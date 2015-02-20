@@ -47,7 +47,7 @@
 	name = "wood floor tile synthesizer"
 	desc = "A device that makes wood floor tiles."
 	uses_charge = 1
-	charge_cost = 250
+	charge_costs = list(250)
 	stacktype = /obj/item/stack/tile/wood
 	build_type = /obj/item/stack/tile/wood
 

@@ -18,18 +18,18 @@
 	if(emag)
 		emag.emp_act(severity)
 	if(synths)
-		for(var/datum/synth/S in synths)
+		for(var/datum/matter_synth/S in synths)
 			S.emp_act(severity)
 	..()
 	return
 
-/obj/item/weapon/robot_module/proc/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
+/obj/item/weapon/robot_module/proc/respawn_consumable(var/mob/living/silicon/robot/R, var/rate)
 
 	if(!synths || !synths.len)
 		return
 
 	for(var/datum/matter_synth/T in synths)
-		T.add_charge(amount * amount)
+		T.add_charge(T.recharge_rate * rate)
 
 /obj/item/weapon/robot_module/proc/rebuild()//Rebuilds the list so it's possible to add/remove items from the module
 	var/list/temp_list = modules
@@ -89,11 +89,11 @@
 	var/obj/item/stack/nanopaste/N = new /obj/item/stack/nanopaste(src)
 	var/obj/item/stack/medical/advanced/bruise_pack/B = new /obj/item/stack/medical/advanced/bruise_pack(src)
 	N.uses_charge = 1
-	N.charge_cost = 1000
-	N.synth = medicine
+	N.charge_costs = list(1000)
+	N.synths = list(medicine)
 	B.uses_charge = 1
-	B.charge_cost = 1000
-	B.synth = medicine
+	B.charge_costs = list(1000)
+	B.synths = list(medicine)
 	src.modules += N
 	src.modules += B
 
@@ -131,14 +131,14 @@
 	var/obj/item/stack/medical/bruise_pack/B = new /obj/item/stack/medical/bruise_pack(src)
 	var/obj/item/stack/medical/splint/S = new /obj/item/stack/medical/splint(src)
 	O.uses_charge = 1
-	O.charge_cost = 1000
-	O.synth = medicine
+	O.charge_costs = list(1000)
+	O.synths = list(medicine)
 	B.uses_charge = 1
-	B.charge_cost = 1000
-	B.synth = medicine
+	B.charge_costs = list(1000)
+	B.synths = list(medicine)
 	S.uses_charge = 1
-	S.charge_cost = 1000
-	S.synth = medicine
+	S.charge_costs = list(1000)
+	S.synths = list(medicine)
 	src.modules += O
 	src.modules += B
 	src.modules += S
@@ -183,20 +183,19 @@
 	synths += glass
 
 	var/obj/item/stack/sheet/metal/cyborg/M = new /obj/item/stack/sheet/metal/cyborg(src)
-	M.synth = metal
+	M.synths = list(metal)
 	src.modules += M
 
 	var/obj/item/stack/rods/cyborg/R = new /obj/item/stack/rods/cyborg(src)
-	R.synth = metal
+	R.synths = list(metal)
 	src.modules += R
 
 	var/obj/item/stack/sheet/plasteel/cyborg/S = new /obj/item/stack/sheet/plasteel/cyborg(src)
-	S.synth = metal
+	S.synths = list(metal)
 	src.modules += S
 
 	var/obj/item/stack/sheet/glass/reinforced/cyborg/RG = new /obj/item/stack/sheet/glass/reinforced/cyborg(src)
-	RG.metal_synth = metal
-	RG.glass_synth = glass
+	RG.synths = list(metal, glass)
 	src.modules += R
 
 /obj/item/weapon/robot_module/engineering
@@ -217,40 +216,43 @@
 	src.modules += new /obj/item/device/analyzer(src)
 	src.modules += new /obj/item/taperoll/engineering(src)
 	src.modules += new /obj/item/weapon/gripper(src)
-	src.modules += new /obj/item/weapon/matter_decompiler(src)
 	src.modules += new /obj/item/device/pipe_painter(src)
 	src.emag = new /obj/item/borg/stun(src)
 
-	var/datum/matter_synth/metal = new /datum/matter_synth/metal(30000)
-	var/datum/matter_synth/glass = new /datum/matter_synth/glass(30000)
+	var/datum/matter_synth/metal = new /datum/matter_synth/metal(40000)
+	var/datum/matter_synth/glass = new /datum/matter_synth/glass(40000)
 	var/datum/matter_synth/wire = new /datum/matter_synth/wire()
 	synths += metal
 	synths += glass
 	synths += wire
 
+	var/obj/item/weapon/matter_decompiler/MD = new /obj/item/weapon/matter_decompiler(src)
+	MD.metal = metal
+	MD.glass = glass
+	src.modules += MD
+
 	var/obj/item/stack/sheet/metal/cyborg/M = new /obj/item/stack/sheet/metal/cyborg(src)
-	M.synth = metal
+	M.synths = list(metal)
 	src.modules += M
 
 	var/obj/item/stack/sheet/glass/cyborg/G = new /obj/item/stack/sheet/glass/cyborg(src)
-	G.synth = glass
+	G.synths = list(glass)
 	src.modules += G
 
 	var/obj/item/stack/rods/cyborg/R = new /obj/item/stack/rods/cyborg(src)
-	R.synth = metal
+	R.synths = list(metal)
 	src.modules += R
 
 	var/obj/item/stack/cable_coil/cyborg/C = new /obj/item/stack/cable_coil/cyborg(src)
-	C.synth = wire
+	C.synths = list(wire)
 	src.modules += C
 
 	var/obj/item/stack/tile/plasteel/cyborg/S = new /obj/item/stack/tile/plasteel/cyborg(src)
-	S.synth = metal
+	S.synths = list(metal)
 	src.modules += S
 
 	var/obj/item/stack/sheet/glass/reinforced/cyborg/RG = new /obj/item/stack/sheet/glass/reinforced/cyborg(src)
-	RG.metal_synth = metal
-	RG.glass_synth = glass
+	RG.synths = list(metal, glass)
 	src.modules += RG
 
 	return
@@ -444,7 +446,6 @@
 	src.modules += new /obj/item/device/multitool(src)
 	src.modules += new /obj/item/device/lightreplacer(src)
 	src.modules += new /obj/item/weapon/gripper(src)
-	src.modules += new /obj/item/weapon/matter_decompiler(src)
 	src.modules += new /obj/item/weapon/reagent_containers/spray/cleaner/drone(src)
 	src.emag = new /obj/item/weapon/pickaxe/plasmacutter(src)
 	src.emag.name = "Plasma Cutter"
@@ -460,41 +461,47 @@
 	synths += plastic
 	synths += wire
 
+	var/obj/item/weapon/matter_decompiler/MD = new /obj/item/weapon/matter_decompiler(src)
+	MD.metal = metal
+	MD.glass = glass
+	MD.wood = wood
+	MD.plastic = plastic
+	src.modules += MD
+
 	var/obj/item/stack/sheet/metal/cyborg/M = new /obj/item/stack/sheet/metal/cyborg(src)
-	M.synth = metal
+	M.synths = list(metal)
 	src.modules += M
 
 	var/obj/item/stack/sheet/glass/cyborg/G = new /obj/item/stack/sheet/glass/cyborg(src)
-	G.synth = glass
+	G.synths = list(glass)
 	src.modules += G
 
 	var/obj/item/stack/rods/cyborg/R = new /obj/item/stack/rods/cyborg(src)
-	R.synth = metal
+	R.synths = list(metal)
 	src.modules += R
 
 	var/obj/item/stack/cable_coil/cyborg/C = new /obj/item/stack/cable_coil/cyborg(src)
-	C.synth = wire
+	C.synths = list(wire)
 	src.modules += C
 
 	var/obj/item/stack/tile/plasteel/cyborg/S = new /obj/item/stack/tile/plasteel/cyborg(src)
-	S.synth = metal
+	S.synths = list(metal)
 	src.modules += S
 
 	var/obj/item/stack/sheet/glass/reinforced/cyborg/RG = new /obj/item/stack/sheet/glass/reinforced/cyborg(src)
-	RG.metal_synth = metal
-	RG.glass_synth = glass
+	RG.synths = list(metal, glass)
 	src.modules += RG
 
 	var/obj/item/stack/tile/wood/cyborg/WT = new /obj/item/stack/tile/wood/cyborg(src)
-	WT.synth = wood
+	WT.synths = list(wood)
 	src.modules += WT
 
 	var/obj/item/stack/sheet/wood/cyborg/W = new /obj/item/stack/sheet/wood/cyborg(src)
-	W.synth = wood
+	W.synths = list(wood)
 	src.modules += W
 
 	var/obj/item/stack/sheet/mineral/plastic/cyborg/P = new /obj/item/stack/sheet/mineral/plastic/cyborg(src)
-	P.synth = plastic
+	P.synths = list(plastic)
 	src.modules += P
 
 /obj/item/weapon/robot_module/drone/add_languages(var/mob/living/silicon/robot/R)

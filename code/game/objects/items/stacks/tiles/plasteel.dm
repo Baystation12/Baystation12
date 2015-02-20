@@ -19,10 +19,10 @@
 /obj/item/stack/tile/plasteel/cyborg
 	name = "floor tile synthesizer"
 	desc = "A device that makes floor tiles."
-	gender = MALE
+	gender = NEUTER
 	matter = null
 	uses_charge = 1
-	charge_cost = 250
+	charge_costs = list(250)
 	stacktype = /obj/item/stack/tile/plasteel
 	build_type = /obj/item/stack/tile/plasteel
 

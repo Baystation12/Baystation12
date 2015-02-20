@@ -88,10 +88,10 @@ var/global/list/datum/stack_recipe/metal_recipes = list ( \
 /obj/item/stack/sheet/metal/cyborg
 	name = "metal synthesizer"
 	desc = "A device that makes metal sheets."
-	gender = MALE
+	gender = NEUTER
 	matter = null
 	uses_charge = 1
-	charge_cost = 1000
+	charge_costs = list(1000)
 	stacktype = /obj/item/stack/sheet/metal
 
 /obj/item/stack/sheet/metal/New(var/loc, var/amount=null)
@@ -124,11 +124,11 @@ var/global/list/datum/stack_recipe/plasteel_recipes = list ( \
 /obj/item/stack/sheet/plasteel/cyborg
 	name = "plasteel synthesizer"
 	desc = "A device that makes plasteel sheets."
-	gender = MALE
+	gender = NEUTER
 	singular_name = "plasteel sheet"
 	matter = null
 	uses_charge = 1
-	charge_cost = 1000
+	charge_costs = list(1000)
 	stacktype = /obj/item/stack/sheet/plasteel
 
 /obj/item/stack/sheet/plasteel/New(var/loc, var/amount=null)
@@ -161,11 +161,11 @@ var/global/list/datum/stack_recipe/wood_recipes = list ( \
 /obj/item/stack/sheet/wood/cyborg
 	name = "wood synthesizer"
 	desc = "A device that makes wooden planks."
-	gender = MALE
+	gender = NEUTER
 	singular_name = "wood plank"
 	icon_state = "sheet-wood"
 	uses_charge = 1
-	charge_cost = 1000
+	charge_costs = list(1000)
 	stacktype = /obj/item/stack/sheet/wood
 
 /obj/item/stack/sheet/wood/New(var/loc, var/amount=null)

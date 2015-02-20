@@ -1,6 +1,6 @@
 /datum/matter_synth
 	var/name = "Generic Synthesizer"
-	var/max_energy = 50000
+	var/max_energy = 60000
 	var/recharge_rate = 2000
 	var/energy
 

@@ -16,10 +16,10 @@
 /obj/item/stack/rods/cyborg
 	name = "metal rod synthesizer"
 	desc = "A device that makes metal rods."
-	gender = MALE
+	gender = NEUTER
 	matter = null
 	uses_charge = 1
-	charge_cost = 500
+	charge_costs = list(500)
 	stacktype = /obj/item/stack/rods
 
 /obj/item/stack/rods/attackby(obj/item/W as obj, mob/user as mob)

@@ -24,11 +24,11 @@
 /obj/item/stack/sheet/glass/cyborg
 	name = "glass synthesizer"
 	desc = "A device that makes glass."
-	gender = MALE
+	gender = NEUTER
 	singular_name = "glass"
 	matter = null
 	uses_charge = 1
-	charge_cost = 1000
+	charge_costs = list(1000)
 	stacktype = /obj/item/stack/sheet/glass
 
 /obj/item/stack/sheet/glass/attack_self(mob/user as mob)
@@ -154,31 +154,13 @@
 /obj/item/stack/sheet/glass/reinforced/cyborg
 	name = "reinforced glass synthesizer"
 	desc = "A device that makes reinforced glass."
-	gender = MALE
+	gender = NEUTER
 	matter = null
-	uses_charge = 1
-	charge_cost = 1000
+	uses_charge = 2
+	charge_costs = list(1000)
 	singular_name = "reinforced glass sheet"
 	icon_state = "sheet-rglass"
-	var/datum/matter_synth/metal_synth
-	var/datum/matter_synth/glass_synth
-	var/metal_charge = 500
-	var/glass_charge = 1000
-
-/obj/item/stack/sheet/glass/reinforced/cyborg/get_amount()
-	return min(round(metal_synth.energy / metal_charge), round(glass_synth.energy / glass_charge))
-
-/obj/item/stack/sheet/glass/reinforced/cyborg/use(var/amount) // Requires special checks, because it uses two storages
-	if(get_amount() < amount)
-		return 0
-	metal_synth.use_charge(amount * metal_charge)
-	glass_synth.use_charge(amount * glass_charge)
-	return 1
-
-/obj/item/stack/sheet/glass/reinforced/cyborg/add(var/amount)
-	metal_synth.add_charge(amount * metal_charge)
-	glass_synth.add_charge(amount * glass_charge)
-	return
+	charge_costs = list(500, 1000)
 
 /*
  * Phoron Glass sheets

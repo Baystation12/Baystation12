@@ -485,10 +485,10 @@ obj/structure/cable/proc/cableColor(var/colorC)
 /obj/item/stack/cable_coil/cyborg
 	name = "cable coil synthesizer"
 	desc = "A device that makes cable."
-	gender = MALE
+	gender = NEUTER
 	matter = null
 	uses_charge = 1
-	charge_cost = 1
+	charge_costs = list(1)
 	stacktype = /obj/item/stack/cable_coil
 
 /obj/item/stack/cable_coil/suicide_act(mob/user)

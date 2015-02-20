@@ -138,9 +138,9 @@ obj/item/stack/sheet/mineral/iron/New()
 
 /obj/item/stack/sheet/mineral/plastic/cyborg
 	name = "plastic sheets synthesizer"
-	gender = MALE
+	gender = NEUTER
 	uses_charge = 1
-	charge_cost = 1000
+	charge_costs = list(1000)
 	stacktype = /obj/item/stack/sheet/mineral/plastic
 
 /obj/item/stack/sheet/mineral/gold

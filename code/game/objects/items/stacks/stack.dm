@@ -18,8 +18,8 @@
 	var/max_amount //also see stack recipes initialisation, param "max_res_amount" must be equal to this max_amount
 	var/stacktype //determines whether different stack types can merge
 	var/uses_charge = 0
-	var/charge_cost = 1
-	var/datum/matter_synth/synth = null
+	var/list/charge_costs = null
+	var/list/datum/matter_synth/synths = null
 
 /obj/item/stack/New(var/loc, var/amount=null)
 	..()
@@ -190,9 +190,12 @@
 					del(src)
 		return 1
 	else
-		if(!synth)
+		if(get_amount() < used)
 			return 0
-		return synth.use_charge(charge_cost * used) // Doesn't need to be deleted
+		for(var/i = 1 to uses_charge)
+			var/datum/matter_synth/S = synths[i]
+			S.use_charge(charge_costs[i] * used) // Doesn't need to be deleted
+		return 1
 	return 0
 
 /obj/item/stack/proc/add(var/extra)
@@ -202,10 +205,12 @@
 		else
 			amount += extra
 		return 1
-	else if(!synth)
+	else if(!synths || synths.len < uses_charge)
 		return 0
 	else
-		synth.add_charge(charge_cost * extra)
+		for(var/i = 1 to uses_charge)
+			var/datum/matter_synth/S = synths[i]
+			S.add_charge(charge_costs[i] * extra)
 
 /*
 	The transfer and split procs work differently than use() and add().
@@ -256,16 +261,28 @@
 
 /obj/item/stack/proc/get_amount()
 	if(uses_charge)
-		if(!synth)
+		if(!synths || synths.len < uses_charge)
 			return 0
-		return round(synth.get_charge() / charge_cost)
+		var/datum/matter_synth/S = synths[1]
+		. = round(S.get_charge() / charge_costs[1])
+		if(uses_charge > 1)
+			for(var/i = 2 to uses_charge)
+				S = synths[i]
+				. = min(., round(S.get_charge() / charge_costs[i]))
+		return
 	return amount
 
 /obj/item/stack/proc/get_max_amount()
 	if(uses_charge)
-		if(!synth)
+		if(!synths || synths.len < uses_charge)
 			return 0
-		return round(synth.max_energy / charge_cost)
+		var/datum/matter_synth/S = synths[1]
+		. = round(S.max_energy / charge_costs[1])
+		if(uses_charge > 1)
+			for(var/i = 2 to uses_charge)
+				S = synths[i]
+				. = min(., round(S.max_energy / charge_costs[i]))
+		return
 	return max_amount
 
 /obj/item/stack/proc/add_to_stacks(mob/usr as mob)
