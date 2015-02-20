@@ -255,7 +255,6 @@ var/list/slot_equipment_priority = list( \
 	face_atom(A)
 	return 1
 
-
 /mob/proc/ret_grab(obj/effect/list_container/mobl/L as obj, flag)
 	if ((!( istype(l_hand, /obj/item/weapon/grab) ) && !( istype(r_hand, /obj/item/weapon/grab) )))
 		if (!( L ))

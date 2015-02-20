@@ -248,3 +248,30 @@
 
 /mob/living/silicon/ai/attack_ai(var/mob/user as mob)
 	ai_camera_list()
+
+/mob/living/silicon/ai/proc/go_down_z()
+	set category = "AI Commands"
+	set name = "Go Downstairs"
+	set desc = "Go down a z-level."
+
+	var/turf/controllerlocation = locate(1, 1, src.eyeobj.z)
+	for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
+		if(controller.down)
+			var/turf/downwards = locate(src.eyeobj.x, src.eyeobj.y, controller.down_target)
+			src.eyeobj.setLoc( downwards )
+		else
+			usr << "Can't go any lower!"
+
+
+/mob/living/silicon/ai/proc/go_up_z()
+	set category = "AI Commands"
+	set name = "Go Upstairs"
+	set desc = "Go up a z-level."
+
+	var/turf/controllerlocation = locate(1, 1, src.eyeobj.z)
+	for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
+		if(controller.up)
+			var/turf/upwards = locate(src.eyeobj.x, src.eyeobj.y, controller.up_target)
+			src.eyeobj.setLoc( upwards )
+		else
+			usr << "Can't go any higher!"
