@@ -39,6 +39,12 @@ Used In File(s): \code\game\objects\items\devices\uplinks.dm
             <div class="item">
                 {{:helper.link( itemValue.Name, 'gear', {'buy_item' : itemValue.obj_path, 'cost' : itemValue.Cost}, itemValue.Cost > data.crystals ? 'disabled' : null, null)}} - <span class="white">{{:itemValue.Cost}}</span>
             </div>
+            
+            {{if itemValue.Cost <= data.crystals}}
+                <div class="item">
+                    {{:itemValue.Description}}
+                </div>
+            {{/if}}
         {{/for}}
         <br>
     {{/for}}
