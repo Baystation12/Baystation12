@@ -12,6 +12,9 @@
 	var/throwpass = 0
 	var/germ_level = GERM_LEVEL_AMBIENT // The higher the germ level, the more germ on the atom.
 
+	//Examine tab
+	var/datum/descriptions/descriptions = null //See code/datums/descriptions.dm for details.
+
 	///Chemistry.
 	var/datum/reagents/reagents = null
 
@@ -202,10 +205,46 @@ its easier to just keep the beam vertical.
 
 	user << "\icon[src] That's [f_name] [suffix]"
 
+	var/datum/descriptions/D = descriptions
+	if(istype(D))
+		user.description_holders["info"] = get_descriptions_info()
+		user.description_holders["fluff"] = get_descriptions_fluff()
+		if(user.mind.special_role)
+			user.description_holders["antag"] = get_descriptions_antag()
+	else
+		user.description_holders["info"] = null
+		user.description_holders["fluff"] = null
+		user.description_holders["antag"] = null
+
+	if(name) //This shouldn't be needed but I'm paranoid.
+		user.description_holders["name"] = "[src.name]" //\icon[src]
+
+	user.description_holders["icon"] = "\icon[src]"
+
 	if(desc)
 		user << desc
+		user.description_holders["desc"] = src.desc
+	else
+		user.description_holders["desc"] = null //This is needed, or else if you examine one thing with a desc, then another without, the panel will retain the first examined's desc.
 
 	return distance == -1 || (get_dist(src, user) <= distance)
+
+//Override these if you need special behaviour for a specific type.
+
+/atom/proc/get_descriptions_info()
+	if(descriptions && descriptions.info)
+		return descriptions.info
+	return
+
+/atom/proc/get_descriptions_fluff()
+	if(descriptions && descriptions.fluff)
+		return descriptions.fluff
+	return
+
+/atom/proc/get_descriptions_antag()
+	if(descriptions && descriptions.antag)
+		return descriptions.antag
+	return
 
 // called by mobs when e.g. having the atom as their machine, pulledby, loc (AKA mob being inside the atom) or buckled var set.
 // see code/modules/mob/mob_movement.dm for more.

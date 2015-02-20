@@ -42,13 +42,56 @@
 /obj/item/weapon/gun/projectile/automatic/c20r/update_icon()
 	..()
 	if(ammo_magazine)
-		icon_state = "c20r-[round(loaded.len,4)]"
+		icon_state = "c20r-[round(ammo_magazine.stored_ammo.len,4)]"
 	else
 		icon_state = "c20r"
 	return
 
+/obj/item/weapon/gun/projectile/automatic/wt550
+	name = "\improper W-T 550 Saber"
+	desc = "A cheap, mass produced Ward-Takahashi PDW. Uses 9mm rounds."
+	icon_state = "wt550"
+	w_class = 3.0
+	caliber = "9mm"
+	origin_tech = "combat=5;materials=2"
+	slot_flags = SLOT_BELT
+	ammo_type = "/obj/item/ammo_casing/c9mmr"
+	fire_sound = 'sound/weapons/Gunshot_smg.ogg'
+	load_method = MAGAZINE
+	magazine_type = /obj/item/ammo_magazine/mc9mmt/rubber
+
+/obj/item/weapon/gun/projectile/automatic/wt550/update_icon()
+	..()
+	if(ammo_magazine)
+		icon_state = "wt550-[round(ammo_magazine.stored_ammo.len,4)]"
+	else
+		icon_state = "wt550"
+	return
+
+/obj/item/weapon/gun/projectile/automatic/z8
+	name = "\improper Z8 Bulldog"
+	desc = "An older model bullpup carbine, made by the now defunct Zendai Foundries. Uses armor piercing 5.56 rounds. Makes you feel like a space marine when you hold it."
+	icon_state = "carbine"
+	item_state = "shotgun"
+	w_class = 4.0
+	force = 10
+	caliber = "a556"
+	origin_tech = "combat=8;materials=3"
+	ammo_type = "/obj/item/ammo_casing/a556"
+	fire_sound = 'sound/weapons/Gunshot.ogg'
+	load_method = MAGAZINE
+	magazine_type = /obj/item/ammo_magazine/a556
+
+/obj/item/weapon/gun/projectile/automatic/z8/update_icon()
+	..()
+	if(ammo_magazine)
+		icon_state = "carbine-[round(ammo_magazine.stored_ammo.len,2)]"
+	else
+		icon_state = "carbine"
+	return
+
 /obj/item/weapon/gun/projectile/automatic/sts35
-	name = "\improper STS-35 Automatic Rifle"
+	name = "\improper STS-35 automatic rifle"
 	desc = "A durable, rugged looking automatic weapon of make popular on the frontier, despite it's bulk. Uses 7.62mm rounds. It is unmarked."
 	icon_state = "assltrifle"
 	item_state = "shotgun"
@@ -88,7 +131,7 @@
 	update_icon()
 
 /obj/item/weapon/gun/projectile/automatic/l6_saw/update_icon()
-	icon_state = "l6[cover_open ? "open" : "closed"][ammo_magazine ? round(loaded.len, 25) : "-empty"]"
+	icon_state = "l6[cover_open ? "open" : "closed"][ammo_magazine ? round(ammo_magazine.stored_ammo.len, 25) : "-empty"]"
 
 /obj/item/weapon/gun/projectile/automatic/l6_saw/special_check(mob/user)
 	if(cover_open)
@@ -102,7 +145,7 @@
 		return
 	..()
 
-/obj/item/weapon/gun/projectile/automatic/l6_saw/unload_ammo(mob/user)
+/obj/item/weapon/gun/projectile/automatic/l6_saw/unload_ammo(mob/user, var/allow_dump=1)
 	if(!cover_open)
 		return
 	..()
