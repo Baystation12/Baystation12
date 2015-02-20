@@ -1,3 +1,28 @@
+/*
+///////////// PHORON DESUBLIMER ////////////////
+	~~Created by Kwask, sprites by Founded1992~~
+Desc: This is a machine which will take gaseous phoron and turns it into bars OR supermatter shards
+The process works like this:
+	1.) Gaseous phoron is pumped into the Hyperinductor. This machine is basically a super heater, as it can heat gas up to 500,000 kelvin
+	2.) Gas is heated up to the optimal temperature for crystalization, which is randomly determined at round start.
+	3.) After the gas is hot enough, it is injected into the reaction chamber. The reaction chamber must be at a specific pressure.
+		If it is too low, then there is waste product, and if it is too high, you risk breaking the machine.
+	4.) The supermatter shard is then formed and extracted from the machine and sent into the compressor
+
+	FOR BARS
+	5.) Place the supermatter shard inside and choose "phoron bars" as the output.
+	6.) The compressor then uses a set PSI and speed to stamp the shard into a sheet. PSI and speed is important here.
+		Higher PSI means more sheets, but if you go too high, you can shatter the crystal and waste it.
+		Speed is similar, but speeding it up simply makes it go faster, until the breaking point
+	7.) Congrats, you now have any number of phoron bars based on how efficient your process was!
+
+	FOR SUPERMATTER
+	5.) Produce 9 supermatter shards at the pressure vessel, then bring them to the compressor.
+		Place them inside and choose "Supermatter" as output. Set the PSI as high as possible and speed as low as possible.
+	6.) Congrats, you now have a supermatter core!
+
+*/
+
 /obj/machinery/phoron_desublimer
 	icon = 'icons/obj/machines/phoron_compressor.dmi'
 	density = 1
@@ -11,8 +36,8 @@
 		return ready
 
 
-/obj/machinery/phoron_desublimer/gas_intake
-	name = "Gas Buffer"
+/obj/machinery/phoron_desublimer/inductor
+	name = "Hyperinductor"
 	desc = "Gas goes into here to be superheated to prepare for crystalization."
 	icon_state = "Pumped"
 	var/datum/gas_mixture/air_contents = new
@@ -22,8 +47,6 @@
 
 	New()
 		..()
-		name = "Gas Buffer"
-		desc = "Gas goes into here to be superheated to prepare for crystalization."
 		icon_state = "Pumped"
 
 	process()
@@ -38,7 +61,7 @@
 
 	report_ready()
 		for( var/obj/machinery/phoron_desublimer/M in orange(src) )
-			if( istype( M, /obj/machinery/phoron_desublimer/crystalizer ))
+			if( istype( M, /obj/machinery/phoron_desublimer/vessel ))
 				ready = 1
 
 		return ready
@@ -52,18 +75,15 @@
 		air_contents.add_thermal_energy(heat_transfer)
 
 
-/obj/machinery/phoron_desublimer/crystalizer
-	name = "Phoron Crystalizer"
-	desc = "Superheated"
+/obj/machinery/phoron_desublimer/vessel
+	name = "Reactant Vessel"
+	desc = "Created supermatter shards from high-temperature phoron."
 	icon_state = "ProcessorEmpty"
 	var/datum/gas_mixture/air_contents = new
 	active_power_usage = 10000
 
 	New()
 		..()
-		name = "Phoron Crystalizer"
-		desc = "Superheated"
-		icon_state = "ProcessorEmpty"
 
 	process()
 		..()
@@ -83,9 +103,9 @@
 		var/compressor = 0
 
 		for( var/obj/machinery/phoron_desublimer/M in orange(src) )
-			if( istype( M, /obj/machinery/phoron_desublimer/gas_intake ))
+			if( istype( M, /obj/machinery/phoron_desublimer/inductor ))
 				gas_intake = 1
-			else if( istype( M, /obj/machinery/phoron_desublimer/compressor ))
+			else if( istype( M, /obj/machinery/phoron_desublimer/anvil ))
 				compressor = 1
 
 		if( gas_intake && compressor )
@@ -94,16 +114,13 @@
 		return ready
 
 
-/obj/machinery/phoron_desublimer/compressor
-	name = "Phoron Compressor"
-	desc = "Moulds the phoron crystal into a sheet."
+/obj/machinery/phoron_desublimer/anvil
+	name = "Supermatter Giga-Anvil"
+	desc = "Moulds the supermatter into the desired product."
 	icon_state = "Pressed"
 
 	New()
 		..()
-		name = "Phoron Compressor"
-		desc = "Moulds the phoron crystal into a sheet."
-		icon_state = "Pressed"
 
 	process()
 		..()
@@ -119,7 +136,7 @@
 
 	report_ready()
 		for( var/obj/machinery/phoron_desublimer/M in orange(src) )
-			if( istype( M, /obj/machinery/phoron_desublimer/crystalizer ))
+			if( istype( M, /obj/machinery/phoron_desublimer/vessel ))
 				ready = 1
 
 		return ready
@@ -134,29 +151,50 @@
 	idle_power_usage = 500
 	active_power_usage = 70000 //70 kW per unit of strength
 	var/active = 0
+	var/assembled = 0
 
 	var/list/obj/machinery/phoron_desublimer/connected_parts
 
+	var/list/checklist = list( "inductor" = 0, "vessel" = 0, "anvil" = 0 )
+
 	New()
 		..()
-		name = "Phoron Desublimation Control"
-		desc = "Controls the phoron desublimation process."
-		icon_state = "Ready"
 
 
 	proc/find_parts()
-		for( var/obj/machinery/phoron_desublimer/PD in orange(src) )
-			if(istype(PD, type))
-				if(PD.report_ready())
-					src.connected_parts.Add(PD)
+		connected_parts = list()
 
-		return 1
+		for( var/obj/machinery/phoron_desublimer/PD in orange(src) )
+			if(PD.report_ready())
+				src.connected_parts.Add(PD)
+
+		return
 
 	proc/check_parts()
-		for( var/obj/machinery/phoron_desublimer/PD in orange(src) )
-			if(istype(PD, type))
-				if(PD.report_ready())
-					src.connected_parts.Add(PD)
+		assembled = 0
+		find_parts()
+
+		for( var/i = 1, i <= checklist.len, i++ )
+			checklist[i] = 0
+
+		for( var/obj/machinery/phoron_desublimer/PD in connected_parts )
+			if( istype( PD, /obj/machinery/phoron_desublimer/inductor ))
+				checklist["inductor"] = PD
+			else if( istype( PD, /obj/machinery/phoron_desublimer/vessel ))
+				checklist["vessel"] = PD
+			else if( istype( PD, /obj/machinery/phoron_desublimer/anvil ))
+				checklist["anvil"] = PD
+
+		var/count = 0
+
+		for( var/i = 1, i <= checklist.len, i++ )
+			if( checklist[i] )
+				count++
+
+		if( count == 3 )
+			assembled = 1
+
+		return
 
 	attack_hand(mob/user as mob)
 		interact(user)
@@ -173,7 +211,7 @@
 		dat += "Phoron Desublimer Controller<BR>"
 		dat += "<A href='?src=\ref[src];close=1'>Close</A><BR><BR>"
 		dat += "Status:<BR>"
-		if(!assembled)
+		if( !assembled )
 			dat += "Unable to detect all parts!<BR>"
 			dat += "<A href='?src=\ref[src];scan=1'>Run Scan</A><BR><BR>"
 		else
