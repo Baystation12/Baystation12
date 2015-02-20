@@ -3116,7 +3116,7 @@ datum
 					M.stuttering += 3
 				else if(data >= 45 && prob(50) && data <55)
 					M.confused = max(M.confused+3,0)
-				else if(data >=55)
+				else if(data >=55 && data <200)
 					M.druggy = max(M.druggy, 55)
 				else if(data >=200)
 					M.adjustToxLoss(2)
@@ -3146,7 +3146,7 @@ datum
 					M.stuttering += 3
 				else if(data >= 45 && prob(50) && data <55)
 					M.confused = max(M.confused+3,0)
-				else if(data >=55)
+				else if(data >=55 && data <200)
 					M.druggy = max(M.druggy, 55)
 				else if(data >=200)
 					M.adjustToxLoss(2)
