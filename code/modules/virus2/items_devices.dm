@@ -36,35 +36,21 @@
 ///////////////VIRUS DISH///////////////
 
 /obj/item/weapon/virusdish
-	name = "virus dish"
+	var/base_name = "virus sample"
+	name = "virus sample"
 	icon = 'icons/obj/items.dmi'
 	icon_state = "implantcase-b"
-	var/base_name = ""
 	var/datum/disease2/disease/virus2 = null
 	var/growth = 0
 	var/info = 0
 	var/analysed = 0
 	var/label_text = ""
-
-	New()
-		..()
-		base_name = name
-
-	attackby(obj/item/weapon/W as obj, mob/user as mob)
-		if(istype(W, /obj/item/weapon/pen) || istype(W, /obj/item/device/flashlight/pen))
-			var/tmp_label = sanitize(copytext(input(user, "Enter a label for [src.name]","Label",src.label_text), 1, MAX_NAME_LEN))
-			if(length(tmp_label) > 14)
-				user << "\red The label can be at most 14 characters long."
-			else
-				user << "\blue You set the label to \"[tmp_label]\"."
-				src.label_text = tmp_label
-				src.update_name_label()
-
+	
 	proc/update_name_label()
 		if(src.label_text == "")
-			src.name = base_name
+			src.name = src.base_name
 		else
-			src.name = "[base_name] ([src.label_text])"
+			src.name = "[src.base_name] ([src.label_text])"
 
 /obj/item/weapon/virusdish/random
 	name = "virus sample"
@@ -76,7 +62,17 @@
 	growth = rand(5, 50)
 
 /obj/item/weapon/virusdish/attackby(var/obj/item/weapon/W as obj,var/mob/living/carbon/user as mob)
-	if(istype(W,/obj/item/weapon/hand_labeler) || istype(W,/obj/item/weapon/reagent_containers/syringe))
+	if(istype(W, /obj/item/weapon/pen) || istype(W, /obj/item/device/flashlight/pen))
+		var/tmp_label = sanitize(copytext(input(user, "Enter a label for [src.name]","Label",src.label_text), 1, MAX_NAME_LEN))
+		if(length(tmp_label) > 14)
+			user << "\red The label can be at most 14 characters long."
+			return
+		else
+			user << "\blue You set the label to \"[tmp_label]\"."
+			src.label_text = tmp_label
+			src.update_name_label()
+			return
+	else if(istype(W,/obj/item/weapon/reagent_containers/syringe) || istype(W, /obj/item/weapon/hand_labeler))
 		return
 	..()
 	if(prob(50))
