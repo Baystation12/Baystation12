@@ -3122,7 +3122,7 @@ datum
 							return
 					if(55 to 200)
 						M.druggy = max(M.druggy, 55)
-					if(200 to INFINITY)
+					else if(200 to INFINITY)
 						M.adjustToxLoss(2)
 				..()
 				return
@@ -3156,7 +3156,7 @@ datum
 							return
 					if(55 to 200)
 						M.druggy = max(M.druggy, 55)
-					if(200 to INFINITY)
+					else if(200 to INFINITY)
 						M.adjustToxLoss(2)
 				..()
 				return
