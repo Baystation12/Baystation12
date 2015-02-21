@@ -71,6 +71,7 @@
 	name = "purple comb"
 	desc = "A pristine purple comb made from flexible plastic."
 	w_class = 1.0
+	icon = 'icons/obj/items.dmi'
 	icon_state = "purplecomb"
 	item_state = "purplecomb"
 

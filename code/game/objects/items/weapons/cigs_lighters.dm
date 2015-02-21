@@ -118,7 +118,6 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 				reagents.reaction(C)
 		else // else just remove some of the reagents
 			reagents.remove_any(REAGENTS_METABOLISM)
-	return
 
 /obj/item/clothing/mask/smokable/proc/light(var/flavor_text = "[usr] lights the [name].")
 	if(!src.lit)
@@ -304,6 +303,10 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 /obj/item/clothing/mask/smokable/cigarette/cigar/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	..()
 
+	user.update_inv_wear_mask(0)
+	user.update_inv_l_hand(0)
+	user.update_inv_r_hand(1)
+
 /////////////////
 //SMOKING PIPES//
 /////////////////
@@ -376,7 +379,24 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		name = "[G.name]-packed [initial(name)]"
 		del(G)
 
-/obj/item/clothing/mask/smokable/pipe/cobpipe
+	else if(istype(W, /obj/item/weapon/flame/lighter))
+		var/obj/item/weapon/flame/lighter/L = W
+		if(L.lit)
+			light("<span class='notice'>[user] manages to light their [name] with [W].</span>")
+
+	else if(istype(W, /obj/item/weapon/flame/match))
+		var/obj/item/weapon/flame/match/M = W
+		if(M.lit)
+			light("<span class='notice'>[user] lights their [name] with their [W].</span>")
+
+	else if(istype(W, /obj/item/device/assembly/igniter))
+		light("<span class='notice'>[user] fiddles with [W], and manages to light their [name] with the power of science.</span>")
+
+	user.update_inv_wear_mask(0)
+	user.update_inv_l_hand(0)
+	user.update_inv_r_hand(1)
+
+/obj/item/clothing/mask/cigarette/pipe/cobpipe
 	name = "corn cob pipe"
 	desc = "A nicotine delivery system popularized by folksy backwoodsmen, kept popular in the modern age and beyond by space hipsters."
 	icon_state = "cobpipeoff"
