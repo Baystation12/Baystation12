@@ -33,8 +33,7 @@
 	..()
 
 /mob/living/silicon/platform/proc/use_power()
-	if( charge <= 0 )
-		charge = 0
+	if(charge == 0 )
 		return
 
 	charge = charge-power_consumption
@@ -42,15 +41,15 @@
 /mob/living/silicon/platform/proc/update_connection()
 	if( charge <= 0 )
 		usr << "Connection lost due to insufficient power."
-		disconnect()
+		platform_disconnect()
 
 	if( health <= 0 )
 		usr << "Connection lost due to critical damage."
-		disconnect()
+		platform_disconnect()
 
 	if( !active )
 		usr << "Connection lost due to unknown error."
-		disconnect()
+		platform_disconnect()
 
 /mob/living/silicon/platform/proc/add_platform_verbs()
 	verbs += platform_verbs_default

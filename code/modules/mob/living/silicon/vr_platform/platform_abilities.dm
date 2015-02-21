@@ -1,10 +1,10 @@
-/mob/living/silicon/platform/proc/activate( var/mob/living/M )
+/mob/living/silicon/platform/proc/activate(var/mob/living/M)
 	active = 1
 	user_body = M
 	M.mind.transfer_to(src)
 	add_platform_verbs()
 
-/mob/living/silicon/platform/verb/disconnect()
+/mob/living/silicon/platform/verb/platform_disconnect()
 	set name = "Disconnect"
 	set desc = "Disconnect the VR uplink."
 	set category = "Virtual Reality"
@@ -21,5 +21,5 @@
 	user_body = null
 
 var/list/platform_verbs_default = list(
-	/mob/living/silicon/platform/verb/disconnect
+	/mob/living/silicon/platform/verb/platform_disconnect
 )

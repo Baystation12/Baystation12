@@ -1,11 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: icons\obj\machines\phoron_compressor.dmi;icons\mob\head.dmi;icons\mob\limb_mask.dmi;code\modules\mob\new_player\sprite_accessories.dm;maps\apollo-3.dmm;maps\apollo-1.dmm;maps\apollo-7.dmm;icons\mob\uniform.dmi;icons\effects\genetics.dmi;code\modules\mob\living\carbon\human\species.dm;icons\mob\human_races\r_tajaran.dmi;code\modules\mob\living\carbon\human\species\station\station.dm;code\modules\mob\living\carbon\human\update_icons.dm;icons\effects\species.dmi;code\modules\mob\living\silicon\robot\drone\drone_items.dm;code\modules\mob\living\silicon\robot\drone\drone.dm;code\modules\mob\living\silicon\robot\drone\drone_abilities.dm;code\modules\mob\living\silicon\robot\robot_items.dm;code\modules\mob\living\silicon\robot\robot.dm;code\_onclick\ai.dm;code\_onclick\oldcode.dm;code\datums\datumvars.dm;code\datums\mind.dm;code\game\gamemodes\malfunction\malfunction.dm;code\game\machinery\camera\tracking.dm;code\modules\mob\dead\observer\observer.dm;code\modules\mob\mob.dm;code\modules\mob\living\silicon\ai\ai.dm
+WINDOW: code\modules\mob\living\silicon\vr_platform\spy-bug\spybug.dm;code\modules\mob\living\silicon\vr_platform\platform_abilities.dm;code\modules\mob\living\silicon\vr_platform\platform_damage.dm;code\modules\mob\living\silicon\vr_platform\platform.dm;code\modules\mob\living\silicon\vr_platform\vr_helmet.dm;code\modules\mob\living\silicon\vr_platform\spy-bug\spybug_abilities.dm;code\modules\mob\living\silicon\vr_platform\spy-bug\spybug_damage.dm
 LAST_COMPILE_VERSION: 506.1249
-DIR: code code\_onclick code\controllers code\datums code\game code\game\area code\game\gamemodes code\game\gamemodes\malfunction code\game\machinery code\game\machinery\camera code\game\objects code\game\objects\effects code\game\objects\effects\decals code\game\objects\effects\decals\Cleanable code\game\objects\items code\game\objects\items\weapons code\modules code\modules\clothing code\modules\clothing\under code\modules\mob code\modules\mob\dead code\modules\mob\dead\observer code\modules\mob\living code\modules\mob\living\carbon code\modules\mob\living\carbon\human code\modules\mob\living\carbon\human\species code\modules\mob\living\carbon\human\species\station code\modules\mob\living\silicon code\modules\mob\living\silicon\ai code\modules\mob\living\silicon\robot code\modules\mob\living\silicon\robot\drone code\modules\mob\new_player code\modules\reagents code\ZAS icons icons\effects icons\mob icons\mob\human_races icons\mob\species icons\NTOS icons\obj icons\obj\machines icons\spideros_icons icons\Testing maps sound sound\AI sound\items sound\machines sound\music sound\voice 
-FILE: code\modules\mob\mob.dm
-LAST_COMPILE_TIME: 1424401409
+DIR: code code\modules code\modules\mob code\modules\mob\living code\modules\mob\living\silicon code\modules\mob\living\silicon\vr_platform code\modules\mob\living\silicon\vr_platform\spy-bug icons icons\mob 
+FILE: code\modules\mob\living\silicon\vr_platform\platform_abilities.dm
+LAST_COMPILE_TIME: 1424478271
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS

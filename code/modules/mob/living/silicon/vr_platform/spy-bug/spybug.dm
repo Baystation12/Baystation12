@@ -15,13 +15,12 @@
 	//Used for self-mailing.
 	var/mail_destination = ""
 
-
-
 	holder_type = /obj/item/weapon/holder/spybug
 
 /mob/living/silicon/platform/spybug/New()
 
-	..()
+	//Generates a semi-unique string
+	name = "[name]-[rand(1, 1000)]"
 
 	verbs += /mob/living/proc/hide
 
@@ -32,6 +31,8 @@
 	//Some tidying-up.
 	flavor_text = "What is THAT?!"
 	updateicon()
+
+	..()
 
 
 /mob/living/silicon/platform/spybug/updateicon()
@@ -65,7 +66,7 @@
 /mob/living/silicon/platform/spybug/Process_Spaceslipping(var/prob_slip)
 	return 1 // Spybugs can't fly in space, now can they?
 
-
+/*
 //Reboot procs.
 /mob/living/silicon/platform/spybug/proc/transfer_personality(var/client/player)
 
@@ -78,10 +79,10 @@
 		player.mob.mind.transfer_to(src)
 
 	src << "Loading flight controls ..."
-	sleep(5)
-	src<< "<b>Loaded</b>."
-	src << "Welcome pilot. Enjoy your flight."
-
+	spawn(5)
+		src<< "<b>Loaded</b>."
+		src << "Welcome pilot. Enjoy your flight."
+*/
 
 /mob/living/silicon/platform/spybug/Bump(atom/movable/AM as mob|obj, yes)
 	if (!yes || ( \
