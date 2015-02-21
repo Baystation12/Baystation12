@@ -56,8 +56,7 @@
 		last_tick = world.time
 		update_neighbors()
 
-	if(neighbors.len && prob(spread_chance))
-
+	if(is_mature() && neighbors.len && prob(spread_chance))
 		for(var/i=1,i<=seed.get_trait(TRAIT_YIELD),i++)
 			if(prob(spread_chance))
 				sleep(rand(3,5))

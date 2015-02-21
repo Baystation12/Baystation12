@@ -60,6 +60,10 @@
 	var/last_tick = 0
 	var/obj/machinery/portable_atmospherics/hydroponics/soil/invisible/plant
 
+/obj/effect/plant/Del()
+	if(plant_controller)
+		plant_controller.remove_plant(src)
+	..()
 /obj/effect/plant/single
 	spread_chance = 0
 
@@ -218,9 +222,8 @@
 
 	if(istype(W, /obj/item/weapon/wirecutters) || istype(W, /obj/item/weapon/scalpel))
 		if(!seed)
-			user << "There is nothing to take a sample from in \the [src]."
+			user << "There is nothing to take a sample from."
 			return
-		// Create a sample.
 		seed.harvest(user,0,1)
 		health -= (rand(3,5)*10)
 	else
@@ -250,4 +253,4 @@
 		die_off()
 
 /obj/effect/plant/proc/is_mature()
-	return (health < (max_health/3))
+	return (health >= (max_health/3))
