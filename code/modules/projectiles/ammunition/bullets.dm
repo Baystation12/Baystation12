@@ -33,6 +33,11 @@
 	caliber = "9mm"
 	projectile_type = /obj/item/projectile/energy/flash
 
+/obj/item/ammo_casing/c9mmr
+	desc = "A 9mm rubber bullet casing."
+	caliber = "9mm"
+	projectile_type = /obj/item/projectile/bullet/pistol/rubber
+
 
 /obj/item/ammo_casing/c45
 	desc = "A .45 bullet casing."
@@ -84,7 +89,7 @@
 	projectile_type = /obj/item/projectile/bullet/shotgun/beanbag
 	matter = list("metal" = 500)
 
-//Can stun in one hit if aimed at the head, but 
+//Can stun in one hit if aimed at the head, but
 //is blocked by clothing that stops tasers and is vulnerable to EMP
 /obj/item/ammo_casing/shotgun/stunshell
 	name = "stun shell"
@@ -113,11 +118,16 @@
 
 /obj/item/ammo_casing/a145
 	name = "shell casing"
-	desc = "A 14.5mm AP shell."
+	desc = "A 14.5mm shell."
 	icon_state = "lcasing"
 	spent_icon = "lcasing-spent"
 	caliber = "14.5mm"
 	projectile_type = /obj/item/projectile/bullet/rifle/a145
+
+/obj/item/ammo_casing/a556
+	desc = "A 5.56mm bullet casing."
+	caliber = "a556"
+	projectile_type = /obj/item/projectile/bullet/rifle/a556
 
 /obj/item/ammo_casing/rocket
 	name = "rocket shell"

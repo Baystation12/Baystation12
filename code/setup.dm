@@ -760,3 +760,4 @@ var/list/be_special_flags = list(
 #define STATUS_CLOSE -1 // Close the interface
 //General-purpose life speed define for plants.
 #define HYDRO_SPEED_MULTIPLIER 1
+#define NANO_IGNORE_DISTANCE 1

@@ -11,7 +11,7 @@
 	caliber = "shotgun"
 	origin_tech = "combat=4;materials=2"
 	load_method = SINGLE_CASING
-	ammo_type = /obj/item/ammo_casing/shotgun/pellet
+	ammo_type = /obj/item/ammo_casing/shotgun/beanbag
 	handle_casings = HOLD_CASINGS
 	var/recentpump = 0 // to prevent spammage
 
@@ -27,16 +27,16 @@
 
 /obj/item/weapon/gun/projectile/shotgun/pump/proc/pump(mob/M as mob)
 	playsound(M, 'sound/weapons/shotgunpump.ogg', 60, 1)
-	
+
 	if(chambered)//We have a shell in the chamber
 		chambered.loc = get_turf(src)//Eject casing
 		chambered = null
-	
+
 	if(loaded.len)
 		var/obj/item/ammo_casing/AC = loaded[1] //load next casing.
 		loaded -= AC //Remove casing from loaded list.
 		chambered = AC
-	
+
 	update_icon()
 
 /obj/item/weapon/gun/projectile/shotgun/pump/combat

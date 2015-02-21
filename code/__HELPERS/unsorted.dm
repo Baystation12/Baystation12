@@ -1305,7 +1305,7 @@ proc/is_hot(obj/item/W as obj)
 /proc/can_operate(mob/living/carbon/M)
 	return (M.lying && \
 	locate(/obj/machinery/optable, M.loc) || \
-	(locate(/obj/structure/stool/bed/roller, M.loc) && prob(75)) || \
+	(locate(/obj/structure/bed/roller, M.loc) && prob(75)) || \
 	(locate(/obj/structure/table/, M.loc) && prob(66)))
 
 /proc/reverse_direction(var/dir)

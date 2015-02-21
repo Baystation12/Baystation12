@@ -19,7 +19,7 @@
 		spawn(0)
 
 			if(target.buckled)
-				var/obj/structure/stool/bed/buckled_to = target.buckled.
+				var/obj/structure/bed/buckled_to = target.buckled.
 				buckled_to.unbuckle_mob()
 
 			var/mobloc = get_turf(target.loc)
