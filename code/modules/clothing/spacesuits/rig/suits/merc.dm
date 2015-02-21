@@ -25,3 +25,6 @@
 		/obj/item/rig_module/chem_dispenser/combat,
 		/obj/item/rig_module/fabricator/energy_net
 		)
+
+/obj/item/weapon/rig/merc/no_modules
+	initial_modules = list()
