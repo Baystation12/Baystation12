@@ -153,3 +153,42 @@
 		var/icon/earbit2 = new/icon("icon" = 'icons/mob/head.dmi', "icon_state" = "kittyinner2")
 		mob.Blend(earbit, ICON_OVERLAY)
 		mob2.Blend(earbit2, ICON_OVERLAY)
+
+/obj/item/clothing/head/collectable/tophat
+	name = "collectable top hat"
+	desc = "A top hat worn by only the most prestigious hat collectors."
+	icon_state = "tophat"
+	item_state = "that"
+	body_parts_covered = 0
+
+	var/bunny_count = 0
+	var/max_bunnies = 1
+
+	attackby(var/obj/item/weapon/W as obj, mob/user as mob)
+		if( istype( W, /obj/item/weapon/holder/bunny ))
+			if( bunny_count < max_bunnies )
+				user.drop_item()
+				bunny_count += 1
+				user << "You put [W] into the tophat."
+				W.loc = src
+		return
+
+	attack_hand(mob/living/carbon/user as mob)
+		if( bunny_count > 0 )
+			var/mob/living/simple_animal/bunny/bunny
+			for( bunny in contents )
+			if( bunny )
+				user.put_in_hands( bunny )
+				bunny_count -= 1
+				user << "You take [bunny] from the tophat."
+				bunny = null
+		return
+
+
+/obj/item/clothing/head/collectable/tophat/entertainer
+	name = "entertainer's hat"
+	desc = "Perhaps you could pull a rabbit out of this!"
+	icon_state = "entertainerhat"
+	item_state = "entertainerhat"
+	siemens_coefficient = 0.9
+	max_bunnies = 3

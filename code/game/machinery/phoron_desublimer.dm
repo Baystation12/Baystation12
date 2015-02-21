@@ -196,7 +196,6 @@ The process works like this:
 		if( !eat_shard() )
 			src.visible_message("\icon[src] <b>[src]</b> beeps, \"Not enough supermatter shards to complete request\".")
 			return
-
 		active = 1
 
 		var/remaining_power = total_power
@@ -315,30 +314,34 @@ The process works like this:
 		dat += "<h3><b>Phoron Desublimer Controller</b></h3><BR>"
 		dat += "<A href='?src=\ref[src];close=1'>Close</A><BR>"
 		dat += "<A href='?src=\ref[src];scan=1'>Run Scan</A><BR><BR>"
-		dat += "<b>Status:</b>"
 
-		for( var/M in machine )
-			var/list/obj/machinery/phoron_desublimer/type = machine_ref[M]
-			dat += "<h4><center>[type.name]"
-			if( type && type.ready )
-				dat += "</center></h4><BR>"
-				if( istype( type, /obj/machinery/phoron_desublimer/furnace ))
-					var/obj/machinery/phoron_desublimer/furnace/furnace = type
-					dat += "<b>Neutron Flow:</b> [furnace.neutron_flow]<BR>"
-					dat += "<A href='?src=\ref[src];furnace_n10=1'>---</A> "
-					dat += "<A href='?src=\ref[src];furnace_n1=1'>--</A> "
-					dat += "<A href='?src=\ref[src];furnace_n01=1'>-</A> "
-					dat += "<A href='?src=\ref[src];furnace_01=1'>+</A> "
-					dat += "<A href='?src=\ref[src];furnace_1=1'>++</A> "
-					dat += "<A href='?src=\ref[src];furnace_10=1'>+++</A> <BR><BR>"
-					dat += "<b>Supermatter Shard Count:</b> [furnace.shard_count]<BR>"
-					if( furnace.active )
-						dat += "<b>Active</b>"
-					else
-						dat += "<A href='?src=\ref[src];furnace_activate=1'>Activate</A><BR>"
-			else
-				dat += " not found!</center></h4><BR>"
-			dat += "<BR><HR>"
+		dat += "<b>Status:</b><BR>"
+		if( !assembled )
+			dat += "Unable to detect all parts!<BR>"
+		else
+			dat += "All parts in place.<BR><BR>"
+			for( var/M in machine )
+				var/list/obj/machinery/phoron_desublimer/type = machine_ref[M]
+				dat += "<h4><center>[type.name]</center></h4>"
+				if( type && type.ready )
+					dat += "<BR>"
+					if( istype( type, /obj/machinery/phoron_desublimer/furnace ))
+						var/obj/machinery/phoron_desublimer/furnace/furnace = type
+						dat += "<b>Neutron Flow:</b> [furnace.neutron_flow]<BR>"
+						dat += "<A href='?src=\ref[src];furnace_n10=1'>---</A> "
+						dat += "<A href='?src=\ref[src];furnace_n1=1'>--</A> "
+						dat += "<A href='?src=\ref[src];furnace_n01=1'>-</A> "
+						dat += "<A href='?src=\ref[src];furnace_01=1'>+</A> "
+						dat += "<A href='?src=\ref[src];furnace_1=1'>++</A> "
+						dat += "<A href='?src=\ref[src];furnace_10=1'>+++</A> <BR><BR>"
+						dat += "<b>Supermatter Shard Count:</b> [furnace.shard_count]<BR>"
+						if( furnace.active )
+							dat += "<b>Active</b>"
+						else
+							dat += "<A href='?src=\ref[src];furnace_activate=1'>Activate</A><BR>"
+				else
+					dat += "Not found!<BR>"
+				dat += "<BR><HR>"
 
 		user << browse(dat, "window=pdcontrol;size=420x500")
 		onclose(user, "pdcontrol")
@@ -378,7 +381,7 @@ The process works like this:
 			furnace.modify_flow( -10 )
 		else if(href_list["furnace_activate"])
 			var/obj/machinery/phoron_desublimer/furnace/furnace = machine_ref["furnace"]
-			if( furnace.ready )
+			if( furnace.ready & !furnace.active )
 				furnace.produce()
 
 		src.updateDialog()

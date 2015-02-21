@@ -35,13 +35,6 @@
 	icon_state = "paper"
 	body_parts_covered = 0
 
-/obj/item/clothing/head/collectable/tophat
-	name = "collectable top hat"
-	desc = "A top hat worn by only the most prestigious hat collectors."
-	icon_state = "tophat"
-	item_state = "that"
-	body_parts_covered = 0
-
 /obj/item/clothing/head/collectable/captain
 	name = "collectable captain's hat"
 	desc = "A Collectable Hat that'll make you look just like a real comdom!"

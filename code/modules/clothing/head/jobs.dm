@@ -105,9 +105,5 @@
 	desc = "A cap surgeons wear during operations. Keeps their hair from tickling your internal organs. This one is dark green."
 	icon_state = "surgcap_green"
 
-/obj/item/clothing/head/entertainer
-	name = "entertainer's hat"
-	desc = "Perhaps you could pull a rabbit out of this!"
-	icon_state = "entertainerhat"
-	item_state = "entertainerhat"
-	siemens_coefficient = 0.9
+
+

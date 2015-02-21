@@ -1,11 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: code\game\machinery\phoron_desublimer.dm;maps\apollo-1.dmm
+WINDOW: maps\apollo-1.dmm;code\modules\power\cable.dm;maps\apollo-7.dmm;code\game\area\Space Station 13 areas.dm;code\game\gamemodes\newobjective.dm;code\game\gamemodes\objective.dm;code\game\gamemodes\revolution\revolution.dm;code\game\machinery\newscaster.dm;code\game\objects\items\devices\PDA\PDA.dm;code\game\objects\items\weapons\grenades\flashbang.dm;code\game\objects\items\weapons\storage\bags.dm;code\game\turfs\simulated\floor_types.dm;code\modules\admin\admin.dm;code\modules\admin\topic.dm;code\modules\admin\verbs\getlogs.dm;code\modules\admin\verbs\one_click_antag.dm;code\modules\hydroponics\seed_datums.dm;code\modules\customitems\item_defines.dm;code\modules\mob\living\simple_animal\friendly\cat.dm;code\modules\mob\new_player\preferences_setup.dm;code\game\jobs\job\civilian.dm;code\modules\clothing\head\jobs.dm;code\modules\mob\living\simple_animal\friendly\bunny.dm;code\modules\clothing\head\misc_special.dm;code\datums\supplypacks.dm;code\modules\clothing\head\collectable.dm;code\modules\clothing\shoes\colour.dm;code\game\machinery\recharger.dm;code\game\machinery\jukebox.dm;icons\obj\jukebox.dmi
 LAST_COMPILE_VERSION: 506.1249
-DIR: code code\datums code\datums\wires code\game code\game\area code\game\gamemodes code\game\gamemodes\malfunction code\game\machinery code\game\mecha code\game\mecha\equipment code\game\mecha\equipment\weapons code\game\objects code\modules code\modules\power code\modules\power\singularity code\modules\power\singularity\particle_accelerator maps 
-FILE: code\game\machinery\phoron_desublimer.dm
-LAST_COMPILE_TIME: 1424511470
+DIR: code code\datums code\datums\wires code\game code\game\area code\game\gamemodes code\game\gamemodes\malfunction code\game\gamemodes\revolution code\game\jobs code\game\jobs\job code\game\machinery code\game\mecha code\game\mecha\equipment code\game\mecha\equipment\weapons code\game\objects code\game\objects\items code\game\objects\items\devices code\game\objects\items\devices\PDA code\game\objects\items\weapons code\game\objects\items\weapons\grenades code\game\objects\items\weapons\storage code\game\turfs code\game\turfs\simulated code\modules code\modules\admin code\modules\admin\verbs code\modules\clothing code\modules\clothing\head code\modules\clothing\shoes code\modules\customitems code\modules\hydroponics code\modules\mob code\modules\mob\living code\modules\mob\living\simple_animal code\modules\mob\living\simple_animal\friendly code\modules\mob\new_player code\modules\power code\modules\power\singularity code\modules\power\singularity\particle_accelerator icons icons\obj maps 
+FILE: maps\apollo-7.dmm
+LAST_COMPILE_TIME: 1424556247
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS

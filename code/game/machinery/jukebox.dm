@@ -229,3 +229,9 @@ datum/track/New(var/title_name, var/audio)
 
 	playing = 1
 	update_icon()
+
+/obj/machinery/media/jukebox/mixer
+	name = "record mixer"
+	icon = 'icons/obj/jukebox.dmi'
+	icon_state = "mixer"
+	state_base = "mixer"

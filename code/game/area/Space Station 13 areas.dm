@@ -1005,6 +1005,18 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Theatre"
 	icon_state = "Theatre"
 
+/area/crew_quarters/theatre/backstage
+	name = "\improper Theatre Back Stage"
+	icon_state = "Theatre"
+
+/area/crew_quarters/theatre/changingroom
+	name = "\improper Theatre Changing Room"
+	icon_state = "Theatre"
+
+/area/crew_quarters/theatre/office
+	name = "\improper Entertainer's Office"
+	icon_state = "Theatre"
+
 /area/library
  	name = "\improper Library"
  	icon_state = "library"
