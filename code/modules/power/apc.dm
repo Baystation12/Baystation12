@@ -888,6 +888,11 @@
 	if(!can_use(usr, 1))
 		return 1
 
+	if(!istype(usr, /mob/living/silicon) && locked)
+		// Shouldn't happen, this is here to prevent href exploits
+		usr << "You must unlock the panel to use this!"
+		return 1
+
 	if (href_list["lock"])
 		coverlocked = !coverlocked
 

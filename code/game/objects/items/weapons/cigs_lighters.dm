@@ -119,7 +119,6 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	user.update_inv_wear_mask(0)
 	user.update_inv_l_hand(0)
 	user.update_inv_r_hand(1)
-	return
 
 
 /obj/item/clothing/mask/cigarette/afterattack(obj/item/weapon/reagent_containers/glass/glass, mob/user as mob, proximity)
@@ -284,6 +283,10 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	else if(istype(W, /obj/item/device/assembly/igniter))
 		light("<span class='notice'>[user] fiddles with [W], and manages to light their [name] with the power of science.</span>")
 
+	user.update_inv_wear_mask(0)
+	user.update_inv_l_hand(0)
+	user.update_inv_r_hand(1)
+
 /////////////////
 //SMOKING PIPES//
 /////////////////
@@ -360,6 +363,10 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 
 	else if(istype(W, /obj/item/device/assembly/igniter))
 		light("<span class='notice'>[user] fiddles with [W], and manages to light their [name] with the power of science.</span>")
+
+	user.update_inv_wear_mask(0)
+	user.update_inv_l_hand(0)
+	user.update_inv_r_hand(1)
 
 /obj/item/clothing/mask/cigarette/pipe/cobpipe
 	name = "corn cob pipe"

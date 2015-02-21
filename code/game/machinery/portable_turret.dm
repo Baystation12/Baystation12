@@ -297,7 +297,7 @@
 
 	else if((istype(I, /obj/item/weapon/wrench)))
 		if(on || raised)
-			user << "<span class='warning'You cannot unsecure an active turret!</span>"
+			user << "<span class='warning'>You cannot unsecure an active turret!</span>"
 			return
 		if(wrenching)
 			user << "<span class='warning'>Someone is already [anchored ? "un" : ""]securing the turret!</span>"
@@ -821,7 +821,7 @@
 
 	if(istype(I, /obj/item/weapon/pen))	//you can rename turrets like bots!
 		var/t = input(user, "Enter new turret name", name, finish_name) as text
-		t = copytext(sanitize(t), 1, MAX_MESSAGE_LEN)
+		t = sanitize(copytext(t, 1, MAX_MESSAGE_LEN))
 		if(!t)
 			return
 		if(!in_range(src, usr) && loc != usr)

@@ -1827,10 +1827,10 @@ datum
 					if(15 to 49)
 						if(prob(50))
 							M.Weaken(2)
-						M.drowsyness  = max(M.drowsyness, 20)
+						M.drowsyness = max(M.drowsyness, 20)
 					if(50 to INFINITY)
-						M.Weaken(20)
-						M.drowsyness  = max(M.drowsyness, 30)
+						M.sleeping = max(M.sleeping, 20)
+						M.drowsyness = max(M.drowsyness, 60)
 				data++
 				..()
 				return
@@ -1854,10 +1854,11 @@ datum
 					if(1)
 						M.confused += 2
 						M.drowsyness += 2
-					if(2 to 199)
+					if(2 to 20)
 						M.Weaken(30)
-					if(200 to INFINITY)
-						M.sleeping += 1
+						M.eye_blurry = max(M.eye_blurry, 10)
+					if(20 to INFINITY)
+						M.sleeping = max(M.sleeping, 30)
 				..()
 				return
 
@@ -3110,16 +3111,20 @@ datum
 				if(!data) data = 1
 				data++
 				M.dizziness +=6
-				if(data >= 15 && data <45)
-					if (!M.stuttering) M.stuttering = 1
-					M.stuttering += 3
-				else if(data >= 45 && prob(50) && data <55)
-					M.confused = max(M.confused+3,0)
-				else if(data >=55)
-					M.druggy = max(M.druggy, 55)
-				else if(data >=200)
-					M.adjustToxLoss(2)
 				..()
+				switch(data)
+					if(15 to 45)
+						if (!M.stuttering) M.stuttering = 1
+						M.stuttering += 3
+					if(45 to 55)
+						if (prob(50))
+							M.confused = max(M.confused+3,0)
+						else
+							return
+					if(55 to 200)
+						M.druggy = max(M.druggy, 55)
+					else if(200 to INFINITY)
+						M.adjustToxLoss(2)
 				return
 
 		neurotoxin
@@ -3140,16 +3145,20 @@ datum
 				if(!data) data = 1
 				data++
 				M.dizziness +=6
-				if(data >= 15 && data <45)
-					if (!M.stuttering) M.stuttering = 1
-					M.stuttering += 3
-				else if(data >= 45 && prob(50) && data <55)
-					M.confused = max(M.confused+3,0)
-				else if(data >=55)
-					M.druggy = max(M.druggy, 55)
-				else if(data >=200)
-					M.adjustToxLoss(2)
 				..()
+				switch(data)
+					if(15 to 45)
+						if (!M.stuttering) M.stuttering = 1
+						M.stuttering += 3
+					if(45 to 55)
+						if (prob(50))
+							M.confused = max(M.confused+3,0)
+						else
+							return
+					if(55 to 200)
+						M.druggy = max(M.druggy, 55)
+					else if(200 to INFINITY)
+						M.adjustToxLoss(2)
 				return
 
 		hippies_delight
