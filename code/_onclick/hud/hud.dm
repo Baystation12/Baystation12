@@ -256,59 +256,99 @@ datum/hud/New(mob/owner)
 	set name = "F12"
 	set hidden = 1
 
-	if(hud_used)
-		if(ishuman(src))
-			if(!client) return
-			if(client.view != world.view)
-				return
-			if(hud_used.hud_shown)
-				hud_used.hud_shown = 0
-				if(src.hud_used.adding)
-					src.client.screen -= src.hud_used.adding
-				if(src.hud_used.other)
-					src.client.screen -= src.hud_used.other
-				if(src.hud_used.hotkeybuttons)
-					src.client.screen -= src.hud_used.hotkeybuttons
-				if(src.hud_used.item_action_list)
-					src.client.screen -= src.hud_used.item_action_list
-
-				//Due to some poor coding some things need special treatment:
-				//These ones are a part of 'adding', 'other' or 'hotkeybuttons' but we want them to stay
-				if(!full)
-					src.client.screen += src.hud_used.l_hand_hud_object	//we want the hands to be visible
-					src.client.screen += src.hud_used.r_hand_hud_object	//we want the hands to be visible
-					src.client.screen += src.hud_used.action_intent		//we want the intent swticher visible
-					src.hud_used.action_intent.screen_loc = ui_acti_alt	//move this to the alternative position, where zone_select usually is.
-				else
-					src.client.screen -= src.healths
-					src.client.screen -= src.internals
-					src.client.screen -= src.gun_setting_icon
-
-				//These ones are not a part of 'adding', 'other' or 'hotkeybuttons' but we want them gone.
-				src.client.screen -= src.zone_sel	//zone_sel is a mob variable for some reason.
-
-			else
-				hud_used.hud_shown = 1
-				if(src.hud_used.adding)
-					src.client.screen += src.hud_used.adding
-				if(src.hud_used.other && src.hud_used.inventory_shown)
-					src.client.screen += src.hud_used.other
-				if(src.hud_used.hotkeybuttons && !src.hud_used.hotkey_ui_hidden)
-					src.client.screen += src.hud_used.hotkeybuttons
-				if(src.healths)
-					src.client.screen |= src.healths
-				if(src.internals)
-					src.client.screen |= src.internals
-				if(src.gun_setting_icon)
-					src.client.screen |= src.gun_setting_icon
-
-				src.hud_used.action_intent.screen_loc = ui_acti //Restore intent selection to the original position
-				src.client.screen += src.zone_sel				//This one is a special snowflake
-
-			hud_used.hidden_inventory_update()
-			hud_used.persistant_inventory_update()
-			update_action_buttons()
-		else
-			usr << "\red Inventory hiding is currently only supported for human mobs, sorry."
-	else
+	if(!hud_used)
 		usr << "\red This mob type does not use a HUD."
+		return
+		
+	if(!ishuman(src))
+		usr << "\red Inventory hiding is currently only supported for human mobs, sorry."
+		return
+	
+	if(!client) return
+	if(client.view != world.view)
+		return
+	if(hud_used.hud_shown)
+		hud_used.hud_shown = 0
+		if(src.hud_used.adding)
+			src.client.screen -= src.hud_used.adding
+		if(src.hud_used.other)
+			src.client.screen -= src.hud_used.other
+		if(src.hud_used.hotkeybuttons)
+			src.client.screen -= src.hud_used.hotkeybuttons
+		if(src.hud_used.item_action_list)
+			src.client.screen -= src.hud_used.item_action_list
+
+		//Due to some poor coding some things need special treatment:
+		//These ones are a part of 'adding', 'other' or 'hotkeybuttons' but we want them to stay
+		if(!full)
+			src.client.screen += src.hud_used.l_hand_hud_object	//we want the hands to be visible
+			src.client.screen += src.hud_used.r_hand_hud_object	//we want the hands to be visible
+			src.client.screen += src.hud_used.action_intent		//we want the intent swticher visible
+			src.hud_used.action_intent.screen_loc = ui_acti_alt	//move this to the alternative position, where zone_select usually is.
+		else
+			src.client.screen -= src.healths
+			src.client.screen -= src.internals
+			src.client.screen -= src.gun_setting_icon
+
+		//These ones are not a part of 'adding', 'other' or 'hotkeybuttons' but we want them gone.
+		src.client.screen -= src.zone_sel	//zone_sel is a mob variable for some reason.
+
+	else
+		hud_used.hud_shown = 1
+		if(src.hud_used.adding)
+			src.client.screen += src.hud_used.adding
+		if(src.hud_used.other && src.hud_used.inventory_shown)
+			src.client.screen += src.hud_used.other
+		if(src.hud_used.hotkeybuttons && !src.hud_used.hotkey_ui_hidden)
+			src.client.screen += src.hud_used.hotkeybuttons
+		if(src.healths)
+			src.client.screen |= src.healths
+		if(src.internals)
+			src.client.screen |= src.internals
+		if(src.gun_setting_icon)
+			src.client.screen |= src.gun_setting_icon
+
+		src.hud_used.action_intent.screen_loc = ui_acti //Restore intent selection to the original position
+		src.client.screen += src.zone_sel				//This one is a special snowflake
+
+	hud_used.hidden_inventory_update()
+	hud_used.persistant_inventory_update()
+	update_action_buttons()
+
+//Similar to button_pressed_F12() but keeps zone_sel, gun_setting_icon, and healths.
+/mob/proc/toggle_zoom_hud()
+	if(!hud_used)
+		return
+	if(!ishuman(src))
+		return
+	if(!client)
+		return
+	if(client.view != world.view)
+		return
+	
+	if(hud_used.hud_shown)
+		hud_used.hud_shown = 0
+		if(src.hud_used.adding)
+			src.client.screen -= src.hud_used.adding
+		if(src.hud_used.other)
+			src.client.screen -= src.hud_used.other
+		if(src.hud_used.hotkeybuttons)
+			src.client.screen -= src.hud_used.hotkeybuttons
+		if(src.hud_used.item_action_list)
+			src.client.screen -= src.hud_used.item_action_list
+		src.client.screen -= src.internals
+	else
+		hud_used.hud_shown = 1
+		if(src.hud_used.adding)
+			src.client.screen += src.hud_used.adding
+		if(src.hud_used.other && src.hud_used.inventory_shown)
+			src.client.screen += src.hud_used.other
+		if(src.hud_used.hotkeybuttons && !src.hud_used.hotkey_ui_hidden)
+			src.client.screen += src.hud_used.hotkeybuttons
+		if(src.internals)
+			src.client.screen |= src.internals
+		src.hud_used.action_intent.screen_loc = ui_acti //Restore intent selection to the original position
+
+	hud_used.hidden_inventory_update()
+	hud_used.persistant_inventory_update()
+	update_action_buttons()
