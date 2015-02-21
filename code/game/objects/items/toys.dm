@@ -944,6 +944,11 @@
 	desc = "A plushie of a scaly lizard! Very controversial, after being accused as \"racist\" by some Unathi."
 	icon_state = "lizardplushie"
 
+/obj/item/toy/plushie/spider
+	name = "spider plush"
+	desc = "A plushie of a fuzzy spider! It has eight legs - all the better to hug you with."
+	icon_state = "spiderplushie"
+
 //Toy cult sword
 /obj/item/toy/cultsword
 	name = "foam sword"
