@@ -15,34 +15,28 @@
 	set name = "Connect"
 	set desc = "Connect to the VR uplink."
 	set category = "Virtual Reality"
+	set src in usr
 
-	var/list/platforms_in_area
+	for(var/mob/living/silicon/platform/O in orange(usr.loc, 3)) // Finding suitable VR platforms in area
+		if(alert(usr, "Would you like to connect to platform: [O.name]?", "Confirm", "Yes", "No") == "Yes")
+			usr << "<b>Attempting connection...</b>"
+			if(O.active != 1)
+				var/list/descriptive_text = list( "<b>Please hold still.</b>",
+												  "\blue Loading beta-wave profile...",
+												  "\blue The helmet vibrates softly..",
+												  "<b>Loaded</b>.",
+												  "\blue Locking neural clamp...",
+												  "\blue The helmet begins to emit an unearthly pitch...",
+												  "\blue You begin to feel your senses melt away...",
+												  "\red You panic as you realize you no longer have control over your body!",
+												  "<b>Locked</b>." )
 
-	for( var/mob/living/silicon/platform/O in orange( src.mob, 3 )) // Finding suitable VR platforms in area
-		platforms_in_area += O
-		usr << "Platform \"[O.name]\" found on [O.loc]"
+				for(var/text in descriptive_text)
+					sleep(rand(10,30))
+					usr << text
 
-	if( platforms_in_area )
-		usr << "<b>Attempting connection...</b>"
-		var/mob/living/silicon/platform/P = input(src, "Which platform do you wish to connect to?") in null|platforms_in_area
-		if(isnull( P ))
-			usr << "\red Connection aborted."
-			return
+				O.activate(usr)
+			else
+				usr << "<b> Error another encrypted connection is active on that platform."
 
-		var/list/descriptive_text = list( "<b>Please hold still.</b>",
-										  "Loading beta-wave profile... ",
-										  "\blue The helmet vibrates softly. ",
-										  "<b>Loaded</b>.",
-										  "Locking neural clamp...",
-										  "\blue The helmet begins to emit an unearthly pitch...",
-										  "\blue You begin to feel your senses melt away...",
-										  "\red You panic as you realize you no longer have control over your body!",
-										  "<b>Locked</b>." )
-
-		for( var/text in descriptive_text )
-			usr << text
-			sleep( rand( 10, 30 ))
-
-		P.activate( usr )
-	else
-		usr << "No suitable platform found within 3 meters of device."
+	usr << "No suitable platform found within 3 meters of device."
