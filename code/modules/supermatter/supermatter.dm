@@ -28,7 +28,7 @@
 #define DETONATION_HALLUCINATION 600
 
 
-#define WARNING_DELAY 20			//seconds between warnings.
+#define WARNING_DELAY 30			//seconds between warnings.
 
 /obj/machinery/power/supermatter
 	name = "Supermatter"
