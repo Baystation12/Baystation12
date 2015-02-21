@@ -66,13 +66,9 @@
 	return
 
 //Checks if the projectile is eligible for embedding. Not that it necessarily will.
-//Mainly used to ensure that projectiles won't embed if they are penetrating the mob.
 /obj/item/projectile/proc/can_embed()
 	//embed must be enabled and damage type must be brute
 	if(!embed || damage_type != BRUTE)
-		return 0
-	//can't embed if the projectile is penetrating through the mob
-	if(penetrating > 0 && damage > 20 && prob(damage))
 		return 0
 	return 1
 
