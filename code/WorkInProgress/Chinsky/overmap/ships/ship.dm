@@ -75,9 +75,9 @@
 /obj/effect/map/ship/proc/decelerate()
 	if(!is_still() && can_burn())
 		if (speed[1])
-			adjust_speed(-SIGN(speed[1]) * min(get_acceleration(),speed[1]), 0)
+			adjust_speed(-SIGN(speed[1]) * min(get_acceleration(),abs(speed[1])), 0)
 		if (speed[2])
-			adjust_speed(0, -SIGN(speed[2]) * min(get_acceleration(),speed[2]))
+			adjust_speed(0, -SIGN(speed[2]) * min(get_acceleration(),abs(speed[2])))
 		last_burn = world.time
 
 /obj/effect/map/ship/proc/accelerate(direction)
