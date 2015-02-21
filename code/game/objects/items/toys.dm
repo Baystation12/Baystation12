@@ -601,206 +601,201 @@
  * Action figures
  */
 
-
 /obj/item/toy/figure
 	name = "Completely Glitched action figure"
 	desc = "A \"Space Life\" brand... wait, what the hell is this thing? It seems to be requesting the sweet release of death."
 	icon_state = "assistant"
 	icon = 'icons/obj/toy.dmi'
-	var/figuretype = ""
 
-/obj/item/toy/figure/New()
-	figuretype = pick("cmo","assistant","atmos","bartender","borg","gardener","captain","cargotech","ce","chaplain","chef","chemist","corgi","detective","dsquad","engineer","geneticist","hop","hos","qm","janitor","agent","librarian","md","mime","miner","ninja","wizard","rd","roboticist","scientist","syndie","secofficer","warden","psychologist","paramedic","ert")
+/obj/item/toy/figure/cmo
+	name = "Chief Medical Officer action figure"
+	desc = "A \"Space Life\" brand Chief Medical Officer action figure."
+	icon_state = "cmo"
 
-	if(figuretype == "cmo")
-		name = "Chief Medical Officer action figure"
-		desc = "A \"Space Life\" brand Chief Medical Officer action figure."
-		icon_state = "cmo"
+/obj/item/toy/figure/assistant
+	name = "Assistant action figure"
+	desc = "A \"Space Life\" brand Assistant action figure."
+	icon_state = "assistant"
 
-	if(figuretype == "assistant")
-		name = "Assistant action figure"
-		desc = "A \"Space Life\" brand Assistant action figure."
-		icon_state = "assistant"
+/obj/item/toy/figure/atmos
+	name = "Atmospheric Technician action figure"
+	desc = "A \"Space Life\" brand Atmospheric Technician action figure."
+	icon_state = "atmos"
 
-	if(figuretype == "atmos")
-		name = "Atmospheric Technician action figure"
-		desc = "A \"Space Life\" brand Atmospheric Technician action figure."
-		icon_state = "atmos"
+/obj/item/toy/figure/bartender
+	name = "Bartender action figure"
+	desc = "A \"Space Life\" brand Bartender action figure."
+	icon_state = "bartender"
 
-	if(figuretype == "bartender")
-		name = "Bartender action figure"
-		desc = "A \"Space Life\" brand Bartender action figure."
-		icon_state = "bartender"
+/obj/item/toy/figure/borg
+	name = "Cyborg action figure"
+	desc = "A \"Space Life\" brand Cyborg action figure."
+	icon_state = "borg"
 
-	if(figuretype == "borg")
-		name = "Cyborg action figure"
-		desc = "A \"Space Life\" brand Cyborg action figure."
-		icon_state = "borg"
+/obj/item/toy/figure/gardener
+	name = "Gardener action figure"
+	desc = "A \"Space Life\" brand Gardener action figure."
+	icon_state = "botanist"
 
-	if(figuretype == "gardener")
-		name = "Gardener action figure"
-		desc = "A \"Space Life\" brand Gardener action figure."
-		icon_state = "gardener"
+/obj/item/toy/figure/captain
+	name = "Captain action figure"
+	desc = "A \"Space Life\" brand Captain action figure."
+	icon_state = "captain"
 
-	if(figuretype == "captain")
-		name = "Captain action figure"
-		desc = "A \"Space Life\" brand Captain action figure."
-		icon_state = "captain"
+/obj/item/toy/figure/cargotech
+	name = "Cargo Technician action figure"
+	desc = "A \"Space Life\" brand Cargo Technician action figure."
+	icon_state = "cargotech"
 
-	if(figuretype == "cargotech")
-		name = "Cargo Technician action figure"
-		desc = "A \"Space Life\" brand Cargo Technician action figure."
-		icon_state = "cargotech"
+/obj/item/toy/figure/ce
+	name = "Chief Engineer action figure"
+	desc = "A \"Space Life\" brand Chief Engineer action figure."
+	icon_state = "ce"
 
-	if(figuretype == "ce")
-		name = "Chief Engineer action figure"
-		desc = "A \"Space Life\" brand Chief Engineer action figure."
-		icon_state = "ce"
+/obj/item/toy/figure/chaplain
+	name = "Chaplain action figure"
+	desc = "A \"Space Life\" brand Chaplain action figure."
+	icon_state = "chaplain"
 
-	if(figuretype == "chaplain")
-		name = "Chaplain action figure"
-		desc = "A \"Space Life\" brand Chaplain action figure."
-		icon_state = "chaplain"
+/obj/item/toy/figure/chef
+	name = "Chef action figure"
+	desc = "A \"Space Life\" brand Chef action figure."
+	icon_state = "chef"
 
-	if(figuretype == "chef")
-		name = "Chef action figure"
-		desc = "A \"Space Life\" brand Chef action figure."
-		icon_state = "chef"
+/obj/item/toy/figure/chemist
+	name = "Chemist action figure"
+	desc = "A \"Space Life\" brand Chemist action figure."
+	icon_state = "chemist"
 
-	if(figuretype == "chemist")
-		name = "Chemist action figure"
-		desc = "A \"Space Life\" brand Chemist action figure."
-		icon_state = "chemist"
+/obj/item/toy/figure/clown
+	name = "Clown action figure"
+	desc = "A \"Space Life\" brand Clown action figure."
+	icon_state = "clown"
 
-	if(figuretype == "clown")
-		name = "Clown action figure"
-		desc = "A \"Space Life\" brand Clown action figure."
-		icon_state = "clown"
+/obj/item/toy/figure/corgi
+	name = "Corgi action figure"
+	desc = "A \"Space Life\" brand Corgi action figure."
+	icon_state = "ian"
 
-	if(figuretype == "corgi")
-		name = "Corgi action figure"
-		desc = "A \"Space Life\" brand Corgi action figure."
-		icon_state = "ian"
+/obj/item/toy/figure/detective
+	name = "Detective action figure"
+	desc = "A \"Space Life\" brand Detective action figure."
+	icon_state = "detective"
 
-	if(figuretype == "detective")
-		name = "Detective action figure"
-		desc = "A \"Space Life\" brand Detective action figure."
-		icon_state = "detective"
+/obj/item/toy/figure/dsquad
+	name = "Space Commando action figure"
+	desc = "A \"Space Life\" brand Space Commando action figure."
+	icon_state = "dsquad"
 
-	if(figuretype == "dsquad")
-		name = "Space Commando action figure"
-		desc = "A \"Space Life\" brand Space Commando action figure."
-		icon_state = "dsquad"
+/obj/item/toy/figure/engineer
+	name = "Engineer action figure"
+	desc = "A \"Space Life\" brand Engineer action figure."
+	icon_state = "engineer"
 
-	if(figuretype == "engineer")
-		name = "Engineer action figure"
-		desc = "A \"Space Life\" brand Engineer action figure."
-		icon_state = "engineer"
+/obj/item/toy/figure/geneticist
+	name = "Geneticist action figure"
+	desc = "A \"Space Life\" brand Geneticist action figure, which was recently dicontinued."
+	icon_state = "geneticist"
 
-	if(figuretype == "geneticist")
-		name = "Geneticist action figure"
-		desc = "A \"Space Life\" brand Geneticist action figure, which was recently dicontinued."
-		icon_state = "geneticist"
+/obj/item/toy/figure/hop
+	name = "Head of Personel action figure"
+	desc = "A \"Space Life\" brand Head of Personel action figure."
+	icon_state = "hop"
 
-	if(figuretype == "hop")
-		name = "Head of Personel action figure"
-		desc = "A \"Space Life\" brand Head of Personel action figure."
-		icon_state = "hop"
+/obj/item/toy/figure/hos
+	name = "Head of Security action figure"
+	desc = "A \"Space Life\" brand Head of Security action figure."
+	icon_state = "hos"
 
-	if(figuretype == "hos")
-		name = "Head of Security action figure"
-		desc = "A \"Space Life\" brand Head of Security action figure."
-		icon_state = "hos"
+/obj/item/toy/figure/qm
+	name = "Quartermaster action figure"
+	desc = "A \"Space Life\" brand Quartermaster action figure."
+	icon_state = "qm"
 
-	if(figuretype == "qm")
-		name = "Quartermaster action figure"
-		desc = "A \"Space Life\" brand Quartermaster action figure."
-		icon_state = "qm"
+/obj/item/toy/figure/janitor
+	name = "Janitor action figure"
+	desc = "A \"Space Life\" brand Janitor action figure."
+	icon_state = "janitor"
 
-	if(figuretype == "janitor")
-		name = "Janitor action figure"
-		desc = "A \"Space Life\" brand Janitor action figure."
-		icon_state = "janitor"
+/obj/item/toy/figure/agent
+	name = "Internal Affairs Agent action figure"
+	desc = "A \"Space Life\" brand Internal Affairs Agent action figure."
+	icon_state = "agent"
 
-	if(figuretype == "agent")
-		name = "Internal Affairs Agent action figure"
-		desc = "A \"Space Life\" brand Internal Affairs Agent action figure."
-		icon_state = "agent"
+/obj/item/toy/figure/librarian
+	name = "Librarian action figure"
+	desc = "A \"Space Life\" brand Librarian action figure."
+	icon_state = "librarian"
 
-	if(figuretype == "librarian")
-		name = "Librarian action figure"
-		desc = "A \"Space Life\" brand Librarian action figure."
-		icon_state = "librarian"
+/obj/item/toy/figure/md
+	name = "Medical Doctor action figure"
+	desc = "A \"Space Life\" brand Medical Doctor action figure."
+	icon_state = "md"
 
-	if(figuretype == "md")
-		name = "Medical Doctor action figure"
-		desc = "A \"Space Life\" brand Medical Doctor action figure."
-		icon_state = "md"
+/obj/item/toy/figure/mime
+	name = "Mime action figure"
+	desc = "A \"Space Life\" brand Mime action figure."
+	icon_state = "mime"
 
-	if(figuretype == "mime")
-		name = "Mime action figure"
-		desc = "A \"Space Life\" brand Mime action figure."
-		icon_state = "mime"
+/obj/item/toy/figure/miner
+	name = "Shaft Miner action figure"
+	desc = "A \"Space Life\" brand Shaft Miner action figure."
+	icon_state = "miner"
 
-	if(figuretype == "miner")
-		name = "Shaft Miner action figure"
-		desc = "A \"Space Life\" brand Shaft Miner action figure."
-		icon_state = "miner"
+/obj/item/toy/figure/ninja
+	name = "Space Ninja action figure"
+	desc = "A \"Space Life\" brand Space Ninja action figure."
+	icon_state = "ninja"
 
-	if(figuretype == "ninja")
-		name = "Space Ninja action figure"
-		desc = "A \"Space Life\" brand Space Ninja action figure."
-		icon_state = "ninja"
+/obj/item/toy/figure/wizard
+	name = "Wizard action figure"
+	desc = "A \"Space Life\" brand Wizard action figure."
+	icon_state = "wizard"
 
-	if(figuretype == "wizard")
-		name = "Wizard action figure"
-		desc = "A \"Space Life\" brand Wizard action figure."
-		icon_state = "wizard"
+/obj/item/toy/figure/rd
+	name = "Research Director action figure"
+	desc = "A \"Space Life\" brand Research Director action figure."
+	icon_state = "rd"
 
-	if(figuretype == "rd")
-		name = "Research Director action figure"
-		desc = "A \"Space Life\" brand Research Director action figure."
-		icon_state = "rd"
+/obj/item/toy/figure/roboticist
+	name = "Roboticist action figure"
+	desc = "A \"Space Life\" brand Roboticist action figure."
+	icon_state = "roboticist"
 
-	if(figuretype == "roboticist")
-		name = "Roboticist action figure"
-		desc = "A \"Space Life\" brand Roboticist action figure."
-		icon_state = "roboticist"
+/obj/item/toy/figure/scientist
+	name = "Scientist action figure"
+	desc = "A \"Space Life\" brand Scientist action figure."
+	icon_state = "scientist"
 
-	if(figuretype == "scientist")
-		name = "Scientist action figure"
-		desc = "A \"Space Life\" brand Scientist action figure."
-		icon_state = "scientist"
+/obj/item/toy/figure/syndie
+	name = "Doom Operative action figure"
+	desc = "A \"Space Life\" brand Doom Operative action figure."
+	icon_state = "syndie"
 
-	if(figuretype == "syndie")
-		name = "Doom Operative action figure"
-		desc = "A \"Space Life\" brand Doom Operative action figure."
-		icon_state = "syndie"
+/obj/item/toy/figure/secofficer
+	name = "Security Officer action figure"
+	desc = "A \"Space Life\" brand Security Officer action figure."
+	icon_state = "secofficer"
 
-	if(figuretype == "secofficer")
-		name = "Security Officer action figure"
-		desc = "A \"Space Life\" brand Security Officer action figure."
-		icon_state = "secofficer"
+/obj/item/toy/figure/warden
+	name = "Warden action figure"
+	desc = "A \"Space Life\" brand Warden action figure."
+	icon_state = "warden"
 
-	if(figuretype == "warden")
-		name = "Warden action figure"
-		desc = "A \"Space Life\" brand Warden action figure."
-		icon_state = "warden"
+/obj/item/toy/figure/psychologist
+	name = "Psychologist action figure"
+	desc = "A \"Space Life\" brand Psychologist action figure."
+	icon_state = "psychologist"
 
-	if(figuretype == "psychologist")
-		name = "Psychologist action figure"
-		desc = "A \"Space Life\" brand Psychologist action figure."
-		icon_state = "psychologist"
+/obj/item/toy/figure/paramedic
+	name = "Paramedic action figure"
+	desc = "A \"Space Life\" brand Paramedic action figure."
+	icon_state = "paramedic"
 
-	if(figuretype == "paramedic")
-		name = "Paramedic action figure"
-		desc = "A \"Space Life\" brand Paramedic action figure."
-		icon_state = "paramedic"
-
-	if(figuretype == "ert")
-		name = "Emergency Response Team Commander action figure"
-		desc = "A \"Space Life\" brand Emergency Response Team Commander action figure."
-		icon_state = "ert"
+/obj/item/toy/figure/ert
+	name = "Emergency Response Team Commander action figure"
+	desc = "A \"Space Life\" brand Emergency Response Team Commander action figure."
+	icon_state = "ert"
 
 /obj/item/toy/katana
 	name = "replica katana"
@@ -889,7 +884,7 @@
 		visible_message("[src] says, \"[phrase]\"")
 
 /obj/structure/plushie/ian
-	name = "plushie corgi"
+	name = "plush corgi"
 	desc = "A plushie of an adorable corgi! Don't you just want to hug it and squeeze it and call it \"Ian\"?"
 	icon_state = "ianplushie"
 	phrase = "Arf!"
@@ -914,7 +909,7 @@
 
 //Small plushies.
 /obj/item/toy/plushie
-	name = "generic small plushie"
+	name = "generic small plush"
 	desc = "A very generic small plushie. It seems to not want to exist."
 	icon = 'icons/obj/toy.dmi'
 	icon_state = "nymphplushie"
