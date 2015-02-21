@@ -24,7 +24,6 @@
 		program.process()
 
 	update_icon()
-	src.updateDialog()
 
 /obj/machinery/embedded_controller/attack_ai(mob/user as mob)
 	src.ui_interact(user)
