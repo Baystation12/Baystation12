@@ -21,6 +21,9 @@
 	if(!nowindow && ..())
 		return 1
 
+	if(!custom_state)
+		custom_state = default_state
+
 	// In the far future no checks are made in an overriding Topic() beyond if(..()) return
 	// Instead any such checks are made in CanUseTopic()
 	var/obj/host = nano_host()
