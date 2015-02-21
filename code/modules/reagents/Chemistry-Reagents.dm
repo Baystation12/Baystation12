@@ -3125,7 +3125,6 @@ datum
 						M.druggy = max(M.druggy, 55)
 					else if(200 to INFINITY)
 						M.adjustToxLoss(2)
-				..()
 				return
 
 		neurotoxin
@@ -3160,7 +3159,6 @@ datum
 						M.druggy = max(M.druggy, 55)
 					else if(200 to INFINITY)
 						M.adjustToxLoss(2)
-				..()
 				return
 
 		hippies_delight
