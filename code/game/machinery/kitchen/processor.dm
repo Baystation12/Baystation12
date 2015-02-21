@@ -28,26 +28,8 @@
 		input = /obj/item/weapon/reagent_containers/food/snacks/meat
 		output = /obj/item/weapon/reagent_containers/food/snacks/meatball
 
-	/*
-	potato
-		input = /obj/item/weapon/reagent_containers/food/snacks/grown/potato
-		output = /obj/item/weapon/reagent_containers/food/snacks/rawsticks
-
-	carrot
-		input = /obj/item/weapon/reagent_containers/food/snacks/grown/carrot
-		output = /obj/item/weapon/reagent_containers/food/snacks/carrotfries
-
-	soybeans
-		input = /obj/item/weapon/reagent_containers/food/snacks/grown/soybeans
-		output = /obj/item/weapon/reagent_containers/food/snacks/soydope
-
-	wheat
-		input = /obj/item/weapon/reagent_containers/food/snacks/grown/wheat
-		output = /obj/item/weapon/reagent_containers/food/snacks/flour
-	*/
-
 	spaghetti
-		input = /obj/item/weapon/reagent_containers/food/snacks/flour
+		input = /obj/item/weapon/reagent_containers/food/snacks/dough
 		output = /obj/item/weapon/reagent_containers/food/snacks/spagetti
 
 	/* mobs */

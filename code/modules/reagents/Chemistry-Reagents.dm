@@ -2135,6 +2135,17 @@ datum
 					M.nutrition -= nutriment_factor
 				..()
 
+		nutriment/egg // Also bad for skrell. Not a child of protein because it might mess up, not sure.
+			name = "egg yolk"
+			id = "egg"
+			color = "#FFFFAA"
+
+			on_mob_life(var/mob/living/M, var/alien)
+				if(alien && alien == IS_SKRELL)
+					M.adjustToxLoss(0.5)
+					M.nutrition -= nutriment_factor
+				..()
+
 		lipozine
 			name = "Lipozine" // The anti-nutriment.
 			id = "lipozine"
@@ -2520,7 +2531,6 @@ datum
 				..()
 				return
 
-/* We're back to flour bags
 		flour
 			name = "flour"
 			id = "flour"
@@ -2538,7 +2548,6 @@ datum
 				src = null
 				if(!istype(T, /turf/space))
 					new /obj/effect/decal/cleanable/flour(T)
-*/
 
 		rice
 			name = "Rice"

@@ -184,27 +184,42 @@
 				pocell.charge = pocell.maxcharge
 				del(src)
 				return
-		else if(istype(W, /obj/item/weapon/circular_saw) || istype(W, /obj/item/weapon/hatchet) || (istype(W, /obj/item/weapon/twohanded/fireaxe) && W:wielded) || istype(W, /obj/item/weapon/melee/energy))
-			if(seed.chems && !isnull(seed.chems["woodpulp"]))
-				user.show_message("<span class='notice'>You make planks out of \the [src]!</span>", 1)
-				for(var/i=0,i<2,i++)
-					var/obj/item/stack/sheet/wood/NG = new (user.loc)
-					NG.color = seed.get_trait(TRAIT_PRODUCT_COLOUR)
-					for (var/obj/item/stack/sheet/wood/G in user.loc)
-						if(G==NG)
-							continue
-						if(G.amount>=G.max_amount)
-							continue
-						G.attackby(NG, user)
-					user << "You add the newly-formed wood to the stack. It now contains [NG.amount] planks."
-				del(src)
-				return
-			else if(seed.kitchen_tag == "pumpkin") // Ugggh these checks are awful.
+		else if(W.sharp)
+			if(seed.kitchen_tag == "pumpkin") // Ugggh these checks are awful.
 				user.show_message("<span class='notice'>You carve a face into [src]!</span>", 1)
 				new /obj/item/clothing/head/pumpkinhead (user.loc)
 				del(src)
 				return
-
+			else if(seed.chems)
+				if(istype(W,/obj/item/weapon/hatchet) && !isnull(seed.chems["woodpulp"]))
+					user.show_message("<span class='notice'>You make planks out of \the [src]!</span>", 1)
+					for(var/i=0,i<2,i++)
+						var/obj/item/stack/sheet/wood/NG = new (user.loc)
+						NG.color = seed.get_trait(TRAIT_PRODUCT_COLOUR)
+						for (var/obj/item/stack/sheet/wood/G in user.loc)
+							if(G==NG)
+								continue
+							if(G.amount>=G.max_amount)
+								continue
+							G.attackby(NG, user)
+						user << "You add the newly-formed wood to the stack. It now contains [NG.amount] planks."
+					del(src)
+					return
+				else if(!isnull(seed.chems["potato"]))
+					user << "You slice \the [src] into sticks."
+					new /obj/item/weapon/reagent_containers/food/snacks/rawsticks(get_turf(src))
+					del(src)
+					return
+				else if(!isnull(seed.chems["carrotjuice"]))
+					user << "You slice \the [src] into sticks."
+					new /obj/item/weapon/reagent_containers/food/snacks/carrotfries(get_turf(src))
+					del(src)
+					return
+				else if(!isnull(seed.chems["soymilk"]))
+					user << "You roughly chop up \the [src]."
+					new /obj/item/weapon/reagent_containers/food/snacks/soydope(get_turf(src))
+					del(src)
+					return
 	..()
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/attack(var/mob/living/carbon/M, var/mob/user, var/def_zone)
