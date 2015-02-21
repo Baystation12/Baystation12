@@ -3111,6 +3111,7 @@ datum
 				if(!data) data = 1
 				data++
 				M.dizziness +=6
+				..()
 				switch(data)
 					if(15 to 45)
 						if (!M.stuttering) M.stuttering = 1
@@ -3145,6 +3146,7 @@ datum
 				if(!data) data = 1
 				data++
 				M.dizziness +=6
+				..()
 				switch(data)
 					if(15 to 45)
 						if (!M.stuttering) M.stuttering = 1
