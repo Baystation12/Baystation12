@@ -23,14 +23,6 @@
 	integrated_light_power = 2
 	local_transmit = 1
 
-	// We need to keep track of a few module items so we don't need to do list operations
-	// every time we need them. These get set in New() after the module is chosen.
-	var/obj/item/stack/sheet/metal/cyborg/stack_metal = null
-	var/obj/item/stack/sheet/wood/cyborg/stack_wood = null
-	var/obj/item/stack/sheet/glass/cyborg/stack_glass = null
-	var/obj/item/stack/sheet/mineral/plastic/cyborg/stack_plastic = null
-	var/obj/item/weapon/matter_decompiler/decompiler = null
-
 	//Used for self-mailing.
 	var/mail_destination = ""
 
@@ -62,15 +54,6 @@
 
 	verbs -= /mob/living/silicon/robot/verb/Namepick
 	module = new /obj/item/weapon/robot_module/drone(src)
-
-	//Grab stacks.
-	stack_metal = locate(/obj/item/stack/sheet/metal/cyborg) in src.module
-	stack_wood = locate(/obj/item/stack/sheet/wood/cyborg) in src.module
-	stack_glass = locate(/obj/item/stack/sheet/glass/cyborg) in src.module
-	stack_plastic = locate(/obj/item/stack/sheet/mineral/plastic/cyborg) in src.module
-
-	//Grab decompiler.
-	decompiler = locate(/obj/item/weapon/matter_decompiler) in src.module
 
 	//Some tidying-up.
 	flavor_text = "It's a tiny little repair drone. The casing is stamped with an NT logo and the subscript: 'NanoTrasen Recursive Repair Systems: Fixing Tomorrow's Problem, Today!'"

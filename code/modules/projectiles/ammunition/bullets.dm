@@ -118,14 +118,14 @@
 
 /obj/item/ammo_casing/a145
 	name = "shell casing"
-	desc = "A 14.5mm AP shell."
+	desc = "A 14.5mm shell."
 	icon_state = "lcasing"
 	spent_icon = "lcasing-spent"
 	caliber = "14.5mm"
 	projectile_type = /obj/item/projectile/bullet/rifle/a145
 
 /obj/item/ammo_casing/a556
-	desc = "A 5.56 bullet casing."
+	desc = "A 5.56mm bullet casing."
 	caliber = "a556"
 	projectile_type = /obj/item/projectile/bullet/rifle/a556
 

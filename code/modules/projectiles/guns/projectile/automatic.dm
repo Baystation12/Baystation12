@@ -70,15 +70,16 @@
 
 /obj/item/weapon/gun/projectile/automatic/z8
 	name = "\improper Z8 Bulldog"
-	desc = "An older model bullpup carbine, made by the now defunct Zendai Foundries. Uses armor piercing 5.56 rounds. Makes you feel like a space marine when you hold it."
+	desc = "An older model bullpup carbine, made by the now defunct Zendai Foundries. Uses armor piercing 5.56mm rounds. Makes you feel like a space marine when you hold it."
 	icon_state = "carbine"
 	item_state = "shotgun"
-	w_class = 4.0
+	w_class = 4
 	force = 10
 	caliber = "a556"
 	origin_tech = "combat=8;materials=3"
 	ammo_type = "/obj/item/ammo_casing/a556"
 	fire_sound = 'sound/weapons/Gunshot.ogg'
+	slot_flags = SLOT_BACK
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/a556
 
@@ -92,13 +93,13 @@
 
 /obj/item/weapon/gun/projectile/automatic/sts35
 	name = "\improper STS-35 automatic rifle"
-	desc = "A durable, rugged looking automatic weapon of make popular on the frontier, despite it's bulk. Uses 7.62mm rounds. It is unmarked."
+	desc = "A durable, rugged looking automatic weapon of a make popular on the frontier. Uses 7.62mm rounds. It is unmarked."
 	icon_state = "assltrifle"
 	item_state = "shotgun"
 	w_class = 4
 	force = 10
 	caliber = "a762"
-	origin_tech = "combat=5;materials=1;syndicate=8"
+	origin_tech = "combat=6;materials=1;syndicate=4"
 	slot_flags = SLOT_BACK
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/c762
@@ -117,7 +118,7 @@
 	slot_flags = 0
 	max_shells = 50
 	caliber = "a762"
-	origin_tech = "combat=5;materials=1;syndicate=2"
+	origin_tech = "combat=6;materials=1;syndicate=2"
 	slot_flags = SLOT_BACK
 	ammo_type = "/obj/item/ammo_casing/a762"
 	fire_sound = 'sound/weapons/Gunshot_smg.ogg'

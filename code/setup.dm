@@ -759,3 +759,4 @@ var/list/be_special_flags = list(
 #define STATUS_DISABLED 0 // RED Visability
 #define STATUS_CLOSE -1 // Close the interface
 
+#define NANO_IGNORE_DISTANCE 1
