@@ -89,7 +89,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/engine
 	name = "Engine Core Vent"
 	power_channel = ENVIRON
-	power_rating = 15000	//15 kW ~ 20 HP
+	power_rating = 30000	//15 kW ~ 20 HP
 
 /obj/machinery/atmospherics/unary/vent_pump/engine/New()
 	..()
@@ -183,11 +183,11 @@
 		//JESUS FUCK.  THERE ARE LITERALLY 250 OF YOU MOTHERFUCKERS ON ZLEVEL ONE AND YOU DO THIS SHIT EVERY TICK WHEN VERY OFTEN THERE IS NO REASON TO
 
 		if(pump_direction && pressure_checks == PRESSURE_CHECK_EXTERNAL && controller_iteration > 10)	//99% of all vents
-			//Fucking hibernate because you ain't doing shit.  
+			//Fucking hibernate because you ain't doing shit.
 			hibernate = 1
 			spawn(rand(100,200))	//hibernate for 10 or 20 seconds randomly
-				hibernate = 0		
-		
+				hibernate = 0
+
 
 	if (power_draw >= 0)
 		last_power_draw = power_draw

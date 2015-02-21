@@ -15,16 +15,16 @@
 
 /datum/data/vending_product/New(var/path, var/name = null, var/amount = 1, var/price = 0, var/color = null, var/category = CAT_NORMAL)
 	..()
-	
+
 	src.product_path = path
-	
+
 	if(!name)
 		var/atom/tmp = new path
 		src.product_name = initial(tmp.name)
 		del(tmp)
 	else
 		src.product_name = name
-	
+
 	src.amount = amount
 	src.price = price
 	src.display_color = color
@@ -58,7 +58,7 @@
 	var/datum/data/vending_product/currently_vending = null // What we're requesting payment for right now
 	var/status_message = "" // Status screen messages like "insufficient funds", displayed in NanoUI
 	var/status_error = 0 // Set to 1 if status_message is an error
-	
+
 	/*
 		Variables used to initialize the product list
 		These are used for initialization only, and so are optional if
@@ -140,7 +140,7 @@
 			product.price = (entry in src.prices) ? src.prices[entry] : 0
 			product.amount = (current_list[1][entry]) ? current_list[1][entry] : 1
 			product.category = category
-			
+
 			src.product_records.Add(product)
 
 /obj/machinery/vending/Del()
@@ -212,7 +212,7 @@
 		src.overlays.Cut()
 		if(src.panel_open)
 			src.overlays += image(src.icon, "[initial(icon_state)]-panel")
-			
+
 		nanomanager.update_uis(src)  // Speaker switch is on the main UI, not wires UI
 		return
 	else if(istype(W, /obj/item/device/multitool)||istype(W, /obj/item/weapon/wirecutters))
@@ -257,8 +257,8 @@
  */
 /obj/machinery/vending/proc/pay_with_cash(var/obj/item/weapon/spacecash/cashmoney, mob/user)
 	if(currently_vending.price > cashmoney.worth)
-	
-		// This is not a status display message, since it's something the character 
+
+		// This is not a status display message, since it's something the character
 		// themselves is meant to see BEFORE putting the money in
 		usr << "\icon[cashmoney] <span class='warning'>That is not enough money.</span>"
 		return 0
@@ -294,9 +294,9 @@
 	return 1
 
 /**
- * Scan a chargecard and deduct payment from it. 
+ * Scan a chargecard and deduct payment from it.
  *
- * Takes payment for whatever is the currently_vending item. Returns 1 if 
+ * Takes payment for whatever is the currently_vending item. Returns 1 if
  * successful, 0 if failed.
  */
 /obj/machinery/vending/proc/pay_with_ewallet(var/obj/item/weapon/spacecash/ewallet/wallet)
@@ -313,7 +313,7 @@
 /**
  * Scan a card and attempt to transfer payment from associated account.
  *
- * Takes payment for whatever is the currently_vending item. Returns 1 if 
+ * Takes payment for whatever is the currently_vending item. Returns 1 if
  * successful, 0 if failed
  */
 /obj/machinery/vending/proc/pay_with_card(var/obj/item/weapon/card/id/I)
@@ -371,9 +371,9 @@
 
 /**
  *  Add money for current purchase to the vendor account.
- * 
+ *
  *  Called after the money has already been taken from the customer.
- */ 
+ */
 /obj/machinery/vending/proc/credit_purchase(var/target as text)
 	vendor_account.money += currently_vending.price
 
@@ -403,11 +403,11 @@
 /**
  *  Display the NanoUI window for the vending machine.
  *
- *  See NanoUI documentation for details. 
+ *  See NanoUI documentation for details.
  */
 /obj/machinery/vending/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	user.set_machine(src)
-	
+
 	var/list/data = list()
 	if(currently_vending)
 		data["mode"] = 1
@@ -422,28 +422,28 @@
 
 		for(var/key = 1 to src.product_records.len)
 			var/datum/data/vending_product/I = src.product_records[key]
-			
+
 			if(!(I.category & src.categories))
 				continue
-			
+
 			listed_products.Add(list(list(
 				"key" = key,
 				"name" = I.product_name,
 				"price" = I.price,
 				"color" = I.display_color,
 				"amount" = I.amount)))
-				
+
 		data["products"] = listed_products
-	
+
 	if(src.coin)
 		data["coin"] = src.coin.name
-	
+
 	if(src.panel_open)
 		data["panel"] = 1
 		data["speaker"] = src.shut_up ? 0 : 1
 	else
 		data["panel"] = 0
-	
+
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "vending_machine.tmpl", src.name, 440, 600)
@@ -488,11 +488,11 @@
 
 			var/key = text2num(href_list["vend"])
 			var/datum/data/vending_product/R = product_records[key]
-			
+
 			// This should not happen unless the request from NanoUI was bad
 			if(!(R.category & src.categories))
 				return
-			
+
 			if(R.price <= 0)
 				src.vend(R, usr)
 			else
@@ -522,7 +522,7 @@
 	src.status_message = "Vending..."
 	src.status_error = 0
 	nanomanager.update_uis(src)
-	
+
 	if (R.category & CAT_COIN)
 		if(!coin)
 			user << "\blue You need to insert a coin to get this item."
@@ -619,7 +619,7 @@
 			new dump_path(src.loc)
 			R.amount--
 		break
-	
+
 	stat |= BROKEN
 	src.icon_state = "[initial(icon_state)]-broken"
 	return
@@ -732,8 +732,8 @@
 	icon_state = "snack"
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/candy = 6,/obj/item/weapon/reagent_containers/food/drinks/dry_ramen = 6,/obj/item/weapon/reagent_containers/food/snacks/chips =6,
 					/obj/item/weapon/reagent_containers/food/snacks/sosjerky = 6,/obj/item/weapon/reagent_containers/food/snacks/no_raisin = 6,/obj/item/weapon/reagent_containers/food/snacks/spacetwinkie = 6,
-					/obj/item/weapon/reagent_containers/food/snacks/cheesiehonkers = 6)
-	contraband = list(/obj/item/weapon/reagent_containers/food/snacks/syndicake = 6)
+					/obj/item/weapon/reagent_containers/food/snacks/cheesiehonkers = 6, /obj/item/weapon/reagent_containers/food/snacks/tastybread = 6)
+	contraband = list(/obj/item/weapon/reagent_containers/food/snacks/syndicake = 6, /obj/item/weapon/reagent_containers/food/snacks/skrellsnacks = 3)
 	prices = list(/obj/item/weapon/reagent_containers/food/snacks/candy = 1,/obj/item/weapon/reagent_containers/food/drinks/dry_ramen = 5,/obj/item/weapon/reagent_containers/food/snacks/chips = 1,
 					/obj/item/weapon/reagent_containers/food/snacks/sosjerky = 2,/obj/item/weapon/reagent_containers/food/snacks/no_raisin = 1,/obj/item/weapon/reagent_containers/food/snacks/spacetwinkie = 1,
 					/obj/item/weapon/reagent_containers/food/snacks/cheesiehonkers = 1)
@@ -750,7 +750,7 @@
 					/obj/item/weapon/reagent_containers/food/drinks/cans/dr_gibb = 10,/obj/item/weapon/reagent_containers/food/drinks/cans/starkist = 10,
 					/obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle = 10,/obj/item/weapon/reagent_containers/food/drinks/cans/space_up = 10,
 					/obj/item/weapon/reagent_containers/food/drinks/cans/iced_tea = 10, /obj/item/weapon/reagent_containers/food/drinks/cans/grape_juice = 10)
-	contraband = list(/obj/item/weapon/reagent_containers/food/drinks/cans/thirteenloko = 5)
+	contraband = list(/obj/item/weapon/reagent_containers/food/drinks/cans/thirteenloko = 5, /obj/item/weapon/reagent_containers/food/snacks/liquidfood = 6)
 	prices = list(/obj/item/weapon/reagent_containers/food/drinks/cans/cola = 1,/obj/item/weapon/reagent_containers/food/drinks/cans/space_mountain_wind = 1,
 					/obj/item/weapon/reagent_containers/food/drinks/cans/dr_gibb = 1,/obj/item/weapon/reagent_containers/food/drinks/cans/starkist = 1,
 					/obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle = 2,/obj/item/weapon/reagent_containers/food/drinks/cans/space_up = 1,
@@ -867,7 +867,7 @@
 	contraband = list(/obj/item/seeds/amanitamycelium = 2,/obj/item/seeds/glowshroom = 2,/obj/item/seeds/libertymycelium = 2,/obj/item/seeds/mtearseed = 2,
 					  /obj/item/seeds/nettleseed = 2,/obj/item/seeds/reishimycelium = 2,/obj/item/seeds/reishimycelium = 2,/obj/item/seeds/shandseed = 2,)
 	premium = list(/obj/item/toy/waterflower = 1)
-	
+
 /**
  *  Populate hydroseeds product_records
  *
@@ -891,7 +891,7 @@
 			product.price = (entry in src.prices) ? src.prices[entry] : 0
 			product.amount = (current_list[1][entry]) ? current_list[1][entry] : 1
 			product.category = category
-			
+
 			src.product_records.Add(product)
 
 /obj/machinery/vending/magivend

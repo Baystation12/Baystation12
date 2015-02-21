@@ -792,7 +792,7 @@ note dizziness decrements automatically in the mob's Life() proc.
 /mob/Stat()
 	..()
 
-	if(statpanel("Status"))	//not looking at that panel
+	if(statpanel("MC"))	//not looking at that panel
 
 		if(client && client.holder)
 			stat(null,"Location:\t([x], [y], [z])")
@@ -808,6 +808,7 @@ note dizziness decrements automatically in the mob's Life() proc.
 				stat(null,"Obj-[master_controller.objects_cost]\t#[processing_objects.len]")
 				stat(null,"Net-[master_controller.networks_cost]\tPnet-[master_controller.powernets_cost]")
 				stat(null,"NanoUI-[master_controller.nano_cost]\t#[nanomanager.processing_uis.len]")
+				stat(null,"Events-[master_controller.events_cost]\t#[event_manager.active_events.len]")
 				stat(null,"Tick-[master_controller.ticker_cost]\tALL-[master_controller.total_cost]")
 			else
 				stat(null,"MasterController-ERROR")
@@ -833,6 +834,17 @@ note dizziness decrements automatically in the mob's Life() proc.
 					statpanel("Spells","[S.charge_counter]/[S.charge_max]",S)
 				if("holdervar")
 					statpanel("Spells","[S.holder_var_type] [S.holder_var_amount]",S)
+	if(statpanel("Examine"))
+		stat(null,"[description_holders["icon"]]    <font size='5'>[description_holders["name"]]</font>") //The name, written in big letters.
+		stat(null,"[description_holders["desc"]]") //the default examine text.
+		if(description_holders["info"])
+			stat(null,"<font color='#084B8A'><b>[description_holders["info"]]</b></font>") //Blue, informative text.
+		if(description_holders["fluff"])
+			stat(null,"<font color='#298A08'><b>[description_holders["fluff"]]</b></font>") //Yellow, fluff-related text.
+		if(mind.special_role)
+			if(description_holders["antag"])
+				stat(null,"<font color='#8A0808'><b>[description_holders["antag"]]</b></font>") //Red, malicious antag-related text
+
 
 
 
@@ -867,7 +879,7 @@ note dizziness decrements automatically in the mob's Life() proc.
 	else if( stat || weakened || paralysis || resting || sleeping || (status_flags & FAKEDEATH))
 		lying = 1
 		canmove = 0
-	else if( stunned )
+	else if(stunned)
 		canmove = 0
 	else if(captured)
 		anchored = 1
@@ -883,6 +895,11 @@ note dizziness decrements automatically in the mob's Life() proc.
 		drop_r_hand()
 	else
 		density = 1
+
+	for(var/obj/item/weapon/grab/G in grabbed_by)
+		if(G.state >= GRAB_AGGRESSIVE)
+			canmove = 0
+			break
 
 	//Temporarily moved here from the various life() procs
 	//I'm fixing stuff incrementally so this will likely find a better home.

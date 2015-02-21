@@ -4,44 +4,59 @@
 	damage = 60
 	damage_type = BRUTE
 	nodamage = 0
-	flag = "bullet"
+	check_armour = "bullet"
 	embed = 1
 	sharp = 1
+	var/mob_passthrough_check = 0
 
 /obj/item/projectile/bullet/on_hit(var/atom/target, var/blocked = 0)
 	if (..(target, blocked))
 		var/mob/living/L = target
 		shake_camera(L, 3, 2)
 
-/obj/item/projectile/bullet/on_penetrate(var/atom/A)
-	if(!A) return 1 //if whatever it was got destroyed when we hit it, then I guess we can just keep going
+/obj/item/projectile/bullet/attack_mob(var/mob/living/target_mob, var/distance, var/miss_modifier)
+	if(penetrating > 0 && damage > 20 && prob(damage))
+		mob_passthrough_check = 1
+	else
+		mob_passthrough_check = 0
+	..()
+
+/obj/item/projectile/bullet/can_embed()
+	//prevent embedding if the projectile is passing through the mob
+	if(mob_passthrough_check)
+		return 0
+	return ..()
+
+/obj/item/projectile/bullet/check_penetrate(var/atom/A)
+	if(!A || !A.density) return 1 //if whatever it was got destroyed when we hit it, then I guess we can just keep going
 
 	if(istype(A, /obj/mecha))
 		return 1 //mecha have their own penetration handling
 
 	if(ismob(A))
+		if(!mob_passthrough_check)
+			return 0
 		if(iscarbon(A))
-			//squishy mobs absorb KE
-			if (damage <= 20) return 0
-			damage *= 0.7
+			damage *= 0.7 //squishy mobs absorb KE
 		return 1
 
-	if(istype(A, /obj/machinery) || istype(A, /obj/structure))
-		var/chance = 15
-		if(istype(A, /turf/simulated/wall))
-			var/turf/simulated/wall/W = A
-			chance = round(damage/W.damage_cap*100)
-		else if(istype(A, /obj/machinery/door))
-			var/obj/machinery/door/D = A
-			chance = round(damage/D.maxhealth*100)
-		else if(istype(A, /obj/structure/girder) || istype(A, /obj/structure/cultgirder))
-			chance = 100
-		
-		if(prob(chance))
-			if(A.opacity)
-				//display a message so that people on the other side aren't so confused
-				A.visible_message("<span class='warning'>\The [src] pierces through \the [A]!")
-			return 1
+	var/chance = 0
+	if(istype(A, /turf/simulated/wall))
+		var/turf/simulated/wall/W = A
+		chance = round(damage/W.damage_cap*180)
+	else if(istype(A, /obj/machinery/door))
+		var/obj/machinery/door/D = A
+		chance = round(damage/D.maxhealth*100)
+	else if(istype(A, /obj/structure/girder) || istype(A, /obj/structure/cultgirder))
+		chance = 100
+	else if(istype(A, /obj/machinery) || istype(A, /obj/structure))
+		chance = 25
+
+	if(prob(chance))
+		if(A.opacity)
+			//display a message so that people on the other side aren't so confused
+			A.visible_message("<span class='warning'>\The [src] pierces through \the [A]!")
+		return 1
 
 	return 0
 
@@ -122,11 +137,18 @@
 /* "Rifle" rounds */
 
 /obj/item/projectile/bullet/rifle/a762
-	damage = 25
+	damage = 30
+	penetrating = 1
 
 /obj/item/projectile/bullet/rifle/a145
-	damage = 90
+	damage = 80
+	stun = 3
+	weaken = 3
 	penetrating = 5
+
+/obj/item/projectile/bullet/rifle/a556
+	damage = 50
+	penetrating = 1
 
 /* Miscellaneous */
 

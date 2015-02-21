@@ -367,7 +367,7 @@
 			item_type = "gun"
 		if(27)
 			//revolver
-			var/obj/item/weapon/gun/projectile/new_gun = new /obj/item/weapon/gun/projectile(src.loc)
+			var/obj/item/weapon/gun/projectile/new_gun = new /obj/item/weapon/gun/projectile/revolver(src.loc)
 			new_item = new_gun
 			new_item.icon_state = "gun[rand(1,4)]"
 			new_item.icon = 'icons/obj/xenoarchaeology.dmi'
@@ -383,7 +383,7 @@
 				if(num_bullets < new_gun.loaded.len)
 					new_gun.loaded.Cut()
 					for(var/i = 1, i <= num_bullets, i++)
-						var/A = text2path(new_gun.ammo_type)
+						var/A = new_gun.ammo_type
 						new_gun.loaded += new A(new_gun)
 				else
 					for(var/obj/item/I in new_gun)

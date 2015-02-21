@@ -15,36 +15,39 @@
 	action(atom/target)
 		if(!action_checks(target)) return
 		if(!cargo_holder) return
-		if(istype(target, /obj/structure/stool)) return
-		for(var/M in target.contents)
-			if(istype(M, /mob/living))
-				return
-
+		
+		//loading
 		if(istype(target,/obj))
 			var/obj/O = target
-			if(!O.anchored)
-				if(cargo_holder.cargo.len < cargo_holder.cargo_capacity)
-					occupant_message("You lift [target] and start to load it into cargo compartment.")
-					chassis.visible_message("[chassis] lifts [target] and starts to load it into cargo compartment.")
-					set_ready_state(0)
-					chassis.use_power(energy_drain)
-					O.anchored = 1
-					var/T = chassis.loc
-					if(do_after_cooldown(target))
-						if(T == chassis.loc && src == chassis.selected)
-							cargo_holder.cargo += O
-							O.loc = chassis
-							O.anchored = 0
-							occupant_message("<font color='blue'>[target] succesfully loaded.</font>")
-							log_message("Loaded [O]. Cargo compartment capacity: [cargo_holder.cargo_capacity - cargo_holder.cargo.len]")
-						else
-							occupant_message("<font color='red'>You must hold still while handling objects.</font>")
-							O.anchored = initial(O.anchored)
-				else
-					occupant_message("<font color='red'>Not enough room in cargo compartment.</font>")
-			else
+			if(O.buckled_mob)
+				return
+			if(locate(/mob/living) in O)
+				return
+			if(O.anchored)
 				occupant_message("<font color='red'>[target] is firmly secured.</font>")
+				return
+			if(cargo_holder.cargo.len >= cargo_holder.cargo_capacity)
+				occupant_message("<font color='red'>Not enough room in cargo compartment.</font>")
+				return
+			
+			occupant_message("You lift [target] and start to load it into cargo compartment.")
+			chassis.visible_message("[chassis] lifts [target] and starts to load it into cargo compartment.")
+			set_ready_state(0)
+			chassis.use_power(energy_drain)
+			O.anchored = 1
+			var/T = chassis.loc
+			if(do_after_cooldown(target))
+				if(T == chassis.loc && src == chassis.selected)
+					cargo_holder.cargo += O
+					O.loc = chassis
+					O.anchored = 0
+					occupant_message("<font color='blue'>[target] succesfully loaded.</font>")
+					log_message("Loaded [O]. Cargo compartment capacity: [cargo_holder.cargo_capacity - cargo_holder.cargo.len]")
+				else
+					occupant_message("<font color='red'>You must hold still while handling objects.</font>")
+					O.anchored = initial(O.anchored)
 
+		//attacking
 		else if(istype(target,/mob/living))
 			var/mob/living/M = target
 			if(M.stat>1) return
@@ -585,7 +588,7 @@
 			chassis.visible_message("The [chassis.name] armor deflects the projectile")
 			chassis.log_append_to_last("Armor saved.")
 		else
-			chassis.take_damage(round(Proj.damage*src.damage_coeff),Proj.flag)
+			chassis.take_damage(round(Proj.damage*src.damage_coeff),Proj.check_armour)
 			chassis.check_for_internal_damage(list(MECHA_INT_FIRE,MECHA_INT_TEMP_CONTROL,MECHA_INT_TANK_BREACH,MECHA_INT_CONTROL_LOST))
 			Proj.on_hit(chassis)
 		set_ready_state(0)
