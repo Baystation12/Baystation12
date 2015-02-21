@@ -182,13 +182,18 @@ Class Procs:
 /obj/machinery/proc/inoperable(var/additional_flags = 0)
 	return (stat & (NOPOWER|BROKEN|additional_flags))
 
+/obj/machinery/CanUseTopic(var/mob/user, var/be_close)
+	if(!interact_offline && (stat & (NOPOWER|BROKEN)))
+		return STATUS_CLOSE
 
-/obj/machinery/Topic(href, href_list, var/nowindow = 0, var/checkrange = 1)
-	if(..())
-		return 1
-	if(!interact_offline && stat & (NOPOWER|BROKEN))
-		return 1
-	return 0
+	return ..()
+
+/obj/machinery/CouldUseTopic(var/mob/user)
+	..()
+	user.set_machine(src)
+
+/obj/machinery/CouldNotUseTopic(var/mob/user)
+	usr.unset_machine()
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 
