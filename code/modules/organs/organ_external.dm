@@ -497,10 +497,11 @@ Note that amputating the affected organ does in fact remove the infection from t
 		H = owner
 
 	for(var/datum/wound/W in wounds)
-		if(W.damage_type == CUT || W.damage_type == BRUISE)
-			brute_dam += W.damage
-		else if(W.damage_type == BURN)
-			burn_dam += W.damage
+		if(!W.internal) //so IB doesn't count towards crit/paincrit
+			if(W.damage_type == CUT || W.damage_type == BRUISE)
+				brute_dam += W.damage
+			else if(W.damage_type == BURN)
+				burn_dam += W.damage
 
 		if(!(status & ORGAN_ROBOT) && W.bleeding() && (H && !(H.species.flags & NO_BLOOD)))
 			W.bleed_timer--
