@@ -2671,7 +2671,7 @@
 "aZs" = (/obj/structure/table,/obj/item/weapon/storage/box/donkpockets{pixel_x = 3; pixel_y = 3},/obj/item/weapon/reagent_containers/glass/beaker{pixel_x = 5},/turf/simulated/floor{icon_state = "cafeteria"; dir = 2},/area/crew_quarters/kitchen)
 "aZt" = (/obj/structure/table,/obj/item/weapon/reagent_containers/food/condiment/saltshaker{pixel_x = -3; pixel_y = 0},/obj/item/weapon/reagent_containers/food/condiment/peppermill{pixel_x = 3},/turf/simulated/floor{icon_state = "cafeteria"; dir = 2},/area/crew_quarters/kitchen)
 "aZu" = (/obj/structure/table,/turf/simulated/floor{icon_state = "cafeteria"; dir = 5},/area/crew_quarters/kitchen)
-"aZv" = (/obj/machinery/processor,/turf/simulated/floor{icon_state = "cafeteria"; dir = 2},/area/crew_quarters/kitchen)
+"aZv" = (/turf/simulated/floor{icon_state = "cafeteria"; dir = 2},/area/crew_quarters/kitchen)
 "aZw" = (/obj/structure/grille,/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 8},/turf/simulated/floor/plating,/area/hydroponics/garden)
 "aZx" = (/obj/machinery/portable_atmospherics/hydroponics/soil,/obj/effect/landmark{name = "blobstart"},/turf/simulated/floor/grass,/area/hydroponics/garden)
 "aZy" = (/obj/structure/flora/ausbushes/brflowers,/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/grass,/area/hydroponics/garden)

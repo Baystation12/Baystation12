@@ -2854,6 +2854,8 @@
 	desc = "A building block of an impressive dish."
 	icon = 'icons/obj/food_ingredients.dmi'
 	icon_state = "doughslice"
+	slice_path = /obj/item/weapon/reagent_containers/food/snacks/spagetti
+	slices_num = 1
 	bitesize = 2
 	New()
 		..()

@@ -451,7 +451,6 @@
 #include "code\game\machinery\embedded_controller\simple_docking_controller.dm"
 #include "code\game\machinery\kitchen\gibber.dm"
 #include "code\game\machinery\kitchen\microwave.dm"
-#include "code\game\machinery\kitchen\processor.dm"
 #include "code\game\machinery\kitchen\smartfridge.dm"
 #include "code\game\machinery\pipe\construction.dm"
 #include "code\game\machinery\pipe\pipe_dispenser.dm"

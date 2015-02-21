@@ -1616,7 +1616,7 @@ datum
 			name = "Meatball"
 			id = "meatball"
 			result = null
-			required_reagents = list("protein" = 9, "flour" = 5)
+			required_reagents = list("protein" = 3, "flour" = 5)
 			result_amount = 3
 			on_reaction(var/datum/reagents/holder, var/created_volume)
 				new /obj/item/weapon/reagent_containers/food/snacks/meatball(get_turf(holder.my_atom))
