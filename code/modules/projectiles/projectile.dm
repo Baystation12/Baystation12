@@ -66,13 +66,9 @@
 	return
 
 //Checks if the projectile is eligible for embedding. Not that it necessarily will.
-//Mainly used to ensure that projectiles won't embed if they are penetrating the mob.
 /obj/item/projectile/proc/can_embed()
 	//embed must be enabled and damage type must be brute
 	if(!embed || damage_type != BRUTE)
-		return 0
-	//can't embed if the projectile is penetrating through the mob
-	if(penetrating > 0 && damage > 20 && prob(damage))
 		return 0
 	return 1
 
@@ -167,9 +163,12 @@
 		target_mob.attack_log += "\[[time_stamp()]\] <b>[firer]/[firer.ckey]</b> shot <b>[target_mob]/[target_mob.ckey]</b> with a <b>[src.type]</b>"
 		firer.attack_log += "\[[time_stamp()]\] <b>[firer]/[firer.ckey]</b> shot <b>[target_mob]/[target_mob.ckey]</b> with a <b>[src.type]</b>"
 		msg_admin_attack("[firer] ([firer.ckey]) shot [target_mob] ([target_mob.ckey]) with a [src] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[firer.x];Y=[firer.y];Z=[firer.z]'>JMP</a>)") //BS12 EDIT ALG
-	else
+	else if(firer)
 		target_mob.attack_log += "\[[time_stamp()]\] <b>UNKNOWN SUBJECT (No longer exists)</b> shot <b>[target_mob]/[target_mob.ckey]</b> with a <b>[src]</b>"
 		msg_admin_attack("UNKNOWN shot [target_mob] ([target_mob.ckey]) with a [src] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[firer.x];Y=[firer.y];Z=[firer.z]'>JMP</a>)") //BS12 EDIT ALG
+	else
+		target_mob.attack_log += "\[[time_stamp()]\] <b>UNKNOWN SUBJECT (No longer exists)</b> shot <b>[target_mob]/[target_mob.ckey]</b> with a <b>[src]</b>"
+		msg_admin_attack("UNKNOWN shot [target_mob] ([target_mob.ckey]) with a [src] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[target_mob.x];Y=[target_mob.y];Z=[target_mob.z]'>JMP</a>)") //BS12 EDIT ALG
 
 	//sometimes bullet_act() will want the projectile to continue flying
 	if (target_mob.bullet_act(src, def_zone) == -1)
