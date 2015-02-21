@@ -686,11 +686,12 @@
 /obj/item/weapon/rig/proc/malfunction()
 	return 0
 
-/obj/item/weapon/rig/emp_act(severity)
-	malfunctioning += severity*10
+/obj/item/weapon/rig/emp_act(severity_class)
+	//class 1 severity is the most severe, not least.
+	malfunctioning += round(30/severity_class)
 	if(malfunction_delay <= 0)
 		malfunction_delay = 20
-	take_hit(severity*10,"electrical pulse")
+	take_hit(round(30/severity_class),"electrical pulse")
 
 /obj/item/weapon/rig/proc/shock(mob/user)
 	if (electrocute_mob(user, cell, src))
@@ -699,12 +700,14 @@
 	return 0
 
 /obj/item/weapon/rig/proc/take_hit(damage,source)
-
 	if(!installed_modules.len)
 		return
 
-	if(!prob(max(0,(damage-(chest ? chest.breach_threshold : 0)))))
-		return
+	//given that module damage is spread out across all modules, even this is probably not enough for emp to affect rigs much.
+	if(source != "electrical pulse")
+		var/protection = chest? chest.breach_threshold : 0
+		if(!prob(max(0, damage - protection)))
+			return
 
 	var/list/valid_modules = list()
 	for(var/obj/item/rig_module/module in installed_modules)
