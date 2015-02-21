@@ -3117,7 +3117,7 @@ datum
 						if (!M.stuttering) M.stuttering = 1
 						M.stuttering += 3
 					if(45 to 55)
-					 	if (prob(50))
+						if (prob(50))
 							M.confused = max(M.confused+3,0)
 						else
 							return
