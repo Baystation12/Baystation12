@@ -275,7 +275,7 @@
 		radiation = Clamp(radiation,0,100)
 
 		if (radiation)
-			var/datum/organ/internal/diona/nutrients/rad_organ = locate() in internal_organs
+			var/obj/item/organ/internal/diona/nutrients/rad_organ = locate() in internal_organs
 			if(rad_organ && !rad_organ.is_broken())
 				var/rads = radiation/25
 				radiation -= rads
@@ -322,7 +322,7 @@
 				adjustToxLoss(damage * RADIATION_SPEED_COEFFICIENT)
 				updatehealth()
 				if(organs.len)
-					var/datum/organ/external/O = pick(organs)
+					var/obj/item/organ/external/O = pick(organs)
 					if(istype(O)) O.add_autopsy_data("Radiation Poisoning", damage)
 
 	proc/breathe()
@@ -331,6 +331,8 @@
 
 		var/datum/gas_mixture/environment = loc.return_air()
 		var/datum/gas_mixture/breath
+
+		//TODO: Move this into lungs organ process_internal()
 
 		// HACK NEED CHANGING LATER
 		if(health < config.health_threshold_crit && !reagents.has_reagent("inaprovaline"))
@@ -456,7 +458,7 @@
 
 		// Lung damage increases the minimum safe pressure.
 		if(species.has_organ["lungs"])
-			var/datum/organ/internal/lungs/L = internal_organs_by_name["lungs"]
+			var/obj/item/organ/internal/lungs/L = internal_organs_by_name["lungs"]
 			if(!L)
 				safe_pressure_min = INFINITY //No lungs, how are you breathing?
 			else if(L.is_broken())
@@ -941,7 +943,7 @@
 
 		if(status_flags & GODMODE)	return 0	//godmode
 
-		var/datum/organ/internal/diona/node/light_organ = locate() in internal_organs
+		var/obj/item/organ/internal/diona/node/light_organ = locate() in internal_organs
 		if(light_organ && !light_organ.is_broken())
 			var/light_amount = 0 //how much light there is in the place, affects receiving nutrition and healing
 			if(isturf(loc)) //else, there's considered to be no light

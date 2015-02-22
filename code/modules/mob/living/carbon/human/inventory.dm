@@ -39,7 +39,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 
 
 /mob/living/carbon/human/proc/has_organ(name)
-	var/datum/organ/external/O = organs_by_name[name]
+	var/obj/item/organ/external/O = organs_by_name[name]
 
 	return (O && !(O.status & ORGAN_DESTROYED) )
 
@@ -411,7 +411,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 			if("splints")
 				var/count = 0
 				for(var/organ in list("l_leg","r_leg","l_arm","r_arm"))
-					var/datum/organ/external/o = target.organs_by_name[organ]
+					var/obj/item/organ/external/o = target.organs_by_name[organ]
 					if(o.status & ORGAN_SPLINTED)
 						count = 1
 						break
@@ -699,7 +699,7 @@ It can still be worn/put on as normal.
 
 			if(can_reach_splints)
 				for(var/organ in list("l_leg","r_leg","l_arm","r_arm"))
-					var/datum/organ/external/o = target.get_organ(organ)
+					var/obj/item/organ/external/o = target.get_organ(organ)
 					if (o && o.status & ORGAN_SPLINTED)
 						var/obj/item/W = new /obj/item/stack/medical/splint(amount=1)
 						o.status &= ~ORGAN_SPLINTED

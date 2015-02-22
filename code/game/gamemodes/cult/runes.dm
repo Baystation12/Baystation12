@@ -104,7 +104,7 @@ var/list/sacrificed = list()
 				if(M.stat==2)
 					continue
 				usr.say("Mah[pick("'","`")]weyh pleggh at e'ntrath!")
-				
+
 				if (M.species && (M.species.flags & NO_PAIN))
 					M.visible_message("\red The markings below [M] glow a bloody red.")
 				else
@@ -576,8 +576,8 @@ var/list/sacrificed = list()
 					if(!(iscultist(V)))
 						victims += V//Checks for cult status and mob type
 			for(var/obj/item/I in src.loc)//Checks for MMIs/brains/Intellicards
-				if(istype(I,/obj/item/organ/brain))
-					var/obj/item/organ/brain/B = I
+				if(istype(I,/obj/item/organ/internal/brain))
+					var/obj/item/organ/internal/brain/B = I
 					victims += B.brainmob
 				else if(istype(I,/obj/item/device/mmi))
 					var/obj/item/device/mmi/B = I

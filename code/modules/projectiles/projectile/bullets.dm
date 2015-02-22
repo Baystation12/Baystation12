@@ -6,7 +6,7 @@
 	nodamage = 0
 	check_armour = "bullet"
 	embed = 1
-	sharp = 1
+	sharp = HARDNESS_SCALPEL
 	var/mob_passthrough_check = 0
 
 /obj/item/projectile/bullet/on_hit(var/atom/target, var/blocked = 0)

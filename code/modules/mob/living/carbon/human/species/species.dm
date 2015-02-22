@@ -95,13 +95,29 @@
 	var/rarity_value = 1          // Relative rarity/collector value for this species.
 	                              // Determines the organs that the species spawns with and
 	var/list/has_organ = list(    // which required-organ checks are conducted.
-		"heart" =    /datum/organ/internal/heart,
-		"lungs" =    /datum/organ/internal/lungs,
-		"liver" =    /datum/organ/internal/liver,
-		"kidneys" =  /datum/organ/internal/kidney,
-		"brain" =    /datum/organ/internal/brain,
-		"appendix" = /datum/organ/internal/appendix,
-		"eyes" =     /datum/organ/internal/eyes
+		"heart" =    /obj/item/organ/internal/heart,
+		"lungs" =    /obj/item/organ/internal/lungs,
+		"liver" =    /obj/item/organ/internal/liver,
+		"kidneys" =  /obj/item/organ/internal/kidneys,
+		"brain" =    /obj/item/organ/internal/brain,
+		"appendix" = /obj/item/organ/internal/appendix,
+		"eyes" =     /obj/item/organ/internal/eyes
+		)
+
+	// Determines the various limb and tissue types that the species spawns with.
+	var/list/tissues = list("skin","muscle","bone")
+	var/list/has_limb = list(     // For now, parents need to be defined before children.
+		list("chest",  /obj/item/organ/external/chest,      null,    "torso"),
+		list("groin",  /obj/item/organ/external/groin,      "chest", "abdomen"),
+		list("head",   /obj/item/organ/external/head,       "chest", "head"),
+		list("l_arm",  /obj/item/organ/external/arm,        "chest", "left arm"),
+		list("r_arm",  /obj/item/organ/external/arm/right,  "chest", "right arm"),
+		list("l_leg",  /obj/item/organ/external/leg,        "groin", "left leg"),
+		list("r_leg",  /obj/item/organ/external/leg/right,  "groin", "right leg"),
+		list("l_hand", /obj/item/organ/external/hand,       "l_arm", "left hand"),
+		list("r_hand", /obj/item/organ/external/hand/right, "r_arm", "right hand"),
+		list("l_foot", /obj/item/organ/external/foot,       "l_leg", "left foot"),
+		list("r_foot", /obj/item/organ/external/foot/right, "r_leg", "right foot")
 		)
 
 /datum/species/New()
@@ -139,48 +155,47 @@
 	var/datum/language/species_language = all_languages[language]
 	return species_language.get_random_name(gender)
 
+/datum/species/proc/create_limbs(var/mob/living/carbon/human/H)
+	if(H.organs_by_name) H.organs_by_name.Cut()
+	H.organs_by_name = list()
+	for(var/list/limb_data in has_limb)
+		var/limb_path = limb_data[2]
+		H.organs_by_name[limb_data[1]] = new limb_path(H, 0)
+
 /datum/species/proc/create_organs(var/mob/living/carbon/human/H) //Handles creation of mob organs.
 
 	//Trying to work out why species changes aren't fixing organs properly.
 	if(H.organs)                  H.organs.Cut()
 	if(H.internal_organs)         H.internal_organs.Cut()
-	if(H.organs_by_name)          H.organs_by_name.Cut()
 	if(H.internal_organs_by_name) H.internal_organs_by_name.Cut()
 
 	H.organs = list()
 	H.internal_organs = list()
-	H.organs_by_name = list()
 	H.internal_organs_by_name = list()
-
-	//This is a basic humanoid limb setup.
-	H.organs_by_name["chest"] = new/datum/organ/external/chest()
-	H.organs_by_name["groin"] = new/datum/organ/external/groin(H.organs_by_name["chest"])
-	H.organs_by_name["head"] = new/datum/organ/external/head(H.organs_by_name["chest"])
-	H.organs_by_name["l_arm"] = new/datum/organ/external/l_arm(H.organs_by_name["chest"])
-	H.organs_by_name["r_arm"] = new/datum/organ/external/r_arm(H.organs_by_name["chest"])
-	H.organs_by_name["r_leg"] = new/datum/organ/external/r_leg(H.organs_by_name["groin"])
-	H.organs_by_name["l_leg"] = new/datum/organ/external/l_leg(H.organs_by_name["groin"])
-	H.organs_by_name["l_hand"] = new/datum/organ/external/l_hand(H.organs_by_name["l_arm"])
-	H.organs_by_name["r_hand"] = new/datum/organ/external/r_hand(H.organs_by_name["r_arm"])
-	H.organs_by_name["l_foot"] = new/datum/organ/external/l_foot(H.organs_by_name["l_leg"])
-	H.organs_by_name["r_foot"] = new/datum/organ/external/r_foot(H.organs_by_name["r_leg"])
 
 	for(var/organ in has_organ)
 		var/organ_type = has_organ[organ]
-		H.internal_organs_by_name[organ] = new organ_type(H)
+		var/obj/item/organ/internal/I = new organ_type(H)
+		H.internal_organs_by_name[organ] = I
+		H.internal_organs |= I
 
 	for(var/name in H.organs_by_name)
 		H.organs += H.organs_by_name[name]
 
-	for(var/datum/organ/external/O in H.organs)
+	for(var/obj/item/organ/external/O in H.organs)
 		O.owner = H
 
 	if(flags & IS_SYNTHETIC)
-		for(var/datum/organ/external/E in H.organs)
+		for(var/obj/item/organ/external/E in H.organs)
 			if(E.status & ORGAN_CUT_AWAY || E.status & ORGAN_DESTROYED) continue
 			E.status |= ORGAN_ROBOT
-		for(var/datum/organ/internal/I in H.internal_organs)
-			I.mechanize()
+		for(var/obj/item/organ/internal/I in H.internal_organs)
+			I.roboticize()
+
+	spawn(10) //Putting this in a spawn so hopefully it will give it time to spawn.
+		if(H && H.vessel)
+			H.vessel.add_reagent("blood",560-H.vessel.total_volume)
+			H.fixblood()
 
 /datum/species/proc/hug(var/mob/living/carbon/human/H,var/mob/living/target)
 

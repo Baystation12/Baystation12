@@ -14,8 +14,8 @@
 	active = 1
 	force = active_force
 	throwforce = active_throwforce
-	sharp = 1
-	edge = 1
+	sharp = HARDNESS_TORCH
+	edge = 20
 	w_class = active_w_class
 	playsound(user, 'sound/weapons/saberon.ogg', 50, 1)
 
@@ -76,8 +76,8 @@
 	flags = CONDUCT | NOSHIELD | NOBLOODY
 	origin_tech = "magnets=3;combat=4"
 	attack_verb = list("attacked", "chopped", "cleaved", "torn", "cut")
-	sharp = 1
-	edge = 1
+	sharp = HARDNESS_TORCH
+	edge = 30
 
 /obj/item/weapon/melee/energy/axe/activate(mob/living/user)
 	..()
@@ -170,8 +170,8 @@
 	desc = "A concentrated beam of energy in the shape of a blade. Very stylish... and lethal."
 	icon_state = "blade"
 	force = 70.0//Normal attacks deal very high damage.
-	sharp = 1
-	edge = 1
+	sharp = HARDNESS_TORCH
+	edge = 25
 	anchored = 1    // Never spawned outside of inventory, should be fine.
 	throwforce = 1  //Throwing or dropping the item deletes it.
 	throw_speed = 1
@@ -207,7 +207,7 @@
 		if(istype(loc,/mob/living))
 			var/mob/living/carbon/human/host = loc
 			if(istype(host))
-				for(var/datum/organ/external/organ in host.organs)
+				for(var/obj/item/organ/external/organ in host.organs)
 					for(var/obj/item/O in organ.implants)
 						if(O == src)
 							organ.implants -= src

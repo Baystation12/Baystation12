@@ -65,7 +65,7 @@
 	attack_verb = list("hit", "pierced", "sliced", "attacked", "drilled")
 	var/drill_sound = 'sound/weapons/Genhit.ogg'
 	var/drill_verb = "drilling"
-	sharp = 1
+	sharp = HARDNESS_SCALPEL
 
 	var/excavation_amount = 100
 

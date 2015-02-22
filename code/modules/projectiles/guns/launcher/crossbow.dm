@@ -8,8 +8,8 @@
 	item_state = "bolt"
 	throwforce = 8
 	w_class = 3.0
-	sharp = 1
-	edge = 0
+	sharp = HARDNESS_SCALPEL
+	edge = 1
 
 /obj/item/weapon/arrow/proc/removed() //Helper for metal rods falling apart.
 	return
@@ -17,8 +17,8 @@
 /obj/item/weapon/spike
 	name = "alloy spike"
 	desc = "It's about a foot of weird silver metal with a wicked point."
-	sharp = 1
-	edge = 0
+	sharp = HARDNESS_TORCH
+	edge = 1
 	throwforce = 5
 	w_class = 2
 	icon = 'icons/obj/weapons.dmi'

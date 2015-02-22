@@ -592,7 +592,7 @@ var/list/slot_equipment_priority = list( \
 		var/mob/living/carbon/human/H = src
 		if(H.health - H.halloss <= config.health_threshold_softcrit)
 			for(var/name in H.organs_by_name)
-				var/datum/organ/external/e = H.organs_by_name[name]
+				var/obj/item/organ/external/e = H.organs_by_name[name]
 				if(H.lying)
 					if(((e.status & ORGAN_BROKEN && !(e.status & ORGAN_SPLINTED)) || e.status & ORGAN_BLEEDING) && (H.getBruteLoss() + H.getFireLoss() >= 100))
 						return 1
@@ -1027,7 +1027,7 @@ note dizziness decrements automatically in the mob's Life() proc.
 			visible_implants += O
 	return visible_implants
 
-mob/proc/yank_out_object()
+/mob/proc/yank_out_object()
 	set category = "Object"
 	set name = "Yank out object"
 	set desc = "Remove an embedded item at the cost of bleeding and pain."
@@ -1068,7 +1068,7 @@ mob/proc/yank_out_object()
 	else
 		U << "<span class='warning'>You attempt to get a good grip on [selection] in [S]'s body.</span>"
 
-	if(!do_after(U, 80))
+	if(!do_after(U, 30))
 		return
 	if(!selection || !S || !U)
 		return
@@ -1083,27 +1083,30 @@ mob/proc/yank_out_object()
 
 	if(ishuman(src))
 		var/mob/living/carbon/human/H = src
-		var/datum/organ/external/affected
+		var/obj/item/organ/external/affected
 
-		for(var/datum/organ/external/organ in H.organs) //Grab the organ holding the implant.
+		for(var/obj/item/organ/external/organ in H.organs) //Grab the organ holding the implant.
 			for(var/obj/item/O in organ.implants)
 				if(O == selection)
 					affected = organ
+					break
 
 		affected.implants -= selection
-		H.shock_stage+=20
-		affected.take_damage((selection.w_class * 3), 0, 0, 1, "Embedded object extraction")
+		for(var/datum/wound/wound in affected.wounds)
+			if(wound.embedded == selection)
+				wound.expand(selection.edge+rand(1,3),0,H.species.tissues.len)
+				H.shock_stage+=(20*wound.depth)
+				break
 
-		if(prob(selection.w_class * 5)) //I'M SO ANEMIC I COULD JUST -DIE-.
-			var/datum/wound/internal_bleeding/I = new (min(selection.w_class * 5, 15))
-			affected.wounds += I
-			H.custom_pain("Something tears wetly in your [affected] as [selection] is pulled free!", 1)
+		affected.update_health()
 
 		if (ishuman(U))
 			var/mob/living/carbon/human/human_user = U
 			human_user.bloody_hands(H)
 
 	selection.loc = get_turf(src)
+	if(!(U.l_hand && U.r_hand))
+		U.put_in_hands(selection)
 
 	for(var/obj/item/weapon/O in pinned)
 		if(O == selection)

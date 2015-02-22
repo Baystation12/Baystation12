@@ -84,21 +84,21 @@
 //This really should be in mob not every check
 		if(ishuman(M))
 			var/mob/living/carbon/human/H = M
-			var/datum/organ/internal/eyes/E = H.internal_organs_by_name["eyes"]
-			if (E && E.damage >= E.min_bruised_damage)
-				M << "\red Your eyes start to burn badly!"
+			var/obj/item/organ/internal/eyes/E = H.internal_organs_by_name["eyes"]
+			if (E && E.is_bruised())
+				M << "<span class='danger'>Your eyes start to burn badly!</span>"
 				if(!banglet && !(istype(src , /obj/item/weapon/grenade/flashbang/clusterbang)))
-					if (E.damage >= E.min_broken_damage)
-						M << "\red You can't see anything!"
+					if (E.is_broken())
+						M << "\red You can't see anything!</span>"
 		if (M.ear_damage >= 15)
-			M << "\red Your ears start to ring badly!"
+			M << "\red Your ears start to ring badly!</span>"
 			if(!banglet && !(istype(src , /obj/item/weapon/grenade/flashbang/clusterbang)))
 				if (prob(M.ear_damage - 10 + 5))
-					M << "\red You can't hear anything!"
+					M << "\red You can't hear anything!</span>"
 					M.sdisabilities |= DEAF
 		else
 			if (M.ear_damage >= 5)
-				M << "\red Your ears start to ring!"
+				M << "\red Your ears start to ring!</span>"
 		M.update_icons()
 
 /obj/item/weapon/grenade/flashbang/clusterbang//Created by Polymorph, fixed by Sieve

@@ -17,8 +17,8 @@
 	icon_state= "bolter"
 	damage = 50
 	check_armour = "bullet"
-	sharp = 1
-	edge = 1
+	sharp = HARDNESS_TORCH
+	edge = 30 // Should be able to blow off limbs.
 
 	on_hit(var/atom/target, var/blocked = 0)
 		explosion(target, -1, 0, 2)

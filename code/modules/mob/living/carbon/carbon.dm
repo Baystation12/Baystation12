@@ -33,8 +33,8 @@
 				if(istype(src, /mob/living/carbon/human))
 					var/mob/living/carbon/human/H = src
 					var/organ = H.get_organ("chest")
-					if (istype(organ, /datum/organ/external))
-						var/datum/organ/external/temp = organ
+					if (istype(organ, /obj/item/organ/external))
+						var/obj/item/organ/external/temp = organ
 						if(temp.take_damage(d, 0))
 							H.UpdateDamageIcon()
 					H.updatehealth()
@@ -64,11 +64,11 @@
 /mob/living/carbon/attack_hand(mob/M as mob)
 	if(!istype(M, /mob/living/carbon)) return
 	if (hasorgans(M))
-		var/datum/organ/external/temp = M:organs_by_name["r_hand"]
+		var/obj/item/organ/external/temp = M:organs_by_name["r_hand"]
 		if (M.hand)
 			temp = M:organs_by_name["l_hand"]
 		if(temp && !temp.is_usable())
-			M << "\red You can't use your [temp.display_name]"
+			M << "\red You can't use your [temp]."
 			return
 
 	for(var/datum/disease/D in viruses)
@@ -158,7 +158,7 @@
 				"\blue You check yourself for injuries." \
 				)
 
-			for(var/datum/organ/external/org in H.organs)
+			for(var/obj/item/organ/external/org in H.organs)
 				var/status = ""
 				var/brutedamage = org.brute_dam
 				var/burndamage = org.burn_dam
@@ -189,7 +189,7 @@
 					status = "weirdly shapen."
 				if(status == "")
 					status = "OK"
-				src.show_message(text("\t []My [] is [].",status=="OK"?"\blue ":"\red ",org.display_name,status),1)
+				src.show_message(text("\t []My [] is [].",status=="OK"?"\blue ":"\red ",org.name,status),1)
 			if((SKELETON in H.mutations) && (!H.w_uniform) && (!H.wear_suit))
 				H.play_xylophone()
 		else

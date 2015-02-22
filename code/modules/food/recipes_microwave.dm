@@ -104,16 +104,9 @@ I said no!
 /datum/recipe/brainburger
 	items = list(
 		/obj/item/weapon/reagent_containers/food/snacks/bun,
-		/obj/item/organ/brain
+		/obj/item/organ/internal/brain
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/brainburger
-
-/datum/recipe/roburger
-	items = list(
-		/obj/item/weapon/reagent_containers/food/snacks/flour,
-		/obj/item/robot_parts/head
-	)
-	result = /obj/item/weapon/reagent_containers/food/snacks/roburger
 
 /datum/recipe/xenoburger
 	items = list(
@@ -1028,7 +1021,7 @@ I said no!
 		/obj/item/weapon/reagent_containers/food/snacks/egg,
 		/obj/item/weapon/reagent_containers/food/snacks/egg,
 		/obj/item/weapon/reagent_containers/food/snacks/egg,
-		/obj/item/organ/brain
+		/obj/item/organ/internal/brain
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/sliceable/braincake
 
