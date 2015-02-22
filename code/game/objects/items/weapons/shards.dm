@@ -86,7 +86,7 @@
 				if(affecting.take_damage(5, 0))
 					H.UpdateDamageIcon()
 				H.updatehealth()
-				if(!(H.species & NO_PAIN))
+				if(!(H.species && (H.species.flags & NO_PAIN)))
 					H.Weaken(3)
 	..()
 

@@ -144,24 +144,24 @@
 	brute_dam = 0
 	burn_dam = 0
 
-	var/all_layers_broken = 1
+	var/severed = 1
+
 	for(var/datum/wound/wound in wounds)
 		if(wound.wound_type == WOUND_CUT || wound.wound_type == WOUND_BRUISE)
 			brute_dam += wound.severity
 		else if(wound.wound_type == WOUND_BURN)
 			burn_dam += wound.severity
 
-		if(wound.depth < owner.species.tissues.len)
-			all_layers_broken = 0
+		if(severed && (wound.depth < owner.species.tissues.len) || (wound.severity < min_sever_area))
+			severed = 0
 
 	if(is_open() && is_bleeding())
 		status |= ORGAN_BLEEDING
 	else
 		status &= ~ORGAN_BLEEDING
 
-	// This is a very, very mangled limb.
-	if(all_layers_broken && !(status & ORGAN_DEAD))
-		die()
+	if(severed)
+		status |= ORGAN_DESTROYED
 
 	..()
 

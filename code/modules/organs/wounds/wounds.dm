@@ -1,19 +1,20 @@
-
 /datum/wound
 	var/severity = 1
-	var/topmost_layer = 0
 	var/depth = 0
 	var/status = WOUND_CLOSED
 	var/wound_type = WOUND_CUT
 	var/germ_level = 0
 	var/wound_str
-	var/obj/item/embedded // If something is inside this wound.
+	var/obj/item/embedded              // If something is inside this wound.
+	var/mob/living/carbon/human/holder // Person that this would is allocated to.
 
-/datum/wound/New(var/new_wound_type, var/new_size, var/new_depth, var/top_layer)
-	if(!top_layer)
+/datum/wound/New(var/mob/living/carbon/human/new_holder)
+	if(!new_holder)
 		del(src)
-		return
-	topmost_layer = top_layer
+	holder = new_holder
+
+/datum/wound/proc/expand(var/new_wound_type, var/new_size, var/new_depth)
+
 	if(!new_size)
 		new_size = 1
 	if(!new_depth)
@@ -27,16 +28,8 @@
 		status = WOUND_OPEN
 	update_wound_descriptor()
 
-/datum/wound/proc/expand(var/new_severity, var/new_depth, var/edged, var/depth_cap)
-	if(new_severity > severity)
-		severity = new_severity
-	if(new_depth > depth)
-		depth = max(1,min(new_depth,depth_cap))
 	if(status == WOUND_SUTURED && prob(25))
 		status = WOUND_OPEN
-	else if(edged && status != WOUND_OPEN)
-		status = WOUND_OPEN
-	update_wound_descriptor()
 
 /datum/wound/proc/heal(var/healing)
 

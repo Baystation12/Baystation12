@@ -702,10 +702,10 @@ Auto Patrol: []"},
 	switch(lasercolor)
 		if("b")
 			target_suit = /obj/item/clothing/suit/redtag
-			target_weapon = /obj/item/weapon/gun/energy/laser/redtag
+			target_weapon = /obj/item/weapon/gun/energy/lasertag/red
 		if("r")
 			target_suit = /obj/item/clothing/suit/bluetag
-			target_weapon = /obj/item/weapon/gun/energy/laser/bluetag
+			target_weapon = /obj/item/weapon/gun/energy/lasertag/blue
 
 	if((istype(perp.r_hand, target_weapon)) || (istype(perp.l_hand, target_weapon)))
 		threat += 4

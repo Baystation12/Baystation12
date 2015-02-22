@@ -128,7 +128,7 @@
 		rigged = 1 //broken batterys are dangerous
 
 /obj/item/weapon/cell/emp_act(severity)
-	charge -= 1000 / severity
+	charge -= maxcharge / severity
 	if (charge < 0)
 		charge = 0
 	if(reliability != 100 && prob(50/severity))

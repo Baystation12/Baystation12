@@ -375,6 +375,12 @@ proc/listclearnulls(list/list)
 		i++
 	return null
 
+// Returns the key based on the index
+/proc/get_key_by_value(var/list/L, var/value)
+	for(var/key in L)
+		if(L[key] == value)
+			return key
+
 /proc/count_by_type(var/list/L, type)
 	var/i = 0
 	for(var/T in L)

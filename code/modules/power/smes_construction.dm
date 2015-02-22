@@ -318,14 +318,14 @@
 // Parameters: None
 // Description: Switches the input on/off depending on previous setting
 /obj/machinery/power/smes/buildable/proc/toggle_input()
-	input_attempt = !input_attempt
+	inputting(!input_attempt)
 	update_icon()
 
 // Proc: toggle_output()
 // Parameters: None
 // Description: Switches the output on/off depending on previous setting
 /obj/machinery/power/smes/buildable/proc/toggle_output()
-	output_attempt = !output_attempt
+	outputting(!output_attempt)
 	update_icon()
 
 // Proc: set_input()

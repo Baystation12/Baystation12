@@ -25,80 +25,66 @@
 	update_health()
 
 /obj/item/organ/external/take_damage(var/brute, var/burn, var/sharp, var/edge)
-	if(brute)
-		// Try cutting first if we can, but if that fails, count it as brute.
-		if(!sharp || !take_cutting_trauma(brute, sharp, edge))
-			take_blunt_trauma(brute, edge)
-	if(burn)
-		take_burn_trauma(burn)
-	update_health()
 
-// Cutting trauma is focused on a small area and hence wounds multiple layers of tissue.
-/obj/item/organ/external/proc/take_cutting_trauma(var/damage, var/sharp, var/weapon_area)
+	world << "Hit with [brute] brute [burn] burn [sharp] sharp [edge] edge."
 
-	/*
-	var/list/cut_layers = list()
-	for(var/datum/tissue_layer/tissue_layer in tissue_layers)
-		if(tissue_layer.tissue.can_cut_with(sharp))
-			cut_layers |= tissue_layer
-	if(!cut_layers.len) // The object isn't sharp enough to cut through any of the layers we have.
-		return 0
+	var/datum/wound/wound
+	if(wounds.len && prob(wounds.len*10))
+		owner.visible_message("Picked an existing wound.")
+		wound = pick(wounds)
 
-	damage = round(damage/cut_layers.len)
-	var/thickest_layer = 0
-	var/spillover = 0
+	if(!wound || wound.status == WOUND_CLOSED || wound.status == WOUND_SUTURED)
+		owner.visible_message("No wound or unsuitable, new wound.")
+		wound = new(owner)
 
-	// Split the damage up against all available layers.
-	// Areas that can fit no more wounds have damage carry over
-	// to lower levels. If the amount is significant, sever the limb.
-	for(var/datum/tissue_layer/tissue_layer in cut_layers)
-		var/layer_damage = damage
-		if(spillover)
-			layer_damage += spillover
-			spillover = 0
-		if(tissue_layer.area > thickest_layer)
-			thickest_layer = tissue_layer.area
-		spillover = tissue_layer.create_wound(WOUND_CUT, damage)
-	owner.shock_stage += spillover
-	// If all the tissue layers are cut through and there's enough damage left over to get through the thickest, sever.
-	if(cut_layers.len >= tissue_layers.len && weapon_area >= min_sever_area && weapon_area + spillover > thickest_layer)
-		status |= ORGAN_DESTROYED
-		droplimb()
-		*/
-	return 1
+	// Edge represents the total contact area of the weapon.
+	// Sharp represents arbitrary weapon sharpness.
+	var/wound_depth = 0
+	var/list/tissue_strings = owner.species.tissues // Easier to write.
 
-// Blunt trauma is diffused over the topmost layer. Can cause wounds below the surface layer.
-/obj/item/organ/external/proc/take_blunt_trauma(var/damage, var/area)
-	/*
-	for(var/datum/tissue_layer/tissue_layer in tissue_layers)
-		if(tissue_layer.wound_area >= tissue_layer.area)
-			continue // No more room for wounds.
-		var/bruise_damage = round(damage*0.7)
-		if(bruise_damage <= 0)
-			damage = 0
+	if(wound.depth>0)
+		wound_depth = wound.depth
+
+	if(!tissues.len)
+		return // This should NEVER happen.
+
+	if(!sharp) sharp = 1
+	if(!edge)  edge = 1
+
+	var/impact_force = round((brute*sharp)/edge)
+	var/damage_description_string = ""
+	var/can_cut_surface = 0
+	var/datum/tissue/tissue = tissues[tissue_strings[max(wound_depth,1)]]
+
+	// Just assume we can damage the top layer for the sake of sanity.
+	if(tissue.can_cut_with(sharp))
+		can_cut_surface = 1
+
+	// Get the depth of the resulting wound.
+	for(var/x = max(wound_depth,1);x<=tissue_strings.len;x++)
+		if(impact_force <= 1)
 			break
-		if(damage > bruise_damage)
-			damage -= bruise_damage
-		else
-			damage = 0
-		if(damage)
-			tissue_layer.create_wound(WOUND_BRUISE, bruise_damage, WOUND_CLOSED)
-		else
-			return
-	if(owner)
-		owner.shock_stage += damage //If you can't wound them, dump it into pain.
-	*/
+		tissue = tissues[tissue_strings[x]]
+		if(prob(impact_force))
+			if(can_cut_surface)
+				if(tissue.can_cut_with(sharp))
+					damage_description_string += "cut through [tissue.descriptors[limb_name] ? tissue.descriptors[limb_name] : tissue.descriptor] ([pick(tissue.edge_damage_strings)]), "
+					impact_force = round(impact_force*0.5)
+					wound_depth++
+					continue
+			else
+				damage_description_string += "bruised [tissue.descriptors[limb_name] ? tissue.descriptors[limb_name] : tissue.descriptor] ([pick(tissue.blunt_damage_strings)]),"
+				impact_force = round(impact_force*0.75)
+				wound_depth++
+				continue
+		break
 
-// Burn trauma will cover the topmost layer as much as possible before harming deeper layers.
-/obj/item/organ/external/proc/take_burn_trauma(var/damage)
-	/*
-	for(var/datum/tissue_layer/tissue_layer in tissue_layers)
-		damage -= tissue_layer.create_wound(WOUND_BURN, damage)
-		if(damage <= 0)
-			return
-	//If the entire surface area of every limb is burned, well, not much we else can do.
-	take_cutting_trauma((damage/2), 1, 1)
-	*/
+	if(!isnull(damage_description_string) && damage_description_string != "")
+		owner.visible_message("<span class='danger'>[damage_description_string]</span>")
+
+	wound.expand((can_cut_surface ? WOUND_CUT : WOUND_BRUISE), edge, max(1,min(tissue_strings.len,wound_depth)))
+	wounds |= wound
+	update_health()
 
 /obj/item/organ/internal/take_damage()
 	..()

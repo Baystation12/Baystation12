@@ -36,7 +36,8 @@ proc/populate_tissue_list()
 	hardness = HARDNESS_SAW
 	flags = TISSUE_INFECTS | TISSUE_ORGAN_LAYER | TISSUE_SUPPORTS
 	regen_threshold = 0 // Cannot regen without surgery.
-	blunt_damage_strings = list("cracking","shattering","fracturing")
+	edge_damage_strings = list("shattering","splitting","severing")
+	blunt_damage_strings = list("denting","fracturing","cracking")
 
 /datum/tissue/scales
 	id = "scales"

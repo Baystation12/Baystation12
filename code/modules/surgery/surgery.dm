@@ -103,6 +103,9 @@ proc/do_surgery(mob/living/carbon/M, mob/living/user, obj/item/tool)
 				else // This failing silently was a pain.
 					user << "\red You must remain close to your patient to conduct surgery."
 				M.op_stage.in_progress = 0 									// Clear the in-progress flag.
+				if (ishuman(M))
+					var/mob/living/carbon/human/H = M
+					H.update_surgery()
 				return	1	  												//don't want to do weapony things after surgery
 
 	if (user.a_intent == "help")

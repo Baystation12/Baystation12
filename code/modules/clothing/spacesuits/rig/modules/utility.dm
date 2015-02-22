@@ -197,8 +197,8 @@
 		target_mob = H
 
 	if(target_mob != H)
-		H << "<span class='danger'>You inject [target_mob] with [chems_to_use] unit[chems_to_use == 1 ? "" : "s"] of [charge.display_name].</span>"
-	target_mob << "<span class='danger'>You feel a rushing in your veins as [chems_to_use] unit[chems_to_use == 1 ? "" : "s"] of [charge.display_name] [chems_to_use == 1 ? "is" : "are"] injected.</span>"
+		H << "<span class='danger'>You inject [target_mob] with [chems_to_use] unit\s of [charge.display_name].</span>"
+	target_mob << "<span class='danger'>You feel a rushing in your veins as [chems_to_use] unit\s of [charge.display_name] [chems_to_use == 1 ? "is" : "are"] injected.</span>"
 	target_mob.reagents.add_reagent(charge.display_name, chems_to_use)
 
 	charge.charges -= chems_to_use
