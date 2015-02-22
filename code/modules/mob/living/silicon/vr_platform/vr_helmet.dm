@@ -5,6 +5,9 @@
 
 	icon_state = "virtualhelmet"
 	item_state = "virtualhelmet"
+	flags = HEADCOVERSEYES
+	flags_inv = (HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE)
+	body_parts_covered = HEAD|FACE|EYES
 	var/mob/living/user = null
 
 /obj/item/clothing/head/helmet/virtual/equipped(mob/M)
@@ -18,7 +21,7 @@
 	set src in usr
 
 	for(var/mob/living/silicon/platform/O in orange(usr.loc, 3)) // Finding suitable VR platforms in area
-		if(alert(usr, "Would you like to connect to platform: [O.name]?", "Confirm", "Yes", "No") == "Yes")
+		if(alert(usr, "Would you like to connect to platform: [O.real_name]?", "Confirm", "Yes", "No") == "Yes")
 			usr << "<b>Attempting connection...</b>"
 			if(O.active != 1)
 				var/list/descriptive_text = list( "<b>Please hold still.</b>",

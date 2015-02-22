@@ -60,9 +60,9 @@
 	new /obj/item/clothing/shoes/black(src)
 	new /obj/item/clothing/shoes/black(src)
 	new /obj/item/clothing/shoes/black(src)
-	new /obj/item/clothing/head/that(src)
-	new /obj/item/clothing/head/that(src)
-	new /obj/item/clothing/head/that(src)
+	new /obj/item/clothing/head/tophat(src)
+	new /obj/item/clothing/head/tophat(src)
+	new /obj/item/clothing/head/tophat(src)
 	return
 
 

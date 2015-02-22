@@ -433,7 +433,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	containername = "Virus sample crate"
 	access = access_cmo
 	group = "Science"
-	
+
 /datum/supply_packs/virologysupplies
 	name = "Virology supplies"
 	contains = list(/obj/item/device/antibody_scanner,
@@ -444,7 +444,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	containertype = "/obj/structure/closet/crate"
 	containername = "Virology supplies crate"
 	group = "Science"
-	
+
 /datum/supply_packs/chemistrysupplies
 	name = "Chemistry supplies"
 	contains = list(/obj/item/weapon/reagent_containers/glass/beaker/large,
@@ -870,7 +870,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	var/num_contained = 4 //number of items picked to be contained in a randomised crate
 	contains = list(/obj/item/clothing/head/collectable/chef,
 					/obj/item/clothing/head/collectable/paper,
-					/obj/item/clothing/head/collectable/tophat,
+					/obj/item/clothing/head/tophat,
 					/obj/item/clothing/head/collectable/captain,
 					/obj/item/clothing/head/collectable/beret,
 					/obj/item/clothing/head/collectable/welding,
@@ -1035,7 +1035,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 
 /datum/supply_packs/formal_wear
 	contains = list(/obj/item/clothing/head/bowler,
-					/obj/item/clothing/head/that,
+					/obj/item/clothing/head/tophat,
 					/obj/item/clothing/suit/storage/toggle/lawyer/bluejacket,
 					/obj/item/clothing/suit/storage/lawyer/purpjacket,
 					/obj/item/clothing/under/suit_jacket,

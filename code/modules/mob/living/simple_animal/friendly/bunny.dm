@@ -70,7 +70,7 @@
 
 	New()
 		..()
-		icon_state = "bunny_white"
-		icon_living = "bunny_white"
-		icon_dead = "bunny_white_dead"
+		icon_state = "bunny_danton"
+		icon_living = "bunny_danton"
+		icon_dead = "bunny_danton_dead"
 

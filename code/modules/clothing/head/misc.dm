@@ -22,14 +22,6 @@
 	icon_state = "pwig"
 	item_state = "pwig"
 
-/obj/item/clothing/head/that
-	name = "top-hat"
-	desc = "It's an amish looking hat."
-	icon_state = "tophat"
-	item_state = "that"
-	siemens_coefficient = 0.9
-	body_parts_covered = 0
-
 /obj/item/clothing/head/redcoat
 	name = "redcoat's hat"
 	icon_state = "redcoat"

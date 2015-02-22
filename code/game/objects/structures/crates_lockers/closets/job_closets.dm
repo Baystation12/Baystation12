@@ -16,8 +16,8 @@
 
 /obj/structure/closet/gmcloset/New()
 	..()
-	new /obj/item/clothing/head/that(src)
-	new /obj/item/clothing/head/that(src)
+	new /obj/item/clothing/head/tophat(src)
+	new /obj/item/clothing/head/tophat(src)
 	new /obj/item/device/radio/headset/headset_service(src)
 	new /obj/item/device/radio/headset/headset_service(src)
 	new /obj/item/clothing/head/hairflower

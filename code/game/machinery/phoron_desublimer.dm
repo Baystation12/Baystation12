@@ -194,7 +194,7 @@ The process works like this:
 
 	proc/produce()
 		if( !eat_shard() )
-			src.visible_message("\icon[src] <b>[src]</b> beeps, \"Not enough supermatter shards to complete request\".")
+			src.visible_message("\icon[src] <b>[src]</b> beeps, \"Not enough supermatter shards to complete request.\"")
 			return
 		active = 1
 
@@ -214,7 +214,7 @@ The process works like this:
 					I.amount = amount
 					I.loc = src.loc
 
-		src.visible_message("\icon[src] <b>[src]</b> beeps, \"Supermatter transmutation complete\".")
+		src.visible_message("\icon[src] <b>[src]</b> beeps, \"Supermatter transmutation complete.\"")
 		active = 0
 
 	proc/eat_shard()

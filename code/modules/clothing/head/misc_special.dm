@@ -154,41 +154,36 @@
 		mob.Blend(earbit, ICON_OVERLAY)
 		mob2.Blend(earbit2, ICON_OVERLAY)
 
-/obj/item/clothing/head/collectable/tophat
-	name = "collectable top hat"
+/obj/item/clothing/head/tophat
+	name = "top hat"
 	desc = "A top hat worn by only the most prestigious hat collectors."
 	icon_state = "tophat"
 	item_state = "that"
 	body_parts_covered = 0
 
-	var/bunny_count = 0
-	var/max_bunnies = 1
+	var/obj/item/weapon/holder/bunny/bunny = null
 
-	attackby(var/obj/item/weapon/W as obj, mob/user as mob)
+	attackby( var/obj/item/weapon/W as obj, mob/user as mob )
 		if( istype( W, /obj/item/weapon/holder/bunny ))
-			if( bunny_count < max_bunnies )
-				user.drop_item()
-				bunny_count += 1
-				user << "You put [W] into the tophat."
-				W.loc = src
-		return
+			user.drop_item()
+			user.visible_message("[user] puts \the [W] into \the [src].", "You put \the [W] into \the [src].")
+			W.loc = src
+			bunny = W
 
-	attack_hand(mob/living/carbon/user as mob)
-		if( bunny_count > 0 )
-			var/mob/living/simple_animal/bunny/bunny
-			for( bunny in contents )
-			if( bunny )
-				user.put_in_hands( bunny )
-				bunny_count -= 1
-				user << "You take [bunny] from the tophat."
-				bunny = null
-		return
+	attack_self(mob/user as mob)
+		if( bunny )
+			user.put_in_hands( new bunny.type(user.loc) )
+			user.visible_message( "[user] pulls \the [bunny] out of \the [src]!", "You pull \the [bunny] out of \the [src]!" )
+
+	examine(mob/user)
+		..(user)
+		if( bunny )
+			user << "There appears to be a bunny inside."
 
 
-/obj/item/clothing/head/collectable/tophat/entertainer
+/obj/item/clothing/head/tophat/entertainer
 	name = "entertainer's hat"
 	desc = "Perhaps you could pull a rabbit out of this!"
 	icon_state = "entertainerhat"
 	item_state = "entertainerhat"
 	siemens_coefficient = 0.9
-	max_bunnies = 3

@@ -1553,7 +1553,7 @@
 "DS" = (/obj/structure/table/woodentable{dir = 5},/obj/item/weapon/reagent_containers/food/snacks/tofukabob,/turf/unsimulated/floor{tag = "icon-wood"; icon_state = "wood"},/area/centcom/holding)
 "DT" = (/obj/structure/table/woodentable{dir = 5},/obj/item/weapon/reagent_containers/food/snacks/poppypretzel,/turf/unsimulated/floor{tag = "icon-wood"; icon_state = "wood"},/area/centcom/holding)
 "DU" = (/obj/structure/table/woodentable{dir = 5},/obj/item/weapon/reagent_containers/food/snacks/orangecakeslice,/turf/unsimulated/floor{tag = "icon-wood"; icon_state = "wood"},/area/centcom/holding)
-"DV" = (/obj/structure/table/woodentable{dir = 5},/obj/item/clothing/under/suit_jacket,/obj/item/clothing/suit/wcoat,/obj/item/clothing/head/tophat{pixel_x = 4; pixel_y = 6},/turf/unsimulated/floor{icon_state = "grimy"},/area/centcom/holding)
+"DV" = (/obj/structure/table/woodentable{dir = 5},/obj/item/clothing/under/suit_jacket,/obj/item/clothing/suit/wcoat,/obj/item/clothing/head/collectable/tophat{pixel_x = 4; pixel_y = 6},/turf/unsimulated/floor{icon_state = "grimy"},/area/centcom/holding)
 "DW" = (/turf/unsimulated/floor{icon_state = "grimy"},/area/centcom/holding)
 "DX" = (/obj/machinery/atmospherics/unary/cryo_cell,/turf/unsimulated/floor{icon_state = "floor"},/area/centcom/holding)
 "DY" = (/obj/machinery/atmospherics/unary/freezer{set_temperature = 73; dir = 2; icon_state = "freezer_1"; use_power = 1},/turf/unsimulated/floor{icon_state = "floor"},/area/centcom/holding)

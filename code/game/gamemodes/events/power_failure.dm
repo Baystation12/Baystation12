@@ -21,7 +21,7 @@
 
 	for(var/obj/machinery/power/apc/C in world)
 		if(C.cell && C.z in config.station_levels)
-			spawn(1)
+			spawn(rand(1, 20))
 				C.cell.charge = 0
 
 /proc/power_restore(var/announce = 1)
@@ -31,7 +31,7 @@
 		command_announcement.Announce("Station power will be restored at this time. We apologize for the inconvenience.", "Power Systems Nominal", new_sound = 'sound/AI/poweron.ogg')
 	for(var/obj/machinery/power/apc/C in world)
 		if(C.cell && C.z in config.station_levels)
-			spawn(1)
+			spawn(rand(1, 20))
 				C.cell.charge = C.cell.maxcharge
 	for(var/obj/machinery/power/smes/S in world)
 		var/area/current_area = get_area(S)

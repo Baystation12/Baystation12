@@ -997,6 +997,10 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Commodation Hall"
 	icon_state = "bar"
 
+/area/crew_quarters/basement_breaker
+	name = "\improper Basement Breaker Room"
+	icon_state = "bar"
+
 /area/crew_quarters/dancefloor
 	name = "\improper Dance Floor"
 	icon_state = "bar"
@@ -1004,6 +1008,7 @@ var/list/ghostteleportlocs = list()
 /area/crew_quarters/theatre
 	name = "\improper Theatre"
 	icon_state = "Theatre"
+	ambience = list( 'sound/ambience/ambitheatre1.ogg' )
 
 /area/crew_quarters/theatre/backstage
 	name = "\improper Theatre Back Stage"
@@ -1033,7 +1038,6 @@ var/list/ghostteleportlocs = list()
 /area/lawoffice
 	name = "\improper Internal Affairs"
 	icon_state = "law"
-
 
 /area/holodeck
 	name = "\improper Holodeck"

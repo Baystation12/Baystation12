@@ -18,18 +18,18 @@
 	holder_type = /obj/item/weapon/holder/spybug
 
 /mob/living/silicon/platform/spybug/New()
-
 	//Generates a semi-unique string
-	name = "[name]-[rand(1, 1000)]"
+	real_name = "[name]-[rand(1, 1000)]"
 
 	verbs += /mob/living/proc/hide
 
 	remove_language("Robot Talk")
 	add_language("Robot Talk", 0)
 	add_language("Drone Talk", 0)
+	universal_understand = 1
 
 	//Some tidying-up.
-	flavor_text = "What is THAT?!"
+	flavor_text = "An annoying little buzzing bug."
 	updateicon()
 
 	..()
