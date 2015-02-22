@@ -78,6 +78,10 @@
 		return STATUS_UPDATE					// update only (orange visibility)
 	return STATUS_INTERACTIVE
 
+//Some atoms such as vehicles might have special rules for how mobs inside them interact with NanoUI.
+/atom/proc/contents_nano_distance(var/src_object, var/mob/living/user)
+	return user.shared_living_nano_distance(src_object)
+
 /mob/living/proc/shared_living_nano_distance(var/atom/movable/src_object)
 	if(!isturf(src_object.loc))
 		if(src_object.loc == src)				// Item in the inventory
@@ -100,7 +104,10 @@
 /mob/living/can_use_topic(var/src_object, var/datum/topic_state/custom_state)
 	. = shared_living_nano_interaction(src_object)
 	if(. == STATUS_INTERACTIVE && !(custom_state.flags & NANO_IGNORE_DISTANCE))
-		. = shared_living_nano_distance(src_object)
+		if(loc)
+			. = loc.contents_nano_distance(src_object, src)
+		else
+			. = shared_living_nano_distance(src_object)
 	if(STATUS_INTERACTIVE)
 		return STATUS_UPDATE
 
