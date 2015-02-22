@@ -73,7 +73,7 @@
 
 	// We shouldn't have spawned if the controller doesn't exist.
 	check_health()
-	if(neighbors.len && health == max_health)
+	if(neighbors.len || health != max_health)
 		plant_controller.add_plant(src)
 
 /obj/effect/plant/proc/die_off()

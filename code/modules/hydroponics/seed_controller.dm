@@ -1,8 +1,8 @@
 // Attempts to offload processing for the spreading plants from the MC.
 // Processes vines/spreading plants.
 
-#define PLANTS_PER_TICK 100
-#define PLANT_TICK_TIME 50
+#define PLANTS_PER_TICK 500 // Cap on number of plant segments processed.
+#define PLANT_TICK_TIME 25  // Number of ticks between the plant processor cycling.
 
 // Debug for testing seed genes.
 /client/proc/show_plant_genes()
@@ -85,10 +85,10 @@ var/global/datum/controller/plants/plant_controller // Set in New().
 	var/list/plant_traits = ALL_GENES
 	while(plant_traits && plant_traits.len)
 		var/gene_tag = pick(plant_traits)
-		var/gene_mask = "[num2hex(rand(0,255))]"
+		var/gene_mask = "[uppertext(num2hex(rand(0,255)))]"
 
 		while(gene_mask in used_masks)
-			gene_mask = "[num2hex(rand(0,255))]"
+			gene_mask = "[uppertext(num2hex(rand(0,255)))]"
 
 		used_masks += gene_mask
 		plant_traits -= gene_tag
@@ -128,18 +128,17 @@ var/global/datum/controller/plants/plant_controller // Set in New().
 			else
 				processed = 0
 				if(plant_queue.len)
-					var/target_to_process = min(plant_queue.len,PLANT_TICK_TIME)
+					var/target_to_process = min(plant_queue.len,plants_per_tick)
 					for(var/x=0;x<target_to_process;x++)
 						if(!plant_queue.len)
 							break
 						var/obj/effect/plant/plant = pick(plant_queue)
-						if(!istype(plant))
-							world << "<span class='danger'>Null or non-plant entry in plant controller queue.</span>"
-							break
 						plant_queue -= plant
-						sleep(1) // Stagger processing out so previous tick can resolve (overlapping plant segments etc)
+						if(!istype(plant))
+							continue
 						plant.process()
 						processed++
+						sleep(1) // Stagger processing out so previous tick can resolve (overlapping plant segments etc)
 				sleep(max(1,(plant_tick_time-processed)))
 
 /datum/controller/plants/proc/add_plant(var/obj/effect/plant/plant)

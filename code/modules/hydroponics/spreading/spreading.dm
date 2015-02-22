@@ -14,8 +14,8 @@
 		if(turfs.len) //Pick a turf to spawn at if we can
 			var/turf/simulated/floor/T = pick(turfs)
 			var/datum/seed/seed = plant_controller.create_random_seed(1)
-			seed.set_trait(TRAIT_SPREAD,2)            // So it will function properly as vines.
-			seed.set_trait(TRAIT_POTENCY,rand(40,50)) // Guarantee a wide spread and powerful effects.
+			seed.set_trait(TRAIT_SPREAD,2)             // So it will function properly as vines.
+			seed.set_trait(TRAIT_POTENCY,rand(70,100)) // Guarantee a wide spread and powerful effects.
 			new /obj/effect/plant(T,seed)
 			message_admins("<span class='notice'>Event: Spacevines spawned at [T.loc] ([T.x],[T.y],[T.z])</span>")
 
@@ -63,6 +63,8 @@
 /obj/effect/plant/Del()
 	if(plant_controller)
 		plant_controller.remove_plant(src)
+	for(var/obj/effect/plant/neighbor in range(1,src))
+		plant_controller.add_plant(neighbor)
 	..()
 /obj/effect/plant/single
 	spread_chance = 0
@@ -156,10 +158,11 @@
 /obj/effect/plant/proc/refresh_icon()
 	var/growth = min(max_growth,round(health/growth_threshold))
 	var/at_fringe = get_dist(src,parent)
-	if(at_fringe >= (spread_distance-3))
-		max_growth--
-	if(at_fringe >= (spread_distance-2))
-		max_growth--
+	if(spread_distance > 5)
+		if(at_fringe >= (spread_distance-3))
+			max_growth--
+		if(at_fringe >= (spread_distance-2))
+			max_growth--
 	max_growth = max(1,max_growth)
 	if(growth_type > 0)
 		switch(growth_type)
