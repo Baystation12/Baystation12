@@ -9,6 +9,7 @@ var/list/admin_verbs_default = list(
 	/client/proc/cmd_mentor_check_new_players
 //	/client/proc/deadchat				/*toggles deadchat on/off*/
 	)
+/*
 var/list/admin_verbs_admin = list(
 	/client/proc/cmd_admin_change_announcement,
 	/client/proc/cmd_vip_say,
@@ -197,6 +198,278 @@ var/list/admin_verbs_rejuv = list(
 	/client/proc/cmd_admin_rejuvenate
 	)
 
+
+var/list/admin_verbs_mod = list(
+	/client/proc/FRules,
+	/client/proc/freeze,
+	/client/proc/freezemecha,
+	/client/proc/cmd_admin_pm_context,	/*right-click adminPM interface*/
+	/client/proc/cmd_admin_pm_panel,	/*admin-pm list*/
+	/client/proc/debug_variables,		/*allows us to -see- the variables of any instance in the game.*/
+	/client/proc/toggledebuglogs,
+	/datum/admins/proc/PlayerNotes,
+	/client/proc/admin_ghost,			/*allows us to ghost/reenter body at will*/
+	/client/proc/cmd_mod_say,
+	/datum/admins/proc/show_player_info,
+	/client/proc/player_panel_new,
+	/client/proc/dsay,
+	/datum/admins/proc/show_skills,
+	/datum/admins/proc/show_player_panel,
+	/client/proc/check_antagonists,
+	/client/proc/jobbans,
+	/client/proc/cmd_admin_subtle_message, 	/*send an message to somebody as a 'voice in their head'*/
+	/client/proc/cleartox,
+	/client/proc/cmd_admin_delete,
+	/client/proc/admincryo,
+	/client/proc/hidedevsay,
+	/client/proc/cmd_dev_say,
+	/client/proc/toggleattacklogs,
+	/client/proc/jumptocoord,
+	/client/proc/forceshuttles,
+	/client/proc/cmd_vip_say,
+	/client/proc/vip_memo
+	///client/proc/hidevsay
+)
+
+var/list/admin_verbs_mentor = list(
+	/client/proc/cmd_admin_pm_context,
+	/client/proc/cmd_admin_pm_panel,
+	/datum/admins/proc/PlayerNotes,
+	/client/proc/admin_ghost,
+	/client/proc/cmd_mod_say,
+	/client/proc/dsay,
+	/client/proc/player_panel_new,
+	/datum/admins/proc/show_player_info,
+	/client/proc/cmd_admin_subtle_message,
+	/client/proc/FRules,
+	/client/proc/freeze,
+	/client/proc/freezemecha,
+	/client/proc/hidedevsay,
+	/client/proc/cmd_dev_say,
+	/client/proc/cmd_vip_say,
+	/client/proc/vip_memo,
+	/datum/admins/proc/show_player_panel,	/*shows an interface for individual players, with various links (links require additional flags*/
+	/client/proc/player_panel
+	///client/proc/hidevsay
+)
+
+var/list/admin_verbs_dev = list(
+	/client/proc/debug_variables,		/*allows us to -see- the variables of any instance in the game.*/
+	/client/proc/cmd_admin_pm_panel,	/*admin-pm list*/
+	/client/proc/cmd_admin_pm_context,	/*right-click adminPM interface*/
+	/client/proc/admin_ghost,			/*allows us to ghost/reenter body at will*/
+	/client/proc/deadmin_self,
+	/client/proc/hidedevsay,
+	/client/proc/cmd_dev_say,
+	/client/proc/cmd_vip_say
+)
+*/
+
+//New Ranks
+var/list/admin_verbs_dev = list(
+	/client/proc/debug_variables,		/*allows us to -see- the variables of any instance in the game.*/
+	/client/proc/cmd_admin_pm_panel,	/*admin-pm list*/
+	/client/proc/cmd_admin_pm_context,	/*right-click adminPM interface*/
+	/client/proc/admin_ghost,			/*allows us to ghost/reenter body at will*/
+	/client/proc/deadmin_self,
+	/client/proc/hidedevsay,
+	/client/proc/cmd_dev_say,
+	/client/proc/cmd_vip_say
+)
+var/list/admin_verbs_mentor = list(
+	/client/proc/toggleadminhelpsound,	/*toggles whether we hear a sound when adminhelps/PMs are used*/
+	/client/proc/deadmin_self,			/*destroys our own admin datum so we can play as a regular player*/
+	/client/proc/hide_verbs,			/*hides all our adminverbs*/
+	/client/proc/hide_most_verbs,		/*hides all our hideable adminverbs*/
+	/client/proc/debug_variables,		/*allows us to -see- the variables of any instance in the game. +VAREDIT needed to modify*/
+	/client/proc/check_antagonists,		/*shows all antags*/
+	/client/proc/cmd_mentor_check_new_players,
+//	/client/proc/deadchat,				/*toggles deadchat on/off*/
+	/client/proc/cmd_vip_say,
+	/client/proc/player_panel_new,
+	/client/proc/admin_ghost,
+	/client/proc/cmd_admin_pm_context,	/*right-click adminPM interface*/
+	/client/proc/cmd_admin_pm_panel,
+	/client/proc/cmd_admin_check_contents,
+	/client/proc/jumptocoord,
+	/client/proc/Jump,
+	/client/proc/jumptokey,				/*allows us to jump to the location of a mob with a certain ckey*/
+	/client/proc/jumptomob,				/*allows us to jump to a specific mob*/
+	/client/proc/jumptoturf,
+	/client/proc/check_antagonists,
+	/datum/admins/proc/PlayerNotes,
+	/client/proc/cmd_mod_say,
+	/datum/admins/proc/show_player_info,
+	/datum/admins/proc/show_skills,
+    /client/proc/cmd_dev_say
+)
+
+var/list/admin_verbs_mod = list(
+	/client/proc/cleartox,
+	/client/proc/clean,
+	/client/proc/check_ai_laws,
+	/client/proc/dsay,
+	/client/proc/investigate_show,
+	/client/proc/cmd_admin_rejuvenate,
+	/client/proc/FRules,
+	/client/proc/freeze,
+	/client/proc/freezemecha,
+	/client/proc/air_report,
+	/datum/admins/proc/show_player_panel
+)
+
+var/list/admin_verbs_mod2 = list(
+	/client/proc/toggle_view_range,
+	/client/proc/cmd_admin_subtle_message,
+	/client/proc/cmd_admin_direct_narrate,
+	/client/proc/unban_panel,
+	/client/proc/jobbans,
+	/client/proc/forceshuttles
+)
+
+var/list/admin_verbs_mod3 = list(
+	/client/proc/cmd_admin_delete,
+	/client/proc/Getmob,				/*teleports a mob to our location*/
+	/client/proc/Getkey,				/*teleports a mob with a certain ckey to our location*/
+	/client/proc/sendmob,
+	/client/proc/free_slot,
+	/client/proc/man_up,
+	/client/proc/allow_character_respawn,
+	/client/proc/admincryo,
+	/client/proc/object_talk,
+	/client/proc/make_sound,
+	/client/proc/editappear,
+	/proc/possess,
+	/proc/release
+)
+
+var/list/admin_verbs_admin = list(
+	/client/proc/cmd_admin_change_announcement,
+	/client/proc/vip_memo,
+	/client/proc/fillspace,
+	/datum/admins/proc/announce,
+	/client/proc/colorooc,
+	/datum/admins/proc/view_txt_log,	/*shows the server log (diary) for today*/
+	/datum/admins/proc/view_atk_log,
+	/client/proc/admin_call_shuttle,	/*allows us to call the emergency shuttle*/
+	/client/proc/admin_cancel_shuttle,
+	/client/proc/cmd_admin_world_narrate,	/*sends text to all players with no padding*/
+	/client/proc/cmd_admin_create_centcom_report,
+	/client/proc/check_words,
+	/client/proc/admin_memo,
+	//client/proc/toggle_hear_deadchat,	/*toggles whether we hear deadchat*/
+	/client/proc/toggle_hear_radio,
+	/client/proc/secrets,
+	/datum/admins/proc/toggleooc,		/*toggles ooc on/off for everyone*/
+	/datum/admins/proc/togglelooc,
+	/datum/admins/proc/toggleoocdead,	/*toggles ooc on/off for everyone who is dead*/
+	/datum/admins/proc/toggledsay,		/*toggles dsay on/off for everyone*/
+	/datum/admins/proc/togglevsay,
+	/client/proc/cmd_admin_say,			/*admin-only ooc chat*/
+	/client/proc/response_team,
+	/client/proc/cmd_admin_add_random_ai_law,
+	/client/proc/show_plant_genes,
+	/client/proc/enable_debug_verbs
+)
+
+var/list/admin_verbs_admin2 = list(
+	/client/proc/alertlevel,
+	/client/proc/invisimin,
+	/datum/admins/proc/access_news_network,
+	/client/proc/cmd_admin_change_custom_event,
+	/client/proc/global_man_up,
+	/client/proc/cmd_admin_gib_self,
+	/client/proc/one_click_antag,
+	/client/proc/send_space_ninja,
+	/client/proc/cmd_admin_add_freeform_ai_law,
+	/client/proc/toggle_random_events,
+	/client/proc/trigger_random_event,
+	/datum/admins/proc/spawn_atom,		/*allows us to spawn instances*/
+	/client/proc/respawn_character,
+	/datum/admins/proc/delay,
+	/client/proc/cmd_debug_del_all,
+	/client/proc/kill_air,
+	/client/proc/ZASSettings,
+	/client/proc/kill_airgroup,
+	/client/proc/toggledebuglogs
+
+)
+var/list/admin_verbs_admin3 = list(
+	/datum/admins/proc/toggleenter,
+	/datum/admins/proc/toggleguests,
+	/client/proc/toggleprayers,
+	/client/proc/game_panel,
+	/client/proc/toggleattacklogs,
+	/client/proc/toggledebuglogs,
+	/client/proc/toggleghostwriters,
+	/client/proc/toggledrones,
+	/client/proc/cmd_admin_dress,
+	/client/proc/drop_bomb,
+	/datum/admins/proc/toggle_aliens,
+	/datum/admins/proc/toggle_space_ninja,
+	/datum/admins/proc/startnow,
+	/datum/admins/proc/restart,
+	/datum/admins/proc/immreboot,
+	/datum/admins/proc/toggleAI,
+	/datum/admins/proc/toggle_aliens,
+	/datum/admins/proc/toggle_space_ninja,
+	/client/proc/Debug2,
+	/client/proc/cmd_admin_list_open_jobs,
+	/client/proc/debug_controller,
+	/client/proc/cmd_debug_mob_lists,
+	/client/proc/cmd_debug_tog_aliens,
+	/client/proc/callproc
+)
+var/list/admin_verbs_headadmin = list(
+	/client/proc/giveruntimelog,		/*allows us to give access to runtime logs to somebody*/
+	/client/proc/getserverlog,
+	/client/proc/check_customitem_activity,
+	/client/proc/toggle_antagHUD_use,
+	/client/proc/toggle_antagHUD_restrictions,
+	/client/proc/edit_vip_permissions,
+	/client/proc/everyone_random,
+	/client/proc/cinematic,
+	/client/proc/set_ooc,
+	/client/proc/artillery,
+	/client/proc/Set_Holiday,
+	/client/proc/ToRban,
+	/datum/admins/proc/toggleaban,
+	/client/proc/toggle_log_hrefs,
+	/datum/admins/proc/adrev,
+	/datum/admins/proc/adspawn,
+	/datum/admins/proc/adjump,
+	/client/proc/nanomapgen_DumpImage,
+	/client/proc/nuke,
+	/client/proc/getruntimelog,
+	/client/proc/reload_admins,
+	/client/proc/reload_mentors,
+	/client/proc/reload_vips,
+	/client/proc/restart_controller,
+	/client/proc/remake_distribution_map,
+	/client/proc/show_distribution_map,
+	/client/proc/SDQL_query,
+	/client/proc/SDQL2_query
+
+
+)
+
+var/list/admin_verbs_gamemaster = list(
+	/client/proc/play_local_sound,
+	/client/proc/play_sound,
+	/client/proc/edit_admin_permissions
+)
+
+/*
+verbs += admin_verbs_dev
+R_MENTOR admin_verbs_mentor
+R_MOD verbs += admin_verbs_mod
+R_BAN verbs += admin_verbs_mod2
+R_POSSESS verbs += admin_verbs_mod3
+R_ADMIN verbs += admin_verbs_admin
+R_SERVER verbs += admin_verbs_admin2
+R_FUN verbs += admin_verbs_admin3
+R_DEBUG admin_verbs_headadmin
+*/
 //verbs which can be hidden - needs work
 var/list/admin_verbs_hideable = list(
 	/client/proc/set_ooc,
@@ -268,76 +541,11 @@ var/list/admin_verbs_hideable = list(
 	/proc/possess,
 	/proc/release
 	)
-var/list/admin_verbs_mod = list(
-	/client/proc/FRules,
-	/client/proc/freeze,
-	/client/proc/freezemecha,
-	/client/proc/cmd_admin_pm_context,	/*right-click adminPM interface*/
-	/client/proc/cmd_admin_pm_panel,	/*admin-pm list*/
-	/client/proc/debug_variables,		/*allows us to -see- the variables of any instance in the game.*/
-	/client/proc/toggledebuglogs,
-	/datum/admins/proc/PlayerNotes,
-	/client/proc/admin_ghost,			/*allows us to ghost/reenter body at will*/
-	/client/proc/cmd_mod_say,
-	/datum/admins/proc/show_player_info,
-	/client/proc/player_panel_new,
-	/client/proc/dsay,
-	/datum/admins/proc/show_skills,
-	/datum/admins/proc/show_player_panel,
-	/client/proc/check_antagonists,
-	/client/proc/jobbans,
-	/client/proc/cmd_admin_subtle_message, 	/*send an message to somebody as a 'voice in their head'*/
-	/client/proc/cleartox,
-	/client/proc/cmd_admin_delete,
-	/client/proc/admincryo,
-	/client/proc/hidedevsay,
-	/client/proc/cmd_dev_say,
-	/client/proc/toggleattacklogs,
-	/client/proc/jumptocoord,
-	/client/proc/forceshuttles,
-	/client/proc/cmd_vip_say,
-	/client/proc/vip_memo
-	///client/proc/hidevsay
-)
-
-var/list/admin_verbs_mentor = list(
-	/client/proc/cmd_admin_pm_context,
-	/client/proc/cmd_admin_pm_panel,
-	/datum/admins/proc/PlayerNotes,
-	/client/proc/admin_ghost,
-	/client/proc/cmd_mod_say,
-	/client/proc/dsay,
-	/client/proc/player_panel_new,
-	/datum/admins/proc/show_player_info,
-	/client/proc/cmd_admin_subtle_message,
-	/client/proc/FRules,
-	/client/proc/freeze,
-	/client/proc/freezemecha,
-	/client/proc/hidedevsay,
-	/client/proc/cmd_dev_say,
-	/client/proc/cmd_vip_say,
-	/client/proc/vip_memo,
-	/datum/admins/proc/show_player_panel,	/*shows an interface for individual players, with various links (links require additional flags*/
-	/client/proc/player_panel
-	///client/proc/hidevsay
-)
-
-var/list/admin_verbs_dev = list(
-	/client/proc/debug_variables,		/*allows us to -see- the variables of any instance in the game.*/
-	/client/proc/cmd_admin_pm_panel,	/*admin-pm list*/
-	/client/proc/cmd_admin_pm_context,	/*right-click adminPM interface*/
-	/client/proc/admin_ghost,			/*allows us to ghost/reenter body at will*/
-	/client/proc/deadmin_self,
-	/client/proc/hidedevsay,
-	/client/proc/cmd_dev_say,
-	/client/proc/cmd_vip_say
-)
-
-
 
 /client/proc/add_admin_verbs()
 	if(holder)
 		verbs += admin_verbs_default
+		/*
 		if(holder.rights & R_BUILDMODE)		verbs += /client/proc/togglebuildmodeself
 		if(holder.rights & R_ADMIN)			verbs += admin_verbs_admin
 		if(holder.rights & R_BAN)			verbs += admin_verbs_ban
@@ -356,11 +564,24 @@ var/list/admin_verbs_dev = list(
 		if(holder.rights & R_MOD)			verbs += admin_verbs_mod
 		if(holder.rights & R_MENTOR)		verbs += admin_verbs_mentor
 		if(holder.rights & R_DEV)			verbs += admin_verbs_dev
+		*/
+		//New Ranks
+		if(holder.rights & R_DEV)			verbs += admin_verbs_dev
+		if(holder.rights & R_MENTOR)		verbs += admin_verbs_mentor
+		if(holder.rights & R_MOD)			verbs += admin_verbs_mod
+		if(holder.rights & R_BAN)			verbs += admin_verbs_mod2
+		if(holder.rights & R_POSSESS)		verbs += admin_verbs_mod3
+		if(holder.rights & R_ADMIN)			verbs += admin_verbs_admin
+		if(holder.rights & R_SERVER)		verbs += admin_verbs_admin2
+		if(holder.rights & R_FUN)			verbs += admin_verbs_admin3
+		if(holder.rights & R_DEBUG)			verbs += admin_verbs_headadmin
+		if(holder.rights & R_SOUNDS)		verbs += admin_verbs_gamemaster
 
 /client/proc/remove_admin_verbs()
 	verbs.Remove(
-		admin_verbs_default,
 		/client/proc/togglebuildmodeself,
+		/*
+		admin_verbs_default,
 		admin_verbs_admin,
 		admin_verbs_ban,
 		admin_verbs_fun,
@@ -372,6 +593,18 @@ var/list/admin_verbs_dev = list(
 		admin_verbs_rejuv,
 		admin_verbs_sounds,
 		admin_verbs_spawn,
+		*/
+		admin_verbs_dev,
+		admin_verbs_mentor,
+		admin_verbs_mod,
+		admin_verbs_mod2,
+		admin_verbs_mod3,
+		admin_verbs_admin,
+		admin_verbs_admin2,
+		admin_verbs_admin3,
+		admin_verbs_headadmin,
+		admin_verbs_gamemaster,
+
 		/*Debug verbs added by "show debug verbs"*/
 		/client/proc/Cell,
 		/client/proc/do_not_use_these,

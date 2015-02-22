@@ -309,6 +309,7 @@ proc/tg_list2text(list/list, glue=",")
 		else               return ICON_OVERLAY
 
 //Converts a rights bitfield into a string
+/*
 /proc/rights2text(rights,seperator="")
 	if(rights & R_BUILDMODE)	. += "[seperator]+BUILDMODE"
 	if(rights & R_ADMIN)		. += "[seperator]+ADMIN"
@@ -327,6 +328,34 @@ proc/tg_list2text(list/list, glue=",")
 	if(rights & R_MENTOR)		. += "[seperator]+MENTOR"
 	if(rights & R_DEV)			. += "[seperator]+DEV"
 	return .
+*/
+
+// New Ranks
+/proc/rights2text(rights,seperator="")
+	if(rights & R_DEV)			. += "[seperator]+DEV"
+	if(rights & R_MENTOR)		. += "[seperator]+MENTOR"
+	if(rights & R_MOD)			. += "[seperator]+MOD"
+	if(rights & R_BAN)			. += "[seperator]+MOD2"
+	if(rights & R_POSSESS)		. += "[seperator]+MOD3"
+	if(rights & R_ADMIN)		. += "[seperator]+ADMIN"
+	if(rights & R_SERVER)		. += "[seperator]+ADMIN2"
+	if(rights & R_FUN)			. += "[seperator]+ADMIN3"
+	if(rights & R_DEBUG)		. += "[seperator]+HEADADMIN"
+	if(rights & R_SOUNDS)		. += "[seperator]+GAMEMASTER"
+
+	return .
+
+/*
+R_MENTOR = +MENTOR
+R_MOD = +MOD
+R_BAN = +MOD2
+R_POSESS = +MOD3
+R_ADMIN = +ADMIN
+R_SERVER = +ADMIN2
+R_FUN = +ADMIN3
+R_DEBUG = +HEADADMIN
+R_SOUND = +GAMEMASTER
+*/
 
 /proc/vip_rights2text(rights,seperator="")
 	if(rights & V_EVENT)		. += "[seperator]+EVENT"
