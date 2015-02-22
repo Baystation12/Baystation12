@@ -3111,21 +3111,17 @@ datum
 				if(!data) data = 1
 				data++
 				M.dizziness +=6
-				..()
 				switch(data)
 					if(15 to 45)
-						if (!M.stuttering) M.stuttering = 1
-						M.stuttering += 3
+						M.stuttering = max(M.stuttering+3,0)
 					if(45 to 55)
 						if (prob(50))
 							M.confused = max(M.confused+3,0)
-						else
-							return
 					if(55 to 200)
 						M.druggy = max(M.druggy, 55)
-					else if(200 to INFINITY)
+					if(200 to INFINITY)
 						M.adjustToxLoss(2)
-				return
+				..()
 
 		neurotoxin
 			name = "Neurotoxin"
@@ -3145,21 +3141,17 @@ datum
 				if(!data) data = 1
 				data++
 				M.dizziness +=6
-				..()
 				switch(data)
 					if(15 to 45)
-						if (!M.stuttering) M.stuttering = 1
-						M.stuttering += 3
+						M.stuttering = max(M.stuttering+3,0)
 					if(45 to 55)
 						if (prob(50))
 							M.confused = max(M.confused+3,0)
-						else
-							return
 					if(55 to 200)
 						M.druggy = max(M.druggy, 55)
-					else if(200 to INFINITY)
+					if(200 to INFINITY)
 						M.adjustToxLoss(2)
-				return
+				..()
 
 		hippies_delight
 			name = "Hippies' Delight"
