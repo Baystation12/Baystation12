@@ -79,9 +79,9 @@
 		mob.adjustBruteLoss(10*multiplier)
 		if(istype(mob, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = mob
-			var/datum/organ/external/O = pick(H.organs)
+			var/obj/item/organ/external/O = pick(H.organs)
 			if(prob(25))
-				mob << "<span class='warning'>Your [O.display_name] feels as if it might fall off!</span>"
+				mob << "<span class='warning'>Your [O.name] feels as if it might fall off!</span>"
 			if(prob(10))
 				spawn(50)
 					if(O)

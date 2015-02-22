@@ -157,7 +157,7 @@ var/obj/screen/robot_inventory
 		if (mymob.client.gun_mode) // If in aim mode, correct the sprite
 			mymob.gun_setting_icon.set_dir(2)
 	for(var/obj/item/weapon/gun/G in mymob) // If targeting someone, display other buttons
-		if (G.target)
+		if (G.aim_targets)
 			mymob.item_use_icon = new /obj/screen/gun/item(null)
 			if (mymob.client.target_can_click)
 				mymob.item_use_icon.set_dir(1)

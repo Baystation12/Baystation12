@@ -112,7 +112,7 @@
 	else if(grown_seed.heat_tolerance < 10)
 		dat += "<br>It is very sensitive to temperature shifts."
 
-	dat += "<br>It thrives in a light level of [grown_seed.ideal_light] lumen[grown_seed.ideal_light == 1 ? "" : "s"]."
+	dat += "<br>It thrives in a light level of [grown_seed.ideal_light] lumen\s."
 
 	if(grown_seed.light_tolerance > 10)
 		dat += "<br>It is well adapted to a range of light levels."
@@ -334,6 +334,14 @@
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "unathiknife"
 	attack_verb = list("ripped", "torn", "cut")
+
+/obj/item/weapon/hatchet/tacknife
+	name = "tactical knife"
+	desc = "You'd be killing loads of people if this was Medal of Valor: Heroes of Nyx."
+	icon = 'icons/obj/weapons.dmi'
+	icon_state = "tacknife"
+	item_state = "knife"
+	attack_verb = list("stabbed", "chopped", "cut")
 
 /obj/item/weapon/scythe
 	icon_state = "scythe0"

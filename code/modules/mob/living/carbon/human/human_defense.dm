@@ -24,7 +24,7 @@ emp_act
 			if(!(def_zone in list("chest", "groin")))
 				reflectchance /= 2
 			if(prob(reflectchance))
-				visible_message("<span class='danger'>The [P.name] gets reflected by [src]'s [wear_suit.name]!</span>")
+				visible_message("\red <B>\The [P] gets reflected by \the [src]'s [wear_suit.name]!</B>")
 
 				// Find a turf near or on the original location to bounce to
 				if(P.starting)

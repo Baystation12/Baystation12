@@ -1,3 +1,5 @@
+#define PROCESS_ACCURACY 1
+
 /****************************************************
 			   ORGAN DEFINES
 ****************************************************/
@@ -614,3 +616,5 @@
 
 /obj/item/organ/internal/stack/vox
 	name = "vox cortical stack"
+
+#undef PROCESS_ACCURACY

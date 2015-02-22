@@ -192,6 +192,13 @@
 	if(isnull(species) || !(species in playable_species))
 		species = "Human"
 
+	if(isnum(underwear))
+		var/list/undies = gender == MALE ? underwear_m : underwear_f
+		underwear = undies[undies[underwear]]
+
+	if(isnum(undershirt))
+		undershirt = undershirt_t[undershirt_t[undershirt]]
+
 	if(isnull(language)) language = "None"
 	if(isnull(spawnpoint)) spawnpoint = "Arrivals Shuttle"
 	if(isnull(nanotrasen_relation)) nanotrasen_relation = initial(nanotrasen_relation)
@@ -214,8 +221,6 @@
 	r_eyes			= sanitize_integer(r_eyes, 0, 255, initial(r_eyes))
 	g_eyes			= sanitize_integer(g_eyes, 0, 255, initial(g_eyes))
 	b_eyes			= sanitize_integer(b_eyes, 0, 255, initial(b_eyes))
-	underwear		= sanitize_integer(underwear, 1, underwear_m.len, initial(underwear))
-	undershirt		= sanitize_integer(undershirt, 1, undershirt_t.len, initial(undershirt))
 	backbag			= sanitize_integer(backbag, 1, backbaglist.len, initial(backbag))
 	b_type			= sanitize_text(b_type, initial(b_type))
 

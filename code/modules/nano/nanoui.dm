@@ -52,6 +52,11 @@ nanoui is used to open and update nano browser uis
 	// the current status/visibility of the ui
 	var/status = STATUS_INTERACTIVE
 
+	// Relationship between a master interface and its children. Used in update_status
+	var/datum/nanoui/master_ui
+	var/list/datum/nanoui/children = list()
+	var/datum/topic_state/custom_state = null
+
 	var/cached_data = null
 
  /**
@@ -68,17 +73,22 @@ nanoui is used to open and update nano browser uis
   *
   * @return /nanoui new nanoui object
   */
-/datum/nanoui/New(nuser, nsrc_object, nui_key, ntemplate_filename, ntitle = 0, nwidth = 0, nheight = 0, var/atom/nref = null)
+/datum/nanoui/New(nuser, nsrc_object, nui_key, ntemplate_filename, ntitle = 0, nwidth = 0, nheight = 0, var/atom/nref = null, var/datum/nanoui/master_ui = null, var/datum/topic_state/custom_state = null)
 	user = nuser
 	src_object = nsrc_object
 	ui_key = nui_key
 	window_id = "[ui_key]\ref[src_object]"
 
+	src.master_ui = master_ui
+	if(master_ui)
+		master_ui.children += src
+	src.custom_state = custom_state ? custom_state : new/datum/topic_state()
+
 	// add the passed template filename as the "main" template, this is required
 	add_template("main", ntemplate_filename)
 
 	if (ntitle)
-		title = ntitle
+		title = sanitize(ntitle)
 	if (nwidth)
 		width = nwidth
 	if (nheight)
@@ -132,116 +142,14 @@ nanoui is used to open and update nano browser uis
   * @return nothing
   */
 /datum/nanoui/proc/update_status(var/push_update = 0)
-	var/status = user.can_interact_with_interface(src_object)
-	if(status == STATUS_CLOSE)
+	var/atom/movable/host = src_object.nano_host()
+	var/new_status = host.CanUseTopic(user, list(), custom_state)
+	if(master_ui)
+		new_status = min(new_status, master_ui.status)
+	if(new_status == STATUS_CLOSE)
 		close()
 	else
-		set_status(status, push_update)
-
-/*
-	Procs called by update_status()
-*/
-
-/mob/living/silicon/pai/can_interact_with_interface(src_object)
-	if(src_object == src && !stat)
-		return STATUS_INTERACTIVE
-	else
-		return ..()
-
-/mob/proc/can_interact_with_interface(var/src_object)
-	return STATUS_CLOSE // By default no mob can do anything with NanoUI
-
-/mob/dead/observer/can_interact_with_interface()
-	if(check_rights(R_ADMIN, 0))
-		return STATUS_INTERACTIVE				// Admins are more equal
-	return STATUS_UPDATE						// Ghosts can view updates
-
-/mob/living/silicon/robot/can_interact_with_interface(var/src_object)
-	if(stat || !client)
-		return STATUS_CLOSE
-	if(lockcharge || stunned || weakened)
-		return STATUS_DISABLED
-	if (src_object in view(client.view, src))	// robots can see and interact with things they can see within their view range
-		return STATUS_INTERACTIVE				// interactive (green visibility)
-	return STATUS_DISABLED						// no updates, completely disabled (red visibility)
-
-/mob/living/silicon/robot/syndicate/can_interact_with_interface(var/src_object)
-	. = ..()
-	if(. != STATUS_INTERACTIVE)
-		return
-
-	if(z in config.admin_levels)						// Syndicate borgs can interact with everything on the admin level
-		return STATUS_INTERACTIVE
-	if(istype(get_area(src), /area/syndicate_station))	// If elsewhere, they can interact with everything on the syndicate shuttle
-		return STATUS_INTERACTIVE
-	if(istype(src_object, /obj/machinery))						// Otherwise they can only interact with emagged machinery
-		var/obj/machinery/Machine = src_object
-		if(Machine.emagged)
-			return STATUS_INTERACTIVE
-	return STATUS_UPDATE
-
-/mob/living/silicon/ai/can_interact_with_interface(var/src_object)
-	if(stat || !client)
-		return STATUS_CLOSE
-	// Prevents the AI from using Topic on admin levels (by for example viewing through the court/thunderdome cameras)
-	// unless it's on the same level as the object it's interacting with.
-	var/turf/T = get_turf(src_object)
-	if(!T || !(z == T.z || (T.z in config.player_levels)))
-		return STATUS_CLOSE
-
-	// If an object is in view then we can interact with it
-	if(src_object in view(client.view, src))
-		return STATUS_INTERACTIVE
-
-	// If we're installed in a chassi, rather than transfered to an inteliCard or other container, then check if we have camera view
-	if(is_in_chassis())
-		//stop AIs from leaving windows open and using then after they lose vision
-		//apc_override is needed here because AIs use their own APC when powerless
-		if(cameranet && !cameranet.checkTurfVis(get_turf(src_object)))
-			return apc_override ? STATUS_INTERACTIVE : STATUS_CLOSE
-		return STATUS_INTERACTIVE
-
-	return 	STATUS_CLOSE
-
-/mob/living/proc/shared_living_nano_interaction(var/src_object)
-	if (src.stat != CONSCIOUS)
-		return STATUS_CLOSE						// no updates, close the interface
-	else if (restrained() || lying || stat || stunned || weakened)
-		return STATUS_UPDATE					// update only (orange visibility)
-	return STATUS_INTERACTIVE
-
-/mob/living/proc/shared_living_nano_distance(var/atom/movable/src_object)
-	if(!isturf(src_object.loc))
-		if(src_object.loc == src)				// Item in the inventory
-			return STATUS_INTERACTIVE
-		if(src.contents.Find(src_object.loc))	// A hidden uplink inside an item
-			return STATUS_INTERACTIVE
-
-	if (!(src_object in view(4, src))) 	// If the src object is not in visable, disable updates
-		return STATUS_CLOSE
-
-	var/dist = get_dist(src_object, src)
-	if (dist <= 1)
-		return STATUS_INTERACTIVE	// interactive (green visibility)
-	else if (dist <= 2)
-		return STATUS_UPDATE 		// update only (orange visibility)
-	else if (dist <= 4)
-		return STATUS_DISABLED 		// no updates, completely disabled (red visibility)
-	return STATUS_CLOSE
-
-/mob/living/can_interact_with_interface(var/src_object, var/be_close = 1)
-	. = shared_living_nano_interaction(src_object)
-	if(. == STATUS_INTERACTIVE && be_close)
-		. = shared_living_nano_distance(src_object)
-	if(STATUS_INTERACTIVE)
-		return STATUS_UPDATE
-
-/mob/living/carbon/human/can_interact_with_interface(var/src_object, var/be_close = 1)
-	. = shared_living_nano_interaction(src_object)
-	if(. == STATUS_INTERACTIVE && be_close)
-		. = shared_living_nano_distance(src_object)
-		if(. == STATUS_UPDATE && (TK in mutations))	// If we have telekinesis and remain close enough, allow interaction.
-			return STATUS_INTERACTIVE
+		set_status(new_status, push_update)
 
  /**
   * Set the ui to auto update (every master_controller tick)
@@ -484,7 +392,6 @@ nanoui is used to open and update nano browser uis
   * @return nothing
   */
 /datum/nanoui/proc/open()
-
 	var/window_size = ""
 	if (width && height)
 		window_size = "size=[width]x[height];"
@@ -504,6 +411,8 @@ nanoui is used to open and update nano browser uis
 	is_auto_updating = 0
 	nanomanager.ui_closed(src)
 	user << browse(null, "window=[window_id]")
+	for(var/datum/nanoui/child in children)
+		child.close()
 
  /**
   * Set the UI window to call the nanoclose verb when the window is closed
@@ -568,7 +477,7 @@ nanoui is used to open and update nano browser uis
 		set_map_z_level(text2num(href_list["mapZLevel"]))
 		map_update = 1
 
-	if ((src_object && src_object.Topic(href, href_list)) || map_update)
+	if ((src_object && src_object.Topic(href, href_list, 0, custom_state)) || map_update)
 		nanomanager.update_uis(src_object) // update all UIs attached to src_object
 
  /**
@@ -595,5 +504,4 @@ nanoui is used to open and update nano browser uis
   * @return nothing
   */
 /datum/nanoui/proc/update(var/force_open = 0)
-	src_object.ui_interact(user, ui_key, src, force_open)
-
+	src_object.ui_interact(user, ui_key, src, force_open, master_ui, custom_state)

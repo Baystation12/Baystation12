@@ -115,13 +115,10 @@
 	listening = !listening && !(wires.IsIndexCut(WIRE_RECEIVE) || wires.IsIndexCut(WIRE_SIGNAL))
 
 /obj/item/device/radio/Topic(href, href_list)
-	//..()
-	if (usr.stat || !on)
-		return
-
-	if (!(issilicon(usr) || (usr.contents.Find(src) || ( in_range(src, usr) && istype(loc, /turf) ))))
+	if(..() || !on)
 		usr << browse(null, "window=radio")
 		return
+
 	usr.set_machine(src)
 	if (href_list["track"])
 		var/mob/target = locate(href_list["track"])
@@ -152,17 +149,7 @@
 			else
 				channels[chan_name] |= FREQ_LISTENING
 
-	if (!( master ))
-		if (istype(loc, /mob))
-			interact(loc)
-		else
-			updateDialog()
-	else
-		if (istype(master.loc, /mob))
-			interact(master.loc)
-		else
-			updateDialog()
-	add_fingerprint(usr)
+	interact(usr)
 
 /obj/item/device/radio/proc/autosay(var/message, var/from, var/channel) //BS12 EDIT
 	var/datum/radio_frequency/connection = null
