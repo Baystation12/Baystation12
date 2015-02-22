@@ -107,28 +107,29 @@ Please contact me on #coderbus IRC. ~Carn x
 //Human Overlays Indexes/////////
 #define MUTATIONS_LAYER			1
 #define DAMAGE_LAYER			2
-#define UNIFORM_LAYER			3
-#define TAIL_LAYER				4		//bs12 specific. this hack is probably gonna come back to haunt me
-#define ID_LAYER				5
-#define SHOES_LAYER				6
-#define GLOVES_LAYER			7
-#define SUIT_LAYER				8
-#define GLASSES_LAYER			9
-#define BELT_LAYER				10		//Possible make this an overlay of somethign required to wear a belt?
-#define SUIT_STORE_LAYER		11
-#define BACK_LAYER				12
-#define HAIR_LAYER				13		//TODO: make part of head layer?
-#define EARS_LAYER				14
-#define FACEMASK_LAYER			15
-#define HEAD_LAYER				16
-#define COLLAR_LAYER			17
-#define HANDCUFF_LAYER			18
-#define LEGCUFF_LAYER			19
-#define L_HAND_LAYER			20
-#define R_HAND_LAYER			21
-#define FIRE_LAYER				22		//If you're on fire
-#define TARGETED_LAYER			23		//BS12: Layer for the target overlay from weapon targeting system
-#define TOTAL_LAYERS			23
+#define SURGERY_LEVEL			3		//bs12 specific.
+#define UNIFORM_LAYER			4
+#define TAIL_LAYER				5		//bs12 specific. this hack is probably gonna come back to haunt me
+#define ID_LAYER				6
+#define SHOES_LAYER				7
+#define GLOVES_LAYER			8
+#define SUIT_LAYER				9
+#define GLASSES_LAYER			10
+#define BELT_LAYER				11		//Possible make this an overlay of somethign required to wear a belt?
+#define SUIT_STORE_LAYER		12
+#define BACK_LAYER				13
+#define HAIR_LAYER				14		//TODO: make part of head layer?
+#define EARS_LAYER				15
+#define FACEMASK_LAYER			16
+#define HEAD_LAYER				17
+#define COLLAR_LAYER			18
+#define HANDCUFF_LAYER			19
+#define LEGCUFF_LAYER			20
+#define L_HAND_LAYER			21
+#define R_HAND_LAYER			22
+#define FIRE_LAYER				23		//If you're on fire
+#define TARGETED_LAYER			24		//BS12: Layer for the target overlay from weapon targeting system
+#define TOTAL_LAYERS			24
 //////////////////////////////////
 
 /mob/living/carbon/human
@@ -509,6 +510,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 	update_inv_legcuffed(0)
 	update_inv_pockets(0)
 	update_fire(0)
+	update_surgery(0)
 	UpdateDamageIcon()
 	update_icons()
 	//Hud Stuff
@@ -922,6 +924,16 @@ proc/get_damage_icon_part(damage_state, body_part)
 
 	if(update_icons)   update_icons()
 
+/mob/living/carbon/human/proc/update_surgery(var/update_icons=1)
+	overlays_standing[SURGERY_LEVEL] = null
+	var/image/total = new
+	for(var/datum/organ/external/E in organs)
+		if(E.open)
+			var/image/I = image("icon"='icons/mob/surgery.dmi', "icon_state"="[E.name][round(E.open)]", "layer"=-SURGERY_LEVEL)
+			total.overlays += I
+	overlays_standing[SURGERY_LEVEL] = total
+	if(update_icons)   update_icons()
+
 // Used mostly for creating head items
 /mob/living/carbon/human/proc/generate_head_icon()
 //gender no longer matters for the mouth, although there should probably be seperate base head icons.
@@ -960,6 +972,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 //Human Overlays Indexes/////////
 #undef MUTATIONS_LAYER
 #undef DAMAGE_LAYER
+#undef SURGERY_LEVEL
 #undef UNIFORM_LAYER
 #undef TAIL_LAYER
 #undef ID_LAYER
