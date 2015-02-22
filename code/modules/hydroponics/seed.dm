@@ -233,7 +233,7 @@
 		origin_turf.visible_message("<span class='danger'>The [thrown.name] splatters against [target]!</span>")
 		del(thrown)
 
-/datum/seed/proc/handle_environment(var/turf/current_turf, var/datum/gas_mixture/environment, var/check_only)
+/datum/seed/proc/handle_environment(var/turf/current_turf, var/datum/gas_mixture/environment, var/light_supplied, var/check_only)
 
 	var/health_change = 0
 	// Handle gas consumption.
@@ -261,17 +261,18 @@
 	// Handle gas production.
 	if(exude_gasses && exude_gasses.len && !check_only)
 		for(var/gas in exude_gasses)
-			environment.adjust_gas(gas, max(1,round((exude_gasses[gas]*get_trait(TRAIT_POTENCY))/exude_gasses.len)))
+			environment.adjust_gas(gas, max(1,round((exude_gasses[gas]*(get_trait(TRAIT_POTENCY)/5))/exude_gasses.len)))
 
 	// Handle light requirements.
-	var/area/A = get_area(current_turf)
-	if(A)
-		var/light_available
-		if(A.lighting_use_dynamic)
-			light_available = max(0,min(10,current_turf.lighting_lumcount)-5)
-		else
-			light_available =  5
-		if(abs(light_available - get_trait(TRAIT_IDEAL_LIGHT)) > get_trait(TRAIT_LIGHT_TOLERANCE))
+	if(!light_supplied)
+		var/area/A = get_area(current_turf)
+		if(A)
+			if(A.lighting_use_dynamic)
+				light_supplied = max(0,min(10,current_turf.lighting_lumcount)-5)
+			else
+				light_supplied =  5
+	if(light_supplied)
+		if(abs(light_supplied - get_trait(TRAIT_IDEAL_LIGHT)) > get_trait(TRAIT_LIGHT_TOLERANCE))
 			health_change += rand(1,3) * HYDRO_SPEED_MULTIPLIER
 
 	return health_change

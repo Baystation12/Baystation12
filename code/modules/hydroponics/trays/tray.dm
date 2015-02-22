@@ -27,6 +27,7 @@
 	var/mutation_mod = 0       // Modifier to mutation chance
 	var/toxins = 0             // Toxicity in the tray?
 	var/mutation_level = 0     // When it hits 100, the plant mutates.
+	var/tray_light = 1         // Supplied lighting.
 
 	// Mechanical concerns.
 	var/health = 0             // Plant health.
@@ -350,6 +351,14 @@
 	return
 
 /obj/machinery/portable_atmospherics/hydroponics/verb/set_light()
+	set name = "Set Light"
+	set category = "Object"
+	set src in view(1)
+
+	var/new_light = input("Specify a light level.") as null|anything in list(0,1,2,3,4,5,6,7,8,9,10)
+	if(new_light)
+		tray_light = new_light
+		usr << "You set the tray to a light level of [tray_light] lumens."
 
 /obj/machinery/portable_atmospherics/hydroponics/proc/check_level_sanity()
 	//Make sure various values are sane.

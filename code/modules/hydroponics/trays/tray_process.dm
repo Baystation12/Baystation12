@@ -60,7 +60,6 @@
 
 	// Check that pressure, heat and light are all within bounds.
 	// First, handle an open system or an unconnected closed system.
-
 	var/turf/T = loc
 	var/datum/gas_mixture/environment
 	// If we're closed, take from our internal sources.
@@ -71,7 +70,10 @@
 	if(!environment) return
 
 	// Seed datum handles gasses, light and pressure.
-	health -= seed.handle_environment(T,environment)
+	if(mechanical && closed_system)
+		health -= seed.handle_environment(T,environment,tray_light)
+	else
+		health -= seed.handle_environment(T,environment)
 
 	// If we're attached to a pipenet, then we should let the pipenet know we might have modified some gasses
 	if (closed_system && connected_port)

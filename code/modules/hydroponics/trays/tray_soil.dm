@@ -4,6 +4,7 @@
 	density = 0
 	use_power = 0
 	mechanical = 0
+	tray_light = 0
 
 /obj/machinery/portable_atmospherics/hydroponics/soil/attackby(var/obj/item/O as obj, var/mob/user as mob)
 	if(istype(O,/obj/item/weapon/tank))
@@ -15,6 +16,7 @@
 	..()
 	verbs -= /obj/machinery/portable_atmospherics/hydroponics/verb/close_lid_verb
 	verbs -= /obj/machinery/portable_atmospherics/hydroponics/verb/remove_label
+	verbs -= /obj/machinery/portable_atmospherics/hydroponics/verb/set_light
 
 /obj/machinery/portable_atmospherics/hydroponics/soil/CanPass()
 	return 1
