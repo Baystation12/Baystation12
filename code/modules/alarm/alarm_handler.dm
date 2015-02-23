@@ -47,6 +47,12 @@
 		existing.clear(source)
 		return check_alarm_cleared(existing)
 
+/datum/alarm_handler/proc/major_alarms()
+	return alarms
+
+/datum/alarm_handler/proc/minor_alarms()
+	return alarms
+
 /datum/alarm_handler/proc/check_alarm_cleared(var/datum/alarm/alarm)
 	if ((alarm.end_time && world.time > alarm.end_time) || !alarm.sources.len)
 		alarms -= alarm

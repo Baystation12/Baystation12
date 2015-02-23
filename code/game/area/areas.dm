@@ -37,10 +37,7 @@
 			cameras += C
 	return cameras
 
-/area/proc/atmosalert(danger_level, var/set_firelocks=1)
-//	if(type==/area) //No atmos alarms in space
-//		return 0 //redudant
-
+/area/proc/atmosalert(danger_level, var/alarm_source)
 	//Check all the alarms before lowering atmosalm. Raising is perfectly fine.
 	for (var/area/RA in related)
 		for (var/obj/machinery/alarm/AA in RA)
@@ -48,37 +45,21 @@
 				danger_level = max(danger_level, AA.danger_level)
 
 	if(danger_level != atmosalm)
-		if (set_firelocks && danger_level < 1 && atmosalm >= 1)
+		if (danger_level < 1 && atmosalm >= 1)
 			//closing the doors on red and opening on green provides a bit of hysteresis that will hopefully prevent fire doors from opening and closing repeatedly due to noise
 			air_doors_open()
-		/*
-		if (danger_level < 2 && atmosalm >= 2)
-			for(var/area/RA in related)
-				for(var/obj/machinery/camera/C in RA)
-					C.network.Remove("Atmosphere Alarms")
-			for(var/mob/living/silicon/aiPlayer in player_list)
-				aiPlayer.cancelAlarm("Atmosphere", src, src)
-			for(var/obj/machinery/computer/station_alert/a in machines)
-				a.cancelAlarm("Atmosphere", src, src)
+		else if (danger_level >= 2 && atmosalm < 2)
+			air_doors_close()
 
-		if (danger_level >= 2 && atmosalm < 2)
-			var/list/cameras = list()
-			for(var/area/RA in related)
-				//updateicon()
-				for(var/obj/machinery/camera/C in RA)
-					cameras += C
-					C.network.Add("Atmosphere Alarms")
-			for(var/mob/living/silicon/aiPlayer in player_list)
-				aiPlayer.triggerAlarm("Atmosphere", src, cameras, src)
-			for(var/obj/machinery/computer/station_alert/a in machines)
-				a.triggerAlarm("Atmosphere", src, cameras, src)
-			if (set_firelocks)
-				air_doors_close()
+		if (danger_level == 0)
+			atmosphere_alarm.clearAlarm(master, alarm_source)
+		else
+			atmosphere_alarm.triggerAlarm(master, alarm_source, severity = danger_level)
 
 		atmosalm = danger_level
 		for(var/area/RA in related)
 			for (var/obj/machinery/alarm/AA in RA)
-				AA.update_icon() */
+				AA.update_icon()
 
 		return 1
 	return 0

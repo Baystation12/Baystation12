@@ -117,14 +117,6 @@
 
 	first_run()
 
-//needed to cancel the alarm after it is deleted
-/obj/machinery/alarm/proc/delayed_reset()
-	var/area/A = alarm_area
-	src = null
-	spawn(600)
-		//It makes sense not to touch firelocks here. The alarm itself is gone, we have no idea what the atmos is like.
-		A.atmosalert(0, set_firelocks=0)
-
 /obj/machinery/alarm/proc/first_run()
 	alarm_area = get_area(src)
 	if (alarm_area.master)
@@ -436,7 +428,7 @@
 				send_signal(device_id, list("power"= 0) )
 
 /obj/machinery/alarm/proc/apply_danger_level(var/new_danger_level)
-	if (report_danger_level && alarm_area.atmosalert(new_danger_level))
+	if (report_danger_level && alarm_area.atmosalert(new_danger_level, src))
 		post_alert(new_danger_level)
 
 	update_icon()
@@ -454,12 +446,10 @@
 
 	if(alert_level==2)
 		alert_signal.data["alert"] = "severe"
-		atmosphere_alarm.triggerAlarm(src.loc, src)
 	else if (alert_level==1)
 		alert_signal.data["alert"] = "minor"
 	else if (alert_level==0)
 		alert_signal.data["alert"] = "clear"
-		atmosphere_alarm.clearAlarm(src.loc, src)
 
 	frequency.post_signal(src, alert_signal)
 
@@ -766,13 +756,13 @@
 			return 1
 
 		if(href_list["atmos_alarm"])
-			if (alarm_area.atmosalert(2))
+			if (alarm_area.atmosalert(2, src))
 				apply_danger_level(2)
 			update_icon()
 			return 1
 
 		if(href_list["atmos_reset"])
-			if (alarm_area.atmosalert(0))
+			if (alarm_area.atmosalert(0, src))
 				apply_danger_level(0)
 			update_icon()
 			return 1
