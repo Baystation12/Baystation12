@@ -1280,9 +1280,6 @@
 	else
 		return ..()
 
-/mob/living/carbon/human/get_descriptions_fluff()
-	return print_flavor_text(0)
-
 /mob/living/carbon/human/getDNA()
 	if(species.flags & NO_SCAN)
 		return null

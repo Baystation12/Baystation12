@@ -834,16 +834,6 @@ note dizziness decrements automatically in the mob's Life() proc.
 					statpanel("Spells","[S.charge_counter]/[S.charge_max]",S)
 				if("holdervar")
 					statpanel("Spells","[S.holder_var_type] [S.holder_var_amount]",S)
-	if(statpanel("Examine"))
-		stat(null,"[description_holders["icon"]]    <font size='5'>[description_holders["name"]]</font>") //The name, written in big letters.
-		stat(null,"[description_holders["desc"]]") //the default examine text.
-		if(description_holders["info"])
-			stat(null,"<font color='#084B8A'><b>[description_holders["info"]]</b></font>") //Blue, informative text.
-		if(description_holders["fluff"])
-			stat(null,"<font color='#298A08'><b>[description_holders["fluff"]]</b></font>") //Yellow, fluff-related text.
-		if(mind.special_role)
-			if(description_holders["antag"])
-				stat(null,"<font color='#8A0808'><b>[description_holders["antag"]]</b></font>") //Red, malicious antag-related text
 
 
 
