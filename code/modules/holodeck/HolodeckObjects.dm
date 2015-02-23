@@ -182,10 +182,10 @@
 		visible_message("[src] fades away as it shatters!")
 	del(src)
 
-/obj/structure/stool/bed/chair/holochair/Del()
+/obj/structure/bed/chair/holochair/Del()
 	..()
 
-/obj/structure/stool/bed/chair/holochair/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/structure/bed/chair/holochair/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/weapon/wrench))
 		user << ("<span class='notice'>It's a holochair, you can't dismantle it!</span>")
 	return

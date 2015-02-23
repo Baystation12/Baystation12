@@ -159,7 +159,7 @@
 	//If limb took enough damage, try to cut or tear it off
 	if(body_part != UPPER_TORSO && body_part != LOWER_TORSO) //as hilarious as it is, getting hit on the chest too much shouldn't effectively gib you.
 		if(config.limbs_can_break && brute_dam >= max_damage * config.organ_health_multiplier)
-			if( (edge && prob(5 * brute)) || (brute > 20 && prob(2 * brute)) )
+			if( (edge && prob(5 * brute)) || (brute > 20 && prob(brute)) )
 				droplimb(1)
 				return
 
@@ -596,14 +596,11 @@ Note that amputating the affected organ does in fact remove the infection from t
 		update_damages()
 
 		var/obj/organ	//Dropped limb object
+		var/list/dropped_items
 		switch(body_part)
 			if(HEAD)
-				organ= new /obj/item/weapon/organ/head(owner.loc, owner)
-				owner.u_equip(owner.glasses)
-				owner.u_equip(owner.head)
-				owner.u_equip(owner.l_ear)
-				owner.u_equip(owner.r_ear)
-				owner.u_equip(owner.wear_mask)
+				organ = new /obj/item/weapon/organ/head(owner.loc, owner)
+				dropped_items = list(owner.glasses, owner.head, owner.l_ear, owner.r_ear, owner.wear_mask)
 			if(ARM_RIGHT)
 				if(status & ORGAN_ROBOT)
 					organ = new /obj/item/robot_parts/r_arm(owner.loc)
@@ -627,19 +624,22 @@ Note that amputating the affected organ does in fact remove the infection from t
 			if(HAND_RIGHT)
 				if(!(status & ORGAN_ROBOT))
 					organ= new /obj/item/weapon/organ/r_hand(owner.loc, owner)
-				owner.u_equip(owner.gloves)
+				dropped_items = list(owner.gloves) //should probably make it so that you can still wear gloves if you have one hand
 			if(HAND_LEFT)
 				if(!(status & ORGAN_ROBOT))
 					organ= new /obj/item/weapon/organ/l_hand(owner.loc, owner)
-				owner.u_equip(owner.gloves)
+				dropped_items = list(owner.gloves)
 			if(FOOT_RIGHT)
 				if(!(status & ORGAN_ROBOT))
 					organ= new /obj/item/weapon/organ/r_foot/(owner.loc, owner)
-				owner.u_equip(owner.shoes)
+				dropped_items = list(owner.shoes)
 			if(FOOT_LEFT)
 				if(!(status & ORGAN_ROBOT))
 					organ = new /obj/item/weapon/organ/l_foot(owner.loc, owner)
-				owner.u_equip(owner.shoes)
+				dropped_items = list(owner.shoes)
+		if(dropped_items)
+			for(var/obj/O in dropped_items)
+				owner.remove_from_mob(O)
 
 		destspawn = 1
 		//Robotic limbs explode if sabotaged.

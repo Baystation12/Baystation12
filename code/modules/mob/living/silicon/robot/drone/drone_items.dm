@@ -57,7 +57,7 @@
 
 	set name = "Drop Item"
 	set desc = "Release an item from your magnetic gripper."
-	set category = "Drone"
+	set category = "Robot Commands"
 
 	if(!wrapped)
 		//There's some weirdness with items being lost inside the arm. Trying to fix all cases. ~Z
@@ -151,12 +151,10 @@
 	icon_state = "decompiler"
 
 	//Metal, glass, wood, plastic.
-	var/list/stored_comms = list(
-		"metal" = 0,
-		"glass" = 0,
-		"wood" = 0,
-		"plastic" = 0
-		)
+	var/datum/matter_synth/metal = null
+	var/datum/matter_synth/glass = null
+	var/datum/matter_synth/wood = null
+	var/datum/matter_synth/plastic = null
 
 /obj/item/weapon/matter_decompiler/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
 	return
@@ -178,10 +176,10 @@
 			src.loc.visible_message("\red [src.loc] sucks [M] into its decompiler. There's a horrible crunching noise.","\red It's a bit of a struggle, but you manage to suck [M] into your decompiler. It makes a series of visceral crunching noises.")
 			new/obj/effect/decal/cleanable/blood/splatter(get_turf(src))
 			del(M)
-			stored_comms["wood"]++
-			stored_comms["wood"]++
-			stored_comms["plastic"]++
-			stored_comms["plastic"]++
+			if(wood)
+				wood.add_charge(2000)
+			if(plastic)
+				plastic.add_charge(2000)
 			return
 
 		else if(istype(M,/mob/living/silicon/robot/drone) && !M.client)
@@ -203,61 +201,66 @@
 			del(M)
 			new/obj/effect/decal/cleanable/blood/oil(get_turf(src))
 
-			stored_comms["metal"] += 15
-			stored_comms["glass"] += 15
-			stored_comms["wood"] += 5
-			stored_comms["plastic"] += 5
+			if(metal)
+				metal.add_charge(15000)
+			if(glass)
+				glass.add_charge(15000)
+			if(wood)
+				wood.add_charge(2000)
+			if(plastic)
+				plastic.add_charge(1000)
 			return
 		else
 			continue
 
 	for(var/obj/W in T)
 		//Different classes of items give different commodities.
-		if (istype(W,/obj/item/weapon/cigbutt))
-			stored_comms["plastic"]++
+		if(istype(W,/obj/item/weapon/cigbutt))
+			if(plastic)
+				plastic.add_charge(500)
 		else if(istype(W,/obj/effect/spider/spiderling))
-			stored_comms["wood"]++
-			stored_comms["wood"]++
-			stored_comms["plastic"]++
-			stored_comms["plastic"]++
+			if(wood)
+				wood.add_charge(2000)
+			if(plastic)
+				plastic.add_charge(2000)
 		else if(istype(W,/obj/item/weapon/light))
 			var/obj/item/weapon/light/L = W
 			if(L.status >= 2) //In before someone changes the inexplicably local defines. ~ Z
-				stored_comms["metal"]++
-				stored_comms["glass"]++
+				if(metal)
+					metal.add_charge(250)
+				if(glass)
+					glass.add_charge(250)
 			else
 				continue
 		else if(istype(W,/obj/effect/decal/remains/robot))
-			stored_comms["metal"]++
-			stored_comms["metal"]++
-			stored_comms["plastic"]++
-			stored_comms["plastic"]++
-			stored_comms["glass"]++
+			if(metal)
+				metal.add_charge(2000)
+			if(plastic)
+				plastic.add_charge(2000)
+			if(glass)
+				glass.add_charge(1000)
 		else if(istype(W,/obj/item/trash))
-			stored_comms["metal"]++
-			stored_comms["plastic"]++
-			stored_comms["plastic"]++
-			stored_comms["plastic"]++
+			if(metal)
+				metal.add_charge(1000)
+			if(plastic)
+				plastic.add_charge(3000)
 		else if(istype(W,/obj/effect/decal/cleanable/blood/gibs/robot))
-			stored_comms["metal"]++
-			stored_comms["metal"]++
-			stored_comms["glass"]++
-			stored_comms["glass"]++
+			if(metal)
+				metal.add_charge(2000)
+			if(glass)
+				glass.add_charge(2000)
 		else if(istype(W,/obj/item/ammo_casing))
-			stored_comms["metal"]++
+			if(metal)
+				metal.add_charge(1000)
 		else if(istype(W,/obj/item/weapon/shard/shrapnel))
-			stored_comms["metal"]++
-			stored_comms["metal"]++
-			stored_comms["metal"]++
+			if(metal)
+				metal.add_charge(1000)
 		else if(istype(W,/obj/item/weapon/shard))
-			stored_comms["glass"]++
-			stored_comms["glass"]++
-			stored_comms["glass"]++
+			if(glass)
+				glass.add_charge(1000)
 		else if(istype(W,/obj/item/weapon/reagent_containers/food/snacks/grown))
-			stored_comms["wood"]++
-			stored_comms["wood"]++
-			stored_comms["wood"]++
-			stored_comms["wood"]++
+			if(wood)
+				wood.add_charge(4000)
 		else if(istype(W,/obj/item/pipe))
 			// This allows drones and engiborgs to clear pipe assemblies from floors.
 		else
@@ -325,39 +328,3 @@
 	dat += resources
 
 	src << browse(dat, "window=robotmod")
-
-//Putting the decompiler here to avoid doing list checks every tick.
-/mob/living/silicon/robot/drone/use_power()
-
-	..()
-	if(!src.has_power || !decompiler)
-		return
-
-	//The decompiler replenishes drone stores from hoovered-up junk each tick.
-	for(var/type in decompiler.stored_comms)
-		if(decompiler.stored_comms[type] > 0)
-			var/obj/item/stack/sheet/stack
-			switch(type)
-				if("metal")
-					if(!stack_metal)
-						stack_metal = new /obj/item/stack/sheet/metal/cyborg(src.module)
-						stack_metal.amount = 1
-					stack = stack_metal
-				if("glass")
-					if(!stack_glass)
-						stack_glass = new /obj/item/stack/sheet/glass/cyborg(src.module)
-						stack_glass.amount = 1
-					stack = stack_glass
-				if("wood")
-					if(!stack_wood)
-						stack_wood = new /obj/item/stack/sheet/wood/cyborg(src.module)
-						stack_wood.amount = 1
-					stack = stack_wood
-				if("plastic")
-					if(!stack_plastic)
-						stack_plastic = new /obj/item/stack/sheet/mineral/plastic/cyborg(src.module)
-						stack_plastic.amount = 1
-					stack = stack_plastic
-
-			stack.amount++
-			decompiler.stored_comms[type]--;

@@ -40,7 +40,7 @@
 			 new/datum/uplink_item(/obj/item/weapon/gun/energy/crossbow, 5, "Energy Crossbow", "XB"),
 			 new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/g9mm, 5, "Silenced 9mm", "S9"),
 			 new/datum/uplink_item(/obj/item/mecha_parts/mecha_equipment/weapon/energy/riggedlaser, 6, "Exosuit Rigged Laser", "RL"),
-			 new/datum/uplink_item(/obj/item/weapon/gun/projectile, 6, "Revolver", "RE"),
+			 new/datum/uplink_item(/obj/item/weapon/gun/projectile/revolver, 6, "Revolver", "RE"),
 			 new/datum/uplink_item(/obj/item/weapon/storage/box/syndicate, 10, "Mercenary Bundle", "BU")
 			),
 		"Stealthy and Inconspicuous Weapons" = list(

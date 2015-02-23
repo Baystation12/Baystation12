@@ -1,3 +1,16 @@
+/*
+Add fingerprints to items when we put them in our hands.
+This saves us from having to call add_fingerprint() any time something is put in a human's hands programmatically.
+
+*/
+/mob/living/carbon/human/put_in_l_hand(var/obj/item/W)
+	. = ..()
+	if(.) W.add_fingerprint(src)
+
+/mob/living/carbon/human/put_in_r_hand(var/obj/item/W)
+	. = ..()
+	if(.) W.add_fingerprint(src)
+
 /mob/living/carbon/human/verb/quick_equip()
 	set name = "quick-equip"
 	set hidden = 1
@@ -758,13 +771,7 @@ It can still be worn/put on as normal.
 	if(slot_to_process)
 		if(strip_item) //Stripping an item from the mob
 			var/obj/item/W = strip_item
-			target.u_equip(W)
-			if (target.client)
-				target.client.screen -= W
-			if (W)
-				W.loc = target.loc
-				W.layer = initial(W.layer)
-				W.dropped(target)
+			target.remove_from_mob(W)
 			W.add_fingerprint(source)
 			if(slot_to_process == slot_l_store) //pockets! Needs to process the other one too. Snowflake code, wooo! It's not like anyone will rewrite this anytime soon. If I'm wrong then... CONGRATULATIONS! ;)
 				if(target.r_store)

@@ -297,7 +297,7 @@
 
 	else if((istype(I, /obj/item/weapon/wrench)))
 		if(on || raised)
-			user << "<span class='warning'You cannot unsecure an active turret!</span>"
+			user << "<span class='warning'>You cannot unsecure an active turret!</span>"
 			return
 		if(wrenching)
 			user << "<span class='warning'>Someone is already [anchored ? "un" : ""]securing the turret!</span>"
@@ -733,7 +733,7 @@
 				gun_charge = E.power_supply.charge //the gun's charge is stored in gun_charge
 				user << "<span class='notice'>You add [I] to the turret.</span>"
 
-				if(istype(installation, /obj/item/weapon/gun/energy/laser/bluetag) || istype(installation, /obj/item/weapon/gun/energy/laser/redtag))
+				if(istype(installation, /obj/item/weapon/gun/energy/lasertag/blue) || istype(installation, /obj/item/weapon/gun/energy/lasertag/red))
 					target_type = /obj/machinery/porta_turret/tag
 				else
 					target_type = /obj/machinery/porta_turret

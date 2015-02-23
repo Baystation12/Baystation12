@@ -519,7 +519,10 @@ turf/simulated/floor/proc/update_icon()
 				var/obj/item/stack/tile/T = C
 				if (T.get_amount() < 1)
 					return
-				floor_type = T.type
+				if(!T.build_type)
+					floor_type = T.type
+				else
+					floor_type = T.build_type
 				intact = 1
 				if(istype(T,/obj/item/stack/tile/light))
 					var/obj/item/stack/tile/light/L = T
