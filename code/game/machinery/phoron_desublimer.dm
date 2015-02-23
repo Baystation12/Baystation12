@@ -12,7 +12,7 @@ The process works like this:
 	NEUTRON FURNACE
 	5.) Place the supermatter shard inside and set the neutron flow. The neutron flow represents the desired focus point.
 		Each of the different materials has a "focus peak" where you produce a maximum output of that material.
-		Setting the neutron flow between two peaks creates a small amount of both materials.
+		Setting the neutron flow between two peaks creates a smaller amount of both materials.
 		Some materials, such as osmium and phoron, produce so little amount that you may get nothing unless the neutron flow matches the peak.
 	6.) Activate the machine.
 	7.) Congrats, you now have some bars!
@@ -198,10 +198,8 @@ The process works like this:
 			return
 		active = 1
 
-		eat_shard()
 		var/remaining_power = total_power
 		flick( "Active", src )
-		sleep(86)
 
 		var/amount = 0
 		for( var/cur_mat in mat )
@@ -215,10 +213,9 @@ The process works like this:
 					I.amount = amount
 					I.loc = src.loc
 
+		eat_shard()
 		src.visible_message("\icon[src] <b>[src]</b> beeps, \"Supermatter transmutation complete.\"")
 		active = 0
-
-		update_icon()
 
 	proc/eat_shard()
 		if( !shard )
@@ -226,6 +223,7 @@ The process works like this:
 
 		del(shard)
 
+		update_icon()
 		return 1
 
 	report_ready()
@@ -244,13 +242,12 @@ The process works like this:
 				B.loc = src
 				shard = B
 				user << "You put [B] into the machine."
-				return
 			else
 				user << "There is already a shard in the machine."
-				return
 		else
 			user << "<span class='notice'>This machine only accepts supermatter shards</span>"
 
+		update_icon()
 		return
 
 	update_icon()
@@ -286,14 +283,14 @@ The process works like this:
 		for( var/M in machine_ref )
 			M = null
 
-		var/area/A = get_area(src)
-		for(var/mob/living/M in mobs_in_area(A))
+		var/area/main_area = get_area(src)
 
-		for( var/obj/machinery/phoron_desublimer/PD in A.contents )
-			if(PD.report_ready())
-				for( var/type in machine_obj )
-					if( istype( PD, machine_obj[type] ))
-						machine_ref[type] = PD // Gettinng the machines sorted out
+		for(var/area/related_area in main_area.related)
+			for( var/obj/machinery/phoron_desublimer/PD in related_area.contents )
+				if(PD.report_ready())
+					for( var/type in machine_obj )
+						if( istype( PD, machine_obj[type] ))
+							machine_ref[type] = PD // Gettinng the machines sorted out
 		return
 
 	proc/check_parts()
@@ -330,7 +327,6 @@ The process works like this:
 		if( !assembled )
 			dat += "Unable to detect all parts!<BR>"
 		else
-			dat += "All parts in place.<BR><BR>"
 			for( var/M in machine )
 				var/list/obj/machinery/phoron_desublimer/type = machine_ref[M]
 				dat += "<h4><center>[type.name]</center></h4>"
