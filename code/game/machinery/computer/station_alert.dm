@@ -42,5 +42,5 @@
 	if(alarms.len)
 		icon_state = "alert:2"
 	else
-		icon_state = "alert:0"
+		icon_state = initial(icon_state)
 	return

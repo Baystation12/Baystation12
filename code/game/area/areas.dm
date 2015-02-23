@@ -37,32 +37,6 @@
 			cameras += C
 	return cameras
 
-/area/proc/poweralert(var/state, var/obj/source as obj)
-	if (state != poweralm)
-		poweralm = state
-		/*if(istype(source))	//Only report power alarms on the z-level where the source is located.
-			var/list/cameras = list()
-			for (var/area/RA in related)
-				for (var/obj/machinery/camera/C in RA)
-					cameras += C
-					if(state == 1)
-						C.network.Remove("Power Alarms")
-					else
-						C.network.Add("Power Alarms")
-			for (var/mob/living/silicon/aiPlayer in player_list)
-				if(aiPlayer.z == source.z)
-					if (state == 1)
-						aiPlayer.cancelAlarm("Power", src, source)
-					else
-						aiPlayer.triggerAlarm("Power", src, cameras, source)
-			for(var/obj/machinery/computer/station_alert/a in machines)
-				if(a.z == source.z)
-					if(state == 1)
-						a.cancelAlarm("Power", src, source)
-					else
-						a.triggerAlarm("Power", src, cameras, source) */
-	return
-
 /area/proc/atmosalert(danger_level, var/set_firelocks=1)
 //	if(type==/area) //No atmos alarms in space
 //		return 0 //redudant

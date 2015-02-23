@@ -95,7 +95,7 @@
 
 /atom/proc/get_alarm_name()
 	var/area/A = get_area(src)
-	return A.name
+	return A.master.name
 
 /area/get_alarm_name()
 	return name

@@ -15,8 +15,9 @@
 /datum/alarm_handler/proc/triggerAlarm(var/atom/origin, var/atom/source, var/duration = 0)
 	var/new_alarm
 	//Proper origin and source mandatory
-	if(!origin || !source)
+	if(!(origin && source))
 		return
+	origin = origin.get_alarm_origin()
 
 	new_alarm = 0
 	//see if there is already an alarm of this origin
@@ -37,8 +38,9 @@
 
 /datum/alarm_handler/proc/clearAlarm(var/atom/origin, var/source)
 	//Proper origin and source mandatory
-	if(!origin || !source)
+	if(!(origin && source))
 		return
+	origin = origin.get_alarm_origin()
 
 	var/datum/alarm/existing = alarms_assoc[origin]
 	if(existing)
@@ -52,6 +54,13 @@
 		notify_listeners(alarm, ALARM_CLEARED)
 		return 1
 	return 0
+
+/atom/proc/get_alarm_origin()
+	return src
+
+/turf/get_alarm_origin()
+	var/area/area = get_area(src)
+	return area.master	// Very important to get area.master, as dynamic lightning can and will split areas.
 
 /datum/alarm_handler/proc/register(var/object, var/procName)
 	listeners[object] = procName

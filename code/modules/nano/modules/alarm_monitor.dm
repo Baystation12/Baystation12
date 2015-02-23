@@ -1,6 +1,6 @@
 /obj/nano_module/alarm_monitor
 	name = "Alarm monitor"
-	var/list_cameras = 0						// Whether or not to list camera references. A future goal would be to merge this with the enginering/security camera console.
+	var/list_cameras = 0						// Whether or not to list camera references. A future goal would be to merge this with the enginering/security camera console. Currently really only for AI-use.
 	var/list/datum/alarm_handler/alarm_handlers // The particular list of alarm handlers this alarm monitor should present to the user.
 
 /obj/nano_module/alarm_monitor/ai
@@ -37,9 +37,6 @@
 		all_alarms += alarms
 
 	return all_alarms
-
-/obj/nano_module/alarm_monitor/Topic(href, href_list)
-	if(..()) return 1
 
 /obj/nano_module/alarm_monitor/ai/Topic(ref, href_list)
 	if(..())
