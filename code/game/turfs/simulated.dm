@@ -76,7 +76,7 @@
 				bloodDNA = null
 
 		var/noslip = 0
-		for (var/obj/structure/stool/bed/chair/C in loc)
+		for (var/obj/structure/bed/chair/C in loc)
 			if (C.buckled_mob == M)
 				noslip = 1
 		if((wet == 1 && M.m_intent == "walk") || noslip)

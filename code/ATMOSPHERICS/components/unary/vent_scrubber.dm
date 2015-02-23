@@ -173,7 +173,7 @@
 		use_power = !use_power
 
 	if(signal.data["panic_siphon"]) //must be before if("scrubbing" thing
-		panic = text2num(signal.data["panic_siphon"] != null)
+		panic = text2num(signal.data["panic_siphon"])
 		if(panic)
 			use_power = 1
 			scrubbing = 0
@@ -189,8 +189,12 @@
 
 	if(signal.data["scrubbing"] != null)
 		scrubbing = text2num(signal.data["scrubbing"])
+		if(scrubbing)
+			panic = 0
 	if(signal.data["toggle_scrubbing"])
 		scrubbing = !scrubbing
+		if(scrubbing)
+			panic = 0
 
 	var/list/toggle = list()
 
@@ -273,6 +277,7 @@
 		user << "A small gauge in the corner reads [round(last_flow_rate, 0.1)] L/s; [round(last_power_draw)] W"
 	else
 		user << "You are too far away to read the gauge."
+	..()
 
 /obj/machinery/atmospherics/unary/vent_scrubber/Del()
 	if(initial_loc)

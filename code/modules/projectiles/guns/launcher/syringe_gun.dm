@@ -1,6 +1,6 @@
 /obj/item/weapon/syringe_cartridge
 	name = "syringe gun cartridge"
-	desc = "An impact-triggered compressed gas cartridge that can fitted to a syringe for rapid injection."
+	desc = "An impact-triggered compressed gas cartridge that can be fitted to a syringe for rapid injection."
 	icon = 'icons/obj/ammo.dmi'
 	icon_state = "syringe-cartridge"
 	var/icon_flight = "syringe-cartridge-flight" //so it doesn't look so weird when shot
@@ -25,6 +25,7 @@
 		user.remove_from_mob(syringe)
 		syringe.loc = src
 		sharp = 1
+		name = "syringe dart"
 		update_icon()
 
 /obj/item/weapon/syringe_cartridge/attack_self(mob/user)
@@ -33,6 +34,7 @@
 		user.put_in_hands(syringe)
 		syringe = null
 		sharp = initial(sharp)
+		name = initial(name)
 		update_icon()
 
 /obj/item/weapon/syringe_cartridge/proc/prime()
@@ -61,7 +63,6 @@
 /obj/item/weapon/gun/launcher/syringe
 	name = "syringe gun"
 	desc = "A spring loaded rifle designed to fit syringes, designed to incapacitate unruly patients from a distance."
-	icon = 'icons/obj/gun.dmi'
 	icon_state = "syringegun"
 	item_state = "syringegun"
 	w_class = 3

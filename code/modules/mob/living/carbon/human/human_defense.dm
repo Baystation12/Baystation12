@@ -38,9 +38,9 @@ emp_act
 				return -1 // complete projectile permutation
 
 	//Shrapnel
-	if (P.damage_type == BRUTE)
+	if(P.can_embed())
 		var/armor = getarmor_organ(organ, "bullet")
-		if((P.embed && prob(20 + max(P.damage - armor, -10))))
+		if(prob(20 + max(P.damage - armor, -10)))
 			var/obj/item/weapon/shard/shrapnel/SP = new()
 			SP.name = (P.name != "shrapnel")? "[P.name] shrapnel" : "shrapnel"
 			SP.desc = "[SP.desc] It looks like it was fired from [P.shot_from]."

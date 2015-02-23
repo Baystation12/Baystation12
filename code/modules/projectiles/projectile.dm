@@ -65,8 +65,15 @@
 /obj/item/projectile/proc/on_impact(var/atom/A)
 	return
 
+//Checks if the projectile is eligible for embedding. Not that it necessarily will.
+/obj/item/projectile/proc/can_embed()
+	//embed must be enabled and damage type must be brute
+	if(!embed || damage_type != BRUTE)
+		return 0
+	return 1
+
 //return 1 if the projectile should be allowed to pass through after all, 0 if not.
-/obj/item/projectile/proc/on_penetrate(var/atom/A)
+/obj/item/projectile/proc/check_penetrate(var/atom/A)
 	return 1
 
 /obj/item/projectile/proc/check_fire(atom/target as mob, var/mob/living/user as mob)  //Checks if you can hit them or not.
@@ -156,9 +163,12 @@
 		target_mob.attack_log += "\[[time_stamp()]\] <b>[firer]/[firer.ckey]</b> shot <b>[target_mob]/[target_mob.ckey]</b> with a <b>[src.type]</b>"
 		firer.attack_log += "\[[time_stamp()]\] <b>[firer]/[firer.ckey]</b> shot <b>[target_mob]/[target_mob.ckey]</b> with a <b>[src.type]</b>"
 		msg_admin_attack("[firer] ([firer.ckey]) shot [target_mob] ([target_mob.ckey]) with a [src] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[firer.x];Y=[firer.y];Z=[firer.z]'>JMP</a>)") //BS12 EDIT ALG
-	else
+	else if(firer)
 		target_mob.attack_log += "\[[time_stamp()]\] <b>UNKNOWN SUBJECT (No longer exists)</b> shot <b>[target_mob]/[target_mob.ckey]</b> with a <b>[src]</b>"
 		msg_admin_attack("UNKNOWN shot [target_mob] ([target_mob.ckey]) with a [src] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[firer.x];Y=[firer.y];Z=[firer.z]'>JMP</a>)") //BS12 EDIT ALG
+	else
+		target_mob.attack_log += "\[[time_stamp()]\] <b>UNKNOWN SUBJECT (No longer exists)</b> shot <b>[target_mob]/[target_mob.ckey]</b> with a <b>[src]</b>"
+		msg_admin_attack("UNKNOWN shot [target_mob] ([target_mob.ckey]) with a [src] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[target_mob.x];Y=[target_mob.y];Z=[target_mob.z]'>JMP</a>)") //BS12 EDIT ALG
 
 	//sometimes bullet_act() will want the projectile to continue flying
 	if (target_mob.bullet_act(src, def_zone) == -1)
@@ -174,7 +184,7 @@
 		loc = A.loc
 		return 0 //cannot shoot yourself
 
-	if(bumped)
+	if(bumped || (A in permutated))
 		return 0
 
 	var/passthrough = 0 //if the projectile should continue flying
@@ -196,19 +206,21 @@
 				attack_mob(M, distance)
 
 	//penetrating projectiles can pass through things that otherwise would not let them
-	if(penetrating > 0)
-		if(on_penetrate(A))
+	if(!passthrough && penetrating > 0)
+		if(check_penetrate(A))
 			passthrough = 1
 		penetrating--
 
 	//the bullet passes through a dense object!
 	if(passthrough)
+		//move ourselves onto A so we can continue on our way.
+		if(A)
+			if(istype(A, /turf))
+				loc = A
+			else
+				loc = A.loc
+			permutated.Add(A)
 		bumped = 0 //reset bumped variable!
-		if(istype(A, /turf))
-			loc = A
-		else
-			loc = A.loc
-		permutated.Add(A)
 		return 0
 
 	//stop flying

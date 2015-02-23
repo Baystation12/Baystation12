@@ -202,9 +202,6 @@ its easier to just keep the beam vertical.
 
 	user << "\icon[src] That's [f_name] [suffix]"
 
-	if(desc)
-		user << desc
-
 	return distance == -1 || (get_dist(src, user) <= distance)
 
 // called by mobs when e.g. having the atom as their machine, pulledby, loc (AKA mob being inside the atom) or buckled var set.
