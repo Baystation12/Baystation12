@@ -30,7 +30,7 @@
 	var/newscaster_announcements = null
 	var/ert_disabled = 0
 	var/uplink_welcome = "Illegal Uplink Console:"
-	var/uplink_uses = 10
+	var/uplink_uses = 12
 	var/list/datum/uplink_item/uplink_items = list(
 		"Ammunition" = list(
 			new/datum/uplink_item(/obj/item/ammo_magazine/a357, 2, ".357", "RA"),
@@ -75,6 +75,7 @@
 			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/clerical, 3, "Morphic Clerical Kit", "CK"),
 			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/space, 3, "Space Suit", "SS"),
 			new/datum/uplink_item(/obj/item/clothing/glasses/thermal/syndi, 3, "Thermal Imaging Glasses", "TM"),
+			new/datum/uplink_item(/obj/item/clothing/suit/storage/vest/heavy/merc, 4, "Heavy Armor Vest", "HAV"),
 			new/datum/uplink_item(/obj/item/weapon/aiModule/syndicate, 7, "Hacked AI Upload Module", "AI"),
 			new/datum/uplink_item(/obj/item/device/powersink, 5, "Powersink (DANGER!)", "PS",),
 			new/datum/uplink_item(/obj/item/device/radio/beacon/syndicate, 7, "Singularity Beacon (DANGER!)", "SB"),
@@ -268,16 +269,6 @@
 		   special_role == "Cultist" && prob(30) || \
 		   special_role == "Head Revolutionary" && prob(30))
 			suspects += man
-
-			// If they're a traitor or likewise, give them extra TC in exchange.
-			var/obj/item/device/uplink/hidden/suplink = man.mind.find_syndicate_uplink()
-			if(suplink)
-				var/extra = 4
-				suplink.uses += extra
-				man << "\red We have received notice that enemy intelligence suspects you to be linked with us. We have thus invested significant resources to increase your uplink's capacity."
-			else
-				// Give them a warning!
-				man << "\red They are on to you!"
 
 		// Some poor people who were just in the wrong place at the wrong time..
 		else if(prob(10))
