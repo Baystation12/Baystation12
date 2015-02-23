@@ -174,6 +174,9 @@
 		if( bunny )
 			user.put_in_hands( new bunny.type(user.loc) )
 			user.visible_message( "[user] pulls \the [bunny] out of \the [src]!", "You pull \the [bunny] out of \the [src]!" )
+			bunny = null
+		else
+			user << "Nothing to pull out of \the [src]!"
 
 	examine(mob/user)
 		..(user)

@@ -9,7 +9,7 @@ The process works like this:
 		If it is too low, then there is waste product, and if it is too high, you risk breaking the machine.
 	4.) The supermatter shard is then formed and extracted from the machine and taken to the Neutron Furnace
 
-	FOR BARS
+	NEUTRON FURNACE
 	5.) Place the supermatter shard inside and set the neutron flow. The neutron flow represents the desired focus point.
 		Each of the different materials has a "focus peak" where you produce a maximum output of that material.
 		Setting the neutron flow between two peaks creates a small amount of both materials.
@@ -137,29 +137,29 @@ The process works like this:
 	desc = "A modern day alchemist's best friend."
 	icon_state = "Open"
 
-	var/shard_count = 0
 	var/neutron_flow = 25
-	var/max_neutron_flow = 200
+	var/max_neutron_flow = 300
 	var/total_power = 150
+	var/obj/item/weapon/shard/supermatter/shard = null
 
-	var/list/mat = list( "Phoron", "Uranium", "Gold", "Platinum", "Osmium", "Silver", "Steel", "Diamonds" )
-	var/list/mat_mod = list( 	"Diamonds" = 2.3,
-								"Steel" = 6,
-								"Silver" = 3.2,
-								"Osmium" = 1.2,
-								"Platinum" = 1.3,
-								"Gold" = 3.2,
-								"Uranium" = 3.2,
-								"Phoron" = 1.2) // modifier for output amount
+	var/list/mat = list( "Osmium", "Phoron", "Diamonds", "Platinum", "Gold", "Uranium",  "Silver", "Steel",  )
+	var/list/mat_mod = list(    "Steel" = 3,
+								"Silver" = 2,
+								"Uranium" = 2,
+								"Gold" = 1,
+								"Platinum" = 1,
+								"Diamonds" = 1,
+								"Phoron" = 1,
+								"Osmium" = 1 ) // modifier for output amount
 
-	var/list/mat_peak = list( 	"Diamonds" = 6,
-								"Steel" = 26.12,
-								"Silver" = 47,
-								"Osmium" = 76,
-								"Platinum" = 78,
-								"Gold" = 79,
-								"Uranium" = 92,
-								"Phoron" = 136) // cost per each mod # of bars
+	var/list/mat_peak = list(   "Steel" = 30,
+								"Silver" = 70,
+								"Uranium" = 110,
+								"Gold" = 150,
+								"Platinum" = 190,
+								"Diamonds" = 230,
+								"Phoron" = 270,
+								"Osmium" = 300 ) // cost per each mod # of bars
 
 	var/list/obj/item/stack/sheet/mat_obj = list( 	"Diamonds" = /obj/item/stack/sheet/mineral/diamond,
 													"Steel" = /obj/item/stack/sheet/metal,
@@ -193,11 +193,12 @@ The process works like this:
 			neutron_flow = 0
 
 	proc/produce()
-		if( !eat_shard() )
-			src.visible_message("\icon[src] <b>[src]</b> beeps, \"Not enough supermatter shards to complete request.\"")
+		if( !shard )
+			src.visible_message("\icon[src] <b>[src]</b> beeps, \"Needs a supermatter shard to transmutate.\"")
 			return
 		active = 1
 
+		eat_shard()
 		var/remaining_power = total_power
 		flick( "Active", src )
 		sleep(86)
@@ -208,7 +209,7 @@ The process works like this:
 				amount = round( remaining_power/mat_peak[cur_mat] )
 
 				if( amount > 0 ) // Will only do anything if any amount was actually created
-					remaining_power = remaining_power - amount*mat_peak[cur_mat] // Using power to create materials
+					remaining_power = remaining_power - (amount*mat_peak[cur_mat]) // Using power to create materials
 					var/obj/item/stack/sheet/T = mat_obj[cur_mat]
 					var/obj/item/stack/sheet/I = new T
 					I.amount = amount
@@ -217,17 +218,13 @@ The process works like this:
 		src.visible_message("\icon[src] <b>[src]</b> beeps, \"Supermatter transmutation complete.\"")
 		active = 0
 
-	proc/eat_shard()
-		var/obj/item/weapon/shard/supermatter/S
-		shard_count = 0
-		for( S in contents )
-			shard_count++
+		update_icon()
 
-		if( shard_count <= 0 )
+	proc/eat_shard()
+		if( !shard )
 			return 0
 
-		del(S)
-		shard_count--
+		del(shard)
 
 		return 1
 
@@ -242,13 +239,27 @@ The process works like this:
 		if(isrobot(user))
 			return
 		if(istype(B, /obj/item/weapon/shard/supermatter))
-			user.drop_item()
-			shard_count += 1
-			B.loc = src
-			user << "You put [B] into the machine."
-			return
+			if( !shard )
+				user.drop_item()
+				B.loc = src
+				shard = B
+				user << "You put [B] into the machine."
+				return
+			else
+				user << "There is already a shard in the machine."
+				return
 		else
 			user << "<span class='notice'>This machine only accepts supermatter shards</span>"
+
+		return
+
+	update_icon()
+		..()
+
+		if( shard )
+			icon_state = "OpenCrystal"
+		else
+			icon_state = "Open"
 
 
 /obj/machinery/computer/phoron_desublimer_control
@@ -334,11 +345,14 @@ The process works like this:
 						dat += "<A href='?src=\ref[src];furnace_01=1'>+</A> "
 						dat += "<A href='?src=\ref[src];furnace_1=1'>++</A> "
 						dat += "<A href='?src=\ref[src];furnace_10=1'>+++</A> <BR><BR>"
-						dat += "<b>Supermatter Shard Count:</b> [furnace.shard_count]<BR>"
-						if( furnace.active )
-							dat += "<b>Active</b>"
+						if( furnace.shard )
+							dat += "<b>Supermatter Shard Inserted</b> <BR>"
+							if( furnace.active  )
+								dat += "<b>Activate</b>"
+							else
+								dat += "<A href='?src=\ref[src];furnace_activate=1'>Activate</A><BR>"
 						else
-							dat += "<A href='?src=\ref[src];furnace_activate=1'>Activate</A><BR>"
+							dat += "<b>Supermatter Shard Needed</b> <BR>"
 				else
 					dat += "Not found!<BR>"
 				dat += "<BR><HR>"

@@ -538,13 +538,16 @@
 					message = "<B>[src]</B> screams!"
 					var/scream_sound
 
-					if( gender == "male" )
-						scream_sound = pick(\
-						'sound/voice/mscream1.ogg',
-						'sound/voice/mscream2.ogg',
-						'sound/voice/mscream3.ogg')
-					else if( gender == "female" )
-						scream_sound = 'sound/voice/wscream1.ogg'
+					if( istype( type, /mob/living/silicon ))
+						scream_sound = 'sound/voice/rscream1.ogg'
+					else
+						if( gender == "male" )
+							scream_sound = pick(\
+							'sound/voice/mscream1.ogg',
+							'sound/voice/mscream2.ogg',
+							'sound/voice/mscream3.ogg')
+						else if( gender == "female" )
+							scream_sound = 'sound/voice/wscream1.ogg'
 
 					playsound(loc, scream_sound, 80, 1)
 					m_type = 2

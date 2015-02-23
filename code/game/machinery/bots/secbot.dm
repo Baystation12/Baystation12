@@ -71,7 +71,7 @@
 
 /obj/machinery/bot/secbot/beepsky
 	name = "Officer Beepsky"
-	desc = "It's James Byond! He takes his assistants beaten, not battered."
+	desc = "It's Officer Beepsky! He takes his assistants beaten, not battered."
 	idcheck = 0
 	auto_patrol = 1
 
@@ -242,8 +242,6 @@ Auto Patrol: []"},
 		mode = SECBOT_IDLE
 
 /obj/machinery/bot/secbot/process()
-
-
 	if(!src.on)
 		return
 
@@ -412,8 +410,6 @@ Auto Patrol: []"},
 						patrol_target = 0
 						return
 					mode = SECBOT_PATROL
-
-
 			else					// no patrol target, so need a new one
 				find_patrol_target()
 				speak("Engaging patrol mode.")
@@ -422,6 +418,8 @@ Auto Patrol: []"},
 		if(SECBOT_PATROL)		// patrol mode
 			patrol_step()
 			spawn(5)
+				if( rand( 0, 600 ) == 1 )
+					playsound(src.loc, pick( 'sound/voice/bgod.ogg', 'sound/voice/bsecureday.ogg' ), 50, 0)
 				if(mode == SECBOT_PATROL)
 					patrol_step()
 
