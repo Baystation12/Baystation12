@@ -26,6 +26,7 @@ datum/controller/game_controller
 	var/powernets_cost	= 0
 	var/nano_cost		= 0
 	var/events_cost		= 0
+	var/machine_sort_cost = 0
 	var/ticker_cost		= 0
 	var/total_cost		= 0
 
@@ -196,10 +197,10 @@ datum/controller/game_controller/proc/process()
 
 				//MACHINES
 				timer = world.timeofday
-				process_machines()
+				process_machines_process()
 				machines_cost = (world.timeofday - timer) / 10
 
-				sleep(breather_ticks)
+				sleep(4)
 
 				//OBJECTS
 				timer = world.timeofday
@@ -235,6 +236,11 @@ datum/controller/game_controller/proc/process()
 				process_events()
 				events_cost = (world.timeofday - timer) / 10
 
+				//MACHINE SORTING
+				timer = world.timeofday
+				process_machines_sort()
+				machine_sort_cost = (world.timeofday - timer) / 10
+
 				//TICKER
 				timer = world.timeofday
 				last_thing_processed = ticker.type
@@ -242,7 +248,7 @@ datum/controller/game_controller/proc/process()
 				ticker_cost = (world.timeofday - timer) / 10
 
 				//TIMING
-				total_cost = air_cost + sun_cost + mobs_cost + diseases_cost + machines_cost + objects_cost + networks_cost + powernets_cost + nano_cost + events_cost + ticker_cost
+				total_cost = air_cost + sun_cost + mobs_cost + diseases_cost + machines_cost + objects_cost + networks_cost + powernets_cost + nano_cost + events_cost + machine_sort_cost + ticker_cost
 
 				var/end_time = world.timeofday
 				if(end_time < start_time)	//why not just use world.time instead?
@@ -263,11 +269,11 @@ datum/controller/game_controller/proc/process_diseases()
 	for(var/datum/disease/Disease in active_diseases)
 		last_thing_processed = Disease.type
 		Disease.process()
-
+/*															going to try spreading these out - machines take their toll on the MC
 datum/controller/game_controller/proc/process_machines()
 	process_machines_sort()
 	process_machines_process()
-
+*/
 /var/global/machinery_sort_required = 0
 datum/controller/game_controller/proc/process_machines_sort()
 	if(machinery_sort_required)
@@ -282,7 +288,7 @@ datum/controller/game_controller/proc/process_machines_process()
 			if(Machine.use_power)
 				Machine.auto_use_power()
 			continue
-		machines -= Machine
+		machines.Cut(i,i+1)
 
 datum/controller/game_controller/proc/process_objects()
 	for(var/i = 1, i <= processing_objects.len, i++)
