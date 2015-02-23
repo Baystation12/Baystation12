@@ -225,4 +225,18 @@
 					prob(2);/obj/item/clothing/suit/storage/vest/heavy/hos,\
 					prob(2);/obj/item/clothing/suit/storage/vest/heavy/pcrc)
 
+/obj/random/plushie
+	name = "random plushie"
+	desc = "This is a random plushie."
+	icon = 'icons/obj/toy.dmi'
+	icon_state = "nymphplushie"
+	item_to_spawn()
+		return pick(/obj/structure/plushie/ian,\
+					/obj/structure/plushie/drone,\
+					/obj/structure/plushie/carp,\
+					/obj/structure/plushie/beepsky,\
+					/obj/item/toy/plushie/nymph,\
+					/obj/item/toy/plushie/mouse,\
+					/obj/item/toy/plushie/kitten,\
+					/obj/item/toy/plushie/lizard)
 

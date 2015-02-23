@@ -86,12 +86,12 @@ var/global/list/datum/stack_recipe/metal_recipes = list ( \
 	origin_tech = "materials=1"
 
 /obj/item/stack/sheet/metal/cyborg
-	name = "metal"
-	desc = "Sheets made out off metal. It has been dubbed Metal Sheets."
-	singular_name = "metal sheet"
-	icon_state = "sheet-metal"
-	throwforce = 14.0
-	flags = CONDUCT
+	name = "metal synthesizer"
+	desc = "A device that makes metal sheets."
+	gender = NEUTER
+	matter = null
+	uses_charge = 1
+	charge_costs = list(1000)
 	stacktype = /obj/item/stack/sheet/metal
 
 /obj/item/stack/sheet/metal/New(var/loc, var/amount=null)
@@ -121,9 +121,19 @@ var/global/list/datum/stack_recipe/plasteel_recipes = list ( \
 	flags = CONDUCT
 	origin_tech = "materials=2"
 
+/obj/item/stack/sheet/plasteel/cyborg
+	name = "plasteel synthesizer"
+	desc = "A device that makes plasteel sheets."
+	gender = NEUTER
+	singular_name = "plasteel sheet"
+	matter = null
+	uses_charge = 1
+	charge_costs = list(1000)
+	stacktype = /obj/item/stack/sheet/plasteel
+
 /obj/item/stack/sheet/plasteel/New(var/loc, var/amount=null)
-		recipes = plasteel_recipes
-		return ..()
+	recipes = plasteel_recipes
+	return ..()
 
 /*
  * Wood
@@ -149,10 +159,13 @@ var/global/list/datum/stack_recipe/wood_recipes = list ( \
 	origin_tech = "materials=1;biotech=1"
 
 /obj/item/stack/sheet/wood/cyborg
-	name = "wooden plank"
-	desc = "One can only guess that this is a bunch of wood."
+	name = "wood synthesizer"
+	desc = "A device that makes wooden planks."
+	gender = NEUTER
 	singular_name = "wood plank"
 	icon_state = "sheet-wood"
+	uses_charge = 1
+	charge_costs = list(1000)
 	stacktype = /obj/item/stack/sheet/wood
 
 /obj/item/stack/sheet/wood/New(var/loc, var/amount=null)

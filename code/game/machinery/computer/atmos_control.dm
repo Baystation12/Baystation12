@@ -9,11 +9,11 @@
 	density = 1
 	anchored = 1.0
 	circuit = "/obj/item/weapon/circuitboard/atmoscontrol"
-	var/obj/machinery/alarm/current
 	var/overridden = 0 //not set yet, can't think of a good way to do it
 	req_access = list(access_ce)
 	var/list/monitored_alarm_ids = null
 	var/list/monitored_alarms = null
+	var/ui_ref
 
 /obj/machinery/computer/atmoscontrol/laptop
 	name = "Atmospherics Laptop"
@@ -32,36 +32,29 @@
 		monitored_alarms = dd_sortedObjectList(monitored_alarms)
 
 /obj/machinery/computer/atmoscontrol/attack_ai(var/mob/user as mob)
-	return interact(user)
+	return ui_interact(user)
 
 /obj/machinery/computer/atmoscontrol/attack_hand(mob/user)
 	if(..())
 		return
-	return interact(user)
+	return ui_interact(user)
 
-/obj/machinery/computer/atmoscontrol/interact(mob/user)
-	user.set_machine(src)
-	if(allowed(user))
-		overridden = 1
-	else if(!emagged)
-		overridden = 0
-	var/dat = "<a href='?src=\ref[src]&reset=1'>Main Menu</a><hr>"
-	if(monitored_alarms && monitored_alarms.len == 1)
-		current = monitored_alarms[1]
-	if(current)
-		dat += specific()
-	else
-		for(var/obj/machinery/alarm/alarm in monitored_alarms ? monitored_alarms : machines)
-			dat += "<a href='?src=\ref[src]&alarm=\ref[alarm]'>"
-			switch(max(alarm.danger_level, alarm.alarm_area.atmosalm))
-				if (0)
-					dat += "<font color=green>"
-				if (1)
-					dat += "<font color=blue>"
-				if (2)
-					dat += "<font color=red>"
-			dat += "[sanitize(alarm.name)]</font></a><br/>"
-	user << browse(dat, "window=atmoscontrol")
+/obj/machinery/computer/atmoscontrol/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+	var/data[0]
+	var/alarms[0]
+
+	// TODO: Move these to a cache, similar to cameras
+	for(var/obj/machinery/alarm/alarm in (monitored_alarms ? monitored_alarms : machines))
+		alarms[++alarms.len] = list("name" = sanitize(alarm.name), "ref"= "\ref[alarm]", "danger" = max(alarm.danger_level, alarm.alarm_area.atmosalm))
+	data["alarms"] = alarms
+
+	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	if(!ui)
+		ui = new(user, src, ui_key, "atmos_control.tmpl", src.name, 625, 625)
+		ui.set_initial_data(data)
+		ui.open()
+		ui.set_auto_update(1)
+	ui_ref = ui
 
 /obj/machinery/computer/atmoscontrol/attackby(var/obj/item/I as obj, var/mob/user as mob)
 	if(istype(I, /obj/item/weapon/card/emag) && !emagged)
@@ -73,23 +66,33 @@
 		return
 	return ..()
 
-/obj/machinery/computer/atmoscontrol/proc/specific()
-	if(!current)
-		return ""
-	var/dat = "<h3>[current.name]</h3><hr>"
-	dat += current.return_status()
-	if(current.remote_control || overridden)
-		dat += "<hr>[current.return_controls(src)]"
-	return dat
-
 //a bunch of this is copied from atmos alarms
 /obj/machinery/computer/atmoscontrol/Topic(href, href_list)
 	if(..())
-		return
-	if(href_list["reset"])
-		current = null
+		return 1
+
 	if(href_list["alarm"])
-		current = locate(href_list["alarm"])
-	else if(current)
-		current.Topic(href, href_list, 1, 1)
-	interact(usr)
+		if(ui_ref)
+			var/obj/machinery/alarm/alarm = locate(href_list["alarm"]) in (monitored_alarms ? monitored_alarms : machines)
+			if(alarm)
+				var/datum/topic_state/TS = generate_state(alarm)
+				alarm.ui_interact(usr, master_ui = ui_ref, custom_state = TS)
+		return 1
+
+/obj/machinery/computer/atmoscontrol/proc/generate_state(var/alarm)
+	var/datum/topic_state/air_alarm/state = new()
+	state.atmos_control = src
+	state.air_alarm = alarm
+	return state
+
+/datum/topic_state/air_alarm
+	flags = NANO_IGNORE_DISTANCE
+	var/obj/machinery/computer/atmoscontrol/atmos_control = null
+	var/obj/machinery/alarm/air_alarm	= null
+
+/datum/topic_state/air_alarm/href_list(var/mob/user)
+	var/list/extra_href = list()
+	extra_href["remote_connection"] = 1
+	extra_href["remote_access"] = user && (atmos_control.allowed(user) || atmos_control.emagged || air_alarm.rcon_setting == RCON_YES || (air_alarm.alarm_area.atmosalm && air_alarm.rcon_setting == RCON_AUTO))
+
+	return extra_href
