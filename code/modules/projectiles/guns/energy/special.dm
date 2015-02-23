@@ -2,10 +2,10 @@
 	name = "ion rifle"
 	desc = "A man portable anti-armor weapon designed to disable mechanical threats"
 	icon_state = "ionrifle"
-	item_state = "laser"
+	item_state = "ionrifle"
 	fire_sound = 'sound/weapons/Laser.ogg'
 	origin_tech = "combat=2;magnets=4"
-	w_class = 4.0
+	w_class = 4
 	force = 10
 	flags =  CONDUCT
 	slot_flags = SLOT_BACK
@@ -16,6 +16,13 @@
 	if(severity > 2)
 		return //so it doesn't EMP itself, I guess
 	..()
+
+/obj/item/weapon/gun/energy/ionrifle/update_icon()
+	..()
+	if(power_supply.charge < charge_cost)
+		item_state = "ionrifle-empty"
+	else
+		item_state = initial(item_state)
 
 /obj/item/weapon/gun/energy/decloner
 	name = "biological demolecularisor"

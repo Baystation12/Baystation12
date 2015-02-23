@@ -76,7 +76,13 @@
 /obj/item/weapon/gun/energy/update_icon()
 	if(charge_meter)
 		var/ratio = power_supply.charge / power_supply.maxcharge
-		ratio = round(ratio, 0.25) * 100
+		
+		//make sure that rounding down will not give us the empty state even if we have charge for a shot left.
+		if(power_supply.charge < charge_cost)
+			ratio = 0
+		else
+			ratio = max(round(ratio, 0.25) * 100, 25)
+		
 		if(modifystate)
 			icon_state = "[modifystate][ratio]"
 		else
