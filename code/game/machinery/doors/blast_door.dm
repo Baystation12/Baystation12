@@ -23,6 +23,10 @@
 	var/id = 1.0
 	dir = 1
 	explosion_resistance = 25
+	
+	//Most blast doors are infrequently toggled and sometimes used with regular doors anyways, 
+	//turning this off prevents awkward zone geometry in places like medbay lobby, for example.
+	block_air_zones = 0
 
 // Proc: Bumped()
 // Parameters: 1 (AM - Atom that tried to walk through this object)
@@ -149,6 +153,13 @@
 	health = maxhealth
 	if(stat & BROKEN)
 		stat &= ~BROKEN
+
+
+/obj/machinery/door/blast/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
+	if(air_group) return 1
+	return ..()
+
+
 
 // SUBTYPE: Regular
 // Your classical blast door, found almost everywhere.

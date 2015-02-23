@@ -198,11 +198,7 @@
 // apparently called whenever an item is removed from a slot, container, or anything else.
 /obj/item/proc/dropped(mob/user as mob)
 	..()
-	if(zoom) //binoculars, scope, etc
-		user.client.view = world.view
-		user.client.pixel_x = 0
-		user.client.pixel_y = 0
-		zoom = 0
+	if(zoom) zoom() //binoculars, scope, etc
 
 // called just as an item is picked up (loc is not yet changed)
 /obj/item/proc/pickup(mob/user)
@@ -660,9 +656,8 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 		cannotzoom = 1
 
 	if(!zoom && !cannotzoom)
-		if(!usr.hud_used.hud_shown)
-			usr.button_pressed_F12(1)	// If the user has already limited their HUD this avoids them having a HUD when they zoom in
-		usr.button_pressed_F12(1)
+		if(usr.hud_used.hud_shown)
+			usr.toggle_zoom_hud()	// If the user has already limited their HUD this avoids them having a HUD when they zoom in
 		usr.client.view = viewsize
 		zoom = 1
 
@@ -688,7 +683,7 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	else
 		usr.client.view = world.view
 		if(!usr.hud_used.hud_shown)
-			usr.button_pressed_F12(1)
+			usr.toggle_zoom_hud()
 		zoom = 0
 
 		usr.client.pixel_x = 0

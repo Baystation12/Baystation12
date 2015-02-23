@@ -26,5 +26,9 @@
 		/obj/item/rig_module/fabricator/energy_net
 		)
 
-/obj/item/weapon/rig/merc/no_modules
-	initial_modules = list()
+//Has most of the modules removed
+/obj/item/weapon/rig/merc/empty
+	initial_modules = list(
+		/obj/item/rig_module/ai_container,
+		/obj/item/rig_module/electrowarfare_suite, //might as well
+		)

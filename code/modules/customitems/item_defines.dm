@@ -1412,12 +1412,6 @@
 
 ////////////////////////////// Foxler - Erstatz Vryroxes /////////////////////////////////////////////////
 
-/obj/item/weapon/holder/cat/fluff/bones
-	name = "Bones"
-	desc = "It's Bones! Meow."
-	gender = MALE
-	icon_state = "cat3"
-
 //Use this subtype for spawning in the custom item.
 /obj/item/weapon/holder/cat/fluff/bones/custom_item
 
@@ -1425,6 +1419,12 @@
 	if (!contents.len)
 		new/mob/living/simple_animal/cat/fluff/bones (src)
 	..()
+
+/obj/item/weapon/holder/cat/fluff/bones
+	name = "Bones"
+	desc = "It's Bones! Meow."
+	gender = MALE
+	icon_state = "cat3"
 
 /mob/living/simple_animal/cat/fluff/bones
 	name = "Bones"
@@ -1434,61 +1434,12 @@
 	icon_living = "cat3"
 	icon_dead = "cat3_dead"
 	holder_type = /obj/item/weapon/holder/cat/fluff/bones
-	bff_name = "Erstatz Vryroxes"
+	var/friend_name = "Erstatz Vryroxes"
 
-/mob/living/simple_animal/cat/fluff
-	var/bff_name
-	var/mob/living/carbon/human/bff
-
-/mob/living/simple_animal/cat/fluff/handle_movement_target()
-	if (!bff)
+/mob/living/simple_animal/cat/fluff/bones/handle_movement_target()
+	if (!friend)
 		for (var/mob/living/carbon/human/M in player_list)
-			if (M.real_name == bff_name)
-				bff = M
+			if (M.real_name == friend_name)
+				friend = M
 				break
-
-	if (bff)
-		var/follow_dist = 5
-		if (bff.stat >= DEAD || bff.health <= config.health_threshold_softcrit) //danger
-			follow_dist = 1
-		else if (bff.stat || bff.health <= 50) //danger or just sleeping
-			follow_dist = 2
-		var/near_dist = max(follow_dist - 3, 1)
-		var/current_dist = get_dist(src, bff)
-
-		if (movement_target != bff)
-			if (current_dist > follow_dist && !istype(movement_target, /mob/living/simple_animal/mouse) && (bff in oview(src)))
-				//stop existing movement
-				walk_to(src,0)
-				turns_since_scan = 0
-
-				//walk to bff
-				stop_automated_movement = 1
-				movement_target = bff
-				walk_to(src, movement_target, near_dist, 4)
-
-		//already following and close enough, stop
-		else if (current_dist <= near_dist)
-			walk_to(src,0)
-			movement_target = null
-			stop_automated_movement = 0
-
-	if (!(bff && movement_target == bff))
-		..()
-
-/mob/living/simple_animal/cat/fluff/Life()
 	..()
-	if (stat || !bff)
-		return
-	if (get_dist(src, bff) <= 1)
-		if (bff.stat >= DEAD || bff.health <= config.health_threshold_softcrit)
-			if (prob((bff.stat < DEAD)? 50 : 15))
-				audible_emote(pick("meows in distress.", "meows anxiously."))
-		else
-			if (prob(5))
-				visible_emote(pick("nuzzles [bff].",
-								   "brushes against [bff].",
-								   "rubs against [bff].",
-								   "purrs."))
-	else if (bff.health <= 50)
-		if (prob(10)) audible_emote("meows anxiously.")

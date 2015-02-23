@@ -250,6 +250,9 @@
 		target = safepick(view(3,target))
 		if(!target)
 			return
+	if(istype(target, /obj/machinery))
+		if (src.interface_action(target))
+			return
 	if(!target.Adjacent(src))
 		if(selected && selected.is_ranged())
 			selected.action(target)
@@ -259,6 +262,29 @@
 		src.melee_action(target)
 	return
 
+/obj/mecha/proc/interface_action(obj/machinery/target)
+	if(istype(target, /obj/machinery/access_button))
+		src.occupant_message("<span class='notice'>Interfacing with [target].</span>")
+		src.log_message("Interfaced with [target].")
+		target.attack_hand(src.occupant)
+		return 1
+	if(istype(target, /obj/machinery/embedded_controller))
+		target.ui_interact(src.occupant)
+		return 1
+	return 0
+
+/obj/mecha/contents_nano_distance(var/src_object, var/mob/living/user)
+	. = user.shared_living_nano_distance(src_object) //allow them to interact with anything they can interact with normally.
+	if(. != STATUS_INTERACTIVE)
+		//Allow interaction with the mecha or anything that is part of the mecha
+		if(src_object == src || (src_object in src))
+			return STATUS_INTERACTIVE
+		if(src.Adjacent(src_object))
+			src.occupant_message("<span class='notice'>Interfacing with [src_object]...</span>")
+			src.log_message("Interfaced with [src_object].")
+			return STATUS_INTERACTIVE
+		if(src_object in view(2, src))
+			return STATUS_UPDATE //if they're close enough, allow the occupant to see the screen through the viewport or whatever. 
 
 /obj/mecha/proc/melee_action(atom/target)
 	return

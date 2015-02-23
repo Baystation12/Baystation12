@@ -3,13 +3,6 @@
 	real_name = "drone"
 	icon = 'icons/mob/robots.dmi'
 	icon_state = "repairbot"
-	descriptions = new/datum/descriptions("Drones are player-controlled synthetics which are lawed to maintain the station and not \
-				interact with anyone else, except for other drones.  They hold a wide array of tools to build, repair, maintain, and clean. \
-				They fuction similarly to other synthetics, in that they require recharging regularly, have laws, and are resilient to many hazards, \
-				such as fire, radiation, vacuum, and more.  Ghosts can join the round as a maintenance drone by using the appropriate verb in the 'ghost' tab. \
-				An inactive drone can be rebooted by swiping an ID card on it with engineering or robotics access.",\
-				,"An <u>Electromagnetic Sequencer</u> can be used to subvert the drone to your cause.")
-	//desc_fluff is already provided with flavor_text.
 	maxHealth = 35
 	health = 35
 	universal_speak = 0
@@ -22,14 +15,6 @@
 	req_access = list(access_engine, access_robotics)
 	integrated_light_power = 2
 	local_transmit = 1
-
-	// We need to keep track of a few module items so we don't need to do list operations
-	// every time we need them. These get set in New() after the module is chosen.
-	var/obj/item/stack/sheet/metal/cyborg/stack_metal = null
-	var/obj/item/stack/sheet/wood/cyborg/stack_wood = null
-	var/obj/item/stack/sheet/glass/cyborg/stack_glass = null
-	var/obj/item/stack/sheet/mineral/plastic/cyborg/stack_plastic = null
-	var/obj/item/weapon/matter_decompiler/decompiler = null
 
 	//Used for self-mailing.
 	var/mail_destination = ""
@@ -62,15 +47,6 @@
 
 	verbs -= /mob/living/silicon/robot/verb/Namepick
 	module = new /obj/item/weapon/robot_module/drone(src)
-
-	//Grab stacks.
-	stack_metal = locate(/obj/item/stack/sheet/metal/cyborg) in src.module
-	stack_wood = locate(/obj/item/stack/sheet/wood/cyborg) in src.module
-	stack_glass = locate(/obj/item/stack/sheet/glass/cyborg) in src.module
-	stack_plastic = locate(/obj/item/stack/sheet/mineral/plastic/cyborg) in src.module
-
-	//Grab decompiler.
-	decompiler = locate(/obj/item/weapon/matter_decompiler) in src.module
 
 	//Some tidying-up.
 	flavor_text = "It's a tiny little repair drone. The casing is stamped with an NT logo and the subscript: 'NanoTrasen Recursive Repair Systems: Fixing Tomorrow's Problem, Today!'"
