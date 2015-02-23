@@ -117,11 +117,6 @@
 
 	first_run()
 
-/obj/machinery/alarm/Del()
-	//If there's an active alarm, clear it after minute so that alarms don't keep going forver
-	delayed_reset()
-	..()
-
 //needed to cancel the alarm after it is deleted
 /obj/machinery/alarm/proc/delayed_reset()
 	var/area/A = alarm_area
@@ -949,7 +944,6 @@ FIRE ALARM
 	var/buildstage = 2 // 2 = complete, 1 = no wires,  0 = circuit gone
 
 /obj/machinery/firealarm/update_icon()
-
 	if(wiresexposed)
 		switch(buildstage)
 			if(2)
@@ -983,7 +977,8 @@ FIRE ALARM
 	return src.alarm()
 
 /obj/machinery/firealarm/emp_act(severity)
-	if(prob(50/severity)) alarm()
+	if(prob(50/severity))
+		alarm(rand(30/severity, 60/severity))
 	..()
 
 /obj/machinery/firealarm/attackby(obj/item/W as obj, mob/user as mob)
@@ -1082,6 +1077,7 @@ FIRE ALARM
 	var/d2
 	if (istype(user, /mob/living/carbon/human) || istype(user, /mob/living/silicon))
 		A = A.loc
+		A = A.master
 
 		if (A.fire)
 			d1 = text("<A href='?src=\ref[];reset=1'>Reset - Lockdown</A>", src)
@@ -1147,25 +1143,25 @@ FIRE ALARM
 /obj/machinery/firealarm/proc/reset()
 	if (!( src.working ))
 		return
-	var/area/A = src.loc
-	A = A.loc
-	if (!( istype(A, /area) ))
-		return
-	A.firereset()
+	var/area/area = get_area(src)
+	for(var/area/A in area.related)
+		for(var/obj/machinery/firealarm/FA in A)
+			fire_alarm.clearAlarm(loc, FA)
 	update_icon()
 	return
 
-/obj/machinery/firealarm/proc/alarm()
-	if (!( src.working ))
+/obj/machinery/firealarm/proc/alarm(var/duration = 0)
+	if (!( src.working))
 		return
-	var/area/A = src.loc
-	A = A.loc
-	if (!( istype(A, /area) ))
-		return
-	A.firealert()
+	var/area/area = get_area(src)
+	for(var/area/A in area.related)
+		for(var/obj/machinery/firealarm/FA in A)
+			fire_alarm.triggerAlarm(loc, FA, duration)
 	update_icon()
 	//playsound(src.loc, 'sound/ambience/signal.ogg', 75, 0)
 	return
+
+
 
 /obj/machinery/firealarm/New(loc, dir, building)
 	..()
@@ -1181,20 +1177,6 @@ FIRE ALARM
 		wiresexposed = 1
 		pixel_x = (dir & 3)? 0 : (dir == 4 ? -24 : 24)
 		pixel_y = (dir & 3)? (dir ==1 ? -24 : 24) : 0
-
-/obj/machinery/firealarm/Del()
-	//so fire alarms don't keep going forever
-	delayed_reset()
-	..()
-
-//needed to cancel the alarm after it is deleted
-/obj/machinery/firealarm/proc/delayed_reset()
-	var/area/A = get_area(src)
-	if (!A) return
-
-	src = null
-	spawn(600)
-		A.firereset()
 
 /obj/machinery/firealarm/initialize()
 	if(z in config.contact_levels)

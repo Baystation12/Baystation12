@@ -12,7 +12,7 @@
 		A.process()
 		check_alarm_cleared(A)
 
-/datum/alarm_handler/proc/triggerAlarm(var/atom/origin, var/atom/source, var/duration = 0)
+/datum/alarm_handler/proc/triggerAlarm(var/atom/origin, var/atom/source, var/duration = 0, var/severity = 1)
 	var/new_alarm
 	//Proper origin and source mandatory
 	if(!(origin && source))
@@ -23,16 +23,16 @@
 	//see if there is already an alarm of this origin
 	var/datum/alarm/existing = alarms_assoc[origin]
 	if(existing)
-		existing.set_duration(source, duration)
+		existing.set_source_data(source, duration, severity)
 	else
-		existing = new/datum/alarm(origin, source, duration)
+		existing = new/datum/alarm(origin, source, duration, severity)
 		new_alarm = 1
 
 	alarms |= existing
 	alarms_assoc[origin] = existing
 	if(new_alarm)
 		alarms = dd_sortedObjectList(alarms)
-		notify_listeners(existing, ALARM_RAISED)
+		on_alarm_change(existing, ALARM_RAISED)
 
 	return new_alarm
 
@@ -51,9 +51,29 @@
 	if ((alarm.end_time && world.time > alarm.end_time) || !alarm.sources.len)
 		alarms -= alarm
 		alarms_assoc -= alarm.origin
-		notify_listeners(alarm, ALARM_CLEARED)
+		on_alarm_change(alarm, ALARM_CLEARED)
 		return 1
 	return 0
+
+/datum/alarm_handler/proc/on_alarm_change(var/datum/alarm/alarm, var/was_raised)
+	for(var/obj/machinery/camera/C in alarm.cameras())
+		if(was_raised)
+			C.network.Add(category)
+			invalidateCameraCache()
+		else
+			C.network.Remove(category)
+	notify_listeners(alarm, was_raised)
+
+/datum/alarm_handler/proc/get_alarm_severity_for_origin(var/atom/origin)
+	if(!origin)
+		return
+
+	origin = origin.get_alarm_origin()
+	var/datum/alarm/existing = alarms_assoc[origin]
+	if(!existing)
+		return
+
+	return existing.max_severity()
 
 /atom/proc/get_alarm_origin()
 	return src

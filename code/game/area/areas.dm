@@ -87,9 +87,9 @@
 	if(!src.master.air_doors_activated)
 		src.master.air_doors_activated = 1
 		for(var/obj/machinery/door/firedoor/E in src.master.all_doors)
-			if(!E:blocked)
+			if(!E.blocked)
 				if(E.operating)
-					E:nextstate = CLOSED
+					E.nextstate = CLOSED
 				else if(!E.density)
 					spawn(0)
 						E.close()
@@ -98,21 +98,21 @@
 	if(src.master.air_doors_activated)
 		src.master.air_doors_activated = 0
 		for(var/obj/machinery/door/firedoor/E in src.master.all_doors)
-			if(!E:blocked)
+			if(!E.blocked)
 				if(E.operating)
-					E:nextstate = OPEN
+					E.nextstate = OPEN
 				else if(E.density)
 					spawn(0)
 						E.open()
 
 
-/area/proc/firealert()
-	if(name == "Space") //no fire alarms in space
-		return
-	if( !fire )
-		fire = 1
-		master.fire = 1		//used for firedoor checks
-		updateicon()
+/area/proc/fire_alert()
+	if(!fire)
+		master.fire = 1	//used for firedoor checks
+		master.updateicon()
+		for(var/area/A in related)
+			A.fire = 1
+			A.updateicon()
 		mouse_opacity = 0
 		for(var/obj/machinery/door/firedoor/D in all_doors)
 			if(!D.blocked)
@@ -122,12 +122,14 @@
 					spawn()
 						D.close()
 
-/area/proc/firereset()
+/area/proc/fire_reset()
 	if (fire)
-		fire = 0
-		master.fire = 0		//used for firedoor checks
+		master.fire = 0	//used for firedoor checks
+		master.updateicon()
+		for(var/area/A in related)
+			A.fire = 0
+			A.updateicon()
 		mouse_opacity = 0
-		updateicon()
 		for(var/obj/machinery/door/firedoor/D in all_doors)
 			if(!D.blocked)
 				if(D.operating)
@@ -135,13 +137,6 @@
 				else if(D.density)
 					spawn(0)
 					D.open()
-		/*for(var/area/RA in related)
-			for (var/obj/machinery/camera/C in RA)
-				C.network.Remove("Fire Alarms")
-		for (var/mob/living/silicon/ai/aiPlayer in player_list)
-			aiPlayer.cancelAlarm("Fire", src, src)
-		for (var/obj/machinery/computer/station_alert/a in machines)
-			a.cancelAlarm("Fire", src, src)*/
 
 /area/proc/readyalert()
 	if(!eject)

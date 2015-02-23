@@ -1,2 +1,2 @@
 /datum/alarm_handler/camera
-	category = "Camera"
+	category = "Camera Alarms"

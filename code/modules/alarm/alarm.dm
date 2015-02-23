@@ -4,6 +4,7 @@
 	var/source		= null	// The source trigger
 	var/source_name = ""	// The name of the source should it be lost (for example a destroyed camera)
 	var/duration	= 0		// How long this source will be alarming, 0 for indefinetely.
+	var/severity 	= 1		// How severe the alarm from this source is.
 	var/start_time	= 0		// When this source began alarming.
 	var/end_time	= 0		// Use to set when this trigger should clear, in case the source is lost.
 
@@ -22,11 +23,11 @@
 	var/area/last_camera_area		//The last area in which cameras where fetched, used to see if the camera list should be updated.
 	var/end_time					//Used to set when this alarm should clear, in case the origin is lost.
 
-/datum/alarm/New(var/atom/origin, var/atom/source, var/duration)
+/datum/alarm/New(var/atom/origin, var/atom/source, var/duration, var/severity)
 	src.origin = origin
 
 	cameras()	// Sets up both cameras and last alarm area.
-	set_duration(source, duration)
+	set_source_data(source, duration, severity)
 
 /datum/alarm/proc/process()
 	// Has origin gone missing?
@@ -41,7 +42,7 @@
 			AS.duration = 0
 			AS.end_time = world.time + ALARM_RESET_DELAY
 
-/datum/alarm/proc/set_duration(var/atom/source, var/duration)
+/datum/alarm/proc/set_source_data(var/atom/source, var/duration, var/severity)
 	var/datum/alarm_source/AS = sources_assoc[source]
 	if(!AS)
 		AS = new/datum/alarm_source(source)
@@ -51,6 +52,7 @@
 	if(AS.duration)
 		duration = SecondsToTicks(duration)
 		AS.duration = duration
+	AS.severity = severity
 
 /datum/alarm/proc/clear(var/source)
 	var/datum/alarm_source/AS = sources_assoc[source]
@@ -83,22 +85,29 @@
 	last_camera_area = last_area
 	return cameras
 
+/datum/alarm/proc/max_severity()
+	var/max_severity = 0
+	for(var/datum/alarm_source/AS in sources)
+		max_severity = max(AS.severity, max_severity)
+
+	return max_severity
 
 /******************
 * Assisting procs *
 ******************/
 /atom/proc/get_alarm_area()
-	return get_area(src)
+	var/area/A = get_area(src)
+	return A.master
 
 /area/get_alarm_area()
-	return src
+	return src.master
 
 /atom/proc/get_alarm_name()
 	var/area/A = get_area(src)
 	return A.master.name
 
 /area/get_alarm_name()
-	return name
+	return master.name
 
 /mob/get_alarm_name()
 	return name
