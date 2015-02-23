@@ -34,6 +34,7 @@ obj/item/weapon/gun/energy/laser/retro
 	force = 5
 	slot_flags = SLOT_BELT
 	origin_tech = null
+	charge_cost = 200 //to compensate a bit for self-recharging
 	self_recharge = 1
 
 

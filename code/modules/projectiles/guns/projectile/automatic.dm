@@ -49,7 +49,7 @@
 
 /obj/item/weapon/gun/projectile/automatic/sts35
 	name = "\improper STS-35 automatic rifle"
-	desc = "A durable, rugged looking automatic weapon of a make popular on the frontier. Uses 7.62mm rounds. It is unmarked."
+	desc = "A durable, rugged looking automatic weapon of a make popular on the frontier worlds. Uses 7.62mm rounds. It is unmarked."
 	icon_state = "arifle"
 	item_state = "shotgun"
 	w_class = 4
@@ -99,6 +99,9 @@
 	slot_flags = SLOT_BACK
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/a556
+	auto_eject = 1
+	auto_eject_sound = 'sound/weapons/smg_empty_alarm.ogg'
+	
 	var/use_launcher = 0
 	var/obj/item/weapon/gun/launcher/grenade/underslung/launcher
 

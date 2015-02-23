@@ -43,7 +43,7 @@
 	name = "combat shotgun"
 	icon_state = "cshotgun"
 	origin_tech = "combat=5;materials=2"
-	max_shells = 8
+	max_shells = 7 //match the ammo box capacity, also it can hold a round in the chamber anyways, for a total of 8.
 	ammo_type = /obj/item/ammo_casing/shotgun
 
 
