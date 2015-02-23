@@ -12,11 +12,20 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 	var/path = null
 	var/reference = ""
 
-datum/uplink_item/New(var/itemPath, var/itemCost as num, var/itemName as text, var/itemReference as text)
+/datum/uplink_item/New(var/itemPath, var/itemCost as num, var/itemName as text, var/itemReference as text)
 	cost = itemCost
 	path = itemPath
 	name = itemName
 	reference = itemReference
+
+/datum/uplink_item/proc/generate_item(var/newloc)
+	var/list/L = list()
+	if(ispath(path))
+		L += new path(newloc)
+	else if(islist(path))
+		for(var/item_path in path)
+			L += new item_path(newloc)
+	return L
 
 datum/nano_item_lists
 	var/list/items_nano
@@ -126,10 +135,11 @@ datum/nano_item_lists
 		used_TC += UI.cost
 		feedback_add_details("traitor_uplink_items_bought", reference)
 
-		var/obj/I = new UI.path(get_turf(usr))
+		var/list/L = UI.generate_item(get_turf(usr))
 		if(ishuman(usr))
 			var/mob/living/carbon/human/A = usr
-			A.put_in_any_hand_if_possible(I)
+			for(var/obj/I in L)
+				A.put_in_any_hand_if_possible(I)
 
 		purchase_log[UI] = purchase_log[UI] + 1
 
