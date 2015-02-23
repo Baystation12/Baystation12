@@ -2,7 +2,7 @@
 #define FREEZER_PERF_MULT 2.5
 
 /obj/machinery/atmospherics/unary/super_freezer
-	name = "Crogenics class cooling system"
+	name = "Cryogenics class cooling system"
 	desc = "Cools gas when connected to pipe network"
 	icon = 'icons/obj/Cryogenic2.dmi'
 	icon_state = "freezer_0"
