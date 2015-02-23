@@ -219,8 +219,8 @@
 		new /obj/item/ammo_casing/shotgun/stunshell(src)
 		new /obj/item/ammo_casing/shotgun/stunshell(src)
 
-/obj/item/weapon/storage/box/heavysniperammo
-	name = "box of 14.5mm AP shells"
+/obj/item/weapon/storage/box/sniperammo
+	name = "box of 14.5mm shells"
 	desc = "It has a picture of a gun and several warning symbols on the front.<br>WARNING: Live ammunition. Misuse may result in serious injury or death."
 
 	New()

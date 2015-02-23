@@ -141,13 +141,13 @@
 	penetrating = 1
 
 /obj/item/projectile/bullet/rifle/a145
-	damage = 80
+	damage = 60
 	stun = 3
 	weaken = 3
 	penetrating = 5
 
 /obj/item/projectile/bullet/rifle/a556
-	damage = 50
+	damage = 40
 	penetrating = 1
 
 /* Miscellaneous */
