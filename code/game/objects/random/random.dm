@@ -170,21 +170,26 @@
 					prob(1);/obj/item/weapon/reagent_containers/syringe/drugs)
 
 
-/obj/random/armory
-	name = "Random Armory Weapon"
+/obj/random/energy
+	name = "Random Energy Weapon"
 	desc = "This is a random security weapon."
 	icon = 'icons/obj/gun.dmi'
 	icon_state = "energykill100"
 	item_to_spawn()
-		return pick(prob(3);/obj/item/weapon/gun/projectile/shotgun/pump,\
-					prob(2);/obj/item/weapon/gun/energy/ionrifle,\
-					prob(2);/obj/item/weapon/gun/projectile/automatic/wt550,\
-					prob(1);/obj/item/weapon/gun/projectile/automatic/z8,\
-					prob(2);/obj/item/weapon/gun/energy/laser,\
+		return pick(prob(2);/obj/item/weapon/gun/energy/laser,\
 					prob(1);/obj/item/weapon/gun/energy/gun,\
+					prob(2);/obj/item/weapon/gun/energy/stunrevolver)
+
+/obj/random/projectile
+	name = "Random Projectile Weapon"
+	desc = "This is a random security weapon."
+	icon = 'icons/obj/gun.dmi'
+	icon_state = "revolver"
+	item_to_spawn()
+		return pick(prob(3);/obj/item/weapon/gun/projectile/shotgun/pump,\
+					prob(2);/obj/item/weapon/gun/projectile/automatic/wt550,\
 					prob(3);/obj/item/weapon/gun/projectile/sec,\
 					prob(2);/obj/item/weapon/gun/projectile/sec/wood,\
-					prob(3);/obj/item/weapon/gun/energy/taser,\
 					prob(1);/obj/item/weapon/gun/projectile/shotgun/pump/combat)
 
 
@@ -202,28 +207,10 @@
 					prob(2);/obj/item/ammo_magazine/c45m/rubber,\
 					prob(2);/obj/item/ammo_magazine/c45m/flash,\
 					prob(1);/obj/item/ammo_magazine/mc9mmt,\
-					prob(3);/obj/item/ammo_magazine/mc9mmt/rubber,\
-					prob(2);/obj/item/ammo_magazine/a556)
+					prob(3);/obj/item/ammo_magazine/mc9mmt/rubber)
 
 
 
-/obj/random/armor
-	name = "Random Armor"
-	desc = "This is a random armor vest."
-	icon = 'icons/obj/clothing/suits.dmi'
-	icon_state = "kvest"
-	item_to_spawn()
-		return pick(prob(4);/obj/item/clothing/suit/storage/vest,\
-					prob(3);/obj/item/clothing/suit/storage/vest/officer,\
-					prob(3);/obj/item/clothing/suit/storage/vest/warden,\
-					prob(3);/obj/item/clothing/suit/storage/vest/hos,\
-					prob(2);/obj/item/clothing/suit/storage/vest/pcrc,\
-					prob(1);/obj/item/clothing/suit/storage/vest/detective,\
-					prob(2);/obj/item/clothing/suit/storage/vest/heavy,\
-					prob(2);/obj/item/clothing/suit/storage/vest/heavy/officer,\
-					prob(2);/obj/item/clothing/suit/storage/vest/heavy/warden,\
-					prob(2);/obj/item/clothing/suit/storage/vest/heavy/hos,\
-					prob(2);/obj/item/clothing/suit/storage/vest/heavy/pcrc)
 
 /obj/random/plushie
 	name = "random plushie"
