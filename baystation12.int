@@ -1,11 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: code\game\machinery\phoron_desublimer.dm;code\modules\paperwork\pen.dm;code\modules\clothing\head\misc_special.dm;code\modules\mob\living\carbon\human\emote.dm;code\modules\mob\living\silicon\silicon.dm;code\modules\mob\living\carbon\human\examine.dm;code\game\objects\items\blueprints.dm;code\modules\mob\living\living.dm;code\__HELPERS\game.dm;code\global.dm;code\world.dm;code\__HELPERS\unsorted.dm;code\game\machinery\jukebox.dm;code\game\area\areas.dm
-LAST_COMPILE_VERSION: 506.1247
-DIR: code code\__HELPERS code\ATMOSPHERICS code\ATMOSPHERICS\components code\ATMOSPHERICS\components\unary code\datums code\datums\spells code\datums\wires code\defines code\defines\procs code\game code\game\area code\game\gamemodes code\game\gamemodes\events code\game\gamemodes\malfunction code\game\gamemodes\traitor code\game\machinery code\game\objects code\game\objects\items code\modules code\modules\awaymissions code\modules\clothing code\modules\clothing\head code\modules\mob code\modules\mob\living code\modules\mob\living\carbon code\modules\mob\living\carbon\human code\modules\mob\living\silicon code\modules\paperwork code\modules\power code\modules\power\antimatter code\modules\power\rust code\modules\research code\modules\research\xenoarchaeology icons icons\turf 
-FILE: code\game\machinery\phoron_desublimer.dm
-LAST_COMPILE_TIME: 1424725571
+WINDOW: code\modules\mob\living\carbon\human\emote.dm;code\modules\mob\living\carbon\human\species\species.dm;code\modules\mob\living\carbon\human\human_species.dm;code\game\machinery\phoron_desublimer.dm;code\modules\mob\living\carbon\human\human.dm;code\modules\mob\mob_helpers.dm
+LAST_COMPILE_VERSION: 506.1249
+DIR: code code\__HELPERS code\ATMOSPHERICS code\ATMOSPHERICS\components code\ATMOSPHERICS\components\unary code\controllers code\datums code\datums\spells code\datums\wires code\defines code\defines\procs code\game code\game\area code\game\gamemodes code\game\machinery code\modules code\modules\mob code\modules\mob\living code\modules\mob\living\carbon code\modules\mob\living\carbon\human code\modules\mob\living\carbon\human\species code\modules\mob\living\carbon\human\species\outsider code\modules\mob\living\carbon\human\species\station 
+FILE: code\modules\mob\living\carbon\human\emote.dm
+LAST_COMPILE_TIME: 1424755714
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS

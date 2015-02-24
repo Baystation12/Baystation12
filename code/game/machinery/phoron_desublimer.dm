@@ -217,6 +217,20 @@ The process works like this:
 		src.visible_message("\icon[src] <b>[src]</b> beeps, \"Supermatter transmutation complete.\"")
 		active = 0
 
+	// This sorts a list of peaks within max_distance units of the neutron flow and returns a sorted list of the nearest ones
+	proc/get_nearest_peaks( var/flow )
+		var/max_distance = 100.0
+		var/list/peak_distances = null
+
+		for( var/material in mat )
+			var/peak = mat[material]
+			var/peak_distance = abs( peak-flow )
+			if( peak_distance <= max_distance )
+				peak_distances[material] = peak_distance
+
+		peak_distances = sortAssoc( peak_distances )
+		return peak_distances
+
 	proc/eat_shard()
 		if( !shard )
 			return 0
@@ -324,10 +338,8 @@ The process works like this:
 		dat += "<A href='?src=\ref[src];scan=1'>Run Scan</A><BR><BR>"
 
 		dat += "<b>Status:</b><BR>"
-		if( !assembled )
-			dat += "Unable to detect all parts!<BR>"
-		else
-			for( var/M in machine )
+		for( var/M in machine )
+			if( machine_ref[M] )
 				var/list/obj/machinery/phoron_desublimer/type = machine_ref[M]
 				dat += "<h4><center>[type.name]</center></h4>"
 				if( type && type.ready )
@@ -350,7 +362,7 @@ The process works like this:
 						else
 							dat += "<b>Supermatter Shard Needed</b> <BR>"
 				else
-					dat += "Not found!<BR>"
+					dat += "ERROR: Incrreoctly set up!<BR>"
 				dat += "<BR><HR>"
 
 		user << browse(dat, "window=pdcontrol;size=420x500")

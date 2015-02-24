@@ -538,7 +538,7 @@
 					message = "<B>[src]</B> screams!"
 					var/scream_sound
 
-					if( istype( type, /mob/living/silicon ))
+					if( istype( type, /mob/living/silicon ) || get_species() == "Machine" )
 						scream_sound = 'sound/voice/rscream1.ogg'
 					else
 						if( gender == "male" )
