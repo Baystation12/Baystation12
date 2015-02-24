@@ -42,7 +42,7 @@
 		name = "collector [mysize] OFF"
 
 /obj/effect/rust_particle_catcher/bullet_act(var/obj/item/projectile/Proj)
-	if(Proj.flag != "bullet" && parent)
+	if(Proj.check_armour != "bullet" && parent)
 		parent.AddEnergy(Proj.damage * 20, 0, 1)
 		update_icon()
 	return 0

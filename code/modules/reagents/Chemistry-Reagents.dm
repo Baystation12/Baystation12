@@ -88,7 +88,7 @@ datum
 			on_new(var/data)
 				return
 
-			// Called when two reagents of the same are mixing.
+			// Called when two reagents of the same are mixing. <-- Blatant lies
 			on_merge(var/data)
 				return
 
@@ -98,7 +98,7 @@ datum
 
 
 		blood
-			data = new/list("donor"=null,"viruses"=null,"species"="Human","blood_DNA"=null,"blood_type"=null,"blood_colour"= "#A10808","resistances"=null,"trace_chem"=null, "antibodies" = null)
+			data = new/list("donor"=null,"viruses"=null,"species"="Human","blood_DNA"=null,"blood_type"=null,"blood_colour"= "#A10808","resistances"=null,"trace_chem"=null, "antibodies" = list())
 			name = "Blood"
 			id = "blood"
 			reagent_state = LIQUID
@@ -192,6 +192,13 @@ datum
 					M.resistances += self.data
 				return
 
+		woodpulp
+			name = "Wood Pulp"
+			id = "woodpulp"
+			description = "A mass of wood fibers."
+			reagent_state = LIQUID
+			color = "#B97A57"
+
 		#define WATER_LATENT_HEAT 19000 // How much heat is removed when applied to a hot turf, in J/unit (19000 makes 120 u of water roughly equivalent to 4L)
 		water
 			name = "Water"
@@ -258,10 +265,15 @@ datum
 					if(!cube.wrapped)
 						cube.Expand()
 
-			reaction_mob(var/mob/M, var/method=TOUCH, var/volume)
+			reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume)
 				if (istype(M, /mob/living/carbon/slime))
 					var/mob/living/carbon/slime/S = M
-					S.apply_water()
+					S.apply_water(volume)
+				if(method == TOUCH && isliving(M))
+					M.adjust_fire_stacks(-(volume / 10))
+					if(M.fire_stacks <= 0)
+						M.ExtinguishMob()
+					return
 
 		water/holywater
 			name = "Holy Water"
@@ -427,7 +439,7 @@ datum
 					holder.remove_reagent(src.id, 0.25 * REAGENTS_METABOLISM)
 				return
 
-/*		silicate
+		silicate
 			name = "Silicate"
 			id = "silicate"
 			description = "A compound that can be used to reinforce glass."
@@ -437,31 +449,9 @@ datum
 			reaction_obj(var/obj/O, var/volume)
 				src = null
 				if(istype(O,/obj/structure/window))
-					if(O:silicate <= 200)
-
-						O:silicate += volume
-						O:health += volume * 3
-
-						if(!O:silicateIcon)
-							var/icon/I = icon(O.icon,O.icon_state,O.dir)
-
-							var/r = (volume / 100) + 1
-							var/g = (volume / 70) + 1
-							var/b = (volume / 50) + 1
-							I.SetIntensity(r,g,b)
-							O.icon = I
-							O:silicateIcon = I
-						else
-							var/icon/I = O:silicateIcon
-
-							var/r = (volume / 100) + 1
-							var/g = (volume / 70) + 1
-							var/b = (volume / 50) + 1
-							I.SetIntensity(r,g,b)
-							O.icon = I
-							O:silicateIcon = I
-
-				return*/
+					var/obj/structure/window/W = O
+					W.apply_silicate(volume)
+				return
 
 		oxygen
 			name = "Oxygen"
@@ -682,15 +672,13 @@ datum
 						for (var/ID in C.virus2)
 							var/datum/disease2/disease/V = C.virus2[ID]
 							if(prob(5))
-								M:antibodies |= V.antigen
+								C.antibodies |= V.antigen
 								if(prob(50))
 									M.radiation += 50 // curing it that way may kill you instead
 									var/absorbed
-									if(istype(C,/mob/living/carbon))
-										var/mob/living/carbon/H = C
-										var/datum/organ/internal/diona/nutrients/rad_organ = locate() in H.internal_organs
-										if(rad_organ && !rad_organ.is_broken())
-											absorbed = 1
+									var/datum/organ/internal/diona/nutrients/rad_organ = locate() in C.internal_organs
+									if(rad_organ && !rad_organ.is_broken())
+										absorbed = 1
 									if(!absorbed)
 										M.adjustToxLoss(100)
 				..()
@@ -933,6 +921,12 @@ datum
 				M.adjustToxLoss(1)
 				..()
 				return
+			reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume)//Splashing people with welding fuel to make them easy to ignite!
+				if(!istype(M, /mob/living))
+					return
+				if(method == TOUCH)
+					M.adjust_fire_stacks(volume / 10)
+					return
 
 		space_cleaner
 			name = "Space cleaner"
@@ -1537,6 +1531,84 @@ datum
 				..()
 				return
 
+//////////////////////////Ground crayons/////////////////////
+
+
+		crayon_dust
+			name = "Crayon dust"
+			id = "crayon_dust"
+			description = "Intensely coloured powder obtained by grinding crayons."
+			reagent_state = LIQUID
+			color = "#888888"
+			overdose = 5
+
+			red
+				name = "Red crayon dust"
+				id = "crayon_dust_red"
+				color = "#FE191A"
+
+			orange
+				name = "Orange crayon dust"
+				id = "crayon_dust_orange"
+				color = "#FFBE4F"
+
+			yellow
+				name = "Yellow crayon dust"
+				id = "crayon_dust_yellow"
+				color = "#FDFE7D"
+
+			green
+				name = "Green crayon dust"
+				id = "crayon_dust_green"
+				color = "#18A31A"
+
+			blue
+				name = "Blue crayon dust"
+				id = "crayon_dust_blue"
+				color = "#247CFF"
+
+			purple
+				name = "Purple crayon dust"
+				id = "crayon_dust_purple"
+				color = "#CC0099"
+
+			grey //Mime
+				name = "Grey crayon dust"
+				id = "crayon_dust_grey"
+				color = "#808080"
+
+			brown //Rainbow
+				name = "Brown crayon dust"
+				id = "crayon_dust_brown"
+				color = "#846F35"
+
+//////////////////////////Paint//////////////////////////////
+
+		paint
+			name = "Paint"
+			id = "paint"
+			description = "This paint will stick to almost any object."
+			reagent_state = LIQUID
+			color = "#808080"
+			overdose = 15
+
+			reaction_turf(var/turf/T, var/volume)
+				..()
+				if(istype(T) && !istype(T, /turf/space))
+					T.color = color
+
+			reaction_obj(var/obj/O, var/volume)
+				..()
+				if(istype(O,/obj))
+					O.color = color
+
+			reaction_mob(var/mob/M, var/method=TOUCH, var/volume)
+				..()
+				if(istype(M,/mob) && !istype(M,/mob/dead))
+					//painting ghosts: not allowed
+					M.color = color
+
+
 //////////////////////////Poison stuff///////////////////////
 
 		toxin
@@ -1615,6 +1687,12 @@ datum
 				src = null
 				T.assume_gas("volatile_fuel", volume, T20C)
 				return
+			reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume)//Splashing people with plasma is stronger than fuel!
+				if(!istype(M, /mob/living))
+					return
+				if(method == TOUCH)
+					M.adjust_fire_stacks(volume / 5)
+					return
 
 		toxin/lexorin
 			name = "Lexorin"
@@ -1631,8 +1709,8 @@ datum
 				if(!M) M = holder.my_atom
 				if(prob(33))
 					M.take_organ_damage(1*REM, 0)
-				M.adjustOxyLoss(3)
-				if(prob(20)) M.emote("gasp")
+				if(M.losebreath < 15)
+					M.losebreath++
 				..()
 				return
 
@@ -1777,10 +1855,12 @@ datum
 					var/obj/effect/alien/weeds/alien_weeds = O
 					alien_weeds.health -= rand(15,35) // Kills alien weeds pretty fast
 					alien_weeds.healthcheck()
-				else if(istype(O,/obj/effect/glowshroom)) //even a small amount is enough to kill it
+				else if(istype(O,/obj/effect/plant)) //even a small amount is enough to kill it
 					del(O)
-				else if(istype(O,/obj/effect/plantsegment))
-					if(prob(50)) del(O) //Kills kudzu too.
+				else if(istype(O,/obj/effect/plant))
+					if(prob(50))
+						var/obj/effect/plant/plant = O
+						plant.die_off()
 				else if(istype(O,/obj/machinery/portable_atmospherics/hydroponics))
 					var/obj/machinery/portable_atmospherics/hydroponics/tray = O
 
@@ -1827,10 +1907,10 @@ datum
 					if(15 to 49)
 						if(prob(50))
 							M.Weaken(2)
-						M.drowsyness  = max(M.drowsyness, 20)
+						M.drowsyness = max(M.drowsyness, 20)
 					if(50 to INFINITY)
-						M.Weaken(20)
-						M.drowsyness  = max(M.drowsyness, 30)
+						M.sleeping = max(M.sleeping, 20)
+						M.drowsyness = max(M.drowsyness, 60)
 				data++
 				..()
 				return
@@ -1854,10 +1934,11 @@ datum
 					if(1)
 						M.confused += 2
 						M.drowsyness += 2
-					if(2 to 199)
+					if(2 to 20)
 						M.Weaken(30)
-					if(200 to INFINITY)
-						M.sleeping += 1
+						M.eye_blurry = max(M.eye_blurry, 10)
+					if(20 to INFINITY)
+						M.sleeping = max(M.sleeping, 30)
 				..()
 				return
 
@@ -2008,7 +2089,7 @@ datum
 						M.take_organ_damage(min(6*toxpwr, volume * toxpwr))
 
 			reaction_obj(var/obj/O, var/volume)
-				if((istype(O,/obj/item) || istype(O,/obj/effect/glowshroom)) && prob(meltprob * 3))
+				if((istype(O,/obj/item) || istype(O,/obj/effect/plant)) && prob(meltprob * 3))
 					if(!O.unacidable)
 						var/obj/effect/decal/cleanable/molten_item/I = new/obj/effect/decal/cleanable/molten_item(O.loc)
 						I.desc = "Looks like this was \an [O] some time ago."
@@ -2040,21 +2121,30 @@ datum
 				if(!M) M = holder.my_atom
 				if(prob(50)) M.heal_organ_damage(1,0)
 				M.nutrition += nutriment_factor	// For hunger and fatness
-/*
-				// If overeaten - vomit and fall down
-				// Makes you feel bad but removes reagents and some effect
-				// from your body
-				if (M.nutrition > 650)
-					M.nutrition = rand (250, 400)
-					M.weakened += rand(2, 10)
-					M.jitteriness += rand(0, 5)
-					M.dizziness = max (0, (M.dizziness - rand(0, 15)))
-					M.druggy = max (0, (M.druggy - rand(0, 15)))
-					M.adjustToxLoss(rand(-15, -5)))
-					M.updatehealth()
-*/
 				..()
 				return
+
+		nutriment/protein // Bad for Skrell!
+			name = "animal protein"
+			id = "protein"
+			color = "#440000"
+
+			on_mob_life(var/mob/living/M, var/alien)
+				if(alien && alien == IS_SKRELL)
+					M.adjustToxLoss(0.5)
+					M.nutrition -= nutriment_factor
+				..()
+
+		nutriment/egg // Also bad for skrell. Not a child of protein because it might mess up, not sure.
+			name = "egg yolk"
+			id = "egg"
+			color = "#FFFFAA"
+
+			on_mob_life(var/mob/living/M, var/alien)
+				if(alien && alien == IS_SKRELL)
+					M.adjustToxLoss(0.5)
+					M.nutrition -= nutriment_factor
+				..()
 
 		lipozine
 			name = "Lipozine" // The anti-nutriment.
@@ -2441,7 +2531,6 @@ datum
 				..()
 				return
 
-/* We're back to flour bags
 		flour
 			name = "flour"
 			id = "flour"
@@ -2459,7 +2548,6 @@ datum
 				src = null
 				if(!istype(T, /turf/space))
 					new /obj/effect/decal/cleanable/flour(T)
-*/
 
 		rice
 			name = "Rice"
@@ -2568,7 +2656,7 @@ datum
 			name = "Carrot juice"
 			id = "carrotjuice"
 			description = "It is just like a carrot but without crunching."
-			color = "#973800" // rgb: 151, 56, 0
+			color = "#FF8C00" // rgb: 255, 140, 0
 
 			glass_icon_state = "carrotjuice"
 			glass_name = "glass of carrot juice"
@@ -2638,7 +2726,7 @@ datum
 			name = "Watermelon Juice"
 			id = "watermelonjuice"
 			description = "Delicious juice made from watermelon."
-			color = "#863333" // rgb: 134, 51, 51
+			color = "#B83333" // rgb: 184, 51, 51
 
 			glass_icon_state = "glass_red"
 			glass_name = "glass of watermelon juice"
@@ -2648,7 +2736,7 @@ datum
 			name = "Lemon Juice"
 			id = "lemonjuice"
 			description = "This juice is VERY sour."
-			color = "#863333" // rgb: 175, 175, 0
+			color = "#AFAF00" // rgb: 175, 175, 0
 
 			glass_icon_state = "lemonjuice"
 			glass_name = "glass of lemon juice"
@@ -2658,7 +2746,7 @@ datum
 			name = "Banana Juice"
 			id = "banana"
 			description = "The raw essence of a banana."
-			color = "#863333" // rgb: 175, 175, 0
+			color = "#C3AF00" // rgb: 195, 175, 0
 
 			glass_icon_state = "banana"
 			glass_name = "glass of banana juice"
@@ -3110,17 +3198,17 @@ datum
 				if(!data) data = 1
 				data++
 				M.dizziness +=6
-				if(data >= 15 && data <45)
-					if (!M.stuttering) M.stuttering = 1
-					M.stuttering += 3
-				else if(data >= 45 && prob(50) && data <55)
-					M.confused = max(M.confused+3,0)
-				else if(data >=55)
-					M.druggy = max(M.druggy, 55)
-				else if(data >=200)
-					M.adjustToxLoss(2)
+				switch(data)
+					if(15 to 45)
+						M.stuttering = max(M.stuttering+3,0)
+					if(45 to 55)
+						if (prob(50))
+							M.confused = max(M.confused+3,0)
+					if(55 to 200)
+						M.druggy = max(M.druggy, 55)
+					if(200 to INFINITY)
+						M.adjustToxLoss(2)
 				..()
-				return
 
 		neurotoxin
 			name = "Neurotoxin"
@@ -3140,17 +3228,17 @@ datum
 				if(!data) data = 1
 				data++
 				M.dizziness +=6
-				if(data >= 15 && data <45)
-					if (!M.stuttering) M.stuttering = 1
-					M.stuttering += 3
-				else if(data >= 45 && prob(50) && data <55)
-					M.confused = max(M.confused+3,0)
-				else if(data >=55)
-					M.druggy = max(M.druggy, 55)
-				else if(data >=200)
-					M.adjustToxLoss(2)
+				switch(data)
+					if(15 to 45)
+						M.stuttering = max(M.stuttering+3,0)
+					if(45 to 55)
+						if (prob(50))
+							M.confused = max(M.confused+3,0)
+					if(55 to 200)
+						M.druggy = max(M.druggy, 55)
+					if(200 to INFINITY)
+						M.adjustToxLoss(2)
 				..()
-				return
 
 		hippies_delight
 			name = "Hippies' Delight"
@@ -3287,6 +3375,12 @@ datum
 						usr << "It wasn't enough..."
 				return
 
+			reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume)//Splashing people with ethanol isn't quite as good as fuel.
+				if(!istype(M, /mob/living))
+					return
+				if(method == TOUCH)
+					M.adjust_fire_stacks(volume / 15)
+					return
 		ethanol/beer
 			name = "Beer"
 			id = "beer"

@@ -23,6 +23,11 @@ var/list/robot_verbs_default = list(
 	var/integrated_light_power = 6
 	var/datum/wires/robot/wires
 
+//Icon stuff
+
+	var/icontype //Persistent icontype tracking allows for cleaner icon updates
+	var/module_sprites[0] //Used to store the associations between sprite names and sprite index.
+
 //Hud stuff
 
 	var/obj/screen/cells = null
@@ -76,6 +81,7 @@ var/list/robot_verbs_default = list(
 	var/lockcharge //Used when locking down a borg to preserve cell charge
 	var/speed = 0 //Cause sec borgs gotta go fast //No they dont!
 	var/scrambledcodes = 0 // Used to determine if a borg shows up on the robotics console.  Setting to one hides them.
+	var/tracking_entities = 0 //The number of known entities currently accessing the internal camera
 	var/braintype = "Cyborg"
 
 /mob/living/silicon/robot/syndicate
@@ -106,6 +112,8 @@ var/list/robot_verbs_default = list(
 	robot_modules_background.icon_state = "block"
 	robot_modules_background.layer = 19 //Objects that appear on screen are on layer 20, UI should be just below it.
 	ident = rand(1, 999)
+	module_sprites["Basic"] = "robot"
+	icontype = "Default"
 	updatename("Default")
 	updateicon()
 
@@ -177,6 +185,10 @@ var/list/robot_verbs_default = list(
 
 	playsound(loc, 'sound/mecha/nominalsyndi.ogg', 75, 0)
 
+/mob/living/silicon/robot/SetName(pickedName as text)
+	custom_name = pickedName
+	updatename()
+
 /mob/living/silicon/robot/proc/sync()
 	if(lawupdate && connected_ai)
 		lawsync()
@@ -227,11 +239,10 @@ var/list/robot_verbs_default = list(
 		modules+="Combat"
 	modtype = input("Please, select a module!", "Robot", null, null) in modules
 
-	var/module_sprites[0] //Used to store the associations between sprite names and sprite index.
-
 	if(module)
 		return
 
+	module_sprites = list()
 	switch(modtype)
 		if("Standard")
 			module = new /obj/item/weapon/robot_module/standard(src)
@@ -426,38 +437,11 @@ var/list/robot_verbs_default = list(
 		updatename()
 		updateicon()
 
-/mob/living/silicon/robot/verb/cmd_robot_alerts()
-	set category = "Robot Commands"
-	set name = "Show Alerts"
-	robot_alerts()
-
 // this verb lets cyborgs see the stations manifest
 /mob/living/silicon/robot/verb/cmd_station_manifest()
 	set category = "Robot Commands"
 	set name = "Show Crew Manifest"
 	show_station_manifest()
-
-
-/mob/living/silicon/robot/proc/robot_alerts()
-	var/dat = "<HEAD><TITLE>Current Station Alerts</TITLE><META HTTP-EQUIV='Refresh' CONTENT='10'></HEAD><BODY>\n"
-	dat += "<A HREF='?src=\ref[src];mach_close=robotalerts'>Close</A><BR><BR>"
-	for (var/cat in alarms)
-		dat += text("<B>[cat]</B><BR>\n")
-		var/list/alarmlist = alarms[cat]
-		if (alarmlist.len)
-			for (var/area_name in alarmlist)
-				var/datum/alarm/alarm = alarmlist[area_name]
-				dat += "<NOBR>"
-				dat += text("-- [area_name]")
-				if (alarm.sources.len > 1)
-					dat += text("- [alarm.sources.len] sources")
-				dat += "</NOBR><BR>\n"
-		else
-			dat += "-- All Systems Nominal<BR>\n"
-		dat += "<BR>\n"
-
-	viewalerts = 1
-	src << browse(dat, "window=robotalerts&can_close=0")
 
 /mob/living/silicon/robot/proc/self_diagnosis()
 	if(!is_component_functioning("diagnosis unit"))
@@ -568,6 +552,9 @@ var/list/robot_verbs_default = list(
 		show_cell_power()
 		show_jetpack_pressure()
 		stat(null, text("Lights: [lights_on ? "ON" : "OFF"]"))
+		if(module)
+			for(var/datum/matter_synth/ms in module.synths)
+				stat("[ms.name]: [ms.energy]/[ms.max_energy]")
 
 /mob/living/silicon/robot/restrained()
 	return 0
@@ -624,25 +611,6 @@ var/list/robot_verbs_default = list(
 			now_pushing = null
 		return
 	return
-
-
-/mob/living/silicon/robot/triggerAlarm(var/class, area/A, list/cameralist, var/source)
-	if (stat == 2)
-		return 1
-
-	..()
-
-	queueAlarm(text("--- [class] alarm detected in [A.name]!"), class)
-
-
-/mob/living/silicon/robot/cancelAlarm(var/class, area/A as area, obj/origin)
-	var/has_alarm = ..()
-
-	if (!has_alarm)
-		queueAlarm(text("--- [class] alarm in [A.name] has been cleared."), class, 0)
-//		if (viewalerts) robot_alerts()
-	return has_alarm
-
 
 /mob/living/silicon/robot/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (istype(W, /obj/item/weapon/handcuffs)) // fuck i don't even know why isrobot() in handcuff code isn't working so this will have to do
@@ -958,38 +926,25 @@ var/list/robot_verbs_default = list(
 
 	overlays.Cut()
 	if(stat == 0)
-		overlays += "eyes"
-		overlays.Cut()
-		overlays += "eyes-[icon_state]"
-	else
-		overlays -= "eyes"
-
-	if(opened && custom_sprite == 1) //Custom borgs also have custom panels, heh
-		if(wiresexposed)
-			overlays += "[src.ckey]-openpanel +w"
-		else if(cell)
-			overlays += "[src.ckey]-openpanel +c"
-		else
-			overlays += "[src.ckey]-openpanel -c"
+		overlays += "eyes-[module_sprites[icontype]]"
 
 	if(opened)
+		var/panelprefix = custom_sprite ? src.ckey : "ov"
 		if(wiresexposed)
-			overlays += "ov-openpanel +w"
+			overlays += "[panelprefix]-openpanel +w"
 		else if(cell)
-			overlays += "ov-openpanel +c"
+			overlays += "[panelprefix]-openpanel +c"
 		else
-			overlays += "ov-openpanel -c"
+			overlays += "[panelprefix]-openpanel -c"
 
 	if(module_active && istype(module_active,/obj/item/borg/combat/shield))
-		overlays += "[icon_state]-shield"
+		overlays += "[module_sprites[icontype]]-shield"
 
 	if(modtype == "Combat")
-		var/base_icon = ""
-		base_icon = icon_state
 		if(module_active && istype(module_active,/obj/item/borg/combat/mobility))
-			icon_state = "[icon_state]-roll"
+			icon_state = "[module_sprites[icontype]]-roll"
 		else
-			icon_state = base_icon
+			icon_state = module_sprites[icontype]
 		return
 
 //Call when target overlay should be added/removed
@@ -1042,30 +997,31 @@ var/list/robot_verbs_default = list(
 
 /mob/living/silicon/robot/Topic(href, href_list)
 	if(..())
-		return
+		return 1
 	if(usr != src)
-		return
+		return 1
 
 	if (href_list["showalerts"])
-		robot_alerts()
-		return
+		subsystem_alarm_monitor()
+		return 1
 
 	if (href_list["mod"])
 		var/obj/item/O = locate(href_list["mod"])
 		if (istype(O) && (O.loc == src))
 			O.attack_self(src)
+		return 1
 
 	if (href_list["act"])
 		var/obj/item/O = locate(href_list["act"])
 		if (!istype(O))
-			return
+			return 1
 
 		if(!((O in src.module.modules) || (O == src.module.emag)))
-			return
+			return 1
 
 		if(activated(O))
 			src << "Already activated"
-			return
+			return 1
 		if(!module_state_1)
 			module_state_1 = O
 			O.layer = 20
@@ -1087,6 +1043,7 @@ var/list/robot_verbs_default = list(
 		else
 			src << "You need to disable a module first!"
 		installed_modules()
+		return 1
 
 	if (href_list["deact"])
 		var/obj/item/O = locate(href_list["deact"])
@@ -1105,6 +1062,7 @@ var/list/robot_verbs_default = list(
 		else
 			src << "Module isn't activated"
 		installed_modules()
+		return 1
 
 	if (href_list["lawc"]) // Toggling whether or not a law gets stated by the State Laws verb --NeoFite
 		var/L = text2num(href_list["lawc"])
@@ -1113,6 +1071,7 @@ var/list/robot_verbs_default = list(
 			if ("No") lawcheck[L+1] = "Yes"
 //		src << text ("Switching Law [L]'s report status to []", lawcheck[L+1])
 		checklaws()
+		return 1
 
 	if (href_list["lawi"]) // Toggling whether or not a law gets stated by the State Laws verb --NeoFite
 		var/L = text2num(href_list["lawi"])
@@ -1121,9 +1080,11 @@ var/list/robot_verbs_default = list(
 			if ("No") ioncheck[L] = "Yes"
 //		src << text ("Switching Law [L]'s report status to []", lawcheck[L+1])
 		checklaws()
+		return 1
 
 	if (href_list["laws"]) // With how my law selection code works, I changed statelaws from a verb to a proc, and call it through my law selection panel. --NeoFite
 		statelaws()
+		return 1
 	return
 
 /mob/living/silicon/robot/proc/radio_menu()
@@ -1222,8 +1183,6 @@ var/list/robot_verbs_default = list(
 	else
 		triesleft--
 
-	var/icontype
-
 	if (custom_sprite == 1)
 		icontype = "Custom"
 		triesleft = 0
@@ -1258,9 +1217,11 @@ var/list/robot_verbs_default = list(
 
 /mob/living/silicon/robot/proc/add_robot_verbs()
 	src.verbs |= robot_verbs_default
+	src.verbs |= robot_verbs_subsystems
 
 /mob/living/silicon/robot/proc/remove_robot_verbs()
 	src.verbs -= robot_verbs_default
+	src.verbs -= robot_verbs_subsystems
 
 // Uses power from cyborg's cell. Returns 1 on success or 0 on failure.
 // Properly converts using CELLRATE now! Amount is in Joules.
@@ -1284,16 +1245,6 @@ var/list/robot_verbs_default = list(
 		use_power(RC.active_usage)
 		return 1
 	return 0
-
-/mob/living/silicon/robot/syndicate/canUseTopic(atom/movable/M)
-	if(stat || lockcharge || stunned || weakened)
-		return
-	if(z in config.admin_levels)
-		return 1
-	if(istype(M, /obj/machinery))
-		var/obj/machinery/Machine = M
-		return Machine.emagged
-	return 1
 
 /mob/living/silicon/robot/proc/notify_ai(var/notifytype, var/oldname, var/newname)
 	if(!connected_ai)

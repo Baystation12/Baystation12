@@ -10,6 +10,7 @@
 	heat_protection =    HEAD|FACE|EYES
 	cold_protection =    HEAD|FACE|EYES
 	brightness_on = 4
+	sprite_sheets = list("Tajara" = 'icons/mob/species/tajaran/helmet.dmi',"Skrell" = 'icons/mob/species/skrell/helmet.dmi',"Unathi" = 'icons/mob/species/unathi/helmet.dmi')
 	species_restricted = null
 
 /obj/item/clothing/gloves/rig
@@ -36,10 +37,11 @@
 	heat_protection =    UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 	cold_protection =    UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 	flags_inv =          HIDEJUMPSUIT|HIDETAIL
-	flags =              STOPSPRESSUREDMAGE | THICKMATERIAL | AIRTIGHT
+	flags =              STOPPRESSUREDAMAGE | THICKMATERIAL | AIRTIGHT
 	slowdown = 0
 	breach_threshold = 35
 	can_breach = 1
+	sprite_sheets = list("Tajara" = 'icons/mob/species/tajaran/suit.dmi',"Unathi" = 'icons/mob/species/unathi/suit.dmi')
 	supporting_limbs = list()
 
 //TODO: move this to modules

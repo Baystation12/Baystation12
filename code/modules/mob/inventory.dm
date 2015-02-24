@@ -208,6 +208,7 @@
 	return 1
 
 //Attemps to remove an object on a mob.  Will not move it to another area or such, just removes from the mob.
+//It does call u_equip() though. So it can drop items to the floor but only if src is human.
 /mob/proc/remove_from_mob(var/obj/O)
 	src.u_equip(O)
 	if (src.client)
@@ -242,16 +243,7 @@
 
 /** BS12's proc to get the item in the active hand. Couldn't find the /tg/ equivalent. **/
 /mob/proc/equipped()
-	if(issilicon(src))
-		if(isrobot(src))
-			if(src:module_active)
-				return src:module_active
-	else
-		if (hand)
-			return l_hand
-		else
-			return r_hand
-		return
+	return get_active_hand() //TODO: get rid of this proc
 
 /mob/living/carbon/human/proc/equip_if_possible(obj/item/W, slot, del_on_fail = 1) // since byond doesn't seem to have pointers, this seems like the best way to do this :/
 	//warning: icky code

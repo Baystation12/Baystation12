@@ -1,6 +1,8 @@
 /mob/living/carbon/Life()
 	..()
 
+	handle_viruses()
+
 	// Increase germ_level regularly
 	if(germ_level < GERM_LEVEL_AMBIENT && prob(30))	//if you're just standing there, you shouldn't get more germs beyond an ambient level
 		germ_level++
@@ -339,7 +341,7 @@
 /mob/living/carbon/can_use_hands()
 	if(handcuffed)
 		return 0
-	if(buckled && ! istype(buckled, /obj/structure/stool/bed/chair)) // buckling does not restrict hands
+	if(buckled && ! istype(buckled, /obj/structure/bed/chair)) // buckling does not restrict hands
 		return 0
 	return 1
 
@@ -354,6 +356,8 @@
 	else if (W == handcuffed)
 		handcuffed = null
 		update_inv_handcuffed()
+		if(buckled && buckled.buckle_require_restraints)
+			buckled.unbuckle_mob()
 
 	else if (W == legcuffed)
 		legcuffed = null

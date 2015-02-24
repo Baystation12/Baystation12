@@ -13,7 +13,6 @@
 	var/c_tag_order = 999
 	var/status = 1
 	anchored = 1.0
-	var/panel_open = 0 // 0 = Closed / 1 = Open
 	var/invuln = null
 	var/bugged = 0
 	var/obj/item/weapon/camera_assembly/assembly = null
@@ -54,13 +53,6 @@
 		ASSERT(src.network.len > 0)
 	..()
 
-/obj/machinery/camera/Del()
-	if(!alarm_on)
-		triggerCameraAlarm()
-	
-	cancelCameraAlarm()
-	..()
-
 /obj/machinery/camera/emp_act(severity)
 	if(!isEmpProof())
 		if(prob(100/severity))
@@ -68,9 +60,9 @@
 			stat |= EMPED
 			SetLuminosity(0)
 			kick_viewers()
-			triggerCameraAlarm()
+			triggerCameraAlarm(10 * severity)
 			update_icon()
-			
+
 			spawn(900)
 				stat &= ~EMPED
 				cancelCameraAlarm()
@@ -85,11 +77,11 @@
 /obj/machinery/camera/ex_act(severity)
 	if(src.invuln)
 		return
-	
+
 	//camera dies if an explosion touches it!
 	if(severity <= 2 || prob(50))
 		destroy()
-	
+
 	..() //and give it the regular chance of being deleted outright
 
 
@@ -174,7 +166,7 @@
 				if (S.current == src)
 					O << "[U] holds \a [itemname] up to one of the cameras ..."
 					O << browse(text("<HTML><HEAD><TITLE>[]</TITLE></HEAD><BODY><TT>[]</TT></BODY></HTML>", itemname, info), text("window=[]", itemname))
-	
+
 	else if (istype(W, /obj/item/weapon/camera_bug))
 		if (!src.can_use())
 			user << "\blue Camera non-functional"
@@ -185,7 +177,7 @@
 		else
 			user << "\blue Camera bugged."
 			src.bugged = 1
-			
+
 	else if(W.damtype == BRUTE || W.damtype == BURN) //bashing cameras
 		if (W.force >= src.toughness)
 			visible_message("<span class='warning'><b>[src] has been [pick(W.attack_verb)] with [W] by [user]!</b></span>")
@@ -194,7 +186,7 @@
 				if (I.hitsound)
 					playsound(loc, I.hitsound, 50, 1, -1)
 		take_damage(W.force)
-	
+
 	else
 		..()
 
@@ -221,14 +213,14 @@
 	if (force >= toughness && (force > toughness*4 || prob(25)))
 		destroy()
 
-//Used when someone breaks a camera 
+//Used when someone breaks a camera
 /obj/machinery/camera/proc/destroy()
 	invalidateCameraCache()
 	stat |= BROKEN
 	kick_viewers()
 	triggerCameraAlarm()
 	update_icon()
-	
+
 	//sparks
 	var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
 	spark_system.set_up(5, 0, loc)
@@ -262,22 +254,16 @@
 	else
 		icon_state = initial(icon_state)
 
-/obj/machinery/camera/proc/triggerCameraAlarm()
+/obj/machinery/camera/proc/triggerCameraAlarm(var/duration = 0)
 	alarm_on = 1
-	if(!get_area(src))
-		return
-	
-	for(var/mob/living/silicon/S in mob_list)
-		S.triggerAlarm("Camera", get_area(src), list(src), src)
-
+	camera_alarm.triggerAlarm(loc, src, duration)
 
 /obj/machinery/camera/proc/cancelCameraAlarm()
-	alarm_on = 0
-	if(!get_area(src))
+	if(wires.IsIndexCut(CAMERA_WIRE_ALARM))
 		return
-	
-	for(var/mob/living/silicon/S in mob_list)
-		S.cancelAlarm("Camera", get_area(src), src)
+
+	alarm_on = 0
+	camera_alarm.clearAlarm(loc, src)
 
 //if false, then the camera is listed as DEACTIVATED and cannot be used
 /obj/machinery/camera/proc/can_use()
@@ -355,10 +341,20 @@
 /obj/machinery/camera/interact(mob/living/user as mob)
 	if(!panel_open || istype(user, /mob/living/silicon/ai))
 		return
-	
+
 	if(stat & BROKEN)
 		user << "<span class='warning'>\The [src] is broken.</span>"
 		return
 
 	user.set_machine(src)
 	wires.Interact(user)
+
+/obj/machinery/camera/proc/nano_structure()
+	var/cam[0]
+	cam["name"] = sanitize(c_tag)
+	cam["deact"] = !can_use()
+	cam["camera"] = "\ref[src]"
+	cam["x"] = x
+	cam["y"] = y
+	cam["z"] = z
+	return cam

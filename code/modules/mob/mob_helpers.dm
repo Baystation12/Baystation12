@@ -80,6 +80,18 @@
 		return 1
 	return 0
 
+/mob/proc/isSilicon()
+	return 0
+
+/mob/living/silicon/isSilicon()
+	return 1
+    
+/mob/proc/isAI()
+	return 0
+
+/mob/living/silicon/ai/isAI()
+	return 1
+
 /proc/ispAI(A)
 	if(istype(A, /mob/living/silicon/pai))
 		return 1
@@ -416,7 +428,7 @@ var/list/intents = list("help","disarm","grab","hurt")
 	set name = "a-intent"
 	set hidden = 1
 
-	if(ishuman(src) || isbrain(src))
+	if(ishuman(src) || isbrain(src) || isslime(src))
 		switch(input)
 			if("help","disarm","grab","hurt")
 				a_intent = input
@@ -547,3 +559,16 @@ proc/is_blind(A)
 			say_dead_direct("The ghost of <span class='name'>[name]</span> now [pick("skulks","lurks","prowls","creeps","stalks")] among the dead. [message]")
 		else
 			say_dead_direct("<span class='name'>[name]</span> no longer [pick("skulks","lurks","prowls","creeps","stalks")] in the realm of the dead. [message]")
+
+/mob/proc/switch_to_camera(var/obj/machinery/camera/C)
+	if (!C.can_use() || stat || (get_dist(C, src) > 1 || machine != src || blinded || !canmove))
+		return 0
+	check_eye(src)
+	return 1
+
+/mob/living/silicon/ai/switch_to_camera(var/obj/machinery/camera/C)
+	if(!C.can_use() || !is_in_chassis())
+		return 0
+
+	eyeobj.setLoc(C)
+	return 1

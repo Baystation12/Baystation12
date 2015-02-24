@@ -194,7 +194,7 @@
 				if(80 to 90)	filling.icon_state = "[icon_state]80"
 				if(91 to INFINITY)	filling.icon_state = "[icon_state]100"
 
-			filling.icon += mix_color_from_reagents(reagents.reagent_list)
+			filling.color = mix_color_from_reagents(reagents.reagent_list)
 			overlays += filling
 
 		if (!is_open_container())
@@ -251,12 +251,6 @@
 	New()
 		..()
 		reagents.add_reagent("sacid", 60)
-		update_icon()
-
-/obj/item/weapon/reagent_containers/glass/beaker/slime
-	New()
-		..()
-		reagents.add_reagent("slimejelly", 60)
 		update_icon()
 
 /obj/item/weapon/reagent_containers/glass/bucket

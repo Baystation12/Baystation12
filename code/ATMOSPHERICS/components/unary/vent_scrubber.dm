@@ -99,6 +99,8 @@
 		"power" = use_power,
 		"scrubbing" = scrubbing,
 		"panic" = panic,
+		"filter_o2" = ("oxygen" in scrubbing_gas),
+		"filter_n2" = ("nitrogen" in scrubbing_gas),
 		"filter_co2" = ("carbon_dioxide" in scrubbing_gas),
 		"filter_phoron" = ("phoron" in scrubbing_gas),
 		"filter_n2o" = ("sleeping_agent" in scrubbing_gas),
@@ -171,7 +173,7 @@
 		use_power = !use_power
 
 	if(signal.data["panic_siphon"]) //must be before if("scrubbing" thing
-		panic = text2num(signal.data["panic_siphon"] != null)
+		panic = text2num(signal.data["panic_siphon"])
 		if(panic)
 			use_power = 1
 			scrubbing = 0
@@ -187,10 +189,24 @@
 
 	if(signal.data["scrubbing"] != null)
 		scrubbing = text2num(signal.data["scrubbing"])
+		if(scrubbing)
+			panic = 0
 	if(signal.data["toggle_scrubbing"])
 		scrubbing = !scrubbing
+		if(scrubbing)
+			panic = 0
 
 	var/list/toggle = list()
+
+	if(!isnull(signal.data["o2_scrub"]) && text2num(signal.data["o2_scrub"]) != ("oxygen" in scrubbing_gas))
+		toggle += "oxygen"
+	else if(signal.data["toggle_o2_scrub"])
+		toggle += "oxygen"
+
+	if(!isnull(signal.data["n2_scrub"]) && text2num(signal.data["n2_scrub"]) != ("nitrogen" in scrubbing_gas))
+		toggle += "nitrogen"
+	else if(signal.data["toggle_n2_scrub"])
+		toggle += "nitrogen"
 
 	if(!isnull(signal.data["co2_scrub"]) && text2num(signal.data["co2_scrub"]) != ("carbon_dioxide" in scrubbing_gas))
 		toggle += "carbon_dioxide"
@@ -261,6 +277,7 @@
 		user << "A small gauge in the corner reads [round(last_flow_rate, 0.1)] L/s; [round(last_power_draw)] W"
 	else
 		user << "You are too far away to read the gauge."
+	..()
 
 /obj/machinery/atmospherics/unary/vent_scrubber/Del()
 	if(initial_loc)

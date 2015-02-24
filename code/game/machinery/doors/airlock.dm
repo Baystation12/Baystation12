@@ -94,6 +94,10 @@
 	secured_wires = 1
 	assembly_type = /obj/structure/door_assembly/door_assembly_highsecurity //Until somebody makes better sprites.
 
+/obj/machinery/door/airlock/vault/bolted
+	icon_state = "door_locked"
+	locked = 1
+
 /obj/machinery/door/airlock/freezer
 	name = "Freezer Airlock"
 	icon = 'icons/obj/doors/Doorfreezer.dmi'
@@ -1002,7 +1006,7 @@ About the new airlock wires panel:
 	if(operating || welded || locked)
 		return
 	if(!forced)
-		//despite the name, this wire is for general door control. 
+		//despite the name, this wire is for general door control.
 		//Bolts are already covered by the check for locked, above
 		if( !arePowerSystemsOn() || isWireCut(AIRLOCK_WIRE_OPEN_DOOR) )
 			return
@@ -1070,10 +1074,6 @@ About the new airlock wires panel:
 
 /obj/machinery/door/airlock/New(var/newloc, var/obj/structure/door_assembly/assembly=null)
 	..()
-
-	//High-sec airlocks are much harder to completely break by emitters.
-	if(secured_wires)
-		emitter_resistance *= 3
 
 	//if assembly is given, create the new door from the assembly
 	if (assembly)

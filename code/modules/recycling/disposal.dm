@@ -5,9 +5,9 @@
 // Automatically recharges air (unless off), will flush when ready if pre-set
 // Can hold items and human size things, no other draggables
 // Toilets are a type of disposal bin for small objects only and work on magic. By magic, I mean torque rotation
-#define SEND_PRESSURE 50 //kPa
+#define SEND_PRESSURE 50 + ONE_ATMOSPHERE //kPa - assume the inside of a dispoal pipe is 1 atm
 #define PRESSURE_TANK_VOLUME 70	//L - a 0.3 m diameter * 1 m long cylindrical tank. Happens to be the same volume as the regular oxygen tanks, so seems appropriate.
-#define PUMP_MAX_FLOW_RATE 50	//L/s - 8 m/s using a 15 cm by 15 cm inlet
+#define PUMP_MAX_FLOW_RATE 100	//L/s - 4 m/s using a 15 cm by 15 cm inlet
 
 /obj/machinery/disposal
 	name = "disposal unit"
@@ -462,10 +462,10 @@
 		if(prob(75))
 			I.loc = src
 			for(var/mob/M in viewers(src))
-				M.show_message("\the [I] lands in \the [src].", 3)
+				M.show_message("\The [I] lands in \the [src].", 3)
 		else
 			for(var/mob/M in viewers(src))
-				M.show_message("\the [I] bounces off of \the [src]'s rim!", 3)
+				M.show_message("\The [I] bounces off of \the [src]'s rim!", 3)
 		return 0
 	else
 		return ..(mover, target, height, air_group)

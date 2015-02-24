@@ -1249,7 +1249,7 @@ proc/is_hot(obj/item/W as obj)
 				return 1000
 			else
 				return 0
-		if(/obj/item/clothing/mask/cigarette)
+		if(/obj/item/clothing/mask/smokable/cigarette)
 			if(W:lit)
 				return 1000
 			else
@@ -1287,7 +1287,7 @@ proc/is_hot(obj/item/W as obj)
 		istype(W, /obj/item/weapon/weldingtool)					  || \
 		istype(W, /obj/item/weapon/flame/lighter/zippo)			  || \
 		istype(W, /obj/item/weapon/flame/match)            		  || \
-		istype(W, /obj/item/clothing/mask/cigarette) 		      || \
+		istype(W, /obj/item/clothing/mask/smokable/cigarette) 		      || \
 		istype(W, /obj/item/weapon/shovel) \
 	)
 
@@ -1305,7 +1305,7 @@ proc/is_hot(obj/item/W as obj)
 /proc/can_operate(mob/living/carbon/M)
 	return (M.lying && \
 	locate(/obj/machinery/optable, M.loc) || \
-	(locate(/obj/structure/stool/bed/roller, M.loc) && prob(75)) || \
+	(locate(/obj/structure/bed/roller, M.loc) && prob(75)) || \
 	(locate(/obj/structure/table/, M.loc) && prob(66)))
 
 /proc/reverse_direction(var/dir)
@@ -1378,3 +1378,15 @@ var/list/WALLITEMS = list(
 	if(istype(arglist,/list))
 		arglist = list2params(arglist)
 	return "<a href='?src=\ref[D];[arglist]'>[content]</a>"
+
+/proc/get_random_colour(var/simple, var/lower, var/upper)
+	var/colour
+	if(simple)
+		colour = pick(list("FF0000","FF7F00","FFFF00","00FF00","0000FF","4B0082","8F00FF"))
+	else
+		for(var/i=1;i<=3;i++)
+			var/temp_col = "[num2hex(rand(lower,upper))]"
+			if(length(temp_col )<2)
+				temp_col  = "0[temp_col]"
+			colour += temp_col
+	return colour

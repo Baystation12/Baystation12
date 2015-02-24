@@ -54,8 +54,8 @@ datum/preferences
 	var/age = 30						//age of character
 	var/spawnpoint = "Arrivals Shuttle" //where this character will spawn (0-2).
 	var/b_type = "A+"					//blood type (not-chooseable)
-	var/underwear = 1					//underwear type
-	var/undershirt = 1					//undershirt type
+	var/underwear						//underwear type
+	var/undershirt						//undershirt type
 	var/backbag = 2						//backpack type
 	var/h_style = "Bald"				//Hair type
 	var/r_hair = 0						//Hair color
@@ -373,12 +373,11 @@ datum/preferences
 	else
 		dat += "<br><br>"
 
-	if(gender == MALE)
-		dat += "Underwear: <a href ='?_src_=prefs;preference=underwear;task=input'><b>[underwear_m[underwear]]</b></a><br>"
-	else
-		dat += "Underwear: <a href ='?_src_=prefs;preference=underwear;task=input'><b>[underwear_f[underwear]]</b></a><br>"
+	var/list/undies = gender == MALE ? underwear_m : underwear_f
 
-	dat += "Undershirt: <a href='?_src_=prefs;preference=undershirt;task=input'><b>[undershirt_t[undershirt]]</b></a><br>"
+	dat += "Underwear: <a href ='?_src_=prefs;preference=underwear;task=input'><b>[get_key_by_value(undies,underwear)]</b></a><br>"
+
+	dat += "Undershirt: <a href='?_src_=prefs;preference=undershirt;task=input'><b>[get_key_by_value(undershirt_t,undershirt)]</b></a><br>"
 
 	dat += "Backpack Type:<br><a href ='?_src_=prefs;preference=bag;task=input'><b>[backbaglist[backbag]]</b></a><br>"
 
@@ -1178,10 +1177,12 @@ datum/preferences
 				if("f_style")
 					f_style = random_facial_hair_style(gender, species)
 				if("underwear")
-					underwear = rand(1,underwear_m.len)
+					var/r = pick(underwear_m)
+					underwear = underwear_m[r]
 					ShowChoices(user)
 				if("undershirt")
-					undershirt = rand(1,undershirt_t.len)
+					var/r = pick(undershirt_t)
+					undershirt = undershirt_t[r]
 					ShowChoices(user)
 				if("eyes")
 					r_eyes = rand(0,255)
@@ -1299,7 +1300,7 @@ datum/preferences
 
 				if("hair")
 					if(species == "Human" || species == "Unathi" || species == "Tajara" || species == "Skrell")
-						var/new_hair = input(user, "Choose your character's hair colour:", "Character Preference") as color|null
+						var/new_hair = input(user, "Choose your character's hair colour:", "Character Preference", rgb(r_hair, g_hair, b_hair)) as color|null
 						if(new_hair)
 							r_hair = hex2num(copytext(new_hair, 2, 4))
 							g_hair = hex2num(copytext(new_hair, 4, 6))
@@ -1319,7 +1320,7 @@ datum/preferences
 						h_style = new_h_style
 
 				if("facial")
-					var/new_facial = input(user, "Choose your character's facial-hair colour:", "Character Preference") as color|null
+					var/new_facial = input(user, "Choose your character's facial-hair colour:", "Character Preference", rgb(r_facial, g_facial, b_facial)) as color|null
 					if(new_facial)
 						r_facial = hex2num(copytext(new_facial, 2, 4))
 						g_facial = hex2num(copytext(new_facial, 4, 6))
@@ -1351,7 +1352,7 @@ datum/preferences
 
 					var/new_underwear = input(user, "Choose your character's underwear:", "Character Preference")  as null|anything in underwear_options
 					if(new_underwear)
-						underwear = underwear_options.Find(new_underwear)
+						underwear = underwear_options[new_underwear]
 					ShowChoices(user)
 
 				if("undershirt")
@@ -1360,11 +1361,11 @@ datum/preferences
 
 					var/new_undershirt = input(user, "Choose your character's undershirt:", "Character Preference") as null|anything in undershirt_options
 					if (new_undershirt)
-						undershirt = undershirt_options.Find(new_undershirt)
+						undershirt = undershirt_options[new_undershirt]
 					ShowChoices(user)
 
 				if("eyes")
-					var/new_eyes = input(user, "Choose your character's eye colour:", "Character Preference") as color|null
+					var/new_eyes = input(user, "Choose your character's eye colour:", "Character Preference", rgb(r_eyes, g_eyes, b_eyes)) as color|null
 					if(new_eyes)
 						r_eyes = hex2num(copytext(new_eyes, 2, 4))
 						g_eyes = hex2num(copytext(new_eyes, 4, 6))
@@ -1379,7 +1380,7 @@ datum/preferences
 
 				if("skin")
 					if(species == "Unathi" || species == "Tajara" || species == "Skrell")
-						var/new_skin = input(user, "Choose your character's skin colour: ", "Character Preference") as color|null
+						var/new_skin = input(user, "Choose your character's skin colour: ", "Character Preference", rgb(r_skin, g_skin, b_skin)) as color|null
 						if(new_skin)
 							r_skin = hex2num(copytext(new_skin, 2, 4))
 							g_skin = hex2num(copytext(new_skin, 4, 6))
@@ -1705,12 +1706,8 @@ datum/preferences
 				else if(status == "mechanical")
 					I.mechanize()
 
-	if(underwear > underwear_m.len || underwear < 1)
-		underwear = 0 //I'm sure this is 100% unnecessary, but I'm paranoid... sue me. //HAH NOW NO MORE MAGIC CLONING UNDIES
 	character.underwear = underwear
 
-	if(undershirt > undershirt_t.len || undershirt < 1)
-		undershirt = 0
 	character.undershirt = undershirt
 
 	if(backbag > 4 || backbag < 1)

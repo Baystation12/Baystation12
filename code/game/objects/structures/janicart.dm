@@ -156,7 +156,7 @@
 
 
 //old style retardo-cart
-/obj/structure/stool/bed/chair/janicart
+/obj/structure/bed/chair/janicart
 	name = "janicart"
 	icon = 'icons/obj/vehicles.dmi'
 	icon_state = "pussywagon"
@@ -169,12 +169,12 @@
 	var/callme = "pimpin' ride"	//how do people refer to it?
 
 
-/obj/structure/stool/bed/chair/janicart/New()
+/obj/structure/bed/chair/janicart/New()
 	create_reagents(100)
 	update_layer()
 
 
-/obj/structure/stool/bed/chair/janicart/examine(mob/user)
+/obj/structure/bed/chair/janicart/examine(mob/user)
 	if(!..(user, 1))
 		return
 
@@ -183,7 +183,7 @@
 		user << "\A [mybag] is hanging on the [callme]."
 
 
-/obj/structure/stool/bed/chair/janicart/attackby(obj/item/I, mob/user)
+/obj/structure/bed/chair/janicart/attackby(obj/item/I, mob/user)
 	if(istype(I, /obj/item/weapon/mop))
 		if(reagents.total_volume > 1)
 			reagents.trans_to(I, 2)
@@ -200,7 +200,7 @@
 		mybag = I
 
 
-/obj/structure/stool/bed/chair/janicart/attack_hand(mob/user)
+/obj/structure/bed/chair/janicart/attack_hand(mob/user)
 	if(mybag)
 		mybag.loc = get_turf(user)
 		user.put_in_hands(mybag)
@@ -209,9 +209,9 @@
 		..()
 
 
-/obj/structure/stool/bed/chair/janicart/relaymove(mob/user, direction)
+/obj/structure/bed/chair/janicart/relaymove(mob/user, direction)
 	if(user.stat || user.stunned || user.weakened || user.paralysis)
-		unbuckle()
+		unbuckle_mob()
 	if(istype(user.l_hand, /obj/item/key) || istype(user.r_hand, /obj/item/key))
 		step(src, direction)
 		update_mob()
@@ -219,46 +219,34 @@
 		user << "<span class='notice'>You'll need the keys in one of your hands to drive this [callme].</span>"
 
 
-/obj/structure/stool/bed/chair/janicart/Move()
+/obj/structure/bed/chair/janicart/Move()
 	..()
 	if(buckled_mob)
 		if(buckled_mob.buckled == src)
 			buckled_mob.loc = loc
 
 
-/obj/structure/stool/bed/chair/janicart/buckle_mob(mob/M, mob/user)
-	if(M != user || !ismob(M) || get_dist(src, user) > 1 || user.restrained() || user.lying || user.stat || M.buckled || istype(user, /mob/living/silicon))
-		return
-
-	unbuckle()
-
-	M.visible_message(\
-		"<span class='notice'>[M] climbs onto the [callme]!</span>",\
-		"<span class='notice'>You climb onto the [callme]!</span>")
-	M.buckled = src
-	M.loc = loc
-	M.set_dir(dir)
-	M.update_canmove()
-	buckled_mob = M
+/obj/structure/bed/chair/janicart/post_buckle_mob(mob/living/M)
 	update_mob()
-	add_fingerprint(user)
+	return ..()
 
 
-/obj/structure/stool/bed/chair/janicart/update_layer()
+/obj/structure/bed/chair/janicart/update_layer()
 	if(dir == SOUTH)
 		layer = FLY_LAYER
 	else
 		layer = OBJ_LAYER
 
 
-/obj/structure/stool/bed/chair/janicart/unbuckle()
-	if(buckled_mob)
-		buckled_mob.pixel_x = 0
-		buckled_mob.pixel_y = 0
-	..()
+/obj/structure/bed/chair/janicart/unbuckle_mob()
+	var/mob/living/M = ..()
+	if(M)
+		M.pixel_x = 0
+		M.pixel_y = 0
+	return M
 
 
-/obj/structure/stool/bed/chair/janicart/set_dir()
+/obj/structure/bed/chair/janicart/set_dir()
 	..()
 	update_layer()
 	if(buckled_mob)
@@ -269,7 +257,7 @@
 	update_mob()
 
 
-/obj/structure/stool/bed/chair/janicart/proc/update_mob()
+/obj/structure/bed/chair/janicart/proc/update_mob()
 	if(buckled_mob)
 		buckled_mob.set_dir(dir)
 		switch(dir)
@@ -287,7 +275,7 @@
 				buckled_mob.pixel_y = 7
 
 
-/obj/structure/stool/bed/chair/janicart/bullet_act(var/obj/item/projectile/Proj)
+/obj/structure/bed/chair/janicart/bullet_act(var/obj/item/projectile/Proj)
 	if(buckled_mob)
 		if(prob(85))
 			return buckled_mob.bullet_act(Proj)

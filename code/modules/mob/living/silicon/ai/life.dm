@@ -89,26 +89,29 @@
 		else
 
 			//stage = 6
-			src.blind.screen_loc = "1,1 to 15,15"
-			if (src.blind.layer!=18)
-				src.blind.layer = 18
-			src.sight = src.sight&~SEE_TURFS
-			src.sight = src.sight&~SEE_MOBS
-			src.sight = src.sight&~SEE_OBJS
-			src.see_in_dark = 0
-			src.see_invisible = SEE_INVISIBLE_LIVING
 
-			if (((!loc.master.power_equip) || istype(T, /turf/space)) && !istype(src.loc,/obj/item))
+			var/area/current_area = get_area(src)
+
+			if (((!loc.master.power_equip) && current_area.requires_power == 1 || istype(T, /turf/space)) && !istype(src.loc,/obj/item))
+				//If our area lacks equipment power, and is not magically powered (i.e. centcom), or if we are in space and not carded, lose power.
 				if (src:aiRestorePowerRoutine==0)
 					src:aiRestorePowerRoutine = 1
 
+					//Blind the AI
+
+					src.blind.screen_loc = "1,1 to 15,15"
+					if (src.blind.layer!=18)
+						src.blind.layer = 18
+					src.sight = src.sight&~SEE_TURFS
+					src.sight = src.sight&~SEE_MOBS
+					src.sight = src.sight&~SEE_OBJS
+					src.see_in_dark = 0
+					src.see_invisible = SEE_INVISIBLE_LIVING
+
+					//Now to tell the AI why they're blind and dying slowly.
+
 					src << "You've lost power!"
-//							world << "DEBUG CODE TIME! [loc] is the area the AI is sucking power from"
-					if (!is_special_character(src))
-						src.set_zeroth_law("")
-					//src.clear_supplied_laws() // Don't reset our laws.
-					//var/time = time2text(world.realtime,"hh:mm:ss")
-					//lawchanges.Add("[time] <b>:</b> [src.name]'s noncore laws have been reset due to power failure")
+
 					spawn(20)
 						src << "Backup battery online. Scanners, camera, and radio interface offline. Beginning fault-detection."
 						sleep(50)
@@ -129,17 +132,10 @@
 						src << "Connection verified. Searching for APC in power network."
 						sleep(50)
 						var/obj/machinery/power/apc/theAPC = null
-/*
-						for (var/something in loc)
-							if (istype(something, /obj/machinery/power/apc))
-								if (!(something:stat & BROKEN))
-									theAPC = something
-									break
-*/
-						var/PRP //like ERP with the code, at least this stuff is no more 4x sametext
+
+						var/PRP
 						for (PRP=1, PRP<=4, PRP++)
-							var/area/AIarea = get_area(src)
-							for(var/area/A in AIarea.master.related)
+							for(var/area/A in current_area.master.related)
 								for (var/obj/machinery/power/apc/APC in A)
 									if (!(APC.stat & BROKEN))
 										theAPC = APC
@@ -175,6 +171,7 @@
 							sleep(50)
 							theAPC = null
 
+	process_queued_alarms()
 	regular_hud_updates()
 	switch(src.sensor_mode)
 		if (SEC_HUD)

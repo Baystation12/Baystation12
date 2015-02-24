@@ -48,7 +48,7 @@
 		H.death()
 
 	//This is a terrible hack and I should be ashamed.
-	var/datum/seed/diona = seed_types["diona"]
+	var/datum/seed/diona = plant_controller.seeds["diona"]
 	if(!diona)
 		del(src)
 

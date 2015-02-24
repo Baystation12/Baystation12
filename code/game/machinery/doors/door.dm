@@ -27,11 +27,11 @@
 	var/air_properties_vary_with_direction = 0
 	var/maxhealth = 300
 	var/health
-	var/emitter_hits = 0 // For use when tracking amount of emitter hits taken.
-	var/emitter_resistance = 10 // Amount of emitter hits doors whistand
+	var/destroy_hits = 10 //How many strong hits it takes to destroy the door
 	var/min_force = 10 //minimum amount of force needed to damage the door with a melee weapon
 	var/hitsound = 'sound/weapons/smash.ogg' //sound door makes when hit with a weapon
 	var/obj/item/stack/sheet/metal/repairing
+	var/block_air_zones = 1 //If set, air zones cannot merge across the door even when it is opened.
 
 	//Multi-tile doors
 	dir = EAST
@@ -103,8 +103,8 @@
 			else
 				flick("door_deny", src)
 		return
-	if(istype(AM, /obj/structure/stool/bed/chair/wheelchair))
-		var/obj/structure/stool/bed/chair/wheelchair/wheel = AM
+	if(istype(AM, /obj/structure/bed/chair/wheelchair))
+		var/obj/structure/bed/chair/wheelchair/wheel = AM
 		if(density)
 			if(wheel.pulling && (src.allowed(wheel.pulling)))
 				open()
@@ -115,7 +115,7 @@
 
 
 /obj/machinery/door/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
-	if(air_group) return 0
+	if(air_group) return !block_air_zones
 	if(istype(mover) && mover.checkpass(PASSGLASS))
 		return !opacity
 	return !density
@@ -146,18 +146,21 @@
 		return
 
 	// Emitter Blasts - these will eventually completely destroy the door, given enough time.
-	if (istype(Proj, /obj/item/projectile/beam/emitter))
-		if(health > 0)
-			Proj.damage /= 4
-		else
-			emitter_hits ++
-			if(emitter_hits >= emitter_resistance)
-				visible_message("\red <B>[src.name] breaks apart!</B>", 1)
-				new /obj/effect/decal/cleanable/ash(src.loc) // Turn it to ashes!
-				del(src)
+	if (Proj.damage > 90) 
+		destroy_hits--
+		if (destroy_hits <= 0)
+			visible_message("\red <B>\The [src.name] disintegrates!</B>")
+			switch (Proj.damage_type)
+				if(BRUTE)
+					new /obj/item/stack/sheet/metal(src.loc, 2)
+					new /obj/item/stack/rods(src.loc, 3)
+				if(BURN)
+					new /obj/effect/decal/cleanable/ash(src.loc) // Turn it to ashes!
+			del(src)
 
 	if(Proj.damage)
-		take_damage(Proj.damage)
+		//cap projectile damage so that there's still a minimum number of hits required to break the door
+		take_damage(min(Proj.damage, 100))
 
 
 
