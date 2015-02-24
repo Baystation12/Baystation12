@@ -19,7 +19,7 @@
 		mob_passthrough_check = 1
 	else
 		mob_passthrough_check = 0
-	..()
+	return ..()
 
 /obj/item/projectile/bullet/can_embed()
 	//prevent embedding if the projectile is passing through the mob
