@@ -76,6 +76,21 @@
 	name = "Canister \[Phoron\]"
 	icon_state = "orange"
 	canister_color = "orange"
+/obj/machinery/portable_atmospherics/canister/empty/nitrogen
+	name = "Canister \[N2\]"
+	icon_state = "red"
+	canister_color = "red"
+/obj/machinery/portable_atmospherics/canister/empty/carbon_dioxide
+	name = "Canister \[CO2\]"
+	icon_state = "black"
+	canister_color = "black"
+/obj/machinery/portable_atmospherics/canister/empty/sleeping_agent
+	name = "Canister \[N2O\]"
+	icon_state = "redws"
+	canister_color = "redws"
+
+
+
 
 /obj/machinery/portable_atmospherics/canister/proc/check_change()
 	var/old_flag = update_flag
@@ -226,7 +241,7 @@ update_flag
 /obj/machinery/portable_atmospherics/canister/bullet_act(var/obj/item/projectile/Proj)
 	if(!(Proj.damage_type == BRUTE || Proj.damage_type == BURN))
 		return
-	
+
 	if(Proj.damage)
 		src.health -= round(Proj.damage / 2)
 		healthcheck()

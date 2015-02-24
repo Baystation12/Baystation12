@@ -1760,6 +1760,11 @@ area/space/atmosalert()
 	name = "\improper Construction Site Solars"
 	icon_state = "aft"
 
+/area/constructionsite/teleporter
+	name = "Construction Site Teleporter"
+	icon_state = "yellow"
+
+
 //area/constructionsite
 //	name = "\improper Construction Site Shuttle"
 
