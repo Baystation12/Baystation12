@@ -586,6 +586,14 @@ datum
 			required_reagents = list("capsaicin" = 2)
 			required_catalysts = list("phoron" = 5)
 			result_amount = 1
+
+		ketchup
+			name = "Ketchup"
+			id = "ketchup"
+			result = "ketchup"
+			required_reagents = list("tomatojuice" = 2, "water" = 1, "sugar" = 1)
+			result_amount = 4
+
 ///////////////////////////////////////////////////////////////////////////////////
 
 // foam and foam precursor
@@ -1602,6 +1610,26 @@ datum
 			on_reaction(var/datum/reagents/holder, var/created_volume)
 				var/location = get_turf(holder.my_atom)
 				new /obj/item/weapon/reagent_containers/food/snacks/sliceable/cheesewheel(location)
+				return
+
+		meatball
+			name = "Meatball"
+			id = "meatball"
+			result = null
+			required_reagents = list("protein" = 3, "flour" = 5)
+			result_amount = 3
+			on_reaction(var/datum/reagents/holder, var/created_volume)
+				new /obj/item/weapon/reagent_containers/food/snacks/meatball(get_turf(holder.my_atom))
+				return
+
+		dough
+			name = "Dough"
+			id = "dough"
+			result = null
+			required_reagents = list("egg" = 3, "flour" = 10)
+			result_amount = 1
+			on_reaction(var/datum/reagents/holder, var/created_volume)
+				new /obj/item/weapon/reagent_containers/food/snacks/dough(get_turf(holder.my_atom))
 				return
 
 		syntiflesh
