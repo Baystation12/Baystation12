@@ -3,6 +3,8 @@
 /proc/invalidateCameraCache()
 	for(var/obj/machinery/computer/security/s in world)
 		s.camera_cache = null
+	for(var/datum/alarm/A in world)
+		A.cameras = null
 
 /obj/machinery/computer/security
 	name = "security camera monitor"
@@ -43,33 +45,17 @@
 				if(!can_access_camera(C))
 					continue
 
-				var/cam[0]
-				cam["name"] = sanitize(C.c_tag)
-				cam["deact"] = !C.can_use()
-				cam["camera"] = "\ref[C]"
-				cam["x"] = C.x
-				cam["y"] = C.y
-				cam["z"] = C.z
-
+				var/cam = C.nano_structure()
 				cameras[++cameras.len] = cam
 
 				if(C == current)
 					data["current"] = cam
 
-				var/list/camera_list = list("cameras" = cameras)
-				camera_cache=list2json(camera_list)
-
+			var/list/camera_list = list("cameras" = cameras)
+			camera_cache=list2json(camera_list)
 		else
 			if(current)
-				var/cam[0]
-				cam["name"] = current.c_tag
-				cam["deact"] = !current.can_use()
-				cam["camera"] = "\ref[current]"
-				cam["x"] = current.x
-				cam["y"] = current.y
-				cam["z"] = current.z
-
-				data["current"] = cam
+				data["current"] = current.nano_structure()
 
 
 		if(ui)
