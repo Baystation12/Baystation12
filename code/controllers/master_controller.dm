@@ -288,7 +288,7 @@ datum/controller/game_controller/proc/process_machines_process()
 			if(Machine.use_power)
 				Machine.auto_use_power()
 			continue
-		machines.Cut(i,i+1)
+		machines -= Machine
 
 datum/controller/game_controller/proc/process_objects()
 	for(var/i = 1, i <= processing_objects.len, i++)
