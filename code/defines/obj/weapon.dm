@@ -24,17 +24,6 @@
 	var/mode = 1
 	w_class = 3.0
 
-/obj/item/weapon/bananapeel
-	name = "banana peel"
-	desc = "A peel from a banana."
-	icon = 'icons/obj/items.dmi'
-	icon_state = "banana_peel"
-	item_state = "banana_peel"
-	w_class = 2.0
-	throwforce = 0
-	throw_speed = 4
-	throw_range = 20
-
 /obj/item/weapon/soap
 	name = "soap"
 	desc = "A cheap bar of soap. Doesn't smell."

@@ -71,6 +71,16 @@
 	var/footstep = 1	//used for squeeks whilst walking
 	species_restricted = null
 
+/obj/item/clothing/shoes/clown_shoes/handle_movement(var/turf/walking, var/running)
+	if(running)
+		if(footstep >= 2)
+			footstep = 0
+			playsound(src, "clownstep", 50, 1) // this will get annoying very fast.
+		else
+			footstep++
+	else
+		playsound(src, "clownstep", 20, 1)
+
 /obj/item/clothing/shoes/jackboots
 	name = "jackboots"
 	desc = "Nanotrasen-issue Security combat boots for combat scenarios or combat situations. All combat, all the time."

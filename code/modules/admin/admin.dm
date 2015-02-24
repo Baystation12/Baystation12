@@ -993,6 +993,32 @@ var/global/floorIsLava = 0
 		else
 			return "Error: Invalid sabotage target: [target]"
 */
+
+/datum/admins/proc/spawn_fruit()
+	set category = "Debug"
+	set desc = "Spawn the product of a seed."
+	set name = "Spawn Fruit"
+
+	if(!check_rights(R_SPAWN))	return
+
+	var/seedtype = input("Select a seed type", "Spawn Fruit") as null|anything in plant_controller.seeds
+	if(!seedtype || !plant_controller.seeds[seedtype])
+		return
+	var/datum/seed/S = plant_controller.seeds[seedtype]
+	S.harvest(usr,0,0,1)
+
+/datum/admins/proc/spawn_plant()
+	set category = "Debug"
+	set desc = "Spawn a spreading plant effect."
+	set name = "Spawn Plant"
+
+	if(!check_rights(R_SPAWN))	return
+
+	var/seedtype = input("Select a seed type", "Spawn Plant") as null|anything in plant_controller.seeds
+	if(!seedtype || !plant_controller.seeds[seedtype])
+		return
+	new /obj/effect/plant(get_turf(usr), plant_controller.seeds[seedtype])
+
 /datum/admins/proc/spawn_atom(var/object as text)
 	set category = "Debug"
 	set desc = "(atom path) Spawn an atom"

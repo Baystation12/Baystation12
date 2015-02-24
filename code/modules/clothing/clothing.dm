@@ -360,6 +360,9 @@ BLIND     // can't see anything
 	species_restricted = list("exclude","Unathi","Tajara")
 	sprite_sheets = list("Vox" = 'icons/mob/species/vox/shoes.dmi')
 
+/obj/item/clothing/shoes/proc/handle_movement(var/turf/walking, var/running)
+	return
+
 /obj/item/clothing/shoes/update_clothing_icon()
 	if (ismob(src.loc))
 		var/mob/M = src.loc
