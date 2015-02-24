@@ -30,30 +30,37 @@
 	var/newscaster_announcements = null
 	var/ert_disabled = 0
 	var/uplink_welcome = "Illegal Uplink Console:"
-	var/uplink_uses = 10
+	var/uplink_uses = 12
 	var/list/datum/uplink_item/uplink_items = list(
+		"Ammunition" = list(
+			new/datum/uplink_item(/obj/item/ammo_magazine/a357, 2, ".357", "RA"),
+			new/datum/uplink_item(/obj/item/ammo_magazine/mc9mm, 2, "9mm", "R9"),
+			new/datum/uplink_item(/obj/item/ammo_magazine/chemdart, 2, "Darts", "AD"),
+			new/datum/uplink_item(/obj/item/weapon/storage/box/sniperammo, 3, "14.5mm", "RA")
+			),
 		"Highly Visible and Dangerous Weapons" = list(
-			 new/datum/uplink_item(/obj/item/ammo_magazine/mc9mm, 2, "Ammo-9mm", "R9"),
-			 new/datum/uplink_item(/obj/item/ammo_magazine/a357, 2, "Ammo-357", "RA"),
 			 new/datum/uplink_item(/obj/item/weapon/storage/box/emps, 3, "5 EMP Grenades", "EM"),
 			 new/datum/uplink_item(/obj/item/weapon/melee/energy/sword, 4, "Energy Sword", "ES"),
+			 new/datum/uplink_item(/obj/item/weapon/gun/projectile/dartgun, 5, "Dart Gun", "DG"),
 			 new/datum/uplink_item(/obj/item/weapon/gun/energy/crossbow, 5, "Energy Crossbow", "XB"),
 			 new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/g9mm, 5, "Silenced 9mm", "S9"),
 			 new/datum/uplink_item(/obj/item/mecha_parts/mecha_equipment/weapon/energy/riggedlaser, 6, "Exosuit Rigged Laser", "RL"),
 			 new/datum/uplink_item(/obj/item/weapon/gun/projectile/revolver, 6, "Revolver", "RE"),
-			 new/datum/uplink_item(/obj/item/weapon/storage/box/syndicate, 10, "Mercenary Bundle", "BU")
+			 new/datum/uplink_item(/obj/item/weapon/storage/box/syndicate, 10, "Mercenary Bundle", "BU"),
+			 new/datum/uplink_item(/obj/item/weapon/gun/projectile/heavysniper, 12, "PTRS Rifle", "BU")
 			),
 		"Stealthy and Inconspicuous Weapons" = list(
 			new/datum/uplink_item(/obj/item/weapon/soap/syndie, 1, "Subversive Soap", "SP"),
 			new/datum/uplink_item(/obj/item/weapon/cane/concealed, 2, "Concealed Cane Sword", "CC"),
 			new/datum/uplink_item(/obj/item/weapon/cartridge/syndicate, 3, "Detomatix PDA Cartridge", "DC"),
 			new/datum/uplink_item(/obj/item/weapon/pen/paralysis, 3, "Paralysis Pen", "PP"),
-			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/cigarette, 4, "Cigarette Kit", "BH")
+			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/cigarette, 4, "Cigarette Kit", "BH"),
+			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/toxin, 4, "Random Toxin - Beaker", "RT")
 			),
 		"Stealth and Camouflage Items" = list(
 			new/datum/uplink_item(/obj/item/weapon/card/id/syndicate, 2, "Agent ID card", "AC"),
 			new/datum/uplink_item(/obj/item/clothing/shoes/syndigaloshes, 2, "No-Slip Shoes", "SH"),
-			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/spy, 2, "Bug Kit", "SK"),
+			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/spy, 2, "Bug Kit", "BK"),
 			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/chameleon, 3, "Chameleon Kit", "CB"),
 			new/datum/uplink_item(/obj/item/device/chameleon, 4, "Chameleon-Projector", "CP"),
 			new/datum/uplink_item(/obj/item/clothing/mask/gas/voice, 4, "Voice Changer", "VC"),
@@ -62,11 +69,13 @@
 		"Devices and Tools" = list(
 			new/datum/uplink_item(/obj/item/weapon/storage/toolbox/syndicate, 1, "Fully Loaded Toolbox", "ST"),
 			new/datum/uplink_item(/obj/item/weapon/plastique, 2, "C-4 (Destroys walls)", "C4"),
+			new/datum/uplink_item(/obj/item/device/encryptionkey/syndicate, 2, "Encrypted Radio Channel Key", "ER"),
 			new/datum/uplink_item(/obj/item/device/encryptionkey/binary, 3, "Binary Translator Key", "BT"),
 			new/datum/uplink_item(/obj/item/weapon/card/emag, 3, "Cryptographic Sequencer", "EC"),
 			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/clerical, 3, "Morphic Clerical Kit", "CK"),
 			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/space, 3, "Space Suit", "SS"),
 			new/datum/uplink_item(/obj/item/clothing/glasses/thermal/syndi, 3, "Thermal Imaging Glasses", "TM"),
+			new/datum/uplink_item(/obj/item/clothing/suit/storage/vest/heavy/merc, 4, "Heavy Armor Vest", "HAV"),
 			new/datum/uplink_item(/obj/item/weapon/aiModule/syndicate, 7, "Hacked AI Upload Module", "AI"),
 			new/datum/uplink_item(/obj/item/device/powersink, 5, "Powersink (DANGER!)", "PS",),
 			new/datum/uplink_item(/obj/item/device/radio/beacon/syndicate, 7, "Singularity Beacon (DANGER!)", "SB"),
@@ -78,9 +87,19 @@
 			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/imp_explosive, 6, "Explosive Implant (DANGER!)", "EI"),
 			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/imp_uplink, 10, "Uplink Implant (Contains 5 Telecrystals)", "UI")
 			),
-		"Health Aids" = list(
-			new/datum/uplink_item(/obj/item/weapon/storage/box/donkpockets, 1, "Box of Donk-Pockets", "DP"),
+		"Medical" = list(
+			new/datum/uplink_item(/obj/item/weapon/storage/box/donkpockets, 1, "Box of Sin-Pockets", "DP"),
+			new/datum/uplink_item(/obj/item/weapon/storage/firstaid/surgery, 5, "Surgery kit", "SK"),
 			new/datum/uplink_item(/obj/item/weapon/storage/firstaid/combat, 5, "Combat medical kit", "CM")
+		),
+		"Hardsuit Modules" = list(
+			new/datum/uplink_item(/obj/item/rig_module/vision/thermal, 2, "Thermal Scanner", "RTS"),
+			new/datum/uplink_item(/obj/item/rig_module/fabricator/energy_net, 3, "Net Projector", "REN"),
+			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/ewar_voice, 4, "Electrowarfare Suite and Voice Synthesiser", "REV"),
+			new/datum/uplink_item(/obj/item/rig_module/maneuvering_jets, 4, "Maneuvering Jets", "RMJ"),
+			new/datum/uplink_item(/obj/item/rig_module/mounted/egun, 6, "Mounted Energy Gun", "REG"),
+			new/datum/uplink_item(/obj/item/rig_module/power_sink, 6, "Power Sink", "RPS"),
+			new/datum/uplink_item(/obj/item/rig_module/mounted, 8, "Mounted Laser Cannon", "RLC")
 		),
 		"(Pointless) Badassery" = list(
 			new/datum/uplink_item(/obj/item/toy/syndicateballoon, 10, "For showing that You Are The BOSS (Useless Balloon)", "BS"),
@@ -250,16 +269,6 @@
 		   special_role == "Cultist" && prob(30) || \
 		   special_role == "Head Revolutionary" && prob(30))
 			suspects += man
-
-			// If they're a traitor or likewise, give them extra TC in exchange.
-			var/obj/item/device/uplink/hidden/suplink = man.mind.find_syndicate_uplink()
-			if(suplink)
-				var/extra = 4
-				suplink.uses += extra
-				man << "\red We have received notice that enemy intelligence suspects you to be linked with us. We have thus invested significant resources to increase your uplink's capacity."
-			else
-				// Give them a warning!
-				man << "\red They are on to you!"
 
 		// Some poor people who were just in the wrong place at the wrong time..
 		else if(prob(10))

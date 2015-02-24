@@ -792,26 +792,25 @@ note dizziness decrements automatically in the mob's Life() proc.
 /mob/Stat()
 	..()
 
-	if(statpanel("MC"))	//not looking at that panel
-
-		if(client && client.holder)
+	if(client && client.holder)
+		if(statpanel("Status"))
 			stat(null,"Location:\t([x], [y], [z])")
 			stat(null,"CPU:\t[world.cpu]")
 			stat(null,"Instances:\t[world.contents.len]")
-
-			if(master_controller)
-				stat(null,"MasterController-[last_tick_duration] ([master_controller.processing?"On":"Off"]-[controller_iteration])")
-				stat(null,"Air-[master_controller.air_cost]\tSun-[master_controller.sun_cost]")
-				stat(null,"Mob-[master_controller.mobs_cost]\t#[mob_list.len]")
-				stat(null,"Dis-[master_controller.diseases_cost]\t#[active_diseases.len]")
-				stat(null,"Mch-[master_controller.machines_cost]\t#[machines.len]")
-				stat(null,"Obj-[master_controller.objects_cost]\t#[processing_objects.len]")
-				stat(null,"Net-[master_controller.networks_cost]\tPnet-[master_controller.powernets_cost]")
-				stat(null,"NanoUI-[master_controller.nano_cost]\t#[nanomanager.processing_uis.len]")
-				stat(null,"Events-[master_controller.events_cost]\t#[event_manager.active_events.len]")
-				stat(null,"Tick-[master_controller.ticker_cost]\tALL-[master_controller.total_cost]")
-			else
-				stat(null,"MasterController-ERROR")
+		if(statpanel("MC") && master_controller)
+			stat(null,"MasterController-[last_tick_duration] ([master_controller.processing?"On":"Off"]-[controller_iteration])")
+			stat(null,"Air-[master_controller.air_cost]\tSun-[master_controller.sun_cost]")
+			stat(null,"Mob-[master_controller.mobs_cost]\t#[mob_list.len]")
+			stat(null,"Dis-[master_controller.diseases_cost]\t#[active_diseases.len]")
+			stat(null,"Mch-[master_controller.machines_cost]\t#[machines.len]")
+			stat(null,"Obj-[master_controller.objects_cost]\t#[processing_objects.len]")
+			stat(null,"Net-[master_controller.networks_cost]\tPnet-[master_controller.powernets_cost]")
+			stat(null,"NanoUI-[master_controller.nano_cost]\t#[nanomanager.processing_uis.len]")
+			stat(null,"Event-[master_controller.events_cost]\t#[event_manager.active_events.len]")
+			alarm_manager.stat_entry()
+			stat(null,"Tick-[master_controller.ticker_cost]\tALL-[master_controller.total_cost]")
+		else
+			stat(null,"MasterController-ERROR")
 
 	if(listed_turf && client)
 		if(!TurfAdjacent(listed_turf))
