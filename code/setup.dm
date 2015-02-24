@@ -765,9 +765,13 @@ var/list/be_special_flags = list(
 #define TISSUE_ORGAN_LAYER 4 // This tissue layer must be open to reach the organs.
 #define TISSUE_SUPPORTS 8    // This is a structural tissue.
 // Wound status flags.
+#define WOUND_CLOSED 0
 #define WOUND_BURN 1
 #define WOUND_BRUISE 2
 #define WOUND_CUT 3
+#define WOUND_OPEN 4
+#define WOUND_RETRACTED 5
+#define WOUND_SUTURED 6
 
 #define WOUND_CLOSED 0
 #define WOUND_OPEN 1
