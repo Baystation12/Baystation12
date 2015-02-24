@@ -57,7 +57,7 @@ datum/controller/game_controller/New()
 	if(!shuttle_controller)			shuttle_controller = new /datum/shuttle_controller()
 
 datum/controller/game_controller/proc/setup()
-	world.tick_lag = 0.3
+	world.tick_lag = config.Ticklag
 
 	/* Used for away missions - no point running it at the moment.
 	spawn(20)
