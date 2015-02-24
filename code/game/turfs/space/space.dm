@@ -20,7 +20,7 @@ var/list/accessible_z_levels = list("1" = 5, "3" = 10, "4" = 15, "5" = 10, "6" =
 	if(!config.starlight)
 		return
 	if(locate(/turf/simulated) in orange(src,1))
-		SetLuminosity(3)
+		SetLuminosity(config.starlight)
 	else
 		SetLuminosity(0)
 
