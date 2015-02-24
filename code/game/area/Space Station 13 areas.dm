@@ -1032,6 +1032,9 @@ var/list/ghostteleportlocs = list()
 	name = "Internal Affairs"
 	icon_state = "law"
 
+/area/lawoffice2
+	name = "Bridge Secretary"
+	icon_state = "law"
 
 
 
