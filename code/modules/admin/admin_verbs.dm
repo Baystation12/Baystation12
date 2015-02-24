@@ -274,7 +274,11 @@ var/list/admin_verbs_dev = list(
 	/client/proc/deadmin_self,
 	/client/proc/hidedevsay,
 	/client/proc/cmd_dev_say,
-	/client/proc/cmd_vip_say
+	/client/proc/cmd_vip_say,
+	/client/proc/Jump,
+	/client/proc/jumptokey,				/*allows us to jump to the location of a mob with a certain ckey*/
+	/client/proc/jumptomob,				/*allows us to jump to a specific mob*/
+	/client/proc/jumptoturf
 )
 var/list/admin_verbs_mentor = list(
 	/client/proc/toggleadminhelpsound,	/*toggles whether we hear a sound when adminhelps/PMs are used*/

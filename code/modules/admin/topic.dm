@@ -1451,8 +1451,7 @@
 		var/recieve_msg = "\blue <b>Your issue is being dealt with by <a href='?src=\ref[usr];priv_msg=\ref[src.owner]'>[usr.client.holder.fakekey ? "Administrator" : usr.key].</a></font> Click their name to send them more information about your issue.</b>"
 		M << recieve_msg
 		for(var/client/X in admins)
-			if(check_rights(R_ADMIN|R_MOD|R_MENTOR,0))
-				X << take_msg
+			X << take_msg
 
 	else if(href_list["takefax"])
 		var/mob/Sender = locate(href_list["takefax"])
