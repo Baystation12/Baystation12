@@ -114,11 +114,11 @@
 
 	spread_chance = seed.get_trait(TRAIT_POTENCY)
 	spread_distance = ((growth_type>0) ? round(spread_chance*0.6) : round(spread_chance*0.3))
-
-	set_dir(calc_dir())
 	update_icon()
 
-	spawn(1)
+	spawn(1) // Plants will sometimes be spawned in the turf adjacent to the one they need to end up in, for the sake of correct dir/etc being set.
+		set_dir(calc_dir())
+		update_icon()
 		plant_controller.add_plant(src)
 		// Some plants eat through plating.
 		if(!isnull(seed.chems["pacid"]))
