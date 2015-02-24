@@ -224,7 +224,4 @@
 
 	var/list/active_genes=list()
 
-	//Examine tab vars
-	//These hold the descriptions and other info, to relay to the actual tab.
-	var/description_holders[0]
 
