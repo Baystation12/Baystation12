@@ -139,18 +139,17 @@ The process works like this:
 
 	var/neutron_flow = 25
 	var/max_neutron_flow = 300
-	var/total_power = 150
 	var/obj/item/weapon/shard/supermatter/shard = null
 
 	var/list/mat = list( "Osmium", "Phoron", "Diamonds", "Platinum", "Gold", "Uranium",  "Silver", "Steel",  )
-	var/list/mat_mod = list(    "Steel" = 3,
-								"Silver" = 2,
-								"Uranium" = 2,
-								"Gold" = 1,
-								"Platinum" = 1,
-								"Diamonds" = 1,
-								"Phoron" = 1,
-								"Osmium" = 1 ) // modifier for output amount
+	var/list/mat_mod = list(    "Steel" = 3.5,
+								"Silver" = 2.5,
+								"Uranium" = 2.5,
+								"Gold" = 1.5,
+								"Platinum" = 1.5,
+								"Diamonds" = 1.5,
+								"Phoron" = 1.5,
+								"Osmium" = 1.3 ) // modifier for output amount
 
 	var/list/mat_peak = list(   "Steel" = 30,
 								"Silver" = 70,
@@ -159,7 +158,7 @@ The process works like this:
 								"Platinum" = 190,
 								"Diamonds" = 230,
 								"Phoron" = 270,
-								"Osmium" = 300 ) // cost per each mod # of bars
+								"Osmium" = 300 ) // Standard peak locations
 
 	var/list/obj/item/stack/sheet/mat_obj = list( 	"Diamonds" = /obj/item/stack/sheet/mineral/diamond,
 													"Steel" = /obj/item/stack/sheet/metal,
@@ -167,7 +166,7 @@ The process works like this:
 													"Platinum" = /obj/item/stack/sheet/mineral/platinum,
 													"Osmium" = /obj/item/stack/sheet/mineral/osmium,
 													"Gold" = /obj/item/stack/sheet/mineral/gold,
-													"Uranium" = /obj/item/stack/sheet/mineral/enruranium,
+													"Uranium" = /obj/item/stack/sheet/mineral/uranium,
 													"Phoron" = /obj/item/stack/sheet/mineral/phoron ) // cost per each mod # of bars
 
 	New()
@@ -192,22 +191,25 @@ The process works like this:
 		if( neutron_flow < 0 )
 			neutron_flow = 0
 
+	// Produces the resultant material
 	proc/produce()
 		if( !shard )
-			src.visible_message("\icon[src] <b>[src]</b> beeps, \"Needs a supermatter shard to transmutate.\"")
+			src.visible_message("\icon[src] <b>[src]</b> buzzes, \"Needs a supermatter shard to transmutate.\"")
 			return
-		active = 1
+		var/list/peak_distances = list()
+		peak_distances = get_peak_distances( neutron_flow )
+		var/max_distance = 50.0 // Max peak distance from neutron flow which will still produce materials
 
-		var/remaining_power = total_power
+		active = 1
 		flick( "Active", src )
 
 		var/amount = 0
 		for( var/cur_mat in mat )
-			if( mat_peak[cur_mat] <= neutron_flow ) // If the neutron flow is higher than the peak energy required, go ahead with the process
-				amount = round( remaining_power/mat_peak[cur_mat] )
+			var/distance = peak_distances[cur_mat]
+			if( distance <= max_distance )
+				amount = round(( distance/max_distance )*mat_mod[cur_mat] ) // Produces amount based on distance from flow and modifier
 
 				if( amount > 0 ) // Will only do anything if any amount was actually created
-					remaining_power = remaining_power - (amount*mat_peak[cur_mat]) // Using power to create materials
 					var/obj/item/stack/sheet/T = mat_obj[cur_mat]
 					var/obj/item/stack/sheet/I = new T
 					I.amount = amount
@@ -217,20 +219,17 @@ The process works like this:
 		src.visible_message("\icon[src] <b>[src]</b> beeps, \"Supermatter transmutation complete.\"")
 		active = 0
 
-	// This sorts a list of peaks within max_distance units of the neutron flow and returns a sorted list of the nearest ones
-	proc/get_nearest_peaks( var/flow )
-		var/max_distance = 100.0
-		var/list/peak_distances = null
+	// This sorts a list of peaks within max_distance units of the given flow and returns a sorted list of the nearest ones
+	proc/get_peak_distances( var/flow )
+		var/list/peak_distances = new/list()
 
-		for( var/material in mat )
-			var/peak = mat[material]
+		for( var/cur_mat in mat_peak )
+			var/peak = mat_peak[cur_mat]
 			var/peak_distance = abs( peak-flow )
-			if( peak_distance <= max_distance )
-				peak_distances[material] = peak_distance
-
-		peak_distances = sortAssoc( peak_distances )
+			peak_distances[cur_mat] = peak_distance
 		return peak_distances
 
+	// Eats the shard, duh
 	proc/eat_shard()
 		if( !shard )
 			return 0
@@ -240,12 +239,14 @@ The process works like this:
 		update_icon()
 		return 1
 
+	// Returns true if the machine is ready to perform
 	report_ready()
 		ready = 1
 
 		..()
 
 		return ready
+
 
 	attackby(var/obj/item/weapon/shard/B as obj, var/mob/user as mob)
 		if(isrobot(user))
@@ -264,6 +265,7 @@ The process works like this:
 		update_icon()
 		return
 
+
 	update_icon()
 		..()
 
@@ -271,6 +273,7 @@ The process works like this:
 			icon_state = "OpenCrystal"
 		else
 			icon_state = "Open"
+
 
 
 /obj/machinery/computer/phoron_desublimer_control
@@ -292,6 +295,8 @@ The process works like this:
 
 	New()
 		..()
+
+		src.check_parts()
 
 	proc/find_parts()
 		for( var/M in machine_ref )
@@ -338,7 +343,7 @@ The process works like this:
 		dat += "<A href='?src=\ref[src];scan=1'>Run Scan</A><BR><BR>"
 
 		dat += "<b>Status:</b><BR>"
-		for( var/M in machine )
+		for( var/M in machine_ref )
 			if( machine_ref[M] )
 				var/list/obj/machinery/phoron_desublimer/type = machine_ref[M]
 				dat += "<h4><center>[type.name]</center></h4>"
@@ -355,8 +360,8 @@ The process works like this:
 						dat += "<A href='?src=\ref[src];furnace_10=1'>+++</A> <BR><BR>"
 						if( furnace.shard )
 							dat += "<b>Supermatter Shard Inserted</b> <BR>"
-							if( furnace.active  )
-								dat += "<b>Activate</b>"
+							if( furnace.active )
+								dat += "<b>Active</b>"
 							else
 								dat += "<A href='?src=\ref[src];furnace_activate=1'>Activate</A><BR>"
 						else
