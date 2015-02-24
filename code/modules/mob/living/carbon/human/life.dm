@@ -1240,7 +1240,7 @@
 			if(!druggy)		see_invisible = SEE_INVISIBLE_LEVEL_TWO
 			if(healths)		healths.icon_state = "health7"	//DEAD healthmeter
 			if(client)
-				if(client.view != world.view) // If mob moves while zoomed in with device, unzoom them.
+				if(client.view != world.view) // If mob dies while zoomed in with device, unzoom them.
 					for(var/obj/item/item in contents)
 						if(item.zoom)
 							item.zoom()

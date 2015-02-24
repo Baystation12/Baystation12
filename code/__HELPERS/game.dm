@@ -491,5 +491,8 @@ datum/projectile_data
 		temps[direction] = rstats
 	return temps
 
-/proc/MinutesToTicks(var/minutes as num)
-	return minutes * 60 * 10
+/proc/MinutesToTicks(var/minutes)
+	return SecondsToTicks(60 * minutes)
+	
+/proc/SecondsToTicks(var/seconds)
+	return seconds * 10

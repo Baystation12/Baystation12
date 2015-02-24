@@ -170,7 +170,7 @@
 /obj/item/weapon/reagent_containers/spray/waterflower
 	name = "water flower"
 	desc = "A seemingly innocent sunflower...with a twist."
-	icon = 'icons/obj/harvest.dmi'
+	icon = 'icons/obj/device.dmi'
 	icon_state = "sunflower"
 	item_state = "sunflower"
 	amount_per_transfer_from_this = 1
@@ -237,7 +237,7 @@
 /obj/item/weapon/reagent_containers/spray/plantbgone // -- Skie
 	name = "Plant-B-Gone"
 	desc = "Kills those pesky weeds!"
-	icon = 'icons/obj/hydroponics.dmi'
+	icon = 'icons/obj/hydroponics_machines.dmi'
 	icon_state = "plantbgone"
 	item_state = "plantbgone"
 	volume = 100

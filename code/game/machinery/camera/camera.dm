@@ -53,13 +53,6 @@
 		ASSERT(src.network.len > 0)
 	..()
 
-/obj/machinery/camera/Del()
-	if(!alarm_on)
-		triggerCameraAlarm()
-
-	cancelCameraAlarm()
-	..()
-
 /obj/machinery/camera/emp_act(severity)
 	if(!isEmpProof())
 		if(prob(100/severity))
@@ -67,7 +60,7 @@
 			stat |= EMPED
 			SetLuminosity(0)
 			kick_viewers()
-			triggerCameraAlarm()
+			triggerCameraAlarm(10 * severity)
 			update_icon()
 
 			spawn(900)
@@ -261,22 +254,16 @@
 	else
 		icon_state = initial(icon_state)
 
-/obj/machinery/camera/proc/triggerCameraAlarm()
+/obj/machinery/camera/proc/triggerCameraAlarm(var/duration = 0)
 	alarm_on = 1
-	if(!get_area(src))
-		return
-
-	for(var/mob/living/silicon/S in mob_list)
-		S.triggerAlarm("Camera", get_area(src), list(src), src)
-
+	camera_alarm.triggerAlarm(loc, src, duration)
 
 /obj/machinery/camera/proc/cancelCameraAlarm()
-	alarm_on = 0
-	if(!get_area(src))
+	if(wires.IsIndexCut(CAMERA_WIRE_ALARM))
 		return
 
-	for(var/mob/living/silicon/S in mob_list)
-		S.cancelAlarm("Camera", get_area(src), src)
+	alarm_on = 0
+	camera_alarm.clearAlarm(loc, src)
 
 //if false, then the camera is listed as DEACTIVATED and cannot be used
 /obj/machinery/camera/proc/can_use()
@@ -361,3 +348,13 @@
 
 	user.set_machine(src)
 	wires.Interact(user)
+
+/obj/machinery/camera/proc/nano_structure()
+	var/cam[0]
+	cam["name"] = sanitize(c_tag)
+	cam["deact"] = !can_use()
+	cam["camera"] = "\ref[src]"
+	cam["x"] = x
+	cam["y"] = y
+	cam["z"] = z
+	return cam
