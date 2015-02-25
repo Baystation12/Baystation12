@@ -49,6 +49,9 @@ datum/track/New(var/title_name, var/audio)
 		new/datum/track("Cake", 'sound/music/midis/still_alive.mid'),
 		new/datum/track("Bill E. Jewel", 'sound/music/midis/pianoman.mid'),
 		new/datum/track("Rocket", 'sound/music/midis/rocketman.mid'),
+		new/datum/track("Eileen", 'sound/music/midis/comeoneileen.mid'),
+		new/datum/track("Falling Out", 'sound/music/midis/idontwant.mid'),
+		new/datum/track("Velvet", 'sound/music/midis/bluevelvet.mid'),
 	)
 
 /obj/machinery/media/jukebox/New()
