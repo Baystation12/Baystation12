@@ -843,6 +843,18 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	access = access_armory
 	group = "Security"
 
+/datum/supply_packs/randomised/autoammo
+	name = "Automatic weapon ammunition crate"
+	num_contained = 6
+	contains = list(/obj/item/ammo_magazine/mc9mmt,
+					/obj/item/ammo_magazine/mc9mmt/rubber,
+					/obj/item/ammo_magazine/a556)
+	cost = 20
+	containertype = /obj/structure/closet/crate/secure
+	containername = "Automatic weapon ammunition crate"
+	access = access_armory
+	group = "Security"
+
 /*
 /datum/supply_packs/loyalty
 	name = "Loyalty implant crate"
