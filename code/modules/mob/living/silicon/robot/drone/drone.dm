@@ -31,7 +31,7 @@
 	add_language("Drone Talk", 1)
 
 	if(camera && "Robots" in camera.network)
-		camera.network.Add("Engineering")
+		camera.add_network("Engineering")
 
 	//They are unable to be upgraded, so let's give them a bit of a better battery.
 	cell.maxcharge = 10000
