@@ -1,7 +1,7 @@
 
 /obj/item/weapon/shard/supermatter
 	name = "supermatter shard"
-	desc = "A shard of supermatter. Incredibly dangerous, though not larger enough to go critical."
+	desc = "A shard of supermatter. Incredibly dangerous, though not large enough to go critical."
 	force = 10.0
 	throwforce = 20.0
 	icon_state = "supermatterlarge"
@@ -13,7 +13,7 @@
 	luminosity = 2
 
 /obj/item/weapon/shard/supermatter/New()
-	src.icon_state = pick("supermatterlarge", "supermattermedium", "supermattersmall")
+	src.icon_state = pick("supermatterlarge")
 	switch(src.icon_state)
 		if("supermattersmall")
 			src.pixel_x = rand(-12, 12)

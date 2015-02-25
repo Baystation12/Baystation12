@@ -207,7 +207,7 @@ The process works like this:
 		for( var/cur_mat in mat )
 			var/distance = peak_distances[cur_mat]
 			if( distance <= max_distance )
-				amount = round(( distance/max_distance )*mat_mod[cur_mat] ) // Produces amount based on distance from flow and modifier
+				amount = round((( max_distance-distance )/max_distance )*mat_mod[cur_mat] ) // Produces amount based on distance from flow and modifier
 
 				if( amount > 0 ) // Will only do anything if any amount was actually created
 					var/obj/item/stack/sheet/T = mat_obj[cur_mat]
