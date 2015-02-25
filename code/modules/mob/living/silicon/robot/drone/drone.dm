@@ -287,5 +287,7 @@
 		return
 
 /mob/living/silicon/robot/drone/add_robot_verbs()
+	src.verbs |= robot_verbs_subsystems
 
 /mob/living/silicon/robot/drone/remove_robot_verbs()
+	src.verbs -= robot_verbs_subsystems

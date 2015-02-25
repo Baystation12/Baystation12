@@ -323,11 +323,13 @@
 	if(next_alarm_notice && (world.time > next_alarm_notice))
 		next_alarm_notice = 0
 
+		var/alarm_raised = 0
 		for(var/datum/alarm_handler/AH in queued_alarms)
 			var/list/alarms = queued_alarms[AH]
 			var/reported = 0
 			for(var/datum/alarm/A in alarms)
 				if(alarms[A] == 1)
+					alarm_raised = 1
 					if(!reported)
 						reported = 1
 						src << "<span class='warning'>--- [AH.category] Detected ---</span>"
@@ -342,6 +344,9 @@
 						reported = 1
 						src << "<span class='notice'>--- [AH.category] Cleared ---</span>"
 					src << "\The [A.alarm_name()]."
+
+		if(alarm_raised)
+			src << "<A HREF=?src=\ref[src];showalerts=1>\[Show Alerts\]</A>"
 
 		for(var/datum/alarm_handler/AH in queued_alarms)
 			var/list/alarms = queued_alarms[AH]
