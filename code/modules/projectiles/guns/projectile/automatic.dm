@@ -139,6 +139,13 @@
 		icon_state = "carbine"
 	return
 
+/obj/item/weapon/gun/projectile/automatic/z8/examine(mob/user)
+	..()
+	if(launcher.chambered)
+		user << "\The [launcher] has \a [launcher.chambered] loaded."
+	else
+		user << "\The [launcher] is empty."
+
 /obj/item/weapon/gun/projectile/automatic/l6_saw
 	name = "\improper L6 SAW"
 	desc = "A rather traditionally made light machine gun with a pleasantly lacquered wooden pistol grip. Has 'Aussec Armoury- 2531' engraved on the reciever"
