@@ -362,13 +362,6 @@
 
 		show_objectives(player)
 
-		//Ninja objective announcement goes here.
-
-		//Set ninja internals.
-		var/mob/living/carbon/human/N = player.current
-		N.internal = N.s_store
-		N.internals.icon_state = "internal1"
-
 /datum/game_mode/calamity/proc/spawn_vox_raiders(var/list/candidates)
 
 	//Create objectives.
@@ -418,11 +411,7 @@
 
 			var/mob/living/simple_animal/borer/roundstart/B = new(target_host)
 
-			player.current = B
-			B.mind = player
-			B.key = player.key
-			player.assigned_role = "Cortical Borer"
-			player.special_role = "Cortical Borer"
+			B.transfer_personality(player)
 
 			B.host = target_host
 			B.host_brain.name = target_host.name
@@ -430,10 +419,6 @@
 
 			var/datum/organ/external/head = target_host.get_organ("head")
 			head.implants += B
-
-			player.current << "\blue <b>You are a cortical borer!</b> You are a brain slug that worms its way \
-			into the head of its victim, lurking out of sight until it needs to take control."
-			player.current << "You can speak to your victim with <b>say</b>, to other borers with <b>say ;</b>, and use your Alien tab for abilities."
 
 			if(!config.objectives_disabled)
 				player.objectives += new /datum/objective/borer_survive()

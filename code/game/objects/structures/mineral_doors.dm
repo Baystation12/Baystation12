@@ -284,4 +284,3 @@
 	CheckHardness()
 		playsound(loc, 'sound/effects/attackblob.ogg', 100, 1)
 		..()
-

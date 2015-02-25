@@ -70,7 +70,6 @@
 
 /datum/game_mode/traitor/autotraitor/post_setup()
 	..()
-	abandon_allowed = 1
 	traitorcheckloop()
 
 /datum/game_mode/traitor/autotraitor/proc/traitorcheckloop()
@@ -135,7 +134,7 @@
 				newtraitor << "\red <B>No time like the present.</B> \black It's time to take matters into your own hands..."
 				newtraitor << "<B>You are now a traitor.</B>"
 				newtraitor.mind.special_role = "traitor"
-				newtraitor.hud_updateflag |= 1 << SPECIALROLE_HUD
+				BITSET(newtraitor.hud_updateflag, SPECIALROLE_HUD)
 				newtraitor << "<i>You have been selected this round as an antagonist!</i>"
 				show_objectives(newtraitor.mind)
 

@@ -1,6 +1,7 @@
 // the SMES
 // stores power
 
+#define SMESRATE 0.05
 #define SMESMAXCHARGELEVEL 250000
 #define SMESMAXOUTPUT 250000
 
@@ -32,28 +33,26 @@
 	var/last_input_attempt	= 0
 	var/last_charge			= 0
 
+	var/input_cut = 0
+	var/input_pulsed = 0
+	var/output_cut = 0
+	var/output_pulsed = 0
+
 	var/open_hatch = 0
 	var/name_tag = null
 	var/building_terminal = 0 //Suggestions about how to avoid clickspam building several terminals accepted!
 	var/obj/machinery/power/terminal/terminal = null
 	var/should_be_mapped = 0 // If this is set to 0 it will send out warning on New()
 
-/obj/machinery/power/smes/drain_power(var/drain_check)
+/obj/machinery/power/smes/drain_power(var/drain_check, var/surge, var/amount = 0)
 
 	if(drain_check)
 		return 1
 
-	if(!charge)
-		return 0
+	var/smes_amt = min((amount * SMESRATE), charge)
+	charge -= smes_amt
+	return smes_amt / SMESRATE
 
-	if(charge)
-		var/drained_power = rand(200,400)
-		if(charge < drained_power)
-			drained_power = charge
-			charge -= drained_power
-			return drained_power
-
-	return 0
 
 /obj/machinery/power/smes/New()
 	..()
@@ -107,9 +106,6 @@
 /obj/machinery/power/smes/proc/chargedisplay()
 	return round(5.5*charge/(capacity ? capacity : 5e6))
 
-#define SMESRATE 0.05			// rate of internal charge to external power
-
-
 /obj/machinery/power/smes/process()
 	if(stat & BROKEN)	return
 
@@ -119,7 +115,7 @@
 	var/last_onln = outputting
 
 	//inputting
-	if(input_attempt)
+	if(input_attempt && (!input_pulsed && !input_cut))
 		var/target_load = min((capacity-charge)/SMESRATE, input_level)	// charge at set rate, limited to spare capacity
 		var/actual_load = draw_power(target_load)						// add the load to the terminal side network
 		charge += actual_load * SMESRATE								// increase the charge
@@ -132,7 +128,7 @@
 			inputting = 0
 
 	//outputting
-	if(outputting)
+	if(outputting && (!output_pulsed && !output_cut))
 		output_used = min( charge/SMESRATE, output_level)		//limit output to that stored
 
 		charge -= output_used*SMESRATE		// reduce the storage (may be recovered in /restore() if excessive)
@@ -222,6 +218,8 @@
 	add_fingerprint(user)
 	ui_interact(user)
 
+/obj/machinery/power/smes/attack_ghost(mob/user)
+	ui_interact(user)
 
 /obj/machinery/power/smes/attack_hand(mob/user)
 	add_fingerprint(user)
@@ -305,12 +303,19 @@
 	data["outputMax"] = output_level_max
 	data["outputLoad"] = round(output_used)
 
+	if(outputting)
+		data["outputting"] = 2			// smes is outputting
+	else if(!outputting && output_attempt)
+		data["outputting"] = 1			// smes is online but not outputting because it's charge level is too low
+	else
+		data["outputting"] = 0			// smes is not outputting
+
 	// update the ui if it exists, returns null if no ui is passed/found
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		// the ui does not exist, so we'll create a new() one
         // for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
-		ui = new(user, src, ui_key, "smes.tmpl", "SMES Power Storage Unit", 540, 380)
+		ui = new(user, src, ui_key, "smes.tmpl", "SMES Unit", 540, 380)
 		// when the ui is first opened this is the data it will use
 		ui.set_initial_data(data)
 		// open the new ui window
@@ -318,17 +323,19 @@
 		// auto update every Master Controller tick
 		ui.set_auto_update(1)
 
+/obj/machinery/power/smes/proc/Percentage()
+	return round(100.0*charge/capacity, 0.1)
 
 /obj/machinery/power/smes/Topic(href, href_list)
 	if(..())
 		return 1
 
 	if( href_list["cmode"] )
-		inputting(!inputting)
+		inputting(!input_attempt)
 		update_icon()
 
 	else if( href_list["online"] )
-		outputting(!outputting)
+		outputting(!output_attempt)
 		update_icon()
 	else if( href_list["input"] )
 		switch( href_list["input"] )
@@ -414,5 +421,3 @@
 /obj/machinery/power/smes/magical/process()
 	charge = 5000000
 	..()
-
-#undef SMESRATE

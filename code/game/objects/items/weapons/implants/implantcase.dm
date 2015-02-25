@@ -1,7 +1,7 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:32
 
 /obj/item/weapon/implantcase
-	name = "Glass Case"
+	name = "glass case"
 	desc = "A case containing an implant."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "implantcase-0"
@@ -26,7 +26,7 @@
 			return
 		if((!in_range(src, usr) && src.loc != user))
 			return
-		t = copytext(sanitize(t),1,MAX_MESSAGE_LEN)
+		t = sanitize(copytext(t,1,MAX_MESSAGE_LEN))
 		if(t)
 			src.name = text("Glass Case - '[]'", t)
 		else
@@ -63,7 +63,7 @@
 
 
 /obj/item/weapon/implantcase/tracking
-	name = "Glass Case - 'Tracking'"
+	name = "glass case - 'tracking'"
 	desc = "A case containing a tracking implant."
 	icon_state = "implantcase-b"
 
@@ -74,7 +74,7 @@
 
 
 /obj/item/weapon/implantcase/explosive
-	name = "Glass Case - 'Explosive'"
+	name = "glass case - 'explosive'"
 	desc = "A case containing an explosive implant."
 	icon_state = "implantcase-r"
 
@@ -85,7 +85,7 @@
 
 
 /obj/item/weapon/implantcase/chem
-	name = "Glass Case - 'Chem'"
+	name = "glass case - 'chem'"
 	desc = "A case containing a chemical implant."
 	icon_state = "implantcase-b"
 
@@ -96,7 +96,7 @@
 
 
 /obj/item/weapon/implantcase/loyalty
-	name = "Glass Case - 'Loyalty'"
+	name = "glass case - 'loyalty'"
 	desc = "A case containing a loyalty implant."
 	icon_state = "implantcase-r"
 
@@ -107,7 +107,7 @@
 
 
 /obj/item/weapon/implantcase/death_alarm
-	name = "Glass Case - 'Death Alarm'"
+	name = "glass case - 'death alarm'"
 	desc = "A case containing a death alarm implant."
 	icon_state = "implantcase-b"
 
@@ -118,7 +118,7 @@
 
 
 /obj/item/weapon/implantcase/freedom
-	name = "Glass Case - 'Freedom'"
+	name = "glass case - 'freedom'"
 	desc = "A case containing a freedom implant."
 	icon_state = "implantcase-r"
 
@@ -129,7 +129,7 @@
 
 
 /obj/item/weapon/implantcase/adrenalin
-	name = "Glass Case - 'Adrenalin'"
+	name = "glass case - 'adrenalin'"
 	desc = "A case containing an adrenalin implant."
 	icon_state = "implantcase-b"
 
@@ -140,7 +140,7 @@
 
 
 /obj/item/weapon/implantcase/dexplosive
-	name = "Glass Case - 'Explosive'"
+	name = "glass case - 'explosive'"
 	desc = "A case containing an explosive."
 	icon_state = "implantcase-r"
 
@@ -151,7 +151,7 @@
 
 
 /obj/item/weapon/implantcase/health
-	name = "Glass Case - 'Health'"
+	name = "glass case - 'health'"
 	desc = "A case containing a health tracking implant."
 	icon_state = "implantcase-b"
 

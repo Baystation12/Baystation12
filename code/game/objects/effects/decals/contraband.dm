@@ -74,9 +74,6 @@
 	
 	del(oldsrc)	//delete it now to cut down on sanity checks afterwards. Agouri's code supports rerolling it anyway
 
-//I'm 
-/obj/structure/sign/poster/proc/placement_check()
-
 //############################## THE ACTUAL DECALS ###########################
 
 /obj/structure/sign/poster
@@ -158,44 +155,6 @@
 	P.loc = newloc
 	src.loc = P
 	del(src)
-
-
-//separated to reduce code duplication. Moved here for ease of reference and to unclutter r_wall/attackby()
-/turf/simulated/wall/proc/place_poster(var/obj/item/weapon/contraband/poster/P, var/mob/user)
-
-	if(!istype(src,/turf/simulated/wall))
-		user << "\red You can't place this here!"
-		return
-
-	var/stuff_on_wall = 0
-	for(var/obj/O in contents) //Let's see if it already has a poster on it or too much stuff
-		if(istype(O,/obj/structure/sign/poster))
-			user << "<span class='notice'>The wall is far too cluttered to place a poster!</span>"
-			return
-		stuff_on_wall++
-		if(stuff_on_wall == 3)
-			user << "<span class='notice'>The wall is far too cluttered to place a poster!</span>"
-			return
-
-	user << "<span class='notice'>You start placing the poster on the wall...</span>" //Looks like it's uncluttered enough. Place the poster.
-
-	//declaring D because otherwise if P gets 'deconstructed' we lose our reference to P.resulting_poster
-	var/obj/structure/sign/poster/D = new(P.serial_number)
-
-	var/temp_loc = user.loc
-	flick("poster_being_set",D)
-	D.loc = src
-	del(P)	//delete it now to cut down on sanity checks afterwards. Agouri's code supports rerolling it anyway
-	playsound(D.loc, 'sound/items/poster_being_created.ogg', 100, 1)
-
-	sleep(17)
-	if(!D)	return
-
-	if(istype(src,/turf/simulated/wall) && user && user.loc == temp_loc)//Let's check if everything is still there
-		user << "<span class='notice'>You place the poster!</span>"
-	else
-		D.roll_and_drop(temp_loc)
-	return
 
 /datum/poster
 	// Name suffix. Poster - [name]

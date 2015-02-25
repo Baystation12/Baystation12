@@ -89,9 +89,9 @@ var/list/event_last_fired = list()
 	if(active_with_role["Security"] > 0)
 		if(!sent_spiders_to_station)
 			possibleEvents[/datum/event/spider_infestation] = max(active_with_role["Security"], 5) + 5
-		if(aliens_allowed && !sent_aliens_to_station)
+		if(config.aliens_allowed && !sent_aliens_to_station)
 			possibleEvents[/datum/event/alien_infestation] = max(active_with_role["Security"], 5) + 2.5
-		if(!sent_ninja_to_station && toggle_space_ninja)
+		if(!sent_ninja_to_station && config.ninjas_allowed)
 			possibleEvents[/datum/event/space_ninja] = max(active_with_role["Security"], 5)
 
 	for(var/event_type in event_last_fired) if(possibleEvents[event_type])

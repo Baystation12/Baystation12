@@ -128,7 +128,7 @@ img, a img {
 h1, h2, h3, h4, h5, h6 {
     margin: 0;
     padding: 12px 0 6px 0;
-    color: #517087;
+    color: #FFFFFF;
     clear: both;
 }
 
@@ -268,6 +268,12 @@ div.notice {
 .itemLabelWide {
     float: left;
     width: 45%;
+    color: #e9c183;
+}
+
+.itemLabelWidest {
+    float: left;
+    width: 100%;
     color: #e9c183;
 }
 
@@ -491,6 +497,14 @@ div.notice {
     text-align: center;
 }
 
+table.fixed { 
+	table-layout:fixed;
+}
+
+table.fixed td {
+	overflow: hidden;
+}
+
 /* Table stuffs for power monitor */
 table.pmon {
     border: 2px solid RoyalBlue;
@@ -561,4 +575,9 @@ th.misc {
 
 .oxyloss {
     color: blue;
+}
+
+/* 75px width used in power monitoring console buttons */
+.width75btn {
+    width: 75px;
 }

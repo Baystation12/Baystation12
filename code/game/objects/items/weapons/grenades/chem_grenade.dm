@@ -1,5 +1,5 @@
 /obj/item/weapon/grenade/chem_grenade
-	name = "Grenade Casing"
+	name = "grenade casing"
 	icon_state = "chemg"
 	item_state = "flashbang"
 	desc = "A hand made chemical grenade."
@@ -171,7 +171,7 @@
 
 
 /obj/item/weapon/grenade/chem_grenade/large
-	name = "Large Chem Grenade"
+	name = "large chem grenade"
 	desc = "An oversized grenade that affects a larger area."
 	icon_state = "large_grenade"
 	allowed_containers = list(/obj/item/weapon/reagent_containers/glass)
@@ -179,7 +179,7 @@
 	affected_area = 4
 
 /obj/item/weapon/grenade/chem_grenade/metalfoam
-	name = "Metal-Foam Grenade"
+	name = "metal-foam grenade"
 	desc = "Used for emergency sealing of air breaches."
 	path = 1
 	stage = 2
@@ -200,7 +200,7 @@
 		icon_state = initial(icon_state) +"_locked"
 
 /obj/item/weapon/grenade/chem_grenade/incendiary
-	name = "Incendiary Grenade"
+	name = "incendiary grenade"
 	desc = "Used for clearing rooms of living things."
 	path = 1
 	stage = 2

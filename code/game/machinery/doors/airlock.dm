@@ -30,6 +30,20 @@
 	var/secured_wires = 0
 	var/datum/wires/airlock/wires = null
 
+/obj/machinery/door/airlock/attack_generic(var/mob/user, var/damage)
+	if(stat & (BROKEN|NOPOWER))
+		if(damage >= 10)
+			if(src.density)
+				visible_message("<span class='danger'>\The [user] forces \the [src] open!</span>")
+				open()
+			else
+				visible_message("<span class='danger'>\The [user] forces \the [src] closed!</span>")
+				close()
+		else
+			visible_message("<span class='notice'>\The [user] strains fruitlessly to force \the [src] [density ? "open" : "closed"].</span>")
+		return
+	..()
+
 /obj/machinery/door/airlock/command
 	name = "Airlock"
 	icon = 'icons/obj/doors/Doorcom.dmi'
@@ -79,6 +93,10 @@
 	opacity = 1
 	secured_wires = 1
 	assembly_type = /obj/structure/door_assembly/door_assembly_highsecurity //Until somebody makes better sprites.
+
+/obj/machinery/door/airlock/vault/bolted
+	icon_state = "door_locked"
+	locked = 1
 
 /obj/machinery/door/airlock/freezer
 	name = "Freezer Airlock"
@@ -316,7 +334,7 @@ About the new airlock wires panel:
 	return ((src.aiControlDisabled==1) && (!hackProof) && (!src.isAllPowerLoss()));
 
 /obj/machinery/door/airlock/proc/arePowerSystemsOn()
-	if (stat & NOPOWER)
+	if (stat & (NOPOWER|BROKEN))
 		return 0
 	return (src.secondsMainPowerLost==0 || src.secondsBackupPowerLost==0)
 
@@ -437,7 +455,7 @@ About the new airlock wires panel:
 			if(density)
 				flick("door_spark", src)
 		if("deny")
-			if(density && !(stat & (BROKEN|NOPOWER)))
+			if(density && src.arePowerSystemsOn())
 				flick("door_deny", src)
 	return
 
@@ -855,13 +873,14 @@ About the new airlock wires panel:
 		return
 
 	src.add_fingerprint(user)
-	if((istype(C, /obj/item/weapon/weldingtool) && !( src.operating > 0 ) && src.density))
+	if(!repairing && (istype(C, /obj/item/weapon/weldingtool) && !( src.operating > 0 ) && src.density))
 		var/obj/item/weapon/weldingtool/W = C
 		if(W.remove_fuel(0,user))
 			if(!src.welded)
 				src.welded = 1
 			else
 				src.welded = null
+			playsound(src, 'sound/items/Welder.ogg', 100, 1)
 			src.update_icon()
 			return
 		else
@@ -869,7 +888,7 @@ About the new airlock wires panel:
 	else if(istype(C, /obj/item/weapon/screwdriver))
 		if (src.p_open)
 			if (stat & BROKEN)
-				usr << "The airlock control panel is too damaged to be closed!"
+				usr << "<span class='warning'>The panel is broken and cannot be closed.</span>"
 			else
 				src.p_open = 0
 		else
@@ -884,13 +903,8 @@ About the new airlock wires panel:
 	else if(istype(C, /obj/item/weapon/pai_cable))	// -- TLE
 		var/obj/item/weapon/pai_cable/cable = C
 		cable.plugin(src, user)
-	else if(istype(C, /obj/item/weapon/crowbar))
-		var/beingcrowbarred = null
-		if(istype(C, /obj/item/weapon/crowbar) )
-			beingcrowbarred = 1 //derp, Agouri
-		else
-			beingcrowbarred = 0
-		if( beingcrowbarred && src.p_open && (operating == -1 || (density && welded && operating != 1 && !src.arePowerSystemsOn() && !src.locked)) )
+	else if(!repairing && istype(C, /obj/item/weapon/crowbar))
+		if(src.p_open && (operating < 0 || (!operating && welded && !src.arePowerSystemsOn() && density && (!src.locked || (stat & BROKEN)))) )
 			playsound(src.loc, 'sound/items/Crowbar.ogg', 100, 1)
 			user.visible_message("[user] removes the electronics from the airlock assembly.", "You start to remove electronics from the airlock assembly.")
 			if(do_after(user,40))
@@ -910,18 +924,18 @@ About the new airlock wires panel:
 				da.created_name = src.name
 				da.update_state()
 
-				if(operating == -1)
+				if(operating == -1 || (stat & BROKEN))
 					new /obj/item/weapon/circuitboard/broken(src.loc)
 					operating = 0
-				else 
+				else
 					if (!electronics) create_electronics()
-					
+
 					electronics.loc = src.loc
 					electronics = null
 
 				del(src)
 				return
-		else if(arePowerSystemsOn() && !(stat & BROKEN))
+		else if(arePowerSystemsOn())
 			user << "\blue The airlock's motors resist your efforts to force it."
 		else if(locked)
 			user << "\blue The airlock's bolts prevent it from being forced."
@@ -931,22 +945,22 @@ About the new airlock wires panel:
 			else
 				spawn(0)	close(1)
 
-	else if(istype(C, /obj/item/weapon/twohanded/fireaxe) && (!arePowerSystemsOn() || (stat & BROKEN)))
+	else if(istype(C, /obj/item/weapon/twohanded/fireaxe) && !arePowerSystemsOn())
 		if(locked)
 			user << "\blue The airlock's bolts prevent it from being forced."
 		else if( !welded && !operating )
 			if(density)
 				var/obj/item/weapon/twohanded/fireaxe/F = C
-				if(F:wielded)
+				if(F.wielded)
 					spawn(0)	open(1)
 				else
-					user << "\red You need to be wielding the Fire axe to do that."
+					user << "\red You need to be wielding \the [C] to do that."
 			else
 				var/obj/item/weapon/twohanded/fireaxe/F = C
-				if(F:wielded)
+				if(F.wielded)
 					spawn(0)	close(1)
 				else
-					user << "\red You need to be wielding the Fire axe to do that."
+					user << "\red You need to be wielding \the [C] to do that."
 
 	else
 		..()
@@ -992,7 +1006,9 @@ About the new airlock wires panel:
 	if(operating || welded || locked)
 		return
 	if(!forced)
-		if( !arePowerSystemsOn() || isWireCut(AIRLOCK_WIRE_DOOR_BOLTS) )
+		//despite the name, this wire is for general door control.
+		//Bolts are already covered by the check for locked, above
+		if( !arePowerSystemsOn() || isWireCut(AIRLOCK_WIRE_OPEN_DOOR) )
 			return
 	if(safe)
 		for(var/turf/turf in locs)
@@ -1062,10 +1078,10 @@ About the new airlock wires panel:
 	//if assembly is given, create the new door from the assembly
 	if (assembly)
 		assembly_type = assembly.type
-		
+
 		electronics = assembly.electronics
 		electronics.loc = src
-		
+
 		//update the door's access to match the electronics'
 		secured_wires = electronics.secure
 		if(electronics.one_access)
@@ -1073,7 +1089,7 @@ About the new airlock wires panel:
 			req_one_access = src.electronics.conf_access
 		else
 			req_access = src.electronics.conf_access
-		
+
 		//get the name from the assembly
 		if(assembly.created_name)
 			name = assembly.created_name
@@ -1093,8 +1109,8 @@ About the new airlock wires panel:
 					src.closeOther = A
 					break
 
-// Most doors will never be deconstructed over the course of a round, 
-// so as an optimization defer the creation of electronics until 
+// Most doors will never be deconstructed over the course of a round,
+// so as an optimization defer the creation of electronics until
 // the airlock is deconstructed
 /obj/machinery/door/airlock/proc/create_electronics()
 	//create new electronics
@@ -1102,7 +1118,7 @@ About the new airlock wires panel:
 		src.electronics = new/obj/item/weapon/airlock_electronics/secure( src.loc )
 	else
 		src.electronics = new/obj/item/weapon/airlock_electronics( src.loc )
-	
+
 	//update the electronics to match the door's access
 	if(!src.req_access)
 		src.check_access()
@@ -1115,9 +1131,6 @@ About the new airlock wires panel:
 /obj/machinery/door/airlock/power_change() //putting this is obj/machinery/door itself makes non-airlock doors turn invisible for some reason
 	..()
 	update_icon()
-
-/obj/machinery/door/airlock/proc/hasPower()
-	return ((src.secondsMainPowerLost==0 || src.secondsBackupPowerLost==0) && !(stat & NOPOWER))
 
 /obj/machinery/door/airlock/proc/prison_open()
 	src.unlock()

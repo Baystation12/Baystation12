@@ -1,23 +1,3 @@
-//Boards
-/obj/item/weapon/circuitboard/batteryrack
-	name = "Circuit board (Battery rack PSU)"
-	build_path = "/obj/machinery/power/smes/batteryrack"
-	board_type = "machine"
-	origin_tech = "powerstorage=3;engineering=2"
-	frame_desc = "Requires 3 power cells."
-	req_components = list("/obj/item/weapon/cell" = 3)
-
-
-/obj/item/weapon/circuitboard/ghettosmes
-	name = "Circuit board (makeshift PSU)"
-	desc = "An APC circuit repurposed into some power storage device controller"
-	build_path = "/obj/machinery/power/smes/batteryrack/makeshift"
-	board_type = "machine"
-	frame_desc = "Requires 3 power cells."
-	req_components = list("/obj/item/weapon/cell" = 3)
-
-
-//Machines
 //The one that works safely.
 /obj/machinery/power/smes/batteryrack
 	name = "power cell rack PSU"
@@ -32,35 +12,11 @@
 	var/cells_amount = 0
 	var/capacitors_amount = 0
 
-	// Smaller capacity, but higher I/O
-	// Starts fully charged, as it's used in substations. This replaces Engineering SMESs round start charge.
-/obj/machinery/power/smes/batteryrack/substation
-	name = "Substation PSU"
-	desc = "A rack of power cells working as a PSU. This one seems to be equipped for higher power loads."
-	output_level = 150000
-	input_level = 150000
-	output_attempt = 1
-
-	// One high capacity cell, two regular cells. Lots of room for engineer upgrades
-	// Also five basic capacitors. Again, upgradeable.
-/obj/machinery/power/smes/batteryrack/substation/add_parts()
-	component_parts = list()
-	component_parts += new /obj/item/weapon/circuitboard/batteryrack
-	component_parts += new /obj/item/weapon/cell/high
-	component_parts += new /obj/item/weapon/cell
-	component_parts += new /obj/item/weapon/cell
-	component_parts += new /obj/item/weapon/stock_parts/capacitor
-	component_parts += new /obj/item/weapon/stock_parts/capacitor
-	component_parts += new /obj/item/weapon/stock_parts/capacitor
-	component_parts += new /obj/item/weapon/stock_parts/capacitor
-	component_parts += new /obj/item/weapon/stock_parts/capacitor
-
 /obj/machinery/power/smes/batteryrack/New()
 	..()
 	add_parts()
 	RefreshParts()
 	return
-
 
 //Maybe this should be moved up to obj/machinery
 /obj/machinery/power/smes/batteryrack/proc/add_parts()

@@ -36,7 +36,7 @@ By design, d1 is the smallest direction and d2 is the highest
 	color = COLOR_RED
 	var/obj/machinery/power/breakerbox/breaker_box
 
-/obj/structure/cable/drain_power(var/drain_check)
+/obj/structure/cable/drain_power(var/drain_check, var/surge, var/amount = 0)
 
 	if(drain_check)
 		return 1
@@ -44,18 +44,7 @@ By design, d1 is the smallest direction and d2 is the highest
 	var/datum/powernet/PN = get_powernet()
 	if(!PN) return 0
 
-	var/drained_power = round(rand(200,400)/2)
-	var/drained_this_tick = PN.draw_power(drained_power)
-
-	if(drained_this_tick < drained_power)
-		for(var/obj/machinery/power/terminal/T in PN.nodes)
-			if(istype(T.master, /obj/machinery/power/apc))
-				var/obj/machinery/power/apc/AP = T.master
-				if(AP.emagged)
-					continue
-				drained_power += AP.drain_power() //Indirect draw won't emag the APC, should this be amended?
-
-	return drained_power
+	return PN.draw_power(amount)
 
 /obj/structure/cable/yellow
 	color = COLOR_YELLOW
@@ -488,13 +477,22 @@ obj/structure/cable/proc/cableColor(var/colorC)
 	throw_speed = 2
 	throw_range = 5
 	matter = list("metal" = 50, "glass" = 20)
-	flags = TABLEPASS | FPRINT | CONDUCT
+	flags = CONDUCT
 	slot_flags = SLOT_BELT
 	item_state = "coil"
 	attack_verb = list("whipped", "lashed", "disciplined", "flogged")
 
+/obj/item/stack/cable_coil/cyborg
+	name = "cable coil synthesizer"
+	desc = "A device that makes cable."
+	gender = NEUTER
+	matter = null
+	uses_charge = 1
+	charge_costs = list(1)
+	stacktype = /obj/item/stack/cable_coil
+
 /obj/item/stack/cable_coil/suicide_act(mob/user)
-	if(locate(/obj/structure/stool) in user.loc)
+	if(locate(/obj/item/weapon/stool) in user.loc)
 		user.visible_message("<span class='suicide'>[user] is making a noose with the [src.name]! It looks like \he's trying to commit suicide.</span>")
 	else
 		user.visible_message("<span class='suicide'>[user] is strangling \himself with the [src.name]! It looks like \he's trying to commit suicide.</span>")
@@ -587,7 +585,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 		usr << "\blue You cannot do that."
 	..()
 
-/obj/item/stack/cable_coil/robot/verb/set_colour()
+/obj/item/stack/cable_coil/cyborg/verb/set_colour()
 	set name = "Change Colour"
 	set category = "Object"
 
@@ -617,26 +615,26 @@ obj/structure/cable/proc/cableColor(var/colorC)
 //   - Cable coil : merge cables
 /obj/item/stack/cable_coil/attackby(obj/item/weapon/W, mob/user)
 	..()
-	if( istype(W, /obj/item/weapon/wirecutters) && src.amount > 1)
-		src.amount--
+	if( istype(W, /obj/item/weapon/wirecutters) && src.get_amount() > 1)
+		src.use(1)
 		new/obj/item/stack/cable_coil(user.loc, 1,color)
 		user << "You cut a piece off the cable coil."
 		src.update_icon()
 		return
 	else if(istype(W, /obj/item/stack/cable_coil))
 		var/obj/item/stack/cable_coil/C = W
-		if(C.amount >= MAXCOIL)
+		if(C.get_amount() >= get_max_amount())
 			user << "The coil is too long, you cannot add any more cable to it."
 			return
 
-		if( (C.amount + src.amount <= MAXCOIL) )
+		if( (C.get_amount() + src.get_amount() <= get_max_amount()) )
 			user << "You join the cable coils together."
-			C.give(src.amount) // give it cable
-			src.use(src.amount) // make sure this one cleans up right
+			C.give(src.get_amount()) // give it cable
+			src.use(src.get_amount()) // make sure this one cleans up right
 			return
 
 		else
-			var/amt = MAXCOIL - C.amount
+			var/amt = get_max_amount() - C.get_amount()
 			user << "You transfer [amt] length\s of cable from one coil to the other."
 			C.give(amt)
 			src.use(amt)

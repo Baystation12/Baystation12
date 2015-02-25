@@ -330,6 +330,7 @@
 	for(i=0,i<4,i++)
 		sleep(50)
 		if(src.OCCUPANT)
+			OCCUPANT.radiation += 50
 			var/datum/organ/internal/diona/nutrients/rad_organ = locate() in OCCUPANT.internal_organs
 			if (!rad_organ)
 				if(src.issuperUV)
@@ -588,7 +589,6 @@
 	var/radiation_level = 2 // 1 is removing germs, 2 is removing blood, 3 is removing phoron.
 	var/model_text = ""     // Some flavour text for the topic box.
 	var/locked = 1          // If locked, nothing can be taken from or added to the cycler.
-	var/panel_open = 0      // Hacking!
 	var/can_repair          // If set, the cycler can repair voidsuits.
 	var/electrified = 0
 

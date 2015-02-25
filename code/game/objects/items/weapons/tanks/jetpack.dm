@@ -1,7 +1,7 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:32
 
 /obj/item/weapon/tank/jetpack
-	name = "Jetpack (Empty)"
+	name = "jetpack (empty)"
 	desc = "A tank of compressed gas for use as propulsion in zero-gravity areas. Use with caution."
 	icon_state = "jetpack"
 	w_class = 4.0
@@ -71,7 +71,7 @@
 
 
 /obj/item/weapon/tank/jetpack/void
-	name = "Void Jetpack (Oxygen)"
+	name = "void jetpack (oxygen)"
 	desc = "It works well in a void."
 	icon_state = "jetpack-void"
 	item_state =  "jetpack-void"
@@ -82,7 +82,7 @@
 	return
 
 /obj/item/weapon/tank/jetpack/oxygen
-	name = "Jetpack (Oxygen)"
+	name = "jetpack (oxygen)"
 	desc = "A tank of compressed oxygen for use as propulsion in zero-gravity areas. Use with caution."
 	icon_state = "jetpack"
 	item_state = "jetpack"
@@ -93,7 +93,7 @@
 	return
 
 /obj/item/weapon/tank/jetpack/carbondioxide
-	name = "Jetpack (Carbon Dioxide)"
+	name = "jetpack (carbon dioxide)"
 	desc = "A tank of compressed carbon dioxide for use as propulsion in zero-gravity areas. Painted black to indicate that it should not be used as a source for internals."
 	distribute_pressure = 0
 	icon_state = "jetpack-black"

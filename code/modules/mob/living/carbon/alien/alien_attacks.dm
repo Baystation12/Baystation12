@@ -31,6 +31,7 @@
 			M.put_in_active_hand(G)
 
 			grabbed_by += G
+			G.affecting = src
 			G.synch()
 
 			LAssailant = M

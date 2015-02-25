@@ -5,6 +5,7 @@
 	max_co2 = 0
 	minbodytemp = 0
 	maxbodytemp = 500
+	mob_size = 5
 
 	var/obj/item/device/radio/borg/radio = null
 	var/mob/living/silicon/ai/connected_ai = null
@@ -208,7 +209,7 @@
 	held_item.loc = src.loc
 	held_item = null
 
-	robogibs(src.loc, viruses)
+	gibs(loc, viruses, null, null, /obj/effect/gibspawner/robot) //TODO: use gib() or refactor spiderbots into synthetics.
 	src.Del()
 	return
 

@@ -14,7 +14,6 @@ RSF
 	anchored = 0.0
 	var/stored_matter = 30
 	var/mode = 1
-	flags = TABLEPASS
 	w_class = 3.0
 
 /obj/item/weapon/rsf/examine(mob/user)
@@ -100,7 +99,7 @@ RSF
 			product = new /obj/item/weapon/storage/pill_bottle/dice()
 			used_energy = 200
 		if(6)
-			product = new /obj/item/clothing/mask/cigarette()
+			product = new /obj/item/clothing/mask/smokable/cigarette()
 			used_energy = 10
 
 	user << "Dispensing [product ? product : "product"]..."

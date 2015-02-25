@@ -189,10 +189,12 @@
 		if(filtering > 0)
 			if(beaker)
 				if(beaker.reagents.total_volume < beaker.reagents.maximum_volume)
-					src.occupant.vessel.trans_to(beaker, 1)
+					var/pumped = 0
 					for(var/datum/reagent/x in src.occupant.reagents.reagent_list)
 						src.occupant.reagents.trans_to(beaker, 3)
-						src.occupant.vessel.trans_to(beaker, 1)
+						pumped++
+					if (ishuman(src.occupant))
+						src.occupant.vessel.trans_to(beaker, pumped + 1)
 		src.updateUsrDialog()
 		return
 

@@ -77,6 +77,7 @@
 	var/lastused_light = 0
 	var/lastused_equip = 0
 	var/lastused_environ = 0
+	var/lastused_charging = 0
 	var/lastused_total = 0
 	var/main_status = 0
 	var/wiresexposed = 0
@@ -116,7 +117,7 @@
 	if(terminal)
 		terminal.connect_to_network()
 
-/obj/machinery/power/apc/drain_power(var/drain_check, var/surge)
+/obj/machinery/power/apc/drain_power(var/drain_check, var/surge, var/amount = 0)
 
 	if(drain_check)
 		return 1
@@ -131,7 +132,10 @@
 		update_icon()
 		return 0
 
-	return cell.drain_power(drain_check)
+	if(terminal && terminal.powernet)
+		terminal.powernet.trigger_warning()
+
+	return cell.drain_power(drain_check, surge, amount)
 
 /obj/machinery/power/apc/New(turf/loc, var/ndir, var/building=0)
 	..()
@@ -178,10 +182,7 @@
 		del(cell) // qdel
 	if(terminal)
 		disconnect_terminal()
-	
-	//If there's no more APC then there shouldn't be a cause for alarm I guess
-	area.poweralert(1, src) //so that alarms don't go on forever
-	
+
 	..()
 
 /obj/machinery/power/apc/proc/make_terminal()
@@ -720,6 +721,11 @@
 	// do APC interaction
 	src.interact(user)
 
+/obj/machinery/power/apc/attack_ghost(user as mob)
+	if(stat & (BROKEN|MAINT))
+		return
+	return ui_interact(user)
+
 /obj/machinery/power/apc/interact(mob/user)
 	if(!user)
 		return
@@ -756,7 +762,8 @@
 		"powerCellStatus" = cell ? cell.percent() : null,
 		"chargeMode" = chargemode,
 		"chargingStatus" = charging,
-		"totalLoad" = round(lastused_equip + lastused_light + lastused_environ),
+		"totalLoad" = round(lastused_total),
+		"totalCharging" = round(lastused_charging),
 		"coverLocked" = coverlocked,
 		"siliconUser" = istype(user, /mob/living/silicon),
 		"malfStatus" = get_malf_status(user),
@@ -881,6 +888,11 @@
 		return 1
 
 	if(!can_use(usr, 1))
+		return 1
+
+	if(!istype(usr, /mob/living/silicon) && locked)
+		// Shouldn't happen, this is here to prevent href exploits
+		usr << "You must unlock the panel to use this!"
 		return 1
 
 	if (href_list["lock"])
@@ -1149,33 +1161,32 @@
 				lighting = autoset(lighting, 1)
 				environ = autoset(environ, 1)
 				autoflag = 3
-				area.poweralert(1, src)
-				if(cell.charge >= 4000)
-					area.poweralert(1, src)
+				power_alarm.clearAlarm(loc, src)
 		else if((cell.percent() <= 30) && (cell.percent() > 15) && longtermpower < 0)                       // <30%, turn off equipment
 			if(autoflag != 2)
 				equipment = autoset(equipment, 2)
 				lighting = autoset(lighting, 1)
 				environ = autoset(environ, 1)
-				area.poweralert(0, src)
+				power_alarm.triggerAlarm(loc, src)
 				autoflag = 2
 		else if(cell.percent() <= 15)        // <15%, turn off lighting & equipment
 			if((autoflag > 1 && longtermpower < 0) || (autoflag > 1 && longtermpower >= 0))
 				equipment = autoset(equipment, 2)
 				lighting = autoset(lighting, 2)
 				environ = autoset(environ, 1)
-				area.poweralert(0, src)
+				power_alarm.triggerAlarm(loc, src)
 				autoflag = 1
 		else                                   // zero charge, turn all off
 			if(autoflag != 0)
 				equipment = autoset(equipment, 0)
 				lighting = autoset(lighting, 0)
 				environ = autoset(environ, 0)
-				area.poweralert(0, src)
+				power_alarm.triggerAlarm(loc, src)
 				autoflag = 0
 
 		// now trickle-charge the cell
 
+		lastused_charging = 0 // Clear the variable for new use.
 		if(src.attempt_charging())
 			if(excess > 0)		// check to make sure we have enough to charge
 				// Max charge is capped to % per second constant
@@ -1183,7 +1194,8 @@
 
 				ch = draw_power(ch/CELLRATE) // Removes the power we're taking from the grid
 				cell.give(ch*CELLRATE) // actually recharge the cell
-
+				lastused_charging = ch
+				lastused_total += ch // Sensors need this to stop reporting APC charging as "Other" load
 			else
 				charging = 0		// stop charging
 				chargecount = 0
@@ -1216,7 +1228,7 @@
 		equipment = autoset(equipment, 0)
 		lighting = autoset(lighting, 0)
 		environ = autoset(environ, 0)
-		area.poweralert(0, src)
+		power_alarm.triggerAlarm(loc, src)
 		autoflag = 0
 
 	// update icon & area power if anything changed

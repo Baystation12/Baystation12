@@ -5,17 +5,15 @@
 /obj/machinery/atmospherics/unary/outlet_injector
 	icon = 'icons/atmos/injector.dmi'
 	icon_state = "map_injector"
-	use_power = 1
 	layer = 3
 
 	name = "air injector"
 	desc = "Passively injects air into its surroundings. Has a valve attached to it that can control flow rate."
 
-	use_power = 1
+	use_power = 0
 	idle_power_usage = 150		//internal circuitry, friction losses and stuff
-	active_power_usage = 15000	//This also doubles as a measure of how powerful the pump is, in Watts. 15000 W ~ 20 HP
+	power_rating = 15000	//15000 W ~ 20 HP
 	
-	var/on = 0
 	var/injecting = 0
 
 	var/volume_rate = 50	//flow rate limit
@@ -34,7 +32,7 @@
 	if(!powered())
 		icon_state = "off"
 	else
-		icon_state = "[on ? "on" : "off"]"
+		icon_state = "[use_power ? "on" : "off"]"
 
 /obj/machinery/atmospherics/unary/outlet_injector/update_underlays()
 	if(..())
@@ -52,11 +50,11 @@
 
 /obj/machinery/atmospherics/unary/outlet_injector/process()
 	..()
-	injecting = 0
 
-	if((stat & (NOPOWER|BROKEN)) || !on)
-		update_use_power(0)	//usually we get here because a player turned a pump off - definitely want to update.
-		last_flow_rate = 0
+	last_power_draw = 0
+	last_flow_rate = 0
+
+	if((stat & (NOPOWER|BROKEN)) || !use_power)
 		return
 	
 	var/power_draw = -1
@@ -64,14 +62,11 @@
 	
 	if(environment && air_contents.temperature > 0)
 		var/transfer_moles = (volume_rate/air_contents.volume)*air_contents.total_moles //apply flow rate limit
-		power_draw = pump_gas(src, air_contents, environment, transfer_moles, active_power_usage)
+		power_draw = pump_gas(src, air_contents, environment, transfer_moles, power_rating)
 	
-	if (power_draw < 0)
-		//update_use_power(0)
-		use_power = 0	//don't force update - easier on CPU
-		last_flow_rate = 0
-	else
-		handle_power_draw(power_draw)
+	if (power_draw >= 0)
+		last_power_draw = power_draw
+		use_power(power_draw)
 		
 		if(network)
 			network.update = 1
@@ -79,7 +74,7 @@
 	return 1
 
 /obj/machinery/atmospherics/unary/outlet_injector/proc/inject()
-	if(on || injecting || (stat & NOPOWER))
+	if(injecting || (stat & NOPOWER))
 		return 0
 
 	var/datum/gas_mixture/environment = loc.return_air()
@@ -89,7 +84,7 @@
 	injecting = 1
 
 	if(air_contents.temperature > 0)
-		var/power_used = pump_gas(src, air_contents, environment, air_contents.total_moles, active_power_usage)
+		var/power_used = pump_gas(src, air_contents, environment, air_contents.total_moles, power_rating)
 		use_power(power_used)
 
 		if(network)
@@ -114,7 +109,7 @@
 	signal.data = list(
 		"tag" = id,
 		"device" = "AO",
-		"power" = on,
+		"power" = use_power,
 		"volume_rate" = volume_rate,
 		"sigtype" = "status"
 	 )
@@ -133,12 +128,10 @@
 		return 0
 
 	if(signal.data["power"])
-		on = text2num(signal.data["power"])
-		update_use_power(on)
+		use_power = text2num(signal.data["power"])
 
 	if(signal.data["power_toggle"])
-		on = !on
-		update_use_power(on)
+		use_power = !use_power
 
 	if(signal.data["inject"])
 		spawn inject()

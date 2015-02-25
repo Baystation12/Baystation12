@@ -4,6 +4,7 @@ datum
 		var/name = null
 		var/id = null
 		var/result = null
+		var/resultcolor = null //for paint
 		var/list/required_reagents = new/list()
 		var/list/required_catalysts = new/list()
 
@@ -55,14 +56,14 @@ datum
 				empulse(location, round(created_volume / 24), round(created_volume / 14), 1)
 				holder.clear_reagents()
 				return
-/*
+
 		silicate
 			name = "Silicate"
 			id = "silicate"
 			result = "silicate"
 			required_reagents = list("aluminum" = 1, "silicon" = 1, "oxygen" = 1)
 			result_amount = 3
-*/
+
 		stoxin
 			name = "Soporific"
 			id = "stoxin"
@@ -131,7 +132,7 @@ datum
 			name = "Water"
 			id = "water"
 			result = "water"
-			required_reagents = list("oxygen" = 2, "hydrogen" = 1)
+			required_reagents = list("oxygen" = 1, "hydrogen" = 2)
 			result_amount = 1
 
 		thermite
@@ -585,6 +586,14 @@ datum
 			required_reagents = list("capsaicin" = 2)
 			required_catalysts = list("phoron" = 5)
 			result_amount = 1
+
+		ketchup
+			name = "Ketchup"
+			id = "ketchup"
+			result = "ketchup"
+			required_reagents = list("tomatojuice" = 2, "water" = 1, "sugar" = 1)
+			result_amount = 4
+
 ///////////////////////////////////////////////////////////////////////////////////
 
 // foam and foam precursor
@@ -1344,6 +1353,200 @@ datum
 				var/obj/effect/golemrune/Z = new /obj/effect/golemrune
 				Z.loc = get_turf(holder.my_atom)
 				Z.announce_to_ghosts()
+
+//////////////////////////////////////////PAINT///////////////////////////////////////////
+//Crayon dust -> paint
+		red_paint
+			name = "Red paint"
+			id = "red_paint"
+			result = "paint"
+			resultcolor = "#FE191A"
+			required_reagents = list("plasticide" = 1, "water" = 3, "crayon_dust_red" = 1)
+			result_amount = 5
+
+		orange_paint
+			name = "Orange paint"
+			id = "orange_paint"
+			result = "paint"
+			resultcolor = "#FFBE4F"
+			required_reagents = list("plasticide" = 1, "water" = 3, "crayon_dust_orange" = 1)
+			result_amount = 5
+
+		yellow_paint
+			name = "Yellow paint"
+			id = "yellow_paint"
+			result = "paint"
+			resultcolor = "#FDFE7D"
+			required_reagents = list("plasticide" = 1, "water" = 3, "crayon_dust_yellow" = 1)
+			result_amount = 5
+
+		green_paint
+			name = "Green paint"
+			id = "green_paint"
+			result = "paint"
+			resultcolor = "#18A31A"
+			required_reagents = list("plasticide" = 1, "water" = 3, "crayon_dust_green" = 1)
+			result_amount = 5
+
+		blue_paint
+			name = "Blue paint"
+			id = "blue_paint"
+			result = "paint"
+			resultcolor = "#247CFF"
+			required_reagents = list("plasticide" = 1, "water" = 3, "crayon_dust_blue" = 1)
+			result_amount = 5
+
+		purple_paint
+			name = "Purple paint"
+			id = "purple_paint"
+			result = "paint"
+			resultcolor = "#CC0099"
+			required_reagents = list("plasticide" = 1, "water" = 3, "crayon_dust_purple" = 1)
+			result_amount = 5
+
+		grey_paint //mime
+			name = "Grey paint"
+			id = "grey_paint"
+			result = "paint"
+			resultcolor = "#808080"
+			required_reagents = list("plasticide" = 1, "water" = 3, "crayon_dust_grey" = 1)
+			result_amount = 5
+
+		brown_paint
+			name = "Brown paint"
+			id = "brown_paint"
+			result = "paint"
+			resultcolor = "#846F35"
+			required_reagents = list("plasticide" = 1, "water" = 3, "crayon_dust_brown" = 1)
+			result_amount = 5
+
+//Ghetto reactions
+
+/* Ideally the paint should take on the blood's colour (for each of the species)
+        but I could not think of a way. - RKF
+
+		blood_paint
+			name = "Blood paint"
+			id = "blood_paint"
+			result = "paint"
+			resultcolor = "#C80000"
+			required_reagents = list("plasticide" = 1, "water" = 3, "blood" = 2)
+			result_amount = 5
+*/
+		milk_paint
+			name = "Milk paint"
+			id = "milk_paint"
+			result = "paint"
+			resultcolor = "#F0F8FF"
+			required_reagents = list("plasticide" = 1, "water" = 3, "milk" = 5)
+			result_amount = 5
+
+		orange_juice_paint
+			name = "Orange juice paint"
+			id = "orange_juice_paint"
+			result = "paint"
+			resultcolor = "#E78108"
+			required_reagents = list("plasticide" = 1, "water" = 3, "orangejuice" = 5)
+			result_amount = 5
+
+		tomato_juice_paint
+			name = "Tomato juice paint"
+			id = "tomato_juice_paint"
+			result = "paint"
+			resultcolor = "#731008"
+			required_reagents = list("plasticide" = 1, "water" = 3, "tomatojuice" = 5)
+			result_amount = 5
+
+		lime_juice_paint
+			name = "Lime juice paint"
+			id = "lime_juice_paint"
+			result = "paint"
+			resultcolor = "#365E30"
+			required_reagents = list("plasticide" = 1, "water" = 3, "limejuice" = 5)
+			result_amount = 5
+
+		carrot_juice_paint
+			name = "Carrot juice paint"
+			id = "carrot_juice_paint"
+			result = "paint"
+			resultcolor = "#973800"
+			required_reagents = list("plasticide" = 1, "water" = 3, "carrotjuice" = 5)
+			result_amount = 5
+
+		berry_juice_paint
+			name = "Berry juice paint"
+			id = "berry_juice_paint"
+			result = "paint"
+			resultcolor = "#990066"
+			required_reagents = list("plasticide" = 1, "water" = 3, "berryjuice" = 5)
+			result_amount = 5
+
+		grape_juice_paint
+			name = "Grape juice paint"
+			id = "grape_juice_paint"
+			result = "paint"
+			resultcolor = "#863333"
+			required_reagents = list("plasticide" = 1, "water" = 3, "grapejuice" = 5)
+			result_amount = 5
+
+		poisonberry_juice_paint
+			name = "Poison berry juice paint"
+			id = "poisonberry_juice_paint"
+			result = "paint"
+			resultcolor = "#863353"
+			required_reagents = list("plasticide" = 1, "water" = 3, "poisonberryjuice" = 5)
+			result_amount = 5
+
+		watermelon_juice_paint
+			name = "Watermelon juice paint"
+			id = "watermelon_juice_paint"
+			result = "paint"
+			resultcolor = "#B83333"
+			required_reagents = list("plasticide" = 1, "water" = 3, "watermelonjuice" = 5)
+			result_amount = 5
+
+		lemon_juice_paint
+			name = "Lemon juice paint"
+			id = "lemon_juice_paint"
+			result = "paint"
+			resultcolor = "#AFAF00"
+			required_reagents = list("plasticide" = 1, "water" = 3, "lemonjuice" = 5)
+			result_amount = 5
+
+		banana_juice_paint
+			name = "Banana juice paint"
+			id = "banana_juice_paint"
+			result = "paint"
+			resultcolor = "#C3AF00"
+			required_reagents = list("plasticide" = 1, "water" = 3, "banana" = 5)
+			result_amount = 5
+
+		potato_juice_paint
+			name = "Potato juice paint"
+			id = "potato_juice_paint"
+			result = "paint"
+			resultcolor = "#302000"
+			required_reagents = list("plasticide" = 1, "water" = 3, "potatojuice" = 5)
+			result_amount = 5
+
+//Other paint
+
+		carbon_paint
+			name = "Carbon paint"
+			id = "carbon_paint"
+			result = "paint"
+			resultcolor = "#333333"
+			required_reagents = list("plasticide" = 1, "water" = 3, "carbon" = 1)
+			result_amount = 5
+
+		aluminum_paint
+			name = "Aluminum paint"
+			id = "aluminum_paint"
+			result = "paint"
+			resultcolor = "#F0F8FF"
+			required_reagents = list("plasticide" = 1, "water" = 3, "aluminum" = 1)
+			result_amount = 5
+
 //////////////////////////////////////////FOOD MIXTURES////////////////////////////////////
 
 		tofu
@@ -1407,6 +1610,26 @@ datum
 			on_reaction(var/datum/reagents/holder, var/created_volume)
 				var/location = get_turf(holder.my_atom)
 				new /obj/item/weapon/reagent_containers/food/snacks/sliceable/cheesewheel(location)
+				return
+
+		meatball
+			name = "Meatball"
+			id = "meatball"
+			result = null
+			required_reagents = list("protein" = 3, "flour" = 5)
+			result_amount = 3
+			on_reaction(var/datum/reagents/holder, var/created_volume)
+				new /obj/item/weapon/reagent_containers/food/snacks/meatball(get_turf(holder.my_atom))
+				return
+
+		dough
+			name = "Dough"
+			id = "dough"
+			result = null
+			required_reagents = list("egg" = 3, "flour" = 10)
+			result_amount = 1
+			on_reaction(var/datum/reagents/holder, var/created_volume)
+				new /obj/item/weapon/reagent_containers/food/snacks/dough(get_turf(holder.my_atom))
 				return
 
 		syntiflesh

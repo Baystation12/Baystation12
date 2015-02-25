@@ -22,6 +22,10 @@
 	open_layer = DOOR_OPEN_LAYER - 0.01 // Just below doors when open
 	closed_layer = DOOR_CLOSED_LAYER + 0.01 // Just above doors when closed
 
+	//These are frequenly used with windows, so make sure zones can pass. 
+	//Generally if a firedoor is at a place where there should be a zone boundery then there will be a regular door underneath it.
+	block_air_zones = 0
+
 	var/blocked = 0
 	var/lockdown = 0 // When the door has detected a problem, it locks.
 	var/pdiff_alert = 0
@@ -186,13 +190,14 @@
 	add_fingerprint(user)
 	if(operating)
 		return//Already doing something.
-	if(istype(C, /obj/item/weapon/weldingtool))
+	if(istype(C, /obj/item/weapon/weldingtool) && !repairing)
 		var/obj/item/weapon/weldingtool/W = C
 		if(W.remove_fuel(0, user))
 			blocked = !blocked
 			user.visible_message("<span class='danger'>\The [user] [blocked ? "welds" : "unwelds"] \the [src] with \a [W].</span>",\
 			"You [blocked ? "weld" : "unweld"] \the [src] with \the [W].",\
 			"You hear something being welded.")
+			playsound(src, 'sound/items/Welder.ogg', 100, 1)
 			update_icon()
 			return
 
@@ -203,7 +208,7 @@
 		update_icon()
 		return
 
-	if(blocked && istype(C, /obj/item/weapon/crowbar))
+	if(blocked && istype(C, /obj/item/weapon/crowbar) && !repairing)
 		if(!hatch_open)
 			user << "<span class='danger'>You must open the maintenance hatch first!</span>"
 		else
@@ -215,19 +220,24 @@
 					user.visible_message("<span class='danger'>[user] has removed the electronics from \the [src].</span>",
 										"You have removed the electronics from [src].")
 
-					new/obj/item/weapon/airalarm_electronics(src.loc)
+					if (stat & BROKEN)
+						new /obj/item/weapon/circuitboard/broken(src.loc)
+					else
+						new/obj/item/weapon/airalarm_electronics(src.loc)
+
 					var/obj/structure/firedoor_assembly/FA = new/obj/structure/firedoor_assembly(src.loc)
 					FA.anchored = 1
 					FA.density = 1
+					FA.wired = 1
 					FA.update_icon()
 					del(src)
 		return
 
 	if(blocked)
-		user << "<span class='danger'>\The [src] is welded solid!</span>"
+		user << "<span class='danger'>\The [src] is welded shut!</span>"
 		return
 
-	if(istype(C, /obj/item/weapon/crowbar) || istype(C,/obj/item/weapon/melee/energy/blade) || istype(C,/obj/item/weapon/twohanded/fireaxe))
+	if(istype(C, /obj/item/weapon/crowbar) || istype(C,/obj/item/weapon/twohanded/fireaxe))
 		if(operating)
 			return
 
@@ -262,6 +272,8 @@
 				spawn(0)
 					close()
 			return
+		
+	return ..()
 
 // CHECK PRESSURE
 /obj/machinery/door/firedoor/process()
@@ -373,9 +385,9 @@
 			overlays += "welded_open"
 	return
 
+//These are playing merry hell on ZAS.  Sorry fellas :(
 
 /obj/machinery/door/firedoor/border_only
-//These are playing merry hell on ZAS.  Sorry fellas :(
 /*
 	icon = 'icons/obj/doors/edge_Doorfire.dmi'
 	glass = 1 //There is a glass window so you can see through the door

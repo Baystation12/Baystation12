@@ -4,6 +4,7 @@
 	icon = 'icons/obj/apiary_bees_etc.dmi'
 	icon_state = "bees1"
 	icon_dead = "bees1"
+	mob_size = 1
 	var/strength = 1
 	var/feral = 0
 	var/mut = 0

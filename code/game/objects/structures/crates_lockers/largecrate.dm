@@ -4,7 +4,6 @@
 	icon = 'icons/obj/storage.dmi'
 	icon_state = "densecrate"
 	density = 1
-	flags = FPRINT
 
 /obj/structure/largecrate/attack_hand(mob/user as mob)
 	user << "<span class='notice'>You need a crowbar to pry this open!</span>"
@@ -64,7 +63,7 @@
 	..()
 
 /obj/structure/largecrate/hoverpod
-	name = "Hoverpod assembly crate"
+	name = "\improper Hoverpod assembly crate"
 	desc = "It comes in a box for the fabricator's sake. Where does the wood come from? ... And why is it lighter?"
 	icon_state = "mulecrate"
 

@@ -294,12 +294,12 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
         {{:helper.link('Reply', 'comment', {'choice' : "Message", 'target': data.active_conversation}, null, 'fixedLeft')}}
 
 
-	{{else data.mode== 41}} <!-- Manifest -->
+	{{else data.mode== 41}} <!-- Manifest uses cached data so we only use nanowriter when shit changes.-->
 	    <div class="item">
             <center><table class="pmon"><tbody>
-                {{if data.manifest.heads.length}}
+                {{if data.cached.heads.length}}
                     <tr><th colspan="3" class="command">Command</th></tr>
-                    {{for data.manifest["heads"]}}
+                    {{for data.cached["heads"]}}
                         {{if value.rank == "Captain"}}
                             <tr><td><span class="good">{{:value.name}}</span></td><td><span class="good">{{:value.rank}}</span></td><td><span class="good">{{:value.active}}</span></td></tr>
                         {{else}}
@@ -307,9 +307,9 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
                         {{/if}}
                     {{/for}}
                 {{/if}}
-                {{if data.manifest.sec.length}}
+                {{if data.cached.sec.length}}
                     <tr><th colspan="3" class="sec">Security</th></tr>
-                    {{for data.manifest["sec"]}}
+                    {{for data.cached["sec"]}}
                         {{if value.rank == "Head of Security"}}
                             <tr><td><span class="good">{{:value.name}}</span></td><td><span class="good">{{:value.rank}}</span></td><td><span class="good">{{:value.active}}</span></td></tr>
                         {{else}}
@@ -317,9 +317,9 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
                         {{/if}}
                     {{/for}}
                 {{/if}}
-                {{if data.manifest.eng.length}}
+                {{if data.cached.eng.length}}
                     <tr><th colspan="3" class="eng">Engineering</th></tr>
-                    {{for data.manifest["eng"]}}
+                    {{for data.cached["eng"]}}
                         {{if value.rank == "Chief Engineer"}}
                             <tr><td><span class="good">{{:value.name}}</span></td><td><span class="good">{{:value.rank}}</span></td><td><span class="good">{{:value.active}}</span></td></tr>
                         {{else}}
@@ -327,9 +327,9 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
                         {{/if}}
                     {{/for}}
                 {{/if}}
-                {{if data.manifest.med.length}}
+                {{if data.cached.med.length}}
                     <tr><th colspan="3" class="med">Medical</th></tr>
-                    {{for data.manifest["med"]}}
+                    {{for data.cached["med"]}}
                         {{if value.rank == "Chief Medical Officer"}}
                             <tr><td><span class="good">{{:value.name}}</span></td><td><span class="good">{{:value.rank}}</span></td><td><span class="good">{{:value.active}}</span></td></tr>
                         {{else}}
@@ -337,9 +337,9 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
                         {{/if}}
                     {{/for}}
                 {{/if}}
-                {{if data.manifest.sci.length}}
+                {{if data.cached.sci.length}}
                     <tr><th colspan="3" class="sci">Science</th></tr>
-                    {{for data.manifest["sci"]}}
+                    {{for data.cached["sci"]}}
                         {{if value.rank == "Research Director"}}
                             <tr><td><span class="good">{{:value.name}}</span></td><td><span class="good">{{:value.rank}}</span></td><td><span class="good">{{:value.active}}</span></td></tr>
                         {{else}}
@@ -347,9 +347,9 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
                         {{/if}}
                     {{/for}}
                 {{/if}}
-                {{if data.manifest.civ.length}}
+                {{if data.cached.civ.length}}
                     <tr><th colspan="3" class="civ">Civilian</th></tr>
-                    {{for data.manifest["civ"]}}
+                    {{for data.cached["civ"]}}
                         {{if value.rank == "Head of Personnel"}}
                             <tr><td><span class="good">{{:value.name}}</span></td><td><span class="good">{{:value.rank}}</span></td><td><span class="good">{{:value.active}}</span></td></tr>
                         {{else}}
@@ -357,9 +357,9 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
                         {{/if}}
                     {{/for}}
                 {{/if}}
-                {{if data.manifest.misc.length}}
+                {{if data.cached.misc.length}}
                     <tr><th colspan="3" class="misc">Misc</th></tr>
-                    {{for data.manifest["misc"]}}
+                    {{for data.cached["misc"]}}
                         <tr><td><span class="average">{{:value.name}}</span></td><td><span class="average">{{:value.rank}}</span></td><td><span class="average">{{:value.active}}</span></td></tr>
                     {{/for}}
                 {{/if}}
@@ -508,56 +508,34 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
             </div>
         </div>
 
-
-	{{else data.mode == 43}}
-        <H2>Station Power Monitors</H2>
+    {{else data.mode == 43}}
+        <H2>Sensor Selection</H2>
         <div class="item">
-            Select a power monitor:
+            Available Sensors:
         </div>
-        {{for data.records.powermonitors}}
+        {{for data.records.power_sensors}}
             <div class="item">
-                {{:helper.link(value.Name, 'radiation', {'cartmenu' : "1", 'choice' : "Power Select",'target' : value.ref}, null, null)}}
+                {{:helper.link(value.name_tag, 'plus', {'cartmenu' : "1", 'choice' : "Power Select",'target' : value.name_tag})}}<br>
             </div>
         {{/for}}
 
 
     {{else data.mode == 433}}
-        <H2>Powernet Status</H2>
-		{{if data.records.powerconnected == 1}}
-			<div class="item">
-				<div class="itemLabelNarrow">
-					<b>Current Load</b>:
-				</div>
-				<div class="itemContent">
-					<span class="average">{{:data.records.powerload}} W</span>
-				</div>
-			</div>
-			<div class="item">
-				<div class="itemLabelNarrow">
-					<b>Total Power</b>:
-				</div>
-				<div class="itemContent">
-					<span class="average">{{:data.records.poweravail}} W</span>
-				</div>
-			</div>
-			<br>
-			<div class="item">
-				<table class="curvedEdges"><tbody>
-					{{for data.records.apcs}}
-						{{if index % 20 === 0}}
-							<tr class=><th>&nbsp;Area&nbsp;</th><th>&nbsp;Eqp.&nbsp;</th><th>&nbsp;Lgt.&nbsp;</th><th>&nbsp;Env&nbsp;</th><th>&nbsp;Cell&nbsp;</th></tr>
-						{{/if}}
-						<tr class=><td><span class="average">{{:value.Name}}</span></td>
-							{{:helper.string('<td bgcolor="{0}">&nbsp;</td>', value.Equipment==1 ? '#4f7529' : '#8f1414')}}
-							{{:helper.string('<td bgcolor="{0}">&nbsp;</td>', value.Lights==1 ? '#4f7529' : '#8f1414')}}
-							{{:helper.string('<td bgcolor="{0}">&nbsp;</td>', value.Environment==1 ? '#4f7529' : '#8f1414')}}
-							{{:helper.string('<td bgcolor="{0}">{1}</td>', value.CellStatus==1 ? '#4f7529' : '#8f1414', value.CellStatus==-1 ? 'No Cell' : value.CellPct + '%')}}
-						</tr>
-					{{/for}}
-				</tbody></table>
-			</div>
+        <H2>Sensor Reading(Simplified View)</H2>
+		{{if data.records.sensor_reading}}
+			<table><tr><th>Area<th>Cell %<th>Load
+			{{for data.records.sensor_reading.apc_data}}
+				<tr><td>{{:value.name}}
+				<td>{{:value.cell_charge}}%
+				<td>{{:value.total_load}}
+			{{empty}}
+				<tr><td>No APCs found!
+			{{/for}}
+			</table>
+			<br><b>Available: {{:data.records.sensor_reading.total_avail}}</b>
+			<br><b>Load: {{:data.records.sensor_reading.total_used_all}}</b>
 		{{else}}
-			<b>Power monitor not connected to net</b>
+			Unable to contact sensor controller! Please retry and contact tech support if problem persists.
 		{{/if}}
 
 	{{else data.mode == 44}}

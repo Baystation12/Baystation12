@@ -13,6 +13,7 @@
 		usr << "\red Speech is currently admin-disabled."
 		return
 	//Let's try to make users fix their errors - we try to detect single, out-of-place letters and 'unintended' words
+	/*
 	var/first_letter = copytext(message,1,2)
 	if((copytext(message,2,3) == " " && first_letter != "I" && first_letter != "A" && first_letter != ";") || cmptext(copytext(message,1,5), "say ") || cmptext(copytext(message,1,4), "me ") || cmptext(copytext(message,1,6), "looc ") || cmptext(copytext(message,1,5), "ooc ") || cmptext(copytext(message,2,6), "say "))
 		var/response = alert(usr, "Do you really want to say this using the *say* verb?\n\n[message]\n", "Confirm your message", "Yes", "Edit message", "No")
@@ -22,6 +23,7 @@
 				return
 		else if(response == "No")
 			return
+	*/
 
 	set_typing_indicator(0)
 	usr.say(message)
@@ -44,16 +46,16 @@
 
 /mob/proc/say_dead(var/message)
 	if(say_disabled)	//This is here to try to identify lag problems
-		usr << "\red Speech is currently admin-disabled."
+		usr << "<span class='danger'>Speech is currently admin-disabled.</span>"
 		return
 
 	if(!src.client.holder)
-		if(!dsay_allowed)
-			src << "\red Deadchat is globally muted"
+		if(!config.dsay_allowed)
+			src << "<span class='danger'>Deadchat is globally muted.</span>"
 			return
 
 	if(client && !(client.prefs.toggles & CHAT_DEAD))
-		usr << "\red You have deadchat muted."
+		usr << "<span class='danger'>You have deadchat muted.</span>"
 		return
 
 	say_dead_direct("[pick("complains","moans","whines","laments","blubbers")], <span class='message'>\"[message]\"</span>", src)
@@ -78,6 +80,9 @@
 		if (istype(other, src.type) || istype(src, other.type))
 			return 1
 		return 0
+
+	if(speaking.flags & INNATE)
+		return 1
 
 	//Language check.
 	for(var/datum/language/L in src.languages)
@@ -142,6 +147,9 @@
 //parses the language code (e.g. :j) from text, such as that supplied to say.
 //returns the language object only if the code corresponds to a language that src can speak, otherwise null.
 /mob/proc/parse_language(var/message)
+	if(length(message) >= 1 && copytext(message,1,2) == "!")
+		return all_languages["Noise"]
+
 	if(length(message) >= 2)
 		var/language_prefix = lowertext(copytext(message, 1 ,3))
 		var/datum/language/L = language_keys[language_prefix]

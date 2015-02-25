@@ -10,7 +10,6 @@
 	var/burning = null
 	var/hitsound = null
 	var/w_class = 3.0
-	flags = FPRINT | TABLEPASS
 	var/slot_flags = 0		//This is used to determine on which slots an item can fit.
 	pass_flags = PASSTABLE
 	pressure_resistance = 5
@@ -35,7 +34,7 @@
 	var/siemens_coefficient = 1 // for electrical admittance/conductance (electrocution checks and shit)
 	var/slowdown = 0 // How much clothing is slowing you down. Negative values speeds you up
 	var/canremove = 1 //Mostly for Ninja code at this point but basically will not allow the item to be removed if set to 0. /N
-	var/armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
+	var/list/armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	var/list/allowed = null //suit storage stuff.
 	var/obj/item/device/uplink/hidden/hidden_uplink = null // All items can have an uplink hidden inside, just remember to add the triggers.
 	var/zoomdevicename = null //name used for message when binoculars/scope is used
@@ -115,10 +114,7 @@
 			size = "bulky"
 		if(5.0)
 			size = "huge"
-		else
-	//if ((CLUMSY in usr.mutations) && prob(50)) t = "funny-looking"
-	var/custom_suffix = "It is a [size] item."
-	return ..(user, distance, suffix = custom_suffix)
+	return ..(user, distance, "", "It is a [size] item.")
 
 /obj/item/attack_hand(mob/user as mob)
 	if (!user) return
@@ -145,9 +141,9 @@
 		if(isliving(src.loc))
 			return
 		user.next_move = max(user.next_move+2,world.time + 2)
-	src.pickup(user)
-	add_fingerprint(user)
 	user.put_in_active_hand(src)
+	if(src.loc == user)
+		src.pickup(user)
 	return
 
 
@@ -202,11 +198,7 @@
 // apparently called whenever an item is removed from a slot, container, or anything else.
 /obj/item/proc/dropped(mob/user as mob)
 	..()
-	if(zoom) //binoculars, scope, etc
-		user.client.view = world.view
-		user.client.pixel_x = 0
-		user.client.pixel_y = 0
-		zoom = 0
+	if(zoom) zoom() //binoculars, scope, etc
 
 // called just as an item is picked up (loc is not yet changed)
 /obj/item/proc/pickup(mob/user)
@@ -415,9 +407,9 @@
 						H << "<span class='warning'>You need a jumpsuit before you can attach this [name].</span>"
 					return 0
 				var/obj/item/clothing/under/uniform = H.w_uniform
-				if(uniform.hastie)
+				if(uniform.accessories.len && !uniform.can_attach_accessory(src))
 					if (!disable_warning)
-						H << "<span class='warning'>You already have [uniform.hastie] attached to your [uniform].</span>"
+						H << "<span class='warning'>You already have an accessory of this type attached to your [uniform].</span>"
 					return 0
 				if( !(slot_flags & SLOT_TIE) )
 					return 0
@@ -605,10 +597,10 @@
 		overlays += blood_overlay
 
 	//if this blood isn't already in the list, add it
-
-	if(blood_DNA[M.dna.unique_enzymes])
-		return 0 //already bloodied with this blood. Cannot add more.
-	blood_DNA[M.dna.unique_enzymes] = M.dna.b_type
+	if(istype(M))
+		if(blood_DNA[M.dna.unique_enzymes])
+			return 0 //already bloodied with this blood. Cannot add more.
+		blood_DNA[M.dna.unique_enzymes] = M.dna.b_type
 	return 1 //we applied blood to the item
 
 /obj/item/proc/generate_blood_overlay()
@@ -641,8 +633,8 @@ For zooming with scope or binoculars. This is called from
 modules/mob/mob_movement.dm if you move you will be zoomed out
 modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 */
-
-/obj/item/proc/zoom(var/tileoffset = 11,var/viewsize = 12) //tileoffset is client view offset in the direction the user is facing. viewsize is how far out this thing zooms. 7 is normal view
+//Looking through a scope or binoculars should /not/ improve your periphereal vision. Still, increase viewsize a tiny bit so that sniping isn't as restricted to NSEW
+/obj/item/proc/zoom(var/tileoffset = 14,var/viewsize = 9) //tileoffset is client view offset in the direction the user is facing. viewsize is how far out this thing zooms. 7 is normal view
 
 	var/devicename
 
@@ -664,9 +656,8 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 		cannotzoom = 1
 
 	if(!zoom && !cannotzoom)
-		if(!usr.hud_used.hud_shown)
-			usr.button_pressed_F12(1)	// If the user has already limited their HUD this avoids them having a HUD when they zoom in
-		usr.button_pressed_F12(1)
+		if(usr.hud_used.hud_shown)
+			usr.toggle_zoom_hud()	// If the user has already limited their HUD this avoids them having a HUD when they zoom in
 		usr.client.view = viewsize
 		zoom = 1
 
@@ -689,18 +680,10 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 
 		usr.visible_message("[usr] peers through the [zoomdevicename ? "[zoomdevicename] of the [src.name]" : "[src.name]"].")
 
-		/*
-		if(istype(usr,/mob/living/carbon/human/))
-			var/mob/living/carbon/human/H = usr
-			usr.visible_message("[usr] holds [devicename] up to [H.get_visible_gender() == MALE ? "his" : H.get_visible_gender() == FEMALE ? "her" : "their"] eyes.")
-		else
-			usr.visible_message("[usr] holds [devicename] up to its eyes.")
-		*/
-
 	else
 		usr.client.view = world.view
 		if(!usr.hud_used.hud_shown)
-			usr.button_pressed_F12(1)
+			usr.toggle_zoom_hud()
 		zoom = 0
 
 		usr.client.pixel_x = 0

@@ -22,6 +22,9 @@ var/list/solars_list = list()
 	var/turn_angle = 0
 	var/obj/machinery/power/solar_control/control = null
 
+/obj/machinery/power/solar/drain_power()
+	return -1
+
 /obj/machinery/power/solar/New(var/turf/loc, var/obj/item/solar_assembly/S)
 	..(loc)
 	Make(S)
@@ -302,6 +305,8 @@ var/list/solars_list = list()
 	var/obj/machinery/power/tracker/connected_tracker = null
 	var/list/connected_panels = list()
 
+/obj/machinery/power/solar_control/drain_power()
+	return -1
 
 /obj/machinery/power/solar_control/New()
 	..()

@@ -5,9 +5,12 @@
 	var/active_w_class
 	sharp = 0
 	edge = 0
-	flags = FPRINT | TABLEPASS | NOBLOODY
+	flags = NOBLOODY
 
 /obj/item/weapon/melee/energy/proc/activate(mob/living/user)
+	anchored = 1
+	if(active)
+		return
 	active = 1
 	force = active_force
 	throwforce = active_throwforce
@@ -17,18 +20,22 @@
 	playsound(user, 'sound/weapons/saberon.ogg', 50, 1)
 
 /obj/item/weapon/melee/energy/proc/deactivate(mob/living/user)
+	anchored = 0
+	if(!active)
+		return
+	playsound(user, 'sound/weapons/saberoff.ogg', 50, 1)
 	active = 0
 	force = initial(force)
 	throwforce = initial(throwforce)
 	sharp = initial(sharp)
 	edge = initial(edge)
 	w_class = initial(w_class)
-	playsound(user, 'sound/weapons/saberoff.ogg', 50, 1)
 
 /obj/item/weapon/melee/energy/attack_self(mob/living/user as mob)
 	if (active)
 		if ((CLUMSY in user.mutations) && prob(50))
-			user.visible_message("\red [user] accidentally cuts \himself with \the [src].", "\red You accidentally cut yourself with \the [src].")
+			user.visible_message("<span class='danger'>[user] accidentally cuts \himself with \the [src].</span>",\
+			"<span class='danger'>You accidentally cut yourself with \the [src].</span>")
 			user.take_organ_damage(5,5)
 		deactivate(user)
 	else
@@ -44,8 +51,8 @@
 
 /obj/item/weapon/melee/energy/suicide_act(mob/user)
 	if (active)
-		viewers(user) << pick("\red <b>[user] is slitting \his stomach open with the [src.name]! It looks like \he's trying to commit seppuku.</b>", \
-							"\red <b>[user] is falling on the [src.name]! It looks like \he's trying to commit suicide.</b>")
+		viewers(user) << pick("<span class='danger'>[user] is slitting \his stomach open with the [src.name]! It looks like \he's trying to commit seppuku.</span>", \
+							"<span class='danger'>[user] is falling on the [src.name]! It looks like \he's trying to commit suicide.</span>")
 		return (BRUTELOSS|FIRELOSS)
 
 /*
@@ -66,7 +73,7 @@
 	throw_speed = 1
 	throw_range = 5
 	w_class = 3
-	flags = FPRINT | CONDUCT | NOSHIELD | TABLEPASS | NOBLOODY
+	flags = CONDUCT | NOSHIELD | NOBLOODY
 	origin_tech = "magnets=3;combat=4"
 	attack_verb = list("attacked", "chopped", "cleaved", "torn", "cut")
 	sharp = 1
@@ -102,8 +109,13 @@
 	throw_speed = 1
 	throw_range = 5
 	w_class = 2
-	flags = FPRINT | TABLEPASS | NOSHIELD | NOBLOODY
+	flags = NOSHIELD | NOBLOODY
 	origin_tech = "magnets=3;syndicate=4"
+
+/obj/item/weapon/melee/energy/sword/dropped(var/mob/user)
+	..()
+	if(!istype(loc,/mob))
+		deactivate(user)
 
 /obj/item/weapon/melee/energy/sword/New()
 	item_color = pick("red","blue","green","purple")
@@ -121,16 +133,18 @@
 	item_color = "purple"
 
 /obj/item/weapon/melee/energy/sword/activate(mob/living/user)
+	if(!active)
+		user << "<span class='notice'>\The [src] is now energised.</span>"
 	..()
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	icon_state = "sword[item_color]"
-	user << "\blue \The [src] is now energised."
 
 /obj/item/weapon/melee/energy/sword/deactivate(mob/living/user)
+	if(active)
+		user << "<span class='notice'>\The [src] deactivates!</span>"
 	..()
 	attack_verb = list()
 	icon_state = initial(icon_state)
-	user << "\blue It can now be concealed."
 
 /obj/item/weapon/melee/energy/sword/IsShield()
 	if(active)
@@ -158,11 +172,12 @@
 	force = 70.0//Normal attacks deal very high damage.
 	sharp = 1
 	edge = 1
-	throwforce = 1//Throwing or dropping the item deletes it.
+	anchored = 1    // Never spawned outside of inventory, should be fine.
+	throwforce = 1  //Throwing or dropping the item deletes it.
 	throw_speed = 1
 	throw_range = 1
 	w_class = 4.0//So you can't hide it in your pocket or some such.
-	flags = FPRINT | TABLEPASS | NOSHIELD | NOBLOODY
+	flags = NOSHIELD | NOBLOODY
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	var/mob/living/creator
 	var/datum/effect/effect/system/spark_spread/spark_system

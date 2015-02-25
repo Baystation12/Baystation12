@@ -79,7 +79,7 @@
 		if(sleeping)
 			adjustHalLoss(-3)
 			if (mind)
-				if((mind.active && client != null) || immune_to_ssd)
+				if(mind.active && client != null)
 					sleeping = max(sleeping-1, 0)
 			blinded = 1
 			stat = UNCONSCIOUS

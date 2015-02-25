@@ -3,6 +3,10 @@
 
 // proc to find out in how much pain the mob is at the moment
 /mob/living/carbon/proc/updateshock()
+	if (species && (species.flags & NO_PAIN))
+		src.traumatic_shock = 0
+		return 0
+
 	src.traumatic_shock = 			\
 	1	* src.getOxyLoss() + 		\
 	0.7	* src.getToxLoss() + 		\

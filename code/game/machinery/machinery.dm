@@ -28,6 +28,9 @@ Class Variables:
    component_parts (list)
       A list of component parts of machine used by frame based machines.
 
+   panel_open (num)
+      Whether the panel is open
+
    uid (num)
       Unique id of machine across all machines.
 
@@ -42,9 +45,6 @@ Class Variables:
          POWEROFF:4 -- tbd
          MAINT:8 -- machine is currently under going maintenance.
          EMPED:16 -- temporary broken by EMP pulse
-
-   manual (num)
-      Currently unused.
 
 Class Procs:
    New()                     'game/machinery/machine.dm'
@@ -104,33 +104,17 @@ Class Procs:
 		//2 = run auto, use active
 	var/idle_power_usage = 0
 	var/active_power_usage = 0
-	var/power_channel = EQUIP
-		//EQUIP,ENVIRON or LIGHT
-	var/list/component_parts = list() //list of all the parts used to build it, if made from certain kinds of frames.
+	var/power_channel = EQUIP //EQUIP, ENVIRON or LIGHT
+	var/list/component_parts = null //list of all the parts used to build it, if made from certain kinds of frames.
 	var/uid
-	var/manual = 0
-	var/interact_offline = 0 // Can the machine be interacted with while de-powered.
+	var/panel_open = 0
 	var/global/gl_uid = 1
+	var/interact_offline = 0 // Can the machine be interacted with while de-powered.
 
-/obj/machinery/drain_power(var/drain_check)
-
-	if(drain_check)
-		return 1
-
-	if(!powered())
-		return 0
-
-	var/area/area = get_area(src)
-	if(!area)
-		return 0
-
-	var/obj/machinery/power/apc/apc = area.get_apc()
-	if(!apc)
-		return 0
-	return apc.drain_power()
-
-/obj/machinery/New()
-	..()
+/obj/machinery/New(l, d=0)
+	..(l)
+	if(d)
+		set_dir(d)
 	if(!machinery_sort_required && ticker)
 		dd_insertObjectList(machines, src)
 	else
@@ -198,63 +182,18 @@ Class Procs:
 /obj/machinery/proc/inoperable(var/additional_flags = 0)
 	return (stat & (NOPOWER|BROKEN|additional_flags))
 
+/obj/machinery/CanUseTopic(var/mob/user, var/be_close)
+	if(!interact_offline && (stat & (NOPOWER|BROKEN)))
+		return STATUS_CLOSE
 
-/obj/machinery/Topic(href, href_list, var/nowindow = 0, var/checkrange = 1)
-	if(..())
-		return 1
-	if(!can_be_used_by(usr, be_close = checkrange))
-		return 1
-	add_fingerprint(usr)
-	return 0
+	return ..()
 
-/obj/machinery/proc/can_be_used_by(mob/user, be_close = 1)
-	if(!interact_offline && stat & (NOPOWER|BROKEN))
-		return 0
-	if(!user.canUseTopic(src, be_close))
-		return 0
-	return 1
+/obj/machinery/CouldUseTopic(var/mob/user)
+	..()
+	user.set_machine(src)
 
-////////////////////////////////////////////////////////////////////////////////////////////
-
-/mob/proc/canUseTopic(atom/movable/M, be_close = 1)
-	return
-
-/mob/dead/observer/canUseTopic(atom/movable/M, be_close = 1)
-	if(check_rights(R_ADMIN, 0))
-		return
-
-/mob/living/canUseTopic(atom/movable/M, be_close = 1, no_dextery = 0)
-	if(no_dextery)
-		src << "<span class='notice'>You don't have the dexterity to do this!</span>"
-		return 0
-	return be_close && !in_range(M, src)
-
-/mob/living/carbon/human/canUseTopic(atom/movable/M, be_close = 1)
-	if(restrained() || lying || stat || stunned || weakened)
-		return
-	if(be_close && !in_range(M, src))
-		if(TK in mutations)
-			var/mob/living/carbon/human/H = M
-			if(istype(H.l_hand, /obj/item/tk_grab) || istype(H.r_hand, /obj/item/tk_grab))
-				return 1
-		return
-	if(!isturf(M.loc) && M.loc != src)
-		return
-	return 1
-
-/mob/living/silicon/ai/canUseTopic(atom/movable/M)
-	if(stat)
-		return
-	//stop AIs from leaving windows open and using then after they lose vision
-	//apc_override is needed here because AIs use their own APC when powerless
-	if(cameranet && !cameranet.checkTurfVis(get_turf(M)) && !apc_override)
-		return
-	return 1
-
-/mob/living/silicon/robot/canUseTopic(atom/movable/M)
-	if(stat || lockcharge || stunned || weakened)
-		return
-	return 1
+/obj/machinery/CouldNotUseTopic(var/mob/user)
+	usr.unset_machine()
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -293,7 +232,7 @@ Class Procs:
 
 	src.add_fingerprint(user)
 
-	return 0
+	return ..()
 
 /obj/machinery/proc/RefreshParts() //Placeholder proc for machines that are built using frames.
 	return
@@ -303,15 +242,15 @@ Class Procs:
 	gl_uid++
 
 /obj/machinery/proc/state(var/msg)
-  for(var/mob/O in hearers(src, null))
-    O.show_message("\icon[src] <span class = 'notice'>[msg]</span>", 2)
+	for(var/mob/O in hearers(src, null))
+		O.show_message("\icon[src] <span class = 'notice'>[msg]</span>", 2)
 
 /obj/machinery/proc/ping(text=null)
-  if (!text)
-    text = "\The [src] pings."
+	if (!text)
+		text = "\The [src] pings."
 
-  state(text, "blue")
-  playsound(src.loc, 'sound/machines/ping.ogg', 50, 0)
+	state(text, "blue")
+	playsound(src.loc, 'sound/machines/ping.ogg', 50, 0)
 
 /obj/machinery/proc/shock(mob/user, prb)
 	if(inoperable())
@@ -332,9 +271,58 @@ Class Procs:
 	else
 		return 0
 
+/obj/machinery/proc/default_deconstruction_crowbar(var/mob/user, var/obj/item/weapon/crowbar/C)
+	if(!istype(C))
+		return 0
+	if(!panel_open)
+		return 0
+	. = dismantle()
+
+/obj/machinery/proc/default_deconstruction_screwdriver(var/mob/user, var/obj/item/weapon/screwdriver/S)
+	if(!istype(S))
+		return 0
+	playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
+	panel_open = !panel_open
+	user << "<span class='notice'>You [panel_open ? "open" : "close"] the maintenance hatch of [src].</span>"
+	update_icon()
+	return 1
+
+/obj/machinery/proc/default_part_replacement(var/mob/user, var/obj/item/weapon/storage/part_replacer/R)
+	if(!istype(R))
+		return 0
+	if(!component_parts)
+		return 0
+	if(panel_open)
+		var/obj/item/weapon/circuitboard/CB = locate(/obj/item/weapon/circuitboard) in component_parts
+		var/P
+		for(var/obj/item/weapon/stock_parts/A in component_parts)
+			for(var/D in CB.req_components)
+				var/T = text2path(D)
+				if(ispath(A.type, T))
+					P = T
+					break
+			for(var/obj/item/weapon/stock_parts/B in R.contents)
+				if(istype(B, P) && istype(A, P))
+					if(B.rating > A.rating)
+						R.remove_from_storage(B, src)
+						R.handle_item_insertion(A, 1)
+						component_parts -= A
+						component_parts += B
+						B.loc = null
+						user << "<span class='notice'>[A.name] replaced with [B.name].</span>"
+						break
+			update_icon()
+			RefreshParts()
+	else
+		user << "<span class='notice'>Following parts detected in the machine:</span>"
+		for(var/var/obj/item/C in component_parts)
+			user << "<span class='notice'>    [C.name]</span>"
+	return 1
+
 /obj/machinery/proc/dismantle()
 	playsound(loc, 'sound/items/Crowbar.ogg', 50, 1)
 	var/obj/machinery/constructable_frame/machine_frame/M = new /obj/machinery/constructable_frame/machine_frame(loc)
+	M.set_dir(src.dir)
 	M.state = 2
 	M.icon_state = "box_1"
 	for(var/obj/I in component_parts)
@@ -375,7 +363,7 @@ Class Procs:
 		if(istype(perp.belt, /obj/item/weapon/gun) || istype(perp.belt, /obj/item/weapon/melee))
 			threatcount += 2
 
-		if(perp.dna && perp.dna.mutantrace && perp.dna.mutantrace != "none")
+		if(perp.species.name != "Human") //beepsky so racist.
 			threatcount += 2
 
 	if(check_records || check_arrest)

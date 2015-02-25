@@ -15,7 +15,7 @@
 		if(I.matter && !recipe.resources) //This can be overidden in the datums.
 			recipe.resources = list()
 			for(var/material in I.matter)
-				recipe.resources[material] = round(I.matter[material]*1.25) // More expensive to produce than they are to recycle.
+				recipe.resources[material] = I.matter[material]*1.25 // More expensive to produce than they are to recycle.
 			del(I)
 
 /datum/autolathe/recipe
@@ -201,8 +201,13 @@
 	path = /obj/item/weapon/reagent_containers/syringe
 	category = "Medical"
 
+/datum/autolathe/recipe/syringegun_ammo
+	name = "syringe"
+	path = /obj/item/weapon/syringe_cartridge
+	category = "Arms and Ammunition"
+
 /datum/autolathe/recipe/shotgun_blanks
-	name = "ammunition (shotgun, blanks)"
+	name = "ammunition (shotgun, blank)"
 	path = /obj/item/ammo_casing/shotgun/blank
 	category = "Arms and Ammunition"
 
@@ -211,9 +216,24 @@
 	path = /obj/item/ammo_casing/shotgun/beanbag
 	category = "Arms and Ammunition"
 
+/datum/autolathe/recipe/shotgun_flash
+	name = "ammunition (shotgun, flash)"
+	path = /obj/item/ammo_casing/shotgun/flash
+	category = "Arms and Ammunition"
+
 /datum/autolathe/recipe/magazine_rubber
-	name = "ammunition (rubber)"
-	path = /obj/item/ammo_magazine/c45r
+	name = "ammunition (.45, rubber)"
+	path = /obj/item/ammo_magazine/c45m/rubber
+	category = "Arms and Ammunition"
+
+/datum/autolathe/recipe/magazine_flash
+	name = "ammunition (.45, flash)"
+	path = /obj/item/ammo_magazine/c45m/flash
+	category = "Arms and Ammunition"
+
+/datum/autolathe/recipe/magazine_smg_rubber
+	name = "ammunition (9mm rubber top mounted)"
+	path = /obj/item/ammo_magazine/mc9mmt/rubber
 	category = "Arms and Ammunition"
 
 /datum/autolathe/recipe/consolescreen
@@ -284,15 +304,51 @@
 	hidden = 1
 	category = "Arms and Ammunition"
 
+/datum/autolathe/recipe/magazine_stetchkin
+	name = "ammunition (9mm)"
+	path = /obj/item/ammo_magazine/mc9mm
+	hidden = 1
+	category = "Arms and Ammunition"
+
+/datum/autolathe/recipe/magazine_stetchkin_flash
+	name = "ammunition (9mm, flash)"
+	path = /obj/item/ammo_magazine/mc9mm/flash
+	hidden = 1
+	category = "Arms and Ammunition"
+
+/datum/autolathe/recipe/magazine_c20r
+	name = "ammunition (12mm)"
+	path = /obj/item/ammo_magazine/a12mm
+	hidden = 1
+	category = "Arms and Ammunition"
+
+/datum/autolathe/recipe/magazine_smg
+	name = "ammunition (9mm top mounted)"
+	path = /obj/item/ammo_magazine/mc9mmt
+	hidden = 1
+	category = "Arms and Ammunition"
+
+/datum/autolathe/recipe/magazine_carbine
+	name = "ammunition (5.56)"
+	path = /obj/item/ammo_magazine/a556
+	hidden = 1
+	category = "Arms and Ammunition"
+
 /datum/autolathe/recipe/shotgun
-	name = "ammunition (shell, shotgun)"
+	name = "ammunition (slug, shotgun)"
 	path = /obj/item/ammo_casing/shotgun
 	hidden = 1
 	category = "Arms and Ammunition"
 
-/datum/autolathe/recipe/shotgun_dart
-	name = "ammunition (dart, shotgun)"
-	path = /obj/item/ammo_casing/shotgun/dart
+/datum/autolathe/recipe/shotgun_pellet
+	name = "ammunition (shell, shotgun)"
+	path = /obj/item/ammo_casing/shotgun/pellet
+	hidden = 1
+	category = "Arms and Ammunition"
+
+/datum/autolathe/recipe/stunshell
+	name = "ammunition (stun cartridge, shotgun)"
+	path = /obj/item/ammo_casing/shotgun/stunshell
 	hidden = 1
 	category = "Arms and Ammunition"
 

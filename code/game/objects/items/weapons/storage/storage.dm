@@ -209,24 +209,17 @@
 			usr << "<span class='notice'>[src] is full, make some space.</span>"
 		return 0 //Storage item is full
 
-	if(can_hold.len)
-		var/ok = 0
-		for(var/A in can_hold)
-			if(istype(W, text2path(A) ))
-				ok = 1
-				break
-		if(!ok)
-			if(!stop_messages)
-				if (istype(W, /obj/item/weapon/hand_labeler))
-					return 0
-				usr << "<span class='notice'>[src] cannot hold [W].</span>"
-			return 0
+	if(can_hold.len && !is_type_in_list(W, can_hold))
+		if(!stop_messages)
+			if (istype(W, /obj/item/weapon/hand_labeler))
+				return 0
+			usr << "<span class='notice'>[src] cannot hold [W].</span>"
+		return 0
 
-	for(var/A in cant_hold) //Check for specific items which this container can't hold.
-		if(istype(W, text2path(A) ))
-			if(!stop_messages)
-				usr << "<span class='notice'>[src] cannot hold [W].</span>"
-			return 0
+	if(cant_hold.len && is_type_in_list(W, cant_hold))
+		if(!stop_messages)
+			usr << "<span class='notice'>[src] cannot hold [W].</span>"
+		return 0
 
 	if (W.w_class > max_w_class)
 		if(!stop_messages)
@@ -452,11 +445,11 @@
 	del(src)
 //BubbleWrap END
 
-/obj/item/weapon/storage/hear_talk(mob/M as mob, text)
+/obj/item/weapon/storage/hear_talk(mob/M as mob, text, verb, datum/language/speaking)
 	for (var/atom/A in src)
 		if(istype(A,/obj/))
 			var/obj/O = A
-			O.hear_talk(M, text)
+			O.hear_talk(M, text, verb, speaking)
 
 //Returns the storage depth of an atom. This is the number of storage items the atom is contained in before reaching toplevel (the area).
 //Returns -1 if the atom was not found on container.

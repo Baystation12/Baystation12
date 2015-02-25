@@ -23,7 +23,6 @@ var/bomb_set
 	var/timing_wire
 	var/removal_stage = 0 // 0 is no removal, 1 is covers removed, 2 is covers open,
 	                      // 3 is sealant open, 4 is unwrenched, 5 is removed from bolts.
-	flags = FPRINT
 	use_power = 0
 
 
@@ -388,8 +387,6 @@ obj/machinery/nuclearbomb/proc/nukehack_win(mob/user as mob)
 	if (ticker && ticker.mode)
 		ticker.mode.explosion_in_progress = 1
 	sleep(100)
-
-	enter_allowed = 0
 
 	var/off_station = 0
 	var/turf/bomb_location = get_turf(src)

@@ -30,12 +30,12 @@
 
 /datum/event/radiation_storm/proc/radiate()
 	for(var/mob/living/carbon/C in living_mob_list)
-		var/turf/T = get_turf(C)
-		if(!T)
+		var/area/A = get_area(C)
+		if(!A)
 			continue
-		if(!(T.z in config.station_levels))
+		if(!(A.z in config.station_levels))
 			continue
-		if(istype(T.loc, /area/maintenance) || istype(T.loc, /area/crew_quarters))
+		if(A.rad_shielded)
 			continue
 
 		if(istype(C,/mob/living/carbon/human))

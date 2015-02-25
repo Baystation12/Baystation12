@@ -38,12 +38,12 @@
 	return total_weight
 
 /datum/event_meta/alien/get_weight(var/list/active_with_role)
-	if(aliens_allowed)
+	if(config.aliens_allowed)
 		return ..(active_with_role)
 	return 0
 
 /datum/event_meta/ninja/get_weight(var/list/active_with_role)
-	if(toggle_space_ninja)
+	if(config.ninjas_allowed)
 		return ..(active_with_role)
 	return 0
 

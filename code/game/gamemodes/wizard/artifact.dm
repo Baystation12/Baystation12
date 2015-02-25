@@ -6,7 +6,6 @@
 	icon = 'icons/obj/wizard.dmi'
 	icon_state = "render"
 	item_state = "render"
-	flags = FPRINT | TABLEPASS
 	force = 15
 	throwforce = 10
 	w_class = 3
@@ -16,7 +15,7 @@
 /obj/effect/rend
 	name = "Tear in the fabric of reality"
 	desc = "You should run now"
-	icon = 'icons/obj/biomass.dmi'
+	icon = 'icons/obj/wizard.dmi'
 	icon_state = "rift"
 	density = 1
 	unacidable = 1

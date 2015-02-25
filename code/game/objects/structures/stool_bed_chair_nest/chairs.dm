@@ -1,20 +1,18 @@
-/obj/structure/stool/bed/chair	//YES, chairs are a type of bed, which are a type of stool. This works, believe me.	-Pete
+/obj/structure/bed/chair	//YES, chairs are a type of bed, which are a type of stool. This works, believe me.	-Pete
 	name = "chair"
 	desc = "You sit in this. Either by will or force."
 	icon_state = "chair"
+	buckle_lying = 0 //force people to sit up in chairs when buckled
 
 	var/propelled = 0 // Check for fire-extinguisher-driven chairs
 
-/obj/structure/stool/MouseDrop(atom/over_object)
-	return
-
-/obj/structure/stool/bed/chair/New()
+/obj/structure/bed/chair/New()
 	..()
 	spawn(3)	//sorry. i don't think there's a better way to do this.
 		update_layer()
 	return
 
-/obj/structure/stool/bed/chair/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/structure/bed/chair/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	..()
 	if(istype(W, /obj/item/assembly/shock_kit))
 		var/obj/item/assembly/shock_kit/SK = W
@@ -22,7 +20,7 @@
 			user << "<span class='notice'>[SK] is not ready to be attached!</span>"
 			return
 		user.drop_item()
-		var/obj/structure/stool/bed/chair/e_chair/E = new /obj/structure/stool/bed/chair/e_chair(src.loc)
+		var/obj/structure/bed/chair/e_chair/E = new /obj/structure/bed/chair/e_chair(src.loc)
 		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 		E.set_dir(dir)
 		E.part = SK
@@ -30,26 +28,26 @@
 		SK.master = E
 		del(src)
 
-/obj/structure/stool/bed/chair/attack_tk(mob/user as mob)
+/obj/structure/bed/chair/attack_tk(mob/user as mob)
 	if(buckled_mob)
 		..()
 	else
 		rotate()
 	return
 
-/obj/structure/stool/bed/chair/proc/update_layer()
+/obj/structure/bed/chair/proc/update_layer()
 	if(src.dir == NORTH)
 		src.layer = FLY_LAYER
 	else
 		src.layer = OBJ_LAYER
 
-/obj/structure/stool/bed/chair/set_dir()
+/obj/structure/bed/chair/set_dir()
 	..()
 	update_layer()
 	if(buckled_mob)
 		buckled_mob.set_dir(dir)
 
-/obj/structure/stool/bed/chair/verb/rotate()
+/obj/structure/bed/chair/verb/rotate()
 	set name = "Rotate Chair"
 	set category = "Object"
 	set src in oview(1)
@@ -68,23 +66,18 @@
 		src.set_dir(turn(src.dir, 90))
 		return
 
-/obj/structure/stool/bed/chair/MouseDrop_T(mob/M as mob, mob/user as mob)
-	if(!istype(M)) return
-	buckle_mob(M, user)
-	return
-
 // Chair types
-/obj/structure/stool/bed/chair/wood/normal
+/obj/structure/bed/chair/wood/normal
 	icon_state = "wooden_chair"
 	name = "wooden chair"
 	desc = "Old is never too old to not be in fashion."
 
-/obj/structure/stool/bed/chair/wood/wings
+/obj/structure/bed/chair/wood/wings
 	icon_state = "wooden_chair_wings"
 	name = "wooden chair"
 	desc = "Old is never too old to not be in fashion."
 
-/obj/structure/stool/bed/chair/wood/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/structure/bed/chair/wood/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/weapon/wrench))
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 		new /obj/item/stack/sheet/wood(src.loc)
@@ -92,45 +85,45 @@
 	else
 		..()
 
-/obj/structure/stool/bed/chair/comfy
+/obj/structure/bed/chair/comfy
 	name = "comfy chair"
 	desc = "It looks comfy."
 	icon_state = "comfychair"
 	color = rgb(255,255,255)
 	var/image/armrest = null
 
-/obj/structure/stool/bed/chair/comfy/New()
+/obj/structure/bed/chair/comfy/New()
 	armrest = image("icons/obj/objects.dmi", "comfychair_armrest")
 	armrest.layer = MOB_LAYER + 0.1
 
 	return ..()
 
-/obj/structure/stool/bed/chair/comfy/afterbuckle()
+/obj/structure/bed/chair/comfy/post_buckle_mob()
 	if(buckled_mob)
 		overlays += armrest
 	else
 		overlays -= armrest
 
-/obj/structure/stool/bed/chair/comfy/brown
+/obj/structure/bed/chair/comfy/brown
 	color = rgb(255,113,0)
 
-/obj/structure/stool/bed/chair/comfy/beige
+/obj/structure/bed/chair/comfy/beige
 	color = rgb(255,253,195)
 
-/obj/structure/stool/bed/chair/comfy/teal
+/obj/structure/bed/chair/comfy/teal
 	color = rgb(0,255,255)
 
-/obj/structure/stool/bed/chair/office
+/obj/structure/bed/chair/office
 	anchored = 0
-	movable = 1
+	buckle_movable = 1
 
-/obj/structure/stool/bed/chair/comfy/black
+/obj/structure/bed/chair/comfy/black
 	color = rgb(167,164,153)
 
-/obj/structure/stool/bed/chair/comfy/lime
+/obj/structure/bed/chair/comfy/lime
 	color = rgb(255,251,0)
 
-/obj/structure/stool/bed/chair/office/Move()
+/obj/structure/bed/chair/office/Move()
 	..()
 	if(buckled_mob)
 		var/mob/living/occupant = buckled_mob
@@ -143,15 +136,14 @@
 					if (O != occupant)
 						Bump(O)
 			else
-				unbuckle()
+				unbuckle_mob()
 
-/obj/structure/stool/bed/chair/office/Bump(atom/A)
+/obj/structure/bed/chair/office/Bump(atom/A)
 	..()
 	if(!buckled_mob)	return
 
 	if(propelled)
-		var/mob/living/occupant = buckled_mob
-		unbuckle()
+		var/mob/living/occupant = unbuckle_mob()
 
 		var/def_zone = ran_zone()
 		var/blocked = occupant.run_armor_check(def_zone, "melee")
@@ -171,8 +163,8 @@
 			victim.apply_damage(10, BRUTE, def_zone, blocked)
 		occupant.visible_message("<span class='danger'>[occupant] crashed into \the [A]!</span>")
 
-/obj/structure/stool/bed/chair/office/light
+/obj/structure/bed/chair/office/light
 	icon_state = "officechair_white"
 
-/obj/structure/stool/bed/chair/office/dark
+/obj/structure/bed/chair/office/dark
 	icon_state = "officechair_dark"

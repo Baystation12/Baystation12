@@ -154,6 +154,12 @@
 		user << "<span class='notice'>There seems to be a firewall preventing you from accessing this device.</span>"
 		return 0
 
+	if (get_dist(src, user) > 1 && !issilicon(user))
+		user << "<span class='notice'>You are too far away.</span>"
+		user.unset_machine()
+		user << browse(null, "window=turretid")
+		return 0
+
 	if(locked && !issilicon(user))
 		user << "<span class='notice'>Access denied.</span>"
 		return 0
@@ -175,7 +181,6 @@
 				<TT><B>Automatic Portable Turret Installation</B></TT><BR><BR>
 				Status: []<BR>
 				Behaviour controls are [locked ? "locked" : "unlocked"]"},
-
 				"<A href='?src=\ref[src];power=1'>[on ? "On" : "Off"]</A>" )
 
 	if(!locked || issilicon(user))
@@ -292,7 +297,7 @@
 
 	else if((istype(I, /obj/item/weapon/wrench)))
 		if(on || raised)
-			user << "<span class='warning'You cannot unsecure an active turret!</span>"
+			user << "<span class='warning'>You cannot unsecure an active turret!</span>"
 			return
 		if(wrenching)
 			user << "<span class='warning'>Someone is already [anchored ? "un" : ""]securing the turret!</span>"
@@ -462,6 +467,9 @@
 			secondarytargets += L
 
 /obj/machinery/porta_turret/proc/assess_living(var/mob/living/L)
+	if(!istype(L))
+		return TURRET_NOT_TARGET
+
 	if(L.invisibility >= INVISIBILITY_LEVEL_ONE) // Cannot see him. see_invisible is a mob-var
 		return TURRET_NOT_TARGET
 
@@ -543,7 +551,7 @@
 	raising = 0
 	cover.icon_state = "turretCover"
 	raised = 0
-	invisibility = 2
+	invisibility = INVISIBILITY_LEVEL_TWO
 	update_icon()
 
 
@@ -725,7 +733,7 @@
 				gun_charge = E.power_supply.charge //the gun's charge is stored in gun_charge
 				user << "<span class='notice'>You add [I] to the turret.</span>"
 
-				if(istype(installation, /obj/item/weapon/gun/energy/laser/bluetag) || istype(installation, /obj/item/weapon/gun/energy/laser/redtag))
+				if(istype(installation, /obj/item/weapon/gun/energy/lasertag/blue) || istype(installation, /obj/item/weapon/gun/energy/lasertag/red))
 					target_type = /obj/machinery/porta_turret/tag
 				else
 					target_type = /obj/machinery/porta_turret
@@ -813,7 +821,7 @@
 
 	if(istype(I, /obj/item/weapon/pen))	//you can rename turrets like bots!
 		var/t = input(user, "Enter new turret name", name, finish_name) as text
-		t = copytext(sanitize(t), 1, MAX_MESSAGE_LEN)
+		t = sanitize(copytext(t, 1, MAX_MESSAGE_LEN))
 		if(!t)
 			return
 		if(!in_range(src, usr) && loc != usr)

@@ -10,9 +10,8 @@
 
 
 obj/structure/windoor_assembly
+	name = "windoor assembly"
 	icon = 'icons/obj/doors/windoor.dmi'
-
-	name = "Windoor Assembly"
 	icon_state = "l_windoor_assembly01"
 	anchored = 0
 	density = 0

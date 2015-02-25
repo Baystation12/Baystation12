@@ -67,14 +67,6 @@ datum/controller/vote
 		current_votes.Cut()
 		additional_text.Cut()
 
-	/*	if(auto_muted && !ooc_allowed)
-			auto_muted = 0
-			ooc_allowed = !( ooc_allowed )
-			world << "<b>The OOC channel has been automatically enabled due to vote end.</b>"
-			log_admin("OOC was toggled automatically due to vote end.")
-			message_admins("OOC has been toggled on automatically.")
-	*/
-
 	proc/get_result()
 		//get the highest number of votes
 		var/greatest_votes = 0
@@ -262,27 +254,6 @@ datum/controller/vote
 			if(mode == "gamemode" && going)
 				going = 0
 				world << "<font color='red'><b>Round start has been delayed.</b></font>"
-		/*	if(mode == "crew_transfer" && ooc_allowed)
-				auto_muted = 1
-				ooc_allowed = !( ooc_allowed )
-				world << "<b>The OOC channel has been automatically disabled due to a crew transfer vote.</b>"
-				log_admin("OOC was toggled automatically due to crew_transfer vote.")
-				message_admins("OOC has been toggled off automatically.")
-			if(mode == "gamemode" && ooc_allowed)
-				auto_muted = 1
-				ooc_allowed = !( ooc_allowed )
-				world << "<b>The OOC channel has been automatically disabled due to the gamemode vote.</b>"
-				log_admin("OOC was toggled automatically due to gamemode vote.")
-				message_admins("OOC has been toggled off automatically.")
-			if(mode == "custom" && ooc_allowed)
-				auto_muted = 1
-				ooc_allowed = !( ooc_allowed )
-				world << "<b>The OOC channel has been automatically disabled due to a custom vote.</b>"
-				log_admin("OOC was toggled automatically due to custom vote.")
-				message_admins("OOC has been toggled off automatically.")
-		*/
-
-
 
 			time_remaining = round(config.vote_period/10)
 			return 1

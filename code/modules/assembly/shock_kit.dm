@@ -6,7 +6,7 @@
 	var/obj/item/device/radio/electropack/part2 = null
 	var/status = 0
 	w_class = 5.0
-	flags = FPRINT | TABLEPASS| CONDUCT
+	flags = CONDUCT
 
 /obj/item/assembly/shock_kit/Del()
 	del(part1)
@@ -40,7 +40,7 @@
 	return
 
 /obj/item/assembly/shock_kit/receive_signal()
-	if(istype(loc, /obj/structure/stool/bed/chair/e_chair))
-		var/obj/structure/stool/bed/chair/e_chair/C = loc
+	if(istype(loc, /obj/structure/bed/chair/e_chair))
+		var/obj/structure/bed/chair/e_chair/C = loc
 		C.shock()
 	return

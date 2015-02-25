@@ -31,7 +31,7 @@ var/const/BLOOD_VOLUME_SURVIVE = 122
 	for(var/datum/reagent/blood/B in vessel.reagent_list)
 		if(B.id == "blood")
 			B.data = list(	"donor"=src,"viruses"=null,"species"=species.name,"blood_DNA"=dna.unique_enzymes,"blood_colour"= species.blood_color,"blood_type"=dna.b_type,	\
-							"resistances"=null,"trace_chem"=null, "virus2" = null, "antibodies" = null)
+							"resistances"=null,"trace_chem"=null, "virus2" = null, "antibodies" = list())
 			B.color = B.data["blood_colour"]
 
 // Takes care blood loss and regeneration
@@ -290,28 +290,23 @@ proc/blood_splatter(var/target,var/datum/reagent/blood/source,var/large)
 			source.data["blood_type"] = donor.dna.b_type
 
 	// Are we dripping or splattering?
-	if(!large)
-
-		// Only a certain number of drips can be on a given turf.
-		var/list/drips = list()
-		var/list/drip_icons = list("1","2","3","4","5")
-
-		for(var/obj/effect/decal/cleanable/blood/drip/drop in T)
-			drips += drop
-			drip_icons.Remove(drop.icon_state)
-
-		// If we have too many drips, remove them and spawn a proper blood splatter.
-		if(drips.len >= 5)
-			//TODO: copy all virus data from drips to new splatter?
-			for(var/obj/effect/decal/cleanable/blood/drip/drop in drips)
-				del drop
-		else
-			decal_type = /obj/effect/decal/cleanable/blood/drip
+	var/list/drips = list()
+	// Only a certain number of drips (or one large splatter) can be on a given turf.
+	for(var/obj/effect/decal/cleanable/blood/drip/drop in T)
+		drips |= drop.drips
+		del(drop)
+	if(!large && drips.len < 3)
+		decal_type = /obj/effect/decal/cleanable/blood/drip
 
 	// Find a blood decal or create a new one.
 	B = locate(decal_type) in T
 	if(!B)
 		B = new decal_type(T)
+
+	var/obj/effect/decal/cleanable/blood/drip/drop = B
+	if(istype(drop) && drips && drips.len && !large)
+		drop.overlays |= drips
+		drop.drips |= drips
 
 	// If there's no data to copy, call it quits here.
 	if(!source)
@@ -330,11 +325,7 @@ proc/blood_splatter(var/target,var/datum/reagent/blood/source,var/large)
 		else
 			B.blood_DNA[source.data["blood_DNA"]] = "O+"
 
-	// Update virus information. //Looks like this is out of date.
-	//for(var/datum/disease/D in source.data["viruses"])
-	//	var/datum/disease/new_virus = D.Copy(1)
-	//	source.viruses += new_virus
-	//	new_virus.holder = B
+	// Update virus information.
 	if(source.data["virus2"])
 		B.virus2 = virus_copylist(source.data["virus2"])
 

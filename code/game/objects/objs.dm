@@ -16,17 +16,30 @@
 	var/damtype = "brute"
 	var/force = 0
 
-/obj/New()
-	..()
-	// If the game is already underway initialize will no longer be called for us
-	if(ticker && ticker.current_state == GAME_STATE_PLAYING)
-		initialize()
-
-/obj/Topic(href, href_list, var/nowindow = 0)
+/obj/Topic(href, href_list, var/nowindow = 0, var/datum/topic_state/custom_state)
 	// Calling Topic without a corresponding window open causes runtime errors
-	if(nowindow)
+	if(!nowindow && ..())
+		return 1
+
+	if(!custom_state)
+		custom_state = default_state
+
+	// In the far future no checks are made in an overriding Topic() beyond if(..()) return
+	// Instead any such checks are made in CanUseTopic()
+	var/obj/host = nano_host()
+	if(host.CanUseTopic(usr, href_list, custom_state) == STATUS_INTERACTIVE)
+		CouldUseTopic(usr)
 		return 0
-	return ..()
+
+	CouldNotUseTopic(usr)
+	return 1
+
+/obj/proc/CouldUseTopic(var/mob/user)
+	var/atom/host = nano_host()
+	host.add_fingerprint(user)
+
+/obj/proc/CouldNotUseTopic(var/mob/user)
+	// Nada
 
 /obj/item/proc/is_used_on(obj/O, mob/user)
 
@@ -132,7 +145,7 @@
 	return
 
 
-/obj/proc/hear_talk(mob/M as mob, text)
+/obj/proc/hear_talk(mob/M as mob, text, verb, datum/language/speaking)
 	if(talking_atom)
 		talking_atom.catchMessage(text, M)
 /*
@@ -141,4 +154,7 @@
 		var/rendered = "<span class='game say'><span class='name'>[M.name]: </span> <span class='message'>[text]</span></span>"
 		mo.show_message(rendered, 2)
 		*/
+	return
+
+/obj/proc/see_emote(mob/M as mob, text, var/emote_type)
 	return
