@@ -1,11 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: code\game\machinery\phoron_desublimer.dm;code\modules\mob\living\carbon\human\human.dm;code\game\objects\items\weapons\RCD.dm;baystation12.dme;code\game\machinery\jukebox.dm;maps\apollo-1.dmm;maps\apollo-7.dmm;icons\obj\doors\DoorHazard.dmi
+WINDOW: code\game\machinery\phoron_desublimer.dm;code\modules\mob\living\carbon\human\human.dm;code\game\objects\items\weapons\RCD.dm;baystation12.dme;code\game\machinery\jukebox.dm;icons\obj\atmos.dmi
 LAST_COMPILE_VERSION: 506.1249
-DIR: code code\__HELPERS code\ATMOSPHERICS code\ATMOSPHERICS\components code\ATMOSPHERICS\components\unary code\controllers code\datums code\datums\spells code\datums\wires code\defines code\defines\procs code\game code\game\area code\game\gamemodes code\game\machinery code\game\objects code\game\objects\items code\game\objects\items\weapons code\modules code\modules\mob code\modules\mob\living code\modules\mob\living\carbon code\modules\mob\living\carbon\human icons icons\obj icons\obj\doors maps sound sound\effects 
-FILE: icons\obj\doors\DoorHazard.dmi
-LAST_COMPILE_TIME: 1424844151
+DIR: code code\__HELPERS code\ATMOSPHERICS code\ATMOSPHERICS\components code\ATMOSPHERICS\components\unary code\controllers code\datums code\datums\spells code\datums\wires code\defines code\defines\procs code\game code\game\area code\game\gamemodes code\game\machinery code\game\machinery\atmoalter code\game\objects code\game\objects\items code\game\objects\items\weapons code\modules code\modules\mob code\modules\mob\living code\modules\mob\living\carbon code\modules\mob\living\carbon\human icons icons\obj maps 
+FILE: icons\obj\atmos.dmi
+LAST_COMPILE_TIME: 1424845514
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
