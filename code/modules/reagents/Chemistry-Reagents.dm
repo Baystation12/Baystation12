@@ -192,6 +192,13 @@ datum
 					M.resistances += self.data
 				return
 
+		woodpulp
+			name = "Wood Pulp"
+			id = "woodpulp"
+			description = "A mass of wood fibers."
+			reagent_state = LIQUID
+			color = "#B97A57"
+
 		#define WATER_LATENT_HEAT 19000 // How much heat is removed when applied to a hot turf, in J/unit (19000 makes 120 u of water roughly equivalent to 4L)
 		water
 			name = "Water"
@@ -1848,10 +1855,12 @@ datum
 					var/obj/effect/alien/weeds/alien_weeds = O
 					alien_weeds.health -= rand(15,35) // Kills alien weeds pretty fast
 					alien_weeds.healthcheck()
-				else if(istype(O,/obj/effect/glowshroom)) //even a small amount is enough to kill it
+				else if(istype(O,/obj/effect/plant)) //even a small amount is enough to kill it
 					del(O)
-				else if(istype(O,/obj/effect/plantsegment))
-					if(prob(50)) del(O) //Kills kudzu too.
+				else if(istype(O,/obj/effect/plant))
+					if(prob(50))
+						var/obj/effect/plant/plant = O
+						plant.die_off()
 				else if(istype(O,/obj/machinery/portable_atmospherics/hydroponics))
 					var/obj/machinery/portable_atmospherics/hydroponics/tray = O
 
@@ -2080,7 +2089,7 @@ datum
 						M.take_organ_damage(min(6*toxpwr, volume * toxpwr))
 
 			reaction_obj(var/obj/O, var/volume)
-				if((istype(O,/obj/item) || istype(O,/obj/effect/glowshroom)) && prob(meltprob * 3))
+				if((istype(O,/obj/item) || istype(O,/obj/effect/plant)) && prob(meltprob * 3))
 					if(!O.unacidable)
 						var/obj/effect/decal/cleanable/molten_item/I = new/obj/effect/decal/cleanable/molten_item(O.loc)
 						I.desc = "Looks like this was \an [O] some time ago."
@@ -2119,6 +2128,17 @@ datum
 			name = "animal protein"
 			id = "protein"
 			color = "#440000"
+
+			on_mob_life(var/mob/living/M, var/alien)
+				if(alien && alien == IS_SKRELL)
+					M.adjustToxLoss(0.5)
+					M.nutrition -= nutriment_factor
+				..()
+
+		nutriment/egg // Also bad for skrell. Not a child of protein because it might mess up, not sure.
+			name = "egg yolk"
+			id = "egg"
+			color = "#FFFFAA"
 
 			on_mob_life(var/mob/living/M, var/alien)
 				if(alien && alien == IS_SKRELL)
@@ -2511,7 +2531,6 @@ datum
 				..()
 				return
 
-/* We're back to flour bags
 		flour
 			name = "flour"
 			id = "flour"
@@ -2529,7 +2548,6 @@ datum
 				src = null
 				if(!istype(T, /turf/space))
 					new /obj/effect/decal/cleanable/flour(T)
-*/
 
 		rice
 			name = "Rice"

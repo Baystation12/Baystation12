@@ -14,6 +14,15 @@ var/list/accessible_z_levels = list("1" = 5, "3" = 10, "4" = 15, "5" = 10, "6" =
 /turf/space/New()
 	if(!istype(src, /turf/space/transit))
 		icon_state = "[((x + y) ^ ~(x * y) + z) % 25]"
+	update_starlight()
+
+/turf/space/proc/update_starlight()
+	if(!config.starlight)
+		return
+	if(locate(/turf/simulated) in orange(src,1))
+		SetLuminosity(3)
+	else
+		SetLuminosity(0)
 
 /turf/space/attackby(obj/item/C as obj, mob/user as mob)
 

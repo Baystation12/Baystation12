@@ -30,6 +30,7 @@
 				new /obj/item/ammo_magazine/a357(src)
 				new /obj/item/weapon/card/emag(src)
 				new /obj/item/weapon/plastique(src)
+				new /obj/item/weapon/plastique(src)
 				return
 
 			if("murder")
@@ -47,6 +48,7 @@
 				return
 
 			if("hacker")
+				new /obj/item/device/encryptionkey/syndicate(src)
 				new /obj/item/weapon/aiModule/syndicate(src)
 				new /obj/item/weapon/card/emag(src)
 				new /obj/item/device/encryptionkey/binary(src)
@@ -62,10 +64,9 @@
 				return
 
 			if("smoothoperator")
-				new /obj/item/weapon/gun/projectile/pistol(src)
-				new /obj/item/weapon/silencer(src)
-				new /obj/item/weapon/soap/syndie(src)
+				new /obj/item/weapon/storage/box/syndie_kit/g9mm(src)
 				new /obj/item/weapon/storage/bag/trash(src)
+				new /obj/item/weapon/soap/syndie(src)
 				new /obj/item/bodybag(src)
 				new /obj/item/clothing/under/suit_jacket(src)
 				new /obj/item/clothing/shoes/laceup(src)
@@ -176,6 +177,15 @@
 	new /obj/item/weapon/gun/projectile/pistol(src)
 	new /obj/item/weapon/silencer(src)
 
+/obj/item/weapon/storage/box/syndie_kit/toxin
+	name = "toxin kit"
+	desc = "An apple will not be enough to keep the doctor away after this."
+
+/obj/item/weapon/storage/box/syndie_kit/toxin/New()
+	..()
+	new /obj/item/weapon/reagent_containers/glass/beaker/vial/random/toxin(src)
+	new /obj/item/weapon/reagent_containers/syringe(src)
+
 /obj/item/weapon/storage/box/syndie_kit/cigarette
 	name = "\improper Tricky smokes"
 	desc = "Comes with the following brands of cigarettes, in this order: 2xFlash, 2xSmoke, 1xMindBreaker, 1xTricordrazine. Avoid mixing them up."
@@ -217,3 +227,11 @@
 	for(var/reagent in reagents)
 		C.reagents.add_reagent(reagent, reagents[reagent] * C.storage_slots)
 
+/obj/item/weapon/storage/box/syndie_kit/ewar_voice
+	name = "Electrowarfare and Voice Synthesiser kit"
+	desc = "Kit for confounding organic and synthetic entities alike."
+
+/obj/item/weapon/storage/box/syndie_kit/ewar_voice/New()
+	..()
+	new /obj/item/rig_module/electrowarfare_suite(src)
+	new /obj/item/rig_module/voice(src)

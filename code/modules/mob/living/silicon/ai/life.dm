@@ -171,6 +171,7 @@
 							sleep(50)
 							theAPC = null
 
+	process_queued_alarms()
 	regular_hud_updates()
 	switch(src.sensor_mode)
 		if (SEC_HUD)

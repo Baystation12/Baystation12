@@ -1,5 +1,5 @@
 /obj/nano_module/rcon
-	name = "RCON interface"
+	name = "Power RCON"
 
 	var/list/known_SMESs = null
 	var/list/known_breakers = null

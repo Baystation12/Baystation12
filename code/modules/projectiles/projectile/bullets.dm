@@ -43,10 +43,10 @@
 	var/chance = 0
 	if(istype(A, /turf/simulated/wall))
 		var/turf/simulated/wall/W = A
-		chance = round(damage/W.damage_cap*180)
+		chance = round(damage/W.damage_cap*250)
 	else if(istype(A, /obj/machinery/door))
 		var/obj/machinery/door/D = A
-		chance = round(damage/D.maxhealth*100)
+		chance = round(damage/D.maxhealth*150)
 	else if(istype(A, /obj/structure/girder) || istype(A, /obj/structure/cultgirder))
 		chance = 100
 	else if(istype(A, /obj/machinery) || istype(A, /obj/structure))
@@ -141,13 +141,13 @@
 	penetrating = 1
 
 /obj/item/projectile/bullet/rifle/a145
-	damage = 80
+	damage = 60
 	stun = 3
 	weaken = 3
 	penetrating = 5
 
 /obj/item/projectile/bullet/rifle/a556
-	damage = 50
+	damage = 40
 	penetrating = 1
 
 /* Miscellaneous */

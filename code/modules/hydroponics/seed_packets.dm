@@ -1,8 +1,10 @@
+var/global/list/plant_seed_sprites = list()
+
 //Seed packet object/procs.
 /obj/item/seeds
 	name = "packet of seeds"
 	icon = 'icons/obj/seeds.dmi'
-	icon_state = "seed"
+	icon_state = "blank"
 	w_class = 2.0
 
 	var/seed_type
@@ -15,16 +17,45 @@
 
 //Grabs the appropriate seed datum from the global list.
 /obj/item/seeds/proc/update_seed()
-	if(!seed && seed_type && !isnull(seed_types) && seed_types[seed_type])
-		seed = seed_types[seed_type]
+	if(!seed && seed_type && !isnull(plant_controller.seeds) && plant_controller.seeds[seed_type])
+		seed = plant_controller.seeds[seed_type]
 	update_appearance()
 
 //Updates strings and icon appropriately based on seed datum.
 /obj/item/seeds/proc/update_appearance()
 	if(!seed) return
-	icon_state = seed.packet_icon
-	src.name = "packet of [seed.seed_name] [seed.seed_noun]"
-	src.desc = "It has a picture of [seed.display_name] on the front."
+
+	// Update icon.
+	overlays.Cut()
+	var/is_seeds = ((seed.seed_noun in list("seeds","pits","nodes")) ? 1 : 0)
+	var/image/seed_mask
+	var/seed_base_key = "base-[is_seeds ? seed.get_trait(TRAIT_PLANT_COLOUR) : "spores"]"
+	if(plant_seed_sprites[seed_base_key])
+		seed_mask = plant_seed_sprites[seed_base_key]
+	else
+		seed_mask = image('icons/obj/seeds.dmi',"[is_seeds ? "seed" : "spore"]-mask")
+		if(is_seeds) // Spore glass bits aren't coloured.
+			seed_mask.color = seed.get_trait(TRAIT_PLANT_COLOUR)
+		plant_seed_sprites[seed_base_key] = seed_mask
+
+	var/image/seed_overlay
+	var/seed_overlay_key = "[seed.get_trait(TRAIT_PRODUCT_ICON)]-[seed.get_trait(TRAIT_PRODUCT_COLOUR)]"
+	if(plant_seed_sprites[seed_overlay_key])
+		seed_overlay = plant_seed_sprites[seed_overlay_key]
+	else
+		seed_overlay = image('icons/obj/seeds.dmi',"[seed.get_trait(TRAIT_PRODUCT_ICON)]")
+		seed_overlay.color = seed.get_trait(TRAIT_PRODUCT_COLOUR)
+		plant_seed_sprites[seed_overlay_key] = seed_overlay
+
+	overlays |= seed_mask
+	overlays |= seed_overlay
+
+	if(is_seeds)
+		src.name = "packet of [seed.seed_name] [seed.seed_noun]"
+		src.desc = "It has a picture of [seed.display_name] on the front."
+	else
+		src.name = "sample of [seed.seed_name] [seed.seed_noun]"
+		src.desc = "It's labelled as coming from [seed.display_name]."
 
 /obj/item/seeds/examine(mob/user)
 	..(user)
@@ -43,13 +74,8 @@
 	seed_type = null
 
 /obj/item/seeds/random/New()
-	seed = new()
-	seed.randomize()
-
-	seed.uid = seed_types.len + 1
-	seed.name = "[seed.uid]"
-	seed_types[seed.name] = seed
-
+	seed = plant_controller.create_random_seed()
+	seed_type = seed.name
 	update_seed()
 
 /obj/item/seeds/replicapod
@@ -90,9 +116,6 @@
 
 /obj/item/seeds/eggplantseed
 	seed_type = "eggplant"
-
-/obj/item/seeds/eggyseed
-	seed_type = "realeggplant"
 
 /obj/item/seeds/bloodtomatoseed
 	seed_type = "bloodtomato"
@@ -234,3 +257,24 @@
 
 /obj/item/seeds/kudzuseed
 	seed_type = "kudzu"
+
+/obj/item/seeds/jurlmah
+	seed_type = "jurlmah"
+
+/obj/item/seeds/amauri
+	seed_type = "amauri"
+
+/obj/item/seeds/gelthi
+	seed_type = "gelthi"
+
+/obj/item/seeds/vale
+	seed_type = "vale"
+
+/obj/item/seeds/surik
+	seed_type = "surik"
+
+/obj/item/seeds/telriis
+	seed_type = "telriis"
+
+/obj/item/seeds/thaadra
+	seed_type = "thaadra"

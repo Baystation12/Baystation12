@@ -321,3 +321,6 @@ EVENT_CUSTOM_START_MAJOR 80;100
 
 ## Uncomment to disable respawning by default.
 #DISABLE_RESPAWN
+
+## Uncomment to make space turfs have a short-range ambient light.
+# STARLIGHT

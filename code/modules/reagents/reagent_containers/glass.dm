@@ -253,12 +253,6 @@
 		reagents.add_reagent("sacid", 60)
 		update_icon()
 
-/obj/item/weapon/reagent_containers/glass/beaker/slime
-	New()
-		..()
-		reagents.add_reagent("slimejelly", 60)
-		update_icon()
-
 /obj/item/weapon/reagent_containers/glass/bucket
 	desc = "It's a bucket."
 	name = "bucket"
