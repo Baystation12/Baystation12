@@ -1,6 +1,6 @@
 /obj/item/weapon/gun/launcher/grenade
 	name = "grenade launcher"
-	desc = "A bulky pump-action grenade launcher. Holds up to 5 grenades in a revolving magazine."
+	desc = "A bulky pump-action grenade launcher. Holds up to 6 grenades in a revolving magazine."
 	icon_state = "riotgun"
 	item_state = "riotgun"
 	w_class = 4
@@ -14,7 +14,7 @@
 
 	var/obj/item/weapon/grenade/chambered
 	var/list/grenades = new/list()
-	var/max_grenades = 4 //holds this + one in the chamber
+	var/max_grenades = 5 //holds this + one in the chamber
 	matter = list("metal" = 2000)
 
 //revolves the magazine, allowing players to choose between multiple grenade types
@@ -42,30 +42,36 @@
 		if(chambered)
 			user << "\A [chambered] is chambered."
 
+/obj/item/weapon/gun/launcher/grenade/proc/load(obj/item/weapon/grenade/G, mob/user)
+	if(grenades.len >= max_grenades)
+		user << "<span class='warning'>[src] is full.</span>"
+		return
+	user.remove_from_mob(G)
+	G.loc = src
+	grenades.Insert(1, G) //add to the head of the list, so that it is loaded on the next pump
+	user.visible_message("[user] inserts \a [G] into [src].", "<span class='notice'>You insert \a [G] into [src].</span>")
+
+/obj/item/weapon/gun/launcher/grenade/proc/unload(mob/user)
+	if(grenades.len)
+		var/obj/item/weapon/grenade/G = grenades[grenades.len]
+		grenades.len--
+		user.put_in_hands(G)
+		user.visible_message("[user] removes \a [G] from [src].", "<span class='notice'>You remove \a [G] from [src].</span>")
+	else
+		user << "<span class='warning'>[src] is empty.</span>"
+
 /obj/item/weapon/gun/launcher/grenade/attack_self(mob/user)
 	pump(user)
 
 /obj/item/weapon/gun/launcher/grenade/attackby(obj/item/I, mob/user)
 	if((istype(I, /obj/item/weapon/grenade)))
-		if(grenades.len >= max_grenades)
-			user << "<span class='warning'>[src] is full.</span>"
-			return
-		user.remove_from_mob(I)
-		I.loc = src
-		grenades.Insert(1, I) //add to the head of the list, so that it is loaded on the next pump
-		user.visible_message("[user] inserts \a [I] into [src].", "<span class='notice'>You insert \a [I] into [src].</span>")
+		load(I, user)
 	else
 		..()
 
 /obj/item/weapon/gun/launcher/grenade/attack_hand(mob/user)
 	if(user.get_inactive_hand() == src)
-		if(grenades.len)
-			var/obj/item/weapon/grenade/G = grenades[grenades.len]
-			grenades.len--
-			user.put_in_hands(G)
-			user.visible_message("[user] removes \a [G] from [src].", "<span class='notice'>You remove \a [G] from [src].</span>")
-		else
-			user << "<span class='warning'>[src] is empty.</span>"
+		unload(user)
 	else
 		..()
 
@@ -79,3 +85,32 @@
 	message_admins("[key_name_admin(user)] fired a grenade ([chambered.name]) from a grenade launcher ([src.name]).")
 	log_game("[key_name_admin(user)] used a grenade ([chambered.name]).")
 	chambered = null
+
+//Underslung grenade launcher to be used with the Z8
+/obj/item/weapon/gun/launcher/grenade/underslung
+	name = "underslung grenade launcher"
+	desc = "Not much more than a tube and a firing mechanism, this grenade launcher is designed to be fitted to a rifle."
+	w_class = 3
+	force = 5
+	max_grenades = 0
+
+/obj/item/weapon/gun/launcher/grenade/underslung/attack_self()
+	return
+
+//load and unload directly into chambered
+/obj/item/weapon/gun/launcher/grenade/underslung/load(obj/item/weapon/grenade/G, mob/user)
+	if(chambered)
+		user << "<span class='warning'>[src] is already loaded.</span>"
+		return
+	user.remove_from_mob(G)
+	G.loc = src
+	chambered = G
+	user.visible_message("[user] load \a [G] into [src].", "<span class='notice'>You load \a [G] into [src].</span>")
+
+/obj/item/weapon/gun/launcher/grenade/underslung/unload(mob/user)
+	if(chambered)
+		user.put_in_hands(chambered)
+		user.visible_message("[user] removes \a [chambered] from [src].", "<span class='notice'>You remove \a [chambered] from [src].</span>")
+		chambered = null
+	else
+		user << "<span class='warning'>[src] is empty.</span>"

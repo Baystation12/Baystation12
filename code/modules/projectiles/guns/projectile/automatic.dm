@@ -47,6 +47,23 @@
 		icon_state = "c20r"
 	return
 
+/obj/item/weapon/gun/projectile/automatic/sts35
+	name = "\improper STS-35 automatic rifle"
+	desc = "A durable, rugged looking automatic weapon of a make popular on the frontier worlds. Uses 7.62mm rounds. It is unmarked."
+	icon_state = "arifle"
+	item_state = "shotgun"
+	w_class = 4
+	force = 10
+	caliber = "a762"
+	origin_tech = "combat=6;materials=1;syndicate=4"
+	slot_flags = SLOT_BACK
+	load_method = MAGAZINE
+	magazine_type = /obj/item/ammo_magazine/c762
+
+/obj/item/weapon/gun/projectile/automatic/sts35/update_icon()
+	..()
+	icon_state = (ammo_magazine)? "arifle-0" : "arifle"
+
 /obj/item/weapon/gun/projectile/automatic/wt550
 	name = "\improper W-T 550 Saber"
 	desc = "A cheap, mass produced Ward-Takahashi PDW. Uses 9mm rounds."
@@ -70,7 +87,7 @@
 
 /obj/item/weapon/gun/projectile/automatic/z8
 	name = "\improper Z8 Bulldog"
-	desc = "An older model bullpup carbine, made by the now defunct Zendai Foundries. Uses armor piercing 5.56mm rounds. Makes you feel like a space marine when you hold it."
+	desc = "An older model bullpup carbine, made by the now defunct Zendai Foundries. Uses armor piercing 5.56mm rounds and has an underslung grenade launcher. Makes you feel like a space marine when you hold it."
 	icon_state = "carbine"
 	item_state = "shotgun"
 	w_class = 4
@@ -82,6 +99,37 @@
 	slot_flags = SLOT_BACK
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/a556
+	auto_eject = 1
+	auto_eject_sound = 'sound/weapons/smg_empty_alarm.ogg'
+	
+	var/use_launcher = 0
+	var/obj/item/weapon/gun/launcher/grenade/underslung/launcher
+
+/obj/item/weapon/gun/projectile/automatic/z8/New()
+	..()
+	launcher = new(src)
+
+/obj/item/weapon/gun/projectile/automatic/z8/attack_self(mob/user)
+	use_launcher = !use_launcher
+	user << "<span class='notice'>You switch to [use_launcher? "\the [launcher]" : "firing normally"].</span>"
+
+/obj/item/weapon/gun/projectile/automatic/z8/attackby(obj/item/I, mob/user)
+	if((istype(I, /obj/item/weapon/grenade)))
+		launcher.load(I, user)
+	else
+		..()
+
+/obj/item/weapon/gun/projectile/automatic/z8/attack_hand(mob/user)
+	if(user.get_inactive_hand() == src && use_launcher)
+		launcher.unload(user)
+	else
+		..()
+
+/obj/item/weapon/gun/projectile/automatic/z8/Fire(atom/target, mob/living/user, params, pointblank=0, reflex=0)
+	if(use_launcher)
+		launcher.Fire(target, user, params, pointblank, reflex)
+	else
+		..()
 
 /obj/item/weapon/gun/projectile/automatic/z8/update_icon()
 	..()
@@ -91,22 +139,12 @@
 		icon_state = "carbine"
 	return
 
-/obj/item/weapon/gun/projectile/automatic/sts35
-	name = "\improper STS-35 automatic rifle"
-	desc = "A durable, rugged looking automatic weapon of a make popular on the frontier. Uses 7.62mm rounds. It is unmarked."
-	icon_state = "assltrifle"
-	item_state = "shotgun"
-	w_class = 4
-	force = 10
-	caliber = "a762"
-	origin_tech = "combat=6;materials=1;syndicate=4"
-	slot_flags = SLOT_BACK
-	load_method = MAGAZINE
-	magazine_type = /obj/item/ammo_magazine/c762
-
-/obj/item/weapon/gun/projectile/automatic/sts35/update_icon()
+/obj/item/weapon/gun/projectile/automatic/z8/examine(mob/user)
 	..()
-	icon_state = (ammo_magazine)? "assltrifle" : "assltrifle-noclip"
+	if(launcher.chambered)
+		user << "\The [launcher] has \a [launcher.chambered] loaded."
+	else
+		user << "\The [launcher] is empty."
 
 /obj/item/weapon/gun/projectile/automatic/l6_saw
 	name = "\improper L6 SAW"
