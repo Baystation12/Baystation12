@@ -161,9 +161,9 @@
 	explode()
 
 /obj/structure/reagent_dispensers/fueltank/proc/explode()
-	if (reagents.total_volume > 500)
+	if (reagents.volume > 500)
 		explosion(src.loc,1,2,4)
-	else if (reagents.total_volume > 100)
+	else if (reagents.volume > 100)
 		explosion(src.loc,0,1,3)
 	else
 		explosion(src.loc,-1,1,2)
@@ -180,10 +180,10 @@
 		leak_fuel(amount_per_transfer_from_this/10.0)
 
 /obj/structure/reagent_dispensers/fueltank/proc/leak_fuel(amount)
-	if (reagents.total_volume == 0)
+	if (reagents.volume == 0)
 		return
 
-	amount = min(amount, reagents.total_volume)
+	amount = min(amount, reagents.volume)
 	reagents.remove_reagent("fuel",amount)
 	new /obj/effect/decal/cleanable/liquid_fuel(src.loc, amount,1)
 

@@ -43,7 +43,7 @@
 
 /obj/item/weapon/extinguisher/examine(mob/user)
 	if(..(user, 0))
-		user << text("\icon[] [] contains [] units of water left!", src, src.name, src.reagents.total_volume)
+		user << text("\icon[] [] contains [] units of water left!", src, src.name, src.reagents.volume)
 	return
 
 /obj/item/weapon/extinguisher/attack_self(mob/user as mob)
@@ -64,7 +64,7 @@
 		return
 
 	if (!safety)
-		if (src.reagents.total_volume < 1)
+		if (src.reagents.volume < 1)
 			usr << "\red \The [src] is empty."
 			return
 
@@ -127,13 +127,13 @@
 				for(var/b=0, b<5, b++)
 					step_towards(W,my_target)
 					if(!W || !W.reagents) return
-					W.reagents.reaction(get_turf(W))
+					W.reagents.touch_turf(get_turf(W))
 					for(var/atom/atm in get_turf(W))
 						if(!W)
 							return
 						if(!W.reagents)
 							break
-						W.reagents.reaction(atm)
+						W.reagents.touch(atm)
 						if(isliving(atm)) //For extinguishing mobs on fire
 							var/mob/living/M = atm
 							M.ExtinguishMob()

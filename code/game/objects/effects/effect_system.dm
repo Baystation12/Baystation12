@@ -39,7 +39,7 @@ would spawn and follow the beaker, even if it is carried or thrown.
 
 /obj/effect/effect/water/Bump(atom/A)
 	if(reagents)
-		reagents.reaction(A)
+		reagents.touch(A)
 	return ..()
 
 
@@ -530,7 +530,7 @@ steam.start() -- spawns the effect
 		for(var/atom/A in src.loc.contents)
 			if(A == src)
 				continue
-			reagents.reaction(A, 1, 1)
+			reagents.touch(A)
 
 /obj/effect/effect/foam/process()
 	if(--amount < 0)

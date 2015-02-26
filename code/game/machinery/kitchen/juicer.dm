@@ -77,10 +77,10 @@
 		processing_chamber = "Nothing."
 	if (!beaker)
 		beaker_contents = "\The [src] has no beaker attached."
-	else if (!beaker.reagents.total_volume)
+	else if (!beaker.reagents.volume)
 		beaker_contents = "\The [src]  has attached an empty beaker."
 		is_beaker_ready = 1
-	else if (beaker.reagents.total_volume < beaker.reagents.maximum_volume)
+	else if (beaker.reagents.volume < beaker.reagents.max_volume)
 		beaker_contents = "\The [src]  has attached a beaker with something."
 		is_beaker_ready = 1
 	else
@@ -143,14 +143,14 @@
 	power_change() //it is a portable machine
 	if(stat & (NOPOWER|BROKEN))
 		return
-	if (!beaker || beaker.reagents.total_volume >= beaker.reagents.maximum_volume)
+	if (!beaker || beaker.reagents.volume >= beaker.reagents.max_volume)
 		return
 	playsound(src.loc, 'sound/machines/juicer.ogg', 50, 1)
 	for (var/obj/item/weapon/reagent_containers/food/snacks/O in src.contents)
 		var/r_id = get_juice_id(O)
 		beaker.reagents.add_reagent(r_id,get_juice_amount(O))
 		del(O)
-		if (beaker.reagents.total_volume >= beaker.reagents.maximum_volume)
+		if (beaker.reagents.volume >= beaker.reagents.max_volume)
 			break
 
 /obj/structure/closet/crate/juice

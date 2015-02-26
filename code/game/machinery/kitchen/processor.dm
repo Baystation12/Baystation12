@@ -82,7 +82,7 @@
 				if(O.resistances&&O.resistances.len)
 					B.data["resistances"] = O.resistances.Copy()
 				bucket_of_blood.reagents.reagent_list += B
-				bucket_of_blood.reagents.update_total()
+				bucket_of_blood.reagents.update_volume()
 				bucket_of_blood.on_reagent_change()
 				//bucket_of_blood.reagents.handle_reactions() //blood doesn't react
 				..()

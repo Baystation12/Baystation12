@@ -352,6 +352,6 @@
 	visible_message("<span class='warning'>With a hideous, rattling moan, [src] shudders back to life!</span>")
 
 	rejuvenate()
-	vessel.add_reagent("blood",560-vessel.total_volume)
+	vessel.add_reagent("blood",560-vessel.volume)
 	fixblood()
 	update_canmove()

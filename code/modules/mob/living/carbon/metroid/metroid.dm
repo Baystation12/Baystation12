@@ -412,14 +412,6 @@
 			adjustToxLoss(-10)
 	nutrition = max(nutrition, get_max_nutrition())
 
-/mob/living/carbon/slime/proc/apply_water(var/amount)
-	adjustToxLoss(15 + amount)
-	if (!client)
-		if (Target) // Like cats
-			Target = null
-			++Discipline
-	return
-
 /mob/living/carbon/slime/can_use_vents()
 	if(Victim)
 		return "You cannot ventcrawl while feeding."

@@ -79,14 +79,14 @@
 			var/choice = alert("What do you want to do with the container?","Radiometric Scanner","Add coolant","Empty coolant","Scan container")
 			if(choice == "Add coolant")
 				var/obj/item/weapon/reagent_containers/glass/G = I
-				var/amount_transferred = min(src.reagents.maximum_volume - src.reagents.total_volume, G.reagents.total_volume)
+				var/amount_transferred = min(src.reagents.max_volume - src.reagents.volume, G.reagents.volume)
 				G.reagents.trans_to(src, amount_transferred)
 				user << "<span class='info'>You empty [amount_transferred]u of coolant into [src].</span>"
 				update_coolant()
 				return
 			else if(choice == "Empty coolant")
 				var/obj/item/weapon/reagent_containers/glass/G = I
-				var/amount_transferred = min(G.reagents.maximum_volume - G.reagents.total_volume, src.reagents.total_volume)
+				var/amount_transferred = min(G.reagents.max_volume - G.reagents.volume, src.reagents.volume)
 				src.reagents.trans_to(G, amount_transferred)
 				user << "<span class='info'>You remove [amount_transferred]u of coolant from [src].</span>"
 				update_coolant()
@@ -134,7 +134,7 @@
 	//
 	data["coolant_usage_rate"] = "[coolant_usage_rate]"
 	data["unused_coolant_abs"] = round(fresh_coolant)
-	data["unused_coolant_per"] = round(fresh_coolant / reagents.maximum_volume * 100)
+	data["unused_coolant_per"] = round(fresh_coolant / reagents.max_volume * 100)
 	data["coolant_purity"] = "[coolant_purity * 100]"
 	//
 	data["optimal_wavelength"] = round(optimal_wavelength)

@@ -105,7 +105,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		return
 	if(location)
 		location.hotspot_expose(700, 5)
-	if(reagents && reagents.total_volume) // check if it has any reagents at all
+	if(reagents && reagents.volume) // check if it has any reagents at all
 		if(iscarbon(loc))
 			var/mob/living/carbon/C = loc
 			if (src == C.wear_mask) // if it's in the human/monkey mouth, transfer reagents to the mob
@@ -114,10 +114,9 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 					if(H.species.flags & IS_SYNTHETIC)
 						return
 
-				reagents.trans_to(C, REAGENTS_METABOLISM, 0.2) // Most of it is not inhaled... balance reasons.
-				reagents.reaction(C)
+				reagents.trans_to_mob(C, REM, 0.2, CHEM_INGEST) // Most of it is not inhaled... balance reasons.
 		else // else just remove some of the reagents
-			reagents.remove_any(REAGENTS_METABOLISM)
+			reagents.remove_any(REM)
 
 /obj/item/clothing/mask/smokable/proc/light(var/flavor_text = "[usr] lights the [name].")
 	if(!src.lit)
@@ -234,7 +233,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		if(transfered)	//if reagents were transfered, show the message
 			user << "<span class='notice'>You dip \the [src] into \the [glass].</span>"
 		else			//if not, either the beaker was empty, or the cigarette was full
-			if(!glass.reagents.total_volume)
+			if(!glass.reagents.volume)
 				user << "<span class='notice'>[glass] is empty.</span>"
 			else
 				user << "<span class='notice'>[src] is full.</span>"
@@ -375,7 +374,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 			return
 		smoketime = 1000
 		if(G.reagents)
-			G.reagents.trans_to(src, G.reagents.total_volume)
+			G.reagents.trans_to(src, G.reagents.volume)
 		name = "[G.name]-packed [initial(name)]"
 		del(G)
 

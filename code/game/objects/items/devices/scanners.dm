@@ -141,7 +141,7 @@ REAGENT SCANNER
 		OX = fake_oxy > 50 ? 		"\red Severe oxygen deprivation detected\blue" 	: 	"Subject bloodstream oxygen level normal"
 	user.show_message("[OX] | [TX] | [BU] | [BR]")
 	if (istype(M, /mob/living/carbon))
-		if(M:reagents.total_volume > 0)
+		if(M:reagents.volume > 0)
 			var/unknown = 0
 			var/reagentdata[0]
 			for(var/A in M.reagents.reagent_list)
@@ -297,7 +297,7 @@ REAGENT SCANNER
 	R.my_atom = src
 
 /obj/item/device/mass_spectrometer/on_reagent_change()
-	if(reagents.total_volume)
+	if(reagents.volume)
 		icon_state = initial(icon_state) + "_s"
 	else
 		icon_state = initial(icon_state)
@@ -311,7 +311,7 @@ REAGENT SCANNER
 	if (!(istype(user, /mob/living/carbon/human) || ticker) && ticker.mode.name != "monkey")
 		user << "\red You don't have the dexterity to do this!"
 		return
-	if(reagents.total_volume)
+	if(reagents.volume)
 		var/list/blood_traces = list()
 		for(var/datum/reagent/R in reagents.reagent_list)
 			if(R.id != "blood")
@@ -380,7 +380,7 @@ REAGENT SCANNER
 	if(!isnull(O.reagents))
 		var/dat = ""
 		if(O.reagents.reagent_list.len > 0)
-			var/one_percent = O.reagents.total_volume / 100
+			var/one_percent = O.reagents.volume / 100
 			for (var/datum/reagent/R in O.reagents.reagent_list)
 				if(prob(reliability))
 					dat += "\n \t \blue [R][details ? ": [R.volume / one_percent]%" : ""]"

@@ -45,7 +45,7 @@ Note: Must be placed west/left of and R&D console to function.
 /obj/machinery/r_n_d/protolathe/RefreshParts()
 	var/T = 0
 	for(var/obj/item/weapon/reagent_containers/glass/G in component_parts)
-		T += G.reagents.maximum_volume
+		T += G.reagents.max_volume
 	var/datum/reagents/R = new/datum/reagents(T)		//Holder for the reagents used as materials.
 	reagents = R
 	R.my_atom = src
@@ -61,7 +61,7 @@ Note: Must be placed west/left of and R&D console to function.
 /obj/machinery/r_n_d/protolathe/dismantle()
 	for(var/obj/I in component_parts)
 		if(istype(I, /obj/item/weapon/reagent_containers/glass/beaker))
-			reagents.trans_to(I, reagents.total_volume)
+			reagents.trans_to(I, reagents.volume)
 	if(m_amount >= 3750)
 		var/obj/item/stack/sheet/metal/G = new /obj/item/stack/sheet/metal(loc)
 		G.amount = round(m_amount / G.perunit)

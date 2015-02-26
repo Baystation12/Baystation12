@@ -19,12 +19,11 @@ var/global/list/cached_icons = list()
 
 	afterattack(turf/simulated/target, mob/user, proximity)
 		if(!proximity) return
-		if(istype(target) && reagents.total_volume > 5)
+		if(istype(target) && reagents.volume > 5)
 			for(var/mob/O in viewers(user))
 				O.show_message("\red \The [target] has been splashed with something by [user]!", 1)
 			spawn(5)
-				reagents.reaction(target, TOUCH)
-				reagents.remove_any(5)
+				reagents.trans_to(target, 5)
 		else
 			return ..()
 

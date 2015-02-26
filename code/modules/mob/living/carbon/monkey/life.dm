@@ -196,11 +196,8 @@
 
 					if(!block)
 						for(var/obj/effect/effect/smoke/chem/smoke in view(1, src))
-							if(smoke.reagents.total_volume)
-								smoke.reagents.reaction(src, INGEST)
-								spawn(5)
-									if(smoke)
-										smoke.reagents.copy_to(src, 10) // I dunno, maybe the reagents enter the blood stream through the lungs?
+							if(smoke.reagents.volume)
+								smoke.reagents.trans_to(src, 10, 1, CHEM_INGEST, 1)// I dunno, maybe the reagents enter the blood stream through the lungs?
 								break // If they breathe in the nasty stuff once, no need to continue checking
 
 
@@ -386,9 +383,11 @@
 			adjustFireLoss(5.0*discomfort)
 
 	proc/handle_chemicals_in_body()
+		chem_effects.Cut()
+		analgesic = 0
 
 		if(reagents && reagents.reagent_list.len)
-			reagents.metabolize(src)
+			reagents.metabolize()
 
 		if (drowsyness)
 			drowsyness--

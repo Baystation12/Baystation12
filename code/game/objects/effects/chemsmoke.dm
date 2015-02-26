@@ -40,7 +40,7 @@
 /datum/effect/effect/system/smoke_spread/chem/set_up(var/datum/reagents/carry = null, n = 10, c = 0, loca, direct)
 	range = n * 0.3
 	cardinals = c
-	carry.copy_to(chemholder, carry.total_volume)
+	carry.trans_to(chemholder, carry.volume, copy = 1)
 
 	if(istype(loca, /turf/))
 		location = loca
@@ -111,7 +111,7 @@
 
 			//dilute the reagents according to cloud density
 			R.volume /= density
-			chemholder.reagents.update_total()
+			chemholder.reagents.update_volume()
 
 			//apply wall affecting reagents to walls
 			if(R.id in list("thermite", "plantbgone"))
@@ -189,7 +189,7 @@
 /datum/effect/effect/system/smoke_spread/chem/proc/spawnSmoke(var/turf/T, var/icon/I, var/dist = 1)
 	var/obj/effect/effect/smoke/chem/smoke = new(location)
 	if(chemholder.reagents.reagent_list.len)
-		chemholder.reagents.copy_to(smoke, chemholder.reagents.total_volume / dist, safety = 1)	//copy reagents to the smoke so mob/breathe() can handle inhaling the reagents
+		chemholder.reagents.trans_to(smoke, chemholder.reagents.volume / dist, copy = 1)	//copy reagents to the smoke so mob/breathe() can handle inhaling the reagents
 	smoke.icon = I
 	smoke.layer = 6
 	smoke.set_dir(pick(cardinal))
@@ -232,7 +232,7 @@
 						if(!(target in wallList))
 							wallList += target
 						continue
-				
+
 				if(target in pending)
 					continue
 				if(target in complete)
@@ -241,7 +241,7 @@
 					continue
 				if(current.c_airblock(target)) //this is needed to stop chemsmoke from passing through thin window walls
 					continue
-				if(target.c_airblock(current)) 
+				if(target.c_airblock(current))
 					continue
 				pending += target
 

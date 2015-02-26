@@ -57,12 +57,12 @@
 /obj/item/toy/balloon/attackby(obj/O as obj, mob/user as mob)
 	if(istype(O, /obj/item/weapon/reagent_containers/glass))
 		if(O.reagents)
-			if(O.reagents.total_volume < 1)
+			if(O.reagents.volume < 1)
 				user << "The [O] is empty."
-			else if(O.reagents.total_volume >= 1)
+			else if(O.reagents.volume >= 1)
 				if(O.reagents.has_reagent("pacid", 1))
 					user << "The acid chews through the balloon!"
-					O.reagents.reaction(user)
+					O.reagents.trans_to(user, reagents.volume)
 					del(src)
 				else
 					src.desc = "A translucent balloon with some form of liquid sloshing around in it."
@@ -72,11 +72,11 @@
 	return
 
 /obj/item/toy/balloon/throw_impact(atom/hit_atom)
-	if(src.reagents.total_volume >= 1)
+	if(src.reagents.volume >= 1)
 		src.visible_message("\red The [src] bursts!","You hear a pop and a splash.")
-		src.reagents.reaction(get_turf(hit_atom))
+		src.reagents.touch_turf(get_turf(hit_atom))
 		for(var/atom/A in get_turf(hit_atom))
-			src.reagents.reaction(A)
+			src.reagents.touch(A)
 		src.icon_state = "burst"
 		spawn(5)
 			if(src)
@@ -84,7 +84,7 @@
 	return
 
 /obj/item/toy/balloon/update_icon()
-	if(src.reagents.total_volume >= 1)
+	if(src.reagents.volume >= 1)
 		icon_state = "waterballoon"
 		item_state = "balloon"
 	else
@@ -468,7 +468,7 @@
 		user << "\blue You refill your flower!"
 		return
 
-	else if (src.reagents.total_volume < 1)
+	else if (src.reagents.volume < 1)
 		src.empty = 1
 		user << "\blue Your flower has run dry!"
 		return
@@ -488,9 +488,9 @@
 		spawn(0)
 			for(var/i=0, i<1, i++)
 				step_towards(D,A)
-				D.reagents.reaction(get_turf(D))
+				D.reagents.touch_turf(get_turf(D))
 				for(var/atom/T in get_turf(D))
-					D.reagents.reaction(T)
+					D.reagents.touch(T)
 					if(ismob(T) && T:client)
 						T:client << "\red [user] has sprayed you with water!"
 				sleep(4)
@@ -500,7 +500,7 @@
 
 /obj/item/toy/waterflower/examine(mob/user)
 	if(..(user, 0))
-		user << text("\icon[] [] units of water left!", src, src.reagents.total_volume)
+		user << text("\icon[] [] units of water left!", src, src.reagents.volume)
 
 /*
  * Bosun's whistle

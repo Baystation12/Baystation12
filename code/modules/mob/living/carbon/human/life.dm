@@ -333,7 +333,7 @@
 		var/datum/gas_mixture/breath
 
 		// HACK NEED CHANGING LATER
-		if(health < config.health_threshold_crit && !reagents.has_reagent("inaprovaline"))
+		if(health < config.health_threshold_crit && !("Nocrit" in chem_effects))
 			losebreath++
 
 		if(losebreath>0) //Suffocating so do not take a breath
@@ -389,11 +389,8 @@
 					if(!block)
 
 						for(var/obj/effect/effect/smoke/chem/smoke in view(1, src))
-							if(smoke.reagents.total_volume)
-								smoke.reagents.reaction(src, INGEST)
-								spawn(5)
-									if(smoke)
-										smoke.reagents.copy_to(src, 10) // I dunno, maybe the reagents enter the blood stream through the lungs?
+							if(smoke.reagents.volume)
+								smoke.reagents.trans_to_mob(src, 10, state = CHEM_INGEST, copy = 1)
 								break // If they breathe in the nasty stuff once, no need to continue checking
 
 			else //Still give containing object the chance to interact
@@ -928,10 +925,12 @@
 	proc/handle_chemicals_in_body()
 
 		if(reagents && !(species.flags & IS_SYNTHETIC)) //Synths don't process reagents.
+			chem_effects.Cut()
+			analgesic = 0
 			var/alien = 0
 			if(species && species.reagent_tag)
 				alien = species.reagent_tag
-			reagents.metabolize(src,alien)
+			reagents.metabolize(alien)
 
 			var/total_phoronloss = 0
 			for(var/obj/item/I in src)
@@ -1018,9 +1017,6 @@
 				silent = 0
 				return 1
 
-			// the analgesic effect wears off slowly
-			analgesic = max(0, analgesic - 1)
-
 			//UNCONSCIOUS. NO-ONE IS HOME
 			if( (getOxyLoss() > 50) || (config.health_threshold_crit > health) )
 				Paralyse(3)
@@ -1059,7 +1055,7 @@
 				handle_dreams()
 				adjustHalLoss(-3)
 				if (mind)
-					//Are they SSD? If so we'll keep them asleep but work off some of that sleep var in case of stoxin or similar.
+					//Are they SSD? If so we'll keep them asleep but work off some of that sleep var in case of soporific or similar.
 					if(player_logged)
 						sleeping = max(sleeping-1, 2)
 					else
@@ -1291,7 +1287,7 @@
 				see_invisible = SEE_INVISIBLE_LIVING
 
 			if(healths)
-				if (analgesic)
+				if (analgesic > 100)
 					healths.icon_state = "health_health_numb"
 				else
 					switch(hal_screwyhud)
@@ -1479,7 +1475,7 @@
 	handle_shock()
 		..()
 		if(status_flags & GODMODE)	return 0	//godmode
-		if(analgesic || (species && species.flags & NO_PAIN)) return // analgesic avoids all traumatic shock temporarily
+		if(species && species.flags & NO_PAIN) return
 
 		if(health < config.health_threshold_softcrit)// health 0 makes you immediately collapse
 			shock_stage = max(shock_stage, 61)
@@ -1576,7 +1572,7 @@
 			var/percentage_health = RoundHealth((health-config.health_threshold_crit)/(maxHealth-config.health_threshold_crit)*100)
 			holder.icon_state = "hud[percentage_health]"
 		hud_list[HEALTH_HUD] = holder
-	
+
 	if (BITTEST(hud_updateflag, STATUS_HUD))
 		var/foundVirus = 0
 		for(var/datum/disease/D in viruses)
@@ -1613,7 +1609,7 @@
 
 		hud_list[STATUS_HUD] = holder
 		hud_list[STATUS_HUD_OOC] = holder2
-	
+
 	if (BITTEST(hud_updateflag, ID_HUD))
 		var/image/holder = hud_list[ID_HUD]
 		if(wear_id)
@@ -1627,7 +1623,7 @@
 
 
 		hud_list[ID_HUD] = holder
-	
+
 	if (BITTEST(hud_updateflag, WANTED_HUD))
 		var/image/holder = hud_list[WANTED_HUD]
 		holder.icon_state = "hudblank"
@@ -1653,11 +1649,11 @@
 						holder.icon_state = "hudreleased"
 						break
 		hud_list[WANTED_HUD] = holder
-	
+
 	if (  BITTEST(hud_updateflag, IMPLOYAL_HUD) \
 	   || BITTEST(hud_updateflag,  IMPCHEM_HUD) \
 	   || BITTEST(hud_updateflag, IMPTRACK_HUD))
-		
+
 		var/image/holder1 = hud_list[IMPTRACK_HUD]
 		var/image/holder2 = hud_list[IMPLOYAL_HUD]
 		var/image/holder3 = hud_list[IMPCHEM_HUD]
@@ -1678,7 +1674,7 @@
 		hud_list[IMPTRACK_HUD] = holder1
 		hud_list[IMPLOYAL_HUD] = holder2
 		hud_list[IMPCHEM_HUD]  = holder3
-	
+
 	if (BITTEST(hud_updateflag, SPECIALROLE_HUD))
 		var/image/holder = hud_list[SPECIALROLE_HUD]
 		holder.icon_state = "hudblank"
@@ -1739,10 +1735,10 @@
 /mob/living/carbon/human/handle_fire()
 	if(..())
 		return
-	
+
 	var/burn_temperature = fire_burn_temperature()
 	var/thermal_protection = get_heat_protection(burn_temperature)
-	
+
 	if (thermal_protection < 1 && bodytemperature < burn_temperature)
 		bodytemperature += round(BODYTEMP_HEATING_MAX*(1-thermal_protection), 1)
 

@@ -221,7 +221,7 @@
 	if(stat & (NOPOWER|BROKEN))
 		return
 	start()
-	if (reagents.total_volume==0 && !(locate(/obj) in contents)) //dry run
+	if (reagents.volume==0 && !(locate(/obj) in contents)) //dry run
 		if (!wzhzhzh(10))
 			abort()
 			return
@@ -311,7 +311,7 @@
 /obj/machinery/microwave/proc/dispose()
 	for (var/obj/O in contents)
 		O.loc = src.loc
-	if (src.reagents.total_volume)
+	if (src.reagents.volume)
 		src.dirty++
 	src.reagents.clear_reagents()
 	usr << "\blue You dispose of the microwave contents."

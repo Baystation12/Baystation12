@@ -599,7 +599,6 @@
 		if (inject_amount > 50)
 			inject_amount = 50
 		connected.beaker.reagents.trans_to(connected.occupant, inject_amount)
-		connected.beaker.reagents.reaction(connected.occupant)
 		return 1 // return 1 forces an update to all Nano uis attached to src
 
 	////////////////////////////////////////////////////////

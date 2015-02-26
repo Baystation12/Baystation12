@@ -64,10 +64,10 @@ datum
 			required_reagents = list("aluminum" = 1, "silicon" = 1, "oxygen" = 1)
 			result_amount = 3
 
-		stoxin
+		soporific
 			name = "Soporific"
-			id = "stoxin"
-			result = "stoxin"
+			id = "soporific"
+			result = "soporific"
 			required_reagents = list("chloralhydrate" = 1, "sugar" = 4)
 			result_amount = 5
 
@@ -75,7 +75,7 @@ datum
 			name = "Sterilizine"
 			id = "sterilizine"
 			result = "sterilizine"
-			required_reagents = list("ethanol" = 1, "anti_toxin" = 1, "chlorine" = 1)
+			required_reagents = list("ethanol" = 1, "dylovene" = 1, "chlorine" = 1)
 			result_amount = 3
 
 		inaprovaline
@@ -85,10 +85,10 @@ datum
 			required_reagents = list("oxygen" = 1, "carbon" = 1, "sugar" = 1)
 			result_amount = 3
 
-		anti_toxin
+		dylovene
 			name = "Dylovene"
-			id = "anti_toxin"
-			result = "anti_toxin"
+			id = "dylovene"
+			result = "dylovene"
 			required_reagents = list("silicon" = 1, "potassium" = 1, "nitrogen" = 1)
 			result_amount = 3
 
@@ -181,7 +181,7 @@ datum
 			name = "Hyronalin"
 			id = "hyronalin"
 			result = "hyronalin"
-			required_reagents = list("radium" = 1, "anti_toxin" = 1)
+			required_reagents = list("radium" = 1, "dylovene" = 1)
 			result_amount = 2
 
 		arithrazine
@@ -239,14 +239,14 @@ datum
 			name = "Tricordrazine"
 			id = "tricordrazine"
 			result = "tricordrazine"
-			required_reagents = list("inaprovaline" = 1, "anti_toxin" = 1)
+			required_reagents = list("inaprovaline" = 1, "dylovene" = 1)
 			result_amount = 2
 
 		alkysine
 			name = "Alkysine"
 			id = "alkysine"
 			result = "alkysine"
-			required_reagents = list("chlorine" = 1, "nitrogen" = 1, "anti_toxin" = 1)
+			required_reagents = list("chlorine" = 1, "nitrogen" = 1, "dylovene" = 1)
 			result_amount = 2
 
 		dexalin
@@ -277,6 +277,13 @@ datum
 			result = "bicaridine"
 			required_reagents = list("inaprovaline" = 1, "carbon" = 1)
 			result_amount = 2
+
+		metorapan
+			name = "Metorapan"
+			id = "metorapan"
+			result = "metorapan"
+			required_reagents = list("bicaridine" = 1, "iron" = 1, "nitrogen" = 1)
+			result_amount = 3
 
 		hyperzine
 			name = "Hyperzine"
@@ -318,14 +325,14 @@ datum
 			name = "imidazoline"
 			id = "imidazoline"
 			result = "imidazoline"
-			required_reagents = list("carbon" = 1, "hydrogen" = 1, "anti_toxin" = 1)
+			required_reagents = list("carbon" = 1, "hydrogen" = 1, "dylovene" = 1)
 			result_amount = 2
 
 		ethylredoxrazine
 			name = "Ethylredoxrazine"
 			id = "ethylredoxrazine"
 			result = "ethylredoxrazine"
-			required_reagents = list("oxygen" = 1, "anti_toxin" = 1, "carbon" = 1)
+			required_reagents = list("oxygen" = 1, "dylovene" = 1, "carbon" = 1)
 			result_amount = 3
 
 		ethanoloxidation
@@ -478,18 +485,11 @@ datum
 			required_reagents = list("potassium_chloride" = 1, "phoron" = 1, "chloralhydrate" = 1)
 			result_amount = 4
 
-		stoxin
-			name = "Soporific"
-			id = "stoxin"
-			result = "stoxin"
-			required_reagents = list("chloralhydrate" = 1, "sugar" = 4)
-			result_amount = 5
-
 		zombiepowder
 			name = "Zombie Powder"
 			id = "zombiepowder"
 			result = "zombiepowder"
-			required_reagents = list("carpotoxin" = 5, "stoxin" = 5, "copper" = 5)
+			required_reagents = list("carpotoxin" = 5, "soporific" = 5, "copper" = 5)
 			result_amount = 2
 
 		rezadone
@@ -503,7 +503,7 @@ datum
 			name = "Mindbreaker Toxin"
 			id = "mindbreaker"
 			result = "mindbreaker"
-			required_reagents = list("silicon" = 1, "hydrogen" = 1, "anti_toxin" = 1)
+			required_reagents = list("silicon" = 1, "hydrogen" = 1, "dylovene" = 1)
 			result_amount = 3
 
 		lipozine
@@ -2120,7 +2120,7 @@ datum
 			name = "Neurotoxin"
 			id = "neurotoxin"
 			result = "neurotoxin"
-			required_reagents = list("gargleblaster" = 1, "stoxin" = 1)
+			required_reagents = list("gargleblaster" = 1, "soporific" = 1)
 			result_amount = 2
 
 		snowwhite

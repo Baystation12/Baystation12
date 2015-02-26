@@ -104,8 +104,10 @@
 
 
 	proc/handle_chemicals_in_body()
+		chem_effects.Cut()
+		analgesic = 0
 
-		if(reagents) reagents.metabolize(src)
+		if(reagents) reagents.metabolize()
 
 		confused = max(0, confused - 1)
 		// decrement dizziness counter, clamped to 0

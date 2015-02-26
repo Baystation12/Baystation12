@@ -13,12 +13,11 @@
 	1.5	* src.getFireLoss() + 		\
 	1.2	* src.getBruteLoss() + 		\
 	1.7	* src.getCloneLoss() + 		\
-	2	* src.halloss
+	2	* src.halloss + 			\
+	-1	* src.analgesic
 
 	if(reagents.has_reagent("alkysine"))
 		src.traumatic_shock -= 10
-	if(reagents.has_reagent("inaprovaline"))
-		src.traumatic_shock -= 25
 	if(reagents.has_reagent("synaptizine"))
 		src.traumatic_shock -= 40
 	if(reagents.has_reagent("paracetamol"))
@@ -29,8 +28,6 @@
 		src.traumatic_shock -= 200
 	if(src.slurring)
 		src.traumatic_shock -= 20
-	if(src.analgesic)
-		src.traumatic_shock = 0
 
 	// broken or ripped off organs will add quite a bit of pain
 	if(istype(src,/mob/living/carbon/human))

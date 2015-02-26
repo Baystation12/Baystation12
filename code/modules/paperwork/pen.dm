@@ -75,7 +75,7 @@
 	if(!(istype(M,/mob)))
 		return
 	..()
-	if(reagents.total_volume)
+	if(reagents.volume)
 		if(M.reagents) reagents.trans_to(M, 50) //used to be 150
 	return
 
@@ -98,7 +98,7 @@
 
 
 	if(M.can_inject(user,1))
-		if(reagents.total_volume)
+		if(reagents.volume)
 			if(M.reagents) reagents.trans_to(M, 50)
 	return
 

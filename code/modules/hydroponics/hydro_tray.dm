@@ -44,7 +44,7 @@
 	// Reagent information for process(), consider moving this to a controller along
 	// with cycle information under 'mechanical concerns' at some point.
 	var/global/list/toxic_reagents = list(
-		"anti_toxin" =     -2,
+		"dylovene" =     -2,
 		"toxin" =           2,
 		"fluorine" =        2.5,
 		"chlorine" =        1.5,
@@ -347,10 +347,10 @@
 
 	if(!reagents) return
 
-	if(reagents.total_volume <= 0)
+	if(reagents.volume <= 0)
 		return
 
-	reagents.trans_to(temp_chem_holder, min(reagents.total_volume,rand(1,3)))
+	reagents.trans_to(temp_chem_holder, min(reagents.volume,rand(1,3)))
 
 	for(var/datum/reagent/R in temp_chem_holder.reagents.reagent_list)
 

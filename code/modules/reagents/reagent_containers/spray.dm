@@ -16,7 +16,6 @@
 	var/list/spray_sizes = list(1,3)
 	volume = 250
 
-
 /obj/item/weapon/reagent_containers/spray/New()
 	..()
 	src.verbs -= /obj/item/weapon/reagent_containers/verb/set_APTFT
@@ -29,12 +28,12 @@
 	if(istype(A, /obj/effect/proc_holder/spell))
 		return
 
-	if(istype(A, /obj/structure/reagent_dispensers) && get_dist(src,A) <= 1) //this block copypasted from reagent_containers/glass, for lack of a better solution
-		if(!A.reagents.total_volume && A.reagents)
+	if(istype(A, /obj/structure/reagent_dispensers) && proximity) //this block copypasted from reagent_containers/glass, for lack of a better solution
+		if(!A.reagents || !A.reagents.volume)
 			user << "<span class='notice'>\The [A] is empty.</span>"
 			return
 
-		if(reagents.total_volume >= reagents.maximum_volume)
+		if(!reagents.get_free_space())
 			user << "<span class='notice'>\The [src] is full.</span>"
 			return
 
@@ -42,7 +41,7 @@
 		user << "<span class='notice'>You fill \the [src] with [trans] units of the contents of \the [A].</span>"
 		return
 
-	if(reagents.total_volume < amount_per_transfer_from_this)
+	if(reagents.volume < amount_per_transfer_from_this)
 		user << "<span class='notice'>\The [src] is empty!</span>"
 		return
 
@@ -64,33 +63,19 @@
 /obj/item/weapon/reagent_containers/spray/proc/Spray_at(atom/A as mob|obj, mob/user as mob, proximity)
 	if (A.density && proximity)
 		A.visible_message("[usr] sprays [A] with [src].")
-		var/obj/D = new/obj()
-		D.create_reagents(amount_per_transfer_from_this)
-		reagents.trans_to(D, amount_per_transfer_from_this)
-		D.icon += mix_color_from_reagents(D.reagents.reagent_list)
-		spawn(0)
-			D.reagents.reaction(A)
-			sleep(5)
-			del(D)
+		reagents.trans_to(A, amount_per_transfer_from_this)
 	else
 		var/obj/effect/decal/chempuff/D = new/obj/effect/decal/chempuff(get_turf(src))
 		D.create_reagents(amount_per_transfer_from_this)
-		reagents.trans_to(D, amount_per_transfer_from_this, 1/spray_size)
+		reagents.trans_to(D, amount_per_transfer_from_this)
 		D.icon += mix_color_from_reagents(D.reagents.reagent_list)
 
-		var/turf/A_turf = get_turf(A)//BS12
-
 		spawn(0)
-			for(var/i=0, i<spray_size, i++)
-				step_towards(D,A)
-				D.reagents.reaction(get_turf(D))
+			for(var/i = 0, i < spray_size, i++)
+				step_towards(D, A)
+				D.reagents.touch_turf(get_turf(D))
 				for(var/atom/T in get_turf(D))
-					D.reagents.reaction(T)
-
-					// When spraying against the wall, also react with the wall, but
-					// not its contents. BS12
-					if(get_dist(D, A_turf) == 1 && A_turf.density)
-						D.reagents.reaction(A_turf)
+					D.reagents.touch(T)
 					sleep(2)
 				sleep(3)
 			del(D)
@@ -104,10 +89,9 @@
 	spray_size = next_in_list(spray_size, spray_sizes)
 	user << "<span class='notice'>You adjusted the pressure nozzle. You'll now use [amount_per_transfer_from_this] units per spray.</span>"
 
-
 /obj/item/weapon/reagent_containers/spray/examine(mob/user)
-	if(..(user, 0) && user==src.loc)
-		user << "[round(src.reagents.total_volume)] units left."
+	if(..(user, 0) && loc == user)
+		user << "[round(reagents.volume)] units left."
 	return
 
 /obj/item/weapon/reagent_containers/spray/verb/empty()
@@ -120,8 +104,7 @@
 		return
 	if(isturf(usr.loc))
 		usr << "<span class='notice'>You empty \the [src] onto the floor.</span>"
-		reagents.reaction(usr.loc)
-		spawn(5) src.reagents.clear_reagents()
+		reagents.trans_to(usr.loc, reagents.volume)
 
 //space cleaner
 /obj/item/weapon/reagent_containers/spray/cleaner
@@ -135,8 +118,8 @@
 
 /obj/item/weapon/reagent_containers/spray/cleaner/New()
 	..()
-	reagents.add_reagent("cleaner", src.volume)
-//pepperspray
+	reagents.add_reagent("cleaner", volume)
+
 /obj/item/weapon/reagent_containers/spray/pepper
 	name = "pepperspray"
 	desc = "Manufactured by UhangInc, used to blind and down an opponent quickly."
@@ -146,7 +129,6 @@
 	possible_transfer_amounts = null
 	volume = 40
 	var/safety = 1
-
 
 /obj/item/weapon/reagent_containers/spray/pepper/New()
 	..()
@@ -166,7 +148,6 @@
 		return
 	..()
 
-//water flower
 /obj/item/weapon/reagent_containers/spray/waterflower
 	name = "water flower"
 	desc = "A seemingly innocent sunflower...with a twist."
@@ -181,7 +162,6 @@
 	..()
 	reagents.add_reagent("water", 10)
 
-//chemsprayer
 /obj/item/weapon/reagent_containers/spray/chemsprayer
 	name = "chem sprayer"
 	desc = "A utility used to spray large amounts of reagent in a given area."
@@ -194,12 +174,10 @@
 	volume = 600
 	origin_tech = "combat=3;materials=3;engineering=3"
 
-
-//this is a big copypasta clusterfuck, but it's still better than it used to be!
 /obj/item/weapon/reagent_containers/spray/chemsprayer/Spray_at(atom/A as mob|obj)
 	var/Sprays[3]
-	for(var/i=1, i<=3, i++) // intialize sprays
-		if(src.reagents.total_volume < 1) break
+	for(var/i = 1, i <= 3, i++) // intialize sprays
+		if(reagents.volume < 1) break
 		var/obj/effect/decal/chempuff/D = new/obj/effect/decal/chempuff(get_turf(src))
 		D.create_reagents(amount_per_transfer_from_this)
 		src.reagents.trans_to(D, amount_per_transfer_from_this)
@@ -223,18 +201,17 @@
 			var/turf/my_target = pick(the_targets)
 			the_targets -= my_target
 
-			for(var/j=1, j<=rand(6,8), j++)
+			for(var/j=1, j<=rand(6, 8), j++)
 				step_towards(D, my_target)
-				D.reagents.reaction(get_turf(D))
+				D.reagents.touch_turf(get_turf(D))
 				for(var/atom/t in get_turf(D))
-					D.reagents.reaction(t)
+					D.reagents.touch(t)
 				sleep(2)
 			del(D)
 
 	return
 
-// Plant-B-Gone
-/obj/item/weapon/reagent_containers/spray/plantbgone // -- Skie
+/obj/item/weapon/reagent_containers/spray/plantbgone
 	name = "Plant-B-Gone"
 	desc = "Kills those pesky weeds!"
 	icon = 'icons/obj/hydroponics.dmi'
@@ -242,16 +219,14 @@
 	item_state = "plantbgone"
 	volume = 100
 
-
 /obj/item/weapon/reagent_containers/spray/plantbgone/New()
 	..()
 	reagents.add_reagent("plantbgone", 100)
 
-
 /obj/item/weapon/reagent_containers/spray/plantbgone/afterattack(atom/A as mob|obj, mob/user as mob, proximity)
 	if(!proximity) return
 
-	if (istype(A, /obj/effect/blob)) // blob damage in blob code
+	if(istype(A, /obj/effect/blob)) // blob damage in blob code
 		return
 
 	..()

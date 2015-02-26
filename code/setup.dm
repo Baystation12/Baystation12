@@ -94,9 +94,15 @@
 #define DOOR_CRUSH_DAMAGE 10
 
 #define HUNGER_FACTOR              0.05 // Factor of how fast mob nutrition decreases
-#define REAGENTS_METABOLISM        0.2  // How many units of reagent are consumed per tick, by default.
-#define REAGENTS_EFFECT_MULTIPLIER (REAGENTS_METABOLISM / 0.4) // By defining the effect multiplier this way, it'll exactly adjust
-                                                               // all effects according to how they originally were with the 0.4 metabolism
+#define REM        0.2  // Means 'Reagent Effect Multiplier'. This is both how many units of reagent are consumed per tick, and how strong their effects are.
+#define CHEM_TOUCH 1
+#define CHEM_INGEST 2
+#define CHEM_BLOOD 3
+#define MINIMUM_CHEMICAL_VOLUME 0.01
+#define SOLID 1
+#define LIQUID 2
+#define GAS 3
+#define REAGENTS_OVERDOSE 30
 
 #define MINIMUM_AIR_RATIO_TO_SUSPEND 0.05 // Minimum ratio of air that must move to/from a tile to suspend group processing
 #define MINIMUM_AIR_TO_SUSPEND       (MOLES_CELLSTANDARD * MINIMUM_AIR_RATIO_TO_SUSPEND) // Minimum amount of air that has to move before a group processing can be suspended

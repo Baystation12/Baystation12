@@ -199,7 +199,7 @@
 				playsound(chassis, 'sound/effects/refill.ogg', 50, 1, -6)
 				return
 
-			if (src.reagents.total_volume < 1)
+			if (src.reagents.volume < 1)
 				occupant_message("\red \The [src] is empty.")
 				return
 
@@ -226,20 +226,20 @@
 					for(var/b=0, b<5, b++)
 						step_towards(W,my_target)
 						if(!W || !W.reagents) return
-						W.reagents.reaction(get_turf(W))
+						W.reagents.touch_turf(get_turf(W))
 						for(var/atom/atm in get_turf(W))
 							if(!W)
 								return
 							if(!W.reagents)
 								break
-							W.reagents.reaction(atm)
+							W.reagents.touch(atm)
 						if(W.loc == my_target) break
 						sleep(2)
 					W.delete()
 			return 1
 
 	get_equip_info()
-		return "[..()] \[[src.reagents.total_volume]\]"
+		return "[..()] \[[src.reagents.volume]\]"
 
 	on_reagent_change()
 		return

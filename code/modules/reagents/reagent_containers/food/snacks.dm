@@ -17,7 +17,7 @@
 	//Placeholder for effect that trigger on eating that aren't tied to reagents.
 /obj/item/weapon/reagent_containers/food/snacks/proc/On_Consume(var/mob/M)
 	if(!usr)	return
-	if(!reagents.total_volume)
+	if(!reagents.volume)
 		M.visible_message("<span class='notice'>[M] finishes eating \the [src].</span>","<span class='notice'>You finish eating \the [src].</span>")
 		usr.drop_from_inventory(src)	//so icons update :[
 
@@ -34,7 +34,7 @@
 	return
 
 /obj/item/weapon/reagent_containers/food/snacks/attack(mob/M as mob, mob/user as mob, def_zone)
-	if(!reagents.total_volume)						//Shouldn't be needed but it checks to see if it has anything left in it.
+	if(!reagents.volume)						//Shouldn't be needed but it checks to see if it has anything left in it.
 		user << "\red None of [src] left, oh no!"
 		M.drop_from_inventory(src)	//so icons update :[
 		del(src)
@@ -91,17 +91,17 @@
 
 		if(reagents)								//Handle ingestion of the reagent.
 			playsound(M.loc,'sound/items/eatfood.ogg', rand(10,50), 1)
-			if(reagents.total_volume)
-				if(reagents.total_volume > bitesize)
+			if(reagents.volume)
+				if(reagents.volume > bitesize)
 					/*
 					 * I totally cannot understand what this code supposed to do.
 					 * Right now every snack consumes in 2 bites, my popcorn does not work right, so I simplify it. -- rastaf0
-					var/temp_bitesize =  max(reagents.total_volume /2, bitesize)
+					var/temp_bitesize =  max(reagents.volume /2, bitesize)
 					reagents.trans_to(M, temp_bitesize)
 					*/
-					reagents.trans_to_ingest(M, bitesize)
+					reagents.trans_to_mob(M, bitesize, 1, CHEM_INGEST)
 				else
-					reagents.trans_to_ingest(M, reagents.total_volume)
+					reagents.trans_to_mob(M, reagents.volume, 1, CHEM_INGEST)
 				bitecount++
 				On_Consume(M)
 			return 1
@@ -135,7 +135,7 @@
 		if(!U.reagents)
 			U.create_reagents(5)
 
-		if (U.reagents.total_volume > 0)
+		if (U.reagents.volume > 0)
 			user << "\red You already have something on your [U]."
 			return
 
@@ -151,9 +151,9 @@
 		I.color = src.filling_color
 		U.overlays += I
 
-		reagents.trans_to(U,min(reagents.total_volume,5))
+		reagents.trans_to(U,min(reagents.volume,5))
 
-		if (reagents.total_volume <= 0)
+		if (reagents.volume <= 0)
 			del(src)
 		return
 
@@ -187,7 +187,7 @@
 			else
 				user.visible_message("\blue [user] slices \the [src]!", "\blue You slice \the [src]!")
 
-			var/reagents_per_slice = reagents.total_volume/slices_num
+			var/reagents_per_slice = reagents.volume/slices_num
 			for(var/i=1 to (slices_num-slices_lost))
 				var/obj/slice = new slice_path (src.loc)
 				reagents.trans_to(slice,reagents_per_slice)
@@ -212,7 +212,7 @@
 	user.visible_message("<b>[user]</b> nibbles away at the [src].","You nibble away at the [src].")
 	bitecount++
 	if(reagents && user.reagents)
-		reagents.trans_to_ingest(user, bitesize)
+		reagents.trans_to_mob(user, bitesize, 1, CHEM_INGEST)
 	spawn(5)
 		if(!src && !user.client)
 			user.custom_emote(1,"[pick("burps", "cries for more", "burps twice", "looks at the area where the food was")]")
@@ -476,7 +476,7 @@
 	throw_impact(atom/hit_atom)
 		..()
 		new/obj/effect/decal/cleanable/egg_smudge(src.loc)
-		src.reagents.reaction(hit_atom, TOUCH)
+		src.reagents.trans_to(hit_atom, src.reagents.volume)
 		src.visible_message("\red [src.name] has been squashed.","\red You hear a smack.")
 		del(src)
 
@@ -592,7 +592,7 @@
 	New()
 		..()
 		reagents.add_reagent("nutriment", 12)
-		reagents.add_reagent("stoxin", 3)
+		reagents.add_reagent("soporific", 3)
 		bitesize = 3
 
 /obj/item/weapon/reagent_containers/food/snacks/stuffing
@@ -1518,7 +1518,7 @@
 		reagents.add_reagent("nutriment", 4)
 		baconbeacon = new /obj/item/device/radio/beacon/bacon(src)
 	On_Consume()
-		if(!reagents.total_volume)
+		if(!reagents.volume)
 			baconbeacon.loc = usr
 			baconbeacon.digest_delay()
 */

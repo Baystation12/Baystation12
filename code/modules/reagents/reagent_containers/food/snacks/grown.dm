@@ -42,8 +42,8 @@
 					rtotal += round(potency/reagent_data[2])
 				reagents.add_reagent(rid,max(1,rtotal))
 
-		if(reagents.total_volume > 0)
-			bitesize = 1+round(reagents.total_volume / 2, 1)
+		if(reagents.volume > 0)
+			bitesize = 1+round(reagents.volume / 2, 1)
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/corn
 	name = "ear of corn"
@@ -408,9 +408,9 @@
 	..()
 	new/obj/effect/decal/cleanable/blood/splatter(src.loc)
 	src.visible_message("<span class='notice'>The [src.name] has been squashed.</span>","<span class='moderate'>You hear a smack.</span>")
-	src.reagents.reaction(get_turf(hit_atom))
+	src.reagents.touch_turf(get_turf(hit_atom))
 	for(var/atom/A in get_turf(hit_atom))
-		src.reagents.reaction(A)
+		src.reagents.touch(A)
 	del(src)
 	return
 
@@ -426,9 +426,9 @@
 	..()
 	new/obj/effect/decal/cleanable/blood/oil(src.loc)
 	src.visible_message("<span class='notice'>The [src.name] has been squashed.</span>","<span class='moderate'>You hear a smack.</span>")
-	src.reagents.reaction(get_turf(hit_atom))
+	src.reagents.touch_turf(get_turf(hit_atom))
 	for(var/atom/A in get_turf(hit_atom))
-		src.reagents.reaction(A)
+		src.reagents.touch(A)
 	del(src)
 	return
 

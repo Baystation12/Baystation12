@@ -58,9 +58,8 @@ var/const/BLOOD_VOLUME_SURVIVE = 122
 				if (reagents.has_reagent("nutriment"))	//Getting food speeds it up
 					B.volume += 0.4
 					reagents.remove_reagent("nutriment", 0.1)
-				if (reagents.has_reagent("iron"))	//Hematogen candy anyone?
+				if("Iron" in chem_effects)	//Hematogen candy anyone?
 					B.volume += 0.8
-					reagents.remove_reagent("iron", 0.1)
 
 		// Damaged heart virtually reduces the blood volume, as the blood isn't
 		// being pumped properly anymore.
@@ -199,45 +198,44 @@ var/const/BLOOD_VOLUME_SURVIVE = 122
 	. = ..()
 	vessel.remove_reagent("blood",amount) // Removes blood if human
 
-//Transfers blood from container ot vessels
-/mob/living/carbon/proc/inject_blood(obj/item/weapon/reagent_containers/container, var/amount)
-	var/datum/reagent/blood/injected = get_blood(container.reagents)
-	if (!injected)
+//Transfers blood from reagents to vessel - consuming it is handled by reagent code
+/mob/living/carbon/proc/inject_blood(var/datum/reagent/blood/injected, var/amount)
+	if (!injected || !istype(injected))
 		return
+
 	var/list/sniffles = virus_copylist(injected.data["virus2"])
 	for(var/ID in sniffles)
 		var/datum/disease2/disease/sniffle = sniffles[ID]
 		infect_virus2(src,sniffle,1)
+
 	if (injected.data["antibodies"] && prob(5))
 		antibodies |= injected.data["antibodies"]
+
 	var/list/chems = list()
 	chems = params2list(injected.data["trace_chem"])
 	for(var/C in chems)
 		src.reagents.add_reagent(C, (text2num(chems[C]) / 560) * amount)//adds trace chemicals to owner's blood
-	reagents.update_total()
+	reagents.update_volume()
 
-	container.reagents.remove_reagent("blood", amount)
-
-//Transfers blood from container ot vessels, respecting blood types compatability.
-/mob/living/carbon/human/inject_blood(obj/item/weapon/reagent_containers/container, var/amount)
-
-	var/datum/reagent/blood/injected = get_blood(container.reagents)
+//Transfers blood from reagents to vessel, respecting blood types compatability.
+/mob/living/carbon/human/inject_blood(var/datum/reagent/blood/injected, var/amount)
 
 	if(species && species.flags & NO_BLOOD)
 		reagents.add_reagent("blood", amount, injected.data)
-		reagents.update_total()
+		reagents.update_volume()
 		return
 
 	var/datum/reagent/blood/our = get_blood(vessel)
 
 	if (!injected || !our)
 		return
-	if(blood_incompatible(injected.data["blood_type"],our.data["blood_type"],injected.data["species"],our.data["species"]) )
+
+	if(blood_incompatible(injected.data["blood_type"], our.data["blood_type"], injected.data["species"], our.data["species"]))
 		reagents.add_reagent("toxin",amount * 0.5)
-		reagents.update_total()
+		reagents.update_volume()
 	else
-		vessel.add_reagent("blood", amount, injected.data)
-		vessel.update_total()
+		vessel.add_reagent("blood", amount, CHEM_TOUCH, injected.data)
+		vessel.update_volume()
 	..()
 
 //Gets human's own blood.

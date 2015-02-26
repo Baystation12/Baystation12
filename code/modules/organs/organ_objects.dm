@@ -260,7 +260,7 @@
 	O.icon_state = dead_icon ? dead_icon : icon_state
 
 	// Pass over the blood.
-	reagents.trans_to(O, reagents.total_volume)
+	reagents.trans_to(O, reagents.volume)
 
 	if(fingerprints) O.fingerprints = fingerprints.Copy()
 	if(fingerprintshidden) O.fingerprintshidden = fingerprintshidden.Copy()

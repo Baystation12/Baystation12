@@ -284,7 +284,7 @@ the implant may become unstable and either pre-maturely inject the subject or si
 
 	trigger(emote, source as mob)
 		if(emote == "deathgasp")
-			src.activate(src.reagents.total_volume)
+			src.activate(src.reagents.volume)
 		return
 
 
@@ -293,7 +293,7 @@ the implant may become unstable and either pre-maturely inject the subject or si
 		var/mob/living/carbon/R = src.imp_in
 		src.reagents.trans_to(R, cause)
 		R << "You hear a faint *beep*."
-		if(!src.reagents.total_volume)
+		if(!src.reagents.volume)
 			R << "You hear a faint click from your chest."
 			spawn(0)
 				del(src)

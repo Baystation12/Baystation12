@@ -15,11 +15,11 @@
 
 /obj/structure/mopbucket/examine(mob/user)
 	if(..(user, 1))
-		user << "[src] \icon[src] contains [reagents.total_volume] unit\s of water!"
+		user << "[src] \icon[src] contains [reagents.volume] unit\s of water!"
 
 /obj/structure/mopbucket/attackby(obj/item/I, mob/user)
 	if(istype(I, /obj/item/weapon/mop))
-		if(reagents.total_volume < 1)
+		if(reagents.volume < 1)
 			user << "[src] is out of water!</span>"
 		else
 			reagents.trans_to(I, 5)

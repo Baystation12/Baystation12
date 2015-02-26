@@ -35,10 +35,10 @@
 	update_icon()
 		overlays.Cut()
 
-		if(reagents.total_volume && (icon_state == "bottle-1" || icon_state == "bottle-2" || icon_state == "bottle-3" || icon_state == "bottle-4"))
+		if(reagents.volume && (icon_state == "bottle-1" || icon_state == "bottle-2" || icon_state == "bottle-3" || icon_state == "bottle-4"))
 			var/image/filling = image('icons/obj/reagentfillings.dmi', src, "[icon_state]10")
 
-			var/percent = round((reagents.total_volume / volume) * 100)
+			var/percent = round((reagents.volume / volume) * 100)
 			switch(percent)
 				if(0 to 9)		filling.icon_state = "[icon_state]--10"
 				if(10 to 24) 	filling.icon_state = "[icon_state]-10"
@@ -88,7 +88,7 @@
 		reagents.add_reagent("cyanide", 30) //volume changed to match chloral
 		update_icon()
 
-/obj/item/weapon/reagent_containers/glass/bottle/stoxin
+/obj/item/weapon/reagent_containers/glass/bottle/soporific
 	name = "soporific bottle"
 	desc = "A small bottle of soporific. Just the fumes make you sleepy."
 	icon = 'icons/obj/chemical.dmi'
@@ -96,7 +96,7 @@
 
 	New()
 		..()
-		reagents.add_reagent("stoxin", 60)
+		reagents.add_reagent("soporific", 60)
 		update_icon()
 
 /obj/item/weapon/reagent_containers/glass/bottle/chloralhydrate
@@ -118,7 +118,7 @@
 
 	New()
 		..()
-		reagents.add_reagent("anti_toxin", 60)
+		reagents.add_reagent("dylovene", 60)
 		update_icon()
 
 /obj/item/weapon/reagent_containers/glass/bottle/mutagen

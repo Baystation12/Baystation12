@@ -7,7 +7,7 @@
 		..()
 		reagents.add_reagent("pwine", potency * 5)
 		reagents.add_reagent("nutriment", potency)
-		bitesize = 1+round(reagents.total_volume / 2, 1)
+		bitesize = 1+round(reagents.volume / 2, 1)
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/thaadrabloom
 	name = "thaa'dra bloom"
@@ -18,7 +18,7 @@
 		..()
 		reagents.add_reagent("frostoil", potency * 1.5 + 5)
 		reagents.add_reagent("nutriment", potency)
-		bitesize = 1+round(reagents.total_volume / 2, 1)
+		bitesize = 1+round(reagents.volume / 2, 1)
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/jurlmah
 	name = "jurl'mah pod"
@@ -29,7 +29,7 @@
 		..()
 		reagents.add_reagent("serotrotium", potency)
 		reagents.add_reagent("nutriment", potency)
-		bitesize = 1+round(reagents.total_volume / 2, 1)
+		bitesize = 1+round(reagents.volume / 2, 1)
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/amauri
 	name = "amauri fruit"
@@ -41,7 +41,7 @@
 		reagents.add_reagent("zombiepowder", potency * 10)
 		reagents.add_reagent("condensedcapsaicin", potency * 5)
 		reagents.add_reagent("nutriment", potency)
-		bitesize = 1+round(reagents.total_volume / 2, 1)
+		bitesize = 1+round(reagents.volume / 2, 1)
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/gelthi
 	name = "gelthi berries"
@@ -51,10 +51,10 @@
 	New(var/loc, var/potency)
 		..()
 		//this may prove a little strong
-		reagents.add_reagent("stoxin", (potency * potency) / 5)
+		reagents.add_reagent("soporific", (potency * potency) / 5)
 		reagents.add_reagent("capsaicin", (potency * potency) / 5)
 		reagents.add_reagent("nutriment", potency)
-		bitesize = 1+round(reagents.total_volume / 2, 1)
+		bitesize = 1+round(reagents.volume / 2, 1)
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/vale
 	name = "vale leaves"
@@ -66,7 +66,7 @@
 		reagents.add_reagent("paracetamol", potency * 5)
 		reagents.add_reagent("dexalin", potency * 2)
 		reagents.add_reagent("nutriment", potency)
-		bitesize = 1+round(reagents.total_volume / 2, 1)
+		bitesize = 1+round(reagents.volume / 2, 1)
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/surik
 	name = "surik fruit"
@@ -78,4 +78,4 @@
 		reagents.add_reagent("impedrezene", potency * 3)
 		reagents.add_reagent("synaptizine", potency * 2)
 		reagents.add_reagent("nutriment", potency)
-		bitesize = 1+round(reagents.total_volume / 2, 1)
+		bitesize = 1+round(reagents.volume / 2, 1)

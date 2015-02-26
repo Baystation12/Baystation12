@@ -942,7 +942,7 @@
 	h.disfigured = 0
 
 	if(species && !(species.flags & NO_BLOOD))
-		vessel.add_reagent("blood",560-vessel.total_volume)
+		vessel.add_reagent("blood",560-vessel.volume)
 		fixblood()
 
 	// Fix up any missing organs.
@@ -1149,7 +1149,7 @@
 
 	spawn(0)
 		regenerate_icons()
-		vessel.add_reagent("blood",560-vessel.total_volume)
+		vessel.add_reagent("blood",560-vessel.volume)
 		fixblood()
 
 	// Rebuild the HUD. If they aren't logged in then login() should reinstantiate it for them.
