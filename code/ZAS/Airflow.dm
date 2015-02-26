@@ -2,17 +2,18 @@
 Contains helper procs for airflow, handled in /connection_group.
 */
 
-
 mob/var/tmp/last_airflow_stun = 0
 mob/proc/airflow_stun()
 	if(stat == 2)
 		return 0
 	if(last_airflow_stun > world.time - vsc.airflow_stun_cooldown)	return 0
+
 	if(!(status_flags & CANSTUN) && !(status_flags & CANWEAKEN))
-		src << "\blue You stay upright as the air rushes past you."
+		src << "<span class='notice'>You stay upright as the air rushes past you.</span>"
 		return 0
-	if(weakened <= 0) src << "\red The sudden rush of air knocks you over!"
-	weakened = max(weakened,5)
+	if(!lying)
+		src << "<span class='warning'>The sudden rush of air knocks you over!</span>"
+	SetWeakened(max(5,weakened))
 	last_airflow_stun = world.time
 
 mob/living/silicon/airflow_stun()
@@ -22,16 +23,9 @@ mob/living/carbon/metroid/airflow_stun()
 	return
 
 mob/living/carbon/human/airflow_stun()
-	if(last_airflow_stun > world.time - vsc.airflow_stun_cooldown)	return 0
-	if(buckled) return 0
 	if(shoes)
 		if(shoes.flags & NOSLIP) return 0
-	if(!(status_flags & CANSTUN) && !(status_flags & CANWEAKEN))
-		src << "\blue You stay upright as the air rushes past you."
-		return 0
-	if(weakened <= 0) src << "\red The sudden rush of air knocks you over!"
-	weakened = max(weakened,rand(1,5))
-	last_airflow_stun = world.time
+	..()
 
 atom/movable/proc/check_airflow_movable(n)
 
@@ -84,10 +78,8 @@ obj/item/check_airflow_movable(n)
 		if(istype(src, /mob/living/carbon/human))
 			if(src:buckled)
 				return
-			if(src:shoes)
-				if(istype(src:shoes, /obj/item/clothing/shoes/magboots))
-					if(src:shoes:magpulse)
-						return
+			if(src:shoes && src:shoes.flags & NOSLIP)
+				return
 		src << "\red You are sucked away by airflow!"
 	var/airflow_falloff = 9 - sqrt((x - airflow_dest.x) ** 2 + (y - airflow_dest.y) ** 2)
 	if(airflow_falloff < 1)
