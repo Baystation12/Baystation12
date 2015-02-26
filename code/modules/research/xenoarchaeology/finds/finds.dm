@@ -345,7 +345,7 @@
 			/obj/item/weapon/gun/energy/laser/practice/xenoarch,\
 			/obj/item/weapon/gun/energy/laser/xenoarch,\
 			/obj/item/weapon/gun/energy/xray/xenoarch,\
-			/obj/item/weapon/gun/energy/laser/captain/xenoarch)
+			/obj/item/weapon/gun/energy/captain/xenoarch)
 			if(spawn_type)
 				var/obj/item/weapon/gun/energy/new_gun = new spawn_type(src.loc)
 				new_item = new_gun

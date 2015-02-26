@@ -264,7 +264,7 @@
 
 /obj/item/clothing/suit/storage/vest/officer
 	name = "officer armor vest"
-	desc = "A simple kevlar plate carrier beloning to Nanotrasen. This one has a security holobadge clipped to the chest."
+	desc = "A simple kevlar plate carrier belonging to Nanotrasen. This one has a security holobadge clipped to the chest."
 	icon_state = "officervest_nobadge"
 	item_state = "officervest_nobadge"
 	icon_badge = "officervest_badge"

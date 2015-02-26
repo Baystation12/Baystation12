@@ -113,6 +113,7 @@
 		/obj/item/device/pda,
 		/obj/item/device/radio/headset,
 		/obj/item/weapon/melee,
+		/obj/item/weapon/gun/projectile/sec,
 		/obj/item/taperoll/police
 		)
 

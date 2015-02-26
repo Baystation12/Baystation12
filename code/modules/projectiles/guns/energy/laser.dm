@@ -6,12 +6,11 @@
 	fire_sound = 'sound/weapons/Laser.ogg'
 	slot_flags = SLOT_BELT|SLOT_BACK
 	w_class = 3
-	force = 10 //it has a stock, might as well give some kind of perk over the egun
+	force = 10
 	matter = list("metal" = 2000)
 	origin_tech = "combat=3;magnets=2"
 	projectile_type = /obj/item/projectile/beam
-	charge_cost = 75
-	fire_delay = 1
+	fire_delay = 1 //rapid fire
 
 /obj/item/weapon/gun/energy/laser/mounted
 	self_recharge = 1
@@ -22,20 +21,28 @@
 	desc = "A modified version of the basic laser gun, this one fires less concentrated energy bolts designed for target practice."
 	projectile_type = /obj/item/projectile/beam/practice
 
-obj/item/weapon/gun/energy/laser/retro
+obj/item/weapon/gun/energy/retro
 	name = "retro laser"
 	icon_state = "retro"
 	desc = "An older model of the basic lasergun, no longer used by Nanotrasen's security or military forces. Nevertheless, it is still quite deadly and easy to maintain, making it a favorite amongst pirates and other outlaws."
+	fire_sound = 'sound/weapons/Laser.ogg'
+	slot_flags = SLOT_BELT
+	w_class = 3
+	projectile_type = /obj/item/projectile/beam
+	fire_delay = 10
 
 /obj/item/weapon/gun/energy/captain
 	name = "antique laser gun"
 	icon_state = "caplaser"
 	desc = "This is an antique laser gun. All craftsmanship is of the highest quality. It is decorated with assistant leather and chrome. The object menaces with spikes of energy. On the item is an image of Space Station 13. The station is exploding."
 	force = 5
+	fire_sound = 'sound/weapons/Laser.ogg'
 	slot_flags = SLOT_BELT
+	w_class = 3
+	projectile_type = /obj/item/projectile/beam
 	origin_tech = null
+	charge_cost = 200 //to compensate a bit for self-recharging
 	self_recharge = 1
-
 
 /obj/item/weapon/gun/energy/lasercannon
 	name = "laser cannon"
@@ -62,6 +69,7 @@ obj/item/weapon/gun/energy/laser/retro
 	origin_tech = "combat=5;materials=3;magnets=2;syndicate=2"
 	projectile_type = /obj/item/projectile/beam/xray
 	charge_cost = 50
+	fire_delay = 1
 
 /obj/item/weapon/gun/energy/sniperrifle
 	name = "\improper L.W.A.P. sniper rifle"

@@ -188,7 +188,7 @@
 
 /obj/machinery/computer/cloning/Topic(href, href_list)
 	if(..())
-		return
+		return 1
 
 	if(loading)
 		return

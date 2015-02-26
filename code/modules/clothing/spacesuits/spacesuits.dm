@@ -32,7 +32,7 @@
 			icon_action_button = "[icon_state]"
 
 		camera = new /obj/machinery/camera(src)
-		camera.network = camera_networks
+		camera.replace_networks(camera_networks)
 		cameranet.removeCamera(camera)
 		camera.c_tag = user.name
 		user << "\blue User scanned as [camera.c_tag]. Camera activated."

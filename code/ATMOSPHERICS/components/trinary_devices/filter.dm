@@ -199,7 +199,7 @@
 
 /obj/machinery/atmospherics/trinary/filter/Topic(href, href_list) // -- TLE
 	if(..())
-		return
+		return 1
 	usr.set_machine(src)
 	src.add_fingerprint(usr)
 	if(href_list["filterset"])

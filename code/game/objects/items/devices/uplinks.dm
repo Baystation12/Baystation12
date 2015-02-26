@@ -13,12 +13,12 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 	var/reference = ""
 	var/description = ""
 
-datum/uplink_item/New(var/itemPath, var/itemCost as num, var/itemName as text, var/itemReference as text, var/itemDescription)
+datum/uplink_item/New(var/itemPath, var/itemCost, var/itemName, var/itemReference, var/itemDescription)
 	cost = itemCost
 	path = itemPath
 	name = itemName
+	reference = itemReference
 	description = itemDescription
-
 
 datum/uplink_item/proc/description()
 	if(!description)

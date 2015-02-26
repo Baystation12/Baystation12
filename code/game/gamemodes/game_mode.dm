@@ -36,7 +36,7 @@
 			new/datum/uplink_item(/obj/item/ammo_magazine/a357, 2, ".357", "RA"),
 			new/datum/uplink_item(/obj/item/ammo_magazine/mc9mm, 2, "9mm", "R9"),
 			new/datum/uplink_item(/obj/item/ammo_magazine/chemdart, 2, "Darts", "AD"),
-			new/datum/uplink_item(/obj/item/weapon/storage/box/sniperammo, 3, "14.5mm", "RA")
+			new/datum/uplink_item(/obj/item/weapon/storage/box/sniperammo, 4, "14.5mm", "SA")
 			),
 		"Highly Visible and Dangerous Weapons" = list(
 			 new/datum/uplink_item(/obj/item/weapon/storage/box/emps, 3, "5 EMP Grenades", "EM"),

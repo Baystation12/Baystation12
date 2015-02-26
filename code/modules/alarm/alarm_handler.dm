@@ -64,10 +64,9 @@
 /datum/alarm_handler/proc/on_alarm_change(var/datum/alarm/alarm, var/was_raised)
 	for(var/obj/machinery/camera/C in alarm.cameras())
 		if(was_raised)
-			C.network.Add(category)
-			invalidateCameraCache()
+			C.add_network(category)
 		else
-			C.network.Remove(category)
+			C.remove_network(category)
 	notify_listeners(alarm, was_raised)
 
 /datum/alarm_handler/proc/get_alarm_severity_for_origin(var/atom/origin)

@@ -181,6 +181,7 @@ datum/genesequence
 	onclose(user, "reconstitutor")
 
 /obj/machinery/computer/reconstitutor/animal/Topic(href, href_list)
+	if(..()) return 1
 	if(href_list["clone"])
 		var/sequence_num = text2num(href_list["sequence_num"])
 		var/datum/genesequence/cloned_genesequence = completed_genesequences[sequence_num]
@@ -201,10 +202,9 @@ datum/genesequence
 				pod1.biomass -= CLONE_BIOMASS
 		else
 			usr << "\red \icon[src] Unable to locate cloning pod!"
-	else
-		..()
 
 /obj/machinery/computer/reconstitutor/Topic(href, href_list)
+	if(..()) return 1
 	if(href_list["insertpos"])
 		//world << "inserting gene for genesequence [href_list["insertgenome"]] at pos [text2num(href_list["insertpos"])]"
 		var/sequence_num = text2num(href_list["sequence_num"])
@@ -251,9 +251,6 @@ datum/genesequence
 	else if(href_list["close"])
 		usr.unset_machine(src)
 		usr << browse(null, "window=reconstitutor")
-
-	else
-		..()
 
 /obj/machinery/computer/reconstitutor/proc/scan_fossil(var/obj/item/weapon/fossil/scan_fossil)
 	//see whether we accept these kind of fossils

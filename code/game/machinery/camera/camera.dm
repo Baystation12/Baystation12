@@ -349,6 +349,51 @@
 	user.set_machine(src)
 	wires.Interact(user)
 
+/obj/machinery/camera/proc/add_network(var/network_name)
+	add_networks(list(network_name))
+
+/obj/machinery/camera/proc/remove_network(var/network_name)
+	remove_networks(list(network_name))
+
+/obj/machinery/camera/proc/add_networks(var/list/networks)
+	var/network_added
+	network_added = 0
+	for(var/network_name in networks)
+		if(!(network_name in src.network))
+			network += network_name
+			network_added = 1
+
+	if(network_added)
+		invalidateCameraCache()
+
+/obj/machinery/camera/proc/remove_networks(var/list/networks)
+	var/network_removed
+	network_removed = 0
+	for(var/network_name in networks)
+		if(network_name in src.network)
+			network -= network_name
+			network_removed = 1
+
+	if(network_removed)
+		invalidateCameraCache()
+
+/obj/machinery/camera/proc/replace_networks(var/list/networks)
+	if(networks.len != network.len)
+		network = networks
+		invalidateCameraCache()
+		return
+
+	for(var/new_network in networks)
+		if(!(new_network in network))
+			network = networks
+			invalidateCameraCache()
+			return
+
+/obj/machinery/camera/proc/clear_all_networks()
+	if(network.len)
+		network.Cut()
+		invalidateCameraCache()
+
 /obj/machinery/camera/proc/nano_structure()
 	var/cam[0]
 	cam["name"] = sanitize(c_tag)

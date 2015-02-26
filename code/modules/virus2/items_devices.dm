@@ -73,7 +73,7 @@
 
 /obj/item/weapon/virusdish/Topic(href, href_list)
 	. = ..()
-	if(.) return
+	if(.) return 1
 
 	if(href_list["info"])
 		usr << browse(info, "window=info_\ref[src]")
