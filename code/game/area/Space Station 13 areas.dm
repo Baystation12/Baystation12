@@ -664,6 +664,22 @@ var/list/ghostteleportlocs = list()
 	name = "Upper-Level Maintenance"
 	icon_state = "fmaint"
 
+/area/maintenance/up1
+	name = "Upper Sci-Med Maintenance"
+	icon_state = "fmaint"
+
+/area/maintenance/up2
+	name = "Upper Bridge Maintenance"
+	icon_state = "fmaint"
+
+/area/maintenance/up3
+	name = "Upper Civilian Maintenance"
+	icon_state = "fmaint"
+
+/area/maintenance/up4
+	name = "Upper Security Maintenance"
+	icon_state = "fmaint"
+
 /area/maintenance/fore
 	name = "Fore Maintenance"
 	icon_state = "fmaint"
