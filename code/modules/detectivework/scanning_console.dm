@@ -213,6 +213,7 @@
 	onclose(user,"fscanner")
 
 /obj/machinery/computer/forensic_scanning/Topic(href,href_list)
+	if(..()) return 1
 	switch(href_list["operation"])
 		if("login")
 			var/mob/M = usr

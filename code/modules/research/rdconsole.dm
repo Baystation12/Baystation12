@@ -162,7 +162,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 
 /obj/machinery/computer/rdconsole/Topic(href, href_list)
 	if(..())
-		return
+		return 1
 
 	add_fingerprint(usr)
 

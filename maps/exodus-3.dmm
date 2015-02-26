@@ -45,7 +45,7 @@
 "aS" = (/obj/machinery/door/window,/turf/simulated/shuttle/floor{icon_state = "floor3"},/area/derelict/ship)
 "aT" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/shuttle/floor{icon_state = "floor3"},/area/derelict/ship)
 "aU" = (/obj/structure/lattice,/turf/space,/area/space)
-"aV" = (/obj/structure/table,/obj/item/weapon/gun/energy/laser/retro,/turf/simulated/shuttle/floor{icon_state = "floor3"},/area/derelict/ship)
+"aV" = (/obj/structure/table,/obj/item/weapon/gun/energy/retro,/turf/simulated/shuttle/floor{icon_state = "floor3"},/area/derelict/ship)
 "aW" = (/obj/structure/grille,/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced,/obj/structure/window/reinforced{dir = 8},/turf/simulated/shuttle/plating,/area/derelict/ship)
 "aX" = (/obj/machinery/light/small{dir = 8},/turf/simulated/shuttle/floor{icon_state = "floor3"},/area/derelict/ship)
 "aY" = (/obj/structure/table,/obj/item/weapon/tank/oxygen,/turf/simulated/shuttle/floor{icon_state = "floor3"},/area/derelict/ship)

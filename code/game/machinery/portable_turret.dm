@@ -94,13 +94,13 @@
 //				iconholder = 1
 //				eprojectile = /obj/item/projectile/beam
 
-		if(/obj/item/weapon/gun/energy/laser/retro)
+		if(/obj/item/weapon/gun/energy/retro)
 			iconholder = 1
 
-//			if(/obj/item/weapon/gun/energy/laser/retro/sc_retro)
+//			if(/obj/item/weapon/gun/energy/retro/sc_retro)
 //				iconholder = 1
 
-		if(/obj/item/weapon/gun/energy/laser/captain)
+		if(/obj/item/weapon/gun/energy/captain)
 			iconholder = 1
 
 		if(/obj/item/weapon/gun/energy/lasercannon)

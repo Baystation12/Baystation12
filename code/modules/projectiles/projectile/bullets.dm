@@ -19,7 +19,7 @@
 		mob_passthrough_check = 1
 	else
 		mob_passthrough_check = 0
-	..()
+	return ..()
 
 /obj/item/projectile/bullet/can_embed()
 	//prevent embedding if the projectile is passing through the mob
@@ -43,10 +43,10 @@
 	var/chance = 0
 	if(istype(A, /turf/simulated/wall))
 		var/turf/simulated/wall/W = A
-		chance = round(damage/W.damage_cap*250)
+		chance = round(damage/W.damage_cap*180)
 	else if(istype(A, /obj/machinery/door))
 		var/obj/machinery/door/D = A
-		chance = round(damage/D.maxhealth*150)
+		chance = round(damage/D.maxhealth*180)
 	else if(istype(A, /obj/structure/girder) || istype(A, /obj/structure/cultgirder))
 		chance = 100
 	else if(istype(A, /obj/machinery) || istype(A, /obj/structure))
@@ -141,7 +141,7 @@
 	penetrating = 1
 
 /obj/item/projectile/bullet/rifle/a145
-	damage = 60
+	damage = 80
 	stun = 3
 	weaken = 3
 	penetrating = 5

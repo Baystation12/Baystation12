@@ -205,7 +205,7 @@
 
 /obj/machinery/computer/rdservercontrol/Topic(href, href_list)
 	if(..())
-		return
+		return 1
 
 	add_fingerprint(usr)
 	usr.set_machine(src)

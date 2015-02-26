@@ -19,7 +19,7 @@
 	update_icon()
 		return
 
-/obj/item/weapon/gun/energy/laser/captain/xenoarch
+/obj/item/weapon/gun/energy/captain/xenoarch
 	icon = 'icons/obj/xenoarchaeology.dmi'
 	update_icon()
 		return

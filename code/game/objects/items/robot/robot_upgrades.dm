@@ -37,7 +37,7 @@
 		R.icon_state = "[R.ckey]-Standard"
 	del(R.module)
 	R.module = null
-	R.camera.network.Remove(list("Engineering","Medical","MINE"))
+	R.camera.remove_networks(list("Engineering","Medical","MINE"))
 	R.updatename("Default")
 	R.status_flags |= CANPUSH
 	R.updateicon()
