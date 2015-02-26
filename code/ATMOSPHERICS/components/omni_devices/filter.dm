@@ -155,7 +155,7 @@
 			return null
 
 /obj/machinery/atmospherics/omni/filter/Topic(href, href_list)
-	if(..()) return
+	if(..()) return 1
 	switch(href_list["command"])
 		if("power")
 			if(!configuring)
