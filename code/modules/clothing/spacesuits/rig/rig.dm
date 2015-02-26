@@ -493,6 +493,8 @@
 		return 1
 
 	if(istype(user))
+		if(malfunction_check(user))
+			return 0
 		if(user.back != src)
 			return 0
 		if(locked_dna)
@@ -509,10 +511,10 @@
 
 	return 1
 
+//TODO: Fix Topic vulnerabilities for malfunction and AI override.
 /obj/item/weapon/rig/Topic(href,href_list)
-
 	if(!check_suit_access(usr))
-		return
+		return 0
 
 	if(href_list["toggle_piece"])
 		if(ishuman(usr) && (usr.stat || usr.stunned || usr.lying))
@@ -545,7 +547,7 @@
 
 	usr.set_machine(src)
 	src.add_fingerprint(usr)
-	return 1
+	return 0
 
 /obj/item/weapon/rig/proc/notify_ai(var/message)
 	if(!message || !installed_modules || !installed_modules.len)
@@ -723,6 +725,12 @@
 	if(wearer)
 		wearer << "<span class='danger'>The [source] has [dam_module.damage >= 2 ? "destroyed" : "damaged"] your [dam_module.interface_name]!"
 	dam_module.deactivate()
+
+/obj/item/weapon/rig/proc/malfunction_check(var/mob/living/carbon/human/user)
+	if(malfunctioning)
+		user << "<span class='danger'>ERROR: Hardware fault. Rebooting interface...</span>"
+		return 1
+	return 0
 
 /*/obj/item/weapon/rig/proc/forced_move(dir)
 	if(locked_down)

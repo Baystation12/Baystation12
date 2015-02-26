@@ -75,6 +75,9 @@
 
 	..()
 
+/obj/item/weapon/rig/light/ninja/malfunction_check()
+	return 0 //even as strong as ninjas are, they may not be able to afford being blocked from switching modules for 20 seconds
+
 /obj/item/weapon/rig/light/stealth
 	name = "stealth suit control module"
 	suit_type = "stealth"
