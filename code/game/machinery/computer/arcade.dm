@@ -84,7 +84,7 @@
 
 /obj/machinery/computer/arcade/Topic(href, href_list)
 	if(..())
-		return
+		return 1
 
 	if (!src.blocked && !src.gameover)
 		if (href_list["attack"])

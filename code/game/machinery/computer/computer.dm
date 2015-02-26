@@ -109,12 +109,6 @@
 	if(istype(user, /mob/dead/observer)) return 0
 	return ..()
 
-/obj/machinery/computer/Topic(href, href_list)
-	/* Can't use topic as observer by default */
-	if(istype(usr, /mob/dead/observer)) return 0
-	return ..()
-
-
 /obj/machinery/computer/attackby(I as obj, user as mob)
 	if(istype(I, /obj/item/weapon/screwdriver) && circuit)
 		playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)

@@ -215,21 +215,21 @@ Max Output Pressure: [output_pressure] kPa<BR>"}
 
 /obj/machinery/computer/general_air_control/large_tank_control/Topic(href, href_list)
 	if(..())
-		return
+		return 1
 
 	if(href_list["adj_pressure"])
 		var/change = text2num(href_list["adj_pressure"])
 		pressure_setting = between(0, pressure_setting + change, 50*ONE_ATMOSPHERE)
 		spawn(1)
 			src.updateUsrDialog()
-		return
+		return 1
 
 	if(href_list["adj_input_flow_rate"])
 		var/change = text2num(href_list["adj_input_flow_rate"])
 		input_flow_setting = between(0, input_flow_setting + change, ATMOS_DEFAULT_VOLUME_PUMP + 500) //default flow rate limit for air injectors
 		spawn(1)
 			src.updateUsrDialog()
-		return
+		return 1
 	
 	if(!radio_connection)
 		return 0
@@ -239,26 +239,32 @@ Max Output Pressure: [output_pressure] kPa<BR>"}
 	if(href_list["in_refresh_status"])
 		input_info = null
 		signal.data = list ("tag" = input_tag, "status" = 1)
+		return 1
 
 	if(href_list["in_toggle_injector"])
 		input_info = null
 		signal.data = list ("tag" = input_tag, "power_toggle" = 1)
+		return 1
 
 	if(href_list["in_set_flowrate"])
 		input_info = null
 		signal.data = list ("tag" = input_tag, "set_volume_rate" = "[input_flow_setting]")
+		return 1
 
 	if(href_list["out_refresh_status"])
 		output_info = null
 		signal.data = list ("tag" = output_tag, "status" = 1)
+		return 1
 
 	if(href_list["out_toggle_power"])
 		output_info = null
 		signal.data = list ("tag" = output_tag, "power_toggle" = 1)
+		return 1
 
 	if(href_list["out_set_pressure"])
 		output_info = null
 		signal.data = list ("tag" = output_tag, "set_internal_pressure" = "[pressure_setting]")
+		return 1
 
 	signal.data["sigtype"]="command"
 	radio_connection.post_signal(src, signal, filter = RADIO_ATMOSIA)
@@ -329,21 +335,21 @@ Min Core Pressure: [pressure_limit] kPa<BR>"}
 
 /obj/machinery/computer/general_air_control/supermatter_core/Topic(href, href_list)
 	if(..())
-		return
+		return 1
 
 	if(href_list["adj_pressure"])
 		var/change = text2num(href_list["adj_pressure"])
 		pressure_setting = between(0, pressure_setting + change, 10*ONE_ATMOSPHERE)
 		spawn(1)
 			src.updateUsrDialog()
-		return
+		return 1
 
 	if(href_list["adj_input_flow_rate"])
 		var/change = text2num(href_list["adj_input_flow_rate"])
 		input_flow_setting = between(0, input_flow_setting + change, ATMOS_DEFAULT_VOLUME_PUMP + 500) //default flow rate limit for air injectors
 		spawn(1)
 			src.updateUsrDialog()
-		return
+		return 1
 	
 	if(!radio_connection)
 		return 0
@@ -353,26 +359,32 @@ Min Core Pressure: [pressure_limit] kPa<BR>"}
 	if(href_list["in_refresh_status"])
 		input_info = null
 		signal.data = list ("tag" = input_tag, "status" = 1)
+		return 1
 
 	if(href_list["in_toggle_injector"])
 		input_info = null
 		signal.data = list ("tag" = input_tag, "power_toggle" = 1)
+		return 1
 
 	if(href_list["in_set_flowrate"])
 		input_info = null
 		signal.data = list ("tag" = input_tag, "set_volume_rate" = "[input_flow_setting]")
+		return 1
 
 	if(href_list["out_refresh_status"])
 		output_info = null
 		signal.data = list ("tag" = output_tag, "status" = 1)
+		return 1
 
 	if(href_list["out_toggle_power"])
 		output_info = null
 		signal.data = list ("tag" = output_tag, "power_toggle" = 1)
+		return 1
 
 	if(href_list["out_set_pressure"])
 		output_info = null
 		signal.data = list ("tag" = output_tag, "set_external_pressure" = "[pressure_setting]", "checks" = 1)
+		return 1
 
 	signal.data["sigtype"]="command"
 	radio_connection.post_signal(src, signal, filter = RADIO_ATMOSIA)
