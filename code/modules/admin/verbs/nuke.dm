@@ -37,7 +37,6 @@
 			var/msg = i
 			world << "\red[msg]"
 		sleep(10)
-		enter_allowed = 0
 		if(ticker)
 			ticker.station_explosion_cinematic(0,null)
 			if(ticker.mode)

@@ -489,6 +489,7 @@
 	throw_range = 10
 	attack_verb = list("slices", "cuts", "stabs", "jabs")
 	sharp = 1
+	edge = 1
 	w_class = 2
 
 	suicide_act(mob/user)

@@ -157,14 +157,9 @@
 
 	if (is_sliceable())
 		//these are used to allow hiding edge items in food that is not on a table/tray
-		var/can_slice_here = isturf(src.loc) && ((locate(/obj/structure/table) in src.loc) || (locate(/obj/machinery/optable) in src.loc) || (locate(/obj/item/weapon/tray) in src.loc))
-		var/hide_item = !has_edge(W) || !can_slice_here
+		var/can_slice_here = isturf(src.loc) && ((locate(/obj/structure/table) in src.loc) || (locate(/obj/machinery/optable) in src.loc) || (locate(/obj/item/weapon/tray) in src.loc) || (locate(/obj/item/pizzabox) in src.loc))
+		var/hide_item = !has_edge(W) || !can_slice_here || !istype(W, /obj/item/weapon/wirecutters)
 
-			istype(W, /obj/item/weapon/improvised/scissorknife) || \
-			istype(W, /obj/item/weapon/wirecutters) || \
-			istype(W, /obj/item/weapon/scissors) || \
-			!(locate(/obj/item/weapon/tray) in src.loc) &&\
-			!(locate(/obj/item/pizzabox) in src.loc) \
 		if (hide_item)
 			if (W.w_class >= src.w_class || W.is_robot_module())
 				return
@@ -178,7 +173,7 @@
 			contents += W
 			return
 
-		if (has_edge(W))
+		if (has_edge(W) || istype(W, /obj/item/weapon/wirecutters))
 			if (!can_slice_here)
 				user << "\red You cannot slice [src] here! You need a table or at least a tray to do it."
 				return

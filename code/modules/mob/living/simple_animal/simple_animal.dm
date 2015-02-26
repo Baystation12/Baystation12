@@ -265,7 +265,6 @@
 				adjustBruteLoss(-medical_pack.heal_brute)
 				visible_message("<span class='warning'>\The [user] applies the [medical_pack] to \the [src].</span>")
 		else
-		if(istype(O, /obj/item/weapon/kitchenknife) || istype(O, /obj/item/weapon/butch) || istype(O, /obj/item/weapon/improvised/scissorknife))
 			user << "<span class='warning'>\The [src] cannot benefit from medical items in its current state.</span>"
 		return
 

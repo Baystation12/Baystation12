@@ -109,7 +109,6 @@
 	desc = "A Paper flower."
 	item_state = "paperflower"
 	icon_state = "paperflower"
-	flags = FPRINT|TABLEPASS
 	slot_flags = SLOT_MASK
 	body_parts_covered = FACE|EYES
 

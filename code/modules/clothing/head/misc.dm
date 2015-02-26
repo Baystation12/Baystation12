@@ -244,7 +244,6 @@
 	desc = "A Paper Crown. Long Live The King!"
 	icon_state = "papercrown"
 	item_state = "papercrown"
-	flags = FPRINT|TABLEPASS
 	flags_inv = HIDEEARS
 
 //Paper flower hat thingy stuff
@@ -252,7 +251,7 @@
 	name = "paper flower"
 	desc = "A Paper Flower. To put in your hair."
 	icon_state = "paperFlower_H"
-	flags = FPRINT|TABLEPASS
+
 /obj/item/clothing/head/philosopher_wig
 	name = "natural philosopher's wig"
 	desc = "A stylish monstrosity unearthed from Earth's Renaissance period. With this most distinguish'd wig, you'll be ready for your next soiree!"
