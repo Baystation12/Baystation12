@@ -73,7 +73,7 @@ nanoui is used to open and update nano browser uis
   *
   * @return /nanoui new nanoui object
   */
-/datum/nanoui/New(nuser, nsrc_object, nui_key, ntemplate_filename, ntitle = 0, nwidth = 0, nheight = 0, var/atom/nref = null, var/datum/nanoui/master_ui = null, var/datum/topic_state/custom_state = null)
+/datum/nanoui/New(nuser, nsrc_object, nui_key, ntemplate_filename, ntitle = 0, nwidth = 0, nheight = 0, var/atom/nref = null, var/datum/nanoui/master_ui = null, var/datum/topic_state/custom_state = default_state)
 	user = nuser
 	src_object = nsrc_object
 	ui_key = nui_key
@@ -82,7 +82,7 @@ nanoui is used to open and update nano browser uis
 	src.master_ui = master_ui
 	if(master_ui)
 		master_ui.children += src
-	src.custom_state = custom_state ? custom_state : new/datum/topic_state()
+	src.custom_state = custom_state
 
 	// add the passed template filename as the "main" template, this is required
 	add_template("main", ntemplate_filename)
