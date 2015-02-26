@@ -30,10 +30,9 @@
 	desc = "An electronically-lockable pod for growing organic tissue."
 	density = 1
 	anchored = 1
-	icon = 'icons/obj/cloning.dmi'
-	icon_state = "pod_0"
+	icon = 'icons/obj/vat.dmi'
+	icon_state = "pod0"
 	req_access = list(access_genetics) //For premature unlocking.
-
 	var/mob/living/occupant
 	var/heal_level = 20 //The clone is released once its health reaches this level.
 	var/heal_rate = 1
@@ -44,6 +43,7 @@
 	var/attempting = 0 //One clone attempt at a time thanks
 	var/eject_wait = 0 //Don't eject them as soon as they are created fuckkk
 	var/biomass = CLONE_BIOMASS * 3
+	var/image/lid
 
 /obj/machinery/clonepod/New()
 	..()
@@ -57,8 +57,10 @@
 	component_parts += new /obj/item/stack/cable_coil(src, 2)
 
 	RefreshParts()
+	update_icon()
 
 /obj/machinery/clonepod/attack_ai(mob/user as mob)
+
 	add_hiddenprint(user)
 	return attack_hand(user)
 
@@ -77,6 +79,7 @@
 	if(mess || attempting)
 		return 0
 	var/datum/mind/clonemind = locate(R.mind)
+
 	if(!istype(clonemind, /datum/mind))	//not a mind
 		return 0
 	if(clonemind.current && clonemind.current.stat != DEAD)	//mind is associated with a non-dead body
@@ -106,7 +109,6 @@
 		R.dna.real_name = "clone ([rand(0,999)])"
 	H.real_name = R.dna.real_name
 
-	icon_state = "pod_1"
 	//Get the clone body ready
 	H.adjustCloneLoss(150) // New damage var so you can't eject a clone early then stab them to abuse the current damage system --NeoFite
 	H.adjustBrainLoss(80) // Even if healed to full health, it will have some brain damage
@@ -148,6 +150,7 @@
 		H.dna.UpdateUI()
 
 	H.set_cloned_appearance()
+	update_icon()
 
 	for(var/datum/language/L in R.languages)
 		H.add_language(L.name)
@@ -209,9 +212,6 @@
 		occupant = null
 		if(locked)
 			locked = 0
-		if(!mess)
-			icon_state = "pod_0"
-		//use_power(200)
 		return
 
 	return
@@ -256,7 +256,7 @@
 		else
 			if(anchored)
 				anchored = 0
-				connected.pod1 = null
+				connected.pods -= src
 				connected = null
 			else
 				anchored = 1
@@ -275,7 +275,7 @@
 	if(!message)
 		return 0
 
-	connected.temp = message
+	connected.temp = "[name] : [message]"
 	connected.updateUsrDialog()
 	return 1
 
@@ -311,41 +311,29 @@
 	if(mess) //Clean that mess and dump those gibs!
 		mess = 0
 		gibs(loc)
-		icon_state = "pod_0"
-
-		/*
-		for(var/obj/O in src)
-			O.loc = loc
-		*/
+		update_icon()
 		return
 
 	if(!(occupant))
 		return
 
-	/*
-	for(var/obj/O in src)
-		O.loc = loc
-	*/
-
 	if(occupant.client)
 		occupant.client.eye = occupant.client.mob
 		occupant.client.perspective = MOB_PERSPECTIVE
 	occupant.loc = loc
-	icon_state = "pod_0"
 	eject_wait = 0 //If it's still set somehow.
 	domutcheck(occupant) //Waiting until they're out before possible monkeyizing.
-//	occupant.add_side_effect("Bad Stomach") // Give them an extra side-effect for free.
 	occupant = null
 
 	biomass -= CLONE_BIOMASS
-
+	update_icon()
 	return
 
 /obj/machinery/clonepod/proc/malfunction()
 	if(occupant)
 		connected_message("Critical Error!")
 		mess = 1
-		icon_state = "pod_g"
+		update_icon()
 		occupant.ghostize()
 		spawn(5)
 			del(occupant)
@@ -386,6 +374,26 @@
 				return
 		else
 	return
+
+/obj/machinery/clonepod/update_icon()
+	..()
+	var/state = (stat & NOPOWER) ? 0 : 1
+	icon_state = "pod[state]"
+	if(!lid)
+		lid = new("icon"=icon, icon_state="lid[state]")
+
+	if (occupant)
+		overlays.Cut()
+		var/image/pickle = new
+		pickle.icon = occupant.icon
+		pickle.icon_state = occupant.icon_state
+		pickle.overlays = occupant.overlays
+		pickle.pixel_y = 20
+		overlays += pickle
+		lid.icon_state = "lid[state]"
+		overlays += lid
+	else if (overlays.len)
+		overlays.Cut()
 
 //Health Tracker Implant
 
