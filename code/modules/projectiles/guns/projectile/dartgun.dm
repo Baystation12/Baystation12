@@ -165,6 +165,7 @@
 	return 0
 
 /obj/item/weapon/gun/projectile/dartgun/Topic(href, href_list)
+	if(..()) return 1
 	src.add_fingerprint(usr)
 	if(href_list["stop_mix"])
 		var/index = text2num(href_list["stop_mix"])

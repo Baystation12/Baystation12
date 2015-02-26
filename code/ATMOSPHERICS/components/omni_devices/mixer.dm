@@ -172,7 +172,7 @@
 	return data
 
 /obj/machinery/atmospherics/omni/mixer/Topic(href, href_list)
-	if(..()) return
+	if(..()) return 1
 
 	switch(href_list["command"])
 		if("power")

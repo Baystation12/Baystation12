@@ -59,7 +59,7 @@
 
 /obj/machinery/computer/engines/Topic(href, href_list)
 	if(..())
-		return
+		return 1
 
 	if(href_list["state"])
 		state = href_list["state"]
