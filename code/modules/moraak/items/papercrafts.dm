@@ -11,6 +11,7 @@
 	item_state = "scissor"
 	force = 5
 	sharp = 1
+	edge = 1
 	w_class = 2
 	matter = list("metal" = 12000)
 	origin_tech = "materials=1"

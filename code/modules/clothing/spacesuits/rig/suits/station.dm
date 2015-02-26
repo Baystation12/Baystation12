@@ -23,10 +23,10 @@
 
 //Chief Engineer's rig. This is sort of a halfway point between the old hardsuits (voidsuits) and the rig class.
 /obj/item/weapon/rig/ce
-
+// You have no idea how much I hate this thing. -Woothie
 	name = "advanced voidsuit control module"
 	suit_type = "advanced voidsuit"
-	desc = "An advanced voidsuit that protects against hazardous, low pressure environments. Shines with a high polish."
+	desc = "An advanced voidsuit that protects against hazardous, low pressure environments. Shines with a high polish. Apply directly to the back."
 	icon_state = "ce_rig"
 	armor = list(melee = 60, bullet = 50, laser = 30,energy = 15, bomb = 30, bio = 30, rad = 30)
 	slowdown = 0
