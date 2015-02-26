@@ -250,6 +250,23 @@ macro "hotkeymode"
 		command = ".south"
 		is-disabled = false
 	elem 
+		name = "ALT+WEST"
+		command = "westfaceperm"
+		is-disabled = false
+		is-disabled = false
+	elem 
+		name = "ALT+NORTH"
+		command = "northfaceperm"
+		is-disabled = false
+	elem 
+		name = "ALT+EAST"
+		command = "eastfaceperm"
+		is-disabled = false
+	elem 
+		name = "ALT+SOUTH"
+		command = "southfaceperm"
+		is-disabled = false
+	elem 
 		name = "INSERT"
 		command = "a-intent right"
 		is-disabled = false
