@@ -7,6 +7,7 @@
 	slowdown = 3
 	offline_slowdown = 10
 	offline_vision_restriction = 2
+	emp_protection = -20
 
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/storage/bag/ore,/obj/item/device/t_scanner,/obj/item/weapon/pickaxe, /obj/item/weapon/rcd)
 
