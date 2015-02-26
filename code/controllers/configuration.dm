@@ -606,7 +606,8 @@
 					config.event_delay_upper[EVENT_LEVEL_MAJOR] = MinutesToTicks(values[3])
 
 				if("starlight")
-					config.starlight = 1
+					value = text2num(value)
+					config.starlight = value >= 0 ? value : 0
 
 				else
 					log_misc("Unknown setting in configuration: '[name]'")
