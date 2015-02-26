@@ -1,11 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: code\game\machinery\phoron_desublimer.dm;code\modules\mob\living\carbon\human\human.dm;code\game\objects\items\weapons\RCD.dm;baystation12.dme;code\game\machinery\jukebox.dm;icons\obj\atmos.dmi;maps\apollo-1.dmm;code\game\objects\items\weapons\shards.dm;icons\obj\shards.dmi;code\game\objects\items\weapons\sm_shard.dm;maps\apollo-3.dmm;maps\apollo-2.dmm
+WINDOW: code\game\machinery\phoron_desublimer.dm;code\game\machinery\atmoalter\canister.dm;code\ATMOSPHERICS\components\unary\heat_source.dm;icons\obj\machines\phoron_compressor.dmi;code\game\machinery\jukebox.dm;icons\obj\atmos.dmi;maps\apollo-1.dmm
 LAST_COMPILE_VERSION: 506.1249
-DIR: code code\__HELPERS code\ATMOSPHERICS code\ATMOSPHERICS\components code\ATMOSPHERICS\components\unary code\controllers code\datums code\datums\spells code\datums\wires code\defines code\defines\procs code\game code\game\area code\game\gamemodes code\game\machinery code\game\objects code\game\objects\items code\game\objects\items\weapons code\modules code\modules\mob code\modules\mob\living code\modules\mob\living\carbon code\modules\mob\living\carbon\human icons icons\obj maps 
-FILE: maps\apollo-2.dmm
-LAST_COMPILE_TIME: 1424895161
+DIR: code code\__HELPERS code\ATMOSPHERICS code\ATMOSPHERICS\components code\ATMOSPHERICS\components\binary_devices code\ATMOSPHERICS\components\omni_devices code\ATMOSPHERICS\components\unary code\controllers code\datums code\datums\spells code\datums\wires code\game code\game\machinery code\game\machinery\atmoalter code\modules code\modules\mob icons icons\mob icons\obj icons\obj\machines maps 
+FILE: maps\apollo-1.dmm
+LAST_COMPILE_TIME: 1424961777
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS

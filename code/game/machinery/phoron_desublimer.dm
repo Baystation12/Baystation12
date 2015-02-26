@@ -16,7 +16,6 @@ The process works like this:
 		Some materials, such as osmium and phoron, produce so little amount that you may get nothing unless the neutron flow matches the peak.
 	6.) Activate the machine.
 	7.) Congrats, you now have some bars!
-
 */
 
 /obj/machinery/phoron_desublimer
@@ -40,28 +39,88 @@ The process works like this:
 /*  //////// HYPERINDUCTOR ////////
 	Superheats gas sent into it, up to 500,000 K
 */
-/obj/machinery/phoron_desublimer/inductor
+/obj/machinery/atmospherics/unary/heater/inductor
 	name = "Hyperinductor"
 	desc = "Gas goes into here to be superheated to prepare for crystalization."
-	icon_state = "Pumped"
-	var/datum/gas_mixture/air_contents = new
-	var/heating_power = 500000
-	active_power_usage = 500000
-	var/set_temperature = 100000
+	icon = 'icons/obj/machines/phoron_compressor.dmi'
+	icon_state = "Inactive"
+
+	set_temperature = T20C	//thermostat
+	max_temperature = T20C + 500000
+	internal_volume = 1000	//L
+
+	use_power = 0
+	idle_power_usage = 5			//5 Watts for thermostat related circuitry
+
+	max_power_rating = 500000	//power rating when the usage is turned up to 100
+	power_setting = 100
 
 	New()
 		..()
-		icon_state = "Pumped"
+
+		component_parts = list()
+		component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)
+		component_parts += new /obj/item/weapon/stock_parts/capacitor(src)
+		component_parts += new /obj/item/weapon/stock_parts/capacitor(src)
+		component_parts += new /obj/item/weapon/stock_parts/capacitor(src)
+		component_parts += new /obj/item/weapon/stock_parts/capacitor(src)
+
+	update_icon()
+		if(src.node)
+			if(src.use_power && src.heating)
+				icon_state = "Active"
+			else
+				icon_state = "Inactive"
+		else
+			icon_state = "Inactive"
+		return
+
+/*
+	New()
+		..()
+		icon_state = "Inactive"
+		air_contents.volume = internal_volume
+
+		component_parts = list()
+		component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)
+		component_parts += new /obj/item/weapon/stock_parts/capacitor(src)
+		component_parts += new /obj/item/weapon/stock_parts/capacitor(src)
+		component_parts += new /obj/item/weapon/stock_parts/capacitor(src)
+		component_parts += new /obj/item/weapon/stock_parts/capacitor(src)
+
+	update_icon()
+		..()
+
+		if(src.heating)
+			icon_state = "Active"
+		else
+			icon_state = "Inactive"
+
+		return
 
 	process()
 		..()
 
-		air_contents.react()
-
-		idle_power_usage = 0
+		idle_power_usage = 5
 		if( active & ready )
-			icon_state = "Pumping"
+			icon_state = "Heating"
 			heat_gas()
+
+		if(stat & (NOPOWER|BROKEN) || !use_power)
+			heating = 0
+			update_icon()
+			return
+
+		if (network && air_contents.total_moles && air_contents.temperature < set_temperature)
+			air_contents.add_thermal_energy( heat_power )
+			use_power(power_rating)
+
+			heating = 1
+			network.update = 1
+		else
+			heating = 0
+
+		update_icon()
 
 	report_ready()
 		ready = 0
@@ -80,15 +139,48 @@ The process works like this:
 
 	proc/heat_gas() // Heating the contained gas
 		var/heat_transfer = air_contents.get_thermal_energy_change(set_temperature)
-
-		heat_transfer = min( heat_transfer , heating_power ) //limit by the power rating of the heater
+		heat_transfer = min( heat_transfer, heating_power ) //limit by the power rating of the heater
+		air_contents.add_thermal_energy(heat_transfer)
 
 		idle_power_usage = heat_transfer
-		air_contents.add_thermal_energy(heat_transfer)
+
+	proc/change_temperature( var/change )
+		set_temperature += change
+
+		if( set_temperature < 0 )
+			set_temperature = 0
+		else if( set_temperature > max_temperature )
+			set_temperature = max_temperature
+*/
 
 /*  //////// PHORON REACTANT VESSEL ////////
 	Recieves superheated gas from the Hyperinductor, turns it into supermatter shards
 */
+
+
+/obj/machinery/portable_atmospherics/react_vessel
+	name = "Reactant Vessel"
+	desc = "Created supermatter shards from high-temperature phoron."
+	icon_state = "ProcessorEmpty"
+	active_power_usage = 10000
+
+	density = 1
+	var/health = 100.0
+	flags = CONDUCT
+
+	var/valve_open = 0
+
+
+	var/canister_color = "yellow"
+	var/can_label = 1
+	start_pressure = 45 * ONE_ATMOSPHERE
+	pressure_resistance = 1000 * ONE_ATMOSPHERE
+	var/temperature_resistance = 1000 + T0C
+	volume = 1000
+	use_power = 0
+	var/release_log = ""
+	var/update_flag = 0
+
 /obj/machinery/phoron_desublimer/vessel
 	name = "Reactant Vessel"
 	desc = "Created supermatter shards from high-temperature phoron."
@@ -98,6 +190,13 @@ The process works like this:
 
 	New()
 		..()
+
+		component_parts = list()
+		component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)
+		component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)
+		component_parts += new /obj/item/weapon/stock_parts/capacitor(src)
+		component_parts += new /obj/item/weapon/stock_parts/capacitor(src)
+		component_parts += new /obj/item/weapon/stock_parts/capacitor(src)
 
 	process()
 		..()
@@ -114,15 +213,7 @@ The process works like this:
 		active = 0
 
 	report_ready()
-		ready = 0
-		var/list/machine = list( "inductor" = 0 )
-
-		for( var/obj/machinery/phoron_desublimer/M in orange(src) )
-			if( istype( M, /obj/machinery/phoron_desublimer/inductor ))
-				machine["inductor"] = 1
-
-		if( machine["inductor"] )
-			ready = 1
+		ready = 1
 
 		..()
 
@@ -171,6 +262,12 @@ The process works like this:
 
 	New()
 		..()
+		component_parts = list()
+		component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)
+		component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)
+		component_parts += new /obj/item/weapon/stock_parts/capacitor(src)
+		component_parts += new /obj/item/weapon/stock_parts/capacitor(src)
+
 
 		/*
 		for( var/i = 1, i <= output_peak.len, i++ )
@@ -287,10 +384,9 @@ The process works like this:
 	var/active = 0
 	var/assembled = 0
 
-	var/list/machine = list( "inductor", "vessel", "furnace" )
-	var/list/obj/machinery/phoron_desublimer/machine_ref = list( "inductor" = null, "vessel" = null, "furnace" = null )
-	var/list/obj/machinery/phoron_desublimer/machine_obj = list( "inductor" = /obj/machinery/phoron_desublimer/inductor,
-								 								 "vessel" = /obj/machinery/phoron_desublimer/vessel,
+	var/list/machine = list( "vessel", "furnace" )
+	var/list/obj/machinery/phoron_desublimer/machine_ref = list( "vessel" = null, "furnace" = null )
+	var/list/obj/machinery/phoron_desublimer/machine_obj = list( "vessel" = /obj/machinery/phoron_desublimer/vessel,
 																 "furnace" = /obj/machinery/phoron_desublimer/furnace )
 
 	New()
@@ -351,10 +447,11 @@ The process works like this:
 					dat += "<BR>"
 					if( istype( type, /obj/machinery/phoron_desublimer/furnace ))
 						var/obj/machinery/phoron_desublimer/furnace/furnace = type
-						dat += "<b>Neutron Flow:</b> [furnace.neutron_flow]<BR>"
+						dat += "<b>Neutron Flow:</b><BR>"
 						dat += "<A href='?src=\ref[src];furnace_n10=1'>---</A> "
 						dat += "<A href='?src=\ref[src];furnace_n1=1'>--</A> "
 						dat += "<A href='?src=\ref[src];furnace_n01=1'>-</A> "
+						dat += "   [furnace.neutron_flow]   "
 						dat += "<A href='?src=\ref[src];furnace_01=1'>+</A> "
 						dat += "<A href='?src=\ref[src];furnace_1=1'>++</A> "
 						dat += "<A href='?src=\ref[src];furnace_10=1'>+++</A> <BR><BR>"
