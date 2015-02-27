@@ -8,12 +8,16 @@
 	var/list/data = null
 	var/volume = 0
 	var/metabolism = REM // This would be 0.2 normally
+	var/ingest_met = 0
+	var/touch_met = 0
 	var/list/filtering_organs = null // These organs help in chemical removal if they are working
 	var/list/filtering_speed = null
 	var/dose = 0
 	var/max_dose = 0
-	var/overdose = 0
-	var/addictive = 0
+	var/overdose_blood = 0
+	var/overdose_ingest = 0
+	var/addiction = null
+	var/addiction_strength = 0
 	var/scannable = 0 // Shows up on health analyzers.
 	var/painkiler = 0
 	var/affects_dead = 0
@@ -30,10 +34,10 @@
 	holder.trans_id_to(M, id, volume)
 	return
 
-/datum/reagent/proc/touch_obj(var/obj/O) // Cleaner cleaning, lube lubbing, etc, all go here
+/datum/reagent/proc/touch_obj(var/obj/O) // Acid melting, cleaner cleaning, etc
 	return
 
-/datum/reagent/proc/touch_turf(var/turf/T) // Acid melting, cleaner cleaning, etc
+/datum/reagent/proc/touch_turf(var/turf/T) // Cleaner cleaning, lube lubbing, etc, all go here
 	return
 
 /datum/reagent/proc/on_mob_life(var/mob/living/carbon/M, var/alien) // Currently, on_mob_life is called on carbons. Any interaction with non-carbon mobs (lube) will need to be done in touch_mob.
@@ -41,13 +45,13 @@
 		return
 	if(!affects_dead && M.stat == DEAD)
 		return
-	if(overdose && (((state == CHEM_BLOOD) && (volume > overdose)) || ((state == CHEM_INGEST) && (volume > overdose * 2))))
-		overdose(M, alien) // Swallowing gives smaller effects, but is harder to overdose.
+	if((overdose_blood && (state == CHEM_BLOOD) && dose > overdose_blood) || (overdose_ingest && (state == CHEM_INGEST) && dose > overdose_ingest))
+		overdose(M, alien)
 	var/removed = metabolism
-	if(state == CHEM_TOUCH)
-		removed *= 2
-	if(state == CHEM_INGEST)
-		removed *= 3
+	if(ingest_met && (state == CHEM_INGEST))
+		removed = ingest_met
+	if(touch_met && (state == CHEM_TOUCH))
+		removed = touch_met
 	removed = min(removed, volume)
 	max_dose = max(volume, max_dose)
 	dose = min(dose + removed, max_dose)
@@ -66,17 +70,19 @@
 				if(O)
 					if(O.is_broken())
 						broken_organ(M, alien, removed, name)
-						return
-					if(O.is_bruised())
+					else if(O.is_bruised())
 						remove_self(filtering_speed[i] * 0.5)
 						bruised_organ(M, alien, removed, name)
-						return
-					remove_self(filtering_speed[i])
+					else
+						remove_self(filtering_speed[i])
 				else
 					if(M.species.has_organ[name]) // Let's not kill dionae for not having a liver
 						missing_organ(M, alien, removed, name)
 					else
 						no_organ(M, alien, removed, name)
+	if(addiction && ishuman(M))
+		var/mob/living/carbon/human/H = M
+		H.addict(addiction, addiction_strength * removed)
 	return
 
 /datum/reagent/proc/bruised_organ(var/mob/living/carbon/M, var/alien, var/removed, var/name) // Organ exists but is bruised
@@ -276,6 +282,33 @@
 			remove_self(volume)
 		return
 
+/datum/reagent/fuel
+	name = "Welding fuel"
+	id = "fuel"
+	description = "Required for welders. Flamable."
+	reagent_state = LIQUID
+	color = "#660000"
+
+	glass_icon_state = "dr_gibb_glass"
+	glass_name = "glass of welder fuel"
+	glass_desc = "Unless you are an industrial tool, this is probably not safe for consumption."
+
+/datum/reagent/fuel/touch_turf(var/turf/T)
+	new /obj/effect/decal/cleanable/liquid_fuel(T, volume)
+	remove_self(volume)
+	return
+
+/datum/reagent/fuel/affect_mob(var/mob/living/carbon/M, var/alien, var/removed)
+	if(state == CHEM_INGEST)
+		M.adjustToxLoss(1 * removed)
+		return
+	if(state == CHEM_BLOOD)
+		M.adjustToxLoss(2 * removed)
+		return
+	if(state == CHEM_TOUCH) // Splashing people with welding fuel to make them easy to ignite!
+		M.adjust_fire_stacks(0.1 * removed)
+		return
+
 /* Basic dispenser chemicals */
 
 /datum/reagent/aluminum
@@ -317,7 +350,7 @@
 	description = "A highly ductile metal."
 	color = "#6E3B08"
 
-/datum/reagent/ethanol // TODO
+/datum/reagent/ethanol
 	name = "Ethanol" //Parent class for all alcoholic reagents.
 	id = "ethanol"
 	description = "A well-known alcohol with a variety of applications."
@@ -325,19 +358,11 @@
 	color = "#404030"
 	filtering_organs = list("liver")
 	filtering_speed = list(REM)
+	addiction = /datum/addiction/alcohol
+	addiction_strength = 1
 	var/nutriment_factor = 0
-	var/dizzy_start = 0			// Dose, in units, after which mob gets dizzy
-	var/dizzy_add = 3			// How much dizziness per tick
-	var/drowsy_start = 0		// Ditto, drowsyness
-	var/drowsy_add = 0
-	var/slurr_start = 40		// Ditto
-	var/slurr_add = 3
-	var/confused_start = 50
-	var/confused_add = 2
-	var/blur_start = 60
-	var/toxic_dose = 70
+	var/strength = 10 // This is, essentially, units between stages - the lower, the stronger. Less fine tuning, more clarity.
 	var/toxicity = 1
-	var/pass_out = 80
 
 	glass_icon_state = "glass_clear"
 	glass_name = "glass of ethanol"
@@ -348,7 +373,7 @@
 		M.adjust_fire_stacks(removed / 15)
 		return
 	if(state == CHEM_BLOOD)
-		M.adjustToxLoss(removed * 2)
+		M.adjustToxLoss(removed * 2 * toxicity)
 		return
 	M.nutrition += nutriment_factor * removed
 
@@ -358,17 +383,17 @@
 	if(alien == IS_DIONA)
 		strength_mod = 0
 
-	if(dose / strength_mod >= dizzy_start)
-		M.make_dizzy(dizzy_add)
-	if(dose / strength_mod >= drowsy_start)
-		M.drowsyness += drowsy_add
-	if(dose / strength_mod >= slurr_start)
-		M.slurring += slurr_add
-	if(dose / strength_mod >= confused_start)
-		M.confused += confused_add
-	if(dose / strength_mod >= blur_start)
+	if(dose / strength_mod >= strength) // Early warning
+		M.make_dizzy(5) // It is decreased at the speed of 3 per tick
+	if(dose / strength_mod >= strength * 4)
+		M.slurring = max(M.slurring, 30)
+	if(dose / strength_mod >= strength * 5)
+		M.confused = max(M.confused, 20)
+	if(dose / strength_mod >= strength * 6)
 		M.eye_blurry = max(M.eye_blurry, 10)
-	if(dose / strength_mod >= toxic_dose)
+	if(dose / strength_mod >= strength * 7)
+		M.drowsyness = max(M.drowsyness, 20)
+	if(dose / strength_mod >= strength * 8)
 		if(ishuman(M))
 			var/mob/living/carbon/human/H = M
 			var/datum/organ/internal/liver/O = H.internal_organs_by_name["liver"]
@@ -382,7 +407,7 @@
 					M.adjustToxLoss(removed * toxicity * 0.5) // This is in addition to the damage caused just by drinking
 		else
 			M.adjustToxLoss(removed * toxicity)
-	if(dose / strength_mod >= pass_out)
+	if(dose / strength_mod >= strength * 9)
 		M.paralysis = max(M.paralysis, 20)
 		M.sleeping  = max(M.sleeping, 30)
 
@@ -444,7 +469,7 @@
 
 /datum/reagent/iron/affect_mob(var/mob/living/carbon/M, var/alien, var/removed)
 	if(state == CHEM_INGEST && alien != IS_DIONA)
-		M.chem_effects.Add("Iron")
+		M.add_chemical_effect(CE_BLOODRESTORE, 8 * removed)
 
 /datum/reagent/lithium
 	name = "Lithium"
@@ -697,7 +722,8 @@
 	description = "Inaprovaline is a synaptic stimulant and cardiostimulant. Commonly used to stabilize patients."
 	reagent_state = LIQUID
 	color = "#00BFFF"
-	overdose = REAGENTS_OVERDOSE * 2
+	overdose_blood = REAGENTS_OVERDOSE * 2
+	overdose_ingest = REAGENTS_OVERDOSE * 4
 	metabolism = REM * 0.5
 	scannable = 1
 	painkiler = 25
@@ -706,7 +732,8 @@
 	if(state == CHEM_TOUCH)
 		return
 	if(alien != IS_DIONA)
-		M.chem_effects.Add("Nocrit")
+		M.add_chemical_effect(CE_STABLE)
+		M.add_chemical_effect(CE_PAINKILLER, 25)
 
 /datum/reagent/bicaridine
 	name = "Bicaridine"
@@ -714,7 +741,8 @@
 	description = "Bicaridine is an analgesic medication and can be used to treat blunt trauma."
 	reagent_state = LIQUID
 	color = "#BF0000"
-	overdose = REAGENTS_OVERDOSE
+	overdose_blood = REAGENTS_OVERDOSE
+	overdose_ingest = REAGENTS_OVERDOSE * 2
 	scannable = 1
 
 /datum/reagent/bicaridine/affect_mob(var/mob/living/carbon/M as mob, var/alien, var/removed)
@@ -730,7 +758,8 @@
 	description = "Metorapan is an analgesic medication that is more effective than Bicaridine."
 	reagent_state = LIQUID
 	color = "#BF3030"
-	overdose = REAGENTS_OVERDOSE
+	overdose_blood = REAGENTS_OVERDOSE * 0.5
+	overdose_ingest = REAGENTS_OVERDOSE
 	scannable = 1
 
 /datum/reagent/metorapan/affect_mob(var/mob/living/carbon/M as mob, var/alien, var/removed)
@@ -746,7 +775,8 @@
 	description = "Kelotane is a drug used to treat burns."
 	reagent_state = LIQUID
 	color = "#FFA800"
-	overdose = REAGENTS_OVERDOSE
+	overdose_blood = REAGENTS_OVERDOSE
+	overdose_ingest = REAGENTS_OVERDOSE * 2
 	scannable = 1
 
 /datum/reagent/kelotane/affect_mob(var/mob/living/carbon/M as mob, var/alien, var/removed)
@@ -762,7 +792,8 @@
 	description = "Dermaline is the next step in burn medication. Works twice as good as kelotane and enables the body to restore even the direst heat-damaged tissue."
 	reagent_state = LIQUID
 	color = "#FF8000"
-	overdose = REAGENTS_OVERDOSE / 2
+	overdose_blood = REAGENTS_OVERDOSE * 0.5
+	overdose_ingest = REAGENTS_OVERDOSE
 	scannable = 1
 
 /datum/reagent/dermaline/affect_mob(var/mob/living/carbon/M as mob, var/alien, var/removed)
@@ -795,7 +826,8 @@
 	description = "Dexalin is used in the treatment of oxygen deprivation."
 	reagent_state = LIQUID
 	color = "#0080FF"
-	overdose = REAGENTS_OVERDOSE
+	overdose_blood = REAGENTS_OVERDOSE
+	overdose_ingest = REAGENTS_OVERDOSE * 2
 	scannable = 1
 
 /datum/reagent/dexalin/affect_mob(var/mob/living/carbon/M as mob, var/alien, var/removed)
@@ -815,7 +847,8 @@
 	description = "Dexalin Plus is used in the treatment of oxygen deprivation. It is highly effective."
 	reagent_state = LIQUID
 	color = "#0040FF"
-	overdose = REAGENTS_OVERDOSE/2
+	overdose_blood = REAGENTS_OVERDOSE * 0.5
+	overdose_ingest = REAGENTS_OVERDOSE
 	scannable = 1
 
 /datum/reagent/dexalin/affect_mob(var/mob/living/carbon/M as mob, var/alien, var/removed)
@@ -848,6 +881,17 @@
 
 /* Other medicine */
 
+/datum/reagent/spaceacillin
+	name = "Spaceacillin"
+	id = "spaceacillin"
+	description = "An all-purpose antiviral agent."
+	reagent_state = LIQUID
+	color = "#C1C1C1"
+	metabolism = REM * 0.05
+	overdose_blood = REAGENTS_OVERDOSE
+	overdose_ingest = REAGENTS_OVERDOSE * 2
+	scannable = 1
+
 /* Toxins, poisons, venoms, drugs */
 
 /datum/reagent/toxin
@@ -866,6 +910,26 @@
 	if(power && alien != IS_DIONA) // TODO: liver
 		M.adjustToxLoss(power * removed * effect)
 
+/datum/reagent/toxin/fertilizer //Reagents used for plant fertilizers.
+	name = "fertilizer"
+	id = "fertilizer"
+	description = "A chemical mix good for growing plants with."
+	reagent_state = LIQUID
+	power = 0.5 //It's not THAT poisonous.
+	color = "#664330"
+
+/datum/reagent/toxin/fertilizer/eznutrient
+	name = "EZ Nutrient"
+	id = "eznutrient"
+
+/datum/reagent/toxin/fertilizer/left4zed
+	name = "Left-4-Zed"
+	id = "left4zed"
+
+/datum/reagent/toxin/fertilizer/robustharvest
+	name = "Robust Harvest"
+	id = "robustharvest"
+
 /datum/reagent/soporific
 	name = "Soporific"
 	id = "soporific"
@@ -873,13 +937,14 @@
 	reagent_state = LIQUID
 	color = "#009CA8" // rgb: 232, 149, 204
 	metabolism = REM * 0.5
-	overdose = REAGENTS_OVERDOSE
+	overdose_blood = REAGENTS_OVERDOSE
+	overdose_ingest = REAGENTS_OVERDOSE * 2
 
 /datum/reagent/soporific/affect_mob(var/mob/living/carbon/M as mob, var/alien, var/removed)
 	if(state != CHEM_BLOOD || alien == IS_DIONA)
 		return
 	if(dose < 1)
-		if(prob(5))
+		if(dose == metabolism * 2 || prob(5))
 			M.emote("yawn")
 	else if(dose < 1.5)
 		M.eye_blurry = max(M.eye_blurry, 10)
@@ -898,7 +963,8 @@
 	reagent_state = LIQUID
 	color = "#60A584"
 	metabolism = REM * 0.5
-	overdose = REAGENTS_OVERDOSE
+	overdose_blood = REAGENTS_OVERDOSE
+	overdose_ingest = REAGENTS_OVERDOSE * 2
 
 /datum/reagent/space_drugs/affect_mob(var/mob/living/carbon/M as mob, var/alien, var/removed)
 	M.druggy = max(M.druggy, 15)
@@ -926,7 +992,33 @@
 		M.adjustToxLoss(0.1 * removed)
 		return
 	M.heal_organ_damage(0.5 * removed, 0)
-	M.nutrition += nutriment_factor // For hunger and fatness
+	M.nutrition += nutriment_factor * removed // For hunger and fatness
+	M.add_chemical_effect(CE_BLOODRESTORE, 4 * removed)
+
+/datum/reagent/nutriment/protein // Bad for Skrell!
+	name = "animal protein"
+	id = "protein"
+	color = "#440000"
+
+/datum/reagent/nutriment/protein/affect_mob(var/mob/living/carbon/M, var/alien, var/removed)
+	if(alien && alien == IS_SKRELL)
+		M.adjustToxLoss(0.5 * removed)
+		return
+	..()
+
+/datum/reagent/nutriment/sprinkles
+	name = "Sprinkles"
+	id = "sprinkles"
+	description = "Multi-colored little bits of sugar, commonly found on donuts. Loved by cops."
+	nutriment_factor = 1
+	color = "#FF00FF"
+
+/*if(istype(M, /mob/living/carbon/human) && M.job in list("Security Officer", "Head of Security", "Detective", "Warden")) <- they used to heal security. Leaving the old code there.
+	if(!M) M = holder.my_atom
+	M.heal_organ_damage(1,1)
+	M.nutrition += nutriment_factor
+	..()
+	return*/
 
 /* Drinks */
 
@@ -956,6 +1048,95 @@
 		if(adj_temp < 0 && M.bodytemperature > 310)
 			M.bodytemperature = min(310, M.bodytemperature - (adj_temp * TEMPERATURE_DAMAGE_COEFFICIENT))
 
+// Juices
+
+/datum/reagent/drink/grapejuice
+	name = "Grape Juice"
+	id = "grapejuice"
+	description = "It's grrrrrape!"
+	color = "#863333" // rgb: 134, 51, 51
+
+	glass_icon_state = "grapejuice"
+	glass_name = "glass of grape juice"
+	glass_desc = "It's grrrrrape!"
+
+/datum/reagent/drink/limejuice
+	name = "Lime Juice"
+	id = "limejuice"
+	description = "The sweet-sour juice of limes."
+	color = "#365E30" // rgb: 54, 94, 48
+
+	glass_icon_state = "glass_green"
+	glass_name = "glass of lime juice"
+	glass_desc = "A glass of sweet-sour lime juice"
+
+/datum/reagent/drink/limejuice/affect_mob(var/mob/living/carbon/M, var/alien, var/removed)
+	..()
+	if(state == CHEM_TOUCH || state == CHEM_BLOOD || alien == IS_DIONA)
+		return
+	M.adjustToxLoss(-0.5 * removed)
+
+/datum/reagent/drink/orangejuice
+	name = "Orange juice"
+	id = "orangejuice"
+	description = "Both delicious AND rich in Vitamin C, what more do you need?"
+	color = "#E78108"
+
+	glass_icon_state = "glass_orange"
+	glass_name = "glass of orange juice"
+	glass_desc = "Vitamins! Yay!"
+
+/datum/reagent/drink/orangejuice/affect_mob(var/mob/living/carbon/M, var/alien, var/removed)
+	..()
+	if(state == CHEM_TOUCH || state == CHEM_BLOOD || alien == IS_DIONA)
+		return
+	M.adjustOxyLoss(-2 * removed)
+
+/datum/reagent/drink/tomatojuice
+	name = "Tomato Juice"
+	id = "tomatojuice"
+	description = "Tomatoes made into juice. What a waste of big, juicy tomatoes, huh?"
+	color = "#731008"
+
+	glass_icon_state = "glass_red"
+	glass_name = "glass of tomato juice"
+	glass_desc = "Are you sure this is tomato juice?"
+
+/datum/reagent/drink/tomatojuice/affect_mob(var/mob/living/carbon/M, var/alien, var/removed)
+	..()
+	if(state == CHEM_TOUCH || state == CHEM_BLOOD || alien == IS_DIONA)
+		return
+	M.heal_organ_damage(0, 0.5 * removed)
+
+// Everything else
+
+/datum/reagent/drink/milk
+	name = "Milk"
+	id = "milk"
+	description = "An opaque white liquid produced by the mammary glands of mammals."
+	color = "#DFDFDF"
+
+	glass_icon_state = "glass_white"
+	glass_name = "glass of milk"
+	glass_desc = "White and nutritious goodness!"
+
+/datum/reagent/drink/milk/affect_mob(var/mob/living/carbon/M, var/alien, var/removed)
+	..()
+	if(state == CHEM_TOUCH || state == CHEM_BLOOD || alien == IS_DIONA)
+		return
+	M.heal_organ_damage(0.5 * removed, 0)
+	holder.remove_reagent("capsaicin", 10 * removed)
+
+/datum/reagent/drink/milk/cream
+	name = "Cream"
+	id = "cream"
+	description = "The fatty, still liquid part of milk. Why don't you mix this with sum scotch, eh?"
+	color = "#DFD7AF"
+
+	glass_icon_state = "glass_white"
+	glass_name = "glass of cream"
+	glass_desc = "Ewwww..."
+
 /datum/reagent/drink/tea
 	name = "Tea"
 	id = "tea"
@@ -972,8 +1153,21 @@
 
 /datum/reagent/drink/tea/affect_mob(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
+	if(state == CHEM_TOUCH || state == CHEM_BLOOD || alien == IS_DIONA)
+		return
 	M.adjustToxLoss(-0.5 * removed)
-	return
+
+/datum/reagent/drink/tea/icetea
+	name = "Iced Tea"
+	id = "icetea"
+	description = "No relation to a certain rap artist/ actor."
+	color = "#104038" // rgb: 16, 64, 56
+	adj_temp = -5
+
+	glass_icon_state = "icedteaglass"
+	glass_name = "glass of iced tea"
+	glass_desc = "No relation to a certain rap artist/ actor."
+	glass_center_of_mass = list("x"=15, "y"=10)
 
 /datum/reagent/drink/coffee
 	name = "Coffee"
@@ -989,6 +1183,65 @@
 	glass_name = "cup of coffee"
 	glass_desc = "Don't drop it, or you'll send scalding liquid and glass shards everywhere."
 
+/datum/reagent/drink/coffee/affect_mob(var/mob/living/carbon/M, var/alien, var/removed)
+	..()
+	if(state == CHEM_TOUCH || state == CHEM_BLOOD || alien == IS_DIONA)
+		return
+	M.make_jittery(5)
+	if(adj_temp > 0)
+		holder.remove_reagent("frostoil", 10 * removed)
+
+/datum/reagent/drink/hot_coco
+	name = "Hot Chocolate"
+	id = "hot_coco"
+	description = "Made with love! And cocoa beans."
+	reagent_state = LIQUID
+	color = "#403010"
+	nutrition = 2
+	adj_temp = 5
+
+	glass_icon_state = "chocolateglass"
+	glass_name = "glass of hot chocolate"
+	glass_desc = "Made with love! And cocoa beans."
+
+/datum/reagent/drink/sodawater
+	name = "Soda Water"
+	id = "sodawater"
+	description = "A can of club soda. Why not make a scotch and soda?"
+	color = "#619494"
+	adj_dizzy = -5
+	adj_drowsy = -3
+	adj_temp = -5
+
+	glass_icon_state = "glass_clear"
+	glass_name = "glass of soda water"
+	glass_desc = "Soda water. Why not make a scotch and soda?"
+
+/datum/reagent/drink/tonic
+	name = "Tonic Water"
+	id = "tonic"
+	description = "It tastes strange but at least the quinine keeps the Space Malaria at bay."
+	color = "#664300"
+	adj_dizzy = -5
+	adj_drowsy = -3
+	adj_sleepy = -2
+	adj_temp = -5
+
+	glass_icon_state = "glass_clear"
+	glass_name = "glass of tonic water"
+	glass_desc = "Quinine tastes funny, but at least it'll keep that Space Malaria away."
+
+/datum/reagent/drink/grenadine
+	name = "Grenadine Syrup"
+	id = "grenadine"
+	description = "Made in the modern day with proper pomegranate substitute. Who uses real fruit, anyways?"
+	color = "#FF004F"
+
+	glass_icon_state = "grenadineglass"
+	glass_name = "glass of grenadine syrup"
+	glass_desc = "Sweet and tangy, a bar syrup used to add color or flavor to drinks."
+	glass_center_of_mass = list("x"=17, "y"=6)
+
 /datum/reagent/drink/space_cola
 	name = "Space Cola"
 	id = "cola"
@@ -1002,7 +1255,353 @@
 	glass_name = "glass of Space Cola"
 	glass_desc = "A glass of refreshing Space Cola"
 
+/datum/reagent/drink/spacemountainwind
+	name = "Mountain Wind"
+	id = "spacemountainwind"
+	description = "Blows right through you like a space wind."
+	color = "#102000"
+	adj_drowsy = -7
+	adj_sleepy = -1
+	adj_temp = -5
+
+	glass_icon_state = "Space_mountain_wind_glass"
+	glass_name = "glass of Space Mountain Wind"
+	glass_desc = "Space Mountain Wind. As you know, there are no mountains in space, only wind."
+
+/datum/reagent/drink/dr_gibb
+	name = "Dr. Gibb"
+	id = "dr_gibb"
+	description = "A delicious blend of 42 different flavours"
+	color = "#102000"
+	adj_drowsy = -6
+	adj_temp = -5
+
+	glass_icon_state = "dr_gibb_glass"
+	glass_name = "glass of Dr. Gibb"
+	glass_desc = "Dr. Gibb. Not as dangerous as the name might imply."
+
+/datum/reagent/drink/space_up
+	name = "Space-Up"
+	id = "space_up"
+	description = "Tastes like a hull breach in your mouth."
+	color = "#202800"
+	adj_temp = -8
+
+	glass_icon_state = "space-up_glass"
+	glass_name = "glass of Space-up"
+	glass_desc = "Space-up. It helps keep your cool."
+
+/datum/reagent/drink/lemon_lime
+	name = "Lemon Lime"
+	description = "A tangy substance made of 0.5% natural citrus!"
+	id = "lemon_lime"
+	color = "#878F00"
+	adj_temp = -8
+
+	glass_icon_state = "lemonlime"
+	glass_name = "glass of lemon lime soda"
+	glass_desc = "A tangy substance made of 0.5% natural citrus!"
+
+/datum/reagent/drink/doctor_delight
+	name = "The Doctor's Delight"
+	id = "doctorsdelight"
+	description = "A gulp a day keeps the MediBot away. That's probably for the best."
+	reagent_state = LIQUID
+	color = "#FF8CFF"
+	nutrition = 1
+
+	glass_icon_state = "doctorsdelightglass"
+	glass_name = "glass of The Doctor's Delight"
+	glass_desc = "A healthy mixture of juices, guaranteed to keep you healthy until the next toolboxing takes place."
+	glass_center_of_mass = list("x"=16, "y"=8)
+
+/datum/reagent/drink/doctor_delight/affect_mob(var/mob/living/carbon/M, var/alien, var/removed)
+	..()
+	if(state == CHEM_TOUCH || state == CHEM_BLOOD || alien == IS_DIONA)
+		return
+	M.adjustOxyLoss(-4 * removed)
+	M.heal_organ_damage(2 * removed, 2 * removed)
+	M.adjustToxLoss(-2 * removed)
+	if(M.dizziness) 
+		M.dizziness = max(0, M.dizziness - 15)
+	if(M.confused)
+		M.confused = max(0, M.confused - 5)
+
+/datum/reagent/drink/dry_ramen
+	name = "Dry Ramen"
+	id = "dry_ramen"
+	description = "Space age food, since August 25, 1958. Contains dried noodles, vegetables, and chemicals that boil in contact with water."
+	reagent_state = SOLID
+	nutrition = 1
+	color = "#302000"
+
+/datum/reagent/drink/hot_ramen
+	name = "Hot Ramen"
+	id = "hot_ramen"
+	description = "The noodles are boiled, the flavors are artificial, just like being back in school."
+	reagent_state = LIQUID
+	color = "#302000"
+	nutrition = 5
+	adj_temp = 5
+
+/datum/reagent/drink/hell_ramen
+	name = "Hell Ramen"
+	id = "hell_ramen"
+	description = "The noodles are boiled, the flavors are artificial, just like being back in school."
+	reagent_state = LIQUID
+	color = "#302000"
+	nutrition = 5
+
+/datum/reagent/drink/hell_ramen/affect_mob(var/mob/living/carbon/M, var/alien, var/removed)
+	..()
+	if(state == CHEM_TOUCH || state == CHEM_BLOOD || alien == IS_DIONA)
+		return
+	M.bodytemperature += 10 * TEMPERATURE_DAMAGE_COEFFICIENT
+
+/datum/reagent/drink/ice
+	name = "Ice"
+	id = "ice"
+	description = "Frozen water, your dentist wouldn't like you chewing this."
+	reagent_state = SOLID
+	color = "#619494"
+	adj_temp = -5
+
+	glass_icon_state = "iceglass"
+	glass_name = "glass of ice"
+	glass_desc = "Generally, you're supposed to put something else in there too..."
+
 /* Alcohol */
+
+// Basic
+
+/datum/reagent/ethanol/absinthe
+	name = "Absinthe"
+	id = "absinthe"
+	description = "Watch out that the Green Fairy doesn't come for you!"
+	color = "#33EE00"
+	strength = 12
+
+	glass_icon_state = "absintheglass"
+	glass_name = "glass of absinthe"
+	glass_desc = "Wormwood, anise, oh my."
+	glass_center_of_mass = list("x"=16, "y"=5)
+
+/datum/reagent/ethanol/ale
+	name = "Ale"
+	id = "ale"
+	description = "A dark alchoholic beverage made by malted barley and yeast."
+	color = "#664300"
+	strength = 50
+
+	glass_icon_state = "aleglass"
+	glass_name = "glass of ale"
+	glass_desc = "A freezing pint of delicious ale"
+	glass_center_of_mass = list("x"=16, "y"=8)
+
+/datum/reagent/ethanol/beer
+	name = "Beer"
+	id = "beer"
+	description = "An alcoholic beverage made from malted grains, hops, yeast, and water."
+	color = "#664300"
+	strength = 50
+	nutriment_factor = 1
+
+	glass_icon_state = "beerglass"
+	glass_name = "glass of beer"
+	glass_desc = "A freezing pint of beer"
+	glass_center_of_mass = list("x"=16, "y"=8)
+
+/datum/reagent/ethanol/beer/affect_mob(var/mob/living/carbon/M, var/alien, var/removed)
+	..()
+	if(state == CHEM_TOUCH || state == CHEM_BLOOD || alien == IS_DIONA)
+		return
+	M.jitteriness = max(M.jitteriness - 3, 0)
+
+/datum/reagent/ethanol/bluecuracao
+	name = "Blue Curacao"
+	id = "bluecuracao"
+	description = "Exotically blue, fruity drink, distilled from oranges."
+	color = "#0000CD"
+	strength = 15
+
+	glass_icon_state = "curacaoglass"
+	glass_name = "glass of blue curacao"
+	glass_desc = "Exotically blue, fruity drink, distilled from oranges."
+	glass_center_of_mass = list("x"=16, "y"=5)
+
+/datum/reagent/ethanol/cognac
+	name = "Cognac"
+	id = "cognac"
+	description = "A sweet and strongly alchoholic drink, made after numerous distillations and years of maturing. Classy as fornication."
+	color = "#AB3C05"
+	strength = 15
+
+	glass_icon_state = "cognacglass"
+	glass_name = "glass of cognac"
+	glass_desc = "Damn, you feel like some kind of French aristocrat just by holding this."
+	glass_center_of_mass = list("x"=16, "y"=6)
+
+/datum/reagent/ethanol/deadrum
+	name = "Deadrum"
+	id = "deadrum"
+	description = "Popular with the sailors. Not very popular with everyone else."
+	color = "#664300"
+	strength = 50
+
+	glass_icon_state = "rumglass"
+	glass_name = "glass of rum"
+	glass_desc = "Now you want to Pray for a pirate suit, don't you?"
+	glass_center_of_mass = list("x"=16, "y"=12)
+
+/datum/reagent/ethanol/deadrum/affect_mob(var/mob/living/carbon/M, var/alien, var/removed)
+	..()
+	if(state == CHEM_TOUCH || state == CHEM_BLOOD || alien == IS_DIONA)
+		return
+	M.dizziness +=5
+
+/datum/reagent/ethanol/gin
+	name = "Gin"
+	id = "gin"
+	description = "It's gin. In space. I say, good sir."
+	color = "#664300"
+	strength = 50
+
+	glass_icon_state = "ginvodkaglass"
+	glass_name = "glass of gin"
+	glass_desc = "A crystal clear glass of Griffeater gin."
+	glass_center_of_mass = list("x"=16, "y"=12)
+
+/datum/reagent/ethanol/kahlua
+	name = "Kahlua"
+	id = "kahlua"
+	description = "A widely known, Mexican coffee-flavoured liqueur. In production since 1936!"
+	color = "#664300"
+	strength = 15
+
+	glass_icon_state = "kahluaglass"
+	glass_name = "glass of RR coffee liquor"
+	glass_desc = "DAMN, THIS THING LOOKS ROBUST"
+	glass_center_of_mass = list("x"=15, "y"=7)
+
+/datum/reagent/ethanol/kahlua/affect_mob(var/mob/living/carbon/M, var/alien, var/removed)
+	..()
+	if(state == CHEM_TOUCH || state == CHEM_BLOOD || alien == IS_DIONA)
+		return
+	M.dizziness = max(0, M.dizziness - 5)
+	M.drowsyness = max(0, M.drowsyness - 3)
+	M.sleeping = max(0, M.sleeping - 2)
+	if (M.bodytemperature > 310)
+		M.bodytemperature = max(310, M.bodytemperature - (5 * TEMPERATURE_DAMAGE_COEFFICIENT))
+	M.make_jittery(5)
+
+/datum/reagent/ethanol/melonliquor
+	name = "Melon Liquor"
+	id = "melonliquor"
+	description = "A relatively sweet and fruity 46 proof liquor."
+	color = "#138808" // rgb: 19, 136, 8
+	strength = 50
+
+	glass_icon_state = "emeraldglass"
+	glass_name = "glass of melon liquor"
+	glass_desc = "A relatively sweet and fruity 46 proof liquor."
+	glass_center_of_mass = list("x"=16, "y"=5)
+
+/datum/reagent/ethanol/rum
+	name = "Rum"
+	id = "rum"
+	description = "Yohoho and all that."
+	color = "#664300"
+	strength = 15
+
+	glass_icon_state = "rumglass"
+	glass_name = "glass of rum"
+	glass_desc = "Now you want to Pray for a pirate suit, don't you?"
+	glass_center_of_mass = list("x"=16, "y"=12)
+
+/datum/reagent/ethanol/tequilla
+	name = "Tequila"
+	id = "tequilla"
+	description = "A strong and mildly flavoured, mexican produced spirit. Feeling thirsty hombre?"
+	color = "#FFFF91"
+	strength = 25
+
+	glass_icon_state = "tequillaglass"
+	glass_name = "glass of Tequilla"
+	glass_desc = "Now all that's missing is the weird colored shades!"
+	glass_center_of_mass = list("x"=16, "y"=12)
+
+/datum/reagent/ethanol/thirteenloko
+	name = "Thirteen Loko"
+	id = "thirteenloko"
+	description = "A potent mixture of caffeine and alcohol."
+	color = "#102000"
+	strength = 25
+	nutriment_factor = 1 * FOOD_METABOLISM
+
+	glass_icon_state = "thirteen_loko_glass"
+	glass_name = "glass of Thirteen Loko"
+	glass_desc = "This is a glass of Thirteen Loko, it appears to be of the highest quality. The drink, not the glass."
+
+/datum/reagent/ethanol/thirteenloko/affect_mob(var/mob/living/carbon/M, var/alien, var/removed)
+	..()
+	if(state == CHEM_TOUCH || state == CHEM_BLOOD || alien == IS_DIONA)
+		return
+	M.drowsyness = max(0, M.drowsyness - 7)
+	if (M.bodytemperature > 310)
+		M.bodytemperature = max(310, M.bodytemperature - (5 * TEMPERATURE_DAMAGE_COEFFICIENT))
+	M.make_jittery(5)
+
+/datum/reagent/ethanol/vermouth
+	name = "Vermouth"
+	id = "vermouth"
+	description = "You suddenly feel a craving for a martini..."
+	color = "#91FF91" // rgb: 145, 255, 145
+	strength = 15
+
+	glass_icon_state = "vermouthglass"
+	glass_name = "glass of vermouth"
+	glass_desc = "You wonder why you're even drinking this straight."
+	glass_center_of_mass = list("x"=16, "y"=12)
+
+/datum/reagent/ethanol/vodka
+	name = "Vodka"
+	id = "vodka"
+	description = "Number one drink AND fueling choice for Russians worldwide."
+	color = "#0064C8" // rgb: 0, 100, 200
+	strength = 15
+
+	glass_icon_state = "ginvodkaglass"
+	glass_name = "glass of vodka"
+	glass_desc = "The glass contain wodka. Xynta."
+	glass_center_of_mass = list("x"=16, "y"=12)
+
+/datum/reagent/ethanol/vodka/on_mob_life(var/mob/living/carbon/M, var/alien, var/removed)
+	..()
+	M.radiation = max(M.radiation - 1 * removed, 0)
+
+/datum/reagent/ethanol/whiskey
+	name = "Whiskey"
+	id = "whiskey"
+	description = "A superb and well-aged single-malt whiskey. Damn."
+	color = "#664300"
+	strength = 25
+
+	glass_icon_state = "whiskeyglass"
+	glass_name = "glass of whiskey"
+	glass_desc = "The silky, smokey whiskey goodness inside the glass makes the drink look very classy."
+	glass_center_of_mass = list("x"=16, "y"=12)
+
+/datum/reagent/ethanol/wine
+	name = "Wine"
+	id = "wine"
+	description = "An premium alchoholic beverage made from distilled grape juice."
+	color = "#7E4043" // rgb: 126, 64, 67
+	strength = 15
+
+	glass_icon_state = "wineglass"
+	glass_name = "glass of wine"
+	glass_desc = "A very classy looking drink."
+	glass_center_of_mass = list("x"=15, "y"=7)
 
 /* Things that didn't fit anywhere else */
 
@@ -1012,3 +1611,23 @@
 	description = "This paint will stick to almost any object."
 	reagent_state = LIQUID
 	color = "#808080"
+
+/datum/reagent/ammonia
+	name = "Ammonia"
+	id = "ammonia"
+	description = "A caustic substance commonly used in fertilizer or household cleaners."
+	reagent_state = GAS
+	color = "#404030"
+
+/datum/reagent/diethylamine
+	name = "Diethylamine"
+	id = "diethylamine"
+	description = "A secondary amine, mildly corrosive."
+	reagent_state = LIQUID
+	color = "#604030"
+
+/datum/reagent/ultraglue
+	name = "Ultra Glue"
+	id = "glue"
+	description = "An extremely powerful bonding agent."
+	color = "#FFFFCC"

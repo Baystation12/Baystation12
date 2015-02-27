@@ -333,7 +333,7 @@
 		var/datum/gas_mixture/breath
 
 		// HACK NEED CHANGING LATER
-		if(health < config.health_threshold_crit && !("Nocrit" in chem_effects))
+		if(health < config.health_threshold_crit && !(CE_STABLE in chem_effects))
 			losebreath++
 
 		if(losebreath>0) //Suffocating so do not take a breath
@@ -931,7 +931,8 @@
 			if(species && species.reagent_tag)
 				alien = species.reagent_tag
 			reagents.metabolize(alien)
-
+			if(CE_PAINKILLER in chem_effects)
+				analgesic = chem_effects[CE_PAINKILLER]
 			var/total_phoronloss = 0
 			for(var/obj/item/I in src)
 				if(I.contaminated)
@@ -939,6 +940,10 @@
 			if(!(status_flags & GODMODE)) adjustToxLoss(total_phoronloss)
 
 		if(status_flags & GODMODE)	return 0	//godmode
+
+		if(addictions && addictions.len)
+			for(var/datum/addiction/A in addictions)
+				A.process()
 
 		var/datum/organ/internal/diona/node/light_organ = locate() in internal_organs
 		if(light_organ && !light_organ.is_broken())
@@ -1551,7 +1556,7 @@
 			if(R.id in heartstopper) //To avoid using fakedeath
 				temp = PULSE_NONE
 			if(R.id in cheartstopper) //Conditional heart-stoppage
-				if(R.volume >= R.overdose)
+				if(R.volume >= R.overdose_blood)
 					temp = PULSE_NONE
 
 		return temp

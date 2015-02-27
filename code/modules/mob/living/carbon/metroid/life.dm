@@ -87,6 +87,9 @@
 
 	if(reagents) reagents.metabolize()
 
+	if(CE_PAINKILLER in chem_effects)
+		analgesic = chem_effects[CE_PAINKILLER]
+
 	src.updatehealth()
 
 	return //TODO: DEFERRED

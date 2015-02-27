@@ -389,6 +389,9 @@
 		if(reagents && reagents.reagent_list.len)
 			reagents.metabolize()
 
+		if(CE_PAINKILLER in chem_effects)
+			analgesic = chem_effects[CE_PAINKILLER]
+
 		if (drowsyness)
 			drowsyness--
 			eye_blurry = max(2, eye_blurry)

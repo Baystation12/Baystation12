@@ -109,6 +109,9 @@
 
 		if(reagents) reagents.metabolize()
 
+		if(CE_PAINKILLER in chem_effects)
+			analgesic = chem_effects[CE_PAINKILLER]
+
 		confused = max(0, confused - 1)
 		// decrement dizziness counter, clamped to 0
 		if(resting)
