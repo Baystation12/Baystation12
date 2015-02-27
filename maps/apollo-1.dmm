@@ -6636,7 +6636,7 @@
 "cxF" = (/obj/structure/sink{icon_state = "sink"; dir = 8; pixel_x = -12; pixel_y = 2},/obj/machinery/access_button{command = "cycle_interior"; frequency = 1379; master_tag = "virology_airlock_control"; name = "Virology Access Button"; pixel_x = 8; pixel_y = -28; req_access_txt = "39"},/obj/machinery/alarm{dir = 4; icon_state = "alarm0"; pixel_x = -22; pixel_y = 0},/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 4},/turf/simulated/floor{dir = 10; icon_state = "warnwhite"},/area/medical/virology)
 "cxG" = (/obj/machinery/atmospherics/pipe/manifold/hidden/purple{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/supply,/turf/simulated/floor{icon_state = "white"},/area/medical/virology)
 "cxH" = (/obj/structure/closet/l3closet/virology,/obj/item/clothing/mask/gas,/turf/simulated/floor{dir = 6; icon_state = "warnwhite"},/area/medical/virology)
-"cxI" = (/obj/structure/table,/obj/machinery/firealarm{dir = 8; pixel_x = -16},/obj/item/weapon/folder/white,/turf/simulated/floor{icon_state = "white"},/area/medical/virology)
+"cxI" = (/obj/structure/table,/obj/machinery/firealarm{dir = 8; pixel_x = -16},/obj/item/weapon/folder/white,/obj/structure/reagent_dispensers/radiumtank{pixel_x = -32},/turf/simulated/floor{icon_state = "white"},/area/medical/virology)
 "cxJ" = (/obj/structure/stool/bed/chair/office/dark{dir = 8},/obj/structure/disposalpipe/segment,/turf/simulated/floor{icon_state = "white"},/area/medical/virology)
 "cxK" = (/turf/simulated/floor{icon_state = "white"},/area/medical/virology)
 "cxL" = (/obj/structure/stool/bed/chair/office/dark{dir = 1},/obj/effect/landmark/start{name = "Virologist"},/turf/simulated/floor{icon_state = "white"},/area/medical/virology)

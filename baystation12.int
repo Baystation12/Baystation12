@@ -1,11 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: icons\mecha\mecha.dmi;code\controllers\master_controller.dm;code\controllers\lighting_controller.dm;code\modules\power\powernet.dm;code\modules\client\preferences.dm;code\modules\mob\living\carbon\human\species.dm;icons\misc\looc.png;icons\misc\news.png;icons\misc\don.png;icons\misc\ooc.png;icons\misc\fullscreen.png;icons\misc\chaticons.dmi;icons\misc\msay.png;code\game\verbs\ooc.dm
+WINDOW: icons\obj\machines\phoron_compressor.dmi;code\game\machinery\phoron_desublimer.dm;icons\mob\human.dmi;maps\apollo-1.dmm;code\modules\reagents\reagent_dispenser.dm;icons\obj\objects.dmi;code\game\objects\effects\glowshroom.dm;code\setup.dm;code\__HELPERS\global_lists.dm;code\modules\client\preferences.dm;code\modules\mob\living\carbon\human\species\station\station.dm;code\modules\mob\living\carbon\human\species\xenomorphs\alien_species.dm
 LAST_COMPILE_VERSION: 506.1249
-DIR: code code\__HELPERS code\ATMOSPHERICS code\ATMOSPHERICS\components code\ATMOSPHERICS\components\binary_devices code\ATMOSPHERICS\components\omni_devices code\ATMOSPHERICS\components\unary code\controllers code\datums code\datums\spells code\datums\wires code\game code\game\gamemodes code\game\gamemodes\events code\game\verbs code\modules code\modules\client code\modules\mob code\modules\mob\living code\modules\mob\living\carbon code\modules\mob\living\carbon\human code\modules\power icons icons\mecha icons\misc 
-FILE: code\controllers\master_controller.dm
-LAST_COMPILE_TIME: 1425049581
+DIR: code code\__HELPERS code\ATMOSPHERICS code\ATMOSPHERICS\components code\ATMOSPHERICS\components\binary_devices code\ATMOSPHERICS\components\omni_devices code\ATMOSPHERICS\components\unary code\controllers code\datums code\datums\spells code\datums\wires code\game code\game\machinery code\game\objects code\game\objects\effects code\game\objects\items code\game\objects\items\devices code\modules code\modules\client code\modules\mob code\modules\mob\living code\modules\mob\living\carbon code\modules\mob\living\carbon\human code\modules\mob\living\carbon\human\species code\modules\mob\living\carbon\human\species\station code\modules\mob\living\carbon\human\species\xenomorphs code\modules\power code\modules\reagents icons icons\effects icons\mecha icons\misc icons\mob icons\obj icons\obj\machines maps 
+FILE: code\modules\mob\living\carbon\human\species\station\station.dm
+LAST_COMPILE_TIME: 1425077752
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
