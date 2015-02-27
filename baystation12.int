@@ -1,11 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: icons\mecha\mecha.dmi
+WINDOW: icons\mecha\mecha.dmi;code\controllers\master_controller.dm;code\controllers\lighting_controller.dm;code\modules\power\powernet.dm;code\modules\client\preferences.dm;code\modules\mob\living\carbon\human\species.dm
 LAST_COMPILE_VERSION: 506.1249
-DIR: code code\__HELPERS code\ATMOSPHERICS code\ATMOSPHERICS\components code\ATMOSPHERICS\components\binary_devices code\ATMOSPHERICS\components\omni_devices code\ATMOSPHERICS\components\unary code\controllers code\datums code\datums\spells code\datums\wires icons icons\mecha 
-FILE: icons\mecha\mecha.dmi
-LAST_COMPILE_TIME: 1424961777
+DIR: code code\__HELPERS code\ATMOSPHERICS code\ATMOSPHERICS\components code\ATMOSPHERICS\components\binary_devices code\ATMOSPHERICS\components\omni_devices code\ATMOSPHERICS\components\unary code\controllers code\datums code\datums\spells code\datums\wires code\game code\game\gamemodes code\game\gamemodes\events code\modules code\modules\client code\modules\mob code\modules\mob\living code\modules\mob\living\carbon code\modules\mob\living\carbon\human code\modules\power icons icons\mecha 
+FILE: code\modules\mob\living\carbon\human\species.dm
+LAST_COMPILE_TIME: 1425049095
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
