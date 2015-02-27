@@ -631,6 +631,7 @@ var/list/be_special_flags = list(
 #define NONGLOBAL   32  // Do not add to general languages list.
 #define INNATE      64  // All mobs can be assumed to speak and understand this language. (audible emotes)
 #define NO_TALK_MSG 128 // Do not show the "\The [speaker] talks into \the [radio]" message
+#define NO_STUTTER 256		// No stuttering, slurring, or other speech problems
 
 //Flags for zone sleeping
 #define ZONE_ACTIVE   1
