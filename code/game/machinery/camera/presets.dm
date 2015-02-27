@@ -31,6 +31,15 @@
 
 // AUTONAME
 
+/obj/machinery/camera/autoname/engineering_outpost
+	network = list("SS13", "Engineering Outpost")
+
+/obj/machinery/camera/autoname/mining_outpost
+	network = list("SS13", "MINE")
+
+/obj/machinery/camera/autoname/research_outpost
+	network = list("SS13", "Research Outpost")
+
 /obj/machinery/camera/autoname
 	var/number = 0 //camera number in area
 
