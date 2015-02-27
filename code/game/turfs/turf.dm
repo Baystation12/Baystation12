@@ -251,6 +251,9 @@
 		if(air_master)
 			air_master.mark_for_update(src)
 
+		for(var/turf/space/S in range(W,1))
+			S.update_starlight()
+
 		W.levelupdate()
 		return W
 
@@ -271,6 +274,9 @@
 
 		if(air_master)
 			air_master.mark_for_update(src)
+
+		for(var/turf/space/S in range(W,1))
+			S.update_starlight()
 
 		W.levelupdate()
 		return W

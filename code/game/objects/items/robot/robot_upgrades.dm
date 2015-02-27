@@ -37,7 +37,7 @@
 		R.icon_state = "[R.ckey]-Standard"
 	del(R.module)
 	R.module = null
-	R.camera.network.Remove(list("Engineering","Medical","MINE"))
+	R.camera.remove_networks(list("Engineering","Medical","MINE"))
 	R.updatename("Default")
 	R.status_flags |= CANPUSH
 	R.updateicon()
@@ -121,7 +121,7 @@
 		usr << "There's no mounting point for the module!"
 		return 0
 
-	var/obj/item/weapon/gun/energy/taser/cyborg/T = locate() in R.module
+	var/obj/item/weapon/gun/energy/taser/mounted/cyborg/T = locate() in R.module
 	if(!T)
 		T = locate() in R.module.contents
 	if(!T)

@@ -186,12 +186,13 @@ var/global/floorIsLava = 0
 	var/f = 1
 	for(var/k in all_languages)
 		var/datum/language/L = all_languages[k]
-		if(!f) body += " | "
-		else f = 0
-		if(L in M.languages)
-			body += "<a href='?src=\ref[src];toglang=\ref[M];lang=[html_encode(k)]' style='color:#006600'>[k]</a>"
-		else
-			body += "<a href='?src=\ref[src];toglang=\ref[M];lang=[html_encode(k)]' style='color:#ff0000'>[k]</a>"
+		if(!(L.flags & INNATE))
+			if(!f) body += " | "
+			else f = 0
+			if(L in M.languages)
+				body += "<a href='?src=\ref[src];toglang=\ref[M];lang=[html_encode(k)]' style='color:#006600'>[k]</a>"
+			else
+				body += "<a href='?src=\ref[src];toglang=\ref[M];lang=[html_encode(k)]' style='color:#ff0000'>[k]</a>"
 
 	body += {"<br>
 		</body></html>
@@ -993,6 +994,32 @@ var/global/floorIsLava = 0
 		else
 			return "Error: Invalid sabotage target: [target]"
 */
+
+/datum/admins/proc/spawn_fruit()
+	set category = "Debug"
+	set desc = "Spawn the product of a seed."
+	set name = "Spawn Fruit"
+
+	if(!check_rights(R_SPAWN))	return
+
+	var/seedtype = input("Select a seed type", "Spawn Fruit") as null|anything in plant_controller.seeds
+	if(!seedtype || !plant_controller.seeds[seedtype])
+		return
+	var/datum/seed/S = plant_controller.seeds[seedtype]
+	S.harvest(usr,0,0,1)
+
+/datum/admins/proc/spawn_plant()
+	set category = "Debug"
+	set desc = "Spawn a spreading plant effect."
+	set name = "Spawn Plant"
+
+	if(!check_rights(R_SPAWN))	return
+
+	var/seedtype = input("Select a seed type", "Spawn Plant") as null|anything in plant_controller.seeds
+	if(!seedtype || !plant_controller.seeds[seedtype])
+		return
+	new /obj/effect/plant(get_turf(usr), plant_controller.seeds[seedtype])
+
 /datum/admins/proc/spawn_atom(var/object as text)
 	set category = "Debug"
 	set desc = "(atom path) Spawn an atom"
@@ -1148,14 +1175,21 @@ var/global/floorIsLava = 0
 	switch(detail)
 		if(0)
 			return "<b>[key_name(C, link, name, highlight_special)]</b>"
-		if(1)
+
+		if(1)	//Private Messages
 			return "<b>[key_name(C, link, name, highlight_special)](<A HREF='?_src_=holder;adminmoreinfo=\ref[M]'>?</A>)</b>"
-		if(2)
+
+		if(2)	//Admins
 			var/ref_mob = "\ref[M]"
 			return "<b>[key_name(C, link, name, highlight_special)](<A HREF='?_src_=holder;adminmoreinfo=[ref_mob]'>?</A>) (<A HREF='?_src_=holder;adminplayeropts=[ref_mob]'>PP</A>) (<A HREF='?_src_=vars;Vars=[ref_mob]'>VV</A>) (<A HREF='?_src_=holder;subtlemessage=[ref_mob]'>SM</A>) (<A HREF='?_src_=holder;adminplayerobservejump=[ref_mob]'>JMP</A>) (<A HREF='?_src_=holder;check_antagonist=1'>CA</A>)</b>"
-		if(3)
+
+		if(3)	//Devs
 			var/ref_mob = "\ref[M]"
 			return "<b>[key_name(C, link, name, highlight_special)](<A HREF='?_src_=vars;Vars=[ref_mob]'>VV</A>)(<A HREF='?_src_=holder;adminplayerobservejump=[ref_mob]'>JMP</A>)</b>"
+
+		if(4)	//Mentors
+			var/ref_mob = "\ref[M]"
+			return "<b>[key_name(C, link, name, highlight_special)] (<A HREF='?_src_=holder;adminmoreinfo=\ref[M]'>?</A>) (<A HREF='?_src_=holder;adminplayeropts=[ref_mob]'>PP</A>) (<A HREF='?_src_=vars;Vars=[ref_mob]'>VV</A>) (<A HREF='?_src_=holder;subtlemessage=[ref_mob]'>SM</A>) (<A HREF='?_src_=holder;adminplayerobservejump=[ref_mob]'>JMP</A>)</b>"
 
 
 /proc/ishost(whom)

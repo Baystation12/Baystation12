@@ -110,7 +110,7 @@
 
 /obj/machinery/computer/helm/Topic(href, href_list)
 	if(..())
-		return
+		return 1
 
 	if (!linked)
 		return

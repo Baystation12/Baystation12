@@ -25,11 +25,17 @@
 		usr << "\red Movement is admin-disabled." //This is to identify lag problems
 		return
 
-	if (istype(A,/mob/living/carbon))
-		var/mob/living/carbon/M = A
+	if (istype(A,/mob/living))
+		var/mob/living/M = A
 		if(M.lying)
 			..()
 			return
+
+		// Ugly hack :( Should never have multiple plants in the same tile.
+		var/obj/effect/plant/plant = locate() in contents
+		if(plant) plant.trodden_on(M)
+
+		// Dirt overlays.
 		dirt++
 		var/obj/effect/decal/cleanable/dirt/dirtoverlay = locate(/obj/effect/decal/cleanable/dirt, src)
 		if (dirt >= 50)
@@ -41,30 +47,21 @@
 
 		if(istype(M, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = M
-			if(istype(H.shoes, /obj/item/clothing/shoes/clown_shoes))
-				var/obj/item/clothing/shoes/clown_shoes/O = H.shoes
-				if(H.m_intent == "run")
-					if(O.footstep >= 2)
-						O.footstep = 0
-						playsound(src, "clownstep", 50, 1) // this will get annoying very fast.
-					else
-						O.footstep++
-				else
-					playsound(src, "clownstep", 20, 1)
-
 			// Tracking blood
 			var/list/bloodDNA = null
 			var/bloodcolor=""
 			if(H.shoes)
 				var/obj/item/clothing/shoes/S = H.shoes
-				if(S.track_blood && S.blood_DNA)
-					bloodDNA = S.blood_DNA
-					bloodcolor=S.blood_color
-					S.track_blood--
+				if(istype(S))
+					S.handle_movement(src,(H.m_intent == "run" ? 1 : 0))
+					if(S.track_blood && S.blood_DNA)
+						bloodDNA = S.blood_DNA
+						bloodcolor=S.blood_color
+						S.track_blood--
 			else
 				if(H.track_blood && H.feet_blood_DNA)
 					bloodDNA = H.feet_blood_DNA
-					bloodcolor=H.feet_blood_color
+					bloodcolor = H.feet_blood_color
 					H.track_blood--
 
 			if (bloodDNA)
@@ -75,14 +72,11 @@
 
 				bloodDNA = null
 
-		var/noslip = 0
-		for (var/obj/structure/stool/bed/chair/C in loc)
-			if (C.buckled_mob == M)
-				noslip = 1
-		if((wet == 1 && M.m_intent == "walk") || noslip)
-			return // no slipping while sitting in a chair, plz
-
 		if(src.wet)
+
+			if(M.buckled || (src.wet == 1 && M.m_intent == "walk"))
+				return
+
 			var/slip_dist = 1
 			var/slip_stun = 6
 			var/floor_type = "wet"

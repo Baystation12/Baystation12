@@ -3,37 +3,42 @@
 	icon_state = "spark"
 	damage = 0
 	damage_type = BURN
-	flag = "energy"
+	check_armour = "energy"
 
 
-//releases a very short burst of light on impact, mainly used to blind people
+//releases a burst of light on impact or after travelling a distance
 /obj/item/projectile/energy/flash
-	name = "shell" //a chemical filled shell or something
+	name = "chemical shell"
 	icon_state = "bullet"
 	damage = 5
-	var/flash_range = 1
-	var/brightness = 5
-	var/light_duration = 10
+	kill_count = 15 //if the shell hasn't hit anything after travelling this far it just explodes.
+	var/flash_range = 0
+	var/brightness = 7
+	var/light_duration = 5
 
-/obj/item/projectile/energy/flash/on_impact()
-	var/turf/T = get_turf(src)
-
+/obj/item/projectile/energy/flash/on_impact(var/atom/A)
+	var/turf/T = flash_range? src.loc : get_turf(A)
 	if(!istype(T)) return
 
-	src.visible_message("<span class='warning'>\The [src] explodes in a bright flash!</span>")
+	//blind adjacent people
 	for (var/mob/living/carbon/M in viewers(T, flash_range))
 		if(M.eyecheck() < 1)
 			flick("e_flash", M.flash)
 
+	//snap pop
 	playsound(src, 'sound/effects/snap.ogg', 50, 1)
-	new/obj/effect/effect/smoke/illumination(src.loc, brightness=max(flash_range*2, brightness), lifetime=light_duration)
+	src.visible_message("<span class='warning'>\The [src] explodes in a bright flash!</span>")
+	
+	new /obj/effect/decal/cleanable/ash(src.loc) //always use src.loc so that ash doesn't end up inside windows
+	new /obj/effect/effect/sparks(T)
+	new /obj/effect/effect/smoke/illumination(T, brightness=max(flash_range*2, brightness), lifetime=light_duration)
 
 //blinds people like the flash round, but can also be used for temporary illumination
 /obj/item/projectile/energy/flash/flare
 	damage = 10
 	flash_range = 1
-	brightness = 7 //similar to a flare
-	light_duration = 150
+	brightness = 9 //similar to a flare
+	light_duration = 200
 
 /obj/item/projectile/energy/electrode
 	name = "electrode"
