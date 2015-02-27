@@ -186,12 +186,13 @@ var/global/floorIsLava = 0
 	var/f = 1
 	for(var/k in all_languages)
 		var/datum/language/L = all_languages[k]
-		if(!f) body += " | "
-		else f = 0
-		if(L in M.languages)
-			body += "<a href='?src=\ref[src];toglang=\ref[M];lang=[html_encode(k)]' style='color:#006600'>[k]</a>"
-		else
-			body += "<a href='?src=\ref[src];toglang=\ref[M];lang=[html_encode(k)]' style='color:#ff0000'>[k]</a>"
+		if(!(L.flags & INNATE))
+			if(!f) body += " | "
+			else f = 0
+			if(L in M.languages)
+				body += "<a href='?src=\ref[src];toglang=\ref[M];lang=[html_encode(k)]' style='color:#006600'>[k]</a>"
+			else
+				body += "<a href='?src=\ref[src];toglang=\ref[M];lang=[html_encode(k)]' style='color:#ff0000'>[k]</a>"
 
 	body += {"<br>
 		</body></html>
