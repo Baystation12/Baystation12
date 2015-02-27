@@ -245,6 +245,10 @@
 	desc = "Dispenses radium that's necessary for cures!"
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "radiumtank"
+	anchored = 1
+	density = 0
+	amount_per_transfer_from_this = 10
+
 	luminosity = 2
 	amount_per_transfer_from_this = 10
 	l_color = "#002200"
