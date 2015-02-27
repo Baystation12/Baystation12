@@ -1148,44 +1148,9 @@
 
 
 		// Set channels depending on how much charge we have left
-
-		// Allow the APC to operate as normal if the cell can charge
-		if(charging && longtermpower < 10)
-			longtermpower += 1
-		else if(longtermpower > -10)
-			longtermpower -= 2
-
-		if((cell.percent() > 30) || longtermpower > 0)              // Put most likely at the top so we don't check it last, effeciency 101
-			if(autoflag != 3)
-				equipment = autoset(equipment, 1)
-				lighting = autoset(lighting, 1)
-				environ = autoset(environ, 1)
-				autoflag = 3
-				power_alarm.clearAlarm(loc, src)
-		else if((cell.percent() <= 30) && (cell.percent() > 15) && longtermpower < 0)                       // <30%, turn off equipment
-			if(autoflag != 2)
-				equipment = autoset(equipment, 2)
-				lighting = autoset(lighting, 1)
-				environ = autoset(environ, 1)
-				power_alarm.triggerAlarm(loc, src)
-				autoflag = 2
-		else if(cell.percent() <= 15)        // <15%, turn off lighting & equipment
-			if((autoflag > 1 && longtermpower < 0) || (autoflag > 1 && longtermpower >= 0))
-				equipment = autoset(equipment, 2)
-				lighting = autoset(lighting, 2)
-				environ = autoset(environ, 1)
-				power_alarm.triggerAlarm(loc, src)
-				autoflag = 1
-		else                                   // zero charge, turn all off
-			if(autoflag != 0)
-				equipment = autoset(equipment, 0)
-				lighting = autoset(lighting, 0)
-				environ = autoset(environ, 0)
-				power_alarm.triggerAlarm(loc, src)
-				autoflag = 0
+		update_channels()
 
 		// now trickle-charge the cell
-
 		lastused_charging = 0 // Clear the variable for new use.
 		if(src.attempt_charging())
 			if(excess > 0)		// check to make sure we have enough to charge
@@ -1222,7 +1187,6 @@
 			chargecount = 0
 
 	else // no cell, switch everything off
-
 		charging = 0
 		chargecount = 0
 		equipment = autoset(equipment, 0)
@@ -1232,12 +1196,47 @@
 		autoflag = 0
 
 	// update icon & area power if anything changed
-
 	if(last_lt != lighting || last_eq != equipment || last_en != environ)
 		queue_icon_update()
 		update()
 	else if (last_ch != charging)
 		queue_icon_update()
+
+/obj/machinery/power/apc/proc/update_channels()
+	// Allow the APC to operate as normal if the cell can charge
+	if(charging && longtermpower < 10)
+		longtermpower += 1
+	else if(longtermpower > -10)
+		longtermpower -= 2
+
+	if((cell.percent() > 30) || longtermpower > 0)              // Put most likely at the top so we don't check it last, effeciency 101
+		if(autoflag != 3)
+			equipment = autoset(equipment, 1)
+			lighting = autoset(lighting, 1)
+			environ = autoset(environ, 1)
+			autoflag = 3
+			power_alarm.clearAlarm(loc, src)
+	else if((cell.percent() <= 30) && (cell.percent() > 15) && longtermpower < 0)                       // <30%, turn off equipment
+		if(autoflag != 2)
+			equipment = autoset(equipment, 2)
+			lighting = autoset(lighting, 1)
+			environ = autoset(environ, 1)
+			power_alarm.triggerAlarm(loc, src)
+			autoflag = 2
+	else if(cell.percent() <= 15)        // <15%, turn off lighting & equipment
+		if((autoflag > 1 && longtermpower < 0) || (autoflag > 1 && longtermpower >= 0))
+			equipment = autoset(equipment, 2)
+			lighting = autoset(lighting, 2)
+			environ = autoset(environ, 1)
+			power_alarm.triggerAlarm(loc, src)
+			autoflag = 1
+	else                                   // zero charge, turn all off
+		if(autoflag != 0)
+			equipment = autoset(equipment, 0)
+			lighting = autoset(lighting, 0)
+			environ = autoset(environ, 0)
+			power_alarm.triggerAlarm(loc, src)
+			autoflag = 0
 
 // val 0=off, 1=off(auto) 2=on 3=on(auto)
 // on 0=off, 1=on, 2=autooff
@@ -1266,12 +1265,15 @@ obj/machinery/power/apc/proc/autoset(var/val, var/on)
 		cell.emp_act(severity)
 	if(occupier)
 		occupier.emp_act(severity)
+
 	lighting = 0
 	equipment = 0
 	environ = 0
+	update()
+
 	spawn(600)
-		equipment = 3
-		environ = 3
+		update_channels()
+		update()
 	..()
 
 /obj/machinery/power/apc/ex_act(severity)

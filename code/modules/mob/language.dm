@@ -88,6 +88,9 @@
 /datum/language/proc/format_message(message, verb)
 	return "[verb], <span class='message'><span class='[colour]'>\"[capitalize(message)]\"</span></span>"
 
+/datum/language/proc/format_message_plain(message, verb)
+	return "[verb], \"[capitalize(message)]\""
+
 /datum/language/proc/format_message_radio(message, verb)
 	return "[verb], <span class='[colour]'>\"[capitalize(message)]\"</span>"
 
@@ -121,10 +124,13 @@
 	name = "Noise"
 	desc = "Noises"
 	key = ""
-	flags = RESTRICTED|NONGLOBAL|INNATE|NO_TALK_MSG
+	flags = RESTRICTED|NONGLOBAL|INNATE|NO_TALK_MSG|NO_STUTTER
 
 /datum/language/noise/format_message(message, verb)
 	return "<span class='message'><span class='[colour]'>[message]</span></span>"
+
+/datum/language/noise/format_message_plain(message, verb)
+	return message
 
 /datum/language/noise/format_message_radio(message, verb)
 	return "<span class='[colour]'>[message]</span>"
