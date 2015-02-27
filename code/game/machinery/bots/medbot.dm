@@ -455,7 +455,7 @@
 	return
 
 /obj/machinery/bot/medbot/bullet_act(var/obj/item/projectile/Proj)
-	if(Proj.flag == "taser")
+	if(Proj.taser_effect)
 		src.stunned = min(stunned+10,20)
 	..()
 

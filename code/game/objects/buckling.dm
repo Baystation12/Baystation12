@@ -70,7 +70,6 @@
 
 /obj/proc/user_unbuckle_mob(mob/user)
 	var/mob/living/M = unbuckle_mob()
-	world << 3
 	if(M)
 		if(M != user)
 			M.visible_message(\

@@ -80,7 +80,7 @@
 
 /obj/machinery/computer/curer/Topic(href, href_list)
 	if(..())
-		return
+		return 1
 	usr.machine = src
 
 	if (href_list["antibody"])
@@ -91,7 +91,6 @@
 
 	src.add_fingerprint(usr)
 	src.updateUsrDialog()
-	return
 
 
 /obj/machinery/computer/curer/proc/createcure(var/obj/item/weapon/reagent_containers/container)

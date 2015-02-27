@@ -70,7 +70,7 @@ datum/track/New(var/title_name, var/audio)
 		return
 
 	if(stat & (NOPOWER|BROKEN))
-		usr << "\the [src] doesn't appear to function."
+		usr << "\The [src] doesn't appear to function."
 		return
 
 	if(href_list["change_track"])
@@ -109,7 +109,7 @@ datum/track/New(var/title_name, var/audio)
 
 /obj/machinery/media/jukebox/interact(mob/user)
 	if(stat & (NOPOWER|BROKEN))
-		usr << "\the [src] doesn't appear to function."
+		usr << "\The [src] doesn't appear to function."
 		return
 
 	ui_interact(user)
@@ -182,12 +182,13 @@ datum/track/New(var/title_name, var/audio)
 	return ..()
 
 /obj/machinery/media/jukebox/proc/StopPlaying()
-	var/area/A = get_area(src)
+	var/area/main_area = get_area(src)
 	// Always kill the current sound
-	for(var/mob/living/M in mobs_in_area(A))
-		M << sound(null, channel = 1)
+	for(var/area/related_area in main_area.related)
+		for(var/mob/living/M in mobs_in_area(related_area))
+			M << sound(null, channel = 1)
 
-	A.forced_ambience = null
+		related_area.forced_ambience = null
 	playing = 0
 	update_icon()
 
@@ -197,12 +198,13 @@ datum/track/New(var/title_name, var/audio)
 	if(!current_track)
 		return
 
-	var/area/A = get_area(src)
-	A.forced_ambience = sound(current_track.sound, channel = 1, repeat = 1, volume = 25)
+	var/area/main_area = get_area(src)
+	for(var/area/related_area in main_area.related)
+		related_area.forced_ambience = sound(current_track.sound, channel = 1, repeat = 1, volume = 25)
 
-	for(var/mob/living/M in mobs_in_area(A))
-		if(M.mind)
-			A.play_ambience(M)
+		for(var/mob/living/M in mobs_in_area(related_area))
+			if(M.mind)
+				related_area.play_ambience(related_area)
 
 	playing = 1
 	update_icon()

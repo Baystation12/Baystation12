@@ -47,7 +47,7 @@
 
 /obj/machinery/computer/communications/Topic(href, href_list)
 	if(..())
-		return
+		return 1
 	if (src.z > 1)
 		usr << "\red <b>Unable to establish a connection</b>: \black You're too far away from the station!"
 		return
@@ -110,7 +110,7 @@
 				if(message_cooldown)
 					usr << "Please allow at least one minute to pass between announcements"
 					return
-				var/input = stripped_input(usr, "Please write a message to announce to the station crew.", "Priority Announcement")
+				var/input = input(usr, "Please write a message to announce to the station crew.", "Priority Announcement")
 				if(!input || !(usr in view(1,src)))
 					return
 				crew_announcement.Announce(input)

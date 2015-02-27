@@ -13,13 +13,29 @@
 	var/list/storage_capacity = list("metal" = 0, "glass" = 0)
 	var/show_category = "All"
 
-	var/panel_open = 0
 	var/hacked = 0
 	var/disabled = 0
 	var/shocked = 0
 	var/busy = 0
 
+	var/mat_efficiency = 1
+	var/build_time = 50
+
 	var/datum/wires/autolathe/wires = null
+
+/obj/machinery/autolathe/New()
+
+	..()
+	wires = new(src)
+	//Create parts for lathe.
+	component_parts = list()
+	component_parts += new /obj/item/weapon/circuitboard/autolathe(src)
+	component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)
+	component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)
+	component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)
+	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
+	component_parts += new /obj/item/weapon/stock_parts/console_screen(src)
+	RefreshParts()
 
 /obj/machinery/autolathe/proc/update_recipe_list()
 	if(!machine_recipes)
@@ -33,8 +49,8 @@
 		user << "<span class='danger'>\The [src] is disabled!</span>"
 		return
 
-	if (shocked)
-		shock(user,50)
+	if(shocked)
+		shock(user, 50)
 
 	var/dat = "<center><h1>Autolathe Control Panel</h1><hr/>"
 
@@ -65,16 +81,16 @@
 			else
 				//Make sure it's buildable and list requires resources.
 				for(var/material in R.resources)
-					var/sheets = round(stored_material[material]/R.resources[material])
+					var/sheets = round(stored_material[material]/round(R.resources[material]*mat_efficiency))
 					if(isnull(max_sheets) || max_sheets > sheets)
 						max_sheets = sheets
-					if(!isnull(stored_material[material]) && stored_material[material] < R.resources[material])
+					if(!isnull(stored_material[material]) && stored_material[material] < round(R.resources[material]*mat_efficiency))
 						can_make = 0
 					if(!comma)
 						comma = 1
 					else
 						material_string += ", "
-					material_string += "[R.resources[material]] [material]"
+					material_string += "[round(R.resources[material] * mat_efficiency)] [material]"
 				material_string += ".<br></td>"
 				//Build list of multipliers for sheets.
 				if(R.is_stack)
@@ -99,29 +115,25 @@
 
 /obj/machinery/autolathe/attackby(var/obj/item/O as obj, var/mob/user as mob)
 
-	if (stat)
-		return
-
-	if (busy)
+	if(busy)
 		user << "<span class='notice'>\The [src] is busy. Please wait for completion of previous operation.</span>"
 		return
 
-	if(istype(O, /obj/item/weapon/screwdriver))
-		panel_open = !panel_open
-		icon_state = (panel_open ? "autolathe_t": "autolathe")
-		user << "You [panel_open ? "open" : "close"] the maintenance hatch of [src]."
+	if(default_deconstruction_screwdriver(user, O))
 		updateUsrDialog()
 		return
+	if(default_deconstruction_crowbar(user, O))
+		return
+	if(default_part_replacement(user, O))
+		return
 
-	if (panel_open)
+	if(stat)
+		return
+
+	if(panel_open)
 		//Don't eat multitools or wirecutters used on an open lathe.
 		if(istype(O, /obj/item/device/multitool) || istype(O, /obj/item/weapon/wirecutters))
 			attack_hand(user)
-			return
-
-		//Dismantle the frame.
-		if(istype(O, /obj/item/weapon/crowbar))
-			dismantle()
 			return
 
 	if(O.loc != user && !(istype(O,/obj/item/stack)))
@@ -170,11 +182,11 @@
 	else
 		user << "You fill \the [src] with \the [eating]."
 
-	flick("autolathe_o",src) // Plays metal insertion animation. Work out a good way to work out a fitting animation. ~Z
+	flick("autolathe_o", src) // Plays metal insertion animation. Work out a good way to work out a fitting animation. ~Z
 
 	if(istype(eating,/obj/item/stack))
 		var/obj/item/stack/stack = eating
-		stack.use(max(1,round(total_used/mass_per_sheet))) // Always use at least 1 to prevent infinite materials.
+		stack.use(max(1, round(total_used/mass_per_sheet))) // Always use at least 1 to prevent infinite materials.
 	else
 		user.drop_item(O)
 		del(O)
@@ -227,18 +239,18 @@
 		//Check if we still have the materials.
 		for(var/material in making.resources)
 			if(!isnull(stored_material[material]))
-				if(stored_material[material] < (making.resources[material]*multiplier))
+				if(stored_material[material] < round(making.resources[material] * mat_efficiency) * multiplier)
 					return
 
 		//Consume materials.
 		for(var/material in making.resources)
 			if(!isnull(stored_material[material]))
-				stored_material[material] = max(0,stored_material[material]-(making.resources[material]*multiplier))
+				stored_material[material] = max(0, stored_material[material] - round(making.resources[material] * mat_efficiency) * multiplier)
 
 		//Fancy autolathe animation.
-		flick("autolathe_n",src)
+		flick("autolathe_n", src)
 
-		sleep(50)
+		sleep(build_time)
 
 		busy = 0
 
@@ -247,39 +259,31 @@
 
 		//Create the desired item.
 		var/obj/item/I = new making.path(get_step(loc, get_dir(src,usr)))
-		if(multiplier>1 && istype(I,/obj/item/stack))
+		if(multiplier > 1 && istype(I, /obj/item/stack))
 			var/obj/item/stack/S = I
 			S.amount = multiplier
 
 	updateUsrDialog()
 
-
-/obj/machinery/autolathe/New()
-
-	..()
-	wires = new(src)
-	//Create parts for lathe.
-	component_parts = list()
-	component_parts += new /obj/item/weapon/circuitboard/autolathe(src)
-	component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)
-	component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)
-	component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)
-	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
-	component_parts += new /obj/item/weapon/stock_parts/console_screen(src)
-	RefreshParts()
+/obj/machinery/autolathe/update_icon()
+	icon_state = (panel_open ? "autolathe_t" : "autolathe")
 
 //Updates overall lathe storage size.
 /obj/machinery/autolathe/RefreshParts()
 	..()
-	var/tot_rating = 0
+	var/mb_rating = 0
+	var/man_rating = 0
 	for(var/obj/item/weapon/stock_parts/matter_bin/MB in component_parts)
-		tot_rating += MB.rating
+		mb_rating += MB.rating
+	for(var/obj/item/weapon/stock_parts/manipulator/M in component_parts)
+		man_rating += M.rating
 
-	storage_capacity["metal"] = tot_rating  * 25000
-	storage_capacity["glass"] = tot_rating  * 12500
+	storage_capacity["metal"] = mb_rating  * 25000
+	storage_capacity["glass"] = mb_rating  * 12500
+	build_time = 50 / man_rating
+	mat_efficiency = 1.1 - man_rating * 0.1// Normally, price is 1.25 the amount of material, so this shouldn't go higher than 0.8. Maximum rating of parts is 3
 
 /obj/machinery/autolathe/dismantle()
-	..()
 	var/list/sheets = list("metal" = /obj/item/stack/sheet/metal, "glass" = /obj/item/stack/sheet/glass)
 
 	for(var/mat in stored_material)
@@ -288,3 +292,4 @@
 		if(stored_material[mat] > S.perunit)
 			S.amount = round(stored_material[mat] / S.perunit)
 			S.loc = loc
+	..()

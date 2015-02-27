@@ -141,9 +141,9 @@
 		if(isliving(src.loc))
 			return
 		user.next_move = max(user.next_move+2,world.time + 2)
-	src.pickup(user)
-	add_fingerprint(user)
 	user.put_in_active_hand(src)
+	if(src.loc == user)
+		src.pickup(user)
 	return
 
 
@@ -198,11 +198,7 @@
 // apparently called whenever an item is removed from a slot, container, or anything else.
 /obj/item/proc/dropped(mob/user as mob)
 	..()
-	if(zoom) //binoculars, scope, etc
-		user.client.view = world.view
-		user.client.pixel_x = 0
-		user.client.pixel_y = 0
-		zoom = 0
+	if(zoom) zoom() //binoculars, scope, etc
 
 // called just as an item is picked up (loc is not yet changed)
 /obj/item/proc/pickup(mob/user)
@@ -411,9 +407,9 @@
 						H << "<span class='warning'>You need a jumpsuit before you can attach this [name].</span>"
 					return 0
 				var/obj/item/clothing/under/uniform = H.w_uniform
-				if(uniform.hastie)
+				if(uniform.accessories.len && !uniform.can_attach_accessory(src))
 					if (!disable_warning)
-						H << "<span class='warning'>You already have [uniform.hastie] attached to your [uniform].</span>"
+						H << "<span class='warning'>You already have an accessory of this type attached to your [uniform].</span>"
 					return 0
 				if( !(slot_flags & SLOT_TIE) )
 					return 0
@@ -637,8 +633,8 @@ For zooming with scope or binoculars. This is called from
 modules/mob/mob_movement.dm if you move you will be zoomed out
 modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 */
-
-/obj/item/proc/zoom(var/tileoffset = 11,var/viewsize = 12) //tileoffset is client view offset in the direction the user is facing. viewsize is how far out this thing zooms. 7 is normal view
+//Looking through a scope or binoculars should /not/ improve your periphereal vision. Still, increase viewsize a tiny bit so that sniping isn't as restricted to NSEW
+/obj/item/proc/zoom(var/tileoffset = 14,var/viewsize = 9) //tileoffset is client view offset in the direction the user is facing. viewsize is how far out this thing zooms. 7 is normal view
 
 	var/devicename
 
@@ -660,9 +656,8 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 		cannotzoom = 1
 
 	if(!zoom && !cannotzoom)
-		if(!usr.hud_used.hud_shown)
-			usr.button_pressed_F12(1)	// If the user has already limited their HUD this avoids them having a HUD when they zoom in
-		usr.button_pressed_F12(1)
+		if(usr.hud_used.hud_shown)
+			usr.toggle_zoom_hud()	// If the user has already limited their HUD this avoids them having a HUD when they zoom in
 		usr.client.view = viewsize
 		zoom = 1
 
@@ -685,18 +680,10 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 
 		usr.visible_message("[usr] peers through the [zoomdevicename ? "[zoomdevicename] of the [src.name]" : "[src.name]"].")
 
-		/*
-		if(istype(usr,/mob/living/carbon/human/))
-			var/mob/living/carbon/human/H = usr
-			usr.visible_message("[usr] holds [devicename] up to [H.get_visible_gender() == MALE ? "his" : H.get_visible_gender() == FEMALE ? "her" : "their"] eyes.")
-		else
-			usr.visible_message("[usr] holds [devicename] up to its eyes.")
-		*/
-
 	else
 		usr.client.view = world.view
 		if(!usr.hud_used.hud_shown)
-			usr.button_pressed_F12(1)
+			usr.toggle_zoom_hud()
 		zoom = 0
 
 		usr.client.pixel_x = 0

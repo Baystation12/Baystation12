@@ -55,7 +55,7 @@
 	var/uses = 0
 	var/emagged = 0
 	var/failmsg = ""
-	var/charge = 1
+	var/charge = 0
 
 /obj/item/device/lightreplacer/New()
 	uses = max_uses / 2
@@ -122,11 +122,11 @@
 /obj/item/device/lightreplacer/proc/AddUses(var/amount = 1)
 	uses = min(max(uses + amount, 0), max_uses)
 
-/obj/item/device/lightreplacer/proc/Charge(var/mob/user)
-	charge += 1
-	if(charge > 7)
+/obj/item/device/lightreplacer/proc/Charge(var/mob/user, var/amount = 1)
+	charge += amount
+	if(charge > 6)
 		AddUses(1)
-		charge = 1
+		charge = 0
 
 /obj/item/device/lightreplacer/proc/ReplaceLight(var/obj/machinery/light/target, var/mob/living/U)
 

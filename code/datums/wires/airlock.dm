@@ -34,14 +34,17 @@ var/const/AIRLOCK_WIRE_LIGHT = 2048
 
 /datum/wires/airlock/GetInteractWindow()
 	var/obj/machinery/door/airlock/A = holder
+	var/haspower = A.arePowerSystemsOn() //If there's no power, then no lights will be on.
+	
 	. += ..()
-	. += text("<br>\n[]<br>\n[]<br>\n[]<br>\n[]<br>\n[]<br>\n[]<br>\n[]", (A.locked ? "The door bolts have fallen!" : "The door bolts look up."),
-	(A.lights ? "The door bolt lights are on." : "The door bolt lights are off!"),
-	((A.hasPower()) ? "The test light is on." : "The test light is off!"),
-	((A.aiControlDisabled==0 && !A.emagged) ? "The 'AI control allowed' light is on." : "The 'AI control allowed' light is off."),
-	(A.safe==0 ? "The 'Check Wiring' light is on." : "The 'Check Wiring' light is off."),
-	(A.normalspeed==0 ? "The 'Check Timing Mechanism' light is on." : "The 'Check Timing Mechanism' light is off."),
-	(A.aiDisabledIdScanner==0 ? "The IDScan light is on." : "The IDScan light is off."))
+	. += text("<br>\n[]<br>\n[]<br>\n[]<br>\n[]<br>\n[]<br>\n[]<br>\n[]", 
+	(A.locked ? "The door bolts have fallen!" : "The door bolts look up."),
+	((A.lights && haspower) ? "The door bolt lights are on." : "The door bolt lights are off!"),
+	((haspower) ? "The test light is on." : "The test light is off!"),
+	((A.aiControlDisabled==0 && !A.emagged && haspower)? "The 'AI control allowed' light is on." : "The 'AI control allowed' light is off."),
+	((A.safe==0 && haspower)? "The 'Check Wiring' light is on." : "The 'Check Wiring' light is off."),
+	((A.normalspeed==0 && haspower)? "The 'Check Timing Mechanism' light is on." : "The 'Check Timing Mechanism' light is off."),
+	((A.aiDisabledIdScanner==0 && haspower)? "The IDScan light is on." : "The IDScan light is off."))
 
 /datum/wires/airlock/UpdateCut(var/index, var/mended)
 
@@ -127,7 +130,7 @@ var/const/AIRLOCK_WIRE_LIGHT = 2048
 	switch(index)
 		if(AIRLOCK_WIRE_IDSCAN)
 			//Sending a pulse through flashes the red light on the door (if the door has power).
-			if(A.hasPower() && A.density)
+			if(A.arePowerSystemsOn() && A.density)
 				A.do_animate("deny")
 		if(AIRLOCK_WIRE_MAIN_POWER1 || AIRLOCK_WIRE_MAIN_POWER2)
 			//Sending a pulse through either one causes a breaker to trip, disabling the door for 10 seconds if backup power is connected, or 1 minute if not (or until backup power comes back on, whichever is shorter).
@@ -139,7 +142,7 @@ var/const/AIRLOCK_WIRE_LIGHT = 2048
 				A.locked = 1
 				A.audible_message("You hear a click from the bottom of the door.", null,  1)
 			else
-				if(A.hasPower()) //only can raise bolts if power's on
+				if(A.arePowerSystemsOn()) //only can raise bolts if power's on
 					A.locked = 0
 					A.audible_message("You hear a click from the bottom of the door.", null, 1)
 			A.update_icon()

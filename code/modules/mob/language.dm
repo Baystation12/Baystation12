@@ -1,3 +1,5 @@
+#define SCRAMBLE_CACHE_LEN 20
+
 /*
 	Datum based languages. Easily editable and modular.
 */
@@ -35,10 +37,20 @@
 
 	return "[trim(full_name)]"
 
+/datum/language
+	var/list/scramble_cache = list()
+
 /datum/language/proc/scramble(var/input)
 
 	if(!syllables || !syllables.len)
 		return stars(input)
+
+	// If the input is cached already, move it to the end of the cache and return it
+	if(input in scramble_cache)
+		var/n = scramble_cache[input]
+		scramble_cache -= input
+		scramble_cache[input] = n
+		return n
 
 	var/input_size = length(input)
 	var/scrambled_text = ""
@@ -64,10 +76,20 @@
 	var/input_ending = copytext(input, input_size)
 	if(input_ending in list("!","?","."))
 		scrambled_text += input_ending
+
+	// Add it to cache, cutting old entries if the list is too long
+	scramble_cache[input] = scrambled_text
+	if(scramble_cache.len > SCRAMBLE_CACHE_LEN)
+		scramble_cache.Cut(1, scramble_cache.len-SCRAMBLE_CACHE_LEN-1)
+
+
 	return scrambled_text
 
 /datum/language/proc/format_message(message, verb)
 	return "[verb], <span class='message'><span class='[colour]'>\"[capitalize(message)]\"</span></span>"
+
+/datum/language/proc/format_message_plain(message, verb)
+	return "[verb], \"[capitalize(message)]\""
 
 /datum/language/proc/format_message_radio(message, verb)
 	return "[verb], <span class='[colour]'>\"[capitalize(message)]\"</span>"
@@ -102,10 +124,13 @@
 	name = "Noise"
 	desc = "Noises"
 	key = ""
-	flags = RESTRICTED|NONGLOBAL|INNATE|NO_TALK_MSG
+	flags = RESTRICTED|NONGLOBAL|INNATE|NO_TALK_MSG|NO_STUTTER
 
 /datum/language/noise/format_message(message, verb)
 	return "<span class='message'><span class='[colour]'>[message]</span></span>"
+
+/datum/language/noise/format_message_plain(message, verb)
+	return message
 
 /datum/language/noise/format_message_radio(message, verb)
 	return "<span class='[colour]'>[message]</span>"
@@ -497,3 +522,5 @@
 "le", "me", "nd", "ne", "ng", "nt", "on", "or", "ou", "re", "se", "st", "te", "th", "ti", "to", 
 "ve", "wa", "all", "and", "are", "but", "ent", "era", "ere", "eve", "for", "had", "hat", "hen", "her", "hin", 
 "his", "ing", "ion", "ith", "not", "ome", "oul", "our", "sho", "ted", "ter", "tha", "the", "thi")
+
+#undef SCRAMBLE_CACHE_LEN

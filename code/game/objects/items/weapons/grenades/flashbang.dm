@@ -21,6 +21,7 @@
 			B.health -= damage
 			B.update_icon()
 
+		new/obj/effect/effect/sparks(src.loc)
 		new/obj/effect/effect/smoke/illumination(src.loc, brightness=15)
 		del(src)
 		return

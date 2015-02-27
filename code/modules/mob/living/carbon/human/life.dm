@@ -326,7 +326,6 @@
 					if(istype(O)) O.add_autopsy_data("Radiation Poisoning", damage)
 
 	proc/breathe()
-		if(reagents.has_reagent("lexorin")) return
 		if(istype(loc, /obj/machinery/atmospherics/unary/cryo_cell)) return
 		if(species && (species.flags & NO_BREATHE || species.flags & IS_SYNTHETIC)) return
 
@@ -439,17 +438,15 @@
 			return
 
 		if(!breath || (breath.total_moles == 0) || suiciding)
+			failed_last_breath = 1
 			if(suiciding)
 				adjustOxyLoss(2)//If you are suiciding, you should die a little bit faster
-				failed_last_breath = 1
 				oxygen_alert = max(oxygen_alert, 1)
 				return 0
 			if(health > config.health_threshold_crit)
 				adjustOxyLoss(HUMAN_MAX_OXYLOSS)
-				failed_last_breath = 1
 			else
 				adjustOxyLoss(HUMAN_CRIT_MAX_OXYLOSS)
-				failed_last_breath = 1
 
 			oxygen_alert = max(oxygen_alert, 1)
 
@@ -1243,7 +1240,7 @@
 			if(!druggy)		see_invisible = SEE_INVISIBLE_LEVEL_TWO
 			if(healths)		healths.icon_state = "health7"	//DEAD healthmeter
 			if(client)
-				if(client.view != world.view) // If mob moves while zoomed in with device, unzoom them.
+				if(client.view != world.view) // If mob dies while zoomed in with device, unzoom them.
 					for(var/obj/item/item in contents)
 						if(item.zoom)
 							item.zoom()

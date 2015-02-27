@@ -84,3 +84,18 @@
 	armor = list(melee = 60, bullet = 50, laser = 30,energy = 15, bomb = 30, bio = 30, rad = 30)
 	siemens_coefficient = 0.9
 	body_parts_covered = UPPER_TORSO|ARMS
+
+//Orange emergency space suit
+/obj/item/clothing/head/helmet/space/emergency
+	name = "Emergency Space Helmet"
+	icon_state = "emergencyhelm"
+	item_state = "emergencyhelm"
+	desc = "A simple helmet with a built in light, smells like mothballs."
+
+
+/obj/item/clothing/suit/space/emergency
+	name = "Emergency Softsuit"
+	icon_state = "syndicate-orange"
+	item_state = "syndicate-orange"
+	desc = "A thin, ungainly softsuit colored in blaze orange for rescuers to easily locate, looks pretty fragile."
+	slowdown = 4
