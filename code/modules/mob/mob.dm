@@ -1180,7 +1180,9 @@ mob/proc/yank_out_object()
 		usr << "You are now facing [dir2text(facing_dir)]."
 
 /mob/proc/set_face_dir(var/newdir)
-	if(newdir)
+	if(newdir == facing_dir)
+		facing_dir = null
+	else if(newdir)
 		set_dir(newdir)
 		facing_dir = newdir
 	else if(facing_dir)
@@ -1200,20 +1202,16 @@ mob/proc/yank_out_object()
 
 /mob/verb/northfaceperm()
 	set hidden = 1
-	facing_dir = null
 	set_face_dir(NORTH)
 
 /mob/verb/southfaceperm()
 	set hidden = 1
-	facing_dir = null
 	set_face_dir(SOUTH)
 
 /mob/verb/eastfaceperm()
 	set hidden = 1
-	facing_dir = null
 	set_face_dir(EAST)
 
 /mob/verb/westfaceperm()
 	set hidden = 1
-	facing_dir = null
 	set_face_dir(WEST)
