@@ -124,7 +124,7 @@
 	Topic(src, list("src"= "\ref[src]", "breaker"="1"), 1) // 1 meaning no window (consistency!)
 
 /obj/machinery/turretid/AICtrlClick() //turns off/on Turrets
-	Topic(src, list("src"= "\ref[src]", "operation"="toggleon"), 1) // 1 meaning no window (consistency!)
+	Topic(src, list("src"= "\ref[src]", "command"="enable", "value"="[!enabled]"), 1) // 1 meaning no window (consistency!)
 
 /atom/proc/AIAltClick(var/atom/A)
 	AltClick(A)
@@ -139,7 +139,7 @@
 	return
 
 /obj/machinery/turretid/AIAltClick() //toggles lethal on turrets
-	Topic(src, list("src"= "\ref[src]", "operation"="togglelethal"), 1) // 1 meaning no window (consistency!)
+	Topic(src, list("src"= "\ref[src]", "command"="lethal", "value"="[!lethal]"), 1) // 1 meaning no window (consistency!)
 
 /atom/proc/AIMiddleClick()
 	return
