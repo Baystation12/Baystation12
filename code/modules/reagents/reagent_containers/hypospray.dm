@@ -87,3 +87,9 @@
 	reagent_inside_of_this_object_which_is_being_used = "adminordrazine"
 	amount_per_transfer_from_this = 0.5
 	volume = 0.5
+
+/obj/item/weapon/reagent_containers/hypospray/autoinjector/adminorazine/attack(mob/M as mob, mob/user as mob)
+	..()
+	user << "The injector disintegrates quickly after you use it."
+	del src
+	return
