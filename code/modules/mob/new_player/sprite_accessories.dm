@@ -678,7 +678,7 @@
 
 	taj_sideburns
 		name = "Tajara Sideburns"
-		icon_state = "facial_mutton"
+		icon_state = "facial_sideburns"
 		species_allowed = list("Tajara")
 
 	taj_mutton
