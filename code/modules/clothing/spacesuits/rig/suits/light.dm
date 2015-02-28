@@ -19,6 +19,8 @@
 
 /obj/item/clothing/suit/space/rig/light
 	name = "suit"
+	breach_threshold = 18 //comparable to voidsuits
+	resilience = 0.2
 
 /obj/item/clothing/gloves/rig/light
 	name = "gloves"
@@ -55,8 +57,10 @@
 	desc = "A unique, vaccum-proof suit of nano-enhanced armor designed specifically for Spider Clan assassins."
 	icon_state = "ninja_rig"
 	armor = list(melee = 60, bullet = 50, laser = 30,energy = 15, bomb = 30, bio = 30, rad = 30)
-	emp_protection = 40
+	emp_protection = 40 //change this to 30 if too high.
 	slowdown = 0
+
+	chest_type = /obj/item/clothing/suit/space/rig/light/ninja
 
 	req_access = list(access_syndicate)
 
@@ -76,6 +80,10 @@
 		)
 
 	..()
+
+/obj/item/clothing/suit/space/rig/light/ninja
+	breach_threshold = 28 //comparable to regular hardsuits
+	resilience = 0.05
 
 /obj/item/weapon/rig/light/stealth
 	name = "stealth suit control module"

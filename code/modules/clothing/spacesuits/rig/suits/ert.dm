@@ -41,6 +41,7 @@
 		)
 
 /obj/item/clothing/gloves/rig/ert_engineer
+	name = "insulated gauntlets"
 	siemens_coefficient = 0
 
 /obj/item/weapon/rig/ert/medical

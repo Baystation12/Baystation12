@@ -315,14 +315,13 @@
 		if(!cell || cell.charge <= 0)
 			if(electrified > 0)
 				electrified = 0
-			malfunction_delay = 0 //ensures that people aren't stuck in their suit if the cell runs out while malfunctioning.
 			if(!offline)
 				if(istype(wearer))
 					if(!canremove)
 						if (offline_slowdown < 3)
 							wearer << "<span class='danger'>Your suit beeps stridently, and suddenly goes dead.</span>"
 						else
-							wearer << "<span class='danger'>Your suit beeps stridently, and suddenly you're wearing a leaden mass of metal and plastic instead of a powered suit.</span>"
+							wearer << "<span class='danger'>Your suit beeps stridently, and suddenly you're wearing a leaden mass of metal and plastic composites instead of a powered suit.</span>"
 					if(offline_vision_restriction == 1)
 						wearer << "<span class='danger'>The suit optics flicker and die, leaving you with restricted vision.</span>"
 					else if(offline_vision_restriction == 2)
@@ -693,7 +692,7 @@
 
 /obj/item/weapon/rig/emp_act(severity_class)
 	//set malfunctioning
-	if(emp_protection < 40)
+	if(emp_protection < 30) //for ninjas, really.
 		malfunctioning += 10
 		if(malfunction_delay <= 0)
 			malfunction_delay = max(malfunction_delay, round(30/severity_class))
@@ -719,8 +718,8 @@
 	if(!is_emp)
 		chance = 2*max(0, damage - (chest? chest.breach_threshold : 0))
 	else
-		//Want this to be roughly independant of the number of modules, that way people designing hardsuits 
-		//don't have to worry (as much) about how adding that extra module will affect emp resiliance.
+		//Want this to be roughly independant of the number of modules, meaning that X emp hits will disable Y% of the suit's modules on average.
+		//that way people designing hardsuits don't have to worry (as much) about how adding that extra module will affect emp resiliance by 'soaking' hits for other modules
 		chance = max(0, damage - emp_protection)*min(installed_modules.len/15, 1)
 
 	if(!prob(chance))
@@ -758,7 +757,10 @@
 
 /obj/item/weapon/rig/proc/malfunction_check(var/mob/living/carbon/human/user)
 	if(malfunction_delay)
-		user << "<span class='danger'>ERROR: Hardware fault. Rebooting interface...</span>"
+		if(offline)
+			user << "<span class='danger'>The suit is completely unresponsive.</span>"
+		else
+			user << "<span class='danger'>ERROR: Hardware fault. Rebooting interface...</span>"
 		return 1
 	return 0
 
