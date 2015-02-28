@@ -281,14 +281,17 @@ datum/controller/game_controller/proc/process_machines_sort()
 		machines = dd_sortedObjectList(machines)
 
 datum/controller/game_controller/proc/process_machines_process()
-	for(var/obj/machinery/Machine in machines)
+	var/i = 1
+	while(i<=machines.len)
+		var/obj/machinery/Machine = machines[i]
 		last_thing_processed = Machine.type
 		if(Machine.process() != PROCESS_KILL)
-			Machine.power_change()
-			if(Machine.use_power)
-				Machine.auto_use_power()
-			continue
-		machines -= Machine
+			if(Machine)
+				if(Machine.use_power)
+					Machine.auto_use_power()
+				i++
+				continue
+		machines.Cut(i,i+1)
 
 datum/controller/game_controller/proc/process_objects()
 	for(var/i = 1, i <= processing_objects.len, i++)
@@ -296,7 +299,7 @@ datum/controller/game_controller/proc/process_objects()
 		last_thing_processed = Object.type
 		Object.process()
 		continue
-//		processing_objects.Cut(i,i+1)
+		processing_objects.Cut(i,i+1)
 
 datum/controller/game_controller/proc/process_pipenets()
 	last_thing_processed = /datum/pipe_network

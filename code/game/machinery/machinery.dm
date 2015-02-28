@@ -123,7 +123,7 @@ Class Procs:
 		machinery_sort_required = 1
 
 /obj/machinery/Del()
-	machines -= src
+	machines.Remove(src)
 	..()
 
 /obj/machinery/process()//If you dont use process or power why are you here
