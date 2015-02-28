@@ -1,9 +1,17 @@
 #define NEIGHBOR_REFRESH_TIME 100
 
+/obj/effect/plant/proc/get_cardinal_neighbors()
+	var/list/cardinal_neighbors = list()
+	for(var/check_dir in cardinal)
+		var/turf/simulated/T = get_step(get_turf(src), check_dir)
+		if(istype(T))
+			cardinal_neighbors |= T
+	return cardinal_neighbors
+
 /obj/effect/plant/proc/update_neighbors()
 	// Update our list of valid neighboring turfs.
 	neighbors = list()
-	for(var/turf/simulated/floor/floor in range(1,src))
+	for(var/turf/simulated/floor in get_cardinal_neighbors())
 		if(get_dist(parent, floor) > spread_distance)
 			continue
 		if((locate(/obj/effect/plant) in floor.contents) || (locate(/obj/effect/dead_plant) in floor.contents) )
@@ -80,10 +88,12 @@
 	// Kill off our plant.
 	if(plant) plant.die()
 	// This turf is clear now, let our buddies know.
-	var/turf/T = get_turf(src)
-	for(var/obj/effect/plant/neighbor in range(1,src))
-		neighbor.neighbors |= T
-		plant_controller.add_plant(neighbor)
+	for(var/turf/simulated/check_turf in get_cardinal_neighbors())
+		if(!istype(check_turf))
+			continue
+		for(var/obj/effect/plant/neighbor in check_turf.contents)
+			neighbor.neighbors |= check_turf
+			plant_controller.add_plant(neighbor)
 	spawn(1) if(src) del(src)
 
 #undef NEIGHBOR_REFRESH_TIME
