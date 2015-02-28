@@ -271,7 +271,7 @@
 	desc = "A metal shaker to mix drinks in."
 	icon_state = "shaker"
 	amount_per_transfer_from_this = 10
-	volume = 100
+	volume = 120
 	center_of_mass = list("x"=17, "y"=10)
 
 /obj/item/weapon/reagent_containers/food/drinks/flask

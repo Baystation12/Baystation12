@@ -3242,7 +3242,7 @@ datum
 
 				// make all the beverages work together
 				for(var/datum/reagent/ethanol/A in holder.reagent_list)
-					if(isnum(A.data)) d += A.data
+					if(A != src && isnum(A.data)) d += A.data
 
 				if(alien && alien == IS_SKRELL) //Skrell get very drunk very quickly.
 					d*=5
