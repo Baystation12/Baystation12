@@ -84,8 +84,8 @@
 		if(istype(owner,/mob/living/carbon/human))
 			var/mob/living/carbon/human/H = owner
 			if(H.species && H.species.flags & IS_SYNTHETIC)
-				brmod = (!isnull(H.species.brute_mod) ? H.species.brute_mod : 1)
-				bumod = (!isnull(H.species.burn_mod) ? H.species.burn_mod : 1)
+				brmod = H.species.brute_mod
+				bumod = H.species.burn_mod
 
 		brute *= brmod //~2/3 damage for ROBOLIMBS
 		burn *= bumod //~2/3 damage for ROBOLIMBS
