@@ -1,10 +1,8 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: code\game\machinery\dispenser.dm
 LAST_COMPILE_VERSION: 506.1249
-DIR: code code\ATMOSPHERICS\components code\ATMOSPHERICS\components\binary_devices code\ATMOSPHERICS\components\omni_devices code\ATMOSPHERICS\components\unary code\controllers code\datums\spells code\datums\wires code\game code\game\area code\game\machinery code\modules code\modules\reagents code\modules\reagents\reagent_containers code\modules\reagents\reagent_containers\glass code\modules\research code\modules\research\xenoarchaeology code\modules\research\xenoarchaeology\machinery maps 
-FILE: code\game\machinery\dispenser.dm
+DIR: code code\ATMOSPHERICS\components code\ATMOSPHERICS\components\binary_devices code\ATMOSPHERICS\components\omni_devices code\ATMOSPHERICS\components\unary code\controllers code\datums\spells code\datums\wires code\game code\game\area code\game\machinery code\modules code\modules\reagents code\modules\reagents\reagent_containers 
 LAST_COMPILE_TIME: 1425116485
 AUTO_FILE_DIR: OFF
 */
