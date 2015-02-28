@@ -762,3 +762,5 @@ var/list/be_special_flags = list(
 //General-purpose life speed define for plants.
 #define HYDRO_SPEED_MULTIPLIER 1
 #define NANO_IGNORE_DISTANCE 1
+
+#define DEFAULT_TYPE /datum/job/assistant

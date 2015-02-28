@@ -407,7 +407,7 @@
 /proc/get_all_jobs()
 	var/list/all_jobs = list()
 	var/list/all_datums = typesof(/datum/job)
-	all_datums.Remove(list(/datum/job,/datum/job/ai,/datum/job/cyborg))
+	all_datums -= exclude_jobs
 	var/datum/job/jobdatum
 	for(var/jobtype in all_datums)
 		jobdatum = new jobtype
