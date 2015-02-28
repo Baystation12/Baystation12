@@ -481,14 +481,14 @@
 	user.drop_from_inventory(src)
 	del(src)
 
-/obj/item/weapon/reagent_containers/food/snacks/throw_impact(atom/hit_atom)
+/obj/item/weapon/reagent_containers/food/snacks/egg/throw_impact(atom/hit_atom)
 	..()
 	new/obj/effect/decal/cleanable/egg_smudge(src.loc)
 	src.reagents.reaction(hit_atom, TOUCH)
 	src.visible_message("\red [src.name] has been squashed.","\red You hear a smack.")
 	del(src)
 
-/obj/item/weapon/reagent_containers/food/snacks/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/item/weapon/reagent_containers/food/snacks/egg/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype( W, /obj/item/toy/crayon ))
 		var/obj/item/toy/crayon/C = W
 		var/clr = C.colourName
