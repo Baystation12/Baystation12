@@ -69,7 +69,7 @@
 		wrapped = null
 		return
 
-	src.loc << "\red You drop \the [wrapped]."
+	src.loc << "<span class='danger'>You drop \the [wrapped].</span>"
 	wrapped.loc = get_turf(src)
 	wrapped = null
 	//update_icon()
@@ -78,6 +78,9 @@
 	return (wrapped ? wrapped.attack(M,user) : 0)
 
 /obj/item/weapon/gripper/afterattack(var/atom/target, var/mob/living/user, proximity, params)
+
+	if(!proximity)
+		return // This will prevent them using guns at range but adminbuse can add them directly to modules, so eh.
 
 	//There's some weirdness with items being lost inside the arm. Trying to fix all cases. ~Z
 	if(!wrapped)
@@ -123,7 +126,7 @@
 			wrapped = I
 			return
 		else
-			user << "\red Your gripper cannot hold \the [target]."
+			user << "<span class='danger'>Your gripper cannot hold \the [target].</span>"
 
 	else if(istype(target,/obj/machinery/power/apc))
 		var/obj/machinery/power/apc/A = target
@@ -140,7 +143,7 @@
 				A.charging = 0
 				A.update_icon()
 
-				user.visible_message("\red [user] removes the power cell from [A]!", "You remove the power cell.")
+				user.visible_message("<span class='danger'>[user] removes the power cell from [A]!</span>", "You remove the power cell.")
 
 //TODO: Matter decompiler.
 /obj/item/weapon/matter_decompiler
@@ -173,7 +176,7 @@
 
 	for(var/mob/M in T)
 		if(istype(M,/mob/living/simple_animal/lizard) || istype(M,/mob/living/simple_animal/mouse))
-			src.loc.visible_message("\red [src.loc] sucks [M] into its decompiler. There's a horrible crunching noise.","\red It's a bit of a struggle, but you manage to suck [M] into your decompiler. It makes a series of visceral crunching noises.")
+			src.loc.visible_message("<span class='danger'>[src.loc] sucks [M] into its decompiler. There's a horrible crunching noise.</span>","<span class='danger'>It's a bit of a struggle, but you manage to suck [M] into your decompiler. It makes a series of visceral crunching noises.</span>")
 			new/obj/effect/decal/cleanable/blood/splatter(get_turf(src))
 			del(M)
 			if(wood)
@@ -270,16 +273,16 @@
 		grabbed_something = 1
 
 	if(grabbed_something)
-		user << "\blue You deploy your decompiler and clear out the contents of \the [T]."
+		user << "<span class='notice'>You deploy your decompiler and clear out the contents of \the [T].</span>"
 	else
-		user << "\red Nothing on \the [T] is useful to you."
+		user << "<span class='danger'>Nothing on \the [T] is useful to you.</span>"
 	return
 
 //PRETTIER TOOL LIST.
 /mob/living/silicon/robot/drone/installed_modules()
 
 	if(weapon_lock)
-		src << "\red Weapon lock active, unable to use modules! Count:[weaponlock_time]"
+		src << "<span class='danger'>Weapon lock active, unable to use modules! Count:[weaponlock_time]</span>"
 		return
 
 	if(!module)
