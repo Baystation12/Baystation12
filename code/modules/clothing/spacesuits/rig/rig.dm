@@ -313,8 +313,9 @@
 
 	if(!istype(wearer) || loc != wearer || wearer.back != src || canremove || !cell || cell.charge <= 0)
 		if(!cell || cell.charge <= 0)
-			if(electrified >0)
+			if(electrified > 0)
 				electrified = 0
+			malfunction_delay = 0 //ensures that people aren't stuck in their suit if the cell runs out while malfunctioning.
 			if(!offline)
 				if(istype(wearer))
 					if(!canremove)
@@ -338,7 +339,6 @@
 			for(var/obj/item/rig_module/module in installed_modules)
 				module.deactivate()
 			offline = 2
-			malfunction_delay = 0 //ensures that people aren't stuck in their suit if the cell runs out while malfunctioning.
 			chest.slowdown = offline_slowdown
 		return
 
@@ -409,7 +409,7 @@
 	data["boots"] =     (boots ?  "[boots.name]" :  "None.")
 	data["chest"] =     (chest ?  "[chest.name]" :  "None.")
 
-	data["charge"] =       cell ? cell.charge : 0
+	data["charge"] =       cell ? round(cell.charge,1) : 0
 	data["maxcharge"] =    cell ? cell.maxcharge : 0
 	data["chargestatus"] = cell ? Floor((cell.charge/cell.maxcharge)*50) : 0
 
