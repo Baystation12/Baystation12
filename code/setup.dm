@@ -763,4 +763,4 @@ var/list/be_special_flags = list(
 #define HYDRO_SPEED_MULTIPLIER 1
 #define NANO_IGNORE_DISTANCE 1
 
-#define DEFAULT_TYPE /datum/job/assistant
+#define DEFAULT_JOB_TYPE /datum/job/assistant

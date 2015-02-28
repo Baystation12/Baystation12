@@ -246,7 +246,7 @@ var/global/datum/controller/occupations/job_master
 
 		//People who wants to be assistants, sure, go on.
 		Debug("DO, Running Assistant Check 1")
-		var/datum/job/assist = new DEFAULT_TYPE ()
+		var/datum/job/assist = new DEFAULT_JOB_TYPE ()
 		var/list/assistant_candidates = FindOccupationCandidates(assist, 3)
 		Debug("AC1, Candidates: [assistant_candidates.len]")
 		for(var/mob/new_player/player in assistant_candidates)
