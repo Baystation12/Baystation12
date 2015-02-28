@@ -350,7 +350,12 @@ Auto Patrol: []"},
 
 			if(istype(src.target,/mob/living/carbon))
 				var/mob/living/carbon/C = target
-				if(!C.handcuffed && !src.arrest_type)
+				var/wearing_hardsuit
+				if(istype(C,/mob/living/carbon/human))
+					var/mob/living/carbon/human/H = C
+					if(istype(H.back, /obj/item/weapon/rig) && istype(H.gloves,/obj/item/clothing/gloves/rig))
+						wearing_hardsuit = 1
+				if(!wearing_hardsuit && !C.handcuffed && !src.arrest_type)
 					playsound(src.loc, 'sound/weapons/handcuffs.ogg', 30, 1, -2)
 					mode = SECBOT_ARREST
 					visible_message("\red <B>[src] is trying to put handcuffs on [src.target]!</B>")
