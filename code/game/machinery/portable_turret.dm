@@ -56,6 +56,7 @@
 	var/datum/effect/effect/system/spark_spread/spark_system	//the spark system, used for generating... sparks?
 
 	var/wrenching = 0
+	var/last_target			//last target fired at, prevents turrets from erratically firing at all valid targets in range
 
 /obj/machinery/porta_turret/stationary
 	lethal = 1
@@ -513,6 +514,9 @@
 	return TURRET_PRIORITY_TARGET	//if the perp has passed all previous tests, congrats, it is now a "shoot-me!" nominee
 
 /obj/machinery/porta_turret/proc/tryToShootAt(var/list/mob/living/targets)
+	if(targets.len && last_target && (last_target in targets) && target(last_target))
+		return 1
+
 	while(targets.len > 0)
 		var/mob/living/M = pick(targets)
 		targets -= M
@@ -538,6 +542,7 @@
 	update_icon()
 
 /obj/machinery/porta_turret/proc/popDown()	//pops the turret down
+	last_target = null
 	if(disabled)
 		return
 	if(raising || !raised)
@@ -566,7 +571,8 @@
 /obj/machinery/porta_turret/proc/target(var/mob/living/target)
 	if(disabled)
 		return
-	if(target && (target.stat != DEAD) && (!(target.lying) || emagged))
+	if(target)
+		last_target = target
 		spawn()
 			popUp()				//pop the turret up if it's not already up.
 		set_dir(get_dir(src, target))	//even if you can't shoot, follow the target
@@ -577,7 +583,7 @@
 
 /obj/machinery/porta_turret/proc/shootAt(var/mob/living/target)
 	//any emagged turrets will shoot extremely fast! This not only is deadly, but drains a lot power!
-	if(!(emagged || lethal))	//if it hasn't been emagged, it has to obey a cooldown rate
+	if(!emagged)	//if it hasn't been emagged, it has to obey a cooldown rate
 		if(last_fired || !raised)	//prevents rapid-fire shooting, unless it's been emagged
 			return
 		last_fired = 1
@@ -603,11 +609,12 @@
 		A = new projectile(loc)
 		playsound(loc, shot_sound, 75, 1)
 	A.original = target
-	if(!(emagged || lethal))
-		use_power(reqpower)
-	else
-		use_power(reqpower * 2)
-		//Shooting Code:
+
+	// Lethal/emagged turrets use twice the power due to higher energy beams
+	// Emagged turrets again use twice as much power due to higher firing rates
+	use_power(reqpower * (2 * (emagged || lethal)) * (2 * emagged))
+
+	//Shooting Code:
 	A.current = T
 	A.yo = U.y - T.y
 	A.xo = U.x - T.x
