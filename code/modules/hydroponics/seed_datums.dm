@@ -685,7 +685,7 @@
 	name = "wheat"
 	seed_name = "wheat"
 	display_name = "wheat stalks"
-	chems = list("nutriment" = list(1,25))
+	chems = list("nutriment" = list(1,25), "flour" = list(1,25))
 	kitchen_tag = "wheat"
 
 /datum/seed/wheat/New()
