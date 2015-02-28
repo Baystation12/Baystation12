@@ -208,7 +208,7 @@
 	id = "water"
 	description = "A ubiquitous chemical substance that is composed of hydrogen and oxygen."
 	reagent_state = LIQUID
-	color = "#0064C8"
+	color = "#0064C877"
 
 	glass_icon_state = "glass_clear"
 	glass_name = "glass of water"
@@ -956,6 +956,30 @@
 		M.sleeping = max(M.sleeping, 20)
 		M.drowsyness = max(M.drowsyness, 60)
 
+/datum/reagent/toxin/chloralhydrate
+	name = "Chloral Hydrate"
+	id = "chloralhydrate"
+	description = "A powerful sedative."
+	reagent_state = SOLID
+	color = "#000067"
+	power = 1
+	metabolism = REM * 0.5
+	overdose_blood = REAGENTS_OVERDOSE * 0.5
+	overdose_ingest = REAGENTS_OVERDOSE
+
+/datum/reagent/toxin/chloralhydrate/affect_mob(var/mob/living/carbon/M as mob, var/alien, var/removed)
+	..()
+	if(state != CHEM_BLOOD || alien == IS_DIONA)
+		return
+	if(dose == metabolism)
+		M.confused += 2
+		M.drowsyness += 2
+	else if(dose < 2)
+		M.Weaken(30)
+		M.eye_blurry = max(M.eye_blurry, 10)
+	else
+		M.sleeping = max(M.sleeping, 30)
+
 /datum/reagent/space_drugs
 	name = "Space drugs"
 	id = "space_drugs"
@@ -1536,7 +1560,7 @@
 	description = "A potent mixture of caffeine and alcohol."
 	color = "#102000"
 	strength = 25
-	nutriment_factor = 1 * FOOD_METABOLISM
+	nutriment_factor = 1
 
 	glass_icon_state = "thirteen_loko_glass"
 	glass_name = "glass of Thirteen Loko"
@@ -1603,7 +1627,52 @@
 	glass_desc = "A very classy looking drink."
 	glass_center_of_mass = list("x"=15, "y"=7)
 
+// Cocktails
+
+/datum/reagent/ethanol/bananahonk
+	name = "Banana Mama"
+	id = "bananahonk"
+	description = "A drink from Clown Heaven."
+	nutriment_factor = 1
+	color = "#FFFF91"
+	boozepwr = 12
+
+	glass_icon_state = "bananahonkglass"
+	glass_name = "glass of Banana Honk"
+	glass_desc = "A drink from Banana Heaven."
+	glass_center_of_mass = list("x"=16, "y"=8)
+
+/datum/reagent/ethanol/driestmartini
+	name = "Driest Martini"
+	id = "driestmartini"
+	description = "Only for the experienced. You think you see sand floating in the glass."
+	nutriment_factor = 1
+	color = "#2E6671"
+	boozepwr = 12
+
+	glass_icon_state = "driestmartiniglass"
+	glass_name = "glass of Driest Martini"
+	glass_desc = "Only for the experienced. You think you see sand floating in the glass."
+	glass_center_of_mass = list("x"=17, "y"=8)
+
 /* Things that didn't fit anywhere else */
+
+/datum/reagent/water/holywater
+	name = "Holy Water"
+	id = "holywater"
+	description = "An ashen-obsidian-water mix, this solution will alter certain sections of the brain's rationality."
+	color = "#E0E8EF" // rgb: 224, 232, 239
+
+	glass_icon_state = "glass_clear"
+	glass_name = "glass of holy water"
+	glass_desc = "An ashen-obsidian-water mix, this solution will alter certain sections of the brain's rationality."
+
+/datum/reagent/water/holywater/affect_mob(var/mob/living/carbon/M, var/alien, var/removed)
+	..()
+	if(ishuman(M)) // Any state
+		if((M.mind in ticker.mode.cult) && prob(10))
+			ticker.mode.remove_cultist(M.mind)
+			M.visible_message("<span class='notice'>[M]'s eyes blink and become clearer.", "<span class='notice'>A cooling sensation from inside you brings you an untold calmness.</notice>")
 
 /datum/reagent/paint // TODO
 	name = "Paint"
