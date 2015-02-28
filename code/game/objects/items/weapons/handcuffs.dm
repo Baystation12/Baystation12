@@ -28,7 +28,7 @@
 		if (C == user)
 			place_handcuffs(user, user)
 			return
-		
+
 		//check for an aggressive grab
 		for (var/obj/item/weapon/grab/G in C.grabbed_by)
 			if (G.loc == user && G.state >= GRAB_AGGRESSIVE)
@@ -41,11 +41,15 @@
 
 	if (ishuman(target))
 		var/mob/living/carbon/human/H = target
-		
+
 		if (!H.has_organ_for_slot(slot_handcuffed))
-			user << "\red \The [H] needs at least two wrists before you can cuff them together!"
+			user << "<span class='danger'>\The [H] needs at least two wrists before you can cuff them together!</span>"
 			return
-		
+
+		if(istype(H.gloves,/obj/item/clothing/gloves/rig)) // Can't cuff someone who's in a deployed hardsuit.
+			user << "<span class='danger'>The cuffs won't fit around \the [H.gloves]!</span>"
+			return
+
 		H.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been handcuffed (attempt) by [user.name] ([user.ckey])</font>")
 		user.attack_log += text("\[[time_stamp()]\] <font color='red'>Attempted to handcuff [H.name] ([H.ckey])</font>")
 		msg_admin_attack("[key_name(user)] attempted to handcuff [key_name(H)]")
@@ -62,7 +66,7 @@
 			feedback_add_details("handcuffs","H")
 			O.process()
 		return
-	
+
 	if (ismonkey(target))
 		var/mob/living/carbon/monkey/M = target
 		var/obj/effect/equip_e/monkey/O = new /obj/effect/equip_e/monkey(  )
@@ -155,13 +159,13 @@ var/last_chew = 0
 		var/turf/p_loc_m = C.loc
 		playsound(src.loc, cuff_sound, 30, 1, -2)
 		user.visible_message("\red <B>[user] is trying to put handcuffs on [C]!</B>")
-		
+
 		if (ishuman(C))
 			var/mob/living/carbon/human/H = C
 			if (!H.has_organ_for_slot(slot_handcuffed))
 				user << "\red \The [H] needs at least two wrists before you can cuff them together!"
 				return
-		
+
 		spawn(30)
 			if(!C)	return
 			if(p_loc == user.loc && p_loc_m == C.loc)
