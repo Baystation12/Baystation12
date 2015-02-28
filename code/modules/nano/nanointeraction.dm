@@ -28,8 +28,10 @@
 		return STATUS_CLOSE
 	if(lockcharge || stunned || weakened)
 		return STATUS_DISABLED
+	if(custom_state.flags & NANO_IGNORE_DISTANCE)
+		return STATUS_INTERACTIVE
 	// robots can interact with things they can see within their view range
-	if(!(custom_state.flags & NANO_IGNORE_DISTANCE) && (src_object in view(src)))
+	if((src_object in view(src)) && get_dist(src_object, src) <= src.client.view)
 		return STATUS_INTERACTIVE	// interactive (green visibility)
 	return STATUS_DISABLED			// no updates, completely disabled (red visibility)
 
