@@ -68,7 +68,7 @@
 
 	var/sealing                                               // Keeps track of seal status independantly of canremove.
 	var/offline = 1                                           // Should we be applying suit maluses?
-	var/offline_slowdown = 10                                 // If the suit is deployed and unpowered, it sets slowdown to this.
+	var/offline_slowdown = 3                                  // If the suit is deployed and unpowered, it sets slowdown to this.
 	var/vision_restriction
 	var/offline_vision_restriction = 1                        // 0 - none, 1 - welder vision, 2 - blind. Maybe move this to helmets.
 
@@ -710,7 +710,7 @@
 		return 1
 	return 0
 
-/obj/item/weapon/rig/proc/take_hit(damage,source)
+/obj/item/weapon/rig/proc/take_hit(damage, source, is_emp=0)
 
 	if(!installed_modules.len)
 		return

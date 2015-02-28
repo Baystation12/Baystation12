@@ -52,7 +52,7 @@ obj/item/weapon/gun/energy/laser/retro
 /obj/item/weapon/gun/energy/lasercannon/mounted
 	self_recharge = 1
 	use_external_power = 1
-	recharge_time = 25
+	recharge_time = 8
 
 /obj/item/weapon/gun/energy/xray
 	name = "xray laser gun"
