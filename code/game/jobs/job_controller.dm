@@ -524,14 +524,18 @@ var/global/datum/controller/occupations/job_master
 				W.buckled_mob = H
 				W.add_fingerprint(H)
 
-		H << "<B>You are the [alt_title ? alt_title : rank].</B>"
-		H << "<b>As the [alt_title ? alt_title : rank] you answer directly to [job.supervisors]. Special circumstances may change this.</b>"
-		H << "<b>To speak on your department's radio channel use :h. For the use of other channels, examine your headset.</b>"
+		H << "<B>You are [job.total_positions == 1 ? "the" : "a"] [alt_title ? alt_title : rank].</B>"
+
+		if(job.supervisors)
+			H << "<b>As the [alt_title ? alt_title : rank] you answer directly to [job.supervisors]. Special circumstances may change this.</b>"
+
+		if(job.idtype)
+			spawnId(H, rank, alt_title)
+			H.equip_to_slot_or_del(new /obj/item/device/radio/headset(H), slot_l_ear)
+			H << "<b>To speak on your department's radio channel use :h. For the use of other channels, examine your headset.</b>"
+
 		if(job.req_admin_notify)
 			H << "<b>You are playing a job that is important for Game Progression. If you have to disconnect, please notify the admins via adminhelp.</b>"
-
-		spawnId(H, rank, alt_title)
-		H.equip_to_slot_or_del(new /obj/item/device/radio/headset(H), slot_l_ear)
 
 		//Gives glasses to the vision impaired
 		if(H.disabilities & NEARSIGHTED)
@@ -539,7 +543,6 @@ var/global/datum/controller/occupations/job_master
 			if(equipped != 1)
 				var/obj/item/clothing/glasses/G = H.glasses
 				G.prescription = 1
-//		H.update_icons()
 
 		BITSET(H.hud_updateflag, ID_HUD)
 		BITSET(H.hud_updateflag, IMPLOYAL_HUD)

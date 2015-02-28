@@ -11,7 +11,7 @@
 	var/total_positions = 0               // How many players can be this job
 	var/spawn_positions = 0               // How many players can spawn in as this job
 	var/current_positions = 0             // How many players have this job
-	var/supervisors = ""	              // Supervisors, who this person answers to directly
+	var/supervisors = null                // Supervisors, who this person answers to directly
 	var/selection_color = "#ffffff"       // Selection screen color
 	var/idtype = /obj/item/weapon/card/id // The type of the ID the player will have
 	var/list/alt_titles                   // List of alternate titles, if any
