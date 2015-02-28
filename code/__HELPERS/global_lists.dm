@@ -48,7 +48,7 @@ var/global/list/underwear_f = list("Red" = "f1", "White" = "f2", "Yellow" = "f3"
 var/global/list/undershirt_t = list("Black Tank top" = "u1", "White Tank top" = "u2", "Black shirt" = "u3", "White shirt" = "u4", "None")
 	//Backpacks
 var/global/list/backbaglist = list("Nothing", "Backpack", "Satchel", "Satchel Alt")
-
+var/global/list/exclude_jobs = list(/datum/job/ai,/datum/job/cyborg)
 //////////////////////////
 /////Initial Building/////
 //////////////////////////
@@ -88,7 +88,8 @@ var/global/list/backbaglist = list("Nothing", "Backpack", "Satchel", "Satchel Al
 	sort_surgeries()
 
 	//List of job. I can't believe this was calculated multiple times per tick!
-	paths = typesof(/datum/job) -list(/datum/job,/datum/job/ai,/datum/job/cyborg)
+	paths = typesof(/datum/job)-/datum/job
+	paths -= exclude_jobs
 	for(var/T in paths)
 		var/datum/job/J = new T
 		joblist[J.title] = J

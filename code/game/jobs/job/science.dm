@@ -1,6 +1,8 @@
 /datum/job/rd
 	title = "Research Director"
 	flag = RD
+	head_position = 1
+	department = "Science"
 	department_flag = MEDSCI
 	faction = "Station"
 	total_positions = 1
@@ -40,6 +42,7 @@
 /datum/job/scientist
 	title = "Scientist"
 	flag = SCIENTIST
+	department = "Science"
 	department_flag = MEDSCI
 	faction = "Station"
 	total_positions = 5
@@ -72,6 +75,7 @@
 /datum/job/xenobiologist
 	title = "Xenobiologist"
 	flag = XENOBIOLOGIST
+	department = "Science"
 	department_flag = MEDSCI
 	faction = "Station"
 	total_positions = 3
@@ -102,6 +106,7 @@
 /datum/job/roboticist
 	title = "Roboticist"
 	flag = ROBOTICIST
+	department = "Science"
 	department_flag = MEDSCI
 	faction = "Station"
 	total_positions = 2
