@@ -5,6 +5,10 @@ var/global/floorIsLava = 0
 
 ////////////////////////////////
 /proc/message_admins(var/msg)
+	for( var/area/A in unlogged_areas ) // Doesn't log if it is an unlogged area, E.G. Thunderdome
+		if( istype( A, get_area(usr) ))
+			return
+
 	msg = "<span class=\"log_message\"><span class=\"prefix\">ADMIN LOG:</span> <span class=\"message\">[msg]</span></span>"
 	log_adminwarn(msg)
 	for(var/client/C in admins)
@@ -12,6 +16,10 @@ var/global/floorIsLava = 0
 			C << msg
 
 /proc/msg_admin_attack(var/text) //Toggleable Attack Messages
+	for( var/area/A in unlogged_areas ) // Doesn't log if it is an unlogged area, E.G. Thunderdome
+		if( istype( A, get_area(usr) ))
+			return
+
 	log_attack(text)
 	var/rendered = "<span class=\"log_message\"><span class=\"prefix\">ATTACK:</span> <span class=\"message\">[text]</span></span>"
 	for(var/client/C in admins)
@@ -176,8 +184,7 @@ var/global/floorIsLava = 0
 			"}
 	if (M.client)
 		body += {" |
-			<A href='?src=\ref[src];tdome1=\ref[M]'>Thunderdome 1</A> |
-			<A href='?src=\ref[src];tdome2=\ref[M]'>Thunderdome 2</A> |
+			<A href='?src=\ref[src];tdome=\ref[M]'>Thunderdome Gladiator</A> |
 			<A href='?src=\ref[src];tdomeadmin=\ref[M]'>Thunderdome Admin</A> |
 			<A href='?src=\ref[src];tdomeobserve=\ref[M]'>Thunderdome Observer</A> |
 		"}

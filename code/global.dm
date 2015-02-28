@@ -126,8 +126,7 @@ var/list/prisonwarp = list()	//prisoners go to these
 var/list/holdingfacility = list()	//captured people go here
 var/list/xeno_spawn = list()//Aliens spawn at ahahthese.
 //	list/mazewarp = list()
-var/list/tdome1 = list()
-var/list/tdome2 = list()
+var/list/tdome = list() // thunderdome gladiators
 var/list/tdomeobserve = list()
 var/list/tdomeadmin = list()
 var/list/prisonsecuritywarp = list()	//prison security goes to these
@@ -248,3 +247,6 @@ var/static/list/scarySounds = list('sound/weapons/thudswoosh.ogg','sound/weapons
 
 // Bomb cap!
 var/max_explosion_range = 14
+
+// Areas where actions won't be logged
+var/list/area/unlogged_areas = list( /area/tdome )

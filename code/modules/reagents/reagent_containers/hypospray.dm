@@ -8,6 +8,8 @@
 	icon = 'icons/obj/syringe.dmi'
 	item_state = "hypo"
 	icon_state = "hypo"
+	var/reagent_inside_of_this_object_which_is_being_used = "tricordrazine"  // hehee, awaiting for the day this gets me yelled at
+
 	amount_per_transfer_from_this = 5
 	volume = 30
 	possible_transfer_amounts = null
@@ -16,7 +18,8 @@
 
 /obj/item/weapon/reagent_containers/hypospray/New() //comment this to make hypos start off empty
 	..()
-	reagents.add_reagent("tricordrazine", 30)
+	reagents.add_reagent(reagent_inside_of_this_object_which_is_being_used, volume)
+	update_icon()
 	return
 
 /obj/item/weapon/reagent_containers/hypospray/attack(mob/M as mob, mob/user as mob)
@@ -50,15 +53,10 @@
 	desc = "A rapid and safe way to administer small amounts of drugs by untrained or trained personnel."
 	icon_state = "autoinjector"
 	item_state = "autoinjector"
+
+	reagent_inside_of_this_object_which_is_being_used = "inaprovaline"
 	amount_per_transfer_from_this = 5
 	volume = 5
-
-/obj/item/weapon/reagent_containers/hypospray/autoinjector/New()
-	..()
-	reagents.remove_reagent("tricordrazine", 30)
-	reagents.add_reagent("inaprovaline", 5)
-	update_icon()
-	return
 
 /obj/item/weapon/reagent_containers/hypospray/autoinjector/attack(mob/M as mob, mob/user as mob)
 	..()
@@ -79,3 +77,13 @@
 		user << "\blue It is currently loaded."
 	else
 		user << "\blue It is spent."
+
+/obj/item/weapon/reagent_containers/hypospray/autoinjector/adminorazine
+	name = "BK5 Injector"
+	desc = "'Tis but a flesh wound!"
+	icon_state = "a_autoinjector"
+	item_state = "a_autoinjector"
+
+	reagent_inside_of_this_object_which_is_being_used = "adminordrazine"
+	amount_per_transfer_from_this = 0.5
+	volume = 0.5

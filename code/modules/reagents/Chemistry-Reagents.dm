@@ -1172,7 +1172,8 @@ datum
 			glass_desc = "It's magic. We don't have to explain it."
 
 			on_mob_life(var/mob/living/carbon/M as mob)
-				if(!M) M = holder.my_atom ///This can even heal dead people.
+				M.revive()
+				/*if(!M) M = holder.my_atom ///This can even heal dead people.
 				M.reagents.remove_all_type(/datum/reagent/toxin, 5*REM, 0, 1)
 				M.setCloneLoss(0)
 				M.setOxyLoss(0)
@@ -1199,7 +1200,8 @@ datum
 					D.spread = "Remissive"
 					D.stage--
 					if(D.stage < 1)
-						D.cure()
+						D.cure()*/
+
 				..()
 				return
 		synaptizine

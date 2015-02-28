@@ -60,10 +60,8 @@
 	//		mazewarp += loc
 		if("Holding Facility")
 			holdingfacility += loc
-		if("tdome1")
-			tdome1	+= loc
-		if("tdome2")
-			tdome2 += loc
+		if("tdome")
+			tdome += loc
 		if("tdomeadmin")
 			tdomeadmin	+= loc
 		if("tdomeobserve")

@@ -40,6 +40,7 @@ var/can_call_ert
 
 
 client/verb/JoinResponseTeam()
+	set name = "Join Response Team"
 	set category = "IC"
 
 	if(istype(usr,/mob/dead/observer) || istype(usr,/mob/new_player))

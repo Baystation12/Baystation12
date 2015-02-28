@@ -424,17 +424,6 @@ var/list/ghostteleportlocs = list()
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 /area/planet/clown
 	name = "\improper Clown Planet"
 	icon_state = "honk"
@@ -444,6 +433,12 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Thunderdome"
 	icon_state = "thunder"
 	requires_power = 0
+
+/area/tdome/arena
+	name = "\improper Thunderdome Arena"
+	icon_state = "thunder"
+	requires_power = 0
+	music = 'sound/music/THUNDERDOME.ogg'
 
 /area/tdome/tdome1
 	name = "\improper Thunderdome (Team 1)"

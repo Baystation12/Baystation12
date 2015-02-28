@@ -641,3 +641,130 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 			usr.loc = upwards
 		else
 			usr << "Can't go any higher!"
+
+
+/mob/dead/observer/verb/join_thunderdome()
+	set category = "Ghost"
+	set name = "Join as Gladiator"
+	set desc = "Join as a gladiator in the thunderdome!"
+
+	if(alert(usr, "Do you really want to join the THUNDERDOME?", "Message", "Yes", "No") != "Yes")
+		return
+
+	var/mob/M = usr
+
+	var/new_name = input(usr, "Pick a name","Name") as null|text
+	if(!new_name)//Somebody changed his mind, place is available again.
+		M.name = "Gladiator"
+		return
+
+	var/mob/living/carbon/human/new_gladiator = create_gladiator( pick(tdome), new_name )
+	new_gladiator.mind.key = usr.key
+	new_gladiator.key = usr.key
+
+
+	del(M)
+
+	new_gladiator.Paralyse(5)
+	spawn(50)
+		new_gladiator << "\blue You have joined as a gladiator in the Thunderdome!"
+	log_admin("[key_name_admin(usr)] has joined the thunderdome!")
+	message_admins("[key_name_admin(usr)] has joined the thunderdome!", 1)
+
+
+/proc/create_gladiator( var/obj/spawn_location, var/gladiator_name )
+
+	//usr << "\red ERT has been temporarily disabled. Talk to a coder."
+	//return
+
+	var/mob/living/carbon/human/M = new(null)
+
+	//todo: god damn this.
+	//make it a panel, like in character creation
+	var/new_facial = input("Please select facial hair color.", "Character Generation") as color
+	if(new_facial)
+		M.r_facial = hex2num(copytext(new_facial, 2, 4))
+		M.g_facial = hex2num(copytext(new_facial, 4, 6))
+		M.b_facial = hex2num(copytext(new_facial, 6, 8))
+
+	var/new_hair = input("Please select hair color.", "Character Generation") as color
+	if(new_facial)
+		M.r_hair = hex2num(copytext(new_hair, 2, 4))
+		M.g_hair = hex2num(copytext(new_hair, 4, 6))
+		M.b_hair = hex2num(copytext(new_hair, 6, 8))
+
+	var/new_eyes = input("Please select eye color.", "Character Generation") as color
+	if(new_eyes)
+		M.r_eyes = hex2num(copytext(new_eyes, 2, 4))
+		M.g_eyes = hex2num(copytext(new_eyes, 4, 6))
+		M.b_eyes = hex2num(copytext(new_eyes, 6, 8))
+
+	var/new_tone = input("Please select skin tone level: 1-220 (1=albino, 35=caucasian, 150=black, 220='very' black)", "Character Generation")  as text
+
+	if (!new_tone)
+		new_tone = 35
+	M.s_tone = max(min(round(text2num(new_tone)), 220), 1)
+	M.s_tone =  -M.s_tone + 35
+
+	// hair
+	var/list/all_hairs = typesof(/datum/sprite_accessory/hair) - /datum/sprite_accessory/hair
+	var/list/hairs = list()
+
+	// loop through potential hairs
+	for(var/x in all_hairs)
+		var/datum/sprite_accessory/hair/H = new x // create new hair datum based on type x
+		hairs.Add(H.name) // add hair name to hairs
+		del(H) // delete the hair after it's all done
+
+//	var/new_style = input("Please select hair style", "Character Generation")  as null|anything in hairs
+//hair
+	var/new_hstyle = input(usr, "Select a hair style", "Grooming")  as null|anything in hair_styles_list
+	if(new_hstyle)
+		M.h_style = new_hstyle
+
+	// facial hair
+	var/new_fstyle = input(usr, "Select a facial hair style", "Grooming")  as null|anything in facial_hair_styles_list
+	if(new_fstyle)
+		M.f_style = new_fstyle
+
+	var/new_gender = alert(usr, "Please select gender.", "Character Generation", "Male", "Female")
+	if (new_gender)
+		if(new_gender == "Male")
+			M.gender = MALE
+		else
+			M.gender = FEMALE
+
+	M.update_hair()
+	M.update_body()
+	M.check_dna(M)
+
+	M.real_name = gladiator_name
+	M.name = gladiator_name
+	M.age = rand(23,35)
+
+	M.dna.ready_dna(M)//Creates DNA.
+
+	//Creates mind stuff.
+	M.mind = new
+	M.mind.current = M
+	M.mind.original = M
+	M.mind.assigned_role = "MODE"
+	M.mind.special_role = "Gladiator"
+	if(!(M.mind in ticker.minds))
+		ticker.minds += M.mind//Adds them to regular mind list.
+	M.equip_gladiator()
+	M.loc = spawn_location
+	return M
+
+
+/mob/living/carbon/human/proc/equip_gladiator()
+	//Uniform
+	equip_to_slot_or_del(new /obj/item/clothing/under/pj/blue(src), slot_w_uniform)
+	equip_to_slot_or_del(new /obj/item/clothing/shoes/slippers(src), slot_shoes)
+	equip_to_slot_or_del(new /obj/item/clothing/head/roman/fluff(src), slot_head)
+
+	//Backpack
+	equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/cultpack(src), slot_back)
+	equip_to_slot_or_del(new /obj/item/weapon/storage/firstaid/regular(src), slot_in_backpack)
+
+	return 1
