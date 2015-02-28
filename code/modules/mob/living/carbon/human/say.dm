@@ -37,6 +37,8 @@
 		else
 			message = copytext(message,3)
 
+	message = trim_left(message)
+
 	//parse the language code and consume it
 	var/datum/language/speaking = parse_language(message)
 	if(speaking)
@@ -62,10 +64,11 @@
 	message = trim(message)
 
 	if(speech_problem_flag)
-		var/list/handle_r = handle_speech_problems(message)
-		message = handle_r[1]
-		verb = handle_r[2]
-		speech_problem_flag = handle_r[3]
+		if(!speaking || !(speaking.flags & NO_STUTTER))
+			var/list/handle_r = handle_speech_problems(message)
+			message = handle_r[1]
+			verb = handle_r[2]
+			speech_problem_flag = handle_r[3]
 
 	if(!message || message == "")
 		return

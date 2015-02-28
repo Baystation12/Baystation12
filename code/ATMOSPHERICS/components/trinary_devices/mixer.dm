@@ -156,7 +156,7 @@
 	return
 
 /obj/machinery/atmospherics/trinary/mixer/Topic(href,href_list)
-	if(..()) return
+	if(..()) return 1
 	if(href_list["power"])
 		use_power = !use_power
 	if(href_list["set_press"])

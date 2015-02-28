@@ -39,7 +39,7 @@
 	flags_inv =          HIDEJUMPSUIT|HIDETAIL
 	flags =              STOPPRESSUREDAMAGE | THICKMATERIAL | AIRTIGHT
 	slowdown = 0
-	//With 0.05 resiliance, will reach 10 breach damage after 18 laser carbine blasts. Completely immune to smg hits.
+	//will reach 10 breach damage after 18 laser carbine blasts, or 7 revolver hits. Completely immune to smg hits.
 	breach_threshold = 28
 	resilience = 0.05
 	can_breach = 1

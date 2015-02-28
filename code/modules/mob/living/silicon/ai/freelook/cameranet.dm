@@ -120,12 +120,14 @@ var/datum/cameranet/cameranet = new()
 			for(var/y = y1; y <= y2; y += 16)
 				if(chunkGenerated(x, y, T.z))
 					var/datum/camerachunk/chunk = getCameraChunk(x, y, T.z)
-					if(choice == 0)
-						// Remove the camera.
-						chunk.cameras -= c
-					else if(choice == 1)
-						// You can't have the same camera in the list twice.
-						chunk.cameras |= c
+					// Only add actual cameras to the list of cameras
+					if(istype(c, /obj/machinery/camera))
+						if(choice == 0)
+							// Remove the camera.
+							chunk.cameras -= c
+						else if(choice == 1)
+							// You can't have the same camera in the list twice.
+							chunk.cameras |= c
 					chunk.hasChanged()
 
 // Will check if a mob is on a viewable turf. Returns 1 if it is, otherwise returns 0.

@@ -113,6 +113,8 @@
 		ui.set_auto_update(1)
 
 /obj/machinery/atmospherics/unary/heater/Topic(href, href_list)
+	if(..())
+		return 1
 	if(href_list["toggleStatus"])
 		use_power = !use_power
 		update_icon()
@@ -127,7 +129,6 @@
 		set_power_level(new_setting)
 
 	add_fingerprint(usr)
-	return 1
 
 //upgrading parts
 /obj/machinery/atmospherics/unary/heater/RefreshParts()
