@@ -16,6 +16,6 @@
 
 /obj/machinery/dispenser/thunderdome
 	name = "BK2 Injector Dispenser"
-	desc = "Dispenses BlackKnight 2.0 injectors."
+	desc = "Dispenses BlackKnight 5000 injectors."
 
 	dispense_item = /obj/item/weapon/reagent_containers/hypospray/autoinjector/adminorazine

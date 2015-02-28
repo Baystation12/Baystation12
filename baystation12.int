@@ -1,11 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: code\modules\reagents\reagent_containers\hypospray.dm;code\modules\reagents\reagent_containers\pill.dm;code\modules\reagents\reagent_containers\glass\bottle.dm;code\modules\research\xenoarchaeology\machinery\geosample_scanner.dm;code\game\machinery\iv_drip.dm;code\game\machinery\dispenser.dm;maps\apollo-1.dmm;code\modules\hydroponics\hydro_tray.dm;code\global.dm;code\modules\admin\topic.dm;code\modules\paperwork\faxmachine.dm;code\game\machinery\phoron_desublimer.dm;code\modules\admin\admin.dm;code\__HELPERS\game.dm;code\game\supplyshuttle.dm;code\game\machinery\lightswitch.dm;code\modules\mob\living\silicon\robot\drone\drone.dm;icons\mob\suit.dmi;code\modules\food\deepfryer.dm;code\modules\hydroponics\grown_inedible.dm;code\modules\mob\mob_grab.dm;maps\apollo-2.dmm;code\modules\mob\mob_transformation_simple.dm;code\game\response_team.dm;code\game\area\Space Station 13 areas.dm;code\modules\mob\dead\observer\observer.dm;code\game\objects\items\weapons\storage\backpack.dm;code\modules\clothing\head\helmet.dm;code\modules\clothing\under\miscellaneous.dm;code\modules\clothing\head\misc.dm
+WINDOW: code\game\machinery\dispenser.dm
 LAST_COMPILE_VERSION: 506.1249
-DIR: code code\ATMOSPHERICS\components code\ATMOSPHERICS\components\binary_devices code\ATMOSPHERICS\components\omni_devices code\ATMOSPHERICS\components\unary code\controllers code\datums\spells code\datums\wires code\game code\game\area code\game\machinery code\game\objects code\game\objects\effects code\game\objects\effects\spawners code\game\objects\items code\game\objects\items\weapons code\game\objects\items\weapons\grenades code\game\objects\items\weapons\storage code\game\objects\structures code\game\objects\structures\stool_bed_chair_nest code\game\turfs code\game\turfs\simulated code\modules code\modules\admin code\modules\client code\modules\clothing code\modules\clothing\head code\modules\clothing\shoes code\modules\clothing\under code\modules\food code\modules\hydroponics code\modules\mob code\modules\mob\dead code\modules\mob\dead\observer code\modules\mob\living code\modules\mob\living\silicon code\modules\mob\living\silicon\robot code\modules\mob\living\silicon\robot\drone code\modules\paperwork code\modules\reagents code\modules\reagents\reagent_containers code\modules\reagents\reagent_containers\glass code\modules\research code\modules\research\xenoarchaeology code\modules\research\xenoarchaeology\machinery code\ZAS icons icons\mob icons\obj maps 
-FILE: maps\apollo-2.dmm
-LAST_COMPILE_TIME: 1425115904
+DIR: code code\ATMOSPHERICS\components code\ATMOSPHERICS\components\binary_devices code\ATMOSPHERICS\components\omni_devices code\ATMOSPHERICS\components\unary code\controllers code\datums\spells code\datums\wires code\game code\game\area code\game\machinery code\modules code\modules\reagents code\modules\reagents\reagent_containers code\modules\reagents\reagent_containers\glass code\modules\research code\modules\research\xenoarchaeology code\modules\research\xenoarchaeology\machinery maps 
+FILE: code\game\machinery\dispenser.dm
+LAST_COMPILE_TIME: 1425116485
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
