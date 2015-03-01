@@ -7,8 +7,8 @@
 #define EARS_VIEW_DIST 2
 #define BELT_VIEW_DIST 2
 #define ID_VIEW_DIST 3
-#define BACK_VIEW_DIST INFINITY
-#define HAND_VIEW_DIST 2
+#define BACK_VIEW_DIST 5
+#define HANDS_VIEW_DIST 2
 
 /mob/living/carbon/human/examine(mob/user)
 	var/skipgloves = 0
@@ -74,8 +74,8 @@
 	msg += "!\n"
 
 	//uniform
-	if( distance <= JUMPSUIT_VIEW_DIST )
-		if(w_uniform && !skipjumpsuit)
+	if(w_uniform && !skipjumpsuit)
+		if( distance <= JUMPSUIT_VIEW_DIST )
 			//Ties
 			var/tie_msg
 			if(istype(w_uniform,/obj/item/clothing/under))
@@ -89,16 +89,18 @@
 				msg += "[t_He] [t_is] wearing \icon[w_uniform] \a [w_uniform][tie_msg].\n"
 
 	//head
-	if( distance <= HEAD_VIEW_DIST )
-		if(head)
+
+	if(head)
+		if( distance <= HEAD_VIEW_DIST )
 			if(head.blood_DNA)
 				msg += "<span class='warning'>[t_He] [t_is] wearing \icon[head] [head.gender==PLURAL?"some":"a"] [(head.blood_color != "#030303") ? "blood" : "oil"]-stained [head.name] on [t_his] head!</span>\n"
 			else
 				msg += "[t_He] [t_is] wearing \icon[head] \a [head] on [t_his] head.\n"
 
 	//suit/armour
-	if( distance <= SUIT_VIEW_DIST )
-		if(wear_suit)
+
+	if(wear_suit)
+		if( distance <= SUIT_VIEW_DIST )
 			if(wear_suit.blood_DNA)
 				msg += "<span class='warning'>[t_He] [t_is] wearing \icon[wear_suit] [wear_suit.gender==PLURAL?"some":"a"] [(wear_suit.blood_color != "#030303") ? "blood" : "oil"]-stained [wear_suit.name]!</span>\n"
 			else
@@ -112,32 +114,34 @@
 					msg += "[t_He] [t_is] carrying \icon[s_store] \a [s_store] on [t_his] [wear_suit.name].\n"
 
 	//back
-	if( distance <= BACK_VIEW_DIST )
-		if(back)
+
+	if(back)
+		if( distance-back.w_class <= BACK_VIEW_DIST )
 			if(back.blood_DNA)
 				msg += "<span class='warning'>[t_He] [t_has] \icon[back] [back.gender==PLURAL?"some":"a"] [(back.blood_color != "#030303") ? "blood" : "oil"]-stained [back] on [t_his] back.</span>\n"
 			else
 				msg += "[t_He] [t_has] \icon[back] \a [back] on [t_his] back.\n"
 
 	//left hand
-	if(( distance+l_hand.w_class ) <= HAND_VIEW_DIST )
-		if(l_hand)
+	if(l_hand)
+		if( distance-l_hand.w_class <= HANDS_VIEW_DIST )
 			if(l_hand.blood_DNA)
 				msg += "<span class='warning'>[t_He] [t_is] holding \icon[l_hand] [l_hand.gender==PLURAL?"some":"a"] [(l_hand.blood_color != "#030303") ? "blood" : "oil"]-stained [l_hand.name] in [t_his] left hand!</span>\n"
 			else
 				msg += "[t_He] [t_is] holding \icon[l_hand] \a [l_hand] in [t_his] left hand.\n"
 
 	//right hand
-	if(( distance+r_hand.w_class ) <= HAND_VIEW_DIST )
-		if(r_hand)
+
+	if(r_hand)
+		if( distance-r_hand.w_class <= HANDS_VIEW_DIST )
 			if(r_hand.blood_DNA)
 				msg += "<span class='warning'>[t_He] [t_is] holding \icon[r_hand] [r_hand.gender==PLURAL?"some":"a"] [(r_hand.blood_color != "#030303") ? "blood" : "oil"]-stained [r_hand.name] in [t_his] right hand!</span>\n"
 			else
 				msg += "[t_He] [t_is] holding \icon[r_hand] \a [r_hand] in [t_his] right hand.\n"
 
 	//gloves
-	if(( distance+gloves.w_class ) <= HAND_VIEW_DIST ) // Gloves are more visible
-		if(gloves && !skipgloves)
+	if(gloves && !skipgloves)
+		if( distance-gloves.w_class <= HANDS_VIEW_DIST )
 			if(gloves.blood_DNA)
 				msg += "<span class='warning'>[t_He] [t_has] \icon[gloves] [gloves.gender==PLURAL?"some":"a"] [(gloves.blood_color != "#030303") ? "blood" : "oil"]-stained [gloves.name] on [t_his] hands!</span>\n"
 			else
@@ -148,16 +152,16 @@
 	//handcuffed?
 
 	//handcuffed?
-	if( distance <= HAND_VIEW_DIST )
-		if(handcuffed)
+	if(handcuffed)
+		if( distance <= HANDS_VIEW_DIST )
 			if(istype(handcuffed, /obj/item/weapon/handcuffs/cable))
 				msg += "<span class='warning'>[t_He] [t_is] \icon[handcuffed] restrained with cable!</span>\n"
 			else
 				msg += "<span class='warning'>[t_He] [t_is] \icon[handcuffed] handcuffed!</span>\n"
 
 	//belt
-	if(( distance+belt.w_class ) <= BELT_VIEW_DIST ) // The larger the object they have on their belt, the more visible it is
-		if(belt)
+	if(belt)
+		if( distance-belt.w_class <= BELT_VIEW_DIST )
 			if(belt.blood_DNA)
 				msg += "<span class='warning'>[t_He] [t_has] \icon[belt] [belt.gender==PLURAL?"some":"a"] [(belt.blood_color != "#030303") ? "blood" : "oil"]-stained [belt.name] about [t_his] waist!</span>\n"
 			else
@@ -174,34 +178,35 @@
 			msg += "<span class='warning'>[t_He] [t_has] [(feet_blood_color != "#030303") ? "blood" : "oil"]-stained feet!</span>\n"
 
 	//mask
-	if( distance <= MASK_VIEW_DIST )
-		if(wear_mask && !skipmask)
+	if(wear_mask && !skipmask)
+		if( distance <= MASK_VIEW_DIST )
 			if(wear_mask.blood_DNA)
 				msg += "<span class='warning'>[t_He] [t_has] \icon[wear_mask] [wear_mask.gender==PLURAL?"some":"a"] [(wear_mask.blood_color != "#030303") ? "blood" : "oil"]-stained [wear_mask.name] on [t_his] face!</span>\n"
 			else
 				msg += "[t_He] [t_has] \icon[wear_mask] \a [wear_mask] on [t_his] face.\n"
 
 	//eyes
-	if( distance <= EYES_VIEW_DIST )
-		if(glasses && !skipeyes)
+	if(glasses && !skipeyes)
+		if( distance <= EYES_VIEW_DIST )
 			if(glasses.blood_DNA)
 				msg += "<span class='warning'>[t_He] [t_has] \icon[glasses] [glasses.gender==PLURAL?"some":"a"] [(glasses.blood_color != "#030303") ? "blood" : "oil"]-stained [glasses] covering [t_his] eyes!</span>\n"
 			else
 				msg += "[t_He] [t_has] \icon[glasses] \a [glasses] covering [t_his] eyes.\n"
 
 	//left ear
-	if( distance <= EARS_VIEW_DIST )
-		if(l_ear && !skipears)
+
+	if(l_ear && !skipears)
+		if( distance <= EARS_VIEW_DIST )
 			msg += "[t_He] [t_has] \icon[l_ear] \a [l_ear] on [t_his] left ear.\n"
 
 	//right ear
-	if( distance <= EARS_VIEW_DIST )
-		if(r_ear && !skipears)
+	if(r_ear && !skipears)
+		if( distance <= EARS_VIEW_DIST )
 			msg += "[t_He] [t_has] \icon[r_ear] \a [r_ear] on [t_his] right ear.\n"
 
 	//ID
-	if( distance <= ID_VIEW_DIST )
-		if(wear_id)
+	if(wear_id)
+		if( distance <= ID_VIEW_DIST )
 			/*var/id
 			if(istype(wear_id, /obj/item/device/pda))
 				var/obj/item/device/pda/pda = wear_id
