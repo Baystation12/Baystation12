@@ -2,7 +2,7 @@
 // Processes vines/spreading plants.
 
 #define PLANTS_PER_TICK 500 // Cap on number of plant segments processed.
-#define PLANT_TICK_TIME 25  // Number of ticks between the plant processor cycling.
+#define PLANT_TICK_TIME 75  // Number of ticks between the plant processor cycling.
 
 // Debug for testing seed genes.
 /client/proc/show_plant_genes()

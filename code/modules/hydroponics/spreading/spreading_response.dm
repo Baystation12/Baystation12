@@ -63,8 +63,8 @@
 	victim.buckled = src
 	victim.update_canmove()
 	buckled_mob = victim
-
-	if(victim.loc != src.loc)
+	var/turf/T = get_turf(src)
+	if(victim.loc != T && T.Enter(victim, get_turf(victim)))
 		src.visible_message("<span class='danger'>Tendrils lash out from \the [src] and drag \the [victim] in!</span>")
 		victim.loc = src.loc
 	victim << "<span class='danger'>Tendrils [pick("wind", "tangle", "tighten")] around you!</span>"

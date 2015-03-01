@@ -198,10 +198,10 @@
 	if(grown_seed.get_trait(TRAIT_TELEPORTING))
 		dat += "<br>The fruit is temporal/spatially unstable."
 
-	dat += "<br><br>\[<a href='?src=\ref[src];print=1'>print report</a>\]"
 	if(dat)
-		user << browse(dat,"window=plant_analyzer")
 		last_data = dat
+		dat += "<br><br>\[<a href='?src=\ref[src];print=1'>print report</a>\]"
+		user << browse(dat,"window=plant_analyzer")
 
 	return
 
