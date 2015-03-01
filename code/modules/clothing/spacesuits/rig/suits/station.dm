@@ -7,6 +7,7 @@
 	slowdown = 3
 	offline_slowdown = 10
 	offline_vision_restriction = 2
+	emp_protection = -20
 
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/storage/bag/ore,/obj/item/device/t_scanner,/obj/item/weapon/pickaxe, /obj/item/weapon/rcd)
 
@@ -56,7 +57,6 @@
 	icon_state = "science_rig"
 	armor = list(melee = 15, bullet = 15, laser = 80, energy = 80, bomb = 60, bio = 100, rad = 100)
 	slowdown = 1
-	offline_slowdown = 3
 	offline_vision_restriction = 1
 
 	helm_type = /obj/item/clothing/head/helmet/space/rig/ert
@@ -79,7 +79,6 @@
 	icon_state = "medical_rig"
 	armor = list(melee = 30, bullet = 15, laser = 20, energy = 60, bomb = 30, bio = 100, rad = 100)
 	slowdown = 1
-	offline_slowdown = 3
 	offline_vision_restriction = 1
 
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/storage/firstaid,/obj/item/device/healthanalyzer,/obj/item/stack/medical,/obj/item/roller )
@@ -100,7 +99,6 @@
 	icon_state = "hazard_rig"
 	armor = list(melee = 60, bullet = 10, laser = 30, energy = 5, bomb = 45, bio = 100, rad = 10)
 	slowdown = 1
-	offline_slowdown = 3
 	offline_vision_restriction = 1
 
 	helm_type = /obj/item/clothing/head/helmet/space/rig/ert
