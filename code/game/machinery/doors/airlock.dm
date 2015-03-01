@@ -1085,9 +1085,10 @@ About the new airlock wires panel:
 		//update the door's access to match the electronics'
 		secured_wires = electronics.secure
 		if(electronics.one_access)
-			req_access = null
+			req_access.Cut()
 			req_one_access = src.electronics.conf_access
 		else
+			req_one_access.Cut()
 			req_access = src.electronics.conf_access
 
 		//get the name from the assembly

@@ -10,8 +10,8 @@
 
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/storage/bag/ore,/obj/item/device/t_scanner,/obj/item/weapon/pickaxe, /obj/item/weapon/rcd)
 
-	req_access = null
-	req_one_access = null
+	req_access = list()
+	req_one_access = list()
 
 	initial_modules = list(
 		/obj/item/rig_module/device/plasmacutter,
@@ -84,8 +84,8 @@
 
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/storage/firstaid,/obj/item/device/healthanalyzer,/obj/item/stack/medical,/obj/item/roller )
 
-	req_access = null
-	req_one_access = null
+	req_access = list()
+	req_one_access = list()
 
 	initial_modules = list(
 		/obj/item/rig_module/chem_dispenser/injector,
@@ -107,6 +107,6 @@
 
 	allowed = list(/obj/item/weapon/gun,/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/melee/baton)
 
-	req_access = null
-	req_one_access = null
+	req_access = list()
+	req_one_access = list()
 
