@@ -241,3 +241,15 @@
 
 /turf/simulated/floor/plating/snow/ex_act(severity)
 	return
+
+/turf/simulated/floor/plating/lava
+	name = "lava"
+	icon = 'icons/turf/floors.dmi'
+	icon_state = "lava"
+
+	Entered(atom/A, atom/OL)
+		..()
+
+		if(istype(A,/mob/living/carbon))
+			var/mob/living/carbon/M = A
+			M.adjustFireLoss(200)

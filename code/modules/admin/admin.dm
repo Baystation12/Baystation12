@@ -5,9 +5,9 @@ var/global/floorIsLava = 0
 
 ////////////////////////////////
 /proc/message_admins(var/msg)
-	for( var/area/A in unlogged_areas ) // Doesn't log if it is an unlogged area, E.G. Thunderdome
-		if( istype( A, get_area(usr) ))
-			return
+	var/area/A = get_area(src)
+	if( unlogged_areas.Find( A, 1, unlogged_areas.len+1 )) // Doesnt log if it originates in an unlogged area, E.G. thunderdome
+		return
 
 	msg = "<span class=\"log_message\"><span class=\"prefix\">ADMIN LOG:</span> <span class=\"message\">[msg]</span></span>"
 	log_adminwarn(msg)
@@ -16,9 +16,9 @@ var/global/floorIsLava = 0
 			C << msg
 
 /proc/msg_admin_attack(var/text) //Toggleable Attack Messages
-	for( var/area/A in unlogged_areas ) // Doesn't log if it is an unlogged area, E.G. Thunderdome
-		if( istype( A, get_area(usr) ))
-			return
+	var/area/A = get_area(src)
+	if( unlogged_areas.Find( A, 1, unlogged_areas.len+1 )) // Doesnt log if it originates in an unlogged area, E.G. thunderdome
+		return
 
 	log_attack(text)
 	var/rendered = "<span class=\"log_message\"><span class=\"prefix\">ATTACK:</span> <span class=\"message\">[text]</span></span>"

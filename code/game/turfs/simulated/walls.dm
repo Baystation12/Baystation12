@@ -24,7 +24,6 @@
 	var/walltype = "metal"
 
 /turf/simulated/wall/bullet_act(var/obj/item/projectile/Proj)
-
 	// Tasers and stuff? No thanks.
 	if(Proj.damage_type == HALLOSS)
 		return
@@ -32,6 +31,9 @@
 	// Emitter blasts are somewhat weaker as emitters have large rate of fire and don't require limited power cell to run
 	if(istype(Proj, /obj/item/projectile/beam/emitter))
 		Proj.damage /= 4
+
+	if(istype(Proj, /obj/item/projectile/bullet ) && ( rand( 1, 3 ) == 1 ))
+		playsound( src, pick( 'sound/effects/ric1.ogg', 'sound/effects/ric2.ogg', 'sound/effects/ric3.ogg', 'sound/effects/ric4.ogg'), 100, 1)
 
 	take_damage(Proj.damage * armor)
 	return

@@ -172,6 +172,21 @@
 				m_type = 1
 			else
 				if (!muzzled)
+					var/scream_sound
+
+					if( gender == "male" )
+						scream_sound = pick(\
+						'sound/voice/cough01_man.ogg',
+						'sound/voice/cough02_man.ogg',
+						'sound/voice/cough03_man.ogg')
+					else if( gender == "female" )
+						scream_sound = pick(\
+						'sound/voice/cough01_woman.ogg',
+						'sound/voice/cough02_woman.ogg',
+						'sound/voice/cough03_woman.ogg')
+
+					playsound(loc, scream_sound, 80, 1)
+
 					message = "<B>[src]</B> coughs!"
 					m_type = 2
 				else

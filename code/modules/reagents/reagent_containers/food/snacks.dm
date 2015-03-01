@@ -2608,7 +2608,7 @@
 
 /obj/item/pizzabox
 	name = "pizza box"
-	desc = "A box suited for pizzas."
+	desc = "A box suited for pizzas. It's cover says 'Pizza Planet LTD'."
 	icon = 'icons/obj/food.dmi'
 	icon_state = "pizzabox1"
 
