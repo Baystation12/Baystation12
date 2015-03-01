@@ -1,11 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: code\modules\clothing\spacesuits\breaches.dm;code\modules\mob\living\living_defines.dm;code\modules\mob\living\blob\blob.dm;code\defines\procs\admin.dm;code\modules\paperwork\paper.dm;code\controllers\configuration.dm;code\modules\security levels\security levels.dm;code\modules\power\port_gen.dm;code\modules\power\rust\circuits_and_design.dm;code\modules\projectiles\guns\energy\laser.dm;code\modules\projectiles\guns\energy\stun.dm;code\modules\reagents\Chemistry-Machinery.dm;code\modules\reagents\reagent_containers\food\snacks.dm;code\modules\admin\admin.dm;code\modules\mob\dead\observer\observer.dm;code\modules\mob\living\carbon\carbon.dm
+WINDOW: code\modules\mob\living\carbon\human\examine.dm;maps\apollo-1.dmm
 LAST_COMPILE_VERSION: 506.1249
-DIR: code code\__HELPERS code\ATMOSPHERICS\components code\ATMOSPHERICS\components\binary_devices code\ATMOSPHERICS\components\omni_devices code\ATMOSPHERICS\components\unary code\controllers code\datums code\datums\spells code\datums\wires code\defines code\defines\procs code\game code\game\area code\game\gamemodes code\game\gamemodes\events code\game\machinery code\game\turfs code\game\turfs\simulated code\game\turfs\unsimulated code\modules code\modules\admin code\modules\admin\verbs code\modules\assembly code\modules\clothing code\modules\clothing\spacesuits code\modules\clothing\spacesuits\rig code\modules\mob code\modules\mob\dead code\modules\mob\dead\observer code\modules\mob\living code\modules\mob\living\blob code\modules\mob\living\carbon code\modules\mob\living\carbon\alien code\modules\mob\living\carbon\human code\modules\mob\living\carbon\human\species code\modules\mob\living\carbon\human\species\xenomorphs code\modules\mob\living\carbon\metroid code\modules\mob\living\simple_animal code\modules\mob\living\simple_animal\hostile code\modules\paperwork code\modules\power code\modules\power\rust code\modules\power\singularity code\modules\projectiles code\modules\projectiles\guns code\modules\projectiles\guns\energy code\modules\reagents code\modules\reagents\reagent_containers code\modules\reagents\reagent_containers\food code\modules\security levels code\TriDimension code\ZAS icons icons\Testing icons\turf maps 
-FILE: code\modules\mob\living\carbon\carbon.dm
-LAST_COMPILE_TIME: 1425186405
+DIR: code code\__HELPERS code\ATMOSPHERICS\components code\ATMOSPHERICS\components\binary_devices code\ATMOSPHERICS\components\omni_devices code\ATMOSPHERICS\components\unary code\controllers code\datums code\datums\spells code\datums\wires code\defines code\modules code\modules\mob code\modules\mob\living code\modules\mob\living\carbon code\modules\mob\living\carbon\human maps 
+FILE: code\modules\mob\living\carbon\human\examine.dm
+LAST_COMPILE_TIME: 1425198817
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS

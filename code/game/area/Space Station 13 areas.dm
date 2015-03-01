@@ -2146,7 +2146,7 @@ var/list/centcom_areas = list (
 	/area/shuttle/specops/centcom,
 )
 
-//SPACE STATION 13
+//Apollo Station
 var/list/the_station_areas = list (
 	/area/shuttle/arrival,
 	/area/shuttle/escape/station,
