@@ -199,6 +199,9 @@
 /mob/proc/on_hear_radio(part_a, speaker_name, track, part_b, formatted)
 	src << "[part_a][speaker_name][part_b][formatted]</span></span>"
 
+/mob/dead/observer/on_hear_radio(part_a, speaker_name, track, part_b, formatted)
+	src << "[part_a][track][part_b][formatted]</span></span>"
+
 /mob/living/silicon/on_hear_radio(part_a, speaker_name, track, part_b, formatted)
 	var/time = say_timestamp()
 	src << "[time][part_a][speaker_name][part_b][formatted]</span></span>"

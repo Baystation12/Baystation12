@@ -797,7 +797,7 @@ note dizziness decrements automatically in the mob's Life() proc.
 			stat(null,"Location:\t([x], [y], [z])")
 			stat(null,"CPU:\t[world.cpu]")
 			stat(null,"Instances:\t[world.contents.len]")
-		if(statpanel("MC") && master_controller)
+		if(statpanel("Status") && master_controller)
 			stat(null,"MasterController-[last_tick_duration] ([master_controller.processing?"On":"Off"]-[controller_iteration])")
 			stat(null,"Air-[master_controller.air_cost]\tSun-[master_controller.sun_cost]")
 			stat(null,"Mob-[master_controller.mobs_cost]\t#[mob_list.len]")
@@ -1180,7 +1180,9 @@ mob/proc/yank_out_object()
 		usr << "You are now facing [dir2text(facing_dir)]."
 
 /mob/proc/set_face_dir(var/newdir)
-	if(newdir)
+	if(newdir == facing_dir)
+		facing_dir = null
+	else if(newdir)
 		set_dir(newdir)
 		facing_dir = newdir
 	else if(facing_dir)
@@ -1200,20 +1202,16 @@ mob/proc/yank_out_object()
 
 /mob/verb/northfaceperm()
 	set hidden = 1
-	facing_dir = null
 	set_face_dir(NORTH)
 
 /mob/verb/southfaceperm()
 	set hidden = 1
-	facing_dir = null
 	set_face_dir(SOUTH)
 
 /mob/verb/eastfaceperm()
 	set hidden = 1
-	facing_dir = null
 	set_face_dir(EAST)
 
 /mob/verb/westfaceperm()
 	set hidden = 1
-	facing_dir = null
 	set_face_dir(WEST)

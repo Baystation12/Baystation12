@@ -35,8 +35,8 @@
 		/datum/unarmed_attack/bite
 		)
 	var/list/unarmed_attacks = null          // For empty hand harm-intent attack
-	var/brute_mod = null                     // Physical damage reduction/malus.
-	var/burn_mod = null                      // Burn damage reduction/malus.
+	var/brute_mod = 1                        // Physical damage multiplier.
+	var/burn_mod = 1                         // Burn damage multiplier.
 
 	// Death vars.
 	var/gibber_type = /obj/effect/gibspawner/human
