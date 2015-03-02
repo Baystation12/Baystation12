@@ -147,7 +147,7 @@
 				return
 
 			if(client.prefs.species != "Human" && !check_rights(R_ADMIN, 0))
-				if(!is_alien_whitelisted(src, client.prefs.species) && config.usealienwhitelist)
+				if(!is_alien_whitelisted(src, client.prefs.species) && config.usealienwhitelist && ( client.prefs.species != unwhitelisted_alien ))
 					src << alert("You are currently not whitelisted to play [client.prefs.species].")
 					return 0
 
@@ -171,7 +171,7 @@
 				return
 
 			if(client.prefs.species != "Human")
-				if(!is_alien_whitelisted(src, client.prefs.species) && config.usealienwhitelist)
+				if(!is_alien_whitelisted(src, client.prefs.species) && config.usealienwhitelist && ( client.prefs.species != unwhitelisted_alien ))
 					src << alert("You are currently not whitelisted to play [client.prefs.species].")
 					return 0
 
