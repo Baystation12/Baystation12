@@ -1,7 +1,11 @@
 /mob/new_player/Login()
 	update_Login_details()	//handles setting lastKnownIP and computer_id for use by the ban systems as well as checking for multikeying
+	src << "<div class=\"motd\">"
+
 	if(join_motd)
-		src << "<div class=\"motd\">[join_motd]</div>"
+		src << "[join_motd]<br>"
+
+	src << "This week's de-whitelisted alien: [unwhitelisted_alien]! Go ahead and give them a try, free of charge!</div>"
 
 	if(!mind)
 		mind = new /datum/mind(key)
