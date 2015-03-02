@@ -186,7 +186,7 @@
 
 //spears, bay edition
 /obj/item/weapon/twohanded/spear
-	icon_state = "spearglass0"
+	icon_state = "spearglass"
 	name = "spear"
 	desc = "A haphazardly-constructed yet still deadly weapon of ancient design."
 	force = 14
@@ -202,5 +202,5 @@
 	attack_verb = list("attacked", "poked", "jabbed", "torn", "gored")
 
 /obj/item/weapon/twohanded/spear/update_icon()
-	icon_state = "spearglass[wielded]"
+	icon_state = "spearglass"
 	return

@@ -331,7 +331,7 @@ datum/controller/game_controller/proc/announcements()
 						"<font color='green'><big><img src=\ref['icons/misc/news.png']></img></big><b> We have community meetings every Saturday at 4 PM EST in our <a href='http://apollo-community.org/viewforum.php?f=32'>teamspeak</a>. Got a problem? Bring it up there!<br></font></b>",
 						"<font color='green'><big><img src=\ref['icons/misc/news.png']></img></big><b> Enjoy the game, and have a great day!<br></font></b>",
 						"<font color='green'><big><img src=\ref['icons/misc/news.png']></img></big><b> Find a bug or exploit? Let us know on our <a href='https://github.com/stuicey/AS_Project/issues?q=is%3Aopen+is%3Aissue'>bugtracker</a>!<br></font></b>" ,
-						"<font color='green'><big><img src=\ref['icons/misc/news.png']></img></big><b> Each week, we de-whitelist an alien race so you give them a test drive. This week's alien is: Diona. Go ahead and give 'em a spin!<br></font></b>",
+						"<font color='green'><big><img src=\ref['icons/misc/news.png']></img></big><b> Each week, we de-whitelist an alien race so you give them a test drive. This week's alien is: [unwhitelisted_alien]. Go ahead and give 'em a spin!<br></font></b>",
 		)
 datum/controller/game_controller/proc/Recover()		//Mostly a placeholder for now.
 	var/msg = "## DEBUG: [time2text(world.timeofday)] MC restarted. Reports:\n"

@@ -143,7 +143,7 @@
 
 	body_temperature = T0C + 15		//make the plant people have a bit lower body temperature, why not
 
-	flags = CAN_JOIN | NO_BREATHE | NO_SCAN | IS_PLANT | NO_BLOOD | NO_PAIN | NO_SLIP | HAS_EYE_COLOR
+	flags = CAN_JOIN | IS_WHITELISTED | NO_BREATHE | NO_SCAN | IS_PLANT | NO_BLOOD | NO_PAIN | HAS_EYE_COLOR
 
 	blood_color = "#004400"
 	flesh_color = "#907E4A"
@@ -258,7 +258,6 @@
 	flesh_color = "#704300"
 	blood_color = "#FFFF99"
 
-
 /datum/species/wryn/handle_death(var/mob/living/carbon/human/H)
 	for(var/mob/living/carbon/C in world)
 		if(locate(/datum/organ/internal/wryn/hivenode) in C.internal_organs)
@@ -268,3 +267,18 @@
 /datum/unarmed_attack/punch/weak
 	attack_verb = list("flail")
 	damage = 1
+
+/datum/species/nucleation
+	name = "Nucleation"
+	name_plural = "Nucleations"
+	icobase = 'icons/mob/human_races/r_nucleation.dmi'
+	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/punch, /datum/unarmed_attack/bite)
+	blurb = "A sub-race of unforunates who have been exposed to too much supermatter radiation. As a result, \
+	supermatter crystal clusters have begun to grow across their bodies. Research to find a cure for this ailment \
+	has been slow, and so this is a common fate for veteran engineers. Their crystalline structure makes them \
+	much more susceptible to damage, especially heat damage. They however, can handle supermatter without protection, \
+	and actually seem to regenerate damage when bathed in radiation."
+
+	burn_mod = 2
+
+	flags = CAN_JOIN | IS_WHITELISTED | NO_BREATHE | NO_BLOOD | NO_PAIN | HAS_LIPS | HAS_UNDERWEAR

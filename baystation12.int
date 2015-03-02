@@ -1,11 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: maps\apollo-1.dmm
+WINDOW: code\modules\mob\living\carbon\human\species\station\station.dm;code\global.dm;code\controllers\master_controller.dm;code\modules\client\preferences.dm
 LAST_COMPILE_VERSION: 506.1249
-DIR: code code\__HELPERS code\ATMOSPHERICS\components code\ATMOSPHERICS\components\binary_devices code\ATMOSPHERICS\components\omni_devices code\ATMOSPHERICS\components\unary code\controllers code\datums code\datums\spells code\datums\wires code\defines maps 
-FILE: maps\apollo-1.dmm
-LAST_COMPILE_TIME: 1425246318
+DIR: code code\__HELPERS code\ATMOSPHERICS\components code\ATMOSPHERICS\components\binary_devices code\ATMOSPHERICS\components\omni_devices code\ATMOSPHERICS\components\unary code\controllers code\datums code\datums\spells code\datums\wires code\defines code\modules code\modules\client code\modules\clothing code\modules\clothing\spacesuits code\modules\clothing\spacesuits\rig code\modules\clothing\spacesuits\rig\suits code\modules\clothing\spacesuits\void code\modules\mob code\modules\mob\living code\modules\mob\living\carbon code\modules\mob\living\carbon\human code\modules\mob\living\carbon\human\species code\modules\mob\living\carbon\human\species\station 
+FILE: code\modules\client\preferences.dm
+LAST_COMPILE_TIME: 1425282791
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS

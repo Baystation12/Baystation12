@@ -250,3 +250,6 @@ var/max_explosion_range = 14
 
 // Areas where actions won't be logged
 var/list/area/unlogged_areas = list( /area/tdome )
+
+// Alien taste-test
+var/unwhitelisted_alien = "Skrell"

@@ -19,3 +19,10 @@
 	desc = "Dispenses BlackKnight 5000 injectors."
 
 	dispense_item = /obj/item/weapon/reagent_containers/hypospray/autoinjector/adminorazine
+
+
+/obj/machinery/dispenser/
+	name = "Shotgun Dispenser"
+	desc = "Dispenses BlackKnight 5000 injectors."
+
+	dispense_item = /obj/item/weapon/gun/projectile/shotgun/pump/combat
