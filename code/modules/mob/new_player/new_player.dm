@@ -417,7 +417,7 @@
 			chosen_species = all_species[client.prefs.species]
 		if(chosen_species)
 			// Have to recheck admin due to no usr at roundstart. Latejoins are fine though.
-			if(is_species_whitelisted(chosen_species) || has_admin_rights())
+			if(is_species_whitelisted(chosen_species) || has_admin_rights() || ( client.prefs.species == unwhitelisted_alien ))
 				new_character = new(loc, client.prefs.species)
 
 		if(!new_character)
