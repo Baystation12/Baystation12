@@ -12,15 +12,20 @@ obj/effect/decal/cleanable/liquid_fuel
 			log_game("Liquid fuel has spilled in [newLoc.loc.name] ([newLoc.x],[newLoc.y],[newLoc.z])")
 		src.amount = amt
 
+		var/has_spread = 0
 		//Be absorbed by any other liquid fuel in the tile.
 		for(var/obj/effect/decal/cleanable/liquid_fuel/other in newLoc)
 			if(other != src)
 				other.amount += src.amount
-				spawn other.Spread()
-				del src
+				other.Spread()
+				has_spread = 1
+				break
 
-		Spread()
 		. = ..()
+		if(!has_spread)
+			Spread()
+		else
+			del(src)
 
 	proc/Spread()
 		//Allows liquid fuels to sometimes flow into other tiles.
