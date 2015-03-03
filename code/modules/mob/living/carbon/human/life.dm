@@ -599,31 +599,31 @@
 			adjustOxyLoss(-5)
 
 		// Hot air hurts :(
-		if( (breath.temperature < species.cold_level_1 || breath.temperature > species.heat_level_1) && !(COLD_RESISTANCE in mutations))
+		if( (breath.temperature <= species.cold_level_1 || breath.temperature >= species.heat_level_1) && !(COLD_RESISTANCE in mutations))
 
-			if(breath.temperature < species.cold_level_1)
+			if(breath.temperature <= species.cold_level_1)
 				if(prob(20))
 					src << "<span class='danger'>You feel your face freezing and icicles forming in your lungs!</span>"
-			else if(breath.temperature > species.heat_level_1)
+			else if(breath.temperature >= species.heat_level_1)
 				if(prob(20))
 					src << "<span class='danger'>You feel your face burning and a searing heat in your lungs!</span>"
 
-			if(breath.temperature > species.heat_level_1)
-				if(breath.temperature <= species.heat_level_2)
+			if(breath.temperature >= species.heat_level_1)
+				if(breath.temperature < species.heat_level_2)
 					apply_damage(HEAT_GAS_DAMAGE_LEVEL_1, BURN, "head", used_weapon = "Excessive Heat")
 					fire_alert = max(fire_alert, 2)
-				else if(breath.temperature <= species.heat_level_3)
+				else if(breath.temperature < species.heat_level_3)
 					apply_damage(HEAT_GAS_DAMAGE_LEVEL_2, BURN, "head", used_weapon = "Excessive Heat")
 					fire_alert = max(fire_alert, 2)
 				else
 					apply_damage(HEAT_GAS_DAMAGE_LEVEL_3, BURN, "head", used_weapon = "Excessive Heat")
 					fire_alert = max(fire_alert, 2)
 			
-			else if(breath.temperature < species.cold_level_1)
-				if(breath.temperature >= species.cold_level_2)
+			else if(breath.temperature <= species.cold_level_1)
+				if(breath.temperature > species.cold_level_2)
 					apply_damage(COLD_GAS_DAMAGE_LEVEL_1, BURN, "head", used_weapon = "Excessive Cold")
 					fire_alert = max(fire_alert, 1)
-				else if(breath.temperature >= species.cold_level_3)
+				else if(breath.temperature > species.cold_level_3)
 					apply_damage(COLD_GAS_DAMAGE_LEVEL_2, BURN, "head", used_weapon = "Excessive Cold")
 					fire_alert = max(fire_alert, 1)
 				else
@@ -695,38 +695,33 @@
 
 			//Use heat transfer as proportional to the gas density. However, we only care about the relative density vs standard 101 kPa/20 C air. Therefore we can use mole ratios
 			var/relative_density = environment.total_moles / MOLES_CELLSTANDARD
-			temp_adj *= relative_density
-
-			if (temp_adj > BODYTEMP_HEATING_MAX) temp_adj = BODYTEMP_HEATING_MAX
-			if (temp_adj < BODYTEMP_COOLING_MAX) temp_adj = BODYTEMP_COOLING_MAX
-			//world << "Environment: [loc_temp], [src]: [bodytemperature], Adjusting: [temp_adj]"
-			bodytemperature += temp_adj
+			bodytemperature += between(BODYTEMP_COOLING_MAX, temp_adj*relative_density, BODYTEMP_HEATING_MAX)
 
 		// +/- 50 degrees from 310.15K is the 'safe' zone, where no damage is dealt.
-		if(bodytemperature > species.heat_level_1)
+		if(bodytemperature >= species.heat_level_1)
 			//Body temperature is too hot.
 			fire_alert = max(fire_alert, 1)
 			if(status_flags & GODMODE)	return 1	//godmode
 			
-			if(bodytemperature <= species.heat_level_2)
+			if(bodytemperature < species.heat_level_2)
 				take_overall_damage(burn=HEAT_DAMAGE_LEVEL_1, used_weapon = "High Body Temperature")
 				fire_alert = max(fire_alert, 2)
-			else if(bodytemperature <= species.heat_level_3)
+			else if(bodytemperature < species.heat_level_3)
 				take_overall_damage(burn=HEAT_DAMAGE_LEVEL_2, used_weapon = "High Body Temperature")
 				fire_alert = max(fire_alert, 2)
 			else
 				take_overall_damage(burn=HEAT_DAMAGE_LEVEL_3, used_weapon = "High Body Temperature")
 				fire_alert = max(fire_alert, 2)
 
-		else if(bodytemperature < species.cold_level_1)
+		else if(bodytemperature <= species.cold_level_1)
 			fire_alert = max(fire_alert, 1)
 			if(status_flags & GODMODE)	return 1	//godmode
 			
 			if(!istype(loc, /obj/machinery/atmospherics/unary/cryo_cell))
-				if(bodytemperature >= species.cold_level_2)
+				if(bodytemperature > species.cold_level_2)
 					take_overall_damage(burn=COLD_DAMAGE_LEVEL_1, used_weapon = "High Body Temperature")
 					fire_alert = max(fire_alert, 1)
-				else if(bodytemperature >= species.cold_level_3)
+				else if(bodytemperature > species.cold_level_3)
 					take_overall_damage(burn=COLD_DAMAGE_LEVEL_2, used_weapon = "High Body Temperature")
 					fire_alert = max(fire_alert, 1)
 				else
