@@ -16,7 +16,6 @@
 	var/open_layer = DOOR_OPEN_LAYER
 	var/closed_layer = DOOR_CLOSED_LAYER
 
-	var/secondsElectrified = 0
 	var/visible = 1
 	var/p_open = 0
 	var/operating = 0
@@ -74,9 +73,6 @@
 	update_nearby_tiles()
 	..()
 	return
-
-//process()
-	//return
 
 /obj/machinery/door/Bumped(atom/AM)
 	if(p_open || operating) return
@@ -146,7 +142,7 @@
 		return
 
 	// Emitter Blasts - these will eventually completely destroy the door, given enough time.
-	if (Proj.damage > 90) 
+	if (Proj.damage > 90)
 		destroy_hits--
 		if (destroy_hits <= 0)
 			visible_message("\red <B>\The [src.name] disintegrates!</B>")
@@ -317,11 +313,6 @@
 /obj/machinery/door/emp_act(severity)
 	if(prob(20/severity) && (istype(src,/obj/machinery/door/airlock) || istype(src,/obj/machinery/door/window)) )
 		open()
-	if(prob(40/severity))
-		if(secondsElectrified == 0)
-			secondsElectrified = -1
-			spawn(300)
-				secondsElectrified = 0
 	..()
 
 

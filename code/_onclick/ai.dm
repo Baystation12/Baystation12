@@ -106,9 +106,9 @@
 
 /obj/machinery/door/airlock/AIShiftClick()  // Opens and closes doors!
 	if(density)
-		Topic(src, list("src"= "\ref[src]", "aiEnable"="7"), 1) // 1 meaning no window (consistency!)
+		Topic(src, list("src"= "\ref[src]", "command"="open", "activate" = "1"), 1) // 1 meaning no window (consistency!)
 	else
-		Topic(src, list("src"= "\ref[src]", "aiDisable"="7"), 1)
+		Topic(src, list("src"= "\ref[src]", "command"="open", "activate" = "0"), 1)
 	return
 
 /atom/proc/AICtrlClick()
@@ -116,9 +116,9 @@
 
 /obj/machinery/door/airlock/AICtrlClick() // Bolts doors
 	if(locked)
-		Topic(src, list("src"= "\ref[src]", "aiEnable"="4"), 1)// 1 meaning no window (consistency!)
+		Topic(src, list("src"= "\ref[src]", "command"="bolts", "activate" = "0"), 1)// 1 meaning no window (consistency!)
 	else
-		Topic(src, list("src"= "\ref[src]", "aiDisable"="4"), 1)
+		Topic(src, list("src"= "\ref[src]", "command"="bolts", "activate" = "1"), 1)
 
 /obj/machinery/power/apc/AICtrlClick() // turns off/on APCs.
 	Topic(src, list("src"= "\ref[src]", "breaker"="1"), 1) // 1 meaning no window (consistency!)
@@ -130,12 +130,12 @@
 	AltClick(A)
 
 /obj/machinery/door/airlock/AIAltClick() // Electrifies doors.
-	if(!secondsElectrified)
+	if(!electrified_until)
 		// permanent shock
-		Topic(src, list("src"= "\ref[src]", "aiEnable"="6"), 1) // 1 meaning no window (consistency!)
+		Topic(src, list("src"= "\ref[src]", "command"="electrify_permanently", "activate" = "1"), 1) // 1 meaning no window (consistency!)
 	else
 		// disable/6 is not in Topic; disable/5 disables both temporary and permanent shock
-		Topic(src, list("src"= "\ref[src]", "aiDisable"="5"), 1)
+		Topic(src, list("src"= "\ref[src]", "command"="electrify_permanently", "activate" = "0"), 1)
 	return
 
 /obj/machinery/turretid/AIAltClick() //toggles lethal on turrets
@@ -146,9 +146,9 @@
 
 /obj/machinery/door/airlock/AIMiddleClick() // Toggles door bolt lights.
 	if(!src.lights)
-		Topic(src, list("src"= "\ref[src]", "aiEnable"="10"), 1) // 1 meaning no window (consistency!)
+		Topic(src, list("src"= "\ref[src]", "command"="lights", "activate" = "1"), 1) // 1 meaning no window (consistency!)
 	else
-		Topic(src, list("src"= "\ref[src]", "aiDisable"="10"), 1)
+		Topic(src, list("src"= "\ref[src]", "command"="lights", "activate" = "0"), 1)
 	return
 
 //
