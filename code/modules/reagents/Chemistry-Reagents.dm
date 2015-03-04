@@ -10,8 +10,6 @@
 	var/metabolism = REM // This would be 0.2 normally
 	var/ingest_met = 0
 	var/touch_met = 0
-	var/list/filtering_organs = null // These organs help in chemical removal if they are working
-	var/list/filtering_speed = null
 	var/dose = 0
 	var/max_dose = 0
 	var/overdose_blood = 0
@@ -31,8 +29,33 @@
 	holder.remove_reagent(id, amount, state)
 
 /datum/reagent/proc/touch_mob(var/mob/M) // By default, moves everything to mob in CHEM_TOUCH state. Could be overridden. // TODO: protection
-	holder.trans_id_to(M, id, volume)
+	var/perm = 1 // How much is transferred
+	for(var/obj/item/clothing/C in M.get_equipped_items())
+		perm *= get_cloth_perm(C)
+	world << "Perm is [perm]"
+	holder.trans_id_to(M, id, volume * perm)
 	return
+
+/datum/reagent/proc/get_cloth_perm(var/obj/item/clothing/C) // This should probably be a clothing proc. TODO: consider moving it.
+	if(C.permeability_coefficient == 1)
+		return 1
+	var/coverage = 0
+	var/t = C.body_parts_covered
+	if(t & HEAD) // This is seriously terrible, and as soon as I come up with a better idea, I'll change it
+		coverage += THERMAL_PROTECTION_HEAD
+	if(t & UPPER_TORSO)
+		coverage += THERMAL_PROTECTION_UPPER_TORSO
+	if(t & LOWER_TORSO)
+		coverage += THERMAL_PROTECTION_LOWER_TORSO
+	if(t & LEGS)
+		coverage += THERMAL_PROTECTION_LEG_LEFT + THERMAL_PROTECTION_LEG_RIGHT
+	if(t & FEET)
+		coverage += THERMAL_PROTECTION_FOOT_LEFT + THERMAL_PROTECTION_FOOT_RIGHT
+	if(t & ARMS)
+		coverage += THERMAL_PROTECTION_ARM_LEFT + THERMAL_PROTECTION_ARM_RIGHT
+	if(t & HANDS)
+		coverage += THERMAL_PROTECTION_HAND_LEFT + THERMAL_PROTECTION_HAND_RIGHT
+	return (1 - (1 - C.permeability_coefficient) * coverage)
 
 /datum/reagent/proc/touch_obj(var/obj/O) // Acid melting, cleaner cleaning, etc
 	return
@@ -61,40 +84,9 @@
 	if(removed >= (metabolism * 0.1)) // If there's too little chemical, don't affect the mob, just remove it
 		affect_mob(M, alien, removed)
 	remove_self(removed)
-	if(filtering_organs && filtering_organs.len)
-		if(ishuman(M))
-			var/mob/living/carbon/human/H = M
-			for(var/i = 1 to filtering_organs.len)
-				var/name = filtering_organs[i]
-				var/datum/organ/internal/O = H.internal_organs_by_name[name]
-				if(O)
-					if(O.is_broken())
-						broken_organ(M, alien, removed, name)
-					else if(O.is_bruised())
-						remove_self(filtering_speed[i] * 0.5)
-						bruised_organ(M, alien, removed, name)
-					else
-						remove_self(filtering_speed[i])
-				else
-					if(M.species.has_organ[name]) // Let's not kill dionae for not having a liver
-						missing_organ(M, alien, removed, name)
-					else
-						no_organ(M, alien, removed, name)
 	if(addiction && ishuman(M))
 		var/mob/living/carbon/human/H = M
 		H.addict(addiction, addiction_strength * removed)
-	return
-
-/datum/reagent/proc/bruised_organ(var/mob/living/carbon/M, var/alien, var/removed, var/name) // Organ exists but is bruised
-	return
-
-/datum/reagent/proc/broken_organ(var/mob/living/carbon/M, var/alien, var/removed, var/name) // Organ exists but is broken
-	return
-
-/datum/reagent/proc/missing_organ(var/mob/living/carbon/M, var/alien, var/removed, var/name) // Organ is meant to exist but doesn't - probably surgery
-	return
-
-/datum/reagent/proc/no_organ(var/mob/living/carbon/M, var/alien, var/removed, var/name) // Species don't have this organ
 	return
 
 /datum/reagent/proc/affect_mob(var/mob/living/carbon/M, var/alien, var/removed) // This is the main working proc where the chemical does its magic
@@ -356,8 +348,6 @@
 	description = "A well-known alcohol with a variety of applications."
 	reagent_state = LIQUID
 	color = "#404030"
-	filtering_organs = list("liver")
-	filtering_speed = list(REM)
 	addiction = /datum/addiction/alcohol
 	addiction_strength = 1
 	var/nutriment_factor = 0
@@ -383,17 +373,21 @@
 	if(alien == IS_DIONA)
 		strength_mod = 0
 
+	M.add_chemical_effect(CE_ALCOHOL, 1)
+
 	if(dose / strength_mod >= strength) // Early warning
-		M.make_dizzy(5) // It is decreased at the speed of 3 per tick
-	if(dose / strength_mod >= strength * 4)
+		M.make_dizzy(6) // It is decreased at the speed of 3 per tick
+	if(dose / strength_mod >= strength * 2) // Slurring
 		M.slurring = max(M.slurring, 30)
-	if(dose / strength_mod >= strength * 5)
+	if(dose / strength_mod >= strength * 3) // Confusion - walking in random directions
 		M.confused = max(M.confused, 20)
-	if(dose / strength_mod >= strength * 6)
+	if(dose / strength_mod >= strength * 4) // Blurry vision
 		M.eye_blurry = max(M.eye_blurry, 10)
-	if(dose / strength_mod >= strength * 7)
+	if(dose / strength_mod >= strength * 5) // Drowsyness - periodically falling asleep
 		M.drowsyness = max(M.drowsyness, 20)
-	if(dose / strength_mod >= strength * 8)
+	if(dose / strength_mod >= strength * 6) // Toxic dose
+		M.add_chemical_effect(CE_ALCOHOL_TOXIC, toxicity)
+		/*
 		if(ishuman(M))
 			var/mob/living/carbon/human/H = M
 			var/datum/organ/internal/liver/O = H.internal_organs_by_name["liver"]
@@ -407,24 +401,10 @@
 					M.adjustToxLoss(removed * toxicity * 0.5) // This is in addition to the damage caused just by drinking
 		else
 			M.adjustToxLoss(removed * toxicity)
-	if(dose / strength_mod >= strength * 9)
+		*/
+	if(dose / strength_mod >= strength * 7) // Pass out
 		M.paralysis = max(M.paralysis, 20)
 		M.sleeping  = max(M.sleeping, 30)
-
-/datum/reagent/ethanol/bruised_organ(var/mob/living/carbon/M, var/alien, var/removed, var/name)
-	if(name == "liver")
-		M.adjustToxLoss(removed * toxicity)
-	return
-
-/datum/reagent/ethanol/broken_organ(var/mob/living/carbon/M, var/alien, var/removed, var/name)
-	if(name == "liver")
-		M.adjustToxLoss(removed * toxicity * 2)
-	return
-
-/datum/reagent/ethanol/missing_organ(var/mob/living/carbon/M, var/alien, var/removed, var/name)
-	if(name == "liver")
-		M.adjustToxLoss(removed * toxicity * 3)
-	return
 
 /datum/reagent/ethanol/touch_obj(var/obj/O)
 	if(istype(O, /obj/item/weapon/paper))
@@ -1346,7 +1326,7 @@
 	M.adjustOxyLoss(-4 * removed)
 	M.heal_organ_damage(2 * removed, 2 * removed)
 	M.adjustToxLoss(-2 * removed)
-	if(M.dizziness) 
+	if(M.dizziness)
 		M.dizziness = max(0, M.dizziness - 15)
 	if(M.confused)
 		M.confused = max(0, M.confused - 5)
@@ -1629,17 +1609,207 @@
 
 // Cocktails
 
+/datum/reagent/ethanol/acid_spit
+	name = "Acid Spit"
+	id = "acidspit"
+	description = "A drink for the daring, can be deadly if incorrectly prepared!"
+	reagent_state = LIQUID
+	color = "#365000"
+	strength = 30
+
+	glass_icon_state = "acidspitglass"
+	glass_name = "glass of Acid Spit"
+	glass_desc = "A drink from Nanotrasen. Made from live aliens."
+	glass_center_of_mass = list("x"=16, "y"=7)
+
+/datum/reagent/ethanol/alliescocktail
+	name = "Allies Cocktail"
+	id = "alliescocktail"
+	description = "A drink made from your allies, not as sweet as when made from your enemies."
+	color = "#664300"
+	strength = 25
+
+	glass_icon_state = "alliescocktail"
+	glass_name = "glass of Allies cocktail"
+	glass_desc = "A drink made from your allies."
+	glass_center_of_mass = list("x"=17, "y"=8)
+
+/datum/reagent/ethanol/aloe
+	name = "Aloe"
+	id = "aloe"
+	description = "So very, very, very good."
+	color = "#664300"
+	strength = 15
+
+	glass_icon_state = "aloe"
+	glass_name = "glass of Aloe"
+	glass_desc = "Very, very, very good."
+	glass_center_of_mass = list("x"=17, "y"=8)
+
+/datum/reagent/ethanol/amasec
+	name = "Amasec"
+	id = "amasec"
+	description = "Official drink of the NanoTrasen Gun-Club!"
+	reagent_state = LIQUID
+	color = "#664300"
+	strength = 25
+
+	glass_icon_state = "amasecglass"
+	glass_name = "glass of Amasec"
+	glass_desc = "Always handy before COMBAT!!!"
+	glass_center_of_mass = list("x"=16, "y"=9)
+
+/datum/reagent/ethanol/andalusia
+	name = "Andalusia"
+	id = "andalusia"
+	description = "A nice, strangely named drink."
+	color = "#664300"
+	strength = 15
+
+	glass_icon_state = "andalusia"
+	glass_name = "glass of Andalusia"
+	glass_desc = "A nice, strange named drink."
+	glass_center_of_mass = list("x"=16, "y"=9)
+
+/datum/reagent/ethanol/b52
+	name = "B-52"
+	id = "b52"
+	description = "Coffee, Irish Cream, and cognac. You will get bombed."
+	color = "#664300"
+	strength = 12
+
+	glass_icon_state = "b52glass"
+	glass_name = "glass of B-52"
+	glass_desc = "Kahlua, Irish cream, and congac. You will get bombed."
+
+/datum/reagent/ethanol/bahama_mama
+	name = "Bahama mama"
+	id = "bahama_mama"
+	description = "Tropical cocktail."
+	color = "#FF7F3B"
+	strength = 25
+
+	glass_icon_state = "bahama_mama"
+	glass_name = "glass of Bahama Mama"
+	glass_desc = "Tropical cocktail"
+	glass_center_of_mass = list("x"=16, "y"=5)
+
 /datum/reagent/ethanol/bananahonk
 	name = "Banana Mama"
 	id = "bananahonk"
 	description = "A drink from Clown Heaven."
 	nutriment_factor = 1
 	color = "#FFFF91"
-	boozepwr = 12
+	strength = 12
 
 	glass_icon_state = "bananahonkglass"
 	glass_name = "glass of Banana Honk"
 	glass_desc = "A drink from Banana Heaven."
+	glass_center_of_mass = list("x"=16, "y"=8)
+
+/datum/reagent/ethanol/barefoot
+	name = "Barefoot"
+	id = "barefoot"
+	description = "Barefoot and pregnant"
+	color = "#664300"
+	strength = 30
+
+	glass_icon_state = "b&p"
+	glass_name = "glass of Barefoot"
+	glass_desc = "Barefoot and pregnant"
+	glass_center_of_mass = list("x"=17, "y"=8)
+
+/datum/reagent/ethanol/black_russian
+	name = "Black Russian"
+	id = "blackrussian"
+	description = "For the lactose-intolerant. Still as classy as a White Russian."
+	color = "#360000"
+	strength = 15
+
+	glass_icon_state = "blackrussianglass"
+	glass_name = "glass of Black Russian"
+	glass_desc = "For the lactose-intolerant. Still as classy as a White Russian."
+	glass_center_of_mass = list("x"=16, "y"=9)
+
+/datum/reagent/ethanol/bloody_mary
+	name = "Bloody Mary"
+	id = "bloodymary"
+	description = "A strange yet pleasurable mixture made of vodka, tomato and lime juice. Or at least you THINK the red stuff is tomato juice."
+	color = "#664300"
+	strength = 15
+
+	glass_icon_state = "bloodymaryglass"
+	glass_name = "glass of Bloody Mary"
+	glass_desc = "Tomato juice, mixed with Vodka and a lil' bit of lime. Tastes like liquid murder."
+
+/datum/reagent/ethanol/booger
+	name = "Booger"
+	id = "booger"
+	description = "Ewww..."
+	color = "#8CFF8C"
+	strength = 30
+
+	glass_icon_state = "booger"
+	glass_name = "glass of Booger"
+	glass_desc = "Ewww..."
+
+/datum/reagent/ethanol/brave_bull
+	name = "Brave Bull"
+	id = "bravebull"
+	description = "It's just as effective as Dutch-Courage!"
+	color = "#664300"
+	strength = 15
+
+	glass_icon_state = "bravebullglass"
+	glass_name = "glass of Brave Bull"
+	glass_desc = "Tequilla and coffee liquor, brought together in a mouthwatering mixture. Drink up."
+	glass_center_of_mass = list("x"=15, "y"=8)
+
+/datum/reagent/ethanol/changelingsting
+	name = "Changeling Sting"
+	id = "changelingsting"
+	description = "You take a tiny sip and feel a burning sensation..."
+	color = "#2E6671"
+	strength = 10
+
+	glass_icon_state = "changelingsting"
+	glass_name = "glass of Changeling Sting"
+	glass_desc = "A stingy drink."
+
+/datum/reagent/ethanol/cuba_libre
+	name = "Cuba Libre"
+	id = "cubalibre"
+	description = "Rum, mixed with cola. Viva la revolucion."
+	color = "#3E1B00"
+	strength = 30
+
+	glass_icon_state = "cubalibreglass"
+	glass_name = "glass of Cuba Libre"
+	glass_desc = "A classic mix of rum and cola."
+	glass_center_of_mass = list("x"=16, "y"=8)
+
+/datum/reagent/ethanol/demonsblood
+	name = "Demons Blood"
+	id = "demonsblood"
+	description = "AHHHH!!!!"
+	color = "#820000"
+	strength = 15
+
+	glass_icon_state = "demonsblood"
+	glass_name = "glass of Demons' Blood"
+	glass_desc = "Just looking at this thing makes the hair at the back of your neck stand up."
+	glass_center_of_mass = list("x"=16, "y"=2)
+
+/datum/reagent/ethanol/devilskiss
+	name = "Devils Kiss"
+	id = "devilskiss"
+	description = "Creepy time!"
+	color = "#A68310"
+	strength = 15
+
+	glass_icon_state = "devilskiss"
+	glass_name = "glass of Devil's Kiss"
+	glass_desc = "Creepy time!"
 	glass_center_of_mass = list("x"=16, "y"=8)
 
 /datum/reagent/ethanol/driestmartini
@@ -1648,12 +1818,288 @@
 	description = "Only for the experienced. You think you see sand floating in the glass."
 	nutriment_factor = 1
 	color = "#2E6671"
-	boozepwr = 12
+	strength = 12
 
 	glass_icon_state = "driestmartiniglass"
 	glass_name = "glass of Driest Martini"
 	glass_desc = "Only for the experienced. You think you see sand floating in the glass."
 	glass_center_of_mass = list("x"=17, "y"=8)
+
+/datum/reagent/ethanol/ginfizz
+	name = "Gin Fizz"
+	id = "ginfizz"
+	description = "Refreshingly lemony, deliciously dry."
+	color = "#664300"
+	strength = 30
+
+	glass_icon_state = "ginfizzglass"
+	glass_name = "glass of gin fizz"
+	glass_desc = "Refreshingly lemony, deliciously dry."
+	glass_center_of_mass = list("x"=16, "y"=7)
+
+/datum/reagent/ethanol/grog
+	name = "Grog"
+	id = "grog"
+	description = "Watered down rum, NanoTrasen approves!"
+	reagent_state = LIQUID
+	color = "#664300"
+	strength = 100
+
+	glass_icon_state = "grogglass"
+	glass_name = "glass of grog"
+	glass_desc = "A fine and cepa drink for Space."
+
+/datum/reagent/ethanol/erikasurprise
+	name = "Erika Surprise"
+	id = "erikasurprise"
+	description = "The surprise is, it's green!"
+	color = "#2E6671"
+	strength = 15
+
+	glass_icon_state = "erikasurprise"
+	glass_name = "glass of Erika Surprise"
+	glass_desc = "The surprise is, it's green!"
+	glass_center_of_mass = list("x"=16, "y"=9)
+
+/datum/reagent/ethanol/goldschlager
+	name = "Goldschlager"
+	id = "goldschlager"
+	description = "100 proof cinnamon schnapps, made for alcoholic teen girls on spring break."
+	color = "#664300"
+	strength = 15
+
+	glass_icon_state = "ginvodkaglass"
+	glass_name = "glass of Goldschlager"
+	glass_desc = "100 proof that teen girls will drink anything with gold in it."
+	glass_center_of_mass = list("x"=16, "y"=12)
+
+/datum/reagent/ethanol/irishcarbomb
+	name = "Irish Car Bomb"
+	id = "irishcarbomb"
+	description = "Mmm, tastes like chocolate cake..."
+	color = "#2E6671"
+	strength = 15
+
+	glass_icon_state = "irishcarbomb"
+	glass_name = "glass of Irish Car Bomb"
+	glass_desc = "An irish car bomb."
+	glass_center_of_mass = list("x"=16, "y"=8)
+
+/datum/reagent/ethanol/irishcoffee
+	name = "Irish Coffee"
+	id = "irishcoffee"
+	description = "Coffee, and alcohol. More fun than a Mimosa to drink in the morning."
+	color = "#664300"
+	strength = 15
+
+	glass_icon_state = "irishcoffeeglass"
+	glass_name = "glass of Irish coffee"
+	glass_desc = "Coffee and alcohol. More fun than a Mimosa to drink in the morning."
+	glass_center_of_mass = list("x"=15, "y"=10)
+
+/datum/reagent/ethanol/longislandicedtea
+	name = "Long Island Iced Tea"
+	id = "longislandicedtea"
+	description = "The liquor cabinet, brought together in a delicious mix. Intended for middle-aged alcoholic women only."
+	color = "#664300"
+	strength = 12
+
+	glass_icon_state = "longislandicedteaglass"
+	glass_name = "glass of Long Island iced tea"
+	glass_desc = "The liquor cabinet, brought together in a delicious mix. Intended for middle-aged alcoholic women only."
+	glass_center_of_mass = list("x"=16, "y"=8)
+
+/datum/reagent/ethanol/manhattan
+	name = "Manhattan"
+	id = "manhattan"
+	description = "The Detective's undercover drink of choice. He never could stomach gin..."
+	color = "#664300"
+	strength = 15
+
+	glass_icon_state = "manhattanglass"
+	glass_name = "glass of Manhattan"
+	glass_desc = "The Detective's undercover drink of choice. He never could stomach gin..."
+	glass_center_of_mass = list("x"=17, "y"=8)
+
+/datum/reagent/ethanol/manly_dorf
+	name = "The Manly Dorf"
+	id = "manlydorf"
+	description = "Beer and Ale, brought together in a delicious mix. Intended for true men only."
+	color = "#664300"
+	strength = 25
+
+	glass_icon_state = "manlydorfglass"
+	glass_name = "glass of The Manly Dorf"
+	glass_desc = "A manly concotion made from Ale and Beer. Intended for true men only."
+
+/datum/reagent/ethanol/margarita
+	name = "Margarita"
+	id = "margarita"
+	description = "On the rocks with salt on the rim. Arriba~!"
+	color = "#8CFF8C"
+	strength = 15
+
+	glass_icon_state = "margaritaglass"
+	glass_name = "glass of margarita"
+	glass_desc = "On the rocks with salt on the rim. Arriba~!"
+	glass_center_of_mass = list("x"=16, "y"=8)
+
+/datum/reagent/ethanol/mead
+	name = "Mead"
+	id = "mead"
+	description = "A Viking's drink, though a cheap one."
+	reagent_state = LIQUID
+	color = "#664300"
+	strength = 30
+	nutriment_factor = 1
+
+	glass_icon_state = "meadglass"
+	glass_name = "glass of mead"
+	glass_desc = "A Viking's beverage, though a cheap one."
+	glass_center_of_mass = list("x"=17, "y"=10)
+
+/datum/reagent/ethanol/patron
+	name = "Patron"
+	id = "patron"
+	description = "Tequila with silver in it, a favorite of alcoholic women in the club scene."
+	color = "#585840"
+	strength = 30
+
+	glass_icon_state = "patronglass"
+	glass_name = "glass of Patron"
+	glass_desc = "Drinking patron in the bar, with all the subpar ladies."
+	glass_center_of_mass = list("x"=7, "y"=8)
+
+/datum/reagent/ethanol/red_mead
+	name = "Red Mead"
+	id = "red_mead"
+	description = "The true Viking's drink! Even though it has a strange red color."
+	color = "#C73C00"
+	strength = 30
+
+	glass_icon_state = "red_meadglass"
+	glass_name = "glass of red mead"
+	glass_desc = "A true Viking's beverage, though its color is strange."
+	glass_center_of_mass = list("x"=17, "y"=10)
+
+/datum/reagent/ethanol/screwdrivercocktail
+	name = "Screwdriver"
+	id = "screwdrivercocktail"
+	description = "Vodka, mixed with plain ol' orange juice. The result is surprisingly delicious."
+	color = "#A68310"
+	strength = 15
+
+	glass_icon_state = "screwdriverglass"
+	glass_name = "glass of Screwdriver"
+	glass_desc = "A simple, yet superb mixture of Vodka and orange juice. Just the thing for the tired engineer."
+	glass_center_of_mass = list("x"=15, "y"=10)
+
+/datum/reagent/ethanol/singulo
+	name = "Singulo"
+	id = "singulo"
+	description = "A blue-space beverage!"
+	color = "#2E6671"
+	strength = 10
+
+	glass_icon_state = "singulo"
+	glass_name = "glass of Singulo"
+	glass_desc = "A blue-space beverage."
+	glass_center_of_mass = list("x"=17, "y"=4)
+
+/datum/reagent/ethanol/snowwhite
+	name = "Snow White"
+	id = "snowwhite"
+	description = "A cold refreshment"
+	color = "#FFFFFF"
+	strength = 30
+
+	glass_icon_state = "snowwhite"
+	glass_name = "glass of Snow White"
+	glass_desc = "A cold refreshment."
+	glass_center_of_mass = list("x"=16, "y"=8)
+
+/datum/reagent/ethanol/suidream
+	name = "Sui Dream"
+	id = "suidream"
+	description = "Comprised of: White soda, blue curacao, melon liquor."
+	color = "#00A86B"
+	strength = 100
+
+	glass_icon_state = "sdreamglass"
+	glass_name = "glass of Sui Dream"
+	glass_desc = "A froofy, fruity, and sweet mixed drink. Understanding the name only brings shame."
+	glass_center_of_mass = list("x"=16, "y"=5)
+
+/datum/reagent/ethanol/syndicatebomb
+	name = "Syndicate Bomb"
+	id = "syndicatebomb"
+	description = "Tastes like terrorism!"
+	color = "#2E6671"
+	strength = 10
+
+	glass_icon_state = "syndicatebomb"
+	glass_name = "glass of Syndicate Bomb"
+	glass_desc = "Tastes like terrorism!"
+	glass_center_of_mass = list("x"=16, "y"=4)
+
+/datum/reagent/ethanol/tequilla_sunrise
+	name = "Tequila Sunrise"
+	id = "tequillasunrise"
+	description = "Tequila and orange juice. Much like a Screwdriver, only Mexican~"
+	color = "#FFE48C"
+	strength = 25
+
+	glass_icon_state = "tequillasunriseglass"
+	glass_name = "glass of Tequilla Sunrise"
+	glass_desc = "Oh great, now you feel nostalgic about sunrises back on Terra..."
+
+/datum/reagent/ethanol/vodkamartini
+	name = "Vodka Martini"
+	id = "vodkamartini"
+	description = "Vodka with Gin. Not quite how 007 enjoyed it, but still delicious."
+	color = "#664300"
+	strength = 12
+
+	glass_icon_state = "martiniglass"
+	glass_name = "glass of vodka martini"
+	glass_desc ="A bastardisation of the classic martini. Still great."
+	glass_center_of_mass = list("x"=17, "y"=8)
+
+/datum/reagent/ethanol/vodkatonic
+	name = "Vodka and Tonic"
+	id = "vodkatonic"
+	description = "For when a gin and tonic isn't russian enough."
+	color = "#0064C8" // rgb: 0, 100, 200
+	strength = 15
+
+	glass_icon_state = "vodkatonicglass"
+	glass_name = "glass of vodka and tonic"
+	glass_desc = "For when a gin and tonic isn't Russian enough."
+	glass_center_of_mass = list("x"=16, "y"=7)
+
+/datum/reagent/ethanol/white_russian
+	name = "White Russian"
+	id = "whiterussian"
+	description = "That's just, like, your opinion, man..."
+	color = "#A68340"
+	strength = 15
+
+	glass_icon_state = "whiterussianglass"
+	glass_name = "glass of White Russian"
+	glass_desc = "A very nice looking drink. But that's just, like, your opinion, man."
+	glass_center_of_mass = list("x"=16, "y"=9)
+
+/datum/reagent/ethanol/whiskeysoda
+	name = "Whiskey Soda"
+	id = "whiskeysoda"
+	description = "For the more refined griffon."
+	color = "#664300"
+	strength = 15
+
+	glass_icon_state = "whiskeysodaglass2"
+	glass_name = "glass of whiskey soda"
+	glass_desc = "Ultimate refreshment."
+	glass_center_of_mass = list("x"=16, "y"=9)
 
 /* Things that didn't fit anywhere else */
 
