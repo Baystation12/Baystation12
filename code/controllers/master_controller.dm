@@ -5,7 +5,6 @@
 var/global/datum/controller/game_controller/master_controller //Set in world.New()
 
 var/global/controller_iteration = 0
-var/global/last_tick_timeofday = world.timeofday
 var/global/last_tick_duration = 0
 
 var/global/air_processing_killed = 0
@@ -53,8 +52,8 @@ datum/controller/game_controller/New()
 
 	if(!syndicate_code_phrase)		syndicate_code_phrase	= generate_code_phrase()
 	if(!syndicate_code_response)	syndicate_code_response	= generate_code_phrase()
-	if(!emergency_shuttle)			emergency_shuttle = new /datum/emergency_shuttle_controller()
-	if(!shuttle_controller)			shuttle_controller = new /datum/shuttle_controller()
+//	if(!emergency_shuttle)			emergency_shuttle = new /datum/emergency_shuttle_controller() // handled in scheduler
+//	if(!shuttle_controller)			shuttle_controller = new /datum/shuttle_controller()
 
 datum/controller/game_controller/proc/setup()
 	world.tick_lag = config.Ticklag
@@ -65,12 +64,12 @@ datum/controller/game_controller/proc/setup()
 	spawn(20)
 		createRandomZlevel()
 
-	if(!air_master)
+/*	if(!air_master) // handled in scheduler
 		air_master = new /datum/controller/air_system()
 		air_master.Setup()
 
 	if(!ticker)
-		ticker = new /datum/controller/gameticker()
+		ticker = new /datum/controller/gameticker()*/
 
 	setup_objects()
 	setupgenetics()
@@ -80,11 +79,11 @@ datum/controller/game_controller/proc/setup()
 
 	transfer_controller = new
 
-	spawn(0)
+/*	spawn(0) // handled in scheduler
 		if(ticker)
 			ticker.pregame()
 
-	lighting_controller.initializeLighting()
+	lighting_controller.initializeLighting()*/
 
 
 datum/controller/game_controller/proc/setup_objects()
@@ -134,10 +133,6 @@ datum/controller/game_controller/proc/process()
 		set background = 1
 		while(1)	//far more efficient than recursively calling ourself
 			if(!Failsafe)	new /datum/controller/failsafe()
-
-			var/currenttime = world.timeofday
-			last_tick_duration = (currenttime - last_tick_timeofday) / 10
-			last_tick_timeofday = currenttime
 
 			if(processing)
 				var/timer
