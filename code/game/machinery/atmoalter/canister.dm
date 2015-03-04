@@ -214,9 +214,7 @@ update_flag
 	else
 		can_label = 0
 
-	if(air_contents.temperature > PHORON_FLASHPOINT)
-		air_contents.zburn()
-	return
+	air_contents.react() //cooking up air cans - add phoron and oxygen, then heat above PHORON_MINIMUM_BURN_TEMPERATURE
 
 /obj/machinery/portable_atmospherics/canister/return_air()
 	return air_contents

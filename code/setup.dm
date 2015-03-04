@@ -122,12 +122,19 @@
 #define CARBON_LIFEFORM_FIRE_DAMAGE     4
 
 // Phoron fire properties.
-#define PHORON_MINIMUM_BURN_TEMPERATURE    (T0C +  100)
-#define PHORON_FLASHPOINT                  (T0C +  246)
-#define PHORON_UPPER_TEMPERATURE           (T0C + 1370)
-#define PHORON_MINIMUM_OXYGEN_NEEDED       2
-#define PHORON_MINIMUM_OXYGEN_PHORON_RATIO 20
-#define PHORON_OXYGEN_FULLBURN             10
+#define PHORON_MINIMUM_BURN_TEMPERATURE    (T0C +  126) //400 K - autoignite temperature in tanks and canisters - enclosed environments I guess
+#define PHORON_FLASHPOINT                  (T0C +  246) //519 K - autoignite temperature in air if that ever gets implemented.
+
+//These control the mole ratio of oxidizer and fuel used in the combustion reaction
+#define FIRE_REACTION_OXIDIZER_AMOUNT	3
+#define FIRE_REACTION_FUEL_AMOUNT		2
+
+//These control the speed at which fire burns
+#define FIRE_GAS_BURNRATE_MULT			1
+#define FIRE_LIQUID_BURNRATE_MULT		0.5
+
+//How many moles of fuel are contained within one solid/liquid fuel volume unit
+#define LIQUIDFUEL_AMOUNT_TO_MOL		1  //mol/volume unit
 
 #define T0C  273.15 //    0.0 degrees celcius
 #define T20C 293.15 //   20.0 degrees celcius
@@ -593,6 +600,7 @@ var/list/be_special_flags = list(
 #define    IMPTRACK_HUD 7 // Tracking implant.
 #define SPECIALROLE_HUD 8 // AntagHUD image.
 #define  STATUS_HUD_OOC 9 // STATUS_HUD without virus DB check for someone being ill.
+#define 	  LIFE_HUD 10 // STATUS_HUD that only reports dead or alive
 
 // Pulse levels, very simplified.
 #define PULSE_NONE    0 // So !M.pulse checks would be possible.
