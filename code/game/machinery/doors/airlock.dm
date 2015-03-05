@@ -1076,7 +1076,7 @@ About the new airlock wires panel:
 	..()
 
 	//if assembly is given, create the new door from the assembly
-	if (assembly)
+	if (assembly && istype(assembly))
 		assembly_type = assembly.type
 
 		electronics = assembly.electronics
