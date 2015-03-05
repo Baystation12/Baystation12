@@ -564,7 +564,7 @@
 	foldable = /obj/item/stack/sheet/cardboard //BubbleWrap
 	storage_slots=21
 	can_hold = list(/obj/item/weapon/light/tube, /obj/item/weapon/light/bulb)
-	max_combined_w_class = 42	//holds 21 items of w_class 2
+	max_storage_space = 42	//holds 21 items of w_class 2
 	use_to_pickup = 1 // for picking up broken bulbs, not that most people will try
 
 /obj/item/weapon/storage/box/lights/bulbs/New()
