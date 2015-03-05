@@ -14,11 +14,11 @@
 	if (stat & (BROKEN|NOPOWER))
 		return
 	lit = !lit
+	use_power = lit ? 1 : 0
 	update_icon()
 
 /obj/machinery/holosign/process()
-	if(lit)
-		auto_use_power()
+	return
 
 /obj/machinery/holosign/update_icon()
 	if (!lit)
@@ -29,6 +29,7 @@
 /obj/machinery/holosign/power_change()
 	if (stat & NOPOWER)
 		lit = 0
+		use_power = 0
 	update_icon()
 
 /obj/machinery/holosign/surgery
