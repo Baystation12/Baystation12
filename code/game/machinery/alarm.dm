@@ -80,6 +80,9 @@
 
 	var/report_danger_level = 1
 
+/obj/machinery/alarm/nobreach
+	breach_detection = 0
+
 /obj/machinery/alarm/monitor
 	report_danger_level = 0
 	breach_detection = 0

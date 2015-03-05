@@ -311,9 +311,9 @@ var/global/photo_count = 0
 	var/obj/item/weapon/photo/p = new/obj/item/weapon/photo()
 
 	p.name = name
-	p.icon = icon
-	p.tiny = tiny
-	p.img = img
+	p.icon = icon(icon, icon_state)
+	p.tiny = icon(tiny)
+	p.img = icon(img)
 	p.desc = desc
 	p.pixel_x = pixel_x
 	p.pixel_y = pixel_y

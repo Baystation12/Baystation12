@@ -153,6 +153,7 @@ var/list/robot_verbs_default = list(
 
 	hud_list[HEALTH_HUD]      = image('icons/mob/hud.dmi', src, "hudblank")
 	hud_list[STATUS_HUD]      = image('icons/mob/hud.dmi', src, "hudhealth100")
+	hud_list[LIFE_HUD]        = image('icons/mob/hud.dmi', src, "hudhealth100")
 	hud_list[ID_HUD]          = image('icons/mob/hud.dmi', src, "hudblank")
 	hud_list[WANTED_HUD]      = image('icons/mob/hud.dmi', src, "hudblank")
 	hud_list[IMPLOYAL_HUD]    = image('icons/mob/hud.dmi', src, "hudblank")
@@ -1143,7 +1144,6 @@ var/list/robot_verbs_default = list(
 	//Disconnect it's camera so it's not so easily tracked.
 	if(src.camera)
 		src.camera.clear_all_networks()
-		cameranet.removeCamera(src.camera)
 
 
 /mob/living/silicon/robot/proc/ResetSecurityCodes()

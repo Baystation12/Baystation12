@@ -60,11 +60,13 @@
 	if(buckled_mob)
 		return
 
+	if(!Adjacent(victim))
+		return
+
 	victim.buckled = src
 	victim.update_canmove()
 	buckled_mob = victim
-
-	if(victim.loc != src.loc)
+	if(victim.loc != get_turf(src))
 		src.visible_message("<span class='danger'>Tendrils lash out from \the [src] and drag \the [victim] in!</span>")
 		victim.loc = src.loc
 	victim << "<span class='danger'>Tendrils [pick("wind", "tangle", "tighten")] around you!</span>"

@@ -198,10 +198,10 @@
 	if(grown_seed.get_trait(TRAIT_TELEPORTING))
 		dat += "<br>The fruit is temporal/spatially unstable."
 
-	dat += "<br><br>\[<a href='?src=\ref[src];print=1'>print report</a>\]"
 	if(dat)
-		user << browse(dat,"window=plant_analyzer")
 		last_data = dat
+		dat += "<br><br>\[<a href='?src=\ref[src];print=1'>print report</a>\]"
+		user << browse(dat,"window=plant_analyzer")
 
 	return
 
@@ -247,6 +247,15 @@
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "unathiknife"
 	attack_verb = list("ripped", "torn", "cut")
+
+/obj/item/weapon/hatchet/tacknife
+	name = "tactical knife"
+	desc = "You'd be killing loads of people if this was Medal of Valor: Heroes of Nyx."
+	icon = 'icons/obj/weapons.dmi'
+	icon_state = "tacknife"
+	item_state = "knife"
+	attack_verb = list("stabbed", "chopped", "cut")
+
 
 /obj/item/weapon/scythe
 	icon_state = "scythe0"

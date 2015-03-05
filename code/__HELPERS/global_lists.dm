@@ -45,10 +45,10 @@ var/global/list/skin_styles_female_list = list()		//unused
 var/global/list/underwear_m = list("White" = "m1", "Grey" = "m2", "Green" = "m3", "Blue" = "m4", "Black" = "m5", "Mankini" = "m6", "None") //Curse whoever made male/female underwear diffrent colours
 var/global/list/underwear_f = list("Red" = "f1", "White" = "f2", "Yellow" = "f3", "Blue" = "f4", "Black" = "f5", "Thong" = "f6", "Black Sports" = "f7","White Sports" = "f8","None")
 	//undershirt
-var/global/list/undershirt_t = list("Black Tank top" = "u1", "White Tank top" = "u2", "Black shirt" = "u3", "White shirt" = "u4", "None")
+var/global/list/undershirt_t = list("White Tank top" = "u1", "Black Tank top" = "u2", "Black shirt" = "u3", "White shirt" = "u4", "None")
 	//Backpacks
 var/global/list/backbaglist = list("Nothing", "Backpack", "Satchel", "Satchel Alt")
-
+var/global/list/exclude_jobs = list(/datum/job/ai,/datum/job/cyborg)
 //////////////////////////
 /////Initial Building/////
 //////////////////////////
@@ -88,7 +88,8 @@ var/global/list/backbaglist = list("Nothing", "Backpack", "Satchel", "Satchel Al
 	sort_surgeries()
 
 	//List of job. I can't believe this was calculated multiple times per tick!
-	paths = typesof(/datum/job) -list(/datum/job,/datum/job/ai,/datum/job/cyborg)
+	paths = typesof(/datum/job)-/datum/job
+	paths -= exclude_jobs
 	for(var/T in paths)
 		var/datum/job/J = new T
 		joblist[J.title] = J

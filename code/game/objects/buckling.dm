@@ -24,6 +24,7 @@
 		return 0
 
 	M.buckled = src
+	M.facing_dir = null
 	M.set_dir(dir)
 	M.update_canmove()
 	buckled_mob = M

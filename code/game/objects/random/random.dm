@@ -188,9 +188,16 @@
 	item_to_spawn()
 		return pick(prob(3);/obj/item/weapon/gun/projectile/shotgun/pump,\
 					prob(2);/obj/item/weapon/gun/projectile/automatic/wt550,\
-					prob(3);/obj/item/weapon/gun/projectile/sec,\
-					prob(2);/obj/item/weapon/gun/projectile/sec/wood,\
 					prob(1);/obj/item/weapon/gun/projectile/shotgun/pump/combat)
+
+/obj/random/handgun
+	name = "Random Handgun"
+	desc = "This is a random security sidearm."
+	icon = 'icons/obj/gun.dmi'
+	icon_state = "secgundark"
+	item_to_spawn()
+		return pick(prob(3);/obj/item/weapon/gun/projectile/sec,\
+					prob(1);/obj/item/weapon/gun/projectile/sec/wood)
 
 
 /obj/random/ammo
