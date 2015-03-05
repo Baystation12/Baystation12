@@ -265,13 +265,19 @@ Auto Patrol: []"},
 				src.mode = 0
 				walk_to(src,0)
 
-			// We re-assess human targets, before bashing their head in, in case their credentials change
-			if(target && istype(target, /mob/living/carbon/human))
-				var/threat = src.assess_perp(target, idcheck, check_records, check_arrest)
-				if(threat < 4)
-					target = null
-
 			if(target)		// make sure target exists
+				// We re-assess human targets, before bashing their head in, in case their credentials change
+				if(istype(target, /mob/living/carbon/human))
+					var/threat = src.assess_perp(target, idcheck, check_records, check_arrest)
+					if(threat < 4)
+						frustration = 8
+						return
+
+				// The target must remain in view to complete the desire to bash its head in
+				if(!(target in view(search_range,src)))
+					frustration++
+					return
+
 				if(!lasercolor && Adjacent(target))	// If right next to perp. Lasertag bots do not arrest anyone, just patrol and shoot and whatnot
 					if(istype(src.target,/mob/living/carbon))
 						playsound(src.loc, 'sound/weapons/Egloves.ogg', 50, 1, -1)
