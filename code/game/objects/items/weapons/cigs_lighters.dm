@@ -114,7 +114,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 					if(H.species.flags & IS_SYNTHETIC)
 						return
 
-				reagents.trans_to_mob(C, REM, 0.2, CHEM_INGEST) // Most of it is not inhaled... balance reasons.
+				reagents.trans_to_mob(C, REM, CHEM_INGEST, 0.2) // Most of it is not inhaled... balance reasons.
 		else // else just remove some of the reagents
 			reagents.remove_any(REM)
 

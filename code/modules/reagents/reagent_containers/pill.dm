@@ -28,7 +28,7 @@
 			M << "<span class='notice'>You swallow \the [src].</span>"
 			M.drop_from_inventory(src) //icon update
 			if(reagents.volume)
-				reagents.trans_to_mob(M, reagents.volume, 1, CHEM_INGEST)
+				reagents.trans_to_mob(M, reagents.volume, CHEM_INGEST)
 			del(src)
 			return 1
 
@@ -53,7 +53,7 @@
 			msg_admin_attack("[user.name] ([user.ckey]) fed [M.name] ([M.ckey]) with [name] Reagents: [contained] (INTENT: [uppertext(user.a_intent)]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
 
 			if(reagents.volume)
-				reagents.trans_to_mob(M, reagents.volume, 1, CHEM_INGEST)
+				reagents.trans_to_mob(M, reagents.volume, CHEM_INGEST)
 			del(src)
 
 			return 1

@@ -228,7 +228,7 @@
 					else if(istype(R, /datum/reagent/toxin))
 						if(filter_effect < 3)
 							owner.adjustToxLoss(0.3 * PROCESS_ACCURACY)
-						owner.reagents.remove_reagent(R.id, ALCOHOL_METABOLISM*filter_effect)
+						owner.reagents.remove_reagent(R.id, R.metabolism * filter_effect * PROCESS_ACCURACY)
 
 /datum/organ/internal/kidney
 	name = "kidneys"

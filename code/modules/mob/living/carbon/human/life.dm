@@ -390,7 +390,7 @@
 
 						for(var/obj/effect/effect/smoke/chem/smoke in view(1, src))
 							if(smoke.reagents.volume)
-								smoke.reagents.trans_to_mob(src, 10, state = CHEM_INGEST, copy = 1)
+								smoke.reagents.trans_to_mob(src, 10, CHEM_INGEST, copy = 1)
 								break // If they breathe in the nasty stuff once, no need to continue checking
 
 			else //Still give containing object the chance to interact
@@ -930,7 +930,9 @@
 			var/alien = 0
 			if(species && species.reagent_tag)
 				alien = species.reagent_tag
-			reagents.metabolize(alien)
+			touching.metabolize(alien, CHEM_TOUCH)
+			ingested.metabolize(alien, CHEM_INGEST)
+			reagents.metabolize(alien, CHEM_BLOOD)
 			if(CE_PAINKILLER in chem_effects)
 				analgesic = chem_effects[CE_PAINKILLER]
 			var/total_phoronloss = 0

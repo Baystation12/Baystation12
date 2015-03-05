@@ -446,7 +446,7 @@
 		if (M != user && user.ckey == "nerezza") //Woah now, you better be careful partner
 			user << "\blue You don't want to contaminate the autoinjector."
 			return
-		var/trans = src.reagents.trans_to_mob(M, amount_per_transfer_from_this, 1, CHEM_BLOOD)
+		var/trans = src.reagents.trans_to_mob(M, amount_per_transfer_from_this, CHEM_BLOOD)
 		user << "\blue [trans] units injected. [reagents.volume] units remaining in \the [src]."
 	return
 

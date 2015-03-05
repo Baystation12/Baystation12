@@ -80,7 +80,7 @@
 	volume = 0
 	for(var/datum/reagent/R in reagent_list)
 		if(R.volume < MINIMUM_CHEMICAL_VOLUME)
-			del_reagent(R.id, R.state)
+			del_reagent(R.id)
 		else
 			volume += R.volume
 	return
@@ -204,14 +204,14 @@
 
 /* Holder-to-chemical */
 
-/datum/reagents/proc/add_reagent(var/id, var/amount, var/state = CHEM_TOUCH, var/data = null, var/safety = 0)
+/datum/reagents/proc/add_reagent(var/id, var/amount, var/data = null, var/safety = 0)
 	if(!isnum(amount))
 		return 0
 	update_volume()
 	amount = min(amount, get_free_space())
 
 	for(var/datum/reagent/current in reagent_list)
-		if(current.id == id && current.state == state)
+		if(current.id == id)
 			current.volume += amount
 			update_volume()
 			if(!isnull(data)) // For all we know, it could be zero or empty string and meaningful
@@ -227,9 +227,9 @@
 		reagent_list += R
 		R.holder = src
 		R.volume = amount
-		R.state = state
 		R.initialize_data()
-		R.mix_data(data)
+		if(!isnull(data))
+			R.mix_data(data)
 		if(!safety)
 			handle_reactions()
 		if(my_atom)
@@ -239,11 +239,11 @@
 		warning("[my_atom] attempted to add a reagent called '[id]' which doesn't exist. ([usr])")
 	return 0
 
-/datum/reagents/proc/remove_reagent(var/id, var/amount, var/state = CHEM_TOUCH, var/safety = 0)
+/datum/reagents/proc/remove_reagent(var/id, var/amount, var/safety = 0)
 	if(!isnum(amount))
 		return 0
 	for(var/datum/reagent/current in reagent_list)
-		if(current.id == id && current.state == state)
+		if(current.id == id)
 			current.volume -= amount // It can go negative, but it doesn't matter
 			update_volume() // Because this proc will delete it then
 			if(!safety)
@@ -253,9 +253,9 @@
 			return 1
 	return 0
 
-/datum/reagents/proc/del_reagent(var/id, var/state = CHEM_TOUCH)
+/datum/reagents/proc/del_reagent(var/id)
 	for(var/datum/reagent/current in reagent_list)
-		if (current.id == id && current.state == state)
+		if (current.id == id)
 			reagent_list -= current
 			del(current)
 			update_volume()
@@ -263,9 +263,9 @@
 				my_atom.on_reagent_change()
 			return 0
 
-/datum/reagents/proc/has_reagent(var/id, var/state = CHEM_TOUCH, var/amount = 0)
+/datum/reagents/proc/has_reagent(var/id, var/amount = 0)
 	for(var/datum/reagent/current in reagent_list)
-		if(current.id == id && current.state == state)
+		if(current.id == id)
 			if(current.volume >= amount)
 				return 1
 			else
@@ -274,18 +274,18 @@
 
 /datum/reagents/proc/clear_reagents()
 	for(var/datum/reagent/current in reagent_list)
-		del_reagent(current.id, current.state)
+		del_reagent(current.id)
 	return
 
-/datum/reagents/proc/get_reagent_amount(var/id, var/state = CHEM_TOUCH)
+/datum/reagents/proc/get_reagent_amount(var/id)
 	for(var/datum/reagent/current in reagent_list)
-		if(current.id == id && current.state == state)
+		if(current.id == id)
 			return current.volume
 	return 0
 
-/datum/reagents/proc/get_data(var/id, var/state = CHEM_TOUCH)
+/datum/reagents/proc/get_data(var/id)
 	for(var/datum/reagent/current in reagent_list)
-		if(current.id == id && current.state == state)
+		if(current.id == id)
 			return current.get_data()
 	return 0
 
@@ -315,7 +315,7 @@
 	handle_reactions()
 	return amount
 
-/datum/reagents/proc/trans_to_holder(var/datum/reagents/target, var/amount = 1, var/multiplier = 1, var/state = CHEM_TOUCH, var/copy = 0) // Transfers [amount] reagents from [src] to [target], multiplying them by [multiplier]. Returns actual amount removed from [src] (not amount transferred to [target]). Keep in mind that it doesn't care about the state of reagents in [src], so don't use it with mobs.
+/datum/reagents/proc/trans_to_holder(var/datum/reagents/target, var/amount = 1, var/multiplier = 1, var/copy = 0) // Transfers [amount] reagents from [src] to [target], multiplying them by [multiplier]. Returns actual amount removed from [src] (not amount transferred to [target]).
 	if(!target || !istype(target))
 		return
 
@@ -328,9 +328,9 @@
 
 	for(var/datum/reagent/current in reagent_list)
 		var/amount_to_transfer = current.volume * part
-		target.add_reagent(current.id, amount_to_transfer * multiplier, state, current.get_data(), safety = 1) // We don't react until everything is in place
+		target.add_reagent(current.id, amount_to_transfer * multiplier, current.get_data(), safety = 1) // We don't react until everything is in place
 		if(!copy)
-			remove_reagent(current.id, amount_to_transfer, current.state, 1)
+			remove_reagent(current.id, amount_to_transfer, 1)
 
 	if(!copy)
 		update_volume()
@@ -377,64 +377,60 @@
 
 	update_volume()
 
-/datum/reagents/proc/trans_to(var/atom/target, var/amount = 1, var/multiplier = 1, var/state = CHEM_TOUCH, var/copy = 0)
+/datum/reagents/proc/trans_to(var/atom/target, var/amount = 1, var/multiplier = 1, var/copy = 0)
 	if(ismob(target))
-		return trans_to_mob(target, amount, multiplier, state, copy)
+		warning("[my_atom] is trying to transfer reagents to [target], which is a mob, using trans_to()")
+		//return trans_to_mob(target, amount, multiplier, copy)
 	if(isturf(target))
 		return trans_to_turf(target, amount, multiplier, copy)
 	if(isobj(target))
 		return trans_to_obj(target, amount, multiplier, copy)
 	return 0
 
-/datum/reagents/proc/trans_id_to(var/atom/target, var/id, var/amount = 1, var/state = CHEM_TOUCH, var/target_state = CHEM_TOUCH)
+/datum/reagents/proc/trans_id_to(var/atom/target, var/id, var/amount = 1)
 	if (!target || !target.reagents)
 		return
 
-	amount = min(amount, get_reagent_amount(id, state))
+	amount = min(amount, get_reagent_amount(id))
 
 	if(!amount)
 		return
 
 	var/datum/reagents/F = new /datum/reagents(amount)
-	var/tmpdata = get_data(id, state)
-	F.add_reagent(id, amount, CHEM_TOUCH, tmpdata)
-	remove_reagent(id, amount, state)
+	var/tmpdata = get_data(id)
+	F.add_reagent(id, amount, tmpdata)
+	remove_reagent(id, amount)
 
-	return F.trans_to(target, amount, 1, target_state) // Let this proc check the atom's type
+	return F.trans_to(target, amount) // Let this proc check the atom's type
 
-/datum/reagents/proc/trans_state_to(var/atom/target, var/state, var/amount = 1, var/target_state = CHEM_TOUCH) // Transfers [amount] reagents in [state] state to [target], putting their state into [target_state]. Returns actual amount transferred. Safe to use with mobs.
-	var/total_volume = 0
-	for(var/datum/reagent/current in reagent_list)
-		if(current.state != state)
-			continue
-		total_volume += current.volume
-
-	var/part = amount / total_volume
-
-	var/datum/reagents/F = new /datum/reagents(volume)
-	for(var/datum/reagent/current in reagent_list)
-		if(current.state != state)
-			continue
-		var/tmpdata = get_data(current.id, state)
-		F.add_reagent(current.id, part * current.volume, CHEM_TOUCH, tmpdata)
-		remove_reagent(current.id, part * current.volume, state)
-
-	return F.trans_to(target, total_volume, 1, target_state)
-
-/datum/reagents/proc/trans_to_mob(var/mob/target, var/amount = 1, var/multiplier = 1, var/state = CHEM_TOUCH, var/copy = 0) // Transfer, noting the state.
-	if(!target || !target.reagents)
+/datum/reagents/proc/trans_to_mob(var/mob/target, var/amount = 1, var/type, var/multiplier = 1, var/copy = 0) // Transfer after checking into which holder...
+	if(!target || !istype(target))
 		return
-
-	var/datum/reagents/R = target.reagents
-
-	return trans_to_holder(R, amount, multiplier, state, copy)
+	if(!type || !(type in list(CHEM_BLOOD, CHEM_INGEST, CHEM_TOUCH)))
+		warning("[my_atom] is trying to transfer reagents to [target], mob, without specifying the type")
+		return
+	if(iscarbon(target))
+		var/mob/living/carbon/C = target
+		if(type == CHEM_BLOOD)
+			var/datum/reagents/R = C.reagents
+			return trans_to_holder(R, amount, multiplier, copy)
+		if(type == CHEM_INGEST)
+			var/datum/reagents/R = C.ingested
+			return trans_to_holder(R, amount, multiplier, copy)
+		if(type == CHEM_TOUCH)
+			var/datum/reagents/R = C.touching
+			return trans_to_holder(R, amount, multiplier, copy)
+	else
+		var/datum/reagents/R = new /datum/reagents(amount)
+		. = trans_to_holder(R, amount, multiplier, copy)
+		R.touch_mob(target)
 
 /datum/reagents/proc/trans_to_turf(var/turf/target, var/amount = 1, var/multiplier = 1, var/copy = 0) // Turfs don't have any reagents (at least, for now). Just touch it.
 	if(!target)
 		return
 
 	var/datum/reagents/R = new /datum/reagents(max_volume)
-	. = trans_to_holder(R, amount, multiplier, CHEM_TOUCH, copy)
+	. = trans_to_holder(R, amount, multiplier, copy)
 	R.touch_turf(target)
 	return
 
@@ -444,20 +440,20 @@
 
 	if(!target.reagents)
 		var/datum/reagents/R = new /datum/reagents(max_volume)
-		. = trans_to_holder(R, amount, multiplier, CHEM_TOUCH, copy)
+		. = trans_to_holder(R, amount, multiplier, copy)
 		R.touch_obj(target)
 		return
 
-	return trans_to_holder(target.reagents, amount, multiplier, CHEM_TOUCH, copy)
+	return trans_to_holder(target.reagents, amount, multiplier, copy)
 
-/datum/reagents/proc/metabolize(var/alien)
+/datum/reagents/proc/metabolize(var/alien, var/location)
 	if(!iscarbon(my_atom))
 		return
 	var/mob/living/carbon/C = my_atom
 	if(!C || !istype(C))
 		return
 	for(var/datum/reagent/current in reagent_list)
-		current.on_mob_life(C, alien)
+		current.on_mob_life(C, alien, location)
 	update_volume()
 
 /* Atom reagent creation - use it all the time */

@@ -99,9 +99,9 @@
 					var/temp_bitesize =  max(reagents.volume /2, bitesize)
 					reagents.trans_to(M, temp_bitesize)
 					*/
-					reagents.trans_to_mob(M, bitesize, 1, CHEM_INGEST)
+					reagents.trans_to_mob(M, bitesize, CHEM_INGEST)
 				else
-					reagents.trans_to_mob(M, reagents.volume, 1, CHEM_INGEST)
+					reagents.trans_to_mob(M, reagents.volume, CHEM_INGEST)
 				bitecount++
 				On_Consume(M)
 			return 1
@@ -212,7 +212,7 @@
 	user.visible_message("<b>[user]</b> nibbles away at the [src].","You nibble away at the [src].")
 	bitecount++
 	if(reagents && user.reagents)
-		reagents.trans_to_mob(user, bitesize, 1, CHEM_INGEST)
+		reagents.trans_to_mob(user, bitesize, CHEM_INGEST)
 	spawn(5)
 		if(!src && !user.client)
 			user.custom_emote(1,"[pick("burps", "cries for more", "burps twice", "looks at the area where the food was")]")

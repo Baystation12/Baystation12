@@ -19,3 +19,6 @@
 	var/analgesic = 0 // How chemicals affect pain
 
 	var/pulse = PULSE_NORM	//current pulse level
+
+	var/datum/reagents/ingested = null // And 'reagents' is for things injected
+	var/datum/reagents/touching = null

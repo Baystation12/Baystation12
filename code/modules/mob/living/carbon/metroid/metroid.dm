@@ -61,7 +61,13 @@
 
 	verbs += /mob/living/proc/ventcrawl
 
-	create_reagents(100)
+	create_reagents(1000)
+	var/datum/reagents/R1 = new/datum/reagents(1000)
+	var/datum/reagents/R2 = new/datum/reagents(1000)
+	ingested = R1
+	touching = R2
+	R1.my_atom = src
+	R2.my_atom = src
 
 	src.colour = colour
 	number = rand(1, 1000)

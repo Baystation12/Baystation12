@@ -3,7 +3,6 @@
 	var/id = "reagent"
 	var/description = "A non-descript chemical."
 	var/datum/reagents/holder = null
-	var/state = CHEM_TOUCH
 	var/reagent_state = SOLID
 	var/list/data = null
 	var/volume = 0
@@ -26,9 +25,9 @@
 	var/color = "#000000"
 
 /datum/reagent/proc/remove_self(var/amount) // Shortcut
-	holder.remove_reagent(id, amount, state)
+	holder.remove_reagent(id, amount)
 
-/datum/reagent/proc/touch_mob(var/mob/M) // By default, moves everything to mob in CHEM_TOUCH state. Could be overridden. // TODO: protection
+/datum/reagent/proc/touch_mob(var/mob/M) // By default, moves everything to mob in CHEM_TOUCH location. Could be overridden. // TODO: protection
 	var/perm = 1 // How much is transferred
 	for(var/obj/item/clothing/C in M.get_equipped_items())
 		perm *= get_cloth_perm(C)
@@ -63,33 +62,33 @@
 /datum/reagent/proc/touch_turf(var/turf/T) // Cleaner cleaning, lube lubbing, etc, all go here
 	return
 
-/datum/reagent/proc/on_mob_life(var/mob/living/carbon/M, var/alien) // Currently, on_mob_life is called on carbons. Any interaction with non-carbon mobs (lube) will need to be done in touch_mob.
+/datum/reagent/proc/on_mob_life(var/mob/living/carbon/M, var/alien, var/location) // Currently, on_mob_life is called on carbons. Any interaction with non-carbon mobs (lube) will need to be done in touch_mob.
 	if(!istype(M))
 		return
 	if(!affects_dead && M.stat == DEAD)
 		return
-	if((overdose_blood && (state == CHEM_BLOOD) && dose > overdose_blood) || (overdose_ingest && (state == CHEM_INGEST) && dose > overdose_ingest))
+	if((overdose_blood && (location == CHEM_BLOOD) && dose > overdose_blood) || (overdose_ingest && (location == CHEM_INGEST) && dose > overdose_ingest))
 		overdose(M, alien)
 	var/removed = metabolism
-	if(ingest_met && (state == CHEM_INGEST))
+	if(ingest_met && (location == CHEM_INGEST))
 		removed = ingest_met
-	if(touch_met && (state == CHEM_TOUCH))
+	if(touch_met && (location == CHEM_TOUCH))
 		removed = touch_met
 	removed = min(removed, volume)
 	max_dose = max(volume, max_dose)
 	dose = min(dose + removed, max_dose)
 	if(painkiler)
 		M.analgesic += painkiler
-	world << "Reagent: [id], volume: [volume], dose: [dose], max_dose: [max_dose], state: [state], removed: [removed], metabolism: [metabolism]"
+	world << "Reagent: [id], volume: [volume], dose: [dose], max_dose: [max_dose], location: [location], removed: [removed], metabolism: [metabolism]"
 	if(removed >= (metabolism * 0.1)) // If there's too little chemical, don't affect the mob, just remove it
-		affect_mob(M, alien, removed)
+		affect_mob(M, alien, removed, location)
 	remove_self(removed)
 	if(addiction && ishuman(M))
 		var/mob/living/carbon/human/H = M
 		H.addict(addiction, addiction_strength * removed)
 	return
 
-/datum/reagent/proc/affect_mob(var/mob/living/carbon/M, var/alien, var/removed) // This is the main working proc where the chemical does its magic
+/datum/reagent/proc/affect_mob(var/mob/living/carbon/M, var/alien, var/removed, var/location) // This is the main working proc where the chemical does its magic
 	return
 
 /datum/reagent/proc/overdose(var/mob/living/carbon/M, var/alien) // Overdose effect. Doesn't happen instantly.
@@ -150,13 +149,13 @@
 		if(B)
 			B.blood_DNA["UNKNOWN DNA STRUCTURE"] = "X*"
 
-/datum/reagent/blood/affect_mob(var/mob/living/carbon/M, var/alien, var/removed)
-	if(state == CHEM_INGEST)
+/datum/reagent/blood/affect_mob(var/mob/living/carbon/M, var/alien, var/removed, var/location)
+	if(location == CHEM_INGEST)
 		if(dose > 5)
 			M.adjustToxLoss(removed)
 		if(dose > 15)
 			M.adjustToxLoss(removed)
-	if(state == CHEM_TOUCH)
+	if(location == CHEM_TOUCH)
 		if(data && data["viruses"])
 			for(var/datum/disease/D in data["viruses"])
 				if(D.spread_type == SPECIAL || D.spread_type == NON_CONTAGIOUS)
@@ -170,7 +169,7 @@
 					infect_virus2(M, V.getcopy())
 		if(data && data["antibodies"])
 			M.antibodies |= data["antibodies"]
-	if(state == CHEM_BLOOD)
+	if(location == CHEM_BLOOD)
 		M.inject_blood(src, volume)
 		remove_self(volume)
 
@@ -180,8 +179,8 @@
 	reagent_state = LIQUID
 	color = "#C81040"
 
-/datum/reagent/vaccine/affect_mob(var/mob/living/carbon/M, var/alien, var/removed)
-	if(data && state == CHEM_BLOOD)
+/datum/reagent/vaccine/affect_mob(var/mob/living/carbon/M, var/alien, var/removed, var/location)
+	if(data && location == CHEM_BLOOD)
 		for(var/datum/disease/D in M.viruses)
 			if(istype(D, /datum/disease/advance))
 				var/datum/disease/advance/A = D
@@ -253,7 +252,7 @@
 		if(!cube.wrapped)
 			cube.Expand()
 
-/datum/reagent/water/affect_mob(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/water/affect_mob(var/mob/living/carbon/M, var/alien, var/removed, var/location)
 	if(istype(M, /mob/living/carbon/slime))
 		var/mob/living/carbon/slime/S = M
 		S.adjustToxLoss(100 * removed) // 1.5 units/7.5 ticks for baby, 2/10 for adult
@@ -263,7 +262,7 @@
 				++S.Discipline
 		if(dose == removed * 2)
 			S.visible_message("<span class='warning'>[S]'s flesh sizzles where the water touches it!</span>", "<span class='danger'>Your flesh burns in the water!</span>")
-	if(state == CHEM_TOUCH)
+	if(location == CHEM_TOUCH)
 		var/needed = M.fire_stacks * 10
 		if(volume > needed)
 			M.fire_stacks = 0
@@ -290,14 +289,14 @@
 	remove_self(volume)
 	return
 
-/datum/reagent/fuel/affect_mob(var/mob/living/carbon/M, var/alien, var/removed)
-	if(state == CHEM_INGEST)
+/datum/reagent/fuel/affect_mob(var/mob/living/carbon/M, var/alien, var/removed, var/location)
+	if(location == CHEM_INGEST)
 		M.adjustToxLoss(1 * removed)
 		return
-	if(state == CHEM_BLOOD)
+	if(location == CHEM_BLOOD)
 		M.adjustToxLoss(2 * removed)
 		return
-	if(state == CHEM_TOUCH) // Splashing people with welding fuel to make them easy to ignite!
+	if(location == CHEM_TOUCH) // Splashing people with welding fuel to make them easy to ignite!
 		M.adjust_fire_stacks(0.1 * removed)
 		return
 
@@ -333,7 +332,7 @@
 	reagent_state = GAS
 	color = "#808080"
 
-/datum/reagent/chlorine/affect_mob(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/chlorine/affect_mob(var/mob/living/carbon/M, var/alien, var/removed, var/location)
 	M.take_organ_damage(1*REM, 0) // State doesn't matter here
 
 /datum/reagent/copper
@@ -358,11 +357,11 @@
 	glass_name = "glass of ethanol"
 	glass_desc = "A well-known alcohol with a variety of applications."
 
-/datum/reagent/ethanol/affect_mob(var/mob/living/carbon/M, var/alien, var/removed)
-	if(state == CHEM_TOUCH)
+/datum/reagent/ethanol/affect_mob(var/mob/living/carbon/M, var/alien, var/removed, var/location)
+	if(location == CHEM_TOUCH)
 		M.adjust_fire_stacks(removed / 15)
 		return
-	if(state == CHEM_BLOOD)
+	if(location == CHEM_BLOOD)
 		M.adjustToxLoss(removed * 2 * toxicity)
 		return
 	M.nutrition += nutriment_factor * removed
@@ -430,7 +429,7 @@
 	reagent_state = GAS
 	color = "#808080"
 
-/datum/reagent/fluorine/affect_mob(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/fluorine/affect_mob(var/mob/living/carbon/M, var/alien, var/removed, var/location)
 	M.adjustToxLoss(removed)
 
 /datum/reagent/hydrogen
@@ -447,8 +446,8 @@
 	reagent_state = SOLID
 	color = "#353535"
 
-/datum/reagent/iron/affect_mob(var/mob/living/carbon/M, var/alien, var/removed)
-	if(state == CHEM_INGEST && alien != IS_DIONA)
+/datum/reagent/iron/affect_mob(var/mob/living/carbon/M, var/alien, var/removed, var/location)
+	if(location == CHEM_INGEST && alien != IS_DIONA)
 		M.add_chemical_effect(CE_BLOODRESTORE, 8 * removed)
 
 /datum/reagent/lithium
@@ -458,8 +457,8 @@
 	reagent_state = SOLID
 	color = "#808080"
 
-/datum/reagent/lithium/affect_mob(var/mob/living/carbon/M, var/alien, var/removed)
-	if(state != CHEM_TOUCH && alien != IS_DIONA)
+/datum/reagent/lithium/affect_mob(var/mob/living/carbon/M, var/alien, var/removed, var/location)
+	if(location != CHEM_TOUCH && alien != IS_DIONA)
 		if(M.canmove && !M.restrained() && istype(M.loc, /turf/space))
 			step(M, pick(cardinal))
 		if(prob(5))
@@ -472,8 +471,8 @@
 	reagent_state = LIQUID
 	color = "#484848"
 
-/datum/reagent/mercury/affect_mob(var/mob/living/carbon/M, var/alien, var/removed)
-	if(state != CHEM_TOUCH && alien != IS_DIONA)
+/datum/reagent/mercury/affect_mob(var/mob/living/carbon/M, var/alien, var/removed, var/location)
+	if(location != CHEM_TOUCH && alien != IS_DIONA)
 		if(M.canmove && !M.restrained() && istype(M.loc, /turf/space))
 			step(M, pick(cardinal))
 		if(prob(5))
@@ -487,11 +486,11 @@
 	reagent_state = GAS
 	color = "#808080"
 
-/datum/reagent/nitrogen/affect_mob(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/nitrogen/affect_mob(var/mob/living/carbon/M, var/alien, var/removed, var/location)
 	if(alien == IS_VOX)
-		if(state == CHEM_BLOOD)
+		if(location == CHEM_BLOOD)
 			M.adjustOxyLoss(-removed * 3)
-		if(state == CHEM_INGEST)
+		if(location == CHEM_INGEST)
 			M.reagents.add_reagent(id, removed, CHEM_BLOOD)
 
 /datum/reagent/oxygen
@@ -501,11 +500,11 @@
 	reagent_state = GAS
 	color = "#808080"
 
-/datum/reagent/oxygen/affect_mob(var/mob/living/carbon/M, var/alien, var/removed)
-	if(state == CHEM_TOUCH)
+/datum/reagent/oxygen/affect_mob(var/mob/living/carbon/M, var/alien, var/removed, var/location)
+	if(location == CHEM_TOUCH)
 		return
 	if(alien == IS_VOX)
-		var/effect = (state == CHEM_BLOOD ? 1.5 : 1)
+		var/effect = (location == CHEM_BLOOD ? 1.5 : 1)
 		M.adjustToxLoss(removed * 2 * effect)
 
 /datum/reagent/phosphorus
@@ -529,9 +528,9 @@
 	reagent_state = SOLID
 	color = "#C7C7C7"
 
-/datum/reagent/radium/affect_mob(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/radium/affect_mob(var/mob/living/carbon/M, var/alien, var/removed, var/location)
 	M.apply_effect(2 * removed, IRRADIATE, 0) // Radium may increase your chances to cure a disease
-	if(state == CHEM_BLOOD) // Make sure to only use it on carbon mobs
+	if(location == CHEM_BLOOD) // Make sure to only use it on carbon mobs
 		if(M.virus2.len)
 			for(var/ID in M.virus2)
 				var/datum/disease2/disease/V = M.virus2[ID]
@@ -564,12 +563,12 @@
 	metabolism = REM * 50 // It's acid!
 	var/meltdose = 10 // How much is needed to melt
 
-/datum/reagent/toxin/acid/affect_mob(var/mob/living/carbon/M, var/alien, var/removed)
-	if(state == CHEM_INGEST)
+/datum/reagent/toxin/acid/affect_mob(var/mob/living/carbon/M, var/alien, var/removed, var/location)
+	if(location == CHEM_INGEST)
 		M.take_organ_damage(0, removed)
-	if(state == CHEM_BLOOD)
+	if(location == CHEM_BLOOD)
 		M.take_organ_damage(0, removed * 2)
-	if(state == CHEM_TOUCH) // This is the most interesting
+	if(location == CHEM_TOUCH) // This is the most interesting
 		if(volume < meltdose) // Not enough to melt anything
 			M.take_organ_damage(removed)
 			return
@@ -683,8 +682,8 @@
 	glass_name = "glass of sugar"
 	glass_desc = "The organic compound commonly known as table sugar and sometimes called saccharose. This white, odorless, crystalline powder has a pleasing, sweet taste."
 
-/datum/reagent/sugar/affect_mob(var/mob/living/carbon/M, var/alien, var/removed)
-	if(state != CHEM_TOUCH)
+/datum/reagent/sugar/affect_mob(var/mob/living/carbon/M, var/alien, var/removed, var/location)
+	if(location != CHEM_TOUCH)
 		M.nutrition += removed * 3
 
 /datum/reagent/sulfur
@@ -708,8 +707,8 @@
 	scannable = 1
 	painkiler = 25
 
-/datum/reagent/inaprovaline/affect_mob(var/mob/living/carbon/M, var/alien, var/removed)
-	if(state == CHEM_TOUCH)
+/datum/reagent/inaprovaline/affect_mob(var/mob/living/carbon/M, var/alien, var/removed, var/location)
+	if(location == CHEM_TOUCH)
 		return
 	if(alien != IS_DIONA)
 		M.add_chemical_effect(CE_STABLE)
@@ -725,10 +724,10 @@
 	overdose_ingest = REAGENTS_OVERDOSE * 2
 	scannable = 1
 
-/datum/reagent/bicaridine/affect_mob(var/mob/living/carbon/M as mob, var/alien, var/removed)
-	if(state == CHEM_TOUCH)
+/datum/reagent/bicaridine/affect_mob(var/mob/living/carbon/M, var/alien, var/removed, var/location)
+	if(location == CHEM_TOUCH)
 		return
-	var/effect = (state == CHEM_BLOOD ? 1.5 : 1)
+	var/effect = (location == CHEM_BLOOD ? 1.5 : 1)
 	if(alien != IS_DIONA)
 		M.heal_organ_damage(4 * removed * effect, 0)
 
@@ -742,10 +741,10 @@
 	overdose_ingest = REAGENTS_OVERDOSE
 	scannable = 1
 
-/datum/reagent/metorapan/affect_mob(var/mob/living/carbon/M as mob, var/alien, var/removed)
-	if(state == CHEM_TOUCH)
+/datum/reagent/metorapan/affect_mob(var/mob/living/carbon/M, var/alien, var/removed, var/location)
+	if(location == CHEM_TOUCH)
 		return
-	var/effect = (state == CHEM_BLOOD ? 1.5 : 1)
+	var/effect = (location == CHEM_BLOOD ? 1.5 : 1)
 	if(alien != IS_DIONA)
 		M.heal_organ_damage(8 * removed * effect, 0)
 
@@ -759,10 +758,10 @@
 	overdose_ingest = REAGENTS_OVERDOSE * 2
 	scannable = 1
 
-/datum/reagent/kelotane/affect_mob(var/mob/living/carbon/M as mob, var/alien, var/removed)
-	if(state == CHEM_TOUCH)
+/datum/reagent/kelotane/affect_mob(var/mob/living/carbon/M, var/alien, var/removed, var/location)
+	if(location == CHEM_TOUCH)
 		return
-	var/effect = (state == CHEM_BLOOD ? 1.5 : 1)
+	var/effect = (location == CHEM_BLOOD ? 1.5 : 1)
 	if(alien != IS_DIONA)
 		M.heal_organ_damage(0, 4 * removed * effect)
 
@@ -776,10 +775,10 @@
 	overdose_ingest = REAGENTS_OVERDOSE
 	scannable = 1
 
-/datum/reagent/dermaline/affect_mob(var/mob/living/carbon/M as mob, var/alien, var/removed)
-	if(state == CHEM_TOUCH)
+/datum/reagent/dermaline/affect_mob(var/mob/living/carbon/M, var/alien, var/removed, var/location)
+	if(location == CHEM_TOUCH)
 		return
-	var/effect = (state == CHEM_BLOOD ? 1.5 : 1)
+	var/effect = (location == CHEM_BLOOD ? 1.5 : 1)
 	if(alien != IS_DIONA)
 		M.heal_organ_damage(0, 8 * removed * effect)
 
@@ -791,10 +790,10 @@
 	color = "#00A000"
 	scannable = 1
 
-/datum/reagent/dylovene/affect_mob(var/mob/living/carbon/M as mob, var/alien, var/removed)
-	if(state == CHEM_TOUCH)
+/datum/reagent/dylovene/affect_mob(var/mob/living/carbon/M, var/alien, var/removed, var/location)
+	if(location == CHEM_TOUCH)
 		return
-	var/effect = (state == CHEM_BLOOD ? 1.5 : 1)
+	var/effect = (location == CHEM_BLOOD ? 1.5 : 1)
 	if(alien != IS_DIONA)
 		M.drowsyness = max(0, M.drowsyness - 4 * removed * effect)
 		M.hallucination = max(0, M.hallucination - 6 * removed * effect)
@@ -810,16 +809,16 @@
 	overdose_ingest = REAGENTS_OVERDOSE * 2
 	scannable = 1
 
-/datum/reagent/dexalin/affect_mob(var/mob/living/carbon/M as mob, var/alien, var/removed)
-	if(state == CHEM_TOUCH)
+/datum/reagent/dexalin/affect_mob(var/mob/living/carbon/M, var/alien, var/removed, var/location)
+	if(location == CHEM_TOUCH)
 		return
-	var/effect = (state == CHEM_BLOOD ? 1.5 : 1)
+	var/effect = (location == CHEM_BLOOD ? 1.5 : 1)
 	if(alien == IS_VOX)
 		M.adjustToxLoss(removed * 4 * effect)
 	else if(alien != IS_DIONA)
 		M.adjustOxyLoss(-10 * removed * effect)
 
-	holder.remove_reagent("lexorin", 2 * removed, state)
+	holder.remove_reagent("lexorin", 2 * removed, location)
 
 /datum/reagent/dexalinp
 	name = "Dexalin Plus"
@@ -831,16 +830,16 @@
 	overdose_ingest = REAGENTS_OVERDOSE
 	scannable = 1
 
-/datum/reagent/dexalin/affect_mob(var/mob/living/carbon/M as mob, var/alien, var/removed)
-	if(state == CHEM_TOUCH)
+/datum/reagent/dexalin/affect_mob(var/mob/living/carbon/M, var/alien, var/removed, var/location)
+	if(location == CHEM_TOUCH)
 		return
-	var/effect = (state == CHEM_BLOOD ? 1.5 : 1)
+	var/effect = (location == CHEM_BLOOD ? 1.5 : 1)
 	if(alien == IS_VOX)
 		M.adjustToxLoss(removed * 6 * effect)
 	else if(alien != IS_DIONA)
 		M.adjustOxyLoss(-200 * removed * effect) // So around 20 per tick under standard settings, should be enough
 
-	holder.remove_reagent("lexorin", 3 * removed, state)
+	holder.remove_reagent("lexorin", 3 * removed, location)
 
 /datum/reagent/tricordrazine
 	name = "Tricordrazine"
@@ -850,10 +849,10 @@
 	color = "#8040FF"
 	scannable = 1
 
-/datum/reagent/tricordrazine/affect_mob(var/mob/living/carbon/M as mob, var/alien, var/removed)
-	if(state == CHEM_TOUCH)
+/datum/reagent/tricordrazine/affect_mob(var/mob/living/carbon/M, var/alien, var/removed, var/location)
+	if(location == CHEM_TOUCH)
 		return
-	var/effect = (state == CHEM_BLOOD ? 1.5 : 1)
+	var/effect = (location == CHEM_BLOOD ? 1.5 : 1)
 	if(alien != IS_DIONA)
 		M.adjustOxyLoss(-4 * removed * effect)
 		M.heal_organ_damage(2 * removed * effect, 2 * removed * effect)
@@ -883,10 +882,10 @@
 	metabolism = REM * 0.5
 	var/power = 4 // How much damage it deals per unit
 
-/datum/reagent/toxin/affect_mob(var/mob/living/carbon/M as mob, var/alien, var/removed)
-	if(state == CHEM_TOUCH)
+/datum/reagent/toxin/affect_mob(var/mob/living/carbon/M, var/alien, var/removed, var/location)
+	if(location == CHEM_TOUCH)
 		return
-	var/effect = (state == CHEM_BLOOD ? 1.5 : 1)
+	var/effect = (location == CHEM_BLOOD ? 1.5 : 1)
 	if(power && alien != IS_DIONA) // TODO: liver
 		M.adjustToxLoss(power * removed * effect)
 
@@ -920,8 +919,8 @@
 	overdose_blood = REAGENTS_OVERDOSE
 	overdose_ingest = REAGENTS_OVERDOSE * 2
 
-/datum/reagent/soporific/affect_mob(var/mob/living/carbon/M as mob, var/alien, var/removed)
-	if(state != CHEM_BLOOD || alien == IS_DIONA)
+/datum/reagent/soporific/affect_mob(var/mob/living/carbon/M, var/alien, var/removed, var/location)
+	if(location != CHEM_BLOOD || alien == IS_DIONA)
 		return
 	if(dose < 1)
 		if(dose == metabolism * 2 || prob(5))
@@ -947,9 +946,9 @@
 	overdose_blood = REAGENTS_OVERDOSE * 0.5
 	overdose_ingest = REAGENTS_OVERDOSE
 
-/datum/reagent/toxin/chloralhydrate/affect_mob(var/mob/living/carbon/M as mob, var/alien, var/removed)
+/datum/reagent/toxin/chloralhydrate/affect_mob(var/mob/living/carbon/M, var/alien, var/removed, var/location)
 	..()
-	if(state != CHEM_BLOOD || alien == IS_DIONA)
+	if(location != CHEM_BLOOD || alien == IS_DIONA)
 		return
 	if(dose == metabolism)
 		M.confused += 2
@@ -970,7 +969,7 @@
 	overdose_blood = REAGENTS_OVERDOSE
 	overdose_ingest = REAGENTS_OVERDOSE * 2
 
-/datum/reagent/space_drugs/affect_mob(var/mob/living/carbon/M as mob, var/alien, var/removed)
+/datum/reagent/space_drugs/affect_mob(var/mob/living/carbon/M, var/alien, var/removed, var/location)
 	M.druggy = max(M.druggy, 15)
 	if(prob(10) && isturf(M.loc) && !istype(M.loc, /turf/space) && M.canmove && !M.restrained())
 		step(M, pick(cardinal))
@@ -989,10 +988,10 @@
 	var/injectable = 0
 	color = "#664330"
 
-/datum/reagent/nutriment/affect_mob(var/mob/living/carbon/M, var/alien, var/removed)
-	if(state == CHEM_TOUCH)
+/datum/reagent/nutriment/affect_mob(var/mob/living/carbon/M, var/alien, var/removed, var/location)
+	if(location == CHEM_TOUCH)
 		return
-	if(state == CHEM_BLOOD && !injectable)
+	if(location == CHEM_BLOOD && !injectable)
 		M.adjustToxLoss(0.1 * removed)
 		return
 	M.heal_organ_damage(0.5 * removed, 0)
@@ -1004,7 +1003,7 @@
 	id = "protein"
 	color = "#440000"
 
-/datum/reagent/nutriment/protein/affect_mob(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/nutriment/protein/affect_mob(var/mob/living/carbon/M, var/alien, var/removed, var/location)
 	if(alien && alien == IS_SKRELL)
 		M.adjustToxLoss(0.5 * removed)
 		return
@@ -1038,11 +1037,11 @@
 	var/adj_sleepy = 0
 	var/adj_temp = 0
 
-/datum/reagent/drink/affect_mob(var/mob/living/carbon/M, var/alien, var/removed)
-	if(state == CHEM_BLOOD)
+/datum/reagent/drink/affect_mob(var/mob/living/carbon/M, var/alien, var/removed, var/location)
+	if(location == CHEM_BLOOD)
 		M.adjustToxLoss(removed) // Probably not a good idea; not very deadly though
 		return
-	if(state == CHEM_INGEST)
+	if(location == CHEM_INGEST)
 		M.nutrition += nutrition * removed
 		M.dizziness = max(0, M.dizziness + adj_dizzy)
 		M.drowsyness = max(0, M.drowsyness + adj_drowsy)
@@ -1074,9 +1073,9 @@
 	glass_name = "glass of lime juice"
 	glass_desc = "A glass of sweet-sour lime juice"
 
-/datum/reagent/drink/limejuice/affect_mob(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/drink/limejuice/affect_mob(var/mob/living/carbon/M, var/alien, var/removed, var/location)
 	..()
-	if(state == CHEM_TOUCH || state == CHEM_BLOOD || alien == IS_DIONA)
+	if(location == CHEM_TOUCH || location == CHEM_BLOOD || alien == IS_DIONA)
 		return
 	M.adjustToxLoss(-0.5 * removed)
 
@@ -1090,9 +1089,9 @@
 	glass_name = "glass of orange juice"
 	glass_desc = "Vitamins! Yay!"
 
-/datum/reagent/drink/orangejuice/affect_mob(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/drink/orangejuice/affect_mob(var/mob/living/carbon/M, var/alien, var/removed, var/location)
 	..()
-	if(state == CHEM_TOUCH || state == CHEM_BLOOD || alien == IS_DIONA)
+	if(location == CHEM_TOUCH || location == CHEM_BLOOD || alien == IS_DIONA)
 		return
 	M.adjustOxyLoss(-2 * removed)
 
@@ -1106,9 +1105,9 @@
 	glass_name = "glass of tomato juice"
 	glass_desc = "Are you sure this is tomato juice?"
 
-/datum/reagent/drink/tomatojuice/affect_mob(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/drink/tomatojuice/affect_mob(var/mob/living/carbon/M, var/alien, var/removed, var/location)
 	..()
-	if(state == CHEM_TOUCH || state == CHEM_BLOOD || alien == IS_DIONA)
+	if(location == CHEM_TOUCH || location == CHEM_BLOOD || alien == IS_DIONA)
 		return
 	M.heal_organ_damage(0, 0.5 * removed)
 
@@ -1124,9 +1123,9 @@
 	glass_name = "glass of milk"
 	glass_desc = "White and nutritious goodness!"
 
-/datum/reagent/drink/milk/affect_mob(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/drink/milk/affect_mob(var/mob/living/carbon/M, var/alien, var/removed, var/location)
 	..()
-	if(state == CHEM_TOUCH || state == CHEM_BLOOD || alien == IS_DIONA)
+	if(location == CHEM_TOUCH || location == CHEM_BLOOD || alien == IS_DIONA)
 		return
 	M.heal_organ_damage(0.5 * removed, 0)
 	holder.remove_reagent("capsaicin", 10 * removed)
@@ -1155,9 +1154,9 @@
 	glass_name = "cup of tea"
 	glass_desc = "Tasty black tea, it has antioxidants, it's good for you!"
 
-/datum/reagent/drink/tea/affect_mob(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/drink/tea/affect_mob(var/mob/living/carbon/M, var/alien, var/removed, var/location)
 	..()
-	if(state == CHEM_TOUCH || state == CHEM_BLOOD || alien == IS_DIONA)
+	if(location == CHEM_TOUCH || location == CHEM_BLOOD || alien == IS_DIONA)
 		return
 	M.adjustToxLoss(-0.5 * removed)
 
@@ -1187,9 +1186,9 @@
 	glass_name = "cup of coffee"
 	glass_desc = "Don't drop it, or you'll send scalding liquid and glass shards everywhere."
 
-/datum/reagent/drink/coffee/affect_mob(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/drink/coffee/affect_mob(var/mob/living/carbon/M, var/alien, var/removed, var/location)
 	..()
-	if(state == CHEM_TOUCH || state == CHEM_BLOOD || alien == IS_DIONA)
+	if(location == CHEM_TOUCH || location == CHEM_BLOOD || alien == IS_DIONA)
 		return
 	M.make_jittery(5)
 	if(adj_temp > 0)
@@ -1319,9 +1318,9 @@
 	glass_desc = "A healthy mixture of juices, guaranteed to keep you healthy until the next toolboxing takes place."
 	glass_center_of_mass = list("x"=16, "y"=8)
 
-/datum/reagent/drink/doctor_delight/affect_mob(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/drink/doctor_delight/affect_mob(var/mob/living/carbon/M, var/alien, var/removed, var/location)
 	..()
-	if(state == CHEM_TOUCH || state == CHEM_BLOOD || alien == IS_DIONA)
+	if(location == CHEM_TOUCH || location == CHEM_BLOOD || alien == IS_DIONA)
 		return
 	M.adjustOxyLoss(-4 * removed)
 	M.heal_organ_damage(2 * removed, 2 * removed)
@@ -1356,9 +1355,9 @@
 	color = "#302000"
 	nutrition = 5
 
-/datum/reagent/drink/hell_ramen/affect_mob(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/drink/hell_ramen/affect_mob(var/mob/living/carbon/M, var/alien, var/removed, var/location)
 	..()
-	if(state == CHEM_TOUCH || state == CHEM_BLOOD || alien == IS_DIONA)
+	if(location == CHEM_TOUCH || location == CHEM_BLOOD || alien == IS_DIONA)
 		return
 	M.bodytemperature += 10 * TEMPERATURE_DAMAGE_COEFFICIENT
 
@@ -1415,9 +1414,9 @@
 	glass_desc = "A freezing pint of beer"
 	glass_center_of_mass = list("x"=16, "y"=8)
 
-/datum/reagent/ethanol/beer/affect_mob(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/ethanol/beer/affect_mob(var/mob/living/carbon/M, var/alien, var/removed, var/location)
 	..()
-	if(state == CHEM_TOUCH || state == CHEM_BLOOD || alien == IS_DIONA)
+	if(location == CHEM_TOUCH || location == CHEM_BLOOD || alien == IS_DIONA)
 		return
 	M.jitteriness = max(M.jitteriness - 3, 0)
 
@@ -1457,9 +1456,9 @@
 	glass_desc = "Now you want to Pray for a pirate suit, don't you?"
 	glass_center_of_mass = list("x"=16, "y"=12)
 
-/datum/reagent/ethanol/deadrum/affect_mob(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/ethanol/deadrum/affect_mob(var/mob/living/carbon/M, var/alien, var/removed, var/location)
 	..()
-	if(state == CHEM_TOUCH || state == CHEM_BLOOD || alien == IS_DIONA)
+	if(location == CHEM_TOUCH || location == CHEM_BLOOD || alien == IS_DIONA)
 		return
 	M.dizziness +=5
 
@@ -1487,9 +1486,9 @@
 	glass_desc = "DAMN, THIS THING LOOKS ROBUST"
 	glass_center_of_mass = list("x"=15, "y"=7)
 
-/datum/reagent/ethanol/kahlua/affect_mob(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/ethanol/kahlua/affect_mob(var/mob/living/carbon/M, var/alien, var/removed, var/location)
 	..()
-	if(state == CHEM_TOUCH || state == CHEM_BLOOD || alien == IS_DIONA)
+	if(location == CHEM_TOUCH || location == CHEM_BLOOD || alien == IS_DIONA)
 		return
 	M.dizziness = max(0, M.dizziness - 5)
 	M.drowsyness = max(0, M.drowsyness - 3)
@@ -1546,9 +1545,9 @@
 	glass_name = "glass of Thirteen Loko"
 	glass_desc = "This is a glass of Thirteen Loko, it appears to be of the highest quality. The drink, not the glass."
 
-/datum/reagent/ethanol/thirteenloko/affect_mob(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/ethanol/thirteenloko/affect_mob(var/mob/living/carbon/M, var/alien, var/removed, var/location)
 	..()
-	if(state == CHEM_TOUCH || state == CHEM_BLOOD || alien == IS_DIONA)
+	if(location == CHEM_TOUCH || location == CHEM_BLOOD || alien == IS_DIONA)
 		return
 	M.drowsyness = max(0, M.drowsyness - 7)
 	if (M.bodytemperature > 310)
@@ -2113,9 +2112,9 @@
 	glass_name = "glass of holy water"
 	glass_desc = "An ashen-obsidian-water mix, this solution will alter certain sections of the brain's rationality."
 
-/datum/reagent/water/holywater/affect_mob(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/water/holywater/affect_mob(var/mob/living/carbon/M, var/alien, var/removed, var/location)
 	..()
-	if(ishuman(M)) // Any state
+	if(ishuman(M)) // Any location
 		if((M.mind in ticker.mode.cult) && prob(10))
 			ticker.mode.remove_cultist(M.mind)
 			M.visible_message("<span class='notice'>[M]'s eyes blink and become clearer.", "<span class='notice'>A cooling sensation from inside you brings you an untold calmness.</notice>")

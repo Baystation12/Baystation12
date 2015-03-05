@@ -49,7 +49,7 @@
 			return ..()
 
 	if (reagents.volume > 0)
-		reagents.trans_to_mob(M, reagents.volume, 1, CHEM_INGEST)
+		reagents.trans_to_mob(M, reagents.volume, CHEM_INGEST)
 		if(M == user)
 			for(var/mob/O in viewers(M, null))
 				O.show_message(text("\blue [] eats some [] from \the [].", user, loaded, src), 1)

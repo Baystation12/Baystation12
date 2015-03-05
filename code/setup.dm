@@ -726,10 +726,6 @@ var/list/be_special_flags = list(
 #define ATMOS_DEFAULT_VOLUME_MIXER  200 // L.
 #define ATMOS_DEFAULT_VOLUME_PIPE   70  // L.
 
-// Reagent metabolism defines.
-#define FOOD_METABOLISM    0.4
-#define ALCOHOL_METABOLISM 0.1
-
 // Chemistry.
 #define CHEM_SYNTH_ENERGY 500 // How much energy does it take to synthesize 1 unit of chemical, in Joules.
 
