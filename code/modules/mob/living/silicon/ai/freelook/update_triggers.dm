@@ -84,6 +84,7 @@
 
 /obj/machinery/camera/deactivate(user as mob, var/choice = 1)
 	..(user, choice)
+	invalidateCameraCache()
 	if(src.can_use())
 		cameranet.addCamera(src)
 	else
@@ -98,16 +99,11 @@
 		cameranet.cameras_unsorted = 1
 	else
 		dd_insertObjectList(cameranet.cameras, src)
-
-	var/list/open_networks = difflist(network,restricted_camera_networks) //...but if all of camera's networks are restricted, it only works for specific camera consoles.
-	if(open_networks.len) //If there is at least one open network, chunk is available for AI usage.
-		cameranet.addCamera(src)
+	update_coverage(1)
 
 /obj/machinery/camera/Del()
 	cameranet.cameras -= src
-	var/list/open_networks = difflist(network,restricted_camera_networks)
-	if(open_networks.len)
-		cameranet.removeCamera(src)
+	clear_all_networks()
 	..()
 
 #undef BORG_CAMERA_BUFFER

@@ -146,10 +146,10 @@ nanoui is used to open and update nano browser uis
 	var/new_status = host.CanUseTopic(user, list(), custom_state)
 	if(master_ui)
 		new_status = min(new_status, master_ui.status)
+
+	set_status(new_status, push_update)
 	if(new_status == STATUS_CLOSE)
 		close()
-	else
-		set_status(new_status, push_update)
 
  /**
   * Set the ui to auto update (every master_controller tick)
@@ -396,6 +396,9 @@ nanoui is used to open and update nano browser uis
 	if (width && height)
 		window_size = "size=[width]x[height];"
 	update_status(0)
+	if(status == STATUS_CLOSE)
+		return
+
 	user << browse(get_html(), "window=[window_id];[window_size][window_options]")
 	winset(user, "mapwindow.map", "focus=true") // return keyboard focus to map
 	on_close_winset()

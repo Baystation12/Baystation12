@@ -138,8 +138,8 @@
 		density = 1
 		icon_state = "up"
 	else
-		buckled_mob.pixel_y = 0
-		buckled_mob.old_y = 0
+		M.pixel_y = 0
+		M.old_y = 0
 		density = 0
 		icon_state = "down"
 

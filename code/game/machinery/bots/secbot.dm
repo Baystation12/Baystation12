@@ -91,8 +91,7 @@
 	update_icon()
 	spawn(3)
 		src.botcard = new /obj/item/weapon/card/id(src)
-		var/datum/job/detective/J = new/datum/job/detective
-		src.botcard.access = J.get_access()
+		src.botcard.access = list(access_security, access_sec_doors, access_forensics_lockers, access_morgue, access_maint_tunnels, access_court)
 		if(radio_controller)
 			radio_controller.add_object(src, control_freq, filter = RADIO_SECBOT)
 			radio_controller.add_object(src, beacon_freq, filter = RADIO_NAVBEACONS)
@@ -266,13 +265,19 @@ Auto Patrol: []"},
 				src.mode = 0
 				walk_to(src,0)
 
-			// We re-assess human targets, before bashing their head in, in case their credentials change
-			if(target && istype(target, /mob/living/carbon/human))
-				var/threat = src.assess_perp(target, idcheck, check_records, check_arrest)
-				if(threat < 4)
-					target = null
-
 			if(target)		// make sure target exists
+				// We re-assess human targets, before bashing their head in, in case their credentials change
+				if(istype(target, /mob/living/carbon/human))
+					var/threat = src.assess_perp(target, idcheck, check_records, check_arrest)
+					if(threat < 4)
+						frustration = 8
+						return
+
+				// The target must remain in view to complete the desire to bash its head in
+				if(!(target in view(search_range,src)))
+					frustration++
+					return
+
 				if(!lasercolor && Adjacent(target))	// If right next to perp. Lasertag bots do not arrest anyone, just patrol and shoot and whatnot
 					if(istype(src.target,/mob/living/carbon))
 						playsound(src.loc, 'sound/weapons/Egloves.ogg', 50, 1, -1)
@@ -350,7 +355,12 @@ Auto Patrol: []"},
 
 			if(istype(src.target,/mob/living/carbon))
 				var/mob/living/carbon/C = target
-				if(!C.handcuffed && !src.arrest_type)
+				var/wearing_hardsuit
+				if(istype(C,/mob/living/carbon/human))
+					var/mob/living/carbon/human/H = C
+					if(istype(H.back, /obj/item/weapon/rig) && istype(H.gloves,/obj/item/clothing/gloves/rig))
+						wearing_hardsuit = 1
+				if(!wearing_hardsuit && !C.handcuffed && !src.arrest_type)
 					playsound(src.loc, 'sound/weapons/handcuffs.ogg', 30, 1, -2)
 					mode = SECBOT_ARREST
 					visible_message("\red <B>[src] is trying to put handcuffs on [src.target]!</B>")
