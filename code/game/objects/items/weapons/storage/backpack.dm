@@ -67,6 +67,12 @@
 			return
 			*/
 		..()
+	
+	//Please don't clutter the parent storage item with stupid hacks.
+	can_be_inserted(obj/item/W as obj, stop_messages = 0)
+		if(istype(W, /obj/item/weapon/storage/backpack/holding))
+			return 1
+		return ..()
 
 	proc/failcheck(mob/user as mob)
 		if (prob(src.reliability)) return 1 //No failure

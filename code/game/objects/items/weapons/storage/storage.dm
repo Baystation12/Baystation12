@@ -21,7 +21,6 @@
 	var/allow_quick_empty	//Set this variable to allow the object to have the 'empty' verb, which dumps all the contents on the floor.
 	var/allow_quick_gather	//Set this variable to allow the object to have the 'toggle mode' verb, which quickly collects all items from a tile.
 	var/collection_mode = 1;  //0 = pick one at a time, 1 = pick all on tile
-	var/foldable = null	// BubbleWrap - if set, can be folded (when empty) into a sheet of cardboard
 	var/use_sound = "rustle"	//sound played when used. null for no sound.
 
 /obj/item/weapon/storage/MouseDrop(obj/over_object as obj)
@@ -236,11 +235,9 @@
 		return 0
 
 	if(W.w_class >= src.w_class && (istype(W, /obj/item/weapon/storage)))
-		//TODO: remove hack
-		if(!istype(src, /obj/item/weapon/storage/backpack/holding))	//bohs should be able to hold backpacks again. The override for putting a boh in a boh is in backpack.dm.
-			if(!stop_messages)
-				usr << "<span class='notice'>[src] cannot hold [W] as it's a storage item of the same size.</span>"
-			return 0 //To prevent the stacking of same sized storage items.
+		if(!stop_messages)
+			usr << "<span class='notice'>[src] cannot hold [W] as it's a storage item of the same size.</span>"
+		return 0 //To prevent the stacking of same sized storage items.
 
 	return 1
 
@@ -260,7 +257,7 @@
 		W.dropped(usr)
 		add_fingerprint(usr)
 
-		if(!prevent_warning && !istype(W, /obj/item/weapon/gun/energy/crossbow))
+		if(!prevent_warning)
 			for(var/mob/M in viewers(usr, null))
 				if (M == usr)
 					usr << "<span class='notice'>You put \the [W] into [src].</span>"
@@ -416,35 +413,12 @@
 			O.emp_act(severity)
 	..()
 
-// BubbleWrap - A box can be folded up to make card
 /obj/item/weapon/storage/attack_self(mob/user as mob)
-
 	//Clicking on itself will empty it, if it has the verb to do that.
 	if(user.get_active_hand() == src)
 		if(src.verbs.Find(/obj/item/weapon/storage/verb/quick_empty))
 			src.quick_empty()
-			return
-
-	//Otherwise we'll try to fold it.
-	if ( contents.len )
-		return
-
-	if ( !ispath(src.foldable) )
-		return
-	var/found = 0
-	// Close any open UI windows first
-	for(var/mob/M in range(1))
-		if (M.s_active == src)
-			src.close(M)
-		if ( M == user )
-			found = 1
-	if ( !found )	// User is too far away
-		return
-	// Now make the cardboard
-	user << "<span class='notice'>You fold [src] flat.</span>"
-	new src.foldable(get_turf(src))
-	del(src)
-//BubbleWrap END
+			return 1
 
 /obj/item/weapon/storage/hear_talk(mob/M as mob, text, verb, datum/language/speaking)
 	for (var/atom/A in src)
