@@ -5,26 +5,31 @@
 	icon = 'icons/obj/holosign.dmi'
 	icon_state = "sign_off"
 	layer = 4
+	idle_power_usage = 2
 	var/lit = 0
 	var/id = null
 	var/on_icon = "sign_on"
 
-	proc/toggle()
-		if (stat & (BROKEN|NOPOWER))
-			return
-		lit = !lit
-		update_icon()
-
+/obj/machinery/holosign/proc/toggle()
+	if (stat & (BROKEN|NOPOWER))
+		return
+	lit = !lit
 	update_icon()
-		if (!lit)
-			icon_state = "sign_off"
-		else
-			icon_state = on_icon
 
-	power_change()
-		if (stat & NOPOWER)
-			lit = 0
-		update_icon()
+/obj/machinery/holosign/process()
+	if(lit)
+		auto_use_power()
+
+/obj/machinery/holosign/update_icon()
+	if (!lit)
+		icon_state = "sign_off"
+	else
+		icon_state = on_icon
+
+/obj/machinery/holosign/power_change()
+	if (stat & NOPOWER)
+		lit = 0
+	update_icon()
 
 /obj/machinery/holosign/surgery
 	name = "surgery holosign"
@@ -48,7 +53,7 @@
 	active = !active
 	icon_state = "light[active]"
 
-	for(var/obj/machinery/holosign/M in world)
+	for(var/obj/machinery/holosign/M in machines)
 		if (M.id == src.id)
 			spawn( 0 )
 				M.toggle()
