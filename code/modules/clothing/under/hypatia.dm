@@ -143,4 +143,13 @@
 	icon_state = "marine-armor-light"
 	item_state = "marine-armor-light"
 
+//Obsedai
+/obj/item/clothing/under/obsedai
+	name = "Obsedai webbing"
+	desc = "A webbing harness used by Obsedai to store things. It is far too large to be worn by other species."
+	species_restricted = list("Obsedai")
+	icon_state = "obsedai"
+	item_state = "obsedai"
+	item_color = "obsedai"
+
 //Made this a seperate file for ease of updating.

@@ -51,7 +51,7 @@
 		name = "Bald"
 		icon_state = "bald"
 		gender = MALE
-		species_allowed = list("Human","Soghun")
+		species_allowed = list("Human","Soghun","Obsedai")
 
 	short
 		name = "Short Hair"	  // try to capatilize the names please~

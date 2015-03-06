@@ -50,7 +50,7 @@
 	//Set species_restricted list
 	switch(target_species)
 		if("Human", "Skrell")	//humanoid bodytypes
-			species_restricted = list("exclude","Soghun","Tajara","Diona","Vox", "Xenomorph", "Xenomorph Drone", "Xenomorph Hunter", "Xenomorph Sentinel", "Xenomorph Queen")
+			species_restricted = list("exclude","Soghun","Tajara","Diona","Vox", "Obsedai", "Xenomorph", "Xenomorph Drone", "Xenomorph Hunter", "Xenomorph Sentinel", "Xenomorph Queen")
 		else
 			species_restricted = list(target_species)
 
@@ -68,7 +68,7 @@
 /obj/item/clothing/head/helmet/refit_for_species(var/target_species)
 	if(!species_restricted)
 		return //this item doesn't use the species_restricted system
-	
+
 	//Set species_restricted list
 	switch(target_species)
 		if("Skrell")
