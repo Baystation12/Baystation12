@@ -87,7 +87,7 @@
 
 /obj/item/weapon/gun/projectile/automatic/z8
 	name = "\improper Z8 Bulldog"
-	desc = "An older model bullpup carbine, made by the now defunct Zendai Foundries. Uses armor piercing 5.56mm rounds and has an underslung grenade launcher. Makes you feel like a space marine when you hold it."
+	desc = "An older model bullpup carbine, made by the now defunct Zendai Foundries. Uses armor piercing 5.56mm rounds. Makes you feel like a space marine when you hold it."
 	icon_state = "carbine"
 	item_state = "shotgun"
 	w_class = 4
