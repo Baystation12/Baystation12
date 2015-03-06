@@ -7,9 +7,10 @@
 	explosion_resistance = 15
 	var/aiControlDisabled = 0 //If 1, AI control is disabled until the AI hacks back in and disables the lock. If 2, the AI has bypassed the lock. If -1, the control is enabled but the AI had bypassed it earlier, so if it is disabled again the AI would have no trouble getting back in.
 	var/hackProof = 0 // if 1, this door can't be hacked by the AI
-	var/electrified_until = 0	// World time when the door is no longer electrified. -1 if it is permanently electrified until someone fixes it.
-	var/main_power_lost_until = 0	 //World time when main power is restored.
-	var/backup_power_lost_until = -1 //World time when backup power is restored.
+	var/electrified_until = 0			//World time when the door is no longer electrified. -1 if it is permanently electrified until someone fixes it.
+	var/main_power_lost_until = 0	 	//World time when main power is restored.
+	var/backup_power_lost_until = -1	//World time when backup power is restored.
+	var/next_beep_at = 0				//World time when we may next beep due to doors being blocked by mobs
 	var/spawnPowerRestoreRunning = 0
 	var/welded = null
 	var/locked = 0
@@ -228,6 +229,8 @@
 	else if(electrified_until > 0 && world.time >= electrified_until)
 		electrify(0)
 
+	..()
+
 /obj/machinery/door/airlock/uranium/process()
 	if(world.time > last_event+20)
 		if(prob(50))
@@ -438,7 +441,7 @@ About the new airlock wires panel:
 /obj/machinery/door/airlock/update_icon()
 	if(overlays) overlays.Cut()
 	if(density)
-		if(locked && lights)
+		if(locked && lights && src.arePowerSystemsOn())
 			icon_state = "door_locked"
 		else
 			icon_state = "door_closed"
@@ -459,7 +462,6 @@ About the new airlock wires panel:
 		icon_state = "door_open"
 		if((stat & BROKEN) && !(stat & NOPOWER))
 			overlays += image(icon, "sparks_open")
-
 	return
 
 /obj/machinery/door/airlock/do_animate(animation)
@@ -488,6 +490,7 @@ About the new airlock wires panel:
 		if("deny")
 			if(density && src.arePowerSystemsOn())
 				flick("door_deny", src)
+				playsound(src.loc, 'sound/machines/buzz-two.ogg', 50, 0)
 	return
 
 /obj/machinery/door/airlock/attack_ai(mob/user as mob)
@@ -822,7 +825,7 @@ About the new airlock wires panel:
 	return
 
 /obj/machinery/door/airlock/open(var/forced=0)
-	if( operating || welded || locked )
+	if(!can_open())
 		return 0
 	if(!forced)
 		if( !arePowerSystemsOn() || isWireCut(AIRLOCK_WIRE_OPEN_DOOR) )
@@ -836,20 +839,32 @@ About the new airlock wires panel:
 		src.closeOther.close()
 	return ..()
 
-/obj/machinery/door/airlock/close(var/forced=0)
-	if(operating || welded || locked)
-		return
+/obj/machinery/door/airlock/can_open()
+	if(locked || welded)
+		return 0
+	return ..()
+
+/obj/machinery/door/airlock/can_close(var/forced)
+	if(locked || welded)
+		return 0
 	if(!forced)
 		//despite the name, this wire is for general door control.
 		//Bolts are already covered by the check for locked, above
-		if( !arePowerSystemsOn() || isWireCut(AIRLOCK_WIRE_OPEN_DOOR) )
-			return
+		if(!arePowerSystemsOn() || isWireCut(AIRLOCK_WIRE_OPEN_DOOR))
+			return	0
+	return ..()
+
+/obj/machinery/door/airlock/close(var/forced=0)
+	if(!can_close(forced))
+		return
+
 	if(safe)
 		for(var/turf/turf in locs)
 			if(locate(/mob/living) in turf)
-			//	playsound(src.loc, 'sound/machines/buzz-two.ogg', 50, 0)	//THE BUZZING IT NEVER STOPS	-Pete
-				spawn (60)
-					close()
+				if(world.time > next_beep_at)
+					playsound(src.loc, 'sound/machines/buzz-two.ogg', 50, 0)
+					next_beep_at = world.time + SecondsToTicks(10)
+				close_door_at = world.time + 6
 				return
 
 	for(var/turf/turf in locs)
