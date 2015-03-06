@@ -298,7 +298,7 @@ var/world_topic_spam_protect_time = world.timeofday
 
 	s += "[station_name()]";
 	s += "<b> {Cosmic Horror/Sci-fi Thriller} "
-	s += "{Mid-High RP} "
+	s += "{High RP} "
 	s += "{Mature content}</b>"
 	s += " ("
 	s += "<a href=\"http://www.heavensgatestation.com/\">" //Change this to wherever you want the hub to link to.
@@ -311,7 +311,7 @@ var/world_topic_spam_protect_time = world.timeofday
 
 	if(ticker)
 		if(master_mode)
-			features += master_mode
+			features += "secret"
 	else
 		features += "<b>STARTING</b>"
 

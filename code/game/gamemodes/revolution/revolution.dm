@@ -17,7 +17,7 @@
 	restricted_jobs = list("Internal Affairs Agent", "AI", "Cyborg","Captain", "Head of Personnel", "Head of Security", "Chief Engineer", "Research Director", "Chief Medical Officer")
 	protected_jobs = list("Security Officer", "Warden", "Detective")
 	required_players = 4
-	required_players_secret = 15
+	required_players_secret = 10
 	required_enemies = 3
 	recommended_enemies = 3
 

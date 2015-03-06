@@ -5,7 +5,7 @@
 	var/const/waittime_h = 1800 //upper bound on time before intercept arrives (in tenths of seconds)
 	var/const/meteordelay = 2000
 	var/nometeors = 1
-	required_players = 0
+	required_players = 1
 	votable = 0
 
 	uplink_welcome = "EVIL METEOR Uplink Console:"
