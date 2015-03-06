@@ -37,11 +37,11 @@
 			del(src)
 
 		if("JoinLate")
-			latejoin += loc
+			latejoin_cryo += loc
 			del(src)
 
 		if("JoinLateGateway")
-			latejoin_gateway += loc
+			latejoin_cryo += loc
 			del(src)
 
 		if("JoinLateCryo")
