@@ -94,7 +94,7 @@
 	item_state = "security"
 	storage_slots = 7
 	max_w_class = 3
-	max_combined_w_class = 21
+	max_storage_space = 28
 	can_hold = list(
 		/obj/item/weapon/grenade,
 		/obj/item/weapon/reagent_containers/spray/pepper,
@@ -154,4 +154,4 @@
 	item_state = "swatbelt"
 	storage_slots = 9
 	max_w_class = 3
-	max_combined_w_class = 21
+	max_storage_space = 28
