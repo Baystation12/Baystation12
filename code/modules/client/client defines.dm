@@ -3,6 +3,7 @@
 		//ADMIN THINGS//
 		////////////////
 	var/datum/admins/holder = null
+	var/datum/admins/deadmin_holder = null
 	var/buildmode		= 0
 	var/angry = 0 // toggles if an admin becomes ANGRY!
 

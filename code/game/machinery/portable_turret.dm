@@ -297,7 +297,7 @@
 
 	else if((istype(I, /obj/item/weapon/wrench)))
 		if(on || raised)
-			user << "<span class='warning'You cannot unsecure an active turret!</span>"
+			user << "<span class='warning'>You cannot unsecure an active turret!</span>"
 			return
 		if(wrenching)
 			user << "<span class='warning'>Someone is already [anchored ? "un" : ""]securing the turret!</span>"

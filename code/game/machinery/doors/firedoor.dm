@@ -22,6 +22,10 @@
 	open_layer = DOOR_OPEN_LAYER - 0.01 // Just below doors when open
 	closed_layer = DOOR_CLOSED_LAYER + 0.01 // Just above doors when closed
 
+	//These are frequenly used with windows, so make sure zones can pass. 
+	//Generally if a firedoor is at a place where there should be a zone boundery then there will be a regular door underneath it.
+	block_air_zones = 0
+
 	var/blocked = 0
 	var/lockdown = 0 // When the door has detected a problem, it locks.
 	var/pdiff_alert = 0
@@ -381,9 +385,9 @@
 			overlays += "welded_open"
 	return
 
+//These are playing merry hell on ZAS.  Sorry fellas :(
 
 /obj/machinery/door/firedoor/border_only
-//These are playing merry hell on ZAS.  Sorry fellas :(
 /*
 	icon = 'icons/obj/doors/edge_Doorfire.dmi'
 	glass = 1 //There is a glass window so you can see through the door
