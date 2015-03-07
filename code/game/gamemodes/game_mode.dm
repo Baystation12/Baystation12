@@ -44,7 +44,9 @@
 		"Stealthy and Inconspicuous Weapons" = list(
 			new/datum/uplink_item(/obj/item/weapon/pen/paralysis, 3, "Paralysis Pen", "PP"),
 			new/datum/uplink_item(/obj/item/weapon/soap/syndie, 1, "Subversive Soap", "SP"),
-			new/datum/uplink_item(/obj/item/weapon/cartridge/syndicate, 3, "Detomatix PDA Cartridge", "DC")
+			new/datum/uplink_item(/obj/item/weapon/cartridge/syndicate, 3, "Detomatix PDA Cartridge", "DC"),
+			new/datum/uplink_item(/obj/item/weapon/cane/pois_cane, 3, "Poison Tipped Cane", "PC"),
+			new/datum/uplink_item(/obj/item/device/flash/syndicamera, 2, "Camera Flasher", "CF")
 			),
 		"Stealth and Camouflage Items" = list(
 			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/chameleon, 3, "Chameleon Kit", "CB"),

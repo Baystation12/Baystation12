@@ -109,13 +109,13 @@
 		flick("flash2", src)
 		if(!issilicon(M))
 
-			user.visible_message("<span class='disarm'>[user] blinds [M] with the flash!</span>")
+			user.visible_message("<span class='disarm'>[user] blinds [M] with the [src.name]!</span>")
 		else
 
-			user.visible_message("<span class='notice'>[user] overloads [M]'s sensors with the flash!</span>")
+			user.visible_message("<span class='notice'>[user] overloads [M]'s sensors with the [src.name]!</span>")
 	else
 
-		user.visible_message("<span class='notice'>[user] fails to blind [M] with the flash!</span>")
+		user.visible_message("<span class='notice'>[user] fails to blind [M] with the [src.name]!</span>")
 
 	return
 
@@ -210,3 +210,12 @@
 		broken = 1
 		user << "\red The bulb has burnt out!"
 		icon_state = "flashburnt"
+
+/obj/item/device/flash/syndicamera
+	name = "Awesome Camera"
+	icon = 'icons/obj/items.dmi'
+	desc = "A suspiciously good looking camera."
+	icon_state = "camera"
+	item_state = "electropack"
+	flags = CONDUCT
+	slot_flags = SLOT_BELT
