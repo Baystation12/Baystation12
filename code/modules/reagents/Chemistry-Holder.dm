@@ -403,6 +403,31 @@
 
 	return F.trans_to(target, amount) // Let this proc check the atom's type
 
+/datum/reagents/proc/splash_mob(var/mob/target, var/amount = 1, var/clothes = 1)
+	var/perm = 0
+	var/list/L = list("head" = THERMAL_PROTECTION_HEAD, "upper_torso" = THERMAL_PROTECTION_UPPER_TORSO, "lower_torso" = THERMAL_PROTECTION_LOWER_TORSO, "legs" = THERMAL_PROTECTION_LEG_LEFT + THERMAL_PROTECTION_LEG_RIGHT, "feet" = THERMAL_PROTECTION_FOOT_LEFT + THERMAL_PROTECTION_FOOT_RIGHT, "arms" = THERMAL_PROTECTION_ARM_LEFT + THERMAL_PROTECTION_ARM_RIGHT, "hands" = THERMAL_PROTECTION_HAND_LEFT + THERMAL_PROTECTION_HAND_RIGHT)
+	if(clothes)
+		for(var/obj/item/clothing/C in target.get_equipped_items())
+			if(C.permeability_coefficient == 1 || C.body_parts_covered == 0)
+				continue
+			if(C.body_parts_covered & HEAD)
+				L["head"] *= C.permeability_coefficient
+			if(C.body_parts_covered & UPPER_TORSO)
+				L["upper_torso"] *= C.permeability_coefficient
+			if(C.body_parts_covered & LOWER_TORSO)
+				L["lower_torso"] *= C.permeability_coefficient
+			if(C.body_parts_covered & LEGS)
+				L["legs"] *= C.permeability_coefficient
+			if(C.body_parts_covered & FEET)
+				L["feet"] *= C.permeability_coefficient
+			if(C.body_parts_covered & ARMS)
+				L["arms"] *= C.permeability_coefficient
+			if(C.body_parts_covered & HANDS)
+				L["hands"] *= C.permeability_coefficient
+	for(var/t in L)
+		perm += L[t]
+	return trans_to_mob(target, amount, CHEM_TOUCH, perm)
+
 /datum/reagents/proc/trans_to_mob(var/mob/target, var/amount = 1, var/type, var/multiplier = 1, var/copy = 0) // Transfer after checking into which holder...
 	if(!target || !istype(target))
 		return

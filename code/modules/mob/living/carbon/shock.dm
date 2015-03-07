@@ -16,16 +16,6 @@
 	2	* src.halloss + 			\
 	-1	* src.analgesic
 
-	if(reagents.has_reagent("alkysine"))
-		src.traumatic_shock -= 10
-	if(reagents.has_reagent("synaptizine"))
-		src.traumatic_shock -= 40
-	if(reagents.has_reagent("paracetamol"))
-		src.traumatic_shock -= 50
-	if(reagents.has_reagent("tramadol"))
-		src.traumatic_shock -= 80
-	if(reagents.has_reagent("oxycodone"))
-		src.traumatic_shock -= 200
 	if(src.slurring)
 		src.traumatic_shock -= 20
 

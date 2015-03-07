@@ -23,6 +23,19 @@ datum
 
 		//I recommend you set the result amount to the total volume of all components.
 
+		rezadone
+			name = "Rezadone"
+			id = "rezadone"
+			result = "rezadone"
+			required_reagents = list("tungsten")
+			result_amount = 3
+
+		rezadone/New()
+			required_reagents += pick("iron", "carbon", "silicon")
+			required_reagents += pick("water", "oxygen", "potassium")
+			for(var/f in required_reagents)
+				required_reagents[f] = 1
+
 		explosion_potassium
 			name = "Explosion"
 			id = "explosion_potassium"
@@ -491,13 +504,6 @@ datum
 			result = "zombiepowder"
 			required_reagents = list("carpotoxin" = 5, "soporific" = 5, "copper" = 5)
 			result_amount = 2
-
-		rezadone
-			name = "Rezadone"
-			id = "rezadone"
-			result = "rezadone"
-			required_reagents = list("carpotoxin" = 1, "cryptobiolin" = 1, "copper" = 1)
-			result_amount = 3
 
 		mindbreaker
 			name = "Mindbreaker Toxin"
@@ -1768,10 +1774,10 @@ datum
 			required_reagents = list("rum" = 2, "cola" = 1)
 			result_amount = 3
 
-		martini
+		classicmartini
 			name = "Classic Martini"
-			id = "martini"
-			result = "martini"
+			id = "classicmartini"
+			result = "classicmartini"
 			required_reagents = list("gin" = 2, "vermouth" = 1)
 			result_amount = 3
 
@@ -1982,7 +1988,7 @@ datum
 			name = "Allies Cocktail"
 			id = "alliescocktail"
 			result = "alliescocktail"
-			required_reagents = list("martini" = 1, "vodka" = 1)
+			required_reagents = list("classicmartini" = 1, "vodka" = 1)
 			result_amount = 2
 
 		demonsblood

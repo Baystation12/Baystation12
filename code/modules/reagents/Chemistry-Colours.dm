@@ -6,6 +6,7 @@
 		return R.color
 
 	var/list/colors = list(0, 0, 0, 0)
+	var/tot_w = 0
 	for(var/datum/reagent/R in reagent_list)
 		var/hex = uppertext(R.color)
 		if(length(hex) == 7)
@@ -13,9 +14,10 @@
 		if(length(hex) != 9) // PANIC PANIC PANIC
 			warning("Reagent [R.id] has an incorrect color set ([R.color])")
 			hex = "#FFFFFFFF"
-		colors[1] += hex2num(copytext(hex, 2, 4)) * R.volume / volume
-		colors[2] += hex2num(copytext(hex, 4, 6)) * R.volume / volume
-		colors[3] += hex2num(copytext(hex, 6, 8)) * R.volume / volume
-		colors[4] += hex2num(copytext(hex, 8, 10)) * R.volume / volume
+		colors[1] += hex2num(copytext(hex, 2, 4)) * R.volume
+		colors[2] += hex2num(copytext(hex, 4, 6)) * R.volume
+		colors[3] += hex2num(copytext(hex, 6, 8)) * R.volume
+		colors[4] += hex2num(copytext(hex, 8, 10)) * R.volume
+		tot_w += R.color_weight
 
-	return rgb(colors[1], colors[2], colors[3], colors[4])
+	return rgb(colors[1] / tot_w, colors[2] / tot_w, colors[3] / tot_w, colors[4] / tot_w)

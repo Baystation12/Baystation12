@@ -72,7 +72,7 @@
 	msg_admin_attack("[user.name] ([user.ckey]) splashed [target.name] ([target.key]) with [name]. Reagents: [contained] (INTENT: [uppertext(user.a_intent)]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
 
 	user.visible_message("<span class='danger'>[target] has been splashed with something by [user]!", "<span class = 'notice'>You splash the solution onto [target].</span>")
-	reagents.trans_to(target, reagents.volume)
+	reagents.splash_mob(target, reagents.volume)
 	return 1
 
 /obj/item/weapon/reagent_containers/proc/self_feed_message(var/mob/user)
