@@ -137,7 +137,7 @@
 
 /mob/living/carbon/monkey/attack_hand(mob/living/carbon/human/M as mob)
 
-	if (M.a_intent == "help")
+	if (M.a_intent == "help" && a_intent == "help")
 		help_shake_act(M)
 		get_scooped(M)
 	else
