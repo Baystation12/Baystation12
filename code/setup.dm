@@ -767,8 +767,13 @@ var/list/be_special_flags = list(
 #define STATUS_UPDATE 1 // ORANGE Visability
 #define STATUS_DISABLED 0 // RED Visability
 #define STATUS_CLOSE -1 // Close the interface
+
 //General-purpose life speed define for plants.
 #define HYDRO_SPEED_MULTIPLIER 1
 #define NANO_IGNORE_DISTANCE 1
 
 #define DEFAULT_JOB_TYPE /datum/job/assistant
+
+// Area flags
+#define MONITORED 1	//For motion alarms and turrets
+#define RAD_SHIELDED 2	//Shielded from radiation, clearly
