@@ -65,6 +65,7 @@ client/verb/JoinResponseTeam()
 			var/leader_selected = isemptylist(response_team_members)
 			var/mob/living/carbon/human/new_commando = create_response_team(L.loc, leader_selected, new_name)
 			del(L)
+			//Creates mind stuff.
 			new_commando.mind.key = usr.key
 			new_commando.key = usr.key
 
@@ -74,6 +75,10 @@ client/verb/JoinResponseTeam()
 				new_commando << "<b>As member of the Emergency Response Team, you answer only to your leader and CentComm officials.</b>"
 			else
 				new_commando << "<b>As leader of the Emergency Response Team, you answer only to CentComm, and have authority to override the Captain where it is necessary to achieve your mission goals. It is recommended that you attempt to cooperate with the captain where possible, however."
+
+			// By setting an explicit location the mob cannot wander off and decide change appearance elsewhere
+			new_commando.change_appearance(APPEARANCE_ALL, new_commando.loc, new_commando)
+
 			return
 
 	else
@@ -167,105 +172,13 @@ proc/trigger_armed_response_team(var/force = 0)
 	var/mob/living/carbon/human/M = new(null)
 	response_team_members |= M
 
-	//todo: god damn this.
-	//make it a panel, like in character creation
-	var/new_facial = input("Please select facial hair color.", "Character Generation") as color
-	if(new_facial)
-		M.r_facial = hex2num(copytext(new_facial, 2, 4))
-		M.g_facial = hex2num(copytext(new_facial, 4, 6))
-		M.b_facial = hex2num(copytext(new_facial, 6, 8))
-
-	var/new_hair = input("Please select hair color.", "Character Generation") as color
-	if(new_facial)
-		M.r_hair = hex2num(copytext(new_hair, 2, 4))
-		M.g_hair = hex2num(copytext(new_hair, 4, 6))
-		M.b_hair = hex2num(copytext(new_hair, 6, 8))
-
-	var/new_eyes = input("Please select eye color.", "Character Generation") as color
-	if(new_eyes)
-		M.r_eyes = hex2num(copytext(new_eyes, 2, 4))
-		M.g_eyes = hex2num(copytext(new_eyes, 4, 6))
-		M.b_eyes = hex2num(copytext(new_eyes, 6, 8))
-
-	var/new_tone = input("Please select skin tone level: 1-220 (1=albino, 35=caucasian, 150=black, 220='very' black)", "Character Generation")  as text
-
-	if (!new_tone)
-		new_tone = 35
-	M.s_tone = max(min(round(text2num(new_tone)), 220), 1)
-	M.s_tone =  -M.s_tone + 35
-
-	// hair
-	var/list/all_hairs = typesof(/datum/sprite_accessory/hair) - /datum/sprite_accessory/hair
-	var/list/hairs = list()
-
-	// loop through potential hairs
-	for(var/x in all_hairs)
-		var/datum/sprite_accessory/hair/H = new x // create new hair datum based on type x
-		hairs.Add(H.name) // add hair name to hairs
-		del(H) // delete the hair after it's all done
-
-//	var/new_style = input("Please select hair style", "Character Generation")  as null|anything in hairs
-//hair
-	var/new_hstyle = input(usr, "Select a hair style", "Grooming")  as null|anything in hair_styles_list
-	if(new_hstyle)
-		M.h_style = new_hstyle
-
-	// facial hair
-	var/new_fstyle = input(usr, "Select a facial hair style", "Grooming")  as null|anything in facial_hair_styles_list
-	if(new_fstyle)
-		M.f_style = new_fstyle
-
-	// if new style selected (not cancel)
-/*	if (new_style)
-		M.h_style = new_style
-
-		for(var/x in all_hairs) // loop through all_hairs again. Might be slightly CPU expensive, but not significantly.
-			var/datum/sprite_accessory/hair/H = new x // create new hair datum
-			if(H.name == new_style)
-				M.h_style = H // assign the hair_style variable a new hair datum
-				break
-			else
-				del(H) // if hair H not used, delete. BYOND can garbage collect, but better safe than sorry
-
-	// facial hair
-	var/list/all_fhairs = typesof(/datum/sprite_accessory/facial_hair) - /datum/sprite_accessory/facial_hair
-	var/list/fhairs = list()
-
-	for(var/x in all_fhairs)
-		var/datum/sprite_accessory/facial_hair/H = new x
-		fhairs.Add(H.name)
-		del(H)
-
-	new_style = input("Please select facial style", "Character Generation")  as null|anything in fhairs
-
-	if(new_style)
-		M.f_style = new_style
-		for(var/x in all_fhairs)
-			var/datum/sprite_accessory/facial_hair/H = new x
-			if(H.name == new_style)
-				M.f_style = H
-				break
-			else
-				del(H)
-*/
-	var/new_gender = alert(usr, "Please select gender.", "Character Generation", "Male", "Female")
-	if (new_gender)
-		if(new_gender == "Male")
-			M.gender = MALE
-		else
-			M.gender = FEMALE
-	//M.rebuild_appearance()
-	M.update_hair()
-	M.update_body()
-	M.check_dna(M)
-
 	M.real_name = commando_name
 	M.name = commando_name
 	M.age = !leader_selected ? rand(23,35) : rand(35,45)
 
+	M.check_dna(M)
 	M.dna.ready_dna(M)//Creates DNA.
 
-	//Creates mind stuff.
 	M.mind = new
 	M.mind.current = M
 	M.mind.original = M
@@ -275,6 +188,7 @@ proc/trigger_armed_response_team(var/force = 0)
 		ticker.minds += M.mind//Adds them to regular mind list.
 	M.loc = spawn_location
 	M.equip_strike_team(leader_selected)
+
 	return M
 
 /mob/living/carbon/human/proc/equip_strike_team(leader_selected = 0)
