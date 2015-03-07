@@ -669,6 +669,17 @@ var/list/admin_verbs_mentor = list(
 	log_admin("[key_name(usr)] used 'kill air'.")
 	message_admins("\blue [key_name_admin(usr)] used 'kill air'.", 1)
 
+/client/proc/readmin_self()
+	set name = "Re-Admin self"
+	set category = "Admin"
+
+	if(deadmin_holder)
+		deadmin_holder.reassociate()
+		log_admin("[src] re-admined themself.")
+		message_admins("[src] re-admined themself.", 1)
+		src << "<span class='interface'>You now have the keys to control the planet, or atleast a small space station</span>"
+		verbs -= /client/proc/readmin_self
+
 /client/proc/deadmin_self()
 	set name = "De-admin self"
 	set category = "Admin"
@@ -679,6 +690,7 @@ var/list/admin_verbs_mentor = list(
 			message_admins("[src] deadmined themself.", 1)
 			deadmin()
 			src << "<span class='interface'>You are now a normal player.</span>"
+			verbs |= /client/proc/readmin_self
 	feedback_add_details("admin_verb","DAS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/toggle_log_hrefs()

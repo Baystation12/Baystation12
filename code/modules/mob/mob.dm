@@ -858,9 +858,11 @@ note dizziness decrements automatically in the mob's Life() proc.
 			canmove = 1
 			pixel_y = V.mob_offset_y
 	else if(buckled)
-		if(buckled.buckle_lying != -1) lying = buckled.buckle_lying
-		if (!buckled.buckle_movable)
-			anchored = 1
+		if(buckled.buckle_lying != -1)
+			 lying = buckled.buckle_lying
+		// var/movable is defined at /obj/structure/stool/bed level
+		// If we're buckled to something else, such as vines, assume it's stationary.
+		if (!istype(buckled) || !buckled.movable)			anchored = 1
 			canmove = 0
 		else
 			anchored = 0
