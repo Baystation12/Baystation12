@@ -36,6 +36,7 @@
 	var/treatment_fire = "tricordrazine"
 	var/treatment_tox = "tricordrazine"
 	var/treatment_virus = "spaceacillin"
+	var/declare_treatment = 0 //When attempting to treat a patient, should it notify everyone wearing medhuds?
 	var/shut_up = 0 //self explanatory :)
 
 /obj/machinery/bot/medbot/mysterious
@@ -74,8 +75,7 @@
 
 		src.botcard = new /obj/item/weapon/card/id(src)
 		if(isnull(src.botcard_access) || (src.botcard_access.len < 1))
-			var/datum/job/doctor/J = new/datum/job/doctor
-			src.botcard.access = J.get_access()
+			src.botcard.access = list(access_medical, access_morgue, access_surgery, access_chemistry, access_virology, access_genetics)
 		else
 			src.botcard.access = src.botcard_access
 
@@ -95,9 +95,6 @@
 	src.icon_state = "medibot[src.on]"
 	src.updateUsrDialog()
 
-/obj/machinery/bot/medbot/attack_paw(mob/user as mob)
-	return attack_hand(user)
-
 /obj/machinery/bot/medbot/attack_hand(mob/user as mob)
 	. = ..()
 	if (.)
@@ -105,7 +102,7 @@
 	var/dat
 	dat += "<TT><B>Automatic Medical Unit v1.0</B></TT><BR><BR>"
 	dat += "Status: <A href='?src=\ref[src];power=1'>[src.on ? "On" : "Off"]</A><BR>"
-	dat += "Maintenance panel panel is [src.open ? "opened" : "closed"]<BR>"
+	dat += "Maintenance panel is [src.open ? "opened" : "closed"]<BR>"
 	dat += "Beaker: "
 	if (src.reagent_glass)
 		dat += "<A href='?src=\ref[src];eject=1'>Loaded \[[src.reagent_glass.reagents.total_volume]/[src.reagent_glass.reagents.maximum_volume]\]</a>"
@@ -130,7 +127,9 @@
 		dat += "Reagent Source: "
 		dat += "<a href='?src=\ref[src];use_beaker=1'>[src.use_beaker ? "Loaded Beaker (When available)" : "Internal Synthesizer"]</a><br>"
 
-		dat += "The speaker switch is [src.shut_up ? "off" : "on"]. <a href='?src=\ref[src];togglevoice=[1]'>Toggle</a>"
+		dat += "Treatment report is [src.declare_treatment ? "on" : "off"]. <a href='?src=\ref[src];declaretreatment=[1]'>Toggle</a><br>"
+
+		dat += "The speaker switch is [src.shut_up ? "off" : "on"]. <a href='?src=\ref[src];togglevoice=[1]'>Toggle</a><br>"
 
 	user << browse("<HEAD><TITLE>Medibot v1.0 controls</TITLE></HEAD>[dat]", "window=automed")
 	onclose(user, "automed")
@@ -175,6 +174,9 @@
 
 	else if ((href_list["togglevoice"]) && (!src.locked || issilicon(usr)))
 		src.shut_up = !src.shut_up
+
+	else if ((href_list["declaretreatment"]) && (!src.locked || issilicon(usr)))
+		src.declare_treatment = !src.declare_treatment
 
 	src.updateUsrDialog()
 	return
@@ -273,12 +275,11 @@
 				src.patient = C
 				src.oldpatient = C
 				src.last_found = world.time
-				spawn(0)
-					if((src.last_newpatient_speak + 100) < world.time) //Don't spam these messages!
-						var/message = pick("Hey, you! Hold on, I'm coming.","Wait! I want to help!","You appear to be injured!")
-						src.speak(message)
-						src.last_newpatient_speak = world.time
+				if((src.last_newpatient_speak + 300) < world.time) //Don't spam these messages!
+					var/message = pick("Hey, [C.name]! Hold on, I'm coming.","Wait [C.name]! I want to help!","[C.name], you appear to be injured!")
+					src.speak(message)
 					src.visible_message("<b>[src]</b> points at [C.name]!")
+					src.last_newpatient_speak = world.time
 				break
 			else
 				continue
@@ -433,6 +434,10 @@
 					src.patient.reagents.add_reagent(reagent_id,src.injection_amount)
 				visible_message("\red <B>[src] injects [src.patient] with the syringe!</B>")
 
+				if(declare_treatment)
+					var/area/location = get_area(src)
+					broadcast_medical_hud_message("[src.name] is treating <b>[C]</b> in <b>[location]</b>", src)
+
 			src.icon_state = "medibot[src.on]"
 			src.currently_healing = 0
 			return
@@ -449,7 +454,7 @@
 	return
 
 /obj/machinery/bot/medbot/bullet_act(var/obj/item/projectile/Proj)
-	if(Proj.flag == "taser")
+	if(Proj.taser_effect)
 		src.stunned = min(stunned+10,20)
 	..()
 
@@ -480,7 +485,7 @@
 /obj/machinery/bot/medbot/Bump(M as mob|obj) //Leave no door unopened!
 	if ((istype(M, /obj/machinery/door)) && (!isnull(src.botcard)))
 		var/obj/machinery/door/D = M
-		if (!istype(D, /obj/machinery/door/firedoor) && D.check_access(src.botcard) && !istype(D,/obj/machinery/door/poddoor))
+		if (!istype(D, /obj/machinery/door/firedoor) && D.check_access(src.botcard) && !istype(D,/obj/machinery/door/blast))
 			D.open()
 			src.frustration = 0
 	else if ((istype(M, /mob/living/)) && (!src.anchored))

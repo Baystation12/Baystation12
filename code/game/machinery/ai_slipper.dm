@@ -1,7 +1,7 @@
 /obj/machinery/ai_slipper
-	name = "AI Liquid Dispenser"
+	name = "\improper AI Liquid Dispenser"
 	icon = 'icons/obj/device.dmi'
-	icon_state = "motion3"
+	icon_state = "motion0"
 	layer = 3
 	anchored = 1.0
 	var/uses = 20
@@ -13,15 +13,19 @@
 	var/cooldown_on = 0
 	req_access = list(access_ai_upload)
 
+/obj/machinery/ai_slipper/New()
+	..()
+	update_icon()
+
 /obj/machinery/ai_slipper/power_change()
-	if(stat & BROKEN)
-		return
+	..()
+	update_icon()
+
+/obj/machinery/ai_slipper/update_icon()
+	if (stat & NOPOWER || stat & BROKEN)
+		icon_state = "motion0"
 	else
-		if( powered() )
-			stat &= ~NOPOWER
-		else
-			icon_state = "motion0"
-			stat |= NOPOWER
+		icon_state = disabled ? "motion0" : "motion3"
 
 /obj/machinery/ai_slipper/proc/setState(var/enabled, var/uses)
 	src.disabled = disabled
@@ -90,7 +94,7 @@
 			return
 	if (href_list["toggleOn"])
 		src.disabled = !src.disabled
-		icon_state = src.disabled? "motion0":"motion3"
+		update_icon()
 	if (href_list["toggleUse"])
 		if(cooldown_on || disabled)
 			return

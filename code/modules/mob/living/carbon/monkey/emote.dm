@@ -31,11 +31,6 @@
 		if ("custom")
 			return custom_emote(m_type, message)
 
-		if ("chirp")
-			if(istype(src,/mob/living/carbon/monkey/diona))
-				message = "<B>The [src.name]</B> chirps!"
-				playsound(src.loc, 'sound/misc/nymphchirp.ogg', 50, 0)
-				m_type = 2
 		if("sign")
 			if (!src.restrained())
 				message = text("<B>The monkey</B> signs[].", (text2num(param) ? text(" the number []", text2num(param)) : null))
@@ -119,10 +114,7 @@
 			message = "<b>The [src.name]</b> lets out a faint chimper as it collapses and stops moving..."
 			m_type = 1
 		if("help")
-			var/text = "choke, "
-			if(istype(src,/mob/living/carbon/monkey/diona))
-				text += "chirp, "
-			text += "collapse, dance, deathgasp, drool, gasp, shiver, gnarl, jump, paw, moan, nod, roar, roll, scratch,\nscretch, shake, sign-#, sit, sulk, sway, tail, twitch, whimper"
+			text += "choke, collapse, dance, deathgasp, drool, gasp, shiver, gnarl, jump, paw, moan, nod, roar, roll, scratch,\nscretch, shake, sign-#, sit, sulk, sway, tail, twitch, whimper"
 			src << text
 		else
 			src << text("Invalid Emote: []", act)

@@ -22,7 +22,6 @@
 	anchored = 1
 	density = 1
 	var/obj/machinery/compressor/compressor
-	directwired = 1
 	var/turf/simulated/outturf
 	var/lastgen
 
@@ -30,12 +29,12 @@
 	name = "Gas turbine control computer"
 	desc = "A computer to remotely control a gas turbine"
 	icon = 'icons/obj/computer.dmi'
-	icon_state = "airtunnel0e"
+	icon_state = "turbinecomp"
 	circuit = /obj/item/weapon/circuitboard/turbine_control
 	anchored = 1
 	density = 1
 	var/obj/machinery/compressor/compressor
-	var/list/obj/machinery/door/poddoor/doors
+	var/list/obj/machinery/door/blast/doors
 	var/id = 0
 	var/door_status = 0
 
@@ -70,7 +69,7 @@
 		return
 	rpm = 0.9* rpm + 0.1 * rpmtarget
 	var/datum/gas_mixture/environment = inturf.return_air()
-	var/transfer_moles = environment.total_moles()/10
+	var/transfer_moles = environment.total_moles / 10
 	//var/transfer_moles = rpm/10000*capacity
 	var/datum/gas_mixture/removed = inturf.remove_air(transfer_moles)
 	gas_contained.merge(removed)
@@ -129,14 +128,14 @@
 	lastgen = ((compressor.rpm / TURBGENQ)**TURBGENG) *TURBGENQ
 
 	add_avail(lastgen)
-	var/newrpm = ((compressor.gas_contained.temperature) * compressor.gas_contained.total_moles())/4
+	var/newrpm = ((compressor.gas_contained.temperature) * compressor.gas_contained.total_moles)/4
 	newrpm = max(0, newrpm)
 
 	if(!compressor.starter || newrpm > 1000)
 		compressor.rpmtarget = newrpm
 
-	if(compressor.gas_contained.total_moles()>0)
-		var/oamount = min(compressor.gas_contained.total_moles(), (compressor.rpm+100)/35000*compressor.capacity)
+	if(compressor.gas_contained.total_moles>0)
+		var/oamount = min(compressor.gas_contained.total_moles, (compressor.rpm+100)/35000*compressor.capacity)
 		var/datum/gas_mixture/removed = compressor.gas_contained.remove(oamount)
 		outturf.assume_air(removed)
 
@@ -223,7 +222,7 @@
 			if(id == C.comp_id)
 				compressor = C
 		doors = new /list()
-		for(var/obj/machinery/door/poddoor/P in machines)
+		for(var/obj/machinery/door/blast/P in machines)
 			if(P.id == id)
 				doors += P
 
@@ -297,7 +296,7 @@
 		else if( href_list["str"] )
 			src.compressor.starter = !src.compressor.starter
 		else if (href_list["doors"])
-			for(var/obj/machinery/door/poddoor/D in src.doors)
+			for(var/obj/machinery/door/blast/D in src.doors)
 				if (door_status == 0)
 					spawn( 0 )
 						D.open()

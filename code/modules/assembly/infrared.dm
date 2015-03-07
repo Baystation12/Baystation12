@@ -60,7 +60,7 @@
 			var/obj/effect/beam/i_beam/I = new /obj/effect/beam/i_beam((holder ? holder.loc : loc) )
 			I.master = src
 			I.density = 1
-			I.dir = dir
+			I.set_dir(dir)
 			step(I, I.dir)
 			if(I)
 				I.density = 0
@@ -85,14 +85,14 @@
 	Move()
 		var/t = dir
 		..()
-		dir = t
+		set_dir(t)
 		del(first)
 		return
 
 
 	holder_movement()
 		if(!holder)	return 0
-//		dir = holder.dir
+//		set_dir(holder.dir)
 		del(first)
 		return 1
 
@@ -120,7 +120,7 @@
 
 
 	Topic(href, href_list)
-		..()
+		if(..()) return 1
 		if(!usr.canmove || usr.stat || usr.restrained() || !in_range(loc, usr))
 			usr << browse(null, "window=infra")
 			onclose(usr, "infra")
@@ -151,7 +151,7 @@
 		set category = "Object"
 		set src in usr
 
-		dir = turn(dir, 90)
+		set_dir(turn(dir, 90))
 		return
 
 
@@ -168,7 +168,6 @@
 	var/visible = 0.0
 	var/left = null
 	anchored = 1.0
-	flags = TABLEPASS
 
 
 /obj/effect/beam/i_beam/proc/hit()
@@ -213,7 +212,7 @@
 	var/obj/effect/beam/i_beam/I = new /obj/effect/beam/i_beam(loc)
 	I.master = master
 	I.density = 1
-	I.dir = dir
+	I.set_dir(dir)
 	//world << "created new beam \ref[I] at [I.x] [I.y] [I.z]"
 	step(I, I.dir)
 
@@ -251,7 +250,7 @@
 	hit()
 	return
 
-/obj/effect/beam/i_beam/HasEntered(atom/movable/AM as mob|obj)
+/obj/effect/beam/i_beam/Crossed(atom/movable/AM as mob|obj)
 	if(istype(AM, /obj/effect/beam))
 		return
 	spawn(0)

@@ -7,6 +7,9 @@
 /turf
 	var/image/obscured
 
+/turf/drain_power()
+	return -1
+
 /turf/proc/visibilityChanged()
 	if(ticker)
 		cameranet.updateVisibility(src)
@@ -81,6 +84,7 @@
 
 /obj/machinery/camera/deactivate(user as mob, var/choice = 1)
 	..(user, choice)
+	invalidateCameraCache()
 	if(src.can_use())
 		cameranet.addCamera(src)
 	else
@@ -89,16 +93,17 @@
 
 /obj/machinery/camera/New()
 	..()
-	cameranet.cameras += src //Camera must be added to global list of all cameras no matter what...
-	var/list/open_networks = difflist(network,RESTRICTED_CAMERA_NETWORKS) //...but if all of camera's networks are restricted, it only works for specific camera consoles.
-	if(open_networks.len) //If there is at least one open network, chunk is available for AI usage.
-		cameranet.addCamera(src)
+	//Camera must be added to global list of all cameras no matter what...
+	if(cameranet.cameras_unsorted || !ticker)
+		cameranet.cameras += src
+		cameranet.cameras_unsorted = 1
+	else
+		dd_insertObjectList(cameranet.cameras, src)
+	update_coverage(1)
 
 /obj/machinery/camera/Del()
 	cameranet.cameras -= src
-	var/list/open_networks = difflist(network,RESTRICTED_CAMERA_NETWORKS)
-	if(open_networks.len)
-		cameranet.removeCamera(src)
+	clear_all_networks()
 	..()
 
 #undef BORG_CAMERA_BUFFER

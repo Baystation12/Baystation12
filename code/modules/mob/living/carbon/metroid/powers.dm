@@ -1,157 +1,98 @@
-/mob/living/carbon/slime/verb/Feed()
-	set category = "Slime"
-	set desc = "This will let you feed on any valid creature in the surrounding area. This should also be used to halt the feeding process."
-	if(Victim)
+/mob/living/carbon/slime/proc/Wrap(var/mob/living/M) // This is a proc for the clicks
+	if (Victim == M || src == M)
 		Feedstop()
 		return
 
-	if(stat)
-		src << "<i>I must be conscious to do this...</i>"
+	if (Victim)
+		src << "I am already feeding..."
 		return
 
-	var/list/choices = list()
-	for(var/mob/living/C in view(1,src))
-		if(C!=src && !istype(C,/mob/living/carbon/slime))
-			choices += C
+	var t = invalidFeedTarget(M)
+	if (t)
+		src << t
+		return
 
-	var/mob/living/carbon/M = input(src,"Who do you wish to feed on?") in null|choices
-	if(!M) return
-	if(M in view(1, src))
+	Feedon(M)
 
-		if(!istype(src, /mob/living/carbon/brain))
-			if(!istype(M, /mob/living/carbon/slime))
-				if(stat != 2)
-					if(health > -70)
+/mob/living/carbon/slime/proc/invalidFeedTarget(var/mob/living/M)
+	if (!M || !istype(M))
+		return "This subject is incomparable..."
+	if (istype(M, /mob/living/carbon/slime)) // No cannibalism... yet
+		return "I cannot feed on other slimes..."
+	if (!Adjacent(M))
+		return "This subject is too far away..."
+	if (istype(M, /mob/living/carbon) && M.getCloneLoss() > 150 || istype(M, /mob/living/simple_animal) && M.stat == DEAD)
+		return "This subject does not have an edible life energy..."
+	for(var/mob/living/carbon/slime/met in view())
+		if(met.Victim == M && met != src)
+			return "The [met.name] is already feeding on this subject..."
+	return 0
 
-						for(var/mob/living/carbon/slime/met in view())
-							if(met.Victim == M && met != src)
-								src << "<i>The [met.name] is already feeding on this subject...</i>"
-								return
-						src << "\blue <i>I have latched onto the subject and begun feeding...</i>"
-						M << "\red <b>The [src.name] has latched onto your head!</b>"
-						Feedon(M)
-
-					else
-						src << "<i>This subject does not have a strong enough life energy...</i>"
-				else
-					src << "<i>This subject does not have an edible life energy...</i>"
-			else
-				src << "<i>I must not feed on my brothers...</i>"
-		else
-			src << "<i>This subject does not have an edible life energy...</i>"
-
-
-
-/mob/living/carbon/slime/proc/Feedon(var/mob/living/carbon/M)
+/mob/living/carbon/slime/proc/Feedon(var/mob/living/M)
 	Victim = M
-	src.loc = M.loc
+	loc = M.loc
 	canmove = 0
 	anchored = 1
-	var/lastnut = nutrition
-	//if(M.client) M << "\red You legs become paralyzed!"
-	if(istype(src, /mob/living/carbon/slime/adult))
-		icon_state = "[colour] adult slime eat"
-	else
-		icon_state = "[colour] baby slime eat"
 
-	while(Victim && M.health > -70 && stat != 2)
-		// M.canmove = 0
+	regenerate_icons()
+
+	while(Victim && !invalidFeedTarget(M) && stat != 2)
 		canmove = 0
 
-		if(M in view(1, src))
-			loc = M.loc
-
-			if(prob(15) && M.client && istype(M, /mob/living/carbon))
-				M << "\red [pick("You can feel your body becoming weak!", \
-				"You feel like you're about to die!", \
-				"You feel every part of your body screaming in agony!", \
-				"A low, rolling pain passes through your body!", \
-				"Your body feels as if it's falling apart!", \
-				"You feel extremely weak!", \
-				"A sharp, deep pain bathes every inch of your body!")]"
+		if(Adjacent(M))
+			UpdateFeed(M)
 
 			if(istype(M, /mob/living/carbon))
-				Victim.adjustCloneLoss(rand(1,10))
+				Victim.adjustCloneLoss(rand(5,6))
 				Victim.adjustToxLoss(rand(1,2))
 				if(Victim.health <= 0)
 					Victim.adjustToxLoss(rand(2,4))
 
-				// Heal yourself
-				adjustToxLoss(-10)
-				adjustOxyLoss(-10)
-				adjustBruteLoss(-10)
-				adjustFireLoss(-10)
-				adjustCloneLoss(-10)
-
-				if(Victim)
-					for(var/mob/living/carbon/slime/slime in view(1,M))
-						if(slime.Victim == M && slime != src)
-							slime.Feedstop()
-
-				nutrition += rand(10,25)
-				if(nutrition >= lastnut + 50)
-					if(prob(80))
-						lastnut = nutrition
-						powerlevel++
-						if(powerlevel > 10)
-							powerlevel = 10
-
-				if(istype(src, /mob/living/carbon/slime/adult))
-					if(nutrition > 1200)
-						nutrition = 1200
-				else
-					if(nutrition > 1000)
-						nutrition = 1000
-
-				Victim.updatehealth()
-				updatehealth()
+			else if(istype(M, /mob/living/simple_animal))
+				Victim.adjustBruteLoss(is_adult ? rand(7, 15) : rand(4, 12))
 
 			else
-				if(prob(25))
-					src << "\red <i>[pick("This subject is incompatable", \
-					"This subject does not have a life energy", "This subject is empty", \
-					"I am not satisified", "I can not feed from this subject", \
-					"I do not feel nourished", "This subject is not food")]...</i>"
+				src << "<span class='warning'>[pick("This subject is incompatable", "This subject does not have a life energy", "This subject is empty", "I am not satisified", "I can not feed from this subject", "I do not feel nourished", "This subject is not food")]...</span>"
+				Feedstop()
+				break
 
-			sleep(rand(15,45))
+			if(prob(15) && M.client && istype(M, /mob/living/carbon))
+				var/painMes = pick("You can feel your body becoming weak!", "You feel like you're about to die!", "You feel every part of your body screaming in agony!", "A low, rolling pain passes through your body!", "Your body feels as if it's falling apart!", "You feel extremely weak!", "A sharp, deep pain bathes every inch of your body!")
+				if (ishuman(M))
+					var/mob/living/carbon/human/H = M
+					H.custom_pain(painMes)
+				else if (istype(M, /mob/living/carbon))
+					var/mob/living/carbon/C = M
+					if (!(C.species && (C.species.flags & NO_PAIN)))
+						M << "<span class='danger'>[painMes]</span>"
 
+			gain_nutrition(rand(20,25))
+
+			adjustOxyLoss(-10) //Heal yourself
+			adjustBruteLoss(-10)
+			adjustFireLoss(-10)
+			adjustCloneLoss(-10)
+			updatehealth()
+			if(Victim)
+				Victim.updatehealth()
+
+			sleep(30) // Deal damage every 3 seconds
 		else
 			break
-
-	if(stat == 2)
-		if(!istype(src, /mob/living/carbon/slime/adult))
-			icon_state = "[colour] baby slime dead"
-
-	else
-		if(istype(src, /mob/living/carbon/slime/adult))
-			icon_state = "[colour] adult slime"
-		else
-			icon_state = "[colour] baby slime"
 
 	canmove = 1
 	anchored = 0
 
-	if(M)
-		if(M.health <= -70)
-			M.canmove = 0
-			if(!client)
-				if(Victim && !rabid && !attacked)
-					if(Victim.LAssailant && Victim.LAssailant != Victim)
-						if(prob(50))
-							if(!(Victim.LAssailant in Friends))
-								Friends.Add(Victim.LAssailant) // no idea why i was using the |= operator
+	if(M && invalidFeedTarget(M)) // This means that the slime drained the victim
+		if(!client)
+			if(Victim && !rabid && !attacked && Victim.LAssailant && Victim.LAssailant != Victim && prob(50))
+				if(!(Victim.LAssailant in Friends))
+					Friends[Victim.LAssailant] = 1
+				else
+					++Friends[Victim.LAssailant]
 
-			if(M.client && istype(src, /mob/living/carbon/human))
-				if(prob(85))
-					rabid = 1 // UUUNNBGHHHH GONNA EAT JUUUUUU
-
-			if(client) src << "<i>This subject does not have a strong enough life energy anymore...</i>"
 		else
-			M.canmove = 1
-
-			if(client) src << "<i>I have stopped feeding...</i>"
-	else
-		if(client) src << "<i>I have stopped feeding...</i>"
+			src << "<span class='notice'>This subject does not have a strong enough life energy anymore...</span>"
 
 	Victim = null
 
@@ -165,99 +106,63 @@
 		if(Victim == M)
 			loc = M.loc // simple "attach to head" effect!
 
-
 /mob/living/carbon/slime/verb/Evolve()
 	set category = "Slime"
 	set desc = "This will let you evolve from baby to adult slime."
 
 	if(stat)
-		src << "<i>I must be conscious to do this...</i>"
+		src << "<span class='notice'>I must be conscious to do this...</span>"
 		return
-	if(!istype(src, /mob/living/carbon/slime/adult))
+
+	if(!is_adult)
 		if(amount_grown >= 10)
-			var/mob/living/carbon/slime/adult/new_slime = new adulttype(loc)
-			new_slime.nutrition = nutrition
-			new_slime.powerlevel = max(0, powerlevel-1)
-			new_slime.a_intent = "hurt"
-			new_slime.key = key
-			new_slime.universal_speak = universal_speak
-			new_slime << "<B>You are now an adult slime.</B>"
-			del(src)
+			is_adult = 1
+			maxHealth = 200
+			amount_grown = 0
+			regenerate_icons()
+			name = text("[colour] [is_adult ? "adult" : "baby"] slime ([number])")
 		else
-			src << "<i>I am not ready to evolve yet...</i>"
+			src << "<span class='notice'>I am not ready to evolve yet...</span>"
 	else
-		src << "<i>I have already evolved...</i>"
+		src << "<span class='notice'>I have already evolved...</span>"
 
 /mob/living/carbon/slime/verb/Reproduce()
 	set category = "Slime"
-	set desc = "This will make you split into four Slimes. NOTE: this will KILL you, but you will be transferred into one of the babies."
+	set desc = "This will make you split into four Slimes."
 
 	if(stat)
-		src << "<i>I must be conscious to do this...</i>"
+		src << "<span class='notice'>I must be conscious to do this...</span>"
 		return
 
-	if(istype(src, /mob/living/carbon/slime/adult))
+	if(is_adult)
 		if(amount_grown >= 10)
-			//if(input("Are you absolutely sure you want to reproduce? Your current body will cease to be, but your consciousness will be transferred into a produced slime.") in list("Yes","No")=="Yes")
 			if(stat)
-				src << "<i>I must be conscious to do this...</i>"
+				src << "<span class='notice'>I must be conscious to do this...</span>"
 				return
 
 			var/list/babies = list()
 			var/new_nutrition = round(nutrition * 0.9)
 			var/new_powerlevel = round(powerlevel / 4)
-			for(var/i=1,i<=4,i++)
-				if(prob(80))
-					var/mob/living/carbon/slime/M = new primarytype(loc)
-					M.nutrition = new_nutrition
-					M.powerlevel = new_powerlevel
-					if(i != 1) step_away(M,src)
-					babies += M
-				else
-					var/mutations = pick("one","two","three","four")
-					switch(mutations)
-						if("one")
-							var/mob/living/carbon/slime/M = new mutationone(loc)
-							M.nutrition = new_nutrition
-							M.powerlevel = new_powerlevel
-							if(i != 1) step_away(M,src)
-							babies += M
-						if("two")
-							var/mob/living/carbon/slime/M = new mutationtwo(loc)
-							M.nutrition = new_nutrition
-							M.powerlevel = new_powerlevel
-							if(i != 1) step_away(M,src)
-							babies += M
-						if("three")
-							var/mob/living/carbon/slime/M = new mutationthree(loc)
-							M.nutrition = new_nutrition
-							M.powerlevel = new_powerlevel
-							if(i != 1) step_away(M,src)
-							babies += M
-						if("four")
-							var/mob/living/carbon/slime/M = new mutationfour(loc)
-							M.nutrition = new_nutrition
-							M.powerlevel = new_powerlevel
-							if(i != 1) step_away(M,src)
-							babies += M
+			for(var/i = 1, i <= 4, i++)
+				var/t = colour
+				if(prob(mutation_chance))
+					t = slime_mutation[rand(1,4)]
+				var/mob/living/carbon/slime/M = new /mob/living/carbon/slime/(loc, t)
+				if(ckey)	M.nutrition = new_nutrition //Player slimes are more robust at spliting. Once an oversight of poor copypasta, now a feature!
+				M.powerlevel = new_powerlevel
+				if(i != 1) step_away(M, src)
+				M.Friends = Friends.Copy()
+				babies += M
+				feedback_add_details("slime_babies_born","slimebirth_[replacetext(M.colour," ","_")]")
 
 			var/mob/living/carbon/slime/new_slime = pick(babies)
-			new_slime.a_intent = "hurt"
 			new_slime.universal_speak = universal_speak
-			new_slime.key = key
-
-			new_slime << "<B>You are now a slime!</B>"
+			if(src.mind)
+				src.mind.transfer_to(new_slime)
+			else
+				new_slime.key = src.key
 			del(src)
 		else
-			src << "<i>I am not ready to reproduce yet...</i>"
+			src << "<span class='notice'>I am not ready to reproduce yet...</span>"
 	else
-		src << "<i>I am not old enough to reproduce yet...</i>"
-
-
-
-/mob/living/carbon/slime/verb/ventcrawl()
-	set name = "Crawl through Vent"
-	set desc = "Enter an air vent and crawl through the pipe system."
-	set category = "Slime"
-	if(Victim)	return
-	handle_ventcrawl()
+		src << "<span class='notice'>I am not old enough to reproduce yet...</span>"

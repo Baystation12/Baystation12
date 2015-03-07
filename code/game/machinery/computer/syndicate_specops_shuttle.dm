@@ -11,7 +11,7 @@ var/syndicate_elite_shuttle_time = 0
 var/syndicate_elite_shuttle_timeleft = 0
 
 /obj/machinery/computer/syndicate_elite_shuttle
-	name = "Elite Syndicate Squad Shuttle Console"
+	name = "elite syndicate squad shuttle control console"
 	icon = 'icons/obj/computer.dmi'
 	icon_state = "syndishuttle"
 	req_access = list(access_cent_specops)
@@ -184,9 +184,6 @@ var/syndicate_elite_shuttle_timeleft = 0
 /obj/machinery/computer/syndicate_elite_shuttle/attack_ai(var/mob/user as mob)
 	return attack_hand(user)
 
-/obj/machinery/computer/syndicate_elite_shuttle/attack_paw(var/mob/user as mob)
-	return attack_hand(user)
-
 /obj/machinery/computer/syndicate_elite_shuttle/attackby(I as obj, user as mob)
 	if(istype(I,/obj/item/weapon/card/emag))
 		user << "\blue The electronic systems in this console are far too advanced for your primitive hacking peripherals."
@@ -221,7 +218,7 @@ var/syndicate_elite_shuttle_timeleft = 0
 
 /obj/machinery/computer/syndicate_elite_shuttle/Topic(href, href_list)
 	if(..())
-		return
+		return 1
 
 	if ((usr.contents.Find(src) || (in_range(src, usr) && istype(loc, /turf))) || (istype(usr, /mob/living/silicon)))
 		usr.set_machine(src)

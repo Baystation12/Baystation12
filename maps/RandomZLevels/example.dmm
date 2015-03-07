@@ -102,7 +102,7 @@
 "bX" = (/obj/structure/table,/obj/item/device/analyzer,/turf/simulated/floor,/area/awaymission/example)
 "bY" = (/obj/structure/table,/obj/item/weapon/rack_parts,/turf/simulated/floor,/area/awaymission/example)
 "bZ" = (/obj/structure/table,/obj/item/device/toner,/turf/simulated/floor,/area/awaymission/example)
-"ca" = (/obj/structure/table,/obj/item/weapon/wirecutters,/obj/item/weapon/cable_coil/yellow,/turf/simulated/floor,/area/awaymission/example)
+"ca" = (/obj/structure/table,/obj/item/weapon/wirecutters,/obj/item/stack/cable_coil/yellow,/turf/simulated/floor,/area/awaymission/example)
 "cb" = (/obj/structure/table,/obj/item/weapon/wrench,/turf/simulated/floor,/area/awaymission/example)
 "cc" = (/obj/machinery/vending/assist,/turf/simulated/floor,/area/awaymission/example)
 "cd" = (/obj/structure/ladder{id = "example"},/turf/simulated/floor/plating,/area/awaymission/example)

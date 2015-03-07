@@ -11,7 +11,7 @@
 	docking_program = new/datum/computer/file/embedded_program/docking/airlock(src, airlock_program)
 	program = docking_program
 
-/obj/machinery/embedded_controller/radio/airlock/docking_port/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null)
+/obj/machinery/embedded_controller/radio/airlock/docking_port/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	var/data[0]
 
 	data = list(
@@ -21,9 +21,10 @@
 		"processing" = airlock_program.memory["processing"],
 		"docking_status" = docking_program.get_docking_status(),
 		"airlock_disabled" = !(docking_program.undocked() || docking_program.override_enabled),
+		"override_enabled" = docking_program.override_enabled,
 	)
 
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data)
+	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 
 	if (!ui)
 		ui = new(user, src, ui_key, "docking_airlock_console.tmpl", name, 470, 290)
@@ -34,10 +35,10 @@
 /obj/machinery/embedded_controller/radio/airlock/docking_port/Topic(href, href_list)
 	if(..())
 		return
-	
+
 	usr.set_machine(src)
 	src.add_fingerprint(usr)
-	
+
 	var/clean = 0
 	switch(href_list["command"])	//anti-HTML-hacking checks
 		if("cycle_ext")
@@ -76,7 +77,7 @@
 		else
 			enable_override()
 		return
-	
+
 	..(command)
 	airlock_program.receive_user_command(command)	//pass along to subprograms
 
@@ -98,26 +99,35 @@
 
 //we are docked, open the doors or whatever.
 /datum/computer/file/embedded_program/docking/airlock/finish_docking()
+	airlock_program.enable_mech_regulators()
 	airlock_program.open_doors()
 
 //tell the docking port to start getting ready for undocking - e.g. close those doors.
 /datum/computer/file/embedded_program/docking/airlock/prepare_for_undocking()
 	airlock_program.stop_cycling()
 	airlock_program.close_doors()
+	airlock_program.disable_mech_regulators()
 
 //are we ready for undocking?
 /datum/computer/file/embedded_program/docking/airlock/ready_for_undocking()
-	return airlock_program.check_doors_secured()
+	var/ext_closed = airlock_program.check_exterior_door_secured()
+	var/int_closed = airlock_program.check_interior_door_secured()
+	return (ext_closed || int_closed)
 
 //An airlock controller to be used by the airlock-based docking port controller.
 //Same as a regular airlock controller but allows disabling of the regular airlock functions when docking
 /datum/computer/file/embedded_program/airlock/docking
-	
 	var/datum/computer/file/embedded_program/docking/airlock/master_prog
 
 /datum/computer/file/embedded_program/airlock/docking/receive_user_command(command)
 	if (master_prog.undocked() || master_prog.override_enabled)	//only allow the port to be used as an airlock if nothing is docked here or the override is enabled
 		..(command)
+
+/datum/computer/file/embedded_program/airlock/docking/proc/enable_mech_regulators()
+	enable_mech_regulation()
+
+/datum/computer/file/embedded_program/airlock/docking/proc/disable_mech_regulators()
+	disable_mech_regulation()
 
 /datum/computer/file/embedded_program/airlock/docking/proc/open_doors()
 	toggleDoor(memory["interior_status"], tag_interior_door, memory["secure"], "open")

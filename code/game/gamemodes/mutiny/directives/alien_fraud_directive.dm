@@ -6,12 +6,12 @@ datum/directive/terminations/alien_fraud
 
 	proc/is_alien(mob/M)
 		var/species = M.get_species()
-		return species == "Tajaran" || species == "Unathi"
+		return species == "Tajara" || species == "Unathi"
 
 datum/directive/terminations/alien_fraud/get_crew_to_terminate()
 	var/list/aliens[0]
 	for(var/mob/M in player_list)
-		if (is_alien(M) && M.is_ready())
+		if (M.is_ready() && is_alien(M) && M != mode.head_loyalist.current)
 			aliens.Add(M)
 	return aliens
 
@@ -30,7 +30,7 @@ datum/directive/terminations/alien_fraud/meets_prerequisites()
 	var/unathi = 0
 	for(var/mob/M in player_list)
 		var/species = M.get_species()
-		if(species == "Tajaran")
+		if(species == "Tajara")
 			tajarans++
 		if(species == "Unathi")
 			unathi++

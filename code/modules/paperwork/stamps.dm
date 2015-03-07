@@ -4,7 +4,6 @@
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "stamp-qm"
 	item_state = "stamp"
-	flags = FPRINT | TABLEPASS
 	throwforce = 0
 	w_class = 1.0
 	throw_speed = 7
@@ -64,6 +63,26 @@
 	icon_state = "stamp-cent"
 	item_color = "centcomm"
 
+// Syndicate stamp to forge documents.
+/obj/item/weapon/stamp/chameleon/attack_self(mob/user as mob)
 
-/obj/item/weapon/stamp/attack_paw(mob/user as mob)
-	return attack_hand(user)
+	var/list/stamp_types = typesof(/obj/item/weapon/stamp) - src.type // Get all stamp types except our own
+	var/list/stamps = list()
+
+	// Generate them into a list
+	for(var/stamp_type in stamp_types)
+		var/obj/item/weapon/stamp/S = new stamp_type
+		stamps[capitalize(S.name)] = S
+
+	var/list/show_stamps = list("EXIT" = null) + sortList(stamps) // the list that will be shown to the user to pick from
+
+	var/input_stamp = input(user, "Choose a stamp to disguise as.", "Choose a stamp.") in show_stamps
+
+	if(user && src in user.contents)
+
+		var/obj/item/weapon/stamp/chosen_stamp = stamps[capitalize(input_stamp)]
+
+		if(chosen_stamp)
+			name = chosen_stamp.name
+			icon_state = chosen_stamp.icon_state
+			item_color = chosen_stamp.item_color

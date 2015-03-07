@@ -55,7 +55,7 @@
 /datum/surgery_step/head/shape
 	allowed_tools = list(
 	/obj/item/weapon/FixOVein = 100, 	\
-	/obj/item/weapon/cable_coil = 75,	\
+	/obj/item/stack/cable_coil = 75,	\
 	/obj/item/device/assembly/mousetrap = 10) //ok chinsky
 
 	min_duration = 80
@@ -64,7 +64,7 @@
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		if(..())
 			var/datum/organ/external/affected = target.get_organ(target_zone)
-			return affected.status & ORGAN_CUT_AWAY && affected.open < 3 && !(affected.status & ORGAN_ATTACHABLE)
+			return affected.status & ORGAN_CUT_AWAY && target.op_stage.head_reattach == 0 && !(affected.status & ORGAN_ATTACHABLE)
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/datum/organ/external/affected = target.get_organ(target_zone)
@@ -73,10 +73,9 @@
 		..()
 
 	end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		var/datum/organ/external/affected = target.get_organ(target_zone)
 		user.visible_message("\blue [user] has finished repositioning flesh and tissue to something anatomically recognizable where [target]'s head used to be with \the [tool].",	\
 		"\blue You have finished repositioning flesh and tissue to something anatomically recognizable where [target]'s head used to be with \the [tool].")
-		affected.open = 3
+		target.op_stage.head_reattach = 1
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/datum/organ/external/affected = target.get_organ(target_zone)
@@ -89,7 +88,7 @@
 /datum/surgery_step/head/suture
 	allowed_tools = list(
 	/obj/item/weapon/hemostat = 100, 	\
-	/obj/item/weapon/cable_coil = 60,	\
+	/obj/item/stack/cable_coil = 60,	\
 	/obj/item/weapon/FixOVein = 80)
 
 	min_duration = 80
@@ -97,8 +96,7 @@
 
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		if(..())
-			var/datum/organ/external/affected = target.get_organ(target_zone)
-			return affected.open == 3
+			return target.op_stage.head_reattach == 1
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		user.visible_message("[user] is stapling and suturing flesh into place in [target]'s esophagal and vocal region with \the [tool].", \
@@ -106,10 +104,9 @@
 		..()
 
 	end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		var/datum/organ/external/affected = target.get_organ(target_zone)
 		user.visible_message("\blue [user] has finished stapling [target]'s neck into place with \the [tool].",	\
 		"\blue You have finished stapling [target]'s neck into place with \the [tool].")
-		affected.open = 4
+		target.op_stage.head_reattach = 2
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/datum/organ/external/affected = target.get_organ(target_zone)
@@ -122,8 +119,8 @@
 /datum/surgery_step/head/prepare
 	allowed_tools = list(
 	/obj/item/weapon/cautery = 100,			\
-	/obj/item/clothing/mask/cigarette = 75,	\
-	/obj/item/weapon/lighter = 50,			\
+	/obj/item/clothing/mask/smokable/cigarette = 75,	\
+	/obj/item/weapon/flame/lighter = 50,			\
 	/obj/item/weapon/weldingtool = 25
 	)
 
@@ -132,8 +129,7 @@
 
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		if(..())
-			var/datum/organ/external/affected = target.get_organ(target_zone)
-			return affected.open == 4
+			return target.op_stage.head_reattach == 2
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		user.visible_message("[user] starts adjusting area around [target]'s neck with \the [tool].", \
@@ -144,6 +140,7 @@
 		var/datum/organ/external/affected = target.get_organ(target_zone)
 		user.visible_message("\blue [user] has finished adjusting the area around [target]'s neck with \the [tool].",	\
 		"\blue You have finished adjusting the area around [target]'s neck with \the [tool].")
+		target.op_stage.head_reattach = 0
 		affected.status |= ORGAN_ATTACHABLE
 		affected.amputated = 1
 		affected.setAmputatedTree()
@@ -184,11 +181,11 @@
 		target.update_body()
 		target.updatehealth()
 		target.UpdateDamageIcon()
-		var/obj/item/weapon/organ/head/B = tool
-		if (B.brainmob.mind)
-			B.brainmob.mind.transfer_to(target)
-		del(B)
-
+		for(var/obj/item/organ/replacing_organ in tool)
+			replacing_organ.loc = get_turf(tool)
+			replacing_organ.replaced(target,affected)
+			del(replacing_organ) //Just in case.
+		del(tool)
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/datum/organ/external/affected = target.get_organ(target_zone)

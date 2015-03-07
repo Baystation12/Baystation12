@@ -7,9 +7,6 @@
 	var/unwrenched = 0
 	var/wait = 0
 
-/obj/machinery/pipedispenser/attack_paw(user as mob)
-	return src.attack_hand(user)
-
 /obj/machinery/pipedispenser/attack_hand(user as mob)
 	if(..())
 		return
@@ -23,21 +20,41 @@
 <A href='?src=\ref[src];make=20;dir=1'>Pipe Cap</A><BR>
 <A href='?src=\ref[src];make=19;dir=1'>4-Way Manifold</A><BR>
 <A href='?src=\ref[src];make=18;dir=1'>Manual T-Valve</A><BR>
-<A href='?src=\ref[src];make=21;dir=1'>upward Pipe</A><BR>
-<A href='?src=\ref[src];make=22;dir=1'>downward Pipe</A><BR>
+<A href='?src=\ref[src];make=43;dir=1'>Manual T-Valve - Mirrored</A><BR>
+<A href='?src=\ref[src];make=21;dir=1'>Upward Pipe</A><BR>
+<A href='?src=\ref[src];make=22;dir=1'>Downward Pipe</A><BR>
+<b>Supply pipes:</b><BR>
+<A href='?src=\ref[src];make=29;dir=1'>Pipe</A><BR>
+<A href='?src=\ref[src];make=30;dir=5'>Bent Pipe</A><BR>
+<A href='?src=\ref[src];make=33;dir=1'>Manifold</A><BR>
+<A href='?src=\ref[src];make=41;dir=1'>Pipe Cap</A><BR>
+<A href='?src=\ref[src];make=35;dir=1'>4-Way Manifold</A><BR>
+<A href='?src=\ref[src];make=37;dir=1'>Upward Pipe</A><BR>
+<A href='?src=\ref[src];make=39;dir=1'>Downward Pipe</A><BR>
+<b>Scrubbers pipes:</b><BR>
+<A href='?src=\ref[src];make=31;dir=1'>Pipe</A><BR>
+<A href='?src=\ref[src];make=32;dir=5'>Bent Pipe</A><BR>
+<A href='?src=\ref[src];make=34;dir=1'>Manifold</A><BR>
+<A href='?src=\ref[src];make=42;dir=1'>Pipe Cap</A><BR>
+<A href='?src=\ref[src];make=36;dir=1'>4-Way Manifold</A><BR>
+<A href='?src=\ref[src];make=38;dir=1'>Upward Pipe</A><BR>
+<A href='?src=\ref[src];make=40;dir=1'>Downward Pipe</A><BR>
 <b>Devices:</b><BR>
+<A href='?src=\ref[src];make=28;dir=1'>Universal pipe adapter</A><BR>
 <A href='?src=\ref[src];make=4;dir=1'>Connector</A><BR>
 <A href='?src=\ref[src];make=7;dir=1'>Unary Vent</A><BR>
 <A href='?src=\ref[src];make=9;dir=1'>Gas Pump</A><BR>
-<A href='?src=\ref[src];make=15;dir=1'>Passive Gate</A><BR>
-<A href='?src=\ref[src];make=16;dir=1'>Volume Pump</A><BR>
+<A href='?src=\ref[src];make=15;dir=1'>Pressure Regulator</A><BR>
+<A href='?src=\ref[src];make=16;dir=1'>High Power Gas Pump</A><BR>
 <A href='?src=\ref[src];make=10;dir=1'>Scrubber</A><BR>
 <A href='?src=\ref[src];makemeter=1'>Meter</A><BR>
 <A href='?src=\ref[src];make=13;dir=1'>Gas Filter</A><BR>
-<A href='?src=\ref[src];make=23;dir=1'>Gas Filter-Mirrored</A><BR>
+<A href='?src=\ref[src];make=23;dir=1'>Gas Filter - Mirrored</A><BR>
 <A href='?src=\ref[src];make=14;dir=1'>Gas Mixer</A><BR>
-<A href='?src=\ref[src];make=25;dir=1'>Gas Mixer-Mirrored</A><BR>
-<A href='?src=\ref[src];make=24;dir=1'>Gas Mixer-T</A><BR>
+<A href='?src=\ref[src];make=25;dir=1'>Gas Mixer - Mirrored</A><BR>
+<A href='?src=\ref[src];make=24;dir=1'>Gas Mixer - T</A><BR>
+<A href='?src=\ref[src];make=26;dir=1'>Omni Gas Mixer</A><BR>
+<A href='?src=\ref[src];make=27;dir=1'>Omni Gas Filter</A><BR>
 <b>Heat exchange:</b><BR>
 <A href='?src=\ref[src];make=2;dir=1'>Pipe</A><BR>
 <A href='?src=\ref[src];make=3;dir=5'>Bent Pipe</A><BR>
@@ -126,7 +143,7 @@
 
 /*
 //Allow you to push disposal pipes into it (for those with density 1)
-/obj/machinery/pipedispenser/disposal/HasEntered(var/obj/structure/disposalconstruct/pipe as obj)
+/obj/machinery/pipedispenser/disposal/Crossed(var/obj/structure/disposalconstruct/pipe as obj)
 	if(istype(pipe) && !pipe.anchored)
 		del(pipe)
 

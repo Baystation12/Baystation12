@@ -54,8 +54,7 @@
 	/obj/item/weapon/handcuffs,\
 	/obj/item/weapon/hemostat,\
 	/obj/item/weapon/kitchenknife,\
-	/obj/item/weapon/lighter,\
-	/obj/item/weapon/lighter,\
+	/obj/item/weapon/flame/lighter,\
 	/obj/item/weapon/light/bulb,\
 	/obj/item/weapon/light/tube,\
 	/obj/item/weapon/pickaxe,\
@@ -103,7 +102,7 @@
 						spawned_obj.desc += " It is made of [source_material]."
 					else
 						spawned_obj.desc = "It is made of [source_material]."
-				source_material.loc = null
+				del(source_material)
 
 			spawn_progress_time = 0
 			max_spawn_time = rand(30,100)

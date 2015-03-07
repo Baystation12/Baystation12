@@ -104,10 +104,13 @@
 		new /obj/item/device/measuring_tape(src)
 		new /obj/item/weapon/pickaxe/hand(src)
 		new /obj/item/weapon/storage/bag/fossils(src)
+		new /obj/item/weapon/hand_labeler(src)
 		return
 
 //---- Isolation room air alarms
 
 /obj/machinery/alarm/isolation
-	name = "Isolation room air control"
-	req_access = list(access_research)
+	req_one_access = list(access_research, access_atmospherics, access_engine_equip)
+
+/obj/machinery/alarm/monitor/isolation
+	req_one_access = list(access_research, access_atmospherics, access_engine_equip)

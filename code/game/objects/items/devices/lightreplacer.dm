@@ -47,7 +47,7 @@
 	icon_state = "lightreplacer0"
 	item_state = "electronic"
 
-	flags = FPRINT | CONDUCT
+	flags = CONDUCT
 	slot_flags = SLOT_BELT
 	origin_tech = "magnets=3;materials=2"
 
@@ -55,21 +55,16 @@
 	var/uses = 0
 	var/emagged = 0
 	var/failmsg = ""
-	// How much to increase per each glass?
-	var/increment = 5
-	// How much to take from the glass?
-	var/decrement = 1
-	var/charge = 1
+	var/charge = 0
 
 /obj/item/device/lightreplacer/New()
 	uses = max_uses / 2
 	failmsg = "The [name]'s refill light blinks red."
 	..()
 
-/obj/item/device/lightreplacer/examine()
-	set src in view(2)
-	..()
-	usr << "It has [uses] lights remaining."
+/obj/item/device/lightreplacer/examine(mob/user)
+	if(..(user, 2))
+		user << "It has [uses] lights remaining."
 
 /obj/item/device/lightreplacer/attackby(obj/item/W, mob/user)
 	if(istype(W,  /obj/item/weapon/card/emag) && emagged == 0)
@@ -78,18 +73,15 @@
 
 	if(istype(W, /obj/item/stack/sheet/glass))
 		var/obj/item/stack/sheet/glass/G = W
-		if(G.amount - decrement >= 0 && uses < max_uses)
-			var/remaining = max(G.amount - decrement, 0)
-			if(!remaining && !(G.amount - decrement) == 0)
-				user << "There isn't enough glass."
-				return
-			G.amount = remaining
-			if(!G.amount)
-				user.drop_item()
-				del(G)
-			AddUses(increment)
-			user << "You insert a piece of glass into the [src.name]. You have [uses] lights remaining."
+		if(uses >= max_uses)
+			user << "<span class='warning'>[src.name] is full."
 			return
+		else if(G.use(1))
+			AddUses(5)
+			user << "<span class='notice'>You insert a piece of glass into the [src.name]. You have [uses] lights remaining.</span>"
+			return
+		else
+			user << "<span class='warning'>You need one sheet of glass to replace lights.</span>"
 
 	if(istype(W, /obj/item/weapon/light))
 		var/obj/item/weapon/light/L = W
@@ -130,11 +122,11 @@
 /obj/item/device/lightreplacer/proc/AddUses(var/amount = 1)
 	uses = min(max(uses + amount, 0), max_uses)
 
-/obj/item/device/lightreplacer/proc/Charge(var/mob/user)
-	charge += 1
-	if(charge > 7)
+/obj/item/device/lightreplacer/proc/Charge(var/mob/user, var/amount = 1)
+	charge += amount
+	if(charge > 6)
 		AddUses(1)
-		charge = 1
+		charge = 0
 
 /obj/item/device/lightreplacer/proc/ReplaceLight(var/obj/machinery/light/target, var/mob/living/U)
 

@@ -29,9 +29,8 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	var/toggled = 1 	// Is it toggled on
 	var/on = 1
 	var/integrity = 100 // basically HP, loses integrity by heat
-	var/heatgen = 20 // how much heat to transfer to the environment
+	var/produces_heat = 1	//whether the machine will produce heat when on.
 	var/delay = 10 // how many process() ticks to delay per heat
-	var/heating_power = 40000
 	var/long_range_link = 0	// Can you link it across Z levels or on the otherside of the map? (Relay & Hub)
 	var/circuitboard = null // string pointing to a circuitboard type
 	var/hide = 0				// Is it a hidden machine?
@@ -65,46 +64,18 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 			if(long_range_link == 0 && machine.long_range_link == 0)
 				continue
 		// If we're sending a copy, be sure to create the copy for EACH machine and paste the data
-		var/datum/signal/copy = new
+		var/datum/signal/copy
 		if(copysig)
-
+			copy = new
 			copy.transmission_method = 2
 			copy.frequency = signal.frequency
-			// Copy the main data contents! Workaround for some nasty bug where the actual array memory is copied and not its contents.
-			copy.data = list(
-
-			"mob" = signal.data["mob"],
-			"mobtype" = signal.data["mobtype"],
-			"realname" = signal.data["realname"],
-			"name" = signal.data["name"],
-			"job" = signal.data["job"],
-			"key" = signal.data["key"],
-			"vmessage" = signal.data["vmessage"],
-			"vname" = signal.data["vname"],
-			"vmask" = signal.data["vmask"],
-			"compression" = signal.data["compression"],
-			"message" = signal.data["message"],
-			"connection" = signal.data["connection"],
-			"radio" = signal.data["radio"],
-			"slow" = signal.data["slow"],
-			"traffic" = signal.data["traffic"],
-			"type" = signal.data["type"],
-			"server" = signal.data["server"],
-			"reject" = signal.data["reject"],
-			"level" = signal.data["level"],
-			"verb" = signal.data["verb"],
-			"language" = signal.data["language"]
-			)
+			copy.data = signal.data.Copy()
 
 			// Keep the "original" signal constant
 			if(!signal.data["original"])
 				copy.data["original"] = signal
 			else
 				copy.data["original"] = signal.data["original"]
-
-		else
-			del(copy)
-
 
 		send_count++
 		if(machine.is_freq_listening(signal))
@@ -214,41 +185,53 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 /obj/machinery/telecomms/proc/checkheat()
 	// Checks heat from the environment and applies any integrity damage
 	var/datum/gas_mixture/environment = loc.return_air()
+	var/damage_chance = 0                           // Percent based chance of applying 1 integrity damage this tick
 	switch(environment.temperature)
-		if(T0C to (T20C + 20))
-			integrity = between(0, integrity, 100)
-		if((T20C + 20) to (T0C + 70))
-			integrity = max(0, integrity - 1)
-	if(delay)
-		delay--
-	else
-		// If the machine is on, ready to produce heat, and has positive traffic, genn some heat
-		if(on && traffic > 0)
-			produce_heat(heatgen)
-			delay = initial(delay)
+		if((T0C + 40) to (T0C + 70))                // 40C-70C, minor overheat, 10% chance of taking damage
+			damage_chance = 10
+		if((T0C + 70) to (T0C + 130))				// 70C-130C, major overheat, 25% chance of taking damage
+			damage_chance = 25
+		if((T0C + 130) to (T0C + 200))              // 130C-200C, dangerous overheat, 50% chance of taking damage
+			damage_chance = 50
+		if((T0C + 200) to INFINITY)					// More than 200C, INFERNO. Takes damage every tick.
+			damage_chance = 100
+	if (damage_chance && prob(damage_chance))
+		integrity = between(0, integrity - 1, 100)
 
-/obj/machinery/telecomms/proc/produce_heat(heat_amt)
-	if(heatgen == 0)
+
+	if(delay > 0)
+		delay--
+	else if(on)
+		produce_heat()
+		delay = initial(delay)
+
+
+
+/obj/machinery/telecomms/proc/produce_heat()
+	if (!produces_heat)
 		return
 
-	if(!(stat & (NOPOWER|BROKEN))) //Blatently stolen from space heater.
+	if (!use_power)
+		return
+
+	if(!(stat & (NOPOWER|BROKEN)))
 		var/turf/simulated/L = loc
 		if(istype(L))
 			var/datum/gas_mixture/env = L.return_air()
-			if(env.temperature < (heat_amt+T0C))
 
-				var/transfer_moles = 0.25 * env.total_moles()
+			var/transfer_moles = 0.25 * env.total_moles
 
-				var/datum/gas_mixture/removed = env.remove(transfer_moles)
+			var/datum/gas_mixture/removed = env.remove(transfer_moles)
 
-				if(removed)
+			if(removed)
 
-					var/heat_capacity = removed.heat_capacity()
-					if(heat_capacity == 0 || heat_capacity == null)
-						heat_capacity = 1
-					removed.temperature = min((removed.temperature*heat_capacity + heating_power)/heat_capacity, 1000)
+				var/heat_produced = idle_power_usage	//obviously can't produce more heat than the machine draws from it's power source
+				if (traffic <= 0)
+					heat_produced *= 0.30	//if idle, produce less heat.
 
-				env.merge(removed)
+				removed.add_thermal_energy(heat_produced)
+
+			env.merge(removed)
 /*
 	The receiver idles and receives messages from subspace-compatible radio equipment;
 	primarily headsets. They then just relay this information to all linked devices,
@@ -265,9 +248,9 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	density = 1
 	anchored = 1
 	use_power = 1
-	idle_power_usage = 30
+	idle_power_usage = 600
 	machinetype = 1
-	heatgen = 0
+	produces_heat = 0
 	circuitboard = "/obj/item/weapon/circuitboard/telecomms/receiver"
 
 /obj/machinery/telecomms/receiver/receive_signal(datum/signal/signal)
@@ -322,9 +305,8 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	density = 1
 	anchored = 1
 	use_power = 1
-	idle_power_usage = 80
+	idle_power_usage = 1600
 	machinetype = 7
-	heatgen = 40
 	circuitboard = "/obj/item/weapon/circuitboard/telecomms/hub"
 	long_range_link = 1
 	netspeed = 40
@@ -357,9 +339,9 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	density = 1
 	anchored = 1
 	use_power = 1
-	idle_power_usage = 30
+	idle_power_usage = 600
 	machinetype = 8
-	heatgen = 0
+	produces_heat = 0
 	circuitboard = "/obj/item/weapon/circuitboard/telecomms/relay"
 	netspeed = 5
 	long_range_link = 1
@@ -409,9 +391,8 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	density = 1
 	anchored = 1
 	use_power = 1
-	idle_power_usage = 50
+	idle_power_usage = 1000
 	machinetype = 2
-	heatgen = 20
 	circuitboard = "/obj/item/weapon/circuitboard/telecomms/bus"
 	netspeed = 40
 	var/change_frequency = 0
@@ -462,9 +443,8 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	density = 1
 	anchored = 1
 	use_power = 1
-	idle_power_usage = 30
+	idle_power_usage = 600
 	machinetype = 3
-	heatgen = 100
 	delay = 5
 	circuitboard = "/obj/item/weapon/circuitboard/telecomms/processor"
 	var/process_mode = 1 // 1 = Uncompress Signals, 0 = Compress Signals
@@ -501,9 +481,8 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	density = 1
 	anchored = 1
 	use_power = 1
-	idle_power_usage = 15
+	idle_power_usage = 300
 	machinetype = 4
-	heatgen = 50
 	circuitboard = "/obj/item/weapon/circuitboard/telecomms/server"
 	var/list/log_entries = list()
 	var/list/stored_names = list()

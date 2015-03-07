@@ -110,15 +110,15 @@
 	foldable = /obj/item/stack/sheet/cardboard //BubbleWrap
 	storage_slots = 7
 	w_class = 2
-	can_hold = list("/obj/item/weapon/pickaxe/brush",\
-	"/obj/item/weapon/pickaxe/one_pick",\
-	"/obj/item/weapon/pickaxe/two_pick",\
-	"/obj/item/weapon/pickaxe/three_pick",\
-	"/obj/item/weapon/pickaxe/four_pick",\
-	"/obj/item/weapon/pickaxe/five_pick",\
-	"/obj/item/weapon/pickaxe/six_pick")
-	max_combined_w_class = 17
-	max_w_class = 4
+	can_hold = list(/obj/item/weapon/pickaxe/brush,\
+	/obj/item/weapon/pickaxe/one_pick,\
+	/obj/item/weapon/pickaxe/two_pick,\
+	/obj/item/weapon/pickaxe/three_pick,\
+	/obj/item/weapon/pickaxe/four_pick,\
+	/obj/item/weapon/pickaxe/five_pick,\
+	/obj/item/weapon/pickaxe/six_pick)
+	max_storage_space = 18
+	max_w_class = 3
 	use_to_pickup = 1 // for picking up broken bulbs, not that most people will try
 
 /obj/item/weapon/storage/box/excavation/New()

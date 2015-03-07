@@ -111,7 +111,7 @@
 			usr << "You must unfasten the pipe before rotating it."
 			return
 
-		dir = turn(dir, -90)
+		set_dir(turn(dir, -90))
 		update()
 
 	verb/flip()
@@ -125,7 +125,7 @@
 			usr << "You must unfasten the pipe before flipping it."
 			return
 
-		dir = turn(dir, 180)
+		set_dir(turn(dir, 180))
 		switch(ptype)
 			if(2)
 				ptype = 3
@@ -205,24 +205,6 @@
 			return
 
 		var/obj/structure/disposalpipe/CP = locate() in T
-		if(ptype>=6 && ptype <= 8) // Disposal or outlet
-			if(CP) // There's something there
-				if(!istype(CP,/obj/structure/disposalpipe/trunk))
-					user << "The [nicetype] requires a trunk underneath it in order to work."
-					return
-			else // Nothing under, fuck.
-				user << "The [nicetype] requires a trunk underneath it in order to work."
-				return
-		else
-			if(CP)
-				update()
-				var/pdir = CP.dpdir
-				if(istype(CP, /obj/structure/disposalpipe/broken))
-					pdir = CP.dir
-				if(pdir & dpdir)
-					user << "There is already a [nicetype] at that location."
-					return
-
 
 		if(istype(I, /obj/item/weapon/wrench))
 			if(anchored)
@@ -234,6 +216,24 @@
 					density = 1
 				user << "You detach the [nicetype] from the underfloor."
 			else
+				if(ptype>=6 && ptype <= 8) // Disposal or outlet
+					if(CP) // There's something there
+						if(!istype(CP,/obj/structure/disposalpipe/trunk))
+							user << "The [nicetype] requires a trunk underneath it in order to work."
+							return
+					else // Nothing under, fuck.
+						user << "The [nicetype] requires a trunk underneath it in order to work."
+						return
+				else
+					if(CP)
+						update()
+						var/pdir = CP.dpdir
+						if(istype(CP, /obj/structure/disposalpipe/broken))
+							pdir = CP.dir
+						if(pdir & dpdir)
+							user << "There is already a [nicetype] at that location."
+							return
+
 				anchored = 1
 				if(ispipe)
 					level = 1 // We don't want disposal bins to disappear under the floors
@@ -260,7 +260,7 @@
 							var/obj/structure/disposalpipe/P = new pipetype(src.loc)
 							src.transfer_fingerprints_to(P)
 							P.base_icon_state = base_state
-							P.dir = dir
+							P.set_dir(dir)
 							P.dpdir = dpdir
 							P.updateicon()
 
@@ -278,7 +278,7 @@
 
 							var/obj/structure/disposaloutlet/P = new /obj/structure/disposaloutlet(src.loc)
 							src.transfer_fingerprints_to(P)
-							P.dir = dir
+							P.set_dir(dir)
 							var/obj/structure/disposalpipe/trunk/Trunk = CP
 							Trunk.linked = P
 
@@ -286,7 +286,7 @@
 
 							var/obj/machinery/disposal/deliveryChute/P = new /obj/machinery/disposal/deliveryChute(src.loc)
 							src.transfer_fingerprints_to(P)
-							P.dir = dir
+							P.set_dir(dir)
 
 						del(src)
 						return

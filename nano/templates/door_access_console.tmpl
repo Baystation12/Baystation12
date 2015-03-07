@@ -4,7 +4,7 @@
 			Exterior Door Status: 
 		</div>
 		<div class="statusValue">
-		{{if exterior_status.state == "closed"}}
+		{{if data.exterior_status.state == "closed"}}
 			Locked
 		{{else}}
 			Open
@@ -16,7 +16,7 @@
 			Interior Door Status: 
 		</div>
 		<div class="statusValue">
-		{{if interior_status.state == "closed"}}
+		{{if data.interior_status.state == "closed"}}
 			Locked
 		{{else}}
 			Open
@@ -27,15 +27,15 @@
 <div class="item" style="padding-top: 10px">
 	<div class="item">
 		<div class="itemContent" style="width: 100%">
-		{{if exterior_status.state == "open"}}
-			{{:~link('Lock Exterior Door', 'alert', {'command' : 'force_ext'}, processing ? 'disabled' : null)}}
+		{{if data.exterior_status.state == "open"}}
+			{{:helper.link('Lock Exterior Door', 'alert', {'command' : 'force_ext'}, data.processing ? 'disabled' : null)}}
 		{{else}}
-			{{:~link('Cycle to Exterior', 'arrowthickstop-1-w', {'command' : 'cycle_ext_door'}, processing ? 'disabled' : null)}}
+			{{:helper.link('Cycle to Exterior', 'arrowthickstop-1-w', {'command' : 'cycle_ext_door'}, data.processing ? 'disabled' : null)}}
 		{{/if}}
-		{{if interior_status.state == "open"}}
-			{{:~link('Lock Interior Door', 'alert', {'command' : 'force_int'}, processing ? 'disabled' : null)}}
+		{{if data.interior_status.state == "open"}}
+			{{:helper.link('Lock Interior Door', 'alert', {'command' : 'force_int'}, data.processing ? 'disabled' : null)}}
 		{{else}}
-			{{:~link('Cycle to Interior', 'arrowthickstop-1-e', {'command' : 'cycle_int_door'}, processing ? 'disabled' : null)}}
+			{{:helper.link('Cycle to Interior', 'arrowthickstop-1-e', {'command' : 'cycle_int_door'}, data.processing ? 'disabled' : null)}}
 		{{/if}}
 		</div>
 	</div>

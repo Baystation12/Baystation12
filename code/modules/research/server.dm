@@ -9,8 +9,8 @@
 	var/id_with_upload_string = ""		//String versions for easy editing in map editor.
 	var/id_with_download_string = ""
 	var/server_id = 0
-	var/heat_gen = 100
-	var/heating_power = 40000
+	var/produces_heat = 1
+	idle_power_usage = 800
 	var/delay = 10
 	req_access = list(access_rd) //Only the R&D can change server settings.
 
@@ -19,8 +19,8 @@
 	component_parts = list()
 	component_parts += new /obj/item/weapon/circuitboard/rdserver(src)
 	component_parts += new /obj/item/weapon/stock_parts/scanning_module(src)
-	component_parts += new /obj/item/weapon/cable_coil(src)
-	component_parts += new /obj/item/weapon/cable_coil(src)
+	component_parts += new /obj/item/stack/cable_coil(src)
+	component_parts += new /obj/item/stack/cable_coil(src)
 	RefreshParts()
 	src.initialize(); //Agouri
 
@@ -32,7 +32,7 @@
 	var/tot_rating = 0
 	for(var/obj/item/weapon/stock_parts/SP in src)
 		tot_rating += SP.rating
-	heat_gen /= max(1, tot_rating)
+	idle_power_usage /= max(1, tot_rating)
 
 /obj/machinery/r_n_d/server/initialize()
 	if(!files) files = new /datum/research(src)
@@ -67,7 +67,7 @@
 	if(delay)
 		delay--
 	else
-		produce_heat(heat_gen)
+		produce_heat()
 		delay = initial(delay)
 
 /obj/machinery/r_n_d/server/meteorhit(var/obj/O as obj)
@@ -100,25 +100,28 @@
 			C.files.AddDesign2Known(D)
 		C.files.RefreshResearch()
 
-/obj/machinery/r_n_d/server/proc/produce_heat(heat_amt)
-	if(!(stat & (NOPOWER|BROKEN))) //Blatently stolen from space heater.
+/obj/machinery/r_n_d/server/proc/produce_heat()
+	if (!produces_heat)
+		return
+
+	if (!use_power)
+		return
+
+	if(!(stat & (NOPOWER|BROKEN))) //Blatently stolen from telecoms
 		var/turf/simulated/L = loc
 		if(istype(L))
 			var/datum/gas_mixture/env = L.return_air()
-			if(env.temperature < (heat_amt+T0C))
 
-				var/transfer_moles = 0.25 * env.total_moles()
+			var/transfer_moles = 0.25 * env.total_moles
 
-				var/datum/gas_mixture/removed = env.remove(transfer_moles)
+			var/datum/gas_mixture/removed = env.remove(transfer_moles)
 
-				if(removed)
+			if(removed)
+				var/heat_produced = idle_power_usage	//obviously can't produce more heat than the machine draws from it's power source
 
-					var/heat_capacity = removed.heat_capacity()
-					if(heat_capacity == 0 || heat_capacity == null)
-						heat_capacity = 1
-					removed.temperature = min((removed.temperature*heat_capacity + heating_power)/heat_capacity, 1000)
+				removed.add_thermal_energy(heat_produced)
 
-				env.merge(removed)
+			env.merge(removed)
 
 /obj/machinery/r_n_d/server/attackby(var/obj/item/O as obj, var/mob/user as mob)
 	if (disabled)
@@ -126,16 +129,16 @@
 	if (shocked)
 		shock(user,50)
 	if (istype(O, /obj/item/weapon/screwdriver))
-		if (!opened)
-			opened = 1
+		if (!panel_open)
+			panel_open = 1
 			icon_state = "server_o"
 			user << "You open the maintenance hatch of [src]."
 		else
-			opened = 0
+			panel_open = 0
 			icon_state = "server"
 			user << "You close the maintenance hatch of [src]."
 		return
-	if (opened)
+	if (panel_open)
 		if(istype(O, /obj/item/weapon/crowbar))
 			griefProtection()
 			playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)
@@ -202,7 +205,7 @@
 
 /obj/machinery/computer/rdservercontrol/Topic(href, href_list)
 	if(..())
-		return
+		return 1
 
 	add_fingerprint(usr)
 	usr.set_machine(src)

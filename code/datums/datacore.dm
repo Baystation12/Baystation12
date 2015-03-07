@@ -51,8 +51,8 @@
 			assignment = "Unassigned"
 
 		var/id = add_zero(num2hex(rand(1, 1.6777215E7)), 6)	//this was the best they could come up with? A large random number? *sigh*
-
-
+		var/icon/front = new(get_id_photo(H), dir = SOUTH)
+		var/icon/side = new(get_id_photo(H), dir = WEST)
 		//General Record
 		var/datum/data/record/G = new()
 		G.fields["id"]			= id
@@ -65,7 +65,12 @@
 		G.fields["m_stat"]		= "Stable"
 		G.fields["sex"]			= H.gender
 		G.fields["species"]		= H.get_species()
-		G.fields["photo"]		= get_id_photo(H)
+		G.fields["home_system"]	= H.home_system
+		G.fields["citizenship"]	= H.citizenship
+		G.fields["faction"]		= H.personal_faction
+		G.fields["religion"]	= H.religion
+		G.fields["photo_front"]	= front
+		G.fields["photo_side"]	= side
 		if(H.gen_record && !jobban_isbanned(H, "Records"))
 			G.fields["notes"] = H.gen_record
 		else
@@ -114,12 +119,22 @@
 		L.fields["name"]		= H.real_name
 		L.fields["rank"] 		= H.mind.assigned_role
 		L.fields["age"]			= H.age
+		L.fields["fingerprint"]	= md5(H.dna.uni_identity)
 		L.fields["sex"]			= H.gender
 		L.fields["b_type"]		= H.b_type
 		L.fields["b_dna"]		= H.dna.unique_enzymes
 		L.fields["enzymes"]		= H.dna.SE // Used in respawning
 		L.fields["identity"]	= H.dna.UI // "
-		L.fields["image"]		= getFlatIcon(H,0)	//This is god-awful
+		L.fields["species"]		= H.get_species()
+		L.fields["home_system"]	= H.home_system
+		L.fields["citizenship"]	= H.citizenship
+		L.fields["faction"]		= H.personal_faction
+		L.fields["religion"]	= H.religion
+		L.fields["image"]		= getFlatIcon(H)	//This is god-awful
+		if(H.exploit_record && !jobban_isbanned(H, "Records"))
+			L.fields["exploit_record"] = H.exploit_record
+		else
+			L.fields["exploit_record"] = "No additional information acquired."
 		locked += L
 	return
 
@@ -146,9 +161,9 @@ proc/get_id_photo(var/mob/living/carbon/human/H)
 		if(E.status & ORGAN_ROBOT)
 			temp.MapColors(rgb(77,77,77), rgb(150,150,150), rgb(28,28,28), rgb(0,0,0))
 		preview_icon.Blend(temp, ICON_OVERLAY)
-	
+
 	//Tail
-	if(H.species.tail && H.species.flags & HAS_TAIL)
+	if(H.species.tail)
 		temp = new/icon("icon" = 'icons/effects/species.dmi', "icon_state" = "[H.species.tail]_s")
 		preview_icon.Blend(temp, ICON_OVERLAY)
 
@@ -166,7 +181,8 @@ proc/get_id_photo(var/mob/living/carbon/human/H)
 
 	var/icon/eyes_s = new/icon("icon" = 'icons/mob/human_face.dmi', "icon_state" = H.species ? H.species.eyes : "eyes_s")
 
-	eyes_s.Blend(rgb(H.r_eyes, H.g_eyes, H.b_eyes), ICON_ADD)
+	if (H.species.flags & HAS_EYE_COLOR)
+		eyes_s.Blend(rgb(H.r_eyes, H.g_eyes, H.b_eyes), ICON_ADD)
 
 	var/datum/sprite_accessory/hair_style = hair_styles_list[H.h_style]
 	if(hair_style)
@@ -188,7 +204,7 @@ proc/get_id_photo(var/mob/living/carbon/human/H)
 		if("Bartender")
 			clothes_s = new /icon('icons/mob/uniform.dmi', "ba_suit_s")
 			clothes_s.Blend(new /icon('icons/mob/feet.dmi', "black"), ICON_UNDERLAY)
-		if("Botanist")
+		if("Gardener")
 			clothes_s = new /icon('icons/mob/uniform.dmi', "hydroponics_s")
 			clothes_s.Blend(new /icon('icons/mob/feet.dmi', "black"), ICON_UNDERLAY)
 		if("Chef")

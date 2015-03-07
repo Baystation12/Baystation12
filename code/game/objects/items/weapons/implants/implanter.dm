@@ -47,7 +47,7 @@
 						affected.implants += src.imp
 						imp.part = affected
 
-						H.hud_updateflag |= 1 << IMPLOYAL_HUD
+						BITSET(H.hud_updateflag, IMPLOYAL_HUD)
 
 				src.imp = null
 				update()
@@ -64,8 +64,6 @@
 	..()
 	update()
 	return
-
-
 
 /obj/item/weapon/implanter/explosive
 	name = "implanter (E)"
@@ -114,7 +112,9 @@
 		return
 	..()
 
-/obj/item/weapon/implanter/compressed/afterattack(atom/A, mob/user as mob)
+/obj/item/weapon/implanter/compressed/afterattack(atom/A, mob/user as mob, proximity)
+	if(!proximity)
+		return
 	if(istype(A,/obj/item) && imp)
 		var/obj/item/weapon/implant/compressed/c = imp
 		if (c.scanned)

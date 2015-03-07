@@ -1,7 +1,7 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:31
 
 /obj/machinery/computer/card
-	name = "Identification Computer"
+	name = "\improper ID card modification console"
 	desc = "Terminal for programming NanoTrasen employee ID cards to access parts of the station."
 	icon_state = "id"
 	req_access = list(access_change_ids)
@@ -11,24 +11,47 @@
 	var/mode = 0.0
 	var/printing = null
 
-	proc/is_centcom()
-		return istype(src, /obj/machinery/computer/card/centcom)
+/obj/machinery/computer/card/proc/is_centcom()
+	return 0
 
-	proc/is_authenticated()
-		return scan ? check_access(scan) : 0
+/obj/machinery/computer/card/proc/is_authenticated()
+	return scan ? check_access(scan) : 0
 
-	proc/get_target_rank()
-		return modify && modify.assignment ? modify.assignment : "Unassigned"
+/obj/machinery/computer/card/proc/get_target_rank()
+	return modify && modify.assignment ? modify.assignment : "Unassigned"
 
-	proc/format_jobs(list/jobs)
-		var/list/formatted = list()
-		for(var/job in jobs)
-			formatted.Add(list(list(
-				"display_name" = replacetext(job, " ", "&nbsp"),
-				"target_rank" = get_target_rank(),
-				"job" = job)))
+/obj/machinery/computer/card/proc/format_jobs(list/jobs)
+	var/list/formatted = list()
+	for(var/job in jobs)
+		formatted.Add(list(list(
+			"display_name" = replacetext(job, " ", "&nbsp"),
+			"target_rank" = get_target_rank(),
+			"job" = job)))
 
-		return formatted
+	return formatted
+
+/obj/machinery/computer/card/verb/eject_id()
+	set category = "Object"
+	set name = "Eject ID Card"
+	set src in oview(1)
+
+	if(!usr || usr.stat || usr.lying)	return
+
+	if(scan)
+		usr << "You remove \the [scan] from \the [src]."
+		scan.loc = get_turf(src)
+		if(!usr.get_active_hand() && istype(usr,/mob/living/carbon/human))
+			usr.put_in_hands(scan)
+		scan = null
+	else if(modify)
+		usr << "You remove \the [modify] from \the [src]."
+		modify.loc = get_turf(src)
+		if(!usr.get_active_hand() && istype(usr,/mob/living/carbon/human))
+			usr.put_in_hands(modify)
+		modify = null
+	else
+		usr << "There is nothing to remove from the console."
+	return
 
 /obj/machinery/computer/card/attackby(obj/item/weapon/card/id/id_card, mob/user)
 	if(!istype(id_card))
@@ -49,15 +72,12 @@
 /obj/machinery/computer/card/attack_ai(var/mob/user as mob)
 	return attack_hand(user)
 
-/obj/machinery/computer/card/attack_paw(var/mob/user as mob)
-	return attack_hand(user)
-
 /obj/machinery/computer/card/attack_hand(mob/user as mob)
 	if(..()) return
 	if(stat & (NOPOWER|BROKEN)) return
 	ui_interact(user)
 
-/obj/machinery/computer/card/ui_interact(mob/user, ui_key="main", datum/nanoui/ui=null)
+/obj/machinery/computer/card/ui_interact(mob/user, ui_key="main", var/datum/nanoui/ui = null, var/force_open = 1)
 	user.set_machine(src)
 
 	var/data[0]
@@ -110,7 +130,7 @@
 
 		data["regions"] = regions
 
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data)
+	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "identification_computer.tmpl", src.name, 600, 700)
 		ui.set_initial_data(data)
@@ -171,7 +191,7 @@
 			if (is_authenticated() && modify)
 				var/t1 = href_list["assign_target"]
 				if(t1 == "Custom")
-					var/temp_t = copytext(sanitize(input("Enter a custom job assignment.","Assignment")),1,45)
+					var/temp_t = sanitize(copytext(input("Enter a custom job assignment.","Assignment"),1,45))
 					//let custom jobs function as an impromptu alt title, mainly for sechuds
 					if(temp_t && modify)
 						modify.assignment = temp_t
@@ -262,6 +282,10 @@
 	return 1
 
 /obj/machinery/computer/card/centcom
-	name = "CentCom Identification Computer"
+	name = "\improper CentCom ID card modification console"
 	circuit = "/obj/item/weapon/circuitboard/card/centcom"
 	req_access = list(access_cent_captain)
+
+
+/obj/machinery/computer/card/centcom/is_centcom()
+	return 1

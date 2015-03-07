@@ -1,5 +1,4 @@
 
-
 //This is a list of words which are ignored by the parser when comparing message contents for names. MUST BE IN LOWER CASE!
 var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","alien","as")
 
@@ -15,25 +14,19 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 	if(prefs.muted & MUTE_ADMINHELP)
 		src << "<font color='red'>Error: Admin-PM: You cannot send adminhelps (Muted).</font>"
 		return
-	if(src.handle_spam_prevention(msg,MUTE_ADMINHELP))
-		return
 
 	adminhelped = 1 //Determines if they get the message to reply by clicking the name.
 
-	/**src.verbs -= /client/verb/adminhelp
-
-	spawn(1200)
-		src.verbs += /client/verb/adminhelp	// 2 minute cool-down for adminhelps
-		src.verbs += /client/verb/adminhelp	// 2 minute cool-down for adminhelps//Go to hell
-	**/
+	if(src.handle_spam_prevention(msg,MUTE_ADMINHELP))
+		return
 
 	//clean the input msg
-	if(!msg)	return
+	if(!msg)
+		return
 	msg = sanitize(copytext(msg,1,MAX_MESSAGE_LEN))
-	if(!msg)	return
+	if(!msg)
+		return
 	var/original_msg = msg
-
-	
 
 	//explode the input msg into a list
 	var/list/msglist = text2list(msg, " ")
@@ -88,32 +81,41 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 							continue
 			msg += "[original_word] "
 
-	if(!mob)	return						//this doesn't happen
+	if(!mob) //this doesn't happen
+		return
 
-	var/ref_mob = "\ref[mob]"
-	msg = "\blue <b><font color=red>HELP: </font>[get_options_bar(mob, 2, 1, 1)][ai_found ? " (<A HREF='?_src_=holder;adminchecklaws=[ref_mob]'>CL</A>)" : ""]:</b> [msg]"
+	var/ai_cl
+	if(ai_found)
+		ai_cl = " (<A HREF='?_src_=holder;adminchecklaws=\ref[mob]'>CL</A>)"
 
-	//send this msg to all admins
+			//Options bar:  mob, details ( admin = 2, dev = 3, mentor = 4, character name (0 = just ckey, 1 = ckey and character name), link? (0 no don't make it a link, 1 do so), 
+			//		highlight special roles (0 = everyone has same looking name, 1 = antags / special roles get a golden name)
+
+	var/mentor_msg = "\blue <b><font color=red>Request for Help: </font>[get_options_bar(mob, 4, 1, 1, 0)][ai_cl]:</b> [msg]"
+	msg = "\blue <b><font color=red>Request for Help:: </font>[get_options_bar(mob, 2, 1, 1)][ai_cl]:</b> [msg]"
+
 	var/admin_number_afk = 0
+
 	for(var/client/X in admins)
 		if((R_ADMIN|R_MOD|R_MENTOR) & X.holder.rights)
 			if(X.is_afk())
 				admin_number_afk++
 			if(X.prefs.toggles & SOUND_ADMINHELP)
 				X << 'sound/effects/adminhelp.ogg'
-			X << msg
+			if(X.holder.rights == R_MENTOR)
+				X << mentor_msg		// Mentors won't see coloring of names on people with special_roles (Antags, etc.)
+			else
+				X << msg
 
 	//show it to the person adminhelping too
-	src << "<font color='blue'>PM to-<b>Admins</b>: [original_msg]</font>"
+	src << "<font color='blue'>PM to-<b>Staff </b>: [original_msg]</font>"
 
 	var/admin_number_present = admins.len - admin_number_afk
 	log_admin("HELP: [key_name(src)]: [original_msg] - heard by [admin_number_present] non-AFK admins.")
 	if(admin_number_present <= 0)
-		if(!admin_number_afk)
-			send2adminirc("ADMINHELP from [key_name(src)]: [html_decode(original_msg)] - !!No admins online!!")
-		else
-			send2adminirc("ADMINHELP from [key_name(src)]: [html_decode(original_msg)] - !!All admins AFK ([admin_number_afk])!!")
+		send2adminirc("Request for Help from [key_name(src)]: [html_decode(original_msg)] - !![admin_number_afk ? "All admins AFK ([admin_number_afk])" : "No admins online"]!!")
 	else
-		send2adminirc("ADMINHELP from [key_name(src)]: [html_decode(original_msg)]")
+		send2adminirc("Request for Help from [key_name(src)]: [html_decode(original_msg)]")
 	feedback_add_details("admin_verb","AH") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	return
+

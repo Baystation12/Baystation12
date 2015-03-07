@@ -31,6 +31,10 @@
 		if(1 to 4)	overlays += "phoron-[phorontanks]"
 		if(5 to INFINITY) overlays += "phoron-5"
 
+/obj/structure/dispenser/attack_ai(mob/user as mob)
+	if(user.Adjacent(src))
+		return attack_hand(user)
+	..()
 
 /obj/structure/dispenser/attack_hand(mob/user as mob)
 	user.set_machine(src)
@@ -50,6 +54,8 @@
 			oxytanks.Add(I)
 			oxygentanks++
 			user << "<span class='notice'>You put [I] in [src].</span>"
+			if(oxygentanks < 5)
+				update_icon()
 		else
 			user << "<span class='notice'>[src] is full.</span>"
 		updateUsrDialog()
@@ -61,6 +67,8 @@
 			platanks.Add(I)
 			phorontanks++
 			user << "<span class='notice'>You put [I] in [src].</span>"
+			if(oxygentanks < 6)
+				update_icon()
 		else
 			user << "<span class='notice'>[src] is full.</span>"
 		updateUsrDialog()

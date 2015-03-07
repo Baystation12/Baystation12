@@ -1,81 +1,101 @@
-/* Table parts and rack parts
- * Contains:
- *		Table Parts
- *		Reinforced Table Parts
- *		Wooden Table Parts
- *		Rack Parts
- */
+// Table parts and rack parts
 
+/obj/item/weapon/table_parts
+	name = "table parts"
+	desc = "Parts of a table. Poor table."
+	gender = PLURAL
+	icon = 'icons/obj/items.dmi'
+	icon_state = "table_parts"
+	matter = list("metal" = 3750)
+	flags = CONDUCT
+	attack_verb = list("slammed", "bashed", "battered", "bludgeoned", "thrashed", "whacked")
 
+	var/build_type = /obj/structure/table
+	var/alter_type = /obj/item/weapon/table_parts/reinforced
+	var/alter_with = /obj/item/stack/rods
+	var/alter_cost = 4
+	var/list/stack_types = list(/obj/item/stack/sheet/metal)
 
-/*
- * Table Parts
- */
 /obj/item/weapon/table_parts/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	..()
 	if (istype(W, /obj/item/weapon/wrench))
-		new /obj/item/stack/sheet/metal( user.loc )
-		//SN src = null
-		del(src)
-	if (istype(W, /obj/item/stack/rods))
-		if (W:amount >= 4)
-			new /obj/item/weapon/table_parts/reinforced( user.loc )
-			user << "\blue You reinforce the [name]."
-			W:use(4)
-			del(src)
-		else if (W:amount < 4)
-			user << "\red You need at least four rods to do this."
-
-/obj/item/weapon/table_parts/attack_self(mob/user as mob)
-	new /obj/structure/table( user.loc )
-	user.drop_item()
-	del(src)
-	return
-
-
-/*
- * Reinforced Table Parts
- */
-/obj/item/weapon/table_parts/reinforced/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if (istype(W, /obj/item/weapon/wrench))
-		new /obj/item/stack/sheet/metal( user.loc )
-		new /obj/item/stack/rods( user.loc )
-		del(src)
-
-/obj/item/weapon/table_parts/reinforced/attack_self(mob/user as mob)
-	new /obj/structure/table/reinforced( user.loc )
-	user.drop_item()
-	del(src)
-	return
-
-/*
- * Wooden Table Parts
- */
-/obj/item/weapon/table_parts/wood/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if (istype(W, /obj/item/weapon/wrench))
-		new /obj/item/stack/sheet/wood( user.loc )
-		del(src)
-
-/obj/item/weapon/table_parts/wood/attack_self(mob/user as mob)
-	new /obj/structure/table/woodentable( user.loc )
-	user.drop_item()
-	del(src)
-	return
-
-/*
- * Rack Parts
- */
-/obj/item/weapon/rack_parts/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	..()
-	if (istype(W, /obj/item/weapon/wrench))
-		new /obj/item/stack/sheet/metal( user.loc )
+		for(var/material_type in stack_types)
+			new material_type(get_turf(user))
 		del(src)
 		return
-	return
+	else
+		if(alter_type && alter_with && istype(W,alter_with))
+			var/obj/item/stack/R = W
+			if (R.use(alter_cost))
+				var/obj/item/new_parts = new alter_type (get_turf(loc))
+				user << "<span class='notice'>You modify \the [name] into \a [new_parts].</span>"
+				del(src)
+			else
+				user << "<span class='warning'>You need at least [alter_cost] sheets to reinforce the [name].</span>"
+			return
+	..()
 
-/obj/item/weapon/rack_parts/attack_self(mob/user as mob)
-	var/obj/structure/rack/R = new /obj/structure/rack( user.loc )
-	R.add_fingerprint(user)
+/obj/item/weapon/table_parts/attack_self(mob/user as mob)
+	if(locate(/obj/structure/table) in user.loc)
+		user << "<span class='warning'>There is already a table here.</span>"
+		return
+
+	new build_type( user.loc )
 	user.drop_item()
 	del(src)
 	return
+
+/obj/item/weapon/table_parts/reinforced
+	name = "reinforced table parts"
+	desc = "Hard table parts. Well... harder."
+	icon = 'icons/obj/items.dmi'
+	icon_state = "reinf_tableparts"
+	matter = list("metal" = 7500)
+	flags = CONDUCT
+
+	stack_types = list(/obj/item/stack/sheet/metal, /obj/item/stack/rods)
+	build_type = /obj/structure/table/reinforced
+	alter_type = null
+	alter_with = null
+	alter_cost = null
+
+/obj/item/weapon/table_parts/wood
+	name = "wooden table parts"
+	desc = "Keep away from fire."
+	icon_state = "wood_tableparts"
+	flags = null
+
+	stack_types = list(/obj/item/stack/sheet/wood)
+	build_type = /obj/structure/table/woodentable
+	alter_type = /obj/item/weapon/table_parts/gambling
+	alter_with = /obj/item/stack/tile/carpet
+	alter_cost = 1
+
+/obj/item/weapon/table_parts/gambling
+	name = "gambling table parts"
+	desc = "Keep away from security."
+	icon_state = "gamble_tableparts"
+	flags = null
+
+	stack_types = list(/obj/item/stack/tile/carpet,/obj/item/stack/sheet/wood)
+	build_type = /obj/structure/table/gamblingtable
+	alter_type = null
+	alter_with = null
+	alter_cost = null
+
+/obj/item/weapon/table_parts/gambling/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	if (istype(W, /obj/item/weapon/crowbar))
+		new /obj/item/stack/tile/carpet( get_turf(loc) )
+		new /obj/item/weapon/table_parts/wood( get_turf(loc) )
+		user << "<span class='notice'>You pry the carpet out of the table.</span>"
+		del(src)
+	..()
+
+/obj/item/weapon/table_parts/rack
+	name = "rack parts"
+	desc = "Parts of a rack."
+	icon_state = "rack_parts"
+	stack_types = list(/obj/item/stack/sheet/metal)
+	build_type = /obj/structure/table/rack
+	alter_type = null
+	alter_with = null
+	alter_cost = null

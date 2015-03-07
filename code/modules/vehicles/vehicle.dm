@@ -1,3 +1,9 @@
+//Dummy object for holding items in vehicles.
+//Prevents items from being interacted with.
+/datum/vehicle_dummy_load
+	var/name = "dummy load"
+	var/actual_load
+
 /obj/vehicle
 	name = "vehicle"
 	icon = 'icons/obj/vehicles.dmi'
@@ -6,6 +12,10 @@
 	anchored = 1
 	animate_movement=1
 	luminosity = 3
+
+	can_buckle = 1
+	buckle_movable = 1
+	buckle_lying = 0
 
 	var/attack_log = null
 	var/on = 0
@@ -21,13 +31,13 @@
 	var/move_delay = 1	//set this to limit the speed of the vehicle
 
 	var/obj/item/weapon/cell/cell
-	var/power_use = 5	//set this to adjust the amount of power the vehicle uses per move
+	var/charge_use = 5	//set this to adjust the amount of power the vehicle uses per move
 
-	var/standing_mob = 0		//if a mob loaded on the vehicle should be standing
 	var/atom/movable/load		//all vehicles can take a load, since they should all be a least drivable
 	var/load_item_visible = 1	//set if the loaded item should be overlayed on the vehicle sprite
 	var/load_offset_x = 0		//pixel_x offset for item overlay
 	var/load_offset_y = 0		//pixel_y offset for item overlay
+	var/mob_offset_y = 0		//pixel_y offset for mob overlay
 
 //-------------------------------------------
 // Standard procs
@@ -38,25 +48,35 @@
 
 /obj/vehicle/Move()
 	if(world.time > l_move_time + move_delay)
-		if(on && powered && cell.charge < power_use)
+		var/old_loc = get_turf(src)
+		if(on && powered && cell.charge < charge_use)
 			turn_off()
 
 		var/init_anc = anchored
 		anchored = 0
-		if(..())
-			if(on && powered)
-				cell.use(power_use)
+		if(!..())
+			anchored = init_anc
+			return 0
+
+		set_dir(get_dir(old_loc, loc))
 		anchored = init_anc
-		
-		if(load)
-			load.loc = loc
-			load.dir = dir
+
+		if(on && powered)
+			cell.use(charge_use)
+
+		//Dummy loads do not have to be moved as they are just an overlay
+		//See load_object() proc in cargo_trains.dm for an example
+		if(load && !istype(load, /datum/vehicle_dummy_load))
+			load.forceMove(loc)
+			load.set_dir(dir)
 
 		return 1
 	else
 		return 0
 
 /obj/vehicle/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	if(istype(W, /obj/item/weapon/hand_labeler))
+		return
 	if(istype(W, /obj/item/weapon/screwdriver))
 		if(!locked)
 			open = !open
@@ -93,17 +113,9 @@
 	else
 		..()
 
-/obj/vehicle/attack_animal(var/mob/living/simple_animal/M as mob)
-	if(M.melee_damage_upper == 0)	return
-	health -= M.melee_damage_upper
-	src.visible_message("\red <B>[M] has [M.attacktext] [src]!</B>")
-	M.attack_log += text("\[[time_stamp()]\] <font color='red'>attacked [src.name]</font>")
-	if(prob(10))
-		new /obj/effect/decal/cleanable/blood/oil(src.loc)
-	healthcheck()
-
 /obj/vehicle/bullet_act(var/obj/item/projectile/Proj)
-	health -= Proj.damage
+	if (Proj.damage_type == BRUTE || Proj.damage_type == BURN)
+		health -= Proj.damage
 	..()
 	healthcheck()
 
@@ -142,7 +154,7 @@
 	pulse2.icon_state = "empdisable"
 	pulse2.name = "emp sparks"
 	pulse2.anchored = 1
-	pulse2.dir = pick(cardinal)
+	pulse2.set_dir(pick(cardinal))
 
 	spawn(10)
 		pulse2.delete()
@@ -156,6 +168,9 @@
 /obj/vehicle/attack_ai(mob/user as mob)
 	return
 
+// For downstream compatibility (in particular Paradise)
+/obj/vehicle/proc/handle_rotation()
+	return
 
 //-------------------------------------------
 // Vehicle procs
@@ -163,7 +178,7 @@
 /obj/vehicle/proc/turn_on()
 	if(stat)
 		return 0
-	if(powered && cell.charge < power_use)
+	if(powered && cell.charge < charge_use)
 		return 0
 	on = 1
 	luminosity = initial(luminosity)
@@ -188,12 +203,17 @@
 
 	new /obj/item/stack/rods(Tsec)
 	new /obj/item/stack/rods(Tsec)
-	new /obj/item/weapon/cable_coil/cut(Tsec)
+	new /obj/item/stack/cable_coil/cut(Tsec)
 
 	if(cell)
-		cell.loc = Tsec
+		cell.forceMove(Tsec)
 		cell.update_icon()
 		cell = null
+
+	//stuns people who are thrown off a train that has been blown up
+	if(istype(load, /mob/living))
+		var/mob/living/M = load
+		M.apply_effects(5, 5)
 
 	unload()
 
@@ -214,7 +234,7 @@
 		turn_off()
 		return
 
-	if(cell.charge < power_use)
+	if(cell.charge < charge_use)
 		turn_off()
 		return
 
@@ -229,8 +249,8 @@
 		return
 
 	H.drop_from_inventory(C)
+	C.forceMove(src)
 	cell = C
-	C.loc = null	//this wont be GC'd since it's referrenced above
 	powercheck()
 	usr << "<span class='notice'>You install [C] in [src].</span>"
 
@@ -239,7 +259,8 @@
 		return
 
 	usr << "<span class='notice'>You remove [cell] from [src].</span>"
-	cell.loc = get_turf(H)
+	cell.forceMove(get_turf(H))
+	H.put_in_hands(cell)
 	cell = null
 	powercheck()
 
@@ -254,8 +275,8 @@
 // calling this parent proc.
 //-------------------------------------------
 /obj/vehicle/proc/load(var/atom/movable/C)
-	//define allowed items for loading in specific vehicle definitions
-
+	//This loads objects onto the vehicle so they can still be interacted with.
+	//Define allowed items for loading in specific vehicle definitions.
 	if(!isturf(C.loc)) //To prevent loading things from someone's inventory, which wouldn't get handled properly.
 		return 0
 	if(load || C.anchored)
@@ -266,21 +287,22 @@
 	if(istype(crate))
 		crate.close()
 
-	C.loc = loc
-	C.dir = dir
+	C.forceMove(loc)
+	C.set_dir(dir)
 	C.anchored = 1
 
 	load = C
 
 	if(load_item_visible)
 		C.pixel_x += load_offset_x
-		C.pixel_y += load_offset_y
+		if(ismob(C))
+			C.pixel_y += mob_offset_y
+		else
+			C.pixel_y += load_offset_y
 		C.layer = layer + 0.1		//so it sits above the vehicle
 
 	if(ismob(C))
-		var/mob/M = C
-		M.buckled = src
-		M.update_canmove()
+		buckle_mob(C)
 
 	return 1
 
@@ -288,7 +310,7 @@
 /obj/vehicle/proc/unload(var/mob/user, var/direction)
 	if(!load)
 		return
-	
+
 	var/turf/dest = null
 
 	//find a turf to unload to
@@ -305,7 +327,7 @@
 		var/list/options = new()
 		for(var/test_dir in alldirs)
 			var/new_dir = get_step_to(src, get_step(src, test_dir))
-			if(new_dir)
+			if(new_dir && load.Adjacent(new_dir))
 				options += new_dir
 		if(options.len)
 			dest = pick(options)
@@ -315,19 +337,15 @@
 	if(!isturf(dest))	//if there still is nowhere to unload, cancel out since the vehicle is probably in nullspace
 		return 0
 
-
-	load.loc = dest
-	load.dir = get_dir(loc, dest)
-	load.anchored = initial(load.anchored)
+	load.forceMove(dest)
+	load.set_dir(get_dir(loc, dest))
+	load.anchored = 0		//we can only load non-anchored items, so it makes sense to set this to false
 	load.pixel_x = initial(load.pixel_x)
 	load.pixel_y = initial(load.pixel_y)
 	load.layer = initial(load.layer)
 
 	if(ismob(load))
-		var/mob/M = load
-		M.buckled = null
-		M.anchored = initial(M.anchored)
-		M.update_canmove()
+		unbuckle_mob(load)
 
 	load = null
 
@@ -339,3 +357,14 @@
 //-------------------------------------------------------
 /obj/vehicle/proc/update_stats()
 	return
+
+/obj/vehicle/attack_generic(var/mob/user, var/damage, var/attack_message)
+	if(!damage)
+		return
+	visible_message("<span class='danger'>[user] [attack_message] the [src]!</span>")
+	user.attack_log += text("\[[time_stamp()]\] <font color='red'>attacked [src.name]</font>")
+	src.health -= damage
+	if(prob(10))
+		new /obj/effect/decal/cleanable/blood/oil(src.loc)
+	spawn(1) healthcheck()
+	return 1

@@ -18,6 +18,7 @@
 		use_power()
 		process_killswitch()
 		process_locks()
+		process_queued_alarms()
 	update_canmove()
 
 /mob/living/silicon/robot/proc/clamp_values()
@@ -32,30 +33,37 @@
 	adjustFireLoss(0)
 
 /mob/living/silicon/robot/proc/use_power()
-
+	// Debug only
+	// world << "DEBUG: life.dm line 35: cyborg use_power() called at tick [controller_iteration]"
+	used_power_this_tick = 0
 	for(var/V in components)
 		var/datum/robot_component/C = components[V]
 		C.update_power_state()
 
 	if ( cell && is_component_functioning("power cell") && src.cell.charge > 0 )
 		if(src.module_state_1)
-			src.cell.use(3)
+			cell_use_power(50) // 50W load for every enabled tool TODO: tool-specific loads
 		if(src.module_state_2)
-			src.cell.use(3)
+			cell_use_power(50)
 		if(src.module_state_3)
-			src.cell.use(3)
+			cell_use_power(50)
+
+		if(lights_on)
+			cell_use_power(30) 	// 30W light. Normal lights would use ~15W, but increased for balance reasons.
 
 		src.has_power = 1
 	else
 		if (src.has_power)
 			src << "\red You are now running on emergency backup power."
 		src.has_power = 0
-
+		if(lights_on) // Light is on but there is no power!
+			lights_on = 0
+			SetLuminosity(0)
 
 /mob/living/silicon/robot/proc/handle_regular_status_updates()
 
 	if(src.camera && !scrambledcodes)
-		if(src.stat == 2 || isWireCut(5))
+		if(src.stat == 2 || wires.IsIndexCut(BORG_WIRE_CAMERA))
 			src.camera.status = 0
 		else
 			src.camera.status = 1
@@ -132,10 +140,6 @@
 	else
 		src.blinded = 1
 
-	if(!is_component_functioning("actuator"))
-		src.Paralyse(3)
-
-
 	return 1
 
 /mob/living/silicon/robot/proc/handle_regular_hud_updates()
@@ -163,15 +167,21 @@
 		src.sight &= ~SEE_MOBS
 		src.sight &= ~SEE_TURFS
 		src.sight &= ~SEE_OBJS
-		src.see_in_dark = 8
-		src.see_invisible = SEE_INVISIBLE_LEVEL_TWO
+		src.see_in_dark = 8 			 // see_in_dark means you can FAINTLY see in the dark, humans have a range of 3 or so, tajaran have it at 8
+		src.see_invisible = SEE_INVISIBLE_LIVING // This is normal vision (25), setting it lower for normal vision means you don't "see" things like darkness since darkness
+							 // has a "invisible" value of 15
 
-	for(var/image/hud in client.images)  //COPIED FROM the human handle_regular_hud_updates() proc
-		if(copytext(hud.icon_state,1,4) == "hud") //ugly, but icon comparison is worse, I believe
-			client.images.Remove(hud)
+	regular_hud_updates()
 
 	var/obj/item/borg/sight/hud/hud = (locate(/obj/item/borg/sight/hud) in src)
-	if(hud && hud.hud)	hud.hud.process_hud(src)
+	if(hud && hud.hud)
+		hud.hud.process_hud(src)
+	else
+		switch(src.sensor_mode)
+			if (SEC_HUD)
+				process_sec_hud(src,0)
+			if (MED_HUD)
+				process_med_hud(src,0)
 
 	if (src.healths)
 		if (src.stat != 2)
@@ -321,6 +331,6 @@
 			weaponlock_time = 120
 
 /mob/living/silicon/robot/update_canmove()
-	if(paralysis || stunned || weakened || buckled || lockcharge) canmove = 0
+	if(paralysis || stunned || weakened || buckled || lockcharge || !is_component_functioning("actuator")) canmove = 0
 	else canmove = 1
 	return canmove

@@ -37,40 +37,20 @@
 	if(locked)
 		locked = 0
 		emagged = 1
-		user << "<span class='warning'>You bypass [src]'s controls.</span>"
+		user << "<span class='warning'>You short out [src]'s maintenance hatch lock.</span>"
+		log_and_message_admins("emagged [src]'s maintenance hatch lock")
 	if(!locked && open)
 		emagged = 2
+		log_and_message_admins("emagged [src]'s inner circuits")
 
-/obj/machinery/bot/examine()
-	set src in view()
-	..()
+/obj/machinery/bot/examine(mob/user)
+	..(user)
 	if (src.health < maxhealth)
 		if (src.health > maxhealth/3)
-			usr << "<span class='warning'>[src]'s parts look loose.</span>"
+			user << "<span class='warning'>[src]'s parts look loose.</span>"
 		else
-			usr << "<span class='danger'>[src]'s parts look very loose!</span>"
+			user << "<span class='danger'>[src]'s parts look very loose!</span>"
 	return
-
-/obj/machinery/bot/attack_alien(var/mob/living/carbon/alien/user as mob)
-	src.health -= rand(15,30)*brute_dam_coeff
-	src.visible_message("\red <B>[user] has slashed [src]!</B>")
-	playsound(src.loc, 'sound/weapons/slice.ogg', 25, 1, -1)
-	if(prob(10))
-		new /obj/effect/decal/cleanable/blood/oil(src.loc)
-	healthcheck()
-
-
-/obj/machinery/bot/attack_animal(var/mob/living/simple_animal/M as mob)
-	if(M.melee_damage_upper == 0)	return
-	src.health -= M.melee_damage_upper
-	src.visible_message("\red <B>[M] has [M.attacktext] [src]!</B>")
-	M.attack_log += text("\[[time_stamp()]\] <font color='red'>attacked [src.name]</font>")
-	if(prob(10))
-		new /obj/effect/decal/cleanable/blood/oil(src.loc)
-	healthcheck()
-
-
-
 
 /obj/machinery/bot/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/weapon/screwdriver))
@@ -101,6 +81,8 @@
 			..()
 
 /obj/machinery/bot/bullet_act(var/obj/item/projectile/Proj)
+	if(!(Proj.damage_type == BRUTE || Proj.damage_type == BURN))
+		return
 	health -= Proj.damage
 	..()
 	healthcheck()
@@ -140,7 +122,7 @@
 	pulse2.icon_state = "empdisable"
 	pulse2.name = "emp sparks"
 	pulse2.anchored = 1
-	pulse2.dir = pick(cardinal)
+	pulse2.set_dir(pick(cardinal))
 
 	spawn(10)
 		pulse2.delete()
@@ -154,6 +136,19 @@
 
 /obj/machinery/bot/attack_ai(mob/user as mob)
 	src.attack_hand(user)
+
+/obj/machinery/bot/attack_hand(var/mob/living/carbon/human/user)
+
+	if(!istype(user))
+		return ..()
+
+	if(user.species.can_shred(user))
+		src.health -= rand(15,30)*brute_dam_coeff
+		src.visible_message("\red <B>[user] has slashed [src]!</B>")
+		playsound(src.loc, 'sound/weapons/slice.ogg', 25, 1, -1)
+		if(prob(10))
+			new /obj/effect/decal/cleanable/blood/oil(src.loc)
+		healthcheck()
 
 /******************************************************************/
 // Navigation procs

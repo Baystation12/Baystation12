@@ -1,8 +1,9 @@
 /mob/living/carbon/human/movement_delay()
+
 	var/tally = 0
 
-	if(species && species.flags & IS_SLOW)
-		tally = 7
+	if(species.slowdown)
+		tally = species.slowdown
 
 	if (istype(loc, /turf/space)) return -1 // It's hard to be slowed down in space by... anything
 
@@ -13,8 +14,11 @@
 
 	if(reagents.has_reagent("nuka_cola")) return -1
 
-	var/health_deficiency = (100 - health + halloss)
+	var/health_deficiency = (100 - health)
 	if(health_deficiency >= 40) tally += (health_deficiency / 25)
+
+	if (!(species && (species.flags & NO_PAIN)))
+		if(halloss >= 10) tally += (halloss / 10) //halloss shouldn't slow you down if you can't even feel it
 
 	var/hungry = (500 - nutrition)/5 // So overeat would be 100 and default level would be 80
 	if (hungry >= 70) tally += hungry/50
@@ -22,11 +26,8 @@
 	if(wear_suit)
 		tally += wear_suit.slowdown
 
-	if(!buckled || (buckled && !istype(buckled, /obj/structure/stool/bed/chair/wheelchair)))
-		if(shoes)
-			tally += shoes.slowdown
-
-		for(var/organ_name in list("l_foot","r_foot","l_leg","r_leg"))
+	if(istype(buckled, /obj/structure/bed/chair/wheelchair))
+		for(var/organ_name in list("l_hand","r_hand","l_arm","r_arm"))
 			var/datum/organ/external/E = get_organ(organ_name)
 			if(!E || (E.status & ORGAN_DESTROYED))
 				tally += 4
@@ -34,9 +35,11 @@
 				tally += 0.5
 			else if(E.status & ORGAN_BROKEN)
 				tally += 1.5
+	else
+		if(shoes)
+			tally += shoes.slowdown
 
-	if(pulledby && istype(pulledby, /obj/structure/stool/bed/chair/wheelchair))
-		for(var/organ_name in list("l_hand","r_hand","l_arm","r_arm"))
+		for(var/organ_name in list("l_foot","r_foot","l_leg","r_leg"))
 			var/datum/organ/external/E = get_organ(organ_name)
 			if(!E || (E.status & ORGAN_DESTROYED))
 				tally += 4
@@ -52,31 +55,45 @@
 	if (bodytemperature < 283.222)
 		tally += (283.222 - bodytemperature) / 10 * 1.75
 
+	tally += max(2 * stance_damage, 0) //damaged/missing feet or legs is slow
+
 	if(mRun in mutations)
 		tally = 0
 
 	return (tally+config.human_delay)
 
 /mob/living/carbon/human/Process_Spacemove(var/check_drift = 0)
-	//Can we act
+	//Can we act?
 	if(restrained())	return 0
 
-	//Do we have a working jetpack
-	if(istype(back, /obj/item/weapon/tank/jetpack))
-		var/obj/item/weapon/tank/jetpack/J = back
-		if(((!check_drift) || (check_drift && J.stabilization_on)) && (!lying) && (J.allow_thrust(0.01, src)))
+	//Do we have a working jetpack?
+	var/obj/item/weapon/tank/jetpack/thrust
+	if(back)
+		if(istype(back,/obj/item/weapon/tank/jetpack))
+			thrust = back
+		else if(istype(back,/obj/item/weapon/rig))
+			var/obj/item/weapon/rig/rig = back
+			for(var/obj/item/rig_module/maneuvering_jets/module in rig.installed_modules)
+				thrust = module.jets
+				break
+
+	if(thrust)
+		if(((!check_drift) || (check_drift && thrust.stabilization_on)) && (!lying) && (thrust.allow_thrust(0.01, src)))
 			inertia_dir = 0
 			return 1
-//		if(!check_drift && J.allow_thrust(0.01, src))
-//			return 1
 
 	//If no working jetpack then use the other checks
-	if(..())	return 1
+	if(..())
+		return 1
 	return 0
 
 
 /mob/living/carbon/human/Process_Spaceslipping(var/prob_slip = 5)
 	//If knocked out we might just hit it and stop.  This makes it possible to get dead bodies and such.
+
+	if(species.flags & NO_SLIP)
+		return
+
 	if(stat)
 		prob_slip = 0 // Changing this to zero to make it line up with the comment, and also, make more sense.
 

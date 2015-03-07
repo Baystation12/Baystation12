@@ -5,7 +5,7 @@
 	anchored = 1
 	w_class = 4.0
 	canhear_range = 2
-	flags = FPRINT | CONDUCT | TABLEPASS | NOBLOODY
+	flags = CONDUCT | NOBLOODY
 	var/number = 0
 	var/anyai = 1
 	var/mob/living/silicon/ai/ai = list()
@@ -24,10 +24,6 @@
 	spawn (0)
 		attack_self(user)
 
-/obj/item/device/radio/intercom/attack_paw(mob/user as mob)
-	return src.attack_hand(user)
-
-
 /obj/item/device/radio/intercom/attack_hand(mob/user as mob)
 	src.add_fingerprint(user)
 	spawn (0)
@@ -36,15 +32,13 @@
 /obj/item/device/radio/intercom/receive_range(freq, level)
 	if (!on)
 		return -1
-	if (!(src.wires & WIRE_RECEIVE))
-		return -1
 	if(!(0 in level))
 		var/turf/position = get_turf(src)
 		if(isnull(position) || !(position.z in level))
 			return -1
 	if (!src.listening)
 		return -1
-	if(freq == SYND_FREQ)
+	if(freq in ANTAG_FREQS)
 		if(!(src.syndie))
 			return -1//Prevents broadcast of messages over devices lacking the encryption
 

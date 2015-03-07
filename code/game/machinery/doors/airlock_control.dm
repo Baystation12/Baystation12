@@ -6,22 +6,37 @@ obj/machinery/door/airlock
 	var/frequency
 	var/shockedby = list()
 	var/datum/radio_frequency/radio_connection
-	explosion_resistance = 15
+	var/cur_command = null	//the command the door is currently attempting to complete
 
-obj/machinery/door/airlock/proc/can_radio()
-	if( !arePowerSystemsOn() || (stat & NOPOWER) || isWireCut(AIRLOCK_WIRE_AI_CONTROL) )
-		return 0
-	return 1
-
+obj/machinery/door/airlock/process()
+	..()
+	if (arePowerSystemsOn())
+		execute_current_command()
 
 obj/machinery/door/airlock/receive_signal(datum/signal/signal)
-	if (!can_radio()) return
+	if (!arePowerSystemsOn()) return //no power
 
 	if(!signal || signal.encryption) return
 
 	if(id_tag != signal.data["tag"] || !signal.data["command"]) return
 
-	switch(signal.data["command"])
+	cur_command = signal.data["command"]
+	spawn()
+		execute_current_command()
+
+obj/machinery/door/airlock/proc/execute_current_command()
+	if(operating)
+		return //emagged or busy doing something else
+
+	if (!cur_command)
+		return
+	
+	do_command(cur_command)
+	if (command_completed(cur_command))
+		cur_command = null
+
+obj/machinery/door/airlock/proc/do_command(var/command)
+	switch(command)
 		if("open")
 			open()
 
@@ -48,11 +63,32 @@ obj/machinery/door/airlock/receive_signal(datum/signal/signal)
 
 			lock()
 			sleep(2)
-
+	
 	send_status()
 
+obj/machinery/door/airlock/proc/command_completed(var/command)
+	switch(command)
+		if("open")
+			return (!density)
 
-obj/machinery/door/airlock/proc/send_status()
+		if("close")
+			return density
+
+		if("unlock")
+			return !locked
+
+		if("lock")
+			return locked
+
+		if("secure_open")
+			return (locked && !density)
+
+		if("secure_close")
+			return (locked && density)
+	
+	return 1	//Unknown command. Just assume it's completed.
+
+obj/machinery/door/airlock/proc/send_status(var/bumped = 0)
 	if(radio_connection)
 		var/datum/signal/signal = new
 		signal.transmission_method = 1 //radio signal
@@ -61,6 +97,9 @@ obj/machinery/door/airlock/proc/send_status()
 
 		signal.data["door_status"] = density?("closed"):("open")
 		signal.data["lock_status"] = locked?("locked"):("unlocked")
+		
+		if (bumped)
+			signal.data["bumped_with_access"] = 1
 
 		radio_connection.post_signal(src, signal, range = AIRLOCK_CONTROL_RANGE, filter = RADIO_AIRLOCK)
 
@@ -80,17 +119,7 @@ obj/machinery/door/airlock/Bumped(atom/AM)
 	if(istype(AM, /obj/mecha))
 		var/obj/mecha/mecha = AM
 		if(density && radio_connection && mecha.occupant && (src.allowed(mecha.occupant) || src.check_access_list(mecha.operation_req_access)))
-			var/datum/signal/signal = new
-			signal.transmission_method = 1 //radio signal
-			signal.data["tag"] = id_tag
-			signal.data["timestamp"] = world.time
-
-			signal.data["door_status"] = density?("closed"):("open")
-			signal.data["lock_status"] = locked?("locked"):("unlocked")
-
-			signal.data["bumped_with_access"] = 1
-
-			radio_connection.post_signal(src, signal, range = AIRLOCK_CONTROL_RANGE, filter = RADIO_AIRLOCK)
+			send_status(1)
 	return
 
 obj/machinery/door/airlock/proc/set_frequency(new_frequency)
@@ -216,6 +245,12 @@ obj/machinery/access_button/update_icon()
 	else
 		icon_state = "access_button_off"
 
+obj/machinery/access_button/attackby(obj/item/I as obj, mob/user as mob)
+	//Swiping ID on the access button
+	if (istype(I, /obj/item/weapon/card/id) || istype(I, /obj/item/device/pda))
+		attack_hand(user)
+		return
+	..()
 
 obj/machinery/access_button/attack_hand(mob/user)
 	add_fingerprint(usr)

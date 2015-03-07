@@ -25,7 +25,7 @@
 	src << "As a ghost, you will now [(prefs.toggles & CHAT_GHOSTRADIO) ? "hear all radio chat in the world" : "only hear from nearby speakers"]."
 	prefs.save_preferences()
 	feedback_add_details("admin_verb","TGR")
-	
+
 /client/proc/toggle_hear_radio()
 	set name = "Show/Hide RadioChatter"
 	set category = "Preferences"
@@ -121,6 +121,16 @@
 	feedback_add_details("admin_verb","TLOOC") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 
+/client/verb/toggle_chattags()
+	set name = "Show/Hide Chat Tags"
+	set category = "Preferences"
+	set desc = "Toggles seeing chat tags/icons"
+	prefs.toggles ^= CHAT_NOICONS
+	prefs.save_preferences()
+
+	src << "You will [!(prefs.toggles & CHAT_NOICONS) ? "now" : "no longer"] see chat tag icons."
+	feedback_add_details("admin_verb","TCTAG") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+
 
 /client/verb/Toggle_Soundscape() //All new ambience should be added here so it works with this verb until someone better at things comes up with a fix that isn't awful
 	set name = "Hear/Silence Ambience"
@@ -172,10 +182,10 @@
 	icons.Add(usr.zone_sel)
 
 	for(var/obj/screen/I in icons)
-		if(I.color && I.alpha)
-			I.icon = ui_style2icon(UI_style_new)
-			I.color = UI_style_color_new
-			I.alpha = UI_style_alpha_new
+		if(I.name in list("help", "harm", "disarm", "grab")) continue
+		I.icon = ui_style2icon(UI_style_new)
+		I.color = UI_style_color_new
+		I.alpha = UI_style_alpha_new
 
 
 

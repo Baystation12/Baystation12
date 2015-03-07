@@ -1,19 +1,26 @@
 //wip wip wup
 /obj/structure/mirror
 	name = "mirror"
-	desc = "Mirror mirror on the wall, who's the most robust of them all?"
+	desc = "A SalonPro Nano-Mirror(TM) brand mirror! The leading technology in hair salon products, utilizing nano-machinery to style your hair just right."
 	icon = 'icons/obj/watercloset.dmi'
 	icon_state = "mirror"
 	density = 0
 	anchored = 1
 	var/shattered = 0
 
-
 /obj/structure/mirror/attack_hand(mob/user as mob)
+
 	if(shattered)	return
 
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
+
+		if(H.a_intent == "hurt")
+			if(prob(30) || H.species.can_shred(H))
+				attack_generic(user,1)
+			else
+				attack_generic(user)
+			return
 
 		var/userloc = H.loc
 
@@ -63,13 +70,15 @@
 
 
 /obj/structure/mirror/bullet_act(var/obj/item/projectile/Proj)
+	if(!(Proj.damage_type == BRUTE || Proj.damage_type == BURN))
+		return
+
 	if(prob(Proj.damage * 2))
 		if(!shattered)
 			shatter()
 		else
 			playsound(src, 'sound/effects/hit_on_shattered_glass.ogg', 70, 1)
 	..()
-
 
 /obj/structure/mirror/attackby(obj/item/I as obj, mob/user as mob)
 	if(shattered)
@@ -83,31 +92,15 @@
 		visible_message("<span class='warning'>[user] hits [src] with [I]!</span>")
 		playsound(src.loc, 'sound/effects/Glasshit.ogg', 70, 1)
 
+/obj/structure/mirror/attack_generic(var/mob/user, var/damage)
 
-/obj/structure/mirror/attack_alien(mob/user as mob)
-	if(islarva(user)) return
 	if(shattered)
 		playsound(src.loc, 'sound/effects/hit_on_shattered_glass.ogg', 70, 1)
-		return
-	user.visible_message("<span class='danger'>[user] smashes [src]!</span>")
-	shatter()
+		return 0
 
-
-/obj/structure/mirror/attack_animal(mob/user as mob)
-	if(!isanimal(user)) return
-	var/mob/living/simple_animal/M = user
-	if(M.melee_damage_upper <= 0) return
-	if(shattered)
-		playsound(src.loc, 'sound/effects/hit_on_shattered_glass.ogg', 70, 1)
-		return
-	user.visible_message("<span class='danger'>[user] smashes [src]!</span>")
-	shatter()
-
-
-/obj/structure/mirror/attack_slime(mob/user as mob)
-	if(!isslimeadult(user)) return
-	if(shattered)
-		playsound(src.loc, 'sound/effects/hit_on_shattered_glass.ogg', 70, 1)
-		return
-	user.visible_message("<span class='danger'>[user] smashes [src]!</span>")
-	shatter()
+	if(damage)
+		user.visible_message("<span class='danger'>[user] smashes [src]!")
+		shatter()
+	else
+		user.visible_message("<span class='danger'>[user] hits [src] and bounces off!</span>")
+	return 1

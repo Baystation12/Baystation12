@@ -10,11 +10,7 @@
 	var/fire_sound //Sound played while firing.
 	var/fire_volume = 50 //How loud it is played.
 	var/auto_rearm = 0 //Does the weapon reload itself after each shot?
-
-/obj/item/mecha_parts/mecha_equipment/weapon/can_attach(var/obj/mecha/combat/M as obj)
-	if(!istype(M))
-		return 0
-	return ..()
+	required_type = list(/obj/mecha/combat, /obj/mecha/working/hoverpod/combatpod)
 
 /obj/item/mecha_parts/mecha_equipment/weapon/action_checks(atom/target)
 	if(projectiles <= 0)
@@ -62,20 +58,30 @@
 	P.process()
 
 /obj/item/mecha_parts/mecha_equipment/weapon/energy
-	name = "General Energy Weapon"
+	name = "general energy weapon"
 	auto_rearm = 1
 
 /obj/item/mecha_parts/mecha_equipment/weapon/energy/laser
 	equip_cooldown = 8
-	name = "CH-PS \"Immolator\" Laser"
+	name = "\improper CH-PS \"Immolator\" laser"
 	icon_state = "mecha_laser"
 	energy_drain = 30
 	projectile = /obj/item/projectile/beam
 	fire_sound = 'sound/weapons/Laser.ogg'
 
+/obj/item/mecha_parts/mecha_equipment/weapon/energy/riggedlaser
+	equip_cooldown = 30
+	name = "jury-rigged welder-laser"
+	desc = "While not regulation, this inefficient weapon can be attached to working exo-suits in desperate, or malicious, times."
+	icon_state = "mecha_laser"
+	energy_drain = 80
+	projectile = /obj/item/projectile/beam
+	fire_sound = 'sound/weapons/Laser.ogg'
+	required_type = list(/obj/mecha/combat, /obj/mecha/working)
+
 /obj/item/mecha_parts/mecha_equipment/weapon/energy/laser/heavy
 	equip_cooldown = 15
-	name = "CH-LC \"Solaris\" Laser Cannon"
+	name = "\improper CH-LC \"Solaris\" laser cannon"
 	icon_state = "mecha_laser"
 	energy_drain = 60
 	projectile = /obj/item/projectile/beam/heavylaser
@@ -83,22 +89,20 @@
 
 /obj/item/mecha_parts/mecha_equipment/weapon/energy/ion
 	equip_cooldown = 40
-	name = "mkIV Ion Heavy Cannon"
+	name = "mkIV ion heavy cannon"
 	icon_state = "mecha_ion"
 	energy_drain = 120
 	projectile = /obj/item/projectile/ion
 	fire_sound = 'sound/weapons/Laser.ogg'
 
-
 /obj/item/mecha_parts/mecha_equipment/weapon/energy/pulse
 	equip_cooldown = 30
-	name = "eZ-13 mk2 Heavy pulse rifle"
+	name = "eZ-13 mk2 heavy pulse rifle"
 	icon_state = "mecha_pulse"
 	energy_drain = 120
 	origin_tech = "materials=3;combat=6;powerstorage=4"
 	projectile = /obj/item/projectile/beam/pulse/heavy
 	fire_sound = 'sound/weapons/marauder.ogg'
-
 
 /obj/item/projectile/beam/pulse/heavy
 	name = "heavy pulse laser"
@@ -113,7 +117,7 @@
 		return
 
 /obj/item/mecha_parts/mecha_equipment/weapon/energy/taser
-	name = "PBT \"Pacifier\" Mounted Taser"
+	name = "\improper PBT \"Pacifier\" mounted taser"
 	icon_state = "mecha_taser"
 	energy_drain = 20
 	equip_cooldown = 8
@@ -122,7 +126,7 @@
 
 /* Commenting this out rather than removing it because it may be useful for reference.
 /obj/item/mecha_parts/mecha_equipment/weapon/honker
-	name = "HoNkER BlAsT 5000"
+	name = "\improper HoNkER BlAsT 5000"
 	icon_state = "mecha_honker"
 	energy_drain = 200
 	equip_cooldown = 150
@@ -160,17 +164,6 @@
 				M.Paralyse(4)
 			else
 				M.make_jittery(500)
-			/* //else the mousetraps are useless
-			if(istype(M, /mob/living/carbon/human))
-				var/mob/living/carbon/human/H = M
-				if(isobj(H.shoes))
-					var/thingy = H.shoes
-					H.drop_from_inventory(H.shoes)
-					walk_away(thingy,chassis,15,2)
-					spawn(20)
-						if(thingy)
-							walk(thingy,0)
-			*/
 		chassis.use_power(energy_drain)
 		log_message("Honked from [src.name]. HONK!")
 		do_after_cooldown()
@@ -178,7 +171,7 @@
 */
 
 /obj/item/mecha_parts/mecha_equipment/weapon/ballistic
-	name = "General Ballisic Weapon"
+	name = "general ballisic weapon"
 	var/projectile_energy_cost
 
 	get_equip_info()
@@ -203,10 +196,10 @@
 
 
 /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/scattershot
-	name = "LBX AC 10 \"Scattershot\""
+	name = "\improper LBX AC 10 \"Scattershot\""
 	icon_state = "mecha_scatter"
 	equip_cooldown = 20
-	projectile = /obj/item/projectile/bullet/midbullet
+	projectile = /obj/item/projectile/bullet/pistol/medium
 	fire_sound = 'sound/weapons/Gunshot.ogg'
 	fire_volume = 80
 	projectiles = 40
@@ -215,10 +208,10 @@
 	projectile_energy_cost = 25
 
 /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/lmg
-	name = "Ultra AC 2"
+	name = "\improper Ultra AC 2"
 	icon_state = "mecha_uac2"
 	equip_cooldown = 10
-	projectile = /obj/item/projectile/bullet/weakbullet
+	projectile = /obj/item/projectile/bullet/pistol/medium
 	fire_sound = 'sound/weapons/Gunshot.ogg'
 	projectiles = 300
 	projectiles_per_shot = 3
@@ -231,10 +224,10 @@
 	var/missile_range = 30
 
 /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack/Fire(atom/movable/AM, atom/target, turf/aimloc)
-	AM.throw_at(target,missile_range, missile_speed)
+	AM.throw_at(target,missile_range, missile_speed, chassis)
 
 /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack/explosive
-	name = "SRM-8 Missile Rack"
+	name = "\improper SRM-8 missile rack"
 	icon_state = "mecha_missilerack"
 	projectile = /obj/item/missile
 	fire_sound = 'sound/effects/bang.ogg'
@@ -255,14 +248,14 @@
 
 	throw_impact(atom/hit_atom)
 		if(primed)
-			explosion(hit_atom, 0, 0, 2, 4)
+			explosion(hit_atom, 0, 1, 2, 4)
 			del(src)
 		else
 			..()
 		return
 
 /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack/flashbang
-	name = "SGL-6 Grenade Launcher"
+	name = "\improper SGL-6 grenade launcher"
 	icon_state = "mecha_grenadelnchr"
 	projectile = /obj/item/weapon/grenade/flashbang
 	fire_sound = 'sound/effects/bang.ogg'
@@ -279,7 +272,7 @@
 		F.prime()
 
 /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack/flashbang/clusterbang//Because I am a heartless bastard -Sieve
-	name = "SOP-6 Grenade Launcher"
+	name = "\improper SOP-6 grenade launcher"
 	projectile = /obj/item/weapon/grenade/flashbang/clusterbang
 	construction_cost = list("metal"=20000,"gold"=6000,"uranium"=6000)
 

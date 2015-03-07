@@ -1,5 +1,5 @@
 /mob/living/simple_animal/hostile/syndicate
-	name = "Syndicate Operative"
+	name = "\improper Syndicate operative"
 	desc = "Death to Nanotrasen."
 	icon_state = "syndicate"
 	icon_living = "syndicate"
@@ -7,9 +7,9 @@
 	icon_gib = "syndicate_gib"
 	speak_chance = 0
 	turns_per_move = 5
-	response_help = "pokes the"
-	response_disarm = "shoves the"
-	response_harm = "hits the"
+	response_help = "pokes"
+	response_disarm = "shoves"
+	response_harm = "hits"
 	speed = 4
 	stop_automated_movement_when_pulled = 0
 	maxHealth = 100
@@ -17,7 +17,7 @@
 	harm_intent_damage = 5
 	melee_damage_lower = 10
 	melee_damage_upper = 10
-	attacktext = "punches"
+	attacktext = "punched"
 	a_intent = "harm"
 	var/corpse = /obj/effect/landmark/mobcorpse/syndicatesoldier
 	var/weapon1
@@ -55,7 +55,7 @@
 	icon_living = "syndicatemelee"
 	weapon1 = /obj/item/weapon/melee/energy/sword/red
 	weapon2 = /obj/item/weapon/shield/energy
-	attacktext = "slashes"
+	attacktext = "slashed"
 	status_flags = 0
 
 /mob/living/simple_animal/hostile/syndicate/melee/attackby(var/obj/item/O as obj, var/mob/user as mob)
@@ -108,7 +108,7 @@
 	icon_living = "syndicateranged"
 	casingtype = /obj/item/ammo_casing/a12mm
 	projectilesound = 'sound/weapons/Gunshot_smg.ogg'
-	projectiletype = /obj/item/projectile/bullet/midbullet2
+	projectiletype = /obj/item/projectile/bullet/pistol/medium
 
 	weapon1 = /obj/item/weapon/gun/projectile/automatic/c20r
 
@@ -144,7 +144,7 @@
 	maxHealth = 15
 	melee_damage_lower = 15
 	melee_damage_upper = 15
-	attacktext = "cuts"
+	attacktext = "cut"
 	attack_sound = 'sound/weapons/bladeslice.ogg'
 	faction = "syndicate"
 	min_oxy = 0
@@ -158,7 +158,5 @@
 	minbodytemp = 0
 
 /mob/living/simple_animal/hostile/viscerator/death()
-	..()
-	visible_message("\red <b>[src]</b> is smashed into pieces!")
+	..(null,"is smashed into pieces!")
 	del src
-	return

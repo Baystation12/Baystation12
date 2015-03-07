@@ -1,4 +1,3 @@
-#define STEFAN_BOLTZMANN_CONSTANT 0.0000000567
 
 datum/pipeline
 	var/datum/gas_mixture/air
@@ -37,22 +36,9 @@ datum/pipeline
 
 		for(var/obj/machinery/atmospherics/pipe/member in members)
 			member.air_temporary = new
+			member.air_temporary.copy_from(air)
 			member.air_temporary.volume = member.volume
-
-			member.air_temporary.oxygen = air.oxygen*member.volume/air.volume
-			member.air_temporary.nitrogen = air.nitrogen*member.volume/air.volume
-			member.air_temporary.phoron = air.phoron*member.volume/air.volume
-			member.air_temporary.carbon_dioxide = air.carbon_dioxide*member.volume/air.volume
-
-			member.air_temporary.temperature = air.temperature
-
-			if(air.trace_gases.len)
-				for(var/datum/gas/trace_gas in air.trace_gases)
-					var/datum/gas/corresponding = new trace_gas.type()
-					member.air_temporary.trace_gases += corresponding
-
-					corresponding.moles = trace_gas.moles*member.volume/air.volume
-			member.air_temporary.update_values()
+			member.air_temporary.multiply(member.volume / air.volume)
 
 	proc/build_pipeline(obj/machinery/atmospherics/pipe/base)
 		air = new
@@ -213,10 +199,21 @@ datum/pipeline
 				air.temperature -= heat/total_heat_capacity
 		if(network)
 			network.update = 1
-			
-	proc/radiate_heat(surface, thermal_conductivity)
-		var/total_heat_capacity = air.heat_capacity()
-		var/heat = STEFAN_BOLTZMANN_CONSTANT * surface * air.temperature ** 4 * thermal_conductivity
-		air.temperature = max(0, air.temperature - heat / total_heat_capacity)
+
+	//surface must be the surface area in m^2
+	proc/radiate_heat_to_space(surface, thermal_conductivity)
+		var/gas_density = air.total_moles/air.volume
+		thermal_conductivity *= min(gas_density / ( RADIATOR_OPTIMUM_PRESSURE/(R_IDEAL_GAS_EQUATION*GAS_CRITICAL_TEMPERATURE) ), 1) //mult by density ratio
+		
+		// We only get heat from the star on the exposed surface area.
+		// If the HE pipes gain more energy from AVERAGE_SOLAR_RADIATION than they can radiate, then they have a net heat increase.
+		var/heat_gain = AVERAGE_SOLAR_RADIATION * (RADIATOR_EXPOSED_SURFACE_AREA_RATIO * surface) * thermal_conductivity
+		
+		// Previously, the temperature would enter equilibrium at 26C or 294K.
+		// Only would happen if both sides (all 2 square meters of surface area) were exposed to sunlight.  We now assume it aligned edge on.
+		// It currently should stabilise at 129.6K or -143.6C
+		heat_gain -= surface * STEFAN_BOLTZMANN_CONSTANT * thermal_conductivity * (air.temperature - COSMIC_RADIATION_TEMPERATURE) ** 4
+		
+		air.add_thermal_energy(heat_gain)
 		if(network)
 			network.update = 1

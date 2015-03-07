@@ -131,11 +131,7 @@
 /datum/game_mode/proc/greet_meme(var/datum/mind/meme, var/you_are=1)
 	if (you_are)
 		meme.current << "<B>\red You are a meme!</B>"
-
-	var/obj_count = 1
-	for(var/datum/objective/objective in meme.objectives)
-		meme.current << "<B>Objective #[obj_count]</B>: [objective.explanation_text]"
-		obj_count++
+	show_objectives(meme)
 	return
 
 /datum/game_mode/meme/check_finished()

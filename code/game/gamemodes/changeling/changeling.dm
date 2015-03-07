@@ -14,9 +14,6 @@ var/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","Epsilon"
 	required_enemies = 1
 	recommended_enemies = 4
 
-	uplink_welcome = "Syndicate Uplink Console:"
-	uplink_uses = 10
-
 	var/const/prob_int_murder_target = 50 // intercept names the assassination target half the time
 	var/const/prob_right_murder_target_l = 25 // lower bound on probability of naming right assassination target
 	var/const/prob_right_murder_target_h = 50 // upper bound on probability of naimg the right assassination target
@@ -125,23 +122,13 @@ var/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","Epsilon"
 		changeling.current << "<B>\red You are a changeling!</B>"
 	changeling.current << "<b>\red Use say \":g message\" to communicate with your fellow changelings. Remember: you get all of their absorbed DNA if you absorb them.</b>"
 
-	if(config.objectives_disabled)
-		changeling.current << "<font color=blue>Within the rules,</font> try to act as an opposing force to the crew. Further RP and try to make sure other players have </i>fun<i>! If you are confused or at a loss, always adminhelp, and before taking extreme actions, please try to also contact the administration! Think through your actions and make the roleplay immersive! <b>Please remember all rules aside from those without explicit exceptions apply to antagonists.</i></b>"
-
-	if (!config.objectives_disabled)
-		changeling.current << "<B>You must complete the following tasks:</B>"
+	show_objectives(changeling)
 
 	if (changeling.current.mind)
 		if (changeling.current.mind.assigned_role == "Clown")
 			changeling.current << "You have evolved beyond your clownish nature, allowing you to wield weapons without harming yourself."
 			changeling.current.mutations.Remove(CLUMSY)
 
-	if (!config.objectives_disabled)
-		var/obj_count = 1
-		for(var/datum/objective/objective in changeling.objectives)
-			changeling.current << "<B>Objective #[obj_count]</B>: [objective.explanation_text]"
-			obj_count++
-		return
 
 /*/datum/game_mode/changeling/check_finished()
 	var/changelings_alive = 0
@@ -173,20 +160,8 @@ var/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","Epsilon"
 	if(changelings.len)
 		var/text = "<FONT size = 2><B>The changelings were:</B></FONT>"
 		for(var/datum/mind/changeling in changelings)
-			var/changelingwin = 1
-
-			text += "<br>[changeling.key] was [changeling.name] ("
-			if(changeling.current)
-				if(changeling.current.stat == DEAD)
-					text += "died"
-				else
-					text += "survived"
-				if(changeling.current.real_name != changeling.name)
-					text += " as [changeling.current.real_name]"
-			else
-				text += "body destroyed"
-				changelingwin = 0
-			text += ")"
+			var/changelingwin = changeling.current
+			text += print_player_full(changeling)
 
 			//Removed sanity if(changeling) because we -want- a runtime to inform us that the changelings list is incorrect and needs to be fixed.
 			text += "<br><b>Changeling ID:</b> [changeling.changeling.changelingID]."
@@ -210,6 +185,7 @@ var/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","Epsilon"
 					else
 						text += "<br><font color='red'><B>The changeling has failed.</B></font>"
 						feedback_add_details("changeling_success","FAIL")
+		text += "<br>"
 
 		world << text
 

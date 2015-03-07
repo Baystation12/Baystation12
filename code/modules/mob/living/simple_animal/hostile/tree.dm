@@ -9,9 +9,9 @@
 	speak_chance = 0
 	turns_per_move = 5
 	meat_type = /obj/item/weapon/reagent_containers/food/snacks/carpmeat
-	response_help = "brushes the"
-	response_disarm = "pushes the"
-	response_harm = "hits the"
+	response_help = "brushes"
+	response_disarm = "pushes"
+	response_harm = "hits"
 	speed = -1
 	maxHealth = 250
 	health = 250
@@ -21,7 +21,7 @@
 	harm_intent_damage = 5
 	melee_damage_lower = 8
 	melee_damage_upper = 12
-	attacktext = "bites"
+	attacktext = "bitten"
 	attack_sound = 'sound/weapons/bite.ogg'
 
 	//Space carp aren't affected by atmos.
@@ -40,7 +40,7 @@
 /mob/living/simple_animal/hostile/tree/FindTarget()
 	. = ..()
 	if(.)
-		emote("growls at [.]")
+		audible_emote("growls at [.]")
 
 /mob/living/simple_animal/hostile/tree/AttackingTarget()
 	. =..()
@@ -51,7 +51,6 @@
 			L.visible_message("<span class='danger'>\the [src] knocks down \the [L]!</span>")
 
 /mob/living/simple_animal/hostile/tree/death()
-	..()
-	visible_message("\red <b>[src]</b> is hacked into pieces!")
+	..(null,"is hacked into pieces!")
 	new /obj/item/stack/sheet/wood(loc)
 	del(src)

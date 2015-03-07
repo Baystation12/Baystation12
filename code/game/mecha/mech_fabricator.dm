@@ -60,6 +60,9 @@
 						/obj/item/mecha_parts/part/ripley_left_leg,
 						/obj/item/mecha_parts/part/ripley_right_leg
 					),
+//	"Hoverpod"=list(
+//						/obj/structure/largecrate/hoverpod // Doesn't work, even with required vars. Why? - Gamerofthegame
+//					),
 	"Odysseus"=list(
 						/obj/item/mecha_parts/chassis/odysseus,
 						/obj/item/mecha_parts/part/odysseus_torso,
@@ -106,6 +109,7 @@
 						/obj/item/mecha_parts/mecha_equipment/tool/cable_layer,
 						/obj/item/mecha_parts/mecha_equipment/tool/sleeper,
 						/obj/item/mecha_parts/mecha_equipment/tool/syringe_gun,
+						/obj/item/mecha_parts/mecha_equipment/tool/passenger,
 						/obj/item/mecha_parts/chassis/firefighter,
 						///obj/item/mecha_parts/mecha_equipment/repair_droid,
 						/obj/item/mecha_parts/mecha_equipment/generator,
@@ -449,10 +453,10 @@
 	for(var/datum/design/D in files.known_designs)
 		if(D.build_type&16)
 			if(D.category in part_sets)//Checks if it's a valid category
-				if(add_part_to_set(D.category, text2path(D.build_path)))//Adds it to said category
+				if(add_part_to_set(D.category, D.build_path))//Adds it to said category
 					i++
 			else
-				if(add_part_to_set("Misc", text2path(D.build_path)))//If in doubt, chunk it into the Misc
+				if(add_part_to_set("Misc", D.build_path))//If in doubt, chunk it into the Misc
 					i++
 	return i
 
@@ -721,8 +725,13 @@
 			return 0
 	var/result = 0
 	var/obj/item/stack/sheet/res = new type(src)
+
+	// amount available to take out
 	var/total_amount = round(resources[mat_string]/res.perunit)
-	res.amount = min(total_amount,amount)
+
+	// number of stacks we're going to take out
+	res.amount = round(min(total_amount,amount))
+
 	if(res.amount>0)
 		resources[mat_string] -= res.amount*res.perunit
 		res.Move(src.loc)
@@ -783,6 +792,7 @@
 	if(istype(W, /obj/item/weapon/card/emag))
 		emag()
 		return
+
 	var/material
 	switch(W.type)
 		if(/obj/item/stack/sheet/mineral/gold)
@@ -805,21 +815,27 @@
 	if(src.being_built)
 		user << "The fabricator is currently processing. Please wait until completion."
 		return
+
 	var/obj/item/stack/sheet/stack = W
+
 	var/sname = "[stack.name]"
 	var/amnt = stack.perunit
 	if(src.resources[material] < res_max_amount)
-		var/count = 0
-		src.overlays += "fab-load-[material]"//loading animation is now an overlay based on material type. No more spontaneous conversion of all ores to metal. -vey
-		sleep(10)
-		if(stack && stack.amount)
-			while(src.resources[material] < res_max_amount && stack)
+		if(stack && stack.amount >= 1)
+			var/count = 0
+			src.overlays += "fab-load-[material]"//loading animation is now an overlay based on material type. No more spontaneous conversion of all ores to metal. -vey
+			sleep(10)
+
+			while(src.resources[material] < res_max_amount && stack.amount >= 1)
 				src.resources[material] += amnt
 				stack.use(1)
 				count++
 			src.overlays -= "fab-load-[material]"
 			user << "You insert [count] [sname] into the fabricator."
 			src.updateUsrDialog()
+		else
+			user << "The fabricator can only accept full sheets of [sname]."
+			return
 	else
 		user << "The fabricator cannot hold more [sname]."
 	return

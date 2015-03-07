@@ -1,15 +1,11 @@
 /mob/living/carbon/human/gib()
-	death(1)
-	var/atom/movable/overlay/animation = null
-	monkeyizing = 1
-	canmove = 0
-	icon = null
-	invisibility = 101
 
-	animation = new(loc)
-	animation.icon_state = "blank"
-	animation.icon = 'icons/mob/mob.dmi'
-	animation.master = src
+	for(var/datum/organ/internal/I in internal_organs)
+		var/obj/item/organ/current_organ = I.remove()
+		if(current_organ)
+			if(istype(loc,/turf))
+				current_organ.throw_at(get_edge_target_turf(src,pick(alldirs)),rand(1,3),30)
+			current_organ.removed(src)
 
 	for(var/datum/organ/external/E in src.organs)
 		if(istype(E, /datum/organ/external/chest))
@@ -19,48 +15,22 @@
 			// Override the current limb status and don't cause an explosion
 			E.droplimb(1,1)
 
-	flick("gibbed-h", animation)
-	if(species)
-		hgibs(loc, viruses, dna, species.flesh_color, species.blood_color)
-	else
-		hgibs(loc, viruses, dna)
-
-	spawn(15)
-		if(animation)	del(animation)
-		if(src)			del(src)
+	..(species.gibbed_anim)
+	gibs(loc, viruses, dna, null, species.flesh_color, species.blood_color)
 
 /mob/living/carbon/human/dust()
-	death(1)
-	var/atom/movable/overlay/animation = null
-	monkeyizing = 1
-	canmove = 0
-	icon = null
-	invisibility = 101
-
-	animation = new(loc)
-	animation.icon_state = "blank"
-	animation.icon = 'icons/mob/mob.dmi'
-	animation.master = src
-
-	flick("dust-h", animation)
-	new /obj/effect/decal/remains/human(loc)
-
-	spawn(15)
-		if(animation)	del(animation)
-		if(src)			del(src)
-
+	if(species)
+		..(species.dusted_anim, species.remains_type)
+	else
+		..()
 
 /mob/living/carbon/human/death(gibbed)
-	if(stat == DEAD)	return
-	if(healths)		healths.icon_state = "health5"
 
-	stat = DEAD
-	dizziness = 0
-	jitteriness = 0
+	if(stat == DEAD) return
 
-
-	hud_updateflag |= 1 << HEALTH_HUD
-	hud_updateflag |= 1 << STATUS_HUD
+	BITSET(hud_updateflag, HEALTH_HUD)
+	BITSET(hud_updateflag, STATUS_HUD)
+	BITSET(hud_updateflag, LIFE_HUD)
 
 	handle_hud_list()
 
@@ -88,51 +58,17 @@
 
 	callHook("death", list(src, gibbed))
 
-	//Check for heist mode kill count.
-	if(ticker.mode && ( istype( ticker.mode,/datum/game_mode/heist) ) )
-		//Check for last assailant's mutantrace.
-		/*if( LAssailant && ( istype( LAssailant,/mob/living/carbon/human ) ) )
-			var/mob/living/carbon/human/V = LAssailant
-			if (V.dna && (V.dna.mutantrace == "vox"))*/ //Not currently feasible due to terrible LAssailant tracking.
-		//world << "Vox kills: [vox_kills]"
-		vox_kills++ //Bad vox. Shouldn't be killing humans.
+	if(!gibbed && species.death_sound)
+		playsound(loc, species.death_sound, 80, 1, 1)
 
-	if(!gibbed)
-		emote("deathgasp") //let the world KNOW WE ARE DEAD
 
-		//For ninjas exploding when they die.
-		if( istype(wear_suit, /obj/item/clothing/suit/space/space_ninja) && wear_suit:s_initialized )
-			src << browse(null, "window=spideros")//Just in case.
-			var/location = loc
-			explosion(location, 0, 0, 3, 4)
-
-		update_canmove()
-		if(client)	blind.layer = 0
-
-	tod = worldtime2text()		//weasellos time of death patch
-	if(mind)	mind.store_memory("Time of death: [tod]", 0)
 	if(ticker && ticker.mode)
-//		world.log << "k"
 		sql_report_death(src)
-		ticker.mode.check_win()		//Calls the rounds wincheck, mainly for wizard, malf, and changeling now
-	return ..(gibbed)
+		ticker.mode.check_win()
+		if(istype(ticker.mode,/datum/game_mode/heist))
+			vox_kills++ //Bad vox. Shouldn't be killing humans.
 
-
-
-/mob/living/carbon/human/proc/makeSkeleton()
-	if(SKELETON in src.mutations)	return
-
-	if(f_style)
-		f_style = "Shaved"
-	if(h_style)
-		h_style = "Bald"
-	update_hair(0)
-
-	mutations.Add(SKELETON)
-	status_flags |= DISFIGURED
-	update_body(0)
-	update_mutantrace()
-	return
+	return ..(gibbed,species.death_message)
 
 /mob/living/carbon/human/proc/ChangeToHusk()
 	if(HUSK in mutations)	return
@@ -146,10 +82,23 @@
 	mutations.Add(HUSK)
 	status_flags |= DISFIGURED	//makes them unknown without fucking up other stuff like admintools
 	update_body(0)
-	update_mutantrace()
 	return
 
 /mob/living/carbon/human/proc/Drain()
 	ChangeToHusk()
-	//mutations |= NOCLONE
+	mutations |= HUSK
+	return
+
+/mob/living/carbon/human/proc/ChangeToSkeleton()
+	if(SKELETON in src.mutations)	return
+
+	if(f_style)
+		f_style = "Shaved"
+	if(h_style)
+		h_style = "Bald"
+	update_hair(0)
+
+	mutations.Add(SKELETON)
+	status_flags |= DISFIGURED
+	update_body(0)
 	return

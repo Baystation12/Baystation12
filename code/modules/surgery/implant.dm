@@ -10,7 +10,7 @@
 		if(!hasorgans(target))
 			return 0
 		var/datum/organ/external/affected = target.get_organ(target_zone)
-		return affected.open == 2 && !(affected.status & ORGAN_BLEEDING) && (target_zone != "chest" || target.op_stage.ribcage == 2)
+		return affected.open == (affected.encased ? 3 : 2) && !(affected.status & ORGAN_BLEEDING)
 
 	proc/get_max_wclass(datum/organ/external/affected)
 		switch (affected.name)
@@ -70,8 +70,8 @@
 	priority = 2
 	allowed_tools = list(
 	/obj/item/weapon/cautery = 100,			\
-	/obj/item/clothing/mask/cigarette = 75,	\
-	/obj/item/weapon/lighter = 50,			\
+	/obj/item/clothing/mask/smokable/cigarette = 75,	\
+	/obj/item/weapon/flame/lighter = 50,			\
 	/obj/item/weapon/weldingtool = 25
 	)
 
@@ -112,7 +112,7 @@
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		if(..())
 			var/datum/organ/external/affected = target.get_organ(target_zone)
-			return !affected.hidden && affected.cavity && tool.w_class <= get_max_wclass(affected)
+			return !istype(user,/mob/living/silicon/robot) && !affected.hidden && affected.cavity && tool.w_class <= get_max_wclass(affected)
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/datum/organ/external/affected = target.get_organ(target_zone)
@@ -128,7 +128,7 @@
 		"\blue You put \the [tool] inside [target]'s [get_cavity(affected)] cavity." )
 		if (tool.w_class > get_max_wclass(affected)/2 && prob(50))
 			user << "\red You tear some blood vessels trying to fit such a big object in this cavity."
-			var/datum/wound/internal_bleeding/I = new (15)
+			var/datum/wound/internal_bleeding/I = new (10)
 			affected.wounds += I
 			affected.owner.custom_pain("You feel something rip in your [affected.display_name]!", 1)
 		user.drop_item()
@@ -155,6 +155,10 @@
 
 	min_duration = 80
 	max_duration = 100
+
+	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+		var/datum/organ/internal/brain/sponge = target.internal_organs_by_name["brain"]
+		return ..() && (!sponge || !sponge.damage)
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/datum/organ/external/affected = target.get_organ(target_zone)
@@ -186,7 +190,7 @@
 				"\blue You take [obj] out of incision on [target]'s [affected.display_name]s with \the [tool]." )
 				affected.implants -= obj
 
-				target.hud_updateflag |= 1 << IMPLOYAL_HUD
+				BITSET(target.hud_updateflag, IMPLOYAL_HUD)
 
 				//Handle possessive brain borers.
 				if(istype(obj,/mob/living/simple_animal/borer))
@@ -194,12 +198,13 @@
 					if(worm.controlling)
 						target.release_control()
 					worm.detatch()
-
-				obj.loc = get_turf(target)
-				if(istype(obj,/obj/item/weapon/implant))
-					var/obj/item/weapon/implant/imp = obj
-					imp.imp_in = null
-					imp.implanted = 0
+					worm.leave_host()
+				else
+					obj.loc = get_turf(target)
+					if(istype(obj,/obj/item/weapon/implant))
+						var/obj/item/weapon/implant/imp = obj
+						imp.imp_in = null
+						imp.implanted = 0
 			else
 				user.visible_message("\blue [user] removes \the [tool] from [target]'s [affected.display_name].", \
 				"\blue There's something inside [target]'s [affected.display_name], but you just missed it this time." )

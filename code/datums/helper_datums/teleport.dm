@@ -16,11 +16,11 @@
 
 	New(ateleatom, adestination, aprecision=0, afteleport=1, aeffectin=null, aeffectout=null, asoundin=null, asoundout=null)
 		..()
-		if(!Init(arglist(args)))
+		if(!initTeleport(arglist(args)))
 			return 0
 		return 1
 
-	proc/Init(ateleatom,adestination,aprecision,afteleport,aeffectin,aeffectout,asoundin,asoundout)
+	proc/initTeleport(ateleatom,adestination,aprecision,afteleport,aeffectin,aeffectout,asoundin,asoundout)
 		if(!setTeleatom(ateleatom))
 			return 0
 		if(!setDestination(adestination))
@@ -108,12 +108,19 @@
 
 		playSpecials(curturf,effectin,soundin)
 
+		var/obj/structure/bed/chair/C = null
+		if(isliving(teleatom))
+			var/mob/living/L = teleatom
+			if(L.buckled)
+				C = L.buckled
 		if(force_teleport)
 			teleatom.forceMove(destturf)
 			playSpecials(destturf,effectout,soundout)
 		else
 			if(teleatom.Move(destturf))
 				playSpecials(destturf,effectout,soundout)
+		if(C)
+			C.forceMove(destturf)
 
 		destarea.Entered(teleatom)
 

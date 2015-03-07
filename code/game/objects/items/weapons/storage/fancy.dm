@@ -24,38 +24,17 @@
 	src.icon_state = "[src.icon_type]box[total_contents]"
 	return
 
-/obj/item/weapon/storage/fancy/examine()
-	set src in oview(1)
+/obj/item/weapon/storage/fancy/examine(mob/user)
+	if(!..(user, 1))
+		return
 
-	..()
 	if(contents.len <= 0)
-		usr << "There are no [src.icon_type]s left in the box."
+		user << "There are no [src.icon_type]s left in the box."
 	else if(contents.len == 1)
-		usr << "There is one [src.icon_type] left in the box."
+		user << "There is one [src.icon_type] left in the box."
 	else
-		usr << "There are [src.contents.len] [src.icon_type]s in the box."
+		user << "There are [src.contents.len] [src.icon_type]s in the box."
 
-	return
-
-
-
-/*
- * Donut Box
- */
-
-/obj/item/weapon/storage/fancy/donut_box
-	icon = 'icons/obj/food.dmi'
-	icon_state = "donutbox6"
-	icon_type = "donut"
-	name = "donut box"
-	storage_slots = 6
-	can_hold = list("/obj/item/weapon/reagent_containers/food/snacks/donut")
-
-
-/obj/item/weapon/storage/fancy/donut_box/New()
-	..()
-	for(var/i=1; i <= storage_slots; i++)
-		new /obj/item/weapon/reagent_containers/food/snacks/donut/normal(src)
 	return
 
 /*
@@ -68,7 +47,8 @@
 	icon_type = "egg"
 	name = "egg box"
 	storage_slots = 12
-	can_hold = list("/obj/item/weapon/reagent_containers/food/snacks/egg")
+	max_storage_space = 24
+	can_hold = list(/obj/item/weapon/reagent_containers/food/snacks/egg)
 
 /obj/item/weapon/storage/fancy/egg_box/New()
 	..()
@@ -89,14 +69,13 @@
 	item_state = "candlebox5"
 	storage_slots = 5
 	throwforce = 2
-	flags = TABLEPASS
 	slot_flags = SLOT_BELT
 
 
 /obj/item/weapon/storage/fancy/candle_box/New()
 	..()
 	for(var/i=1; i <= storage_slots; i++)
-		new /obj/item/candle(src)
+		new /obj/item/weapon/flame/candle(src)
 	return
 
 /*
@@ -112,7 +91,7 @@
 	storage_slots = 6
 	icon_type = "crayon"
 	can_hold = list(
-		"/obj/item/toy/crayon"
+		/obj/item/toy/crayon
 	)
 
 /obj/item/weapon/storage/fancy/crayons/New()
@@ -153,17 +132,16 @@
 	item_state = "cigpacket"
 	w_class = 1
 	throwforce = 2
-	flags = TABLEPASS
 	slot_flags = SLOT_BELT
 	storage_slots = 6
-	can_hold = list("/obj/item/clothing/mask/cigarette")
+	can_hold = list(/obj/item/clothing/mask/smokable/cigarette)
 	icon_type = "cigarette"
 
 /obj/item/weapon/storage/fancy/cigarettes/New()
 	..()
 	flags |= NOREACT
 	for(var/i = 1 to storage_slots)
-		new /obj/item/clothing/mask/cigarette(src)
+		new /obj/item/clothing/mask/smokable/cigarette(src)
 	create_reagents(15 * storage_slots)//so people can inject cigarettes without opening a packet, now with being able to inject the whole one
 
 /obj/item/weapon/storage/fancy/cigarettes/Del()
@@ -176,7 +154,7 @@
 	return
 
 /obj/item/weapon/storage/fancy/cigarettes/remove_from_storage(obj/item/W as obj, atom/new_location)
-		var/obj/item/clothing/mask/cigarette/C = W
+		var/obj/item/clothing/mask/smokable/cigarette/C = W
 		if(!istype(C)) return // what
 		reagents.trans_to(C, (reagents.total_volume/contents.len))
 		..()
@@ -186,7 +164,7 @@
 		return
 
 	if(M == user && user.zone_sel.selecting == "mouth" && contents.len > 0 && !user.wear_mask)
-		var/obj/item/clothing/mask/cigarette/W = new /obj/item/clothing/mask/cigarette(user)
+		var/obj/item/clothing/mask/smokable/cigarette/W = new /obj/item/clothing/mask/smokable/cigarette(user)
 		reagents.trans_to(W, (reagents.total_volume/contents.len))
 		user.equip_to_slot_if_possible(W, slot_wear_mask)
 		reagents.maximum_volume = 15 * contents.len
@@ -202,6 +180,54 @@
 	icon_state = "Dpacket"
 	item_state = "Dpacket"
 
+/obj/item/weapon/storage/fancy/cigar
+	name = "cigar case"
+	desc = "A case for holding your cigars when you are not smoking them."
+	icon_state = "cigarcase"
+	item_state = "cigarcase"
+	icon = 'icons/obj/cigarettes.dmi'
+	w_class = 1
+	throwforce = 2
+	slot_flags = SLOT_BELT
+	storage_slots = 7
+	can_hold = list(/obj/item/clothing/mask/smokable/cigarette/cigar)
+	icon_type = "cigar"
+
+/obj/item/weapon/storage/fancy/cigar/New()
+	..()
+	flags |= NOREACT
+	for(var/i = 1 to storage_slots)
+		new /obj/item/clothing/mask/smokable/cigarette/cigar(src)
+	create_reagents(15 * storage_slots)
+
+/obj/item/weapon/storage/fancy/cigar/Del()
+	del(reagents)
+	..()
+
+/obj/item/weapon/storage/fancy/cigar/update_icon()
+	icon_state = "[initial(icon_state)][contents.len]"
+	return
+
+/obj/item/weapon/storage/fancy/cigar/remove_from_storage(obj/item/W as obj, atom/new_location)
+		var/obj/item/clothing/mask/smokable/cigarette/cigar/C = W
+		if(!istype(C)) return
+		reagents.trans_to(C, (reagents.total_volume/contents.len))
+		..()
+
+/obj/item/weapon/storage/fancy/cigar/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
+	if(!istype(M, /mob))
+		return
+
+	if(M == user && user.zone_sel.selecting == "mouth" && contents.len > 0 && !user.wear_mask)
+		var/obj/item/clothing/mask/smokable/cigarette/cigar/W = new /obj/item/clothing/mask/smokable/cigarette/cigar(user)
+		reagents.trans_to(W, (reagents.total_volume/contents.len))
+		user.equip_to_slot_if_possible(W, slot_wear_mask)
+		reagents.maximum_volume = 15 * contents.len
+		contents.len--
+		user << "<span class='notice'>You take a cigar out of the case.</span>"
+		update_icon()
+	else
+		..()
 
 /*
  * Vial Box
@@ -213,7 +239,7 @@
 	icon_type = "vial"
 	name = "vial storage box"
 	storage_slots = 6
-	can_hold = list("/obj/item/weapon/reagent_containers/glass/beaker/vial")
+	can_hold = list(/obj/item/weapon/reagent_containers/glass/beaker/vial)
 
 
 /obj/item/weapon/storage/fancy/vials/New()
@@ -228,9 +254,9 @@
 	icon = 'icons/obj/vialbox.dmi'
 	icon_state = "vialbox0"
 	item_state = "syringe_kit"
-	max_w_class = 3
-	can_hold = list("/obj/item/weapon/reagent_containers/glass/beaker/vial")
-	max_combined_w_class = 14 //The sum of the w_classes of all the items in this storage item.
+	max_w_class = 2
+	can_hold = list(/obj/item/weapon/reagent_containers/glass/beaker/vial)
+	max_storage_space = 12 //The sum of the w_classes of all the items in this storage item.
 	storage_slots = 6
 	req_access = list(access_virology)
 

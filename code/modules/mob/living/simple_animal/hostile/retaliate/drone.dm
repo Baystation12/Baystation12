@@ -10,9 +10,9 @@
 	rapid = 1
 	speak_chance = 5
 	turns_per_move = 3
-	response_help = "pokes the"
-	response_disarm = "gently pushes aside the"
-	response_harm = "hits the"
+	response_help = "pokes"
+	response_disarm = "gently pushes aside"
+	response_harm = "hits"
 	speak = list("ALERT.","Hostile-ile-ile entities dee-twhoooo-wected.","Threat parameterszzzz- szzet.","Bring sub-sub-sub-systems uuuup to combat alert alpha-a-a.")
 	emote_see = list("beeps menacingly","whirrs threateningly","scans its immediate vicinity")
 	a_intent = "harm"
@@ -158,8 +158,7 @@
 	walk(src,0)
 
 /mob/living/simple_animal/hostile/retaliate/malf_drone/death()
-	src.visible_message("\blue \icon[src] [src] suddenly breaks apart.")
-	..()
+	..(null,"suddenly breaks apart.")
 	del(src)
 
 /mob/living/simple_animal/hostile/retaliate/malf_drone/Del()
@@ -259,7 +258,7 @@
 		if(spawnees & 128)
 			C = new(src.loc)
 			C.name = "Drone phoron overcharge counter"
-			C.origin_tech = "phoron=[rand(3,6)]"
+			C.origin_tech = "phorontech=[rand(3,6)]"
 
 		if(spawnees & 256)
 			C = new(src.loc)

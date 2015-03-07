@@ -85,15 +85,18 @@
 	return 0
 
 
-/mob/proc/drop_from_inventory(var/obj/item/W)
+/mob/proc/drop_from_inventory(var/obj/item/W, var/atom/Target = null)
 	if(W)
+		if(!Target)
+			Target = loc
+
 		if(client)	client.screen -= W
 		u_equip(W)
 		if(!W) return 1 // self destroying objects (tk, grabs)
 		W.layer = initial(W.layer)
-		W.loc = loc
+		W.loc = Target
 
-		var/turf/T = get_turf(loc)
+		var/turf/T = get_turf(Target)
 		if(isturf(T))
 			T.Entered(W)
 
@@ -178,8 +181,34 @@
 		update_inv_wear_mask(0)
 	return
 
+/mob/proc/unEquip(obj/item/I, force = 0) //Force overrides NODROP for things like wizarditis and admin undress.
+	if(!I) //If there's nothing to drop, the drop is automatically successful. If(unEquip) should generally be used to check for NODROP.
+		return 1
+
+	/*if((I.flags & NODROP) && !force)
+		return 0*/
+
+	if(!I.canremove && !force)
+		return 0
+
+	if(I == r_hand)
+		r_hand = null
+		update_inv_r_hand()
+	else if(I == l_hand)
+		l_hand = null
+		update_inv_l_hand()
+
+	if(I)
+		if(client)
+			client.screen -= I
+		I.loc = loc
+		I.dropped(src)
+		if(I)
+			I.layer = initial(I.layer)
+	return 1
 
 //Attemps to remove an object on a mob.  Will not move it to another area or such, just removes from the mob.
+//It does call u_equip() though. So it can drop items to the floor but only if src is human.
 /mob/proc/remove_from_mob(var/obj/O)
 	src.u_equip(O)
 	if (src.client)
@@ -214,16 +243,7 @@
 
 /** BS12's proc to get the item in the active hand. Couldn't find the /tg/ equivalent. **/
 /mob/proc/equipped()
-	if(issilicon(src))
-		if(isrobot(src))
-			if(src:module_active)
-				return src:module_active
-	else
-		if (hand)
-			return l_hand
-		else
-			return r_hand
-		return
+	return get_active_hand() //TODO: get rid of this proc
 
 /mob/living/carbon/human/proc/equip_if_possible(obj/item/W, slot, del_on_fail = 1) // since byond doesn't seem to have pointers, this seems like the best way to do this :/
 	//warning: icky code
@@ -316,4 +336,3 @@
 		if (del_on_fail)
 			del(W)
 	return equipped
-

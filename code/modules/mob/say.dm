@@ -12,6 +12,20 @@
 	if(say_disabled)	//This is here to try to identify lag problems
 		usr << "\red Speech is currently admin-disabled."
 		return
+	//Let's try to make users fix their errors - we try to detect single, out-of-place letters and 'unintended' words
+	/*
+	var/first_letter = copytext(message,1,2)
+	if((copytext(message,2,3) == " " && first_letter != "I" && first_letter != "A" && first_letter != ";") || cmptext(copytext(message,1,5), "say ") || cmptext(copytext(message,1,4), "me ") || cmptext(copytext(message,1,6), "looc ") || cmptext(copytext(message,1,5), "ooc ") || cmptext(copytext(message,2,6), "say "))
+		var/response = alert(usr, "Do you really want to say this using the *say* verb?\n\n[message]\n", "Confirm your message", "Yes", "Edit message", "No")
+		if(response == "Edit message")
+			message = input(usr, "Please edit your message carefully:", "Edit message", message)
+			if(!message)
+				return
+		else if(response == "No")
+			return
+	*/
+
+	set_typing_indicator(0)
 	usr.say(message)
 
 /mob/verb/me_verb(message as text)
@@ -22,61 +36,39 @@
 		usr << "\red Speech is currently admin-disabled."
 		return
 
-	message = trim(copytext(sanitize(message), 1, MAX_MESSAGE_LEN))
+	message = strip_html_properly(message)
 
+	set_typing_indicator(0)
 	if(use_me)
 		usr.emote("me",usr.emote_type,message)
 	else
 		usr.emote(message)
 
 /mob/proc/say_dead(var/message)
-	var/name = src.real_name
-	var/alt_name = ""
-
 	if(say_disabled)	//This is here to try to identify lag problems
-		usr << "\red Speech is currently admin-disabled."
+		usr << "<span class='danger'>Speech is currently admin-disabled.</span>"
 		return
 
 	if(!src.client.holder)
-		if(!dsay_allowed)
-			src << "\red Deadchat is globally muted"
+		if(!config.dsay_allowed)
+			src << "<span class='danger'>Deadchat is globally muted.</span>"
 			return
 
 	if(client && !(client.prefs.toggles & CHAT_DEAD))
-		usr << "\red You have deadchat muted."
+		usr << "<span class='danger'>You have deadchat muted.</span>"
 		return
 
-	if(mind && mind.name)
-		name = "[mind.name]"
-	else
-		name = real_name
-	if(name != real_name)
-		alt_name = " (died as [real_name])"
-
-	var/rendered = "<span class='game deadsay'><span class='prefix'>DEAD:</span> <span class='name'>[name]</span>[alt_name] [pick("complains","moans","whines","laments","blubbers")], <span class='message'>\"[message]\"</span></span>"
-
-	for(var/mob/M in player_list)
-		if(istype(M, /mob/new_player))
-			continue
-		if(M.client && M.stat == DEAD && (M.client.prefs.toggles & CHAT_DEAD))
-			M << rendered
-			continue
-
-		if(M.client && M.client.holder && !is_mentor(M.client) && (M.client.prefs.toggles & CHAT_DEAD) ) // Show the message to admins/mods with deadchat toggled on
-			M << rendered	//Admins can hear deadchat, if they choose to, no matter if they're blind/deaf or not.
-
-
-	return
+	say_dead_direct("[pick("complains","moans","whines","laments","blubbers")], <span class='message'>\"[message]\"</span>", src)
 
 /mob/proc/say_understands(var/mob/other,var/datum/language/speaking = null)
 
 	if (src.stat == 2)		//Dead
 		return 1
-	
+
 	//Universal speak makes everything understandable, for obvious reasons.
 	else if(src.universal_speak || src.universal_understand)
 		return 1
-	
+
 	//Languages are handled after.
 	if (!speaking)
 		if(!other)
@@ -88,47 +80,36 @@
 		if (istype(other, src.type) || istype(src, other.type))
 			return 1
 		return 0
-	
+
+	if(speaking.flags & INNATE)
+		return 1
+
 	//Language check.
 	for(var/datum/language/L in src.languages)
 		if(speaking.name == L.name)
-			if (L.flags & NONVERBAL)
-				if ((src.sdisabilities & BLIND || src.blinded || src.stat) || !(other in view(src)))
-					return 0
-			
 			return 1
-	
+
 	return 0
 
-/mob/proc/say_quote(var/text,var/datum/language/speaking)
+/*
+   ***Deprecated***
+   let this be handled at the hear_say or hear_radio proc
+   This is left in for robot speaking when humans gain binary channel access until I get around to rewriting
+   robot_talk() proc.
+   There is no language handling build into it however there is at the /mob level so we accept the call
+   for it but just ignore it.
+*/
 
-	if(!text)
-		return "says, \"...\"";	//not the best solution, but it will stop a large number of runtimes. The cause is somewhere in the Tcomms code
-		//tcomms code is still runtiming somewhere here
-	var/ending = copytext(text, length(text))
+/mob/proc/say_quote(var/message, var/datum/language/speaking = null)
+        var/verb = "says"
+        var/ending = copytext(message, length(message))
+        if(ending=="!")
+                verb=pick("exclaims","shouts","yells")
+        else if(ending=="?")
+                verb="asks"
 
-	var/speech_verb = "says"
-	var/speech_style = "body"
+        return verb
 
-	if (speaking)
-		speech_verb = speaking.speech_verb
-		speech_style = speaking.colour
-	else if(speak_emote && speak_emote.len)
-		speech_verb = pick(speak_emote)
-	else if (src.stuttering)
-		speech_verb = "stammers"
-	else if (src.slurring)
-		speech_verb = "slurrs"
-	else if (ending == "?")
-		speech_verb = "asks"
-	else if (ending == "!")
-		speech_verb = "exclaims"
-	else if(isliving(src))
-		var/mob/living/L = src
-		if (L.getBrainLoss() >= 60)
-			speech_verb = "gibbers"
-
-	return "<span class='say_quote'>[speech_verb],</span> \"<span class='[speech_style]'>[text]</span>\""
 
 /mob/proc/emote(var/act, var/type, var/message)
 	if(act == "me")
@@ -160,17 +141,19 @@
 	if(length(message) >= 2)
 		var/channel_prefix = copytext(message, 1 ,3)
 		return department_radio_keys[channel_prefix]
-	
+
 	return null
 
 //parses the language code (e.g. :j) from text, such as that supplied to say.
 //returns the language object only if the code corresponds to a language that src can speak, otherwise null.
 /mob/proc/parse_language(var/message)
+	if(length(message) >= 1 && copytext(message,1,2) == "!")
+		return all_languages["Noise"]
+
 	if(length(message) >= 2)
 		var/language_prefix = lowertext(copytext(message, 1 ,3))
 		var/datum/language/L = language_keys[language_prefix]
 		if (can_speak(L))
 			return L
-	
-	return null
 
+	return null

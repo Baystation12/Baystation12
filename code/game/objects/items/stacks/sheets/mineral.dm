@@ -15,7 +15,7 @@ Mineral Sheets
 */
 
 var/global/list/datum/stack_recipe/sandstone_recipes = list ( \
-	new/datum/stack_recipe("pile of dirt", /obj/machinery/hydroponics/soil, 3, time = 10, one_per_turf = 1, on_floor = 1), \
+	new/datum/stack_recipe("pile of dirt", /obj/machinery/portable_atmospherics/hydroponics/soil, 3, time = 10, one_per_turf = 1, on_floor = 1), \
 	new/datum/stack_recipe("sandstone door", /obj/structure/mineral_door/sandstone, 10, one_per_turf = 1, on_floor = 1), \
 	)
 
@@ -46,6 +46,7 @@ var/global/list/datum/stack_recipe/plastic_recipes = list ( \
 	new/datum/stack_recipe("plastic spoon", /obj/item/weapon/kitchen/utensil/pspoon, 1, on_floor = 1), \
 	new/datum/stack_recipe("plastic knife", /obj/item/weapon/kitchen/utensil/pknife, 1, on_floor = 1), \
 	new/datum/stack_recipe("plastic bag", /obj/item/weapon/storage/bag/plasticbag, 3, on_floor = 1), \
+	new/datum/stack_recipe("blood pack", /obj/item/weapon/reagent_containers/blood/empty, 4, on_floor = 0), \
 	)
 
 var/global/list/datum/stack_recipe/iron_recipes = list ( \
@@ -136,9 +137,11 @@ obj/item/stack/sheet/mineral/iron/New()
 	recipes = plastic_recipes
 
 /obj/item/stack/sheet/mineral/plastic/cyborg
-	name = "plastic sheets"
-	icon_state = "sheet-plastic"
-	perunit = 2000
+	name = "plastic sheets synthesizer"
+	gender = NEUTER
+	uses_charge = 1
+	charge_costs = list(1000)
+	stacktype = /obj/item/stack/sheet/mineral/plastic
 
 /obj/item/stack/sheet/mineral/gold
 	name = "gold"

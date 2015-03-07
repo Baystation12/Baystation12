@@ -4,19 +4,11 @@
 /obj/structure/ore_box
 	icon = 'icons/obj/mining.dmi'
 	icon_state = "orebox0"
-	name = "Ore Box"
+	name = "ore box"
 	desc = "A heavy box used for storing ore."
 	density = 1
-	var/amt_gold = 0
-	var/amt_silver = 0
-	var/amt_diamond = 0
-	var/amt_glass = 0
-	var/amt_iron = 0
-	var/amt_phoron = 0
-	var/amt_uranium = 0
-	var/amt_clown = 0
-	var/amt_strange = 0
 	var/last_update = 0
+	var/list/stored_ore = list()
 
 /obj/structure/ore_box/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (istype(W, /obj/item/weapon/ore))
@@ -28,54 +20,46 @@
 		for(var/obj/item/weapon/ore/O in S.contents)
 			S.remove_from_storage(O, src) //This will move the item to this item's contents
 		user << "\blue You empty the satchel into the box."
+
+	update_ore_count()
+
 	return
 
-/obj/structure/ore_box/examine()
-	set name = "Examine"
-	set category = "IC"
-	set src in view(usr.client) //If it can be seen, it can be examined.
+/obj/structure/ore_box/proc/update_ore_count()
 
-	if (!( usr ))
+	stored_ore = list()
+
+	for(var/obj/item/weapon/ore/O in contents)
+
+		if(stored_ore[O.name])
+			stored_ore[O.name]++
+		else
+			stored_ore[O.name] = 1
+
+/obj/structure/ore_box/examine(mob/user)
+	user << "That's an [src]."
+	user << desc
+
+	// Borgs can now check contents too.
+	if((!istype(user, /mob/living/carbon/human)) && (!istype(user, /mob/living/silicon/robot)))
 		return
-	usr << "That's an [src]."
-	usr << desc
 
-	if(!istype(usr, /mob/living/carbon/human)) //Only living, intelligent creatures with hands can check the contents of ore boxes.
+	if(!Adjacent(user)) //Can only check the contents of ore boxes if you can physically reach them.
 		return
 
-	if(!Adjacent(usr)) //Can only check the contents of ore boxes if you can physically reach them.
-		return
+	add_fingerprint(user)
 
-	add_fingerprint(usr)
-
-	if(contents.len < 1)
-		usr << "It is empty."
+	if(!contents.len)
+		user << "It is empty."
 		return
 
 	if(world.time > last_update + 10)
-		update_orecount()
+		update_ore_count()
 		last_update = world.time
 
-	var/dat = text("<b>The contents of the ore box reveal...</b>")
-	if (amt_iron)
-		dat += text("<br>Metal ore: [amt_iron]")
-	if (amt_glass)
-		dat += text("<br>Sand: [amt_glass]")
-	if (amt_phoron)
-		dat += text("<br>Phoron ore: [amt_phoron]")
-	if (amt_uranium)
-		dat += text("<br>Uranium ore: [amt_uranium]")
-	if (amt_silver)
-		dat += text("<br>Silver ore: [amt_silver]")
-	if (amt_gold)
-		dat += text("<br>Gold ore: [amt_gold]")
-	if (amt_diamond)
-		dat += text("<br>Diamond ore: [amt_diamond]")
-	if (amt_strange)
-		dat += text("<br>Strange rocks: [amt_strange]")
-
-	usr << dat
-
+	user << "It holds:"
+	for(var/ore in stored_ore)
+		user << "- [stored_ore[ore]] [ore]"
 	return
 
 
@@ -108,45 +92,10 @@
 
 	return
 
-
-// Updates ore tally
-/obj/structure/ore_box/proc/update_orecount()
-	amt_iron = 0
-	amt_glass = 0
-	amt_phoron = 0
-	amt_uranium = 0
-	amt_silver = 0
-	amt_gold = 0
-	amt_diamond = 0
-	amt_strange = 0
-	amt_clown = 0
-
-	for(var/obj/item/weapon/ore/O in contents)
-		if(!istype(O))
-			continue
-
-		if (istype(O, /obj/item/weapon/ore/iron))
-			amt_iron++
-			continue
-		if (istype(O, /obj/item/weapon/ore/glass))
-			amt_glass++
-			continue
-		if (istype(O, /obj/item/weapon/ore/phoron))
-			amt_phoron++
-			continue
-		if (istype(O, /obj/item/weapon/ore/uranium))
-			amt_uranium++
-			continue
-		if (istype(O, /obj/item/weapon/ore/silver))
-			amt_silver++
-			continue
-		if (istype(O, /obj/item/weapon/ore/gold))
-			amt_gold++
-			continue
-		if (istype(O, /obj/item/weapon/ore/diamond))
-			amt_diamond++
-			continue
-		if (istype(O, /obj/item/weapon/ore/strangerock))
-			amt_strange++
-			continue
-	return
+/obj/structure/ore_box/ex_act(severity)
+	if(severity == 1.0 || (severity < 3.0 && prob(50)))
+		for (var/obj/item/weapon/ore/O in contents)
+			O.loc = src.loc
+			O.ex_act(severity++)
+		del(src)
+		return

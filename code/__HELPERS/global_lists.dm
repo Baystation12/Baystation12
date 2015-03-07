@@ -22,11 +22,15 @@ var/global/list/joblist = list()					//list of all jobstypes, minus borg and AI
 //Languages/species/whitelist.
 var/global/list/all_species[0]
 var/global/list/all_languages[0]
-var/global/list/language_keys[0]					//table of say codes for all languages
-var/global/list/whitelisted_species = list("Human")
+var/global/list/language_keys[0]					// Table of say codes for all languages
+var/global/list/whitelisted_species = list("Human") // Species that require a whitelist check.
+var/global/list/playable_species = list("Human")    // A list of ALL playable species, whitelisted, latejoin or otherwise.
 
 // Posters
-var/global/list/datum/poster/poster_designs = typesof(/datum/poster) - /datum/poster
+var/global/list/poster_designs = list()
+
+// Uplinks
+var/list/obj/item/device/uplink/world_uplinks = list()
 
 //Preferences stuff
 	//Hairstyles
@@ -38,18 +42,18 @@ var/global/list/facial_hair_styles_male_list = list()
 var/global/list/facial_hair_styles_female_list = list()
 var/global/list/skin_styles_female_list = list()		//unused
 	//Underwear
-var/global/list/underwear_m = list("White", "Grey", "Green", "Blue", "Black", "Mankini", "None") //Curse whoever made male/female underwear diffrent colours
-var/global/list/underwear_f = list("Red", "White", "Yellow", "Blue", "Black", "Thong", "None")
+var/global/list/underwear_m = list("White" = "m1", "Grey" = "m2", "Green" = "m3", "Blue" = "m4", "Black" = "m5", "Mankini" = "m6", "None") //Curse whoever made male/female underwear diffrent colours
+var/global/list/underwear_f = list("Red" = "f1", "White" = "f2", "Yellow" = "f3", "Blue" = "f4", "Black" = "f5", "Thong" = "f6", "Black Sports" = "f7","White Sports" = "f8","None")
 	//undershirt
-var/global/list/undershirt_t = list("Black Tank top", "White Tank top", "Black shirt", "White shirt", "None")
+var/global/list/undershirt_t = list("White Tank top" = "u1", "Black Tank top" = "u2", "Black shirt" = "u3", "White shirt" = "u4", "None")
 	//Backpacks
 var/global/list/backbaglist = list("Nothing", "Backpack", "Satchel", "Satchel Alt")
-
+var/global/list/exclude_jobs = list(/datum/job/ai,/datum/job/cyborg)
 //////////////////////////
 /////Initial Building/////
 //////////////////////////
 
-/hook/startup/proc/makeDatumRefLists()
+/proc/makeDatumRefLists()
 	var/list/paths
 
 	//Hair - Initialise all /datum/sprite_accessory/hair into an list indexed by hair-style name
@@ -83,14 +87,9 @@ var/global/list/backbaglist = list("Nothing", "Backpack", "Satchel", "Satchel Al
 		surgery_steps += S
 	sort_surgeries()
 
-	//Medical side effects. List all effects by their names
-	paths = typesof(/datum/medical_effect)-/datum/medical_effect
-	for(var/T in paths)
-		var/datum/medical_effect/M = new T
-		side_effects[M.name] = T
-
 	//List of job. I can't believe this was calculated multiple times per tick!
-	paths = typesof(/datum/job) -list(/datum/job,/datum/job/ai,/datum/job/cyborg)
+	paths = typesof(/datum/job)-/datum/job
+	paths -= exclude_jobs
 	for(var/T in paths)
 		var/datum/job/J = new T
 		joblist[J.title] = J
@@ -100,10 +99,13 @@ var/global/list/backbaglist = list("Nothing", "Backpack", "Satchel", "Satchel Al
 	for(var/T in paths)
 		var/datum/language/L = new T
 		all_languages[L.name] = L
-	
+
 	for (var/language_name in all_languages)
 		var/datum/language/L = all_languages[language_name]
-		language_keys[":[lowertext(L.key)]"] = L
+		if(!(L.flags & NONGLOBAL))
+			language_keys[":[lowertext(L.key)]"] = L
+			language_keys[".[lowertext(L.key)]"] = L
+			language_keys["#[lowertext(L.key)]"] = L
 
 	var/rkey = 0
 	paths = typesof(/datum/species)-/datum/species
@@ -113,8 +115,16 @@ var/global/list/backbaglist = list("Nothing", "Backpack", "Satchel", "Satchel Al
 		S.race_key = rkey //Used in mob icon caching.
 		all_species[S.name] = S
 
+		if(!(S.flags & IS_RESTRICTED))
+			playable_species += S.name
 		if(S.flags & IS_WHITELISTED)
 			whitelisted_species += S.name
+
+	//Posters
+	paths = typesof(/datum/poster) - /datum/poster
+	for(var/T in paths)
+		var/datum/poster/P = new T
+		poster_designs += P
 
 	return 1
 

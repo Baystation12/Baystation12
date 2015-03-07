@@ -259,6 +259,8 @@ client
 			body += "<option value='?_src_=vars;regenerateicons=\ref[D]'>Regenerate Icons</option>"
 			body += "<option value='?_src_=vars;addlanguage=\ref[D]'>Add Language</option>"
 			body += "<option value='?_src_=vars;remlanguage=\ref[D]'>Remove Language</option>"
+			body += "<option value='?_src_=vars;addorgan=\ref[D]'>Add Organ</option>"
+			body += "<option value='?_src_=vars;remorgan=\ref[D]'>Remove Organ</option>"
 
 			body += "<option value='?_src_=vars;fix_nano=\ref[D]'>Fix NanoUI</option>"
 
@@ -266,7 +268,6 @@ client
 			body += "<option value='?_src_=vars;remverb=\ref[D]'>Remove Verb</option>"
 			if(ishuman(D))
 				body += "<option value>---</option>"
-				body += "<option value='?_src_=vars;setmutantrace=\ref[D]'>Set Mutantrace</option>"
 				body += "<option value='?_src_=vars;setspecies=\ref[D]'>Set Species</option>"
 				body += "<option value='?_src_=vars;makeai=\ref[D]'>Make AI</option>"
 				body += "<option value='?_src_=vars;makerobot=\ref[D]'>Make cyborg</option>"
@@ -426,7 +427,7 @@ client
 			usr << "This can only be used on instances of type /mob"
 			return
 
-		var/new_name = copytext(sanitize(input(usr,"What would you like to name this mob?","Input a name",M.real_name) as text|null),1,MAX_NAME_LEN)
+		var/new_name = sanitize(copytext(input(usr,"What would you like to name this mob?","Input a name",M.real_name) as text|null,1,MAX_NAME_LEN))
 		if( !new_name || !M )	return
 
 		message_admins("Admin [key_name_admin(usr)] renamed [key_name_admin(M)] to [new_name].")
@@ -495,7 +496,7 @@ client
 
 		src.give_disease(M)
 		href_list["datumrefresh"] = href_list["give_spell"]
-		
+
 	else if(href_list["give_disease2"])
 		if(!check_rights(R_ADMIN|R_FUN))	return
 
@@ -580,7 +581,7 @@ client
 			usr << "This can only be used on instances of type /mob/living/carbon/human"
 			return
 
-		H.makeSkeleton()
+		H.ChangeToSkeleton()
 		href_list["datumrefresh"] = href_list["make_skeleton"]
 
 	else if(href_list["delall"])
@@ -668,8 +669,8 @@ client
 			return
 
 		switch(href_list["rotatedir"])
-			if("right")	A.dir = turn(A.dir, -45)
-			if("left")	A.dir = turn(A.dir, 45)
+			if("right")	A.set_dir(turn(A.dir, -45))
+			if("left")	A.set_dir(turn(A.dir, 45))
 		href_list["datumrefresh"] = href_list["rotatedatum"]
 
 	else if(href_list["makemonkey"])
@@ -742,27 +743,6 @@ client
 			return
 		holder.Topic(href, list("makeai"=href_list["makeai"]))
 
-	else if(href_list["setmutantrace"])
-		if(!check_rights(R_SPAWN))	return
-
-		var/mob/living/carbon/human/H = locate(href_list["setmutantrace"])
-		if(!istype(H))
-			usr << "This can only be done to instances of type /mob/living/carbon/human"
-			return
-
-		var/new_mutantrace = input("Please choose a new mutantrace","Mutantrace",null) as null|anything in list("NONE","golem","lizard","slime","plant","shadow","tajaran","skrell","vox")
-		switch(new_mutantrace)
-			if(null)
-				return
-			if("NONE")
-				new_mutantrace = ""
-		if(!H)
-			usr << "Mob doesn't exist anymore"
-			return
-		if(H.dna)
-			H.dna.mutantrace = new_mutantrace
-			H.update_mutantrace()
-
 	else if(href_list["setspecies"])
 		if(!check_rights(R_SPAWN))	return
 
@@ -779,7 +759,6 @@ client
 
 		if(H.set_species(new_species))
 			usr << "Set species of [H] to [H.species]."
-			H.regenerate_icons()
 		else
 			usr << "Failed! Something went wrong."
 
@@ -792,6 +771,9 @@ client
 			return
 
 		var/new_language = input("Please choose a language to add.","Language",null) as null|anything in all_languages
+
+		if(!new_language)
+			return
 
 		if(!H)
 			usr << "Mob doesn't exist anymore"
@@ -816,6 +798,9 @@ client
 
 		var/datum/language/rem_language = input("Please choose a language to remove.","Language",null) as null|anything in H.languages
 
+		if(!rem_language)
+			return
+
 		if(!H)
 			usr << "Mob doesn't exist anymore"
 			return
@@ -827,9 +812,9 @@ client
 
 	else if(href_list["addverb"])
 		if(!check_rights(R_DEBUG))      return
-		
+
 		var/mob/living/H = locate(href_list["addverb"])
-		
+
 		if(!istype(H))
 			usr << "This can only be done to instances of type /mob/living"
 			return
@@ -845,7 +830,7 @@ client
 				possibleverbs += typesof(/mob/living/silicon/proc,/mob/living/silicon/ai/proc,/mob/living/silicon/ai/verb)
 		possibleverbs -= H.verbs
 		possibleverbs += "Cancel" 								// ...And one for the bottom
-		
+
 		var/verb = input("Select a verb!", "Verbs",null) as anything in possibleverbs
 		if(!H)
 			usr << "Mob doesn't exist anymore"
@@ -854,7 +839,7 @@ client
 			return
 		else
 			H.verbs += verb
-		
+
 	else if(href_list["remverb"])
 		if(!check_rights(R_DEBUG))      return
 
@@ -872,7 +857,77 @@ client
 		else
 			H.verbs -= verb
 
-	
+	else if(href_list["addorgan"])
+		if(!check_rights(R_SPAWN))	return
+
+		var/mob/living/carbon/M = locate(href_list["addorgan"])
+		if(!istype(M))
+			usr << "This can only be done to instances of type /mob/living/carbon"
+			return
+
+		var/new_organ = input("Please choose an organ to add.","Organ",null) as null|anything in typesof(/datum/organ/internal)-/datum/organ/internal
+		if(!new_organ) return
+
+		if(!M)
+			usr << "Mob doesn't exist anymore"
+			return
+
+		if(locate(new_organ) in M.internal_organs)
+			usr << "Mob already has that organ."
+			return
+
+		if(istype(M,/mob/living/carbon/human))
+			var/mob/living/carbon/human/H = M
+			var/datum/organ/internal/I = new new_organ(H)
+
+			var/organ_slot = input(usr, "Which slot do you want the organ to go in ('default' for default)?")  as text|null
+
+			if(!organ_slot)
+				return
+
+			if(organ_slot != "default")
+				organ_slot = sanitize(copytext(organ_slot,1,MAX_MESSAGE_LEN))
+			else
+				if(I.removed_type)
+					var/obj/item/organ/O = new I.removed_type()
+					organ_slot = O.organ_tag
+					del(O)
+				else
+					organ_slot = "unknown organ"
+
+			if(H.internal_organs_by_name[organ_slot])
+				usr << "[H] already has an organ in that slot."
+				del(I)
+				return
+
+			H.internal_organs |= I
+			H.internal_organs_by_name[organ_slot] = I
+			usr << "Added new [new_organ] to [H] as slot [organ_slot]."
+		else
+			new new_organ(M)
+			usr << "Added new [new_organ] to [M]."
+
+	else if(href_list["remorgan"])
+		if(!check_rights(R_SPAWN))	return
+
+		var/mob/living/carbon/M = locate(href_list["remorgan"])
+		if(!istype(M))
+			usr << "This can only be done to instances of type /mob/living/carbon"
+			return
+
+		var/rem_organ = input("Please choose an organ to remove.","Organ",null) as null|anything in M.internal_organs
+
+		if(!M)
+			usr << "Mob doesn't exist anymore"
+			return
+
+		if(!(locate(rem_organ) in M.internal_organs))
+			usr << "Mob does not have that organ."
+			return
+
+		usr << "Removed [rem_organ] from [M]."
+		del(rem_organ)
+
 	else if(href_list["fix_nano"])
 		if(!check_rights(R_DEBUG)) return
 
@@ -881,17 +936,13 @@ client
 		if(!istype(H) || !H.client)
 			usr << "This can only be done on mobs with clients"
 			return
-		
-				
 
 		nanomanager.send_resources(H.client)
-		
+
 		usr << "Resource files sent"
 		H << "Your NanoUI Resource files have been refreshed"
 
 		log_admin("[key_name(usr)] resent the NanoUI resource files to [key_name(H)] ")
-
-
 
 	else if(href_list["regenerateicons"])
 		if(!check_rights(0))	return

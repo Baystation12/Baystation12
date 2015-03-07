@@ -18,6 +18,7 @@
 	w_class = 1
 	sharp = 1
 	var/mode = SYRINGE_DRAW
+	var/image/filling //holds a reference to the current filling overlay
 
 	on_reagent_change()
 		update_icon()
@@ -44,9 +45,6 @@
 	attack_hand()
 		..()
 		update_icon()
-
-	attack_paw()
-		return attack_hand()
 
 	attackby(obj/item/I as obj, mob/user as mob)
 
@@ -128,12 +126,12 @@
 
 			if(SYRINGE_INJECT)
 				if(!reagents.total_volume)
-					user << "\red The Syringe is empty."
+					user << "\red The syringe is empty."
 					return
 				if(istype(target, /obj/item/weapon/implantcase/chem))
 					return
 
-				if(!target.is_open_container() && !ismob(target) && !istype(target, /obj/item/weapon/reagent_containers/food) && !istype(target, /obj/item/slime_extract) && !istype(target, /obj/item/clothing/mask/cigarette) && !istype(target, /obj/item/weapon/storage/fancy/cigarettes))
+				if(!target.is_open_container() && !ismob(target) && !istype(target, /obj/item/weapon/reagent_containers/food) && !istype(target, /obj/item/slime_extract) && !istype(target, /obj/item/clothing/mask/smokable/cigarette) && !istype(target, /obj/item/weapon/storage/fancy/cigarettes))
 					user << "\red You cannot directly fill this object."
 					return
 				if(target.reagents.total_volume >= target.reagents.maximum_volume)
@@ -220,15 +218,15 @@
 		item_state = "syringe_[rounded_vol]"
 
 		if(reagents.total_volume)
-			var/image/filling = image('icons/obj/reagentfillings.dmi', src, "syringe10")
+			filling = image('icons/obj/reagentfillings.dmi', src, "syringe10")
 
 			filling.icon_state = "syringe[rounded_vol]"
 
-			filling.icon += mix_color_from_reagents(reagents.reagent_list)
+			filling.color = mix_color_from_reagents(reagents.reagent_list)
 			overlays += filling
 
 
-	/obj/item/weapon/reagent_containers/syringe/proc/syringestab(mob/living/carbon/target as mob, mob/living/carbon/user as mob)
+	proc/syringestab(mob/living/carbon/target as mob, mob/living/carbon/user as mob)
 
 		user.attack_log += "\[[time_stamp()]\]<font color='red'> Attacked [target.name] ([target.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])</font>"
 		target.attack_log += "\[[time_stamp()]\]<font color='orange'> Attacked by [user.name] ([user.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])</font>"
@@ -271,11 +269,17 @@
 		src.reagents.reaction(target, INGEST)
 		var/syringestab_amount_transferred = rand(0, (reagents.total_volume - 5)) //nerfed by popular demand
 		src.reagents.trans_to(target, syringestab_amount_transferred)
+		src.break_syringe(target, user)
+		
+	proc/break_syringe(mob/living/carbon/target, mob/living/carbon/user)
 		src.desc += " It is broken."
 		src.mode = SYRINGE_BROKEN
-		src.add_blood(target)
-		src.add_fingerprint(usr)
+		if(target)
+			src.add_blood(target)
+		if(user)
+			src.add_fingerprint(user)
 		src.update_icon()
+
 
 
 /obj/item/weapon/reagent_containers/ld50_syringe
@@ -307,9 +311,6 @@
 	attack_hand()
 		..()
 		update_icon()
-
-	attack_paw()
-		return attack_hand()
 
 	attackby(obj/item/I as obj, mob/user as mob)
 
@@ -421,6 +422,17 @@
 	New()
 		..()
 		reagents.add_reagent("spaceacillin", 15)
+		mode = SYRINGE_INJECT
+		update_icon()
+
+/obj/item/weapon/reagent_containers/syringe/drugs
+	name = "Syringe (drugs)"
+	desc = "Contains aggressive drugs meant for torture."
+	New()
+		..()
+		reagents.add_reagent("space_drugs",  5)
+		reagents.add_reagent("mindbreaker",  5)
+		reagents.add_reagent("cryptobiolin", 5)
 		mode = SYRINGE_INJECT
 		update_icon()
 

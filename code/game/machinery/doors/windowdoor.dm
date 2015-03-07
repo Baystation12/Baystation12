@@ -4,7 +4,10 @@
 	icon = 'icons/obj/doors/windoor.dmi'
 	icon_state = "left"
 	var/base_state = "left"
-	var/health = 150.0 //If you change this, consiter changing ../door/window/brigdoor/ health at the bottom of this .dm file
+	min_force = 4
+	hitsound = 'sound/effects/Glasshit.ogg'
+	maxhealth = 150 //If you change this, consiter changing ../door/window/brigdoor/ health at the bottom of this .dm file
+	health
 	visible = 0.0
 	use_power = 0
 	flags = ON_BORDER
@@ -13,26 +16,44 @@
 	explosion_resistance = 5
 	air_properties_vary_with_direction = 1
 
-
-/obj/machinery/door/window/update_nearby_tiles(need_rebuild)
-	if(!air_master)
-		return 0
-
-	air_master.mark_for_update(get_turf(src))
-
-	return 1
-
 /obj/machinery/door/window/New()
 	..()
-
+	update_nearby_tiles()
 	if (src.req_access && src.req_access.len)
 		src.icon_state = "[src.icon_state]"
 		src.base_state = src.icon_state
 	return
 
+/obj/machinery/door/window/proc/shatter(var/display_message = 1)
+	new /obj/item/weapon/shard(src.loc)
+	var/obj/item/stack/cable_coil/CC = new /obj/item/stack/cable_coil(src.loc)
+	CC.amount = 2
+	var/obj/item/weapon/airlock_electronics/ae
+	if(!electronics)
+		ae = new/obj/item/weapon/airlock_electronics( src.loc )
+		if(!src.req_access)
+			src.check_access()
+		if(src.req_access.len)
+			ae.conf_access = src.req_access
+		else if (src.req_one_access.len)
+			ae.conf_access = src.req_one_access
+			ae.one_access = 1
+	else
+		ae = electronics
+		electronics = null
+		ae.loc = src.loc
+	if(operating == -1)
+		ae.icon_state = "door_electronics_smoked"
+		operating = 0
+	src.density = 0
+	playsound(src, "shatter", 70, 1)
+	if(display_message)
+		visible_message("[src] shatters!")
+	del(src)
+
 /obj/machinery/door/window/Del()
 	density = 0
-	playsound(src, "shatter", 70, 1)
+	update_nearby_tiles()
 	..()
 
 /obj/machinery/door/window/Bumped(atom/movable/AM as mob|obj)
@@ -51,11 +72,12 @@
 					sleep(50)
 					close()
 		return
+	var/mob/M = AM // we've returned by here if M is not a mob
 	if (!( ticker ))
 		return
 	if (src.operating)
 		return
-	if (src.density && src.allowed(AM))
+	if (src.density && !M.small && src.allowed(AM))
 		open()
 		if(src.check_access(null))
 			sleep(50)
@@ -121,69 +143,24 @@
 	src.operating = 0
 	return 1
 
-/obj/machinery/door/window/proc/take_damage(var/damage)
+/obj/machinery/door/window/take_damage(var/damage)
 	src.health = max(0, src.health - damage)
 	if (src.health <= 0)
-		new /obj/item/weapon/shard(src.loc)
-		var/obj/item/weapon/cable_coil/CC = new /obj/item/weapon/cable_coil(src.loc)
-		CC.amount = 2
-		var/obj/item/weapon/airlock_electronics/ae
-		if(!electronics)
-			ae = new/obj/item/weapon/airlock_electronics( src.loc )
-			if(!src.req_access)
-				src.check_access()
-			if(src.req_access.len)
-				ae.conf_access = src.req_access
-			else if (src.req_one_access.len)
-				ae.conf_access = src.req_one_access
-				ae.one_access = 1
-		else
-			ae = electronics
-			electronics = null
-			ae.loc = src.loc
-		if(operating == -1)
-			ae.icon_state = "door_electronics_smoked"
-			operating = 0
-		src.density = 0
-		del(src)
+		shatter()
 		return
-
-/obj/machinery/door/window/bullet_act(var/obj/item/projectile/Proj)
-	if(Proj.damage)
-		take_damage(round(Proj.damage / 2))
-	..()
-
-//When an object is thrown at the window
-/obj/machinery/door/window/hitby(AM as mob|obj)
-
-	..()
-	visible_message("\red <B>The glass door was hit by [AM].</B>", 1)
-	var/tforce = 0
-	if(ismob(AM))
-		tforce = 40
-	else
-		tforce = AM:throwforce
-	playsound(src.loc, 'sound/effects/Glasshit.ogg', 100, 1)
-	take_damage(tforce)
-	//..() //Does this really need to be here twice? The parent proc doesn't even do anything yet. - Nodrak
-	return
-
 
 /obj/machinery/door/window/attack_ai(mob/user as mob)
 	return src.attack_hand(user)
 
-/obj/machinery/door/window/attack_paw(mob/user as mob)
-	if(istype(user, /mob/living/carbon/alien/humanoid) || istype(user, /mob/living/carbon/slime/adult))
-		if(src.operating)
-			return
-		playsound(src.loc, 'sound/effects/Glasshit.ogg', 75, 1)
-		visible_message("\red <B>[user] smashes against the [src.name].</B>", 1)
-		take_damage(25)
-	else
-		return src.attack_hand(user)
-
-
 /obj/machinery/door/window/attack_hand(mob/user as mob)
+
+	if(istype(user,/mob/living/carbon/human))
+		var/mob/living/carbon/human/H = user
+		if(H.species.can_shred(H))
+			playsound(src.loc, 'sound/effects/Glasshit.ogg', 75, 1)
+			visible_message("\red <B>[user] smashes against the [src.name].</B>", 1)
+			take_damage(25)
+			return
 	return src.attackby(user, user)
 
 /obj/machinery/door/window/attackby(obj/item/weapon/I as obj, mob/user as mob)
@@ -222,7 +199,7 @@
 				wa.name = "Wired Windoor Assembly"
 			if (src.base_state == "right" || src.base_state == "rightsecure")
 				wa.facing = "r"
-			wa.dir = src.dir
+			wa.set_dir(src.dir)
 			wa.state = "02"
 			wa.update_icon()
 
@@ -243,7 +220,7 @@
 			ae.icon_state = "door_electronics_smoked"
 
 			operating = 0
-			del(src)
+			shatter(src)
 			return
 
 	//If it's a weapon, smash windoor. Unless it's an id card, agent card, ect.. then ignore it (Cards really shouldnt damage a door anyway)

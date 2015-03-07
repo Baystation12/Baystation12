@@ -9,7 +9,7 @@
 /obj/effect/step_trigger/proc/Trigger(var/atom/movable/A)
 	return 0
 
-/obj/effect/step_trigger/HasEntered(H as mob|obj)
+/obj/effect/step_trigger/Crossed(H as mob|obj)
 	..()
 	if(!H)
 		return
@@ -71,7 +71,7 @@
 				var/predir = AM.dir
 				step(AM, direction)
 				if(!facedir)
-					AM.dir = predir
+					AM.set_dir(predir)
 
 
 

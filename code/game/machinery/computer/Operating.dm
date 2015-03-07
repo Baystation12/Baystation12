@@ -1,7 +1,7 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:31
 
 /obj/machinery/computer/operating
-	name = "Operating Computer"
+	name = "patient monitoring console"
 	density = 1
 	anchored = 1.0
 	icon_state = "operating"
@@ -71,7 +71,7 @@
 
 /obj/machinery/computer/operating/Topic(href, href_list)
 	if(..())
-		return
+		return 1
 	if ((usr.contents.Find(src) || (in_range(src, usr) && istype(src.loc, /turf))) || (istype(usr, /mob/living/silicon)))
 		usr.set_machine(src)
 	return

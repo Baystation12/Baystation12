@@ -1,5 +1,5 @@
 /obj/machinery/computer/teleporter
-	name = "Teleporter"
+	name = "Teleporter Control Console"
 	desc = "Used to control a linked teleportation Hub and Station."
 	icon_state = "teleport"
 	circuit = "/obj/item/weapon/circuitboard/teleporter"
@@ -9,6 +9,10 @@
 	var/one_time_use = 0 //Used for one-time-use teleport cards (such as clown planet coordinates.)
 						 //Setting this to 1 will set src.locked to null after a player enters the portal and will not allow hand-teles to open portals to that location.
 
+/* Ghosts can't use this */
+/obj/machinery/computer/teleporter/attack_ghost(user as mob)
+	return 1
+
 /obj/machinery/computer/teleporter/New()
 	src.id = "[rand(1000, 9999)]"
 	..()
@@ -17,6 +21,7 @@
 	return
 
 /obj/machinery/computer/teleporter/initialize()
+	..()
 	var/obj/machinery/teleport/station/station = locate(/obj/machinery/teleport/station, get_step(src, dir))
 	var/obj/machinery/teleport/hub/hub
 	if(station)
@@ -24,11 +29,11 @@
 
 	if(istype(station))
 		station.com = hub
-		station.dir = dir
+		station.set_dir(dir)
 
 	if(istype(hub))
 		hub.com = src
-		hub.dir = dir
+		hub.set_dir(dir)
 
 /obj/machinery/computer/teleporter/attackby(I as obj, mob/living/user as mob)
 	if(istype(I, /obj/item/weapon/card/data/))
@@ -76,15 +81,14 @@
 
 	return
 
-/obj/machinery/computer/teleporter/attack_paw()
-	src.attack_hand()
-
 /obj/machinery/teleport/station/attack_ai()
 	src.attack_hand()
 
-/obj/machinery/computer/teleporter/attack_hand()
-	if(stat & (NOPOWER|BROKEN))
-		return
+/obj/machinery/computer/teleporter/attack_hand(user as mob)
+	if(..()) return
+	
+	/* Ghosts can't use this one because it's a direct selection */
+	if(istype(user, /mob/dead/observer)) return
 
 	var/list/L = list()
 	var/list/areaindex = list()
@@ -93,7 +97,7 @@
 		var/turf/T = get_turf(R)
 		if (!T)
 			continue
-		if(T.z == 2 || T.z > 7)
+		if(!(T.z in config.player_levels))
 			continue
 		var/tmpname = T.loc.name
 		if(areaindex[tmpname])
@@ -120,7 +124,12 @@
 				areaindex[tmpname] = 1
 			L[tmpname] = I
 
-	var/desc = input("Please select a location to lock in.", "Locking Computer") in L
+	var/desc = input("Please select a location to lock in.", "Locking Computer") in L|null
+	if(!desc)
+		return
+	if(get_dist(src, usr) > 1 && !issilicon(usr))
+		return
+
 	src.locked = L[desc]
 	for(var/mob/O in hearers(src, null))
 		O.show_message("\blue Locked In", 2)
@@ -198,6 +207,8 @@
 		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 		s.set_up(5, 1, src)
 		s.start()
+		accurate = 1
+		spawn(3000)	accurate = 0 //Accurate teleporting for 5 minutes
 		for(var/mob/B in hearers(src, null))
 			B.show_message("\blue Test fire completed.")
 	return
@@ -308,9 +319,6 @@
 /obj/machinery/teleport/station/attackby(var/obj/item/weapon/W)
 	src.attack_hand()
 
-/obj/machinery/teleport/station/attack_paw()
-	src.attack_hand()
-
 /obj/machinery/teleport/station/attack_ai()
 	src.attack_hand()
 
@@ -339,6 +347,7 @@
 
 	if (com)
 		com.icon_state = "tele0"
+		com.accurate = 0
 		for(var/mob/O in hearers(src, null))
 			O.show_message("\blue Teleporter disengaged!", 2)
 	src.add_fingerprint(usr)

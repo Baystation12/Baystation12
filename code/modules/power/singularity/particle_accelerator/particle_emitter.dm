@@ -44,6 +44,6 @@
 			if(2)
 				A = new/obj/effect/accelerated_particle/strong(T, dir)
 		if(A)
-			A.dir = src.dir
+			A.set_dir(src.dir)
 			return 1
 	return 0

@@ -37,18 +37,22 @@
 /turf/ex_act(severity)
 	return 0
 
-
-/turf/bullet_act(var/obj/item/projectile/Proj)
-	if(istype(Proj ,/obj/item/projectile/beam/pulse))
-		src.ex_act(2)
-	..()
-	return 0
-
-/turf/bullet_act(var/obj/item/projectile/Proj)
-	if(istype(Proj ,/obj/item/projectile/bullet/gyro))
-		explosion(src, -1, 0, 2)
-	..()
-	return 0
+/turf/attack_hand(mob/user)
+	if(!(user.canmove) || user.restrained() || !(user.pulling))
+		return 0
+	if(user.pulling.anchored || !isturf(user.pulling.loc))
+		return 0
+	if(user.pulling.loc != user.loc && get_dist(user, user.pulling) > 1)
+		return 0
+	if(ismob(user.pulling))
+		var/mob/M = user.pulling
+		var/atom/movable/t = M.pulling
+		M.stop_pulling()
+		step(user.pulling, get_dir(user.pulling.loc, src))
+		M.start_pulling(t)
+	else
+		step(user.pulling, get_dir(user.pulling.loc, src))
+	return 1
 
 /turf/Enter(atom/movable/mover as mob|obj, atom/forget as mob|obj|turf|area)
 	if(movement_disabled && usr.ckey != movement_disabled_exception)
@@ -86,7 +90,7 @@
 
 	//Finally, check objects/mobs to block entry that are not on the border
 	for(var/atom/movable/obstacle in src)
-		if(obstacle.flags & ~ON_BORDER)
+		if(!(obstacle.flags & ON_BORDER))
 			if(!obstacle.CanPass(mover, mover.loc, 1, 0) && (forget != obstacle))
 				mover.Bump(obstacle, 1)
 				return 0
@@ -112,40 +116,27 @@
 	if(!istype(atom, /atom/movable))
 		return
 
-	var/atom/movable/M = atom
+	var/atom/movable/A = atom
 
 	var/loopsanity = 100
-	if(ismob(M))
-		if(!M:lastarea)
-			M:lastarea = get_area(M.loc)
-		if(M:lastarea.has_gravity == 0)
+	if(ismob(A))
+		var/mob/M = A
+		if(!M.lastarea)
+			M.lastarea = get_area(M.loc)
+		if(M.lastarea.has_gravity == 0)
 			inertial_drift(M)
-
-	/*
-		if(M.flags & NOGRAV)
-			inertial_drift(M)
-	*/
-
-
 
 		else if(!istype(src, /turf/space))
-			M:inertia_dir = 0
+			M.inertia_dir = 0
+			M.make_floating(0)
 	..()
 	var/objects = 0
-	for(var/atom/A as mob|obj|turf|area in src)
+	for(var/atom/O as mob|obj|turf|area in range(1))
 		if(objects > loopsanity)	break
 		objects++
 		spawn( 0 )
-			if ((A && M))
-				A.HasEntered(M, 1)
-			return
-	objects = 0
-	for(var/atom/A as mob|obj|turf|area in range(1))
-		if(objects > loopsanity)	break
-		objects++
-		spawn( 0 )
-			if ((A && M))
-				A.HasProximity(M, 1)
+			if ((O && A))
+				O.HasProximity(A, 1)
 			return
 	return
 
@@ -222,6 +213,7 @@
 ///// Z-Level Stuff
 
 	var/old_lumcount = lighting_lumcount - initial(lighting_lumcount)
+	var/obj/fire/old_fire = fire
 
 	//world << "Replacing [src.type] with [N]"
 
@@ -246,15 +238,21 @@
 		//W.Assimilate_Air()
 
 		W.lighting_lumcount += old_lumcount
-		if(old_lumcount != W.lighting_lumcount)
-			W.lighting_changed = 1
-			lighting_controller.changed_turfs += W
+
+		if(W.lighting_lumcount)
+			W.UpdateAffectingLights()
+
+		if(old_fire)
+			fire = old_fire
 
 		if (istype(W,/turf/simulated/floor))
 			W.RemoveLattice()
 
 		if(air_master)
 			air_master.mark_for_update(src)
+
+		for(var/turf/space/S in range(W,1))
+			S.update_starlight()
 
 		W.levelupdate()
 		return W
@@ -271,8 +269,14 @@
 			W.lighting_changed = 1
 			lighting_controller.changed_turfs += W
 
+		if(old_fire)
+			old_fire.RemoveFire()
+
 		if(air_master)
 			air_master.mark_for_update(src)
+
+		for(var/turf/space/S in range(W,1))
+			S.update_starlight()
 
 		W.levelupdate()
 		return W

@@ -1,44 +1,22 @@
-//Boards
-/obj/item/weapon/circuitboard/batteryrack
-	name = "Circuit board (Battery rack PSU)"
-	build_path = "/obj/machinery/power/smes/batteryrack"
-	board_type = "machine"
-	origin_tech = "powerstorage=3;engineering=2"
-	frame_desc = "Requires 3 power cells."
-	req_components = list("/obj/item/weapon/cell" = 3)
-
-
-/obj/item/weapon/circuitboard/ghettosmes
-	name = "Circuit board (makeshift PSU)"
-	desc = "An APC circuit repurposed into some power storage device controller"
-	build_path = "/obj/machinery/power/smes/batteryrack/makeshift"
-	board_type = "machine"
-	frame_desc = "Requires 3 power cells."
-	req_components = list("/obj/item/weapon/cell" = 3)
-
-
-//Machines
 //The one that works safely.
 /obj/machinery/power/smes/batteryrack
 	name = "power cell rack PSU"
 	desc = "A rack of power cells working as a PSU."
 	charge = 0 //you dont really want to make a potato PSU which already is overloaded
-	online = 0
-	chargelevel = 0
-	output = 0
+	output_attempt = 0
+	input_level = 0
+	output_level = 0
 	input_level_max = 0
 	output_level_max = 0
 	icon_state = "gsmes"
 	var/cells_amount = 0
 	var/capacitors_amount = 0
 
-
 /obj/machinery/power/smes/batteryrack/New()
 	..()
 	add_parts()
 	RefreshParts()
 	return
-
 
 //Maybe this should be moved up to obj/machinery
 /obj/machinery/power/smes/batteryrack/proc/add_parts()
@@ -67,13 +45,13 @@
 	capacity = C * 40   //Basic cells are such crap. Hyper cells needed to get on normal SMES levels.
 
 
-/obj/machinery/power/smes/batteryrack/updateicon()
+/obj/machinery/power/smes/batteryrack/update_icon()
 	overlays.Cut()
 	if(stat & BROKEN)	return
 
-	if (online)
+	if (output_attempt)
 		overlays += image('icons/obj/power.dmi', "gsmes_outputting")
-	if(charging)
+	if(inputting)
 		overlays += image('icons/obj/power.dmi', "gsmes_charging")
 
 	var/clevel = chargedisplay()
@@ -91,7 +69,7 @@
 	if(open_hatch)
 		if(istype(W, /obj/item/weapon/crowbar))
 			if (charge < (capacity / 100))
-				if (!online && !chargemode)
+				if (!output_attempt && !input_attempt)
 					playsound(get_turf(src), 'sound/items/Crowbar.ogg', 50, 1)
 					var/obj/machinery/constructable_frame/machine_frame/M = new /obj/machinery/constructable_frame/machine_frame(src.loc)
 					M.state = 2
@@ -108,7 +86,7 @@
 				user << "<span class='warning'>Better let [src] discharge before dismantling it.</span>"
 		else if ((istype(W, /obj/item/weapon/stock_parts/capacitor) && (capacitors_amount < 5)) || (istype(W, /obj/item/weapon/cell) && (cells_amount < 5)))
 			if (charge < (capacity / 100))
-				if (!online && !chargemode)
+				if (!output_attempt && !input_attempt)
 					user.drop_item()
 					component_parts += W
 					W.loc = src
@@ -141,13 +119,13 @@
 	return
 
 
-/obj/machinery/power/smes/batteryrack/makeshift/updateicon()
+/obj/machinery/power/smes/batteryrack/makeshift/update_icon()
 	overlays.Cut()
 	if(stat & BROKEN)	return
 
-	if (online)
+	if (output_attempt)
 		overlays += image('icons/obj/power.dmi', "gsmes_outputting")
-	if(charging)
+	if(inputting)
 		overlays += image('icons/obj/power.dmi', "gsmes_charging")
 	if (overcharge_percent > 100)
 		overlays += image('icons/obj/power.dmi', "gsmes_overcharge")
@@ -212,40 +190,35 @@
 
 	//store machine state to see if we need to update the icon overlays
 	var/last_disp = chargedisplay()
-	var/last_chrg = charging
-	var/last_onln = online
+	var/last_chrg = inputting
+	var/last_onln = output_attempt
 	var/last_overcharge = overcharge_percent
 
 	if(terminal)
-		var/excess = terminal.surplus()
+		if(input_attempt)
+			var/target_load = min((capacity-charge)/SMESRATE, input_level)		// charge at set rate, limited to spare capacity
+			var/actual_load = draw_power(target_load)		// add the load to the terminal side network
+			charge += actual_load * SMESRATE	// increase the charge
 
-		if(charging)
-			if(excess >= 0)		// if there's power available, try to charge
-				var/load = min((capacity * 1.5 - charge)/SMESRATE, chargelevel)		// charge at set rate, limited to spare capacity
-				charge += load * SMESRATE	// increase the charge
-				add_load(load)		// add the load to the terminal side network
+			if (actual_load >= target_load) // did the powernet have enough power available for us?
+				inputting = 1
+			else
+				inputting = 0
 
-			else					// if not enough capacity
-				charging = 0		// stop charging
-
-		else
-			if (chargemode && excess > 0 && excess >= chargelevel)
-				charging = 1
-
-	if(online)		// if outputting
-		lastout = min( charge/SMESRATE, output)		//limit output to that stored
-		charge -= lastout*SMESRATE		// reduce the storage (may be recovered in /restore() if excessive)
-		add_avail(lastout)				// add output to powernet (smes side)
+	if(output_attempt)		// if outputting
+		output_used = min( charge/SMESRATE, output_level)		//limit output to that stored
+		charge -= output_used*SMESRATE		// reduce the storage (may be recovered in /restore() if excessive)
+		add_avail(output_used)				// add output to powernet (smes side)
 		if(charge < 0.0001)
-			online = 0					// stop output if charge falls to zero
+			outputting(0)					// stop output if charge falls to zero
 
 	overcharge_percent = round((charge / capacity) * 100)
 	if (overcharge_percent > 115) //115% is the minimum overcharge for anything to happen
 		overcharge_consequences()
 
 	// only update icon if state changed
-	if(last_disp != chargedisplay() || last_chrg != charging || last_onln != online || ((overcharge_percent > 100) ^ (last_overcharge > 100)))
-		updateicon()
+	if(last_disp != chargedisplay() || last_chrg != inputting || last_onln != output_attempt || ((overcharge_percent > 100) ^ (last_overcharge > 100)))
+		update_icon()
 	return
 
 #undef SMESRATE

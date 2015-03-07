@@ -10,15 +10,13 @@
 
 
 obj/structure/windoor_assembly
+	name = "windoor assembly"
 	icon = 'icons/obj/doors/windoor.dmi'
-
-	name = "Windoor Assembly"
 	icon_state = "l_windoor_assembly01"
 	anchored = 0
 	density = 0
 	dir = NORTH
 
-	var/ini_dir
 	var/obj/item/weapon/airlock_electronics/electronics = null
 
 	//Vars to help with the icon's name
@@ -26,9 +24,17 @@ obj/structure/windoor_assembly
 	var/secure = ""		//Whether or not this creates a secure windoor
 	var/state = "01"	//How far the door assembly has progressed in terms of sprites
 
-obj/structure/windoor_assembly/New(dir=NORTH)
+obj/structure/windoor_assembly/New(Loc, start_dir=NORTH, constructed=0)
 	..()
-	src.ini_dir = src.dir
+	if(constructed)
+		state = "01"
+		anchored = 0
+	switch(start_dir)
+		if(NORTH, SOUTH, EAST, WEST)
+			set_dir(start_dir)
+		else //If the user is facing northeast. northwest, southeast, southwest or north, default to north
+			set_dir(NORTH)
+	
 	update_nearby_tiles(need_rebuild=1)
 
 obj/structure/windoor_assembly/Del()
@@ -70,7 +76,7 @@ obj/structure/windoor_assembly/Del()
 					if(do_after(user, 40))
 						if(!src || !WT.isOn()) return
 						user << "\blue You dissasembled the windoor assembly!"
-						new /obj/item/stack/sheet/rglass(get_turf(src), 5)
+						new /obj/item/stack/sheet/glass/reinforced(get_turf(src), 5)
 						if(secure)
 							new /obj/item/stack/rods(get_turf(src), 4)
 						del(src)
@@ -109,36 +115,33 @@ obj/structure/windoor_assembly/Del()
 			//Adding plasteel makes the assembly a secure windoor assembly. Step 2 (optional) complete.
 			else if(istype(W, /obj/item/stack/rods) && !secure)
 				var/obj/item/stack/rods/R = W
-				if(R.amount < 4)
-					user << "\red You need more rods to do this."
+				if(R.get_amount() < 4)
+					user << "<span class='warning'>You need more rods to do this.</span>"
 					return
-				user << "\blue You start to reinforce the windoor with rods."
+				user << "<span class='notice'>You start to reinforce the windoor with rods.</span>"
 
-				if(do_after(user,40))
-					if(!src) return
-
-					R.use(4)
-					user << "\blue You reinforce the windoor."
-					src.secure = "secure_"
-					if(src.anchored)
-						src.name = "Secure Anchored Windoor Assembly"
-					else
-						src.name = "Secure Windoor Assembly"
+				if(do_after(user,40) && !secure)
+					if (R.use(4))
+						user << "<span class='notice'>You reinforce the windoor.</span>"
+						src.secure = "secure_"
+						if(src.anchored)
+							src.name = "Secure Anchored Windoor Assembly"
+						else
+							src.name = "Secure Windoor Assembly"
 
 			//Adding cable to the assembly. Step 5 complete.
-			else if(istype(W, /obj/item/weapon/cable_coil) && anchored)
+			else if(istype(W, /obj/item/stack/cable_coil) && anchored)
 				user.visible_message("[user] wires the windoor assembly.", "You start to wire the windoor assembly.")
 
+				var/obj/item/stack/cable_coil/CC = W
 				if(do_after(user, 40))
-					if(!src) return
-					var/obj/item/weapon/cable_coil/CC = W
-					CC.use(1)
-					user << "\blue You wire the windoor!"
-					src.state = "02"
-					if(src.secure)
-						src.name = "Secure Wired Windoor Assembly"
-					else
-						src.name = "Wired Windoor Assembly"
+					if (CC.use(1))
+						user << "<span class='notice'>You wire the windoor!</span>"
+						src.state = "02"
+						if(src.secure)
+							src.name = "Secure Wired Windoor Assembly"
+						else
+							src.name = "Wired Windoor Assembly"
 			else
 				..()
 
@@ -153,7 +156,7 @@ obj/structure/windoor_assembly/Del()
 					if(!src) return
 
 					user << "\blue You cut the windoor wires.!"
-					new/obj/item/weapon/cable_coil(get_turf(user), 1)
+					new/obj/item/stack/cable_coil(get_turf(user), 1)
 					src.state = "01"
 					if(src.secure)
 						src.name = "Secure Anchored Windoor Assembly"
@@ -216,7 +219,7 @@ obj/structure/windoor_assembly/Del()
 						else
 							windoor.icon_state = "rightsecureopen"
 							windoor.base_state = "rightsecure"
-						windoor.dir = src.dir
+						windoor.set_dir(src.dir)
 						windoor.density = 0
 
 						if(src.electronics.one_access)
@@ -234,7 +237,7 @@ obj/structure/windoor_assembly/Del()
 						else
 							windoor.icon_state = "rightopen"
 							windoor.base_state = "right"
-						windoor.dir = src.dir
+						windoor.set_dir(src.dir)
 						windoor.density = 0
 
 						if(src.electronics.one_access)
@@ -268,12 +271,11 @@ obj/structure/windoor_assembly/Del()
 	if(src.state != "01")
 		update_nearby_tiles(need_rebuild=1) //Compel updates before
 
-	src.dir = turn(src.dir, 270)
+	src.set_dir(turn(src.dir, 270))
 
 	if(src.state != "01")
 		update_nearby_tiles(need_rebuild=1)
 
-	src.ini_dir = src.dir
 	update_icon()
 	return
 
@@ -292,11 +294,3 @@ obj/structure/windoor_assembly/Del()
 
 	update_icon()
 	return
-
-/obj/structure/windoor_assembly/proc/update_nearby_tiles(need_rebuild)
-	if(!air_master)
-		return 0
-
-	air_master.mark_for_update(loc)
-
-	return 1

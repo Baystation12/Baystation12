@@ -32,9 +32,10 @@ datum/genesequence
 	var/list/accepted_fossil_types = list(/obj/item/weapon/fossil/plant)
 
 
-/obj/machinery/computer/reconstitutor/New()
-	if(!undiscovered_genesequences)
-		undiscovered_genesequences = master_controller.all_plant_genesequences.Copy()
+/obj/machinery/computer/reconstitutor/initialize()
+	spawn(50)
+		if(!undiscovered_genesequences)
+			undiscovered_genesequences = master_controller.all_plant_genesequences.Copy()
 	..()
 
 /obj/machinery/computer/reconstitutor/animal
@@ -43,8 +44,9 @@ datum/genesequence
 	pod1 = null
 	circuit = "/obj/item/weapon/circuitboard/reconstitutor/animal"
 
-/obj/machinery/computer/reconstitutor/animal/New()
-	undiscovered_genesequences = master_controller.all_animal_genesequences.Copy()
+/obj/machinery/computer/reconstitutor/animal/initialize()
+	spawn(50)
+		undiscovered_genesequences = master_controller.all_animal_genesequences.Copy()
 	..()
 
 /obj/machinery/computer/reconstitutor/attackby(obj/item/W, mob/user)
@@ -77,14 +79,17 @@ datum/genesequence
 					S.remove_from_storage(F, src) //This will move the item to this item's contents
 					del(F)
 					updateDialog()
-		var/outmsg = "\blue You empty all the fossils from [S] into [src]."
+
+		user.visible_message("[user] empties all the fossils from [S] into [src].", "\blue You empty all the fossils from [S] into [src].", "You hear the sound of rocks being poured into a container")
+
+		var/outmsg = ""
 		if(numaccepted)
 			outmsg += " \blue[numaccepted] fossils were accepted and consumed as [src] extracts genetic data from them."
 		if(numrejected)
 			outmsg += " \red[numrejected] fossils were rejected."
 		if(full)
 			outmsg += " \red[src] can not extract any more genetic data from new fossils."
-		visible_message(outmsg)
+		user << outmsg
 
 	else
 		..()
@@ -176,6 +181,7 @@ datum/genesequence
 	onclose(user, "reconstitutor")
 
 /obj/machinery/computer/reconstitutor/animal/Topic(href, href_list)
+	if(..()) return 1
 	if(href_list["clone"])
 		var/sequence_num = text2num(href_list["sequence_num"])
 		var/datum/genesequence/cloned_genesequence = completed_genesequences[sequence_num]
@@ -196,10 +202,9 @@ datum/genesequence
 				pod1.biomass -= CLONE_BIOMASS
 		else
 			usr << "\red \icon[src] Unable to locate cloning pod!"
-	else
-		..()
 
 /obj/machinery/computer/reconstitutor/Topic(href, href_list)
+	if(..()) return 1
 	if(href_list["insertpos"])
 		//world << "inserting gene for genesequence [href_list["insertgenome"]] at pos [text2num(href_list["insertpos"])]"
 		var/sequence_num = text2num(href_list["sequence_num"])
@@ -246,9 +251,6 @@ datum/genesequence
 	else if(href_list["close"])
 		usr.unset_machine(src)
 		usr << browse(null, "window=reconstitutor")
-
-	else
-		..()
 
 /obj/machinery/computer/reconstitutor/proc/scan_fossil(var/obj/item/weapon/fossil/scan_fossil)
 	//see whether we accept these kind of fossils

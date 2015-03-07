@@ -394,7 +394,7 @@
 	if ( emagged ) // Warning, hungry humans detected: throw fertilizer at them
 		spawn(0)
 			fert.loc = src.loc
-			fert.throw_at(target, 16, 3)
+			fert.throw_at(target, 16, 3, src)
 		src.visible_message("\red <b>[src] launches [fert.name] at [target.name]!</b>")
 		flick("farmbot_broke", src)
 		spawn (FARMBOT_EMAG_DELAY)
@@ -583,7 +583,7 @@
 
 	else if(istype(W, /obj/item/weapon/pen))
 		var/t = input(user, "Enter new robot name", src.name, src.created_name) as text
-		t = copytext(sanitize(t), 1, MAX_NAME_LEN)
+		t = sanitize(copytext(t, 1, MAX_NAME_LEN))
 		if (!t)
 			return
 		if (!in_range(src, usr) && src.loc != usr)

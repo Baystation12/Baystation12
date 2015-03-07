@@ -29,8 +29,10 @@
 		output += "<p><a href='byond://?src=\ref[src];show_preferences=1'>Setup Character</A></p>"
 
 		if(!ticker || ticker.current_state <= GAME_STATE_PREGAME)
-			if(!ready)	output += "<p><a href='byond://?src=\ref[src];ready=1'>Declare Ready</A></p>"
-			else	output += "<p><b>You are ready</b> (<a href='byond://?src=\ref[src];ready=2'>Cancel</A>)</p>"
+			if(ready)
+				output += "<p>\[ <b>Ready</b> | <a href='byond://?src=\ref[src];ready=0'>Not Ready</a> \]</p>"
+			else
+				output += "<p>\[ <a href='byond://?src=\ref[src];ready=1'>Ready</a> | <b>Not Ready</b> \]</p>"
 
 		else
 			output += "<a href='byond://?src=\ref[src];manifest=1'>View the Crew Manifest</A><br><br>"
@@ -59,7 +61,7 @@
 
 		output += "</div>"
 
-		src << browse(output,"window=playersetup;size=210x240;can_close=0")
+		src << browse(output,"window=playersetup;size=210x280;can_close=0")
 		return
 
 	Stat()
@@ -95,7 +97,10 @@
 			return 1
 
 		if(href_list["ready"])
-			ready = !ready
+			if(!ticker || ticker.current_state <= GAME_STATE_PREGAME) // Make sure we don't ready up after the round has started
+				ready = text2num(href_list["ready"])
+			else
+				ready = 0
 
 		if(href_list["refresh"])
 			src << browse(null, "window=playersetup") //closes the player setup window
@@ -118,6 +123,7 @@
 				observer.loc = O.loc
 				observer.timeofdeath = world.time // Set the time of death so that the respawn timer works correctly.
 
+				announce_ghost_joinleave(src)
 				client.prefs.update_preview_icon()
 				observer.icon = client.prefs.preview_icon
 				observer.alpha = 127
@@ -134,13 +140,19 @@
 				return 1
 
 		if(href_list["late_join"])
+
 			if(!ticker || ticker.current_state != GAME_STATE_PLAYING)
 				usr << "\red The round is either not ready, or has already finished..."
 				return
 
-			if(client.prefs.species != "Human")
+			if(client.prefs.species != "Human" && !check_rights(R_ADMIN, 0))
 				if(!is_alien_whitelisted(src, client.prefs.species) && config.usealienwhitelist)
 					src << alert("You are currently not whitelisted to play [client.prefs.species].")
+					return 0
+
+				var/datum/species/S = all_species[client.prefs.species]
+				if(!(S.flags & IS_WHITELISTED))
+					src << alert("Your current species,[client.prefs.species], is not available for play on the station.")
 					return 0
 
 			LateChoices()
@@ -150,8 +162,11 @@
 
 		if(href_list["SelectedJob"])
 
-			if(!enter_allowed)
-				usr << "\blue There is an administrative lock on entering the game!"
+			if(!config.enter_allowed)
+				usr << "<span class='notice'>There is an administrative lock on entering the game!</span>"
+				return
+			else if(ticker && ticker.mode && ticker.mode.explosion_in_progress)
+				usr << "<span class='danger'>The station is currently exploding. Joining would go poorly.</span>"
 				return
 
 			if(client.prefs.species != "Human")
@@ -159,7 +174,12 @@
 					src << alert("You are currently not whitelisted to play [client.prefs.species].")
 					return 0
 
-			AttemptLateSpawn(href_list["SelectedJob"])
+				var/datum/species/S = all_species[client.prefs.species]
+				if(!(S.flags & CAN_JOIN))
+					src << alert("Your current species, [client.prefs.species], is not available for play on the station.")
+					return 0
+
+			AttemptLateSpawn(href_list["SelectedJob"],client.prefs.spawnpoint)
 			return
 
 		if(href_list["privacy_poll"])
@@ -264,20 +284,20 @@
 	proc/IsJobAvailable(rank)
 		var/datum/job/job = job_master.GetJob(rank)
 		if(!job)	return 0
-		if((job.current_positions >= job.total_positions) && job.total_positions != -1)	return 0
+		if(!job.is_position_available()) return 0
 		if(jobban_isbanned(src,rank))	return 0
 		if(!job.player_old_enough(src.client))	return 0
 		return 1
 
 
-	proc/AttemptLateSpawn(rank)
+	proc/AttemptLateSpawn(rank,var/spawning_at)
 		if (src != usr)
 			return 0
 		if(!ticker || ticker.current_state != GAME_STATE_PLAYING)
 			usr << "\red The round is either not ready, or has already finished..."
 			return 0
-		if(!enter_allowed)
-			usr << "\blue There is an administrative lock on entering the game!"
+		if(!config.enter_allowed)
+			usr << "<span class='notice'>There is an administrative lock on entering the game!</span>"
 			return 0
 		if(!IsJobAvailable(rank))
 			src << alert("[rank] is not available. Please try another.")
@@ -288,15 +308,53 @@
 
 		job_master.AssignRole(src, rank, 1)
 
-		var/mob/living/carbon/human/character = create_character()	//creates the human and transfers vars and mind
-		job_master.EquipRank(character, rank, 1)					//equips the human
+		var/mob/living/character = create_character()	//creates the human and transfers vars and mind
+		character = job_master.EquipRank(character, rank, 1)					//equips the human
+		UpdateFactionList(character)
 		EquipCustomItems(character)
-		character.loc = pick(latejoin)
+
+		// AIs don't need a spawnpoint, they must spawn at an empty core
+		if(character.mind.assigned_role == "AI")
+
+			character = character.AIize(move=0) // AIize the character, but don't move them yet
+
+			// IsJobAvailable for AI checks that there is an empty core available in this list
+			var/obj/structure/AIcore/deactivated/C = empty_playable_ai_cores[1]
+			empty_playable_ai_cores -= C
+
+			character.loc = C.loc
+
+			AnnounceCyborg(character, rank, "has been downloaded to the empty core in \the [character.loc.loc]")
+			ticker.mode.latespawn(character)
+
+			del(C)
+			del(src)
+			return
+
+		//Find our spawning point.
+		var/join_message
+		var/datum/spawnpoint/S
+
+		if(spawning_at)
+			S = spawntypes[spawning_at]
+
+		if(S && istype(S))
+			if(S.check_job_spawning(rank))
+				character.loc = pick(S.turfs)
+				join_message = S.msg
+			else
+				character << "Your chosen spawnpoint ([S.display_name]) is unavailable for your chosen job. Spawning you at the Arrivals shuttle instead."
+				character.loc = pick(latejoin)
+				join_message = "has arrived on the station"
+		else
+			character.loc = pick(latejoin)
+			join_message = "has arrived on the station"
+
 		character.lastarea = get_area(loc)
 		// Moving wheelchair if they have one
-		if(character.buckled && istype(character.buckled, /obj/structure/stool/bed/chair/wheelchair))
+		if(character.buckled && istype(character.buckled, /obj/structure/bed/chair/wheelchair))
 			character.buckled.loc = character.loc
-			character.buckled.dir = character.dir
+			character.buckled.set_dir(character.dir)
 
 		ticker.mode.latespawn(character)
 
@@ -305,19 +363,27 @@
 		if(character.mind.assigned_role != "Cyborg")
 			data_core.manifest_inject(character)
 			ticker.minds += character.mind//Cyborgs and AIs handle this in the transform proc.	//TODO!!!!! ~Carn
-			AnnounceArrival(character, rank)
 
+			//Grab some data from the character prefs for use in random news procs.
+
+			AnnounceArrival(character, rank, join_message)
 		else
-			character.Robotize()
+			AnnounceCyborg(character, rank, join_message)
+
 		del(src)
 
-	proc/AnnounceArrival(var/mob/living/carbon/human/character, var/rank)
+	proc/AnnounceArrival(var/mob/living/carbon/human/character, var/rank, var/join_message)
 		if (ticker.current_state == GAME_STATE_PLAYING)
-			var/obj/item/device/radio/intercom/a = new /obj/item/device/radio/intercom(null)// BS12 EDIT Arrivals Announcement Computer, rather than the AI.
 			if(character.mind.role_alt_title)
 				rank = character.mind.role_alt_title
-			a.autosay("[character.real_name],[rank ? " [rank]," : " visitor," ] has arrived on the station.", "Arrivals Announcement Computer")
-			del(a)
+			global_announcer.autosay("[character.real_name],[rank ? " [rank]," : " visitor," ] [join_message ? join_message : "has arrived on the station"].", "Arrivals Announcement Computer")
+
+	proc/AnnounceCyborg(var/mob/living/character, var/rank, var/join_message)
+		if (ticker.current_state == GAME_STATE_PLAYING)
+			if(character.mind.role_alt_title)
+				rank = character.mind.role_alt_title
+			// can't use their name here, since cyborg namepicking is done post-spawn, so we'll just say "A new Cyborg has arrived"/"A new Android has arrived"/etc.
+			global_announcer.autosay("A new[rank ? " [rank]" : " visitor" ] [join_message ? join_message : "has arrived on the station"].", "Arrivals Announcement Computer")
 
 	proc/LateChoices()
 		var/mills = world.time // 1/10 of a second, not real milliseconds but whatever
@@ -325,7 +391,10 @@
 		var/mins = (mills % 36000) / 600
 		var/hours = mills / 36000
 
+		var/name = client.prefs.be_random_name ? "friend" : client.prefs.real_name
+
 		var/dat = "<html><body><center>"
+		dat += "<b>Welcome, [name].<br></b>"
 		dat += "Round Duration: [round(hours)]h [round(mins)]m<br>"
 
 		if(emergency_shuttle) //In case Nanotrasen decides reposess CentComm's shuttles.
@@ -405,13 +474,16 @@
 		// And uncomment this, too.
 		//new_character.dna.UpdateSE()
 
+		// Do the initial caching of the player's body icons.
+		new_character.regenerate_icons()
+
 		new_character.key = key		//Manually transfer the key to log them in
 
 		return new_character
 
 	proc/ViewManifest()
 		var/dat = "<html><body>"
-		dat += "<h4>Crew Manifest</h4>"
+		dat += "<h4>Show Crew Manifest</h4>"
 		dat += data_core.get_manifest(OOC = 1)
 
 		src << browse(dat, "window=manifest;size=370x420;can_close=1")

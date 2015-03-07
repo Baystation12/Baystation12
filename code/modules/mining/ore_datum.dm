@@ -24,7 +24,8 @@
 	oretag = "sand"
 
 /datum/ore/phoron
-	smelts_to = /obj/item/stack/sheet/mineral/phoron
+	//smelts_to = something that explodes violently on the conveyor, huhuhuhu
+	compresses_to = /obj/item/stack/sheet/mineral/phoron
 	oretag = "phoron"
 
 /datum/ore/silver

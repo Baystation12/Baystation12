@@ -25,9 +25,17 @@
 		usr << "\red Movement is admin-disabled." //This is to identify lag problems
 		return
 
-	if (istype(A,/mob/living/carbon))
-		var/mob/living/carbon/M = A
-		if(M.lying)        return
+	if (istype(A,/mob/living))
+		var/mob/living/M = A
+		if(M.lying)
+			..()
+			return
+
+		// Ugly hack :( Should never have multiple plants in the same tile.
+		var/obj/effect/plant/plant = locate() in contents
+		if(plant) plant.trodden_on(M)
+
+		// Dirt overlays.
 		dirt++
 		var/obj/effect/decal/cleanable/dirt/dirtoverlay = locate(/obj/effect/decal/cleanable/dirt, src)
 		if (dirt >= 50)
@@ -39,30 +47,21 @@
 
 		if(istype(M, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = M
-			if(istype(H.shoes, /obj/item/clothing/shoes/clown_shoes))
-				var/obj/item/clothing/shoes/clown_shoes/O = H.shoes
-				if(H.m_intent == "run")
-					if(O.footstep >= 2)
-						O.footstep = 0
-						playsound(src, "clownstep", 50, 1) // this will get annoying very fast.
-					else
-						O.footstep++
-				else
-					playsound(src, "clownstep", 20, 1)
-
 			// Tracking blood
 			var/list/bloodDNA = null
 			var/bloodcolor=""
 			if(H.shoes)
 				var/obj/item/clothing/shoes/S = H.shoes
-				if(S.track_blood && S.blood_DNA)
-					bloodDNA = S.blood_DNA
-					bloodcolor=S.blood_color
-					S.track_blood--
+				if(istype(S))
+					S.handle_movement(src,(H.m_intent == "run" ? 1 : 0))
+					if(S.track_blood && S.blood_DNA)
+						bloodDNA = S.blood_DNA
+						bloodcolor=S.blood_color
+						S.track_blood--
 			else
 				if(H.track_blood && H.feet_blood_DNA)
 					bloodDNA = H.feet_blood_DNA
-					bloodcolor=H.feet_blood_color
+					bloodcolor = H.feet_blood_color
 					H.track_blood--
 
 			if (bloodDNA)
@@ -73,66 +72,32 @@
 
 				bloodDNA = null
 
-		switch (src.wet)
-			if(1)
-				if(istype(M, /mob/living/carbon/human)) // Added check since monkeys don't have shoes
-					if ((M.m_intent == "run") && !(istype(M:shoes, /obj/item/clothing/shoes) && M:shoes.flags&NOSLIP))
-						M.stop_pulling()
-						step(M, M.dir)
-						M << "\blue You slipped on the wet floor!"
-						playsound(src, 'sound/misc/slip.ogg', 50, 1, -3)
-						M.Stun(5)
-						M.Weaken(3)
-					else
-						M.inertia_dir = 0
-						return
-				else if(!istype(M, /mob/living/carbon/slime))
-					if (M.m_intent == "run")
-						M.stop_pulling()
-						step(M, M.dir)
-						M << "\blue You slipped on the wet floor!"
-						playsound(src, 'sound/misc/slip.ogg', 50, 1, -3)
-						M.Stun(5)
-						M.Weaken(3)
-					else
-						M.inertia_dir = 0
-						return
+		if(src.wet)
 
-			if(2) //lube                //can cause infinite loops - needs work
-				if(!istype(M, /mob/living/carbon/slime))
-					M.stop_pulling()
+			if(M.buckled || (src.wet == 1 && M.m_intent == "walk"))
+				return
+
+			var/slip_dist = 1
+			var/slip_stun = 6
+			var/floor_type = "wet"
+
+			switch(src.wet)
+				if(2) // Lube
+					floor_type = "slippery"
+					slip_dist = 4
+					slip_stun = 10
+				if(3) // Ice
+					floor_type = "icy"
+					slip_stun = 4
+
+			if(M.slip("the [floor_type] floor",slip_stun))
+				for(var/i = 0;i<slip_dist;i++)
 					step(M, M.dir)
-					spawn(1) step(M, M.dir)
-					spawn(2) step(M, M.dir)
-					spawn(3) step(M, M.dir)
-					spawn(4) step(M, M.dir)
-					M.take_organ_damage(2) // Was 5 -- TLE
-					M << "\blue You slipped on the floor!"
-					playsound(src, 'sound/misc/slip.ogg', 50, 1, -3)
-					M.Weaken(10)
-			if(3) // Ice
-				if(istype(M, /mob/living/carbon/human)) // Added check since monkeys don't have shoes
-					if ((M.m_intent == "run") && !(istype(M:shoes, /obj/item/clothing/shoes) && M:shoes.flags&NOSLIP) && prob(30))
-						M.stop_pulling()
-						step(M, M.dir)
-						M << "\blue You slipped on the icy floor!"
-						playsound(src, 'sound/misc/slip.ogg', 50, 1, -3)
-						M.Stun(4)
-						M.Weaken(3)
-					else
-						M.inertia_dir = 0
-						return
-				else if(!istype(M, /mob/living/carbon/slime))
-					if (M.m_intent == "run" && prob(30))
-						M.stop_pulling()
-						step(M, M.dir)
-						M << "\blue You slipped on the icy floor!"
-						playsound(src, 'sound/misc/slip.ogg', 50, 1, -3)
-						M.Stun(4)
-						M.Weaken(3)
-					else
-						M.inertia_dir = 0
-						return
+					sleep(1)
+			else
+				M.inertia_dir = 0
+		else
+			M.inertia_dir = 0
 
 	..()
 
@@ -141,56 +106,22 @@
 	if (!..())
 		return 0
 
-	for(var/obj/effect/decal/cleanable/blood/B in contents)
-		if(!B.blood_DNA[M.dna.unique_enzymes])
-			B.blood_DNA[M.dna.unique_enzymes] = M.dna.b_type
-			B.virus2 = virus_copylist(M.virus2)
+	if(istype(M))
+		for(var/obj/effect/decal/cleanable/blood/B in contents)
+			if(!B.blood_DNA[M.dna.unique_enzymes])
+				B.blood_DNA[M.dna.unique_enzymes] = M.dna.b_type
+				B.virus2 = virus_copylist(M.virus2)
+			return 1 //we bloodied the floor
+		blood_splatter(src,M.get_blood(M.vessel),1)
 		return 1 //we bloodied the floor
-
-
-
-	//if there isn't a blood decal already, make one.
-	var/obj/effect/decal/cleanable/blood/newblood = new /obj/effect/decal/cleanable/blood(src)
-
-	//Species-specific blood.
-	if(M.species)
-		newblood.basecolor = M.species.blood_color
-	else
-		newblood.basecolor = "#A10808"
-
-	newblood.blood_DNA[M.dna.unique_enzymes] = M.dna.b_type
-	newblood.virus2 = virus_copylist(M.virus2)
-	newblood.update_icon()
-
-	return 1 //we bloodied the floor
-
+	return 0
 
 // Only adds blood on the floor -- Skie
 /turf/simulated/proc/add_blood_floor(mob/living/carbon/M as mob)
 	if(istype(M, /mob/living/carbon/monkey))
-
-		var/obj/effect/decal/cleanable/blood/this = new /obj/effect/decal/cleanable/blood(src)
-		this.blood_DNA[M.dna.unique_enzymes] = M.dna.b_type
-		this.basecolor = "#A10808"
-		this.update_icon()
-
-	else if(istype(M,/mob/living/carbon/human))
-
-		var/obj/effect/decal/cleanable/blood/this = new /obj/effect/decal/cleanable/blood(src)
-		var/mob/living/carbon/human/H = M
-
-		//Species-specific blood.
-		if(H.species)
-			this.basecolor = H.species.blood_color
-		else
-			this.basecolor = "#A10808"
-		this.update_icon()
-
-		this.blood_DNA[M.dna.unique_enzymes] = M.dna.b_type
-
+		blood_splatter(src,M,1)
 	else if( istype(M, /mob/living/carbon/alien ))
 		var/obj/effect/decal/cleanable/blood/xeno/this = new /obj/effect/decal/cleanable/blood/xeno(src)
 		this.blood_DNA["UNKNOWN BLOOD"] = "X*"
-
 	else if( istype(M, /mob/living/silicon/robot ))
 		new /obj/effect/decal/cleanable/blood/oil(src)

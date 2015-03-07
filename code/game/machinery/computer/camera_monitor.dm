@@ -40,7 +40,7 @@
 	D["Cancel"] = "Cancel"
 	for (var/obj/machinery/camera/C in L)
 		if ( C.network in src.networks )
-			D[text("[]: [][]", C.network, C.c_tag, (C.status ? null : " (Deactivated)"))] = C
+			D[text("[]: [][]", C.network, C.c_tag, (C.can_use() ? null : " (Deactivated)"))] = C
 
 	var/t = input(user, "Which camera should you change to?") as null|anything in D
 

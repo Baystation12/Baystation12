@@ -4,8 +4,10 @@
 	desc = "You shouldn't ever see this."
 	icon = 'icons/obj/objects.dmi'
 	slot_flags = SLOT_HEAD
+	sprite_sheets = list("Vox" = 'icons/mob/species/vox/head.dmi')
 
 /obj/item/weapon/holder/New()
+	item_state = icon_state
 	..()
 	processing_objects.Add(src)
 
@@ -38,8 +40,9 @@
 /mob/living/var/holder_type
 
 /mob/living/proc/get_scooped(var/mob/living/carbon/grabber)
-	if(!holder_type)
+	if(!holder_type || buckled || pinned.len)
 		return
+
 	var/obj/item/weapon/holder/H = new holder_type(loc)
 	src.loc = H
 	H.name = loc.name
@@ -53,32 +56,34 @@
 //Mob specific holders.
 
 /obj/item/weapon/holder/diona
-
 	name = "diona nymph"
 	desc = "It's a tiny plant critter."
 	icon_state = "nymph"
 	origin_tech = "magnets=3;biotech=5"
+	slot_flags = SLOT_HEAD | SLOT_OCLOTHING
 
 /obj/item/weapon/holder/drone
-
 	name = "maintenance drone"
 	desc = "It's a small maintenance robot."
 	icon_state = "drone"
 	origin_tech = "magnets=3;engineering=5"
 
-
 /obj/item/weapon/holder/cat
-
 	name = "cat"
 	desc = "It's a cat. Meow."
 	icon_state = "cat"
 	origin_tech = null
 
+/obj/item/weapon/holder/borer
+	name = "cortical borer"
+	desc = "It's a slimy brain slug. Gross."
+	icon_state = "borer"
+	origin_tech = "biotech=6"
+
 /obj/item/weapon/holder/monkey
 	name = "monkey"
 	desc = "It's a monkey. Ook."
 	icon_state = "cat"
-	origin_tech = null
 	icon = 'icons/mob/monkey.dmi'
 	icon_state = "monkey1"
 
@@ -91,10 +96,8 @@
 	name = "stok"
 	desc = "It's a stok. stok."
 	icon_state = "stokkey1"
-	origin_tech = null
 
 /obj/item/weapon/holder/monkey/neaera
 	name = "neaera"
 	desc = "It's a neaera."
 	icon_state = "skrellkey1"
-	origin_tech = null

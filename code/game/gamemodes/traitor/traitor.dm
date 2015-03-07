@@ -6,14 +6,13 @@
 	name = "traitor"
 	config_tag = "traitor"
 	restricted_jobs = list("Cyborg")//They are part of the AI if he is traitor so are they, they use to get double chances
-	protected_jobs = list("Security Officer", "Warden", "Detective", "Head of Security", "Captain")//AI", Currently out of the list as malf does not work for shit
+	protected_jobs = list("Security Officer", "Warden", "Detective", "Internal Affairs Agent", "Head of Security", "Captain")//AI", Currently out of the list as malf does not work for shit
 	required_players = 0
 	required_enemies = 1
 	recommended_enemies = 4
 
 
 	uplink_welcome = "AntagCorp Portable Teleportation Relay:"
-	uplink_uses = 10
 
 	var/const/waittime_l = 600 //lower bound on time before intercept arrives (in tenths of seconds)
 	var/const/waittime_h = 1800 //upper bound on time before intercept arrives (in tenths of seconds)
@@ -24,7 +23,7 @@
 
 /datum/game_mode/traitor/announce()
 	world << "<B>The current game mode is - Traitor!</B>"
-	world << "<B>There is a syndicate traitor on the station. Do not let the traitor succeed!</B>"
+	world << "<B>There is a foreign agent or traitor on the station. Do not let the traitor succeed!</B>"
 
 
 /datum/game_mode/traitor/pre_setup()
@@ -135,14 +134,7 @@
 
 /datum/game_mode/proc/greet_traitor(var/datum/mind/traitor)
 	traitor.current << "<B><font size=3 color=red>You are the traitor.</font></B>"
-	if (!config.objectives_disabled)
-		var/obj_count = 1
-		for(var/datum/objective/objective in traitor.objectives)
-			traitor.current << "<B>Objective #[obj_count]</B>: [objective.explanation_text]"
-			obj_count++
-	else
-		traitor.current << "<i>You have been selected this round as an antagonist- <font color=blue>Within the rules,</font> try to act as an opposing force to the crew- This can be via corporate payoff, personal motives, or maybe just being a dick. Further RP and try to make sure other players have </i>fun<i>! If you are confused or at a loss, always adminhelp, and before taking extreme actions, please try to also contact the administration! Think through your actions and make the roleplay immersive! <b>Please remember all rules aside from those without explicit exceptions apply to antagonist.</i></b>"
-	return
+	show_objectives(traitor)
 
 
 /datum/game_mode/proc/finalize_traitor(var/datum/mind/traitor)
@@ -156,6 +148,14 @@
 /datum/game_mode/traitor/declare_completion()
 	..()
 	return//Traitors will be checked as part of check_extra_completion. Leaving this here as a reminder.
+
+/datum/game_mode/proc/give_codewords(mob/living/traitor_mob)
+	traitor_mob << "<u><b>Your employers provided you with the following information on how to identify possible allies:</b></u>"
+	traitor_mob << "<b>Code Phrase</b>: <span class='danger'>[syndicate_code_phrase]</span>"
+	traitor_mob << "<b>Code Response</b>: <span class='danger'>[syndicate_code_response]</span>"
+	traitor_mob.mind.store_memory("<b>Code Phrase</b>: [syndicate_code_phrase]")
+	traitor_mob.mind.store_memory("<b>Code Response</b>: [syndicate_code_response]")
+	traitor_mob << "Use the code words, preferably in the order provided, during regular conversation, to identify other agents. Proceed with caution, however, as everyone is a potential foe."
 
 /datum/game_mode/traitor/process()
 	// Make sure all objectives are processed regularly, so that objectives
@@ -172,39 +172,14 @@
 	killer.set_zeroth_law(law, law_borg)
 	killer << "New law: 0. [law]"
 
-	//Begin code phrase.
-	killer << "The Syndicate provided you with the following information on how to identify their agents:"
-	if(prob(80))
-		killer << "\red Code Phrase: \black [syndicate_code_phrase]"
-		killer.mind.store_memory("<b>Code Phrase</b>: [syndicate_code_phrase]")
-	else
-		killer << "Unfortunately, the Syndicate did not provide you with a code phrase."
-	if(prob(80))
-		killer << "\red Code Response: \black [syndicate_code_response]"
-		killer.mind.store_memory("<b>Code Response</b>: [syndicate_code_response]")
-	else
-		killer << "Unfortunately, the Syndicate did not provide you with a code response."
-	killer << "Use the code words in the order provided, during regular conversation, to identify other agents. Proceed with caution, however, as everyone is a potential foe."
-	//End code phrase.
-
+	give_codewords(killer)
 
 /datum/game_mode/proc/auto_declare_completion_traitor()
 	if(traitors.len)
 		var/text = "<FONT size = 2><B>The traitors were:</B></FONT>"
 		for(var/datum/mind/traitor in traitors)
 			var/traitorwin = 1
-
-			text += "<br>[traitor.key] was [traitor.name] ("
-			if(traitor.current)
-				if(traitor.current.stat == DEAD)
-					text += "died"
-				else
-					text += "survived"
-				if(traitor.current.real_name != traitor.name)
-					text += " as [traitor.current.real_name]"
-			else
-				text += "body destroyed"
-			text += ")"
+			text += print_player_full(traitor)
 
 			if(traitor.objectives.len)//If the traitor had no objectives, don't need to process this.
 				var/count = 1
@@ -230,6 +205,8 @@
 				else
 					text += "<br><font color='red'><B>The [special_role_text] has failed!</B></font>"
 					feedback_add_details("traitor_success","FAIL")
+
+		text += "<br>"
 
 		world << text
 	return 1
@@ -287,7 +264,7 @@
 			var/freq = 1441
 			var/list/freqlist = list()
 			while (freq <= 1489)
-				if (freq < 1451 || freq > 1459)
+				if (freq < 1451 || freq > PUB_FREQ)
 					freqlist += freq
 				freq += 2
 				if ((freq % 2) == 0)
@@ -295,6 +272,7 @@
 			freq = freqlist[rand(1, freqlist.len)]
 
 			var/obj/item/device/uplink/hidden/T = new(R)
+			T.uplink_owner = traitor_mob.mind
 			target_radio.hidden_uplink = T
 			target_radio.traitor_frequency = freq
 			traitor_mob << "A portable object teleportation relay has been installed in your [R.name] [loc]. Simply dial the frequency [format_frequency(freq)] to unlock its hidden features."
@@ -304,6 +282,7 @@
 			var/pda_pass = "[rand(100,999)] [pick("Alpha","Bravo","Delta","Omega")]"
 
 			var/obj/item/device/uplink/hidden/T = new(R)
+			T.uplink_owner = traitor_mob.mind
 			R.hidden_uplink = T
 			var/obj/item/device/pda/P = R
 			P.lock_code = pda_pass
@@ -312,19 +291,7 @@
 			traitor_mob.mind.store_memory("<B>Uplink Passcode:</B> [pda_pass] ([R.name] [loc]).")
 	//Begin code phrase.
 	if(!safety)//If they are not a rev. Can be added on to.
-		traitor_mob << "The Syndicate provided you with the following information on how to identify other agents:"
-		if(prob(80))
-			traitor_mob << "\red Code Phrase: \black [syndicate_code_phrase]"
-			traitor_mob.mind.store_memory("<b>Code Phrase</b>: [syndicate_code_phrase]")
-		else
-			traitor_mob << "Unfortunetly, the Syndicate did not provide you with a code phrase."
-		if(prob(80))
-			traitor_mob << "\red Code Response: \black [syndicate_code_response]"
-			traitor_mob.mind.store_memory("<b>Code Response</b>: [syndicate_code_response]")
-		else
-			traitor_mob << "Unfortunately, the Syndicate did not provide you with a code response."
-		traitor_mob << "Use the code words in the order provided, during regular conversation, to identify other agents. Proceed with caution, however, as everyone is a potential foe."
-	//End code phrase.
+		give_codewords(traitor_mob)
 
 	// Tell them about people they might want to contact.
 	var/mob/living/carbon/human/M = get_nt_opposed()

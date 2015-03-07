@@ -80,6 +80,9 @@
 		throw_item(A)
 		return
 
+	if(!istype(A,/obj/item/weapon/gun) && !isturf(A) && !istype(A,/obj/screen))
+		last_target_click = world.time
+
 	var/obj/item/W = get_active_hand()
 
 	if(W == A)
@@ -113,7 +116,7 @@
 			if(!resolved && A && W)
 				W.afterattack(A,src,1,params) // 1 indicates adjacency
 		else
-			UnarmedAttack(A)
+			UnarmedAttack(A, 1)
 		return
 
 	if(!isturf(loc)) // This is going to stop you from telekinesing from inside a closet, but I don't shed many tears for that
@@ -144,10 +147,12 @@
 
 	return
 
+/mob/proc/changeNext_move(num)
+	next_move = world.time + num
+
 // Default behavior: ignore double clicks, consider them normal clicks instead
 /mob/proc/DblClickOn(var/atom/A, var/params)
 	ClickOn(A,params)
-
 
 /*
 	Translates into attack_hand, etc.
@@ -161,6 +166,21 @@
 */
 /mob/proc/UnarmedAttack(var/atom/A, var/proximity_flag)
 	return
+
+/mob/living/UnarmedAttack(var/atom/A, var/proximity_flag)
+
+	if(!ticker)
+		src << "You cannot attack people before the game has started."
+		return 0
+
+	if (istype(get_area(src), /area/start))
+		src << "No attacking people at spawn, you jackass."
+		return 0
+
+	if(stat)
+		return 0
+
+	return 1
 
 /*
 	Ranged unarmed attack:
@@ -202,7 +222,20 @@
 */
 /mob/proc/MiddleClickOn(var/atom/A)
 	return
+
 /mob/living/carbon/MiddleClickOn(var/atom/A)
+	swap_hand()
+
+/mob/living/carbon/human/MiddleClickOn(var/atom/A)
+
+	if(back)
+		var/obj/item/weapon/rig/rig = back
+		if(istype(rig) && rig.selected_module)
+			if(world.time <= next_move) return
+			next_move = world.time + 8
+			rig.selected_module.engage(A)
+			return
+
 	swap_hand()
 
 // In case of use break glass
@@ -221,8 +254,7 @@
 	return
 /atom/proc/ShiftClick(var/mob/user)
 	if(user.client && user.client.eye == user)
-		examine()
-		user.face_atom(src)
+		user.examinate(src)
 	return
 
 /*
@@ -249,13 +281,16 @@
 
 /atom/proc/AltClick(var/mob/user)
 	var/turf/T = get_turf(src)
-	if(T && T.AdjacentQuick(user))
+	if(T && user.TurfAdjacent(T))
 		if(user.listed_turf == T)
 			user.listed_turf = null
 		else
 			user.listed_turf = T
 			user.client.statpanel = T.name
 	return
+
+/mob/proc/TurfAdjacent(var/turf/T)
+	return T.AdjacentQuick(src)
 
 /*
 	Misc helpers
@@ -295,14 +330,17 @@
 
 // Simple helper to face what you clicked on, in case it should be needed in more than one place
 /mob/proc/face_atom(var/atom/A)
-	if( stat || buckled || !A || !x || !y || !A.x || !A.y ) return
+	if(!A || !x || !y || !A.x || !A.y) return
 	var/dx = A.x - x
 	var/dy = A.y - y
 	if(!dx && !dy) return
 
+	var/direction
 	if(abs(dx) < abs(dy))
-		if(dy > 0)	usr.dir = NORTH
-		else		usr.dir = SOUTH
+		if(dy > 0)	direction = NORTH
+		else		direction = SOUTH
 	else
-		if(dx > 0)	usr.dir = EAST
-		else		usr.dir = WEST
+		if(dx > 0)	direction = EAST
+		else		direction = WEST
+	if(direction != dir)
+		facedir(direction)

@@ -26,14 +26,15 @@ datum/controller/game_controller
 	var/powernets_cost	= 0
 	var/nano_cost		= 0
 	var/events_cost		= 0
+	var/alarms_cost		= 0
 	var/ticker_cost		= 0
 	var/total_cost		= 0
 
 	var/last_thing_processed
 	var/mob/list/expensive_mobs = list()
-	var/rebuild_active_areas = 0
-	
-	var/list/shuttle_list	//for debugging and VV
+
+	var/list/shuttle_list	                    // For debugging and VV
+	var/datum/random_map/ore/asteroid_ore_map   // For debugging and VV.
 
 datum/controller/game_controller/New()
 	//There can be only one master_controller. Out with the old and in with the new.
@@ -52,10 +53,14 @@ datum/controller/game_controller/New()
 
 	if(!syndicate_code_phrase)		syndicate_code_phrase	= generate_code_phrase()
 	if(!syndicate_code_response)	syndicate_code_response	= generate_code_phrase()
-	if(!emergency_shuttle)			emergency_shuttle = new /datum/shuttle_controller/emergency_shuttle()
+	if(!emergency_shuttle)			emergency_shuttle = new /datum/emergency_shuttle_controller()
+	if(!shuttle_controller)			shuttle_controller = new /datum/shuttle_controller()
 
 datum/controller/game_controller/proc/setup()
 	world.tick_lag = config.Ticklag
+
+	//Create the asteroid Z-level.
+	new /datum/random_map(null,13,32,5,217,223)
 
 	spawn(20)
 		createRandomZlevel()
@@ -67,9 +72,6 @@ datum/controller/game_controller/proc/setup()
 	if(!ticker)
 		ticker = new /datum/controller/gameticker()
 
-	if(!shuttles) setup_shuttles()
-	shuttle_list = shuttles
-
 	setup_objects()
 	setupgenetics()
 	setupfactions()
@@ -78,18 +80,11 @@ datum/controller/game_controller/proc/setup()
 
 	transfer_controller = new
 
-	for(var/i=0, i<max_secret_rooms, i++)
-		make_mining_asteroid_secret()
-
-	//Create the mining ore distribution map.
-	var/datum/ore_distribution/O = new()
-	O.populate_distribution_map()
-
 	spawn(0)
 		if(ticker)
 			ticker.pregame()
 
-	lighting_controller.Initialize()
+	lighting_controller.initializeLighting()
 
 
 datum/controller/game_controller/proc/setup_objects()
@@ -113,6 +108,22 @@ datum/controller/game_controller/proc/setup_objects()
 			var/obj/machinery/atmospherics/unary/vent_scrubber/T = U
 			T.broadcast_status()
 
+	// Create the mining ore distribution map.
+	// These values determine the specific area that the map is applied to.
+	// If you do not use the official Baycode asteroid map, you will need to change them.
+	asteroid_ore_map = new /datum/random_map/ore(null,13,32,5,217,223)
+
+	//Shitty hack to fix mining turf overlays, for some reason New() is not being called.
+	//for(var/turf/simulated/floor/plating/airless/asteroid/T in world)
+	//	T.updateMineralOverlays()
+	//	T.name = "asteroid"
+
+	//Set up spawn points.
+	populate_spawn_points()
+
+	// Sort the machinery list so it doesn't cause a lagspike at roundstart
+	process_machines_sort()
+
 	world << "\red \b Initializations complete."
 	sleep(-1)
 
@@ -135,6 +146,7 @@ datum/controller/game_controller/proc/process()
 
 				vote.process()
 				transfer_controller.process()
+				shuttle_controller.process()
 				process_newscaster()
 
 				//AIR
@@ -220,6 +232,11 @@ datum/controller/game_controller/proc/process()
 				process_events()
 				events_cost = (world.timeofday - timer) / 10
 
+				//ALARMS
+				timer = world.timeofday
+				process_alarms()
+				alarms_cost = (world.timeofday - timer) / 10
+
 				//TICKER
 				timer = world.timeofday
 				last_thing_processed = ticker.type
@@ -227,10 +244,10 @@ datum/controller/game_controller/proc/process()
 				ticker_cost = (world.timeofday - timer) / 10
 
 				//TIMING
-				total_cost = air_cost + sun_cost + mobs_cost + diseases_cost + machines_cost + objects_cost + networks_cost + powernets_cost + nano_cost + events_cost + ticker_cost
+				total_cost = air_cost + sun_cost + mobs_cost + diseases_cost + machines_cost + objects_cost + networks_cost + powernets_cost + nano_cost + events_cost + alarms_cost + ticker_cost
 
 				var/end_time = world.timeofday
-				if(end_time < start_time)
+				if(end_time < start_time)	//why not just use world.time instead?
 					start_time -= 864000    //deciseconds in a day
 				sleep( round(minimum_ticks - (end_time - start_time),1) )
 			else
@@ -263,47 +280,25 @@ datum/controller/game_controller/proc/process_diseases()
 		active_diseases.Cut(i,i+1)
 
 datum/controller/game_controller/proc/process_machines()
+	process_machines_sort()
 	process_machines_process()
-	process_machines_power()
-	process_machines_rebuild()
+
+/var/global/machinery_sort_required = 0
+datum/controller/game_controller/proc/process_machines_sort()
+	if(machinery_sort_required)
+		machinery_sort_required = 0
+		machines = dd_sortedObjectList(machines)
+
 datum/controller/game_controller/proc/process_machines_process()
-	var/i = 1
-	while(i<=machines.len)
-		var/obj/machinery/Machine = machines[i]
-		if(Machine)
-			last_thing_processed = Machine.type
-			if(Machine.process() != PROCESS_KILL)
-				if(Machine)
-					i++
-					continue
-		machines.Cut(i,i+1)
-
-datum/controller/game_controller/proc/process_machines_power()
-	var/i=1
-	while(i<=active_areas.len)
-		var/area/A = active_areas[i]
-		if(A.powerupdate && A.master == A)
-			A.powerupdate -= 1
-			for(var/area/SubArea in A.related)
-				for(var/obj/machinery/M in SubArea)
-					if(M)
-						if(M.use_power)
-							M.auto_use_power()
-
-		if(A.apc.len && A.master == A)
-			i++
-			continue
-
-		A.powerupdate = 0
-		active_areas.Cut(i,i+1)
-
-datum/controller/game_controller/proc/process_machines_rebuild()
-	if(controller_iteration % 150 == 0 || rebuild_active_areas)	//Every 300 seconds we retest every area/machine
-		for(var/area/A in all_areas)
-			if(A == A.master)
-				A.powerupdate += 1
-				active_areas |= A
-		rebuild_active_areas = 0
+	for(var/obj/machinery/Machine in machines)
+		last_thing_processed = Machine.type
+		if(Machine.process() != PROCESS_KILL)
+			if(Machine)
+				Machine.power_change()
+				if(Machine.use_power)
+					Machine.auto_use_power()
+				continue
+		machines -= Machine
 
 
 datum/controller/game_controller/proc/process_objects()
@@ -328,18 +323,13 @@ datum/controller/game_controller/proc/process_pipenets()
 			continue
 		pipe_networks.Cut(i,i+1)
 
-datum/controller/game_controller/proc/process_powernets()
+/datum/controller/game_controller/proc/process_powernets()
 	last_thing_processed = /datum/powernet
-	var/i = 1
-	while(i<=powernets.len)
-		var/datum/powernet/Powernet = powernets[i]
-		if(Powernet)
-			Powernet.reset()
-			i++
-			continue
-		powernets.Cut(i,i+1)
+	for(var/datum/powernet/Powernet in powernets)
+		Powernet.reset()
 
 datum/controller/game_controller/proc/process_nano()
+	last_thing_processed = /datum/nanoui
 	var/i = 1
 	while(i<=nanomanager.processing_uis.len)
 		var/datum/nanoui/ui = nanomanager.processing_uis[i]
@@ -350,16 +340,12 @@ datum/controller/game_controller/proc/process_nano()
 		nanomanager.processing_uis.Cut(i,i+1)
 
 datum/controller/game_controller/proc/process_events()
-	last_thing_processed = /datum/event
-	var/i = 1
-	while(i<=events.len)
-		var/datum/event/Event = events[i]
-		if(Event)
-			Event.process()
-			i++
-			continue
-		events.Cut(i,i+1)
-	checkEvent()
+	last_thing_processed = /datum/event_manager
+	event_manager.process()
+
+datum/controller/game_controller/proc/process_alarms()
+	last_thing_processed = /datum/subsystem/alarm
+	alarm_manager.fire()
 
 datum/controller/game_controller/proc/Recover()		//Mostly a placeholder for now.
 	var/msg = "## DEBUG: [time2text(world.timeofday)] MC restarted. Reports:\n"

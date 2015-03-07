@@ -20,7 +20,7 @@ var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", 
 		runewords-=cultwords[word]
 
 /obj/effect/rune
-	desc = ""
+	desc = "A strange collection of symbols drawn in blood."
 	anchored = 1
 	icon = 'icons/obj/rune.dmi'
 	icon_state = "1"
@@ -32,6 +32,8 @@ var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", 
 	var/word1
 	var/word2
 	var/word3
+	var/list/converting = list()
+	
 // Places these combos are mentioned: this file - twice in the rune code, once in imbued tome, once in tome's HTML runes.dm - in the imbue rune code. If you change a combination - dont forget to change it everywhere.
 
 // travel self [word] - Teleport to random [rune with word destination matching]
@@ -68,30 +70,14 @@ var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", 
 		for(var/mob/living/silicon/ai/AI in player_list)
 			AI.client.images += blood
 
-	examine()
-		set src in view(2)
-
-		if(!iscultist(usr))
-			usr << "A strange collection of symbols drawn in blood."
-			return
-			/* Explosions... really?
-			if(desc && !usr.stat)
-				usr << "It reads: <i>[desc]</i>."
-				sleep(30)
-				explosion(src.loc, 0, 2, 5, 5)
-				if(src)
-					del(src)
-			*/
-		if(!desc)
-			usr << "A spell circle drawn in blood. It reads: <i>[word1] [word2] [word3]</i>."
-		else
-			usr << "Explosive Runes inscription in blood. It reads: <i>[desc]</i>."
-
-		return
+	examine(mob/user)
+		..()
+		if(iscultist(user))
+			user << "This spell circle reads: <i>[word1] [word2] [word3]</i>."
 
 
 	attackby(I as obj, user as mob)
-		if(istype(I, /obj/item/weapon/tome) && iscultist(user))
+		if(istype(I, /obj/item/weapon/book/tome) && iscultist(user))
 			user << "You retrace your steps, carefully undoing the lines of the rune."
 			del(src)
 			return
@@ -178,13 +164,14 @@ var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", 
 		check_icon()
 			icon = get_uristrune_cult(word1, word2, word3)
 
-/obj/item/weapon/tome
+/obj/item/weapon/book/tome
 	name = "arcane tome"
+	icon = 'icons/obj/weapons.dmi'
 	icon_state ="tome"
 	throw_speed = 1
 	throw_range = 5
 	w_class = 2.0
-	flags = FPRINT | TABLEPASS
+	unique = 1
 	var/notedat = ""
 	var/tomedat = ""
 	var/list/words = list("ire" = "ire", "ego" = "ego", "nahlizet" = "nahlizet", "certum" = "certum", "veri" = "veri", "jatkaa" = "jatkaa", "balaq" = "balaq", "mgar" = "mgar", "karazet" = "karazet", "geeri" = "geeri")
@@ -313,7 +300,7 @@ var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", 
 						[words[10]] is <a href='byond://?src=\ref[src];number=10;action=change'>[words[words[10]]]</A> <A href='byond://?src=\ref[src];number=10;action=clear'>Clear</A><BR>
 						"}
 			usr << browse("[notedat]", "window=notes")
-//		call(/obj/item/weapon/tome/proc/edit_notes)()
+//		call(/obj/item/weapon/book/tome/proc/edit_notes)()
 		else
 			usr << browse(null, "window=notes")
 			return
@@ -344,11 +331,8 @@ var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", 
 		msg_admin_attack("[user.name] ([user.ckey]) used [name] on [M.name] ([M.ckey]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
 
 		if(istype(M,/mob/dead))
-			M.invisibility = 0
-			user.visible_message( \
-				"\red [user] drags the ghost to our plan of reality!", \
-				"\red You drag the ghost to our plan of reality!" \
-			)
+			var/mob/dead/D = M
+			D.manifest(user)
 			return
 		if(!istype(M))
 			return
@@ -408,7 +392,7 @@ var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", 
 					[words[9]] is <a href='byond://?src=\ref[src];number=9;action=change'>[words[words[9]]]</A> <A href='byond://?src=\ref[src];number=9;action=clear'>Clear</A><BR>
 					[words[10]] is <a href='byond://?src=\ref[src];number=10;action=change'>[words[words[10]]]</A> <A href='byond://?src=\ref[src];number=10;action=clear'>Clear</A><BR>
 					"}
-//						call(/obj/item/weapon/tome/proc/edit_notes)()
+//						call(/obj/item/weapon/book/tome/proc/edit_notes)()
 						user << browse("[notedat]", "window=notes")
 						return
 			if(usr.get_active_hand() != src)
@@ -493,8 +477,8 @@ var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", 
 			user << "The book seems full of illegible scribbles. Is this a joke?"
 			return
 
-	attackby(obj/item/weapon/tome/T as obj, mob/living/user as mob)
-		if(istype(T, /obj/item/weapon/tome)) // sanity check to prevent a runtime error
+	attackby(obj/item/weapon/book/tome/T as obj, mob/living/user as mob)
+		if(istype(T, /obj/item/weapon/book/tome)) // sanity check to prevent a runtime error
 			switch(alert("Copy the runes from your tome?",,"Copy", "Cancel"))
 				if("cancel")
 					return
@@ -508,14 +492,13 @@ var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", 
 			user << "You copy the translation notes from your tome."
 
 
-	examine()
-		set src in usr
-		if(!iscultist(usr))
-			usr << "An old, dusty tome with frayed edges and a sinister looking cover."
+	examine(mob/user)
+		if(!iscultist(user))
+			user << "An old, dusty tome with frayed edges and a sinister looking cover."
 		else
-			usr << "The scriptures of Nar-Sie, The One Who Sees, The Geometer of Blood. Contains the details of every ritual his followers could think of. Most of these are useless, though."
+			user << "The scriptures of Nar-Sie, The One Who Sees, The Geometer of Blood. Contains the details of every ritual his followers could think of. Most of these are useless, though."
 
-/obj/item/weapon/tome/imbued //admin tome, spawns working runes without waiting
+/obj/item/weapon/book/tome/imbued //admin tome, spawns working runes without waiting
 	w_class = 2.0
 	var/cultistsonly = 1
 	attack_self(mob/user as mob)

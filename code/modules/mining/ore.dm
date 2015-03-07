@@ -2,6 +2,7 @@
 	name = "rock"
 	icon = 'icons/obj/mining.dmi'
 	icon_state = "ore2"
+	w_class = 2
 	var/datum/geosample/geologic_data
 	var/oretag
 
@@ -19,7 +20,7 @@
 
 /obj/item/weapon/ore/coal
 	name = "carbonaceous rock"
-	icon_state = "Iron ore" //TODO
+	icon_state = "Coal ore"
 	origin_tech = "materials=1"
 	oretag = "coal"
 
@@ -55,12 +56,12 @@
 
 /obj/item/weapon/ore/osmium
 	name = "raw platinum"
-	icon_state = "slag" //TODO
+	icon_state = "Platinum ore"
 	oretag = "platinum"
 
 /obj/item/weapon/ore/hydrogen
 	name = "raw hydrogen"
-	icon_state = "slag" //TODO
+	icon_state = "Phazon"
 	oretag = "hydrogen"
 
 /obj/item/weapon/ore/slag

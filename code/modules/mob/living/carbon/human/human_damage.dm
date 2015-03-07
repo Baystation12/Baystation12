@@ -1,7 +1,8 @@
 //Updates the mob's health from organs and mob damage variables
 /mob/living/carbon/human/updatehealth()
+
 	if(status_flags & GODMODE)
-		health = 100
+		health = maxHealth
 		stat = CONSCIOUS
 		return
 	var/total_burn	= 0
@@ -9,21 +10,60 @@
 	for(var/datum/organ/external/O in organs)	//hardcoded to streamline things a bit
 		total_brute	+= O.brute_dam
 		total_burn	+= O.burn_dam
-	health = 100 - getOxyLoss() - getToxLoss() - getCloneLoss() - total_burn - total_brute
+
+	var/oxy_l = ((species.flags & NO_BREATHE) ? 0 : getOxyLoss())
+	var/tox_l = ((species.flags & NO_POISON) ? 0 : getToxLoss())
+	var/clone_l = getCloneLoss()
+
+	health = maxHealth - oxy_l - tox_l - clone_l - total_burn - total_brute
+
 	//TODO: fix husking
-	if( ((100 - total_burn) < config.health_threshold_dead) && stat == DEAD) //100 only being used as the magic human max health number, feel free to change it if you add a var for it -- Urist
+	if( ((maxHealth - total_burn) < config.health_threshold_dead) && stat == DEAD)
 		ChangeToHusk()
 	return
 
+/mob/living/carbon/human/adjustBrainLoss(var/amount)
+
+	if(status_flags & GODMODE)	return 0	//godmode
+
+	if(species && species.has_organ["brain"])
+		var/datum/organ/internal/brain/sponge = internal_organs_by_name["brain"]
+		if(sponge)
+			sponge.take_damage(amount)
+			sponge.damage = min(max(brainloss, 0),(maxHealth*2))
+			brainloss = sponge.damage
+		else
+			brainloss = 200
+	else
+		brainloss = 0
+
+/mob/living/carbon/human/setBrainLoss(var/amount)
+
+	if(status_flags & GODMODE)	return 0	//godmode
+
+	if(species && species.has_organ["brain"])
+		var/datum/organ/internal/brain/sponge = internal_organs_by_name["brain"]
+		if(sponge)
+			sponge.damage = min(max(amount, 0),(maxHealth*2))
+			brainloss = sponge.damage
+		else
+			brainloss = 200
+	else
+		brainloss = 0
+
 /mob/living/carbon/human/getBrainLoss()
-	var/res = brainloss
-	var/datum/organ/internal/brain/sponge = internal_organs["brain"]
-	if (sponge.is_bruised())
-		res += 20
-	if (sponge.is_broken())
-		res += 50
-	res = min(res,maxHealth*2)
-	return res
+
+	if(status_flags & GODMODE)	return 0	//godmode
+
+	if(species && species.has_organ["brain"])
+		var/datum/organ/internal/brain/sponge = internal_organs_by_name["brain"]
+		if(sponge)
+			brainloss = min(sponge.damage,maxHealth*2)
+		else
+			brainloss = 200
+	else
+		brainloss = 0
+	return brainloss
 
 //These procs fetch a cumulative total damage from all organs
 /mob/living/carbon/human/getBruteLoss()
@@ -47,7 +87,7 @@
 		take_overall_damage(amount, 0)
 	else
 		heal_overall_damage(-amount, 0)
-	hud_updateflag |= 1 << HEALTH_HUD
+	BITSET(hud_updateflag, HEALTH_HUD)
 
 /mob/living/carbon/human/adjustFireLoss(var/amount)
 	if(species && species.burn_mod)
@@ -57,7 +97,7 @@
 		take_overall_damage(0, amount)
 	else
 		heal_overall_damage(0, -amount)
-	hud_updateflag |= 1 << HEALTH_HUD
+	BITSET(hud_updateflag, HEALTH_HUD)
 
 /mob/living/carbon/human/proc/adjustBruteLossByPart(var/amount, var/organ_name, var/obj/damage_source = null)
 	if(species && species.brute_mod)
@@ -72,7 +112,7 @@
 			//if you don't want to heal robot organs, they you will have to check that yourself before using this proc.
 			O.heal_damage(-amount, 0, internal=0, robo_repair=(O.status & ORGAN_ROBOT))
 
-	hud_updateflag |= 1 << HEALTH_HUD
+	BITSET(hud_updateflag, HEALTH_HUD)
 
 /mob/living/carbon/human/proc/adjustFireLossByPart(var/amount, var/organ_name, var/obj/damage_source = null)
 	if(species && species.burn_mod)
@@ -87,7 +127,7 @@
 			//if you don't want to heal robot organs, they you will have to check that yourself before using this proc.
 			O.heal_damage(0, -amount, internal=0, robo_repair=(O.status & ORGAN_ROBOT))
 
-	hud_updateflag |= 1 << HEALTH_HUD
+	BITSET(hud_updateflag, HEALTH_HUD)
 
 /mob/living/carbon/human/Stun(amount)
 	if(HULK in mutations)	return
@@ -101,10 +141,22 @@
 	if(HULK in mutations)	return
 	..()
 
+/mob/living/carbon/human/getCloneLoss()
+	if(species.flags & (IS_SYNTHETIC | NO_SCAN))
+		cloneloss = 0
+	return ..()
+
+/mob/living/carbon/human/setCloneLoss(var/amount)
+	if(species.flags & (IS_SYNTHETIC | NO_SCAN))
+		cloneloss = 0
+	else
+		..()
+
 /mob/living/carbon/human/adjustCloneLoss(var/amount)
 	..()
 
-	if(species.flags & IS_SYNTHETIC)
+	if(species.flags & (IS_SYNTHETIC | NO_SCAN))
+		cloneloss = 0
 		return
 
 	var/heal_prob = max(0, 80 - getCloneLoss())
@@ -133,7 +185,42 @@
 			if (O.status & ORGAN_MUTATED)
 				O.unmutate()
 				src << "<span class = 'notice'>Your [O.display_name] is shaped normally again.</span>"
-	hud_updateflag |= 1 << HEALTH_HUD
+	BITSET(hud_updateflag, HEALTH_HUD)
+
+// Defined here solely to take species flags into account without having to recast at mob/living level.
+/mob/living/carbon/human/getOxyLoss()
+	if(species.flags & NO_BREATHE)
+		oxyloss = 0
+	return ..()
+
+/mob/living/carbon/human/adjustOxyLoss(var/amount)
+	if(species.flags & NO_BREATHE)
+		oxyloss = 0
+	else
+		..()
+
+/mob/living/carbon/human/setOxyLoss(var/amount)
+	if(species.flags & NO_BREATHE)
+		oxyloss = 0
+	else
+		..()
+
+/mob/living/carbon/human/getToxLoss()
+	if(species.flags & NO_POISON)
+		toxloss = 0
+	return ..()
+
+/mob/living/carbon/human/adjustToxLoss(var/amount)
+	if(species.flags & NO_POISON)
+		toxloss = 0
+	else
+		..()
+
+/mob/living/carbon/human/setToxLoss(var/amount)
+	if(species.flags & NO_POISON)
+		toxloss = 0
+	else
+		..()
 
 ////////////////////////////////////////////
 
@@ -162,9 +249,13 @@
 	var/datum/organ/external/picked = pick(parts)
 	if(picked.heal_damage(brute,burn))
 		UpdateDamageIcon()
-		hud_updateflag |= 1 << HEALTH_HUD
+		BITSET(hud_updateflag, HEALTH_HUD)
 	updatehealth()
 
+
+/*
+In most cases it makes more sense to use apply_damage() instead! And make sure to check armour if applicable.
+*/
 //Damages ONE external organ, organ gets randomly selected from damagable ones.
 //It automatically updates damage overlays if necesary
 //It automatically updates health status
@@ -174,7 +265,7 @@
 	var/datum/organ/external/picked = pick(parts)
 	if(picked.take_damage(brute,burn,sharp,edge))
 		UpdateDamageIcon()
-		hud_updateflag |= 1 << HEALTH_HUD
+		BITSET(hud_updateflag, HEALTH_HUD)
 	updatehealth()
 	speech_problem_flag = 1
 
@@ -197,7 +288,7 @@
 
 		parts -= picked
 	updatehealth()
-	hud_updateflag |= 1 << HEALTH_HUD
+	BITSET(hud_updateflag, HEALTH_HUD)
 	speech_problem_flag = 1
 	if(update)	UpdateDamageIcon()
 
@@ -218,7 +309,7 @@
 
 		parts -= picked
 	updatehealth()
-	hud_updateflag |= 1 << HEALTH_HUD
+	BITSET(hud_updateflag, HEALTH_HUD)
 	if(update)	UpdateDamageIcon()
 
 
@@ -245,7 +336,7 @@ This function restores all organs.
 	if(istype(E, /datum/organ/external))
 		if (E.heal_damage(brute, burn))
 			UpdateDamageIcon()
-			hud_updateflag |= 1 << HEALTH_HUD
+			BITSET(hud_updateflag, HEALTH_HUD)
 	else
 		return 0
 	return
@@ -259,12 +350,19 @@ This function restores all organs.
 
 /mob/living/carbon/human/apply_damage(var/damage = 0, var/damagetype = BRUTE, var/def_zone = null, var/blocked = 0, var/sharp = 0, var/edge = 0, var/obj/used_weapon = null)
 
-	handle_suit_punctures(damagetype, damage)
-
 	//visible_message("Hit debug. [damage] | [damagetype] | [def_zone] | [blocked] | [sharp] | [used_weapon]")
+
+	//Handle other types of damage
 	if((damagetype != BRUTE) && (damagetype != BURN))
+		if(damagetype == HALLOSS && !(species && (species.flags & NO_PAIN)))
+			if ((damage > 25 && prob(20)) || (damage > 50 && prob(60)))
+				emote("scream")
+
 		..(damage, damagetype, def_zone, blocked)
 		return 1
+
+	//Handle BRUTE and BURN damage
+	handle_suit_punctures(damagetype, damage, def_zone)
 
 	if(blocked >= 2)	return 0
 
@@ -295,13 +393,5 @@ This function restores all organs.
 
 	// Will set our damageoverlay icon to the next level, which will then be set back to the normal level the next mob.Life().
 	updatehealth()
-	hud_updateflag |= 1 << HEALTH_HUD
-
-	//Embedded projectile code.
-	if(!organ) return
-	if(istype(used_weapon,/obj/item/weapon))
-		var/obj/item/weapon/W = used_weapon  //Sharp objects will always embed if they do enough damage.
-		if( (damage > (10*W.w_class)) && ( (sharp && !ismob(W.loc)) || prob(damage/W.w_class) ) )
-			organ.embed(W)
-
+	BITSET(hud_updateflag, HEALTH_HUD)
 	return 1

@@ -1,19 +1,19 @@
 /mob/living/silicon/ai/death(gibbed)
-	if(stat == DEAD)	return
-	stat = DEAD
+
+	if(stat == DEAD)
+		return
+
 	if (src.custom_sprite == 1)//check for custom AI sprite, defaulting to blue screen if no.
 		icon_state = "[ckey]-ai-crash"
-	else icon_state = "ai-crash"
-	update_canmove()
+	else
+		icon_state = "ai-crash"
+
 	if(src.eyeobj)
 		src.eyeobj.setLoc(get_turf(src))
-	if(blind)	blind.layer = 0
-	sight |= SEE_TURFS|SEE_MOBS|SEE_OBJS
-	see_in_dark = 8
-	see_invisible = SEE_INVISIBLE_LEVEL_TWO
+
+	remove_ai_verbs(src)
 
 	var/callshuttle = 0
-
 	for(var/obj/machinery/computer/communications/commconsole in world)
 		if(commconsole.z == 2)
 			continue
@@ -47,13 +47,11 @@
 		spawn(10)
 			explosion(src.loc, 3, 6, 12, 15)
 
-	for(var/obj/machinery/ai_status_display/O in world) //change status
+	for(var/obj/machinery/ai_status_display/O in world)
 		spawn( 0 )
 		O.mode = 2
 		if (istype(loc, /obj/item/device/aicard))
-			loc.icon_state = "aicard-404"
+			var/obj/item/device/aicard/card = loc
+			card.update_icon()
 
-	tod = worldtime2text() //weasellos time of death patch
-	if(mind)	mind.store_memory("Time of death: [tod]", 0)
-
-	return ..(gibbed)
+	return ..(gibbed,"gives one shrill beep before falling lifeless.")

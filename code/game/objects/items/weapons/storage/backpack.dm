@@ -8,11 +8,10 @@
 	desc = "You wear this on your back and put items into it."
 	icon_state = "backpack"
 	item_state = "backpack"
-	w_class = 4.0
-	flags = FPRINT|TABLEPASS
-	slot_flags = SLOT_BACK	//ERROOOOO
+	w_class = 4
+	slot_flags = SLOT_BACK
 	max_w_class = 3
-	max_combined_w_class = 21
+	max_storage_space = 28
 
 /obj/item/weapon/storage/backpack/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (src.use_sound)
@@ -41,7 +40,7 @@
 	origin_tech = "bluespace=4"
 	icon_state = "holdingpack"
 	max_w_class = 4
-	max_combined_w_class = 28
+	max_storage_space = 56
 
 	New()
 		..()
@@ -68,6 +67,12 @@
 			return
 			*/
 		..()
+	
+	//Please don't clutter the parent storage item with stupid hacks.
+	can_be_inserted(obj/item/W as obj, stop_messages = 0)
+		if(istype(W, /obj/item/weapon/storage/backpack/holding))
+			return 1
+		return ..()
 
 	proc/failcheck(mob/user as mob)
 		if (prob(src.reliability)) return 1 //No failure
@@ -82,14 +87,14 @@
 
 
 /obj/item/weapon/storage/backpack/santabag
-	name = "Santa's Gift Bag"
+	name = "\improper Santa's gift bag"
 	desc = "Space Santa uses this to deliver toys to all the nice children in space in Christmas! Wow, it's pretty big!"
 	icon_state = "giftbag0"
 	item_state = "giftbag"
 	w_class = 4.0
 	storage_slots = 20
 	max_w_class = 3
-	max_combined_w_class = 400 // can store a ton of shit!
+	max_storage_space = 400 // can store a ton of shit!
 
 /obj/item/weapon/storage/backpack/cultpack
 	name = "trophy rack"
@@ -125,6 +130,36 @@
 	desc = "It's a tough backpack for the daily grind of station life."
 	icon_state = "engiepack"
 	item_state = "engiepack"
+
+/obj/item/weapon/storage/backpack/toxins
+	name = "laboratory backpack"
+	desc = "It's a light backpack modeled for use in laboratories and other scientific institutions."
+	icon_state = "toxpack"
+	item_state = "toxpack"
+
+/obj/item/weapon/storage/backpack/hydroponics
+	name = "herbalist's backpack"
+	desc = "It's a green backpack with many pockets to store plants and tools in."
+	icon_state = "hydpack"
+	item_state = "hydpack"
+
+/obj/item/weapon/storage/backpack/genetics
+	name = "geneticist backpack"
+	desc = "It's a backpack fitted with slots for diskettes and other workplace tools."
+	icon_state = "genpack"
+	item_state = "genpack"
+
+/obj/item/weapon/storage/backpack/virology
+	name = "sterile backpack"
+	desc = "It's a sterile backpack able to withstand different pathogens from entering its fabric."
+	icon_state = "viropack"
+	item_state = "viropack"
+
+/obj/item/weapon/storage/backpack/chemistry
+	name = "chemistry backpack"
+	desc = "It's an orange backpack which was designed to hold beakers, pill bottles and bottles."
+	icon_state = "chempack"
+	item_state = "chempack"
 
 /*
  * Satchel Types
@@ -193,3 +228,33 @@
 	desc = "An exclusive satchel for Nanotrasen officers."
 	icon_state = "satchel-cap"
 	item_state = "captainpack"
+
+//ERT backpacks.
+/obj/item/weapon/storage/backpack/ert
+	name = "emergency response team backpack"
+	desc = "A spacious backpack with lots of pockets, used by members of the Nanotrasen Emergency Response Team."
+	icon_state = "ert_commander"
+	item_state = "backpack"
+
+//Commander
+/obj/item/weapon/storage/backpack/ert/commander
+	name = "emergency response team commander backpack"
+	desc = "A spacious backpack with lots of pockets, worn by the commander of a Nanotrasen Emergency Response Team."
+
+//Security
+/obj/item/weapon/storage/backpack/ert/security
+	name = "emergency response team security backpack"
+	desc = "A spacious backpack with lots of pockets, worn by security members of a Nanotrasen Emergency Response Team."
+	icon_state = "ert_security"
+
+//Engineering
+/obj/item/weapon/storage/backpack/ert/engineer
+	name = "emergency response team engineer backpack"
+	desc = "A spacious backpack with lots of pockets, worn by engineering members of a Nanotrasen Emergency Response Team."
+	icon_state = "ert_engineering"
+
+//Medical
+/obj/item/weapon/storage/backpack/ert/medical
+	name = "emergency response team medical backpack"
+	desc = "A spacious backpack with lots of pockets, worn by medical members of a Nanotrasen Emergency Response Team."
+	icon_state = "ert_medical"

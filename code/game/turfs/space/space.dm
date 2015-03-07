@@ -1,35 +1,28 @@
+//This list contains the z-level numbers which can be accessed via space travel and the percentile chances to get there.
+//(Exceptions: extended, sandbox and nuke) -Errorage
+var/list/accessible_z_levels = list("1" = 5, "3" = 10, "4" = 15, "5" = 10, "6" = 60)
+
 /turf/space
 	icon = 'icons/turf/space.dmi'
 	name = "\proper space"
 	icon_state = "0"
 
-	temperature = T0C
+	temperature = T20C
 	thermal_conductivity = OPEN_HEAT_TRANSFER_COEFFICIENT
 //	heat_capacity = 700000 No.
 
 /turf/space/New()
 	if(!istype(src, /turf/space/transit))
 		icon_state = "[((x + y) ^ ~(x * y) + z) % 25]"
+	update_starlight()
 
-/turf/space/attack_paw(mob/user as mob)
-	return src.attack_hand(user)
-
-/turf/space/attack_hand(mob/user as mob)
-	if ((user.restrained() || !( user.pulling )))
+/turf/space/proc/update_starlight()
+	if(!config.starlight)
 		return
-	if (user.pulling.anchored || !isturf(user.pulling.loc))
-		return
-	if ((user.pulling.loc != user.loc && get_dist(user, user.pulling) > 1))
-		return
-	if (ismob(user.pulling))
-		var/mob/M = user.pulling
-		var/atom/movable/t = M.pulling
-		M.stop_pulling()
-		step(user.pulling, get_dir(user.pulling.loc, src))
-		M.start_pulling(t)
+	if(locate(/turf/simulated) in orange(src,1))
+		SetLuminosity(config.starlight)
 	else
-		step(user.pulling, get_dir(user.pulling.loc, src))
-	return
+		SetLuminosity(0)
 
 /turf/space/attackby(obj/item/C as obj, mob/user as mob)
 
@@ -38,16 +31,18 @@
 		if(L)
 			return
 		var/obj/item/stack/rods/R = C
-		user << "\blue Constructing support lattice ..."
-		playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
-		ReplaceWithLattice()
-		R.use(1)
+		if (R.use(1))
+			user << "\blue Constructing support lattice ..."
+			playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
+			ReplaceWithLattice()
 		return
 
 	if (istype(C, /obj/item/stack/tile/plasteel))
 		var/obj/structure/lattice/L = locate(/obj/structure/lattice, src)
 		if(L)
 			var/obj/item/stack/tile/plasteel/S = C
+			if (S.get_amount() < 1)
+				return
 			del(L)
 			playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
 			S.build(src)
@@ -71,9 +66,10 @@
 
 	if(ticker && ticker.mode)
 
+
 		// Okay, so let's make it so that people can travel z levels but not nuke disks!
-		// if(ticker.mode.name == "nuclear emergency")	return
-		if(A.z > 6) return
+		// if(ticker.mode.name == "mercenary")	return
+		if(A.z > 6 && !config.use_overmap) return
 		if (A.x <= TRANSITIONEDGE || A.x >= (world.maxx - TRANSITIONEDGE - 1) || A.y <= TRANSITIONEDGE || A.y >= (world.maxy - TRANSITIONEDGE - 1))
 			if(istype(A, /obj/effect/meteor)||istype(A, /obj/effect/space_dust))
 				del(A)
@@ -82,7 +78,9 @@
 			if(istype(A, /obj/item/weapon/disk/nuclear)) // Don't let nuke disks travel Z levels  ... And moving this shit down here so it only fires when they're actually trying to change z-level.
 				del(A) //The disk's Del() proc ensures a new one is created
 				return
-
+			if(config.use_overmap)
+				overmap_spacetravel(src,A)
+				return
 			var/list/disk_search = A.search_contents_for(/obj/item/weapon/disk/nuclear)
 			if(!isemptylist(disk_search))
 				if(istype(A, /mob/living))
@@ -109,7 +107,7 @@
 			var/safety = 1
 
 			while(move_to_z == src.z)
-				var/move_to_z_str = pickweight(accessable_z_levels)
+				var/move_to_z_str = pickweight(accessible_z_levels)
 				move_to_z = text2num(move_to_z_str)
 				safety++
 				if(safety > 10)

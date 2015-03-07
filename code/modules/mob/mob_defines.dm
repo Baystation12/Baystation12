@@ -69,6 +69,7 @@
 	var/med_record = ""
 	var/sec_record = ""
 	var/gen_record = ""
+	var/exploit_record = ""
 	var/blinded = null
 	var/bhunger = 0			//Carbon
 	var/ajourn = 0
@@ -87,22 +88,25 @@
 	var/list/pinned = list()            // List of things pinning this creature to walls (see living_defense.dm)
 	var/list/embedded = list()          // Embedded items, since simple mobs don't have organs.
 	var/list/languages = list()         // For speaking/listening.
-	var/list/abilities = list()         // For species-derived or admin-given powers.
 	var/list/speak_emote = list("says") // Verbs used when speaking. Defaults to 'say' if speak_emote is null.
 	var/emote_type = 1		// Define emote default type, 1 for seen emotes, 2 for heard emotes
+	var/facing_dir = null   // Used for the ancient art of moonwalking.
 
 	var/name_archive //For admin things like possession
 
 	var/timeofdeath = 0.0//Living
 	var/cpr_time = 1.0//Carbon
 
-
 	var/bodytemperature = 310.055	//98.7 F
+	var/old_x = 0
+	var/old_y = 0
 	var/drowsyness = 0.0//Carbon
 	var/dizziness = 0//Carbon
 	var/is_dizzy = 0
 	var/is_jittery = 0
 	var/jitteriness = 0//Carbon
+	var/is_floating = 0
+	var/floatiness = 0
 	var/charges = 0.0
 	var/nutrition = 400.0//Carbon
 
@@ -117,7 +121,7 @@
 	var/m_int = null//Living
 	var/m_intent = "run"//Living
 	var/lastKnownIP = null
-	var/obj/structure/stool/bed/buckled = null//Living
+	var/obj/buckled = null//Living
 	var/obj/item/l_hand = null//Living
 	var/obj/item/r_hand = null//Living
 	var/obj/item/weapon/back = null//Human/Monkey
@@ -184,7 +188,7 @@
 
 //List of active diseases
 
-	var/viruses = list() // replaces var/datum/disease/virus
+	var/list/viruses = list() // replaces var/datum/disease/virus
 
 //Monkey/infected mode
 	var/list/resistances = list()
@@ -209,14 +213,15 @@
 	//Whether or not mobs can understand other mobtypes. These stay in /mob so that ghosts can hear everything.
 	var/universal_speak = 0 // Set to 1 to enable the mob to speak to everyone -- TLE
 	var/universal_understand = 0 // Set to 1 to enable the mob to understand everyone, not necessarily speak
-	var/robot_talk_understand = 0
-	var/alien_talk_understand = 0
 
-	var/has_limbs = 1 //Whether this mob have any limbs he can move with
-	var/can_stand = 1 //Whether this mob have ability to stand
+	var/stance_damage = 0 //Whether this mob's ability to stand has been affected
 
-	var/immune_to_ssd = 0
+	//SSD var, changed it up some so people can have special things happen for different mobs when SSD.
+	var/player_logged = 0
 
-	var/turf/listed_turf = null  //the current turf being examined in the stat panel
+	var/turf/listed_turf = null  	//the current turf being examined in the stat panel
+	var/list/shouldnt_see = list()	//list of objects that this mob shouldn't see in the stat panel. this silliness is needed because of AI alt+click and cult blood runes
 
 	var/list/active_genes=list()
+
+

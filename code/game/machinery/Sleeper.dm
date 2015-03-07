@@ -11,6 +11,9 @@
 	density = 1
 	var/orient = "LEFT" // "RIGHT" changes the dir suffix to "-r"
 
+	use_power = 1
+	idle_power_usage = 40
+	interact_offline = 1
 
 /obj/machinery/sleep_console/process()
 	if(stat & (NOPOWER|BROKEN))
@@ -47,15 +50,17 @@
 /obj/machinery/sleep_console/attack_ai(mob/user as mob)
 	return src.attack_hand(user)
 
-/obj/machinery/sleep_console/attack_paw(mob/user as mob)
-	return src.attack_hand(user)
-
 /obj/machinery/sleep_console/attack_hand(mob/user as mob)
 	if(..())
 		return
-	if (src.connected)
+	if(stat & (NOPOWER|BROKEN))
+		return
+	var/dat = ""
+	if (!src.connected || (connected.stat & (NOPOWER|BROKEN)))
+		dat += "This console is not connected to a sleeper or the sleeper is non-functional."
+	else
 		var/mob/living/occupant = src.connected.occupant
-		var/dat = "<font color='blue'><B>Occupant Statistics:</B></FONT><BR>"
+		dat += "<font color='blue'><B>Occupant Statistics:</B></FONT><BR>"
 		if (occupant)
 			var/t1
 			switch(occupant.stat)
@@ -99,9 +104,9 @@
 			dat += "<HR><A href='?src=\ref[src];ejectify=1'>Eject Patient</A>"
 		else
 			dat += "The sleeper is empty."
-		dat += text("<BR><BR><A href='?src=\ref[];mach_close=sleeper'>Close</A>", user)
-		user << browse(dat, "window=sleeper;size=400x500")
-		onclose(user, "sleeper")
+	dat += text("<BR><BR><A href='?src=\ref[];mach_close=sleeper'>Close</A>", user)
+	user << browse(dat, "window=sleeper;size=400x500")
+	onclose(user, "sleeper")
 	return
 
 /obj/machinery/sleep_console/Topic(href, href_list)
@@ -134,9 +139,6 @@
 	return
 
 
-/obj/machinery/sleep_console/power_change()
-	return
-	// no change - sleeper works without power (you just can't inject more)
 
 
 
@@ -150,6 +152,7 @@
 
 /obj/machinery/sleeper
 	name = "Sleeper"
+	desc = "A fancy bed with built-in injectors, a dialysis machine, and a limited health scanner."
 	icon = 'icons/obj/Cryogenic2.dmi'
 	icon_state = "sleeper_0"
 	density = 1
@@ -161,9 +164,13 @@
 	var/obj/item/weapon/reagent_containers/glass/beaker = null
 	var/filtering = 0
 
+	use_power = 1
+	idle_power_usage = 15
+	active_power_usage = 200 //builtin health analyzer, dialysis machine, injectors.
+
 	New()
 		..()
-		beaker = new /obj/item/weapon/reagent_containers/glass/beaker/large()
+		beaker = new /obj/item/weapon/reagent_containers/glass/beaker/large(src)
 		spawn( 5 )
 			if(orient == "RIGHT")
 				icon_state = "sleeper_0-r"
@@ -176,13 +183,18 @@
 
 
 	process()
+		if (stat & (NOPOWER|BROKEN))
+			return
+
 		if(filtering > 0)
 			if(beaker)
 				if(beaker.reagents.total_volume < beaker.reagents.maximum_volume)
-					src.occupant.vessel.trans_to(beaker, 1)
+					var/pumped = 0
 					for(var/datum/reagent/x in src.occupant.reagents.reagent_list)
 						src.occupant.reagents.trans_to(beaker, 3)
-						src.occupant.vessel.trans_to(beaker, 1)
+						pumped++
+					if (ishuman(src.occupant))
+						src.occupant.vessel.trans_to(beaker, pumped + 1)
 		src.updateUsrDialog()
 		return
 
@@ -233,12 +245,11 @@
 					M.client.perspective = EYE_PERSPECTIVE
 					M.client.eye = src
 				M.loc = src
+				update_use_power(2)
 				src.occupant = M
 				src.icon_state = "sleeper_1"
 				if(orient == "RIGHT")
 					icon_state = "sleeper_1-r"
-
-				M << "\blue <b>You feel cool air surround you. You go numb as your senses turn inward.</b>"
 
 				src.add_fingerprint(user)
 				del(G)
@@ -299,6 +310,9 @@
 			M:reagents.add_reagent("inaprovaline", 5)
 		return
 	proc/toggle_filter()
+		if(!src.occupant)
+			filtering = 0
+			return
 		if(filtering)
 			filtering = 0
 		else
@@ -314,14 +328,19 @@
 			src.occupant.client.perspective = MOB_PERSPECTIVE
 		src.occupant.loc = src.loc
 		src.occupant = null
+		update_use_power(1)
 		if(orient == "RIGHT")
 			icon_state = "sleeper_0-r"
 		return
 
 
 	proc/inject_chemical(mob/living/user as mob, chemical, amount)
+		if (stat & (BROKEN|NOPOWER))
+			return
+
 		if(src.occupant && src.occupant.reagents)
 			if(src.occupant.reagents.get_reagent_amount(chemical) + amount <= 20)
+				use_power(amount * CHEM_SYNTH_ENERGY)
 				src.occupant.reagents.add_reagent(chemical, amount)
 				user << "Occupant now has [src.occupant.reagents.get_reagent_amount(chemical)] units of [available_chemicals[chemical]] in his/her bloodstream."
 				return
@@ -409,12 +428,11 @@
 			usr.client.perspective = EYE_PERSPECTIVE
 			usr.client.eye = src
 			usr.loc = src
+			update_use_power(2)
 			src.occupant = usr
 			src.icon_state = "sleeper_1"
 			if(orient == "RIGHT")
 				icon_state = "sleeper_1-r"
-
-			usr << "\blue <b>You feel cool air surround you. You go numb as your senses turn inward.</b>"
 
 			for(var/obj/O in src)
 				del(O)

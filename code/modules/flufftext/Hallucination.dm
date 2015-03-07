@@ -22,7 +22,7 @@ mob/living/carbon/var
 mob/living/carbon/proc/handle_hallucinations()
 	if(handling_hal) return
 	handling_hal = 1
-	while(hallucination > 20)
+	while(client && hallucination > 20)
 		sleep(rand(200,500)/(hallucination/25))
 		var/halpick = rand(1,100)
 		switch(halpick)
@@ -252,7 +252,7 @@ proc/check_panel(mob/M)
 
 		return
 
-	HasEntered(var/mob/M, somenumber)
+	Crossed(var/mob/M, somenumber)
 		if(M == my_target)
 			step_away(src,my_target,2)
 			if(prob(30))
@@ -295,7 +295,7 @@ proc/check_panel(mob/M)
 				collapse()
 				continue
 			if(get_dist(src,my_target) > 1)
-				src.dir = get_dir(src,my_target)
+				src.set_dir(get_dir(src,my_target))
 				step_towards(src,my_target)
 				updateimage()
 			else
@@ -342,11 +342,11 @@ var/list/non_fakeattack_weapons = list(/obj/item/weapon/gun/projectile, /obj/ite
 	/obj/item/weapon/storage/toolbox/syndicate, /obj/item/weapon/aiModule,\
 	/obj/item/device/radio/headset/syndicate,	/obj/item/weapon/plastique,\
 	/obj/item/device/powersink, /obj/item/weapon/storage/box/syndie_kit,\
-	/obj/item/toy/syndicateballoon, /obj/item/weapon/gun/energy/laser/captain,\
+	/obj/item/toy/syndicateballoon, /obj/item/weapon/gun/energy/captain,\
 	/obj/item/weapon/hand_tele, /obj/item/weapon/rcd, /obj/item/weapon/tank/jetpack,\
 	/obj/item/clothing/under/rank/captain, /obj/item/device/aicard,\
 	/obj/item/clothing/shoes/magboots, /obj/item/blueprints, /obj/item/weapon/disk/nuclear,\
-	/obj/item/clothing/suit/space/nasavoid, /obj/item/weapon/tank)
+	/obj/item/clothing/suit/space/void, /obj/item/weapon/tank)
 
 /proc/fake_attack(var/mob/living/target)
 //	var/list/possible_clones = new/list()

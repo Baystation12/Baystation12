@@ -4,7 +4,7 @@
 /obj/item/weapon/tank
 	name = "tank"
 	icon = 'icons/obj/tank.dmi'
-	flags = FPRINT | TABLEPASS | CONDUCT
+	flags = CONDUCT
 	slot_flags = SLOT_BACK
 	w_class = 3
 
@@ -28,7 +28,7 @@
 	src.air_contents.volume = volume //liters
 	src.air_contents.temperature = T20C
 
-	processing_objects.Add(src)	
+	processing_objects.Add(src)
 	return
 
 /obj/item/weapon/tank/Del()
@@ -39,12 +39,12 @@
 
 	..()
 
-/obj/item/weapon/tank/examine()
+/obj/item/weapon/tank/examine(mob/user)
 	var/obj/icon = src
 	if (istype(src.loc, /obj/item/assembly))
 		icon = src.loc
-	if (!in_range(src, usr))
-		if (icon == src) usr << "\blue It's \a \icon[icon][src]! If you want any more information you'll need to get closer."
+	if (!in_range(src, user))
+		if (icon == src) user << "\blue It's \a \icon[icon][src]! If you want any more information you'll need to get closer."
 		return
 
 	var/celsius_temperature = src.air_contents.temperature-T0C
@@ -63,7 +63,7 @@
 	else
 		descriptive = "furiously hot"
 
-	usr << "\blue \The \icon[icon][src] feels [descriptive]"
+	user << "\blue \The \icon[icon][src] feels [descriptive]"
 
 	return
 
@@ -91,24 +91,13 @@
 
 		var/pressure = air_contents.return_pressure()
 		manipulated_by = user.real_name			//This person is aware of the contents of the tank.
-		var/total_moles = air_contents.total_moles()
+		var/total_moles = air_contents.total_moles
 
 		user << "\blue Results of analysis of \icon[icon]"
 		if (total_moles>0)
-			var/o2_concentration = air_contents.oxygen/total_moles
-			var/n2_concentration = air_contents.nitrogen/total_moles
-			var/co2_concentration = air_contents.carbon_dioxide/total_moles
-			var/phoron_concentration = air_contents.phoron/total_moles
-
-			var/unknown_concentration =  1-(o2_concentration+n2_concentration+co2_concentration+phoron_concentration)
-
 			user << "\blue Pressure: [round(pressure,0.1)] kPa"
-			user << "\blue Nitrogen: [round(n2_concentration*100)]%"
-			user << "\blue Oxygen: [round(o2_concentration*100)]%"
-			user << "\blue CO2: [round(co2_concentration*100)]%"
-			user << "\blue Phoron: [round(phoron_concentration*100)]%"
-			if(unknown_concentration>0.01)
-				user << "\red Unknown: [round(unknown_concentration*100)]%"
+			for(var/g in air_contents.gas)
+				user << "\blue [gas_data.name[g]]: [(round(air_contents.gas[g] / total_moles) * 100)]%"
 			user << "\blue Temperature: [round(air_contents.temperature-T0C)]&deg;C"
 		else
 			user << "\blue Tank is empty!"
@@ -127,11 +116,17 @@
 
 	ui_interact(user)
 
-/obj/item/weapon/tank/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null)
+/obj/item/weapon/tank/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+	var/mob/living/carbon/location = null
 
+	if(istype(loc, /obj/item/weapon/rig))		// check for tanks in rigs
+		if(istype(loc.loc, /mob/living/carbon))
+			location = loc.loc
+	else if(istype(loc, /mob/living/carbon))
+		location = loc
+	
 	var/using_internal
-	if(istype(loc,/mob/living/carbon))
-		var/mob/living/carbon/location = loc
+	if(istype(location))
 		if(location.internal==src)
 			using_internal = 1
 
@@ -142,15 +137,31 @@
 	data["defaultReleasePressure"] = round(TANK_DEFAULT_RELEASE_PRESSURE)
 	data["maxReleasePressure"] = round(TANK_MAX_RELEASE_PRESSURE)
 	data["valveOpen"] = using_internal ? 1 : 0
-	
-	data["maskConnected"] = 0	
-	if(istype(loc,/mob/living/carbon))
-		var/mob/living/carbon/location = loc
-		if(location.internal == src || (location.wear_mask && (location.wear_mask.flags & MASKINTERNALS)))
-			data["maskConnected"] = 1
+
+	data["maskConnected"] = 0
+
+	if(istype(location))
+		var/mask_check = 0
+
+		if(location.internal == src)	// if tank is current internal
+			mask_check = 1
+		else if(src in location)		// or if tank is in the mobs possession
+			if(!location.internal)		// and they do not have any active internals
+				mask_check = 1
+		else if(istype(src.loc, /obj/item/weapon/rig) && src.loc in location)	// or the rig is in the mobs possession
+			if(!location.internal)		// and they do not have any active internals
+				mask_check = 1
+
+		if(mask_check)
+			if(location.wear_mask && (location.wear_mask.flags & AIRTIGHT))
+				data["maskConnected"] = 1
+			else if(istype(location, /mob/living/carbon/human))
+				var/mob/living/carbon/human/H = location
+				if(H.head && (H.head.flags & AIRTIGHT))
+					data["maskConnected"] = 1
 
 	// update the ui if it exists, returns null if no ui is passed/found
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data)
+	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		// the ui does not exist, so we'll create a new() one
         // for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
@@ -188,7 +199,16 @@
 				if (location.internals)
 					location.internals.icon_state = "internal0"
 			else
-				if(location.wear_mask && (location.wear_mask.flags & MASKINTERNALS))
+
+				var/can_open_valve
+				if(location.wear_mask && (location.wear_mask.flags & AIRTIGHT))
+					can_open_valve = 1
+				else if(istype(location,/mob/living/carbon/human))
+					var/mob/living/carbon/human/H = location
+					if(H.head && (H.head.flags & AIRTIGHT))
+						can_open_valve = 1
+
+				if(can_open_valve)
 					location.internal = src
 					usr << "\blue You open \the [src] valve."
 					if (location.internals)
@@ -226,7 +246,7 @@
 
 /obj/item/weapon/tank/process()
 	//Allow for reactions
-	air_contents.react()
+	air_contents.react() //cooking up air tanks - add phoron and oxygen, then heat above PHORON_MINIMUM_BURN_TEMPERATURE
 	check_status()
 
 
@@ -248,7 +268,7 @@
 		air_contents.react()
 		pressure = air_contents.return_pressure()
 		var/range = (pressure-TANK_FRAGMENT_PRESSURE)/TANK_FRAGMENT_SCALE
-		range = min(range, MAX_EXPLOSION_RANGE)		// was 8 - - - Changed to a configurable define -- TLE
+		range = min(range, max_explosion_range)		// was 8 - - - Changed to a configurable define -- TLE
 		var/turf/epicenter = get_turf(loc)
 
 		//world << "\blue Exploding Pressure: [pressure] kPa, intensity: [range]"

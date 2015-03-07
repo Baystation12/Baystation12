@@ -32,6 +32,8 @@
 			tow.Move(old_loc)
 		return 1
 	else
+		if(lead)
+			unattach()
 		return 0
 
 /obj/vehicle/train/Bump(atom/Obstacle)
@@ -48,13 +50,22 @@
 		if(istype(A, /mob/living))
 			var/mob/living/M = A
 			visible_message("\red [src] knocks over [M]!")
-			M.apply_effects(5, 5)							//knock people down if you hit them
-			M.apply_damages(5 * train_length / move_delay)	// and do damage according to how fast the train is going and how heavy it is			
+			M.apply_effects(5, 5)				//knock people down if you hit them
+			M.apply_damages(22 / move_delay)	// and do damage according to how fast the train is going
 			if(istype(load, /mob/living/carbon/human))
 				var/mob/living/D = load
 				D << "\red You hit [M]!"
 				msg_admin_attack("[D.name] ([D.ckey]) hit [M.name] ([M.ckey]) with [src]. (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>)")
 
+
+//-------------------------------------------
+// Vehicle procs
+//-------------------------------------------
+/obj/vehicle/train/explode()
+	if (tow)
+		tow.unattach()
+	unattach()
+	..()
 
 
 //-------------------------------------------
@@ -68,8 +79,7 @@
 
 	if(user != load)
 		if(user in src)		//for handling players stuck in src - this shouldn't happen - but just in case it does
-			user.loc = T
-			contents -= user
+			user.forceMove(T)
 			return 1
 		return 0
 
@@ -80,7 +90,7 @@
 	return 1
 
 /obj/vehicle/train/MouseDrop_T(var/atom/movable/C, mob/user as mob)
-	if(!usr.canmove || usr.stat || usr.restrained() || !Adjacent(usr) || !user.Adjacent(C))
+	if(user.buckled || user.stat || user.restrained() || !Adjacent(user) || !user.Adjacent(C) || !istype(C) || (user == C && !user.canmove))
 		return
 	if(istype(C,/obj/vehicle/train))
 		latch(C, user)
@@ -93,11 +103,10 @@
 		return 0
 
 	if(user != load && (user in src))
-		user.loc = loc			//for handling players stuck in src
-		contents -= user
+		user.forceMove(loc)			//for handling players stuck in src
 	else if(load)
 		unload(user)			//unload if loaded
-	else if(!load)
+	else if(!load && !user.buckled)
 		load(user)				//else try climbing on board
 	else
 		return 0
@@ -105,9 +114,9 @@
 /obj/vehicle/train/verb/unlatch_v()
 	set name = "Unlatch"
 	set desc = "Unhitches this train from the one in front of it."
-	set category = "Object"
+	set category = "Vehicle"
 	set src in view(1)
-	
+
 	if(!istype(usr, /mob/living/carbon/human))
 		return
 
@@ -122,6 +131,7 @@
 //-------------------------------------------
 
 //attempts to attach src as a follower of the train T
+//Note: there is a modified version of this in code\modules\vehicles\cargo_train.dm specifically for cargo train engines
 /obj/vehicle/train/proc/attach_to(obj/vehicle/train/T, mob/user)
 	if (get_dist(src, T) > 1)
 		user << "\red [src] is too far away from [T] to hitch them together."
@@ -130,18 +140,27 @@
 	if (lead)
 		user << "\red [src] is already hitched to something."
 		return
-	
+
 	if (T.tow)
 		user << "\red [T] is already towing something."
 		return
+
+	//check for cycles.
+	var/obj/vehicle/train/next_car = T
+	while (next_car)
+		if (next_car == src)
+			user << "\red That seems very silly."
+			return
+		next_car = next_car.lead
+
 	//latch with src as the follower
 	lead = T
 	T.tow = src
-	dir = lead.dir
-	
+	set_dir(lead.dir)
+
 	if(user)
 		user << "\blue You hitch [src] to [T]."
-	
+
 	update_stats()
 
 
@@ -150,10 +169,10 @@
 	if (!lead)
 		user << "\red [src] is not hitched to anything."
 		return
-	
+
 	lead.tow = null
 	lead.update_stats()
-	
+
 	user << "\blue You unhitch [src] from [lead]."
 	lead = null
 
@@ -172,7 +191,7 @@
 
 //returns 1 if this is the lead car of the train
 /obj/vehicle/train/proc/is_train_head()
-	if (lead) 
+	if (lead)
 		return 0
 	return 1
 
@@ -184,23 +203,28 @@
 // size of the train, to limit super long trains.
 //-------------------------------------------------------
 /obj/vehicle/train/update_stats()
-	if(tow)
-		return tow.update_stats()	//take us to the very end
-	else
-		update_train_stats()		//we're at the end
+	//first, seek to the end of the train
+	var/obj/vehicle/train/T = src
+	while(T.tow)
+		//check for cyclic train.
+		if (T.tow == src)
+			lead.tow = null
+			lead.update_stats()
 
-/obj/vehicle/train/proc/update_train_stats()
-	if(powered && on)
-		active_engines = 1	//increment active engine count if this is a running engine
-	else
-		active_engines = 0
+			lead = null
+			update_stats()
+			return
+		T = T.tow
 
-	train_length = 1
+	//now walk back to the front.
+	var/active_engines = 0
+	var/train_length = 0
+	while(T)
+		train_length++
+		if (T.powered && T.on)
+			active_engines++
+		T.update_car(train_length, active_engines)
+		T = T.lead
 
-	if(istype(tow))
-		active_engines += tow.active_engines
-		train_length += tow.train_length
-
-	//update the next section of train ahead of us
-	if(istype(lead))
-		lead.update_train_stats()
+/obj/vehicle/train/proc/update_car(var/train_length, var/active_engines)
+	return

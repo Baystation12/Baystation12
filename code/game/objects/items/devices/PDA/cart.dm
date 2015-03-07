@@ -16,10 +16,11 @@
 	var/access_janitor = 0
 //	var/access_flora = 0
 	var/access_reagent_scanner = 0
-	var/access_remote_door = 0 //Control some blast doors remotely!!
+	var/access_remote_door = 0 // Control some blast doors remotely!!
 	var/remote_door_id = ""
 	var/access_status_display = 0
 	var/access_quartermaster = 0
+	var/access_detonate_pda = 0
 	var/access_hydroponics = 0
 	var/charges = 0
 	var/mode = null
@@ -27,34 +28,33 @@
 	var/datum/data/record/active1 = null //General
 	var/datum/data/record/active2 = null //Medical
 	var/datum/data/record/active3 = null //Security
-	var/obj/machinery/power/monitor/powmonitor = null // Power Monitor
-	var/list/powermonitors = list()
+	var/selected_sensor = null // Power Sensor
 	var/message1	// used for status_displays
 	var/message2
 	var/list/stored_data = list()
 
 /obj/item/weapon/cartridge/engineering
-	name = "Power-ON Cartridge"
+	name = "\improper Power-ON cartridge"
 	icon_state = "cart-e"
 	access_engine = 1
 
 /obj/item/weapon/cartridge/atmos
-	name = "BreatheDeep Cartridge"
+	name = "\improper BreatheDeep cartridge"
 	icon_state = "cart-a"
 	access_atmos = 1
 
 /obj/item/weapon/cartridge/medical
-	name = "Med-U Cartridge"
+	name = "\improper Med-U cartridge"
 	icon_state = "cart-m"
 	access_medical = 1
 
 /obj/item/weapon/cartridge/chemistry
-	name = "ChemWhiz Cartridge"
+	name = "\improper ChemWhiz cartridge"
 	icon_state = "cart-chem"
 	access_reagent_scanner = 1
 
 /obj/item/weapon/cartridge/security
-	name = "R.O.B.U.S.T. Cartridge"
+	name = "\improper R.O.B.U.S.T. cartridge"
 	icon_state = "cart-s"
 	access_security = 1
 
@@ -64,31 +64,31 @@
 		radio = new /obj/item/radio/integrated/beepsky(src)
 
 /obj/item/weapon/cartridge/detective
-	name = "D.E.T.E.C.T. Cartridge"
+	name = "\improper D.E.T.E.C.T. cartridge"
 	icon_state = "cart-s"
 	access_security = 1
 	access_medical = 1
 
 
 /obj/item/weapon/cartridge/janitor
-	name = "CustodiPRO Cartridge"
+	name = "\improper CustodiPRO cartridge"
 	desc = "The ultimate in clean-room design."
 	icon_state = "cart-j"
 	access_janitor = 1
 
 /obj/item/weapon/cartridge/lawyer
-	name = "P.R.O.V.E. Cartridge"
+	name = "\improper P.R.O.V.E. cartridge"
 	icon_state = "cart-s"
 	access_security = 1
 
 /obj/item/weapon/cartridge/clown
-	name = "Honkworks 5.0"
+	name = "\improper Honkworks 5.0 cartridge"
 	icon_state = "cart-clown"
 	access_clown = 1
 	charges = 5
 
 /obj/item/weapon/cartridge/mime
-	name = "Gestur-O 1000"
+	name = "\improper Gestur-O 1000 cartridge"
 	icon_state = "cart-mi"
 	access_mime = 1
 	charges = 5
@@ -104,7 +104,7 @@
 	desc = "A data cartridge with an integrated radio signaler module."
 
 /obj/item/weapon/cartridge/signal/science
-	name = "Signal Ace 2"
+	name = "\improper Signal Ace 2 cartridge"
 	desc = "Complete with integrated radio signaler!"
 	icon_state = "cart-tox"
 	access_reagent_scanner = 1
@@ -118,7 +118,7 @@
 
 
 /obj/item/weapon/cartridge/quartermaster
-	name = "Space Parts & Space Vendors Cartridge"
+	name = "\improper Space Parts & Space Vendors cartridge"
 	desc = "Perfect for the Quartermaster on the go!"
 	icon_state = "cart-q"
 	access_quartermaster = 1
@@ -129,12 +129,12 @@
 		radio = new /obj/item/radio/integrated/mule(src)
 
 /obj/item/weapon/cartridge/head
-	name = "Easy-Record DELUXE"
+	name = "\improper Easy-Record DELUXE"
 	icon_state = "cart-h"
 	access_status_display = 1
 
 /obj/item/weapon/cartridge/hop
-	name = "HumanResources9001"
+	name = "\improper HumanResources9001 cartridge"
 	icon_state = "cart-h"
 	access_status_display = 1
 	access_quartermaster = 1
@@ -147,7 +147,7 @@
 		radio = new /obj/item/radio/integrated/mule(src)
 
 /obj/item/weapon/cartridge/hos
-	name = "R.O.B.U.S.T. DELUXE"
+	name = "\improper R.O.B.U.S.T. DELUXE"
 	icon_state = "cart-hos"
 	access_status_display = 1
 	access_security = 1
@@ -158,21 +158,21 @@
 		radio = new /obj/item/radio/integrated/beepsky(src)
 
 /obj/item/weapon/cartridge/ce
-	name = "Power-On DELUXE"
+	name = "\improper Power-On DELUXE"
 	icon_state = "cart-ce"
 	access_status_display = 1
 	access_engine = 1
 	access_atmos = 1
 
 /obj/item/weapon/cartridge/cmo
-	name = "Med-U DELUXE"
+	name = "\improper Med-U DELUXE"
 	icon_state = "cart-cmo"
 	access_status_display = 1
 	access_reagent_scanner = 1
 	access_medical = 1
 
 /obj/item/weapon/cartridge/rd
-	name = "Signal Ace DELUXE"
+	name = "\improper Signal Ace DELUXE"
 	icon_state = "cart-rd"
 	access_status_display = 1
 	access_reagent_scanner = 1
@@ -184,7 +184,7 @@
 		radio = new /obj/item/radio/integrated/signal(src)
 
 /obj/item/weapon/cartridge/captain
-	name = "Value-PAK Cartridge"
+	name = "\improper Value-PAK cartridge"
 	desc = "Now with 200% more value!"
 	icon_state = "cart-c"
 	access_quartermaster = 1
@@ -197,9 +197,10 @@
 	access_atmos = 1
 
 /obj/item/weapon/cartridge/syndicate
-	name = "Detomatix Cartridge"
+	name = "\improper Detomatix cartridge"
 	icon_state = "cart"
 	access_remote_door = 1
+	access_detonate_pda = 1
 	remote_door_id = "smindicate" //Make sure this matches the syndicate shuttle's shield/door id!!	//don't ask about the name, testing.
 	charges = 4
 
@@ -245,12 +246,12 @@
 
 	/*		Signaler (Mode: 40)				*/
 
-	
+
 	if(istype(radio,/obj/item/radio/integrated/signal) && (mode==40))
 		var/obj/item/radio/integrated/signal/R = radio
 		values["signal_freq"] = format_frequency(R.frequency)
 		values["signal_code"] = R.code
-		
+
 
 	/*		Station Display (Mode: 42)			*/
 
@@ -261,45 +262,29 @@
 
 
 	/*		Power Monitor (Mode: 43 / 433)			*/
+
 	if(mode==43 || mode==433)
-		var/pMonData[0]
-		for(var/obj/machinery/power/monitor/pMon in world)
-			if(!(pMon.stat & (NOPOWER|BROKEN)) )
-				pMonData[++pMonData.len] = list ("Name" = pMon.name, "ref" = "\ref[pMon]")
-				if(isnull(powmonitor)) powmonitor = pMon 
-						
-		values["powermonitors"] = pMonData
+		var/list/sensors = list()
+		var/obj/machinery/power/sensor/MS = null
 
-		values["poweravail"] = powmonitor.powernet.avail
-		values["powerload"] = num2text(powmonitor.powernet.viewload,10)
+		for(var/obj/machinery/power/sensor/S in machines)
+			sensors.Add(list(list("name_tag" = S.name_tag)))
+			if(S.name_tag == selected_sensor)
+				MS = S
+		values["power_sensors"] = sensors
+		if(selected_sensor && MS)
+			values["sensor_reading"] = MS.return_reading_data()
 
-		var/list/L = list()
-		for(var/obj/machinery/power/terminal/term in powmonitor.powernet.nodes)
-			if(istype(term.master, /obj/machinery/power/apc))
-				var/obj/machinery/power/apc/A = term.master
-				L += A
-
-		var/list/Status = list(0,0,1,1) // Status:  off, auto-off, on, auto-on
-		var/list/chg = list(0,1,1)	// Charging: nope, charging, full
-		var/apcData[0]
-		for(var/obj/machinery/power/apc/A in L)
-			apcData[++apcData.len] = list("Name" = html_encode(A.area.name), "Equipment" = Status[A.equipment+1], "Lights" = Status[A.lighting+1], "Environment" = Status[A.environ+1], "CellPct" = A.cell ? round(A.cell.percent(),1) : -1, "CellStatus" = A.cell ? chg[A.charging+1] : 0)
-	
-		values["apcs"] = apcData
-
-				      
-	
-	
 
 	/*		General Records (Mode: 44 / 441 / 45 / 451)	*/
 	if(mode == 44 || mode == 441 || mode == 45 || mode ==451)
 		if(istype(active1, /datum/data/record) && (active1 in data_core.general))
 			values["general"] = active1.fields
 			values["general_exists"] = 1
-								
+
 		else
 			values["general_exists"] = 0
-	
+
 
 
 	/*		Medical Records (Mode: 44 / 441)	*/
@@ -316,7 +301,7 @@
 		else
 			values["medical_exists"] = 0
 
-	/*		Security Records (Mode:45 / 451)	*/	
+	/*		Security Records (Mode:45 / 451)	*/
 
 	if(mode == 45 || mode == 451)
 		var/secData[0]
@@ -348,15 +333,15 @@
 			if(SC.botlist && SC.botlist.len)
 				for(var/obj/machinery/bot/B in SC.botlist)
 					botsCount++
-					if(B.loc) 
+					if(B.loc)
 						botsData[++botsData.len] = list("Name" = sanitize(B.name), "Location" = sanitize(B.loc.loc.name), "ref" = "\ref[B]")
-		
+
 			if(!botsData.len)
 				botsData[++botsData.len] = list("Name" = "No bots found", "Location" = "Invalid", "ref"= null)
 
 			beepskyData["bots"] = botsData
 			beepskyData["count"] = botsCount
-		
+
 		else
 			beepskyData["active"] = 0
 			botsData[++botsData.len] = list("Name" = "No bots found", "Location" = "Invalid", "ref"= null)
@@ -379,10 +364,10 @@
 				var/area/loca = QC.botstatus["loca"]
 				var/loca_name = sanitize(loca.name)
 				muleData["botstatus"] =  list("loca" = loca_name, "mode" = QC.botstatus["mode"],"home"=QC.botstatus["home"],"powr" = QC.botstatus["powr"],"retn" =QC.botstatus["retn"], "pick"=QC.botstatus["pick"], "load" = QC.botstatus["load"], "dest" = sanitize(QC.botstatus["dest"]))
-	  
+
 			else
 				muleData["botstatus"] = list("loca" = null, "mode" = -1,"home"=null,"powr" = null,"retn" =null, "pick"=null, "load" = null, "dest" = null)
-		
+
 
 			var/mulebotsCount=0
 			for(var/obj/machinery/bot/B in QC.botlist)
@@ -397,7 +382,7 @@
 			muleData["count"] = mulebotsCount
 
 		else
-			muleData["botstatus"] =  list("loca" = null, "mode" = -1,"home"=null,"powr" = null,"retn" =null, "pick"=null, "load" = null, "dest" = null) 
+			muleData["botstatus"] =  list("loca" = null, "mode" = -1,"home"=null,"powr" = null,"retn" =null, "pick"=null, "load" = null, "dest" = null)
 			muleData["active"] = 0
 			mulebotsData[++mulebotsData.len] = list("Name" = "No bots found", "Location" = "Invalid", "ref"= null)
 			muleData["bots"] = mulebotsData
@@ -413,20 +398,20 @@
 		var/supplyData[0]
 		var/datum/shuttle/ferry/supply/shuttle = supply_controller.shuttle
 		if (shuttle)
-			supplyData["shuttle_moving"] = shuttle.has_eta()
+			supplyData["shuttle_moving"] = shuttle.has_arrive_time()
 			supplyData["shuttle_eta"] = shuttle.eta_minutes()
 			supplyData["shuttle_loc"] = shuttle.at_station() ? "Station" : "Dock"
 		var/supplyOrderCount = 0
 		var/supplyOrderData[0]
 		for(var/S in supply_controller.shoppinglist)
 			var/datum/supply_order/SO = S
-		
+
 			supplyOrderData[++supplyOrderData.len] = list("Number" = SO.ordernum, "Name" = html_encode(SO.object.name), "ApprovedBy" = SO.orderedby, "Comment" = html_encode(SO.comment))
 		if(!supplyOrderData.len)
 			supplyOrderData[++supplyOrderData.len] = list("Number" = null, "Name" = null, "OrderedBy"=null)
-		
+
 		supplyData["approved"] = supplyOrderData
-		supplyData["approved_count"] = supplyOrderCount	
+		supplyData["approved_count"] = supplyOrderCount
 
 		var/requestCount = 0
 		var/requestData[0]
@@ -436,20 +421,20 @@
 			requestData[++requestData.len] = list("Number" = SO.ordernum, "Name" = html_encode(SO.object.name), "OrderedBy" = SO.orderedby, "Comment" = html_encode(SO.comment))
 		if(!requestData.len)
 			requestData[++requestData.len] = list("Number" = null, "Name" = null, "orderedBy" = null, "Comment" = null)
-	
+
 		supplyData["requests"] = requestData
 		supplyData["requests_count"] = requestCount
 
 
 		values["supply"] = supplyData
 
-	
+
 
 	/* 	Janitor Supplies Locator  (Mode: 49)      */
 	if(mode==49)
 		var/JaniData[0]
 		var/turf/cl = get_turf(src)
-	
+
 		if(cl)
 			JaniData["user_loc"] = list("x" = cl.x, "y" = cl.y)
 		else
@@ -462,14 +447,14 @@
 					continue
 				var/direction = get_dir(src, M)
 				MopData[++MopData.len] = list ("x" = ml.x, "y" = ml.y, "dir" = uppertext(dir2text(direction)), "status" = M.reagents.total_volume ? "Wet" : "Dry")
-	
+
 		if(!MopData.len)
 			MopData[++MopData.len] = list("x" = 0, "y" = 0, dir=null, status = null)
-	
+
 
 		var/BucketData[0]
 		for(var/obj/structure/mopbucket/B in world)
-			var/turf/bl = get_turf(B)	
+			var/turf/bl = get_turf(B)
 			if(bl)
 				if(bl.z != cl.z)
 					continue
@@ -487,8 +472,8 @@
 					continue
 				var/direction = get_dir(src,B)
 				CbotData[++CbotData.len] = list("x" = bl.x, "y" = bl.y, "dir" = uppertext(dir2text(direction)), "status" = B.on ? "Online" : "Offline")
-	
-	
+
+
 		if(!CbotData.len)
 			CbotData[++CbotData.len] = list("x" = 0, "y" = 0, dir=null, status = null)
 		var/CartData[0]
@@ -501,7 +486,7 @@
 				CartData[++CartData.len] = list("x" = bl.x, "y" = bl.y, "dir" = uppertext(dir2text(direction)), "status" = B.reagents.total_volume/100)
 		if(!CartData.len)
 			CartData[++CartData.len] = list("x" = 0, "y" = 0, dir=null, status = null)
-	
+
 
 
 
@@ -512,7 +497,7 @@
 		values["janitor"] = JaniData
 
 	return values
-			
+
 
 
 
@@ -525,8 +510,8 @@
 		usr << browse(null, "window=pda")
 		return
 
-		
-		
+
+
 
 	switch(href_list["choice"])
 		if("Medical Records")
@@ -577,17 +562,22 @@
 				if("alert")
 					post_status("alert", href_list["alert"])
 				if("setmsg1")
-					message1 = input("Line 1", "Enter Message Text", message1) as text|null
+					message1 = reject_bad_text(trim(sanitize(copytext(input("Line 1", "Enter Message Text", message1) as text|null, 1, 40))), 40)
 					updateSelfDialog()
 				if("setmsg2")
-					message2 = input("Line 2", "Enter Message Text", message2) as text|null
+					message2 = reject_bad_text(trim(sanitize(copytext(input("Line 2", "Enter Message Text", message2) as text|null, 1, 40))), 40)
 					updateSelfDialog()
 				else
 					post_status(href_list["statdisp"])
+
 		if("Power Select")
-			var/pref = href_list["target"]
-			powmonitor = locate(pref)
+			selected_sensor = href_list["target"]
 			loc:mode = 433
 			mode = 433
+		if("Power Clear")
+			selected_sensor = null
+			loc:mode = 43
+			mode = 43
+
 
 	return 1

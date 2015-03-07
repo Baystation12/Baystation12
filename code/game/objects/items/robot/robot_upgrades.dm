@@ -30,12 +30,18 @@
 	R.uneq_all()
 	R.hands.icon_state = "nomod"
 	R.icon_state = "robot"
+	//world << R.custom_sprite
+	if(R.custom_sprite == 1)
+		//world << R.icon_state
+		icon = 'icons/mob/custom-synthetic.dmi'
+		R.icon_state = "[R.ckey]-Standard"
 	del(R.module)
 	R.module = null
-	R.camera.network.Remove(list("Engineering","Medical","MINE"))
+	R.camera.remove_networks(list("Engineering","Medical","MINE"))
 	R.updatename("Default")
 	R.status_flags |= CANPUSH
 	R.updateicon()
+	R.notify_ai(2)
 
 	return 1
 
@@ -51,6 +57,7 @@
 
 /obj/item/borg/upgrade/rename/action(var/mob/living/silicon/robot/R)
 	if(..()) return 0
+	R.notify_ai(3, R.name, heldname)
 	R.name = heldname
 	R.custom_name = heldname
 	R.real_name = heldname
@@ -75,6 +82,9 @@
 				R.key = ghost.key
 
 	R.stat = CONSCIOUS
+	dead_mob_list -= R
+	living_mob_list |= R
+	R.notify_ai(1)
 	return 1
 
 
@@ -111,7 +121,7 @@
 		usr << "There's no mounting point for the module!"
 		return 0
 
-	var/obj/item/weapon/gun/energy/taser/cyborg/T = locate() in R.module
+	var/obj/item/weapon/gun/energy/taser/mounted/cyborg/T = locate() in R.module
 	if(!T)
 		T = locate() in R.module.contents
 	if(!T)

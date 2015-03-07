@@ -1,8 +1,11 @@
 /obj/machinery/embedded_controller
-	var/datum/computer/file/embedded_program/program
+	var/datum/computer/file/embedded_program/program	//the currently executing program
 
 	name = "Embedded Controller"
 	anchored = 1
+
+	use_power = 1
+	idle_power_usage = 10
 
 	var/on = 1
 
@@ -21,16 +24,15 @@
 		program.process()
 
 	update_icon()
-	src.updateDialog()
 
 /obj/machinery/embedded_controller/attack_ai(mob/user as mob)
 	src.ui_interact(user)
 
-/obj/machinery/embedded_controller/attack_paw(mob/user as mob)
-	user << "You do not have the dexterity to use this."
-	return
-
 /obj/machinery/embedded_controller/attack_hand(mob/user as mob)
+
+	if(!user.IsAdvancedToolUser())
+		return 0
+
 	src.ui_interact(user)
 
 /obj/machinery/embedded_controller/ui_interact()
@@ -41,10 +43,12 @@
 	icon_state = "airlock_control_standby"
 	power_channel = ENVIRON
 	density = 0
-	
+
 	var/id_tag
+	//var/radio_power_use = 50 //power used to xmit signals
 
 	var/frequency = 1379
+	var/radio_filter = null
 	var/datum/radio_frequency/radio_connection
 	unacidable = 1
 
@@ -60,14 +64,15 @@
 	else
 		icon_state = "airlock_control_off"
 
-/obj/machinery/embedded_controller/radio/post_signal(datum/signal/signal)
+/obj/machinery/embedded_controller/radio/post_signal(datum/signal/signal, var/filter = null)
 	signal.transmission_method = TRANSMISSION_RADIO
 	if(radio_connection)
-		return radio_connection.post_signal(src, signal)
+		//use_power(radio_power_use)	//neat idea, but causes way too much lag.
+		return radio_connection.post_signal(src, signal, filter)
 	else
 		del(signal)
 
 /obj/machinery/embedded_controller/radio/proc/set_frequency(new_frequency)
 	radio_controller.remove_object(src, frequency)
 	frequency = new_frequency
-	radio_connection = radio_controller.add_object(src, frequency)
+	radio_connection = radio_controller.add_object(src, frequency, radio_filter)

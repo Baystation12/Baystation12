@@ -234,13 +234,57 @@
 	name = "Security pinup"
 	desc = "This is a pin-up poster. A dark skinned white haired girl poses in the sunlight wearing a tank top with her stomach exposed. The text on the poster states \"M, Succubus of Security.\" and a lipstick mark stains the top right corner, as if kissed by the model herself."
 
- /datum/poster/bay_48
+/datum/poster/bay_48
 	icon_state="bsposter48"
 	name = "Borg pinup?"
 	desc = "This is a.. pin-up poster? It is a diagram on an old model of cyborg with a note scribbled in marker on the bottom, on the top there is a large XO written in red marker."
 
- /datum/poster/bay_49
+/datum/poster/bay_49
 	icon_state="bsposter49"
 	name = "Engineering recruitment"
 	desc = "This is a poster showing an engineer relaxing by a computer, the text states \"Living the life! Join Engineering today!\""
 
+/datum/poster/bay_50
+	icon_state="bsposter50"
+	name = "Pinup Girl Cindy Kate"
+	desc = "This particular one is of Cindy Kate, a seductive performer well known among less savoury circles."
+
+/datum/poster/bay_51
+	icon_state="bsposter51"
+	name = "space appreciation poster"
+	desc = "This is a poster produced by the Generic Space Company, as a part of a series of commemorative posters on the wonders of space. One of three."
+
+/datum/poster/bay_52
+	icon_state="bsposter52"
+	name = "fire safety poster"
+	desc = "This is a poster reminding you of what you should do if you are on fire, or if you are at a dance party."
+
+/datum/poster/bay_53
+	icon_state="bsposter53"
+	name = "fire extinguisher poster"
+	desc = "This is a poster reminding you of what you should use to put out a fire."
+
+/datum/poster/bay_54
+	icon_state="bsposter54"
+	name = "firefighter poster"
+	desc = "This is a poster of a particularly stern looking firefighter. The caption reads, \"Only you can prevent space fires.\""
+
+/datum/poster/bay_55
+	icon_state="bsposter55"
+	name = "Earth appreciation poster"
+	desc = "This is a poster produced by the Generic Space Company, as a part of a series of commemorative posters on the wonders of space. Two of three."
+
+/datum/poster/bay_56
+	icon_state="bsposter56"
+	name = "Mars appreciation poster"
+	desc = "This is a poster produced by the Generic Space Company, as a part of a series of commemorative posters on the wonders of space. Three of three."
+
+/datum/poster/bay_57
+	icon_state="bsposter57"
+	name = "space carp warning poster"
+	desc = "This poster tells of the dangers of space carp infestations."
+
+/datum/poster/bay_58
+	icon_state="bsposter58"
+	name = "space carp information poster"
+	desc = "This poster showcases an old spacer saying on the dangers of migrant space carp."

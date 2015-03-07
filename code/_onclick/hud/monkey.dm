@@ -8,7 +8,7 @@
 
 	using = new /obj/screen()
 	using.name = "act_intent"
-	using.dir = SOUTHWEST
+	using.set_dir(SOUTHWEST)
 	using.icon = ui_style
 	using.icon_state = (mymob.a_intent == "hurt" ? "harm" : mymob.a_intent)
 	using.screen_loc = ui_acti
@@ -67,7 +67,7 @@
 
 	using = new /obj/screen()
 	using.name = "mov_intent"
-	using.dir = SOUTHWEST
+	using.set_dir(SOUTHWEST)
 	using.icon = ui_style
 	using.icon_state = (mymob.m_intent == "run" ? "running" : "walking")
 	using.screen_loc = ui_movi
@@ -85,7 +85,7 @@
 
 	inv_box = new /obj/screen/inventory()
 	inv_box.name = "r_hand"
-	inv_box.dir = WEST
+	inv_box.set_dir(WEST)
 	inv_box.icon = ui_style
 	inv_box.icon_state = "hand_inactive"
 	if(mymob && !mymob.hand)	//This being 0 or null means the right hand is in use
@@ -98,7 +98,7 @@
 
 	inv_box = new /obj/screen/inventory()
 	inv_box.name = "l_hand"
-	inv_box.dir = EAST
+	inv_box.set_dir(EAST)
 	inv_box.icon = ui_style
 	inv_box.icon_state = "hand_inactive"
 	if(mymob && mymob.hand)	//This being 1 means the left hand is in use
@@ -109,18 +109,18 @@
 	src.l_hand_hud_object = inv_box
 	src.adding += inv_box
 
-	using = new /obj/screen()
+	using = new /obj/screen/inventory()
 	using.name = "hand"
-	using.dir = SOUTH
+	using.set_dir(SOUTH)
 	using.icon = ui_style
 	using.icon_state = "hand1"
 	using.screen_loc = ui_swaphand1
 	using.layer = 19
 	src.adding += using
 
-	using = new /obj/screen()
+	using = new /obj/screen/inventory()
 	using.name = "hand"
-	using.dir = SOUTH
+	using.set_dir(SOUTH)
 	using.icon = ui_style
 	using.icon_state = "hand2"
 	using.screen_loc = ui_swaphand2
@@ -129,7 +129,7 @@
 
 	inv_box = new /obj/screen/inventory()
 	inv_box.name = "mask"
-	inv_box.dir = NORTH
+	inv_box.set_dir(NORTH)
 	inv_box.icon = ui_style
 	inv_box.icon_state = "equip"
 	inv_box.screen_loc = ui_monkey_mask
@@ -139,7 +139,7 @@
 
 	inv_box = new /obj/screen/inventory()
 	inv_box.name = "back"
-	inv_box.dir = NORTHEAST
+	inv_box.set_dir(NORTHEAST)
 	inv_box.icon = ui_style
 	inv_box.icon_state = "equip"
 	inv_box.screen_loc = ui_back
@@ -224,19 +224,19 @@
 	mymob.gun_setting_icon = new /obj/screen/gun/mode(null)
 	if (mymob.client)
 		if (mymob.client.gun_mode) // If in aim mode, correct the sprite
-			mymob.gun_setting_icon.dir = 2
+			mymob.gun_setting_icon.set_dir(2)
 	for(var/obj/item/weapon/gun/G in mymob) // If targeting someone, display other buttons
-		if (G.target)
+		if (G.aim_targets)
 			mymob.item_use_icon = new /obj/screen/gun/item(null)
 			if (mymob.client.target_can_click)
-				mymob.item_use_icon.dir = 1
+				mymob.item_use_icon.set_dir(1)
 			src.adding += mymob.item_use_icon
 			mymob.gun_move_icon = new /obj/screen/gun/move(null)
 			if (mymob.client.target_can_move)
-				mymob.gun_move_icon.dir = 1
+				mymob.gun_move_icon.set_dir(1)
 				mymob.gun_run_icon = new /obj/screen/gun/run(null)
 				if (mymob.client.target_can_run)
-					mymob.gun_run_icon.dir = 1
+					mymob.gun_run_icon.set_dir(1)
 				src.adding += mymob.gun_run_icon
 			src.adding += mymob.gun_move_icon
 

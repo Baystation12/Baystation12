@@ -1,8 +1,18 @@
-
 // fun if you want to typecast humans/monkeys/etc without writing long path-filled lines.
 /proc/ishuman(A)
 	if(istype(A, /mob/living/carbon/human))
 		return 1
+	return 0
+
+/proc/isalien(A)
+	if(istype(A, /mob/living/carbon/alien))
+		return 1
+	return 0
+
+/proc/isxenomorph(A)
+	if(istype(A, /mob/living/carbon/human))
+		var/mob/living/carbon/human/H = A
+		return istype(H.species, /datum/species/xenos)
 	return 0
 
 /proc/ismonkey(A)
@@ -15,28 +25,8 @@
 		return 1
 	return 0
 
-/proc/isalien(A)
-	if(istype(A, /mob/living/carbon/alien))
-		return 1
-	return 0
-
-/proc/isalienadult(A)
-	if(istype(A, /mob/living/carbon/alien/humanoid))
-		return 1
-	return 0
-
-/proc/islarva(A)
-	if(istype(A, /mob/living/carbon/alien/larva))
-		return 1
-	return 0
-
 /proc/isslime(A)
 	if(istype(A, /mob/living/carbon/slime))
-		return 1
-	return 0
-
-/proc/isslimeadult(A)
-	if(istype(A, /mob/living/carbon/slime/adult))
 		return 1
 	return 0
 
@@ -90,6 +80,18 @@
 		return 1
 	return 0
 
+/mob/proc/isSilicon()
+	return 0
+
+/mob/living/silicon/isSilicon()
+	return 1
+    
+/mob/proc/isAI()
+	return 0
+
+/mob/living/silicon/ai/isAI()
+	return 1
+
 /proc/ispAI(A)
 	if(istype(A, /mob/living/silicon/pai))
 		return 1
@@ -120,12 +122,80 @@ proc/isorgan(A)
 		return 1
 	return 0
 
+proc/isdeaf(A)
+	if(istype(A, /mob))
+		var/mob/M = A
+		return (M.sdisabilities & DEAF) || M.ear_deaf
+	return 0
+
+proc/isnewplayer(A)
+	if(istype(A, /mob/new_player))
+		return 1
+	return 0
+
 proc/hasorgans(A)
 	return ishuman(A)
 
-/proc/hsl2rgb(h, s, l)
-	return
+proc/iscuffed(A)
+	if(istype(A, /mob/living/carbon))
+		var/mob/living/carbon/C = A
+		if(C.handcuffed)
+			return 1
+	return 0
 
+proc/hassensorlevel(A, var/level)
+	var/mob/living/carbon/human/H = A
+	if(istype(H) && istype(H.w_uniform, /obj/item/clothing/under))
+		var/obj/item/clothing/under/U = H.w_uniform
+		return U.sensor_mode >= level
+	return 0
+	
+proc/getsensorlevel(A)
+	var/mob/living/carbon/human/H = A
+	if(istype(H) && istype(H.w_uniform, /obj/item/clothing/under))
+		var/obj/item/clothing/under/U = H.w_uniform
+		return U.sensor_mode
+	return SUIT_SENSOR_OFF
+
+/proc/hsl2rgb(h, s, l)
+	return //TODO: Implement
+
+/*
+	Miss Chance
+*/
+
+//TODO: Integrate defence zones and targeting body parts with the actual organ system, move these into organ definitions.
+
+//The base miss chance for the different defence zones
+var/list/global/base_miss_chance = list(
+	"head" = 40,
+	"chest" = 10,
+	"groin" = 20,
+	"l_leg" = 20,
+	"r_leg" = 20,
+	"l_arm" = 20,
+	"r_arm" = 20,
+	"l_hand" = 50,
+	"r_hand" = 50,
+	"l_foot" = 50,
+	"r_foot" = 50,
+)
+
+//Used to weight organs when an organ is hit randomly (i.e. not a directed, aimed attack).
+//Also used to weight the protection value that armour provides for covering that body part when calculating protection from full-body effects.
+var/list/global/organ_rel_size = list(
+	"head" = 25,
+	"chest" = 70,
+	"groin" = 30,
+	"l_leg" = 25,
+	"r_leg" = 25,
+	"l_arm" = 25,
+	"r_arm" = 25,
+	"l_hand" = 10,
+	"r_hand" = 10,
+	"l_foot" = 10,
+	"r_foot" = 10,
+)
 
 /proc/check_zone(zone)
 	if(!zone)	return "chest"
@@ -134,35 +204,34 @@ proc/hasorgans(A)
 			zone = "head"
 		if("mouth")
 			zone = "head"
-/*		if("l_hand")
-			zone = "l_arm"
-		if("r_hand")
-			zone = "r_arm"
-		if("l_foot")
-			zone = "l_leg"
-		if("r_foot")
-			zone = "r_leg"
-		if("groin")
-			zone = "chest"
-*/
 	return zone
 
-
+// Returns zone with a certain probability. If the probability fails, or no zone is specified, then a random body part is chosen.
+// Do not use this if someone is intentionally trying to hit a specific body part.
+// Use get_zone_with_miss_chance() for that.
 /proc/ran_zone(zone, probability)
-	zone = check_zone(zone)
-	if(!probability)	probability = 90
-	if(probability == 100)	return zone
+	if (zone)
+		zone = check_zone(zone)
+		if (prob(probability))
+			return zone
 
-	if(zone == "chest")
-		if(prob(probability))	return "chest"
-		var/t = rand(1, 9)
-		switch(t)
-			if(1 to 3)	return "head"
-			if(4 to 6)	return "l_arm"
-			if(7 to 9)	return "r_arm"
+	var/ran_zone = zone
+	while (ran_zone == zone)
+		ran_zone = pick (
+			organ_rel_size["head"]; "head",
+			organ_rel_size["chest"]; "chest",
+			organ_rel_size["groin"]; "groin",
+			organ_rel_size["l_arm"]; "l_arm",
+			organ_rel_size["r_arm"]; "r_arm",
+			organ_rel_size["l_leg"]; "l_leg",
+			organ_rel_size["r_leg"]; "r_leg",
+			organ_rel_size["l_hand"]; "l_hand",
+			organ_rel_size["r_hand"]; "r_hand",
+			organ_rel_size["l_foot"]; "l_foot",
+			organ_rel_size["r_foot"]; "r_foot",
+		)
 
-	if(prob(probability * 0.75))	return zone
-	return "chest"
+	return ran_zone
 
 // Emulates targetting a specific body part, and miss chances
 // May return null if missed
@@ -173,42 +242,13 @@ proc/hasorgans(A)
 	// you can only miss if your target is standing and not restrained
 	if(!target.buckled && !target.lying)
 		var/miss_chance = 10
-		switch(zone)
-			if("head")
-				miss_chance = 40
-			if("l_leg")
-				miss_chance = 20
-			if("r_leg")
-				miss_chance = 20
-			if("l_arm")
-				miss_chance = 20
-			if("r_arm")
-				miss_chance = 20
-			if("l_hand")
-				miss_chance = 50
-			if("r_hand")
-				miss_chance = 50
-			if("l_foot")
-				miss_chance = 50
-			if("r_foot")
-				miss_chance = 50
+		if (zone in base_miss_chance)
+			miss_chance = base_miss_chance[zone]
 		miss_chance = max(miss_chance + miss_chance_mod, 0)
 		if(prob(miss_chance))
 			if(prob(70))
 				return null
-			else
-				var/t = rand(1, 10)
-				switch(t)
-					if(1)	return "head"
-					if(2)	return "l_arm"
-					if(3)	return "r_arm"
-					if(4) 	return "chest"
-					if(5) 	return "l_foot"
-					if(6)	return "r_foot"
-					if(7)	return "l_hand"
-					if(8)	return "r_hand"
-					if(9)	return "l_leg"
-					if(10)	return "r_leg"
+			return pick(base_miss_chance)
 
 	return zone
 
@@ -226,11 +266,17 @@ proc/hasorgans(A)
 	n = length(n)
 	var/p = null
 	p = 1
+	var/intag = 0
 	while(p <= n)
-		if ((copytext(te, p, p + 1) == " " || prob(pr)))
-			t = text("[][]", t, copytext(te, p, p + 1))
+		var/char = copytext(te, p, p + 1)
+		if (char == "<") //let's try to not break tags
+			intag = !intag
+		if (intag || char == " " || prob(pr))
+			t = text("[][]", t, char)
 		else
 			t = text("[]*", t)
+		if (char == ">")
+			intag = !intag
 		p++
 	return t
 
@@ -278,7 +324,7 @@ proc/slur(phrase)
 						n_letter = text("[n_letter]-[n_letter]")
 		t = text("[t][n_letter]")//since the above is ran through for each letter, the text just adds up back to the original word.
 		p++//for each letter p is increased to find where the next letter will be.
-	return copytext(sanitize(t),1,MAX_MESSAGE_LEN)
+	return sanitize(copytext(t,1,MAX_MESSAGE_LEN))
 
 
 proc/Gibberish(t, p)//t is the inputted message, and any value higher than 70 for p will cause letters to be replaced instead of added
@@ -325,21 +371,31 @@ It's fairly easy to fix if dealing with single letters but not so much with comp
 			n_letter = text("[n_letter]")
 		t = text("[t][n_letter]")
 		p=p+n_mod
-	return copytext(sanitize(t),1,MAX_MESSAGE_LEN)
+	return sanitize(copytext(t,1,MAX_MESSAGE_LEN))
 
 
 /proc/shake_camera(mob/M, duration, strength=1)
 	if(!M || !M.client || M.shakecamera)
 		return
+	M.shakecamera = 1
 	spawn(1)
-		var/oldeye=M.client.eye
+		if(!M.client)
+			return
+
+		var/atom/oldeye=M.client.eye
+		var/aiEyeFlag = 0
+		if(istype(oldeye, /mob/aiEye))
+			aiEyeFlag = 1
+
 		var/x
-		M.shakecamera = 1
 		for(x=0; x<duration, x++)
-			M.client.eye = locate(dd_range(1,M.loc.x+rand(-strength,strength),world.maxx),dd_range(1,M.loc.y+rand(-strength,strength),world.maxy),M.loc.z)
+			if(aiEyeFlag)
+				M.client.eye = locate(dd_range(1,oldeye.loc.x+rand(-strength,strength),world.maxx),dd_range(1,oldeye.loc.y+rand(-strength,strength),world.maxy),oldeye.loc.z)
+			else
+				M.client.eye = locate(dd_range(1,M.loc.x+rand(-strength,strength),world.maxx),dd_range(1,M.loc.y+rand(-strength,strength),world.maxy),M.loc.z)
 			sleep(1)
-		M.shakecamera = 0
 		M.client.eye=oldeye
+		M.shakecamera = 0
 
 
 /proc/findname(msg)
@@ -379,7 +435,7 @@ var/list/intents = list("help","disarm","grab","hurt")
 	set name = "a-intent"
 	set hidden = 1
 
-	if(ishuman(src) || isalienadult(src) || isbrain(src))
+	if(ishuman(src) || isbrain(src) || isslime(src))
 		switch(input)
 			if("help","disarm","grab","hurt")
 				a_intent = input
@@ -390,7 +446,7 @@ var/list/intents = list("help","disarm","grab","hurt")
 		if(hud_used && hud_used.action_intent)
 			hud_used.action_intent.icon_state = "intent_[a_intent]"
 
-	else if(isrobot(src) || ismonkey(src) || islarva(src))
+	else if(isrobot(src) || ismonkey(src))
 		switch(input)
 			if("help")
 				a_intent = "help"
@@ -403,3 +459,123 @@ var/list/intents = list("help","disarm","grab","hurt")
 				hud_used.action_intent.icon_state = "harm"
 			else
 				hud_used.action_intent.icon_state = "help"
+
+proc/is_blind(A)
+	if(istype(A, /mob/living/carbon))
+		var/mob/living/carbon/C = A
+		if(C.sdisabilities & BLIND || C.blinded)
+			return 1
+	return 0
+
+/proc/broadcast_security_hud_message(var/message, var/broadcast_source)
+	broadcast_hud_message(message, broadcast_source, sec_hud_users, /obj/item/clothing/glasses/hud/security)
+
+/proc/broadcast_medical_hud_message(var/message, var/broadcast_source)
+	broadcast_hud_message(message, broadcast_source, med_hud_users, /obj/item/clothing/glasses/hud/health)
+
+/proc/broadcast_hud_message(var/message, var/broadcast_source, var/list/targets, var/icon)
+	var/turf/sourceturf = get_turf(broadcast_source)
+	for(var/mob/M in targets)
+		var/turf/targetturf = get_turf(M)
+		if((targetturf.z == sourceturf.z))
+			M.show_message("<span class='info'>\icon[icon] [message]</span>", 1)
+
+/proc/mobs_in_area(var/area/A)
+	var/list/mobs = new
+	for(var/mob/living/M in mob_list)
+		if(get_area(M) == A)
+			mobs += M
+	return mobs
+
+//Direct dead say used both by emote and say
+//It is somewhat messy. I don't know what to do.
+//I know you can't see the change, but I rewrote the name code. It is significantly less messy now
+/proc/say_dead_direct(var/message, var/mob/subject = null)
+	var/name
+	var/keyname
+	if(subject && subject.client)
+		var/client/C = subject.client
+		keyname = (C.holder && C.holder.fakekey) ? C.holder.fakekey : C.key
+		if(C.mob) //Most of the time this is the dead/observer mob; we can totally use him if there is no better name
+			var/mindname
+			var/realname = C.mob.real_name
+			if(C.mob.mind)
+				mindname = C.mob.mind.name
+				if(C.mob.mind.original && C.mob.mind.original.real_name)
+					realname = C.mob.mind.original.real_name
+			if(mindname && mindname != realname)
+				name = "[realname] died as [mindname]"
+			else
+				name = realname
+
+	for(var/mob/M in player_list)
+		if(M.client && ((!istype(M, /mob/new_player) && M.stat == DEAD) || (M.client.holder && !is_mentor(M.client))) && (M.client.prefs.toggles & CHAT_DEAD))
+			var/follow
+			var/lname
+			if(subject)
+				if(subject != M)
+					follow = "(<a href='byond://?src=\ref[M];track=\ref[subject]'>follow</a>) "
+				if(M.stat != DEAD && M.client.holder)
+					follow = "(<a href='?src=\ref[M.client.holder];adminplayerobservejump=\ref[subject]'>JMP</a>) "
+				var/mob/dead/observer/DM
+				if(istype(subject, /mob/dead/observer))
+					DM = subject
+				if(M.client.holder) 							// What admins see
+					lname = "[keyname][(DM && DM.anonsay) ? "*" : (DM ? "" : "^")] ([name])"
+				else
+					if(DM && DM.anonsay)						// If the person is actually observer they have the option to be anonymous
+						lname = "Ghost of [name]"
+					else if(DM)									// Non-anons
+						lname = "[keyname] ([name])"
+					else										// Everyone else (dead people who didn't ghost yet, etc.)
+						lname = name
+				lname = "<span class='name'>[lname]</span> "
+			M << "<span class='deadsay'>" + create_text_tag("dead", "DEAD:", M.client) + " [lname][follow][message]</span>"
+
+//Announces that a ghost has joined/left, mainly for use with wizards
+/proc/announce_ghost_joinleave(O, var/joined_ghosts = 1, var/message = "")
+	var/client/C
+	//Accept any type, sort what we want here
+	if(istype(O, /mob))
+		var/mob/M = O
+		if(M.client)
+			C = M.client
+	else if(istype(O, /client))
+		C = O
+	else if(istype(O, /datum/mind))
+		var/datum/mind/M = O
+		if(M.current && M.current.client)
+			C = M.current.client
+		else if(M.original && M.original.client)
+			C = M.original.client
+
+	if(C)
+		var/name
+		if(C.mob)
+			var/mob/M = C.mob
+			if(M.mind && M.mind.name)
+				name = M.mind.name
+			if(M.real_name && M.real_name != name)
+				if(name)
+					name += " ([M.real_name])"
+				else
+					name = M.real_name
+		if(!name)
+			name = (C.holder && C.holder.fakekey) ? C.holder.fakekey : C.key
+		if(joined_ghosts)
+			say_dead_direct("The ghost of <span class='name'>[name]</span> now [pick("skulks","lurks","prowls","creeps","stalks")] among the dead. [message]")
+		else
+			say_dead_direct("<span class='name'>[name]</span> no longer [pick("skulks","lurks","prowls","creeps","stalks")] in the realm of the dead. [message]")
+
+/mob/proc/switch_to_camera(var/obj/machinery/camera/C)
+	if (!C.can_use() || stat || (get_dist(C, src) > 1 || machine != src || blinded || !canmove))
+		return 0
+	check_eye(src)
+	return 1
+
+/mob/living/silicon/ai/switch_to_camera(var/obj/machinery/camera/C)
+	if(!C.can_use() || !is_in_chassis())
+		return 0
+
+	eyeobj.setLoc(C)
+	return 1

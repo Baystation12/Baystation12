@@ -1,23 +1,23 @@
 /mob/living/carbon/slime/death(gibbed)
-	if(stat == DEAD)	return
-	stat = DEAD
-	icon_state = "[colour] baby slime dead"
 
-	if(!gibbed)
-		if(istype(src, /mob/living/carbon/slime/adult))
-			ghostize()
-			var/mob/living/carbon/slime/M1 = new primarytype(loc)
-			M1.rabid = 1
-			var/mob/living/carbon/slime/M2 = new primarytype(loc)
-			M2.rabid = 1
-			if(src)	del(src)
-		else
-			for(var/mob/O in viewers(src, null))
-				O.show_message("<b>The [name]</b> seizes up and falls limp...", 1) //ded -- Urist
+	if(stat == DEAD) return
 
-	update_canmove()
-	if(blind)	blind.layer = 0
+	if(!gibbed && is_adult)
+		var/mob/living/carbon/slime/M = new /mob/living/carbon/slime(loc, colour)
+		M.rabid = 1
+		M.Friends = Friends.Copy()
+		step_away(M, src)
+		is_adult = 0
+		maxHealth = 150
+		revive()
+		regenerate_icons()
+		if (!client) rabid = 1
+		number = rand(1, 1000)
+		name = "[colour] [is_adult ? "adult" : "baby"] slime ([number])"
+		return
 
-	ticker.mode.check_win()
+	. = ..(gibbed, "seizes up and falls limp...")
 
-	return ..(gibbed)
+	regenerate_icons()
+
+	return

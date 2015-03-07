@@ -28,6 +28,9 @@ Class Variables:
    component_parts (list)
       A list of component parts of machine used by frame based machines.
 
+   panel_open (num)
+      Whether the panel is open
+
    uid (num)
       Unique id of machine across all machines.
 
@@ -42,9 +45,6 @@ Class Variables:
          POWEROFF:4 -- tbd
          MAINT:8 -- machine is currently under going maintenance.
          EMPED:16 -- temporary broken by EMP pulse
-
-   manual (num)
-      Currently unused.
 
 Class Procs:
    New()                     'game/machinery/machine.dm'
@@ -104,16 +104,22 @@ Class Procs:
 		//2 = run auto, use active
 	var/idle_power_usage = 0
 	var/active_power_usage = 0
-	var/power_channel = EQUIP
-		//EQUIP,ENVIRON or LIGHT
+	var/power_channel = EQUIP //EQUIP, ENVIRON or LIGHT
 	var/list/component_parts = null //list of all the parts used to build it, if made from certain kinds of frames.
 	var/uid
-	var/manual = 0
+	var/panel_open = 0
 	var/global/gl_uid = 1
+	var/interact_offline = 0 // Can the machine be interacted with while de-powered.
 
-/obj/machinery/New()
-	..()
-	machines += src
+/obj/machinery/New(l, d=0)
+	..(l)
+	if(d)
+		set_dir(d)
+	if(!machinery_sort_required && ticker)
+		dd_insertObjectList(machines, src)
+	else
+		machines += src
+		machinery_sort_required = 1
 
 /obj/machinery/Del()
 	machines -= src
@@ -131,7 +137,7 @@ Class Procs:
 		pulse2.icon_state = "empdisable"
 		pulse2.name = "emp sparks"
 		pulse2.anchored = 1
-		pulse2.dir = pick(cardinal)
+		pulse2.set_dir(pick(cardinal))
 
 		spawn(10)
 			pulse2.delete()
@@ -157,6 +163,10 @@ Class Procs:
 	if(prob(50))
 		del(src)
 
+//sets the use_power var and then forces an area power update
+/obj/machinery/proc/update_use_power(var/new_use_power, var/force_update = 0)
+	use_power = new_use_power
+
 /obj/machinery/proc/auto_use_power()
 	if(!powered(power_channel))
 		return 0
@@ -166,36 +176,26 @@ Class Procs:
 		use_power(active_power_usage,power_channel, 1)
 	return 1
 
-/obj/machinery/Topic(href, href_list)
+/obj/machinery/proc/operable(var/additional_flags = 0)
+	return !inoperable(additional_flags)
+
+/obj/machinery/proc/inoperable(var/additional_flags = 0)
+	return (stat & (NOPOWER|BROKEN|additional_flags))
+
+/obj/machinery/CanUseTopic(var/mob/user, var/be_close)
+	if(!interact_offline && (stat & (NOPOWER|BROKEN)))
+		return STATUS_CLOSE
+
+	return ..()
+
+/obj/machinery/CouldUseTopic(var/mob/user)
 	..()
-	if(stat & (NOPOWER|BROKEN))
-		return 1
-	if(usr.restrained() || usr.lying || usr.stat)
-		return 1
-	if ( ! (istype(usr, /mob/living/carbon/human) || \
-			istype(usr, /mob/living/silicon) || \
-			istype(usr, /mob/living/carbon/monkey)) )
-		usr << "\red You don't have the dexterity to do this!"
-		return 1
+	user.set_machine(src)
 
-	var/norange = 0
-	if(istype(usr, /mob/living/carbon/human))
-		var/mob/living/carbon/human/H = usr
-		if(istype(H.l_hand, /obj/item/tk_grab))
-			norange = 1
-		else if(istype(H.r_hand, /obj/item/tk_grab))
-			norange = 1
+/obj/machinery/CouldNotUseTopic(var/mob/user)
+	usr.unset_machine()
 
-	if(!norange)
-		if ((!in_range(src, usr) || !istype(src.loc, /turf)) && !istype(usr, /mob/living/silicon))
-			return 1
-
-	src.add_fingerprint(usr)
-
-	var/area/A = get_area(src)
-	A.master.powerupdate = 1
-
-	return 0
+////////////////////////////////////////////////////////////////////////////////////////////
 
 /obj/machinery/attack_ai(mob/user as mob)
 	if(isrobot(user))
@@ -206,11 +206,8 @@ Class Procs:
 	else
 		return src.attack_hand(user)
 
-/obj/machinery/attack_paw(mob/user as mob)
-	return src.attack_hand(user)
-
 /obj/machinery/attack_hand(mob/user as mob)
-	if(stat & (NOPOWER|BROKEN|MAINT))
+	if(inoperable(MAINT))
 		return 1
 	if(user.lying || user.stat)
 		return 1
@@ -235,32 +232,28 @@ Class Procs:
 
 	src.add_fingerprint(user)
 
-	var/area/A = get_area(src)
-	A.master.powerupdate = 1
-
-	return 0
+	return ..()
 
 /obj/machinery/proc/RefreshParts() //Placeholder proc for machines that are built using frames.
 	return
-	return 0
 
 /obj/machinery/proc/assign_uid()
 	uid = gl_uid
 	gl_uid++
 
 /obj/machinery/proc/state(var/msg)
-  for(var/mob/O in hearers(src, null))
-    O.show_message("\icon[src] <span class = 'notice'>[msg]</span>", 2)
+	for(var/mob/O in hearers(src, null))
+		O.show_message("\icon[src] <span class = 'notice'>[msg]</span>", 2)
 
 /obj/machinery/proc/ping(text=null)
-  if (!text)
-    text = "\The [src] pings."
+	if (!text)
+		text = "\The [src] pings."
 
-  state(text, "blue")
-  playsound(src.loc, 'sound/machines/ping.ogg', 50, 0)
+	state(text, "blue")
+	playsound(src.loc, 'sound/machines/ping.ogg', 50, 0)
 
 /obj/machinery/proc/shock(mob/user, prb)
-	if(stat & (BROKEN|NOPOWER))
+	if(inoperable())
 		return 0
 	if(!prob(prb))
 		return 0
@@ -268,13 +261,68 @@ Class Procs:
 	s.set_up(5, 1, src)
 	s.start()
 	if (electrocute_mob(user, get_area(src), src, 0.7))
+		var/area/temp_area = get_area(src)
+		if(temp_area && temp_area.master)
+			var/obj/machinery/power/apc/temp_apc = temp_area.master.get_apc()
+
+			if(temp_apc && temp_apc.terminal && temp_apc.terminal.powernet)
+				temp_apc.terminal.powernet.trigger_warning()
 		return 1
 	else
 		return 0
 
+/obj/machinery/proc/default_deconstruction_crowbar(var/mob/user, var/obj/item/weapon/crowbar/C)
+	if(!istype(C))
+		return 0
+	if(!panel_open)
+		return 0
+	. = dismantle()
+
+/obj/machinery/proc/default_deconstruction_screwdriver(var/mob/user, var/obj/item/weapon/screwdriver/S)
+	if(!istype(S))
+		return 0
+	playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
+	panel_open = !panel_open
+	user << "<span class='notice'>You [panel_open ? "open" : "close"] the maintenance hatch of [src].</span>"
+	update_icon()
+	return 1
+
+/obj/machinery/proc/default_part_replacement(var/mob/user, var/obj/item/weapon/storage/part_replacer/R)
+	if(!istype(R))
+		return 0
+	if(!component_parts)
+		return 0
+	if(panel_open)
+		var/obj/item/weapon/circuitboard/CB = locate(/obj/item/weapon/circuitboard) in component_parts
+		var/P
+		for(var/obj/item/weapon/stock_parts/A in component_parts)
+			for(var/D in CB.req_components)
+				var/T = text2path(D)
+				if(ispath(A.type, T))
+					P = T
+					break
+			for(var/obj/item/weapon/stock_parts/B in R.contents)
+				if(istype(B, P) && istype(A, P))
+					if(B.rating > A.rating)
+						R.remove_from_storage(B, src)
+						R.handle_item_insertion(A, 1)
+						component_parts -= A
+						component_parts += B
+						B.loc = null
+						user << "<span class='notice'>[A.name] replaced with [B.name].</span>"
+						break
+			update_icon()
+			RefreshParts()
+	else
+		user << "<span class='notice'>Following parts detected in the machine:</span>"
+		for(var/var/obj/item/C in component_parts)
+			user << "<span class='notice'>    [C.name]</span>"
+	return 1
+
 /obj/machinery/proc/dismantle()
 	playsound(loc, 'sound/items/Crowbar.ogg', 50, 1)
 	var/obj/machinery/constructable_frame/machine_frame/M = new /obj/machinery/constructable_frame/machine_frame(loc)
+	M.set_dir(src.dir)
 	M.state = 2
 	M.icon_state = "box_1"
 	for(var/obj/I in component_parts)
@@ -283,3 +331,51 @@ Class Procs:
 		I.loc = loc
 	del(src)
 	return 1
+
+/obj/machinery/proc/on_assess_perp(mob/living/carbon/human/perp)
+	return 0
+
+/obj/machinery/proc/is_assess_emagged()
+	return emagged
+
+/obj/machinery/proc/assess_perp(mob/living/carbon/human/perp, var/auth_weapons, var/check_records, var/check_arrest)
+	var/threatcount = 0	//the integer returned
+
+	if(is_assess_emagged())
+		return 10	//if emagged, always return 10.
+
+	threatcount += on_assess_perp(perp)
+	if(threatcount >= 10)
+		return threatcount
+
+	//Agent cards lower threatlevel.
+	var/obj/item/weapon/card/id/id = GetIdCard(perp)
+	if(id && istype(id, /obj/item/weapon/card/id/syndicate))
+		threatcount -= 2
+
+	if(auth_weapons && !src.allowed(perp))
+		if(istype(perp.l_hand, /obj/item/weapon/gun) || istype(perp.l_hand, /obj/item/weapon/melee))
+			threatcount += 4
+
+		if(istype(perp.r_hand, /obj/item/weapon/gun) || istype(perp.r_hand, /obj/item/weapon/melee))
+			threatcount += 4
+
+		if(istype(perp.belt, /obj/item/weapon/gun) || istype(perp.belt, /obj/item/weapon/melee))
+			threatcount += 2
+
+		if(perp.species.name != "Human") //beepsky so racist.
+			threatcount += 2
+
+	if(check_records || check_arrest)
+		var/perpname = perp.name
+		if(id)
+			perpname = id.registered_name
+
+		var/datum/data/record/R = find_security_record("name", perpname)
+		if(check_records && !R)
+			threatcount += 4
+
+		if(check_arrest && R && (R.fields["criminal"] == "*Arrest*"))
+			threatcount += 4
+
+	return threatcount

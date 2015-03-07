@@ -1,6 +1,6 @@
 var/list/name_to_mineral
 
-proc/SetupMinerals()
+/proc/SetupMinerals()
 	name_to_mineral = list()
 	for(var/type in typesof(/mineral) - /mineral)
 		var/mineral/new_mineral = new type
@@ -9,56 +9,63 @@ proc/SetupMinerals()
 		name_to_mineral[new_mineral.name] = new_mineral
 	return 1
 
-mineral
-	///What am I called?
-	var/name
-	var/display_name
-	///How much ore?
-	var/result_amount
-	///Does this type of deposit spread?
-	var/spread = 1
-	///Chance of spreading in any direction
-	var/spread_chance
+/mineral
+	var/name	      // Tag for use in overlay generation/list population	.
+	var/display_name  // What am I called?
+	var/result_amount // How much ore?
+	var/spread = 1	  // Does this type of deposit spread?
+	var/spread_chance // Chance of spreading in any direction
+	var/ore	          // Path to the ore produced when tile is mined.
 
-	///Path to the resultant ore.
-	var/ore
 
-	New()
-		. = ..()
-		if(!display_name)
-			display_name = name
+/mineral/New()
+	. = ..()
+	if(!display_name)
+		display_name = name
 
-mineral/uranium
+/mineral/uranium
 	name = "Uranium"
 	result_amount = 5
 	spread_chance = 10
 	ore = /obj/item/weapon/ore/uranium
 
-mineral/iron
+/mineral/platinum
+	name = "Platinum"
+	result_amount = 5
+	spread_chance = 10
+	ore = /obj/item/weapon/ore/osmium
+
+/mineral/iron
 	name = "Iron"
 	result_amount = 5
 	spread_chance = 25
 	ore = /obj/item/weapon/ore/iron
 
-mineral/diamond
+/mineral/coal
+	name = "Coal"
+	result_amount = 5
+	spread_chance = 25
+	ore = /obj/item/weapon/ore/coal
+
+/mineral/diamond
 	name = "Diamond"
 	result_amount = 5
 	spread_chance = 10
 	ore = /obj/item/weapon/ore/diamond
 
-mineral/gold
+/mineral/gold
 	name = "Gold"
 	result_amount = 5
 	spread_chance = 10
 	ore = /obj/item/weapon/ore/gold
 
-mineral/silver
+/mineral/silver
 	name = "Silver"
 	result_amount = 5
 	spread_chance = 10
 	ore = /obj/item/weapon/ore/silver
 
-mineral/phoron
+/mineral/phoron
 	name = "Phoron"
 	result_amount = 5
 	spread_chance = 25

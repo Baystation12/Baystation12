@@ -1,10 +1,11 @@
+#ifndef OVERRIDE_BAN_SYSTEM
 //Blocks an attempt to connect before even creating our client datum thing.
 world/IsBanned(key,address,computer_id)
 	if(ckey(key) in admin_datums)
 		return ..()
 
 	//Guest Checking
-	if(!guests_allowed && IsGuestKey(key))
+	if(!config.guests_allowed && IsGuestKey(key))
 		log_access("Failed Login: [key] - Guests not allowed")
 		message_admins("\blue Failed Login: [key] - Guests not allowed")
 		return list("reason"="guest", "desc"="\nReason: Guests not allowed. Please sign in with a byond account.")
@@ -79,3 +80,6 @@ world/IsBanned(key,address,computer_id)
 		if (failedip)
 			message_admins("[key] has logged in with a blank ip in the ban check.")
 		return ..()	//default pager ban stuff
+#endif
+#undef OVERRIDE_BAN_SYSTEM
+

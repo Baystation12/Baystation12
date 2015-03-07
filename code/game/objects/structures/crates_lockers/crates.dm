@@ -40,8 +40,7 @@
 
 	if(climbable)
 		structure_shaken()
-
-	return
+	return 1
 
 /obj/structure/closet/crate/close()
 	if(!src.opened)
@@ -56,8 +55,8 @@
 			break
 		if(O.density || O.anchored || istype(O,/obj/structure/closet))
 			continue
-		if(istype(O, /obj/structure/stool/bed)) //This is only necessary because of rollerbeds and swivel chairs.
-			var/obj/structure/stool/bed/B = O
+		if(istype(O, /obj/structure/bed)) //This is only necessary because of rollerbeds and swivel chairs.
+			var/obj/structure/bed/B = O
 			if(B.buckled_mob)
 				continue
 		O.loc = src
@@ -71,20 +70,22 @@
 	if(opened)
 		if(isrobot(user))
 			return
+		if(W.loc != user) // This should stop mounted modules ending up outside the module.
+			return
 		user.drop_item()
 		if(W)
 			W.loc = src.loc
 	else if(istype(W, /obj/item/weapon/packageWrap))
 		return
-	else if(istype(W, /obj/item/weapon/cable_coil))
+	else if(istype(W, /obj/item/stack/cable_coil))
+		var/obj/item/stack/cable_coil/C = W
 		if(rigged)
 			user << "<span class='notice'>[src] is already rigged!</span>"
 			return
-		user  << "<span class='notice'>You rig [src].</span>"
-		user.drop_item()
-		del(W)
-		rigged = 1
-		return
+		if (C.use(1))
+			user  << "<span class='notice'>You rig [src].</span>"
+			rigged = 1
+			return
 	else if(istype(W, /obj/item/device/radio/electropack))
 		if(rigged)
 			user  << "<span class='notice'>You attach [W] to [src].</span>"
@@ -183,7 +184,7 @@
 		src.toggle(user)
 
 /obj/structure/closet/crate/secure/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(is_type_in_list(W, list(/obj/item/weapon/packageWrap, /obj/item/weapon/cable_coil, /obj/item/device/radio/electropack, /obj/item/weapon/wirecutters)))
+	if(is_type_in_list(W, list(/obj/item/weapon/packageWrap, /obj/item/stack/cable_coil, /obj/item/device/radio/electropack, /obj/item/weapon/wirecutters)))
 		return ..()
 	if(locked && (istype(W, /obj/item/weapon/card/emag)||istype(W, /obj/item/weapon/melee/energy/blade)))
 		overlays.Cut()
@@ -231,15 +232,15 @@
 	icon_closed = "plasticcrate"
 
 /obj/structure/closet/crate/internals
+	name = "internals crate"
 	desc = "A internals crate."
-	name = "Internals crate"
 	icon_state = "o2crate"
 	icon_opened = "o2crateopen"
 	icon_closed = "o2crate"
 
 /obj/structure/closet/crate/trashcart
+	name = "trash cart"
 	desc = "A heavy, metal trashcart with wheels."
-	name = "Trash Cart"
 	icon_state = "trashcart"
 	icon_opened = "trashcartopen"
 	icon_closed = "trashcart"
@@ -261,15 +262,15 @@
 */
 
 /obj/structure/closet/crate/medical
+	name = "medical crate"
 	desc = "A medical crate."
-	name = "Medical crate"
 	icon_state = "medicalcrate"
 	icon_opened = "medicalcrateopen"
 	icon_closed = "medicalcrate"
 
 /obj/structure/closet/crate/rcd
-	desc = "A crate for the storage of the RCD."
-	name = "RCD crate"
+	name = "\improper RCD crate"
+	desc = "A crate with rapid construction device."
 	icon_state = "crate"
 	icon_opened = "crateopen"
 	icon_closed = "crate"
@@ -282,7 +283,7 @@
 	new /obj/item/weapon/rcd(src)
 
 /obj/structure/closet/crate/solar
-	name = "Solar Pack crate"
+	name = "solar pack crate"
 
 /obj/structure/closet/crate/solar/New()
 	..()
@@ -312,8 +313,8 @@
 	new /obj/item/weapon/paper/solar(src)
 
 /obj/structure/closet/crate/freezer
+	name = "freezer"
 	desc = "A freezer."
-	name = "Freezer"
 	icon_state = "freezer"
 	icon_opened = "freezeropen"
 	icon_closed = "freezer"
@@ -324,12 +325,7 @@
 		var/datum/gas_mixture/gas = (..())
 		if(!gas)	return null
 		var/datum/gas_mixture/newgas = new/datum/gas_mixture()
-		newgas.oxygen = gas.oxygen
-		newgas.carbon_dioxide = gas.carbon_dioxide
-		newgas.nitrogen = gas.nitrogen
-		newgas.phoron = gas.phoron
-		newgas.volume = gas.volume
-		newgas.temperature = gas.temperature
+		newgas.copy_from(gas)
 		if(newgas.temperature <= target_temp)	return
 
 		if((newgas.temperature - cooling_power) > target_temp)
@@ -339,25 +335,27 @@
 		return newgas
 
 /obj/structure/closet/crate/freezer/rations //Fpr use in the escape shuttle
+	name = "emergency rations"
 	desc = "A crate of emergency rations."
-	name = "Emergency Rations"
 
 
 /obj/structure/closet/crate/freezer/rations/New()
 	..()
-	new /obj/item/weapon/storage/box/donkpockets(src)
-	new /obj/item/weapon/storage/box/donkpockets(src)
+	new /obj/item/weapon/reagent_containers/food/snacks/liquidfood(src)
+	new /obj/item/weapon/reagent_containers/food/snacks/liquidfood(src)
+	new /obj/item/weapon/reagent_containers/food/snacks/liquidfood(src)
+	new /obj/item/weapon/reagent_containers/food/snacks/liquidfood(src)
 
 /obj/structure/closet/crate/bin
+	name = "large bin"
 	desc = "A large bin."
-	name = "Large bin"
 	icon_state = "largebin"
 	icon_opened = "largebinopen"
 	icon_closed = "largebin"
 
 /obj/structure/closet/crate/radiation
+	name = "radioactive gear crate"
 	desc = "A crate with a radiation sign on it."
-	name = "Radioactive gear crate"
 	icon_state = "radiation"
 	icon_opened = "radiationopen"
 	icon_closed = "radiation"
@@ -374,36 +372,36 @@
 	new /obj/item/clothing/head/radiation(src)
 
 /obj/structure/closet/crate/secure/weapon
+	name = "weapons crate"
 	desc = "A secure weapons crate."
-	name = "Weapons crate"
 	icon_state = "weaponcrate"
 	icon_opened = "weaponcrateopen"
 	icon_closed = "weaponcrate"
 
 /obj/structure/closet/crate/secure/phoron
+	name = "phoron crate"
 	desc = "A secure phoron crate."
-	name = "Phoron crate"
 	icon_state = "phoroncrate"
 	icon_opened = "phoroncrateopen"
 	icon_closed = "phoroncrate"
 
 /obj/structure/closet/crate/secure/gear
+	name = "gear crate"
 	desc = "A secure gear crate."
-	name = "Gear crate"
 	icon_state = "secgearcrate"
 	icon_opened = "secgearcrateopen"
 	icon_closed = "secgearcrate"
 
 /obj/structure/closet/crate/secure/hydrosec
-	desc = "A crate with a lock on it, painted in the scheme of the station's botanists."
 	name = "secure hydroponics crate"
+	desc = "A crate with a lock on it, painted in the scheme of the station's botanists."
 	icon_state = "hydrosecurecrate"
 	icon_opened = "hydrosecurecrateopen"
 	icon_closed = "hydrosecurecrate"
 
 /obj/structure/closet/crate/secure/bin
+	name = "secure bin"
 	desc = "A secure bin."
-	name = "Secure bin"
 	icon_state = "largebins"
 	icon_opened = "largebinsopen"
 	icon_closed = "largebins"
@@ -474,7 +472,7 @@
 	icon_closed = "largermetal"
 
 /obj/structure/closet/crate/hydroponics
-	name = "Hydroponics crate"
+	name = "hydroponics crate"
 	desc = "All you need to destroy those pesky weeds and pests."
 	icon_state = "hydrocrate"
 	icon_opened = "hydrocrateopen"

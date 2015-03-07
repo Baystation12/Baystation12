@@ -13,25 +13,25 @@
 	lawupdate = 0
 	density = 1
 	req_access = list(access_engine, access_robotics)
-
-	// We need to keep track of a few module items so we don't need to do list operations
-	// every time we need them. These get set in New() after the module is chosen.
-	var/obj/item/stack/sheet/metal/cyborg/stack_metal = null
-	var/obj/item/stack/sheet/wood/cyborg/stack_wood = null
-	var/obj/item/stack/sheet/glass/cyborg/stack_glass = null
-	var/obj/item/stack/sheet/mineral/plastic/cyborg/stack_plastic = null
-	var/obj/item/weapon/matter_decompiler/decompiler = null
+	integrated_light_power = 2
+	local_transmit = 1
 
 	//Used for self-mailing.
 	var/mail_destination = ""
 
 	holder_type = /obj/item/weapon/holder/drone
+
 /mob/living/silicon/robot/drone/New()
 
 	..()
 
+	verbs += /mob/living/proc/hide
+	remove_language("Robot Talk")
+	add_language("Robot Talk", 0)
+	add_language("Drone Talk", 1)
+
 	if(camera && "Robots" in camera.network)
-		camera.network.Add("Engineering")
+		camera.add_network("Engineering")
 
 	//They are unable to be upgraded, so let's give them a bit of a better battery.
 	cell.maxcharge = 10000
@@ -48,21 +48,23 @@
 	verbs -= /mob/living/silicon/robot/verb/Namepick
 	module = new /obj/item/weapon/robot_module/drone(src)
 
-	//Grab stacks.
-	stack_metal = locate(/obj/item/stack/sheet/metal/cyborg) in src.module
-	stack_wood = locate(/obj/item/stack/sheet/wood/cyborg) in src.module
-	stack_glass = locate(/obj/item/stack/sheet/glass/cyborg) in src.module
-	stack_plastic = locate(/obj/item/stack/sheet/mineral/plastic/cyborg) in src.module
-
-	//Grab decompiler.
-	decompiler = locate(/obj/item/weapon/matter_decompiler) in src.module
-
 	//Some tidying-up.
 	flavor_text = "It's a tiny little repair drone. The casing is stamped with an NT logo and the subscript: 'NanoTrasen Recursive Repair Systems: Fixing Tomorrow's Problem, Today!'"
-	updatename()
 	updateicon()
 
+/mob/living/silicon/robot/drone/init()
+	laws = new /datum/ai_laws/drone()
+	connected_ai = null
+
+	aiCamera = new/obj/item/device/camera/siliconcam/drone_camera(src)
+	playsound(src.loc, 'sound/machines/twobeep.ogg', 50, 0)
+
 //Redefining some robot procs...
+/mob/living/silicon/robot/drone/SetName(pickedName as text)
+	// Would prefer to call the grandparent proc but this isn't possible, so..
+	real_name = pickedName
+	name = real_name
+
 /mob/living/silicon/robot/drone/updatename()
 	real_name = "maintenance drone ([rand(100,999)])"
 	name = real_name
@@ -80,76 +82,6 @@
 
 /mob/living/silicon/robot/drone/pick_module()
 	return
-
-//Drones can only use binary and say emotes. NOTHING else.
-//TBD, fix up boilerplate. ~ Z
-/mob/living/silicon/robot/drone/say(var/message)
-
-	if (!message)
-		return
-
-	if (src.client)
-		if(client.prefs.muted & MUTE_IC)
-			src << "You cannot send IC messages (muted)."
-			return
-		if (src.client.handle_spam_prevention(message,MUTE_IC))
-			return
-
-	message = trim(copytext(sanitize(message), 1, MAX_MESSAGE_LEN))
-
-	if (stat == 2)
-		return say_dead(message)
-
-	if(copytext(message,1,2) == "*")
-		return emote(copytext(message,2))
-	else if(length(message) >= 2)
-		if(copytext(message, 1 ,3) == ":b" || copytext(message, 1 ,3) == ":B")
-
-			if(!is_component_functioning("comms"))
-				src << "\red Your binary communications component isn't functional."
-				return
-
-			robot_talk(trim(copytext(message,3)))
-
-		else if(copytext(message, 1 ,3) == ":d" || copytext(message, 1 ,3) == ":D")
-
-			if(!is_component_functioning("radio"))
-				src << "\red Your radio transmitter isn't functional."
-				return
-
-			for (var/mob/living/S in living_mob_list)
-				if(istype(S, /mob/living/silicon/robot/drone))
-					S << "<i><span class='game say'>Drone Talk, <span class='name'>[name]</span><span class='message'> transmits, \"[trim(copytext(message,3))]\"</span></span></i>"
-
-			for (var/mob/M in dead_mob_list)
-				if(!istype(M,/mob/new_player) && !istype(M,/mob/living/carbon/brain))
-					M << "<i><span class='game say'>Drone Talk, <span class='name'>[name]</span><span class='message'> transmits, \"[trim(copytext(message,3))]\"</span></span></i>"
-
-		else
-
-			var/list/listeners = hearers(5,src)
-			listeners |= src
-
-			for(var/mob/living/silicon/robot/drone/D in listeners)
-				if(D.client) D << "<b>[src]</b> transmits, \"[message]\""
-
-			for (var/mob/M in player_list)
-				if (istype(M, /mob/new_player))
-					continue
-				else if(M.stat == 2 &&  M.client.prefs.toggles & CHAT_GHOSTEARS)
-					if(M.client) M << "<b>[src]</b> transmits, \"[message]\""
-
-//Sick of trying to get this to display properly without redefining it.
-/mob/living/silicon/robot/drone/show_system_integrity()
-	if(!src.stat)
-		var/temphealth = health+35 //Brings it to 0.
-		if(temphealth<0)	temphealth = 0
-		//Convert to percentage.
-		temphealth = (temphealth / (maxHealth*2)) * 100
-
-		stat(null, text("System integrity: [temphealth]%"))
-	else
-		stat(null, text("Systems nonfunctional"))
 
 //Drones cannot be upgraded with borg modules so we need to catch some items before they get used in ..().
 /mob/living/silicon/robot/drone/attackby(obj/item/weapon/W as obj, mob/user as mob)
@@ -190,7 +122,7 @@
 		clear_supplied_laws()
 		clear_inherent_laws()
 		laws = new /datum/ai_laws/syndicate_override
-		set_zeroth_law("Only [user.real_name] and people he designates as being such are Syndicate Agents.")
+		set_zeroth_law("Only [user.real_name] and people he designates as being such are operatives.")
 
 		src << "<b>Obey these laws:</b>"
 		laws.show_laws(src)
@@ -256,14 +188,6 @@
 		return
 	..()
 
-/mob/living/silicon/robot/drone/death(gibbed)
-
-	if(module)
-		var/obj/item/weapon/gripper/G = locate(/obj/item/weapon/gripper) in module
-		if(G) G.drop_item()
-
-	..(gibbed)
-
 //DRONE MOVEMENT.
 /mob/living/silicon/robot/drone/Process_Spaceslipping(var/prob_slip)
 	//TODO: Consider making a magboot item for drones to equip. ~Z
@@ -328,13 +252,19 @@
 	full_law_reset()
 	src << "<br><b>You are a maintenance drone, a tiny-brained robotic repair machine</b>."
 	src << "You have no individual will, no personality, and no drives or urges other than your laws."
-	src << "Use <b>:b</b> to talk to your fellow synthetics, <b>:d</b> to talk to other drones, and <b>say</b> to speak silently to your nearby fellows."
-	src << "Remember,  you are <b>lawed against interference with the crew</b>."
+	src << "Use <b>:d</b> to talk to other drones and <b>say</b> to speak silently to your nearby fellows."
+	src << "Remember,  you are <b>lawed against interference with the crew</b>. Also remember, <b>you DO NOT take orders from the AI.</b>"
 	src << "<b>Don't invade their worksites, don't steal their resources, don't tell them about the changeling in the toilets.</b>"
 	src << "<b>If a crewmember has noticed you, <i>you are probably breaking your third law</i></b>."
 
 /mob/living/silicon/robot/drone/Bump(atom/movable/AM as mob|obj, yes)
-	if (!yes || ( !istype(AM,/obj/machinery/door) && !istype(AM,/obj/machinery/recharge_station) && !istype(AM,/obj/machinery/disposal/deliveryChute) ) ) return
+	if (!yes || ( \
+	 !istype(AM,/obj/machinery/door) && \
+	 !istype(AM,/obj/machinery/recharge_station) && \
+	 !istype(AM,/obj/machinery/disposal/deliveryChute) && \
+	 !istype(AM,/obj/machinery/teleport/hub) && \
+	 !istype(AM,/obj/effect/portal)
+	)) return
 	..()
 	return
 
@@ -355,3 +285,9 @@
 	else
 		src << "<span class='warning'>You are too small to pull that.</span>"
 		return
+
+/mob/living/silicon/robot/drone/add_robot_verbs()
+	src.verbs |= robot_verbs_subsystems
+
+/mob/living/silicon/robot/drone/remove_robot_verbs()
+	src.verbs -= robot_verbs_subsystems

@@ -22,7 +22,7 @@
 	throwforce = 5.0
 	throw_speed = 3
 	throw_range = 5
-	flags = FPRINT | TABLEPASS | CONDUCT
+	flags = CONDUCT
 	origin_tech = "materials=1"
 	attack_verb = list("attacked", "stabbed", "poked")
 	sharp = 0
@@ -32,9 +32,9 @@
 /obj/item/weapon/kitchen/utensil/New()
 	if (prob(60))
 		src.pixel_y = rand(0, 4)
-	return
 
 	create_reagents(5)
+	return
 
 /obj/item/weapon/kitchen/utensil/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
 	if(!istype(M))
@@ -58,15 +58,16 @@
 			for(var/mob/O in viewers(M, null))
 				O.show_message(text("\blue [] feeds [] some [] from \the []", user, M, loaded, src), 1)
 				M.reagents.add_reagent("nutriment", 1)
-
+		playsound(M.loc,'sound/items/eatfood.ogg', rand(10,40), 1)
 		overlays.Cut()
 		return
+	else
+		..()
 
 /obj/item/weapon/kitchen/utensil/fork
 	name = "fork"
 	desc = "It's a fork. Sure is pointy."
 	icon_state = "fork"
-	sharp = 1
 
 /obj/item/weapon/kitchen/utensil/pfork
 	name = "plastic fork"
@@ -115,8 +116,10 @@
 	name = "plastic knife"
 	desc = "The bluntest of blades."
 	icon_state = "pknife"
-	force = 10.0
-	throwforce = 10.0
+	force = 1
+	throwforce = 1
+	sharp = 0
+	edge = 1 //for cutting pizzas
 
 /obj/item/weapon/kitchen/utensil/knife/attack(target as mob, mob/living/user as mob)
 	if ((CLUMSY in user.mutations) && prob(50))
@@ -134,7 +137,7 @@
 	icon = 'icons/obj/kitchen.dmi'
 	icon_state = "knife"
 	desc = "A general purpose Chef's Knife made by SpaceCook Incorporated. Guaranteed to stay sharp for years to come."
-	flags = FPRINT | TABLEPASS | CONDUCT
+	flags = CONDUCT
 	sharp = 1
 	edge = 1
 	force = 10.0
@@ -166,7 +169,7 @@
 	icon = 'icons/obj/kitchen.dmi'
 	icon_state = "butch"
 	desc = "A huge thing used for chopping and chopping up meat. This includes clowns and clown-by-products."
-	flags = FPRINT | TABLEPASS | CONDUCT
+	flags = CONDUCT
 	force = 15.0
 	w_class = 2.0
 	throwforce = 8.0
@@ -243,7 +246,7 @@
 	throw_speed = 1
 	throw_range = 5
 	w_class = 3.0
-	flags = FPRINT | TABLEPASS | CONDUCT
+	flags = CONDUCT
 	matter = list("metal" = 3000)
 	/* // NOPE
 	var/food_total= 0

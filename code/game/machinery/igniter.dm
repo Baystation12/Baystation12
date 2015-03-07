@@ -13,9 +13,6 @@
 /obj/machinery/igniter/attack_ai(mob/user as mob)
 	return src.attack_hand(user)
 
-/obj/machinery/igniter/attack_paw(mob/user as mob)
-	return
-
 /obj/machinery/igniter/attack_hand(mob/user as mob)
 	if(..())
 		return
@@ -38,6 +35,7 @@
 	icon_state = "igniter[on]"
 
 /obj/machinery/igniter/power_change()
+	..()
 	if(!( stat & NOPOWER) )
 		icon_state = "igniter[src.on]"
 	else
@@ -60,12 +58,12 @@
 	..()
 
 /obj/machinery/sparker/power_change()
-	if ( powered() && disable == 0 )
-		stat &= ~NOPOWER
+	..()
+	if ( !(stat & NOPOWER) && disable == 0 )
+
 		icon_state = "[base_state]"
 //		src.sd_SetLuminosity(2)
 	else
-		stat |= ~NOPOWER
 		icon_state = "[base_state]-p"
 //		src.sd_SetLuminosity(0)
 
@@ -117,20 +115,13 @@
 	ignite()
 	..(severity)
 
-/obj/machinery/ignition_switch/attack_ai(mob/user as mob)
-	return src.attack_hand(user)
+/obj/machinery/button/ignition
+	name = "ignition switch"
+	desc = "A remote control switch for a mounted igniter."
 
-/obj/machinery/ignition_switch/attack_paw(mob/user as mob)
-	return src.attack_hand(user)
+/obj/machinery/button/ignition/attack_hand(mob/user as mob)
 
-/obj/machinery/ignition_switch/attackby(obj/item/weapon/W, mob/user as mob)
-	return src.attack_hand(user)
-
-/obj/machinery/ignition_switch/attack_hand(mob/user as mob)
-
-	if(stat & (NOPOWER|BROKEN))
-		return
-	if(active)
+	if(..())
 		return
 
 	use_power(5)

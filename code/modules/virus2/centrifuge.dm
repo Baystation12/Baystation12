@@ -1,5 +1,5 @@
 /obj/machinery/computer/centrifuge
-	name = "Isolation Centrifuge"
+	name = "isolation centrifuge"
 	desc = "Used to separate things with different weight. Spin 'em round, round, right round."
 	icon = 'icons/obj/virology.dmi'
 	icon_state = "centrifuge"
@@ -36,7 +36,7 @@
 	if(..()) return
 	ui_interact(user)
 
-/obj/machinery/computer/centrifuge/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null)
+/obj/machinery/computer/centrifuge/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	user.set_machine(src)
 
 	var/data[0]
@@ -54,7 +54,7 @@
 		if (sample)
 			var/datum/reagent/blood/B = locate(/datum/reagent/blood) in sample.reagents.reagent_list
 			if (B)
-				data["antibodies"] = B.data["antibodies"] ? antigens2string(B.data["antibodies"]) : null
+				data["antibodies"] = antigens2string(B.data["antibodies"], none=null)
 
 				var/list/pathogens[0]
 				var/list/virus = B.data["virus2"]
@@ -67,10 +67,11 @@
 
 			else
 				var/datum/reagent/antibodies/A = locate(/datum/reagent/antibodies) in sample.reagents.reagent_list
-				data["antibodies"] = A && A.data["antibodies"] ? antigens2string(A.data["antibodies"]) : null
+				if(A)
+					data["antibodies"] = antigens2string(A.data["antibodies"], none=null)
 				data["is_antibody_sample"] = 1
 
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data)
+	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "isolation_centrifuge.tmpl", src.name, 400, 500)
 		ui.set_initial_data(data)
@@ -91,7 +92,7 @@
 			isolate()
 
 /obj/machinery/computer/centrifuge/Topic(href, href_list)
-	if (..()) return 0
+	if (..()) return 1
 
 	var/mob/user = usr
 	var/datum/nanoui/ui = nanomanager.get_open_ui(user, src, "main")
@@ -186,7 +187,7 @@
 	var/datum/reagent/blood/B = locate(/datum/reagent/blood) in sample.reagents.reagent_list
 	if (B)
 		P.info += "<u>Antibodies:</u> "
-		P.info += B.data["antibodies"] ? antigens2string(B.data["antibodies"]) : "None"
+		P.info += antigens2string(B.data["antibodies"])
 		P.info += "<br>"
 
 		var/list/virus = B.data["virus2"]
@@ -202,7 +203,7 @@
 		var/datum/reagent/antibodies/A = locate(/datum/reagent/antibodies) in sample.reagents.reagent_list
 		if (A)
 			P.info += "The following antibodies have been isolated from the blood sample: "
-			P.info += A.data["antibodies"] ? antigens2string(A.data["antibodies"]) : "None"
+			P.info += antigens2string(A.data["antibodies"])
 			P.info += "<br>"
 
 	P.info += {"

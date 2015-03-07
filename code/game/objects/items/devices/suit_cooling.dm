@@ -2,9 +2,18 @@
 	name = "portable suit cooling unit"
 	desc = "A portable heat sink and liquid cooled radiator that can be hooked up to a space suit's existing temperature controls to provide industrial levels of cooling."
 	w_class = 4
-	icon = 'icons/obj/device.dmi'	//temporary, I hope
+	icon = 'icons/obj/device.dmi'
 	icon_state = "suitcooler0"
 	slot_flags = SLOT_BACK	//you can carry it on your back if you want, but it won't do anything unless attached to suit storage
+	
+	//copied from tank.dm
+	flags = CONDUCT
+	force = 5.0
+	throwforce = 10.0
+	throw_speed = 1
+	throw_range = 4
+	
+	origin_tech = "magnets=2;materials=2"
 	
 	var/on = 0				//is it turned on?
 	var/cover_open = 0		//is the cover open?
@@ -33,7 +42,7 @@
 	
 	var/mob/living/carbon/human/H = loc
 	
-	var/efficiency = H.get_pressure_protection()		//you need to have a good seal for effective cooling
+	var/efficiency = 1 - H.get_pressure_weakness()		//you need to have a good seal for effective cooling
 	var/env_temp = get_environment_temperature()		//wont save you from a fire
 	var/temp_adj = min(H.bodytemperature - max(thermostat, env_temp), max_cooling)
 	
@@ -152,26 +161,25 @@
 	else
 		icon_state = "suitcooler0"
 
-/obj/item/device/suit_cooling_unit/examine()
-	set src in view(1)
-	
-	..()
+/obj/item/device/suit_cooling_unit/examine(mob/user)
+	if(!..(user, 1))
+		return
 	
 	if (on)
 		if (attached_to_suit(src.loc))
-			usr << "It's switched on and running."
+			user << "It's switched on and running."
 		else
-			usr << "It's switched on, but not attached to anything."
+			user << "It's switched on, but not attached to anything."
 	else
-		usr << "It is switched off."
+		user << "It is switched off."
 	
 	if (cover_open)
 		if(cell)
-			usr << "The panel is open, exposing the [cell]."
+			user << "The panel is open, exposing the [cell]."
 		else
-			usr << "The panel is open."
+			user << "The panel is open."
 	
 	if (cell)
-		usr << "The charge meter reads [round(cell.percent())]%."
+		user << "The charge meter reads [round(cell.percent())]%."
 	else
-		usr << "It doesn't have a power cell installed."
+		user << "It doesn't have a power cell installed."

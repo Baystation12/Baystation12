@@ -9,15 +9,17 @@
 	docking_program = new/datum/computer/file/embedded_program/docking/simple(src)
 	program = docking_program
 
-/obj/machinery/embedded_controller/radio/simple_docking_controller/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null)
+/obj/machinery/embedded_controller/radio/simple_docking_controller/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	var/data[0]
 
 	data = list(
 		"docking_status" = docking_program.get_docking_status(),
 		"override_enabled" = docking_program.override_enabled,
+		"door_state" = 	docking_program.memory["door_status"]["state"],
+		"door_lock" = 	docking_program.memory["door_status"]["lock"],
 	)
 
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data)
+	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 
 	if (!ui)
 		ui = new(user, src, ui_key, "simple_docking_console.tmpl", name, 470, 290)
@@ -27,22 +29,22 @@
 
 /obj/machinery/embedded_controller/radio/simple_docking_controller/Topic(href, href_list)
 	if(..())
-		return
-	
+		return 1
+
 	usr.set_machine(src)
 	src.add_fingerprint(usr)
-	
+
 	var/clean = 0
 	switch(href_list["command"])	//anti-HTML-hacking checks
 		if("force_door")
 			clean = 1
 		if("toggle_override")
 			clean = 1
-	
+
 	if(clean)
 		program.receive_user_command(href_list["command"])
 
-	return 1
+	return 0
 
 
 //A docking controller program for a simple door based docking port
@@ -52,28 +54,27 @@
 /datum/computer/file/embedded_program/docking/simple/New(var/obj/machinery/embedded_controller/M)
 	..(M)
 	memory["door_status"] = list(state = "closed", lock = "locked")		//assume closed and locked in case the doors dont report in
-	memory["door_status"] = list(state = "closed", lock = "locked")
 
 	if (istype(M, /obj/machinery/embedded_controller/radio/simple_docking_controller))
 		var/obj/machinery/embedded_controller/radio/simple_docking_controller/controller = M
-		
-		tag_door = controller.tag_door
-			
+
+		tag_door = controller.tag_door? controller.tag_door : "[id_tag]_hatch"
+
 		spawn(10)
 			signal_door("update")		//signals connected doors to update their status
-		
-	
+
+
 /datum/computer/file/embedded_program/docking/simple/receive_signal(datum/signal/signal, receive_method, receive_param)
 	var/receive_tag = signal.data["tag"]
-	
+
 	if(!receive_tag) return
-	
+
 	if(receive_tag==tag_door)
 		memory["door_status"]["state"] = signal.data["door_status"]
 		memory["door_status"]["lock"] = signal.data["lock_status"]
-	
+
 	..(signal, receive_method, receive_param)
-	
+
 /datum/computer/file/embedded_program/docking/simple/receive_user_command(command)
 	switch(command)
 		if("force_door")
@@ -95,8 +96,13 @@
 	signal.data["command"] = command
 	post_signal(signal)
 
+///datum/computer/file/embedded_program/docking/simple/proc/signal_mech_sensor(var/command)
+//	signal_door(command)
+//	return
+
 /datum/computer/file/embedded_program/docking/simple/proc/open_door()
 	if(memory["door_status"]["state"] == "closed")
+		//signal_mech_sensor("enable")
 		signal_door("secure_open")
 	else if(memory["door_status"]["lock"] == "unlocked")
 		signal_door("lock")
@@ -104,6 +110,7 @@
 /datum/computer/file/embedded_program/docking/simple/proc/close_door()
 	if(memory["door_status"]["state"] == "open")
 		signal_door("secure_close")
+		//signal_mech_sensor("disable")
 	else if(memory["door_status"]["lock"] == "unlocked")
 		signal_door("lock")
 

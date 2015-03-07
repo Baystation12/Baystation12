@@ -76,7 +76,7 @@
 			else
 				user << "<span class='notice'>You need a tighter grip.</span>"
 
-	if(cistern)
+	if(cistern && !istype(user,/mob/living/silicon/robot)) //STOP PUTTING YOUR MODULES IN THE TOILET.
 		if(I.w_class > 3)
 			user << "<span class='notice'>\The [I] does not fit.</span>"
 			return
@@ -128,6 +128,11 @@
 	var/ismist = 0				//needs a var so we can make it linger~
 	var/watertemp = "normal"	//freezing, normal, or boiling
 	var/mobpresent = 0		//true if there is a mob on the shower's loc, this is to ease process()
+	var/is_washing = 0
+
+/obj/machinery/shower/New()
+	..()
+	create_reagents(2)
 
 //add heat controls? when emagged, you can freeze to death in it?
 
@@ -190,7 +195,7 @@
 				del(mymist)
 				ismist = 0
 
-/obj/machinery/shower/HasEntered(atom/movable/O)
+/obj/machinery/shower/Crossed(atom/movable/O)
 	..()
 	wash(O)
 	if(ismob(O))
@@ -205,6 +210,11 @@
 //Yes, showers are super powerful as far as washing goes.
 /obj/machinery/shower/proc/wash(atom/movable/O as obj|mob)
 	if(!on) return
+
+	if(isliving(O))
+		var/mob/living/L = O
+		L.ExtinguishMob()
+		L.fire_stacks = -20 //Douse ourselves with water to avoid fire more easily
 
 	if(iscarbon(O))
 		var/mob/living/carbon/M = O
@@ -285,9 +295,21 @@
 				del(E)
 
 /obj/machinery/shower/process()
-	if(!on || !mobpresent) return
+	if(!on) return
+	wash_floor()
+	if(!mobpresent)	return
 	for(var/mob/living/carbon/C in loc)
 		check_heat(C)
+
+/obj/machinery/shower/proc/wash_floor()
+	if(!ismist && is_washing)
+		return
+	is_washing = 1
+	var/turf/T = get_turf(src)
+	reagents.add_reagent("water", 2)
+	T.clean(src)
+	spawn(100)
+		is_washing = 0
 
 /obj/machinery/shower/proc/check_heat(mob/M as mob)
 	if(!on || watertemp == "normal") return
@@ -362,28 +384,29 @@
 		user << "\red Someone's already washing here."
 		return
 
-	if (istype(O, /obj/item/weapon/reagent_containers))
-		var/obj/item/weapon/reagent_containers/RG = O
+	var/obj/item/weapon/reagent_containers/RG = O
+	if (istype(RG) && RG.is_open_container())
 		RG.reagents.add_reagent("water", min(RG.volume - RG.reagents.total_volume, RG.amount_per_transfer_from_this))
 		user.visible_message("\blue [user] fills \the [RG] using \the [src].","\blue You fill \the [RG] using \the [src].")
 		return
 
 	else if (istype(O, /obj/item/weapon/melee/baton))
 		var/obj/item/weapon/melee/baton/B = O
-		if (B.charges > 0 && B.status == 1)
-			flick("baton_active", src)
-			user.Stun(10)
-			user.stuttering = 10
-			user.Weaken(10)
-			if(isrobot(user))
-				var/mob/living/silicon/robot/R = user
-				R.cell.charge -= 20
-			else
-				B.charges--
-			user.visible_message( \
-				"[user] was stunned by his wet [O].", \
-				"\red You have wet \the [O], it shocks you!")
-			return
+		if(B.bcell)
+			if(B.bcell.charge > 0 && B.status == 1)
+				flick("baton_active", src)
+				user.Stun(10)
+				user.stuttering = 10
+				user.Weaken(10)
+				if(isrobot(user))
+					var/mob/living/silicon/robot/R = user
+					R.cell.charge -= 20
+				else
+					B.deductcharge(B.hitcost)
+				user.visible_message( \
+					"<span class='danger'>[user] was stunned by \his wet [O]!</span>", \
+					"<span class='userdanger'>[user] was stunned by \his wet [O]!</span>")
+				return
 
 	var/turf/location = user.loc
 	if(!isturf(location)) return

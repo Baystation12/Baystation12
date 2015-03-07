@@ -3,7 +3,9 @@
 
 	if(!mind)				return
 	if(!mind.changeling)	mind.changeling = new /datum/changeling(gender)
+
 	verbs += /datum/changeling/proc/EvolutionMenu
+	add_language("Changeling")
 
 	var/lesser_form = !ishuman(src)
 
@@ -30,8 +32,7 @@
 		mind.changeling.absorbed_species += H.species.name
 
 	for(var/language in languages)
-		if(!(language in mind.changeling.absorbed_languages))
-			mind.changeling.absorbed_languages += language
+		mind.changeling.absorbed_languages |= language
 
 	return 1
 
@@ -80,6 +81,9 @@
 	for(var/language in updated_languages)
 		languages += language
 
+	//This isn't strictly necessary but just to be safe...
+	add_language("Changeling")
+
 	return
 
 //Used to switch species based on the changeling datum.
@@ -111,12 +115,13 @@
 	src.visible_message("<span class='warning'>[src] transforms!</span>")
 
 	src.verbs -= /mob/proc/changeling_change_species
-	spawn(10)	src.verbs += /mob/proc/changeling_change_species
+	H.set_species(S,1) //Until someone moves body colour into DNA, they're going to have to use the default.
 
-	H.set_species(S)
+	spawn(10)
+		src.verbs += /mob/proc/changeling_change_species
+		src.regenerate_icons()
 
 	changeling_update_languages(changeling.absorbed_languages)
-
 	feedback_add_details("changeling_powers","TR")
 
 	return 1
@@ -144,7 +149,7 @@
 		src << "<span class='warning'>We do not know how to parse this creature's DNA!</span>"
 		return
 
-	if(NOCLONE in T.mutations)
+	if(HUSK in T.mutations)
 		src << "<span class='warning'>This creature's DNA is ruined beyond useability!</span>"
 		return
 
@@ -171,7 +176,6 @@
 				var/datum/organ/external/affecting = T.get_organ(src.zone_sel.selecting)
 				if(affecting.take_damage(39,0,1,0,"large organic needle"))
 					T:UpdateDamageIcon()
-					continue
 
 		feedback_add_details("changeling_powers","A[stage]")
 		if(!do_mob(src, T, 150))
@@ -452,7 +456,7 @@
 			changeling.chem_charges -= 20
 
 			// restore us to health
-			C.rejuvenate()
+			C.revive()
 
 			// remove our fake death flag
 			C.status_flags &= ~(FAKEDEATH)
@@ -653,7 +657,7 @@ var/list/datum/dna/hivemind_bank = list()
 		src << "<span class='notice'>We return our vocal glands to their original location.</span>"
 		return
 
-	var/mimic_voice = input("Enter a name to mimic.", "Mimic Voice", null) as text
+	var/mimic_voice = stripped_input(usr, "Enter a name to mimic.", "Mimic Voice", null, MAX_NAME_LEN)
 	if(!mimic_voice)
 		return
 
@@ -675,11 +679,16 @@ var/list/datum/dna/hivemind_bank = list()
 	//////////
 
 /mob/proc/sting_can_reach(mob/M as mob, sting_range = 1)
-	if(M.loc == src.loc) return 1 //target and source are in the same thing
-	if(!isturf(src.loc) || !isturf(M.loc)) return 0 //One is inside, the other is outside something.
-	if(AStar(src.loc, M.loc, /turf/proc/AdjacentTurfs, /turf/proc/Distance, sting_range)) //If a path exists, good!
-		return 1
-	return 0
+	if(M.loc == src.loc)
+		return 1 //target and source are in the same thing
+	if(!isturf(src.loc) || !isturf(M.loc))
+		src << "<span class='warning'>We cannot reach \the [M] with a sting!</span>"
+		return 0 //One is inside, the other is outside something.
+	// Maximum queued turfs set to 25; I don't *think* anything raises sting_range above 2, but if it does the 25 may need raising
+	if(!AStar(src.loc, M.loc, /turf/proc/AdjacentTurfs, /turf/proc/Distance, max_nodes=25, max_node_depth=sting_range)) //If we can't find a path, fail
+		src << "<span class='warning'>We cannot find a path to sting \the [M] by!</span>"
+		return 0
+	return 1
 
 //Handles the general sting code to reduce on copypasta (seeming as somebody decided to make SO MANY dumb abilities)
 /mob/proc/changeling_sting(var/required_chems=0, var/verb_path)
@@ -843,11 +852,13 @@ var/list/datum/dna/hivemind_bank = list()
 	if(!changeling)
 		return 0
 
-	var/mob/living/carbon/T = changeling_sting(40, /mob/proc/changeling_extract_dna_sting)
+	var/mob/living/carbon/human/T = changeling_sting(40, /mob/proc/changeling_extract_dna_sting)
 	if(!T)	return 0
 
 	T.dna.real_name = T.real_name
 	changeling.absorbed_dna |= T.dna
+	if(T.species && !(T.species.name in changeling.absorbed_species))
+		changeling.absorbed_species += T.species.name
 
 	feedback_add_details("changeling_powers","ED")
 	return 1

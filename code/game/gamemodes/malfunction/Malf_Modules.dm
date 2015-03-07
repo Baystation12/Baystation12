@@ -49,9 +49,12 @@ rcd light flash thingy on matter drain
 	set category = "Malfunction"
 	set name = "Upgrade Turrets"
 	usr.verbs -= /client/proc/upgrade_turrets
-	for(var/obj/machinery/turret/turret in player_list)
-		turret.health += 30
-		turret.shot_delay = 20
+	for(var/obj/machinery/porta_turret/turret in machines)
+		var/turf/T = get_turf(turret)
+		if(T.z in config.station_levels)
+			// Increase health by 37.5% of original max, decrease delays between shots to 66%
+			turret.health += initial(turret.health) * 3 / 8
+			turret.shot_delay = initial(turret.shot_delay) * 2 / 3
 
 /datum/AI_Module/large/disable_rcd
 	module_name = "RCD disable"

@@ -9,7 +9,6 @@
 	throw_speed = 2
 	throw_range = 5
 	w_class = 3.0
-	flags = TABLEPASS
 	var/created_name = "Cleanbot"
 
 
@@ -52,10 +51,9 @@
 	should_patrol = 1
 
 	src.botcard = new /obj/item/weapon/card/id(src)
-	var/datum/job/janitor/J = new/datum/job/janitor
-	src.botcard.access = J.get_access()
-	
-	src.locked = 0 // Start unlocked so roboticist can set them to patrol.	
+	src.botcard.access = list(access_janitor, access_maint_tunnels)
+
+	src.locked = 0 // Start unlocked so roboticist can set them to patrol.
 
 	if(radio_controller)
 		radio_controller.add_object(src, beacon_freq, filter = RADIO_NAVBEACONS)
@@ -197,7 +195,7 @@ text("<A href='?src=\ref[src];operation=oddbutton'>[src.oddbutton ? "Yes" : "No"
 	if(!src.target || src.target == null)
 		for (var/obj/effect/decal/cleanable/D in view(7,src))
 			for(var/T in src.target_types)
-				if(isnull(D.targeted_by) && (D.type == T || D.parent_type == T) && D != src.oldtarget)   // If the mess isn't targeted
+				if(isnull(D.targeted_by) && istype(D, T) && D != src.oldtarget)   // If the mess isn't targeted (D.type == T || D.parent_type == T)
 					src.oldtarget = D								 // or if it is but the bot is gone.
 					src.target = D									 // and it's stuff we clean?  Clean it.
 					D.targeted_by = src	// Claim the mess we are targeting.
