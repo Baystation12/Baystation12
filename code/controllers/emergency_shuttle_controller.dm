@@ -197,6 +197,11 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 		return 1
 	return 0
 
+
+/datum/emergency_shuttle_controller/proc/stuck()
+	if (!shuttle.location && world.time >= launch_time && shuttle.moving_status != SHUTTLE_INTRANSIT)
+		shuttle.force_launch(src)
+
 //returns 1 if the shuttle is currently in transit (or just leaving) to the station
 /datum/emergency_shuttle_controller/proc/going_to_station()
 	return (!shuttle.direction && shuttle.moving_status != SHUTTLE_IDLE)
