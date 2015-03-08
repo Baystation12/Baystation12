@@ -1,19 +1,6 @@
-/mob/living/carbon/human
-	var/list/valid_species = list()
-	var/list/valid_hairstyles = list()
-	var/list/valid_facial_hairstyles = list()
-
-/mob/living/carbon/human/New()
-	..()
-
-/mob/living/carbon/human/proc/change_appearance(var/flags = APPEARANCE_ALL_HAIR, var/location = src, var/mob/user = src)
-	var/obj/nano_module/appearance_changer/AC = new(location, src)
+/mob/living/carbon/human/proc/change_appearance(var/flags = APPEARANCE_ALL_HAIR, var/location = src, var/mob/user = src, var/check_species_whitelist = 1, var/list/species_whitelist = list(), var/list/species_blacklist = list())
+	var/obj/nano_module/appearance_changer/AC = new(location, src, check_species_whitelist, species_whitelist, species_blacklist)
 	AC.flags = flags
-
-	generate_valid_species()
-	generate_valid_hairstyles()
-	generate_valid_facial_hairstyles()
-
 	AC.ui_interact(user)
 
 /mob/living/carbon/human/proc/change_species(var/new_species)
@@ -23,7 +10,7 @@
 	if(species == new_species)
 		return
 
-	if(!(new_species in valid_species))
+	if(!(new_species in all_species))
 		return
 
 	set_species(new_species)
@@ -47,7 +34,7 @@
 	if(h_style == hair_style)
 		return
 
-	if(!(hair_style in valid_hairstyles))
+	if(!(hair_style in hair_styles_list))
 		return
 
 	h_style = hair_style
@@ -62,7 +49,7 @@
 	if(f_style == facial_hair_style)
 		return
 
-	if(!(facial_hair_style in valid_facial_hairstyles))
+	if(!(facial_hair_style in facial_hair_styles_list))
 		return
 
 	f_style = facial_hair_style
@@ -71,8 +58,8 @@
 	return 1
 
 /mob/living/carbon/human/proc/reset_hair()
-	generate_valid_hairstyles()
-	generate_valid_facial_hairstyles()
+	var/list/valid_hairstyles = generate_valid_hairstyles()
+	var/list/valid_facial_hairstyles = generate_valid_facial_hairstyles()
 
 	if(valid_hairstyles.len)
 		h_style = pick(valid_hairstyles)
@@ -145,21 +132,27 @@
 	check_dna()
 	dna.ready_dna(src)
 
-/mob/living/carbon/human/proc/generate_valid_species()
-	valid_species.Cut()
+/mob/living/carbon/human/proc/generate_valid_species(var/check_whitelist = 1, var/list/whitelist = list(), var/list/blacklist = list())
+	var/list/valid_species = new()
 	for(var/current_species_name in all_species)
 		var/datum/species/current_species = all_species[current_species_name]
 
-		if(config.usealienwhitelist && !check_rights(R_ADMIN, 0)) //If we're using the whitelist, make sure to check it!
+		if(check_whitelist && config.usealienwhitelist && !check_rights(R_ADMIN, 0, src)) //If we're using the whitelist, make sure to check it!
 			if(!(current_species.flags & CAN_JOIN))
 				continue
-			else if((current_species.flags & IS_WHITELISTED) && !is_alien_whitelisted(src, current_species_name))
+			if(whitelist.len && !(current_species_name in whitelist))
+				continue
+			if(blacklist.len && (current_species_name in blacklist))
+				continue
+			if((current_species.flags & IS_WHITELISTED) && !is_alien_whitelisted(src, current_species_name))
 				continue
 
 		valid_species += current_species_name
 
+	return valid_species
+
 /mob/living/carbon/human/proc/generate_valid_hairstyles()
-	valid_hairstyles.Cut()
+	var/list/valid_hairstyles = new()
 	for(var/hairstyle in hair_styles_list)
 		var/datum/sprite_accessory/S = hair_styles_list[hairstyle]
 
@@ -174,7 +167,7 @@
 	return valid_hairstyles
 
 /mob/living/carbon/human/proc/generate_valid_facial_hairstyles()
-	valid_facial_hairstyles.Cut()
+	var/list/valid_facial_hairstyles = new()
 	for(var/facialhairstyle in facial_hair_styles_list)
 		var/datum/sprite_accessory/S = facial_hair_styles_list[facialhairstyle]
 

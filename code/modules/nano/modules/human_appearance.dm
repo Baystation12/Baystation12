@@ -1,23 +1,37 @@
 /obj/nano_module/appearance_changer
 	name = "Appearance Editor"
 	flags = APPEARANCE_ALL_HAIR
-	var/mob/living/carbon/human/owner
+	var/mob/living/carbon/human/owner = null
+	var/list/valid_species = list()
+	var/list/valid_hairstyles = list()
+	var/list/valid_facial_hairstyles = list()
 
-/obj/nano_module/appearance_changer/New(var/location, var/mob/living/carbon/human/H)
+	var/check_whitelist
+	var/list/whitelist
+	var/list/blacklist
+
+/obj/nano_module/appearance_changer/New(var/location, var/mob/living/carbon/human/H, var/check_species_whitelist = 1, var/list/species_whitelist = list(), var/list/species_blacklist = list())
 	..()
 	loc = location
 	owner = H
+	src.check_whitelist = check_species_whitelist
+	src.whitelist = species_whitelist
+	src.blacklist = species_blacklist
 
 /obj/nano_module/appearance_changer/Topic(ref, href_list)
 	if(..())
 		return 1
 
 	if(href_list["race"])
-		if(can_change(APPEARANCE_RACE))
-			return owner.change_species(href_list["race"])
+		if(can_change(APPEARANCE_RACE) && (href_list["race"] in valid_species))
+			if(owner.change_species(href_list["race"]))
+				cut_and_generate_data()
+				return 1
 	if(href_list["gender"])
 		if(can_change(APPEARANCE_GENDER))
-			return owner.change_gender(href_list["gender"])
+			if(owner.change_gender(href_list["gender"]))
+				cut_and_generate_data()
+				return 1
 	if(href_list["skin_tone"])
 		if(can_change_skin_tone())
 			var/new_s_tone = input(usr, "Choose your character's skin-tone:\n(Light 1 - 220 Dark)", "Skin Tone", owner.s_tone) as num|null
@@ -35,7 +49,7 @@
 					update_dna()
 					return 1
 	if(href_list["hair"])
-		if(can_change(APPEARANCE_HAIR))
+		if(can_change(APPEARANCE_HAIR) && (href_list["hair"] in valid_hairstyles))
 			if(owner.change_hair(href_list["hair"]))
 				update_dna()
 				return 1
@@ -50,7 +64,7 @@
 					update_dna()
 					return 1
 	if(href_list["facial_hair"])
-		if(can_change(APPEARANCE_FACIAL_HAIR))
+		if(can_change(APPEARANCE_FACIAL_HAIR) && (href_list["facial_hair"] in valid_facial_hairstyles))
 			if(owner.change_facial_hair(href_list["facial_hair"]))
 				update_dna()
 				return 1
@@ -78,6 +92,7 @@
 	return 0
 
 /obj/nano_module/appearance_changer/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+	generate_data(check_whitelist, whitelist, blacklist)
 	var/data[0]
 
 	data["specimen"] = owner.species.name
@@ -85,7 +100,7 @@
 	data["change_race"] = can_change(APPEARANCE_RACE)
 	if(data["change_race"])
 		var/species[0]
-		for(var/specimen in owner.valid_species)
+		for(var/specimen in valid_species)
 			species[++species.len] =  list("specimen" = specimen)
 		data["species"] = species
 
@@ -96,7 +111,7 @@
 	data["change_hair"] = can_change(APPEARANCE_HAIR)
 	if(data["change_hair"])
 		var/hair_styles[0]
-		for(var/hair_style in owner.valid_hairstyles)
+		for(var/hair_style in valid_hairstyles)
 			hair_styles[++hair_styles.len] = list("hairstyle" = hair_style)
 		data["hair_styles"] = hair_styles
 		data["hair_style"] = owner.h_style
@@ -104,7 +119,7 @@
 	data["change_facial_hair"] = can_change(APPEARANCE_FACIAL_HAIR)
 	if(data["change_facial_hair"])
 		var/facial_hair_styles[0]
-		for(var/facial_hair_style in owner.valid_facial_hairstyles)
+		for(var/facial_hair_style in valid_facial_hairstyles)
 			facial_hair_styles[++facial_hair_styles.len] = list("facialhairstyle" = facial_hair_style)
 		data["facial_hair_styles"] = facial_hair_styles
 		data["facial_hair_style"] = owner.f_style
@@ -133,3 +148,16 @@
 
 /obj/nano_module/appearance_changer/proc/can_still_topic()
 	return CanUseTopic(usr, list(), default_state) == STATUS_INTERACTIVE
+
+/obj/nano_module/appearance_changer/proc/cut_and_generate_data()
+	// Making the assumption that the available species remain constant
+	valid_facial_hairstyles.Cut()
+	valid_facial_hairstyles.Cut()
+	generate_data()
+
+/obj/nano_module/appearance_changer/proc/generate_data()
+	if(!valid_species.len)
+		valid_species = owner.generate_valid_species(check_whitelist, whitelist, blacklist)
+	if(!valid_hairstyles.len || !valid_facial_hairstyles.len)
+		valid_hairstyles = owner.generate_valid_hairstyles()
+		valid_facial_hairstyles = owner.generate_valid_facial_hairstyles()
