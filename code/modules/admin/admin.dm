@@ -719,6 +719,38 @@ var/global/floorIsLava = 0
 		sleep(50)
 		world.Reboot()
 
+/datum/admins/proc/endround()
+	set category = "Server"
+	set name = "End Round"
+	set desc="Ends the Round"
+	if(!ticker)
+		alert("huh...what are you doing...the game hasn't even started yet...")
+		return
+	if(!ticker.mode)
+		alert("huh...what are you doing...the game hasn't even started yet...")
+		return
+	if (ticker.current_state == GAME_STATE_FINISHED)
+		if (!usr.client.holder)
+			return
+		var/confirm = alert("End the Round?", "End Round", "Yes", "Cancel")
+		if(confirm == "Cancel")
+			return
+		if(confirm == "Yes")
+			world << "\red <b>Restarting world!</b> \blue Round End Initiated by [usr.client.holder.fakekey ? "Admin" : usr.key]!"
+			log_admin("[key_name(usr)] initiated a round end.")
+			log_admin_single("[key_name(usr)] initiated a round end.")
+
+			feedback_set_details("end_error","admin round end - by [usr.key] [usr.client.holder.fakekey ? "(stealth)" : ""]")
+			feedback_add_details("admin_verb","R") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+
+			if(blackbox)
+				blackbox.save_all_data_to_sql()
+
+			sleep(50)
+			world.Reboot()
+	else
+		alert("The round cannot be ended untill the shuttle is docked with Centcom.")
+		return
 
 /datum/admins/proc/announce()
 	set category = "Special Verbs"

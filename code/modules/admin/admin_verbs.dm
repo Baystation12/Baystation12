@@ -396,9 +396,10 @@ var/list/admin_verbs_admin2 = list(
 	/client/proc/kill_air,
 	/client/proc/ZASSettings,
 	/client/proc/kill_airgroup,
-	/client/proc/toggledebuglogs
-
+	/client/proc/toggledebuglogs,
+	/datum/admins/proc/endround
 )
+
 var/list/admin_verbs_admin3 = list(
 	/datum/admins/proc/toggleenter,
 	/datum/admins/proc/toggleguests,
