@@ -15,18 +15,6 @@
 	processing_objects.Remove(src)
 	..()
 
-/obj/item/weapon/holder/return_air()
-	var/turf/T = get_turf(src)
-	return T.return_air()
-
-/obj/item/weapon/holder/handle_internal_lifeform(mob/lifeform_inside_me, breath_request)
-	var/turf/T = get_turf(src)
-	return T.remove_air(breath_request)
-
-/obj/item/weapon/holder/assume_air(var/mixture)
-	var/turf/T = get_turf(src)
-	return T.assume_air(mixture)
-
 /obj/item/weapon/holder/process()
 
 	if(istype(loc,/turf) || !(contents.len))

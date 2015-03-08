@@ -1060,6 +1060,7 @@
 #include "code\modules\mob\living\logout.dm"
 #include "code\modules\mob\living\say.dm"
 #include "code\modules\mob\living\blob\blob.dm"
+#include "code\modules\mob\living\carbon\breathe.dm"
 #include "code\modules\mob\living\carbon\carbon.dm"
 #include "code\modules\mob\living\carbon\carbon_defines.dm"
 #include "code\modules\mob\living\carbon\carbon_powers.dm"
