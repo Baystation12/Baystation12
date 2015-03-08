@@ -300,7 +300,7 @@
 
 	else if(href_list["simplemake"])
 
-		if(!check_rights(R_SPAWN))	return
+		if(!check_rights(/*R_SPAWN*/R_SERVER))	return
 
 		var/mob/M = locate(href_list["mob"])
 		if(!ismob(M))
@@ -1074,7 +1074,7 @@
 		.(href, list("f_secret"=1))
 
 	else if(href_list["monkeyone"])
-		if(!check_rights(R_SPAWN))	return
+		if(!check_rights(/*R_SPAWN*/R_SERVER))	return
 
 		var/mob/living/carbon/human/H = locate(href_list["monkeyone"])
 		if(!istype(H))
@@ -1087,7 +1087,7 @@
 		H.monkeyize()
 
 	else if(href_list["corgione"])
-		if(!check_rights(R_SPAWN))	return
+		if(!check_rights(/*R_SPAWN*/R_SERVER))	return
 
 		var/mob/living/carbon/human/H = locate(href_list["corgione"])
 		if(!istype(H))
@@ -1294,7 +1294,7 @@
 			usr << "Admin Rejuvinates have been disabled"
 
 	else if(href_list["makeai"])
-		if(!check_rights(R_SPAWN))	return
+		if(!check_rights(/*R_SPAWN*/R_SERVER))	return
 
 		var/mob/living/carbon/human/H = locate(href_list["makeai"])
 		if(!istype(H))
@@ -1307,7 +1307,7 @@
 		H.AIize()
 
 	else if(href_list["makealien"])
-		if(!check_rights(R_SPAWN))	return
+		if(!check_rights(/*R_SPAWN*/R_SERVER))	return
 
 		var/mob/living/carbon/human/H = locate(href_list["makealien"])
 		if(!istype(H))
@@ -1317,7 +1317,7 @@
 		usr.client.cmd_admin_alienize(H)
 
 	else if(href_list["makeslime"])
-		if(!check_rights(R_SPAWN))	return
+		if(!check_rights(/*R_SPAWN*/R_SERVER))	return
 
 		var/mob/living/carbon/human/H = locate(href_list["makeslime"])
 		if(!istype(H))
@@ -1327,7 +1327,7 @@
 		usr.client.cmd_admin_slimeize(H)
 
 	else if(href_list["makepai"])
-		if(!check_rights(R_SPAWN))	return
+		if(!check_rights(/*R_SPAWN*/R_SERVER))	return
 
 		var/mob/M = locate(href_list["makepai"])
 		if(!istype(M))
@@ -1337,7 +1337,7 @@
 		M.pAItransform()
 
 	else if(href_list["makerobot"])
-		if(!check_rights(R_SPAWN))	return
+		if(!check_rights(/*R_SPAWN*/R_SERVER))	return
 
 		var/mob/living/carbon/human/H = locate(href_list["makerobot"])
 		if(!istype(H))
@@ -1347,7 +1347,7 @@
 		usr.client.cmd_admin_robotize(H)
 
 	else if(href_list["makeanimal"])
-		if(!check_rights(R_SPAWN))	return
+		if(!check_rights(/*R_SPAWN*/R_SERVER))	return
 
 		var/mob/M = locate(href_list["makeanimal"])
 		if(istype(M, /mob/new_player))
@@ -1357,7 +1357,7 @@
 		usr.client.cmd_admin_animalize(M)
 
 	else if(href_list["togmutate"])
-		if(!check_rights(R_SPAWN))	return
+		if(!check_rights(/*R_SPAWN*/R_SERVER))	return
 
 		var/mob/living/carbon/human/H = locate(href_list["togmutate"])
 		if(!istype(H))
@@ -1801,23 +1801,23 @@
 		show_traitor_panel(M)
 
 	else if(href_list["create_object"])
-		if(!check_rights(R_SPAWN))	return
+		if(!check_rights(/*R_SPAWN*/R_SERVER))	return
 		return create_object(usr)
 
 	else if(href_list["quick_create_object"])
-		if(!check_rights(R_SPAWN))	return
+		if(!check_rights(/*R_SPAWN*/R_SERVER))	return
 		return quick_create_object(usr)
 
 	else if(href_list["create_turf"])
-		if(!check_rights(R_SPAWN))	return
+		if(!check_rights(/*R_SPAWN*/R_SERVER))	return
 		return create_turf(usr)
 
 	else if(href_list["create_mob"])
-		if(!check_rights(R_SPAWN))	return
+		if(!check_rights(/*R_SPAWN*/R_SERVER))	return
 		return create_mob(usr)
 
 	else if(href_list["object_list"])			//this is the laggiest thing ever
-		if(!check_rights(R_SPAWN))	return
+		if(!check_rights(/*R_SPAWN*/R_SERVER))	return
 
 		if(!config.allow_admin_spawning)
 			usr << "Spawning of items is not allowed."

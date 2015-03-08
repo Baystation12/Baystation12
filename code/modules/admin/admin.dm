@@ -1059,7 +1059,7 @@ var/global/floorIsLava = 0
 	set desc = "(atom path) Spawn an atom"
 	set name = "Spawn"
 
-	if(!check_rights(R_SPAWN))	return
+	if(!check_rights(/*R_SPAWN*/R_SERVER))	return
 
 	var/list/types = typesof(/atom)
 	var/list/matches = new()

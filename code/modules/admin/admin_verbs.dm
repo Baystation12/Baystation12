@@ -452,9 +452,8 @@ var/list/admin_verbs_headadmin = list(
 	/client/proc/remake_distribution_map,
 	/client/proc/show_distribution_map,
 	/client/proc/SDQL_query,
-	/client/proc/SDQL2_query
-
-
+	/client/proc/SDQL2_query,
+	/client/proc/togglebuildmodeself
 )
 
 var/list/admin_verbs_gamemaster = list(
