@@ -8,9 +8,9 @@
 	var/obj/nano_module/alarm_monitor/engineering/alarm_monitor
 
 /obj/machinery/computer/station_alert/New()
-	..()
 	alarm_monitor = new(src)
 	alarm_monitor.register(src, /obj/machinery/computer/station_alert/update_icon)
+	..()
 
 /obj/machinery/computer/station_alert/Del()
 	alarm_monitor.unregister(src)
