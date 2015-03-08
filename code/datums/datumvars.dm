@@ -422,7 +422,7 @@ client
 
 	//~CARN: for renaming mobs (updates their name, real_name, mind.name, their ID/PDA and datacore records).
 	else if(href_list["rename"])
-		if(!check_rights(R_VAREDIT))	return
+		if(!check_rights(/*R_VAREDIT*/R_ADMIN))	return
 
 		var/mob/M = locate(href_list["rename"])
 		if(!istype(M))
@@ -437,7 +437,7 @@ client
 		href_list["datumrefresh"] = href_list["rename"]
 
 	else if(href_list["varnameedit"] && href_list["datumedit"])
-		if(!check_rights(R_VAREDIT))	return
+		if(!check_rights(/*R_VAREDIT*/R_ADMIN))	return
 
 		var/D = locate(href_list["datumedit"])
 		if(!istype(D,/datum) && !istype(D,/client))
@@ -447,7 +447,7 @@ client
 		modify_variables(D, href_list["varnameedit"], 1)
 
 	else if(href_list["varnamechange"] && href_list["datumchange"])
-		if(!check_rights(R_VAREDIT))	return
+		if(!check_rights(/*R_VAREDIT*/R_ADMIN))	return
 
 		var/D = locate(href_list["datumchange"])
 		if(!istype(D,/datum) && !istype(D,/client))
@@ -457,7 +457,7 @@ client
 		modify_variables(D, href_list["varnamechange"], 0)
 
 	else if(href_list["varnamemass"] && href_list["datummass"])
-		if(!check_rights(R_VAREDIT))	return
+		if(!check_rights(/*R_VAREDIT*/R_ADMIN))	return
 
 		var/atom/A = locate(href_list["datummass"])
 		if(!istype(A))

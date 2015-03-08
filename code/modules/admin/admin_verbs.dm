@@ -390,6 +390,7 @@ var/list/admin_verbs_admin2 = list(
 	/client/proc/trigger_random_event,
 	/datum/admins/proc/spawn_atom,		/*allows us to spawn instances*/
 	/client/proc/respawn_character,
+	/datum/admins/proc/startnow,
 	/datum/admins/proc/delay,
 	/client/proc/cmd_debug_del_all,
 	/client/proc/kill_air,
@@ -411,7 +412,6 @@ var/list/admin_verbs_admin3 = list(
 	/client/proc/drop_bomb,
 	/datum/admins/proc/toggle_aliens,
 	/datum/admins/proc/toggle_space_ninja,
-	/datum/admins/proc/startnow,
 	/datum/admins/proc/restart,
 	/datum/admins/proc/immreboot,
 	/datum/admins/proc/toggleAI,

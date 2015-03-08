@@ -126,7 +126,7 @@ var/list/forbidden_varedit_object_types = list(
 			L += var_value
 
 /client/proc/mod_list(var/list/L)
-	if(!check_rights(R_VAREDIT))	return
+	if(!check_rights(/*R_VAREDIT*/R_ADMIN))	return
 
 	if(!istype(L,/list)) src << "Not a List."
 
@@ -273,7 +273,7 @@ var/list/forbidden_varedit_object_types = list(
 
 
 /client/proc/modify_variables(var/atom/O, var/param_var_name = null, var/autodetect_class = 0)
-	if(!check_rights(R_VAREDIT))	return
+	if(!check_rights(/*R_VAREDIT*/R_ADMIN))	return
 
 	var/list/locked = list("vars", "key", "ckey", "client", "firemut", "ishulk", "telekinesis", "xray", "virus", "cuffed", "ka", "last_eaten", "icon", "icon_state", "mutantrace")
 

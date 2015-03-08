@@ -666,7 +666,7 @@ var/global/floorIsLava = 0
 			<A href='?src=\ref[src];secretsfun=dbzmode'>DBZ Mode (Everyones a Wizard)</A><BR>
 			"}
 
-	if(check_rights(R_SERVER,0))
+	if(check_rights(R_POSSESS,0))
 		dat += "<A href='?src=\ref[src];secretsadmin=togglebombcap'>Toggle bomb cap</A><BR>"
 		dat += "<A href='?src=\ref[src];secretsadmin=togglebomboff'>Toggle bombs off</A><BR>"
 
