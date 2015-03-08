@@ -77,7 +77,7 @@ client/verb/JoinResponseTeam()
 				new_commando << "<b>As leader of the Emergency Response Team, you answer only to CentComm, and have authority to override the Captain where it is necessary to achieve your mission goals. It is recommended that you attempt to cooperate with the captain where possible, however."
 
 			// By setting an explicit location the mob cannot wander off and decide change appearance elsewhere
-			new_commando.change_appearance(APPEARANCE_ALL, new_commando.loc, new_commando, species_whitelist = list("Human", "Unathi", "Tajara"))
+			new_commando.change_appearance(APPEARANCE_ALL, new_commando.loc, new_commando, species_whitelist = config.ert_species)
 
 			return
 
