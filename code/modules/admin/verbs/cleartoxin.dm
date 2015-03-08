@@ -5,6 +5,8 @@
 		src << "Only administrators may use this command."
 		return
 	var/datum/gas_mixture/environment = usr.loc.return_air()
+	environment.gas["sleeping_agent_archived"] = null
+	environment.gas["sleeping_agent"] = 0
 	environment.gas["phoron_archived"] = null
 	environment.gas["phoron"] = 0
 	environment.gas["carbon_dioxide"] = 0
