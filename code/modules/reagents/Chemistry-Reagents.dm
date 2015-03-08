@@ -27,7 +27,7 @@
 /datum/reagent/proc/remove_self(var/amount) // Shortcut
 	holder.remove_reagent(id, amount)
 
-/datum/reagent/proc/touch_mob(var/mob/M) // The name might be misleading - this is how a chemical reacts to contacting NON-CARBON mobs
+/datum/reagent/proc/touch_mob(var/mob/M) // This doesn't apply to being splashed - this is for, e.g. extinguishers and sprays. The difference is that reagent is not on the mob - it's in another object.
 	return
 
 /datum/reagent/proc/touch_obj(var/obj/O) // Acid melting, cleaner cleaning, etc
@@ -70,13 +70,13 @@
 /datum/reagent/proc/addiction_effect(var/mob/living/carbon/M, var/alien, var/stage) // TODO
 	return
 
-/datum/reagent/proc/initialize_data() // Called when the reagent is created.
+/datum/reagent/proc/initialize_data(var/newdata) // Called when the reagent is created.
 	return
 
-/datum/reagent/proc/mix_data(var/newdata) // You have a reagent with data, and new reagent with its own data get added, how do you deal with that?
+/datum/reagent/proc/mix_data(var/newdata, var/newamount) // You have a reagent with data, and new reagent with its own data get added, how do you deal with that?
 	return
 
-/datum/reagent/proc/get_data() // Just in case you have a reagent that handles data differently. See paint.
+/datum/reagent/proc/get_data() // Just in case you have a reagent that handles data differently.
 	return data
 
 /* DEPRECATED - TODO: REMOVE EVERYWHERE */
@@ -666,6 +666,13 @@
 	description = "A chemical element with a pungent smell."
 	reagent_state = SOLID
 	color = "#BF8C00"
+
+/datum/reagent/tungsten
+	name = "Tungsten"
+	id = "tungsten"
+	description = "A chemical element, and a strong oxidising agent."
+	reagent_state = SOLID
+	color = "#DCDCDC"
 
 /* General medicine */
 
@@ -1831,12 +1838,6 @@
 	description = "Multi-colored little bits of sugar, commonly found on donuts. Loved by cops."
 	nutriment_factor = 1
 	color = "#FF00FF"
-/*if(istype(M, /mob/living/carbon/human) && M.job in list("Security Officer", "Head of Security", "Detective", "Warden")) <- they used to heal security. Leaving the old code there.
-	if(!M) M = holder.my_atom
-	M.heal_organ_damage(1,1)
-	M.nutrition += nutriment_factor
-	..()
-	return*/
 
 /datum/reagent/nutriment/mint
 	name = "Mint"
@@ -1844,12 +1845,6 @@
 	description = "Also known as Mentha."
 	reagent_state = LIQUID
 	color = "#CF3600"
-/*			on_mob_life(var/mob/living/M as mob) <- and this used to gib fat people because Monty Python
-				if(!M) M = holder.my_atom
-				if (FAT in M.mutations)
-					M.gib()
-				..()
-				return*/
 
 /datum/reagent/lipozine // The anti-nutriment.
 	name = "Lipozine"
@@ -3722,6 +3717,40 @@
 	if(location == CHEM_TOUCH)
 		M.color = color
 
+/datum/reagent/paint/get_data()
+	return color
+
+/datum/reagent/paint/initialize_data(var/newdata)
+	color = newdata
+	return
+
+/datum/reagent/paint/mix_data(var/newdata, var/newamount)
+	var/list/colors = list(0, 0, 0, 0)
+	var/tot_w = 0
+
+	var/hex1 = uppertext(color)
+	var/hex2 = uppertext(newdata)
+	if(length(hex1) == 7)
+		hex1 += "FF"
+	if(length(hex2) == 7)
+		hex2 += "FF"
+	if(length(hex1) != 9 || length(hex2) != 9)
+		return
+	colors[1] += hex2num(copytext(hex1, 2, 4)) * volume
+	colors[2] += hex2num(copytext(hex1, 4, 6)) * volume
+	colors[3] += hex2num(copytext(hex1, 6, 8)) * volume
+	colors[4] += hex2num(copytext(hex1, 8, 10)) * volume
+	tot_w += volume
+	colors[1] += hex2num(copytext(hex2, 2, 4)) * newamount
+	colors[2] += hex2num(copytext(hex2, 4, 6)) * newamount
+	colors[3] += hex2num(copytext(hex2, 6, 8)) * newamount
+	colors[4] += hex2num(copytext(hex2, 8, 10)) * newamount
+	tot_w += newamount
+
+	color = rgb(colors[1] / tot_w, colors[2] / tot_w, colors[3] / tot_w, colors[4] / tot_w)
+	world << "We get paint of [color] color after mixing"
+	return
+
 /* Things that didn't fit anywhere else */
 
 /datum/reagent/adminordrazine //An OP chemical for admins
@@ -3980,8 +4009,54 @@
 	reagent_state = LIQUID
 	color = "#808080"
 
+/datum/reagent/coolant
+	name = "Coolant"
+	id = "coolant"
+	description = "Industrial cooling substance."
+	reagent_state = LIQUID
+	color = "#C8A5DC"
+
 /datum/reagent/ultraglue
 	name = "Ultra Glue"
 	id = "glue"
 	description = "An extremely powerful bonding agent."
 	color = "#FFFFCC"
+
+/* Removed xenoarcheology stuff
+
+/datum/reagent/lithiumsodiumtungstate
+	name = "Lithium Sodium Tungstate"
+	id = "lithiumsodiumtungstate"
+	description = "A reducing agent for geological compounds."
+	reagent_state = LIQUID
+	color = "#C0C0C0"  // rgb: 192, 192, 192, darker silver
+
+/datum/reagent/ground_rock
+	name = "Ground Rock"
+	id = "ground_rock"
+	description = "A fine dust made of ground up rock."
+	reagent_state = SOLID
+	color = "#A0522D"   //rgb: 160, 82, 45, brown
+
+/datum/reagent/density_separated_sample
+	name = "Density separated sample"
+	id = "density_separated_sample"
+	description = "A watery paste used in chemical analysis, there are some chunks floating in it."
+	reagent_state = LIQUID
+	color = "#DEB887"   //rgb: 222, 184, 135, light brown
+
+/datum/reagent/analysis_sample
+	name = "Analysis liquid"
+	id = "analysis_sample"
+	description = "A watery paste used in chemical analysis."
+	reagent_state = LIQUID
+	color = "#F5FFFA"   //rgb: 245, 255, 250, almost white
+
+/datum/reagent/chemical_waste
+	name = "Chemical Waste"
+	id = "chemical_waste"
+	description = "A viscous, toxic liquid left over from many chemical processes."
+	reagent_state = LIQUID
+	color = "#ADFF2F"   //rgb: 173, 255, 47, toxic green
+
+*/

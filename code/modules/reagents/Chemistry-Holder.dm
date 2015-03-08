@@ -3,6 +3,7 @@
 	var/volume = 0
 	var/max_volume = 100
 	var/atom/my_atom = null
+	var/reacting = 0 // Reacting right now
 
 /datum/reagents/New(var/max = 100)
 	max_volume = max
@@ -13,6 +14,8 @@
 		chemical_reagents_list = list()
 		for(var/path in paths)
 			var/datum/reagent/D = new path()
+			if(!D.name)
+				continue
 			chemical_reagents_list[D.id] = D
 
 	if(!chemical_reactions_list)
@@ -91,116 +94,64 @@
 	if(my_atom)
 		my_atom.reagents = null
 
-/datum/reagents/proc/handle_reactions() // TODO
+/datum/reagents/proc/handle_reactions()
 	if(!my_atom) // No reactions in temporary holders
 		return
-	if(my_atom.flags & NOREACT) return //Yup, no reactions here. No siree.
+	if(my_atom.flags & NOREACT) // No reactions here
+		return
+	if(reacting) // This proc is already active, just let it finish
+		return
 
+	reacting = 1
+	var/list/happening = list()
 	var/reaction_occured = 0
 	do
 		reaction_occured = 0
-		for(var/datum/reagent/R in reagent_list) // Usually a small list
-			for(var/reaction in chemical_reactions_list[R.id]) // Was a big list but now it should be smaller since we filtered it with our reagent id
+		for(var/datum/reagent/R in reagent_list)
+			for(var/datum/chemical_reaction/C in chemical_reactions_list[R.id])
+				var/reagents_suitable = 1
+				for(var/B in C.required_reagents)
+					if(!has_reagent(B, C.required_reagents[B]))
+						reagents_suitable = 0
+				for(var/B in C.catalysts)
+					if(!has_reagent(B, C.catalysts[B]))
+						reagents_suitable = 0
+				for(var/B in C.inhibitors)
+					if(has_reagent(B, C.inhibitors[B]))
+						reagents_suitable = 0
 
-				if(!reaction)
+				if(!reagents_suitable || !C.can_happen(src))
+					if(C.type in happening)
+						happening -= C.type
 					continue
 
-				var/datum/chemical_reaction/C = reaction
-
-				//check if this recipe needs to be heated to mix
-				if(C.requires_heating)
-					if(istype(my_atom.loc, /obj/machinery/bunsen_burner))
-						if(!my_atom.loc:heated)
-							continue
-					else
-						continue
-
-				var/total_required_reagents = C.required_reagents.len
-				var/total_matching_reagents = 0
-				var/total_required_catalysts = C.required_catalysts.len
-				var/total_matching_catalysts= 0
-				var/matching_container = 0
-				var/matching_other = 0
-				var/list/multipliers = new/list()
-
+				var/use = C.speed
+				if(C.instant)
+					var/B = C.required_reagents[1]
+					use = get_reagent_amount(B) / C.required_reagents[B]
 				for(var/B in C.required_reagents)
-					if(!has_reagent(B, C.required_reagents[B]))	break
-					total_matching_reagents++
-					multipliers += round(get_reagent_amount(B) / C.required_reagents[B])
-				for(var/B in C.required_catalysts)
-					if(!has_reagent(B, C.required_catalysts[B]))	break
-					total_matching_catalysts++
+					use = min(use, get_reagent_amount(B) / C.required_reagents[B])
 
-				if(!C.required_container)
-					matching_container = 1
+				var/newdata = C.send_data(src) // We need to get it before reagents are removed. See blood paint.
+				for(var/B in C.required_reagents)
+					remove_reagent(B, use * C.required_reagents[B], safety = 1)
 
-				else
-					if(my_atom.type == C.required_container)
-						matching_container = 1
+				if(C.result)
+					add_reagent(C.result, C.result_amount * use, newdata)
 
-				if(!C.required_other)
-					matching_other = 1
-
-				else
-					/*if(istype(my_atom, /obj/item/slime_core))
-						var/obj/item/slime_core/M = my_atom
-
-						if(M.POWERFLAG == C.required_other && M.Uses > 0) // added a limit to slime cores -- Muskets requested this
-							matching_other = 1*/
-					if(istype(my_atom, /obj/item/slime_extract))
-						var/obj/item/slime_extract/M = my_atom
-
-						if(M.Uses > 0) // added a limit to slime cores -- Muskets requested this
-							matching_other = 1
-
-
-
-
-				if(total_matching_reagents == total_required_reagents && total_matching_catalysts == total_required_catalysts && matching_container && matching_other)
-					var/multiplier = min(multipliers)
-					var/preserved_data = null
-					for(var/B in C.required_reagents)
-						if(!preserved_data)
-							preserved_data = get_data(B)
-						remove_reagent(B, (multiplier * C.required_reagents[B]), safety = 1)
-
-					var/created_volume = C.result_amount*multiplier
-					if(C.result)
-						feedback_add_details("chemical_reaction","[C.result]|[C.result_amount*multiplier]")
-						multiplier = max(multiplier, 1) //this shouldnt happen ...
-						if(!isnull(C.resultcolor)) //paints
-							add_reagent(C.result, C.result_amount*multiplier, C.resultcolor)
-						else
-							add_reagent(C.result, C.result_amount*multiplier)
-							//set_data(C.result, preserved_data)
-
-						//add secondary products
-						for(var/S in C.secondary_results)
-							add_reagent(S, C.result_amount * C.secondary_results[S] * multiplier)
-
+				if(!ismob(my_atom) && C.mix_message && !(C.type in happening))
+					happening += C.type
 					var/list/seen = viewers(4, get_turf(my_atom))
-					if(!ismob(my_atom))
-						for(var/mob/M in seen)
-							M << "\blue \icon[my_atom] The solution begins to bubble."
-						playsound(get_turf(my_atom), 'sound/effects/bubbles.ogg', 80, 1)
+					for(var/mob/M in seen)
+						M << "<span class='notice'>\icon[my_atom] [C.mix_message]</span>"
+					playsound(get_turf(my_atom), 'sound/effects/bubbles.ogg', 80, 1)
 
-					if(istype(my_atom, /obj/item/slime_extract))
-						var/obj/item/slime_extract/ME2 = my_atom
-						ME2.Uses--
-						if(ME2.Uses <= 0) // give the notification that the slime core is dead
-							for(var/mob/M in seen)
-								M << "\blue \icon[my_atom] The [my_atom]'s power is consumed in the reaction."
-								ME2.name = "used slime extract"
-								ME2.desc = "This extract has been used up."
-
-
-					C.on_reaction(src, created_volume)
-					reaction_occured = 1
-					break
-
+				C.on_reaction(src, C.result_amount * use)
+				reaction_occured = 1
+		sleep(10)
 	while(reaction_occured)
 	update_volume()
-	return 0
+	reacting = 0
 
 /* Holder-to-chemical */
 
@@ -215,7 +166,7 @@
 			current.volume += amount
 			update_volume()
 			if(!isnull(data)) // For all we know, it could be zero or empty string and meaningful
-				current.mix_data(data)
+				current.mix_data(data, amount)
 			if(!safety)
 				handle_reactions()
 			if(my_atom)
@@ -227,9 +178,7 @@
 		reagent_list += R
 		R.holder = src
 		R.volume = amount
-		R.initialize_data()
-		if(!isnull(data))
-			R.mix_data(data)
+		R.initialize_data(data)
 		if(!safety)
 			handle_reactions()
 		if(my_atom)
