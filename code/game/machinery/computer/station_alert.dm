@@ -38,7 +38,7 @@
 	if(stat & (BROKEN|NOPOWER))
 		return
 
-	var/list/alarms = alarm_monitor.active_alarms()
+	var/list/alarms = alarm_monitor.major_alarms()
 	if(alarms.len)
 		icon_state = "alert:2"
 	else
