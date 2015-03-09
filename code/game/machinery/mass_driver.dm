@@ -16,27 +16,30 @@
 	var/drive_range = 50 //this is mostly irrelevant since current mass drivers throw into space, but you could make a lower-range mass driver for interstation transport or something I guess.
 
 
-	proc/drive(amount)
-		if(stat & (BROKEN|NOPOWER))
-			return
-		use_power(500)
-		var/O_limit
-		var/atom/target = get_edge_target_turf(src, dir)
-		for(var/atom/movable/O in loc)
-			if(!O.anchored||istype(O, /obj/mecha))//Mechs need their launch platforms.
-				O_limit++
-				if(O_limit >= 20)
-					for(var/mob/M in hearers(src, null))
-						M << "\blue The mass driver lets out a screech, it mustn't be able to handle any more items."
-					break
-				use_power(500)
-				spawn( 0 )
-					O.throw_at(target, drive_range * power, power)
-		flick("mass_driver1", src)
+/obj/machinery/mass_driver/proc/drive(amount)
+	if(stat & (BROKEN|NOPOWER))
 		return
+	use_power(500)
+	var/O_limit
+	var/atom/target = get_edge_target_turf(src, dir)
+	for(var/atom/movable/O in loc)
+		if(!O.anchored||istype(O, /obj/mecha))//Mechs need their launch platforms.
+			O_limit++
+			if(O_limit >= 20)
+				for(var/mob/M in hearers(src, null))
+					M << "\blue The mass driver lets out a screech, it mustn't be able to handle any more items."
+				break
+			use_power(500)
+			spawn( 0 )
+				O.throw_at(target, drive_range * power, power)
+	flick("mass_driver1", src)
+	return
 
-	emp_act(severity)
-		if(stat & (BROKEN|NOPOWER))
-			return
-		drive()
-		..(severity)
+/obj/machinery/mass_driver/emp_act(severity)
+	if(stat & (BROKEN|NOPOWER))
+		return
+	drive()
+	..(severity)
+
+/obj/machinery/mass_driver/process()
+	return
