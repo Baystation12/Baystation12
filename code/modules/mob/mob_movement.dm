@@ -453,23 +453,18 @@
 		if(istype(turf,/turf/space))
 			continue
 
-		if(istype(src,/mob/living/carbon/human/))  // Only humans can wear magboots, so we give them a chance to.
-			var/mob/living/carbon/human/H = src
-			if((istype(turf,/turf/simulated/floor)) && (src.lastarea.has_gravity == 0) && !(istype(H.shoes, /obj/item/clothing/shoes/magboots) && (H.shoes.flags & NOSLIP)))
-				continue
-
-
-		else
-			if((istype(turf,/turf/simulated/floor)) && (src.lastarea.has_gravity == 0)) // No one else gets a chance.
-				continue
-
-
-
-		/*
-		if(istype(turf,/turf/simulated/floor) && (src.flags & NOGRAV))
-			continue
-		*/
-
+		if(istype(turf,/turf/simulated/floor)) // Floors don't count if they don't have gravity
+			var/area/A = turf.loc
+			if(istype(A) && A.has_gravity == 0)
+				var/can_walk = 0
+				
+				if(ishuman(src))  // Only humans can wear magboots, so we give them a chance to.
+					var/mob/living/carbon/human/H = src
+					if(istype(H.shoes, /obj/item/clothing/shoes/magboots) && (H.shoes.flags & NOSLIP))
+						can_walk = 1
+				
+				if(!can_walk)
+					continue
 
 		dense_object++
 		break
