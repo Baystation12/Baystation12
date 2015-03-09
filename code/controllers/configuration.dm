@@ -184,6 +184,8 @@
 
 	var/starlight = 0	// Whether space turfs have ambient light or not
 
+	var/list/ert_species = list("Human")
+
 /datum/configuration/New()
 	var/list/L = typesof(/datum/game_mode) - /datum/game_mode
 	for (var/T in L)
@@ -609,6 +611,10 @@
 					value = text2num(value)
 					config.starlight = value >= 0 ? value : 0
 
+				if("ert_species")
+					config.ert_species = text2list(value, ";")
+					if(!config.ert_species.len)
+						config.ert_species += "Human"
 				else
 					log_misc("Unknown setting in configuration: '[name]'")
 

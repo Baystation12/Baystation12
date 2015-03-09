@@ -8,6 +8,8 @@
 	embed = 1
 	sharp = 1
 	var/mob_passthrough_check = 0
+	
+	muzzle_type = /obj/effect/projectile/bullet/muzzle
 
 /obj/item/projectile/bullet/on_hit(var/atom/target, var/blocked = 0)
 	if (..(target, blocked))
