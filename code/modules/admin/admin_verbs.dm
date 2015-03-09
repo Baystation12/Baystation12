@@ -319,8 +319,8 @@ var/list/admin_verbs_mod = list(
 	/client/proc/freeze,
 	/client/proc/freezemecha,
 	/client/proc/air_report,
-	/datum/admins/proc/show_player_panel
-)
+	/datum/admins/proc/show_player_panel,
+	/client/proc/toggleattacklogs
 
 var/list/admin_verbs_mod2 = list(
 	/client/proc/toggle_view_range,
