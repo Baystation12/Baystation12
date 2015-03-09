@@ -34,6 +34,12 @@
 	else
 		return null
 
+//Currently used only for cryo cells, because they are also pipes and so overriding their return_air() would break their pipe-behaviour.
+//If cryo cells are ever rewritten so that the part that contains the human is separate from the pipe part --
+//such as rewriting them so that they are a machine that contains a pipe segment (or a pipe that contains a machine that contains the human?) -- then this can be removed.
+/atom/proc/return_air_for_internal_lifeform()
+	return return_air()
+
 /atom/proc/check_eye(user as mob)
 	if (istype(user, /mob/living/silicon/ai)) // WHYYYY
 		return 1
