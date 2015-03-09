@@ -1,5 +1,7 @@
 # Unbound Travels
 
+![travis](https://travis-ci.org/jamiedigweed/NSS-Phoenix.svg)
+
 [Website](http://www.unbound-travels.com/) - [Code](https://github.com/jamiedigweed/NSS-Phoenix)
 
 ---
