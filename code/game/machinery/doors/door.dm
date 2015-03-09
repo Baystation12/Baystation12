@@ -126,9 +126,6 @@
 	if(user.last_airflow > world.time - vsc.airflow_delay) //Fakkit
 		return
 	src.add_fingerprint(user)
-	if(!src.requiresID())
-		user = null
-
 	if(density)
 		if(allowed(user))	open()
 		else				flick("door_deny", src)
@@ -193,10 +190,6 @@
 		return
 	if(src.operating > 0 || isrobot(user))	return //borgs can't attack doors open because it conflicts with their AI-like interaction with them.
 	src.add_fingerprint(user)
-	if(!Adjacent(user))
-		user = null
-	if(!src.requiresID())
-		user = null
 
 	if(istype(I, /obj/item/stack/sheet/metal))
 		if(stat & BROKEN)
@@ -422,6 +415,11 @@
 
 /obj/machinery/door/proc/requiresID()
 	return 1
+
+/obj/machinery/door/allowed(mob/M)
+	if(!requiresID())
+		return ..(null) //don't care who they are or what they have, act as if they're NOTHING
+	return ..(M)
 
 /obj/machinery/door/update_nearby_tiles(need_rebuild)
 	if(!air_master)
