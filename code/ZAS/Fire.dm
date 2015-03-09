@@ -239,12 +239,17 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 		//world << "gas_reaction_progress = [gas_reaction_progress]"
 		
 		var/total_reaction_progress = gas_reaction_progress + liquid_reaction_progress
-		if(total_reaction_progress <= 0)
-			return 0
-		
 		var/used_fuel = min(total_reaction_progress, reaction_limit)
 		var/used_oxidizers = used_fuel*(FIRE_REACTION_OXIDIZER_AMOUNT/FIRE_REACTION_FUEL_AMOUNT)
 		//world << "used_fuel = [used_fuel]; used_oxidizers = [used_oxidizers]; reaction_limit=[reaction_limit]"
+		
+		//if the reaction is progressing too slow then it isn't self-sustaining anymore and burns out
+		if(zone && zone.fuel_objs.len)
+			if(used_fuel <= FIRE_LIQUD_MIN_BURNRATE)
+				return 0
+		else if(used_fuel <= FIRE_GAS_MIN_BURNRATE*group_multiplier) //purely gas fires have more stringent criteria
+			return 0
+
 		
 		//*** Remove fuel and oxidizer, add carbon dioxide and heat
 		
