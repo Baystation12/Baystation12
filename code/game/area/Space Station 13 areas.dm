@@ -1027,6 +1027,10 @@ var/list/ghostteleportlocs = list()
 	name = "Bar basement"
 	icon_state = "bar"
 
+/area/crew_quarters/stardeck
+	name = "Stardeck and Hallway"
+	icon_state = "bar"
+
 /area/crew_quarters/theatre
 	name = "Theatre"
 	icon_state = "Theatre"
@@ -1434,6 +1438,14 @@ var/list/ghostteleportlocs = list()
 
 /area/security/perma
 	name = "PermaBrig"
+	icon_state = "brig"
+
+/area/security/permaobservation
+	name = "Perma Brig Observation"
+	icon_state = "brig"
+
+/area/security/permaisolation
+	name = "Perma Brig Isolation"
 	icon_state = "brig"
 
 /area/security/prison
