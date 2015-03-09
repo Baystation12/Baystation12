@@ -40,18 +40,17 @@
 
 /client/var/description_holders[0]
 
-/client/proc/update_description_holders(atom/A)
+/client/proc/update_description_holders(atom/A, update_antag_info=0)
 	description_holders["info"] = A.get_description_info()
 	description_holders["fluff"] = A.get_description_fluff()
-	if(mob.mind && mob.mind.special_role || isobserver(src)) //ghosts don't have minds.
-		description_holders["antag"] = A.get_description_antag()
+	description_holders["antag"] = (update_antag_info)? A.get_description_antag() : ""
 
 	description_holders["name"] = "[A.name]"
 	description_holders["icon"] = "\icon[A]"
 	description_holders["desc"] = A.desc
 
 /client/Stat()
-	..()
+	. = ..()
 	if(statpanel("Examine"))
 		stat(null,"[description_holders["icon"]]    <font size='5'>[description_holders["name"]]</font>") //The name, written in big letters.
 		stat(null,"[description_holders["desc"]]") //the default examine text.
@@ -61,3 +60,12 @@
 			stat(null,"<font color='#298A08'><b>[description_holders["fluff"]]</b></font>") //Yellow, fluff-related text.
 		if(description_holders["antag"])
 			stat(null,"<font color='#8A0808'><b>[description_holders["antag"]]</b></font>") //Red, malicious antag-related text
+
+//override examinate verb to update description holders when things are examined
+/mob/examinate(atom/A as mob|obj|turf in view())
+	if(..())
+		return 1
+
+	var/is_antag = ((mind && mind.special_role) || isobserver(src)) //ghosts don't have minds
+	if(client)
+		client.update_description_holders(A, is_antag)
