@@ -331,7 +331,13 @@
 	put_mob(usr)
 	return
 
-
+/obj/machinery/atmospherics/unary/cryo_cell/return_air_for_internal_lifeform()
+	//assume that the cryo cell has some kind of breath mask or something that
+	//draws from the cryo tube's environment, instead of the cold internal air.
+	if(loc)
+		return loc.return_air()
+	else
+		return null
 
 /datum/data/function/proc/reset()
 	return

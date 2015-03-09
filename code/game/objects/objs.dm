@@ -62,16 +62,6 @@
 	else
 		return null
 
-/obj/proc/handle_internal_lifeform(mob/lifeform_inside_me, breath_request)
-	//Return: (NONSTANDARD)
-	//		null if object handles breathing logic for lifeform
-	//		datum/air_group to tell lifeform to process using that breath return
-	//DEFAULT: Take air from turf to give to have mob process
-	if(breath_request>0)
-		return remove_air(breath_request)
-	else
-		return null
-
 /atom/movable/proc/initialize()
 	return
 

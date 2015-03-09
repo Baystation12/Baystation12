@@ -69,11 +69,6 @@
 		if(air_master.current_cycle%4==2 || failed_last_breath || (health < config.health_threshold_crit)) 	//First, resolve location and get a breath
 			breathe() 				//Only try to take a breath every 4 ticks, unless suffocating
 
-		else //Still give containing object the chance to interact
-			if(istype(loc, /obj/))
-				var/obj/location_as_object = loc
-				location_as_object.handle_internal_lifeform(src, 0)
-
 		//Updates the number of stored chemicals for powers
 		handle_changeling()
 
@@ -328,95 +323,26 @@
 					var/datum/organ/external/O = pick(organs)
 					if(istype(O)) O.add_autopsy_data("Radiation Poisoning", damage)
 
-	proc/breathe()
-		if(istype(loc, /obj/machinery/atmospherics/unary/cryo_cell)) return
-		if(species && (species.flags & NO_BREATHE || species.flags & IS_SYNTHETIC)) return
+	/** breathing **/
+	
+	handle_chemical_smoke(var/datum/gas_mixture/environment)
+		if(wear_mask && (wear_mask.flags & BLOCK_GAS_SMOKE_EFFECT))
+			return
+		if(glasses && (glasses.flags & BLOCK_GAS_SMOKE_EFFECT))
+			return
+		if(head && (head.flags & BLOCK_GAS_SMOKE_EFFECT))
+			return
+		..()
 
-		var/datum/gas_mixture/environment = loc.return_air()
-		var/datum/gas_mixture/breath
-
-		// HACK NEED CHANGING LATER
-		if(health < config.health_threshold_crit && !reagents.has_reagent("inaprovaline"))
-			losebreath++
-
-		if(losebreath>0) //Suffocating so do not take a breath
-			losebreath--
-			if (prob(10)) //Gasp per 10 ticks? Sounds about right.
-				spawn emote("gasp")
-			if(istype(loc, /obj/))
-				var/obj/location_as_object = loc
-				location_as_object.handle_internal_lifeform(src, 0)
-		else
-			//First, check for air from internal atmosphere (using an air tank and mask generally)
-			breath = get_breath_from_internal(BREATH_VOLUME) // Super hacky -- TLE
-			//breath = get_breath_from_internal(0.5) // Manually setting to old BREATH_VOLUME amount -- TLE
-
-			//No breath from internal atmosphere so get breath from location
-			if(!breath)
-				if(isobj(loc))
-					var/obj/location_as_object = loc
-					breath = location_as_object.handle_internal_lifeform(src, BREATH_MOLES)
-				else if(isturf(loc))
-					var/breath_moles = 0
-					/*if(environment.return_pressure() > ONE_ATMOSPHERE)
-						// Loads of air around (pressure effect will be handled elsewhere), so lets just take a enough to fill our lungs at normal atmos pressure (using n = Pv/RT)
-						breath_moles = (ONE_ATMOSPHERE*BREATH_VOLUME/R_IDEAL_GAS_EQUATION*environment.temperature)
-					else*/
-						// Not enough air around, take a percentage of what's there to model this properly
-					breath_moles = environment.total_moles*BREATH_PERCENTAGE
-
-					breath = loc.remove_air(breath_moles)
-
-					if(istype(wear_mask, /obj/item/clothing/mask) && breath)
-						var/obj/item/clothing/mask/M = wear_mask
-						var/datum/gas_mixture/filtered = M.filter_air(breath)
-						loc.assume_air(filtered)
-
-					if(!is_lung_ruptured())
-						if(!breath || breath.total_moles < BREATH_MOLES / 5 || breath.total_moles > BREATH_MOLES * 5)
-							if(prob(5))
-								rupture_lung()
-
-					// Handle filtering
-					var/block = 0
-					if(wear_mask)
-						if(wear_mask.flags & BLOCK_GAS_SMOKE_EFFECT)
-							block = 1
-					if(glasses)
-						if(glasses.flags & BLOCK_GAS_SMOKE_EFFECT)
-							block = 1
-					if(head)
-						if(head.flags & BLOCK_GAS_SMOKE_EFFECT)
-							block = 1
-
-					if(!block)
-
-						for(var/obj/effect/effect/smoke/chem/smoke in view(1, src))
-							if(smoke.reagents.total_volume)
-								smoke.reagents.reaction(src, INGEST)
-								spawn(5)
-									if(smoke)
-										smoke.reagents.copy_to(src, 10) // I dunno, maybe the reagents enter the blood stream through the lungs?
-								break // If they breathe in the nasty stuff once, no need to continue checking
-
-			else //Still give containing object the chance to interact
-				if(istype(loc, /obj/))
-					var/obj/location_as_object = loc
-					location_as_object.handle_internal_lifeform(src, 0)
-
-		handle_breath(breath)
-
-		if(breath)
-			loc.assume_air(breath)
-
-			//spread some viruses while we are at it
-			if (virus2.len > 0 && prob(10))
-//				log_debug("[src] : Exhaling some viruses")
-				for(var/mob/living/carbon/M in view(1,src))
-					src.spread_disease_to(M)
+	handle_post_breath(datum/gas_mixture/breath)
+		..()
+		//spread some viruses while we are at it
+		if(breath && virus2.len > 0 && prob(10))
+			for(var/mob/living/carbon/M in view(1,src))
+				src.spread_disease_to(M)
 
 
-	proc/get_breath_from_internal(volume_needed)
+	get_breath_from_internal(volume_needed=BREATH_VOLUME)
 		if(internal)
 
 			var/obj/item/weapon/tank/rig_supply
@@ -435,7 +361,7 @@
 		return null
 
 
-	proc/handle_breath(datum/gas_mixture/breath)
+	handle_breath(datum/gas_mixture/breath)
 
 		if(status_flags & GODMODE)
 			return
