@@ -148,7 +148,8 @@
 
 				C.on_reaction(src, C.result_amount * use)
 				reaction_occured = 1
-		sleep(10)
+		if(reaction_occured)
+			sleep(10)
 	while(reaction_occured)
 	update_volume()
 	reacting = 0
@@ -158,7 +159,6 @@
 /datum/reagents/proc/add_reagent(var/id, var/amount, var/data = null, var/safety = 0)
 	if(!isnum(amount))
 		return 0
-	update_volume()
 	amount = min(amount, get_free_space())
 
 	for(var/datum/reagent/current in reagent_list)
@@ -178,6 +178,7 @@
 		reagent_list += R
 		R.holder = src
 		R.volume = amount
+		update_volume()
 		R.initialize_data(data)
 		if(!safety)
 			handle_reactions()
@@ -268,9 +269,10 @@
 	if(!target || !istype(target))
 		return
 
-	amount = min(min(amount, volume), target.get_free_space() / multiplier)
+	amount = min(amount, volume, target.get_free_space() / multiplier)
 
 	if(!amount)
+		world << "Transfer end - no amount: [world.time]"
 		return
 
 	var/part = amount / volume
@@ -282,9 +284,7 @@
 			remove_reagent(current.id, amount_to_transfer, 1)
 
 	if(!copy)
-		update_volume()
 		handle_reactions()
-	target.update_volume()
 	target.handle_reactions()
 	return amount
 
@@ -328,8 +328,9 @@
 
 /datum/reagents/proc/trans_to(var/atom/target, var/amount = 1, var/multiplier = 1, var/copy = 0)
 	if(ismob(target))
-		warning("[my_atom] is trying to transfer reagents to [target], which is a mob, using trans_to()")
+		//warning("[my_atom] is trying to transfer reagents to [target], which is a mob, using trans_to()")
 		//return trans_to_mob(target, amount, multiplier, copy)
+		return splash_mob(target, amount)
 	if(isturf(target))
 		return trans_to_turf(target, amount, multiplier, copy)
 	if(isobj(target))

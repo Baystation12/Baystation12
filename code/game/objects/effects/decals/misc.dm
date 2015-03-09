@@ -12,9 +12,3 @@
 	density = 0
 	anchored = 1
 	layer = 50
-
-//Used by spraybottles.
-/obj/effect/decal/chempuff
-	name = "chemicals"
-	icon = 'icons/obj/chempuff.dmi'
-	pass_flags = PASSTABLE | PASSGRILLE

@@ -51,7 +51,6 @@
 	removed = min(removed, volume)
 	max_dose = max(volume, max_dose)
 	dose = min(dose + removed, max_dose)
-	world << "Reagent: [id], volume: [volume], dose: [dose], max_dose: [max_dose], location: [location], removed: [removed], metabolism: [metabolism]"
 	if(removed >= (metabolism * 0.1) || removed >= 0.1) // If there's too little chemical, don't affect the mob, just remove it
 		affect_mob(M, alien, removed, location)
 	remove_self(removed)
@@ -539,13 +538,10 @@
 
 /datum/reagent/acid/affect_mob(var/mob/living/carbon/M, var/alien, var/removed, var/location)
 	if(location == CHEM_INGEST)
-		M.take_organ_damage(0, removed)
+		M.take_organ_damage(0, removed * power)
 	if(location == CHEM_BLOOD)
-		M.take_organ_damage(0, removed * 2)
+		M.take_organ_damage(0, removed * power * 2)
 	if(location == CHEM_TOUCH) // This is the most interesting
-		if(volume < meltdose) // Not enough to melt anything
-			M.take_organ_damage(removed)
-			return
 		if(ishuman(M))
 			var/mob/living/carbon/human/H = M
 			if(H.head)
@@ -553,14 +549,13 @@
 					H << "<span class='danger'>Your [H.head] protects you from the acid.</span>"
 					remove_self(volume)
 					return
-				else
+				else if(removed > meltdose)
 					H << "<span class='danger'>Your [H.head] melts away!</span>"
 					del(H.head)
-					H.update_inv_head(0)
-					H.update_hair(0)
-					remove_self(meltdose)
-			if(volume <= 0)
-				world << "Yep, it's needed"
+					H.update_inv_head(1)
+					H.update_hair(1)
+					removed -= meltdose
+			if(removed <= 0)
 				return
 
 			if(H.wear_mask)
@@ -568,58 +563,58 @@
 					H << "<span class='danger'>Your [H.wear_mask] protects you from the acid.</span>"
 					remove_self(volume)
 					return
-				else
+				else if(removed > meltdose)
 					H << "<span class='danger'>Your [H.wear_mask] melts away!</span>"
 					del(H.wear_mask)
-					H.update_inv_wear_mask(0)
-					H.update_hair(0)
-					remove_self(meltdose)
-			if(volume <= 0)
-				world << "Yep, it's needed"
+					H.update_inv_wear_mask(1)
+					H.update_hair(1)
+					removed -= meltdose
+			if(removed <= 0)
 				return
 
 			if(H.glasses)
-				if(H.glasses.unacidable && dose == removed)
+				if(H.glasses.unacidable)
 					H << "<span class='danger'>Your [H.glasses] partially protect you from the acid!</span>"
-					remove_self(meltdose / 2)
-				else if(!H.glasses.unacidable)
+					removed /= 2
+				else if(removed > meltdose)
 					H << "<span class='danger'>Your [H.glasses] melt away!</span>"
 					del(H.glasses)
-					H.update_inv_glasses(0)
-					remove_self(meltdose / 2)
-			if(volume <= 0)
-				world << "Yep, it's needed"
+					H.update_inv_glasses(1)
+					removed -= meltdose / 2
+			if(removed <= 0)
 				return
 
 		if(ismonkey(M))
 			var/mob/living/carbon/monkey/MK = M
 			if(MK.wear_mask)
-				if(MK.wear_mask.unacidable && dose == removed)
-					MK << "<span class='danger'>Your [MK.wear_mask] partially protects you from the acid!</span>"
-					remove_self(meltdose / 2)
+				if(MK.wear_mask.unacidable)
+					MK << "<span class='danger'>Your [MK.wear_mask] protects you from the acid!</span>"
+					remove_self(volume)
 					return
 				else
 					MK << "<span class='danger'>Your [MK.wear_mask] melts away!</span>"
 					del(MK.wear_mask)
-					MK.update_inv_wear_mask(0)
-					remove_self(meltdose)
-			if(volume <= 0)
-				world << "Yep, it's needed"
+					MK.update_inv_wear_mask(1)
+					removed -= meltdose
+			if(removed <= 0)
 				return
 
-		if(!M.unacidable)
+		if(volume < meltdose) // Not enough to melt anything
+			M.take_organ_damage(removed * power * 0.2) 
+			return
+		if(!M.unacidable && removed > 0)
 			if(istype(M, /mob/living/carbon/human) && volume >= meltdose)
 				var/mob/living/carbon/human/H = M
 				var/datum/organ/external/affecting = H.get_organ("head")
 				if(affecting)
-					if(affecting.take_damage(removed * power * 2, removed * power))
+					if(affecting.take_damage(0, removed * power * 0.1))
 						H.UpdateDamageIcon()
-					if(prob(100 * removed / meltdose)) //Applies disfigurement
+					if(prob(100 * removed / meltdose)) // Applies disfigurement
 						if (!(H.species && (H.species.flags & NO_PAIN)))
 							H.emote("scream")
 						H.status_flags |= DISFIGURED
 			else
-				M.take_organ_damage(removed * power * 2, removed * power)
+				M.take_organ_damage(0, removed * power * 0.1) // Balance. The damage is instant, so it's weaker. 10 units -> 5 damage, double for pacid. 120 units beaker could deal 60, but a) it's burn, which is not as dangerous, b) it's a one-use weapon, c) missing with it will splash it over the ground and d) clothes give some protection, so not everything will hit
 
 /datum/reagent/acid/touch_obj(var/obj/O)
 	if(O.unacidable)
@@ -1406,6 +1401,8 @@
 	color = "#801E28"
 
 /datum/reagent/slimejelly/affect_mob(var/mob/living/carbon/M, var/alien, var/removed, var/location)
+	if(location == CHEM_TOUCH || alien == IS_DIONA)
+		return
 	if(prob(10))
 		M << "<span class='danger'>Your insides are burning!</span>"
 		M.adjustToxLoss(rand(100, 300) * removed)
@@ -1423,7 +1420,7 @@
 	overdose_ingest = REAGENTS_OVERDOSE * 2
 
 /datum/reagent/soporific/affect_mob(var/mob/living/carbon/M, var/alien, var/removed, var/location)
-	if(location != CHEM_BLOOD || alien == IS_DIONA)
+	if(location == CHEM_TOUCH || alien == IS_DIONA)
 		return
 	if(dose < 1)
 		if(dose == metabolism * 2 || prob(5))
@@ -1449,7 +1446,7 @@
 	overdose_ingest = REAGENTS_OVERDOSE
 
 /datum/reagent/chloralhydrate/affect_mob(var/mob/living/carbon/M, var/alien, var/removed, var/location)
-	if(location != CHEM_BLOOD || alien == IS_DIONA)
+	if(location == CHEM_TOUCH || alien == IS_DIONA)
 		return
 	if(dose == metabolism)
 		M.confused += 2
@@ -3748,7 +3745,6 @@
 	tot_w += newamount
 
 	color = rgb(colors[1] / tot_w, colors[2] / tot_w, colors[3] / tot_w, colors[4] / tot_w)
-	world << "We get paint of [color] color after mixing"
 	return
 
 /* Things that didn't fit anywhere else */
