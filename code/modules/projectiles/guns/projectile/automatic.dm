@@ -128,6 +128,8 @@
 /obj/item/weapon/gun/projectile/automatic/z8/Fire(atom/target, mob/living/user, params, pointblank=0, reflex=0)
 	if(use_launcher)
 		launcher.Fire(target, user, params, pointblank, reflex)
+		if(!launcher.chambered)
+			use_launcher = 0 //switch back automatically
 	else
 		..()
 

@@ -22,7 +22,7 @@
 
 /obj/item/clothing/suit/armor/vest/security
 	name = "security armor"
-	desc = "An armored vest that protects against some damage. This one has NanoTrasen corporate badge."
+	desc = "An armored vest that protects against some damage. This one has a NanoTrasen corporate badge."
 	icon_state = "armorsec"
 	item_state = "armor"
 
@@ -139,53 +139,6 @@
 	src.item_state = "reactiveoff"
 	..()
 
-
-//All of the armor below is mostly unused
-
-
-/obj/item/clothing/suit/armor/centcomm
-	name = "Cent. Com. armor"
-	desc = "A suit that protects against some damage."
-	icon_state = "centcom"
-	item_state = "centcom"
-	w_class = 4//bulky item
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
-	allowed = list(/obj/item/weapon/gun/energy,/obj/item/weapon/melee/baton,/obj/item/weapon/handcuffs,/obj/item/weapon/tank/emergency_oxygen)
-	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
-	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
-	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
-	siemens_coefficient = 0
-
-/obj/item/clothing/suit/armor/heavy
-	name = "heavy armor"
-	desc = "A heavily armored suit that protects against moderate damage."
-	icon_state = "heavy"
-	item_state = "swat_suit"
-	w_class = 4//bulky item
-	gas_transfer_coefficient = 0.90
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
-	slowdown = 3
-	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
-	siemens_coefficient = 0
-
-/obj/item/clothing/suit/armor/tdome
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
-	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
-
-/obj/item/clothing/suit/armor/tdome/red
-	name = "Thunderdome suit (red)"
-	desc = "Reddish armor."
-	icon_state = "tdred"
-	item_state = "tdred"
-	siemens_coefficient = 1
-
-/obj/item/clothing/suit/armor/tdome/green
-	name = "Thunderdome suit (green)"
-	desc = "Pukish armor."
-	icon_state = "tdgreen"
-	item_state = "tdgreen"
-	siemens_coefficient = 1
-
 /obj/item/clothing/suit/armor/tactical
 	name = "tactical armor"
 	desc = "A suit of armor most often used by Special Weapons and Tactics squads. Includes padded vest with pockets along with shoulder and kneeguards."
@@ -228,6 +181,7 @@
 	desc = "A set of armor worn by members of the NanoTrasen Emergency Response Team."
 	icon_state = "ertarmor_cmd"
 	item_state = "armor"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 	armor = list(melee = 60, bullet = 60, laser = 60, energy = 40, bomb = 20, bio = 0, rad = 0)
 
 //Commander
@@ -342,11 +296,57 @@
 	icon_badge = "pcrcwebvest_badge"
 	icon_nobadge = "pcrcwebvest_nobadge"
 
+//Provides the protection of a merc voidsuit, but only covers the chest/groin, and also takes up a suit slot. In exchange it has no slowdown and provides storage.
 /obj/item/clothing/suit/storage/vest/heavy/merc
-	name = "comfortable heavy armor vest"
-	desc = "A heavy kevlar plate carrier in a fetching tan. Fits pretty well."
+	name = "heavy armor vest"
+	desc = "A high-quality heavy kevlar plate carrier in a fetching tan. The vest is surprisingly flexible, and possibly made of an advanced material."
 	icon_state = "mercwebvest"
 	item_state = "mercwebvest"
 	armor = list(melee = 60, bullet = 60, laser = 60, energy = 40, bomb = 40, bio = 0, rad = 0)
 	slowdown = 0
 
+//All of the armor below is mostly unused
+
+
+/obj/item/clothing/suit/armor/centcomm
+	name = "Cent. Com. armor"
+	desc = "A suit that protects against some damage."
+	icon_state = "centcom"
+	item_state = "centcom"
+	w_class = 4//bulky item
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
+	allowed = list(/obj/item/weapon/gun/energy,/obj/item/weapon/melee/baton,/obj/item/weapon/handcuffs,/obj/item/weapon/tank/emergency_oxygen)
+	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
+	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
+	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
+	siemens_coefficient = 0
+
+/obj/item/clothing/suit/armor/heavy
+	name = "heavy armor"
+	desc = "A heavily armored suit that protects against moderate damage."
+	icon_state = "heavy"
+	item_state = "swat_suit"
+	w_class = 4//bulky item
+	gas_transfer_coefficient = 0.90
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
+	slowdown = 3
+	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
+	siemens_coefficient = 0
+
+/obj/item/clothing/suit/armor/tdome
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
+	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
+
+/obj/item/clothing/suit/armor/tdome/red
+	name = "Thunderdome suit (red)"
+	desc = "Reddish armor."
+	icon_state = "tdred"
+	item_state = "tdred"
+	siemens_coefficient = 1
+
+/obj/item/clothing/suit/armor/tdome/green
+	name = "Thunderdome suit (green)"
+	desc = "Pukish armor."
+	icon_state = "tdgreen"
+	item_state = "tdgreen"
+	siemens_coefficient = 1
