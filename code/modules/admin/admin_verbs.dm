@@ -344,7 +344,8 @@ var/list/admin_verbs_mod3 = list(
 	/client/proc/make_sound,
 	/client/proc/editappear,
 	/proc/possess,
-	/proc/release
+	/proc/release,
+	/client/proc/secrets
 )
 
 var/list/admin_verbs_admin = list(
@@ -363,7 +364,6 @@ var/list/admin_verbs_admin = list(
 	/client/proc/admin_memo,
 	//client/proc/toggle_hear_deadchat,	/*toggles whether we hear deadchat*/
 	/client/proc/toggle_hear_radio,
-	/client/proc/secrets,
 	/datum/admins/proc/toggleooc,		/*toggles ooc on/off for everyone*/
 	/datum/admins/proc/togglelooc,
 	/datum/admins/proc/toggleoocdead,	/*toggles ooc on/off for everyone who is dead*/
