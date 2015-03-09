@@ -710,6 +710,17 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	access = access_security
 	group = "Security"
 
+/datum/supply_packs/flareguns
+	name = "Flare guns crate"
+	contains = list(/obj/item/weapon/gun/projectile/sec/flash,
+					/obj/item/ammo_magazine/c45m/flash,
+					/obj/item/weapon/gun/projectile/shotgun/doublebarrel/flare,
+					/obj/item/weapon/storage/box/flashshells)
+	cost = 25
+	containertype = /obj/structure/closet/crate/secure/weapon
+	containername = "Flare gun crate"
+	access = access_security
+	group = "Security"
 
 /datum/supply_packs/eweapons
 	name = "Experimental weapons crate"

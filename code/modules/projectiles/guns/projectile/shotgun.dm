@@ -65,6 +65,11 @@
 	origin_tech = "combat=3;materials=1"
 	ammo_type = /obj/item/ammo_casing/shotgun/beanbag
 
+/obj/item/weapon/gun/projectile/shotgun/doublebarrel/flare
+	name = "signal shotgun"
+	desc = "A double-barreled shotgun meant to fire signal flash shells."
+	ammo_type = /obj/item/ammo_casing/shotgun/flash
+
 //this is largely hacky and bad :(	-Pete
 /obj/item/weapon/gun/projectile/shotgun/doublebarrel/attackby(var/obj/item/A as obj, mob/user as mob)
 	if(istype(A, /obj/item/weapon/circular_saw) || istype(A, /obj/item/weapon/melee/energy) || istype(A, /obj/item/weapon/pickaxe/plasmacutter))
