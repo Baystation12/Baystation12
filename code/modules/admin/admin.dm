@@ -667,10 +667,10 @@ var/global/floorIsLava = 0
 			"}
 
 	if(check_rights(R_POSSESS,0))
-		dat += "<A href='?src=\ref[src];secretsadmin=togglebombcap'>Toggle bomb cap</A><BR>"
-		dat += "<A href='?src=\ref[src];secretsadmin=togglebomboff'>Toggle bombs off</A><BR>"
-
-	dat += "<BR>"
+		dat +="<BR><B>Bombs</B><BR>"
+		dat += "<A href='?src=\ref[src];secretsmod=togglebombcap'>Toggle bomb cap</A><BR>"
+		dat += "<A href='?src=\ref[src];secretsmod=togglebomboff'>Toggle bombs off</A><BR>"
+		dat += "<BR>"
 
 	if(check_rights(R_DEBUG,0))
 		dat += {"
