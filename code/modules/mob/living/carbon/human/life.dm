@@ -31,6 +31,7 @@
 	var/pressure_alert = 0
 	var/temperature_alert = 0
 	var/in_stasis = 0
+	var/heartbeat = 0
 
 /mob/living/carbon/human/Life()
 
@@ -101,6 +102,8 @@
 		handle_pain()
 
 		handle_medical_side_effects()
+
+		handle_heartbeat()
 
 	handle_stasis_bag()
 
@@ -1561,6 +1564,27 @@
 					temp = PULSE_NONE
 
 		return temp
+
+	proc/handle_heartbeat()
+		if(pulse == PULSE_NONE || !species.has_organ["heart"])
+			return
+
+		var/datum/organ/internal/heart/H = internal_organs_by_name["heart"]
+
+		if(!H || H.robotic >=2 )
+			return
+
+		if(pulse >= PULSE_2FAST || shock_stage >= 10 || istype(get_turf(src), /turf/space))
+			//PULSE_THREADY - maximum value for pulse, currently it 5.
+			//High pulse value corresponds to a fast rate of heartbeat.
+			//Divided by 2, otherwise it is too slow.
+			var/rate = (PULSE_THREADY - pulse)/2
+
+			if(heartbeat >= rate)
+				heartbeat = 0
+				src << sound('sound/effects/singlebeat.ogg',0,0,0,50)
+			else
+				heartbeat++
 
 /*
 	Called by life(), instead of having the individual hud items update icons each tick and check for status changes
