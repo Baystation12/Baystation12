@@ -232,6 +232,9 @@ var/list/slot_equipment_priority = list( \
 
 	face_atom(A)
 	A.examine(src)
+	
+	if(client)
+		client.update_description_holders(A)
 
 /mob/verb/pointed(atom/A as mob|obj|turf in view())
 	set name = "Point To"
