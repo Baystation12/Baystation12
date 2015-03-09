@@ -128,7 +128,7 @@
 			if (!(R.id in acceptable_reagents))
 				user << "\red Your [O] contains components unsuitable for cookery."
 				return 1
-		//G.reagents.trans_to(src,G.amount_per_transfer_from_this)
+		//G.reagents.trans_to_obj(src,G.amount_per_transfer_from_this)
 	else if(istype(O,/obj/item/weapon/grab))
 		var/obj/item/weapon/grab/G = O
 		user << "\red This is ridiculous. You can not fit \the [G.affecting] in this [src]."

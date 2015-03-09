@@ -229,7 +229,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	if(!proximity)
 		return
 	if(istype(glass)) //you can dip cigarettes into beakers
-		var/transfered = glass.reagents.trans_to(src, chem_volume)
+		var/transfered = glass.reagents.trans_to_obj(src, chem_volume)
 		if(transfered)	//if reagents were transfered, show the message
 			user << "<span class='notice'>You dip \the [src] into \the [glass].</span>"
 		else			//if not, either the beaker was empty, or the cigarette was full
@@ -374,7 +374,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 			return
 		smoketime = 1000
 		if(G.reagents)
-			G.reagents.trans_to(src, G.reagents.volume)
+			G.reagents.trans_to_obj(src, G.reagents.volume)
 		name = "[G.name]-packed [initial(name)]"
 		del(G)
 

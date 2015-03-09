@@ -78,7 +78,7 @@
 /datum/recipe/proc/make(var/obj/container as obj)
 	var/obj/result_obj = new result(container)
 	for (var/obj/O in (container.contents-result_obj))
-		O.reagents.trans_to(result_obj, O.reagents.volume)
+		O.reagents.trans_to_obj(result_obj, O.reagents.volume)
 		del(O)
 	container.reagents.clear_reagents()
 	return result_obj
@@ -90,7 +90,7 @@
 		if (O.reagents)
 			O.reagents.del_reagent("nutriment")
 			O.reagents.update_volume()
-			O.reagents.trans_to(result_obj, O.reagents.volume)
+			O.reagents.trans_to_obj(result_obj, O.reagents.volume)
 		del(O)
 	container.reagents.clear_reagents()
 	return result_obj

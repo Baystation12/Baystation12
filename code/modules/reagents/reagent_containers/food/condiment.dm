@@ -40,7 +40,7 @@
 				user << "<span class='notice'>You can't add more condiment to \the [target].</span>"
 				return
 
-			var/trans = reagents.trans_to(target, amount_per_transfer_from_this)
+			var/trans = reagents.trans_to_obj(target, amount_per_transfer_from_this)
 			user << "<span class='notice'>You add [trans] units of the condiment to \the [target].</span>"
 
 	feed_sound(var/mob/user)

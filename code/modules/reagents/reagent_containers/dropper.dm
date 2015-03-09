@@ -49,11 +49,11 @@
 							safe_thing = victim.glasses
 
 					if(safe_thing)
-						trans = reagents.trans_to(safe_thing, amount_per_transfer_from_this)
+						trans = reagents.trans_to_obj(safe_thing, amount_per_transfer_from_this)
 						user.visible_message("<span class='warning'>[user] tries to squirt something into [target]'s eyes, but fails!</span>", "<span class='notice'>You transfer [trans] units of the solution.</span>")
 						return
 
-				trans = reagents.trans_to(target, reagents.volume)
+				trans = reagents.trans_to_mob(target, reagents.volume, CHEM_INGEST)
 				user.visible_message("<span class='warning'>[user] squirts something into [target]'s eyes!</span>", "<span class='notice'>You transfer [trans] units of the solution.</span>")
 
 				var/mob/living/M = target
@@ -77,7 +77,7 @@
 				user << "<span class='notice'>[target] is empty.</span>"
 				return
 
-			var/trans = target.reagents.trans_to(src, amount_per_transfer_from_this)
+			var/trans = target.reagents.trans_to_obj(src, amount_per_transfer_from_this)
 
 			user << "<span class='notice'>You fill the dropper with [trans] units of the solution.</span>"
 

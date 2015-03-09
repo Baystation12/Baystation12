@@ -93,12 +93,6 @@
 			playsound(M.loc,'sound/items/eatfood.ogg', rand(10,50), 1)
 			if(reagents.volume)
 				if(reagents.volume > bitesize)
-					/*
-					 * I totally cannot understand what this code supposed to do.
-					 * Right now every snack consumes in 2 bites, my popcorn does not work right, so I simplify it. -- rastaf0
-					var/temp_bitesize =  max(reagents.volume /2, bitesize)
-					reagents.trans_to(M, temp_bitesize)
-					*/
 					reagents.trans_to_mob(M, bitesize, CHEM_INGEST)
 				else
 					reagents.trans_to_mob(M, reagents.volume, CHEM_INGEST)
@@ -151,7 +145,7 @@
 		I.color = src.filling_color
 		U.overlays += I
 
-		reagents.trans_to(U,min(reagents.volume,5))
+		reagents.trans_to_obj(U, min(reagents.volume,5))
 
 		if (reagents.volume <= 0)
 			del(src)
@@ -190,7 +184,7 @@
 			var/reagents_per_slice = reagents.volume/slices_num
 			for(var/i=1 to (slices_num-slices_lost))
 				var/obj/slice = new slice_path (src.loc)
-				reagents.trans_to(slice,reagents_per_slice)
+				reagents.trans_to_obj(slice, reagents_per_slice)
 			del(src)
 			return
 

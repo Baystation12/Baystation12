@@ -95,7 +95,7 @@
 						if(istype(T, /mob/living/carbon/human))
 							var/mob/living/carbon/human/H = T
 							if(H.species && H.species.flags & NO_BLOOD)
-								H.reagents.trans_to(src, amount)
+								H.reagents.trans_to_obj(src, amount)
 							else
 								B = T.take_blood(src, amount)
 						else
@@ -119,7 +119,7 @@
 						user << "<span class='notice'>You cannot directly remove reagents from this object.</span>"
 						return
 
-					var/trans = target.reagents.trans_to(src, amount_per_transfer_from_this)
+					var/trans = target.reagents.trans_to_obj(src, amount_per_transfer_from_this)
 					user << "<span class='notice'>You fill the syringe with [trans] units of the solution.</span>"
 					update_icon()
 
@@ -179,7 +179,10 @@
 						msg_admin_attack("[user.name] ([user.ckey]) injected [M.name] ([M.key]) with [name]. Reagents: [contained] (INTENT: [uppertext(user.a_intent)]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
 
 				var/trans
-				trans = reagents.trans_to(target, amount_per_transfer_from_this, 1, CHEM_BLOOD)
+				if(ismob(target))
+					trans = reagents.trans_to_mob(target, amount_per_transfer_from_this, CHEM_BLOOD)
+				else
+					trans = reagents.trans_to(target, amount_per_transfer_from_this)
 				user << "<span class='notice'>You inject [trans] units of the solution. The syringe now contains [src.reagents.volume] units.</span>"
 				if (reagents.volume <= 0 && mode == SYRINGE_INJECT)
 					mode = SYRINGE_DRAW
@@ -254,7 +257,7 @@
 			target.take_organ_damage(3)// 7 is the same as crowbar punch
 
 		var/syringestab_amount_transferred = rand(0, (reagents.volume - 5)) //nerfed by popular demand
-		reagents.trans_to(target, syringestab_amount_transferred, 1, CHEM_BLOOD)
+		reagents.trans_to_mob(target, syringestab_amount_transferred, CHEM_BLOOD)
 		break_syringe(target, user)
 
 	proc/break_syringe(mob/living/carbon/target, mob/living/carbon/user)

@@ -197,7 +197,7 @@
 					if(!block)
 						for(var/obj/effect/effect/smoke/chem/smoke in view(1, src))
 							if(smoke.reagents.volume)
-								smoke.reagents.trans_to(src, 10, 1, CHEM_INGEST, 1)// I dunno, maybe the reagents enter the blood stream through the lungs?
+								smoke.reagents.trans_to_mob(src, 10, CHEM_INGEST, copy = 1)
 								break // If they breathe in the nasty stuff once, no need to continue checking
 
 

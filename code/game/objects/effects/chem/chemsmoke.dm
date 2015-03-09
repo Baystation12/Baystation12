@@ -32,7 +32,7 @@
 /datum/effect/effect/system/smoke_spread/chem/set_up(var/datum/reagents/carry = null, n = 10, c = 0, loca, direct)
 	range = n * 0.3
 	cardinals = c
-	carry.trans_to(chemholder, carry.volume, copy = 1)
+	carry.trans_to_obj(chemholder, carry.volume, copy = 1)
 
 	if(istype(loca, /turf/))
 		location = loca
@@ -130,7 +130,7 @@
 /datum/effect/effect/system/smoke_spread/chem/proc/spawnSmoke(var/turf/T, var/icon/I, var/dist = 1) // Randomizes and spawns the smoke effect. Also handles deleting the smoke once the effect is finished.
 	var/obj/effect/effect/smoke/chem/smoke = new(location)
 	if(chemholder.reagents.reagent_list.len)
-		chemholder.reagents.trans_to(smoke, chemholder.reagents.volume / dist, copy = 1) //copy reagents to the smoke so mob/breathe() can handle inhaling the reagents
+		chemholder.reagents.trans_to_obj(smoke, chemholder.reagents.volume / dist, copy = 1) //copy reagents to the smoke so mob/breathe() can handle inhaling the reagents
 	smoke.icon = I
 	smoke.layer = 6
 	smoke.set_dir(pick(cardinal))

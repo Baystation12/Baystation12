@@ -55,7 +55,7 @@
 
 	if(istype(target, /obj/structure/reagent_dispensers/watertank) && flag)
 		var/obj/O = target
-		var/amount = O.reagents.trans_to(src, 50)
+		var/amount = O.reagents.trans_to_obj(src, 50)
 		user << "<span class='notice'>You fill [src] with [amount] units of the contents of [target].</span>"
 		playsound(loc, 'sound/effects/refill.ogg', 50, 1, -6)
 		return
@@ -125,7 +125,7 @@
 				W.create_reagents(spray_amount)
 				if(!src)
 					return
-				reagents.trans_to(W, spray_amount)
+				reagents.trans_to_obj(W, spray_amount)
 				W.set_color()
 				W.set_up(my_target)
 

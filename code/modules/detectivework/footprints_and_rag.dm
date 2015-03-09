@@ -31,7 +31,7 @@
 /obj/item/weapon/reagent_containers/glass/rag/attack(atom/target as obj|turf|area, mob/user as mob , flag)
 	if(ismob(target) && target.reagents && reagents.volume)
 		user.visible_message("\red \The [target] has been smothered with \the [src] by \the [user]!", "\red You smother \the [target] with \the [src]!", "You hear some struggling and muffled cries of surprise")
-		src.reagents.trans_to(target, reagents.volume)
+		src.reagents.trans_to_mob(target, reagents.volume, CHEM_INGEST)
 		return
 	else
 		..()

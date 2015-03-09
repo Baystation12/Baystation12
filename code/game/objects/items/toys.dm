@@ -48,7 +48,7 @@
 /obj/item/toy/balloon/afterattack(atom/A as mob|obj, mob/user as mob, proximity)
 	if(!proximity) return
 	if (istype(A, /obj/structure/reagent_dispensers/watertank) && get_dist(src,A) <= 1)
-		A.reagents.trans_to(src, 10)
+		A.reagents.trans_to_obj(src, 10)
 		user << "\blue You fill the balloon with the contents of [A]."
 		src.desc = "A translucent balloon with some form of liquid sloshing around in it."
 		src.update_icon()
@@ -62,12 +62,12 @@
 			else if(O.reagents.volume >= 1)
 				if(O.reagents.has_reagent("pacid", 1))
 					user << "The acid chews through the balloon!"
-					O.reagents.trans_to(user, reagents.volume)
+					O.reagents.splash_mob(user, reagents.volume)
 					del(src)
 				else
 					src.desc = "A translucent balloon with some form of liquid sloshing around in it."
 					user << "\blue You fill the balloon with the contents of [O]."
-					O.reagents.trans_to(src, 10)
+					O.reagents.trans_to_obj(src, 10)
 	src.update_icon()
 	return
 
@@ -464,7 +464,7 @@
 		return
 
 	else if (istype(A, /obj/structure/reagent_dispensers/watertank) && get_dist(src,A) <= 1)
-		A.reagents.trans_to(src, 10)
+		A.reagents.trans_to_obj(src, 10)
 		user << "\blue You refill your flower!"
 		return
 
@@ -482,7 +482,7 @@
 		D.icon = 'icons/obj/chemical.dmi'
 		D.icon_state = "chempuff"
 		D.create_reagents(5)
-		src.reagents.trans_to(D, 1)
+		src.reagents.trans_to_obj(D, 1)
 		playsound(src.loc, 'sound/effects/spray3.ogg', 50, 1, -6)
 
 		spawn(0)

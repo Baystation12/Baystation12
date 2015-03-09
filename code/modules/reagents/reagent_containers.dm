@@ -50,7 +50,7 @@
 		user << "<span class='notice'>[src] is full.</span>"
 		return 1
 
-	var/trans = target.reagents.trans_to(src, target:amount_per_transfer_from_this)
+	var/trans = target.reagents.trans_to_obj(src, target:amount_per_transfer_from_this)
 	user << "<span class='notice'>You fill [src] with [trans] units of the contents of [target].</span>"
 	return 1
 

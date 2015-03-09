@@ -70,6 +70,8 @@
 	return
 
 /datum/reagent/proc/initialize_data(var/newdata) // Called when the reagent is created.
+	if(!isnull(newdata))
+		data = newdata
 	return
 
 /datum/reagent/proc/mix_data(var/newdata, var/newamount) // You have a reagent with data, and new reagent with its own data get added, how do you deal with that?
@@ -105,6 +107,12 @@
 	glass_icon_state = "glass_red"
 	glass_name = "glass of tomato juice"
 	glass_desc = "Are you sure this is tomato juice?"
+
+/datum/reagent/blood/initialize_data(var/newdata)
+	..()
+	if(data && data["blood_colour"])
+		color = data["blood_colour"]
+	return
 
 /datum/reagent/blood/touch_turf(var/turf/simulated/T)
 	if(!istype(T) || volume < 3)

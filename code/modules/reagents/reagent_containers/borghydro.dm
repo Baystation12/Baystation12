@@ -70,7 +70,7 @@
 		M << "<span class='notice'>You feel a tiny prick!</span>"
 
 		if(M.reagents)
-			var/trans = R.trans_to(M, amount_per_transfer_from_this, 1, CHEM_BLOOD)
+			var/trans = R.trans_to_mob(M, amount_per_transfer_from_this, CHEM_BLOOD)
 			user << "<span class='notice'>[trans] units injected. [R.volume] units remaining.</span>"
 	return
 

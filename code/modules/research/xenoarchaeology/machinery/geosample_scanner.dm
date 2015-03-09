@@ -80,14 +80,14 @@
 			if(choice == "Add coolant")
 				var/obj/item/weapon/reagent_containers/glass/G = I
 				var/amount_transferred = min(src.reagents.max_volume - src.reagents.volume, G.reagents.volume)
-				G.reagents.trans_to(src, amount_transferred)
+				G.reagents.trans_to_obj(src, amount_transferred)
 				user << "<span class='info'>You empty [amount_transferred]u of coolant into [src].</span>"
 				update_coolant()
 				return
 			else if(choice == "Empty coolant")
 				var/obj/item/weapon/reagent_containers/glass/G = I
 				var/amount_transferred = min(G.reagents.max_volume - G.reagents.volume, src.reagents.volume)
-				src.reagents.trans_to(G, amount_transferred)
+				src.reagents.trans_to_obj(G, amount_transferred)
 				user << "<span class='info'>You remove [amount_transferred]u of coolant from [src].</span>"
 				update_coolant()
 				return

@@ -429,7 +429,7 @@
 		spawn(30)
 			if ((get_dist(src, src.patient) <= 1) && (src.on))
 				if((reagent_id == "internal_beaker") && (src.reagent_glass) && (src.reagent_glass.reagents.volume))
-					src.reagent_glass.reagents.trans_to(src.patient, src.injection_amount, 1, CHEM_BLOOD) //Inject from beaker instead.
+					src.reagent_glass.reagents.trans_to_mob(src.patient, src.injection_amount, CHEM_BLOOD) //Inject from beaker instead.
 				else
 					src.patient.reagents.add_reagent(reagent_id,src.injection_amount)
 				visible_message("\red <B>[src] injects [src.patient] with the syringe!</B>")

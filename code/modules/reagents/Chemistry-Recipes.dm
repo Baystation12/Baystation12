@@ -235,7 +235,7 @@
 	name = "Hyperzine"
 	id = "hyperzine"
 	result = "hyperzine"
-	required_reagents = list("sugar" = 1, "phosphorus" = 1, "sulfur" = 1,)
+	required_reagents = list("sugar" = 1, "phosphorus" = 1, "sulfur" = 1)
 	result_amount = 3
 
 /datum/chemical_reaction/ryetalyn
@@ -286,6 +286,7 @@
 	id = "soporific"
 	result = "soporific"
 	required_reagents = list("chloralhydrate" = 1, "sugar" = 4)
+	inhibitors = list("phosphorus") // Messes with the smoke
 	result_amount = 5
 
 /datum/chemical_reaction/chloralhydrate

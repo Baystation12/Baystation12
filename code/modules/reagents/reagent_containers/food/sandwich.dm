@@ -34,7 +34,7 @@
 	else if(istype(W,/obj/item/weapon/reagent_containers/food/snacks))
 		user << "\blue You layer [W] over \the [src]."
 		var/obj/item/weapon/reagent_containers/F = W
-		F.reagents.trans_to(src, F.reagents.volume)
+		F.reagents.trans_to_obj(src, F.reagents.volume)
 		user.drop_item()
 		W.loc = src
 		ingredients += W

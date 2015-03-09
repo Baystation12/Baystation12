@@ -194,7 +194,7 @@
 		if(do_after_cooldown(target))
 			if( istype(target, /obj/structure/reagent_dispensers/watertank) && get_dist(chassis,target) <= 1)
 				var/obj/o = target
-				var/amount = o.reagents.trans_to(src, 200)
+				var/amount = o.reagents.trans_to_obj(src, 200)
 				occupant_message("\blue [amount] units transferred into internal tank.")
 				playsound(chassis, 'sound/effects/refill.ogg', 50, 1, -6)
 				return
@@ -228,7 +228,7 @@
 					W.create_reagents(5)
 					if(!src)
 						return
-					reagents.trans_to(W, spray_amount)
+					reagents.trans_to_obj(W, spray_amount)
 					W.set_color()
 					W.set_up(my_target)
 			return 1
