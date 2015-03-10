@@ -103,62 +103,66 @@
 		return
 
 	reacting = 1
-	var/list/happening = list()
-	var/reaction_occured = 0
-	do
-		reaction_occured = 0
-		for(var/datum/reagent/R in reagent_list)
-			for(var/datum/chemical_reaction/C in chemical_reactions_list[R.id])
-				var/reagents_suitable = 1
-				for(var/B in C.required_reagents)
-					if(!has_reagent(B, C.required_reagents[B]))
-						reagents_suitable = 0
-				for(var/B in C.catalysts)
-					if(!has_reagent(B, C.catalysts[B]))
-						reagents_suitable = 0
-				for(var/B in C.inhibitors)
-					if(has_reagent(B, C.inhibitors[B]))
-						reagents_suitable = 0
+	spawn(0)
+		var/list/happening = list()
+		var/reaction_occured = 0
+		do
+			reaction_occured = 0
+			for(var/datum/reagent/R in reagent_list)
+				for(var/datum/chemical_reaction/C in chemical_reactions_list[R.id])
+					var/reagents_suitable = 1
+					for(var/B in C.required_reagents)
+						if(!has_reagent(B, C.required_reagents[B]))
+							reagents_suitable = 0
+					for(var/B in C.catalysts)
+						if(!has_reagent(B, C.catalysts[B]))
+							reagents_suitable = 0
+					for(var/B in C.inhibitors)
+						if(has_reagent(B, C.inhibitors[B]))
+							reagents_suitable = 0
 
-				if(!reagents_suitable || !C.can_happen(src))
-					if(C.type in happening)
-						happening -= C.type
-					continue
+					if(!reagents_suitable || !C.can_happen(src))
+						if(C.type in happening)
+							happening -= C.type
+						continue
 
-				var/use = C.speed
-				if(C.instant)
-					var/B = C.required_reagents[1]
-					use = get_reagent_amount(B) / C.required_reagents[B]
-				for(var/B in C.required_reagents)
-					use = min(use, get_reagent_amount(B) / C.required_reagents[B])
+					world << "Reaction occuring: [C.name]"
+					var/use = C.speed
+					if(C.instant)
+						var/B = C.required_reagents[1]
+						use = get_reagent_amount(B) / C.required_reagents[B]
+					for(var/B in C.required_reagents)
+						use = min(use, get_reagent_amount(B) / C.required_reagents[B])
 
-				var/newdata = C.send_data(src) // We need to get it before reagents are removed. See blood paint.
-				for(var/B in C.required_reagents)
-					remove_reagent(B, use * C.required_reagents[B], safety = 1)
+					var/newdata = C.send_data(src) // We need to get it before reagents are removed. See blood paint.
+					for(var/B in C.required_reagents)
+						remove_reagent(B, use * C.required_reagents[B], safety = 1)
 
-				if(C.result)
-					add_reagent(C.result, C.result_amount * use, newdata)
+					if(C.result)
+						add_reagent(C.result, C.result_amount * use, newdata)
 
-				if(!ismob(my_atom) && C.mix_message && !(C.type in happening))
-					happening += C.type
-					var/list/seen = viewers(4, get_turf(my_atom))
-					for(var/mob/M in seen)
-						M << "<span class='notice'>\icon[my_atom] [C.mix_message]</span>"
-					playsound(get_turf(my_atom), 'sound/effects/bubbles.ogg', 80, 1)
+					if(!ismob(my_atom) && C.mix_message && !(C.type in happening))
+						happening += C.type
+						var/list/seen = viewers(4, get_turf(my_atom))
+						for(var/mob/M in seen)
+							M << "<span class='notice'>\icon[my_atom] [C.mix_message]</span>"
+						playsound(get_turf(my_atom), 'sound/effects/bubbles.ogg', 80, 1)
 
-				C.on_reaction(src, C.result_amount * use)
-				reaction_occured = 1
-		if(reaction_occured)
-			sleep(10)
-	while(reaction_occured)
-	update_volume()
-	reacting = 0
+					C.on_reaction(src, C.result_amount * use)
+					reaction_occured = 1
+			if(reaction_occured)
+				sleep(10)
+		while(reaction_occured)
+		update_volume()
+		reacting = 0
+	return
 
 /* Holder-to-chemical */
 
 /datum/reagents/proc/add_reagent(var/id, var/amount, var/data = null, var/safety = 0)
 	if(!isnum(amount))
 		return 0
+	update_volume()
 	amount = min(amount, get_free_space())
 
 	for(var/datum/reagent/current in reagent_list)
@@ -272,7 +276,6 @@
 	amount = min(amount, volume, target.get_free_space() / multiplier)
 
 	if(!amount)
-		world << "Transfer end - no amount: [world.time]"
 		return
 
 	var/part = amount / volume

@@ -199,7 +199,8 @@
 	result = "dexalin"
 	required_reagents = list("oxygen" = 2, "phoron" = 0.1)
 	catalysts = list("phoron" = 1)
-	inhibitors = list("cryoxadone" = 1)
+	inhibitors = list("water" = 1) // Messes with cryox
+	speed = 10
 	result_amount = 1
 
 /datum/chemical_reaction/dermaline
@@ -259,6 +260,7 @@
 	required_reagents = list("cryoxadone" = 1, "sodium" = 1, "phoron" = 0.1)
 	catalysts = list("phoron" = 1)
 	result_amount = 2
+	speed = 10
 
 /datum/chemical_reaction/spaceacillin
 	name = "Spaceacillin"
@@ -412,7 +414,7 @@
 	result_amount = 3
 
 /datum/chemical_reaction/rezadone/New()
-	var/list/suitable = list("alumnium", "carbon", "chlorine", "copper", "ethanol", "fluorine", "hydrogen", "iron", "lithium", "mercury", "nitrogen", "oxygen", "phosphorus", "potassium", "radium", "sulphuric acid", "silicon", "sodium", "sugar", "sulfur") // Excluded: water, for reacting with potassium and messing with coolant
+	var/list/suitable = list("alumnium", "carbon", "chlorine", "copper", "ethanol", "fluorine", "iron", "lithium", "mercury", "nitrogen", "oxygen", "phosphorus", "potassium", "radium", "sulphuric acid", "silicon", "sodium", "sugar", "sulfur") // Excluded: water, for reacting with potassium and messing with coolant; hydrogen: ammonia
 	for(var/i = 2 to 3)
 		var/t = pick(suitable)
 		required_reagents += t
@@ -427,7 +429,7 @@
 	result_amount = 3
 
 /datum/chemical_reaction/lexorin/New()
-	var/list/suitable = list("alumnium", "carbon", "chlorine", "copper", "ethanol", "fluorine", "hydrogen", "iron", "lithium", "mercury", "nitrogen", "oxygen", "phosphorus", "potassium", "radium", "sulphuric acid", "silicon", "sodium", "sugar", "sulfur")
+	var/list/suitable = list("alumnium", "carbon", "chlorine", "copper", "ethanol", "fluorine", "iron", "lithium", "mercury", "nitrogen", "oxygen", "phosphorus", "potassium", "radium", "sulphuric acid", "silicon", "sodium", "sugar", "sulfur")
 	for(var/i = 2 to 3)
 		var/t = pick(suitable)
 		required_reagents += t

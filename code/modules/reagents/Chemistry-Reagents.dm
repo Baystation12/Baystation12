@@ -207,6 +207,7 @@
 	description = "A ubiquitous chemical substance that is composed of hydrogen and oxygen."
 	reagent_state = LIQUID
 	color = "#0064C877"
+	metabolism = REM * 10
 
 	glass_icon_state = "glass_clear"
 	glass_name = "glass of water"
@@ -262,12 +263,12 @@
 /datum/reagent/water/affect_mob(var/mob/living/carbon/M, var/alien, var/removed, var/location)
 	if(istype(M, /mob/living/carbon/slime))
 		var/mob/living/carbon/slime/S = M
-		S.adjustToxLoss(100 * removed) // 1.5 units/7.5 ticks for baby, 2/10 for adult
+		S.adjustToxLoss(15 * removed) // Babies have 150 health, adults have 200; So, 10 units and 13.5
 		if(!S.client)
 			if(S.Target) // Like cats
 				S.Target = null
 				++S.Discipline
-		if(dose == removed * 2)
+		if(dose == removed)
 			S.visible_message("<span class='warning'>[S]'s flesh sizzles where the water touches it!</span>", "<span class='danger'>Your flesh burns in the water!</span>")
 	if(location == CHEM_TOUCH)
 		var/needed = M.fire_stacks * 10
@@ -1597,7 +1598,7 @@
 	overdose_blood = REAGENTS_OVERDOSE
 	overdose_ingest = REAGENTS_OVERDOSE
 
-/datum/reagent/impedrezene/affect_mob(var/mob/living/carbon/M, var/alien, var/removed, var/location)
+/datum/reagent/mindbreaker/affect_mob(var/mob/living/carbon/M, var/alien, var/removed, var/location)
 	if(location == CHEM_TOUCH || alien == IS_DIONA)
 		return
 	M.hallucination = max(M.hallucination, 100)
