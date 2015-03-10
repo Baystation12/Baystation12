@@ -24,6 +24,11 @@
 	..()
 	initialize_directions = dir
 
+/obj/machinery/atmospherics/unary/cryo_cell/Del()
+	if(occupant)
+		occupant.loc = loc
+	..()
+
 /obj/machinery/atmospherics/unary/cryo_cell/initialize()
 	if(node) return
 	var/node_connect = dir
