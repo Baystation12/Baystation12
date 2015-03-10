@@ -126,7 +126,6 @@
 							happening -= C.type
 						continue
 
-					world << "Reaction occuring: [C.name]"
 					var/use = C.speed
 					if(C.instant)
 						var/B = C.required_reagents[1]
