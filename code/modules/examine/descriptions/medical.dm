@@ -11,15 +11,15 @@
 	in critical condition by placing them in stasis, so they can be treated at a later time.<br>\
 	<br>\
 	In order for it to work, it must be loaded with chemicals, and the temperature of the solution must reach a certain point. Additionally, it \
-	requires a supply of pure oxygen, provided by canisters that are attached. The most commonly used chemicals in the chambers are Cryoaxadone and \
-	Clonexadone. Clonexadone is more effective in treating Genetic damage, but is otherwise functionally identical.<br>\
+	requires a supply of pure oxygen, provided by canisters that are attached. The most commonly used chemicals in the chambers are Cryoxadone and \
+	Clonexadone. Clonexadone is more effective in treating all damage, including Genetic damage, but is otherwise functionally identical.<br>\
 	<br>\
-	Activating the freezer nearby, and setting it to a temperature setting below 50, is required before operation! Further, any clothing the patient \
+	Activating the freezer nearby, and setting it to a temperature setting below 150, is recommended before operation! Further, any clothing the patient \
 	is wearing that act as an insulator will reduce its effectiveness, and should be removed.<br>\
 	<br>\
 	Clicking the tube with a beaker full of chemicals in hand will place it in its storage to distribute when it is activated.<br>\
 	<br>\
-	Click your target with Grab intent, then click on the tube, with an empty hand, to place them it. Click the tube again to open the menu. \
+	Click your target with Grab intent, then click on the tube, with an empty hand, to place them in it. Click the tube again to open the menu. \
 	Press the button on the menu to activate it. Once they have reached 100 health, right-click the cell and click 'Eject Occupant' to remove them. \
 	Remember to turn it off, once you've finished, to save power and chemicals!"
 
@@ -30,7 +30,7 @@
 	description_info = "This console gives information on the status of the patient on the adjacent operating table, notably their consciousness."
 
 /obj/machinery/sleeper
-	description_info = "The sleeper allows you to clean the blood by means of dialysis, and to administer medication in controlled environment.<br>\
+	description_info = "The sleeper allows you to clean the blood by means of dialysis, and to administer medication in a controlled environment.<br>\
 	<br>\
 	Click your target with Grab intent, then click on the sleeper to place them in it. Click the green console, with an empty hand, to open the menu. \
 	Click 'Start Dialysis' to begin filtering unwanted chemicals from the occupant's blood. The beaker contained will begin to fill with their \
