@@ -760,6 +760,18 @@
 			user << "You screw the cell in place"
 		return
 
+	else if(istype(W, /obj/item/device/multitool))
+		if(state>=3 && src.occupant)
+			user << "You attempt to eject the pilot using the maintenance controls."
+			if(src.occupant.stat)
+				src.go_out()
+				src.log_message("[src.occupant] was ejected using the maintenance controls.")
+			else
+				user << "<span class='warning'>Your attempt is rejected.</span>"
+				src.occupant_message("<span class='warning'>An attempt to eject you was made using the maintenance controls.</span>")
+				src.log_message("Eject attempt made using maintenance controls - rejected.")
+		return
+
 	else if(istype(W, /obj/item/weapon/cell))
 		if(state==4)
 			if(!src.cell)
