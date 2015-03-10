@@ -73,12 +73,12 @@
 /datum/addiction/alcohol
 	name = "Alcohol addiction"
 	stage_dose = list(100, 400, 600, 800, 1000)
-	recover_level = 900 // 900 ticks ~ 1800 seconds ~ 30 minutes without drinking
+	recover_level = 1800 // 1800 ticks ~ 3600 seconds ~ 60 minutes without drinking
 	recover_speed = 1
 
 /datum/addiction/alcohol/withdrawal_act()
 	if(stage == 1 && prob(1))
-		owner << "<span class='warning'>You have a light headache.</span>"
+		owner << "<span class='warning'>You have a light headache.</span>" // TODO: pain effect
 	if(stage == 2 && prob(1))
 		owner << "<span class='warning'>You have a headache.</span>"
 	if(stage >= 3 && prob(1))
@@ -97,3 +97,102 @@
 		owner.Weaken(5)
 	if(stage == 5 && prob(1))
 		owner.vomit()
+
+/datum/addiction/hyperzine
+	name = "Hyperzine addiction"
+	stage_dose = list(45, 90, 180, 360)
+	recover_level = 900 // 900 ticks ~ 1800 seconds ~ 30 minutes without hyperzine
+	recover_speed = 0.1
+
+/datum/addiction/hyperzine/stage_act()
+	if(stage == 1 && prob(1))
+		owner << "<span class='warning'>You have a light headache.</span>"
+	if(stage >= 1 && prob(1))
+		owner << "<span class='warning'>You can't focus on anything.</span>"
+	if(stage >= 2 && prob(1))
+		owner.emote("twitch")
+	if(stage == 4 && prob(1))
+		owner.vomit()
+
+/datum/addiction/hyperzine/withdrawal_act()
+	if(stage == 1 && prob(1))
+		owner << "<span class='warning'>You have a light headache.</span>"
+	if(stage >= 1 && prob(1))
+		owner << "<span class='warning'>You can't focus on anything.</span>"
+	if(stage >= 2 && prob(1))
+		owner << "<span class='warning'>You have a headache.</span>"
+	if(stage >= 2 && prob(1))
+		owner << "<span class='warning'>Everything feels slow.</span>"
+	if(stage >= 2 && prob(1))
+		owner.emote("shiver")
+	if(stage >= 3 && prob(1))
+		owner.drowsyness += 20
+		owner << "<span class='warning'>You feel sleepy.</span>"
+
+/datum/addiction/oxycodone
+	name = "Oxydocone addiction"
+	stage_dose = list(40, 80, 160, 320)
+	recover_level = 900 // ~30 minutes
+	recover_speed = 0.1
+
+/datum/addiction/oxycodone/stage_act()
+	if(stage >= 1 && prob(1))
+		owner << "<span class='notice'>You feel euphoric!</span>"
+	if(stage >= 1 && prob(1))
+		owner << "<span class='warning'>You start sweating.</span>"
+	if(stage >= 2 && prob(1))
+		owner << "<span class='warning'>You have a headache.</span>"
+	if(stage == 4 && prob(1))
+		owner << "<span class='danger'>You can't breathe for a moment.</span>"
+		owner.losebreath = max(5, owner.losebreath)
+
+/datum/addiction/oxycodone/withdrawal_act()
+	if(stage >= 1 && prob(1))
+		owner << "<span class='warning'>You feel anxious.</span>"
+	if(stage >= 1 && prob(1))
+		owner.emote("yawn")
+	if(stage >= 2 && prob(1))
+		owner.emote("gasp")
+	if(stage >= 3 && prob(1))
+		owner << "<span class='danger'>You have a muscle spasm!</span>"
+		owner.apply_effect(30, AGONY, 0)
+	if(stage == 4 && prob(1))
+		owner.vomit()
+
+/datum/addiction/spacedrugs
+	name = "Space Drugs addiction"
+	stage_dose = list(1, 30, 60, 90, 120)
+
+/datum/addiction/spacedrugs/stage_act()
+	if(stage >= 1 && prob(1))
+		owner << "<span class='notice'>You feel euphoric!</span>"
+	if(stage >= 2 && prob(1))
+		owner << "<span class='warning'>You feel dizzy.</span>"
+	if(stage >= 3 && prob(1))
+		owner.druggy = max(owner.druggy, 15)
+	if(stage == 5 && prob(1))
+		owner.hallucination = max(M.hallucination, 10)
+
+/datum/addiction/spacedrugs/withdrawal_act()
+	if(stage >= 1 && prob(1))
+		owner << "<span class='notice'>You feel depressed.</span>"
+	if(stage >= 4 && prob(1))
+		owner << "<span class='danger'>You have a severe headache!</span>"
+
+/datum/addiction/mindbreaker
+	name = "Mindbreaker addiction"
+	stage_dose = list(1, 30, 60, 90, 120)
+
+/datum/addiction/mindbreaker/stage_act()
+	if(stage >= 2 && prob(1))
+		owner << "<span class='warning'>You feel dizzy.</span>"
+	if(stage >= 3 && prob(1))
+		owner.eye_blurry = max(M.eye_blurry, 10)
+	if(stage >= 3 && prob(1))
+		owner.eye_blurry = max(M.eye_blurry, 10)
+	if(stage == 5 && prob(1))
+		owner.hallucination = max(M.hallucination, 10)
+
+/datum/addiction/mindbreaker/withdrawal_act()
+	if(stage >= 1 && prob(1))
+		owner << "<span class='notice'>You feel depressed.</span>"

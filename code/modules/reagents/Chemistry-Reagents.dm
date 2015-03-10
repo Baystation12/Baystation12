@@ -78,7 +78,7 @@
 	return
 
 /datum/reagent/proc/get_data() // Just in case you have a reagent that handles data differently.
-	return data
+	return data.Copy()
 
 /* DEPRECATED - TODO: REMOVE EVERYWHERE */
 
@@ -113,6 +113,30 @@
 	if(data && data["blood_colour"])
 		color = data["blood_colour"]
 	return
+
+/datum/reagent/blood/get_data() // Just in case you have a reagent that handles data differently.
+	var/t = data.Copy()
+	if(t["virus2"])
+		var/list/v = t["virus2"]
+		t["virus2"] = v.Copy()
+	return t
+
+/datum/reagent/blood/mix_data(var/newdata, var/newamount) // You have a reagent with data, and new reagent with its own data get added, how do you deal with that?
+	if(data["viruses"] || newdata["viruses"])
+		var/list/mix1 = data["viruses"]
+		var/list/mix2 = newdata["viruses"]
+		var/list/to_mix = list() // Stop issues with the list changing during mixing.
+		for(var/datum/disease/advance/AD in mix1)
+			to_mix += AD
+		for(var/datum/disease/advance/AD in mix2)
+			to_mix += AD
+		var/datum/disease/advance/AD = Advance_Mix(to_mix)
+		if(AD)
+			var/list/preserve = list(AD)
+			for(var/D in data["viruses"])
+				if(!istype(D, /datum/disease/advance))
+					preserve += D
+			data["viruses"] = preserve
 
 /datum/reagent/blood/touch_turf(var/turf/simulated/T)
 	if(!istype(T) || volume < 3)
@@ -917,6 +941,8 @@
 	description = "An effective and very addictive painkiller."
 	reagent_state = LIQUID
 	color = "#800080"
+	addiction = /datum/addiction/oxycodone
+	addiction_strength = 1
 	overdose_blood = 20
 	overdose_ingest = 20
 	metabolism = 0.02
@@ -1041,6 +1067,8 @@
 	reagent_state = LIQUID
 	color = "#FF3300"
 	metabolism = REM * 0.15
+	addiction = /datum/addiction/hyperzine
+	addiction_strength = 1
 	overdose_blood = REAGENTS_OVERDOSE * 0.5
 	overdose_ingest = REAGENTS_OVERDOSE * 0.5
 
@@ -1489,6 +1517,8 @@
 	reagent_state = LIQUID
 	color = "#60A584"
 	metabolism = REM * 0.5
+	addiction = /datum/addiction/spacedrugs
+	addiction_strength = 1
 	overdose_blood = REAGENTS_OVERDOSE
 	overdose_ingest = REAGENTS_OVERDOSE * 2
 
@@ -1560,6 +1590,8 @@
 	description = "A powerful hallucinogen, it can cause fatal effects in users."
 	reagent_state = LIQUID
 	color = "#B31008"
+	addiction = /datum/addiction/mindbreaker
+	addiction_strength = 1
 	metabolism = REM * 0.25
 	overdose_blood = REAGENTS_OVERDOSE
 	overdose_ingest = REAGENTS_OVERDOSE
@@ -1567,7 +1599,7 @@
 /datum/reagent/impedrezene/affect_mob(var/mob/living/carbon/M, var/alien, var/removed, var/location)
 	if(location == CHEM_TOUCH || alien == IS_DIONA)
 		return
-	M.hallucination = max(M.hallucination + 10, 100)
+	M.hallucination = max(M.hallucination, 100)
 
 /datum/reagent/psilocybin
 	name = "Psilocybin"
