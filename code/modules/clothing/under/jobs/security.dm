@@ -36,6 +36,16 @@
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS
 	siemens_coefficient = 0.9
 
+/obj/item/clothing/under/rank/dispatch/sec
+	name = "security officer's uniform"
+	desc = "A dress shirt and khakis with a security patch sewn on."
+	icon_state = "dispatch"
+	item_state = "dispatch"
+	item_color = "dispatch"
+	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS
+	siemens_coefficient = 0.9
+
 /obj/item/clothing/under/rank/security2
 	name = "security officer's uniform"
 	desc = "It's made of a slightly sturdier material, to allow for robust protection."
