@@ -34,8 +34,7 @@ var/const/BORG_WIRE_CAMERA = 16
 
 		if (BORG_WIRE_AI_CONTROL) //Cut the AI wire to reset AI control
 			if(!mended)
-				if (R.connected_ai)
-					R.connected_ai = null
+				R.disconnect_from_ai()
 
 		if (BORG_WIRE_CAMERA)
 			if(!isnull(R.camera) && !R.scrambledcodes)
@@ -56,12 +55,8 @@ var/const/BORG_WIRE_CAMERA = 16
 		if (BORG_WIRE_AI_CONTROL) //pulse the AI wire to make the borg reselect an AI
 			if(!R.emagged)
 				var/mob/living/silicon/ai/new_ai = select_active_ai(R)
-				if(new_ai && (new_ai != R.connected_ai))
-					R.connected_ai.connected_robots -= src
-					R.connected_ai = new_ai
-					new_ai.connected_robots += src
-					R.notify_ai(1)
-					R.sync()
+				R.connect_to_ai(new_ai)
+
 		if (BORG_WIRE_CAMERA)
 			if(!isnull(R.camera) && R.camera.can_use() && !R.scrambledcodes)
 				R.camera.kick_viewers() // Kick anyone watching the Cyborg's camera
