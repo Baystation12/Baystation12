@@ -226,9 +226,7 @@
 				if(tra.current)
 					var/I = image('icons/mob/mob.dmi', loc = tra.current, icon_state = "traitor")
 					src.client.images += I
-		if(src.connected_ai)
-			src.connected_ai.connected_robots -= src
-			src.connected_ai = null
+		src.disconnect_from_ai()
 		if(src.mind)
 			if(!src.mind.special_role)
 				src.mind.special_role = "traitor"
