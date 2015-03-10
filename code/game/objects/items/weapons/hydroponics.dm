@@ -4,7 +4,7 @@
 //uncomment when this is updated to match storage update
 /*
 /obj/item/weapon/seedbag
-	icon = 'icons/obj/hydroponics.dmi'
+	icon = 'icons/obj/hydroponics_machines.dmi'
 	icon_state = "seedbag"
 	name = "Seed Bag"
 	desc = "A small satchel made for organizing seeds."

@@ -1,6 +1,8 @@
 /datum/job/rd
 	title = "Research Director"
 	flag = RD
+	head_position = 1
+	department = "Science"
 	department_flag = MEDSCI
 	faction = "Station"
 	total_positions = 1
@@ -40,15 +42,16 @@
 /datum/job/scientist
 	title = "Scientist"
 	flag = SCIENTIST
+	department = "Science"
 	department_flag = MEDSCI
 	faction = "Station"
-	total_positions = 6
+	total_positions = 5
 	spawn_positions = 3
 	supervisors = "the research director"
 	selection_color = "#ffeeff"
 	access = list(access_robotics, access_tox, access_tox_storage, access_research, access_xenobiology, access_xenoarch)
 	minimal_access = list(access_tox, access_tox_storage, access_research, access_xenoarch)
-	alt_titles = list("Xenoarcheologist", "Anomalist", "Phoron Researcher", "Xenobotanist")
+	alt_titles = list("Xenoarcheologist", "Anomalist", "Phoron Researcher")
 
 	minimal_player_age = 14
 
@@ -72,14 +75,16 @@
 /datum/job/xenobiologist
 	title = "Xenobiologist"
 	flag = XENOBIOLOGIST
+	department = "Science"
 	department_flag = MEDSCI
 	faction = "Station"
-	total_positions = 2
+	total_positions = 3
 	spawn_positions = 2
 	supervisors = "the research director"
 	selection_color = "#ffeeff"
 	access = list(access_robotics, access_tox, access_tox_storage, access_research, access_xenobiology)
 	minimal_access = list(access_research, access_xenobiology)
+	alt_titles = list("Xenobotanist")
 
 	minimal_player_age = 14
 
@@ -101,6 +106,7 @@
 /datum/job/roboticist
 	title = "Roboticist"
 	flag = ROBOTICIST
+	department = "Science"
 	department_flag = MEDSCI
 	faction = "Station"
 	total_positions = 2

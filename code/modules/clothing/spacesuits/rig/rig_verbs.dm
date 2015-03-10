@@ -141,6 +141,9 @@
 	set category = "Hardsuit"
 	set src = usr.contents
 
+	if(malfunction_check(usr))
+		return
+
 	if(!check_power_cost(usr, 0, 0, 0, 0))
 		return
 
@@ -168,6 +171,9 @@
 	set category = "Hardsuit"
 	set src = usr.contents
 
+	if(malfunction_check(usr))
+		return
+
 	if(canremove)
 		usr << "<span class='warning'>The suit is not active.</span>"
 		return
@@ -189,6 +195,9 @@
 	set category = "Hardsuit"
 	set src = usr.contents
 
+	if(malfunction_check(usr))
+		return
+	
 	if(!check_power_cost(usr, 0, 0, 0, 0))
 		return
 
@@ -221,6 +230,9 @@
 	set desc = "Toggle a system module."
 	set category = "Hardsuit"
 	set src = usr.contents
+
+	if(malfunction_check(usr))
+		return
 
 	if(!check_power_cost(usr, 0, 0, 0, 0))
 		return
@@ -256,6 +268,9 @@
 	set desc = "Engages a system module."
 	set category = "Hardsuit"
 	set src = usr.contents
+
+	if(malfunction_check(usr))
+		return
 
 	if(canremove)
 		usr << "<span class='warning'>The suit is not active.</span>"

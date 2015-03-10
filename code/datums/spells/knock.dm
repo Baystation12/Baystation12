@@ -14,6 +14,7 @@
 		for(var/obj/machinery/door/door in T.contents)
 			spawn(1)
 				if(istype(door,/obj/machinery/door/airlock))
-					door:unlock(1)	//forced because it's magic!
+					var/obj/machinery/door/airlock/A = door
+					A.unlock(1)	//forced because it's magic!
 				door.open()
 	return

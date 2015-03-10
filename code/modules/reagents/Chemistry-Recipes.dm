@@ -1284,6 +1284,28 @@
 	new /obj/item/weapon/reagent_containers/food/snacks/sliceable/cheesewheel(location)
 	return
 
+/datum/chemical_reaction/meatball
+	name = "Meatball"
+	id = "meatball"
+	result = null
+	required_reagents = list("protein" = 3, "flour" = 5)
+	result_amount = 3
+
+/datum/chemical_reaction/meatball/on_reaction(var/datum/reagents/holder, var/created_volume)
+	new /obj/item/weapon/reagent_containers/food/snacks/meatball(get_turf(holder.my_atom))
+	return
+
+/datum/chemical_reaction/dough
+	name = "Dough"
+	id = "dough"
+	result = null
+	required_reagents = list("egg" = 3, "flour" = 10)
+	result_amount = 1
+
+/datum/chemical_reaction/dough/on_reaction(var/datum/reagents/holder, var/created_volume)
+	new /obj/item/weapon/reagent_containers/food/snacks/dough(get_turf(holder.my_atom))
+	return
+
 /datum/chemical_reaction/syntiflesh
 	name = "Syntiflesh"
 	id = "syntiflesh"

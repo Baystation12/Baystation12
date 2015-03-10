@@ -171,7 +171,7 @@
 	if(stage >= 3 && prob(1))
 		owner.druggy = max(owner.druggy, 15)
 	if(stage == 5 && prob(1))
-		owner.hallucination = max(M.hallucination, 10)
+		owner.hallucination = max(owner.hallucination, 10)
 
 /datum/addiction/spacedrugs/withdrawal_act()
 	if(stage >= 1 && prob(1))
@@ -187,11 +187,11 @@
 	if(stage >= 2 && prob(1))
 		owner << "<span class='warning'>You feel dizzy.</span>"
 	if(stage >= 3 && prob(1))
-		owner.eye_blurry = max(M.eye_blurry, 10)
+		owner.eye_blurry = max(owner.eye_blurry, 10)
 	if(stage >= 3 && prob(1))
-		owner.eye_blurry = max(M.eye_blurry, 10)
+		owner.eye_blurry = max(owner.eye_blurry, 10)
 	if(stage == 5 && prob(1))
-		owner.hallucination = max(M.hallucination, 10)
+		owner.hallucination = max(owner.hallucination, 10)
 
 /datum/addiction/mindbreaker/withdrawal_act()
 	if(stage >= 1 && prob(1))

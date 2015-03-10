@@ -109,7 +109,7 @@
 	initial_ammo = 0
 
 /obj/item/ammo_magazine/a556
-	name = "magazine (5.56)"
+	name = "magazine (5.56mm)"
 	icon_state = "5.56"
 	origin_tech = "combat=2"
 	mag_type = MAGAZINE

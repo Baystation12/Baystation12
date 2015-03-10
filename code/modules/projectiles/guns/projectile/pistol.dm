@@ -7,11 +7,6 @@
 	origin_tech = "combat=2;materials=2"
 	load_method = MAGAZINE
 
-/obj/item/weapon/gun/projectile/colt/flash
-	name = "\improper Colt M1911 signal pistol"
-	desc = "A cheap Martian knock-off of a Colt M1911. Uses .45 signal flash rounds."
-	magazine_type = /obj/item/ammo_magazine/c45m/flash
-
 /obj/item/weapon/gun/projectile/colt/detective
 	desc = "A cheap Martian knock-off of a Colt M1911. Uses less-than-lethal .45 rounds."
 	magazine_type = /obj/item/ammo_magazine/c45m/rubber
@@ -35,14 +30,18 @@
 		return 1
 
 /obj/item/weapon/gun/projectile/sec
-	desc = "A Nanotrasen designed sidearm, found pretty much everywhere humans are. Uses less-than-lethal .45 rounds."
+	desc = "A NanoTrasen designed sidearm, found pretty much everywhere humans are. Uses less-than-lethal .45 rounds."
 	name = "\improper NT Mk58"
 	icon_state = "secguncomp"
 	magazine_type = /obj/item/ammo_magazine/c45m/rubber
 	caliber = ".45"
-	origin_tech = "combat=3;materials=2"
+	origin_tech = "combat=2;materials=2"
 	load_method = MAGAZINE
 
+/obj/item/weapon/gun/projectile/sec/flash
+	name = "\improper NT Mk58 signal pistol"
+	desc = "A NanoTrasen designed sidearm, found pretty much everywhere humans are. Uses .45 signal flash rounds."
+	magazine_type = /obj/item/ammo_magazine/c45m/flash
 
 /obj/item/weapon/gun/projectile/sec/wood
 	desc = "A Nanotrasen designed sidearm, this one has a sweet wooden grip. Uses less-than-lethal .45 rounds."

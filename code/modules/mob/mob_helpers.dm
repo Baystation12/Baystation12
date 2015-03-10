@@ -149,6 +149,13 @@ proc/hassensorlevel(A, var/level)
 		var/obj/item/clothing/under/U = H.w_uniform
 		return U.sensor_mode >= level
 	return 0
+	
+proc/getsensorlevel(A)
+	var/mob/living/carbon/human/H = A
+	if(istype(H) && istype(H.w_uniform, /obj/item/clothing/under))
+		var/obj/item/clothing/under/U = H.w_uniform
+		return U.sensor_mode
+	return SUIT_SENSOR_OFF
 
 /proc/hsl2rgb(h, s, l)
 	return //TODO: Implement
@@ -559,3 +566,16 @@ proc/is_blind(A)
 			say_dead_direct("The ghost of <span class='name'>[name]</span> now [pick("skulks","lurks","prowls","creeps","stalks")] among the dead. [message]")
 		else
 			say_dead_direct("<span class='name'>[name]</span> no longer [pick("skulks","lurks","prowls","creeps","stalks")] in the realm of the dead. [message]")
+
+/mob/proc/switch_to_camera(var/obj/machinery/camera/C)
+	if (!C.can_use() || stat || (get_dist(C, src) > 1 || machine != src || blinded || !canmove))
+		return 0
+	check_eye(src)
+	return 1
+
+/mob/living/silicon/ai/switch_to_camera(var/obj/machinery/camera/C)
+	if(!C.can_use() || !is_in_chassis())
+		return 0
+
+	eyeobj.setLoc(C)
+	return 1

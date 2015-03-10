@@ -19,6 +19,18 @@
 	var/list/targetTurfs
 	var/list/wallList
 	var/density
+	var/show_log = 1
+
+/datum/effect/effect/system/smoke_spread/chem/spores
+	show_log = 0
+	var/datum/seed/seed
+
+/datum/effect/effect/system/smoke_spread/chem/spores/New(seed_name)
+	if(seed_name && plant_controller)
+		seed = plant_controller.seeds[seed_name]
+	if(!seed)
+		del(src)
+	..()
 
 /datum/effect/effect/system/smoke_spread/chem/New()
 	..()
@@ -61,16 +73,17 @@
 	var/where = "[A.name] | [location.x], [location.y]"
 	var/whereLink = "<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[location.x];Y=[location.y];Z=[location.z]'>[where]</a>"
 
-	if(carry.my_atom.fingerprintslast)
-		var/mob/M = get_mob_by_key(carry.my_atom.fingerprintslast)
-		var/more = ""
-		if(M)
-			more = "(<A HREF='?_src_=holder;adminmoreinfo=\ref[M]'>?</a>)"
-		message_admins("A chemical smoke reaction has taken place in ([whereLink])[contained]. Last associated key is [carry.my_atom.fingerprintslast][more].", 0, 1)
-		log_game("A chemical smoke reaction has taken place in ([where])[contained]. Last associated key is [carry.my_atom.fingerprintslast].")
-	else
-		message_admins("A chemical smoke reaction has taken place in ([whereLink]). No associated key.", 0, 1)
-		log_game("A chemical smoke reaction has taken place in ([where])[contained]. No associated key.")
+	if(show_log)
+		if(carry.my_atom.fingerprintslast)
+			var/mob/M = get_mob_by_key(carry.my_atom.fingerprintslast)
+			var/more = ""
+			if(M)
+				more = "(<A HREF='?_src_=holder;adminmoreinfo=\ref[M]'>?</a>)"
+			message_admins("A chemical smoke reaction has taken place in ([whereLink])[contained]. Last associated key is [carry.my_atom.fingerprintslast][more].", 0, 1)
+			log_game("A chemical smoke reaction has taken place in ([where])[contained]. Last associated key is [carry.my_atom.fingerprintslast].")
+		else
+			message_admins("A chemical smoke reaction has taken place in ([whereLink]). No associated key.", 0, 1)
+			log_game("A chemical smoke reaction has taken place in ([where])[contained]. No associated key.")
 
 //Runs the chem smoke effect
 // Spawns damage over time loop for each reagent held in the cloud.
@@ -129,6 +142,7 @@
 
 /datum/effect/effect/system/smoke_spread/chem/proc/spawnSmoke(var/turf/T, var/icon/I, var/dist = 1) // Randomizes and spawns the smoke effect. Also handles deleting the smoke once the effect is finished.
 	var/obj/effect/effect/smoke/chem/smoke = new(location)
+
 	if(chemholder.reagents.reagent_list.len)
 		chemholder.reagents.trans_to_obj(smoke, chemholder.reagents.volume / dist, copy = 1) //copy reagents to the smoke so mob/breathe() can handle inhaling the reagents
 	smoke.icon = I
@@ -142,6 +156,11 @@
 	smoke.opacity = 0		// lighting and view range updates
 	fadeOut(smoke)
 	smoke.delete()
+
+/datum/effect/effect/system/smoke_spread/chem/spores/spawnSmoke(var/turf/T, var/icon/I, var/dist = 1)
+	var/obj/effect/effect/smoke/chem/spores = new(location)
+	spores.name = "cloud of [seed.seed_name] [seed.seed_noun]"
+	..(T, I, dist, spores)
 
 /datum/effect/effect/system/smoke_spread/chem/proc/fadeOut(var/atom/A, var/frames = 16) // Fades out the smoke smoothly using it's alpha variable.
 	var/step = A.alpha / frames

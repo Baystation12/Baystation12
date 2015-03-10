@@ -33,7 +33,7 @@
 							/obj/item/toy/prize/odysseus					= 1,
 							/obj/item/toy/prize/phazon						= 1,
 							/obj/item/toy/waterflower						= 1,
-							/obj/item/toy/figure							= 1,
+							/obj/random/action_figure								= 1,
 							/obj/random/plushie								= 1,
 							/obj/item/toy/cultsword							= 1
 							)
@@ -84,7 +84,7 @@
 
 /obj/machinery/computer/arcade/Topic(href, href_list)
 	if(..())
-		return
+		return 1
 
 	if (!src.blocked && !src.gameover)
 		if (href_list["attack"])

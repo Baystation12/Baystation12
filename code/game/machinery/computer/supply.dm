@@ -49,7 +49,7 @@
 
 /obj/machinery/computer/ordercomp/Topic(href, href_list)
 	if(..())
-		return
+		return 1
 
 	if( isturf(loc) && (in_range(src, usr) || istype(usr, /mob/living/silicon)) )
 		usr.set_machine(src)
@@ -224,7 +224,7 @@
 		world.log << "## ERROR: Eek. The supply/shuttle datum is missing somehow."
 		return
 	if(..())
-		return
+		return 1
 
 	if(isturf(loc) && ( in_range(src, usr) || istype(usr, /mob/living/silicon) ) )
 		usr.set_machine(src)

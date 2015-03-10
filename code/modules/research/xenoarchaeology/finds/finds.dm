@@ -208,7 +208,8 @@
 			new_item.icon_state = "box"
 			var/obj/item/weapon/storage/box/new_box = new_item
 			new_box.max_w_class = pick(1,2,2,3,3,3,4,4)
-			new_box.max_combined_w_class = rand(new_box.max_w_class, new_box.max_w_class * 10)
+			var/storage_amount = 2**(new_box.max_w_class-1)
+			new_box.max_storage_space = rand(storage_amount, storage_amount * 10)
 			if(prob(30))
 				apply_image_decorations = 1
 		if(12)
@@ -345,7 +346,7 @@
 			/obj/item/weapon/gun/energy/laser/practice/xenoarch,\
 			/obj/item/weapon/gun/energy/laser/xenoarch,\
 			/obj/item/weapon/gun/energy/xray/xenoarch,\
-			/obj/item/weapon/gun/energy/laser/captain/xenoarch)
+			/obj/item/weapon/gun/energy/captain/xenoarch)
 			if(spawn_type)
 				var/obj/item/weapon/gun/energy/new_gun = new spawn_type(src.loc)
 				new_item = new_gun

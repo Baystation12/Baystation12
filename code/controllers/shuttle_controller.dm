@@ -147,13 +147,12 @@ var/global/datum/shuttle_controller/shuttle_controller
 
 	// Public shuttles
 	shuttle = new()
-	shuttle.location = 1
 	shuttle.warmup_time = 10
 	shuttle.area_offsite = locate(/area/shuttle/constructionsite/site)
 	shuttle.area_station = locate(/area/shuttle/constructionsite/station)
 	shuttle.docking_controller_tag = "engineering_shuttle"
 	shuttle.dock_target_station = "engineering_dock_airlock"
-	shuttle.dock_target_offsite = "engineering_station_airlock"
+	shuttle.dock_target_offsite = "edock_airlock"
 	shuttles["Engineering"] = shuttle
 	process_shuttles += shuttle
 

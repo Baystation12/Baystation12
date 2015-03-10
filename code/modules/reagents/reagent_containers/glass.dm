@@ -12,6 +12,7 @@
 	amount_per_transfer_from_this = 10
 	possible_transfer_amounts = list(5,10,15,25,30,60)
 	volume = 60
+	w_class = 2
 	flags = OPENCONTAINER
 
 	var/label_text = ""
@@ -205,12 +206,6 @@
 	New()
 		..()
 		reagents.add_reagent("sacid", 60)
-		update_icon()
-
-/obj/item/weapon/reagent_containers/glass/beaker/slime
-	New()
-		..()
-		reagents.add_reagent("slimejelly", 60)
 		update_icon()
 
 /obj/item/weapon/reagent_containers/glass/bucket

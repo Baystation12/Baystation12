@@ -792,26 +792,25 @@ note dizziness decrements automatically in the mob's Life() proc.
 /mob/Stat()
 	..()
 
-	if(statpanel("MC"))	//not looking at that panel
-
-		if(client && client.holder)
+	if(client && client.holder)
+		if(statpanel("Status"))
 			stat(null,"Location:\t([x], [y], [z])")
 			stat(null,"CPU:\t[world.cpu]")
 			stat(null,"Instances:\t[world.contents.len]")
-
-			if(master_controller)
-				stat(null,"MasterController-[last_tick_duration] ([master_controller.processing?"On":"Off"]-[controller_iteration])")
-				stat(null,"Air-[master_controller.air_cost]\tSun-[master_controller.sun_cost]")
-				stat(null,"Mob-[master_controller.mobs_cost]\t#[mob_list.len]")
-				stat(null,"Dis-[master_controller.diseases_cost]\t#[active_diseases.len]")
-				stat(null,"Mch-[master_controller.machines_cost]\t#[machines.len]")
-				stat(null,"Obj-[master_controller.objects_cost]\t#[processing_objects.len]")
-				stat(null,"Net-[master_controller.networks_cost]\tPnet-[master_controller.powernets_cost]")
-				stat(null,"NanoUI-[master_controller.nano_cost]\t#[nanomanager.processing_uis.len]")
-				stat(null,"Events-[master_controller.events_cost]\t#[event_manager.active_events.len]")
-				stat(null,"Tick-[master_controller.ticker_cost]\tALL-[master_controller.total_cost]")
-			else
-				stat(null,"MasterController-ERROR")
+		if(statpanel("Status") && master_controller)
+			stat(null,"MasterController-[last_tick_duration] ([master_controller.processing?"On":"Off"]-[controller_iteration])")
+			stat(null,"Air-[master_controller.air_cost]\tSun-[master_controller.sun_cost]")
+			stat(null,"Mob-[master_controller.mobs_cost]\t#[mob_list.len]")
+			stat(null,"Dis-[master_controller.diseases_cost]\t#[active_diseases.len]")
+			stat(null,"Mch-[master_controller.machines_cost]\t#[machines.len]")
+			stat(null,"Obj-[master_controller.objects_cost]\t#[processing_objects.len]")
+			stat(null,"Net-[master_controller.networks_cost]\tPnet-[master_controller.powernets_cost]")
+			stat(null,"NanoUI-[master_controller.nano_cost]\t#[nanomanager.processing_uis.len]")
+			stat(null,"Event-[master_controller.events_cost]\t#[event_manager.active_events.len]")
+			alarm_manager.stat_entry()
+			stat(null,"Tick-[master_controller.ticker_cost]\tALL-[master_controller.total_cost]")
+		else
+			stat(null,"MasterController-ERROR")
 
 	if(listed_turf && client)
 		if(!TurfAdjacent(listed_turf))
@@ -859,13 +858,15 @@ note dizziness decrements automatically in the mob's Life() proc.
 			canmove = 1
 			pixel_y = V.mob_offset_y
 	else if(buckled)
-		if(buckled.buckle_lying != -1) lying = buckled.buckle_lying
-		if (!buckled.buckle_movable)
-			anchored = 1
-			canmove = 0
-		else
-			anchored = 0
-			canmove = 1
+		anchored = 1
+		canmove = 0
+		if(istype(buckled))
+			if(buckled.buckle_lying != -1)
+				lying = buckled.buckle_lying
+			if(buckled.buckle_movable)
+				anchored = 0
+				canmove = 1
+
 	else if( stat || weakened || paralysis || resting || sleeping || (status_flags & FAKEDEATH))
 		lying = 1
 		canmove = 0
@@ -1181,7 +1182,9 @@ mob/proc/yank_out_object()
 		usr << "You are now facing [dir2text(facing_dir)]."
 
 /mob/proc/set_face_dir(var/newdir)
-	if(newdir)
+	if(newdir == facing_dir)
+		facing_dir = null
+	else if(newdir)
 		set_dir(newdir)
 		facing_dir = newdir
 	else if(facing_dir)
@@ -1201,20 +1204,16 @@ mob/proc/yank_out_object()
 
 /mob/verb/northfaceperm()
 	set hidden = 1
-	facing_dir = null
 	set_face_dir(NORTH)
 
 /mob/verb/southfaceperm()
 	set hidden = 1
-	facing_dir = null
 	set_face_dir(SOUTH)
 
 /mob/verb/eastfaceperm()
 	set hidden = 1
-	facing_dir = null
 	set_face_dir(EAST)
 
 /mob/verb/westfaceperm()
 	set hidden = 1
-	facing_dir = null
 	set_face_dir(WEST)

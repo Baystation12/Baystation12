@@ -78,7 +78,11 @@
 	return
 
 /datum/reagent/proc/get_data() // Just in case you have a reagent that handles data differently.
-	return data.Copy()
+	if(data && istype(data, /list))
+		return data.Copy()
+	else if(data)
+		return data
+	return null
 
 /* DEPRECATED - TODO: REMOVE EVERYWHERE */
 
@@ -632,7 +636,7 @@
 				return
 
 		if(volume < meltdose) // Not enough to melt anything
-			M.take_organ_damage(removed * power * 0.2) 
+			M.take_organ_damage(removed * power * 0.2)
 			return
 		if(!M.unacidable && removed > 0)
 			if(istype(M, /mob/living/carbon/human) && volume >= meltdose)
@@ -651,7 +655,7 @@
 /datum/reagent/acid/touch_obj(var/obj/O)
 	if(O.unacidable)
 		return
-	if((istype(O, /obj/item) || istype(O, /obj/effect/glowshroom)) && (volume > meltdose))
+	if((istype(O, /obj/item) || istype(O, /obj/effect/plant)) && (volume > meltdose))
 		var/obj/effect/decal/cleanable/molten_item/I = new/obj/effect/decal/cleanable/molten_item(O.loc)
 		I.desc = "Looks like this was \an [O] some time ago."
 		for(var/mob/M in viewers(5, O))
@@ -1367,11 +1371,8 @@
 		var/obj/effect/alien/weeds/alien_weeds = O
 		alien_weeds.health -= rand(15, 35)
 		alien_weeds.healthcheck()
-	else if(istype(O, /obj/effect/glowshroom))
+	else if(istype(O, /obj/effect/plant))
 		del(O)
-	else if(istype(O, /obj/effect/plantsegment)) // Kudzu
-		if(prob(50))
-			del(O)
 
 /datum/reagent/toxin/plantbgone/affect_mob(var/mob/living/carbon/M, var/alien, var/removed, var/location)
 	..()
@@ -1744,42 +1745,28 @@
 		return
 	..()
 
-/* 		flour <- We're back to flour bags
-			name = "flour"
-			id = "flour"
-			description = "This is what you rub all over yourself to pretend to be a ghost."
-			reagent_state = SOLID
-			nutriment_factor = 1 * REAGENTS_METABOLISM
-			color = "#FFFFFF" // rgb: 0, 0, 0
+/datum/reagent/nutriment/egg // Also bad for skrell. Not a child of protein because it might mess up, not sure.
+	name = "egg yolk"
+	id = "egg"
+	color = "#FFFFAA"
 
-			on_mob_life(var/mob/living/M as mob)
-				M.nutrition += nutriment_factor
-				..()
-				return
+/datum/reagent/nutriment/egg/affect_mob(var/mob/living/carbon/M, var/alien, var/removed, var/location)
+	if(alien && alien == IS_SKRELL)
+		M.adjustToxLoss(0.5)
+		return
+	..()
 
-			reaction_turf(var/turf/T, var/volume)
-				src = null
-				if(!istype(T, /turf/space))
-					new /obj/effect/decal/cleanable/flour(T)*/
+/datum/reagent/nutriment/flour
+	name = "flour"
+	id = "flour"
+	description = "This is what you rub all over yourself to pretend to be a ghost."
+	reagent_state = SOLID
+	nutriment_factor = 1
+	color = "#FFFFFF"
 
-/*	//removed because of meta bullshit. this is why we can't have nice things.
-		syndicream
-			name = "Cream filling"
-			id = "syndicream"
-			description = "Delicious cream filling of a mysterious origin. Tastes criminally good."
-			nutriment_factor = 1 * REAGENTS_METABOLISM
-			color = "#AB7878" // rgb: 171, 120, 120
-
-			on_mob_life(var/mob/living/M as mob)
-				M.nutrition += nutriment_factor
-				if(istype(M, /mob/living/carbon/human) && M.mind)
-					if(M.mind.special_role)
-						if(!M) M = holder.my_atom
-						M.heal_organ_damage(1,1)
-						M.nutrition += nutriment_factor
-						..()
-						return
-				..()*/
+/datum/reagent/nutriment/flour/touch_turf(var/turf/simulated/T)
+	if(!istype(T, /turf/space))
+		new /obj/effect/decal/cleanable/flour(T)
 
 /datum/reagent/nutriment/coco
 	name = "Coco Powder"

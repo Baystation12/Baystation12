@@ -31,12 +31,12 @@
 	var/alarm_on = 0
 	var/busy = 0
 
+	var/on_open_network = 0
+
 /obj/machinery/camera/New()
 	wires = new(src)
 	assembly = new(src)
 	assembly.state = 4
-
-	invalidateCameraCache()
 
 	/* // Use this to look for cameras that have the same c_tag.
 	for(var/obj/machinery/camera/C in cameranet.cameras)
@@ -53,28 +53,21 @@
 		ASSERT(src.network.len > 0)
 	..()
 
-/obj/machinery/camera/Del()
-	if(!alarm_on)
-		triggerCameraAlarm()
-
-	cancelCameraAlarm()
-	..()
-
 /obj/machinery/camera/emp_act(severity)
 	if(!isEmpProof())
 		if(prob(100/severity))
-			invalidateCameraCache()
 			stat |= EMPED
 			SetLuminosity(0)
 			kick_viewers()
-			triggerCameraAlarm()
+			triggerCameraAlarm(30 / severity)
 			update_icon()
+			update_coverage()
 
 			spawn(900)
 				stat &= ~EMPED
 				cancelCameraAlarm()
 				update_icon()
-				invalidateCameraCache()
+				update_coverage()
 			..()
 
 /obj/machinery/camera/bullet_act(var/obj/item/projectile/P)
@@ -121,7 +114,7 @@
 		destroy()
 
 /obj/machinery/camera/attackby(obj/W as obj, mob/living/user as mob)
-	invalidateCameraCache()
+	update_coverage()
 	// DECONSTRUCTION
 	if(isscrewdriver(W))
 		//user << "<span class='notice'>You start to [panel_open ? "close" : "open"] the camera's panel.</span>"
@@ -165,7 +158,7 @@
 		for(var/mob/living/silicon/ai/O in living_mob_list)
 			if(!O.client) continue
 			if(U.name == "Unknown") O << "<b>[U]</b> holds \a [itemname] up to one of your cameras ..."
-			else O << "<b><a href='byond://?src=\ref[O];track2=\ref[O];track=\ref[U]'>[U]</a></b> holds \a [itemname] up to one of your cameras ..."
+			else O << "<b><a href='byond://?src=\ref[O];track2=\ref[O];track=\ref[U];trackname=[U.name]'>[U]</a></b> holds \a [itemname] up to one of your cameras ..."
 			O << browse(text("<HTML><HEAD><TITLE>[]</TITLE></HEAD><BODY><TT>[]</TT></BODY></HTML>", itemname, info), text("window=[]", itemname))
 		for(var/mob/O in player_list)
 			if (istype(O.machine, /obj/machinery/computer/security))
@@ -202,7 +195,7 @@
 		//legacy support, if choice is != 1 then just kick viewers without changing status
 		kick_viewers()
 	else
-		invalidateCameraCache()
+		update_coverage()
 		set_status( !src.status )
 		if (!(src.status))
 			visible_message("\red [user] has deactivated [src]!")
@@ -222,11 +215,11 @@
 
 //Used when someone breaks a camera
 /obj/machinery/camera/proc/destroy()
-	invalidateCameraCache()
 	stat |= BROKEN
 	kick_viewers()
 	triggerCameraAlarm()
 	update_icon()
+	update_coverage()
 
 	//sparks
 	var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
@@ -261,22 +254,16 @@
 	else
 		icon_state = initial(icon_state)
 
-/obj/machinery/camera/proc/triggerCameraAlarm()
+/obj/machinery/camera/proc/triggerCameraAlarm(var/duration = 0)
 	alarm_on = 1
-	if(!get_area(src))
-		return
-
-	for(var/mob/living/silicon/S in mob_list)
-		S.triggerAlarm("Camera", get_area(src), list(src), src)
-
+	camera_alarm.triggerAlarm(loc, src, duration)
 
 /obj/machinery/camera/proc/cancelCameraAlarm()
-	alarm_on = 0
-	if(!get_area(src))
+	if(wires.IsIndexCut(CAMERA_WIRE_ALARM))
 		return
 
-	for(var/mob/living/silicon/S in mob_list)
-		S.cancelAlarm("Camera", get_area(src), src)
+	alarm_on = 0
+	camera_alarm.clearAlarm(loc, src)
 
 //if false, then the camera is listed as DEACTIVATED and cannot be used
 /obj/machinery/camera/proc/can_use()
@@ -361,3 +348,72 @@
 
 	user.set_machine(src)
 	wires.Interact(user)
+
+/obj/machinery/camera/proc/add_network(var/network_name)
+	add_networks(list(network_name))
+
+/obj/machinery/camera/proc/remove_network(var/network_name)
+	remove_networks(list(network_name))
+
+/obj/machinery/camera/proc/add_networks(var/list/networks)
+	var/network_added
+	network_added = 0
+	for(var/network_name in networks)
+		if(!(network_name in src.network))
+			network += network_name
+			network_added = 1
+
+	if(network_added)
+		update_coverage(1)
+
+/obj/machinery/camera/proc/remove_networks(var/list/networks)
+	var/network_removed
+	network_removed = 0
+	for(var/network_name in networks)
+		if(network_name in src.network)
+			network -= network_name
+			network_removed = 1
+
+	if(network_removed)
+		update_coverage(1)
+
+/obj/machinery/camera/proc/replace_networks(var/list/networks)
+	if(networks.len != network.len)
+		network = networks
+		update_coverage(1)
+		return
+
+	for(var/new_network in networks)
+		if(!(new_network in network))
+			network = networks
+			update_coverage(1)
+			return
+
+/obj/machinery/camera/proc/clear_all_networks()
+	if(network.len)
+		network.Cut()
+		update_coverage(1)
+
+/obj/machinery/camera/proc/nano_structure()
+	var/cam[0]
+	cam["name"] = sanitize(c_tag)
+	cam["deact"] = !can_use()
+	cam["camera"] = "\ref[src]"
+	cam["x"] = x
+	cam["y"] = y
+	cam["z"] = z
+	return cam
+
+/obj/machinery/camera/proc/update_coverage(var/network_change = 0)
+	if(network_change)
+		var/list/open_networks = difflist(network, restricted_camera_networks)
+		// Add or remove camera from the camera net as necessary
+		if(on_open_network && !open_networks.len)
+			cameranet.removeCamera(src)
+		else if(!on_open_network && open_networks.len)
+			on_open_network = 1
+			cameranet.addCamera(src)
+	else
+		cameranet.updateVisibility(src, 0)
+
+	invalidateCameraCache()

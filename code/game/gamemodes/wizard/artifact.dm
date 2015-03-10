@@ -15,7 +15,7 @@
 /obj/effect/rend
 	name = "Tear in the fabric of reality"
 	desc = "You should run now"
-	icon = 'icons/obj/biomass.dmi'
+	icon = 'icons/obj/wizard.dmi'
 	icon_state = "rift"
 	density = 1
 	unacidable = 1

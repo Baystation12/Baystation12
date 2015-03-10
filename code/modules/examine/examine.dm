@@ -11,8 +11,8 @@
 	var/description_fluff = null //Green text about the atom's fluff, if any exists.
 	var/description_antag = null //Malicious red text, for the antags.
 
-/atom/examine(mob/user)
-	..()
+/atom/examine(mob/user, var/distance = -1, var/infix = "", var/suffix = "")
+	. = ..()
 	user.description_holders["info"] = get_description_info()
 	user.description_holders["fluff"] = get_description_fluff()
 	if(user.mind && user.mind.special_role || isobserver(user)) //Runtime prevention, as ghosts don't have minds.

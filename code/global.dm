@@ -10,7 +10,7 @@ var/global/list/med_hud_users            = list() // List of all entities using 
 var/global/list/sec_hud_users            = list() // List of all entities using a security HUD.
 
 // Those networks can only be accessed by pre-existing terminals. AIs and new terminals can't use them.
-var/list/restricted_camera_networks = list("thunder","ERT","NUKE")
+var/list/restricted_camera_networks = list("thunder","ERT","NUKE","Secret")
 
 var/global/list/global_mutations  = list() // List of hidden mutation things.
 var/global/defer_powernet_rebuild = 0      // True if net rebuild will be called manually after an event.
@@ -174,8 +174,9 @@ var/gravity_is_on = 1
 var/join_motd = null
 var/forceblob = 0
 
-var/datum/nanomanager/nanomanager     = new() // NanoManager, the manager for Nano UIs.
-var/datum/event_manager/event_manager = new() // Event Manager, the manager for events.
+var/datum/nanomanager/nanomanager		= new() // NanoManager, the manager for Nano UIs.
+var/datum/event_manager/event_manager	= new() // Event Manager, the manager for events.
+var/datum/subsystem/alarm/alarm_manager	= new() // Alarm Manager, the manager for alarms.
 
 var/list/awaydestinations = list() // Away missions. A list of landmarks that the warpgate can take you to.
 
@@ -256,3 +257,5 @@ var/max_explosion_range = 14
 
 // Announcer intercom, because too much stuff creates an intercom for one message then hard del()s it.
 var/global/obj/item/device/radio/intercom/global_announcer = new(null)
+
+var/list/station_departments = list("Command", "Medical", "Engineering", "Science", "Security", "Cargo", "Civilian")

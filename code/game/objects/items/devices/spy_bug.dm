@@ -140,7 +140,6 @@
 	..()
 	name = "DV-136ZB #[rand(1000,9999)]"
 	c_tag = name
-	cameranet.removeCamera(src)		// Sorry, no AI spying.
 
 /obj/machinery/camera/spy/check_eye(var/mob/user as mob)
 	return 1
