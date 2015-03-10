@@ -17,7 +17,7 @@
 	//Placeholder for effect that trigger on eating that aren't tied to reagents.
 /obj/item/weapon/reagent_containers/food/snacks/proc/On_Consume(var/mob/M)
 	if(!usr)	return
-	if(!reagents.total_volume)
+	if(!reagents.volume)
 		M.visible_message("<span class='notice'>[M] finishes eating \the [src].</span>","<span class='notice'>You finish eating \the [src].</span>")
 		usr.drop_from_inventory(src)	//so icons update :[
 
@@ -34,8 +34,7 @@
 	return
 
 /obj/item/weapon/reagent_containers/food/snacks/attack(mob/M as mob, mob/user as mob, def_zone)
-
-	if(!reagents.total_volume)
+	if(!reagents.volume)
 		user << "<span class='danger'>None of [src] left!</span>"
 		user.drop_from_inventory(src)
 		del(src)
@@ -92,17 +91,11 @@
 
 		if(reagents)								//Handle ingestion of the reagent.
 			playsound(M.loc,'sound/items/eatfood.ogg', rand(10,50), 1)
-			if(reagents.total_volume)
-				if(reagents.total_volume > bitesize)
-					/*
-					 * I totally cannot understand what this code supposed to do.
-					 * Right now every snack consumes in 2 bites, my popcorn does not work right, so I simplify it. -- rastaf0
-					var/temp_bitesize =  max(reagents.total_volume /2, bitesize)
-					reagents.trans_to(M, temp_bitesize)
-					*/
-					reagents.trans_to_ingest(M, bitesize)
+			if(reagents.volume)
+				if(reagents.volume > bitesize)
+					reagents.trans_to_mob(M, bitesize, CHEM_INGEST)
 				else
-					reagents.trans_to_ingest(M, reagents.total_volume)
+					reagents.trans_to_mob(M, reagents.volume, CHEM_INGEST)
 				bitecount++
 				On_Consume(M)
 			return 1
@@ -133,7 +126,7 @@
 		if(!U.reagents)
 			U.create_reagents(5)
 
-		if (U.reagents.total_volume > 0)
+		if (U.reagents.volume > 0)
 			user << "\red You already have something on your [U]."
 			return
 
@@ -149,9 +142,9 @@
 		I.color = src.filling_color
 		U.overlays += I
 
-		reagents.trans_to(U,min(reagents.total_volume,5))
+		reagents.trans_to_obj(U, min(reagents.volume,5))
 
-		if (reagents.total_volume <= 0)
+		if (reagents.volume <= 0)
 			del(src)
 		return
 
@@ -185,10 +178,10 @@
 			else
 				user.visible_message("\blue [user] slices \the [src]!", "\blue You slice \the [src]!")
 
-			var/reagents_per_slice = reagents.total_volume/slices_num
+			var/reagents_per_slice = reagents.volume/slices_num
 			for(var/i=1 to (slices_num-slices_lost))
 				var/obj/slice = new slice_path (src.loc)
-				reagents.trans_to(slice,reagents_per_slice)
+				reagents.trans_to_obj(slice, reagents_per_slice)
 			del(src)
 			return
 
@@ -210,7 +203,7 @@
 	user.visible_message("<b>[user]</b> nibbles away at \the [src].","You nibble away at \the [src].")
 	bitecount++
 	if(reagents && user.reagents)
-		reagents.trans_to_ingest(user, bitesize)
+		reagents.trans_to_mob(user, bitesize, CHEM_INGEST)
 	spawn(5)
 		if(!src && !user.client)
 			user.custom_emote(1,"[pick("burps", "cries for more", "burps twice", "looks at the area where the food was")]")
@@ -477,14 +470,14 @@
 	if(!(proximity && O.is_open_container()))
 		return
 	user << "You crack \the [src] into \the [O]."
-	reagents.trans_to(O, reagents.total_volume)
+	reagents.trans_to(O, reagents.volume)
 	user.drop_from_inventory(src)
 	del(src)
 
 /obj/item/weapon/reagent_containers/food/snacks/egg/throw_impact(atom/hit_atom)
 	..()
 	new/obj/effect/decal/cleanable/egg_smudge(src.loc)
-	src.reagents.reaction(hit_atom, TOUCH)
+	src.reagents.trans_to(hit_atom, reagents.volume)
 	src.visible_message("\red [src.name] has been squashed.","\red You hear a smack.")
 	del(src)
 
@@ -603,7 +596,7 @@
 	New()
 		..()
 		reagents.add_reagent("nutriment", 12)
-		reagents.add_reagent("stoxin", 3)
+		reagents.add_reagent("soporific", 3)
 		bitesize = 3
 
 /obj/item/weapon/reagent_containers/food/snacks/stuffing
@@ -1529,7 +1522,7 @@
 		reagents.add_reagent("nutriment", 4)
 		baconbeacon = new /obj/item/device/radio/beacon/bacon(src)
 	On_Consume()
-		if(!reagents.total_volume)
+		if(!reagents.volume)
 			baconbeacon.loc = usr
 			baconbeacon.digest_delay()
 */
@@ -2048,7 +2041,7 @@
 
 	New()
 		..()
-		reagents.add_reagent("minttoxin", 1)
+		reagents.add_reagent("mint", 1)
 		bitesize = 1
 
 /obj/item/weapon/reagent_containers/food/snacks/mushroomsoup

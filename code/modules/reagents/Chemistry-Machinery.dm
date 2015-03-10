@@ -139,7 +139,7 @@
 		if (dispensable_reagents.Find(href_list["dispense"]) && beaker != null && beaker.is_open_container())
 			var/obj/item/weapon/reagent_containers/B = src.beaker
 			var/datum/reagents/R = B.reagents
-			var/space = R.maximum_volume - R.total_volume
+			var/space = R.max_volume - R.volume
 
 			//uses 1 energy per 10 units.
 			var/added_amount = min(amount, energy / CHEM_DISPENSER_ENERGY_COST, space)
@@ -246,7 +246,7 @@
 	beaker = null
 	recharged = 0
 	hackedcheck = 0
-	dispensable_reagents = list("inaprovaline","ryetalyn","paracetamol","tramadol","oxycodone","sterilizine","leporazine","kelotane","dermaline","dexalin","dexalinp","tricordrazine","anti_toxin","synaptizine","hyronalin","arithrazine","alkysine","imidazoline","peridaxon","bicaridine","hyperzine","rezadone","spaceacillin","ethylredoxrazine","stoxin","chloralhydrate","cryoxadone","clonexadone")
+	dispensable_reagents = list("inaprovaline","ryetalyn","paracetamol","tramadol","oxycodone","sterilizine","leporazine","kelotane","dermaline","dexalin","dexalinp","tricordrazine","dylovene","synaptizine","hyronalin","arithrazine","alkysine","imidazoline","peridaxon","bicaridine","hyperzine","rezadone","spaceacillin","ethylredoxrazine","soporific","chloralhydrate","cryoxadone","clonexadone")
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -407,21 +407,21 @@
 		else if (href_list["createpill"] || href_list["createpill_multiple"])
 			var/count = 1
 
-			if(reagents.total_volume/count < 1) //Sanity checking.
+			if(reagents.volume/count < 1) //Sanity checking.
 				return
 
 			if (href_list["createpill_multiple"])
 				count = Clamp(isgoodnumber(input("Select the number of pills to make.", 10, pillamount) as num),1,max_pill_count)
 
-			if(reagents.total_volume/count < 1) //Sanity checking.
+			if(reagents.volume/count < 1) //Sanity checking.
 				return
 
-			var/amount_per_pill = reagents.total_volume/count
+			var/amount_per_pill = reagents.volume/count
 			if (amount_per_pill > 60) amount_per_pill = 60
 
 			var/name = reject_bad_text(input(usr,"Name:","Name your pill!","[reagents.get_master_reagent_name()] ([amount_per_pill] units)"))
 
-			if(reagents.total_volume/count < 1) //Sanity checking.
+			if(reagents.volume/count < 1) //Sanity checking.
 				return
 			while (count--)
 				var/obj/item/weapon/reagent_containers/pill/P = new/obj/item/weapon/reagent_containers/pill(src.loc)
@@ -430,7 +430,7 @@
 				P.pixel_x = rand(-7, 7) //random position
 				P.pixel_y = rand(-7, 7)
 				P.icon_state = "pill"+pillsprite
-				reagents.trans_to(P,amount_per_pill)
+				reagents.trans_to_obj(P, amount_per_pill)
 				if(src.loaded_pill_bottle)
 					if(loaded_pill_bottle.contents.len < loaded_pill_bottle.storage_slots)
 						P.loc = loaded_pill_bottle
@@ -445,11 +445,11 @@
 				P.pixel_x = rand(-7, 7) //random position
 				P.pixel_y = rand(-7, 7)
 				P.icon_state = bottlesprite
-				reagents.trans_to(P,60)
+				reagents.trans_to_obj(P, 60)
 				P.update_icon()
 			else
 				var/obj/item/weapon/reagent_containers/food/condiment/P = new/obj/item/weapon/reagent_containers/food/condiment(src.loc)
-				reagents.trans_to(P,50)
+				reagents.trans_to_obj(P, 50)
 		else if(href_list["change_pill"])
 			#define MAX_PILL_SPRITE 20 //max icon state of the pill sprites
 			var/dat = "<table>"
@@ -502,7 +502,7 @@
 			dat += "<A href='?src=\ref[src];ejectp=1'>Eject Pill Bottle \[[loaded_pill_bottle.contents.len]/[loaded_pill_bottle.storage_slots]\]</A><BR><BR>"
 		else
 			dat += "No pill bottle inserted.<BR><BR>"
-		if(!R.total_volume)
+		if(!R.volume)
 			dat += "Beaker is empty."
 		else
 			dat += "Add to buffer:<BR>"
@@ -516,7 +516,7 @@
 				dat += "<A href='?src=\ref[src];addcustom=[G.id]'>(Custom)</A><BR>"
 
 		dat += "<HR>Transfer to <A href='?src=\ref[src];toggle=1'>[(!mode ? "disposal" : "beaker")]:</A><BR>"
-		if(reagents.total_volume)
+		if(reagents.volume)
 			for(var/datum/reagent/N in reagents.reagent_list)
 				dat += "[N.name] , [N.volume] Units - "
 				dat += "<A href='?src=\ref[src];analyze=1;desc=[N.description];name=[N.name]'>(Analyze)</A> "
@@ -717,7 +717,7 @@
 			if(B)
 				Blood = B
 				break
-		if(!R.total_volume||!R.reagent_list.len)
+		if(!R.volume||!R.reagent_list.len)
 			dat += "The beaker is empty<BR>"
 		else if(!Blood)
 			dat += "No blood sample found in beaker"
@@ -785,7 +785,7 @@
 					dat += "nothing<BR>"
 			else
 				dat += "nothing<BR>"
-		dat += "<BR><A href='?src=\ref[src];eject=1'>Eject beaker</A>[((R.total_volume&&R.reagent_list.len) ? "-- <A href='?src=\ref[src];empty_beaker=1'>Empty beaker</A>":"")]<BR>"
+		dat += "<BR><A href='?src=\ref[src];eject=1'>Eject beaker</A>[((R.volume&&R.reagent_list.len) ? "-- <A href='?src=\ref[src];empty_beaker=1'>Empty beaker</A>":"")]<BR>"
 		dat += "<A href='?src=\ref[user];mach_close=pandemic'>Close</A>"
 
 	user << browse("<TITLE>[src.name]</TITLE><BR>[dat]", "window=pandemic;size=575x400")
@@ -871,7 +871,7 @@
 	if(istype(O,/obj/item/weapon/storage/bag/plants))
 		var/failed = 1
 		for (var/obj/item/G in O.contents)
-			if(!O.reagents || !O.reagents.total_volume)
+			if(!O.reagents || !O.reagents.volume)
 				continue
 			failed = 0
 			O.contents -= G
@@ -892,7 +892,7 @@
 		src.updateUsrDialog()
 		return 0
 
-	if(!sheet_reagents[O.type] && (!O.reagents || !O.reagents.total_volume))
+	if(!sheet_reagents[O.type] && (!O.reagents || !O.reagents.volume))
 		user << "\The [O] is not suitable for blending."
 		return 1
 
@@ -999,9 +999,7 @@
 	power_change()
 	if(stat & (NOPOWER|BROKEN))
 		return
-
-	// Sanity check.
-	if (!beaker || (beaker && beaker.reagents.total_volume >= beaker.reagents.maximum_volume))
+	if (!beaker || (beaker && beaker.reagents.volume >= beaker.reagents.max_volume))
 		return
 
 	playsound(src.loc, 'sound/machines/blender.ogg', 50, 1)
@@ -1010,7 +1008,6 @@
 	// Reset the machine.
 	spawn(60)
 		inuse = 0
-		interact(usr)
 
 	// Process.
 	for (var/obj/item/O in holdingitems)
@@ -1019,7 +1016,7 @@
 			holdingitems -= null
 			continue
 
-		var/remaining_volume = beaker.reagents.maximum_volume - beaker.reagents.total_volume
+		var/remaining_volume = beaker.reagents.max_volume - beaker.reagents.volume
 		if(sheet_reagents[O.type])
 			var/obj/item/stack/stack = O
 			if(istype(stack))
@@ -1029,10 +1026,10 @@
 					beaker.reagents.add_reagent(sheet_reagents[stack.type], (amount_to_take*REAGENTS_PER_SHEET))
 					continue
 
-		O.reagents.trans_to(beaker, min(O.reagents.total_volume, remaining_volume))
-		if(O.reagents.total_volume == 0)
+		O.reagents.trans_to(beaker, min(O.reagents.volume, remaining_volume))
+		if(O.reagents.volume == 0)
 			remove_object(O)
-		if (beaker.reagents.total_volume >= beaker.reagents.maximum_volume)
+		if (beaker.reagents.volume >= beaker.reagents.max_volume)
 			break
 
 #undef REAGENTS_PER_SHEET

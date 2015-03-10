@@ -88,10 +88,10 @@
 				dat += "<HR><A href='?src=\ref[src];removebeaker=1'>Remove Beaker</A><BR>"
 				if(src.connected.filtering)
 					dat += "<A href='?src=\ref[src];togglefilter=1'>Stop Dialysis</A><BR>"
-					dat += text("Output Beaker has [] units of free space remaining<BR><HR>", src.connected.beaker.reagents.maximum_volume - src.connected.beaker.reagents.total_volume)
+					dat += text("Output Beaker has [] units of free space remaining<BR><HR>", src.connected.beaker.reagents.max_volume - src.connected.beaker.reagents.volume)
 				else
 					dat += "<HR><A href='?src=\ref[src];togglefilter=1'>Start Dialysis</A><BR>"
-					dat += text("Output Beaker has [] units of free space remaining<BR><HR>", src.connected.beaker.reagents.maximum_volume - src.connected.beaker.reagents.total_volume)
+					dat += text("Output Beaker has [] units of free space remaining<BR><HR>", src.connected.beaker.reagents.max_volume - src.connected.beaker.reagents.volume)
 			else
 				dat += "<HR>No Dialysis Output Beaker is present.<BR><HR>"
 
@@ -159,7 +159,7 @@
 	anchored = 1
 	var/orient = "LEFT" // "RIGHT" changes the dir suffix to "-r"
 	var/mob/living/carbon/human/occupant = null
-	var/available_chemicals = list("inaprovaline" = "Inaprovaline", "stoxin" = "Soporific", "paracetamol" = "Paracetamol", "anti_toxin" = "Dylovene", "dexalin" = "Dexalin")
+	var/available_chemicals = list("inaprovaline" = "Inaprovaline", "soporific" = "Soporific", "paracetamol" = "Paracetamol", "dylovene" = "Dylovene", "dexalin" = "Dexalin")
 	var/amounts = list(5, 10)
 	var/obj/item/weapon/reagent_containers/glass/beaker = null
 	var/filtering = 0
@@ -188,13 +188,13 @@
 
 		if(filtering > 0)
 			if(beaker)
-				if(beaker.reagents.total_volume < beaker.reagents.maximum_volume)
+				if(beaker.reagents.volume < beaker.reagents.max_volume)
 					var/pumped = 0
 					for(var/datum/reagent/x in src.occupant.reagents.reagent_list)
-						src.occupant.reagents.trans_to(beaker, 3)
+						src.occupant.reagents.trans_to_obj(beaker, 3)
 						pumped++
 					if (ishuman(src.occupant))
-						src.occupant.vessel.trans_to(beaker, pumped + 1)
+						src.occupant.vessel.trans_to_obj(beaker, pumped + 1)
 		src.updateUsrDialog()
 		return
 
@@ -369,7 +369,7 @@
 			user << "\blue Expected time till occupant can safely awake: (note: If health is below 20% these times are inaccurate)"
 			user << text("\blue \t [] second\s (if around 1 or 2 the sleeper is keeping them asleep.)", src.occupant.paralysis / 5)
 			if(src.beaker)
-				user << text("\blue \t Dialysis Output Beaker has [] of free space remaining.", src.beaker.reagents.maximum_volume - src.beaker.reagents.total_volume)
+				user << text("\blue \t Dialysis Output Beaker has [] of free space remaining.", src.beaker.reagents.max_volume - src.beaker.reagents.volume)
 			else
 				user << "\blue No Dialysis Output Beaker loaded."
 		else

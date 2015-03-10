@@ -61,7 +61,7 @@
 	data["toxins"] = min(toxins, 100)
 	data["on"] = on
 	data["system_in_use"] = foodsupply > 0 || radiation > 0 || toxins > 0
-	data["chemical_volume"] = beaker ? beaker.reagents.total_volume : 0
+	data["chemical_volume"] = beaker ? beaker.reagents.volume : 0
 	data["max_chemical_volume"] = beaker ? beaker.volume : 1
 	data["virus"] = dish ? dish.virus2 : null
 	data["growth"] = dish ? min(dish.growth, 100) : 0
@@ -134,7 +134,7 @@
 
 		if (locate(/datum/reagent/toxin) in beaker.reagents.reagent_list)
 			for(var/datum/reagent/toxin/T in beaker.reagents.reagent_list)
-				toxins += max(T.toxpwr,1)
+				toxins += max(T.strength,1)
 				beaker.reagents.remove_reagent(T.id,1)
 			nanomanager.update_uis(src)
 

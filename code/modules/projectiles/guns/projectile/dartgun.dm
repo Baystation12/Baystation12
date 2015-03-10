@@ -17,7 +17,7 @@
 	if(blocked < 2 && isliving(target))
 		var/mob/living/L = target
 		if(L.can_inject(target_zone=def_zone))
-			reagents.trans_to(L, reagent_amount)
+			reagents.trans_to_mob(L, reagent_amount, CHEM_BLOOD)
 
 /obj/item/ammo_casing/chemdart
 	name = "chemical dart"
@@ -124,7 +124,7 @@
 	if(mixing.len)
 		var/mix_amount = dart.reagent_amount/mixing.len
 		for(var/obj/item/weapon/reagent_containers/glass/beaker/B in mixing)
-			B.reagents.trans_to(dart, mix_amount)
+			B.reagents.trans_to_obj(dart, mix_amount)
 
 /obj/item/weapon/gun/projectile/dartgun/attack_self(mob/user)
 	user.set_machine(src)
@@ -199,7 +199,7 @@
 	desc = "A small gas-powered dartgun, fitted for nonhuman hands."
 
 /obj/item/weapon/gun/projectile/dartgun/vox/medical
-	starting_chems = list("kelotane","bicaridine","anti_toxin")
+	starting_chems = list("kelotane","bicaridine","dylovene")
 
 /obj/item/weapon/gun/projectile/dartgun/vox/raider
-	starting_chems = list("space_drugs","stoxin","impedrezene")
+	starting_chems = list("space_drugs","soporific","impedrezene")

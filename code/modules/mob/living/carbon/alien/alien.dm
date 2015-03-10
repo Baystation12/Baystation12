@@ -23,9 +23,13 @@
 	verbs += /mob/living/proc/ventcrawl
 	verbs += /mob/living/proc/hide
 
-	var/datum/reagents/R = new/datum/reagents(100)
-	reagents = R
-	R.my_atom = src
+	create_reagents(1000)
+	var/datum/reagents/R1 = new/datum/reagents(1000)
+	var/datum/reagents/R2 = new/datum/reagents(1000)
+	ingested = R1
+	touching = R2
+	R1.my_atom = src
+	R2.my_atom = src
 
 	name = "[initial(name)] ([rand(1, 1000)])"
 	real_name = name

@@ -397,7 +397,7 @@
 		..()
 		flags |= NOREACT
 		syringes = new
-		known_reagents = list("inaprovaline"="Inaprovaline","anti_toxin"="Dylovene")
+		known_reagents = list("inaprovaline"="Inaprovaline","dylovene"="Dylovene")
 		processed_reagents = new
 		create_reagents(max_volume)
 		synth = new (list(src),0)
@@ -414,7 +414,7 @@
 	get_equip_info()
 		var/output = ..()
 		if(output)
-			return "[output] \[<a href=\"?src=\ref[src];toggle_mode=1\">[mode? "Analyze" : "Launch"]</a>\]<br />\[Syringes: [syringes.len]/[max_syringes] | Reagents: [reagents.total_volume]/[reagents.maximum_volume]\]<br /><a href='?src=\ref[src];show_reagents=1'>Reagents list</a>"
+			return "[output] \[<a href=\"?src=\ref[src];toggle_mode=1\">[mode? "Analyze" : "Launch"]</a>\]<br />\[Syringes: [syringes.len]/[max_syringes] | Reagents: [reagents.volume]/[reagents.max_volume]\]<br /><a href='?src=\ref[src];show_reagents=1'>Reagents list</a>"
 		return
 
 	action(atom/movable/target)
@@ -431,7 +431,7 @@
 		if(!syringes.len)
 			occupant_message("<span class=\"alert\">No syringes loaded.</span>")
 			return
-		if(reagents.total_volume<=0)
+		if(reagents.volume<=0)
 			occupant_message("<span class=\"alert\">No available reagents to load syringe with.</span>")
 			return
 		set_ready_state(0)
@@ -439,7 +439,7 @@
 		var/turf/trg = get_turf(target)
 		var/obj/item/weapon/reagent_containers/syringe/S = syringes[1]
 		S.forceMove(get_turf(chassis))
-		reagents.trans_to(S, min(S.volume, reagents.total_volume))
+		reagents.trans_to_obj(S, min(S.volume, reagents.volume))
 		syringes -= S
 		S.icon = 'icons/obj/chemical.dmi'
 		S.icon_state = "syringeproj"
@@ -458,7 +458,7 @@
 					if(M)
 						S.icon_state = initial(S.icon_state)
 						S.icon = initial(S.icon)
-						S.reagents.trans_to(M, S.reagents.total_volume)
+						S.reagents.trans_to_mob(M, S.reagents.volume, CHEM_BLOOD)
 						M.take_organ_damage(2)
 						S.visible_message("<span class=\"attack\"> [M] was hit by the syringe!</span>")
 						break
@@ -571,7 +571,7 @@
 			if(R.volume > 0)
 				output += "[R]: [round(R.volume,0.001)] - <a href=\"?src=\ref[src];purge_reagent=[R.id]\">Purge Reagent</a><br />"
 		if(output)
-			output += "Total: [round(reagents.total_volume,0.001)]/[reagents.maximum_volume] - <a href=\"?src=\ref[src];purge_all=1\">Purge All</a>"
+			output += "Total: [round(reagents.volume,0.001)]/[reagents.max_volume] - <a href=\"?src=\ref[src];purge_all=1\">Purge All</a>"
 		return output || "None"
 
 	proc/load_syringe(obj/item/weapon/reagent_containers/syringe/S)
@@ -587,7 +587,7 @@
 				if(!(D.CanPass(S,src.loc)))
 					occupant_message("Unable to load syringe.")
 					return 0
-			S.reagents.trans_to(src, S.reagents.total_volume)
+			S.reagents.trans_to_obj(src, S.reagents.volume)
 			S.forceMove(src)
 			syringes += S
 			occupant_message("Syringe loaded.")
@@ -640,7 +640,7 @@
 		if(!S.chassis)
 			return stop()
 		var/energy_drain = S.energy_drain*10
-		if(!S.processed_reagents.len || S.reagents.total_volume >= S.reagents.maximum_volume || !S.chassis.has_charge(energy_drain))
+		if(!S.processed_reagents.len || S.reagents.volume >= S.reagents.max_volume || !S.chassis.has_charge(energy_drain))
 			S.occupant_message("<span class=\"alert\">Reagent processing stopped.</a>")
 			S.log_message("Reagent processing stopped.")
 			return stop()

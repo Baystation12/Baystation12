@@ -32,7 +32,7 @@
 		update_icon()
 
 	update_icon()
-		var/percent = round((reagents.total_volume / volume) * 100)
+		var/percent = round((reagents.volume / volume) * 100)
 		switch(percent)
 			if(0 to 9)			icon_state = "empty"
 			if(10 to 50) 		icon_state = "half"

@@ -61,7 +61,13 @@
 
 	verbs += /mob/living/proc/ventcrawl
 
-	create_reagents(100)
+	create_reagents(1000)
+	var/datum/reagents/R1 = new/datum/reagents(1000)
+	var/datum/reagents/R2 = new/datum/reagents(1000)
+	ingested = R1
+	touching = R2
+	R1.my_atom = src
+	R2.my_atom = src
 
 	src.colour = colour
 	number = rand(1, 1000)
@@ -411,14 +417,6 @@
 			powerlevel = 10
 			adjustToxLoss(-10)
 	nutrition = max(nutrition, get_max_nutrition())
-
-/mob/living/carbon/slime/proc/apply_water(var/amount)
-	adjustToxLoss(15 + amount)
-	if (!client)
-		if (Target) // Like cats
-			Target = null
-			++Discipline
-	return
 
 /mob/living/carbon/slime/can_use_vents()
 	if(Victim)

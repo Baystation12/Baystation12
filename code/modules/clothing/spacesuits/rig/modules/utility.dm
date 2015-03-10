@@ -123,7 +123,7 @@
 		list("tramadol",      "tramadol",      0, 80),
 		list("dexalin plus",  "dexalinp",      0, 80),
 		list("antibiotics",   "spaceacillin",  0, 80),
-		list("antitoxins",    "anti_toxin",    0, 80),
+		list("antitoxins",    "dylovene",    0, 80),
 		list("nutrients",     "nutriment",     0, 80),
 		list("hyronalin",     "hyronalin",     0, 80),
 		list("radium",        "radium",        0, 80)
@@ -151,7 +151,7 @@
 	if(!input_item.is_open_container())
 		return 0
 
-	if(!input_item.reagents || !input_item.reagents.total_volume)
+	if(!input_item.reagents || !input_item.reagents.volume)
 		user << "\The [input_item] is empty."
 		return 0
 

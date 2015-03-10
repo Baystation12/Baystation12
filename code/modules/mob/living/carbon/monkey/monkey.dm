@@ -47,9 +47,13 @@
 
 	verbs += /mob/living/proc/ventcrawl
 
-	var/datum/reagents/R = new/datum/reagents(1000)
-	reagents = R
-	R.my_atom = src
+	create_reagents(1000)
+	var/datum/reagents/R1 = new/datum/reagents(1000)
+	var/datum/reagents/R2 = new/datum/reagents(1000)
+	ingested = R1
+	touching = R2
+	R1.my_atom = src
+	R2.my_atom = src
 
 	species = all_species[greaterform]
 	add_language(species.language)
@@ -91,10 +95,8 @@
 
 /mob/living/carbon/monkey/movement_delay()
 	var/tally = 0
-	if(reagents)
-		if(reagents.has_reagent("hyperzine")) return -1
-
-		if(reagents.has_reagent("nuka_cola")) return -1
+	if(CE_SPEEDBOOST in chem_effects)
+		return -1
 
 	var/health_deficiency = (100 - health)
 	if(health_deficiency >= 45) tally += (health_deficiency / 25)

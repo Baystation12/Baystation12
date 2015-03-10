@@ -57,7 +57,7 @@
 		H.emote("me", 1, "has drool running down from his mouth.")
 
 	finish(mob/living/carbon/human/H)
-		if(!H.reagents.has_reagent("anti_toxin"))
+		if(!H.reagents.has_reagent("dylovene"))
 			H.monkeyize()**/
 
 /datum/genetics/side_effect/confuse
@@ -71,7 +71,7 @@
 		H.emote("me", 1, "has drool running down from his mouth.")
 
 	finish(mob/living/carbon/human/H)
-		if(!H.reagents.has_reagent("anti_toxin"))
+		if(!H.reagents.has_reagent("dylovene"))
 			H.confused += 100
 
 proc/trigger_side_effect(mob/living/carbon/human/H)

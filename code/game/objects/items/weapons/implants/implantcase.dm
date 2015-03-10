@@ -34,12 +34,12 @@
 	else if(istype(I, /obj/item/weapon/reagent_containers/syringe))
 		if(!src.imp)	return
 		if(!src.imp.allow_reagents)	return
-		if(src.imp.reagents.total_volume >= src.imp.reagents.maximum_volume)
+		if(src.imp.reagents.volume >= src.imp.reagents.max_volume)
 			user << "\red [src] is full."
 		else
 			spawn(5)
-				I.reagents.trans_to(src.imp, 5)
-				user << "\blue You inject 5 units of the solution. The syringe now contains [I.reagents.total_volume] units."
+				I.reagents.trans_to_obj(src.imp, 5)
+				user << "\blue You inject 5 units of the solution. The syringe now contains [I.reagents.volume] units."
 	else if (istype(I, /obj/item/weapon/implanter))
 		var/obj/item/weapon/implanter/M = I
 		if (M.imp)

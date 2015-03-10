@@ -32,7 +32,7 @@
 				Tr = get_turf(C)
 				if((Tr) && (Tr.z != src.z))	continue//Out of range
 				if(!C.implanted) continue
-				dat += "[C.imp_in.name] | Remaining Units: [C.reagents.total_volume] | Inject: "
+				dat += "[C.imp_in.name] | Remaining Units: [C.reagents.volume] | Inject: "
 				dat += "<A href='?src=\ref[src];inject1=\ref[C]'>(<font color=red>(1)</font>)</A>"
 				dat += "<A href='?src=\ref[src];inject5=\ref[C]'>(<font color=red>(5)</font>)</A>"
 				dat += "<A href='?src=\ref[src];inject10=\ref[C]'>(<font color=red>(10)</font>)</A><BR>"

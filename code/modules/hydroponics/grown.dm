@@ -53,8 +53,8 @@
 				rtotal += round(potency/reagent_data[2])
 			reagents.add_reagent(rid,max(1,rtotal))
 	update_desc()
-	if(reagents.total_volume > 0)
-		bitesize = 1+round(reagents.total_volume / 2, 1)
+	if(reagents.volume > 0)
+		bitesize = 1+round(reagents.volume / 2, 1)
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/proc/update_desc()
 
@@ -264,7 +264,7 @@
 			M.updatehealth()
 
 		if(seed && seed.get_trait(TRAIT_STINGS))
-			if(!reagents || reagents.total_volume <= 0)
+			if(!reagents || reagents.volume <= 0)
 				return
 			reagents.remove_any(rand(1,3))
 			seed.thrown_at(src,M)
@@ -330,7 +330,7 @@
 		var/mob/living/carbon/human/H = user
 		if(istype(H) && H.gloves)
 			return
-		if(!reagents || reagents.total_volume <= 0)
+		if(!reagents || reagents.volume <= 0)
 			return
 		reagents.remove_any(rand(1,3)) //Todo, make it actually remove the reagents the seed uses.
 		seed.do_thorns(H,src)

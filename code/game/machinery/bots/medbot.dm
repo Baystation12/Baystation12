@@ -46,7 +46,7 @@
 	treatment_oxy = "dexalinp"
 	treatment_brute = "bicaridine"
 	treatment_fire = "kelotane"
-	treatment_tox = "anti_toxin"
+	treatment_tox = "dylovene"
 
 /obj/item/weapon/firstaid_arm_assembly
 	name = "first aid/robot arm assembly"
@@ -105,7 +105,7 @@
 	dat += "Maintenance panel is [src.open ? "opened" : "closed"]<BR>"
 	dat += "Beaker: "
 	if (src.reagent_glass)
-		dat += "<A href='?src=\ref[src];eject=1'>Loaded \[[src.reagent_glass.reagents.total_volume]/[src.reagent_glass.reagents.maximum_volume]\]</a>"
+		dat += "<A href='?src=\ref[src];eject=1'>Loaded \[[src.reagent_glass.reagents.volume]/[src.reagent_glass.reagents.max_volume]\]</a>"
 	else
 		dat += "None Loaded"
 	dat += "<br>Behaviour controls are [src.locked ? "locked" : "unlocked"]<hr>"
@@ -384,7 +384,7 @@
 	var/reagent_id = null
 
 	//Use whatever is inside the loaded beaker. If there is one.
-	if((src.use_beaker) && (src.reagent_glass) && (src.reagent_glass.reagents.total_volume))
+	if((src.use_beaker) && (src.reagent_glass) && (src.reagent_glass.reagents.volume))
 		reagent_id = "internal_beaker"
 
 	if(src.emagged == 2) //Emagged! Time to poison everybody.
@@ -427,9 +427,8 @@
 		visible_message("\red <B>[src] is trying to inject [src.patient]!</B>")
 		spawn(30)
 			if ((get_dist(src, src.patient) <= 1) && (src.on))
-				if((reagent_id == "internal_beaker") && (src.reagent_glass) && (src.reagent_glass.reagents.total_volume))
-					src.reagent_glass.reagents.trans_to(src.patient,src.injection_amount) //Inject from beaker instead.
-					src.reagent_glass.reagents.reaction(src.patient, 2)
+				if((reagent_id == "internal_beaker") && (src.reagent_glass) && (src.reagent_glass.reagents.volume))
+					src.reagent_glass.reagents.trans_to_mob(src.patient, src.injection_amount, CHEM_BLOOD) //Inject from beaker instead.
 				else
 					src.patient.reagents.add_reagent(reagent_id,src.injection_amount)
 				visible_message("\red <B>[src] injects [src.patient] with the syringe!</B>")

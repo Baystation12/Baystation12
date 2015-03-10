@@ -1,66 +1,23 @@
-/proc/mix_color_from_reagents(var/list/reagent_list)
-	if(!reagent_list || !length(reagent_list))
-		return 0
+/datum/reagents/proc/get_color()
+	if(!reagent_list || !reagent_list.len)
+		return "#ffffffff"
+	if(reagent_list.len == 1) // It's pretty common and saves a lot of work
+		var/datum/reagent/R = reagent_list[1]
+		return R.color
 
-	var/contents = length(reagent_list)
-	var/list/weight = new /list(contents)
-	var/list/redcolor = new /list(contents)
-	var/list/greencolor = new /list(contents)
-	var/list/bluecolor = new /list(contents)
-	var/i
+	var/list/colors = list(0, 0, 0, 0)
+	var/tot_w = 0
+	for(var/datum/reagent/R in reagent_list)
+		var/hex = uppertext(R.color)
+		if(length(hex) == 7)
+			hex += "FF"
+		if(length(hex) != 9) // PANIC PANIC PANIC
+			warning("Reagent [R.id] has an incorrect color set ([R.color])")
+			hex = "#FFFFFFFF"
+		colors[1] += hex2num(copytext(hex, 2, 4)) * R.volume * R.color_weight
+		colors[2] += hex2num(copytext(hex, 4, 6)) * R.volume * R.color_weight
+		colors[3] += hex2num(copytext(hex, 6, 8)) * R.volume * R.color_weight
+		colors[4] += hex2num(copytext(hex, 8, 10)) * R.volume * R.color_weight
+		tot_w += R.volume * R.color_weight
 
-	//fill the list of weights
-	for(i=1; i<=contents; i++)
-		var/datum/reagent/re = reagent_list[i]
-		var/reagentweight = re.volume
-		if(istype(re, /datum/reagent/paint))
-			reagentweight *= 20 //Paint colours a mixture twenty times as much
-		weight[i] = reagentweight
-
-
-	//fill the lists of colours
-	for(i=1; i<=contents; i++)
-		var/datum/reagent/re = reagent_list[i]
-		var/hue = re.color
-		if(length(hue) != 7)
-			return 0
-		redcolor[i]=hex2num(copytext(hue,2,4))
-		greencolor[i]=hex2num(copytext(hue,4,6))
-		bluecolor[i]=hex2num(copytext(hue,6,8))
-
-	//mix all the colors
-	var/red = mixOneColor(weight,redcolor)
-	var/green = mixOneColor(weight,greencolor)
-	var/blue = mixOneColor(weight,bluecolor)
-
-	//assemble all the pieces
-	var/finalcolor = rgb(red, green, blue)
-	return finalcolor
-
-/proc/mixOneColor(var/list/weight, var/list/color)
-	if (!weight || !color || length(weight)!=length(color))
-		return 0
-
-	var/contents = length(weight)
-	var/i
-
-	//normalize weights
-	var/listsum = 0
-	for(i=1; i<=contents; i++)
-		listsum += weight[i]
-	for(i=1; i<=contents; i++)
-		weight[i] /= listsum
-
-	//mix them
-	var/mixedcolor = 0
-	for(i=1; i<=contents; i++)
-		mixedcolor += weight[i]*color[i]
-	mixedcolor = round(mixedcolor)
-
-	//until someone writes a formal proof for this algorithm, let's keep this in
-//	if(mixedcolor<0x00 || mixedcolor>0xFF)
-//		return 0
-	//that's not the kind of operation we are running here, nerd
-	mixedcolor=min(max(mixedcolor,0),255)
-
-	return mixedcolor
+	return rgb(colors[1] / tot_w, colors[2] / tot_w, colors[3] / tot_w, colors[4] / tot_w)

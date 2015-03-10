@@ -19,10 +19,10 @@
 
 	if(beaker)
 		var/datum/reagents/reagents = beaker.reagents
-		if(reagents.total_volume)
+		if(reagents.volume)
 			var/image/filling = image('icons/obj/iv_drip.dmi', src, "reagent")
 
-			var/percent = round((reagents.total_volume / beaker.volume) * 100)
+			var/percent = round((reagents.volume / beaker.volume) * 100)
 			switch(percent)
 				if(0 to 9)		filling.icon_state = "reagent0"
 				if(10 to 24) 	filling.icon_state = "reagent10"
@@ -32,7 +32,7 @@
 				if(80 to 90)	filling.icon_state = "reagent80"
 				if(91 to INFINITY)	filling.icon_state = "reagent100"
 
-			filling.icon += mix_color_from_reagents(reagents.reagent_list)
+			filling.icon += reagents.get_color()
 			overlays += filling
 
 /obj/machinery/iv_drip/MouseDrop(over_object, src_location, over_location)
@@ -82,16 +82,16 @@
 		// Give blood
 		if(mode)
 			if(src.beaker.volume > 0)
-				var/transfer_amount = REAGENTS_METABOLISM
+				var/transfer_amount = REM
 				if(istype(src.beaker, /obj/item/weapon/reagent_containers/blood))
 					// speed up transfer on blood packs
 					transfer_amount = 4
-				src.beaker.reagents.trans_to(src.attached, transfer_amount)
+				src.beaker.reagents.trans_to_mob(src.attached, transfer_amount, CHEM_BLOOD)
 				update_icon()
 
 		// Take blood
 		else
-			var/amount = beaker.reagents.maximum_volume - beaker.reagents.total_volume
+			var/amount = beaker.reagents.max_volume - beaker.reagents.volume
 			amount = min(amount, 4)
 			// If the beaker is full, ping
 			if(amount == 0)
@@ -117,7 +117,7 @@
 
 			if (B)
 				beaker.reagents.reagent_list |= B
-				beaker.reagents.update_total()
+				beaker.reagents.update_volume()
 				beaker.on_reagent_change()
 				beaker.reagents.handle_reactions()
 				update_icon()
@@ -154,7 +154,7 @@
 
 	if(beaker)
 		if(beaker.reagents && beaker.reagents.reagent_list.len)
-			usr << "\blue Attached is \a [beaker] with [beaker.reagents.total_volume] units of liquid."
+			usr << "\blue Attached is \a [beaker] with [beaker.reagents.volume] units of liquid."
 		else
 			usr << "\blue Attached is an empty [beaker]."
 	else

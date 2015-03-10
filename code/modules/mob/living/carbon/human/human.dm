@@ -20,9 +20,13 @@
 		else
 			set_species()
 
-	var/datum/reagents/R = new/datum/reagents(1000)
-	reagents = R
-	R.my_atom = src
+	create_reagents(1000)
+	var/datum/reagents/R1 = new/datum/reagents(1000)
+	var/datum/reagents/R2 = new/datum/reagents(1000)
+	ingested = R1
+	touching = R2
+	R1.my_atom = src
+	R2.my_atom = src
 
 	hud_list[HEALTH_HUD]      = image('icons/mob/hud.dmi', src, "hudhealth100")
 	hud_list[STATUS_HUD]      = image('icons/mob/hud.dmi', src, "hudhealthy")
@@ -943,7 +947,7 @@
 	h.disfigured = 0
 
 	if(species && !(species.flags & NO_BLOOD))
-		vessel.add_reagent("blood",560-vessel.total_volume)
+		vessel.add_reagent("blood",560-vessel.volume)
 		fixblood()
 
 	// Fix up any missing organs.
@@ -1150,7 +1154,7 @@
 
 	spawn(0)
 		regenerate_icons()
-		vessel.add_reagent("blood",560-vessel.total_volume)
+		vessel.add_reagent("blood",560-vessel.volume)
 		fixblood()
 
 	// Rebuild the HUD. If they aren't logged in then login() should reinstantiate it for them.

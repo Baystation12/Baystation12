@@ -21,7 +21,7 @@
 
 /obj/structure/janitorialcart/examine(mob/user)
 	if(..(user, 1))
-		user << "[src] \icon[src] contains [reagents.total_volume] unit\s of liquid!"
+		user << "[src] \icon[src] contains [reagents.volume] unit\s of liquid!"
 	//everything else is visible, so doesn't need to be mentioned
 
 
@@ -35,11 +35,11 @@
 		user << "<span class='notice'>You put [I] into [src].</span>"
 
 	else if(istype(I, /obj/item/weapon/mop))
-		if(I.reagents.total_volume < I.reagents.maximum_volume)	//if it's not completely soaked we assume they want to wet it, otherwise store it
-			if(reagents.total_volume < 1)
+		if(I.reagents.volume < I.reagents.max_volume)	//if it's not completely soaked we assume they want to wet it, otherwise store it
+			if(reagents.volume < 1)
 				user << "[src] is out of water!</span>"
 			else
-				reagents.trans_to(I, 5)	//
+				reagents.trans_to_obj(I, 5)	//
 				user << "<span class='notice'>You wet [I] in [src].</span>"
 				playsound(loc, 'sound/effects/slosh.ogg', 25, 1)
 				return
@@ -178,15 +178,15 @@
 	if(!..(user, 1))
 		return
 
-	user << "\icon[src] This [callme] contains [reagents.total_volume] unit\s of water!"
+	user << "\icon[src] This [callme] contains [reagents.volume] unit\s of water!"
 	if(mybag)
 		user << "\A [mybag] is hanging on the [callme]."
 
 
 /obj/structure/bed/chair/janicart/attackby(obj/item/I, mob/user)
 	if(istype(I, /obj/item/weapon/mop))
-		if(reagents.total_volume > 1)
-			reagents.trans_to(I, 2)
+		if(reagents.volume > 1)
+			reagents.trans_to_obj(I, 2)
 			user << "<span class='notice'>You wet [I] in the [callme].</span>"
 			playsound(loc, 'sound/effects/slosh.ogg', 25, 1)
 		else

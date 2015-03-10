@@ -341,7 +341,6 @@
 			for(var/mob/living/carbon/M in view(1,src))
 				src.spread_disease_to(M)
 
-
 	get_breath_from_internal(volume_needed=BREATH_VOLUME)
 		if(internal)
 
@@ -855,11 +854,16 @@
 	proc/handle_chemicals_in_body()
 
 		if(reagents && !(species.flags & IS_SYNTHETIC)) //Synths don't process reagents.
+			chem_effects.Cut()
+			analgesic = 0
 			var/alien = 0
 			if(species && species.reagent_tag)
 				alien = species.reagent_tag
-			reagents.metabolize(src,alien)
-
+			touching.metabolize(alien, CHEM_TOUCH)
+			ingested.metabolize(alien, CHEM_INGEST)
+			reagents.metabolize(alien, CHEM_BLOOD)
+			if(CE_PAINKILLER in chem_effects)
+				analgesic = chem_effects[CE_PAINKILLER]
 			var/total_phoronloss = 0
 			for(var/obj/item/I in src)
 				if(I.contaminated)
@@ -867,6 +871,10 @@
 			if(!(status_flags & GODMODE)) adjustToxLoss(total_phoronloss)
 
 		if(status_flags & GODMODE)	return 0	//godmode
+
+		if(addictions && addictions.len)
+			for(var/datum/addiction/A in addictions)
+				A.process()
 
 		var/datum/organ/internal/diona/node/light_organ = locate() in internal_organs
 		if(light_organ && !light_organ.is_broken())
@@ -945,9 +953,6 @@
 				silent = 0
 				return 1
 
-			// the analgesic effect wears off slowly
-			analgesic = max(0, analgesic - 1)
-
 			//UNCONSCIOUS. NO-ONE IS HOME
 			if( (getOxyLoss() > 50) || (config.health_threshold_crit > health) )
 				Paralyse(3)
@@ -990,7 +995,7 @@
 				handle_dreams()
 				adjustHalLoss(-3)
 				if (mind)
-					//Are they SSD? If so we'll keep them asleep but work off some of that sleep var in case of stoxin or similar.
+					//Are they SSD? If so we'll keep them asleep but work off some of that sleep var in case of soporific or similar.
 					if(player_logged)
 						sleeping = max(sleeping-1, 2)
 					else
@@ -1222,7 +1227,7 @@
 				see_invisible = SEE_INVISIBLE_LIVING
 
 			if(healths)
-				if (analgesic)
+				if (analgesic > 100)
 					healths.icon_state = "health_health_numb"
 				else
 					switch(hal_screwyhud)
@@ -1410,7 +1415,7 @@
 	handle_shock()
 		..()
 		if(status_flags & GODMODE)	return 0	//godmode
-		if(analgesic || (species && species.flags & NO_PAIN)) return // analgesic avoids all traumatic shock temporarily
+		if(species && species.flags & NO_PAIN) return
 
 		if(health < config.health_threshold_softcrit)// health 0 makes you immediately collapse
 			shock_stage = max(shock_stage, 61)
@@ -1486,7 +1491,7 @@
 			if(R.id in heartstopper) //To avoid using fakedeath
 				temp = PULSE_NONE
 			if(R.id in cheartstopper) //Conditional heart-stoppage
-				if(R.volume >= R.overdose)
+				if(R.volume >= R.overdose_blood)
 					temp = PULSE_NONE
 
 		return temp

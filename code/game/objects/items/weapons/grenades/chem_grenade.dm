@@ -94,7 +94,7 @@
 				user << "\red The grenade can not hold more containers."
 				return
 			else
-				if(W.reagents.total_volume)
+				if(W.reagents.volume)
 					user << "\blue You add \the [W] to the assembly."
 					user.drop_item()
 					W.loc = src
@@ -137,7 +137,7 @@
 		//if(prob(reliability))
 		var/has_reagents = 0
 		for(var/obj/item/weapon/reagent_containers/glass/G in beakers)
-			if(G.reagents.total_volume) has_reagents = 1
+			if(G.reagents.volume) has_reagents = 1
 
 		active = 0
 		if(!has_reagents)
@@ -148,9 +148,9 @@
 		playsound(src.loc, 'sound/effects/bamf.ogg', 50, 1)
 
 		for(var/obj/item/weapon/reagent_containers/glass/G in beakers)
-			G.reagents.trans_to(src, G.reagents.total_volume)
+			G.reagents.trans_to_obj(src, G.reagents.volume)
 
-		if(src.reagents.total_volume) //The possible reactions didnt use up all reagents.
+		if(src.reagents.volume) //The possible reactions didnt use up all reagents.
 			var/datum/effect/effect/system/steam_spread/steam = new /datum/effect/effect/system/steam_spread()
 			steam.set_up(10, 0, get_turf(src))
 			steam.attach(src)
@@ -158,7 +158,7 @@
 
 			for(var/atom/A in view(affected_area, src.loc))
 				if( A == src ) continue
-				src.reagents.reaction(A, 1, 10)
+				src.reagents.touch(A)
 
 		if(istype(loc, /mob/living/carbon))		//drop dat grenade if it goes off in your hand
 			var/mob/living/carbon/C = loc

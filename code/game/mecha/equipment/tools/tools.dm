@@ -194,12 +194,12 @@
 		if(do_after_cooldown(target))
 			if( istype(target, /obj/structure/reagent_dispensers/watertank) && get_dist(chassis,target) <= 1)
 				var/obj/o = target
-				var/amount = o.reagents.trans_to(src, 200)
+				var/amount = o.reagents.trans_to_obj(src, 200)
 				occupant_message("\blue [amount] units transferred into internal tank.")
 				playsound(chassis, 'sound/effects/refill.ogg', 50, 1, -6)
 				return
 
-			if (src.reagents.total_volume < 1)
+			if (src.reagents.volume < 1)
 				occupant_message("\red \The [src] is empty.")
 				return
 
@@ -211,35 +211,30 @@
 			var/turf/T1 = get_step(T,turn(direction, 90))
 			var/turf/T2 = get_step(T,turn(direction, -90))
 
-			var/list/the_targets = list(T,T1,T2)
+			var/list/the_targets = list(T, T1, T2)
 
-			for(var/a=0, a<5, a++)
+			for(var/a = 1 to 5)
 				spawn(0)
-					var/obj/effect/effect/water/W = new /obj/effect/effect/water( get_turf(chassis) )
-					var/turf/my_target = pick(the_targets)
-					var/datum/reagents/R = new/datum/reagents(5)
-					if(!W) return
-					W.reagents = R
-					R.my_atom = W
-					if(!W || !src) return
-					src.reagents.trans_to(W,1)
-					for(var/b=0, b<5, b++)
-						step_towards(W,my_target)
-						if(!W || !W.reagents) return
-						W.reagents.reaction(get_turf(W))
-						for(var/atom/atm in get_turf(W))
-							if(!W)
-								return
-							if(!W.reagents)
-								break
-							W.reagents.reaction(atm)
-						if(W.loc == my_target) break
-						sleep(2)
-					W.delete()
+					var/obj/effect/effect/water/W = new /obj/effect/effect/water(get_turf(chassis))
+					var/turf/my_target
+					if(a == 1)
+						my_target = T
+					else if(a == 2)
+						my_target = T1
+					else if(a == 3)
+						my_target = T2
+					else
+						my_target = pick(the_targets)
+					W.create_reagents(5)
+					if(!src)
+						return
+					reagents.trans_to_obj(W, spray_amount)
+					W.set_color()
+					W.set_up(my_target)
 			return 1
 
 	get_equip_info()
-		return "[..()] \[[src.reagents.total_volume]\]"
+		return "[..()] \[[src.reagents.volume]\]"
 
 	on_reagent_change()
 		return

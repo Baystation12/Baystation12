@@ -71,7 +71,7 @@
 	if(stat == CONSCIOUS && istype(G) && G.is_open_container())
 		user.visible_message("<span class='notice'>[user] milks [src] using \the [O].</span>")
 		var/transfered = udder.trans_id_to(G, "milk", rand(5,10))
-		if(G.reagents.total_volume >= G.volume)
+		if(G.reagents.volume >= G.volume)
 			user << "\red The [O] is full."
 		if(!transfered)
 			user << "\red The udder is dry. Wait a bit longer..."
@@ -111,7 +111,7 @@
 	if(stat == CONSCIOUS && istype(G) && G.is_open_container())
 		user.visible_message("<span class='notice'>[user] milks [src] using \the [O].</span>")
 		var/transfered = udder.trans_id_to(G, "milk", rand(5,10))
-		if(G.reagents.total_volume >= G.volume)
+		if(G.reagents.volume >= G.volume)
 			user << "\red The [O] is full."
 		if(!transfered)
 			user << "\red The udder is dry. Wait a bit longer..."

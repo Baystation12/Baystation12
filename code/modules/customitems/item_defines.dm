@@ -394,7 +394,7 @@
 	icon_state = "pill9"
 	New()
 		..()
-		reagents.add_reagent("stoxin", 5)
+		reagents.add_reagent("soporific", 5)
 		reagents.add_reagent("sugar", 10)
 		reagents.add_reagent("ethanol", 5)
 
@@ -432,12 +432,12 @@
 	if (user.ckey != "nerezza") //Because this can end up in the wrong hands, let's make it useless for them!
 		user << "\blue You click \the [src] but get no reaction. Must be dead."
 		return
-	if(!reagents.total_volume)
+	if(!reagents.volume)
 		user << "\red \The [src] is empty."
 		return
 	if (!( istype(M, /mob) ))
 		return
-	if (reagents.total_volume)
+	if (reagents.volume)
 		if (M == user && user.ckey == "nerezza") //Make sure this is being used by the right person, for the right reason (self injection)
 			visible_message("\blue [user] presses their \
 				penlight against their skin, quickly clicking the button once.", \
@@ -446,10 +446,8 @@
 		if (M != user && user.ckey == "nerezza") //Woah now, you better be careful partner
 			user << "\blue You don't want to contaminate the autoinjector."
 			return
-		src.reagents.reaction(M, INGEST)
-		if(M.reagents)
-			var/trans = reagents.trans_to(M, amount_per_transfer_from_this)
-			user << "\blue [trans] units injected. [reagents.total_volume] units remaining in \the [src]."
+		var/trans = src.reagents.trans_to_mob(M, amount_per_transfer_from_this, CHEM_BLOOD)
+		user << "\blue [trans] units injected. [reagents.volume] units remaining in \the [src]."
 	return
 
 /obj/item/weapon/reagent_containers/hypospray/fluff/asher_spock_1/examine(mob/user as mob)

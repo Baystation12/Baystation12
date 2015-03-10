@@ -105,7 +105,7 @@
 
 	dat += "Water Tank: "
 	if ( tank )
-		dat += "\[[tank.reagents.total_volume]/[tank.reagents.maximum_volume]\]"
+		dat += "\[[tank.reagents.volume]/[tank.reagents.max_volume]\]"
 	else
 		dat += "Error: Water Tank not Found"
 
@@ -303,14 +303,14 @@
 			var list/options = list(FARMBOT_MODE_WEED)
 			if ( get_total_ferts() )
 				options.Add(FARMBOT_MODE_FERTILIZE)
-			if ( tank && tank.reagents.total_volume >= 1 )
+			if ( tank && tank.reagents.volume >= 1 )
 				options.Add(FARMBOT_MODE_WATER)
 			mode = pick(options)
 			target = human
 			return mode
 		return 0
 	else
-		if ( setting_refill && tank && tank.reagents.total_volume < 100 )
+		if ( setting_refill && tank && tank.reagents.volume < 100 )
 			for ( var/obj/structure/sink/source in view(7,src) )
 				target = source
 				mode = FARMBOT_MODE_REFILL
@@ -331,7 +331,7 @@
 	if ( tray.myseed.plant_type == 2 && setting_ignoreMushrooms )
 		return 0
 
-	if ( setting_water && tray.waterlevel <= 10 && tank && tank.reagents.total_volume >= 1 )
+	if ( setting_water && tray.waterlevel <= 10 && tank && tank.reagents.volume >= 1 )
 		return FARMBOT_MODE_WATER
 
 	if ( setting_weed && tray.weedlevel >= 5 )
@@ -453,7 +453,7 @@
 		tray.updateicon()
 
 /obj/machinery/bot/farmbot/proc/water()
-	if ( !tank || tank.reagents.total_volume < 1 )
+	if ( !tank || tank.reagents.volume < 1 )
 		mode = 0
 		target = null
 		return 0
@@ -463,15 +463,10 @@
 		icon_state = "farmbot[src.on]"
 
 	if ( emagged ) // warning, humans are thirsty!
-		var splashAmount = min(70,tank.reagents.total_volume)
+		var splashAmount = min(70,tank.reagents.volume)
 		src.visible_message("\red [src] splashes [target] with a bucket of water!")
 		playsound(src.loc, 'sound/effects/slosh.ogg', 25, 1)
-		if ( prob(50) )
-			tank.reagents.reaction(target, TOUCH) //splash the human!
-		else
-			tank.reagents.reaction(target.loc, TOUCH) //splash the human's roots!
-		spawn(5)
-			tank.reagents.remove_any(splashAmount)
+		tank.reagents.splash_mob(target, splashAmount) //splash the human!
 
 		mode = FARMBOT_MODE_WAITING
 		spawn(FARMBOT_EMAG_DELAY)
@@ -497,7 +492,7 @@
 			mode = 0
 
 /obj/machinery/bot/farmbot/proc/refill()
-	if ( !tank || !tank.reagents.total_volume > 600 || !istype(target,/obj/structure/sink) )
+	if ( !tank || !tank.reagents.volume > 600 || !istype(target,/obj/structure/sink) )
 		mode = 0
 		target = null
 		return
@@ -508,7 +503,7 @@
 	spawn(300)
 		src.visible_message("\blue [src] finishes filling it's tank.")
 		src.mode = 0
-		tank.reagents.add_reagent("water", tank.reagents.maximum_volume - tank.reagents.total_volume )
+		tank.reagents.add_reagent("water", tank.reagents.max_volume - tank.reagents.volume )
 		playsound(src.loc, 'sound/effects/slosh.ogg', 25, 1)
 
 
