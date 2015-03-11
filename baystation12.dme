@@ -964,6 +964,7 @@
 #include "code\modules\examine\examine.dm"
 #include "code\modules\examine\descriptions\atmospherics.dm"
 #include "code\modules\examine\descriptions\engineering.dm"
+#include "code\modules\examine\descriptions\medical.dm"
 #include "code\modules\examine\descriptions\mobs.dm"
 #include "code\modules\examine\descriptions\stacks.dm"
 #include "code\modules\examine\descriptions\structures.dm"
