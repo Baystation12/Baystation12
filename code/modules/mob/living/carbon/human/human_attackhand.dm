@@ -2,7 +2,7 @@
 
 	var/mob/living/carbon/human/H = M
 	if(istype(H))
-		var/datum/organ/external/temp = H.organs_by_name["r_hand"]
+		var/obj/item/organ/external/temp = H.organs_by_name["r_hand"]
 		if(H.hand)
 			temp = H.organs_by_name["l_hand"]
 		if(temp && !temp.is_usable())
@@ -24,7 +24,7 @@
 				playsound(loc, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
 				visible_message("\red <B>[H] has attempted to punch [src]!</B>")
 				return 0
-			var/datum/organ/external/affecting = get_organ(ran_zone(H.zone_sel.selecting))
+			var/obj/item/organ/external/affecting = get_organ(ran_zone(H.zone_sel.selecting))
 			var/armor_block = run_armor_check(affecting, "melee")
 
 			if(HULK in H.mutations)
@@ -98,7 +98,7 @@
 			var/block = 0
 			var/accurate = 0
 			var/hit_zone = H.zone_sel.selecting
-			var/datum/organ/external/affecting = get_organ(hit_zone)
+			var/obj/item/organ/external/affecting = get_organ(hit_zone)
 
 			switch(src.a_intent)
 				if("help")
@@ -208,7 +208,7 @@
 
 			if(w_uniform)
 				w_uniform.add_fingerprint(M)
-			var/datum/organ/external/affecting = get_organ(ran_zone(M.zone_sel.selecting))
+			var/obj/item/organ/external/affecting = get_organ(ran_zone(M.zone_sel.selecting))
 
 			if(istype(r_hand,/obj/item/weapon/gun) || istype(l_hand,/obj/item/weapon/gun))
 				var/obj/item/weapon/gun/W = null
@@ -291,8 +291,20 @@
 	src.visible_message("<span class='danger'>[user] has [attack_message] [src]!</span>")
 
 	var/dam_zone = pick("head", "chest", "l_arm", "r_arm", "l_leg", "r_leg", "groin")
-	var/datum/organ/external/affecting = get_organ(ran_zone(dam_zone))
+	var/obj/item/organ/external/affecting = get_organ(ran_zone(dam_zone))
 	var/armor_block = run_armor_check(affecting, "melee")
 	apply_damage(damage, BRUTE, affecting, armor_block)
 	updatehealth()
+	return 1
+
+/mob/living/carbon/human/proc/attack_joint(var/obj/item/W, var/mob/living/user, var/def_zone)
+
+	var/obj/item/organ/external/organ = get_organ(check_zone(def_zone))
+	if(!organ || organ.is_dislocated() || organ.dislocated == -1) //Cannot dislocate this organ.
+		return 0
+
+	user.visible_message("<span class='danger'>[src] has been [pick(W.attack_verb)] in \the [organ] with \the [W] by [user]!</span>")
+	if(prob(W.force))
+		user.visible_message("<span class='danger'>[src]'s [organ.joint] [pick("gives way","caves in","crumbles","collapses")] with a grisly crunch!</span>")
+		organ.dislocate()
 	return 1

@@ -85,7 +85,7 @@
 
 /mob/living/silicon/isSilicon()
 	return 1
-    
+
 /mob/proc/isAI()
 	return 0
 
@@ -118,7 +118,7 @@ proc/isobserver(A)
 	return 0
 
 proc/isorgan(A)
-	if(istype(A, /datum/organ/external))
+	if(istype(A, /obj/item/organ/external))
 		return 1
 	return 0
 
@@ -149,7 +149,7 @@ proc/hassensorlevel(A, var/level)
 		var/obj/item/clothing/under/U = H.w_uniform
 		return U.sensor_mode >= level
 	return 0
-	
+
 proc/getsensorlevel(A)
 	var/mob/living/carbon/human/H = A
 	if(istype(H) && istype(H.w_uniform, /obj/item/clothing/under))

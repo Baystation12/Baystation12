@@ -198,7 +198,7 @@
 
 	//splints
 	for(var/organ in list("l_leg","r_leg","l_arm","r_arm"))
-		var/datum/organ/external/o = get_organ(organ)
+		var/obj/item/organ/external/o = get_organ(organ)
 		if(o && o.status & ORGAN_SPLINTED)
 			msg += "<span class='warning'>[t_He] [t_has] a splint on [t_his] [o.display_name]!</span>\n"
 
@@ -251,7 +251,7 @@
 	var/list/wound_flavor_text = list()
 	var/list/is_destroyed = list()
 	var/list/is_bleeding = list()
-	for(var/datum/organ/external/temp in organs)
+	for(var/obj/item/organ/external/temp in organs)
 		if(temp)
 			if(temp.status & ORGAN_DESTROYED)
 				is_destroyed["[temp.display_name]"] = 1

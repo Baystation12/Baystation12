@@ -12,7 +12,7 @@
 			return 0
 		if (!hasorgans(target))
 			return 0
-		var/datum/organ/external/affected = target.get_organ(target_zone)
+		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 		if (affected == null)
 			return 0
 		if (affected.status & ORGAN_DESTROYED)
@@ -36,18 +36,18 @@
 
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		if(..())
-			var/datum/organ/external/affected = target.get_organ(target_zone)
+			var/obj/item/organ/external/affected = target.get_organ(target_zone)
 			return affected.open == 0 && target_zone != "mouth"
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		var/datum/organ/external/affected = target.get_organ(target_zone)
+		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 		user.visible_message("[user] starts the bloodless incision on [target]'s [affected.display_name] with \the [tool].", \
 		"You start the bloodless incision on [target]'s [affected.display_name] with \the [tool].")
 		target.custom_pain("You feel a horrible, searing pain in your [affected.display_name]!",1)
 		..()
 
 	end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		var/datum/organ/external/affected = target.get_organ(target_zone)
+		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 		user.visible_message("\blue [user] has made a bloodless incision on [target]'s [affected.display_name] with \the [tool].", \
 		"\blue You have made a bloodless incision on [target]'s [affected.display_name] with \the [tool].",)
 		//Could be cleaner ...
@@ -61,7 +61,7 @@
 		spread_germs_to_organ(affected, user)
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		var/datum/organ/external/affected = target.get_organ(target_zone)
+		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 		user.visible_message("\red [user]'s hand slips as the blade sputters, searing a long gash in [target]'s [affected.display_name] with \the [tool]!", \
 		"\red Your hand slips as the blade sputters, searing a long gash in [target]'s [affected.display_name] with \the [tool]!")
 		affected.createwound(CUT, 7.5)
@@ -77,18 +77,18 @@
 
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		if(..())
-			var/datum/organ/external/affected = target.get_organ(target_zone)
+			var/obj/item/organ/external/affected = target.get_organ(target_zone)
 			return affected.open == 0 && target_zone != "mouth"
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		var/datum/organ/external/affected = target.get_organ(target_zone)
+		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 		user.visible_message("[user] starts to construct a prepared incision on and within [target]'s [affected.display_name] with \the [tool].", \
 		"You start to construct a prepared incision on and within [target]'s [affected.display_name] with \the [tool].")
 		target.custom_pain("You feel a horrible, searing pain in your [affected.display_name] as it is pushed apart!",1)
 		..()
 
 	end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		var/datum/organ/external/affected = target.get_organ(target_zone)
+		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 		user.visible_message("\blue [user] has constructed a prepared incision on and within [target]'s [affected.display_name] with \the [tool].", \
 		"\blue You have constructed a prepared incision on and within [target]'s [affected.display_name] with \the [tool].",)
 		affected.open = 1
@@ -101,7 +101,7 @@
 		affected.open = 2
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		var/datum/organ/external/affected = target.get_organ(target_zone)
+		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 		user.visible_message("\red [user]'s hand jolts as the system sparks, ripping a gruesome hole in [target]'s [affected.display_name] with \the [tool]!", \
 		"\red Your hand jolts as the system sparks, ripping a gruesome hole in [target]'s [affected.display_name] with \the [tool]!")
 		affected.createwound(CUT, 20)
@@ -119,18 +119,18 @@
 
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		if(..())
-			var/datum/organ/external/affected = target.get_organ(target_zone)
+			var/obj/item/organ/external/affected = target.get_organ(target_zone)
 			return affected.open == 0 && target_zone != "mouth"
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		var/datum/organ/external/affected = target.get_organ(target_zone)
+		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 		user.visible_message("[user] starts the incision on [target]'s [affected.display_name] with \the [tool].", \
 		"You start the incision on [target]'s [affected.display_name] with \the [tool].")
 		target.custom_pain("You feel a horrible pain as if from a sharp knife in your [affected.display_name]!",1)
 		..()
 
 	end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		var/datum/organ/external/affected = target.get_organ(target_zone)
+		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 		user.visible_message("\blue [user] has made an incision on [target]'s [affected.display_name] with \the [tool].", \
 		"\blue You have made an incision on [target]'s [affected.display_name] with \the [tool].",)
 		affected.open = 1
@@ -141,7 +141,7 @@
 		affected.createwound(CUT, 1)
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		var/datum/organ/external/affected = target.get_organ(target_zone)
+		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 		user.visible_message("\red [user]'s hand slips, slicing open [target]'s [affected.display_name] in the wrong place with \the [tool]!", \
 		"\red Your hand slips, slicing open [target]'s [affected.display_name] in the wrong place with \the [tool]!")
 		affected.createwound(CUT, 10)
@@ -158,25 +158,25 @@
 
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		if(..())
-			var/datum/organ/external/affected = target.get_organ(target_zone)
+			var/obj/item/organ/external/affected = target.get_organ(target_zone)
 			return affected.open && (affected.status & ORGAN_BLEEDING)
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		var/datum/organ/external/affected = target.get_organ(target_zone)
+		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 		user.visible_message("[user] starts clamping bleeders in [target]'s [affected.display_name] with \the [tool].", \
 		"You start clamping bleeders in [target]'s [affected.display_name] with \the [tool].")
 		target.custom_pain("The pain in your [affected.display_name] is maddening!",1)
 		..()
 
 	end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		var/datum/organ/external/affected = target.get_organ(target_zone)
+		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 		user.visible_message("\blue [user] clamps bleeders in [target]'s [affected.display_name] with \the [tool].",	\
 		"\blue You clamp bleeders in [target]'s [affected.display_name] with \the [tool].")
 		affected.clamp()
 		spread_germs_to_organ(affected, user)
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		var/datum/organ/external/affected = target.get_organ(target_zone)
+		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 		user.visible_message("\red [user]'s hand slips, tearing blood vessals and causing massive bleeding in [target]'s [affected.display_name] with \the [tool]!",	\
 		"\red Your hand slips, tearing blood vessels and causing massive bleeding in [target]'s [affected.display_name] with \the [tool]!",)
 		affected.createwound(CUT, 10)
@@ -193,11 +193,11 @@
 
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		if(..())
-			var/datum/organ/external/affected = target.get_organ(target_zone)
+			var/obj/item/organ/external/affected = target.get_organ(target_zone)
 			return affected.open == 1 //&& !(affected.status & ORGAN_BLEEDING)
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		var/datum/organ/external/affected = target.get_organ(target_zone)
+		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 		var/msg = "[user] starts to pry open the incision on [target]'s [affected.display_name] with \the [tool]."
 		var/self_msg = "You start to pry open the incision on [target]'s [affected.display_name] with \the [tool]."
 		if (target_zone == "chest")
@@ -211,7 +211,7 @@
 		..()
 
 	end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		var/datum/organ/external/affected = target.get_organ(target_zone)
+		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 		var/msg = "\blue [user] keeps the incision open on [target]'s [affected.display_name] with \the [tool]."
 		var/self_msg = "\blue You keep the incision open on [target]'s [affected.display_name] with \the [tool]."
 		if (target_zone == "chest")
@@ -224,7 +224,7 @@
 		affected.open = 2
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		var/datum/organ/external/affected = target.get_organ(target_zone)
+		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 		var/msg = "\red [user]'s hand slips, tearing the edges of the incision on [target]'s [affected.display_name] with \the [tool]!"
 		var/self_msg = "\red Your hand slips, tearing the edges of the incision on [target]'s [affected.display_name] with \the [tool]!"
 		if (target_zone == "chest")
@@ -249,18 +249,18 @@
 
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		if(..())
-			var/datum/organ/external/affected = target.get_organ(target_zone)
+			var/obj/item/organ/external/affected = target.get_organ(target_zone)
 			return affected.open && target_zone != "mouth"
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		var/datum/organ/external/affected = target.get_organ(target_zone)
+		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 		user.visible_message("[user] is beginning to cauterize the incision on [target]'s [affected.display_name] with \the [tool]." , \
 		"You are beginning to cauterize the incision on [target]'s [affected.display_name] with \the [tool].")
 		target.custom_pain("Your [affected.display_name] is being burned!",1)
 		..()
 
 	end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		var/datum/organ/external/affected = target.get_organ(target_zone)
+		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 		user.visible_message("\blue [user] cauterizes the incision on [target]'s [affected.display_name] with \the [tool].", \
 		"\blue You cauterize the incision on [target]'s [affected.display_name] with \the [tool].")
 		affected.open = 0
@@ -268,12 +268,12 @@
 		affected.status &= ~ORGAN_BLEEDING
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		var/datum/organ/external/affected = target.get_organ(target_zone)
+		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 		user.visible_message("\red [user]'s hand slips, leaving a small burn on [target]'s [affected.display_name] with \the [tool]!", \
 		"\red Your hand slips, leaving a small burn on [target]'s [affected.display_name] with \the [tool]!")
 		target.apply_damage(3, BURN, affected)
 
-/datum/surgery_step/generic/cut_limb
+/datum/surgery_step/generic/amputate
 	allowed_tools = list(
 	/obj/item/weapon/circular_saw = 100, \
 	/obj/item/weapon/hatchet = 75
@@ -287,7 +287,7 @@
 			return 0
 		if (!hasorgans(target))
 			return 0
-		var/datum/organ/external/affected = target.get_organ(target_zone)
+		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 		if (affected == null)
 			return 0
 		if (affected.status & ORGAN_DESTROYED)
@@ -295,20 +295,20 @@
 		return target_zone != "chest" && target_zone != "groin" && target_zone != "head"
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		var/datum/organ/external/affected = target.get_organ(target_zone)
-		user.visible_message("[user] is beginning to cut off [target]'s [affected.display_name] with \the [tool]." , \
-		"You are beginning to cut off [target]'s [affected.display_name] with \the [tool].")
-		target.custom_pain("Your [affected.display_name] is being ripped apart!",1)
+		var/obj/item/organ/external/affected = target.get_organ(target_zone)
+		user.visible_message("[user] is beginning to amputate [target]'s [affected.display_name] with \the [tool]." , \
+		"You are beginning to cut through [target]'s [affected.amputation_point] with \the [tool].")
+		target.custom_pain("Your [affected.amputation_point] is being ripped apart!",1)
 		..()
 
 	end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		var/datum/organ/external/affected = target.get_organ(target_zone)
-		user.visible_message("\blue [user] cuts off [target]'s [affected.display_name] with \the [tool].", \
-		"\blue You cut off [target]'s [affected.display_name] with \the [tool].")
+		var/obj/item/organ/external/affected = target.get_organ(target_zone)
+		user.visible_message("\blue [user] amputates [target]'s [affected.display_name] with \the [tool].", \
+		"\blue You amputate [target]'s [affected.display_name] with \the [tool].")
 		affected.droplimb(1,1,1)
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		var/datum/organ/external/affected = target.get_organ(target_zone)
+		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 		user.visible_message("\red [user]'s hand slips, sawwing through the bone in [target]'s [affected.display_name] with \the [tool]!", \
 		"\red Your hand slips, sawwing through the bone in [target]'s [affected.display_name] with \the [tool]!")
 		affected.createwound(CUT, 30)

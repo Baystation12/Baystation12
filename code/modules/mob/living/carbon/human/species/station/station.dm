@@ -145,12 +145,12 @@
 	water and other radiation."
 
 	has_organ = list(
-		"nutrient channel" =   /datum/organ/internal/diona/nutrients,
-		"neural strata" =      /datum/organ/internal/diona/strata,
-		"response node" =      /datum/organ/internal/diona/node,
-		"gas bladder" =        /datum/organ/internal/diona/bladder,
-		"polyp segment" =      /datum/organ/internal/diona/polyp,
-		"anchoring ligament" = /datum/organ/internal/diona/ligament
+		"nutrient channel" =   /obj/item/organ/diona/nutrients,
+		"neural strata" =      /obj/item/organ/diona/strata,
+		"response node" =      /obj/item/organ/diona/node,
+		"gas bladder" =        /obj/item/organ/diona/bladder,
+		"polyp segment" =      /obj/item/organ/diona/polyp,
+		"anchoring ligament" = /obj/item/organ/diona/ligament
 		)
 
 	warning_low_pressure = 50

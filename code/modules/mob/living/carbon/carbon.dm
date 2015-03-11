@@ -33,8 +33,8 @@
 				if(istype(src, /mob/living/carbon/human))
 					var/mob/living/carbon/human/H = src
 					var/organ = H.get_organ("chest")
-					if (istype(organ, /datum/organ/external))
-						var/datum/organ/external/temp = organ
+					if (istype(organ, /obj/item/organ/external))
+						var/obj/item/organ/external/temp = organ
 						if(temp.take_damage(d, 0))
 							H.UpdateDamageIcon()
 					H.updatehealth()
@@ -64,7 +64,7 @@
 /mob/living/carbon/attack_hand(mob/M as mob)
 	if(!istype(M, /mob/living/carbon)) return
 	if (hasorgans(M))
-		var/datum/organ/external/temp = M:organs_by_name["r_hand"]
+		var/obj/item/organ/external/temp = M:organs_by_name["r_hand"]
 		if (M.hand)
 			temp = M:organs_by_name["l_hand"]
 		if(temp && !temp.is_usable())
@@ -158,7 +158,7 @@
 				"\blue You check yourself for injuries." \
 				)
 
-			for(var/datum/organ/external/org in H.organs)
+			for(var/obj/item/organ/external/org in H.organs)
 				var/status = ""
 				var/brutedamage = org.brute_dam
 				var/burndamage = org.burn_dam

@@ -592,7 +592,7 @@ var/list/slot_equipment_priority = list( \
 		var/mob/living/carbon/human/H = src
 		if(H.health - H.halloss <= config.health_threshold_softcrit)
 			for(var/name in H.organs_by_name)
-				var/datum/organ/external/e = H.organs_by_name[name]
+				var/obj/item/organ/external/e = H.organs_by_name[name]
 				if(H.lying)
 					if(((e.status & ORGAN_BROKEN && !(e.status & ORGAN_SPLINTED)) || e.status & ORGAN_BLEEDING) && (H.getBruteLoss() + H.getFireLoss() >= 100))
 						return 1
@@ -1084,9 +1084,9 @@ mob/proc/yank_out_object()
 
 	if(ishuman(src))
 		var/mob/living/carbon/human/H = src
-		var/datum/organ/external/affected
+		var/obj/item/organ/external/affected
 
-		for(var/datum/organ/external/organ in H.organs) //Grab the organ holding the implant.
+		for(var/obj/item/organ/external/organ in H.organs) //Grab the organ holding the implant.
 			for(var/obj/item/O in organ.implants)
 				if(O == selection)
 					affected = organ

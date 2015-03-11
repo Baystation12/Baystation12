@@ -110,7 +110,7 @@
 
 
 	if(!target_limb) target_limb = pick("l_foot","r_foot","l_leg","r_leg","l_hand","r_hand","l_arm", "r_arm","head","chest","groin")
-	var/datum/organ/external/affecting = target.get_organ(target_limb)
+	var/obj/item/organ/external/affecting = target.get_organ(target_limb)
 	var/damage = 0
 
 	if(get_trait(TRAIT_CARNIVOROUS))

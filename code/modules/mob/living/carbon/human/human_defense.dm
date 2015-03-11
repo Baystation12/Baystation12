@@ -10,7 +10,7 @@ emp_act
 
 /mob/living/carbon/human/bullet_act(var/obj/item/projectile/P, var/def_zone)
 
-	var/datum/organ/external/organ = get_organ(check_zone(def_zone))
+	var/obj/item/organ/external/organ = get_organ(check_zone(def_zone))
 
 	//Shields
 	if(check_shields(P.damage, "the [P.name]"))
@@ -50,7 +50,7 @@ emp_act
 	return (..(P , def_zone))
 
 /mob/living/carbon/human/stun_effect_act(var/stun_amount, var/agony_amount, var/def_zone)
-	var/datum/organ/external/affected = get_organ(check_zone(def_zone))
+	var/obj/item/organ/external/affected = get_organ(check_zone(def_zone))
 	var/siemens_coeff = get_siemens_coefficient_organ(affected)
 	stun_amount *= siemens_coeff
 	agony_amount *= siemens_coeff
@@ -84,21 +84,21 @@ emp_act
 	if(def_zone)
 		if(isorgan(def_zone))
 			return getarmor_organ(def_zone, type)
-		var/datum/organ/external/affecting = get_organ(def_zone)
+		var/obj/item/organ/external/affecting = get_organ(def_zone)
 		return getarmor_organ(affecting, type)
 		//If a specific bodypart is targetted, check how that bodypart is protected and return the value.
 
 	//If you don't specify a bodypart, it checks ALL your bodyparts for protection, and averages out the values
 	for(var/organ_name in organs_by_name)
 		if (organ_name in organ_rel_size)
-			var/datum/organ/external/organ = organs_by_name[organ_name]
+			var/obj/item/organ/external/organ = organs_by_name[organ_name]
 			var/weight = organ_rel_size[organ_name]
 			armorval += getarmor_organ(organ, type) * weight
 			total += weight
 	return (armorval/max(total, 1))
 
 //this proc returns the Siemens coefficient of electrical resistivity for a particular external organ.
-/mob/living/carbon/human/proc/get_siemens_coefficient_organ(var/datum/organ/external/def_zone)
+/mob/living/carbon/human/proc/get_siemens_coefficient_organ(var/obj/item/organ/external/def_zone)
 	if (!def_zone)
 		return 1.0
 
@@ -112,7 +112,7 @@ emp_act
 	return siemens_coefficient
 
 //this proc returns the armour value for a particular external organ.
-/mob/living/carbon/human/proc/getarmor_organ(var/datum/organ/external/def_zone, var/type)
+/mob/living/carbon/human/proc/getarmor_organ(var/obj/item/organ/external/def_zone, var/type)
 	if(!type)	return 0
 	var/protection = 0
 	var/list/protective_gear = list(head, wear_mask, wear_suit, w_uniform, gloves, shoes)
@@ -167,10 +167,10 @@ emp_act
 	for(var/obj/O in src)
 		if(!O)	continue
 		O.emp_act(severity)
-	for(var/datum/organ/external/O  in organs)
+	for(var/obj/item/organ/external/O  in organs)
 		if(O.status & ORGAN_DESTROYED)	continue
 		O.emp_act(severity)
-		for(var/datum/organ/internal/I  in O.internal_organs)
+		for(var/obj/item/organ/I  in O.internal_organs)
 			if(I.robotic == 0)	continue
 			I.emp_act(severity)
 	..()
@@ -188,7 +188,7 @@ emp_act
 		visible_message("\red <B>[user] misses [src] with \the [I]!")
 		return 0
 
-	var/datum/organ/external/affecting = get_organ(target_zone)
+	var/obj/item/organ/external/affecting = get_organ(target_zone)
 	if (!affecting)
 		return 0
 	if(affecting.status & ORGAN_DESTROYED)
@@ -330,7 +330,7 @@ emp_act
 		if ((O.thrower != src) && check_shields(throw_damage, "[O]"))
 			return
 
-		var/datum/organ/external/affecting = get_organ(zone)
+		var/obj/item/organ/external/affecting = get_organ(zone)
 		var/hit_area = affecting.display_name
 
 		src.visible_message("\red [src] has been hit in the [hit_area] by [O].")
@@ -372,13 +372,13 @@ emp_act
 			var/obj/item/I = O
 			mass = I.w_class/THROWNOBJ_KNOCKBACK_DIVISOR
 		var/momentum = speed*mass
-		
+
 		if(O.throw_source && momentum >= THROWNOBJ_KNOCKBACK_SPEED)
 			var/dir = get_dir(O.throw_source, src)
 
 			visible_message("\red [src] staggers under the impact!","\red You stagger under the impact!")
 			src.throw_at(get_edge_target_turf(src,dir),1,momentum)
-			
+
 			if(!O || !src) return
 
 			if(O.loc == src && O.sharp) //Projectile is embedded and suitable for pinning.
@@ -392,8 +392,8 @@ emp_act
 
 /mob/living/carbon/human/embed(var/obj/O, var/def_zone=null)
 	if(!def_zone) ..()
-	
-	var/datum/organ/external/affecting = get_organ(def_zone)
+
+	var/obj/item/organ/external/affecting = get_organ(def_zone)
 	if(affecting)
 		affecting.embed(O)
 

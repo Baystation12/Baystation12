@@ -1908,7 +1908,7 @@
 "KJ" = (/obj/item/weapon/caution,/turf/unsimulated/floor{icon_state = "freezerfloor"; dir = 2},/area/wizard_station)
 "KK" = (/obj/item/weapon/kitchenknife/ritual,/turf/unsimulated/floor{icon_state = "freezerfloor"; dir = 2},/area/wizard_station)
 "KL" = (/obj/item/weapon/screwdriver{pixel_y = 15},/turf/simulated/shuttle/floor4/vox,/area/shuttle/vox/station)
-"KM" = (/obj/item/weapon/organ/r_arm,/turf/simulated/shuttle/floor4/vox,/area/shuttle/vox/station)
+"KM" = (/obj/item/organ/external/r_arm,/turf/simulated/shuttle/floor4/vox,/area/shuttle/vox/station)
 "KN" = (/obj/machinery/atmospherics/pipe/tank/nitrogen{dir = 1; initialize_directions = 1; start_pressure = 493.6},/turf/simulated/shuttle/floor4/vox,/area/shuttle/vox/station)
 "KO" = (/obj/machinery/portable_atmospherics/canister/phoron,/turf/simulated/shuttle/floor4/vox,/area/shuttle/vox/station)
 "KP" = (/obj/machinery/portable_atmospherics/canister/nitrogen,/turf/simulated/shuttle/floor4/vox,/area/shuttle/vox/station)

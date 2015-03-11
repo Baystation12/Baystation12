@@ -111,7 +111,7 @@ var/global/list/obj/cortical_stacks = list() //Stacks for 'leave nobody behind' 
 	vox.h_style = "Short Vox Quills"
 	vox.f_style = "Shaved"
 
-	for(var/datum/organ/external/limb in vox.organs)
+	for(var/obj/item/organ/external/limb in vox.organs)
 		limb.status &= ~(ORGAN_DESTROYED | ORGAN_ROBOT)
 
 	// Keep track of their stack.
@@ -126,8 +126,8 @@ var/global/list/obj/cortical_stacks = list() //Stacks for 'leave nobody behind' 
 	if(cortical_stacks.len == 0)
 		return 0
 
-	for(var/datum/organ/internal/stack/vox/stack in cortical_stacks)
-		if(stack.organ_holder && get_area(stack.organ_holder) != locate(/area/shuttle/vox/station))
+	for(var/obj/item/organ/stack/vox/stack in cortical_stacks)
+		if(stack && get_area(stack) != locate(/area/shuttle/vox/station))
 			return 0
 	return 1
 

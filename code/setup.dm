@@ -503,6 +503,7 @@
 #define SALVED           512
 #define ORGAN_DEAD       1024
 #define ORGAN_MUTATED    2048
+#define ORGAN_ASSISTED   4096
 
 // Admin permissions. Please don't edit these values without speaking to Errorage first. ~Carn
 #define R_BUILDMODE     1

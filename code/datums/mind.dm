@@ -72,7 +72,7 @@ datum/mind
 				current.remove_changeling_powers()
 				current.verbs -= /datum/changeling/proc/EvolutionMenu
 			current.mind = null
-			
+
 			nanomanager.user_transferred(current, new_character) // transfer active NanoUI instances to new user
 		if(new_character.mind)		//remove any mind currently in our new body's mind variable
 			new_character.mind.current = null
@@ -505,7 +505,7 @@ datum/mind
 			switch(href_list["implant"])
 				if("remove")
 					for(var/obj/item/weapon/implant/loyalty/I in H.contents)
-						for(var/datum/organ/external/organs in H.organs)
+						for(var/obj/item/organ/external/organs in H.organs)
 							if(I in organs.implants)
 								I.Del()
 								break

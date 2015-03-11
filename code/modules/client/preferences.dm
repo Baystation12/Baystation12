@@ -1690,7 +1690,7 @@ datum/preferences
 	for(var/name in organ_data)
 
 		var/status = organ_data[name]
-		var/datum/organ/external/O = character.organs_by_name[name]
+		var/obj/item/organ/external/O = character.organs_by_name[name]
 		if(O)
 			if(status == "amputated")
 				O.amputated = 1
@@ -1699,12 +1699,12 @@ datum/preferences
 			else if(status == "cyborg")
 				O.status |= ORGAN_ROBOT
 		else
-			var/datum/organ/internal/I = character.internal_organs_by_name[name]
+			var/obj/item/organ/I = character.internal_organs_by_name[name]
 			if(I)
 				if(status == "assisted")
 					I.mechassist()
 				else if(status == "mechanical")
-					I.mechanize()
+					I.robotize()
 
 	character.underwear = underwear
 

@@ -6,7 +6,7 @@
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		if (!hasorgans(target))
 			return 0
-		var/datum/organ/external/affected = target.get_organ(target_zone)
+		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 		if (!affected)
 			return 0
 		if (!(affected.status & ORGAN_DESTROYED))
@@ -29,7 +29,7 @@
 
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		if(..())
-			var/datum/organ/external/affected = target.get_organ(target_zone)
+			var/obj/item/organ/external/affected = target.get_organ(target_zone)
 			return !(affected.status & ORGAN_CUT_AWAY)
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -38,13 +38,13 @@
 		..()
 
 	end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		var/datum/organ/external/affected = target.get_organ(target_zone)
+		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 		user.visible_message("\blue [user] peels back tattered flesh where [target]'s head used to be with \the [tool].",	\
 		"\blue You peel back tattered flesh where [target]'s head used to be with \the [tool].")
 		affected.status |= ORGAN_CUT_AWAY
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		var/datum/organ/external/affected = target.get_organ(target_zone)
+		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 		if (affected.parent)
 			affected = affected.parent
 			user.visible_message("\red [user]'s hand slips, ripping [target]'s [affected.display_name] open!", \
@@ -63,11 +63,11 @@
 
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		if(..())
-			var/datum/organ/external/affected = target.get_organ(target_zone)
+			var/obj/item/organ/external/affected = target.get_organ(target_zone)
 			return affected.status & ORGAN_CUT_AWAY && target.op_stage.head_reattach == 0 && !(affected.status & ORGAN_ATTACHABLE)
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		var/datum/organ/external/affected = target.get_organ(target_zone)
+		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 		user.visible_message("[user] is beginning to reshape [target]'s esophagal and vocal region with \the [tool].", \
 		"You start to reshape [target]'s [affected.display_name] esophagal and vocal region with \the [tool].")
 		..()
@@ -78,7 +78,7 @@
 		target.op_stage.head_reattach = 1
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		var/datum/organ/external/affected = target.get_organ(target_zone)
+		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 		if (affected.parent)
 			affected = affected.parent
 			user.visible_message("\red [user]'s hand slips, further rending flesh on [target]'s neck!", \
@@ -109,7 +109,7 @@
 		target.op_stage.head_reattach = 2
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		var/datum/organ/external/affected = target.get_organ(target_zone)
+		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 		if (affected.parent)
 			affected = affected.parent
 			user.visible_message("\red [user]'s hand slips, ripping apart flesh on [target]'s neck!", \
@@ -137,7 +137,7 @@
 		..()
 
 	end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		var/datum/organ/external/affected = target.get_organ(target_zone)
+		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 		user.visible_message("\blue [user] has finished adjusting the area around [target]'s neck with \the [tool].",	\
 		"\blue You have finished adjusting the area around [target]'s neck with \the [tool].")
 		target.op_stage.head_reattach = 0
@@ -147,7 +147,7 @@
 		affected.open = 0
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		var/datum/organ/external/affected = target.get_organ(target_zone)
+		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 		if (affected.parent)
 			affected = affected.parent
 			user.visible_message("\red [user]'s hand slips, searing [target]'s neck!", \
@@ -156,7 +156,7 @@
 
 
 /datum/surgery_step/head/attach
-	allowed_tools = list(/obj/item/weapon/organ/head = 100)
+	allowed_tools = list(/obj/item/organ/head = 100)
 	can_infect = 0
 
 	min_duration = 80
@@ -164,7 +164,7 @@
 
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		if(..())
-			var/datum/organ/external/head = target.get_organ(target_zone)
+			var/obj/item/organ/external/head = target.get_organ(target_zone)
 			return head.status & ORGAN_ATTACHABLE
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -172,7 +172,7 @@
 		"You start attaching [tool] to [target]'s reshaped neck.")
 
 	end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		var/datum/organ/external/affected = target.get_organ(target_zone)
+		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 		user.visible_message("\blue [user] has attached [target]'s head to the body.",	\
 		"\blue You have attached [target]'s head to the body.")
 		affected.status = 0
@@ -188,7 +188,7 @@
 		del(tool)
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		var/datum/organ/external/affected = target.get_organ(target_zone)
+		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 		user.visible_message("\red [user]'s hand slips, damaging connectors on [target]'s neck!", \
 		"\red Your hand slips, damaging connectors on [target]'s neck!")
 		target.apply_damage(10, BRUTE, affected, sharp=1)

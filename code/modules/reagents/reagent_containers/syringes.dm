@@ -235,7 +235,7 @@
 		if(istype(target, /mob/living/carbon/human))
 
 			var/target_zone = ran_zone(check_zone(user.zone_sel.selecting, target))
-			var/datum/organ/external/affecting = target:get_organ(target_zone)
+			var/obj/item/organ/external/affecting = target:get_organ(target_zone)
 
 			if (!affecting)
 				return
@@ -270,7 +270,7 @@
 		var/syringestab_amount_transferred = rand(0, (reagents.total_volume - 5)) //nerfed by popular demand
 		src.reagents.trans_to(target, syringestab_amount_transferred)
 		src.break_syringe(target, user)
-		
+
 	proc/break_syringe(mob/living/carbon/target, mob/living/carbon/user)
 		src.desc += " It is broken."
 		src.mode = SYRINGE_BROKEN
