@@ -1317,9 +1317,6 @@
 			if(pressure)
 				pressure.icon_state = "pressure[pressure_alert]"
 
-			if(pullin)
-				if(pulling)								pullin.icon_state = "pull1"
-				else									pullin.icon_state = "pull0"
 //			if(rest)	//Not used with new UI
 //				if(resting || lying || sleeping)		rest.icon_state = "rest1"
 //				else									rest.icon_state = "rest0"
