@@ -1432,3 +1432,16 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 
 
 
+/datum/supply_packs/firefighting
+	name = "Firefighting equipment"
+	containername = "Firefighting crate"
+	cost = 30
+	group = "Operations"
+	contains = list(/obj/item/clothing/head/hardhat/red,
+					/obj/item/clothing/head/hardhat/red,
+					/obj/item/clothing/suit/fire/firefighter,
+					/obj/item/clothing/suit/fire/firefighter,
+					/obj/item/clothing/mask/gas,
+					/obj/item/clothing/mask/gas,
+					/obj/item/weapon/extinguisher,
+					/obj/item/weapon/extinguisher)
