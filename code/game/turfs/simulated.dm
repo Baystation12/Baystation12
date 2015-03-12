@@ -37,8 +37,8 @@
 
 		// Dirt overlays.
 		dirt++
-		var/obj/effect/decal/cleanable/dirt/dirtoverlay = locate(/obj/effect/decal/cleanable/dirt, src)
 		if (dirt >= 50)
+			var/obj/effect/decal/cleanable/dirt/dirtoverlay = locate(/obj/effect/decal/cleanable/dirt, src)
 			if (!dirtoverlay)
 				dirtoverlay = new/obj/effect/decal/cleanable/dirt(src)
 				dirtoverlay.alpha = 15
