@@ -33,7 +33,6 @@
 	icon = 'icons/obj/cloning.dmi'
 	icon_state = "pod_0"
 	req_access = list(access_genetics) //For premature unlocking.
-
 	var/mob/living/occupant
 	var/heal_level = 20 //The clone is released once its health reaches this level.
 	var/heal_rate = 1
@@ -57,8 +56,10 @@
 	component_parts += new /obj/item/stack/cable_coil(src, 2)
 
 	RefreshParts()
+	update_icon()
 
 /obj/machinery/clonepod/attack_ai(mob/user as mob)
+
 	add_hiddenprint(user)
 	return attack_hand(user)
 
@@ -77,6 +78,7 @@
 	if(mess || attempting)
 		return 0
 	var/datum/mind/clonemind = locate(R.mind)
+
 	if(!istype(clonemind, /datum/mind))	//not a mind
 		return 0
 	if(clonemind.current && clonemind.current.stat != DEAD)	//mind is associated with a non-dead body
@@ -106,7 +108,6 @@
 		R.dna.real_name = "clone ([rand(0,999)])"
 	H.real_name = R.dna.real_name
 
-	icon_state = "pod_1"
 	//Get the clone body ready
 	H.adjustCloneLoss(150) // New damage var so you can't eject a clone early then stab them to abuse the current damage system --NeoFite
 	H.adjustBrainLoss(80) // Even if healed to full health, it will have some brain damage
@@ -148,6 +149,7 @@
 		H.dna.UpdateUI()
 
 	H.set_cloned_appearance()
+	update_icon()
 
 	for(var/datum/language/L in R.languages)
 		H.add_language(L.name)
@@ -209,9 +211,6 @@
 		occupant = null
 		if(locked)
 			locked = 0
-		if(!mess)
-			icon_state = "pod_0"
-		//use_power(200)
 		return
 
 	return
@@ -256,7 +255,7 @@
 		else
 			if(anchored)
 				anchored = 0
-				connected.pod1 = null
+				connected.pods -= src
 				connected = null
 			else
 				anchored = 1
@@ -265,6 +264,11 @@
 				user.visible_message("[user] secures [src] to the floor.", "You secure [src] to the floor.")
 			else
 				user.visible_message("[user] unsecures [src] from the floor.", "You unsecure [src] from the floor.")
+	else if(istype(W, /obj/item/device/multitool))
+		var/obj/item/device/multitool/M = W
+		M.connecting = src
+		user << "<span class='notice'>You load connection data from [src] to [M].</span>"
+		return
 	else
 		..()
 
@@ -275,7 +279,7 @@
 	if(!message)
 		return 0
 
-	connected.temp = message
+	connected.temp = "[name] : [message]"
 	connected.updateUsrDialog()
 	return 1
 
@@ -311,41 +315,29 @@
 	if(mess) //Clean that mess and dump those gibs!
 		mess = 0
 		gibs(loc)
-		icon_state = "pod_0"
-
-		/*
-		for(var/obj/O in src)
-			O.loc = loc
-		*/
+		update_icon()
 		return
 
 	if(!(occupant))
 		return
 
-	/*
-	for(var/obj/O in src)
-		O.loc = loc
-	*/
-
 	if(occupant.client)
 		occupant.client.eye = occupant.client.mob
 		occupant.client.perspective = MOB_PERSPECTIVE
 	occupant.loc = loc
-	icon_state = "pod_0"
 	eject_wait = 0 //If it's still set somehow.
 	domutcheck(occupant) //Waiting until they're out before possible monkeyizing.
-//	occupant.add_side_effect("Bad Stomach") // Give them an extra side-effect for free.
 	occupant = null
 
 	biomass -= CLONE_BIOMASS
-
+	update_icon()
 	return
 
 /obj/machinery/clonepod/proc/malfunction()
 	if(occupant)
 		connected_message("Critical Error!")
 		mess = 1
-		icon_state = "pod_g"
+		update_icon()
 		occupant.ghostize()
 		spawn(5)
 			del(occupant)
@@ -386,6 +378,14 @@
 				return
 		else
 	return
+
+/obj/machinery/clonepod/update_icon()
+	..()
+	icon_state = "pod_0"
+	if (occupant && !(stat & NOPOWER))
+		icon_state = "pod_1"
+	else if (mess)
+		icon_state = "pod_g"
 
 //Health Tracker Implant
 
