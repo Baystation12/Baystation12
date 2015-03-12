@@ -618,6 +618,7 @@
 /obj/machinery/suit_cycler/Del()
 	del(wires) // qdel
 	wires = null
+	..()
 
 /obj/machinery/suit_cycler/engineering
 	name = "Engineering suit cycler"

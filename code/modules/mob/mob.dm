@@ -616,6 +616,8 @@ var/list/slot_equipment_priority = list( \
 	if(pulling)
 		pulling.pulledby = null
 		pulling = null
+		if(pullin)
+			pullin.icon_state = "pull1"
 
 /mob/proc/start_pulling(var/atom/movable/AM)
 	if ( !AM || !usr || src==AM || !isturf(src.loc) )	//if there's no person pulling OR the person is pulling themself OR the object being pulled is inside something: abort!
@@ -641,6 +643,9 @@ var/list/slot_equipment_priority = list( \
 
 	src.pulling = AM
 	AM.pulledby = src
+
+	if(pullin)
+		pullin.icon_state = "pull0"
 
 	if(ishuman(AM))
 		var/mob/living/carbon/human/H = AM
@@ -859,7 +864,9 @@ note dizziness decrements automatically in the mob's Life() proc.
 			canmove = 1
 			pixel_y = V.mob_offset_y
 	else if(buckled)
-		if (!buckled.movable)
+		// var/movable is defined at /obj/structure/stool/bed level
+		// If we're buckled to something else, such as vines, assume it's stationary.
+		if (!istype(buckled) || !buckled.movable)
 			anchored = 1
 			canmove = 0
 			if(istype(buckled,/obj/structure/stool/bed/chair) )
