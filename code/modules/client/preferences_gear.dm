@@ -355,6 +355,13 @@ var/global/list/gear_datums = list()
 	cost = 2
 	slot = slot_w_uniform
 	allowed_roles = list("Security Officer","Head of Security","Warden")
+	
+/datum/gear/dispatchsec
+	display_name = "uniform, blue (Security)"
+	path = /obj/item/clothing/under/rank/dispatch/sec
+	cost = 2
+	slot = slot_w_uniform
+	allowed_roles = list("Security Officer","Head of Security","Warden")
 
 /datum/gear/uniform_hop
 	display_name = "uniform, HoP's dress"
