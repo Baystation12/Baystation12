@@ -1,9 +1,20 @@
+/var/global/machinery_sort_required = 0
+
 /datum/controller/process/machinery/setup()
 	name = "machinery"
 	schedule_interval = 20 // every 2 seconds
 
 /datum/controller/process/machinery/doWork()
-	//#ifdef PROFILE_MACHINES
+	internal_sort()
+	internal_process()
+
+/datum/controller/process/machinery/proc/internal_sort()
+	if(machinery_sort_required)
+		machinery_sort_required = 0
+		machines = dd_sortedObjectList(machines)
+
+/datum/controller/process/machinery/proc/internal_process()
+//#ifdef PROFILE_MACHINES
 	//machine_profiling.len = 0
 	//#endif
 
@@ -31,4 +42,3 @@
 			#endif
 
 		scheck()
-
