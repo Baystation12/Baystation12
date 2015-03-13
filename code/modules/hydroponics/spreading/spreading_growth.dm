@@ -20,7 +20,7 @@
 			if(!isnull(seed.chems["pacid"]))
 				spawn(rand(5,25)) floor.ex_act(3)
 			continue
-		if(!Adjacent(floor))
+		if(!Adjacent(floor) || !floor.Enter(src))
 			continue
 		neighbors |= floor
 	// Update all of our friends.

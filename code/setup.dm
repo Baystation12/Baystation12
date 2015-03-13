@@ -778,6 +778,12 @@ var/list/be_special_flags = list(
 
 #define NANO_IGNORE_DISTANCE 1
 
+// Robot AI notifications
+#define ROBOT_NOTIFICATION_NEW_UNIT 1
+#define ROBOT_NOTIFICATION_NEW_NAME 2
+#define ROBOT_NOTIFICATION_NEW_MODULE 3
+#define ROBOT_NOTIFICATION_MODULE_RESET 4
+
 #define DEFAULT_JOB_TYPE /datum/job/assistant
 
 // Appearance change flags
@@ -792,3 +798,4 @@ var/list/be_special_flags = list(
 #define APPEARANCE_EYE_COLOR 256
 #define APPEARANCE_ALL_HAIR APPEARANCE_HAIR|APPEARANCE_HAIR_COLOR|APPEARANCE_FACIAL_HAIR|APPEARANCE_FACIAL_HAIR_COLOR
 #define APPEARANCE_ALL 511
+

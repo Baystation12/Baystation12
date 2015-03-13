@@ -2,7 +2,7 @@
 	name = "\improper PTRS-7 rifle"
 	desc = "A portable anti-armour rifle fitted with a scope. Originally designed to used against armoured exosuits, it is capable of punching through windows and non-reinforced walls with ease. Fires armor piercing 14.5mm shells."
 	icon_state = "heavysniper"
-	item_state = "shotgun"
+	item_state = "l6closednomag" //placeholder
 	w_class = 4
 	force = 10
 	slot_flags = SLOT_BACK
