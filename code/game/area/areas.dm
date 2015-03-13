@@ -38,6 +38,11 @@
 	return cameras
 
 /area/proc/atmosalert(danger_level, var/alarm_source)
+	if (danger_level == 0)
+		atmosphere_alarm.clearAlarm(master, alarm_source)
+	else
+		atmosphere_alarm.triggerAlarm(master, alarm_source, severity = danger_level)
+
 	//Check all the alarms before lowering atmosalm. Raising is perfectly fine.
 	for (var/area/RA in related)
 		for (var/obj/machinery/alarm/AA in RA)
@@ -50,11 +55,6 @@
 			air_doors_open()
 		else if (danger_level >= 2 && atmosalm < 2)
 			air_doors_close()
-
-		if (danger_level == 0)
-			atmosphere_alarm.clearAlarm(master, alarm_source)
-		else
-			atmosphere_alarm.triggerAlarm(master, alarm_source, severity = danger_level)
 
 		atmosalm = danger_level
 		for(var/area/RA in related)

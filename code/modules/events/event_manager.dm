@@ -32,7 +32,7 @@
 		EC.process()
 
 /datum/event_manager/proc/event_complete(var/datum/event/E)
-	if(!E.event_meta)	// datum/event is used here and there for random reasons, maintaining "backwards compatibility"
+	if(!E.event_meta || !E.severity)	// datum/event is used here and there for random reasons, maintaining "backwards compatibility"
 		log_debug("Event of '[E.type]' with missing meta-data has completed.")
 		return
 

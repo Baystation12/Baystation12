@@ -109,11 +109,11 @@ Please contact me on #coderbus IRC. ~Carn x
 #define DAMAGE_LAYER			2
 #define SURGERY_LEVEL			3		//bs12 specific.
 #define UNIFORM_LAYER			4
-#define TAIL_LAYER				5		//bs12 specific. this hack is probably gonna come back to haunt me
-#define ID_LAYER				6
-#define SHOES_LAYER				7
-#define GLOVES_LAYER			8
-#define SUIT_LAYER				9
+#define ID_LAYER				5
+#define SHOES_LAYER				6
+#define GLOVES_LAYER			7
+#define SUIT_LAYER				8
+#define TAIL_LAYER				9		//bs12 specific. this hack is probably gonna come back to haunt me
 #define GLASSES_LAYER			10
 #define BELT_LAYER				11		//Possible make this an overlay of somethign required to wear a belt?
 #define SUIT_STORE_LAYER		12
@@ -920,7 +920,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 /mob/living/carbon/human/update_fire(var/update_icons=1)
 	overlays_standing[FIRE_LAYER] = null
 	if(on_fire)
-		overlays_standing[FIRE_LAYER] = image("icon"='icons/mob/OnFire.dmi', "icon_state"="Standing", "layer"=-FIRE_LAYER)
+		overlays_standing[FIRE_LAYER] = image("icon"='icons/mob/OnFire.dmi', "icon_state"="Standing", "layer"=FIRE_LAYER)
 
 	if(update_icons)   update_icons()
 
@@ -974,12 +974,12 @@ proc/get_damage_icon_part(damage_state, body_part)
 #undef DAMAGE_LAYER
 #undef SURGERY_LEVEL
 #undef UNIFORM_LAYER
-#undef TAIL_LAYER
 #undef ID_LAYER
 #undef SHOES_LAYER
 #undef GLOVES_LAYER
 #undef EARS_LAYER
 #undef SUIT_LAYER
+#undef TAIL_LAYER
 #undef GLASSES_LAYER
 #undef FACEMASK_LAYER
 #undef BELT_LAYER

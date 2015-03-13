@@ -168,7 +168,6 @@
 		O.mmi.transfer_identity(src)
 
 	callHook("borgify", list(O))
-	O.notify_ai(1)
 	O.Namepick()
 
 	spawn(0)//To prevent the proc from returning null.

@@ -133,6 +133,11 @@
 #define FIRE_GAS_BURNRATE_MULT			1
 #define FIRE_LIQUID_BURNRATE_MULT		0.5
 
+//If the fire is burning slower than this rate then the reaction is going too slow to be self sustaining and the fire burns itself out.
+//This ensures that fires don't grind to a near-halt while still remaining active forever.
+#define FIRE_GAS_MIN_BURNRATE				0.1
+#define FIRE_LIQUD_MIN_BURNRATE				0.05
+
 //How many moles of fuel are contained within one solid/liquid fuel volume unit
 #define LIQUIDFUEL_AMOUNT_TO_MOL		1  //mol/volume unit
 
@@ -767,8 +772,30 @@ var/list/be_special_flags = list(
 #define STATUS_UPDATE 1 // ORANGE Visability
 #define STATUS_DISABLED 0 // RED Visability
 #define STATUS_CLOSE -1 // Close the interface
+
 //General-purpose life speed define for plants.
 #define HYDRO_SPEED_MULTIPLIER 1
+
 #define NANO_IGNORE_DISTANCE 1
 
+// Robot AI notifications
+#define ROBOT_NOTIFICATION_NEW_UNIT 1
+#define ROBOT_NOTIFICATION_NEW_NAME 2
+#define ROBOT_NOTIFICATION_NEW_MODULE 3
+#define ROBOT_NOTIFICATION_MODULE_RESET 4
+
 #define DEFAULT_JOB_TYPE /datum/job/assistant
+
+// Appearance change flags
+#define APPEARANCE_UPDATE_DNA 1
+#define APPEARANCE_RACE	2|APPEARANCE_UPDATE_DNA
+#define APPEARANCE_GENDER 4|APPEARANCE_UPDATE_DNA
+#define APPEARANCE_SKIN 8
+#define APPEARANCE_HAIR 16
+#define APPEARANCE_HAIR_COLOR 32
+#define APPEARANCE_FACIAL_HAIR 64
+#define APPEARANCE_FACIAL_HAIR_COLOR 128
+#define APPEARANCE_EYE_COLOR 256
+#define APPEARANCE_ALL_HAIR APPEARANCE_HAIR|APPEARANCE_HAIR_COLOR|APPEARANCE_FACIAL_HAIR|APPEARANCE_FACIAL_HAIR_COLOR
+#define APPEARANCE_ALL 511
+

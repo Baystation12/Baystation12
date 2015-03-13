@@ -54,8 +54,6 @@
 
 /mob/living/silicon/robot/drone/init()
 	laws = new /datum/ai_laws/drone()
-	connected_ai = null
-
 	aiCamera = new/obj/item/device/camera/siliconcam/drone_camera(src)
 	playsound(src.loc, 'sound/machines/twobeep.ogg', 50, 0)
 
