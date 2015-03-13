@@ -36,12 +36,12 @@
 		icon = 'icons/mob/custom-synthetic.dmi'
 		R.icon_state = "[R.ckey]-Standard"
 	del(R.module)
+	R.notify_ai(ROBOT_NOTIFICATION_MODULE_RESET, R.module.name)
 	R.module = null
 	R.camera.remove_networks(list("Engineering","Medical","MINE"))
 	R.updatename("Default")
 	R.status_flags |= CANPUSH
 	R.updateicon()
-	R.notify_ai(2)
 
 	return 1
 
@@ -57,7 +57,7 @@
 
 /obj/item/borg/upgrade/rename/action(var/mob/living/silicon/robot/R)
 	if(..()) return 0
-	R.notify_ai(3, R.name, heldname)
+	R.notify_ai(ROBOT_NOTIFICATION_NEW_NAME, R.name, heldname)
 	R.name = heldname
 	R.custom_name = heldname
 	R.real_name = heldname
@@ -84,7 +84,7 @@
 	R.stat = CONSCIOUS
 	dead_mob_list -= R
 	living_mob_list |= R
-	R.notify_ai(1)
+	R.notify_ai(ROBOT_NOTIFICATION_NEW_UNIT)
 	return 1
 
 

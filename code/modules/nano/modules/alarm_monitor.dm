@@ -30,11 +30,24 @@
 	for(var/datum/alarm_handler/AH in alarm_handlers)
 		AH.unregister(object)
 
-/obj/nano_module/alarm_monitor/proc/active_alarms()
+/obj/nano_module/alarm_monitor/proc/all_alarms()
 	var/list/all_alarms = new()
 	for(var/datum/alarm_handler/AH in alarm_handlers)
-		var/list/alarms = AH.alarms
-		all_alarms += alarms
+		all_alarms += AH.alarms
+
+	return all_alarms
+
+/obj/nano_module/alarm_monitor/proc/major_alarms()
+	var/list/all_alarms = new()
+	for(var/datum/alarm_handler/AH in alarm_handlers)
+		all_alarms += AH.major_alarms()
+
+	return all_alarms
+
+/obj/nano_module/alarm_monitor/proc/minor_alarms()
+	var/list/all_alarms = new()
+	for(var/datum/alarm_handler/AH in alarm_handlers)
+		all_alarms += AH.minor_alarms()
 
 	return all_alarms
 

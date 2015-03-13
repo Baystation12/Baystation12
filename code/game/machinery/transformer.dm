@@ -38,7 +38,6 @@
 		playsound(src.loc, 'sound/machines/ping.ogg', 50, 0)
 		if(robot)
 			robot.SetLockDown(0)
-			robot.notify_ai(1)
 
 /obj/machinery/transformer/conveyor/New()
 	..()

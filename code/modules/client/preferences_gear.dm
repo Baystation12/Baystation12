@@ -282,6 +282,12 @@ var/global/list/gear_datums = list()
 	slot = slot_w_uniform
 	cost = 2
 
+/datum/gear/blazer_blue
+	display_name = "blazer, blue"
+	path = /obj/item/clothing/under/blazer
+	slot = slot_w_uniform
+	cost = 2
+
 /datum/gear/kilt
 	display_name = "kilt"
 	path = /obj/item/clothing/under/kilt

@@ -11,26 +11,7 @@
 	var/description_fluff = null //Green text about the atom's fluff, if any exists.
 	var/description_antag = null //Malicious red text, for the antags.
 
-/atom/examine(mob/user, var/distance = -1, var/infix = "", var/suffix = "")
-	. = ..()
-	user.description_holders["info"] = get_description_info()
-	user.description_holders["fluff"] = get_description_fluff()
-	if(user.mind && user.mind.special_role || isobserver(user)) //Runtime prevention, as ghosts don't have minds.
-		user.description_holders["antag"] = get_description_antag()
-
-	if(name) //This shouldn't be needed but I'm paranoid.
-		user.description_holders["name"] = "[src.name]" //\icon[src]
-
-	user.description_holders["icon"] = "\icon[src]"
-
-	if(desc)
-		user << desc
-		user.description_holders["desc"] = src.desc
-	else
-		user.description_holders["desc"] = null //This is needed, or else if you examine one thing with a desc, then another without, the panel will retain the first examined's desc.
-
 //Override these if you need special behaviour for a specific type.
-
 /atom/proc/get_description_info()
 	if(description_info)
 		return description_info
@@ -46,11 +27,30 @@
 		return description_antag
 	return
 
-/mob/
-	var/description_holders[0]
+/mob/living/get_description_fluff()
+	if(flavor_text) //Get flavor text for the green text.
+		return flavor_text
+	else //No flavor text?  Try for hardcoded fluff instead.
+		return ..()
 
-/mob/Stat()
-	..()
+/mob/living/carbon/human/get_description_fluff()
+	return print_flavor_text(0)
+
+/* The examine panel itself */
+
+/client/var/description_holders[0]
+
+/client/proc/update_description_holders(atom/A, update_antag_info=0)
+	description_holders["info"] = A.get_description_info()
+	description_holders["fluff"] = A.get_description_fluff()
+	description_holders["antag"] = (update_antag_info)? A.get_description_antag() : ""
+
+	description_holders["name"] = "[A.name]"
+	description_holders["icon"] = "\icon[A]"
+	description_holders["desc"] = A.desc
+
+/client/Stat()
+	. = ..()
 	if(statpanel("Examine"))
 		stat(null,"[description_holders["icon"]]    <font size='5'>[description_holders["name"]]</font>") //The name, written in big letters.
 		stat(null,"[description_holders["desc"]]") //the default examine text.
@@ -61,11 +61,11 @@
 		if(description_holders["antag"])
 			stat(null,"<font color='#8A0808'><b>[description_holders["antag"]]</b></font>") //Red, malicious antag-related text
 
-/mob/living/get_description_fluff()
-	if(flavor_text) //Get flavor text for the green text.
-		return flavor_text
-	else //No flavor text?  Try for hardcoded fluff instead.
-		return ..()
+//override examinate verb to update description holders when things are examined
+/mob/examinate(atom/A as mob|obj|turf in view())
+	if(..())
+		return 1
 
-/mob/living/carbon/human/get_description_fluff()
-	return print_flavor_text(0)
+	var/is_antag = ((mind && mind.special_role) || isobserver(src)) //ghosts don't have minds
+	if(client)
+		client.update_description_holders(A, is_antag)

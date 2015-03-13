@@ -207,6 +207,7 @@ its easier to just keep the beam vertical.
 			f_name += "oil-stained [name][infix]."
 
 	user << "\icon[src] That's [f_name] [suffix]"
+	user << desc
 
 	return distance == -1 || (get_dist(src, user) <= distance)
 
