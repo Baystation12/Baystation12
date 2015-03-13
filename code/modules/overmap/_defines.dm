@@ -24,16 +24,15 @@ proc/toggle_move_stars(zlevel, direction)
 		moving_levels["zlevel"] = gen_dir
 		for(var/x = 1 to world.maxx)
 			for(var/y = 1 to world.maxy)
-				spawn(0)
-					var/turf/space/T = locate(x,y,zlevel)
-					if (T)
-						if(!gen_dir)
-							T.icon_state = "[((T.x + T.y) ^ ~(T.x * T.y) + T.z) % 25]"
-						else
-							T.icon_state = "speedspace_[gen_dir]_[rand(1,15)]"
-							for(var/atom/movable/AM in T)
-								if (!AM.anchored)
-									AM.throw_at(get_step(T,reverse_direction(direction)), 5, 1)
+				var/turf/space/T = locate(x,y,zlevel)
+				if (istype(T))
+					if(!gen_dir)
+						T.icon_state = "[((T.x + T.y) ^ ~(T.x * T.y) + T.z) % 25]"
+					else
+						T.icon_state = "speedspace_[gen_dir]_[rand(1,15)]"
+						for(var/atom/movable/AM in T)
+							if (!AM.anchored)
+								AM.throw_at(get_step(T,reverse_direction(direction)), 5, 1)
 
 
 //list used to cache empty zlevels to avoid nedless map bloat
