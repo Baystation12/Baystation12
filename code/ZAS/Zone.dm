@@ -138,6 +138,11 @@ Class Procs:
 	air.group_multiplier = contents.len+1
 
 /zone/proc/tick()
+	if(air.temperature >= PHORON_FLASHPOINT && !(src in air_master.active_fire_zones) && air.check_combustability() && contents.len)
+		var/turf/T = pick(contents)
+		if(istype(T))
+			T.create_fire(vsc.fire_firelevel_multiplier)
+
 	if(air.check_tile_graphic(graphic_add, graphic_remove))
 		for(var/turf/simulated/T in contents)
 			T.update_graphic(graphic_add, graphic_remove)

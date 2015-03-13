@@ -74,7 +74,7 @@ Used In File(s): \code\game\machinery\alarm.dm
         </tr>
     </table>
 <HR>
-{{if data.locked || (data.remote_connection && ! data.remote_access)}}
+{{if (data.locked && !data.remote_connection) || (data.remote_connection && ! data.remote_access)}}
 	{{if data.remote_connection}}
 		<span class='noticePlaceholder'>(Current remote control settings and alarm status restricts access.)</span>
 	{{else}}

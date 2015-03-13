@@ -228,7 +228,7 @@ var/list/slot_equipment_priority = list( \
 
 	if((is_blind(src) || usr.stat) && !isobserver(src))
 		src << "<span class='notice'>Something is there but you can't see it.</span>"
-		return
+		return 1
 
 	face_atom(A)
 	A.examine(src)
@@ -616,6 +616,8 @@ var/list/slot_equipment_priority = list( \
 	if(pulling)
 		pulling.pulledby = null
 		pulling = null
+		if(pullin)
+			pullin.icon_state = "pull0"
 
 /mob/proc/start_pulling(var/atom/movable/AM)
 	if ( !AM || !usr || src==AM || !isturf(src.loc) )	//if there's no person pulling OR the person is pulling themself OR the object being pulled is inside something: abort!
@@ -641,6 +643,9 @@ var/list/slot_equipment_priority = list( \
 
 	src.pulling = AM
 	AM.pulledby = src
+
+	if(pullin)
+		pullin.icon_state = "pull1"
 
 	if(ishuman(AM))
 		var/mob/living/carbon/human/H = AM
@@ -858,13 +863,15 @@ note dizziness decrements automatically in the mob's Life() proc.
 			canmove = 1
 			pixel_y = V.mob_offset_y
 	else if(buckled)
-		if(buckled.buckle_lying != -1) lying = buckled.buckle_lying
-		if (!buckled.buckle_movable)
-			anchored = 1
-			canmove = 0
-		else
-			anchored = 0
-			canmove = 1
+		anchored = 1
+		canmove = 0
+		if(istype(buckled))
+			if(buckled.buckle_lying != -1)
+				lying = buckled.buckle_lying
+			if(buckled.buckle_movable)
+				anchored = 0
+				canmove = 1
+
 	else if( stat || weakened || paralysis || resting || sleeping || (status_flags & FAKEDEATH))
 		lying = 1
 		canmove = 0

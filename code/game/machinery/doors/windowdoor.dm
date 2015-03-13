@@ -234,9 +234,6 @@
 
 
 	src.add_fingerprint(user)
-	if (!src.requiresID())
-		//don't care who they are or what they have, act as if they're NOTHING
-		user = null
 
 	if (src.allowed(user))
 		if (src.density)

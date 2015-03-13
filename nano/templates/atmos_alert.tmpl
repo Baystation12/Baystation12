@@ -1,17 +1,18 @@
 <H1>Priority Alerts</H1>
 {{for data.priority_alarms}}
 	<div class="item">
-	{{:value.name}} {{:helper.link('Reset', null, {'clear_alarm' : value.ref})}}
+        {{:value.name}} {{:helper.link('Reset', null, {'clear_alarm' : value.ref})}}
 	</div>
 {{empty}}
 	No priority alerts detected.
 {{/for}}
 
 <H3>Minor Alerts</H3>
-<div class="item">
-	{{for data.minor_alarms}}
-		{{:value.name}} {{:helper.link('Reset', null, {'clear_alarm' : value.ref})}}
-	{{empty}}
-		No minor alerts detected.
-	{{/for}}
-</div>
+{{for data.minor_alarms}}
+    <div class="item">
+        {{:value.name}} {{:helper.link('Reset', null, {'clear_alarm' : value.ref})}}
+    </div>
+{{empty}}
+    No minor alerts detected.
+{{/for}}
+

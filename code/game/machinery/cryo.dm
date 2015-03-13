@@ -24,6 +24,11 @@
 	..()
 	initialize_directions = dir
 
+/obj/machinery/atmospherics/unary/cryo_cell/Del()
+	if(occupant)
+		occupant.loc = loc
+	..()
+
 /obj/machinery/atmospherics/unary/cryo_cell/initialize()
 	if(node) return
 	var/node_connect = dir
@@ -37,7 +42,6 @@
 	if(!node)
 		return
 	if(!on)
-		updateUsrDialog()
 		return
 
 	if(occupant)
@@ -52,7 +56,6 @@
 	if(abs(temperature_archived-air_contents.temperature) > 1)
 		network.update = 1
 
-	updateUsrDialog()
 	return 1
 
 
@@ -188,7 +191,6 @@
 		var/mob/M = G:affecting
 		if(put_mob(M))
 			del(G)
-	updateUsrDialog()
 	return
 
 /obj/machinery/atmospherics/unary/cryo_cell/update_icon()
@@ -331,7 +333,13 @@
 	put_mob(usr)
 	return
 
-
+/obj/machinery/atmospherics/unary/cryo_cell/return_air_for_internal_lifeform()
+	//assume that the cryo cell has some kind of breath mask or something that
+	//draws from the cryo tube's environment, instead of the cold internal air.
+	if(loc)
+		return loc.return_air()
+	else
+		return null
 
 /datum/data/function/proc/reset()
 	return
