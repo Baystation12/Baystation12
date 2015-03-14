@@ -229,16 +229,17 @@ var/list/global/organ_rel_size = list(
 // Emulates targetting a specific body part, and miss chances
 // May return null if missed
 // miss_chance_mod may be negative.
-/proc/get_zone_with_miss_chance(zone, var/mob/target, var/miss_chance_mod = 0)
+/proc/get_zone_with_miss_chance(zone, var/mob/target, var/miss_chance_mod = 0, var/ranged_attack=0)
 	zone = check_zone(zone)
 
 	// you cannot miss if your target is prone or restrained
 	if(target.buckled || target.lying)
 		return zone
 	// if your target is being grabbed aggressively by someone you cannot miss either
-	for(var/obj/item/weapon/grab/G in target.grabbed_by)
-		if(G.state >= GRAB_AGGRESSIVE)
-			return zone
+	if(!ranged_attack)
+		for(var/obj/item/weapon/grab/G in target.grabbed_by)
+			if(G.state >= GRAB_AGGRESSIVE)
+				return zone
 	
 	var/miss_chance = 10
 	if (zone in base_miss_chance)

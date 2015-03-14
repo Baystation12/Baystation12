@@ -135,16 +135,21 @@
 	xo = new_x - starting_loc.x
 
 //Called when the projectile intercepts a mob. Returns 1 if the projectile hit the mob, 0 if it missed and should keep flying.
-/obj/item/projectile/proc/attack_mob(var/mob/living/target_mob, var/distance, var/miss_modifier)
+/obj/item/projectile/proc/attack_mob(var/mob/living/target_mob, var/distance, var/miss_modifier=0)
 	//accuracy bonus from aiming
-	if (istype(shot_from, /obj/item/weapon/gun))	//If you aim at someone beforehead, it'll hit more often.
-		var/obj/item/weapon/gun/daddy = shot_from	//Kinda balanced by fact you need like 2 seconds to aim
+	if (istype(shot_from, /obj/item/weapon/gun))
+		var/obj/item/weapon/gun/daddy = shot_from
 		miss_modifier -= round(15*daddy.accuracy)
-		if (daddy.aim_targets && original in daddy.aim_targets) //As opposed to no-delay pew pew
+		
+		//If you aim at someone beforehead, it'll hit more often.
+		//Kinda balanced by fact you need like 2 seconds to aim
+		//As opposed to no-delay pew pew
+		if (daddy.aim_targets && original in daddy.aim_targets)
 			miss_modifier += -30
 
 	//roll to-hit
-	var/hit_zone = get_zone_with_miss_chance(def_zone, target_mob, max(miss_modifier + 15*(distance-2), 0))
+	miss_modifier = max(miss_modifier + 15*(distance-2), 0)
+	var/hit_zone = get_zone_with_miss_chance(def_zone, target_mob, miss_modifier, ranged_attack=(distance > 1))
 	if(!hit_zone)
 		visible_message("<span class='notice'>\The [src] misses [target_mob] narrowly!</span>")
 		return 0
