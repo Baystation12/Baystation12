@@ -35,6 +35,7 @@
 		/obj/item/device/robotanalyzer,
 		/obj/item/weapon/minihoe,
 		/obj/item/weapon/hatchet,
+		/obj/item/device/analyzer/plant_analyzer,
 		/obj/item/weapon/extinguisher/mini
 		)
 
@@ -82,7 +83,10 @@
 		/obj/item/clothing/head/surgery,
 		/obj/item/clothing/gloves/latex,
 		/obj/item/weapon/reagent_containers/hypospray,
-		/obj/item/clothing/glasses/hud/health
+		/obj/item/clothing/glasses/hud/health,
+		/obj/item/weapon/crowbar,
+		/obj/item/device/flashlight,
+		/obj/item/weapon/extinguisher/mini
 		)
 
 /obj/item/weapon/storage/belt/medical/emt
@@ -91,11 +95,7 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "emsbelt"
 	item_state = "emsbelt"
-	can_hold = list(
-		/obj/item/weapon/crowbar,
-		/obj/item/device/flashlight,
-		/obj/item/weapon/extinguisher/mini
-		)
+
 
 
 /obj/item/weapon/storage/belt/security
@@ -111,7 +111,7 @@
 		/obj/item/weapon/reagent_containers/spray/pepper,
 		/obj/item/weapon/handcuffs,
 		/obj/item/device/flash,
-		/obj/item/clothing/glasses/sunglasses,
+		/obj/item/clothing/glasses,
 		/obj/item/ammo_casing/shotgun,
 		/obj/item/ammo_magazine,
 		/obj/item/weapon/reagent_containers/food/snacks/donut/,
@@ -123,6 +123,7 @@
 		/obj/item/device/pda,
 		/obj/item/device/radio/headset,
 		/obj/item/device/hailer,
+		/obj/item/device/megaphone,
 		/obj/item/weapon/melee,
 		/obj/item/weapon/gun/projectile/sec,
 		/obj/item/taperoll/police
