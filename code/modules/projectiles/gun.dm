@@ -208,9 +208,9 @@
 				for(var/obj/item/weapon/grab/G in M.grabbed_by)
 					grabstate = max(grabstate, G.state)
 				if(grabstate >= GRAB_NECK)
-					damage_mult = 1.5
-				else if (grabstate >= GRAB_AGGRESSIVE)
 					damage_mult = 3.0
+				else if (grabstate >= GRAB_AGGRESSIVE)
+					damage_mult = 1.5
 		
 		P.damage *= damage_mult
 

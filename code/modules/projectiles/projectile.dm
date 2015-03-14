@@ -181,7 +181,7 @@
 
 	return 1
 
-/obj/item/projectile/Bump(atom/A as mob|obj|turf|area)
+/obj/item/projectile/Bump(atom/A as mob|obj|turf|area, forced=0)
 	if(A == src)
 		return 0 //no
 	
@@ -189,7 +189,7 @@
 		loc = A.loc
 		return 0 //cannot shoot yourself
 
-	if(bumped || (A in permutated))
+	if((bumped && !forced) || (A in permutated))
 		return 0
 
 	var/passthrough = 0 //if the projectile should continue flying
@@ -200,11 +200,11 @@
 		var/mob/M = A
 		if(istype(A, /mob/living))
 			//if they have a neck grab on someone, that person gets hit instead
-			for(var/obj/item/weapon/grab/G in list(M.l_hand, M.r_hand))
-				if(G.state >= GRAB_NECK)
-					//If Bump() returns 0 (missed them or went through them) then we continue on to attack M.
-					if(Bump(G.affecting))
-						return
+			var/obj/item/weapon/grab/G = locate() in M
+			if(G && G.state >= GRAB_NECK)
+				visible_message("<span class='danger'>\The [M] uses [G.affecting] as a shield!</span>")
+				if(Bump(G.affecting, forced=1))
+					return //If Bump() returns 0 (keep going) then we continue on to attack M.
 			
 			passthrough = !attack_mob(M, distance)
 		else
