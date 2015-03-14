@@ -401,10 +401,10 @@
 #define XENO_HOST   32768 // Tracks whether we're gonna be a baby alien's mummy.
 
 // Grab levels.
+#define GRAB_UPGRADING  -1
 #define GRAB_PASSIVE    1
 #define GRAB_AGGRESSIVE 2
 #define GRAB_NECK       3
-#define GRAB_UPGRADING  4
 #define GRAB_KILL       5
 
 // Security levels.

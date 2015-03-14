@@ -194,6 +194,13 @@
 	if(ismob(A))
 		var/mob/M = A
 		if(istype(A, /mob/living))
+			//if they have a neck grab on someone, that person gets hit instead
+			for(var/obj/item/weapon/grab/G in list(M.l_hand, M.r_hand))
+				if(G.state >= GRAB_NECK)
+					//If Bump() returns 0 (missed them or went through them) then we continue on to attack M.
+					if(Bump(G.affecting))
+						return
+			
 			passthrough = !attack_mob(M, distance)
 		else
 			passthrough = 1 //so ghosts don't stop bullets
