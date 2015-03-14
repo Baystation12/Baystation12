@@ -14,6 +14,9 @@
 	var/build_eff = 1
 	var/eat_eff = 1
 
+/obj/machinery/biogenerator/process()
+	return
+
 /obj/machinery/biogenerator/New()
 	..()
 	var/datum/reagents/R = new/datum/reagents(1000)

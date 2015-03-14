@@ -7,6 +7,8 @@
 
 	anchored = 1
 	density = 1
+	use_power = 1
+	idle_power_usage = 40
 
 	icon_state = "bioprinter"
 
@@ -20,6 +22,9 @@
 		"eyes" =    list(/obj/item/organ/eyes,   30),
 		"liver" =   list(/obj/item/organ/liver,  50)
 		)
+
+/obj/machinery/bioprinter/process()
+	return
 
 /obj/machinery/bioprinter/prosthetics
 	name = "prosthetics fabricator"

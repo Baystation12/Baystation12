@@ -16,6 +16,9 @@ datum/track/New(var/title_name, var/audio)
 	anchored = 1
 	density = 1
 	power_channel = EQUIP
+	use_power = 1
+	idle_power_usage = 10
+	active_power_usage = 100
 
 	var/playing = 0
 
@@ -31,6 +34,9 @@ datum/track/New(var/title_name, var/audio)
 		new/datum/track("Scratch", 'sound/music/title1.ogg'),
 		new/datum/track("Trai`Tor", 'sound/music/traitor.ogg'),
 	)
+
+/obj/machinery/media/jukebox/process()
+	return
 
 /obj/machinery/media/jukebox/Del()
 	StopPlaying()
@@ -189,6 +195,7 @@ datum/track/New(var/title_name, var/audio)
 
 	A.forced_ambience = null
 	playing = 0
+	update_use_power(1)
 	update_icon()
 
 
@@ -205,4 +212,5 @@ datum/track/New(var/title_name, var/audio)
 			A.play_ambience(M)
 
 	playing = 1
+	update_use_power(2)
 	update_icon()

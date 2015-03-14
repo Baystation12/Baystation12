@@ -23,6 +23,9 @@
 
 	var/datum/wires/autolathe/wires = null
 
+/obj/machinery/autolathe/process()
+	return
+
 /obj/machinery/autolathe/New()
 
 	..()
@@ -233,8 +236,7 @@
 			return
 
 		busy = 1
-		//This needs some work.
-		use_power(max(2000, (making.power_use*multiplier)))
+		update_use_power(2)
 
 		//Check if we still have the materials.
 		for(var/material in making.resources)
@@ -253,6 +255,7 @@
 		sleep(build_time)
 
 		busy = 0
+		update_use_power(1)
 
 		//Sanity check.
 		if(!making || !src) return

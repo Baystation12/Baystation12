@@ -173,6 +173,9 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 	idle_power_usage = 5
 	active_power_usage = 100
 
+/obj/machinery/hologram/process()
+	return
+
 //Destruction procs.
 /obj/machinery/hologram/ex_act(severity)
 	switch(severity)

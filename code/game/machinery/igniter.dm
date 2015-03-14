@@ -54,6 +54,9 @@
 	var/base_state = "migniter"
 	anchored = 1
 
+/obj/machinery/sparker/process()
+	return
+
 /obj/machinery/sparker/New()
 	..()
 
@@ -129,12 +132,12 @@
 	active = 1
 	icon_state = "launcheract"
 
-	for(var/obj/machinery/sparker/M in world)
+	for(var/obj/machinery/sparker/M in machines)
 		if (M.id == src.id)
 			spawn( 0 )
 				M.ignite()
 
-	for(var/obj/machinery/igniter/M in world)
+	for(var/obj/machinery/igniter/M in machines)
 		if(M.id == src.id)
 			use_power(50)
 			M.on = !( M.on )

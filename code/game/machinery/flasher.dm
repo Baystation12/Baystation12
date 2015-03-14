@@ -22,6 +22,9 @@
 	base_state = "pflash"
 	density = 1
 
+/obj/machinery/flasher/process()
+	return
+
 /*
 /obj/machinery/flasher/New()
 	sleep(4)					//<--- What the fuck are you doing? D=
@@ -133,7 +136,7 @@
 	active = 1
 	icon_state = "launcheract"
 
-	for(var/obj/machinery/flasher/M in world)
+	for(var/obj/machinery/flasher/M in machines)
 		if(M.id == src.id)
 			spawn()
 				M.flash()
