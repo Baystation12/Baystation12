@@ -32,7 +32,11 @@
 		/obj/item/device/t_scanner,
 		/obj/item/device/analyzer,
 		/obj/item/taperoll/engineering,
-		/obj/item/device/robotanalyzer)
+		/obj/item/device/robotanalyzer,
+		/obj/item/weapon/minihoe,
+		/obj/item/weapon/hatchet,
+		/obj/item/weapon/extinguisher/mini
+		)
 
 
 /obj/item/weapon/storage/belt/utility/full/New()
@@ -75,9 +79,11 @@
 		/obj/item/stack/medical,
 		/obj/item/device/flashlight/pen,
 		/obj/item/clothing/mask/surgical,
+		/obj/item/clothing/head/surgery,
 		/obj/item/clothing/gloves/latex,
-		/obj/item/weapon/reagent_containers/hypospray
-	)
+		/obj/item/weapon/reagent_containers/hypospray,
+		/obj/item/clothing/glasses/hud/health
+		)
 
 /obj/item/weapon/storage/belt/medical/emt
 	name = "EMT utility belt"
@@ -85,6 +91,11 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "emsbelt"
 	item_state = "emsbelt"
+	can_hold = list(
+		/obj/item/weapon/crowbar,
+		/obj/item/device/flashlight,
+		/obj/item/weapon/extinguisher/mini
+		)
 
 
 /obj/item/weapon/storage/belt/security
@@ -100,18 +111,18 @@
 		/obj/item/weapon/reagent_containers/spray/pepper,
 		/obj/item/weapon/handcuffs,
 		/obj/item/device/flash,
-		/obj/item/clothing/glasses,
+		/obj/item/clothing/glasses/sunglasses,
 		/obj/item/ammo_casing/shotgun,
 		/obj/item/ammo_magazine,
-		/obj/item/weapon/reagent_containers/food/snacks/donut/normal,
-		/obj/item/weapon/reagent_containers/food/snacks/donut/jelly,
+		/obj/item/weapon/reagent_containers/food/snacks/donut/,
 		/obj/item/weapon/melee/baton,
 		/obj/item/weapon/gun/energy/taser,
-		/obj/item/weapon/flame/lighter/zippo,
+		/obj/item/weapon/flame/lighter,
 		/obj/item/clothing/glasses/hud/security,
 		/obj/item/device/flashlight,
 		/obj/item/device/pda,
 		/obj/item/device/radio/headset,
+		/obj/item/device/hailer,
 		/obj/item/weapon/melee,
 		/obj/item/weapon/gun/projectile/sec,
 		/obj/item/taperoll/police
