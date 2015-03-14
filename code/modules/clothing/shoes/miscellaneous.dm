@@ -68,18 +68,9 @@
 	slowdown = SHOES_SLOWDOWN+1
 	item_color = "clown"
 	force = 0
-	var/footstep = 1	//used for squeeks whilst walking
+	//footstep = 1	//used for squeeks whilst walking
+	sound = "clownstep"
 	species_restricted = null
-
-/obj/item/clothing/shoes/clown_shoes/handle_movement(var/turf/walking, var/running)
-	if(running)
-		if(footstep >= 2)
-			footstep = 0
-			playsound(src, "clownstep", 50, 1) // this will get annoying very fast.
-		else
-			footstep++
-	else
-		playsound(src, "clownstep", 20, 1)
 
 /obj/item/clothing/shoes/jackboots
 	name = "jackboots"

@@ -47,7 +47,7 @@
 
 		if(istype(M, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = M
-			// Tracking blood
+			// Tracking blood, footsteps
 			var/list/bloodDNA = null
 			var/bloodcolor=""
 			if(H.shoes)
