@@ -106,7 +106,7 @@
 		//Update their traitor status.
 		if(host.mind)
 			if(!host.mind.special_role)
-				ticker.mode.borers |= host.mind
+				borers.hosts |= host.mind
 				host.mind.special_role = "Borer Thrall"
 			host << "<span class='danger'>A creeping lassitude surrounds you. Your mind is being invaded by an alien intelligence and that's just fine.</span>"
 			host << "<span class = 'danger'>You are now a thrall to a cortical borer. Please listen to what they have to say; they're in your head.</span>"

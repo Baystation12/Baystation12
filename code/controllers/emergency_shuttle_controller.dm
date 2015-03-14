@@ -136,9 +136,8 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 
 /datum/emergency_shuttle_controller/proc/get_shuttle_prep_time()
 	// During mutiny rounds, the shuttle takes twice as long.
-	if(ticker && istype(ticker.mode,/datum/game_mode/mutiny))
-		return SHUTTLE_PREPTIME * 3		//15 minutes
-
+	if(ticker && ticker.mode)
+		return SHUTTLE_PREPTIME * ticker.mode.shuttle_delay
 	return SHUTTLE_PREPTIME
 
 

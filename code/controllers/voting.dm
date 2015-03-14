@@ -129,7 +129,7 @@ datum/controller/vote
 			for(var/key in current_votes)
 				if(choices[current_votes[key]] == .)
 					round_voters += key // Keep track of who voted for the winning round.
-			if((mode == "gamemode" && . == "extended") || ticker.hide_mode == 0) // Announce Extended gamemode, but not other gamemodes
+			if((mode == "gamemode" && . == "Extended") || ticker.hide_mode == 0) // Announce Extended gamemode, but not other gamemodes
 				text += "<b>Vote Result: [.]</b>"
 			else
 				if(mode != "gamemode")
@@ -139,6 +139,8 @@ datum/controller/vote
 
 		else
 			text += "<b>Vote Result: Inconclusive - No Votes!</b>"
+			if(mode == "add_antagonist")
+				antag_add_failed = 1
 		log_vote(text)
 		world << "<font color='purple'>[text]</font>"
 		return .
@@ -161,6 +163,11 @@ datum/controller/vote
 				if("crew_transfer")
 					if(. == "Initiate Crew Transfer")
 						init_shift_change(null, 1)
+				if("add_antagonist")
+					if(isnull(.) || . == "None")
+						antag_add_failed = 1
+					else
+						additional_antag_types |= antag_names_to_ids[.]
 
 		if(mode == "gamemode") //fire this even if the vote fails.
 			if(!going)
@@ -208,7 +215,7 @@ datum/controller/vote
 					var/list/L = typesof(/datum/game_mode) - /datum/game_mode
 					for (var/F in choices)
 						for (var/T in L)
-							var/datum/game_mode/M = new T()
+							var/datum/game_mode/M = new T(1)
 							if (M.config_tag == F)
 								gamemode_names[M.config_tag] = capitalize(M.name) //It's ugly to put this here but it works
 								additional_text.Add("<td align = 'center'>[M.required_players]</td>")
@@ -227,6 +234,14 @@ datum/controller/vote
 							initiator_key << "The crew transfer button has been disabled!"
 						question = "End the shift?"
 						choices.Add("Initiate Crew Transfer", "Continue The Round")
+				if("add_antagonist")
+					if(!config.allow_extra_antags || ticker.current_state >= 2)
+						return 0
+					for(var/antag_type in all_antag_types)
+						var/datum/antagonist/antag = all_antag_types[antag_type]
+						if(!(antag.id in additional_antag_types) && (antag.flags & ANTAG_VOTABLE))
+							choices.Add(antag.role_text)
+					choices.Add("None")
 				if("custom")
 					question = html_encode(input(usr,"What is the vote for?") as text|null)
 					if(!question)	return 0
@@ -234,7 +249,8 @@ datum/controller/vote
 						var/option = capitalize(html_encode(input(usr,"Please enter an option or hit cancel to finish") as text|null))
 						if(!option || mode || !usr.client)	break
 						choices.Add(option)
-				else			return 0
+				else
+					return 0
 			mode = vote_type
 			initiator = initiator_key
 			started_time = world.time
@@ -320,7 +336,12 @@ datum/controller/vote
 				. += "<font color='grey'>GameMode (Disallowed)</font>"
 			if(trialmin)
 				. += "\t(<a href='?src=\ref[src];vote=toggle_gamemode'>[config.allow_vote_mode?"Allowed":"Disallowed"]</a>)"
-
+			. += "</li><li>"
+			//extra antagonists
+			if(trialmin || (!antag_add_failed && config.allow_extra_antags))
+				. += "<a href='?src=\ref[src];vote=add_antagonist'>Add Antagonist Type</a>"
+			else
+				. += "<font color='grey'>Restart (Disallowed)</font>"
 			. += "</li>"
 			//custom
 			if(trialmin)
@@ -355,6 +376,9 @@ datum/controller/vote
 			if("crew_transfer")
 				if(config.allow_vote_restart || usr.client.holder)
 					initiate_vote("crew_transfer",usr.key)
+			if("add_antagonist")
+				if(config.allow_extra_antags || usr.client.holder)
+					initiate_vote("add_antagonist",usr.key)
 			if("custom")
 				if(usr.client.holder)
 					initiate_vote("custom",usr.key)

@@ -1,0 +1,45 @@
+var/datum/antagonist/ert/ert
+
+/datum/antagonist/ert
+	id = MODE_ERT
+	bantype = "Emergency Response Team"
+	role_text = "Emergency Responder"
+	role_text_plural = "Emergency Responders"
+	welcome_text = "As member of the Emergency Response Team, you answer only to your leader and CentComm officials."
+	leader_welcome_text = "As leader of the Emergency Response Team, you answer only to CentComm, and have authority to override the Captain where it is necessary to achieve your mission goals. It is recommended that you attempt to cooperate with the captain where possible, however."
+	spawn_lower = 1
+	spawn_upper = 5
+	max_antags = 5
+	max_antags_round = 5 // ERT mode?
+
+	flags = ANTAG_OVERRIDE_JOB | ANTAG_OVERRIDE_MOB
+
+/datum/antagonist/ert/New()
+	..()
+	ert = src
+
+/datum/antagonist/ert/greet(var/datum/mind/player)
+	if(!..())
+		return
+	player.current << "The Emergency Response Team works for Asset Protection; your job is to protect NanoTrasen's ass-ets. There is a code red alert on [station_name()], you are tasked to go and fix the problem."
+	player.current << "You should first gear up and discuss a plan with your team. More members may be joining, don't move out before you're ready."
+
+/datum/antagonist/ert/equip(var/mob/living/carbon/human/player)
+
+	//Special radio setup
+	player.equip_to_slot_or_del(new /obj/item/device/radio/headset/ert(src), slot_l_ear)
+	player.equip_to_slot_or_del(new /obj/item/clothing/under/ert(src), slot_w_uniform)
+	player.equip_to_slot_or_del(new /obj/item/clothing/shoes/swat(src), slot_shoes)
+	player.equip_to_slot_or_del(new /obj/item/clothing/gloves/swat(src), slot_gloves)
+	player.equip_to_slot_or_del(new /obj/item/clothing/glasses/sunglasses(src), slot_glasses)
+
+	var/obj/item/weapon/card/id/W = new(src)
+	W.assignment = "Emergency Response Team"
+	W.registered_name = player.real_name
+	W.name = "[player.real_name]'s ID Card ([W.assignment])"
+	W.icon_state = "centcom"
+	W.access = get_all_accesses()
+	W.access += get_all_centcom_access()
+	player.equip_to_slot_or_del(W, slot_wear_id)
+
+	return 1

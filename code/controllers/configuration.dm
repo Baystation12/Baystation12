@@ -67,6 +67,9 @@
 	var/automute_on = 0					//enables automuting/spam prevention
 	var/jobs_have_minimal_access = 0	//determines whether jobs use minimal access or expanded access.
 
+	var/rp_rev = 0             // Changes between conversion methods in rev.
+	var/announce_revheads = 0  // Determines if revheads are announced in revolution mode.
+
 	var/cult_ghostwriter = 1               //Allows ghosts to write in blood in cult rounds...
 	var/cult_ghostwriter_req_cultists = 10 //...so long as this many cultists are active.
 
@@ -82,7 +85,7 @@
 	var/usealienwhitelist = 0
 	var/limitalienplayers = 0
 	var/alien_to_human_ratio = 0.5
-
+	var/allow_extra_antags = 0
 	var/guests_allowed = 1
 	var/debugparanoid = 0
 
@@ -585,6 +588,15 @@
 				if("disable_welder_vision")
 					config.welder_vision = 0
 
+				if("rp_rev")
+					config.rp_rev = 1
+
+				if("announce_revheads")
+					config.announce_revheads = 1
+
+				if("allow_extra_antags")
+					config.allow_extra_antags = 1
+
 				if("event_custom_start_mundane")
 					var/values = text2numlist(value, ";")
 					config.event_first_run[EVENT_LEVEL_MUNDANE] = list("lower" = MinutesToTicks(values[1]), "upper" = MinutesToTicks(values[2]))
@@ -770,6 +782,7 @@
 	for (var/T in (typesof(/datum/game_mode) - /datum/game_mode))
 		var/datum/game_mode/M = new T()
 		if (M.config_tag && M.config_tag == mode_name)
+			M.create_antagonists()
 			return M
 		del(M)
 	return new /datum/game_mode/extended()
