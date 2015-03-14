@@ -17,6 +17,9 @@
 /*/obj/machinery/bodyscanner/allow_drop()
 	return 0*/
 
+/obj/machinery/bodyscanner/process()
+	return
+
 /obj/machinery/bodyscanner/relaymove(mob/user as mob)
 	if (user.stat)
 		return
