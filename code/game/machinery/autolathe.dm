@@ -23,8 +23,6 @@
 
 	var/datum/wires/autolathe/wires = null
 
-/obj/machinery/autolathe/process()
-	return
 
 /obj/machinery/autolathe/New()
 

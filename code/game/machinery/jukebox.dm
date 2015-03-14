@@ -35,8 +35,6 @@ datum/track/New(var/title_name, var/audio)
 		new/datum/track("Trai`Tor", 'sound/music/traitor.ogg'),
 	)
 
-/obj/machinery/media/jukebox/process()
-	return
 
 /obj/machinery/media/jukebox/Del()
 	StopPlaying()

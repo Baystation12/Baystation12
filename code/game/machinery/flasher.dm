@@ -12,6 +12,8 @@
 	var/strength = 10 //How weakened targets are when flashed.
 	var/base_state = "mflash"
 	anchored = 1
+	use_power = 1
+	idle_power_usage = 2
 
 /obj/machinery/flasher/portable //Portable version of the flasher. Only flashes when anchored
 	name = "portable flasher"
@@ -21,9 +23,6 @@
 	anchored = 0
 	base_state = "pflash"
 	density = 1
-
-/obj/machinery/flasher/process()
-	return
 
 /*
 /obj/machinery/flasher/New()

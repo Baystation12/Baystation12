@@ -11,9 +11,6 @@
 	idle_power_usage = 40
 	active_power_usage = 10000
 
-/obj/machinery/robotic_fabricator/process()
-	return
-
 /obj/machinery/robotic_fabricator/attackby(var/obj/item/O as obj, var/mob/user as mob)
 	if (istype(O, /obj/item/stack/sheet/metal))
 		var/obj/item/stack/sheet/metal/M = O

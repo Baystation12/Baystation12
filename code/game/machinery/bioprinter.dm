@@ -23,9 +23,6 @@
 		"liver" =   list(/obj/item/organ/liver,  50)
 		)
 
-/obj/machinery/bioprinter/process()
-	return
-
 /obj/machinery/bioprinter/prosthetics
 	name = "prosthetics fabricator"
 	desc = "It's a machine that prints prosthetic organs."

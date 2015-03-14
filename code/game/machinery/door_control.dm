@@ -34,8 +34,6 @@
 	idle_power_usage = 2
 	active_power_usage = 4
 
-/obj/machinery/door_control/process()
-	return
 
 /obj/machinery/door_control/attack_ai(mob/user as mob)
 	if(wires & 2)

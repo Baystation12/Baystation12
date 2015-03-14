@@ -53,9 +53,10 @@
 	var/last_spark = 0
 	var/base_state = "migniter"
 	anchored = 1
+	use_power = 1
+	idle_power_usage = 2
+	active_power_usage = 4
 
-/obj/machinery/sparker/process()
-	return
 
 /obj/machinery/sparker/New()
 	..()

@@ -175,8 +175,6 @@
 	active_power_usage = 2000
 	var/obj/machinery/computer/teleporter/com
 
-/obj/machinery/teleport/hub/process()
-	return
 
 /obj/machinery/teleport/hub/New()
 	..()
@@ -313,9 +311,6 @@
 	idle_power_usage = 10
 	active_power_usage = 2000
 	var/obj/machinery/teleport/hub/com
-
-/obj/machinery/teleport/station/process()
-	return
 
 /obj/machinery/teleport/station/New()
 	..()
