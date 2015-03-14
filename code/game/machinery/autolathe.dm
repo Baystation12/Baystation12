@@ -6,7 +6,7 @@
 	anchored = 1
 	use_power = 1
 	idle_power_usage = 10
-	active_power_usage = 100
+	active_power_usage = 2000
 
 	var/list/machine_recipes
 	var/list/stored_material =  list("metal" = 0, "glass" = 0)
