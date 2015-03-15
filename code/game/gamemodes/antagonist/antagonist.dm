@@ -154,11 +154,14 @@ var/global/list/antag_names_to_ids = list()
 
 /datum/antagonist/proc/attempt_spawn(var/lower_count, var/upper_count, var/ghosts_only)
 
+	world << "Attempting to spawn [id]."
+
 	var/main_type
 	if(ticker && ticker.mode)
 		if(ticker.mode.antag_tag && ticker.mode.antag_tag == id)
 			main_type = 1
 	else
+		world << "Ticker uninitialized, failed."
 		return 0
 
 	var/cur_max = (main_type ? max_antags_round : max_antags)
@@ -166,6 +169,7 @@ var/global/list/antag_names_to_ids = list()
 		cur_max = Clamp((ticker.mode.num_players()/ticker.mode.antag_scaling_coeff), 1, cur_max)
 
 	if(get_antag_count() >= cur_max)
+		world << "Antag count: [get_antag_count()] greater than [cur_max], failed."
 		return 0
 
 	// Sanity.
@@ -188,15 +192,22 @@ var/global/list/antag_names_to_ids = list()
 
 	// Get the raw list of potential players.
 	var/req_num = 0
-	var/list/candidates = ticker.mode.get_players_for_role(role_type)
+	var/list/candidates = ticker.mode.get_players_for_role(role_type, id)
+	if(!candidates) candidates = list()
+
+	world << "Candidate count is [candidates.len]."
 
 	// Prune restricted jobs and status.
 	for(var/datum/mind/player in candidates)
 		if((ghosts_only && !istype(player.current, /mob/dead)) || (player.assigned_role in restricted_jobs))
+			world << "Removing [player.name]."
 			candidates -= player
+
+	world << "Candidate count is now [candidates.len]."
 
 	// Update our boundaries.
 	if((!candidates.len) || candidates.len < lower_count)
+		world << "[candidates.len] not set or below [lower_count], failed."
 		return 0
 	else if(candidates.len < upper_count)
 		req_num = candidates.len
@@ -229,6 +240,7 @@ var/global/list/antag_names_to_ids = list()
 			else
 				command_announcement.Announce("[spawn_announcement]", "[spawn_announcement_title ? spawn_announcement_title : "Priority Alert"]")
 
+	world << "Success."
 	return 1
 
 /datum/antagonist/proc/apply(var/datum/mind/player)

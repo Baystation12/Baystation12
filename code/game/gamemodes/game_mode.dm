@@ -241,12 +241,11 @@ var/global/list/additional_antag_types = list()
 			playerC++
 
 	if(master_mode=="secret")
-		if(playerC >= required_players_secret)
-			return 1
+		if(playerC < required_players_secret)
+			return 0
 	else
-		if(playerC >= required_players)
-			return 1
-	return 0
+		if(playerC < required_players)
+			return 0
 
 	// Ensure we can spawn at least the voted roundtype main antagonist type after scaling the max antag counts.
 	// If we can, -try- to spawn the other voted antagonist types. It doesn't really matter if we can't.
@@ -255,9 +254,9 @@ var/global/list/additional_antag_types = list()
 		if(main_antags.attempt_spawn(required_enemies))
 			for(var/datum/antagonist/antag in (antag_templates-main_antags))
 				antag.attempt_spawn()
-		else
-			return 0
-	return 1
+			return 1
+
+	return 0
 
 ///pre_setup()
 ///Attempts to select players for special roles the mode might have.
@@ -560,15 +559,11 @@ var/global/list/additional_antag_types = list()
 			comm.messagetext.Add(intercepttext)
 	world << sound('sound/AI/commandreport.ogg')
 
-/datum/game_mode/proc/get_players_for_role(var/role, override_jobbans=0)
+/datum/game_mode/proc/get_players_for_role(var/role, var/antag_id)
 	var/list/players = list()
 	var/list/candidates = list()
 
-	var/datum/antagonist/antag_template
-	for(var/datum/antagonist/antag in all_antag_types)
-		if(antag.role_type == role)
-			antag_template = antag
-			break
+	var/datum/antagonist/antag_template = all_antag_types[antag_id]
 	if(!antag_template)
 		return candidates
 
@@ -584,7 +579,7 @@ var/global/list/additional_antag_types = list()
 
 	// Get a list of all the people who want to be the antagonist for this round
 	for(var/mob/new_player/player in players)
-		if(player.client.prefs.be_special & role)
+		if(!role || (player.client.prefs.be_special & role))
 			log_debug("[player.key] had [roletext] enabled, so we are drafting them.")
 			candidates += player.mind
 			players -= player

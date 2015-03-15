@@ -35,7 +35,7 @@ var/datum/antagonist/rogue_ai/malf
 
 /datum/antagonist/rogue_ai/attempt_spawn()
 
-	var/list/candidates = ticker.mode.get_players_for_role(role_type)
+	var/list/candidates = ticker.mode.get_players_for_role(role_type, id)
 	for(var/datum/mind/player in candidates)
 		if(player.assigned_role != "AI")
 			candidates -= player
