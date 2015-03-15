@@ -76,6 +76,16 @@
 	name = "wrench"
 	path = /obj/item/weapon/wrench
 	category = "Tools"
+	
+/datum/autolathe/recipe/hatchet
+	name = "hatchet"
+	path = /obj/item/weapon/hatchet
+	category = "Tools"
+	
+/datum/autolathe/recipe/minihoe
+	name = "mini hoe"
+	path = /obj/item/weapon/minihoe
+	category = "Tools"
 
 /datum/autolathe/recipe/radio_headset
 	name = "radio headset"
