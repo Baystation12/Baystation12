@@ -75,21 +75,26 @@
 		return 1
 	return 0
 
-/proc/isAI(A)
-	if(istype(A, /mob/living/silicon/ai))
-		return 1
-	return 0
-
 /mob/proc/isSilicon()
 	return 0
 
 /mob/living/silicon/isSilicon()
 	return 1
+/proc/isAI(A)
+	if(istype(A, /mob/living/silicon/ai))
+		return 1
+	return 0
     
 /mob/proc/isAI()
 	return 0
 
 /mob/living/silicon/ai/isAI()
+	return 1
+    
+/mob/proc/isRobot()
+	return 0
+
+/mob/living/silicon/robot/isRobot()
 	return 1
 
 /proc/ispAI(A)

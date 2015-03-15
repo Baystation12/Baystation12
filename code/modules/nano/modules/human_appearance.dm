@@ -146,9 +146,6 @@
 /obj/nano_module/appearance_changer/proc/can_change_skin_color()
 	return owner && (flags & APPEARANCE_SKIN) && owner.species.flags & HAS_SKIN_COLOR
 
-/obj/nano_module/appearance_changer/proc/can_still_topic()
-	return CanUseTopic(usr, list(), default_state) == STATUS_INTERACTIVE
-
 /obj/nano_module/appearance_changer/proc/cut_and_generate_data()
 	// Making the assumption that the available species remain constant
 	valid_facial_hairstyles.Cut()

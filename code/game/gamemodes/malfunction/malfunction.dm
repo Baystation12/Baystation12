@@ -50,7 +50,7 @@
 			world.Reboot()
 			return
 		AI_mind.current.verbs += /mob/living/silicon/ai/proc/choose_modules
-		AI_mind.current:laws = new /datum/ai_laws/malfunction
+		AI_mind.current:laws = new /datum/ai_laws/nanotrasen/malfunction
 		AI_mind.current:malf_picker = new /datum/AI_Module/module_picker
 		AI_mind.current.verbs += /datum/game_mode/malfunction/proc/ai_win // We run checks if AI overtaken the station in the proc itself. This guarantees you won't have to relog when it refuses to appear on takeover completion.
 		AI_mind.current:show_laws()
