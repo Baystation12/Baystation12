@@ -86,7 +86,7 @@
 
 /obj/machinery/computer/teleporter/attack_hand(user as mob)
 	if(..()) return
-	
+
 	/* Ghosts can't use this one because it's a direct selection */
 	if(istype(user, /mob/dead/observer)) return
 
@@ -174,6 +174,7 @@
 	idle_power_usage = 10
 	active_power_usage = 2000
 	var/obj/machinery/computer/teleporter/com
+
 
 /obj/machinery/teleport/hub/New()
 	..()
@@ -335,6 +336,8 @@
 	if (com)
 		com.icon_state = "tele1"
 		use_power(5000)
+		update_use_power(2)
+		com.update_use_power(2)
 		for(var/mob/O in hearers(src, null))
 			O.show_message("\blue Teleporter engaged!", 2)
 	src.add_fingerprint(usr)
@@ -348,6 +351,8 @@
 	if (com)
 		com.icon_state = "tele0"
 		com.accurate = 0
+		com.update_use_power(1)
+		update_use_power(1)
 		for(var/mob/O in hearers(src, null))
 			O.show_message("\blue Teleporter disengaged!", 2)
 	src.add_fingerprint(usr)
