@@ -197,9 +197,22 @@
 			x_offset = rand(-1,1)
 
 	//Point blank bonus
-	if(pointblank) P.damage *= 1.3
-
-	//TODO: accuracy modifiers
+	if(pointblank) 
+		var/damage_mult = 1.3 //default point blank multiplier
+		
+		//determine multiplier due to the target being grabbed
+		if(ismob(target))
+			var/mob/M = target
+			if(M.grabbed_by.len)
+				var/grabstate = 0
+				for(var/obj/item/weapon/grab/G in M.grabbed_by)
+					grabstate = max(grabstate, G.state)
+				if(grabstate >= GRAB_NECK)
+					damage_mult = 3.0
+				else if (grabstate >= GRAB_AGGRESSIVE)
+					damage_mult = 1.5
+		
+		P.damage *= damage_mult
 
 	if(params)
 		P.set_clickpoint(params)

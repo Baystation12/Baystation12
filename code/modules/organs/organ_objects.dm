@@ -76,7 +76,7 @@
 /obj/item/organ/proc/update()
 
 	if(!organ_data)
-		organ_data = new /datum/organ/internal()
+		organ_data = new organ_type()
 
 	if(robotic)
 		organ_data.robotic = robotic
@@ -93,6 +93,7 @@
 	organ_tag = "heart"
 	fresh = 6 // Juicy.
 	dead_icon = "heart-off"
+	organ_type = /datum/organ/internal/heart
 
 /obj/item/organ/lungs
 	name = "lungs"
@@ -101,6 +102,7 @@
 	prosthetic_name = "gas exchange system"
 	prosthetic_icon = "lungs-prosthetic"
 	organ_tag = "lungs"
+	organ_type = /datum/organ/internal/lungs
 
 /obj/item/organ/kidneys
 	name = "kidneys"
@@ -109,6 +111,7 @@
 	prosthetic_name = "prosthetic kidneys"
 	prosthetic_icon = "kidneys-prosthetic"
 	organ_tag = "kidneys"
+	organ_type = /datum/organ/internal/kidney
 
 /obj/item/organ/eyes
 	name = "eyeballs"
@@ -117,7 +120,7 @@
 	prosthetic_name = "visual prosthesis"
 	prosthetic_icon = "eyes-prosthetic"
 	organ_tag = "eyes"
-
+	organ_type = /datum/organ/internal/eyes
 	var/eye_colour
 
 /obj/item/organ/liver
@@ -126,11 +129,13 @@
 	prosthetic_name = "toxin filter"
 	prosthetic_icon = "liver-prosthetic"
 	organ_tag = "liver"
+	organ_type = /datum/organ/internal/liver
 
 /obj/item/organ/appendix
 	name = "appendix"
 	icon_state = "appendix"
 	organ_tag = "appendix"
+	organ_type = /datum/organ/internal/appendix
 
 //These are here so they can be printed out via the fabricator.
 /obj/item/organ/heart/prosthetic

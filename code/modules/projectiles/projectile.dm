@@ -148,16 +148,21 @@
 	xo = new_x - starting_loc.x
 
 //Called when the projectile intercepts a mob. Returns 1 if the projectile hit the mob, 0 if it missed and should keep flying.
-/obj/item/projectile/proc/attack_mob(var/mob/living/target_mob, var/distance, var/miss_modifier)
+/obj/item/projectile/proc/attack_mob(var/mob/living/target_mob, var/distance, var/miss_modifier=0)
 	//accuracy bonus from aiming
-	if (istype(shot_from, /obj/item/weapon/gun))	//If you aim at someone beforehead, it'll hit more often.
-		var/obj/item/weapon/gun/daddy = shot_from	//Kinda balanced by fact you need like 2 seconds to aim
+	if (istype(shot_from, /obj/item/weapon/gun))
+		var/obj/item/weapon/gun/daddy = shot_from
 		miss_modifier -= round(15*daddy.accuracy)
-		if (daddy.aim_targets && original in daddy.aim_targets) //As opposed to no-delay pew pew
+		
+		//If you aim at someone beforehead, it'll hit more often.
+		//Kinda balanced by fact you need like 2 seconds to aim
+		//As opposed to no-delay pew pew
+		if (daddy.aim_targets && original in daddy.aim_targets)
 			miss_modifier += -30
 
 	//roll to-hit
-	var/hit_zone = get_zone_with_miss_chance(def_zone, target_mob, max(miss_modifier + 15*(distance-2), 0))
+	miss_modifier = max(miss_modifier + 15*(distance-2), 0)
+	var/hit_zone = get_zone_with_miss_chance(def_zone, target_mob, miss_modifier, ranged_attack=(distance > 1))
 	if(!hit_zone)
 		visible_message("<span class='notice'>\The [src] misses [target_mob] narrowly!</span>")
 		return 0
@@ -189,7 +194,7 @@
 
 	return 1
 
-/obj/item/projectile/Bump(atom/A as mob|obj|turf|area)
+/obj/item/projectile/Bump(atom/A as mob|obj|turf|area, forced=0)
 	if(A == src)
 		return 0 //no
 	
@@ -197,7 +202,7 @@
 		loc = A.loc
 		return 0 //cannot shoot yourself
 
-	if(bumped || (A in permutated))
+	if((bumped && !forced) || (A in permutated))
 		return 0
 
 	var/passthrough = 0 //if the projectile should continue flying
@@ -207,6 +212,13 @@
 	if(ismob(A))
 		var/mob/M = A
 		if(istype(A, /mob/living))
+			//if they have a neck grab on someone, that person gets hit instead
+			var/obj/item/weapon/grab/G = locate() in M
+			if(G && G.state >= GRAB_NECK)
+				visible_message("<span class='danger'>\The [M] uses [G.affecting] as a shield!</span>")
+				if(Bump(G.affecting, forced=1))
+					return //If Bump() returns 0 (keep going) then we continue on to attack M.
+			
 			passthrough = !attack_mob(M, distance)
 		else
 			passthrough = 1 //so ghosts don't stop bullets

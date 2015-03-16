@@ -532,7 +532,7 @@
 						del(G)
 				if(GRAB_NECK)
 					//If the you move when grabbing someone then it's easier for them to break free. Same if the affected mob is immune to stun.
-					if (((world.time - G.assailant.l_move_time < 20 || !L.stunned) && prob(15)) || prob(3))
+					if (((world.time - G.assailant.l_move_time < 30 || !L.stunned) && prob(15)) || prob(3))
 						L.visible_message("<span class='warning'>[L] has broken free of [G.assailant]'s headlock!</span>")
 						del(G)
 		if(resisting)
