@@ -265,6 +265,7 @@
 		A = new /obj/item/projectile/energy/electrode( loc )
 		use_power(200)
 	A.current = T
+	A.starting = T
 	A.yo = U.y - T.y
 	A.xo = U.x - T.x
 	spawn( 0 )

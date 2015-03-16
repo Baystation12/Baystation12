@@ -8,6 +8,8 @@
 	embed = 1
 	sharp = 1
 	var/mob_passthrough_check = 0
+	
+	muzzle_type = /obj/effect/projectile/bullet/muzzle
 
 /obj/item/projectile/bullet/on_hit(var/atom/target, var/blocked = 0)
 	if (..(target, blocked))
@@ -47,6 +49,7 @@
 	else if(istype(A, /obj/machinery/door))
 		var/obj/machinery/door/D = A
 		chance = round(damage/D.maxhealth*180)
+		if(D.glass) chance *= 2
 	else if(istype(A, /obj/structure/girder) || istype(A, /obj/structure/cultgirder))
 		chance = 100
 	else if(istype(A, /obj/machinery) || istype(A, /obj/structure))

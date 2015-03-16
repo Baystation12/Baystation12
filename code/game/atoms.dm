@@ -34,6 +34,12 @@
 	else
 		return null
 
+//Currently used only for cryo cells, because they are also pipes and so overriding their return_air() would break their pipe-behaviour.
+//If cryo cells are ever rewritten so that the part that contains the human is separate from the pipe part --
+//such as rewriting them so that they are a machine that contains a pipe segment (or a pipe that contains a machine that contains the human?) -- then this can be removed.
+/atom/proc/return_air_for_internal_lifeform()
+	return return_air()
+
 /atom/proc/check_eye(user as mob)
 	if (istype(user, /mob/living/silicon/ai)) // WHYYYY
 		return 1
@@ -201,6 +207,7 @@ its easier to just keep the beam vertical.
 			f_name += "oil-stained [name][infix]."
 
 	user << "\icon[src] That's [f_name] [suffix]"
+	user << desc
 
 	return distance == -1 || (get_dist(src, user) <= distance)
 

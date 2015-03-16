@@ -149,6 +149,13 @@ proc/hassensorlevel(A, var/level)
 		var/obj/item/clothing/under/U = H.w_uniform
 		return U.sensor_mode >= level
 	return 0
+	
+proc/getsensorlevel(A)
+	var/mob/living/carbon/human/H = A
+	if(istype(H) && istype(H.w_uniform, /obj/item/clothing/under))
+		var/obj/item/clothing/under/U = H.w_uniform
+		return U.sensor_mode
+	return SUIT_SENSOR_OFF
 
 /proc/hsl2rgb(h, s, l)
 	return //TODO: Implement
@@ -229,20 +236,26 @@ var/list/global/organ_rel_size = list(
 // Emulates targetting a specific body part, and miss chances
 // May return null if missed
 // miss_chance_mod may be negative.
-/proc/get_zone_with_miss_chance(zone, var/mob/target, var/miss_chance_mod = 0)
+/proc/get_zone_with_miss_chance(zone, var/mob/target, var/miss_chance_mod = 0, var/ranged_attack=0)
 	zone = check_zone(zone)
 
-	// you can only miss if your target is standing and not restrained
-	if(!target.buckled && !target.lying)
-		var/miss_chance = 10
-		if (zone in base_miss_chance)
-			miss_chance = base_miss_chance[zone]
-		miss_chance = max(miss_chance + miss_chance_mod, 0)
-		if(prob(miss_chance))
-			if(prob(70))
-				return null
-			return pick(base_miss_chance)
-
+	// you cannot miss if your target is prone or restrained
+	if(target.buckled || target.lying)
+		return zone
+	// if your target is being grabbed aggressively by someone you cannot miss either
+	if(!ranged_attack)
+		for(var/obj/item/weapon/grab/G in target.grabbed_by)
+			if(G.state >= GRAB_AGGRESSIVE)
+				return zone
+	
+	var/miss_chance = 10
+	if (zone in base_miss_chance)
+		miss_chance = base_miss_chance[zone]
+	miss_chance = max(miss_chance + miss_chance_mod, 0)
+	if(prob(miss_chance))
+		if(prob(70))
+			return null
+		return pick(base_miss_chance)
 	return zone
 
 

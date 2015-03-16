@@ -220,7 +220,7 @@
 /datum/gas_mixture/proc/remove_ratio(ratio, out_group_multiplier = 1)
 	if(ratio <= 0)
 		return null
-	out_group_multiplier = max(1, min(group_multiplier, out_group_multiplier))
+	out_group_multiplier = between(1, out_group_multiplier, group_multiplier)
 
 	ratio = min(ratio, 1)
 
@@ -237,6 +237,11 @@
 
 	return removed
 
+//Removes a volume of gas from the mixture and returns a gas_mixture containing the removed air with the given volume
+/datum/gas_mixture/proc/remove_volume(removed_volume)
+	var/datum/gas_mixture/removed = remove_ratio(removed_volume/volume, 1)
+	removed.volume = removed_volume
+	return removed
 
 //Removes moles from the gas mixture, limited by a given flag.  Returns a gax_mixture containing the removed air.
 /datum/gas_mixture/proc/remove_by_flag(flag, amount)
@@ -301,7 +306,7 @@
 
 
 /datum/gas_mixture/proc/react(atom/dump_location)
-	zburn(null)
+	zburn(null, force_burn=0, no_check=0) //could probably just call zburn() here with no args but I like being explicit.
 
 
 //Rechecks the gas_mixture and adjusts the graphic list if needed.

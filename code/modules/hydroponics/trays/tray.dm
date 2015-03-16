@@ -592,15 +592,20 @@
 		if(!environment) //We're in a crate or nullspace, bail out.
 			return
 
-		var/area/A = T.loc
-		var/light_available
-		if(A)
-			if(A.lighting_use_dynamic)
-				light_available = max(0,min(10,T.lighting_lumcount)-5)
-			else
-				light_available =  5
+		var/light_string
+		if(closed_system && mechanical)
+			light_string = "that the internal lights are set to [tray_light] lumens"
+		else
+			var/area/A = T.loc
+			var/light_available
+			if(A)
+				if(A.lighting_use_dynamic)
+					light_available = max(0,min(10,T.lighting_lumcount)-5)
+				else
+					light_available =  5
+			light_string = "a light level of [light_available] lumens"
 
-		usr << "The tray's sensor suite is reporting a light level of [light_available] lumens and a temperature of [environment.temperature]K."
+		usr << "The tray's sensor suite is reporting [light_string] and a temperature of [environment.temperature]K."
 
 /obj/machinery/portable_atmospherics/hydroponics/verb/close_lid_verb()
 	set name = "Toggle Tray Lid"

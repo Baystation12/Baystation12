@@ -1,11 +1,11 @@
-/atom/movable/proc/nano_host()
+/atom/proc/nano_host()
 	return src
 
 /obj/nano_module/nano_host()
 	return loc
 
 
-/atom/movable/proc/CanUseTopic(var/mob/user, href_list, var/datum/topic_state/custom_state)
+/atom/proc/CanUseTopic(var/mob/user, href_list, var/datum/topic_state/custom_state)
 	return user.can_use_topic(nano_host(), custom_state)
 
 
@@ -13,7 +13,7 @@
 	return STATUS_CLOSE // By default no mob can do anything with NanoUI
 
 /mob/dead/observer/can_use_topic()
-	if(check_rights(R_ADMIN, 0))
+	if(check_rights(R_ADMIN, 0, src))
 		return STATUS_INTERACTIVE				// Admins are more equal
 	return STATUS_UPDATE						// Ghosts can view updates
 
@@ -28,8 +28,10 @@
 		return STATUS_CLOSE
 	if(lockcharge || stunned || weakened)
 		return STATUS_DISABLED
+	if(custom_state.flags & NANO_IGNORE_DISTANCE)
+		return STATUS_INTERACTIVE
 	// robots can interact with things they can see within their view range
-	if(!(custom_state.flags & NANO_IGNORE_DISTANCE) && (src_object in view(src)))
+	if((src_object in view(src)) && get_dist(src_object, src) <= src.client.view)
 		return STATUS_INTERACTIVE	// interactive (green visibility)
 	return STATUS_DISABLED			// no updates, completely disabled (red visibility)
 

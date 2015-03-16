@@ -122,12 +122,24 @@
 #define CARBON_LIFEFORM_FIRE_DAMAGE     4
 
 // Phoron fire properties.
-#define PHORON_MINIMUM_BURN_TEMPERATURE    (T0C +  100)
-#define PHORON_FLASHPOINT                  (T0C +  246)
-#define PHORON_UPPER_TEMPERATURE           (T0C + 1370)
-#define PHORON_MINIMUM_OXYGEN_NEEDED       2
-#define PHORON_MINIMUM_OXYGEN_PHORON_RATIO 20
-#define PHORON_OXYGEN_FULLBURN             10
+#define PHORON_MINIMUM_BURN_TEMPERATURE    (T0C +  126) //400 K - autoignite temperature in tanks and canisters - enclosed environments I guess
+#define PHORON_FLASHPOINT                  (T0C +  246) //519 K - autoignite temperature in air if that ever gets implemented.
+
+//These control the mole ratio of oxidizer and fuel used in the combustion reaction
+#define FIRE_REACTION_OXIDIZER_AMOUNT	3
+#define FIRE_REACTION_FUEL_AMOUNT		2
+
+//These control the speed at which fire burns
+#define FIRE_GAS_BURNRATE_MULT			1
+#define FIRE_LIQUID_BURNRATE_MULT		0.5
+
+//If the fire is burning slower than this rate then the reaction is going too slow to be self sustaining and the fire burns itself out.
+//This ensures that fires don't grind to a near-halt while still remaining active forever.
+#define FIRE_GAS_MIN_BURNRATE				0.1
+#define FIRE_LIQUD_MIN_BURNRATE				0.05
+
+//How many moles of fuel are contained within one solid/liquid fuel volume unit
+#define LIQUIDFUEL_AMOUNT_TO_MOL		1  //mol/volume unit
 
 #define T0C  273.15 //    0.0 degrees celcius
 #define T20C 293.15 //   20.0 degrees celcius
@@ -593,6 +605,7 @@ var/list/be_special_flags = list(
 #define    IMPTRACK_HUD 7 // Tracking implant.
 #define SPECIALROLE_HUD 8 // AntagHUD image.
 #define  STATUS_HUD_OOC 9 // STATUS_HUD without virus DB check for someone being ill.
+#define 	  LIFE_HUD 10 // STATUS_HUD that only reports dead or alive
 
 // Pulse levels, very simplified.
 #define PULSE_NONE    0 // So !M.pulse checks would be possible.
@@ -759,8 +772,30 @@ var/list/be_special_flags = list(
 #define STATUS_UPDATE 1 // ORANGE Visability
 #define STATUS_DISABLED 0 // RED Visability
 #define STATUS_CLOSE -1 // Close the interface
+
 //General-purpose life speed define for plants.
 #define HYDRO_SPEED_MULTIPLIER 1
+
 #define NANO_IGNORE_DISTANCE 1
 
+// Robot AI notifications
+#define ROBOT_NOTIFICATION_NEW_UNIT 1
+#define ROBOT_NOTIFICATION_NEW_NAME 2
+#define ROBOT_NOTIFICATION_NEW_MODULE 3
+#define ROBOT_NOTIFICATION_MODULE_RESET 4
+
 #define DEFAULT_JOB_TYPE /datum/job/assistant
+
+// Appearance change flags
+#define APPEARANCE_UPDATE_DNA 1
+#define APPEARANCE_RACE	2|APPEARANCE_UPDATE_DNA
+#define APPEARANCE_GENDER 4|APPEARANCE_UPDATE_DNA
+#define APPEARANCE_SKIN 8
+#define APPEARANCE_HAIR 16
+#define APPEARANCE_HAIR_COLOR 32
+#define APPEARANCE_FACIAL_HAIR 64
+#define APPEARANCE_FACIAL_HAIR_COLOR 128
+#define APPEARANCE_EYE_COLOR 256
+#define APPEARANCE_ALL_HAIR APPEARANCE_HAIR|APPEARANCE_HAIR_COLOR|APPEARANCE_FACIAL_HAIR|APPEARANCE_FACIAL_HAIR_COLOR
+#define APPEARANCE_ALL 511
+

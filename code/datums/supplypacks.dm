@@ -696,20 +696,31 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	name = "Weapons crate"
 	contains = list(/obj/item/weapon/melee/baton,
 					/obj/item/weapon/melee/baton,
-					/obj/item/weapon/gun/energy/laser,
-					/obj/item/weapon/gun/energy/laser,
+					/obj/item/weapon/gun/energy/gun,
+					/obj/item/weapon/gun/energy/gun,
 					/obj/item/weapon/gun/energy/taser,
 					/obj/item/weapon/gun/energy/taser,
 					/obj/item/weapon/gun/projectile/sec,
 					/obj/item/weapon/gun/projectile/sec,
 					/obj/item/weapon/storage/box/flashbangs,
 					/obj/item/weapon/storage/box/flashbangs)
-	cost = 30
+	cost = 40
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "Weapons crate"
 	access = access_security
 	group = "Security"
 
+/datum/supply_packs/flareguns
+	name = "Flare guns crate"
+	contains = list(/obj/item/weapon/gun/projectile/sec/flash,
+					/obj/item/ammo_magazine/c45m/flash,
+					/obj/item/weapon/gun/projectile/shotgun/doublebarrel/flare,
+					/obj/item/weapon/storage/box/flashshells)
+	cost = 25
+	containertype = /obj/structure/closet/crate/secure/weapon
+	containername = "Flare gun crate"
+	access = access_security
+	group = "Security"
 
 /datum/supply_packs/eweapons
 	name = "Experimental weapons crate"
@@ -777,7 +788,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	name = "Energy weapons crate"
 	contains = list(/obj/item/weapon/gun/energy/laser,
 					/obj/item/weapon/gun/energy/laser,
-					/obj/item/weapon/gun/energy/gun)
+					/obj/item/weapon/gun/energy/laser)
 	cost = 50
 	containertype = /obj/structure/closet/crate/secure
 	containername = "energy weapons crate"
@@ -789,9 +800,10 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	contains = list(/obj/item/clothing/suit/armor/bulletproof,
 					/obj/item/clothing/suit/armor/bulletproof,
 					/obj/item/weapon/storage/box/shotgunammo,
-					/obj/item/weapon/gun/projectile/shotgun/pump,
+					/obj/item/weapon/storage/box/shotgunshells,
+					/obj/item/weapon/gun/projectile/shotgun/pump/combat,
 					/obj/item/weapon/gun/projectile/shotgun/pump/combat)
-	cost = 50
+	cost = 65
 	containertype = /obj/structure/closet/crate/secure
 	containername = "Shotgun crate"
 	access = access_armory

@@ -7,6 +7,17 @@
 
 /*-------TODOOOOOOOOOO--------*/
 
+//Verbs used by hotkeys.
+/mob/living/silicon/robot/verb/cmd_unequip_module()
+	set name = "unequip-module"
+	set hidden = 1
+	uneq_active()
+
+/mob/living/silicon/robot/verb/cmd_toggle_module(module as num)
+	set name = "toggle-module"
+	set hidden = 1
+	toggle_module(module)
+
 /mob/living/silicon/robot/proc/uneq_active()
 	if(isnull(module_active))
 		return

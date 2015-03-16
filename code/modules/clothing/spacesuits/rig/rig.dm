@@ -12,8 +12,8 @@
 	icon = 'icons/obj/rig_modules.dmi'
 	desc = "A back-mounted hardsuit deployment and control mechanism."
 	slot_flags = SLOT_BACK
-	req_one_access = null
-	req_access = null
+	req_one_access = list()
+	req_access = list()
 	w_class = 4
 
 	// These values are passed on to all component pieces.
@@ -68,9 +68,11 @@
 
 	var/sealing                                               // Keeps track of seal status independantly of canremove.
 	var/offline = 1                                           // Should we be applying suit maluses?
-	var/offline_slowdown = 10                                 // If the suit is deployed and unpowered, it sets slowdown to this.
+	var/offline_slowdown = 3                                  // If the suit is deployed and unpowered, it sets slowdown to this.
 	var/vision_restriction
 	var/offline_vision_restriction = 1                        // 0 - none, 1 - welder vision, 2 - blind. Maybe move this to helmets.
+
+	var/emp_protection = 0
 
 	// Wiring! How exciting.
 	var/datum/wires/rig/wires
@@ -311,7 +313,7 @@
 
 	if(!istype(wearer) || loc != wearer || wearer.back != src || canremove || !cell || cell.charge <= 0)
 		if(!cell || cell.charge <= 0)
-			if(electrified >0)
+			if(electrified > 0)
 				electrified = 0
 			if(!offline)
 				if(istype(wearer))
@@ -319,7 +321,7 @@
 						if (offline_slowdown < 3)
 							wearer << "<span class='danger'>Your suit beeps stridently, and suddenly goes dead.</span>"
 						else
-							wearer << "<span class='danger'>Your suit beeps stridently, and suddenly you're wearing a leaden mass of metal and plastic instead of a powered suit.</span>"
+							wearer << "<span class='danger'>Your suit beeps stridently, and suddenly you're wearing a leaden mass of metal and plastic composites instead of a powered suit.</span>"
 					if(offline_vision_restriction == 1)
 						wearer << "<span class='danger'>The suit optics flicker and die, leaving you with restricted vision.</span>"
 					else if(offline_vision_restriction == 2)
@@ -406,7 +408,7 @@
 	data["boots"] =     (boots ?  "[boots.name]" :  "None.")
 	data["chest"] =     (chest ?  "[chest.name]" :  "None.")
 
-	data["charge"] =       cell ? cell.charge : 0
+	data["charge"] =       cell ? round(cell.charge,1) : 0
 	data["maxcharge"] =    cell ? cell.maxcharge : 0
 	data["chargestatus"] = cell ? Floor((cell.charge/cell.maxcharge)*50) : 0
 
@@ -416,7 +418,7 @@
 	data["aicontrol"] =     control_overridden
 	data["aioverride"] =    ai_override_enabled
 	data["securitycheck"] = security_check_enabled
-	data["malf"] =          malfunctioning
+	data["malf"] =          malfunction_delay
 
 
 	var/list/module_list = list()
@@ -493,6 +495,8 @@
 		return 1
 
 	if(istype(user))
+		if(malfunction_check(user))
+			return 0
 		if(user.back != src)
 			return 0
 		if(locked_dna)
@@ -509,10 +513,10 @@
 
 	return 1
 
+//TODO: Fix Topic vulnerabilities for malfunction and AI override.
 /obj/item/weapon/rig/Topic(href,href_list)
-
 	if(!check_suit_access(usr))
-		return
+		return 0
 
 	if(href_list["toggle_piece"])
 		if(ishuman(usr) && (usr.stat || usr.stunned || usr.lying))
@@ -545,7 +549,7 @@
 
 	usr.set_machine(src)
 	src.add_fingerprint(usr)
-	return 1
+	return 0
 
 /obj/item/weapon/rig/proc/notify_ai(var/message)
 	if(!message || !installed_modules || !installed_modules.len)
@@ -687,11 +691,17 @@
 	return 0
 
 /obj/item/weapon/rig/emp_act(severity_class)
-	//class 1 severity is the most severe, not least.
-	malfunctioning += round(30/severity_class)
-	if(malfunction_delay <= 0)
-		malfunction_delay = 20
-	take_hit(round(30/severity_class),"electrical pulse")
+	//set malfunctioning
+	if(emp_protection < 30) //for ninjas, really.
+		malfunctioning += 10
+		if(malfunction_delay <= 0)
+			malfunction_delay = max(malfunction_delay, round(30/severity_class))
+	
+	//drain some charge
+	if(cell) cell.emp_act(severity_class + 15)
+	
+	//possibly damage some modules
+	take_hit((100/severity_class), "electrical pulse", 1)
 
 /obj/item/weapon/rig/proc/shock(mob/user)
 	if (electrocute_mob(user, cell, src))
@@ -699,33 +709,60 @@
 		return 1
 	return 0
 
-/obj/item/weapon/rig/proc/take_hit(damage,source)
+/obj/item/weapon/rig/proc/take_hit(damage, source, is_emp=0)
+
 	if(!installed_modules.len)
 		return
 
-	//given that module damage is spread out across all modules, even this is probably not enough for emp to affect rigs much.
-	if(source != "electrical pulse")
-		var/protection = chest? chest.breach_threshold : 0
-		if(!prob(max(0, damage - protection)))
-			return
+	var/chance
+	if(!is_emp)
+		chance = 2*max(0, damage - (chest? chest.breach_threshold : 0))
+	else
+		//Want this to be roughly independant of the number of modules, meaning that X emp hits will disable Y% of the suit's modules on average.
+		//that way people designing hardsuits don't have to worry (as much) about how adding that extra module will affect emp resiliance by 'soaking' hits for other modules
+		chance = max(0, damage - emp_protection)*min(installed_modules.len/15, 1)
 
+	if(!prob(chance))
+		return
+
+	//deal addition damage to already damaged module first.
+	//This way the chances of a module being disabled aren't so remote.
 	var/list/valid_modules = list()
+	var/list/damaged_modules = list()
 	for(var/obj/item/rig_module/module in installed_modules)
 		if(module.damage < 2)
 			valid_modules |= module
+			if(module.damage > 0)
+				damaged_modules |= module
 
-	if(!valid_modules.len)
-		return
+	var/obj/item/rig_module/dam_module = null
+	if(damaged_modules.len)
+		dam_module = pick(damaged_modules)
+	else if(valid_modules.len)
+		dam_module = pick(valid_modules)
+	
+	if(!dam_module) return
 
-	var/obj/item/rig_module/dam_module = pick(valid_modules)
 	dam_module.damage++
 
 	if(!source)
 		source = "hit"
 
 	if(wearer)
-		wearer << "<span class='danger'>The [source] has [dam_module.damage >= 2 ? "destroyed" : "damaged"] your [dam_module.interface_name]!"
+		if(dam_module.damage >= 2)
+			wearer << "<span class='danger'>The [source] has disabled your [dam_module.interface_name]!"
+		else
+			wearer << "<span class='warning'>The [source] has damaged your [dam_module.interface_name]!"
 	dam_module.deactivate()
+
+/obj/item/weapon/rig/proc/malfunction_check(var/mob/living/carbon/human/user)
+	if(malfunction_delay)
+		if(offline)
+			user << "<span class='danger'>The suit is completely unresponsive.</span>"
+		else
+			user << "<span class='danger'>ERROR: Hardware fault. Rebooting interface...</span>"
+		return 1
+	return 0
 
 /*/obj/item/weapon/rig/proc/forced_move(dir)
 	if(locked_down)
