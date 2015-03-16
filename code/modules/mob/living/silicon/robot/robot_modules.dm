@@ -412,7 +412,7 @@
 	src.modules += new /obj/item/weapon/gripper/research(src)
 	src.modules += new /obj/item/weapon/gripper/no_use/loader(src)
 	src.modules += new /obj/item/device/robotanalyzer(src)
-	src.modules += new /obj/item/weapon/card/id/robot(src)
+	src.modules += new /obj/item/weapon/card/robot(src)
 	src.modules += new /obj/item/weapon/wrench(src)
 	src.modules += new /obj/item/weapon/screwdriver(src)
 	src.modules += new /obj/item/weapon/crowbar(src)
