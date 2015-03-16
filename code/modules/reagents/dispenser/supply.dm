@@ -108,25 +108,6 @@
 	containername = "soft drinks crate"
 	group = "Reagents"
 
-/datum/supply_packs/medicine_reagents
-	name = "Medicine dispenser cartridges"
-	contains = list(
-			/obj/item/weapon/reagent_containers/chem_disp_cartridge/inaprov,
-			/obj/item/weapon/reagent_containers/chem_disp_cartridge/tramadol,
-			/obj/item/weapon/reagent_containers/chem_disp_cartridge/kelotane,
-			/obj/item/weapon/reagent_containers/chem_disp_cartridge/dexalin/small,
-			/obj/item/weapon/reagent_containers/chem_disp_cartridge/tricord,
-			/obj/item/weapon/reagent_containers/chem_disp_cartridge/dylovene,
-			/obj/item/weapon/reagent_containers/chem_disp_cartridge/bicaridine,
-			/obj/item/weapon/reagent_containers/chem_disp_cartridge/spaceacillin,
-			/obj/item/weapon/reagent_containers/chem_disp_cartridge/ethylredox
-		)
-	cost = 300
-	containertype = /obj/structure/closet/crate/secure
-	containername = "medicine crate"
-	access = list(access_chemistry)
-	group = "Reagents"
-
 /datum/supply_packs/dispenser_cartridges
 	name = "Empty dispenser cartridges"
 	contains = list(
@@ -192,18 +173,6 @@ SEC_PACK(radium,    /obj/item/weapon/reagent_containers/chem_disp_cartridge/radi
 SEC_PACK(ethanol,   /obj/item/weapon/reagent_containers/chem_disp_cartridge/ethanol,    "Reagent refill - Ethanol",       "ethanol reagent cartridge crate",       15, access_chemistry)
 SEC_PACK(sacid,     /obj/item/weapon/reagent_containers/chem_disp_cartridge/sacid,      "Reagent refill - Sulfuric Acid", "sulfuric acid reagent cartridge crate", 15, access_chemistry)
 SEC_PACK(tungsten,  /obj/item/weapon/reagent_containers/chem_disp_cartridge/tungsten,   "Reagent refill - Tungsten",      "tungsten reagent cartridge crate",      15, access_chemistry)
-
-// Medical-restricted (medicines)
-//      Datum path     Contents type                                                           Supply pack name                       Container name                           Cost  Container access
-SEC_PACK(inaprov,      /obj/item/weapon/reagent_containers/chem_disp_cartridge/inaprov,       "Reagent cartridge - Inaprovaline",     "inaprovaline reagent cartridge crate",     100, access_medical)
-SEC_PACK(tramadol,     /obj/item/weapon/reagent_containers/chem_disp_cartridge/tramadol,      "Reagent cartridge - Tramadol",         "tramadol reagent cartridge crate",         100, access_medical)
-SEC_PACK(kelotane,     /obj/item/weapon/reagent_containers/chem_disp_cartridge/kelotane,      "Reagent cartridge - Kelotane",         "kelotane reagent cartridge crate",         100, access_medical)
-SEC_PACK(dexalin_s,    /obj/item/weapon/reagent_containers/chem_disp_cartridge/dexalin/small, "Reagent cartridge - Dexalin",          "dexalin reagent cartridge crate",          100, access_medical)
-SEC_PACK(tricord,      /obj/item/weapon/reagent_containers/chem_disp_cartridge/tricord,       "Reagent cartridge - Tricordrazine",    "tricordrazine reagent cartridge crate",    100, access_medical)
-SEC_PACK(dylovene,     /obj/item/weapon/reagent_containers/chem_disp_cartridge/dylovene,      "Reagent cartridge - Dylovene",         "dylovene reagent cartridge crate",         100, access_medical)
-SEC_PACK(bicaridine,   /obj/item/weapon/reagent_containers/chem_disp_cartridge/bicaridine,    "Reagent cartridge - Bicaridine",       "bicaridine reagent cartridge crate",       100, access_medical)
-SEC_PACK(spaceacillin, /obj/item/weapon/reagent_containers/chem_disp_cartridge/spaceacillin,  "Reagent cartridge - Spaceacillin",     "spaceacillin reagent cartridge crate",     100, access_medical)
-SEC_PACK(ethylredox,   /obj/item/weapon/reagent_containers/chem_disp_cartridge/ethylredox,    "Reagent cartridge - Ethylredoxrazine", "ethylredoxrazine reagent cartridge crate", 100, access_medical)
 
 // Bar-restricted (alcoholic drinks)
 //      Datum path Contents type                                                     Supply pack name             Container name                    Cost  Container access
