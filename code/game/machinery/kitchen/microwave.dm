@@ -135,11 +135,11 @@
 		return 1
 	else
 		user << "\red You have no idea what you can cook with this [O]."
-		return 1
+	..()
 	src.updateUsrDialog()
 
 /obj/machinery/microwave/attack_ai(mob/user as mob)
-	return 0
+	attack_hand(user)
 
 /obj/machinery/microwave/attack_hand(mob/user as mob)
 	user.set_machine(src)

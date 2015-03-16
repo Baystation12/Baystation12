@@ -15,13 +15,7 @@
 /obj/item/weapon/portable_destructive_analyzer/New()
 	..()
 	files = new /datum/research/techonly(src) //Setup the research data holder.
-/*
-/obj/item/weapon/portable_destructive_analyzer/proc/ConvertReqString2List(var/list/source_list) //TODO: MAKE THIS A HELPER PROC
-	var/list/temp_list = params2list(source_list)
-	for(var/O in temp_list)
-		temp_list[O] = text2num(temp_list[O])
-	return temp_list
-*/
+
 /obj/item/weapon/portable_destructive_analyzer/attack_self(user as mob)
 	var/response = alert(user, 	"Analyzing the item inside will *DESTROY* the item for good.\n\
 							Syncing to the research server will send the data that is stored inside to research.\n\
@@ -123,6 +117,24 @@
 /obj/item/weapon/card/id/robot/read()
 	usr << "The ID card does not appear to have any writing on it."
 	return
+
+//A harvest item for serviceborgs.
+/obj/item/weapon/robot_harvester
+	name = "auto harvester"
+	desc = "A hand-held harvest tool that resembles a sickle.  It uses energy to cut plant matter very efficently."
+	icon = 'icons/obj/weapons.dmi'
+	icon_state = "autoharvester"
+
+/obj/item/weapon/robot_harvester/afterattack(var/atom/target, var/mob/living/user, proximity)
+	if(!target)
+		return
+	if(!proximity)
+		return
+	if(istype(target,/obj/machinery/portable_atmospherics/hydroponics))
+		var/obj/machinery/portable_atmospherics/hydroponics/T = target
+		T.harvest(user)
+	else
+		user << "Harvesting \a [target] is not the purpose of this tool.  The [src] is for plants being grown."
 
 // A special tray for the service droid. Allow droid to pick up and drop items as if they were using the tray normally
 // Click on table to unload, click on item to load. Otherwise works identically to a tray.

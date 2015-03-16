@@ -88,6 +88,18 @@
 		/obj/item/weapon/reagent_containers/blood
 		)
 
+/obj/item/weapon/gripper/service //Used to handle food, drinks, and seeds.
+	name = "service gripper"
+	icon_state = "gripper"
+	desc = "A simple grasping tool used to perform tasks in the service sector, such as handling food, drinks, and seeds."
+
+	can_hold = list(
+		/obj/item/weapon/reagent_containers/glass,
+		/obj/item/weapon/reagent_containers/food,
+		/obj/item/seeds,
+		/obj/item/weapon/grown
+		)
+
 /obj/item/weapon/gripper/no_use //Used when you want to hold and put items in other things, but not able to 'use' the item
 
 /obj/item/weapon/gripper/no_use/loader //This is used to disallow building with metal.
@@ -212,6 +224,21 @@
 				A.cell = null
 
 				user.visible_message("<span class='danger'>[user] removes the power cell from [A]!</span>", "You remove the power cell.")
+/*
+	if(!wrapped)
+		//There's some weirdness with items being lost inside the arm. Trying to fix all cases. ~Z
+		for(var/obj/item/thing in src.contents)
+			thing.loc = get_turf(src)
+		return
+
+	if(wrapped.loc != src)
+		wrapped = null
+		return
+
+	src.loc << "<span class='danger'>You drop \the [wrapped].</span>"
+	wrapped.loc = get_turf(src)
+	wrapped = null
+*/
 
 //TODO: Matter decompiler.
 /obj/item/weapon/matter_decompiler

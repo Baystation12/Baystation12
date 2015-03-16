@@ -315,8 +315,13 @@
 /obj/item/weapon/robot_module/butler/New()
 	..()
 	src.modules += new /obj/item/device/flash(src)
-	src.modules += new /obj/item/weapon/reagent_containers/food/drinks/cans/beer(src)
-	src.modules += new /obj/item/weapon/reagent_containers/food/condiment/enzyme(src)
+	src.modules += new /obj/item/weapon/gripper/service(src)
+	src.modules += new /obj/item/weapon/reagent_containers/glass/bucket(src)
+	src.modules += new /obj/item/weapon/minihoe(src)
+	src.modules += new /obj/item/weapon/hatchet(src)
+	src.modules += new /obj/item/device/analyzer/plant_analyzer(src)
+	src.modules += new /obj/item/weapon/storage/bag/plants(src)
+	src.modules += new /obj/item/weapon/robot_harvester(src)
 
 	var/obj/item/weapon/rsf/M = new /obj/item/weapon/rsf(src)
 	M.stored_matter = 30

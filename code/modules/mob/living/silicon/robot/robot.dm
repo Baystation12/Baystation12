@@ -259,7 +259,8 @@ var/list/robot_verbs_default = list(
 			module_sprites["Bro"] = "Brobot"
 			module_sprites["Rich"] = "maximillion"
 			module_sprites["Default"] = "Service2"
-			module_sprites["Drone"] = "drone-service" // How does this even work...? Oh well.
+			module_sprites["Drone - Service"] = "drone-service"
+			module_sprites["Drone - Hydro"] = "drone-hydro"
 
 		if("Clerical")
 			module = new /obj/item/weapon/robot_module/clerical(src)
