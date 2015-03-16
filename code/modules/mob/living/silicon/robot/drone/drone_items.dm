@@ -2,7 +2,7 @@
 //Limited use.
 /obj/item/weapon/gripper
 	name = "magnetic gripper"
-	desc = "A simple grasping tool for synthetic assets."
+	desc = "A simple grasping tool specialized in construction and engineering work."
 	icon = 'icons/obj/device.dmi'
 	icon_state = "gripper"
 
@@ -30,6 +30,10 @@
 
 // VEEEEERY limited version for mining borgs. Basically only for swapping cells and upgrading the drills.
 /obj/item/weapon/gripper/miner
+	name = "drill maintenance gripper"
+	desc = "A simple grasping tool for the maintenance of heavy drilling machines."
+	icon_state = "gripper-mining"
+
 	can_hold = list(
 	/obj/item/weapon/cell,
 	/obj/item/weapon/stock_parts
@@ -38,20 +42,70 @@
 /obj/item/weapon/gripper/paperwork
 	name = "paperwork gripper"
 	desc = "A simple grasping tool for clerical work."
-	icon = 'icons/obj/device.dmi'
-	icon_state = "gripper"
 
 	can_hold = list(
 		/obj/item/weapon/clipboard,
 		/obj/item/weapon/paper,
 		/obj/item/weapon/paper_bundle,
-		/obj/item/weapon/card/id
+		/obj/item/weapon/card/id,
+		/obj/item/weapon/book,
+		/obj/item/weapon/newspaper
+		)
+
+/obj/item/weapon/gripper/research //A general usage gripper, used for toxins/robotics/xenobio/etc
+	name = "scientific gripper"
+	icon_state = "gripper-sci"
+	desc = "A simple grasping tool suited to assist in a wide array of research applications."
+
+	can_hold = list(
+		/obj/item/weapon/cell,
+		/obj/item/weapon/stock_parts,
+		/obj/item/device/mmi,
+		/obj/item/robot_parts,
+		/obj/item/borg/upgrade,
+		/obj/item/device/flash, //to build borgs
+		/obj/item/organ/brain, //to insert into MMIs.
+		/obj/item/stack/cable_coil, //again, for borg building
+		/obj/item/device/assembly, //toxins
+		/obj/item/device/assembly_holder, //toxins
+		/obj/item/weapon/tank, //toxins
+		/obj/item/device/transfer_valve, //take a guess
+		/obj/item/weapon/circuitboard,
+		/obj/item/slime_extract,
+		/obj/item/weapon/reagent_containers/glass
+
+		)
+
+/obj/item/weapon/gripper/chemistry //Primarily used for chemical work.
+	name = "chemical gripper"
+	icon_state = "gripper-medical"
+	desc = "A simple grasping tool specialized in the safe handling and transportation of chemical compounds inside containers, and loading said containers \
+	inside machinery."
+
+	can_hold = list(
+		/obj/item/weapon/reagent_containers/glass,
+		/obj/item/weapon/reagent_containers/pill,
+		/obj/item/weapon/reagent_containers/blood
+		)
+
+/obj/item/weapon/gripper/no_use //Used when you want to hold and put items in other things, but not able to 'use' the item
+
+/obj/item/weapon/gripper/no_use/loader //This is used to disallow building with metal.
+	name = "sheet loader"
+	desc = "A specialized loading device, designed to pick up and insert sheets of materials inside machines."
+	icon_state = "gripper-sheet"
+
+	can_hold = list(
+		/obj/item/stack/sheet
 		)
 
 /obj/item/weapon/gripper/attack_self(mob/user as mob)
 	if(wrapped)
 		return wrapped.attack_self(user)
 	return ..()
+
+/obj/item/weapon/gripper/no_use/attack_self(mob/user as mob)
+	return
 
 /obj/item/weapon/gripper/verb/drop_item()
 
@@ -142,6 +196,20 @@
 
 				A.charging = 0
 				A.update_icon()
+
+				user.visible_message("<span class='danger'>[user] removes the power cell from [A]!</span>", "You remove the power cell.")
+
+	else if(istype(target,/mob/living/silicon/robot))
+		var/mob/living/silicon/robot/A = target
+		if(A.opened)
+			if(A.cell)
+
+				wrapped = A.cell
+
+				A.cell.add_fingerprint(user)
+				A.cell.updateicon()
+				A.cell.loc = src
+				A.cell = null
 
 				user.visible_message("<span class='danger'>[user] removes the power cell from [A]!</span>", "You remove the power cell.")
 

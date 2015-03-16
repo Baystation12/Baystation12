@@ -156,8 +156,6 @@
 	return 1 // update UIs attached to this object
 
 /obj/machinery/chem_dispenser/attackby(var/obj/item/weapon/reagent_containers/B as obj, var/mob/user as mob)
-	if(isrobot(user))
-		return
 	if(src.beaker)
 		user << "Something is already loaded into the machine."
 		return
@@ -170,6 +168,7 @@
 		user << "You set [B] on the machine."
 		nanomanager.update_uis(src) // update all UIs attached to src
 		return
+	..()
 
 /obj/machinery/chem_dispenser/attack_ai(mob/user as mob)
 	return src.attack_hand(user)
@@ -900,10 +899,11 @@
 	O.loc = src
 	holdingitems += O
 	src.updateUsrDialog()
+	..()
 	return 0
 
 /obj/machinery/reagentgrinder/attack_ai(mob/user as mob)
-	return 0
+	attack_hand(user)
 
 /obj/machinery/reagentgrinder/attack_hand(mob/user as mob)
 	user.set_machine(src)

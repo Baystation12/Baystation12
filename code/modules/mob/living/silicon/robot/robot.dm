@@ -271,6 +271,12 @@ var/list/robot_verbs_default = list(
 			module_sprites["Default"] = "Service2"
 			module_sprites["Drone"] = "drone-service"
 
+		if("Research")
+			module = new /obj/item/weapon/robot_module/research(src)
+			module.channels = list("Science" = 1)
+			module_sprites["Droid"] = "droid-science"
+			module_sprites["Drone"] = "drone-science"
+
 		if("Miner")
 			module = new /obj/item/weapon/robot_module/miner(src)
 			module.channels = list("Supply" = 1)
@@ -290,7 +296,8 @@ var/list/robot_verbs_default = list(
 			module_sprites["Standard"] = "surgeon"
 			module_sprites["Advanced Droid"] = "droid-medical"
 			module_sprites["Needles"] = "medicalrobot"
-			module_sprites["Drone" ] = "drone-medical"
+			module_sprites["Drone - Medical" ] = "drone-medical"
+			module_sprites["Drone - Chemistry" ] = "drone-chemistry"
 
 		if("Surgeon")
 			module = new /obj/item/weapon/robot_module/surgeon(src)
@@ -905,6 +912,10 @@ var/list/robot_verbs_default = list(
 		var/mob/living/carbon/monkey/george = M
 		//they can only hold things :(
 		if(george.get_active_hand() && istype(george.get_active_hand(), /obj/item/weapon/card/id) && check_access(george.get_active_hand()))
+			return 1
+	else if(istype(M, /mob/living/silicon/robot))
+		var/mob/living/silicon/robot/R = M
+		if(check_access(R.get_active_hand()))
 			return 1
 	return 0
 
