@@ -224,21 +224,6 @@
 				A.cell = null
 
 				user.visible_message("<span class='danger'>[user] removes the power cell from [A]!</span>", "You remove the power cell.")
-/*
-	if(!wrapped)
-		//There's some weirdness with items being lost inside the arm. Trying to fix all cases. ~Z
-		for(var/obj/item/thing in src.contents)
-			thing.loc = get_turf(src)
-		return
-
-	if(wrapped.loc != src)
-		wrapped = null
-		return
-
-	src.loc << "<span class='danger'>You drop \the [wrapped].</span>"
-	wrapped.loc = get_turf(src)
-	wrapped = null
-*/
 
 //TODO: Matter decompiler.
 /obj/item/weapon/matter_decompiler
