@@ -1,6 +1,5 @@
 var/global/antag_add_failed // Used in antag type voting.
 var/global/list/additional_antag_types = list()
-
 ///////////////////////////////////
 //Keeps track of all living heads//
 ///////////////////////////////////
@@ -218,7 +217,7 @@ var/global/list/additional_antag_types = list()
 	world << "<B>The current game mode is [capitalize(name)]!</B>"
 	if(round_description) world << "[round_description]"
 	if(round_autoantag) world << "Antagonists will be added to the round automagically as needed."
-	if(antag_templates && antag_templates.len > 1 && master_mode != "secret")
+	if(antag_templates && antag_templates.len)
 		var/antag_summary = "<b>Possible antagonist types:</b> "
 		var/i = 1
 		for(var/datum/antagonist/antag in antag_templates)
@@ -230,11 +229,14 @@ var/global/list/additional_antag_types = list()
 			antag_summary += "[antag.role_text_plural]"
 			i++
 		antag_summary += "."
-		world << "[antag_summary]"
+		if(antag_templates.len > 1 && master_mode != "secret")
+			world << "[antag_summary]"
+		else
+			message_admins("[antag_summary]")
 
 ///can_start()
 ///Checks to see if the game can be setup and ran with the current number of players or whatnot.
-/datum/game_mode/proc/can_start()
+/datum/game_mode/proc/can_start(var/do_not_spawn)
 	var/playerC = 0
 	for(var/mob/new_player/player in player_list)
 		if((player.client)&&(player.ready))
@@ -247,24 +249,16 @@ var/global/list/additional_antag_types = list()
 		if(playerC < required_players)
 			return 0
 
-	// Ensure we can spawn at least the voted roundtype main antagonist type after scaling the max antag counts.
 	// If we can, -try- to spawn the other voted antagonist types. It doesn't really matter if we can't.
-	if(antag_templates && antag_templates.len)
-		var/datum/antagonist/main_antags = antag_templates[1]
-		if(main_antags.attempt_spawn(required_enemies))
-			for(var/datum/antagonist/antag in (antag_templates-main_antags))
-				antag.attempt_spawn()
-			return 1
-
+	if(!do_not_spawn)
+		if(antag_templates && antag_templates.len)
+			var/datum/antagonist/main_antags = antag_templates[1]
+			var/list/candidates = main_antags.get_candidates(required_enemies)
+			if(candidates.len > required_enemies)
+				return 1
+	else
+		return 1
 	return 0
-
-///pre_setup()
-///Attempts to select players for special roles the mode might have.
-/datum/game_mode/proc/pre_setup()
-	if(antag_templates && antag_templates.len)
-		for(var/datum/antagonist/antag in antag_templates)
-			antag.place_all_mobs()
-	return 1
 
 /datum/game_mode/proc/refresh_event_modifiers()
 	if(event_delay_mod_moderate || event_delay_mod_major)
@@ -292,7 +286,7 @@ var/global/list/additional_antag_types = list()
 
 	if(antag_templates && antag_templates.len)
 		for(var/datum/antagonist/antag in antag_templates)
-			antag.create_global_objectives()
+			antag.attempt_spawn(required_enemies)
 			antag.finalize()
 
 	if(emergency_shuttle && auto_recall_shuttle)
@@ -373,10 +367,12 @@ var/global/list/additional_antag_types = list()
 	var/datum/antagonist/spawn_antag
 	var/datum/mind/candidate
 
+	var/from_ghosts
 	if(prob(antag_prob))
 		if(ghost_candidates.len && ghost_antag_templates.len && prob(50))
 			spawn_antag = pick(ghost_antag_templates)
 			candidate = pick(ghost_candidates)
+			from_ghosts = 1
 		else if(antag_candidates.len && living_antag_templates.len)
 			spawn_antag = pick(living_antag_templates)
 			candidate = pick(antag_candidates)
@@ -386,7 +382,7 @@ var/global/list/additional_antag_types = list()
 		return
 
 	if(spawn_antag.can_become_antag(candidate))
-		spawn_antag.attempt_late_spawn(candidate)
+		spawn_antag.attempt_late_spawn(candidate, from_ghosts)
 
 /datum/game_mode/proc/latespawn(mob/living/carbon/human/character)
 

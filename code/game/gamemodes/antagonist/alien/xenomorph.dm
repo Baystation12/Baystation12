@@ -31,7 +31,7 @@ var/datum/antagonist/xenos/xenomorphs
 	if(href_list["move_to_spawn"]) place_mob(href_list["move_to_spawn"])
 
 /datum/antagonist/xenos/get_extra_panel_options(var/datum/mind/player)
-	return "<td><a href='?src=\ref[src];move_to_spawn=\ref[player.current]'>\[move to vent\]</a></td>"
+	return "<a href='?src=\ref[src];move_to_spawn=\ref[player.current]'>\[move to vent\]</a>"
 
 /datum/antagonist/xenos/random_spawn()
 	if(config.aliens_allowed) ..()

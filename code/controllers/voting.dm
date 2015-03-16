@@ -212,14 +212,12 @@ datum/controller/vote
 					if(ticker.current_state >= 2)
 						return 0
 					choices.Add(config.votable_modes)
-					var/list/L = typesof(/datum/game_mode) - /datum/game_mode
 					for (var/F in choices)
-						for (var/T in L)
-							var/datum/game_mode/M = new T(1)
-							if (M.config_tag == F)
-								gamemode_names[M.config_tag] = capitalize(M.name) //It's ugly to put this here but it works
-								additional_text.Add("<td align = 'center'>[M.required_players]</td>")
-								break
+						var/datum/game_mode/M = gamemode_cache[F]
+						if(!M)
+							continue
+						gamemode_names[M.config_tag] = capitalize(M.name) //It's ugly to put this here but it works
+						additional_text.Add("<td align = 'center'>[M.required_players]</td>")
 					gamemode_names["secret"] = "Secret"
 				if("crew_transfer")
 					if(check_rights(R_ADMIN|R_MOD, 0))

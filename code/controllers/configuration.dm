@@ -1,3 +1,5 @@
+var/list/gamemode_cache = list()
+
 /datum/configuration
 	var/server_name = null				// server name (for world name / status)
 	var/server_suffix = 0				// generate numeric suffix based on server port
@@ -197,8 +199,8 @@
 		// I wish I didn't have to instance the game modes in order to look up
 		// their information, but it is the only way (at least that I know of).
 		var/datum/game_mode/M = new T()
-
 		if (M.config_tag)
+			gamemode_cache[M.config_tag] = M // So we don't instantiate them repeatedly.
 			if(!(M.config_tag in modes))		// ensure each mode is added only once
 				log_misc("Adding game mode [M.name] ([M.config_tag]) to configuration.")
 				src.modes += M.config_tag
@@ -206,7 +208,6 @@
 				src.probabilities[M.config_tag] = M.probability
 				if (M.votable)
 					src.votable_modes += M.config_tag
-		del(M)
 	src.votable_modes += "secret"
 
 /datum/configuration/proc/load(filename, type = "config") //the type can also be game_options, in which case it uses a different switch. not making it separate to not copypaste code - Urist
@@ -779,24 +780,20 @@
 /datum/configuration/proc/pick_mode(mode_name)
 	// I wish I didn't have to instance the game modes in order to look up
 	// their information, but it is the only way (at least that I know of).
-	for (var/T in (typesof(/datum/game_mode) - /datum/game_mode))
-		var/datum/game_mode/M = new T()
+	for (var/game_mode in gamemode_cache)
+		var/datum/game_mode/M = gamemode_cache[game_mode]
 		if (M.config_tag && M.config_tag == mode_name)
 			M.create_antagonists()
 			return M
-		del(M)
-	return new /datum/game_mode/extended()
+	return gamemode_cache["extended"]
 
 /datum/configuration/proc/get_runnable_modes()
 	var/list/datum/game_mode/runnable_modes = new
-	for (var/T in (typesof(/datum/game_mode) - /datum/game_mode))
-		var/datum/game_mode/M = new T()
-		//world << "DEBUG: [T], tag=[M.config_tag], prob=[probabilities[M.config_tag]]"
+	for (var/game_mode in gamemode_cache)
+		var/datum/game_mode/M = gamemode_cache[game_mode]
 		if (!(M.config_tag in modes))
-			del(M)
 			continue
 		if (probabilities[M.config_tag]<=0)
-			del(M)
 			continue
 		if (M.can_start())
 			runnable_modes[M] = probabilities[M.config_tag]

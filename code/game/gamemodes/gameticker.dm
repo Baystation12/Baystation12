@@ -76,6 +76,7 @@ var/global/datum/controller/gameticker/ticker
 	if(master_mode=="secret")
 		src.hide_mode = 1
 	var/list/datum/game_mode/runnable_modes
+	var/mode_started
 	if((master_mode=="random") || (master_mode=="secret"))
 		runnable_modes = config.get_runnable_modes()
 		if (runnable_modes.len==0)
@@ -85,6 +86,7 @@ var/global/datum/controller/gameticker/ticker
 		if(secret_force_mode != "secret")
 			var/datum/game_mode/M = config.pick_mode(secret_force_mode)
 			if(M.can_start())
+				mode_started = 1
 				src.mode = config.pick_mode(secret_force_mode)
 		job_master.ResetOccupations()
 		if(!src.mode)
@@ -94,7 +96,7 @@ var/global/datum/controller/gameticker/ticker
 			src.mode = new mtype
 	else
 		src.mode = config.pick_mode(master_mode)
-	if (!src.mode.can_start())
+	if(!mode_started && !src.mode.can_start())
 		world << "<B>Unable to start [mode.name].</B> Not enough players, [mode.required_players] players needed. Reverting to pre-game lobby."
 		del(mode)
 		current_state = GAME_STATE_PREGAME
@@ -103,13 +105,6 @@ var/global/datum/controller/gameticker/ticker
 
 	//Configure mode and assign player to special mode stuff
 	job_master.DivideOccupations() //Distribute jobs
-	var/can_continue = src.mode.pre_setup()//Setup special modes
-	if(!can_continue)
-		del(mode)
-		current_state = GAME_STATE_PREGAME
-		world << "<B>Error setting up [master_mode].</B> Reverting to pre-game lobby."
-		job_master.ResetOccupations()
-		return 0
 
 	if(hide_mode)
 		var/list/modes = new

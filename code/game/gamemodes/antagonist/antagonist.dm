@@ -51,7 +51,6 @@ var/global/list/antag_names_to_ids = list()
 	var/loss_text
 	var/victory_feedback_tag
 	var/loss_feedback_tag
-
 	var/spawn_upper = 5
 	var/spawn_lower = 3
 	var/max_antags = 3
@@ -71,7 +70,7 @@ var/global/list/antag_names_to_ids = list()
 	var/bantype = "Syndicate"
 	var/suspicion_chance = 50
 	var/flags = 0
-
+	var/cur_max = 0
 
 	var/datum/mind/leader
 
@@ -82,6 +81,7 @@ var/global/list/antag_names_to_ids = list()
 	var/list/global_objectives = list()
 	var/list/restricted_jobs = list()
 	var/list/protected_jobs = list()
+	var/list/candidates = list()
 
 /datum/antagonist/New()
 	..()
@@ -89,7 +89,7 @@ var/global/list/antag_names_to_ids = list()
 	if(config.protect_roles_from_antagonist)
 		restricted_jobs |= protected_jobs
 
-/datum/antagonist/proc/attempt_late_spawn(var/datum/mind/player)
+/datum/antagonist/proc/attempt_late_spawn(var/datum/mind/player, var/move_to_spawn)
 
 	var/main_type
 	if(ticker && ticker.mode)
@@ -106,6 +106,11 @@ var/global/list/antag_names_to_ids = list()
 		return 0
 
 	player.current << "<span class='danger'><i>You have been selected this round as an antagonist!</i></span>"
+	add_antagonist(player)
+	equip(player.current)
+	finalize(player)
+	if(move_to_spawn)
+		place_mob(player.current)
 	return
 
 /datum/antagonist/proc/tick()
@@ -122,18 +127,17 @@ var/global/list/antag_names_to_ids = list()
 
 /datum/antagonist/proc/get_panel_entry(var/datum/mind/player)
 
-	var/dat = "<tr>"
-	dat += "<td><b>[role_text]:</b></td>"
-	if(is_antagonist(player))
-		dat += "<td><a href='?src=\ref[player];remove_antagonist=[id]'>\[-\]</a></td>"
-		dat += "<td><a href='?src=\ref[player];equip_antagonist=[id]'>\[equip\]</a></td>"
-		if(starting_locations && starting_locations.len)
-			dat += "<td><a href='?src=\ref[player];move_antag_to_spawn=[id]'>\[move to spawn\]</a></td>"
-	else
-		dat += "<td><a href='?src=\ref[player];add_antagonist=[id]'>\[+\]</a></td>"
+	var/dat = "<tr><td><b>[role_text]:</b>"
 	var/extra = get_extra_panel_options(player)
-	if(extra) dat += "[extra]"
-	dat += "</tr>"
+	if(is_antagonist(player))
+		dat += "<a href='?src=\ref[player];remove_antagonist=[id]'>\[-\]</a>"
+		dat += "<a href='?src=\ref[player];equip_antagonist=[id]'>\[equip\]</a>"
+		if(starting_locations && starting_locations.len)
+			dat += "<a href='?src=\ref[player];move_antag_to_spawn=[id]'>\[move to spawn\]</a>"
+		if(extra) dat += "[extra]"
+	else
+		dat += "<a href='?src=\ref[player];add_antagonist=[id]'>\[+\]</a>"
+	dat += "</td></tr>"
 
 	return dat
 
@@ -152,25 +156,23 @@ var/global/list/antag_names_to_ids = list()
 /datum/antagonist/proc/get_antag_count()
 	return current_antagonists ? current_antagonists.len : 0
 
-/datum/antagonist/proc/attempt_spawn(var/lower_count, var/upper_count, var/ghosts_only)
 
-	world << "Attempting to spawn [id]."
+/datum/antagonist/proc/get_candidates(var/lower_count, var/upper_count, var/ghosts_only)
 
+	candidates = list()
 	var/main_type
 	if(ticker && ticker.mode)
 		if(ticker.mode.antag_tag && ticker.mode.antag_tag == id)
 			main_type = 1
 	else
-		world << "Ticker uninitialized, failed."
-		return 0
+		return list()
 
 	var/cur_max = (main_type ? max_antags_round : max_antags)
 	if(ticker.mode.antag_scaling_coeff)
 		cur_max = Clamp((ticker.mode.num_players()/ticker.mode.antag_scaling_coeff), 1, cur_max)
 
 	if(get_antag_count() >= cur_max)
-		world << "Antag count: [get_antag_count()] greater than [cur_max], failed."
-		return 0
+		return list()
 
 	// Sanity.
 	if(lower_count)
@@ -189,66 +191,43 @@ var/global/list/antag_names_to_ids = list()
 	if(upper_count < lower_count)
 		upper_count = lower_count
 
-
-	// Get the raw list of potential players.
-	var/req_num = 0
-	var/list/candidates = ticker.mode.get_players_for_role(role_type, id)
-	if(!candidates) candidates = list()
-
-	world << "Candidate count is [candidates.len]."
+	candidates = list() // Clear.
+	candidates = ticker.mode.get_players_for_role(role_type, id)
 
 	// Prune restricted jobs and status.
 	for(var/datum/mind/player in candidates)
 		if((ghosts_only && !istype(player.current, /mob/dead)) || (player.assigned_role in restricted_jobs))
-			world << "Removing [player.name]."
 			candidates -= player
 
-	world << "Candidate count is now [candidates.len]."
+	if((!candidates.len) || candidates.len < lower_count)
+		return list()
+
+	return candidates
+
+/datum/antagonist/proc/attempt_spawn(var/lower_count, var/upper_count, var/ghosts_only)
+
+	world << "Attempting to spawn."
+	// Get the raw list of potential players.
+	candidates = get_candidates(lower_count, upper_count, ghosts_only)
 
 	// Update our boundaries.
-	if((!candidates.len) || candidates.len < lower_count)
-		world << "[candidates.len] not set or below [lower_count], failed."
+	if(!candidates.len)
+		world << "No candidates."
 		return 0
-	else if(candidates.len < upper_count)
-		req_num = candidates.len
-	else
-		req_num = upper_count
 
 	//Grab candidates randomly until we have enough.
-	while(req_num > 0)
+	while(candidates.len)
 		var/datum/mind/player = pick(candidates)
 		current_antagonists |= player
+		// Update job and role.
+		player.special_role = role_text
+		if(flags & ANTAG_OVERRIDE_JOB)
+			player.assigned_role = "MODE"
 		candidates -= player
-		req_num--
-
-	// This will be used in equip() and greet(). Random due to random order of candidates being grabbed.
-	if(flags & ANTAG_HAS_LEADER)
-		leader = current_antagonists[1]
-
-	// Generate first stage antagonists.
-	for(var/datum/mind/player in current_antagonists)
-		apply(player)
-		equip(player.current)
-		finalize(player)
-
-	spawn(1)
-		if(spawn_announcement)
-			if(spawn_announcement_delay)
-				sleep(spawn_announcement_delay)
-			if(spawn_announcement_sound)
-				command_announcement.Announce("[spawn_announcement]", "[spawn_announcement_title ? spawn_announcement_title : "Priority Alert"]", new_sound = spawn_announcement_sound)
-			else
-				command_announcement.Announce("[spawn_announcement]", "[spawn_announcement_title ? spawn_announcement_title : "Priority Alert"]")
-
-	world << "Success."
+	world << "Done."
 	return 1
 
 /datum/antagonist/proc/apply(var/datum/mind/player)
-
-	// Update job and role.
-	player.special_role = role_text
-	if(flags & ANTAG_OVERRIDE_JOB)
-		player.assigned_role = "MODE"
 
 	// Get the mob.
 	if((flags & ANTAG_OVERRIDE_MOB) && (!player.current || (mob_path && !istype(player.current, mob_path))))
@@ -334,13 +313,20 @@ var/global/list/antag_names_to_ids = list()
 	// This will fail if objectives have already been generated.
 	create_global_objectives()
 
+	if(flags & ANTAG_HAS_LEADER)
+		leader = current_antagonists[1]
+
 	if(target)
+		apply(target)
+		equip(target.current)
 		create_objectives(target)
 		update_icons_added(target)
 		greet(target)
 		return
 
 	for(var/datum/mind/player in current_antagonists)
+		apply(player)
+		equip(player.current)
 		create_objectives(player)
 		update_icons_added(player)
 		greet(player)
@@ -348,17 +334,29 @@ var/global/list/antag_names_to_ids = list()
 	if(flags & ANTAG_HAS_NUKE)
 		make_nuke(leader)
 
+	place_all_mobs()
+
+	spawn(1)
+		if(spawn_announcement)
+			if(spawn_announcement_delay)
+				sleep(spawn_announcement_delay)
+			if(spawn_announcement_sound)
+				command_announcement.Announce("[spawn_announcement]", "[spawn_announcement_title ? spawn_announcement_title : "Priority Alert"]", new_sound = spawn_announcement_sound)
+			else
+				command_announcement.Announce("[spawn_announcement]", "[spawn_announcement_title ? spawn_announcement_title : "Priority Alert"]")
+
+
 /datum/antagonist/proc/print_player_summary()
 
 	if(!current_antagonists.len)
 		return 0
 
-	var/text = "<BR/><FONT size = 2><B>The [current_antagonists.len == 1 ? "[role_text] was" : "[role_text_plural] were"]:</B></FONT>"
+	var/text = "<br><font size = 2><b>The [current_antagonists.len == 1 ? "[role_text] was" : "[role_text_plural] were"]:</b></font>"
 	for(var/datum/mind/P in current_antagonists)
 		text += print_player_full(P)
 		text += get_special_objective_text(P)
 		var/failed
-		if(!global_objectives && P.objectives)
+		if(!global_objectives && P.objectives && P.objectives.len)
 			var/num = 1
 			for(var/datum/objective/O in P.objectives)
 				text += print_objective(O, num)
@@ -376,7 +374,7 @@ var/global/list/antag_names_to_ids = list()
 			else
 				text += "<br><font color='green'><B>The [role_text] was successful!</B></font>"
 
-	if(global_objectives)
+	if(global_objectives && global_objectives.len)
 		text += "<BR/><FONT size = 2>Their objectives were:<FONT>"
 		var/num = 1
 		for(var/datum/objective/O in global_objectives)

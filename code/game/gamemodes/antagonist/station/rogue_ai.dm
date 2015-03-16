@@ -33,19 +33,18 @@ var/datum/antagonist/rogue_ai/malf
 	if(hack_time <=0)
 		capture_station()
 
-/datum/antagonist/rogue_ai/attempt_spawn()
-
-	var/list/candidates = ticker.mode.get_players_for_role(role_type, id)
+/datum/antagonist/rogue_ai/get_candidates()
+	candidates = ticker.mode.get_players_for_role(role_type, id)
 	for(var/datum/mind/player in candidates)
 		if(player.assigned_role != "AI")
 			candidates -= player
-
 	if(!candidates.len)
-		return 0
+		return list()
+
+/datum/antagonist/rogue_ai/attempt_spawn()
 
 	var/datum/mind/player = pick(candidates)
 	current_antagonists |= player
-	apply(player)
 	return 1
 
 /datum/antagonist/rogue_ai/equip(var/mob/living/silicon/ai/player)
@@ -126,9 +125,6 @@ var/datum/antagonist/rogue_ai/malf
 	set category = "Abilities"
 	set name = "System Override"
 	set desc = "Begin taking over the station."
-	if (!istype(ticker.mode,/datum/game_mode/malfunction))
-		usr << "You cannot begin a takeover in this round type!"
-		return
 	if (malf.revealed)
 		usr << "You've already begun your takeover."
 		return
