@@ -684,7 +684,8 @@
 
 	New()
 		..()
-		reagents.add_reagent("protein", 3)
+		reagents.add_reagent("protein", 6)
+		reagents.add_reagent("pacid",6)
 		src.bitesize = 6
 
 /obj/item/weapon/reagent_containers/food/snacks/meatball
