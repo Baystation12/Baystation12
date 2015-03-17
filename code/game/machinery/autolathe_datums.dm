@@ -76,6 +76,16 @@
 	name = "wrench"
 	path = /obj/item/weapon/wrench
 	category = "Tools"
+	
+/datum/autolathe/recipe/hatchet
+	name = "hatchet"
+	path = /obj/item/weapon/hatchet
+	category = "Tools"
+	
+/datum/autolathe/recipe/minihoe
+	name = "mini hoe"
+	path = /obj/item/weapon/minihoe
+	category = "Tools"
 
 /datum/autolathe/recipe/radio_headset
 	name = "radio headset"
@@ -346,6 +356,12 @@
 	hidden = 1
 	category = "Arms and Ammunition"
 
+/datum/autolathe/recipe/tacknife
+	name = "tactical knife"
+	path = /obj/item/weapon/hatchet/tacknife
+	hidden = 1
+	category = "Arms and Ammunition"
+
 /datum/autolathe/recipe/stunshell
 	name = "ammunition (stun cartridge, shotgun)"
 	path = /obj/item/ammo_casing/shotgun/stunshell
@@ -375,3 +391,5 @@
 	path = /obj/item/weapon/handcuffs
 	hidden = 1
 	category = "General"
+
+

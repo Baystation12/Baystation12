@@ -319,7 +319,7 @@ emp_act
 		if (O.throw_source)
 			var/distance = get_dist(O.throw_source, loc)
 			miss_chance = max(15*(distance-2), 0)
-		zone = get_zone_with_miss_chance(zone, src, miss_chance)
+		zone = get_zone_with_miss_chance(zone, src, miss_chance, ranged_attack=1)
 
 		if(!zone)
 			visible_message("\blue \The [O] misses [src] narrowly!")

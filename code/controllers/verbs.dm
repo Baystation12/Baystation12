@@ -39,10 +39,6 @@
 	usr = null
 	src = null
 	switch(controller)
-		if("Master")
-			new /datum/controller/game_controller()
-			master_controller.process()
-			feedback_add_details("admin_verb","RMC")
 		if("Failsafe")
 			new /datum/controller/failsafe()
 			feedback_add_details("admin_verb","RFailsafe")

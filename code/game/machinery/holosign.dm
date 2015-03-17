@@ -5,7 +5,9 @@
 	icon = 'icons/obj/holosign.dmi'
 	icon_state = "sign_off"
 	layer = 4
+	use_power = 1
 	idle_power_usage = 2
+	active_power_usage = 4
 	var/lit = 0
 	var/id = null
 	var/on_icon = "sign_on"
@@ -14,11 +16,8 @@
 	if (stat & (BROKEN|NOPOWER))
 		return
 	lit = !lit
-	use_power = lit ? 1 : 0
+	use_power = lit ? 2 : 1
 	update_icon()
-
-/obj/machinery/holosign/process()
-	return
 
 /obj/machinery/holosign/update_icon()
 	if (!lit)
