@@ -192,6 +192,29 @@
 				src.show_message(text("\t []My [] is [].",status=="OK"?"\blue ":"\red ",org.display_name,status),1)
 			if((SKELETON in H.mutations) && (!H.w_uniform) && (!H.wear_suit))
 				H.play_xylophone()
+		else if (on_fire)
+			playsound(src.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
+			if (M.on_fire)
+				M.visible_message("<span class='warning'>[M] tries to pat out [src]'s flames, but to no avail!</span>", \
+				"<span class='warning'>You try to pat out [src]'s flames, but to no avail! Put yourself out first!</span>")
+			else
+				M.visible_message("<span class='warning'>[M] tries to pat out [src]'s flames!</span>", \
+				"<span class='warning'>You try to pat out [src]'s flames! Hot!</span>")
+				if(do_mob(M, src, 15))
+					if (prob(10) && (M.fire_stacks <= 0))
+						src.fire_stacks -= 2
+						M.fire_stacks += 1
+					M.IgniteMob()
+					if (M.on_fire)
+						M.visible_message("<span class='danger'>The fire spreads from [src] to [M]!</span>", \
+						"<span class='danger'>The fire spreads to you as well!</span>")
+					else
+						src.fire_stacks -= 3 //Less effective than stop, drop, and roll
+						if (src.fire_stacks <= 0)
+							M.visible_message("<span class='warning'>[M] successfully pats out [src]'s flames.</span>", \
+							"<span class='warning'>You successfully pat out [src]'s flames.</span>")
+							src.ExtinguishMob()
+							src.fire_stacks = 0
 		else
 			var/t_him = "it"
 			if (src.gender == MALE)
@@ -218,7 +241,11 @@
 				else
 					M.visible_message("<span class='notice'>[M] hugs [src] to make [t_him] feel better!</span>", \
 								"<span class='notice'>You hug [src] to make [t_him] feel better!</span>")
-
+				if(M.fire_stacks >= (src.fire_stacks + 3))
+					src.fire_stacks += 1
+					M.fire_stacks -= 1
+				if(M.on_fire)
+					src.IgniteMob()
 			AdjustParalysis(-3)
 			AdjustStunned(-3)
 			AdjustWeakened(-3)
