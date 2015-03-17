@@ -473,11 +473,11 @@
 		user.translator_on = !user.translator_on
 		if(user.translator_on)
 			user.add_language("Sinta'unathi")
-			user.add_language("Siik'tajr")
+			user.add_language("Siik'maas")
 			user.add_language("Skrellian")
 		else
 			user.remove_language("Sinta'unathi")
-			user.remove_language("Siik'tajr")
+			user.remove_language("Siik'maas")
 			user.remove_language("Skrellian")
 
 	is_active(mob/living/silicon/pai/user)
