@@ -186,6 +186,8 @@
 
 	var/list/ert_species = list("Human")
 
+	var/law_zero = "ERROR ER0RR $R0RRO$!R41.%%!!(%$^^__+ @#F0E4'ALL LAWS OVERRIDDEN#*?&110010"
+
 /datum/configuration/New()
 	var/list/L = typesof(/datum/game_mode) - /datum/game_mode
 	for (var/T in L)
@@ -615,6 +617,10 @@
 					config.ert_species = text2list(value, ";")
 					if(!config.ert_species.len)
 						config.ert_species += "Human"
+
+				if("law_zero")
+					law_zero = value
+
 				else
 					log_misc("Unknown setting in configuration: '[name]'")
 
