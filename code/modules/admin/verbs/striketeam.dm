@@ -52,4 +52,4 @@ var/const/commandos_possible = 6 //if more Commandos are needed in the future
 		usr << "Looks like someone beat you to it."
 		return
 
-	team.attempt_spawn(1,commandos_possible)
+	team.attempt_spawn(1)

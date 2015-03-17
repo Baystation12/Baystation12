@@ -69,7 +69,9 @@
 		id.registered_name = player.real_name
 
 /datum/antagonist/proc/random_spawn()
-	return attempt_spawn(null,null,(flags & (ANTAG_OVERRIDE_MOB|ANTAG_OVERRIDE_JOB)))
+	create_global_objectives()
+	attempt_spawn(flags & (ANTAG_OVERRIDE_MOB|ANTAG_OVERRIDE_JOB))
+	finalize()
 
 /datum/antagonist/proc/create_id(var/assignment, var/mob/living/carbon/human/player)
 

@@ -27,15 +27,3 @@
 	if(antag_type == id || antag_type == role_text)
 		return 1
 	return 0
-
-/datum/antagonist/proc/get_candidates(var/ghosts_only)
-
-	candidates = list() // Clear.
-	candidates = ticker.mode.get_players_for_role(role_type, id)
-
-	// Prune restricted jobs and status.
-	for(var/datum/mind/player in candidates)
-		if((ghosts_only && !istype(player.current, /mob/dead)) || (player.assigned_role in restricted_jobs))
-			candidates -= player
-
-	return candidates

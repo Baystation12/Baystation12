@@ -12,7 +12,7 @@
 		place_mob(player.current)
 	return
 
-/datum/antagonist/proc/update_cur_max(var/lower_count, var/upper_count)
+/datum/antagonist/proc/update_cur_max()
 
 	candidates = list()
 	var/main_type
@@ -26,16 +26,15 @@
 	if(ticker.mode.antag_scaling_coeff)
 		cur_max = Clamp((ticker.mode.num_players()/ticker.mode.antag_scaling_coeff), 1, cur_max)
 
-/datum/antagonist/proc/attempt_spawn(var/lower_count, var/upper_count, var/ghosts_only)
+/datum/antagonist/proc/attempt_spawn(var/ghosts_only)
 
-	world << "Attempting to spawn."
 	// Get the raw list of potential players.
-	update_cur_max(lower_count, upper_count)
+	update_cur_max()
 	candidates = get_candidates(ghosts_only)
 
 	// Update our boundaries.
 	if(!candidates.len)
-		world << "No candidates."
+		world << "Somehow there are no antagonist candidates."
 		return 0
 
 	//Grab candidates randomly until we have enough.
@@ -47,7 +46,6 @@
 		if(flags & ANTAG_OVERRIDE_JOB)
 			player.assigned_role = "MODE"
 		candidates -= player
-	world << "Done."
 	return 1
 
 /datum/antagonist/proc/place_mob(var/mob/living/mob)
@@ -76,3 +74,13 @@
 		BITSET(player.current.hud_updateflag, SPECIALROLE_HUD)
 		return 1
 	return 0
+
+/datum/antagonist/proc/get_candidates(var/ghosts_only)
+
+	candidates = list() // Clear.
+	candidates = ticker.mode.get_players_for_role(role_type, id)
+	// Prune restricted jobs and status.
+	for(var/datum/mind/player in candidates)
+		if((ghosts_only && !istype(player.current, /mob/dead)) || (player.assigned_role in restricted_jobs))
+			candidates -= player
+	return candidates

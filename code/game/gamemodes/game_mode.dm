@@ -258,6 +258,14 @@ var/global/list/additional_antag_types = list()
 				return 1
 	else
 		return 1
+
+	// Attempt to mark folks down as ready to go. Don't finalize until post setup.
+	var/datum/antagonist/main_antags = antag_templates[1]
+	var/list/candidates = main_antags.get_candidates()
+	if(candidates.len >= required_enemies)
+		for(var/datum/antagonist/antag in antag_templates)
+			antag.attempt_spawn()
+		return 1
 	return 0
 
 /datum/game_mode/proc/refresh_event_modifiers()
@@ -286,7 +294,6 @@ var/global/list/additional_antag_types = list()
 
 	if(antag_templates && antag_templates.len)
 		for(var/datum/antagonist/antag in antag_templates)
-			antag.attempt_spawn(required_enemies)
 			antag.finalize()
 
 	if(emergency_shuttle && auto_recall_shuttle)
