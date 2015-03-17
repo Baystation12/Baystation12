@@ -778,6 +778,9 @@ var/list/be_special_flags = list(
 
 #define NANO_IGNORE_DISTANCE 1
 
+// Area flags, possibly more to come
+#define RAD_SHIELDED 1	//Shielded from radiation, clearly
+
 // Robot AI notifications
 #define ROBOT_NOTIFICATION_NEW_UNIT 1
 #define ROBOT_NOTIFICATION_NEW_NAME 2
