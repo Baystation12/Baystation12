@@ -34,9 +34,6 @@ datum/controller/game_controller/New()
 datum/controller/game_controller/proc/setup()
 	world.tick_lag = config.Ticklag
 
-	//Create the asteroid Z-level.
-	new /datum/random_map(null,13,32,5,217,223)
-
 	spawn(20)
 		createRandomZlevel()
 

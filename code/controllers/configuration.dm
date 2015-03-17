@@ -125,6 +125,7 @@ var/list/gamemode_cache = list()
 	var/use_loyalty_implants = 0
 
 	var/welder_vision = 1
+	var/generate_asteroid = 0
 
 	//Used for modifying movement speed for mobs.
 	//Unversal modifiers
@@ -308,6 +309,9 @@ var/list/gamemode_cache = list()
 
 				if ("mentors")
 					config.mods_are_mentors = 1
+
+				if ("generate_asteroid")
+					config.generate_asteroid = 1
 
 				if("allow_admin_ooccolor")
 					config.allow_admin_ooccolor = 1
