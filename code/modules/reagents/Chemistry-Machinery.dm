@@ -870,8 +870,8 @@
 
 	if(istype(O,/obj/item/weapon/storage/bag/plants))
 		var/failed = 1
-		for (var/obj/item/G in O.contents)
-			if(!O.reagents || !O.reagents.total_volume)
+		for(var/obj/item/G in O.contents)
+			if(!G.reagents || !G.reagents.total_volume)
 				continue
 			failed = 0
 			O.contents -= G
@@ -885,9 +885,9 @@
 			return 1
 
 		if(!O.contents.len)
-			user << "You fill \the [src]."
+			user << "You empty \the [O] into \the [src]."
 		else
-			user << "You fill \the [src]. Some of the things in the plant bag aren't suitable."
+			user << "You fill \the [src] from \the [O]."
 
 		src.updateUsrDialog()
 		return 0
