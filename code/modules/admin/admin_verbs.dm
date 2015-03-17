@@ -47,6 +47,7 @@ var/list/admin_verbs_admin = list(
 	/client/proc/check_words,			/*displays cult-words*/
 	/client/proc/check_ai_laws,			/*shows AI and borg laws*/
 	/client/proc/rename_silicon,		/*properly renames silicons*/
+	/client/proc/manage_silicon_laws,	/* Allows viewing and editing silicon laws. */
 	/client/proc/check_antagonists,
 	/client/proc/admin_memo,			/*admin memo system. show/delete/write. +SERVER needed to delete admin memos of others*/
 	/client/proc/dsay,					/*talk in deadchat using our ckey/fakekey*/
@@ -716,7 +717,7 @@ var/list/admin_verbs_mentor = list(
 	if(holder)
 		src.holder.output_ai_laws()
 
-/client/proc/rename_silicon(mob/living/silicon/S in world)
+/client/proc/rename_silicon(mob/living/silicon/S in mob_list)
 	set name = "Rename Silicon"
 	set category = "Admin"
 
@@ -729,6 +730,18 @@ var/list/admin_verbs_mentor = list(
 			admin_log_and_message_admins("has renamed the silicon '[S.real_name]' to '[new_name]'")
 			S.SetName(new_name)
 	feedback_add_details("admin_verb","RAI") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+
+/client/proc/manage_silicon_laws(mob/living/silicon/S in mob_list)
+	set name = "Manage Silicon Laws"
+	set category = "Admin"
+
+	if(!istype(S))
+		return
+
+	if(holder)
+		S.subsystem_law_manager()
+	admin_log_and_message_admins("has opened [S]'s law manager.")
+	feedback_add_details("admin_verb","MSL") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/change_human_appearance_admin(mob/living/carbon/human/H in world)
 	set name = "Change Mob Appearance - Admin"
@@ -743,7 +756,7 @@ var/list/admin_verbs_mentor = list(
 		H.change_appearance(APPEARANCE_ALL, usr, usr, check_species_whitelist = 0)
 	feedback_add_details("admin_verb","CHAA") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
-/client/proc/change_human_appearance_self(mob/living/carbon/human/H in world)
+/client/proc/change_human_appearance_self(mob/living/carbon/human/H in mob_list)
 	set name = "Change Mob Appearance - Self"
 	set desc = "Allows the mob to change its appearance"
 	set category = "Admin"
@@ -776,7 +789,7 @@ var/list/admin_verbs_mentor = list(
 //	feedback_add_details("admin_verb","MP") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	return
 
-/client/proc/editappear(mob/living/carbon/human/M as mob in world)
+/client/proc/editappear(mob/living/carbon/human/M as mob in mob_list)
 	set name = "Edit Appearance"
 	set category = "Fun"
 
