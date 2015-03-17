@@ -870,7 +870,8 @@
 	name = "grass"
 	seed_name = "grass"
 	display_name = "grass"
-	chems = list("nutriment" = list(1,20), "orangejuice" = list(1,20))
+	chems = list("nutriment" = list(1,20))
+	kitchen_tag = "grass"
 
 /datum/seed/grass/New()
 	..()
