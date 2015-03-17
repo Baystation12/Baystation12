@@ -6,10 +6,8 @@ var/datum/antagonist/renegade/renegades
 	welcome_text = "Your own safety matters above all else, trust no one and kill anyone who gets in your way. However, armed as you are, now would be the perfect time to settle that score or grab that pair of yellow gloves you've been eyeing..."
 	id = MODE_RENEGADE
 	flags = ANTAG_SUSPICIOUS | ANTAG_IMPLANT_IMMUNE | ANTAG_RANDSPAWN | ANTAG_VOTABLE
-	spawn_lower = 1
-	spawn_upper = 5
-	max_antags = 200 // No upper limit.
-	max_antags_round = 200
+	max_antags = 5
+	max_antags_round = 7
 
 	var/list/spawn_guns = list(
 		/obj/item/weapon/gun/energy/taser,

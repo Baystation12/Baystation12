@@ -8,8 +8,6 @@ var/datum/antagonist/ert/ert
 	role_text_plural = "Emergency Responders"
 	welcome_text = "As member of the Emergency Response Team, you answer only to your leader and CentComm officials."
 	leader_welcome_text = "As leader of the Emergency Response Team, you answer only to CentComm, and have authority to override the Captain where it is necessary to achieve your mission goals. It is recommended that you attempt to cooperate with the captain where possible, however."
-	spawn_lower = 1
-	spawn_upper = 5
 	max_antags = 5
 	max_antags_round = 5 // ERT mode?
 

@@ -10,10 +10,8 @@ var/datum/antagonist/xenos/xenomorphs
 	flags = ANTAG_OVERRIDE_MOB | ANTAG_RANDSPAWN | ANTAG_OVERRIDE_JOB | ANTAG_VOTABLE
 	welcome_text = "Hiss! You are a larval alien. Hide and bide your time until you are ready to evolve."
 
-	spawn_upper = 5
-	spawn_lower = 3
-	max_antags = 200 // No upper limit.
-	max_antags_round = 200 // No upper limit.
+	max_antags = 5
+	max_antags_round = 8
 
 	spawn_announcement = "Unidentified lifesigns detected coming aboard the station. Secure any exterior access, including ducting and ventilation."
 	spawn_announcement_title = "Lifesign Alert"
