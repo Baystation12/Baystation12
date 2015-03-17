@@ -774,6 +774,5 @@ var/list/be_special_flags = list(
 
 #define DEFAULT_JOB_TYPE /datum/job/assistant
 
-// Area flags
-#define MONITORED 1	//For motion alarms and turrets
-#define RAD_SHIELDED 2	//Shielded from radiation, clearly
+// Area flags, possibly more to come
+#define RAD_SHIELDED 1	//Shielded from radiation, clearly
