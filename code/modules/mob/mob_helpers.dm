@@ -1,4 +1,3 @@
-
 // fun if you want to typecast humans/monkeys/etc without writing long path-filled lines.
 /proc/ishuman(A)
 	if(istype(A, /mob/living/carbon/human))
@@ -8,6 +7,12 @@
 /proc/isalien(A)
 	if(istype(A, /mob/living/carbon/alien))
 		return 1
+	return 0
+
+/proc/isxenomorph(A)
+	if(istype(A, /mob/living/carbon/human))
+		var/mob/living/carbon/human/H = A
+		return istype(H.species, /datum/species/xenos)
 	return 0
 
 /proc/ismonkey(A)
@@ -119,6 +124,20 @@ proc/isnewplayer(A)
 proc/hasorgans(A)
 	return ishuman(A)
 
+proc/iscuffed(A)
+	if(istype(A, /mob/living/carbon))
+		var/mob/living/carbon/C = A
+		if(C.handcuffed)
+			return 1
+	return 0
+
+proc/hassensorlevel(A, var/level)
+	var/mob/living/carbon/human/H = A
+	if(istype(H) && istype(H.w_uniform, /obj/item/clothing/under))
+		var/obj/item/clothing/under/U = H.w_uniform
+		return U.sensor_mode >= level
+	return 0
+
 /proc/hsl2rgb(h, s, l)
 	return //TODO: Implement
 
@@ -228,11 +247,17 @@ var/list/global/organ_rel_size = list(
 	n = length(n)
 	var/p = null
 	p = 1
+	var/intag = 0
 	while(p <= n)
-		if ((copytext(te, p, p + 1) == " " || prob(pr)))
-			t = text("[][]", t, copytext(te, p, p + 1))
+		var/char = copytext(te, p, p + 1)
+		if (char == "<") //let's try to not break tags
+			intag = !intag
+		if (intag || char == " " || prob(pr))
+			t = text("[][]", t, char)
 		else
 			t = text("[]*", t)
+		if (char == ">")
+			intag = !intag
 		p++
 	return t
 
@@ -280,7 +305,7 @@ proc/slur(phrase)
 						n_letter = text("[n_letter]-[n_letter]")
 		t = text("[t][n_letter]")//since the above is ran through for each letter, the text just adds up back to the original word.
 		p++//for each letter p is increased to find where the next letter will be.
-	return copytext(sanitize(t),1,MAX_MESSAGE_LEN)
+	return sanitize(copytext(t,1,MAX_MESSAGE_LEN))
 
 
 proc/Gibberish(t, p)//t is the inputted message, and any value higher than 70 for p will cause letters to be replaced instead of added
@@ -327,7 +352,7 @@ It's fairly easy to fix if dealing with single letters but not so much with comp
 			n_letter = text("[n_letter]")
 		t = text("[t][n_letter]")
 		p=p+n_mod
-	return copytext(sanitize(t),1,MAX_MESSAGE_LEN)
+	return sanitize(copytext(t,1,MAX_MESSAGE_LEN))
 
 
 /proc/shake_camera(mob/M, duration, strength=1)
@@ -335,6 +360,8 @@ It's fairly easy to fix if dealing with single letters but not so much with comp
 		return
 	M.shakecamera = 1
 	spawn(1)
+		if(!M.client)
+			return
 
 		var/atom/oldeye=M.client.eye
 		var/aiEyeFlag = 0
@@ -414,6 +441,13 @@ var/list/intents = list("help","disarm","grab","hurt")
 			else
 				hud_used.action_intent.icon_state = "help"
 
+proc/is_blind(A)
+	if(istype(A, /mob/living/carbon))
+		var/mob/living/carbon/C = A
+		if(C.sdisabilities & BLIND || C.blinded)
+			return 1
+	return 0
+
 /proc/broadcast_security_hud_message(var/message, var/broadcast_source)
 	broadcast_hud_message(message, broadcast_source, sec_hud_users, /obj/item/clothing/glasses/hud/security)
 
@@ -426,3 +460,90 @@ var/list/intents = list("help","disarm","grab","hurt")
 		var/turf/targetturf = get_turf(M)
 		if((targetturf.z == sourceturf.z))
 			M.show_message("<span class='info'>\icon[icon] [message]</span>", 1)
+
+/proc/mobs_in_area(var/area/A)
+	var/list/mobs = new
+	for(var/mob/living/M in mob_list)
+		if(get_area(M) == A)
+			mobs += M
+	return mobs
+
+//Direct dead say used both by emote and say
+//It is somewhat messy. I don't know what to do.
+//I know you can't see the change, but I rewrote the name code. It is significantly less messy now
+/proc/say_dead_direct(var/message, var/mob/subject = null)
+	var/name
+	var/keyname
+	if(subject && subject.client)
+		var/client/C = subject.client
+		keyname = (C.holder && C.holder.fakekey) ? C.holder.fakekey : C.key
+		if(C.mob) //Most of the time this is the dead/observer mob; we can totally use him if there is no better name
+			var/mindname
+			var/realname = C.mob.real_name
+			if(C.mob.mind)
+				mindname = C.mob.mind.name
+				if(C.mob.mind.original && C.mob.mind.original.real_name)
+					realname = C.mob.mind.original.real_name
+			if(mindname && mindname != realname)
+				name = "[realname] died as [mindname]"
+			else
+				name = realname
+
+	for(var/mob/M in player_list)
+		if(M.client && ((!istype(M, /mob/new_player) && M.stat == DEAD) || (M.client.holder && !is_mentor(M.client))) && (M.client.prefs.toggles & CHAT_DEAD))
+			var/follow
+			var/lname
+			if(subject)
+				if(subject != M)
+					follow = "(<a href='byond://?src=\ref[M];track=\ref[subject]'>follow</a>) "
+				if(M.stat != DEAD && M.client.holder)
+					follow = "(<a href='?src=\ref[M.client.holder];adminplayerobservejump=\ref[subject]'>JMP</a>) "
+				var/mob/dead/observer/DM
+				if(istype(subject, /mob/dead/observer))
+					DM = subject
+				if(M.client.holder) 							// What admins see
+					lname = "[keyname][(DM && DM.anonsay) ? "*" : (DM ? "" : "^")] ([name])"
+				else
+					if(DM && DM.anonsay)						// If the person is actually observer they have the option to be anonymous
+						lname = "Ghost of [name]"
+					else if(DM)									// Non-anons
+						lname = "[keyname] ([name])"
+					else										// Everyone else (dead people who didn't ghost yet, etc.)
+						lname = name
+				lname = "<span class='name'>[lname]</span> "
+			M << "<span class='deadsay'>" + create_text_tag("dead", "DEAD:", M.client) + " [lname][follow][message]</span>"
+
+//Announces that a ghost has joined/left, mainly for use with wizards
+/proc/announce_ghost_joinleave(O, var/joined_ghosts = 1, var/message = "")
+	var/client/C
+	//Accept any type, sort what we want here
+	if(istype(O, /mob))
+		var/mob/M = O
+		if(M.client)
+			C = M.client
+	else if(istype(O, /client))
+		C = O
+	else if(istype(O, /datum/mind))
+		var/datum/mind/M = O
+		if(M.current && M.current.client)
+			C = M.current.client
+		else if(M.original && M.original.client)
+			C = M.original.client
+
+	if(C)
+		var/name
+		if(C.mob)
+			var/mob/M = C.mob
+			if(M.mind && M.mind.name)
+				name = M.mind.name
+			if(M.real_name && M.real_name != name)
+				if(name)
+					name += " ([M.real_name])"
+				else
+					name = M.real_name
+		if(!name)
+			name = (C.holder && C.holder.fakekey) ? C.holder.fakekey : C.key
+		if(joined_ghosts)
+			say_dead_direct("The ghost of <span class='name'>[name]</span> now [pick("skulks","lurks","prowls","creeps","stalks")] among the dead. [message]")
+		else
+			say_dead_direct("<span class='name'>[name]</span> no longer [pick("skulks","lurks","prowls","creeps","stalks")] in the realm of the dead. [message]")

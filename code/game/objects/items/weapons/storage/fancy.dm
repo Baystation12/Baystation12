@@ -24,16 +24,16 @@
 	src.icon_state = "[src.icon_type]box[total_contents]"
 	return
 
-/obj/item/weapon/storage/fancy/examine()
-	set src in oview(1)
-
-	..()
+/obj/item/weapon/storage/fancy/examine(mob/user)
+	if(!..(user, 1))
+		return
+	
 	if(contents.len <= 0)
-		usr << "There are no [src.icon_type]s left in the box."
+		user << "There are no [src.icon_type]s left in the box."
 	else if(contents.len == 1)
-		usr << "There is one [src.icon_type] left in the box."
+		user << "There is one [src.icon_type] left in the box."
 	else
-		usr << "There are [src.contents.len] [src.icon_type]s in the box."
+		user << "There are [src.contents.len] [src.icon_type]s in the box."
 
 	return
 
@@ -69,7 +69,6 @@
 	item_state = "candlebox5"
 	storage_slots = 5
 	throwforce = 2
-	flags = TABLEPASS
 	slot_flags = SLOT_BELT
 
 
@@ -133,7 +132,6 @@
 	item_state = "cigpacket"
 	w_class = 1
 	throwforce = 2
-	flags = TABLEPASS
 	slot_flags = SLOT_BELT
 	storage_slots = 6
 	can_hold = list("/obj/item/clothing/mask/cigarette")
@@ -190,7 +188,6 @@
 	icon = 'icons/obj/cigarettes.dmi'
 	w_class = 1
 	throwforce = 2
-	flags = TABLEPASS
 	slot_flags = SLOT_BELT
 	storage_slots = 7
 	can_hold = list("/obj/item/clothing/mask/cigarette/cigar")

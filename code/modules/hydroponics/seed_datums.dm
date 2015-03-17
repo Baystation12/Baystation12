@@ -217,8 +217,8 @@ proc/populate_seed_list()
 			"water",
 			"potassium",
 			"plasticide",
-			"slimetoxin",
-			"aslimetoxin",
+			"mutationtoxin",
+			"amutationtoxin",
 			"inaprovaline",
 			"space_drugs",
 			"paroxetine",
@@ -255,7 +255,7 @@ proc/populate_seed_list()
 
 	if(prob(90))
 		requires_nutrients = 1
-		nutrient_consumption = rand(100)*0.1
+		nutrient_consumption = rand(25)/100
 	else
 		requires_nutrients = 0
 
@@ -643,8 +643,13 @@ proc/populate_seed_list()
 	if(consume_gasses) new_seed.consume_gasses = consume_gasses.Copy()
 	if(exude_gasses)   new_seed.exude_gasses = exude_gasses.Copy()
 
-	new_seed.seed_name =            "[(roundstart ? "[(modified ? "modified" : "mutant")] " : "")][seed_name]"
-	new_seed.display_name =         "[(roundstart ? "[(modified ? "modified" : "mutant")] " : "")][display_name]"
+	if(modified != -1)
+		new_seed.seed_name =            "[(roundstart ? "[(modified ? "modified" : "mutant")] " : "")][seed_name]"
+		new_seed.display_name =         "[(roundstart ? "[(modified ? "modified" : "mutant")] " : "")][display_name]"
+	else
+		new_seed.seed_name =            "[seed_name]"
+		new_seed.display_name =         "[display_name]"
+
 	new_seed.seed_noun =            seed_noun
 
 	new_seed.requires_nutrients =   requires_nutrients

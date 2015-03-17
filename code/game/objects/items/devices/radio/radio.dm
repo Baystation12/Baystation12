@@ -1,5 +1,3 @@
-
-
 /obj/item/device/radio
 	icon = 'icons/obj/radio.dmi'
 	name = "station bounced radio"
@@ -12,7 +10,7 @@
 	var/traitor_frequency = 0 //tune to frequency to unlock traitor supplies
 	var/canhear_range = 3 // the range which mobs can hear this radio from
 	var/obj/item/device/radio/patch_link = null
-	var/wires = WIRE_SIGNAL | WIRE_RECEIVE | WIRE_TRANSMIT
+	var/datum/wires/radio/wires = null
 	var/b_stat = 0
 	var/broadcasting = 0
 	var/listening = 1
@@ -22,20 +20,15 @@
 	var/syndie = 0//Holder to see if it's a syndicate encrpyed radio
 	var/maxf = 1499
 //			"Example" = FREQ_LISTENING|FREQ_BROADCASTING
-	flags = FPRINT | CONDUCT | TABLEPASS
+	flags = CONDUCT
 	slot_flags = SLOT_BELT
 	throw_speed = 2
 	throw_range = 9
 	w_class = 2
 
 	matter = list("glass" = 25,"metal" = 75)
-
-	var/const/WIRE_SIGNAL = 1 //sends a signal, like to set off a bomb or electrocute someone
-	var/const/WIRE_RECEIVE = 2
-	var/const/WIRE_TRANSMIT = 4
-	var/const/TRANSMISSION_DELAY = 5 // only 2/second/radio
 	var/const/FREQ_LISTENING = 1
-		//FREQ_BROADCASTING = 2
+
 
 /obj/item/device/radio
 	var/datum/radio_frequency/radio_connection
@@ -48,6 +41,7 @@
 
 /obj/item/device/radio/New()
 	..()
+	wires = new(src)
 	if(radio_controller)
 		initialize()
 
@@ -102,14 +96,9 @@
 	return
 
 /obj/item/device/radio/proc/text_wires()
-	if (!b_stat)
-		return ""
-	return {"
-			<hr>
-			Green Wire: <A href='byond://?src=\ref[src];wires=4'>[(wires & 4) ? "Cut" : "Mend"] Wire</A><BR>
-			Red Wire:   <A href='byond://?src=\ref[src];wires=2'>[(wires & 2) ? "Cut" : "Mend"] Wire</A><BR>
-			Blue Wire:  <A href='byond://?src=\ref[src];wires=1'>[(wires & 1) ? "Cut" : "Mend"] Wire</A><BR>
-			"}
+	if (b_stat)
+		return wires.GetInteractWindow()
+	return
 
 
 /obj/item/device/radio/proc/text_sec_channel(var/chan_name, var/chan_stat)
@@ -118,6 +107,12 @@
 			<B>[chan_name]</B><br>
 			Speaker: <A href='byond://?src=\ref[src];ch_name=[chan_name];listen=[!list]'>[list ? "Engaged" : "Disengaged"]</A><BR>
 			"}
+
+/obj/item/device/radio/proc/ToggleBroadcast()
+	broadcasting = !broadcasting && !(wires.IsIndexCut(WIRE_TRANSMIT) || wires.IsIndexCut(WIRE_SIGNAL))
+
+/obj/item/device/radio/proc/ToggleReception()
+	listening = !listening && !(wires.IsIndexCut(WIRE_RECEIVE) || wires.IsIndexCut(WIRE_SIGNAL))
 
 /obj/item/device/radio/Topic(href, href_list)
 	//..()
@@ -146,24 +141,17 @@
 				return
 
 	else if (href_list["talk"])
-		broadcasting = text2num(href_list["talk"])
+		ToggleBroadcast()
 	else if (href_list["listen"])
 		var/chan_name = href_list["ch_name"]
 		if (!chan_name)
-			listening = text2num(href_list["listen"])
+			ToggleReception()
 		else
 			if (channels[chan_name] & FREQ_LISTENING)
 				channels[chan_name] &= ~FREQ_LISTENING
 			else
 				channels[chan_name] |= FREQ_LISTENING
-	else if (href_list["wires"])
-		var/t1 = text2num(href_list["wires"])
-		if (!( istype(usr.get_active_hand(), /obj/item/weapon/wirecutters) ))
-			return
-		if (wires & t1)
-			wires &= ~t1
-		else
-			wires |= t1
+
 	if (!( master ))
 		if (istype(loc, /mob))
 			interact(loc)
@@ -204,27 +192,27 @@
 	// If a channel isn't specified, send to common.
 	if(!message_mode || message_mode == "headset")
 		return radio_connection
-	
+
 	// Otherwise, if a channel is specified, look for it.
-	if(channels)
+	if(channels && channels.len > 0)
 		if (message_mode == "department") // Department radio shortcut
 			message_mode = channels[1]
-		
+
 		if (channels[message_mode]) // only broadcast if the channel is set on
 			return secure_radio_connections[message_mode]
-	
+
 	// If we were to send to a channel we don't have, drop it.
 	return null
 
 /obj/item/device/radio/talk_into(mob/living/M as mob, message, channel, var/verb = "says", var/datum/language/speaking = null)
-	if(!on) return // the device has to be on
+	if(!on) return 0 // the device has to be on
 	//  Fix for permacell radios, but kinda eh about actually fixing them.
-	if(!M || !message) return
+	if(!M || !message) return 0
 
 	//  Uncommenting this. To the above comment:
 	// 	The permacell radios aren't suppose to be able to transmit, this isn't a bug and this "fix" is just making radio wires useless. -Giacom
-	if(!(src.wires & WIRE_TRANSMIT)) // The device has to have all its wires and shit intact
-		return
+	if(wires.IsIndexCut(WIRE_TRANSMIT)) // The device has to have all its wires and shit intact
+		return 0
 
 	M.last_target_click = world.time
 
@@ -242,9 +230,9 @@
 	//#### Grab the connection datum ####//
 	var/datum/radio_frequency/connection = handle_message_mode(M, message, channel)
 	if (!istype(connection))
-		return
+		return 0
 	if (!connection)
-		return
+		return 0
 
 	var/turf/position = get_turf(src)
 
@@ -263,7 +251,8 @@
 
 	// --- Human: use their actual job ---
 	if (ishuman(M))
-		jobname = M:get_assignment()
+		var/mob/living/carbon/human/H = M
+		jobname = H.get_assignment()
 
 	// --- Carbon Nonhuman ---
 	else if (iscarbon(M)) // Nonhuman carbon mob
@@ -346,7 +335,7 @@
 			R.receive_signal(signal)
 
 		// Receiving code can be located in Telecommunications.dm
-		return
+		return signal.data["done"] && position.z in signal.data["level"]
 
 
   /* ###### Intercoms and station-bounced radios ###### */
@@ -399,15 +388,15 @@
 
 	if(signal.data["done"] && position.z in signal.data["level"])
 		// we're done here.
-		return
+		return 1
 
 	// Oh my god; the comms are down or something because the signal hasn't been broadcasted yet in our level.
 	// Send a mundane broadcast with limited targets:
 
 	//THIS IS TEMPORARY. YEAH RIGHT
-	if(!connection)	return	//~Carn
+	if(!connection)	return 0	//~Carn
 
-	Broadcast_Message(connection, M, voicemask, pick(M.speak_emote),
+	return Broadcast_Message(connection, M, voicemask, pick(M.speak_emote),
 					  src, message, displayname, jobname, real_name, M.voice_name,
 					  filter_type, signal.data["compression"], list(position.z), connection.frequency,verb,speaking)
 
@@ -437,7 +426,7 @@
 	// what the range is in which mobs will hear the radio
 	// returns: -1 if can't receive, range otherwise
 
-	if (!(wires & WIRE_RECEIVE))
+	if (wires.IsIndexCut(WIRE_RECEIVE))
 		return -1
 	if(!listening)
 		return -1
@@ -472,15 +461,13 @@
 		return get_mobs_in_view(canhear_range, src)
 
 
-/obj/item/device/radio/examine()
-	set src in view()
-
-	..()
-	if ((in_range(src, usr) || loc == usr))
+/obj/item/device/radio/examine(mob/user)
+	. = ..()
+	if ((in_range(src, user) || loc == user))
 		if (b_stat)
-			usr.show_message("\blue \the [src] can be attached and modified!")
+			user.show_message("\blue \the [src] can be attached and modified!")
 		else
-			usr.show_message("\blue \the [src] can not be modified or attached!")
+			user.show_message("\blue \the [src] can not be modified or attached!")
 	return
 
 /obj/item/device/radio/attackby(obj/item/weapon/W as obj, mob/user as mob)
@@ -519,9 +506,10 @@
 	icon = 'icons/obj/robot_component.dmi' // Cyborgs radio icons should look like the component.
 	icon_state = "radio"
 	canhear_range = 3
+	subspace_transmission = 1
 
 /obj/item/device/radio/borg/talk_into()
-	..()
+	. = ..()
 	if (isrobot(src.loc))
 		var/mob/living/silicon/robot/R = src.loc
 		var/datum/robot_component/C = R.components["radio"]
@@ -607,11 +595,11 @@
 	if (href_list["mode"])
 		if(subspace_transmission != 1)
 			subspace_transmission = 1
-			usr << "Subspace Transmission is disabled"
+			usr << "Subspace Transmission is enabled"
 		else
 			subspace_transmission = 0
-			usr << "Subspace Transmission is enabled"
-		if(subspace_transmission == 1)//Simple as fuck, clears the channel list to prevent talking/listening over them if subspace transmission is disabled
+			usr << "Subspace Transmission is disabled"
+		if(subspace_transmission == 0)//Simple as fuck, clears the channel list to prevent talking/listening over them if subspace transmission is disabled
 			channels = list()
 		else
 			recalculateChannels()
@@ -638,10 +626,10 @@
 				<A href='byond://?src=\ref[src];freq=2'>+</A>
 				<A href='byond://?src=\ref[src];freq=10'>+</A><BR>
 				<A href='byond://?src=\ref[src];mode=1'>Toggle Broadcast Mode</A><BR>
-				<A href='byond://?src=\ref[src];shutup=1'>Toggle Loudspeaker</A><BR>
+				Loudspeaker: [shut_up ? "<A href='byond://?src=\ref[src];shutup=0'>Disengaged</A>" : "<A href='byond://?src=\ref[src];shutup=1'>Engaged</A>"]<BR>
 				"}
 
-	if(!subspace_transmission)//Don't even bother if subspace isn't turned on
+	if(subspace_transmission)//Don't even bother if subspace isn't turned on
 		for (var/ch_name in channels)
 			dat+=text_sec_channel(ch_name, channels[ch_name])
 	dat+={"[text_wires()]</TT></body></html>"}

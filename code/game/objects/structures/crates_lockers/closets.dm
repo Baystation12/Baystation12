@@ -4,7 +4,6 @@
 	icon = 'icons/obj/closet.dmi'
 	icon_state = "closed"
 	density = 1
-	flags = FPRINT
 	var/icon_closed = "closed"
 	var/icon_opened = "open"
 	var/opened = 0
@@ -21,15 +20,13 @@
 	var/store_items = 1
 	var/store_mobs = 1
 
-	var/const/mob_size = 15
+	var/const/default_mob_size = 15
 
-/obj/structure/closet/New()
-	..()
-	spawn(1)
-		if(!opened)		// if closed, any item at the crate's loc is put in the contents
-			for(var/obj/item/I in src.loc)
-				if(I.density || I.anchored || I == src) continue
-				I.loc = src
+/obj/structure/closet/initialize()
+	if(!opened)		// if closed, any item at the crate's loc is put in the contents
+		for(var/obj/item/I in src.loc)
+			if(I.density || I.anchored || I == src) continue
+			I.loc = src
 
 /obj/structure/closet/alter_health()
 	return get_turf(src)
@@ -87,11 +84,11 @@
 	var/stored_units = 0
 
 	if(store_misc)
-		stored_units = store_misc(stored_units)
+		stored_units += store_misc(stored_units)
 	if(store_items)
-		stored_units = store_items(stored_units)
+		stored_units += store_items(stored_units)
 	if(store_mobs)
-		stored_units = store_mobs(stored_units)
+		stored_units += store_mobs(stored_units)
 
 	src.icon_state = src.icon_closed
 	src.opened = 0
@@ -102,44 +99,45 @@
 
 //Cham Projector Exception
 /obj/structure/closet/proc/store_misc(var/stored_units)
+	var/added_units = 0
 	for(var/obj/effect/dummy/chameleon/AD in src.loc)
-		if(stored_units > storage_capacity)
+		if((stored_units + added_units) > storage_capacity)
 			break
 		AD.loc = src
-		stored_units++
-	return stored_units
+		added_units++
+	return added_units
 
 /obj/structure/closet/proc/store_items(var/stored_units)
+	var/added_units = 0
 	for(var/obj/item/I in src.loc)
 		var/item_size = Ceiling(I.w_class / 2)
-		if(stored_units + item_size > storage_capacity)
+		if(stored_units + added_units + item_size > storage_capacity)
 			continue
 		if(!I.anchored)
 			I.loc = src
-			stored_units += item_size
-	return stored_units
+			added_units += item_size
+	return added_units
 
 /obj/structure/closet/proc/store_mobs(var/stored_units)
-	for(var/mob/M in src.loc)
-		if(stored_units + mob_size > storage_capacity)
-			break
-		if(istype (M, /mob/dead/observer))
-			continue
+	var/added_units = 0
+	for(var/mob/living/M in src.loc)
 		if(M.buckled || M.pinned.len)
 			continue
-
+		var/current_mob_size = (M.mob_size ? M.mob_size : default_mob_size)
+		if(stored_units + added_units + current_mob_size > storage_capacity)
+			break
 		if(M.client)
 			M.client.perspective = EYE_PERSPECTIVE
 			M.client.eye = src
-
 		M.loc = src
-		stored_units += mob_size
-	return stored_units
+		added_units += current_mob_size
+	return added_units
 
 /obj/structure/closet/proc/toggle(mob/user as mob)
 	if(!(src.opened ? src.close() : src.open()))
 		user << "<span class='notice'>It won't budge!</span>"
-	return
+		return
+	update_icon()
 
 // this should probably use dump_contents()
 /obj/structure/closet/ex_act(severity)
@@ -172,13 +170,6 @@
 
 	return
 
-/obj/structure/closet/attack_animal(mob/living/user as mob)
-	if(user.wall_smash)
-		visible_message("\red [user] destroys the [src]. ")
-		for(var/atom/movable/A as mob|obj in src)
-			A.loc = src.loc
-		del(src)
-
 // this should probably use dump_contents()
 /obj/structure/closet/blob_act()
 	if(prob(75))
@@ -196,7 +187,8 @@
 /obj/structure/closet/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(src.opened)
 		if(istype(W, /obj/item/weapon/grab))
-			src.MouseDrop_T(W:affecting, user)      //act like they were dragged onto the closet
+			var/obj/item/weapon/grab/G = W
+			src.MouseDrop_T(G.affecting, user)      //act like they were dragged onto the closet
 		if(istype(W,/obj/item/tk_grab))
 			return 0
 		if(istype(W, /obj/item/weapon/weldingtool))
@@ -210,6 +202,8 @@
 			del(src)
 			return
 		if(isrobot(user))
+			return
+		if(W.loc != user) // This should stop mounted modules ending up outside the module.
 			return
 		usr.drop_item()
 		if(W)
@@ -265,10 +259,6 @@
 			spawn(30)
 				lastbang = 0
 
-
-/obj/structure/closet/attack_paw(mob/user as mob)
-	return src.attack_hand(user)
-
 /obj/structure/closet/attack_hand(mob/user as mob)
 	src.add_fingerprint(user)
 	src.toggle(user)
@@ -302,8 +292,16 @@
 	else
 		icon_state = icon_opened
 
-/obj/structure/closet/hear_talk(mob/M as mob, text)
+/obj/structure/closet/hear_talk(mob/M as mob, text, verb, datum/language/speaking)
 	for (var/atom/A in src)
 		if(istype(A,/obj/))
 			var/obj/O = A
-			O.hear_talk(M, text)
+			O.hear_talk(M, text, verb, speaking)
+
+/obj/structure/closet/attack_generic(var/mob/user, var/damage, var/attack_message = "destroys", var/wallbreaker)
+	if(!damage || !wallbreaker)
+		return
+	visible_message("<span class='danger'>[user] [attack_message] the [src]!</span>")
+	dump_contents()
+	spawn(1) del(src)
+	return 1

@@ -20,7 +20,8 @@
 	var/frustration = 0
 
 	var/idcheck = 0 //If false, all station IDs are authorized for weapons.
-	var/check_records = 1 //Does it check security records?
+	var/check_records = 0	//Does it check security records?
+	var/check_arrest = 1	//Does it check arrest status?
 	var/arrest_type = 0 //If true, don't handcuff
 	var/declare_arrests = 0 //When making an arrest, should it notify everyone wearing sechuds?
 
@@ -97,6 +98,7 @@
 			radio_controller.add_object(src, beacon_freq, filter = RADIO_NAVBEACONS)
 		if(lasercolor)
 			shot_delay = 6		//Longer shot delay because JESUS CHRIST
+			check_arrest = 0
 			check_records = 0	//Don't actively target people set to arrest
 			arrest_type = 1		//Don't even try to cuff
 			req_access = list(access_maint_tunnels)
@@ -150,12 +152,14 @@ Maintenance panel is [src.open ? "opened" : "closed"]"},
 		dat += text({"<BR>
 Check for Weapon Authorization: []<BR>
 Check Security Records: []<BR>
+Check Arrest Status: []<BR>
 Operating Mode: []<BR>
 Report Arrests: []<BR>
 Auto Patrol: []"},
 
 "<A href='?src=\ref[src];operation=idcheck'>[src.idcheck ? "Yes" : "No"]</A>",
 "<A href='?src=\ref[src];operation=ignorerec'>[src.check_records ? "Yes" : "No"]</A>",
+"<A href='?src=\ref[src];operation=ignorearr'>[src.check_arrest ? "Yes" : "No"]</A>",
 "<A href='?src=\ref[src];operation=switchmode'>[src.arrest_type ? "Detain" : "Arrest"]</A>",
 "<A href='?src=\ref[src];operation=declarearrests'>[src.declare_arrests ? "Yes" : "No"]</A>",
 "<A href='?src=\ref[src];operation=patrol'>[auto_patrol ? "On" : "Off"]</A>" )
@@ -189,6 +193,8 @@ Auto Patrol: []"},
 			src.idcheck = !src.idcheck
 		if("ignorerec")
 			src.check_records = !src.check_records
+		if("ignorearr")
+			src.check_arrest = !src.check_arrest
 		if("switchmode")
 			src.arrest_type = !src.arrest_type
 		if("patrol")
@@ -261,6 +267,18 @@ Auto Patrol: []"},
 				walk_to(src,0)
 
 			if(target)		// make sure target exists
+				// We re-assess human targets, before bashing their head in, in case their credentials change
+				if(istype(target, /mob/living/carbon/human))
+					var/threat = src.assess_perp(target, idcheck, check_records, check_arrest)
+					if(threat < 4)
+						frustration = 8
+						return
+
+				// The target must remain in view to complete the desire to bash its head in
+				if(!(target in view(search_range,src)))
+					frustration++
+					return
+
 				if(!lasercolor && Adjacent(target))	// If right next to perp. Lasertag bots do not arrest anyone, just patrol and shoot and whatnot
 					if(istype(src.target,/mob/living/carbon))
 						playsound(src.loc, 'sound/weapons/Egloves.ogg', 50, 1, -1)
@@ -631,6 +649,9 @@ Auto Patrol: []"},
 		return
 	src.anchored = 0
 	for(var/mob/living/M in view(search_range,src)) //Let's find us a criminal
+		if(M.invisibility >= INVISIBILITY_LEVEL_ONE) // Cannot see him. see_invisible is a mob-var
+			continue
+
 		if(istype(M, /mob/living/carbon))
 			var/mob/living/carbon/C = M
 			if(C.stat || C.handcuffed)
@@ -643,7 +664,7 @@ Auto Patrol: []"},
 				continue
 
 			if(istype(C, /mob/living/carbon/human))
-				src.threatlevel = src.assess_perp(C)
+				src.threatlevel = src.assess_perp(C, idcheck, check_records, check_arrest)
 
 		else if(istype(M, /mob/living/simple_animal/hostile))
 			if(M.stat == DEAD)
@@ -669,83 +690,47 @@ Auto Patrol: []"},
 		else
 			continue
 
-//If the security records say to arrest them, arrest them
-//Or if they have weapons and aren't security, arrest them.
-/obj/machinery/bot/secbot/proc/assess_perp(mob/living/carbon/human/perp as mob)
-	var/threatcount = 0
+/obj/machinery/bot/secbot/on_assess_perp(mob/living/carbon/human/perp)
+	if(lasercolor)
+		return laser_check(perp, lasercolor)
 
-	if(perp.stat == DEAD)
-		return 0
+	var/threat = 0
+	threat -= laser_check(perp, "b")
+	threat -= laser_check(perp, "r")
 
-	if(src.emagged == 2) return 10 //Everyone is a criminal!
+	return threat
 
-	if(src.idcheck && !src.allowed(perp))
-		if(istype(perp.l_hand, /obj/item/weapon/gun) || istype(perp.l_hand, /obj/item/weapon/melee))
-			if(!istype(perp.l_hand, /obj/item/weapon/gun/energy/laser/bluetag) \
-			&& !istype(perp.l_hand, /obj/item/weapon/gun/energy/laser/redtag) \
-			&& !istype(perp.l_hand, /obj/item/weapon/gun/energy/laser/practice))
-				threatcount += 4
+/obj/machinery/bot/secbot/proc/laser_check(mob/living/carbon/human/perp, var/lasercolor)
+	var/target_suit
+	var/target_weapon
+	var/threat = 0
+	//Lasertag turrets target the opposing team, how great is that? -Sieve
+	switch(lasercolor)
+		if("b")
+			target_suit = /obj/item/clothing/suit/redtag
+			target_weapon = /obj/item/weapon/gun/energy/laser/redtag
+		if("r")
+			target_suit = /obj/item/clothing/suit/bluetag
+			target_weapon = /obj/item/weapon/gun/energy/laser/bluetag
 
-		if(istype(perp.r_hand, /obj/item/weapon/gun) || istype(perp.r_hand, /obj/item/weapon/melee))
-			if(!istype(perp.r_hand, /obj/item/weapon/gun/energy/laser/bluetag) \
-			&& !istype(perp.r_hand, /obj/item/weapon/gun/energy/laser/redtag) \
-			&& !istype(perp.r_hand, /obj/item/weapon/gun/energy/laser/practice))
-				threatcount += 4
+	if((istype(perp.r_hand, target_weapon)) || (istype(perp.l_hand, target_weapon)))
+		threat += 4
 
-		if(istype(perp.belt, /obj/item/weapon/gun) || istype(perp.belt, /obj/item/weapon/melee))
-			if(!istype(perp.belt, /obj/item/weapon/gun/energy/laser/bluetag) \
-			&& !istype(perp.belt, /obj/item/weapon/gun/energy/laser/redtag) \
-			&& !istype(perp.belt, /obj/item/weapon/gun/energy/laser/practice))
-				threatcount += 2
+	if(istype(perp, /mob/living/carbon/human))
+		if(istype(perp.wear_suit, target_suit))
+			threat += 4
+		if(istype(perp.belt, target_weapon))
+			threat += 2
 
-		if(istype(perp.wear_suit, /obj/item/clothing/suit/wizrobe))
-			threatcount += 2
+	return threat
 
-		if(perp.dna && perp.dna.mutantrace && perp.dna.mutantrace != "none")
-			threatcount += 2
-
-		//Agent cards lower threatlevel.
-		if(perp.wear_id && istype(perp.wear_id.GetID(), /obj/item/weapon/card/id/syndicate))
-			threatcount -= 2
-
-	if(src.lasercolor == "b")//Lasertag turrets target the opposing team, how great is that? -Sieve
-		threatcount = 0//They will not, however shoot at people who have guns, because it gets really fucking annoying
-		if(istype(perp.wear_suit, /obj/item/clothing/suit/redtag))
-			threatcount += 4
-		if((istype(perp.r_hand,/obj/item/weapon/gun/energy/laser/redtag)) || (istype(perp.l_hand,/obj/item/weapon/gun/energy/laser/redtag)))
-			threatcount += 4
-		if(istype(perp.belt, /obj/item/weapon/gun/energy/laser/redtag))
-			threatcount += 2
-
-	if(src.lasercolor == "r")
-		threatcount = 0
-		if(istype(perp.wear_suit, /obj/item/clothing/suit/bluetag))
-			threatcount += 4
-		if((istype(perp.r_hand,/obj/item/weapon/gun/energy/laser/bluetag)) || (istype(perp.l_hand,/obj/item/weapon/gun/energy/laser/bluetag)))
-			threatcount += 4
-		if(istype(perp.belt, /obj/item/weapon/gun/energy/laser/bluetag))
-			threatcount += 2
-
-	if(src.check_records)
-		var/perpname = perp.name
-		if(perp.wear_id)
-			var/obj/item/weapon/card/id/id = perp.wear_id.GetID()
-			if(id)
-				perpname = id.registered_name
-
-		for (var/datum/data/record/E in data_core.general)
-			if(E.fields["name"] == perpname)
-				for(var/datum/data/record/R in data_core.security)
-					if((R.fields["id"] == E.fields["id"]) && (R.fields["criminal"] == "*Arrest*"))
-						threatcount = 4
-						break
-
-	return threatcount
+/obj/machinery/bot/secbot/is_assess_emagged()
+	return emagged == 2
 
 /obj/machinery/bot/secbot/Bump(M as mob|obj) //Leave no door unopened!
 	if((istype(M, /obj/machinery/door)) && !isnull(src.botcard))
 		var/obj/machinery/door/D = M
-		if(!istype(D, /obj/machinery/door/firedoor) && D.check_access(src.botcard) && !istype(D,/obj/machinery/door/poddoor))
+		if(!istype(D, /obj/machinery/door/firedoor) && D.check_access(src.botcard) && !istype(D,/obj/machinery/door/blast))
 			D.open()
 			src.frustration = 0
 	else if(!src.anchored)
@@ -908,7 +893,7 @@ Auto Patrol: []"},
 		pulse2.icon_state = "empdisable"
 		pulse2.name = "emp sparks"
 		pulse2.anchored = 1
-		pulse2.dir = pick(cardinal)
+		pulse2.set_dir(pick(cardinal))
 		spawn(10)
 			pulse2.delete()
 		var/list/mob/living/carbon/targets = new

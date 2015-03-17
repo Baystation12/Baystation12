@@ -7,7 +7,7 @@
 
 	use_power = 1
 	idle_power_usage = 150		//internal circuitry, friction losses and stuff
-	active_power_usage = 3700	//This also doubles as a measure of how powerful the mixer is, in Watts. 3700 W ~ 5 HP
+	power_rating = 3700			//3700 W ~ 5 HP
 
 	var/list/inputs = new()
 	var/datum/omni_port/output
@@ -49,8 +49,6 @@
 	for(var/datum/omni_port/P in ports)
 		P.air.volume = ATMOS_DEFAULT_VOLUME_MIXER
 
-	rebuild_mixing_inputs()
-
 /obj/machinery/atmospherics/omni/mixer/Del()
 	inputs.Cut()
 	output = null
@@ -77,6 +75,8 @@
 	if(output)
 		output.air.volume = ATMOS_DEFAULT_VOLUME_MIXER * 0.75 * inputs.len
 		output.concentration = 1
+	
+	rebuild_mixing_inputs()
 
 /obj/machinery/atmospherics/omni/mixer/proc/mapper_set()
 	return (tag_north_con || tag_south_con || tag_east_con || tag_west_con)
@@ -108,14 +108,11 @@
 
 	var/power_draw = -1
 	if (transfer_moles > MINUMUM_MOLES_TO_FILTER)
-		power_draw = mix_gas(src, mixing_inputs, output, transfer_moles, active_power_usage)
+		power_draw = mix_gas(src, mixing_inputs, output.air, transfer_moles, power_rating)
 
-	if (power_draw < 0)
-		//update_use_power(0)
-		use_power = 0	//don't force update - easier on CPU
-		last_flow_rate = 0
-	else
-		handle_power_draw(power_draw)
+	if (power_draw >= 0)
+		last_power_draw = power_draw
+		use_power(power_draw)
 
 		for(var/datum/omni_port/P in inputs)
 			if(P.concentration && P.network)
@@ -144,7 +141,7 @@
 /obj/machinery/atmospherics/omni/mixer/proc/build_uidata()
 	var/list/data = new()
 
-	data["power"] = on
+	data["power"] = use_power
 	data["config"] = configuring
 
 	var/portData[0]
@@ -180,16 +177,16 @@
 	switch(href_list["command"])
 		if("power")
 			if(!configuring)
-				on = !on
+				use_power = !use_power
 			else
-				on = 0
+				use_power = 0
 		if("configure")
 			configuring = !configuring
 			if(configuring)
-				on = 0
+				use_power = 0
 
 	//only allows config changes when in configuring mode ~otherwise you'll get weird pressure stuff going on
-	if(configuring && !on)
+	if(configuring && !use_power)
 		switch(href_list["command"])
 			if("set_flow_rate")
 				var/new_flow_rate = input(usr,"Enter new flow rate limit (0-[max_flow_rate]L/s)","Flow Rate Control",set_flow_rate) as num

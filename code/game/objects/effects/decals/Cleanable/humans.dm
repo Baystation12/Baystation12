@@ -4,7 +4,9 @@ var/global/list/image/splatter_cache=list()
 
 /obj/effect/decal/cleanable/blood
 	name = "blood"
+	var/dryname = "dried blood"
 	desc = "It's thick and gooey. Perhaps it's the chef's cooking?"
+	var/drydesc = "It's dry and crusty. Someone is not doing their job."
 	gender = PLURAL
 	density = 0
 	anchored = 1
@@ -29,8 +31,6 @@ var/global/list/image/splatter_cache=list()
 	update_icon()
 	if(istype(src, /obj/effect/decal/cleanable/blood/gibs))
 		return
-	if(istype(src, /obj/effect/decal/cleanable/blood/tracks))
-		return // We handle our own drying.
 	if(src.type == /obj/effect/decal/cleanable/blood)
 		if(src.loc && isturf(src.loc))
 			for(var/obj/effect/decal/cleanable/blood/B in src.loc)
@@ -57,15 +57,21 @@ var/global/list/image/splatter_cache=list()
 	if((!l_foot || l_foot.status & ORGAN_DESTROYED) && (!r_foot || r_foot.status & ORGAN_DESTROYED))
 		hasfeet = 0
 	if(perp.shoes && !perp.buckled)//Adding blood to shoes
-		perp.shoes.blood_color = basecolor
-		perp.shoes:track_blood = max(amount,perp.shoes:track_blood)
-		if(!perp.shoes.blood_overlay)
-			perp.shoes.generate_blood_overlay()
-		if(!perp.shoes.blood_DNA)
-			perp.shoes.blood_DNA = list()
-			perp.shoes.blood_overlay.color = basecolor
-			perp.shoes.overlays += perp.shoes.blood_overlay
-		perp.shoes.blood_DNA |= blood_DNA.Copy()
+		var/obj/item/clothing/shoes/S = perp.shoes
+		if(istype(S))
+			S.blood_color = basecolor
+			S.track_blood = max(amount,S.track_blood)
+			if(!S.blood_overlay)
+				S.generate_blood_overlay()
+			if(!S.blood_DNA)
+				S.blood_DNA = list()
+				S.blood_overlay.color = basecolor
+				S.overlays += S.blood_overlay
+			if(S.blood_overlay && S.blood_overlay.color != basecolor)
+				S.blood_overlay.color = basecolor
+				S.overlays.Cut()
+				S.overlays += S.blood_overlay
+			S.blood_DNA |= blood_DNA.Copy()
 
 	else if (hasfeet)//Or feet
 		perp.feet_blood_color = basecolor
@@ -81,10 +87,10 @@ var/global/list/image/splatter_cache=list()
 	amount--
 
 /obj/effect/decal/cleanable/blood/proc/dry()
-		name = "dried [src.name]"
-		desc = "It's dry and crusty. Someone is not doing their job."
-		color = adjust_brightness(color, -50)
-		amount = 0
+	name = dryname
+	desc = drydesc
+	color = adjust_brightness(color, -50)
+	amount = 0
 
 /obj/effect/decal/cleanable/blood/attack_hand(mob/living/carbon/human/user)
 	..()
@@ -108,13 +114,19 @@ var/global/list/image/splatter_cache=list()
         amount = 2
 
 /obj/effect/decal/cleanable/blood/drip
-        name = "drips of blood"
-        desc = "It's red."
-        gender = PLURAL
-        icon = 'icons/effects/drip.dmi'
-        icon_state = "1"
-        random_icon_states = list("1","2","3","4","5")
-        amount = 0
+	name = "drips of blood"
+	desc = "It's red."
+	gender = PLURAL
+	icon = 'icons/effects/drip.dmi'
+	icon_state = "1"
+	random_icon_states = list("1","2","3","4","5")
+	amount = 0
+	var/list/drips = list()
+
+/obj/effect/decal/cleanable/blood/drip/New()
+	..()
+	spawn(1)
+		drips |= icon_state
 
 /obj/effect/decal/cleanable/blood/writing
 	icon_state = "tracks"
@@ -133,9 +145,9 @@ var/global/list/image/splatter_cache=list()
 	else
 		icon_state = "writing1"
 
-/obj/effect/decal/cleanable/blood/writing/examine()
-	..()
-	usr << "It reads: <font color='[basecolor]'>\"[message]\"<font>"
+/obj/effect/decal/cleanable/blood/writing/examine(mob/user)
+	..(user)
+	user << "It reads: <font color='[basecolor]'>\"[message]\"<font>"
 
 /obj/effect/decal/cleanable/blood/gibs
 	name = "gibs"

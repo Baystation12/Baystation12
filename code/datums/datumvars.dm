@@ -268,7 +268,6 @@ client
 			body += "<option value='?_src_=vars;remverb=\ref[D]'>Remove Verb</option>"
 			if(ishuman(D))
 				body += "<option value>---</option>"
-				body += "<option value='?_src_=vars;setmutantrace=\ref[D]'>Set Mutantrace</option>"
 				body += "<option value='?_src_=vars;setspecies=\ref[D]'>Set Species</option>"
 				body += "<option value='?_src_=vars;makeai=\ref[D]'>Make AI</option>"
 				body += "<option value='?_src_=vars;makerobot=\ref[D]'>Make cyborg</option>"
@@ -428,7 +427,7 @@ client
 			usr << "This can only be used on instances of type /mob"
 			return
 
-		var/new_name = copytext(sanitize(input(usr,"What would you like to name this mob?","Input a name",M.real_name) as text|null),1,MAX_NAME_LEN)
+		var/new_name = sanitize(copytext(input(usr,"What would you like to name this mob?","Input a name",M.real_name) as text|null,1,MAX_NAME_LEN))
 		if( !new_name || !M )	return
 
 		message_admins("Admin [key_name_admin(usr)] renamed [key_name_admin(M)] to [new_name].")
@@ -582,7 +581,7 @@ client
 			usr << "This can only be used on instances of type /mob/living/carbon/human"
 			return
 
-		H.makeSkeleton()
+		H.ChangeToSkeleton()
 		href_list["datumrefresh"] = href_list["make_skeleton"]
 
 	else if(href_list["delall"])
@@ -670,8 +669,8 @@ client
 			return
 
 		switch(href_list["rotatedir"])
-			if("right")	A.dir = turn(A.dir, -45)
-			if("left")	A.dir = turn(A.dir, 45)
+			if("right")	A.set_dir(turn(A.dir, -45))
+			if("left")	A.set_dir(turn(A.dir, 45))
 		href_list["datumrefresh"] = href_list["rotatedatum"]
 
 	else if(href_list["makemonkey"])
@@ -743,27 +742,6 @@ client
 			usr << "Mob doesn't exist anymore"
 			return
 		holder.Topic(href, list("makeai"=href_list["makeai"]))
-
-	else if(href_list["setmutantrace"])
-		if(!check_rights(R_SPAWN))	return
-
-		var/mob/living/carbon/human/H = locate(href_list["setmutantrace"])
-		if(!istype(H))
-			usr << "This can only be done to instances of type /mob/living/carbon/human"
-			return
-
-		var/new_mutantrace = input("Please choose a new mutantrace","Mutantrace",null) as null|anything in list("NONE","golem","lizard","slime","plant","shadow","tajaran","skrell","vox")
-		switch(new_mutantrace)
-			if(null)
-				return
-			if("NONE")
-				new_mutantrace = ""
-		if(!H)
-			usr << "Mob doesn't exist anymore"
-			return
-		if(H.dna)
-			H.dna.mutantrace = new_mutantrace
-			H.update_mutantrace()
 
 	else if(href_list["setspecies"])
 		if(!check_rights(R_SPAWN))	return
@@ -888,6 +866,7 @@ client
 			return
 
 		var/new_organ = input("Please choose an organ to add.","Organ",null) as null|anything in typesof(/datum/organ/internal)-/datum/organ/internal
+		if(!new_organ) return
 
 		if(!M)
 			usr << "Mob doesn't exist anymore"
@@ -921,6 +900,7 @@ client
 				del(I)
 				return
 
+			H.internal_organs |= I
 			H.internal_organs_by_name[organ_slot] = I
 			usr << "Added new [new_organ] to [H] as slot [organ_slot]."
 		else

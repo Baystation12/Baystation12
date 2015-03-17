@@ -35,11 +35,8 @@
 		else
 			user.update_inv_r_hand()
 
-
-
-
 /obj/item/weapon/gun/energy/gun/nuclear
-	name = "Advanced Energy Gun"
+	name = "advanced energy gun"
 	desc = "An energy gun with an experimental miniaturized reactor."
 	icon_state = "nucgun"
 	origin_tech = "combat=3;materials=5;powerstorage=3"

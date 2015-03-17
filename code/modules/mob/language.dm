@@ -1,3 +1,5 @@
+#define SCRAMBLE_CACHE_LEN 20
+
 /*
 	Datum based languages. Easily editable and modular.
 */
@@ -8,29 +10,103 @@
 	var/speech_verb = "says"         // 'says', 'hisses', 'farts'.
 	var/ask_verb = "asks"            // Used when sentence ends in a ?
 	var/exclaim_verb = "exclaims"    // Used when sentence ends in a !
+	var/whisper_verb                 // Optional. When not specified speech_verb + quietly/softly is used instead.
 	var/signlang_verb = list()       // list of emotes that might be displayed if this language has NONVERBAL or SIGNLANG flags
-	var/colour = "body"         // CSS style to use for strings in this language.
+	var/colour = "body"              // CSS style to use for strings in this language.
 	var/key = "x"                    // Character used to speak in language eg. :o for Unathi.
 	var/flags = 0                    // Various language flags.
 	var/native                       // If set, non-native speakers will have trouble speaking.
+	var/list/syllables               // Used when scrambling text for a non-speaker.
+	var/list/space_chance = 55       // Likelihood of getting a space in the random scramble string.
+
+/datum/language/proc/get_random_name(var/gender, name_count=2, syllable_count=4)
+	if(!syllables || !syllables.len)
+		if(gender==FEMALE)
+			return capitalize(pick(first_names_female)) + " " + capitalize(pick(last_names))
+		else
+			return capitalize(pick(first_names_male)) + " " + capitalize(pick(last_names))
+
+	var/full_name = ""
+	var/new_name = ""
+
+	for(var/i = 0;i<name_count;i++)
+		new_name = ""
+		for(var/x = rand(Floor(syllable_count/2),syllable_count);x>0;x--)
+			new_name += pick(syllables)
+		full_name += " [capitalize(lowertext(new_name))]"
+
+	return "[trim(full_name)]"
+
+/datum/language
+	var/list/scramble_cache = list()
+
+/datum/language/proc/scramble(var/input)
+
+	if(!syllables || !syllables.len)
+		return stars(input)
+
+	// If the input is cached already, move it to the end of the cache and return it
+	if(input in scramble_cache)
+		var/n = scramble_cache[input]
+		scramble_cache -= input
+		scramble_cache[input] = n
+		return n
+
+	var/input_size = length(input)
+	var/scrambled_text = ""
+	var/capitalize = 1
+
+	while(length(scrambled_text) < input_size)
+		var/next = pick(syllables)
+		if(capitalize)
+			next = capitalize(next)
+			capitalize = 0
+		scrambled_text += next
+		var/chance = rand(100)
+		if(chance <= 5)
+			scrambled_text += ". "
+			capitalize = 1
+		else if(chance > 5 && chance <= space_chance)
+			scrambled_text += " "
+
+	scrambled_text = trim(scrambled_text)
+	var/ending = copytext(scrambled_text, length(scrambled_text))
+	if(ending == ".")
+		scrambled_text = copytext(scrambled_text,1,length(scrambled_text)-1)
+	var/input_ending = copytext(input, input_size)
+	if(input_ending in list("!","?","."))
+		scrambled_text += input_ending
+
+	// Add it to cache, cutting old entries if the list is too long
+	scramble_cache[input] = scrambled_text
+	if(scramble_cache.len > SCRAMBLE_CACHE_LEN)
+		scramble_cache.Cut(1, scramble_cache.len-SCRAMBLE_CACHE_LEN-1)
+
+
+	return scrambled_text
+
+/datum/language/proc/format_message(message, verb)
+	return "[verb], <span class='message'><span class='[colour]'>\"[capitalize(message)]\"</span></span>"
+
+/datum/language/proc/format_message_plain(message, verb)
+	return "[verb], \"[capitalize(message)]\""
+
+/datum/language/proc/format_message_radio(message, verb)
+	return "[verb], <span class='[colour]'>\"[capitalize(message)]\"</span>"
+
+/datum/language/proc/get_talkinto_msg_range(message)
+	// if you yell, you'll be heard from two tiles over instead of one
+	return (copytext(message, length(message)) == "!") ? 2 : 1
 
 /datum/language/proc/broadcast(var/mob/living/speaker,var/message,var/speaker_mask)
-
 	log_say("[key_name(speaker)] : ([name]) [message]")
 
+	if(!speaker_mask) speaker_mask = speaker.name
+	var/msg = "<i><span class='game say'>[name], <span class='name'>[speaker_mask]</span> [format_message(message, get_spoken_verb(message))]</span></i>"
+
 	for(var/mob/player in player_list)
-
-		var/understood = 0
-
-		if(istype(player,/mob/dead))
-			understood = 1
-		else if((src in player.languages) && check_special_condition(player))
-			understood = 1
-
-		if(understood)
-			if(!speaker_mask) speaker_mask = speaker.name
-			var/msg = "<i><span class='game say'>[name], <span class='name'>[speaker_mask]</span> <span class='message'>[speech_verb], \"<span class='[colour]'>[message]</span><span class='message'>\"</span></span></i>"
-			player << "[msg]"
+		if(istype(player,/mob/dead) || ((src in player.languages) && check_special_condition(player)))
+			player << msg
 
 /datum/language/proc/check_special_condition(var/mob/other)
 	return 1
@@ -43,6 +119,26 @@
 			return ask_verb
 	return speech_verb
 
+// Noise "language", for audible emotes.
+/datum/language/noise
+	name = "Noise"
+	desc = "Noises"
+	key = ""
+	flags = RESTRICTED|NONGLOBAL|INNATE|NO_TALK_MSG|NO_STUTTER
+
+/datum/language/noise/format_message(message, verb)
+	return "<span class='message'><span class='[colour]'>[message]</span></span>"
+
+/datum/language/noise/format_message_plain(message, verb)
+	return message
+
+/datum/language/noise/format_message_radio(message, verb)
+	return "<span class='[colour]'>[message]</span>"
+
+/datum/language/noise/get_talkinto_msg_range(message)
+	// if you make a loud noise (screams etc), you'll be heard from 4 tiles over instead of two
+	return (copytext(message, length(message)) == "!") ? 4 : 2
+
 /datum/language/unathi
 	name = "Sinta'unathi"
 	desc = "The common language of Moghes, composed of sibilant hisses and rattles. Spoken natively by Unathi."
@@ -52,6 +148,14 @@
 	colour = "soghun"
 	key = "o"
 	flags = WHITELISTED
+	syllables = list("ss","ss","ss","ss","skak","seeki","resh","las","esi","kor","sh")
+
+/datum/language/unathi/get_random_name()
+
+	var/new_name = ..()
+	while(findtextEx(new_name,"sss",1,null))
+		new_name = replacetext(new_name, "sss", "ss")
+	return capitalize(new_name)
 
 /datum/language/tajaran
 	name = "Siik'tajr"
@@ -62,6 +166,19 @@
 	colour = "tajaran"
 	key = "j"
 	flags = WHITELISTED
+	syllables = list("rr","rr","tajr","kir","raj","kii","mir","kra","ahk","nal","vah","khaz","jri","ran","darr", \
+	"mi","jri","dynh","manq","rhe","zar","rrhaz","kal","chur","eech","thaa","dra","jurl","mah","sanu","dra","ii'r", \
+	"ka","aasi","far","wa","baq","ara","qara","zir","sam","mak","hrar","nja","rir","khan","jun","dar","rik","kah", \
+	"hal","ket","jurl","mah","tul","cresh","azu","ragh")
+
+/datum/language/tajaran/get_random_name(var/gender)
+
+	var/new_name = ..(gender,1)
+	if(prob(80))
+		new_name += " [pick(list("Hadii","Kaytam","Zhan-Khazan","Hharar","Njarir'Akhan"))]"
+	else
+		new_name += ..(gender,1)
+	return new_name
 
 /datum/language/skrell
 	name = "Skrellian"
@@ -72,6 +189,7 @@
 	colour = "skrell"
 	key = "k"
 	flags = WHITELISTED
+	syllables = list("qr","qrr","xuq","qil","quum","xuqm","vol","xrim","zaoo","qu-uu","qix","qoo","zix","*","!")
 
 /datum/language/vox
 	name = "Vox-pidgin"
@@ -80,8 +198,13 @@
 	ask_verb = "creels"
 	exclaim_verb = "SHRIEKS"
 	colour = "vox"
-	key = "v"
-	flags = RESTRICTED
+	key = "5"
+	flags = WHITELISTED
+	syllables = list("ti","ti","ti","hi","hi","ki","ki","ki","ki","ya","ta","ha","ka","ya","chi","cha","kah", \
+	"SKRE","AHK","EHK","RAWK","KRA","AAA","EEE","KI","II","KRI","KA")
+
+/datum/language/vox/get_random_name()
+	return ..(FEMALE,1,6)
 
 /datum/language/diona
 	name = "Rootspeak"
@@ -92,14 +215,23 @@
 	colour = "soghun"
 	key = "q"
 	flags = RESTRICTED
+	syllables = list("hs","zt","kr","st","sh")
+
+/datum/language/diona/get_random_name()
+	var/new_name = "[pick(list("To Sleep Beneath","Wind Over","Embrace of","Dreams of","Witnessing","To Walk Beneath","Approaching the"))]"
+	new_name += " [pick(list("the Void","the Sky","Encroaching Night","Planetsong","Starsong","the Wandering Star","the Empty Day","Daybreak","Nightfall","the Rain"))]"
+	return new_name
 
 /datum/language/common
 	name = "Galactic Common"
 	desc = "The common galactic tongue."
 	speech_verb = "says"
+	whisper_verb = "whispers"
 	key = "0"
 	flags = RESTRICTED
+	syllables = list("blah","blah","blah","bleh","meh","neh","nah","wah")
 
+//TODO flag certain languages to use the mob-type specific say_quote and then get rid of these.
 /datum/language/common/get_spoken_verb(var/msg_end)
 	switch(msg_end)
 		if("!")
@@ -111,9 +243,20 @@
 /datum/language/human
 	name = "Sol Common"
 	desc = "A bastardized hybrid of informal English and elements of Mandarin Chinese; the common language of the Sol system."
-	colour = "rough"
+	speech_verb = "says"
+	whisper_verb = "whispers"
+	colour = "solcom"
 	key = "1"
 	flags = RESTRICTED
+	syllables = list("tao","shi","tzu","yi","com","be","is","i","op","vi","ed","lec","mo","cle","te","dis","e")
+
+/datum/language/human/get_spoken_verb(var/msg_end)
+	switch(msg_end)
+		if("!")
+			return pick("exclaims","shouts","yells") //TODO: make the basic proc handle lists of verbs.
+		if("?")
+			return ask_verb
+	return speech_verb
 
 // Galactic common languages (systemwide accepted standards).
 /datum/language/trader
@@ -122,6 +265,15 @@
 	speech_verb = "enunciates"
 	colour = "say_quote"
 	key = "2"
+	space_chance = 100
+	syllables = list("lorem", "ipsum", "dolor", "sit", "amet", "consectetur", "adipiscing", "elit",
+					 "sed", "do", "eiusmod", "tempor", "incididunt", "ut", "labore", "et", "dolore",
+					 "magna", "aliqua", "ut", "enim", "ad", "minim", "veniam", "quis", "nostrud",
+					 "exercitation", "ullamco", "laboris", "nisi", "ut", "aliquip", "ex", "ea", "commodo",
+					 "consequat", "duis", "aute", "irure", "dolor", "in", "reprehenderit", "in",
+					 "voluptate", "velit", "esse", "cillum", "dolore", "eu", "fugiat", "nulla",
+					 "pariatur", "excepteur", "sint", "occaecat", "cupidatat", "non", "proident", "sunt",
+					 "in", "culpa", "qui", "officia", "deserunt", "mollit", "anim", "id", "est", "laborum")
 
 /datum/language/gutter
 	name = "Gutter"
@@ -129,6 +281,7 @@
 	speech_verb = "growls"
 	colour = "rough"
 	key = "3"
+	syllables = list ("gra","ba","ba","breh","bra","rah","dur","ra","ro","gro","go","ber","bar","geh","heh", "gra")
 
 /datum/language/xenocommon
 	name = "Xenomorph"
@@ -139,6 +292,7 @@
 	exclaim_verb = "hisses"
 	key = "4"
 	flags = RESTRICTED
+	syllables = list("sss","sSs","SSS")
 
 /datum/language/xenos
 	name = "Hivemind"
@@ -273,15 +427,14 @@
 	return 1
 
 /mob/proc/remove_language(var/rem_language)
-
-	languages.Remove(all_languages[rem_language])
-
-	return 0
+	var/datum/language/L = all_languages[rem_language]
+	. = (L in languages)
+	languages.Remove(L)
 
 // Can we speak this language, as opposed to just understanding it?
 /mob/proc/can_speak(datum/language/speaking)
 
-	return (universal_speak || speaking in src.languages)
+	return (universal_speak || (speaking && speaking.flags & INNATE) || speaking in src.languages)
 
 //TBD
 /mob/verb/check_languages()
@@ -292,7 +445,10 @@
 	var/dat = "<b><font size = 5>Known Languages</font></b><br/><br/>"
 
 	for(var/datum/language/L in languages)
-		dat += "<b>[L.name] (:[L.key])</b><br/>[L.desc]<br/><br/>"
+		if(!(L.flags & NONGLOBAL))
+			dat += "<b>[L.name] (:[L.key])</b><br/>[L.desc]<br/><br/>"
 
 	src << browse(dat, "window=checklanguage")
 	return
+
+#undef SCRAMBLE_CACHE_LEN

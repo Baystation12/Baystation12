@@ -13,9 +13,6 @@
 	required_players = 1
 	votable = 0 //Remove after testing.
 
-	uplink_welcome = "Syndicate Uplink Console:"
-	uplink_uses = 10
-
 	//Possible roundstart antag types.
 	var/list/atypes = list("syndi","ling","tater","wiz","ninja","vox","cult") //Readd slug when borer spawn is fixed.
 	var/list/chosen_atypes = list()
@@ -85,6 +82,17 @@
 	return 1
 
 /datum/game_mode/calamity/post_setup()
+	event_manager.report_at_round_end = 1
+	// Reduce the interval between moderate/major events
+	var/datum/event_container/EModerate = event_manager.event_containers[EVENT_LEVEL_MODERATE]
+	var/datum/event_container/EMajor = event_manager.event_containers[EVENT_LEVEL_MAJOR]
+	EModerate.delay_modifier = 0.5
+	EMajor.delay_modifier = 0.75
+
+	// Add the cortical borer event
+	var/list/moderate_event_list = EModerate.available_events
+	var/event = new /datum/event_meta(EVENT_LEVEL_MODERATE, "Borer Infestation", /datum/event/borer_infestation, 400, is_one_shot = 1)
+	moderate_event_list.Add(event)
 
 	if(chosen_atypes)
 		for(var/atype in chosen_atypes)
@@ -176,7 +184,7 @@
 
 	switch(role)
 		if("syndi")
-			role_text = "Syndicate Operative"
+			role_text = "Mercenary"
 		if("ling")
 			role_text = "Changeling"
 		if("tater")
@@ -248,9 +256,9 @@
 	var/obj/effect/landmark/nuke_spawn = locate("landmark*Nuclear-Bomb")
 
 	var/nuke_code = "[rand(10000, 99999)]"
-	var/leader_selected = 0
 	var/spawnpos = 1
 
+	var/datum/mind/leader = null
 	for(var/datum/mind/player in candidates)
 
 		syndicates |= player
@@ -267,9 +275,9 @@
 		greet_syndicate(player)
 		equip_syndicate(player.current)
 
-		if(!leader_selected)
+		if(!leader)
 			prepare_syndicate_leader(player, nuke_code)
-			leader_selected = 1
+			leader = player
 
 		spawnpos++
 		update_synd_icons_added(player)
@@ -278,6 +286,8 @@
 
 	if(uplinkdevice)
 		var/obj/item/device/radio/uplink/U = new(uplinkdevice.loc)
+		if(leader)
+			U.hidden_uplink.uplink_owner = leader
 		U.hidden_uplink.uses = 40
 	if(nuke_spawn && synd_spawn.len > 0)
 		var/obj/machinery/nuclearbomb/the_bomb = new /obj/machinery/nuclearbomb(nuke_spawn.loc)
@@ -346,22 +356,11 @@
 		if(player.current && !(istype(player.current,/mob/living/carbon/human))) return 0
 
 		//Ninja intro crawl goes here.
-
 		if(!config.objectives_disabled)
 			player.objectives += new /datum/objective/ninja_highlander()
 			player.objectives += new /datum/objective/survive()
 
 		show_objectives(player)
-
-		//Ninja objective announcement goes here.
-
-		//Set ninja internals.
-		var/mob/living/carbon/human/N = player.current
-		N.internal = N.s_store
-		N.internals.icon_state = "internal1"
-		if(N.wear_suit && istype(N.wear_suit,/obj/item/clothing/suit/space/space_ninja))
-			var/obj/item/clothing/suit/space/space_ninja/S = N.wear_suit
-			S:randomize_param()
 
 /datum/game_mode/calamity/proc/spawn_vox_raiders(var/list/candidates)
 
@@ -412,11 +411,7 @@
 
 			var/mob/living/simple_animal/borer/roundstart/B = new(target_host)
 
-			player.current = B
-			B.mind = player
-			B.key = player.key
-			player.assigned_role = "Cortical Borer"
-			player.special_role = "Cortical Borer"
+			B.transfer_personality(player)
 
 			B.host = target_host
 			B.host_brain.name = target_host.name
@@ -424,10 +419,6 @@
 
 			var/datum/organ/external/head = target_host.get_organ("head")
 			head.implants += B
-
-			player.current << "\blue <b>You are a cortical borer!</b> You are a brain slug that worms its way \
-			into the head of its victim, lurking out of sight until it needs to take control."
-			player.current << "You can speak to your victim with <b>say</b>, to other borers with <b>say ;</b>, and use your Alien tab for abilities."
 
 			if(!config.objectives_disabled)
 				player.objectives += new /datum/objective/borer_survive()

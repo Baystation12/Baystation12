@@ -1,3 +1,25 @@
+//mob verbs are faster than object verbs. See mob/verb/examine.
+/mob/living/verb/pulled(atom/movable/AM as mob|obj in oview(1))
+	set name = "Pull"
+	set category = "Object"
+
+	if(AM.Adjacent(src))
+		src.start_pulling(AM)
+
+	return
+
+//mob verbs are faster than object verbs. See above.
+/mob/living/pointed(atom/A as mob|obj|turf in view())
+	if(src.stat || !src.canmove || src.restrained())
+		return 0
+	if(src.status_flags & FAKEDEATH)
+		return 0
+	if(!..())
+		return 0
+
+	usr.visible_message("<b>[src]</b> points to [A]")
+	return 1
+
 /mob/living/verb/succumb()
 	set hidden = 1
 	if ((src.health < 0 && src.health > -95.0))
@@ -410,7 +432,8 @@
 
 
 						step(pulling, get_dir(pulling.loc, T))
-						M.start_pulling(t)
+						if(t)
+							M.start_pulling(t)
 				else
 					if (pulling)
 						if (istype(pulling, /obj/structure/window))
@@ -435,8 +458,9 @@
 	set name = "Resist"
 	set category = "IC"
 
-	if(!isliving(usr) || usr.next_move > world.time)
+	if(usr.stat || !isliving(usr) || usr.next_move > world.time)
 		return
+
 	usr.next_move = world.time + 20
 
 	var/mob/living/L = usr
@@ -467,17 +491,17 @@
 		var/mob/living/simple_animal/borer/B = src.loc
 		var/mob/living/captive_brain/H = src
 
-		H << "\red <B>You begin doggedly resisting the parasite's control (this will take approximately sixty seconds).</B>"
-		B.host << "\red <B>You feel the captive mind of [src] begin to resist your control.</B>"
+		H << "<span class='danger'>You begin doggedly resisting the parasite's control (this will take approximately sixty seconds).</span>"
+		B.host << "<span class='danger'>You feel the captive mind of [src] begin to resist your control.</span>"
 
-		spawn(rand(400,500)+B.host.brainloss)
+		spawn(rand(200,250)+B.host.brainloss)
 
 			if(!B || !B.controlling)
 				return
 
 			B.host.adjustBrainLoss(rand(5,10))
-			H << "\red <B>With an immense exertion of will, you regain control of your body!</B>"
-			B.host << "\red <B>You feel control of the host brain ripped from your grasp, and retract your probosci before the wild neural impulses can damage you.</b>"
+			H << "<span class='danger'>With an immense exertion of will, you regain control of your body!</span>"
+			B.host << "<span class='danger'>You feel control of the host brain ripped from your grasp, and retract your probosci before the wild neural impulses can damage you.</span>"
 
 			B.detatch()
 
@@ -617,7 +641,7 @@
 				can_break_cuffs = 1
 			else if(istype(CM,/mob/living/carbon/human))
 				var/mob/living/carbon/human/H = CM
-				if(H.species.can_shred(H))
+				if(H.species.can_shred(H,1))
 					can_break_cuffs = 1
 
 			if(can_break_cuffs) //Don't want to do a lot of logic gating here.
@@ -663,7 +687,7 @@
 				can_break_cuffs = 1
 			else if(istype(CM,/mob/living/carbon/human))
 				var/mob/living/carbon/human/H = CM
-				if(H.species.can_shred(H))
+				if(H.species.can_shred(H,1))
 					can_break_cuffs = 1
 
 			if(can_break_cuffs) //Don't want to do a lot of logic gating here.
@@ -816,3 +840,6 @@
 
 /mob/living/proc/has_eyes()
 	return 1
+
+/mob/living/proc/slip(var/slipped_on,stun_duration=8)
+	return 0

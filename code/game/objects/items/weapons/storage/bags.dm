@@ -21,7 +21,6 @@
 	display_contents_with_number = 0 // UNStABLE AS FuCK, turn on when it stops crashing clients
 	use_to_pickup = 1
 	slot_flags = SLOT_BELT
-	flags = FPRINT | TABLEPASS
 
 // -----------------------------
 //          Trash bag
@@ -71,7 +70,7 @@
 // -----------------------------
 
 /obj/item/weapon/storage/bag/ore
-	name = "Mining Satchel"
+	name = "mining satchel"
 	desc = "This little bugger can be used to store and transport ores."
 	icon = 'icons/obj/mining.dmi'
 	icon_state = "satchel"
@@ -88,9 +87,9 @@
 // -----------------------------
 
 /obj/item/weapon/storage/bag/plants
+	name = "plant bag"
 	icon = 'icons/obj/hydroponics.dmi'
 	icon_state = "plantbag"
-	name = "Plant Bag"
 	storage_slots = 50; //the number of plant pieces it can carry.
 	max_combined_w_class = 200 //Doesn't matter what this is, so long as it's more or equal to storage_slots * plants.w_class
 	max_w_class = 3
@@ -105,9 +104,9 @@
 // However, making it a storage/bag allows us to reuse existing code in some places. -Sayu
 
 /obj/item/weapon/storage/bag/sheetsnatcher
+	name = "sheet snatcher"
 	icon = 'icons/obj/mining.dmi'
 	icon_state = "sheetsnatcher"
-	name = "Sheet Snatcher"
 	desc = "A patented Nanotrasen storage system designed for any kind of mineral sheet."
 
 	var/capacity = 300; //the number of sheets it can carry.
@@ -236,7 +235,7 @@
 // -----------------------------
 
 /obj/item/weapon/storage/bag/sheetsnatcher/borg
-	name = "Sheet Snatcher 9000"
+	name = "sheet snatcher 9000"
 	desc = ""
 	capacity = 500//Borgs get more because >specialization
 
@@ -245,9 +244,9 @@
 // -----------------------------
 
 /obj/item/weapon/storage/bag/cash
+	name = "cash bag"
 	icon = 'icons/obj/storage.dmi'
 	icon_state = "cashbag"
-	name = "Cash bag"
 	desc = "A bag for carrying lots of cash. It's got a big dollar sign printed on the front."
 	storage_slots = 50; //the number of cash pieces it can carry.
 	max_combined_w_class = 200 //Doesn't matter what this is, so long as it's more or equal to storage_slots * cash.w_class

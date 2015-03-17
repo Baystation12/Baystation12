@@ -7,6 +7,7 @@
 	density = 1
 	anchored = 1.0
 	layer = 2.8
+	interact_offline = 1
 
 	var/on = 0
 	use_power = 1
@@ -22,6 +23,11 @@
 /obj/machinery/atmospherics/unary/cryo_cell/New()
 	..()
 	initialize_directions = dir
+
+/obj/machinery/atmospherics/unary/cryo_cell/Del()
+	if(occupant)
+		occupant.loc = loc
+	..()
 
 /obj/machinery/atmospherics/unary/cryo_cell/initialize()
 	if(node) return

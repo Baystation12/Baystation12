@@ -4,6 +4,7 @@
 	icon = 'icons/obj/apiary_bees_etc.dmi'
 	icon_state = "bees1"
 	icon_dead = "bees1"
+	mob_size = 1
 	var/strength = 1
 	var/feral = 0
 	var/mut = 0
@@ -18,7 +19,6 @@
 /mob/living/simple_animal/bee/New(loc, var/obj/machinery/apiary/new_parent)
 	..()
 	parent = new_parent
-	verbs -= /atom/movable/verb/pull
 
 /mob/living/simple_animal/bee/Del()
 	if(parent)

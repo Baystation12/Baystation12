@@ -12,7 +12,7 @@ var/list/sacrificed = list()
 			for(var/obj/effect/rune/R in world)
 				if(R == src)
 					continue
-				if(R.word1 == cultwords["travel"] && R.word2 == cultwords["self"] && R.word3 == key && R.z != 2)
+				if(R.word1 == cultwords["travel"] && R.word2 == cultwords["self"] && R.word3 == key && isPlayerLevel(R.z))
 					index++
 					allrunesloc.len = index
 					allrunesloc[index] = R.loc
@@ -355,7 +355,7 @@ var/list/sacrificed = list()
 				usr.visible_message("\red [usr]'s eyes glow blue as \he freezes in place, absolutely motionless.", \
 				"\red The shadow that is your spirit separates itself from your body. You are now in the realm beyond. While this is a great sight, being here strains your mind and body. Hurry...", \
 				"\red You hear only complete silence for a moment.")
-				usr.ghostize(1)
+				announce_ghost_joinleave(usr.ghostize(1), 1, "You feel that they had to use some [pick("dark", "black", "blood", "forgotten", "forbidden")] magic to [pick("invade","disturb","disrupt","infest","taint","spoil","blight")] this place!")
 				L.ajourn = 1
 				while(L)
 					if(L.key)
@@ -399,8 +399,6 @@ var/list/sacrificed = list()
 					D.real_name = copytext(P.info, findtext(P.info,">")+1, findtext(P.info,"<",2) )
 					chose_name = 1
 					break
-			if(!chose_name)
-				D.real_name = "[pick(first_names_male)] [pick(last_names)]"
 			D.universal_speak = 1
 			D.status_flags &= ~GODMODE
 			D.s_tone = 35
@@ -415,10 +413,14 @@ var/list/sacrificed = list()
 				ticker.mode:add_cultist(D.mind)
 			else
 				ticker.mode.cult+=D.mind
-			D.mind.assigned_role = pick("Anguished", "Blasphemous", "Corrupt", "Depraved", "Disturbed", "Exacerbated", "Foul", "Hateful", "Inexorable", "Implacable", "Impure", "Pained", "Profane", "Profligate", "Resentful", "Restless", "Tormented", "Unclean", "Unforgiving", "Vengeful", "Vindictive", "Wicked", "Wronged")
-			D.mind.assigned_role += " "
-			D.mind.assigned_role += pick("Apparition", "Aptrgangr", "Draugr", "Dybbuk", "Ghast", "Ghost", "Gjenganger", "Haint", "Phantom", "Phantasm", "Poltergeist", "Revenant", "Shade", "Soul", "Spectre", "Spirit", "Spook", "Visitant", "Wraith")
+
+			D.mind.assigned_role = "Manifest Ghost"
 			D.mind.special_role = "Cultist"
+			if(!chose_name)
+				D.real_name = pick("Anguished", "Blasphemous", "Corrupt", "Cruel", "Depraved", "Despicable", "Disturbed", "Exacerbated", "Foul", "Hateful", "Inexorable", "Implacable", "Impure", "Malevolent", "Malignant", "Malicious", "Pained", "Profane", "Profligate", "Relentless", "Resentful", "Restless", "Spiteful", "Tormented", "Unclean", "Unforgiving", "Vengeful", "Vindictive", "Wicked", "Wronged")
+				D.real_name += " "
+				D.real_name += pick("Apparition", "Aptrgangr", "Dis", "Draugr", "Dybbuk", "Eidolon", "Fetch", "Fylgja", "Ghast", "Ghost", "Gjenganger", "Haint", "Phantom", "Phantasm", "Poltergeist", "Revenant", "Shade", "Shadow", "Soul", "Spectre", "Spirit", "Spook", "Visitant", "Wraith")
+
 			D << "<font color=\"purple\"><b><i>Your blood pulses. Your head throbs. The world goes red. All at once you are aware of a horrible, horrible truth. The veil of reality has been ripped away and in the festering wound left behind something sinister takes root.</b></i></font>"
 			D << "<font color=\"purple\"><b><i>Assist your new compatriots in their dark dealings. Their goal is yours, and yours is theirs. You serve the Dark One above all else. Bring It back.</b></i></font>"
 

@@ -31,30 +31,11 @@
 			bundle = W
 		bundle.worth += src.worth
 		bundle.update_icon()
-		if (!istype(src.loc, /turf) && istype(user, /mob/living/carbon/human))
+		if(istype(user, /mob/living/carbon/human))
 			var/mob/living/carbon/human/h_user = user
-			if(h_user.r_hand == src)
-				h_user.drop_from_inventory(src)
-				h_user.put_in_r_hand(bundle)
-			else if(h_user.l_hand == src)
-				h_user.drop_from_inventory(src)
-				h_user.put_in_l_hand(bundle)
-			else if (h_user.l_store == src)
-				h_user.drop_from_inventory(src)
-				bundle.loc = h_user
-				bundle.layer = 20
-				h_user.l_store = bundle
-				h_user.update_inv_pockets()
-			else if (h_user.r_store == src)
-				h_user.drop_from_inventory(src)
-				bundle.loc = h_user
-				bundle.layer = 20
-				h_user.r_store = bundle
-				h_user.update_inv_pockets()
-			else
-				src.loc = get_turf(h_user)
-				if(h_user.client)	h_user.client.screen -= src
-				h_user.put_in_hands(bundle)
+			h_user.drop_from_inventory(src)
+			h_user.drop_from_inventory(bundle)
+			h_user.put_in_hands(bundle)
 		user << "<span class='notice'>You add [src.worth] Thalers worth of money to the bundles.<br>It holds [bundle.worth] Thalers now.</span>"
 		del(src)
 
@@ -176,8 +157,7 @@ proc/spawn_money(var/sum, spawnloc, mob/living/carbon/human/human_user as mob)
 	desc = "A card that holds an amount of money."
 	var/owner_name = "" //So the ATM can set it so the EFTPOS can put a valid name on transactions.
 
-/obj/item/weapon/spacecash/ewallet/examine()
-	set src in view()
-	..()
-	if (!(usr in view(2)) && usr!=src.loc) return
-	usr << "\blue Charge card's owner: [src.owner_name]. Thalers remaining: [src.worth]."
+/obj/item/weapon/spacecash/ewallet/examine(mob/user)
+	..(user)
+	if (!(user in view(2)) && user!=src.loc) return
+	user << "\blue Charge card's owner: [src.owner_name]. Thalers remaining: [src.worth]."

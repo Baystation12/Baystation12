@@ -21,41 +21,45 @@
 /********
 * photo *
 ********/
+var/global/photo_count = 0
+
 /obj/item/weapon/photo
 	name = "photo"
 	icon = 'icons/obj/items.dmi'
 	icon_state = "photo"
 	item_state = "paper"
 	w_class = 2.0
+	var/id
 	var/icon/img	//Big photo image
 	var/scribble	//Scribble on the back.
 	var/icon/tiny
 	var/photo_size = 3
 
+/obj/item/weapon/photo/New()
+	id = photo_count++
+
 /obj/item/weapon/photo/attack_self(mob/user as mob)
-	examine()
+	user.examinate(src)
 
 /obj/item/weapon/photo/attackby(obj/item/weapon/P as obj, mob/user as mob)
 	if(istype(P, /obj/item/weapon/pen) || istype(P, /obj/item/toy/crayon))
-		var/txt = sanitize(input(user, "What would you like to write on the back?", "Photo Writing", null)  as text)
-		txt = copytext(txt, 1, 128)
+		var/txt = sanitize(copytext(input(user, "What would you like to write on the back?", "Photo Writing", null)  as text, 1, 128))
 		if(loc == user && user.stat == 0)
 			scribble = txt
 	..()
 
-/obj/item/weapon/photo/examine()
-	set src in oview(1)
-	if(in_range(usr, src))
-		show(usr)
-		usr << desc
+/obj/item/weapon/photo/examine(mob/user)
+	if(in_range(user, src))
+		show(user)
+		user << desc
 	else
-		usr << "<span class='notice'>It is too far away.</span>"
+		user << "<span class='notice'>It is too far away.</span>"
 
 /obj/item/weapon/photo/proc/show(mob/user as mob)
-	user << browse_rsc(img, "tmp_photo.png")
+	user << browse_rsc(img, "tmp_photo_[id].png")
 	user << browse("<html><head><title>[name]</title></head>" \
 		+ "<body style='overflow:hidden;margin:0;text-align:center'>" \
-		+ "<img src='tmp_photo.png' width='[64*photo_size]' style='-ms-interpolation-mode:nearest-neighbor' />" \
+		+ "<img src='tmp_photo_[id].png' width='[64*photo_size]' style='-ms-interpolation-mode:nearest-neighbor' />" \
 		+ "[scribble ? "<br>Written on the back:<br><i>[scribble]</i>" : ""]"\
 		+ "</body></html>", "window=book;size=[64*photo_size]x[scribble ? 400 : 64*photo_size]")
 	onclose(user, "[name]")
@@ -66,7 +70,7 @@
 	set category = "Object"
 	set src in usr
 
-	var/n_name = copytext(sanitize(input(usr, "What would you like to label the photo?", "Photo Labelling", null)  as text), 1, MAX_NAME_LEN)
+	var/n_name = sanitize(copytext(input(usr, "What would you like to label the photo?", "Photo Labelling", null)  as text, 1, MAX_NAME_LEN))
 	//loc.loc check is for making possible renaming photos in clipboards
 	if(( (loc == usr || (loc.loc && loc.loc == usr)) && usr.stat == 0))
 		name = "[(n_name ? text("[n_name]") : "photo")]"
@@ -118,7 +122,7 @@
 	icon_state = "camera"
 	item_state = "electropack"
 	w_class = 2.0
-	flags = FPRINT | CONDUCT | TABLEPASS
+	flags = CONDUCT
 	slot_flags = SLOT_BELT
 	matter = list("metal" = 2000)
 	var/pictures_max = 10
@@ -271,8 +275,8 @@
 		y_c--
 		x_c = x_c - size
 
-	var/datum/picture/P = createpicture(target, user, turfs, mobs, flag)
-	printpicture(user, P)
+	var/obj/item/weapon/photo/p = createpicture(target, user, turfs, mobs, flag)
+	printpicture(user, p)
 
 /obj/item/device/camera/proc/createpicture(atom/target, mob/user, list/turfs, mobs, flag)
 	var/icon/photoimage = get_icon(turfs, target)
@@ -286,30 +290,37 @@
 	ic.Blend(small_img,ICON_OVERLAY, 10, 13)
 	pc.Blend(tiny_img,ICON_OVERLAY, 12, 19)
 
-	var/datum/picture/P = new()
-	P.fields["author"] = user
-	P.fields["icon"] = ic
-	P.fields["tiny"] = pc
-	P.fields["img"] = photoimage
-	P.fields["desc"] = mobs
-	P.fields["pixel_x"] = rand(-10, 10)
-	P.fields["pixel_y"] = rand(-10, 10)
-	P.fields["size"] = size
+	var/obj/item/weapon/photo/p = new()
+	p.name = "photo"
+	p.icon = ic
+	p.tiny = pc
+	p.img = photoimage
+	p.desc = mobs
+	p.pixel_x = rand(-10, 10)
+	p.pixel_y = rand(-10, 10)
+	p.photo_size = size
 
-	return P
+	return p
 
-/obj/item/device/camera/proc/printpicture(mob/user, var/datum/picture/P)
-	var/obj/item/weapon/photo/Photo = new/obj/item/weapon/photo()
-	Photo.loc = user.loc
+/obj/item/device/camera/proc/printpicture(mob/user, obj/item/weapon/photo/p)
+	p.loc = user.loc
 	if(!user.get_inactive_hand())
-		user.put_in_inactive_hand(Photo)
-	Photo.construct(P)
+		user.put_in_inactive_hand(p)
 
-/obj/item/weapon/photo/proc/construct(var/datum/picture/P)
-	icon = P.fields["icon"]
-	tiny = P.fields["tiny"]
-	img = P.fields["img"]
-	desc = P.fields["desc"]
-	pixel_x = P.fields["pixel_x"]
-	pixel_y = P.fields["pixel_y"]
-	photo_size = P.fields["size"]
+/obj/item/weapon/photo/proc/copy(var/copy_id = 0)
+	var/obj/item/weapon/photo/p = new/obj/item/weapon/photo()
+
+	p.name = name
+	p.icon = icon
+	p.tiny = tiny
+	p.img = img
+	p.desc = desc
+	p.pixel_x = pixel_x
+	p.pixel_y = pixel_y
+	p.photo_size = photo_size
+	p.scribble = scribble
+
+	if(copy_id)
+		p.id = id
+
+	return p

@@ -29,14 +29,8 @@
 	..()
 	return
 
-/obj/structure/stool/bed/attack_paw(mob/user as mob)
-	return src.attack_hand(user)
-
 /obj/structure/stool/bed/attack_hand(mob/user as mob)
 	manual_unbuckle(user)
-	return
-
-/obj/structure/stool/bed/proc/handle_rotation()
 	return
 
 /obj/structure/stool/bed/MouseDrop(atom/over_object)
@@ -107,7 +101,7 @@
 			"You hear metal clanking")
 	M.buckled = src
 	M.loc = src.loc
-	M.dir = src.dir
+	M.set_dir(src.dir)
 	M.update_canmove()
 	src.buckled_mob = M
 	src.add_fingerprint(user)

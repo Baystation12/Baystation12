@@ -25,22 +25,21 @@
 		hear_sleep(message)
 		return
 
-	var/style = "body"
-
 	//non-verbal languages are garbled if you can't see the speaker. Yes, this includes if they are inside a closet.
 	if (language && (language.flags & NONVERBAL))
 		if (!speaker || (src.sdisabilities & BLIND || src.blinded) || !(speaker in view(src)))
 			message = stars(message)
 
-	if(!say_understands(speaker,language))
-		if(istype(speaker,/mob/living/simple_animal))
-			var/mob/living/simple_animal/S = speaker
-			message = pick(S.speak)
-		else
-			message = stars(message)
-
-	if(language)
-		style = language.colour
+	if(!(language && (language.flags & INNATE))) // skip understanding checks for INNATE languages
+		if(!say_understands(speaker,language))
+			if(istype(speaker,/mob/living/simple_animal))
+				var/mob/living/simple_animal/S = speaker
+				message = pick(S.speak)
+			else
+				if(language)
+					message = language.scramble(message)
+				else
+					message = stars(message)
 
 	var/speaker_name = speaker.name
 	if(istype(speaker, /mob/living/carbon/human))
@@ -61,12 +60,16 @@
 			message = "<b>[message]</b>"
 
 	if(sdisabilities & DEAF || ear_deaf)
-		if(speaker == src)
-			src << "<span class='warning'>You cannot hear yourself speak!</span>"
-		else
-			src << "<span class='name'>[speaker_name]</span>[alt_name] talks but you cannot hear \him."
+		if(!language || !(language.flags & INNATE)) // INNATE is the flag for audible-emote-language, so we don't want to show an "x talks but you cannot hear them" message if it's set
+			if(speaker == src)
+				src << "<span class='warning'>You cannot hear yourself speak!</span>"
+			else
+				src << "<span class='name'>[speaker_name]</span>[alt_name] talks but you cannot hear \him."
 	else
-		src << "<span class='game say'><span class='name'>[speaker_name]</span>[alt_name] [track][verb], <span class='message'><span class='[style]'>\"[message]\"</span></span></span>"
+		if(language)
+			src << "<span class='game say'><span class='name'>[speaker_name]</span>[alt_name] [track][language.format_message(message, verb)]</span>"
+		else
+			src << "<span class='game say'><span class='name'>[speaker_name]</span>[alt_name] [track][verb], <span class='message'><span class='body'>\"[message]\"</span></span></span>"
 		if (speech_sound && (get_dist(speaker, src) <= world.view && src.z == speaker.z))
 			var/turf/source = speaker? get_turf(speaker) : get_turf(src)
 			src.playsound_local(source, speech_sound, sound_vol, 1)
@@ -83,25 +86,27 @@
 
 	var/track = null
 
-	var/style = "body"
-
 	//non-verbal languages are garbled if you can't see the speaker. Yes, this includes if they are inside a closet.
 	if (language && (language.flags & NONVERBAL))
 		if (!speaker || (src.sdisabilities & BLIND || src.blinded) || !(speaker in view(src)))
 			message = stars(message)
 
-	if(!say_understands(speaker,language))
-		if(istype(speaker,/mob/living/simple_animal))
-			var/mob/living/simple_animal/S = speaker
-			message = pick(S.speak)
-		else
+	if(!(language && (language.flags & INNATE))) // skip understanding checks for INNATE languages
+		if(!say_understands(speaker,language))
+			if(istype(speaker,/mob/living/simple_animal))
+				var/mob/living/simple_animal/S = speaker
+				if(S.speak && S.speak.len)
+					message = pick(S.speak)
+				else
+					return
+			else
+				if(language)
+					message = language.scramble(message)
+				else
+					message = stars(message)
+
+		if(hard_to_hear)
 			message = stars(message)
-
-	if(language)
-		style = language.colour
-
-	if(hard_to_hear)
-		message = stars(message)
 
 	var/speaker_name = speaker.name
 
@@ -162,13 +167,18 @@
 			speaker_name = "[speaker.real_name] ([speaker_name])"
 		track = "[speaker_name] (<a href='byond://?src=\ref[src];track=\ref[speaker]'>follow</a>)"
 
+	var/formatted
+	if(language)
+		formatted = language.format_message_radio(message, verb)
+	else
+		formatted = "[verb], <span class=\"body\">\"[message]\"</span>"
 	if(sdisabilities & DEAF || ear_deaf)
 		if(prob(20))
 			src << "<span class='warning'>You feel your headset vibrate but can hear nothing from it!</span>"
 	else if(track)
-		src << "[part_a][track][part_b][verb], <span class=\"[style]\">\"[message]\"</span></span></span>"
+		src << "[part_a][track][part_b][formatted]</span></span>"
 	else
-		src << "[part_a][speaker_name][part_b][verb], <span class=\"[style]\">\"[message]\"</span></span></span>"
+		src << "[part_a][speaker_name][part_b][formatted]</span></span>"
 
 /mob/proc/hear_signlang(var/message, var/verb = "gestures", var/datum/language/language, var/mob/speaker = null)
 	if(!client)

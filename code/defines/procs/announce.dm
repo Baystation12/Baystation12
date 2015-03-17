@@ -7,7 +7,7 @@
 	var/log = 0
 	var/sound
 	var/newscast = 0
-	var/channel_name = "Public Station Announcements"
+	var/channel_name = "Station Announcements"
 	var/announcement_type = "Announcement"
 
 /datum/announcement/New(var/do_log = 0, var/new_sound = null, var/do_newscast = 0)
@@ -36,7 +36,7 @@
 	var/tmp/message_title = new_title ? new_title : title
 	var/tmp/message_sound = new_sound ? sound(new_sound) : sound
 
-	message = html_encode(message)
+	message = trim_strip_html_properly(message)
 	message_title = html_encode(message_title)
 
 	Message(message, message_title)

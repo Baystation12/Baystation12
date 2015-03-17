@@ -1,5 +1,5 @@
 /obj/machinery/computer/aifixer
-	name = "AI System Integrity Restorer"
+	name = "\improper AI system integrity restorer"
 	icon = 'icons/obj/computer.dmi'
 	icon_state = "ai-fixer"
 	circuit = /obj/item/weapon/circuitboard/aifixer
@@ -8,23 +8,55 @@
 	var/active = 0
 
 /obj/machinery/computer/aifixer/New()
-	src.overlays += image('icons/obj/computer.dmi', "ai-fixer-empty")
+	update_icon()
 
+/obj/machinery/computer/aifixer/proc/load_ai(var/mob/living/silicon/ai/transfer, var/obj/item/device/aicard/card, var/mob/user)
+
+	if(!transfer)
+		return
+
+	// Transfer over the AI.
+	transfer << "You have been uploaded to a stationary terminal. Sadly, there is no remote access from here."
+	user << "\blue <b>Transfer successful</b>: \black [transfer.name] ([rand(1000,9999)].exe) installed and executed successfully. Local copy has been removed."
+
+	transfer.loc = src
+	transfer.cancel_camera()
+	transfer.control_disabled = 1
+	occupant = transfer
+
+	if(card)
+		card.clear()
+
+	update_icon()
 
 /obj/machinery/computer/aifixer/attackby(I as obj, user as mob)
-	if(istype(I, /obj/item/device/aicard))
-		if(stat & (NOPOWER|BROKEN))
-			user << "This terminal isn't functioning right now, get it working!"
-			return
-		I:transfer_ai("AIFIXER","AICARD",src,user)
 
+	if(istype(I, /obj/item/device/aicard))
+
+		if(stat & (NOPOWER|BROKEN))
+			user << "This terminal isn't functioning right now."
+			return
+
+		var/obj/item/device/aicard/card = I
+		var/mob/living/silicon/ai/comp_ai = locate() in src
+		var/mob/living/silicon/ai/card_ai = locate() in card
+
+		if(istype(comp_ai))
+			if(active)
+				user << "\red <b>ERROR</b>: \black Reconstruction in progress."
+				return
+			card.grab_ai(comp_ai, user)
+			if(!(locate(/mob/living/silicon/ai) in src)) occupant = null
+		else if(istype(card_ai))
+			load_ai(card_ai,card,user)
+			occupant = locate(/mob/living/silicon/ai) in src
+
+		update_icon()
+		return
 	..()
 	return
 
 /obj/machinery/computer/aifixer/attack_ai(var/mob/user as mob)
-	return attack_hand(user)
-
-/obj/machinery/computer/aifixer/attack_paw(var/mob/user as mob)
 	return attack_hand(user)
 
 /obj/machinery/computer/aifixer/attack_hand(var/mob/user as mob)
@@ -36,7 +68,7 @@
 
 	if (src.occupant)
 		var/laws
-		dat += "Stored AI: [src.occupant.name]<br>System integrity: [(src.occupant.health+100)/2]%<br>"
+		dat += "Stored AI: [src.occupant.name]<br>System integrity: [src.occupant.system_integrity()]%<br>"
 
 		for (var/law in occupant.laws.ion)
 			if(law)
@@ -112,17 +144,16 @@
 
 /obj/machinery/computer/aifixer/update_icon()
 	..()
-	// Broken / Unpowered
-	if((stat & BROKEN) || (stat & NOPOWER))
-		overlays.Cut()
 
-	// Working / Powered
-	else
-		if (occupant)
-			switch (occupant.stat)
-				if (0)
-					overlays += image('icons/obj/computer.dmi', "ai-fixer-full")
-				if (2)
-					overlays += image('icons/obj/computer.dmi', "ai-fixer-404")
+	overlays.Cut()
+
+	if((stat & BROKEN) || (stat & NOPOWER))
+		return
+
+	if(occupant)
+		if(occupant.stat)
+			overlays += image('icons/obj/computer.dmi', "ai-fixer-404")
 		else
-			overlays += image('icons/obj/computer.dmi', "ai-fixer-empty")
+			overlays += image('icons/obj/computer.dmi', "ai-fixer-full")
+	else
+		overlays += image('icons/obj/computer.dmi', "ai-fixer-empty")

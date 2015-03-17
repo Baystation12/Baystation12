@@ -72,6 +72,16 @@ datum
 				handle_reactions()
 				return total_transfered
 
+			get_master_reagent()
+				var/the_reagent = null
+				var/the_volume = 0
+				for(var/datum/reagent/A in reagent_list)
+					if(A.volume > the_volume)
+						the_volume = A.volume
+						the_reagent = A
+				
+				return the_reagent
+			
 			get_master_reagent_name()
 				var/the_name = null
 				var/the_volume = 0
