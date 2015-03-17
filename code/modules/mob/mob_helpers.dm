@@ -84,13 +84,13 @@
 	if(istype(A, /mob/living/silicon/ai))
 		return 1
 	return 0
-    
+
 /mob/proc/isAI()
 	return 0
 
 /mob/living/silicon/ai/isAI()
 	return 1
-    
+
 /mob/proc/isRobot()
 	return 0
 
@@ -154,13 +154,18 @@ proc/hassensorlevel(A, var/level)
 		var/obj/item/clothing/under/U = H.w_uniform
 		return U.sensor_mode >= level
 	return 0
-	
+
 proc/getsensorlevel(A)
 	var/mob/living/carbon/human/H = A
 	if(istype(H) && istype(H.w_uniform, /obj/item/clothing/under))
 		var/obj/item/clothing/under/U = H.w_uniform
 		return U.sensor_mode
 	return SUIT_SENSOR_OFF
+
+
+/proc/is_admin(var/mob/user)
+	return check_rights(R_ADMIN, 0, user) != 0
+
 
 /proc/hsl2rgb(h, s, l)
 	return //TODO: Implement

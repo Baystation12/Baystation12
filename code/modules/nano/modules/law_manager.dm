@@ -222,7 +222,7 @@
 	return law_sets
 
 /obj/nano_module/law_manager/proc/is_malf(var/mob/user)
-	return is_admin(user) || (owner.isAI() && owner.mind.special_role == "malfunction")
+	return is_admin(user) || (owner.mind && (owner.mind.special_role == "malfunction" || owner.mind.special_role == "traitor"))
 
 /obj/nano_module/law_manager/proc/is_slaved()
 	if(owner.isRobot())

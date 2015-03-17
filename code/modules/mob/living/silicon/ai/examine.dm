@@ -1,7 +1,7 @@
 /mob/living/silicon/ai/examine(mob/user)
 	if(!..(user))
 		return
-		
+
 	var/msg = ""
 	if (src.stat == DEAD)
 		msg += "<span class='deadsay'>It appears to be powered-down.</span>\n"
@@ -23,5 +23,14 @@
 		msg += "</span>"
 	msg += "*---------*</span>"
 
-	usr << msg
+	user << msg
+	user.showLaws(src)
+
 	return
+
+/mob/proc/showLaws(var/mob/living/silicon/S)
+	return
+
+/mob/dead/observer/showLaws(var/mob/living/silicon/S)
+	if(antagHUD || is_admin(src))
+		S.laws.show_laws(src)
