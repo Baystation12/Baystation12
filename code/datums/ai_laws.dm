@@ -55,11 +55,11 @@ var/global/const/base_law_type = /datum/ai_laws/nanotrasen
 	if(sorted_laws.len)
 		return
 
-	if(zeroth_law)
-		sorted_laws += zeroth_law
-
 	for(var/ion_law in ion_laws)
 		sorted_laws += ion_law
+
+	if(zeroth_law)
+		sorted_laws += zeroth_law
 
 	var/index = 1
 	for(var/datum/ai_law/inherent_law in inherent_laws)
@@ -172,4 +172,7 @@ var/global/const/base_law_type = /datum/ai_laws/nanotrasen
 /datum/ai_laws/proc/show_laws(var/who)
 	sort_laws()
 	for(var/datum/ai_law/law in sorted_laws)
-		who << "[law.get_index()]. [law.law]"
+		if(law == zeroth_law || law == zeroth_law_borg)
+			who << "<span class='danger'>[law.get_index()]. [law.law]</span>"
+		else
+			who << "[law.get_index()]. [law.law]"
