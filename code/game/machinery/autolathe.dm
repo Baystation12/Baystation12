@@ -6,7 +6,7 @@
 	anchored = 1
 	use_power = 1
 	idle_power_usage = 10
-	active_power_usage = 100
+	active_power_usage = 2000
 
 	var/list/machine_recipes
 	var/list/stored_material =  list("metal" = 0, "glass" = 0)
@@ -22,6 +22,7 @@
 	var/build_time = 50
 
 	var/datum/wires/autolathe/wires = null
+
 
 /obj/machinery/autolathe/New()
 
@@ -233,8 +234,7 @@
 			return
 
 		busy = 1
-		//This needs some work.
-		use_power(max(2000, (making.power_use*multiplier)))
+		update_use_power(2)
 
 		//Check if we still have the materials.
 		for(var/material in making.resources)
@@ -253,6 +253,7 @@
 		sleep(build_time)
 
 		busy = 0
+		update_use_power(1)
 
 		//Sanity check.
 		if(!making || !src) return

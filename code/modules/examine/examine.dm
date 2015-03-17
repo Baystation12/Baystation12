@@ -51,7 +51,7 @@
 
 /client/Stat()
 	. = ..()
-	if(statpanel("Examine"))
+	if(usr && statpanel("Examine"))
 		stat(null,"[description_holders["icon"]]    <font size='5'>[description_holders["name"]]</font>") //The name, written in big letters.
 		stat(null,"[description_holders["desc"]]") //the default examine text.
 		if(description_holders["info"])

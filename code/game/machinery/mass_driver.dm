@@ -40,6 +40,3 @@
 		return
 	drive()
 	..(severity)
-
-/obj/machinery/mass_driver/process()
-	return
