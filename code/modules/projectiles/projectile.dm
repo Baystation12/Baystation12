@@ -51,6 +51,18 @@
 	var/drowsy = 0
 	var/agony = 0
 	var/embed = 0 // whether or not the projectile can embed itself in the mob
+	
+	var/hitscan = 0	// whether the projectile should be hitscan
+
+	// effect types to be used
+	var/muzzle_type
+	var/tracer_type
+	var/impact_type
+	
+	var/datum/plot_vector/trajectory	// used to plot the path of the projectile
+	var/datum/vector_loc/location		// current location of the projectile in pixel space
+	var/matrix/effect_transform			// matrix to rotate and scale projectile effects - putting it here so it doesn't 
+										//  have to be recreated multiple times
 
 //TODO: make it so this is called more reliably, instead of sometimes by bullet_act() and sometimes not
 /obj/item/projectile/proc/on_hit(var/atom/target, var/blocked = 0, var/def_zone = null)
@@ -63,6 +75,7 @@
 
 //called when the projectile stops flying because it collided with something
 /obj/item/projectile/proc/on_impact(var/atom/A)
+	impact_effect(effect_transform)		// generate impact effect
 	return
 
 //Checks if the projectile is eligible for embedding. Not that it necessarily will.
@@ -135,16 +148,21 @@
 	xo = new_x - starting_loc.x
 
 //Called when the projectile intercepts a mob. Returns 1 if the projectile hit the mob, 0 if it missed and should keep flying.
-/obj/item/projectile/proc/attack_mob(var/mob/living/target_mob, var/distance, var/miss_modifier)
+/obj/item/projectile/proc/attack_mob(var/mob/living/target_mob, var/distance, var/miss_modifier=0)
 	//accuracy bonus from aiming
-	if (istype(shot_from, /obj/item/weapon/gun))	//If you aim at someone beforehead, it'll hit more often.
-		var/obj/item/weapon/gun/daddy = shot_from	//Kinda balanced by fact you need like 2 seconds to aim
+	if (istype(shot_from, /obj/item/weapon/gun))
+		var/obj/item/weapon/gun/daddy = shot_from
 		miss_modifier -= round(15*daddy.accuracy)
-		if (daddy.aim_targets && original in daddy.aim_targets) //As opposed to no-delay pew pew
+		
+		//If you aim at someone beforehead, it'll hit more often.
+		//Kinda balanced by fact you need like 2 seconds to aim
+		//As opposed to no-delay pew pew
+		if (daddy.aim_targets && original in daddy.aim_targets)
 			miss_modifier += -30
 
 	//roll to-hit
-	var/hit_zone = get_zone_with_miss_chance(def_zone, target_mob, max(miss_modifier + 15*(distance-2), 0))
+	miss_modifier = max(miss_modifier + 15*(distance-2), 0)
+	var/hit_zone = get_zone_with_miss_chance(def_zone, target_mob, miss_modifier, ranged_attack=(distance > 1))
 	if(!hit_zone)
 		visible_message("<span class='notice'>\The [src] misses [target_mob] narrowly!</span>")
 		return 0
@@ -176,7 +194,7 @@
 
 	return 1
 
-/obj/item/projectile/Bump(atom/A as mob|obj|turf|area)
+/obj/item/projectile/Bump(atom/A as mob|obj|turf|area, forced=0)
 	if(A == src)
 		return 0 //no
 	
@@ -184,7 +202,7 @@
 		loc = A.loc
 		return 0 //cannot shoot yourself
 
-	if(bumped || (A in permutated))
+	if((bumped && !forced) || (A in permutated))
 		return 0
 
 	var/passthrough = 0 //if the projectile should continue flying
@@ -194,6 +212,13 @@
 	if(ismob(A))
 		var/mob/M = A
 		if(istype(A, /mob/living))
+			//if they have a neck grab on someone, that person gets hit instead
+			var/obj/item/weapon/grab/G = locate() in M
+			if(G && G.state >= GRAB_NECK)
+				visible_message("<span class='danger'>\The [M] uses [G.affecting] as a shield!</span>")
+				if(Bump(G.affecting, forced=1))
+					return //If Bump() returns 0 (keep going) then we continue on to attack M.
+			
 			passthrough = !attack_mob(M, distance)
 		else
 			passthrough = 1 //so ghosts don't stop bullets
@@ -228,6 +253,7 @@
 	
 	density = 0
 	invisibility = 101
+
 	del(src)
 	return 1
 
@@ -240,6 +266,11 @@
 		return 1
 
 /obj/item/projectile/process()
+	var/first_step = 1
+
+	//plot the initial trajectory
+	setup_trajectory()
+
 	spawn while(src)
 		if(kill_count-- < 1)
 			on_impact(src.loc) //for any final impact behaviours
@@ -249,13 +280,71 @@
 		if((x == 1 || x == world.maxx || y == 1 || y == world.maxy))
 			del(src)
 			return
-		step_towards(src, current)
-		sleep(1)
+
+		trajectory.increment()	// increment the current location
+		location = trajectory.return_location(location)		// update the locally stored location data
+
+		if(!location)
+			del(src)	// if it's left the world... kill it
+
+		Move(location.return_turf())
+
+		if(first_step)
+			muzzle_effect(effect_transform)
+			first_step = 0
+		else
+			tracer_effect(effect_transform)
+
 		if(!bumped && !isturf(original))
 			if(loc == get_turf(original))
 				if(!(original in permutated))
 					Bump(original)
-					sleep(1)
+
+		if(!hitscan)
+			sleep(1)	//add delay between movement iterations if it's not a hitscan weapon
+
+/obj/item/projectile/proc/setup_trajectory()
+	// plot the initial trajectory
+	trajectory = new()
+	trajectory.setup(starting, original, pixel_x, pixel_y)
+	
+	// generate this now since all visual effects the projectile makes can use it
+	effect_transform = new()
+	effect_transform.Scale(trajectory.return_hypotenuse(), 1)
+	effect_transform.Turn(-trajectory.return_angle())		//no idea why this has to be inverted, but it works
+
+/obj/item/projectile/proc/muzzle_effect(var/matrix/T)
+	if(silenced)
+		return
+
+	if(ispath(muzzle_type))
+		var/obj/effect/projectile/M = new muzzle_type(get_turf(src))
+		
+		if(istype(M))
+			M.set_transform(T)
+			M.pixel_x = location.pixel_x
+			M.pixel_y = location.pixel_y
+			M.activate()
+
+/obj/item/projectile/proc/tracer_effect(var/matrix/M)
+	if(ispath(tracer_type))
+		var/obj/effect/projectile/P = new tracer_type(location.loc)
+		
+		if(istype(P))
+			P.set_transform(M)
+			P.pixel_x = location.pixel_x
+			P.pixel_y = location.pixel_y
+			P.activate()
+
+/obj/item/projectile/proc/impact_effect(var/matrix/M)
+	if(ispath(tracer_type))
+		var/obj/effect/projectile/P = new impact_type(location.loc)
+		
+		if(istype(P))
+			P.set_transform(M)
+			P.pixel_x = location.pixel_x
+			P.pixel_y = location.pixel_y
+			P.activate()
 
 //"Tracing" projectile
 /obj/item/projectile/test //Used to see if you can hit them.
@@ -285,12 +374,21 @@
 	yo = targloc.y - curloc.y
 	xo = targloc.x - curloc.x
 	target = targloc
+
+	//plot the initial trajectory
+	setup_trajectory()
+
 	while(src) //Loop on through!
 		if(result)
 			return (result - 1)
 		if((!( target ) || loc == target))
 			target = locate(min(max(x + xo, 1), world.maxx), min(max(y + yo, 1), world.maxy), z) //Finding the target turf at map edge
-		step_towards(src, target)
+
+		trajectory.increment()	// increment the current location
+		location = trajectory.return_location(location)		// update the locally stored location data
+
+		Move(location.return_turf())
+
 		var/mob/living/M = locate() in get_turf(src)
 		if(istype(M)) //If there is someting living...
 			return 1 //Return 1

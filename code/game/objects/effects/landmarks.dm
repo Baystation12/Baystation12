@@ -117,7 +117,7 @@
 
 /obj/effect/landmark/start/ninja/New()
 	..()
-	ninjastart += loc
+	ninjastart += src
 
 //Costume spawner landmarks
 

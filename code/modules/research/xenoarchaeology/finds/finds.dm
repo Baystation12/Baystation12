@@ -546,13 +546,9 @@
 		new_item.desc = src.desc
 
 		if(talkative)
-			new_item.talking_atom = new()
-			talking_atom.holder_atom = new_item
-			talking_atom.init()
+			new_item.talking_atom = new(new_item)
 
 		del(src)
 
 	else if(talkative)
-		src.talking_atom = new()
-		talking_atom.holder_atom = src
-		talking_atom.init()
+		src.talking_atom = new(src)

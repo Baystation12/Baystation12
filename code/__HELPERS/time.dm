@@ -4,9 +4,11 @@
 #define MINUTE *600
 #define MINUTES *600
 
+var/roundstart_hour = 0
 //Returns the world time in english
 proc/worldtime2text(time = world.time)
-	return "[round(time / 36000)+12]:[(time / 600 % 60) < 10 ? add_zero(time / 600 % 60, 1) : time / 600 % 60]"
+	if(!roundstart_hour) roundstart_hour = pick(2,7,12,17)
+	return "[round(time / 36000)+roundstart_hour]:[(time / 600 % 60) < 10 ? add_zero(time / 600 % 60, 1) : time / 600 % 60]"
 
 proc/time_stamp()
 	return time2text(world.timeofday, "hh:mm:ss")
