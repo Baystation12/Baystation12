@@ -1143,7 +1143,7 @@
 		..()
 		unpopped = rand(1,10)
 		reagents.add_reagent("nutriment", 2)
-		bitesize = 0.1 //this snack is supposed to be eating during looooong time. And this it not dinner food! --rastaf0
+		bitesize = 1 //this snack is supposed to be eating during looooong time. And this it not dinner food! --rastaf0
 	On_Consume()
 		if(prob(unpopped))	//lol ...what's the point?
 			usr << "\red You bite down on an un-popped kernel!"
