@@ -801,3 +801,6 @@ var/list/be_special_flags = list(
 
 #define MIN_SUPPLIED_LAW_NUMBER 15
 #define MAX_SUPPLIED_LAW_NUMBER 50
+
+//Area flags, possibly more to come
+#define RAD_SHIELDED 1 //shielded from radiation, clearly
