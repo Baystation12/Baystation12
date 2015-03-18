@@ -12,9 +12,7 @@ var/datum/antagonist/deathsquad/mercenary/commandos
 	commandos = src
 
 /datum/antagonist/deathsquad/mercenary/equip(var/mob/living/carbon/human/player)
-	var/obj/item/device/radio/R = new /obj/item/device/radio/headset/syndicate(player)
-	R.set_frequency(SYND_FREQ) //Same frequency as the syndicate team in Nuke mode.
-	player.equip_to_slot_or_del(R, slot_l_ear)
+
 	player.equip_to_slot_or_del(new /obj/item/clothing/under/syndicate(player), slot_w_uniform)
 	player.equip_to_slot_or_del(new /obj/item/weapon/gun/projectile/silenced(player), slot_belt)
 	player.equip_to_slot_or_del(new /obj/item/clothing/shoes/swat(player), slot_shoes)
@@ -25,4 +23,8 @@ var/datum/antagonist/deathsquad/mercenary/commandos
 	player.equip_to_slot_or_del(new /obj/item/ammo_magazine/c45(player), slot_in_backpack)
 	player.equip_to_slot_or_del(new /obj/item/weapon/rig/merc(player), slot_back)
 	player.equip_to_slot_or_del(new /obj/item/weapon/gun/energy/pulse_rifle(player), slot_r_hand)
-	create_id("Commando", player)
+
+	var/obj/item/weapon/card/id/id = create_id("Commando", player)
+	id.access |= get_all_accesses()
+	id.icon_state = "centcom"
+	create_radio(SYND_FREQ, player)

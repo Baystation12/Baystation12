@@ -1,45 +1,3 @@
-var/global/list/all_antag_types = list()
-var/global/list/all_antag_spawnpoints = list()
-var/global/list/antag_names_to_ids = list()
-
-/proc/get_antag_data(var/antag_type)
-	if(all_antag_types[antag_type])
-		return all_antag_types[antag_type]
-	else
-		for(var/cur_antag_type in all_antag_types)
-			var/datum/antagonist/antag = all_antag_types[cur_antag_type]
-			if(antag && antag.is_type(antag_type))
-				return antag
-
-/proc/clear_antag_roles(var/datum/mind/player, var/implanted)
-	for(var/antag_type in all_antag_types)
-		var/datum/antagonist/antag = all_antag_types[antag_type]
-		if(!implanted || !(antag.flags & ANTAG_IMPLANT_IMMUNE))
-			antag.remove_antagonist(player, 1, implanted)
-
-/proc/update_antag_icons(var/datum/mind/player)
-	for(var/antag_type in all_antag_types)
-		var/datum/antagonist/antag = all_antag_types[antag_type]
-		if(player)
-			antag.update_icons_removed(player)
-			if(antag.is_antagonist(player))
-				antag.update_icons_added(player)
-		else
-			antag.update_all_icons()
-
-/proc/populate_antag_type_list()
-	for(var/antag_type in typesof(/datum/antagonist)-/datum/antagonist)
-		var/datum/antagonist/A = new antag_type
-		all_antag_types[A.id] = A
-		all_antag_spawnpoints[A.landmark_id] = list()
-		antag_names_to_ids[A.role_text] = A.id
-
-/proc/get_antags(var/atype)
-	var/datum/antagonist/antag = all_antag_types[atype]
-	if(antag && islist(antag.current_antagonists))
-		return antag.current_antagonists
-	return list()
-
 /datum/antagonist
 
 	var/role_type = BE_TRAITOR
@@ -51,8 +9,6 @@ var/global/list/antag_names_to_ids = list()
 	var/loss_text
 	var/victory_feedback_tag
 	var/loss_feedback_tag
-	var/spawn_upper = 5
-	var/spawn_lower = 3
 	var/max_antags = 3
 	var/max_antags_round = 5
 
@@ -73,9 +29,10 @@ var/global/list/antag_names_to_ids = list()
 	var/cur_max = 0
 
 	var/datum/mind/leader
-
+	var/spawned_nuke
 	var/nuke_spawn_loc
 
+	var/list/valid_species = list("Unathi","Tajara","Skrell","Human") // Used for setting appearance.
 	var/list/starting_locations = list()
 	var/list/current_antagonists = list()
 	var/list/global_objectives = list()
@@ -83,47 +40,18 @@ var/global/list/antag_names_to_ids = list()
 	var/list/protected_jobs = list()
 	var/list/candidates = list()
 
+	var/default_access = list()
+	var/id_type = /obj/item/weapon/card/id
+
 /datum/antagonist/New()
 	..()
+	cur_max = max_antags
 	get_starting_locations()
 	if(config.protect_roles_from_antagonist)
 		restricted_jobs |= protected_jobs
 
-/datum/antagonist/proc/attempt_late_spawn(var/datum/mind/player, var/move_to_spawn)
-
-	var/main_type
-	if(ticker && ticker.mode)
-		if(ticker.mode.antag_tag && ticker.mode.antag_tag == id)
-			main_type = 1
-	else
-		return 0
-
-	var/cur_max = (main_type ? max_antags_round : max_antags)
-	if(ticker.mode.antag_scaling_coeff)
-		cur_max = Clamp((ticker.mode.num_players()/ticker.mode.antag_scaling_coeff), 1, cur_max)
-
-	if(get_antag_count() > cur_max-1)
-		return 0
-
-	player.current << "<span class='danger'><i>You have been selected this round as an antagonist!</i></span>"
-	add_antagonist(player)
-	equip(player.current)
-	finalize(player)
-	if(move_to_spawn)
-		place_mob(player.current)
-	return
-
 /datum/antagonist/proc/tick()
 	return 1
-
-/datum/antagonist/proc/is_antagonist(var/datum/mind/player)
-	if(player in current_antagonists)
-		return 1
-
-/datum/antagonist/proc/is_type(var/antag_type)
-	if(antag_type == id || antag_type == role_text)
-		return 1
-	return 0
 
 /datum/antagonist/proc/get_panel_entry(var/datum/mind/player)
 
@@ -144,149 +72,6 @@ var/global/list/antag_names_to_ids = list()
 /datum/antagonist/proc/get_extra_panel_options()
 	return
 
-/datum/antagonist/proc/antags_are_dead()
-	for(var/datum/mind/antag in current_antagonists)
-		if(mob_path && !istype(antag.current,mob_path))
-			continue
-		if(antag.current.stat==2)
-			continue
-		return 0
-	return 1
-
-/datum/antagonist/proc/get_antag_count()
-	return current_antagonists ? current_antagonists.len : 0
-
-
-/datum/antagonist/proc/get_candidates(var/lower_count, var/upper_count, var/ghosts_only)
-
-	candidates = list()
-	var/main_type
-	if(ticker && ticker.mode)
-		if(ticker.mode.antag_tag && ticker.mode.antag_tag == id)
-			main_type = 1
-	else
-		return list()
-
-	var/cur_max = (main_type ? max_antags_round : max_antags)
-	if(ticker.mode.antag_scaling_coeff)
-		cur_max = Clamp((ticker.mode.num_players()/ticker.mode.antag_scaling_coeff), 1, cur_max)
-
-	if(get_antag_count() >= cur_max)
-		return list()
-
-	// Sanity.
-	if(lower_count)
-		lower_count = max(lower_count,1)
-		if(spawn_lower)
-			lower_count = max(lower_count,spawn_lower)
-	else
-		lower_count = 1
-
-	if(upper_count)
-		if(spawn_upper)
-			upper_count = max(min(spawn_upper, cur_max),1)
-	else
-		upper_count = 1
-
-	if(upper_count < lower_count)
-		upper_count = lower_count
-
-	candidates = list() // Clear.
-	candidates = ticker.mode.get_players_for_role(role_type, id)
-
-	// Prune restricted jobs and status.
-	for(var/datum/mind/player in candidates)
-		if((ghosts_only && !istype(player.current, /mob/dead)) || (player.assigned_role in restricted_jobs))
-			candidates -= player
-
-	if((!candidates.len) || candidates.len < lower_count)
-		return list()
-
-	return candidates
-
-/datum/antagonist/proc/attempt_spawn(var/lower_count, var/upper_count, var/ghosts_only)
-
-	world << "Attempting to spawn."
-	// Get the raw list of potential players.
-	candidates = get_candidates(lower_count, upper_count, ghosts_only)
-
-	// Update our boundaries.
-	if(!candidates.len)
-		world << "No candidates."
-		return 0
-
-	//Grab candidates randomly until we have enough.
-	while(candidates.len)
-		var/datum/mind/player = pick(candidates)
-		current_antagonists |= player
-		// Update job and role.
-		player.special_role = role_text
-		if(flags & ANTAG_OVERRIDE_JOB)
-			player.assigned_role = "MODE"
-		candidates -= player
-	world << "Done."
-	return 1
-
-/datum/antagonist/proc/apply(var/datum/mind/player)
-
-	// Get the mob.
-	if((flags & ANTAG_OVERRIDE_MOB) && (!player.current || (mob_path && !istype(player.current, mob_path))))
-		var/mob/holder = player.current
-		player.current = new mob_path(get_turf(player.current))
-		player.transfer_to(player.current)
-		if(holder) del(holder)
-
-	player.original = player.current
-	return player.current
-
-/datum/antagonist/proc/create_objectives(var/datum/mind/player)
-	if(config.objectives_disabled)
-		return 0
-	if(global_objectives && global_objectives.len)
-		player.objectives |= global_objectives
-	return 1
-
-/datum/antagonist/proc/equip(var/mob/living/carbon/human/player)
-
-	if(!istype(player))
-		return 0
-
-	// This could use work.
-	if(flags & ANTAG_CLEAR_EQUIPMENT)
-		for(var/obj/item/thing in player.contents)
-			del(thing)
-	return 1
-
-/datum/antagonist/proc/unequip(var/mob/living/carbon/human/player)
-	if(!istype(player))
-		return 0
-	return 1
-
-/datum/antagonist/proc/greet(var/datum/mind/player)
-
-	// Basic intro text.
-	player.current << "<span class='danger'><font size=3>You are a [role_text]!</font></span>"
-	if(leader_welcome_text && player.current == leader)
-		player.current << "<span class='notice'>[leader_welcome_text]</span>"
-	else
-		player.current << "<span class='notice'>[welcome_text]</span>"
-	show_objectives(player)
-
-	// Choose a name, if any.
-	if(flags & ANTAG_CHOOSE_NAME)
-		var/newname = sanitize(copytext(input(player.current, "You are a [role_text]. Would you like to change your name to something else?", "Name change") as null|text,1,MAX_NAME_LEN))
-		if (newname)
-			player.current.real_name = newname
-			player.current.name = player.current.real_name
-		player.name = player.current.name
-
-	// Clown clumsiness check, I guess downstream might use it.
-	if (player.current.mind)
-		if (player.current.mind.assigned_role == "Clown")
-			player.current << "You have evolved beyond your clownish nature, allowing you to wield weapons without harming yourself."
-			player.current.mutations.Remove(CLUMSY)
-	return 1
-
 /datum/antagonist/proc/get_starting_locations()
 	if(landmark_id)
 		starting_locations = list()
@@ -294,31 +79,22 @@ var/global/list/antag_names_to_ids = list()
 			if(L.name == landmark_id)
 				starting_locations |= get_turf(L)
 
-/datum/antagonist/proc/create_global_objectives()
-	return 	!((global_objectives && global_objectives.len) || config.objectives_disabled)
-
 /datum/antagonist/proc/place_all_mobs()
 	if(!starting_locations || !starting_locations.len || !current_antagonists || !current_antagonists.len)
 		return
 	for(var/datum/mind/player in current_antagonists)
 		player.current.loc = pick(starting_locations)
 
-/datum/antagonist/proc/place_mob(var/mob/living/mob)
-	if(!starting_locations || !starting_locations.len)
-		return
-	mob.loc = pick(starting_locations)
-
 /datum/antagonist/proc/finalize(var/datum/mind/target)
 
 	// This will fail if objectives have already been generated.
 	create_global_objectives()
 
-	if(flags & ANTAG_HAS_LEADER)
-		leader = current_antagonists[1]
+	if(leader && flags & ANTAG_HAS_NUKE && !spawned_nuke)
+		make_nuke(leader)
 
 	if(target)
 		apply(target)
-		equip(target.current)
 		create_objectives(target)
 		update_icons_added(target)
 		greet(target)
@@ -330,9 +106,6 @@ var/global/list/antag_names_to_ids = list()
 		create_objectives(player)
 		update_icons_added(player)
 		greet(player)
-
-	if(flags & ANTAG_HAS_NUKE)
-		make_nuke(leader)
 
 	place_all_mobs()
 
@@ -356,7 +129,7 @@ var/global/list/antag_names_to_ids = list()
 		text += print_player_full(P)
 		text += get_special_objective_text(P)
 		var/failed
-		if(!global_objectives && P.objectives && P.objectives.len)
+		if(!global_objectives.len && P.objectives && P.objectives.len)
 			var/num = 1
 			for(var/datum/objective/O in P.objectives)
 				text += print_objective(O, num)
@@ -367,6 +140,7 @@ var/global/list/antag_names_to_ids = list()
 					text += "<font color='red'>Fail.</font>"
 					feedback_add_details(feedback_tag,"[O.type]|FAIL")
 					failed = 1
+				num++
 
 		if(!config.objectives_disabled)
 			if(failed)
@@ -385,7 +159,7 @@ var/global/list/antag_names_to_ids = list()
 	world << text
 
 /datum/antagonist/proc/print_objective(var/datum/objective/O, var/num, var/append_success)
-	var/text = "<BR/><B>Objective [num]:</B> [O.explanation_text] "
+	var/text = "<br><b>Objective [num]:</b> [O.explanation_text] "
 	if(append_success)
 		if(O.check_completion())
 			text += "<font color='green'><B>Success!</B></font>"
@@ -434,31 +208,6 @@ var/global/list/antag_names_to_ids = list()
 
 	return text
 
-/datum/antagonist/proc/get_special_objective_text()
-	return ""
-
-/datum/antagonist/proc/add_antagonist(var/datum/mind/player)
-	if(!istype(player))
-		return 0
-	if(player in current_antagonists)
-		return 0
-	if(!can_become_antag(player))
-		return 0
-	current_antagonists |= player
-	apply(player)
-	finalize(player)
-	return 1
-
-/datum/antagonist/proc/remove_antagonist(var/datum/mind/player, var/show_message, var/implanted)
-	if(player in current_antagonists)
-		player.current << "<span class='danger'><font size = 3>You are no longer a [role_text]!</font></span>"
-		current_antagonists -= player
-		player.special_role = null
-		update_icons_removed(player)
-		BITSET(player.current.hud_updateflag, SPECIALROLE_HUD)
-		return 1
-	return 0
-
 /datum/antagonist/proc/update_all_icons()
 	if(!antag_indicator)
 		return
@@ -498,64 +247,4 @@ var/global/list/antag_names_to_ids = list()
 				if(I.icon_state == antag_indicator)
 					del(I)
 
-/datum/antagonist/proc/can_become_antag(var/datum/mind/player)
-	if(player.current && jobban_isbanned(player.current, bantype))
-		return 0
-	if(player.assigned_role in protected_jobs)
-		return 0
-	if(config.protect_roles_from_antagonist && (player.assigned_role in restricted_jobs))
-		return 0
-	return 1
 
-/datum/antagonist/proc/check_victory()
-	var/result
-	if(config.objectives_disabled)
-		return 1
-	if(!victory_text || !loss_text)
-		return 1
-
-	if(global_objectives && global_objectives.len)
-		for(var/datum/objective/O in global_objectives)
-			if(!O.completed && !O.check_completion())
-				result = 1 // Victory.
-			else
-				O.completed = 1 //Will this break anything?
-
-	if(result)
-		world << "<span class='danger'><font size = 3>[victory_text]</span>"
-		if(victory_feedback_tag) feedback_set_details("round_end_result","[victory_feedback_tag]")
-	else
-		world << "<span class='danger'><font size = 3>[loss_text]</span>"
-		if(loss_feedback_tag) feedback_set_details("round_end_result","[loss_feedback_tag]")
-
-/datum/antagonist/proc/make_nuke(var/atom/paper_spawn_loc, var/datum/mind/code_owner)
-
-	// Decide on a code.
-	var/obj/effect/landmark/nuke_spawn = locate(nuke_spawn_loc ? nuke_spawn_loc : "landmark*Nuclear-Bomb")
-
-	var/code
-	if(nuke_spawn)
-		var/obj/machinery/nuclearbomb/nuke = new(get_turf(nuke_spawn))
-		code = "[rand(10000, 99999)]"
-		nuke.r_code = code
-
-	if(code)
-		if(!paper_spawn_loc)
-			paper_spawn_loc = get_turf(locate("landmark*Nuclear-Code"))
-		if(paper_spawn_loc)
-			// Create and pass on the bomb code paper.
-			var/obj/item/weapon/paper/P = new(paper_spawn_loc)
-			P.info = "The nuclear authorization code is: <b>[code]</b>"
-			P.name = "nuclear bomb code"
-		if(code_owner)
-			code_owner.store_memory("<B>Nuclear Bomb Code</B>: [code]", 0, 0)
-			code_owner.current << "The nuclear authorization code is: <B>[code]</B>"
-
-	else
-		world << "<spam class='danger'>Could not spawn nuclear bomb. Contact a developer.</span>"
-		return
-
-	return code
-
-/datum/antagonist/proc/random_spawn()
-	return attempt_spawn((spawn_lower ? spawn_lower : 1),(spawn_upper ? spawn_upper : 1),(flags & (ANTAG_OVERRIDE_MOB|ANTAG_OVERRIDE_JOB)))

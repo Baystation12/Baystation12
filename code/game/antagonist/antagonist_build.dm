@@ -7,6 +7,9 @@
 
 /datum/antagonist/proc/apply(var/datum/mind/player)
 
+	if(flags & ANTAG_HAS_LEADER && !leader)
+		leader = current_antagonists[1]
+
 	// Get the mob.
 	if((flags & ANTAG_OVERRIDE_MOB) && (!player.current || (mob_path && !istype(player.current, mob_path))))
 		var/mob/holder = player.current
@@ -48,13 +51,14 @@
 
 	// Choose a name, if any.
 	if(flags & ANTAG_CHOOSE_NAME)
-		var/newname = sanitize(copytext(input(player.current, "You are a [role_text]. Would you like to change your name to something else?", "Name change") as null|text,1,MAX_NAME_LEN))
-		if (newname)
-			player.current.real_name = newname
-			player.current.name = player.current.real_name
-		player.name = player.current.name
-		// Update any ID cards.
-		update_access(player.current)
+		spawn(5)
+			var/newname = sanitize(copytext(input(player.current, "You are a [role_text]. Would you like to change your name to something else?", "Name change") as null|text,1,MAX_NAME_LEN))
+			if (newname)
+				player.current.real_name = newname
+				player.current.name = player.current.real_name
+			player.name = player.current.name
+			// Update any ID cards.
+			update_access(player.current)
 
 	// Clown clumsiness check, I guess downstream might use it.
 	if (player.current.mind)
@@ -116,4 +120,5 @@
 		world << "<spam class='danger'>Could not spawn nuclear bomb. Contact a developer.</span>"
 		return
 
+	spawned_nuke = code
 	return code

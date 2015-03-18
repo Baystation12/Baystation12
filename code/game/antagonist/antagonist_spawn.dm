@@ -7,7 +7,6 @@
 	player.current << "<span class='danger'><i>You have been selected this round as an antagonist!</i></span>"
 	add_antagonist(player)
 	equip(player.current)
-	finalize(player)
 	if(move_to_spawn)
 		place_mob(player.current)
 	return
@@ -34,7 +33,6 @@
 
 	// Update our boundaries.
 	if(!candidates.len)
-		world << "Somehow there are no antagonist candidates."
 		return 0
 
 	//Grab candidates randomly until we have enough.
@@ -60,6 +58,7 @@
 		return 0
 	if(!can_become_antag(player))
 		return 0
+
 	current_antagonists |= player
 	apply(player)
 	finalize(player)
@@ -81,6 +80,6 @@
 	candidates = ticker.mode.get_players_for_role(role_type, id)
 	// Prune restricted jobs and status.
 	for(var/datum/mind/player in candidates)
-		if((ghosts_only && !istype(player.current, /mob/dead)) || (player.assigned_role in restricted_jobs))
+		if((ghosts_only && !istype(player.current, /mob/dead)) || player.special_role || (player.assigned_role in restricted_jobs))
 			candidates -= player
 	return candidates

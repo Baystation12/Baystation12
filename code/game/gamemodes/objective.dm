@@ -713,7 +713,7 @@ datum/objective/heist/kidnap
 			target = pick(possible_targets)
 
 		if(target && target.current)
-			explanation_text = "The Shoal has a need for [target.current.real_name], the [target.assigned_role]. Take them alive."
+			explanation_text = "We can get a good price for [target.current.real_name], the [target.assigned_role]. Take them alive."
 		else
 			explanation_text = "Free Objective"
 		return target
@@ -770,7 +770,7 @@ datum/objective/heist/loot
 				target_amount = 1
 				loot = "an ion gun"
 
-		explanation_text = "We are lacking in hardware. Steal [loot]."
+		explanation_text = "It's a buyer's market out here. Steal [loot] for resale."
 
 	check_completion()
 
@@ -850,25 +850,14 @@ datum/objective/heist/salvage
 		return 0
 
 
-/datum/objective/heist/inviolate_crew
+/datum/objective/heist/preserve_crew
 	explanation_text = "Do not leave anyone behind, alive or dead."
 
 	check_completion()
 		if(raiders && raiders.is_raider_crew_safe()) return 1
 		return 0
 
-#define MAX_RAIDER_KILLS 10 //Number of kills during the round before the Inviolate is broken.
-						 //Would be nice to use raider-specific kills but is currently not feasible.
-var/global/raider_kills = 0 //Used to check the Inviolate.
-
-datum/objective/heist/inviolate_death
-	explanation_text = "Minimise deaths and loss of resources."
-	check_completion()
-		if(raider_kills > MAX_RAIDER_KILLS) return 0
-		return 1
-
 //Borer objective(s).
-
 /datum/objective/borer_survive
 	explanation_text = "Survive in a host until the end of the round."
 

@@ -11,7 +11,7 @@ var/datum/antagonist/ert/ert
 	max_antags = 5
 	max_antags_round = 5 // ERT mode?
 
-	flags = ANTAG_OVERRIDE_JOB | ANTAG_OVERRIDE_MOB
+	flags = ANTAG_OVERRIDE_JOB | ANTAG_SET_APPEARANCE
 
 /datum/antagonist/ert/New()
 	..()

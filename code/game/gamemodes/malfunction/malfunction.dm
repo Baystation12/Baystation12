@@ -11,10 +11,8 @@
 	auto_recall_shuttle = 1
 	antag_tag = MODE_MALFUNCTION
 
-
 /datum/game_mode/malfunction/process()
 	malf.tick()
-
 
 /datum/game_mode/malfunction/check_finished()
 	if (malf.station_captured && !malf.can_nuke)

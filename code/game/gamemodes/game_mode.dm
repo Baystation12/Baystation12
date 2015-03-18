@@ -249,14 +249,7 @@ var/global/list/additional_antag_types = list()
 		if(playerC < required_players)
 			return 0
 
-	// If we can, -try- to spawn the other voted antagonist types. It doesn't really matter if we can't.
-	if(!do_not_spawn)
-		if(antag_templates && antag_templates.len)
-			var/datum/antagonist/main_antags = antag_templates[1]
-			var/list/candidates = main_antags.get_candidates(required_enemies)
-			if(candidates.len > required_enemies)
-				return 1
-	else
+	if(!(antag_templates && antag_templates.len))
 		return 1
 
 	// Attempt to mark folks down as ready to go. Don't finalize until post setup.

@@ -23,7 +23,7 @@ var/datum/antagonist/rogue_ai/malf
 	hacked_apcs |= apc
 
 /datum/antagonist/rogue_ai/proc/update_takeover_time()
-	hack_time -= ((hacked_apcs.len/6)*last_tick_duration)
+	hack_time -= ((hacked_apcs.len/6)*tickerProcess.getLastTickerTimeDuration())
 
 /datum/antagonist/rogue_ai/tick()
 	if(revealed && hacked_apcs.len >= 3)
@@ -54,7 +54,7 @@ var/datum/antagonist/rogue_ai/malf
 	player.verbs += /mob/living/silicon/ai/proc/takeover
 	player.verbs += /mob/living/silicon/ai/proc/self_destruct
 
-	player.laws = new /datum/ai_laws/malfunction
+	player.laws = new /datum/ai_laws/nanotrasen/malfunction
 	player.malf_picker = new /datum/AI_Module/module_picker
 
 /datum/antagonist/rogue_ai/greet(var/datum/mind/player)

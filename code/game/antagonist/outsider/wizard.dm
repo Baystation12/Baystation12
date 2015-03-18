@@ -8,9 +8,8 @@ var/datum/antagonist/wizard/wizards
 	bantype = "wizard"
 	landmark_id = "wizard"
 	welcome_text = "You will find a list of available spells in your spell book. Choose your magic arsenal carefully.<br>In your pockets you will find a teleport scroll. Use it as needed."
-	flags = ANTAG_OVERRIDE_JOB | ANTAG_CLEAR_EQUIPMENT | ANTAG_CHOOSE_NAME | ANTAG_VOTABLE
-	spawn_lower = 1
-	spawn_upper = 1
+	flags = ANTAG_OVERRIDE_JOB | ANTAG_CLEAR_EQUIPMENT | ANTAG_CHOOSE_NAME | ANTAG_VOTABLE | ANTAG_SET_APPEARANCE
+	max_antags = 1
 
 /datum/antagonist/wizard/New()
 	..()

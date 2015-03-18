@@ -809,7 +809,7 @@ var/list/be_special_flags = list(
 #define ANTAG_HAS_NUKE          128 // Will spawn a nuke at supplied location.
 #define ANTAG_RANDSPAWN         256 // Potentially randomly spawns due to events.
 #define ANTAG_VOTABLE           512 // Can be voted as an additional antagonist before roundstart.
-
+#define ANTAG_SET_APPEARANCE   1024 // Causes antagonists to use an appearance modifier on spawn.
 // Mode/antag template macros.
 #define MODE_BORER "borer"
 #define MODE_XENOMORPH "xeno"

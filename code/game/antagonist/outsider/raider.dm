@@ -7,108 +7,84 @@ var/datum/antagonist/raider/raiders
 	role_text_plural = "Raiders"
 	bantype = "raider"
 	landmark_id = "voxstart"
-	welcome_text = "Use :0 to speak Galcom, :H to talk on your encrypted channel, and don't forget to turn on your nitrogen internals!"
-	flags = ANTAG_OVERRIDE_JOB | ANTAG_CLEAR_EQUIPMENT | ANTAG_CHOOSE_NAME | ANTAG_VOTABLE
-	spawn_lower = 4
-	spawn_upper = 6
+	welcome_text = "Use :H to talk on your encrypted channel."
+	flags = ANTAG_OVERRIDE_JOB | ANTAG_CLEAR_EQUIPMENT | ANTAG_CHOOSE_NAME | ANTAG_VOTABLE | ANTAG_SET_APPEARANCE
 	max_antags = 6
 	max_antags_round = 10
+	id_type = /obj/item/weapon/card/id/syndicate
 
 	// Heist overrides check_victory() and doesn't need victory or loss strings/tags.
-	var/spawn_tick = 1
+	var/list/raider_uniforms = list(
+		/obj/item/clothing/under/soviet,
+		/obj/item/clothing/under/pirate,
+		/obj/item/clothing/under/redcoat,
+		/obj/item/clothing/under/serviceoveralls,
+		/obj/item/clothing/under/captain_fly
+		)
+
+	var/list/raider_shoes = list(
+		/obj/item/clothing/shoes/jackboots,
+		/obj/item/clothing/shoes/sandal,
+		/obj/item/clothing/shoes/laceup
+		)
+
+	var/list/raider_glasses = list(
+		/obj/item/clothing/glasses/thermal,
+		/obj/item/clothing/glasses/thermal/eyepatch,
+		/obj/item/clothing/glasses/thermal/monocle
+		)
+
+	var/list/raider_helmets = list(
+		/obj/item/clothing/head/bearpelt,
+		/obj/item/clothing/head/ushanka,
+		/obj/item/clothing/head/pirate,
+		/obj/item/clothing/head/bandana,
+		/obj/item/clothing/head/hgpiratecap,
+		/obj/item/clothing/head/flatcap
+		)
+
+	var/list/raider_suits = list(
+		/obj/item/clothing/suit/pirate,
+		/obj/item/clothing/suit/hgpirate,
+		/obj/item/clothing/suit/storage/toggle/bomber,
+		/obj/item/clothing/suit/storage/leather_jacket,
+		/obj/item/clothing/suit/storage/toggle/brown_jacket,
+		/obj/item/clothing/suit/storage/toggle/hoodie,
+		/obj/item/clothing/suit/storage/toggle/hoodie/black
+		)
+
+	var/list/raider_guns = list(
+		/obj/item/weapon/gun/energy/laser,
+		/obj/item/weapon/gun/energy/retro,
+		/obj/item/weapon/gun/energy/xray,
+		/obj/item/weapon/gun/energy/mindflayer,
+		/obj/item/weapon/gun/energy/toxgun,
+		/obj/item/weapon/gun/energy/stunrevolver,
+		/obj/item/weapon/gun/energy/crossbow/largecrossbow,
+		/obj/item/weapon/gun/projectile/automatic/mini_uzi,
+		/obj/item/weapon/gun/projectile/automatic/c20r,
+		/obj/item/weapon/gun/projectile/silenced,
+		/obj/item/weapon/gun/projectile/shotgun/pump,
+		/obj/item/weapon/gun/projectile/shotgun/pump/combat,
+		/obj/item/weapon/gun/projectile/colt,
+		/obj/item/weapon/gun/projectile/pistol
+		)
 
 /datum/antagonist/raider/New()
 	..()
 	raiders = src
 
-/datum/antagonist/raider/equip(var/mob/living/carbon/human/player)
-
-	if(!..())
-		return 0
-
-	player.age = rand(12,70)
-	player.set_species("Vox")
-	player.languages = list() // Removing language from chargen.
-	player.flavor_text = ""
-	player.add_language("Vox-pidgin")
-	player.add_language("Galactic Common")
-	player.add_language("Tradeband")
-
-	var/datum/language/voxlang = all_languages["Vox-pidgin"]
-	player.real_name = voxlang.get_random_name()
-	player.name = player.real_name
-	if(player.mind)
-		player.mind.name = player.name
-	player.h_style = "Short Vox Quills"
-	player.f_style = "Shaved"
-
-	for(var/datum/organ/external/limb in player.organs)
-		limb.status &= ~(ORGAN_DESTROYED | ORGAN_ROBOT)
-
-	player.regenerate_icons()
-
-	var/obj/item/device/radio/R = new /obj/item/device/radio/headset/syndicate(player)
-	R.set_frequency(SYND_FREQ)
-	player.equip_to_slot_or_del(R, slot_l_ear)
-	player.equip_to_slot_or_del(new /obj/item/clothing/under/vox/vox_robes(player), slot_w_uniform)
-	player.equip_to_slot_or_del(new /obj/item/clothing/shoes/magboots/vox(player), slot_shoes) // REPLACE THESE WITH CODED VOX ALTERNATIVES.
-	player.equip_to_slot_or_del(new /obj/item/clothing/gloves/yellow/vox(player), slot_gloves) // AS ABOVE.
-
-	switch(spawn_tick)
-		if(1) // Vox raider!
-			player.equip_to_slot_or_del(new /obj/item/clothing/suit/space/vox/carapace(player), slot_wear_suit)
-			player.equip_to_slot_or_del(new /obj/item/clothing/head/helmet/space/vox/carapace(player), slot_head)
-			player.equip_to_slot_or_del(new /obj/item/weapon/melee/baton/loaded(player), slot_belt)
-			player.equip_to_slot_or_del(new /obj/item/clothing/glasses/thermal/monocle(player), slot_glasses) // REPLACE WITH CODED VOX ALTERNATIVE.
-			player.equip_to_slot_or_del(new /obj/item/device/chameleon(player), slot_l_store)
-
-			var/obj/item/weapon/gun/launcher/spikethrower/W = new(player)
-			player.equip_to_slot_or_del(W, slot_r_hand)
-
-		if(2) // Vox engineer!
-			player.equip_to_slot_or_del(new /obj/item/clothing/suit/space/vox/pressure(player), slot_wear_suit)
-			player.equip_to_slot_or_del(new /obj/item/clothing/head/helmet/space/vox/pressure(player), slot_head)
-			player.equip_to_slot_or_del(new /obj/item/weapon/storage/belt/utility/full(player), slot_belt)
-			player.equip_to_slot_or_del(new /obj/item/clothing/glasses/meson(player), slot_glasses) // REPLACE WITH CODED VOX ALTERNATIVE.
-			player.equip_to_slot_or_del(new /obj/item/weapon/storage/box/emps(player), slot_r_hand)
-			player.equip_to_slot_or_del(new /obj/item/device/multitool(player), slot_l_hand)
-
-		if(3) // Vox saboteur!
-			player.equip_to_slot_or_del(new /obj/item/clothing/suit/space/vox/stealth(player), slot_wear_suit)
-			player.equip_to_slot_or_del(new /obj/item/clothing/head/helmet/space/vox/stealth(player), slot_head)
-			player.equip_to_slot_or_del(new /obj/item/weapon/storage/belt/utility/full(player), slot_belt)
-			player.equip_to_slot_or_del(new /obj/item/clothing/glasses/thermal/monocle(player), slot_glasses) // REPLACE WITH CODED VOX ALTERNATIVE.
-			player.equip_to_slot_or_del(new /obj/item/weapon/card/emag(player), slot_l_store)
-			player.equip_to_slot_or_del(new /obj/item/weapon/gun/projectile/dartgun/vox/raider(player), slot_r_hand)
-			player.equip_to_slot_or_del(new /obj/item/device/multitool(player), slot_l_hand)
-
-		if(4) // Vox medic!
-			player.equip_to_slot_or_del(new /obj/item/clothing/suit/space/vox/medic(player), slot_wear_suit)
-			player.equip_to_slot_or_del(new /obj/item/clothing/head/helmet/space/vox/medic(player), slot_head)
-			player.equip_to_slot_or_del(new /obj/item/weapon/storage/belt/utility/full(player), slot_belt) // Who needs actual surgical tools?
-			player.equip_to_slot_or_del(new /obj/item/clothing/glasses/hud/health(player), slot_glasses) // REPLACE WITH CODED VOX ALTERNATIVE.
-			player.equip_to_slot_or_del(new /obj/item/weapon/circular_saw(player), slot_l_store)
-			player.equip_to_slot_or_del(new /obj/item/weapon/gun/projectile/dartgun/vox/medical, slot_r_hand)
-
-	player.equip_to_slot_or_del(new /obj/item/clothing/mask/breath(player), slot_wear_mask)
-	player.equip_to_slot_or_del(new /obj/item/weapon/tank/nitrogen(player), slot_back)
-	player.equip_to_slot_or_del(new /obj/item/device/flashlight(player), slot_r_store)
-
-	var/obj/item/weapon/card/id/syndicate/C = new(player)
-	C.name = "[player.real_name]'s Legitimate Human ID Card"
-	C.icon_state = "id"
-	C.access = list(access_syndicate)
-	C.assignment = "Trader"
-	C.registered_name = player.real_name
-	C.registered_user = player
-	var/obj/item/weapon/storage/wallet/W = new(player)
-	W.handle_item_insertion(C)
-	spawn_money(rand(50,150)*10,W)
-	player.equip_to_slot_or_del(W, slot_wear_id)
-	spawn_tick++
-	if (spawn_tick > 4) spawn_tick = 1
+/datum/antagonist/raider/update_access(var/mob/living/player)
+	for(var/obj/item/weapon/storage/wallet/W in player.contents)
+		for(var/obj/item/weapon/card/id/id in W.contents)
+			id.name = "[player.real_name]'s Passport"
+			id.registered_name = player.real_name
+			W.name = "[initial(W.name)] ([id.name])"
 
 /datum/antagonist/raider/create_global_objectives()
+
+	if(global_objectives.len)
+		return
 
 	var/i = 1
 	var/max_objectives = pick(2,2,2,2,3,3,3,4)
@@ -130,9 +106,7 @@ var/datum/antagonist/raider/raiders
 
 		i++
 
-	//-All- vox raids have these two objectives. Failing them loses the game.
-	global_objectives |= new /datum/objective/heist/inviolate_crew
-	global_objectives |= new /datum/objective/heist/inviolate_death
+	global_objectives |= new /datum/objective/heist/preserve_crew
 
 /datum/antagonist/raider/check_victory()
 	// Totally overrides the base proc.
@@ -151,10 +125,10 @@ var/datum/antagonist/raider/raiders
 	//Set result by objectives.
 	if(success == global_objectives.len)
 		win_type = "Major"
-		win_group = "Vox"
+		win_group = "Raider"
 	else if(success > 2)
 		win_type = "Minor"
-		win_group = "Vox"
+		win_group = "Raider"
 	else
 		win_type = "Minor"
 		win_group = "Crew"
@@ -162,19 +136,19 @@ var/datum/antagonist/raider/raiders
 	if(antags_are_dead())
 		win_type = "Major"
 		win_group = "Crew"
-		win_msg += "<B>The Vox Raiders have been wiped out!</B>"
+		win_msg += "<B>The Raiders have been wiped out!</B>"
 	else if(is_raider_crew_safe())
 		if(win_group == "Crew" && win_type == "Minor")
 			win_type = "Major"
 		win_group = "Crew"
-		win_msg += "<B>The Vox Raiders have left someone behind!</B>"
+		win_msg += "<B>The Raiders have left someone behind!</B>"
 	else
-		if(win_group == "Vox")
+		if(win_group == "Raider")
 			if(win_type == "Minor")
 				win_type = "Major"
-			win_msg += "<B>The Vox Raiders escaped the station!</B>"
+			win_msg += "<B>The Raiders escaped the station!</B>"
 		else
-			win_msg += "<B>The Vox Raiders were repelled!</B>"
+			win_msg += "<B>The Raiders were repelled!</B>"
 
 	world << "<span class='danger'><font size = 3>[win_type] [win_group] victory!</font>"
 	world << "[win_msg]"
@@ -182,10 +156,61 @@ var/datum/antagonist/raider/raiders
 
 /datum/antagonist/raider/proc/is_raider_crew_safe()
 
-	if(cortical_stacks.len == 0)
+	if(!current_antagonists || current_antagonists.len == 0)
 		return 0
 
-	for(var/datum/organ/internal/stack/vox/stack in cortical_stacks)
-		if(stack.organ_holder && get_area(stack.organ_holder) != locate(/area/shuttle/vox/station))
+	for(var/datum/mind/player in current_antagonists)
+		if(!player.current || get_area(player.current) != locate(/area/shuttle/skipjack/station))
 			return 0
 	return 1
+
+/datum/antagonist/raider/equip(var/mob/living/carbon/human/player)
+
+	if(!..())
+		return 0
+
+	if(player.species && player.species.name == "Vox")
+		equip_vox(player)
+	else
+		var/new_shoes =   pick(raider_shoes)
+		var/new_uniform = pick(raider_uniforms)
+		var/new_glasses = pick(raider_glasses)
+		var/new_helmet =  pick(raider_helmets)
+		var/new_suit =    pick(raider_suits)
+		var/new_gun =     pick(raider_guns)
+
+		player.equip_to_slot_or_del(new new_shoes(player),slot_shoes)
+		player.equip_to_slot_or_del(new new_uniform(player),slot_w_uniform)
+		player.equip_to_slot_or_del(new new_glasses(player),slot_glasses)
+		player.equip_to_slot_or_del(new new_helmet(player),slot_head)
+		player.equip_to_slot_or_del(new new_suit(player),slot_wear_suit)
+		player.equip_to_slot_or_del(new new_gun(player),slot_belt)
+
+	var/obj/item/weapon/card/id/id = create_id("Visitor", player)
+	id.name = "[player.real_name]'s Passport"
+	id.assignment = "Visitor"
+	var/obj/item/weapon/storage/wallet/W = new(player)
+	W.handle_item_insertion(id)
+	player.equip_to_slot_or_del(W, slot_wear_id)
+	spawn_money(rand(50,150)*10,W)
+	create_radio(SYND_FREQ, player)
+
+	return 1
+
+/datum/antagonist/raider/proc/equip_vox(var/mob/living/carbon/human/player)
+
+	var/uniform_type = pick(list(/obj/item/clothing/under/vox/vox_robes,/obj/item/clothing/under/vox/vox_casual))
+
+	player.equip_to_slot_or_del(new uniform_type(player), slot_w_uniform)
+	player.equip_to_slot_or_del(new /obj/item/clothing/shoes/magboots/vox(player), slot_shoes) // REPLACE THESE WITH CODED VOX ALTERNATIVES.
+	player.equip_to_slot_or_del(new /obj/item/clothing/gloves/yellow/vox(player), slot_gloves) // AS ABOVE.
+	player.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/swat/vox(player), slot_wear_mask)
+	player.equip_to_slot_or_del(new /obj/item/weapon/tank/nitrogen(player), slot_back)
+	player.equip_to_slot_or_del(new /obj/item/device/flashlight(player), slot_r_store)
+
+	player.internal = locate(/obj/item/weapon/tank) in player.contents
+	if(istype(player.internal,/obj/item/weapon/tank) && player.internals)
+		player.internals.icon_state = "internal1"
+
+	return 1
+

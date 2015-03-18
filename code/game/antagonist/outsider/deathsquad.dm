@@ -10,19 +10,8 @@ var/datum/antagonist/deathsquad/deathsquad
 	flags = ANTAG_OVERRIDE_JOB | ANTAG_OVERRIDE_MOB | ANTAG_HAS_NUKE
 	max_antags = 4
 	max_antags_round = 6
-
+	default_access = list(access_cent_general, access_cent_specops, access_cent_living, access_cent_storage)
 	var/deployed = 0
-
-/datum/antagonist/deathsquad/proc/create_id(var/assignment, var/mob/living/carbon/human/player)
-
-	var/obj/item/weapon/card/id/W = new(player)
-	W.name = "[player.real_name]'s ID Card"
-	W.icon_state = "centcom"
-	W.access = get_all_accesses()
-	W.access += list(access_cent_general, access_cent_specops, access_cent_living, access_cent_storage)
-	W.assignment = "[assignment]"
-	W.registered_name = player.real_name
-	player.equip_to_slot_or_del(W, slot_wear_id)
 
 /datum/antagonist/deathsquad/New(var/no_reference)
 	..()
@@ -38,9 +27,7 @@ var/datum/antagonist/deathsquad/deathsquad
 		player.equip_to_slot_or_del(new /obj/item/clothing/under/rank/centcom_officer(player), slot_w_uniform)
 	else
 		player.equip_to_slot_or_del(new /obj/item/clothing/under/color/green(player), slot_w_uniform)
-	var/obj/item/device/radio/R = new /obj/item/device/radio/headset(player)
-	R.set_frequency(DTH_FREQ)
-	player.equip_to_slot_or_del(R, slot_l_ear)
+
 	player.equip_to_slot_or_del(new /obj/item/clothing/shoes/swat(player), slot_shoes)
 	player.equip_to_slot_or_del(new /obj/item/clothing/gloves/swat(player), slot_gloves)
 	player.equip_to_slot_or_del(new /obj/item/clothing/glasses/thermal(player), slot_glasses)
@@ -55,18 +42,25 @@ var/datum/antagonist/deathsquad/deathsquad
 	player.equip_to_slot_or_del(new /obj/item/weapon/rig/combat(player), slot_back)
 	player.equip_to_slot_or_del(new /obj/item/weapon/melee/energy/sword(player), slot_s_store)
 	player.implant_loyalty(player)
-	create_id("Asset Protection", player)
-	return
+
+	var/obj/item/weapon/card/id/id = create_id("Asset Protection", player)
+	id.access |= get_all_accesses()
+	id.icon_state = "centcom"
+	create_radio(DTH_FREQ, player)
 
 /datum/antagonist/deathsquad/apply(var/datum/mind/player)
 
 	..()
 
-	//var/syndicate_commando_leader_rank = pick("Lieutenant", "Captain", "Major")
-	var/syndicate_commando_rank = pick("Corporal", "Sergeant", "Staff Sergeant", "Sergeant 1st Class", "Master Sergeant", "Sergeant Major")
+	var/syndicate_commando_rank
+	if(leader && player == leader)
+		syndicate_commando_rank = pick("Corporal", "Sergeant", "Staff Sergeant", "Sergeant 1st Class", "Master Sergeant", "Sergeant Major")
+	else
+		syndicate_commando_rank = pick("Lieutenant", "Captain", "Major")
+
 	var/syndicate_commando_name = pick(last_names)
 
-	var/datum/preferences/A = new()//Randomize appearance for the commando.
+	var/datum/preferences/A = new() //Randomize appearance for the commando.
 	A.randomize_appearance_for(player.current)
 
 	player.name = "[syndicate_commando_rank] [syndicate_commando_name]"
@@ -80,3 +74,10 @@ var/datum/antagonist/deathsquad/deathsquad
 		H.dna.ready_dna(H)
 
 	return
+
+/datum/antagonist/deathsquad/finalize(var/datum/mind/target)
+
+	..()
+
+	if(!deployed)
+		deployed = 1
