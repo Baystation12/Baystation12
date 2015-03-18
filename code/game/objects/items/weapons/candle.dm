@@ -6,13 +6,13 @@
 	item_state = "candle1"
 	w_class = 1
 
-	var/wax = 200
+	var/wax = 2000
 
 /obj/item/weapon/flame/candle/update_icon()
 	var/i
-	if(wax>150)
+	if(wax > 1500)
 		i = 1
-	else if(wax>80)
+	else if(wax > 800)
 		i = 2
 	else i = 3
 	icon_state = "candle[i][lit ? "_lit" : ""]"
