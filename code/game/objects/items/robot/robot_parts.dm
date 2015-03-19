@@ -9,6 +9,13 @@
 	var/list/construction_cost = list("metal"=20000,"glass"=5000)
 	var/list/part = null
 	var/sabotaged = 0 //Emagging limbs can have repercussions when installed as prosthetics.
+	var/cyberlimb = null //Used in custom robolimbs.
+
+/obj/item/robot_parts/New(loc, var/datum/organ/external/E)
+	..(loc)
+	if(!istype(E))
+		return
+	cyberlimb = E.cyberlimb
 
 /obj/item/robot_parts/l_arm
 	name = "robot left arm"

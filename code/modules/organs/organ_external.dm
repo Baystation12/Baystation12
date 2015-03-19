@@ -44,6 +44,7 @@
 	// how often wounds should be updated, a higher number means less often
 	var/wound_update_accuracy = 1
 
+	var/cyberlimb = null	//Cyberlimb icon name
 
 /datum/organ/external/New(var/datum/organ/external/P)
 	if(P)
@@ -604,22 +605,22 @@ Note that amputating the affected organ does in fact remove the infection from t
 				dropped_items = list(owner.glasses, owner.head, owner.l_ear, owner.r_ear, owner.wear_mask)
 			if(ARM_RIGHT)
 				if(status & ORGAN_ROBOT)
-					organ = new /obj/item/robot_parts/r_arm(owner.loc)
+					organ= new /obj/item/robot_parts/r_arm(owner.loc, src)
 				else
 					organ= new /obj/item/weapon/organ/r_arm(owner.loc, owner)
 			if(ARM_LEFT)
 				if(status & ORGAN_ROBOT)
-					organ= new /obj/item/robot_parts/l_arm(owner.loc)
+					organ= new /obj/item/robot_parts/l_arm(owner.loc, src)
 				else
 					organ= new /obj/item/weapon/organ/l_arm(owner.loc, owner)
 			if(LEG_RIGHT)
 				if(status & ORGAN_ROBOT)
-					organ = new /obj/item/robot_parts/r_leg(owner.loc)
+					organ= new /obj/item/robot_parts/r_leg(owner.loc, src)
 				else
 					organ= new /obj/item/weapon/organ/r_leg(owner.loc, owner)
 			if(LEG_LEFT)
 				if(status & ORGAN_ROBOT)
-					organ = new /obj/item/robot_parts/l_leg(owner.loc)
+					organ= new /obj/item/robot_parts/l_leg(owner.loc, src)
 				else
 					organ= new /obj/item/weapon/organ/l_leg(owner.loc, owner)
 			if(HAND_RIGHT)
@@ -785,6 +786,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	src.destspawn = 0
 	for (var/datum/organ/external/T in children)
 		if(T)
+			T.cyberlimb = src.cyberlimb
 			T.robotize()
 
 /datum/organ/external/proc/mutate()
@@ -806,7 +808,17 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 /datum/organ/external/get_icon(var/icon/race_icon, var/icon/deform_icon,gender="")
 	if (status & ORGAN_ROBOT && !(owner.species && owner.species.flags & IS_SYNTHETIC))
-		return new /icon('icons/mob/human_races/robotic.dmi', "[icon_name][gender ? "_[gender]" : ""]")
+		switch(cyberlimb)
+			if ("bishop")
+				return new /icon('icons/mob/human_races/cyberlimbs/bishop.dmi', "[icon_name][gender ? "_[gender]" : ""]")
+			if ("hesphaistos")
+				return new /icon('icons/mob/human_races/cyberlimbs/hesphaistos.dmi', "[icon_name][gender ? "_[gender]" : ""]")
+			if ("xion")
+				return new /icon('icons/mob/human_races/cyberlimbs/xion.dmi', "[icon_name][gender ? "_[gender]" : ""]")
+			if ("zenghu")
+				return new /icon('icons/mob/human_races/cyberlimbs/zenghu.dmi', "[icon_name][gender ? "_[gender]" : ""]")
+			else
+				return new /icon('icons/mob/human_races/robotic.dmi', "[icon_name][gender ? "_[gender]" : ""]")
 
 	if (status & ORGAN_MUTATED)
 		return new /icon(deform_icon, "[icon_name][gender ? "_[gender]" : ""]")
