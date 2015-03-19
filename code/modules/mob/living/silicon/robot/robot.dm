@@ -297,8 +297,7 @@
 			module_sprites["Standard"] = "surgeon"
 			module_sprites["Advanced Droid"] = "droid-medical"
 			module_sprites["Needles"] = "medicalrobot"
-			module_sprites["Drone - Medical" ] = "drone-medical"
-			module_sprites["Drone - Chemistry" ] = "drone-chemistry"
+			module_sprites["Drone" ] = "drone-medical"
 
 		if("Surgeon")
 			module = new /obj/item/weapon/robot_module/surgeon(src)
