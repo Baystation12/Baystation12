@@ -154,7 +154,7 @@ var/list/robot_verbs_default = list(
 
 /mob/living/silicon/robot/proc/init()
 	aiCamera = new/obj/item/device/camera/siliconcam/robot_camera(src)
-	laws = new /datum/ai_laws/nanotrasen()
+	laws = new /datum/ai_laws/arccos()
 	additional_law_channels += "Binary"
 	connected_ai = select_active_ai_with_fewest_borgs()
 	if(connected_ai)
