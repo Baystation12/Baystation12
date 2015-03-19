@@ -453,9 +453,9 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	if(host)
 		if(config.uneducated_mice)
 			host.universal_understand = 0
+		announce_ghost_joinleave(src, 0, "They are now a mouse.")
 		host.ckey = src.ckey
 		host << "<span class='info'>You are now a mouse. Try to avoid interaction with players, and do not give hints away that you are more than a simple rodent.</span>"
-		announce_ghost_joinleave(host, 0, "They are now a mouse.")
 
 /mob/dead/observer/verb/view_manfiest()
 	set name = "View Crew Manifest"
