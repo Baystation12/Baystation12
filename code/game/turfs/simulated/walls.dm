@@ -12,7 +12,7 @@
 	var/damage_overlay
 	var/global/damage_overlays[8]
 
-	var/max_temperature = 1800 //K, walls will take damage if they're next to a fire hotter than this
+	var/max_temperature = 325000 //K, walls will take damage if they're next to a fire hotter than this
 
 	opacity = 1
 	density = 1
