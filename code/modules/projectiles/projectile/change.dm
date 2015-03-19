@@ -6,14 +6,15 @@
 	nodamage = 1
 	check_armour = "energy"
 
-	on_hit(var/atom/change)
-		wabbajack(change)
+/obj/item/projectile/change/on_hit(var/atom/change)
+	wabbajack(change)
 
-
-/obj/item/projectile/change/proc/wabbajack (mob/M as mob in living_mob_list)
+/obj/item/projectile/change/proc/wabbajack(var/mob/M)
 	if(istype(M, /mob/living) && M.stat != DEAD)
-		if(M.monkeyizing)	return
-		if(M.has_brain_worms()) return //Borer stuff - RR
+		if(M.monkeyizing)
+			return
+		if(M.has_brain_worms())
+			return //Borer stuff - RR
 
 		M.monkeyizing = 1
 		M.canmove = 0
@@ -23,7 +24,8 @@
 
 		if(istype(M, /mob/living/silicon/robot))
 			var/mob/living/silicon/robot/Robot = M
-			if(Robot.mmi)	del(Robot.mmi)
+			if(Robot.mmi)
+				del(Robot.mmi)
 		else
 			for(var/obj/item/W in M)
 				if(istype(W, /obj/item/weapon/implant))	//TODO: Carn. give implants a dropped() or something
@@ -35,7 +37,25 @@
 
 		var/mob/living/new_mob
 
-		var/randomize = pick("monkey","robot","slime","xeno","human")
+		var/options = list("monkey", "robot", "slime")
+		for(var/t in all_species)
+			if(!istype(all_species[t], /datum/species/xenos))
+				options += t
+		options += "Hunter" // Unfortunately, create_new_xenomorph needs xeno's name without "Xenomorph" part, so they can't be just drawn from species list
+		options += "Sentinel"
+		options += "Drone"
+		if(ismonkey(M))
+			options -= "monkey"
+		if(isrobot(M))
+			options -= "robot"
+		if(isslime(M))
+			options -= "slime"
+		if(ishuman(M))
+			var/mob/living/carbon/human/H = M
+			if(H.species)
+				options -= H.species.name
+
+		var/randomize = pick(options)
 		switch(randomize)
 			if("monkey")
 				new_mob = new /mob/living/carbon/monkey(M.loc)
@@ -51,12 +71,11 @@
 			if("slime")
 				new_mob = new /mob/living/carbon/slime(M.loc)
 				new_mob.universal_speak = 1
-			if("xeno")
-				var/alien_caste = pick("Hunter","Sentinel","Drone","Larva")
-				new_mob = create_new_xenomorph(alien_caste,M.loc)
+			if("Hunter", "Sentinel", "Drone")
+				new_mob = create_new_xenomorph(randomize, M.loc)
 				new_mob.universal_speak = 1
-			if("human")
-				new_mob = new /mob/living/carbon/human(M.loc, pick(all_species))
+			else
+				new_mob = new /mob/living/carbon/human(M.loc, randomize)
 				if(M.gender == MALE)
 					new_mob.gender = MALE
 					new_mob.name = pick(first_names_male)
@@ -80,7 +99,7 @@
 		else
 			new_mob.key = M.key
 
-		new_mob << "<B>Your form morphs into that of a [randomize].</B>"
+		new_mob << "<B>Your form morphs into that of a [lowertext(randomize)].</B>"
 
 		del(M)
 		return new_mob
