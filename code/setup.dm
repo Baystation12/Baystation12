@@ -457,18 +457,17 @@
 #define INVISIBILITY_LEVEL_ONE            35
 #define INVISIBILITY_LEVEL_TWO            45
 #define INVISIBILITY_OBSERVER             60
-#define INVISIBILITY_AI_EYE               61
+#define INVISIBILITY_AI_EYE		          61
 
 #define SEE_INVISIBLE_LIVING              25
 #define SEE_INVISIBLE_OBSERVER_NOLIGHTING 15
 #define SEE_INVISIBLE_LEVEL_ONE           35
 #define SEE_INVISIBLE_LEVEL_TWO           45
-#define SEE_INVISIBLE_OBSERVER_NOOBSERVERS 59
-#define SEE_INVISIBLE_OBSERVER            60
-#define SEE_INVISIBLE_OBSERVER_AI_EYE     61
+#define SEE_INVISIBLE_CULT		          60
+#define SEE_INVISIBLE_OBSERVER            61
 
 #define SEE_INVISIBLE_MINIMUM 5
-#define  INVISIBILITY_MAXIMUM 100
+#define INVISIBILITY_MAXIMUM 100
 
 // Object specific defines.
 #define CANDLE_LUM 3 // For how bright candles are.
