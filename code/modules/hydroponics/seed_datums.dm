@@ -685,7 +685,7 @@
 	name = "wheat"
 	seed_name = "wheat"
 	display_name = "wheat stalks"
-	chems = list("nutriment" = list(1,25), "flour" = list(1,25))
+	chems = list("nutriment" = list(1,25), "flour" = list(15,15))
 	kitchen_tag = "wheat"
 
 /datum/seed/wheat/New()
@@ -703,7 +703,7 @@
 	name = "rice"
 	seed_name = "rice"
 	display_name = "rice stalks"
-	chems = list("nutriment" = list(1,25), "rice" = list(1,25))
+	chems = list("nutriment" = list(1,25), "rice" = list(10,15))
 	kitchen_tag = "rice"
 
 /datum/seed/rice/New()
@@ -870,7 +870,8 @@
 	name = "grass"
 	seed_name = "grass"
 	display_name = "grass"
-	chems = list("nutriment" = list(1,20), "orangejuice" = list(1,20))
+	chems = list("nutriment" = list(1,20))
+	kitchen_tag = "grass"
 
 /datum/seed/grass/New()
 	..()

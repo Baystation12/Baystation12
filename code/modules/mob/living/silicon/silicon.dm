@@ -2,13 +2,9 @@
 	gender = NEUTER
 	voice_name = "synthesized voice"
 	var/syndicate = 0
-	var/datum/ai_laws/laws = null//Now... THEY ALL CAN ALL HAVE LAWS
-	var/list/additional_law_channels = list("State")
 	var/const/MAIN_CHANNEL = "Main Frequency"
 	var/lawchannel = MAIN_CHANNEL // Default channel on which to state laws
 	var/list/stating_laws = list()// Channels laws are currently being stated on
-	var/lawcheck[1]
-	var/ioncheck[1]
 	var/obj/item/device/radio/common_radio
 
 	var/list/hud_list[10]
@@ -21,9 +17,6 @@
 	var/pose //Yes, now AIs can pose too.
 	var/obj/item/device/camera/siliconcam/aiCamera = null //photography
 	var/local_transmit //If set, can only speak to others of the same type within a short range.
-
-	// Subsystems
-	var/obj/nano_module/alarm_monitor = null
 
 	var/sensor_mode = 0 //Determines the current HUD.
 
@@ -169,13 +162,12 @@
 
 // This adds the basic clock, shuttle recall timer, and malf_ai info to all silicon lifeforms
 /mob/living/silicon/Stat()
-	..()
-	statpanel("Status")
-	if (src.client.statpanel == "Status")
+	if(statpanel("Status"))
 		show_station_time()
 		show_emergency_shuttle_eta()
 		show_system_integrity()
 		show_malf_ai()
+	..()
 
 // this function displays the stations manifest in a separate window
 /mob/living/silicon/proc/show_station_manifest()
@@ -255,27 +247,6 @@
 /mob/living/silicon/binarycheck()
 	return 1
 
-/mob/living/silicon/Topic(href, href_list)
-	if(..())
-		return 1
-
-	if (href_list["lawr"]) // Selects on which channel to state laws
-		var/list/channels = list(MAIN_CHANNEL)
-		if(common_radio)
-			for (var/ch_name in common_radio.channels)
-				channels += ch_name
-
-		channels += additional_law_channels
-		channels += "Cancel"
-
-		var/setchannel = input(usr, "Specify channel.", "Channel selection") in channels
-		if(setchannel != "Cancel")
-			lawchannel = setchannel
-			checklaws()
-		return 1
-
-	return 0
-
 /mob/living/silicon/ex_act(severity)
 	if(!blinded)
 		flick("flash", flash)
@@ -299,6 +270,8 @@
 
 /mob/living/silicon/proc/init_subsystems()
 	alarm_monitor = new/obj/nano_module/alarm_monitor/borg(src)
+	law_manager = new/obj/nano_module/law_manager(src)
+
 	for(var/datum/alarm_handler/AH in alarm_manager.all_handlers)
 		AH.register(src, /mob/living/silicon/proc/receive_alarm)
 		queued_alarms[AH] = list()	// Makes sure alarms remain listed in consistent order

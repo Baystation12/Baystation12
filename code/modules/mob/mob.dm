@@ -792,7 +792,8 @@ note dizziness decrements automatically in the mob's Life() proc.
 	//reset the pixel offsets to zero
 	is_floating = 0
 
-
+/proc/getStatName(var/datum/controller/process/process)
+	return uppertext(copytext(process.name, 1, 4))
 
 /mob/Stat()
 	..()
@@ -802,20 +803,49 @@ note dizziness decrements automatically in the mob's Life() proc.
 			stat(null,"Location:\t([x], [y], [z])")
 			stat(null,"CPU:\t[world.cpu]")
 			stat(null,"Instances:\t[world.contents.len]")
-		if(statpanel("Status") && master_controller)
-			stat(null,"MasterController-[last_tick_duration] ([master_controller.processing?"On":"Off"]-[controller_iteration])")
-			stat(null,"Air-[master_controller.air_cost]\tSun-[master_controller.sun_cost]")
-			stat(null,"Mob-[master_controller.mobs_cost]\t#[mob_list.len]")
-			stat(null,"Dis-[master_controller.diseases_cost]\t#[active_diseases.len]")
-			stat(null,"Mch-[master_controller.machines_cost]\t#[machines.len]")
-			stat(null,"Obj-[master_controller.objects_cost]\t#[processing_objects.len]")
-			stat(null,"Net-[master_controller.networks_cost]\tPnet-[master_controller.powernets_cost]")
-			stat(null,"NanoUI-[master_controller.nano_cost]\t#[nanomanager.processing_uis.len]")
-			stat(null,"Event-[master_controller.events_cost]\t#[event_manager.active_events.len]")
-			alarm_manager.stat_entry()
-			stat(null,"Tick-[master_controller.ticker_cost]\tALL-[master_controller.total_cost]")
+		if(statpanel("Status") && processScheduler.getIsRunning())
+			var/datum/controller/process/process
+
+			process = processScheduler.getProcess("ticker")
+			stat(null, "[getStatName(process)]\t - #[process.getTicks()]\t - [process.getLastRunTime()]")
+
+			process = processScheduler.getProcess("air")
+			stat(null, "[getStatName(process)]\t - #[process.getTicks()]\t - [process.getLastRunTime()]")
+
+			process = processScheduler.getProcess("lighting")
+			stat(null, "[getStatName(process)]\t - #[process.getTicks()]\t - [process.getLastRunTime()]")
+
+			process = processScheduler.getProcess("alarm")
+			var/list/alarms = alarm_manager.active_alarms()
+			stat(null, "[getStatName(process)]([alarms.len])\t - #[process.getTicks()]\t - [process.getLastRunTime()]")
+
+			process = processScheduler.getProcess("mob")
+			stat(null, "[getStatName(process)]([mob_list.len])\t - #[process.getTicks()]\t - [process.getLastRunTime()]")
+
+			process = processScheduler.getProcess("machinery")
+			stat(null, "[getStatName(process)]([machines.len])\t - #[process.getTicks()]\t - [process.getLastRunTime()]")
+
+			process = processScheduler.getProcess("obj")
+			stat(null, "[getStatName(process)]([processing_objects.len])\t - #[process.getTicks()]\t - [process.getLastRunTime()]")
+
+			process = processScheduler.getProcess("pipenet")
+			stat(null, "[getStatName(process)]([pipe_networks.len])\t - #[process.getTicks()]\t - [process.getLastRunTime()]")
+
+			process = processScheduler.getProcess("powernet")
+			stat(null, "[getStatName(process)]([powernets.len])\t - #[process.getTicks()]\t - [process.getLastRunTime()]")
+
+			process = processScheduler.getProcess("nanoui")
+			stat(null, "[getStatName(process)]([nanomanager.processing_uis.len])\t - #[process.getTicks()]\t - [process.getLastRunTime()]")
+
+			process = processScheduler.getProcess("disease")
+			stat(null, "[getStatName(process)]([active_diseases.len])\t - #[process.getTicks()]\t - [process.getLastRunTime()]")
+
+			process = processScheduler.getProcess("sun")
+			stat(null, "[getStatName(process)]\t - #[process.getTicks()]\t - [process.getLastRunTime()]")
+
 		else
-			stat(null,"MasterController-ERROR")
+			stat(null, "processScheduler is not running.")
+
 
 	if(listed_turf && client)
 		if(!TurfAdjacent(listed_turf))

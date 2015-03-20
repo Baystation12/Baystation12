@@ -115,7 +115,7 @@
 	return null
 
 /obj/proc/check_access(obj/item/I)
-	if(!src.req_access.len && !src.req_one_access.len) //no requirements
+	if(!(!req_access || req_access.len) && !(req_one_access || req_one_access.len)) //no requirements
 		return 1
 	if(!I)
 		return 0
