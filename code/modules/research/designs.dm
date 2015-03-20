@@ -357,11 +357,11 @@ datum/design/aimodule/safeguard
 	req_tech = list("programming" = 3, "materials" = 4)
 	build_path = /obj/item/weapon/aiModule/safeguard
 
-datum/design/aimodule/onehuman
-	name = "OneHuman"
+datum/design/aimodule/onecrew
+	name = "OneCrewMember"
 	id = "onehuman"
 	req_tech = list("programming" = 4, "materials" = 6)
-	build_path = /obj/item/weapon/aiModule/oneHuman
+	build_path = /obj/item/weapon/aiModule/oneCrewMember
 
 datum/design/aimodule/protectstation
 	name = "ProtectStation"
