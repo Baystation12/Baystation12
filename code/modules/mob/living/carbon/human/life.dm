@@ -1218,6 +1218,8 @@
 				glasses_processed = 1
 				process_glasses(glasses)
 
+			if(!glasses_processed && (species.vision_flags > 0))
+				sight |= species.vision_flags
 			if(!seer && !glasses_processed)
 				see_invisible = SEE_INVISIBLE_LIVING
 

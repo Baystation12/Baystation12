@@ -198,7 +198,7 @@
 	var/obj/item/device/radio/R	= new (src)
 	var/AN = "Self-Destruct System"
 
-	R.autosay("Caution. Self-Destruct sequence has been actived. Self-destructing in Ten..", AN)
+	R.autosay("Caution. Self-Destruct sequence has been activated. Self-destructing in Ten..", AN)
 	for (var/i=9 to 1 step -1)
 		sleep(10)
 		var/msg = ""
