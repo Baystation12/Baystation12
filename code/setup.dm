@@ -457,18 +457,17 @@
 #define INVISIBILITY_LEVEL_ONE            35
 #define INVISIBILITY_LEVEL_TWO            45
 #define INVISIBILITY_OBSERVER             60
-#define INVISIBILITY_AI_EYE               61
+#define INVISIBILITY_AI_EYE		          61
 
 #define SEE_INVISIBLE_LIVING              25
 #define SEE_INVISIBLE_OBSERVER_NOLIGHTING 15
 #define SEE_INVISIBLE_LEVEL_ONE           35
 #define SEE_INVISIBLE_LEVEL_TWO           45
-#define SEE_INVISIBLE_OBSERVER_NOOBSERVERS 59
-#define SEE_INVISIBLE_OBSERVER            60
-#define SEE_INVISIBLE_OBSERVER_AI_EYE     61
+#define SEE_INVISIBLE_CULT		          60
+#define SEE_INVISIBLE_OBSERVER            61
 
 #define SEE_INVISIBLE_MINIMUM 5
-#define  INVISIBILITY_MAXIMUM 100
+#define INVISIBILITY_MAXIMUM 100
 
 // Object specific defines.
 #define CANDLE_LUM 3 // For how bright candles are.
@@ -799,3 +798,8 @@ var/list/be_special_flags = list(
 #define APPEARANCE_ALL_HAIR APPEARANCE_HAIR|APPEARANCE_HAIR_COLOR|APPEARANCE_FACIAL_HAIR|APPEARANCE_FACIAL_HAIR_COLOR
 #define APPEARANCE_ALL 511
 
+#define MIN_SUPPLIED_LAW_NUMBER 15
+#define MAX_SUPPLIED_LAW_NUMBER 50
+
+//Area flags, possibly more to come
+#define RAD_SHIELDED 1 //shielded from radiation, clearly

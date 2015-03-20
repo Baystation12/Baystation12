@@ -57,8 +57,6 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	var/list/ambience = list('sound/ambience/ambigen1.ogg','sound/ambience/ambigen3.ogg','sound/ambience/ambigen4.ogg','sound/ambience/ambigen5.ogg','sound/ambience/ambigen6.ogg','sound/ambience/ambigen7.ogg','sound/ambience/ambigen8.ogg','sound/ambience/ambigen9.ogg','sound/ambience/ambigen10.ogg','sound/ambience/ambigen11.ogg','sound/ambience/ambigen12.ogg','sound/ambience/ambigen14.ogg')
 	var/sound/forced_ambience = null
 
-	var/rad_shielded = 0
-
 /*Adding a wizard area teleport list because motherfucking lag -- Urist*/
 /*I am far too lazy to make it a proper list of areas so I'll just make it run the usual telepot routine at the start of the game*/
 var/list/teleportlocs = list()
@@ -474,7 +472,7 @@ area/space/atmosalert()
 	icon_state = "yellow"
 	requires_power = 0
 	unlimited_power = 1
-	rad_shielded = 1
+	flags = RAD_SHIELDED
 
 /area/syndicate_station/start
 	name = "\improper Mercenary Forward Operating Base"
@@ -531,7 +529,7 @@ area/space/atmosalert()
 
 /area/vox_station
 	requires_power = 0
-	rad_shielded = 1
+	flags = RAD_SHIELDED
 
 /area/vox_station/transit
 	name = "\improper hyperspace"
@@ -647,7 +645,7 @@ area/space/atmosalert()
 //Maintenance
 
 /area/maintenance
-	rad_shielded = 1
+	flags = RAD_SHIELDED
 
 /area/maintenance/aft
 	name = "Aft Maintenance"
@@ -922,7 +920,7 @@ area/space/atmosalert()
 /area/crew_quarters
 	name = "\improper Dormitories"
 	icon_state = "Sleep"
-	rad_shielded = 1
+	flags = RAD_SHIELDED
 
 /area/crew_quarters/toilet
 	name = "\improper Dormitory Toilets"

@@ -698,17 +698,26 @@ proc/anim(turf/location as turf,target as mob|obj,a_icon,a_icon_state as text,fl
 
 	else return get_step(ref, base_dir)
 
-/proc/do_mob(var/mob/user , var/mob/target, var/time = 30) //This is quite an ugly solution but i refuse to use the old request system.
-	if(!user || !target) return 0
-	var/user_loc = user.loc
-	var/target_loc = target.loc
+/proc/do_mob(var/mob/user, var/mob/target, var/delay, var/numticks = 5, var/needhand = 1) //This is quite an ugly solution but i refuse to use the old request system.
+	if(!user || !target)	return 0
+	if(numticks == 0)		return 0
+
+	var/delayfraction = round(delay/numticks)
+	var/original_user_loc = user.loc
+	var/original_target_loc = target.loc
 	var/holding = user.get_active_hand()
-	sleep(time)
-	if(!user || !target) return 0
-	if ( user.loc == user_loc && target.loc == target_loc && user.get_active_hand() == holding && !( user.stat ) && ( !user.stunned && !user.weakened && !user.paralysis && !user.lying ) )
-		return 1
-	else
-		return 0
+
+	for(var/i = 0, i<numticks, i++)
+		sleep(delayfraction)
+
+		if(!user || user.stat || user.weakened || user.stunned || user.loc != original_user_loc)
+			return 0
+		if(!target || target.loc != original_target_loc)
+			return 0
+		if(needhand && !(user.get_active_hand() == holding))	//Sometimes you don't want the user to have to keep their active hand
+			return 0
+
+	return 1
 
 /proc/do_after(var/mob/user as mob, delay as num, var/numticks = 5, var/needhand = 1)
 	if(!user || isnull(user))
@@ -718,14 +727,12 @@ proc/anim(turf/location as turf,target as mob|obj,a_icon,a_icon_state as text,fl
 
 	var/delayfraction = round(delay/numticks)
 	var/original_loc = user.loc
-	var/original_turf = get_turf(user)
 	var/holding = user.get_active_hand()
 
 	for(var/i = 0, i<numticks, i++)
 		sleep(delayfraction)
 
-
-		if(!user || user.stat || user.weakened || user.stunned || user.loc != original_loc || get_turf(user) != original_turf)
+		if(!user || user.stat || user.weakened || user.stunned || user.loc != original_loc)
 			return 0
 		if(needhand && !(user.get_active_hand() == holding))	//Sometimes you don't want the user to have to keep their active hand
 			return 0
