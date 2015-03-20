@@ -324,7 +324,7 @@
 					if(istype(O)) O.add_autopsy_data("Radiation Poisoning", damage)
 
 	/** breathing **/
-	
+
 	handle_chemical_smoke(var/datum/gas_mixture/environment)
 		if(wear_mask && (wear_mask.flags & BLOCK_GAS_SMOKE_EFFECT))
 			return
@@ -1201,7 +1201,7 @@
 			if(seer==1)
 				var/obj/effect/rune/R = locate() in loc
 				if(R && R.word1 == cultwords["see"] && R.word2 == cultwords["hell"] && R.word3 == cultwords["join"])
-					see_invisible = SEE_INVISIBLE_OBSERVER
+					see_invisible = SEE_INVISIBLE_CULT
 				else
 					see_invisible = SEE_INVISIBLE_LIVING
 					seer = 0

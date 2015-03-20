@@ -14,17 +14,34 @@
 	status_flags = GODMODE  // You can't damage it.
 	see_in_dark = 7
 	invisibility = INVISIBILITY_AI_EYE
+	var/ghostimage = null
+
+/mob/aiEye/New()
+	ghostimage = image(src.icon,src,src.icon_state)
+	ghost_darkness_images |= ghostimage //so ghosts can see the AI eye when they disable darkness
+	ghost_sightless_images |= ghostimage //so ghosts can see the AI eye when they disable ghost sight
+	updateallghostimages()
+	..()
+
+mob/aiEye/Del()
+	if (ghostimage)
+		ghost_darkness_images -= ghostimage
+		ghost_sightless_images -= ghostimage
+		del(ghostimage)
+		ghostimage = null;
+		updateallghostimages()
+	..()
 
 // Movement code. Returns 0 to stop air movement from moving it.
 /mob/aiEye/Move()
 	return 0
 
-/mob/aiEye/examinate(atom/A as mob|obj|turf in view())
+/mob/aiEye/examinate()
 	set popup_menu = 0
 	set src = usr.contents
 	return 0
 
-/mob/aiEye/pointed(atom/A as mob|obj|turf in view())
+/mob/aiEye/pointed()
 	set popup_menu = 0
 	set src = usr.contents
 	return 0
