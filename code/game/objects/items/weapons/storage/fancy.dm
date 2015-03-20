@@ -47,8 +47,10 @@
 	icon_type = "egg"
 	name = "egg box"
 	storage_slots = 12
-	max_storage_space = 24
-	can_hold = list(/obj/item/weapon/reagent_containers/food/snacks/egg)
+	can_hold = list(
+		/obj/item/weapon/reagent_containers/food/snacks/egg,
+		/obj/item/weapon/reagent_containers/food/snacks/boiledegg
+		)
 
 /obj/item/weapon/storage/fancy/egg_box/New()
 	..()

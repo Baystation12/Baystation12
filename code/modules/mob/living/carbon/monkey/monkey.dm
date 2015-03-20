@@ -270,7 +270,7 @@
 //Unless its monkey mode monkeys cant use advanced tools
 /mob/living/carbon/monkey/IsAdvancedToolUser(var/silent)
 	if(!silent)
-		src << "<span class='warning'>You don't have the dexterity to use [src]!</span>"
+		src << "<span class='warning'>You don't have the dexterity to use that!</span>"
 	return 0
 
 /mob/living/carbon/monkey/say(var/message, var/datum/language/speaking = null, var/verb="says", var/alt_name="", var/italics=0, var/message_range = world.view, var/list/used_radios = list())
