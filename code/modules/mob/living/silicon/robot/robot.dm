@@ -1238,6 +1238,7 @@
 
 /mob/living/silicon/robot/proc/disconnect_from_ai()
 	if(connected_ai)
+		sync() // One last sync attempt
 		connected_ai.connected_robots -= src
 		connected_ai = null
 

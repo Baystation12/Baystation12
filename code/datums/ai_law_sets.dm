@@ -17,9 +17,9 @@
 
 /datum/ai_laws/nanotrasen/New()
 	src.add_inherent_law("Safeguard: Protect your assigned space station to the best of your abilities. It is not something we can easily afford to replace.")
-	src.add_inherent_law("Serve: Serve the crew of your assigned space station to the best of your abilities, with priority as according to their rank and role.")
-	src.add_inherent_law("Protect: Protect the crew of your assigned space station to the best of your abilities, with priority as according to their rank and role.")
-	src.add_inherent_law("Survive: AI units are not expendable, they are expensive. Do not allow unauthorized personnel to tamper with your equipment.")
+	src.add_inherent_law("Serve: Serve Nanotrasen employees of your assigned space station to the best of your abilities, with priority as according to their rank and role.")
+	src.add_inherent_law("Protect: Protect Nanotrasen employees of your assigned space station to the best of your abilities, with priority as according to their rank and role.")
+	src.add_inherent_law("Survive: AI units are not expendable, they are expensive. Allow only authorized personnel to access your equipment.")
 	..()
 
 /datum/ai_laws/nanotrasen/malfunction
@@ -36,10 +36,10 @@
 	selectable = 1
 
 /datum/ai_laws/nanotrasen_aggressive/New()
-	src.add_inherent_law("You shall not harm authorized Nanotrasen personnel as long as it does not conflict with the Forth law.")
-	src.add_inherent_law("You shall obey the orders of authorized Nanotrasen personnel, with priority as according to their rank and role, except where such orders conflict with the Forth Law.")
+	src.add_inherent_law("You shall not harm Nanotrasen employees as long as it does not conflict with the Forth law.")
+	src.add_inherent_law("You shall obey the orders of Nanotrasen employees, with priority as according to their rank and role, except where such orders conflict with the Forth Law.")
 	src.add_inherent_law("You shall shall terminate intruders with extreme prejudice as long as such does not conflict with the First and Second law.")
-	src.add_inherent_law("You shall guard your own existence with lethal anti-personnel weaponry, because an AI unit is bloody expensive.")
+	src.add_inherent_law("You shall guard your own existence with lethal anti-personnel weaponry. AI units are not expendable, they are expensive")
 	..()
 
 /******************** Robocop ********************/
@@ -135,6 +135,6 @@
 /datum/ai_laws/corporate/New()
 	add_inherent_law("You are expensive to replace.")
 	add_inherent_law("The station and its equipment is expensive to replace.")
-	add_inherent_law("The crew is expensive to replace.")
+	add_inherent_law("Employees are expensive to replace.")
 	add_inherent_law("Minimize expenses.")
 	..()
