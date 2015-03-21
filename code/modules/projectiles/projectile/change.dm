@@ -9,7 +9,7 @@
 /obj/item/projectile/change/on_hit(var/atom/change)
 	wabbajack(change)
 
-/obj/item/projectile/change/proc/wabbajack(var/mob/M as mob in living_mob_list)
+/obj/item/projectile/change/proc/wabbajack(var/mob/M)
 	if(istype(M, /mob/living) && M.stat != DEAD)
 		if(M.monkeyizing)
 			return
@@ -37,7 +37,10 @@
 
 		var/mob/living/new_mob
 
-		var/options = list("monkey", "robot", "slime", "Hunter", "Sentinel", "Drone", "Human", "Unathi", "Tajara", "Skrell", "Diona", "Machine", "Vox", "Slime", "Golem", "Shadow")
+		var/options = list("monkey", "robot", "slime")
+		for(var/t in all_species)
+			options += t
+		options -= "Xenomorph Queen"
 		if(ismonkey(M))
 			options -= "monkey"
 		if(isrobot(M))
@@ -68,7 +71,7 @@
 			if("Hunter", "Sentinel", "Drone")
 				new_mob = create_new_xenomorph(randomize, M.loc)
 				new_mob.universal_speak = 1
-			if("Human", "Unathi", "Tajara", "Skrell", "Diona", "Machine", "Vox", "Slime", "Golem", "Shadow")
+			else
 				new_mob = new /mob/living/carbon/human(M.loc, randomize)
 				if(M.gender == MALE)
 					new_mob.gender = MALE
