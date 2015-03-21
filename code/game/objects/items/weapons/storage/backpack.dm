@@ -8,10 +8,10 @@
 	desc = "You wear this on your back and put items into it."
 	icon_state = "backpack"
 	item_state = "backpack"
-	w_class = 4.0
-	slot_flags = SLOT_BACK	//ERROOOOO
+	w_class = 4
+	slot_flags = SLOT_BACK
 	max_w_class = 3
-	max_combined_w_class = 21
+	max_storage_space = 28
 
 /obj/item/weapon/storage/backpack/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (src.use_sound)
@@ -40,7 +40,7 @@
 	origin_tech = "bluespace=4"
 	icon_state = "holdingpack"
 	max_w_class = 4
-	max_combined_w_class = 28
+	max_storage_space = 56
 
 	New()
 		..()
@@ -67,6 +67,12 @@
 			return
 			*/
 		..()
+	
+	//Please don't clutter the parent storage item with stupid hacks.
+	can_be_inserted(obj/item/W as obj, stop_messages = 0)
+		if(istype(W, /obj/item/weapon/storage/backpack/holding))
+			return 1
+		return ..()
 
 	proc/failcheck(mob/user as mob)
 		if (prob(src.reliability)) return 1 //No failure
@@ -88,7 +94,7 @@
 	w_class = 4.0
 	storage_slots = 20
 	max_w_class = 3
-	max_combined_w_class = 400 // can store a ton of shit!
+	max_storage_space = 400 // can store a ton of shit!
 
 /obj/item/weapon/storage/backpack/cultpack
 	name = "trophy rack"

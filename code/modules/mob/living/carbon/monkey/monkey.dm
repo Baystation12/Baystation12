@@ -14,6 +14,7 @@
 	//var/uni_append = "12C4E2"                // Small appearance modifier for different species.
 	var/list/uni_append = list(0x12C,0x4E2)    // Same as above for DNA2.
 	var/update_muts = 1                        // Monkey gene must be set at start.
+	holder_type = /obj/item/weapon/holder/monkey
 
 /mob/living/carbon/monkey/tajara
 	name = "farwa"
@@ -22,6 +23,7 @@
 	icon_state = "tajkey1"
 	greaterform = "Tajara"
 	uni_append = list(0x0A0,0xE00) // 0A0E00
+	holder_type = /obj/item/weapon/holder/monkey/farwa
 
 /mob/living/carbon/monkey/skrell
 	name = "neaera"
@@ -30,6 +32,7 @@
 	icon_state = "skrellkey1"
 	greaterform = "Skrell"
 	uni_append = list(0x01C,0xC92) // 01CC92
+	holder_type = /obj/item/weapon/holder/monkey/neaera
 
 /mob/living/carbon/monkey/unathi
 	name = "stok"
@@ -38,6 +41,7 @@
 	icon_state = "stokkey1"
 	greaterform = "Unathi"
 	uni_append = list(0x044,0xC5D) // 044C5D
+	holder_type = /obj/item/weapon/holder/monkey/stok
 
 /mob/living/carbon/monkey/New()
 
@@ -133,8 +137,9 @@
 
 /mob/living/carbon/monkey/attack_hand(mob/living/carbon/human/M as mob)
 
-	if (M.a_intent == "help")
+	if (M.a_intent == "help" && a_intent == "help")
 		help_shake_act(M)
+		get_scooped(M)
 	else
 		if (M.a_intent == "hurt")
 			var/datum/unarmed_attack/attack = null

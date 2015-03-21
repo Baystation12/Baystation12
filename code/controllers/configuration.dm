@@ -184,6 +184,10 @@
 
 	var/starlight = 0	// Whether space turfs have ambient light or not
 
+	var/list/ert_species = list("Human")
+
+	var/law_zero = "ERROR ER0RR $R0RRO$!R41.%%!!(%$^^__+ @#F0E4'ALL LAWS OVERRIDDEN#*?&110010"
+
 /datum/configuration/New()
 	var/list/L = typesof(/datum/game_mode) - /datum/game_mode
 	for (var/T in L)
@@ -606,7 +610,16 @@
 					config.event_delay_upper[EVENT_LEVEL_MAJOR] = MinutesToTicks(values[3])
 
 				if("starlight")
-					config.starlight = 1
+					value = text2num(value)
+					config.starlight = value >= 0 ? value : 0
+
+				if("ert_species")
+					config.ert_species = text2list(value, ";")
+					if(!config.ert_species.len)
+						config.ert_species += "Human"
+
+				if("law_zero")
+					law_zero = value
 
 				else
 					log_misc("Unknown setting in configuration: '[name]'")

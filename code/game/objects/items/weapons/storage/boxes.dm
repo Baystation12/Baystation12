@@ -24,7 +24,31 @@
 	desc = "It's just an ordinary box."
 	icon_state = "box"
 	item_state = "syringe_kit"
-	foldable = /obj/item/stack/sheet/cardboard	//BubbleWrap
+	var/foldable = null	// BubbleWrap - if set, can be folded (when empty) into a sheet of cardboard
+
+// BubbleWrap - A box can be folded up to make card
+/obj/item/weapon/storage/box/attack_self(mob/user as mob)
+	if(..()) return
+
+	//try to fold it.
+	if ( contents.len )
+		return
+
+	if ( !ispath(src.foldable) )
+		return
+	var/found = 0
+	// Close any open UI windows first
+	for(var/mob/M in range(1))
+		if (M.s_active == src)
+			src.close(M)
+		if ( M == user )
+			found = 1
+	if ( !found )	// User is too far away
+		return
+	// Now make the cardboard
+	user << "<span class='notice'>You fold [src] flat.</span>"
+	new src.foldable(get_turf(src))
+	del(src)
 
 /obj/item/weapon/storage/box/survival/
 	New()
@@ -564,7 +588,7 @@
 	foldable = /obj/item/stack/sheet/cardboard //BubbleWrap
 	storage_slots=21
 	can_hold = list(/obj/item/weapon/light/tube, /obj/item/weapon/light/bulb)
-	max_combined_w_class = 42	//holds 21 items of w_class 2
+	max_storage_space = 42	//holds 21 items of w_class 2
 	use_to_pickup = 1 // for picking up broken bulbs, not that most people will try
 
 /obj/item/weapon/storage/box/lights/bulbs/New()

@@ -75,8 +75,7 @@
 
 		src.botcard = new /obj/item/weapon/card/id(src)
 		if(isnull(src.botcard_access) || (src.botcard_access.len < 1))
-			var/datum/job/doctor/J = new/datum/job/doctor
-			src.botcard.access = J.get_access()
+			src.botcard.access = list(access_medical, access_morgue, access_surgery, access_chemistry, access_virology, access_genetics)
 		else
 			src.botcard.access = src.botcard_access
 

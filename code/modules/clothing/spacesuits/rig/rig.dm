@@ -12,8 +12,8 @@
 	icon = 'icons/obj/rig_modules.dmi'
 	desc = "A back-mounted hardsuit deployment and control mechanism."
 	slot_flags = SLOT_BACK
-	req_one_access = null
-	req_access = null
+	req_one_access = list()
+	req_access = list()
 	w_class = 4
 
 	// These values are passed on to all component pieces.

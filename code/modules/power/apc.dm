@@ -44,6 +44,9 @@
 /obj/machinery/power/apc/super
 	cell_type = /obj/item/weapon/cell/super
 
+/obj/machinery/power/apc/super/equipment
+	equipment = 2
+
 /obj/machinery/power/apc/hyper
 	cell_type = /obj/item/weapon/cell/hyper
 

@@ -104,7 +104,7 @@
 			if(C.imprinted != "empty")
 				U << "\red <b>Capture failed!</b>: \black The soul stone has already been imprinted with [C.imprinted]'s mind!"
 			else
-				if (T.stat == 0)
+				if ((T.health + T.halloss) > config.health_threshold_crit)
 					U << "\red <b>Capture failed!</b>: \black Kill or maim the victim first!"
 				else
 					if(T.client == null)
@@ -129,6 +129,11 @@
 							S.canmove = 0//Can't move out of the soul stone
 							S.name = "Shade of [T.real_name]"
 							S.real_name = "Shade of [T.real_name]"
+							S.icon = T.icon
+							S.icon_state = T.icon_state
+							S.overlays = T.overlays
+							S.color = rgb(254,0,0)
+							S.alpha = 127
 							if (T.client)
 								T.client.mob = S
 							S.cancel_camera()
