@@ -21,28 +21,12 @@ var/list/spawntypes = list()
 			return 0
 
 		return 1
+	
 /datum/spawnpoint/cryo
 	display_name = "Cryogenic Storage"
 	msg = "has completed cryogenic transfer"
-	disallow_job = list("Cyborg")
-
+	disallow_job = list("Cyborg")	
+	
 /datum/spawnpoint/cryo/New()
 	..()
 	turfs = latejoin_cryo
-	
-/datum/spawnpoint/arrivals/New()
-	..()
-	turfs = latejoin_cryo
-	
-/datum/spawnpoint/gateway/New()
-	..()
-	turfs = latejoin_cryo
-
-/datum/spawnpoint/cyborg
-	display_name = "Cyborg Storage"
-	msg = "has been activated from storage"
-	restrict_job = list("Cyborg")
-
-/datum/spawnpoint/cyborg/New()
-	..()
-	turfs = latejoin_cyborg
