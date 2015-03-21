@@ -10,16 +10,10 @@
 	return null
 
 /proc/get_area(O)
-	var/atom/location = O
-	var/i
-	for(i=1, i<=20, i++)
-		if(isarea(location))
-			return location
-		else if (istype(location))
-			location = location.loc
-		else
-			return null
-	return 0
+	var/turf/loc = get_turf(O)
+	if(!loc)
+		return null
+	return loc.loc
 
 /proc/get_area_name(N) //get area by its name
 	for(var/area/A in world)
@@ -49,7 +43,7 @@
 	return level in config.station_levels
 
 /proc/isNotStationLevel(var/level)
-	return !isStationLevel()
+	return !isStationLevel(level)
 
 /proc/isPlayerLevel(var/level)
 	return level in config.player_levels

@@ -657,7 +657,7 @@ var/global/list/gear_datums = list()
 
 /datum/gear/dress_shoes
 	display_name = "shoes, dress"
-	path = /obj/item/clothing/shoes/centcom
+	path = /obj/item/clothing/shoes/laceup
 	cost = 1
 	slot = slot_shoes
 

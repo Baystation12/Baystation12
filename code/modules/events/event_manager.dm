@@ -32,7 +32,7 @@
 		EC.process()
 
 /datum/event_manager/proc/event_complete(var/datum/event/E)
-	if(!E.event_meta)	// datum/event is used here and there for random reasons, maintaining "backwards compatibility"
+	if(!E.event_meta || !E.severity)	// datum/event is used here and there for random reasons, maintaining "backwards compatibility"
 		log_debug("Event of '[E.type]' with missing meta-data has completed.")
 		return
 
@@ -195,12 +195,12 @@
 		admin_log_and_message_admins("has [report_at_round_end ? "enabled" : "disabled"] the round end event report.")
 	else if(href_list["dec_timer"])
 		var/datum/event_container/EC = locate(href_list["event"])
-		var/decrease = (60 * RaiseToPower(10, text2num(href_list["dec_timer"])))
+		var/decrease = (60 * 10 ** text2num(href_list["dec_timer"]))
 		EC.next_event_time -= decrease
 		admin_log_and_message_admins("decreased timer for [severity_to_string[EC.severity]] events by [decrease/600] minute(s).")
 	else if(href_list["inc_timer"])
 		var/datum/event_container/EC = locate(href_list["event"])
-		var/increase = (60 * RaiseToPower(10, text2num(href_list["inc_timer"])))
+		var/increase = (60 * 10 ** text2num(href_list["inc_timer"]))
 		EC.next_event_time += increase
 		admin_log_and_message_admins("increased timer for [severity_to_string[EC.severity]] events by [increase/600] minute(s).")
 	else if(href_list["select_event"])

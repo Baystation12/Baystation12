@@ -70,7 +70,7 @@ datum/track/New(var/title_name, var/audio)
 		return
 
 	if(stat & (NOPOWER|BROKEN))
-		usr << "\the [src] doesn't appear to function."
+		usr << "\The [src] doesn't appear to function."
 		return
 
 	if(href_list["change_track"])
@@ -109,7 +109,7 @@ datum/track/New(var/title_name, var/audio)
 
 /obj/machinery/media/jukebox/interact(mob/user)
 	if(stat & (NOPOWER|BROKEN))
-		usr << "\the [src] doesn't appear to function."
+		usr << "\The [src] doesn't appear to function."
 		return
 
 	ui_interact(user)

@@ -198,6 +198,7 @@
 	icon_state = "holster"
 	item_color = "holster"
 	var/obj/item/weapon/gun/holstered = null
+	w_class = 3.0 // so it doesn't fit in pockets
 
 //subtypes can override this to specify what can be holstered
 /obj/item/clothing/tie/holster/proc/can_holster(obj/item/weapon/gun/W)
@@ -316,6 +317,7 @@
 	desc = "Used to hold things when you don't have enough hands."
 	icon_state = "webbing"
 	item_color = "webbing"
+	w_class = 3.0 // so it doesn't fit in pockets
 	var/slots = 3
 	var/obj/item/weapon/storage/internal/hold
 
@@ -360,7 +362,7 @@
 
 /obj/item/clothing/tie/storage/webbing
 	name = "webbing"
-	desc = "Strudy mess of synthcotton belts and buckles, ready to share your burden."
+	desc = "Sturdy mess of synthcotton belts and buckles, ready to share your burden."
 	icon_state = "webbing"
 	item_color = "webbing"
 
