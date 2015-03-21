@@ -234,6 +234,12 @@
 
 	..()
 
+/obj/machinery/cryopod/Del()
+	if(occupant)
+		occupant.loc = loc
+		occupant.resting = 1
+	..()
+
 /obj/machinery/cryopod/initialize()
 	..()
 

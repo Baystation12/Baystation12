@@ -38,7 +38,9 @@
 	flags_inv =          HIDEJUMPSUIT|HIDETAIL
 	flags =              STOPSPRESSUREDMAGE | THICKMATERIAL | AIRTIGHT
 	slowdown = 0
-	breach_threshold = 35
+	//With 0.2 resiliance, will reach 10 breach damage after 9 laser carbine blasts. Completely immune to smg hits.
+	breach_threshold = 28
+	resilience = 0.1
 	can_breach = 1
 	supporting_limbs = list()
 

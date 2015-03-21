@@ -8,11 +8,6 @@ obj/machinery/door/airlock
 	var/datum/radio_frequency/radio_connection
 	var/cur_command = null	//the command the door is currently attempting to complete
 
-obj/machinery/door/airlock/proc/can_radio()
-	if(!arePowerSystemsOn())
-		return 0
-	return 1
-
 obj/machinery/door/airlock/process()
 	..()
 	if (arePowerSystemsOn())
@@ -20,8 +15,6 @@ obj/machinery/door/airlock/process()
 
 obj/machinery/door/airlock/receive_signal(datum/signal/signal)
 	if (!arePowerSystemsOn()) return //no power
-
-	if (!can_radio()) return //no radio
 
 	if(!signal || signal.encryption) return
 
