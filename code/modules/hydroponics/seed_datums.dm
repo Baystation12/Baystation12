@@ -861,6 +861,7 @@
 	seed_name = "orange"
 	display_name = "orange trees"
 	kitchen_tag = "orange"
+	chems = list("nutriment" = list(1,20), "orangejuice" = list(1,20))
 
 /datum/seed/citrus/orange/New()
 	..()
