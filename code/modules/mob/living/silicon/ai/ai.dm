@@ -194,6 +194,7 @@ var/list/ai_verbs_default = list(
 
 /mob/living/silicon/ai/Del()
 	ai_list -= src
+	del(eyeobj)
 	..()
 
 /mob/living/silicon/ai/pointed(atom/A as mob|obj|turf in view())
