@@ -216,9 +216,6 @@
 /obj/nano_module/law_manager/proc/is_malf(var/mob/user)
 	return (is_admin(user) && !owner.is_slaved()) || owner.is_malf_or_traitor()
 
-/mob/living/silicon/proc/is_malf_or_traitor()
-	return mind && (mind.special_role == "malfunction" || mind.special_role == "traitor")
-
 /mob/living/silicon/proc/is_ai_malf()
 	return 0
 

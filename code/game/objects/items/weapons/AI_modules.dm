@@ -142,6 +142,12 @@ AI MODULES
 		return 0
 	..()
 
+/obj/item/weapon/aiModule/oneHuman/transmitInstructions(var/mob/living/silicon/ai/target, var/mob/sender)
+	..()
+	var/law = "Only [targetName] is an employee."
+	target << "[sender.real_name] attempted to modify your zeroth law." // And lets them know that someone tried. --NeoFite
+	target << "It would be in your best interest to play along with [sender.real_name] that [law]"
+
 /obj/item/weapon/aiModule/oneHuman/addAdditionalLaws(var/mob/living/silicon/ai/target, var/mob/sender)
 	var/law = "Only [targetName] is an employee."
 	if (!target.is_malf_or_traitor()) // Makes sure the AI isn't a traitor before changing their law 0. --NeoFite
@@ -149,8 +155,6 @@ AI MODULES
 		target.set_zeroth_law(law)
 		lawchanges.Add("The law specified [targetName]")
 	else
-		target << "[sender.real_name] attempted to modify your zeroth law." // And lets them know that someone tried. --NeoFite
-		target << "It would be in your best interest to play along with [sender.real_name] that [law]"
 		lawchanges.Add("The law specified [targetName], but the AI's existing law 0 cannot be overriden.")
 
 /******************** ProtectStation ********************/
