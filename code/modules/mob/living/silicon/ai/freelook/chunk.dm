@@ -75,8 +75,9 @@
 	for(var/camera in cameras)
 		var/obj/machinery/camera/c = camera
 
-		if(!c)
+		if(!istype(c))
 			cameras -= c
+			continue
 
 		if(!c.can_use())
 			continue

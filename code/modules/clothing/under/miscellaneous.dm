@@ -13,7 +13,7 @@
 	item_state = "w_suit"
 
 /obj/item/clothing/under/captain_fly
-	name = "rogue captains uniform"
+	name = "rogue's uniform"
 	desc = "For the man who doesn't care because he's still free."
 	icon_state = "captain_fly"
 	item_state = "captain_fly"
@@ -154,7 +154,7 @@
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 
 /obj/item/clothing/under/gentlesuit
-	name = "Gentlemans Suit"
+	name = "gentlemans suit"
 	desc = "A silk black shirt with a white tie and a matching gray vest and slacks. Feels proper."
 	icon_state = "gentlesuit"
 	item_state = "gentlesuit"
@@ -477,16 +477,23 @@
 	item_color = "tan_suit"
 
 /obj/item/clothing/under/serviceoveralls
-	name = "Workman outfit"
+	name = "workman outfit"
 	desc = "The very image of a working man. Not that you're probably doing work."
 	icon_state = "mechanic"
 	item_state = "mechanic"
 	item_color = "mechanic"
 
 /obj/item/clothing/under/cheongsam
-	name = "White Cheongsam"
+	name = "white cheongsam"
 	desc = "It is a white cheongsam dress."
 	icon_state = "mai_yang"
 	item_state = "mai_yang"
 	item_color = "mai_yang"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS
+
+/obj/item/clothing/under/blazer
+	name = "blue blazer"
+	desc = "A bold but yet conservative outfit, red corduroys, navy blazer and a tie." 
+	icon_state = "blue_blazer"
+	item_state = "blue_blazer"
+	item_color = "blue_blazer"

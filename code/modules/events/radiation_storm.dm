@@ -35,7 +35,7 @@
 			continue
 		if(!(A.z in config.station_levels))
 			continue
-		if(A.rad_shielded)
+		if(A.flags & RAD_SHIELDED)
 			continue
 
 		if(istype(C,/mob/living/carbon/human))

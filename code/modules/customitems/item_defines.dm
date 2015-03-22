@@ -1177,6 +1177,16 @@
 	icon_state = "head_m"
 	body_parts_covered = FACE|EYES
 
+//Painted mask: Dante Cicero - andrewmeythaler
+
+/obj/item/clothing/mask/andrewmeythaler
+	name = "painted mask"
+	desc = "A ghoulish mask with a stylized painting of a flame over the left eye, and a painted tear stream coming from the right eye."
+	icon = 'icons/obj/custom_items.dmi'
+	item_state = "cicero"
+	icon_state = "cicero"
+	body_parts_covered = FACE|EYES
+
 ////// Small locket - Altair An-Nasaqan - Serithi
 
 /obj/item/clothing/accessory/fluff/altair_locket

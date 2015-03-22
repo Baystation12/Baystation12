@@ -27,10 +27,6 @@
 		if(air_master.current_cycle%4==2)
 			//Only try to take a breath every 4 seconds, unless suffocating
 			breathe()
-		else //Still give containing object the chance to interact
-			if(istype(loc, /obj/))
-				var/obj/location_as_object = loc
-				location_as_object.handle_internal_lifeform(src, 0)
 
 		//Updates the number of stored chemicals for powers
 		handle_changeling()
@@ -152,85 +148,7 @@
 						domutcheck(src,null)
 						emote("gasp")
 
-	proc/breathe()
-		if(reagents)
-
-			if(reagents.has_reagent("lexorin")) return
-
-		if(!loc) return //probably ought to make a proper fix for this, but :effort: --NeoFite
-
-		var/datum/gas_mixture/environment = loc.return_air()
-		var/datum/gas_mixture/breath
-		if(health < 0)
-			losebreath++
-		if(losebreath>0) //Suffocating so do not take a breath
-			losebreath--
-			if (prob(75)) //High chance of gasping for air
-				spawn emote("gasp")
-			if(istype(loc, /obj/))
-				var/obj/location_as_object = loc
-				location_as_object.handle_internal_lifeform(src, 0)
-		else
-			//First, check for air from internal atmosphere (using an air tank and mask generally)
-			breath = get_breath_from_internal(BREATH_VOLUME)
-
-			//No breath from internal atmosphere so get breath from location
-			if(!breath)
-				if(istype(loc, /obj/))
-					var/obj/location_as_object = loc
-					breath = location_as_object.handle_internal_lifeform(src, BREATH_VOLUME)
-				else if(istype(loc, /turf/))
-					var/breath_moles = environment.total_moles*BREATH_PERCENTAGE
-					breath = loc.remove_air(breath_moles)
-
-					if(istype(wear_mask, /obj/item/clothing/mask) && breath)
-						var/obj/item/clothing/mask/M = wear_mask
-						var/datum/gas_mixture/filtered = M.filter_air(breath)
-						loc.assume_air(filtered)
-
-					// Handle chem smoke effect  -- Doohl
-					var/block = 0
-					if(wear_mask)
-						if(istype(wear_mask, /obj/item/clothing/mask/gas))
-							block = 1
-
-					if(!block)
-						for(var/obj/effect/effect/smoke/chem/smoke in view(1, src))
-							if(smoke.reagents.total_volume)
-								smoke.reagents.reaction(src, INGEST)
-								spawn(5)
-									if(smoke)
-										smoke.reagents.copy_to(src, 10) // I dunno, maybe the reagents enter the blood stream through the lungs?
-								break // If they breathe in the nasty stuff once, no need to continue checking
-
-
-			else //Still give containing object the chance to interact
-				if(istype(loc, /obj/))
-					var/obj/location_as_object = loc
-					location_as_object.handle_internal_lifeform(src, 0)
-
-		handle_breath(breath)
-
-		if(breath)
-			loc.assume_air(breath)
-
-
-	proc/get_breath_from_internal(volume_needed)
-		if(internal)
-			if (!contents.Find(internal))
-				internal = null
-			if (!(wear_mask && (wear_mask.flags & AIRTIGHT)))
-				internal = null
-			if(internal)
-				if (internals)
-					internals.icon_state = "internal1"
-				return internal.remove_air_volume(volume_needed)
-			else
-				if (internals)
-					internals.icon_state = "internal0"
-		return null
-
-	proc/handle_breath(datum/gas_mixture/breath)
+	handle_breath(datum/gas_mixture/breath)
 		if(status_flags & GODMODE)
 			return
 
@@ -520,9 +438,6 @@
 
 		if(pressure)
 			pressure.icon_state = "pressure[pressure_alert]"
-
-		if(pullin)	pullin.icon_state = "pull[pulling ? 1 : 0]"
-
 
 		if (toxin)	toxin.icon_state = "tox[phoron_alert ? 1 : 0]"
 		if (oxygen) oxygen.icon_state = "oxy[oxygen_alert ? 1 : 0]"

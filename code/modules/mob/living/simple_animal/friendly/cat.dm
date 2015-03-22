@@ -49,11 +49,18 @@
 		if (turns_since_scan > 5)
 			walk_to(src,0)
 			turns_since_scan = 0
-			
+
 			if (flee_target) //fleeing takes precendence
 				handle_flee_target()
 			else
 				handle_movement_target()
+
+	if(prob(2)) //spooky
+		var/mob/dead/observer/spook = locate() in range(src,5)
+		if(spook)
+			var/turf/T = spook.loc
+			var/obj/O = pick(T.contents)
+			visible_emote("suddenly stops and stares at something unseen[istype(O) ? " near [O]":""].")
 
 /mob/living/simple_animal/cat/proc/handle_movement_target()
 	//if our target is neither inside a turf or inside a human(???), stop
@@ -68,7 +75,7 @@
 			if(isturf(snack.loc) && !snack.stat)
 				movement_target = snack
 				break
-	
+
 	if(movement_target)
 		stop_automated_movement = 1
 		walk_to(src,movement_target,0,3)
@@ -106,7 +113,7 @@
 /mob/living/simple_animal/cat/bullet_act(var/obj/item/projectile/proj)
 	. = ..()
 	set_flee_target(proj.firer? proj.firer : src.loc)
-	
+
 /mob/living/simple_animal/cat/hitby(atom/movable/AM)
 	. = ..()
 	set_flee_target(AM.thrower? AM.thrower : src.loc)
@@ -193,7 +200,7 @@
 		set_dir(get_dir(src, friend))
 		say("Meow!")
 		return
-	
+
 	if (!(ishuman(usr) && befriend_job && usr.job == befriend_job))
 		usr << "<span class='notice'>[src] ignores you.</span>"
 		return

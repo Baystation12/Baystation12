@@ -36,7 +36,8 @@
 			if(age >= seed.get_trait(TRAIT_MATURATION))
 				overlay_stage = seed.growth_stages
 			else
-				overlay_stage = max(1,round(age/round(seed.get_trait(TRAIT_MATURATION)/seed.growth_stages)))
+				var/maturation = round(seed.get_trait(TRAIT_MATURATION)/seed.growth_stages)
+				overlay_stage = maturation ? max(1,round(age/maturation)) : 1
 			var/ikey = "[seed.get_trait(TRAIT_PLANT_ICON)]-[overlay_stage]"
 			var/image/plant_overlay = plant_controller.plant_icon_cache["[ikey]-[seed.get_trait(TRAIT_PLANT_COLOUR)]"]
 			if(!plant_overlay)

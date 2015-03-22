@@ -287,11 +287,8 @@ datum
 
 			on_mob_life(var/mob/living/M as mob)
 				if(ishuman(M))
-					if((M.mind in ticker.mode.cult) && prob(10))
-						M << "\blue A cooling sensation from inside you brings you an untold calmness."
-						ticker.mode.remove_cultist(M.mind)
-						for(var/mob/O in viewers(M, null))
-							O.show_message(text("\blue []'s eyes blink and become clearer.", M), 1) // So observers know it worked.
+					if(M.mind && cult.is_antagonist(M.mind) && prob(10))
+						cult.remove_antagonist(M.mind)
 				holder.remove_reagent(src.id, 10 * REAGENTS_METABOLISM) //high metabolism to prevent extended uncult rolls.
 				return
 

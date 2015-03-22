@@ -189,7 +189,7 @@
 				user << "\red Sticking a dead [W] into the frame would sort of defeat the purpose."
 				return
 
-			if(M.brainmob.mind in ticker.mode.head_revolutionaries)
+			if(M.brainmob.mind in revs.head_revolutionaries)
 				user << "\red The frame's firmware lets out a shrill sound, and flashes 'Abnormal Memory Engram'. It refuses to accept the [W]."
 				return
 
@@ -226,7 +226,6 @@
 
 			feedback_inc("cyborg_birth",1)
 			callHook("borgify", list(O))
-			O.notify_ai(1)
 			O.Namepick()
 
 			del(src)

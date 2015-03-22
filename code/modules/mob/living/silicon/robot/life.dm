@@ -221,18 +221,15 @@
 			src.healths.icon_state = "health7"
 
 	if (src.syndicate && src.client)
-		if(ticker.mode.name == "traitor")
-			for(var/datum/mind/tra in ticker.mode.traitors)
-				if(tra.current)
-					var/I = image('icons/mob/mob.dmi', loc = tra.current, icon_state = "traitor")
-					src.client.images += I
-		if(src.connected_ai)
-			src.connected_ai.connected_robots -= src
-			src.connected_ai = null
+		for(var/datum/mind/tra in traitors.current_antagonists)
+			if(tra.current)
+				var/I = image('icons/mob/mob.dmi', loc = tra.current, icon_state = "traitor")
+				src.client.images += I
+		src.disconnect_from_ai()
 		if(src.mind)
 			if(!src.mind.special_role)
 				src.mind.special_role = "traitor"
-				ticker.mode.traitors += src.mind
+				traitors.current_antagonists |= src.mind
 
 	if (src.cells)
 		if (src.cell)
@@ -264,8 +261,6 @@
 			else
 				src.bodytemp.icon_state = "temp-2"
 
-
-	if(src.pullin)	src.pullin.icon_state = "pull[src.pulling ? 1 : 0]"
 //Oxygen and fire does nothing yet!!
 //	if (src.oxygen) src.oxygen.icon_state = "oxy[src.oxygen_alert ? 1 : 0]"
 //	if (src.fire) src.fire.icon_state = "fire[src.fire_alert ? 1 : 0]"
