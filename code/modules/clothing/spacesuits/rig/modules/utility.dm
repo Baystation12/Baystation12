@@ -133,7 +133,7 @@
 
 /obj/item/rig_module/chem_dispenser/ninja
 	interface_desc = "Dispenses loaded chemicals directly into the wearer's bloodstream. This variant is made to be extremely light and flexible."
-	
+
 	//just over a syringe worth of each. Want more? Go refill. Gives the ninja another reason to have to show their face.
 	charges = list(
 		list("tricordrazine", "tricordrazine", 0, 20),
@@ -283,7 +283,7 @@
 			var/raw_choice = input(usr, "Please enter a new name.")  as text|null
 			if(!raw_choice)
 				return 0
-			voice_holder.voice = sanitize(copytext(raw_choice,1,MAX_MESSAGE_LEN))
+			voice_holder.voice = sanitize(raw_choice)
 			usr << "<font color='blue'>You are now mimicking <B>[voice_holder.voice]</B>.</font>"
 	return 1
 

@@ -1291,7 +1291,7 @@ datum/preferences
 				if("metadata")
 					var/new_metadata = input(user, "Enter any information you'd like others to see, such as Roleplay-preferences:", "Game Preference" , metadata)  as message|null
 					if(new_metadata)
-						metadata = sanitize(copytext(new_metadata,1,MAX_MESSAGE_LEN))
+						metadata = sanitize(new_metadata)
 
 				if("b_type")
 					var/new_b_type = input(user, "Choose your character's blood-type:", "Character Preference") as null|anything in list( "A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-" )
@@ -1504,7 +1504,7 @@ datum/preferences
 					if(choice == "Other")
 						var/raw_choice = input(user, "Please enter a home system.")  as text|null
 						if(raw_choice)
-							home_system = sanitize(copytext(raw_choice,1,MAX_MESSAGE_LEN))
+							home_system = sanitize(raw_choice)
 						return
 					home_system = choice
 				if("citizenship")
@@ -1514,7 +1514,7 @@ datum/preferences
 					if(choice == "Other")
 						var/raw_choice = input(user, "Please enter your current citizenship.", "Character Preference") as text|null
 						if(raw_choice)
-							citizenship = sanitize(copytext(raw_choice,1,MAX_MESSAGE_LEN))
+							citizenship = sanitize(raw_choice)
 						return
 					citizenship = choice
 				if("faction")
@@ -1524,7 +1524,7 @@ datum/preferences
 					if(choice == "Other")
 						var/raw_choice = input(user, "Please enter a faction.")  as text|null
 						if(raw_choice)
-							faction = sanitize(copytext(raw_choice,1,MAX_MESSAGE_LEN))
+							faction = sanitize(raw_choice)
 						return
 					faction = choice
 				if("religion")
@@ -1534,7 +1534,7 @@ datum/preferences
 					if(choice == "Other")
 						var/raw_choice = input(user, "Please enter a religon.")  as text|null
 						if(raw_choice)
-							religion = sanitize(copytext(raw_choice,1,MAX_MESSAGE_LEN))
+							religion = sanitize(raw_choice)
 						return
 					religion = choice
 		else
