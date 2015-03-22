@@ -142,6 +142,17 @@
 	if(!get_trait(TRAIT_STINGS))
 		return
 	if(chems && chems.len)
+
+		var/body_coverage = HEAD|FACE|EYES|UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
+
+		for(var/obj/item/clothing/clothes in target)
+			if(target.l_hand == clothes|| target.r_hand == clothes)
+				continue
+			body_coverage &= !(clothes.body_parts_covered)
+
+		if(!body_coverage)
+			return
+
 		target << "<span class='danger'>You are stung by \the [fruit]!</span>"
 		for(var/rid in chems)
 			var/injecting = min(5,max(1,get_trait(TRAIT_POTENCY)/5))
