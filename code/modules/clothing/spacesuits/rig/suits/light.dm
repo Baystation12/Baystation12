@@ -94,7 +94,6 @@
 	req_access = list(access_syndicate)
 
 	initial_modules = list(
-		/obj/item/rig_module/teleporter,
 		/obj/item/rig_module/stealth_field,
 		/obj/item/rig_module/vision
 		)

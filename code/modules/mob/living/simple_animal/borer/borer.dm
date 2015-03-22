@@ -1,5 +1,3 @@
-/datum/game_mode/var/list/borers = list()
-
 /mob/living/simple_animal/borer
 	name = "cortical borer"
 	real_name = "cortical borer"
@@ -155,7 +153,7 @@
 		//If they're not a proper traitor, reset their antag status.
 		if(host.mind.special_role == "Borer Thrall")
 			host << "<span class ='danger'>You are no longer an antagonist.</span>"
-			ticker.mode.borers -= host.mind
+			borers.hosts -= host.mind
 			host.mind.special_role = null
 
 	src.loc = get_turf(host)
