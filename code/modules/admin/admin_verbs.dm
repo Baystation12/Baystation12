@@ -15,6 +15,7 @@ var/list/admin_verbs_admin = list(
 	/client/proc/player_panel_new,		/*shows an interface for all players, with links to various panels*/
 	/client/proc/invisimin,				/*allows our mob to go invisible/visible*/
 //	/datum/admins/proc/show_traitor_panel,	/*interface which shows a mob's mind*/ -Removed due to rare practical use. Moved to debug verbs ~Errorage
+	/datum/admins/proc/show_game_mode,  /*Configuration window for the current game mode.*/
 	/datum/admins/proc/toggleenter,		/*toggles whether people can join the current game*/
 	/datum/admins/proc/toggleguests,	/*toggles whether guests can join the current game*/
 	/datum/admins/proc/announce,		/*priority announce something to all clients.*/
@@ -101,10 +102,8 @@ var/list/admin_verbs_fun = list(
 	/client/proc/drop_bomb,
         /client/proc/everyone_random,
 	/client/proc/cinematic,
-	/client/proc/one_click_antag,
 	/datum/admins/proc/toggle_aliens,
 	/datum/admins/proc/toggle_space_ninja,
-	/client/proc/send_space_ninja,
 	/client/proc/cmd_admin_add_freeform_ai_law,
 	/client/proc/cmd_admin_add_random_ai_law,
 	/client/proc/make_sound,
@@ -152,6 +151,7 @@ var/list/admin_verbs_debug = list(
 	/client/proc/cmd_debug_make_powernets,
 	/client/proc/kill_airgroup,
 	/client/proc/debug_controller,
+	/client/proc/debug_antagonist_template,
 	/client/proc/cmd_debug_mob_lists,
 	/client/proc/cmd_admin_delete,
 	/client/proc/cmd_debug_del_all,
@@ -219,7 +219,6 @@ var/list/admin_verbs_hideable = list(
 	/client/proc/cinematic,
 	/datum/admins/proc/toggle_aliens,
 	/datum/admins/proc/toggle_space_ninja,
-	/client/proc/send_space_ninja,
 	/client/proc/cmd_admin_add_freeform_ai_law,
 	/client/proc/cmd_admin_add_random_ai_law,
 	/client/proc/cmd_admin_create_centcom_report,
@@ -565,22 +564,6 @@ var/list/admin_verbs_mentor = list(
 			explosion(epicenter, devastation_range, heavy_impact_range, light_impact_range, flash_range)
 	message_admins("\blue [ckey] creating an admin explosion at [epicenter.loc].")
 	feedback_add_details("admin_verb","DB") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-
-/client/proc/give_spell(mob/T as mob in mob_list) // -- Urist
-	set category = "Fun"
-	set name = "Give Spell"
-	set desc = "Gives a spell to a mob."
-	var/list/spell_names = list()
-	for(var/v in spells)
-	//	"/obj/effect/proc_holder/spell/" 30 symbols ~Intercross21
-		spell_names.Add(copytext("[v]", 31, 0))
-	var/S = input("Choose the spell to give to that guy", "ABRAKADABRA") as null|anything in spell_names
-	if(!S) return
-	var/path = text2path("/obj/effect/proc_holder/spell/[S]")
-	T.spell_list += new path
-	feedback_add_details("admin_verb","GS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-	log_admin("[key_name(usr)] gave [key_name(T)] the spell [S].")
-	message_admins("\blue [key_name_admin(usr)] gave [key_name(T)] the spell [S].", 1)
 
 /client/proc/give_disease(mob/T as mob in mob_list) // -- Giacom
 	set category = "Fun"

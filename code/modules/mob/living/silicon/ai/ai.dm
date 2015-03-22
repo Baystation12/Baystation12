@@ -189,7 +189,7 @@ var/list/ai_verbs_default = list(
 
 	src << radio_text
 
-	if (!(ticker && ticker.mode && (mind in ticker.mode.malf_ai)))
+	if (!(ticker && ticker.mode && (mind in malf.current_antagonists)))
 		show_laws()
 		src << "<b>These laws may be changed by other players, or by you being the traitor.</b>"
 
@@ -312,17 +312,15 @@ var/list/ai_verbs_default = list(
 
 /mob/living/silicon/ai/proc/is_malf()
 	if(ticker.mode.name == "AI malfunction")
-		var/datum/game_mode/malfunction/malf = ticker.mode
-		for (var/datum/mind/malfai in malf.malf_ai)
+		for (var/datum/mind/malfai in malf.current_antagonists)
 			if (mind == malfai)
 				return malf
 	return 0
 
 // displays the malf_ai information if the AI is the malf
 /mob/living/silicon/ai/show_malf_ai()
-	var/datum/game_mode/malfunction/malf = is_malf()
-	if(malf && malf.apcs >= 3)
-		stat(null, "Time until station control secured: [max(malf.AI_win_timeleft/(malf.apcs/3), 0)] seconds")
+	if(malf && malf.hacked_apcs.len >= 3)
+		stat(null, "Time until station control secured: [max(malf.hack_time/(malf.hacked_apcs/3), 0)] seconds")
 
 // this verb lets the ai see the stations manifest
 /mob/living/silicon/ai/proc/ai_roster()
@@ -584,16 +582,6 @@ var/list/ai_verbs_default = list(
 				if("carp")
 					holo_icon = getHologramIcon(icon('icons/mob/AI.dmi',"holo4"))
 	return
-
-/*/mob/living/silicon/ai/proc/corereturn()
-	set category = "Malfunction"
-	set name = "Return to Main Core"
-
-	var/obj/machinery/power/apc/apc = src.loc
-	if(!istype(apc))
-		src << "\blue You are already in your Main Core."
-		return
-	apc.malfvacate()*/
 
 //Toggles the luminosity and applies it by re-entereing the camera.
 /mob/living/silicon/ai/proc/toggle_camera_light()

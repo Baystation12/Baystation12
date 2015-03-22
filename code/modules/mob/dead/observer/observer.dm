@@ -229,8 +229,8 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 				//world << "DEBUG: ticker not null"
 				if(ticker.mode.name == "AI malfunction")
 					//world << "DEBUG: malf mode ticker test"
-					if(ticker.mode:malf_mode_declared)
-						stat(null, "Time left: [max(ticker.mode:AI_win_timeleft/(ticker.mode:apcs/3), 0)]")
+					if(malf.revealed)
+						stat(null, "Time left: [max(malf.hack_time/(malf.hacked_apcs.len/3), 0)]")
 		if(emergency_shuttle)
 			var/eta_status = emergency_shuttle.get_status_panel_eta()
 			if(eta_status)
@@ -492,8 +492,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 	var/ghosts_can_write
 	if(ticker.mode.name == "cult")
-		var/datum/game_mode/cult/C = ticker.mode
-		if(C.cult.len > config.cult_ghostwriter_req_cultists)
+		if(cult.current_antagonists.len > config.cult_ghostwriter_req_cultists)
 			ghosts_can_write = 1
 
 	if(!ghosts_can_write)
