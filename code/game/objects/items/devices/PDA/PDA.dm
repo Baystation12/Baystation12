@@ -689,7 +689,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		if ("Edit")
 			var/n = input(U, "Please enter message", name, notehtml) as message
 			if (in_range(src, U) && loc == U)
-				n = copytext(adminscrub(n), 1, MAX_MESSAGE_LEN)
+				n = sanitizeSafe(n, extra = 0)
 				if (mode == 1)
 					note = html_decode(n)
 					notehtml = note
@@ -972,7 +972,8 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	U.last_target_click = world.time
 	var/t = input(U, "Please enter message", P.name, null) as text
 	t = sanitize(t)
-	t = readd_quotes(t)
+	//t = readd_quotes(t)
+	t = replace_characters(t, list("&#34;" = "\""))
 	if (!t || !istype(P))
 		return
 	if (!in_range(src, U) && loc != U)

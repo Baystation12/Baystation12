@@ -708,7 +708,7 @@ var/list/admin_verbs_mentor = list(
 		return
 
 	if(holder)
-		var/new_name = trim_strip_input(src, "Enter new name. Leave blank or as is to cancel.", "Enter new silicon name", S.real_name)
+		var/new_name = sanitizeSafe(input(src, "Enter new name. Leave blank or as is to cancel.", "Enter new silicon name", S.real_name))
 		if(new_name && new_name != S.real_name)
 			admin_log_and_message_admins("has renamed the silicon '[S.real_name]' to '[new_name]'")
 			S.SetName(new_name)

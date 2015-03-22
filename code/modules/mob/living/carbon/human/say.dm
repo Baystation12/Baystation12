@@ -10,7 +10,7 @@
 			src << "\red You cannot speak in IC (Muted)."
 			return
 
-	message = trim_strip_html_properly(message)
+	message = sanitize(message)
 
 	if(stat)
 		if(stat == 2)

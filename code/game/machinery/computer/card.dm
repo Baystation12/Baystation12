@@ -222,7 +222,7 @@
 			if (is_authenticated())
 				var/t2 = modify
 				if ((modify == t2 && (in_range(src, usr) || (istype(usr, /mob/living/silicon))) && istype(loc, /turf)))
-					var/temp_name = reject_bad_name(href_list["reg"])
+					var/temp_name = sanitizeName(href_list["reg"])
 					if(temp_name)
 						modify.registered_name = temp_name
 					else
