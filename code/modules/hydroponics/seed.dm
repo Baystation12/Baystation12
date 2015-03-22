@@ -148,7 +148,7 @@
 		for(var/obj/item/clothing/clothes in target)
 			if(target.l_hand == clothes|| target.r_hand == clothes)
 				continue
-			body_coverage &= !(clothes.body_parts_covered)
+			body_coverage &= ~(clothes.body_parts_covered)
 
 		if(!body_coverage)
 			return
