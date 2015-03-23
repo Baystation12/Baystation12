@@ -912,7 +912,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			M.apply_damage( rand(30,60) , BURN)
 		message += "You feel a searing heat! Your [P] is burning!"
 	if(i>=20 && i<=25) //EMP
-		empulse(P.loc, 3, 6, 1)
+		empulse(P.loc, 3, 6, 6, log=1)
 		message += "Your [P] emits a wave of electromagnetic energy!"
 	if(i>=25 && i<=40) //Smoke
 		var/datum/effect/effect/system/smoke_spread/chem/S = new /datum/effect/effect/system/smoke_spread/chem

@@ -8,7 +8,7 @@
 
 
 	on_hit(var/atom/target, var/blocked = 0)
-		empulse(target, 1, 1)
+		empulse(target, 0, 0, 1, 0)
 		return 1
 
 

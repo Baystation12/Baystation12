@@ -155,7 +155,7 @@
 				return
 			if (overcharge_percent >= 140)
 				if (prob(1))
-					empulse(src.loc, 3, 8, 1)
+					empulse(src.loc, 3, 5, 8, 1)
 		if ((2.4e6+1) to 3.6e6)
 			if (overcharge_percent >= 115)
 				if (prob(7))
@@ -164,7 +164,7 @@
 				return
 			if (overcharge_percent >= 130)
 				if (prob(1))
-					empulse(src.loc, 3, 8, 1)
+					empulse(src.loc, 3, 5, 8, 1)
 			if (overcharge_percent >= 150)
 				if (prob(1))
 					explosion(src.loc, 0, 1, 3, 5)
@@ -176,7 +176,7 @@
 				return
 			if (overcharge_percent >= 125)
 				if (prob(2))
-					empulse(src.loc, 4, 10, 1)
+					empulse(src.loc, 4, 10, 10, 1)
 			if (overcharge_percent >= 140)
 				if (prob(1))
 					explosion(src.loc, 1, 3, 5, 8)

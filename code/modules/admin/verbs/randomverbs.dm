@@ -616,7 +616,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 
 	if (heavy || light)
 
-		empulse(O, heavy, light)
+		empulse(O, heavy, light, light)
 		log_admin("[key_name(usr)] created an EM Pulse ([heavy],[light]) at ([O.x],[O.y],[O.z])")
 		message_admins("[key_name_admin(usr)] created an EM PUlse ([heavy],[light]) at ([O.x],[O.y],[O.z])", 1)
 		feedback_add_details("admin_verb","EMP") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!

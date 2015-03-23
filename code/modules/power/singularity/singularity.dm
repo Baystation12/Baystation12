@@ -430,7 +430,7 @@ var/global/list/uneatable = list(
 
 
 /obj/machinery/singularity/proc/emp_area()
-	empulse(src, 8, 10)
+	empulse(src, 8, 9, 10)
 	return
 
 
