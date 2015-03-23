@@ -254,6 +254,12 @@ proc/get_damage_icon_part(damage_state, body_part)
 			icon_key = "[icon_key]0"
 		else if(part.status & ORGAN_ROBOT)
 			icon_key = "[icon_key]2"
+			switch(part.cyberlimb)
+				if ("bishop") icon_key = "[icon_key]b"
+				if ("hesphaistos") icon_key = "[icon_key]h"
+				if ("xion") icon_key = "[icon_key]x"
+				if ("zenghu") icon_key = "[icon_key]z"
+				else icon_key = "[icon_key]n"
 		else if(part.status & ORGAN_DEAD)
 			icon_key = "[icon_key]3"
 		else
