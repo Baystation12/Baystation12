@@ -113,7 +113,7 @@
 	robot_modules_background.layer = 19 //Objects that appear on screen are on layer 20, UI should be just below it.
 	ident = rand(1, 999)
 	module_sprites["Basic"] = "robot"
-	icontype = "Default"
+	icontype = "Basic"
 	updatename("Default")
 	updateicon()
 

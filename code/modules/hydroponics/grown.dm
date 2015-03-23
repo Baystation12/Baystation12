@@ -319,6 +319,7 @@
 		del(src)
 		return
 
+	/*
 	if(seed.kitchen_tag)
 		switch(seed.kitchen_tag)
 			if("shand")
@@ -333,6 +334,7 @@
 				user << "<span class='notice'>You mash the petals into a poultice.</span>"
 				del(src)
 				return
+	*/
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/pickup(mob/user)
 	..()
