@@ -690,19 +690,20 @@
 /obj/item/weapon/rig/proc/malfunction()
 	return 0
 
-//TODO rework this for the new EMP severity class
 /obj/item/weapon/rig/emp_act(severity_class)
 	//set malfunctioning
-	if(emp_protection < 30) //for ninjas, really.
+	if(emp_protection < 50/severity_class)
 		malfunctioning += 10
 		if(malfunction_delay <= 0)
 			malfunction_delay = max(malfunction_delay, round(30/severity_class))
 	
 	//drain some charge
-	if(cell) cell.emp_act(severity_class + 15)
+	if(cell) cell.emp_act(3*severity_class + 1)
 	
 	//possibly damage some modules
-	take_hit((100/severity_class), "electrical pulse", 1)
+	var/hits = max(7-3*(severity_class-1), 0) //7,4,1
+	for(var/i in 1 to hits)
+		take_hit(100, "electrical pulse", 1)
 
 /obj/item/weapon/rig/proc/shock(mob/user)
 	if (electrocute_mob(user, cell, src))
@@ -721,7 +722,7 @@
 	else
 		//Want this to be roughly independant of the number of modules, meaning that X emp hits will disable Y% of the suit's modules on average.
 		//that way people designing hardsuits don't have to worry (as much) about how adding that extra module will affect emp resiliance by 'soaking' hits for other modules
-		chance = max(0, damage - emp_protection)*min(installed_modules.len/15, 1)
+		chance = 2*max(0, damage - emp_protection)*min(installed_modules.len/15, 1)
 
 	if(!prob(chance))
 		return
