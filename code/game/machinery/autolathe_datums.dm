@@ -322,6 +322,12 @@
 	hidden = 1
 	category = "Arms and Ammunition"
 
+/datum/autolathe/recipe/magazine_arifle
+	name = "ammunition (7.62mm)"
+	path = /obj/item/ammo_magazine/c762
+	hidden = 1
+	category = "Arms and Ammunition"
+
 /datum/autolathe/recipe/magazine_smg
 	name = "ammunition (9mm top mounted)"
 	path = /obj/item/ammo_magazine/mc9mmt
@@ -329,7 +335,7 @@
 	category = "Arms and Ammunition"
 
 /datum/autolathe/recipe/magazine_carbine
-	name = "ammunition (5.56)"
+	name = "ammunition (5.56mm)"
 	path = /obj/item/ammo_magazine/a556
 	hidden = 1
 	category = "Arms and Ammunition"
