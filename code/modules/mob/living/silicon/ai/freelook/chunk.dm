@@ -3,7 +3,7 @@
 // CAMERA CHUNK
 //
 // A 16x16 grid of the map with a list of turfs that can be seen, are visible and are dimmed.
-// Allows the AI Eye to stream these chunks and know what it can and cannot see.
+// Allows the Eye to stream these chunks and know what it can and cannot see.
 
 /datum/camerachunk
 	var/list/obscuredTurfs = list()
@@ -19,28 +19,28 @@
 	var/y = 0
 	var/z = 0
 
-// Add an AI eye to the chunk, then update if changed.
+// Add an eye to the chunk, then update if changed.
 
-/datum/camerachunk/proc/add(mob/aiEye/ai)
-	if(!ai.ai)
+/datum/camerachunk/proc/add(mob/eye/eye)
+	if(!eye.owner)
 		return
-	ai.visibleCameraChunks += src
-	if(ai.ai.client)
-		ai.ai.client.images += obscured
+	eye.visibleChunks += src
+	if(eye.owner.client)
+		eye.owner.client.images += obscured
 	visible++
-	seenby += ai
+	seenby += eye
 	if(changed && !updating)
 		update()
 
-// Remove an AI eye from the chunk, then update if changed.
+// Remove an eye from the chunk, then update if changed.
 
-/datum/camerachunk/proc/remove(mob/aiEye/ai)
-	if(!ai.ai)
+/datum/camerachunk/proc/remove(mob/eye/eye)
+	if(!eye.owner)
 		return
-	ai.visibleCameraChunks -= src
-	if(ai.ai.client)
-		ai.ai.client.images -= obscured
-	seenby -= ai
+	eye.visibleChunks -= src
+	if(eye.owner.client)
+		eye.owner.client.images -= obscured
+	seenby -= eye
 	if(visible > 0)
 		visible--
 
@@ -103,11 +103,11 @@
 		if(t.obscured)
 			obscured -= t.obscured
 			for(var/eye in seenby)
-				var/mob/aiEye/m = eye
-				if(!m || !m.ai)
+				var/mob/eye/m = eye
+				if(!m || !m.owner)
 					continue
-				if(m.ai.client)
-					m.ai.client.images -= t.obscured
+				if(m.owner.client)
+					m.owner.client.images -= t.obscured
 
 	for(var/turf in visRemoved)
 		var/turf/t = turf
@@ -117,12 +117,12 @@
 
 			obscured += t.obscured
 			for(var/eye in seenby)
-				var/mob/aiEye/m = eye
-				if(!m || !m.ai)
+				var/mob/eye/m = eye
+				if(!m || !m.owner)
 					seenby -= m
 					continue
-				if(m.ai.client)
-					m.ai.client.images += t.obscured
+				if(m.owner.client)
+					m.owner.client.images += t.obscured
 
 // Create a new camera chunk, since the chunks are made as they are needed.
 

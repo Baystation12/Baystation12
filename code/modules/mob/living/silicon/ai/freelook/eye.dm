@@ -3,84 +3,29 @@
 // A mob that the AI controls to look around the station with.
 // It streams chunks as it moves around, which will show it what the AI can and cannot see.
 
-/mob/aiEye
+/mob/eye/aiEye
 	name = "Inactive AI Eye"
-	icon = 'icons/mob/AI.dmi'
-	icon_state = "eye"
-	alpha = 127
-	var/list/visibleCameraChunks = list()
+	icon_state = "AI-eye"
 	var/mob/living/silicon/ai/ai = null
-	density = 0
-	status_flags = GODMODE  // You can't damage it.
-	see_in_dark = 7
-	invisibility = INVISIBILITY_AI_EYE
-	var/ghostimage = null
 
-/mob/aiEye/New()
-	ghostimage = image(src.icon,src,src.icon_state)
-	ghost_darkness_images |= ghostimage //so ghosts can see the AI eye when they disable darkness
-	ghost_sightless_images |= ghostimage //so ghosts can see the AI eye when they disable ghost sight
-	updateallghostimages()
-	..()
-
-mob/aiEye/Del()
-	if (ghostimage)
-		ghost_darkness_images -= ghostimage
-		ghost_sightless_images -= ghostimage
-		del(ghostimage)
-		ghostimage = null;
-		updateallghostimages()
-	..()
-
-// Movement code. Returns 0 to stop air movement from moving it.
-/mob/aiEye/Move()
-	return 0
-
-/mob/aiEye/examinate()
-	set popup_menu = 0
-	set src = usr.contents
-	return 0
-
-/mob/aiEye/pointed()
-	set popup_menu = 0
-	set src = usr.contents
-	return 0
-
-/mob/aiEye/examine(mob/user)
-
-// Use this when setting the aiEye's location.
-// It will also stream the chunk that the new loc is in.
-/mob/aiEye/proc/setLoc(var/T, var/cancel_tracking = 1)
-
-	if(ai)
-		if(!isturf(ai.loc))
-			return
-
+/mob/eye/aiEye/setLoc(var/T, var/cancel_tracking = 1)
+	if(..())
 		if(cancel_tracking)
 			ai.ai_cancel_tracking()
 
-		T = get_turf(T)
-		loc = T
-		cameranet.visibility(src)
 		if(ai.client)
 			ai.client.eye = src
 		//Holopad
 		if(ai.holo)
 			ai.holo.move_hologram(ai)
-
-/mob/aiEye/proc/getLoc()
-
-	if(ai)
-		if(!isturf(ai.loc) || !ai.client)
-			return
-		return ai.eyeobj.loc
+		return 1
 
 // AI MOVEMENT
 
 // The AI's "eye". Described on the top of the page.
 
 /mob/living/silicon/ai
-	var/mob/aiEye/eyeobj = new()
+	var/mob/eye/aiEye/eyeobj = new()
 	var/sprint = 10
 	var/cooldown = 0
 	var/acceleration = 1
@@ -90,7 +35,9 @@ mob/aiEye/Del()
 /mob/living/silicon/ai/New()
 	..()
 	eyeobj.ai = src
+	eyeobj.owner = src
 	eyeobj.name = "[src.name] (AI Eye)" // Give it a name
+	eyeobj.visualnet = cameranet
 	spawn(5)
 		eyeobj.loc = src.loc
 
@@ -152,7 +99,7 @@ mob/aiEye/Del()
 
 	if(client && client.eye)
 		client.eye = src
-	for(var/datum/camerachunk/c in eyeobj.visibleCameraChunks)
+	for(var/datum/camerachunk/c in eyeobj.visibleChunks)
 		c.remove(eyeobj)
 	src.eyeobj.setLoc(src)
 
