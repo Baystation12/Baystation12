@@ -99,7 +99,7 @@
 
 	if(client && client.eye)
 		client.eye = src
-	for(var/datum/camerachunk/c in eyeobj.visibleChunks)
+	for(var/datum/chunk/c in eyeobj.visibleChunks)
 		c.remove(eyeobj)
 	src.eyeobj.setLoc(src)
 

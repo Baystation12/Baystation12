@@ -31,7 +31,7 @@ var/datum/cameranet/cameranet = new()
 	y &= ~0xf
 	var/key = "[x],[y],[z]"
 	if(!chunks[key])
-		chunks[key] = new /datum/camerachunk(null, x, y, z)
+		chunks[key] = new /datum/chunk/camera(null, x, y, z)
 
 	return chunks[key]
 
@@ -54,11 +54,11 @@ var/datum/cameranet/cameranet = new()
 	var/list/add = visibleChunks - eye.visibleChunks
 
 	for(var/chunk in remove)
-		var/datum/camerachunk/c = chunk
+		var/datum/chunk/c = chunk
 		c.remove(eye)
 
 	for(var/chunk in add)
-		var/datum/camerachunk/c = chunk
+		var/datum/chunk/c = chunk
 		c.add(eye)
 
 // Updates the chunks that the turf is located in. Use this when obstacles are destroyed or	when doors open.
@@ -73,7 +73,7 @@ var/datum/cameranet/cameranet = new()
 	// 0xf = 15
 	if(!chunkGenerated(x, y, z))
 		return
-	var/datum/camerachunk/chunk = getCameraChunk(x, y, z)
+	var/datum/chunk/chunk = getCameraChunk(x, y, z)
 	chunk.hasChanged()
 
 // Removes a camera from a chunk.
@@ -119,7 +119,7 @@ var/datum/cameranet/cameranet = new()
 		for(var/x = x1; x <= x2; x += 16)
 			for(var/y = y1; y <= y2; y += 16)
 				if(chunkGenerated(x, y, T.z))
-					var/datum/camerachunk/chunk = getCameraChunk(x, y, T.z)
+					var/datum/chunk/camera/chunk = getCameraChunk(x, y, T.z)
 					// Only add actual cameras to the list of cameras
 					if(istype(c, /obj/machinery/camera))
 						if(choice == 0)
@@ -139,7 +139,7 @@ var/datum/cameranet/cameranet = new()
 	return checkTurfVis(position)
 
 /datum/cameranet/proc/checkTurfVis(var/turf/position)
-	var/datum/camerachunk/chunk = getCameraChunk(position.x, position.y, position.z)
+	var/datum/chunk/chunk = getCameraChunk(position.x, position.y, position.z)
 	if(chunk)
 		if(chunk.changed)
 			chunk.hasChanged(1) // Update now, no matter if it's visible or not.
@@ -153,6 +153,6 @@ var/datum/cameranet/cameranet = new()
 	set src in world
 
 	if(cameranet.chunkGenerated(x, y, z))
-		var/datum/camerachunk/chunk = cameranet.getCameraChunk(x, y, z)
+		var/datum/chunk/chunk = cameranet.getCameraChunk(x, y, z)
 		usr.client.debug_variables(chunk)
 */
