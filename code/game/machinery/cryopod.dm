@@ -396,7 +396,7 @@
 	control_computer.frozen_crew += "[occupant.real_name]"
 
 	announce.autosay("[occupant.real_name] [on_store_message]", "[on_store_name]")
-	visible_message("<span class='notice'>\The [src] hums and hisses as it moves [occupant.real_name] into storage.</span>", 3)
+	visible_message("<span class='notice'>\The [initial(name)] hums and hisses as it moves [occupant.real_name] into storage.</span>", 3)
 
 	set_occupant(null)
 	// Delete the mob.
@@ -555,7 +555,7 @@
 	src.occupant = occupant
 	name = initial(name)
 	if(occupant)
-		name = "[name] ([occupant])]"
+		name = "[name] ([occupant])"
 
 
 //Attacks/effects.
