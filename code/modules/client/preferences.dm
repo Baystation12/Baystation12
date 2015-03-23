@@ -111,6 +111,7 @@ datum/preferences
 	// maps each organ to either null(intact), "cyborg" or "amputated"
 	// will probably not be able to do this for head and torso ;)
 	var/list/organ_data = list()
+	var/list/rlimb_data = list()
 	var/list/player_alt_titles = new()		// the default name of a job like "Medical Doctor"
 
 	var/list/flavor_texts = list()
@@ -318,6 +319,7 @@ datum/preferences
 		//world << "[ind] \ [organ_data.len]"
 		var/status = organ_data[name]
 		var/organ_name = null
+		var/rlimb_name = null
 		switch(name)
 			if("l_arm")
 				organ_name = "left arm"
@@ -341,10 +343,21 @@ datum/preferences
 				organ_name = "eyes"
 
 		if(status == "cyborg")
+			switch(rlimb_data[name])
+				if("bishop")
+					rlimb_name = "Bishop"
+				if("hesphaistos")
+					rlimb_name = "Hesphaistos"
+				if("xion")
+					rlimb_name = "Xion"
+				if("zenghu")
+					rlimb_name = "Zeng-Hu"
+				else
+					rlimb_name = "NanoTrasen"
 			++ind
 			if(ind > 1)
 				dat += ", "
-			dat += "\tMechanical [organ_name] prothesis"
+			dat += "\t[rlimb_name] [organ_name] prothesis"
 		else if(status == "amputated")
 			++ind
 			if(ind > 1)
@@ -1449,18 +1462,39 @@ datum/preferences
 					switch(new_state)
 						if("Normal")
 							organ_data[limb] = null
+							rlimb_data[limb] = null
 							if(third_limb)
 								organ_data[third_limb] = null
+								rlimb_data[third_limb] = null
 						if("Amputated")
 							organ_data[limb] = "amputated"
+							rlimb_data[limb] = null
 							if(second_limb)
 								organ_data[second_limb] = "amputated"
+								rlimb_data[second_limb] = null
 						if("Prothesis")
+							var/rlimb_type = input(user, "What manufactuer do you wish the limb to be from?") as null|anything in list("NanoTrasen","Bishop","Hesphaistos","Xion","Zeng-Hu")
+							switch(rlimb_type)
+								if("NanoTrasen")
+									rlimb_data[limb] = null
+								if("Bishop")
+									rlimb_data[limb] = "bishop"
+								if("Hesphaistos")
+									rlimb_data[limb] = "hesphaistos"
+								if("Xion")
+									rlimb_data[limb] = "xion"
+								if("Zeng-Hu")
+									rlimb_data[limb] = "zenghu"
 							organ_data[limb] = "cyborg"
 							if(second_limb)
 								organ_data[second_limb] = "cyborg"
+								rlimb_data[second_limb] = rlimb_data[limb]
+							if(third_limb && organ_data[third_limb] == "cyborg")
+								rlimb_data[third_limb] = rlimb_data[limb]
 							if(third_limb && organ_data[third_limb] == "amputated")
 								organ_data[third_limb] = null
+								rlimb_data[third_limb] = null
+							
 				if("organs")
 					var/organ_name = input(user, "Which internal function do you want to change?") as null|anything in list("Heart", "Eyes")
 					if(!organ_name) return
@@ -1698,6 +1732,7 @@ datum/preferences
 				O.destspawn = 1
 			else if(status == "cyborg")
 				O.status |= ORGAN_ROBOT
+				O.cyberlimb = rlimb_data[name]
 		else
 			var/datum/organ/internal/I = character.internal_organs_by_name[name]
 			if(I)

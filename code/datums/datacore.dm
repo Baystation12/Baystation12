@@ -157,10 +157,22 @@ proc/get_id_photo(var/mob/living/carbon/human/H)
 
 	for(var/datum/organ/external/E in H.organs)
 		if(E.status & ORGAN_CUT_AWAY || E.status & ORGAN_DESTROYED) continue
-		temp = new /icon(icobase, "[E.name]")
+		
 		if(E.status & ORGAN_ROBOT)
-			temp.MapColors(rgb(77,77,77), rgb(150,150,150), rgb(28,28,28), rgb(0,0,0))
-		preview_icon.Blend(temp, ICON_OVERLAY)
+			switch(E.cyberlimb)
+				if ("bishop")
+					preview_icon.Blend(new /icon('icons/mob/human_races/cyberlimbs/bishop.dmi', "[E.name]"), ICON_OVERLAY)
+				if ("hesphaistos") 
+					preview_icon.Blend(new /icon('icons/mob/human_races/cyberlimbs/hesphaistos.dmi', "[E.name]"), ICON_OVERLAY)
+				if ("xion") 
+					preview_icon.Blend(new /icon('icons/mob/human_races/cyberlimbs/xion.dmi', "[E.name]"), ICON_OVERLAY)
+				if ("zenghu")
+					preview_icon.Blend(new /icon('icons/mob/human_races/cyberlimbs/zenghu.dmi', "[E.name]"), ICON_OVERLAY)
+				else
+					preview_icon.Blend(new /icon('icons/mob/human_races/robotic.dmi', "[E.name]"), ICON_OVERLAY)
+			continue
+		
+		preview_icon.Blend(new /icon(icobase, "[E.name]"), ICON_OVERLAY)
 
 	//Tail
 	if(H.species.tail)

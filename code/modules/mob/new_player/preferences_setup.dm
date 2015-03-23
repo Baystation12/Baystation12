@@ -200,12 +200,22 @@ datum/preferences
 
 		for(var/name in list("r_arm","r_hand","r_leg","r_foot","l_leg","l_foot","l_arm","l_hand"))
 			if(organ_data[name] == "amputated") continue
-
-			var/icon/temp = new /icon(icobase, "[name]")
+			
 			if(organ_data[name] == "cyborg")
-				temp.MapColors(rgb(77,77,77), rgb(150,150,150), rgb(28,28,28), rgb(0,0,0))
-
-			preview_icon.Blend(temp, ICON_OVERLAY)
+				switch(rlimb_data[name])
+					if ("bishop")
+						preview_icon.Blend(new /icon('icons/mob/human_races/cyberlimbs/bishop.dmi', "[name]"), ICON_OVERLAY)
+					if ("hesphaistos") 
+						preview_icon.Blend(new /icon('icons/mob/human_races/cyberlimbs/hesphaistos.dmi', "[name]"), ICON_OVERLAY)
+					if ("xion") 
+						preview_icon.Blend(new /icon('icons/mob/human_races/cyberlimbs/xion.dmi', "[name]"), ICON_OVERLAY)
+					if ("zenghu")
+						preview_icon.Blend(new /icon('icons/mob/human_races/cyberlimbs/zenghu.dmi', "[name]"), ICON_OVERLAY)
+					else
+						preview_icon.Blend(new /icon('icons/mob/human_races/robotic.dmi', "[name]"), ICON_OVERLAY)
+				continue
+				
+			preview_icon.Blend(new /icon(icobase, "[name]"), ICON_OVERLAY)
 
 		//Tail
 		if(current_species && (current_species.tail))

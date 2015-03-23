@@ -156,12 +156,13 @@
 		user.visible_message("\blue [user] has attached \the [tool] where [target]'s [affected.display_name] used to be.",	\
 		"\blue You have attached \the [tool] where [target]'s [affected.display_name] used to be.")
 		affected.germ_level = 0
+		affected.cyberlimb = L.cyberlimb
 		affected.robotize()
 		if(L.sabotaged)
 			affected.sabotaged = 1
 		else
 			affected.sabotaged = 0
-		target.update_body()
+		target.update_body(1)
 		target.updatehealth()
 		target.UpdateDamageIcon()
 		del(tool)

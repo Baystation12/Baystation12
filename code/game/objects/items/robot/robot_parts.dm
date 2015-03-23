@@ -9,6 +9,23 @@
 	var/list/construction_cost = list("metal"=20000,"glass"=5000)
 	var/list/part = null
 	var/sabotaged = 0 //Emagging limbs can have repercussions when installed as prosthetics.
+	var/cyberlimb = null //Used in custom robolimbs.
+	examine(mob/user)
+		switch(cyberlimb)
+			if("bishop")
+				user << "This limb was manufactured by Bishop Cybernetics and has a white polymer casing with blue holo-displays."
+			if("hesphiastos")
+				user << "This limb was manufactured by Hesphiastos Industries and has a militaristic black and green casing with gold stripes."
+			if("xion")
+				user << "This limb was manufactured by the Xion Manufacturing Group and has a minimalist black and red casing."
+			if("zenghu")
+				user << "This limb was manufactured by Zeng-Hu Pharmaceuticals and has a rubbery fleshtone covering with visible seams."
+
+/obj/item/robot_parts/New(loc, var/datum/organ/external/E)
+	..(loc)
+	if(!istype(E))
+		return
+	cyberlimb = E.cyberlimb
 
 /obj/item/robot_parts/l_arm
 	name = "robot left arm"
