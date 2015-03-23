@@ -212,7 +212,7 @@
 	invisa_view = 2
 
 	emp_act(severity)
-		if(istype(src.loc, /mob/living/carbon/human))
+		if(prob(100/severity) && istype(src.loc, /mob/living/carbon/human))
 			var/mob/living/carbon/human/M = src.loc
 			M << "\red The Optical Thermal Scanner overloads and blinds you!"
 			if(M.glasses == src)
@@ -220,7 +220,7 @@
 				M.eye_blurry = 5
 				M.disabilities |= NEARSIGHTED
 				spawn(100)
-					M.disabilities &= ~NEARSIGHTED
+					M.disabilities &= ~NEARSIGHTED //TODO: make it so that being blinded isn't a cure for nearsightedness
 		..()
 
 /obj/item/clothing/glasses/thermal/New()

@@ -690,6 +690,7 @@
 /obj/item/weapon/rig/proc/malfunction()
 	return 0
 
+//TODO rework this for the new EMP severity class
 /obj/item/weapon/rig/emp_act(severity_class)
 	//set malfunctioning
 	if(emp_protection < 30) //for ninjas, really.

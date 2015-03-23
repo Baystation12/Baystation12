@@ -108,24 +108,24 @@
 			return
 		if(1)
 			switch (severity)
-				if (1.0)
+				if(1)
 					take_damage(20,0)
 					return
-				if (2.0)
+				if(2)
 					take_damage(7,0)
 					return
-				if(3.0)
+				if(3)
 					take_damage(3,0)
 					return
 		if(2)
 			switch (severity)
-				if (1.0)
+				if(1)
 					take_damage(40,0)
 					return
-				if (2.0)
+				if(2)
 					take_damage(15,0)
 					return
-				if(3.0)
+				if(3)
 					take_damage(10,0)
 					return
 

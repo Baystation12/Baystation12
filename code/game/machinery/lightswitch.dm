@@ -39,7 +39,9 @@
 		user << "A light switch. It is [on? "on" : "off"]."
 
 /obj/machinery/light_switch/attack_hand(mob/user)
+	toggle()
 
+/obj/machinery/light_switch/proc/toggle()
 	on = !on
 
 	for(var/area/A in area.master.related)
@@ -66,5 +68,5 @@
 	if(stat & (BROKEN|NOPOWER))
 		..(severity)
 		return
-	power_change()
+	toggle()
 	..(severity)

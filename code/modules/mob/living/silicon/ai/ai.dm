@@ -401,7 +401,7 @@ var/list/ai_verbs_default = list(
 			if(1)
 				view_core()
 			if(2)
-				ai_call_shuttle()
+				ai_call_shuttle() //this is wierd
 	..()
 
 /mob/living/silicon/ai/Topic(href, href_list)

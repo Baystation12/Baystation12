@@ -152,7 +152,7 @@
 
 //ion rifle!
 /mob/living/simple_animal/hostile/retaliate/malf_drone/emp_act(severity)
-	health -= rand(3,15) * (severity + 1)
+	health -= rand(3,15) * 2/severity
 	disabled = rand(150, 600)
 	hostile_drone = 0
 	walk(src,0)

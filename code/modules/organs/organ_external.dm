@@ -62,9 +62,17 @@
 		return
 	var/probability = 30
 	var/damage = 15
-	if(severity == 2)
-		probability = 1
-		damage = 3
+	switch(severity)
+		if(1)
+			probability = 30
+			damage = 15
+		if(2)
+			probability = 10
+			damage = 5
+		if(3)
+			probability = 1
+			damage = 3
+
 	if(prob(probability))
 		droplimb(1)
 	else
