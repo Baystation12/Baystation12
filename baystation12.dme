@@ -1054,6 +1054,8 @@
 #include "code\modules\mob\dead\observer\say.dm"
 #include "code\modules\mob\freelook\chunk.dm"
 #include "code\modules\mob\freelook\eye.dm"
+#include "code\modules\mob\freelook\update_triggers.dm"
+#include "code\modules\mob\freelook\visualnet.dm"
 #include "code\modules\mob\language\generic.dm"
 #include "code\modules\mob\language\language.dm"
 #include "code\modules\mob\language\outsider.dm"

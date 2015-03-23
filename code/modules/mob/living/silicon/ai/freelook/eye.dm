@@ -8,6 +8,10 @@
 	icon_state = "AI-eye"
 	var/mob/living/silicon/ai/ai = null
 
+/mob/eye/aiEye/New()
+	..()
+	visualnet = cameranet
+
 /mob/eye/aiEye/setLoc(var/T, var/cancel_tracking = 1)
 	if(..())
 		if(cancel_tracking)

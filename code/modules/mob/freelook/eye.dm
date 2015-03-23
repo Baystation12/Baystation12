@@ -15,7 +15,7 @@
 	see_in_dark = 7
 	invisibility = INVISIBILITY_EYE
 	var/ghostimage = null
-	var/datum/cameranet/visualnet
+	var/datum/visualnet/visualnet
 
 /mob/eye/New()
 	ghostimage = image(src.icon,src,src.icon_state)
