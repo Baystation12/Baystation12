@@ -801,6 +801,9 @@ var/list/admin_verbs_mentor = list(
 		M.r_eyes = hex2num(copytext(new_eyes, 2, 4))
 		M.g_eyes = hex2num(copytext(new_eyes, 4, 6))
 		M.b_eyes = hex2num(copytext(new_eyes, 6, 8))
+		if(M.internal_organs_by_name["eyes"])
+			var/obj/item/organ/eyes/eyes = M.internal_organs_by_name["eyes"]
+			eyes.eye_colour = list(M.r_eyes,M.g_eyes,M.b_eyes)
 
 	var/new_skin = input("Please select body color. This is for Tajaran, Unathi, and Skrell only!", "Character Generation") as color
 	if(new_skin)

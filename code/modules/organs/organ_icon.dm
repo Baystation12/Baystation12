@@ -35,7 +35,7 @@ var/global/list/limb_icon_cache = list()
 		//TODO: cache these icons
 		if(skeletal)
 			mob_icon = new /icon('icons/mob/human_races/r_skeleton.dmi', "[icon_name][gender ? "_[gender]" : ""]")
-		else if (status & ORGAN_ROBOT && !(owner.species && owner.species.flags & IS_SYNTHETIC))
+		else if ((status & ORGAN_ROBOT) && !(owner.species && owner.species.flags & IS_SYNTHETIC))
 			mob_icon = new /icon('icons/mob/human_races/robotic.dmi', "[icon_name][gender ? "_[gender]" : ""]")
 		else
 			if (status & ORGAN_MUTATED)
@@ -55,9 +55,9 @@ var/global/list/limb_icon_cache = list()
 			else if(owner.species.flags & HAS_SKIN_COLOR)
 				mob_icon.Blend(rgb(owner.r_skin, owner.g_skin, owner.b_skin), ICON_ADD)
 
-	icon = mob_icon
 	dir = EAST
-	return icon
+	icon = mob_icon
+	return mob_icon
 
 /obj/item/organ/external/head/get_icon(var/skeletal)
 
@@ -73,7 +73,7 @@ var/global/list/limb_icon_cache = list()
 			eyes_icon.Blend(rgb(eyes.eye_colour[1], eyes.eye_colour[2], eyes.eye_colour[3]), ICON_ADD)
 			mob_icon.Blend(eyes_icon, ICON_OVERLAY)
 
-	if(owner.lip_style && (owner.species && owner.species.flags & HAS_LIPS))
+	if(owner.lip_style && (owner.species && (owner.species.flags & HAS_LIPS)))
 		mob_icon.Blend(new/icon('icons/mob/human_face.dmi', "lips_[owner.lip_style]_s"), ICON_OVERLAY)
 
 	if(owner.f_style)
@@ -94,7 +94,7 @@ var/global/list/limb_icon_cache = list()
 			mob_icon.Blend(hair, ICON_OVERLAY)
 
 	icon = mob_icon
-	return icon
+	return mob_icon
 
 // new damage icon system
 // adjusted to set damage_state to brute/burn code only (without r_name0 as before)

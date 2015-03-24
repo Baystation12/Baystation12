@@ -68,7 +68,7 @@
 	gender = PLURAL
 	organ_tag = "eyes"
 	parent_organ = "head"
-	var/list/eye_colour
+	var/list/eye_colour = list(0,0,0)
 
 /obj/item/organ/eyes/process() //Eye damage replaces the old eye_stat var.
 	..()
@@ -78,6 +78,15 @@
 		owner.eye_blurry = 20
 	if(is_broken())
 		owner.eye_blind = 20
+
+/obj/item/organ/eyes/New()
+	..()
+	if(owner)
+		eye_colour = list(
+			owner.r_eyes ? owner.r_eyes : 0,
+			owner.g_eyes ? owner.g_eyes : 0,
+			owner.b_eyes ? owner.b_eyes : 0
+			)
 
 /obj/item/organ/eyes/removed(var/mob/living/target,var/mob/living/user)
 

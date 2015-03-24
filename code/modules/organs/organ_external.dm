@@ -108,13 +108,15 @@
 	return
 
 
-/obj/item/organ/external/New(var/newloc, var/mob/living/carbon/holder, var/obj/item/organ/external/P)
-	if(P)
-		parent = P
-		if(!parent.children)
-			parent.children = list()
-		parent.children.Add(src)
-	return ..()
+/obj/item/organ/external/New(var/mob/living/carbon/holder, var/internal)
+	..()
+	if(owner && parent_organ && istype(owner, /mob/living/carbon/human))
+		var/mob/living/carbon/human/H = owner
+		var/obj/item/organ/external/parent = H.organs_by_name[src.parent_organ]
+		if(parent)
+			if(!parent.children)
+				parent.children = list()
+			parent.children.Add(src)
 
 /****************************************************
 			   DAMAGE PROCS

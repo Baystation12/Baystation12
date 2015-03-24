@@ -146,6 +146,9 @@
 		H.r_eyes   = dna.GetUIValueRange(DNA_UI_EYES_R,    255)
 		H.g_eyes   = dna.GetUIValueRange(DNA_UI_EYES_G,    255)
 		H.b_eyes   = dna.GetUIValueRange(DNA_UI_EYES_B,    255)
+		if(H.internal_organs_by_name["eyes"])
+			var/obj/item/organ/eyes/eyes = H.internal_organs_by_name["eyes"]
+			eyes.eye_colour = list(H.r_eyes,H.g_eyes,H.b_eyes)
 
 		H.s_tone   = 35 - dna.GetUIValueRange(DNA_UI_SKIN_TONE, 220) // Value can be negative.
 

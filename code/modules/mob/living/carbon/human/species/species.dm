@@ -154,21 +154,21 @@
 	H.internal_organs_by_name = list()
 
 	//This is a basic humanoid limb setup.
-	H.organs_by_name["chest"] = new/obj/item/organ/external/chest(null,H)
-	H.organs_by_name["groin"] = new/obj/item/organ/external/groin(H.organs_by_name["chest"],H)
-	H.organs_by_name["head"] = new/obj/item/organ/external/head(H.organs_by_name["chest"],H)
-	H.organs_by_name["l_arm"] = new/obj/item/organ/external/arm(H.organs_by_name["chest"],H)
-	H.organs_by_name["r_arm"] = new/obj/item/organ/external/arm/right(H.organs_by_name["chest"],H)
-	H.organs_by_name["r_leg"] = new/obj/item/organ/external/leg(H.organs_by_name["groin"],H)
-	H.organs_by_name["l_leg"] = new/obj/item/organ/external/leg/right(H.organs_by_name["groin"],H)
-	H.organs_by_name["l_hand"] = new/obj/item/organ/external/hand(H.organs_by_name["l_arm"],H)
-	H.organs_by_name["r_hand"] = new/obj/item/organ/external/hand/right(H.organs_by_name["r_arm"],H)
-	H.organs_by_name["l_foot"] = new/obj/item/organ/external/foot(H.organs_by_name["l_leg"],H)
-	H.organs_by_name["r_foot"] = new/obj/item/organ/external/foot/right(H.organs_by_name["r_leg"],H)
+	H.organs_by_name["chest"] = new/obj/item/organ/external/chest(H)
+	H.organs_by_name["groin"] = new/obj/item/organ/external/groin(H)
+	H.organs_by_name["head"] = new/obj/item/organ/external/head(H)
+	H.organs_by_name["l_arm"] = new/obj/item/organ/external/arm(H)
+	H.organs_by_name["r_arm"] = new/obj/item/organ/external/arm/right(H)
+	H.organs_by_name["r_leg"] = new/obj/item/organ/external/leg(H)
+	H.organs_by_name["l_leg"] = new/obj/item/organ/external/leg/right(H)
+	H.organs_by_name["l_hand"] = new/obj/item/organ/external/hand(H)
+	H.organs_by_name["r_hand"] = new/obj/item/organ/external/hand/right(H)
+	H.organs_by_name["l_foot"] = new/obj/item/organ/external/foot(H)
+	H.organs_by_name["r_foot"] = new/obj/item/organ/external/foot/right(H)
 
 	for(var/organ in has_organ)
 		var/organ_type = has_organ[organ]
-		H.internal_organs_by_name[organ] = new organ_type(H,H,1)
+		H.internal_organs_by_name[organ] = new organ_type(H,1)
 
 	for(var/name in H.organs_by_name)
 		H.organs += H.organs_by_name[name]

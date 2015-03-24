@@ -196,7 +196,7 @@
 
 	var/obj/item/stack/sheet/glass/reinforced/cyborg/RG = new /obj/item/stack/sheet/glass/reinforced/cyborg(src)
 	RG.synths = list(metal, glass)
-	src.modules += R
+	src.modules += RG
 
 /obj/item/weapon/robot_module/engineering
 	name = "engineering robot module"

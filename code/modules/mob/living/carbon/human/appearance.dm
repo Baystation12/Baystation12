@@ -83,6 +83,10 @@
 	g_eyes = green
 	b_eyes = blue
 
+	if(internal_organs_by_name["eyes"])
+		var/obj/item/organ/eyes/eyes = internal_organs_by_name["eyes"]
+		eyes.eye_colour = list(r_eyes,g_eyes,b_eyes)
+
 	update_body()
 	return 1
 

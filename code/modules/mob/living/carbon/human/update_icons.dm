@@ -243,10 +243,6 @@ proc/get_damage_icon_part(damage_state, body_part)
 
 	var/icon_key = "[species.race_key][g][s_tone]"
 	for(var/obj/item/organ/external/part in organs)
-
-		if(istype(part,/obj/item/organ/external/head) && !(part.status & ORGAN_DESTROYED))
-			has_head = 1
-
 		if(part.status & ORGAN_DESTROYED)
 			icon_key = "[icon_key]0"
 		else if(part.status & ORGAN_ROBOT)
@@ -274,36 +270,24 @@ proc/get_damage_icon_part(damage_state, body_part)
 		base_icon = chest.get_icon()
 
 		for(var/obj/item/organ/external/part in organs)
-
 			var/icon/temp = part.get_icon(skeleton)
-
 			//That part makes left and right legs drawn topmost and lowermost when human looks WEST or EAST
 			//And no change in rendering for other parts (they icon_position is 0, so goes to 'else' part)
 			if(part.icon_position&(LEFT|RIGHT))
-
 				var/icon/temp2 = new('icons/mob/human.dmi',"blank")
-
 				temp2.Insert(new/icon(temp,dir=NORTH),dir=NORTH)
 				temp2.Insert(new/icon(temp,dir=SOUTH),dir=SOUTH)
-
 				if(!(part.icon_position & LEFT))
 					temp2.Insert(new/icon(temp,dir=EAST),dir=EAST)
-
 				if(!(part.icon_position & RIGHT))
 					temp2.Insert(new/icon(temp,dir=WEST),dir=WEST)
-
 				base_icon.Blend(temp2, ICON_OVERLAY)
-
 				if(part.icon_position & LEFT)
 					temp2.Insert(new/icon(temp,dir=EAST),dir=EAST)
-
 				if(part.icon_position & RIGHT)
 					temp2.Insert(new/icon(temp,dir=WEST),dir=WEST)
-
 				base_icon.Blend(temp2, ICON_UNDERLAY)
-
 			else
-
 				base_icon.Blend(temp, ICON_OVERLAY)
 
 		if(!skeleton)
@@ -883,41 +867,6 @@ proc/get_damage_icon_part(damage_state, body_part)
 			total.overlays += I
 	overlays_standing[SURGERY_LEVEL] = total
 	if(update_icons)   update_icons()
-
-// Used mostly for creating head items
-/mob/living/carbon/human/proc/generate_head_icon()
-//gender no longer matters for the mouth, although there should probably be seperate base head icons.
-//	var/g = "m"
-//	if (gender == FEMALE)	g = "f"
-
-	//base icons
-	var/icon/face_lying		= new /icon('icons/mob/human_face.dmi',"bald_l")
-
-	if(f_style)
-		var/datum/sprite_accessory/facial_hair_style = facial_hair_styles_list[f_style]
-		if(facial_hair_style)
-			var/icon/facial_l = new/icon("icon" = facial_hair_style.icon, "icon_state" = "[facial_hair_style.icon_state]_l")
-			facial_l.Blend(rgb(r_facial, g_facial, b_facial), ICON_ADD)
-			face_lying.Blend(facial_l, ICON_OVERLAY)
-
-	if(h_style)
-		var/datum/sprite_accessory/hair_style = hair_styles_list[h_style]
-		if(hair_style)
-			var/icon/hair_l = new/icon("icon" = hair_style.icon, "icon_state" = "[hair_style.icon_state]_l")
-			hair_l.Blend(rgb(r_hair, g_hair, b_hair), ICON_ADD)
-			face_lying.Blend(hair_l, ICON_OVERLAY)
-
-	//Eyes
-	// Note: These used to be in update_face(), and the fact they're here will make it difficult to create a disembodied head
-	var/icon/eyes_l = new/icon('icons/mob/human_face.dmi', "eyes_l")
-	eyes_l.Blend(rgb(r_eyes, g_eyes, b_eyes), ICON_ADD)
-	face_lying.Blend(eyes_l, ICON_OVERLAY)
-
-	if(lip_style)
-		face_lying.Blend(new/icon('icons/mob/human_face.dmi', "lips_[lip_style]_l"), ICON_OVERLAY)
-
-	var/image/face_lying_image = new /image(icon = face_lying)
-	return face_lying_image
 
 //Human Overlays Indexes/////////
 #undef MUTATIONS_LAYER

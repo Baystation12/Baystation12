@@ -25,32 +25,27 @@ var/list/organ_cache = list()
 /obj/item/organ/proc/update_health()
 	return
 
-/obj/item/organ/New(var/newloc, var/mob/living/carbon/holder, var/internal)
-	..(newloc)
-
+/obj/item/organ/New(var/mob/living/carbon/holder, var/internal)
+	..(holder)
 	create_reagents(5)
-
-	if(!max_damage) max_damage = min_broken_damage * 2
-
+	if(!max_damage)
+		max_damage = min_broken_damage * 2
 	if(istype(holder))
-
-		if(internal)
-			holder.internal_organs |= src
 		src.owner = holder
-
 		var/mob/living/carbon/human/H = holder
 		if(istype(H))
-
+			if(internal)
+				var/obj/item/organ/external/E = H.organs_by_name[src.parent_organ]
+				if(E)
+					if(E.internal_organs == null)
+						E.internal_organs = list()
+					E.internal_organs |= src
 			if(H.dna)
 				if(!blood_DNA)
 					blood_DNA = list()
 				blood_DNA[H.dna.unique_enzymes] = H.dna.b_type
-
-			var/obj/item/organ/external/E = H.organs_by_name[src.parent_organ]
-			if(E)
-				if(E.internal_organs == null)
-					E.internal_organs = list()
-				E.internal_organs |= src
+		if(internal)
+			holder.internal_organs |= src
 
 /obj/item/organ/proc/die()
 	name = "dead [initial(name)]"

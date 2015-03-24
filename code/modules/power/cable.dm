@@ -193,9 +193,9 @@ By design, d1 is the smallest direction and d2 is the highest
 		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 		s.set_up(5, 1, src)
 		s.start()
-		return 1
-	else
-		return 0
+		if(usr.stunned)
+			return 1
+	return 0
 
 //explosion handling
 /obj/structure/cable/ex_act(severity)
