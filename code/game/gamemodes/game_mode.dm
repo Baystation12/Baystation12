@@ -36,7 +36,7 @@
 			new/datum/uplink_item(/obj/item/ammo_magazine/a357, 2, ".357", "RA"),
 			new/datum/uplink_item(/obj/item/ammo_magazine/mc9mm, 2, "9mm", "R9"),
 			new/datum/uplink_item(/obj/item/ammo_magazine/chemdart, 2, "Darts", "AD"),
-			new/datum/uplink_item(/obj/item/weapon/storage/box/sniperammo, 4, "14.5mm", "SA")
+			new/datum/uplink_item(/obj/item/weapon/storage/box/sniperammo, 2, "14.5mm", "SA")
 			),
 		"Highly Visible and Dangerous Weapons" = list(
 			 new/datum/uplink_item(/obj/item/weapon/storage/box/emps, 3, "5 EMP Grenades", "EM"),
@@ -47,7 +47,7 @@
 			 new/datum/uplink_item(/obj/item/mecha_parts/mecha_equipment/weapon/energy/riggedlaser, 6, "Exosuit Rigged Laser", "RL"),
 			 new/datum/uplink_item(/obj/item/weapon/gun/projectile/revolver, 6, "Revolver", "RE"),
 			 new/datum/uplink_item(/obj/item/weapon/storage/box/syndicate, 10, "Mercenary Bundle", "BU"),
-			 new/datum/uplink_item(/obj/item/weapon/gun/projectile/heavysniper, 12, "PTRS Rifle", "BU")
+			 new/datum/uplink_item(/obj/item/weapon/gun/projectile/heavysniper, 12, "Antimaterial Rifle", "BU")
 			),
 		"Stealthy and Inconspicuous Weapons" = list(
 			new/datum/uplink_item(/obj/item/weapon/soap/syndie, 1, "Subversive Soap", "SP"),
