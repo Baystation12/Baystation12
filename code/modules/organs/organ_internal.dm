@@ -68,7 +68,7 @@
 	gender = PLURAL
 	organ_tag = "eyes"
 	parent_organ = "head"
-	var/eye_colour
+	var/list/eye_colour
 
 /obj/item/organ/eyes/process() //Eye damage replaces the old eye_stat var.
 	..()

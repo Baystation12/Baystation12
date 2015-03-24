@@ -22,7 +22,10 @@ var/list/organ_cache = list()
 									  // links chemical IDs to number of ticks for which they'll stay in the blood
 	germ_level = 0
 
-/obj/item/organ/New(var/newloc, var/mob/living/carbon/holder)
+/obj/item/organ/proc/update_health()
+	return
+
+/obj/item/organ/New(var/newloc, var/mob/living/carbon/holder, var/internal)
 	..(newloc)
 
 	create_reagents(5)
@@ -31,15 +34,23 @@ var/list/organ_cache = list()
 
 	if(istype(holder))
 
-		holder.internal_organs |= src
+		if(internal)
+			holder.internal_organs |= src
 		src.owner = holder
 
 		var/mob/living/carbon/human/H = holder
 		if(istype(H))
+
+			if(H.dna)
+				if(!blood_DNA)
+					blood_DNA = list()
+				blood_DNA[H.dna.unique_enzymes] = H.dna.b_type
+
 			var/obj/item/organ/external/E = H.organs_by_name[src.parent_organ]
-			if(E.internal_organs == null)
-				E.internal_organs = list()
-			E.internal_organs |= src
+			if(E)
+				if(E.internal_organs == null)
+					E.internal_organs = list()
+				E.internal_organs |= src
 
 /obj/item/organ/proc/die()
 	name = "dead [initial(name)]"
@@ -55,9 +66,12 @@ var/list/organ_cache = list()
 		return
 
 	//Process infections
-	if (robotic >= 2 || (owner.species && owner.species.flags & IS_PLANT))
+	if (robotic >= 2 || (owner && owner.species && (owner.species.flags & IS_PLANT)))
 		germ_level = 0
 		return
+
+	if(loc != owner)
+		owner = null
 
 	if(!owner)
 		var/datum/reagent/blood/B = locate(/datum/reagent/blood) in reagents.reagent_list
@@ -123,15 +137,6 @@ var/list/organ_cache = list()
 
 /obj/item/organ/proc/receive_chem(chemical as obj)
 	return 0
-
-/obj/item/organ/proc/get_icon(var/image/supplied)
-	var/key = "internal-[icon_state]"
-	var/image/I
-	if(organ_cache[key])
-		I = organ_cache[key]
-	else
-		I = image(icon, "[icon_state]")
-	return I
 
 /obj/item/organ/proc/rejuvenate()
 	damage = 0

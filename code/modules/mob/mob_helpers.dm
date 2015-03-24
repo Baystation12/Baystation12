@@ -138,7 +138,7 @@ proc/isnewplayer(A)
 		return 1
 	return 0
 
-proc/hasorgans(A)
+proc/hasorgans(A) // Fucking really??
 	return ishuman(A)
 
 proc/iscuffed(A)

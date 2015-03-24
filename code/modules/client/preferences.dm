@@ -1695,7 +1695,6 @@ datum/preferences
 			if(status == "amputated")
 				O.amputated = 1
 				O.status |= ORGAN_DESTROYED
-				O.destspawn = 1
 			else if(status == "cyborg")
 				O.status |= ORGAN_ROBOT
 		else

@@ -156,7 +156,7 @@
 
 
 /datum/surgery_step/head/attach
-	allowed_tools = list(/obj/item/organ/head = 100)
+	allowed_tools = list(/obj/item/organ/external/head = 100)
 	can_infect = 0
 
 	min_duration = 80
@@ -177,7 +177,6 @@
 		"\blue You have attached [target]'s head to the body.")
 		affected.status = 0
 		affected.amputated = 0
-		affected.destspawn = 0
 		target.update_body()
 		target.updatehealth()
 		target.UpdateDamageIcon()

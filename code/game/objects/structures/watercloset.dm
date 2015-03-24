@@ -346,8 +346,9 @@
 	var/busy = 0 	//Something's being washed at the moment
 
 /obj/structure/sink/attack_hand(mob/user as mob)
-	if (hasorgans(user))
-		var/obj/item/organ/external/temp = user:organs_by_name["r_hand"]
+	if (ishuman(user))
+		var/mob/living/carbon/human/H = user
+		var/obj/item/organ/external/temp = H.organs_by_name["r_hand"]
 		if (user.hand)
 			temp = user:organs_by_name["l_hand"]
 		if(temp && !temp.is_usable())

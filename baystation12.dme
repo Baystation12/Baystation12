@@ -1275,6 +1275,7 @@
 #include "code\modules\organs\organ.dm"
 #include "code\modules\organs\organ_alien.dm"
 #include "code\modules\organs\organ_external.dm"
+#include "code\modules\organs\organ_icon.dm"
 #include "code\modules\organs\organ_internal.dm"
 #include "code\modules\organs\pain.dm"
 #include "code\modules\organs\wound.dm"

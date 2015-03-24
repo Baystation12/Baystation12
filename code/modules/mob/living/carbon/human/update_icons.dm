@@ -225,7 +225,6 @@ proc/get_damage_icon_part(damage_state, body_part)
 
 	var/husk_color_mod = rgb(96,88,80)
 	var/hulk_color_mod = rgb(48,224,40)
-	var/necrosis_color_mod = rgb(10,50,0)
 
 	var/husk = (HUSK in src.mutations)
 	var/fat = (FAT in src.mutations)
@@ -233,7 +232,6 @@ proc/get_damage_icon_part(damage_state, body_part)
 	var/skeleton = (SKELETON in src.mutations)
 
 	var/g = (gender == FEMALE ? "f" : "m")
-	var/has_head = 0
 
 	//CACHING: Generate an index key from visible bodyparts.
 	//0 = destroyed, 1 = normal, 2 = robotic, 3 = necrotic.
@@ -241,7 +239,6 @@ proc/get_damage_icon_part(damage_state, body_part)
 	//Create a new, blank icon for our mob to use.
 	if(stand_icon)
 		del(stand_icon)
-
 	stand_icon = new(species.icon_template ? species.icon_template : 'icons/mob/human.dmi',"blank")
 
 	var/icon_key = "[species.race_key][g][s_tone]"
@@ -270,34 +267,15 @@ proc/get_damage_icon_part(damage_state, body_part)
 
 	else
 
-	//BEGIN CACHED ICON GENERATION.
-		var/race_icon =   (skeleton ? 'icons/mob/human_races/r_skeleton.dmi' : species.icobase)
-		var/deform_icon = (skeleton ? 'icons/mob/human_races/r_skeleton.dmi' : species.icobase)
-
+		//BEGIN CACHED ICON GENERATION.
 		//Robotic limbs are handled in get_icon() so all we worry about are missing or dead limbs.
 		//No icon stored, so we need to start with a basic one.
 		var/obj/item/organ/external/chest = get_organ("chest")
-		base_icon = chest.get_icon(race_icon,deform_icon,g)
-
-		if(chest.status & ORGAN_DEAD)
-			base_icon.ColorTone(necrosis_color_mod)
-			base_icon.SetIntensity(0.7)
+		base_icon = chest.get_icon()
 
 		for(var/obj/item/organ/external/part in organs)
 
-			var/icon/temp //Hold the bodypart icon for processing.
-
-			if(part.status & ORGAN_DESTROYED)
-				continue
-
-			if (istype(part, /obj/item/organ/external/groin) || istype(part, /obj/item/organ/external/head))
-				temp = part.get_icon(race_icon,deform_icon,g)
-			else
-				temp = part.get_icon(race_icon,deform_icon)
-
-			if(part.status & ORGAN_DEAD)
-				temp.ColorTone(necrosis_color_mod)
-				temp.SetIntensity(0.7)
+			var/icon/temp = part.get_icon(skeleton)
 
 			//That part makes left and right legs drawn topmost and lowermost when human looks WEST or EAST
 			//And no change in rendering for other parts (they icon_position is 0, so goes to 'else' part)
@@ -338,43 +316,15 @@ proc/get_damage_icon_part(damage_state, body_part)
 		//Handle husk overlay.
 		if(husk)
 			var/icon/mask = new(base_icon)
-			var/icon/husk_over = new(race_icon,"overlay_husk")
+			var/icon/husk_over = new(species.icobase,"overlay_husk")
 			mask.MapColors(0,0,0,1, 0,0,0,1, 0,0,0,1, 0,0,0,1, 0,0,0,0)
 			husk_over.Blend(mask, ICON_ADD)
 			base_icon.Blend(husk_over, ICON_OVERLAY)
 
-
-		//Skin tone.
-		if(!husk && !hulk)
-			if(species.flags & HAS_SKIN_TONE)
-				if(s_tone >= 0)
-					base_icon.Blend(rgb(s_tone, s_tone, s_tone), ICON_ADD)
-				else
-					base_icon.Blend(rgb(-s_tone,  -s_tone,  -s_tone), ICON_SUBTRACT)
-
 		human_icon_cache[icon_key] = base_icon
 
-		//log_debug("Generated new cached mob icon ([icon_key] \icon[human_icon_cache[icon_key]]) for [src]. [human_icon_cache.len] cached mob icons.")
-
 	//END CACHED ICON GENERATION.
-
 	stand_icon.Blend(base_icon,ICON_OVERLAY)
-
-	//Skin colour. Not in cache because highly variable (and relatively benign).
-	if (species.flags & HAS_SKIN_COLOR)
-		stand_icon.Blend(rgb(r_skin, g_skin, b_skin), ICON_ADD)
-
-	if(has_head)
-		//Eyes
-		if(!skeleton)
-			var/icon/eyes = new/icon('icons/mob/human_face.dmi', species.eyes)
-			if (species.flags & HAS_EYE_COLOR)
-				eyes.Blend(rgb(r_eyes, g_eyes, b_eyes), ICON_ADD)
-			stand_icon.Blend(eyes, ICON_OVERLAY)
-
-		//Mouth	(lipstick!)
-		if(lip_style && (species && species.flags & HAS_LIPS))	//skeletons are allowed to wear lipstick no matter what you think, agouri.
-			stand_icon.Blend(new/icon('icons/mob/human_face.dmi', "lips_[lip_style]_s"), ICON_OVERLAY)
 
 	//Underwear
 	if(underwear && species.flags & HAS_UNDERWEAR)

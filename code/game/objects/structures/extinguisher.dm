@@ -31,10 +31,11 @@
 /obj/structure/extinguisher_cabinet/attack_hand(mob/user)
 	if(isrobot(user))
 		return
-	if (hasorgans(user))
-		var/obj/item/organ/external/temp = user:organs_by_name["r_hand"]
+	if (ishuman(user))
+		var/mob/living/carbon/human/H = user
+		var/obj/item/organ/external/temp = H.organs_by_name["r_hand"]
 		if (user.hand)
-			temp = user:organs_by_name["l_hand"]
+			temp = H.organs_by_name["l_hand"]
 		if(temp && !temp.is_usable())
 			user << "<span class='notice'>You try to move your [temp.display_name], but cannot!"
 			return

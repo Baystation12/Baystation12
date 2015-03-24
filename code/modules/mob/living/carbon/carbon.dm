@@ -60,12 +60,13 @@
 
 /mob/living/carbon/attack_hand(mob/M as mob)
 	if(!istype(M, /mob/living/carbon)) return
-	if (hasorgans(M))
-		var/obj/item/organ/external/temp = M:organs_by_name["r_hand"]
-		if (M.hand)
-			temp = M:organs_by_name["l_hand"]
+	if (ishuman(M))
+		var/mob/living/carbon/human/H = M
+		var/obj/item/organ/external/temp = H.organs_by_name["r_hand"]
+		if (H.hand)
+			temp = H.organs_by_name["l_hand"]
 		if(temp && !temp.is_usable())
-			M << "\red You can't use your [temp.display_name]"
+			H << "\red You can't use your [temp.display_name]"
 			return
 
 	for(var/datum/disease/D in viruses)

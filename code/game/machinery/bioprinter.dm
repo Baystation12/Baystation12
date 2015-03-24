@@ -50,7 +50,7 @@
 			O.transplant_data["blood_type"] = loaded_dna["blood_type"]
 			O.transplant_data["blood_DNA"] =  loaded_dna["blood_DNA"]
 
-		visible_message("<span class='info'>The bioprinter spits out a new organ.")
+		visible_message("<span class='info'>The bioprinter spits out a new organ.</span>")
 
 	else
 		user << "<span class='warning'>There is not enough matter in the printer.</span>"
