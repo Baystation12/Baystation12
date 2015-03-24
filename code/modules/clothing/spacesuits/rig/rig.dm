@@ -696,17 +696,18 @@
 		malfunctioning += 10
 		if(malfunction_delay <= 0)
 			malfunction_delay = max(malfunction_delay, round(30/severity_class))
-	
+
 	//drain some charge
 	if(cell) cell.emp_act(severity_class + 15)
-	
+
 	//possibly damage some modules
 	take_hit((100/severity_class), "electrical pulse", 1)
 
 /obj/item/weapon/rig/proc/shock(mob/user)
 	if (electrocute_mob(user, cell, src))
 		spark_system.start()
-		return 1
+		if(user.stunned)
+			return 1
 	return 0
 
 /obj/item/weapon/rig/proc/take_hit(damage, source, is_emp=0)
@@ -740,7 +741,7 @@
 		dam_module = pick(damaged_modules)
 	else if(valid_modules.len)
 		dam_module = pick(valid_modules)
-	
+
 	if(!dam_module) return
 
 	dam_module.damage++
