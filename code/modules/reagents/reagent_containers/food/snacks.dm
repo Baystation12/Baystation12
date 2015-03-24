@@ -3009,14 +3009,15 @@
 
 
 /obj/item/weapon/reagent_containers/food/snacks/tastybread
-	name = "Bread Tube"
-	desc = "Chewy...and surprisingly tasty."
+	name = "bread tube"
+	desc = "Bread in a tube. Chewy...and surprisingly tasty."
 	icon_state = "tastybread"
+	trash = /obj/item/trash/tastybread
 	filling_color = "#A66829"
 
 	New()
 		..()
-		reagents.add_reagent("nutriment", 12)
+		reagents.add_reagent("nutriment", 6)
 		bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/skrellsnacks
