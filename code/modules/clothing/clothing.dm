@@ -360,8 +360,18 @@ BLIND     // can't see anything
 	species_restricted = list("exclude","Unathi","Tajara")
 	sprite_sheets = list("Vox" = 'icons/mob/species/vox/shoes.dmi')
 
+	var/sound = "footsteps"
+	var/footstep = 0 //step counter
+
 /obj/item/clothing/shoes/proc/handle_movement(var/turf/walking, var/running)
-	return
+	if(running)
+		if(footstep >= 2)
+			footstep = 0
+			playsound(src, sound, 50, 1)
+		else
+			footstep++
+	else
+		playsound(src, sound, 20, 1)
 
 /obj/item/clothing/shoes/update_clothing_icon()
 	if (ismob(src.loc))
