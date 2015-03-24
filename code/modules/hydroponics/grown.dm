@@ -298,12 +298,28 @@
 		if(src) del(src)
 		return
 
+	if(seed.kitchen_tag == "grass")
+		user.show_message("<span class='notice'>You make a grass tile out of \the [src]!</span>", 1)
+		for(var/i=0,i<2,i++)
+			var/obj/item/stack/tile/grass/G = new (user.loc)
+			G.color = seed.get_trait(TRAIT_PRODUCT_COLOUR)
+			for (var/obj/item/stack/tile/grass/NG in user.loc)
+				if(G==NG)
+					continue
+				if(NG.amount>=NG.max_amount)
+					continue
+				NG.attackby(G, user)
+			user << "You add the newly-formed grass to the stack. It now contains [G.amount] tiles."
+		del(src)
+		return
+
 	if(seed.get_trait(TRAIT_SPREAD) > 0)
 		user << "<span class='notice'>You plant the [src.name].</span>"
 		new /obj/machinery/portable_atmospherics/hydroponics/soil/invisible(get_turf(user),src.seed)
 		del(src)
 		return
 
+	/*
 	if(seed.kitchen_tag)
 		switch(seed.kitchen_tag)
 			if("shand")
@@ -318,6 +334,7 @@
 				user << "<span class='notice'>You mash the petals into a poultice.</span>"
 				del(src)
 				return
+	*/
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/pickup(mob/user)
 	..()

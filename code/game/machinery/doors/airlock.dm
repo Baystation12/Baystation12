@@ -844,19 +844,20 @@ About the new airlock wires panel:
 		return 0
 	return ..()
 
-/obj/machinery/door/airlock/can_close(var/forced)
+/obj/machinery/door/airlock/can_close()
 	if(locked || welded)
 		return 0
-	if(!forced)
-		//despite the name, this wire is for general door control.
-		//Bolts are already covered by the check for locked, above
-		if(!arePowerSystemsOn() || isWireCut(AIRLOCK_WIRE_OPEN_DOOR))
-			return	0
 	return ..()
 
 /obj/machinery/door/airlock/close(var/forced=0)
-	if(!can_close(forced))
-		return
+	if(!can_close())
+		return 0
+
+	if(!forced)
+		//despite the name, this wire is for general door control.
+		//Bolts are already covered by the check for locked in can_close()
+		if(!arePowerSystemsOn() || isWireCut(AIRLOCK_WIRE_OPEN_DOOR))
+			return	0
 
 	if(safe)
 		for(var/turf/turf in locs)

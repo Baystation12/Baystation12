@@ -36,6 +36,9 @@
 		return
 
 	var/list/modifiers = params2list(params)
+	if(modifiers["shift"] && modifiers["ctrl"])
+		CtrlShiftClickOn(A)
+		return
 	if(modifiers["middle"])
 		MiddleClickOn(A)
 		return
@@ -100,6 +103,14 @@
 	The following criminally helpful code is just the previous code cleaned up;
 	I have no idea why it was in atoms.dm instead of respective files.
 */
+
+/atom/proc/AICtrlShiftClick()
+	return
+
+/obj/machinery/door/airlock/AICtrlShiftClick()
+	if(emagged)
+		return
+	return
 
 /atom/proc/AIShiftClick()
 	return

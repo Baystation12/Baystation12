@@ -15,7 +15,7 @@ var/global/list/special_roles = list( //keep synced with the defines BE_* in set
 	"cultist" = IS_MODE_COMPILED("cult"),                // 8
 	"infested monkey" = IS_MODE_COMPILED("monkey"),      // 9
 	"ninja" = "true",                                    // 10
-	"vox raider" = IS_MODE_COMPILED("heist"),            // 11
+	"raider" = IS_MODE_COMPILED("heist"),                // 11
 	"diona" = 1,                                         // 12
 	"mutineer" = IS_MODE_COMPILED("mutiny"),             // 13
 	"pAI candidate" = 1, // -- TLE                       // 14
@@ -171,16 +171,16 @@ datum/preferences
 					used_skillpoints += 6 * multiplier
 
 /datum/preferences/proc/GetSkillClass(points)
+	return CalculateSkillClass(points, age)
+
+/proc/CalculateSkillClass(points, age)
+	if(points <= 0) return "Unconfigured"
 	// skill classes describe how your character compares in total points
-	var/original_points = points
 	points -= min(round((age - 20) / 2.5), 4) // every 2.5 years after 20, one extra skillpoint
 	if(age > 30)
 		points -= round((age - 30) / 5) // every 5 years after 30, one extra skillpoint
-	if(original_points > 0 && points <= 0) points = 1
 	switch(points)
-		if(0)
-			return "Unconfigured"
-		if(1 to 3)
+		if(-1000 to 3)
 			return "Terrifying"
 		if(4 to 6)
 			return "Below Average"
@@ -394,7 +394,7 @@ datum/preferences
 
 	dat += "<b><a href=\"byond://?src=\ref[user];preference=antagoptions;active=0\">Set Antag Options</b></a><br>"
 
-	dat += "\t<a href=\"byond://?src=\ref[user];preference=skills\"><b>Set Skills</b> (<i>[GetSkillClass(used_skillpoints)][used_skillpoints > 0 ? " [used_skillpoints]" : "0"])</i></a><br>"
+	dat += "\t<a href=\"byond://?src=\ref[user];preference=skills\"><b>Set Skills</b> (<i>[GetSkillClass(used_skillpoints)] [used_skillpoints > 0 ? "[used_skillpoints]" : "0"]</i>)</a><br>"
 
 	dat += "<a href='byond://?src=\ref[user];preference=flavor_text;task=open'><b>Set Flavor Text</b></a><br>"
 	dat += "<a href='byond://?src=\ref[user];preference=flavour_text_robot;task=open'><b>Set Robot Flavour Text</b></a><br>"

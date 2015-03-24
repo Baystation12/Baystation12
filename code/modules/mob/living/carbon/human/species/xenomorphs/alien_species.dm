@@ -42,6 +42,8 @@
 	breath_type = null
 	poison_type = null
 
+	vision_flags = SEE_MOBS
+
 	has_organ = list(
 		"heart" =           /obj/item/organ/heart,
 		"brain" =           /obj/item/organ/brain/xeno,

@@ -1,12 +1,14 @@
 //These machines are mostly just here for debugging/spawning. Skeletons of the feature to come.
 
 /obj/machinery/bioprinter
-	name = "bioprinter"
+	name = "organ bioprinter"
 	desc = "It's a machine that grows replacement organs."
 	icon = 'icons/obj/surgery.dmi'
 
 	anchored = 1
 	density = 1
+	use_power = 1
+	idle_power_usage = 40
 
 	icon_state = "bioprinter"
 
@@ -41,33 +43,41 @@
 		if(prints_prosthetics)
 			O.robotic = 2
 		else if(loaded_dna)
-			visible_message("The printer would be using the DNA sample if it was coded.")
-			//TODO: Copy DNA hash or donor reference over to new organ.
+			visible_message("<span class='notice'>The printer injects the stored DNA into the biomass.</span>.")
+			O.transplant_data = list()
+			var/mob/living/carbon/C = loaded_dna["donor"]
+			O.transplant_data["species"] =    C.species.name
+			O.transplant_data["blood_type"] = loaded_dna["blood_type"]
+			O.transplant_data["blood_DNA"] =  loaded_dna["blood_DNA"]
 
-		visible_message("The bioprinter spits out a new organ.")
+		visible_message("<span class='info'>The bioprinter spits out a new organ.")
 
 	else
-		user << "There is not enough matter in the printer."
+		user << "<span class='warning'>There is not enough matter in the printer.</span>"
 
 /obj/machinery/bioprinter/attackby(obj/item/weapon/W, mob/user)
 
 	// DNA sample from syringe.
 	if(!prints_prosthetics && istype(W,/obj/item/weapon/reagent_containers/syringe))
-		user << "You inject the blood sample into the bioprinter, but it isn't coded yet."
+		var/obj/item/weapon/reagent_containers/syringe/S = W
+		var/datum/reagent/blood/injected = locate() in S.reagents.reagent_list //Grab some blood
+		if(injected && injected.data)
+			loaded_dna = injected.data
+			user << "<span class='info'>You inject the blood sample into the bioprinter.</span>"
 		return
 	// Meat for biomass.
 	else if(!prints_prosthetics && istype(W, /obj/item/weapon/reagent_containers/food/snacks/meat))
-		user << "\blue \The [src] processes \the [W]."
 		stored_matter += 50
 		user.drop_item()
+		user << "<span class='info'>\The [src] processes \the [W]. Levels of stored biomass now: [stored_matter]</span>"
 		del(W)
 		return
 	// Steel for matter.
 	else if(prints_prosthetics && istype(W, /obj/item/stack/sheet/metal))
 		var/obj/item/stack/sheet/metal/M = W
-		user << "\blue \The [src] processes \the [W]."
 		stored_matter += M.amount * 10
 		user.drop_item()
+		user << "<span class='info'>\The [src] processes \the [W]. Levels of stored matter now: [stored_matter]</span>"
 		del(W)
 		return
 	else

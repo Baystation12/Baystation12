@@ -234,6 +234,12 @@
 
 	..()
 
+/obj/machinery/cryopod/Del()
+	if(occupant)
+		occupant.loc = loc
+		occupant.resting = 1
+	..()
+
 /obj/machinery/cryopod/initialize()
 	..()
 
@@ -357,10 +363,10 @@
 	if(occupant.mind.objectives.len)
 		del(occupant.mind.objectives)
 		occupant.mind.special_role = null
-	else
-		if(ticker.mode.name == "AutoTraitor")
-			var/datum/game_mode/traitor/autotraitor/current_mode = ticker.mode
-			current_mode.possible_traitors.Remove(occupant)
+	//else
+		//if(ticker.mode.name == "AutoTraitor")
+			//var/datum/game_mode/traitor/autotraitor/current_mode = ticker.mode
+			//current_mode.possible_traitors.Remove(occupant)
 
 	// Delete them from datacore.
 
@@ -390,12 +396,11 @@
 	control_computer.frozen_crew += "[occupant.real_name]"
 
 	announce.autosay("[occupant.real_name] [on_store_message]", "[on_store_name]")
-	visible_message("<span class='notice'>\The [src] hums and hisses as it moves [occupant.real_name] into storage.</span>", 3)
+	visible_message("<span class='notice'>\The [initial(name)] hums and hisses as it moves [occupant.real_name] into storage.</span>", 3)
 
+	set_occupant(null)
 	// Delete the mob.
 	del(occupant)
-	occupant = null
-	name = initial(name)
 
 
 /obj/machinery/cryopod/attackby(var/obj/item/weapon/G as obj, var/mob/user as mob)
@@ -442,7 +447,7 @@
 
 			M << "<span class='notice'>[on_enter_occupant_message]</span>"
 			M << "<span class='notice'><b>If you ghost, log out or close your client now, your character will shortly be permanently removed from the round.</b></span>"
-			occupant = M
+			set_occupant(M)
 			time_entered = world.time
 
 			// Book keeping!
@@ -511,7 +516,7 @@
 		usr.client.perspective = EYE_PERSPECTIVE
 		usr.client.eye = src
 		usr.loc = src
-		src.occupant = usr
+		set_occupant(usr)
 
 		if(orient_right)
 			icon_state = "[occupied_icon_state]-r"
@@ -520,11 +525,10 @@
 
 		usr << "<span class='notice'>[on_enter_occupant_message]</span>"
 		usr << "<span class='notice'><b>If you ghost, log out or close your client now, your character will shortly be permanently removed from the round.</b></span>"
-		occupant = usr
+
 		time_entered = world.time
 
 		src.add_fingerprint(usr)
-		name = "[name] ([usr.name])"
 
 	return
 
@@ -538,7 +542,7 @@
 		occupant.client.perspective = MOB_PERSPECTIVE
 
 	occupant.loc = get_turf(src)
-	occupant = null
+	set_occupant(null)
 
 	if(orient_right)
 		icon_state = "[base_icon_state]-r"
@@ -546,6 +550,12 @@
 		icon_state = base_icon_state
 
 	return
+
+/obj/machinery/cryopod/proc/set_occupant(var/occupant)
+	src.occupant = occupant
+	name = initial(name)
+	if(occupant)
+		name = "[name] ([occupant])"
 
 
 //Attacks/effects.

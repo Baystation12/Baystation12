@@ -58,8 +58,7 @@
 /datum/surgery_step/internal/fix_organ
 	allowed_tools = list(
 	/obj/item/stack/medical/advanced/bruise_pack= 100,		\
-	/obj/item/stack/medical/bruise_pack = 20,	\
-	/obj/item/stack/medical/bruise_pack/tajaran = 70, 		\
+	/obj/item/stack/medical/bruise_pack = 20
 	)
 
 	min_duration = 70
@@ -82,11 +81,8 @@
 		var/tool_name = "\the [tool]"
 		if (istype(tool, /obj/item/stack/medical/advanced/bruise_pack))
 			tool_name = "regenerative membrane"
-		if (istype(tool, /obj/item/stack/medical/bruise_pack))
-			if (istype(tool, /obj/item/stack/medical/bruise_pack/tajaran))
-				tool_name = "the poultice"
-			else
-				tool_name = "the bandaid"
+		else if (istype(tool, /obj/item/stack/medical/bruise_pack))
+			tool_name = "the bandaid"
 
 		if (!hasorgans(target))
 			return
@@ -106,10 +102,7 @@
 		if (istype(tool, /obj/item/stack/medical/advanced/bruise_pack))
 			tool_name = "regenerative membrane"
 		if (istype(tool, /obj/item/stack/medical/bruise_pack))
-			if (istype(tool, /obj/item/stack/medical/bruise_pack/tajaran))
-				tool_name = "the poultice"
-			else
-				tool_name = "the bandaid"
+			tool_name = "the bandaid"
 
 		if (!hasorgans(target))
 			return
@@ -136,12 +129,9 @@
 			target.adjustToxLoss(5)
 
 		else if (istype(tool, /obj/item/stack/medical/bruise_pack))
-			if (istype(tool, /obj/item/stack/medical/bruise_pack/tajaran))
-				target.adjustToxLoss(7)
-			else
-				dam_amt = 5
-				target.adjustToxLoss(10)
-				affected.createwound(CUT, 5)
+			dam_amt = 5
+			target.adjustToxLoss(10)
+			affected.createwound(CUT, 5)
 
 		for(var/obj/item/organ/I in affected.internal_organs)
 			if(I && I.damage > 0)

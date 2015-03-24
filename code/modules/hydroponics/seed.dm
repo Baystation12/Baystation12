@@ -59,7 +59,7 @@
 	set_trait(TRAIT_HIGHKPA_TOLERANCE,    200)          // High pressure capacity.
 	set_trait(TRAIT_IDEAL_HEAT,           293)          // Preferred temperature in Kelvin.
 	set_trait(TRAIT_NUTRIENT_CONSUMPTION, 0.25)         // Plant eats this much per tick.
-	set_trait(TRAIT_PLANT_COLOUR,         "#6EF86A")    // Colour of the plant icon.
+	set_trait(TRAIT_PLANT_COLOUR,         "#46B543")    // Colour of the plant icon.
 
 	spawn(5)
 		sleep(-1)
@@ -142,6 +142,17 @@
 	if(!get_trait(TRAIT_STINGS))
 		return
 	if(chems && chems.len)
+
+		var/body_coverage = HEAD|FACE|EYES|UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
+
+		for(var/obj/item/clothing/clothes in target)
+			if(target.l_hand == clothes|| target.r_hand == clothes)
+				continue
+			body_coverage &= ~(clothes.body_parts_covered)
+
+		if(!body_coverage)
+			return
+
 		target << "<span class='danger'>You are stung by \the [fruit]!</span>"
 		for(var/rid in chems)
 			var/injecting = min(5,max(1,get_trait(TRAIT_POTENCY)/5))

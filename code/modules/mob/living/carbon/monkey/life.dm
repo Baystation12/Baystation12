@@ -439,9 +439,6 @@
 		if(pressure)
 			pressure.icon_state = "pressure[pressure_alert]"
 
-		if(pullin)	pullin.icon_state = "pull[pulling ? 1 : 0]"
-
-
 		if (toxin)	toxin.icon_state = "tox[phoron_alert ? 1 : 0]"
 		if (oxygen) oxygen.icon_state = "oxy[oxygen_alert ? 1 : 0]"
 		if (fire) fire.icon_state = "fire[fire_alert ? 2 : 0]"

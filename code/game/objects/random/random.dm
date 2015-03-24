@@ -177,8 +177,8 @@
 	icon_state = "energykill100"
 	item_to_spawn()
 		return pick(prob(2);/obj/item/weapon/gun/energy/laser,\
-					prob(1);/obj/item/weapon/gun/energy/gun,\
-					prob(2);/obj/item/weapon/gun/energy/stunrevolver)
+					prob(2);/obj/item/weapon/gun/energy/gun,\
+					prob(1);/obj/item/weapon/gun/energy/stunrevolver)
 
 /obj/random/projectile
 	name = "Random Projectile Weapon"
@@ -206,15 +206,15 @@
 	icon = 'icons/obj/ammo.dmi'
 	icon_state = "45-10"
 	item_to_spawn()
-		return pick(prob(3);/obj/item/weapon/storage/box/beanbags,\
-					prob(1);/obj/item/weapon/storage/box/shotgunammo,\
-					prob(2);/obj/item/weapon/storage/box/shotgunshells,\
-					prob(2);/obj/item/weapon/storage/box/stunshells,\
-					prob(1);/obj/item/ammo_magazine/c45m,\
-					prob(2);/obj/item/ammo_magazine/c45m/rubber,\
-					prob(2);/obj/item/ammo_magazine/c45m/flash,\
-					prob(1);/obj/item/ammo_magazine/mc9mmt,\
-					prob(3);/obj/item/ammo_magazine/mc9mmt/rubber)
+		return pick(prob(6);/obj/item/weapon/storage/box/beanbags,\
+					prob(2);/obj/item/weapon/storage/box/shotgunammo,\
+					prob(4);/obj/item/weapon/storage/box/shotgunshells,\
+					prob(1);/obj/item/weapon/storage/box/stunshells,\
+					prob(2);/obj/item/ammo_magazine/c45m,\
+					prob(4);/obj/item/ammo_magazine/c45m/rubber,\
+					prob(4);/obj/item/ammo_magazine/c45m/flash,\
+					prob(2);/obj/item/ammo_magazine/mc9mmt,\
+					prob(6);/obj/item/ammo_magazine/mc9mmt/rubber)
 
 
 /obj/random/action_figure

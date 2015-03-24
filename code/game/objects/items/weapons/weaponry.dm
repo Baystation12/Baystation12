@@ -11,7 +11,7 @@
 	attack_verb = list("banned")
 
 	suicide_act(mob/user)
-		viewers(user) << "\red <b>[user] is hitting \himself with the [src.name]! It looks like \he's trying to ban \himself from life.</b>"
+		viewers(user) << "<span class='danger'>[user] is hitting \himself with the [src.name]! It looks like \he's trying to ban \himself from life.</span>"
 		return (BRUTELOSS|FIRELOSS|TOXLOSS|OXYLOSS)
 
 /obj/item/weapon/nullrod
@@ -27,7 +27,7 @@
 	w_class = 2
 
 	suicide_act(mob/user)
-		viewers(user) << "\red <b>[user] is impaling \himself with the [src.name]! It looks like \he's trying to commit suicide.</b>"
+		viewers(user) << "<span class='danger'>[user] is impaling \himself with the [src.name]! It looks like \he's trying to commit suicide.</span>"
 		return (BRUTELOSS|FIRELOSS)
 
 /obj/item/weapon/nullrod/attack(mob/M as mob, mob/living/user as mob) //Paste from old-code to decult with a null rod.
@@ -38,36 +38,34 @@
 	msg_admin_attack("[user.name] ([user.ckey]) attacked [M.name] ([M.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
 
 	if (!(istype(user, /mob/living/carbon/human) || ticker) && ticker.mode.name != "monkey")
-		user << "\red You don't have the dexterity to do this!"
+		user << "<span class='danger'>You don't have the dexterity to do this!</span>"
 		return
 
 	if ((CLUMSY in user.mutations) && prob(50))
-		user << "\red The rod slips out of your hand and hits your head."
+		user << "<span class='danger'>The rod slips out of your hand and hits your head.</span>"
 		user.take_organ_damage(10)
 		user.Paralyse(20)
 		return
 
 	if (M.stat !=2)
-		if((M.mind in ticker.mode.cult) && prob(33))
-			M << "\red The power of [src] clears your mind of the cult's influence!"
-			user << "\red You wave [src] over [M]'s head and see their eyes become clear, their mind returning to normal."
-			ticker.mode.remove_cultist(M.mind)
-			for(var/mob/O in viewers(M, null))
-				O.show_message(text("\red [] waves [] over []'s head.", user, src, M), 1)
+		if(cult && (M.mind in cult.current_antagonists) && prob(33))
+			M << "<span class='danger'>The power of [src] clears your mind of the cult's influence!</span>"
+			user << "<span class='danger'>You wave [src] over [M]'s head and see their eyes become clear, their mind returning to normal.</span>"
+			cult.remove_antagonist(M.mind)
+			M.visible_message("<span class='danger'>\The [user] waves \the [src] over \the [M]'s head.</span>")
 		else if(prob(10))
-			user << "\red The rod slips in your hand."
+			user << "<span class='danger'>The rod slips in your hand.</span>"
 			..()
 		else
-			user << "\red The rod appears to do nothing."
-			for(var/mob/O in viewers(M, null))
-				O.show_message(text("\red [] waves [] over []'s head.", user, src, M), 1)
+			user << "<span class='danger'>The rod appears to do nothing.</span>"
+			M.visible_message("<span class='danger'>\The [user] waves \the [src] over \the [M]'s head.</span>")
 			return
 
 /obj/item/weapon/nullrod/afterattack(atom/A, mob/user as mob, proximity)
 	if(!proximity)
 		return
 	if (istype(A, /turf/simulated/floor))
-		user << "\blue You hit the floor with the [src]."
+		user << "<span class='notice'>You hit the floor with the [src].</span>"
 		call(/obj/effect/rune/proc/revealrunes)(src)
 
 /obj/item/weapon/sord
@@ -84,7 +82,7 @@
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 
 	suicide_act(mob/user)
-		viewers(user) << "\red <b>[user] is impaling \himself with the [src.name]! It looks like \he's trying to commit suicide.</b>"
+		viewers(user) << "<span class='danger'>[user] is impaling \himself with the [src.name]! It looks like \he's trying to commit suicide.</span>"
 		return(BRUTELOSS)
 
 /obj/item/weapon/sord/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
@@ -109,7 +107,7 @@
 		return 1
 
 	suicide_act(mob/user)
-		viewers(user) << "\red <b>[user] is falling on the [src.name]! It looks like \he's trying to commit suicide.</b>"
+		viewers(user) << "<span class='danger'>[user] is falling on the [src.name]! It looks like \he's trying to commit suicide.</span>"
 		return(BRUTELOSS)
 
 /obj/item/weapon/claymore/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
@@ -131,7 +129,7 @@
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 
 	suicide_act(mob/user)
-		viewers(user) << "\red <b>[user] is slitting \his stomach open with the [src.name]! It looks like \he's trying to commit seppuku.</b>"
+		viewers(user) << "<span class='danger'>[user] is slitting \his stomach open with the [src.name]! It looks like \he's trying to commit seppuku.</span>"
 		return(BRUTELOSS)
 
 /obj/item/weapon/katana/IsShield()

@@ -37,6 +37,7 @@
 	var/list/unarmed_attacks = null          // For empty hand harm-intent attack
 	var/brute_mod = 1                        // Physical damage multiplier.
 	var/burn_mod = 1                         // Burn damage multiplier.
+	var/vision_flags = 0                     // Same flags as glasses.
 
 	// Death vars.
 	var/gibber_type = /obj/effect/gibspawner/human

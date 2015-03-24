@@ -39,10 +39,6 @@
 	usr = null
 	src = null
 	switch(controller)
-		if("Master")
-			new /datum/controller/game_controller()
-			master_controller.process()
-			feedback_add_details("admin_verb","RMC")
 		if("Failsafe")
 			new /datum/controller/failsafe()
 			feedback_add_details("admin_verb","RFailsafe")
@@ -56,7 +52,17 @@
 	message_admins("Admin [key_name_admin(usr)] has restarted the [controller] controller.")
 	return
 
-/client/proc/debug_controller(controller in list("Master","Failsafe","Ticker","Lighting","Air","Jobs","Sun","Radio","Supply","Shuttles","Emergency Shuttle","Configuration","pAI", "Cameras", "Transfer Controller", "Gas Data","Event","Plants","Alarm"))
+/client/proc/debug_antagonist_template(antag_type in all_antag_types)
+	set category = "Debug"
+	set name = "Debug Antagonist"
+	set desc = "Debug an antagonist template."
+
+	var/datum/antagonist/antag = all_antag_types[antag_type]
+	if(antag)
+		usr.client.debug_variables(antag)
+		message_admins("Admin [key_name_admin(usr)] is debugging the [antag.role_text] template.")
+
+/client/proc/debug_controller(controller in list("Master","Failsafe","Ticker","Lighting","Air","Jobs","Sun","Radio","Supply","Shuttles","Emergency Shuttle","Configuration","pAI", "Cameras", "Transfer Controller", "Gas Data","Event","Plants","Alarm","Nano"))
 	set category = "Debug"
 	set name = "Debug Controller"
 	set desc = "Debug the various periodic loop controllers for the game (be careful!)"
@@ -120,5 +126,8 @@
 		if("Alarm")
 			debug_variables(alarm_manager)
 			feedback_add_details("admin_verb", "DAlarm")
+		if("Nano")
+			debug_variables(nanomanager)
+			feedback_add_details("admin_verb", "DNano")
 	message_admins("Admin [key_name_admin(usr)] is debugging the [controller] controller.")
 	return

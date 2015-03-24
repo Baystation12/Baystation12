@@ -45,15 +45,9 @@ var/list/event_last_fired = list()
 	// Code/WorkInProgress/Cael_Aislinn/Economy/Economy_Events.dm
 	// Code/WorkInProgress/Cael_Aislinn/Economy/Economy_Events_Mundane.dm
 
-	if(ticker.mode && ticker.mode.name == "calamity") //Calamity mode messes with some events.
-		possibleEvents[/datum/event/borer_infestation] = 400
-		possibleEvents[/datum/event/economic_event] = 25
-		possibleEvents[/datum/event/trivial_news] = 25
-		possibleEvents[/datum/event/mundane_news] = 25
-	else
-		possibleEvents[/datum/event/economic_event] = 300
-		possibleEvents[/datum/event/trivial_news] = 400
-		possibleEvents[/datum/event/mundane_news] = 300
+	possibleEvents[/datum/event/economic_event] = 300
+	possibleEvents[/datum/event/trivial_news] = 400
+	possibleEvents[/datum/event/mundane_news] = 300
 
 	possibleEvents[/datum/event/pda_spam] = max(min(25, player_list.len) * 4, 200)
 	possibleEvents[/datum/event/money_lotto] = max(min(5, player_list.len), 50)
@@ -89,10 +83,7 @@ var/list/event_last_fired = list()
 	if(active_with_role["Security"] > 0)
 		if(!sent_spiders_to_station)
 			possibleEvents[/datum/event/spider_infestation] = max(active_with_role["Security"], 5) + 5
-		if(config.aliens_allowed && !sent_aliens_to_station)
-			possibleEvents[/datum/event/alien_infestation] = max(active_with_role["Security"], 5) + 2.5
-		if(!sent_ninja_to_station && config.ninjas_allowed)
-			possibleEvents[/datum/event/space_ninja] = max(active_with_role["Security"], 5)
+		possibleEvents[/datum/event/random_antag] = max(active_with_role["Security"], 5) + 2.5
 
 	for(var/event_type in event_last_fired) if(possibleEvents[event_type])
 		var/time_passed = world.time - event_last_fired[event_type]
