@@ -352,35 +352,15 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	sleep(48)
 	del(animation)
 
-	var/mob/living/carbon/monkey/O = new /mob/living/carbon/monkey(src)
-	O.dna = C.dna.Clone()
-	C.dna = null
-
 	for(var/obj/item/W in C)
 		C.drop_from_inventory(W)
 	for(var/obj/T in C)
 		del(T)
 
-	O.loc = C.loc
-	O.name = "monkey ([copytext(md5(C.real_name), 2, 6)])"
-	O.setToxLoss(C.getToxLoss())
-	O.adjustBruteLoss(C.getBruteLoss())
-	O.setOxyLoss(C.getOxyLoss())
-	O.adjustFireLoss(C.getFireLoss())
-	O.stat = C.stat
-	O.a_intent = "hurt"
-	for(var/obj/item/weapon/implant/I in implants)
-		I.loc = O
-		I.implanted = O
-
-	C.mind.transfer_to(O)
-
-	O.make_changeling(1)
-	O.verbs += /mob/proc/changeling_lesser_transform
-	O.changeling_update_languages(changeling.absorbed_languages)
-
+	var/mob/living/carbon/human/H = src
+	if(istype(H))
+		H.set_species(H.species.primitive_form ? H.species.primitive_form : "Monkey")
 	feedback_add_details("changeling_powers","LF")
-	del(C)
 	return 1
 
 

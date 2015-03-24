@@ -20,6 +20,7 @@
 	var/tail                                             // Name of tail image in species effects icon file.
 	var/race_key = 0       	                             // Used for mob icon cache string.
 	var/icon/icon_template                               // Used for mob icon generation for non-32x32 species.
+	var/is_small
 
 	// Language/culture vars.
 	var/default_language = "Galactic Common" // Default language is used when 'say' is used without modifiers.
@@ -91,7 +92,8 @@
 	var/darksight = 2             // Native darksight distance.
 	var/flags = 0                 // Various specific features.
 	var/slowdown = 0              // Passive movement speed malus (or boost, if negative)
-	var/primitive                 // Lesser form, if any (ie. monkey for humans)
+	var/primitive_form            // Lesser form, if any (ie. monkey for humans)
+	var/greater_form              // Greater form, if any, ie. human for monkeys.
 	var/gluttonous                // Can eat some mobs. 1 for monkeys, 2 for people.
 	var/rarity_value = 1          // Relative rarity/collector value for this species.
 	                              // Determines the organs that the species spawns with and

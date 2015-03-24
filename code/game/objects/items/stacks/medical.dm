@@ -16,8 +16,7 @@
 		return 1
 
 	if ( ! (istype(user, /mob/living/carbon/human) || \
-			istype(user, /mob/living/silicon) || \
-			istype(user, /mob/living/carbon/monkey)) )
+			istype(user, /mob/living/silicon)) )
 		user << "\red You don't have the dexterity to do this!"
 		return 1
 

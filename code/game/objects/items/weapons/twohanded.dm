@@ -63,9 +63,6 @@
 	unwield()
 
 /obj/item/weapon/twohanded/attack_self(mob/user as mob)
-	if( istype(user,/mob/living/carbon/monkey) )
-		user << "<span class='warning'>It's too heavy for you to wield fully.</span>"
-		return
 
 	..()
 
