@@ -419,28 +419,27 @@ the implant may become unstable and either pre-maturely inject the subject or si
 		else if(M.stat == 2)
 			activate("death")
 
-	activate(var/cause)2
+	activate(var/cause)
 		var/mob/M = imp_in
 		var/area/t = get_area(M)
-		switch (cause)
-			if("death")
-				var/obj/item/device/radio/headset/a = new /obj/item/device/radio/headset(null)
-				if(istype(t, /area/syndicate_station) || istype(t, /area/syndicate_mothership) || istype(t, /area/shuttle/syndicate_elite) )
-					//give the syndies a bit of stealth
-					a.autosay("[mobname] has died in Space!", "[mobname]'s Death Alarm")
-				else
-					a.autosay("[mobname] has died in [t.name]!", "[mobname]'s Death Alarm")
-				a.loc = null //just in case
-				processing_objects.Remove(src)
-			if ("emp" && prob(70))
-				var/obj/item/device/radio/headset/a = new /obj/item/device/radio/headset(null)
-				var/name = prob(50) ? t.name : pick(teleportlocs)
-				a.autosay("[mobname] has died in [name]!", "[mobname]'s Death Alarm")
-				a.loc = null //just in case
+		if(cause == "death")
+			var/obj/item/device/radio/headset/a = new /obj/item/device/radio/headset(null)
+			if(istype(t, /area/syndicate_station) || istype(t, /area/syndicate_mothership) || istype(t, /area/shuttle/syndicate_elite) )
+				//give the syndies a bit of stealth
+				a.autosay("[mobname] has died in Space!", "[mobname]'s Death Alarm")
 			else
-				var/obj/item/device/radio/headset/a = new /obj/item/device/radio/headset(null)
-				a.autosay("[mobname] has died-zzzzt in-in-in...", "[mobname]'s Death Alarm")
-				a.loc = null //just in case
+				a.autosay("[mobname] has died in [t.name]!", "[mobname]'s Death Alarm")
+			a.loc = null //just in case
+			processing_objects.Remove(src)
+		else if(cause == "emp" && prob(70))
+			var/obj/item/device/radio/headset/a = new /obj/item/device/radio/headset(null)
+			var/name = prob(50) ? t.name : pick(teleportlocs)
+			a.autosay("[mobname] has died in [name]!", "[mobname]'s Death Alarm")
+			a.loc = null //just in case
+		else
+			var/obj/item/device/radio/headset/a = new /obj/item/device/radio/headset(null)
+			a.autosay("[mobname] has died-zzzzt in-in-in...", "[mobname]'s Death Alarm")
+			a.loc = null //just in case
 
 	emp_act(severity)			//for some reason alarms stop going off in case they are emp'd, even without this
 		if (malfunction)		//so I'm just going to add a meltdown chance here
@@ -453,7 +452,7 @@ the implant may become unstable and either pre-maturely inject the subject or si
 			if(2) do_malf = prob(75)
 			if(3) do_malf = prob(25)
 		
-		if(malf)
+		if(do_malf)
 			activate("emp")	//let's shout that this dude is dead
 			if(prob(40))	//small chance of obvious meltdown
 				meltdown()
