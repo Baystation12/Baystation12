@@ -225,6 +225,7 @@ var/global/datum/shuttle_controller/shuttle_controller
 	//Nuke Ops shuttle.
 	var/datum/shuttle/multi_shuttle/MS = new/datum/shuttle/multi_shuttle()
 	MS.origin = locate(/area/syndicate_station/start)
+	MS.start_location = "Mercenary Base"
 
 	MS.destinations = list(
 		"Northwest of the station" = locate(/area/syndicate_station/northwest),
@@ -236,6 +237,12 @@ var/global/datum/shuttle_controller/shuttle_controller
 		"Telecomms Satellite" = locate(/area/syndicate_station/commssat),
 		"Mining Asteroid" = locate(/area/syndicate_station/mining),
 		"Arrivals dock" = locate(/area/syndicate_station/arrivals_dock),
+		)
+	
+	MS.docking_controller_tag = "merc_shuttle"
+	MS.destination_dock_targets = list(
+		"Mercenary Base" = "merc_base",
+		"Arrivals dock" = "nuke_shuttle_dock_airlock",
 		)
 
 	MS.announcer = "NSV Icarus"
