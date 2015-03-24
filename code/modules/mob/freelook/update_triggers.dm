@@ -8,7 +8,7 @@
 			VN.updateVisibility(A, opacity_check)
 
 /turf
-	var/image/obscured
+	var/list/image/obfuscations = new()
 
 /turf/drain_power()
 	return -1

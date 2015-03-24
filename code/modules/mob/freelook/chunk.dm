@@ -5,6 +5,10 @@
 // A 16x16 grid of the map with a list of turfs that can be seen, are visible and are dimmed.
 // Allows the Eye to stream these chunks and know what it can and cannot see.
 
+/datum/obfuscation
+	var/icon = 'icons/effects/cameravis.dmi'
+	var/icon_state = "black"
+
 /datum/chunk
 	var/list/obscuredTurfs = list()
 	var/list/visibleTurfs = list()
@@ -17,6 +21,7 @@
 	var/x = 0
 	var/y = 0
 	var/z = 0
+	var/datum/obfuscation/obfuscation = new()
 
 // Add an eye to the chunk, then update if changed.
 
@@ -83,29 +88,29 @@
 
 	for(var/turf in visAdded)
 		var/turf/t = turf
-		if(t.obscured)
-			obscured -= t.obscured
+		if(t.obfuscations[obfuscation.type])
+			obscured -= t.obfuscations[obfuscation.type]
 			for(var/eye in seenby)
 				var/mob/eye/m = eye
 				if(!m || !m.owner)
 					continue
 				if(m.owner.client)
-					m.owner.client.images -= t.obscured
+					m.owner.client.images -= t.obfuscations[obfuscation.type]
 
 	for(var/turf in visRemoved)
 		var/turf/t = turf
 		if(obscuredTurfs[t])
-			if(!t.obscured)
-				t.obscured = image('icons/effects/cameravis.dmi', t, "black", 15)
+			if(!t.obfuscations[obfuscation.type])
+				t.obfuscations[obfuscation.type] = image(obfuscation.icon, t, obfuscation.icon_state, 15)
 
-			obscured += t.obscured
+			obscured += t.obfuscations[obfuscation.type]
 			for(var/eye in seenby)
 				var/mob/eye/m = eye
 				if(!m || !m.owner)
 					seenby -= m
 					continue
 				if(m.owner.client)
-					m.owner.client.images += t.obscured
+					m.owner.client.images += t.obfuscations[obfuscation.type]
 
 /datum/chunk/proc/acquireVisibleTurfs(var/list/visible)
 
@@ -134,8 +139,8 @@
 
 	for(var/turf in obscuredTurfs)
 		var/turf/t = turf
-		if(!t.obscured)
-			t.obscured = image('icons/effects/cameravis.dmi', t, "black", 15)
-		obscured += t.obscured
+		if(!t.obfuscations[obfuscation.type])
+			t.obfuscations[obfuscation.type] = image(obfuscation.icon, t, obfuscation.icon_state, 15)
+		obscured += t.obfuscations[obfuscation.type]
 
 #undef UPDATE_BUFFER

@@ -196,7 +196,7 @@ Class Procs:
 	user.set_machine(src)
 
 /obj/machinery/CouldNotUseTopic(var/mob/user)
-	usr.unset_machine()
+	user.unset_machine()
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 

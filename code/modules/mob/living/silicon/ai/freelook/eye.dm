@@ -17,8 +17,6 @@
 		if(cancel_tracking)
 			ai.ai_cancel_tracking()
 
-		if(ai.client)
-			ai.client.eye = src
 		//Holopad
 		if(ai.holo)
 			ai.holo.move_hologram(ai)
@@ -41,7 +39,6 @@
 	eyeobj.ai = src
 	eyeobj.owner = src
 	eyeobj.name = "[src.name] (AI Eye)" // Give it a name
-	eyeobj.visualnet = cameranet
 	spawn(5)
 		eyeobj.loc = src.loc
 

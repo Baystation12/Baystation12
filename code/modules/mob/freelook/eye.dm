@@ -56,6 +56,9 @@ mob/eye/Del()
 		T = get_turf(T)
 		loc = T
 
+		if(owner.client)
+			owner.client.eye = src
+
 		visualnet.visibility(src)
 		return 1
 	return 0
