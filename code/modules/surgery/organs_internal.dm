@@ -304,12 +304,9 @@
 
 		// Extract the organ!
 		if(target.op_stage.current_organ)
-			var/obj/item/organ/I = target.internal_organs_by_name[target.op_stage.current_organ]
-			var/obj/item/organ/O
-			if(I && istype(I))
-				O = I.remove(user)
-				if(O && istype(O))
-					O.removed(target,user)
+			var/obj/item/organ/O = target.internal_organs_by_name[target.op_stage.current_organ]
+			if(O && istype(O))
+				O.removed(user)
 			target.op_stage.current_organ = null
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)

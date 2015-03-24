@@ -1,11 +1,9 @@
 /mob/living/carbon/human/gib()
 
 	for(var/obj/item/organ/I in internal_organs)
-		var/obj/item/organ/current_organ = I.remove()
-		if(current_organ)
-			if(istype(loc,/turf))
-				current_organ.throw_at(get_edge_target_turf(src,pick(alldirs)),rand(1,3),30)
-			current_organ.removed(src)
+		I.removed()
+		if(istype(loc,/turf))
+			I.throw_at(get_edge_target_turf(src,pick(alldirs)),rand(1,3),30)
 
 	for(var/obj/item/organ/external/E in src.organs)
 		if(istype(E, /obj/item/organ/external/chest))

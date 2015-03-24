@@ -142,7 +142,10 @@
 
 /datum/species/proc/create_organs(var/mob/living/carbon/human/H) //Handles creation of mob organs.
 
-	//Trying to work out why species changes aren't fixing organs properly.
+	for(var/obj/item/organ/organ in H.contents)
+		if((organ in H.organs) || (organ in H.internal_organs))
+			del(organ)
+
 	if(H.organs)                  H.organs.Cut()
 	if(H.internal_organs)         H.internal_organs.Cut()
 	if(H.organs_by_name)          H.organs_by_name.Cut()

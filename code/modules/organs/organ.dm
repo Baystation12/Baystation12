@@ -226,29 +226,29 @@ var/list/organ_cache = list()
 					take_damage(10,0)
 					return
 
-/obj/item/organ/proc/removed(var/mob/living/carbon/human/target,var/mob/living/user)
+/obj/item/organ/proc/removed(var/mob/living/user)
 
-	if(!istype(target))
+	if(!istype(owner))
 		return
 
-	target.internal_organs_by_name[organ_tag] = null
-	target.internal_organs_by_name -= organ_tag
-	target.internal_organs -= src
+	owner.internal_organs_by_name[organ_tag] = null
+	owner.internal_organs_by_name -= organ_tag
+	owner.internal_organs -= src
 
-	var/obj/item/organ/external/affected = target.get_organ(parent_organ)
-	affected.internal_organs -= src
+	var/obj/item/organ/external/affected = owner.get_organ(parent_organ)
+	if(affected) affected.internal_organs -= src
 
-	loc = target.loc
+	loc = owner.loc
 	rejecting = null
 	var/datum/reagent/blood/organ_blood = locate(/datum/reagent/blood) in reagents.reagent_list
 	if(!organ_blood || !organ_blood.data["blood_DNA"])
-		target.vessel.trans_to(src, 5, 1, 1)
+		owner.vessel.trans_to(src, 5, 1, 1)
 
-	if(target && user && vital)
-		user.attack_log += "\[[time_stamp()]\]<font color='red'> removed a vital organ ([src]) from [target.name] ([target.ckey]) (INTENT: [uppertext(user.a_intent)])</font>"
-		target.attack_log += "\[[time_stamp()]\]<font color='orange'> had a vital organ ([src]) removed by [user.name] ([user.ckey]) (INTENT: [uppertext(user.a_intent)])</font>"
-		msg_admin_attack("[user.name] ([user.ckey]) removed a vital organ ([src]) from [target.name] ([target.ckey]) (INTENT: [uppertext(user.a_intent)]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
-		target.death()
+	if(owner && user && vital)
+		user.attack_log += "\[[time_stamp()]\]<font color='red'> removed a vital organ ([src]) from [owner.name] ([owner.ckey]) (INTENT: [uppertext(user.a_intent)])</font>"
+		owner.attack_log += "\[[time_stamp()]\]<font color='orange'> had a vital organ ([src]) removed by [user.name] ([user.ckey]) (INTENT: [uppertext(user.a_intent)])</font>"
+		msg_admin_attack("[user.name] ([user.ckey]) removed a vital organ ([src]) from [owner.name] ([owner.ckey]) (INTENT: [uppertext(user.a_intent)]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
+		owner.death()
 
 /obj/item/organ/proc/replaced(var/mob/living/carbon/human/target,var/obj/item/organ/external/affected)
 
@@ -314,10 +314,3 @@ var/list/organ_cache = list()
 	if(!robotic && user.a_intent == "help" && user.zone_sel.selecting == "mouth")
 		bitten(user)
 		return
-
-/obj/item/organ/proc/remove(var/mob/user)
-	if(user)
-		src.loc = get_turf(user)
-	else
-		src.loc = get_turf(owner)
-	return src

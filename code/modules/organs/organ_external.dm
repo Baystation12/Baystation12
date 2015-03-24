@@ -28,7 +28,7 @@
 	var/list/obj/item/organ/external/children
 
 	// Internal organs of this body part
-	var/list/obj/item/organ/internal_organs
+	var/list/internal_organs = list()
 
 	var/damage_msg = "\red You feel an intense pain"
 	var/broken_description
@@ -620,7 +620,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 	if(parent)
 		parent.children -= src
-	src.removed(owner)
+	src.removed()
 
 	if(parent)
 		spawn(1)
@@ -808,7 +808,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 		H.drop_item()
 	W.loc = owner
 
-/obj/item/organ/external/removed(var/mob/living/user)
+/obj/item/organ/external/removed()
 
 	var/is_robotic = status & ORGAN_ROBOT
 	..()
@@ -823,12 +823,12 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 	// Attached organs also fly off.
 	for(var/obj/item/organ/external/O in children)
-		O.removed(owner)
+		O.removed()
 		O.loc = src //TODO: generate entire limb icons from contents.
 
 	// Grab all the internal giblets too.
 	for(var/obj/item/organ/organ in internal_organs)
-		organ.removed(user)
+		organ.removed()
 		organ.loc = src
 
 	release_restraints()

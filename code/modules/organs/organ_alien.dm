@@ -107,14 +107,14 @@
 	organ_tag = "brain"
 	desc = "A disgusting space slug."
 
-/obj/item/organ/borer/removed(var/mob/living/target,var/mob/living/user)
+/obj/item/organ/borer/removed(var/mob/living/user)
 
 	..()
 
-	var/mob/living/simple_animal/borer/B = target.has_brain_worms()
+	var/mob/living/simple_animal/borer/B = owner.has_brain_worms()
 	if(B)
 		B.leave_host()
-		B.ckey = target.ckey
+		B.ckey = owner.ckey
 
 	spawn(0)
 		del(src)
