@@ -855,10 +855,16 @@
 	proc/handle_chemicals_in_body()
 
 		if(reagents && !(species.flags & IS_SYNTHETIC)) //Synths don't process reagents.
+			chem_effects.Cut()
+			analgesic = 0
 			var/alien = 0
 			if(species && species.reagent_tag)
 				alien = species.reagent_tag
-			reagents.metabolize(src,alien)
+			touching.metabolize(alien, CHEM_TOUCH)
+			ingested.metabolize(alien, CHEM_INGEST)
+			reagents.metabolize(alien, CHEM_BLOOD)
+			if(CE_PAINKILLER in chem_effects)
+				analgesic = chem_effects[CE_PAINKILLER]
 
 			var/total_phoronloss = 0
 			for(var/obj/item/I in src)
@@ -944,9 +950,6 @@
 				blinded = 1
 				silent = 0
 				return 1
-
-			// the analgesic effect wears off slowly
-			analgesic = max(0, analgesic - 1)
 
 			//UNCONSCIOUS. NO-ONE IS HOME
 			if( (getOxyLoss() > 50) || (config.health_threshold_crit > health) )
@@ -1224,7 +1227,7 @@
 				see_invisible = SEE_INVISIBLE_LIVING
 
 			if(healths)
-				if (analgesic)
+				if (analgesic > 100)
 					healths.icon_state = "health_health_numb"
 				else
 					switch(hal_screwyhud)
@@ -1409,7 +1412,7 @@
 	handle_shock()
 		..()
 		if(status_flags & GODMODE)	return 0	//godmode
-		if(analgesic || (species && species.flags & NO_PAIN)) return // analgesic avoids all traumatic shock temporarily
+		if(species && species.flags & NO_PAIN) return
 
 		if(health < config.health_threshold_softcrit)// health 0 makes you immediately collapse
 			shock_stage = max(shock_stage, 61)
@@ -1485,7 +1488,7 @@
 			if(R.id in heartstopper) //To avoid using fakedeath
 				temp = PULSE_NONE
 			if(R.id in cheartstopper) //Conditional heart-stoppage
-				if(R.volume >= R.overdose)
+				if(R.volume >= R.overdose_blood)
 					temp = PULSE_NONE
 
 		return temp

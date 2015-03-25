@@ -114,10 +114,9 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 					if(H.species.flags & IS_SYNTHETIC)
 						return
 
-				reagents.trans_to(C, REAGENTS_METABOLISM, 0.2) // Most of it is not inhaled... balance reasons.
-				reagents.reaction(C)
+				reagents.trans_to_mob(C, REM, CHEM_INGEST, 0.2) // Most of it is not inhaled... balance reasons.
 		else // else just remove some of the reagents
-			reagents.remove_any(REAGENTS_METABOLISM)
+			reagents.remove_any(REM)
 
 /obj/item/clothing/mask/smokable/proc/light(var/flavor_text = "[usr] lights the [name].")
 	if(!src.lit)
@@ -230,7 +229,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	if(!proximity)
 		return
 	if(istype(glass)) //you can dip cigarettes into beakers
-		var/transfered = glass.reagents.trans_to(src, chem_volume)
+		var/transfered = glass.reagents.trans_to_obj(src, chem_volume)
 		if(transfered)	//if reagents were transfered, show the message
 			user << "<span class='notice'>You dip \the [src] into \the [glass].</span>"
 		else			//if not, either the beaker was empty, or the cigarette was full
@@ -375,7 +374,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 			return
 		smoketime = 1000
 		if(G.reagents)
-			G.reagents.trans_to(src, G.reagents.total_volume)
+			G.reagents.trans_to_obj(src, G.reagents.total_volume)
 		name = "[G.name]-packed [initial(name)]"
 		del(G)
 

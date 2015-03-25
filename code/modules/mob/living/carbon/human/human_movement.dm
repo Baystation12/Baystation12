@@ -10,9 +10,8 @@
 	if(embedded_flag)
 		handle_embedded_objects() //Moving with objects stuck in you can cause bad times.
 
-	if(reagents.has_reagent("hyperzine")) return -1
-
-	if(reagents.has_reagent("nuka_cola")) return -1
+	if(CE_SPEEDBOOST in chem_effects)
+		return -1
 
 	var/health_deficiency = (100 - health)
 	if(health_deficiency >= 40) tally += (health_deficiency / 25)

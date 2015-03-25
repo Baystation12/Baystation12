@@ -1,3 +1,13 @@
+/mob/living/carbon/New()
+	create_reagents(1000)
+	var/datum/reagents/R1 = new/datum/reagents(1000)
+	var/datum/reagents/R2 = new/datum/reagents(1000)
+	ingested = R1
+	touching = R2
+	R1.my_atom = src
+	R2.my_atom = src
+	..()
+
 /mob/living/carbon/Life()
 	..()
 
@@ -551,3 +561,9 @@
 	Stun(stun_duration)
 	Weaken(Floor(stun_duration/2))
 	return 1
+
+/mob/living/carbon/proc/add_chemical_effect(var/effect, var/magnitude = 1)
+	if(effect in chem_effects)
+		chem_effects[effect] += magnitude
+	else
+		chem_effects[effect] = magnitude

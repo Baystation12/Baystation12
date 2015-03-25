@@ -82,8 +82,18 @@
 	return temp_change
 
 /mob/living/carbon/slime/proc/handle_chemicals_in_body()
+	chem_effects.Cut()
+	analgesic = 0
 
-	if(reagents) reagents.metabolize(src)
+	if(touching)
+		touching.metabolize(0, CHEM_TOUCH)
+	if(ingested)
+		ingested.metabolize(0, CHEM_INGEST)
+	if(reagents)
+		reagents.metabolize(0, CHEM_BLOOD)
+
+	if(CE_PAINKILLER in chem_effects)
+		analgesic = chem_effects[CE_PAINKILLER]
 
 	src.updatehealth()
 

@@ -172,7 +172,7 @@
 	organ_data.rejecting = null
 	var/datum/reagent/blood/organ_blood = locate(/datum/reagent/blood) in reagents.reagent_list
 	if(!organ_blood || !organ_blood.data["blood_DNA"])
-		target.vessel.trans_to(src, 5, 1, 1)
+		target.vessel.trans_to_obj(src, 5, 1, 1)
 
 	if(target && user && organ_data.vital)
 		user.attack_log += "\[[time_stamp()]\]<font color='red'> removed a vital organ ([src]) from [target.name] ([target.ckey]) (INTENT: [uppertext(user.a_intent)])</font>"
@@ -265,7 +265,7 @@
 	O.icon_state = dead_icon ? dead_icon : icon_state
 
 	// Pass over the blood.
-	reagents.trans_to(O, reagents.total_volume)
+	reagents.trans_to_obj(O, reagents.total_volume)
 
 	if(fingerprints) O.fingerprints = fingerprints.Copy()
 	if(fingerprintshidden) O.fingerprintshidden = fingerprintshidden.Copy()

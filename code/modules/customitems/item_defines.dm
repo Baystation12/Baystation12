@@ -446,10 +446,8 @@
 		if (M != user && user.ckey == "nerezza") //Woah now, you better be careful partner
 			user << "\blue You don't want to contaminate the autoinjector."
 			return
-		src.reagents.reaction(M, INGEST)
-		if(M.reagents)
-			var/trans = reagents.trans_to(M, amount_per_transfer_from_this)
-			user << "\blue [trans] units injected. [reagents.total_volume] units remaining in \the [src]."
+		var/trans = reagents.trans_to_mob(M, amount_per_transfer_from_this, CHEM_BLOOD)
+		user << "\blue [trans] units injected. [reagents.total_volume] units remaining in \the [src]."
 	return
 
 /obj/item/weapon/reagent_containers/hypospray/fluff/asher_spock_1/examine(mob/user as mob)

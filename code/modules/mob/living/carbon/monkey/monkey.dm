@@ -47,10 +47,6 @@
 
 	verbs += /mob/living/proc/ventcrawl
 
-	var/datum/reagents/R = new/datum/reagents(1000)
-	reagents = R
-	R.my_atom = src
-
 	species = all_species[greaterform]
 	add_language(species.language)
 

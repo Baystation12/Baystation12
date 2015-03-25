@@ -466,12 +466,7 @@
 		var splashAmount = min(70,tank.reagents.total_volume)
 		src.visible_message("\red [src] splashes [target] with a bucket of water!")
 		playsound(src.loc, 'sound/effects/slosh.ogg', 25, 1)
-		if ( prob(50) )
-			tank.reagents.reaction(target, TOUCH) //splash the human!
-		else
-			tank.reagents.reaction(target.loc, TOUCH) //splash the human's roots!
-		spawn(5)
-			tank.reagents.remove_any(splashAmount)
+		tank.reagents.splash_mob(target, splashAmount)
 
 		mode = FARMBOT_MODE_WAITING
 		spawn(FARMBOT_EMAG_DELAY)
