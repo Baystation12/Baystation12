@@ -8,12 +8,18 @@
 	icon = 'icons/mob/eye.dmi'
 	icon_state = "default-eye"
 	alpha = 127
-	var/list/visibleChunks = list()
-	var/mob/living/owner = null
-	density = 0
-	status_flags = GODMODE  // You can't damage it.
+
+	var/sprint = 10
+	var/cooldown = 0
+	var/acceleration = 1
+
 	see_in_dark = 7
+	status_flags = GODMODE
 	invisibility = INVISIBILITY_EYE
+
+	var/mob/owner = null
+	var/list/visibleChunks = list()
+
 	var/ghostimage = null
 	var/datum/visualnet/visualnet
 
@@ -63,8 +69,35 @@ mob/eye/Del()
 		return 1
 	return 0
 
+/mob/eye/EyeMove(n, direct)
+	var/initial = initial(sprint)
+	var/max_sprint = 50
+
+	if(cooldown && cooldown < world.timeofday)
+		sprint = initial
+
+	for(var/i = 0; i < max(sprint, initial); i += 20)
+		var/turf/step = get_turf(get_step(src, direct))
+		if(step)
+			setLoc(step)
+
+	cooldown = world.timeofday + 5
+	if(acceleration)
+		sprint = min(sprint + 0.5, max_sprint)
+	else
+		sprint = initial
+
 /mob/eye/proc/getLoc()
 	if(owner)
 		if(!isturf(owner.loc) || !owner.client)
 			return
 		return loc
+
+/mob
+	var/mob/eye/eyeobj
+
+/mob/proc/EyeMove(n, direct)
+	if(!eyeobj)
+		return
+
+	return eyeobj.EyeMove(n, direct)
