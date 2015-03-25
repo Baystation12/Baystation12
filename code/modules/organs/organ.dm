@@ -2,6 +2,8 @@ var/list/organ_cache = list()
 
 /obj/item/organ
 	name = "organ"
+	icon = 'icons/obj/surgery.dmi'
+
 	var/mob/living/carbon/human/owner = null
 	var/status = 0
 	var/vital //Lose a vital limb, die immediately.

@@ -3,15 +3,6 @@ var/global/list/limb_icon_cache = list()
 /obj/item/organ/external/set_dir()
 	return
 
-/obj/item/organ/proc/get_icon(var/image/supplied)
-	var/key = "internal-[icon_state]"
-	var/image/I
-	if(organ_cache[key])
-		I = organ_cache[key]
-	else
-		I = image(icon, "[icon_state]")
-	return I
-
 /obj/item/organ/external/proc/compile_icon()
 	overlays.Cut()
 	get_icon()
@@ -22,7 +13,7 @@ var/global/list/limb_icon_cache = list()
 				overlays += child.get_icon()
 		overlays += organ.get_icon()
 
-/obj/item/organ/external/get_icon(var/skeletal)
+/obj/item/organ/external/proc/get_icon(var/skeletal)
 
 	if(!owner)
 		mob_icon = new /icon('icons/mob/human_races/r_human.dmi', "[icon_name][gendered_icon ? "_f" : ""]")

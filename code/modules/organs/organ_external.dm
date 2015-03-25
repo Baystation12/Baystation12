@@ -599,7 +599,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 ****************************************************/
 
 //Handles dismemberment
-/obj/item/organ/external/proc/droplimb(var/clean, var/disintegrate)
+/obj/item/organ/external/proc/droplimb(var/clean, var/disintegrate, var/ignore_children)
 
 	if(cannot_amputate || !owner)
 		return
@@ -625,7 +625,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 				"<span class='moderate'><b>Your [src.name] explodes in a shower of gore!</b></span>",\
 				"<span class='danger'>You hear the sickening splatter of gore.</span>")
 
-	src.removed()
+	src.removed(null, ignore_children)
 
 	if(parent)
 		parent.children -= src
@@ -658,6 +658,12 @@ Note that amputating the affected organ does in fact remove the infection from t
 				gore.basecolor = owner.species.blood_color
 			gore.update_icon()
 			gore.throw_at(get_edge_target_turf(src,pick(alldirs)),rand(1,3),30)
+
+			for(var/obj/item/organ/I in internal_organs)
+				I.removed()
+				if(istype(loc,/turf))
+					I.throw_at(get_edge_target_turf(src,pick(alldirs)),rand(1,3),30)
+
 	del(src)
 
 /****************************************************
@@ -827,7 +833,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 		H.drop_item()
 	W.loc = owner
 
-/obj/item/organ/external/removed()
+/obj/item/organ/external/removed(var/mob/living/user, var/ignore_children)
 
 	var/is_robotic = status & ORGAN_ROBOT
 	..()
@@ -839,9 +845,10 @@ Note that amputating the affected organ does in fact remove the infection from t
 		del(implant)
 
 	// Attached organs also fly off.
-	for(var/obj/item/organ/external/O in children)
-		O.removed()
-		O.loc = src
+	if(!ignore_children)
+		for(var/obj/item/organ/external/O in children)
+			O.removed()
+			O.loc = src
 
 	// Grab all the internal giblets too.
 	for(var/obj/item/organ/organ in internal_organs)

@@ -6,11 +6,9 @@
 			I.throw_at(get_edge_target_turf(src,pick(alldirs)),rand(1,3),30)
 
 	for(var/obj/item/organ/external/E in src.organs)
-		if(E.cannot_amputate)
-			E.removed()
-			del(E)
-			continue
-		E.droplimb()
+		E.droplimb(0,0,1)
+
+	sleep(1)
 
 	..(species.gibbed_anim)
 	gibs(loc, viruses, dna, null, species.flesh_color, species.blood_color)
