@@ -139,7 +139,8 @@
 	src.updateUsrDialog()
 
 /obj/machinery/microwave/attack_ai(mob/user as mob)
-	attack_hand(user)
+	if(istype(user, /mob/living/silicon/robot) && Adjacent(user))
+		attack_hand(user)
 
 /obj/machinery/microwave/attack_hand(mob/user as mob)
 	user.set_machine(src)

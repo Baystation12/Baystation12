@@ -6,6 +6,8 @@
 	icon = 'icons/obj/device.dmi'
 	icon_state = "gripper"
 
+	flags = NOBLUDGEON
+
 	//Has a list of items that it can hold.
 	var/list/can_hold = list(
 		/obj/item/weapon/cell,
@@ -27,6 +29,8 @@
 		)
 
 	var/obj/item/wrapped = null // Item currently being held.
+
+	var/force_holder = null //
 
 // VEEEEERY limited version for mining borgs. Basically only for swapping cells and upgrading the drills.
 /obj/item/weapon/gripper/miner
@@ -130,7 +134,13 @@
 	//update_icon()
 
 /obj/item/weapon/gripper/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
-	return (wrapped ? wrapped.attack(M,user) : 0)
+	if(wrapped) 	//The force of the wrapped obj gets set to zero during the attack() and afterattack().
+		force_holder = wrapped.force
+		wrapped.force = 0.0
+		wrapped.attack(M,user)
+		return 1
+	return 0
+//	return (wrapped ? wrapped.attack(M,user) : 0)
 
 /obj/item/weapon/gripper/afterattack(var/atom/target, var/mob/living/user, proximity, params)
 
@@ -149,9 +159,14 @@
 
 		//Pass the attack on to the target. This might delete/relocate wrapped.
 		var/resolved = target.attackby(wrapped,user)
+		world << "attackby([wrapped],[user]) was called."
 		if(!resolved && wrapped && target)
+			world << "afterattack([target],[user]) was called."
 			wrapped.afterattack(target,user,1)
 
+		//wrapped's force was set to zero.  This resets it to the value it had before.
+		wrapped.force = force_holder
+		force_holder = null
 		//If wrapped was neither deleted nor put into target, put it back into the gripper.
 		if(wrapped && user && (wrapped.loc == user))
 			wrapped.loc = src
@@ -209,6 +224,7 @@
 
 				A.cell.add_fingerprint(user)
 				A.cell.updateicon()
+				A.updateicon()
 				A.cell.loc = src
 				A.cell = null
 

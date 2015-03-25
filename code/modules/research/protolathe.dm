@@ -116,9 +116,6 @@ Note: Must be placed west/left of and R&D console to function.
 	if(busy)
 		user << "<span class='notice'>\The [src] is busy. Please wait for completion of previous operation.</span>"
 		return 1
-//	if(!istype(O, /obj/item/stack/sheet))
-//		user << "<span class='notice'>You cannot insert this item into \the [src]!</span>"
-//		return 1
 	if(stat)
 		return 1
 	if(istype(O,/obj/item/stack/sheet))
