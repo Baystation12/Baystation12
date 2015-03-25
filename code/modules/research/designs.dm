@@ -358,7 +358,7 @@ datum/design/aimodule/safeguard
 	build_path = /obj/item/weapon/aiModule/safeguard
 
 datum/design/aimodule/onehuman
-	name = "OneEmployee"
+	name = "OneCrewMember"
 	id = "onehuman"
 	req_tech = list("programming" = 4, "materials" = 6)
 	build_path = /obj/item/weapon/aiModule/oneHuman

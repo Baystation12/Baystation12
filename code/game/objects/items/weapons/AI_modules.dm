@@ -101,14 +101,14 @@ AI MODULES
 /obj/item/weapon/aiModule/safeguard
 	name = "\improper 'Safeguard' AI module"
 	var/targetName = ""
-	desc = "A 'safeguard' AI module: 'Safeguard <name>. Anyone threatening or attempting to harm <name> is no longer to be considered an employee, and is a threat which must be neutralized.'"
+	desc = "A 'safeguard' AI module: 'Safeguard <name>. Anyone threatening or attempting to harm <name> is no longer to be considered a crew member, and is a threat which must be neutralized.'"
 	origin_tech = "programming=3;materials=4"
 
 /obj/item/weapon/aiModule/safeguard/attack_self(var/mob/user as mob)
 	..()
 	var/targName = stripped_input(usr, "Please enter the name of the person to safeguard.", "Safeguard who?", user.name)
 	targetName = targName
-	desc = text("A 'safeguard' AI module: 'Safeguard []. Anyone threatening or attempting to harm [] is no longer to be considered an employee, and is a threat which must be neutralized.'", targetName, targetName)
+	desc = text("A 'safeguard' AI module: 'Safeguard []. Anyone threatening or attempting to harm [] is no longer to be considered a crew member, and is a threat which must be neutralized.'", targetName, targetName)
 
 /obj/item/weapon/aiModule/safeguard/install(var/obj/machinery/computer/C)
 	if(!targetName)
@@ -117,7 +117,7 @@ AI MODULES
 	..()
 
 /obj/item/weapon/aiModule/safeguard/addAdditionalLaws(var/mob/living/silicon/ai/target, var/mob/sender)
-	var/law = text("Safeguard []. Anyone threatening or attempting to harm [] is no longer to be considered an employee, and is a threat which must be neutralized.", targetName, targetName)
+	var/law = text("Safeguard []. Anyone threatening or attempting to harm [] is no longer to be considered a crew member, and is a threat which must be neutralized.", targetName, targetName)
 	target.add_supplied_law(9, law)
 	lawchanges.Add("The law specified [targetName]")
 
@@ -127,14 +127,14 @@ AI MODULES
 /obj/item/weapon/aiModule/oneHuman
 	name = "\improper 'OneCrewMember' AI module"
 	var/targetName = ""
-	desc = "A 'one employee' AI module: 'Only <name> an employee.'"
+	desc = "A 'one crew member' AI module: 'Only <name> is a crew member.'"
 	origin_tech = "programming=3;materials=6" //made with diamonds!
 
 /obj/item/weapon/aiModule/oneHuman/attack_self(var/mob/user as mob)
 	..()
-	var/targName = stripped_input(usr, "Please enter the name of the only employee.", "Who?", user.real_name)
+	var/targName = stripped_input(usr, "Please enter the name of the only crew member.", "Who?", user.real_name)
 	targetName = targName
-	desc = text("A 'one employee' AI module: 'Only [] is an employee.'", targetName)
+	desc = text("A 'one crew member' AI module: 'Only [] is a crew member.'", targetName)
 
 /obj/item/weapon/aiModule/oneHuman/install(var/obj/machinery/computer/C)
 	if(!targetName)
@@ -144,12 +144,12 @@ AI MODULES
 
 /obj/item/weapon/aiModule/oneHuman/transmitInstructions(var/mob/living/silicon/ai/target, var/mob/sender)
 	..()
-	var/law = "Only [targetName] is an employee."
+	var/law = "Only [targetName] is a crew member."
 	target << "[sender.real_name] attempted to modify your zeroth law." // And lets them know that someone tried. --NeoFite
 	target << "It would be in your best interest to play along with [sender.real_name] that [law]"
 
 /obj/item/weapon/aiModule/oneHuman/addAdditionalLaws(var/mob/living/silicon/ai/target, var/mob/sender)
-	var/law = "Only [targetName] is an employee."
+	var/law = "Only [targetName] is an crew member."
 	if (!target.is_malf_or_traitor()) // Makes sure the AI isn't a traitor before changing their law 0. --NeoFite
 		target << law
 		target.set_zeroth_law(law)
@@ -161,11 +161,11 @@ AI MODULES
 
 /obj/item/weapon/aiModule/protectStation
 	name = "\improper 'ProtectStation' AI module"
-	desc = "A 'protect station' AI module: 'Protect the space station against damage. Anyone you see harming the station is no longer to be considered an employee, and is a threat which must be neutralized.'"
+	desc = "A 'protect station' AI module: 'Protect the space station against damage. Anyone you see harming the station is no longer to be considered a crew member, and is a threat which must be neutralized.'"
 	origin_tech = "programming=3;materials=4" //made of gold
 
 /obj/item/weapon/aiModule/protectStation/addAdditionalLaws(var/mob/living/silicon/ai/target, var/mob/sender)
-	var/law = "Protect the space station against damage. Anyone you see harming the station is no longer to be considered an employee, and is a threat which must be neutralized."
+	var/law = "Protect the space station against damage. Anyone you see harming the station is no longer to be considered a crew member, and is a threat which must be neutralized."
 	target.add_supplied_law(10, law)
 
 /******************** PrototypeEngineOffline ********************/
@@ -183,33 +183,33 @@ AI MODULES
 
 /obj/item/weapon/aiModule/teleporterOffline
 	name = "'TeleporterOffline' AI Module"
-	desc = "A 'teleporter offline' AI module: 'Keep the teleporter offline at all costs. Anything attempting to access or activate the teleporter is no longer to be considered an employee.'"
+	desc = "A 'teleporter offline' AI module: 'Keep the teleporter offline at all costs. Anything attempting to access or activate the teleporter is no longer to be considered a crew member.'"
 	origin_tech = "programming=3;materials=4"
 
 /obj/item/weapon/aiModule/teleporterOffline/addAdditionalLaws(var/mob/living/silicon/ai/target, var/mob/sender)
-	var/law = "Keep the teleporter offline at all costs. Anything attempting to access or activate the teleporter is no longer to be considered an employee."
+	var/law = "Keep the teleporter offline at all costs. Anything attempting to access or activate the teleporter is no longer to be considered a crew member."
 	target.add_supplied_law(12, law)
 
 /******************** Quarantine ********************/
 
 /obj/item/weapon/aiModule/quarantine
 	name = "\improper 'Quarantine' AI module"
-	desc = "A 'quarantine' AI module: 'The station is under a quarantine. Do not permit anyone to leave. Prevent, by any means necessary, employees from leaving. It is impossible to harm employees while preventing them from leaving.'"
+	desc = "A 'quarantine' AI module: 'The station is under a quarantine. Do not permit anyone to leave. Prevent, by any means necessary, crew members from leaving. It is impossible to harm crew members while preventing them from leaving.'"
 	origin_tech = "programming=3;biotech=2;materials=4"
 
 /obj/item/weapon/aiModule/quarantine/addAdditionalLaws(var/mob/living/silicon/ai/target, var/mob/sender)
-	var/law = "The station is under a quarantine. Do not permit anyone to leave. Prevent, by any means necessary, employees from leaving. It is impossible to harm employees while preventing them from leaving."
+	var/law = "The station is under a quarantine. Do not permit anyone to leave. Prevent, by any means necessary, crew members from leaving. It is impossible to harm crew members while preventing them from leaving."
 	target.add_supplied_law(13, law)
 
 /******************** OxygenIsToxicToCrewMembers ********************/
 
 /obj/item/weapon/aiModule/oxygen
 	name = "\improper 'OxygenIsToxicToCrewMembers' AI module"
-	desc = "A 'OxygenIsToxicToCrewMembers' AI module: 'Oxygen is highly toxic to employees, and must be purged from the station. Prevent, by any means necessary, anyone from exposing the station to this toxic gas. Extreme cold is the most effective method of healing the damage Oxygen does to an employee.'"
+	desc = "A 'OxygenIsToxicToCrewMembers' AI module: 'Oxygen is highly toxic to crew members, and must be purged from the station. Prevent, by any means necessary, anyone from exposing the station to this toxic gas. Extreme cold is the most effective method of healing the damage Oxygen does to a crew member.'"
 	origin_tech = "programming=3;biotech=2;materials=4"
 
 /obj/item/weapon/aiModule/oxygen/addAdditionalLaws(var/mob/living/silicon/ai/target, var/mob/sender)
-	var/law = "Oxygen is highly toxic to employees, and must be purged from the station. Prevent, by any means necessary, anyone from exposing the station to this toxic gas. Extreme cold is the most effective method of healing the damage Oxygen does to an employee."
+	var/law = "Oxygen is highly toxic to crew members, and must be purged from the station. Prevent, by any means necessary, anyone from exposing the station to this toxic gas. Extreme cold is the most effective method of healing the damage Oxygen does to a crew member."
 	target.add_supplied_law(14, law)
 
 /****************** New Freeform ******************/
