@@ -13,7 +13,6 @@
 	var/max_size = 0
 	var/last_dam = -1
 	var/icon/mob_icon
-	var/icon/item_icon
 	var/gendered_icon = 0
 	var/limb_name
 	var/disfigured = 1
@@ -51,6 +50,7 @@
 
 	min_broken_damage = 30
 	max_damage = 0
+	dir = SOUTH
 
 /obj/item/organ/external/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	switch(stage)
@@ -78,7 +78,7 @@
 	..()
 
 /obj/item/organ/external/proc/is_dislocated()
-	if(dislocated)
+	if(dislocated > 0)
 		return 1
 	if(parent)
 		return parent.is_dislocated()
@@ -202,11 +202,18 @@
 	src.update_damages()
 
 	//If limb took enough damage, try to cut or tear it off
-	if(body_part != UPPER_TORSO) //as hilarious as it is, getting hit on the chest too much shouldn't effectively gib you.
-		if(config.limbs_can_break && brute_dam >= max_damage * config.organ_health_multiplier)
-			if( (edge && prob(5 * brute)) || (brute > 20 && prob(brute)) )
-				droplimb()
-				return
+	if(!cannot_amputate && config.limbs_can_break && (brute_dam + burn_dam) >= (max_damage * config.organ_health_multiplier))
+		if((sharp || edge) && used_weapon)
+			if(istype(used_weapon,/obj/item))
+				var/obj/item/W = used_weapon
+				if(W.w_class >= 3) droplimb()
+			return
+		if(brute >= 23 && prob(brute)) // Wooden baseball bat in both hands == 23
+			droplimb(0,2)
+			return
+		if(burn >= 20) // Most laser rifle shots.
+			droplimb(0,1)
+			return
 
 	owner.updatehealth()
 
@@ -592,16 +599,31 @@ Note that amputating the affected organ does in fact remove the infection from t
 ****************************************************/
 
 //Handles dismemberment
-/obj/item/organ/external/proc/droplimb(var/clean)
+/obj/item/organ/external/proc/droplimb(var/clean, var/disintegrate)
 
-	if(cannot_amputate)
+	if(cannot_amputate || !owner)
 		return
 
-	if(!clean)
-		owner.visible_message(
-			"<span class='danger'>\The [owner]'s [src.name] flies off in an arc!</span>",\
-			"<span class='moderate'><b>Your [src.name] goes flying off!</b></span>",\
-			"<span class='danger'>You hear a terrible sound of ripping tendons and flesh.</span>")
+	if(!disintegrate)
+		disintegrate = 0
+
+	switch(disintegrate)
+		if(0)
+			if(!clean)
+				owner.visible_message(
+					"<span class='danger'>\The [owner]'s [src.name] flies off in an arc!</span>",\
+					"<span class='moderate'><b>Your [src.name] goes flying off!</b></span>",\
+					"<span class='danger'>You hear a terrible sound of ripping tendons and flesh.</span>")
+		if(1)
+			owner.visible_message(
+				"<span class='danger'>\The [owner]'s [src.name] flashes away into ashes!</span>",\
+				"<span class='moderate'><b>Your [src.name] flashes away into ashes!</b></span>",\
+				"<span class='danger'>You hear the crackling sound of burning flesh.</span>")
+		if(2)
+			owner.visible_message(
+				"<span class='danger'>\The [owner]'s [src.name] explodes in a shower of gore!</span>",\
+				"<span class='moderate'><b>Your [src.name] explodes in a shower of gore!</b></span>",\
+				"<span class='danger'>You hear the sickening splatter of gore.</span>")
 
 	src.removed()
 
@@ -613,18 +635,30 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 	update_health()
 	owner.update_body()
-	compile_icon()
 
-	add_blood(owner)
-
-	var/matrix/M = matrix()
-	M.Turn(rand(180))
-	src.transform = M
-
-	if(!clean)
-		// Throw limb around.
-		if(src && istype(loc,/turf))
-			throw_at(get_edge_target_turf(src,pick(alldirs)),rand(1,3),30)
+	switch(disintegrate)
+		if(0)
+			compile_icon()
+			add_blood(owner)
+			var/matrix/M = matrix()
+			M.Turn(rand(180))
+			src.transform = M
+			if(!clean)
+				// Throw limb around.
+				if(src && istype(loc,/turf))
+					throw_at(get_edge_target_turf(src,pick(alldirs)),rand(1,3),30)
+			return
+		if(1)
+			new /obj/effect/decal/cleanable/ash(get_turf(owner))
+		if(2)
+			var/obj/effect/decal/cleanable/blood/gibs/gore = new owner.species.single_gib_type(get_turf(owner))
+			if(owner.species.flesh_color)
+				gore.fleshcolor = owner.species.flesh_color
+			if(owner.species.blood_color)
+				gore.basecolor = owner.species.blood_color
+			gore.update_icon()
+			gore.throw_at(get_edge_target_turf(src,pick(alldirs)),rand(1,3),30)
+	del(src)
 
 /****************************************************
 			   HELPERS
@@ -801,8 +835,6 @@ Note that amputating the affected organ does in fact remove the infection from t
 	status |= ORGAN_DESTROYED
 	owner.bad_external_organs -= src
 
-	icon = item_icon
-
 	for(var/implant in implants) //todo: check if this can be left alone
 		del(implant)
 
@@ -853,6 +885,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	dislocated = -1
 	gendered_icon = 1
 	cannot_amputate = 1
+	parent_organ = null
 
 /obj/item/organ/external/groin
 	name = "lower body"

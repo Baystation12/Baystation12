@@ -41,6 +41,7 @@
 
 	// Death vars.
 	var/gibber_type = /obj/effect/gibspawner/human
+	var/single_gib_type = /obj/effect/decal/cleanable/blood/gibs
 	var/remains_type = /obj/effect/decal/remains/xeno
 	var/gibbed_anim = "gibbed-h"
 	var/dusted_anim = "dust-h"

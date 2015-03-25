@@ -11,6 +11,8 @@ emp_act
 /mob/living/carbon/human/bullet_act(var/obj/item/projectile/P, var/def_zone)
 
 	var/obj/item/organ/external/organ = get_organ(check_zone(def_zone))
+	if(!organ)
+		return
 
 	//Shields
 	if(check_shields(P.damage, "the [P.name]"))
@@ -85,16 +87,18 @@ emp_act
 		if(isorgan(def_zone))
 			return getarmor_organ(def_zone, type)
 		var/obj/item/organ/external/affecting = get_organ(def_zone)
-		return getarmor_organ(affecting, type)
+		if(affecting)
+			return getarmor_organ(affecting, type)
 		//If a specific bodypart is targetted, check how that bodypart is protected and return the value.
 
 	//If you don't specify a bodypart, it checks ALL your bodyparts for protection, and averages out the values
 	for(var/organ_name in organs_by_name)
 		if (organ_name in organ_rel_size)
 			var/obj/item/organ/external/organ = organs_by_name[organ_name]
-			var/weight = organ_rel_size[organ_name]
-			armorval += getarmor_organ(organ, type) * weight
-			total += weight
+			if(organ)
+				var/weight = organ_rel_size[organ_name]
+				armorval += getarmor_organ(organ, type) * weight
+				total += weight
 	return (armorval/max(total, 1))
 
 //this proc returns the Siemens coefficient of electrical resistivity for a particular external organ.
@@ -113,13 +117,13 @@ emp_act
 
 //this proc returns the armour value for a particular external organ.
 /mob/living/carbon/human/proc/getarmor_organ(var/obj/item/organ/external/def_zone, var/type)
-	if(!type)	return 0
+	if(!type || !def_zone) return 0
 	var/protection = 0
 	var/list/protective_gear = list(head, wear_mask, wear_suit, w_uniform, gloves, shoes)
 	for(var/gear in protective_gear)
 		if(gear && istype(gear ,/obj/item/clothing))
 			var/obj/item/clothing/C = gear
-			if(C.body_parts_covered & def_zone.body_part)
+			if(istype(C) && C.body_parts_covered & def_zone.body_part)
 				protection += C.armor[type]
 	return protection
 
@@ -186,7 +190,7 @@ emp_act
 		target_zone = user.zone_sel.selecting
 	if(!target_zone)
 		visible_message("\red <B>[user] misses [src] with \the [I]!")
-		return 0
+		return 1
 
 	var/obj/item/organ/external/affecting = get_organ(target_zone)
 
@@ -194,9 +198,11 @@ emp_act
 		user << "<span class='danger'>They are missing that limb!</span>"
 		return
 
+	var/effective_force = I.force
+	if(user.a_intent == "disarm") effective_force = round(I.force/2)
 	var/hit_area = affecting.name
 
-	if((user != src) && check_shields(I.force, "the [I.name]"))
+	if((user != src) && check_shields(effective_force, "the [I.name]"))
 		return 0
 
 	if(istype(I,/obj/item/weapon/card/emag))
@@ -224,14 +230,14 @@ emp_act
 		weapon_sharp = 0
 		weapon_edge = 0
 
-	if(armor >= 2)	return 0
-	if(!I.force)	return 0
-	var/Iforce = I.force //to avoid runtimes on the forcesay checks at the bottom. Some items might delete themselves if you drop them. (stunning yourself, ninja swords)
+	if(armor >= 2)			return 0
+	if(!effective_force)	return 0
+	var/Iforce = effective_force //to avoid runtimes on the forcesay checks at the bottom. Some items might delete themselves if you drop them. (stunning yourself, ninja swords)
 
-	apply_damage(I.force, I.damtype, affecting, armor, sharp=weapon_sharp, edge=weapon_edge, used_weapon=I)
+	apply_damage(effective_force, I.damtype, affecting, armor, sharp=weapon_sharp, edge=weapon_edge, used_weapon=I)
 
 	var/bloody = 0
-	if(((I.damtype == BRUTE) || (I.damtype == HALLOSS)) && prob(25 + (I.force * 2)))
+	if(((I.damtype == BRUTE) || (I.damtype == HALLOSS)) && prob(25 + (effective_force * 2)))
 		I.add_blood(src)	//Make the weapon bloody, not the person.
 //		if(user.hand)	user.update_inv_l_hand()	//updates the attacker's overlay for the (now bloodied) weapon
 //		else			user.update_inv_r_hand()	//removed because weapons don't have on-mob blood overlays
@@ -246,36 +252,37 @@ emp_act
 					H.bloody_body(src)
 					H.bloody_hands(src)
 
-		switch(hit_area)
-			if("head")//Harder to score a stun but if you do it lasts a bit longer
-				if(prob(I.force))
-					apply_effect(20, PARALYZE, armor)
-					visible_message("\red <B>[src] has been knocked unconscious!</B>")
-				if(bloody)//Apply blood
-					if(wear_mask)
-						wear_mask.add_blood(src)
-						update_inv_wear_mask(0)
-					if(head)
-						head.add_blood(src)
-						update_inv_head(0)
-					if(glasses && prob(33))
-						glasses.add_blood(src)
-						update_inv_glasses(0)
+		if(!stat)
+			switch(hit_area)
+				if("head")//Harder to score a stun but if you do it lasts a bit longer
+					if(prob(effective_force))
+						apply_effect(20, PARALYZE, armor)
+						visible_message("\red <B>[src] has been knocked unconscious!</B>")
+					if(bloody)//Apply blood
+						if(wear_mask)
+							wear_mask.add_blood(src)
+							update_inv_wear_mask(0)
+						if(head)
+							head.add_blood(src)
+							update_inv_head(0)
+						if(glasses && prob(33))
+							glasses.add_blood(src)
+							update_inv_glasses(0)
 
-			if("chest")//Easier to score a stun but lasts less time
-				if(prob((I.force + 10)))
-					apply_effect(6, WEAKEN, armor)
-					visible_message("\red <B>[src] has been knocked down!</B>")
+				if("chest")//Easier to score a stun but lasts less time
+					if(prob((effective_force + 10)))
+						apply_effect(6, WEAKEN, armor)
+						visible_message("\red <B>[src] has been knocked down!</B>")
 
-				if(bloody)
-					bloody_body(src)
+					if(bloody)
+						bloody_body(src)
 
 	if(Iforce > 10 || Iforce >= 5 && prob(33))
 		forcesay(hit_appends)	//forcesay checks stat already
 
 	//Melee weapon embedded object code.
 	if (I && I.damtype == BRUTE && !I.anchored && !I.is_robot_module())
-		var/damage = I.force
+		var/damage = effective_force
 		if (armor)
 			damage /= armor+1
 

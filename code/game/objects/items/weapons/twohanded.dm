@@ -218,7 +218,7 @@
 	throw_speed = 3
 	throw_range = 7
 	throwforce = 7
-	attack_verb = list("smashed", "beaten", "slammed", "smacked", "striked", "battered", "bonked")
+	attack_verb = list("smashed", "beaten", "slammed", "smacked", "struck", "battered", "bonked")
 	hitsound = 'sound/weapons/genhit3.ogg'
 	force_wielded = 23
 

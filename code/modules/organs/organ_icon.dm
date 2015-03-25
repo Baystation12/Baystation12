@@ -1,5 +1,8 @@
 var/global/list/limb_icon_cache = list()
 
+/obj/item/organ/external/set_dir()
+	return
+
 /obj/item/organ/proc/get_icon(var/image/supplied)
 	var/key = "internal-[icon_state]"
 	var/image/I
@@ -56,7 +59,6 @@ var/global/list/limb_icon_cache = list()
 				mob_icon.Blend(rgb(owner.r_skin, owner.g_skin, owner.b_skin), ICON_ADD)
 
 	dir = EAST
-	item_icon = icon(mob_icon,icon_state,SOUTH)
 	icon = mob_icon
 
 	return mob_icon
