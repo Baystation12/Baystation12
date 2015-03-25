@@ -38,7 +38,7 @@
 		for(var/obj/item/organ/external/organ in M.organs)
 			if (!organ)
 				continue
-			if((organ.status & ORGAN_DESTROYED) && !organ.amputated)
+			if(istype(organ, /obj/item/organ/external/stump))
 				src.traumatic_shock += 60
 			else if(organ.status & ORGAN_BROKEN || organ.open)
 				src.traumatic_shock += 30

@@ -457,10 +457,14 @@ datum/objective/harm
 			var/mob/living/carbon/human/H = target.current
 			for(var/obj/item/organ/external/E in H.organs)
 				if(E.status & ORGAN_BROKEN)
-					already_completed = 1
 					return 1
-				if(E.status & ORGAN_DESTROYED && !E.amputated)
-					already_completed = 1
+			for(var/limb_type in H.species.has_limbs) //todo check prefs for robotic limbs and amputations.
+				var/found
+				for(var/obj/item/organ/external/E in H.organs)
+					if(limb_type == E.type)
+						found = 1
+						break
+				if(!found)
 					return 1
 
 			var/obj/item/organ/external/head/head = H.get_organ("head")

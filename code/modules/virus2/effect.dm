@@ -81,11 +81,11 @@
 			var/mob/living/carbon/human/H = mob
 			var/obj/item/organ/external/O = pick(H.organs)
 			if(prob(25))
-				mob << "<span class='warning'>Your [O.display_name] feels as if it might fall off!</span>"
+				mob << "<span class='warning'>Your [O.name] feels as if it might fall off!</span>"
 			if(prob(10))
 				spawn(50)
 					if(O)
-						O.droplimb(1)
+						O.droplimb()
 		else
 			if(prob(75))
 				mob << "<span class='warning'>Your whole body feels like it might fall apart!</span>"
@@ -156,7 +156,7 @@
 			var/obj/item/organ/external/E = H.organs_by_name[organ]
 			if (!(E.status & ORGAN_DEAD))
 				E.status |= ORGAN_DEAD
-				H << "<span class='notice'>You can't feel your [E.display_name] anymore...</span>"
+				H << "<span class='notice'>You can't feel your [E.name] anymore...</span>"
 				for (var/obj/item/organ/external/C in E.children)
 					C.status |= ORGAN_DEAD
 			H.update_body(1)

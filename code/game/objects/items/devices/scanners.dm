@@ -125,7 +125,7 @@ REAGENT SCANNER
 		if(length(damaged)>0)
 			for(var/obj/item/organ/external/org in damaged)
 				user.show_message(text("\blue \t []: [][]\blue - []",	\
-				"[capitalize(org.display_name)][org.status & ORGAN_ROBOT ? "(Cybernetic)" : ""]",	\
+				"[capitalize(org.name)][org.status & ORGAN_ROBOT ? "(Cybernetic)" : ""]",	\
 				(org.brute_dam > 0)	?	"\red [org.brute_dam]"							:0,		\
 				(org.status & ORGAN_BLEEDING)?"\red <b>\[Bleeding\]</b>":"\t", 		\
 				(org.burn_dam > 0)	?	"<font color='#FFA500'>[org.burn_dam]</font>"	:0),1)
@@ -181,7 +181,7 @@ REAGENT SCANNER
 		var/mob/living/carbon/human/H = M
 		for(var/name in H.organs_by_name)
 			var/obj/item/organ/external/e = H.organs_by_name[name]
-			var/limb = e.display_name
+			var/limb = e.name
 			if(e.status & ORGAN_BROKEN)
 				if(((e.name == "l_arm") || (e.name == "r_arm") || (e.name == "l_leg") || (e.name == "r_leg")) && (!(e.status & ORGAN_SPLINTED)))
 					user << "\red Unsecured fracture in subject [limb]. Splinting recommended for transport."

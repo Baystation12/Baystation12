@@ -44,19 +44,18 @@
 	else
 		user << "This one seems particularly lifeless. Perhaps it will regain some of its luster later.."
 
-/obj/item/organ/brain/removed(var/mob/living/target,var/mob/living/user)
+/obj/item/organ/brain/removed(var/mob/living/user)
 
 	..()
 
-	var/mob/living/simple_animal/borer/borer = target.has_brain_worms()
+	var/mob/living/simple_animal/borer/borer = owner.has_brain_worms()
 
 	if(borer)
 		borer.detatch() //Should remove borer if the brain is removed - RR
 
-	var/mob/living/carbon/human/H = target
 	var/obj/item/organ/brain/B = src
-	if(istype(B) && istype(H))
-		B.transfer_identity(target)
+	if(istype(B) && istype(owner))
+		B.transfer_identity(owner)
 
 /obj/item/organ/brain/replaced(var/mob/living/target)
 

@@ -176,15 +176,15 @@
 	icon_state = "appendix"
 	parent_organ = "groin"
 
-/obj/item/organ/appendix/removed(var/mob/living/target,var/mob/living/user)
+/obj/item/organ/appendix/removed()
 
 	..()
 
 	var/inflamed = 0
-	for(var/datum/disease/appendicitis/appendicitis in target.viruses)
+	for(var/datum/disease/appendicitis/appendicitis in owner.viruses)
 		inflamed = 1
 		appendicitis.cure()
-		target.resistances += appendicitis
+		owner.resistances += appendicitis
 
 	if(inflamed)
 		icon_state = "appendixinflamed"

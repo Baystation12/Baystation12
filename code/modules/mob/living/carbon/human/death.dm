@@ -6,12 +6,11 @@
 			I.throw_at(get_edge_target_turf(src,pick(alldirs)),rand(1,3),30)
 
 	for(var/obj/item/organ/external/E in src.organs)
-		if(istype(E, /obj/item/organ/external/chest))
+		if(E.cannot_amputate)
+			E.removed()
+			del(E)
 			continue
-		// Only make the limb drop if it's not too damaged
-		if(prob(100 - E.get_damage()))
-			// Override the current limb status and don't cause an explosion
-			E.droplimb(1,1)
+		E.droplimb()
 
 	..(species.gibbed_anim)
 	gibs(loc, viruses, dna, null, species.flesh_color, species.blood_color)

@@ -47,8 +47,8 @@
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 		if (affected.parent)
 			affected = affected.parent
-			user.visible_message("\red [user]'s hand slips, ripping [target]'s [affected.display_name] open!", \
-			"\red Your hand slips,  ripping [target]'s [affected.display_name] open!")
+			user.visible_message("\red [user]'s hand slips, ripping [target]'s [affected.name] open!", \
+			"\red Your hand slips,  ripping [target]'s [affected.name] open!")
 			affected.createwound(CUT, 10)
 
 
@@ -69,7 +69,7 @@
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 		user.visible_message("[user] is beginning to reshape [target]'s esophagal and vocal region with \the [tool].", \
-		"You start to reshape [target]'s [affected.display_name] esophagal and vocal region with \the [tool].")
+		"You start to reshape [target]'s [affected.name] esophagal and vocal region with \the [tool].")
 		..()
 
 	end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -142,8 +142,6 @@
 		"\blue You have finished adjusting the area around [target]'s neck with \the [tool].")
 		target.op_stage.head_reattach = 0
 		affected.status |= ORGAN_ATTACHABLE
-		affected.amputated = 1
-		affected.setAmputatedTree()
 		affected.open = 0
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -151,7 +149,7 @@
 		if (affected.parent)
 			affected = affected.parent
 			user.visible_message("\red [user]'s hand slips, searing [target]'s neck!", \
-			"\red Your hand slips, searing [target]'s [affected.display_name]!")
+			"\red Your hand slips, searing [target]'s [affected.name]!")
 			target.apply_damage(10, BURN, affected)
 
 
@@ -176,7 +174,6 @@
 		user.visible_message("\blue [user] has attached [target]'s head to the body.",	\
 		"\blue You have attached [target]'s head to the body.")
 		affected.status = 0
-		affected.amputated = 0
 		target.update_body()
 		target.updatehealth()
 		target.UpdateDamageIcon()

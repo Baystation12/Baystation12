@@ -472,7 +472,7 @@
 
 		if(S.brute_dam)
 			S.heal_damage(15,0,0,1)
-			user.visible_message("\red \The [user] patches some dents on \the [M]'s [S.display_name] with \the [src].")
+			user.visible_message("\red \The [user] patches some dents on \the [M]'s [S.name] with \the [src].")
 			return
 		else
 			user << "Nothing to fix!"

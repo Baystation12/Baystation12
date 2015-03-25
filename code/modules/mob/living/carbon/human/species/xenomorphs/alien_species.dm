@@ -124,7 +124,7 @@
 		if (E.status & ORGAN_BROKEN)
 			if (prob(mend_prob))
 				if (E.mend_fracture())
-					H << "<span class='alium'>You feel something mend itself inside your [E.display_name].</span>"
+					H << "<span class='alium'>You feel something mend itself inside your [E.name].</span>"
 			return 1
 
 	return 0

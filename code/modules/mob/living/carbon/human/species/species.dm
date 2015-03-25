@@ -105,6 +105,20 @@
 		"eyes" =     /obj/item/organ/eyes
 		)
 
+	var/list/has_limbs = list(
+		/obj/item/organ/external/chest,
+		/obj/item/organ/external/groin,
+		/obj/item/organ/external/head,
+		/obj/item/organ/external/arm,
+		/obj/item/organ/external/arm/right,
+		/obj/item/organ/external/leg,
+		/obj/item/organ/external/leg/right,
+		/obj/item/organ/external/hand,
+		/obj/item/organ/external/hand/right,
+		/obj/item/organ/external/foot,
+		/obj/item/organ/external/foot/right
+		)
+
 /datum/species/New()
 	if(hud_type)
 		hud = new hud_type()
@@ -156,18 +170,8 @@
 	H.organs_by_name = list()
 	H.internal_organs_by_name = list()
 
-	//This is a basic humanoid limb setup.
-	H.organs_by_name["chest"] = new/obj/item/organ/external/chest(H)
-	H.organs_by_name["groin"] = new/obj/item/organ/external/groin(H)
-	H.organs_by_name["head"] = new/obj/item/organ/external/head(H)
-	H.organs_by_name["l_arm"] = new/obj/item/organ/external/arm(H)
-	H.organs_by_name["r_arm"] = new/obj/item/organ/external/arm/right(H)
-	H.organs_by_name["r_leg"] = new/obj/item/organ/external/leg(H)
-	H.organs_by_name["l_leg"] = new/obj/item/organ/external/leg/right(H)
-	H.organs_by_name["l_hand"] = new/obj/item/organ/external/hand(H)
-	H.organs_by_name["r_hand"] = new/obj/item/organ/external/hand/right(H)
-	H.organs_by_name["l_foot"] = new/obj/item/organ/external/foot(H)
-	H.organs_by_name["r_foot"] = new/obj/item/organ/external/foot/right(H)
+	for(var/limb_type in has_limbs)
+		new limb_type(H)
 
 	for(var/organ in has_organ)
 		var/organ_type = has_organ[organ]

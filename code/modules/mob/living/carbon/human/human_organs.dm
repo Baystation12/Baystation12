@@ -41,7 +41,7 @@
 			//Moving around with fractured ribs won't do you any good
 				if (E.is_broken() && E.internal_organs && prob(15))
 					var/obj/item/organ/I = pick(E.internal_organs)
-					custom_pain("You feel broken bones moving in your [E.display_name]!", 1)
+					custom_pain("You feel broken bones moving in your [E.name]!", 1)
 					I.take_damage(rand(3,5))
 
 				//Moving makes open wounds get infected much faster

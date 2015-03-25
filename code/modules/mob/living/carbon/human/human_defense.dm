@@ -70,10 +70,10 @@ emp_act
 
 				u_equip(c_hand)
 				if (affected.status & ORGAN_ROBOT)
-					emote("me", 1, "drops what they were holding, their [affected.display_name] malfunctioning!")
+					emote("me", 1, "drops what they were holding, their [affected.name] malfunctioning!")
 				else
 					var/emote_scream = pick("screams in pain and ", "lets out a sharp cry and ", "cries out and ")
-					emote("me", 1, "[(species && species.flags & NO_PAIN) ? "" : emote_scream ]drops what they were holding in their [affected.display_name]!")
+					emote("me", 1, "[(species && species.flags & NO_PAIN) ? "" : emote_scream ]drops what they were holding in their [affected.name]!")
 
 	..(stun_amount, agony_amount, def_zone)
 
@@ -189,12 +189,12 @@ emp_act
 		return 0
 
 	var/obj/item/organ/external/affecting = get_organ(target_zone)
-	if (!affecting)
-		return 0
-	if(affecting.status & ORGAN_DESTROYED)
-		user << "What [affecting.display_name]?"
-		return 0
-	var/hit_area = affecting.display_name
+
+	if (!affecting || affecting.status & ORGAN_DESTROYED || istype(affecting, /obj/item/organ/external/stump))
+		user << "<span class='danger'>They are missing that limb!</span>"
+		return
+
+	var/hit_area = affecting.name
 
 	if((user != src) && check_shields(I.force, "the [I.name]"))
 		return 0
@@ -204,9 +204,9 @@ emp_act
 			user << "\red That limb isn't robotic."
 			return
 		if(affecting.sabotaged)
-			user << "\red [src]'s [affecting.display_name] is already sabotaged!"
+			user << "\red [src]'s [affecting.name] is already sabotaged!"
 		else
-			user << "\red You sneakily slide [I] into the dataport on [src]'s [affecting.display_name] and short out the safeties."
+			user << "\red You sneakily slide [I] into the dataport on [src]'s [affecting.name] and short out the safeties."
 			var/obj/item/weapon/card/emag/emag = I
 			emag.uses--
 			affecting.sabotaged = 1
@@ -328,7 +328,7 @@ emp_act
 			return
 
 		var/obj/item/organ/external/affecting = get_organ(zone)
-		var/hit_area = affecting.display_name
+		var/hit_area = affecting.name
 
 		src.visible_message("\red [src] has been hit in the [hit_area] by [O].")
 		var/armor = run_armor_check(affecting, "melee", "Your armor has protected your [hit_area].", "Your armor has softened hit to your [hit_area].") //I guess "melee" is the best fit here

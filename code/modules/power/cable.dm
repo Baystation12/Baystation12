@@ -527,7 +527,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 
 		if(S.burn_dam > 0 && use(1))
 			S.heal_damage(0,15,0,1)
-			user.visible_message("\red \The [user] repairs some burn damage on \the [M]'s [S.display_name] with \the [src].")
+			user.visible_message("\red \The [user] repairs some burn damage on \the [M]'s [S.name] with \the [src].")
 			return
 		else
 			user << "Nothing to fix!"

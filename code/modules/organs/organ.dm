@@ -179,7 +179,7 @@ var/list/organ_cache = list()
 
 	var/obj/item/organ/external/parent = owner.get_organ(parent_organ)
 	if (!silent)
-		owner.custom_pain("Something inside your [parent.display_name] hurts a lot.", 1)
+		owner.custom_pain("Something inside your [parent.name] hurts a lot.", 1)
 
 /obj/item/organ/proc/robotize() //Being used to make robutt hearts, etc
 	robotic = 2
@@ -244,10 +244,11 @@ var/list/organ_cache = list()
 	if(!organ_blood || !organ_blood.data["blood_DNA"])
 		owner.vessel.trans_to(src, 5, 1, 1)
 
-	if(owner && user && vital)
-		user.attack_log += "\[[time_stamp()]\]<font color='red'> removed a vital organ ([src]) from [owner.name] ([owner.ckey]) (INTENT: [uppertext(user.a_intent)])</font>"
-		owner.attack_log += "\[[time_stamp()]\]<font color='orange'> had a vital organ ([src]) removed by [user.name] ([user.ckey]) (INTENT: [uppertext(user.a_intent)])</font>"
-		msg_admin_attack("[user.name] ([user.ckey]) removed a vital organ ([src]) from [owner.name] ([owner.ckey]) (INTENT: [uppertext(user.a_intent)]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
+	if(owner && vital)
+		if(user)
+			user.attack_log += "\[[time_stamp()]\]<font color='red'> removed a vital organ ([src]) from [owner.name] ([owner.ckey]) (INTENT: [uppertext(user.a_intent)])</font>"
+			owner.attack_log += "\[[time_stamp()]\]<font color='orange'> had a vital organ ([src]) removed by [user.name] ([user.ckey]) (INTENT: [uppertext(user.a_intent)])</font>"
+			msg_admin_attack("[user.name] ([user.ckey]) removed a vital organ ([src]) from [owner.name] ([owner.ckey]) (INTENT: [uppertext(user.a_intent)]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
 		owner.death()
 
 /obj/item/organ/proc/replaced(var/mob/living/carbon/human/target,var/obj/item/organ/external/affected)

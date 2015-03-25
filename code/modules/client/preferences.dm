@@ -1693,8 +1693,13 @@ datum/preferences
 		var/obj/item/organ/external/O = character.organs_by_name[name]
 		if(O)
 			if(status == "amputated")
-				O.amputated = 1
-				O.status |= ORGAN_DESTROYED
+				character.organs_by_name[O.limb_name] = null
+				character.organs -= O
+				if(O.children) // This might need to become recursive.
+					for(var/obj/item/organ/external/child in O.children)
+						character.organs_by_name[child.limb_name] = null
+						character.organs -= child
+
 			else if(status == "cyborg")
 				O.status |= ORGAN_ROBOT
 		else

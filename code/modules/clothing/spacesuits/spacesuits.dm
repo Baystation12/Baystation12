@@ -89,5 +89,5 @@
 	// Otherwise, remove the splints.
 	for(var/obj/item/organ/external/E in supporting_limbs)
 		E.status &= ~ ORGAN_SPLINTED
-		user << "The suit stops supporting your [E.display_name]."
+		user << "The suit stops supporting your [E.name]."
 	supporting_limbs = list()

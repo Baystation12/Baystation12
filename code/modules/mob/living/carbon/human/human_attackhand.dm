@@ -5,8 +5,8 @@
 		var/obj/item/organ/external/temp = H.organs_by_name["r_hand"]
 		if(H.hand)
 			temp = H.organs_by_name["l_hand"]
-		if(temp && !temp.is_usable())
-			H << "\red You can't use your [temp.display_name]."
+		if(!temp || !temp.is_usable())
+			H << "\red You can't use your hand."
 			return
 
 	..()
@@ -100,6 +100,10 @@
 			var/hit_zone = H.zone_sel.selecting
 			var/obj/item/organ/external/affecting = get_organ(hit_zone)
 
+			if(!affecting || affecting.status & ORGAN_DESTROYED)
+				M << "<span class='danger'>They are missing that limb!</span>"
+				return
+
 			switch(src.a_intent)
 				if("help")
 					// We didn't see this coming, so we get the full blow
@@ -157,7 +161,7 @@
 					miss_type = 1
 
 			if(!miss_type && block)
-				attack_message = "[H] went for [src]'s [affecting.display_name] but was blocked!"
+				attack_message = "[H] went for [src]'s [affecting.name] but was blocked!"
 				miss_type = 2
 
 			// See what attack they use

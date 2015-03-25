@@ -64,9 +64,9 @@
 
 		if(!D.organs_scanned[O.name])
 			if(D.organ_names == "")
-				D.organ_names = O.display_name
+				D.organ_names = O.name
 			else
-				D.organ_names += ", [O.display_name]"
+				D.organ_names += ", [O.name]"
 
 		del D.organs_scanned[O.name]
 		D.organs_scanned[O.name] = W.copy()
@@ -199,7 +199,7 @@
 		usr << "<b>You have to cut the limb open first!</b>"
 		return
 	for(var/mob/O in viewers(M))
-		O.show_message("\red [user.name] scans the wounds on [M.name]'s [S.display_name] with \the [src.name]", 1)
+		O.show_message("\red [user.name] scans the wounds on [M.name]'s [S.name] with \the [src.name]", 1)
 
 	src.add_data(S)
 

@@ -938,8 +938,6 @@
 		O.status &= ~ORGAN_SPLINTED
 		O.status &= ~ORGAN_CUT_AWAY
 		O.status &= ~ORGAN_ATTACHABLE
-		if (!O.amputated)
-			O.status &= ~ORGAN_DESTROYED
 		O.wounds.Cut()
 		O.heal_damage(1000,1000,1,1)
 
@@ -1060,11 +1058,11 @@
 				var/msg = null
 				switch(rand(1,3))
 					if(1)
-						msg ="<span class='warning'>A spike of pain jolts your [organ.display_name] as you bump [O] inside.</span>"
+						msg ="<span class='warning'>A spike of pain jolts your [organ.name] as you bump [O] inside.</span>"
 					if(2)
-						msg ="<span class='warning'>Your movement jostles [O] in your [organ.display_name] painfully.</span>"
+						msg ="<span class='warning'>Your movement jostles [O] in your [organ.name] painfully.</span>"
 					if(3)
-						msg ="<span class='warning'>[O] in your [organ.display_name] twists painfully as you move.</span>"
+						msg ="<span class='warning'>[O] in your [organ.name] twists painfully as you move.</span>"
 				src << msg
 
 				organ.take_damage(rand(1,3), 0, 0)

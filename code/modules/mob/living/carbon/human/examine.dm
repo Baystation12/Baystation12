@@ -200,7 +200,7 @@
 	for(var/organ in list("l_leg","r_leg","l_arm","r_arm"))
 		var/obj/item/organ/external/o = get_organ(organ)
 		if(o && o.status & ORGAN_SPLINTED)
-			msg += "<span class='warning'>[t_He] [t_has] a splint on [t_his] [o.display_name]!</span>\n"
+			msg += "<span class='warning'>[t_He] [t_has] a splint on [t_his] [o.name]!</span>\n"
 
 	if(suiciding)
 		msg += "<span class='warning'>[t_He] appears to have commited suicide... there is no hope of recovery.</span>\n"
@@ -254,30 +254,30 @@
 	for(var/obj/item/organ/external/temp in organs)
 		if(temp)
 			if(temp.status & ORGAN_DESTROYED)
-				is_destroyed["[temp.display_name]"] = 1
-				wound_flavor_text["[temp.display_name]"] = "<span class='warning'><b>[t_He] is missing [t_his] [temp.display_name].</b></span>\n"
+				is_destroyed["[temp.name]"] = 1
+				wound_flavor_text["[temp.name]"] = "<span class='warning'><b>[t_He] is missing [t_his] [temp.name].</b></span>\n"
 				continue
 			if(temp.status & ORGAN_ROBOT)
 				if(!(temp.brute_dam + temp.burn_dam))
 					if(!species.flags & IS_SYNTHETIC)
-						wound_flavor_text["[temp.display_name]"] = "<span class='warning'>[t_He] has a robot [temp.display_name]!</span>\n"
+						wound_flavor_text["[temp.name]"] = "<span class='warning'>[t_He] has a robot [temp.name]!</span>\n"
 						continue
 				else
-					wound_flavor_text["[temp.display_name]"] = "<span class='warning'>[t_He] has a robot [temp.display_name]. It has"
+					wound_flavor_text["[temp.name]"] = "<span class='warning'>[t_He] has a robot [temp.name]. It has"
 				if(temp.brute_dam) switch(temp.brute_dam)
 					if(0 to 20)
-						wound_flavor_text["[temp.display_name]"] += " some dents"
+						wound_flavor_text["[temp.name]"] += " some dents"
 					if(21 to INFINITY)
-						wound_flavor_text["[temp.display_name]"] += pick(" a lot of dents"," severe denting")
+						wound_flavor_text["[temp.name]"] += pick(" a lot of dents"," severe denting")
 				if(temp.brute_dam && temp.burn_dam)
-					wound_flavor_text["[temp.display_name]"] += " and"
+					wound_flavor_text["[temp.name]"] += " and"
 				if(temp.burn_dam) switch(temp.burn_dam)
 					if(0 to 20)
-						wound_flavor_text["[temp.display_name]"] += " some burns"
+						wound_flavor_text["[temp.name]"] += " some burns"
 					if(21 to INFINITY)
-						wound_flavor_text["[temp.display_name]"] += pick(" a lot of burns"," severe melting")
-				if(wound_flavor_text["[temp.display_name]"])
-					wound_flavor_text["[temp.display_name]"] += "!</span>\n"
+						wound_flavor_text["[temp.name]"] += pick(" a lot of burns"," severe melting")
+				if(wound_flavor_text["[temp.name]"])
+					wound_flavor_text["[temp.name]"] += "!</span>\n"
 			else if(temp.wounds.len > 0)
 				var/list/wound_descriptors = list()
 				for(var/datum/wound/W in temp.wounds)
@@ -325,14 +325,14 @@
 						else if(flavor_text.len > 1 && text > 1)
 							flavor_text_string += ","
 						flavor_text_string += flavor_text[text]
-					flavor_text_string += " on [t_his] [temp.display_name].</span><br>"
-					wound_flavor_text["[temp.display_name]"] = flavor_text_string
+					flavor_text_string += " on [t_his] [temp.name].</span><br>"
+					wound_flavor_text["[temp.name]"] = flavor_text_string
 				else
-					wound_flavor_text["[temp.display_name]"] = ""
+					wound_flavor_text["[temp.name]"] = ""
 				if(temp.status & ORGAN_BLEEDING)
-					is_bleeding["[temp.display_name]"] = 1
+					is_bleeding["[temp.name]"] = 1
 			else
-				wound_flavor_text["[temp.display_name]"] = ""
+				wound_flavor_text["[temp.name]"] = ""
 
 	//Handles the text strings being added to the actual description.
 	//If they have something that covers the limb, and it is not missing, put flavortext.  If it is covered but bleeding, add other flavortext.

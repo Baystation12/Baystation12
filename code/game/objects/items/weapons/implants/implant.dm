@@ -35,7 +35,7 @@
 		return 0
 
 	proc/meltdown()	//breaks it down, making implant unrecongizible
-		imp_in << "\red You feel something melting inside [part ? "your [part.display_name]" : "you"]!"
+		imp_in << "\red You feel something melting inside [part ? "your [part.name]" : "you"]!"
 		if (part)
 			part.take_damage(burn = 15, used_weapon = "Electronics meltdown")
 		else
@@ -171,7 +171,7 @@ Implant Specifics:<BR>"}
 			if(ishuman(imp_in))
 				if (elevel == "Localized Limb")
 					if(part) //For some reason, small_boom() didn't work. So have this bit of working copypaste.
-						imp_in.visible_message("\red Something beeps inside [imp_in][part ? "'s [part.display_name]" : ""]!")
+						imp_in.visible_message("\red Something beeps inside [imp_in][part ? "'s [part.name]" : ""]!")
 						playsound(loc, 'sound/items/countdown.ogg', 75, 1, -3)
 						sleep(25)
 						if (istype(part,/obj/item/organ/external/chest) ||	\
@@ -182,7 +182,7 @@ Implant Specifics:<BR>"}
 							del(src)
 						else
 							explosion(get_turf(imp_in), -1, -1, 2, 3)
-							part.droplimb(1)
+							part.droplimb()
 							del(src)
 				if (elevel == "Destroy Body")
 					explosion(get_turf(T), -1, 0, 1, 6)
@@ -236,7 +236,7 @@ Implant Specifics:<BR>"}
 
 	proc/small_boom()
 		if (ishuman(imp_in) && part)
-			imp_in.visible_message("\red Something beeps inside [imp_in][part ? "'s [part.display_name]" : ""]!")
+			imp_in.visible_message("\red Something beeps inside [imp_in][part ? "'s [part.name]" : ""]!")
 			playsound(loc, 'sound/items/countdown.ogg', 75, 1, -3)
 			spawn(25)
 				if (ishuman(imp_in) && part)
@@ -247,7 +247,7 @@ Implant Specifics:<BR>"}
 						istype(part,/obj/item/organ/external/head))
 						part.createwound(BRUISE, 60)	//mangle them instead
 					else
-						part.droplimb(1)
+						part.droplimb()
 				explosion(get_turf(imp_in), -1, -1, 2, 3)
 				del(src)
 

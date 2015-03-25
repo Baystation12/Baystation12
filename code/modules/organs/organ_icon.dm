@@ -56,7 +56,9 @@ var/global/list/limb_icon_cache = list()
 				mob_icon.Blend(rgb(owner.r_skin, owner.g_skin, owner.b_skin), ICON_ADD)
 
 	dir = EAST
+	item_icon = icon(mob_icon,icon_state,SOUTH)
 	icon = mob_icon
+
 	return mob_icon
 
 /obj/item/organ/external/head/get_icon(var/skeletal)
