@@ -562,7 +562,7 @@ var/list/ghostteleportlocs = list()
 /area/prison/solitary
 	name = "\improper Solitary Confinement"
 	icon_state = "brig"
-	
+
 /area/prison/yard
 	name = "\improper Labor Camp Yard"
 	icon_state = ""
@@ -866,7 +866,11 @@ var/list/ghostteleportlocs = list()
 	icon_state = "toilet"
 
 /area/crew_quarters/sleep/bedrooms
-	name = "\improper Dormitory Bedroom One"
+	name = "\improper Dormitory Bedroom 1"
+	icon_state = "Sleep"
+
+/area/crew_quarters/sleep/bedroomstwo
+	name = "\improper Dormitory Bedroom 2"
 	icon_state = "Sleep"
 
 /area/crew_quarters/sleep/cryo
