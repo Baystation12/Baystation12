@@ -39,11 +39,8 @@
 
 		var/options = list("monkey", "robot", "slime")
 		for(var/t in all_species)
-			if(!istype(all_species[t], /datum/species/xenos))
-				options += t
-		options += "Hunter" // Unfortunately, create_new_xenomorph needs xeno's name without "Xenomorph" part, so they can't be just drawn from species list
-		options += "Sentinel"
-		options += "Drone"
+			options += t
+		options -= "Xenomorph Queen"
 		if(ismonkey(M))
 			options -= "monkey"
 		if(isrobot(M))
@@ -71,8 +68,8 @@
 			if("slime")
 				new_mob = new /mob/living/carbon/slime(M.loc)
 				new_mob.universal_speak = 1
-			if("Hunter", "Sentinel", "Drone")
-				new_mob = create_new_xenomorph(randomize, M.loc)
+			if("Xenomorph Hunter", "Xenomorph Sentinel", "Xenomorph Drone")
+				new_mob = create_new_xenomorph(copytext(randomize, 11), M.loc)
 				new_mob.universal_speak = 1
 			else
 				new_mob = new /mob/living/carbon/human(M.loc, randomize)
