@@ -300,7 +300,7 @@
 
 	else if(href_list["simplemake"])
 
-		if(!check_rights(R_SPAWN))	return
+		if(!check_rights(/*R_SPAWN*/R_SERVER))	return
 
 		var/mob/M = locate(href_list["mob"])
 		if(!ismob(M))
@@ -1074,7 +1074,7 @@
 		.(href, list("f_secret"=1))
 
 	else if(href_list["monkeyone"])
-		if(!check_rights(R_SPAWN))	return
+		if(!check_rights(/*R_SPAWN*/R_SERVER))	return
 
 		var/mob/living/carbon/human/H = locate(href_list["monkeyone"])
 		if(!istype(H))
@@ -1087,7 +1087,7 @@
 		H.monkeyize()
 
 	else if(href_list["corgione"])
-		if(!check_rights(R_SPAWN))	return
+		if(!check_rights(/*R_SPAWN*/R_SERVER))	return
 
 		var/mob/living/carbon/human/H = locate(href_list["corgione"])
 		if(!istype(H))
@@ -1294,7 +1294,7 @@
 			usr << "Admin Rejuvinates have been disabled"
 
 	else if(href_list["makeai"])
-		if(!check_rights(R_SPAWN))	return
+		if(!check_rights(/*R_SPAWN*/R_SERVER))	return
 
 		var/mob/living/carbon/human/H = locate(href_list["makeai"])
 		if(!istype(H))
@@ -1307,7 +1307,7 @@
 		H.AIize()
 
 	else if(href_list["makealien"])
-		if(!check_rights(R_SPAWN))	return
+		if(!check_rights(/*R_SPAWN*/R_SERVER))	return
 
 		var/mob/living/carbon/human/H = locate(href_list["makealien"])
 		if(!istype(H))
@@ -1317,7 +1317,7 @@
 		usr.client.cmd_admin_alienize(H)
 
 	else if(href_list["makeslime"])
-		if(!check_rights(R_SPAWN))	return
+		if(!check_rights(/*R_SPAWN*/R_SERVER))	return
 
 		var/mob/living/carbon/human/H = locate(href_list["makeslime"])
 		if(!istype(H))
@@ -1327,7 +1327,7 @@
 		usr.client.cmd_admin_slimeize(H)
 
 	else if(href_list["makepai"])
-		if(!check_rights(R_SPAWN))	return
+		if(!check_rights(/*R_SPAWN*/R_SERVER))	return
 
 		var/mob/M = locate(href_list["makepai"])
 		if(!istype(M))
@@ -1337,7 +1337,7 @@
 		M.pAItransform()
 
 	else if(href_list["makerobot"])
-		if(!check_rights(R_SPAWN))	return
+		if(!check_rights(/*R_SPAWN*/R_SERVER))	return
 
 		var/mob/living/carbon/human/H = locate(href_list["makerobot"])
 		if(!istype(H))
@@ -1347,7 +1347,7 @@
 		usr.client.cmd_admin_robotize(H)
 
 	else if(href_list["makeanimal"])
-		if(!check_rights(R_SPAWN))	return
+		if(!check_rights(/*R_SPAWN*/R_SERVER))	return
 
 		var/mob/M = locate(href_list["makeanimal"])
 		if(istype(M, /mob/new_player))
@@ -1357,7 +1357,7 @@
 		usr.client.cmd_admin_animalize(M)
 
 	else if(href_list["togmutate"])
-		if(!check_rights(R_SPAWN))	return
+		if(!check_rights(/*R_SPAWN*/R_SERVER))	return
 
 		var/mob/living/carbon/human/H = locate(href_list["togmutate"])
 		if(!istype(H))
@@ -1451,8 +1451,7 @@
 		var/recieve_msg = "\blue <b>Your issue is being dealt with by <a href='?src=\ref[usr];priv_msg=\ref[src.owner]'>[usr.client.holder.fakekey ? "Administrator" : usr.key].</a></font> Click their name to send them more information about your issue.</b>"
 		M << recieve_msg
 		for(var/client/X in admins)
-			if(check_rights(R_ADMIN|R_MOD|R_MENTOR,0))
-				X << take_msg
+			X << take_msg
 
 	else if(href_list["takefax"])
 		var/mob/Sender = locate(href_list["takefax"])
@@ -1802,23 +1801,23 @@
 		show_traitor_panel(M)
 
 	else if(href_list["create_object"])
-		if(!check_rights(R_SPAWN))	return
+		if(!check_rights(/*R_SPAWN*/R_SERVER))	return
 		return create_object(usr)
 
 	else if(href_list["quick_create_object"])
-		if(!check_rights(R_SPAWN))	return
+		if(!check_rights(/*R_SPAWN*/R_SERVER))	return
 		return quick_create_object(usr)
 
 	else if(href_list["create_turf"])
-		if(!check_rights(R_SPAWN))	return
+		if(!check_rights(/*R_SPAWN*/R_SERVER))	return
 		return create_turf(usr)
 
 	else if(href_list["create_mob"])
-		if(!check_rights(R_SPAWN))	return
+		if(!check_rights(/*R_SPAWN*/R_SERVER))	return
 		return create_mob(usr)
 
 	else if(href_list["object_list"])			//this is the laggiest thing ever
-		if(!check_rights(R_SPAWN))	return
+		if(!check_rights(/*R_SPAWN*/R_SERVER))	return
 
 		if(!config.allow_admin_spawning)
 			usr << "Spawning of items is not allowed."
@@ -2625,6 +2624,38 @@
 			log_admin_single("[key_name(usr)] used secret [href_list["secretsfun"]]")
 			if (ok)
 				world << text("<B>A secret has been activated by []!</B>", usr.key)
+	else if(href_list["secretsmod"])
+		if(!check_rights(R_POSSESS))	return
+		switch(href_list["secretsmod"])
+			if("togglebombcap")
+				feedback_inc("admin_secrets_fun_used",1)
+				feedback_add_details("admin_secrets_fun_used","BC")
+				switch(MAX_EXPLOSION_RANGE)
+					if(14)	MAX_EXPLOSION_RANGE = 16
+					if(16)	MAX_EXPLOSION_RANGE = 20
+					if(20)	MAX_EXPLOSION_RANGE = 28
+					if(28)	MAX_EXPLOSION_RANGE = 56
+					if(56)	MAX_EXPLOSION_RANGE = 128
+					if(128)	MAX_EXPLOSION_RANGE = 14
+				var/range_dev = MAX_EXPLOSION_RANGE *0.25
+				var/range_high = MAX_EXPLOSION_RANGE *0.5
+				var/range_low = MAX_EXPLOSION_RANGE
+				message_admins("\red <b> [key_name_admin(usr)] changed the bomb cap to [range_dev], [range_high], [range_low]</b>", 1)
+				log_admin("[key_name_admin(usr)] changed the bomb cap to [MAX_EXPLOSION_RANGE]")
+				log_admin_single("[key_name_admin(usr)] changed the bomb cap to [MAX_EXPLOSION_RANGE]")
+
+			if("togglebomboff")
+				feedback_inc("admin_secrets_fun_used",1)
+				feedback_add_details("admin_secrets_fun_used","BCF")
+				if(MAX_EXPLOSION_RANGE != 0)
+					MAX_EXPLOSION_RANGE = 0
+				else
+					MAX_EXPLOSION_RANGE = 14
+				var/range_dev = MAX_EXPLOSION_RANGE *0.25
+				var/range_high = MAX_EXPLOSION_RANGE *0.5
+				var/range_low = MAX_EXPLOSION_RANGE
+				message_admins("\red <b> [key_name_admin(usr)] changed the bomb cap to [range_dev], [range_high], [range_low]</b>", 1)
+				log_admin("[key_name_admin(usr)] changed the bomb cap to [MAX_EXPLOSION_RANGE]")
 
 	else if(href_list["secretsadmin"])
 		if(!check_rights(R_ADMIN))	return
@@ -2676,36 +2707,6 @@
 				usr << browse(dat, "window=manifest;size=440x410")
 			if("check_antagonist")
 				check_antagonists()
-
-			if("togglebombcap")
-				feedback_inc("admin_secrets_fun_used",1)
-				feedback_add_details("admin_secrets_fun_used","BC")
-				switch(MAX_EXPLOSION_RANGE)
-					if(14)	MAX_EXPLOSION_RANGE = 16
-					if(16)	MAX_EXPLOSION_RANGE = 20
-					if(20)	MAX_EXPLOSION_RANGE = 28
-					if(28)	MAX_EXPLOSION_RANGE = 56
-					if(56)	MAX_EXPLOSION_RANGE = 128
-					if(128)	MAX_EXPLOSION_RANGE = 14
-				var/range_dev = MAX_EXPLOSION_RANGE *0.25
-				var/range_high = MAX_EXPLOSION_RANGE *0.5
-				var/range_low = MAX_EXPLOSION_RANGE
-				message_admins("\red <b> [key_name_admin(usr)] changed the bomb cap to [range_dev], [range_high], [range_low]</b>", 1)
-				log_admin("[key_name_admin(usr)] changed the bomb cap to [MAX_EXPLOSION_RANGE]")
-				log_admin_single("[key_name_admin(usr)] changed the bomb cap to [MAX_EXPLOSION_RANGE]")
-
-			if("togglebomboff")
-				feedback_inc("admin_secrets_fun_used",1)
-				feedback_add_details("admin_secrets_fun_used","BCF")
-				if(MAX_EXPLOSION_RANGE != 0)
-					MAX_EXPLOSION_RANGE = 0
-				else
-					MAX_EXPLOSION_RANGE = 14
-				var/range_dev = MAX_EXPLOSION_RANGE *0.25
-				var/range_high = MAX_EXPLOSION_RANGE *0.5
-				var/range_low = MAX_EXPLOSION_RANGE
-				message_admins("\red <b> [key_name_admin(usr)] changed the bomb cap to [range_dev], [range_high], [range_low]</b>", 1)
-				log_admin("[key_name_admin(usr)] changed the bomb cap to [MAX_EXPLOSION_RANGE]")
 
 			if("DNA")
 				var/dat = "<B>Showing DNA from blood.</B><HR>"
@@ -2991,7 +2992,7 @@
 				vsc.SetDefault(usr)
 
 	// Maxis
-	else if(href_list["icwl"])
+	/*else if(href_list["icwl"])
 		if(check_rights(R_MOD|R_ADMIN))
 
 			var/mob/M = locate(href_list["icwl"])
@@ -3006,7 +3007,7 @@
 				log_admin("[key_name_admin(usr)] has whitelisted [M.ckey]")
 
 			show_player_panel(M)
-
+*/
 	else if(href_list["iaa"])
 		if(check_rights(R_ADMIN))
 

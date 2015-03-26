@@ -97,9 +97,9 @@ var/global/datum/controller/occupations/job_master
 			if(!job.player_old_enough(player.client))
 				Debug("FOC player not old enough, Player: [player]")
 				continue
-			if(!icwl_canHaveJob(player, job.title))
+			/*if(!icwl_canHaveJob(player, job.title))
 				Debug("FOC character failed whitelist, Player: [player], Job: [job.title]")
-				continue
+				continue*/
 			if(flag && (!player.client.prefs.be_special & flag))
 				Debug("FOC flag failed, Player: [player], Flag: [flag], ")
 				continue
@@ -128,9 +128,9 @@ var/global/datum/controller/occupations/job_master
 				Debug("GRJ player not old enough, Player: [player]")
 				continue
 
-			if(!icwl_canHaveJob(player, job.title))
+			/*if(!icwl_canHaveJob(player, job.title))
 				Debug("GRJ character failed whitelist, Player: [player], Job: [job.title]")
-				continue
+				continue*/
 
 			if((job.current_positions < job.spawn_positions) || job.spawn_positions == -1)
 				Debug("GRJ Random job given, Player: [player], Job: [job]")
@@ -562,7 +562,7 @@ var/global/datum/controller/occupations/job_master
 		if(job.req_admin_notify)
 			H << "<b>You are playing a job that is important for Game Progression. If you have to disconnect, please notify the admins via adminhelp.</b>"
 		if(job.bs_jobban_warning)
-			H << "\red <b>AS A BLUESHIELD GUARD, YOU MUST FOLLOW A <a href='http://www.unbound-travels.com/showthread.php?2552-Blueshield-Standard-Operating-Procedure'>STRICT STANDARD OPERATING PROCEDURE</a>. IF YOU DO NOT, YOU WILL BE JOBBANNED. IF YOU ARE UNSURE ABOUT SOMETHING, ADMINHELP."
+			H << "\red <b>AS A BLUESHIELD GUARD, YOU MUST FOLLOW A <a href='http://www.unbound-travels.com/showthread.php?3353-Blueshield-Standard-Operating-Proceedure-Re-Vamped'>STRICT STANDARD OPERATING PROCEDURE</a>. IF YOU DO NOT, YOU WILL BE JOBBANNED. IF YOU ARE UNSURE ABOUT SOMETHING, ADMINHELP."
 		spawnId(H, rank, alt_title)
 		H.equip_to_slot_or_del(new /obj/item/device/radio/headset(H), slot_l_ear)
 
@@ -696,7 +696,7 @@ var/global/datum/controller/occupations/job_master
 			var/level4 = 0 //never
 			var/level5 = 0 //banned
 			var/level6 = 0 //account too young
-			var/level7 = 0 //ICWL
+		//	var/level7 = 0 //ICWL
 			for(var/mob/new_player/player in player_list)
 				if(!(player.ready && player.mind && !player.mind.assigned_role))
 					continue //This player is not ready
@@ -706,8 +706,8 @@ var/global/datum/controller/occupations/job_master
 				if(!job.player_old_enough(player.client))
 					level6++
 					continue
-				if(icwl_canHaveJob(player, job.title))
-					level7++
+				/*if(icwl_canHaveJob(player, job.title))
+					level7++*/
 					continue
 				if(player.client.prefs.GetJobDepartment(job, 1) & job.flag)
 					level1++
@@ -717,7 +717,7 @@ var/global/datum/controller/occupations/job_master
 					level3++
 				else level4++ //not selected
 
-			tmp_str += "HIGH=[level1]|MEDIUM=[level2]|LOW=[level3]|NEVER=[level4]|BANNED=[level5]|YOUNG=[level6]|ICWL=[level7]|-"
+			tmp_str += "HIGH=[level1]|MEDIUM=[level2]|LOW=[level3]|NEVER=[level4]|BANNED=[level5]|YOUNG=[level6]|-"
 			feedback_add_details("job_preferences",tmp_str)
 
 	proc/getdeptaccess(var/dept)

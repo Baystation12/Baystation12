@@ -56,7 +56,7 @@ var/global/floorIsLava = 0
 	else
 		body += " \[<A href='?src=\ref[src];revive=\ref[M]'>Heal</A>\] "
 
-	var/icwl = icwl_isWhitelisted(M.ckey)
+	//var/icwl = icwl_isWhitelisted(M.ckey)
 	body += {"
 		<br><br>\[
 		<a href='?_src_=vars;Vars=\ref[M]'>VV</a> -
@@ -69,8 +69,7 @@ var/global/floorIsLava = 0
 		<A href='?_src_=holder;warn=[M.ckey]'>Warn</A> |
 		<A href='?src=\ref[src];newban=\ref[M]'>Ban</A> |
 		<A href='?src=\ref[src];jobban2=\ref[M]'>Jobban</A> |
-		<A href='?src=\ref[src];notes=show;mob=\ref[M]'>Notes</A> |
-		<A href='?src=\ref[src];icwl=\ref[M]'><font color='[icwl?"blue":"red"]'>ICWL</font></A>
+		<A href='?src=\ref[src];notes=show;mob=\ref[M]'>Notes</A>
 	"}
 
 	if(M.client)
@@ -667,11 +666,11 @@ var/global/floorIsLava = 0
 			<A href='?src=\ref[src];secretsfun=dbzmode'>DBZ Mode (Everyones a Wizard)</A><BR>
 			"}
 
-	if(check_rights(R_SERVER,0))
-		dat += "<A href='?src=\ref[src];secretsadmin=togglebombcap'>Toggle bomb cap</A><BR>"
-		dat += "<A href='?src=\ref[src];secretsadmin=togglebomboff'>Toggle bombs off</A><BR>"
-
-	dat += "<BR>"
+	if(check_rights(R_POSSESS,0))
+		dat +="<BR><B>Bombs</B><BR>"
+		dat += "<A href='?src=\ref[src];secretsmod=togglebombcap'>Toggle bomb cap</A><BR>"
+		dat += "<A href='?src=\ref[src];secretsmod=togglebomboff'>Toggle bombs off</A><BR>"
+		dat += "<BR>"
 
 	if(check_rights(R_DEBUG,0))
 		dat += {"
@@ -720,6 +719,38 @@ var/global/floorIsLava = 0
 		sleep(50)
 		world.Reboot()
 
+/datum/admins/proc/endround()
+	set category = "Server"
+	set name = "End Round"
+	set desc="Ends the Round"
+	if(!ticker)
+		alert("huh...what are you doing...the game hasn't even started yet...")
+		return
+	if(!ticker.mode)
+		alert("huh...what are you doing...the game hasn't even started yet...")
+		return
+	if (ticker.current_state == GAME_STATE_FINISHED)
+		if (!usr.client.holder)
+			return
+		var/confirm = alert("End the Round?", "End Round", "Yes", "Cancel")
+		if(confirm == "Cancel")
+			return
+		if(confirm == "Yes")
+			world << "\red <b>Restarting world!</b> \blue Round End Initiated by [usr.client.holder.fakekey ? "Admin" : usr.key]!"
+			log_admin("[key_name(usr)] initiated a round end.")
+			log_admin_single("[key_name(usr)] initiated a round end.")
+
+			feedback_set_details("end_error","admin round end - by [usr.key] [usr.client.holder.fakekey ? "(stealth)" : ""]")
+			feedback_add_details("admin_verb","R") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+
+			if(blackbox)
+				blackbox.save_all_data_to_sql()
+
+			sleep(50)
+			world.Reboot()
+	else
+		alert("The round cannot be ended untill the shuttle is docked with Centcom.")
+		return
 
 /datum/admins/proc/announce()
 	set category = "Special Verbs"
@@ -1060,7 +1091,7 @@ var/global/floorIsLava = 0
 	set desc = "(atom path) Spawn an atom"
 	set name = "Spawn"
 
-	if(!check_rights(R_SPAWN))	return
+	if(!check_rights(/*R_SPAWN*/R_SERVER))	return
 
 	var/list/types = typesof(/atom)
 	var/list/matches = new()

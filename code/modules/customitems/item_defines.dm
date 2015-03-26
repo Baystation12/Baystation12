@@ -1443,3 +1443,41 @@
 /obj/item/clothing/under/lawyer/black/yithani
 	name = "Zaramiyrh's suit"
 	desc = "A silk-woven black suit with dull gold embroidery. A clip hangs from the side, allowing a harness to be attached."
+
+/obj/item/clothing/suit/storage/labcoat/kidafrag //Fraggloid
+	name = "frag jacket"
+	desc = "A slightly worn and battered combat jacket, with Kida military insignia. That fur collar looks quite cosy."
+	icon_state = "kidafrag_open"
+	item_state = "kidafrag_open"
+	armor = list(melee = 25, bullet = 25, laser = 15, energy = 5, bomb = 5, bio = 0, rad = 0) //Just a little bit of armor. We want this guy to be wearing it on code green.
+
+/obj/item/clothing/under/rank/chemist/winter //Winterbrass
+	name = "Winters' jumpsuit"
+	desc = "This is a wraparound coat, held closed with a pair of black clasps, with teal piping along the edges and down the arms; there are a pair of black slacks with it. Both pieces of clothing have a faint reflective sheen."
+	icon_state = "wintersuit"
+	item_state = "wintersuit"
+	item_color = "wintersuit"
+
+/obj/item/clothing/under/rank/miner/kidaminer //Majora
+	desc = "This old and worn brown dress smells of various pheromones woven into the fabric with a miner's insignia on the back. It reads \"Miner Class Laborer.\" It is clear this jacket was not intended for humans due to the tight waist section."
+	name = "Kidan mining dress"
+	icon_state = "kidaminer"
+	item_state = "kidaminer"
+	item_color = "kidaminer"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS //Sleeveless.
+
+/obj/item/clothing/head/beret/sec/ris //Cdb
+	name = "R.I.S beret"
+	desc = "A worn looking beret with a small metal brooch, a pair of crossed blades over a clenched fist. Getting too close, it bears a faint chemical smell."
+	icon_state = "beret_badge"
+	flags = FPRINT | TABLEPASS
+
+/obj/item/clothing/under/rank/security/ris //Cdb
+	name = "R.I.S uniform"
+	desc = "A typical PMC uniform with a red patch on the shoulder bearing the image of what appears to be a wolf-dog wearing a respirator, the words \"41st tox-hounds.\" written beneath. The chest bears a similar patch reading \"Red Iron Security. Jane-Luc Price, Proctor.\""
+	icon_state = "hosdnavyclothes"
+	item_state = "harper_uniform"
+	item_color = "harper_uniform"
+	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
+	flags = FPRINT | TABLEPASS
+	siemens_coefficient = 0.9

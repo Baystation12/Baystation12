@@ -1,5 +1,5 @@
 
-var/global/normal_ooc_colour = "#505050"
+var/global/normal_ooc_colour = "#506AB7"
 
 /client/verb/ooc(msg as text)
 	set name = "OOC" //Gave this shit a shorter name so you only have to time out "ooc" rather than "ooc message" to use it --NeoFite
@@ -49,7 +49,7 @@ var/global/normal_ooc_colour = "#505050"
 			display_colour = "#005a31"	//dark green
 
 	if(holder && !holder.fakekey)
-		display_colour = "#505050"	//light blue
+		display_colour = "#506AB7"	//light blue
 		if(holder.rights & R_MOD && !(holder.rights & R_ADMIN))
 			display_colour = "#184880"	//dark blue
 		//if(holder.rights & R_DEBUG && !(holder.rights & R_ADMIN))

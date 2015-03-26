@@ -247,6 +247,8 @@ datum/preferences
 					language = "None"
 		if (species == "Tajaran")
 			species = "Tajara"
+		if (species == "kidan")
+			species = "Kidan"
 	update_preview_icon()
 	user << browse_rsc(preview_icon_front, "previewicon.png")
 	user << browse_rsc(preview_icon_side, "previewicon2.png")
@@ -300,7 +302,7 @@ datum/preferences
 			var/datum/gear/G = gear_datums[gear[i]]
 			if(G)
 				total_cost += G.cost
-				dat += "[gear[i]] ([G.cost] points) <a href='?_src_=prefs=\ref[user];preference=loadout;task=remove;gear=[i]'>\[remove\]</a><br>"
+				dat += "[gear[i]] ([G.cost] points) <a href='?_src_=prefs;preference=loadout;task=remove;gear=[i]'>\[remove\]</a><br>"
 
 		dat += "<b>Used:</b> [total_cost] points."
 	else
@@ -507,9 +509,9 @@ datum/preferences
 			var/available_in_days = job.available_in_days(user.client)
 			HTML += "<del>[rank]</del></td><td> \[IN [(available_in_days)] DAYS]</td></tr>"
 			continue
-		if(!icwl_canHaveJob(user, rank))
+		/*if(!icwl_canHaveJob(user, rank))
 			HTML += "<del>[rank]</del></td><td><b> \[ICWL]</b></td></tr>"
-			continue
+			continue*/
 		if((job_civilian_low & ASSISTANT) && (rank != "Assistant"))
 			HTML += "<font color=orange>[rank]</font></td><td></td></tr>"
 			continue
