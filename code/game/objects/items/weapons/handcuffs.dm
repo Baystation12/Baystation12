@@ -67,20 +67,6 @@
 			O.process()
 		return
 
-	if (ismonkey(target))
-		var/mob/living/carbon/monkey/M = target
-		var/obj/effect/equip_e/monkey/O = new /obj/effect/equip_e/monkey(  )
-		O.source = user
-		O.target = M
-		O.item = user.get_active_hand()
-		O.s_loc = user.loc
-		O.t_loc = M.loc
-		O.place = "handcuff"
-		M.requests += O
-		spawn( 0 )
-			O.process()
-		return
-
 var/last_chew = 0
 /mob/living/carbon/human/RestrainedClickOn(var/atom/A)
 	if (A != src) return ..()

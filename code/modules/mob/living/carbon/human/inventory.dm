@@ -351,10 +351,6 @@ This saves us from having to call add_fingerprint() any time something is put in
 	name = "human"
 	var/mob/living/carbon/human/target = null
 
-/obj/effect/equip_e/monkey
-	name = "monkey"
-	var/mob/living/carbon/monkey/target = null
-
 /obj/effect/equip_e/process()
 	return
 

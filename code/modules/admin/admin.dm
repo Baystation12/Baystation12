@@ -92,7 +92,7 @@ var/global/floorIsLava = 0
 			body += "<br>"
 
 			//Monkey
-			if(ismonkey(M))
+			if(issmall(M))
 				body += "<B>Monkeyized</B> | "
 			else
 				body += "<A href='?src=\ref[src];monkeyone=\ref[M]'>Monkeyize</A> | "
@@ -952,25 +952,6 @@ var/global/floorIsLava = 0
 			return 1
 
 	return 0
-
-/*
-/datum/admins/proc/get_sab_desc(var/target)
-	switch(target)
-		if(1)
-			return "Destroy at least 70% of the phoron canisters on the station"
-		if(2)
-			return "Destroy the AI"
-		if(3)
-			var/count = 0
-			for(var/mob/living/carbon/monkey/Monkey in world)
-				if(Monkey.z in station_levels)
-					count++
-			return "Kill all [count] of the monkeys on the station"
-		if(4)
-			return "Cut power to at least 80% of the station"
-		else
-			return "Error: Invalid sabotage target: [target]"
-*/
 
 /datum/admins/proc/spawn_fruit()
 	set category = "Debug"
