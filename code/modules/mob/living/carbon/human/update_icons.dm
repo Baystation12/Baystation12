@@ -175,15 +175,6 @@ Please contact me on #coderbus IRC. ~Carn x
 		src.transform = M
 
 var/global/list/damage_icon_parts = list()
-proc/get_damage_icon_part(damage_state, body_part)
-	if(damage_icon_parts["[damage_state]/[body_part]"] == null)
-		var/icon/DI = new /icon('icons/mob/dam_human.dmi', damage_state)			// the damage icon for whole human
-		// TODO: Convert dam_human.dmi to greyscale and blend in species.blood_colour here.
-		DI.Blend(new /icon('icons/mob/dam_mask.dmi', body_part), ICON_MULTIPLY)		// mask with this organ's pixels
-		damage_icon_parts["[damage_state]/[body_part]"] = DI
-		return DI
-	else
-		return damage_icon_parts["[damage_state]/[body_part]"]
 
 //DAMAGE OVERLAYS
 //constructs damage icon for each organ from mask * damage field and saves it in our overlays_ lists
@@ -202,7 +193,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 
 	previous_damage_appearance = damage_appearance
 
-	var/icon/standing = new /icon('icons/mob/dam_human.dmi', "00")
+	var/icon/standing = new /icon(species.damage_overlays, "00")
 
 	var/image/standing_image = new /image("icon" = standing)
 
@@ -211,8 +202,15 @@ proc/get_damage_icon_part(damage_state, body_part)
 		if(!(O.status & ORGAN_DESTROYED))
 			O.update_icon()
 			if(O.damage_state == "00") continue
-
-			var/icon/DI = get_damage_icon_part(O.damage_state, O.icon_name)
+			var/icon/DI
+			var/cache_index = "[O.damage_state]/[O.icon_name]/[species.blood_color]/[species.name]"
+			if(damage_icon_parts[cache_index] == null)
+				DI = new /icon(species.damage_overlays, O.damage_state)			// the damage icon for whole human
+				DI.Blend(new /icon(species.damage_mask, O.icon_name), ICON_MULTIPLY)	// mask with this organ's pixels
+				DI.Blend(species.blood_color, ICON_MULTIPLY)
+				damage_icon_parts[cache_index] = DI
+			else
+				DI = damage_icon_parts["[O.damage_state]/[O.icon_name]"]
 
 			standing_image.overlays += DI
 

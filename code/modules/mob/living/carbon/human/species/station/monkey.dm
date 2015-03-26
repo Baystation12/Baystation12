@@ -5,6 +5,8 @@
 
 	icobase = 'icons/mob/human_races/monkeys/r_monkey.dmi'
 	deform = 'icons/mob/human_races/monkeys/r_monkey.dmi'
+	damage_overlays = 'icons/mob/human_races/masks/dam_monkey.dmi'
+	damage_mask = 'icons/mob/human_races/masks/dam_mask_monkey.dmi'
 
 	language = null
 	default_language = "Chimpanzee"
