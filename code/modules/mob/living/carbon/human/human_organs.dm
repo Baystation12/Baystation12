@@ -1,3 +1,9 @@
+/mob/living/carbon/human/proc/update_eyes()
+	if(internal_organs_by_name["eyes"])
+		var/obj/item/organ/eyes/eyes = internal_organs_by_name["eyes"]
+		eyes.eye_colour = list(r_eyes,g_eyes,b_eyes)
+		regenerate_icons()
+
 /mob/living/carbon/var/list/internal_organs = list()
 /mob/living/carbon/human/var/list/organs = list()
 /mob/living/carbon/human/var/list/organs_by_name = list() // map organ names to organs

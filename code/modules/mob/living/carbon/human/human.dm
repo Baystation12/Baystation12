@@ -801,10 +801,7 @@
 		r_eyes = hex2num(copytext(new_eyes, 2, 4))
 		g_eyes = hex2num(copytext(new_eyes, 4, 6))
 		b_eyes = hex2num(copytext(new_eyes, 6, 8))
-		if(internal_organs_by_name["eyes"])
-			var/obj/item/organ/eyes/eyes = internal_organs_by_name["eyes"]
-			eyes.eye_colour = list(r_eyes,g_eyes,b_eyes)
-
+		update_eyes()
 
 	var/new_tone = input("Please select skin tone level: 1-220 (1=albino, 35=caucasian, 150=black, 220='very' black)", "Character Generation", "[35-s_tone]")  as text
 

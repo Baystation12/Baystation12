@@ -433,15 +433,9 @@ var/list/sacrificed = list()
 			D.b_eyes = 200
 			D.r_eyes = 200
 			D.g_eyes = 200
-			if(D.internal_organs_by_name["eyes"])
-				var/obj/item/organ/eyes/eyes = D.internal_organs_by_name["eyes"]
-				eyes.eye_colour = list(D.r_eyes,D.g_eyes,D.b_eyes)
-
-
+			D.update_eyes()
 			D.underwear = 0
-
 			D.key = ghost.key
-
 			cult.add_antagonist(D.mind)
 
 			if(!chose_name)
