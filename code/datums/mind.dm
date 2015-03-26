@@ -593,10 +593,3 @@ datum/mind
 	..()
 	mind.assigned_role = "Juggernaut"
 	mind.special_role = "Cultist"
-
-/mob/living/simple_animal/vox/armalis/mind_initialize()
-	..()
-	mind.assigned_role = "Armalis"
-	mind.special_role = "Vox Raider"
-
-
