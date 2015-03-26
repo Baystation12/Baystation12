@@ -11,7 +11,7 @@
 	invocation_type = "shout"
 	range = 7
 	selection_type = "range"
-	var/list/compatible_mobs = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
+	var/list/compatible_mobs = list(/mob/living/carbon/human)
 
 /obj/effect/proc_holder/spell/targeted/horsemask/cast(list/targets, mob/user = usr)
 	if(!targets.len)
@@ -43,7 +43,7 @@
 	dropped(mob/user as mob)
 		canremove = 1
 		..()
-	
+
 	equipped(var/mob/user, var/slot)
 		if (slot == slot_wear_mask)
 			canremove = 0		//curses!

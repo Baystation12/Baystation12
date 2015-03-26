@@ -195,9 +195,8 @@
 			slab_type = critter.meat_type
 	else if(istype(src.occupant,/mob/living/carbon/human))
 		slab_name = src.occupant.real_name
+		// /obj/item/weapon/reagent_containers/food/snacks/meat/monkey Move to species datum.
 		slab_type = /obj/item/weapon/reagent_containers/food/snacks/meat/human
-	else if(istype(src.occupant, /mob/living/carbon/monkey))
-		slab_type = /obj/item/weapon/reagent_containers/food/snacks/meat/monkey
 
 	// Small mobs don't give as much nutrition.
 	if(src.occupant.small)

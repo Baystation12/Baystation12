@@ -1888,7 +1888,7 @@
 "Kp" = (/turf/unsimulated/floor{icon_state = "grass1"; name = "grass"},/area/wizard_station)
 "Kq" = (/obj/structure/flora/ausbushes/fullgrass,/turf/unsimulated/floor{icon_state = "grass1"; name = "grass"},/area/wizard_station)
 "Kr" = (/obj/effect/decal/cleanable/blood,/turf/unsimulated/floor{icon_state = "freezerfloor"; dir = 2},/area/wizard_station)
-"Ks" = (/mob/living/carbon/monkey{name = "Murphey"},/turf/unsimulated/floor{icon_state = "freezerfloor"; dir = 2},/area/wizard_station)
+"Ks" = (/mob/living/carbon/human/monkey{name = "Murphey"},/turf/unsimulated/floor{icon_state = "freezerfloor"; dir = 2},/area/wizard_station)
 "Kt" = (/turf/unsimulated/floor{icon_state = "freezerfloor"; dir = 2},/area/wizard_station)
 "Ku" = (/obj/item/organ/xenos/plasmavessel,/turf/unsimulated/floor{tag = "icon-asteroid"; icon_state = "asteroid"},/area/syndicate_mothership{name = "\improper Raider Base"})
 "Kv" = (/obj/structure/sink{icon_state = "sink"; dir = 8; pixel_x = -12; pixel_y = 2},/obj/structure/mirror/raider{pixel_x = -28; pixel_y = 0},/turf/unsimulated/floor{icon_state = "freezerfloor"; dir = 2},/area/syndicate_mothership{name = "\improper Raider Base"})

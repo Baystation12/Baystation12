@@ -2096,7 +2096,7 @@
 "aOp" = (/obj/machinery/door/airlock/external{frequency = 1379; icon_state = "door_locked"; id_tag = "solar_chapel_outer"; locked = 1; name = "Engineering External Access"; req_access = list(10,13)},/obj/effect/decal/cleanable/dirt,/obj/structure/cable/yellow{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/plating,/area/maintenance/auxsolarstarboard)
 "aOq" = (/obj/machinery/access_button{command = "cycle_exterior"; frequency = 1379; master_tag = "solar_tool_airlock"; name = "exterior access button"; pixel_x = -25; pixel_y = -25; req_access = list(13)},/obj/structure/cable/yellow{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/plating/airless,/area/solar/auxport)
 "aOr" = (/obj/structure/disposalpipe/segment{dir = 8; icon_state = "pipe-c"},/turf/simulated/floor{icon_state = "grimy"},/area/crew_quarters/bar)
-"aOs" = (/mob/living/carbon/monkey{name = "Pun Pun"; icon_state = "punpun1"},/turf/simulated/floor{icon_state = "grimy"},/area/crew_quarters/bar)
+"aOs" = (/mob/living/carbon/human/monkey{name = "Pun Pun"; icon_state = "punpun1"},/turf/simulated/floor{icon_state = "grimy"},/area/crew_quarters/bar)
 "aOt" = (/turf/simulated/floor{icon_state = "grimy"},/area/crew_quarters/bar)
 "aOu" = (/obj/structure/window/reinforced{dir = 4},/obj/structure/table/reinforced,/obj/item/weapon/flame/lighter/zippo,/turf/simulated/floor{icon_state = "grimy"},/area/crew_quarters/bar)
 "aOv" = (/obj/structure/bed/chair/comfy/brown{dir = 4},/obj/structure/cable/green{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/carpet,/area/crew_quarters/bar)

@@ -9,7 +9,7 @@
 	invocation_type = "whisper"
 	range = 1
 	var/list/protected_roles = list("Wizard","Changeling","Cultist") //which roles are immune to the spell
-	var/list/compatible_mobs = list(/mob/living/carbon/human,/mob/living/carbon/monkey) //which types of mobs are affected by the spell. NOTE: change at your own risk
+	var/list/compatible_mobs = list(/mob/living/carbon/human) //which types of mobs are affected by the spell. NOTE: change at your own risk
 	var/base_spell_loss_chance = 20 //base probability of the wizard losing a spell in the process
 	var/spell_loss_chance_modifier = 7 //amount of probability of losing a spell added per spell (mind_transfer included)
 	var/spell_loss_amount = 1 //the maximum amount of spells possible to lose during a single transfer
