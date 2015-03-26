@@ -51,7 +51,7 @@
 	if(..() || !occupied)
 		return
 	meat--
-	new meattype(get_turf(src))
+	new meat_type(get_turf(src))
 	if(src.meat > 1)
 		user << "You remove some meat from \the [victim_name]."
 	else if(src.meat == 1)

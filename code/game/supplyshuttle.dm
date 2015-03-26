@@ -75,7 +75,7 @@ var/list/mechtoys = list(
 				return ..()
 		if(istype(A, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = M
-			if(H.is_small)
+			if(H.species.is_small)
 				return ..()
 		return 0
 

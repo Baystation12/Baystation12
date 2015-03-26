@@ -326,43 +326,23 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 		src << "<span class='warning'>We cannot perform this ability at the present time!</span>"
 		return
 
-	var/mob/living/carbon/C = src
-	changeling.chem_charges--
-	C.remove_changeling_powers()
-	C.visible_message("<span class='warning'>[C] transforms!</span>")
-	changeling.geneticdamage = 30
-	C << "<span class='warning'>Our genes cry out!</span>"
-
-	//TODO replace with monkeyize proc
-	var/list/implants = list() //Try to preserve implants.
-	for(var/obj/item/weapon/implant/W in C)
-		implants += W
-
-	C.monkeyizing = 1
-	C.canmove = 0
-	C.icon = null
-	C.overlays.Cut()
-	C.invisibility = 101
-
-	var/atom/movable/overlay/animation = new /atom/movable/overlay( C.loc )
-	animation.icon_state = "blank"
-	animation.icon = 'icons/mob/mob.dmi'
-	animation.master = src
-	flick("h2monkey", animation)
-	sleep(48)
-	del(animation)
-
-	for(var/obj/item/W in C)
-		C.drop_from_inventory(W)
-	for(var/obj/T in C)
-		del(T)
-
 	var/mob/living/carbon/human/H = src
-	if(istype(H))
-		H.set_species(H.species.primitive_form ? H.species.primitive_form : "Monkey")
+
+	if(!istype(H) || !H.species.primitive_form)
+		src << "<span class='warning'>We cannot perform this ability in this form!</span>"
+		return
+
+	changeling.chem_charges--
+	H.remove_changeling_powers()
+	H.visible_message("<span class='warning'>[H] transforms!</span>")
+	changeling.geneticdamage = 30
+	H << "<span class='warning'>Our genes cry out!</span>"
+	var/list/implants = list() //Try to preserve implants.
+	for(var/obj/item/weapon/implant/W in H)
+		implants += W
+	H.monkeyize()
 	feedback_add_details("changeling_powers","LF")
 	return 1
-
 
 //Transform into a human
 /mob/proc/changeling_lesser_transform()

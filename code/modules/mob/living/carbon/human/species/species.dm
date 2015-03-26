@@ -21,6 +21,7 @@
 	var/race_key = 0       	                             // Used for mob icon cache string.
 	var/icon/icon_template                               // Used for mob icon generation for non-32x32 species.
 	var/is_small
+	var/show_ssd = 1
 
 	// Language/culture vars.
 	var/default_language = "Galactic Common" // Default language is used when 'say' is used without modifiers.
@@ -254,3 +255,6 @@
 
 	return 0
 
+// Called in life() when the mob has no client.
+/datum/species/proc/handle_npc(var/mob/living/carbon/human/H)
+	return

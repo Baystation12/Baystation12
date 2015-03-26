@@ -21,9 +21,17 @@
 	sleep(48)
 	//animation = null
 
+	monkeyizing = 0
+	stunned = 0
+	update_canmove()
+	invisibility = initial(invisibility)
+
 	if(!species.primitive_form) //If the creature in question has no primitive set, this is going to be messy.
 		gib()
 		return
+
+	for(var/obj/item/W in src)
+		drop_from_inventory(W)
 	set_species(species.primitive_form)
 	dna.SetSEState(MONKEYBLOCK,1)
 	dna.SetSEValueRange(MONKEYBLOCK,0xDAC, 0xFFF)

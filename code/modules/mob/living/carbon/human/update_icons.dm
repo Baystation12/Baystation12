@@ -336,7 +336,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 				base_icon.MapColors(rgb(tone[1],0,0),rgb(0,tone[2],0),rgb(0,0,tone[3]))
 
 		//Handle husk overlay.
-		if(husk)
+		if(husk && ("overlay_husk" in icon_states(race_icon)))
 			var/icon/mask = new(base_icon)
 			var/icon/husk_over = new(race_icon,"overlay_husk")
 			mask.MapColors(0,0,0,1, 0,0,0,1, 0,0,0,1, 0,0,0,1, 0,0,0,0)
