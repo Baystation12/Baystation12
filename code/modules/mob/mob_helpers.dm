@@ -85,11 +85,20 @@
 
 /mob/living/silicon/isSilicon()
 	return 1
-    
+
 /mob/proc/isAI()
 	return 0
 
 /mob/living/silicon/ai/isAI()
+	return 1
+
+/mob/proc/isSynthetic()
+	return 0
+
+/mob/living/carbon/human/isSynthetic()
+	return species.flags & IS_SYNTHETIC
+
+/mob/living/silicon/isSynthetic()
 	return 1
 
 /proc/ispAI(A)
@@ -240,7 +249,7 @@ var/list/global/organ_rel_size = list(
 		for(var/obj/item/weapon/grab/G in target.grabbed_by)
 			if(G.state >= GRAB_AGGRESSIVE)
 				return zone
-	
+
 	var/miss_chance = 10
 	if (zone in base_miss_chance)
 		miss_chance = base_miss_chance[zone]
