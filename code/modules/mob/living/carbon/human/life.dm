@@ -100,6 +100,9 @@
 
 		handle_heartbeat()
 
+		if(!client)
+			species.handle_npc(src)
+
 	handle_stasis_bag()
 
 	if(life_tick > 5 && timeofdeath && (timeofdeath < 5 || world.time - timeofdeath > 6000))	//We are long dead, or we're junk mobs spawned like the clowns on the clown shuttle
@@ -324,7 +327,7 @@
 					if(istype(O)) O.add_autopsy_data("Radiation Poisoning", damage)
 
 	/** breathing **/
-	
+
 	handle_chemical_smoke(var/datum/gas_mixture/environment)
 		if(wear_mask && (wear_mask.flags & BLOCK_GAS_SMOKE_EFFECT))
 			return
@@ -1201,7 +1204,7 @@
 			if(seer==1)
 				var/obj/effect/rune/R = locate() in loc
 				if(R && R.word1 == cultwords["see"] && R.word2 == cultwords["hell"] && R.word3 == cultwords["join"])
-					see_invisible = SEE_INVISIBLE_OBSERVER
+					see_invisible = SEE_INVISIBLE_CULT
 				else
 					see_invisible = SEE_INVISIBLE_LIVING
 					seer = 0
@@ -1218,6 +1221,8 @@
 				glasses_processed = 1
 				process_glasses(glasses)
 
+			if(!glasses_processed && (species.vision_flags > 0))
+				sight |= species.vision_flags
 			if(!seer && !glasses_processed)
 				see_invisible = SEE_INVISIBLE_LIVING
 

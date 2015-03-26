@@ -34,7 +34,7 @@
 		return 1
 
 	if(href_list["set_view"])
-		if(is_malf(usr))
+		if(is_malf(usr) || owner.is_ai_malf())
 			current_view = text2num(href_list["set_view"])
 		else
 			current_view = 0
@@ -71,7 +71,7 @@
 		return 1
 
 	if(href_list["add_supplied_law"])
-		if(supplied_law && supplied_law_position >= 1 && MIN_SUPPLIED_LAW_NUMBER <= MAX_SUPPLIED_LAW_NUMBER)
+		if(supplied_law && supplied_law_position >= 1 && MIN_SUPPLIED_LAW_NUMBER <= MAX_SUPPLIED_LAW_NUMBER && is_malf(usr))
 			log_and_message_admins("has given [owner] a new supplied law: [supplied_law]")
 			owner.add_supplied_law(supplied_law_position, supplied_law)
 		return 1
@@ -135,11 +135,12 @@
 		return 1
 
 	if(href_list["transfer_laws"])
-		var/datum/ai_laws/ALs = locate(href_list["transfer_laws"]) in (is_admin(usr) ? admin_laws : player_laws)
-		if(ALs)
-			log_and_message_admins("has transfered the [ALs.name] laws to [owner].")
-			ALs.sync(owner, 0)
-			current_view = 0
+		if(is_malf(usr))
+			var/datum/ai_laws/ALs = locate(href_list["transfer_laws"]) in (is_admin(usr) ? admin_laws : player_laws)
+			if(ALs)
+				log_and_message_admins("has transfered the [ALs.name] laws to [owner].")
+				ALs.sync(owner, 0)
+				current_view = 0
 		return 1
 
 	if(href_list["sync_laws"])
@@ -167,8 +168,6 @@
 	var/data[0]
 	owner.laws.sort_laws()
 
-	data["view"] = current_view
-
 	data["ion_law_nr"] = ionnum()
 	data["ion_law"] = ion_law
 	data["zeroth_law"] = zeroth_law
@@ -183,8 +182,13 @@
 
 	data["isAI"] = owner.isAI()
 	data["isMalf"] = is_malf(user)
-	data["isSlaved"] = is_slaved()
+	data["isAIMalf"] = owner.is_ai_malf()
+	data["isSlaved"] = owner.is_slaved()
 	data["isAdmin"] = is_admin(user)
+
+	if(!(data["isMalf"] || data["isAIMalf"]))
+		current_view = 0
+	data["view"] = current_view
 
 	var/channels[0]
 	for (var/ch_name in owner.law_channels())
@@ -192,7 +196,7 @@
 	data["channel"] = owner.lawchannel
 	data["channels"] = channels
 
-	if(data["isMalf"])
+	if(data["isMalf"] || data["isAIMalf"])
 		data["law_sets"] = package_multiple_laws(data["isAdmin"] ? admin_laws : player_laws)
 
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
@@ -222,13 +226,25 @@
 	return law_sets
 
 /obj/nano_module/law_manager/proc/is_malf(var/mob/user)
-	return is_admin(user) || (owner.mind && (owner.mind.special_role == "malfunction" || owner.mind.special_role == "traitor"))
+	return (is_admin(user) && !owner.is_slaved()) || owner.is_malf_loose()
 
-/obj/nano_module/law_manager/proc/is_slaved()
-	if(owner.isRobot())
-		var/mob/living/silicon/robot/R = owner
-		return R.lawupdate && R.connected_ai ? sanitize(R.connected_ai.name) : null
-	return null
+/mob/living/silicon/proc/is_malf_loose()
+	return mind && (mind.special_role == "malfunction" || mind.special_role == "traitor")
+
+/mob/living/silicon/proc/is_ai_malf()
+	return 0
+
+/mob/living/silicon/robot/is_ai_malf()
+	return is_slaved() && connected_ai.is_malf_loose()
+
+/mob/living/silicon/ai/is_ai_malf()
+	return 0
+
+/mob/living/silicon/proc/is_slaved()
+	return 0
+
+/mob/living/silicon/robot/is_slaved()
+	return lawupdate && connected_ai ? sanitize(connected_ai.name) : null
 
 /obj/nano_module/law_manager/proc/sync_laws(var/mob/living/silicon/ai/AI)
 	if(!AI)

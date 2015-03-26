@@ -68,12 +68,12 @@
 	//Flimsy grilles aren't so great at stopping projectiles. However they can absorb some of the impact
 	var/damage = Proj.damage
 	var/passthrough = 0
-	
+
 	//20% chance that the grille provides a bit more cover than usual. Support structure for example might take up 20% of the grille's area.
 	//If they click on the grille itself then we assume they are aiming at the grille itself and the extra cover behaviour is always used.
 	switch(Proj.damage_type)
 		if(BRUTE)
-			//bullets 
+			//bullets
 			if(Proj.original == src || prob(20))
 				Proj.damage *= between(0, Proj.damage/60, 0.5)
 				if(prob(max((damage-10)/25, 0))*100)
@@ -86,11 +86,11 @@
 			if(!(Proj.original == src || prob(20)))
 				Proj.damage *= 0.5
 				passthrough = 1
-	
+
 	if(passthrough)
 		. = -1
 		damage = between(0, (damage - Proj.damage)*(Proj.damage_type == BRUTE? 0.4 : 1), 10) //if the bullet passes through then the grille avoids most of the damage
-	
+
 	src.health -= damage*0.2
 	spawn(0) healthcheck() //spawn to make sure we return properly if the grille is deleted
 
@@ -139,7 +139,7 @@
 				if(WINDOW.dir == dir_to_set)//checking this for a 2nd time to check if a window was made while we were waiting.
 					user << "<span class='notice'>There is already a window facing this way there.</span>"
 					return
-			
+
 			var/wtype = ST.created_window
 			if (ST.use(1))
 				var/obj/structure/window/WD = new wtype(loc, dir_to_set, 1)
@@ -197,7 +197,8 @@
 			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 			s.set_up(3, 1, src)
 			s.start()
-			return 1
+			if(user.stunned)
+				return 1
 		else
 			return 0
 	return 0

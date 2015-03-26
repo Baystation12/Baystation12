@@ -241,7 +241,7 @@
 	set_trait(TRAIT_PRODUCTION,6)
 	set_trait(TRAIT_YIELD,5)
 	set_trait(TRAIT_POTENCY,10)
-	set_trait(TRAIT_PRODUCT_ICON,"treefruit")
+	set_trait(TRAIT_PRODUCT_ICON,"apple")
 	set_trait(TRAIT_PRODUCT_COLOUR,"#FF540A")
 	set_trait(TRAIT_PLANT_ICON,"tree2")
 
@@ -419,7 +419,7 @@
 	set_trait(TRAIT_POTENCY,10)
 	set_trait(TRAIT_PRODUCT_ICON,"mushroom")
 	set_trait(TRAIT_PRODUCT_COLOUR,"#FF4545")
-	set_trait(TRAIT_PLANT_COLOUR,"#F5F2D0")
+	set_trait(TRAIT_PLANT_COLOUR,"#E0DDBA")
 	set_trait(TRAIT_PLANT_ICON,"mushroom4")
 
 /datum/seed/mushroom/poison/death
@@ -466,7 +466,6 @@
 	set_trait(TRAIT_SPREAD,1)
 	set_trait(TRAIT_MATURATION,15)
 	set_trait(TRAIT_YIELD,3)
-	set_trait(TRAIT_EXPLOSIVE,1)
 	set_trait(TRAIT_POTENCY,30)
 	set_trait(TRAIT_BIOLUM,1)
 	set_trait(TRAIT_BIOLUM_COLOUR,"#006622")
@@ -585,7 +584,7 @@
 	set_trait(TRAIT_YIELD,6)
 	set_trait(TRAIT_POTENCY,10)
 	set_trait(TRAIT_PRODUCT_ICON,"potato")
-	set_trait(TRAIT_PRODUCT_COLOUR,"#96855D")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#C4AE7A")
 	set_trait(TRAIT_PLANT_ICON,"bush2")
 
 /datum/seed/cabbage
@@ -685,7 +684,7 @@
 	name = "wheat"
 	seed_name = "wheat"
 	display_name = "wheat stalks"
-	chems = list("nutriment" = list(1,25), "flour" = list(1,25))
+	chems = list("nutriment" = list(1,25), "flour" = list(15,15))
 	kitchen_tag = "wheat"
 
 /datum/seed/wheat/New()
@@ -703,7 +702,7 @@
 	name = "rice"
 	seed_name = "rice"
 	display_name = "rice stalks"
-	chems = list("nutriment" = list(1,25), "rice" = list(1,25))
+	chems = list("nutriment" = list(1,25), "rice" = list(10,15))
 	kitchen_tag = "rice"
 
 /datum/seed/rice/New()
@@ -861,6 +860,7 @@
 	seed_name = "orange"
 	display_name = "orange trees"
 	kitchen_tag = "orange"
+	chems = list("nutriment" = list(1,20), "orangejuice" = list(1,20))
 
 /datum/seed/citrus/orange/New()
 	..()
@@ -870,7 +870,8 @@
 	name = "grass"
 	seed_name = "grass"
 	display_name = "grass"
-	chems = list("nutriment" = list(1,20), "orangejuice" = list(1,20))
+	chems = list("nutriment" = list(1,20))
+	kitchen_tag = "grass"
 
 /datum/seed/grass/New()
 	..()
@@ -917,8 +918,9 @@
 	set_trait(TRAIT_YIELD,3)
 	set_trait(TRAIT_POTENCY,10)
 	set_trait(TRAIT_PRODUCT_ICON,"cherry")
-	set_trait(TRAIT_PRODUCT_COLOUR,"#8C0101")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#A80000")
 	set_trait(TRAIT_PLANT_ICON,"tree2")
+	set_trait(TRAIT_PLANT_COLOUR,"#2F7D2D")
 
 /datum/seed/kudzu
 	name = "kudzu"
