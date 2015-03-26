@@ -235,7 +235,7 @@ datum/hud/New(mob/owner)
 
 	if(ishuman(mymob))
 		human_hud(ui_style, ui_color, ui_alpha, mymob) // Pass the player the UI style chosen in preferences
-	else if(ismonkey(mymob))
+	else if(issmall(mymob))
 		monkey_hud(ui_style)
 	else if(isbrain(mymob))
 		brain_hud(ui_style)
@@ -259,11 +259,11 @@ datum/hud/New(mob/owner)
 	if(!hud_used)
 		usr << "\red This mob type does not use a HUD."
 		return
-		
+
 	if(!ishuman(src))
 		usr << "\red Inventory hiding is currently only supported for human mobs, sorry."
 		return
-	
+
 	if(!client) return
 	if(client.view != world.view)
 		return
@@ -325,7 +325,7 @@ datum/hud/New(mob/owner)
 		return
 	if(client.view != world.view)
 		return
-	
+
 	if(hud_used.hud_shown)
 		hud_used.hud_shown = 0
 		if(src.hud_used.adding)

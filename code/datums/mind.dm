@@ -320,6 +320,7 @@ datum/mind
 					H.implant_loyalty(H, override = TRUE)
 					log_admin("[key_name_admin(usr)] has loyalty implanted [current].")
 				else
+		/*
 		else if (href_list["monkey"])
 			var/mob/living/L = current
 			if (L.monkeyizing)
@@ -369,7 +370,7 @@ datum/mind
 						src = mobfinder.loc:mind
 						del(mobfinder)
 						current.radiation -= 50
-
+		*/
 		else if (href_list["silicon"])
 			BITSET(current.hud_updateflag, SPECIALROLE_HUD)
 			switch(href_list["silicon"])
@@ -540,10 +541,6 @@ datum/mind
 	..()
 	if(!mind.assigned_role)	mind.assigned_role = "Assistant"	//defualt
 
-//MONKEY
-/mob/living/carbon/monkey/mind_initialize()
-	..()
-
 //slime
 /mob/living/carbon/slime/mind_initialize()
 	..()
@@ -596,10 +593,3 @@ datum/mind
 	..()
 	mind.assigned_role = "Juggernaut"
 	mind.special_role = "Cultist"
-
-/mob/living/simple_animal/vox/armalis/mind_initialize()
-	..()
-	mind.assigned_role = "Armalis"
-	mind.special_role = "Vox Raider"
-
-

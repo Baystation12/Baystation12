@@ -326,63 +326,23 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 		src << "<span class='warning'>We cannot perform this ability at the present time!</span>"
 		return
 
-	var/mob/living/carbon/C = src
+	var/mob/living/carbon/human/H = src
+
+	if(!istype(H) || !H.species.primitive_form)
+		src << "<span class='warning'>We cannot perform this ability in this form!</span>"
+		return
+
 	changeling.chem_charges--
-	C.remove_changeling_powers()
-	C.visible_message("<span class='warning'>[C] transforms!</span>")
+	H.remove_changeling_powers()
+	H.visible_message("<span class='warning'>[H] transforms!</span>")
 	changeling.geneticdamage = 30
-	C << "<span class='warning'>Our genes cry out!</span>"
-
-	//TODO replace with monkeyize proc
+	H << "<span class='warning'>Our genes cry out!</span>"
 	var/list/implants = list() //Try to preserve implants.
-	for(var/obj/item/weapon/implant/W in C)
+	for(var/obj/item/weapon/implant/W in H)
 		implants += W
-
-	C.monkeyizing = 1
-	C.canmove = 0
-	C.icon = null
-	C.overlays.Cut()
-	C.invisibility = 101
-
-	var/atom/movable/overlay/animation = new /atom/movable/overlay( C.loc )
-	animation.icon_state = "blank"
-	animation.icon = 'icons/mob/mob.dmi'
-	animation.master = src
-	flick("h2monkey", animation)
-	sleep(48)
-	del(animation)
-
-	var/mob/living/carbon/monkey/O = new /mob/living/carbon/monkey(src)
-	O.dna = C.dna.Clone()
-	C.dna = null
-
-	for(var/obj/item/W in C)
-		C.drop_from_inventory(W)
-	for(var/obj/T in C)
-		del(T)
-
-	O.loc = C.loc
-	O.name = "monkey ([copytext(md5(C.real_name), 2, 6)])"
-	O.setToxLoss(C.getToxLoss())
-	O.adjustBruteLoss(C.getBruteLoss())
-	O.setOxyLoss(C.getOxyLoss())
-	O.adjustFireLoss(C.getFireLoss())
-	O.stat = C.stat
-	O.a_intent = "hurt"
-	for(var/obj/item/weapon/implant/I in implants)
-		I.loc = O
-		I.implanted = O
-
-	C.mind.transfer_to(O)
-
-	O.make_changeling(1)
-	O.verbs += /mob/proc/changeling_lesser_transform
-	O.changeling_update_languages(changeling.absorbed_languages)
-
+	H.monkeyize()
 	feedback_add_details("changeling_powers","LF")
-	del(C)
 	return 1
-
 
 //Transform into a human
 /mob/proc/changeling_lesser_transform()
@@ -842,7 +802,7 @@ var/list/datum/dna/hivemind_bank = list()
 
 	var/mob/living/carbon/T = changeling_sting(40,/mob/proc/changeling_transformation_sting)
 	if(!T)	return 0
-	if((HUSK in T.mutations) || (!ishuman(T) && !ismonkey(T)))
+	if((HUSK in T.mutations) || (!ishuman(T) && !issmall(T)))
 		src << "<span class='warning'>Our sting appears ineffective against its DNA.</span>"
 		return 0
 	T.visible_message("<span class='warning'>[T] transforms!</span>")
