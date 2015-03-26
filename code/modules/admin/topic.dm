@@ -1609,7 +1609,7 @@
 			where = "onfloor"
 
 		if ( where == "inhand" )	//Can only give when human or monkey
-			if ( !( ishuman(usr) || ismonkey(usr) ) )
+			if ( !( ishuman(usr) || issmall(usr) ) )
 				usr << "Can only spawn in hand when you're a human or a monkey."
 				where = "onfloor"
 			else if ( usr.get_active_hand() )

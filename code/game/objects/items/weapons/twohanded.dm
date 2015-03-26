@@ -66,6 +66,14 @@
 
 	..()
 
+	if(istype(user, /mob/living/carbon/human))
+		var/mob/living/carbon/human/H = user
+		if(H.species.is_small)
+			user << "<span class='warning'>It's too heavy for you to wield fully.</span>"
+			return
+	else
+		return
+
 	if(wielded) //Trying to unwield it
 		unwield()
 		user << "<span class='notice'>You are now carrying the [name] with one hand.</span>"

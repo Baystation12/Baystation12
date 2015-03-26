@@ -15,10 +15,10 @@
 		return istype(H.species, /datum/species/xenos)
 	return 0
 
-/proc/ismonkey(A)
+/proc/issmall(A)
 	if(A && istype(A, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = A
-		if(H.species && H.species.is_small) //todo
+		if(H.species && H.species.is_small)
 			return 1
 	return 0
 

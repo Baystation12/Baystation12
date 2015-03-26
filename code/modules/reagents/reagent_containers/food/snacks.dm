@@ -1587,7 +1587,7 @@
 			else 		//someone is having a bad day
 				E.createwound(CUT, 30)
 				E.embed(surprise)
-		else if (ismonkey(M))
+		else if (issmall(M))
 			M.visible_message("<span class='danger'>[M] suddenly tears in half!</span>")
 			var/mob/living/carbon/monkey/ook = new monkey_type(M.loc)
 			ook.name = "malformed [ook.name]"

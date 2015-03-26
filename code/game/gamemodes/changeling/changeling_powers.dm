@@ -822,7 +822,7 @@ var/list/datum/dna/hivemind_bank = list()
 
 	var/mob/living/carbon/T = changeling_sting(40,/mob/proc/changeling_transformation_sting)
 	if(!T)	return 0
-	if((HUSK in T.mutations) || (!ishuman(T) && !ismonkey(T)))
+	if((HUSK in T.mutations) || (!ishuman(T) && !issmall(T)))
 		src << "<span class='warning'>Our sting appears ineffective against its DNA.</span>"
 		return 0
 	T.visible_message("<span class='warning'>[T] transforms!</span>")

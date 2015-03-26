@@ -92,7 +92,7 @@ var/global/floorIsLava = 0
 			body += "<br>"
 
 			//Monkey
-			if(ismonkey(M))
+			if(issmall(M))
 				body += "<B>Monkeyized</B> | "
 			else
 				body += "<A href='?src=\ref[src];monkeyone=\ref[M]'>Monkeyize</A> | "
