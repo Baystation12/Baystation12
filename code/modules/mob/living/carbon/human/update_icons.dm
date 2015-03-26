@@ -210,7 +210,7 @@ var/global/list/damage_icon_parts = list()
 				DI.Blend(species.blood_color, ICON_MULTIPLY)
 				damage_icon_parts[cache_index] = DI
 			else
-				DI = damage_icon_parts["[O.damage_state]/[O.icon_name]"]
+				DI = damage_icon_parts[cache_index]
 
 			standing_image.overlays += DI
 
