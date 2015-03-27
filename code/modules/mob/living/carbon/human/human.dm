@@ -5,7 +5,7 @@
 	icon = 'icons/mob/human.dmi'
 	icon_state = "body_m_s"
 
-	var/list/hud_list[9]
+	var/list/hud_list[10]
 	var/embedded_flag	  //To check if we've need to roll for damage on movement while an item is imbedded in us.
 
 /mob/living/carbon/human/New(var/new_loc, var/new_species = null)
@@ -26,6 +26,7 @@
 
 	hud_list[HEALTH_HUD]      = image('icons/mob/hud.dmi', src, "hudhealth100")
 	hud_list[STATUS_HUD]      = image('icons/mob/hud.dmi', src, "hudhealthy")
+	hud_list[LIFE_HUD]	      = image('icons/mob/hud.dmi', src, "hudhealthy")
 	hud_list[ID_HUD]          = image('icons/mob/hud.dmi', src, "hudunknown")
 	hud_list[WANTED_HUD]      = image('icons/mob/hud.dmi', src, "hudblank")
 	hud_list[IMPLOYAL_HUD]    = image('icons/mob/hud.dmi', src, "hudblank")
@@ -47,8 +48,8 @@
 	stat(null, "Intent: [a_intent]")
 	stat(null, "Move Mode: [m_intent]")
 	if(ticker && ticker.mode && ticker.mode.name == "AI malfunction")
-		if(ticker.mode:malf_mode_declared)
-			stat(null, "Time left: [max(ticker.mode:AI_win_timeleft/(ticker.mode:apcs/3), 0)]")
+		if(malf.revealed)
+			stat(null, "Time left: [max(malf.hack_time/(malf.hacked_apcs/3), 0)]")
 	if(emergency_shuttle)
 		var/eta_status = emergency_shuttle.get_status_panel_eta()
 		if(eta_status)
@@ -195,6 +196,7 @@
 	var/datum/organ/external/affected = M.organs_by_name["head"]
 	affected.implants += L
 	L.part = affected
+	L.implanted(src)
 
 /mob/living/carbon/human/proc/is_loyalty_implanted(mob/living/carbon/human/M)
 	for(var/L in M.contents)

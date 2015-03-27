@@ -59,13 +59,6 @@
 				H.UpdateDamageIcon()
 		H.updatehealth()
 		return 1
-	else if(istype(src, /mob/living/carbon/monkey))
-		if (COLD_RESISTANCE in src.mutations) //fireproof
-			return 0
-		var/mob/living/carbon/monkey/M = src
-		M.adjustFireLoss(burn_amount)
-		M.updatehealth()
-		return 1
 	else if(istype(src, /mob/living/silicon/ai))
 		return 0
 
@@ -280,6 +273,7 @@
 		C.legcuffed = initial(C.legcuffed)
 	BITSET(hud_updateflag, HEALTH_HUD)
 	BITSET(hud_updateflag, STATUS_HUD)
+	BITSET(hud_updateflag, LIFE_HUD)
 	ExtinguishMob()
 	fire_stacks = 0
 
@@ -332,6 +326,7 @@
 
 	BITSET(hud_updateflag, HEALTH_HUD)
 	BITSET(hud_updateflag, STATUS_HUD)
+	BITSET(hud_updateflag, LIFE_HUD)
 	return
 
 /mob/living/proc/UpdateDamageIcon()

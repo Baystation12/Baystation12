@@ -729,10 +729,10 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 			M.equip_to_slot_or_del(W, slot_wear_id)
 
 		if("death commando")//Was looking to add this for a while.
-			M.equip_death_commando()
+			deathsquad.equip(M)
 
 		if("syndicate commando")
-			M.equip_syndicate_commando()
+			commandos.equip(M)
 
 		if("nanotrasen representative")
 			M.equip_if_possible(new /obj/item/clothing/under/rank/centcom(M), slot_w_uniform)

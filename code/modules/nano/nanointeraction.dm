@@ -1,11 +1,11 @@
-/atom/movable/proc/nano_host()
+/atom/proc/nano_host()
 	return src
 
 /obj/nano_module/nano_host()
 	return loc
 
 
-/atom/movable/proc/CanUseTopic(var/mob/user, href_list, var/datum/topic_state/custom_state)
+/atom/proc/CanUseTopic(var/mob/user, href_list, var/datum/topic_state/custom_state)
 	return user.can_use_topic(nano_host(), custom_state)
 
 

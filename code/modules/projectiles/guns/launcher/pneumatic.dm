@@ -12,7 +12,7 @@
 
 	var/fire_pressure                                   // Used in fire checks/pressure checks.
 	var/max_w_class = 3                                 // Hopper intake size.
-	var/max_combined_w_class = 20                       // Total internal storage size.
+	var/max_storage_space = 20                       // Total internal storage size.
 	var/obj/item/weapon/tank/tank = null                // Tank of gas for use in firing the cannon.
 	var/obj/item/weapon/storage/tank_container  // Something to hold the tank item so we don't accidentally fire it.
 	var/pressure_setting = 10                           // Percentage of the gas in the tank used to fire the projectile.
@@ -64,13 +64,13 @@
 	else if(istype(W) && W.w_class <= max_w_class)
 		var/total_stored = 0
 		for(var/obj/item/O in src.contents)
-			total_stored += O.w_class
-		if(total_stored + W.w_class <= max_combined_w_class)
+			total_stored += O.get_storage_cost()
+		if(total_stored + W.get_storage_cost() <= max_storage_space)
 			user.drop_item(W)
 			W.loc = src
 			user << "You shove [W] into the hopper."
 		else
-			user << "That won't fit into the hopper - it's full."
+			user << "That won't fit into the hopper - it's too full."
 		return
 	else
 		user << "That won't fit into the hopper."
