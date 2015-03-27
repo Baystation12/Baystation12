@@ -49,10 +49,10 @@
 /mob/living/silicon/emp_act(severity)
 	switch(severity)
 		if(1)
-			src.take_organ_damage(20)
+			src.take_organ_damage(0,20,emp=1)
 			Stun(rand(5,10))
 		if(2)
-			src.take_organ_damage(10)
+			src.take_organ_damage(0,10,emp=1)
 			Stun(rand(1,5))
 	flick("noise", src:flash)
 	src << "\red <B>*BZZZT*</B>"

@@ -19,6 +19,10 @@ var/datum/antagonist/rogue_ai/malf
 	var/station_captured
 	var/can_nuke = 0
 
+/datum/antagonist/rogue_ai/New()
+	..()
+	malf = src
+
 /datum/antagonist/rogue_ai/proc/hack_apc(var/obj/machinery/power/apc/apc)
 	hacked_apcs |= apc
 

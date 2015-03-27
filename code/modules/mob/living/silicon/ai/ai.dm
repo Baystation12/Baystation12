@@ -189,7 +189,7 @@ var/list/ai_verbs_default = list(
 
 	src << radio_text
 
-	if (!(ticker && ticker.mode && (mind in malf.current_antagonists)))
+	if (malf && !(mind in malf.current_antagonists))
 		show_laws()
 		src << "<b>These laws may be changed by other players, or by you being the traitor.</b>"
 

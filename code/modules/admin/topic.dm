@@ -266,7 +266,7 @@
 			if("nymph")				M.change_mob_type( /mob/living/carbon/alien/diona , null, null, delmob )
 			if("human")				M.change_mob_type( /mob/living/carbon/human , null, null, delmob, href_list["species"])
 			if("slime")				M.change_mob_type( /mob/living/carbon/slime , null, null, delmob )
-			if("monkey")			M.change_mob_type( /mob/living/carbon/monkey , null, null, delmob )
+			if("monkey")			M.change_mob_type( /mob/living/carbon/human/monkey , null, null, delmob )
 			if("robot")				M.change_mob_type( /mob/living/silicon/robot , null, null, delmob )
 			if("cat")				M.change_mob_type( /mob/living/simple_animal/cat , null, null, delmob )
 			if("runtime")			M.change_mob_type( /mob/living/simple_animal/cat/fluff/Runtime , null, null, delmob )
@@ -1183,44 +1183,6 @@
 		show_player_panel(H)
 		//H.regenerate_icons()
 
-/***************** BEFORE**************
-
-	if (href_list["l_players"])
-		var/dat = "<B>Name/Real Name/Key/IP:</B><HR>"
-		for(var/mob/M in world)
-			var/foo = ""
-			if (ismob(M) && M.client)
-				if(!M.client.authenticated && !M.client.authenticating)
-					foo += text("\[ <A HREF='?src=\ref[];adminauth=\ref[]'>Authorize</A> | ", src, M)
-				else
-					foo += text("\[ <B>Authorized</B> | ")
-				if(M.start)
-					if(!istype(M, /mob/living/carbon/monkey))
-						foo += text("<A HREF='?src=\ref[];monkeyone=\ref[]'>Monkeyize</A> | ", src, M)
-					else
-						foo += text("<B>Monkeyized</B> | ")
-					if(istype(M, /mob/living/silicon/ai))
-						foo += text("<B>Is an AI</B> | ")
-					else
-						foo += text("<A HREF='?src=\ref[];makeai=\ref[]'>Make AI</A> | ", src, M)
-					if(isNotAdminLevel(M.z))
-						foo += text("<A HREF='?src=\ref[];sendtoprison=\ref[]'>Prison</A> | ", src, M)
-						foo += text("<A HREF='?src=\ref[];sendtomaze=\ref[]'>Maze</A> | ", src, M)
-					else
-						foo += text("<B>On Z = [M.z]</B> | ")
-				else
-					foo += text("<B>Hasn't Entered Game</B> | ")
-				foo += text("<A HREF='?src=\ref[];revive=\ref[]'>Heal/Revive</A> | ", src, M)
-
-				foo += text("<A HREF='?src=\ref[];forcespeech=\ref[]'>Say</A> \]", src, M)
-			dat += text("N: [] R: [] (K: []) (IP: []) []<BR>", M.name, M.real_name, (M.client ? M.client : "No client"), M.lastKnownIP, foo)
-
-		usr << browse(dat, "window=players;size=900x480")
-
-*****************AFTER******************/
-
-// Now isn't that much better? IT IS NOW A PROC, i.e. kinda like a big panel like unstable
-
 	else if(href_list["adminplayeropts"])
 		var/mob/M = locate(href_list["adminplayeropts"])
 		show_player_panel(M)
@@ -1647,7 +1609,7 @@
 			where = "onfloor"
 
 		if ( where == "inhand" )	//Can only give when human or monkey
-			if ( !( ishuman(usr) || ismonkey(usr) ) )
+			if ( !( ishuman(usr) || issmall(usr) ) )
 				usr << "Can only spawn in hand when you're a human or a monkey."
 				where = "onfloor"
 			else if ( usr.get_active_hand() )

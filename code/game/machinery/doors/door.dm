@@ -85,10 +85,10 @@
 		return 0
 	return 1
 
-/obj/machinery/door/proc/can_close(var/forced = 0)
-	if(!density && !operating && !(!forced && (stat & (BROKEN|NOPOWER))))
-		return 1
-	return 0
+/obj/machinery/door/proc/can_close()
+	if(density || operating || !ticker)
+		return 0
+	return 1
 
 /obj/machinery/door/Bumped(atom/AM)
 	if(p_open || operating) return
