@@ -45,6 +45,8 @@
 	var/obj/item/weapon/cell/cell = null
 	var/obj/machinery/camera/camera = null
 
+	var/cell_emp_mult = 2
+
 	// Components are basically robot organs.
 	var/list/components = list()
 
