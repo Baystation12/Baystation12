@@ -257,3 +257,8 @@ var/max_explosion_range = 14
 
 // Announcer intercom, because too much stuff creates an intercom for one message then hard del()s it.
 var/global/obj/item/device/radio/intercom/global_announcer = new(null)
+
+var/list/station_departments = list("Command", "Medical", "Engineering", "Science", "Security", "Cargo", "Civilian")
+
+var/global/const/TICKS_IN_DAY = 864000
+var/global/const/TICKS_IN_SECOND = 10

@@ -59,9 +59,7 @@
 	..()
 	wires = new(src)
 	botcard = new(src)
-	var/datum/job/cargo_tech/J = new/datum/job/cargo_tech
-	botcard.access = J.get_access()
-//	botcard.access += access_robotics //Why --Ikki
+	botcard.access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_qm, access_mint, access_mining, access_mining_station)
 	cell = new(src)
 	cell.charge = 2000
 	cell.maxcharge = 2000

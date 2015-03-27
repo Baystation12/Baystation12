@@ -122,12 +122,24 @@
 #define CARBON_LIFEFORM_FIRE_DAMAGE     4
 
 // Phoron fire properties.
-#define PHORON_MINIMUM_BURN_TEMPERATURE    (T0C +  100)
-#define PHORON_FLASHPOINT                  (T0C +  246)
-#define PHORON_UPPER_TEMPERATURE           (T0C + 1370)
-#define PHORON_MINIMUM_OXYGEN_NEEDED       2
-#define PHORON_MINIMUM_OXYGEN_PHORON_RATIO 20
-#define PHORON_OXYGEN_FULLBURN             10
+#define PHORON_MINIMUM_BURN_TEMPERATURE    (T0C +  126) //400 K - autoignite temperature in tanks and canisters - enclosed environments I guess
+#define PHORON_FLASHPOINT                  (T0C +  246) //519 K - autoignite temperature in air if that ever gets implemented.
+
+//These control the mole ratio of oxidizer and fuel used in the combustion reaction
+#define FIRE_REACTION_OXIDIZER_AMOUNT	3
+#define FIRE_REACTION_FUEL_AMOUNT		2
+
+//These control the speed at which fire burns
+#define FIRE_GAS_BURNRATE_MULT			1
+#define FIRE_LIQUID_BURNRATE_MULT		0.5
+
+//If the fire is burning slower than this rate then the reaction is going too slow to be self sustaining and the fire burns itself out.
+//This ensures that fires don't grind to a near-halt while still remaining active forever.
+#define FIRE_GAS_MIN_BURNRATE				0.1
+#define FIRE_LIQUD_MIN_BURNRATE				0.05
+
+//How many moles of fuel are contained within one solid/liquid fuel volume unit
+#define LIQUIDFUEL_AMOUNT_TO_MOL		1  //mol/volume unit
 
 #define T0C  273.15 //    0.0 degrees celcius
 #define T20C 293.15 //   20.0 degrees celcius
@@ -445,18 +457,17 @@
 #define INVISIBILITY_LEVEL_ONE            35
 #define INVISIBILITY_LEVEL_TWO            45
 #define INVISIBILITY_OBSERVER             60
-#define INVISIBILITY_AI_EYE               61
+#define INVISIBILITY_AI_EYE		          61
 
 #define SEE_INVISIBLE_LIVING              25
 #define SEE_INVISIBLE_OBSERVER_NOLIGHTING 15
 #define SEE_INVISIBLE_LEVEL_ONE           35
 #define SEE_INVISIBLE_LEVEL_TWO           45
-#define SEE_INVISIBLE_OBSERVER_NOOBSERVERS 59
-#define SEE_INVISIBLE_OBSERVER            60
-#define SEE_INVISIBLE_OBSERVER_AI_EYE     61
+#define SEE_INVISIBLE_CULT		          60
+#define SEE_INVISIBLE_OBSERVER            61
 
 #define SEE_INVISIBLE_MINIMUM 5
-#define  INVISIBILITY_MAXIMUM 100
+#define INVISIBILITY_MAXIMUM 100
 
 // Object specific defines.
 #define CANDLE_LUM 3 // For how bright candles are.
@@ -593,6 +604,7 @@ var/list/be_special_flags = list(
 #define    IMPTRACK_HUD 7 // Tracking implant.
 #define SPECIALROLE_HUD 8 // AntagHUD image.
 #define  STATUS_HUD_OOC 9 // STATUS_HUD without virus DB check for someone being ill.
+#define 	  LIFE_HUD 10 // STATUS_HUD that only reports dead or alive
 
 // Pulse levels, very simplified.
 #define PULSE_NONE    0 // So !M.pulse checks would be possible.
@@ -759,8 +771,10 @@ var/list/be_special_flags = list(
 #define STATUS_UPDATE 1 // ORANGE Visability
 #define STATUS_DISABLED 0 // RED Visability
 #define STATUS_CLOSE -1 // Close the interface
+
 //General-purpose life speed define for plants.
 #define HYDRO_SPEED_MULTIPLIER 1
+
 #define NANO_IGNORE_DISTANCE 1
 
 // Robot AI notifications
@@ -768,3 +782,57 @@ var/list/be_special_flags = list(
 #define ROBOT_NOTIFICATION_NEW_NAME 2
 #define ROBOT_NOTIFICATION_NEW_MODULE 3
 #define ROBOT_NOTIFICATION_MODULE_RESET 4
+
+#define DEFAULT_JOB_TYPE /datum/job/assistant
+
+// Appearance change flags
+#define APPEARANCE_UPDATE_DNA 1
+#define APPEARANCE_RACE	2|APPEARANCE_UPDATE_DNA
+#define APPEARANCE_GENDER 4|APPEARANCE_UPDATE_DNA
+#define APPEARANCE_SKIN 8
+#define APPEARANCE_HAIR 16
+#define APPEARANCE_HAIR_COLOR 32
+#define APPEARANCE_FACIAL_HAIR 64
+#define APPEARANCE_FACIAL_HAIR_COLOR 128
+#define APPEARANCE_EYE_COLOR 256
+#define APPEARANCE_ALL_HAIR APPEARANCE_HAIR|APPEARANCE_HAIR_COLOR|APPEARANCE_FACIAL_HAIR|APPEARANCE_FACIAL_HAIR_COLOR
+#define APPEARANCE_ALL 511
+
+// Antagonist datum flags.
+#define ANTAG_OVERRIDE_JOB        1 // Assigned job is set to MODE when spawning.
+#define ANTAG_OVERRIDE_MOB        2 // Mob is recreated from datum mob_type var when spawning.
+#define ANTAG_CLEAR_EQUIPMENT     4 // All preexisting equipment is purged.
+#define ANTAG_CHOOSE_NAME         8 // Antagonists are prompted to enter a name.
+#define ANTAG_IMPLANT_IMMUNE     16 // Cannot be loyalty implanted.
+#define ANTAG_SUSPICIOUS         32 // Shows up on roundstart report.
+#define ANTAG_HAS_LEADER         64 // Generates a leader antagonist.
+#define ANTAG_HAS_NUKE          128 // Will spawn a nuke at supplied location.
+#define ANTAG_RANDSPAWN         256 // Potentially randomly spawns due to events.
+#define ANTAG_VOTABLE           512 // Can be voted as an additional antagonist before roundstart.
+#define ANTAG_SET_APPEARANCE   1024 // Causes antagonists to use an appearance modifier on spawn.
+// Mode/antag template macros.
+#define MODE_BORER "borer"
+#define MODE_XENOMORPH "xeno"
+#define MODE_LOYALIST "loyalist"
+#define MODE_MUTINEER "mutineer"
+#define MODE_COMMANDO "commando"
+#define MODE_DEATHSQUAD "deathsquad"
+#define MODE_ERT "ert"
+#define MODE_MERCENARY "mercenary"
+#define MODE_NINJA "ninja"
+#define MODE_RAIDER "raider"
+#define MODE_WIZARD "wizard"
+#define MODE_CHANGELING "changeling"
+#define MODE_CULTIST "cultist"
+#define MODE_HIGHLANDER "highlander"
+#define MODE_MONKEY "monkey"
+#define MODE_RENEGADE "renegade"
+#define MODE_REVOLUTIONARY "revolutionary"
+#define MODE_MALFUNCTION "malf"
+#define MODE_TRAITOR "traitor"
+
+#define MIN_SUPPLIED_LAW_NUMBER 15
+#define MAX_SUPPLIED_LAW_NUMBER 50
+
+//Area flags, possibly more to come
+#define RAD_SHIELDED 1 //shielded from radiation, clearly

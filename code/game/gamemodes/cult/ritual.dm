@@ -361,10 +361,7 @@ var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", 
 				user << "\red You do not have enough space to write a proper rune."
 				return
 
-
-
-
-			if (C>=26+runedec+ticker.mode.cult.len) //including the useless rune at the secret room, shouldn't count against the limit of 25 runes - Urist
+			if (C>=26 + runedec + cult.current_antagonists.len) //including the useless rune at the secret room, shouldn't count against the limit of 25 runes - Urist
 				alert("The cloth of reality can't take that much of a strain. Remove some runes first!")
 				return
 			else

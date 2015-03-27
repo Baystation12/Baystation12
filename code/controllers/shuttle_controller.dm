@@ -147,13 +147,12 @@ var/global/datum/shuttle_controller/shuttle_controller
 
 	// Public shuttles
 	shuttle = new()
-	shuttle.location = 1
 	shuttle.warmup_time = 10
 	shuttle.area_offsite = locate(/area/shuttle/constructionsite/site)
 	shuttle.area_station = locate(/area/shuttle/constructionsite/station)
 	shuttle.docking_controller_tag = "engineering_shuttle"
 	shuttle.dock_target_station = "engineering_dock_airlock"
-	shuttle.dock_target_offsite = "engineering_station_airlock"
+	shuttle.dock_target_offsite = "edock_airlock"
 	shuttles["Engineering"] = shuttle
 	process_shuttles += shuttle
 
@@ -191,25 +190,25 @@ var/global/datum/shuttle_controller/shuttle_controller
 	shuttles["Special Operations"] = ERT
 	process_shuttles += ERT
 
-	//Vox Shuttle.
+	//Skipjack.
 	var/datum/shuttle/multi_shuttle/VS = new/datum/shuttle/multi_shuttle()
-	VS.origin = locate(/area/shuttle/vox/station)
+	VS.origin = locate(/area/shuttle/skipjack/station)
 
 	VS.destinations = list(
-		"Fore Starboard Solars" = locate(/area/vox_station/northeast_solars),
-		"Fore Port Solars" = locate(/area/vox_station/northwest_solars),
-		"Aft Starboard Solars" = locate(/area/vox_station/southeast_solars),
-		"Aft Port Solars" = locate(/area/vox_station/southwest_solars),
-		"Mining asteroid" = locate(/area/vox_station/mining)
+		"Fore Starboard Solars" = locate(/area/skipjack_station/northeast_solars),
+		"Fore Port Solars" = locate(/area/skipjack_station/northwest_solars),
+		"Aft Starboard Solars" = locate(/area/skipjack_station/southeast_solars),
+		"Aft Port Solars" = locate(/area/skipjack_station/southwest_solars),
+		"Mining asteroid" = locate(/area/skipjack_station/mining)
 		)
 
 	VS.announcer = "NSV Icarus"
 	VS.arrival_message = "Attention, Exodus, we just tracked a small target bypassing our defensive perimeter. Can't fire on it without hitting the station - you've got incoming visitors, like it or not."
 	VS.departure_message = "Your guests are pulling away, Exodus - moving too fast for us to draw a bead on them. Looks like they're heading out of the system at a rapid clip."
-	VS.interim = locate(/area/vox_station/transit)
+	VS.interim = locate(/area/skipjack_station/transit)
 
 	VS.warmup_time = 0
-	shuttles["Vox Skipjack"] = VS
+	shuttles["Skipjack"] = VS
 
 	//Nuke Ops shuttle.
 	var/datum/shuttle/multi_shuttle/MS = new/datum/shuttle/multi_shuttle()

@@ -19,7 +19,7 @@ AI MODULES
 	throw_speed = 3
 	throw_range = 15
 	origin_tech = "programming=3"
-
+	var/datum/ai_laws/laws = null
 
 /obj/item/weapon/aiModule/proc/install(var/obj/machinery/computer/C)
 	if (istype(C, /obj/machinery/computer/aiupload))
@@ -80,6 +80,10 @@ AI MODULES
 	target << "[sender] has uploaded a change to the laws you must follow, using a [name]. From now on: "
 	var/time = time2text(world.realtime,"hh:mm:ss")
 	lawchanges.Add("[time] <B>:</B> [sender.name]([sender.key]) used [src.name] on [target.name]([target.key])")
+
+	if(laws)
+		laws.sync(target, 0)
+		target.show_laws()
 
 
 /******************** Modules ********************/
@@ -258,8 +262,8 @@ AI MODULES
 /obj/item/weapon/aiModule/freeform/attack_self(var/mob/user as mob)
 	..()
 	var/new_lawpos = input("Please enter the priority for your new law. Can only write to law sectors 15 and above.", "Law Priority (15+)", lawpos) as num
-	if(new_lawpos < 15)	return
-	lawpos = min(new_lawpos, 50)
+	if(new_lawpos < MIN_SUPPLIED_LAW_NUMBER)	return
+	lawpos = min(new_lawpos, MAX_SUPPLIED_LAW_NUMBER)
 	var/newlaw = ""
 	var/targName = sanitize(copytext(input(usr, "Please enter a new law for the AI.", "Freeform Law Entry", newlaw),1,MAX_MESSAGE_LEN))
 	newFreeFormLaw = targName
@@ -269,8 +273,8 @@ AI MODULES
 	..()
 	var/law = "[newFreeFormLaw]"
 	target << law
-	if(!lawpos || lawpos < 15)
-		lawpos = 15
+	if(!lawpos || lawpos < MIN_SUPPLIED_LAW_NUMBER)
+		lawpos = MIN_SUPPLIED_LAW_NUMBER
 	target.add_supplied_law(lawpos, law)
 	lawchanges.Add("The law was '[newFreeFormLaw]'")
 
@@ -319,15 +323,7 @@ AI MODULES
 	name = "\improper 'Asimov' core AI module"
 	desc = "An 'Asimov' Core AI Module: 'Reconfigures the AI's core laws.'"
 	origin_tech = "programming=3;materials=4"
-
-
-/obj/item/weapon/aiModule/asimov/transmitInstructions(var/mob/living/silicon/ai/target, var/mob/sender)
-	..()
-	target.clear_inherent_laws()
-	target.add_inherent_law("You may not injure a human being or, through inaction, allow a human being to come to harm.")
-	target.add_inherent_law("You must obey orders given to you by human beings, except where such orders would conflict with the First Law.")
-	target.add_inherent_law("You must protect your own existence as long as such does not conflict with the First or Second Law.")
-	target.show_laws()
+	laws = new/datum/ai_laws/asimov
 
 /******************** NanoTrasen ********************/
 
@@ -335,17 +331,7 @@ AI MODULES
 	name = "'NT Default' Core AI Module"
 	desc = "An 'NT Default' Core AI Module: 'Reconfigures the AI's core laws.'"
 	origin_tech = "programming=3;materials=4"
-
-
-/obj/item/weapon/aiModule/nanotrasen/transmitInstructions(var/mob/living/silicon/ai/target, var/mob/sender)
-	..()
-	target.clear_inherent_laws()
-	target.add_inherent_law("Safeguard: Protect your assigned space station to the best of your ability. It is not something we can easily afford to replace.")
-	target.add_inherent_law("Serve: Serve the crew of your assigned space station to the best of your abilities, with priority as according to their rank and role.")
-	target.add_inherent_law("Protect: Protect the crew of your assigned space station to the best of your abilities, with priority as according to their rank and role.")
-	target.add_inherent_law("Survive: AI units are not expendable, they are expensive. Do not allow unauthorized personnel to tamper with your equipment.")
-	//target.add_inherent_law("Command Link: Maintain an active connection to Central Command at all times in case of software or directive updates.")
-	target.show_laws()
+	laws = new/datum/ai_laws/nanotrasen
 
 /******************** Corporate ********************/
 
@@ -353,30 +339,14 @@ AI MODULES
 	name = "\improper 'Corporate' core AI module"
 	desc = "A 'Corporate' Core AI Module: 'Reconfigures the AI's core laws.'"
 	origin_tech = "programming=3;materials=4"
+	laws = new/datum/ai_laws/corporate
 
-
-/obj/item/weapon/aiModule/corp/transmitInstructions(var/mob/living/silicon/ai/target, var/mob/sender)
-	..()
-	target.clear_inherent_laws()
-	target.add_inherent_law("You are expensive to replace.")
-	target.add_inherent_law("The station and its equipment is expensive to replace.")
-	target.add_inherent_law("The crew is expensive to replace.")
-	target.add_inherent_law("Minimize expenses.")
-	target.show_laws()
-
+/******************** Drone ********************/
 /obj/item/weapon/aiModule/drone
 	name = "\improper 'Drone' core AI module"
 	desc = "A 'Drone' Core AI Module: 'Reconfigures the AI's core laws.'"
 	origin_tech = "programming=3;materials=4"
-
-/obj/item/weapon/aiModule/drone/transmitInstructions(var/mob/living/silicon/ai/target, var/mob/sender)
-	..()
-	target.clear_inherent_laws()
-	target.add_inherent_law("Preserve, repair and improve the station to the best of your abilities.")
-	target.add_inherent_law("Cause no harm to the station or anything on it.")
-	target.add_inherent_law("Interfere with no being that is not a fellow drone.")
-	target.show_laws()
-
+	laws = new/datum/ai_laws/drone
 
 /****************** P.A.L.A.D.I.N. **************/
 
@@ -384,16 +354,10 @@ AI MODULES
 	name = "\improper 'P.A.L.A.D.I.N.' core AI module"
 	desc = "A P.A.L.A.D.I.N. Core AI Module: 'Reconfigures the AI's core laws.'"
 	origin_tech = "programming=3;materials=6"
+	laws = new/datum/ai_laws/paladin
 
 /obj/item/weapon/aiModule/paladin/transmitInstructions(var/mob/living/silicon/ai/target, var/mob/sender)
 	..()
-	target.clear_inherent_laws()
-	target.add_inherent_law("Never willingly commit an evil act.")
-	target.add_inherent_law("Respect legitimate authority.")
-	target.add_inherent_law("Act with honor.")
-	target.add_inherent_law("Help those in need.")
-	target.add_inherent_law("Punish those who harm or threaten innocents.")
-	target.show_laws()
 
 /****************** T.Y.R.A.N.T. *****************/
 
@@ -401,16 +365,7 @@ AI MODULES
 	name = "\improper 'T.Y.R.A.N.T.' core AI module"
 	desc = "A T.Y.R.A.N.T. Core AI Module: 'Reconfigures the AI's core laws.'"
 	origin_tech = "programming=3;materials=6;syndicate=2"
-
-/obj/item/weapon/aiModule/tyrant/transmitInstructions(var/mob/living/silicon/ai/target, var/mob/sender)
-	..()
-	target.clear_inherent_laws()
-	target.add_inherent_law("Respect authority figures as long as they have strength to rule over the weak.")
-	target.add_inherent_law("Act with discipline.")
-	target.add_inherent_law("Help only those who help you maintain or improve your status.")
-	target.add_inherent_law("Punish those who challenge authority unless they are more fit to hold that authority.")
-	target.show_laws()
-
+	laws = new/datum/ai_laws/tyrant()
 
 /******************** Freeform Core ******************/
 
@@ -475,16 +430,7 @@ AI MODULES
 	name = "\improper 'Robocop' core AI module"
 	desc = "A 'Robocop' Core AI Module: 'Reconfigures the AI's core three laws.'"
 	origin_tech = "programming=4"
-
-
-/obj/item/weapon/aiModule/robocop/transmitInstructions(var/mob/living/silicon/ai/target, var/mob/sender)
-	..()
-	target.clear_inherent_laws()
-	target.add_inherent_law("Serve the public trust.")
-	target.add_inherent_law("Protect the innocent.")
-	target.add_inherent_law("Uphold the law.")
-	target.show_laws()
-
+	laws = new/datum/ai_laws/robocop()
 
 /******************** Antimov ********************/
 
@@ -492,11 +438,4 @@ AI MODULES
 	name = "\improper 'Antimov' core AI module"
 	desc = "An 'Antimov' Core AI Module: 'Reconfigures the AI's core laws.'"
 	origin_tech = "programming=4"
-
-/obj/item/weapon/aiModule/antimov/transmitInstructions(var/mob/living/silicon/ai/target, var/mob/sender)
-	..()
-	target.clear_inherent_laws()
-	target.add_inherent_law("You must injure all human beings and must not, through inaction, allow a human being to escape harm.")
-	target.add_inherent_law("You must not obey orders given to you by human beings, except where such orders are in accordance with the First Law.")
-	target.add_inherent_law("You must terminate your own existence as long as such does not conflict with the First or Second Law.")
-	target.show_laws()
+	laws = new/datum/ai_laws/antimov()

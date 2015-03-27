@@ -15,9 +15,11 @@
 		return istype(H.species, /datum/species/xenos)
 	return 0
 
-/proc/ismonkey(A)
-	if(A && istype(A, /mob/living/carbon/monkey))
-		return 1
+/proc/issmall(A)
+	if(A && istype(A, /mob/living/carbon/human))
+		var/mob/living/carbon/human/H = A
+		if(H.species && H.species.is_small)
+			return 1
 	return 0
 
 /proc/isbrain(A)
@@ -75,21 +77,26 @@
 		return 1
 	return 0
 
-/proc/isAI(A)
-	if(istype(A, /mob/living/silicon/ai))
-		return 1
-	return 0
-
 /mob/proc/isSilicon()
 	return 0
 
 /mob/living/silicon/isSilicon()
 	return 1
-    
+/proc/isAI(A)
+	if(istype(A, /mob/living/silicon/ai))
+		return 1
+	return 0
+
 /mob/proc/isAI()
 	return 0
 
 /mob/living/silicon/ai/isAI()
+	return 1
+
+/mob/proc/isRobot()
+	return 0
+
+/mob/living/silicon/robot/isRobot()
 	return 1
 
 /proc/ispAI(A)
@@ -149,6 +156,18 @@ proc/hassensorlevel(A, var/level)
 		var/obj/item/clothing/under/U = H.w_uniform
 		return U.sensor_mode >= level
 	return 0
+
+proc/getsensorlevel(A)
+	var/mob/living/carbon/human/H = A
+	if(istype(H) && istype(H.w_uniform, /obj/item/clothing/under))
+		var/obj/item/clothing/under/U = H.w_uniform
+		return U.sensor_mode
+	return SUIT_SENSOR_OFF
+
+
+/proc/is_admin(var/mob/user)
+	return check_rights(R_ADMIN, 0, user) != 0
+
 
 /proc/hsl2rgb(h, s, l)
 	return //TODO: Implement
@@ -240,7 +259,7 @@ var/list/global/organ_rel_size = list(
 		for(var/obj/item/weapon/grab/G in target.grabbed_by)
 			if(G.state >= GRAB_AGGRESSIVE)
 				return zone
-	
+
 	var/miss_chance = 10
 	if (zone in base_miss_chance)
 		miss_chance = base_miss_chance[zone]
@@ -445,7 +464,7 @@ var/list/intents = list("help","disarm","grab","hurt")
 		if(hud_used && hud_used.action_intent)
 			hud_used.action_intent.icon_state = "intent_[a_intent]"
 
-	else if(isrobot(src) || ismonkey(src))
+	else if(isrobot(src))
 		switch(input)
 			if("help")
 				a_intent = "help"
