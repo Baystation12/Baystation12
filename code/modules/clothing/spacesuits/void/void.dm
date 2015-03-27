@@ -55,6 +55,7 @@
 	//Inbuilt devices.
 	var/obj/item/clothing/shoes/magboots/boots = null // Deployable boots, if any.
 	var/obj/item/clothing/head/helmet/helmet = null   // Deployable helmet, if any.
+	var/obj/item/weapon/tank/tank = null              // Deployable tank, if any.
 
 /obj/item/clothing/suit/space/void/refit_for_species(var/target_species)
 	..()
@@ -87,6 +88,13 @@
 			M << "Your suit's boots deploy with a hiss."
 			boots.canremove = 0
 
+	if(tank)
+		if(H.s_store) //In case someone finds a way.
+			M << "Alarmingly, the valve on your suit's installed tank fails to engage."
+		else if (H.equip_to_slot_if_possible(tank, slot_s_store))
+			M << "The valve on your suit's installed tank safely engages."
+			tank.canremove = 0
+
 /obj/item/clothing/suit/space/void/dropped()
 	..()
 
@@ -107,6 +115,10 @@
 				boots.canremove = 1
 				H.drop_from_inventory(boots)
 				boots.loc = src
+	
+	if(tank)
+		tank.canremove = 1
+		tank.loc = src
 
 /obj/item/clothing/suit/space/void/verb/toggle_helmet()
 
@@ -150,7 +162,11 @@
 		return
 
 	if(istype(W,/obj/item/weapon/screwdriver))
-		if(helmet)
+		if(tank)
+			user << "You pop \the [tank] out of \the [src]'s storage compartment."
+			tank.loc = get_turf(src)
+			src.tank = null
+		else if(helmet)
 			user << "You detatch \the [helmet] from \the [src]'s helmet mount."
 			helmet.loc = get_turf(src)
 			src.helmet = null
@@ -178,6 +194,17 @@
 			user.drop_item()
 			W.loc = src
 			boots = W
+		return
+	else if(istype(W,/obj/item/weapon/tank))
+		if(tank)
+			user << "\The [src] already has an airtank installed."
+		else if(istype(W,/obj/item/weapon/tank/phoron))
+			user << "\The [W] cannot be inserted into \the [src]'s storage compartment."
+		else
+			user << "You insert \the [W] into \the [src]'s storage compartment."
+			user.drop_item()
+			W.loc = src
+			tank = W
 		return
 
 	..()
