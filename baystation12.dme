@@ -1274,6 +1274,7 @@
 #include "code\modules\organs\organ_internal.dm"
 #include "code\modules\organs\organ_stump.dm"
 #include "code\modules\organs\pain.dm"
+#include "code\modules\organs\robolimbs.dm"
 #include "code\modules\organs\wound.dm"
 #include "code\modules\overmap\_defines.dm"
 #include "code\modules\overmap\sectors.dm"

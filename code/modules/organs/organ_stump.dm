@@ -16,6 +16,9 @@
 	if(istype(limb))
 		max_damage = limb.max_damage
 
+/obj/item/organ/external/stump/is_stump()
+	return 1
+
 /obj/item/organ/external/stump/removed()
 	..()
 	del(src)

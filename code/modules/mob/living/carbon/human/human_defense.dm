@@ -194,7 +194,7 @@ emp_act
 
 	var/obj/item/organ/external/affecting = get_organ(target_zone)
 
-	if (!affecting || affecting.status & ORGAN_DESTROYED || istype(affecting, /obj/item/organ/external/stump))
+	if (!affecting || (affecting.status & ORGAN_DESTROYED) || affecting.is_stump())
 		user << "<span class='danger'>They are missing that limb!</span>"
 		return
 

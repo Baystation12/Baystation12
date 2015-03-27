@@ -183,6 +183,8 @@ var/global/list/damage_icon_parts = list()
 	var/damage_appearance = ""
 
 	for(var/obj/item/organ/external/O in organs)
+		if(O.is_stump())
+			continue
 		if(O.status & ORGAN_DESTROYED) damage_appearance += "d"
 		else
 			damage_appearance += O.damage_state
@@ -199,6 +201,8 @@ var/global/list/damage_icon_parts = list()
 
 	// blend the individual damage states with our icons
 	for(var/obj/item/organ/external/O in organs)
+		if(O.is_stump())
+			continue
 		if(!(O.status & ORGAN_DESTROYED))
 			O.update_icon()
 			if(O.damage_state == "00") continue
@@ -241,10 +245,10 @@ var/global/list/damage_icon_parts = list()
 
 	var/icon_key = "[species.race_key][g][s_tone]"
 	for(var/obj/item/organ/external/part in organs)
-		if(part.status & ORGAN_DESTROYED)
+		if(part.is_stump() || (part.status & ORGAN_DESTROYED))
 			icon_key = "[icon_key]0"
 		else if(part.status & ORGAN_ROBOT)
-			icon_key = "[icon_key]2"
+			icon_key = "[icon_key]2[part.model ? "-[part.model]": ""]"
 		else if(part.status & ORGAN_DEAD)
 			icon_key = "[icon_key]3"
 		else

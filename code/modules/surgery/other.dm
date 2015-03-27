@@ -21,7 +21,7 @@
 			return 0
 
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
-
+		if(!affected) return
 		var/internal_bleeding = 0
 		for(var/datum/wound/W in affected.wounds) if(W.internal)
 			internal_bleeding = 1
@@ -75,7 +75,7 @@
 
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 
-		return affected.open >= 2 && (affected.status & ORGAN_DEAD)
+		return affected && affected.open >= 2 && (affected.status & ORGAN_DEAD)
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
@@ -127,7 +127,7 @@
 			return 0
 
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
-		return affected.open == 3 && (affected.status & ORGAN_DEAD)
+		return affected && affected.open == 3 && (affected.status & ORGAN_DEAD)
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)

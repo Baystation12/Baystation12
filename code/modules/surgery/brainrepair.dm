@@ -15,6 +15,7 @@
 
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
+		if(!affected) return
 		var/obj/item/organ/brain/sponge = target.internal_organs_by_name["brain"]
 		return (sponge && sponge.damage > 0 && sponge.damage <= 20) && affected.open == 3
 
@@ -47,6 +48,7 @@
 
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
+		if(!affected) return
 		var/obj/item/organ/brain/sponge = target.internal_organs_by_name["brain"]
 		return (sponge && sponge.damage > 20) && affected.open == 3
 

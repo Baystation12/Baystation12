@@ -21,14 +21,14 @@
 	if(force_process)
 		bad_external_organs.Cut()
 		for(var/obj/item/organ/external/Ex in organs)
-			bad_external_organs += Ex
+			bad_external_organs |= Ex
 
 	//processing internal organs is pretty cheap, do that first.
 	for(var/obj/item/organ/I in internal_organs)
 		I.process()
 
-	//losing a limb stops it from processing, so this has to be done separately
 	handle_stance()
+	handle_grasp()
 
 	if(!force_process && !bad_external_organs.len)
 		return
@@ -68,20 +68,21 @@
 	if (istype(buckled, /obj/structure/bed))
 		return
 
-	for (var/organ in list("l_leg","l_foot","r_leg","r_foot"))
-		var/obj/item/organ/external/E = organs_by_name[organ]
-		if(E)
-			if (E.status & ORGAN_DESTROYED)
-				stance_damage += 2 // let it fail even if just foot&leg
-			else if (E.is_malfunctioning() || (E.is_broken() && !(E.status & ORGAN_SPLINTED)) || !E.is_usable())
-				stance_damage += 1
+	for(var/limb_tag in list("l_leg","r_leg","l_foot","r_foot"))
+		var/obj/item/organ/external/E = organs_by_name[limb_tag]
+		if(!E)
+			stance_damage += 2
+		else if (E.status & ORGAN_DESTROYED)
+			stance_damage += 2 // let it fail even if just foot&leg
+		else if (E.is_malfunctioning() || (E.is_broken() && !(E.status & ORGAN_SPLINTED)) || !E.is_usable())
+			stance_damage += 1
 
 	// Canes and crutches help you stand (if the latter is ever added)
 	// One cane mitigates a broken leg+foot, or a missing foot.
 	// Two canes are needed for a lost leg. If you are missing both legs, canes aren't gonna help you.
-	if (istype(l_hand, /obj/item/weapon/cane))
+	if (l_hand && istype(l_hand, /obj/item/weapon/cane))
 		stance_damage -= 2
-	if (istype(l_hand, /obj/item/weapon/cane))
+	if (r_hand && istype(r_hand, /obj/item/weapon/cane))
 		stance_damage -= 2
 
 	// standing is poor
@@ -91,6 +92,40 @@
 				emote("scream")
 			custom_emote(1, "collapses!")
 		Weaken(5) //can't emote while weakened, apparently.
+
+/mob/living/carbon/human/proc/handle_grasp()
+
+	if(!l_hand && !r_hand)
+		return
+
+	for (var/obj/item/organ/external/E in organs)
+		if(!E || !E.can_grasp || (E.status & ORGAN_SPLINTED))
+			continue
+
+		if(E.is_broken())
+			if(E.body_part == HAND_LEFT)
+				u_equip(l_hand)
+			else
+				u_equip(r_hand)
+
+			var/emote_scream = pick("screams in pain and ", "lets out a sharp cry and ", "cries out and ")
+			emote("me", 1, "[(species.flags & NO_PAIN) ? "" : emote_scream ]drops what they were holding in their [E.name]!")
+
+		else if(E.is_malfunctioning())
+
+			if(E.body_part == HAND_LEFT)
+				u_equip(l_hand)
+			else
+				u_equip(r_hand)
+
+			emote("me", 1, "drops what they were holding, their [E.name] malfunctioning!")
+
+			var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
+			spark_system.set_up(5, 0, src)
+			spark_system.attach(src)
+			spark_system.start()
+			spawn(10)
+				del(spark_system)
 
 //Handles chem traces
 /mob/living/carbon/human/proc/handle_trace_chems()

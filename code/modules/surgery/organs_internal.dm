@@ -10,7 +10,7 @@
 		return 0
 
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	return affected.open == (affected.encased ? 3 : 2)
+	return affected && affected.open == (affected.encased ? 3 : 2)
 
 //////////////////////////////////////////////////////////////////
 //					ALIEN EMBRYO SURGERY						//
@@ -35,7 +35,7 @@
 		if (!hasorgans(target))
 			return
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
-		return ..() && embryo && affected.open == 3 && target_zone == "chest"
+		return ..() && affected && embryo && affected.open == 3 && target_zone == "chest"
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/msg = "[user] starts to pull something out from [target]'s ribcage with \the [tool]."
@@ -69,7 +69,8 @@
 		if (!hasorgans(target))
 			return
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
-
+		if(!affected)
+			return
 		var/is_organ_damaged = 0
 		for(var/obj/item/organ/I in affected.internal_organs)
 			if(I.damage > 0)
@@ -152,7 +153,7 @@
 		if (!hasorgans(target))
 			return
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
-
+		if(!affected) return
 		var/is_organ_damaged = 0
 		for(var/obj/item/organ/I in affected.internal_organs)
 			if(I.damage > 0 && I.robotic >= 2)
@@ -327,7 +328,7 @@
 
 		var/obj/item/organ/O = tool
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
-
+		if(!affected) return
 		var/organ_compatible
 		var/organ_missing
 

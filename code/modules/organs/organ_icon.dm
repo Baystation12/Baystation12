@@ -13,41 +13,51 @@ var/global/list/limb_icon_cache = list()
 				overlays += child.get_icon()
 		overlays += organ.get_icon()
 
+/obj/item/organ/external/proc/sync_colour_to_human(var/mob/living/carbon/human/human)
+	s_tone = null
+	s_col = null
+	if(human.s_tone && (human.species.flags & HAS_SKIN_TONE))
+		s_tone = human.s_tone
+	if(human.species.flags & HAS_SKIN_COLOR)
+		s_col = list(human.r_skin, human.g_skin, human.b_skin)
+
 /obj/item/organ/external/proc/get_icon(var/skeletal)
 
-	if(!owner)
-		mob_icon = new /icon('icons/mob/human_races/r_human.dmi', "[icon_name][gendered_icon ? "_f" : ""]")
+	var/gender
+	if(force_icon)
+		mob_icon = new /icon(force_icon, "[icon_name]")
 	else
-
-		var/gender
-		if(gendered_icon)
-			if(owner.gender == FEMALE)
-				gender = "f"
-			else
-				gender = "m"
-
-		//TODO: cache these icons
-		if(skeletal)
-			mob_icon = new /icon('icons/mob/human_races/r_skeleton.dmi', "[icon_name][gender ? "_[gender]" : ""]")
-		else if ((status & ORGAN_ROBOT) && !(owner.species && owner.species.flags & IS_SYNTHETIC))
-			mob_icon = new /icon('icons/mob/human_races/robotic.dmi', "[icon_name][gender ? "_[gender]" : ""]")
+		if(!owner)
+			mob_icon = new /icon('icons/mob/human_races/r_human.dmi', "[icon_name][gendered_icon ? "_f" : ""]")
 		else
-			if (status & ORGAN_MUTATED)
-				mob_icon = new /icon(owner.species.deform, "[icon_name][gender ? "_[gender]" : ""]")
-			else
-				mob_icon = new /icon(owner.species.icobase, "[icon_name][gender ? "_[gender]" : ""]")
 
-			if(status & ORGAN_DEAD)
-				mob_icon.ColorTone(rgb(10,50,0))
-				mob_icon.SetIntensity(0.7)
-
-			if(owner.species.flags & HAS_SKIN_TONE)
-				if(owner.s_tone >= 0)
-					mob_icon.Blend(rgb(owner.s_tone, owner.s_tone, owner.s_tone), ICON_ADD)
+			if(gendered_icon)
+				if(owner.gender == FEMALE)
+					gender = "f"
 				else
-					mob_icon.Blend(rgb(-owner.s_tone,  -owner.s_tone,  -owner.s_tone), ICON_SUBTRACT)
-			else if(owner.species.flags & HAS_SKIN_COLOR)
-				mob_icon.Blend(rgb(owner.r_skin, owner.g_skin, owner.b_skin), ICON_ADD)
+					gender = "m"
+
+			if(skeletal)
+				mob_icon = new /icon('icons/mob/human_races/r_skeleton.dmi', "[icon_name][gender ? "_[gender]" : ""]")
+			else if ((status & ORGAN_ROBOT) && !(owner.species && owner.species.flags & IS_SYNTHETIC))
+				mob_icon = new /icon('icons/mob/human_races/robotic.dmi', "[icon_name][gender ? "_[gender]" : ""]")
+			else
+				if (status & ORGAN_MUTATED)
+					mob_icon = new /icon(owner.species.deform, "[icon_name][gender ? "_[gender]" : ""]")
+				else
+					mob_icon = new /icon(owner.species.icobase, "[icon_name][gender ? "_[gender]" : ""]")
+
+				if(status & ORGAN_DEAD)
+					mob_icon.ColorTone(rgb(10,50,0))
+					mob_icon.SetIntensity(0.7)
+
+				if(!isnull(s_tone))
+					if(s_tone >= 0)
+						mob_icon.Blend(rgb(s_tone, s_tone, s_tone), ICON_ADD)
+					else
+						mob_icon.Blend(rgb(-s_tone,  -s_tone,  -s_tone), ICON_SUBTRACT)
+				else if(s_col && s_col.len >= 3)
+					mob_icon.Blend(rgb(s_col[1], s_col[2], s_col[3]), ICON_ADD)
 
 	dir = EAST
 	icon = mob_icon

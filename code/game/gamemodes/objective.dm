@@ -458,7 +458,9 @@ datum/objective/harm
 			for(var/obj/item/organ/external/E in H.organs)
 				if(E.status & ORGAN_BROKEN)
 					return 1
-			for(var/limb_type in H.species.has_limbs) //todo check prefs for robotic limbs and amputations.
+			for(var/limb_tag in H.species.has_limbs) //todo check prefs for robotic limbs and amputations.
+				var/list/organ_data = H.species.has_limbs[limb_tag]
+				var/limb_type = organ_data["path"]
 				var/found
 				for(var/obj/item/organ/external/E in H.organs)
 					if(limb_type == E.type)

@@ -12,7 +12,7 @@
 			return 0
 
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
-		return affected.encased && affected.open >= 2
+		return affected && affected.encased && affected.open >= 2
 
 
 /datum/surgery_step/open_encased/saw
@@ -28,7 +28,7 @@
 		if (!hasorgans(target))
 			return
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
-		return ..() && affected.open == 2
+		return ..() && affected && affected.open == 2
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 
@@ -77,7 +77,7 @@
 		if (!hasorgans(target))
 			return
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
-		return ..() && affected.open == 2.5
+		return ..() && affected && affected.open == 2.5
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 
@@ -134,7 +134,7 @@
 		if (!hasorgans(target))
 			return
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
-		return ..() && affected.open == 3
+		return ..() && affected && affected.open == 3
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 
@@ -191,7 +191,7 @@
 		if (!hasorgans(target))
 			return
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
-		return ..() && affected.open == 2.5
+		return ..() && affected && affected.open == 2.5
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 

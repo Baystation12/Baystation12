@@ -117,17 +117,17 @@
 		)
 
 	var/list/has_limbs = list(
-		/obj/item/organ/external/chest,
-		/obj/item/organ/external/groin,
-		/obj/item/organ/external/head,
-		/obj/item/organ/external/arm,
-		/obj/item/organ/external/arm/right,
-		/obj/item/organ/external/leg,
-		/obj/item/organ/external/leg/right,
-		/obj/item/organ/external/hand,
-		/obj/item/organ/external/hand/right,
-		/obj/item/organ/external/foot,
-		/obj/item/organ/external/foot/right
+		"chest" =  list("path" = /obj/item/organ/external/chest),
+		"groin" =  list("path" = /obj/item/organ/external/groin),
+		"head" =   list("path" = /obj/item/organ/external/head),
+		"l_arm" =  list("path" = /obj/item/organ/external/arm),
+		"r_arm" =  list("path" = /obj/item/organ/external/arm/right),
+		"l_leg" =  list("path" = /obj/item/organ/external/leg),
+		"r_leg" =  list("path" = /obj/item/organ/external/leg/right),
+		"l_hand" = list("path" = /obj/item/organ/external/hand),
+		"r_hand" = list("path" = /obj/item/organ/external/hand/right),
+		"l_foot" = list("path" = /obj/item/organ/external/foot),
+		"r_foot" = list("path" = /obj/item/organ/external/foot/right)
 		)
 
 /datum/species/New()
@@ -182,14 +182,17 @@
 	H.internal_organs_by_name = list()
 
 	for(var/limb_type in has_limbs)
-		new limb_type(H)
+		var/list/organ_data = has_limbs[limb_type]
+		var/limb_path = organ_data["path"]
+		var/obj/item/organ/O = new limb_path(H)
+		organ_data["descriptor"] = O.name
 
 	for(var/organ in has_organ)
 		var/organ_type = has_organ[organ]
 		H.internal_organs_by_name[organ] = new organ_type(H,1)
 
 	for(var/name in H.organs_by_name)
-		H.organs += H.organs_by_name[name]
+		H.organs |= H.organs_by_name[name]
 
 	for(var/obj/item/organ/external/O in H.organs)
 		O.owner = H
@@ -197,7 +200,7 @@
 	if(flags & IS_SYNTHETIC)
 		for(var/obj/item/organ/external/E in H.organs)
 			if(E.status & ORGAN_CUT_AWAY || E.status & ORGAN_DESTROYED) continue
-			E.status |= ORGAN_ROBOT
+			E.robotize()
 		for(var/obj/item/organ/I in H.internal_organs)
 			I.robotize()
 

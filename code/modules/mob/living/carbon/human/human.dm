@@ -1337,7 +1337,7 @@
 	var/list/limbs = list()
 	for(var/limb in organs_by_name)
 		var/obj/item/organ/external/current_limb = organs_by_name[limb]
-		if(current_limb.dislocated == 2)
+		if(current_limb && current_limb.dislocated == 2)
 			limbs |= limb
 
 	var/choice = input(src,"Which joint do you wish to relocate?") as null|anything in limbs
