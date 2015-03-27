@@ -1,8 +1,3 @@
-var/list/robot_verbs_default = list(
-	/mob/living/silicon/robot/proc/sensor_mode,
-	/mob/living/silicon/robot/proc/robot_checklaws
-)
-
 #define CYBORG_POWER_USAGE_MULTIPLIER 2.5 // Multiplier for amount of power cyborgs use.
 
 /mob/living/silicon/robot
@@ -50,6 +45,8 @@ var/list/robot_verbs_default = list(
 	var/obj/item/weapon/cell/cell = null
 	var/obj/machinery/camera/camera = null
 
+	var/cell_emp_mult = 2
+
 	// Components are basically robot organs.
 	var/list/components = list()
 
@@ -84,6 +81,11 @@ var/list/robot_verbs_default = list(
 	var/tracking_entities = 0 //The number of known entities currently accessing the internal camera
 	var/braintype = "Cyborg"
 
+	var/list/robot_verbs_default = list(
+		/mob/living/silicon/robot/proc/sensor_mode,
+		/mob/living/silicon/robot/proc/robot_checklaws
+	)
+
 /mob/living/silicon/robot/syndicate
 	lawupdate = 0
 	scrambledcodes = 1
@@ -113,7 +115,7 @@ var/list/robot_verbs_default = list(
 	robot_modules_background.layer = 19 //Objects that appear on screen are on layer 20, UI should be just below it.
 	ident = rand(1, 999)
 	module_sprites["Basic"] = "robot"
-	icontype = "Default"
+	icontype = "Basic"
 	updatename("Default")
 	updateicon()
 
@@ -506,15 +508,13 @@ var/list/robot_verbs_default = list(
 // this function shows information about the malf_ai gameplay type in the status screen
 /mob/living/silicon/robot/show_malf_ai()
 	..()
-	if(ticker.mode.name == "AI malfunction")
-		var/datum/game_mode/malfunction/malf = ticker.mode
-		for (var/datum/mind/malfai in malf.malf_ai)
-			if(connected_ai)
-				if(connected_ai.mind == malfai)
-					if(malf.apcs >= 3)
-						stat(null, "Time until station control secured: [max(malf.AI_win_timeleft/(malf.apcs/3), 0)] seconds")
-			else if(ticker.mode:malf_mode_declared)
-				stat(null, "Time left: [max(ticker.mode:AI_win_timeleft/(ticker.mode:apcs/3), 0)]")
+	for (var/datum/mind/malfai in malf.current_antagonists)
+		if(connected_ai)
+			if(connected_ai.mind == malfai)
+				if(malf.hacked_apcs >= 3)
+					stat(null, "Time until station control secured: [max(malf.hack_time/(malf.hacked_apcs/3), 0)] seconds")
+		else if(malf.revealed)
+			stat(null, "Time left: [max(malf.hack_time/(malf.hacked_apcs.len/3), 0)]")
 	return 0
 
 
@@ -901,11 +901,6 @@ var/list/robot_verbs_default = list(
 		//if they are holding or wearing a card that has access, that works
 		if(check_access(H.get_active_hand()) || check_access(H.wear_id))
 			return 1
-	else if(istype(M, /mob/living/carbon/monkey))
-		var/mob/living/carbon/monkey/george = M
-		//they can only hold things :(
-		if(george.get_active_hand() && istype(george.get_active_hand(), /obj/item/weapon/card/id) && check_access(george.get_active_hand()))
-			return 1
 	return 0
 
 /mob/living/silicon/robot/proc/check_access(obj/item/weapon/card/id/I)
@@ -1063,28 +1058,6 @@ var/list/robot_verbs_default = list(
 			src << "Module isn't activated"
 		installed_modules()
 		return 1
-
-	if (href_list["lawc"]) // Toggling whether or not a law gets stated by the State Laws verb --NeoFite
-		var/L = text2num(href_list["lawc"])
-		switch(lawcheck[L+1])
-			if ("Yes") lawcheck[L+1] = "No"
-			if ("No") lawcheck[L+1] = "Yes"
-//		src << text ("Switching Law [L]'s report status to []", lawcheck[L+1])
-		checklaws()
-		return 1
-
-	if (href_list["lawi"]) // Toggling whether or not a law gets stated by the State Laws verb --NeoFite
-		var/L = text2num(href_list["lawi"])
-		switch(ioncheck[L])
-			if ("Yes") ioncheck[L] = "No"
-			if ("No") ioncheck[L] = "Yes"
-//		src << text ("Switching Law [L]'s report status to []", lawcheck[L+1])
-		checklaws()
-		return 1
-
-	if (href_list["laws"]) // With how my law selection code works, I changed statelaws from a verb to a proc, and call it through my law selection panel. --NeoFite
-		statelaws()
-		return 1
 	return
 
 /mob/living/silicon/robot/proc/radio_menu()
@@ -1215,11 +1188,11 @@ var/list/robot_verbs_default = list(
 
 /mob/living/silicon/robot/proc/add_robot_verbs()
 	src.verbs |= robot_verbs_default
-	src.verbs |= robot_verbs_subsystems
+	src.verbs |= silicon_verbs_subsystems
 
 /mob/living/silicon/robot/proc/remove_robot_verbs()
 	src.verbs -= robot_verbs_default
-	src.verbs -= robot_verbs_subsystems
+	src.verbs -= silicon_verbs_subsystems
 
 // Uses power from cyborg's cell. Returns 1 on success or 0 on failure.
 // Properly converts using CELLRATE now! Amount is in Joules.

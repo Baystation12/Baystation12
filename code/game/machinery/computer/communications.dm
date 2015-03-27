@@ -430,7 +430,7 @@
 	if ((!( ticker ) || !emergency_shuttle.location()))
 		return
 
-	if(sent_strike_team == 1)
+	if(deathsquad.deployed)
 		user << "Centcom will not allow the shuttle to be called. Consider all contracts terminated."
 		return
 
@@ -479,7 +479,7 @@
 			user << "Centcom does not currently have a shuttle available in your sector. Please try again later."
 			return
 
-		if(sent_strike_team == 1)
+		if(deathsquad.deployed == 1)
 			user << "Centcom will not allow the shuttle to be called. Consider all contracts terminated."
 			return
 
@@ -487,7 +487,7 @@
 			user << "The shuttle is refueling. Please wait another [round((54000-world.time)/60)] minutes before trying again."
 			return
 
-		if(ticker.mode.name == "revolution" || ticker.mode.name == "AI malfunction" || ticker.mode.name == "sandbox")
+		if(ticker.mode.auto_recall_shuttle)
 			//New version pretends to call the shuttle but cause the shuttle to return after a random duration.
 			emergency_shuttle.auto_recall = 1
 
@@ -510,7 +510,7 @@
 /proc/cancel_call_proc(var/mob/user)
 	if (!( ticker ) || !emergency_shuttle.can_recall())
 		return
-	if((ticker.mode.name == "blob")||(ticker.mode.name == "meteor"))
+	if((ticker.mode.name == "blob")||(ticker.mode.name == "Meteor"))
 		return
 
 	if(!emergency_shuttle.going_to_centcom()) //check that shuttle isn't already heading to centcomm
@@ -556,7 +556,7 @@
 		if(!shuttlecaller.stat && shuttlecaller.client && istype(shuttlecaller.loc,/turf))
 			return ..()
 
-	if(ticker.mode.name == "revolution" || ticker.mode.name == "AI malfunction" || sent_strike_team)
+	if(ticker.mode.name == "revolution" || ticker.mode.name == "AI malfunction" || deathsquad.deployed)
 		return ..()
 
 	emergency_shuttle.call_evac()
@@ -579,7 +579,7 @@
 		if(!shuttlecaller.stat && shuttlecaller.client && istype(shuttlecaller.loc,/turf))
 			return ..()
 
-	if(ticker.mode.name == "revolution" || ticker.mode.name == "AI malfunction" || sent_strike_team)
+	if(ticker.mode.name == "revolution" || ticker.mode.name == "AI malfunction" || deathsquad.deployed)
 		return ..()
 
 	emergency_shuttle.call_evac()

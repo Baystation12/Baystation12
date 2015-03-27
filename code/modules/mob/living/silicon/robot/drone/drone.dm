@@ -5,6 +5,7 @@
 	icon_state = "repairbot"
 	maxHealth = 35
 	health = 35
+	cell_emp_mult = 1
 	universal_speak = 0
 	universal_understand = 1
 	gender = NEUTER
@@ -285,7 +286,7 @@
 		return
 
 /mob/living/silicon/robot/drone/add_robot_verbs()
-	src.verbs |= robot_verbs_subsystems
+	src.verbs |= silicon_verbs_subsystems
 
 /mob/living/silicon/robot/drone/remove_robot_verbs()
-	src.verbs -= robot_verbs_subsystems
+	src.verbs -= silicon_verbs_subsystems

@@ -101,11 +101,6 @@
 		//if they are holding or wearing a card that has access, that works
 		if(src.check_access(H.get_active_hand()) || src.check_access(H.wear_id))
 			return 1
-	else if(istype(M, /mob/living/carbon/monkey))
-		var/mob/living/carbon/george = M
-		//they can only hold things :(
-		if(src.check_access(george.get_active_hand()))
-			return 1
 	return 0
 
 /obj/item/proc/GetAccess()
@@ -115,7 +110,7 @@
 	return null
 
 /obj/proc/check_access(obj/item/I)
-	if(!src.req_access.len && !src.req_one_access.len) //no requirements
+	if(!(!req_access || req_access.len) && !(req_one_access || req_one_access.len)) //no requirements
 		return 1
 	if(!I)
 		return 0

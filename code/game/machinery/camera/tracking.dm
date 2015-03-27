@@ -213,7 +213,7 @@
 mob/living/proc/near_camera()
 	if (!isturf(loc))
 		return 0
-	else if(!cameranet.checkCameraVis(src))
+	else if(!cameranet.checkVis(src))
 		return 0
 	return 1
 

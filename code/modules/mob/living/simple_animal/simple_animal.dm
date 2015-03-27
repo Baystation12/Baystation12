@@ -308,9 +308,8 @@
 
 /mob/living/simple_animal/death()
 	icon_state = icon_dead
-	stat = DEAD
 	density = 0
-	return ..()
+	return ..(deathmessage = "no message")
 
 /mob/living/simple_animal/ex_act(severity)
 	if(!blinded)

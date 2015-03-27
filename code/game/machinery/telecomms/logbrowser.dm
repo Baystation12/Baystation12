@@ -77,7 +77,7 @@
 							race = "[H.species.name]"
 
 
-						else if(ismonkey(M))
+						else if(issmall(M))
 							race = "Monkey"
 							language = race
 
