@@ -627,14 +627,27 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 	src.removed(null, ignore_children)
 
+	wounds.Cut()
 	if(parent)
+		var/datum/wound/W
+		if(max_damage < 50)
+			W = new/datum/wound/lost_limb/small(max_damage)
+		else
+			W = new/datum/wound/lost_limb(max_damage)
 		parent.children -= src
-		if(!clean)
-			new /obj/item/organ/external/stump(owner, 0, src)
+		if(clean)
+			parent.wounds |= W
+			parent.update_damages()
+		else
+			var/obj/item/organ/external/stump/stump = new (owner, 0, src)
+			stump.wounds |= W
+			owner.organs |= stump
+			stump.update_damages()
 		parent = null
 
 	update_health()
 	owner.update_body()
+	dir = SOUTH
 
 	switch(disintegrate)
 		if(0)

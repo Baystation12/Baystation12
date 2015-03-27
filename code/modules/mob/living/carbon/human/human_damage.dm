@@ -5,11 +5,11 @@
 		health = maxHealth
 		stat = CONSCIOUS
 		return
-	var/total_burn	= 0
-	var/total_brute	= 0
+	var/total_burn  = 0
+	var/total_brute = 0
 	for(var/obj/item/organ/external/O in organs)	//hardcoded to streamline things a bit
-		total_brute	+= O.brute_dam
-		total_burn	+= O.burn_dam
+		total_brute += O.brute_dam
+		total_burn  += O.burn_dam
 
 	var/oxy_l = ((species.flags & NO_BREATHE) ? 0 : getOxyLoss())
 	var/tox_l = ((species.flags & NO_POISON) ? 0 : getToxLoss())

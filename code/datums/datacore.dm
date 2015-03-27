@@ -156,7 +156,6 @@ proc/get_id_photo(var/mob/living/carbon/human/H)
 	preview_icon.Blend(temp, ICON_OVERLAY)
 
 	for(var/obj/item/organ/external/E in H.organs)
-		if(E.status & ORGAN_CUT_AWAY || E.status & ORGAN_DESTROYED) continue
 		temp = new /icon(icobase, "[E.name]")
 		if(E.status & ORGAN_ROBOT)
 			temp.MapColors(rgb(77,77,77), rgb(150,150,150), rgb(28,28,28), rgb(0,0,0))

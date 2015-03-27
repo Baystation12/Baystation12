@@ -254,16 +254,9 @@ var/global/list/damage_icon_parts = list()
 
 	var/icon/base_icon
 	if(human_icon_cache[icon_key])
-		//Icon is cached, use existing icon.
 		base_icon = human_icon_cache[icon_key]
-
-		//log_debug("Retrieved cached mob icon ([icon_key] \icon[human_icon_cache[icon_key]]) for [src].")
-
 	else
-
 		//BEGIN CACHED ICON GENERATION.
-		//Robotic limbs are handled in get_icon() so all we worry about are missing or dead limbs.
-		//No icon stored, so we need to start with a basic one.
 		var/obj/item/organ/external/chest = get_organ("chest")
 		base_icon = chest.get_icon()
 
@@ -296,7 +289,7 @@ var/global/list/damage_icon_parts = list()
 				base_icon.MapColors(rgb(tone[1],0,0),rgb(0,tone[2],0),rgb(0,0,tone[3]))
 
 		//Handle husk overlay.
-		if(husk && ("overlay_husk" in icon_states(race_icon)))
+		if(husk && ("overlay_husk" in icon_states(species.icobase)))
 			var/icon/mask = new(base_icon)
 			var/icon/husk_over = new(species.icobase,"overlay_husk")
 			mask.MapColors(0,0,0,1, 0,0,0,1, 0,0,0,1, 0,0,0,1, 0,0,0,0)

@@ -16,20 +16,6 @@
 	if(istype(limb))
 		max_damage = limb.max_damage
 
-/obj/item/organ/external/stump/process()
-	damage = max_damage
-
-/obj/item/organ/external/stump/handle_rejection()
-	return
-
-/obj/item/organ/external/stump/rejuvenate()
-	return
-
-/obj/item/organ/external/stump/is_damaged()
-	return 1
-
-/obj/item/organ/external/stump/is_bruised()
-	return 1
-
-/obj/item/organ/external/stump/is_broken()
-	return 1
+/obj/item/organ/external/stump/removed()
+	..()
+	del(src)

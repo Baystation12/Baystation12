@@ -89,7 +89,6 @@ mob/living/carbon/human/proc/handle_pain()
 	var/maxdam = 0
 	var/obj/item/organ/external/damaged_organ = null
 	for(var/obj/item/organ/external/E in organs)
-		// amputated limbs don't cause pain
 		if(E.status & ORGAN_DEAD) continue
 		var/dam = E.get_damage()
 		// make the choice of the organ depend on damage,
