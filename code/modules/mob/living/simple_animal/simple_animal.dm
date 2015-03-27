@@ -343,7 +343,7 @@
 		var/obj/machinery/bot/B = target_mob
 		if(B.health > 0)
 			return (0)
-	return (1)
+	return 1
 
 //Call when target overlay should be added/removed
 /mob/living/simple_animal/update_targeted()

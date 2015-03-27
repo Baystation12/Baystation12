@@ -31,15 +31,7 @@
 
 	Life()
 		..()
-		if(stat == 2)
-			new /obj/item/weapon/ectoplasm (src.loc)
-			for(var/mob/M in viewers(src, null))
-				if((M.client && !( M.blinded )))
-					M.show_message("\red [src] lets out a contented sigh as their form unwinds. ")
-					ghostize()
-			del src
-			return
-
+		OnDeathInLife()
 
 	attackby(var/obj/item/O as obj, var/mob/user as mob)  //Marker -Agouri
 		if(istype(O, /obj/item/device/soulstone))
@@ -58,4 +50,14 @@
 				for(var/mob/M in viewers(src, null))
 					if ((M.client && !( M.blinded )))
 						M.show_message("\red [user] gently taps [src] with the [O]. ")
+		return
+
+/mob/living/simple_animal/shade/proc/OnDeathInLife()
+	if(stat == 2)
+		new /obj/item/weapon/ectoplasm (src.loc)
+		for(var/mob/M in viewers(src, null))
+			if((M.client && !( M.blinded )))
+				M.show_message("\red [src] lets out a contented sigh as their form unwinds. ")
+				ghostize()
+		del src
 		return

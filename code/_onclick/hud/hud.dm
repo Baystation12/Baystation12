@@ -33,7 +33,7 @@ var/list/global_huds = list(
 	screen.screen_loc = "1,1"
 	screen.icon = 'icons/obj/hud_full.dmi'
 	screen.icon_state = icon_state
-	screen.layer = 17
+	screen.layer = SCREEN_LAYER
 	screen.mouse_opacity = 0
 
 	return screen
@@ -259,11 +259,11 @@ datum/hud/New(mob/owner)
 	if(!hud_used)
 		usr << "\red This mob type does not use a HUD."
 		return
-		
+
 	if(!ishuman(src))
 		usr << "\red Inventory hiding is currently only supported for human mobs, sorry."
 		return
-	
+
 	if(!client) return
 	if(client.view != world.view)
 		return
@@ -325,7 +325,7 @@ datum/hud/New(mob/owner)
 		return
 	if(client.view != world.view)
 		return
-	
+
 	if(hud_used.hud_shown)
 		hud_used.hud_shown = 0
 		if(src.hud_used.adding)
