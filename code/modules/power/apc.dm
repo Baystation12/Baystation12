@@ -534,7 +534,8 @@
 					var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 					s.set_up(5, 1, src)
 					s.start()
-					return
+					if(user.stunned)
+						return
 				C.use(10)
 				user.visible_message(\
 					"<span class='warning'>[user.name] has added cables to the APC frame!</span>",\
@@ -554,7 +555,8 @@
 					var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 					s.set_up(5, 1, src)
 					s.start()
-					return
+					if(usr.stunned)
+						return
 				new /obj/item/stack/cable_coil(loc,10)
 				user << "<span class='notice'>You cut the cables and dismantle the power terminal.</span>"
 				del(terminal) // qdel

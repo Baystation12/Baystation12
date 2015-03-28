@@ -602,9 +602,10 @@ var/list/admin_verbs_mentor = list(
 		var/mob/living/carbon/human/H = T
 		if (H.species)
 			D.affected_species = list(H.species.name)
-	if(istype(T,/mob/living/carbon/monkey))
-		var/mob/living/carbon/monkey/M = T
-		D.affected_species = list(M.greaterform)
+			if(H.species.primitive_form)
+				D.affected_species |= H.species.primitive_form
+			if(H.species.greater_form)
+				D.affected_species |= H.species.greater_form
 	infect_virus2(T,D,1)
 
 	feedback_add_details("admin_verb","GD2") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
@@ -616,7 +617,7 @@ var/list/admin_verbs_mentor = list(
 	set name = "Make Sound"
 	set desc = "Display a message to everyone who can hear the target"
 	if(O)
-		var/message = input("What do you want the message to be?", "Make Sound") as text|null
+		var/message = sanitize(input("What do you want the message to be?", "Make Sound") as text|null)
 		if(!message)
 			return
 		for (var/mob/V in hearers(O))
@@ -708,7 +709,7 @@ var/list/admin_verbs_mentor = list(
 		return
 
 	if(holder)
-		var/new_name = trim_strip_input(src, "Enter new name. Leave blank or as is to cancel.", "Enter new silicon name", S.real_name)
+		var/new_name = sanitizeSafe(input(src, "Enter new name. Leave blank or as is to cancel.", "Enter new silicon name", S.real_name))
 		if(new_name && new_name != S.real_name)
 			admin_log_and_message_admins("has renamed the silicon '[S.real_name]' to '[new_name]'")
 			S.SetName(new_name)

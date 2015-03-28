@@ -26,7 +26,7 @@
 			return
 		if((!in_range(src, usr) && src.loc != user))
 			return
-		t = sanitize(copytext(t,1,MAX_MESSAGE_LEN))
+		t = sanitize(t)
 		if(t)
 			src.name = text("Glass Case - '[]'", t)
 		else

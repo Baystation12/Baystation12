@@ -15,9 +15,11 @@
 		return istype(H.species, /datum/species/xenos)
 	return 0
 
-/proc/ismonkey(A)
-	if(A && istype(A, /mob/living/carbon/monkey))
-		return 1
+/proc/issmall(A)
+	if(A && istype(A, /mob/living/carbon/human))
+		var/mob/living/carbon/human/H = A
+		if(H.species && H.species.is_small)
+			return 1
 	return 0
 
 /proc/isbrain(A)
@@ -257,7 +259,7 @@ var/list/global/organ_rel_size = list(
 		for(var/obj/item/weapon/grab/G in target.grabbed_by)
 			if(G.state >= GRAB_AGGRESSIVE)
 				return zone
-	
+
 	var/miss_chance = 10
 	if (zone in base_miss_chance)
 		miss_chance = base_miss_chance[zone]
@@ -340,7 +342,7 @@ proc/slur(phrase)
 						n_letter = text("[n_letter]-[n_letter]")
 		t = text("[t][n_letter]")//since the above is ran through for each letter, the text just adds up back to the original word.
 		p++//for each letter p is increased to find where the next letter will be.
-	return sanitize(copytext(t,1,MAX_MESSAGE_LEN))
+	return sanitize(t)
 
 
 proc/Gibberish(t, p)//t is the inputted message, and any value higher than 70 for p will cause letters to be replaced instead of added
@@ -387,7 +389,7 @@ It's fairly easy to fix if dealing with single letters but not so much with comp
 			n_letter = text("[n_letter]")
 		t = text("[t][n_letter]")
 		p=p+n_mod
-	return sanitize(copytext(t,1,MAX_MESSAGE_LEN))
+	return sanitize(t)
 
 
 /proc/shake_camera(mob/M, duration, strength=1)
@@ -462,7 +464,7 @@ var/list/intents = list("help","disarm","grab","hurt")
 		if(hud_used && hud_used.action_intent)
 			hud_used.action_intent.icon_state = "intent_[a_intent]"
 
-	else if(isrobot(src) || ismonkey(src))
+	else if(isrobot(src))
 		switch(input)
 			if("help")
 				a_intent = "help"

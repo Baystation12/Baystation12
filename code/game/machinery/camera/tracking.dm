@@ -47,7 +47,7 @@
 	set name = "Store Camera Location"
 	set desc = "Stores your current camera location by the given name"
 
-	loc = sanitize(copytext(loc, 1, MAX_MESSAGE_LEN))
+	loc = sanitize(loc)
 	if(!loc)
 		src << "\red Must supply a location name"
 		return
@@ -213,7 +213,7 @@
 mob/living/proc/near_camera()
 	if (!isturf(loc))
 		return 0
-	else if(!cameranet.checkCameraVis(src))
+	else if(!cameranet.checkVis(src))
 		return 0
 	return 1
 

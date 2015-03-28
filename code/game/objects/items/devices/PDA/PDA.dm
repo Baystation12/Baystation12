@@ -689,7 +689,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		if ("Edit")
 			var/n = input(U, "Please enter message", name, notehtml) as message
 			if (in_range(src, U) && loc == U)
-				n = copytext(adminscrub(n), 1, MAX_MESSAGE_LEN)
+				n = sanitizeSafe(n, extra = 0)
 				if (mode == 1)
 					note = html_decode(n)
 					notehtml = note
@@ -726,7 +726,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 						U << "The PDA softly beeps."
 						ui.close()
 					else
-						t = sanitize(copytext(t, 1, 20))
+						t = sanitize(t, 20)
 						ttone = t
 			else
 				ui.close()
@@ -735,7 +735,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			var/t = input(U, "Please enter new news tone", name, newstone) as text
 			if (in_range(src, U) && loc == U)
 				if (t)
-					t = sanitize(copytext(t, 1, 20))
+					t = sanitize(t, 20)
 					newstone = t
 			else
 				ui.close()
@@ -971,8 +971,9 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		U.visible_message("<span class='notice'>[U] taps on \his PDA's screen.</span>")
 	U.last_target_click = world.time
 	var/t = input(U, "Please enter message", P.name, null) as text
-	t = sanitize(copytext(t, 1, MAX_MESSAGE_LEN))
-	t = readd_quotes(t)
+	t = sanitize(t)
+	//t = readd_quotes(t)
+	t = replace_characters(t, list("&#34;" = "\""))
 	if (!t || !istype(P))
 		return
 	if (!in_range(src, U) && loc != U)
@@ -1218,9 +1219,6 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			if(2)
 				if (!istype(C:dna, /datum/dna))
 					user << "\blue No fingerprints found on [C]"
-				else if(!istype(C, /mob/living/carbon/monkey))
-					if(!isnull(C:gloves))
-						user << "\blue No fingerprints found on [C]"
 				else
 					user << text("\blue [C]'s Fingerprints: [md5(C:dna.uni_identity)]")
 				if ( !(C:blood_DNA) )

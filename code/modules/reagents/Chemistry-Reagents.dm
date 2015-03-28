@@ -150,10 +150,6 @@
 		return
 	if(!data["donor"] || istype(data["donor"], /mob/living/carbon/human))
 		blood_splatter(T, src, 1)
-	else if(istype(data["donor"], /mob/living/carbon/monkey))
-		var/obj/effect/decal/cleanable/blood/B = blood_splatter(T, src, 1)
-		if(B)
-			B.blood_DNA["Non-Human DNA"] = "A+"
 	else if(istype(data["donor"], /mob/living/carbon/alien))
 		var/obj/effect/decal/cleanable/blood/B = blood_splatter(T, src, 1)
 		if(B)
@@ -613,21 +609,6 @@
 				del(H.glasses)
 				H.update_inv_glasses(1)
 				removed -= meltdose / 2
-		if(removed <= 0)
-			return
-
-	if(ismonkey(M))
-		var/mob/living/carbon/monkey/MK = M
-		if(MK.wear_mask)
-			if(MK.wear_mask.unacidable)
-				MK << "<span class='danger'>Your [MK.wear_mask] protects you from the acid!</span>"
-				remove_self(volume)
-				return
-			else
-				MK << "<span class='danger'>Your [MK.wear_mask] melts away!</span>"
-				del(MK.wear_mask)
-				MK.update_inv_wear_mask(1)
-				removed -= meltdose
 		if(removed <= 0)
 			return
 
@@ -4057,5 +4038,4 @@
 	description = "A viscous, toxic liquid left over from many chemical processes."
 	reagent_state = LIQUID
 	color = "#ADFF2F"   //rgb: 173, 255, 47, toxic green
-
 */

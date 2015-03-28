@@ -463,7 +463,7 @@
 #define INVISIBILITY_LEVEL_ONE            35
 #define INVISIBILITY_LEVEL_TWO            45
 #define INVISIBILITY_OBSERVER             60
-#define INVISIBILITY_AI_EYE		          61
+#define INVISIBILITY_EYE		          61
 
 #define SEE_INVISIBLE_LIVING              25
 #define SEE_INVISIBLE_OBSERVER_NOLIGHTING 15

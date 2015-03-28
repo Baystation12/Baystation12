@@ -45,6 +45,8 @@
 	var/obj/item/weapon/cell/cell = null
 	var/obj/machinery/camera/camera = null
 
+	var/cell_emp_mult = 2
+
 	// Components are basically robot organs.
 	var/list/components = list()
 
@@ -430,8 +432,8 @@
 
 	spawn(0)
 		var/newname
-		newname = input(src,"You are a robot. Enter a name, or leave blank for the default name.", "Name change","") as text
-		if (newname != "")
+		newname = sanitizeSafe(input(src,"You are a robot. Enter a name, or leave blank for the default name.", "Name change","") as text, MAX_NAME_LEN)
+		if (newname)
 			custom_name = newname
 
 		updatename()
@@ -898,11 +900,6 @@
 		var/mob/living/carbon/human/H = M
 		//if they are holding or wearing a card that has access, that works
 		if(check_access(H.get_active_hand()) || check_access(H.wear_id))
-			return 1
-	else if(istype(M, /mob/living/carbon/monkey))
-		var/mob/living/carbon/monkey/george = M
-		//they can only hold things :(
-		if(george.get_active_hand() && istype(george.get_active_hand(), /obj/item/weapon/card/id) && check_access(george.get_active_hand()))
 			return 1
 	return 0
 
