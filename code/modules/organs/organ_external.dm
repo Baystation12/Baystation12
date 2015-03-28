@@ -214,26 +214,25 @@
 	// sync the organ's damage with its wounds
 	src.update_damages()
 
-	owner.updatehealth()
-	var/result = update_icon()
-
 	//If limb took enough damage, try to cut or tear it off
 	if(owner && loc == owner)
 		if(!cannot_amputate && config.limbs_can_break && (brute_dam + burn_dam) >= (max_damage * config.organ_health_multiplier))
 			var/threshold = max_damage/3
+			var/dropped
 			if((burn >= threshold) && prob(burn))
+				dropped = 1
 				droplimb(0,1)
-				return result
-			if(prob(brute))
+			if(!dropped && prob(brute))
 				if(brute >= threshold)
-					if((sharp || edge) && used_weapon)
-						if(istype(used_weapon,/obj/item))
-							var/obj/item/W = used_weapon
-							if(W.w_class >= 3)
-								droplimb()
-								return result
-					droplimb(0,2)
-					return result
+					if((sharp || edge) && istype(used_weapon,/obj/item))
+						var/obj/item/W = used_weapon
+						if(W.w_class >= 3)
+							droplimb()
+					else
+						droplimb(0,2)
+
+	owner.updatehealth()
+	return update_icon()
 
 /obj/item/organ/external/proc/heal_damage(brute, burn, internal = 0, robo_repair = 0)
 	if(status & ORGAN_ROBOT && !robo_repair)
@@ -896,7 +895,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	owner.organs_by_name[limb_name] = null // Remove from owner's vars.
 
 	//Robotic limbs explode if sabotaged.
-	if(is_robotic)
+	if(is_robotic && sabotaged)
 		owner.visible_message(
 			"<span class='danger'>\The [owner]'s [src.name] explodes violently!</span>",\
 			"<span class='danger'>Your [src.name] explodes!</span>",\
