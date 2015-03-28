@@ -284,13 +284,9 @@
 	return 0
 
 /turf/simulated/wall/attack_generic(var/mob/user, var/damage, var/attack_message, var/wallbreaker)
-
 	if(!damage || !wallbreaker)
 		user << "You push the wall but nothing happens."
 		return
-
-	if(istype(src,/turf/simulated/wall/r_wall) && !rotting)
-		user << "This wall is far too strong for you to destroy."
 
 	if(rotting || prob(40))
 		user << "You smash through the wall!"

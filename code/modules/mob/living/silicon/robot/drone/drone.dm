@@ -16,6 +16,11 @@
 	integrated_light_power = 2
 	local_transmit = 1
 
+	mob_bump_flag = SIMPLE_ANIMAL
+	mob_swap_flags = SIMPLE_ANIMAL
+	mob_push_flags = SIMPLE_ANIMAL
+	mob_always_swap = 1
+
 	//Used for self-mailing.
 	var/mail_destination = ""
 
@@ -254,20 +259,6 @@
 	src << "Remember,  you are <b>lawed against interference with the crew</b>. Also remember, <b>you DO NOT take orders from the AI.</b>"
 	src << "<b>Don't invade their worksites, don't steal their resources, don't tell them about the changeling in the toilets.</b>"
 	src << "<b>If a crewmember has noticed you, <i>you are probably breaking your third law</i></b>."
-
-/mob/living/silicon/robot/drone/Bump(atom/movable/AM as mob|obj, yes)
-	if (!yes || ( \
-	 !istype(AM,/obj/machinery/door) && \
-	 !istype(AM,/obj/machinery/recharge_station) && \
-	 !istype(AM,/obj/machinery/disposal/deliveryChute) && \
-	 !istype(AM,/obj/machinery/teleport/hub) && \
-	 !istype(AM,/obj/effect/portal)
-	)) return
-	..()
-	return
-
-/mob/living/silicon/robot/drone/Bumped(AM as mob|obj)
-	return
 
 /mob/living/silicon/robot/drone/start_pulling(var/atom/movable/AM)
 

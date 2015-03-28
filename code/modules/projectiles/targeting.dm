@@ -85,7 +85,7 @@
 		return
 	
 	//reflex firing is disabled when help intent is set
-	if (M.a_intent == "help")
+	if (M.a_intent == I_HELP)
 		M << "\red You refrain from firing your [src] as your intent is set to help."
 		return
 	
