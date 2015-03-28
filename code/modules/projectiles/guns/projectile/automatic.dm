@@ -51,7 +51,7 @@
 	name = "\improper STS-35 automatic rifle"
 	desc = "A durable, rugged looking automatic weapon of a make popular on the frontier worlds. Uses 7.62mm rounds. It is unmarked."
 	icon_state = "arifle"
-	item_state = "l6closednomag" //placeholder
+	item_state = "arifle"
 	w_class = 4
 	force = 10
 	caliber = "a762"
@@ -68,7 +68,7 @@
 	name = "\improper W-T 550 Saber"
 	desc = "A cheap, mass produced Ward-Takahashi PDW. Uses 9mm rounds."
 	icon_state = "wt550"
-	item_state = "c20r" //placeholder
+	item_state = "wt550"
 	w_class = 3
 	caliber = "9mm"
 	origin_tech = "combat=5;materials=2"
@@ -90,7 +90,7 @@
 	name = "\improper Z8 Bulldog"
 	desc = "An older model bullpup carbine, made by the now defunct Zendai Foundries. Uses armor piercing 5.56mm rounds. Makes you feel like a space marine when you hold it."
 	icon_state = "carbine"
-	item_state = "l6closednomag" //placeholder
+	item_state = "z8carbine"
 	w_class = 4
 	force = 10
 	caliber = "a556"
