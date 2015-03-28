@@ -105,6 +105,16 @@
 	else
 		icon_state = "table2-idle"
 
+/obj/machinery/optable/MouseDrop_T(mob/target, mob/user)
+
+	var/mob/living/M = user
+	if(user.stat || user.restrained() || !check_table(user) || !iscarbon(target))
+		return
+	if(istype(M))
+		take_victim(target,user)
+	else
+		return ..()
+
 /obj/machinery/optable/verb/climb_on()
 	set name = "Climb On Table"
 	set category = "Object"

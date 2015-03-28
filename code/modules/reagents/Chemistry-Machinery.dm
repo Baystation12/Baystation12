@@ -5,7 +5,6 @@
 #define BOTTLE_SPRITES list("bottle-1", "bottle-2", "bottle-3", "bottle-4") //list of available bottle sprites
 #define REAGENTS_PER_SHEET 20
 
-
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -659,10 +658,12 @@
 	O.loc = src
 	holdingitems += O
 	src.updateUsrDialog()
+	..()
 	return 0
 
 /obj/machinery/reagentgrinder/attack_ai(mob/user as mob)
-	return 0
+	if(istype(user, /mob/living/silicon/robot) && Adjacent(user))
+		attack_hand(user)
 
 /obj/machinery/reagentgrinder/attack_hand(mob/user as mob)
 	user.set_machine(src)
