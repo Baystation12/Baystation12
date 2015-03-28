@@ -37,12 +37,11 @@
 
 		var/mob/living/new_mob
 
-		var/options = list("monkey", "robot", "slime")
+		var/options = list("robot", "slime")
 		for(var/t in all_species)
 			options += t
 		options -= "Xenomorph Queen"
-		if(ismonkey(M))
-			options -= "monkey"
+		options -= "Xenomorph"
 		if(isrobot(M))
 			options -= "robot"
 		if(isslime(M))
@@ -54,9 +53,6 @@
 
 		var/randomize = pick(options)
 		switch(randomize)
-			if("monkey")
-				new_mob = new /mob/living/carbon/monkey(M.loc)
-				new_mob.universal_speak = 1
 			if("robot")
 				new_mob = new /mob/living/silicon/robot(M.loc)
 				new_mob.gender = M.gender

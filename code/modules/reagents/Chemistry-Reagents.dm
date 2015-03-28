@@ -153,9 +153,6 @@ datum
 
 				if(!self.data["donor"] || istype(self.data["donor"], /mob/living/carbon/human))
 					blood_splatter(T,self,1)
-				else if(istype(self.data["donor"], /mob/living/carbon/monkey))
-					var/obj/effect/decal/cleanable/blood/B = blood_splatter(T,self,1)
-					if(B) B.blood_DNA["Non-Human DNA"] = "A+"
 				else if(istype(self.data["donor"], /mob/living/carbon/alien))
 					var/obj/effect/decal/cleanable/blood/B = blood_splatter(T,self,1)
 					if(B) B.blood_DNA["UNKNOWN DNA STRUCTURE"] = "X*"
@@ -287,11 +284,8 @@ datum
 
 			on_mob_life(var/mob/living/M as mob)
 				if(ishuman(M))
-					if((M.mind in ticker.mode.cult) && prob(10))
-						M << "\blue A cooling sensation from inside you brings you an untold calmness."
-						ticker.mode.remove_cultist(M.mind)
-						for(var/mob/O in viewers(M, null))
-							O.show_message(text("\blue []'s eyes blink and become clearer.", M), 1) // So observers know it worked.
+					if(M.mind && cult.is_antagonist(M.mind) && prob(10))
+						cult.remove_antagonist(M.mind)
 				holder.remove_reagent(src.id, 10 * REAGENTS_METABOLISM) //high metabolism to prevent extended uncult rolls.
 				return
 
@@ -2059,17 +2053,6 @@ datum
 								H << "<span class='danger'>Your glasses melts away!</span>"
 								del (H.glasses)
 								H.update_inv_glasses(0)
-
-					else if(ismonkey(M))
-						var/mob/living/carbon/monkey/MK = M
-						if(MK.wear_mask)
-							if(!MK.wear_mask.unacidable)
-								MK << "<span class='danger'>Your mask melts away but protects you from the acid!</span>"
-								del (MK.wear_mask)
-								MK.update_inv_wear_mask(0)
-							else
-								MK << "<span class='warning'>Your mask protects you from the acid.</span>"
-							return
 
 					if(!M.unacidable)
 						if(istype(M, /mob/living/carbon/human) && volume >= 10)

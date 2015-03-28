@@ -66,9 +66,6 @@ var/list/accessible_z_levels = list("1" = 5, "3" = 10, "4" = 15, "5" = 10, "6" =
 
 	if(ticker && ticker.mode)
 
-
-		// Okay, so let's make it so that people can travel z levels but not nuke disks!
-		// if(ticker.mode.name == "mercenary")	return
 		if(A.z > 6 && !config.use_overmap) return
 		if (A.x <= TRANSITIONEDGE || A.x >= (world.maxx - TRANSITIONEDGE - 1) || A.y <= TRANSITIONEDGE || A.y >= (world.maxy - TRANSITIONEDGE - 1))
 			if(istype(A, /obj/effect/meteor)||istype(A, /obj/effect/space_dust))

@@ -146,7 +146,7 @@
 		pet.colour = "[M.colour]"
 		user <<"You feed the slime the potion, removing it's powers and calming it."
 		del(M)
-		var/newname = sanitize(copytext(input(user, "Would you like to give the slime a name?", "Name your new pet", "pet slime") as null|text,1,MAX_NAME_LEN))
+		var/newname = sanitize(input(user, "Would you like to give the slime a name?", "Name your new pet", "pet slime") as null|text, MAX_NAME_LEN)
 
 		if (!newname)
 			newname = "pet slime"
@@ -177,7 +177,7 @@
 		pet.colour = "[M.colour]"
 		user <<"You feed the slime the potion, removing it's powers and calming it."
 		del(M)
-		var/newname = sanitize(copytext(input(user, "Would you like to give the slime a name?", "Name your new pet", "pet slime") as null|text,1,MAX_NAME_LEN))
+		var/newname = sanitize(input(user, "Would you like to give the slime a name?", "Name your new pet", "pet slime") as null|text, MAX_NAME_LEN)
 
 		if (!newname)
 			newname = "pet slime"

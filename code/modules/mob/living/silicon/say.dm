@@ -34,7 +34,7 @@
 		if (src.client.handle_spam_prevention(message,MUTE_IC))
 			return 0
 
-	message = trim_strip_html_properly(message)
+	message = sanitize(message)
 
 	if (stat == 2)
 		return say_dead(message)

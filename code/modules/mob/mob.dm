@@ -360,12 +360,9 @@ var/list/slot_equipment_priority = list( \
 	set src in usr
 	if(usr != src)
 		usr << "No."
-	var/msg = input(usr,"Set the flavor text in your 'examine' verb. Can also be used for OOC notes about your character.","Flavor Text",html_decode(flavor_text)) as message|null
+	var/msg = sanitize(input(usr,"Set the flavor text in your 'examine' verb. Can also be used for OOC notes about your character.","Flavor Text",html_decode(flavor_text)) as message|null, extra = 0)
 
 	if(msg != null)
-		msg = copytext(msg, 1, MAX_MESSAGE_LEN)
-		msg = html_encode(msg)
-
 		flavor_text = msg
 
 /mob/proc/warn_flavor_changed()
@@ -398,7 +395,7 @@ var/list/slot_equipment_priority = list( \
 	if ((stat != 2 || !( ticker )))
 		usr << "<span class='notice'><B>You must be dead to use this!</B></span>"
 		return
-	if (ticker.mode.name == "meteor" || ticker.mode.name == "epidemic") //BS12 EDIT
+	if (ticker.mode.deny_respawn) //BS12 EDIT
 		usr << "<span class='notice'>Respawn is disabled for this roundtype.</span>"
 		return
 	else

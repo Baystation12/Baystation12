@@ -152,7 +152,7 @@ Implant Specifics:<BR>"}
 
 	hear(var/msg)
 		var/list/replacechars = list("'" = "","\"" = "",">" = "","<" = "","(" = "",")" = "")
-		msg = sanitize_simple(msg, replacechars)
+		msg = replace_characters(msg, replacechars)
 		if(findtext(msg,phrase))
 			activate()
 			del(src)
@@ -206,7 +206,7 @@ Implant Specifics:<BR>"}
 		elevel = alert("What sort of explosion would you prefer?", "Implant Intent", "Localized Limb", "Destroy Body", "Full Explosion")
 		phrase = input("Choose activation phrase:") as text
 		var/list/replacechars = list("'" = "","\"" = "",">" = "","<" = "","(" = "",")" = "")
-		phrase = sanitize_simple(phrase, replacechars)
+		phrase = replace_characters(phrase, replacechars)
 		usr.mind.store_memory("Explosive implant in [source] can be activated by saying something containing the phrase ''[src.phrase]'', <B>say [src.phrase]</B> to attempt to activate.", 0, 0)
 		usr << "The implanted explosive implant in [source] can be activated by saying something containing the phrase ''[src.phrase]'', <B>say [src.phrase]</B> to attempt to activate."
 		return 1
@@ -336,12 +336,13 @@ the implant may become unstable and either pre-maturely inject the subject or si
 	implanted(mob/M)
 		if(!istype(M, /mob/living/carbon/human))	return 0
 		var/mob/living/carbon/human/H = M
-		if(H.mind in ticker.mode.head_revolutionaries)
+		var/datum/antagonist/antag_data = get_antag_data(H.mind.special_role)
+		if(antag_data && (antag_data.flags & ANTAG_IMPLANT_IMMUNE))
 			H.visible_message("[H] seems to resist the implant!", "You feel the corporate tendrils of Nanotrasen try to invade your mind!")
 			return 0
-		else if(H.mind in ticker.mode:revolutionaries)
-			ticker.mode:remove_revolutionary(H.mind)
-		H << "\blue You feel a surge of loyalty towards Nanotrasen."
+		else
+			clear_antag_roles(H.mind, 1)
+			H << "<span class='notice'>You feel a surge of loyalty towards Nanotrasen.</span>"
 		return 1
 
 

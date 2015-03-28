@@ -57,6 +57,10 @@ var/global/datum/global_init/init = new ()
 	// due to this list not being instantiated.
 	plant_controller = new()
 
+	//Create the asteroid Z-level.
+	if(config.generate_asteroid)
+		new /datum/random_map(null,13,32,5,217,223)
+
 	// Create autolathe recipes, as above.
 	populate_lathe_recipes()
 
