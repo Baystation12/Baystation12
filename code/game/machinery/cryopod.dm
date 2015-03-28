@@ -175,7 +175,7 @@
 	var/on_store_message = "has entered long-term storage."
 	var/on_store_name = "Cryogenic Oversight"
 	var/on_enter_occupant_message = "You feel cool air surround you. You go numb as your senses turn inward."
-	var/allow_occupant_types = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
+	var/allow_occupant_types = list(/mob/living/carbon/human)
 	var/disallow_occupant_types = list()
 
 	var/mob/occupant = null       // Person waiting to be despawned.
@@ -396,7 +396,7 @@
 	control_computer.frozen_crew += "[occupant.real_name]"
 
 	announce.autosay("[occupant.real_name] [on_store_message]", "[on_store_name]")
-	visible_message("<span class='notice'>\The [src] hums and hisses as it moves [occupant.real_name] into storage.</span>", 3)
+	visible_message("<span class='notice'>\The [initial(name)] hums and hisses as it moves [occupant.real_name] into storage.</span>", 3)
 
 	set_occupant(null)
 	// Delete the mob.
@@ -555,7 +555,7 @@
 	src.occupant = occupant
 	name = initial(name)
 	if(occupant)
-		name = "[name] ([occupant])]"
+		name = "[name] ([occupant])"
 
 
 //Attacks/effects.

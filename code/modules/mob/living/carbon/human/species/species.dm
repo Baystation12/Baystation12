@@ -12,6 +12,12 @@
 	// Icon/appearance vars.
 	var/icobase = 'icons/mob/human_races/r_human.dmi'    // Normal icon set.
 	var/deform = 'icons/mob/human_races/r_def_human.dmi' // Mutated icon set.
+
+	// Damage overlay and masks.
+	var/damage_overlays = 'icons/mob/human_races/masks/dam_human.dmi'
+	var/damage_mask = 'icons/mob/human_races/masks/dam_mask_human.dmi'
+	var/blood_mask = 'icons/mob/human_races/masks/blood_human.dmi'
+
 	var/prone_icon                                       // If set, draws this from icobase when mob is prone.
 	var/eyes = "eyes_s"                                  // Icon for eyes.
 	var/blood_color = "#A10808"                          // Red.
@@ -20,6 +26,8 @@
 	var/tail                                             // Name of tail image in species effects icon file.
 	var/race_key = 0       	                             // Used for mob icon cache string.
 	var/icon/icon_template                               // Used for mob icon generation for non-32x32 species.
+	var/is_small
+	var/show_ssd = 1
 
 	// Language/culture vars.
 	var/default_language = "Galactic Common" // Default language is used when 'say' is used without modifiers.
@@ -40,6 +48,7 @@
 	var/vision_flags = 0                     // Same flags as glasses.
 
 	// Death vars.
+	var/meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat/human
 	var/gibber_type = /obj/effect/gibspawner/human
 	var/remains_type = /obj/effect/decal/remains/xeno
 	var/gibbed_anim = "gibbed-h"
@@ -91,7 +100,8 @@
 	var/darksight = 2             // Native darksight distance.
 	var/flags = 0                 // Various specific features.
 	var/slowdown = 0              // Passive movement speed malus (or boost, if negative)
-	var/primitive                 // Lesser form, if any (ie. monkey for humans)
+	var/primitive_form            // Lesser form, if any (ie. monkey for humans)
+	var/greater_form              // Greater form, if any, ie. human for monkeys.
 	var/gluttonous                // Can eat some mobs. 1 for monkeys, 2 for people.
 	var/rarity_value = 1          // Relative rarity/collector value for this species.
 	                              // Determines the organs that the species spawns with and
@@ -251,3 +261,6 @@
 
 	return 0
 
+// Called in life() when the mob has no client.
+/datum/species/proc/handle_npc(var/mob/living/carbon/human/H)
+	return

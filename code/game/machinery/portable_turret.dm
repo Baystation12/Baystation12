@@ -488,7 +488,7 @@
 	if(iscuffed(L)) // If the target is handcuffed, leave it alone
 		return TURRET_NOT_TARGET
 
-	if(isanimal(L) || ismonkey(L)) // Animals are not so dangerous
+	if(isanimal(L) || issmall(L)) // Animals are not so dangerous
 		return check_anomalies ? TURRET_SECONDARY_TARGET : TURRET_NOT_TARGET
 	if(isxenomorph(L) || isalien(L)) // Xenos are dangerous
 		return check_anomalies ? TURRET_PRIORITY_TARGET	: TURRET_NOT_TARGET
@@ -818,7 +818,7 @@
 
 	if(istype(I, /obj/item/weapon/pen))	//you can rename turrets like bots!
 		var/t = input(user, "Enter new turret name", name, finish_name) as text
-		t = sanitize(copytext(t, 1, MAX_MESSAGE_LEN))
+		t = sanitize(t)
 		if(!t)
 			return
 		if(!in_range(src, usr) && loc != usr)

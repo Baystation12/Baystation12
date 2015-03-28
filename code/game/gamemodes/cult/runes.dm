@@ -564,7 +564,7 @@ var/list/sacrificed = list()
 		// returns 0 if the rune is not used. returns 1 if the rune is used.
 		communicate()
 			. = 1 // Default output is 1. If the rune is deleted it will return 1
-			var/input = stripped_input(usr, "Please choose a message to tell to the other acolytes.", "Voice of Blood", "")
+			var/input = sanitize(input(usr, "Please choose a message to tell to the other acolytes.", "Voice of Blood", ""))
 			if(!input)
 				if (istype(src))
 					fizzle()
@@ -705,27 +705,6 @@ var/list/sacrificed = list()
 								H.dust()//To prevent the MMI from remaining
 							else
 								H.gib()
-			for(var/mob/living/carbon/monkey/M in src.loc)
-				if (cult)
-					if(M.mind == cult.sacrifice_target)
-						if(cultsinrange.len >= 3)
-							sacrificed += M.mind
-							usr << "\red The Geometer of Blood accepts this sacrifice, your objective is now complete."
-						else
-							usr << "\red Your target's earthly bonds are too strong. You need more cultists to succeed in this ritual."
-							continue
-					else
-						if(prob(20))
-							usr << "\red The Geometer of Blood accepts your meager sacrifice."
-							cult.grant_runeword(usr)
-						else
-							usr << "\red The Geometer of blood accepts this sacrifice."
-							usr << "\red However, a mere monkey is not enough to satisfy Him."
-				else
-					usr << "\red The Geometer of Blood accepts your meager sacrifice."
-					if(prob(20))
-						cult.grant_runeword(usr)
-				M.gib()
 
 /////////////////////////////////////////SIXTEENTH RUNE
 

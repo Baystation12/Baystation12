@@ -5,6 +5,7 @@
 	icon_state = "repairbot"
 	maxHealth = 35
 	health = 35
+	cell_emp_mult = 1
 	universal_speak = 0
 	universal_understand = 1
 	gender = NEUTER

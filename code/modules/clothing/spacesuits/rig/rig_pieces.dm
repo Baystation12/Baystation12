@@ -39,9 +39,9 @@
 	flags_inv =          HIDEJUMPSUIT|HIDETAIL
 	flags =              STOPPRESSUREDAMAGE | THICKMATERIAL | AIRTIGHT
 	slowdown = 0
-	//will reach 10 breach damage after 18 laser carbine blasts, or 7 revolver hits. Completely immune to smg hits.
-	breach_threshold = 28
-	resilience = 0.05
+	//will reach 10 breach damage after 25 laser carbine blasts, 3 revolver hits, or ~1 PTR hit. Completely immune to smg or sts hits.
+	breach_threshold = 38
+	resilience = 0.2
 	can_breach = 1
 	sprite_sheets = list("Tajara" = 'icons/mob/species/tajaran/suit.dmi',"Unathi" = 'icons/mob/species/unathi/suit.dmi')
 	supporting_limbs = list()

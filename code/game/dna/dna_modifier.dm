@@ -102,7 +102,7 @@
 
 	if (usr.stat != 0)
 		return
-	if (!ishuman(usr) && !ismonkey(usr)) //Make sure they're a mob that has dna
+	if (!ishuman(usr) && !issmall(usr)) //Make sure they're a mob that has dna
 		usr << "\blue Try as you might, you can not climb up into the scanner."
 		return
 	if (src.occupant)
@@ -737,7 +737,7 @@
 
 		if (bufferOption == "changeLabel")
 			var/datum/dna2/record/buf = src.buffers[bufferId]
-			var/text = sanitize(copytext(input(usr, "New Label:", "Edit Label", buf.name) as text|null, 1, MAX_NAME_LEN))
+			var/text = sanitize(input(usr, "New Label:", "Edit Label", buf.name) as text|null, MAX_NAME_LEN)
 			buf.name = text
 			src.buffers[bufferId] = buf
 			return 1

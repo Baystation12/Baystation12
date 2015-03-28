@@ -696,17 +696,18 @@
 		malfunctioning += 10
 		if(malfunction_delay <= 0)
 			malfunction_delay = max(malfunction_delay, round(30/severity_class))
-	
+
 	//drain some charge
 	if(cell) cell.emp_act(severity_class + 15)
-	
+
 	//possibly damage some modules
 	take_hit((100/severity_class), "electrical pulse", 1)
 
 /obj/item/weapon/rig/proc/shock(mob/user)
 	if (electrocute_mob(user, cell, src))
 		spark_system.start()
-		return 1
+		if(user.stunned)
+			return 1
 	return 0
 
 /obj/item/weapon/rig/proc/take_hit(damage, source, is_emp=0)
@@ -720,7 +721,7 @@
 	else
 		//Want this to be roughly independant of the number of modules, meaning that X emp hits will disable Y% of the suit's modules on average.
 		//that way people designing hardsuits don't have to worry (as much) about how adding that extra module will affect emp resiliance by 'soaking' hits for other modules
-		chance = max(0, damage - emp_protection)*min(installed_modules.len/15, 1)
+		chance = 2*max(0, damage - emp_protection)*min(installed_modules.len/15, 1)
 
 	if(!prob(chance))
 		return
@@ -740,7 +741,7 @@
 		dam_module = pick(damaged_modules)
 	else if(valid_modules.len)
 		dam_module = pick(valid_modules)
-	
+
 	if(!dam_module) return
 
 	dam_module.damage++

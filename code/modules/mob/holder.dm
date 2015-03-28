@@ -83,21 +83,19 @@
 /obj/item/weapon/holder/monkey
 	name = "monkey"
 	desc = "It's a monkey. Ook."
-	icon_state = "cat"
-	icon = 'icons/mob/monkey.dmi'
-	icon_state = "monkey1"
+	icon_state = "monkey"
 
 /obj/item/weapon/holder/monkey/farwa
 	name = "farwa"
 	desc = "It's a farwa."
-	icon_state = "tajkey1"
+	icon_state = "farwa"
 
 /obj/item/weapon/holder/monkey/stok
 	name = "stok"
 	desc = "It's a stok. stok."
-	icon_state = "stokkey1"
+	icon_state = "stok"
 
 /obj/item/weapon/holder/monkey/neaera
 	name = "neaera"
 	desc = "It's a neaera."
-	icon_state = "skrellkey1"
+	icon_state = "neara"

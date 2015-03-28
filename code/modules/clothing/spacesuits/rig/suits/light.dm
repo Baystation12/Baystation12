@@ -20,7 +20,6 @@
 /obj/item/clothing/suit/space/rig/light
 	name = "suit"
 	breach_threshold = 18 //comparable to voidsuits
-	resilience = 0.2
 
 /obj/item/clothing/gloves/rig/light
 	name = "gloves"
@@ -82,8 +81,7 @@
 	..()
 
 /obj/item/clothing/suit/space/rig/light/ninja
-	breach_threshold = 28 //comparable to regular hardsuits
-	resilience = 0.05
+	breach_threshold = 38 //comparable to regular hardsuits
 
 /obj/item/weapon/rig/light/stealth
 	name = "stealth suit control module"
