@@ -6,7 +6,7 @@
 		usr << "\red Speech is currently admin-disabled."
 		return
 
-	message = trim_strip_html_properly(message)
+	message = sanitize(message)
 	log_whisper("[src.name]/[src.key] : [message]")
 
 	if (src.client)
