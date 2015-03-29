@@ -41,4 +41,5 @@ var/global/list/empty_playable_ai_cores = list()
 			var/datum/game_mode/traitor/autotraitor/current_mode = ticker.mode
 			current_mode.possible_traitors.Remove(src)
 
+	ghostize(0)
 	del(src)
