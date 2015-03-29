@@ -262,15 +262,15 @@
 	name = "bottle of Spaceacillin pills"
 	desc = "A theta-lactam antibiotic. Effective against many diseases likely to be encountered in space."
 
-/obj/item/weapon/storage/pill_bottle/spaceacillin/New()
-    ..()
-    new /obj/item/weapon/reagent_containers/pill/spaceacillin(src)
-    new /obj/item/weapon/reagent_containers/pill/spaceacillin(src)
-    new /obj/item/weapon/reagent_containers/pill/spaceacillin(src)
-    new /obj/item/weapon/reagent_containers/pill/spaceacillin(src)
-    new /obj/item/weapon/reagent_containers/pill/spaceacillin(src)
-    new /obj/item/weapon/reagent_containers/pill/spaceacillin(src)
-    new /obj/item/weapon/reagent_containers/pill/spaceacillin(src)
+	New()
+		..()
+		new /obj/item/weapon/reagent_containers/pill/spaceacillin( src )
+		new /obj/item/weapon/reagent_containers/pill/spaceacillin( src )
+		new /obj/item/weapon/reagent_containers/pill/spaceacillin( src )
+		new /obj/item/weapon/reagent_containers/pill/spaceacillin( src )
+		new /obj/item/weapon/reagent_containers/pill/spaceacillin( src )
+		new /obj/item/weapon/reagent_containers/pill/spaceacillin( src )
+		new /obj/item/weapon/reagent_containers/pill/spaceacillin( src )
 
 /obj/item/weapon/storage/pill_bottle/tramadol
 	name = "bottle of Tramadol pills"
