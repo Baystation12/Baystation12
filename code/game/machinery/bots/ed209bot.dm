@@ -84,7 +84,7 @@
 				lasercolor = "r"
 			else if( istype(W, /obj/item/clothing/suit/bluetag) )
 				lasercolor = "b"
-			if( lasercolor || istype(W, /obj/item/clothing/suit/storage/vest) )
+			if( lasercolor || istype(W, /obj/item/clothing/suit/armor/vest) )
 				user.drop_item()
 				del(W)
 				build_step++
