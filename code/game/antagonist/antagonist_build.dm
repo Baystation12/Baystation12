@@ -52,7 +52,7 @@
 	// Choose a name, if any.
 	if(flags & ANTAG_CHOOSE_NAME)
 		spawn(5)
-			var/newname = sanitize(copytext(input(player.current, "You are a [role_text]. Would you like to change your name to something else?", "Name change") as null|text,1,MAX_NAME_LEN))
+			var/newname = sanitize(input(player.current, "You are a [role_text]. Would you like to change your name to something else?", "Name change") as null|text, MAX_NAME_LEN)
 			if (newname)
 				player.current.real_name = newname
 				player.current.name = player.current.real_name

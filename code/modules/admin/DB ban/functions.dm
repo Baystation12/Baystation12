@@ -181,7 +181,7 @@ datum/admins/proc/DB_ban_edit(var/banid = null, var/param = null)
 	switch(param)
 		if("reason")
 			if(!value)
-				value = input("Insert the new reason for [pckey]'s ban", "New Reason", "[reason]", null) as null|text
+				value = sanitize(input("Insert the new reason for [pckey]'s ban", "New Reason", "[reason]", null) as null|text)
 				value = sql_sanitize_text(value)
 				if(!value)
 					usr << "Cancelled"

@@ -188,9 +188,9 @@
 
 	if(mob.stat==2)	return
 
-	// handle possible AI movement
-	if(isAI(mob))
-		return AIMove(n,direct,mob)
+	// handle possible Eye movement
+	if(mob.eyeobj)
+		return mob.EyeMove(n,direct)
 
 	if(mob.monkeyizing)	return//This is sota the goto stop mobs from moving var
 
@@ -457,12 +457,12 @@
 			var/area/A = turf.loc
 			if(istype(A) && A.has_gravity == 0)
 				var/can_walk = 0
-				
+
 				if(ishuman(src))  // Only humans can wear magboots, so we give them a chance to.
 					var/mob/living/carbon/human/H = src
 					if(istype(H.shoes, /obj/item/clothing/shoes/magboots) && (H.shoes.flags & NOSLIP))
 						can_walk = 1
-				
+
 				if(!can_walk)
 					continue
 

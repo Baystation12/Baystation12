@@ -49,10 +49,10 @@
 /mob/living/silicon/emp_act(severity)
 	switch(severity)
 		if(1)
-			src.take_organ_damage(20)
+			src.take_organ_damage(0,20,emp=1)
 			Stun(rand(5,10))
 		if(2)
-			src.take_organ_damage(10)
+			src.take_organ_damage(0,10,emp=1)
 			Stun(rand(1,5))
 	flick("noise", src:flash)
 	src << "\red <B>*BZZZT*</B>"
@@ -235,14 +235,14 @@
 	set desc = "Sets a description which will be shown when someone examines you."
 	set category = "IC"
 
-	pose =  sanitize(copytext(input(usr, "This is [src]. It is...", "Pose", null)  as text, 1, MAX_MESSAGE_LEN))
+	pose =  sanitize(input(usr, "This is [src]. It is...", "Pose", null)  as text)
 
 /mob/living/silicon/verb/set_flavor()
 	set name = "Set Flavour Text"
 	set desc = "Sets an extended description of your character's features."
 	set category = "IC"
 
-	flavor_text =  sanitize(copytext(input(usr, "Please enter your new flavour text.", "Flavour text", null)  as text, 1))
+	flavor_text =  sanitize(input(usr, "Please enter your new flavour text.", "Flavour text", null)  as text)
 
 /mob/living/silicon/binarycheck()
 	return 1

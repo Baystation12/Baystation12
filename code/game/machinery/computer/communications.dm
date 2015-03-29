@@ -175,10 +175,10 @@
 					post_status(href_list["statdisp"])
 
 		if("setmsg1")
-			stat_msg1 = reject_bad_text(trim(sanitize(copytext(input("Line 1", "Enter Message Text", stat_msg1) as text|null, 1, 40))), 40)
+			stat_msg1 = reject_bad_text(sanitize(input("Line 1", "Enter Message Text", stat_msg1) as text|null, 40), 40)
 			src.updateDialog()
 		if("setmsg2")
-			stat_msg2 = reject_bad_text(trim(sanitize(copytext(input("Line 2", "Enter Message Text", stat_msg2) as text|null, 1, 40))), 40)
+			stat_msg2 = reject_bad_text(sanitize(input("Line 2", "Enter Message Text", stat_msg2) as text|null, 40), 40)
 			src.updateDialog()
 
 		// OMG CENTCOMM LETTERHEAD
@@ -187,7 +187,7 @@
 				if(centcomm_message_cooldown)
 					usr << "\red Arrays recycling.  Please stand by."
 					return
-				var/input = stripped_input(usr, "Please choose a message to transmit to Centcomm via quantum entanglement.  Please be aware that this process is very expensive, and abuse will lead to... termination.  Transmission does not guarantee a response. There is a 30 second delay before you may send another message, be clear, full and concise.", "To abort, send an empty message.", "")
+				var/input = sanitize(input("Please choose a message to transmit to Centcomm via quantum entanglement.  Please be aware that this process is very expensive, and abuse will lead to... termination.  Transmission does not guarantee a response. There is a 30 second delay before you may send another message, be clear, full and concise.", "To abort, send an empty message.", ""))
 				if(!input || !(usr in view(1,src)))
 					return
 				Centcomm_announce(input, usr)
@@ -204,7 +204,7 @@
 				if(centcomm_message_cooldown)
 					usr << "\red Arrays recycling.  Please stand by."
 					return
-				var/input = stripped_input(usr, "Please choose a message to transmit to \[ABNORMAL ROUTING CORDINATES\] via quantum entanglement.  Please be aware that this process is very expensive, and abuse will lead to... termination. Transmission does not guarantee a response. There is a 30 second delay before you may send another message, be clear, full and concise.", "To abort, send an empty message.", "")
+				var/input = sanitize(input(usr, "Please choose a message to transmit to \[ABNORMAL ROUTING CORDINATES\] via quantum entanglement.  Please be aware that this process is very expensive, and abuse will lead to... termination. Transmission does not guarantee a response. There is a 30 second delay before you may send another message, be clear, full and concise.", "To abort, send an empty message.", ""))
 				if(!input || !(usr in view(1,src)))
 					return
 				Syndicate_announce(input, usr)
