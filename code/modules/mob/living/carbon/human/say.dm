@@ -7,6 +7,7 @@
 		src << "<span class='danger'>You're muzzled and cannot speak!</span>"
 		return
 
+	message = sanitize(message)
 	..(message, alt_name = alt_name)	//ohgod we should really be passing a datum here.
 
 /mob/living/carbon/human/proc/forcesay(list/append)

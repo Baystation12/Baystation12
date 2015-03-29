@@ -364,6 +364,8 @@
 	if(speak_emote.len)
 		verb = pick(speak_emote)
 
+	message = sanitize(message)
+
 	..(message, null, verb)
 
 /mob/living/simple_animal/get_speech_ending(verb, var/ending)
