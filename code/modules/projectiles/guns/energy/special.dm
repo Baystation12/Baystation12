@@ -121,6 +121,7 @@
 	name = "staff of change"
 	desc = "An artefact that spits bolts of coruscating energy which cause the target's very form to reshape itself"
 	icon = 'icons/obj/gun.dmi'
+	item_icons = null
 	icon_state = "staffofchange"
 	item_state = "staffofchange"
 	fire_sound = 'sound/weapons/emitter.ogg'
@@ -174,6 +175,7 @@ obj/item/weapon/gun/energy/staff/focus
 	desc = "It's a cute rubber duck.  With an evil gleam in it's eye."
 	projectile_type = /obj/item/projectile/icarus/pointdefense
 	icon = 'icons/obj/watercloset.dmi'
+	item_icons = null
 	icon_state = "rubberducky"
 	item_state = "rubberducky"
 	charge_cost = 0

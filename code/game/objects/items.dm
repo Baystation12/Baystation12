@@ -40,6 +40,11 @@
 	var/zoomdevicename = null //name used for message when binoculars/scope is used
 	var/zoom = 0 //1 if item is actively being used to zoom. For scoped guns and binoculars.
 
+	// Used to specify the icon file to be used when the item is worn. If not set the default icon for that slot will be used.
+	// If icon_override or sprite_sheets are set they will take precendence over this, assuming they apply to the slot in question.
+	// Only slot_l_hand/slot_r_hand are implemented at the moment. Others to be implemented as needed.
+	var/list/item_icons = null
+
 	/* Species-specific sprites, concept stolen from Paradise//vg/.
 	ex:
 	sprite_sheets = list(
