@@ -233,7 +233,7 @@
 	else if(href_list["back"])
 		selected_event_container = null
 	else if(href_list["set_name"])
-		var/name = input("Enter event name.", "Set Name") as text|null
+		var/name = sanitize(input("Enter event name.", "Set Name") as text|null)
 		if(name)
 			var/datum/event_meta/EM = locate(href_list["set_name"])
 			EM.name = name

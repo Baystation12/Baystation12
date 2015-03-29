@@ -130,7 +130,7 @@ proc/get_radio_key_from_channel(var/channel)
 			src << "\red You cannot speak in IC (Muted)."
 			return
 
-	message = trim_strip_html_properly(message)
+	message = sanitize(message)
 
 	if(stat)
 		if(stat == 2)

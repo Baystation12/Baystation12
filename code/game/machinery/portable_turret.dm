@@ -818,7 +818,7 @@
 
 	if(istype(I, /obj/item/weapon/pen))	//you can rename turrets like bots!
 		var/t = input(user, "Enter new turret name", name, finish_name) as text
-		t = sanitize(copytext(t, 1, MAX_MESSAGE_LEN))
+		t = sanitize(t)
 		if(!t)
 			return
 		if(!in_range(src, usr) && loc != usr)
