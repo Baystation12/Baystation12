@@ -360,36 +360,14 @@
 		overlays += target_locked
 
 /mob/living/simple_animal/say(var/message)
-	if(stat)
-		return
-
-	if(copytext(message,1,2) == "*")
-		return emote(copytext(message,2))
-
-	if(stat)
-		return
-
-	//parse the language code and consume it
-	var/datum/language/speaking = parse_language(message)
-	if(speaking)
-		message = copytext(message,2+length(speaking.key))
-
 	var/verb = "says"
-	var/ending = copytext(message, length(message))
-	if (speaking)
-		// This is broadcast to all mobs with the language,
-		// irrespective of distance or anything else.
-		if(speaking.flags & HIVEMIND)
-			speaking.broadcast(src,trim(message))
-			return
-		//If we've gotten this far, keep going!
-		verb = speaking.get_spoken_verb(ending)
-	else if(speak_emote.len)
+	if(speak_emote.len)
 		verb = pick(speak_emote)
 
-	message = capitalize(trim(message))
+	..(message, null, verb)
 
-	..(message, speaking, verb)
+/mob/living/simple_animal/get_speech_ending(verb, var/ending)
+	return verb
 
 /mob/living/simple_animal/put_in_hands(var/obj/item/W) // No hands.
 	W.loc = get_turf(src)
