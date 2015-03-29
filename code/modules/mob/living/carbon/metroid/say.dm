@@ -1,4 +1,7 @@
 /mob/living/carbon/slime/say(var/message)
+
+	message = sanitize(message)
+
 	var/verb = say_quote(message)
 
 	if(copytext(message,1,2) == "*")

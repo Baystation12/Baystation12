@@ -280,7 +280,7 @@
 			voice_holder.active = 0
 			usr << "<font color='blue'>You disable the speech synthesiser.</font>"
 		if("Set Name")
-			var/raw_choice = sanitize(input(usr, "Please enter a new name.")  as text|null)
+			var/raw_choice = sanitize(input(usr, "Please enter a new name.")  as text|null, MAX_NAME_LEN)
 			if(!raw_choice)
 				return 0
 			voice_holder.voice = raw_choice

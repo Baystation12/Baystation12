@@ -30,13 +30,14 @@
 	title = "Security Announcement"
 	announcement_type = "Security Announcement"
 
-/datum/announcement/proc/Announce(var/message as text, var/new_title = "", var/new_sound = null, var/do_newscast = newscast)
+/datum/announcement/proc/Announce(var/message as text, var/new_title = "", var/new_sound = null, var/do_newscast = newscast, var/msg_sanitized = 0)
 	if(!message)
 		return
 	var/message_title = new_title ? new_title : title
 	var/message_sound = new_sound ? new_sound : sound
 
-	message = sanitize(message, extra = 0)
+	if(!msg_sanitized)
+		message = sanitize(message, extra = 0)
 	message_title = sanitizeSafe(message_title)
 
 	Message(message, message_title)
