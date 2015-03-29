@@ -63,6 +63,15 @@
 /obj/item/device
 	icon = 'icons/obj/device.dmi'
 
+//Checks if the item is being held by a mob, and if so, updates the held icons
+/obj/item/proc/update_held_icon()
+	if(ismob(src.loc))
+		var/mob/M = src.loc
+		if(M.l_hand == src)
+			M.update_inv_l_hand()
+		if(M.r_hand == src)
+			M.update_inv_r_hand()
+
 /obj/item/ex_act(severity)
 	switch(severity)
 		if(1.0)

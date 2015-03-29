@@ -60,12 +60,7 @@
 			projectile_type = /obj/item/projectile/energy/floramut
 			modifystate = "floramut"
 	update_icon()
-	
-	item_state = modifystate
-	if(user.l_hand == src)
-		user.update_inv_l_hand()
-	else
-		user.update_inv_r_hand()
+	update_held_icon()
 
 /obj/item/weapon/gun/energy/floragun/afterattack(obj/target, mob/user, adjacent_flag)
 	//allow shooting into adjacent hydrotrays regardless of intent

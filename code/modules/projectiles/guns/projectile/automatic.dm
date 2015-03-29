@@ -51,7 +51,7 @@
 	name = "\improper STS-35 automatic rifle"
 	desc = "A durable, rugged looking automatic weapon of a make popular on the frontier worlds. Uses 7.62mm rounds. It is unmarked."
 	icon_state = "arifle"
-	item_state = "arifle"
+	item_state = null
 	w_class = 4
 	force = 10
 	caliber = "a762"
@@ -63,6 +63,7 @@
 /obj/item/weapon/gun/projectile/automatic/sts35/update_icon()
 	..()
 	icon_state = (ammo_magazine)? "arifle-0" : "arifle"
+	update_held_icon()
 
 /obj/item/weapon/gun/projectile/automatic/wt550
 	name = "\improper W-T 550 Saber"

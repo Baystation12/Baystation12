@@ -138,10 +138,7 @@
 		handle_post_fire(user, target, pointblank, reflex)
 
 		update_icon()
-		if(user.hand)
-			user.update_inv_l_hand()
-		else
-			user.update_inv_r_hand()
+		update_held_icon()
 
 
 //obtains the next projectile to fire
