@@ -136,7 +136,7 @@
 
 //Called when the projectile intercepts a mob. Returns 1 if the projectile hit the mob, 0 if it missed and should keep flying.
 /obj/item/projectile/proc/attack_mob(var/mob/living/target_mob, var/distance, var/miss_modifier=0)
-	if(istype(target_mob)
+	if(istype(target_mob))
 		return
 	//accuracy bonus from aiming
 	if (istype(shot_from, /obj/item/weapon/gun))
