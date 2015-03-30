@@ -218,12 +218,12 @@
 					W = l_hand
 					chance = hand ? 40 : 20
 
-				if (istype(r_hand,/obj/item/weapon/gun))
+				else if (istype(r_hand,/obj/item/weapon/gun))
 					W = r_hand
 					chance = !hand ? 40 : 20
 
 				if (prob(chance))
-					visible_message("<spawn class=danger>[src]'s [W] goes off during struggle!")
+					visible_message("<spawn class=danger>[src]'s [W.name] goes off during struggle!")
 					var/list/turfs = list()
 					for(var/turf/T in view())
 						turfs += T
