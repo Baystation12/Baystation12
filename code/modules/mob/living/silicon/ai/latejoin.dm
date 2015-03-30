@@ -39,4 +39,5 @@ var/global/list/empty_playable_ai_cores = list()
 
 	clear_antag_roles(mind)
 
+	ghostize(0)
 	del(src)
