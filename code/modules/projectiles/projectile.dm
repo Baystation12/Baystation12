@@ -33,6 +33,7 @@
 	var/p_x = 16
 	var/p_y = 16 // the pixel location of the tile that the player clicked. Default is the center
 
+	var/accuracy = 0
 	var/damage = 10
 	var/damage_type = BRUTE //BRUTE, BURN, TOX, OXY, CLONE are the only things that should be in here
 	var/nodamage = 0 //Determines if the projectile will skip any damage inflictions
@@ -51,17 +52,17 @@
 	var/drowsy = 0
 	var/agony = 0
 	var/embed = 0 // whether or not the projectile can embed itself in the mob
-	
+
 	var/hitscan = 0	// whether the projectile should be hitscan
 
 	// effect types to be used
 	var/muzzle_type
 	var/tracer_type
 	var/impact_type
-	
+
 	var/datum/plot_vector/trajectory	// used to plot the path of the projectile
 	var/datum/vector_loc/location		// current location of the projectile in pixel space
-	var/matrix/effect_transform			// matrix to rotate and scale projectile effects - putting it here so it doesn't 
+	var/matrix/effect_transform			// matrix to rotate and scale projectile effects - putting it here so it doesn't
 										//  have to be recreated multiple times
 
 //TODO: make it so this is called more reliably, instead of sometimes by bullet_act() and sometimes not
@@ -131,6 +132,10 @@
 	shot_from = launcher
 	silenced = launcher.silenced
 
+	if (istype(shot_from, /obj/item/weapon/gun))
+		var/obj/item/weapon/gun/daddy = shot_from
+		accuracy = daddy.accuracy - daddy.cumulative_recoil
+
 	spawn()
 		process()
 
@@ -152,8 +157,8 @@
 	//accuracy bonus from aiming
 	if (istype(shot_from, /obj/item/weapon/gun))
 		var/obj/item/weapon/gun/daddy = shot_from
-		miss_modifier -= round(15*daddy.accuracy)
-		
+		miss_modifier -= round(15*accuracy)
+
 		//If you aim at someone beforehead, it'll hit more often.
 		//Kinda balanced by fact you need like 2 seconds to aim
 		//As opposed to no-delay pew pew
@@ -197,7 +202,7 @@
 /obj/item/projectile/Bump(atom/A as mob|obj|turf|area, forced=0)
 	if(A == src)
 		return 0 //no
-	
+
 	if(A == firer)
 		loc = A.loc
 		return 0 //cannot shoot yourself
@@ -218,7 +223,7 @@
 				visible_message("<span class='danger'>\The [M] uses [G.affecting] as a shield!</span>")
 				if(Bump(G.affecting, forced=1))
 					return //If Bump() returns 0 (keep going) then we continue on to attack M.
-			
+
 			passthrough = !attack_mob(M, distance)
 		else
 			passthrough = 1 //so ghosts don't stop bullets
@@ -250,7 +255,7 @@
 
 	//stop flying
 	on_impact(A)
-	
+
 	density = 0
 	invisibility = 101
 
@@ -307,7 +312,7 @@
 	// plot the initial trajectory
 	trajectory = new()
 	trajectory.setup(starting, original, pixel_x, pixel_y)
-	
+
 	// generate this now since all visual effects the projectile makes can use it
 	effect_transform = new()
 	effect_transform.Scale(trajectory.return_hypotenuse(), 1)
@@ -319,7 +324,7 @@
 
 	if(ispath(muzzle_type))
 		var/obj/effect/projectile/M = new muzzle_type(get_turf(src))
-		
+
 		if(istype(M))
 			M.set_transform(T)
 			M.pixel_x = location.pixel_x
@@ -329,7 +334,7 @@
 /obj/item/projectile/proc/tracer_effect(var/matrix/M)
 	if(ispath(tracer_type))
 		var/obj/effect/projectile/P = new tracer_type(location.loc)
-		
+
 		if(istype(P))
 			P.set_transform(M)
 			P.pixel_x = location.pixel_x
@@ -339,7 +344,7 @@
 /obj/item/projectile/proc/impact_effect(var/matrix/M)
 	if(ispath(tracer_type))
 		var/obj/effect/projectile/P = new impact_type(location.loc)
-		
+
 		if(istype(P))
 			P.set_transform(M)
 			P.pixel_x = location.pixel_x

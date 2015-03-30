@@ -1,3 +1,5 @@
+#define RECOIL_ACCURACY_MODIFIER	2
+
 //Parent gun type. Guns are weapons that can be aimed at mobs and act over a distance
 /obj/item/weapon/gun
 	name = "gun"
@@ -25,8 +27,14 @@
 	var/accuracy = 0 //accuracy is measured in tiles. +1 accuracy means that everything is effectively one tile closer for the purpose of miss chance, -1 means the opposite. launchers are not supported, at the moment.
 	var/scoped_accuracy = null
 
+	var/burst_toggleable = 0
+	var/burst_mode = 0 //burst fire
+	var/burst_delay = 2
+	var/burst_size = 3
+
 	var/last_fired = 0
-	
+	var/cumulative_recoil = 0
+
 	//aiming system stuff
 	var/keep_aim = 1 	//1 for keep shooting until aim is lowered
 						//0 for one bullet after tarrget moves and aim is lowered
@@ -40,6 +48,8 @@
 	..()
 	if(isnull(scoped_accuracy))
 		scoped_accuracy = accuracy
+	if(!burst_toggleable)
+		verbs -= /obj/item/weapon/gun/verb/toggle_firemode
 
 //Returns 1 if the gun is able to be fired
 /obj/item/weapon/gun/proc/ready_to_fire()
@@ -57,9 +67,9 @@
 		return 0
 	if(!user.IsAdvancedToolUser())
 		return 0
-	
+
 	var/mob/living/M = user
-	
+
 	if(HULK in M.mutations)
 		M << "<span class='danger'>Your fingers are much too large for the trigger guard!</span>"
 		return 0
@@ -69,7 +79,7 @@
 			if(process_projectile(P, user, user, pick("l_foot", "r_foot")))
 				handle_post_fire(user, user)
 				user.visible_message(
-					"<span class='danger'>[user] shoots \himself in the foot with \the [src]!</span>", 
+					"<span class='danger'>[user] shoots \himself in the foot with \the [src]!</span>",
 					"<span class='danger'>You shoot yourself in the foot with \the [src]!</span>"
 					)
 				M.drop_item()
@@ -123,14 +133,34 @@
 			user << "<span class='warning'>[src] is not ready to fire again!"
 		return
 
-	var/obj/projectile = consume_next_projectile(user)
-	if(!projectile)
-		handle_click_empty(user)
-		return
+	var/times_to_fire = 1
+	var/times_fired = 0
+	//var/times_fired1 = 0
+	//var/original_accuracy = accuracy
 
-	user.next_move = world.time + 4
+	if(burst_mode)
+		times_to_fire = burst_size
 
-	if(process_projectile(projectile, user, target, user.zone_sel.selecting, params, pointblank, reflex))
+
+	while(times_fired<times_to_fire)
+		var/obj/projectile = consume_next_projectile(user)
+		if(!projectile)
+			spawn(times_fired*burst_delay)
+				handle_click_empty(user)
+			break
+
+		spawn(times_fired*burst_delay) //brief delay between shots
+			process_projectile(projectile, user, target, user.zone_sel.selecting, params, pointblank, reflex)
+			cumulative_recoil += recoil * RECOIL_ACCURACY_MODIFIER //first shot in burst has regular accuracy. Subsequent shots degrade
+			if(recoil)
+				spawn()
+					shake_camera(user, recoil+1, recoil)
+			spawn(10)
+				cumulative_recoil -= recoil * RECOIL_ACCURACY_MODIFIER //cumulative recoil returns to 0 ten ticks after firing
+
+		times_fired++
+
+	if(times_fired)
 		handle_post_fire(user, target, pointblank, reflex)
 
 		update_icon()
@@ -138,6 +168,8 @@
 			user.update_inv_l_hand()
 		else
 			user.update_inv_r_hand()
+
+		user.next_move = world.time + 2 + times_fired * burst_delay
 
 
 //obtains the next projectile to fire
@@ -148,7 +180,7 @@
 /obj/item/weapon/gun/proc/can_hit(atom/target as mob, var/mob/living/user as mob)
 	if(!special_check(user))
 		return 2
-	//just assume we can shoot through glass and stuff. No big deal, the player can just choose to not target someone 
+	//just assume we can shoot through glass and stuff. No big deal, the player can just choose to not target someone
 	//on the other side of a window if it makes a difference. Or if they run behind a window, too bad.
 	return check_trajectory(target, user)
 
@@ -162,28 +194,27 @@
 
 //called after successfully firing
 /obj/item/weapon/gun/proc/handle_post_fire(mob/user, atom/target, var/pointblank=0, var/reflex=0)
-	if(silenced)
-		playsound(user, fire_sound, 10, 1)
-	else
-		playsound(user, fire_sound, 50, 1)
+	if(!silenced)
 		user.visible_message(
-			"<span class='danger'>[user] fires [src][pointblank ? "  point blank at [target]":""][reflex ? " by reflex":""]!</span>",
+			"<span class='danger'>[user][burst_mode ? " burst-fires ":" fires "][src][pointblank ? "  point blank at [target]":""][reflex ? " by reflex":""]!</span>",
 			"<span class='warning'>You fire [src][reflex ? "by reflex":""]!</span>",
 			"You hear a [fire_sound_text]!"
 		)
-	
-	if(recoil)
-		spawn()
-			shake_camera(user, recoil+1, recoil)
+
 	update_icon()
 
 //does the actual shooting
 /obj/item/weapon/gun/proc/process_projectile(obj/projectile, mob/user, atom/target, var/target_zone, var/params=null, var/pointblank=0, var/reflex=0)
 	if(!istype(projectile, /obj/item/projectile))
 		return 0 //default behaviour only applies to true projectiles
-	
+
+	if(silenced)
+		playsound(user, fire_sound, 10, 1)
+	else
+		playsound(user, fire_sound, 50, 1)
+
 	var/obj/item/projectile/P = projectile
-	
+
 	//shooting while in shock
 	var/x_offset = 0
 	var/y_offset = 0
@@ -197,9 +228,9 @@
 			x_offset = rand(-1,1)
 
 	//Point blank bonus
-	if(pointblank) 
+	if(pointblank)
 		var/damage_mult = 1.3 //default point blank multiplier
-		
+
 		//determine multiplier due to the target being grabbed
 		if(ismob(target))
 			var/mob/M = target
@@ -211,7 +242,7 @@
 					damage_mult = 3.0
 				else if (grabstate >= GRAB_AGGRESSIVE)
 					damage_mult = 1.5
-		
+
 		P.damage *= damage_mult
 
 	if(params)
@@ -219,13 +250,25 @@
 
 	return !P.launch(target, user, src, target_zone, x_offset, y_offset)
 
+/obj/item/weapon/gun/examine(mob/user)
+	..(user)
+	if(burst_toggleable)
+		if(burst_mode)
+			user << "It is set to [burst_size]-shot burst."
+		else
+			user << "It is set to single-shot."
+	else
+		if(burst_mode)
+			user << "It fires [burst_size]-shot bursts."
+	return
+
 //Suicide handling.
 /obj/item/weapon/gun/var/mouthshoot = 0 //To stop people from suiciding twice... >.>
 /obj/item/weapon/gun/proc/handle_suicide(mob/living/user)
 	if(!ishuman(user))
 		return
 	var/mob/living/carbon/human/M = user
-	
+
 	mouthshoot = 1
 	M.visible_message("\red [user] sticks their gun in their mouth, ready to pull the trigger...")
 	if(!do_after(user, 40))
@@ -259,13 +302,24 @@
 		mouthshoot = 0
 		return
 
+/obj/item/weapon/gun/verb/toggle_firemode()
+	set name = "Toggle Fire Mode"
+	set category = "Object"
+
+	burst_mode = !burst_mode
+
+	if (burst_mode)
+		loc << "[src.name] set to [src.burst_size]-shot burst."
+	else
+		loc << "[src.name] set to single-shot."
+
 /obj/item/weapon/gun/proc/toggle_scope(var/zoom_amount=2.0)
 	//looking through a scope limits your periphereal vision
 	//still, increase the view size by a tiny amount so that sniping isn't too restricted to NSEW
 	var/zoom_offset = round(world.view * zoom_amount)
 	var/view_size = round(world.view + zoom_amount)
 	var/scoped_accuracy_mod = zoom_offset
-	
+
 	zoom(zoom_offset, view_size)
 	if(zoom)
 		accuracy = scoped_accuracy + scoped_accuracy_mod
