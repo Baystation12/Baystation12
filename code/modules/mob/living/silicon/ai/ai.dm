@@ -311,13 +311,6 @@ var/list/ai_verbs_default = list(
 			//usr <<"You can only change your display once!"
 			//return
 
-/mob/living/silicon/ai/proc/is_malf()
-	if(ticker.mode.name == "AI malfunction")
-		for (var/datum/mind/malfai in malf.current_antagonists)
-			if (mind == malfai)
-				return malf
-	return 0
-
 // displays the malf_ai information if the AI is the malf
 /mob/living/silicon/ai/show_malf_ai()
 	if(malf && malf.hacked_apcs.len >= 3)

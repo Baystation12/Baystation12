@@ -49,30 +49,26 @@
 		var/datum/ai_law/AL = locate(href_list["ref"]) in owner.laws.all_laws()
 		if(AL)
 			var/state_law = text2num(href_list["state_law"])
-			AL.state_law = state_law
+			owner.laws.set_state_law(AL, state_law)
 		return 1
 
 	if(href_list["add_zeroth_law"])
 		if(zeroth_law && is_admin(usr) && !owner.laws.zeroth_law)
-			log_and_message_admins("has given [owner] a new zeroth law: [zeroth_law]")
 			owner.set_zeroth_law(zeroth_law)
 		return 1
 
 	if(href_list["add_ion_law"])
 		if(ion_law && is_malf(usr))
-			log_and_message_admins("has given [owner] a new ion law: [ion_law]")
 			owner.add_ion_law(ion_law)
 		return 1
 
 	if(href_list["add_inherent_law"])
 		if(inherent_law && is_malf(usr))
-			log_and_message_admins("has given [owner] a new inherent law: [inherent_law]")
 			owner.add_inherent_law(inherent_law)
 		return 1
 
 	if(href_list["add_supplied_law"])
 		if(supplied_law && supplied_law_position >= 1 && MIN_SUPPLIED_LAW_NUMBER <= MAX_SUPPLIED_LAW_NUMBER && is_malf(usr))
-			log_and_message_admins("has given [owner] a new supplied law: [supplied_law]")
 			owner.add_supplied_law(supplied_law_position, supplied_law)
 		return 1
 
@@ -120,8 +116,7 @@
 		if(is_malf(usr))
 			var/datum/ai_law/AL = locate(href_list["delete_law"]) in owner.laws.all_laws()
 			if(AL && is_malf(usr))
-				log_and_message_admins("has deleted a law belonging to [owner]: [AL.law]")
-				owner.laws.delete_law(AL)
+				owner.delete_law(AL)
 		return 1
 
 	if(href_list["state_laws"])
@@ -143,15 +138,6 @@
 				current_view = 0
 		return 1
 
-	if(href_list["sync_laws"])
-		if(owner.isAI())
-			sync_laws(owner)
-		else
-			var/mob/living/silicon/robot/R = owner
-			sync_laws(R.connected_ai)
-		usr << "<span class='notice'>Sync complete.</span>"
-		return 1
-
 	if(href_list["notify_laws"])
 		owner << "<span class='danger'>Law Notice</span>"
 		owner.laws.show_laws(owner)
@@ -164,9 +150,11 @@
 			usr << "<span class='notice>Laws displayed.</span>"
 		return 1
 
+	return 0
+
 /obj/nano_module/law_manager/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	var/data[0]
-	owner.laws.sort_laws()
+	owner.lawsync()
 
 	data["ion_law_nr"] = ionnum()
 	data["ion_law"] = ion_law
@@ -175,7 +163,7 @@
 	data["supplied_law"] = supplied_law
 	data["supplied_law_position"] = supplied_law_position
 
-	package_laws(data, "zeroth_laws", list(owner.laws.zeroth_law, owner.laws.zeroth_law_borg))
+	package_laws(data, "zeroth_laws", list(owner.laws.zeroth_law))
 	package_laws(data, "ion_laws", owner.laws.ion_laws)
 	package_laws(data, "inherent_laws", owner.laws.inherent_laws)
 	package_laws(data, "supplied_laws", owner.laws.supplied_laws)
@@ -209,7 +197,7 @@
 /obj/nano_module/law_manager/proc/package_laws(var/list/data, var/field, var/list/datum/ai_law/laws)
 	var/packaged_laws[0]
 	for(var/datum/ai_law/AL in laws)
-		packaged_laws[++packaged_laws.len] = list("law" = sanitize(AL.law), "index" = AL.get_index(), "state" = AL.state_law, "ref" = "\ref[AL]")
+		packaged_laws[++packaged_laws.len] = list("law" = sanitize(AL.law), "index" = AL.get_index(), "state" = owner.laws.get_state_law(AL), "ref" = "\ref[AL]")
 	data[field] = packaged_laws
 	data["has_[field]"] = packaged_laws.len
 
@@ -226,16 +214,13 @@
 	return law_sets
 
 /obj/nano_module/law_manager/proc/is_malf(var/mob/user)
-	return (is_admin(user) && !owner.is_slaved()) || owner.is_malf_loose()
-
-/mob/living/silicon/proc/is_malf_loose()
-	return mind && (mind.special_role == "malfunction" || mind.special_role == "traitor")
+	return (is_admin(user) && !owner.is_slaved()) || owner.is_malf_or_traitor()
 
 /mob/living/silicon/proc/is_ai_malf()
 	return 0
 
 /mob/living/silicon/robot/is_ai_malf()
-	return is_slaved() && connected_ai.is_malf_loose()
+	return is_slaved() && connected_ai.is_malf_or_traitor()
 
 /mob/living/silicon/ai/is_ai_malf()
 	return 0
