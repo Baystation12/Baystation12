@@ -9,10 +9,12 @@
 	cell_type = /obj/item/weapon/cell/crap
 
 /obj/item/weapon/gun/energy/taser/mounted
+	name = "mounted taser gun"
 	self_recharge = 1
 	use_external_power = 1
 
 /obj/item/weapon/gun/energy/taser/mounted/cyborg
+	name = "taser gun"
 	cell_type = /obj/item/weapon/cell/secborg
 	recharge_time = 10 //Time it takes for shots to recharge (in ticks)
 
