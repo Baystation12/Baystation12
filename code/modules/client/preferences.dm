@@ -995,16 +995,10 @@ datum/preferences
 				ShowChoices(user)
 				return
 			if("general")
-				var/msg = input(usr,"Give a general description of your character. This will be shown regardless of clothing, and may include OOC notes and preferences.","Flavor Text",html_decode(flavor_texts[href_list["task"]])) as message
-				if(msg != null)
-					msg = copytext(msg, 1, MAX_MESSAGE_LEN)
-					msg = html_encode(msg)
+				var/msg = sanitize(input(usr,"Give a general description of your character. This will be shown regardless of clothing, and may include OOC notes and preferences.","Flavor Text",html_decode(flavor_texts[href_list["task"]])) as message, extra = 0)
 				flavor_texts[href_list["task"]] = msg
 			else
-				var/msg = input(usr,"Set the flavor text for your [href_list["task"]].","Flavor Text",html_decode(flavor_texts[href_list["task"]])) as message
-				if(msg != null)
-					msg = copytext(msg, 1, MAX_MESSAGE_LEN)
-					msg = html_encode(msg)
+				var/msg = sanitize(input(usr,"Set the flavor text for your [href_list["task"]].","Flavor Text",html_decode(flavor_texts[href_list["task"]])) as message, extra = 0)
 				flavor_texts[href_list["task"]] = msg
 		SetFlavorText(user)
 		return
@@ -1019,16 +1013,10 @@ datum/preferences
 				ShowChoices(user)
 				return
 			if("Default")
-				var/msg = input(usr,"Set the default flavour text for your robot. It will be used for any module without individual setting.","Flavour Text",html_decode(flavour_texts_robot["Default"])) as message
-				if(msg != null)
-					msg = copytext(msg, 1, MAX_MESSAGE_LEN)
-					msg = html_encode(msg)
+				var/msg = sanitize(input(usr,"Set the default flavour text for your robot. It will be used for any module without individual setting.","Flavour Text",html_decode(flavour_texts_robot["Default"])) as message, extra = 0)
 				flavour_texts_robot[href_list["task"]] = msg
 			else
-				var/msg = input(usr,"Set the flavour text for your robot with [href_list["task"]] module. If you leave this empty, default flavour text will be used for this module.","Flavour Text",html_decode(flavour_texts_robot[href_list["task"]])) as message
-				if(msg != null)
-					msg = copytext(msg, 1, MAX_MESSAGE_LEN)
-					msg = html_encode(msg)
+				var/msg = sanitize(input(usr,"Set the flavour text for your robot with [href_list["task"]] module. If you leave this empty, default flavour text will be used for this module.","Flavour Text",html_decode(flavour_texts_robot[href_list["task"]])) as message, extra = 0)
 				flavour_texts_robot[href_list["task"]] = msg
 		SetFlavourTextRobot(user)
 		return
@@ -1044,41 +1032,25 @@ datum/preferences
 		else
 			user << browse(null, "window=records")
 		if(href_list["task"] == "med_record")
-			var/medmsg = input(usr,"Set your medical notes here.","Medical Records",html_decode(med_record)) as message
-
+			var/medmsg = sanitize(input(usr,"Set your medical notes here.","Medical Records",html_decode(med_record)) as message, MAX_PAPER_MESSAGE_LEN, extra = 0)
 			if(medmsg != null)
-				medmsg = copytext(medmsg, 1, MAX_PAPER_MESSAGE_LEN)
-				medmsg = html_encode(medmsg)
-
 				med_record = medmsg
 				SetRecords(user)
 
 		if(href_list["task"] == "sec_record")
-			var/secmsg = input(usr,"Set your security notes here.","Security Records",html_decode(sec_record)) as message
-
+			var/secmsg = sanitize(input(usr,"Set your security notes here.","Security Records",html_decode(sec_record)) as message, MAX_PAPER_MESSAGE_LEN, extra = 0)
 			if(secmsg != null)
-				secmsg = copytext(secmsg, 1, MAX_PAPER_MESSAGE_LEN)
-				secmsg = html_encode(secmsg)
-
 				sec_record = secmsg
 				SetRecords(user)
 		if(href_list["task"] == "gen_record")
-			var/genmsg = input(usr,"Set your employment notes here.","Employment Records",html_decode(gen_record)) as message
-
+			var/genmsg = sanitize(input(usr,"Set your employment notes here.","Employment Records",html_decode(gen_record)) as message, MAX_PAPER_MESSAGE_LEN, extra = 0)
 			if(genmsg != null)
-				genmsg = copytext(genmsg, 1, MAX_PAPER_MESSAGE_LEN)
-				genmsg = html_encode(genmsg)
-
 				gen_record = genmsg
 				SetRecords(user)
 
 		if(href_list["task"] == "exploitable_record")
-			var/exploitmsg = input(usr,"Set exploitable information about you here.","Exploitable Information",html_decode(exploit_record)) as message
-
+			var/exploitmsg = sanitize(input(usr,"Set exploitable information about you here.","Exploitable Information",html_decode(exploit_record)) as message, MAX_PAPER_MESSAGE_LEN, extra = 0)
 			if(exploitmsg != null)
-				exploitmsg = copytext(exploitmsg, 1, MAX_PAPER_MESSAGE_LEN)
-				exploitmsg = html_encode(exploitmsg)
-
 				exploit_record = exploitmsg
 				SetAntagoptions(user)
 
@@ -1205,7 +1177,7 @@ datum/preferences
 				if("name")
 					var/raw_name = input(user, "Choose your character's name:", "Character Preference")  as text|null
 					if (!isnull(raw_name)) // Check to ensure that the user entered text (rather than cancel.)
-						var/new_name = reject_bad_name(raw_name)
+						var/new_name = sanitizeName(raw_name)
 						if(new_name)
 							real_name = new_name
 						else
@@ -1291,7 +1263,7 @@ datum/preferences
 				if("metadata")
 					var/new_metadata = input(user, "Enter any information you'd like others to see, such as Roleplay-preferences:", "Game Preference" , metadata)  as message|null
 					if(new_metadata)
-						metadata = sanitize(copytext(new_metadata,1,MAX_MESSAGE_LEN))
+						metadata = sanitize(new_metadata)
 
 				if("b_type")
 					var/new_b_type = input(user, "Choose your character's blood-type:", "Character Preference") as null|anything in list( "A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-" )
@@ -1504,7 +1476,7 @@ datum/preferences
 					if(choice == "Other")
 						var/raw_choice = input(user, "Please enter a home system.")  as text|null
 						if(raw_choice)
-							home_system = sanitize(copytext(raw_choice,1,MAX_MESSAGE_LEN))
+							home_system = sanitize(raw_choice)
 						return
 					home_system = choice
 				if("citizenship")
@@ -1514,7 +1486,7 @@ datum/preferences
 					if(choice == "Other")
 						var/raw_choice = input(user, "Please enter your current citizenship.", "Character Preference") as text|null
 						if(raw_choice)
-							citizenship = sanitize(copytext(raw_choice,1,MAX_MESSAGE_LEN))
+							citizenship = sanitize(raw_choice)
 						return
 					citizenship = choice
 				if("faction")
@@ -1524,7 +1496,7 @@ datum/preferences
 					if(choice == "Other")
 						var/raw_choice = input(user, "Please enter a faction.")  as text|null
 						if(raw_choice)
-							faction = sanitize(copytext(raw_choice,1,MAX_MESSAGE_LEN))
+							faction = sanitize(raw_choice)
 						return
 					faction = choice
 				if("religion")
@@ -1534,7 +1506,7 @@ datum/preferences
 					if(choice == "Other")
 						var/raw_choice = input(user, "Please enter a religon.")  as text|null
 						if(raw_choice)
-							religion = sanitize(copytext(raw_choice,1,MAX_MESSAGE_LEN))
+							religion = sanitize(raw_choice)
 						return
 					religion = choice
 		else

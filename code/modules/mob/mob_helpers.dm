@@ -342,7 +342,7 @@ proc/slur(phrase)
 						n_letter = text("[n_letter]-[n_letter]")
 		t = text("[t][n_letter]")//since the above is ran through for each letter, the text just adds up back to the original word.
 		p++//for each letter p is increased to find where the next letter will be.
-	return sanitize(copytext(t,1,MAX_MESSAGE_LEN))
+	return sanitize(t)
 
 
 proc/Gibberish(t, p)//t is the inputted message, and any value higher than 70 for p will cause letters to be replaced instead of added
@@ -389,7 +389,7 @@ It's fairly easy to fix if dealing with single letters but not so much with comp
 			n_letter = text("[n_letter]")
 		t = text("[t][n_letter]")
 		p=p+n_mod
-	return sanitize(copytext(t,1,MAX_MESSAGE_LEN))
+	return sanitize(t)
 
 
 /proc/shake_camera(mob/M, duration, strength=1)
@@ -433,20 +433,20 @@ It's fairly easy to fix if dealing with single letters but not so much with comp
 	return 0
 
 //converts intent-strings into numbers and back
-var/list/intents = list("help","disarm","grab","hurt")
+var/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 /proc/intent_numeric(argument)
 	if(istext(argument))
 		switch(argument)
-			if("help")		return 0
-			if("disarm")	return 1
-			if("grab")		return 2
+			if(I_HELP)		return 0
+			if(I_DISARM)	return 1
+			if(I_GRAB)		return 2
 			else			return 3
 	else
 		switch(argument)
-			if(0)			return "help"
-			if(1)			return "disarm"
-			if(2)			return "grab"
-			else			return "hurt"
+			if(0)			return I_HELP
+			if(1)			return I_DISARM
+			if(2)			return I_GRAB
+			else			return I_HURT
 
 //change a mob's act-intent. Input the intent as a string such as "help" or use "right"/"left
 /mob/verb/a_intent_change(input as text)
@@ -455,7 +455,7 @@ var/list/intents = list("help","disarm","grab","hurt")
 
 	if(ishuman(src) || isbrain(src) || isslime(src))
 		switch(input)
-			if("help","disarm","grab","hurt")
+			if(I_HELP,I_DISARM,I_GRAB,I_HURT)
 				a_intent = input
 			if("right")
 				a_intent = intent_numeric((intent_numeric(a_intent)+1) % 4)
@@ -466,17 +466,17 @@ var/list/intents = list("help","disarm","grab","hurt")
 
 	else if(isrobot(src))
 		switch(input)
-			if("help")
-				a_intent = "help"
-			if("hurt")
-				a_intent = "hurt"
+			if(I_HELP)
+				a_intent = I_HELP
+			if(I_HURT)
+				a_intent = I_HURT
 			if("right","left")
 				a_intent = intent_numeric(intent_numeric(a_intent) - 3)
 		if(hud_used && hud_used.action_intent)
-			if(a_intent == "hurt")
-				hud_used.action_intent.icon_state = "harm"
+			if(a_intent == I_HURT)
+				hud_used.action_intent.icon_state = I_HURT
 			else
-				hud_used.action_intent.icon_state = "help"
+				hud_used.action_intent.icon_state = I_HELP
 
 proc/is_blind(A)
 	if(istype(A, /mob/living/carbon))

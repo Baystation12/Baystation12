@@ -90,14 +90,14 @@
 	if(user && user.client && !(A in aim_targets))
 		var/client/C = user.client
 		//If help intent is on and we have clicked on an eligible target, switch to aim mode automatically
-		if(user.a_intent == "help" && isliving(A) && !C.gun_mode)
+		if(user.a_intent == I_HELP && isliving(A) && !C.gun_mode)
 			C.ToggleGunMode()
 
 		if(C.gun_mode)
 			aiming = PreFire(A,user,params) //They're using the new gun system, locate what they're aiming at.
 
 	if (!aiming)
-		if(user && user.a_intent == "help") //regardless of what happens, refuse to shoot if help intent is on
+		if(user && user.a_intent == I_HELP) //regardless of what happens, refuse to shoot if help intent is on
 			user << "\red You refrain from firing your [src] as your intent is set to help."
 		else
 			Fire(A,user,params) //Otherwise, fire normally.
@@ -105,7 +105,7 @@
 /obj/item/weapon/gun/attack(atom/A, mob/living/user, def_zone)
 	if (A == user && user.zone_sel.selecting == "mouth" && !mouthshoot)
 		handle_suicide(user)
-	else if(user.a_intent == "hurt") //point blank shooting
+	else if(user.a_intent == I_HURT) //point blank shooting
 		Fire(A, user, pointblank=1)
 	else
 		return ..() //Pistolwhippin'

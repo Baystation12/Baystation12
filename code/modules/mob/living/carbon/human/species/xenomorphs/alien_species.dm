@@ -52,6 +52,10 @@
 		"nutrient vessel" = /datum/organ/internal/diona/nutrients
 		)
 
+	bump_flag = ALIEN
+	swap_flags = ALLMOBS
+	push_flags = ALLMOBS ^ ROBOT
+
 	var/alien_number = 0
 	var/caste_name = "creature" // Used to update alien name.
 	var/weeds_heal_rate = 1     // Health regen on weeds.

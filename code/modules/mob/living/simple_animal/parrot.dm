@@ -215,7 +215,7 @@
 /mob/living/simple_animal/parrot/attack_hand(mob/living/carbon/M as mob)
 	..()
 	if(client) return
-	if(!stat && M.a_intent == "hurt")
+	if(!stat && M.a_intent == I_HURT)
 
 		icon_state = "parrot_fly" //It is going to be flying regardless of whether it flees or attacks
 

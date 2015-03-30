@@ -517,7 +517,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 	if(istype(M,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = M
 		var/datum/organ/external/S = H.get_organ(user.zone_sel.selecting)
-		if(!(S.status & ORGAN_ROBOT) || user.a_intent != "help")
+		if(!(S.status & ORGAN_ROBOT) || user.a_intent != I_HELP)
 			return ..()
 
 		if(H.species.flags & IS_SYNTHETIC)

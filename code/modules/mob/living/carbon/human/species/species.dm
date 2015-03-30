@@ -115,6 +115,11 @@
 		"eyes" =     /datum/organ/internal/eyes
 		)
 
+	// Bump vars
+	var/bump_flag = HUMAN		// What are we considered to be when bumped?
+	var/push_flags = ALLMOBS	// What can we push?
+	var/swap_flags = ALLMOBS	// What can we swap place with?
+
 /datum/species/New()
 	if(hud_type)
 		hud = new hud_type()
@@ -250,7 +255,7 @@
 // Called when using the shredding behavior.
 /datum/species/proc/can_shred(var/mob/living/carbon/human/H, var/ignore_intent)
 
-	if(!ignore_intent && H.a_intent != "hurt")
+	if(!ignore_intent && H.a_intent != I_HURT)
 		return 0
 
 	for(var/datum/unarmed_attack/attack in unarmed_attacks)

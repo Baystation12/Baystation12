@@ -725,10 +725,10 @@ var/global/floorIsLava = 0
 	set desc="Announce your desires to the world"
 	if(!check_rights(0))	return
 
-	var/message = input("Global message to send:", "Admin Announce", null, null)  as message
+	var/message = input("Global message to send:", "Admin Announce", null, null)  as message//todo: sanitize for all?
 	if(message)
 		if(!check_rights(R_SERVER,0))
-			message = adminscrub(message,500)
+			message = sanitize(message, 500, extra = 0)
 		world << "\blue <b>[usr.client.holder.fakekey ? "Administrator" : usr.key] Announces:</b>\n \t [message]"
 		log_admin("Announce: [key_name(usr)] : [message]")
 	feedback_add_details("admin_verb","A") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!

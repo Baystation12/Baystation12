@@ -331,7 +331,7 @@
 
 	else
 		//if the turret was attacked with the intention of harming it:
-		user.changeNext_move(CLICK_CD_MELEE)
+		user.changeNext_move(NEXT_MOVE_DELAY)
 		take_damage(I.force * 0.5)
 		if(I.force * 0.5 > 1) //if the force of impact dealt at least 1 damage, the turret gets pissed off
 			if(!attacked && !emagged)
@@ -818,7 +818,7 @@
 
 	if(istype(I, /obj/item/weapon/pen))	//you can rename turrets like bots!
 		var/t = input(user, "Enter new turret name", name, finish_name) as text
-		t = sanitize(copytext(t, 1, MAX_MESSAGE_LEN))
+		t = sanitize(t)
 		if(!t)
 			return
 		if(!in_range(src, usr) && loc != usr)

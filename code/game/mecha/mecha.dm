@@ -284,7 +284,7 @@
 			src.log_message("Interfaced with [src_object].")
 			return STATUS_INTERACTIVE
 		if(src_object in view(2, src))
-			return STATUS_UPDATE //if they're close enough, allow the occupant to see the screen through the viewport or whatever. 
+			return STATUS_UPDATE //if they're close enough, allow the occupant to see the screen through the viewport or whatever.
 
 /obj/mecha/proc/melee_action(atom/target)
 	return
@@ -784,7 +784,7 @@
 				user << "There's already a powercell installed."
 		return
 
-	else if(istype(W, /obj/item/weapon/weldingtool) && user.a_intent != "hurt")
+	else if(istype(W, /obj/item/weapon/weldingtool) && user.a_intent != I_HURT)
 		var/obj/item/weapon/weldingtool/WT = W
 		if (WT.remove_fuel(0,user))
 			if (hasInternalDamage(MECHA_INT_TANK_BREACH))
@@ -1569,8 +1569,8 @@
 		return
 	if (href_list["change_name"])
 		if(usr != src.occupant)	return
-		var/newname = strip_html_simple(input(occupant,"Choose new exosuit name","Rename exosuit",initial(name)) as text, MAX_NAME_LEN)
-		if(newname && trim(newname))
+		var/newname = sanitizeSafe(input(occupant,"Choose new exosuit name","Rename exosuit",initial(name)) as text, MAX_NAME_LEN)
+		if(newname)
 			name = newname
 		else
 			alert(occupant, "nope.avi")
