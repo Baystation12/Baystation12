@@ -80,7 +80,7 @@
 
 	mutations.Add(HUSK)
 	status_flags |= DISFIGURED	//makes them unknown without fucking up other stuff like admintools
-	update_body(0)
+	update_body(1)
 	return
 
 /mob/living/carbon/human/proc/Drain()
