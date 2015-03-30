@@ -1,15 +1,81 @@
+//This proc is called whenever someone clicks an inventory ui slot.
+/mob/proc/attack_ui(slot)
+	var/obj/item/W = get_active_hand()
+	if(istype(W))
+		equip_to_slot_if_possible(W, slot)
+
+/mob/proc/put_in_any_hand_if_possible(obj/item/W as obj, del_on_fail = 0, disable_warning = 1, redraw_mob = 1)
+	if(equip_to_slot_if_possible(W, slot_l_hand, del_on_fail, disable_warning, redraw_mob))
+		return 1
+	else if(equip_to_slot_if_possible(W, slot_r_hand, del_on_fail, disable_warning, redraw_mob))
+		return 1
+	return 0
+
+//This is a SAFE proc. Use this instead of equip_to_slot()!
+//set del_on_fail to have it delete W if it fails to equip
+//set disable_warning to disable the 'you are unable to equip that' warning.
+//unset redraw_mob to prevent the mob from being redrawn at the end.
+/mob/proc/equip_to_slot_if_possible(obj/item/W as obj, slot, del_on_fail = 0, disable_warning = 0, redraw_mob = 1)
+	if(!istype(W)) return 0
+
+	if(!W.mob_can_equip(src, slot))
+		if(del_on_fail)
+			del(W)
+		else
+			if(!disable_warning)
+				src << "\red You are unable to equip that." //Only print if del_on_fail is false
+		return 0
+
+	equip_to_slot(W, slot, redraw_mob) //This proc should not ever fail.
+	return 1
+
+//This is an UNSAFE proc. It merely handles the actual job of equipping. All the checks on whether you can or can't eqip need to be done before! Use mob_can_equip() for that task.
+//In most cases you will want to use equip_to_slot_if_possible()
+/mob/proc/equip_to_slot(obj/item/W as obj, slot)
+	return
+
+//This is just a commonly used configuration for the equip_to_slot_if_possible() proc, used to equip people when the rounds tarts and when events happen and such.
+/mob/proc/equip_to_slot_or_del(obj/item/W as obj, slot)
+	return equip_to_slot_if_possible(W, slot, 1, 1, 0)
+
+//The list of slots by priority. equip_to_appropriate_slot() uses this list. Doesn't matter if a mob type doesn't have a slot.
+var/list/slot_equipment_priority = list( \
+		slot_back,\
+		slot_wear_id,\
+		slot_w_uniform,\
+		slot_wear_suit,\
+		slot_wear_mask,\
+		slot_head,\
+		slot_shoes,\
+		slot_gloves,\
+		slot_l_ear,\
+		slot_r_ear,\
+		slot_glasses,\
+		slot_belt,\
+		slot_s_store,\
+		slot_tie,\
+		slot_l_store,\
+		slot_r_store\
+	)
+
+//puts the item "W" into an appropriate slot in a human's inventory
+//returns 0 if it cannot, 1 if successful
+/mob/proc/equip_to_appropriate_slot(obj/item/W)
+	if(!istype(W)) return 0
+
+	for(var/slot in slot_equipment_priority)
+		if(equip_to_slot_if_possible(W, slot, del_on_fail=0, disable_warning=1, redraw_mob=1))
+			return 1
+
+	return 0
+
 //These procs handle putting s tuff in your hand. It's probably best to use these rather than setting l_hand = ...etc
 //as they handle all relevant stuff like adding it to the player's screen and updating their overlays.
 
 //Returns the thing in our active hand
 /mob/proc/get_active_hand()
-	if(issilicon(src))
-		if(isrobot(src))
-			if(src:module_active)
-				return src:module_active
-	else
-		if(hand)	return l_hand
-		else		return r_hand
+	if(hand)	return l_hand
+	else		return r_hand
 
 //Returns the thing in our inactive hand
 /mob/proc/get_inactive_hand()
@@ -84,27 +150,19 @@
 		return drop_item()
 	return 0
 
-
+// Removes an item from inventory and places it in the target atom
 /mob/proc/drop_from_inventory(var/obj/item/W, var/atom/Target = null)
 	if(W)
 		if(!Target)
 			Target = loc
 
-		if(client)	client.screen -= W
-		u_equip(W)
+		remove_from_mob(W)
 		if(!W) return 1 // self destroying objects (tk, grabs)
-		W.layer = initial(W.layer)
-		W.loc = Target
-
-		var/turf/T = get_turf(Target)
-		if(isturf(T))
-			T.Entered(W)
-
-		W.dropped(src)
+		
+		W.forceMove(Target)
 		update_icons()
 		return 1
 	return 0
-
 
 //Drops the item in our left hand
 /mob/proc/drop_l_hand(var/atom/Target)
@@ -166,7 +224,12 @@
 	return
 
 
-/mob/proc/u_equip(W as obj)
+//Removes the object from any slots the mob might have, calling the appropriate icon update proc.
+//Does nothing else.
+//DO NOT CALL THIS PROC DIRECTLY. It is meant to be called only by other inventory procs.
+//As far as I can tell the proc exists so that mobs with different inventory slots can override
+//the search through all the slots, without having to duplicate the rest of the item dropping.
+/mob/proc/u_equip(obj/W as obj)
 	if (W == r_hand)
 		r_hand = null
 		update_inv_r_hand(0)
@@ -215,6 +278,9 @@
 		src.client.screen -= O
 	O.layer = initial(O.layer)
 	O.screen_loc = null
+	if(istype(O, /obj/item))
+		var/obj/item/I = O
+		I.dropped()
 	return 1
 
 
