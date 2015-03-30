@@ -102,7 +102,7 @@
 						if("magicmissile")
 							feedback_add_details("wizard_spell_learned","MM") //please do not change the abbreviation to keep data processing consistent. Add a unique id to any new spells
 							H.spell_list += new /obj/effect/proc_holder/spell/targeted/projectile/magic_missile(H)
-							temp = "This spell fires several, slow moving, magic projectiles at nearby targets. If they hit a target, it is paralyzed and takes minor damage."
+							temp = "This spell fires several, slow moving, magic projectiles at nearby targets. If a projectile hits a target, the target is stunned for some time."
 						if("fireball")
 							feedback_add_details("wizard_spell_learned","FB") //please do not change the abbreviation to keep data processing consistent. Add a unique id to any new spells
 							H.spell_list += new /obj/effect/proc_holder/spell/dumbfire/fireball(H)
@@ -114,11 +114,11 @@
 						if("disabletech")
 							feedback_add_details("wizard_spell_learned","DT") //please do not change the abbreviation to keep data processing consistent. Add a unique id to any new spells
 							H.spell_list += new /obj/effect/proc_holder/spell/targeted/emplosion/disable_tech(H)
-							temp = "This spell disables all weapons, cameras and most other technology in range."
+							temp = "This spell releases an EMP from your person disabling most technology within range; computers, doors, prosthetics, etc."
 						if("smoke")
 							feedback_add_details("wizard_spell_learned","SM") //please do not change the abbreviation to keep data processing consistent. Add a unique id to any new spells
 							H.spell_list += new /obj/effect/proc_holder/spell/targeted/smoke(H)
-							temp = "This spell spawns a cloud of choking smoke at your location and does not require wizard garb."
+							temp = "This spell spawns a cloud of vision obscuring smoke at your location and does not require wizard garb."
 						if("blind")
 							feedback_add_details("wizard_spell_learned","BD") //please do not change the abbreviation to keep data processing consistent. Add a unique id to any new spells
 							H.spell_list += new /obj/effect/proc_holder/spell/targeted/trigger/blind(H)
@@ -142,7 +142,7 @@
 						if("mutate")
 							feedback_add_details("wizard_spell_learned","MU") //please do not change the abbreviation to keep data processing consistent. Add a unique id to any new spells
 							H.spell_list += new /obj/effect/proc_holder/spell/targeted/genetic/mutate(H)
-							temp = "This spell causes you to turn into a hulk and gain telekinesis for a short while."
+							temp = "This spell causes you to turn into a hulk, gaining super strength and the ability to punch down walls! You also gain the ability to fire lasers from your eyes!"
 						if("etherealjaunt")
 							feedback_add_details("wizard_spell_learned","EJ") //please do not change the abbreviation to keep data processing consistent. Add a unique id to any new spells
 							H.spell_list += new /obj/effect/proc_holder/spell/targeted/ethereal_jaunt(H)
