@@ -35,6 +35,7 @@
 		user.update_inv_r_hand()
 
 /obj/item/weapon/gun/energy/gun/mounted
+	name = "mounted energy gun"
 	self_recharge = 1
 	use_external_power = 1
 
