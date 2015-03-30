@@ -10,14 +10,13 @@
 		is_adult = 0
 		maxHealth = 150
 		revive()
-		regenerate_icons()
 		if (!client) rabid = 1
 		number = rand(1, 1000)
 		name = "[colour] [is_adult ? "adult" : "baby"] slime ([number])"
 		return
 
 	. = ..(gibbed, "seizes up and falls limp...")
-
+	mood = null
 	regenerate_icons()
 
 	return
