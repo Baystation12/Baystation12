@@ -169,7 +169,7 @@
 			user << "<span class='notice'>\The [src] is full.</span>"
 			return 1
 		else
-			user.before_take_item(O)
+			user.remove_from_mob(O)
 			O.loc = src
 			if(item_quants[O.name])
 				item_quants[O.name]++

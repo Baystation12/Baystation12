@@ -177,7 +177,7 @@
 		spawn(0) //delete the empty stack once the current context yields
 			if (amount <= 0) //check again in case someone transferred stuff to us
 				if(usr)
-					usr.before_take_item(src)
+					usr.remove_from_mob(src)
 				del(src)
 	return 1
 

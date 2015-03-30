@@ -67,7 +67,7 @@
 		for(var/obj/item/O in src.contents)
 			total_stored += O.w_class
 		if(total_stored + W.w_class <= max_combined_w_class)
-			user.drop_item(W)
+			user.remove_from_mob(W)
 			W.loc = src
 			user << "You shove [W] into the hopper."
 		else

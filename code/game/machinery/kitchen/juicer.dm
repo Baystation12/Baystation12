@@ -38,7 +38,7 @@
 		if (beaker)
 			return 1
 		else
-			user.before_take_item(O)
+			user.remove_from_mob(O)
 			O.loc = src
 			beaker = O
 			src.verbs += /obj/machinery/juicer/verb/detach
@@ -48,7 +48,7 @@
 	if (!is_type_in_list(O, allowed_items))
 		user << "It looks as not containing any juice."
 		return 1
-	user.before_take_item(O)
+	user.remove_from_mob(O)
 	O.loc = src
 	src.updateUsrDialog()
 	return 0
