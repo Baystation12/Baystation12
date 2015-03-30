@@ -25,6 +25,10 @@
 	breath_type = null
 	poison_type = null
 
+	bump_flag = SLIME
+	swap_flags = MONKEY|SLIME|SIMPLE_ANIMAL
+	push_flags = MONKEY|SLIME|SIMPLE_ANIMAL
+
 /datum/species/slime/handle_death(var/mob/living/carbon/human/H)
 	spawn(1)
 		if(H)

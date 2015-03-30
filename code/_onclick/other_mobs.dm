@@ -31,7 +31,7 @@
 /mob/living/carbon/human/RangedAttack(var/atom/A)
 	if(!gloves && !mutations.len) return
 	var/obj/item/clothing/gloves/G = gloves
-	if((LASER in mutations) && a_intent == "hurt")
+	if((LASER in mutations) && a_intent == I_HURT)
 		LaserEyes(A) // moved into a proc below
 
 	else if(istype(G) && G.Touch(A,0)) // for magic gloves
@@ -89,9 +89,9 @@
 	if (istype(M))
 
 		switch(src.a_intent)
-			if ("help") // We just poke the other
+			if (I_HELP) // We just poke the other
 				M.visible_message("<span class='notice'>[src] gently pokes [M]!</span>", "<span class='notice'>[src] gently pokes you!</span>")
-			if ("disarm") // We stun the target, with the intention to feed
+			if (I_DISARM) // We stun the target, with the intention to feed
 				var/stunprob = 1
 				var/power = max(0, min(10, (powerlevel + rand(0, 3))))
 				if (powerlevel > 0 && !istype(A, /mob/living/carbon/slime))
@@ -130,9 +130,9 @@
 				else
 					M.visible_message("<span class='danger'>[src] has tried to pounce at [M]!</span>", "<span class='danger'>[src] has tried to pounce at you!</span>")
 				M.updatehealth()
-			if ("grab") // We feed
+			if (I_GRAB) // We feed
 				Wrap(M)
-			if ("hurt") // Attacking
+			if (I_HURT) // Attacking
 				A.attack_generic(src, (is_adult ? rand(20,40) : rand(5,25)), "glomped")
 	else
 		A.attack_generic(src, (is_adult ? rand(20,40) : rand(5,25)), "glomped") // Basic attack.
@@ -156,5 +156,5 @@
 		return
 
 	var/damage = rand(melee_damage_lower, melee_damage_upper)
-	if(A.attack_generic(src,damage,attacktext,wall_smash) && loc && attack_sound)
+	if(A.attack_generic(src,damage,attacktext,environment_smash) && loc && attack_sound)
 		playsound(loc, attack_sound, 50, 1, 1)

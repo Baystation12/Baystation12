@@ -10,10 +10,11 @@
 	response_harm   = "punches"
 	icon_dead = "shade_dead"
 	speed = -1
-	a_intent = "harm"
+	a_intent = I_HURT
 	stop_automated_movement = 1
 	status_flags = CANPUSH
-	universal_speak = 1
+	universal_speak = 0
+	universal_understand = 1
 	attack_sound = 'sound/weapons/punch1.ogg'
 	min_oxy = 0
 	max_oxy = 0
@@ -24,15 +25,25 @@
 	min_n2 = 0
 	max_n2 = 0
 	minbodytemp = 0
+	show_stat_health = 0
 	faction = "cult"
+	supernatural = 1
+	var/nullblock = 0
+
+	mob_swap_flags = HUMAN|SIMPLE_ANIMAL|SLIME|MONKEY
+	mob_push_flags = ALLMOBS
+
 	var/list/construct_spells = list()
 
 /mob/living/simple_animal/construct/New()
 	..()
 	name = text("[initial(name)] ([rand(1, 1000)])")
 	real_name = name
+	add_language("Cult")
+	add_language("Occult")
 	for(var/spell in construct_spells)
 		spell_list += new spell(src)
+	updateicon()
 
 /mob/living/simple_animal/construct/death()
 	new /obj/item/weapon/ectoplasm (src.loc)
@@ -40,12 +51,11 @@
 	ghostize()
 	del src
 
-
 /mob/living/simple_animal/construct/attack_generic(var/mob/user)
 	if(istype(user, /mob/living/simple_animal/construct/builder))
 		if(health < maxHealth)
 			adjustBruteLoss(-5)
-			user.visible_message("<b>\The [user]</b> mends some of \the [src]'s wounds.")
+			user.visible_message("<span class='notice'>\The [user]</b> mends some of \the [src]'s wounds.</span>")
 		else
 			user << "<span class='notice'>\The [src] is undamaged.</span>"
 		return
@@ -53,7 +63,7 @@
 
 /mob/living/simple_animal/construct/examine(mob/user)
 	..(user)
-	var/msg = ""
+	var/msg = "<span cass='info'>*---------*\nThis is \icon[src] \a <EM>[src]</EM>!\n"
 	if (src.health < src.maxHealth)
 		msg += "<span class='warning'>"
 		if (src.health >= src.maxHealth/2)
@@ -64,54 +74,12 @@
 	msg += "*---------*</span>"
 
 	user << msg
-	return
-
-/mob/living/simple_animal/construct/Bump(atom/movable/AM as mob|obj, yes)
-	if ((!( yes ) || now_pushing))
-		return
-	now_pushing = 1
-	if(ismob(AM))
-		var/mob/tmob = AM
-		if(!(tmob.status_flags & CANPUSH))
-			now_pushing = 0
-			return
-
-		tmob.LAssailant = src
-	now_pushing = 0
-	..()
-	if (!istype(AM, /atom/movable))
-		return
-	if (!( now_pushing ))
-		now_pushing = 1
-		if (!( AM.anchored ))
-			var/t = get_dir(src, AM)
-			if (istype(AM, /obj/structure/window))
-				var/obj/structure/window/W = AM
-				if(W.is_full_window())
-					for(var/obj/structure/window/win in get_step(AM,t))
-						now_pushing = 0
-						return
-			step(AM, t)
-		now_pushing = null
-
-/mob/living/simple_animal/construct/attackby(var/obj/item/O as obj, var/mob/user as mob)
-	if(O.force)
-		var/damage = O.force
-		if (O.damtype == HALLOSS)
-			damage = 0
-		adjustBruteLoss(damage)
-		for(var/mob/M in viewers(src, null))
-			if ((M.client && !( M.blinded )))
-				M.show_message("\red \b [src] has been attacked with [O] by [user]. ")
-	else
-		usr << "\red This weapon is ineffective, it does no damage."
-		for(var/mob/M in viewers(src, null))
-			if ((M.client && !( M.blinded )))
-				M.show_message("\red [user] gently taps [src] with [O]. ")
-
 
 
 /////////////////Juggernaut///////////////
+
+
+
 /mob/living/simple_animal/construct/armoured
 	name = "Juggernaut"
 	real_name = "Juggernaut"
@@ -128,31 +96,11 @@
 	attacktext = "smashed their armoured gauntlet into"
 	mob_size = 20
 	speed = 3
-	wall_smash = 1
+	environment_smash = 2
 	attack_sound = 'sound/weapons/punch3.ogg'
 	status_flags = 0
+	resistance = 10
 	construct_spells = list(/obj/effect/proc_holder/spell/aoe_turf/conjure/lesserforcewall)
-
-/mob/living/simple_animal/construct/armoured/attackby(var/obj/item/O as obj, var/mob/user as mob)
-	if(O.force)
-		if(O.force >= 11)
-			var/damage = O.force
-			if (O.damtype == HALLOSS)
-				damage = 0
-			adjustBruteLoss(damage)
-			for(var/mob/M in viewers(src, null))
-				if ((M.client && !( M.blinded )))
-					M.show_message("\red \b [src] has been attacked with [O] by [user]. ")
-		else
-			for(var/mob/M in viewers(src, null))
-				if ((M.client && !( M.blinded )))
-					M.show_message("\red \b [O] bounces harmlessly off of [src]. ")
-	else
-		usr << "\red This weapon is ineffective, it does no damage."
-		for(var/mob/M in viewers(src, null))
-			if ((M.client && !( M.blinded )))
-				M.show_message("\red [user] gently taps [src] with [O]. ")
-
 
 /mob/living/simple_animal/construct/armoured/Life()
 	weakened = 0
@@ -163,8 +111,8 @@
 		var/reflectchance = 80 - round(P.damage/3)
 		if(prob(reflectchance))
 			adjustBruteLoss(P.damage * 0.5)
-			visible_message("<span class='danger'>\The [P] was reflected by \the [src]'s shell!</span>", \
-							"<span class='userdanger'>\The [P] was reflected by \the [src]'s shell!</span>")
+			visible_message("<span class='danger'>The [P.name] gets reflected by [src]'s shell!</span>", \
+							"<span class='userdanger'>The [P.name] gets reflected by [src]'s shell!</span>")
 
 			// Find a turf near or on the original location to bounce to
 			if(P.starting)
@@ -198,10 +146,10 @@
 	melee_damage_upper = 25
 	attacktext = "slashed"
 	speed = -1
+	environment_smash = 1
 	see_in_dark = 7
 	attack_sound = 'sound/weapons/bladeslice.ogg'
 	construct_spells = list(/obj/effect/proc_holder/spell/targeted/ethereal_jaunt/shift)
-
 
 
 /////////////////////////////Artificer/////////////////////////
@@ -223,7 +171,7 @@
 	melee_damage_upper = 5
 	attacktext = "rammed"
 	speed = 0
-	wall_smash = 1
+	environment_smash = 2
 	attack_sound = 'sound/weapons/punch2.ogg'
 	construct_spells = list(/obj/effect/proc_holder/spell/aoe_turf/conjure/construct/lesser,
 							/obj/effect/proc_holder/spell/aoe_turf/conjure/wall,
@@ -250,60 +198,35 @@
 	melee_damage_upper = 50
 	attacktext = "brutally crushed"
 	speed = 5
-	wall_smash = 1
+	environment_smash = 2
 	attack_sound = 'sound/weapons/punch4.ogg'
-	mob_size = 20
+	resistance = 10
 	var/energy = 0
 	var/max_energy = 1000
 
-/mob/living/simple_animal/construct/behemoth/attackby(var/obj/item/O as obj, var/mob/user as mob)
-	if(O.force)
-		if(O.force >= 11)
-			var/damage = O.force
-			if (O.damtype == HALLOSS)
-				damage = 0
-			adjustBruteLoss(damage)
-			for(var/mob/M in viewers(src, null))
-				if ((M.client && !( M.blinded )))
-					M.show_message("\red \b [src] has been attacked with [O] by [user]. ")
-		else
-			for(var/mob/M in viewers(src, null))
-				if ((M.client && !( M.blinded )))
-					M.show_message("\red \b [O] bounces harmlessly off of [src]. ")
-	else
-		usr << "\red This weapon is ineffective, it does no damage."
-		for(var/mob/M in viewers(src, null))
-			if ((M.client && !( M.blinded )))
-				M.show_message("\red [user] gently taps [src] with [O]. ")
+////////////////////////Harvester////////////////////////////////
 
 
 
-////////////////Powers//////////////////
+/mob/living/simple_animal/construct/harvester
+	name = "Harvester"
+	real_name = "Harvester"
+	desc = "The promised reward of the livings who follow narsie. Obtained by offering their bodies to the geometer of blood"
+	icon = 'icons/mob/mob.dmi'
+	icon_state = "harvester"
+	icon_living = "harvester"
+	maxHealth = 150
+	health = 150
+	melee_damage_lower = 25
+	melee_damage_upper = 25
+	attacktext = "violently stabs"
+	speed = -1
+	environment_smash = 1
+	see_in_dark = 7
+	attack_sound = 'sound/weapons/pierce.ogg'
 
-
-/*
-/client/proc/summon_cultist()
-	set category = "Behemoth"
-	set name = "Summon Cultist (300)"
-	set desc = "Teleport a cultist to your location"
-	if (istype(usr,/mob/living/simple_animal/constructbehemoth))
-
-		if(usr.energy<300)
-			usr << "\red You do not have enough power stored!"
-			return
-
-		if(usr.stat)
-			return
-
-		usr.energy -= 300
-	var/list/mob/living/cultists = new
-	for(var/datum/mind/H in ticker.mode.cult)
-		if (istype(H.current,/mob/living))
-			cultists+=H.current
-			var/mob/cultist = input("Choose the one who you want to summon", "Followers of Geometer") as null|anything in (cultists - usr)
-			if(!cultist)
-				return
-			if (cultist == usr) //just to be sure.
-				return
-			cultist.loc = usr.loc
-			usr.visible_message("/red [cultist] appears in a flash of red light as [usr] glows with power")*/
+	construct_spells = list(
+			//spell/targeted/harvest,
+			//spell/aoe_turf/knock/harvester,
+			//spell/rune_write
+		)
