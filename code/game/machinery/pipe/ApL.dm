@@ -42,7 +42,7 @@
 				P_type_t = "regular pipes"
 			if(29)
 				P_type = 31
-				P_type_t = "rcrubbers pipes"
+				P_type_t = "scrubbers pipes"
 			if(2)
 				P_type = 29
 				P_type_t = "supply pipes"
@@ -111,7 +111,7 @@
 		visible_message("Metal depleted, [src] deactivated.")
 		return
 	if(metal < amount)
-		visible_message("No enough Metal to finish the task.")
+		visible_message("No enough vetal to finish the task.")
 		return
 	metal-=amount
 	return 1
