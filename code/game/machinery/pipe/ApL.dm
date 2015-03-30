@@ -111,7 +111,7 @@
 		visible_message("Metal depleted, [src] deactivated.")
 		return
 	if(metal < amount)
-		visible_message("No enough vetal to finish the task.")
+		visible_message("Not enough metal to finish the task.")
 		return
 	metal-=amount
 	return 1
