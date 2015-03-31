@@ -219,7 +219,7 @@
 		if(!cannot_amputate && config.limbs_can_break && (brute_dam + burn_dam) >= (max_damage * config.organ_health_multiplier))
 			var/threshold = max_damage/3
 			var/dropped
-			if((burn >= threshold) && prob(burn))
+			if((burn >= threshold) && prob(burn/3))
 				dropped = 1
 				droplimb(0,1)
 			if(!dropped && prob(brute))
