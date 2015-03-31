@@ -1,9 +1,10 @@
 /obj/item/glass_jar
 	name = "glass jar"
 	desc = "A small empty jar."
-	icon = 'icons/obj/chemical.dmi'
-	icon_state = "beakerlarge"
+	icon = 'icons/obj/items.dmi'
+	icon_state = "jar"
 	w_class = 2
+	matter = list("glass" = 200)
 	var/contains = 0 // 0 = nothing, 1 = money, 2 = animal, 3 = spiderling
 
 /obj/item/glass_jar/New()
@@ -76,14 +77,14 @@
 		desc = "A small jar with money inside."
 		for(var/obj/item/weapon/spacecash/S in src)
 			var/image/money = image(S.icon, S.icon_state)
-			money.pixel_x = rand(-5, 5)
-			money.pixel_y = rand(-5, 5)
-			money.transform *= 0.5
+			money.pixel_x = rand(-3, 3)
+			money.pixel_y = rand(-6, 6)
+			money.transform *= 0.75
 			underlays += money
 	else if(contains == 2)
 		for(var/mob/M in src)
 			var/image/victim = image(M.icon, M.icon_state)
-			victim.pixel_y = 8
+			victim.pixel_y = 6
 			underlays += victim
 			name = "glass jar with [M]"
 			desc = "A small jar with [M] inside."
@@ -93,5 +94,4 @@
 			underlays += victim
 			name = "glass jar with [S]"
 			desc = "A small jar with [S] inside."
-	overlays += "lid_beakerlarge"
 	return
