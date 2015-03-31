@@ -85,7 +85,7 @@
 	desc = "A shoulder-mounted battery-powered laser cannon mount."
 	selectable = 1
 	usable = 1
-	use_power_cost = 10
+	module_cooldown = 0
 
 	engage_string = "Configure"
 
