@@ -66,7 +66,7 @@
 		for(var/obj/item/O in src.contents)
 			total_stored += O.get_storage_cost()
 		if(total_stored + W.get_storage_cost() <= max_storage_space)
-			user.drop_item(W)
+			user.remove_from_mob(W)
 			W.loc = src
 			user << "You shove [W] into the hopper."
 		else

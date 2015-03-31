@@ -45,6 +45,7 @@
 	name = "dart gun"
 	desc = "A small gas-powered dartgun, capable of delivering chemical cocktails swiftly across short distances."
 	icon_state = "dartgun-empty"
+	item_state = null
 
 	caliber = "dart"
 	fire_sound = 'sound/weapons/empty.ogg'

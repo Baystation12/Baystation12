@@ -33,6 +33,10 @@
 
 	flags = IS_RESTRICTED
 
+	bump_flag = MONKEY
+	swap_flags = MONKEY|SLIME|SIMPLE_ANIMAL
+	push_flags = MONKEY|SLIME|SIMPLE_ANIMAL|ALIEN
+
 /datum/species/monkey/handle_npc(var/mob/living/carbon/human/H)
 	if(H.stat != CONSCIOUS)
 		return
@@ -44,6 +48,7 @@
 /datum/species/monkey/handle_post_spawn(var/mob/living/carbon/human/H)
 	H.real_name = "[lowertext(name)] ([rand(100,999)])"
 	H.name = H.real_name
+
 	..()
 
 /datum/species/monkey/tajaran

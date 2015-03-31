@@ -180,7 +180,7 @@
 		user.visible_message("<span class='danger'>[user] smashes through [src]!</span>")
 		shatter()
 
-	else if (usr.a_intent == "hurt")
+	else if (usr.a_intent == I_HURT)
 
 		if (istype(usr,/mob/living/carbon/human))
 			var/mob/living/carbon/human/H = usr

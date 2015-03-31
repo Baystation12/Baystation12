@@ -242,8 +242,8 @@
 		reagents.add_reagent("synaptizine", 5)
 		reagents.add_reagent("hyperzine", 5)
 
- /obj/item/weapon/reagent_containers/pill/spaceacillin
-	name = "Spaceacillin"
+/obj/item/weapon/reagent_containers/pill/spaceacillin
+	name = "Spaceacillin pill"
 	desc = "Contains antiviral agents."
 	icon_state = "pill19"
 	New()

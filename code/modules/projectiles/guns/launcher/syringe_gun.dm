@@ -133,4 +133,5 @@
 	name = "syringe gun revolver"
 	desc = "A modification of the syringe gun design, using a rotating cylinder to store up to five syringes. The spring still needs to be drawn between shots."
 	icon_state = "rapidsyringegun"
+	item_state = "rapidsyringegun"
 	max_darts = 5

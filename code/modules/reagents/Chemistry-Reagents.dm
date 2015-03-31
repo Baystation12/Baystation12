@@ -541,7 +541,7 @@
 				if(prob(50))
 					M.radiation += 50 // curing it that way may kill you instead
 					var/absorbed = 0
-					var/datum/organ/internal/diona/nutrients/rad_organ = locate() in M.internal_organs
+					var/obj/item/organ/diona/nutrients/rad_organ = locate() in M.internal_organs
 					if(rad_organ && !rad_organ.is_broken())
 						absorbed = 1
 					if(!absorbed)
@@ -938,7 +938,7 @@
 	M.eye_blind = max(M.eye_blind - 5, 0)
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
-		var/datum/organ/internal/eyes/E = H.internal_organs_by_name["eyes"]
+		var/obj/item/organ/eyes/E = H.internal_organs_by_name["eyes"]
 		if(E && istype(E))
 			if(E.damage > 0)
 				E.damage = max(E.damage - 5 * removed, 0)
@@ -956,7 +956,7 @@
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 
-		for(var/datum/organ/internal/I in H.internal_organs)
+		for(var/obj/item/organ/I in H.internal_organs)
 			if((I.damage > 0) && (I.robotic != 2)) //Peridaxon heals only non-robotic organs
 				I.damage = max(I.damage - removed, 0)
 
@@ -3381,7 +3381,7 @@
 		M.adjustToxLoss(2 * removed)
 	if(dose > 60 && ishuman(M) && prob(5))
 		var/mob/living/carbon/human/H = M
-		var/datum/organ/internal/heart/L = H.internal_organs_by_name["heart"]
+		var/obj/item/organ/heart/L = H.internal_organs_by_name["heart"]
 		if (L && istype(L))
 			if(dose < 120)
 				L.take_damage(10 * removed, 0)

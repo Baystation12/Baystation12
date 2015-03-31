@@ -27,7 +27,7 @@
 
 	if(istype(buckled, /obj/structure/bed/chair/wheelchair))
 		for(var/organ_name in list("l_hand","r_hand","l_arm","r_arm"))
-			var/datum/organ/external/E = get_organ(organ_name)
+			var/obj/item/organ/external/E = get_organ(organ_name)
 			if(!E || (E.status & ORGAN_DESTROYED))
 				tally += 4
 			if(E.status & ORGAN_SPLINTED)
@@ -39,7 +39,7 @@
 			tally += shoes.slowdown
 
 		for(var/organ_name in list("l_foot","r_foot","l_leg","r_leg"))
-			var/datum/organ/external/E = get_organ(organ_name)
+			var/obj/item/organ/external/E = get_organ(organ_name)
 			if(!E || (E.status & ORGAN_DESTROYED))
 				tally += 4
 			if(E.status & ORGAN_SPLINTED)

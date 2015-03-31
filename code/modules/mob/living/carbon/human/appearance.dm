@@ -83,6 +83,7 @@
 	g_eyes = green
 	b_eyes = blue
 
+	update_eyes()
 	update_body()
 	return 1
 

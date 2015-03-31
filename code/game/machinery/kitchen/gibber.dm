@@ -228,7 +228,7 @@
 		for (var/obj/thing in contents)
 			// Todo: unify limbs and internal organs
 			// There's a chance that the gibber will fail to destroy some evidence.
-			if((istype(thing,/obj/item/weapon/organ) || istype(thing,/obj/item/organ)) && prob(80))
+			if((istype(thing,/obj/item/organ) || istype(thing,/obj/item/organ)) && prob(80))
 				del(thing)
 				continue
 			thing.loc = get_turf(thing) // Drop it onto the turf for throwing.

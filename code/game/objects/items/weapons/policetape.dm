@@ -125,7 +125,7 @@
 	breaktape(W, user)
 
 /obj/item/tape/attack_hand(mob/user as mob)
-	if (user.a_intent == "help" && src.allowed(user))
+	if (user.a_intent == I_HELP && src.allowed(user))
 		user.show_viewers("\blue [user] lifts [src], allowing passage.")
 		crumple()
 		lifted = 1
@@ -137,7 +137,7 @@
 
 
 /obj/item/tape/proc/breaktape(obj/item/weapon/W as obj, mob/user as mob)
-	if(user.a_intent == "help" && ((!can_puncture(W) && src.allowed(user))))
+	if(user.a_intent == I_HELP && ((!can_puncture(W) && src.allowed(user))))
 		user << "You can't break the [src] with that!"
 		return
 	user.show_viewers("\blue [user] breaks the [src]!")

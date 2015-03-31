@@ -331,7 +331,7 @@
 		sleep(50)
 		if(src.OCCUPANT)
 			OCCUPANT.radiation += 50
-			var/datum/organ/internal/diona/nutrients/rad_organ = locate() in OCCUPANT.internal_organs
+			var/obj/item/organ/diona/nutrients/rad_organ = locate() in OCCUPANT.internal_organs
 			if (!rad_organ)
 				if(src.issuperUV)
 					var/burndamage = rand(28,35)

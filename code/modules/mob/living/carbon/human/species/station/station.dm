@@ -135,6 +135,7 @@
 	rarity_value = 3
 	hud_type = /datum/hud_data/diona
 	siemens_coefficient = 0.3
+	eyes = "blank_eyes"
 
 	blurb = "Commonly referred to (erroneously) as 'plant people', the Dionaea are a strange space-dwelling collective \
 	species hailing from Epsilon Ursae Minoris. Each 'diona' is a cluster of numerous cat-sized organisms called nymphs; \
@@ -145,12 +146,26 @@
 	water and other radiation."
 
 	has_organ = list(
-		"nutrient channel" =   /datum/organ/internal/diona/nutrients,
-		"neural strata" =      /datum/organ/internal/diona/strata,
-		"response node" =      /datum/organ/internal/diona/node,
-		"gas bladder" =        /datum/organ/internal/diona/bladder,
-		"polyp segment" =      /datum/organ/internal/diona/polyp,
-		"anchoring ligament" = /datum/organ/internal/diona/ligament
+		"nutrient channel" =   /obj/item/organ/diona/nutrients,
+		"neural strata" =      /obj/item/organ/diona/strata,
+		"response node" =      /obj/item/organ/diona/node,
+		"gas bladder" =        /obj/item/organ/diona/bladder,
+		"polyp segment" =      /obj/item/organ/diona/polyp,
+		"anchoring ligament" = /obj/item/organ/diona/ligament
+		)
+
+	has_limbs = list(
+		"chest" =  list("path" = /obj/item/organ/external/diona/chest),
+		"groin" =  list("path" = /obj/item/organ/external/diona/groin),
+		"head" =   list("path" = /obj/item/organ/external/diona/head),
+		"l_arm" =  list("path" = /obj/item/organ/external/diona/arm),
+		"r_arm" =  list("path" = /obj/item/organ/external/diona/arm/right),
+		"l_leg" =  list("path" = /obj/item/organ/external/diona/leg),
+		"r_leg" =  list("path" = /obj/item/organ/external/diona/leg/right),
+		"l_hand" = list("path" = /obj/item/organ/external/diona/hand),
+		"r_hand" = list("path" = /obj/item/organ/external/diona/hand/right),
+		"l_foot" = list("path" = /obj/item/organ/external/diona/foot),
+		"r_foot" = list("path" = /obj/item/organ/external/diona/foot/right)
 		)
 
 	warning_low_pressure = 50
@@ -166,7 +181,7 @@
 
 	body_temperature = T0C + 15		//make the plant people have a bit lower body temperature, why not
 
-	flags = CAN_JOIN | IS_WHITELISTED | NO_BREATHE | NO_SCAN | IS_PLANT | NO_BLOOD | NO_PAIN | NO_SLIP | HAS_EYE_COLOR
+	flags = CAN_JOIN | IS_WHITELISTED | NO_BREATHE | NO_SCAN | IS_PLANT | NO_BLOOD | NO_PAIN | NO_SLIP | REGENERATES_LIMBS
 
 	blood_color = "#004400"
 	flesh_color = "#907E4A"

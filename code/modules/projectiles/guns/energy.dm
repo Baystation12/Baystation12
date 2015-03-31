@@ -29,6 +29,7 @@
 		power_supply.give(power_supply.maxcharge)
 	if(self_recharge)
 		processing_objects.Add(src)
+	update_icon()
 
 /obj/item/weapon/gun/energy/Del()
 	if(self_recharge)
@@ -87,3 +88,4 @@
 			icon_state = "[modifystate][ratio]"
 		else
 			icon_state = "[initial(icon_state)][ratio]"
+
