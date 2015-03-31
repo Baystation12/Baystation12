@@ -6,7 +6,7 @@
 			I.throw_at(get_edge_target_turf(src,pick(alldirs)),rand(1,3),30)
 
 	for(var/obj/item/organ/external/E in src.organs)
-		E.droplimb(0,0,1)
+		E.droplimb(0,DROPLIMB_EDGE,1)
 
 	sleep(1)
 

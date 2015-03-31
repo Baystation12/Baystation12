@@ -221,15 +221,15 @@
 			var/dropped
 			if((burn >= threshold) && prob(burn/3))
 				dropped = 1
-				droplimb(0,1)
+				droplimb(0,DROPLIMB_BURN)
 			if(!dropped && prob(brute))
 				if(brute >= threshold)
 					if((sharp || edge) && istype(used_weapon,/obj/item))
 						var/obj/item/W = used_weapon
 						if(W.w_class >= 3)
-							droplimb()
+							droplimb(0,DROPLIMB_EDGE)
 					else
-						droplimb(0,2)
+						droplimb(0,DROPLIMB_BLUNT)
 
 	owner.updatehealth()
 	return update_icon()
@@ -364,7 +364,7 @@ This function completely restores a damaged organ to perfect condition.
 		//Dismemberment
 		if(status & ORGAN_DESTROYED)
 			if(config.limbs_can_break)
-				droplimb()
+				droplimb(0,DROPLIMB_EDGE) //Might be worth removing this check since take_damage handles it.
 			return
 		if(parent)
 			if(parent.status & ORGAN_DESTROYED)
@@ -624,21 +624,21 @@ Note that amputating the affected organ does in fact remove the infection from t
 		return
 
 	if(!disintegrate)
-		disintegrate = 0
+		disintegrate = DROPLIMB_EDGE
 
 	switch(disintegrate)
-		if(0)
+		if(DROPLIMB_EDGE)
 			if(!clean)
 				owner.visible_message(
 					"<span class='danger'>\The [owner]'s [src.name] flies off in an arc!</span>",\
 					"<span class='moderate'><b>Your [src.name] goes flying off!</b></span>",\
 					"<span class='danger'>You hear a terrible sound of ripping tendons and flesh.</span>")
-		if(1)
+		if(DROPLIMB_BURN)
 			owner.visible_message(
 				"<span class='danger'>\The [owner]'s [src.name] flashes away into ashes!</span>",\
 				"<span class='moderate'><b>Your [src.name] flashes away into ashes!</b></span>",\
 				"<span class='danger'>You hear the crackling sound of burning flesh.</span>")
-		if(2)
+		if(DROPLIMB_BLUNT)
 			owner.visible_message(
 				"<span class='danger'>\The [owner]'s [src.name] explodes in a shower of gore!</span>",\
 				"<span class='moderate'><b>Your [src.name] explodes in a shower of gore!</b></span>",\
@@ -672,7 +672,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 		dir = 2
 
 	switch(disintegrate)
-		if(0)
+		if(DROPLIMB_EDGE)
 			compile_icon()
 			add_blood(owner)
 			var/matrix/M = matrix()
@@ -684,9 +684,9 @@ Note that amputating the affected organ does in fact remove the infection from t
 					throw_at(get_edge_target_turf(src,pick(alldirs)),rand(1,3),30)
 				dir = 2
 			return
-		if(1)
+		if(DROPLIMB_BURN)
 			new /obj/effect/decal/cleanable/ash(get_turf(owner))
-		if(2)
+		if(DROPLIMB_BLUNT)
 			var/obj/effect/decal/cleanable/blood/gibs/gore = new owner.species.single_gib_type(get_turf(owner))
 			if(owner.species.flesh_color)
 				gore.fleshcolor = owner.species.flesh_color

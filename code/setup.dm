@@ -854,3 +854,7 @@ var/list/be_special_flags = list(
 #define ALLMOBS (HUMAN|MONKEY|ALIEN|ROBOT|SLIME|SIMPLE_ANIMAL)
 
 #define NEXT_MOVE_DELAY 8
+
+#define DROPLIMB_EDGE 0
+#define DROPLIMB_BLUNT 1
+#define DROPLIMB_BURN 2

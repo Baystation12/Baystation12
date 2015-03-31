@@ -81,11 +81,11 @@
 			var/mob/living/carbon/human/H = mob
 			var/obj/item/organ/external/O = pick(H.organs)
 			if(prob(25))
-				mob << "<span class='warning'>Your [O.name] feels as if it might fall off!</span>"
+				mob << "<span class='warning'>Your [O.name] feels as if it might burst!</span>"
 			if(prob(10))
 				spawn(50)
 					if(O)
-						O.droplimb()
+						O.droplimb(0,DROPLIMB_BLUNT)
 		else
 			if(prob(75))
 				mob << "<span class='warning'>Your whole body feels like it might fall apart!</span>"

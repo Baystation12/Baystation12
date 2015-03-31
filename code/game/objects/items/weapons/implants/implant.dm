@@ -182,7 +182,7 @@ Implant Specifics:<BR>"}
 							del(src)
 						else
 							explosion(get_turf(imp_in), -1, -1, 2, 3)
-							part.droplimb()
+							part.droplimb(0,DROPLIMB_BLUNT)
 							del(src)
 				if (elevel == "Destroy Body")
 					explosion(get_turf(T), -1, 0, 1, 6)
@@ -247,7 +247,7 @@ Implant Specifics:<BR>"}
 						istype(part,/obj/item/organ/external/head))
 						part.createwound(BRUISE, 60)	//mangle them instead
 					else
-						part.droplimb()
+						part.droplimb(0,DROPLIMB_BLUNT)
 				explosion(get_turf(imp_in), -1, -1, 2, 3)
 				del(src)
 
