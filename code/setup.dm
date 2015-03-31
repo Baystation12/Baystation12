@@ -503,6 +503,7 @@
 #define SALVED           512
 #define ORGAN_DEAD       1024
 #define ORGAN_MUTATED    2048
+#define ORGAN_ASSISTED   4096
 
 // Admin permissions. Please don't edit these values without speaking to Errorage first. ~Carn
 #define R_BUILDMODE     1
@@ -618,22 +619,23 @@ var/list/be_special_flags = list(
 #define GETPULSE_TOOL 1 // More accurate. (med scanner, sleeper, etc.)
 
 // Species flags.
-#define NO_BLOOD       1     // Vessel var is not filled with blood, cannot bleed out.
-#define NO_BREATHE     2     // Cannot suffocate or take oxygen loss.
-#define NO_SCAN        4     // Cannot be scanned in a DNA machine/genome-stolen.
-#define NO_PAIN        8     // Cannot suffer halloss/recieves deceptive health indicator.
-#define NO_SLIP        16    // Cannot fall over.
-#define NO_POISON      32    // Cannot not suffer toxloss.
-#define HAS_SKIN_TONE  64    // Skin tone selectable in chargen. (0-255)
-#define HAS_SKIN_COLOR 128   // Skin colour selectable in chargen. (RGB)
-#define HAS_LIPS       256   // Lips are drawn onto the mob icon. (lipstick)
-#define HAS_UNDERWEAR  512   // Underwear is drawn onto the mob icon.
-#define IS_PLANT       1024  // Is a treeperson.
-#define IS_WHITELISTED 2048  // Must be whitelisted to play.
-#define IS_SYNTHETIC   4096  // Is a machine race.
-#define HAS_EYE_COLOR  8192  // Eye colour selectable in chargen. (RGB)
-#define CAN_JOIN       16384 // Species is selectable in chargen.
-#define IS_RESTRICTED  32768 // Is not a core/normally playable species. (castes, mutantraces)
+#define NO_BLOOD          1     // Vessel var is not filled with blood, cannot bleed out.
+#define NO_BREATHE        2     // Cannot suffocate or take oxygen loss.
+#define NO_SCAN           4     // Cannot be scanned in a DNA machine/genome-stolen.
+#define NO_PAIN           8     // Cannot suffer halloss/recieves deceptive health indicator.
+#define NO_SLIP           16    // Cannot fall over.
+#define NO_POISON         32    // Cannot not suffer toxloss.
+#define HAS_SKIN_TONE     64    // Skin tone selectable in chargen. (0-255)
+#define HAS_SKIN_COLOR    128   // Skin colour selectable in chargen. (RGB)
+#define HAS_LIPS          256   // Lips are drawn onto the mob icon. (lipstick)
+#define HAS_UNDERWEAR     512   // Underwear is drawn onto the mob icon.
+#define IS_PLANT          1024  // Is a treeperson.
+#define IS_WHITELISTED    2048  // Must be whitelisted to play.
+#define IS_SYNTHETIC      4096  // Is a machine race.
+#define HAS_EYE_COLOR     8192  // Eye colour selectable in chargen. (RGB)
+#define CAN_JOIN          16384 // Species is selectable in chargen.
+#define IS_RESTRICTED     32768 // Is not a core/normally playable species. (castes, mutantraces)
+#define REGENERATES_LIMBS 65536 // Attempts to regenerate unamputated limbs.
 
 // Language flags.
 #define WHITELISTED 1   // Language is available if the speaker is whitelisted.
@@ -857,3 +859,7 @@ var/list/be_special_flags = list(
 #define ALLMOBS (HUMAN|MONKEY|ALIEN|ROBOT|SLIME|SIMPLE_ANIMAL)
 
 #define NEXT_MOVE_DELAY 8
+
+#define DROPLIMB_EDGE 0
+#define DROPLIMB_BLUNT 1
+#define DROPLIMB_BURN 2

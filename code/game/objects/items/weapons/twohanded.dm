@@ -128,12 +128,12 @@
 	base_icon = "fireaxe"
 	name = "fire axe"
 	desc = "Truly, the weapon of a madman. Who would think to fight fire with an axe?"
-	force = 10
+	force = 15
 	sharp = 1
 	edge = 1
 	w_class = 4.0
 	slot_flags = SLOT_BACK
-	force_wielded = 40
+	force_wielded = 30
 	attack_verb = list("attacked", "chopped", "cleaved", "torn", "cut")
 
 /obj/item/weapon/twohanded/fireaxe/afterattack(atom/A as mob|obj|turf|area, mob/user as mob, proximity)
@@ -198,7 +198,7 @@
 	base_icon = "spearglass"
 	name = "spear"
 	desc = "A haphazardly-constructed yet still deadly weapon of ancient design."
-	force = 14
+	force = 10
 	w_class = 4.0
 	slot_flags = SLOT_BACK
 	force_wielded = 22 // Was 13, Buffed - RR
@@ -219,13 +219,13 @@
 	sharp = 0
 	edge = 0
 	w_class = 3
-	force = 15
+	force = 10
 	throw_speed = 3
 	throw_range = 7
 	throwforce = 7
-	attack_verb = list("smashed", "beaten", "slammed", "smacked", "striked", "battered", "bonked")
+	attack_verb = list("smashed", "beaten", "slammed", "smacked", "struck", "battered", "bonked")
 	hitsound = 'sound/weapons/genhit3.ogg'
-	force_wielded = 23
+	force_wielded = 20
 
 /obj/item/weapon/twohanded/baseballbat/metal
 	name = "metal bat"
@@ -233,6 +233,6 @@
 	icon_state = "metalbat0"
 	base_icon = "metalbat"
 	item_state = "metalbat"
-	force = 18
+	force = 15
 	w_class = 3.0
-	force_wielded = 27
+	force_wielded = 25

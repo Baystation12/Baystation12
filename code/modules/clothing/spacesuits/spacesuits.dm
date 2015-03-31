@@ -76,7 +76,7 @@
 // Some space suits are equipped with reactive membranes that support
 // broken limbs - at the time of writing, only the ninja suit, but
 // I can see it being useful for other suits as we expand them. ~ Z
-// The actual splinting occurs in /datum/organ/external/proc/fracture()
+// The actual splinting occurs in /obj/item/organ/external/proc/fracture()
 /obj/item/clothing/suit/space/proc/check_limb_support(var/mob/living/carbon/human/user)
 
 	// If this isn't set, then we don't need to care.
@@ -87,7 +87,7 @@
 		return
 
 	// Otherwise, remove the splints.
-	for(var/datum/organ/external/E in supporting_limbs)
+	for(var/obj/item/organ/external/E in supporting_limbs)
 		E.status &= ~ ORGAN_SPLINTED
-		user << "The suit stops supporting your [E.display_name]."
+		user << "The suit stops supporting your [E.name]."
 	supporting_limbs = list()
