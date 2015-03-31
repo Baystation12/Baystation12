@@ -3,6 +3,10 @@
 	name = "gun"
 	desc = "Its a gun. It's pretty terrible, though."
 	icon = 'icons/obj/gun.dmi'
+	item_icons = list(
+		icon_l_hand = 'icons/mob/items/lefthand_guns.dmi',
+		icon_r_hand = 'icons/mob/items/righthand_guns.dmi',
+		)
 	icon_state = "detective"
 	item_state = "gun"
 	flags =  CONDUCT
@@ -134,10 +138,7 @@
 		handle_post_fire(user, target, pointblank, reflex)
 
 		update_icon()
-		if(user.hand)
-			user.update_inv_l_hand()
-		else
-			user.update_inv_r_hand()
+		update_held_icon()
 
 
 //obtains the next projectile to fire
