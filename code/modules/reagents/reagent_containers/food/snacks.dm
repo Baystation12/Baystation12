@@ -165,9 +165,7 @@
 				return
 
 			user << "\red You slip [W] inside [src]."
-			user.u_equip(W)
-			if ((user.client && user.s_active != src))
-				user.client.screen -= W
+			user.remove_from_mob(W)
 			W.dropped(user)
 			add_fingerprint(user)
 			contents += W

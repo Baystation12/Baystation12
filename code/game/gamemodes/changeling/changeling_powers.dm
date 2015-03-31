@@ -388,13 +388,7 @@
 	del(animation)
 
 	for(var/obj/item/W in src)
-		C.u_equip(W)
-		if (C.client)
-			C.client.screen -= W
-		if (W)
-			W.loc = C.loc
-			W.dropped(C)
-			W.layer = initial(W.layer)
+		C.drop_from_inventory(W)
 
 	var/mob/living/carbon/human/O = new /mob/living/carbon/human( src )
 	if (C.dna.GetUIState(DNA_UI_GENDER))

@@ -198,7 +198,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	if(ismob(loc))
 		var/mob/living/M = loc
 		M << "<span class='notice'>Your [name] goes out.</span>"
-		M.u_equip(src)	//un-equip it so the overlays can update
+		M.remove_from_mob(src)	//un-equip it so the overlays can update
 		M.update_inv_wear_mask(0)
 	processing_objects.Remove(src)
 	del(src)

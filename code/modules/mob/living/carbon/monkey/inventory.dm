@@ -81,13 +81,7 @@
 				if(istype(target.wear_mask, /obj/item/clothing)&& !target.wear_mask:canremove)
 					return
 				var/obj/item/W = target.wear_mask
-				target.u_equip(W)
-				if (target.client)
-					target.client.screen -= W
-				if (W)
-					W.loc = target.loc
-					W.dropped(target)
-					W.layer = initial(W.layer)
+				target.drop_from_inventory(W)
 				W.add_fingerprint(source)
 			else
 				if (istype(item, /obj/item/clothing/mask))
@@ -99,13 +93,7 @@
 		if("l_hand")
 			if (target.l_hand)
 				var/obj/item/W = target.l_hand
-				target.u_equip(W)
-				if (target.client)
-					target.client.screen -= W
-				if (W)
-					W.loc = target.loc
-					W.layer = initial(W.layer)
-					W.dropped(target)
+				target.drop_from_inventory(W)
 				W.add_fingerprint(source)
 			else
 				if (istype(item, /obj/item))
@@ -119,13 +107,7 @@
 		if("r_hand")
 			if (target.r_hand)
 				var/obj/item/W = target.r_hand
-				target.u_equip(W)
-				if (target.client)
-					target.client.screen -= W
-				if (W)
-					W.loc = target.loc
-					W.layer = initial(W.layer)
-					W.dropped(target)
+				target.drop_from_inventory(W)
 				W.add_fingerprint(source)
 			else
 				if (istype(item, /obj/item))
@@ -139,13 +121,7 @@
 		if("back")
 			if (target.back)
 				var/obj/item/W = target.back
-				target.u_equip(W)
-				if (target.client)
-					target.client.screen -= W
-				if (W)
-					W.loc = target.loc
-					W.dropped(target)
-					W.layer = initial(W.layer)
+				target.target.drop_from_inventory(W)
 				W.add_fingerprint(source)
 			else
 				if ((istype(item, /obj/item) && item.slot_flags & SLOT_BACK ))
@@ -157,13 +133,7 @@
 		if("handcuff")
 			if (target.handcuffed)
 				var/obj/item/W = target.handcuffed
-				target.u_equip(W)
-				if (target.client)
-					target.client.screen -= W
-				if (W)
-					W.loc = target.loc
-					W.dropped(target)
-					W.layer = initial(W.layer)
+				target.target.drop_from_inventory(W)
 				W.add_fingerprint(source)
 			else
 				if (istype(item, /obj/item/weapon/handcuffs))
