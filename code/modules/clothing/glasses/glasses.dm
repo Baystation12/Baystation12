@@ -12,6 +12,7 @@
 	var/toggleable = 0
 	var/off_state = "degoggles"
 	var/active = 1
+	var/activation_sound = 'sound/items/goggles_charge.ogg'
 	var/obj/screen/overlay = null
 	body_parts_covered = EYES
 
@@ -26,6 +27,8 @@
 			active = 1
 			icon_state = initial(icon_state)
 			user.update_inv_glasses()
+			if(activation_sound)
+				usr << activation_sound
 			usr << "You activate the optical matrix on the [src]."
 
 /obj/item/clothing/glasses/meson
@@ -242,28 +245,28 @@
 	icon_state = "meson"
 	origin_tech = "magnets=3;syndicate=4"
 
-/obj/item/clothing/glasses/thermal/monocle
+/obj/item/clothing/glasses/thermal/plain
+	toggleable = 0
+	activation_sound = null
+	icon_action_button = ""
+
+/obj/item/clothing/glasses/thermal/plain/monocle
 	name = "Thermoncle"
 	desc = "A monocle thermal."
 	icon_state = "thermoncle"
 	flags = null //doesn't protect eyes because it's a monocle, duh
-	toggleable = 0
-	icon_action_button = ""
+
 	body_parts_covered = 0
 
-/obj/item/clothing/glasses/thermal/eyepatch
+/obj/item/clothing/glasses/thermal/plain/eyepatch
 	name = "Optical Thermal Eyepatch"
 	desc = "An eyepatch with built-in thermal optics"
 	icon_state = "eyepatch"
 	item_state = "eyepatch"
-	toggleable = 0
-	icon_action_button = ""
 	body_parts_covered = 0
 
-/obj/item/clothing/glasses/thermal/jensen
+/obj/item/clothing/glasses/thermal/plain/jensen
 	name = "Optical Thermal Implants"
 	desc = "A set of implantable lenses designed to augment your vision"
 	icon_state = "thermalimplants"
 	item_state = "syringe_kit"
-	toggleable = 0
-	icon_action_button = ""
