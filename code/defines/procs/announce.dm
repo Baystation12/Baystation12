@@ -15,17 +15,17 @@
 	log = do_log
 	newscast = do_newscast
 
-/datum/announcement/priority/New(var/do_log = 1, var/new_sound = sound('sound/misc/notice2.ogg'), var/do_newscast = 0)
+/datum/announcement/priority/New(var/do_log = 1, var/new_sound = 'sound/misc/notice2.ogg', var/do_newscast = 0)
 	..(do_log, new_sound, do_newscast)
 	title = "Priority Announcement"
 	announcement_type = "Priority Announcement"
 
-/datum/announcement/priority/command/New(var/do_log = 1, var/new_sound = sound('sound/misc/notice2.ogg'), var/do_newscast = 0)
+/datum/announcement/priority/command/New(var/do_log = 1, var/new_sound = 'sound/misc/notice2.ogg', var/do_newscast = 0)
 	..(do_log, new_sound, do_newscast)
 	title = "[command_name()] Update"
 	announcement_type = "[command_name()] Update"
 
-/datum/announcement/priority/security/New(var/do_log = 1, var/new_sound = sound('sound/misc/notice2.ogg'), var/do_newscast = 0)
+/datum/announcement/priority/security/New(var/do_log = 1, var/new_sound = 'sound/misc/notice2.ogg', var/do_newscast = 0)
 	..(do_log, new_sound, do_newscast)
 	title = "Security Announcement"
 	announcement_type = "Security Announcement"
@@ -34,7 +34,7 @@
 	if(!message)
 		return
 	var/message_title = new_title ? new_title : title
-	var/message_sound = new_sound ? sound(new_sound) : sound
+	var/message_sound = new_sound ? new_sound : sound
 
 	message = sanitize(message, extra = 0)
 	message_title = sanitizeSafe(message_title)
