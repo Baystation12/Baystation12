@@ -125,7 +125,7 @@ proc/isobserver(A)
 	return 0
 
 proc/isorgan(A)
-	if(istype(A, /datum/organ/external))
+	if(istype(A, /obj/item/organ/external))
 		return 1
 	return 0
 
@@ -140,7 +140,7 @@ proc/isnewplayer(A)
 		return 1
 	return 0
 
-proc/hasorgans(A)
+proc/hasorgans(A) // Fucking really??
 	return ishuman(A)
 
 proc/iscuffed(A)
