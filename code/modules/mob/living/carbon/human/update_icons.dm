@@ -854,37 +854,47 @@ var/global/list/damage_icon_parts = list()
 /mob/living/carbon/human/update_inv_r_hand(var/update_icons=1)
 	if(r_hand)
 		r_hand.screen_loc = ui_rhand	//TODO
+		
+		var/t_icon = INV_R_HAND_DEF_ICON
+		if(r_hand.item_icons && (icon_r_hand in r_hand.item_icons))
+			t_icon = r_hand.item_icons[icon_r_hand]
+		
 		var/t_state = r_hand.item_state //useful for clothing that changes icon_state but retains the same sprite on the mob when held in hand
 		if(!t_state)	t_state = r_hand.icon_state
-
 		if(r_hand.icon_override)
 			t_state = "[t_state]_r"
 			overlays_standing[R_HAND_LAYER] = image("icon" = r_hand.icon_override, "icon_state" = "[t_state]")
 		else
-			overlays_standing[R_HAND_LAYER] = image("icon" = 'icons/mob/items_righthand.dmi', "icon_state" = "[t_state]")
+			overlays_standing[R_HAND_LAYER] = image("icon" = t_icon, "icon_state" = "[t_state]")
 
 		if (handcuffed) drop_r_hand()
 	else
 		overlays_standing[R_HAND_LAYER] = null
-	if(update_icons)   update_icons()
+	
+	if(update_icons) update_icons()
 
 
 /mob/living/carbon/human/update_inv_l_hand(var/update_icons=1)
 	if(l_hand)
 		l_hand.screen_loc = ui_lhand	//TODO
+		
+		var/t_icon = INV_L_HAND_DEF_ICON
+		if(l_hand.item_icons && (icon_l_hand in l_hand.item_icons))
+			t_icon = l_hand.item_icons[icon_l_hand]
+		
 		var/t_state = l_hand.item_state //useful for clothing that changes icon_state but retains the same sprite on the mob when held in hand
 		if(!t_state)	t_state = l_hand.icon_state
-
 		if(l_hand.icon_override)
 			t_state = "[t_state]_l"
 			overlays_standing[L_HAND_LAYER] = image("icon" = l_hand.icon_override, "icon_state" = "[t_state]")
 		else
-			overlays_standing[L_HAND_LAYER] = image("icon" = 'icons/mob/items_lefthand.dmi', "icon_state" = "[t_state]")
+			overlays_standing[L_HAND_LAYER] = image("icon" = t_icon, "icon_state" = "[t_state]")
 
 		if (handcuffed) drop_l_hand()
 	else
 		overlays_standing[L_HAND_LAYER] = null
-	if(update_icons)   update_icons()
+	
+	if(update_icons) update_icons()
 
 /mob/living/carbon/human/proc/update_tail_showing(var/update_icons=1)
 	overlays_standing[TAIL_LAYER] = null
