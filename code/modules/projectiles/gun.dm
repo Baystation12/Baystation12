@@ -20,16 +20,16 @@
 	var/fire_delay = 6
 	var/fire_sound = 'sound/weapons/Gunshot.ogg'
 	var/fire_sound_text = "gunshot"
-	var/recoil = 0		//screen shake & burst accuracy
+	var/recoil = 0		//screen shake
 	var/silenced = 0
 	var/accuracy = 0 //accuracy is measured in tiles. +1 accuracy means that everything is effectively one tile closer for the purpose of miss chance, -1 means the opposite. launchers are not supported, at the moment.
 	var/scoped_accuracy = null
-	var/shot_accuracy_effect = 3 //degree to which firing the gun rapidly or in bursts affects accuracy
 
 	var/burst_toggleable = 0
-	var/burst_mode = 0 //burst fire
-	var/burst_delay = 2
+	var/burst_on = 0
+	var/burst_delay = 2 //time between shots in burst
 	var/burst_size = 3
+	var/shot_accuracy_penalty = 3 //degree to which firing the gun rapidly or in bursts affects accuracy
 
 	var/last_fired = 0
 	var/cumulative_accuracy_penalty = 0
@@ -135,7 +135,7 @@
 	var/times_to_fire = 1
 	var/times_fired = 0
 
-	if(burst_mode)
+	if(burst_on)
 		times_to_fire = burst_size
 
 
@@ -148,9 +148,9 @@
 
 		spawn(times_fired*burst_delay) //brief delay between shots
 			process_projectile(projectile, user, target, user.zone_sel.selecting, params, pointblank, reflex)
-			cumulative_accuracy_penalty += shot_accuracy_effect //first shot in burst has regular accuracy. Subsequent shots degrade
+			cumulative_accuracy_penalty += shot_accuracy_penalty //first shot in burst has regular accuracy. Subsequent shots degrade
 			spawn(5)
-				cumulative_accuracy_penalty -= shot_accuracy_effect //accuracy penalty returns to 0 ten ticks after firing
+				cumulative_accuracy_penalty -= shot_accuracy_penalty //accuracy penalty returns to 0 five ticks after firing
 
 
 	if(times_fired)
@@ -194,7 +194,7 @@
 		fire_volume = 10
 	else
 		user.visible_message(
-			"<span class='danger'>[user][burst_mode ? " burst-fires ":" fires "][src][pointblank ? "  point blank at [target]":""][reflex ? " by reflex":""]!</span>",
+			"<span class='danger'>[user][burst_on ? " burst-fires ":" fires "][src][pointblank ? "  point blank at [target]":""][reflex ? " by reflex":""]!</span>",
 			"<span class='warning'>You fire [src][reflex ? "by reflex":""]!</span>",
 			"You hear a [fire_sound_text]!"
 		)
@@ -252,13 +252,13 @@
 /obj/item/weapon/gun/examine(mob/user)
 	..(user)
 	if(burst_toggleable)
-		if(burst_mode)
-			user << "It is set to [burst_size]-shot burst."
+		if(burst_on)
+			user << "Set to [burst_size]-shot burst."
 		else
-			user << "It is set to single-shot."
+			user << "Set to single-shot."
 	else
-		if(burst_mode)
-			user << "It fires [burst_size]-shot bursts."
+		if(burst_on)
+			user << "Fires [burst_size]-shot bursts."
 	return
 
 //Suicide handling.
@@ -305,9 +305,9 @@
 	set name = "Toggle Fire Mode"
 	set category = "Object"
 
-	burst_mode = !burst_mode
+	burst_on = !burst_on
 
-	if (burst_mode)
+	if (burst_on)
 		loc << "[src.name] set to [src.burst_size]-shot burst."
 	else
 		loc << "[src.name] set to single-shot."
