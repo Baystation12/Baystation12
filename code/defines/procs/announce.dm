@@ -33,8 +33,8 @@
 /datum/announcement/proc/Announce(var/message as text, var/new_title = "", var/new_sound = null, var/do_newscast = newscast)
 	if(!message)
 		return
-	var/tmp/message_title = new_title ? new_title : title
-	var/tmp/message_sound = new_sound ? sound(new_sound) : sound
+	var/message_title = new_title ? new_title : title
+	var/message_sound = new_sound ? sound(new_sound) : sound
 
 	message = sanitize(message, extra = 0)
 	message_title = sanitizeSafe(message_title)
@@ -102,8 +102,8 @@ datum/announcement/proc/Sound(var/message_sound)
 	PlaySound(message_sound)
 
 datum/announcement/priority/Sound(var/message_sound)
-	if(sound)
-		world << sound
+	if(message_sound)
+		world << message_sound
 
 datum/announcement/priority/command/Sound(var/message_sound)
 	PlaySound(message_sound)
