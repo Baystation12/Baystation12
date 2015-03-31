@@ -618,7 +618,7 @@
 	if(!M.unacidable && removed > 0)
 		if(istype(M, /mob/living/carbon/human) && volume >= meltdose)
 			var/mob/living/carbon/human/H = M
-			var/datum/organ/external/affecting = H.get_organ("head")
+			var/obj/item/organ/external/affecting = H.get_organ("head")
 			if(affecting)
 				if(affecting.take_damage(0, removed * power * 0.1))
 					H.UpdateDamageIcon()
@@ -2231,7 +2231,7 @@
 	glass_icon_state = "hot_coffee"
 	glass_name = "cup of coffee"
 	glass_desc = "Don't drop it, or you'll send scalding liquid and glass shards everywhere."
-	
+
 
 /datum/reagent/drink/coffee/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/location)
 	..()
