@@ -170,12 +170,17 @@ var/list/slot_equipment_priority = list( \
 	if(hand)	return drop_l_hand(Target)
 	else		return drop_r_hand(Target)
 
-//Removes the object from any slots the mob might have, calling the appropriate icon update proc.
-//Does nothing else.
-//DO NOT CALL THIS PROC DIRECTLY. It is meant to be called only by other inventory procs.
-//The only exception to this is if you are transferring the item between slots on the same mob.
-//As far as I can tell the proc exists so that mobs with different inventory slots can override
-//the search through all the slots, without having to duplicate the rest of the item dropping.
+/*
+	Removes the object from any slots the mob might have, calling the appropriate icon update proc.
+	Does nothing else.
+	
+	DO NOT CALL THIS PROC DIRECTLY. It is meant to be called only by other inventory procs.
+	It's probably okay to use it if you are transferring the item between slots on the same mob,
+	but chances are you're safer calling remove_from_mob() or drop_from_inventory() anyways.
+	
+	As far as I can tell the proc exists so that mobs with different inventory slots can override
+	the search through all the slots, without having to duplicate the rest of the item dropping.
+*/
 /mob/proc/u_equip(obj/W as obj)
 	if (W == r_hand)
 		r_hand = null
