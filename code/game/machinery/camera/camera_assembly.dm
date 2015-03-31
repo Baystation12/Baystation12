@@ -125,7 +125,7 @@
 	if(is_type_in_list(W, possible_upgrades) && !is_type_in_list(W, upgrades)) // Is a possible upgrade and isn't in the camera already.
 		user << "You attach \the [W] into the assembly inner circuits."
 		upgrades += W
-		user.drop_item(W)
+		user.remove_from_mob(W)
 		W.loc = src
 		return
 

@@ -377,9 +377,9 @@
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 		user.visible_message("\blue [user] has transplanted \the [tool] into [target]'s [affected.name].", \
 		"\blue You have transplanted \the [tool] into [target]'s [affected.name].")
-		user.drop_item(tool)
 		var/obj/item/organ/O = tool
 		if(istype(O))
+			user.remove_from_mob(O)
 			O.replaced(target,affected)
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)

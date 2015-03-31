@@ -165,7 +165,7 @@ var/list/slot_equipment_priority = list( \
 /mob/proc/drop_r_hand(var/atom/Target)
 	return drop_from_inventory(r_hand, Target)
 
-//Drops the item in our active hand.
+//Drops the item in our active hand. TODO: rename this to drop_active_hand or something
 /mob/proc/drop_item(var/atom/Target)
 	if(hand)	return drop_l_hand(Target)
 	else		return drop_r_hand(Target)
