@@ -228,11 +228,7 @@
 			var/mob/living/carbon/human/H = target
 
 			var/target_zone = ran_zone(check_zone(user.zone_sel.selecting, target))
-<<<<<<< HEAD
-			var/datum/organ/external/affecting = H.get_organ(target_zone)
-=======
-			var/obj/item/organ/external/affecting = target:get_organ(target_zone)
->>>>>>> dev
+			var/obj/item/organ/external/affecting = H.get_organ(target_zone)
 
 			if (!affecting || (affecting.status & ORGAN_DESTROYED) || affecting.is_stump())
 				user << "<span class='danger'>They are missing that limb!</span>"
@@ -260,13 +256,8 @@
 			target.take_organ_damage(3)// 7 is the same as crowbar punch
 
 		var/syringestab_amount_transferred = rand(0, (reagents.total_volume - 5)) //nerfed by popular demand
-<<<<<<< HEAD
 		reagents.trans_to_mob(target, syringestab_amount_transferred, CHEM_BLOOD)
 		break_syringe(target, user)
-=======
-		src.reagents.trans_to(target, syringestab_amount_transferred)
-		src.break_syringe(target, user)
->>>>>>> dev
 
 	proc/break_syringe(mob/living/carbon/target, mob/living/carbon/user)
 		desc += " It is broken."
