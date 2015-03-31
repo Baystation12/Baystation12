@@ -92,6 +92,7 @@
 /obj/item/weapon/cane/concealed/New()
 	..()
 	concealed_blade = new/obj/item/weapon/butterfly/switchblade(src)
+	concealed_blade.attack_self()
 
 /obj/item/weapon/cane/concealed/attack_self(mob/user)
 	if(concealed_blade)
@@ -101,8 +102,9 @@
 		user.drop_from_inventory(src)
 		user.put_in_hands(concealed_blade)
 		user.put_in_hands(src)
+		update_inv_l_hand(0)
+		update_inv_r_hand()
 		concealed_blade = null
-		update_icon()
 	else
 		..()
 
