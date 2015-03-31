@@ -121,7 +121,7 @@
 		if("back")
 			if (target.back)
 				var/obj/item/W = target.back
-				target.target.drop_from_inventory(W)
+				target.drop_from_inventory(W)
 				W.add_fingerprint(source)
 			else
 				if ((istype(item, /obj/item) && item.slot_flags & SLOT_BACK ))
@@ -133,7 +133,7 @@
 		if("handcuff")
 			if (target.handcuffed)
 				var/obj/item/W = target.handcuffed
-				target.target.drop_from_inventory(W)
+				target.drop_from_inventory(W)
 				W.add_fingerprint(source)
 			else
 				if (istype(item, /obj/item/weapon/handcuffs))
