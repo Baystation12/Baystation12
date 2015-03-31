@@ -135,7 +135,7 @@
 
 /obj/structure/door_assembly/attackby(obj/item/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/weapon/pen))
-		var/t = copytext(stripped_input(user, "Enter the name for the door.", src.name, src.created_name),1,MAX_NAME_LEN)
+		var/t = sanitizeSafe(input(user, "Enter the name for the door.", src.name, src.created_name), MAX_NAME_LEN)
 		if(!t)	return
 		if(!in_range(src, usr) && src.loc != usr)	return
 		created_name = t
@@ -248,6 +248,10 @@
 							glass = 1
 				else if(istype(S, /obj/item/stack/sheet/mineral) && S.sheettype)
 					var/M = S.sheettype
+					// Ugly hack, will suffice for now. Need to fix it upstream as well, may rewrite mineral walls. ~Z
+					if(M in list("mhydrogen","osmium","tritium","platinum","iron"))
+						user << "You cannot make an airlock out of that material."
+						return
 					if(S.get_amount() >= 2)
 						playsound(src.loc, 'sound/items/Crowbar.ogg', 100, 1)
 						user.visible_message("[user] adds [S.name] to the airlock assembly.", "You start to install [S.name] into the airlock assembly.")

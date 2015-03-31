@@ -10,53 +10,19 @@
 		check_antagonists()
 		return
 
-	if(href_list["makeAntag"])
-		switch(href_list["makeAntag"])
-			if("1")
-				log_admin("[key_name(usr)] has spawned a traitor.")
-				if(!src.makeTraitors())
-					usr << "\red Unfortunately there weren't enough candidates available."
-			if("2")
-				log_admin("[key_name(usr)] has spawned a changeling.")
-				if(!src.makeChanglings())
-					usr << "\red Unfortunately there weren't enough candidates available."
-			if("3")
-				log_admin("[key_name(usr)] has spawned revolutionaries.")
-				if(!src.makeRevs())
-					usr << "\red Unfortunately there weren't enough candidates available."
-			if("4")
-				log_admin("[key_name(usr)] has spawned a cultists.")
-				if(!src.makeCult())
-					usr << "\red Unfortunately there weren't enough candidates available."
-			if("5")
-				log_admin("[key_name(usr)] has spawned a malf AI.")
-				if(!src.makeMalfAImode())
-					usr << "\red Unfortunately there weren't enough candidates available."
-			if("6")
-				log_admin("[key_name(usr)] has spawned a wizard.")
-				if(!src.makeWizard())
-					usr << "\red Unfortunately there weren't enough candidates available."
-			if("7")
-				log_admin("[key_name(usr)] has spawned a nuke team.")
-				if(!src.makeNukeTeam())
-					usr << "\red Unfortunately there weren't enough candidates available."
-			if("8")
-				log_admin("[key_name(usr)] has spawned a ninja.")
-				src.makeSpaceNinja()
-			if("9")
-				log_admin("[key_name(usr)] has spawned aliens.")
-				src.makeAliens()
-			if("10")
-				log_admin("[key_name(usr)] has spawned a death squad.")
-			if("11")
-				log_admin("[key_name(usr)] has spawned vox raiders.")
-				if(!src.makeVoxRaiders())
-					usr << "\red Unfortunately there weren't enough candidates available."
-	else if(href_list["dbsearchckey"] || href_list["dbsearchadmin"])
+	if(href_list["dbsearchckey"] || href_list["dbsearchadmin"])
+
 		var/adminckey = href_list["dbsearchadmin"]
 		var/playerckey = href_list["dbsearchckey"]
+		var/playerip = href_list["dbsearchip"]
+		var/playercid = href_list["dbsearchcid"]
+		var/dbbantype = text2num(href_list["dbsearchbantype"])
+		var/match = 0
 
-		DB_ban_panel(playerckey, adminckey)
+		if("dbmatch" in href_list)
+			match = 1
+
+		DB_ban_panel(playerckey, adminckey, playerip, playercid, dbbantype, match)
 		return
 
 	else if(href_list["dbbanedit"])
@@ -72,6 +38,8 @@
 
 		var/bantype = text2num(href_list["dbbanaddtype"])
 		var/banckey = href_list["dbbanaddckey"]
+		var/banip = href_list["dbbanaddip"]
+		var/bancid = href_list["dbbanaddcid"]
 		var/banduration = text2num(href_list["dbbaddduration"])
 		var/banjob = href_list["dbbanaddjob"]
 		var/banreason = href_list["dbbanreason"]
@@ -107,9 +75,18 @@
 				playermob = M
 				break
 
+
 		banreason = "(MANUAL BAN) "+banreason
 
-		DB_ban_record(bantype, playermob, banduration, banreason, banjob, null, banckey)
+		if(!playermob)
+			if(banip)
+				banreason = "[banreason] (CUSTOM IP)"
+			if(bancid)
+				banreason = "[banreason] (CUSTOM CID)"
+		else
+			message_admins("Ban process: A mob matching [playermob.ckey] was found at location [playermob.x], [playermob.y], [playermob.z]. Custom ip and computer id fields replaced with the ip and computer id from the located mob")
+
+		DB_ban_record(bantype, playermob, banduration, banreason, banjob, null, banckey, banip, bancid )
 
 	else if(href_list["editrights"])
 		if(!check_rights(R_PERMISSIONS))
@@ -289,10 +266,10 @@
 			if("nymph")				M.change_mob_type( /mob/living/carbon/alien/diona , null, null, delmob )
 			if("human")				M.change_mob_type( /mob/living/carbon/human , null, null, delmob, href_list["species"])
 			if("slime")				M.change_mob_type( /mob/living/carbon/slime , null, null, delmob )
-			if("monkey")			M.change_mob_type( /mob/living/carbon/monkey , null, null, delmob )
+			if("monkey")			M.change_mob_type( /mob/living/carbon/human/monkey , null, null, delmob )
 			if("robot")				M.change_mob_type( /mob/living/silicon/robot , null, null, delmob )
 			if("cat")				M.change_mob_type( /mob/living/simple_animal/cat , null, null, delmob )
-			if("runtime")			M.change_mob_type( /mob/living/simple_animal/cat/Runtime , null, null, delmob )
+			if("runtime")			M.change_mob_type( /mob/living/simple_animal/cat/fluff/Runtime , null, null, delmob )
 			if("corgi")				M.change_mob_type( /mob/living/simple_animal/corgi , null, null, delmob )
 			if("ian")				M.change_mob_type( /mob/living/simple_animal/corgi/Ian , null, null, delmob )
 			if("crab")				M.change_mob_type( /mob/living/simple_animal/crab , null, null, delmob )
@@ -351,12 +328,12 @@
 				mins = min(525599,mins)
 				minutes = CMinutes + mins
 				duration = GetExp(minutes)
-				reason = input(usr,"Reason?","reason",reason2) as text|null
+				reason = sanitize(input(usr,"Reason?","reason",reason2) as text|null)
 				if(!reason)	return
 			if("No")
 				temp = 0
 				duration = "Perma"
-				reason = input(usr,"Reason?","reason",reason2) as text|null
+				reason = sanitize(input(usr,"Reason?","reason",reason2) as text|null)
 				if(!reason)	return
 
 		log_admin("[key_name(usr)] edited [banned_key]'s ban. Reason: [reason] Duration: [duration]")
@@ -568,69 +545,15 @@
 		jobs += "<table cellpadding='1' cellspacing='0' width='100%'>"
 		jobs += "<tr bgcolor='ffeeaa'><th colspan='10'><a href='?src=\ref[src];jobban3=Syndicate;jobban4=\ref[M]'>Antagonist Positions</a></th></tr><tr align='center'>"
 
-		//Traitor
-		if(jobban_isbanned(M, "traitor") || isbanned_dept)
-			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=traitor;jobban4=\ref[M]'><font color=red>[replacetext("Traitor", " ", "&nbsp")]</font></a></td>"
-		else
-			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=traitor;jobban4=\ref[M]'>[replacetext("Traitor", " ", "&nbsp")]</a></td>"
-
-		//Changeling
-		if(jobban_isbanned(M, "changeling") || isbanned_dept)
-			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=changeling;jobban4=\ref[M]'><font color=red>[replacetext("Changeling", " ", "&nbsp")]</font></a></td>"
-		else
-			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=changeling;jobban4=\ref[M]'>[replacetext("Changeling", " ", "&nbsp")]</a></td>"
-
-		//Nuke Operative
-		if(jobban_isbanned(M, "operative") || isbanned_dept)
-			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=operative;jobban4=\ref[M]'><font color=red>[replacetext("Mercenary", " ", "&nbsp")]</font></a></td>"
-		else
-			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=operative;jobban4=\ref[M]'>[replacetext("Mercenary", " ", "&nbsp")]</a></td>"
-
-		//Revolutionary
-		if(jobban_isbanned(M, "revolutionary") || isbanned_dept)
-			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=revolutionary;jobban4=\ref[M]'><font color=red>[replacetext("Revolutionary", " ", "&nbsp")]</font></a></td>"
-		else
-			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=revolutionary;jobban4=\ref[M]'>[replacetext("Revolutionary", " ", "&nbsp")]</a></td>"
-
-		jobs += "</tr><tr align='center'>" //Breaking it up so it fits nicer on the screen every 5 entries
-
-		//Cultist
-		if(jobban_isbanned(M, "cultist") || isbanned_dept)
-			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=cultist;jobban4=\ref[M]'><font color=red>[replacetext("Cultist", " ", "&nbsp")]</font></a></td>"
-		else
-			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=cultist;jobban4=\ref[M]'>[replacetext("Cultist", " ", "&nbsp")]</a></td>"
-
-		//Wizard
-		if(jobban_isbanned(M, "wizard") || isbanned_dept)
-			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=wizard;jobban4=\ref[M]'><font color=red>[replacetext("Wizard", " ", "&nbsp")]</font></a></td>"
-		else
-			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=wizard;jobban4=\ref[M]'>[replacetext("Wizard", " ", "&nbsp")]</a></td>"
-
-		//ERT
-		if(jobban_isbanned(M, "Emergency Response Team") || isbanned_dept)
-			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=Emergency Response Team;jobban4=\ref[M]'><font color=red>Emergency Response Team</font></a></td>"
-		else
-			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=Emergency Response Team;jobban4=\ref[M]'>Emergency Response Team</a></td>"
-
-
-/*		//Malfunctioning AI	//Removed Malf-bans because they're a pain to impliment
-		if(jobban_isbanned(M, "malf AI") || isbanned_dept)
-			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=malf AI;jobban4=\ref[M]'><font color=red>[replacetext("Malf AI", " ", "&nbsp")]</font></a></td>"
-		else
-			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=malf AI;jobban4=\ref[M]'>[replacetext("Malf AI", " ", "&nbsp")]</a></td>"
-
-		//Alien
-		if(jobban_isbanned(M, "alien candidate") || isbanned_dept)
-			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=alien candidate;jobban4=\ref[M]'><font color=red>[replacetext("Alien", " ", "&nbsp")]</font></a></td>"
-		else
-			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=alien candidate;jobban4=\ref[M]'>[replacetext("Alien", " ", "&nbsp")]</a></td>"
-
-		//Infested Monkey
-		if(jobban_isbanned(M, "infested monkey") || isbanned_dept)
-			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=infested monkey;jobban4=\ref[M]'><font color=red>[replacetext("Infested Monkey", " ", "&nbsp")]</font></a></td>"
-		else
-			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=infested monkey;jobban4=\ref[M]'>[replacetext("Infested Monkey", " ", "&nbsp")]</a></td>"
-*/
+		// Antagonists.
+		for(var/antag_type in all_antag_types)
+			var/datum/antagonist/antag = all_antag_types[antag_type]
+			if(!antag || !antag.bantype)
+				continue
+			if(jobban_isbanned(M, "[antag.bantype]") || isbanned_dept)
+				jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=[antag.bantype];jobban4=\ref[M]'><font color=red>[replacetext("[antag.role_text]", " ", "&nbsp")]</font></a></td>"
+			else
+				jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=[antag.bantype];jobban4=\ref[M]'>[replacetext("[antag.role_text]", " ", "&nbsp")]</a></td>"
 
 		jobs += "</tr></table>"
 
@@ -642,16 +565,7 @@
 			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=Dionaea;jobban4=\ref[M]'><font color=red>Dionaea</font></a></td>"
 		else
 			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=Dionaea;jobban4=\ref[M]'>Dionaea</a></td>"
-
-		if(jobban_isbanned(M, "Borer"))
-			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=Borer;jobban4=\ref[M]'><font color=red>Borer</font></a></td>"
-		else
-			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=Borer;jobban4=\ref[M]'>Borer</a></td>"
-
-
 		jobs += "</tr></table>"
-
-
 		body = "<body>[jobs]</body>"
 		dat = "<tt>[header][body]</tt>"
 		usr << browse(dat, "window=jobban2;size=800x490")
@@ -741,7 +655,7 @@
 					var/mins = input(usr,"How long (in minutes)?","Ban time",1440) as num|null
 					if(!mins)
 						return
-					var/reason = input(usr,"Reason?","Please State Reason","") as text|null
+					var/reason = sanitize(input(usr,"Reason?","Please State Reason","") as text|null)
 					if(!reason)
 						return
 
@@ -766,7 +680,7 @@
 					return 1
 				if("No")
 					if(!check_rights(R_BAN))  return
-					var/reason = input(usr,"Reason?","Please State Reason","") as text|null
+					var/reason = sanitize(input(usr,"Reason?","Please State Reason","") as text|null)
 					if(reason)
 						var/msg
 						for(var/job in notbannedlist)
@@ -823,7 +737,7 @@
 		if (ismob(M))
 			if(!check_if_greater_rights_than(M.client))
 				return
-			var/reason = input("Please enter reason")
+			var/reason = sanitize(input("Please enter reason"))
 			if(!reason)
 				M << "\red You have been kicked from the server"
 			else
@@ -880,7 +794,7 @@
 				if(!mins)
 					return
 				if(mins >= 525600) mins = 525599
-				var/reason = input(usr,"Reason?","reason","Griefer") as text|null
+				var/reason = sanitize(input(usr,"Reason?","reason","Griefer") as text|null)
 				if(!reason)
 					return
 				AddBan(M.ckey, M.computer_id, reason, usr.ckey, 1, mins)
@@ -901,7 +815,7 @@
 				//del(M)	// See no reason why to delete mob. Important stuff can be lost. And ban can be lifted before round ends.
 			if("No")
 				if(!check_rights(R_BAN))   return
-				var/reason = input(usr,"Reason?","reason","Griefer") as text|null
+				var/reason = sanitize(input(usr,"Reason?","reason","Griefer") as text|null)
 				if(!reason)
 					return
 				switch(alert(usr,"IP ban?",,"Yes","No","Cancel"))
@@ -1253,44 +1167,6 @@
 		show_player_panel(H)
 		//H.regenerate_icons()
 
-/***************** BEFORE**************
-
-	if (href_list["l_players"])
-		var/dat = "<B>Name/Real Name/Key/IP:</B><HR>"
-		for(var/mob/M in world)
-			var/foo = ""
-			if (ismob(M) && M.client)
-				if(!M.client.authenticated && !M.client.authenticating)
-					foo += text("\[ <A HREF='?src=\ref[];adminauth=\ref[]'>Authorize</A> | ", src, M)
-				else
-					foo += text("\[ <B>Authorized</B> | ")
-				if(M.start)
-					if(!istype(M, /mob/living/carbon/monkey))
-						foo += text("<A HREF='?src=\ref[];monkeyone=\ref[]'>Monkeyize</A> | ", src, M)
-					else
-						foo += text("<B>Monkeyized</B> | ")
-					if(istype(M, /mob/living/silicon/ai))
-						foo += text("<B>Is an AI</B> | ")
-					else
-						foo += text("<A HREF='?src=\ref[];makeai=\ref[]'>Make AI</A> | ", src, M)
-					if(isNotAdminLevel(M.z))
-						foo += text("<A HREF='?src=\ref[];sendtoprison=\ref[]'>Prison</A> | ", src, M)
-						foo += text("<A HREF='?src=\ref[];sendtomaze=\ref[]'>Maze</A> | ", src, M)
-					else
-						foo += text("<B>On Z = [M.z]</B> | ")
-				else
-					foo += text("<B>Hasn't Entered Game</B> | ")
-				foo += text("<A HREF='?src=\ref[];revive=\ref[]'>Heal/Revive</A> | ", src, M)
-
-				foo += text("<A HREF='?src=\ref[];forcespeech=\ref[]'>Say</A> \]", src, M)
-			dat += text("N: [] R: [] (K: []) (IP: []) []<BR>", M.name, M.real_name, (M.client ? M.client : "No client"), M.lastKnownIP, foo)
-
-		usr << browse(dat, "window=players;size=900x480")
-
-*****************AFTER******************/
-
-// Now isn't that much better? IT IS NOW A PROC, i.e. kinda like a big panel like unstable
-
 	else if(href_list["adminplayeropts"])
 		var/mob/M = locate(href_list["adminplayeropts"])
 		show_player_panel(M)
@@ -1449,7 +1325,7 @@
 			usr << "The person you are trying to contact is not wearing a headset"
 			return
 
-		var/input = input(src.owner, "Please enter a message to reply to [key_name(H)] via their headset.","Outgoing message from Centcomm", "")
+		var/input = sanitize(input(src.owner, "Please enter a message to reply to [key_name(H)] via their headset.","Outgoing message from Centcomm", ""))
 		if(!input)	return
 
 		src.owner << "You sent [input] to [H] via a secure channel."
@@ -1466,7 +1342,7 @@
 			usr << "The person you are trying to contact is not wearing a headset"
 			return
 
-		var/input = input(src.owner, "Please enter a message to reply to [key_name(H)] via their headset.","Outgoing message from a shadowy figure...", "")
+		var/input = sanitize(input(src.owner, "Please enter a message to reply to [key_name(H)] via their headset.","Outgoing message from a shadowy figure...", ""))
 		if(!input)	return
 
 		src.owner << "You sent [input] to [H] via a secure channel."
@@ -1513,6 +1389,7 @@
 		var/mob/sender = locate(href_list["CentcommFaxReply"])
 		var/obj/machinery/photocopier/faxmachine/fax = locate(href_list["originfax"])
 
+		//todo: sanitize
 		var/input = input(src.owner, "Please enter a message to reply to [key_name(sender)] via secure connection. NOTE: BBCode does not work, but HTML tags do! Use <br> for line breaks.", "Outgoing message from Centcomm", "") as message|null
 		if(!input)	return
 
@@ -1717,7 +1594,7 @@
 			where = "onfloor"
 
 		if ( where == "inhand" )	//Can only give when human or monkey
-			if ( !( ishuman(usr) || ismonkey(usr) ) )
+			if ( !( ishuman(usr) || issmall(usr) ) )
 				usr << "Can only spawn in hand when you're a human or a monkey."
 				where = "onfloor"
 			else if ( usr.get_active_hand() )
@@ -1866,13 +1743,13 @@
 				feedback_add_details("admin_secrets_fun_used","Aliens")
 				log_admin("[key_name(usr)] spawned an alien infestation", 1)
 				message_admins("\blue [key_name_admin(usr)] attempted an alien infestation", 1)
-				new /datum/event/alien_infestation
+				xenomorphs.random_spawn()
 			if("borers")
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","Borers")
 				log_admin("[key_name(usr)] spawned a cortical borer infestation.", 1)
 				message_admins("\blue [key_name_admin(usr)] spawned a cortical borer infestation.", 1)
-				new /datum/event/borer_infestation
+				borers.random_spawn()
 
 			if("power")
 				feedback_inc("admin_secrets_fun_used",1)
@@ -1954,40 +1831,6 @@
 						//teleport security person
 						H.loc = pick(prisonsecuritywarp)
 					prisonwarped += H
-			if("traitor_all")
-				if(!ticker)
-					alert("The game hasn't started yet!")
-					return
-				var/objective = sanitize(copytext(input("Enter an objective"),1,MAX_MESSAGE_LEN))
-				if(!objective)
-					return
-				feedback_inc("admin_secrets_fun_used",1)
-				feedback_add_details("admin_secrets_fun_used","TA([objective])")
-				for(var/mob/living/carbon/human/H in player_list)
-					if(H.stat == 2 || !H.client || !H.mind) continue
-					if(is_special_character(H)) continue
-					//traitorize(H, objective, 0)
-					ticker.mode.traitors += H.mind
-					H.mind.special_role = "traitor"
-					var/datum/objective/new_objective = new
-					new_objective.owner = H
-					new_objective.explanation_text = objective
-					H.mind.objectives += new_objective
-					ticker.mode.greet_traitor(H.mind)
-					//ticker.mode.forge_traitor_objectives(H.mind)
-					ticker.mode.finalize_traitor(H.mind)
-				for(var/mob/living/silicon/A in player_list)
-					ticker.mode.traitors += A.mind
-					A.mind.special_role = "traitor"
-					var/datum/objective/new_objective = new
-					new_objective.owner = A
-					new_objective.explanation_text = objective
-					A.mind.objectives += new_objective
-					ticker.mode.greet_traitor(A.mind)
-					ticker.mode.finalize_traitor(A.mind)
-				message_admins("\blue [key_name_admin(usr)] used everyone is a traitor secret. Objective is [objective]", 1)
-				log_admin("[key_name(usr)] used everyone is a traitor secret. Objective is [objective]")
-
 			if("launchshuttle")
 				if(!shuttle_controller) return // Something is very wrong, the shuttle controller has not been created.
 
@@ -2212,8 +2055,7 @@
 			if("aliens")
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","AL")
-				if(config.aliens_allowed)
-					new /datum/event/alien_infestation
+				if(xenomorphs.random_spawn())
 					message_admins("[key_name_admin(usr)] has spawned aliens", 1)
 			if("spiders")
 				feedback_inc("admin_secrets_fun_used",1)
@@ -2229,12 +2071,6 @@
 				else
 					communications_blackout(1)
 				message_admins("[key_name_admin(usr)] triggered a communications blackout.", 1)
-			if("spaceninja")
-				feedback_inc("admin_secrets_fun_used",1)
-				feedback_add_details("admin_secrets_fun_used","SN")
-				if(config.ninjas_allowed)
-					if(space_ninja_arrival())//If the ninja is actually spawned. They may not be depending on a few factors.
-						message_admins("[key_name_admin(usr)] has sent in a space ninja", 1)
 			if("carp")
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","C")
@@ -2410,15 +2246,10 @@
 				var/show_log = alert(usr, "Show ion message?", "Message", "Yes", "No")
 				if(show_log == "Yes")
 					command_announcement.Announce("Ion storm detected near the station. Please check all AI-controlled equipment for errors.", "Anomaly Alert", new_sound = 'sound/AI/ionstorm.ogg')
-			if("spacevines")
-				feedback_inc("admin_secrets_fun_used",1)
-				feedback_add_details("admin_secrets_fun_used","K")
-				new /datum/event/spacevine
-				message_admins("[key_name_admin(usr)] has spawned spacevines", 1)
 			if("onlyone")
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","OO")
-				usr.client.only_one()
+				only_one()
 				message_admins("[key_name_admin(usr)] has triggered a battle to the death (only one)")
 		if(usr)
 			log_admin("[key_name(usr)] used secret [href_list["secretsfun"]]")
@@ -2536,9 +2367,7 @@
 		src.access_news_network()
 
 	else if(href_list["ac_set_channel_name"])
-		src.admincaster_feed_channel.channel_name = strip_html_simple(input(usr, "Provide a Feed Channel Name", "Network Channel Handler", ""))
-		while (findtext(src.admincaster_feed_channel.channel_name," ") == 1)
-			src.admincaster_feed_channel.channel_name = copytext(src.admincaster_feed_channel.channel_name,2,lentext(src.admincaster_feed_channel.channel_name)+1)
+		src.admincaster_feed_channel.channel_name = sanitizeSafe(input(usr, "Provide a Feed Channel Name", "Network Channel Handler", ""))
 		src.access_news_network()
 
 	else if(href_list["ac_set_channel_lock"])
@@ -2571,13 +2400,11 @@
 		var/list/available_channels = list()
 		for(var/datum/feed_channel/F in news_network.network_channels)
 			available_channels += F.channel_name
-		src.admincaster_feed_channel.channel_name = adminscrub(input(usr, "Choose receiving Feed Channel", "Network Channel Handler") in available_channels )
+		src.admincaster_feed_channel.channel_name = sanitizeSafe(input(usr, "Choose receiving Feed Channel", "Network Channel Handler") in available_channels )
 		src.access_news_network()
 
 	else if(href_list["ac_set_new_message"])
-		src.admincaster_feed_message.body = adminscrub(input(usr, "Write your Feed story", "Network Channel Handler", ""))
-		while (findtext(src.admincaster_feed_message.body," ") == 1)
-			src.admincaster_feed_message.body = copytext(src.admincaster_feed_message.body,2,lentext(src.admincaster_feed_message.body)+1)
+		src.admincaster_feed_message.body = sanitize(input(usr, "Write your Feed story", "Network Channel Handler", ""))
 		src.access_news_network()
 
 	else if(href_list["ac_submit_new_message"])
@@ -2619,15 +2446,11 @@
 		src.access_news_network()
 
 	else if(href_list["ac_set_wanted_name"])
-		src.admincaster_feed_message.author = adminscrub(input(usr, "Provide the name of the Wanted person", "Network Security Handler", ""))
-		while (findtext(src.admincaster_feed_message.author," ") == 1)
-			src.admincaster_feed_message.author = copytext(admincaster_feed_message.author,2,lentext(admincaster_feed_message.author)+1)
+		src.admincaster_feed_message.author = sanitize(input(usr, "Provide the name of the Wanted person", "Network Security Handler", ""))
 		src.access_news_network()
 
 	else if(href_list["ac_set_wanted_desc"])
-		src.admincaster_feed_message.body = adminscrub(input(usr, "Provide the a description of the Wanted person and any other details you deem important", "Network Security Handler", ""))
-		while (findtext(src.admincaster_feed_message.body," ") == 1)
-			src.admincaster_feed_message.body = copytext(src.admincaster_feed_message.body,2,lentext(src.admincaster_feed_message.body)+1)
+		src.admincaster_feed_message.body = sanitize(input(usr, "Provide the a description of the Wanted person and any other details you deem important", "Network Security Handler", ""))
 		src.access_news_network()
 
 	else if(href_list["ac_submit_wanted"])
@@ -2732,7 +2555,7 @@
 		src.access_news_network()
 
 	else if(href_list["ac_set_signature"])
-		src.admincaster_signature = adminscrub(input(usr, "Provide your desired signature", "Network Identity Handler", ""))
+		src.admincaster_signature = sanitize(input(usr, "Provide your desired signature", "Network Identity Handler", ""))
 		src.access_news_network()
 
 	else if(href_list["populate_inactive_customitems"])
@@ -2770,7 +2593,7 @@
 
 	if(href_list["add_player_info"])
 		var/key = href_list["add_player_info"]
-		var/add = input("Add Player Info") as null|text
+		var/add = sanitize(input("Add Player Info") as null|text)
 		if(!add) return
 
 		notes_add(key,add,usr)

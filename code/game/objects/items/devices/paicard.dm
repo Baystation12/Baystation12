@@ -260,7 +260,7 @@
 			if(2)
 				radio.ToggleReception()
 	if(href_list["setlaws"])
-		var/newlaws = sanitize(copytext(input("Enter any additional directives you would like your pAI personality to follow. Note that these directives will not override the personality's allegiance to its imprinted master. Conflicting directives will be ignored.", "pAI Directive Configuration", pai.pai_laws) as message,1,MAX_MESSAGE_LEN))
+		var/newlaws = sanitize(input("Enter any additional directives you would like your pAI personality to follow. Note that these directives will not override the personality's allegiance to its imprinted master. Conflicting directives will be ignored.", "pAI Directive Configuration", pai.pai_laws) as message)
 		if(newlaws)
 			pai.pai_laws = newlaws
 			pai << "Your supplemental directives have been updated. Your new directives are:"
@@ -281,6 +281,8 @@
 	src.overlays.Cut()
 	src.overlays += "pai-off"
 
+/obj/item/device/paicard
+	var/current_emotion = 1
 /obj/item/device/paicard/proc/setEmotion(var/emotion)
 	if(pai)
 		src.overlays.Cut()
@@ -294,6 +296,7 @@
 			if(7) src.overlays += "pai-sad"
 			if(8) src.overlays += "pai-angry"
 			if(9) src.overlays += "pai-what"
+		current_emotion = emotion
 
 /obj/item/device/paicard/proc/alertUpdate()
 	var/turf/T = get_turf_or_move(src.loc)

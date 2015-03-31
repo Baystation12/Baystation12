@@ -193,9 +193,9 @@ By design, d1 is the smallest direction and d2 is the highest
 		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 		s.set_up(5, 1, src)
 		s.start()
-		return 1
-	else
-		return 0
+		if(usr.stunned)
+			return 1
+	return 0
 
 //explosion handling
 /obj/structure/cable/ex_act(severity)
@@ -482,8 +482,17 @@ obj/structure/cable/proc/cableColor(var/colorC)
 	item_state = "coil"
 	attack_verb = list("whipped", "lashed", "disciplined", "flogged")
 
+/obj/item/stack/cable_coil/cyborg
+	name = "cable coil synthesizer"
+	desc = "A device that makes cable."
+	gender = NEUTER
+	matter = null
+	uses_charge = 1
+	charge_costs = list(1)
+	stacktype = /obj/item/stack/cable_coil
+
 /obj/item/stack/cable_coil/suicide_act(mob/user)
-	if(locate(/obj/structure/stool) in user.loc)
+	if(locate(/obj/item/weapon/stool) in user.loc)
 		user.visible_message("<span class='suicide'>[user] is making a noose with the [src.name]! It looks like \he's trying to commit suicide.</span>")
 	else
 		user.visible_message("<span class='suicide'>[user] is strangling \himself with the [src.name]! It looks like \he's trying to commit suicide.</span>")
@@ -508,7 +517,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 	if(istype(M,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = M
 		var/datum/organ/external/S = H.get_organ(user.zone_sel.selecting)
-		if(!(S.status & ORGAN_ROBOT) || user.a_intent != "help")
+		if(!(S.status & ORGAN_ROBOT) || user.a_intent != I_HELP)
 			return ..()
 
 		if(H.species.flags & IS_SYNTHETIC)
@@ -576,7 +585,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 		usr << "\blue You cannot do that."
 	..()
 
-/obj/item/stack/cable_coil/robot/verb/set_colour()
+/obj/item/stack/cable_coil/cyborg/verb/set_colour()
 	set name = "Change Colour"
 	set category = "Object"
 
@@ -606,26 +615,26 @@ obj/structure/cable/proc/cableColor(var/colorC)
 //   - Cable coil : merge cables
 /obj/item/stack/cable_coil/attackby(obj/item/weapon/W, mob/user)
 	..()
-	if( istype(W, /obj/item/weapon/wirecutters) && src.amount > 1)
-		src.amount--
+	if( istype(W, /obj/item/weapon/wirecutters) && src.get_amount() > 1)
+		src.use(1)
 		new/obj/item/stack/cable_coil(user.loc, 1,color)
 		user << "You cut a piece off the cable coil."
 		src.update_icon()
 		return
 	else if(istype(W, /obj/item/stack/cable_coil))
 		var/obj/item/stack/cable_coil/C = W
-		if(C.amount >= MAXCOIL)
+		if(C.get_amount() >= get_max_amount())
 			user << "The coil is too long, you cannot add any more cable to it."
 			return
 
-		if( (C.amount + src.amount <= MAXCOIL) )
+		if( (C.get_amount() + src.get_amount() <= get_max_amount()) )
 			user << "You join the cable coils together."
-			C.give(src.amount) // give it cable
-			src.use(src.amount) // make sure this one cleans up right
+			C.give(src.get_amount()) // give it cable
+			src.use(src.get_amount()) // make sure this one cleans up right
 			return
 
 		else
-			var/amt = MAXCOIL - C.amount
+			var/amt = get_max_amount() - C.get_amount()
 			user << "You transfer [amt] length\s of cable from one coil to the other."
 			C.give(amt)
 			src.use(amt)

@@ -137,8 +137,8 @@
 					return
 
 				if(M.brainmob.mind)
-					ticker.mode.remove_cultist(M.brainmob.mind, 1)
-					ticker.mode.remove_revolutionary(M.brainmob.mind, 1)
+					cult.remove_antagonist(M.brainmob.mind, 1)
+					revs.remove_antagonist(M.brainmob.mind, 1)
 
 				user.drop_item()
 				P.loc = src
@@ -168,9 +168,15 @@
 			if(istype(P, /obj/item/weapon/screwdriver))
 				playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)
 				user << "\blue You connect the monitor."
-				var/mob/living/silicon/ai/A = new /mob/living/silicon/ai ( loc, laws, brain )
-				if(A) //if there's no brain, the mob is deleted and a structure/AIcore is created
-					A.rename_self("ai", 1)
+				if(!brain)
+					var/open_for_latejoin = alert(user, "Would you like this core to be open for latejoining AIs?", "Latejoin", "Yes", "Yes", "No") == "Yes"
+					var/obj/structure/AIcore/deactivated/D = new(loc)
+					if(open_for_latejoin)
+						empty_playable_ai_cores += D
+				else
+					var/mob/living/silicon/ai/A = new /mob/living/silicon/ai ( loc, laws, brain )
+					if(A) //if there's no brain, the mob is deleted and a structure/AIcore is created
+						A.rename_self("ai", 1)
 				feedback_inc("cyborg_ais_created",1)
 				del(src)
 
@@ -201,20 +207,57 @@
 
 /obj/structure/AIcore/deactivated/proc/check_malf(var/mob/living/silicon/ai/ai)
 	if(!ai) return
-	if (ticker.mode.name == "AI malfunction")
-		var/datum/game_mode/malfunction/malf = ticker.mode
-		for (var/datum/mind/malfai in malf.malf_ai)
-			if (ai.mind == malfai)
-				return 1
+	for (var/datum/mind/malfai in malf.current_antagonists)
+		if (ai.mind == malfai)
+			return 1
 
-/obj/structure/AIcore/deactivated/attackby(var/obj/item/device/aicard/card, var/mob/user)
+/obj/structure/AIcore/deactivated/attackby(var/obj/item/weapon/W, var/mob/user)
 
-	if(istype(card))
+	if(istype(W, /obj/item/device/aicard))
+		var/obj/item/device/aicard/card = W
 		var/mob/living/silicon/ai/transfer = locate() in card
 		if(transfer)
 			load_ai(transfer,card,user)
 		else
 			user << "\red <b>ERROR</b>: \black Unable to locate artificial intelligence."
 		return
+	else if(istype(W, /obj/item/weapon/wrench))
+		if(anchored)
+			user.visible_message("\blue \The [user] starts to unbolt \the [src] from the plating...")
+			if(!do_after(user,40))
+				user.visible_message("\blue \The [user] decides not to unbolt \the [src].")
+				return
+			user.visible_message("\blue \The [user] finishes unfastening \the [src]!")
+			anchored = 0
+			return
+		else
+			user.visible_message("\blue \The [user] starts to bolt \the [src] to the plating...")
+			if(!do_after(user,40))
+				user.visible_message("\blue \The [user] decides not to bolt \the [src].")
+				return
+			user.visible_message("\blue \The [user] finishes fastening down \the [src]!")
+			anchored = 1
+			return
+	else
+		return ..()
 
-	..()
+/client/proc/empty_ai_core_toggle_latejoin()
+	set name = "Toggle AI Core Latejoin"
+	set category = "Admin"
+
+	var/list/cores = list()
+	for(var/obj/structure/AIcore/deactivated/D in world)
+		cores["[D] ([D.loc.loc])"] = D
+
+	var/id = input("Which core?", "Toggle AI Core Latejoin", null) as null|anything in cores
+	if(!id) return
+
+	var/obj/structure/AIcore/deactivated/D = cores[id]
+	if(!D) return
+
+	if(D in empty_playable_ai_cores)
+		empty_playable_ai_cores -= D
+		src << "\The [id] is now <font color=\"#ff0000\">not available</font> for latejoining AIs."
+	else
+		empty_playable_ai_cores += D
+		src << "\The [id] is now <font color=\"#008000\">available</font> for latejoining AIs."

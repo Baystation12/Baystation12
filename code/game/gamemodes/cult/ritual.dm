@@ -32,6 +32,8 @@ var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", 
 	var/word1
 	var/word2
 	var/word3
+	var/list/converting = list()
+	
 // Places these combos are mentioned: this file - twice in the rune code, once in imbued tome, once in tome's HTML runes.dm - in the imbue rune code. If you change a combination - dont forget to change it everywhere.
 
 // travel self [word] - Teleport to random [rune with word destination matching]
@@ -359,10 +361,7 @@ var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", 
 				user << "\red You do not have enough space to write a proper rune."
 				return
 
-
-
-
-			if (C>=26+runedec+ticker.mode.cult.len) //including the useless rune at the secret room, shouldn't count against the limit of 25 runes - Urist
+			if (C>=26 + runedec + cult.current_antagonists.len) //including the useless rune at the secret room, shouldn't count against the limit of 25 runes - Urist
 				alert("The cloth of reality can't take that much of a strain. Remove some runes first!")
 				return
 			else

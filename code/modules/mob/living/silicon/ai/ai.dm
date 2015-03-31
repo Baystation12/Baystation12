@@ -3,7 +3,6 @@
 
 var/list/ai_list = list()
 var/list/ai_verbs_default = list(
-	/mob/living/silicon/ai/proc/ai_alerts,
 	/mob/living/silicon/ai/proc/ai_announcement,
 	/mob/living/silicon/ai/proc/ai_call_shuttle,
 	// /mob/living/silicon/ai/proc/ai_recall_shuttle,
@@ -44,7 +43,7 @@ var/list/ai_verbs_default = list(
 	icon_state = "ai"
 	anchored = 1 // -- TLE
 	density = 1
-	status_flags = CANSTUN|CANPARALYSE
+	status_flags = CANSTUN|CANPARALYSE|CANPUSH
 	shouldnt_see = list(/obj/effect/rune)
 	var/list/network = list("SS13")
 	var/obj/machinery/camera/camera = null
@@ -80,9 +79,13 @@ var/list/ai_verbs_default = list(
 
 /mob/living/silicon/ai/proc/add_ai_verbs()
 	src.verbs |= ai_verbs_default
+	src.verbs |= ai_verbs_subsystems
+	src.verbs |= silicon_verbs_subsystems
 
 /mob/living/silicon/ai/proc/remove_ai_verbs()
 	src.verbs -= ai_verbs_default
+	src.verbs -= ai_verbs_subsystems
+	src.verbs -= silicon_verbs_subsystems
 
 /mob/living/silicon/ai/New(loc, var/datum/ai_laws/L, var/obj/item/device/mmi/B, var/safety = 0)
 	announcement = new()
@@ -141,7 +144,7 @@ var/list/ai_verbs_default = list(
 
 	if(!safety)//Only used by AIize() to successfully spawn an AI.
 		if (!B)//If there is no player/brain inside.
-			new/obj/structure/AIcore/deactivated(loc)//New empty terminal.
+			empty_playable_ai_cores += new/obj/structure/AIcore/deactivated(loc)//New empty terminal.
 			del(src)//Delete AI.
 			return
 		else
@@ -156,6 +159,7 @@ var/list/ai_verbs_default = list(
 
 	hud_list[HEALTH_HUD]      = image('icons/mob/hud.dmi', src, "hudblank")
 	hud_list[STATUS_HUD]      = image('icons/mob/hud.dmi', src, "hudblank")
+	hud_list[LIFE_HUD] 		  = image('icons/mob/hud.dmi', src, "hudblank")
 	hud_list[ID_HUD]          = image('icons/mob/hud.dmi', src, "hudblank")
 	hud_list[WANTED_HUD]      = image('icons/mob/hud.dmi', src, "hudblank")
 	hud_list[IMPLOYAL_HUD]    = image('icons/mob/hud.dmi', src, "hudblank")
@@ -185,7 +189,7 @@ var/list/ai_verbs_default = list(
 
 	src << radio_text
 
-	if (!(ticker && ticker.mode && (mind in ticker.mode.malf_ai)))
+	if (malf && !(mind in malf.current_antagonists))
 		show_laws()
 		src << "<b>These laws may be changed by other players, or by you being the traitor.</b>"
 
@@ -193,6 +197,7 @@ var/list/ai_verbs_default = list(
 
 /mob/living/silicon/ai/Del()
 	ai_list -= src
+	del(eyeobj)
 	..()
 
 /mob/living/silicon/ai/pointed(atom/A as mob|obj|turf in view())
@@ -211,9 +216,8 @@ var/list/ai_verbs_default = list(
 	else
 		stat(null, text("Systems nonfunctional"))
 
-/mob/living/silicon/ai/proc/SetName(pickedName as text)
-	real_name = pickedName
-	name = pickedName
+/mob/living/silicon/ai/SetName(pickedName as text)
+	..()
 	announcement.announcer = pickedName
 	if(eyeobj)
 		eyeobj.name = "[pickedName] (AI Eye)"
@@ -307,49 +311,10 @@ var/list/ai_verbs_default = list(
 			//usr <<"You can only change your display once!"
 			//return
 
-/mob/living/silicon/ai/proc/is_malf()
-	if(ticker.mode.name == "AI malfunction")
-		var/datum/game_mode/malfunction/malf = ticker.mode
-		for (var/datum/mind/malfai in malf.malf_ai)
-			if (mind == malfai)
-				return malf
-	return 0
-
 // displays the malf_ai information if the AI is the malf
 /mob/living/silicon/ai/show_malf_ai()
-	var/datum/game_mode/malfunction/malf = is_malf()
-	if(malf && malf.apcs >= 3)
-		stat(null, "Time until station control secured: [max(malf.AI_win_timeleft/(malf.apcs/3), 0)] seconds")
-
-/mob/living/silicon/ai/proc/ai_alerts()
-	set category = "AI Commands"
-	set name = "Show Alerts"
-
-	var/dat = "<HEAD><TITLE>Current Station Alerts</TITLE><META HTTP-EQUIV='Refresh' CONTENT='10'></HEAD><BODY>\n"
-	dat += "<A HREF='?src=\ref[src];mach_close=aialerts'>Close</A><BR><BR>"
-	for (var/cat in alarms)
-		dat += text("<B>[]</B><BR>\n", cat)
-		var/list/alarmlist = alarms[cat]
-		if (alarmlist.len)
-			for (var/area_name in alarmlist)
-				var/datum/alarm/alarm = alarmlist[area_name]
-				dat += "<NOBR>"
-
-				var/cameratext = ""
-				if (alarm.cameras)
-					for (var/obj/machinery/camera/I in alarm.cameras)
-						cameratext += text("[]<A HREF=?src=\ref[];switchcamera=\ref[]>[]</A>", (cameratext=="") ? "" : " | ", src, I, I.c_tag)
-				dat += text("-- [] ([])", alarm.area.name, (cameratext)? cameratext : "No Camera")
-
-				if (alarm.sources.len > 1)
-					dat += text(" - [] sources", alarm.sources.len)
-				dat += "</NOBR><BR>\n"
-		else
-			dat += "-- All Systems Nominal<BR>\n"
-		dat += "<BR>\n"
-
-	viewalerts = 1
-	src << browse(dat, "window=aialerts&can_close=0")
+	if(malf && malf.hacked_apcs.len >= 3)
+		stat(null, "Time until station control secured: [max(malf.hack_time/(malf.hacked_apcs/3), 0)] seconds")
 
 // this verb lets the ai see the stations manifest
 /mob/living/silicon/ai/proc/ai_roster()
@@ -447,7 +412,7 @@ var/list/ai_verbs_default = list(
 	if (href_list["switchcamera"])
 		switchCamera(locate(href_list["switchcamera"])) in cameranet.cameras
 	if (href_list["showalerts"])
-		ai_alerts()
+		subsystem_alarm_monitor()
 	//Carn: holopad requests
 	if (href_list["jumptoholopad"])
 		var/obj/machinery/hologram/holopad/H = locate(href_list["jumptoholopad"])
@@ -456,25 +421,6 @@ var/list/ai_verbs_default = list(
 				H.attack_ai(src) //may as well recycle
 			else
 				src << "<span class='notice'>Unable to locate the holopad.</span>"
-
-	if (href_list["lawc"]) // Toggling whether or not a law gets stated by the State Laws verb --NeoFite
-		var/L = text2num(href_list["lawc"])
-		switch(lawcheck[L+1])
-			if ("Yes") lawcheck[L+1] = "No"
-			if ("No") lawcheck[L+1] = "Yes"
-//		src << text ("Switching Law [L]'s report status to []", lawcheck[L+1])
-		checklaws()
-
-	if (href_list["lawi"]) // Toggling whether or not a law gets stated by the State Laws verb --NeoFite
-		var/L = text2num(href_list["lawi"])
-		switch(ioncheck[L])
-			if ("Yes") ioncheck[L] = "No"
-			if ("No") ioncheck[L] = "Yes"
-//		src << text ("Switching Law [L]'s report status to []", lawcheck[L+1])
-		checklaws()
-
-	if (href_list["laws"]) // With how my law selection code works, I changed statelaws from a verb to a proc, and call it through my law selection panel. --NeoFite
-		statelaws()
 
 	if (href_list["track"])
 		var/mob/target = locate(href_list["track"]) in mob_list
@@ -521,29 +467,6 @@ var/list/ai_verbs_default = list(
 	//machine = src
 
 	return 1
-
-/mob/living/silicon/ai/triggerAlarm(var/class, area/A, list/cameralist, var/source)
-	if (stat == 2)
-		return 1
-
-	..()
-
-	var/cameratext = ""
-	for (var/obj/machinery/camera/C in cameralist)
-		cameratext += "[(cameratext == "")? "" : "|"]<A HREF=?src=\ref[src];switchcamera=\ref[C]>[C.c_tag]</A>"
-
-	queueAlarm("--- [class] alarm detected in [A.name]! ([(cameratext)? cameratext : "No Camera"])", class)
-
-	if (viewalerts) ai_alerts()
-
-/mob/living/silicon/ai/cancelAlarm(var/class, area/A as area, var/source)
-	var/has_alarm = ..()
-
-	if (!has_alarm)
-		queueAlarm(text("--- [] alarm in [] has been cleared.", class, A.name), class, 0)
-		if (viewalerts) ai_alerts()
-
-	return has_alarm
 
 /mob/living/silicon/ai/cancel_camera()
 	set category = "AI Commands"
@@ -654,16 +577,6 @@ var/list/ai_verbs_default = list(
 					holo_icon = getHologramIcon(icon('icons/mob/AI.dmi',"holo4"))
 	return
 
-/*/mob/living/silicon/ai/proc/corereturn()
-	set category = "Malfunction"
-	set name = "Return to Main Core"
-
-	var/obj/machinery/power/apc/apc = src.loc
-	if(!istype(apc))
-		src << "\blue You are already in your Main Core."
-		return
-	apc.malfvacate()*/
-
 //Toggles the luminosity and applies it by re-entereing the camera.
 /mob/living/silicon/ai/proc/toggle_camera_light()
 	set name = "Toggle Camera Light"
@@ -765,6 +678,9 @@ var/list/ai_verbs_default = list(
 		src << "\red System Error - Transceiver Disabled!"
 		return 1
 	return 0
+
+/mob/living/silicon/ai/proc/is_in_chassis()
+	return istype(loc, /turf)
 
 #undef AI_CHECK_WIRELESS
 #undef AI_CHECK_RADIO

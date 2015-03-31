@@ -1,6 +1,7 @@
 var/list/sacrificed = list()
 
 /obj/effect/rune
+
 /////////////////////////////////////////FIRST RUNE
 	proc
 		teleport(var/key)
@@ -98,50 +99,79 @@ var/list/sacrificed = list()
 /////////////////////////////////////////THIRD RUNE
 
 		convert()
+			var/mob/living/carbon/target = null
 			for(var/mob/living/carbon/M in src.loc)
-				if(iscultist(M))
-					continue
-				if(M.stat==2)
-					continue
-				usr.say("Mah[pick("'","`")]weyh pleggh at e'ntrath!")
-				
-				if (M.species && (M.species.flags & NO_PAIN))
-					M.visible_message("\red The markings below [M] glow a bloody red.")
+				if(!iscultist(M) && M.stat < DEAD && !(M in converting))
+					target = M
+					break
+
+			if(!target) //didn't find any new targets
+				if(!converting.len)
+					fizzle()
 				else
-					M.visible_message("\red [M] writhes in pain as the markings below \him glow a bloody red.", \
-					"\red AAAAAAHHHH!", \
-					"\red You hear an anguished scream.")
-				if(is_convertable_to_cult(M.mind) && !jobban_isbanned(M, "cultist"))//putting jobban check here because is_convertable uses mind as argument
+					usr << "<span class='danger'>You sense that the power of the dark one is already working away at them.</span>"
+				return
 
-					// Mostly for the benefit of those who resist, but it makes sense for even those who join to have some.. effect.
-					M.take_overall_damage(0, 10)
+			usr.say("Mah[pick("'","`")]weyh pleggh at e'ntrath!")
 
-					var/choice = alert(M,"Do you want to join the cult?","Submit to Nar'Sie","Resist","Submit")
-					if(choice == "Submit")
-						ticker.mode.add_cultist(M.mind)
-						M.mind.special_role = "Cultist"
-						M << "<font color=\"purple\"><b><i>Your blood pulses. Your head throbs. The world goes red. All at once you are aware of a horrible, horrible truth. The veil of reality has been ripped away and in the festering wound left behind something sinister takes root.</b></i></font>"
-						M << "<font color=\"purple\"><b><i>Assist your new compatriots in their dark dealings. Their goal is yours, and yours is theirs. You serve the Dark One above all else. Bring It back.</b></i></font>"
-						return 1
-
-					else if(choice == "Resist")
-
-						M.take_overall_damage(0, rand(5, 10)) // You dirty resister cannot handle the damage to your mind. Easily.
-						// Resist messages go!
-						var/BurnLoss = M.getFireLoss()
-						if (BurnLoss < 25) 			M << "<font color=\"red\"><b>Your blood boils as you force yourself to resist the corruption invading every corner of your mind."
-						else if (BurnLoss < 45) 	M << "<font color=\"red\"><b>Your blood boils and your body burns as the corruption further forces itself into your body and mind."
-						else if (BurnLoss < 75) 	M << "<font color=\"red\"><b>You begin to hallucinate images of a dark and incomprehensible being and your entire body feels like its engulfed in flame as your mental defenses crumble."
-						else if (BurnLoss < 100) 	M << "<font color=\"red\"><b>Your mind turns to ash as the burning flames engulf your very soul and images of Nar'Sie begin to bombard the last remnants of mental resistance."
-						else 						M << "<font color=\"red\"><b>Your entire broken soul and being is engulfed in corruption and flames as your mind shatters away into nothing."
-						return 0
-				else
-					M << "<font color=\"purple\"><b><i>Your blood pulses. Your head throbs. The world goes red. All at once you are aware of a horrible, horrible truth. The veil of reality has been ripped away and in the festering wound left behind something sinister takes root.</b></i></font>"
-					M << "<font color=\"red\"><b>And you were able to force it out of your mind. You now know the truth, there's something horrible out there, stop it and its minions at all costs.</b></font>"
+			converting |= target
+			var/list/waiting_for_input = list(target = 0) //need to box this up in order to be able to reset it again from inside spawn, apparently
+			var/initial_message = 0
+			while(target in converting)
+				if(target.loc != src.loc || target.stat == DEAD)
+					converting -= target
+					if(target.getFireLoss() < 100)
+						target.hallucination = min(target.hallucination, 500)
 					return 0
-			return fizzle()
 
+				target.take_overall_damage(0, rand(5, 20)) // You dirty resister cannot handle the damage to your mind. Easily. - even cultists who accept right away should experience some effects
+				// Resist messages go!
+				if(initial_message) //don't do this stuff right away, only if they resist or hesitate.
+					switch(target.getFireLoss())
+						if(0 to 25)
+							target << "<span class='danger'>Your blood boils as you force yourself to resist the corruption invading every corner of your mind.</span>"
+						if(25 to 45)
+							target << "<span class='danger'>Your blood boils and your body burns as the corruption further forces itself into your body and mind.</span>"
+						if(45 to 75)
+							target << "<span class='danger'>You begin to hallucinate images of a dark and incomprehensible being and your entire body feels like its engulfed in flame as your mental defenses crumble.</span>"
+							target.apply_effect(rand(1,10), STUTTER)
+						if(75 to 100)
+							target << "<span class='cult'>Your mind turns to ash as the burning flames engulf your very soul and images of an unspeakable horror begin to bombard the last remnants of mental resistance.</span>"
+							//broken mind - 5000 may seem like a lot I wanted the effect to really stand out for maxiumum losing-your-mind-spooky
+							//hallucination is reduced when the step off as well, provided they haven't hit the last stage...
+							target.hallucination += 5000
+							target.apply_effect(10, STUTTER)
+							target.adjustBrainLoss(1)
+						if(100 to INFINITY)
+							target << "<span class='cult'>Your entire broken soul and being is engulfed in corruption and flames as your mind shatters away into nothing.</span>"
+							target.hallucination += 5000
+							target.apply_effect(15, STUTTER)
+							target.adjustBrainLoss(rand(1,5))
 
+				initial_message = 1
+				if (target.species && (target.species.flags & NO_PAIN))
+					target.visible_message("<span class='warning'>The markings below [target] glow a bloody red.</span>")
+				else
+					target.visible_message("<span class='warning'>[target] writhes in pain as the markings below \him glow a bloody red.</span>", "<span class='danger'>AAAAAAHHHH!</span>", "<span class='warning'>You hear an anguished scream.</span>")
+
+				if(!waiting_for_input[target]) //so we don't spam them with dialogs if they hesitate
+					waiting_for_input[target] = 1
+
+					if(!cult.can_become_antag(target.mind) || jobban_isbanned(target, "cultist"))//putting jobban check here because is_convertable uses mind as argument
+						//waiting_for_input ensures this is only shown once, so they basically auto-resist from here on out. They still need to find a way to get off the freaking rune if they don't want to burn to death, though.
+						target << "<span class='cult'>Your blood pulses. Your head throbs. The world goes red. All at once you are aware of a horrible, horrible truth. The veil of reality has been ripped away and in the festering wound left behind something sinister takes root.</span>"
+						target << "<span class='danger'>And you were able to force it out of your mind. You now know the truth, there's something horrible out there, stop it and its minions at all costs.</span>"
+
+					else spawn()
+						var/choice = alert(target,"Do you want to join the cult?","Submit to Nar'Sie","Resist","Submit")
+						waiting_for_input[target] = 0
+						if(choice == "Submit") //choosing 'Resist' does nothing of course.
+							cult.add_antagonist(target.mind)
+							converting -= target
+							target.hallucination = 0 //sudden clarity
+
+				sleep(100) //proc once every 10 seconds
+			return 1
 
 /////////////////////////////////////////FOURTH RUNE
 
@@ -153,8 +183,6 @@ var/list/sacrificed = list()
 					cultist_count += 1
 			if(cultist_count >= 9)
 				new /obj/machinery/singularity/narsie/large(src.loc)
-				if(ticker.mode.name == "cult")
-					ticker.mode:eldergod = 0
 				return
 			else
 				return fizzle()
@@ -230,12 +258,12 @@ var/list/sacrificed = list()
 					usr.seer = 0
 				else if(usr.see_invisible!=SEE_INVISIBLE_LIVING)
 					usr << "\red The world beyond flashes your eyes but disappears quickly, as if something is disrupting your vision."
-					usr.see_invisible = SEE_INVISIBLE_OBSERVER
+					usr.see_invisible = SEE_INVISIBLE_CULT
 					usr.seer = 0
 				else
 					usr.say("Rash'tla sektath mal[pick("'","`")]zua. Zasan therium vivira. Itonis al'ra matum!")
 					usr << "\red The world beyond opens to your eyes."
-					usr.see_invisible = SEE_INVISIBLE_OBSERVER
+					usr.see_invisible = SEE_INVISIBLE_CULT
 					usr.seer = 1
 				return
 			return fizzle()
@@ -249,7 +277,7 @@ var/list/sacrificed = list()
 			var/is_sacrifice_target = 0
 			for(var/mob/living/carbon/human/M in src.loc)
 				if(M.stat == DEAD)
-					if(ticker.mode.name == "cult" && M.mind == ticker.mode:sacrifice_target)
+					if(cult && M.mind == cult.sacrifice_target)
 						is_sacrifice_target = 1
 					else
 						corpse_to_raise = M
@@ -267,7 +295,7 @@ var/list/sacrificed = list()
 				for(var/obj/effect/rune/R in world)
 					if(R.word1==cultwords["blood"] && R.word2==cultwords["join"] && R.word3==cultwords["hell"])
 						for(var/mob/living/carbon/human/N in R.loc)
-							if(ticker.mode.name == "cult" && N.mind && N.mind == ticker.mode:sacrifice_target)
+							if(cult && N.mind && N.mind == cult.sacrifice_target)
 								is_sacrifice_target = 1
 							else
 								if(N.stat!= DEAD)
@@ -276,7 +304,7 @@ var/list/sacrificed = list()
 
 			if(!body_to_sacrifice)
 				if (is_sacrifice_target)
-					usr << "\red The Geometer of blood wants that corpse for himself."
+					usr << "\red The Geometer of Blood wants that corpse for himself."
 				else
 					usr << "\red The sacrifical corpse is not dead. You must free it from this world of illusions before it may be used."
 				return fizzle()
@@ -409,20 +437,12 @@ var/list/sacrificed = list()
 
 			D.key = ghost.key
 
-			if(ticker.mode.name == "cult")
-				ticker.mode:add_cultist(D.mind)
-			else
-				ticker.mode.cult+=D.mind
+			cult.add_antagonist(D.mind)
 
-			D.mind.assigned_role = "Manifest Ghost"
-			D.mind.special_role = "Cultist"
 			if(!chose_name)
 				D.real_name = pick("Anguished", "Blasphemous", "Corrupt", "Cruel", "Depraved", "Despicable", "Disturbed", "Exacerbated", "Foul", "Hateful", "Inexorable", "Implacable", "Impure", "Malevolent", "Malignant", "Malicious", "Pained", "Profane", "Profligate", "Relentless", "Resentful", "Restless", "Spiteful", "Tormented", "Unclean", "Unforgiving", "Vengeful", "Vindictive", "Wicked", "Wronged")
 				D.real_name += " "
 				D.real_name += pick("Apparition", "Aptrgangr", "Dis", "Draugr", "Dybbuk", "Eidolon", "Fetch", "Fylgja", "Ghast", "Ghost", "Gjenganger", "Haint", "Phantom", "Phantasm", "Poltergeist", "Revenant", "Shade", "Shadow", "Soul", "Spectre", "Spirit", "Spook", "Visitant", "Wraith")
-
-			D << "<font color=\"purple\"><b><i>Your blood pulses. Your head throbs. The world goes red. All at once you are aware of a horrible, horrible truth. The veil of reality has been ripped away and in the festering wound left behind something sinister takes root.</b></i></font>"
-			D << "<font color=\"purple\"><b><i>Assist your new compatriots in their dark dealings. Their goal is yours, and yours is theirs. You serve the Dark One above all else. Bring It back.</b></i></font>"
 
 			var/mob/living/user = usr
 			while(this_rune && user && user.stat==CONSCIOUS && user.client && user.loc==this_rune.loc)
@@ -544,7 +564,7 @@ var/list/sacrificed = list()
 		// returns 0 if the rune is not used. returns 1 if the rune is used.
 		communicate()
 			. = 1 // Default output is 1. If the rune is deleted it will return 1
-			var/input = stripped_input(usr, "Please choose a message to tell to the other acolytes.", "Voice of Blood", "")
+			var/input = sanitize(input(usr, "Please choose a message to tell to the other acolytes.", "Voice of Blood", ""))
 			if(!input)
 				if (istype(src))
 					fizzle()
@@ -560,7 +580,7 @@ var/list/sacrificed = list()
 				usr.say("[input]")
 			else
 				usr.whisper("[input]")
-			for(var/datum/mind/H in ticker.mode.cult)
+			for(var/datum/mind/H in cult.current_antagonists)
 				if (H.current)
 					H.current << "\red \b [input]"
 			del(src)
@@ -599,7 +619,7 @@ var/list/sacrificed = list()
 						worth = 1
 
 				if (ticker.mode.name == "cult")
-					if(H.mind == ticker.mode:sacrifice_target)
+					if(H.mind == cult.sacrifice_target)
 						if(cultsinrange.len >= 3)
 							sacrificed += H.mind
 							if(isrobot(H))
@@ -614,7 +634,7 @@ var/list/sacrificed = list()
 							if(H.stat !=2)
 								if(prob(80) || worth)
 									usr << "\red The Geometer of Blood accepts this [worth ? "exotic " : ""]sacrifice."
-									ticker.mode:grant_runeword(usr)
+									cult.grant_runeword(usr)
 								else
 									usr << "\red The Geometer of blood accepts this sacrifice."
 									usr << "\red However, this soul was not enough to gain His favor."
@@ -625,7 +645,7 @@ var/list/sacrificed = list()
 							else
 								if(prob(40) || worth)
 									usr << "\red The Geometer of blood accepts this [worth ? "exotic " : ""]sacrifice."
-									ticker.mode:grant_runeword(usr)
+									cult.grant_runeword(usr)
 								else
 									usr << "\red The Geometer of blood accepts this sacrifice."
 									usr << "\red However, a mere dead body is not enough to satisfy Him."
@@ -639,7 +659,7 @@ var/list/sacrificed = list()
 							else
 								if(prob(40))
 									usr << "\red The Geometer of blood accepts this sacrifice."
-									ticker.mode:grant_runeword(usr)
+									cult.grant_runeword(usr)
 								else
 									usr << "\red The Geometer of blood accepts this sacrifice."
 									usr << "\red However, a mere dead body is not enough to satisfy Him."
@@ -652,7 +672,7 @@ var/list/sacrificed = list()
 						if(H.stat !=2)
 							if(prob(80))
 								usr << "\red The Geometer of Blood accepts this sacrifice."
-								ticker.mode:grant_runeword(usr)
+								cult.grant_runeword(usr)
 							else
 								usr << "\red The Geometer of blood accepts this sacrifice."
 								usr << "\red However, this soul was not enough to gain His favor."
@@ -663,7 +683,7 @@ var/list/sacrificed = list()
 						else
 							if(prob(40))
 								usr << "\red The Geometer of blood accepts this sacrifice."
-								ticker.mode:grant_runeword(usr)
+								cult.grant_runeword(usr)
 							else
 								usr << "\red The Geometer of blood accepts this sacrifice."
 								usr << "\red However, a mere dead body is not enough to satisfy Him."
@@ -677,7 +697,7 @@ var/list/sacrificed = list()
 						else
 							if(prob(40))
 								usr << "\red The Geometer of blood accepts this sacrifice."
-								ticker.mode:grant_runeword(usr)
+								cult.grant_runeword(usr)
 							else
 								usr << "\red The Geometer of blood accepts this sacrifice."
 								usr << "\red However, a mere dead body is not enough to satisfy Him."
@@ -685,27 +705,6 @@ var/list/sacrificed = list()
 								H.dust()//To prevent the MMI from remaining
 							else
 								H.gib()
-			for(var/mob/living/carbon/monkey/M in src.loc)
-				if (ticker.mode.name == "cult")
-					if(M.mind == ticker.mode:sacrifice_target)
-						if(cultsinrange.len >= 3)
-							sacrificed += M.mind
-							usr << "\red The Geometer of Blood accepts this sacrifice, your objective is now complete."
-						else
-							usr << "\red Your target's earthly bonds are too strong. You need more cultists to succeed in this ritual."
-							continue
-					else
-						if(prob(20))
-							usr << "\red The Geometer of Blood accepts your meager sacrifice."
-							ticker.mode:grant_runeword(usr)
-						else
-							usr << "\red The Geometer of blood accepts this sacrifice."
-							usr << "\red However, a mere monkey is not enough to satisfy Him."
-				else
-					usr << "\red The Geometer of Blood accepts your meager sacrifice."
-					if(prob(20))
-						ticker.mode.grant_runeword(usr)
-				M.gib()
 
 /////////////////////////////////////////SIXTEENTH RUNE
 
@@ -769,7 +768,7 @@ var/list/sacrificed = list()
 		freedom()
 			var/mob/living/user = usr
 			var/list/mob/living/carbon/cultists = new
-			for(var/datum/mind/H in ticker.mode.cult)
+			for(var/datum/mind/H in cult.current_antagonists)
 				if (istype(H.current,/mob/living/carbon))
 					cultists+=H.current
 			var/list/mob/living/carbon/users = new
@@ -816,7 +815,7 @@ var/list/sacrificed = list()
 		cultsummon()
 			var/mob/living/user = usr
 			var/list/mob/living/carbon/cultists = new
-			for(var/datum/mind/H in ticker.mode.cult)
+			for(var/datum/mind/H in cult.current_antagonists)
 				if (istype(H.current,/mob/living/carbon))
 					cultists+=H.current
 			var/list/mob/living/carbon/users = new

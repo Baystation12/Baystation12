@@ -4,4 +4,5 @@
 *.rsc
 *.dmb
 *.lk
+*.backup
 data/

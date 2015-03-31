@@ -75,8 +75,7 @@
 
 		src.botcard = new /obj/item/weapon/card/id(src)
 		if(isnull(src.botcard_access) || (src.botcard_access.len < 1))
-			var/datum/job/doctor/J = new/datum/job/doctor
-			src.botcard.access = J.get_access()
+			src.botcard.access = list(access_medical, access_morgue, access_surgery, access_chemistry, access_virology, access_genetics)
 		else
 			src.botcard.access = src.botcard_access
 
@@ -281,9 +280,6 @@
 					src.speak(message)
 					src.visible_message("<b>[src]</b> points at [C.name]!")
 					src.last_newpatient_speak = world.time
-					if(declare_treatment)
-						var/area/location = get_area(src)
-						broadcast_medical_hud_message("[src.name] is treating <b>[C]</b> in <b>[location]</b>", src)
 				break
 			else
 				continue
@@ -438,6 +434,10 @@
 					src.patient.reagents.add_reagent(reagent_id,src.injection_amount)
 				visible_message("\red <B>[src] injects [src.patient] with the syringe!</B>")
 
+				if(declare_treatment)
+					var/area/location = get_area(src)
+					broadcast_medical_hud_message("[src.name] is treating <b>[C]</b> in <b>[location]</b>", src)
+
 			src.icon_state = "medibot[src.on]"
 			src.currently_healing = 0
 			return
@@ -454,7 +454,7 @@
 	return
 
 /obj/machinery/bot/medbot/bullet_act(var/obj/item/projectile/Proj)
-	if(Proj.flag == "taser")
+	if(Proj.taser_effect)
 		src.stunned = min(stunned+10,20)
 	..()
 
@@ -564,7 +564,7 @@
 /obj/item/weapon/firstaid_arm_assembly/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	..()
 	if(istype(W, /obj/item/weapon/pen))
-		var/t = copytext(stripped_input(user, "Enter new robot name", src.name, src.created_name),1,MAX_NAME_LEN)
+		var/t = sanitizeSafe(input(user, "Enter new robot name", src.name, src.created_name), MAX_NAME_LEN)
 		if (!t)
 			return
 		if (!in_range(src, usr) && src.loc != usr)

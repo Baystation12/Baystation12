@@ -1,17 +1,14 @@
+#define TRACKING_POSSIBLE 0
+#define TRACKING_NO_COVERAGE 1
+#define TRACKING_TERMINATE 2
+
 /mob/living/silicon/ai/var/max_locations = 10
 /mob/living/silicon/ai/var/stored_locations[0]
 
-/mob/living/silicon/ai/proc/InvalidTurf(turf/T as turf)
-	if(!T)
-		return 1
-	if(T.z == 2)
-		return 1
-	if(T.z > 6)
-		return 1
-	return 0
+/proc/InvalidPlayerTurf(turf/T as turf)
+	return !(T && T.z in config.player_levels)
 
 /mob/living/silicon/ai/proc/get_camera_list()
-
 	if(src.stat == 2)
 		return
 
@@ -50,7 +47,7 @@
 	set name = "Store Camera Location"
 	set desc = "Stores your current camera location by the given name"
 
-	loc = sanitize(copytext(loc, 1, MAX_MESSAGE_LEN))
+	loc = sanitize(loc)
 	if(!loc)
 		src << "\red Must supply a location name"
 		return
@@ -64,7 +61,7 @@
 		return
 
 	var/L = src.eyeobj.getLoc()
-	if (InvalidTurf(get_turf(L)))
+	if (InvalidPlayerTurf(get_turf(L)))
 		src << "\red Unable to store this location"
 		return
 
@@ -107,38 +104,14 @@
 	var/list/cameras = list()
 
 /mob/living/silicon/ai/proc/trackable_mobs()
-
 	if(usr.stat == 2)
 		return list()
 
 	var/datum/trackable/TB = new()
 	for(var/mob/living/M in mob_list)
-		// Easy checks first.
-		// Don't detect mobs on Centcom. Since the wizard den is on Centcomm, we only need this.
-		if(InvalidTurf(get_turf(M)))
-			continue
 		if(M == usr)
 			continue
-		if(M.invisibility)//cloaked
-			continue
-		if(M.digitalcamo)
-			continue
-
-		// Human check
-		var/human = 0
-		if(istype(M, /mob/living/carbon/human))
-			human = 1
-			var/mob/living/carbon/human/H = M
-			//Cameras can't track people wearing an agent card or a ninja hood.
-			if(H.wear_id && istype(H.wear_id.GetID(), /obj/item/weapon/card/id/syndicate))
-				continue
-			if(istype(H.head, /obj/item/clothing/head/helmet/space/rig))
-				var/obj/item/clothing/head/helmet/space/rig/helmet = H.head
-				if(helmet.prevent_track())
-					continue
-
-		 // Now, are they viewable by a camera? (This is last because it's the most intensive check)
-		if(!near_camera(M))
+		if(M.tracking_status() != TRACKING_POSSIBLE)
 			continue
 
 		var/name = M.name
@@ -148,7 +121,7 @@
 		else
 			TB.names.Add(name)
 			TB.namecounts[name] = 1
-		if(human)
+		if(istype(M, /mob/living/carbon/human))
 			TB.humans[name] = M
 		else
 			TB.others[name] = M
@@ -177,6 +150,7 @@
 		return
 
 	src << "Follow camera mode [forced ? "terminated" : "ended"]."
+	cameraFollow.tracking_cancelled()
 	cameraFollow = null
 
 /mob/living/silicon/ai/proc/ai_actual_track(mob/living/target as mob)
@@ -185,33 +159,21 @@
 
 	U.cameraFollow = target
 	U << "Now tracking [target.name] on camera."
+	target.tracking_initiated()
 
 	spawn (0)
 		while (U.cameraFollow == target)
 			if (U.cameraFollow == null)
 				return
-			if (istype(target, /mob/living/carbon/human))
-				var/mob/living/carbon/human/H = target
-				if(H.wear_id && istype(H.wear_id.GetID(), /obj/item/weapon/card/id/syndicate))
+
+			switch(target.tracking_status())
+				if(TRACKING_NO_COVERAGE)
+					U << "Target is not near any active cameras."
+					sleep(100)
+					continue
+				if(TRACKING_TERMINATE)
 					U.ai_cancel_tracking(1)
 					return
-				if(istype(H.head, /obj/item/clothing/head/helmet/space/rig))
-					var/obj/item/clothing/head/helmet/space/rig/helmet = H.head
-					if(helmet.prevent_track())
-						U.ai_cancel_tracking(1)
-						return
-				if(H.digitalcamo)
-					U.ai_cancel_tracking(1)
-					return
-
-			if(istype(target.loc,/obj/effect/dummy))
-				U.ai_cancel_tracking()
-				return
-
-			if (!trackable(target))
-				U << "Target is not near any active cameras."
-				sleep(100)
-				continue
 
 			if(U.eyeobj)
 				U.eyeobj.setLoc(get_turf(target), 0)
@@ -219,24 +181,6 @@
 				view_core()
 				return
 			sleep(10)
-
-/proc/near_camera(var/mob/living/M)
-	if (!isturf(M.loc))
-		return 0
-	if(isrobot(M))
-		var/mob/living/silicon/robot/R = M
-		if(!(R.camera && R.camera.can_use()) && !cameranet.checkCameraVis(M))
-			return 0
-	else if(!cameranet.checkCameraVis(M))
-		return 0
-	return 1
-
-/proc/trackable(var/mob/living/M)
-	var/turf/T = get_turf(M)
-	if(T && (T.z in config.station_levels) && hassensorlevel(M, SUIT_SENSOR_TRACKING))
-		return 1
-
-	return near_camera(M)
 
 /obj/machinery/camera/attack_ai(var/mob/living/silicon/ai/user as mob)
 	if (!istype(user))
@@ -248,3 +192,87 @@
 
 /mob/living/silicon/ai/attack_ai(var/mob/user as mob)
 	ai_camera_list()
+
+/proc/camera_sort(list/L)
+	var/obj/machinery/camera/a
+	var/obj/machinery/camera/b
+
+	for (var/i = L.len, i > 0, i--)
+		for (var/j = 1 to i - 1)
+			a = L[j]
+			b = L[j + 1]
+			if (a.c_tag_order != b.c_tag_order)
+				if (a.c_tag_order > b.c_tag_order)
+					L.Swap(j, j + 1)
+			else
+				if (sorttext(a.c_tag, b.c_tag) < 0)
+					L.Swap(j, j + 1)
+	return L
+
+
+mob/living/proc/near_camera()
+	if (!isturf(loc))
+		return 0
+	else if(!cameranet.checkVis(src))
+		return 0
+	return 1
+
+/mob/living/proc/tracking_status()
+	// Easy checks first.
+	// Don't detect mobs on Centcom. Since the wizard den is on Centcomm, we only need this.
+	if(InvalidPlayerTurf(get_turf(src)))
+		return TRACKING_TERMINATE
+	if(invisibility >= INVISIBILITY_LEVEL_ONE) //cloaked
+		return TRACKING_TERMINATE
+	if(digitalcamo)
+		return TRACKING_TERMINATE
+	if(istype(loc,/obj/effect/dummy))
+		return TRACKING_TERMINATE
+
+	 // Now, are they viewable by a camera? (This is last because it's the most intensive check)
+	return near_camera() ? TRACKING_POSSIBLE : TRACKING_NO_COVERAGE
+
+/mob/living/silicon/robot/tracking_status()
+	. = ..()
+	if(. == TRACKING_NO_COVERAGE)
+		return camera && camera.can_use() ? TRACKING_POSSIBLE : TRACKING_NO_COVERAGE
+
+/mob/living/silicon/robot/syndicate/tracking_status()
+	return TRACKING_TERMINATE
+
+/mob/living/carbon/human/tracking_status()
+	//Cameras can't track people wearing an agent card or a ninja hood.
+	if(wear_id && istype(wear_id.GetID(), /obj/item/weapon/card/id/syndicate))
+		return TRACKING_TERMINATE
+	if(istype(head, /obj/item/clothing/head/helmet/space/rig))
+		var/obj/item/clothing/head/helmet/space/rig/helmet = head
+		if(helmet.prevent_track())
+			return TRACKING_TERMINATE
+
+	. = ..()
+	if(. == TRACKING_TERMINATE)
+		return
+
+	if(. == TRACKING_NO_COVERAGE)
+		var/turf/T = get_turf(src)
+		if(T && (T.z in config.station_levels) && hassensorlevel(src, SUIT_SENSOR_TRACKING))
+			return TRACKING_POSSIBLE
+
+mob/living/proc/tracking_initiated()
+
+mob/living/silicon/robot/tracking_initiated()
+	tracking_entities++
+	if(tracking_entities == 1 && has_zeroth_law())
+		src << "<span class='warning'>Internal camera is currently being accessed.</span>"
+
+mob/living/proc/tracking_cancelled()
+
+mob/living/silicon/robot/tracking_initiated()
+	tracking_entities--
+	if(!tracking_entities && has_zeroth_law())
+		src << "<span class='notice'>Internal camera is no longer being accessed.</span>"
+
+
+#undef TRACKING_POSSIBLE
+#undef TRACKING_NO_COVERAGE
+#undef TRACKING_TERMINATE

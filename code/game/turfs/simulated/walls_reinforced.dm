@@ -5,9 +5,8 @@
 	opacity = 1
 	density = 1
 
-	damage_cap = 500
+	damage_cap = 800
 	max_temperature = 6000
-	armor = 0.1 // Only 10% damage from gunfire, it's made from strong alloys and stuff.
 
 	walltype = "rwall"
 
@@ -18,6 +17,13 @@
 	hulk_take_damage = 0
 	rotting_destroy_touch = 0
 	rotting_touch_message = "\blue This wall feels rather unstable."
+
+/turf/simulated/wall/r_wall/attack_generic(var/mob/user, var/damage, var/attack_message, var/wallbreaker)
+	if(!rotting && wallbreaker < 2)
+		user << "You push the wall but nothing happens."
+		return
+
+	return ..()
 
 /turf/simulated/wall/r_wall/attackby(obj/item/W as obj, mob/user as mob)
 
@@ -291,6 +297,9 @@
 		var/obj/item/light_fixture_frame/small/AH = W
 		AH.try_build(src)
 		return
+
+	else if(istype(W, /obj/item/weapon/reagent_containers))
+		return // They tend to have meaningful afterattack - let them apply it without destroying a rotting wall
 
 	//Finally, CHECKING FOR FALSE WALLS if it isn't damaged
 	else if(!d_state)

@@ -20,6 +20,122 @@
 	usr.visible_message("<b>[src]</b> points to [A]")
 	return 1
 
+/*one proc, four uses
+swapping: if it's 1, the mobs are trying to switch, if 0, non-passive is pushing passive
+default behaviour is:
+ - non-passive mob passes the passive version
+ - passive mob checks to see if its mob_bump_flag is in the non-passive's mob_bump_flags
+ - if si, the proc returns
+*/
+/mob/living/proc/can_move_mob(var/mob/living/swapped, swapping = 0, passive = 0)
+	if(!swapped)
+		return 1
+	if(!passive)
+		return swapped.can_move_mob(src, swapping, 1)
+	else
+		var/context_flags = 0
+		if(swapping)
+			context_flags = swapped.mob_swap_flags
+		else
+			context_flags = swapped.mob_push_flags
+		if(!mob_bump_flag) //nothing defined, go wild
+			return 1
+		if(mob_bump_flag & context_flags)
+			return 1
+		return 0
+
+/mob/living/Bump(atom/movable/AM, yes)
+	spawn(0)
+		if ((!( yes ) || now_pushing) || !loc)
+			return
+		now_pushing = 1
+		if (istype(AM, /mob/living))
+			var/mob/living/tmob = AM
+
+			for(var/mob/living/M in range(tmob, 1))
+				if(tmob.pinned.len ||  ((M.pulling == tmob && ( tmob.restrained() && !( M.restrained() ) && M.stat == 0)) || locate(/obj/item/weapon/grab, tmob.grabbed_by.len)) )
+					if ( !(world.time % 5) )
+						src << "<span class='warning'>[tmob] is restrained, you cannot push past</span>"
+					now_pushing = 0
+					return
+				if( tmob.pulling == M && ( M.restrained() && !( tmob.restrained() ) && tmob.stat == 0) )
+					if ( !(world.time % 5) )
+						src << "<span class='warning'>[tmob] is restraining [M], you cannot push past</span>"
+					now_pushing = 0
+					return
+
+			//BubbleWrap: people in handcuffs are always switched around as if they were on 'help' intent to prevent a person being pulled from being seperated from their puller
+			var/dense = 0
+			if(loc.density)
+				dense = 1
+			for(var/atom/movable/A in loc)
+				if(A == src)
+					continue
+				if(A.density)
+					if(A.flags&ON_BORDER)
+						dense = !A.CanPass(src, src.loc)
+					else
+						dense = 1
+				if(dense) break
+
+			//Leaping mobs just land on the tile, no pushing, no anything.
+			if(status_flags & LEAPING)
+				loc = tmob.loc
+				status_flags &= ~LEAPING
+				now_pushing = 0
+				return
+
+			if((tmob.mob_always_swap || (tmob.a_intent == I_HELP || tmob.restrained()) && (a_intent == I_HELP || src.restrained())) && tmob.canmove && canmove && !dense && can_move_mob(tmob, 1, 0)) // mutual brohugs all around!
+				var/turf/oldloc = loc
+				loc = tmob.loc
+				tmob.loc = oldloc
+				now_pushing = 0
+				for(var/mob/living/carbon/slime/slime in view(1,tmob))
+					if(slime.Victim == tmob)
+						slime.UpdateFeed()
+				return
+
+			if(!can_move_mob(tmob, 0, 0))
+				now_pushing = 0
+				return
+			if(istype(tmob, /mob/living/carbon/human) && (FAT in tmob.mutations))
+				if(prob(40) && !(FAT in src.mutations))
+					src << "<span class='danger'>You fail to push [tmob]'s fat ass out of the way.</span>"
+					now_pushing = 0
+					return
+			if(tmob.r_hand && istype(tmob.r_hand, /obj/item/weapon/shield/riot))
+				if(prob(99))
+					now_pushing = 0
+					return
+			if(tmob.l_hand && istype(tmob.l_hand, /obj/item/weapon/shield/riot))
+				if(prob(99))
+					now_pushing = 0
+					return
+			if(!(tmob.status_flags & CANPUSH))
+				now_pushing = 0
+				return
+
+			tmob.LAssailant = src
+
+		now_pushing = 0
+		spawn(0)
+			..()
+			if (!istype(AM, /atom/movable))
+				return
+			if (!now_pushing)
+				now_pushing = 1
+
+				if (!AM.anchored)
+					var/t = get_dir(src, AM)
+					if (istype(AM, /obj/structure/window))
+						for(var/obj/structure/window/win in get_step(AM,t))
+							now_pushing = 0
+							return
+					step(AM, t)
+				now_pushing = 0
+			return
+	return
+
 /mob/living/verb/succumb()
 	set hidden = 1
 	if ((src.health < 0 && src.health > -95.0))
@@ -58,13 +174,6 @@
 			if(affecting.take_damage(0, divided_damage+extradam))	//TODO: fix the extradam stuff. Or, ebtter yet...rewrite this entire proc ~Carn
 				H.UpdateDamageIcon()
 		H.updatehealth()
-		return 1
-	else if(istype(src, /mob/living/carbon/monkey))
-		if (COLD_RESISTANCE in src.mutations) //fireproof
-			return 0
-		var/mob/living/carbon/monkey/M = src
-		M.adjustFireLoss(burn_amount)
-		M.updatehealth()
 		return 1
 	else if(istype(src, /mob/living/silicon/ai))
 		return 0
@@ -171,7 +280,6 @@
 
 // ++++ROCKDTBEN++++ MOB PROCS //END
 
-
 /mob/proc/get_contents()
 
 
@@ -242,7 +350,7 @@
 	src.updatehealth()
 
 // damage ONE external organ, organ gets randomly selected from damaged ones.
-/mob/living/proc/take_organ_damage(var/brute, var/burn)
+/mob/living/proc/take_organ_damage(var/brute, var/burn, var/emp=0)
 	if(status_flags & GODMODE)	return 0	//godmode
 	adjustBruteLoss(brute)
 	adjustFireLoss(burn)
@@ -279,8 +387,11 @@
 		if (C.legcuffed && !initial(C.legcuffed))
 			C.drop_from_inventory(C.legcuffed)
 		C.legcuffed = initial(C.legcuffed)
-	hud_updateflag |= 1 << HEALTH_HUD
-	hud_updateflag |= 1 << STATUS_HUD
+	BITSET(hud_updateflag, HEALTH_HUD)
+	BITSET(hud_updateflag, STATUS_HUD)
+	BITSET(hud_updateflag, LIFE_HUD)
+	ExtinguishMob()
+	fire_stacks = 0
 
 /mob/living/proc/rejuvenate()
 
@@ -329,8 +440,9 @@
 	// make the icons look correct
 	regenerate_icons()
 
-	hud_updateflag |= 1 << HEALTH_HUD
-	hud_updateflag |= 1 << STATUS_HUD
+	BITSET(hud_updateflag, HEALTH_HUD)
+	BITSET(hud_updateflag, STATUS_HUD)
+	BITSET(hud_updateflag, LIFE_HUD)
 	return
 
 /mob/living/proc/UpdateDamageIcon()
@@ -416,11 +528,11 @@
 						//pull damage with injured people
 							if(prob(25))
 								M.adjustBruteLoss(1)
-								visible_message("\red \The [M]'s wounds open more from being dragged!")
+								visible_message("<span class='danger'>\The [M]'s [M.isSynthetic() ? "state worsens": "wounds open more"] from being dragged!</span>")
 						if(M.pull_damage())
 							if(prob(25))
 								M.adjustBruteLoss(2)
-								visible_message("\red \The [M]'s wounds worsen terribly from being dragged!")
+								visible_message("<span class='danger'>\The [M]'s [M.isSynthetic() ? "state" : "wounds"] worsen terribly from being dragged!</span>")
 								var/turf/location = M.loc
 								if (istype(location, /turf/simulated))
 									location.add_blood(M)
@@ -512,7 +624,7 @@
 			return
 
 	//resisting grabs (as if it helps anyone...)
-	if ((!( L.stat ) && L.canmove && !( L.restrained() )))
+	if ((!( L.stat ) && !( L.restrained() )))
 		var/resisting = 0
 		for(var/obj/O in L.requests)
 			L.requests.Remove(O)
@@ -520,23 +632,20 @@
 			resisting++
 		for(var/obj/item/weapon/grab/G in usr.grabbed_by)
 			resisting++
-			if (G.state == 1)
-				del(G)
-			else
-				if (G.state == 2)
-					if (prob(25))
-						for(var/mob/O in viewers(L, null))
-							O.show_message(text("\red [] has broken free of []'s grip!", L, G.assailant), 1)
+			switch(G.state)
+				if(GRAB_PASSIVE)
+					del(G)
+				if(GRAB_AGGRESSIVE)
+					if(prob(60)) //same chance of breaking the grab as disarm
+						L.visible_message("<span class='warning'>[L] has broken free of [G.assailant]'s grip!</span>")
 						del(G)
-				else
-					if (G.state == 3)
-						if (prob(5))
-							for(var/mob/O in viewers(usr, null))
-								O.show_message(text("\red [] has broken free of []'s headlock!", L, G.assailant), 1)
-							del(G)
+				if(GRAB_NECK)
+					//If the you move when grabbing someone then it's easier for them to break free. Same if the affected mob is immune to stun.
+					if (((world.time - G.assailant.l_move_time < 30 || !L.stunned) && prob(15)) || prob(3))
+						L.visible_message("<span class='warning'>[L] has broken free of [G.assailant]'s headlock!</span>")
+						del(G)
 		if(resisting)
-			for(var/mob/O in viewers(usr, null))
-				O.show_message(text("\red <B>[] resists!</B>", L), 1)
+			L.visible_message("<span class='danger'>[L] resists!</span>")
 
 
 	//unbuckling yourself
@@ -556,9 +665,9 @@
 						for(var/mob/O in viewers(C))
 							O.show_message("\red <B>[usr] manages to unbuckle themself!</B>", 1)
 						C << "\blue You successfully unbuckle yourself."
-						C.buckled.manual_unbuckle(C)
+						C.buckled.user_unbuckle_mob(C)
 		else
-			L.buckled.manual_unbuckle(L)
+			L.buckled.user_unbuckle_mob(L)
 
 	//Breaking out of a locker?
 	else if( src.loc && (istype(src.loc, /obj/structure/closet)) )
@@ -629,9 +738,21 @@
 						BD.attack_hand(usr)
 					C.open()
 
-	//breaking out of handcuffs
+	//drop && roll or breaking out of handcuffs
 	else if(iscarbon(L))
 		var/mob/living/carbon/CM = L
+		if(CM.on_fire && CM.canmove)
+			CM.fire_stacks -= 5
+			CM.Weaken(3)
+			CM.spin(32,2)
+			CM.visible_message("<span class='danger'>[CM] rolls on the floor, trying to put themselves out!</span>", \
+				"<span class='notice'>You stop, drop, and roll!</span>")
+			sleep(30)
+			if(fire_stacks <= 0)
+				CM.visible_message("<span class='danger'>[CM] has successfully extinguished themselves!</span>", \
+					"<span class='notice'>You extinguish yourself.</span>")
+				ExtinguishMob()
+			return
 		if(CM.handcuffed && CM.canmove && (CM.last_special <= world.time))
 			CM.next_move = world.time + 100
 			CM.last_special = world.time + 100
@@ -658,6 +779,8 @@
 						CM.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!" ))
 						del(CM.handcuffed)
 						CM.handcuffed = null
+						if(buckled && buckled.buckle_require_restraints)
+							buckled.unbuckle_mob()
 						CM.update_inv_handcuffed()
 			else
 				var/obj/item/weapon/handcuffs/HC = CM.handcuffed
@@ -843,3 +966,21 @@
 
 /mob/living/proc/slip(var/slipped_on,stun_duration=8)
 	return 0
+
+/mob/living/carbon/proc/spin(spintime, speed)
+	spawn()
+		var/D = dir
+		while(spintime >= speed)
+			sleep(speed)
+			switch(D)
+				if(NORTH)
+					D = EAST
+				if(SOUTH)
+					D = WEST
+				if(EAST)
+					D = SOUTH
+				if(WEST)
+					D = NORTH
+			set_dir(D)
+			spintime -= speed
+	return

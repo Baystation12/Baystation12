@@ -2,7 +2,7 @@
 /mob/living/silicon/robot/drone/verb/set_mail_tag()
 	set name = "Set Mail Tag"
 	set desc = "Tag yourself for delivery through the disposals system."
-	set category = "Drone"
+	set category = "Robot Commands"
 
 	var/new_tag = input("Select the desired destination.", "Set Mail Tag", null) as null|anything in tagger_locations
 
@@ -24,6 +24,6 @@
 //Actual picking-up event.
 /mob/living/silicon/robot/drone/attack_hand(mob/living/carbon/human/M as mob)
 
-	if(M.a_intent == "help")
+	if(M.a_intent == I_HELP)
 		get_scooped(M)
 	..()

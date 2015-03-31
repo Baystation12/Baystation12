@@ -5,7 +5,7 @@
 	circuit = "/obj/item/weapon/circuitboard/cloning"
 	req_access = list(access_heads) //Only used for record deletion right now.
 	var/obj/machinery/dna_scannernew/scanner = null //Linked scanner. For scanning.
-	var/obj/machinery/clonepod/pod1 = null //Linked cloning pod.
+	var/list/pods = list() //Linked cloning pods.
 	var/temp = ""
 	var/scantemp = "Scanner unoccupied"
 	var/menu = 1 //Which menu screen to display
@@ -23,38 +23,35 @@
 
 /obj/machinery/computer/cloning/proc/updatemodules()
 	src.scanner = findscanner()
-	src.pod1 = findcloner()
-
-	if (!isnull(src.pod1))
-		src.pod1.connected = src // Some variable the pod needs
+	findcloner()
+	var/num = 1
+	for (var/obj/machinery/clonepod/pod in pods)
+		pod.connected = src
+		pod.name = "[initial(pod.name)] #[num++]"
 
 /obj/machinery/computer/cloning/proc/findscanner()
 	var/obj/machinery/dna_scannernew/scannerf = null
 
-	// Loop through every direction
+	//Try to find scanner on adjacent tiles first
 	for(dir in list(NORTH,EAST,SOUTH,WEST))
-
-		// Try to find a scanner in that direction
 		scannerf = locate(/obj/machinery/dna_scannernew, get_step(src, dir))
+		if (scannerf)
+			return scannerf
 
-		// If found, then we break, and return the scanner
-		if (!isnull(scannerf))
-			break
+	//Then look for a free one in the area
+	if(!scannerf)
+		for(var/obj/machinery/dna_scannernew/S in get_area(src))
+			return S
 
-	// If no scanner was found, it will return null
-	return scannerf
+	return
 
 /obj/machinery/computer/cloning/proc/findcloner()
-	var/obj/machinery/clonepod/podf = null
+	pods.Cut()
+	for(var/obj/machinery/clonepod/P in get_area(src))
+		if(!P.connected)
+			pods += P
 
-	for(dir in list(NORTH,EAST,SOUTH,WEST))
-
-		podf = locate(/obj/machinery/clonepod, get_step(src, dir))
-
-		if (!isnull(podf))
-			break
-
-	return podf
+	return
 
 /obj/machinery/computer/cloning/attackby(obj/item/W as obj, mob/user as mob)
 	if (istype(W, /obj/item/weapon/disk/data)) //INSERT SOME DISKETTES
@@ -65,6 +62,14 @@
 			user << "You insert [W]."
 			src.updateUsrDialog()
 			return
+	else if(istype(W, /obj/item/device/multitool))
+		var/obj/item/device/multitool/M = W
+		var/obj/machinery/clonepod/P = M.connecting
+		if(P && !(P in pods))
+			pods += P
+			P.connected = src
+			P.name = "[initial(P.name)] #[pods.len]"
+			user << "<span class='notice'>You connect [P] to [src].</span>"
 	else
 		..()
 	return
@@ -92,13 +97,13 @@
 			dat += "<h4>Modules</h4>"
 			//dat += "<a href='byond://?src=\ref[src];relmodules=1'>Reload Modules</a>"
 			if (isnull(src.scanner))
-				dat += " <font color=red>Scanner-ERROR</font><br>"
+				dat += " <font color=red>DNA scanner not found.</font><br>"
 			else
-				dat += " <font color=green>Scanner-Found!</font><br>"
-			if (isnull(src.pod1))
-				dat += " <font color=red>Pod-ERROR</font><br>"
+				dat += " <font color=green>DNA scanner found.</font><br>"
+			if (pods.len)
+				dat += " <font color=green>[pods.len] cloning vat\s found.</font><br>"
 			else
-				dat += " <font color=green>Pod-Found!</font><br>"
+				dat += " <font color=red>No cloning vats found.</font><br>"
 
 			// Scanner
 			dat += "<h4>Scanner Functions</h4>"
@@ -120,8 +125,9 @@
 
 				dat += "Lock status: <a href='byond://?src=\ref[src];lock=1'>[src.scanner.locked ? "Locked" : "Unlocked"]</a><br>"
 
-			if (!isnull(src.pod1))
-				dat += "Biomass: <i>[src.pod1.biomass]</i><br>"
+			if (pods.len)
+				for (var/obj/machinery/clonepod/pod in pods)
+					dat += "[pod] biomass: <i>[pod.biomass]</i><br>"
 
 			// Database
 			dat += "<h4>Database Functions</h4>"
@@ -167,10 +173,8 @@
 				dat += {"<b>UI:</b> [src.active_record.dna.uni_identity]<br>
 				<b>SE:</b> [src.active_record.dna.struc_enzymes]<br><br>"}
 
-				if(pod1 && pod1.biomass >= CLONE_BIOMASS)
+				if(pods.len)
 					dat += {"<a href='byond://?src=\ref[src];clone=\ref[src.active_record]'>Clone</a><br>"}
-				else
-					dat += {"<b>Insufficient biomass</b><br>"}
 
 		if(4)
 			if (!src.active_record)
@@ -188,7 +192,7 @@
 
 /obj/machinery/computer/cloning/Topic(href, href_list)
 	if(..())
-		return
+		return 1
 
 	if(loading)
 		return
@@ -291,34 +295,38 @@
 		//Look for that player! They better be dead!
 		if(istype(C))
 			//Can't clone without someone to clone.  Or a pod.  Or if the pod is busy. Or full of gibs.
-			if(!pod1)
-				temp = "Error: No Clonepod detected."
-			else if(pod1.occupant)
-				temp = "Error: Clonepod is currently occupied."
-			else if(pod1.biomass < CLONE_BIOMASS)
-				temp = "Error: Not enough biomass."
-			else if(pod1.mess)
-				temp = "Error: Clonepod malfunction."
-			else if(!config.revival_cloning)
-				temp = "Error: Unable to initiate cloning cycle."
-
-			else if(pod1.growclone(C))
-				temp = "Initiating cloning cycle..."
-				records.Remove(C)
-				del(C)
-				menu = 1
+			if(!pods.len)
+				temp = "Error: No clone pods detected."
 			else
+				var/obj/machinery/clonepod/pod = pods[1]
+				if (pods.len > 1)
+					pod = input(usr,"Select a cloning pod to use", "Pod selection") as anything in pods
+				if(pod.occupant)
+					temp = "Error: Clonepod is currently occupied."
+				else if(pod.biomass < CLONE_BIOMASS)
+					temp = "Error: Not enough biomass."
+				else if(pod.mess)
+					temp = "Error: Clonepod malfunction."
+				else if(!config.revival_cloning)
+					temp = "Error: Unable to initiate cloning cycle."
 
-				var/mob/selected = find_dead_player("[C.ckey]")
-				selected << 'sound/machines/chime.ogg'	//probably not the best sound but I think it's reasonable
-				var/answer = alert(selected,"Do you want to return to life?","Cloning","Yes","No")
-				if(answer != "No" && pod1.growclone(C))
+				else if(pod.growclone(C))
 					temp = "Initiating cloning cycle..."
 					records.Remove(C)
 					del(C)
 					menu = 1
 				else
-					temp = "Initiating cloning cycle...<br>Error: Post-initialisation failed. Cloning cycle aborted."
+
+					var/mob/selected = find_dead_player("[C.ckey]")
+					selected << 'sound/machines/chime.ogg'	//probably not the best sound but I think it's reasonable
+					var/answer = alert(selected,"Do you want to return to life?","Cloning","Yes","No")
+					if(answer != "No" && pod.growclone(C))
+						temp = "Initiating cloning cycle..."
+						records.Remove(C)
+						del(C)
+						menu = 1
+					else
+						temp = "Initiating cloning cycle...<br>Error: Post-initialisation failed. Cloning cycle aborted."
 
 		else
 			temp = "Error: Data corruption."

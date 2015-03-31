@@ -17,15 +17,15 @@
 /obj/item/ashtray/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (health < 1)
 		return
-	if (istype(W,/obj/item/weapon/cigbutt) || istype(W,/obj/item/clothing/mask/cigarette) || istype(W, /obj/item/weapon/flame/match))
+	if (istype(W,/obj/item/weapon/cigbutt) || istype(W,/obj/item/clothing/mask/smokable/cigarette) || istype(W, /obj/item/weapon/flame/match))
 		if (contents.len >= max_butts)
 			user << "This ashtray is full."
 			return
 		user.remove_from_mob(W)
 		W.loc = src
 
-		if (istype(W,/obj/item/clothing/mask/cigarette))
-			var/obj/item/clothing/mask/cigarette/cig = W
+		if (istype(W,/obj/item/clothing/mask/smokable/cigarette))
+			var/obj/item/clothing/mask/smokable/cigarette/cig = W
 			if (cig.lit == 1)
 				src.visible_message("[user] crushes [cig] in [src], putting it out.")
 				processing_objects.Remove(cig)
@@ -61,14 +61,14 @@
 			return
 		if (contents.len)
 			src.visible_message("\red [src] slams into [hit_atom] spilling its contents!")
-		for (var/obj/item/clothing/mask/cigarette/O in contents)
+		for (var/obj/item/clothing/mask/smokable/cigarette/O in contents)
 			O.loc = src.loc
 		icon_state = icon_empty
 	return ..()
 
 /obj/item/ashtray/proc/die()
 	src.visible_message("\red [src] shatters spilling its contents!")
-	for (var/obj/item/clothing/mask/cigarette/O in contents)
+	for (var/obj/item/clothing/mask/smokable/cigarette/O in contents)
 		O.loc = src.loc
 	icon_state = icon_broken
 

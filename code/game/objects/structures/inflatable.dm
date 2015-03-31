@@ -3,7 +3,7 @@
 	desc = "A folded membrane which rapidly expands into a large cubical shape on activation."
 	icon = 'icons/obj/inflatable.dmi'
 	icon_state = "folded_wall"
-	w_class = 3.0
+	w_class = 3
 
 	attack_self(mob/user)
 		playsound(loc, 'sound/items/zip.ogg', 75, 1)
@@ -38,6 +38,9 @@
 	return 0
 
 /obj/structure/inflatable/bullet_act(var/obj/item/projectile/Proj)
+	if(!(Proj.damage_type == BRUTE || Proj.damage_type == BURN))
+		return
+	
 	health -= Proj.damage
 	..()
 	if(health <= 0)
@@ -249,7 +252,8 @@
 	desc = "Contains inflatable walls and doors."
 	icon_state = "inf_box"
 	item_state = "syringe_kit"
-	max_combined_w_class = 21
+	max_storage_space = 28
+	can_hold = list(/obj/item/inflatable)
 
 	New()
 		..()

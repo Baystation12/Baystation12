@@ -21,6 +21,7 @@
 	var/force_wielded = 0
 	var/wieldsound = null
 	var/unwieldsound = null
+	var/base_icon
 
 /obj/item/weapon/twohanded/proc/unwield()
 	wielded = 0
@@ -32,6 +33,10 @@
 	wielded = 1
 	force = force_wielded
 	name = "[initial(name)] (Wielded)"
+	update_icon()
+
+/obj/item/weapon/twohanded/New()
+	..()
 	update_icon()
 
 /obj/item/weapon/twohanded/mob_can_equip(M as mob, slot)
@@ -51,17 +56,23 @@
 	return	unwield()
 
 /obj/item/weapon/twohanded/update_icon()
-	return
+	icon_state = "[base_icon][wielded]"
+	item_state = icon_state
 
 /obj/item/weapon/twohanded/pickup(mob/user)
 	unwield()
 
 /obj/item/weapon/twohanded/attack_self(mob/user as mob)
-	if( istype(user,/mob/living/carbon/monkey) )
-		user << "<span class='warning'>It's too heavy for you to wield fully.</span>"
-		return
 
 	..()
+
+	if(istype(user, /mob/living/carbon/human))
+		var/mob/living/carbon/human/H = user
+		if(H.species.is_small)
+			user << "<span class='warning'>It's too heavy for you to wield fully.</span>"
+			return
+	else
+		return
 
 	if(wielded) //Trying to unwield it
 		unwield()
@@ -106,11 +117,15 @@
 	wield()
 		del(src)
 
+/obj/item/weapon/twohanded/offhand/update_icon()
+	return
+
 /*
  * Fireaxe
  */
 /obj/item/weapon/twohanded/fireaxe  // DEM AXES MAN, marker -Agouri
 	icon_state = "fireaxe0"
+	base_icon = "fireaxe"
 	name = "fire axe"
 	desc = "Truly, the weapon of a madman. Who would think to fight fire with an axe?"
 	force = 10
@@ -120,10 +135,6 @@
 	slot_flags = SLOT_BACK
 	force_wielded = 40
 	attack_verb = list("attacked", "chopped", "cleaved", "torn", "cut")
-
-/obj/item/weapon/twohanded/fireaxe/update_icon()  //Currently only here to fuck with the on-mob icons.
-	icon_state = "fireaxe[wielded]"
-	return
 
 /obj/item/weapon/twohanded/fireaxe/afterattack(atom/A as mob|obj|turf|area, mob/user as mob, proximity)
 	if(!proximity) return
@@ -146,6 +157,7 @@
  */
 /obj/item/weapon/twohanded/dualsaber
 	icon_state = "dualsaber0"
+	base_icon = "dualsaber"
 	name = "double-bladed energy sword"
 	desc = "Handle with care."
 	force = 3
@@ -161,10 +173,6 @@
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	sharp = 1
 	edge = 1
-
-/obj/item/weapon/twohanded/dualsaber/update_icon()
-	icon_state = "dualsaber[wielded]"
-	return
 
 /obj/item/weapon/twohanded/dualsaber/attack(target as mob, mob/living/user as mob)
 	..()
@@ -187,6 +195,7 @@
 //spears, bay edition
 /obj/item/weapon/twohanded/spear
 	icon_state = "spearglass0"
+	base_icon = "spearglass"
 	name = "spear"
 	desc = "A haphazardly-constructed yet still deadly weapon of ancient design."
 	force = 14
@@ -201,6 +210,29 @@
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	attack_verb = list("attacked", "poked", "jabbed", "torn", "gored")
 
-/obj/item/weapon/twohanded/spear/update_icon()
-	icon_state = "spearglass[wielded]"
-	return
+/obj/item/weapon/twohanded/baseballbat
+	name = "wooden bat"
+	desc = "HOME RUN!"
+	icon_state = "woodbat0"
+	base_icon = "woodbat"
+	item_state = "woodbat"
+	sharp = 0
+	edge = 0
+	w_class = 3
+	force = 15
+	throw_speed = 3
+	throw_range = 7
+	throwforce = 7
+	attack_verb = list("smashed", "beaten", "slammed", "smacked", "striked", "battered", "bonked")
+	hitsound = 'sound/weapons/genhit3.ogg'
+	force_wielded = 23
+
+/obj/item/weapon/twohanded/baseballbat/metal
+	name = "metal bat"
+	desc = "A shiny metal bat."
+	icon_state = "metalbat0"
+	base_icon = "metalbat"
+	item_state = "metalbat"
+	force = 18
+	w_class = 3.0
+	force_wielded = 27

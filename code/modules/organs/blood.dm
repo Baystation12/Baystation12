@@ -31,7 +31,7 @@ var/const/BLOOD_VOLUME_SURVIVE = 122
 	for(var/datum/reagent/blood/B in vessel.reagent_list)
 		if(B.id == "blood")
 			B.data = list(	"donor"=src,"viruses"=null,"species"=species.name,"blood_DNA"=dna.unique_enzymes,"blood_colour"= species.blood_color,"blood_type"=dna.b_type,	\
-							"resistances"=null,"trace_chem"=null, "virus2" = null, "antibodies" = null)
+							"resistances"=null,"trace_chem"=null, "virus2" = null, "antibodies" = list())
 			B.color = B.data["blood_colour"]
 
 // Takes care blood loss and regeneration
@@ -282,12 +282,6 @@ proc/blood_splatter(var/target,var/datum/reagent/blood/source,var/large)
 	if(istype(source,/mob/living/carbon/human))
 		var/mob/living/carbon/human/M = source
 		source = M.get_blood(M.vessel)
-	else if(istype(source,/mob/living/carbon/monkey))
-		var/mob/living/carbon/monkey/donor = source
-		if(donor.dna)
-			source = new()
-			source.data["blood_DNA"] = donor.dna.unique_enzymes
-			source.data["blood_type"] = donor.dna.b_type
 
 	// Are we dripping or splattering?
 	var/list/drips = list()

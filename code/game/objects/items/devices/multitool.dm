@@ -20,3 +20,4 @@
 
 	origin_tech = "magnets=1;engineering=1"
 	var/obj/machinery/telecomms/buffer // simple machine buffer for device linkage
+	var/obj/machinery/clonepod/connecting //same for cryopod linkage

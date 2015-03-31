@@ -40,6 +40,9 @@
 	canister_color = "blue"
 	can_label = 0
 
+/obj/machinery/portable_atmospherics/canister/oxygen/prechilled
+	name = "Canister: \[O2 (Cryo)\]"
+
 /obj/machinery/portable_atmospherics/canister/phoron
 	name = "Canister \[Phoron\]"
 	icon_state = "orange"
@@ -73,6 +76,21 @@
 	name = "Canister \[Phoron\]"
 	icon_state = "orange"
 	canister_color = "orange"
+/obj/machinery/portable_atmospherics/canister/empty/nitrogen
+	name = "Canister \[N2\]"
+	icon_state = "red"
+	canister_color = "red"
+/obj/machinery/portable_atmospherics/canister/empty/carbon_dioxide
+	name = "Canister \[CO2\]"
+	icon_state = "black"
+	canister_color = "black"
+/obj/machinery/portable_atmospherics/canister/empty/sleeping_agent
+	name = "Canister \[N2O\]"
+	icon_state = "redws"
+	canister_color = "redws"
+
+
+
 
 /obj/machinery/portable_atmospherics/canister/proc/check_change()
 	var/old_flag = update_flag
@@ -196,9 +214,7 @@ update_flag
 	else
 		can_label = 0
 
-	if(air_contents.temperature > PHORON_FLASHPOINT)
-		air_contents.zburn()
-	return
+	air_contents.react() //cooking up air cans - add phoron and oxygen, then heat above PHORON_MINIMUM_BURN_TEMPERATURE
 
 /obj/machinery/portable_atmospherics/canister/return_air()
 	return air_contents
@@ -221,6 +237,9 @@ update_flag
 	return
 
 /obj/machinery/portable_atmospherics/canister/bullet_act(var/obj/item/projectile/Proj)
+	if(!(Proj.damage_type == BRUTE || Proj.damage_type == BURN))
+		return
+
 	if(Proj.damage)
 		src.health -= round(Proj.damage / 2)
 		healthcheck()
@@ -296,6 +315,7 @@ update_flag
 /obj/machinery/portable_atmospherics/canister/Topic(href, href_list)
 
 	//Do not use "if(..()) return" here, canisters will stop working in unpowered areas like space or on the derelict. // yeah but without SOME sort of Topic check any dick can mess with them via exploits as he pleases -walter0o
+	//First comment might be outdated.
 	if (!istype(src.loc, /turf))
 		return 0
 
@@ -368,6 +388,14 @@ update_flag
 	..()
 
 	src.air_contents.adjust_gas("oxygen", MolesForPressure())
+	src.update_icon()
+	return 1
+
+/obj/machinery/portable_atmospherics/canister/oxygen/prechilled/New()
+	..()
+
+	src.air_contents.adjust_gas("oxygen", MolesForPressure())
+	src.air_contents.temperature = 80
 	src.update_icon()
 	return 1
 

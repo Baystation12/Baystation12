@@ -11,12 +11,30 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 	var/cost = 0
 	var/path = null
 	var/reference = ""
+	var/description = ""
 
-datum/uplink_item/New(var/itemPath, var/itemCost as num, var/itemName as text, var/itemReference as text)
+datum/uplink_item/New(var/itemPath, var/itemCost, var/itemName, var/itemReference, var/itemDescription)
 	cost = itemCost
 	path = itemPath
 	name = itemName
 	reference = itemReference
+	description = itemDescription
+
+datum/uplink_item/proc/description()
+	if(!description)
+		// Fallback description
+		var/obj/temp = src.path
+		description = replacetext(initial(temp.desc), "\n", "<br>")
+	return description
+
+/datum/uplink_item/proc/generate_item(var/newloc)
+	var/list/L = list()
+	if(ispath(path))
+		L += new path(newloc)
+	else if(islist(path))
+		for(var/item_path in path)
+			L += new item_path(newloc)
+	return L
 
 datum/nano_item_lists
 	var/list/items_nano
@@ -41,15 +59,16 @@ datum/nano_item_lists
 	uses = ticker.mode.uplink_uses
 	ItemsCategory = ticker.mode.uplink_items
 
-	var/datum/nano_item_lists/IL = generate_item_lists()
-	nanoui_items = IL.items_nano
-	ItemsReference = IL.items_reference
-
 	world_uplinks += src
 
 /obj/item/device/uplink/Del()
 	world_uplinks -= src
 	..()
+
+/obj/item/device/uplink/proc/generate_items()
+	var/datum/nano_item_lists/IL = generate_item_lists()
+	nanoui_items = IL.items_nano
+	ItemsReference = IL.items_reference
 
 // BS12 no longer use this menu but there are forks that do, hency why we keep it
 /obj/item/device/uplink/proc/generate_menu()
@@ -87,7 +106,7 @@ datum/nano_item_lists
 	for(var/category in ItemsCategory)
 		nano[++nano.len] = list("Category" = category, "items" = list())
 		for(var/datum/uplink_item/I in ItemsCategory[category])
-			nano[nano.len]["items"] += list(list("Name" = I.name, "Cost" = I.cost, "obj_path" = I.reference))
+			nano[nano.len]["items"] += list(list("Name" = I.name, "Description" = I.description(),"Cost" = I.cost, "obj_path" = I.reference))
 			reference[I.reference] = I
 
 	var/datum/nano_item_lists/result = new
@@ -108,6 +127,9 @@ datum/nano_item_lists
 	return pick(random_items)
 
 /obj/item/device/uplink/Topic(href, href_list)
+	if(..())
+		return 1
+
 	if(href_list["buy_item"] == "random")
 		var/datum/uplink_item/UI = chooseRandomItem()
 		href_list["buy_item"] = UI.reference
@@ -123,10 +145,11 @@ datum/nano_item_lists
 		used_TC += UI.cost
 		feedback_add_details("traitor_uplink_items_bought", reference)
 
-		var/obj/I = new UI.path(get_turf(usr))
+		var/list/L = UI.generate_item(get_turf(usr))
 		if(ishuman(usr))
 			var/mob/living/carbon/human/A = usr
-			A.put_in_any_hand_if_possible(I)
+			for(var/obj/I in L)
+				A.put_in_any_hand_if_possible(I)
 
 		purchase_log[UI] = purchase_log[UI] + 1
 
@@ -186,6 +209,8 @@ datum/nano_item_lists
 	data["welcome"] = welcome
 	data["crystals"] = uses
 	data["menu"] = nanoui_menu
+	if(!nanoui_items)
+		generate_items()
 	data["nano_items"] = nanoui_items
 	data += nanoui_data
 
@@ -208,10 +233,10 @@ datum/nano_item_lists
 // The purchasing code.
 /obj/item/device/uplink/hidden/Topic(href, href_list)
 	if (usr.stat || usr.restrained())
-		return
+		return 1
 
 	if (!( istype(usr, /mob/living/carbon/human)))
-		return 0
+		return 1
 	var/mob/user = usr
 	var/datum/nanoui/ui = nanomanager.get_open_ui(user, src, "main")
 	if ((usr.contents.Find(src.loc) || (in_range(src.loc, usr) && istype(src.loc.loc, /turf))))

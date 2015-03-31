@@ -6,7 +6,6 @@
 	unacidable = 1
 
 /obj/effect/landmark/New()
-
 	..()
 	tag = text("landmark*[]", name)
 	invisibility = 101
@@ -28,12 +27,9 @@
 		if("monkey")
 			monkeystart += loc
 			del(src)
+
 		if("start")
 			newplayer_start += loc
-			del(src)
-
-		if("wizard")
-			wizardstart += loc
 			del(src)
 
 		if("JoinLate")
@@ -52,23 +48,25 @@
 			latejoin_cyborg += loc
 			del(src)
 
-		//prisoners
 		if("prisonwarp")
 			prisonwarp += loc
 			del(src)
-	//	if("mazewarp")
-	//		mazewarp += loc
+
 		if("Holding Facility")
 			holdingfacility += loc
+
 		if("tdome1")
-			tdome1	+= loc
+			tdome1 += loc
+
 		if("tdome2")
 			tdome2 += loc
+
 		if("tdomeadmin")
-			tdomeadmin	+= loc
+			tdomeadmin += loc
+
 		if("tdomeobserve")
 			tdomeobserve += loc
-		//not prisoners
+
 		if("prisonsecuritywarp")
 			prisonsecuritywarp += loc
 			del(src)
@@ -79,18 +77,6 @@
 
 		if("xeno_spawn")
 			xeno_spawn += loc
-			del(src)
-
-		if("ninjastart")
-			ninjastart += loc
-			del(src)
-
-		if("voxstart")
-			raider_spawn += loc
-			del(src)
-
-		if("Syndicate-Spawn")
-			synd_spawn += loc
 			del(src)
 
 	landmarks_list += src
@@ -112,6 +98,13 @@
 	invisibility = 101
 
 	return 1
+
+/obj/effect/landmark/start/ninja
+	name = "ninja"
+
+/obj/effect/landmark/start/ninja/New()
+	..()
+	ninjastart += src
 
 //Costume spawner landmarks
 
@@ -144,7 +137,7 @@
 /obj/effect/landmark/costume/elpresidente/New()
 	new /obj/item/clothing/under/gimmick/rank/captain/suit(src.loc)
 	new /obj/item/clothing/head/flatcap(src.loc)
-	new /obj/item/clothing/mask/cigarette/cigar/havana(src.loc)
+	new /obj/item/clothing/mask/smokable/cigarette/cigar/havana(src.loc)
 	new /obj/item/clothing/shoes/jackboots(src.loc)
 	del(src)
 

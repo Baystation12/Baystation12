@@ -360,17 +360,17 @@
 								C << "<span class='notice'>You don't have a[breathes=="oxygen" ? "n oxygen" : addtext(" ",breathes)] tank.</span>"
 		if("act_intent")
 			usr.a_intent_change("right")
-		if("help")
-			usr.a_intent = "help"
+		if(I_HELP)
+			usr.a_intent = I_HELP
 			usr.hud_used.action_intent.icon_state = "intent_help"
-		if("harm")
-			usr.a_intent = "hurt"
+		if(I_HURT)
+			usr.a_intent = I_HURT
 			usr.hud_used.action_intent.icon_state = "intent_hurt"
-		if("grab")
-			usr.a_intent = "grab"
+		if(I_GRAB)
+			usr.a_intent = I_GRAB
 			usr.hud_used.action_intent.icon_state = "intent_grab"
-		if("disarm")
-			usr.a_intent = "disarm"
+		if(I_DISARM)
+			usr.a_intent = I_DISARM
 			usr.hud_used.action_intent.icon_state = "intent_disarm"
 
 		if("pull")

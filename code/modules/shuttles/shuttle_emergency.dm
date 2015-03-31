@@ -221,7 +221,7 @@
 
 /obj/machinery/computer/shuttle_control/emergency/Topic(href, href_list)
 	if(..())
-		return
+		return 1
 
 	if(href_list["removeid"])
 		var/dna_hash = href_list["removeid"]

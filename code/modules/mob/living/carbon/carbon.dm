@@ -1,6 +1,8 @@
 /mob/living/carbon/Life()
 	..()
 
+	handle_viruses()
+
 	// Increase germ_level regularly
 	if(germ_level < GERM_LEVEL_AMBIENT && prob(30))	//if you're just standing there, you shouldn't get more germs beyond an ambient level
 		germ_level++
@@ -19,12 +21,11 @@
 		if(germ_level < GERM_LEVEL_MOVE_CAP && prob(8))
 			germ_level++
 
-/mob/living/carbon/relaymove(var/mob/user, direction)
-	if(user in src.stomach_contents)
-		if(prob(40))
-			for(var/mob/M in hearers(4, src))
-				if(M.client)
-					M.show_message(text("\red You hear something rumbling inside [src]'s stomach..."), 2)
+/mob/living/carbon/relaymove(var/mob/living/user, direction)
+	if((user in src.stomach_contents) && istype(user))
+		if(user.last_special <= world.time)
+			user.last_special = world.time + 50
+			src.visible_message("<span class='danger'>You hear something rumbling inside [src]'s stomach...</span>")
 			var/obj/item/I = user.get_active_hand()
 			if(I && I.force)
 				var/d = rand(round(I.force / 4), I.force)
@@ -38,9 +39,7 @@
 					H.updatehealth()
 				else
 					src.take_organ_damage(d)
-				for(var/mob/M in viewers(user, null))
-					if(M.client)
-						M.show_message(text("\red <B>[user] attacks [src]'s stomach wall with the [I.name]!"), 2)
+				user.visible_message("<span class='danger'>[user] attacks [src]'s stomach wall with the [I.name]!</span>")
 				playsound(user.loc, 'sound/effects/attackblob.ogg', 50, 1)
 
 				if(prob(src.getBruteLoss() - 50))
@@ -190,6 +189,29 @@
 				src.show_message(text("\t []My [] is [].",status=="OK"?"\blue ":"\red ",org.display_name,status),1)
 			if((SKELETON in H.mutations) && (!H.w_uniform) && (!H.wear_suit))
 				H.play_xylophone()
+		else if (on_fire)
+			playsound(src.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
+			if (M.on_fire)
+				M.visible_message("<span class='warning'>[M] tries to pat out [src]'s flames, but to no avail!</span>", \
+				"<span class='warning'>You try to pat out [src]'s flames, but to no avail! Put yourself out first!</span>")
+			else
+				M.visible_message("<span class='warning'>[M] tries to pat out [src]'s flames!</span>", \
+				"<span class='warning'>You try to pat out [src]'s flames! Hot!</span>")
+				if(do_mob(M, src, 15))
+					if (prob(10) && (M.fire_stacks <= 0))
+						src.fire_stacks -= 2
+						M.fire_stacks += 1
+					M.IgniteMob()
+					if (M.on_fire)
+						M.visible_message("<span class='danger'>The fire spreads from [src] to [M]!</span>", \
+						"<span class='danger'>The fire spreads to you as well!</span>")
+					else
+						src.fire_stacks -= 3 //Less effective than stop, drop, and roll
+						if (src.fire_stacks <= 0)
+							M.visible_message("<span class='warning'>[M] successfully pats out [src]'s flames.</span>", \
+							"<span class='warning'>You successfully pat out [src]'s flames.</span>")
+							src.ExtinguishMob()
+							src.fire_stacks = 0
 		else
 			var/t_him = "it"
 			if (src.gender == MALE)
@@ -216,7 +238,11 @@
 				else
 					M.visible_message("<span class='notice'>[M] hugs [src] to make [t_him] feel better!</span>", \
 								"<span class='notice'>You hug [src] to make [t_him] feel better!</span>")
-
+				if(M.fire_stacks >= (src.fire_stacks + 3))
+					src.fire_stacks += 1
+					M.fire_stacks -= 1
+				if(M.on_fire)
+					src.IgniteMob()
 			AdjustParalysis(-3)
 			AdjustStunned(-3)
 			AdjustWeakened(-3)
@@ -332,7 +358,7 @@
 /mob/living/carbon/can_use_hands()
 	if(handcuffed)
 		return 0
-	if(buckled && ! istype(buckled, /obj/structure/stool/bed/chair)) // buckling does not restrict hands
+	if(buckled && ! istype(buckled, /obj/structure/bed/chair)) // buckling does not restrict hands
 		return 0
 	return 1
 
@@ -347,6 +373,8 @@
 	else if (W == handcuffed)
 		handcuffed = null
 		update_inv_handcuffed()
+		if(buckled && buckled.buckle_require_restraints)
+			buckled.unbuckle_mob()
 
 	else if (W == legcuffed)
 		legcuffed = null
@@ -407,102 +435,12 @@
 	if(alert(src,"You sure you want to sleep for a while?","Sleep","Yes","No") == "Yes")
 		usr.sleeping = 20 //Short nap
 
-/mob/living/carbon/Bump(atom/movable/AM as mob|obj, yes)
-
-	spawn( 0 )
-		if ((!( yes ) || now_pushing))
-			return
-		now_pushing = 1
-		if(ismob(AM))
-			var/mob/tmob = AM
-
-			if( istype(tmob, /mob/living/carbon) && prob(10) )
-				src.spread_disease_to(AM, "Contact")
-
-			if(istype(tmob, /mob/living/carbon/human))
-
-				if(HULK in tmob.mutations)
-					if(prob(70))
-						usr << "\red <B>You fail to push [tmob]'s fat ass out of the way.</B>"
-						now_pushing = 0
-						return
-				if(!(tmob.status_flags & CANPUSH))
-					now_pushing = 0
-					return
-
-				for(var/mob/M in range(tmob, 1))
-					if(tmob.pinned.len ||  ((M.pulling == tmob && ( tmob.restrained() && !( M.restrained() ) && M.stat == 0)) || locate(/obj/item/weapon/grab, tmob.grabbed_by.len)) )
-						if ( !(world.time % 5) )
-							src << "\red [tmob] is restrained, you cannot push past"
-						now_pushing = 0
-						return
-					if( tmob.pulling == M && ( M.restrained() && !( tmob.restrained() ) && tmob.stat == 0) )
-						if ( !(world.time % 5) )
-							src << "\red [tmob] is restraining [M], you cannot push past"
-						now_pushing = 0
-						return
-
-			//Leaping mobs just land on the tile, no pushing, no anything.
-			if(status_flags & LEAPING)
-				loc = tmob.loc
-				status_flags &= ~LEAPING
-				now_pushing = 0
-				return
-
-			// Step over drones.
-			// I have no idea why the hell this isn't already happening. How do mice do it?
-			if(istype(tmob,/mob/living/silicon/robot/drone))
-				loc = tmob.loc
-				now_pushing = 0
-				return
-
-			if((tmob.a_intent == "help" || tmob.restrained()) && (a_intent == "help" || src.restrained()) && tmob.canmove && !tmob.buckled && canmove) // mutual brohugs all around!
-				var/turf/oldloc = loc
-				loc = tmob.loc
-				tmob.loc = oldloc
-				now_pushing = 0
-				for(var/mob/living/carbon/slime/slime in view(1,tmob))
-					if(slime.Victim == tmob)
-						slime.UpdateFeed()
-				return
-
-			if(istype(tmob, /mob/living/carbon/human) && (FAT in tmob.mutations))
-				if(prob(40) && !(FAT in src.mutations))
-					src << "\red <B>You fail to push [tmob]'s fat ass out of the way.</B>"
-					now_pushing = 0
-					return
-			if(tmob.r_hand && istype(tmob.r_hand, /obj/item/weapon/shield/riot))
-				if(prob(99))
-					now_pushing = 0
-					return
-			if(tmob.l_hand && istype(tmob.l_hand, /obj/item/weapon/shield/riot))
-				if(prob(99))
-					now_pushing = 0
-					return
-			if(!(tmob.status_flags & CANPUSH))
-				now_pushing = 0
-				return
-
-			tmob.LAssailant = src
-
-		now_pushing = 0
-		..()
-		if (!( istype(AM, /atom/movable) ))
-			return
-		if (!( now_pushing ))
-			now_pushing = 1
-			if (!( AM.anchored ))
-				var/t = get_dir(src, AM)
-				if (istype(AM, /obj/structure/window))
-					var/obj/structure/window/W = AM
-					if(W.is_full_window())
-						for(var/obj/structure/window/win in get_step(AM,t))
-							now_pushing = 0
-							return
-				step(AM, t)
-			now_pushing = 0
+/mob/living/carbon/Bump(var/atom/movable/AM, yes)
+	if(now_pushing || !yes)
 		return
-	return
+	..()
+	if(istype(AM, /mob/living/carbon) && prob(10))
+		src.spread_disease_to(AM, "Contact")
 
 /mob/living/carbon/can_use_vents()
 	return
@@ -516,3 +454,8 @@
 	Stun(stun_duration)
 	Weaken(Floor(stun_duration/2))
 	return 1
+
+/mob/living/carbon/get_default_language()
+	if(!species)
+		return null
+	return species.default_language ? all_languages[species.default_language] : null

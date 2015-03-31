@@ -42,6 +42,8 @@
 	breath_type = null
 	poison_type = null
 
+	vision_flags = SEE_MOBS
+
 	has_organ = list(
 		"heart" =           /datum/organ/internal/heart,
 		"brain" =           /datum/organ/internal/brain/xeno,
@@ -49,6 +51,10 @@
 		"hive node" =       /datum/organ/internal/xenos/hivenode,
 		"nutrient vessel" = /datum/organ/internal/diona/nutrients
 		)
+
+	bump_flag = ALIEN
+	swap_flags = ALLMOBS
+	push_flags = ALLMOBS ^ ROBOT
 
 	var/alien_number = 0
 	var/caste_name = "creature" // Used to update alien name.

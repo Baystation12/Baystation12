@@ -70,25 +70,8 @@
 		var/laws
 		dat += "Stored AI: [src.occupant.name]<br>System integrity: [src.occupant.system_integrity()]%<br>"
 
-		for (var/law in occupant.laws.ion)
-			if(law)
-				laws += "[ionnum()]: [law]<BR>"
-
-		if (src.occupant.laws.zeroth)
-			laws += "0: [occupant.laws.zeroth]<BR>"
-
-		var/number = 1
-		for (var/index = 1, index <= occupant.laws.inherent.len, index++)
-			var/law = occupant.laws.inherent[index]
-			if (length(law) > 0)
-				laws += "[number]: [law]<BR>"
-				number++
-
-		for (var/index = 1, index <= occupant.laws.supplied.len, index++)
-			var/law = occupant.laws.supplied[index]
-			if (length(law) > 0)
-				laws += "[number]: [law]<BR>"
-				number++
+		for (var/datum/ai_law/law in occupant.laws.all_laws())
+			laws += "[law.get_index()]: [law.law]<BR>"
 
 		dat += "Laws:<br>[laws]<br>"
 
@@ -113,7 +96,7 @@
 
 /obj/machinery/computer/aifixer/Topic(href, href_list)
 	if(..())
-		return
+		return 1
 	if (href_list["fix"])
 		src.active = 1
 		src.overlays += image('icons/obj/computer.dmi', "ai-fixer-on")

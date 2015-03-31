@@ -3,6 +3,8 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 /datum/job/captain
 	title = "Captain"
 	flag = CAPTAIN
+	department = "Command"
+	head_position = 1
 	department_flag = ENGSEC
 	faction = "Station"
 	total_positions = 1
@@ -24,7 +26,7 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 		H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H.back), slot_in_backpack)
 		var/obj/item/clothing/under/U = new /obj/item/clothing/under/rank/captain(H)
 		if(H.age>49)
-			U.hastie = new /obj/item/clothing/tie/medal/gold/captain(U)
+			U.accessories += new /obj/item/clothing/accessory/medal/gold/captain(U)
 		H.equip_to_slot_or_del(U, slot_w_uniform)
 		H.equip_to_slot_or_del(new /obj/item/device/pda/captain(H), slot_belt)
 		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/brown(H), slot_shoes)
@@ -50,6 +52,8 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 /datum/job/hop
 	title = "Head of Personnel"
 	flag = HOP
+	department = "Civilian"
+	head_position = 1
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 1

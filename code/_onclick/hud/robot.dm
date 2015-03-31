@@ -57,7 +57,7 @@ var/obj/screen/robot_inventory
 	using.name = "act_intent"
 	using.set_dir(SOUTHWEST)
 	using.icon = 'icons/mob/screen1_robot.dmi'
-	using.icon_state = (mymob.a_intent == "hurt" ? "harm" : mymob.a_intent)
+	using.icon_state = (mymob.a_intent == I_HURT ? I_HURT : mymob.a_intent)
 	using.screen_loc = ui_acti
 	using.layer = 20
 	src.adding += using
@@ -157,7 +157,7 @@ var/obj/screen/robot_inventory
 		if (mymob.client.gun_mode) // If in aim mode, correct the sprite
 			mymob.gun_setting_icon.set_dir(2)
 	for(var/obj/item/weapon/gun/G in mymob) // If targeting someone, display other buttons
-		if (G.target)
+		if (G.aim_targets)
 			mymob.item_use_icon = new /obj/screen/gun/item(null)
 			if (mymob.client.target_can_click)
 				mymob.item_use_icon.set_dir(1)

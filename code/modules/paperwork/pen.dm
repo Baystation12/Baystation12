@@ -130,10 +130,40 @@
 	if(new_signature)
 		signature = new_signature
 	*/
-	signature = trim_strip_html_properly(input("Enter new signature. Leave blank for 'Anonymous'", "New Signature", signature))
+	signature = sanitize(input("Enter new signature. Leave blank for 'Anonymous'", "New Signature", signature))
 
 /obj/item/weapon/pen/proc/get_signature(var/mob/user)
 	return (user && user.real_name) ? user.real_name : "Anonymous"
 
 /obj/item/weapon/pen/chameleon/get_signature(var/mob/user)
 	return signature ? signature : "Anonymous"
+
+/obj/item/weapon/pen/chameleon/verb/set_colour()
+	set name = "Change Pen Colour"
+	set category = "Object"
+
+	var/list/possible_colours = list ("Yellow", "Green", "Pink", "Blue", "Orange", "Cyan", "Red", "Invisible", "Black")
+	var/selected_type = input("Pick new colour.", "Pen Colour", null, null) as null|anything in possible_colours
+
+	if(selected_type)
+		switch(selected_type)
+			if("Yellow")
+				colour = COLOR_YELLOW
+			if("Green")
+				colour = COLOR_GREEN
+			if("Pink")
+				colour = COLOR_PINK
+			if("Blue")
+				colour = COLOR_BLUE
+			if("Orange")
+				colour = COLOR_ORANGE
+			if("Cyan")
+				colour = COLOR_CYAN
+			if("Red")
+				colour = COLOR_RED
+			if("Invisible")
+				colour = COLOR_WHITE
+			else
+				colour = COLOR_BLACK
+		usr << "<span class='info'>You select the [lowertext(selected_type)] ink container.</span>"
+

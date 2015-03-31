@@ -63,8 +63,8 @@
 		var/tie_msg
 		if(istype(w_uniform,/obj/item/clothing/under))
 			var/obj/item/clothing/under/U = w_uniform
-			if(U.hastie)
-				tie_msg += " with \icon[U.hastie] \a [U.hastie]"
+			if(U.accessories.len)
+				tie_msg += ". Attached to it is [lowertext(english_list(U.accessories))]"
 
 		if(w_uniform.blood_DNA)
 			msg += "<span class='warning'>[t_He] [t_is] wearing \icon[w_uniform] [w_uniform.gender==PLURAL?"some":"a"] [(w_uniform.blood_color != "#030303") ? "blood" : "oil"]-stained [w_uniform.name][tie_msg]!</span>\n"
@@ -130,6 +130,10 @@
 			msg += "<span class='warning'>[t_He] [t_is] \icon[handcuffed] restrained with cable!</span>\n"
 		else
 			msg += "<span class='warning'>[t_He] [t_is] \icon[handcuffed] handcuffed!</span>\n"
+
+	//buckled
+	if(buckled)
+		msg += "<span class='warning'>[t_He] [t_is] \icon[buckled] buckled to [buckled]!</span>\n"
 
 	//belt
 	if(belt)
@@ -209,7 +213,7 @@
 		distance = 1
 	if (src.stat)
 		msg += "<span class='warning'>[t_He] [t_is]n't responding to anything around [t_him] and seems to be asleep.</span>\n"
-		if((stat == 2 || src.health < config.health_threshold_crit) && distance <= 3)
+		if((stat == 2 || src.losebreath) && distance <= 3)
 			msg += "<span class='warning'>[t_He] does not appear to be breathing.</span>\n"
 		if(istype(usr, /mob/living/carbon/human) && !usr.stat && Adjacent(usr))
 			usr.visible_message("<b>[usr]</b> checks [src]'s pulse.", "You check [src]'s pulse.")
@@ -219,7 +223,10 @@
 					usr << "<span class='deadsay'>[t_He] has no pulse[src.client ? "" : " and [t_his] soul has departed"]...</span>"
 				else
 					usr << "<span class='deadsay'>[t_He] has a pulse!</span>"
-
+	if(fire_stacks)
+		msg += "[t_He] [t_is] covered in some liquid.\n"
+	if(on_fire)
+		msg += "<span class='warning'>[t_He] [t_is] on fire!.</span>\n"
 	msg += "<span class='warning'>"
 
 	if(nutrition < 100)
@@ -235,7 +242,7 @@
 	if(getBrainLoss() >= 60)
 		msg += "[t_He] [t_has] a stupid expression on [t_his] face.\n"
 
-	if((!species.has_organ["brain"] || has_brain()) && stat != DEAD)
+	if(species.show_ssd && (!species.has_organ["brain"] || has_brain()) && stat != DEAD)
 		if(!key)
 			msg += "<span class='deadsay'>[t_He] [t_is] fast asleep. It doesn't look like they are waking up anytime soon.</span>\n"
 		else if(!client)

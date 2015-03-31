@@ -136,7 +136,7 @@
 		return
 
 	//Is the usr's mob type able to do this?
-	if(ishuman(usr) || ismonkey(usr) || isrobot(usr))
+	if(ishuman(usr) || issmall(usr) || isrobot(usr))
 
 		//Removing from inventory
 		if(href_list["remove_inv"])
@@ -215,7 +215,7 @@
 /mob/living/simple_animal/parrot/attack_hand(mob/living/carbon/M as mob)
 	..()
 	if(client) return
-	if(!stat && M.a_intent == "hurt")
+	if(!stat && M.a_intent == I_HURT)
 
 		icon_state = "parrot_fly" //It is going to be flying regardless of whether it flees or attacks
 
@@ -607,7 +607,7 @@
 			stolen_item = C.r_hand
 
 		if(stolen_item)
-			C.u_equip(stolen_item)
+			C.remove_from_mob(stolen_item)
 			held_item = stolen_item
 			stolen_item.loc = src
 			visible_message("[src] grabs the [held_item] out of [C]'s hand!", "\blue You snag the [held_item] out of [C]'s hand!", "You hear the sounds of wings flapping furiously.")

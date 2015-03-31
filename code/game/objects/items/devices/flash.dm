@@ -2,7 +2,7 @@
 	name = "flash"
 	desc = "Used for blinding and being an asshole."
 	icon_state = "flash"
-	item_state = "flashbang"	//looks exactly like a flash (and nothing like a flashbang)
+	item_state = "flash"
 	throwforce = 5
 	w_class = 2.0
 	throw_speed = 4
@@ -70,7 +70,7 @@
 			flick("e_flash", M.flash)
 
 			if(ishuman(M) && ishuman(user) && M.stat!=DEAD)
-				if(user.mind && user.mind in ticker.mode.head_revolutionaries && ticker.mode.name == "revolution")
+				if(user.mind && user.mind in revs.head_revolutionaries)
 					var/revsafe = 0
 					for(var/obj/item/weapon/implant/loyalty/L in M)
 						if(L && L.implanted)
@@ -81,7 +81,7 @@
 						revsafe = 2
 					if(!revsafe)
 						M.mind.has_been_rev = 1
-						ticker.mode.add_revolutionary(M.mind)
+						revs.add_antagonist(M.mind)
 					else if(revsafe == 1)
 						user << "<span class='warning'>Something seems to be blocking the flash!</span>"
 					else

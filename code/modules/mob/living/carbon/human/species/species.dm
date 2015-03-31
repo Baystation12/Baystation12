@@ -12,6 +12,12 @@
 	// Icon/appearance vars.
 	var/icobase = 'icons/mob/human_races/r_human.dmi'    // Normal icon set.
 	var/deform = 'icons/mob/human_races/r_def_human.dmi' // Mutated icon set.
+
+	// Damage overlay and masks.
+	var/damage_overlays = 'icons/mob/human_races/masks/dam_human.dmi'
+	var/damage_mask = 'icons/mob/human_races/masks/dam_mask_human.dmi'
+	var/blood_mask = 'icons/mob/human_races/masks/blood_human.dmi'
+
 	var/prone_icon                                       // If set, draws this from icobase when mob is prone.
 	var/eyes = "eyes_s"                                  // Icon for eyes.
 	var/blood_color = "#A10808"                          // Red.
@@ -20,6 +26,8 @@
 	var/tail                                             // Name of tail image in species effects icon file.
 	var/race_key = 0       	                             // Used for mob icon cache string.
 	var/icon/icon_template                               // Used for mob icon generation for non-32x32 species.
+	var/is_small
+	var/show_ssd = 1
 
 	// Language/culture vars.
 	var/default_language = "Galactic Common" // Default language is used when 'say' is used without modifiers.
@@ -35,10 +43,12 @@
 		/datum/unarmed_attack/bite
 		)
 	var/list/unarmed_attacks = null          // For empty hand harm-intent attack
-	var/brute_mod = null                     // Physical damage reduction/malus.
-	var/burn_mod = null                      // Burn damage reduction/malus.
+	var/brute_mod = 1                        // Physical damage multiplier.
+	var/burn_mod = 1                         // Burn damage multiplier.
+	var/vision_flags = 0                     // Same flags as glasses.
 
 	// Death vars.
+	var/meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat/human
 	var/gibber_type = /obj/effect/gibspawner/human
 	var/remains_type = /obj/effect/decal/remains/xeno
 	var/gibbed_anim = "gibbed-h"
@@ -56,7 +66,7 @@
 	var/cold_level_3 = 120                            // Cold damage level 3 below this point.
 	var/heat_level_1 = 360                            // Heat damage level 1 above this point.
 	var/heat_level_2 = 400                            // Heat damage level 2 above this point.
-	var/heat_level_3 = 1000                           // Heat damage level 2 above this point.
+	var/heat_level_3 = 1000                           // Heat damage level 3 above this point.
 	var/synth_temp_gain = 0			                  // IS_SYNTHETIC species will gain this much temperature every second
 	var/hazard_high_pressure = HAZARD_HIGH_PRESSURE   // Dangerously high pressure.
 	var/warning_high_pressure = WARNING_HIGH_PRESSURE // High pressure warning.
@@ -65,6 +75,20 @@
 	var/light_dam                                     // If set, mob will be damaged in light over this value and heal in light below its negative.
 	var/body_temperature = 310.15	                  // Non-IS_SYNTHETIC species will try to stabilize at this temperature.
 	                                                  // (also affects temperature processing)
+
+	var/heat_discomfort_level = 315                   // Aesthetic messages about feeling warm.
+	var/cold_discomfort_level = 285                   // Aesthetic messages about feeling chilly.
+	var/list/heat_discomfort_strings = list(
+		"You feel sweat drip down your neck.",
+		"You feel uncomfortably warm.",
+		"Your skin prickles in the heat."
+		)
+	var/list/cold_discomfort_strings = list(
+		"You feel chilly.",
+		"You shiver suddely.",
+		"Your chilly flesh stands out in goosebumps."
+		)
+
 	// HUD data vars.
 	var/datum/hud_data/hud
 	var/hud_type
@@ -76,7 +100,8 @@
 	var/darksight = 2             // Native darksight distance.
 	var/flags = 0                 // Various specific features.
 	var/slowdown = 0              // Passive movement speed malus (or boost, if negative)
-	var/primitive                 // Lesser form, if any (ie. monkey for humans)
+	var/primitive_form            // Lesser form, if any (ie. monkey for humans)
+	var/greater_form              // Greater form, if any, ie. human for monkeys.
 	var/gluttonous                // Can eat some mobs. 1 for monkeys, 2 for people.
 	var/rarity_value = 1          // Relative rarity/collector value for this species.
 	                              // Determines the organs that the species spawns with and
@@ -90,6 +115,11 @@
 		"eyes" =     /datum/organ/internal/eyes
 		)
 
+	// Bump vars
+	var/bump_flag = HUMAN		// What are we considered to be when bumped?
+	var/push_flags = ALLMOBS	// What can we push?
+	var/swap_flags = ALLMOBS	// What can we swap place with?
+
 /datum/species/New()
 	if(hud_type)
 		hud = new hud_type()
@@ -99,6 +129,27 @@
 	unarmed_attacks = list()
 	for(var/u_type in unarmed_types)
 		unarmed_attacks += new u_type()
+
+/datum/species/proc/get_environment_discomfort(var/mob/living/carbon/human/H, var/msg_type)
+
+	if(!prob(5))
+		return
+
+	var/covered = 0 // Basic coverage can help.
+	for(var/obj/item/clothing/clothes in H)
+		if(H.l_hand == clothes|| H.r_hand == clothes)
+			continue
+		if((clothes.body_parts_covered & UPPER_TORSO) && (clothes.body_parts_covered & LOWER_TORSO))
+			covered = 1
+			break
+
+	switch(msg_type)
+		if("cold")
+			if(!covered)
+				H << "<span class='danger'>[pick(cold_discomfort_strings)]</span>"
+		if("heat")
+			if(covered)
+				H << "<span class='danger'>[pick(heat_discomfort_strings)]</span>"
 
 /datum/species/proc/get_random_name(var/gender)
 	var/datum/language/species_language = all_languages[language]
@@ -204,7 +255,7 @@
 // Called when using the shredding behavior.
 /datum/species/proc/can_shred(var/mob/living/carbon/human/H, var/ignore_intent)
 
-	if(!ignore_intent && H.a_intent != "hurt")
+	if(!ignore_intent && H.a_intent != I_HURT)
 		return 0
 
 	for(var/datum/unarmed_attack/attack in unarmed_attacks)
@@ -215,3 +266,6 @@
 
 	return 0
 
+// Called in life() when the mob has no client.
+/datum/species/proc/handle_npc(var/mob/living/carbon/human/H)
+	return

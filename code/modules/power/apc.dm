@@ -44,6 +44,9 @@
 /obj/machinery/power/apc/super
 	cell_type = /obj/item/weapon/cell/super
 
+/obj/machinery/power/apc/super/equipment
+	equipment = 2
+
 /obj/machinery/power/apc/hyper
 	cell_type = /obj/item/weapon/cell/hyper
 
@@ -167,24 +170,17 @@
 			src.update()
 
 /obj/machinery/power/apc/Del()
-	if(malfai && operating)
-		if (ticker.mode.config_tag == "malfunction")
-			if (src.z in config.station_levels) //if (is_type_in_list(get_area(src), the_station_areas))
-				ticker.mode:apcs--
+	if(operating && malf && src.z in config.station_levels) //if (is_type_in_list(get_area(src), the_station_areas))
+		malf.hacked_apcs -= src
 	area.power_light = 0
 	area.power_equip = 0
 	area.power_environ = 0
 	area.power_change()
-	if(occupier)
-		malfvacate(1)
 	del(wires)
 	if(cell)
 		del(cell) // qdel
 	if(terminal)
 		disconnect_terminal()
-
-	//If there's no more APC then there shouldn't be a cause for alarm I guess
-	area.poweralert(1, src) //so that alarms don't go on forever
 
 	..()
 
@@ -538,7 +534,8 @@
 					var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 					s.set_up(5, 1, src)
 					s.start()
-					return
+					if(user.stunned)
+						return
 				C.use(10)
 				user.visible_message(\
 					"<span class='warning'>[user.name] has added cables to the APC frame!</span>",\
@@ -558,7 +555,8 @@
 					var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 					s.set_up(5, 1, src)
 					s.start()
-					return
+					if(usr.stunned)
+						return
 				new /obj/item/stack/cable_coil(loc,10)
 				user << "<span class='notice'>You cut the cables and dismantle the power terminal.</span>"
 				del(terminal) // qdel
@@ -660,7 +658,7 @@
 	if(istype(user,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = user
 
-		if(H.species.flags & IS_SYNTHETIC && H.a_intent == "grab")
+		if(H.species.flags & IS_SYNTHETIC && H.a_intent == I_GRAB)
 			if(emagged || stat & BROKEN)
 				var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 				s.set_up(3, 1, src)
@@ -724,6 +722,11 @@
 	// do APC interaction
 	src.interact(user)
 
+/obj/machinery/power/apc/attack_ghost(user as mob)
+	if(stat & (BROKEN|MAINT))
+		return
+	return ui_interact(user)
+
 /obj/machinery/power/apc/interact(mob/user)
 	if(!user)
 		return
@@ -735,7 +738,7 @@
 
 
 /obj/machinery/power/apc/proc/get_malf_status(mob/user)
-	if (ticker && ticker.mode && (user.mind in ticker.mode.malf_ai) && istype(user, /mob/living/silicon/ai))
+	if (malf && (user.mind in malf.current_antagonists) && istype(user, /mob/living/silicon/ai))
 		if (src.malfai == (user:parent ? user:parent : user))
 			if (src.occupier == user)
 				return 3 // 3 = User is shunted in this APC
@@ -942,23 +945,12 @@
 					malfai.malfhack = null
 					malfai.malfhacking = 0
 					locked = 1
-					if (ticker.mode.config_tag == "malfunction")
-						if (src.z in config.station_levels) //if (is_type_in_list(get_area(src), the_station_areas))
-							ticker.mode:apcs++
 					if(usr:parent)
 						src.malfai = usr:parent
 					else
 						src.malfai = usr
 					malfai << "Hack complete. The APC is now under your exclusive control."
 					update_icon()
-
-	else if (href_list["occupyapc"])
-		if(get_malf_status(usr))
-			malfoccupy(usr)
-
-	else if (href_list["deoccupyapc"])
-		if(get_malf_status(usr))
-			malfvacate()
 
 	else if (href_list["toggleaccess"])
 		if(istype(usr, /mob/living/silicon))
@@ -972,72 +964,8 @@
 
 /obj/machinery/power/apc/proc/toggle_breaker()
 	operating = !operating
-
-	if(malfai)
-		if (ticker.mode.config_tag == "malfunction")
-			if (src.z in config.station_levels) //if (is_type_in_list(get_area(src), the_station_areas))
-				operating ? ticker.mode:apcs++ : ticker.mode:apcs--
-
 	src.update()
 	update_icon()
-
-/obj/machinery/power/apc/proc/malfoccupy(var/mob/living/silicon/ai/malf)
-	return
-
-	if(!istype(malf))
-		return
-	if(istype(malf.loc, /obj/machinery/power/apc)) // Already in an APC
-		malf << "<span class='warning'>You must evacuate your current apc first.</span>"
-		return
-	/*if(!malf.can_shunt)
-		malf << "<span class='warning'>You cannot shunt.</span>"
-		return*/
-	if(isNotStationLevel(src.z))
-		return
-	src.occupier = new /mob/living/silicon/ai(src,malf.laws,null,1)
-	src.occupier.adjustOxyLoss(malf.getOxyLoss())
-	if(!findtext(src.occupier.name,"APC Copy"))
-		src.occupier.name = "[malf.name] APC Copy"
-	if(malf.parent)
-		src.occupier.parent = malf.parent
-	else
-		src.occupier.parent = malf
-	malf.mind.transfer_to(src.occupier)
-	src.occupier.eyeobj.name = "[src.occupier.name] (AI Eye)"
-	if(malf.parent)
-		del(malf) // qdel
-	// src.occupier.verbs += /mob/living/silicon/ai/proc/corereturn
-	src.occupier.verbs += /datum/game_mode/malfunction/proc/takeover
-	src.occupier.cancel_camera()
-	if (seclevel2num(get_security_level()) == SEC_LEVEL_DELTA)
-		for(var/obj/item/weapon/pinpointer/point in world)
-			point.the_disk = src //the pinpointer will detect the shunted AI
-
-
-/obj/machinery/power/apc/proc/malfvacate(var/forced)
-	if(!src.occupier)
-		return
-	if(src.occupier.parent && src.occupier.parent.stat != 2)
-		src.occupier.mind.transfer_to(src.occupier.parent)
-		src.occupier.parent.adjustOxyLoss(src.occupier.getOxyLoss())
-		src.occupier.parent.cancel_camera()
-		del(src.occupier) // qdel
-		if (seclevel2num(get_security_level()) == SEC_LEVEL_DELTA)
-			for(var/obj/item/weapon/pinpointer/point in world)
-				for(var/datum/mind/AI_mind in ticker.mode.malf_ai)
-					var/mob/living/silicon/ai/A = AI_mind.current // the current mob the mind owns
-					if(A.stat != DEAD)
-						point.the_disk = A //The pinpointer tracks the AI back into its core.
-
-	else
-		src.occupier << "<span class='danger'>Primary core damaged, unable to return core processes.</span>"
-		if(forced)
-			src.occupier.loc = src.loc
-			src.occupier.death()
-			src.occupier.gib()
-			for(var/obj/item/weapon/pinpointer/point in world)
-				point.the_disk = null //the pinpointer will go back to pointing at the nuke disc.
-
 
 /obj/machinery/power/apc/proc/ion_act()
 	//intended to be exactly the same as an AI malf attack
@@ -1190,7 +1118,7 @@
 		equipment = autoset(equipment, 0)
 		lighting = autoset(lighting, 0)
 		environ = autoset(environ, 0)
-		area.poweralert(0, src)
+		power_alarm.triggerAlarm(loc, src)
 		autoflag = 0
 
 	// update icon & area power if anything changed
@@ -1213,29 +1141,27 @@
 			lighting = autoset(lighting, 1)
 			environ = autoset(environ, 1)
 			autoflag = 3
-			area.poweralert(1, src)
-			if(cell.charge >= 4000)
-				area.poweralert(1, src)
+			power_alarm.clearAlarm(loc, src)
 	else if((cell.percent() <= 30) && (cell.percent() > 15) && longtermpower < 0)                       // <30%, turn off equipment
 		if(autoflag != 2)
 			equipment = autoset(equipment, 2)
 			lighting = autoset(lighting, 1)
 			environ = autoset(environ, 1)
-			area.poweralert(0, src)
+			power_alarm.triggerAlarm(loc, src)
 			autoflag = 2
 	else if(cell.percent() <= 15)        // <15%, turn off lighting & equipment
 		if((autoflag > 1 && longtermpower < 0) || (autoflag > 1 && longtermpower >= 0))
 			equipment = autoset(equipment, 2)
 			lighting = autoset(lighting, 2)
 			environ = autoset(environ, 1)
-			area.poweralert(0, src)
+			power_alarm.triggerAlarm(loc, src)
 			autoflag = 1
 	else                                   // zero charge, turn all off
 		if(autoflag != 0)
 			equipment = autoset(equipment, 0)
 			lighting = autoset(lighting, 0)
 			environ = autoset(environ, 0)
-			area.poweralert(0, src)
+			power_alarm.triggerAlarm(loc, src)
 			autoflag = 0
 
 // val 0=off, 1=off(auto) 2=on 3=on(auto)
@@ -1309,10 +1235,6 @@ obj/machinery/power/apc/proc/autoset(var/val, var/on)
 		terminal = null
 
 /obj/machinery/power/apc/proc/set_broken()
-	if(malfai && operating)
-		if (ticker.mode.config_tag == "malfunction")
-			if (src.z in config.station_levels) //if (is_type_in_list(get_area(src), the_station_areas))
-				ticker.mode:apcs--
 	// Aesthetically much better!
 	src.visible_message("<span class='notice'>[src]'s screen flickers with warnings briefly!</span>")
 	spawn(rand(2,5))
@@ -1321,8 +1243,6 @@ obj/machinery/power/apc/proc/autoset(var/val, var/on)
 		operating = 0
 		update_icon()
 		update()
-		if(occupier)
-			malfvacate(1)
 
 // overload all the lights in this APC area
 

@@ -2,7 +2,7 @@
 	name = "Human"
 	name_plural = "Humans"
 	language = "Sol Common"
-	primitive = /mob/living/carbon/monkey
+	primitive_form = "Monkey"
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/punch, /datum/unarmed_attack/bite)
 	blurb = "Humanity originated in the Sol system, and over the last five centuries has spread \
 	colonies across a wide swathe of space. They hold a wide range of forms and creeds.<br/><br/> \
@@ -20,7 +20,7 @@
 	language = "Sinta'unathi"
 	tail = "sogtail"
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/claws, /datum/unarmed_attack/bite/sharp)
-	primitive = /mob/living/carbon/monkey/unathi
+	primitive_form = "Stok"
 	darksight = 3
 	gluttonous = 1
 
@@ -45,6 +45,20 @@
 	reagent_tag = IS_UNATHI
 	base_color = "#066000"
 
+	heat_discomfort_level = 295
+	heat_discomfort_strings = list(
+		"You feel soothingly warm.",
+		"You feel the heat sink into your bones.",
+		"You feel warm enough to take a nap."
+		)
+
+	cold_discomfort_level = 292
+	cold_discomfort_strings = list(
+		"You feel chilly.",
+		"You feel sluggish and cold.",
+		"Your scales bristle against the cold."
+		)
+
 /datum/species/tajaran
 	name = "Tajara"
 	name_plural = "Tajaran"
@@ -54,6 +68,9 @@
 	tail = "tajtail"
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/claws, /datum/unarmed_attack/bite/sharp)
 	darksight = 8
+	slowdown = -1
+	brute_mod = 1.2
+
 	blurb = "The Tajaran race is a species of feline-like bipeds hailing from the planet of Ahdomai in the \
 	S'randarr system. They have been brought up into the space age by the Humans and Skrell, and have been \
 	influenced heavily by their long history of Slavemaster rule. They have a structured, clan-influenced way \
@@ -68,12 +85,20 @@
 	heat_level_2 = 380 //Default 400
 	heat_level_3 = 800 //Default 1000
 
-	primitive = /mob/living/carbon/monkey/tajara
+	primitive_form = "Farwa"
 
 	flags = CAN_JOIN | IS_WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
 
 	flesh_color = "#AFA59E"
 	base_color = "#333333"
+
+	heat_discomfort_level = 292
+	heat_discomfort_strings = list(
+		"Your fur prickles in the heat.",
+		"You feel uncomfortably warm.",
+		"Your overheated skin itches."
+		)
+	cold_discomfort_level = 275
 
 /datum/species/skrell
 	name = "Skrell"
@@ -82,7 +107,7 @@
 	deform = 'icons/mob/human_races/r_def_skrell.dmi'
 	eyes = "skrell_eyes_s"
 	language = "Skrellian"
-	primitive = /mob/living/carbon/monkey/skrell
+	primitive_form = "Neara"
 	unarmed_types = list(/datum/unarmed_attack/punch)
 	blurb = "An amphibious species, Skrell come from the star system known as Qerr'Vallis, which translates to 'Star of \
 	the royals' or 'Light of the Crown'.<br/><br/>Skrell are a highly advanced and logical race who live under the rule \
@@ -105,7 +130,7 @@
 	deform = 'icons/mob/human_races/r_def_plant.dmi'
 	language = "Rootspeak"
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/diona)
-	primitive = /mob/living/carbon/alien/diona
+	//primitive_form = "Nymph"
 	slowdown = 7
 	rarity_value = 3
 	hud_type = /datum/hud_data/diona

@@ -563,7 +563,7 @@ datum
 
 
 			captainslaser
-				steal_target = /obj/item/weapon/gun/energy/laser/captain
+				steal_target = /obj/item/weapon/gun/energy/captain
 				explanation_text = "Steal the captain's antique laser gun."
 				weight = 20
 

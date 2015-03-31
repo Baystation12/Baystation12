@@ -76,6 +76,7 @@ var/global/datum/controller/gameticker/ticker
 	if(master_mode=="secret")
 		src.hide_mode = 1
 	var/list/datum/game_mode/runnable_modes
+	var/mode_started
 	if((master_mode=="random") || (master_mode=="secret"))
 		runnable_modes = config.get_runnable_modes()
 		if (runnable_modes.len==0)
@@ -85,6 +86,7 @@ var/global/datum/controller/gameticker/ticker
 		if(secret_force_mode != "secret")
 			var/datum/game_mode/M = config.pick_mode(secret_force_mode)
 			if(M.can_start())
+				mode_started = 1
 				src.mode = config.pick_mode(secret_force_mode)
 		job_master.ResetOccupations()
 		if(!src.mode)
@@ -94,7 +96,7 @@ var/global/datum/controller/gameticker/ticker
 			src.mode = new mtype
 	else
 		src.mode = config.pick_mode(master_mode)
-	if (!src.mode.can_start())
+	if(!mode_started && !src.mode.can_start())
 		world << "<B>Unable to start [mode.name].</B> Not enough players, [mode.required_players] players needed. Reverting to pre-game lobby."
 		del(mode)
 		current_state = GAME_STATE_PREGAME
@@ -103,13 +105,6 @@ var/global/datum/controller/gameticker/ticker
 
 	//Configure mode and assign player to special mode stuff
 	job_master.DivideOccupations() //Distribute jobs
-	var/can_continue = src.mode.pre_setup()//Setup special modes
-	if(!can_continue)
-		del(mode)
-		current_state = GAME_STATE_PREGAME
-		world << "<B>Error setting up [master_mode].</B> Reverting to pre-game lobby."
-		job_master.ResetOccupations()
-		return 0
 
 	if(hide_mode)
 		var/list/modes = new
@@ -156,9 +151,12 @@ var/global/datum/controller/gameticker/ticker
 	if(admins_number == 0)
 		send2adminirc("Round has started with no admins online.")
 
-	supply_controller.process() 		//Start the supply shuttle regenerating points -- TLE
+/*	supply_controller.process() 		//Start the supply shuttle regenerating points -- TLE // handled in scheduler
 	master_controller.process()		//Start master_controller.process()
 	lighting_controller.process()	//Start processing DynamicAreaLighting updates
+	*/
+
+	processScheduler.start()
 
 	for(var/obj/multiz/ladder/L in world) L.connect() //Lazy hackfix for ladders. TODO: move this to an actual controller. ~ Z
 
@@ -185,7 +183,7 @@ var/global/datum/controller/gameticker/ticker
 		cinematic.mouse_opacity = 0
 		cinematic.screen_loc = "1,0"
 
-		var/obj/structure/stool/bed/temp_buckle = new(src)
+		var/obj/structure/bed/temp_buckle = new(src)
 		//Incredibly hackish. It creates a bed within the gameticker (lol) to stop mobs running around
 		if(station_missed)
 			for(var/mob/living/M in living_mob_list)
@@ -313,7 +311,7 @@ var/global/datum/controller/gameticker/ticker
 
 		mode.process()
 
-		emergency_shuttle.process()
+//		emergency_shuttle.process() //handled in scheduler
 
 		var/game_finished = 0
 		var/mode_finished = 0
@@ -368,12 +366,6 @@ var/global/datum/controller/gameticker/ticker
 				vote.autotransfer()
 
 		return 1
-
-	proc/getfactionbyname(var/name)
-		for(var/datum/faction/F in factions)
-			if(F.name == name)
-				return F
-
 
 /datum/controller/gameticker/proc/declare_completion()
 	world << "<br><br><br><H1>A round of [mode.name] has ended!</H1>"
@@ -435,11 +427,6 @@ var/global/datum/controller/gameticker/ticker
 		world << "<b>There [dronecount>1 ? "were" : "was"] [dronecount] industrious maintenance [dronecount>1 ? "drones" : "drone"] at the end of this round."
 
 	mode.declare_completion()//To declare normal completion.
-
-	//calls auto_declare_completion_* for all modes
-	for(var/handler in typesof(/datum/game_mode/proc))
-		if (findtext("[handler]","auto_declare_completion_"))
-			call(mode, handler)()
 
 	//Ask the event manager to print round end information
 	event_manager.RoundEnd()

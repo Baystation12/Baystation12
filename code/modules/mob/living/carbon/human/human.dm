@@ -5,7 +5,7 @@
 	icon = 'icons/mob/human.dmi'
 	icon_state = "body_m_s"
 
-	var/list/hud_list[9]
+	var/list/hud_list[10]
 	var/embedded_flag	  //To check if we've need to roll for damage on movement while an item is imbedded in us.
 
 /mob/living/carbon/human/New(var/new_loc, var/new_species = null)
@@ -26,6 +26,7 @@
 
 	hud_list[HEALTH_HUD]      = image('icons/mob/hud.dmi', src, "hudhealth100")
 	hud_list[STATUS_HUD]      = image('icons/mob/hud.dmi', src, "hudhealthy")
+	hud_list[LIFE_HUD]	      = image('icons/mob/hud.dmi', src, "hudhealthy")
 	hud_list[ID_HUD]          = image('icons/mob/hud.dmi', src, "hudunknown")
 	hud_list[WANTED_HUD]      = image('icons/mob/hud.dmi', src, "hudblank")
 	hud_list[IMPLOYAL_HUD]    = image('icons/mob/hud.dmi', src, "hudblank")
@@ -47,8 +48,8 @@
 	stat(null, "Intent: [a_intent]")
 	stat(null, "Move Mode: [m_intent]")
 	if(ticker && ticker.mode && ticker.mode.name == "AI malfunction")
-		if(ticker.mode:malf_mode_declared)
-			stat(null, "Time left: [max(ticker.mode:AI_win_timeleft/(ticker.mode:apcs/3), 0)]")
+		if(malf.revealed)
+			stat(null, "Time left: [max(malf.hack_time/(malf.hacked_apcs/3), 0)]")
 	if(emergency_shuttle)
 		var/eta_status = emergency_shuttle.get_status_panel_eta()
 		if(eta_status)
@@ -195,6 +196,7 @@
 	var/datum/organ/external/affected = M.organs_by_name["head"]
 	affected.implants += L
 	L.part = affected
+	L.implanted(src)
 
 /mob/living/carbon/human/proc/is_loyalty_implanted(mob/living/carbon/human/M)
 	for(var/L in M.contents)
@@ -241,7 +243,7 @@
 	<BR><B>Suit Storage:</B> <A href='?src=\ref[src];item=s_store'>[(s_store ? s_store : "Nothing")]</A> [((istype(wear_mask, /obj/item/clothing/mask) && istype(s_store, /obj/item/weapon/tank) && !( internal )) ? text(" <A href='?src=\ref[];item=internal'>Set Internal</A>", src) : "")]
 	<BR>[(handcuffed ? text("<A href='?src=\ref[src];item=handcuff'>Handcuffed</A>") : text("<A href='?src=\ref[src];item=handcuff'>Not Handcuffed</A>"))]
 	<BR>[(legcuffed ? text("<A href='?src=\ref[src];item=legcuff'>Legcuffed</A>") : text(""))]
-	<BR>[(suit) ? ((suit.hastie) ? text(" <A href='?src=\ref[];item=tie'>Remove Accessory</A>", src) : "") :]
+	<BR>[(suit) ? ((suit.accessories.len) ? text(" <A href='?src=\ref[];item=tie'>Remove Accessory</A>", src) : "") :]
 	<BR>[(internal ? text("<A href='?src=\ref[src];item=internal'>Remove Internal</A>") : "")]
 	<BR><A href='?src=\ref[src];item=splints'>Remove Splints</A>
 	<BR><A href='?src=\ref[src];item=pockets'>Empty Pockets</A>
@@ -412,7 +414,7 @@
 										modified = 1
 
 										spawn()
-											hud_updateflag |= 1 << WANTED_HUD
+											BITSET(hud_updateflag, WANTED_HUD)
 											if(istype(usr,/mob/living/carbon/human))
 												var/mob/living/carbon/human/U = usr
 												U.handle_regular_hud_updates()
@@ -499,7 +501,7 @@
 					for (var/datum/data/record/R in data_core.security)
 						if (R.fields["id"] == E.fields["id"])
 							if(hasHUD(usr,"security"))
-								var/t1 = sanitize(copytext(input("Add Comment:", "Sec. records", null, null)  as message,1,MAX_MESSAGE_LEN))
+								var/t1 = sanitize(input("Add Comment:", "Sec. records", null, null)  as message)
 								if ( !(t1) || usr.stat || usr.restrained() || !(hasHUD(usr,"security")) )
 									return
 								var/counter = 1
@@ -628,7 +630,7 @@
 					for (var/datum/data/record/R in data_core.medical)
 						if (R.fields["id"] == E.fields["id"])
 							if(hasHUD(usr,"medical"))
-								var/t1 = sanitize(copytext(input("Add Comment:", "Med. records", null, null)  as message,1,MAX_MESSAGE_LEN))
+								var/t1 = sanitize(input("Add Comment:", "Med. records", null, null)  as message)
 								if ( !(t1) || usr.stat || usr.restrained() || !(hasHUD(usr,"medical")) )
 									return
 								var/counter = 1
@@ -655,17 +657,11 @@
 				src << browse(null, "window=flavor_changes")
 				return
 			if("general")
-				var/msg = input(usr,"Update the general description of your character. This will be shown regardless of clothing, and may include OOC notes and preferences.","Flavor Text",html_decode(flavor_texts[href_list["flavor_change"]])) as message
-				if(msg != null)
-					msg = copytext(msg, 1, MAX_MESSAGE_LEN)
-					msg = html_encode(msg)
+				var/msg = sanitize(input(usr,"Update the general description of your character. This will be shown regardless of clothing, and may include OOC notes and preferences.","Flavor Text",html_decode(flavor_texts[href_list["flavor_change"]])) as message, extra = 0)
 				flavor_texts[href_list["flavor_change"]] = msg
 				return
 			else
-				var/msg = input(usr,"Update the flavor text for your [href_list["flavor_change"]].","Flavor Text",html_decode(flavor_texts[href_list["flavor_change"]])) as message
-				if(msg != null)
-					msg = copytext(msg, 1, MAX_MESSAGE_LEN)
-					msg = html_encode(msg)
+				var/msg = sanitize(input(usr,"Update the flavor text for your [href_list["flavor_change"]].","Flavor Text",html_decode(flavor_texts[href_list["flavor_change"]])) as message, extra = 0)
 				flavor_texts[href_list["flavor_change"]] = msg
 				set_flavor()
 				return
@@ -696,6 +692,8 @@
 			number += 2
 	if(istype(src.head, /obj/item/clothing/head/helmet/space))
 		number += 2
+	if(istype(src.head, /obj/item/clothing/head/helmet/space/emergency))
+		number -= 2
 	if(istype(src.glasses, /obj/item/clothing/glasses/thermal))
 		number -= 1
 	if(istype(src.glasses, /obj/item/clothing/glasses/sunglasses))
@@ -710,7 +708,7 @@
 	if(species.has_fine_manipulation)
 		return 1
 	if(!silent)
-		src << "<span class='warning'>You don't have the dexterity to use [src]!</span>"
+		src << "<span class='warning'>You don't have the dexterity to use that!<span>"
 	return 0
 
 /mob/living/carbon/human/abiotic(var/full_body = 0)
@@ -1162,6 +1160,10 @@
 	else
 		return 0
 
+	mob_bump_flag = species.bump_flag
+	mob_swap_flags = species.swap_flags
+	mob_push_flags = species.push_flags
+
 /mob/living/carbon/human/proc/bloody_doodle()
 	set category = "IC"
 	set name = "Write in blood"
@@ -1201,7 +1203,7 @@
 
 	var/max_length = bloody_hands * 30 //tweeter style
 
-	var/message = stripped_input(src,"Write a message. It cannot be longer than [max_length] characters.","Blood writing", "")
+	var/message = sanitize(input("Write a message. It cannot be longer than [max_length] characters.","Blood writing", ""))
 
 	if (message)
 		var/used_blood_amount = round(length(message) / 30, 1)
@@ -1220,10 +1222,11 @@
 /mob/living/carbon/human/can_inject(var/mob/user, var/error_msg, var/target_zone)
 	. = 1
 
-	if(!user)
-		target_zone = pick("chest","chest","chest","left leg","right leg","left arm", "right arm", "head")
-	else if(!target_zone)
-		target_zone = user.zone_sel.selecting
+	if(!target_zone)
+		if(!user)
+			target_zone = pick("chest","chest","chest","left leg","right leg","left arm", "right arm", "head")
+		else
+			target_zone = user.zone_sel.selecting
 
 	switch(target_zone)
 		if("head")
@@ -1236,7 +1239,7 @@
  		// Might need re-wording.
 		user << "<span class='alert'>There is no exposed flesh or thin material [target_zone == "head" ? "on their head" : "on their body"] to inject into.</span>"
 
-/mob/living/carbon/human/print_flavor_text()
+/mob/living/carbon/human/print_flavor_text(var/shrink = 1)
 	var/list/equipment = list(src.head,src.wear_mask,src.glasses,src.w_uniform,src.wear_suit,src.gloves,src.shoes)
 	var/head_exposed = 1
 	var/face_exposed = 1
@@ -1272,7 +1275,10 @@
 			if((T == "head" && head_exposed) || (T == "face" && face_exposed) || (T == "eyes" && eyes_exposed) || (T == "torso" && torso_exposed) || (T == "arms" && arms_exposed) || (T == "hands" && hands_exposed) || (T == "legs" && legs_exposed) || (T == "feet" && feet_exposed))
 				flavor_text += flavor_texts[T]
 				flavor_text += "\n\n"
-	return ..()
+	if(!shrink)
+		return flavor_text
+	else
+		return ..()
 
 /mob/living/carbon/human/getDNA()
 	if(species.flags & NO_SCAN)

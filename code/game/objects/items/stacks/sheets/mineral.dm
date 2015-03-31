@@ -47,6 +47,9 @@ var/global/list/datum/stack_recipe/plastic_recipes = list ( \
 	new/datum/stack_recipe("plastic knife", /obj/item/weapon/kitchen/utensil/pknife, 1, on_floor = 1), \
 	new/datum/stack_recipe("plastic bag", /obj/item/weapon/storage/bag/plasticbag, 3, on_floor = 1), \
 	new/datum/stack_recipe("blood pack", /obj/item/weapon/reagent_containers/blood/empty, 4, on_floor = 0), \
+	new/datum/stack_recipe("reagent dispenser cartridge (large)", /obj/item/weapon/reagent_containers/chem_disp_cartridge,        5, on_floor=0), // 500u
+	new/datum/stack_recipe("reagent dispenser cartridge (med)",   /obj/item/weapon/reagent_containers/chem_disp_cartridge/medium, 3, on_floor=0), // 250u
+	new/datum/stack_recipe("reagent dispenser cartridge (small)", /obj/item/weapon/reagent_containers/chem_disp_cartridge/small,  1, on_floor=0)  // 100u
 	)
 
 var/global/list/datum/stack_recipe/iron_recipes = list ( \
@@ -137,9 +140,10 @@ obj/item/stack/sheet/mineral/iron/New()
 	recipes = plastic_recipes
 
 /obj/item/stack/sheet/mineral/plastic/cyborg
-	name = "plastic sheets"
-	icon_state = "sheet-plastic"
-	perunit = 2000
+	name = "plastic sheets synthesizer"
+	gender = NEUTER
+	uses_charge = 1
+	charge_costs = list(1000)
 	stacktype = /obj/item/stack/sheet/mineral/plastic
 
 /obj/item/stack/sheet/mineral/gold

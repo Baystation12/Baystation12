@@ -21,8 +21,8 @@
 			return
 		else if(istype(W, /obj/item/weapon/card/emag))
 			locked_dna = null
-			req_access = null
-			req_one_access = null
+			req_access.Cut()
+			req_one_access.Cut()
 			locked = 0
 			subverted = 1
 			user << "<span class='danger'>You short out the access protocol for the suit.</span>"

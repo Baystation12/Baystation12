@@ -67,13 +67,19 @@
 				src << "<span class='name'>[speaker_name]</span>[alt_name] talks but you cannot hear \him."
 	else
 		if(language)
-			src << "<span class='game say'><span class='name'>[speaker_name]</span>[alt_name] [track][language.format_message(message, verb)]</span>"
+			on_hear_say("<span class='game say'><span class='name'>[speaker_name]</span>[alt_name] [track][language.format_message(message, verb)]</span>")
 		else
-			src << "<span class='game say'><span class='name'>[speaker_name]</span>[alt_name] [track][verb], <span class='message'><span class='body'>\"[message]\"</span></span></span>"
+			on_hear_say("<span class='game say'><span class='name'>[speaker_name]</span>[alt_name] [track][verb], <span class='message'><span class='body'>\"[message]\"</span></span></span>")
 		if (speech_sound && (get_dist(speaker, src) <= world.view && src.z == speaker.z))
 			var/turf/source = speaker? get_turf(speaker) : get_turf(src)
 			src.playsound_local(source, speech_sound, sound_vol, 1)
 
+/mob/proc/on_hear_say(var/message)
+	src << message
+
+/mob/living/silicon/on_hear_say(var/message)
+	var/time = say_timestamp()
+	src << "[time] [message]"
 
 /mob/proc/hear_radio(var/message, var/verb="says", var/datum/language/language=null, var/part_a, var/part_b, var/mob/speaker = null, var/hard_to_hear = 0, var/vname ="")
 
@@ -125,17 +131,26 @@
 
 	if(istype(src, /mob/living/silicon/ai) && !hard_to_hear)
 		var/jobname // the mob's "job"
-		var/mob/living/carbon/human/impersonating //The crewmember being impersonated, if any.
+		var/mob/living/carbon/human/impersonating //The crew member being impersonated, if any.
 
 		if (ishuman(speaker))
 			var/mob/living/carbon/human/H = speaker
 
-			if((H.wear_id && istype(H.wear_id,/obj/item/weapon/card/id/syndicate)) && (H.wear_mask && istype(H.wear_mask,/obj/item/clothing/mask/gas/voice)))
-
+			if(H.wear_mask && istype(H.wear_mask,/obj/item/clothing/mask/gas/voice))
 				changed_voice = 1
-				var/mob/living/carbon/human/I = locate(speaker_name)
+				var/list/impersonated = new()
+				var/mob/living/carbon/human/I = impersonated[speaker_name]
 
-				if(I)
+				if(!I)
+					for(var/mob/living/carbon/human/M in mob_list)
+						if(M.real_name == speaker_name)
+							I = M
+							impersonated[speaker_name] = I
+							break
+
+				// If I's display name is currently different from the voice name and using an agent ID then don't impersonate
+				// as this would allow the AI to track I and realize the mismatch.
+				if(I && !(I.name != speaker_name && I.wear_id && istype(I.wear_id,/obj/item/weapon/card/id/syndicate)))
 					impersonating = I
 					jobname = impersonating.get_assignment()
 				else
@@ -175,10 +190,25 @@
 	if(sdisabilities & DEAF || ear_deaf)
 		if(prob(20))
 			src << "<span class='warning'>You feel your headset vibrate but can hear nothing from it!</span>"
-	else if(track)
-		src << "[part_a][track][part_b][formatted]</span></span>"
 	else
-		src << "[part_a][speaker_name][part_b][formatted]</span></span>"
+		on_hear_radio(part_a, speaker_name, track, part_b, formatted)
+
+/proc/say_timestamp()
+	return "<span class='say_quote'>\[[worldtime2text()]\]</span>"
+
+/mob/proc/on_hear_radio(part_a, speaker_name, track, part_b, formatted)
+	src << "[part_a][speaker_name][part_b][formatted]</span></span>"
+
+/mob/dead/observer/on_hear_radio(part_a, speaker_name, track, part_b, formatted)
+	src << "[part_a][track][part_b][formatted]</span></span>"
+
+/mob/living/silicon/on_hear_radio(part_a, speaker_name, track, part_b, formatted)
+	var/time = say_timestamp()
+	src << "[time][part_a][speaker_name][part_b][formatted]</span></span>"
+
+/mob/living/silicon/ai/on_hear_radio(part_a, speaker_name, track, part_b, formatted)
+	var/time = say_timestamp()
+	src << "[time][part_a][track][part_b][formatted]</span></span>"
 
 /mob/proc/hear_signlang(var/message, var/verb = "gestures", var/datum/language/language, var/mob/speaker = null)
 	if(!client)

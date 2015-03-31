@@ -18,7 +18,7 @@
 	melee_damage_lower = 15
 	melee_damage_upper = 15
 	attacktext = "punched"
-	a_intent = "harm"
+	a_intent = I_HURT
 	var/corpse = /obj/effect/landmark/mobcorpse/russian
 	var/weapon1 = /obj/item/weapon/kitchenknife
 	min_oxy = 5
@@ -38,7 +38,7 @@
 	icon_state = "russianranged"
 	icon_living = "russianranged"
 	corpse = /obj/effect/landmark/mobcorpse/russian/ranged
-	weapon1 = /obj/item/weapon/gun/projectile/mateba
+	weapon1 = /obj/item/weapon/gun/projectile/revolver/mateba
 	ranged = 1
 	projectiletype = /obj/item/projectile/bullet
 	projectilesound = 'sound/weapons/Gunshot.ogg'

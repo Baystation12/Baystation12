@@ -43,7 +43,7 @@ var/global/photo_count = 0
 
 /obj/item/weapon/photo/attackby(obj/item/weapon/P as obj, mob/user as mob)
 	if(istype(P, /obj/item/weapon/pen) || istype(P, /obj/item/toy/crayon))
-		var/txt = sanitize(copytext(input(user, "What would you like to write on the back?", "Photo Writing", null)  as text, 1, 128))
+		var/txt = sanitize(input(user, "What would you like to write on the back?", "Photo Writing", null)  as text, 128)
 		if(loc == user && user.stat == 0)
 			scribble = txt
 	..()
@@ -70,7 +70,7 @@ var/global/photo_count = 0
 	set category = "Object"
 	set src in usr
 
-	var/n_name = sanitize(copytext(input(usr, "What would you like to label the photo?", "Photo Labelling", null)  as text, 1, MAX_NAME_LEN))
+	var/n_name = sanitizeSafe(input(usr, "What would you like to label the photo?", "Photo Labelling", null)  as text, MAX_NAME_LEN)
 	//loc.loc check is for making possible renaming photos in clipboards
 	if(( (loc == usr || (loc.loc && loc.loc == usr)) && usr.stat == 0))
 		name = "[(n_name ? text("[n_name]") : "photo")]"
@@ -86,7 +86,7 @@ var/global/photo_count = 0
 	icon = 'icons/obj/items.dmi'
 	icon_state = "album"
 	item_state = "briefcase"
-	can_hold = list("/obj/item/weapon/photo",)
+	can_hold = list(/obj/item/weapon/photo)
 
 /obj/item/weapon/storage/photo_album/MouseDrop(obj/over_object as obj)
 
@@ -311,9 +311,9 @@ var/global/photo_count = 0
 	var/obj/item/weapon/photo/p = new/obj/item/weapon/photo()
 
 	p.name = name
-	p.icon = icon
-	p.tiny = tiny
-	p.img = img
+	p.icon = icon(icon, icon_state)
+	p.tiny = icon(tiny)
+	p.img = icon(img)
 	p.desc = desc
 	p.pixel_x = pixel_x
 	p.pixel_y = pixel_y

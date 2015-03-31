@@ -18,7 +18,7 @@
 	melee_damage_lower = 10
 	melee_damage_upper = 10
 	attacktext = "punched"
-	a_intent = "harm"
+	a_intent = I_HURT
 	var/corpse = /obj/effect/landmark/mobcorpse/syndicatesoldier
 	var/weapon1
 	var/weapon2
@@ -31,7 +31,7 @@
 	min_n2 = 0
 	max_n2 = 0
 	unsuitable_atoms_damage = 15
-	wall_smash = 1
+	environment_smash = 1
 	faction = "syndicate"
 	status_flags = CANPUSH
 
@@ -108,7 +108,7 @@
 	icon_living = "syndicateranged"
 	casingtype = /obj/item/ammo_casing/a12mm
 	projectilesound = 'sound/weapons/Gunshot_smg.ogg'
-	projectiletype = /obj/item/projectile/bullet/midbullet2
+	projectiletype = /obj/item/projectile/bullet/pistol/medium
 
 	weapon1 = /obj/item/weapon/gun/projectile/automatic/c20r
 

@@ -511,15 +511,16 @@ var/global/list/uneatable = list(
 
 /obj/machinery/singularity/narsie/proc/pickcultist() //Narsie rewards his cultists with being devoured first, then picks a ghost to follow. --NEO
 	var/list/cultists = list()
-	for(var/datum/mind/cult_nh_mind in ticker.mode.cult)
-		if(!cult_nh_mind.current)
-			continue
-		if(cult_nh_mind.current.stat)
-			continue
-		var/turf/pos = get_turf(cult_nh_mind.current)
-		if(pos.z != src.z)
-			continue
-		cultists += cult_nh_mind.current
+	if(cult && cult.current_antagonists.len)
+		for(var/datum/mind/cult_nh_mind in cult.current_antagonists)
+			if(!cult_nh_mind.current)
+				continue
+			if(cult_nh_mind.current.stat)
+				continue
+			var/turf/pos = get_turf(cult_nh_mind.current)
+			if(pos.z != src.z)
+				continue
+			cultists += cult_nh_mind.current
 	if(cultists.len)
 		acquire(pick(cultists))
 		return

@@ -26,6 +26,7 @@
 	var/area_uid
 	var/id_tag = null
 
+	var/hibernate = 0 //Do we even process?
 	var/pump_direction = 1 //0 = siphoning, 1 = releasing
 
 	var/external_pressure_bound = EXTERNAL_PRESSURE_BOUND
@@ -88,7 +89,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/engine
 	name = "Engine Core Vent"
 	power_channel = ENVIRON
-	power_rating = 15000	//15 kW ~ 20 HP
+	power_rating = 30000	//15 kW ~ 20 HP
 
 /obj/machinery/atmospherics/unary/vent_pump/engine/New()
 	..()
@@ -150,8 +151,8 @@
 /obj/machinery/atmospherics/unary/vent_pump/process()
 	..()
 
-	last_power_draw = 0
-	last_flow_rate = 0
+	if (hibernate)
+		return 1
 
 	if (!node)
 		use_power = 0
@@ -176,6 +177,17 @@
 			//limit flow rate from turfs
 			transfer_moles = min(transfer_moles, environment.total_moles*air_contents.volume/environment.volume)	//group_multiplier gets divided out here
 			power_draw = pump_gas(src, environment, air_contents, transfer_moles, power_rating)
+
+	else
+		//If we're in an area that is fucking ideal, and we don't have to do anything, chances are we won't next tick either so why redo these calculations?
+		//JESUS FUCK.  THERE ARE LITERALLY 250 OF YOU MOTHERFUCKERS ON ZLEVEL ONE AND YOU DO THIS SHIT EVERY TICK WHEN VERY OFTEN THERE IS NO REASON TO
+
+		if(pump_direction && pressure_checks == PRESSURE_CHECK_EXTERNAL && controller_iteration > 10)	//99% of all vents
+			//Fucking hibernate because you ain't doing shit.
+			hibernate = 1
+			spawn(rand(100,200))	//hibernate for 10 or 20 seconds randomly
+				hibernate = 0
+
 
 	if (power_draw >= 0)
 		last_power_draw = power_draw
@@ -256,6 +268,9 @@
 /obj/machinery/atmospherics/unary/vent_pump/receive_signal(datum/signal/signal)
 	if(stat & (NOPOWER|BROKEN))
 		return
+
+	hibernate = 0
+
 	//log_admin("DEBUG \[[world.timeofday]\]: /obj/machinery/atmospherics/unary/vent_pump/receive_signal([signal.debug_print()])")
 	if(!signal.data["tag"] || (signal.data["tag"] != id_tag) || (signal.data["sigtype"]!="command"))
 		return 0
@@ -368,6 +383,7 @@
 		user << "You are too far away to read the gauge."
 	if(welded)
 		user << "It seems welded shut."
+	..()
 
 /obj/machinery/atmospherics/unary/vent_pump/power_change()
 	var/old_stat = stat
@@ -407,18 +423,3 @@
 		initial_loc.air_vent_names -= id_tag
 	..()
 	return
-
-/*
-	Alt-click to vent crawl - Monkeys, aliens, slimes and mice.
-	This is a little buggy but somehow that just seems to plague ventcrawl.
-	I am sorry, I don't know why.
-*/
-// Commenting this out for now, it's not critical, stated to be buggy, and seems like
-// a really clumsy way of doing this. ~Z
-/*/obj/machinery/atmospherics/unary/vent_pump/AltClick(var/mob/living/ML)
-	if(istype(ML))
-		var/list/ventcrawl_verbs = list(/mob/living/carbon/monkey/verb/ventcrawl, /mob/living/carbon/alien/verb/ventcrawl, /mob/living/carbon/slime/verb/ventcrawl,/mob/living/simple_animal/mouse/verb/ventcrawl)
-		if(length(ML.verbs & ventcrawl_verbs)) // alien queens have this removed, an istype would be complicated
-			ML.handle_ventcrawl(src)
-			return
-	..()*/

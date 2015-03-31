@@ -15,7 +15,7 @@
 	item_state = "bluetag"
 	blood_overlay_type = "armor"
 	body_parts_covered = UPPER_TORSO
-	allowed = list (/obj/item/weapon/gun/energy/laser/bluetag)
+	allowed = list (/obj/item/weapon/gun/energy/lasertag/blue)
 	siemens_coefficient = 3.0
 
 /obj/item/clothing/suit/redtag
@@ -25,7 +25,7 @@
 	item_state = "redtag"
 	blood_overlay_type = "armor"
 	body_parts_covered = UPPER_TORSO
-	allowed = list (/obj/item/weapon/gun/energy/laser/redtag)
+	allowed = list (/obj/item/weapon/gun/energy/lasertag/red)
 	siemens_coefficient = 3.0
 
 /*
@@ -346,11 +346,13 @@
 	icon_state = "blueponcho"
 	item_state = "blueponcho"
 
-/obj/item/clothing/suit/storage/bomber
+/obj/item/clothing/suit/storage/toggle/bomber
 	name = "bomber jacket"
 	desc = "A thick, well-worn WW2 leather bomber jacket."
 	icon_state = "bomber"
 	item_state = "bomber"
+	icon_open = "bomber_open"
+	icon_closed = "bomber"
 	body_parts_covered = UPPER_TORSO|ARMS
 	cold_protection = UPPER_TORSO|ARMS
 	min_cold_protection_temperature = T0C - 20
@@ -383,10 +385,20 @@
 	icon_open = "brown_jacket_nt_open"
 	icon_closed = "brown_jacket_nt"
 
-/obj/item/clothing/suit/hoodie
+/obj/item/clothing/suit/storage/toggle/hoodie
 	name = "grey hoodie"
 	desc = "A warm, grey sweatshirt."
 	icon_state = "grey_hoodie"
 	item_state = "grey_hoodie"
+	icon_open = "grey_hoodie_open"
+	icon_closed = "grey_hoodie"
 	min_cold_protection_temperature = T0C - 20
 	cold_protection = UPPER_TORSO|LOWER_TORSO|ARMS
+
+/obj/item/clothing/suit/storage/toggle/hoodie/black
+	name = "black hoodie"
+	desc = "A warm, black sweatshirt."
+	icon_state = "black_hoodie"
+	item_state = "black_hoodie"
+	icon_open = "black_hoodie_open"
+	icon_closed = "black_hoodie"

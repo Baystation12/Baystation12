@@ -12,13 +12,14 @@
 	amount_per_transfer_from_this = 10
 	possible_transfer_amounts = list(5,10,15,25,30,60)
 	volume = 60
+	w_class = 2
 	flags = OPENCONTAINER
 
 	var/label_text = ""
 
 	var/list/can_be_placed_into = list(
 		/obj/machinery/chem_master/,
-		/obj/machinery/chem_dispenser/,
+		/obj/machinery/chemical_dispenser,
 		/obj/machinery/reagentgrinder,
 		/obj/structure/table,
 		/obj/structure/closet,
@@ -137,7 +138,7 @@
 
 	attackby(obj/item/weapon/W as obj, mob/user as mob)
 		if(istype(W, /obj/item/weapon/pen) || istype(W, /obj/item/device/flashlight/pen))
-			var/tmp_label = sanitize(copytext(input(user, "Enter a label for [src.name]","Label",src.label_text), 1, MAX_NAME_LEN))
+			var/tmp_label = sanitizeSafe(input(user, "Enter a label for [src.name]","Label",src.label_text), MAX_NAME_LEN)
 			if(length(tmp_label) > 10)
 				user << "\red The label can be at most 10 characters long."
 			else
@@ -194,7 +195,7 @@
 				if(80 to 90)	filling.icon_state = "[icon_state]80"
 				if(91 to INFINITY)	filling.icon_state = "[icon_state]100"
 
-			filling.icon += mix_color_from_reagents(reagents.reagent_list)
+			filling.color = mix_color_from_reagents(reagents.reagent_list)
 			overlays += filling
 
 		if (!is_open_container())
@@ -251,12 +252,6 @@
 	New()
 		..()
 		reagents.add_reagent("sacid", 60)
-		update_icon()
-
-/obj/item/weapon/reagent_containers/glass/beaker/slime
-	New()
-		..()
-		reagents.add_reagent("slimejelly", 60)
 		update_icon()
 
 /obj/item/weapon/reagent_containers/glass/bucket

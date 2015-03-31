@@ -15,7 +15,7 @@ var/global/list/special_roles = list( //keep synced with the defines BE_* in set
 	"cultist" = IS_MODE_COMPILED("cult"),                // 8
 	"infested monkey" = IS_MODE_COMPILED("monkey"),      // 9
 	"ninja" = "true",                                    // 10
-	"vox raider" = IS_MODE_COMPILED("heist"),            // 11
+	"raider" = IS_MODE_COMPILED("heist"),                // 11
 	"diona" = 1,                                         // 12
 	"mutineer" = IS_MODE_COMPILED("mutiny"),             // 13
 	"pAI candidate" = 1, // -- TLE                       // 14
@@ -54,8 +54,8 @@ datum/preferences
 	var/age = 30						//age of character
 	var/spawnpoint = "Arrivals Shuttle" //where this character will spawn (0-2).
 	var/b_type = "A+"					//blood type (not-chooseable)
-	var/underwear = 1					//underwear type
-	var/undershirt = 1					//undershirt type
+	var/underwear						//underwear type
+	var/undershirt						//undershirt type
 	var/backbag = 2						//backpack type
 	var/h_style = "Bald"				//Hair type
 	var/r_hair = 0						//Hair color
@@ -373,12 +373,11 @@ datum/preferences
 	else
 		dat += "<br><br>"
 
-	if(gender == MALE)
-		dat += "Underwear: <a href ='?_src_=prefs;preference=underwear;task=input'><b>[underwear_m[underwear]]</b></a><br>"
-	else
-		dat += "Underwear: <a href ='?_src_=prefs;preference=underwear;task=input'><b>[underwear_f[underwear]]</b></a><br>"
+	var/list/undies = gender == MALE ? underwear_m : underwear_f
 
-	dat += "Undershirt: <a href='?_src_=prefs;preference=undershirt;task=input'><b>[undershirt_t[undershirt]]</b></a><br>"
+	dat += "Underwear: <a href ='?_src_=prefs;preference=underwear;task=input'><b>[get_key_by_value(undies,underwear)]</b></a><br>"
+
+	dat += "Undershirt: <a href='?_src_=prefs;preference=undershirt;task=input'><b>[get_key_by_value(undershirt_t,undershirt)]</b></a><br>"
 
 	dat += "Backpack Type:<br><a href ='?_src_=prefs;preference=bag;task=input'><b>[backbaglist[backbag]]</b></a><br>"
 
@@ -996,16 +995,10 @@ datum/preferences
 				ShowChoices(user)
 				return
 			if("general")
-				var/msg = input(usr,"Give a general description of your character. This will be shown regardless of clothing, and may include OOC notes and preferences.","Flavor Text",html_decode(flavor_texts[href_list["task"]])) as message
-				if(msg != null)
-					msg = copytext(msg, 1, MAX_MESSAGE_LEN)
-					msg = html_encode(msg)
+				var/msg = sanitize(input(usr,"Give a general description of your character. This will be shown regardless of clothing, and may include OOC notes and preferences.","Flavor Text",html_decode(flavor_texts[href_list["task"]])) as message, extra = 0)
 				flavor_texts[href_list["task"]] = msg
 			else
-				var/msg = input(usr,"Set the flavor text for your [href_list["task"]].","Flavor Text",html_decode(flavor_texts[href_list["task"]])) as message
-				if(msg != null)
-					msg = copytext(msg, 1, MAX_MESSAGE_LEN)
-					msg = html_encode(msg)
+				var/msg = sanitize(input(usr,"Set the flavor text for your [href_list["task"]].","Flavor Text",html_decode(flavor_texts[href_list["task"]])) as message, extra = 0)
 				flavor_texts[href_list["task"]] = msg
 		SetFlavorText(user)
 		return
@@ -1020,16 +1013,10 @@ datum/preferences
 				ShowChoices(user)
 				return
 			if("Default")
-				var/msg = input(usr,"Set the default flavour text for your robot. It will be used for any module without individual setting.","Flavour Text",html_decode(flavour_texts_robot["Default"])) as message
-				if(msg != null)
-					msg = copytext(msg, 1, MAX_MESSAGE_LEN)
-					msg = html_encode(msg)
+				var/msg = sanitize(input(usr,"Set the default flavour text for your robot. It will be used for any module without individual setting.","Flavour Text",html_decode(flavour_texts_robot["Default"])) as message, extra = 0)
 				flavour_texts_robot[href_list["task"]] = msg
 			else
-				var/msg = input(usr,"Set the flavour text for your robot with [href_list["task"]] module. If you leave this empty, default flavour text will be used for this module.","Flavour Text",html_decode(flavour_texts_robot[href_list["task"]])) as message
-				if(msg != null)
-					msg = copytext(msg, 1, MAX_MESSAGE_LEN)
-					msg = html_encode(msg)
+				var/msg = sanitize(input(usr,"Set the flavour text for your robot with [href_list["task"]] module. If you leave this empty, default flavour text will be used for this module.","Flavour Text",html_decode(flavour_texts_robot[href_list["task"]])) as message, extra = 0)
 				flavour_texts_robot[href_list["task"]] = msg
 		SetFlavourTextRobot(user)
 		return
@@ -1045,41 +1032,25 @@ datum/preferences
 		else
 			user << browse(null, "window=records")
 		if(href_list["task"] == "med_record")
-			var/medmsg = input(usr,"Set your medical notes here.","Medical Records",html_decode(med_record)) as message
-
+			var/medmsg = sanitize(input(usr,"Set your medical notes here.","Medical Records",html_decode(med_record)) as message, MAX_PAPER_MESSAGE_LEN, extra = 0)
 			if(medmsg != null)
-				medmsg = copytext(medmsg, 1, MAX_PAPER_MESSAGE_LEN)
-				medmsg = html_encode(medmsg)
-
 				med_record = medmsg
 				SetRecords(user)
 
 		if(href_list["task"] == "sec_record")
-			var/secmsg = input(usr,"Set your security notes here.","Security Records",html_decode(sec_record)) as message
-
+			var/secmsg = sanitize(input(usr,"Set your security notes here.","Security Records",html_decode(sec_record)) as message, MAX_PAPER_MESSAGE_LEN, extra = 0)
 			if(secmsg != null)
-				secmsg = copytext(secmsg, 1, MAX_PAPER_MESSAGE_LEN)
-				secmsg = html_encode(secmsg)
-
 				sec_record = secmsg
 				SetRecords(user)
 		if(href_list["task"] == "gen_record")
-			var/genmsg = input(usr,"Set your employment notes here.","Employment Records",html_decode(gen_record)) as message
-
+			var/genmsg = sanitize(input(usr,"Set your employment notes here.","Employment Records",html_decode(gen_record)) as message, MAX_PAPER_MESSAGE_LEN, extra = 0)
 			if(genmsg != null)
-				genmsg = copytext(genmsg, 1, MAX_PAPER_MESSAGE_LEN)
-				genmsg = html_encode(genmsg)
-
 				gen_record = genmsg
 				SetRecords(user)
 
 		if(href_list["task"] == "exploitable_record")
-			var/exploitmsg = input(usr,"Set exploitable information about you here.","Exploitable Information",html_decode(exploit_record)) as message
-
+			var/exploitmsg = sanitize(input(usr,"Set exploitable information about you here.","Exploitable Information",html_decode(exploit_record)) as message, MAX_PAPER_MESSAGE_LEN, extra = 0)
 			if(exploitmsg != null)
-				exploitmsg = copytext(exploitmsg, 1, MAX_PAPER_MESSAGE_LEN)
-				exploitmsg = html_encode(exploitmsg)
-
 				exploit_record = exploitmsg
 				SetAntagoptions(user)
 
@@ -1178,10 +1149,12 @@ datum/preferences
 				if("f_style")
 					f_style = random_facial_hair_style(gender, species)
 				if("underwear")
-					underwear = rand(1,underwear_m.len)
+					var/r = pick(underwear_m)
+					underwear = underwear_m[r]
 					ShowChoices(user)
 				if("undershirt")
-					undershirt = rand(1,undershirt_t.len)
+					var/r = pick(undershirt_t)
+					undershirt = undershirt_t[r]
 					ShowChoices(user)
 				if("eyes")
 					r_eyes = rand(0,255)
@@ -1204,7 +1177,7 @@ datum/preferences
 				if("name")
 					var/raw_name = input(user, "Choose your character's name:", "Character Preference")  as text|null
 					if (!isnull(raw_name)) // Check to ensure that the user entered text (rather than cancel.)
-						var/new_name = reject_bad_name(raw_name)
+						var/new_name = sanitizeName(raw_name)
 						if(new_name)
 							real_name = new_name
 						else
@@ -1290,7 +1263,7 @@ datum/preferences
 				if("metadata")
 					var/new_metadata = input(user, "Enter any information you'd like others to see, such as Roleplay-preferences:", "Game Preference" , metadata)  as message|null
 					if(new_metadata)
-						metadata = sanitize(copytext(new_metadata,1,MAX_MESSAGE_LEN))
+						metadata = sanitize(new_metadata)
 
 				if("b_type")
 					var/new_b_type = input(user, "Choose your character's blood-type:", "Character Preference") as null|anything in list( "A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-" )
@@ -1351,7 +1324,7 @@ datum/preferences
 
 					var/new_underwear = input(user, "Choose your character's underwear:", "Character Preference")  as null|anything in underwear_options
 					if(new_underwear)
-						underwear = underwear_options.Find(new_underwear)
+						underwear = underwear_options[new_underwear]
 					ShowChoices(user)
 
 				if("undershirt")
@@ -1360,7 +1333,7 @@ datum/preferences
 
 					var/new_undershirt = input(user, "Choose your character's undershirt:", "Character Preference") as null|anything in undershirt_options
 					if (new_undershirt)
-						undershirt = undershirt_options.Find(new_undershirt)
+						undershirt = undershirt_options[new_undershirt]
 					ShowChoices(user)
 
 				if("eyes")
@@ -1503,7 +1476,7 @@ datum/preferences
 					if(choice == "Other")
 						var/raw_choice = input(user, "Please enter a home system.")  as text|null
 						if(raw_choice)
-							home_system = sanitize(copytext(raw_choice,1,MAX_MESSAGE_LEN))
+							home_system = sanitize(raw_choice)
 						return
 					home_system = choice
 				if("citizenship")
@@ -1513,7 +1486,7 @@ datum/preferences
 					if(choice == "Other")
 						var/raw_choice = input(user, "Please enter your current citizenship.", "Character Preference") as text|null
 						if(raw_choice)
-							citizenship = sanitize(copytext(raw_choice,1,MAX_MESSAGE_LEN))
+							citizenship = sanitize(raw_choice)
 						return
 					citizenship = choice
 				if("faction")
@@ -1523,7 +1496,7 @@ datum/preferences
 					if(choice == "Other")
 						var/raw_choice = input(user, "Please enter a faction.")  as text|null
 						if(raw_choice)
-							faction = sanitize(copytext(raw_choice,1,MAX_MESSAGE_LEN))
+							faction = sanitize(raw_choice)
 						return
 					faction = choice
 				if("religion")
@@ -1533,7 +1506,7 @@ datum/preferences
 					if(choice == "Other")
 						var/raw_choice = input(user, "Please enter a religon.")  as text|null
 						if(raw_choice)
-							religion = sanitize(copytext(raw_choice,1,MAX_MESSAGE_LEN))
+							religion = sanitize(raw_choice)
 						return
 					religion = choice
 		else
@@ -1705,12 +1678,8 @@ datum/preferences
 				else if(status == "mechanical")
 					I.mechanize()
 
-	if(underwear > underwear_m.len || underwear < 1)
-		underwear = 0 //I'm sure this is 100% unnecessary, but I'm paranoid... sue me. //HAH NOW NO MORE MAGIC CLONING UNDIES
 	character.underwear = underwear
 
-	if(undershirt > undershirt_t.len || undershirt < 1)
-		undershirt = 0
 	character.undershirt = undershirt
 
 	if(backbag > 4 || backbag < 1)

@@ -250,6 +250,9 @@
 		target = safepick(view(3,target))
 		if(!target)
 			return
+	if(istype(target, /obj/machinery))
+		if (src.interface_action(target))
+			return
 	if(!target.Adjacent(src))
 		if(selected && selected.is_ranged())
 			selected.action(target)
@@ -259,6 +262,29 @@
 		src.melee_action(target)
 	return
 
+/obj/mecha/proc/interface_action(obj/machinery/target)
+	if(istype(target, /obj/machinery/access_button))
+		src.occupant_message("<span class='notice'>Interfacing with [target].</span>")
+		src.log_message("Interfaced with [target].")
+		target.attack_hand(src.occupant)
+		return 1
+	if(istype(target, /obj/machinery/embedded_controller))
+		target.ui_interact(src.occupant)
+		return 1
+	return 0
+
+/obj/mecha/contents_nano_distance(var/src_object, var/mob/living/user)
+	. = user.shared_living_nano_distance(src_object) //allow them to interact with anything they can interact with normally.
+	if(. != STATUS_INTERACTIVE)
+		//Allow interaction with the mecha or anything that is part of the mecha
+		if(src_object == src || (src_object in src))
+			return STATUS_INTERACTIVE
+		if(src.Adjacent(src_object))
+			src.occupant_message("<span class='notice'>Interfacing with [src_object]...</span>")
+			src.log_message("Interfaced with [src_object].")
+			return STATUS_INTERACTIVE
+		if(src_object in view(2, src))
+			return STATUS_UPDATE //if they're close enough, allow the occupant to see the screen through the viewport or whatever.
 
 /obj/mecha/proc/melee_action(atom/target)
 	return
@@ -487,7 +513,7 @@
 
 
 /obj/mecha/bullet_act(var/obj/item/projectile/Proj) //wrapper
-	src.log_message("Hit by projectile. Type: [Proj.name]([Proj.flag]).",1)
+	src.log_message("Hit by projectile. Type: [Proj.name]([Proj.check_armour]).",1)
 	call((proc_res["dynbulletdamage"]||src), "dynbulletdamage")(Proj) //calls equipment
 	..()
 	return
@@ -506,8 +532,25 @@
 		var/ignore_threshold
 		if(istype(Proj, /obj/item/projectile/beam/pulse))
 			ignore_threshold = 1
-		src.take_damage(Proj.damage,Proj.flag)
+		src.take_damage(Proj.damage, Proj.check_armour)
+		if(prob(25)) spark_system.start()
 		src.check_for_internal_damage(list(MECHA_INT_FIRE,MECHA_INT_TEMP_CONTROL,MECHA_INT_TANK_BREACH,MECHA_INT_CONTROL_LOST,MECHA_INT_SHORT_CIRCUIT),ignore_threshold)
+
+		//AP projectiles have a chance to cause additional damage
+		if(Proj.penetrating)
+			var/distance = get_dist(Proj.starting, get_turf(loc))
+			var/hit_occupant = 1 //only allow the occupant to be hit once
+			for(var/i in 1 to min(Proj.penetrating, round(Proj.damage/15)))
+				if(src.occupant && hit_occupant && prob(20))
+					Proj.attack_mob(src.occupant, distance)
+					hit_occupant = 0
+				else
+					src.check_for_internal_damage(list(MECHA_INT_FIRE,MECHA_INT_TEMP_CONTROL,MECHA_INT_TANK_BREACH,MECHA_INT_CONTROL_LOST,MECHA_INT_SHORT_CIRCUIT), 1)
+
+				Proj.penetrating--
+
+				if(prob(15))
+					break //give a chance to exit early
 
 	Proj.on_hit(src)
 	return
@@ -717,6 +760,18 @@
 			user << "You screw the cell in place"
 		return
 
+	else if(istype(W, /obj/item/device/multitool))
+		if(state>=3 && src.occupant)
+			user << "You attempt to eject the pilot using the maintenance controls."
+			if(src.occupant.stat)
+				src.go_out()
+				src.log_message("[src.occupant] was ejected using the maintenance controls.")
+			else
+				user << "<span class='warning'>Your attempt is rejected.</span>"
+				src.occupant_message("<span class='warning'>An attempt to eject you was made using the maintenance controls.</span>")
+				src.log_message("Eject attempt made using maintenance controls - rejected.")
+		return
+
 	else if(istype(W, /obj/item/weapon/cell))
 		if(state==4)
 			if(!src.cell)
@@ -729,7 +784,7 @@
 				user << "There's already a powercell installed."
 		return
 
-	else if(istype(W, /obj/item/weapon/weldingtool) && user.a_intent != "hurt")
+	else if(istype(W, /obj/item/weapon/weldingtool) && user.a_intent != I_HURT)
 		var/obj/item/weapon/weldingtool/WT = W
 		if (WT.remove_fuel(0,user))
 			if (hasInternalDamage(MECHA_INT_TANK_BREACH))
@@ -1514,8 +1569,8 @@
 		return
 	if (href_list["change_name"])
 		if(usr != src.occupant)	return
-		var/newname = strip_html_simple(input(occupant,"Choose new exosuit name","Rename exosuit",initial(name)) as text, MAX_NAME_LEN)
-		if(newname && trim(newname))
+		var/newname = sanitizeSafe(input(occupant,"Choose new exosuit name","Rename exosuit",initial(name)) as text, MAX_NAME_LEN)
+		if(newname)
 			name = newname
 		else
 			alert(occupant, "nope.avi")

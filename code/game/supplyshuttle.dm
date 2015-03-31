@@ -49,22 +49,36 @@ var/list/mechtoys = list(
 	anchored = 1
 	layer = 4
 	explosion_resistance = 5
+	var/list/mobs_can_pass = list(
+		/mob/living/carbon/slime,
+		/mob/living/simple_animal/mouse,
+		/mob/living/silicon/robot/drone
+		)
 
 /obj/structure/plasticflaps/CanPass(atom/A, turf/T)
 	if(istype(A) && A.checkpass(PASSGLASS))
 		return prob(60)
 
-	var/obj/structure/stool/bed/B = A
-	if (istype(A, /obj/structure/stool/bed) && B.buckled_mob)//if it's a bed/chair and someone is buckled, it will not pass
+	var/obj/structure/bed/B = A
+	if (istype(A, /obj/structure/bed) && B.buckled_mob)//if it's a bed/chair and someone is buckled, it will not pass
 		return 0
 
 	if(istype(A, /obj/vehicle))	//no vehicles
 		return 0
 
-	if(istype(A, /mob/living)) // You Shall Not Pass!
-		var/mob/living/M = A
-		if(!M.lying && !istype(M, /mob/living/carbon/monkey) && !istype(M, /mob/living/carbon/slime) && !istype(M, /mob/living/simple_animal/mouse) && !istype(M, /mob/living/silicon/robot/drone))  //If your not laying down, or a small creature, no pass.
-			return 0
+	var/mob/living/M = A
+	if(istype(M))
+		if(M.lying)
+			return ..()
+		for(var/mob_type in mobs_can_pass)
+			if(istype(A, mob_type))
+				return ..()
+		if(istype(A, /mob/living/carbon/human))
+			var/mob/living/carbon/human/H = M
+			if(H.species.is_small)
+				return ..()
+		return 0
+
 	return ..()
 
 /obj/structure/plasticflaps/ex_act(severity)

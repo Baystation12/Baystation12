@@ -21,48 +21,37 @@
 	sleep(48)
 	//animation = null
 
-	if(!species.primitive) //If the creature in question has no primitive set, this is going to be messy.
+	monkeyizing = 0
+	stunned = 0
+	update_canmove()
+	invisibility = initial(invisibility)
+
+	if(!species.primitive_form) //If the creature in question has no primitive set, this is going to be messy.
 		gib()
 		return
 
-	var/mob/living/carbon/monkey/O = null
+	for(var/obj/item/W in src)
+		drop_from_inventory(W)
+	set_species(species.primitive_form)
+	dna.SetSEState(MONKEYBLOCK,1)
+	dna.SetSEValueRange(MONKEYBLOCK,0xDAC, 0xFFF)
 
-	O = new species.primitive(loc)
-
-	O.dna = dna.Clone()
-	O.dna.SetSEState(MONKEYBLOCK,1)
-	O.dna.SetSEValueRange(MONKEYBLOCK,0xDAC, 0xFFF)
-	O.loc = loc
-	O.viruses = viruses
-	O.a_intent = "hurt"
-
-	for(var/datum/disease/D in O.viruses)
-		D.affected_mob = O
-
-	if (client)
-		client.mob = O
-	if(mind)
-		mind.transfer_to(O)
-
-	O << "<B>You are now [O]. </B>"
-
-	spawn(0)//To prevent the proc from returning null.
-		del(src)
+	src << "<B>You are now [species.name]. </B>"
 	del(animation)
 
-	return O
+	return src
 
 /mob/new_player/AIize()
 	spawning = 1
 	return ..()
 
-/mob/living/carbon/human/AIize()
+/mob/living/carbon/human/AIize(move=1) // 'move' argument needs defining here too because BYOND is dumb
 	if (monkeyizing)
 		return
 	for(var/t in organs)
 		del(t)
 
-	return ..()
+	return ..(move)
 
 /mob/living/carbon/AIize()
 	if (monkeyizing)
@@ -75,7 +64,7 @@
 	invisibility = 101
 	return ..()
 
-/mob/proc/AIize()
+/mob/proc/AIize(move=1)
 	if(client)
 		src << sound(null, repeat = 0, wait = 0, volume = 85, channel = 1) // stop the jams for AIs
 	var/mob/living/silicon/ai/O = new (loc, base_law_type,,1)//No MMI but safety is in effect.
@@ -88,37 +77,38 @@
 	else
 		O.key = key
 
-	var/obj/loc_landmark
-	for(var/obj/effect/landmark/start/sloc in landmarks_list)
-		if (sloc.name != "AI")
-			continue
-		if (locate(/mob/living) in sloc.loc)
-			continue
-		loc_landmark = sloc
-	if (!loc_landmark)
-		for(var/obj/effect/landmark/tripai in landmarks_list)
-			if (tripai.name == "tripai")
-				if(locate(/mob/living) in tripai.loc)
-					continue
-				loc_landmark = tripai
-	if (!loc_landmark)
-		O << "Oh god sorry we can't find an unoccupied AI spawn location, so we're spawning you on top of someone."
+	if(move)
+		var/obj/loc_landmark
 		for(var/obj/effect/landmark/start/sloc in landmarks_list)
-			if (sloc.name == "AI")
-				loc_landmark = sloc
+			if (sloc.name != "AI")
+				continue
+			if ((locate(/mob/living) in sloc.loc) || (locate(/obj/structure/AIcore) in sloc.loc))
+				continue
+			loc_landmark = sloc
+		if (!loc_landmark)
+			for(var/obj/effect/landmark/tripai in landmarks_list)
+				if (tripai.name == "tripai")
+					if((locate(/mob/living) in tripai.loc) || (locate(/obj/structure/AIcore) in tripai.loc))
+						continue
+					loc_landmark = tripai
+		if (!loc_landmark)
+			O << "Oh god sorry we can't find an unoccupied AI spawn location, so we're spawning you on top of someone."
+			for(var/obj/effect/landmark/start/sloc in landmarks_list)
+				if (sloc.name == "AI")
+					loc_landmark = sloc
 
-	O.loc = loc_landmark.loc
-	for (var/obj/item/device/radio/intercom/comm in O.loc)
-		comm.ai += O
+		O.loc = loc_landmark.loc
+		for (var/obj/item/device/radio/intercom/comm in O.loc)
+			comm.ai += O
 
 	O.on_mob_init()
 
 	O.add_ai_verbs()
 
 	O.rename_self("ai",1)
-	. = O
-	del(src)
-
+	spawn(0)
+		del(src)
+	return O
 
 //human -> robot
 /mob/living/carbon/human/proc/Robotize()
@@ -167,7 +157,6 @@
 		O.mmi.transfer_identity(src)
 
 	callHook("borgify", list(O))
-	O.notify_ai(1)
 	O.Namepick()
 
 	spawn(0)//To prevent the proc from returning null.
@@ -191,7 +180,7 @@
 	var/alien_caste = pick("Hunter","Sentinel","Drone")
 	var/mob/living/carbon/human/new_xeno = create_new_xenomorph(alien_caste,loc)
 
-	new_xeno.a_intent = "hurt"
+	new_xeno.a_intent = I_HURT
 	new_xeno.key = key
 
 	new_xeno << "<B>You are now an alien.</B>"
@@ -248,7 +237,7 @@
 		del(t)
 
 	var/mob/living/simple_animal/corgi/new_corgi = new /mob/living/simple_animal/corgi (loc)
-	new_corgi.a_intent = "hurt"
+	new_corgi.a_intent = I_HURT
 	new_corgi.key = key
 
 	new_corgi << "<B>You are now a Corgi. Yap Yap!</B>"
@@ -282,7 +271,7 @@
 	var/mob/new_mob = new mobpath(src.loc)
 
 	new_mob.key = key
-	new_mob.a_intent = "hurt"
+	new_mob.a_intent = I_HURT
 
 
 	new_mob << "You suddenly feel more... animalistic."
@@ -302,7 +291,7 @@
 	var/mob/new_mob = new mobpath(src.loc)
 
 	new_mob.key = key
-	new_mob.a_intent = "hurt"
+	new_mob.a_intent = I_HURT
 	new_mob << "You feel more... animalistic"
 
 	del(src)

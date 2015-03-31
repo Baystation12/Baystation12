@@ -1,6 +1,6 @@
 /mob/living/simple_animal/borer/say(var/message)
 
-	message = trim_strip_html_properly(message)
+	message = sanitize(message)
 	message = capitalize(message)
 
 	if(!message)

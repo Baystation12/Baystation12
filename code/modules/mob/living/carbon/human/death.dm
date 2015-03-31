@@ -28,8 +28,10 @@
 
 	if(stat == DEAD) return
 
-	hud_updateflag |= 1 << HEALTH_HUD
-	hud_updateflag |= 1 << STATUS_HUD
+	BITSET(hud_updateflag, HEALTH_HUD)
+	BITSET(hud_updateflag, STATUS_HUD)
+	BITSET(hud_updateflag, LIFE_HUD)
+
 	handle_hud_list()
 
 	//Handle species-specific deaths.
@@ -63,8 +65,6 @@
 	if(ticker && ticker.mode)
 		sql_report_death(src)
 		ticker.mode.check_win()
-		if(istype(ticker.mode,/datum/game_mode/heist))
-			vox_kills++ //Bad vox. Shouldn't be killing humans.
 
 	return ..(gibbed,species.death_message)
 

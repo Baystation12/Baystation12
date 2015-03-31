@@ -89,7 +89,7 @@
 	return
 
 /obj/machinery/turret/bullet_act(var/obj/item/projectile/Proj)
-	if(Proj.damage_type == HALLOSS)
+	if(!(Proj.damage_type == BRUTE || Proj.damage_type == BURN))
 		return
 	take_damage(Proj.damage)
 	..()
@@ -265,6 +265,7 @@
 		A = new /obj/item/projectile/energy/electrode( loc )
 		use_power(200)
 	A.current = T
+	A.starting = T
 	A.yo = U.y - T.y
 	A.xo = U.x - T.x
 	spawn( 0 )
@@ -299,7 +300,7 @@
 				popping = 0
 
 /obj/machinery/turret/bullet_act(var/obj/item/projectile/Proj)
-	if(Proj.damage_type == HALLOSS)
+	if(!(Proj.damage_type == BRUTE || Proj.damage_type == BURN))
 		return
 	src.health -= Proj.damage
 	..()

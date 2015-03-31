@@ -138,7 +138,7 @@
 		if(output_used < 0.0001)			// either from no charge or set to 0
 			outputting(0)
 			investigate_log("lost power and turned <font color='red'>off</font>","singulo")
-	else if(output_attempt && charge > output_level && output_level > 0)
+	else if(output_attempt && output_level > 0)
 		outputting = 1
 	else
 		output_used = 0
@@ -218,6 +218,8 @@
 	add_fingerprint(user)
 	ui_interact(user)
 
+/obj/machinery/power/smes/attack_ghost(mob/user)
+	ui_interact(user)
 
 /obj/machinery/power/smes/attack_hand(mob/user)
 	add_fingerprint(user)
@@ -273,7 +275,8 @@
 						s.set_up(5, 1, src)
 						s.start()
 						building_terminal = 0
-						return 0
+						if(usr.stunned)
+							return 0
 					new /obj/item/stack/cable_coil(loc,10)
 					user.visible_message(\
 						"<span class='notice'>[user.name] cut the cables and dismantled the power terminal.</span>",\

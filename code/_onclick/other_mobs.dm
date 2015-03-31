@@ -31,7 +31,7 @@
 /mob/living/carbon/human/RangedAttack(var/atom/A)
 	if(!gloves && !mutations.len) return
 	var/obj/item/clothing/gloves/G = gloves
-	if((LASER in mutations) && a_intent == "hurt")
+	if((LASER in mutations) && a_intent == I_HURT)
 		LaserEyes(A) // moved into a proc below
 
 	else if(istype(G) && G.Touch(A,0)) // for magic gloves
@@ -51,45 +51,6 @@
 
 /mob/living/RestrainedClickOn(var/atom/A)
 	return
-
-/*
-	Monkeys
-*/
-
-
-/mob/living/carbon/monkey/UnarmedAttack(var/atom/A, var/proximity)
-
-	if(!..())
-		return
-
-	A.attack_hand(src)
-
-/*
-	Monkey RestrainedClickOn() was apparently the
-	one and only use of all of the restrained click code
-	(except to stop you from doing things while handcuffed);
-	moving it here instead of various hand_p's has simplified
-	things considerably
-*/
-/mob/living/carbon/monkey/RestrainedClickOn(var/atom/A)
-	if(a_intent != "harm" || !ismob(A)) return
-	if(istype(wear_mask, /obj/item/clothing/mask/muzzle))
-		return
-	var/mob/living/carbon/ML = A
-	var/dam_zone = ran_zone(pick("chest", "l_hand", "r_hand", "l_leg", "r_leg"))
-	var/armor = ML.run_armor_check(dam_zone, "melee")
-	if(prob(75))
-		ML.apply_damage(rand(1,3), BRUTE, dam_zone, armor)
-		for(var/mob/O in viewers(ML, null))
-			O.show_message("\red <B>[name] has bit [ML]!</B>", 1)
-		if(armor >= 2) return
-		if(ismonkey(ML))
-			for(var/datum/disease/D in viruses)
-				if(istype(D, /datum/disease/jungle_fever))
-					ML.contract_disease(D,1,0)
-	else
-		for(var/mob/O in viewers(ML, null))
-			O.show_message("\red <B>[src] has attempted to bite [ML]!</B>", 1)
 
 /*
 	Aliens
@@ -120,45 +81,61 @@
 
 	// Eating
 	if(Victim)
+		if (Victim == A)
+			Feedstop()
 		return
 
-	// Basic attack.
-	A.attack_generic(src, (is_adult ? rand(20,40) : rand(5,25)), "glomped")
-
-	// Handle mob shocks.
 	var/mob/living/M = A
-	if(istype(M) && powerlevel > 0 && !istype(A,/mob/living/carbon/slime))
+	if (istype(M))
 
-		if(ishuman(M))
-			var/mob/living/carbon/human/H = M
-			if(H.species.flags & IS_SYNTHETIC || (H.species.siemens_coefficient<0.5))
-				return
+		switch(src.a_intent)
+			if (I_HELP) // We just poke the other
+				M.visible_message("<span class='notice'>[src] gently pokes [M]!</span>", "<span class='notice'>[src] gently pokes you!</span>")
+			if (I_DISARM) // We stun the target, with the intention to feed
+				var/stunprob = 1
+				var/power = max(0, min(10, (powerlevel + rand(0, 3))))
+				if (powerlevel > 0 && !istype(A, /mob/living/carbon/slime))
+					if(ishuman(M))
+						var/mob/living/carbon/human/H = M
+						if(H.species.flags & IS_SYNTHETIC)
+							return
+						stunprob *= H.species.siemens_coefficient
 
-		var/power = max(0,min(10,(powerlevel+rand(0,3))))
 
-		var/stunprob = 10
-		switch(power*10)
-			if(1 to 2) stunprob = 20
-			if(3 to 4) stunprob = 30
-			if(5 to 6) stunprob = 40
-			if(7 to 8) stunprob = 60
-			if(9) 	   stunprob = 70
-			if(10) 	   stunprob = 95
+					switch(power * 10)
+						if(0) stunprob *= 10
+						if(1 to 2) stunprob *= 20
+						if(3 to 4) stunprob *= 30
+						if(5 to 6) stunprob *= 40
+						if(7 to 8) stunprob *= 60
+						if(9) 	   stunprob *= 70
+						if(10) 	   stunprob *= 95
 
-		if(prob(stunprob))
-			powerlevel = max(0,powerlevel-3)
-			src.visible_message("\red <B>The [name] has shocked [M]!</B>")
-			M.Weaken(power)
-			M.Stun(power)
-			if (M.stuttering < power) M.stuttering = power
+				if(prob(stunprob))
+					powerlevel = max(0, powerlevel-3)
+					M.visible_message("<span class='danger'>[src] has shocked [M]!</span>", "<span class='danger'>[src] has shocked you!</span>")
+					M.Weaken(power)
+					M.Stun(power)
+					M.stuttering = max(M.stuttering, power)
 
-			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
-			s.set_up(5, 1, M)
-			s.start()
+					var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+					s.set_up(5, 1, M)
+					s.start()
 
-			if(prob(stunprob) && powerlevel >= 8)
-				M.adjustFireLoss(powerlevel * rand(6,10))
-			M.updatehealth()
+					if(prob(stunprob) && powerlevel >= 8)
+						M.adjustFireLoss(powerlevel * rand(6,10))
+				else if(prob(40))
+					M.visible_message("<span class='danger'>[src] has pounced at [M]!</span>", "<span class='danger'>[src] has pounced at you!</span>")
+					M.Weaken(power)
+				else
+					M.visible_message("<span class='danger'>[src] has tried to pounce at [M]!</span>", "<span class='danger'>[src] has tried to pounce at you!</span>")
+				M.updatehealth()
+			if (I_GRAB) // We feed
+				Wrap(M)
+			if (I_HURT) // Attacking
+				A.attack_generic(src, (is_adult ? rand(20,40) : rand(5,25)), "glomped")
+	else
+		A.attack_generic(src, (is_adult ? rand(20,40) : rand(5,25)), "glomped") // Basic attack.
 /*
 	New Players:
 	Have no reason to click on anything at all.
@@ -179,5 +156,5 @@
 		return
 
 	var/damage = rand(melee_damage_lower, melee_damage_upper)
-	if(A.attack_generic(src,damage,attacktext,wall_smash) && loc && attack_sound)
+	if(A.attack_generic(src,damage,attacktext,environment_smash) && loc && attack_sound)
 		playsound(loc, attack_sound, 50, 1, 1)
