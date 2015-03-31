@@ -1,5 +1,3 @@
-#define RECOIL_ACCURACY_MODIFIER	3
-
 //Parent gun type. Guns are weapons that can be aimed at mobs and act over a distance
 /obj/item/weapon/gun
 	name = "gun"
@@ -26,6 +24,7 @@
 	var/silenced = 0
 	var/accuracy = 0 //accuracy is measured in tiles. +1 accuracy means that everything is effectively one tile closer for the purpose of miss chance, -1 means the opposite. launchers are not supported, at the moment.
 	var/scoped_accuracy = null
+	var/shot_accuracy_effect = 3 //degree to which firing the gun rapidly or in bursts affects accuracy
 
 	var/burst_toggleable = 0
 	var/burst_mode = 0 //burst fire
@@ -149,9 +148,9 @@
 
 		spawn(times_fired*burst_delay) //brief delay between shots
 			process_projectile(projectile, user, target, user.zone_sel.selecting, params, pointblank, reflex)
-			cumulative_accuracy_penalty += recoil * RECOIL_ACCURACY_MODIFIER //first shot in burst has regular accuracy. Subsequent shots degrade
-			spawn(10)
-				cumulative_accuracy_penalty -= recoil * RECOIL_ACCURACY_MODIFIER //cumulative recoil returns to 0 ten ticks after firing
+			cumulative_accuracy_penalty += shot_accuracy_effect //first shot in burst has regular accuracy. Subsequent shots degrade
+			spawn(5)
+				cumulative_accuracy_penalty -= shot_accuracy_effect //accuracy penalty returns to 0 ten ticks after firing
 
 
 	if(times_fired)
