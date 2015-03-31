@@ -607,7 +607,7 @@
 			stolen_item = C.r_hand
 
 		if(stolen_item)
-			C.u_equip(stolen_item)
+			C.remove_from_mob(stolen_item)
 			held_item = stolen_item
 			stolen_item.loc = src
 			visible_message("[src] grabs the [held_item] out of [C]'s hand!", "\blue You snag the [held_item] out of [C]'s hand!", "You hear the sounds of wings flapping furiously.")

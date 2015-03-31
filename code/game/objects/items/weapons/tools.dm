@@ -190,12 +190,12 @@
 		if (user.client)
 			user.client.screen -= src
 		if (user.r_hand == src)
-			user.u_equip(src)
+			user.remove_from_mob(src)
 		else
-			user.u_equip(src)
+			user.remove_from_mob(src)
 		src.master = F
 		src.layer = initial(src.layer)
-		user.u_equip(src)
+		user.remove_from_mob(src)
 		if (user.client)
 			user.client.screen -= src
 		src.loc = F

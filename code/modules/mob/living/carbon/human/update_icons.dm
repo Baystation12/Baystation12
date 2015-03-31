@@ -694,13 +694,12 @@ var/global/list/damage_icon_parts = list()
 			standing.overlays	+= bloodsies
 
 		overlays_standing[SUIT_LAYER]	= standing
-
 		update_tail_showing(0)
 
 	else
 		overlays_standing[SUIT_LAYER]	= null
-
 		update_tail_showing(0)
+		update_inv_shoes(0)
 
 	update_collar(0)
 
