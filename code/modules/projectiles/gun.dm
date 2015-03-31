@@ -1,4 +1,4 @@
-#define RECOIL_ACCURACY_MODIFIER	2
+#define RECOIL_ACCURACY_MODIFIER	3
 
 //Parent gun type. Guns are weapons that can be aimed at mobs and act over a distance
 /obj/item/weapon/gun
@@ -22,7 +22,7 @@
 	var/fire_delay = 6
 	var/fire_sound = 'sound/weapons/Gunshot.ogg'
 	var/fire_sound_text = "gunshot"
-	var/recoil = 0		//screen shake
+	var/recoil = 0		//screen shake & burst accuracy
 	var/silenced = 0
 	var/accuracy = 0 //accuracy is measured in tiles. +1 accuracy means that everything is effectively one tile closer for the purpose of miss chance, -1 means the opposite. launchers are not supported, at the moment.
 	var/scoped_accuracy = null
@@ -33,7 +33,7 @@
 	var/burst_size = 3
 
 	var/last_fired = 0
-	var/cumulative_recoil = 0
+	var/cumulative_accuracy_penalty = 0
 
 	//aiming system stuff
 	var/keep_aim = 1 	//1 for keep shooting until aim is lowered
@@ -135,14 +135,12 @@
 
 	var/times_to_fire = 1
 	var/times_fired = 0
-	//var/times_fired1 = 0
-	//var/original_accuracy = accuracy
 
 	if(burst_mode)
 		times_to_fire = burst_size
 
 
-	while(times_fired<times_to_fire)
+	for(times_fired = 0;times_fired<times_to_fire;times_fired++)
 		var/obj/projectile = consume_next_projectile(user)
 		if(!projectile)
 			spawn(times_fired*burst_delay)
@@ -151,17 +149,13 @@
 
 		spawn(times_fired*burst_delay) //brief delay between shots
 			process_projectile(projectile, user, target, user.zone_sel.selecting, params, pointblank, reflex)
-			cumulative_recoil += recoil * RECOIL_ACCURACY_MODIFIER //first shot in burst has regular accuracy. Subsequent shots degrade
-			if(recoil)
-				spawn()
-					shake_camera(user, recoil+1, recoil)
+			cumulative_accuracy_penalty += recoil * RECOIL_ACCURACY_MODIFIER //first shot in burst has regular accuracy. Subsequent shots degrade
 			spawn(10)
-				cumulative_recoil -= recoil * RECOIL_ACCURACY_MODIFIER //cumulative recoil returns to 0 ten ticks after firing
+				cumulative_accuracy_penalty -= recoil * RECOIL_ACCURACY_MODIFIER //cumulative recoil returns to 0 ten ticks after firing
 
-		times_fired++
 
 	if(times_fired)
-		handle_post_fire(user, target, pointblank, reflex)
+		handle_post_fire(user, target, pointblank, reflex, times_fired)
 
 		update_icon()
 		if(user.hand)
@@ -193,13 +187,24 @@
 	playsound(src.loc, 'sound/weapons/empty.ogg', 100, 1)
 
 //called after successfully firing
-/obj/item/weapon/gun/proc/handle_post_fire(mob/user, atom/target, var/pointblank=0, var/reflex=0)
-	if(!silenced)
+/obj/item/weapon/gun/proc/handle_post_fire(mob/user, atom/target, var/pointblank=0, var/reflex=0, var/times_fired = 1)
+
+	var/fire_volume = 50
+
+	if(silenced)
+		fire_volume = 10
+	else
 		user.visible_message(
 			"<span class='danger'>[user][burst_mode ? " burst-fires ":" fires "][src][pointblank ? "  point blank at [target]":""][reflex ? " by reflex":""]!</span>",
 			"<span class='warning'>You fire [src][reflex ? "by reflex":""]!</span>",
 			"You hear a [fire_sound_text]!"
 		)
+
+	for (var/times_played=0 ; times_played<times_fired ; times_played++)
+		spawn(times_played*burst_delay)
+			playsound(user, fire_sound, fire_volume, 1)
+			if(recoil)
+				shake_camera(user, recoil+1, recoil)
 
 	update_icon()
 
@@ -207,11 +212,6 @@
 /obj/item/weapon/gun/proc/process_projectile(obj/projectile, mob/user, atom/target, var/target_zone, var/params=null, var/pointblank=0, var/reflex=0)
 	if(!istype(projectile, /obj/item/projectile))
 		return 0 //default behaviour only applies to true projectiles
-
-	if(silenced)
-		playsound(user, fire_sound, 10, 1)
-	else
-		playsound(user, fire_sound, 50, 1)
 
 	var/obj/item/projectile/P = projectile
 

@@ -134,7 +134,8 @@
 
 	if (istype(shot_from, /obj/item/weapon/gun))
 		var/obj/item/weapon/gun/daddy = shot_from
-		accuracy = daddy.accuracy - daddy.cumulative_recoil
+		accuracy = daddy.accuracy - daddy.cumulative_accuracy_penalty
+		//user << "Accuracy: [accuracy]"
 
 	spawn()
 		process()
