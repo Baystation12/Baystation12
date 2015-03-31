@@ -10,8 +10,8 @@
 	var/a_dis = 0
 	var/P_type = 0
 	var/P_type_t = ""
-	var/max_metal = 1000
-	var/metal = 100
+	var/max_metal = 50
+	var/metal = 10
 	var/obj/item/weapon/wrench/W
 
 /obj/machinery/pipelayer/New()
@@ -30,7 +30,7 @@
 
 /obj/machinery/pipelayer/attack_hand(mob/user as mob)
 	on=!on
-	visible_message("[src] [!on?"dea":"a"]ctivated.", "[user] [!on?"dea":"a"]ctivate [src].")
+	visible_message("[src] [!on?"dea":"a"]ctivated.", "[user] [!on?"dea":"a"]ctivated [src].")
 	return
 
 /obj/machinery/pipelayer/attackby(var/obj/item/W as obj, var/mob/user as mob)
@@ -48,7 +48,7 @@
 				P_type_t = "supply pipes"
 			if(0)
 				P_type = 2
-				P_type_t = "heat exchange"
+				P_type_t = "heat exchange pipes"
 
 		user.visible_message("[user] set [src] to [P_type_t] making", "You set [src] to [P_type_t] making")
 		return
@@ -88,9 +88,10 @@
 
 /obj/machinery/pipelayer/examine(mob/user)
 	..()
-	user.visible_message("[src] have [metal] in stack, setted to [P_type_t], and auto dismantle [!on?"dea":"a"]ctivated.")
+	user.visible_message("\The [src] has [metal] sheet\s, is set to produce [P_type_t], and auto-dismantle is [!on?"de":""]activated.")
 
 /obj/machinery/pipelayer/proc/reset()
+	on=0
 	return
 
 /obj/machinery/pipelayer/proc/load_metal(var/obj/item/stack/sheet/metal/MM)
@@ -108,10 +109,7 @@
 
 /obj/machinery/pipelayer/proc/use_metal(amount)
 	if(!metal || metal<amount)
-		visible_message("Metal depleted, [src] deactivated.")
-		return
-	if(metal < amount)
-		visible_message("Not enough metal to finish the task.")
+		visible_message("Metal depleted. [src] deactivated.")
 		return
 	metal-=amount
 	return 1
@@ -126,11 +124,7 @@
 	return !new_turf.intact
 
 /obj/machinery/pipelayer/proc/layPipe(var/turf/w_turf,var/M_Dir,var/old_dir)
-	if(!on)
-		return reset()
-	if(!(M_Dir in list(1, 2, 4, 8)))
-		return reset()
-	if(!use_metal(0.25))
+	if(!on || !(M_Dir in list(1, 2, 4, 8)) || !use_metal(0.25))
 		return reset()
 	var/fdirn = turn(M_Dir,180)
 	var/p_type
