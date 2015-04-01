@@ -729,7 +729,7 @@ note dizziness decrements automatically in the mob's Life() proc.
 			stat(null,"Location:\t([x], [y], [z])")
 			stat(null,"CPU:\t[world.cpu]")
 			stat(null,"Instances:\t[world.contents.len]")
-		if(statpanel("Status") && processScheduler.getIsRunning())
+		if(statpanel("Status") && processScheduler && processScheduler.getIsRunning())
 			var/datum/controller/process/process
 
 			process = processScheduler.getProcess("ticker")
