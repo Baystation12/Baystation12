@@ -223,7 +223,7 @@
 					chance = !hand ? 40 : 20
 
 				if (prob(chance))
-					visible_message("<spawn class=danger>[src]'s [W] goes off during struggle!")
+					visible_message("<span class='danger'>[src]'s [W] goes off during struggle!</span>")
 					var/list/turfs = list()
 					for(var/turf/T in view())
 						turfs += T
