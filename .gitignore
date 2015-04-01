@@ -6,3 +6,6 @@
 *.lk
 *.orig
 data/
+cfg/
+core.*
+libmysqlclient.so

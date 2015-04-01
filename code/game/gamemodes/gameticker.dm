@@ -110,7 +110,6 @@ var/global/datum/controller/gameticker/ticker
 	if (!src.mode.can_start())
 		world << "<B>Unable to start [mode.name].</B> Not enough players, [mode.required_players] players needed. Reverting to pre-game lobby."
 		del(mode)
-		master_mode = "secret"
 		current_state = GAME_STATE_PREGAME
 		job_master.ResetOccupations()
 		return 0
@@ -121,7 +120,6 @@ var/global/datum/controller/gameticker/ticker
 	if(!can_continue)
 		del(mode)
 		current_state = GAME_STATE_PREGAME
-		master_mode = "secret"
 		world << "<B>Error setting up [master_mode].</B> Reverting to pre-game lobby."
 		job_master.ResetOccupations()
 		return 0

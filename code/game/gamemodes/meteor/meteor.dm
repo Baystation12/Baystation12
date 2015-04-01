@@ -18,8 +18,8 @@
 
 
 /datum/game_mode/meteor/post_setup()
-	defer_powernet_rebuild = 2//Might help with the lag
-	spawn (rand(waittime_l, waittime_h))
+	defer_powernet_rebuild = 2 //Might help with the lag
+	//spawn (rand(waittime_l, waittime_h))
 	//	send_intercept()
 	spawn(meteordelay)
 		nometeors = 0

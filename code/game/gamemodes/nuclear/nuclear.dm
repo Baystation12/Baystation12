@@ -160,7 +160,7 @@ var/global/list/turf/synd_spawn = list()
 		var/obj/machinery/nuclearbomb/the_bomb = new /obj/machinery/nuclearbomb(nuke_spawn.loc)
 		the_bomb.r_code = nuke_code
 
-	spawn (rand(waittime_l, waittime_h))
+	//spawn (rand(waittime_l, waittime_h))
 	//	send_intercept()
 
 	return ..()

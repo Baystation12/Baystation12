@@ -562,7 +562,7 @@ var/list/ghostteleportlocs = list()
 /area/prison/solitary
 	name = "\improper Solitary Confinement"
 	icon_state = "brig"
-	
+
 /area/prison/yard
 	name = "\improper Labor Camp Yard"
 	icon_state = ""
@@ -779,20 +779,24 @@ var/list/ghostteleportlocs = list()
 	icon_state = "construction"
 
 /area/hallway/secondary/entry/fore
-	name = "\improper Arrival Shuttle Hallway - Fore"
+	name = "\improper Garden Zone Hallway - Fore"
 	icon_state = "entry_1"
 
 /area/hallway/secondary/entry/port
-	name = "\improper Arrival Shuttle Hallway - Port"
+	name = "\improper Garden Zone Hallway - Port"
 	icon_state = "entry_2"
 
 /area/hallway/secondary/entry/starboard
-	name = "\improper Arrival Shuttle Hallway - Starboard"
+	name = "\improper Garden Zone Hallway - Starboard"
 	icon_state = "entry_3"
 
 /area/hallway/secondary/entry/aft
-	name = "\improper Arrival Shuttle Hallway - Aft"
+	name = "\improper Garden Zone Hallway - Aft"
 	icon_state = "entry_4"
+
+/area/hallway/secondary/entry/garden
+	name = "\improper Garden Zone"
+	icon_state = "garden"
 
 //Command
 
@@ -866,7 +870,11 @@ var/list/ghostteleportlocs = list()
 	icon_state = "toilet"
 
 /area/crew_quarters/sleep/bedrooms
-	name = "\improper Dormitory Bedroom One"
+	name = "\improper Dormitory Bedroom 1"
+	icon_state = "Sleep"
+
+/area/crew_quarters/sleep/bedroomstwo
+	name = "\improper Dormitory Bedroom 2"
 	icon_state = "Sleep"
 
 /area/crew_quarters/sleep/cryo

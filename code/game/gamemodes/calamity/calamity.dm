@@ -388,8 +388,8 @@
 		player.current << "<b><font color='red'>Your crew is transporting cortical stacks and critical resources back to the Shoal.\
 		 No delay or concession can be tolerated. Even putting holes in the station pales in comparison to failure.</b></font>"
 
-	spawn (rand(waittime_l, waittime_h))
-	//	send_intercept()
+	//	spawn (rand(waittime_l, waittime_h))
+	//		send_intercept()
 	..()
 
 /datum/game_mode/calamity/proc/spawn_borers(var/list/candidates)

@@ -73,7 +73,7 @@ var/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","Epsilon"
 			forge_changeling_objectives(changeling)
 		greet_changeling(changeling)
 
-	spawn (rand(waittime_l, waittime_h))
+	//spawn (rand(waittime_l, waittime_h))
 	//	send_intercept()
 	..()
 	return
