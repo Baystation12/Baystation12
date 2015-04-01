@@ -72,6 +72,10 @@
 		if("grab")
 			if(M == src || anchored)
 				return 0
+			for(var/obj/item/weapon/grab/G in src.grabbed_by)
+				if(G.assailant == M)
+					M << "<span class='notice'>You already grabbed [src].</span>"
+					return
 			if(w_uniform)
 				w_uniform.add_fingerprint(M)
 
