@@ -431,7 +431,7 @@
 		user.visible_message("<span class='danger'>The [src] was sliced apart by [user]!</span>")
 		destroy()
 
-	user.drop_item(src)
+	user.drop_item(src.loc)
 	return
 
 /obj/structure/table/proc/straight_table_check(var/direction)
