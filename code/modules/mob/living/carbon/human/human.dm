@@ -1119,8 +1119,6 @@
 
 	species = all_species[new_species]
 
-	species.create_organs(src)
-
 	if(species.language)
 		add_language(species.language)
 
@@ -1136,6 +1134,8 @@
 		r_skin = 0
 		g_skin = 0
 		b_skin = 0
+
+	species.create_organs(src)
 
 	species.handle_post_spawn(src)
 
