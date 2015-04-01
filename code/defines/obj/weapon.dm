@@ -91,10 +91,11 @@
 
 /obj/item/weapon/cane/concealed/New()
 	..()
-	concealed_blade = new/obj/item/weapon/butterfly/switchblade(src)
-	concealed_blade.attack_self()
+	var/obj/item/weapon/butterfly/switchblade/temp_blade = new(src)
+	concealed_blade = temp_blade
+	temp_blade.attack_self()
 
-/obj/item/weapon/cane/concealed/attack_self(mob/user)
+/obj/item/weapon/cane/concealed/attack_self(var/mob/user)
 	if(concealed_blade)
 		user.visible_message("<span class='warning'>[user] has unsheathed \a [concealed_blade] from \his [src]!</span>", "You unsheathe \the [concealed_blade] from \the [src].")
 		// Calling drop/put in hands to properly call item drop/pickup procs
@@ -102,8 +103,8 @@
 		user.drop_from_inventory(src)
 		user.put_in_hands(concealed_blade)
 		user.put_in_hands(src)
-		update_inv_l_hand(0)
-		update_inv_r_hand()
+		user.update_inv_l_hand(0)
+		user.update_inv_r_hand()
 		concealed_blade = null
 	else
 		..()
