@@ -134,7 +134,7 @@
 		verbs |= /obj/item/weapon/rig/proc/toggle_chest
 
 	for(var/obj/item/piece in list(gloves,helmet,boots,chest))
-		if(!piece)
+		if(!istype(piece))
 			continue
 		piece.canremove = 0
 		piece.name = "[suit_type] [initial(piece.name)]"
@@ -145,7 +145,6 @@
 		piece.siemens_coefficient = siemens_coefficient
 		piece.permeability_coefficient = permeability_coefficient
 		piece.unacidable = unacidable
-		if(islist(species_restricted)) piece.species_restricted = species_restricted.Copy()
 		if(islist(armor)) piece.armor = armor.Copy()
 
 	update_icon(1)

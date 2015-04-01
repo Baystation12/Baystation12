@@ -35,6 +35,11 @@
 		die_off()
 		return 0
 
+	for(var/obj/effect/effect/smoke/chem/smoke in view(1, src))
+		if(smoke.reagents.has_reagent("plantbgone"))
+			die_off()
+			return
+
 	// Handle life.
 	var/turf/simulated/T = get_turf(src)
 	if(istype(T))
