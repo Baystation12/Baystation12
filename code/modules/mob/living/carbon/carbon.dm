@@ -32,8 +32,8 @@
 				if(istype(src, /mob/living/carbon/human))
 					var/mob/living/carbon/human/H = src
 					var/organ = H.get_organ("chest")
-					if (istype(organ, /datum/organ/external))
-						var/datum/organ/external/temp = organ
+					if (istype(organ, /obj/item/organ/external))
+						var/obj/item/organ/external/temp = organ
 						if(temp.take_damage(d, 0))
 							H.UpdateDamageIcon()
 					H.updatehealth()
@@ -60,12 +60,13 @@
 
 /mob/living/carbon/attack_hand(mob/M as mob)
 	if(!istype(M, /mob/living/carbon)) return
-	if (hasorgans(M))
-		var/datum/organ/external/temp = M:organs_by_name["r_hand"]
-		if (M.hand)
-			temp = M:organs_by_name["l_hand"]
+	if (ishuman(M))
+		var/mob/living/carbon/human/H = M
+		var/obj/item/organ/external/temp = H.organs_by_name["r_hand"]
+		if (H.hand)
+			temp = H.organs_by_name["l_hand"]
 		if(temp && !temp.is_usable())
-			M << "\red You can't use your [temp.display_name]"
+			H << "\red You can't use your [temp.name]"
 			return
 
 	for(var/datum/disease/D in viruses)
@@ -155,7 +156,7 @@
 				"\blue You check yourself for injuries." \
 				)
 
-			for(var/datum/organ/external/org in H.organs)
+			for(var/obj/item/organ/external/org in H.organs)
 				var/status = ""
 				var/brutedamage = org.brute_dam
 				var/burndamage = org.burn_dam
@@ -186,9 +187,32 @@
 					status = "weirdly shapen."
 				if(status == "")
 					status = "OK"
-				src.show_message(text("\t []My [] is [].",status=="OK"?"\blue ":"\red ",org.display_name,status),1)
+				src.show_message(text("\t []My [] is [].",status=="OK"?"\blue ":"\red ",org.name,status),1)
 			if((SKELETON in H.mutations) && (!H.w_uniform) && (!H.wear_suit))
 				H.play_xylophone()
+		else if (on_fire)
+			playsound(src.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
+			if (M.on_fire)
+				M.visible_message("<span class='warning'>[M] tries to pat out [src]'s flames, but to no avail!</span>", \
+				"<span class='warning'>You try to pat out [src]'s flames, but to no avail! Put yourself out first!</span>")
+			else
+				M.visible_message("<span class='warning'>[M] tries to pat out [src]'s flames!</span>", \
+				"<span class='warning'>You try to pat out [src]'s flames! Hot!</span>")
+				if(do_mob(M, src, 15))
+					if (prob(10) && (M.fire_stacks <= 0))
+						src.fire_stacks -= 2
+						M.fire_stacks += 1
+					M.IgniteMob()
+					if (M.on_fire)
+						M.visible_message("<span class='danger'>The fire spreads from [src] to [M]!</span>", \
+						"<span class='danger'>The fire spreads to you as well!</span>")
+					else
+						src.fire_stacks -= 3 //Less effective than stop, drop, and roll
+						if (src.fire_stacks <= 0)
+							M.visible_message("<span class='warning'>[M] successfully pats out [src]'s flames.</span>", \
+							"<span class='warning'>You successfully pat out [src]'s flames.</span>")
+							src.ExtinguishMob()
+							src.fire_stacks = 0
 		else
 			var/t_him = "it"
 			if (src.gender == MALE)
@@ -215,7 +239,11 @@
 				else
 					M.visible_message("<span class='notice'>[M] hugs [src] to make [t_him] feel better!</span>", \
 								"<span class='notice'>You hug [src] to make [t_him] feel better!</span>")
-
+				if(M.fire_stacks >= (src.fire_stacks + 3))
+					src.fire_stacks += 1
+					M.fire_stacks -= 1
+				if(M.on_fire)
+					src.IgniteMob()
 			AdjustParalysis(-3)
 			AdjustStunned(-3)
 			AdjustWeakened(-3)
@@ -300,16 +328,9 @@
 
 	if(!item) return //Grab processing has a chance of returning null
 
-	item.layer = initial(item.layer)
-	u_equip(item)
-	update_icons()
-
-	if (istype(usr, /mob/living/carbon)) //Check if a carbon mob is throwing. Modify/remove this line as required.
-		item.loc = src.loc
-		if(src.client)
-			src.client.screen -= item
-		if(istype(item, /obj/item))
-			item:dropped(src) // let it know it's been dropped
+	
+	src.remove_from_mob(item)
+	item.loc = src.loc
 
 	//actually throw it!
 	if (item)
@@ -415,102 +436,12 @@
 	if(alert(src,"You sure you want to sleep for a while?","Sleep","Yes","No") == "Yes")
 		usr.sleeping = 20 //Short nap
 
-/mob/living/carbon/Bump(atom/movable/AM as mob|obj, yes)
-
-	spawn( 0 )
-		if ((!( yes ) || now_pushing))
-			return
-		now_pushing = 1
-		if(ismob(AM))
-			var/mob/tmob = AM
-
-			if( istype(tmob, /mob/living/carbon) && prob(10) )
-				src.spread_disease_to(AM, "Contact")
-
-			if(istype(tmob, /mob/living/carbon/human))
-
-				if(HULK in tmob.mutations)
-					if(prob(70))
-						usr << "\red <B>You fail to push [tmob]'s fat ass out of the way.</B>"
-						now_pushing = 0
-						return
-				if(!(tmob.status_flags & CANPUSH))
-					now_pushing = 0
-					return
-
-				for(var/mob/M in range(tmob, 1))
-					if(tmob.pinned.len ||  ((M.pulling == tmob && ( tmob.restrained() && !( M.restrained() ) && M.stat == 0)) || locate(/obj/item/weapon/grab, tmob.grabbed_by.len)) )
-						if ( !(world.time % 5) )
-							src << "\red [tmob] is restrained, you cannot push past"
-						now_pushing = 0
-						return
-					if( tmob.pulling == M && ( M.restrained() && !( tmob.restrained() ) && tmob.stat == 0) )
-						if ( !(world.time % 5) )
-							src << "\red [tmob] is restraining [M], you cannot push past"
-						now_pushing = 0
-						return
-
-			//Leaping mobs just land on the tile, no pushing, no anything.
-			if(status_flags & LEAPING)
-				loc = tmob.loc
-				status_flags &= ~LEAPING
-				now_pushing = 0
-				return
-
-			// Step over drones.
-			// I have no idea why the hell this isn't already happening. How do mice do it?
-			if(istype(tmob,/mob/living/silicon/robot/drone))
-				loc = tmob.loc
-				now_pushing = 0
-				return
-
-			if((tmob.a_intent == "help" || tmob.restrained()) && (a_intent == "help" || src.restrained()) && tmob.canmove && !tmob.buckled && canmove) // mutual brohugs all around!
-				var/turf/oldloc = loc
-				loc = tmob.loc
-				tmob.loc = oldloc
-				now_pushing = 0
-				for(var/mob/living/carbon/slime/slime in view(1,tmob))
-					if(slime.Victim == tmob)
-						slime.UpdateFeed()
-				return
-
-			if(istype(tmob, /mob/living/carbon/human) && (FAT in tmob.mutations))
-				if(prob(40) && !(FAT in src.mutations))
-					src << "\red <B>You fail to push [tmob]'s fat ass out of the way.</B>"
-					now_pushing = 0
-					return
-			if(tmob.r_hand && istype(tmob.r_hand, /obj/item/weapon/shield/riot))
-				if(prob(99))
-					now_pushing = 0
-					return
-			if(tmob.l_hand && istype(tmob.l_hand, /obj/item/weapon/shield/riot))
-				if(prob(99))
-					now_pushing = 0
-					return
-			if(!(tmob.status_flags & CANPUSH))
-				now_pushing = 0
-				return
-
-			tmob.LAssailant = src
-
-		now_pushing = 0
-		..()
-		if (!( istype(AM, /atom/movable) ))
-			return
-		if (!( now_pushing ))
-			now_pushing = 1
-			if (!( AM.anchored ))
-				var/t = get_dir(src, AM)
-				if (istype(AM, /obj/structure/window))
-					var/obj/structure/window/W = AM
-					if(W.is_full_window())
-						for(var/obj/structure/window/win in get_step(AM,t))
-							now_pushing = 0
-							return
-				step(AM, t)
-			now_pushing = 0
+/mob/living/carbon/Bump(var/atom/movable/AM, yes)
+	if(now_pushing || !yes)
 		return
-	return
+	..()
+	if(istype(AM, /mob/living/carbon) && prob(10))
+		src.spread_disease_to(AM, "Contact")
 
 /mob/living/carbon/can_use_vents()
 	return
@@ -524,3 +455,8 @@
 	Stun(stun_duration)
 	Weaken(Floor(stun_duration/2))
 	return 1
+
+/mob/living/carbon/get_default_language()
+	if(!species)
+		return null
+	return species.default_language ? all_languages[species.default_language] : null

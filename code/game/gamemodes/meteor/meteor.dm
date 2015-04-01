@@ -1,40 +1,22 @@
+#define METEOR_DELAY 6000
+
 /datum/game_mode/meteor
-	name = "meteor"
+	name = "Meteor"
+	round_description = "The space station has been stuck in a major meteor shower."
+	extended_round_description = "The station is on an unavoidable collision course with an asteroid field. The station will be continuously slammed with meteors, venting hallways, rooms, and ultimately destroying a majority of the basic life functions of the entire structure. Coordinate with your fellow crew members to survive the inevitable destruction of the station and get back home in one piece!"
 	config_tag = "meteor"
-	var/const/waittime_l = 600 //lower bound on time before intercept arrives (in tenths of seconds)
-	var/const/waittime_h = 1800 //upper bound on time before intercept arrives (in tenths of seconds)
-	var/const/meteordelay = 2000
-	var/nometeors = 1
 	required_players = 0
 	votable = 0
-
 	uplink_welcome = "EVIL METEOR Uplink Console:"
-
-
-/datum/game_mode/meteor/announce()
-	world << "<B>The current game mode is - Meteor!</B>"
-	world << "<B>The space station has been stuck in a major meteor shower. You must escape from the station or at least live.</B>"
-
+	deny_respawn = 1
 
 /datum/game_mode/meteor/post_setup()
 	defer_powernet_rebuild = 2//Might help with the lag
-	spawn (rand(waittime_l, waittime_h))
-		send_intercept()
-	spawn(meteordelay)
-		nometeors = 0
 	..()
 
-
 /datum/game_mode/meteor/process()
-	if(nometeors) return
-	/*if(prob(80))
-		spawn()
-			dust_swarm("norm")
-	else
-		spawn()
-			dust_swarm("strong")*/
-	spawn() spawn_meteors(6)
-
+	if(world.time >= METEOR_DELAY)
+		spawn() spawn_meteors(6)
 
 /datum/game_mode/meteor/declare_completion()
 	var/text
@@ -53,12 +35,14 @@
 			survivors++
 
 	if(survivors)
-		world << "\blue <B>The following survived the meteor storm</B>:[text]"
+		world << "<span class='notice'><B>The following survived the meteor storm</B></span>:[text]"
 	else
-		world << "\blue <B>Nobody survived the meteor storm!</B>"
+		world << "<span class='notice'><B>Nobody survived the meteor storm!</B></span>"
 
 	feedback_set_details("round_end_result","end - evacuation")
 	feedback_set("round_end_result",survivors)
 
 	..()
 	return 1
+
+#undef METEOR_DELAY

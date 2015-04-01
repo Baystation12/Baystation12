@@ -85,10 +85,8 @@
 	//MONEY
 /var/const/access_crate_cash = 200
 
-/obj/var/list/req_access = null
-/obj/var/req_access_txt = "0"
-/obj/var/list/req_one_access = null
-/obj/var/req_one_access_txt = "0"
+/obj/var/list/req_access = list()
+/obj/var/list/req_one_access = list()
 
 //returns 1 if this mob has sufficient access to use this object
 /obj/proc/allowed(mob/M)
@@ -103,11 +101,6 @@
 		//if they are holding or wearing a card that has access, that works
 		if(src.check_access(H.get_active_hand()) || src.check_access(H.wear_id))
 			return 1
-	else if(istype(M, /mob/living/carbon/monkey))
-		var/mob/living/carbon/george = M
-		//they can only hold things :(
-		if(src.check_access(george.get_active_hand()))
-			return 1
 	return 0
 
 /obj/item/proc/GetAccess()
@@ -117,54 +110,17 @@
 	return null
 
 /obj/proc/check_access(obj/item/I)
-	//These generations have been moved out of /obj/New() because they were slowing down the creation of objects that never even used the access system.
-	if(!src.req_access)
-		src.req_access = list()
-		if(src.req_access_txt)
-			var/list/req_access_str = text2list(req_access_txt,";")
-			for(var/x in req_access_str)
-				var/n = text2num(x)
-				if(n)
-					req_access += n
-
-	if(!src.req_one_access)
-		src.req_one_access = list()
-		if(src.req_one_access_txt)
-			var/list/req_one_access_str = text2list(req_one_access_txt,";")
-			for(var/x in req_one_access_str)
-				var/n = text2num(x)
-				if(n)
-					req_one_access += n
-
-	if(!istype(src.req_access, /list)) //something's very wrong
-		return 1
-
-	var/list/L = src.req_access
-	if(!L.len && (!src.req_one_access || !src.req_one_access.len)) //no requirements
-		return 1
-	if(!I)
-		return 0
-	for(var/req in src.req_access)
-		if(!(req in I.GetAccess())) //doesn't have this access
-			return 0
-	if(src.req_one_access && src.req_one_access.len)
-		for(var/req in src.req_one_access)
-			if(req in I.GetAccess()) //has an access from the single access list
-				return 1
-		return 0
-	return 1
-
+	return check_access_list(I ? I.GetAccess() : list())
 
 /obj/proc/check_access_list(var/list/L)
-	if(!src.req_access  && !src.req_one_access)	return 1
-	if(!istype(src.req_access, /list))	return 1
-	if(!src.req_access.len && (!src.req_one_access || !src.req_one_access.len))	return 1
+	if(!req_access)		req_access = list()
+	if(!req_one_access)	req_one_access = list()
 	if(!L)	return 0
 	if(!istype(L, /list))	return 0
 	for(var/req in src.req_access)
 		if(!(req in L)) //doesn't have this access
 			return 0
-	if(src.req_one_access && src.req_one_access.len)
+	if(src.req_one_access.len)
 		for(var/req in src.req_one_access)
 			if(req in L) //has an access from the single access list
 				return 1
@@ -407,7 +363,7 @@
 /proc/get_all_jobs()
 	var/list/all_jobs = list()
 	var/list/all_datums = typesof(/datum/job)
-	all_datums.Remove(list(/datum/job,/datum/job/ai,/datum/job/cyborg))
+	all_datums -= exclude_jobs
 	var/datum/job/jobdatum
 	for(var/jobtype in all_datums)
 		jobdatum = new jobtype

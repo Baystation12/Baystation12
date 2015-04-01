@@ -91,8 +91,7 @@
 	update_icon()
 	spawn(3)
 		src.botcard = new /obj/item/weapon/card/id(src)
-		var/datum/job/detective/J = new/datum/job/detective
-		src.botcard.access = J.get_access()
+		src.botcard.access = list(access_security, access_sec_doors, access_forensics_lockers, access_morgue, access_maint_tunnels, access_court)
 		if(radio_controller)
 			radio_controller.add_object(src, control_freq, filter = RADIO_SECBOT)
 			radio_controller.add_object(src, beacon_freq, filter = RADIO_NAVBEACONS)
@@ -839,7 +838,7 @@ Auto Patrol: []"},
 		del(src)
 
 	else if(istype(W, /obj/item/weapon/pen))
-		var/t = copytext(stripped_input(user, "Enter new robot name", src.name, src.created_name),1,MAX_NAME_LEN)
+		var/t = sanitizeSafe(input(user, "Enter new robot name", src.name, src.created_name), MAX_NAME_LEN)
 		if(!t)
 			return
 		if(!in_range(src, usr) && src.loc != usr)

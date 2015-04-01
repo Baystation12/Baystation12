@@ -233,13 +233,6 @@
 				else
 					randmutg(H)
 					domutcheck(H,null,MUTCHK_FORCED)
-	for(var/mob/living/carbon/monkey/M in living_mob_list)
-		var/turf/T = get_turf(M)
-		if(!T)
-			continue
-		if(isNotStationLevel(T.z))
-			continue
-		M.apply_effect((rand(15,75)),IRRADIATE,0)
 	sleep(100)
 	command_announcement.Announce("High levels of radiation detected near the station. Please report to the Med-bay if you feel strange.", "Anomaly Alert", new_sound = 'sound/AI/radiation.ogg')
 

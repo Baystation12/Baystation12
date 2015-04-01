@@ -194,10 +194,9 @@
 		if(critter.meat_type)
 			slab_type = critter.meat_type
 	else if(istype(src.occupant,/mob/living/carbon/human))
+		var/mob/living/carbon/human/H = occupant
 		slab_name = src.occupant.real_name
-		slab_type = /obj/item/weapon/reagent_containers/food/snacks/meat/human
-	else if(istype(src.occupant, /mob/living/carbon/monkey))
-		slab_type = /obj/item/weapon/reagent_containers/food/snacks/meat/monkey
+		slab_type = H.species.meat_type
 
 	// Small mobs don't give as much nutrition.
 	if(src.occupant.small)
@@ -229,7 +228,7 @@
 		for (var/obj/thing in contents)
 			// Todo: unify limbs and internal organs
 			// There's a chance that the gibber will fail to destroy some evidence.
-			if((istype(thing,/obj/item/weapon/organ) || istype(thing,/obj/item/organ)) && prob(80))
+			if((istype(thing,/obj/item/organ) || istype(thing,/obj/item/organ)) && prob(80))
 				del(thing)
 				continue
 			thing.loc = get_turf(thing) // Drop it onto the turf for throwing.

@@ -39,7 +39,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 
 
 /mob/living/carbon/human/proc/has_organ(name)
-	var/datum/organ/external/O = organs_by_name[name]
+	var/obj/item/organ/external/O = organs_by_name[name]
 
 	return (O && !(O.status & ORGAN_DESTROYED) )
 
@@ -69,11 +69,11 @@ This saves us from having to call add_fingerprint() any time something is put in
 		if(slot_glasses)
 			return has_organ("head")
 		if(slot_gloves)
-			return has_organ("l_hand") && has_organ("r_hand")
+			return has_organ("l_hand") || has_organ("r_hand")
 		if(slot_head)
 			return has_organ("head")
 		if(slot_shoes)
-			return has_organ("r_foot") && has_organ("l_foot")
+			return has_organ("r_foot") || has_organ("l_foot")
 		if(slot_wear_suit)
 			return has_organ("chest")
 		if(slot_w_uniform)
@@ -89,19 +89,13 @@ This saves us from having to call add_fingerprint() any time something is put in
 		if(slot_tie)
 			return 1
 
-/mob/living/carbon/human/u_equip(obj/item/W as obj)
+/mob/living/carbon/human/u_equip(obj/W as obj)
 	if(!W)	return 0
-
-	var/success
 
 	if (W == wear_suit)
 		if(s_store)
 			drop_from_inventory(s_store)
-		if(W)
-			success = 1
 		wear_suit = null
-		if(W.flags_inv & HIDESHOES)
-			update_inv_shoes(0)
 		update_inv_wear_suit()
 	else if (W == w_uniform)
 		if (r_store)
@@ -113,43 +107,43 @@ This saves us from having to call add_fingerprint() any time something is put in
 		if (belt)
 			drop_from_inventory(belt)
 		w_uniform = null
-		success = 1
 		update_inv_w_uniform()
 	else if (W == gloves)
 		gloves = null
-		success = 1
 		update_inv_gloves()
 	else if (W == glasses)
 		glasses = null
-		success = 1
 		update_inv_glasses()
 	else if (W == head)
 		head = null
-		if((W.flags & BLOCKHAIR) || (W.flags & BLOCKHEADHAIR)|| (W.flags_inv & HIDEMASK))
+		
+		var/update_hair = 0
+		if((W.flags & BLOCKHAIR) || (W.flags & BLOCKHEADHAIR))
+			update_hair = 1
+		else if(istype(W, /obj/item))
+			var/obj/item/I = W
+			if(I.flags_inv & HIDEMASK)
+				update_hair = 1
+		if(update_hair)
 			update_hair(0)	//rebuild hair
 			update_inv_ears(0)
 			update_inv_wear_mask(0)
-		success = 1
+		
 		update_inv_head()
 	else if (W == l_ear)
 		l_ear = null
-		success = 1
 		update_inv_ears()
 	else if (W == r_ear)
 		r_ear = null
-		success = 1
 		update_inv_ears()
 	else if (W == shoes)
 		shoes = null
-		success = 1
 		update_inv_shoes()
 	else if (W == belt)
 		belt = null
-		success = 1
 		update_inv_belt()
 	else if (W == wear_mask)
 		wear_mask = null
-		success = 1
 		if((W.flags & BLOCKHAIR) || (W.flags & BLOCKHEADHAIR))
 			update_hair(0)	//rebuild hair
 			update_inv_ears(0)
@@ -160,53 +154,36 @@ This saves us from having to call add_fingerprint() any time something is put in
 		update_inv_wear_mask()
 	else if (W == wear_id)
 		wear_id = null
-		success = 1
 		update_inv_wear_id()
 	else if (W == r_store)
 		r_store = null
-		success = 1
 		update_inv_pockets()
 	else if (W == l_store)
 		l_store = null
-		success = 1
 		update_inv_pockets()
 	else if (W == s_store)
 		s_store = null
-		success = 1
 		update_inv_s_store()
 	else if (W == back)
 		back = null
-		success = 1
 		update_inv_back()
 	else if (W == handcuffed)
 		handcuffed = null
 		if(buckled && buckled.buckle_require_restraints)
 			buckled.unbuckle_mob()
-		success = 1
 		update_inv_handcuffed()
 	else if (W == legcuffed)
 		legcuffed = null
-		success = 1
 		update_inv_legcuffed()
 	else if (W == r_hand)
 		r_hand = null
-		success = 1
 		update_inv_r_hand()
 	else if (W == l_hand)
 		l_hand = null
-		success = 1
 		update_inv_l_hand()
 	else
 		return 0
-
-	if(success)
-		if (W)
-			if (client)
-				client.screen -= W
-			W.loc = loc
-			W.dropped(src)
-			//if(W)
-				//W.layer = initial(W.layer)
+	
 	update_action_buttons()
 	return 1
 
@@ -319,7 +296,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 			update_inv_s_store(redraw_mob)
 		if(slot_in_backpack)
 			if(src.get_active_hand() == W)
-				src.u_equip(W)
+				src.remove_from_mob(W)
 			W.loc = src.back
 		if(slot_tie)
 			var/obj/item/clothing/under/uniform = src.w_uniform
@@ -339,6 +316,10 @@ This saves us from having to call add_fingerprint() any time something is put in
 
 	return
 
+/*
+	MouseDrop human inventory menu
+*/
+
 /obj/effect/equip_e
 	name = "equip e"
 	var/mob/source = null
@@ -350,10 +331,6 @@ This saves us from having to call add_fingerprint() any time something is put in
 /obj/effect/equip_e/human
 	name = "human"
 	var/mob/living/carbon/human/target = null
-
-/obj/effect/equip_e/monkey
-	name = "monkey"
-	var/mob/living/carbon/monkey/target = null
 
 /obj/effect/equip_e/process()
 	return
@@ -411,7 +388,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 			if("splints")
 				var/count = 0
 				for(var/organ in list("l_leg","r_leg","l_arm","r_arm"))
-					var/datum/organ/external/o = target.organs_by_name[organ]
+					var/obj/item/organ/external/o = target.organs_by_name[organ]
 					if(o.status & ORGAN_SPLINTED)
 						count = 1
 						break
@@ -699,7 +676,7 @@ It can still be worn/put on as normal.
 
 			if(can_reach_splints)
 				for(var/organ in list("l_leg","r_leg","l_arm","r_arm"))
-					var/datum/organ/external/o = target.get_organ(organ)
+					var/obj/item/organ/external/o = target.get_organ(organ)
 					if (o && o.status & ORGAN_SPLINTED)
 						var/obj/item/W = new /obj/item/stack/medical/splint(amount=1)
 						o.status &= ~ORGAN_SPLINTED
@@ -775,15 +752,12 @@ It can still be worn/put on as normal.
 			W.add_fingerprint(source)
 			if(slot_to_process == slot_l_store) //pockets! Needs to process the other one too. Snowflake code, wooo! It's not like anyone will rewrite this anytime soon. If I'm wrong then... CONGRATULATIONS! ;)
 				if(target.r_store)
-					target.u_equip(target.r_store) //At this stage l_store is already processed by the code above, we only need to process r_store.
+					target.remove_from_mob(target.r_store) //At this stage l_store is already processed by the code above, we only need to process r_store.
 		else
 			if(item && target.has_organ_for_slot(slot_to_process)) //Placing an item on the mob
 				if(item.mob_can_equip(target, slot_to_process, 0))
-					source.u_equip(item)
+					source.remove_from_mob(item)
 					target.equip_to_slot_if_possible(item, slot_to_process, 0, 1, 1)
-					item.dropped(source)
-					source.update_icons()
-					target.update_icons()
 
 	if(source && target)
 		if(source.machine == target)

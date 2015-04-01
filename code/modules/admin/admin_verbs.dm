@@ -15,6 +15,7 @@ var/list/admin_verbs_admin = list(
 	/client/proc/player_panel_new,		/*shows an interface for all players, with links to various panels*/
 	/client/proc/invisimin,				/*allows our mob to go invisible/visible*/
 //	/datum/admins/proc/show_traitor_panel,	/*interface which shows a mob's mind*/ -Removed due to rare practical use. Moved to debug verbs ~Errorage
+	/datum/admins/proc/show_game_mode,  /*Configuration window for the current game mode.*/
 	/datum/admins/proc/toggleenter,		/*toggles whether people can join the current game*/
 	/datum/admins/proc/toggleguests,	/*toggles whether guests can join the current game*/
 	/datum/admins/proc/announce,		/*priority announce something to all clients.*/
@@ -47,6 +48,7 @@ var/list/admin_verbs_admin = list(
 	/client/proc/check_words,			/*displays cult-words*/
 	/client/proc/check_ai_laws,			/*shows AI and borg laws*/
 	/client/proc/rename_silicon,		/*properly renames silicons*/
+	/client/proc/manage_silicon_laws,	/* Allows viewing and editing silicon laws. */
 	/client/proc/check_antagonists,
 	/client/proc/admin_memo,			/*admin memo system. show/delete/write. +SERVER needed to delete admin memos of others*/
 	/client/proc/dsay,					/*talk in deadchat using our ckey/fakekey*/
@@ -79,7 +81,10 @@ var/list/admin_verbs_admin = list(
 	/client/proc/toggle_antagHUD_restrictions,
 	/client/proc/allow_character_respawn,    /* Allows a ghost to respawn */
 	/client/proc/event_manager_panel,
-	/client/proc/empty_ai_core_toggle_latejoin
+	/client/proc/empty_ai_core_toggle_latejoin,
+	/client/proc/aooc,
+	/client/proc/change_human_appearance_admin,	/* Allows an admin to change the basic appearance of human-based mobs */
+	/client/proc/change_human_appearance_self	/* Allows the human-based mob itself change its basic appearance */
 )
 var/list/admin_verbs_ban = list(
 	/client/proc/unban_panel,
@@ -87,7 +92,8 @@ var/list/admin_verbs_ban = list(
 	)
 var/list/admin_verbs_sounds = list(
 	/client/proc/play_local_sound,
-	/client/proc/play_sound
+	/client/proc/play_sound,
+	/client/proc/play_server_sound
 	)
 var/list/admin_verbs_fun = list(
 	/client/proc/object_talk,
@@ -96,10 +102,8 @@ var/list/admin_verbs_fun = list(
 	/client/proc/drop_bomb,
         /client/proc/everyone_random,
 	/client/proc/cinematic,
-	/client/proc/one_click_antag,
 	/datum/admins/proc/toggle_aliens,
 	/datum/admins/proc/toggle_space_ninja,
-	/client/proc/send_space_ninja,
 	/client/proc/cmd_admin_add_freeform_ai_law,
 	/client/proc/cmd_admin_add_random_ai_law,
 	/client/proc/make_sound,
@@ -147,6 +151,7 @@ var/list/admin_verbs_debug = list(
 	/client/proc/cmd_debug_make_powernets,
 	/client/proc/kill_airgroup,
 	/client/proc/debug_controller,
+	/client/proc/debug_antagonist_template,
 	/client/proc/cmd_debug_mob_lists,
 	/client/proc/cmd_admin_delete,
 	/client/proc/cmd_debug_del_all,
@@ -206,6 +211,7 @@ var/list/admin_verbs_hideable = list(
 	/client/proc/check_words,
 	/client/proc/play_local_sound,
 	/client/proc/play_sound,
+	/client/proc/play_server_sound,
 	/client/proc/object_talk,
 	/client/proc/cmd_admin_dress,
 	/client/proc/cmd_admin_gib_self,
@@ -213,7 +219,6 @@ var/list/admin_verbs_hideable = list(
 	/client/proc/cinematic,
 	/datum/admins/proc/toggle_aliens,
 	/datum/admins/proc/toggle_space_ninja,
-	/client/proc/send_space_ninja,
 	/client/proc/cmd_admin_add_freeform_ai_law,
 	/client/proc/cmd_admin_add_random_ai_law,
 	/client/proc/cmd_admin_create_centcom_report,
@@ -560,22 +565,6 @@ var/list/admin_verbs_mentor = list(
 	message_admins("\blue [ckey] creating an admin explosion at [epicenter.loc].")
 	feedback_add_details("admin_verb","DB") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
-/client/proc/give_spell(mob/T as mob in mob_list) // -- Urist
-	set category = "Fun"
-	set name = "Give Spell"
-	set desc = "Gives a spell to a mob."
-	var/list/spell_names = list()
-	for(var/v in spells)
-	//	"/obj/effect/proc_holder/spell/" 30 symbols ~Intercross21
-		spell_names.Add(copytext("[v]", 31, 0))
-	var/S = input("Choose the spell to give to that guy", "ABRAKADABRA") as null|anything in spell_names
-	if(!S) return
-	var/path = text2path("/obj/effect/proc_holder/spell/[S]")
-	T.spell_list += new path
-	feedback_add_details("admin_verb","GS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-	log_admin("[key_name(usr)] gave [key_name(T)] the spell [S].")
-	message_admins("\blue [key_name_admin(usr)] gave [key_name(T)] the spell [S].", 1)
-
 /client/proc/give_disease(mob/T as mob in mob_list) // -- Giacom
 	set category = "Fun"
 	set name = "Give Disease (old)"
@@ -613,9 +602,10 @@ var/list/admin_verbs_mentor = list(
 		var/mob/living/carbon/human/H = T
 		if (H.species)
 			D.affected_species = list(H.species.name)
-	if(istype(T,/mob/living/carbon/monkey))
-		var/mob/living/carbon/monkey/M = T
-		D.affected_species = list(M.greaterform)
+			if(H.species.primitive_form)
+				D.affected_species |= H.species.primitive_form
+			if(H.species.greater_form)
+				D.affected_species |= H.species.greater_form
 	infect_virus2(T,D,1)
 
 	feedback_add_details("admin_verb","GD2") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
@@ -627,7 +617,7 @@ var/list/admin_verbs_mentor = list(
 	set name = "Make Sound"
 	set desc = "Display a message to everyone who can hear the target"
 	if(O)
-		var/message = input("What do you want the message to be?", "Make Sound") as text|null
+		var/message = sanitize(input("What do you want the message to be?", "Make Sound") as text|null)
 		if(!message)
 			return
 		for (var/mob/V in hearers(O))
@@ -711,16 +701,66 @@ var/list/admin_verbs_mentor = list(
 	if(holder)
 		src.holder.output_ai_laws()
 
-/client/proc/rename_silicon(mob/living/silicon/S in world)
+/client/proc/rename_silicon(mob/living/silicon/S in mob_list)
 	set name = "Rename Silicon"
 	set category = "Admin"
 
+	if(!istype(S))
+		return
+
 	if(holder)
-		var/new_name = trim_strip_input(src, "Enter new name. Leave blank or as is to cancel.", "Enter new silicon name", S.real_name)
+		var/new_name = sanitizeSafe(input(src, "Enter new name. Leave blank or as is to cancel.", "Enter new silicon name", S.real_name))
 		if(new_name && new_name != S.real_name)
 			admin_log_and_message_admins("has renamed the silicon '[S.real_name]' to '[new_name]'")
 			S.SetName(new_name)
 	feedback_add_details("admin_verb","RAI") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+
+/client/proc/manage_silicon_laws(mob/living/silicon/S in mob_list)
+	set name = "Manage Silicon Laws"
+	set category = "Admin"
+
+	if(!istype(S))
+		return
+
+	if(holder)
+		S.subsystem_law_manager()
+	admin_log_and_message_admins("has opened [S]'s law manager.")
+	feedback_add_details("admin_verb","MSL") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+
+/client/proc/change_human_appearance_admin(mob/living/carbon/human/H in world)
+	set name = "Change Mob Appearance - Admin"
+	set desc = "Allows you to change the mob appearance"
+	set category = "Admin"
+
+	if(!istype(H))
+		return
+
+	if(holder)
+		admin_log_and_message_admins("is altering the appearance of [H].")
+		H.change_appearance(APPEARANCE_ALL, usr, usr, check_species_whitelist = 0)
+	feedback_add_details("admin_verb","CHAA") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+
+/client/proc/change_human_appearance_self(mob/living/carbon/human/H in mob_list)
+	set name = "Change Mob Appearance - Self"
+	set desc = "Allows the mob to change its appearance"
+	set category = "Admin"
+
+	if(!istype(H))
+		return
+
+	if(!H.client)
+		usr << "Only mobs with clients can alter their own appearance."
+		return
+
+	if(holder)
+		switch(alert("Do you wish for [H] to be allowed to select non-whitelisted races?","Alter Mob Appearance","Yes","No","Cancel"))
+			if("Yes")
+				admin_log_and_message_admins("has allowed [H] to change \his appearance, without whitelisting of races.")
+				H.change_appearance(APPEARANCE_ALL, H.loc, check_species_whitelist = 0)
+			if("No")
+				admin_log_and_message_admins("has allowed [H] to change \his appearance, with whitelisting of races.")
+				H.change_appearance(APPEARANCE_ALL, H.loc, check_species_whitelist = 1)
+	feedback_add_details("admin_verb","CMAS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 
 //---- bs12 verbs ----
@@ -733,7 +773,7 @@ var/list/admin_verbs_mentor = list(
 //	feedback_add_details("admin_verb","MP") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	return
 
-/client/proc/editappear(mob/living/carbon/human/M as mob in world)
+/client/proc/editappear(mob/living/carbon/human/M as mob in mob_list)
 	set name = "Edit Appearance"
 	set category = "Fun"
 
@@ -762,6 +802,7 @@ var/list/admin_verbs_mentor = list(
 		M.r_eyes = hex2num(copytext(new_eyes, 2, 4))
 		M.g_eyes = hex2num(copytext(new_eyes, 4, 6))
 		M.b_eyes = hex2num(copytext(new_eyes, 6, 8))
+		M.update_eyes()
 
 	var/new_skin = input("Please select body color. This is for Tajaran, Unathi, and Skrell only!", "Character Generation") as color
 	if(new_skin)

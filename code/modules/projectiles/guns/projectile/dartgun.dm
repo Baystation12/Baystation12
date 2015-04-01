@@ -6,6 +6,8 @@
 	embed = 1 //the dart is shot fast enough to pierce space suits, so I guess splintering inside the target can be a thing. Should be rare due to low damage.
 	var/reagent_amount = 15
 	kill_count = 15 //shorter range
+	
+	muzzle_type = null
 
 /obj/item/projectile/bullet/chemdart/New()
 	reagents = new/datum/reagents(reagent_amount)
@@ -43,6 +45,7 @@
 	name = "dart gun"
 	desc = "A small gas-powered dartgun, capable of delivering chemical cocktails swiftly across short distances."
 	icon_state = "dartgun-empty"
+	item_state = null
 
 	caliber = "dart"
 	fire_sound = 'sound/weapons/empty.ogg'

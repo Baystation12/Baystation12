@@ -45,6 +45,9 @@
 		return
 
 	var/list/modifiers = params2list(params)
+	if(modifiers["shift"] && modifiers["ctrl"])
+		CtrlShiftClickOn(A)
+		return
 	if(modifiers["middle"])
 		MiddleClickOn(A)
 		return
@@ -192,7 +195,7 @@
 */
 /mob/proc/RangedAttack(var/atom/A, var/params)
 	if(!mutations.len) return
-	if((LASER in mutations) && a_intent == "harm")
+	if((LASER in mutations) && a_intent == I_HURT)
 		LaserEyes(A) // moved into a proc below
 	else if(TK in mutations)
 		switch(get_dist(src,A))
@@ -291,6 +294,17 @@
 
 /mob/proc/TurfAdjacent(var/turf/T)
 	return T.AdjacentQuick(src)
+
+/*
+	Control+Shift click
+	Unused except for AI
+*/
+/mob/proc/CtrlShiftClickOn(var/atom/A)
+	A.CtrlShiftClick(src)
+	return
+
+/atom/proc/CtrlShiftClick(var/mob/user)
+	return
 
 /*
 	Misc helpers

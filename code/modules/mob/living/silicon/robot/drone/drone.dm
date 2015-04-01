@@ -5,6 +5,7 @@
 	icon_state = "repairbot"
 	maxHealth = 35
 	health = 35
+	cell_emp_mult = 1
 	universal_speak = 0
 	universal_understand = 1
 	gender = NEUTER
@@ -15,6 +16,11 @@
 	req_access = list(access_engine, access_robotics)
 	integrated_light_power = 2
 	local_transmit = 1
+
+	mob_bump_flag = SIMPLE_ANIMAL
+	mob_swap_flags = SIMPLE_ANIMAL
+	mob_push_flags = SIMPLE_ANIMAL
+	mob_always_swap = 1
 
 	//Used for self-mailing.
 	var/mail_destination = ""
@@ -255,20 +261,6 @@
 	src << "<b>Don't invade their worksites, don't steal their resources, don't tell them about the changeling in the toilets.</b>"
 	src << "<b>If a crewmember has noticed you, <i>you are probably breaking your third law</i></b>."
 
-/mob/living/silicon/robot/drone/Bump(atom/movable/AM as mob|obj, yes)
-	if (!yes || ( \
-	 !istype(AM,/obj/machinery/door) && \
-	 !istype(AM,/obj/machinery/recharge_station) && \
-	 !istype(AM,/obj/machinery/disposal/deliveryChute) && \
-	 !istype(AM,/obj/machinery/teleport/hub) && \
-	 !istype(AM,/obj/effect/portal)
-	)) return
-	..()
-	return
-
-/mob/living/silicon/robot/drone/Bumped(AM as mob|obj)
-	return
-
 /mob/living/silicon/robot/drone/start_pulling(var/atom/movable/AM)
 
 	if(istype(AM,/obj/item/pipe) || istype(AM,/obj/structure/disposalconstruct))
@@ -285,7 +277,7 @@
 		return
 
 /mob/living/silicon/robot/drone/add_robot_verbs()
-	src.verbs |= robot_verbs_subsystems
+	src.verbs |= silicon_verbs_subsystems
 
 /mob/living/silicon/robot/drone/remove_robot_verbs()
-	src.verbs -= robot_verbs_subsystems
+	src.verbs -= silicon_verbs_subsystems

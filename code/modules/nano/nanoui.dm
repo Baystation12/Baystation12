@@ -73,7 +73,7 @@ nanoui is used to open and update nano browser uis
   *
   * @return /nanoui new nanoui object
   */
-/datum/nanoui/New(nuser, nsrc_object, nui_key, ntemplate_filename, ntitle = 0, nwidth = 0, nheight = 0, var/atom/nref = null, var/datum/nanoui/master_ui = null, var/datum/topic_state/custom_state = null)
+/datum/nanoui/New(nuser, nsrc_object, nui_key, ntemplate_filename, ntitle = 0, nwidth = 0, nheight = 0, var/atom/nref = null, var/datum/nanoui/master_ui = null, var/datum/topic_state/custom_state = default_state)
 	user = nuser
 	src_object = nsrc_object
 	ui_key = nui_key
@@ -82,7 +82,7 @@ nanoui is used to open and update nano browser uis
 	src.master_ui = master_ui
 	if(master_ui)
 		master_ui.children += src
-	src.custom_state = custom_state ? custom_state : new/datum/topic_state()
+	src.custom_state = custom_state
 
 	// add the passed template filename as the "main" template, this is required
 	add_template("main", ntemplate_filename)
@@ -146,10 +146,10 @@ nanoui is used to open and update nano browser uis
 	var/new_status = host.CanUseTopic(user, list(), custom_state)
 	if(master_ui)
 		new_status = min(new_status, master_ui.status)
+
+	set_status(new_status, push_update)
 	if(new_status == STATUS_CLOSE)
 		close()
-	else
-		set_status(new_status, push_update)
 
  /**
   * Set the ui to auto update (every master_controller tick)
@@ -399,6 +399,9 @@ nanoui is used to open and update nano browser uis
 	if (width && height)
 		window_size = "size=[width]x[height];"
 	update_status(0)
+	if(status == STATUS_CLOSE)
+		return
+
 	user << browse(get_html(), "window=[window_id];[window_size][window_options]")
 	winset(user, "mapwindow.map", "focus=true") // return keyboard focus to map
 	on_close_winset()

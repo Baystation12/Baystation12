@@ -12,6 +12,12 @@
 	// Icon/appearance vars.
 	var/icobase = 'icons/mob/human_races/r_human.dmi'    // Normal icon set.
 	var/deform = 'icons/mob/human_races/r_def_human.dmi' // Mutated icon set.
+
+	// Damage overlay and masks.
+	var/damage_overlays = 'icons/mob/human_races/masks/dam_human.dmi'
+	var/damage_mask = 'icons/mob/human_races/masks/dam_mask_human.dmi'
+	var/blood_mask = 'icons/mob/human_races/masks/blood_human.dmi'
+
 	var/prone_icon                                       // If set, draws this from icobase when mob is prone.
 	var/eyes = "eyes_s"                                  // Icon for eyes.
 	var/blood_color = "#A10808"                          // Red.
@@ -20,6 +26,8 @@
 	var/tail                                             // Name of tail image in species effects icon file.
 	var/race_key = 0       	                             // Used for mob icon cache string.
 	var/icon/icon_template                               // Used for mob icon generation for non-32x32 species.
+	var/is_small
+	var/show_ssd = 1
 
 	// Language/culture vars.
 	var/default_language = "Galactic Common" // Default language is used when 'say' is used without modifiers.
@@ -40,7 +48,9 @@
 	var/vision_flags = 0                     // Same flags as glasses.
 
 	// Death vars.
+	var/meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat/human
 	var/gibber_type = /obj/effect/gibspawner/human
+	var/single_gib_type = /obj/effect/decal/cleanable/blood/gibs
 	var/remains_type = /obj/effect/decal/remains/xeno
 	var/gibbed_anim = "gibbed-h"
 	var/dusted_anim = "dust-h"
@@ -91,19 +101,39 @@
 	var/darksight = 2             // Native darksight distance.
 	var/flags = 0                 // Various specific features.
 	var/slowdown = 0              // Passive movement speed malus (or boost, if negative)
-	var/primitive                 // Lesser form, if any (ie. monkey for humans)
+	var/primitive_form            // Lesser form, if any (ie. monkey for humans)
+	var/greater_form              // Greater form, if any, ie. human for monkeys.
 	var/gluttonous                // Can eat some mobs. 1 for monkeys, 2 for people.
 	var/rarity_value = 1          // Relative rarity/collector value for this species.
 	                              // Determines the organs that the species spawns with and
 	var/list/has_organ = list(    // which required-organ checks are conducted.
-		"heart" =    /datum/organ/internal/heart,
-		"lungs" =    /datum/organ/internal/lungs,
-		"liver" =    /datum/organ/internal/liver,
-		"kidneys" =  /datum/organ/internal/kidney,
-		"brain" =    /datum/organ/internal/brain,
-		"appendix" = /datum/organ/internal/appendix,
-		"eyes" =     /datum/organ/internal/eyes
+		"heart" =    /obj/item/organ/heart,
+		"lungs" =    /obj/item/organ/lungs,
+		"liver" =    /obj/item/organ/liver,
+		"kidneys" =  /obj/item/organ/kidney,
+		"brain" =    /obj/item/organ/brain,
+		"appendix" = /obj/item/organ/appendix,
+		"eyes" =     /obj/item/organ/eyes
 		)
+
+	var/list/has_limbs = list(
+		"chest" =  list("path" = /obj/item/organ/external/chest),
+		"groin" =  list("path" = /obj/item/organ/external/groin),
+		"head" =   list("path" = /obj/item/organ/external/head),
+		"l_arm" =  list("path" = /obj/item/organ/external/arm),
+		"r_arm" =  list("path" = /obj/item/organ/external/arm/right),
+		"l_leg" =  list("path" = /obj/item/organ/external/leg),
+		"r_leg" =  list("path" = /obj/item/organ/external/leg/right),
+		"l_hand" = list("path" = /obj/item/organ/external/hand),
+		"r_hand" = list("path" = /obj/item/organ/external/hand/right),
+		"l_foot" = list("path" = /obj/item/organ/external/foot),
+		"r_foot" = list("path" = /obj/item/organ/external/foot/right)
+		)
+
+	// Bump vars
+	var/bump_flag = HUMAN		// What are we considered to be when bumped?
+	var/push_flags = ALLMOBS	// What can we push?
+	var/swap_flags = ALLMOBS	// What can we swap place with?
 
 /datum/species/New()
 	if(hud_type)
@@ -142,7 +172,10 @@
 
 /datum/species/proc/create_organs(var/mob/living/carbon/human/H) //Handles creation of mob organs.
 
-	//Trying to work out why species changes aren't fixing organs properly.
+	for(var/obj/item/organ/organ in H.contents)
+		if((organ in H.organs) || (organ in H.internal_organs))
+			del(organ)
+
 	if(H.organs)                  H.organs.Cut()
 	if(H.internal_organs)         H.internal_organs.Cut()
 	if(H.organs_by_name)          H.organs_by_name.Cut()
@@ -153,35 +186,28 @@
 	H.organs_by_name = list()
 	H.internal_organs_by_name = list()
 
-	//This is a basic humanoid limb setup.
-	H.organs_by_name["chest"] = new/datum/organ/external/chest()
-	H.organs_by_name["groin"] = new/datum/organ/external/groin(H.organs_by_name["chest"])
-	H.organs_by_name["head"] = new/datum/organ/external/head(H.organs_by_name["chest"])
-	H.organs_by_name["l_arm"] = new/datum/organ/external/l_arm(H.organs_by_name["chest"])
-	H.organs_by_name["r_arm"] = new/datum/organ/external/r_arm(H.organs_by_name["chest"])
-	H.organs_by_name["r_leg"] = new/datum/organ/external/r_leg(H.organs_by_name["groin"])
-	H.organs_by_name["l_leg"] = new/datum/organ/external/l_leg(H.organs_by_name["groin"])
-	H.organs_by_name["l_hand"] = new/datum/organ/external/l_hand(H.organs_by_name["l_arm"])
-	H.organs_by_name["r_hand"] = new/datum/organ/external/r_hand(H.organs_by_name["r_arm"])
-	H.organs_by_name["l_foot"] = new/datum/organ/external/l_foot(H.organs_by_name["l_leg"])
-	H.organs_by_name["r_foot"] = new/datum/organ/external/r_foot(H.organs_by_name["r_leg"])
+	for(var/limb_type in has_limbs)
+		var/list/organ_data = has_limbs[limb_type]
+		var/limb_path = organ_data["path"]
+		var/obj/item/organ/O = new limb_path(H)
+		organ_data["descriptor"] = O.name
 
 	for(var/organ in has_organ)
 		var/organ_type = has_organ[organ]
-		H.internal_organs_by_name[organ] = new organ_type(H)
+		H.internal_organs_by_name[organ] = new organ_type(H,1)
 
 	for(var/name in H.organs_by_name)
-		H.organs += H.organs_by_name[name]
+		H.organs |= H.organs_by_name[name]
 
-	for(var/datum/organ/external/O in H.organs)
+	for(var/obj/item/organ/external/O in H.organs)
 		O.owner = H
 
 	if(flags & IS_SYNTHETIC)
-		for(var/datum/organ/external/E in H.organs)
+		for(var/obj/item/organ/external/E in H.organs)
 			if(E.status & ORGAN_CUT_AWAY || E.status & ORGAN_DESTROYED) continue
-			E.status |= ORGAN_ROBOT
-		for(var/datum/organ/internal/I in H.internal_organs)
-			I.mechanize()
+			E.robotize()
+		for(var/obj/item/organ/I in H.internal_organs)
+			I.robotize()
 
 /datum/species/proc/hug(var/mob/living/carbon/human/H,var/mob/living/target)
 
@@ -240,7 +266,7 @@
 // Called when using the shredding behavior.
 /datum/species/proc/can_shred(var/mob/living/carbon/human/H, var/ignore_intent)
 
-	if(!ignore_intent && H.a_intent != "hurt")
+	if(!ignore_intent && H.a_intent != I_HURT)
 		return 0
 
 	for(var/datum/unarmed_attack/attack in unarmed_attacks)
@@ -251,3 +277,6 @@
 
 	return 0
 
+// Called in life() when the mob has no client.
+/datum/species/proc/handle_npc(var/mob/living/carbon/human/H)
+	return

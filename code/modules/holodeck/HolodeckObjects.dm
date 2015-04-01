@@ -392,22 +392,27 @@
 	icon_state = "holo4"
 	icon_living = "holo4"
 	icon_dead = "holo4"
+	alpha = 127
 	icon_gib = null
 	meat_amount = 0
 	meat_type = null
+
+/mob/living/simple_animal/hostile/carp/holodeck/New()
+	..()
+	SetLuminosity(2) //hologram lighting
 
 /mob/living/simple_animal/hostile/carp/holodeck/proc/set_safety(var/safe)
 	if (safe)
 		faction = "neutral"
 		melee_damage_lower = 0
 		melee_damage_upper = 0
-		wall_smash = 0
+		environment_smash = 0
 		destroy_surroundings = 0
 	else
 		faction = "carp"
 		melee_damage_lower = initial(melee_damage_lower)
 		melee_damage_upper = initial(melee_damage_upper)
-		wall_smash = initial(wall_smash)
+		environment_smash = initial(environment_smash)
 		destroy_surroundings = initial(destroy_surroundings)
 
 /mob/living/simple_animal/hostile/carp/holodeck/gib()

@@ -1,4 +1,4 @@
-//This is a holder for things like the Vox and Nuke shuttle.
+//This is a holder for things like the Skipjack and Nuke shuttle.
 /datum/shuttle/multi_shuttle
 
 	var/cloaked = 1

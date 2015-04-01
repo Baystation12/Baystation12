@@ -225,10 +225,11 @@ var/global/datum/controller/occupations/job_master
 		SetupOccupations()
 
 		//Holder for Triumvirate is stored in the ticker, this just processes it
-		if(ticker)
-			for(var/datum/job/ai/A in occupations)
-				if(ticker.triai)
+		if(ticker && ticker.triai)
+			for(var/datum/job/A in occupations)
+				if(A.title == "AI")
 					A.spawn_positions = 3
+					break
 
 		//Get the players who are ready
 		for(var/mob/new_player/player in player_list)
@@ -245,7 +246,7 @@ var/global/datum/controller/occupations/job_master
 
 		//People who wants to be assistants, sure, go on.
 		Debug("DO, Running Assistant Check 1")
-		var/datum/job/assist = new /datum/job/assistant()
+		var/datum/job/assist = new DEFAULT_JOB_TYPE ()
 		var/list/assistant_candidates = FindOccupationCandidates(assist, 3)
 		Debug("AC1, Candidates: [assistant_candidates.len]")
 		for(var/mob/new_player/player in assistant_candidates)
@@ -513,8 +514,8 @@ var/global/datum/controller/occupations/job_master
 				H.internals.icon_state = "internal1"
 
 		if(istype(H)) //give humans wheelchairs, if they need them.
-			var/datum/organ/external/l_foot = H.get_organ("l_foot")
-			var/datum/organ/external/r_foot = H.get_organ("r_foot")
+			var/obj/item/organ/external/l_foot = H.get_organ("l_foot")
+			var/obj/item/organ/external/r_foot = H.get_organ("r_foot")
 			if((!l_foot || l_foot.status & ORGAN_DESTROYED) && (!r_foot || r_foot.status & ORGAN_DESTROYED))
 				var/obj/structure/bed/chair/wheelchair/W = new /obj/structure/bed/chair/wheelchair(H.loc)
 				H.buckled = W
@@ -523,14 +524,18 @@ var/global/datum/controller/occupations/job_master
 				W.buckled_mob = H
 				W.add_fingerprint(H)
 
-		H << "<B>You are the [alt_title ? alt_title : rank].</B>"
-		H << "<b>As the [alt_title ? alt_title : rank] you answer directly to [job.supervisors]. Special circumstances may change this.</b>"
-		H << "<b>To speak on your department's radio channel use :h. For the use of other channels, examine your headset.</b>"
+		H << "<B>You are [job.total_positions == 1 ? "the" : "a"] [alt_title ? alt_title : rank].</B>"
+
+		if(job.supervisors)
+			H << "<b>As the [alt_title ? alt_title : rank] you answer directly to [job.supervisors]. Special circumstances may change this.</b>"
+
+		if(job.idtype)
+			spawnId(H, rank, alt_title)
+			H.equip_to_slot_or_del(new /obj/item/device/radio/headset(H), slot_l_ear)
+			H << "<b>To speak on your department's radio channel use :h. For the use of other channels, examine your headset.</b>"
+
 		if(job.req_admin_notify)
 			H << "<b>You are playing a job that is important for Game Progression. If you have to disconnect, please notify the admins via adminhelp.</b>"
-
-		spawnId(H, rank, alt_title)
-		H.equip_to_slot_or_del(new /obj/item/device/radio/headset(H), slot_l_ear)
 
 		//Gives glasses to the vision impaired
 		if(H.disabilities & NEARSIGHTED)
@@ -538,7 +543,6 @@ var/global/datum/controller/occupations/job_master
 			if(equipped != 1)
 				var/obj/item/clothing/glasses/G = H.glasses
 				G.prescription = 1
-//		H.update_icons()
 
 		BITSET(H.hud_updateflag, ID_HUD)
 		BITSET(H.hud_updateflag, IMPLOYAL_HUD)

@@ -77,7 +77,7 @@
 	slot_flags = SLOT_BELT | SLOT_POCKET
 	w_class = 3
 	storage_slots = 50
-	max_combined_w_class = 200 //Doesn't matter what this is, so long as it's more or equal to storage_slots * ore.w_class
+	max_storage_space = 200 //Doesn't matter what this is, so long as it's more or equal to storage_slots * ore.w_class
 	max_w_class = 3
 	can_hold = list(/obj/item/weapon/ore)
 
@@ -91,7 +91,7 @@
 	icon = 'icons/obj/hydroponics_machines.dmi'
 	icon_state = "plantbag"
 	storage_slots = 50; //the number of plant pieces it can carry.
-	max_combined_w_class = 200 //Doesn't matter what this is, so long as it's more or equal to storage_slots * plants.w_class
+	max_storage_space = 200 //Doesn't matter what this is, so long as it's more or equal to storage_slots * plants.w_class
 	max_w_class = 3
 	w_class = 2
 	can_hold = list(/obj/item/weapon/reagent_containers/food/snacks/grown,/obj/item/seeds,/obj/item/weapon/grown)
@@ -156,7 +156,7 @@
 				break
 
 		if(!inserted || !S.amount)
-			usr.u_equip(S)
+			usr.remove_from_mob(S)
 			usr.update_icons()	//update our overlays
 			if (usr.client && usr.s_active != src)
 				usr.client.screen -= S
@@ -249,7 +249,7 @@
 	icon_state = "cashbag"
 	desc = "A bag for carrying lots of cash. It's got a big dollar sign printed on the front."
 	storage_slots = 50; //the number of cash pieces it can carry.
-	max_combined_w_class = 200 //Doesn't matter what this is, so long as it's more or equal to storage_slots * cash.w_class
+	max_storage_space = 200 //Doesn't matter what this is, so long as it's more or equal to storage_slots * cash.w_class
 	max_w_class = 3
 	w_class = 2
 	can_hold = list(/obj/item/weapon/coin,/obj/item/weapon/spacecash)

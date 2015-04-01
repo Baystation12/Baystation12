@@ -16,13 +16,10 @@
 	var/damtype = "brute"
 	var/force = 0
 
-/obj/Topic(href, href_list, var/nowindow = 0, var/datum/topic_state/custom_state)
+/obj/Topic(href, href_list, var/nowindow = 0, var/datum/topic_state/custom_state = default_state)
 	// Calling Topic without a corresponding window open causes runtime errors
 	if(!nowindow && ..())
 		return 1
-
-	if(!custom_state)
-		custom_state = default_state
 
 	// In the far future no checks are made in an overriding Topic() beyond if(..()) return
 	// Instead any such checks are made in CanUseTopic()
@@ -62,16 +59,6 @@
 /obj/return_air()
 	if(loc)
 		return loc.return_air()
-	else
-		return null
-
-/obj/proc/handle_internal_lifeform(mob/lifeform_inside_me, breath_request)
-	//Return: (NONSTANDARD)
-	//		null if object handles breathing logic for lifeform
-	//		datum/air_group to tell lifeform to process using that breath return
-	//DEFAULT: Take air from turf to give to have mob process
-	if(breath_request>0)
-		return remove_air(breath_request)
 	else
 		return null
 

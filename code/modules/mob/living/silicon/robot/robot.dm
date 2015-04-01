@@ -1,8 +1,3 @@
-var/list/robot_verbs_default = list(
-	/mob/living/silicon/robot/proc/sensor_mode,
-	/mob/living/silicon/robot/proc/robot_checklaws
-)
-
 #define CYBORG_POWER_USAGE_MULTIPLIER 2.5 // Multiplier for amount of power cyborgs use.
 
 /mob/living/silicon/robot
@@ -12,6 +7,10 @@ var/list/robot_verbs_default = list(
 	icon_state = "robot"
 	maxHealth = 200
 	health = 200
+
+	mob_bump_flag = ROBOT
+	mob_swap_flags = ROBOT|MONKEY|SLIME|SIMPLE_ANIMAL
+	mob_push_flags = ALLMOBS //trundle trundle
 
 	var/lights_on = 0 // Is our integrated light on?
 	var/used_power_this_tick = 0
@@ -50,6 +49,8 @@ var/list/robot_verbs_default = list(
 	var/obj/item/weapon/cell/cell = null
 	var/obj/machinery/camera/camera = null
 
+	var/cell_emp_mult = 2
+
 	// Components are basically robot organs.
 	var/list/components = list()
 
@@ -83,6 +84,11 @@ var/list/robot_verbs_default = list(
 	var/scrambledcodes = 0 // Used to determine if a borg shows up on the robotics console.  Setting to one hides them.
 	var/tracking_entities = 0 //The number of known entities currently accessing the internal camera
 	var/braintype = "Cyborg"
+
+	var/list/robot_verbs_default = list(
+		/mob/living/silicon/robot/proc/sensor_mode,
+		/mob/living/silicon/robot/proc/robot_checklaws
+	)
 
 /mob/living/silicon/robot/syndicate
 	lawupdate = 0
@@ -153,6 +159,7 @@ var/list/robot_verbs_default = list(
 
 	hud_list[HEALTH_HUD]      = image('icons/mob/hud.dmi', src, "hudblank")
 	hud_list[STATUS_HUD]      = image('icons/mob/hud.dmi', src, "hudhealth100")
+	hud_list[LIFE_HUD]        = image('icons/mob/hud.dmi', src, "hudhealth100")
 	hud_list[ID_HUD]          = image('icons/mob/hud.dmi', src, "hudblank")
 	hud_list[WANTED_HUD]      = image('icons/mob/hud.dmi', src, "hudblank")
 	hud_list[IMPLOYAL_HUD]    = image('icons/mob/hud.dmi', src, "hudblank")
@@ -429,8 +436,8 @@ var/list/robot_verbs_default = list(
 
 	spawn(0)
 		var/newname
-		newname = input(src,"You are a robot. Enter a name, or leave blank for the default name.", "Name change","") as text
-		if (newname != "")
+		newname = sanitizeSafe(input(src,"You are a robot. Enter a name, or leave blank for the default name.", "Name change","") as text, MAX_NAME_LEN)
+		if (newname)
 			custom_name = newname
 
 		updatename()
@@ -505,15 +512,13 @@ var/list/robot_verbs_default = list(
 // this function shows information about the malf_ai gameplay type in the status screen
 /mob/living/silicon/robot/show_malf_ai()
 	..()
-	if(ticker.mode.name == "AI malfunction")
-		var/datum/game_mode/malfunction/malf = ticker.mode
-		for (var/datum/mind/malfai in malf.malf_ai)
-			if(connected_ai)
-				if(connected_ai.mind == malfai)
-					if(malf.apcs >= 3)
-						stat(null, "Time until station control secured: [max(malf.AI_win_timeleft/(malf.apcs/3), 0)] seconds")
-			else if(ticker.mode:malf_mode_declared)
-				stat(null, "Time left: [max(ticker.mode:AI_win_timeleft/(ticker.mode:apcs/3), 0)]")
+	for (var/datum/mind/malfai in malf.current_antagonists)
+		if(connected_ai)
+			if(connected_ai.mind == malfai)
+				if(malf.hacked_apcs >= 3)
+					stat(null, "Time until station control secured: [max(malf.hack_time/(malf.hacked_apcs/3), 0)] seconds")
+		else if(malf.revealed)
+			stat(null, "Time left: [max(malf.hack_time/(malf.hacked_apcs.len/3), 0)]")
 	return 0
 
 
@@ -573,43 +578,6 @@ var/list/robot_verbs_default = list(
 	..(Proj)
 	if(prob(75) && Proj.damage > 0) spark_system.start()
 	return 2
-
-/mob/living/silicon/robot/Bump(atom/movable/AM as mob|obj, yes)
-	spawn( 0 )
-		if ((!( yes ) || now_pushing))
-			return
-		now_pushing = 1
-		if(ismob(AM))
-			var/mob/tmob = AM
-			if(istype(tmob, /mob/living/carbon/human) && (FAT in tmob.mutations))
-				if(prob(20))
-					usr << "\red <B>You fail to push [tmob]'s fat ass out of the way.</B>"
-					now_pushing = 0
-					return
-			if(!(tmob.status_flags & CANPUSH))
-				now_pushing = 0
-				return
-		now_pushing = 0
-		..()
-		if (istype(AM, /obj/machinery/recharge_station))
-			var/obj/machinery/recharge_station/F = AM
-			F.move_inside()
-		if (!istype(AM, /atom/movable))
-			return
-		if (!now_pushing)
-			now_pushing = 1
-			if (!AM.anchored)
-				var/t = get_dir(src, AM)
-				if (istype(AM, /obj/structure/window))
-					var/obj/structure/window/W = AM
-					if(W.is_full_window())
-						for(var/obj/structure/window/win in get_step(AM,t))
-							now_pushing = 0
-							return
-				step(AM, t)
-			now_pushing = null
-		return
-	return
 
 /mob/living/silicon/robot/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (istype(W, /obj/item/weapon/handcuffs)) // fuck i don't even know why isrobot() in handcuff code isn't working so this will have to do
@@ -900,11 +868,6 @@ var/list/robot_verbs_default = list(
 		//if they are holding or wearing a card that has access, that works
 		if(check_access(H.get_active_hand()) || check_access(H.wear_id))
 			return 1
-	else if(istype(M, /mob/living/carbon/monkey))
-		var/mob/living/carbon/monkey/george = M
-		//they can only hold things :(
-		if(george.get_active_hand() && istype(george.get_active_hand(), /obj/item/weapon/card/id) && check_access(george.get_active_hand()))
-			return 1
 	return 0
 
 /mob/living/silicon/robot/proc/check_access(obj/item/weapon/card/id/I)
@@ -1062,28 +1025,6 @@ var/list/robot_verbs_default = list(
 			src << "Module isn't activated"
 		installed_modules()
 		return 1
-
-	if (href_list["lawc"]) // Toggling whether or not a law gets stated by the State Laws verb --NeoFite
-		var/L = text2num(href_list["lawc"])
-		switch(lawcheck[L+1])
-			if ("Yes") lawcheck[L+1] = "No"
-			if ("No") lawcheck[L+1] = "Yes"
-//		src << text ("Switching Law [L]'s report status to []", lawcheck[L+1])
-		checklaws()
-		return 1
-
-	if (href_list["lawi"]) // Toggling whether or not a law gets stated by the State Laws verb --NeoFite
-		var/L = text2num(href_list["lawi"])
-		switch(ioncheck[L])
-			if ("Yes") ioncheck[L] = "No"
-			if ("No") ioncheck[L] = "Yes"
-//		src << text ("Switching Law [L]'s report status to []", lawcheck[L+1])
-		checklaws()
-		return 1
-
-	if (href_list["laws"]) // With how my law selection code works, I changed statelaws from a verb to a proc, and call it through my law selection panel. --NeoFite
-		statelaws()
-		return 1
 	return
 
 /mob/living/silicon/robot/proc/radio_menu()
@@ -1214,11 +1155,11 @@ var/list/robot_verbs_default = list(
 
 /mob/living/silicon/robot/proc/add_robot_verbs()
 	src.verbs |= robot_verbs_default
-	src.verbs |= robot_verbs_subsystems
+	src.verbs |= silicon_verbs_subsystems
 
 /mob/living/silicon/robot/proc/remove_robot_verbs()
 	src.verbs -= robot_verbs_default
-	src.verbs -= robot_verbs_subsystems
+	src.verbs -= silicon_verbs_subsystems
 
 // Uses power from cyborg's cell. Returns 1 on success or 0 on failure.
 // Properly converts using CELLRATE now! Amount is in Joules.
@@ -1259,6 +1200,7 @@ var/list/robot_verbs_default = list(
 
 /mob/living/silicon/robot/proc/disconnect_from_ai()
 	if(connected_ai)
+		sync() // One last sync attempt
 		connected_ai.connected_robots -= src
 		connected_ai = null
 

@@ -2,6 +2,7 @@
 	name = "revolver"
 	desc = "A classic revolver. Uses .357 ammo"
 	icon_state = "revolver"
+	item_state = "revolver"
 	caliber = "357"
 	origin_tech = "combat=2;materials=2"
 	handle_casings = CYCLE_CASINGS
@@ -34,7 +35,7 @@
 		M << "<span class='notice'>You don't feel cool enough to name this gun, chump.</span>"
 		return 0
 
-	var/input = stripped_input(usr,"What do you want to name the gun?", ,"", MAX_NAME_LEN)
+	var/input = sanitizeSafe(input("What do you want to name the gun?", ,""), MAX_NAME_LEN)
 
 	if(src && input && !M.stat && in_range(M,src))
 		name = input

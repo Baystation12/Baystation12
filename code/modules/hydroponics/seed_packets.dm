@@ -12,6 +12,8 @@ var/global/list/plant_seed_sprites = list()
 	var/modified = 0
 
 /obj/item/seeds/New()
+	while(!plant_controller)
+		sleep(30)
 	update_seed()
 	..()
 

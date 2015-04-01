@@ -31,9 +31,9 @@
 		if(!BB)
 			user << "\blue There is no bullet in the casing to inscribe anything into."
 			return
-		
+
 		var/tmp_label = ""
-		var/label_text = sanitize(copytext(input(user, "Inscribe some text into \the [initial(BB.name)]","Inscription",tmp_label), 1, MAX_NAME_LEN))
+		var/label_text = sanitizeSafe(input(user, "Inscribe some text into \the [initial(BB.name)]","Inscription",tmp_label), MAX_NAME_LEN)
 		if(length(label_text) > 20)
 			user << "\red The inscription can be at most 20 characters long."
 		else if(!label_text)
@@ -54,7 +54,7 @@
 
 //Gun loading types
 #define SINGLE_CASING 	1	//The gun only accepts ammo_casings. ammo_magazines should never have this as their mag_type.
-#define SPEEDLOADER 	2	//Transfers casings from the mag to the gun when used. 
+#define SPEEDLOADER 	2	//Transfers casings from the mag to the gun when used.
 #define MAGAZINE 		4	//The magazine item itself goes inside the gun
 
 //An item that holds casings and can be used to put them inside guns
@@ -71,15 +71,15 @@
 	w_class = 2
 	throw_speed = 4
 	throw_range = 10
-	
+
 	var/list/stored_ammo = list()
 	var/mag_type = SPEEDLOADER //ammo_magazines can only be used with compatible guns. This is not a bitflag, the load_method var on guns is.
 	var/caliber = "357"
 	var/max_ammo = 7
-	
+
 	var/ammo_type = /obj/item/ammo_casing //ammo type that is initially loaded
 	var/initial_ammo = null
-	
+
 	var/multiple_sprites = 0
 	//because BYOND doesn't support numbers as keys in associative lists
 	var/list/icon_keys = list()		//keys
@@ -145,10 +145,10 @@
 	var/typestr = "[M.type]"
 	if(!(typestr in magazine_icondata_keys) || !(typestr in magazine_icondata_states))
 		magazine_icondata_cache_add(M)
-	
+
 	M.icon_keys = magazine_icondata_keys[typestr]
 	M.ammo_states = magazine_icondata_states[typestr]
-	
+
 /proc/magazine_icondata_cache_add(var/obj/item/ammo_magazine/M)
 	var/list/icon_keys = list()
 	var/list/ammo_states = list()

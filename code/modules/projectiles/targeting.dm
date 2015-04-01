@@ -80,12 +80,12 @@
 	var/mob/living/M = loc
 	if(M == T) return
 	if(!istype(M)) return
-	if(src != M.equipped())
+	if(src != M.get_active_hand())
 		stop_aim()
 		return
 	
 	//reflex firing is disabled when help intent is set
-	if (M.a_intent == "help")
+	if (M.a_intent == I_HELP)
 		M << "\red You refrain from firing your [src] as your intent is set to help."
 		return
 	

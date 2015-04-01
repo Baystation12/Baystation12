@@ -65,7 +65,7 @@ var/const/BLOOD_VOLUME_SURVIVE = 122
 		// Damaged heart virtually reduces the blood volume, as the blood isn't
 		// being pumped properly anymore.
 		if(species && species.has_organ["heart"])
-			var/datum/organ/internal/heart/heart = internal_organs_by_name["heart"]
+			var/obj/item/organ/heart/heart = internal_organs_by_name["heart"]
 
 			if(!heart)
 				blood_volume = 0
@@ -127,7 +127,7 @@ var/const/BLOOD_VOLUME_SURVIVE = 122
 
 		//Bleeding out
 		var/blood_max = 0
-		for(var/datum/organ/external/temp in organs)
+		for(var/obj/item/organ/external/temp in organs)
 			if(!(temp.status & ORGAN_BLEEDING) || temp.status & ORGAN_ROBOT)
 				continue
 			for(var/datum/wound/W in temp.wounds) if(W.bleeding())
@@ -282,12 +282,6 @@ proc/blood_splatter(var/target,var/datum/reagent/blood/source,var/large)
 	if(istype(source,/mob/living/carbon/human))
 		var/mob/living/carbon/human/M = source
 		source = M.get_blood(M.vessel)
-	else if(istype(source,/mob/living/carbon/monkey))
-		var/mob/living/carbon/monkey/donor = source
-		if(donor.dna)
-			source = new()
-			source.data["blood_DNA"] = donor.dna.unique_enzymes
-			source.data["blood_type"] = donor.dna.b_type
 
 	// Are we dripping or splattering?
 	var/list/drips = list()

@@ -2,7 +2,7 @@
 	name = "Human"
 	name_plural = "Humans"
 	language = "Sol Common"
-	primitive = /mob/living/carbon/monkey
+	primitive_form = "Monkey"
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/punch, /datum/unarmed_attack/bite)
 	blurb = "Humanity originated in the Sol system, and over the last five centuries has spread \
 	colonies across a wide swathe of space. They hold a wide range of forms and creeds.<br/><br/> \
@@ -20,7 +20,7 @@
 	language = "Sinta'unathi"
 	tail = "sogtail"
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/claws, /datum/unarmed_attack/bite/sharp)
-	primitive = /mob/living/carbon/monkey/unathi
+	primitive_form = "Stok"
 	darksight = 3
 	gluttonous = 1
 
@@ -85,7 +85,7 @@
 	heat_level_2 = 380 //Default 400
 	heat_level_3 = 800 //Default 1000
 
-	primitive = /mob/living/carbon/monkey/tajara
+	primitive_form = "Farwa"
 
 	flags = CAN_JOIN | IS_WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
 
@@ -107,7 +107,7 @@
 	deform = 'icons/mob/human_races/r_def_skrell.dmi'
 	eyes = "skrell_eyes_s"
 	language = "Skrellian"
-	primitive = /mob/living/carbon/monkey/skrell
+	primitive_form = "Neara"
 	unarmed_types = list(/datum/unarmed_attack/punch)
 	blurb = "An amphibious species, Skrell come from the star system known as Qerr'Vallis, which translates to 'Star of \
 	the royals' or 'Light of the Crown'.<br/><br/>Skrell are a highly advanced and logical race who live under the rule \
@@ -130,11 +130,12 @@
 	deform = 'icons/mob/human_races/r_def_plant.dmi'
 	language = "Rootspeak"
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/diona)
-	primitive = /mob/living/carbon/alien/diona
+	//primitive_form = "Nymph"
 	slowdown = 7
 	rarity_value = 3
 	hud_type = /datum/hud_data/diona
 	siemens_coefficient = 0.3
+	eyes = "blank_eyes"
 
 	blurb = "Commonly referred to (erroneously) as 'plant people', the Dionaea are a strange space-dwelling collective \
 	species hailing from Epsilon Ursae Minoris. Each 'diona' is a cluster of numerous cat-sized organisms called nymphs; \
@@ -145,12 +146,26 @@
 	water and other radiation."
 
 	has_organ = list(
-		"nutrient channel" =   /datum/organ/internal/diona/nutrients,
-		"neural strata" =      /datum/organ/internal/diona/strata,
-		"response node" =      /datum/organ/internal/diona/node,
-		"gas bladder" =        /datum/organ/internal/diona/bladder,
-		"polyp segment" =      /datum/organ/internal/diona/polyp,
-		"anchoring ligament" = /datum/organ/internal/diona/ligament
+		"nutrient channel" =   /obj/item/organ/diona/nutrients,
+		"neural strata" =      /obj/item/organ/diona/strata,
+		"response node" =      /obj/item/organ/diona/node,
+		"gas bladder" =        /obj/item/organ/diona/bladder,
+		"polyp segment" =      /obj/item/organ/diona/polyp,
+		"anchoring ligament" = /obj/item/organ/diona/ligament
+		)
+
+	has_limbs = list(
+		"chest" =  list("path" = /obj/item/organ/external/diona/chest),
+		"groin" =  list("path" = /obj/item/organ/external/diona/groin),
+		"head" =   list("path" = /obj/item/organ/external/diona/head),
+		"l_arm" =  list("path" = /obj/item/organ/external/diona/arm),
+		"r_arm" =  list("path" = /obj/item/organ/external/diona/arm/right),
+		"l_leg" =  list("path" = /obj/item/organ/external/diona/leg),
+		"r_leg" =  list("path" = /obj/item/organ/external/diona/leg/right),
+		"l_hand" = list("path" = /obj/item/organ/external/diona/hand),
+		"r_hand" = list("path" = /obj/item/organ/external/diona/hand/right),
+		"l_foot" = list("path" = /obj/item/organ/external/diona/foot),
+		"r_foot" = list("path" = /obj/item/organ/external/diona/foot/right)
 		)
 
 	warning_low_pressure = 50
@@ -166,7 +181,7 @@
 
 	body_temperature = T0C + 15		//make the plant people have a bit lower body temperature, why not
 
-	flags = CAN_JOIN | IS_WHITELISTED | NO_BREATHE | NO_SCAN | IS_PLANT | NO_BLOOD | NO_PAIN | NO_SLIP | HAS_EYE_COLOR
+	flags = CAN_JOIN | IS_WHITELISTED | NO_BREATHE | NO_SCAN | IS_PLANT | NO_BLOOD | NO_PAIN | NO_SLIP | REGENERATES_LIMBS
 
 	blood_color = "#004400"
 	flesh_color = "#907E4A"

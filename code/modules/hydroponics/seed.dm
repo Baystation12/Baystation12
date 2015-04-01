@@ -110,19 +110,19 @@
 
 
 	if(!target_limb) target_limb = pick("l_foot","r_foot","l_leg","r_leg","l_hand","r_hand","l_arm", "r_arm","head","chest","groin")
-	var/datum/organ/external/affecting = target.get_organ(target_limb)
+	var/obj/item/organ/external/affecting = target.get_organ(target_limb)
 	var/damage = 0
 
 	if(get_trait(TRAIT_CARNIVOROUS))
 		if(get_trait(TRAIT_CARNIVOROUS) == 2)
 			if(affecting)
-				target << "<span class='danger'>\The [fruit]'s thorns pierce your [affecting.display_name] greedily!</span>"
+				target << "<span class='danger'>\The [fruit]'s thorns pierce your [affecting.name] greedily!</span>"
 			else
 				target << "<span class='danger'>\The [fruit]'s thorns pierce your flesh greedily!</span>"
 			damage = get_trait(TRAIT_POTENCY)/2
 		else
 			if(affecting)
-				target << "<span class='danger'>\The [fruit]'s thorns dig deeply into your [affecting.display_name]!</span>"
+				target << "<span class='danger'>\The [fruit]'s thorns dig deeply into your [affecting.name]!</span>"
 			else
 				target << "<span class='danger'>\The [fruit]'s thorns dig deeply into your flesh!</span>"
 			damage = get_trait(TRAIT_POTENCY)/5

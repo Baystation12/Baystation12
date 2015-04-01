@@ -76,6 +76,16 @@
 	name = "wrench"
 	path = /obj/item/weapon/wrench
 	category = "Tools"
+	
+/datum/autolathe/recipe/hatchet
+	name = "hatchet"
+	path = /obj/item/weapon/hatchet
+	category = "Tools"
+	
+/datum/autolathe/recipe/minihoe
+	name = "mini hoe"
+	path = /obj/item/weapon/minihoe
+	category = "Tools"
 
 /datum/autolathe/recipe/radio_headset
 	name = "radio headset"
@@ -322,6 +332,12 @@
 	hidden = 1
 	category = "Arms and Ammunition"
 
+/datum/autolathe/recipe/magazine_arifle
+	name = "ammunition (7.62mm)"
+	path = /obj/item/ammo_magazine/c762
+	hidden = 1
+	category = "Arms and Ammunition"
+
 /datum/autolathe/recipe/magazine_smg
 	name = "ammunition (9mm top mounted)"
 	path = /obj/item/ammo_magazine/mc9mmt
@@ -329,7 +345,7 @@
 	category = "Arms and Ammunition"
 
 /datum/autolathe/recipe/magazine_carbine
-	name = "ammunition (5.56)"
+	name = "ammunition (5.56mm)"
 	path = /obj/item/ammo_magazine/a556
 	hidden = 1
 	category = "Arms and Ammunition"
@@ -343,6 +359,12 @@
 /datum/autolathe/recipe/shotgun_pellet
 	name = "ammunition (shell, shotgun)"
 	path = /obj/item/ammo_casing/shotgun/pellet
+	hidden = 1
+	category = "Arms and Ammunition"
+
+/datum/autolathe/recipe/tacknife
+	name = "tactical knife"
+	path = /obj/item/weapon/hatchet/tacknife
 	hidden = 1
 	category = "Arms and Ammunition"
 
@@ -375,3 +397,5 @@
 	path = /obj/item/weapon/handcuffs
 	hidden = 1
 	category = "General"
+
+

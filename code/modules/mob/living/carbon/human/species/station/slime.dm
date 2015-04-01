@@ -1,6 +1,7 @@
 /datum/species/slime
 	name = "Slime"
 	name_plural = "slimes"
+	is_small = 1
 
 	icobase = 'icons/mob/human_races/r_slime.dmi'
 	deform = 'icons/mob/human_races/r_slime.dmi'
@@ -18,11 +19,15 @@
 	death_message = "rapidly loses cohesion, splattering across the ground..."
 
 	has_organ = list(
-		"brain" = /datum/organ/internal/brain/slime
+		"brain" = /obj/item/organ/brain/slime
 		)
 
 	breath_type = null
 	poison_type = null
+
+	bump_flag = SLIME
+	swap_flags = MONKEY|SLIME|SIMPLE_ANIMAL
+	push_flags = MONKEY|SLIME|SIMPLE_ANIMAL
 
 /datum/species/slime/handle_death(var/mob/living/carbon/human/H)
 	spawn(1)

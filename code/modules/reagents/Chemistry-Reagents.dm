@@ -153,9 +153,6 @@ datum
 
 				if(!self.data["donor"] || istype(self.data["donor"], /mob/living/carbon/human))
 					blood_splatter(T,self,1)
-				else if(istype(self.data["donor"], /mob/living/carbon/monkey))
-					var/obj/effect/decal/cleanable/blood/B = blood_splatter(T,self,1)
-					if(B) B.blood_DNA["Non-Human DNA"] = "A+"
 				else if(istype(self.data["donor"], /mob/living/carbon/alien))
 					var/obj/effect/decal/cleanable/blood/B = blood_splatter(T,self,1)
 					if(B) B.blood_DNA["UNKNOWN DNA STRUCTURE"] = "X*"
@@ -287,11 +284,8 @@ datum
 
 			on_mob_life(var/mob/living/M as mob)
 				if(ishuman(M))
-					if((M.mind in ticker.mode.cult) && prob(10))
-						M << "\blue A cooling sensation from inside you brings you an untold calmness."
-						ticker.mode.remove_cultist(M.mind)
-						for(var/mob/O in viewers(M, null))
-							O.show_message(text("\blue []'s eyes blink and become clearer.", M), 1) // So observers know it worked.
+					if(M.mind && cult.is_antagonist(M.mind) && prob(10))
+						cult.remove_antagonist(M.mind)
 				holder.remove_reagent(src.id, 10 * REAGENTS_METABOLISM) //high metabolism to prevent extended uncult rolls.
 				return
 
@@ -376,7 +370,7 @@ datum
 						W.loc = M.loc
 						W.dropped(M)
 					var/mob/living/carbon/slime/new_mob = new /mob/living/carbon/slime(M.loc)
-					new_mob.a_intent = "hurt"
+					new_mob.a_intent = I_HURT
 					new_mob.universal_speak = 1
 					if(M.mind)
 						M.mind.transfer_to(new_mob)
@@ -676,7 +670,7 @@ datum
 								if(prob(50))
 									M.radiation += 50 // curing it that way may kill you instead
 									var/absorbed
-									var/datum/organ/internal/diona/nutrients/rad_organ = locate() in C.internal_organs
+									var/obj/item/organ/diona/nutrients/rad_organ = locate() in C.internal_organs
 									if(rad_organ && !rad_organ.is_broken())
 										absorbed = 1
 									if(!absorbed)
@@ -1290,7 +1284,7 @@ datum
 				M.eye_blind = max(M.eye_blind-5 , 0)
 				if(ishuman(M))
 					var/mob/living/carbon/human/H = M
-					var/datum/organ/internal/eyes/E = H.internal_organs_by_name["eyes"]
+					var/obj/item/organ/eyes/E = H.internal_organs_by_name["eyes"]
 					if(E && istype(E))
 						if(E.damage > 0)
 							E.damage = max(E.damage - 1, 0)
@@ -1312,7 +1306,7 @@ datum
 					var/mob/living/carbon/human/H = M
 
 					//Peridaxon heals only non-robotic organs
-					for(var/datum/organ/internal/I in H.internal_organs)
+					for(var/obj/item/organ/I in H.internal_organs)
 						if((I.damage > 0) && (I.robotic != 2))
 							I.damage = max(I.damage - 0.20, 0)
 				..()
@@ -2060,21 +2054,10 @@ datum
 								del (H.glasses)
 								H.update_inv_glasses(0)
 
-					else if(ismonkey(M))
-						var/mob/living/carbon/monkey/MK = M
-						if(MK.wear_mask)
-							if(!MK.wear_mask.unacidable)
-								MK << "<span class='danger'>Your mask melts away but protects you from the acid!</span>"
-								del (MK.wear_mask)
-								MK.update_inv_wear_mask(0)
-							else
-								MK << "<span class='warning'>Your mask protects you from the acid.</span>"
-							return
-
 					if(!M.unacidable)
 						if(istype(M, /mob/living/carbon/human) && volume >= 10)
 							var/mob/living/carbon/human/H = M
-							var/datum/organ/external/affecting = H.get_organ("head")
+							var/obj/item/organ/external/affecting = H.get_organ("head")
 							if(affecting)
 								if(affecting.take_damage(4*toxpwr, 2*toxpwr))
 									H.UpdateDamageIcon()
@@ -3349,7 +3332,7 @@ datum
 					M:drowsyness  = max(M:drowsyness, 30)
 					if(ishuman(M))
 						var/mob/living/carbon/human/H = M
-						var/datum/organ/internal/liver/L = H.internal_organs_by_name["liver"]
+						var/obj/item/organ/liver/L = H.internal_organs_by_name["liver"]
 						if (!L)
 							H.adjustToxLoss(5)
 						else if(istype(L))
@@ -3671,13 +3654,13 @@ datum
 						if(prob(30)) M.adjustToxLoss(2)
 						if(prob(5)) if(ishuman(M))
 							var/mob/living/carbon/human/H = M
-							var/datum/organ/internal/heart/L = H.internal_organs_by_name["heart"]
+							var/obj/item/organ/heart/L = H.internal_organs_by_name["heart"]
 							if (L && istype(L))
 								L.take_damage(5, 0)
 					if (300 to INFINITY)
 						if(ishuman(M))
 							var/mob/living/carbon/human/H = M
-							var/datum/organ/internal/heart/L = H.internal_organs_by_name["heart"]
+							var/obj/item/organ/heart/L = H.internal_organs_by_name["heart"]
 							if (L && istype(L))
 								L.take_damage(100, 0)
 				holder.remove_reagent(src.id, FOOD_METABOLISM)

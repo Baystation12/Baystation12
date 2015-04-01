@@ -131,6 +131,21 @@
 
 	var/max_reagent_volume = 80 //Used when refilling.
 
+/obj/item/rig_module/chem_dispenser/ninja
+	interface_desc = "Dispenses loaded chemicals directly into the wearer's bloodstream. This variant is made to be extremely light and flexible."
+
+	//just over a syringe worth of each. Want more? Go refill. Gives the ninja another reason to have to show their face.
+	charges = list(
+		list("tricordrazine", "tricordrazine", 0, 20),
+		list("tramadol",      "tramadol",      0, 20),
+		list("dexalin plus",  "dexalinp",      0, 20),
+		list("antibiotics",   "spaceacillin",  0, 20),
+		list("antitoxins",    "anti_toxin",    0, 20),
+		list("nutrients",     "nutriment",     0, 80),
+		list("hyronalin",     "hyronalin",     0, 20),
+		list("radium",        "radium",        0, 20)
+		)
+
 /obj/item/rig_module/chem_dispenser/accepts_item(var/obj/item/input_item, var/mob/living/user)
 
 	if(!input_item.is_open_container())
@@ -265,10 +280,10 @@
 			voice_holder.active = 0
 			usr << "<font color='blue'>You disable the speech synthesiser.</font>"
 		if("Set Name")
-			var/raw_choice = input(usr, "Please enter a new name.")  as text|null
+			var/raw_choice = sanitize(input(usr, "Please enter a new name.")  as text|null)
 			if(!raw_choice)
 				return 0
-			voice_holder.voice = sanitize(copytext(raw_choice,1,MAX_MESSAGE_LEN))
+			voice_holder.voice = raw_choice
 			usr << "<font color='blue'>You are now mimicking <B>[voice_holder.voice]</B>.</font>"
 	return 1
 

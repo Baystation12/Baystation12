@@ -22,7 +22,7 @@
 		M << "<span class='notice'>You don't feel cool enough to name this gun, chump.</span>"
 		return 0
 
-	var/input = stripped_input(usr,"What do you want to name the gun?", ,"", MAX_NAME_LEN)
+	var/input = sanitizeSafe(input("What do you want to name the gun?", ,""), MAX_NAME_LEN)
 
 	if(src && input && !M.stat && in_range(M,src))
 		name = input
@@ -63,6 +63,7 @@
 	name = "desert eagle"
 	desc = "A robust handgun that uses .50 AE ammo"
 	icon_state = "deagle"
+	item_state = "deagle"
 	force = 14.0
 	caliber = ".50"
 	load_method = MAGAZINE
@@ -107,6 +108,7 @@
 	name = "\improper Stechtkin pistol"
 	desc = "A small, easily concealable gun. Uses 9mm rounds."
 	icon_state = "pistol"
+	item_state = null
 	w_class = 2
 	caliber = "9mm"
 	silenced = 0

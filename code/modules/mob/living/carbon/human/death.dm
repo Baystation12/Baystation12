@@ -1,19 +1,14 @@
 /mob/living/carbon/human/gib()
 
-	for(var/datum/organ/internal/I in internal_organs)
-		var/obj/item/organ/current_organ = I.remove()
-		if(current_organ)
-			if(istype(loc,/turf))
-				current_organ.throw_at(get_edge_target_turf(src,pick(alldirs)),rand(1,3),30)
-			current_organ.removed(src)
+	for(var/obj/item/organ/I in internal_organs)
+		I.removed()
+		if(istype(loc,/turf))
+			I.throw_at(get_edge_target_turf(src,pick(alldirs)),rand(1,3),30)
 
-	for(var/datum/organ/external/E in src.organs)
-		if(istype(E, /datum/organ/external/chest))
-			continue
-		// Only make the limb drop if it's not too damaged
-		if(prob(100 - E.get_damage()))
-			// Override the current limb status and don't cause an explosion
-			E.droplimb(1,1)
+	for(var/obj/item/organ/external/E in src.organs)
+		E.droplimb(0,DROPLIMB_EDGE,1)
+
+	sleep(1)
 
 	..(species.gibbed_anim)
 	gibs(loc, viruses, dna, null, species.flesh_color, species.blood_color)
@@ -30,6 +25,7 @@
 
 	BITSET(hud_updateflag, HEALTH_HUD)
 	BITSET(hud_updateflag, STATUS_HUD)
+	BITSET(hud_updateflag, LIFE_HUD)
 
 	handle_hud_list()
 
@@ -37,7 +33,7 @@
 	if(species) species.handle_death(src)
 
 	//Handle brain slugs.
-	var/datum/organ/external/head = get_organ("head")
+	var/obj/item/organ/external/head = get_organ("head")
 	var/mob/living/simple_animal/borer/B
 
 	for(var/I in head.implants)
@@ -64,8 +60,6 @@
 	if(ticker && ticker.mode)
 		sql_report_death(src)
 		ticker.mode.check_win()
-		if(istype(ticker.mode,/datum/game_mode/heist))
-			vox_kills++ //Bad vox. Shouldn't be killing humans.
 
 	return ..(gibbed,species.death_message)
 

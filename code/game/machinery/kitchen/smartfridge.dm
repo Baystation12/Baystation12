@@ -58,7 +58,7 @@
 /obj/machinery/smartfridge/secure/extract
 	name = "\improper Slime Extract Storage"
 	desc = "A refrigerated storage unit for slime extracts"
-	req_access_txt = "47"
+	req_access = list(access_research)
 
 /obj/machinery/smartfridge/secure/extract/accept_check(var/obj/item/O as obj)
 	if(istype(O,/obj/item/slime_extract))
@@ -70,7 +70,7 @@
 	desc = "A refrigerated storage unit for storing medicine and chemicals."
 	icon_state = "smartfridge" //To fix the icon in the map editor.
 	icon_on = "smartfridge_chem"
-	req_one_access_txt = "5;33"
+	req_one_access = list(access_medical,access_chemistry)
 
 /obj/machinery/smartfridge/secure/medbay/accept_check(var/obj/item/O as obj)
 	if(istype(O,/obj/item/weapon/reagent_containers/glass/))
@@ -84,7 +84,7 @@
 /obj/machinery/smartfridge/secure/virology
 	name = "\improper Refrigerated Virus Storage"
 	desc = "A refrigerated storage unit for storing viral material."
-	req_access_txt = "39"
+	req_access = list(access_virology)
 	icon_state = "smartfridge_virology"
 	icon_on = "smartfridge_virology"
 	icon_off = "smartfridge_virology-off"
@@ -197,7 +197,7 @@
 			user << "<span class='notice'>\The [src] is full.</span>"
 			return 1
 		else
-			user.before_take_item(O)
+			user.remove_from_mob(O)
 			O.loc = src
 			if(item_quants[O.name])
 				item_quants[O.name]++

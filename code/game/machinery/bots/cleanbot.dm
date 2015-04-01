@@ -51,10 +51,9 @@
 	should_patrol = 1
 
 	src.botcard = new /obj/item/weapon/card/id(src)
-	var/datum/job/janitor/J = new/datum/job/janitor
-	src.botcard.access = J.get_access()
-	
-	src.locked = 0 // Start unlocked so roboticist can set them to patrol.	
+	src.botcard.access = list(access_janitor, access_maint_tunnels)
+
+	src.locked = 0 // Start unlocked so roboticist can set them to patrol.
 
 	if(radio_controller)
 		radio_controller.add_object(src, beacon_freq, filter = RADIO_NAVBEACONS)
@@ -356,7 +355,7 @@ text("<A href='?src=\ref[src];operation=oddbutton'>[src.oddbutton ? "Yes" : "No"
 		del(src)
 
 	else if (istype(W, /obj/item/weapon/pen))
-		var/t = copytext(stripped_input(user, "Enter new robot name", src.name, src.created_name),1,MAX_NAME_LEN)
+		var/t = sanitizeSafe(input(user, "Enter new robot name", src.name, src.created_name), MAX_NAME_LEN)
 		if (!t)
 			return
 		if (!in_range(src, usr) && src.loc != usr)
