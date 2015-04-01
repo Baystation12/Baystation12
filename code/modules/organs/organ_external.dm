@@ -18,7 +18,7 @@
 	var/icon/mob_icon
 	var/gendered_icon = 0
 	var/limb_name
-	var/disfigured = 1
+	var/disfigured = 0
 	var/cannot_amputate
 	var/cannot_break
 	var/s_tone
