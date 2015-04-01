@@ -216,7 +216,7 @@
 		if(isturf(A))
 			for(var/obj/O in A)
 				O.bullet_act(src)
-			for(var/mob/M in A)
+			for(var/mob/living/M in A)
 				attack_mob(M, distance)
 
 	//penetrating projectiles can pass through things that otherwise would not let them
