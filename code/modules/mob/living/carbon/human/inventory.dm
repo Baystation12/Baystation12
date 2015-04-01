@@ -215,10 +215,11 @@ This saves us from having to call add_fingerprint() any time something is put in
 //This is an UNSAFE proc. Use mob_can_equip() before calling this one! Or rather use equip_to_slot_if_possible() or advanced_equip_to_slot_if_possible()
 //set redraw_mob to 0 if you don't wish the hud to be updated - if you're doing it manually in your own proc.
 /mob/living/carbon/human/equip_to_slot(obj/item/W as obj, slot, redraw_mob = 1)
+
 	if(!slot) return
 	if(!istype(W)) return
 	if(!has_organ_for_slot(slot)) return
-
+	if(!species || !species.hud || !(slot in species.hud.equip_slots)) return
 	W.loc = src
 	switch(slot)
 		if(slot_back)
@@ -337,7 +338,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 
 	W.layer = 20
 
-	return
+	return 1
 
 /obj/effect/equip_e
 	name = "equip e"

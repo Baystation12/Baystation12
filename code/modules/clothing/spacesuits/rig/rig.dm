@@ -140,12 +140,13 @@
 		piece.name = "[suit_type] [initial(piece.name)]"
 		piece.desc = "It seems to be part of a [src.name]."
 		piece.icon_state = "[initial(icon_state)]"
-		piece.armor = armor.Copy()
 		piece.min_cold_protection_temperature = min_cold_protection_temperature
 		piece.max_heat_protection_temperature = max_heat_protection_temperature
 		piece.siemens_coefficient = siemens_coefficient
 		piece.permeability_coefficient = permeability_coefficient
 		piece.unacidable = unacidable
+		if(islist(species_restricted)) piece.species_restricted = species_restricted.Copy()
+		if(islist(armor)) piece.armor = armor.Copy()
 
 	update_icon(1)
 
@@ -631,14 +632,15 @@
 						use_obj.loc = src
 
 		else if (deploy_mode != ONLY_RETRACT)
-			if(check_slot)
-				if(check_slot != use_obj)
-					H << "<span class='danger'>You are unable to deploy \the [piece] as \the [check_slot] [check_slot.gender == PLURAL ? "are" : "is"] in the way.</span>"
-					return
+			if(check_slot && check_slot != use_obj)
+				H << "<span class='danger'>You are unable to deploy \the [piece] as \the [check_slot] [check_slot.gender == PLURAL ? "are" : "is"] in the way.</span>"
+				return
 			else
-				H << "<font color='blue'><b>Your [use_obj.name] [use_obj.gender == PLURAL ? "deploy" : "deploys"] swiftly.</b></span>"
 				use_obj.loc = H
-				H.equip_to_slot(use_obj, equip_to)
+				if(!H.equip_to_slot_if_possible(use_obj, equip_to, 0))
+					use_obj.loc = src
+				else
+					H << "<font color='blue'><b>Your [use_obj.name] [use_obj.gender == PLURAL ? "deploy" : "deploys"] swiftly.</b></span>"
 
 	if(piece == "helmet" && helmet)
 		helmet.update_light(H)
