@@ -98,7 +98,6 @@ var/global/datum/controller/gameticker/ticker
 		src.mode = config.pick_mode(master_mode)
 	if(!mode_started && !src.mode.can_start())
 		world << "<B>Unable to start [mode.name].</B> Not enough players, [mode.required_players] players needed. Reverting to pre-game lobby."
-		del(mode)
 		current_state = GAME_STATE_PREGAME
 		job_master.ResetOccupations()
 		return 0
