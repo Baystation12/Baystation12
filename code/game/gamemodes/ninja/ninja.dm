@@ -59,7 +59,7 @@
 			forge_ninja_objectives(ninja)
 		show_objectives(ninja)
 
-	spawn (rand(waittime_l, waittime_h))
+	//spawn (rand(waittime_l, waittime_h))
 	//	send_intercept()
 	return ..()
 

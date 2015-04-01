@@ -1,11 +1,3 @@
-#Ain't noone need to see these c;
-admins.txt
-alienwhitelist.txt
-config.txt
-custom_items.txt
-custom_sprites.txt
-dbconfig.txt
-forumdbconfig.txt
-game_options.txt
-moderators.txt
-svndir.txt
+#ignore everything here, except subdirectories
+*
+!*/

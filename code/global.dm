@@ -82,7 +82,7 @@ var/blobevent = 0
 
 var/diary = null
 var/href_logfile = null
-var/station_name = "NSS Exodus"
+var/station_name = "NSS Eternal"
 var/game_version = "Baystation12"
 var/changelog_hash = ""
 var/read_the_rules = ""

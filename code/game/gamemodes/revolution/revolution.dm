@@ -93,7 +93,7 @@
 	modePlayer += head_revolutionaries
 	if(emergency_shuttle)
 		emergency_shuttle.auto_recall = 1
-	spawn (rand(waittime_l, waittime_h))
+	//spawn (rand(waittime_l, waittime_h))
 	//	send_intercept()
 	..()
 

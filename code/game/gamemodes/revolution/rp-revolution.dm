@@ -86,8 +86,8 @@
 		rev_mind.current << "\blue You are a member of the revolutionaries' leadership!"
 		show_objectives(rev_mind)
 
-	spawn (rand(waittime_l, waittime_h))
-		send_intercept()
+	//spawn (rand(waittime_l, waittime_h))
+	//	send_intercept()
 
 /*/datum/game_mode/rp_revolution/send_intercept()
 	var/intercepttext = "<FONT size = 3><B>Cent. Com. Update</B> Requested staus information:</FONT><HR>"

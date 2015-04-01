@@ -57,7 +57,7 @@
 		name_wizard(wizard.current)
 		greet_wizard(wizard)
 
-	spawn (rand(waittime_l, waittime_h))
+	//spawn (rand(waittime_l, waittime_h))
 	//	send_intercept() NOTE: to self, add if statement or similar and make possible to toggle disable of intercept via config.
 	..()
 	return

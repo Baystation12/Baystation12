@@ -82,8 +82,8 @@ var/global/list/obj/cortical_stacks = list() //Stacks for 'leave nobody behind' 
 		if(!config.objectives_disabled && raid_objectives)
 			raider.objectives = raid_objectives
 
-//	spawn (rand(waittime_l, waittime_h))
-//		send_intercept()
+	//spawn (rand(waittime_l, waittime_h))
+	//	send_intercept()
 
 /datum/game_mode/proc/create_vox(var/datum/mind/newraider)
 
@@ -169,7 +169,7 @@ var/global/list/obj/cortical_stacks = list() //Stacks for 'leave nobody behind' 
 
 /datum/game_mode/proc/greet_vox(var/datum/mind/raider)
 	raider.current << "\blue <B>You are a Vox Raider, fresh from the Shoal!</b>"
-	raider.current << "\blue The Vox are a race of cunning, sharp-eyed nomadic raiders and traders endemic to the frontier and much of the unexplored galaxy. You and the crew have come to the Exodus for plunder, trade or both."
+	raider.current << "\blue The Vox are a race of cunning, sharp-eyed nomadic raiders and traders endemic to the frontier and much of the unexplored galaxy. You and the crew have come to the [station_name] for plunder, trade or both."
 	raider.current << "\blue Vox are cowardly and will flee from larger groups, but corner one or find them en masse and they are vicious."
 	raider.current << "\blue Use :V to voxtalk, :H to talk on your encrypted channel, and don't forget to turn on your nitrogen internals!"
 	raider.current << "\red IF YOU HAVE NOT PLAYED A VOX BEFORE, REVIEW THIS THREAD: http://baystation12.net/forums/viewtopic.php?f=6&t=8657."
