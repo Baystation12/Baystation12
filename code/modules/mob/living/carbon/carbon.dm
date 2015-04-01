@@ -31,10 +31,9 @@
 				var/d = rand(round(I.force / 4), I.force)
 				if(istype(src, /mob/living/carbon/human))
 					var/mob/living/carbon/human/H = src
-					var/organ = H.get_organ("chest")
-					if (istype(organ, /obj/item/organ/external))
-						var/obj/item/organ/external/temp = organ
-						if(temp.take_damage(d, 0))
+					var/obj/item/organ/external/organ = H.get_organ("chest")
+					if (istype(organ))
+						if(organ.take_damage(d, 0))
 							H.UpdateDamageIcon()
 					H.updatehealth()
 				else
@@ -328,7 +327,7 @@
 
 	if(!item) return //Grab processing has a chance of returning null
 
-	
+
 	src.remove_from_mob(item)
 	item.loc = src.loc
 
