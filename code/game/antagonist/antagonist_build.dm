@@ -28,7 +28,9 @@
 	// This could use work.
 	if(flags & ANTAG_CLEAR_EQUIPMENT)
 		for(var/obj/item/thing in player.contents)
-			del(thing)
+			player.drop_from_inventory(thing)
+			if(thing.loc != player)
+				del(thing)
 	return 1
 
 	if(flags & ANTAG_SET_APPEARANCE)
