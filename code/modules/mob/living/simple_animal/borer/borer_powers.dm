@@ -69,7 +69,7 @@
 	if(istype(M,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = M
 
-		var/datum/organ/external/E = H.organs_by_name["head"]
+		var/obj/item/organ/external/E = H.organs_by_name["head"]
 		if(!E || (E.status & ORGAN_DESTROYED))
 			src << "\The [H] does not have a head!"
 
@@ -115,12 +115,12 @@
 		if(istype(M,/mob/living/carbon/human))
 
 			var/mob/living/carbon/human/H = M
-			var/datum/organ/internal/I = H.internal_organs_by_name["brain"]
+			var/obj/item/organ/I = H.internal_organs_by_name["brain"]
 			if(!I) // No brain organ, so the borer moves in and replaces it permanently.
 				replace_brain()
 			else
 				// If they're in normally, implant removal can get them out.
-				var/datum/organ/external/head = H.get_organ("head")
+				var/obj/item/organ/external/head = H.get_organ("head")
 				head.implants += src
 
 		return
@@ -183,11 +183,11 @@
 
 	H.ChangeToHusk()
 
-	var/datum/organ/internal/borer/B = new(H)
+	var/obj/item/organ/borer/B = new(H)
 	H.internal_organs_by_name["brain"] = B
 	H.internal_organs |= B
 
-	var/datum/organ/external/affecting = H.get_organ("head")
+	var/obj/item/organ/external/affecting = H.get_organ("head")
 	affecting.implants -= src
 
 	var/s2h_id = src.computer_id

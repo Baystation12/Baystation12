@@ -52,9 +52,7 @@ var/global/datum/global_init/init = new ()
 
 	sleep_offline = 1
 
-	// Set up roundstart seed list. This is here because vendors were
-	// bugging out and not populating with the correct packet names
-	// due to this list not being instantiated.
+	// Set up roundstart seed list.
 	plant_controller = new()
 
 	//Create the asteroid Z-level.
@@ -64,16 +62,15 @@ var/global/datum/global_init/init = new ()
 	// Create autolathe recipes, as above.
 	populate_lathe_recipes()
 
+	// Create robolimbs for chargen.
+	populate_robolimb_list()
+
 	processScheduler = new
 	master_controller = new /datum/controller/game_controller()
 	spawn(1)
-
 		processScheduler.deferSetupFor(/datum/controller/process/ticker)
 		processScheduler.setup()
-
 		master_controller.setup()
-
-
 
 	spawn(3000)		//so we aren't adding to the round-start lag
 		if(config.ToRban)
@@ -84,17 +81,6 @@ var/global/datum/global_init/init = new ()
 #undef RECOMMENDED_VERSION
 
 	return
-
-//world/Topic(href, href_list[])
-//		world << "Received a Topic() call!"
-//		world << "[href]"
-//		for(var/a in href_list)
-//			world << "[a]"
-//		if(href_list["hello"])
-//			world << "Hello world!"
-//			return "Hello world!"
-//		world << "End of Topic() call."
-//		..()
 
 var/world_topic_spam_protect_ip = "0.0.0.0"
 var/world_topic_spam_protect_time = world.timeofday

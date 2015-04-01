@@ -235,6 +235,9 @@
 		H.r_eyes = hex2num(getblock(structure,8,3))
 		H.g_eyes = hex2num(getblock(structure,9,3))
 		H.b_eyes = hex2num(getblock(structure,10,3))
+		if(H.internal_organs_by_name["eyes"])
+			var/obj/item/organ/eyes/eyes = H.internal_organs_by_name["eyes"]
+			eyes.eye_colour = list(H.r_eyes,H.g_eyes,H.b_eyes)
 
 		if (isblockon(getblock(structure, 11,3),11 , 1))
 			H.gender = FEMALE
@@ -461,7 +464,7 @@
 		O.adjustToxLoss(M.getToxLoss() + 20)
 		O.adjustOxyLoss(M.getOxyLoss())
 		O.stat = M.stat
-		O.a_intent = I_HURT
+		O.a_intent = "hurt"
 		for (var/obj/item/weapon/implant/I in implants)
 			I.loc = O
 			I.implanted = O

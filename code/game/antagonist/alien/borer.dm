@@ -27,8 +27,8 @@ var/datum/antagonist/xenos/borer/borers
 	borer.host = host
 	borer.host_brain.name = host.name
 	borer.host_brain.real_name = host.real_name
-	var/datum/organ/external/head = host.get_organ("head")
-	head.implants += borer
+	var/obj/item/organ/external/head = host.get_organ("head")
+	if(head) head.implants += borer
 
 /datum/antagonist/xenos/borer/proc/get_hosts()
 	var/list/possible_hosts = list()

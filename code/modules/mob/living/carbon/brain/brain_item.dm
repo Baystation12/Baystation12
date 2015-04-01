@@ -10,11 +10,6 @@
 	throw_range = 5
 	origin_tech = "biotech=3"
 	attack_verb = list("attacked", "slapped", "whacked")
-	prosthetic_name = "cyberbrain"
-	prosthetic_icon = "brain-prosthetic"
-	organ_tag = "brain"
-	organ_type = /datum/organ/internal/brain
-
 	var/mob/living/carbon/brain/brainmob = null
 
 /obj/item/organ/brain/xeno
@@ -49,19 +44,18 @@
 	else
 		user << "This one seems particularly lifeless. Perhaps it will regain some of its luster later.."
 
-/obj/item/organ/brain/removed(var/mob/living/target,var/mob/living/user)
+/obj/item/organ/brain/removed(var/mob/living/user)
 
 	..()
 
-	var/mob/living/simple_animal/borer/borer = target.has_brain_worms()
+	var/mob/living/simple_animal/borer/borer = owner.has_brain_worms()
 
 	if(borer)
 		borer.detatch() //Should remove borer if the brain is removed - RR
 
-	var/mob/living/carbon/human/H = target
 	var/obj/item/organ/brain/B = src
-	if(istype(B) && istype(H))
-		B.transfer_identity(target)
+	if(istype(B) && istype(owner))
+		B.transfer_identity(owner)
 
 /obj/item/organ/brain/replaced(var/mob/living/target)
 
@@ -78,8 +72,6 @@
 /obj/item/organ/brain/slime
 	name = "slime core"
 	desc = "A complex, organic knot of jelly and crystalline particles."
-	prosthetic_name = null
-	prosthetic_icon = null
 	robotic = 2
 	icon = 'icons/mob/slimes.dmi'
 	icon_state = "green slime extract"
@@ -87,8 +79,6 @@
 /obj/item/organ/brain/golem
 	name = "chem"
 	desc = "A tightly furled roll of paper, covered with indecipherable runes."
-	prosthetic_name = null
-	prosthetic_icon = null
 	robotic = 2
 	icon = 'icons/obj/wizard.dmi'
 	icon_state = "scroll"

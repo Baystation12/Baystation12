@@ -235,14 +235,13 @@
 		if(istype(target, /mob/living/carbon/human))
 
 			var/target_zone = ran_zone(check_zone(user.zone_sel.selecting, target))
-			var/datum/organ/external/affecting = target:get_organ(target_zone)
+			var/obj/item/organ/external/affecting = target:get_organ(target_zone)
 
-			if (!affecting)
+			if (!affecting || (affecting.status & ORGAN_DESTROYED) || affecting.is_stump())
+				user << "<span class='danger'>They are missing that limb!</span>"
 				return
-			if(affecting.status & ORGAN_DESTROYED)
-				user << "What [affecting.display_name]?"
-				return
-			var/hit_area = affecting.display_name
+
+			var/hit_area = affecting.name
 
 			var/mob/living/carbon/human/H = target
 			if((user != target) && H.check_shields(7, "the [src.name]"))
@@ -251,7 +250,7 @@
 			if (target != user && target.getarmor(target_zone, "melee") > 5 && prob(50))
 				for(var/mob/O in viewers(world.view, user))
 					O.show_message(text("\red <B>[user] tries to stab [target] in \the [hit_area] with [src.name], but the attack is deflected by armor!</B>"), 1)
-				user.u_equip(src)
+				user.remove_from_mob(src)
 				del(src)
 				return
 
@@ -270,7 +269,7 @@
 		var/syringestab_amount_transferred = rand(0, (reagents.total_volume - 5)) //nerfed by popular demand
 		src.reagents.trans_to(target, syringestab_amount_transferred)
 		src.break_syringe(target, user)
-		
+
 	proc/break_syringe(mob/living/carbon/target, mob/living/carbon/user)
 		src.desc += " It is broken."
 		src.mode = SYRINGE_BROKEN

@@ -99,6 +99,15 @@
 /mob/living/silicon/robot/isRobot()
 	return 1
 
+/mob/proc/isSynthetic()
+	return 0
+
+/mob/living/carbon/human/isSynthetic()
+	return species.flags & IS_SYNTHETIC
+
+/mob/living/silicon/isSynthetic()
+	return 1
+
 /proc/ispAI(A)
 	if(istype(A, /mob/living/silicon/pai))
 		return 1
@@ -125,7 +134,7 @@ proc/isobserver(A)
 	return 0
 
 proc/isorgan(A)
-	if(istype(A, /datum/organ/external))
+	if(istype(A, /obj/item/organ/external))
 		return 1
 	return 0
 
@@ -140,7 +149,7 @@ proc/isnewplayer(A)
 		return 1
 	return 0
 
-proc/hasorgans(A)
+proc/hasorgans(A) // Fucking really??
 	return ishuman(A)
 
 proc/iscuffed(A)

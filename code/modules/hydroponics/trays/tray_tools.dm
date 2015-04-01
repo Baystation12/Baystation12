@@ -226,7 +226,7 @@
 	icon_state = "hatchet"
 	flags = CONDUCT
 	force = 12.0
-	w_class = 2.0
+	w_class = 3.0
 	throwforce = 15.0
 	throw_speed = 4
 	throw_range = 4
