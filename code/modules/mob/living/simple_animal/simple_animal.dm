@@ -92,6 +92,7 @@
 
 	if(health < 1)
 		death()
+		return
 
 	if(health > maxHealth)
 		health = maxHealth
