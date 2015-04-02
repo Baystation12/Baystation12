@@ -1020,6 +1020,9 @@
 			continue
 
 		var/remaining_volume = beaker.reagents.maximum_volume - beaker.reagents.total_volume
+		if(remaining_volume <= 0)
+			break
+
 		if(sheet_reagents[O.type])
 			var/obj/item/stack/stack = O
 			if(istype(stack))
@@ -1029,10 +1032,11 @@
 					beaker.reagents.add_reagent(sheet_reagents[stack.type], (amount_to_take*REAGENTS_PER_SHEET))
 					continue
 
-		O.reagents.trans_to(beaker, min(O.reagents.total_volume, remaining_volume))
-		if(O.reagents.total_volume == 0)
-			remove_object(O)
-		if (beaker.reagents.total_volume >= beaker.reagents.maximum_volume)
-			break
+		if(O.reagents)
+			O.reagents.trans_to(beaker, min(O.reagents.total_volume, remaining_volume))
+			if(O.reagents.total_volume == 0)
+				remove_object(O)
+			if (beaker.reagents.total_volume >= beaker.reagents.maximum_volume)
+				break
 
 #undef REAGENTS_PER_SHEET
