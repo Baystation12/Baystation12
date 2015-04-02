@@ -45,7 +45,7 @@
 		"heart" =    /obj/item/organ/heart,
 		"lungs" =    /obj/item/organ/lungs,
 		"liver" =    /obj/item/organ/liver,
-		"kidneys" =  /obj/item/organ/kidney,
+		"kidneys" =  /obj/item/organ/kidneys,
 		"brain" =    /obj/item/organ/brain,
 		"eyes" =     /obj/item/organ/eyes,
 		"stack" =    /obj/item/organ/stack/vox
