@@ -640,8 +640,8 @@ Note that amputating the affected organ does in fact remove the infection from t
 	wounds.Cut()
 	if(parent)
 		var/datum/wound/W
-		if(max_damage < 50)
-			W = new/datum/wound/lost_limb/small(max_damage)
+		if(clean || max_damage < 50)
+			W = new/datum/wound/lost_limb/small(max_damage/2)
 		else
 			W = new/datum/wound/lost_limb(max_damage)
 		parent.children -= src
@@ -930,6 +930,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	gendered_icon = 1
 	cannot_amputate = 1
 	parent_organ = null
+	encased = "ribcage"
 
 /obj/item/organ/external/groin
 	name = "lower body"
@@ -1051,6 +1052,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	joint = "jaw"
 	amputation_point = "neck"
 	gendered_icon = 1
+	encased = "skull"
 
 /obj/item/organ/external/head/removed()
 	if(owner)

@@ -357,7 +357,7 @@
 				user << "\red \The [target] already has [o_a][O.organ_tag]."
 				return 2
 
-			if(O && affected.name == O.parent_organ)
+			if(O && affected.limb_name == O.parent_organ)
 				organ_compatible = 1
 			else
 				user << "\red \The [O.organ_tag] [o_do] normally go in \the [affected.name]."
