@@ -82,6 +82,7 @@
 /datum/antagonist/proc/create_id(var/assignment, var/mob/living/carbon/human/player)
 
 	var/obj/item/weapon/card/id/W = new id_type(player)
+	if(!W) return
 	W.name = "[player.real_name]'s ID Card"
 	W.access |= default_access
 	W.assignment = "[assignment]"
