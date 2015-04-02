@@ -625,6 +625,12 @@ var/global/list/gear_datums = list()
 	cost = 2
 	slot = slot_shoes
 
+/datum/gear/toeless_jackboots
+	display_name = "toe-less jackboots"
+	path = /obj/item/clothing/shoes/jackboots/fluff/kecer_eldraran //permisson of owner of custom item was granted
+	cost = 2
+	slot = slot_shoes
+
 /datum/gear/sandal
 	display_name = "sandals"
 	path = /obj/item/clothing/shoes/sandal
