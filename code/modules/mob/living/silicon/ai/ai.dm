@@ -6,6 +6,7 @@ var/list/ai_verbs_default = list(
 	/mob/living/silicon/ai/proc/ai_announcement,
 	/mob/living/silicon/ai/proc/ai_call_shuttle,
 	// /mob/living/silicon/ai/proc/ai_recall_shuttle,
+	/mob/living/silicon/ai/proc/ai_emergency_message,
 	/mob/living/silicon/ai/proc/ai_camera_track,
 	/mob/living/silicon/ai/proc/ai_camera_list,
 	/mob/living/silicon/ai/proc/ai_goto_location,
@@ -379,6 +380,27 @@ var/list/ai_verbs_default = list(
 
 	if(confirm == "Yes")
 		cancel_call_proc(src)
+
+/mob/living/silicon/ai/var/emergency_message_cooldown = 0
+/mob/living/silicon/ai/proc/ai_emergency_message()
+	set category = "AI Commands"
+	set name = "Send Emergency Message"
+
+	if(check_unable(AI_CHECK_WIRELESS))
+		return
+	if(emergency_message_cooldown)
+		usr << "\red Arrays recycling.  Please stand by."
+		return
+	var/input = input(usr, "Please choose a message to transmit to Centcomm via quantum entanglement.  Please be aware that this process is very expensive, and abuse will lead to... termination.  Transmission does not guarantee a response. There is a 30 second delay before you may send another message, be clear, full and concise.", "To abort, send an empty message.", "")
+	if(!input)
+		return
+	Centcomm_announce(input, usr)
+	usr << "\blue Message transmitted."
+	log_say("[key_name(usr)] has made an IA Centcomm announcement: [input]")
+	emergency_message_cooldown = 1
+	spawn(300)
+		emergency_message_cooldown = 0
+
 
 /mob/living/silicon/ai/check_eye(var/mob/user as mob)
 	if (!camera)
