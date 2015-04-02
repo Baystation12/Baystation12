@@ -113,15 +113,15 @@
 			if("undocked")
 				dat += "<font color='[override_en? "red" : "grey"]'>Undocked</font>"
 			if("docking")
-				dat += "<font color='[override_en? "red" : "amber"]'>Docking</font>"
+				dat += "<font color='[override_en? "red" : "yellow"]'>Docking</font>"
 			if("undocking")
-				dat += "<font color='[override_en? "red" : "amber"]'>Undocking</font>"
+				dat += "<font color='[override_en? "red" : "yellow"]'>Undocking</font>"
 			if("docked")
 				dat += "<font color='[override_en? "red" : "green"]'>Docked</font>"
 		
 		if(override_en) dat += " <font color='red'>(Override Enabled)</font>"
 		
-		dat += ".<br>"
+		dat += ". <A href='?src=\ref[src];refresh=[1]'>\[Refresh\]</A><br><br>"
 		
 		switch(docking_status)
 			if("undocked")
@@ -157,6 +157,10 @@
 	if(!istype(MS)) return
 
 	//world << "multi_shuttle: last_departed=[MS.last_departed], origin=[MS.origin], interim=[MS.interim], travel_time=[MS.move_time]"
+
+	if(href_list["refresh"])
+		updateUsrDialog()
+		return
 
 	if (MS.moving_status != SHUTTLE_IDLE)
 		usr << "\blue [shuttle_tag] vessel is moving."
