@@ -49,7 +49,7 @@
 
 /obj/item/organ/brain/removed(var/mob/living/user)
 
-	..()
+	name = "[owner.real_name]'s brain"
 
 	var/mob/living/simple_animal/borer/borer = owner.has_brain_worms()
 
@@ -59,6 +59,8 @@
 	var/obj/item/organ/brain/B = src
 	if(istype(B) && istype(owner))
 		B.transfer_identity(owner)
+
+	..()
 
 /obj/item/organ/brain/replaced(var/mob/living/target)
 

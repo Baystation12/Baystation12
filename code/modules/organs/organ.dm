@@ -235,6 +235,7 @@ var/list/organ_cache = list()
 
 	owner.internal_organs_by_name[organ_tag] = null
 	owner.internal_organs_by_name -= organ_tag
+	owner.internal_organs_by_name -= null
 	owner.internal_organs -= src
 
 	var/obj/item/organ/external/affected = owner.get_organ(parent_organ)
