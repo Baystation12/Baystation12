@@ -39,13 +39,10 @@
 
 		if(L.part)
 			for(var/part_name in L.part)
-				world << "Checking [part_name]"
 				if(!isnull(target.get_organ(part_name)))
-					world << "target has organ there"
 					continue
 				var/list/organ_data = target.species.has_limbs["[target_zone]"]
 				if(!organ_data)
-					world << "target species has no limb for that part"
 					continue
 				var/new_limb_type = organ_data["path"]
 				var/obj/item/organ/external/new_limb = new new_limb_type(target)

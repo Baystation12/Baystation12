@@ -20,7 +20,8 @@
 		else
 			set_species()
 
-	name = species.get_random_name(gender)
+	if(species)
+		name = species.get_random_name(gender)
 
 	var/datum/reagents/R = new/datum/reagents(1000)
 	reagents = R
