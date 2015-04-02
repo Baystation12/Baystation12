@@ -216,7 +216,7 @@ var/list/slot_equipment_priority = list( \
 	O.screen_loc = null
 	if(istype(O, /obj/item))
 		var/obj/item/I = O
-		I.dropped()
+		I.dropped(src)
 	return 1
 
 
