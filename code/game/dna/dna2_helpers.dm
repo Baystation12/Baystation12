@@ -165,7 +165,7 @@
 		if((0 < beard) && (beard <= facial_hair_styles_list.len))
 			H.f_style = facial_hair_styles_list[beard]
 
-		H.update_body(0)
+		H.force_update_limbs()
 		H.update_hair()
 
 		return 1
