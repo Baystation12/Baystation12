@@ -167,11 +167,19 @@
 		playsound(user, fire_sound, 10, 1)
 	else
 		playsound(user, fire_sound, 50, 1)
-		user.visible_message(
-			"<span class='danger'>[user] fires [src][pointblank ? "  point blank at [target]":""][reflex ? " by reflex":""]!</span>",
-			"<span class='warning'>You fire [src][reflex ? "by reflex":""]!</span>",
-			"You hear a [fire_sound_text]!"
-		)
+		
+		if(reflex)
+			user.visible_message(
+				"<span class='reflex_shoot'><b>[user] fires [src][pointblank ? "  point blank at [target]":""] by reflex!<b></span>",
+				"<span class='reflex_shoot'>You fire [src] by reflex]!</span>",
+				"You hear a [fire_sound_text]!"
+			)
+		else
+			user.visible_message(
+				"<span class='danger'>[user] fires [src][pointblank ? "  point blank at [target]":""]!</span>",
+				"<span class='warning'>You fire [src]!</span>",
+				"You hear a [fire_sound_text]!"
+				)
 	
 	if(recoil)
 		spawn()
