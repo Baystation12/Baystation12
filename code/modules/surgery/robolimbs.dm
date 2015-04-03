@@ -37,11 +37,11 @@
 		user.visible_message("\blue [user] has attached \the [tool] to [target].",	\
 		"\blue You have attached \the [tool] to [target].")
 
-		if(L.part)
+		if(L.part)http://i.imgur.com/g19Dq0G.png
 			for(var/part_name in L.part)
 				if(!isnull(target.get_organ(part_name)))
 					continue
-				var/list/organ_data = target.species.has_limbs["[target_zone]"]
+				var/list/organ_data = target.species.has_limbs["[part_name]"]
 				if(!organ_data)
 					continue
 				var/new_limb_type = organ_data["path"]
