@@ -122,6 +122,11 @@
 		screen_loc = ui_gun_select
 		//dir = 1
 
+	radio
+		name = "Allow Radio Use"
+		icon_state = "no_radio0"
+		screen_loc = ui_gun4
+
 /obj/screen/zone_sel
 	name = "damage zone"
 	icon_state = "zone_sel"
@@ -484,6 +489,24 @@
 
 		if("Toggle Gun Mode")
 			usr.client.ToggleGunMode()
+
+		if("Allow Radio Use")
+			if(gun_click_time > world.time - 30)	//give them 3 seconds between mode changes.
+				return
+			if(!istype(usr.get_active_hand(),/obj/item/weapon/gun))
+				usr << "You need your gun in your active hand to do that!"
+				return
+			usr.client.AllowTargetRadio()
+			gun_click_time = world.time
+
+		if("Disallow Radio Use")
+			if(gun_click_time > world.time - 30)	//give them 3 seconds between mode changes.
+				return
+			if(!istype(usr.get_active_hand(),/obj/item/weapon/gun))
+				usr << "You need your gun in your active hand to do that!"
+				return
+			usr.client.AllowTargetRadio()
+			gun_click_time = world.time
 
 		else
 			return 0

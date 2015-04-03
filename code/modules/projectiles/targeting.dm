@@ -153,6 +153,7 @@
 	last_move_intent = -100
 	last_target_click = -5
 	target_locked = null
+	last_target_radio = -5;
 
 /mob/living/proc/Targeted(var/obj/item/weapon/gun/I) //Self explanitory.
 	if(!I.aim_targets)
@@ -218,6 +219,12 @@
 					I.lock_time = world.time + 5
 				I.lock_time = world.time + 5
 				I.last_moved_mob = src
+			if(last_target_radio > I.lock_time + 10 && !T.client.target_can_radio)
+				I.TargetActed(src)
+				if(I.last_moved_mob == src) //If they were the last ones to move, give them more of a grace period, so that an automatic weapon can hold down a room better.
+					I.lock_time = world.time + 5
+				I.lock_time = world.time + 5
+				I.last_moved_mob = src
 			sleep(1)
 
 /mob/living/proc/NotTargeted(var/obj/item/weapon/gun/I)
@@ -253,12 +260,14 @@
 	target_can_move = 0
 	target_can_run = 0
 	target_can_click = 0
+	target_can_radio = 0
 	gun_mode = 0
 
 //These are called by the on-screen buttons, adjusting what the victim can and cannot do.
 /client/proc/add_gun_icons()
 	screen += usr.item_use_icon
 	screen += usr.gun_move_icon
+	screen += usr.radio_use_icon
 	if (target_can_move)
 		screen += usr.gun_run_icon
 
@@ -268,6 +277,7 @@
 	if(!usr) return 1 // Runtime prevention on N00k agents spawning with SMG
 	screen -= usr.item_use_icon
 	screen -= usr.gun_move_icon
+	screen -= usr.radio_use_icon
 	if (target_can_move)
 		screen -= usr.gun_run_icon
 
@@ -374,3 +384,26 @@ client/verb/AllowTargetRun()
 					M << "Your character may now <b>use items</b> at the discretion of their targeter."
 				else
 					M << "\red <b>Your character will now be shot if they use items.</b>"
+
+/client/verb/AllowTargetRadio()
+	set hidden=1
+
+	target_can_radio = !target_can_radio
+	if(target_can_radio)
+		usr << "Target may now use radio."
+	else
+		usr << "Target may no longer use radio."
+
+	if(usr.radio_use_icon)
+		usr.radio_use_icon.icon_state = "no_radio[target_can_radio]"
+		usr.radio_use_icon.name = "[target_can_radio ? "Disallow" : "Allow"] Radio Use"
+
+	//Handling change for all the guns on client
+	for(var/obj/item/weapon/gun/G in src)
+		G.lock_time = world.time + 5
+		if(G.aim_targets)
+			for(var/mob/living/M in G.aim_targets)
+				if(target_can_radio)
+					M << "Your character may now <b>use the radio</b> at the discretion of their targeter."
+				else
+					M << "\red <b>Your character will now be shot if they use the radio.</b>"
