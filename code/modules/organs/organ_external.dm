@@ -243,10 +243,10 @@
 		status &= ~ORGAN_BROKEN
 		perma_injury = 0
 
-	if((brute || burn) && children && children.len && (owner.species.flags & REGENERATES_LIMBS))
+	/*if((brute || burn) && children && children.len && (owner.species.flags & REGENERATES_LIMBS))
 		var/obj/item/organ/external/stump/S = locate() in children
 		if(S)
-			world << "Extra healing to go around ([brute+burn]) and [owner] needs a replacement limb."
+			world << "Extra healing to go around ([brute+burn]) and [owner] needs a replacement limb."*/
 
 	//Sync the organ's damage with its wounds
 	src.update_damages()
@@ -656,9 +656,9 @@ Note that amputating the affected organ does in fact remove the infection from t
 		parent = null
 
 	spawn(1)
-		owner.update_body()
 		owner.updatehealth()
 		owner.UpdateDamageIcon()
+		owner.regenerate_icons()
 		dir = 2
 
 	switch(disintegrate)

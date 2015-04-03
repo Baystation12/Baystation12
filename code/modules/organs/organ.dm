@@ -286,7 +286,7 @@ var/list/organ_cache = list()
 		target.r_eyes = eye_colour[1]
 		target.g_eyes = eye_colour[2]
 		target.b_eyes = eye_colour[3]
-		target.update_body()
+		target.update_eyes()
 	..()
 
 /obj/item/organ/proc/bitten(mob/user)
