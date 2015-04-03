@@ -25,7 +25,7 @@
 /obj/item/device/debugger/is_used_on(obj/O, mob/user)
 	if(istype(O, /obj/machinery/power/apc))
 		var/obj/machinery/power/apc/A = O
-		if(A.emagged || A.malfhack)
+		if(A.emagged || A.hacker)
 			user << "\red There is a software error with the device."
 		else
 			user << "\blue The device's software appears to be fine."

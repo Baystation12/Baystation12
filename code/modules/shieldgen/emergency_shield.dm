@@ -12,6 +12,21 @@
 	var/shield_generate_power = 7500	//how much power we use when regenerating
 	var/shield_idle_power = 1500		//how much power we use when just being sustained.
 
+/obj/machinery/shield/malfai
+	name = "Emergency Forcefield"
+	desc = "Weak forcefield which seems to be projected by station's emergency atmosphere containment field"
+	health = max_health/2 // Half health, it's not suposed to resist much.
+
+/obj/machinery/shield/malfai/process()
+	health -= 0.5 // Slowly lose integrity over time
+	check_failure()
+
+/obj/machinery/shield/proc/check_failure()
+	if (src.health <= 0)
+		visible_message("\blue The [src] dissipates!")
+		del(src)
+		return
+
 /obj/machinery/shield/New()
 	src.set_dir(pick(1,2,3,4))
 	..()
@@ -38,11 +53,7 @@
 	//Play a fitting sound
 	playsound(src.loc, 'sound/effects/EMPulse.ogg', 75, 1)
 
-
-	if (src.health <= 0)
-		visible_message("\blue The [src] dissipates!")
-		del(src)
-		return
+	check_failure()
 
 	opacity = 1
 	spawn(20) if(src) opacity = 0
@@ -51,12 +62,7 @@
 
 /obj/machinery/shield/meteorhit()
 	src.health -= max_health*0.75 //3/4 health as damage
-
-	if(src.health <= 0)
-		visible_message("\blue The [src] dissipates!")
-		del(src)
-		return
-
+	check_failure()
 	opacity = 1
 	spawn(20) if(src) opacity = 0
 	return
@@ -64,10 +70,7 @@
 /obj/machinery/shield/bullet_act(var/obj/item/projectile/Proj)
 	health -= Proj.damage
 	..()
-	if(health <=0)
-		visible_message("\blue The [src] dissipates!")
-		del(src)
-		return
+	check_failure()
 	opacity = 1
 	spawn(20) if(src) opacity = 0
 
@@ -112,11 +115,7 @@
 	//This seemed to be the best sound for hitting a force field.
 	playsound(src.loc, 'sound/effects/EMPulse.ogg', 100, 1)
 
-	//Handle the destruction of the shield
-	if (src.health <= 0)
-		visible_message("\blue The [src] dissipates!")
-		del(src)
-		return
+	check_failure()
 
 	//The shield becomes dense to absorb the blow.. purely asthetic.
 	opacity = 1
@@ -124,9 +123,6 @@
 
 	..()
 	return
-
-
-
 /obj/machinery/shieldgen
 	name = "Emergency shield projector"
 	desc = "Used to seal minor hull breaches."
@@ -161,7 +157,7 @@
 	update_icon()
 
 	create_shields()
-	
+
 	idle_power_usage = 0
 	for(var/obj/machinery/shield/shield_tile in deployed_shields)
 		idle_power_usage += shield_tile.shield_idle_power
@@ -174,7 +170,7 @@
 	update_icon()
 
 	collapse_shields()
-	
+
 	update_use_power(0)
 
 /obj/machinery/shieldgen/proc/create_shields()
@@ -201,22 +197,22 @@
 /obj/machinery/shieldgen/process()
 	if (!active || (stat & NOPOWER))
 		return
-	
+
 	if(malfunction)
 		if(deployed_shields.len && prob(5))
 			del(pick(deployed_shields))
 	else
 		if (check_delay <= 0)
 			create_shields()
-			
+
 			var/new_power_usage = 0
 			for(var/obj/machinery/shield/shield_tile in deployed_shields)
 				new_power_usage += shield_tile.shield_idle_power
-			
+
 			if (new_power_usage != idle_power_usage)
 				idle_power_usage = new_power_usage
 				use_power(0)
-			
+
 			check_delay = 60
 		else
 			check_delay--

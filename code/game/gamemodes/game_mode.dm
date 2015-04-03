@@ -33,17 +33,17 @@ var/global/list/additional_antag_types = list()
 	var/required_players_secret = 0          // Minimum number of players for that game mode to be chose in Secret
 	var/required_enemies = 0                 // Minimum antagonists for round to start.
 	var/newscaster_announcements = null
-	var/end_on_antag_death                   // Round will end when all antagonists are dead.
+	var/end_on_antag_death = 0               // Round will end when all antagonists are dead.
 	var/ert_disabled = 0                     // ERT cannot be called.
-	var/deny_respawn                         // Disable respawn during this round.
+	var/deny_respawn = 0	                 // Disable respawn during this round.
 
 	var/shuttle_delay = 1                    // Shuttle transit time is multiplied by this.
-	var/auto_recall_shuttle                  // Will the shuttle automatically be recalled?
+	var/auto_recall_shuttle = 0              // Will the shuttle automatically be recalled?
 
 	var/antag_tag                            // First (main) antag template to spawn.
 	var/list/antag_templates                 // Extra antagonist types to include.
 
-	var/round_autoantag                      // Will this round attempt to periodically spawn more antagonists?
+	var/round_autoantag = 0                  // Will this round attempt to periodically spawn more antagonists?
 	var/antag_prob = 0                       // Likelihood of a new antagonist spawning.
 	var/antag_count = 0                      // Current number of antagonists.
 	var/antag_scaling_coeff = 5              // Coefficient for scaling max antagonists to player count.

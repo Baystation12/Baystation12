@@ -80,15 +80,25 @@
 /obj/machinery/camera/proc/upgradeEmpProof()
 	assembly.upgrades.Add(new /obj/item/stack/sheet/mineral/osmium(assembly))
 	setPowerUsage()
+	if(cameranet)
+		cameranet.updateVisibility(src)
+	update_nearby_tiles()
 
 /obj/machinery/camera/proc/upgradeXRay()
 	assembly.upgrades.Add(new /obj/item/weapon/stock_parts/scanning_module/adv(assembly))
 	setPowerUsage()
+	if(cameranet)
+		cameranet.updateVisibility(src)
+	update_nearby_tiles()
 
-// If you are upgrading Motion, and it isn't in the camera's New(), add it to the machines list.
 /obj/machinery/camera/proc/upgradeMotion()
 	assembly.upgrades.Add(new /obj/item/device/assembly/prox_sensor(assembly))
 	setPowerUsage()
+	if(!(src in machines))
+		machines.Add(src)
+	if(cameranet)
+		cameranet.updateVisibility(src)
+	update_nearby_tiles()
 
 /obj/machinery/camera/proc/setPowerUsage()
 	var/mult = 1

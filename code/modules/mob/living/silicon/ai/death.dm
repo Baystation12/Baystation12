@@ -35,17 +35,13 @@
 			break
 		callshuttle++
 
-	if(ticker.mode.name == "revolution" || ticker.mode.name == "AI malfunction")
+	if(ticker.mode.name == "revolution")
 		callshuttle = 0
 
 	if(callshuttle == 3) //if all three conditions are met
 		emergency_shuttle.call_evac()
 		log_game("All the AIs, comm consoles and boards are destroyed. Shuttle called.")
 		message_admins("All the AIs, comm consoles and boards are destroyed. Shuttle called.", 1)
-
-	if(explosive)
-		spawn(10)
-			explosion(src.loc, 3, 6, 12, 15)
 
 	for(var/obj/machinery/ai_status_display/O in world)
 		spawn( 0 )
