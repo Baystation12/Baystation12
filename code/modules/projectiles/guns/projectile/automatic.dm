@@ -62,7 +62,7 @@
 
 /obj/item/weapon/gun/projectile/automatic/sts35/update_icon()
 	..()
-	icon_state = (ammo_magazine)? "arifle-0" : "arifle"
+	icon_state = (ammo_magazine)? "arifle" : "arifle-empty"
 	update_held_icon()
 
 /obj/item/weapon/gun/projectile/automatic/wt550
