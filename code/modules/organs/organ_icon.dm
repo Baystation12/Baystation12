@@ -16,7 +16,9 @@ var/global/list/limb_icon_cache = list()
 /obj/item/organ/external/proc/sync_colour_to_human(var/mob/living/carbon/human/human)
 	s_tone = null
 	s_col = null
-	if(human.s_tone && (human.species.flags & HAS_SKIN_TONE))
+	if(status & ORGAN_ROBOT)
+		return
+	if(!isnull(human.s_tone) && (human.species.flags & HAS_SKIN_TONE))
 		s_tone = human.s_tone
 	if(human.species.flags & HAS_SKIN_COLOR)
 		s_col = list(human.r_skin, human.g_skin, human.b_skin)

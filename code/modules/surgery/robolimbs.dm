@@ -39,8 +39,11 @@
 
 		if(L.part)
 			for(var/part_name in L.part)
-				if(!isnull(target.get_organ(part_name))) continue
+				if(!isnull(target.get_organ(part_name)))
+					continue
 				var/list/organ_data = target.species.has_limbs["[target_zone]"]
+				if(!organ_data)
+					continue
 				var/new_limb_type = organ_data["path"]
 				var/obj/item/organ/external/new_limb = new new_limb_type(target)
 				new_limb.robotize(L.model_info)

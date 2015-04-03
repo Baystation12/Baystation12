@@ -151,7 +151,7 @@ var/list/slot_equipment_priority = list( \
 
 		remove_from_mob(W)
 		if(!W) return 1 // self destroying objects (tk, grabs)
-		
+
 		W.forceMove(Target)
 		update_icons()
 		return 1
@@ -165,7 +165,7 @@ var/list/slot_equipment_priority = list( \
 /mob/proc/drop_r_hand(var/atom/Target)
 	return drop_from_inventory(r_hand, Target)
 
-//Drops the item in our active hand.
+//Drops the item in our active hand. TODO: rename this to drop_active_hand or something
 /mob/proc/drop_item(var/atom/Target)
 	if(hand)	return drop_l_hand(Target)
 	else		return drop_r_hand(Target)
@@ -173,11 +173,11 @@ var/list/slot_equipment_priority = list( \
 /*
 	Removes the object from any slots the mob might have, calling the appropriate icon update proc.
 	Does nothing else.
-	
+
 	DO NOT CALL THIS PROC DIRECTLY. It is meant to be called only by other inventory procs.
 	It's probably okay to use it if you are transferring the item between slots on the same mob,
 	but chances are you're safer calling remove_from_mob() or drop_from_inventory() anyways.
-	
+
 	As far as I can tell the proc exists so that mobs with different inventory slots can override
 	the search through all the slots, without having to duplicate the rest of the item dropping.
 */
@@ -216,7 +216,7 @@ var/list/slot_equipment_priority = list( \
 	O.screen_loc = null
 	if(istype(O, /obj/item))
 		var/obj/item/I = O
-		I.dropped()
+		I.dropped(src)
 	return 1
 
 

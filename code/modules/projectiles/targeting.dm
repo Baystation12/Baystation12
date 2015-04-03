@@ -23,7 +23,7 @@
 //Removing the lock and the buttons.
 /obj/item/weapon/gun/dropped(mob/user as mob)
 	stop_aim()
-	if (user.client)
+	if(user && user.client)
 		user.client.remove_gun_icons()
 	return ..()
 
@@ -47,7 +47,7 @@
 /obj/item/weapon/gun/proc/PreFire(atom/A as mob|obj|turf|area, mob/living/user as mob|obj, params)
 	//Lets not spam it.
 	if(lock_time > world.time - 2) return
-	
+
 	user.set_dir(get_cardinal_dir(src, A))
 	if(isliving(A) && !(A in aim_targets))
 		Aim(A) 	//Clicked a mob, aim at them
@@ -58,7 +58,7 @@
 	if(isliving(M) && (M in view(user)) && !(M in aim_targets))
 		Aim(M) //Aha!  Aim at them!
 		return 1
-	
+
 	return 0
 
 //Aiming at the target mob.
@@ -83,12 +83,12 @@
 	if(src != M.get_active_hand())
 		stop_aim()
 		return
-	
+
 	//reflex firing is disabled when help intent is set
 	if (M.a_intent == I_HELP)
 		M << "\red You refrain from firing your [src] as your intent is set to help."
 		return
-	
+
 	M.last_move_intent = world.time
 	var/firing_check = can_hit(T,usr) //0 if it cannot hit them, 1 if it is capable of hitting, and 2 if a special check is preventing it from firing.
 	if(firing_check > 0)

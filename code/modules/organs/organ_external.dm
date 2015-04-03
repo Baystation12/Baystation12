@@ -3,13 +3,16 @@
 ****************************************************/
 /obj/item/organ/external
 	name = "external"
+	min_broken_damage = 30
+	max_damage = 0
+	dir = SOUTH
+	organ_tag = "limb"
+
 	var/icon_name = null
 	var/body_part = null
 	var/icon_position = 0
-
 	var/model
 	var/force_icon
-
 	var/damage_state = "00"
 	var/brute_dam = 0
 	var/burn_dam = 0
@@ -18,7 +21,7 @@
 	var/icon/mob_icon
 	var/gendered_icon = 0
 	var/limb_name
-	var/disfigured = 1
+	var/disfigured = 0
 	var/cannot_amputate
 	var/cannot_break
 	var/s_tone
@@ -26,37 +29,24 @@
 	var/list/wounds = list()
 	var/number_wounds = 0 // cache the number of wounds, which is NOT wounds.len!
 	var/perma_injury = 0
-
 	var/obj/item/organ/external/parent
 	var/list/obj/item/organ/external/children
-
-	// Internal organs of this body part
-	var/list/internal_organs = list()
-
+	var/list/internal_organs = list() 	// Internal organs of this body part
 	var/damage_msg = "\red You feel an intense pain"
 	var/broken_description
-
 	var/open = 0
 	var/stage = 0
 	var/cavity = 0
 	var/sabotaged = 0 // If a prosthetic limb is emagged, it will detonate when it fails.
 	var/encased       // Needs to be opened with a saw to access the organs.
-
 	var/obj/item/hidden = null
 	var/list/implants = list()
-
-	// how often wounds should be updated, a higher number means less often
-	var/wound_update_accuracy = 1
-
+	var/wound_update_accuracy = 1 	// how often wounds should be updated, a higher number means less often
 	var/joint = "joint"   // Descriptive string used in dislocation.
 	var/amputation_point  // Descriptive string used in amputation.
 	var/dislocated = 0    // If you target a joint, you can dislocate the limb, causing temporary damage to the organ.
 	var/can_grasp
 	var/can_stand
-
-	min_broken_damage = 30
-	max_damage = 0
-	dir = SOUTH
 
 /obj/item/organ/external/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	switch(stage)
@@ -650,8 +640,8 @@ Note that amputating the affected organ does in fact remove the infection from t
 	wounds.Cut()
 	if(parent)
 		var/datum/wound/W
-		if(max_damage < 50)
-			W = new/datum/wound/lost_limb/small(max_damage)
+		if(clean || max_damage < 50)
+			W = new/datum/wound/lost_limb/small(max_damage/2)
 		else
 			W = new/datum/wound/lost_limb(max_damage)
 		parent.children -= src
@@ -940,6 +930,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	gendered_icon = 1
 	cannot_amputate = 1
 	parent_organ = null
+	encased = "ribcage"
 
 /obj/item/organ/external/groin
 	name = "lower body"
@@ -1061,9 +1052,11 @@ Note that amputating the affected organ does in fact remove the infection from t
 	joint = "jaw"
 	amputation_point = "neck"
 	gendered_icon = 1
+	encased = "skull"
 
 /obj/item/organ/external/head/removed()
 	if(owner)
+		name = "[owner.real_name]'s head"
 		owner.u_equip(owner.glasses)
 		owner.u_equip(owner.head)
 		owner.u_equip(owner.l_ear)
