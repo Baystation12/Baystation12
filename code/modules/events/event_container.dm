@@ -59,19 +59,9 @@ var/global/list/severity_to_string = list(EVENT_LEVEL_MUNDANE = "Mundane", EVENT
 
 	var/list/possible_events = list()
 	for(var/datum/event_meta/EM in available_events)
-		var/event_weight = EM.get_weight(active_with_role)
-		if(EM.enabled && event_weight)
+		var/event_weight = get_weight(EM, active_with_role)
+		if(event_weight)
 			possible_events[EM] = event_weight
-
-	for(var/event_meta in last_event_time) if(possible_events[event_meta])
-		var/time_passed = world.time - event_last_fired[event_meta]
-		var/weight_modifier = max(0, (config.expected_round_length - time_passed) / 300)
-		var/new_weight = max(possible_events[event_meta] - weight_modifier, 0)
-
-		if(new_weight)
-			possible_events[event_meta] = new_weight
-		else
-			possible_events -= event_meta
 
 	if(possible_events.len == 0)
 		return null
@@ -80,6 +70,19 @@ var/global/list/severity_to_string = list(EVENT_LEVEL_MUNDANE = "Mundane", EVENT
 	var/picked_event = pickweight(possible_events)
 	available_events -= picked_event
 	return picked_event
+
+/datum/event_container/proc/get_weight(var/datum/event_meta/EM, var/list/active_with_role)
+	if(!EM.enabled)
+		return 0
+
+	var/weight = EM.get_weight(active_with_role)
+	var/last_time = last_event_time[EM]
+	if(last_time)
+		var/time_passed = world.time - last_time
+		var/weight_modifier = max(0, round((config.expected_round_length - time_passed) / 300))
+		weight = weight - weight_modifier
+
+	return weight
 
 /datum/event_container/proc/set_event_delay()
 	// If the next event time has not yet been set and we have a custom first time start
