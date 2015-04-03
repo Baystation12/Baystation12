@@ -235,12 +235,14 @@ var/list/organ_cache = list()
 
 	owner.internal_organs_by_name[organ_tag] = null
 	owner.internal_organs_by_name -= organ_tag
+	owner.internal_organs_by_name -= null
 	owner.internal_organs -= src
 
 	var/obj/item/organ/external/affected = owner.get_organ(parent_organ)
 	if(affected) affected.internal_organs -= src
 
 	loc = owner.loc
+	processing_objects |= src
 	rejecting = null
 	var/datum/reagent/blood/organ_blood = locate(/datum/reagent/blood) in reagents.reagent_list
 	if(!organ_blood || !organ_blood.data["blood_DNA"])
@@ -269,6 +271,7 @@ var/list/organ_cache = list()
 		transplant_data["blood_DNA"] =  transplant_blood.data["blood_DNA"]
 
 	owner = target
+	processing_objects -= src
 	target.internal_organs |= src
 	affected.internal_organs |= src
 	target.internal_organs_by_name[organ_tag] = src

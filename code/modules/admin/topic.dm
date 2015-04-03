@@ -968,11 +968,7 @@
 
 		//strip their stuff and stick it in the crate
 		for(var/obj/item/I in M)
-			M.u_equip(I)
-			if(I)
-				I.loc = locker
-				I.layer = initial(I.layer)
-				I.dropped(M)
+			M.drop_from_inventory(I, locker)
 		M.update_icons()
 
 		//so they black out before warping
@@ -1005,11 +1001,7 @@
 			return
 
 		for(var/obj/item/I in M)
-			M.u_equip(I)
-			if(I)
-				I.loc = M.loc
-				I.layer = initial(I.layer)
-				I.dropped(M)
+			M.drop_from_inventory(I)
 
 		M.Paralyse(5)
 		sleep(5)
@@ -1034,11 +1026,7 @@
 			return
 
 		for(var/obj/item/I in M)
-			M.u_equip(I)
-			if(I)
-				I.loc = M.loc
-				I.layer = initial(I.layer)
-				I.dropped(M)
+			M.drop_from_inventory(I)
 
 		M.Paralyse(5)
 		sleep(5)
@@ -1085,11 +1073,7 @@
 			return
 
 		for(var/obj/item/I in M)
-			M.u_equip(I)
-			if(I)
-				I.loc = M.loc
-				I.layer = initial(I.layer)
-				I.dropped(M)
+			M.drop_from_inventory(I)
 
 		if(istype(M, /mob/living/carbon/human))
 			var/mob/living/carbon/human/observer = M
@@ -1838,13 +1822,7 @@
 							if(istype(W, /obj/item/organ/external))
 								continue
 								//don't strip organs
-							H.u_equip(W)
-							if (H.client)
-								H.client.screen -= W
-							if (W)
-								W.loc = H.loc
-								W.dropped(H)
-								W.layer = initial(W.layer)
+							H.drop_from_inventory(W)
 						//teleport person to cell
 						H.loc = pick(prisonwarp)
 						H.equip_to_slot_or_del(new /obj/item/clothing/under/color/orange(H), slot_w_uniform)

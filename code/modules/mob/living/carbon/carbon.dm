@@ -31,10 +31,9 @@
 				var/d = rand(round(I.force / 4), I.force)
 				if(istype(src, /mob/living/carbon/human))
 					var/mob/living/carbon/human/H = src
-					var/organ = H.get_organ("chest")
-					if (istype(organ, /obj/item/organ/external))
-						var/obj/item/organ/external/temp = organ
-						if(temp.take_damage(d, 0))
+					var/obj/item/organ/external/organ = H.get_organ("chest")
+					if (istype(organ))
+						if(organ.take_damage(d, 0))
 							H.UpdateDamageIcon()
 					H.updatehealth()
 				else
@@ -328,16 +327,9 @@
 
 	if(!item) return //Grab processing has a chance of returning null
 
-	item.layer = initial(item.layer)
-	u_equip(item)
-	update_icons()
 
-	if (istype(usr, /mob/living/carbon)) //Check if a carbon mob is throwing. Modify/remove this line as required.
-		item.loc = src.loc
-		if(src.client)
-			src.client.screen -= item
-		if(istype(item, /obj/item))
-			item:dropped(src) // let it know it's been dropped
+	src.remove_from_mob(item)
+	item.loc = src.loc
 
 	//actually throw it!
 	if (item)

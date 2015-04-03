@@ -96,8 +96,8 @@
 
 /client/verb/drop_item()
 	set hidden = 1
-	if(!isrobot(mob))
-		mob.drop_item_v()
+	if(!isrobot(mob) && mob.stat == CONSCIOUS && isturf(mob.loc))
+		return mob.drop_item()
 	return
 
 

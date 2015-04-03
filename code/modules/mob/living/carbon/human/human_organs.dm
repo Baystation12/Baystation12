@@ -104,9 +104,9 @@
 
 		if(E.is_broken())
 			if(E.body_part == HAND_LEFT)
-				u_equip(l_hand)
+				drop_from_inventory(l_hand)
 			else
-				u_equip(r_hand)
+				drop_from_inventory(r_hand)
 
 			var/emote_scream = pick("screams in pain and ", "lets out a sharp cry and ", "cries out and ")
 			emote("me", 1, "[(species.flags & NO_PAIN) ? "" : emote_scream ]drops what they were holding in their [E.name]!")
@@ -114,9 +114,9 @@
 		else if(E.is_malfunctioning())
 
 			if(E.body_part == HAND_LEFT)
-				u_equip(l_hand)
+				drop_from_inventory(l_hand)
 			else
-				u_equip(r_hand)
+				drop_from_inventory(r_hand)
 
 			emote("me", 1, "drops what they were holding, their [E.name] malfunctioning!")
 
