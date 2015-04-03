@@ -2,7 +2,7 @@
 
 	if(istype(M))
 		//Let people pick the little buggers up.
-		if(M.a_intent == "help")
+		if(M.a_intent == I_HELP)
 			if(M.species && M.species.name == "Diona")
 				M << "You feel your being twine with that of [src] as it merges with your biomass."
 				src << "You feel your being twine with that of [M] as you merge with its biomass."

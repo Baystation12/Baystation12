@@ -21,7 +21,7 @@
 	set category = "Object"
 	set src in usr
 
-	var/voice = sanitize(copytext(name,1,MAX_MESSAGE_LEN))
+	var/voice = sanitize(name, MAX_NAME_LEN)
 	if(!voice || !length(voice)) return
 	changer.voice = voice
 	usr << "<span class='notice'>You are now mimicking <B>[changer.voice]</B>.</span>"

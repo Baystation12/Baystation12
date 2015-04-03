@@ -89,6 +89,10 @@
 			C.loc = loc
 
 	else if(istype(W, /obj/item/weapon/reagent_containers/glass) || istype(W, /obj/item/weapon/reagent_containers/food))
+		if(container)
+			user << "<span class='warning'>There is already \a [container] on \the [src]!</span>"
+			return
+
 		var/obj/item/weapon/reagent_containers/RC = W
 
 		if(!accept_drinking && istype(RC,/obj/item/weapon/reagent_containers/food))

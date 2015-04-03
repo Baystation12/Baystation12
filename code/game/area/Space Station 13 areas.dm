@@ -330,8 +330,8 @@ area/space/atmosalert()
 /area/shuttle/research/outpost
 	icon_state = "shuttle"
 
-/area/shuttle/vox/station
-	name = "\improper Vox Skipjack"
+/area/shuttle/skipjack/station
+	name = "\improper Skipjack"
 	icon_state = "yellow"
 	requires_power = 0
 
@@ -527,31 +527,28 @@ area/space/atmosalert()
 	icon_state = "yellow"
 	requires_power = 0
 
-/area/vox_station
-	requires_power = 0
-	flags = RAD_SHIELDED
+/area/skipjack_station/transit
 
-/area/vox_station/transit
 	name = "\improper hyperspace"
 	icon_state = "shuttle"
 
-/area/vox_station/southwest_solars
+/area/skipjack_station/southwest_solars
 	name = "\improper aft port solars"
 	icon_state = "southwest"
 
-/area/vox_station/northwest_solars
+/area/skipjack_station/northwest_solars
 	name = "\improper fore port solars"
 	icon_state = "northwest"
 
-/area/vox_station/northeast_solars
+/area/skipjack_station/northeast_solars
 	name = "\improper fore starboard solars"
 	icon_state = "northeast"
 
-/area/vox_station/southeast_solars
+/area/skipjack_station/southeast_solars
 	name = "\improper aft starboard solars"
 	icon_state = "southeast"
 
-/area/vox_station/mining
+/area/skipjack_station/mining
 	name = "\improper nearby mining asteroid"
 	icon_state = "north"
 

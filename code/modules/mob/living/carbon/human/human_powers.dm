@@ -175,7 +175,7 @@
 
 	text = input("What would you like to say?", "Speak to creature", null, null)
 
-	text = trim(sanitize(copytext(text, 1, MAX_MESSAGE_LEN)))
+	text = sanitize(text)
 
 	if(!text) return
 
@@ -213,7 +213,7 @@
 	set desc = "Whisper silently to someone over a distance."
 	set category = "Abilities"
 
-	var/msg = sanitize(copytext(input("Message:", "Psychic Whisper") as text|null, 1, MAX_MESSAGE_LEN))
+	var/msg = sanitize(input("Message:", "Psychic Whisper") as text|null)
 	if(msg)
 		log_say("PsychicWhisper: [key_name(src)]->[M.key] : [msg]")
 		M << "\green You hear a strange, alien voice in your head... \italic [msg]"

@@ -30,9 +30,9 @@
 	max_co2 = 0
 	max_tox = 0
 
-	a_intent = "harm" //so they don't get pushed around
+	a_intent = I_HURT //so they don't get pushed around
 
-	wall_smash = 1
+	environment_smash = 2
 
 	speed = -1
 

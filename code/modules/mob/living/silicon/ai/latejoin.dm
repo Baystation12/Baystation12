@@ -36,9 +36,8 @@ var/global/list/empty_playable_ai_cores = list()
 	if(mind.objectives.len)
 		del(mind.objectives)
 		mind.special_role = null
-	else
-		if(ticker.mode.name == "AutoTraitor")
-			var/datum/game_mode/traitor/autotraitor/current_mode = ticker.mode
-			current_mode.possible_traitors.Remove(src)
 
+	clear_antag_roles(mind)
+
+	ghostize(0)
 	del(src)

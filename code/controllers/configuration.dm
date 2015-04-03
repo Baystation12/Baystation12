@@ -1,3 +1,5 @@
+var/list/gamemode_cache = list()
+
 /datum/configuration
 	var/server_name = null				// server name (for world name / status)
 	var/server_suffix = 0				// generate numeric suffix based on server port
@@ -67,6 +69,9 @@
 	var/automute_on = 0					//enables automuting/spam prevention
 	var/jobs_have_minimal_access = 0	//determines whether jobs use minimal access or expanded access.
 
+	var/rp_rev = 0             // Changes between conversion methods in rev.
+	var/announce_revheads = 0  // Determines if revheads are announced in revolution mode.
+
 	var/cult_ghostwriter = 1               //Allows ghosts to write in blood in cult rounds...
 	var/cult_ghostwriter_req_cultists = 10 //...so long as this many cultists are active.
 
@@ -82,7 +87,7 @@
 	var/usealienwhitelist = 0
 	var/limitalienplayers = 0
 	var/alien_to_human_ratio = 0.5
-
+	var/allow_extra_antags = 0
 	var/guests_allowed = 1
 	var/debugparanoid = 0
 
@@ -120,6 +125,7 @@
 	var/use_loyalty_implants = 0
 
 	var/welder_vision = 1
+	var/generate_asteroid = 0
 
 	//Used for modifying movement speed for mobs.
 	//Unversal modifiers
@@ -194,8 +200,8 @@
 		// I wish I didn't have to instance the game modes in order to look up
 		// their information, but it is the only way (at least that I know of).
 		var/datum/game_mode/M = new T()
-
 		if (M.config_tag)
+			gamemode_cache[M.config_tag] = M // So we don't instantiate them repeatedly.
 			if(!(M.config_tag in modes))		// ensure each mode is added only once
 				log_misc("Adding game mode [M.name] ([M.config_tag]) to configuration.")
 				src.modes += M.config_tag
@@ -203,7 +209,6 @@
 				src.probabilities[M.config_tag] = M.probability
 				if (M.votable)
 					src.votable_modes += M.config_tag
-		del(M)
 	src.votable_modes += "secret"
 
 /datum/configuration/proc/load(filename, type = "config") //the type can also be game_options, in which case it uses a different switch. not making it separate to not copypaste code - Urist
@@ -304,6 +309,9 @@
 
 				if ("mentors")
 					config.mods_are_mentors = 1
+
+				if ("generate_asteroid")
+					config.generate_asteroid = 1
 
 				if("allow_admin_ooccolor")
 					config.allow_admin_ooccolor = 1
@@ -585,6 +593,15 @@
 				if("disable_welder_vision")
 					config.welder_vision = 0
 
+				if("rp_rev")
+					config.rp_rev = 1
+
+				if("announce_revheads")
+					config.announce_revheads = 1
+
+				if("allow_extra_antags")
+					config.allow_extra_antags = 1
+
 				if("event_custom_start_mundane")
 					var/values = text2numlist(value, ";")
 					config.event_first_run[EVENT_LEVEL_MUNDANE] = list("lower" = MinutesToTicks(values[1]), "upper" = MinutesToTicks(values[2]))
@@ -767,23 +784,20 @@
 /datum/configuration/proc/pick_mode(mode_name)
 	// I wish I didn't have to instance the game modes in order to look up
 	// their information, but it is the only way (at least that I know of).
-	for (var/T in (typesof(/datum/game_mode) - /datum/game_mode))
-		var/datum/game_mode/M = new T()
+	for (var/game_mode in gamemode_cache)
+		var/datum/game_mode/M = gamemode_cache[game_mode]
 		if (M.config_tag && M.config_tag == mode_name)
+			M.create_antagonists()
 			return M
-		del(M)
-	return new /datum/game_mode/extended()
+	return gamemode_cache["extended"]
 
 /datum/configuration/proc/get_runnable_modes()
 	var/list/datum/game_mode/runnable_modes = new
-	for (var/T in (typesof(/datum/game_mode) - /datum/game_mode))
-		var/datum/game_mode/M = new T()
-		//world << "DEBUG: [T], tag=[M.config_tag], prob=[probabilities[M.config_tag]]"
+	for (var/game_mode in gamemode_cache)
+		var/datum/game_mode/M = gamemode_cache[game_mode]
 		if (!(M.config_tag in modes))
-			del(M)
 			continue
 		if (probabilities[M.config_tag]<=0)
-			del(M)
 			continue
 		if (M.can_start())
 			runnable_modes[M] = probabilities[M.config_tag]

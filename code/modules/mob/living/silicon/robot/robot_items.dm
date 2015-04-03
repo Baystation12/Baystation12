@@ -124,11 +124,11 @@
 /obj/item/weapon/pen/robopen/proc/RenamePaper(mob/user as mob,obj/paper as obj)
 	if ( !user || !paper )
 		return
-	var/n_name = input(user, "What would you like to label the paper?", "Paper Labelling", null)  as text
+	var/n_name = sanitizeSafe(input(user, "What would you like to label the paper?", "Paper Labelling", null)  as text, 32)
 	if ( !user || !paper )
 		return
 
-	n_name = copytext(n_name, 1, 32)
+	//n_name = copytext(n_name, 1, 32)
 	if(( get_dist(user,paper) <= 1  && user.stat == 0))
 		paper.name = "paper[(n_name ? text("- '[n_name]'") : null)]"
 	add_fingerprint(user)

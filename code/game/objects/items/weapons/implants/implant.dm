@@ -8,7 +8,7 @@
 	icon_state = "implant"
 	var/implanted = null
 	var/mob/imp_in = null
-	var/datum/organ/external/part = null
+	var/obj/item/organ/external/part = null
 	item_color = "b"
 	var/allow_reagents = 0
 	var/malfunction = 0
@@ -35,7 +35,7 @@
 		return 0
 
 	proc/meltdown()	//breaks it down, making implant unrecongizible
-		imp_in << "\red You feel something melting inside [part ? "your [part.display_name]" : "you"]!"
+		imp_in << "\red You feel something melting inside [part ? "your [part.name]" : "you"]!"
 		if (part)
 			part.take_damage(burn = 15, used_weapon = "Electronics meltdown")
 		else
@@ -152,7 +152,7 @@ Implant Specifics:<BR>"}
 
 	hear(var/msg)
 		var/list/replacechars = list("'" = "","\"" = "",">" = "","<" = "","(" = "",")" = "")
-		msg = sanitize_simple(msg, replacechars)
+		msg = replace_characters(msg, replacechars)
 		if(findtext(msg,phrase))
 			activate()
 			del(src)
@@ -171,18 +171,18 @@ Implant Specifics:<BR>"}
 			if(ishuman(imp_in))
 				if (elevel == "Localized Limb")
 					if(part) //For some reason, small_boom() didn't work. So have this bit of working copypaste.
-						imp_in.visible_message("\red Something beeps inside [imp_in][part ? "'s [part.display_name]" : ""]!")
+						imp_in.visible_message("\red Something beeps inside [imp_in][part ? "'s [part.name]" : ""]!")
 						playsound(loc, 'sound/items/countdown.ogg', 75, 1, -3)
 						sleep(25)
-						if (istype(part,/datum/organ/external/chest) ||	\
-							istype(part,/datum/organ/external/groin) ||	\
-							istype(part,/datum/organ/external/head))
+						if (istype(part,/obj/item/organ/external/chest) ||	\
+							istype(part,/obj/item/organ/external/groin) ||	\
+							istype(part,/obj/item/organ/external/head))
 							part.createwound(BRUISE, 60)	//mangle them instead
 							explosion(get_turf(imp_in), -1, -1, 2, 3)
 							del(src)
 						else
 							explosion(get_turf(imp_in), -1, -1, 2, 3)
-							part.droplimb(1)
+							part.droplimb(0,DROPLIMB_BLUNT)
 							del(src)
 				if (elevel == "Destroy Body")
 					explosion(get_turf(T), -1, 0, 1, 6)
@@ -206,7 +206,7 @@ Implant Specifics:<BR>"}
 		elevel = alert("What sort of explosion would you prefer?", "Implant Intent", "Localized Limb", "Destroy Body", "Full Explosion")
 		phrase = input("Choose activation phrase:") as text
 		var/list/replacechars = list("'" = "","\"" = "",">" = "","<" = "","(" = "",")" = "")
-		phrase = sanitize_simple(phrase, replacechars)
+		phrase = replace_characters(phrase, replacechars)
 		usr.mind.store_memory("Explosive implant in [source] can be activated by saying something containing the phrase ''[src.phrase]'', <B>say [src.phrase]</B> to attempt to activate.", 0, 0)
 		usr << "The implanted explosive implant in [source] can be activated by saying something containing the phrase ''[src.phrase]'', <B>say [src.phrase]</B> to attempt to activate."
 		return 1
@@ -236,18 +236,18 @@ Implant Specifics:<BR>"}
 
 	proc/small_boom()
 		if (ishuman(imp_in) && part)
-			imp_in.visible_message("\red Something beeps inside [imp_in][part ? "'s [part.display_name]" : ""]!")
+			imp_in.visible_message("\red Something beeps inside [imp_in][part ? "'s [part.name]" : ""]!")
 			playsound(loc, 'sound/items/countdown.ogg', 75, 1, -3)
 			spawn(25)
 				if (ishuman(imp_in) && part)
 					//No tearing off these parts since it's pretty much killing
 					//and you can't replace groins
-					if (istype(part,/datum/organ/external/chest) ||	\
-						istype(part,/datum/organ/external/groin) ||	\
-						istype(part,/datum/organ/external/head))
+					if (istype(part,/obj/item/organ/external/chest) ||	\
+						istype(part,/obj/item/organ/external/groin) ||	\
+						istype(part,/obj/item/organ/external/head))
 						part.createwound(BRUISE, 60)	//mangle them instead
 					else
-						part.droplimb(1)
+						part.droplimb(0,DROPLIMB_BLUNT)
 				explosion(get_turf(imp_in), -1, -1, 2, 3)
 				del(src)
 
@@ -336,12 +336,13 @@ the implant may become unstable and either pre-maturely inject the subject or si
 	implanted(mob/M)
 		if(!istype(M, /mob/living/carbon/human))	return 0
 		var/mob/living/carbon/human/H = M
-		if(H.mind in ticker.mode.head_revolutionaries)
+		var/datum/antagonist/antag_data = get_antag_data(H.mind.special_role)
+		if(antag_data && (antag_data.flags & ANTAG_IMPLANT_IMMUNE))
 			H.visible_message("[H] seems to resist the implant!", "You feel the corporate tendrils of Nanotrasen try to invade your mind!")
 			return 0
-		else if(H.mind in ticker.mode:revolutionaries)
-			ticker.mode:remove_revolutionary(H.mind)
-		H << "\blue You feel a surge of loyalty towards Nanotrasen."
+		else
+			clear_antag_roles(H.mind, 1)
+			H << "<span class='notice'>You feel a surge of loyalty towards Nanotrasen.</span>"
 		return 1
 
 

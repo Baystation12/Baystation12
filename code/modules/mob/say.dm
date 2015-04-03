@@ -36,7 +36,7 @@
 		usr << "\red Speech is currently admin-disabled."
 		return
 
-	message = strip_html_properly(message)
+	message = sanitize(message)
 
 	set_typing_indicator(0)
 	if(use_me)

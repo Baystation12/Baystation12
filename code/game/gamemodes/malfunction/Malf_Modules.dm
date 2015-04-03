@@ -110,16 +110,6 @@ rcd light flash thingy on matter drain
 				else apc.overload++
 		else usr << "Out of uses."
 
-/datum/AI_Module/small/interhack
-	module_name = "Hack intercept"
-	mod_pick_name = "interhack"
-
-/client/proc/interhack()
-	set category = "Malfunction"
-	set name = "Hack intercept"
-	usr.verbs -= /client/proc/interhack
-	ticker.mode:hack_intercept()
-
 /datum/AI_Module/small/reactivate_camera
 	module_name = "Reactivate camera"
 	mod_pick_name = "recam"
@@ -192,7 +182,6 @@ rcd light flash thingy on matter drain
 	src.possible_modules += new /datum/AI_Module/large/upgrade_turrets
 	src.possible_modules += new /datum/AI_Module/large/disable_rcd
 	src.possible_modules += new /datum/AI_Module/small/overload_machine
-	src.possible_modules += new /datum/AI_Module/small/interhack
 	src.possible_modules += new /datum/AI_Module/small/blackout
 	src.possible_modules += new /datum/AI_Module/small/reactivate_camera
 	src.possible_modules += new /datum/AI_Module/small/upgrade_camera
@@ -282,18 +271,6 @@ rcd light flash thingy on matter drain
 			usr:current_modules += new /datum/AI_Module/small/blackout
 		else src.temp = "Three additional uses added to Blackout module."
 		src.processing_time -= 15
-
-	else if (href_list["interhack"])
-		var/already
-		for (var/datum/AI_Module/mod in usr:current_modules)
-			if(istype(mod, /datum/AI_Module/small/interhack))
-				already = 1
-		if (!already)
-			usr.verbs += /client/proc/interhack
-			src.temp = "Hacks the status upgrade from Cent. Com, removing any information about malfunctioning electrical systems."
-			usr:current_modules += new /datum/AI_Module/small/interhack
-			src.processing_time -= 15
-		else src.temp = "This module is only needed once."
 
 	else if (href_list["recam"])
 		var/already

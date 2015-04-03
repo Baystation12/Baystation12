@@ -98,22 +98,22 @@
 
 	// Beneficial reagents also have values for modifying yield_mod and mut_mod (in that order).
 	var/global/list/beneficial_reagents = list(
-		"beer" =           list( -0.05, 0,   0   ),
-		"fluorine" =       list( -2,    0,   0   ),
-		"chlorine" =       list( -1,    0,   0   ),
-		"phosphorus" =     list( -0.75, 0,   0   ),
-		"sodawater" =      list(  0.1,  0,   0   ),
-		"sacid" =          list( -1,    0,   0   ),
-		"pacid" =          list( -2,    0,   0   ),
-		"plantbgone" =     list( -2,    0,   0.2 ),
-		"cryoxadone" =     list(  3,    0,   0   ),
-		"ammonia" =        list(  0.5,  0,   0   ),
-		"diethylamine" =   list(  1,    0,   0   ),
-		"nutriment" =      list(  0.5,  0.1,   0 ),
-		"radium" =         list( -1.5,  0,   0.2 ),
-		"adminordrazine" = list(  1,    1,   1   ),
-		"robustharvest" =  list(  0,    0.2, 0   ),
-		"left4zed" =       list(  0,    0,   0.2 )
+		"beer" =           list( -0.05, 0,   0  ),
+		"fluorine" =       list( -2,    0,   0  ),
+		"chlorine" =       list( -1,    0,   0  ),
+		"phosphorus" =     list( -0.75, 0,   0  ),
+		"sodawater" =      list(  0.1,  0,   0  ),
+		"sacid" =          list( -1,    0,   0  ),
+		"pacid" =          list( -2,    0,   0  ),
+		"plantbgone" =     list( -2,    0,   0.2),
+		"cryoxadone" =     list(  3,    0,   0  ),
+		"ammonia" =        list(  0.5,  0,   0  ),
+		"diethylamine" =   list(  1,    0,   0  ),
+		"nutriment" =      list(  0.5,  0.1, 0  ),
+		"radium" =         list( -1.5,  0,   0.2),
+		"adminordrazine" = list(  1,    1,   1  ),
+		"robustharvest" =  list(  0,    0.2, 0  ),
+		"left4zed" =       list(  0,    0,   0.2)
 		)
 
 	// Mutagen list specifies minimum value for the mutation to take place, rather
@@ -453,7 +453,7 @@
 		if(!seed)
 
 			var/obj/item/seeds/S = O
-			user.drop_item(O)
+			user.remove_from_mob(O)
 
 			if(!S.seed)
 				user << "The packet seems to be empty. You throw it away."
@@ -497,7 +497,7 @@
 	else if ( istype(O, /obj/item/weapon/plantspray) )
 
 		var/obj/item/weapon/plantspray/spray = O
-		user.drop_item(O)
+		user.remove_from_mob(O)
 		toxins += spray.toxicity
 		pestlevel -= spray.pest_kill_str
 		weedlevel -= spray.weed_kill_str

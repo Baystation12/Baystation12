@@ -363,7 +363,7 @@
 		if (istype(G.affecting, /mob/living))
 			var/mob/living/M = G.affecting
 			if (G.state < 2)
-				if(user.a_intent == "hurt")
+				if(user.a_intent == I_HURT)
 					if (prob(15))	M.Weaken(5)
 					M.apply_damage(8,def_zone = "head")
 					visible_message("<span class='danger'>[G.assailant] slams [G.affecting]'s face against \the [src]!</span>")
@@ -431,7 +431,7 @@
 		user.visible_message("<span class='danger'>The [src] was sliced apart by [user]!</span>")
 		destroy()
 
-	user.drop_item(src)
+	user.drop_item(src.loc)
 	return
 
 /obj/structure/table/proc/straight_table_check(var/direction)

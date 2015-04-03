@@ -41,16 +41,23 @@
 	// TODO: needs to be refactored into a mob/living level attacked_by() proc. ~Z
 	if(istype(M, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = M
-		var/hit = H.attacked_by(src, user, def_zone)
-		if(hit && hitsound)
+
+		// Handle striking to cripple.
+		var/dislocation_str
+		if(user.a_intent == "disarm")
+			dislocation_str = H.attack_joint(src, user, def_zone)
+		if(H.attacked_by(src, user, def_zone) && hitsound)
 			playsound(loc, hitsound, 50, 1, -1)
-		return hit
+			spawn(1) //ugh I hate this but I don't want to root through human attack procs to print it after this call resolves.
+				if(dislocation_str) user.visible_message("<span class='danger'>[dislocation_str]</span>")
+			return 1
+		return 0
 	else
 		if(attack_verb.len)
 			user.visible_message("<span class='danger'>[M] has been [pick(attack_verb)] with [src] by [user]!</span>")
 		else
 			user.visible_message("<span class='danger'>[M] has been attacked with [src] by [user]!</span>")
-		
+
 		if (hitsound)
 			playsound(loc, hitsound, 50, 1, -1)
 		switch(damtype)

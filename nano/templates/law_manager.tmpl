@@ -42,7 +42,7 @@
 </style>
 
 {{if data.isSlaved && data.isAdmin}}
-    <span class='notice'>This unit is law synced to {{:data.isSlaved}}. Any law differences will be lost upon sync.</span>
+    <span class='notice'>This unit is law synced to {{:data.isSlaved}}.</span>
 {{/if}}
 
 {{if data.isMalf || data.isAIMalf}}
@@ -101,7 +101,7 @@
 				<td>{{:helper.link('Yes', null, {'ref': value.ref, 'state_law' : 1}, value.state == 1 ? 'selected' : null)}}{{:helper.link('No', null, {'ref': value.ref, 'state_law' : 0}, value.state != 1 ? 'selected' : null)}}</td>
 				{{if data.isMalf}}
 				<td class='edit'>{{:helper.link('Edit', null, {'edit_law': value.ref}, data.isAdmin ? null : 'disabled')}}</td>
-				<td class='delete'>{{:helper.link('Delete', null, {'delete_law': value.ref}, data.isAdmin ? null : 'disabled', data.IsAdmin ? 'redButton' : null)}}</td>
+				<td class='delete'>{{:helper.link('Delete', null, {'delete_law': value.ref}, data.isAdmin ? null : 'disabled', data.isAdmin ? 'redButton' : null)}}</td>
 			{{/if}}
 			</tr>
 		{{/for}}
@@ -185,25 +185,16 @@
 		</div>
 	{{/if}}
 
-	{{if data.isMalf}}
-		<div class="item">
-			<div class="itemLabelNarrow">
-				Sync Laws:
-			</div>
-			<div class="itemContent">
-				{{:helper.link('Sync Laws', null, {'sync_laws' : 1})}}
-			</div>
-		</div>
-	{{/if}}
-
-	<div class="item">
-		<div class="itemLabelNarrow">
-			Law Notification:
-		</div>
-		<div class="itemContent">
-			{{:helper.link('Notify', null, {'notify_laws' : 1})}}
-		</div>
-	</div>
+    {{if data.isAI}}
+        <div class="item">
+            <div class="itemLabelNarrow">
+                Law Notification:
+            </div>
+            <div class="itemContent">
+                {{:helper.link('Notify', null, {'notify_laws' : 1})}}
+            </div>
+        </div>
+    {{/if}}
 {{else data.view == 1}}
 	{{for data.law_sets}}
 		<div class="item">

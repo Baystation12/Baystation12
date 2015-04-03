@@ -108,7 +108,7 @@ Des: Removes all infection images from aliens and places an infection image on a
 
 	for(var/mob/living/carbon/alien in player_list)
 
-		if(!locate(/datum/organ/internal/xenos/hivenode) in alien.internal_organs)
+		if(!locate(/obj/item/organ/xenos/hivenode) in alien.internal_organs)
 			continue
 
 		if(alien.client)
@@ -130,7 +130,7 @@ Des: Checks if the passed mob (C) is infected with the alien egg, then gives eac
 
 		for(var/mob/living/carbon/alien in player_list)
 
-			if(!locate(/datum/organ/internal/xenos/hivenode) in alien.internal_organs)
+			if(!locate(/obj/item/organ/xenos/hivenode) in alien.internal_organs)
 				continue
 
 			if(alien.client)
@@ -149,7 +149,7 @@ Des: Removes the alien infection image from all aliens in the world located in p
 
 		for(var/mob/living/carbon/alien in player_list)
 
-			if(!locate(/datum/organ/internal/xenos/hivenode) in alien.internal_organs)
+			if(!locate(/obj/item/organ/xenos/hivenode) in alien.internal_organs)
 				continue
 
 			if(alien.client)

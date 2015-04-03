@@ -14,9 +14,8 @@
 		if(held_container)
 			user << "\red You must remove the [held_container] first."
 		else
-			user.drop_item(src)
 			held_container = W
-			held_container.loc = src
+			user.drop_from_inventory(held_container, src)
 			user << "\blue You put the [held_container] onto the [src]."
 			var/image/I = image("icon"=W, "layer"=FLOAT_LAYER)
 			underlays += I

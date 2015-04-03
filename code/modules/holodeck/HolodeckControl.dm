@@ -28,7 +28,7 @@ var/global/list/holodeck_programs = list(
 	var/area/linkedholodeck = null
 	var/area/target = null
 	var/active = 0
-	var/list/holographic_items = list()
+	var/list/holographic_objs = list()
 	var/list/holographic_mobs = list()
 	var/damaged = 0
 	var/safety_disabled = 0
@@ -208,7 +208,7 @@ var/global/list/holodeck_programs = list(
 		emergencyShutdown()
 
 /obj/machinery/computer/HolodeckControl/process()
-	for(var/item in holographic_items) // do this first, to make sure people don't take items out when power is down.
+	for(var/item in holographic_objs) // do this first, to make sure people don't take items out when power is down.
 		if(!(get_turf(item) in linkedholodeck))
 			derez(item, 0)
 
@@ -221,7 +221,7 @@ var/global/list/holodeck_programs = list(
 	if(!..())
 		return
 	if(active)
-		use_power(item_power_usage * (holographic_items.len + holographic_mobs.len))
+		use_power(item_power_usage * (holographic_objs.len + holographic_mobs.len))
 
 		if(!checkInteg(linkedholodeck))
 			damaged = 1
@@ -243,7 +243,7 @@ var/global/list/holodeck_programs = list(
 				T.hotspot_expose(1000,500,1)
 
 /obj/machinery/computer/HolodeckControl/proc/derez(var/obj/obj , var/silent = 1)
-	holographic_items.Remove(obj)
+	holographic_objs.Remove(obj)
 
 	if(obj == null)
 		return
@@ -251,7 +251,7 @@ var/global/list/holodeck_programs = list(
 	if(isobj(obj))
 		var/mob/M = obj.loc
 		if(ismob(M))
-			M.u_equip(obj)
+			M.remove_from_mob(obj)
 			M.update_icons()	//so their overlays update
 
 	if(!silent)
@@ -271,7 +271,7 @@ var/global/list/holodeck_programs = list(
 
 	if(toggleOn)
 		var/area/targetsource = locate(/area/holodeck/source_emptycourt)
-		holographic_items = targetsource.copy_contents_to(linkedholodeck)
+		holographic_objs = targetsource.copy_contents_to(linkedholodeck)
 
 		spawn(30)
 			for(var/obj/effect/landmark/L in linkedholodeck)
@@ -288,7 +288,7 @@ var/global/list/holodeck_programs = list(
 		active = 1
 		use_power = 2
 	else
-		for(var/item in holographic_items)
+		for(var/item in holographic_objs)
 			derez(item)
 		if(!linkedholodeck.has_gravity)
 			linkedholodeck.gravitychange(1,linkedholodeck)
@@ -313,7 +313,7 @@ var/global/list/holodeck_programs = list(
 	active = 1
 	use_power = 2
 
-	for(var/item in holographic_items)
+	for(var/item in holographic_objs)
 		derez(item)
 
 	for(var/mob/living/simple_animal/hostile/carp/holodeck/C in holographic_mobs)
@@ -323,7 +323,9 @@ var/global/list/holodeck_programs = list(
 	for(var/obj/effect/decal/cleanable/blood/B in linkedholodeck)
 		del(B)
 
-	holographic_items = A.copy_contents_to(linkedholodeck , 1)
+	holographic_objs = A.copy_contents_to(linkedholodeck , 1)
+	for(var/obj/holo_obj in holographic_objs)
+		holo_obj.alpha *= 0.8 //give holodeck objs a slight transparency
 
 	spawn(30)
 		for(var/obj/effect/landmark/L in linkedholodeck)
@@ -366,7 +368,7 @@ var/global/list/holodeck_programs = list(
 
 /obj/machinery/computer/HolodeckControl/proc/emergencyShutdown()
 	//Get rid of any items
-	for(var/item in holographic_items)
+	for(var/item in holographic_objs)
 		derez(item)
 	for(var/mob/living/simple_animal/hostile/carp/holodeck/C in holographic_mobs)
 		holographic_mobs -= C

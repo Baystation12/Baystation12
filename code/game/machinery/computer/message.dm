@@ -409,7 +409,7 @@
 
 					//Select Your Name
 					if("Sender")
-						customsender 	= input(usr, "Please enter the sender's name.") as text|null
+						customsender 	= sanitize(input(usr, "Please enter the sender's name.") as text|null)
 
 					//Select Receiver
 					if("Recepient")
@@ -425,12 +425,12 @@
 
 					//Enter custom job
 					if("RecJob")
-						customjob	 	= input(usr, "Please enter the sender's job.") as text|null
+						customjob	 	= sanitize(input(usr, "Please enter the sender's job.") as text|null)
 
 					//Enter message
 					if("Message")
 						custommessage	= input(usr, "Please enter your message.") as text|null
-						custommessage	= sanitize(copytext(custommessage, 1, MAX_MESSAGE_LEN))
+						custommessage	= sanitize(custommessage)
 
 					//Send message
 					if("Send")
