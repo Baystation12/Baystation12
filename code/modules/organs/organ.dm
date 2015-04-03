@@ -3,7 +3,7 @@ var/list/organ_cache = list()
 /obj/item/organ
 	name = "organ"
 	icon = 'icons/obj/surgery.dmi'
-
+	var/dead_icon
 	var/mob/living/carbon/human/owner = null
 	var/status = 0
 	var/vital //Lose a vital limb, die immediately.
@@ -50,11 +50,13 @@ var/list/organ_cache = list()
 			holder.internal_organs |= src
 
 /obj/item/organ/proc/die()
-	name = "dead [initial(name)]"
-	health = 0
+	if(status & ORGAN_ROBOT)
+		return
+	name = "dead [name]"
+	damage = max_damage
 	processing_objects -= src
-	//TODO: Grey out the icon state.
-	//TODO: Inject an organ with peridaxon to make it alive again.
+	if(dead_icon)
+		icon_state = dead_icon
 
 /obj/item/organ/process()
 
@@ -75,10 +77,10 @@ var/list/organ_cache = list()
 		if(B && prob(40))
 			reagents.remove_reagent("blood",0.1)
 			blood_splatter(src,B,1)
-
-		health -= rand(1,3)
-		if(health <= 0)
+		damage += rand(1,3)
+		if(damage >= max_damage)
 			die()
+
 	else if(owner.bodytemperature >= 170)	//cryo stops germs from moving and doing their bad stuffs
 		//** Handle antibiotics and curing infections
 		handle_antibiotics()
@@ -179,9 +181,10 @@ var/list/organ_cache = list()
 	else
 		src.damage += amount
 
-	var/obj/item/organ/external/parent = owner.get_organ(parent_organ)
-	if (!silent)
-		owner.custom_pain("Something inside your [parent.name] hurts a lot.", 1)
+	if(owner && parent_organ)
+		var/obj/item/organ/external/parent = owner.get_organ(parent_organ)
+		if(parent && !silent)
+			owner.custom_pain("Something inside your [parent.name] hurts a lot.", 1)
 
 /obj/item/organ/proc/robotize() //Being used to make robutt hearts, etc
 	robotic = 2

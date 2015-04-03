@@ -926,23 +926,12 @@
 		germ_level += n
 
 /mob/living/carbon/human/revive()
-	for (var/obj/item/organ/external/O in organs)
-		O.status &= ~ORGAN_BROKEN
-		O.status &= ~ORGAN_BLEEDING
-		O.status &= ~ORGAN_SPLINTED
-		O.status &= ~ORGAN_CUT_AWAY
-		O.status &= ~ORGAN_ATTACHABLE
-		O.wounds.Cut()
-		O.heal_damage(1000,1000,1,1)
-
-	var/obj/item/organ/external/head/h = organs_by_name["head"]
-	h.disfigured = 0
 
 	if(species && !(species.flags & NO_BLOOD))
 		vessel.add_reagent("blood",560-vessel.total_volume)
 		fixblood()
 
-	// Fix up any missing organs.
+	// Fix up all organs.
 	// This will ignore any prosthetics in the prefs currently.
 	species.create_organs(src)
 
@@ -954,11 +943,9 @@
 						H.brainmob.mind.transfer_to(src)
 						del(H)
 
-	for(var/obj/item/organ/I in internal_organs)
-		I.damage = 0
-
 	for (var/datum/disease/virus in viruses)
 		virus.cure()
+
 	for (var/ID in virus2)
 		var/datum/disease2/disease/V = virus2[ID]
 		V.cure(src)

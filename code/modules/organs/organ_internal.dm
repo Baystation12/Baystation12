@@ -11,6 +11,7 @@
 	icon_state = "heart-on"
 	organ_tag = "heart"
 	parent_organ = "chest"
+	dead_icon = "heart-off"
 
 /obj/item/organ/lungs
 	name = "lungs"
