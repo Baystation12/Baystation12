@@ -81,7 +81,7 @@
 /obj/structure/flora/pottedplant/MouseDrop(atom/over_object)
 	if (istype(over_object, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = over_object
-		if (H==usr && !H.restrained() && !H.stat && in_range(src, over_object))
+		if (H==usr && !H.restrained() && !H.stat && in_range(src, over_object) && !src.anchored)
 			var/obj/item/weapon/pottedplant/S = new/obj/item/weapon/pottedplant()
 			S.icon_state = src.icon_state
 			src.loc = S
