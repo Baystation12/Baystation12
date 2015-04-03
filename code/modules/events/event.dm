@@ -37,16 +37,6 @@
 
 	return total_weight
 
-/datum/event_meta/alien/get_weight(var/list/active_with_role)
-	if(config.aliens_allowed)
-		return ..(active_with_role)
-	return 0
-
-/datum/event_meta/ninja/get_weight(var/list/active_with_role)
-	if(config.ninjas_allowed)
-		return ..(active_with_role)
-	return 0
-
 /datum/event	//NOTE: Times are measured in master controller ticks!
 	var/startWhen		= 0	//When in the lifetime to call start().
 	var/announceWhen	= 0	//When in the lifetime to call announce().

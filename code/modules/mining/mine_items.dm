@@ -118,6 +118,8 @@
 	origin_tech = "materials=4;phorontech=3;engineering=3"
 	desc = "A rock cutter that uses bursts of hot plasma. You could use it to cut limbs off of xenos! Or, you know, mine stuff."
 	drill_verb = "cutting"
+	sharp = 1
+	edge = 1
 
 /obj/item/weapon/pickaxe/diamond
 	name = "diamond pickaxe"

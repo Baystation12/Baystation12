@@ -50,7 +50,7 @@
 "aX" = (/obj/machinery/door/firedoor,/obj/machinery/door/window/southright{name = "Virology Isolation Room Three"; req_access = list(39)},/turf/simulated/floor{icon_state = "white"},/area/space)
 "aY" = (/obj/structure/closet/secure_closet/medical2,/turf/simulated/floor{icon_state = "freezerfloor"},/area/space)
 "aZ" = (/obj/structure/closet/crate/freezer,/turf/simulated/floor{icon_state = "freezerfloor"},/area/space)
-"ba" = (/obj/structure/closet/crate/freezer,/obj/item/organ/eyes/prosthetic,/turf/simulated/floor{icon_state = "freezerfloor"},/area/space)
+"ba" = (/obj/structure/closet/crate/freezer,/turf/simulated/floor{icon_state = "freezerfloor"},/area/space)
 "bb" = (/turf/simulated/floor{icon_state = "freezerfloor"},/area/space)
 "bc" = (/obj/item/roller,/turf/simulated/floor{icon_state = "freezerfloor"},/area/space)
 "bd" = (/obj/machinery/iv_drip,/turf/simulated/floor{icon_state = "freezerfloor"},/area/space)

@@ -137,8 +137,8 @@
 					return
 
 				if(M.brainmob.mind)
-					ticker.mode.remove_cultist(M.brainmob.mind, 1)
-					ticker.mode.remove_revolutionary(M.brainmob.mind, 1)
+					cult.remove_antagonist(M.brainmob.mind, 1)
+					revs.remove_antagonist(M.brainmob.mind, 1)
 
 				user.drop_item()
 				P.loc = src
@@ -187,6 +187,11 @@
 	anchored = 1
 	state = 20//So it doesn't interact based on the above. Not really necessary.
 
+/obj/structure/AIcore/deactivated/Del()
+	if(src in empty_playable_ai_cores)
+		empty_playable_ai_cores -= src
+	..()
+
 /obj/structure/AIcore/deactivated/proc/load_ai(var/mob/living/silicon/ai/transfer, var/obj/item/device/aicard/card, var/mob/user)
 
 	if(!istype(transfer) || locate(/mob/living/silicon/ai) in src)
@@ -207,11 +212,9 @@
 
 /obj/structure/AIcore/deactivated/proc/check_malf(var/mob/living/silicon/ai/ai)
 	if(!ai) return
-	if (ticker.mode.name == "AI malfunction")
-		var/datum/game_mode/malfunction/malf = ticker.mode
-		for (var/datum/mind/malfai in malf.malf_ai)
-			if (ai.mind == malfai)
-				return 1
+	for (var/datum/mind/malfai in malf.current_antagonists)
+		if (ai.mind == malfai)
+			return 1
 
 /obj/structure/AIcore/deactivated/attackby(var/obj/item/weapon/W, var/mob/user)
 

@@ -37,13 +37,13 @@
 	if(!target)
 		return
 
-	if(user.a_intent != "hurt" || !isGlass)
+	if(user.a_intent != I_HURT || !isGlass)
 		return ..()
 
 
 	force = 15 //Smashing bottles over someoen's head hurts.
 
-	var/datum/organ/external/affecting = user.zone_sel.selecting //Find what the player is aiming at
+	var/obj/item/organ/external/affecting = user.zone_sel.selecting //Find what the player is aiming at
 
 	var/armor_block = 0 //Get the target's armour values for normal attack damage.
 	var/armor_duration = 0 //The more force the bottle has, the longer the duration.

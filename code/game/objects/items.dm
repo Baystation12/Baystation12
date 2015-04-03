@@ -40,6 +40,11 @@
 	var/zoomdevicename = null //name used for message when binoculars/scope is used
 	var/zoom = 0 //1 if item is actively being used to zoom. For scoped guns and binoculars.
 
+	// Used to specify the icon file to be used when the item is worn. If not set the default icon for that slot will be used.
+	// If icon_override or sprite_sheets are set they will take precendence over this, assuming they apply to the slot in question.
+	// Only slot_l_hand/slot_r_hand are implemented at the moment. Others to be implemented as needed.
+	var/list/item_icons = null
+
 	/* Species-specific sprites, concept stolen from Paradise//vg/.
 	ex:
 	sprite_sheets = list(
@@ -57,6 +62,15 @@
 
 /obj/item/device
 	icon = 'icons/obj/device.dmi'
+
+//Checks if the item is being held by a mob, and if so, updates the held icons
+/obj/item/proc/update_held_icon()
+	if(ismob(src.loc))
+		var/mob/M = src.loc
+		if(M.l_hand == src)
+			M.update_inv_l_hand()
+		if(M.r_hand == src)
+			M.update_inv_r_hand()
 
 /obj/item/ex_act(severity)
 	switch(severity)
@@ -119,11 +133,12 @@
 /obj/item/attack_hand(mob/user as mob)
 	if (!user) return
 	if (hasorgans(user))
-		var/datum/organ/external/temp = user:organs_by_name["r_hand"]
+		var/mob/living/carbon/human/H = user
+		var/obj/item/organ/external/temp = H.organs_by_name["r_hand"]
 		if (user.hand)
-			temp = user:organs_by_name["l_hand"]
+			temp = H.organs_by_name["l_hand"]
 		if(temp && !temp.is_usable())
-			user << "<span class='notice'>You try to move your [temp.display_name], but cannot!"
+			user << "<span class='notice'>You try to move your [temp.name], but cannot!"
 			return
 
 	if (istype(src.loc, /obj/item/weapon/storage))
@@ -417,35 +432,6 @@
 		return 0 //Unsupported slot
 		//END HUMAN
 
-	else if(ismonkey(M))
-		//START MONKEY
-		var/mob/living/carbon/monkey/MO = M
-		switch(slot)
-			if(slot_l_hand)
-				if(MO.l_hand)
-					return 0
-				return 1
-			if(slot_r_hand)
-				if(MO.r_hand)
-					return 0
-				return 1
-			if(slot_wear_mask)
-				if(MO.wear_mask)
-					return 0
-				if( !(slot_flags & SLOT_MASK) )
-					return 0
-				return 1
-			if(slot_back)
-				if(MO.back)
-					return 0
-				if( !(slot_flags & SLOT_BACK) )
-					return 0
-				return 1
-		return 0 //Unsupported slot
-
-		//END MONKEY
-
-
 /obj/item/verb/verb_pickup()
 	set src in oview(1)
 	set category = "Object"
@@ -507,14 +493,6 @@
 		user << "\red You're going to need to remove the eye covering first."
 		return
 
-	var/mob/living/carbon/monkey/Mo = M
-	if(istype(Mo) && ( \
-			(Mo.wear_mask && Mo.wear_mask.flags & MASKCOVERSEYES) \
-		))
-		// you can't stab someone in the eyes wearing a mask!
-		user << "\red You're going to need to remove the eye covering first."
-		return
-
 	if(!M.has_eyes())
 		user << "\red You cannot locate any eyes on [M]!"
 		return
@@ -533,11 +511,11 @@
 		M.adjustBruteLoss(10)
 		*/
 
-	if(istype(M, /mob/living/carbon/human))
+	if(istype(H))
 
-		var/datum/organ/internal/eyes/eyes = H.internal_organs_by_name["eyes"]
+		var/obj/item/organ/eyes/eyes = H.internal_organs_by_name["eyes"]
 
-		if(M != user)
+		if(H != user)
 			for(var/mob/O in (viewers(M) - user - M))
 				O.show_message("\red [M] has been stabbed in the eye with [src] by [user].", 1)
 			M << "\red [user] stabs you in the eye with [src]!"
@@ -563,7 +541,7 @@
 			if (eyes.damage >= eyes.min_broken_damage)
 				if(M.stat != 2)
 					M << "\red You go blind!"
-		var/datum/organ/external/affecting = M:get_organ("head")
+		var/obj/item/organ/external/affecting = H.get_organ("head")
 		if(affecting.take_damage(7))
 			M:UpdateDamageIcon()
 	else

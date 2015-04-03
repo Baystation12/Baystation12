@@ -105,14 +105,14 @@
 	current_user = user
 	user.visible_message("[user] begins to draw back the string of [src].","<span class='notice'>You begin to draw back the string of [src].</span>")
 	tension = 1
-	
+
 	while(bolt && tension && current_user == user)
 		if(!do_after(user, 25)) //crossbow strings don't just magically pull back on their own.
 			user.visible_message("[usr] stops drawing and relaxes the string of [src].","<span class='warning'>You stop drawing back and relax the string of [src].</span>")
 			tension = 0
 			icon_state = "crossbow"
 			return
-		
+
 		tension++
 		icon_state = "crossbow-drawn"
 
@@ -120,7 +120,7 @@
 			tension = max_tension
 			usr << "[src] clunks as you draw the string to its maximum tension!"
 			return
-		
+
 		user.visible_message("[usr] draws back the string of [src]!","<span class='notice'>You continue drawing back the string of [src]!</span>")
 
 /obj/item/weapon/gun/launcher/crossbow/proc/increase_tension(var/mob/user as mob)

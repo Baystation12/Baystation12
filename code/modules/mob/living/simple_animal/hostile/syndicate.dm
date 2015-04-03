@@ -18,7 +18,7 @@
 	melee_damage_lower = 10
 	melee_damage_upper = 10
 	attacktext = "punched"
-	a_intent = "harm"
+	a_intent = I_HURT
 	var/corpse = /obj/effect/landmark/mobcorpse/syndicatesoldier
 	var/weapon1
 	var/weapon2
@@ -31,7 +31,7 @@
 	min_n2 = 0
 	max_n2 = 0
 	unsuitable_atoms_damage = 15
-	wall_smash = 1
+	environment_smash = 1
 	faction = "syndicate"
 	status_flags = CANPUSH
 

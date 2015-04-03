@@ -58,7 +58,7 @@
 	..()
 
 	if(istype(W, /obj/item/weapon/pen))
-		var/t = copytext(stripped_input(user, "Enter new robot name", src.name, src.created_name),1,MAX_NAME_LEN)
+		var/t = sanitizeSafe(input(user, "Enter new robot name", src.name, src.created_name), MAX_NAME_LEN)
 		if(!t)	return
 		if(!in_range(src, usr) && src.loc != usr)	return
 		created_name = t
@@ -84,7 +84,7 @@
 				lasercolor = "r"
 			else if( istype(W, /obj/item/clothing/suit/bluetag) )
 				lasercolor = "b"
-			if( lasercolor || istype(W, /obj/item/clothing/suit/armor/vest) )
+			if( lasercolor || istype(W, /obj/item/clothing/suit/storage/vest) )
 				user.drop_item()
 				del(W)
 				build_step++

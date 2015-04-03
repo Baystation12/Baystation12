@@ -88,10 +88,10 @@
 		return 0
 	return 1
 
-/obj/machinery/door/proc/can_close(var/forced = 0)
-	if(!density && !operating && !(!forced && (stat & (BROKEN|NOPOWER))))
-		return 1
-	return 0
+/obj/machinery/door/proc/can_close()
+	if(density || operating || !ticker)
+		return 0
+	return 1
 
 /obj/machinery/door/Bumped(atom/AM)
 	if(p_open || operating) return
@@ -262,7 +262,7 @@
 		return
 
 	//psa to whoever coded this, there are plenty of objects that need to call attack() on doors without bludgeoning them.
-	if(src.density && istype(I, /obj/item/weapon) && user.a_intent == "hurt" && !istype(I, /obj/item/weapon/card))
+	if(src.density && istype(I, /obj/item/weapon) && user.a_intent == I_HURT && !istype(I, /obj/item/weapon/card))
 		var/obj/item/weapon/W = I
 		if(W.damtype == BRUTE || W.damtype == BURN)
 			if(W.force < min_force)

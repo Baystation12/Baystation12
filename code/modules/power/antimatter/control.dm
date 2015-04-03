@@ -171,10 +171,8 @@
 			user << "\red There is already a [fueljar] inside!"
 			return
 		fueljar = W
+		user.remove_from_mob(W)
 		W.loc = src
-		if(user.client)
-			user.client.screen -= W
-		user.u_equip(W)
 		user.update_icons()
 		user.visible_message("[user.name] loads an [W.name] into the [src.name].", \
 				"You load an [W.name].", \

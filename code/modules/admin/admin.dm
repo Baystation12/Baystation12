@@ -92,7 +92,7 @@ var/global/floorIsLava = 0
 			body += "<br>"
 
 			//Monkey
-			if(ismonkey(M))
+			if(issmall(M))
 				body += "<B>Monkeyized</B> | "
 			else
 				body += "<A href='?src=\ref[src];monkeyone=\ref[M]'>Monkeyize</A> | "
@@ -725,10 +725,10 @@ var/global/floorIsLava = 0
 	set desc="Announce your desires to the world"
 	if(!check_rights(0))	return
 
-	var/message = input("Global message to send:", "Admin Announce", null, null)  as message
+	var/message = input("Global message to send:", "Admin Announce", null, null)  as message//todo: sanitize for all?
 	if(message)
 		if(!check_rights(R_SERVER,0))
-			message = adminscrub(message,500)
+			message = sanitize(message, 500, extra = 0)
 		world << "\blue <b>[usr.client.holder.fakekey ? "Administrator" : usr.key] Announces:</b>\n \t [message]"
 		log_admin("Announce: [key_name(usr)] : [message]")
 	feedback_add_details("admin_verb","A") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
@@ -937,63 +937,21 @@ var/global/floorIsLava = 0
 		return 0
 	if (!istype(M))
 		return 0
-	if((M.mind in ticker.mode.head_revolutionaries) || (M.mind in ticker.mode.revolutionaries))
-		if (ticker.mode.config_tag == "revolution")
-			return 2
-		return 1
-	if(M.mind in ticker.mode.cult)
-		if (ticker.mode.config_tag == "cult")
-			return 2
-		return 1
-	if(M.mind in ticker.mode.malf_ai)
-		if (ticker.mode.config_tag == "malfunction")
-			return 2
-		return 1
-	if(M.mind in ticker.mode.syndicates)
-		if (ticker.mode.config_tag == "mercenary")
-			return 2
-		return 1
-	if(M.mind in ticker.mode.wizards)
-		if (ticker.mode.config_tag == "wizard")
-			return 2
-		return 1
-	if(M.mind in ticker.mode.changelings)
-		if (ticker.mode.config_tag == "changeling")
-			return 2
-		return 1
 
-	for(var/datum/disease/D in M.viruses)
-		if(istype(D, /datum/disease/jungle_fever))
-			if (ticker.mode.config_tag == "monkey")
-				return 2
+	if(M.mind)
+		if(ticker.mode.antag_templates && ticker.mode.antag_templates.len)
+			for(var/datum/antagonist/antag in ticker.mode.antag_templates)
+				if(antag.is_antagonist(M.mind))
+					return 2
+		else if(M.mind.special_role)
 			return 1
+
 	if(isrobot(M))
 		var/mob/living/silicon/robot/R = M
 		if(R.emagged)
 			return 1
-	if(M.mind&&M.mind.special_role)//If they have a mind and special role, they are some type of traitor or antagonist.
-		return 1
 
 	return 0
-
-/*
-/datum/admins/proc/get_sab_desc(var/target)
-	switch(target)
-		if(1)
-			return "Destroy at least 70% of the phoron canisters on the station"
-		if(2)
-			return "Destroy the AI"
-		if(3)
-			var/count = 0
-			for(var/mob/living/carbon/monkey/Monkey in world)
-				if(Monkey.z in station_levels)
-					count++
-			return "Kill all [count] of the monkeys on the station"
-		if(4)
-			return "Cut power to at least 80% of the station"
-		else
-			return "Error: Invalid sabotage target: [target]"
-*/
 
 /datum/admins/proc/spawn_fruit()
 	set category = "Debug"
@@ -1070,11 +1028,87 @@ var/global/floorIsLava = 0
 	M.mind.edit_memory()
 	feedback_add_details("admin_verb","STP") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
+/datum/admins/proc/show_game_mode()
+	set category = "Admin"
+	set desc = "Show the current round configuration."
+	set name = "Show Game Mode"
+
+	if(!ticker || !ticker.mode)
+		alert("Not before roundstart!", "Alert")
+		return
+
+	var/out = "<font size=3><b>Current mode: [ticker.mode.name] (<a href='?src=\ref[ticker.mode];debug_antag=self'>[ticker.mode.config_tag]</a>)</b></font><br/>"
+	out += "<hr>"
+
+	if(ticker.mode.ert_disabled)
+		out += "<b>Emergency Response Teams:</b> <a href='?src=\ref[ticker.mode];toggle=ert'>disabled</a>"
+	else
+		out += "<b>Emergency Response Teams:</b> <a href='?src=\ref[ticker.mode];toggle=ert'>enabled</a>"
+	out += "<br/>"
+
+	if(ticker.mode.deny_respawn)
+		out += "<b>Respawning:</b> <a href='?src=\ref[ticker.mode];toggle=respawn'>disallowed</a>"
+	else
+		out += "<b>Respawning:</b> <a href='?src=\ref[ticker.mode];toggle=respawn'>allowed</a>"
+	out += "<br/>"
+
+	out += "<b>Shuttle delay multiplier:</b> <a href='?src=\ref[ticker.mode];set=shuttle_delay'>[ticker.mode.shuttle_delay]</a><br/>"
+
+	if(ticker.mode.auto_recall_shuttle)
+		out += "<b>Shuttle auto-recall:</b> <a href='?src=\ref[ticker.mode];toggle=shuttle_recall'>enabled</a>"
+	else
+		out += "<b>Shuttle auto-recall:</b> <a href='?src=\ref[ticker.mode];toggle=shuttle_recall'>disabled</a>"
+	out += "<br/><br/>"
+
+	if(ticker.mode.event_delay_mod_moderate)
+		out += "<b>Moderate event time modifier:</b> <a href='?src=\ref[ticker.mode];set=event_modifier_moderate'>[ticker.mode.event_delay_mod_moderate]</a><br/>"
+	else
+		out += "<b>Moderate event time modifier:</b> <a href='?src=\ref[ticker.mode];set=event_modifier_moderate'>unset</a><br/>"
+
+	if(ticker.mode.event_delay_mod_major)
+		out += "<b>Major event time modifier:</b> <a href='?src=\ref[ticker.mode];set=event_modifier_severe'>[ticker.mode.event_delay_mod_major]</a><br/>"
+	else
+		out += "<b>Major event time modifier:</b> <a href='?src=\ref[ticker.mode];set=event_modifier_severe'>unset</a><br/>"
+
+	out += "<hr>"
+
+	if(ticker.mode.antag_tag)
+		out += "<b>Core antag id:</b>  <a href='?src=\ref[ticker.mode];debug_antag=[ticker.mode.antag_tag]'>[ticker.mode.antag_tag]</a>.</br>"
+
+	if(ticker.mode.round_autoantag)
+		out += "<b>Autotraitor <a href='?src=\ref[ticker.mode];toggle=autotraitor'>enabled</a></b> ([ticker.mode.antag_prob]% spawn chance)"
+		if(ticker.mode.antag_scaling_coeff)
+			out += " (scaling with <a href='?src=\ref[ticker.mode];set=antag_scaling'>[ticker.mode.antag_scaling_coeff]</a>)"
+		out += "<br/>"
+	else
+		out += "<b>Autotraitor <a href='?src=\ref[ticker.mode];toggle=autotraitor'>disabled</a></b>.<br/>"
+
+	out += "<b>All antag ids:</b>"
+	if(ticker.mode.antag_templates && ticker.mode.antag_templates.len).
+		var/playercount = ticker.mode.num_players()
+		for(var/datum/antagonist/antag in ticker.mode.antag_templates)
+			var/cur_max_antags
+			if(ticker.mode.antag_tag && antag.id == ticker.mode.antag_tag)
+				cur_max_antags = antag.max_antags_round
+			else
+				cur_max_antags = antag.max_antags
+			if(ticker.mode.antag_scaling_coeff)
+				cur_max_antags = Clamp((playercount/ticker.mode.antag_scaling_coeff), 1, cur_max_antags)
+			out += " <a href='?src=\ref[ticker.mode];debug_antag=[antag.id]'>[antag.id]</a>"
+			out += " ([antag.get_antag_count()]/[cur_max_antags]) "
+			out += " <a href='?src=\ref[ticker.mode];remove_antag_type=[antag.id]'>\[-\]</a><br/>"
+	else
+		out += " None."
+	out += " <a href='?src=\ref[ticker.mode];add_antag_type=1'>\[+\]</a><br/>"
+
+	usr << browse(out, "window=edit_mode[src]")
+	feedback_add_details("admin_verb","SGM")
+
 
 /datum/admins/proc/toggletintedweldhelmets()
 	set category = "Debug"
 	set desc="Reduces view range when wearing welding helmets"
-	set name="Toggle tinted welding helmes"
+	set name="Toggle tinted welding helmets."
 	config.welder_vision = !( config.welder_vision )
 	if (config.welder_vision)
 		world << "<B>Reduced welder vision has been enabled!</B>"

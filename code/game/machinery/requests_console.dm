@@ -223,7 +223,7 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 	if(reject_bad_text(href_list["write"]))
 		dpt = ckey(href_list["write"]) //write contains the string of the receiving department's name
 
-		var/new_message = copytext(reject_bad_text(input(usr, "Write your message:", "Awaiting Input", "")),1,MAX_MESSAGE_LEN)
+		var/new_message = sanitize(input("Write your message:", "Awaiting Input", ""))
 		if(new_message)
 			message = new_message
 			screen = 9
@@ -238,7 +238,7 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 			priority = -1
 
 	if(href_list["writeAnnouncement"])
-		var/new_message = copytext(reject_bad_text(input(usr, "Write your message:", "Awaiting Input", "")),1,MAX_MESSAGE_LEN)
+		var/new_message = sanitize(input("Write your message:", "Awaiting Input", ""))
 		if(new_message)
 			message = new_message
 			switch(href_list["priority"])

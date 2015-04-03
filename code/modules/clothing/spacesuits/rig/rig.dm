@@ -134,18 +134,18 @@
 		verbs |= /obj/item/weapon/rig/proc/toggle_chest
 
 	for(var/obj/item/piece in list(gloves,helmet,boots,chest))
-		if(!piece)
+		if(!istype(piece))
 			continue
 		piece.canremove = 0
 		piece.name = "[suit_type] [initial(piece.name)]"
 		piece.desc = "It seems to be part of a [src.name]."
 		piece.icon_state = "[initial(icon_state)]"
-		piece.armor = armor.Copy()
 		piece.min_cold_protection_temperature = min_cold_protection_temperature
 		piece.max_heat_protection_temperature = max_heat_protection_temperature
 		piece.siemens_coefficient = siemens_coefficient
 		piece.permeability_coefficient = permeability_coefficient
 		piece.unacidable = unacidable
+		if(islist(armor)) piece.armor = armor.Copy()
 
 	update_icon(1)
 
@@ -631,14 +631,15 @@
 						use_obj.loc = src
 
 		else if (deploy_mode != ONLY_RETRACT)
-			if(check_slot)
-				if(check_slot != use_obj)
-					H << "<span class='danger'>You are unable to deploy \the [piece] as \the [check_slot] [check_slot.gender == PLURAL ? "are" : "is"] in the way.</span>"
-					return
+			if(check_slot && check_slot != use_obj)
+				H << "<span class='danger'>You are unable to deploy \the [piece] as \the [check_slot] [check_slot.gender == PLURAL ? "are" : "is"] in the way.</span>"
+				return
 			else
-				H << "<font color='blue'><b>Your [use_obj.name] [use_obj.gender == PLURAL ? "deploy" : "deploys"] swiftly.</b></span>"
 				use_obj.loc = H
-				H.equip_to_slot(use_obj, equip_to)
+				if(!H.equip_to_slot_if_possible(use_obj, equip_to, 0))
+					use_obj.loc = src
+				else
+					H << "<font color='blue'><b>Your [use_obj.name] [use_obj.gender == PLURAL ? "deploy" : "deploys"] swiftly.</b></span>"
 
 	if(piece == "helmet" && helmet)
 		helmet.update_light(H)
@@ -696,17 +697,18 @@
 		malfunctioning += 10
 		if(malfunction_delay <= 0)
 			malfunction_delay = max(malfunction_delay, round(30/severity_class))
-	
+
 	//drain some charge
 	if(cell) cell.emp_act(severity_class + 15)
-	
+
 	//possibly damage some modules
 	take_hit((100/severity_class), "electrical pulse", 1)
 
 /obj/item/weapon/rig/proc/shock(mob/user)
 	if (electrocute_mob(user, cell, src))
 		spark_system.start()
-		return 1
+		if(user.stunned)
+			return 1
 	return 0
 
 /obj/item/weapon/rig/proc/take_hit(damage, source, is_emp=0)
@@ -720,7 +722,7 @@
 	else
 		//Want this to be roughly independant of the number of modules, meaning that X emp hits will disable Y% of the suit's modules on average.
 		//that way people designing hardsuits don't have to worry (as much) about how adding that extra module will affect emp resiliance by 'soaking' hits for other modules
-		chance = max(0, damage - emp_protection)*min(installed_modules.len/15, 1)
+		chance = 2*max(0, damage - emp_protection)*min(installed_modules.len/15, 1)
 
 	if(!prob(chance))
 		return
@@ -740,7 +742,7 @@
 		dam_module = pick(damaged_modules)
 	else if(valid_modules.len)
 		dam_module = pick(valid_modules)
-	
+
 	if(!dam_module) return
 
 	dam_module.damage++

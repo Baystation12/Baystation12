@@ -190,12 +190,12 @@
 		if (user.client)
 			user.client.screen -= src
 		if (user.r_hand == src)
-			user.u_equip(src)
+			user.remove_from_mob(src)
 		else
-			user.u_equip(src)
+			user.remove_from_mob(src)
 		src.master = F
 		src.layer = initial(src.layer)
-		user.u_equip(src)
+		user.remove_from_mob(src)
 		if (user.client)
 			user.client.screen -= src
 		src.loc = F
@@ -362,7 +362,7 @@
 	var/safety = user:eyecheck()
 	if(istype(user, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = user
-		var/datum/organ/internal/eyes/E = H.internal_organs_by_name["eyes"]
+		var/obj/item/organ/eyes/E = H.internal_organs_by_name["eyes"]
 		if(!E)
 			return
 		if(H.species.flags & IS_SYNTHETIC)
@@ -457,10 +457,10 @@
 
 	if(hasorgans(M))
 
-		var/datum/organ/external/S = M:organs_by_name[user.zone_sel.selecting]
+		var/obj/item/organ/external/S = M:organs_by_name[user.zone_sel.selecting]
 
 		if (!S) return
-		if(!(S.status & ORGAN_ROBOT) || user.a_intent != "help")
+		if(!(S.status & ORGAN_ROBOT) || user.a_intent != I_HELP)
 			return ..()
 
 		if(istype(M,/mob/living/carbon/human))
@@ -472,7 +472,7 @@
 
 		if(S.brute_dam)
 			S.heal_damage(15,0,0,1)
-			user.visible_message("\red \The [user] patches some dents on \the [M]'s [S.display_name] with \the [src].")
+			user.visible_message("\red \The [user] patches some dents on \the [M]'s [S.name] with \the [src].")
 			return
 		else
 			user << "Nothing to fix!"

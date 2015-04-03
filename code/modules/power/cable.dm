@@ -193,9 +193,9 @@ By design, d1 is the smallest direction and d2 is the highest
 		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 		s.set_up(5, 1, src)
 		s.start()
-		return 1
-	else
-		return 0
+		if(usr.stunned)
+			return 1
+	return 0
 
 //explosion handling
 /obj/structure/cable/ex_act(severity)
@@ -516,7 +516,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 /obj/item/stack/cable_coil/attack(mob/M as mob, mob/user as mob)
 	if(istype(M,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = M
-		var/datum/organ/external/S = H.get_organ(user.zone_sel.selecting)
+		var/obj/item/organ/external/S = H.get_organ(user.zone_sel.selecting)
 		if(!(S.status & ORGAN_ROBOT) || user.a_intent != "help")
 			return ..()
 
@@ -527,7 +527,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 
 		if(S.burn_dam > 0 && use(1))
 			S.heal_damage(0,15,0,1)
-			user.visible_message("\red \The [user] repairs some burn damage on \the [M]'s [S.display_name] with \the [src].")
+			user.visible_message("\red \The [user] repairs some burn damage on \the [M]'s [S.name] with \the [src].")
 			return
 		else
 			user << "Nothing to fix!"

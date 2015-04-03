@@ -358,8 +358,6 @@
 
 		ticker.mode.latespawn(character)
 
-		//ticker.mode.latespawn(character)
-
 		if(character.mind.assigned_role != "Cyborg")
 			data_core.manifest_inject(character)
 			ticker.minds += character.mind//Cyborgs and AIs handle this in the transform proc.	//TODO!!!!! ~Carn
@@ -475,6 +473,7 @@
 		//new_character.dna.UpdateSE()
 
 		// Do the initial caching of the player's body icons.
+		new_character.force_update_limbs()
 		new_character.regenerate_icons()
 
 		new_character.key = key		//Manually transfer the key to log them in

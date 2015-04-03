@@ -21,36 +21,25 @@
 	sleep(48)
 	//animation = null
 
-	if(!species.primitive) //If the creature in question has no primitive set, this is going to be messy.
+	monkeyizing = 0
+	stunned = 0
+	update_canmove()
+	invisibility = initial(invisibility)
+
+	if(!species.primitive_form) //If the creature in question has no primitive set, this is going to be messy.
 		gib()
 		return
 
-	var/mob/living/carbon/monkey/O = null
+	for(var/obj/item/W in src)
+		drop_from_inventory(W)
+	set_species(species.primitive_form)
+	dna.SetSEState(MONKEYBLOCK,1)
+	dna.SetSEValueRange(MONKEYBLOCK,0xDAC, 0xFFF)
 
-	O = new species.primitive(loc)
-
-	O.dna = dna.Clone()
-	O.dna.SetSEState(MONKEYBLOCK,1)
-	O.dna.SetSEValueRange(MONKEYBLOCK,0xDAC, 0xFFF)
-	O.loc = loc
-	O.viruses = viruses
-	O.a_intent = "hurt"
-
-	for(var/datum/disease/D in O.viruses)
-		D.affected_mob = O
-
-	if (client)
-		client.mob = O
-	if(mind)
-		mind.transfer_to(O)
-
-	O << "<B>You are now [O]. </B>"
-
-	spawn(0)//To prevent the proc from returning null.
-		del(src)
+	src << "<B>You are now [species.name]. </B>"
 	del(animation)
 
-	return O
+	return src
 
 /mob/new_player/AIize()
 	spawning = 1
@@ -191,7 +180,7 @@
 	var/alien_caste = pick("Hunter","Sentinel","Drone")
 	var/mob/living/carbon/human/new_xeno = create_new_xenomorph(alien_caste,loc)
 
-	new_xeno.a_intent = "hurt"
+	new_xeno.a_intent = I_HURT
 	new_xeno.key = key
 
 	new_xeno << "<B>You are now an alien.</B>"
@@ -248,7 +237,7 @@
 		del(t)
 
 	var/mob/living/simple_animal/corgi/new_corgi = new /mob/living/simple_animal/corgi (loc)
-	new_corgi.a_intent = "hurt"
+	new_corgi.a_intent = I_HURT
 	new_corgi.key = key
 
 	new_corgi << "<B>You are now a Corgi. Yap Yap!</B>"
@@ -282,7 +271,7 @@
 	var/mob/new_mob = new mobpath(src.loc)
 
 	new_mob.key = key
-	new_mob.a_intent = "hurt"
+	new_mob.a_intent = I_HURT
 
 
 	new_mob << "You suddenly feel more... animalistic."
@@ -302,7 +291,7 @@
 	var/mob/new_mob = new mobpath(src.loc)
 
 	new_mob.key = key
-	new_mob.a_intent = "hurt"
+	new_mob.a_intent = I_HURT
 	new_mob << "You feel more... animalistic"
 
 	del(src)

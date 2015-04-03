@@ -14,11 +14,12 @@
 	var/moved_recently = 0
 	var/mob/pulledby = null
 
-/atom/movable/Bump(var/atom/A as mob|obj|turf|area, yes)
+/atom/movable/Bump(var/atom/A, yes)
 	if(src.throwing)
 		src.throw_impact(A)
+		src.throwing = 0
 
-	spawn( 0 )
+	spawn(0)
 		if ((A && yes))
 			A.last_bumped = world.time
 			A.Bumped(src)

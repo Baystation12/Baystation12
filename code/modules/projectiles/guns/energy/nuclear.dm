@@ -29,12 +29,10 @@
 			projectile_type = /obj/item/projectile/beam/stun
 			modifystate = "energystun"
 	update_icon()
-	if(user.l_hand == src)
-		user.update_inv_l_hand()
-	else
-		user.update_inv_r_hand()
+	update_held_icon()
 
 /obj/item/weapon/gun/energy/gun/mounted
+	name = "mounted energy gun"
 	self_recharge = 1
 	use_external_power = 1
 

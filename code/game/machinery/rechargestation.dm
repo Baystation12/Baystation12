@@ -147,6 +147,8 @@
 		if(99 to 110)
 			overlays += image('icons/obj/objects.dmi', "statn_c100")
 
+/obj/machinery/recharge_station/Bumped(var/mob/AM)
+	move_inside(AM)
 
 /obj/machinery/recharge_station/proc/build_icon()
 	if(NOPOWER|BROKEN)
@@ -199,31 +201,37 @@
 	add_fingerprint(usr)
 	return
 
-/obj/machinery/recharge_station/verb/move_inside()
+/obj/machinery/recharge_station/verb/move_inside(var/mob/user = usr)
 	set category = "Object"
 	set src in oview(1)
-	if(usr.stat == 2)
+
+	if(!user)
+		return
+
+	if(!(istype(user, /mob/living/silicon/robot)))
+		user << "<span class='notice'>Only non-organics may enter the recharger!</span>"
+		return
+	var/mob/living/silicon/robot/R = user
+
+	if(R.stat == 2)
 		//Whoever had it so that a borg with a dead cell can't enter this thing should be shot. --NEO
 		return
-	if(!(istype(usr, /mob/living/silicon/)))
-		usr << "<span class='notice'>Only non-organics may enter the recharger!</span>"
-		return
 	if(occupant)
-		usr << "<span class='notice'>The cell is already occupied!</span>"
+		R << "<span class='notice'>The cell is already occupied!</span>"
 		return
-	if(!usr:cell)
-		usr << "<span class='notice'>Without a powercell, you can't be recharged.</span>"
+	if(!R.cell)
+		R << "<span class='notice'>Without a powercell, you can't be recharged.</span>"
 		//Make sure they actually HAVE a cell, now that they can get in while powerless. --NEO
 		return
-	usr.stop_pulling()
-	if(usr && usr.client)
-		usr.client.perspective = EYE_PERSPECTIVE
-		usr.client.eye = src
-	usr.loc = src
-	occupant = usr
+	R.stop_pulling()
+	if(R.client)
+		R.client.perspective = EYE_PERSPECTIVE
+		R.client.eye = src
+	R.loc = src
+	occupant = R
 	/*for(var/obj/O in src)
 		O.loc = loc*/
-	add_fingerprint(usr)
+	add_fingerprint(R)
 	build_icon()
 	update_use_power(1)
 	return

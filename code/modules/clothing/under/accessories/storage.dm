@@ -6,6 +6,7 @@
 	slot = "utility"
 	var/slots = 3
 	var/obj/item/weapon/storage/internal/hold
+	w_class = 3.0
 
 /obj/item/clothing/accessory/storage/New()
 	..()
@@ -48,7 +49,7 @@
 
 /obj/item/clothing/accessory/storage/webbing
 	name = "webbing"
-	desc = "Strudy mess of synthcotton belts and buckles, ready to share your burden."
+	desc = "Sturdy mess of synthcotton belts and buckles, ready to share your burden."
 	icon_state = "webbing"
 	item_color = "webbing"
 

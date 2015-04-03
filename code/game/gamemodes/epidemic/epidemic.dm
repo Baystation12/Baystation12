@@ -3,25 +3,12 @@
 	config_tag = "epidemic"
 	required_players = 1
 	required_players_secret = 15
-
-	var/const/waittime_l = 300 //lower bound on time before intercept arrives (in tenths of seconds)
-	var/const/waittime_h = 600 //upper bound on time before intercept arrives (in tenths of seconds)
-	var/checkwin_counter =0
-	var/finished = 0
+	round_description = "A deadly epidemic is spreading on the station. Find a cure as fast as possible, and keep your distance to anyone who speaks in a hoarse voice!"
 
 	var/cruiser_arrival
-
 	var/virus_name = ""
-
 	var/stage = 0
 	var/doctors = 0
-
-///////////////////////////
-//Announces the game type//
-///////////////////////////
-/datum/game_mode/epidemic/announce()
-	world << "<B>The current game mode is - Epidemic!</B>"
-	world << "<B>A deadly epidemic is spreading on the station. Find a cure as fast as possible, and keep your distance to anyone who speaks in a hoarse voice!</B>"
 
 
 ///////////////////////////////////////////////////////////////////////////////
