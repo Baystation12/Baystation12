@@ -278,9 +278,8 @@ var/list/organ_cache = list()
 	target.internal_organs |= src
 	affected.internal_organs |= src
 	target.internal_organs_by_name[organ_tag] = src
-	status |= ORGAN_CUT_AWAY
-
-	del(src)
+	if(robotic)
+		status |= ORGAN_ROBOT
 
 /obj/item/organ/eyes/replaced(var/mob/living/carbon/human/target)
 
@@ -300,7 +299,6 @@ var/list/organ_cache = list()
 	user << "\blue You take an experimental bite out of \the [src]."
 	var/datum/reagent/blood/B = locate(/datum/reagent/blood) in reagents.reagent_list
 	blood_splatter(src,B,1)
-
 
 	user.drop_from_inventory(src)
 	var/obj/item/weapon/reagent_containers/food/snacks/organ/O = new(get_turf(src))
