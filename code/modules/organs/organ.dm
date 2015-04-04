@@ -274,6 +274,7 @@ var/list/organ_cache = list()
 		transplant_data["blood_DNA"] =  transplant_blood.data["blood_DNA"]
 
 	owner = target
+	loc = owner
 	processing_objects -= src
 	target.internal_organs |= src
 	affected.internal_organs |= src
