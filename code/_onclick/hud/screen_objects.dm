@@ -432,7 +432,7 @@
 			if(istype(usr, /mob/living/silicon/robot))
 				usr:toggle_module(3)
 
-		if("Allow Walking")
+		if("Allow Walking" || "Disallow Walking")
 			if(gun_click_time > world.time - 30)	//give them 3 seconds between mode changes.
 				return
 			if(!istype(usr.get_active_hand(),/obj/item/weapon/gun))
@@ -441,16 +441,7 @@
 			usr.client.AllowTargetMove()
 			gun_click_time = world.time
 
-		if("Disallow Walking")
-			if(gun_click_time > world.time - 30)	//give them 3 seconds between mode changes.
-				return
-			if(!istype(usr.get_active_hand(),/obj/item/weapon/gun))
-				usr << "You need your gun in your active hand to do that!"
-				return
-			usr.client.AllowTargetMove()
-			gun_click_time = world.time
-
-		if("Allow Running")
+		if("Allow Running" || "Disallow Running")
 			if(gun_click_time > world.time - 30)	//give them 3 seconds between mode changes.
 				return
 			if(!istype(usr.get_active_hand(),/obj/item/weapon/gun))
@@ -459,26 +450,7 @@
 			usr.client.AllowTargetRun()
 			gun_click_time = world.time
 
-		if("Disallow Running")
-			if(gun_click_time > world.time - 30)	//give them 3 seconds between mode changes.
-				return
-			if(!istype(usr.get_active_hand(),/obj/item/weapon/gun))
-				usr << "You need your gun in your active hand to do that!"
-				return
-			usr.client.AllowTargetRun()
-			gun_click_time = world.time
-
-		if("Allow Item Use")
-			if(gun_click_time > world.time - 30)	//give them 3 seconds between mode changes.
-				return
-			if(!istype(usr.get_active_hand(),/obj/item/weapon/gun))
-				usr << "You need your gun in your active hand to do that!"
-				return
-			usr.client.AllowTargetClick()
-			gun_click_time = world.time
-
-
-		if("Disallow Item Use")
+		if("Allow Item Use" || "Disallow Item Use")
 			if(gun_click_time > world.time - 30)	//give them 3 seconds between mode changes.
 				return
 			if(!istype(usr.get_active_hand(),/obj/item/weapon/gun))
@@ -490,16 +462,7 @@
 		if("Toggle Gun Mode")
 			usr.client.ToggleGunMode()
 
-		if("Allow Radio Use")
-			if(gun_click_time > world.time - 30)	//give them 3 seconds between mode changes.
-				return
-			if(!istype(usr.get_active_hand(),/obj/item/weapon/gun))
-				usr << "You need your gun in your active hand to do that!"
-				return
-			usr.client.AllowTargetRadio()
-			gun_click_time = world.time
-
-		if("Disallow Radio Use")
+		if("Allow Radio Use" || "Disallow Radio Use")
 			if(gun_click_time > world.time - 30)	//give them 3 seconds between mode changes.
 				return
 			if(!istype(usr.get_active_hand(),/obj/item/weapon/gun))
