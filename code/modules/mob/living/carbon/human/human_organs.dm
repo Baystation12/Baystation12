@@ -104,8 +104,12 @@
 
 		if(E.is_broken())
 			if(E.body_part == HAND_LEFT)
+				if(!l_hand)
+					continue
 				drop_from_inventory(l_hand)
 			else
+				if(!r_hand)
+					continue
 				drop_from_inventory(r_hand)
 
 			var/emote_scream = pick("screams in pain and ", "lets out a sharp cry and ", "cries out and ")
