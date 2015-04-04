@@ -4,7 +4,7 @@
 	icon_state = "beacon"
 	item_state = "signaler"
 	var/code = "electronic"
-	origin_tech = "bluespace=1"
+	origin_tech = list(TECH_BLUESPACE = 1)
 
 /obj/item/device/radio/beacon/hear_talk()
 	return
@@ -38,7 +38,7 @@
 /obj/item/device/radio/beacon/syndicate
 	name = "suspicious beacon"
 	desc = "A label on it reads: <i>Activate to have a singularity beacon teleported to your location</i>."
-	origin_tech = "bluespace=1;syndicate=7"
+	origin_tech = list(TECH_BLUESPACE = 1, TECH_ILLEGAL = 7)
 
 /obj/item/device/radio/beacon/syndicate/attack_self(mob/user as mob)
 	if(user)

@@ -6,7 +6,7 @@
 	name = T_BOARD("superconductive magnetic energy storage")
 	build_path = "/obj/machinery/power/smes/buildable"
 	board_type = "machine"
-	origin_tech = "powerstorage=6;engineering=4"
+	origin_tech = list(TECH_POWER = 6, TECH_ENGINERING = 4)
 	frame_desc = "Requires 1 superconducting magnetic coil and 30 wires."
 	req_components = list("/obj/item/weapon/smes_coil" = 1, "/obj/item/stack/cable_coil" = 30)
 
@@ -14,7 +14,7 @@
 	name = T_BOARD("battery rack PSU")
 	build_path = "/obj/machinery/power/smes/batteryrack"
 	board_type = "machine"
-	origin_tech = "powerstorage=3;engineering=2"
+	origin_tech = list(TECH_POWER = 3, TECH_ENGINERING = 2)
 	frame_desc = "Requires 3 power cells."
 	req_components = list("/obj/item/weapon/cell" = 3)
 

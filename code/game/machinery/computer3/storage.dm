@@ -35,7 +35,7 @@
 	// Add a file to the hard drive, returns 0 if failed
 	// forced is used when spawning files on a write-protect drive
 	proc/addfile(var/datum/file/F,var/forced = 0)
-		if(!F || crit_fail || (F in files))
+		if(!F || (F in files))
 			return 1
 		if(writeprotect && !forced)
 			return 0

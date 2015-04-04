@@ -25,7 +25,7 @@
 	icon_state = "stunrevolver"
 	item_state = "stunrevolver"
 	fire_sound = 'sound/weapons/Gunshot.ogg'
-	origin_tech = "combat=3;materials=3;powerstorage=2"
+	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 3, TECH_POWER = 2)
 	charge_cost = 125
 	projectile_type = /obj/item/projectile/energy/electrode/stunshot
 	cell_type = /obj/item/weapon/cell
@@ -38,7 +38,7 @@
 	w_class = 2.0
 	item_state = "crossbow"
 	matter = list("metal" = 2000)
-	origin_tech = "combat=2;magnets=2;syndicate=5"
+	origin_tech = list(TECH_COMBAT = 2, TECH_MAGNET = 2, TECH_ILLEGAL = 5)
 	slot_flags = SLOT_BELT
 	silenced = 1
 	fire_sound = 'sound/weapons/Genhit.ogg'

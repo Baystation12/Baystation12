@@ -6,7 +6,7 @@
 	name = T_BOARD("biogenerator")
 	build_path = "/obj/machinery/biogenerator"
 	board_type = "machine"
-	origin_tech = "programming=2"
+	origin_tech = list(TECH_DATA = 2)
 	frame_desc = "Requires 1 Manipulator, and 1 Matter Bin."
 	req_components = list(
 							"/obj/item/weapon/stock_parts/matter_bin" = 1,

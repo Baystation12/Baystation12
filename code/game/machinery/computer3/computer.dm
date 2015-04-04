@@ -309,7 +309,6 @@
 	proc/set_broken()
 		icon_state = "computer_b"
 		stat |= BROKEN
-		crit_fail = 1
 		if(program)
 			program.error = BUSTED_ASS_COMPUTER
 		if(os)

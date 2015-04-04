@@ -17,7 +17,6 @@
 	w_class = 2.0
 
 	var/emagged = 0
-	crit_fail = 0
 
 	// the computer that this device is attached to
 	var/obj/machinery/computer3/computer

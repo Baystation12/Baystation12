@@ -23,7 +23,7 @@
 	throw_speed = 3
 	throw_range = 5
 	flags = CONDUCT
-	origin_tech = "materials=1"
+	origin_tech = list(TECH_MATERIAL = 1)
 	attack_verb = list("attacked", "stabbed", "poked")
 	sharp = 0
 
@@ -146,7 +146,7 @@
 	throw_speed = 3
 	throw_range = 6
 	matter = list("metal" = 12000)
-	origin_tech = "materials=1"
+	origin_tech = list(TECH_MATERIAL = 1)
 	attack_verb = list("slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 
 	suicide_act(mob/user)
@@ -176,7 +176,7 @@
 	throw_speed = 3
 	throw_range = 6
 	matter = list("metal" = 12000)
-	origin_tech = "materials=1"
+	origin_tech = list(TECH_MATERIAL = 1)
 	attack_verb = list("cleaved", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	sharp = 1
 	edge = 1

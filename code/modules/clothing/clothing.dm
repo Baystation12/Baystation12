@@ -212,8 +212,6 @@ BLIND     // can't see anything
 		cell.charge -= 1000 / severity
 		if (cell.charge < 0)
 			cell.charge = 0
-		if(cell.reliability != 100 && prob(50/severity))
-			cell.reliability -= 10 / severity
 	..()
 
 // Called just before an attack_hand(), in mob/UnarmedAttack()

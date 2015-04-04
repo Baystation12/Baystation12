@@ -7,7 +7,7 @@
 	icon = 'icons/obj/module.dmi'
 	icon_state = "id_mod"
 	item_state = "electronic"
-	origin_tech = "programming=2"
+	origin_tech = list(TECH_DATA = 2)
 	var/id = null
 	var/frequency = null
 	var/build_path = null

@@ -6,5 +6,5 @@
 
 /obj/item/weapon/circuitboard/aicore
 	name = T_BOARD("AI core")
-	origin_tech = "programming=4;biotech=2"
+	origin_tech = list(TECH_DATA = 4, TECH_BIO = 2)
 	board_type = "other"

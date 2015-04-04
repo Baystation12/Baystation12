@@ -11,7 +11,7 @@
 	throw_speed = 2
 	throw_range = 5
 	matter = list("metal" = 500)
-	origin_tech = "materials=1"
+	origin_tech = list(TECH_MATERIAL = 1)
 	var/dispenser = 0
 	var/breakouttime = 1200 //Deciseconds = 120s = 2 minutes
 	var/cuff_sound = 'sound/weapons/handcuffs.ogg'

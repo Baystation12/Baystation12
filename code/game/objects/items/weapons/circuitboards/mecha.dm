@@ -12,7 +12,7 @@
 
 
 /obj/item/weapon/circuitboard/mecha/ripley
-		origin_tech = "programming=3"
+		origin_tech = list(TECH_DATA = 3)
 
 /obj/item/weapon/circuitboard/mecha/ripley/peripherals
 		name = T_BOARD_MECHA("Ripley peripherals control")
@@ -24,7 +24,7 @@
 
 
 /obj/item/weapon/circuitboard/mecha/gygax
-		origin_tech = "programming=4"
+		origin_tech = list(TECH_DATA = 4)
 
 /obj/item/weapon/circuitboard/mecha/gygax/peripherals
 		name = T_BOARD_MECHA("Gygax peripherals control")
@@ -33,7 +33,7 @@
 /obj/item/weapon/circuitboard/mecha/gygax/targeting
 		name = T_BOARD_MECHA("Gygax weapon control and targeting")
 		icon_state = "mcontroller"
-		origin_tech = "programming=4;combat=4"
+		origin_tech = list(TECH_DATA = 4, TECH_COMBAT = 4)
 
 /obj/item/weapon/circuitboard/mecha/gygax/main
 		name = T_BOARD_MECHA("Gygax central control")
@@ -41,7 +41,7 @@
 
 
 /obj/item/weapon/circuitboard/mecha/durand
-		origin_tech = "programming=4"
+		origin_tech = list(TECH_DATA = 4)
 
 /obj/item/weapon/circuitboard/mecha/durand/peripherals
 		name = T_BOARD_MECHA("Durand peripherals control")
@@ -50,7 +50,7 @@
 /obj/item/weapon/circuitboard/mecha/durand/targeting
 		name = T_BOARD_MECHA("Durand weapon control and targeting")
 		icon_state = "mcontroller"
-		origin_tech = "programming=4;combat=4"
+		origin_tech = list(TECH_DATA = 4, TECH_COMBAT = 4)
 
 /obj/item/weapon/circuitboard/mecha/durand/main
 		name = T_BOARD_MECHA("Durand central control")
@@ -58,7 +58,7 @@
 
 
 /obj/item/weapon/circuitboard/mecha/honker
-		origin_tech = "programming=4"
+		origin_tech = list(TECH_DATA = 4)
 
 /obj/item/weapon/circuitboard/mecha/honker/peripherals
 		name = T_BOARD_MECHA("H.O.N.K peripherals control")
@@ -74,7 +74,7 @@
 
 
 /obj/item/weapon/circuitboard/mecha/odysseus
-		origin_tech = "programming=3"
+		origin_tech = list(TECH_DATA = 3)
 
 /obj/item/weapon/circuitboard/mecha/odysseus/peripherals
 		name = T_BOARD_MECHA("Odysseus peripherals control")

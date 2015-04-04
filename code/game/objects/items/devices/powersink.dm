@@ -13,7 +13,7 @@
 
 	matter = list("metal" = 750,"waste" = 750)
 
-	origin_tech = "powerstorage=3;syndicate=5"
+	origin_tech = list(TECH_POWER = 3, TECH_ILLEGAL = 5)
 	var/drain_rate = 1000000		// amount of power to drain per tick
 	var/dissipation_rate = 20000
 	var/power_drained = 0 		// has drained this much power

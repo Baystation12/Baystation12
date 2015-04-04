@@ -192,7 +192,7 @@
 	w_class = 3.0
 	possible_transfer_amounts = null
 	volume = 600
-	origin_tech = "combat=3;materials=3;engineering=3"
+	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 3, TECH_ENGINERING = 3)
 
 
 //this is a big copypasta clusterfuck, but it's still better than it used to be!

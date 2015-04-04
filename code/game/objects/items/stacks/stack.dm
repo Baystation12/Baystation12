@@ -11,7 +11,7 @@
 
 /obj/item/stack
 	gender = PLURAL
-	origin_tech = "materials=1"
+	origin_tech = list(TECH_MATERIAL = 1)
 	var/list/datum/stack_recipe/recipes
 	var/singular_name
 	var/amount = 1

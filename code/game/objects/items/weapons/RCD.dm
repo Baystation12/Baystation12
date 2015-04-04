@@ -14,7 +14,7 @@
 	throw_range = 5
 	w_class = 3.0
 	matter = list("metal" = 50000)
-	origin_tech = "engineering=4;materials=2"
+	origin_tech = list(TECH_ENGINERING = 4, TECH_MATERIAL = 2)
 	var/datum/effect/effect/system/spark_spread/spark_system
 	var/stored_matter = 0
 	var/working = 0
@@ -152,7 +152,7 @@
 	opacity = 0
 	density = 0
 	anchored = 0.0
-	origin_tech = "materials=2"
+	origin_tech = list(TECH_MATERIAL = 2)
 	matter = list("metal" = 30000,"glass" = 15000)
 
 /obj/item/weapon/rcd/borg

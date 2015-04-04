@@ -10,7 +10,7 @@
 	edge = 0
 	throwforce = 7
 	w_class = 3
-	origin_tech = "combat=2"
+	origin_tech = list(TECH_COMBAT = 2)
 	attack_verb = list("beaten")
 	var/stunforce = 0
 	var/agonyforce = 60

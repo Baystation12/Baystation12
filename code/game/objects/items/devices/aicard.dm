@@ -6,7 +6,7 @@
 	w_class = 2.0
 	slot_flags = SLOT_BELT
 	var/flush = null
-	origin_tech = "programming=4;materials=4"
+	origin_tech = list(TECH_DATA = 4, TECH_MATERIAL = 4)
 
 	var/mob/living/silicon/ai/carded_ai
 

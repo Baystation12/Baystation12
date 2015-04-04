@@ -9,7 +9,7 @@
 	icon_state = ""
 	flags = CONDUCT
 	w_class = 2.0
-	origin_tech = "materials=1;biotech=1"
+	origin_tech = list(TECH_MATERIAL = 1, TECH_BIO = 1)
 	var/list/datum/autopsy_data_scanner/wdata = list()
 	var/list/datum/autopsy_data_scanner/chemtraces = list()
 	var/target_name = null

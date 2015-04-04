@@ -233,7 +233,7 @@
 	sharp = 1
 	edge = 1
 	matter = list("metal" = 15000)
-	origin_tech = "materials=2;combat=1"
+	origin_tech = list(TECH_MATERIAL = 2, TECH_COMBAT = 1)
 	attack_verb = list("chopped", "torn", "cut")
 
 /obj/item/weapon/hatchet/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
@@ -268,7 +268,7 @@
 	w_class = 4.0
 	flags = NOSHIELD
 	slot_flags = SLOT_BACK
-	origin_tech = "materials=2;combat=2"
+	origin_tech = list(TECH_MATERIAL = 2, TECH_COMBAT = 2)
 	attack_verb = list("chopped", "sliced", "cut", "reaped")
 
 /obj/item/weapon/scythe/afterattack(atom/A, mob/user as mob, proximity)

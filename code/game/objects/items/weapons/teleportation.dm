@@ -22,7 +22,7 @@
 	throw_speed = 4
 	throw_range = 20
 	matter = list("metal" = 400)
-	origin_tech = "magnets=1"
+	origin_tech = list(TECH_MAGNET = 1)
 
 /obj/item/weapon/locator/attack_self(mob/user as mob)
 	user.set_machine(src)
@@ -133,7 +133,7 @@ Frequency:
 	throw_speed = 3
 	throw_range = 5
 	matter = list("metal" = 10000)
-	origin_tech = "magnets=1;bluespace=3"
+	origin_tech = list(TECH_MAGNET = 1, TECH_BLUESPACE = 3)
 
 /obj/item/weapon/hand_tele/attack_self(mob/user as mob)
 	var/turf/current_location = get_turf(user)//What turf is the user on?
