@@ -700,11 +700,6 @@ Note that amputating the affected organ does in fact remove the infection from t
 /obj/item/organ/external/proc/is_stump()
 	return 0
 
-/obj/item/organ/external/replaced()
-	get_icon()
-	icon = mob_icon
-	return ..()
-
 /obj/item/organ/external/proc/release_restraints(var/mob/living/carbon/human/holder)
 	if(!holder)
 		holder = owner
@@ -865,7 +860,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 		return
 	var/is_robotic = status & ORGAN_ROBOT
 	var/mob/living/carbon/human/victim = owner
-	get_icon()
+
 	..()
 
 	status |= ORGAN_DESTROYED
