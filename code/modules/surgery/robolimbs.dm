@@ -37,7 +37,7 @@
 		user.visible_message("\blue [user] has attached \the [tool] to [target].",	\
 		"\blue You have attached \the [tool] to [target].")
 
-		if(L.part)http://i.imgur.com/g19Dq0G.png
+		if(L.part)
 			for(var/part_name in L.part)
 				if(!isnull(target.get_organ(part_name)))
 					continue
