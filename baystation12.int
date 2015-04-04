@@ -1,6 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
+WINDOW: maps\exodus-1.dmm;maps\exodus-2.dmm;maps\exodus-3.dmm;maps\exodus-4.dmm;maps\exodus-5.dmm
+LAST_COMPILE_VERSION: 506.1247
+DIR: code code\modules code\modules\clothing code\modules\clothing\spacesuits code\modules\clothing\spacesuits\rig code\modules\clothing\spacesuits\rig\modules code\modules\clothing\spacesuits\rig\suits icons icons\mob icons\obj icons\obj\clothing maps 
+FILE: maps\exodus-5.dmm
+LAST_COMPILE_TIME: 1428182322
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
