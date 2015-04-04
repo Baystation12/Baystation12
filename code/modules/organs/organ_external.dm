@@ -634,8 +634,9 @@ Note that amputating the affected organ does in fact remove the infection from t
 				"<span class='moderate'><b>Your [src.name] explodes in a shower of gore!</b></span>",\
 				"<span class='danger'>You hear the sickening splatter of gore.</span>")
 
-	src.removed(null, ignore_children)
-	owner.traumatic_shock += 60
+	var/mob/living/carbon/human/victim = owner //Keep a reference for post-removed().
+	removed(null, ignore_children)
+	victim.traumatic_shock += 60
 
 	wounds.Cut()
 	if(parent)
@@ -649,22 +650,22 @@ Note that amputating the affected organ does in fact remove the infection from t
 			parent.wounds |= W
 			parent.update_damages()
 		else
-			var/obj/item/organ/external/stump/stump = new (owner, 0, src)
+			var/obj/item/organ/external/stump/stump = new (victim, 0, src)
 			stump.wounds |= W
-			owner.organs |= stump
+			victim.organs |= stump
 			stump.update_damages()
 		parent = null
 
 	spawn(1)
-		owner.updatehealth()
-		owner.UpdateDamageIcon()
-		owner.regenerate_icons()
+		victim.updatehealth()
+		victim.UpdateDamageIcon()
+		victim.regenerate_icons()
 		dir = 2
 
 	switch(disintegrate)
 		if(DROPLIMB_EDGE)
 			compile_icon()
-			add_blood(owner)
+			add_blood(victim)
 			var/matrix/M = matrix()
 			M.Turn(rand(180))
 			src.transform = M
@@ -675,13 +676,13 @@ Note that amputating the affected organ does in fact remove the infection from t
 				dir = 2
 			return
 		if(DROPLIMB_BURN)
-			new /obj/effect/decal/cleanable/ash(get_turf(owner))
+			new /obj/effect/decal/cleanable/ash(get_turf(victim))
 		if(DROPLIMB_BLUNT)
-			var/obj/effect/decal/cleanable/blood/gibs/gore = new owner.species.single_gib_type(get_turf(owner))
-			if(owner.species.flesh_color)
-				gore.fleshcolor = owner.species.flesh_color
-			if(owner.species.blood_color)
-				gore.basecolor = owner.species.blood_color
+			var/obj/effect/decal/cleanable/blood/gibs/gore = new owner.species.single_gib_type(get_turf(victim))
+			if(victim.species.flesh_color)
+				gore.fleshcolor = victim.species.flesh_color
+			if(victim.species.blood_color)
+				gore.basecolor = victim.species.blood_color
 			gore.update_icon()
 			gore.throw_at(get_edge_target_turf(src,pick(alldirs)),rand(1,3),30)
 
@@ -704,20 +705,21 @@ Note that amputating the affected organ does in fact remove the infection from t
 	icon = mob_icon
 	return ..()
 
-/obj/item/organ/external/proc/release_restraints()
-	if (owner.handcuffed && body_part in list(ARM_LEFT, ARM_RIGHT, HAND_LEFT, HAND_RIGHT))
-		owner.visible_message(\
-			"\The [owner.handcuffed.name] falls off of [owner.name].",\
-			"\The [owner.handcuffed.name] falls off you.")
-
-		owner.drop_from_inventory(owner.handcuffed)
-
-	if (owner.legcuffed && body_part in list(FOOT_LEFT, FOOT_RIGHT, LEG_LEFT, LEG_RIGHT))
-		owner.visible_message(\
-			"\The [owner.legcuffed.name] falls off of [owner.name].",\
-			"\The [owner.legcuffed.name] falls off you.")
-
-		owner.drop_from_inventory(owner.legcuffed)
+/obj/item/organ/external/proc/release_restraints(var/mob/living/carbon/human/holder)
+	if(!holder)
+		holder = owner
+	if(!holder)
+		return
+	if (holder.handcuffed && body_part in list(ARM_LEFT, ARM_RIGHT, HAND_LEFT, HAND_RIGHT))
+		holder.visible_message(\
+			"\The [holder.handcuffed.name] falls off of [holder.name].",\
+			"\The [holder.handcuffed.name] falls off you.")
+		holder.drop_from_inventory(holder.handcuffed)
+	if (holder.legcuffed && body_part in list(FOOT_LEFT, FOOT_RIGHT, LEG_LEFT, LEG_RIGHT))
+		holder.visible_message(\
+			"\The [holder.legcuffed.name] falls off of [holder.name].",\
+			"\The [holder.legcuffed.name] falls off you.")
+		holder.drop_from_inventory(holder.legcuffed)
 
 /obj/item/organ/external/proc/bandage()
 	var/rval = 0
@@ -859,11 +861,15 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 /obj/item/organ/external/removed(var/mob/living/user, var/ignore_children)
 
+	if(!owner)
+		return
 	var/is_robotic = status & ORGAN_ROBOT
+	var/mob/living/carbon/human/victim = owner
+	get_icon()
 	..()
 
 	status |= ORGAN_DESTROYED
-	owner.bad_external_organs -= src
+	victim.bad_external_organs -= src
 
 	for(var/implant in implants) //todo: check if this can be left alone
 		del(implant)
@@ -880,19 +886,19 @@ Note that amputating the affected organ does in fact remove the infection from t
 		organ.removed()
 		organ.loc = src
 
-	release_restraints()
-	owner.organs -= src
-	owner.organs_by_name[limb_name] = null // Remove from owner's vars.
+	release_restraints(victim)
+	victim.organs -= src
+	victim.organs_by_name[limb_name] = null // Remove from owner's vars.
 
 	//Robotic limbs explode if sabotaged.
 	if(is_robotic && sabotaged)
-		owner.visible_message(
-			"<span class='danger'>\The [owner]'s [src.name] explodes violently!</span>",\
+		victim.visible_message(
+			"<span class='danger'>\The [victim]'s [src.name] explodes violently!</span>",\
 			"<span class='danger'>Your [src.name] explodes!</span>",\
 			"<span class='danger'>You hear an explosion!</span>")
 		explosion(get_turf(owner),-1,-1,2,3)
 		var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
-		spark_system.set_up(5, 0, owner)
+		spark_system.set_up(5, 0, victim)
 		spark_system.attach(owner)
 		spark_system.start()
 		spawn(10)

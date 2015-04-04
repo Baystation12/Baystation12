@@ -52,7 +52,6 @@ var/list/organ_cache = list()
 /obj/item/organ/proc/die()
 	if(status & ORGAN_ROBOT)
 		return
-	name = "dead [name]"
 	damage = max_damage
 	processing_objects -= src
 	if(dead_icon)
