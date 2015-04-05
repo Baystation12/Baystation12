@@ -816,7 +816,8 @@ var/list/admin_verbs_mentor = list(
 		var/job = input("Please select job slot to free", "Free job slot")  as null|anything in jobs
 		if (job)
 			job_master.FreeRole(job)
-	return
+			message_admins("A job slot for [job] has been opened by [key_name_admin(usr)]")
+			return
 
 /client/proc/toggleattacklogs()
 	set name = "Toggle Attack Log Messages"
