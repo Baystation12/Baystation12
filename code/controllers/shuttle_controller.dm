@@ -13,6 +13,17 @@ var/global/datum/shuttle_controller/shuttle_controller
 			shuttle.process()
 
 
+//This is called by gameticker after all the machines and radio frequencies have been properly initialized
+/datum/shuttle_controller/proc/setup_shuttle_docks()
+	for(var/shuttle_tag in shuttles)
+		var/datum/shuttle/shuttle = shuttles[shuttle_tag]
+		shuttle.init_docking_controllers()
+		shuttle.dock() //makes all shuttles docked to something at round start go into the docked state
+	
+	for(var/obj/machinery/embedded_controller/C in machines)
+		if(istype(C.program, /datum/computer/file/embedded_program/docking))
+			C.program.tag = null //clear the tags, 'cause we don't need 'em anymore
+
 /datum/shuttle_controller/New()
 	shuttles = list()
 	process_shuttles = list()
@@ -213,6 +224,7 @@ var/global/datum/shuttle_controller/shuttle_controller
 	//Nuke Ops shuttle.
 	var/datum/shuttle/multi_shuttle/MS = new/datum/shuttle/multi_shuttle()
 	MS.origin = locate(/area/syndicate_station/start)
+	MS.start_location = "Mercenary Base"
 
 	MS.destinations = list(
 		"Northwest of the station" = locate(/area/syndicate_station/northwest),
@@ -225,6 +237,12 @@ var/global/datum/shuttle_controller/shuttle_controller
 		"Mining Asteroid" = locate(/area/syndicate_station/mining),
 		"Arrivals dock" = locate(/area/syndicate_station/arrivals_dock),
 		)
+	
+	MS.docking_controller_tag = "merc_shuttle"
+	MS.destination_dock_targets = list(
+		"Mercenary Base" = "merc_base",
+		"Arrivals dock" = "nuke_shuttle_dock_airlock",
+		)
 
 	MS.announcer = "NSV Icarus"
 	MS.arrival_message = "Attention, Exodus, you have a large signature approaching the station - looks unarmed to surface scans. We're too far out to intercept - brace for visitors."
@@ -234,72 +252,3 @@ var/global/datum/shuttle_controller/shuttle_controller
 	MS.warmup_time = 0
 	shuttles["Mercenary"] = MS
 
-
-//This is called by gameticker after all the machines and radio frequencies have been properly initialized
-/datum/shuttle_controller/proc/setup_shuttle_docks()
-	var/datum/shuttle/shuttle
-	var/datum/shuttle/ferry/multidock/multidock
-	var/list/dock_controller_map = list()	//so we only have to iterate once through each list
-
-	//multidock shuttles
-	var/list/dock_controller_map_station = list()
-	var/list/dock_controller_map_offsite = list()
-
-	for (var/shuttle_tag in shuttles)
-		shuttle = shuttles[shuttle_tag]
-		if (shuttle.docking_controller_tag)
-			dock_controller_map[shuttle.docking_controller_tag] = shuttle
-		if (istype(shuttle, /datum/shuttle/ferry/multidock))
-			multidock = shuttle
-			dock_controller_map_station[multidock.docking_controller_tag_station] = multidock
-			dock_controller_map_offsite[multidock.docking_controller_tag_offsite] = multidock
-
-	//escape pod arming controllers
-	var/datum/shuttle/ferry/escape_pod/pod
-	var/list/pod_controller_map = list()
-	for (var/datum/shuttle/ferry/escape_pod/P in emergency_shuttle.escape_pods)
-		if (P.dock_target_station)
-			pod_controller_map[P.dock_target_station] = P
-
-	//search for the controllers, if we have one.
-	if (dock_controller_map.len)
-		for (var/obj/machinery/embedded_controller/radio/C in machines)	//only radio controllers are supported at the moment
-			if (istype(C.program, /datum/computer/file/embedded_program/docking))
-				if (C.id_tag in dock_controller_map)
-					shuttle = dock_controller_map[C.id_tag]
-					shuttle.docking_controller = C.program
-					dock_controller_map -= C.id_tag
-
-					//escape pods
-					if(istype(C, /obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod) && istype(shuttle, /datum/shuttle/ferry/escape_pod))
-						var/obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod/EPC = C
-						EPC.pod = shuttle
-
-				if (C.id_tag in dock_controller_map_station)
-					multidock = dock_controller_map_station[C.id_tag]
-					if (istype(multidock))
-						multidock.docking_controller_station = C.program
-						dock_controller_map_station -= C.id_tag
-				if (C.id_tag in dock_controller_map_offsite)
-					multidock = dock_controller_map_offsite[C.id_tag]
-					if (istype(multidock))
-						multidock.docking_controller_offsite = C.program
-						dock_controller_map_offsite -= C.id_tag
-
-				//escape pods
-				if (C.id_tag in pod_controller_map)
-					pod = pod_controller_map[C.id_tag]
-					if (istype(C.program, /datum/computer/file/embedded_program/docking/simple/escape_pod/))
-						pod.arming_controller = C.program
-
-	//sanity check
-	if (dock_controller_map.len || dock_controller_map_station.len || dock_controller_map_offsite.len)
-		var/dat = ""
-		for (var/dock_tag in dock_controller_map + dock_controller_map_station + dock_controller_map_offsite)
-			dat += "\"[dock_tag]\", "
-		world << "\red \b warning: shuttles with docking tags [dat] could not find their controllers!"
-
-	//makes all shuttles docked to something at round start go into the docked state
-	for (var/shuttle_tag in shuttles)
-		shuttle = shuttles[shuttle_tag]
-		shuttle.dock()
