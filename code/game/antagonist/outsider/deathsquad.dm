@@ -44,8 +44,9 @@ var/datum/antagonist/deathsquad/deathsquad
 	player.implant_loyalty(player)
 
 	var/obj/item/weapon/card/id/id = create_id("Asset Protection", player)
-	id.access |= get_all_accesses()
-	id.icon_state = "centcom"
+	if(id)
+		id.access |= get_all_accesses()
+		id.icon_state = "centcom"
 	create_radio(DTH_FREQ, player)
 
 /datum/antagonist/deathsquad/apply(var/datum/mind/player)

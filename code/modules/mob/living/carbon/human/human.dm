@@ -20,6 +20,9 @@
 		else
 			set_species()
 
+	if(species)
+		name = species.get_random_name(gender)
+
 	var/datum/reagents/R = new/datum/reagents(1000)
 	reagents = R
 	R.my_atom = src
@@ -326,8 +329,8 @@
 
 //Returns "Unknown" if facially disfigured and real_name if not. Useful for setting name when polyacided or when updating a human's name variable
 /mob/living/carbon/human/proc/get_face_name()
-	var/obj/item/organ/external/head/head = get_organ("head")
-	if( !head || head.disfigured || (head.status & ORGAN_DESTROYED) || !real_name || (HUSK in mutations) )	//disfigured. use id-name if possible
+	var/obj/item/organ/external/head = get_organ("head")
+	if(!head || head.disfigured || (head.status & ORGAN_DESTROYED) || !real_name || (HUSK in mutations) )	//disfigured. use id-name if possible
 		return "Unknown"
 	return real_name
 
@@ -1119,8 +1122,6 @@
 
 	species = all_species[new_species]
 
-	species.create_organs(src)
-
 	if(species.language)
 		add_language(species.language)
 
@@ -1136,6 +1137,8 @@
 		r_skin = 0
 		g_skin = 0
 		b_skin = 0
+
+	species.create_organs(src)
 
 	species.handle_post_spawn(src)
 
@@ -1361,3 +1364,8 @@
 		U << "<span class='danger'>You pop [S]'s [current_limb.joint] back in!</span>"
 		S << "<span class='danger'>[U] pops your [current_limb.joint] back in!</span>"
 	current_limb.undislocate()
+
+/mob/living/carbon/human/drop_from_inventory(var/obj/item/W, var/atom/Target = null)
+	if(W in organs)
+		return
+	..()

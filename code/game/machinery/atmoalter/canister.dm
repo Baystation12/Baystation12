@@ -8,6 +8,7 @@
 
 	var/valve_open = 0
 	var/release_pressure = ONE_ATMOSPHERE
+	var/release_flow_rate = ATMOS_DEFAULT_VOLUME_PUMP //in L/s
 
 	var/canister_color = "yellow"
 	var/can_label = 1
@@ -193,21 +194,15 @@ update_flag
 			environment = loc.return_air()
 
 		var/env_pressure = environment.return_pressure()
-		var/pressure_delta = min(release_pressure - env_pressure, (air_contents.return_pressure() - env_pressure)/2)
-		//Can not have a pressure delta that would cause environment pressure > tank pressure
+		var/pressure_delta = release_pressure - env_pressure
 
-		var/transfer_moles = 0
 		if((air_contents.temperature > 0) && (pressure_delta > 0))
-			transfer_moles = pressure_delta*environment.volume/(air_contents.temperature * R_IDEAL_GAS_EQUATION)
+			var/transfer_moles = calculate_transfer_moles(air_contents, environment, pressure_delta)
+			transfer_moles = min(transfer_moles, (release_flow_rate/air_contents.volume)*air_contents.total_moles) //flow rate limit
 
-			//Actually transfer the gas
-			var/datum/gas_mixture/removed = air_contents.remove(transfer_moles)
-
-			if(holding)
-				environment.merge(removed)
-			else
-				loc.assume_air(removed)
-			src.update_icon()
+			var/returnval = pump_gas_passive(src, air_contents, environment, transfer_moles)
+			if(returnval >= 0)
+				src.update_icon()
 
 	if(air_contents.return_pressure() < 1)
 		can_label = 1

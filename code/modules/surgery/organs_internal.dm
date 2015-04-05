@@ -343,9 +343,11 @@
 		var/o_a =  (O.gender == PLURAL) ? "" : "a "
 		var/o_do = (O.gender == PLURAL) ? "don't" : "doesn't"
 
-		if(target.species.has_organ[O.organ_tag])
+		if(O.organ_tag == "limb")
+			return 0
+		else if(target.species.has_organ[O.organ_tag])
 
-			if(!O.health)
+			if(O.is_damaged())
 				user << "\red \The [O.organ_tag] [o_is] in no state to be transplanted."
 				return 2
 
@@ -355,7 +357,7 @@
 				user << "\red \The [target] already has [o_a][O.organ_tag]."
 				return 2
 
-			if(O && affected.name == O.parent_organ)
+			if(O && affected.limb_name == O.parent_organ)
 				organ_compatible = 1
 			else
 				user << "\red \The [O.organ_tag] [o_do] normally go in \the [affected.name]."
