@@ -136,11 +136,13 @@
 
 //Called when the projectile intercepts a mob. Returns 1 if the projectile hit the mob, 0 if it missed and should keep flying.
 /obj/item/projectile/proc/attack_mob(var/mob/living/target_mob, var/distance, var/miss_modifier=0)
+	if(!istype(target_mob))
+		return
 	//accuracy bonus from aiming
 	if (istype(shot_from, /obj/item/weapon/gun))
 		var/obj/item/weapon/gun/daddy = shot_from
 		miss_modifier -= round(15*daddy.accuracy)
-		
+
 		//If you aim at someone beforehead, it'll hit more often.
 		//Kinda balanced by fact you need like 2 seconds to aim
 		//As opposed to no-delay pew pew
@@ -184,7 +186,7 @@
 /obj/item/projectile/Bump(atom/A as mob|obj|turf|area, forced=0)
 	if(A == src)
 		return 0 //no
-	
+
 	if(A == firer)
 		loc = A.loc
 		return 0 //cannot shoot yourself
@@ -205,7 +207,7 @@
 				visible_message("<span class='danger'>\The [M] uses [G.affecting] as a shield!</span>")
 				if(Bump(G.affecting, forced=1))
 					return //If Bump() returns 0 (keep going) then we continue on to attack M.
-			
+
 			passthrough = !attack_mob(M, distance)
 		else
 			passthrough = 1 //so ghosts don't stop bullets
@@ -214,7 +216,7 @@
 		if(isturf(A))
 			for(var/obj/O in A)
 				O.bullet_act(src)
-			for(var/mob/M in A)
+			for(var/mob/living/M in A)
 				attack_mob(M, distance)
 
 	//penetrating projectiles can pass through things that otherwise would not let them
@@ -237,7 +239,7 @@
 
 	//stop flying
 	on_impact(A)
-	
+
 	density = 0
 	invisibility = 101
 	del(src)
