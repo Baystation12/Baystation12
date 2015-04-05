@@ -236,7 +236,7 @@
 	if(!I.aim_targets.len)
 		del(I.aim_targets)
 	var/mob/living/T = I.loc //Remove the targeting icons
-	if(T && ismob(T) && !I.aim_targets)
+	if(T && ismob(T) && !I.aim_targets && T.client)
 		T.client.remove_gun_icons()
 	if(!targeted_by.len)
 		del target_locked //Remove the overlay

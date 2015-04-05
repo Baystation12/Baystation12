@@ -374,6 +374,8 @@
 	yo = targloc.y - curloc.y
 	xo = targloc.x - curloc.x
 	target = targloc
+	original = target
+	starting = curloc
 
 	//plot the initial trajectory
 	setup_trajectory()
