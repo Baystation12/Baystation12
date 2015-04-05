@@ -216,11 +216,11 @@
 
 				if (istype(l_hand,/obj/item/weapon/gun))
 					W = l_hand
-					chance = hand ? 40 : 20
+					chance += hand ? 40 : 20
 
 				else if (istype(r_hand,/obj/item/weapon/gun))
 					W = r_hand
-					chance = !hand ? 40 : 20
+					chance += !hand ? 40 : 20
 
 				if (prob(chance))
 					visible_message("<span class='danger'>[src]'s [W.name] goes off during struggle!")
