@@ -1,5 +1,10 @@
 /obj/machinery/portable_atmospherics/hydroponics/process()
 
+	// Handle nearby smoke if any.
+	for(var/obj/effect/effect/smoke/chem/smoke in view(1, src))
+		if(smoke.reagents.total_volume)
+			smoke.reagents.copy_to(src, 5)
+
 	//Do this even if we're not ready for a plant cycle.
 	process_reagents()
 

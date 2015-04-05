@@ -44,7 +44,7 @@
 	organ_tag = "kidneys"
 	parent_organ = "groin"
 
-/obj/item/organ/kidney/process()
+/obj/item/organ/kidneys/process()
 
 	..()
 
@@ -60,7 +60,6 @@
 			owner.adjustToxLoss(0.1 * PROCESS_ACCURACY)
 		else if(is_broken())
 			owner.adjustToxLoss(0.3 * PROCESS_ACCURACY)
-
 
 /obj/item/organ/eyes
 	name = "eyeballs"
@@ -113,7 +112,7 @@
 	name = "liver"
 	icon_state = "liver"
 	organ_tag = "liver"
-	parent_organ = "chest"
+	parent_organ = "groin"
 
 /obj/item/organ/liver/process()
 
@@ -175,6 +174,7 @@
 	name = "appendix"
 	icon_state = "appendix"
 	parent_organ = "groin"
+	organ_tag = "appendix"
 
 /obj/item/organ/appendix/removed()
 

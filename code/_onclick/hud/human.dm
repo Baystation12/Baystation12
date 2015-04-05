@@ -356,6 +356,9 @@
 	//mymob.gun_run_icon.color = ui_color
 	mymob.gun_run_icon.alpha = ui_alpha
 
+	mymob.radio_use_icon = new /obj/screen/gun/radio(null)
+	mymob.radio_use_icon.alpha = ui_alpha
+
 	if (mymob.client)
 		if (mymob.client.gun_mode) // If in aim mode, correct the sprite
 			mymob.gun_setting_icon.set_dir(2)

@@ -1396,7 +1396,7 @@
 "AR" = (/obj/item/weapon/cigbutt,/obj/structure/cable/blue{d1 = 4; d2 = 8; icon_state = "4-8"},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 5},/turf/simulated/floor{icon_state = "bar"},/area/outpost/mining_main/dorms)
 "AS" = (/obj/item/device/radio/intercom{name = "Station Intercom (General)"; pixel_y = -29},/obj/structure/cable/blue{d1 = 4; d2 = 8; icon_state = "4-8"},/turf/simulated/floor{icon_state = "bar"},/area/outpost/mining_main/dorms)
 "AT" = (/obj/structure/grille,/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced,/obj/machinery/door/firedoor/border_only{dir = 2},/turf/simulated/floor/plating,/area/outpost/mining_main/west_hall)
-"AU" = (/obj/machinery/alarm{dir = 1; icon_state = "alarm0"; pixel_y = -22},/obj/structure/table/rack,/obj/item/weapon/rig/industrial,/turf/simulated/floor,/area/outpost/mining_main/west_hall)
+"AU" = (/obj/machinery/alarm{dir = 1; icon_state = "alarm0"; pixel_y = -22},/obj/structure/table/rack,/obj/item/weapon/rig/industrial/equipped,/turf/simulated/floor,/area/outpost/mining_main/west_hall)
 "AV" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/turf/simulated/floor,/area/outpost/mining_main/west_hall)
 "AW" = (/obj/machinery/camera{c_tag = "Storage Room"; dir = 1; network = list("MINE")},/turf/simulated/floor,/area/outpost/mining_main/west_hall)
 "AX" = (/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/turf/simulated/floor/airless{icon_state = "asteroidwarning"; dir = 4},/area/mine/explored)
