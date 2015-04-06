@@ -5,6 +5,7 @@
 	flags =  CONDUCT
 	slot_flags = SLOT_BACK
 
+	muzzle_flash = 0
 	var/release_force = 0
 	var/throw_distance = 10
 	fire_sound_text = "a launcher firing"
