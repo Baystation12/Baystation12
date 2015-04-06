@@ -439,7 +439,7 @@
 		return
 
 	if(world.time < 6000) // Ten minute grace period to let the game get going without lolmetagaming. -- TLE
-		user << "The emergency shuttle is refueling. Please wait another [round((6000-world.time)/60)] minutes before trying again."
+		user << "The emergency shuttle is refueling. Please wait another [round((6000-world.time)/600)] minute\s before trying again."
 		return
 
 	if(emergency_shuttle.going_to_centcom())
