@@ -433,10 +433,9 @@ var/list/sacrificed = list()
 			D.b_eyes = 200
 			D.r_eyes = 200
 			D.g_eyes = 200
+			D.update_eyes()
 			D.underwear = 0
-
 			D.key = ghost.key
-
 			cult.add_antagonist(D.mind)
 
 			if(!chose_name)
@@ -797,7 +796,7 @@ var/list/sacrificed = list()
 				if (cultist.legcuffed)
 					cultist.drop_from_inventory(cultist.legcuffed)
 				if (istype(cultist.wear_mask, /obj/item/clothing/mask/muzzle))
-					cultist.u_equip(cultist.wear_mask)
+					cultist.drop_from_inventory(cultist.wear_mask)
 				if(istype(cultist.loc, /obj/structure/closet)&&cultist.loc:welded)
 					cultist.loc:welded = 0
 				if(istype(cultist.loc, /obj/structure/closet/secure_closet)&&cultist.loc:locked)

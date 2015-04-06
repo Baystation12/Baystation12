@@ -182,7 +182,7 @@
 	icons.Add(usr.zone_sel)
 
 	for(var/obj/screen/I in icons)
-		if(I.name in list("help", "harm", "disarm", "grab")) continue
+		if(I.name in list(I_HELP, I_HURT, I_DISARM, I_GRAB)) continue
 		I.icon = ui_style2icon(UI_style_new)
 		I.color = UI_style_color_new
 		I.alpha = UI_style_alpha_new

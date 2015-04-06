@@ -83,6 +83,7 @@
 	g_eyes = green
 	b_eyes = blue
 
+	update_eyes()
 	update_body()
 	return 1
 
@@ -116,7 +117,7 @@
 	g_skin = green
 	b_skin = blue
 
-	update_body()
+	force_update_limbs()
 	return 1
 
 /mob/living/carbon/human/proc/change_skin_tone(var/tone)
@@ -125,7 +126,7 @@
 
 	s_tone = tone
 
-	update_body()
+	force_update_limbs()
 	return 1
 
 /mob/living/carbon/human/proc/update_dna()
@@ -185,3 +186,8 @@
 /proc/q()
 	var/mob/living/carbon/human/H = usr
 	H.change_appearance(APPEARANCE_ALL)
+
+/mob/living/carbon/human/proc/force_update_limbs()
+	for(var/obj/item/organ/external/O in organs)
+		O.sync_colour_to_human(src)
+	update_body(0)

@@ -13,6 +13,7 @@
 	idle_power_usage = 20
 	active_power_usage = 5000
 	req_access = list(access_robotics)
+	var/current_manufacturer
 	var/time_coeff = 1.5 //can be upgraded with research
 	var/resource_coeff = 1.5 //can be upgraded with research
 	var/list/resources = list(
@@ -143,6 +144,7 @@
 
 /obj/machinery/mecha_part_fabricator/New()
 	..()
+
 	component_parts = list()
 	component_parts += new /obj/item/weapon/circuitboard/mechfab(src)
 	component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)
@@ -164,6 +166,9 @@
 			break
 	*/
 	return
+
+/obj/machinery/mecha_part_fabricator/initialize()
+	current_manufacturer = basic_robolimb.company
 
 /obj/machinery/mecha_part_fabricator/RefreshParts()
 	var/T = 0
@@ -361,7 +366,11 @@
 	if( !(locate(part, src.contents)) || !(part.vars.Find("construction_time")) || !(part.vars.Find("construction_cost")) ) // these 3 are the current requirements for an object being buildable by the mech_fabricator
 		return
 
-	src.being_built = new part.type(src)
+	if(current_manufacturer)
+		src.being_built = new part.type(src, current_manufacturer)
+	else
+		src.being_built = new part.type(src, basic_robolimb.company)
+
 	src.desc = "It's building [src.being_built]."
 	src.remove_resources(part)
 	src.overlays += "fab-active"
@@ -562,7 +571,7 @@
 		switch(screen)
 			if("main")
 				left_part = output_available_resources()+"<hr>"
-				left_part += "<a href='?src=\ref[src];sync=1'>Sync with R&D servers</a><hr>"
+				left_part += "<a href='?src=\ref[src];sync=1'>Sync with R&D servers</a> | <a href='?src=\ref[src];set_manufacturer=1'>Set manufacturer</a> ([current_manufacturer])<hr>"
 				for(var/part_set in part_sets)
 					left_part += "<a href='?src=\ref[src];part_set=[part_set]'>[part_set]</a> - \[<a href='?src=\ref[src];partset_to_queue=[part_set]'>Add all parts to queue\]<br>"
 			if("parts")
@@ -623,6 +632,9 @@
 		return
 
 	var/datum/topic_input/filter = new /datum/topic_input(href,href_list)
+	if(href_list["set_manufacturer"])
+		var/choice = input(usr, "Which manufacturer do you wish to use for this fabricator?") as null|anything in all_robolimbs
+		if(choice) current_manufacturer = choice
 	if(href_list["part_set"])
 		var/tpart_set = filter.getStr("part_set")
 		if(tpart_set)

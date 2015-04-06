@@ -9,10 +9,12 @@
 	cell_type = /obj/item/weapon/cell/crap
 
 /obj/item/weapon/gun/energy/taser/mounted
+	name = "mounted taser gun"
 	self_recharge = 1
 	use_external_power = 1
 
 /obj/item/weapon/gun/energy/taser/mounted/cyborg
+	name = "taser gun"
 	cell_type = /obj/item/weapon/cell/secborg
 	recharge_time = 10 //Time it takes for shots to recharge (in ticks)
 
@@ -21,6 +23,7 @@
 	name = "stun revolver"
 	desc = "A high-tech revolver that fires stun cartridges. The stun cartridges can be recharged using a conventional energy weapon recharger."
 	icon_state = "stunrevolver"
+	item_state = "stunrevolver"
 	fire_sound = 'sound/weapons/Gunshot.ogg'
 	origin_tech = "combat=3;materials=3;powerstorage=2"
 	charge_cost = 125

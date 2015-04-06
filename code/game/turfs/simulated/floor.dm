@@ -456,7 +456,7 @@ turf/simulated/floor/proc/update_icon()
 	if(istype(C,/obj/item/weapon/light/bulb)) //only for light tiles
 		if(is_light_floor())
 			if(get_lightfloor_state())
-				user.drop_item(C)
+				user.remove_from_mob(C)
 				del(C)
 				set_lightfloor_state(0) //fixing it by bashing it with a light bulb, fun eh?
 				update_icon()

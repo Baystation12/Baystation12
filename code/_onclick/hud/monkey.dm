@@ -10,7 +10,7 @@
 	using.name = "act_intent"
 	using.set_dir(SOUTHWEST)
 	using.icon = ui_style
-	using.icon_state = (mymob.a_intent == "hurt" ? "harm" : mymob.a_intent)
+	using.icon_state = (mymob.a_intent == I_HURT ? I_HURT : mymob.a_intent)
 	using.screen_loc = ui_acti
 	using.layer = 20
 	src.adding += using
@@ -231,6 +231,10 @@
 			if (mymob.client.target_can_click)
 				mymob.item_use_icon.set_dir(1)
 			src.adding += mymob.item_use_icon
+			mymob.radio_use_icon = new /obj/screen/gun/radio(null)
+			if (mymob.client.target_can_radio)
+				mymob.radio_use_icon.set_dir(1)
+			src.adding += mymob.radio_use_icon
 			mymob.gun_move_icon = new /obj/screen/gun/move(null)
 			if (mymob.client.target_can_move)
 				mymob.gun_move_icon.set_dir(1)

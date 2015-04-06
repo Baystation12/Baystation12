@@ -370,7 +370,7 @@ datum
 						W.loc = M.loc
 						W.dropped(M)
 					var/mob/living/carbon/slime/new_mob = new /mob/living/carbon/slime(M.loc)
-					new_mob.a_intent = "hurt"
+					new_mob.a_intent = I_HURT
 					new_mob.universal_speak = 1
 					if(M.mind)
 						M.mind.transfer_to(new_mob)
@@ -670,7 +670,7 @@ datum
 								if(prob(50))
 									M.radiation += 50 // curing it that way may kill you instead
 									var/absorbed
-									var/datum/organ/internal/diona/nutrients/rad_organ = locate() in C.internal_organs
+									var/obj/item/organ/diona/nutrients/rad_organ = locate() in C.internal_organs
 									if(rad_organ && !rad_organ.is_broken())
 										absorbed = 1
 									if(!absorbed)
@@ -1284,7 +1284,7 @@ datum
 				M.eye_blind = max(M.eye_blind-5 , 0)
 				if(ishuman(M))
 					var/mob/living/carbon/human/H = M
-					var/datum/organ/internal/eyes/E = H.internal_organs_by_name["eyes"]
+					var/obj/item/organ/eyes/E = H.internal_organs_by_name["eyes"]
 					if(E && istype(E))
 						if(E.damage > 0)
 							E.damage = max(E.damage - 1, 0)
@@ -1306,7 +1306,7 @@ datum
 					var/mob/living/carbon/human/H = M
 
 					//Peridaxon heals only non-robotic organs
-					for(var/datum/organ/internal/I in H.internal_organs)
+					for(var/obj/item/organ/I in H.internal_organs)
 						if((I.damage > 0) && (I.robotic != 2))
 							I.damage = max(I.damage - 0.20, 0)
 				..()
@@ -1849,12 +1849,9 @@ datum
 					var/obj/effect/alien/weeds/alien_weeds = O
 					alien_weeds.health -= rand(15,35) // Kills alien weeds pretty fast
 					alien_weeds.healthcheck()
-				else if(istype(O,/obj/effect/plant)) //even a small amount is enough to kill it
-					del(O)
 				else if(istype(O,/obj/effect/plant))
-					if(prob(50))
-						var/obj/effect/plant/plant = O
-						plant.die_off()
+					var/obj/effect/plant/plant = O
+					plant.die_off()
 				else if(istype(O,/obj/machinery/portable_atmospherics/hydroponics))
 					var/obj/machinery/portable_atmospherics/hydroponics/tray = O
 
@@ -2057,7 +2054,7 @@ datum
 					if(!M.unacidable)
 						if(istype(M, /mob/living/carbon/human) && volume >= 10)
 							var/mob/living/carbon/human/H = M
-							var/datum/organ/external/affecting = H.get_organ("head")
+							var/obj/item/organ/external/affecting = H.get_organ("head")
 							if(affecting)
 								if(affecting.take_damage(4*toxpwr, 2*toxpwr))
 									H.UpdateDamageIcon()
@@ -3332,7 +3329,7 @@ datum
 					M:drowsyness  = max(M:drowsyness, 30)
 					if(ishuman(M))
 						var/mob/living/carbon/human/H = M
-						var/datum/organ/internal/liver/L = H.internal_organs_by_name["liver"]
+						var/obj/item/organ/liver/L = H.internal_organs_by_name["liver"]
 						if (!L)
 							H.adjustToxLoss(5)
 						else if(istype(L))
@@ -3654,13 +3651,13 @@ datum
 						if(prob(30)) M.adjustToxLoss(2)
 						if(prob(5)) if(ishuman(M))
 							var/mob/living/carbon/human/H = M
-							var/datum/organ/internal/heart/L = H.internal_organs_by_name["heart"]
+							var/obj/item/organ/heart/L = H.internal_organs_by_name["heart"]
 							if (L && istype(L))
 								L.take_damage(5, 0)
 					if (300 to INFINITY)
 						if(ishuman(M))
 							var/mob/living/carbon/human/H = M
-							var/datum/organ/internal/heart/L = H.internal_organs_by_name["heart"]
+							var/obj/item/organ/heart/L = H.internal_organs_by_name["heart"]
 							if (L && istype(L))
 								L.take_damage(100, 0)
 				holder.remove_reagent(src.id, FOOD_METABOLISM)

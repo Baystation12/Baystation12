@@ -406,7 +406,7 @@
 				if(type in diseases) // Make sure this is a disease
 					D = new type(0, null)
 			var/list/data = list("viruses"=list(D))
-			var/name = sanitizeSafe(input(usr,"Name:","Name the culture",D.name))
+			var/name = sanitizeSafe(input(usr,"Name:","Name the culture",D.name), MAX_NAME_LEN)
 			if(!name || name == " ") name = D.name
 			B.name = "[name] culture bottle"
 			B.desc = "A small bottle. Contains [D.agent] culture in synthblood medium."
@@ -655,7 +655,7 @@
 		user << "\The [O] is not suitable for blending."
 		return 1
 
-	user.before_take_item(O)
+	user.remove_from_mob(O)
 	O.loc = src
 	holdingitems += O
 	src.updateUsrDialog()
@@ -779,6 +779,9 @@
 			continue
 
 		var/remaining_volume = beaker.reagents.maximum_volume - beaker.reagents.total_volume
+		if(remaining_volume <= 0)
+			break
+
 		if(sheet_reagents[O.type])
 			var/obj/item/stack/stack = O
 			if(istype(stack))
@@ -788,10 +791,11 @@
 					beaker.reagents.add_reagent(sheet_reagents[stack.type], (amount_to_take*REAGENTS_PER_SHEET))
 					continue
 
-		O.reagents.trans_to(beaker, min(O.reagents.total_volume, remaining_volume))
-		if(O.reagents.total_volume == 0)
-			remove_object(O)
-		if (beaker.reagents.total_volume >= beaker.reagents.maximum_volume)
-			break
+		if(O.reagents)
+			O.reagents.trans_to(beaker, min(O.reagents.total_volume, remaining_volume))
+			if(O.reagents.total_volume == 0)
+				remove_object(O)
+			if (beaker.reagents.total_volume >= beaker.reagents.maximum_volume)
+				break
 
 #undef REAGENTS_PER_SHEET
