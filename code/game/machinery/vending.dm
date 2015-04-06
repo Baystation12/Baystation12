@@ -186,6 +186,22 @@
 			var/obj/item/weapon/card/id/C = W
 			paid = pay_with_card(C)
 			handled = 1
+		else if (istype(W, /obj/item/device/pda))
+			var/obj/item/device/pda/C = W
+			if(C.id)
+				paid = pay_with_card(C.id,"\improper PDA")
+				handled = 1
+			else
+				user << "There is no ID in [C]"
+				return
+		else if (istype(W, /obj/item/weapon/storage/wallet))
+			var/obj/item/weapon/storage/wallet/C = W
+			if(C.front_id)
+				paid = pay_with_card(C.front_id,"wallet")
+				handled = 1
+			else
+				user << "There is no ID in [C]"
+				return
 		else if (istype(W, /obj/item/weapon/spacecash/ewallet))
 			var/obj/item/weapon/spacecash/ewallet/C = W
 			paid = pay_with_ewallet(C)
@@ -202,7 +218,10 @@
 			nanomanager.update_uis(src)
 			return // don't smack that machine with your 2 thalers
 
-	if (istype(W, /obj/item/weapon/card/emag))
+	if (istype(W, /obj/item/weapon/card/id) || istype(W, /obj/item/device/pda) || istype(W, /obj/item/weapon/storage/wallet) || istype(W, /obj/item/weapon/spacecash/ewallet) || istype(W, /obj/item/weapon/spacecash))
+		attack_hand(user)
+		return
+	else if (istype(W, /obj/item/weapon/card/emag))
 		src.emagged = 1
 		user << "You short out the product lock on [src]"
 		return
@@ -316,8 +335,11 @@
  * Takes payment for whatever is the currently_vending item. Returns 1 if
  * successful, 0 if failed
  */
-/obj/machinery/vending/proc/pay_with_card(var/obj/item/weapon/card/id/I)
-	visible_message("<span class='info'>[usr] swipes a card through [src].</span>")
+/obj/machinery/vending/proc/pay_with_card(var/obj/item/weapon/card/id/I, var/container_name = null)
+	if(container_name)
+		visible_message("<span class='info'>[usr] swipes \an [container_name] through [src].</span>")
+	else
+		visible_message("<span class='info'>[usr] swipes a card through [src].</span>")
 	var/datum/money_account/customer_account = get_account(I.associated_account_number)
 	if (!customer_account)
 		src.status_message = "Error: Unable to access account. Please contact technical support if problem persists."
