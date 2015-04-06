@@ -383,7 +383,6 @@
 		user << "You are too far away to read the gauge."
 	if(welded)
 		user << "It seems welded shut."
-	..()
 
 /obj/machinery/atmospherics/unary/vent_pump/power_change()
 	var/old_stat = stat

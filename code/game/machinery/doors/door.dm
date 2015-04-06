@@ -143,7 +143,7 @@
 		return
 
 	// Emitter Blasts - these will eventually completely destroy the door, given enough time.
-	if (Proj.damage > 90) 
+	if (Proj.damage > 90)
 		destroy_hits--
 		if (destroy_hits <= 0)
 			visible_message("\red <B>\The [src.name] disintegrates!</B>")
@@ -291,6 +291,17 @@
 		visible_message("\The [src] shows signs of damage!" )
 	update_icon()
 	return
+
+
+/obj/machinery/door/examine(mob/user)
+	..()
+	if(src.health < src.maxhealth / 4)
+		user << "\The [src] looks like it's about to break!"
+	else if(src.health < src.maxhealth / 2)
+		user << "\The [src] looks seriously damaged!"
+	else if(src.health < src.maxhealth * 3/4)
+		user << "\The [src] shows signs of damage!"
+
 
 /obj/machinery/door/proc/set_broken()
 	stat |= BROKEN
