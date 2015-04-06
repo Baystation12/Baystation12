@@ -863,11 +863,11 @@
 	var/list/creatures = list()
 	for(var/mob/living/carbon/h in world)
 		creatures += h
-	var/mob/target = input ("Who do you want to project your mind to ?") as null|anything in creatures
+	var/mob/target = input("Who do you want to project your mind to ?") as null|anything in creatures
 	if (isnull(target))
 		return
 
-	var/say = input ("What do you wish to say")
+	var/say = sanitize(input("What do you wish to say"))
 	if(mRemotetalk in target.mutations)
 		target.show_message("\blue You hear [src.real_name]'s voice: [say]")
 	else

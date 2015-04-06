@@ -255,7 +255,7 @@
 #define slot_legs        21
 #define slot_tie         22
 
-// Mob sprite sheets. These need to be strings as numbers 
+// Mob sprite sheets. These need to be strings as numbers
 // cannot be used as associative list keys.
 #define icon_l_hand		"slot_l_hand"
 #define icon_r_hand		"slot_r_hand"
@@ -756,6 +756,7 @@ var/list/be_special_flags = list(
 #define MAX_MESSAGE_LEN       1024
 #define MAX_PAPER_MESSAGE_LEN 3072
 #define MAX_BOOK_MESSAGE_LEN  9216
+#define MAX_LNAME_LEN         64
 #define MAX_NAME_LEN          26
 
 // Event defines.

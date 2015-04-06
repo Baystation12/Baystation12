@@ -167,7 +167,7 @@
 			if("change_id")
 				var/attempt_code = text2num(input("Re-enter the current EFTPOS access code", "Confirm EFTPOS code"))
 				if(attempt_code == access_code)
-					eftpos_name = sanitize(input("Enter a new terminal ID for this device", "Enter new EFTPOS ID")) + " EFTPOS scanner"
+					eftpos_name = sanitize(input("Enter a new terminal ID for this device", "Enter new EFTPOS ID"), MAX_NAME_LEN) + " EFTPOS scanner"
 					print_reference()
 				else
 					usr << "\icon[src]<span class='warning'>Incorrect code entered.</span>"
