@@ -20,6 +20,7 @@
 	var/fire_delay = 6
 	var/fire_sound = 'sound/weapons/Gunshot.ogg'
 	var/fire_sound_text = "gunshot"
+	var/muzzle_flash = 3
 	var/recoil = 0		//screen shake
 	var/silenced = 0
 	var/accuracy = 0 //accuracy is measured in tiles. +1 accuracy means that everything is effectively one tile closer for the purpose of miss chance, -1 means the opposite. launchers are not supported, at the moment.
@@ -198,6 +199,11 @@
 			"<span class='warning'>You fire [src][reflex ? "by reflex":""]!</span>",
 			"You hear a [fire_sound_text]!"
 		)
+		if(muzzle_flash)
+			var/turf/T_user = get_turf(user)
+			var/turf/T_target = get_turf(target)
+			var/obj/effect/effect/smoke/illumination/I = new /obj/effect/effect/smoke/illumination(get_step(T_user, get_dir(T_user,T_target)), brightness=muzzle_flash+(times_fired-1)*muzzle_flash/2, lifetime=max(8,times_fired*burst_delay+3))
+			I.alpha = 0
 
 	for (var/times_played=0 ; times_played<times_fired ; times_played++)
 		spawn(times_played*burst_delay)
