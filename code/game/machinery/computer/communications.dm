@@ -48,9 +48,9 @@
 /obj/machinery/computer/communications/Topic(href, href_list)
 	if(..())
 		return 1
-	if (src.z > 1)
-		usr << "\red <b>Unable to establish a connection</b>: \black You're too far away from the station!"
-		return
+	//if (src.z > 1)
+	//	usr << "\red <b>Unable to establish a connection</b>: \black You're too far away from the station!"
+	//	return
 	usr.set_machine(src)
 
 	if(!href_list["operation"])
@@ -185,13 +185,16 @@
 		if("MessageCentcomm")
 			if(src.authenticated==1)
 				if(centcomm_message_cooldown)
-					usr << "\red Arrays recycling.  Please stand by."
+					usr << "<span class='warning'>Arrays recycling. Please stand by.</span>"
+					return
+				if(!is_relay_online())//Contact Centcom has a check, Syndie doesn't to allow for Traitor funs.
+					usr <<"<span class='warning'>No Emergency Bluespace Relay detected. Unable to transmit message.</span>"
 					return
 				var/input = sanitize(input("Please choose a message to transmit to Centcomm via quantum entanglement.  Please be aware that this process is very expensive, and abuse will lead to... termination.  Transmission does not guarantee a response. There is a 30 second delay before you may send another message, be clear, full and concise.", "To abort, send an empty message.", ""))
 				if(!input || !(usr in view(1,src)))
 					return
 				Centcomm_announce(input, usr)
-				usr << "\blue Message transmitted."
+				usr << "<span class='notice'>blue Message transmitted.</span>"
 				log_say("[key_name(usr)] has made an IA Centcomm announcement: [input]")
 				centcomm_message_cooldown = 1
 				spawn(300)//30 second cooldown
@@ -202,13 +205,13 @@
 		if("MessageSyndicate")
 			if((src.authenticated==1) && (src.emagged))
 				if(centcomm_message_cooldown)
-					usr << "\red Arrays recycling.  Please stand by."
+					usr << "<span class='warning'>Arrays recycling. Please stand by.</span>"
 					return
 				var/input = sanitize(input(usr, "Please choose a message to transmit to \[ABNORMAL ROUTING CORDINATES\] via quantum entanglement.  Please be aware that this process is very expensive, and abuse will lead to... termination. Transmission does not guarantee a response. There is a 30 second delay before you may send another message, be clear, full and concise.", "To abort, send an empty message.", ""))
 				if(!input || !(usr in view(1,src)))
 					return
 				Syndicate_announce(input, usr)
-				usr << "\blue Message transmitted."
+				usr << "<span class='notice'>blue Message transmitted.</span>"
 				log_say("[key_name(usr)] has made an illegal announcement: [input]")
 				centcomm_message_cooldown = 1
 				spawn(300)//10 minute cooldown
@@ -279,9 +282,9 @@
 /obj/machinery/computer/communications/attack_hand(var/mob/user as mob)
 	if(..())
 		return
-	if (src.z > 6)
-		user << "\red <b>Unable to establish a connection</b>: \black You're too far away from the station!"
-		return
+	//if (src.z > 6)
+	//	user << "\red <b>Unable to establish a connection</b>: \black You're too far away from the station!"
+	//	return
 
 	user.set_machine(src)
 	var/dat = "<head><title>Communications Console</title></head><body>"
@@ -518,6 +521,13 @@
 		log_game("[key_name(user)] has recalled the shuttle.")
 		message_admins("[key_name_admin(user)] has recalled the shuttle.", 1)
 	return
+
+
+/proc/is_relay_online()
+    for(var/obj/machinery/bluespacerelay/M in world)
+        if(M.stat == 0)
+            return 1
+    return 0
 
 /obj/machinery/computer/communications/proc/post_status(var/command, var/data1, var/data2)
 

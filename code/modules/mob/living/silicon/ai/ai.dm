@@ -388,6 +388,9 @@ var/list/ai_verbs_default = list(
 
 	if(check_unable(AI_CHECK_WIRELESS))
 		return
+	if(!is_relay_online())
+		usr <<"<span class='warning'>No Emergency Bluespace Relay detected. Unable to transmit message.</span>"
+		return
 	if(emergency_message_cooldown)
 		usr << "<span class='warning'>Arrays recycling. Please stand by.</span>"
 		return
