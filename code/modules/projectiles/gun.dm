@@ -158,10 +158,7 @@
 		handle_post_fire(user, target, pointblank, reflex, times_fired)
 
 		update_icon()
-		if(user.hand)
-			user.update_inv_l_hand()
-		else
-			user.update_inv_r_hand()
+		update_held_icon()
 
 		user.next_move = world.time + 2 + times_fired * burst_delay
 
@@ -194,11 +191,18 @@
 	if(silenced)
 		fire_volume = 10
 	else
-		user.visible_message(
-			"<span class='danger'>[user][burst_on ? " burst-fires ":" fires "][src][pointblank ? "  point blank at [target]":""][reflex ? " by reflex":""]!</span>",
-			"<span class='warning'>You fire [src][reflex ? "by reflex":""]!</span>",
-			"You hear a [fire_sound_text]!"
-		)
+		if(reflex)
+			user.visible_message(
+				"<span class='reflex_shoot'><b>\The [user][burst_on ? " burst-fires ":" fires "]\the [src][pointblank ? " point blank at \the [target]":""] by reflex!<b></span>",
+				"<span class='reflex_shoot'>You fire \the [src] by reflex!</span>",
+				"You hear a [fire_sound_text]!"
+			)
+		else
+			user.visible_message(
+				"<span class='danger'>\The [user][burst_on ? " burst-fires ":" fires "]\the [src][pointblank ? " point blank at \the [target]":""]!</span>",
+				"<span class='warning'>You fire \the [src]!</span>",
+				"You hear a [fire_sound_text]!"
+			)
 		if(muzzle_flash)
 			var/turf/T_user = get_turf(user)
 			var/turf/T_target = get_turf(target)
