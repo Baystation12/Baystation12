@@ -813,7 +813,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 			name = "[R.company] [initial(name)]"
 			desc = "[R.desc]"
 
-	dislocated = -1
+	dislocated = -1 //TODO, make robotic limbs a separate type, remove snowflake
 	cannot_break = 1
 	get_icon()
 	for (var/obj/item/organ/external/T in children)

@@ -214,25 +214,18 @@
 				w_uniform.add_fingerprint(M)
 			var/obj/item/organ/external/affecting = get_organ(ran_zone(M.zone_sel.selecting))
 
-			if(istype(r_hand,/obj/item/weapon/gun) || istype(l_hand,/obj/item/weapon/gun))
-				var/obj/item/weapon/gun/W = null
-				var/chance = 0
+			var/list/holding = list(get_active_hand() = 40, get_inactive_hand = 20)
 
-				if (istype(l_hand,/obj/item/weapon/gun))
-					W = l_hand
-					chance = hand ? 40 : 20
-
-				if (istype(r_hand,/obj/item/weapon/gun))
-					W = r_hand
-					chance = !hand ? 40 : 20
-
-				if (prob(chance))
-					visible_message("<span class='danger'>[src]'s [W] goes off during struggle!</span>")
+			//See if they have any guns that might go off
+			for(var/obj/item/weapon/gun/W in holding)
+				if(W && prob(holding[W]))
 					var/list/turfs = list()
 					for(var/turf/T in view())
 						turfs += T
-					var/turf/target = pick(turfs)
-					return W.afterattack(target,src)
+					if(turfs.len)
+						var/turf/target = pick(turfs)
+						visible_message("<span class='danger'>[src]'s [W] goes off during the struggle!</span>")
+						return W.afterattack(target,src)
 
 			var/randn = rand(1, 100)
 			if(!(species.flags & NO_SLIP) && randn <= 25)
@@ -245,38 +238,19 @@
 					visible_message("<span class='warning'>[M] attempted to push [src]!</span>")
 				return
 
-			var/talked = 0	// BubbleWrap
-
 			if(randn <= 60)
-				//BubbleWrap: Disarming breaks a pull
-				if(pulling)
-					visible_message("\red <b>[M] has broken [src]'s grip on [pulling]!</B>")
-					talked = 1
-					stop_pulling()
+				//See about breaking grips or pulls
+				if(break_all_grabs(M))
+					playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
+					return
 
-				//BubbleWrap: Disarming also breaks a grab - this will also stop someone being choked, won't it?
-				if(istype(l_hand, /obj/item/weapon/grab))
-					var/obj/item/weapon/grab/lgrab = l_hand
-					if(lgrab.affecting)
-						visible_message("\red <b>[M] has broken [src]'s grip on [lgrab.affecting]!</B>")
-						talked = 1
-					spawn(1)
-						del(lgrab)
-				if(istype(r_hand, /obj/item/weapon/grab))
-					var/obj/item/weapon/grab/rgrab = r_hand
-					if(rgrab.affecting)
-						visible_message("\red <b>[M] has broken [src]'s grip on [rgrab.affecting]!</B>")
-						talked = 1
-					spawn(1)
-						del(rgrab)
-				//End BubbleWrap
-
-				if(!talked)	//BubbleWrap
-					drop_item()
-					visible_message("\red <B>[M] has disarmed [src]!</B>")
-				playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
-				return
-
+				//Actually disarm them
+				for(var/obj/item/I in holding)
+					if(I)
+						drop_from_inventory(I)
+						visible_message("<span class='danger'>[M] has disarmed [src]!</span>")
+						playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
+						return
 
 			playsound(loc, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
 			visible_message("\red <B>[M] attempted to disarm [src]!</B>")
@@ -315,3 +289,27 @@
 		dislocation_str = "[src]'s [organ.joint] [pick("gives way","caves in","crumbles","collapses")] with a grisly crunch!"
 		organ.dislocate()
 	return dislocation_str
+
+//Breaks all grips and pulls that the mob currently has.
+/mob/living/carbon/human/proc/break_all_grabs(mob/living/carbon/user)
+	var/success = 0
+	if(pulling)
+		visible_message("\red <b>[user] has broken [src]'s grip on [pulling]!</B>")
+		success = 1
+		stop_pulling()
+
+	if(istype(l_hand, /obj/item/weapon/grab))
+		var/obj/item/weapon/grab/lgrab = l_hand
+		if(lgrab.affecting)
+			visible_message("\red <b>[user] has broken [src]'s grip on [lgrab.affecting]!</B>")
+			success = 1
+		spawn(1)
+			del(lgrab)
+	if(istype(r_hand, /obj/item/weapon/grab))
+		var/obj/item/weapon/grab/rgrab = r_hand
+		if(rgrab.affecting)
+			visible_message("\red <b>[user] has broken [src]'s grip on [rgrab.affecting]!</B>")
+			success = 1
+		spawn(1)
+			del(rgrab)
+	return success
