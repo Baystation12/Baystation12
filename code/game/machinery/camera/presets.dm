@@ -1,4 +1,11 @@
 // PRESETS
+var/global/list/station_networks = list("SS13","Engineering Outpost","MINE","Research Outpost","Prison","Security")
+
+/obj/machinery/camera/network/prison
+	network = list("Prison")
+
+/obj/machinery/camera/network/security
+	network = list("Security")
 
 // EMP
 
@@ -32,13 +39,16 @@
 // AUTONAME
 
 /obj/machinery/camera/autoname/engineering_outpost
-	network = list("SS13", "Engineering Outpost")
+	network = list("Engineering Outpost")
 
 /obj/machinery/camera/autoname/mining_outpost
-	network = list("SS13", "MINE")
+	network = list("MINE")
 
 /obj/machinery/camera/autoname/research_outpost
-	network = list("SS13", "Research Outpost")
+	network = list("Research Outpost")
+
+/obj/machinery/camera/autoname/security
+	network = list("Security")
 
 /obj/machinery/camera/autoname
 	var/number = 0 //camera number in area

@@ -478,41 +478,39 @@ var/list/ai_verbs_default = list(
 //Replaces /mob/living/silicon/ai/verb/change_network() in ai.dm & camera.dm
 //Adds in /mob/living/silicon/ai/proc/ai_network_change() instead
 //Addition by Mord_Sith to define AI's network change ability
-/mob/living/silicon/ai/proc/ai_network_change()
-	set category = "AI Commands"
-	set name = "Jump To Network"
-	unset_machine()
-	var/cameralist[0]
-
+/mob/living/silicon/ai/proc/get_camera_network_list()
 	if(check_unable())
 		return
 
-	var/mob/living/silicon/ai/U = usr
-
+	var/list/cameralist = new()
 	for (var/obj/machinery/camera/C in cameranet.cameras)
 		if(!C.can_use())
 			continue
-
 		var/list/tempnetwork = difflist(C.network,restricted_camera_networks,1)
-		if(tempnetwork.len)
-			for(var/i in tempnetwork)
-				cameralist[i] = i
-	var/old_network = network
-	network = input(U, "Which network would you like to view?") as null|anything in cameralist
+		for(var/i in tempnetwork)
+			cameralist[i] = i
 
-	if(!U.eyeobj)
-		U.view_core()
+	cameralist = sortAssoc(cameralist)
+	return cameralist
+
+/mob/living/silicon/ai/proc/ai_network_change(var/network in get_camera_network_list())
+	set category = "AI Commands"
+	set name = "Jump To Network"
+	unset_machine()
+
+	if(!network)
 		return
 
-	if(isnull(network))
-		network = old_network // If nothing is selected
-	else
-		for(var/obj/machinery/camera/C in cameranet.cameras)
-			if(!C.can_use())
-				continue
-			if(network in C.network)
-				U.eyeobj.setLoc(get_turf(C))
-				break
+	if(!eyeobj)
+		view_core()
+		return
+
+	for(var/obj/machinery/camera/C in cameranet.cameras)
+		if(!C.can_use())
+			continue
+		if(network in C.network)
+			eyeobj.setLoc(get_turf(C))
+			break
 	src << "\blue Switched to [network] camera network."
 //End of code by Mord_Sith
 

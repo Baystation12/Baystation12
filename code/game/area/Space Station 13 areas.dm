@@ -1362,35 +1362,35 @@ area/space/atmosalert()
 	icon_state = "security"
 
 /area/security/lobby
-	name = "\improper Security lobby"
+	name = "\improper Security Lobby"
 	icon_state = "security"
 
 /area/security/brig
-	name = "\improper Brig"
+	name = "\improper Security - Brig"
 	icon_state = "brig"
 
 /area/security/prison
-	name = "\improper Prison Wing"
+	name = "\improper Security - Prison Wing"
 	icon_state = "sec_prison"
 
 /area/security/warden
-	name = "\improper Warden"
+	name = "\improper Security - Warden's Office"
 	icon_state = "Warden"
 
 /area/security/armoury
-	name = "\improper Armory"
+	name = "\improper Security - Armory"
 	icon_state = "Warden"
 
 /area/security/detectives_office
-	name = "\improper Detective's Office"
+	name = "\improper Security - Forensic Office"
 	icon_state = "detective"
 
 /area/security/range
-	name = "\improper Firing Range"
+	name = "\improper Security - Firing Range"
 	icon_state = "firingrange"
 
 /area/security/tactical
-	name = "\improper Tactical Equipment"
+	name = "\improper Security - Tactical Equipment"
 	icon_state = "Tactical"
 
 
