@@ -179,29 +179,16 @@
 	return
 
 /obj/machinery/vending/attackby(obj/item/weapon/W as obj, mob/user as mob)
+
+	var/obj/item/weapon/card/id/I = W.GetID()
+
 	if (currently_vending && vendor_account && !vendor_account.suspended)
 		var/paid = 0
 		var/handled = 0
-		if(istype(W, /obj/item/weapon/card/id))
-			var/obj/item/weapon/card/id/C = W
-			paid = pay_with_card(C)
+
+		if (I) //for IDs and PDAs and wallets with IDs
+			paid = pay_with_card(I,W)
 			handled = 1
-		else if (istype(W, /obj/item/device/pda))
-			var/obj/item/device/pda/C = W
-			if(C.id)
-				paid = pay_with_card(C.id,"\improper PDA")
-				handled = 1
-			else
-				user << "There is no ID in [C]"
-				return
-		else if (istype(W, /obj/item/weapon/storage/wallet))
-			var/obj/item/weapon/storage/wallet/C = W
-			if(C.front_id)
-				paid = pay_with_card(C.front_id,"wallet")
-				handled = 1
-			else
-				user << "There is no ID in [C]"
-				return
 		else if (istype(W, /obj/item/weapon/spacecash/ewallet))
 			var/obj/item/weapon/spacecash/ewallet/C = W
 			paid = pay_with_ewallet(C)
@@ -218,7 +205,7 @@
 			nanomanager.update_uis(src)
 			return // don't smack that machine with your 2 thalers
 
-	if (istype(W, /obj/item/weapon/card/id) || istype(W, /obj/item/device/pda) || istype(W, /obj/item/weapon/storage/wallet) || istype(W, /obj/item/weapon/spacecash/ewallet) || istype(W, /obj/item/weapon/spacecash))
+	if (I || istype(W, /obj/item/weapon/spacecash))
 		attack_hand(user)
 		return
 	else if (istype(W, /obj/item/weapon/card/emag))
@@ -319,7 +306,7 @@
  * successful, 0 if failed.
  */
 /obj/machinery/vending/proc/pay_with_ewallet(var/obj/item/weapon/spacecash/ewallet/wallet)
-	visible_message("<span class='info'>[usr] swipes a card through [src].</span>")
+	visible_message("<span class='info'>[usr] swipes [wallet] through [src].</span>")
 	if(currently_vending.price > wallet.worth)
 		src.status_message = "Insufficient funds on chargecard."
 		src.status_error = 1
@@ -335,11 +322,11 @@
  * Takes payment for whatever is the currently_vending item. Returns 1 if
  * successful, 0 if failed
  */
-/obj/machinery/vending/proc/pay_with_card(var/obj/item/weapon/card/id/I, var/container_name = null)
-	if(container_name)
-		visible_message("<span class='info'>[usr] swipes \an [container_name] through [src].</span>")
+/obj/machinery/vending/proc/pay_with_card(var/obj/item/weapon/card/id/I, var/obj/item/ID_container)
+	if(ID_container)
+		visible_message("<span class='info'>[usr] swipes [ID_container] through [src].</span>")
 	else
-		visible_message("<span class='info'>[usr] swipes a card through [src].</span>")
+		visible_message("<span class='info'>[usr] swipes [I] through [src].</span>")
 	var/datum/money_account/customer_account = get_account(I.associated_account_number)
 	if (!customer_account)
 		src.status_message = "Error: Unable to access account. Please contact technical support if problem persists."
