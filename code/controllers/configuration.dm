@@ -43,9 +43,7 @@
 	var/continous_rounds = 0			// Gamemodes which end instantly will instead keep on going until the round ends by escape shuttle or nuke.
 	var/allow_Metadata = 0				// Metadata is supported.
 	var/popup_admin_pm = 0				//adminPMs to non-admins show in a pop-up 'reply' window when set to 1.
-	var/Ticklag = 0.9
-	var/Tickcomp = 0
-	var/socket_talk	= 0					// use socket_talk to communicate with other processes
+	var/Ticklag = 0.5
 	var/list/resource_urls = null
 	var/antag_hud_allowed = 0			// Ghosts can turn on Antagovision to see a HUD of who is the bad guys this round.
 	var/antag_hud_restricted = 0                    // Ghosts that turn on Antagovision cannot rejoin the round.
@@ -150,12 +148,6 @@
 
 	var/enter_allowed = 1
 
-	var/use_irc_bot = 0
-	var/irc_bot_host = ""
-	var/main_irc = ""
-	var/admin_irc = ""
-	var/python_path = "" //Path to the python executable.  Defaults to "python" on windows and "/usr/bin/env python2" on unix
-	var/use_lib_nudge = 0 //Use the C library nudge instead of the python nudge.
 	var/use_overmap = 0
 
 	var/list/station_levels = list(1)				// Defines which Z-levels the station exists on.
@@ -470,9 +462,6 @@
 				if("allow_holidays")
 					Holiday = 1
 
-				if("use_irc_bot")
-					use_irc_bot = 1
-
 				if("ticklag")
 					Ticklag = text2num(value)
 
@@ -480,12 +469,6 @@
 					config.antag_hud_allowed = 1
 				if("antag_hud_restricted")
 					config.antag_hud_restricted = 1
-
-				if("socket_talk")
-					socket_talk = text2num(value)
-
-				if("tickcomp")
-					Tickcomp = 1
 
 				if("humans_need_surnames")
 					humans_need_surnames = 1
@@ -523,22 +506,6 @@
 
 				if("comms_password")
 					config.comms_password = value
-
-				if("irc_bot_host")
-					config.irc_bot_host = value
-
-				if("main_irc")
-					config.main_irc = value
-
-				if("admin_irc")
-					config.admin_irc = value
-
-				if("python_path")
-					if(value)
-						config.python_path = value
-
-				if("use_lib_nudge")
-					config.use_lib_nudge = 1
 
 				if("allow_cult_ghostwriter")
 					config.cult_ghostwriter = 1
@@ -771,11 +738,3 @@
 			runnable_modes[M] = probabilities[M.config_tag]
 			//world << "DEBUG: runnable_mode\[[runnable_modes.len]\] = [M.config_tag]"
 	return runnable_modes
-
-/datum/configuration/proc/post_load()
-	//apply a default value to config.python_path, if needed
-	if (!config.python_path)
-		if(world.system_type == UNIX)
-			config.python_path = "/usr/bin/env python2"
-		else //probably windows, if not this should work anyway
-			config.python_path = "python"
