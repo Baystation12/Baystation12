@@ -251,6 +251,11 @@
 						visible_message("<span class='danger'>[M] has disarmed [src]!</span>")
 						playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 						return
+			
+			//if M (and only M) has a grab on src, start dislocating limbs
+			if(grab_joint(M))
+				playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
+				return
 
 			playsound(loc, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
 			visible_message("\red <B>[M] attempted to disarm [src]!</B>")
@@ -276,7 +281,9 @@
 	return 1
 
 /mob/living/carbon/human/proc/attack_joint(var/obj/item/W, var/mob/living/user, var/def_zone)
-	var/target_zone = def_zone? check_zone(def_zone) : get_zone_with_miss_chance(user.zone_sel.selecting, src)
+	if(!def_zone) def_zone = user.zone_sel.selecting
+	var/target_zone = get_zone_with_miss_chance(check_zone(def_zone), src)
+
 	if(user == src) // Attacking yourself can't miss
 		target_zone = user.zone_sel.selecting
 	if(!target_zone)
@@ -286,29 +293,55 @@
 		return null
 	var/dislocation_str
 	if(prob(W.force))
-		dislocation_str = "[src]'s [organ.joint] [pick("gives way","caves in","crumbles","collapses")] with a grisly crunch!"
+		dislocation_str = "[src]'s [organ.joint] [pick("gives way","caves in","crumbles","collapses")]!"
 		organ.dislocate()
 	return dislocation_str
+
+//Used to attack a joint through grabbing
+/mob/living/carbon/human/proc/grab_joint(var/mob/living/user, var/def_zone)
+	var/has_grab = 0
+	for(var/obj/item/weapon/grab/G in list(user.l_hand, user.r_hand))
+		if(G.affecting == src && G.state == GRAB_NECK)
+			has_grab = 1
+			break
+	
+	if(!has_grab)
+		return 0
+	
+	if(!def_zone) def_zone = user.zone_sel.selecting
+	var/target_zone = check_zone(def_zone)
+	if(!target_zone)
+		return 0
+	var/obj/item/organ/external/organ = get_organ(check_zone(target_zone))
+	if(!organ || organ.is_dislocated() || organ.dislocated == -1)
+		return 0
+	
+	user.visible_message("<span class='warning'>[user] begins to dislocate [src]'s [organ.joint]!</span>")
+	if(do_after(user, 100))
+		organ.dislocate()
+		src.visible_message("<span class='danger'>[src]'s [organ.joint] [pick("gives way","caves in","crumbles","collapses")]!</span>")
+		return 1
+	return 0
 
 //Breaks all grips and pulls that the mob currently has.
 /mob/living/carbon/human/proc/break_all_grabs(mob/living/carbon/user)
 	var/success = 0
 	if(pulling)
-		visible_message("\red <b>[user] has broken [src]'s grip on [pulling]!</B>")
+		visible_message("<span class='danger'>[user] has broken [src]'s grip on [pulling]!</span>")
 		success = 1
 		stop_pulling()
 
 	if(istype(l_hand, /obj/item/weapon/grab))
 		var/obj/item/weapon/grab/lgrab = l_hand
 		if(lgrab.affecting)
-			visible_message("\red <b>[user] has broken [src]'s grip on [lgrab.affecting]!</B>")
+			visible_message("<span class='danger'>[user] has broken [src]'s grip on [lgrab.affecting]!</span>")
 			success = 1
 		spawn(1)
 			del(lgrab)
 	if(istype(r_hand, /obj/item/weapon/grab))
 		var/obj/item/weapon/grab/rgrab = r_hand
 		if(rgrab.affecting)
-			visible_message("\red <b>[user] has broken [src]'s grip on [rgrab.affecting]!</B>")
+			visible_message("<span class='danger'>[user] has broken [src]'s grip on [rgrab.affecting]!</span>")
 			success = 1
 		spawn(1)
 			del(rgrab)
