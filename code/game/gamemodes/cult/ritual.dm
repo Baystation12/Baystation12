@@ -458,6 +458,8 @@ var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", 
 			user << "\red You slice open one of your fingers and begin drawing a rune on the floor whilst chanting the ritual that binds your life essence with the dark arcane energies flowing through the surrounding world."
 			user.take_overall_damage((rand(9)+1)/10) // 0.1 to 1.0 damage
 			if(do_after(user, 50))
+				var/area/A = get_area(user)
+				log_and_message_admins("created \an [chosen_rune] rune at \the [A.name] - [user.loc.x]-[user.loc.y]-[user.loc.z].")
 				if(usr.get_active_hand() != src)
 					return
 				var/mob/living/carbon/human/H = user
@@ -515,6 +517,8 @@ var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", 
 				var/mob/living/carbon/human/H = user
 				R.blood_DNA = list()
 				R.blood_DNA[H.dna.unique_enzymes] = H.dna.b_type
+			var/area/A = get_area(user)
+			log_and_message_admins("created \an [r] rune at \the [A.name] - [user.loc.x]-[user.loc.y]-[user.loc.z].")
 			switch(r)
 				if("teleport")
 					var/list/words = list("ire", "ego", "nahlizet", "certum", "veri", "jatkaa", "balaq", "mgar", "karazet", "geeri")
