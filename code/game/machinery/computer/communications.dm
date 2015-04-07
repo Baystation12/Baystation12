@@ -48,9 +48,7 @@
 /obj/machinery/computer/communications/Topic(href, href_list)
 	if(..())
 		return 1
-	//if (src.z > 1)
-	//	usr << "\red <b>Unable to establish a connection</b>: \black You're too far away from the station!"
-	//	return
+
 	usr.set_machine(src)
 
 	if(!href_list["operation"])
@@ -194,7 +192,7 @@
 				if(!input || !(usr in view(1,src)))
 					return
 				Centcomm_announce(input, usr)
-				usr << "<span class='notice'>blue Message transmitted.</span>"
+				usr << "<span class='notice'>Message transmitted.</span>"
 				log_say("[key_name(usr)] has made an IA Centcomm announcement: [input]")
 				centcomm_message_cooldown = 1
 				spawn(300)//30 second cooldown
@@ -211,7 +209,7 @@
 				if(!input || !(usr in view(1,src)))
 					return
 				Syndicate_announce(input, usr)
-				usr << "<span class='notice'>blue Message transmitted.</span>"
+				usr << "<span class='notice'>Message transmitted.</span>"
 				log_say("[key_name(usr)] has made an illegal announcement: [input]")
 				centcomm_message_cooldown = 1
 				spawn(300)//10 minute cooldown
@@ -282,9 +280,6 @@
 /obj/machinery/computer/communications/attack_hand(var/mob/user as mob)
 	if(..())
 		return
-	//if (src.z > 6)
-	//	user << "\red <b>Unable to establish a connection</b>: \black You're too far away from the station!"
-	//	return
 
 	user.set_machine(src)
 	var/dat = "<head><title>Communications Console</title></head><body>"
