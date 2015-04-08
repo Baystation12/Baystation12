@@ -100,9 +100,9 @@
 			var/hit_zone = H.zone_sel.selecting
 			var/obj/item/organ/external/affecting = get_organ(hit_zone)
 
-			if(!affecting || affecting.status & ORGAN_DESTROYED)
+			if(!affecting || affecting.is_stump() || (affecting.status & ORGAN_DESTROYED))
 				M << "<span class='danger'>They are missing that limb!</span>"
-				return
+				return 1
 
 			switch(src.a_intent)
 				if(I_HELP)

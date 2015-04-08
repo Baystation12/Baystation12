@@ -1,7 +1,7 @@
 /mob/living/carbon/human/proc/update_eyes()
-	if(internal_organs_by_name["eyes"])
-		var/obj/item/organ/eyes/eyes = internal_organs_by_name["eyes"]
-		eyes.eye_colour = list(r_eyes,g_eyes,b_eyes)
+	var/obj/item/organ/eyes/eyes = internal_organs_by_name["eyes"]
+	if(eyes)
+		eyes.update_colour()
 		regenerate_icons()
 
 /mob/living/carbon/var/list/internal_organs = list()
@@ -104,8 +104,12 @@
 
 		if(E.is_broken())
 			if(E.body_part == HAND_LEFT)
+				if(!l_hand)
+					continue
 				drop_from_inventory(l_hand)
 			else
+				if(!r_hand)
+					continue
 				drop_from_inventory(r_hand)
 
 			var/emote_scream = pick("screams in pain and ", "lets out a sharp cry and ", "cries out and ")
