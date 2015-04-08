@@ -1,11 +1,6 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: code\modules\projectiles\gun.dm;code\modules\projectiles\projectile.dm;code\modules\projectiles\guns\projectile\automatic.dm;maps\exodus-1.dmm;code\modules\projectiles\projectile\energy.dm;code\modules\projectiles\effects.dm
-LAST_COMPILE_VERSION: 506.1249
-DIR: code code\game code\game\objects code\game\objects\items code\game\objects\items\devices code\modules code\modules\projectiles code\modules\projectiles\ammunition code\modules\projectiles\guns code\modules\projectiles\guns\launcher code\modules\projectiles\guns\projectile code\modules\projectiles\projectile maps 
-FILE: code\modules\projectiles\gun.dm
-LAST_COMPILE_TIME: 1428334440
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
