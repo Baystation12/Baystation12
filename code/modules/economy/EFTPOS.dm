@@ -1,5 +1,5 @@
 /obj/item/device/eftpos
-	name = "EFTPOS scanner"
+	name = "\improper EFTPOS scanner"
 	desc = "Swipe your ID card to make purchases electronically."
 	icon = 'icons/obj/device.dmi'
 	icon_state = "eftpos"
@@ -110,11 +110,13 @@
 	else
 		user << browse(null,"window=eftpos")
 
-/obj/item/device/eftpos/attackby(O as obj, user as mob)
-	if(istype(O, /obj/item/weapon/card))
+/obj/item/device/eftpos/attackby(obj/item/O as obj, user as mob)
+
+	var/obj/item/weapon/card/id/I = O.GetID()
+
+	if(I)
 		if(linked_account)
-			var/obj/item/weapon/card/I = O
-			scan_card(I)
+			scan_card(I, O)
 		else
 			usr << "\icon[src]<span class='warning'>Unable to connect to linked account.</span>"
 	else if (istype(O, /obj/item/weapon/spacecash/ewallet))
@@ -124,7 +126,7 @@
 				if(transaction_locked && !transaction_paid)
 					if(transaction_amount <= E.worth)
 						playsound(src, 'sound/machines/chime.ogg', 50, 1)
-						src.visible_message("\icon[src] The [src] chimes.")
+						src.visible_message("\icon[src] \The [src] chimes.")
 						transaction_paid = 1
 
 						//transfer the money
@@ -141,7 +143,7 @@
 						T.time = worldtime2text()
 						linked_account.transaction_log.Add(T)
 					else
-						usr << "\icon[src]<span class='warning'>The charge card doesn't have that much money!</span>"
+						usr << "\icon[src]<span class='warning'>\The [O] doesn't have that much money!</span>"
 			else
 				usr << "\icon[src]<span class='warning'>Connected account has been suspended.</span>"
 		else
@@ -225,10 +227,13 @@
 
 	src.attack_self(usr)
 
-/obj/item/device/eftpos/proc/scan_card(var/obj/item/weapon/card/I)
+/obj/item/device/eftpos/proc/scan_card(var/obj/item/weapon/card/I, var/obj/item/ID_container)
 	if (istype(I, /obj/item/weapon/card/id))
 		var/obj/item/weapon/card/id/C = I
-		visible_message("<span class='info'>[usr] swipes a card through [src].</span>")
+		if(I==ID_container || ID_container == null)
+			usr.visible_message("<span class='info'>\The [usr] swipes a card through \the [src].</span>")
+		else
+			usr.visible_message("<span class='info'>\The [usr] swipes \the [ID_container] through \the [src].</span>")
 		if(transaction_locked && !transaction_paid)
 			if(linked_account)
 				if(!linked_account.suspended)
@@ -242,7 +247,7 @@
 						if(!D.suspended)
 							if(transaction_amount <= D.money)
 								playsound(src, 'sound/machines/chime.ogg', 50, 1)
-								src.visible_message("\icon[src] The [src] chimes.")
+								src.visible_message("\icon[src] \The [src] chimes.")
 								transaction_paid = 1
 
 								//transfer the money
@@ -283,13 +288,13 @@
 	else if (istype(I, /obj/item/weapon/card/emag))
 		if(transaction_locked)
 			if(transaction_paid)
-				usr << "\icon[src]<span class='info'>You stealthily swipe [I] through [src].</span>"
+				usr << "\icon[src]<span class='info'>You stealthily swipe \the [I] through \the [src].</span>"
 				transaction_locked = 0
 				transaction_paid = 0
 			else
-				visible_message("<span class='info'>[usr] swipes a card through [src].</span>")
+				usr.visible_message("<span class='info'>\The [usr] swipes a card through \the [src].</span>")
 				playsound(src, 'sound/machines/chime.ogg', 50, 1)
-				src.visible_message("\icon[src] The [src] chimes.")
+				src.visible_message("\icon[src] \The [src] chimes.")
 				transaction_paid = 1
 	else
 		..()

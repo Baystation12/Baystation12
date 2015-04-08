@@ -194,7 +194,7 @@
 	update_icon()
 
 /obj/item/weapon/paper/proc/get_signature(var/obj/item/weapon/pen/P, mob/user as mob)
-	if(P)
+	if(P && istype(P, /obj/item/weapon/pen))
 		return P.get_signature(user)
 	return (user && user.real_name) ? user.real_name : "Anonymous"
 
@@ -350,6 +350,11 @@
 		//t = html_encode(t)
 		t = replacetext(t, "\n", "<BR>")
 		t = parsepencode(t, i, usr, iscrayon) // Encode everything from pencode to html
+
+
+		if(fields > 50)//large amount of fields creates a heavy load on the server, see updateinfolinks() and addtofield()
+			usr << "<span class='warning'>Too many fields. Sorry, you can't do this.</span>"
+			return
 
 		if(id!="end")
 			addtofield(text2num(id), t) // He wants to edit a field, let him.
