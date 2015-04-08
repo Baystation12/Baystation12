@@ -308,7 +308,7 @@
 	if(!target_zone)
 		return null
 	var/obj/item/organ/external/organ = get_organ(check_zone(target_zone))
-	if(!organ || organ.is_dislocated() || organ.dislocated == -1)
+	if(!organ || (organ.dislocated == 2) || (organ.dislocated == -1))
 		return null
 	var/dislocation_str
 	if(prob(W.force))

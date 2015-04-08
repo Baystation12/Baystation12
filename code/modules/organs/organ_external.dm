@@ -96,9 +96,14 @@
 		dislocated = 0
 	if(children && children.len)
 		for(var/obj/item/organ/external/child in children)
-			child.undislocate()
+			if(child.dislocated == 1)
+				child.undislocate()
 	if(owner)
 		owner.shock_stage += 20
+		for(var/obj/item/organ/external/limb in owner.organs)
+			if(limb.dislocated == 2)
+				return
+		owner.verbs -= /mob/living/carbon/human/proc/undislocate
 
 /obj/item/organ/external/update_health()
 	damage = min(max_damage, (brute_dam + burn_dam))
@@ -837,7 +842,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	return 0
 
 /obj/item/organ/external/proc/is_usable()
-	return !(status & (ORGAN_DESTROYED|ORGAN_MUTATED|ORGAN_DEAD))
+	return !is_dislocated() && !(status & (ORGAN_DESTROYED|ORGAN_MUTATED|ORGAN_DEAD))
 
 /obj/item/organ/external/proc/is_malfunctioning()
 	return ((status & ORGAN_ROBOT) && (brute_dam + burn_dam) >= 10 && prob(brute_dam + burn_dam))

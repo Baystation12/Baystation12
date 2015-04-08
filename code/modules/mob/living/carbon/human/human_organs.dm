@@ -70,12 +70,12 @@
 
 	for(var/limb_tag in list("l_leg","r_leg","l_foot","r_foot"))
 		var/obj/item/organ/external/E = organs_by_name[limb_tag]
-		if(!E)
-			stance_damage += 2
-		else if (E.status & ORGAN_DESTROYED)
+		if(!E || (E.status & (ORGAN_DESTROYED|ORGAN_DEAD)))
 			stance_damage += 2 // let it fail even if just foot&leg
-		else if (E.is_malfunctioning() || (E.is_broken() && !(E.status & ORGAN_SPLINTED)) || !E.is_usable())
+		else if (E.is_malfunctioning() || (E.is_broken() && !(E.status & ORGAN_SPLINTED)) || (E.status & ORGAN_MUTATED))
 			stance_damage += 1
+		else if (E.is_dislocated())
+			stance_damage += 0.5
 
 	// Canes and crutches help you stand (if the latter is ever added)
 	// One cane mitigates a broken leg+foot, or a missing foot.
@@ -102,7 +102,7 @@
 		if(!E || !E.can_grasp || (E.status & ORGAN_SPLINTED))
 			continue
 
-		if(E.is_broken())
+		if(E.is_broken() || E.is_dislocated())
 			if(E.body_part == HAND_LEFT)
 				if(!l_hand)
 					continue
