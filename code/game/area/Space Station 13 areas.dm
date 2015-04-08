@@ -1420,7 +1420,7 @@ area/space/atmosalert()
 	icon_state = "checkpoint1"
 
 /area/security/checkpoint2
-	name = "\improper Security Checkpoint"
+	name = "\improper Security - Arrival Checkpoint"
 	icon_state = "security"
 
 /area/security/checkpoint/supply
@@ -1451,14 +1451,6 @@ area/space/atmosalert()
 	name = "\improper Quartermasters"
 	icon_state = "quart"
 
-///////////WORK IN PROGRESS//////////
-
-/area/quartermaster/sorting
-	name = "\improper Delivery Office"
-	icon_state = "quartstorage"
-
-////////////WORK IN PROGRESS//////////
-
 /area/quartermaster/office
 	name = "\improper Cargo Office"
 	icon_state = "quartoffice"
@@ -1468,20 +1460,12 @@ area/space/atmosalert()
 	icon_state = "quartstorage"
 
 /area/quartermaster/qm
-	name = "\improper Quartermaster's Office"
+	name = "\improper Cargo - Quartermaster's Office"
 	icon_state = "quart"
 
 /area/quartermaster/miningdock
-	name = "\improper Mining Dock"
+	name = "\improper Cargo Mining Dock"
 	icon_state = "mining"
-
-/area/quartermaster/miningstorage
-	name = "\improper Mining Storage"
-	icon_state = "green"
-
-/area/quartermaster/mechbay
-	name = "\improper Mech Bay"
-	icon_state = "yellow"
 
 /area/janitor/
 	name = "\improper Custodial Closet"
