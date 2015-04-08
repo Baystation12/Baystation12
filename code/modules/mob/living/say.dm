@@ -80,7 +80,7 @@ proc/get_radio_key_from_channel(var/channel)
 		if(dongle.translate_binary) return 1
 
 /mob/living/proc/get_default_language()
-	return null
+	return default_language
 
 /mob/living/proc/handle_speech_problems(var/message, var/verb)
 	var/list/returns[3]
