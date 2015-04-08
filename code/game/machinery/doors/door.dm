@@ -304,6 +304,17 @@
 	update_icon()
 	return
 
+
+/obj/machinery/door/examine(mob/user)
+	..()
+	if(src.health < src.maxhealth / 4)
+		user << "\The [src] looks like it's about to break!"
+	else if(src.health < src.maxhealth / 2)
+		user << "\The [src] looks seriously damaged!"
+	else if(src.health < src.maxhealth * 3/4)
+		user << "\The [src] shows signs of damage!"
+
+
 /obj/machinery/door/proc/set_broken()
 	stat |= BROKEN
 	for (var/mob/O in viewers(src, null))
