@@ -944,3 +944,14 @@ var/list/admin_verbs_mentor = list(
 
 	log_admin("[key_name(usr)] told everyone to man up and deal with it.")
 	message_admins("\blue [key_name_admin(usr)] told everyone to man up and deal with it.", 1)
+
+/client/proc/give_spell(mob/T as mob in mob_list) // -- Urist
+	set category = "Fun"
+	set name = "Give Spell"
+	set desc = "Gives a spell to a mob."
+	var/spell/S = input("Choose the spell to give to that guy", "ABRAKADABRA") as null|anything in spells
+	if(!S) return
+	T.spell_list += new S
+	feedback_add_details("admin_verb","GS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+	log_admin("[key_name(usr)] gave [key_name(T)] the spell [S].")
+	message_admins("\blue [key_name_admin(usr)] gave [key_name(T)] the spell [S].", 1)

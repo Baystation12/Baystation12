@@ -37,7 +37,7 @@ var/global/list/GlobalPool = list()
 				AM = new get_type (arglist(second_arg))
 			else
 				AM = new get_type (second_arg)
-
+	else
 	if(AM)
 		return AM
 
