@@ -1,6 +1,6 @@
 /obj/machinery/pipelayer
 
-	name = "Automatic Pipe Layer"
+	name = "Automatic pipe layer"
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "pipe_d"
 	density = 1
@@ -50,7 +50,7 @@
 				P_type = 2
 				P_type_t = "heat exchange pipes"
 
-		user.visible_message("[user] set [src] to [P_type_t] making", "You set [src] to [P_type_t] making")
+		user.visible_message("[user] has set \the [src] to manufacture [P_type_t] .", "You set \the [src] to manufacture [P_type_t].")
 		return
 
 	if(istype(W, /obj/item/weapon/crowbar))
@@ -82,7 +82,7 @@
 				var/obj/item/stack/sheet/metal/MM = new (get_turf(src))
 				MM.amount = m
 		else
-			user.visible_message("There's no more metal on the stack.")
+			user.visible_message("\The [src] is empty.")
 		return
 	..()
 
