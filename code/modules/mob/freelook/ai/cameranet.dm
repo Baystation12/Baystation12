@@ -2,8 +2,6 @@
 //
 // The datum containing all the chunks.
 
-var/datum/visualnet/camera/cameranet = new()
-
 /datum/visualnet/camera
 	// The cameras on the map, no matter if they work or not. Updated in obj/machinery/camera.dm by New() and Del().
 	var/list/cameras = list()

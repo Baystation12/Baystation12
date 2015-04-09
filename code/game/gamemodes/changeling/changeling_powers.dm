@@ -463,7 +463,6 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 
 			// sending display messages
 			C << "<span class='notice'>We have regenerated.</span>"
-			C.visible_message("<span class='warning'>[src] appears to wake from the dead, having healed all wounds.</span>")
 
 
 	feedback_add_details("changeling_powers","FD")

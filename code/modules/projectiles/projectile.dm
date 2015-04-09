@@ -155,6 +155,8 @@
 
 //Called when the projectile intercepts a mob. Returns 1 if the projectile hit the mob, 0 if it missed and should keep flying.
 /obj/item/projectile/proc/attack_mob(var/mob/living/target_mob, var/distance, var/miss_modifier=0)
+	if(!istype(target_mob))
+		return
 	//accuracy bonus from aiming
 	if (istype(shot_from, /obj/item/weapon/gun))
 		var/obj/item/weapon/gun/daddy = shot_from
@@ -233,7 +235,7 @@
 		if(isturf(A))
 			for(var/obj/O in A)
 				O.bullet_act(src)
-			for(var/mob/M in A)
+			for(var/mob/living/M in A)
 				attack_mob(M, distance)
 
 	//penetrating projectiles can pass through things that otherwise would not let them

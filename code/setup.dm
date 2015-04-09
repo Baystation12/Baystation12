@@ -864,3 +864,10 @@ var/list/be_special_flags = list(
 #define DROPLIMB_EDGE 0
 #define DROPLIMB_BLUNT 1
 #define DROPLIMB_BURN 2
+
+// Custom layer definitions, supplementing the default TURF_LAYER, MOB_LAYER, etc.
+#define DOOR_OPEN_LAYER 2.7		//Under all objects if opened. 2.7 due to tables being at 2.6
+#define DOOR_CLOSED_LAYER 3.1	//Above most items if closed
+#define OBFUSCATION_LAYER 14	//Where images covering the view for eyes are put
+#define SCREEN_LAYER 17			//Mob HUD/effects layer
+

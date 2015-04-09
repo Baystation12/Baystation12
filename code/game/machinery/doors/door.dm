@@ -1,7 +1,4 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:31
-#define DOOR_OPEN_LAYER 2.7		//Under all objects if opened. 2.7 due to tables being at 2.6
-#define DOOR_CLOSED_LAYER 3.1	//Above most items if closed
-
 #define DOOR_REPAIR_AMOUNT 50	//amount of health regained per stack amount used
 
 /obj/machinery/door
@@ -306,6 +303,17 @@
 		visible_message("\The [src] shows signs of damage!" )
 	update_icon()
 	return
+
+
+/obj/machinery/door/examine(mob/user)
+	..()
+	if(src.health < src.maxhealth / 4)
+		user << "\The [src] looks like it's about to break!"
+	else if(src.health < src.maxhealth / 2)
+		user << "\The [src] looks seriously damaged!"
+	else if(src.health < src.maxhealth * 3/4)
+		user << "\The [src] shows signs of damage!"
+
 
 /obj/machinery/door/proc/set_broken()
 	stat |= BROKEN

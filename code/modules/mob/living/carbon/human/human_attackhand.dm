@@ -100,9 +100,9 @@
 			var/hit_zone = H.zone_sel.selecting
 			var/obj/item/organ/external/affecting = get_organ(hit_zone)
 
-			if(!affecting || affecting.status & ORGAN_DESTROYED)
+			if(!affecting || affecting.is_stump() || (affecting.status & ORGAN_DESTROYED))
 				M << "<span class='danger'>They are missing that limb!</span>"
-				return
+				return 1
 
 			switch(src.a_intent)
 				if(I_HELP)
@@ -220,14 +220,14 @@
 
 				if (istype(l_hand,/obj/item/weapon/gun))
 					W = l_hand
-					chance = hand ? 40 : 20
+					chance += hand ? 40 : 20
 
-				if (istype(r_hand,/obj/item/weapon/gun))
+				else if (istype(r_hand,/obj/item/weapon/gun))
 					W = r_hand
-					chance = !hand ? 40 : 20
+					chance += !hand ? 40 : 20
 
 				if (prob(chance))
-					visible_message("<span class='danger'>[src]'s [W] goes off during struggle!</span>")
+					visible_message("<span class='danger'>[src]'s [W.name] goes off during struggle!")
 					var/list/turfs = list()
 					for(var/turf/T in view())
 						turfs += T
@@ -308,7 +308,7 @@
 	if(!target_zone)
 		return null
 	var/obj/item/organ/external/organ = get_organ(check_zone(target_zone))
-	if(!organ || organ.is_dislocated() || organ.dislocated == -1)
+	if(!organ || (organ.dislocated == 2) || (organ.dislocated == -1))
 		return null
 	var/dislocation_str
 	if(prob(W.force))
