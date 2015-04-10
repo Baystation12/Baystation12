@@ -1,6 +1,6 @@
-proc/log_and_message_admins(var/message as text)
-	log_admin(usr ? "[key_name(usr)] [message]" : "EVENT [message]")
-	message_admins(usr ? "[key_name(usr)] [message]" : "EVENT [message]")
+proc/log_and_message_admins(var/message as text, var/mob/user = usr)
+	log_admin(user ? "[key_name(user)] [message]" : "EVENT [message]")
+	message_admins(user ? "[key_name(user)] [message]" : "EVENT [message]")
 
 proc/log_and_message_admins_many(var/list/mob/users, var/message)
 	if(!users || !users.len)

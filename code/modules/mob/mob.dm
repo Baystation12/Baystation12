@@ -787,19 +787,6 @@ note dizziness decrements automatically in the mob's Life() proc.
 					continue
 				statpanel(listed_turf.name, null, A)
 
-	if(spell_list && spell_list.len)
-		for(var/obj/effect/proc_holder/spell/S in spell_list)
-			switch(S.charge_type)
-				if("recharge")
-					statpanel("Spells","[S.charge_counter/10.0]/[S.charge_max/10]",S)
-				if("charges")
-					statpanel("Spells","[S.charge_counter]/[S.charge_max]",S)
-				if("holdervar")
-					statpanel("Spells","[S.holder_var_type] [S.holder_var_amount]",S)
-
-
-
-
 // facing verbs
 /mob/proc/canface()
 	if(!canmove)						return 0

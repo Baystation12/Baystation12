@@ -871,3 +871,43 @@ var/list/be_special_flags = list(
 #define OBFUSCATION_LAYER 14	//Where images covering the view for eyes are put
 #define SCREEN_LAYER 17			//Mob HUD/effects layer
 
+
+/////////////////
+////WIZARD //////
+/////////////////
+
+/*		WIZARD SPELL FLAGS		*/
+#define GHOSTCAST		1	//can a ghost cast it?
+#define NEEDSCLOTHES	2	//does it need the wizard garb to cast? Nonwizard spells should not have this
+#define NEEDSHUMAN		4	//does it require the caster to be human?
+#define Z2NOCAST		8	//if this is added, the spell can't be cast at centcomm
+#define STATALLOWED		16	//if set, the user doesn't have to be conscious to cast. Required for ghost spells
+#define IGNOREPREV		32	//if set, each new target does not overlap with the previous one
+//The following flags only affect different types of spell, and therefore overlap
+//Targeted spells
+#define INCLUDEUSER		64	//does the spell include the caster in its target selection?
+#define SELECTABLE		128	//can you select each target for the spell?
+//AOE spells
+#define IGNOREDENSE		64	//are dense turfs ignored in selection?
+#define IGNORESPACE		128	//are space turfs ignored in selection?
+//End split flags
+#define CONSTRUCT_CHECK	256	//used by construct spells - checks for nullrods
+#define NO_BUTTON		512	//spell won't show up in the HUD with this
+
+//invocation
+#define SpI_SHOUT	"shout"
+#define SpI_WHISPER	"whisper"
+#define SpI_EMOTE	"emote"
+#define SpI_NONE	"none"
+
+//upgrading
+#define Sp_SPEED	"speed"
+#define Sp_POWER	"power"
+#define Sp_TOTAL	"total"
+
+//casting costs
+#define Sp_RECHARGE	"recharge"
+#define Sp_CHARGES	"charges"
+#define Sp_HOLDVAR	"holdervar"
+
+///////WIZ END/////////
