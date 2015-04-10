@@ -124,7 +124,9 @@
 	return !new_turf.intact
 
 /obj/machinery/pipelayer/proc/layPipe(var/turf/w_turf,var/M_Dir,var/old_dir)
-	if(!on || !(M_Dir in list(1, 2, 4, 8)) || !use_metal(0.25))
+	if(!on || !(M_Dir in list(1, 2, 4, 8)) || M_Dir==old_dir)
+		return reset()
+	if(!use_metal(0.25))
 		return reset()
 	var/fdirn = turn(M_Dir,180)
 	var/p_type
