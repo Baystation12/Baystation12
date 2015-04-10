@@ -456,6 +456,9 @@
 	return 1
 
 /mob/living/carbon/get_default_language()
+	if(default_language)
+		return default_language
+
 	if(!species)
 		return null
 	return species.default_language ? all_languages[species.default_language] : null

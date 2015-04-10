@@ -825,7 +825,8 @@ var/global/list/obj/item/device/pda/PDAs = list()
 							difficulty += P.cartridge.access_engine
 							difficulty += P.cartridge.access_clown
 							difficulty += P.cartridge.access_janitor
-							difficulty += 3 * P.hidden_uplink
+							if(P.hidden_uplink)
+								difficulty += 3
 
 						if(prob(difficulty))
 							U.show_message("\red An error flashes on your [src].", 1)

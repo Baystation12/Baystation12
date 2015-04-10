@@ -731,24 +731,30 @@ note dizziness decrements automatically in the mob's Life() proc.
 		if(statpanel("Status") && processScheduler && processScheduler.getIsRunning())
 			var/datum/controller/process/process
 
-			process = processScheduler.getProcess("ticker")
-			stat(null, "[getStatName(process)]\t - #[process.getTicks()]\t - [process.getLastRunTime()]")
-
 			process = processScheduler.getProcess("air")
-			stat(null, "[getStatName(process)]\t - #[process.getTicks()]\t - [process.getLastRunTime()]")
-
-			process = processScheduler.getProcess("lighting")
 			stat(null, "[getStatName(process)]\t - #[process.getTicks()]\t - [process.getLastRunTime()]")
 
 			process = processScheduler.getProcess("alarm")
 			var/list/alarms = alarm_manager.active_alarms()
 			stat(null, "[getStatName(process)]([alarms.len])\t - #[process.getTicks()]\t - [process.getLastRunTime()]")
 
-			process = processScheduler.getProcess("mob")
-			stat(null, "[getStatName(process)]([mob_list.len])\t - #[process.getTicks()]\t - [process.getLastRunTime()]")
+			process = processScheduler.getProcess("disease")
+			stat(null, "[getStatName(process)]([active_diseases.len])\t - #[process.getTicks()]\t - [process.getLastRunTime()]")
+
+			process = processScheduler.getProcess("garbage")
+			stat(null, "[getStatName(process)]([garbage_collector.destroyed.len])\t - #[process.getTicks()]\t - [process.getLastRunTime()]")
 
 			process = processScheduler.getProcess("machinery")
 			stat(null, "[getStatName(process)]([machines.len])\t - #[process.getTicks()]\t - [process.getLastRunTime()]")
+
+			process = processScheduler.getProcess("mob")
+			stat(null, "[getStatName(process)]([mob_list.len])\t - #[process.getTicks()]\t - [process.getLastRunTime()]")
+
+			process = processScheduler.getProcess("nanoui")
+			stat(null, "[getStatName(process)]([nanomanager.processing_uis.len])\t - #[process.getTicks()]\t - [process.getLastRunTime()]")
+
+			process = processScheduler.getProcess("lighting")
+			stat(null, "[getStatName(process)]\t - #[process.getTicks()]\t - [process.getLastRunTime()]")
 
 			process = processScheduler.getProcess("obj")
 			stat(null, "[getStatName(process)]([processing_objects.len])\t - #[process.getTicks()]\t - [process.getLastRunTime()]")
@@ -759,13 +765,10 @@ note dizziness decrements automatically in the mob's Life() proc.
 			process = processScheduler.getProcess("powernet")
 			stat(null, "[getStatName(process)]([powernets.len])\t - #[process.getTicks()]\t - [process.getLastRunTime()]")
 
-			process = processScheduler.getProcess("nanoui")
-			stat(null, "[getStatName(process)]([nanomanager.processing_uis.len])\t - #[process.getTicks()]\t - [process.getLastRunTime()]")
-
-			process = processScheduler.getProcess("disease")
-			stat(null, "[getStatName(process)]([active_diseases.len])\t - #[process.getTicks()]\t - [process.getLastRunTime()]")
-
 			process = processScheduler.getProcess("sun")
+			stat(null, "[getStatName(process)]\t - #[process.getTicks()]\t - [process.getLastRunTime()]")
+
+			process = processScheduler.getProcess("ticker")
 			stat(null, "[getStatName(process)]\t - #[process.getTicks()]\t - [process.getLastRunTime()]")
 
 		else

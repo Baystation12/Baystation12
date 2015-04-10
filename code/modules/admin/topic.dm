@@ -1317,21 +1317,27 @@
 			M.stuttering = 20
 
 	else if(href_list["CentcommReply"])
-		var/mob/living/carbon/human/H = locate(href_list["CentcommReply"])
-		if(!istype(H))
-			usr << "This can only be used on instances of type /mob/living/carbon/human"
-			return
-		if(!istype(H.l_ear, /obj/item/device/radio/headset) && !istype(H.r_ear, /obj/item/device/radio/headset))
-			usr << "The person you are trying to contact is not wearing a headset"
+		var/mob/living/L = locate(href_list["CentcommReply"])
+		if(!istype(L))
+			usr << "This can only be used on instances of type /mob/living/"
 			return
 
-		var/input = sanitize(input(src.owner, "Please enter a message to reply to [key_name(H)] via their headset.","Outgoing message from Centcomm", ""))
-		if(!input)	return
+		if(L.can_centcom_reply())
+			var/input = input(src.owner, "Please enter a message to reply to [key_name(L)] via their headset.","Outgoing message from Centcomm", "")
+			if(!input)		return
 
-		src.owner << "You sent [input] to [H] via a secure channel."
-		log_admin("[src.owner] replied to [key_name(H)]'s Centcomm message with the message [input].")
-		message_admins("[src.owner] replied to [key_name(H)]'s Centcom message with: \"[input]\"")
-		H << "You hear something crackle in your headset for a moment before a voice speaks.  \"Please stand by for a message from Central Command.  Message as follows. <b>\"[input]\"</b>  Message ends.\""
+			src.owner << "You sent [input] to [L] via a secure channel."
+			log_admin("[src.owner] replied to [key_name(L)]'s Centcomm message with the message [input].")
+			message_admins("[src.owner] replied to [key_name(L)]'s Centcom message with: \"[input]\"")
+			if(!L.isAI())
+				L << "<span class='info'>You hear something crackle in your headset for a moment before a voice speaks.</span>"
+			L << "<span class='info'>Please stand by for a message from Central Command.</span>"
+			L << "<span class='info'>Message as follows.</span>"
+			L << "<span class='notice'>[input]</span>"
+			L << "<span class='info'>Message ends.</span>"
+		else
+			src.owner << "The person you are trying to contact does not have functional radio equipment."
+
 
 	else if(href_list["SyndicateReply"])
 		var/mob/living/carbon/human/H = locate(href_list["SyndicateReply"])
@@ -2619,3 +2625,12 @@
 			if("list")
 				PlayerNotesPage(text2num(href_list["index"]))
 		return
+
+mob/living/proc/can_centcom_reply()
+	return 0
+
+mob/living/carbon/human/can_centcom_reply()
+	return istype(l_ear, /obj/item/device/radio/headset) || istype(r_ear, /obj/item/device/radio/headset)
+
+mob/living/silicon/ai/can_centcom_reply()
+	return common_radio != null && !check_unable(2)
