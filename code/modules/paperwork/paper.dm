@@ -194,7 +194,7 @@
 	update_icon()
 
 /obj/item/weapon/paper/proc/get_signature(var/obj/item/weapon/pen/P, mob/user as mob)
-	if(P)
+	if(P && istype(P, /obj/item/weapon/pen))
 		return P.get_signature(user)
 	return (user && user.real_name) ? user.real_name : "Anonymous"
 
@@ -324,7 +324,17 @@
 	if(href_list["write"])
 		var/id = href_list["write"]
 		//var/t = strip_html_simple(input(usr, "What text do you wish to add to " + (id=="end" ? "the end of the paper" : "field "+id) + "?", "[name]", null),8192) as message
-		var/t =  strip_html_simple(input("Enter what you want to write:", "Write", null, null) as message, MAX_PAPER_MESSAGE_LEN)
+
+		var/textlimit = MAX_PAPER_MESSAGE_LEN - length(info)
+		if(textlimit <= 0)
+			usr << "<span class='info'>You're trying to find a free place on paper, but can't!</span>"
+			return
+
+		var/t =  strip_html_simple(input("Enter what you want to write:", "Write", null, null) as message, textlimit)
+
+		if(!t)
+			return
+
 		var/obj/item/i = usr.get_active_hand() // Check to see if he still got that darn pen, also check if he's using a crayon or pen.
 		var/iscrayon = 0
 		if(!istype(i, /obj/item/weapon/pen))
@@ -347,9 +357,17 @@
 				message_admins("PAPER: [usr] ([usr.ckey]) tried to use forbidden word in [src]: [bad].")
 				return
 */
+		var last_fields_value = fields
+
 		t = html_encode(t)
 		t = replacetext(t, "\n", "<BR>")
 		t = parsepencode(t, i, usr, iscrayon) // Encode everything from pencode to html
+
+
+		if(fields > 50)//large amount of fields creates a heavy load on the server, see updateinfolinks() and addtofield()
+			usr << "<span class='warning'>Too many fields. Sorry, you can't do this.</span>"
+			fields = last_fields_value
+			return
 
 		if(id!="end")
 			addtofield(text2num(id), t) // He wants to edit a field, let him.
