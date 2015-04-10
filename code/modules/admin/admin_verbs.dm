@@ -724,7 +724,8 @@ var/list/admin_verbs_mentor = list(
 		return
 
 	if(holder)
-		S.subsystem_law_manager()
+		var/obj/nano_module/law_manager/L = new(S)
+		L.ui_interact(usr, state = admin_state)
 	admin_log_and_message_admins("has opened [S]'s law manager.")
 	feedback_add_details("admin_verb","MSL") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
@@ -738,7 +739,7 @@ var/list/admin_verbs_mentor = list(
 
 	if(holder)
 		admin_log_and_message_admins("is altering the appearance of [H].")
-		H.change_appearance(APPEARANCE_ALL, usr, usr, check_species_whitelist = 0)
+		H.change_appearance(APPEARANCE_ALL, usr, usr, check_species_whitelist = 0, state = admin_state)
 	feedback_add_details("admin_verb","CHAA") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/change_human_appearance_self(mob/living/carbon/human/H in mob_list)
