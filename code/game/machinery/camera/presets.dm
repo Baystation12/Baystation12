@@ -1,5 +1,8 @@
 // PRESETS
-var/global/list/station_networks = list("SS13","Engineering Outpost","MINE","Research Outpost","Prison","Security")
+var/global/list/station_networks = list("SS13","Civilian West","Engineering Outpost","MINE","Research Outpost","Prison","Security")
+
+/obj/machinery/camera/network/civilian_west
+	network = list("Civilian West")
 
 /obj/machinery/camera/network/prison
 	network = list("Prison")
@@ -37,6 +40,9 @@ var/global/list/station_networks = list("SS13","Engineering Outpost","MINE","Res
 	upgradeMotion()
 
 // AUTONAME
+
+/obj/machinery/camera/autoname/civilian_west
+	network = list("Civilian West")
 
 /obj/machinery/camera/autoname/engineering_outpost
 	network = list("Engineering Outpost")
