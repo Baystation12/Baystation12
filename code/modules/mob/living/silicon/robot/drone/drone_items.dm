@@ -136,7 +136,6 @@
 		wrapped.attack(M,user)
 		return 1
 	return 0
-//	return (wrapped ? wrapped.attack(M,user) : 0)
 
 /obj/item/weapon/gripper/afterattack(var/atom/target, var/mob/living/user, proximity, params)
 
@@ -155,9 +154,7 @@
 
 		//Pass the attack on to the target. This might delete/relocate wrapped.
 		var/resolved = target.attackby(wrapped,user)
-		world << "attackby([wrapped],[user]) was called."
 		if(!resolved && wrapped && target)
-			world << "afterattack([target],[user]) was called."
 			wrapped.afterattack(target,user,1)
 
 		//wrapped's force was set to zero.  This resets it to the value it had before.
@@ -225,21 +222,6 @@
 				A.cell = null
 
 				user.visible_message("<span class='danger'>[user] removes the power cell from [A]!</span>", "You remove the power cell.")
-/*
-	if(!wrapped)
-		//There's some weirdness with items being lost inside the arm. Trying to fix all cases. ~Z
-		for(var/obj/item/thing in src.contents)
-			thing.loc = get_turf(src)
-		return
-
-	if(wrapped.loc != src)
-		wrapped = null
-		return
-
-	src.loc << "<span class='danger'>You drop \the [wrapped].</span>"
-	wrapped.loc = get_turf(src)
-	wrapped = null
-*/
 
 //TODO: Matter decompiler.
 /obj/item/weapon/matter_decompiler
