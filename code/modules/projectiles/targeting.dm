@@ -195,7 +195,7 @@
 		else
 			I.lower_aim()
 			return
-		if(m_intent == "run" && T.client.target_can_move == 1 && T.client.target_can_run == 0)
+		if(iscarbon(src) && m_intent == "run" && T.client.target_can_move == 1 && T.client.target_can_run == 0)
 			src << "<span class='danger'>Your move intent is now set to walk, as your targeter permits it.</span>"  //Self explanitory.
 			set_m_intent("walk")
 
