@@ -48,6 +48,47 @@
 			wander = 1
 		else if(prob(5))
 			emote("snuffles")
+/mob/living/simple_animal/mouse/Click(location,control,params)
+	..()
+	var/modifiers = params2list(params)
+	if (modifiers["alt"])
+		if(isobserver(usr))
+			if (src.ckey) return // Someone is in there!
+
+
+			if(config.disable_player_mice)
+				src << "<span class='warning'>Spawning as a mouse is currently disabled.</span>"
+				return
+
+			var/mob/dead/observer/M = usr
+			if(config.antag_hud_restricted && M.has_enabled_antagHUD == 1)
+				src << "<span class='warning'>antagHUD restrictions prevent you from spawning in as a mouse.</span>"
+				return
+
+
+			var/timedifference = world.time - client.time_died_as_mouse
+			if(client.time_died_as_mouse && timedifference <= mouse_respawn_time * 600)
+				var/timedifference_text
+				timedifference_text = time2text(mouse_respawn_time * 600 - timedifference,"mm:ss")
+				src << "<span class='warning'>You may only spawn again as a mouse more than [mouse_respawn_time] minutes after your death. You have [timedifference_text] left.</span>"
+				return
+
+			var/confirm = alert(usr, "Become [src]?", "Message", "Yes", "No")
+			if (confirm != "Yes")
+				return
+
+			if(!istype(src)) // mob could have been gibbed etc since asking.
+				usr << "\red That mob no longer exists!"
+				return
+
+
+			if (src.ckey)
+				usr << "\red Too slow! Someone beat you to it."
+				return // Someone is in there!
+
+
+			src.ckey = usr.ckey
+			del(usr)
 
 /mob/living/simple_animal/mouse/New()
 	..()
@@ -55,13 +96,20 @@
 	verbs += /mob/living/proc/ventcrawl
 	verbs += /mob/living/proc/hide
 
-	name = "[name] ([rand(1, 1000)])"
 	if(!body_color)
 		body_color = pick( list("brown","gray","white") )
+
+	if (name == "mouse") // Fixes Tom's name
+		name = "[name] ([rand(1, 1000)])"
+
+	if (desc == "It's a small, disease-ridden rodent.") // and the desc
+		desc = "It's a small [body_color] rodent, often seen hiding in maintenance areas and making a nuisance of itself."
+
+
 	icon_state = "mouse_[body_color]"
 	icon_living = "mouse_[body_color]"
 	icon_dead = "mouse_[body_color]_dead"
-	desc = "It's a small [body_color] rodent, often seen hiding in maintenance areas and making a nuisance of itself."
+
 
 /mob/living/simple_animal/mouse/proc/splat()
 	src.health = 0

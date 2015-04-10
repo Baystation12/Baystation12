@@ -159,7 +159,7 @@
 						M.attack_log += text("\[[time_stamp()]\] <font color='red'>Began [TugText] [src.name] ([src.ckey])'s [affected.name]</font>")
 						src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Had their [affected.name] tugged at by [M.name] ([M.ckey])</font>")
 						if (M.species.flags & IS_STRONG || affected.status & ORGAN_ROBOT)
-							msg_admin_attack("[key_name(M)] began [TugText] [key_name(src)]'s [affected.name]") // Tell all the admins that ARM RIPPING FUN.
+							msg_admin_attack("[key_name(M)] began [TugText] [key_name(src)]'s [affected.name] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>)") // Tell all the admins that ARM RIPPING FUN.
 						ripping = 1
 						spawn(tugTime)
 							var/CanRip = 0
@@ -173,7 +173,7 @@
 								affected.droplimb(1) // RIP.
 								M.attack_log += text("\[[time_stamp()]\] <font color='red'>Ripped off [src.name] ([src.ckey])'s [affected.name]</font>")
 								src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Had their [affected.name] ripped off by [M.name] ([M.ckey])</font>")
-								msg_admin_attack("[key_name(M)] ripped off [key_name(src)]'s [affected.name]")
+								msg_admin_attack("[key_name(M)] ripped off [key_name(src)]'s [affected.name] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>)")
 								visible_message("<span class='danger'>[M] ripped off [src]'s [affected.display_name]!</span>", "<span class='danger'>[M] ripped off your [affected.display_name]!</span>")
 							else
 								M.attack_log += text("\[[time_stamp()]\] <font color='red'>Stopped [TugText] [src.name] ([src.ckey])'s [affected.name]</font>")
@@ -226,7 +226,7 @@
 
 			M.attack_log += text("\[[time_stamp()]\] <font color='red'>[pick(attack.attack_verb)]ed [src.name] ([src.ckey])</font>")
 			src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been [pick(attack.attack_verb)]ed by [M.name] ([M.ckey])</font>")
-			msg_admin_attack("[key_name(M)] [pick(attack.attack_verb)]ed [key_name(src)]")
+			msg_admin_attack("[key_name(M)] [pick(attack.attack_verb)]ed [key_name(src)] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>)")
 
 			var/damage = rand(0, 5)//BS12 EDIT
 			if(!damage)
@@ -257,7 +257,7 @@
 			M.attack_log += text("\[[time_stamp()]\] <font color='red'>Disarmed [src.name] ([src.ckey])</font>")
 			src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been disarmed by [M.name] ([M.ckey])</font>")
 
-			msg_admin_attack("[key_name(M)] disarmed [src.name] ([src.ckey])")
+			msg_admin_attack("[key_name(M)] disarmed [src.name] ([src.ckey]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>)")
 
 			if(w_uniform)
 				w_uniform.add_fingerprint(M)

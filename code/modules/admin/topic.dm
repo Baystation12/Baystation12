@@ -1682,7 +1682,7 @@
 					// give the sprite some time to flick
 					spawn(20)
 						var/obj/item/weapon/paper/P = new /obj/item/weapon/paper( F.loc )
-						P.name = "[command_name()]- [customname]"
+						P.name = "[command_name()] - [customname]"
 						P.info = input
 						P.update_icon()
 
@@ -1731,7 +1731,7 @@
 					// give the sprite some time to flick
 					spawn(20)
 						var/obj/item/weapon/paper/P = new /obj/item/weapon/paper( F.loc )
-						P.name = "Sol Government- [customname]"
+						P.name = "Sol Government - [customname]"
 						P.info = input
 						P.update_icon()
 
