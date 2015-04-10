@@ -170,14 +170,14 @@
 		
 		if(reflex)
 			user.visible_message(
-				"<span class='reflex_shoot'><b>[user] fires [src][pointblank ? "  point blank at [target]":""] by reflex!<b></span>",
-				"<span class='reflex_shoot'>You fire [src] by reflex]!</span>",
+				"<span class='reflex_shoot'><b>\The [user] fires \the [src][pointblank ? " point blank at \the [target]":""] by reflex!<b></span>",
+				"<span class='reflex_shoot'>You fire \the [src] by reflex!</span>",
 				"You hear a [fire_sound_text]!"
 			)
 		else
 			user.visible_message(
-				"<span class='danger'>[user] fires [src][pointblank ? "  point blank at [target]":""]!</span>",
-				"<span class='warning'>You fire [src]!</span>",
+				"<span class='danger'>\The [user] fires \the [src][pointblank ? " point blank at \the [target]":""]!</span>",
+				"<span class='warning'>You fire \the [src]!</span>",
 				"You hear a [fire_sound_text]!"
 				)
 	

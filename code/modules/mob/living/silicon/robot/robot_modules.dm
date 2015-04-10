@@ -191,7 +191,7 @@
 	src.modules += R
 
 	var/obj/item/stack/sheet/plasteel/cyborg/S = new /obj/item/stack/sheet/plasteel/cyborg(src)
-	S.synths = list(metal)
+	S.synths = list(plasteel)
 	src.modules += S
 
 	var/obj/item/stack/sheet/glass/reinforced/cyborg/RG = new /obj/item/stack/sheet/glass/reinforced/cyborg(src)
