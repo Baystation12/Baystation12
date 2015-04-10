@@ -47,8 +47,7 @@
 		"liver" =    /datum/organ/internal/liver,
 		"kidneys" =  /datum/organ/internal/kidney,
 		"brain" =    /datum/organ/internal/brain,
-		"eyes" =     /datum/organ/internal/eyes,
-		"stack" =    /datum/organ/internal/stack/vox
+		"eyes" =     /datum/organ/internal/eyes
 		)
 
 /datum/species/vox/get_random_name(var/gender)
