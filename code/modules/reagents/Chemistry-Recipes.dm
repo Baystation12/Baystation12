@@ -213,13 +213,6 @@ datum
 			required_catalysts = list("phoron" = 5)
 			result_amount = 2
 
-		virus_food
-			name = "Virus Food"
-			id = "virusfood"
-			result = "virusfood"
-			required_reagents = list("water" = 1, "milk" = 1)
-			result_amount = 5
-
 		leporazine
 			name = "Leporazine"
 			id = "leporazine"
@@ -538,8 +531,8 @@ datum
 			name = "Virus Food"
 			id = "virusfood"
 			result = "virusfood"
-			required_reagents = list("water" = 5, "milk" = 5, "oxygen" = 5)
-			result_amount = 15
+			required_reagents = list("water" = 1, "milk" = 1, "oxygen" = 1)
+			result_amount = 3
 /*
 		mix_virus
 			name = "Mix Virus"
