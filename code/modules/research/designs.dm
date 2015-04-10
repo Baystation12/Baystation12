@@ -485,6 +485,12 @@ datum/design/circuit/tcom/receiver
 	req_tech = list("programming" = 4, "engineering" = 3, "bluespace" = 2)
 	build_path = /obj/item/weapon/circuitboard/telecomms/receiver
 
+datum/design/circuit/tcom/bluespacerelay
+	name = "emergency bluespace relay"
+	id = "bluespace-relay"
+	req_tech = list("programming" = 4, "bluespace" = 4)
+	build_path = /obj/item/weapon/circuitboard/bluespacerelay
+
 ///////////////////////////////////
 ////////////Mecha Modules//////////
 ///////////////////////////////////
