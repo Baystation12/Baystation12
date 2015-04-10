@@ -1629,7 +1629,9 @@ datum
 			required_reagents = list("egg" = 3, "flour" = 10)
 			result_amount = 1
 			on_reaction(var/datum/reagents/holder, var/created_volume)
-				new /obj/item/weapon/reagent_containers/food/snacks/dough(get_turf(holder.my_atom))
+				var/turf/T = get_turf(holder.my_atom)
+				for(var/i = 1 to created_volume)
+					new /obj/item/weapon/reagent_containers/food/snacks/dough(T)
 				return
 
 		syntiflesh
@@ -1639,8 +1641,9 @@ datum
 			required_reagents = list("blood" = 5, "clonexadone" = 1)
 			result_amount = 1
 			on_reaction(var/datum/reagents/holder, var/created_volume)
-				var/location = get_turf(holder.my_atom)
-				new /obj/item/weapon/reagent_containers/food/snacks/meat/syntiflesh(location)
+				var/turf/T = get_turf(holder.my_atom)
+				for(var/i = 1 to created_volume)
+					new /obj/item/weapon/reagent_containers/food/snacks/meat/syntiflesh(T)
 				return
 
 		hot_ramen
