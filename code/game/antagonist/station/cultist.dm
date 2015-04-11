@@ -29,6 +29,7 @@ var/datum/antagonist/cultist/cult
 	var/list/startwords = list("blood","join","self","hell")
 	var/list/allwords = list("travel","self","see","hell","blood","join","tech","destroy", "other", "hide")
 	var/list/sacrificed = list()
+	var/list/harvested = list()
 
 /datum/antagonist/cultist/New()
 	..()

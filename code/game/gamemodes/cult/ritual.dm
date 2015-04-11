@@ -498,6 +498,9 @@ var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","
 		else
 			user << "The scriptures of Nar-Sie, The One Who Sees, The Geometer of Blood. Contains the details of every ritual his followers could think of. Most of these are useless, though."
 
+/obj/item/weapon/book/tome/cultify()
+	return
+
 /obj/item/weapon/book/tome/imbued //admin tome, spawns working runes without waiting
 	w_class = 2.0
 	var/cultistsonly = 1

@@ -215,3 +215,16 @@
 	health -= damage
 	spawn(1) healthcheck()
 	return 1
+
+/obj/structure/grille/cult
+	name = "cult grille"
+	desc = "A matrice built out of an unknown material, with some sort of force field blocking air around it"
+	icon_state = "grillecult"
+	health = 40 //Make it strong enough to avoid people breaking in too easily
+
+/obj/structure/grille/cult/CanPass(atom/movable/mover, turf/target, height = 1.5, air_group = 0)
+	if(air_group)
+		return 0 //Make sure air doesn't drain
+	..()
+
+

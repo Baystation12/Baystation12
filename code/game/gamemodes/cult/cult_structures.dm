@@ -3,6 +3,9 @@
 	anchored = 1
 	icon = 'icons/obj/cult.dmi'
 
+/obj/structure/cult/cultify()
+	return
+
 /obj/structure/cult/talisman
 	name = "Altar"
 	desc = "A bloodstained altar dedicated to Nar-Sie"

@@ -1,4 +1,3 @@
-
 /mob/living/simple_animal/construct
 	name = "Construct"
 	real_name = "Construct"
@@ -34,6 +33,9 @@
 	mob_push_flags = ALLMOBS
 
 	var/list/construct_spells = list()
+
+/mob/living/simple_animal/construct/cultify()
+	return
 
 /mob/living/simple_animal/construct/New()
 	..()

@@ -1,5 +1,8 @@
 var/list/sacrificed = list()
 
+/obj/effect/rune/cultify()
+	return
+
 /obj/effect/rune
 
 /////////////////////////////////////////FIRST RUNE
