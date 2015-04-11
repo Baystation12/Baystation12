@@ -180,6 +180,9 @@ var/list/sacrificed = list()
 /////////////////////////////////////////FOURTH RUNE
 
 		tearreality()
+			if(!cult.allow_narsie)
+				return fizzle()
+
 			var/list/cultists = new()
 			for(var/mob/M in range(1,src))
 				if(iscultist(M) && !M.stat)

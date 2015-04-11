@@ -428,6 +428,10 @@
 	if ((!( ticker ) || !emergency_shuttle.location()))
 		return
 
+	if(!universe.OnShuttleCall(usr))
+		user << "<span class='notice'>Cannot establish a bluespace connection.</span>"
+		return
+
 	if(deathsquad.deployed)
 		user << "Centcom will not allow the shuttle to be called. Consider all contracts terminated."
 		return

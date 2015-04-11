@@ -1,3 +1,8 @@
+/mob
+	//thou shall always be able to see the Geometer of Blood
+	var/image/narsimage = null
+	var/image/narglow = null
+
 /mob/proc/cultify()
 	return
 
@@ -26,3 +31,33 @@
 		cult.harvested += G.mind
 	else
 		dust()
+
+/mob/proc/see_narsie(var/obj/machinery/singularity/narsie/large/N, var/dir)
+	if(N.chained)
+		if(narsimage)
+			del(narsimage)
+			del(narglow)
+		return
+	if((N.z == src.z)&&(get_dist(N,src) <= (N.consume_range+10)) && !(N in view(src)))
+		if(!narsimage) //Create narsimage
+			narsimage = image('icons/obj/narsie.dmi',src.loc,"narsie",9,1)
+			narsimage.mouse_opacity = 0
+		if(!narglow) //Create narglow
+			narglow = image('icons/obj/narsie.dmi',narsimage.loc,"glow-narsie",LIGHTING_LAYER+2,1)
+			narglow.mouse_opacity = 0
+		//Else if no dir is given, simply send them the image of narsie
+		var/new_x = 32 * (N.x - src.x) + N.pixel_x
+		var/new_y = 32 * (N.y - src.y) + N.pixel_y
+		narsimage.pixel_x = new_x
+		narsimage.pixel_y = new_y
+		narglow.pixel_x = new_x
+		narglow.pixel_y = new_y
+		narsimage.loc = src.loc
+		narglow.loc = src.loc
+		//Display the new narsimage to the player
+		src << narsimage
+		src << narglow
+	else
+		if(narsimage)
+			del(narsimage)
+			del(narglow)

@@ -22,6 +22,11 @@
 /obj/structure/grille/meteorhit(var/obj/M)
 	del(src)
 
+/obj/structure/grille/update_icon()
+	if(destroyed)
+		icon_state = "[initial(icon_state)]-b"
+	else
+		icon_state = initial(icon_state)
 
 /obj/structure/grille/Bumped(atom/user)
 	if(ismob(user)) shock(user, 70)
@@ -165,9 +170,9 @@
 /obj/structure/grille/proc/healthcheck()
 	if(health <= 0)
 		if(!destroyed)
-			icon_state = "brokengrille"
 			density = 0
 			destroyed = 1
+			update_icon()
 			new /obj/item/stack/rods(loc)
 
 		else
@@ -226,5 +231,3 @@
 	if(air_group)
 		return 0 //Make sure air doesn't drain
 	..()
-
-

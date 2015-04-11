@@ -52,12 +52,10 @@
 		new I(loc)
 	..()
 
-/obj/machinery/power/apc/cultify()
-	return
-
 /obj/machinery/atmospherics/cultify()
 	if(src.invisibility != INVISIBILITY_MAXIMUM)
 		src.invisibility = INVISIBILITY_MAXIMUM
+		density = 0
 
 /obj/machinery/cooking/cultify()
 	new /obj/structure/cult/talisman(loc)
@@ -84,9 +82,19 @@
 		del(c_animation)
 		qdel(src)
 
+/obj/machinery/door/firedoor/cultify()
+	qdel(src)
+
 /obj/machinery/light/cultify()
 	new /obj/structure/cult/pylon(loc)
 	qdel(src)
+
+/obj/machinery/mech_sensor/cultify()
+	qdel(src)
+
+/obj/machinery/power/apc/cultify()
+	if(src.invisibility != INVISIBILITY_MAXIMUM)
+		src.invisibility = INVISIBILITY_MAXIMUM
 
 /obj/machinery/vending/cultify()
 	new /obj/structure/cult/forge(loc)

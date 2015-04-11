@@ -909,3 +909,11 @@ var/list/be_special_flags = list(
 #define Sp_HOLDVAR	"holdervar"
 
 ///////WIZ END/////////
+
+//singularity defines
+#define STAGE_ONE 	1
+#define STAGE_TWO 	3
+#define STAGE_THREE	5
+#define STAGE_FOUR	7
+#define STAGE_FIVE	9
+#define STAGE_SUPER	11
