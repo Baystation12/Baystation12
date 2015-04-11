@@ -1,14 +1,49 @@
 // PRESETS
-var/global/list/station_networks = list("SS13","Civilian West","Engineering Outpost","MINE","Research Outpost","Prison","Security")
+#define NETWORK_CIVILIAN_WEST "Civilian West"
+#define NETWORK_ENGINE "Engine"
+#define NETWORK_ENGINEERING "Engineering"
+#define NETWORK_ENGINEERING_OUTPOST "Engineering Outpost"
+#define NETWORK_MINE "MINE"
+#define NETWORK_RESEARCH_OUTPOST "Research Outpost"
+#define NETWORK_PRISON "Prison"
+#define NETWORK_SECURITY "Security"
+
+var/global/list/station_networks = list(
+										"SS13",
+										NETWORK_CIVILIAN_WEST,
+										NETWORK_ENGINE,
+										NETWORK_ENGINEERING,
+										NETWORK_ENGINEERING_OUTPOST,
+										NETWORK_MINE,
+										NETWORK_RESEARCH_OUTPOST,
+										NETWORK_PRISON,
+										NETWORK_SECURITY
+										)
+var/global/list/engineering_networks = list(
+										NETWORK_ENGINE,
+										NETWORK_ENGINEERING,
+										NETWORK_ENGINEERING_OUTPOST,
+										"Atmosphere Alarms",
+										"Fire Alarms",
+										"Power Alarms")
 
 /obj/machinery/camera/network/civilian_west
-	network = list("Civilian West")
+	network = list(NETWORK_CIVILIAN_WEST)
+
+/obj/machinery/camera/network/engine
+	network = list(NETWORK_ENGINE)
+
+/obj/machinery/camera/network/engineering
+	network = list(NETWORK_ENGINEERING)
+
+/obj/machinery/camera/network/engineering_outpost
+	network = list(NETWORK_ENGINEERING_OUTPOST)
 
 /obj/machinery/camera/network/prison
-	network = list("Prison")
+	network = list(NETWORK_PRISON)
 
 /obj/machinery/camera/network/security
-	network = list("Security")
+	network = list(NETWORK_SECURITY)
 
 // EMP
 
@@ -42,19 +77,25 @@ var/global/list/station_networks = list("SS13","Civilian West","Engineering Outp
 // AUTONAME
 
 /obj/machinery/camera/autoname/civilian_west
-	network = list("Civilian West")
+	network = list(NETWORK_CIVILIAN_WEST)
+
+/obj/machinery/camera/autoname/engine
+	network = list(NETWORK_ENGINE)
+
+/obj/machinery/camera/autoname/engineering
+	network = list(NETWORK_ENGINEERING)
 
 /obj/machinery/camera/autoname/engineering_outpost
-	network = list("Engineering Outpost")
+	network = list(NETWORK_ENGINEERING_OUTPOST)
 
 /obj/machinery/camera/autoname/mining_outpost
-	network = list("MINE")
+	network = list(NETWORK_MINE)
 
 /obj/machinery/camera/autoname/research_outpost
-	network = list("Research Outpost")
+	network = list(NETWORK_RESEARCH_OUTPOST)
 
 /obj/machinery/camera/autoname/security
-	network = list("Security")
+	network = list(NETWORK_SECURITY)
 
 /obj/machinery/camera/autoname
 	var/number = 0 //camera number in area
@@ -73,6 +114,7 @@ var/global/list/station_networks = list("SS13","Civilian West","Engineering Outp
 					if(C.number)
 						number = max(number, C.number+1)
 			c_tag = "[A.name] #[number]"
+		invalidateCameraCache()
 
 
 // CHECKS
@@ -113,3 +155,12 @@ var/global/list/station_networks = list("SS13","Civilian West","Engineering Outp
 	if (isMotion())
 		mult++
 	active_power_usage = mult*initial(active_power_usage)
+
+#undef NETWORK_CIVILIAN_WEST
+#undef NETWORK_ENGINE
+#undef NETWORK_ENGINEERING
+#undef NETWORK_ENGINEERING_OUTPOST
+#undef NETWORK_MINE
+#undef NETWORK_RESEARCH_OUTPOST
+#undef NETWORK_PRISON
+#undef NETWORK_SECURITY

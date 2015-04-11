@@ -240,8 +240,12 @@
 	name = "engineering camera monitor"
 	desc = "Used to monitor fires and breaches."
 	icon_state = "engineeringcameras"
-	network = list("Engineering","Engineering Outpost","Power Alarms","Atmosphere Alarms","Fire Alarms")
 	circuit = /obj/item/weapon/circuitboard/security/engineering
+
+/obj/machinery/computer/security/engineering/New()
+	if(!network)
+		network = engineering_networks
+	..()
 
 /obj/machinery/computer/security/nuclear
 	name = "head mounted camera monitor"

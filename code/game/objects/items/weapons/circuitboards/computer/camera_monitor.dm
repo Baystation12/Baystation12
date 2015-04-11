@@ -5,16 +5,23 @@
 /obj/item/weapon/circuitboard/security
 	name = T_BOARD("security camera monitor")
 	build_path = /obj/machinery/computer/security
-	var/network = list("SS13")
 	req_access = list(access_security)
+	var/list/network
 	var/locked = 1
 	var/emagged = 0
+	
+/obj/item/weapon/circuitboard/security/New()
+	..()
+	network = station_networks
 
 /obj/item/weapon/circuitboard/security/engineering
 	name = T_BOARD("engineering camera monitor")
 	build_path = /obj/machinery/computer/security/engineering
-	network = list("Engineering","Power Alarms","Atmosphere Alarms","Fire Alarms")
 	req_access = list()
+	
+/obj/item/weapon/circuitboard/security/engineering/New()
+	..()
+	network = engineering_networks
 
 /obj/item/weapon/circuitboard/security/mining
 	name = T_BOARD("mining camera monitor")
