@@ -504,6 +504,13 @@
 	P.synths = list(plastic)
 	src.modules += P
 
+/obj/item/weapon/robot_module/drone/construction
+	name = "construction drone module"
+
+/obj/item/weapon/robot_module/drone/construction/New()
+	..()
+	src.modules += new /obj/item/weapon/rcd/borg(src)
+
 /obj/item/weapon/robot_module/drone/add_languages(var/mob/living/silicon/robot/R)
 	return	//not much ROM to spare in that tiny microprocessor!
 

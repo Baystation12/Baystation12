@@ -24,6 +24,10 @@
 
 	//Used for self-mailing.
 	var/mail_destination = ""
+	var/obj/machinery/drone_fabricator/master_fabricator
+	var/law_type = /datum/ai_laws/drone
+	var/can_pull_size = 2
+	var/can_pull_mobs
 
 	holder_type = /obj/item/weapon/holder/drone
 
@@ -35,9 +39,6 @@
 	remove_language("Robot Talk")
 	add_language("Robot Talk", 0)
 	add_language("Drone Talk", 1)
-
-	if(camera && "Robots" in camera.network)
-		camera.add_network("Engineering")
 
 	//They are unable to be upgraded, so let's give them a bit of a better battery.
 	cell.maxcharge = 10000
@@ -52,15 +53,15 @@
 		C.max_damage = 10
 
 	verbs -= /mob/living/silicon/robot/verb/Namepick
-	module = new /obj/item/weapon/robot_module/drone(src)
-
-	//Some tidying-up.
-	flavor_text = "It's a tiny little repair drone. The casing is stamped with an NT logo and the subscript: 'NanoTrasen Recursive Repair Systems: Fixing Tomorrow's Problem, Today!'"
 	updateicon()
 
 /mob/living/silicon/robot/drone/init()
-	laws = new /datum/ai_laws/drone()
+	laws = new law_type
 	aiCamera = new/obj/item/device/camera/siliconcam/drone_camera(src)
+	if(camera && "Robots" in camera.network)
+		camera.add_network("Engineering")
+	module = new /obj/item/weapon/robot_module/drone(src)
+	flavor_text = "It's a tiny little repair drone. The casing is stamped with an NT logo and the subscript: 'NanoTrasen Recursive Repair Systems: Fixing Tomorrow's Problem, Today!'"
 	playsound(src.loc, 'sound/machines/twobeep.ogg', 50, 0)
 
 //Redefining some robot procs...
@@ -185,7 +186,7 @@
 //Drones killed by damage will gib.
 /mob/living/silicon/robot/drone/handle_regular_status_updates()
 
-	if(health <= -35 && src.stat != 2)
+	if((health <= -35 || (master_fabricator && src.z != master_fabricator.z)) && src.stat != 2)
 		timeofdeath = world.time
 		death() //Possibly redundant, having trouble making death() cooperate.
 		gib()
@@ -219,7 +220,7 @@
 	clear_supplied_laws()
 	clear_inherent_laws()
 	clear_ion_laws()
-	laws = new /datum/ai_laws/drone
+	laws = new law_type
 
 //Reboot procs.
 
@@ -267,17 +268,33 @@
 		..()
 	else if(istype(AM,/obj/item))
 		var/obj/item/O = AM
-		if(O.w_class > 2)
+		if(O.w_class > can_pull_size)
 			src << "<span class='warning'>You are too small to pull that.</span>"
 			return
 		else
 			..()
 	else
-		src << "<span class='warning'>You are too small to pull that.</span>"
-		return
+		if(!can_pull_mobs)
+			src << "<span class='warning'>You are too small to pull that.</span>"
+			return
 
 /mob/living/silicon/robot/drone/add_robot_verbs()
 	src.verbs |= silicon_verbs_subsystems
 
 /mob/living/silicon/robot/drone/remove_robot_verbs()
 	src.verbs -= silicon_verbs_subsystems
+
+/mob/living/silicon/robot/drone/construction
+	can_pull_size = 5
+	can_pull_mobs = 1
+
+/mob/living/silicon/robot/drone/construction/init()
+	laws = new /datum/ai_laws/construction_drone()
+	aiCamera = new/obj/item/device/camera/siliconcam/drone_camera(src)
+	module = new /obj/item/weapon/robot_module/drone/construction(src)
+	flavor_text = "It's a bulky construction drone stamped with a Sol Central glyph."
+	playsound(src.loc, 'sound/machines/twobeep.ogg', 50, 0)
+
+/mob/living/silicon/robot/drone/construction/updatename()
+	real_name = "construction drone ([rand(100,999)])"
+	name = real_name
