@@ -305,7 +305,8 @@ var/list/admin_verbs_mentor = list(
 	/client/proc/cmd_mod_say,
 	/datum/admins/proc/show_player_info,
 	/datum/admins/proc/show_skills,
-    /client/proc/cmd_dev_say
+    /client/proc/cmd_dev_say,
+    /obj/machinery/faxmachine/proc/sendFax, /*allows us to send a fax to a specific fax machine.*/
 )
 
 var/list/admin_verbs_mod = list(
@@ -963,7 +964,7 @@ var/list/admin_verbs_hideable = list(
 		if(!msg)
 			return
 		for (var/mob/V in hearers(mob.control_object))
-			V.show_message("<b>[mob.control_object.name]</b> says: \"" + msg + "\"", 2)
+			V.show_message("<b>[mob.control_object.name]</b> says, \"" + msg + "\"", 2)
 	feedback_add_details("admin_verb","OT") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/kill_air() // -- TLE
@@ -1027,7 +1028,7 @@ var/list/admin_verbs_hideable = list(
 	set name = "Edit Appearance"
 	set category = "Fun"
 
-	if(!check_rights(R_FUN))	return
+//	if(!check_rights(R_FUN))	return
 
 	if(!istype(M, /mob/living/carbon/human))
 		usr << "\red You can only do this to humans!"

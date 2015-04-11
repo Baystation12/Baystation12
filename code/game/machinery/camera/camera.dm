@@ -361,7 +361,7 @@
 		src.network += "Security"
 	if(istype(A,/area/rnd/guard))
 		src.network += "Security"
-	if(istype(A,/area/security/interigation))
+	if(istype(A,/area/security/interrogation))
 		src.network += "Interrogation"
 	if(istype(A,/area/mine))
 		src.network += "MINE"

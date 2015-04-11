@@ -66,7 +66,7 @@ var/list/teleportlocs = list()
 		if(istype(AR, /area/shuttle) || istype(AR, /area/syndicate_station) || istype(AR, /area/wizard_station)) continue
 		if(teleportlocs.Find(AR.name)) continue
 		var/turf/picked = pick(get_area_turfs(AR.type))
-		if (picked.z == 1)
+		if (picked.z == 1|| picked.z==7 || picked.z==8) // For multi-z teleports!
 			teleportlocs += AR.name
 			teleportlocs[AR.name] = AR
 
@@ -1424,9 +1424,9 @@ var/list/ghostteleportlocs = list()
 	name = "Security Office"
 	icon_state = "security"
 
-/area/security/interigation
-	name = "Interigation Room"
-	icon_state = "security"
+/area/security/interrogation
+	name = "Interrogation Room"
+	icon_state = "secinterrogation"
 
 /area/security/lobby
 	name = "Security lobby"
