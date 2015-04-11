@@ -26,6 +26,9 @@
 	var/has_resources
 	var/list/resources
 
+	// Flick animation
+	var/atom/movable/overlay/c_animation = null
+
 /turf/New()
 	..()
 	for(var/atom/movable/AM as mob|obj in src)

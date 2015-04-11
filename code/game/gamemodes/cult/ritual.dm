@@ -2,7 +2,8 @@
 
 var/cultwords = list()
 var/runedec = 0
-var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", "self", "see", "other", "hide")
+var/global/list/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", "self", "see", "other", "hide")
+var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","mgar","balaq", "karazet", "geeri")
 
 /client/proc/check_words() // -- Urist
 	set category = "Special Verbs"
@@ -14,7 +15,7 @@ var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", 
 		usr << "[cultwords[word]] is [word]"
 
 /proc/runerandom() //randomizes word meaning
-	var/list/runewords=list("ire","ego","nahlizet","certum","veri","jatkaa","mgar","balaq", "karazet", "geeri") ///"orkan" and "allaq" removed.
+	var/list/runewords=rnwords
 	for (var/word in engwords)
 		cultwords[word] = pick(runewords)
 		runewords-=cultwords[word]
@@ -33,7 +34,7 @@ var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", 
 	var/word2
 	var/word3
 	var/list/converting = list()
-	
+
 // Places these combos are mentioned: this file - twice in the rune code, once in imbued tome, once in tome's HTML runes.dm - in the imbue rune code. If you change a combination - dont forget to change it everywhere.
 
 // travel self [word] - Teleport to random [rune with word destination matching]

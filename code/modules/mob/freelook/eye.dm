@@ -36,7 +36,7 @@ mob/eye/Del()
 		ghost_darkness_images -= ghostimage
 		ghost_sightless_images -= ghostimage
 		del(ghostimage)
-		ghostimage = null;
+		ghostimage = null
 		updateallghostimages()
 	..()
 

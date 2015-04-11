@@ -119,3 +119,6 @@
 
 #define ui_iarrowleft "SOUTH-1,11"
 #define ui_iarrowright "SOUTH-1,13"
+
+#define ui_spell_master "14:16,14:16"
+#define ui_genetic_master "14:16,12:16"

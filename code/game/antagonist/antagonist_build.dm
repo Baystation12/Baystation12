@@ -34,7 +34,7 @@
 	return 1
 
 	if(flags & ANTAG_SET_APPEARANCE)
-		player.change_appearance(APPEARANCE_ALL, player, player, valid_species)
+		player.change_appearance(APPEARANCE_ALL, player.loc, player, valid_species, state = z_state)
 
 /datum/antagonist/proc/unequip(var/mob/living/carbon/human/player)
 	if(!istype(player))

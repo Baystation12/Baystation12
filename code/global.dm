@@ -1,4 +1,7 @@
 //#define TESTING
+#if DM_VERSION < 506
+#warn This compiler is out of date. You may experience issues with projectile animations.
+#endif
 
 // Items that ask to be called every cycle.
 var/global/obj/effect/datacore/data_core = null
