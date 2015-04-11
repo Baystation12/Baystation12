@@ -34,13 +34,10 @@ var/global/list/GlobalPool = list()
 	if(!AM)
 		if(ispath(get_type))
 			if(islist(second_arg))
-				AM = new get_type (arglist(second_arg))
+				return new get_type (arglist(second_arg))
 			else
-				AM = new get_type (second_arg)
-	else
-	if(AM)
-		return AM
-
+				return new get_type (second_arg)
+	return AM
 
 
 /proc/GetFromPool(var/get_type,var/second_arg)
