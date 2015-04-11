@@ -1,5 +1,19 @@
 #define DEBUG
 
+/*** RuBaystation... ***/
+#define DEBUG_CYRILLIC       //расскоментить для вывода дебаг-информации, связанной с sanitize текста и исправления "я"
+
+#define JA_TEMP    "¶"       //техническая замена "я"
+#define JA_CHAT    "&#255;"  //ascii(windows-1251) код, используется в чате игры
+#define JA_POPUP   "&#1103;" //unicode вариант для вплывающих окон
+
+//ja_mode для sanitize()
+#define TEMP       0
+#define CHAT       1
+#define POPUP      2
+
+/*** ...RuBaystation ***/
+
 // Math constants.
 #define M_E     2.71828183
 #define M_PI    3.14159265
