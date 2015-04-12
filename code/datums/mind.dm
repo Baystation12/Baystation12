@@ -194,7 +194,7 @@ datum/mind
 			switch (new_obj_type)
 				if ("assassinate","protect","debrain", "harm", "brig")
 					//To determine what to name the objective in explanation text.
-					var/objective_type_capital = uppertext(copytext(new_obj_type, 1,2))//Capitalize first letter.
+					var/objective_type_capital = uppertext_alt(copytext(new_obj_type, 1,2))//Capitalize first letter.
 					var/objective_type_text = copytext(new_obj_type, 2)//Leave the rest of the text.
 					var/objective_type = "[objective_type_capital][objective_type_text]"//Add them together into a text string.
 

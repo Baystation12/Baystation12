@@ -50,11 +50,11 @@
 		var/next = Xa + 1
 		if(heard_words.len > 20 + rand(10,20))
 			heard_words.Remove(heard_words[1])
-		if(!heard_words["[lowertext(seperate[Xa])]"])
-			heard_words["[lowertext(seperate[Xa])]"] = list()
-		var/list/w = heard_words["[lowertext(seperate[Xa])]"]
+		if(!heard_words["[lowertext_alt(seperate[Xa])]"])
+			heard_words["[lowertext_alt(seperate[Xa])]"] = list()
+		var/list/w = heard_words["[lowertext_alt(seperate[Xa])]"]
 		if(w)
-			w.Add("[lowertext(seperate[next])]")
+			w.Add("[lowertext_alt(seperate[next])]")
 		//world << "Adding [lowertext(seperate[next])] to [lowertext(seperate[Xa])]"
 
 	if(prob(30))
@@ -87,10 +87,10 @@
 	else
 		text = pick(text2list(word, " "))
 	if(lentext(text)==1)
-		text=uppertext(text)
+		text=uppertext_alt(text)
 	else
 		var/cap = copytext(text,1,2)
-		cap = uppertext(cap)
+		cap = uppertext_alt(cap)
 		cap += copytext(text,2,lentext(text)+1)
 		text=cap
 	var/q = 0
@@ -98,7 +98,7 @@
 	if(msg=="What" | msg == "Who" | msg == "How" | msg == "Why" | msg == "Are")
 		q=1
 
-	text=lowertext(text)
+	text=lowertext_alt(text)
 	for(var/ya,ya <= limit,ya++)
 
 		if(heard_words.Find("[text]"))

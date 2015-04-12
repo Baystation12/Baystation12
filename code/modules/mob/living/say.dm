@@ -87,7 +87,7 @@ proc/get_radio_key_from_channel(var/channel)
 	var/speech_problem_flag = 0
 
 	if((HULK in mutations) && health >= 25 && length(message))
-		message = "[uppertext(message)]!!!"
+		message = "[uppertext_alt(message)]!!!"
 		verb = pick("yells","roars","hollers")
 		speech_problem_flag = 1
 	if(slurring)

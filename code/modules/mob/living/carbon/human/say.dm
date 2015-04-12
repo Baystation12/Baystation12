@@ -160,7 +160,7 @@
 				message = stutter(message)
 				verb = pick("stammers", "stutters")
 			if(prob(braindam))
-				message = uppertext(message)
+				message = uppertext_alt(message)
 				verb = "yells loudly"
 
 	returns[1] = message
