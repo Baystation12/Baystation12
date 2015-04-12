@@ -244,7 +244,7 @@
 	..()
 
 /obj/machinery/smartfridge/attack_ai(mob/user as mob)
-	return 0
+	attack_hand(user)
 
 /obj/machinery/smartfridge/attack_hand(mob/user as mob)
 	if(stat & (NOPOWER|BROKEN))

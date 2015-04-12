@@ -479,17 +479,6 @@
 
 	if ((usr.contents.Find(src) || (in_range(src, usr) && istype(src.loc, /turf))))
 		if ((href_list["vend"]) && (src.vend_ready) && (!currently_vending))
-
-			if(istype(usr,/mob/living/silicon))
-				if(istype(usr,/mob/living/silicon/robot))
-					var/mob/living/silicon/robot/R = usr
-					if(!(R.module && istype(R.module,/obj/item/weapon/robot_module/butler) ))
-						usr << "\red The vending machine refuses to interface with you, as you are not in its target demographic!"
-						return
-				else
-					usr << "\red The vending machine refuses to interface with you, as you are not in its target demographic!"
-					return
-
 			if((!allowed(usr)) && !emagged && scan_id)	//For SECURE VENDING MACHINES YEAH
 				usr << "<span class='warning'>Access denied.</span>"	//Unless emagged of course
 				flick(icon_deny,src)
@@ -504,6 +493,9 @@
 
 			if(R.price <= 0)
 				src.vend(R, usr)
+			else if(istype(usr,/mob/living/silicon)) //If the item is not free, provide feedback if a synth is trying to buy something.
+				usr << "<span class='danger'>Artificial unit recognized.  Artificial units cannot complete this transaction.  Purchase canceled.</span>"
+				return
 			else
 				src.currently_vending = R
 				if(!vendor_account || vendor_account.suspended)
