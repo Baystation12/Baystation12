@@ -484,7 +484,7 @@
 	src.modules += new /obj/item/device/multitool(src)
 	src.modules += new /obj/item/device/lightreplacer(src)
 	src.modules += new /obj/item/weapon/gripper(src)
-	src.modules += new /obj/item/weapon/reagent_containers/spray/cleaner/drone(src)
+	src.modules += new /obj/item/weapon/soap(src)
 	src.emag = new /obj/item/weapon/pickaxe/plasmacutter(src)
 	src.emag.name = "Plasma Cutter"
 
@@ -542,16 +542,19 @@
 	P.synths = list(plastic)
 	src.modules += P
 
+/obj/item/weapon/robot_module/drone/construction
+	name = "construction drone module"
+
+/obj/item/weapon/robot_module/drone/construction/New()
+	..()
+	src.modules += new /obj/item/weapon/rcd/borg(src)
+
 /obj/item/weapon/robot_module/drone/add_languages(var/mob/living/silicon/robot/R)
 	return	//not much ROM to spare in that tiny microprocessor!
 
 /obj/item/weapon/robot_module/drone/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
-	var/obj/item/weapon/reagent_containers/spray/cleaner/C = locate() in src.modules
-	C.reagents.add_reagent("cleaner", 3 * amount)
-
 	var/obj/item/device/lightreplacer/LR = locate() in src.modules
 	LR.Charge(R, amount)
-
 	..()
 	return
 
@@ -559,7 +562,5 @@
 /obj/item/proc/is_robot_module()
 	if (!istype(src.loc, /mob/living/silicon/robot))
 		return 0
-
 	var/mob/living/silicon/robot/R = src.loc
-
 	return (src in R.module.modules)
