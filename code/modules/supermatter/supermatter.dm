@@ -273,12 +273,12 @@
 
 	Consume(user)
 
-/obj/machinery/power/supermatter/proc/transfer_energy()
-	for(var/obj/machinery/power/rad_collector/R in rad_collectors)
-		var/distance = get_dist(R, src)
+/obj/machinery/power/supermatter/proc/transfer_energy() //Bay will comment this out in a later commit. Uncomment it and all instances of transfer_energy() - T
+	for(var/obj/machinery/power/rad_collector/C in rad_collectors)
+		var/distance = get_dist(C, src)
 		if(distance <= 15)
 			//for collectors using standard phoron tanks at 1013 kPa, the actual power generated will be this power*POWER_FACTOR*20*29 = power*POWER_FACTOR*580
-			R.receive_pulse(power * POWER_FACTOR * (min(3/distance, 1))**2)
+			C.receive_pulse(power * POWER_FACTOR * (min(3/distance, 1))**2)
 	return
 
 /obj/machinery/power/supermatter/attackby(obj/item/weapon/W as obj, mob/living/user as mob)
