@@ -2,11 +2,12 @@
 	name = "cargo cap"
 	desc = "It's a baseball hat in a tasteless yellow color."
 	icon_state = "cargosoft"
-	flags = FPRINT|TABLEPASS|HEADCOVERSEYES
+	flags = HEADCOVERSEYES
 	item_state = "helmet"
 	item_color = "cargo"
 	var/flipped = 0
 	siemens_coefficient = 0.9
+	body_parts_covered = 0
 
 	dropped()
 		src.icon_state = "[item_color]soft"
@@ -25,7 +26,7 @@
 			else
 				icon_state = "[item_color]soft"
 				usr << "You flip the hat back in normal position."
-			usr.update_inv_head()	//so our mob-overlays update
+			update_clothing_icon()	//so our mob-overlays update
 
 /obj/item/clothing/head/soft/red
 	name = "red cap"

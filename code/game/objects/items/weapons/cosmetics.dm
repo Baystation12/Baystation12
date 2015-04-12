@@ -4,7 +4,6 @@
 	desc = "A generic brand of lipstick."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "lipstick"
-	flags = FPRINT | TABLEPASS
 	w_class = 1.0
 	var/colour = "red"
 	var/open = 0
@@ -65,24 +64,18 @@
 	else
 		user << "<span class='notice'>Where are the lips on that?</span>"
 
-//you can wipe off lipstick with paper!
-/obj/item/weapon/paper/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
-	if(user.zone_sel.selecting == "mouth")
-		if(!istype(M, /mob))	return
+//you can wipe off lipstick with paper! see code/modules/paperwork/paper.dm, paper/attack()
 
-		if(ishuman(M))
-			var/mob/living/carbon/human/H = M
-			if(H == user)
-				user << "<span class='notice'>You wipe off the lipstick with [src].</span>"
-				H.lip_style = null
-				H.update_body()
-			else
-				user.visible_message("<span class='warning'>[user] begins to wipe [H]'s lipstick off with \the [src].</span>", \
-								 	 "<span class='notice'>You begin to wipe off [H]'s lipstick.</span>")
-				if(do_after(user, 10) && do_after(H, 10, 5, 0))	//user needs to keep their active hand, H does not.
-					user.visible_message("<span class='notice'>[user] wipes [H]'s lipstick off with \the [src].</span>", \
-										 "<span class='notice'>You wipe off [H]'s lipstick.</span>")
-					H.lip_style = null
-					H.update_body()
-	else
-		..()
+
+/obj/item/weapon/haircomb //sparklysheep's comb
+	name = "purple comb"
+	desc = "A pristine purple comb made from flexible plastic."
+	w_class = 1.0
+	icon = 'icons/obj/items.dmi'
+	icon_state = "purplecomb"
+	item_state = "purplecomb"
+
+/obj/item/weapon/haircomb/attack_self(mob/user)
+	if(user.r_hand == src || user.l_hand == src)
+		user.visible_message(text("\red [] uses [] to comb their hair with incredible style and sophistication. What a [].", user, src, user.gender == FEMALE ? "lady" : "guy"))
+	return

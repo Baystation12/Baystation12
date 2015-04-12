@@ -15,13 +15,12 @@
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "pen"
 	item_state = "pen"
-	flags = FPRINT | TABLEPASS
 	slot_flags = SLOT_BELT | SLOT_EARS
 	throwforce = 0
 	w_class = 1.0
 	throw_speed = 7
 	throw_range = 15
-	m_amt = 10
+	matter = list("metal" = 10)
 	var/colour = "black"	//what colour the ink is!
 	pressure_resistance = 2
 
@@ -58,7 +57,7 @@
  */
 /obj/item/weapon/pen/sleepypen
 	desc = "It's a black ink pen with a sharp point and a carefully engraved \"Waffle Co.\""
-	flags = FPRINT | TABLEPASS | OPENCONTAINER
+	flags = OPENCONTAINER
 	slot_flags = SLOT_BELT
 	origin_tech = "materials=2;syndicate=5"
 
@@ -85,7 +84,7 @@
  * Parapens
  */
  /obj/item/weapon/pen/paralysis
-	flags = FPRINT | TABLEPASS | OPENCONTAINER
+	flags = OPENCONTAINER
 	slot_flags = SLOT_BELT
 	origin_tech = "materials=2;syndicate=5"
 
@@ -109,7 +108,32 @@
 	reagents = R
 	R.my_atom = src
 	R.add_reagent("zombiepowder", 10)
-	R.add_reagent("impedrezene", 25)
 	R.add_reagent("cryptobiolin", 15)
 	..()
 	return
+
+/*
+ * Chameleon pen
+ */
+/obj/item/weapon/pen/chameleon
+	var/signature = ""
+
+/obj/item/weapon/pen/chameleon/attack_self(mob/user as mob)
+	/*
+	// Limit signatures to official crew members
+	var/personnel_list[] = list()
+	for(var/datum/data/record/t in data_core.locked) //Look in data core locked.
+		personnel_list.Add(t.fields["name"])
+	personnel_list.Add("Anonymous")
+
+	var/new_signature = input("Enter new signature pattern.", "New Signature") as null|anything in personnel_list
+	if(new_signature)
+		signature = new_signature
+	*/
+	signature = trim_strip_html_properly(input("Enter new signature. Leave blank for 'Anonymous'", "New Signature", signature))
+
+/obj/item/weapon/pen/proc/get_signature(var/mob/user)
+	return (user && user.real_name) ? user.real_name : "Anonymous"
+
+/obj/item/weapon/pen/chameleon/get_signature(var/mob/user)
+	return signature ? signature : "Anonymous"

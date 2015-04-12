@@ -3,13 +3,13 @@
 	desc = "Some rods. Can be used for building, or something."
 	singular_name = "metal rod"
 	icon_state = "rods"
-	flags = FPRINT | TABLEPASS| CONDUCT
+	flags = CONDUCT
 	w_class = 3.0
 	force = 9.0
 	throwforce = 15.0
 	throw_speed = 5
 	throw_range = 20
-	m_amt = 1875
+	matter = list("metal" = 1875)
 	max_amount = 60
 	attack_verb = list("hit", "bludgeoned", "whacked")
 
@@ -52,15 +52,19 @@
 				use(1)
 			else
 				return 1
-	else
+
+	else if(!in_use)
 		if(amount < 2)
 			user << "\blue You need at least two rods to do this."
 			return
 		usr << "\blue Assembling grille..."
+		in_use = 1
 		if (!do_after(usr, 10))
+			in_use = 0
 			return
 		var/obj/structure/grille/F = new /obj/structure/grille/ ( usr.loc )
 		usr << "\blue You assemble a grille"
+		in_use = 0
 		F.add_fingerprint(usr)
 		use(2)
 	return

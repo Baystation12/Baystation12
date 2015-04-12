@@ -74,13 +74,13 @@ move an amendment</a> to the drawing.</p>
 
 
 /obj/item/blueprints/proc/get_area()
-	var/turf/T = get_turf_loc(usr)
+	var/turf/T = get_turf(usr)
 	var/area/A = T.loc
 	A = A.master
 	return A
 
 /obj/item/blueprints/proc/get_area_type(var/area/A = get_area())
-	if (A.name == "Space")
+	if(istype(A, /area/space))
 		return AREA_SPACE
 	var/list/SPECIALS = list(
 		/area/shuttle,
@@ -101,7 +101,7 @@ move an amendment</a> to the drawing.</p>
 
 /obj/item/blueprints/proc/create_area()
 	//world << "DEBUG: create_area"
-	var/res = detect_room(get_turf_loc(usr))
+	var/res = detect_room(get_turf(usr))
 	if(!istype(res,/list))
 		switch(res)
 			if(ROOM_ERR_SPACE)
@@ -122,7 +122,7 @@ move an amendment</a> to the drawing.</p>
 		return
 	var/area/A = new
 	A.name = str
-	A.tag="[A.type]_[md5(str)]" // without this dynamic light system ruin everithing
+	A.tagbase = "[A.type]_[md5(str)]" // without this dynamic light system ruin everithing
 	//var/ma
 	//ma = A.master ? "[A.master]" : "(null)"
 	//world << "DEBUG: create_area: <br>A.name=[A.name]<br>A.tag=[A.tag]<br>A.master=[ma]"

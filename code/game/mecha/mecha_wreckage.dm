@@ -11,7 +11,7 @@
 	anchored = 0
 	opacity = 0
 	var/list/welder_salvage = list(/obj/item/stack/sheet/plasteel,/obj/item/stack/sheet/metal,/obj/item/stack/rods)
-	var/list/wirecutters_salvage = list(/obj/item/weapon/cable_coil)
+	var/list/wirecutters_salvage = list(/obj/item/stack/cable_coil)
 	var/list/crowbar_salvage
 	var/salvage_num = 5
 
@@ -153,27 +153,6 @@
 	name = "Death-Ripley wreckage"
 	icon_state = "deathripley-broken"
 
-/obj/effect/decal/mecha_wreckage/honker
-	name = "Honker wreckage"
-	icon_state = "honker-broken"
-
-	New()
-		..()
-		var/list/parts = list(
-								/obj/item/mecha_parts/chassis/honker,
-								/obj/item/mecha_parts/part/honker_torso,
-								/obj/item/mecha_parts/part/honker_head,
-								/obj/item/mecha_parts/part/honker_left_arm,
-								/obj/item/mecha_parts/part/honker_right_arm,
-								/obj/item/mecha_parts/part/honker_left_leg,
-								/obj/item/mecha_parts/part/honker_right_leg)
-		for(var/i=0;i<2;i++)
-			if(!isemptylist(parts) && prob(40))
-				var/part = pick(parts)
-				welder_salvage += part
-				parts -= part
-		return
-
 /obj/effect/decal/mecha_wreckage/durand
 	name = "Durand wreckage"
 	icon_state = "durand-broken"
@@ -218,3 +197,7 @@
 				welder_salvage += part
 				parts -= part
 		return
+
+/obj/effect/decal/mecha_wreckage/hoverpod
+	name = "Hover pod wreckage"
+	icon_state = "engineering_pod-broken"

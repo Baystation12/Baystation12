@@ -6,7 +6,7 @@
 	icon_state = "health"
 	w_class = 2.0
 	item_state = "electronic"
-	flags = FPRINT | TABLEPASS | CONDUCT
+	flags = CONDUCT
 
 /obj/item/device/antibody_scanner/attack(mob/M as mob, mob/user as mob)
 	if(!istype(M,/mob/living/carbon/))
@@ -58,19 +58,18 @@
 		return
 	..()
 	if(prob(50))
-		user << "\The [src] shatters!"
+		user << "<span class='danger'>\The [src] shatters!</span>"
 		if(virus2.infectionchance > 0)
 			for(var/mob/living/carbon/target in view(1, get_turf(src)))
 				if(airborne_can_reach(get_turf(src), get_turf(target)))
-					if(get_infection_chance(target))
-						infect_virus2(target,src.virus2)
+					infect_virus2(target, src.virus2)
 		del src
 
-/obj/item/weapon/virusdish/examine()
-	usr << "This is a virus containment dish."
+/obj/item/weapon/virusdish/examine(mob/user)
+	user << "This is a virus containment dish."
 	if(src.info)
-		usr << "It has the following information about its contents:"
-		usr << src.info
+		user << "It has the following information about its contents:"
+		user << src.info
 
 /obj/item/weapon/ruinedvirusdish
 	name = "ruined virus sample"
@@ -92,6 +91,7 @@
 	name = "blank GNA disk"
 	icon = 'icons/obj/cloning.dmi'
 	icon_state = "datadisk0"
+	w_class = 1
 	var/datum/disease2/effectholder/effect = null
 	var/list/species = null
 	var/stage = 1

@@ -1,12 +1,8 @@
-/mob/living/silicon/robot/examine()
-	set src in oview()
+/mob/living/silicon/robot/examine(mob/user)
+	var/custom_infix = custom_name ? ", [modtype] [braintype]" : ""
+	..(user, infix = custom_infix)
 
-	if(!usr || !src)	return
-	if( (usr.sdisabilities & BLIND || usr.blinded || usr.stat) && !istype(usr,/mob/dead/observer) )
-		usr << "<span class='notice'>Something is there but you can't see it.</span>"
-		return
-
-	var/msg = "<span class='info'>*---------*\nThis is \icon[src] \a <EM>[src]</EM>[custom_name ? ", [modtype] [braintype]" : ""]!\n"
+	var/msg = ""
 	msg += "<span class='warning'>"
 	if (src.getBruteLoss())
 		if (src.getBruteLoss() < 75)
@@ -27,7 +23,7 @@
 
 	if(!has_power)
 		msg += "<span class='warning'>It appears to be running on backup power.</span>\n"
-	
+
 	switch(src.stat)
 		if(CONSCIOUS)
 			if(!src.client)	msg += "It appears to be in stand-by mode.\n" //afk
@@ -35,12 +31,12 @@
 		if(DEAD)			msg += "<span class='deadsay'>It looks completely unsalvageable.</span>\n"
 	msg += "*---------*</span>"
 
-	if(print_flavor_text()) msg += "[print_flavor_text()]\n"
+	if(print_flavor_text()) msg += "\n[print_flavor_text()]\n"
 
 	if (pose)
 		if( findtext(pose,".",lentext(pose)) == 0 && findtext(pose,"!",lentext(pose)) == 0 && findtext(pose,"?",lentext(pose)) == 0 )
 			pose = addtext(pose,".") //Makes sure all emotes end with a period.
 		msg += "\nIt is [pose]"
 
-	usr << msg
+	user << msg
 	return

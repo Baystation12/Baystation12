@@ -8,6 +8,8 @@
 	icon = 'icons/obj/lighting.dmi'
 	icon_state = "glowshroomf"
 	layer = 2.1
+	l_color = "#003300"
+
 	var/endurance = 30
 	var/potency = 30
 	var/delay = 1200
@@ -26,7 +28,7 @@
 
 	..()
 
-	dir = CalcDir()
+	set_dir(CalcDir())
 
 	if(!floor)
 		switch(dir) //offset to make it be on the wall rather than on the floor
@@ -44,7 +46,7 @@
 
 	processing_objects += src
 
-	SetLuminosity(round(potency/10))
+	SetLuminosity(round(potency/15))
 	lastTick = world.timeofday
 
 /obj/effect/glowshroom/Del()
@@ -154,7 +156,7 @@
 		else
 	return
 
-/obj/effect/glowshroom/temperature_expose(datum/gas_mixture/air, exposed_temperature, exposed_volume)
+/obj/effect/glowshroom/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	if(exposed_temperature > 300)
 		endurance -= 5
 		CheckEndurance()

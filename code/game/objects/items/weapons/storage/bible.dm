@@ -5,7 +5,6 @@
 	throw_speed = 1
 	throw_range = 5
 	w_class = 3.0
-	flags = FPRINT | TABLEPASS
 	var/mob/affecting = null
 	var/deity_name = "Christ"
 
@@ -102,5 +101,6 @@
 			A.reagents.add_reagent("holywater",water2holy)
 
 /obj/item/weapon/storage/bible/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	playsound(src.loc, "rustle", 50, 1, -5)
+	if (src.use_sound)
+		playsound(src.loc, src.use_sound, 50, 1, -5)
 	..()

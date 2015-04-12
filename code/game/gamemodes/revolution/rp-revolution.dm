@@ -19,16 +19,12 @@
 	var/all_brigged = 0
 	var/brigged_time = 0
 
-	uplink_welcome = "Syndicate Uplink Console:"
-	uplink_uses = 10
-
-
 /datum/game_mode/rp_revolution/announce()
 	world << "<B>The current game mode is - Revolution RP!</B>"
 
 /datum/game_mode/rp_revolution/send_intercept()
 	var/intercepttext = "<FONT size = 3><B>Cent. Com. Update</B> Requested staus information:</FONT><HR>"
-	intercepttext += "<B> Cent. Com has recently been contacted by the following syndicate affiliated organisations in your area, please investigate any information you may have:</B>"
+	intercepttext += "<B> Cent. Com has recently been contacted by the following subervsive or criminal-affiliated organisations in your area, please investigate any information you may have:</B>"
 
 	var/list/possible_modes = list()
 	possible_modes.Add("revolution", "wizard", "traitor", "malf")
@@ -45,7 +41,7 @@
 	for (var/obj/machinery/computer/communications/comm in world)
 		if (!(comm.stat & (BROKEN | NOPOWER)) && comm.prints_intercept)
 			var/obj/item/weapon/paper/intercept = new /obj/item/weapon/paper( comm.loc )
-			intercept.name = "paper - 'Cent. Com. Status Summary'"
+			intercept.name = "Cent. Com. Status Summary"
 			intercept.info = intercepttext
 
 			comm.messagetitle.Add("Cent. Com. Status Summary")
@@ -87,18 +83,15 @@
 		update_rev_icons_added(rev_mind)
 
 	for(var/datum/mind/rev_mind in head_revolutionaries)
-		var/obj_count = 1
 		rev_mind.current << "\blue You are a member of the revolutionaries' leadership!"
-		for(var/datum/objective/objective in rev_mind.objectives)
-			rev_mind.current << "<B>Objective #[obj_count]</B>: [objective.explanation_text]"
-			obj_count++
+		show_objectives(rev_mind)
 
 	spawn (rand(waittime_l, waittime_h))
 		send_intercept()
 
 /datum/game_mode/rp_revolution/send_intercept()
 	var/intercepttext = "<FONT size = 3><B>Cent. Com. Update</B> Requested staus information:</FONT><HR>"
-	intercepttext += "<B> Cent. Com has recently been contacted by the following syndicate affiliated organisations in your area, please investigate any information you may have:</B>"
+	intercepttext += "<B> Cent. Com has recently been contacted by the following subversive or criminal-affiliated organisations in your area, please investigate any information you may have:</B>"
 
 	var/list/possible_modes = list()
 	possible_modes.Add("revolution", "wizard", "nuke", "traitor", "malf")
@@ -116,7 +109,7 @@
 	for (var/obj/machinery/computer/communications/comm in world)
 		if (!(comm.stat & (BROKEN | NOPOWER)) && comm.prints_intercept)
 			var/obj/item/weapon/paper/intercept = new /obj/item/weapon/paper( comm.loc )
-			intercept.name = "paper - 'Cent. Com. Status Summary'"
+			intercept.name = "Cent. Com. Status Summary"
 			intercept.info = intercepttext
 
 			comm.messagetitle.Add("Cent. Com. Status Summary")
@@ -134,7 +127,7 @@
 		for (var/obj/machinery/computer/communications/comm in world)
 			if (!(comm.stat & (BROKEN | NOPOWER)) && comm.prints_intercept)
 				var/obj/item/weapon/paper/intercept = new /obj/item/weapon/paper( comm.loc )
-				intercept.name = "paper - 'Cent. Com. Status Summary'"
+				intercept.name = "Cent. Com. Status Summary"
 				intercept.info = intercepttext
 
 				comm.messagetitle.Add("Cent. Com. Status Summary")

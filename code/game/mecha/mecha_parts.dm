@@ -2,12 +2,14 @@
 ////// Mecha Parts //////
 /////////////////////////
 
+// Mecha circuitboards can be found in /code/game/objects/items/weapons/circuitboards/mecha.dm
+
 /obj/item/mecha_parts
 	name = "mecha part"
 	icon = 'icons/mecha/mech_construct.dmi'
 	icon_state = "blank"
 	w_class = 5
-	flags = FPRINT | TABLEPASS | CONDUCT
+	flags = CONDUCT
 	origin_tech = "programming=2;materials=2"
 	var/construction_time = 100
 	var/list/construction_cost = list("metal"=20000,"glass"=5000)
@@ -18,7 +20,7 @@
 	icon_state = "backbone"
 	var/datum/construction/construct
 	construction_cost = list("metal"=20000)
-	flags = FPRINT | CONDUCT
+	flags = CONDUCT
 
 	attackby(obj/item/W as obj, mob/user as mob)
 		if(!construct || !construct.action(W, user))
@@ -232,52 +234,6 @@
 	icon_state = "ripley_r_leg"
 */
 
-////////// HONK
-
-/obj/item/mecha_parts/chassis/honker
-	name = "H.O.N.K Chassis"
-
-	New()
-		..()
-		construct = new /datum/construction/mecha/honker_chassis(src)
-
-/obj/item/mecha_parts/part/honker_torso
-	name="H.O.N.K Torso"
-	icon_state = "honker_harness"
-	construction_time = 300
-	construction_cost = list("metal"=35000,"glass"=10000,"bananium"=10000)
-
-/obj/item/mecha_parts/part/honker_head
-	name="H.O.N.K Head"
-	icon_state = "honker_head"
-	construction_time = 200
-	construction_cost = list("metal"=15000,"glass"=5000,"bananium"=5000)
-
-/obj/item/mecha_parts/part/honker_left_arm
-	name="H.O.N.K Left Arm"
-	icon_state = "honker_l_arm"
-	construction_time = 200
-	construction_cost = list("metal"=20000,"bananium"=5000)
-
-/obj/item/mecha_parts/part/honker_right_arm
-	name="H.O.N.K Right Arm"
-	icon_state = "honker_r_arm"
-	construction_time = 200
-	construction_cost = list("metal"=20000,"bananium"=5000)
-
-/obj/item/mecha_parts/part/honker_left_leg
-	name="H.O.N.K Left Leg"
-	icon_state = "honker_l_leg"
-	construction_time = 200
-	construction_cost = list("metal"=20000,"bananium"=5000)
-
-/obj/item/mecha_parts/part/honker_right_leg
-	name="H.O.N.K Right Leg"
-	icon_state = "honker_r_leg"
-	construction_time = 200
-	construction_cost = list("metal"=20000,"bananium"=5000)
-
-
 ////////// Phazon
 
 /obj/item/mecha_parts/chassis/phazon
@@ -292,42 +248,42 @@
 	name="Phazon Torso"
 	icon_state = "phazon_harness"
 	construction_time = 300
-	construction_cost = list("metal"=35000,"glass"=10000,"plasma"=20000)
+	construction_cost = list("metal"=35000,"glass"=10000,"phoron"=20000)
 	origin_tech = "programming=5;materials=7;bluespace=6;powerstorage=6"
 
 /obj/item/mecha_parts/part/phazon_head
 	name="Phazon Head"
 	icon_state = "phazon_head"
 	construction_time = 200
-	construction_cost = list("metal"=15000,"glass"=5000,"plasma"=10000)
+	construction_cost = list("metal"=15000,"glass"=5000,"phoron"=10000)
 	origin_tech = "programming=4;materials=5;magnets=6"
 
 /obj/item/mecha_parts/part/phazon_left_arm
 	name="Phazon Left Arm"
 	icon_state = "phazon_l_arm"
 	construction_time = 200
-	construction_cost = list("metal"=20000,"plasma"=10000)
+	construction_cost = list("metal"=20000,"phoron"=10000)
 	origin_tech = "materials=5;bluespace=2;magnets=2"
 
 /obj/item/mecha_parts/part/phazon_right_arm
 	name="Phazon Right Arm"
 	icon_state = "phazon_r_arm"
 	construction_time = 200
-	construction_cost = list("metal"=20000,"plasma"=10000)
+	construction_cost = list("metal"=20000,"phoron"=10000)
 	origin_tech = "materials=5;bluespace=2;magnets=2"
 
 /obj/item/mecha_parts/part/phazon_left_leg
 	name="Phazon Left Leg"
 	icon_state = "phazon_l_leg"
 	construction_time = 200
-	construction_cost = list("metal"=20000,"plasma"=10000)
+	construction_cost = list("metal"=20000,"phoron"=10000)
 	origin_tech = "materials=5;bluespace=3;magnets=3"
 
 /obj/item/mecha_parts/part/phazon_right_leg
 	name="Phazon Right Leg"
 	icon_state = "phazon_r_leg"
 	construction_time = 200
-	construction_cost = list("metal"=20000,"plasma"=10000)
+	construction_cost = list("metal"=20000,"phoron"=10000)
 	origin_tech = "materials=5;bluespace=3;magnets=3"
 
 ///////// Odysseus
@@ -393,90 +349,3 @@
 	origin_tech = "materials=3;engineering=3"
 	construction_time = 200
 	construction_cost = list("metal"=15000)*/
-
-
-///////// Circuitboards
-
-/obj/item/weapon/circuitboard/mecha
-	name = "Exosuit Circuit board"
-	icon = 'icons/obj/module.dmi'
-	icon_state = "std_mod"
-	item_state = "electronic"
-	board_type = "other"
-	flags = FPRINT | TABLEPASS | CONDUCT
-	force = 5.0
-	w_class = 2.0
-	throwforce = 5.0
-	throw_speed = 3
-	throw_range = 15
-
-	ripley
-		origin_tech = "programming=3"
-
-	ripley/peripherals
-		name = "Circuit board (Ripley Peripherals Control module)"
-		icon_state = "mcontroller"
-
-	ripley/main
-		name = "Circuit board (Ripley Central Control module)"
-		icon_state = "mainboard"
-
-	gygax
-		origin_tech = "programming=4"
-
-	gygax/peripherals
-		name = "Circuit board (Gygax Peripherals Control module)"
-		icon_state = "mcontroller"
-
-	gygax/targeting
-		name = "Circuit board (Gygax Weapon Control and Targeting module)"
-		icon_state = "mcontroller"
-		origin_tech = "programming=4;combat=4"
-
-	gygax/main
-		name = "Circuit board (Gygax Central Control module)"
-		icon_state = "mainboard"
-
-	durand
-		origin_tech = "programming=4"
-
-	durand/peripherals
-		name = "Circuit board (Durand Peripherals Control module)"
-		icon_state = "mcontroller"
-
-	durand/targeting
-		name = "Circuit board (Durand Weapon Control and Targeting module)"
-		icon_state = "mcontroller"
-		origin_tech = "programming=4;combat=4"
-
-	durand/main
-		name = "Circuit board (Durand Central Control module)"
-		icon_state = "mainboard"
-
-	honker
-		origin_tech = "programming=4"
-
-	honker/peripherals
-		name = "Circuit board (H.O.N.K Peripherals Control module)"
-		icon_state = "mcontroller"
-
-	honker/targeting
-		name = "Circuit board (H.O.N.K Weapon Control and Targeting module)"
-		icon_state = "mcontroller"
-
-	honker/main
-		name = "Circuit board (H.O.N.K Central Control module)"
-		icon_state = "mainboard"
-
-	odysseus
-		origin_tech = "programming=3"
-
-	odysseus/peripherals
-		name = "Circuit board (Odysseus Peripherals Control module)"
-		icon_state = "mcontroller"
-
-	odysseus/main
-		name = "Circuit board (Odysseus Central Control module)"
-		icon_state = "mainboard"
-
-

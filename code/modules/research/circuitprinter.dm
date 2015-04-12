@@ -15,6 +15,10 @@ using metal and glass, it uses glass and reagents (usually sulfuric acis).
 	var/uranium_amount = 0
 	var/max_material_amount = 75000.0
 
+	use_power = 1
+	idle_power_usage = 30
+	active_power_usage = 2500
+
 	New()
 		..()
 		component_parts = list()
@@ -142,3 +146,7 @@ using metal and glass, it uses glass and reagents (usually sulfuric acis).
 			new stacktype(src.loc, amount)
 		busy = 0
 		src.updateUsrDialog()
+
+//This is to stop these machines being hackable via clicking.
+/obj/machinery/r_n_d/circuit_imprinter/attack_hand(mob/user as mob)
+	return

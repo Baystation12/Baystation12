@@ -13,7 +13,7 @@
 I said no!
 /datum/recipe/syntitelebacon
 	items = list(
-		/obj/item/weapon/syntiflesh,
+		/obj/item/weapon/reagent_containers/food/snacks/meat/syntiflesh,
 		/obj/item/device/assembly/signaler
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/telebacon
@@ -80,43 +80,12 @@ I said no!
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/donut/normal
 
-/* what is this
-/datum/recipe/human
-	//invalid recipe
-	make_food(var/obj/container as obj)
-		var/human_name
-		var/human_job
-		for (var/obj/item/weapon/reagent_containers/food/snacks/meat/human/HM in container)
-			if (!HM.subjectname)
-				continue
-			human_name = HM.subjectname
-			human_job = HM.subjectjob
-			break
-		var/lastname_index = findtext(human_name, " ")
-		if (lastname_index)
-			human_name = copytext(human_name,lastname_index+1)
-
-		var/obj/item/weapon/reagent_containers/food/snacks/human/HB = ..(container)
-		HB.name = human_name+HB.name
-		HB.job = human_job
-		return HB
-*/
-
 /datum/recipe/human/burger
 	items = list(
 		/obj/item/weapon/reagent_containers/food/snacks/meat/human,
 		/obj/item/weapon/reagent_containers/food/snacks/bun
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/human/burger
-
-/* Duplicated by plainburger
-/datum/recipe/monkeyburger
-	items = list(
-		/obj/item/weapon/reagent_containers/food/snacks/bun,
-		/obj/item/weapon/reagent_containers/food/snacks/meat/monkey
-	)
-	result = /obj/item/weapon/reagent_containers/food/snacks/monkeyburger
-*/
 
 /datum/recipe/plainburger
 	items = list(
@@ -128,14 +97,14 @@ I said no!
 /datum/recipe/syntiburger
 	items = list(
 		/obj/item/weapon/reagent_containers/food/snacks/bun,
-		/obj/item/weapon/syntiflesh
+		/obj/item/weapon/reagent_containers/food/snacks/meat/syntiflesh
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/monkeyburger
 
 /datum/recipe/brainburger
 	items = list(
 		/obj/item/weapon/reagent_containers/food/snacks/bun,
-		/obj/item/brain
+		/obj/item/organ/brain
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/brainburger
 
@@ -252,9 +221,9 @@ I said no!
 		/obj/item/weapon/reagent_containers/food/snacks/dough,
 		/obj/item/weapon/reagent_containers/food/snacks/dough,
 		/obj/item/weapon/reagent_containers/food/snacks/dough,
-		/obj/item/weapon/syntiflesh,
-		/obj/item/weapon/syntiflesh,
-		/obj/item/weapon/syntiflesh,
+		/obj/item/weapon/reagent_containers/food/snacks/meat/syntiflesh,
+		/obj/item/weapon/reagent_containers/food/snacks/meat/syntiflesh,
+		/obj/item/weapon/reagent_containers/food/snacks/meat/syntiflesh,
 		/obj/item/weapon/reagent_containers/food/snacks/cheesewedge,
 		/obj/item/weapon/reagent_containers/food/snacks/cheesewedge,
 		/obj/item/weapon/reagent_containers/food/snacks/cheesewedge,
@@ -437,8 +406,8 @@ I said no!
 /datum/recipe/syntikabob
 	items = list(
 		/obj/item/stack/rods,
-		/obj/item/weapon/syntiflesh,
-		/obj/item/weapon/syntiflesh,
+		/obj/item/weapon/reagent_containers/food/snacks/meat/syntiflesh,
+		/obj/item/weapon/reagent_containers/food/snacks/meat/syntiflesh,
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/monkeykabob
 
@@ -533,7 +502,7 @@ I said no!
 /datum/recipe/syntisteak
 	reagents = list("sodiumchloride" = 1, "blackpepper" = 1)
 	items = list(
-		/obj/item/weapon/syntiflesh
+		/obj/item/weapon/reagent_containers/food/snacks/meat/syntiflesh
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/meatsteak
 
@@ -562,9 +531,9 @@ I said no!
 /datum/recipe/syntipizza
 	items = list(
 		/obj/item/weapon/reagent_containers/food/snacks/sliceable/flatdough,
-		/obj/item/weapon/syntiflesh,
-		/obj/item/weapon/syntiflesh,
-		/obj/item/weapon/syntiflesh,
+		/obj/item/weapon/reagent_containers/food/snacks/meat/syntiflesh,
+		/obj/item/weapon/reagent_containers/food/snacks/meat/syntiflesh,
+		/obj/item/weapon/reagent_containers/food/snacks/meat/syntiflesh,
 		/obj/item/weapon/reagent_containers/food/snacks/cheesewedge,
 		/obj/item/weapon/reagent_containers/food/snacks/grown/tomato,
 	)
@@ -878,7 +847,7 @@ I said no!
 
 /datum/recipe/poppypretzel
 	items = list(
-		/obj/item/seeds/poppyseed,
+		/obj/item/weapon/reagent_containers/food/snacks/grown/poppy,
 		/obj/item/weapon/reagent_containers/food/snacks/dough,
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/poppypretzel
@@ -1047,14 +1016,6 @@ I said no!
 	items = list()
 	result = /obj/item/weapon/reagent_containers/food/snacks/slimesoup
 
-/datum/recipe/clownstears
-	reagents = list("water" = 10)
-	items = list(
-		/obj/item/weapon/reagent_containers/food/snacks/grown/banana,
-		/obj/item/weapon/ore/clown,
-	)
-	result = /obj/item/weapon/reagent_containers/food/snacks/clownstears
-
 /datum/recipe/boiledslimeextract
 	reagents = list("water" = 5)
 	items = list(
@@ -1071,7 +1032,7 @@ I said no!
 		/obj/item/weapon/reagent_containers/food/snacks/egg,
 		/obj/item/weapon/reagent_containers/food/snacks/egg,
 		/obj/item/weapon/reagent_containers/food/snacks/egg,
-		/obj/item/brain
+		/obj/item/organ/brain
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/sliceable/braincake
 

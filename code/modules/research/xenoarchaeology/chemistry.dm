@@ -75,13 +75,12 @@ datum
 	desc = "A small, open-topped glass container for delicate research samples. It sports a re-useable strip for labelling with a pen."
 	icon = 'icons/obj/device.dmi'
 	icon_state = "solution_tray"
-	m_amt = 0
-	g_amt = 5
+	matter = list("glass" = 5)
 	w_class = 2.0
 	amount_per_transfer_from_this = 1
 	possible_transfer_amounts = list(1, 2)
 	volume = 2
-	flags = FPRINT | OPENCONTAINER
+	flags = OPENCONTAINER
 
 obj/item/weapon/reagent_containers/glass/solution_tray/attackby(obj/item/weapon/W as obj, mob/living/user as mob)
 	if(istype(W, /obj/item/weapon/pen))

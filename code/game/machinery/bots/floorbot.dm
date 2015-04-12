@@ -9,7 +9,6 @@
 	throw_speed = 2
 	throw_range = 5
 	w_class = 3.0
-	flags = TABLEPASS
 	var/created_name = "Floorbot"
 
 /obj/item/weapon/toolbox_tiles_sensor
@@ -22,7 +21,6 @@
 	throw_speed = 2
 	throw_range = 5
 	w_class = 3.0
-	flags = TABLEPASS
 	var/created_name = "Floorbot"
 
 //Floorbot
@@ -79,7 +77,7 @@
 	var/dat
 	dat += "<TT><B>Automatic Station Floor Repairer v1.0</B></TT><BR><BR>"
 	dat += "Status: <A href='?src=\ref[src];operation=start'>[src.on ? "On" : "Off"]</A><BR>"
-	dat += "Maintenance panel panel is [src.open ? "opened" : "closed"]<BR>"
+	dat += "Maintenance panel is [src.open ? "opened" : "closed"]<BR>"
 	dat += "Tiles left: [src.amount]<BR>"
 	dat += "Behvaiour controls are [src.locked ? "locked" : "unlocked"]<BR>"
 	if(!src.locked || issilicon(user))
@@ -103,7 +101,7 @@
 		var/obj/item/stack/tile/plasteel/T = W
 		if(src.amount >= 50)
 			return
-		var/loaded = min(50-src.amount, T.amount)
+		var/loaded = min(50-src.amount, T.get_amount())
 		T.use(loaded)
 		src.amount += loaded
 		user << "<span class='notice'>You load [loaded] tiles into the floorbot. He now contains [src.amount] tiles.</span>"
@@ -228,7 +226,7 @@
 	if((!src.target || src.target == null) && emagged == 2)
 		if(!src.target || src.target == null)
 			for (var/turf/simulated/floor/D in view(7,src))
-				if(!(D in floorbottargets) && D != src.oldtarget && D.floor_tile)
+				if(!(D in floorbottargets) && D != src.oldtarget && D.floor_type)
 					src.oldtarget = D
 					src.target = D
 					break
@@ -325,12 +323,12 @@
 			src.target = null
 			src.repairing = 0
 			return
-		if(src.amount + T.amount > 50)
+		if(src.amount + T.get_amount() > 50)
 			var/i = 50 - src.amount
 			src.amount += i
-			T.amount -= i
+			T.use(i)
 		else
-			src.amount += T.amount
+			src.amount += T.get_amount()
 			del(T)
 		src.updateicon()
 		src.target = null
@@ -339,7 +337,7 @@
 /obj/machinery/bot/floorbot/proc/maketile(var/obj/item/stack/sheet/metal/M)
 	if(!istype(M, /obj/item/stack/sheet/metal))
 		return
-	if(M.amount > 1)
+	if(M.get_amount() > 1)
 		return
 	visible_message("\red [src] begins to create tiles.")
 	src.repairing = 1
@@ -400,12 +398,15 @@
 		return
 	if(user.s_active)
 		user.s_active.close(user)
-	del(T)
-	var/obj/item/weapon/toolbox_tiles/B = new /obj/item/weapon/toolbox_tiles
-	user.put_in_hands(B)
-	user << "<span class='notice'>You add the tiles into the empty toolbox. They protrude from the top.</span>"
-	user.drop_from_inventory(src)
-	del(src)
+	if (T.use(10))
+		var/obj/item/weapon/toolbox_tiles/B = new /obj/item/weapon/toolbox_tiles
+		user.put_in_hands(B)
+		user << "<span class='notice'>You add the tiles into the empty toolbox. They protrude from the top.</span>"
+		user.drop_from_inventory(src)
+		del(src)
+	else
+		user << "<span class='warning'>You need 10 floortiles for a floorbot.</span>"
+	return
 
 /obj/item/weapon/toolbox_tiles/attackby(var/obj/item/W, mob/user as mob)
 	..()

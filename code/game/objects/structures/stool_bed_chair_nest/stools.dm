@@ -4,7 +4,6 @@
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "stool"
 	anchored = 1.0
-	flags = FPRINT
 	pressure_resistance = 15
 
 /obj/structure/stool/ex_act(severity)
@@ -54,16 +53,31 @@
 	w_class = 5.0
 	var/obj/structure/stool/origin = null
 
+/obj/item/weapon/stool/proc/deploy(var/mob/user)
+
+	if(!origin)
+		del src
+
+	origin.loc = get_turf(src)
+
+	if(user)
+		user.u_equip(src)
+		user.visible_message("\blue [user] puts [src] down.", "\blue You put [src] down.")
+
+	del src
+
+/obj/item/weapon/stool/dropped(mob/user as mob)
+	..()
+	if(istype(loc,/turf/))
+		deploy(user)
+
 /obj/item/weapon/stool/attack_self(mob/user as mob)
 	..()
-	origin.loc = get_turf(src)
-	user.u_equip(src)
-	user.visible_message("\blue [user] puts [src] down.", "\blue You put [src] down.")
-	del src
+	deploy(user)
 
 /obj/item/weapon/stool/attack(mob/M as mob, mob/user as mob)
 	if (prob(5) && istype(M,/mob/living))
-		user.visible_message("\red [user] breaks [src] over [M]'s back!.")
+		user.visible_message("\red [user] breaks [src] over [M]'s back!")
 		user.u_equip(src)
 		var/obj/item/stack/sheet/metal/m = new/obj/item/stack/sheet/metal
 		m.loc = get_turf(src)

@@ -27,16 +27,9 @@
 	max_w_class = 2
 	max_combined_w_class = 14
 
-	examine()
-		set src in oview(1)
-		..()
-		usr << text("The service panel is [src.open ? "open" : "closed"].")
-
-	attack_alien(mob/user as mob)
-		return attack_hand(user)
-
-	attack_paw(mob/user as mob)
-		return attack_hand(user)
+	examine(mob/user)
+		if(..(user, 1))
+			user << text("The service panel is [src.open ? "open" : "closed"].")
 
 	attackby(obj/item/weapon/W as obj, mob/user as mob)
 		if(locked)
@@ -152,7 +145,6 @@
 	icon_state = "secure"
 	item_state = "sec-case"
 	desc = "A large briefcase with a digital locking system."
-	flags = FPRINT | TABLEPASS
 	force = 8.0
 	throw_speed = 1
 	throw_range = 4
@@ -167,16 +159,12 @@
 		if ((src.loc == user) && (src.locked == 1))
 			usr << "\red [src] is locked and cannot be opened!"
 		else if ((src.loc == user) && (!src.locked))
-			playsound(src.loc, "rustle", 50, 1, -5)
-			if (user.s_active)
-				user.s_active.close(user) //Close and re-open
-			src.show_to(user)
+			src.open(usr)
 		else
 			..()
 			for(var/mob/M in range(1))
 				if (M.s_active == src)
 					src.close(M)
-			src.orient2hud(user)
 		src.add_fingerprint(user)
 		return
 
@@ -227,7 +215,6 @@
 	icon_opened = "safe0"
 	icon_locking = "safeb"
 	icon_sparking = "safespark"
-	flags = FPRINT | TABLEPASS
 	force = 8.0
 	w_class = 8.0
 	max_w_class = 8

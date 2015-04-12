@@ -14,7 +14,8 @@
 /datum/game_mode/revolution
 	name = "revolution"
 	config_tag = "revolution"
-	restricted_jobs = list("Security Officer", "Warden", "Detective", "AI", "Cyborg","Captain", "Head of Personnel", "Head of Security", "Chief Engineer", "Research Director", "Chief Medical Officer")
+	restricted_jobs = list("Internal Affairs Agent", "AI", "Cyborg","Captain", "Head of Personnel", "Head of Security", "Chief Engineer", "Research Director", "Chief Medical Officer")
+	protected_jobs = list("Security Officer", "Warden", "Detective")
 	required_players = 4
 	required_players_secret = 15
 	required_enemies = 3
@@ -91,7 +92,7 @@
 		greet_revolutionary(rev_mind)
 	modePlayer += head_revolutionaries
 	if(emergency_shuttle)
-		emergency_shuttle.always_fake_recall = 1
+		emergency_shuttle.auto_recall = 1
 	spawn (rand(waittime_l, waittime_h))
 		send_intercept()
 	..()
@@ -117,16 +118,13 @@
 			rev_mind.objectives += rev_obj
 
 /datum/game_mode/proc/greet_revolutionary(var/datum/mind/rev_mind, var/you_are=1)
-	var/obj_count = 1
+
+	rev_mind.special_role = "Head Revolutionary"
+
 	if (you_are)
 		rev_mind.current << "\blue You are a member of the revolutionaries' leadership!"
-	if(!config.objectives_disabled)
-		for(var/datum/objective/objective in rev_mind.objectives)
-			rev_mind.current << "<B>Objective #[obj_count]</B>: [objective.explanation_text]"
-			rev_mind.special_role = "Head Revolutionary"
-			obj_count++
-	else
-		rev_mind.current << "<font color=blue>Within the rules,</font> try to act as an opposing force to the crew. Further RP and try to make sure other players have </i>fun<i>! If you are confused or at a loss, always adminhelp, and before taking extreme actions, please try to also contact the administration! Think through your actions and make the roleplay immersive! <b>Please remember all rules aside from those without explicit exceptions apply to antagonists.</i></b>"
+
+	show_objectives(rev_mind)
 
 /////////////////////////////////////////////////////////////////////////////////
 //This are equips the rev heads with their gear, and makes the clown not clumsy//
@@ -152,7 +150,7 @@
 	)
 	var/where = mob.equip_in_one_of_slots(T, slots)
 	if (!where)
-		mob << "The Syndicate were unfortunately unable to get you a flash."
+		mob << "Your employers were unfortunately unable to get you a flash."
 	else
 		mob << "The flash in your [where] will help you to persuade the crew to join your cause."
 		mob.update_icons()
@@ -175,7 +173,7 @@
 	if(config.continous_rounds)
 		if(finished != 0)
 			if(emergency_shuttle)
-				emergency_shuttle.always_fake_recall = 0
+				emergency_shuttle.auto_recall = 0
 		return ..()
 	if(finished != 0)
 		return 1
@@ -197,8 +195,7 @@
 	revolutionaries += rev_mind
 	rev_mind.current << "\red <FONT size = 3> You are now a revolutionary! Help your cause. Do not harm your fellow freedom fighters. You can identify your comrades by the red \"R\" icons, and your leaders by the blue \"R\" icons. Help them kill the heads to win the revolution!</FONT>"
 	rev_mind.special_role = "Revolutionary"
-	if(config.objectives_disabled)
-		rev_mind.current << "<font color=blue>Within the rules,</font> try to act as an opposing force to the crew. Further RP and try to make sure other players have </i>fun<i>! If you are confused or at a loss, always adminhelp, and before taking extreme actions, please try to also contact the administration! Think through your actions and make the roleplay immersive! <b>Please remember all rules aside from those without explicit exceptions apply to antagonists.</i></b>"
+	show_objectives(rev_mind)
 	update_rev_icons_added(rev_mind)
 	return 1
 //////////////////////////////////////////////////////////////////////////////
@@ -340,7 +337,7 @@
 /datum/game_mode/revolution/proc/check_heads_victory()
 	for(var/datum/mind/rev_mind in head_revolutionaries)
 		var/turf/T = get_turf(rev_mind.current)
-		if((rev_mind) && (rev_mind.current) && (rev_mind.current.stat != 2) && T && (T.z == 1))
+		if((rev_mind) && (rev_mind.current) && (rev_mind.current.stat != 2) && T && (T.z in config.station_levels))
 			if(ishuman(rev_mind.current))
 				return 0
 	return 1
@@ -370,7 +367,7 @@
 			if(headrev.current)
 				if(headrev.current.stat == DEAD)
 					text += "died"
-				else if(headrev.current.z != 1)
+				else if(isNotStationLevel(headrev.current.z))
 					text += "fled the station"
 				else
 					text += "survived the revolution"
@@ -393,7 +390,7 @@
 			if(rev.current)
 				if(rev.current.stat == DEAD)
 					text += "died"
-				else if(rev.current.z != 1)
+				else if(isNotStationLevel(rev.current.z))
 					text += "fled the station"
 				else
 					text += "survived the revolution"
@@ -418,7 +415,7 @@
 			if(head.current)
 				if(head.current.stat == DEAD)
 					text += "died"
-				else if(head.current.z != 1)
+				else if(isNotStationLevel(head.current.z))
 					text += "fled the station"
 				else
 					text += "survived the revolution"

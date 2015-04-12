@@ -47,7 +47,7 @@
 #define GEAR_EVA 15
 
 //---- The following corporations are friendly with NanoTrasen and loosely enable trade and travel:
-//Corporation NanoTrasen - Generalised / high tech research and plasma exploitation.
+//Corporation NanoTrasen - Generalised / high tech research and phoron exploitation.
 //Corporation Vessel Contracting - Ship and station construction, materials research.
 //Corporation Osiris Atmospherics - Atmospherics machinery construction and chemical research.
 //Corporation Second Red Cross Society - 26th century Red Cross reborn as a dominating economic force in biomedical science (research and materials).
@@ -77,19 +77,8 @@ var/global/economy_init = 0
 	if(economy_init)
 		return 2
 
-	var/datum/feed_channel/newChannel = new /datum/feed_channel
-	newChannel.channel_name = "Tau Ceti Daily"
-	newChannel.author = "CentComm Minister of Information"
-	newChannel.locked = 1
-	newChannel.is_admin_channel = 1
-	news_network.network_channels += newChannel
-
-	newChannel = new /datum/feed_channel
-	newChannel.channel_name = "The Gibson Gazette"
-	newChannel.author = "Editor Mike Hammers"
-	newChannel.locked = 1
-	newChannel.is_admin_channel = 1
-	news_network.network_channels += newChannel
+	news_network.CreateFeedChannel("Nyx Daily", "CentComm Minister of Information", 1, 1)
+	news_network.CreateFeedChannel("The Gibson Gazette", "Editor Mike Hammers", 1, 1)
 
 	for(var/loc_type in typesof(/datum/trade_destination) - /datum/trade_destination)
 		var/datum/trade_destination/D = new loc_type

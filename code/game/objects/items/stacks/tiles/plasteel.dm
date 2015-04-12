@@ -5,11 +5,11 @@
 	icon_state = "tile"
 	w_class = 3.0
 	force = 6.0
-	m_amt = 937.5
+	matter = list("metal" = 937.5)
 	throwforce = 15.0
 	throw_speed = 5
 	throw_range = 20
-	flags = FPRINT | TABLEPASS | CONDUCT
+	flags = CONDUCT
 	max_amount = 60
 
 /obj/item/stack/tile/plasteel/New(var/loc, var/amount=null)

@@ -32,8 +32,8 @@ tank [un]loading stuff
 /obj/machinery/power/port_gen/attack_hand(mob/user)
 turn on/off
 
-/obj/machinery/power/port_gen/examine()
-display round(lastgen) and plasmatank amount
+/obj/machinery/power/port_gen/examine(mob/user)
+display round(lastgen) and phorontank amount
 
 */
 
@@ -48,7 +48,6 @@ display round(lastgen) and plasmatank amount
 	icon_state = "portgen0"
 	density = 1
 	anchored = 0
-	directwired = 0
 	use_power = 0
 
 	var/active = 0
@@ -80,14 +79,18 @@ display round(lastgen) and plasmatank amount
 		icon_state = initial(icon_state)
 		handleInactive()
 
+/obj/machinery/power/powered()
+	return 1 //doesn't require an external power source
+
 /obj/machinery/power/port_gen/attack_hand(mob/user as mob)
 	if(..())
 		return
 	if(!anchored)
 		return
 
-/obj/machinery/power/port_gen/examine()
-	set src in oview(1)
+/obj/machinery/power/port_gen/examine(mob/user)
+	if(!..(user,1 ))
+		return
 	if(active)
 		usr << "\blue The generator is on."
 	else
@@ -99,11 +102,14 @@ display round(lastgen) and plasmatank amount
 	var/sheets = 0
 	var/max_sheets = 100
 	var/sheet_name = ""
-	var/sheet_path = /obj/item/stack/sheet/mineral/plasma
+	var/sheet_path = /obj/item/stack/sheet/mineral/phoron
 	var/board_path = "/obj/item/weapon/circuitboard/pacman"
 	var/sheet_left = 0 // How much is left of the sheet
-	var/time_per_sheet = 40
 	var/heat = 0
+	
+	//produces up to 80 kW and lasts for 20 minutes with 50 sheets
+	var/time_per_sheet = 96
+	power_gen = 20000
 
 /obj/machinery/power/port_gen/pacman/initialize()
 	..()
@@ -115,8 +121,8 @@ display round(lastgen) and plasmatank amount
 	component_parts = list()
 	component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)
 	component_parts += new /obj/item/weapon/stock_parts/micro_laser(src)
-	component_parts += new /obj/item/weapon/cable_coil(src)
-	component_parts += new /obj/item/weapon/cable_coil(src)
+	component_parts += new /obj/item/stack/cable_coil(src)
+	component_parts += new /obj/item/stack/cable_coil(src)
 	component_parts += new /obj/item/weapon/stock_parts/capacitor(src)
 	component_parts += new board_path(src)
 	var/obj/sheet = new sheet_path(null)
@@ -140,10 +146,10 @@ display round(lastgen) and plasmatank amount
 	reliability = min(round(temp_reliability / 4), 100)
 	power_gen = round(initial(power_gen) * (max(2, temp_rating) / 2))
 
-/obj/machinery/power/port_gen/pacman/examine()
-	..()
-	usr << "\blue The generator has [sheets] units of [sheet_name] fuel left, producing [power_gen] per cycle."
-	if(crit_fail) usr << "\red The generator seems to have broken down."
+/obj/machinery/power/port_gen/pacman/examine(mob/user)
+	..(user)
+	user << "\blue The generator has [sheets] units of [sheet_name] fuel left, producing [power_gen] per cycle."
+	if(crit_fail) user << "\red The generator seems to have broken down."
 
 /obj/machinery/power/port_gen/pacman/HasFuel()
 	if(sheets >= 1 / (time_per_sheet / power_output) - sheet_left)
@@ -266,9 +272,6 @@ display round(lastgen) and plasmatank amount
 /obj/machinery/power/port_gen/pacman/attack_ai(mob/user as mob)
 	interact(user)
 
-/obj/machinery/power/port_gen/pacman/attack_paw(mob/user as mob)
-	interact(user)
-
 /obj/machinery/power/port_gen/pacman/interact(mob/user)
 	if (get_dist(src, user) > 1 )
 		if (!istype(user, /mob/living/silicon/ai))
@@ -329,18 +332,24 @@ display round(lastgen) and plasmatank amount
 	name = "S.U.P.E.R.P.A.C.M.A.N.-type Portable Generator"
 	icon_state = "portgen1"
 	sheet_path = /obj/item/stack/sheet/mineral/uranium
-	power_gen = 15000
-	time_per_sheet = 65
 	board_path = "/obj/item/weapon/circuitboard/pacman/super"
+	
+	//produces 80 kW like the PACMAN but 50 sheets will last for 2 hours
+	power_gen = 20000
+	time_per_sheet = 576
+	
 	overheat()
 		explosion(src.loc, 3, 3, 3, -1)
 
 /obj/machinery/power/port_gen/pacman/mrs
 	name = "M.R.S.P.A.C.M.A.N.-type Portable Generator"
 	icon_state = "portgen2"
-	sheet_path = /obj/item/stack/sheet/mineral/diamond
-	power_gen = 40000
-	time_per_sheet = 80
+	sheet_path = /obj/item/stack/sheet/mineral/tritium
 	board_path = "/obj/item/weapon/circuitboard/pacman/mrs"
+	
+	//produces 200 kW and lasts for 1 hour with 50 sheets
+	power_gen = 50000
+	time_per_sheet = 288
+	
 	overheat()
 		explosion(src.loc, 4, 4, 4, -1)

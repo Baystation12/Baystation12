@@ -103,7 +103,7 @@
 		//if they are holding or wearing a card that has access, that works
 		if(src.check_access(H.get_active_hand()) || src.check_access(H.wear_id))
 			return 1
-	else if(istype(M, /mob/living/carbon/monkey) || istype(M, /mob/living/carbon/alien/humanoid))
+	else if(istype(M, /mob/living/carbon/monkey))
 		var/mob/living/carbon/george = M
 		//they can only hold things :(
 		if(src.check_access(george.get_active_hand()))
@@ -415,97 +415,58 @@
 	return all_jobs
 
 /proc/get_all_centcom_jobs()
-	return list("VIP Guest","Custodian","Thunderdome Overseer","Intel Officer","Medical Officer","Death Commando","Research Officer","BlackOps Commander","Supreme Commander")
+	return list("VIP Guest",
+		"Custodian",
+		"Thunderdome Overseer",
+		"Intel Officer",
+		"Medical Officer",
+		"Death Commando",
+		"Research Officer",
+		"BlackOps Commander",
+		"Supreme Commander",
+		"Emergency Response Team",
+		"Emergency Response Team Leader")
 
-//gets the actual job rank (ignoring alt titles)
-//this is used solely for sechuds
-/obj/proc/GetJobRealName()
-	if (!istype(src, /obj/item/device/pda) && !istype(src,/obj/item/weapon/card/id))
-		return
-
-	var/rank
-	var/assignment
-	if(istype(src, /obj/item/device/pda))
-		if(src:id)
-			rank = src:id:rank
-			assignment = src:id:assignment
-	else if(istype(src, /obj/item/weapon/card/id))
-		rank = src:rank
-		assignment = src:assignment
-
-	if( rank in joblist )
-		return rank
-
-	if( assignment in joblist )
-		return assignment
-
-	return "Unknown"
-
-//gets the alt title, failing that the actual job rank
-//this is unused
-/obj/proc/sdsdsd()	//GetJobDisplayName
-	if (!istype(src, /obj/item/device/pda) && !istype(src,/obj/item/weapon/card/id))
-		return
-
-	var/assignment
-	if(istype(src, /obj/item/device/pda))
-		if(src:id)
-			assignment = src:id:assignment
-	else if(istype(src, /obj/item/weapon/card/id))
-		assignment = src:assignment
-
-	if(assignment)
-		return assignment
-
-	return "Unknown"
+proc/GetIdCard(var/mob/living/carbon/human/H)
+	if(H.wear_id)
+		var/id = H.wear_id.GetID()
+		if(id)
+			return id
+	if(H.get_active_hand())
+		var/obj/item/I = H.get_active_hand()
+		return I.GetID()
 
 proc/FindNameFromID(var/mob/living/carbon/human/H)
 	ASSERT(istype(H))
-	var/obj/item/weapon/card/id/C = H.get_active_hand()
-	if( istype(C) || istype(C, /obj/item/device/pda) )
-		var/obj/item/weapon/card/id/ID = C
-
-		if( istype(C, /obj/item/device/pda) )
-			var/obj/item/device/pda/pda = C
-			ID = pda.id
-		if(!istype(ID))
-			ID = null
-
-		if(ID)
-			return ID.registered_name
-
-	C = H.wear_id
-
-	if( istype(C) || istype(C, /obj/item/device/pda) )
-		var/obj/item/weapon/card/id/ID = C
-
-		if( istype(C, /obj/item/device/pda) )
-			var/obj/item/device/pda/pda = C
-			ID = pda.id
-		if(!istype(ID))
-			ID = null
-
-		if(ID)
-			return ID.registered_name
+	var/obj/item/weapon/card/id/C = GetIdCard(H)
+	if(C)
+		return C.registered_name
 
 proc/get_all_job_icons() //For all existing HUD icons
 	return joblist + list("Prisoner")
 
 /obj/proc/GetJobName() //Used in secHUD icon generation
-	if (!istype(src, /obj/item/device/pda) && !istype(src,/obj/item/weapon/card/id))
+	var/obj/item/weapon/card/id/I
+	if(istype(src, /obj/item/device/pda))
+		var/obj/item/device/pda/P = src
+		I = P.id
+	else if(istype(src, /obj/item/weapon/card/id))
+		I = src
+
+	if(I)
+		var/job_icons = get_all_job_icons()
+		var/centcom = get_all_centcom_jobs()
+
+		if(I.assignment	in job_icons) //Check if the job has a hud icon
+			return I.assignment
+		if(I.rank in job_icons)
+			return I.rank
+
+		if(I.assignment	in centcom) //Return with the NT logo if it is a Centcom job
+			return "Centcom"
+		if(I.rank in centcom)
+			return "Centcom"
+	else
 		return
 
-	var/jobName
-
-	if(istype(src, /obj/item/device/pda))
-		if(src:id)
-			jobName = src:id:assignment
-	if(istype(src, /obj/item/weapon/card/id))
-		jobName = src:assignment
-
-	if(jobName in get_all_job_icons()) //Check if the job has a hud icon
-		return jobName
-	if(jobName in get_all_centcom_jobs()) //Return with the NT logo if it is a Centcom job
-		return "Centcom"
 	return "Unknown" //Return unknown if none of the above apply
-

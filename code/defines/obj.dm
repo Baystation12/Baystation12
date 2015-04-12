@@ -173,10 +173,11 @@ using /obj/effect/datacore/proc/manifest_inject( ), or manifest_insert( )
 */
 
 var/global/list/PDA_Manifest = list()
+var/global/ManifestJSON
 
 /obj/effect/datacore/proc/get_manifest_json()
 	if(PDA_Manifest.len)
-		return PDA_Manifest
+		return
 	var/heads[0]
 	var/sec[0]
 	var/eng[0]
@@ -247,7 +248,8 @@ var/global/list/PDA_Manifest = list()
 		"bot" = bot,\
 		"misc" = misc\
 		)
-	return PDA_Manifest
+	ManifestJSON = list2json(PDA_Manifest)
+	return
 
 
 
@@ -302,10 +304,11 @@ var/global/list/PDA_Manifest = list()
 	throwforce = 0.0
 	throw_speed = 1
 	throw_range = 20
-	flags = FPRINT | TABLEPASS | CONDUCT
+	flags = CONDUCT
+
 	afterattack(atom/target as mob|obj|turf|area, mob/user as mob)
 		user.drop_item()
-		src.throw_at(target, throw_range, throw_speed)
+		src.throw_at(target, throw_range, throw_speed, user)
 
 /obj/effect/stop
 	var/victim = null

@@ -1,9 +1,10 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:31
 
 /obj/machinery/computer/pod
-	name = "Pod Launch Control"
-	desc = "A controll for launching pods. Some people prefer firing Mechas."
+	name = "pod launch control console"
+	desc = "A control console for launching pods. Some people prefer firing Mechas."
 	icon_state = "computer_generic"
+	circuit = /obj/item/weapon/circuitboard/pod
 	var/id = 1.0
 	var/obj/machinery/mass_driver/connected = null
 	var/timing = 0.0
@@ -30,10 +31,10 @@
 		viewers(null, null) << "Cannot locate mass driver connector. Cancelling firing sequence!"
 		return
 
-	for(var/obj/machinery/door/poddoor/M in world)
+	for(var/obj/machinery/door/blast/M in world)
 		if(M.id == id)
 			M.open()
-			return
+
 	sleep(20)
 
 	for(var/obj/machinery/mass_driver/M in world)
@@ -42,13 +43,13 @@
 			M.drive()
 
 	sleep(50)
-	for(var/obj/machinery/door/poddoor/M in world)
+	for(var/obj/machinery/door/blast/M in world)
 		if(M.id == id)
 			M.close()
 			return
 	return
 
-
+/*
 /obj/machinery/computer/pod/attackby(I as obj, user as mob)
 	if(istype(I, /obj/item/weapon/screwdriver))
 		playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)
@@ -103,15 +104,11 @@
 	else
 		attack_hand(user)
 	return
+*/
 
 
 /obj/machinery/computer/pod/attack_ai(var/mob/user as mob)
 	return attack_hand(user)
-
-
-/obj/machinery/computer/pod/attack_paw(var/mob/user as mob)
-	return attack_hand(user)
-
 
 /obj/machinery/computer/pod/attack_hand(var/mob/user as mob)
 	if(..())
@@ -171,6 +168,12 @@
 				connected.power = t
 		if(href_list["alarm"])
 			alarm()
+		if(href_list["drive"])
+			for(var/obj/machinery/mass_driver/M in machines)
+				if(M.id == id)
+					M.power = connected.power
+					M.drive()
+
 		if(href_list["time"])
 			timing = text2num(href_list["time"])
 		if(href_list["tp"])
@@ -178,7 +181,7 @@
 			time += tp
 			time = min(max(round(time), 0), 120)
 		if(href_list["door"])
-			for(var/obj/machinery/door/poddoor/M in world)
+			for(var/obj/machinery/door/blast/M in world)
 				if(M.id == id)
 					if(M.density)
 						M.open()
@@ -198,7 +201,7 @@
 
 /obj/machinery/computer/pod/old/syndicate
 	name = "ProComp Executive IIc"
-	desc = "The Syndicate operate on a tight budget. Operates external airlocks."
+	desc = "Criminals often operate on a tight budget. Operates external airlocks."
 	title = "External Airlock Controls"
 	req_access = list(access_syndicate)
 

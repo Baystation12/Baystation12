@@ -6,11 +6,12 @@
 // in the logs.  ascii character 13 = CR
 
 /var/global/log_end= world.system_type == UNIX ? ascii2text(13) : ""
-								
+
 
 /proc/error(msg)
 	world.log << "## ERROR: [msg][log_end]"
 
+#define WARNING(MSG) warning("[MSG] in [__FILE__] at line [__LINE__] src: [src] usr: [usr].")
 //print a warning message to world.log
 /proc/warning(msg)
 	world.log << "## WARNING: [msg][log_end]"
@@ -79,4 +80,4 @@
 		diary << "\[[time_stamp()]]PDA: [text][log_end]"
 
 /proc/log_misc(text)
-	diary << "\[[time_stamp()]]MISC: [text][log_end]" 
+	diary << "\[[time_stamp()]]MISC: [text][log_end]"

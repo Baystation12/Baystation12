@@ -1,5 +1,5 @@
 /obj/item/radio/integrated
-	name = "PDA radio module"
+	name = "\improper PDA radio module"
 	desc = "An electronic radio system of nanotrasen origin."
 	icon = 'icons/obj/module.dmi'
 	icon_state = "power_mod"
@@ -40,7 +40,7 @@
 	var/obj/machinery/bot/secbot/active 	// the active bot; if null, show bot list
 	var/list/botstatus			// the status signal sent by the bot
 
-	var/control_freq = 1447
+	var/control_freq = AI_FREQ
 
 	// create a new QM cartridge, and register to receive bot control & beacon message
 	New()
@@ -106,7 +106,7 @@
 	var/list/beacons
 
 	var/beacon_freq = 1400
-	var/control_freq = 1447
+	var/control_freq = AI_FREQ
 
 	// create a new QM cartridge, and register to receive bot control & beacon message
 	New()

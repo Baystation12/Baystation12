@@ -1,6 +1,6 @@
 /obj/structure/closet/secure_closet/personal
-	desc = "It's a secure locker for personnel. The first card swiped gains control."
 	name = "personal closet"
+	desc = "It's a secure locker for personnel. The first card swiped gains control."
 	req_access = list(access_all_personal_lockers)
 	var/registered_name = null
 
@@ -21,7 +21,9 @@
 /obj/structure/closet/secure_closet/personal/patient/New()
 	..()
 	spawn(4)
-		contents = list()
+		// Not really the best way to do this, but it's better than "contents = list()"!
+		for(var/atom/movable/AM in contents)
+			del(AM)
 		new /obj/item/clothing/under/color/white( src )
 		new /obj/item/clothing/shoes/white( src )
 	return
@@ -51,7 +53,9 @@
 /obj/structure/closet/secure_closet/personal/cabinet/New()
 	..()
 	spawn(4)
-		contents = list()
+		// Not really the best way to do this, but it's better than "contents = list()"!
+		for(var/atom/movable/AM in contents)
+			del(AM)
 		new /obj/item/weapon/storage/backpack/satchel/withwallet( src )
 		new /obj/item/device/radio/headset( src )
 	return
@@ -94,4 +98,26 @@
 				O.show_message("\blue The locker has been sliced open by [user] with an energy blade!", 1, "\red You hear metal being sliced and sparks flying.", 2)
 	else
 		user << "\red Access Denied"
+	return
+
+/obj/structure/closet/secure_closet/personal/verb/reset()
+	set src in oview(1) // One square distance
+	set category = "Object"
+	set name = "Reset Lock"
+	if(!usr.canmove || usr.stat || usr.restrained()) // Don't use it if you're not able to! Checks for stuns, ghost and restrain
+		return
+	if(ishuman(usr))
+		src.add_fingerprint(usr)
+		if (src.locked || !src.registered_name)
+			usr << "\red You need to unlock it first."
+		else if (src.broken)
+			usr << "\red It appears to be broken."
+		else
+			if (src.opened)
+				if(!src.close())
+					return
+			src.locked = 1
+			src.icon_state = src.icon_locked
+			src.registered_name = null
+			src.desc = "It's a secure locker for personnel. The first card swiped gains control."
 	return

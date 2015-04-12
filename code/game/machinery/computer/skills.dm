@@ -1,8 +1,8 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:31
 
 /obj/machinery/computer/skills//TODO:SANITY
-	name = "Employment Records"
-	desc = "Used to view personnel's employment records"
+	name = "employment records console"
+	desc = "Used to view, edit and maintain employment records."
 	icon_state = "medlaptop"
 	req_one_access = list(access_heads)
 	circuit = "/obj/item/weapon/circuitboard/skills"
@@ -31,9 +31,6 @@
 	..()
 
 /obj/machinery/computer/skills/attack_ai(mob/user as mob)
-	return attack_hand(user)
-
-/obj/machinery/computer/skills/attack_paw(mob/user as mob)
 	return attack_hand(user)
 
 //Someone needs to break down the dat += into chunks instead of long ass lines.
@@ -87,8 +84,8 @@
 				if(3.0)
 					dat += "<CENTER><B>Employment Record</B></CENTER><BR>"
 					if ((istype(active1, /datum/data/record) && data_core.general.Find(active1)))
-						var/icon/front = new(active1.fields["photo"], dir = SOUTH)
-						var/icon/side = new(active1.fields["photo"], dir = WEST)
+						var/icon/front = active1.fields["photo_front"]
+						var/icon/side = active1.fields["photo_side"]
 						user << browse_rsc(front, "front.png")
 						user << browse_rsc(side, "side.png")
 						dat += text("<table><tr><td>	\
@@ -100,7 +97,7 @@
 						Fingerprint: <A href='?src=\ref[src];choice=Edit Field;field=fingerprint'>[active1.fields["fingerprint"]]</A><BR>\n	\
 						Physical Status: [active1.fields["p_stat"]]<BR>\n	\
 						Mental Status: [active1.fields["m_stat"]]<BR><BR>\n	\
-						Employment/skills summary:<BR> [active1.fields["notes"]]<BR></td>	\
+						Employment/skills summary:<BR> [decode(active1.fields["notes"])]<BR></td>	\
 						<td align = center valign = top>Photo:<br><img src=front.png height=80 width=80 border=4>	\
 						<img src=side.png height=80 width=80 border=4></td></tr></table>")
 					else
@@ -275,11 +272,11 @@ What a mess.*/
 					var/obj/item/weapon/paper/P = new /obj/item/weapon/paper( loc )
 					P.info = "<CENTER><B>Employment Record</B></CENTER><BR>"
 					if ((istype(active1, /datum/data/record) && data_core.general.Find(active1)))
-						P.info += text("Name: [] ID: []<BR>\nSex: []<BR>\nAge: []<BR>\nFingerprint: []<BR>\nPhysical Status: []<BR>\nMental Status: []<BR>\nEmployment/Skills Summary:[]<BR>", active1.fields["name"], active1.fields["id"], active1.fields["sex"], active1.fields["age"], active1.fields["fingerprint"], active1.fields["p_stat"], active1.fields["m_stat"], active1.fields["notes"])
+						P.info += text("Name: [] ID: []<BR>\nSex: []<BR>\nAge: []<BR>\nFingerprint: []<BR>\nPhysical Status: []<BR>\nMental Status: []<BR>\nEmployment/Skills Summary:<BR>\n[]<BR>", active1.fields["name"], active1.fields["id"], active1.fields["sex"], active1.fields["age"], active1.fields["fingerprint"], active1.fields["p_stat"], active1.fields["m_stat"], decode(active1.fields["notes"]))
 					else
 						P.info += "<B>General Record Lost!</B><BR>"
 					P.info += "</TT>"
-					P.name = "paper - 'Employment Record'"
+					P.name = "Employment Record ([active1.fields["name"]])"
 					printing = null
 //RECORD DELETE
 			if ("Delete All Records")
@@ -302,22 +299,9 @@ What a mess.*/
 					temp += "<a href='?src=\ref[src];choice=Clear Screen'>No</a>"
 //RECORD CREATE
 			if ("New Record (General)")
-				
 				if(PDA_Manifest.len)
 					PDA_Manifest.Cut()
-				var/datum/data/record/G = new /datum/data/record()
-				G.fields["name"] = "New Record"
-				G.fields["id"] = text("[]", add_zero(num2hex(rand(1, 1.6777215E7)), 6))
-				G.fields["rank"] = "Unassigned"
-				G.fields["real_rank"] = "Unassigned"
-				G.fields["sex"] = "Male"
-				G.fields["age"] = "Unknown"
-				G.fields["fingerprint"] = "Unknown"
-				G.fields["p_stat"] = "Active"
-				G.fields["m_stat"] = "Stable"
-				G.fields["species"] = "Human"
-				data_core.general += G
-				active1 = G
+				active1 = CreateGeneralRecord()
 
 //FIELD FUNCTIONS
 			if ("Edit Field")
@@ -325,19 +309,19 @@ What a mess.*/
 				switch(href_list["field"])
 					if("name")
 						if (istype(active1, /datum/data/record))
-							var/t1 = input("Please input name:", "Secure. records", active1.fields["name"], null)  as text
+							var/t1 = reject_bad_name(input("Please input name:", "Secure. records", active1.fields["name"], null)  as text)
 							if ((!( t1 ) || !length(trim(t1)) || !( authenticated ) || usr.stat || usr.restrained() || (!in_range(src, usr) && (!istype(usr, /mob/living/silicon)))) || active1 != a1)
 								return
 							active1.fields["name"] = t1
 					if("id")
 						if (istype(active1, /datum/data/record))
-							var/t1 = copytext(sanitize(input("Please input id:", "Secure. records", active1.fields["id"], null)  as text),1,MAX_MESSAGE_LEN)
+							var/t1 = trim(sanitize(copytext(input("Please input id:", "Secure. records", active1.fields["id"], null)  as text,1,MAX_MESSAGE_LEN)))
 							if ((!( t1 ) || !( authenticated ) || usr.stat || usr.restrained() || (!in_range(src, usr) && (!istype(usr, /mob/living/silicon))) || active1 != a1))
 								return
 							active1.fields["id"] = t1
 					if("fingerprint")
 						if (istype(active1, /datum/data/record))
-							var/t1 = copytext(sanitize(input("Please input fingerprint hash:", "Secure. records", active1.fields["fingerprint"], null)  as text),1,MAX_MESSAGE_LEN)
+							var/t1 = trim(sanitize(copytext(input("Please input fingerprint hash:", "Secure. records", active1.fields["fingerprint"], null)  as text,1,MAX_MESSAGE_LEN)))
 							if ((!( t1 ) || !( authenticated ) || usr.stat || usr.restrained() || (!in_range(src, usr) && (!istype(usr, /mob/living/silicon))) || active1 != a1))
 								return
 							active1.fields["fingerprint"] = t1
@@ -366,7 +350,7 @@ What a mess.*/
 							alert(usr, "You do not have the required rank to do this!")
 					if("species")
 						if (istype(active1, /datum/data/record))
-							var/t1 = copytext(sanitize(input("Please enter race:", "General records", active1.fields["species"], null)  as message),1,MAX_MESSAGE_LEN)
+							var/t1 = trim(sanitize(copytext(input("Please enter race:", "General records", active1.fields["species"], null)  as message,1,MAX_MESSAGE_LEN)))
 							if ((!( t1 ) || !( authenticated ) || usr.stat || usr.restrained() || (!in_range(src, usr) && (!istype(usr, /mob/living/silicon))) || active1 != a1))
 								return
 							active1.fields["species"] = t1
@@ -417,6 +401,8 @@ What a mess.*/
 					R.fields["criminal"] = pick("None", "*Arrest*", "Incarcerated", "Parolled", "Released")
 				if(5)
 					R.fields["p_stat"] = pick("*Unconcious*", "Active", "Physically Unfit")
+					if(PDA_Manifest.len)
+						PDA_Manifest.Cut()
 				if(6)
 					R.fields["m_stat"] = pick("*Insane*", "*Unstable*", "*Watch*", "Stable")
 			continue

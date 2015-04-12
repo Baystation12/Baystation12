@@ -22,40 +22,39 @@
 	var/allow_quick_gather	//Set this variable to allow the object to have the 'toggle mode' verb, which quickly collects all items from a tile.
 	var/collection_mode = 1;  //0 = pick one at a time, 1 = pick all on tile
 	var/foldable = null	// BubbleWrap - if set, can be folded (when empty) into a sheet of cardboard
+	var/use_sound = "rustle"	//sound played when used. null for no sound.
 
 /obj/item/weapon/storage/MouseDrop(obj/over_object as obj)
+
+	if(!canremove)
+		return
+
 	if (ishuman(usr) || ismonkey(usr)) //so monkeys can take off their backpacks -- Urist
-		var/mob/M = usr
 
 		if (istype(usr.loc,/obj/mecha)) // stops inventory actions in a mech
 			return
 
-		if(over_object == M && Adjacent(M)) // this must come before the screen objects only block
-			orient2hud(M)          // dunno why it wasn't before
-			if(M.s_active)
-				M.s_active.close(M)
-			show_to(M)
+		if(over_object == usr && Adjacent(usr)) // this must come before the screen objects only block
+			src.open(usr)
 			return
 
 		if (!( istype(over_object, /obj/screen) ))
 			return ..()
+
+		//makes sure that the storage is equipped, so that we can't drag it into our hand from miles away.
+		//there's got to be a better way of doing this.
 		if (!(src.loc == usr) || (src.loc && src.loc.loc == usr))
 			return
-		playsound(src.loc, "rustle", 50, 1, -5)
-		if (!( M.restrained() ) && !( M.stat ))
+
+		if (!( usr.restrained() ) && !( usr.stat ))
 			switch(over_object.name)
 				if("r_hand")
-					M.u_equip(src)
-					M.put_in_r_hand(src)
+					usr.u_equip(src)
+					usr.put_in_r_hand(src)
 				if("l_hand")
-					M.u_equip(src)
-					M.put_in_l_hand(src)
+					usr.u_equip(src)
+					usr.put_in_l_hand(src)
 			src.add_fingerprint(usr)
-			return
-		if(over_object == usr && in_range(src, usr) || usr.contents.Find(src))
-			if (usr.s_active)
-				usr.s_active.close(usr)
-			src.show_to(usr)
 			return
 	return
 
@@ -100,6 +99,15 @@
 	if(user.s_active == src)
 		user.s_active = null
 	return
+
+/obj/item/weapon/storage/proc/open(mob/user as mob)
+	if (src.use_sound)
+		playsound(src.loc, src.use_sound, 50, 1, -5)
+
+	orient2hud(user)
+	if (user.s_active)
+		user.s_active.close(user)
+	show_to(user)
 
 /obj/item/weapon/storage/proc/close(mob/user as mob)
 
@@ -313,17 +321,17 @@
 
 	if(isrobot(user))
 		user << "\blue You're a robot. No."
-		return 1 //Robots can't interact with storage items.
+		return //Robots can't interact with storage items.
 
 	if(!can_be_inserted(W))
-		return 0
+		return
 
 	if(istype(W, /obj/item/weapon/tray))
 		var/obj/item/weapon/tray/T = W
 		if(T.calc_carry() > 0)
 			if(prob(85))
 				user << "\red The tray won't fit in [src]."
-				return 1
+				return
 			else
 				W.loc = user.loc
 				if ((user.client && user.s_active != src))
@@ -331,15 +339,13 @@
 				W.dropped(user)
 				user << "\red God damnit!"
 
-	handle_item_insertion(W)
-	return 1
+	W.add_fingerprint(user)
+	return handle_item_insertion(W)
 
 /obj/item/weapon/storage/dropped(mob/user as mob)
 	return
 
 /obj/item/weapon/storage/attack_hand(mob/user as mob)
-	playsound(src.loc, "rustle", 50, 1, -5)
-
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
 		if(H.l_store == src && !H.get_active_hand())	//Prevents opening if it's in a pocket.
@@ -351,11 +357,8 @@
 			H.r_store = null
 			return
 
-	src.orient2hud(user)
 	if (src.loc == user)
-		if (user.s_active)
-			user.s_active.close(user)
-		src.show_to(user)
+		src.open(user)
 	else
 		..()
 		for(var/mob/M in range(1))
@@ -449,10 +452,44 @@
 	del(src)
 //BubbleWrap END
 
-/obj/item/weapon/storage/hear_talk(mob/M as mob, text)
+/obj/item/weapon/storage/hear_talk(mob/M as mob, text, verb, datum/language/speaking)
 	for (var/atom/A in src)
 		if(istype(A,/obj/))
 			var/obj/O = A
-			O.hear_talk(M, text)
+			O.hear_talk(M, text, verb, speaking)
 
+//Returns the storage depth of an atom. This is the number of storage items the atom is contained in before reaching toplevel (the area).
+//Returns -1 if the atom was not found on container.
+/atom/proc/storage_depth(atom/container)
+	var/depth = 0
+	var/atom/cur_atom = src
 
+	while (cur_atom && !(cur_atom in container.contents))
+		if (isarea(cur_atom))
+			return -1
+		if (istype(cur_atom.loc, /obj/item/weapon/storage))
+			depth++
+		cur_atom = cur_atom.loc
+
+	if (!cur_atom)
+		return -1	//inside something with a null loc.
+
+	return depth
+
+//Like storage depth, but returns the depth to the nearest turf
+//Returns -1 if no top level turf (a loc was null somewhere, or a non-turf atom's loc was an area somehow).
+/atom/proc/storage_depth_turf()
+	var/depth = 0
+	var/atom/cur_atom = src
+
+	while (cur_atom && !isturf(cur_atom))
+		if (isarea(cur_atom))
+			return -1
+		if (istype(cur_atom.loc, /obj/item/weapon/storage))
+			depth++
+		cur_atom = cur_atom.loc
+
+	if (!cur_atom)
+		return -1	//inside something with a null loc.
+
+	return depth

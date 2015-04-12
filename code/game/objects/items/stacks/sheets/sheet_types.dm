@@ -25,13 +25,20 @@ var/global/list/datum/stack_recipe/metal_recipes = list ( \
 		new/datum/stack_recipe("brown comfy chair", /obj/structure/stool/bed/chair/comfy/brown, 2, one_per_turf = 1, on_floor = 1), \
 		new/datum/stack_recipe("lime comfy chair", /obj/structure/stool/bed/chair/comfy/lime, 2, one_per_turf = 1, on_floor = 1), \
 		new/datum/stack_recipe("teal comfy chair", /obj/structure/stool/bed/chair/comfy/teal, 2, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("red comfy chair", /obj/structure/stool/bed/chair/comfy/red, 2, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("blue comfy chair", /obj/structure/stool/bed/chair/comfy/blue, 2, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("purple comfy chair", /obj/structure/stool/bed/chair/comfy/purp, 2, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("green comfy chair", /obj/structure/stool/bed/chair/comfy/green, 2, one_per_turf = 1, on_floor = 1), \
 		), 2), \
 	null, \
 	new/datum/stack_recipe("table parts", /obj/item/weapon/table_parts, 2), \
-	new/datum/stack_recipe("rack parts", /obj/item/weapon/rack_parts), \
+	new/datum/stack_recipe("rack parts", /obj/item/weapon/table_parts/rack), \
+	new/datum/stack_recipe("metal baseball bat", /obj/item/weapon/baseballbat/metal, 10, time = 20, one_per_turf = 0, on_floor = 1), \
 	new/datum/stack_recipe("closet", /obj/structure/closet, 2, time = 15, one_per_turf = 1, on_floor = 1), \
 	null, \
 	new/datum/stack_recipe("canister", /obj/machinery/portable_atmospherics/canister, 10, time = 15, one_per_turf = 1, on_floor = 1), \
+	null, \
+	new/datum/stack_recipe("cannon frame", /obj/item/weapon/cannonframe, 10, time = 15, one_per_turf = 0, on_floor = 0), \
 	null, \
 	new/datum/stack_recipe("floor tile", /obj/item/stack/tile/plasteel, 1, 4, 20), \
 	new/datum/stack_recipe("metal rod", /obj/item/stack/rods, 1, 2, 60), \
@@ -57,6 +64,7 @@ var/global/list/datum/stack_recipe/metal_recipes = list ( \
 		new/datum/stack_recipe("airtight hatch assembly", /obj/structure/door_assembly/door_assembly_hatch, 4, time = 50, one_per_turf = 1, on_floor = 1), \
 		new/datum/stack_recipe("maintenance hatch assembly", /obj/structure/door_assembly/door_assembly_mhatch, 4, time = 50, one_per_turf = 1, on_floor = 1), \
 		new/datum/stack_recipe("high security airlock assembly", /obj/structure/door_assembly/door_assembly_highsecurity, 4, time = 50, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("emergency shutter", /obj/structure/firedoor_assembly, 4, time = 50, one_per_turf = 1, on_floor = 1), \
 		new/datum/stack_recipe("multi-tile airlock assembly", /obj/structure/door_assembly/multi_tile, 4, time = 50, one_per_turf = 1, on_floor = 1), \
 		), 4), \
 	null, \
@@ -68,7 +76,7 @@ var/global/list/datum/stack_recipe/metal_recipes = list ( \
 	new/datum/stack_recipe("air alarm frame", /obj/item/alarm_frame, 2), \
 	new/datum/stack_recipe("fire alarm frame", /obj/item/firealarm_frame, 2), \
 	null, \
-	new/datum/stack_recipe("iron door", /obj/structure/mineral_door/iron, 20, one_per_turf = 1, on_floor = 1), \
+	new/datum/stack_recipe("knife blade", /obj/item/butterflyblade, 6, time = 20, one_per_turf = 0, on_floor = 1) \
 )
 
 /obj/item/stack/sheet/metal
@@ -76,9 +84,9 @@ var/global/list/datum/stack_recipe/metal_recipes = list ( \
 	desc = "Sheets made out off metal. It has been dubbed Metal Sheets."
 	singular_name = "metal sheet"
 	icon_state = "sheet-metal"
-	m_amt = 3750
+	matter = list("metal" = 3750)
 	throwforce = 14.0
-	flags = FPRINT | TABLEPASS | CONDUCT
+	flags = CONDUCT
 	origin_tech = "materials=1"
 
 /obj/item/stack/sheet/metal/cyborg
@@ -86,9 +94,9 @@ var/global/list/datum/stack_recipe/metal_recipes = list ( \
 	desc = "Sheets made out off metal. It has been dubbed Metal Sheets."
 	singular_name = "metal sheet"
 	icon_state = "sheet-metal"
-	m_amt = 0
 	throwforce = 14.0
-	flags = FPRINT | TABLEPASS | CONDUCT
+	flags = CONDUCT
+	stacktype = /obj/item/stack/sheet/metal
 
 /obj/item/stack/sheet/metal/New(var/loc, var/amount=null)
 	recipes = metal_recipes
@@ -103,17 +111,18 @@ var/global/list/datum/stack_recipe/plasteel_recipes = list ( \
 	new/datum/stack_recipe("Metal crate", /obj/structure/closet/crate, 10, time = 50, one_per_turf = 1), \
 	new/datum/stack_recipe("RUST fuel assembly port frame", /obj/item/rust_fuel_assembly_port_frame, 12, time = 50, one_per_turf = 1), \
 	new/datum/stack_recipe("RUST fuel compressor frame", /obj/item/rust_fuel_compressor_frame, 12, time = 50, one_per_turf = 1), \
+	new/datum/stack_recipe("knife grip", /obj/item/butterflyhandle, 4, time = 20, one_per_turf = 0, on_floor = 1),
 	)
 
 /obj/item/stack/sheet/plasteel
 	name = "plasteel"
 	singular_name = "plasteel sheet"
-	desc = "This sheet is an alloy of iron and plasma."
+	desc = "This sheet is an alloy of iron and phoron."
 	icon_state = "sheet-plasteel"
 	item_state = "sheet-metal"
-	m_amt = 7500
+	matter = list("metal" = 7500)
 	throwforce = 15.0
-	flags = FPRINT | TABLEPASS | CONDUCT
+	flags = CONDUCT
 	origin_tech = "materials=2"
 
 /obj/item/stack/sheet/plasteel/New(var/loc, var/amount=null)
@@ -129,8 +138,10 @@ var/global/list/datum/stack_recipe/wood_recipes = list ( \
 	new/datum/stack_recipe("table parts", /obj/item/weapon/table_parts/wood, 2), \
 	new/datum/stack_recipe("wooden chair", /obj/structure/stool/bed/chair/wood/normal, 3, time = 10, one_per_turf = 1, on_floor = 1), \
 	new/datum/stack_recipe("wooden barricade", /obj/structure/barricade/wooden, 5, time = 50, one_per_turf = 1, on_floor = 1), \
+	new/datum/stack_recipe("crossbow frame", /obj/item/weapon/crossbowframe, 5, time = 25, one_per_turf = 0, on_floor = 0), \
 	new/datum/stack_recipe("wooden door", /obj/structure/mineral_door/wood, 10, time = 20, one_per_turf = 1, on_floor = 1), \
 	new/datum/stack_recipe("coffin", /obj/structure/closet/coffin, 5, time = 15, one_per_turf = 1, on_floor = 1), \
+	new/datum/stack_recipe("baseball bat", /obj/item/weapon/baseballbat, 10, time = 20, one_per_turf = 0, on_floor = 1) \
 //	new/datum/stack_recipe("apiary", /obj/item/apiary, 10, time = 25, one_per_turf = 0, on_floor = 0)
 	)
 
@@ -140,6 +151,13 @@ var/global/list/datum/stack_recipe/wood_recipes = list ( \
 	singular_name = "wood plank"
 	icon_state = "sheet-wood"
 	origin_tech = "materials=1;biotech=1"
+
+/obj/item/stack/sheet/wood/cyborg
+	name = "wooden plank"
+	desc = "One can only guess that this is a bunch of wood."
+	singular_name = "wood plank"
+	icon_state = "sheet-wood"
+	stacktype = /obj/item/stack/sheet/wood
 
 /obj/item/stack/sheet/wood/New(var/loc, var/amount=null)
 	recipes = wood_recipes
@@ -160,6 +178,8 @@ var/global/list/datum/stack_recipe/wood_recipes = list ( \
  */
 var/global/list/datum/stack_recipe/cardboard_recipes = list ( \
 	new/datum/stack_recipe("box", /obj/item/weapon/storage/box), \
+	new/datum/stack_recipe("donut box", /obj/item/weapon/storage/donut_box/empty), \
+	new/datum/stack_recipe("egg box", /obj/item/weapon/storage/fancy/egg_box), \
 	new/datum/stack_recipe("light tubes", /obj/item/weapon/storage/box/lights/tubes), \
 	new/datum/stack_recipe("light bulbs", /obj/item/weapon/storage/box/lights/bulbs), \
 	new/datum/stack_recipe("mouse traps", /obj/item/weapon/storage/box/mousetraps), \
@@ -181,7 +201,6 @@ var/global/list/datum/stack_recipe/cardboard_recipes = list ( \
 	desc = "Large sheets of card, like boxes folded flat."
 	singular_name = "cardboard sheet"
 	icon_state = "sheet-card"
-	flags = FPRINT | TABLEPASS
 	origin_tech = "materials=1"
 
 /obj/item/stack/sheet/cardboard/New(var/loc, var/amount=null)

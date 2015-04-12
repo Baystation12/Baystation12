@@ -1,3 +1,24 @@
+//mob verbs are faster than object verbs. See mob/verb/examine.
+/mob/living/verb/pulled(atom/movable/AM as mob|obj in oview(1))
+	set name = "Pull"
+	set category = "Object"
+
+	if(AM.Adjacent(src))
+		src.start_pulling(AM)
+
+	return
+
+//mob verbs are faster than object verbs. See above.
+/mob/living/pointed(atom/A as mob|obj|turf in view())
+	if(src.stat || !src.canmove || src.restrained())
+		return 0
+	if(src.status_flags & FAKEDEATH)
+		return 0
+	if(!..())
+		return 0
+
+	usr.visible_message("<b>[src]</b> points to [A]")
+	return 1
 
 /mob/living/verb/succumb()
 	set hidden = 1
@@ -18,7 +39,7 @@
 //This proc is used for mobs which are affected by pressure to calculate the amount of pressure that actually
 //affects them once clothing is factored in. ~Errorage
 /mob/living/proc/calculate_affecting_pressure(var/pressure)
-	return 0
+	return
 
 
 //sort of a legacy burn method for /electrocute, /shock, and the e_chair
@@ -202,15 +223,6 @@
 	return 0
 
 
-/mob/living/proc/electrocute_act(var/shock_damage, var/obj/source, var/siemens_coeff = 1.0)
-	  return 0 //only carbon liveforms have this proc
-
-/mob/living/emp_act(severity)
-	var/list/L = src.get_contents()
-	for(var/obj/O in L)
-		O.emp_act(severity)
-	..()
-
 /mob/living/proc/can_inject()
 	return 1
 
@@ -309,6 +321,7 @@
 		dead_mob_list -= src
 		living_mob_list += src
 		tod = null
+		timeofdeath = 0
 
 	// restore us to conciousness
 	stat = CONSCIOUS
@@ -419,11 +432,13 @@
 
 
 						step(pulling, get_dir(pulling.loc, T))
-						M.start_pulling(t)
+						if(t)
+							M.start_pulling(t)
 				else
 					if (pulling)
 						if (istype(pulling, /obj/structure/window))
-							if(pulling:ini_dir == NORTHWEST || pulling:ini_dir == NORTHEAST || pulling:ini_dir == SOUTHWEST || pulling:ini_dir == SOUTHEAST)
+							var/obj/structure/window/W = pulling
+							if(W.is_full_window())
 								for(var/obj/structure/window/win in get_step(pulling,get_dir(pulling.loc, T)))
 									stop_pulling()
 					if (pulling)
@@ -431,7 +446,8 @@
 	else
 		stop_pulling()
 		. = ..()
-	if ((s_active && !( s_active in contents ) ))
+
+	if (s_active && !( s_active in contents ) && get_turf(s_active) != get_turf(src))	//check !( s_active in contents ) first so we hopefully don't have to call get_turf() so much.
 		s_active.close(src)
 
 	if(update_slimes)
@@ -442,8 +458,9 @@
 	set name = "Resist"
 	set category = "IC"
 
-	if(!isliving(usr) || usr.next_move > world.time)
+	if(usr.stat || !isliving(usr) || usr.next_move > world.time)
 		return
+
 	usr.next_move = world.time + 20
 
 	var/mob/living/L = usr
@@ -457,7 +474,16 @@
 			M.drop_from_inventory(H)
 			M << "[H] wriggles out of your grip!"
 			src << "You wriggle out of [M]'s grip!"
+		else if(istype(H.loc,/obj/item))
+			src << "You struggle free of [H.loc]."
+			H.loc = get_turf(H)
 
+		if(istype(M))
+			for(var/atom/A in M.contents)
+				if(istype(A,/mob/living/simple_animal/borer) || istype(A,/obj/item/weapon/holder))
+					return
+
+		M.status_flags &= ~PASSEMOTES
 		return
 
 	//Resisting control by an alien mind.
@@ -465,25 +491,19 @@
 		var/mob/living/simple_animal/borer/B = src.loc
 		var/mob/living/captive_brain/H = src
 
-		H << "\red <B>You begin doggedly resisting the parasite's control (this will take approximately sixty seconds).</B>"
-		B.host << "\red <B>You feel the captive mind of [src] begin to resist your control.</B>"
+		H << "<span class='danger'>You begin doggedly resisting the parasite's control (this will take approximately sixty seconds).</span>"
+		B.host << "<span class='danger'>You feel the captive mind of [src] begin to resist your control.</span>"
 
-		spawn(rand(350,450)+B.host.brainloss)
+		spawn(rand(200,250)+B.host.brainloss)
 
 			if(!B || !B.controlling)
 				return
 
 			B.host.adjustBrainLoss(rand(5,10))
-			H << "\red <B>With an immense exertion of will, you regain control of your body!</B>"
-			B.host << "\red <B>You feel control of the host brain ripped from your grasp, and retract your probosci before the wild neural impulses can damage you.</b>"
-			B.controlling = 0
+			H << "<span class='danger'>With an immense exertion of will, you regain control of your body!</span>"
+			B.host << "<span class='danger'>You feel control of the host brain ripped from your grasp, and retract your probosci before the wild neural impulses can damage you.</span>"
 
-			B.ckey = B.host.ckey
-			B.host.ckey = H.ckey
-
-			H.ckey = null
-			H.name = "host brain"
-			H.real_name = "host brain"
+			B.detatch()
 
 			verbs -= /mob/living/carbon/proc/release_control
 			verbs -= /mob/living/carbon/proc/punish_host
@@ -615,7 +635,16 @@
 		if(CM.handcuffed && CM.canmove && (CM.last_special <= world.time))
 			CM.next_move = world.time + 100
 			CM.last_special = world.time + 100
-			if(isalienadult(CM) || (HULK in usr.mutations))//Don't want to do a lot of logic gating here.
+
+			var/can_break_cuffs
+			if(HULK in usr.mutations)
+				can_break_cuffs = 1
+			else if(istype(CM,/mob/living/carbon/human))
+				var/mob/living/carbon/human/H = CM
+				if(H.species.can_shred(H,1))
+					can_break_cuffs = 1
+
+			if(can_break_cuffs) //Don't want to do a lot of logic gating here.
 				usr << "\red You attempt to break your handcuffs. (This will take around 5 seconds and you need to stand still)"
 				for(var/mob/O in viewers(CM))
 					O.show_message(text("\red <B>[] is trying to break the handcuffs!</B>", CM), 1)
@@ -652,7 +681,16 @@
 		else if(CM.legcuffed && CM.canmove && (CM.last_special <= world.time))
 			CM.next_move = world.time + 100
 			CM.last_special = world.time + 100
-			if(isalienadult(CM) || (HULK in usr.mutations))//Don't want to do a lot of logic gating here.
+
+			var/can_break_cuffs
+			if(HULK in usr.mutations)
+				can_break_cuffs = 1
+			else if(istype(CM,/mob/living/carbon/human))
+				var/mob/living/carbon/human/H = CM
+				if(H.species.can_shred(H,1))
+					can_break_cuffs = 1
+
+			if(can_break_cuffs) //Don't want to do a lot of logic gating here.
 				usr << "\red You attempt to break your legcuffs. (This will take around 5 seconds and you need to stand still)"
 				for(var/mob/O in viewers(CM))
 					O.show_message(text("\red <B>[] is trying to break the legcuffs!</B>", CM), 1)
@@ -695,12 +733,17 @@
 	resting = !resting
 	src << "\blue You are now [resting ? "resting" : "getting up"]"
 
-/mob/living/proc/handle_ventcrawl(var/obj/machinery/atmospherics/unary/vent_pump/vent_found = null) // -- TLE -- Merged by Carn
+/mob/living/proc/handle_ventcrawl(var/obj/machinery/atmospherics/unary/vent_pump/vent_found = null, var/ignore_items = 0) // -- TLE -- Merged by Carn
 	if(stat)
 		src << "You must be conscious to do this!"
 		return
 	if(lying)
 		src << "You can't vent crawl while you're stunned!"
+		return
+
+	var/special_fail_msg = can_use_vents()
+	if(special_fail_msg)
+		src << "\red [special_fail_msg]"
 		return
 
 	if(vent_found) // one was passed in, probably from vent/AltClick()
@@ -750,10 +793,12 @@
 		src << "Never mind, you left."
 		return
 
-	for(var/obj/item/carried_item in contents)//If the monkey got on objects.
-		if( !istype(carried_item, /obj/item/weapon/implant) && !istype(carried_item, /obj/item/clothing/mask/facehugger) )//If it's not an implant or a facehugger
-			src << "\red You can't be carrying items or have items equipped when vent crawling!"
-			return
+	if(!ignore_items)
+		for(var/obj/item/carried_item in contents)//If the monkey got on objects.
+			if( !istype(carried_item, /obj/item/weapon/implant) && !istype(carried_item, /obj/item/clothing/mask/facehugger) )//If it's not an implant or a facehugger
+				src << "\red You can't be carrying items or have items equipped when vent crawling!"
+				return
+
 	if(isslime(src))
 		var/mob/living/carbon/slime/S = src
 		if(S.Victim)
@@ -786,3 +831,15 @@
 		var/area/new_area = get_area(loc)
 		if(new_area)
 			new_area.Entered(src)
+
+/mob/living/proc/can_use_vents()
+	return "You can't fit into that vent."
+
+/mob/living/proc/has_brain()
+	return 1
+
+/mob/living/proc/has_eyes()
+	return 1
+
+/mob/living/proc/slip(var/slipped_on,stun_duration=8)
+	return 0

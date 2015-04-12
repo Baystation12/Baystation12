@@ -12,7 +12,7 @@
 /obj/effect/mine/New()
 	icon_state = "uglyminearmed"
 
-/obj/effect/mine/HasEntered(AM as mob|obj)
+/obj/effect/mine/Crossed(AM as mob|obj)
 	Bumped(AM)
 
 /obj/effect/mine/Bumped(mob/M as mob|obj)
@@ -51,27 +51,15 @@
 
 	for (var/turf/simulated/floor/target in range(1,src))
 		if(!target.blocks_air)
-
-			var/datum/gas_mixture/payload = new
-			var/datum/gas/sleeping_agent/trace_gas = new
-
-			trace_gas.moles = 30
-			payload += trace_gas
-
-			target.zone.air.merge(payload)
+			target.assume_gas("sleeping_agent", 30)
 
 	spawn(0)
 		del(src)
 
-/obj/effect/mine/proc/triggerplasma(obj)
+/obj/effect/mine/proc/triggerphoron(obj)
 	for (var/turf/simulated/floor/target in range(1,src))
 		if(!target.blocks_air)
-
-			var/datum/gas_mixture/payload = new
-
-			payload.toxins = 30
-
-			target.zone.air.merge(payload)
+			target.assume_gas("phoron", 30)
 
 			target.hotspot_expose(1000, CELL_VOLUME)
 
@@ -96,10 +84,10 @@
 	icon_state = "uglymine"
 	triggerproc = "triggerrad"
 
-/obj/effect/mine/plasma
-	name = "Plasma Mine"
+/obj/effect/mine/phoron
+	name = "Phoron Mine"
 	icon_state = "uglymine"
-	triggerproc = "triggerplasma"
+	triggerproc = "triggerphoron"
 
 /obj/effect/mine/kick
 	name = "Kick Mine"

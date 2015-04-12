@@ -149,11 +149,11 @@ macro "macro"
 		is-disabled = false
 	elem 
 		name = "F3"
-		command = "say"
+		command = ".say"
 		is-disabled = false
 	elem 
 		name = "F4"
-		command = "me"
+		command = ".me"
 		is-disabled = false
 	elem 
 		name = "F5"
@@ -274,6 +274,10 @@ macro "hotkeymode"
 		command = "a-intent hurt"
 		is-disabled = false
 	elem 
+		name = "5"
+		command = ".me"
+		is-disabled = false
+	elem 
 		name = "A+REP"
 		command = ".west"
 		is-disabled = false
@@ -314,6 +318,14 @@ macro "hotkeymode"
 		command = "a-intent right"
 		is-disabled = false
 	elem 
+		name = "H"
+		command = "holster"
+		is-disabled = false
+	elem 
+		name = "CTRL+H"
+		command = "holster"
+		is-disabled = false
+	elem 
 		name = "Q"
 		command = ".northwest"
 		is-disabled = false
@@ -339,7 +351,7 @@ macro "hotkeymode"
 		is-disabled = false
 	elem 
 		name = "T"
-		command = "say"
+		command = ".say"
 		is-disabled = false
 	elem "w_key"
 		name = "W+REP"
@@ -395,11 +407,11 @@ macro "hotkeymode"
 		is-disabled = false
 	elem 
 		name = "F3"
-		command = "say"
+		command = ".say"
 		is-disabled = false
 	elem 
 		name = "F4"
-		command = "me"
+		command = ".me"
 		is-disabled = false
 	elem 
 		name = "F5"
@@ -1346,6 +1358,8 @@ window "mapwindow"
 		on-size = ""
 		icon-size = 0
 		text-mode = false
+		letterbox = true
+		zoom = 0
 		on-show = ".winset\"mainwindow.mainvsplit.left=mapwindow\""
 		on-hide = ".winset\"mainwindow.mainvsplit.left=\""
 		style = ""
@@ -1414,7 +1428,7 @@ window "outputwindow"
 		visited-color = #ff00ff
 		style = ".system {color:#ff0000;}"
 		enable-http-images = false
-		max-lines = 1000
+		max-lines = 0
 		image = ""
 
 window "rpane"
@@ -1818,4 +1832,6 @@ window "infowindow"
 		on-show = ".winset\"rpane.infob.is-visible=true;rpane.browseb.is-visible=true?rpane.infob.pos=130,0:rpane.infob.pos=65,0 rpane.textb.is-visible=true rpane.infob.is-checked=true rpane.rpanewindow.pos=0,30 rpane.rpanewindow.size=0x0 rpane.rpanewindow.left=infowindow\""
 		on-hide = ".winset\"rpane.infob.is-visible=false;rpane.browseb.is-visible=true?rpane.browseb.is-checked=true rpane.rpanewindow.left=browserwindow:rpane.textb.is-visible=true rpane.rpanewindow.pos=0,30 rpane.rpanewindow.size=0x0 rpane.rpanewindow.left=\""
 		on-tab = ""
+		prefix-color = none
+		suffix-color = none
 

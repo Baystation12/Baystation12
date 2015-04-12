@@ -59,7 +59,7 @@
 		max_i--
 		if(max_i<=0) return
 
-	while (!istype(pickedstart, /turf/space) || pickedstart.loc.name != "Space" ) //FUUUCK, should never happen.
+	while (!istype(pickedstart, /turf/space)) //FUUUCK, should never happen.
 
 
 	var/obj/effect/meteor/M

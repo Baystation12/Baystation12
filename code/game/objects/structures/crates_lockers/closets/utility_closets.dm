@@ -129,11 +129,11 @@
 	if(prob(20))
 		new /obj/item/weapon/storage/belt/utility(src)
 	if(prob(30))
-		new /obj/item/weapon/cable_coil/random(src)
+		new /obj/item/stack/cable_coil/random(src)
 	if(prob(30))
-		new /obj/item/weapon/cable_coil/random(src)
+		new /obj/item/stack/cable_coil/random(src)
 	if(prob(30))
-		new /obj/item/weapon/cable_coil/random(src)
+		new /obj/item/stack/cable_coil/random(src)
 	if(prob(20))
 		new /obj/item/device/multitool(src)
 	if(prob(5))
@@ -171,7 +171,6 @@
 
 /obj/structure/closet/bombcloset/New()
 	..()
-	sleep(2)
 	new /obj/item/clothing/suit/bomb_suit( src )
 	new /obj/item/clothing/under/color/black( src )
 	new /obj/item/clothing/shoes/black( src )
@@ -187,7 +186,6 @@
 
 /obj/structure/closet/bombclosetsecurity/New()
 	..()
-	sleep(2)
 	new /obj/item/clothing/suit/bomb_suit/security( src )
 	new /obj/item/clothing/under/rank/security( src )
 	new /obj/item/clothing/shoes/brown( src )
@@ -208,7 +206,6 @@
 
 /obj/structure/closet/hydrant/New()
 	..()
-	sleep(2)
 	new /obj/item/clothing/suit/fire/firefighter(src)
 	new /obj/item/clothing/mask/gas(src)
 	new /obj/item/device/flashlight(src)

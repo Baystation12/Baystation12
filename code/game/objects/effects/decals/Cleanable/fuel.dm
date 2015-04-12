@@ -1,12 +1,15 @@
 obj/effect/decal/cleanable/liquid_fuel
-	//Liquid fuel is used for things that used to rely on volatile fuels or plasma being contained to a couple tiles.
+	//Liquid fuel is used for things that used to rely on volatile fuels or phoron being contained to a couple tiles.
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "fuel"
 	layer = TURF_LAYER+0.2
 	anchored = 1
 	var/amount = 1 //Basically moles.
 
-	New(newLoc,amt=1)
+	New(turf/newLoc,amt=1,nologs=0)
+		if(!nologs)
+			message_admins("Liquid fuel has spilled in [newLoc.loc.name] ([newLoc.x],[newLoc.y],[newLoc.z]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[newLoc.x];Y=[newLoc.y];Z=[newLoc.z]'>JMP</a>)")
+			log_game("Liquid fuel has spilled in [newLoc.loc.name] ([newLoc.x],[newLoc.y],[newLoc.z])")
 		src.amount = amt
 
 		//Be absorbed by any other liquid fuel in the tile.
@@ -21,7 +24,7 @@ obj/effect/decal/cleanable/liquid_fuel
 
 	proc/Spread()
 		//Allows liquid fuels to sometimes flow into other tiles.
-		if(amount < 0.5) return
+		if(amount < 5.0) return
 		var/turf/simulated/S = loc
 		if(!istype(S)) return
 		for(var/d in cardinal)
@@ -30,14 +33,14 @@ obj/effect/decal/cleanable/liquid_fuel
 				var/turf/simulated/origin = get_turf(src)
 				if(origin.CanPass(null, target, 0, 0) && target.CanPass(null, origin, 0, 0))
 					if(!locate(/obj/effect/decal/cleanable/liquid_fuel) in target)
-						new/obj/effect/decal/cleanable/liquid_fuel(target, amount*0.25)
+						new/obj/effect/decal/cleanable/liquid_fuel(target, amount*0.25,1)
 						amount *= 0.75
 
 	flamethrower_fuel
 		icon_state = "mustard"
 		anchored = 0
 		New(newLoc, amt = 1, d = 0)
-			dir = d //Setting this direction means you won't get torched by your own flamethrower.
+			set_dir(d) //Setting this direction means you won't get torched by your own flamethrower.
 			. = ..()
 
 		Spread()

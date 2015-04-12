@@ -13,7 +13,7 @@
 	maxHealth = 15
 	melee_damage_lower = 2
 	melee_damage_upper = 3
-	attacktext = "claws"
+	attacktext = "clawed"
 	projectilesound = 'sound/weapons/Gunshot.ogg'
 	projectiletype = /obj/item/projectile/hivebotbullet
 	faction = "hivebot"
@@ -44,7 +44,7 @@
 	ranged = 1
 
 
-/mob/living/simple_animal/hostile/hivebot/Die()
+/mob/living/simple_animal/hostile/hivebot/death()
 	..()
 	visible_message("<b>[src]</b> blows apart!")
 	new /obj/effect/decal/cleanable/blood/gibs/robot(src.loc)

@@ -20,7 +20,7 @@
 			new/obj/item/weapon/reagent_containers/food/drinks/bottle/rum(src)
 			new/obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiadeus(src)
 			new/obj/item/weapon/reagent_containers/food/drinks/bottle/whiskey(src)
-			new/obj/item/weapon/lighter/zippo(src)
+			new/obj/item/weapon/flame/lighter/zippo(src)
 		if(2)
 			new/obj/item/weapon/pickaxe/drill(src)
 			new/obj/item/device/taperecorder(src)
@@ -39,7 +39,7 @@
 			return
 		if(9)
 			for(var/i = 0, i < 3, i++)
-				new/obj/machinery/hydroponics(src)
+				new/obj/machinery/portable_atmospherics/hydroponics(src)
 		if(10)
 			for(var/i = 0, i < 3, i++)
 				new/obj/item/weapon/reagent_containers/glass/beaker/noreact(src)

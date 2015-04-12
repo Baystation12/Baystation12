@@ -1,7 +1,7 @@
 obj/machinery/atmospherics/trinary
 	dir = SOUTH
 	initialize_directions = SOUTH|NORTH|WEST
-	use_power = 1
+	use_power = 0
 
 	var/datum/gas_mixture/air1
 	var/datum/gas_mixture/air2
@@ -80,20 +80,23 @@ obj/machinery/atmospherics/trinary
 
 		for(var/obj/machinery/atmospherics/target in get_step(src,node1_connect))
 			if(target.initialize_directions & get_dir(target,src))
-				node1 = target
-				break
+				if (check_connect_types(target,src))
+					node1 = target
+					break
 
 		for(var/obj/machinery/atmospherics/target in get_step(src,node2_connect))
 			if(target.initialize_directions & get_dir(target,src))
-				node2 = target
-				break
-
+				if (check_connect_types(target,src))
+					node2 = target
+					break
 		for(var/obj/machinery/atmospherics/target in get_step(src,node3_connect))
 			if(target.initialize_directions & get_dir(target,src))
-				node3 = target
-				break
+				if (check_connect_types(target,src))
+					node3 = target
+					break
 
 		update_icon()
+		update_underlays()
 
 	build_network()
 		if(!network1 && node1)
@@ -160,5 +163,7 @@ obj/machinery/atmospherics/trinary
 		else if(reference==node3)
 			del(network3)
 			node3 = null
+
+		update_underlays()
 
 		return null

@@ -2,7 +2,7 @@
 /obj/item/clothing/suit/armor
 	allowed = list(/obj/item/weapon/gun/energy,/obj/item/weapon/reagent_containers/spray/pepper,/obj/item/weapon/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/handcuffs)
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
-	flags = FPRINT | TABLEPASS | THICKMATERIAL
+	flags = THICKMATERIAL
 
 	cold_protection = UPPER_TORSO|LOWER_TORSO
 	min_cold_protection_temperature = ARMOR_MIN_COLD_PROTECTION_TEMPERATURE
@@ -17,7 +17,7 @@
 	icon_state = "armor"
 	item_state = "armor"
 	blood_overlay_type = "armor"
-	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
+	flags = ONESIZEFITSALL
 	armor = list(melee = 50, bullet = 15, laser = 50, energy = 10, bomb = 25, bio = 0, rad = 0)
 
 /obj/item/clothing/suit/armor/vest/security
@@ -31,6 +31,7 @@
 	desc = "An armoured jacket with silver rank pips and livery."
 	icon_state = "warden_jacket"
 	item_state = "armor"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 
 
 /obj/item/clothing/suit/armor/riot
@@ -38,7 +39,7 @@
 	desc = "A suit of armor with heavy padding to protect against melee attacks. Looks like it might impair movement."
 	icon_state = "riot"
 	item_state = "swat_suit"
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 	slowdown = 1
 	armor = list(melee = 80, bullet = 10, laser = 10, energy = 10, bomb = 0, bio = 0, rad = 0)
 	flags_inv = HIDEJUMPSUIT
@@ -70,15 +71,15 @@
 	item_state = "swat_suit"
 	gas_transfer_coefficient = 0.01
 	permeability_coefficient = 0.01
-	flags = FPRINT | TABLEPASS
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
+	flags = STOPSPRESSUREDMAGE | THICKMATERIAL
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS
 	allowed = list(/obj/item/weapon/gun,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/handcuffs,/obj/item/weapon/tank/emergency_oxygen)
 	slowdown = 1
-	armor = list(melee = 80, bullet = 60, laser = 50,energy = 25, bomb = 50, bio = 0, rad = 0)
+	armor = list(melee = 80, bullet = 60, laser = 50,energy = 25, bomb = 50, bio = 100, rad = 100)
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
 	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
 	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
-	siemens_coefficient = 0.5
+	siemens_coefficient = 0.6
 
 
 /obj/item/clothing/suit/armor/swat/officer
@@ -88,6 +89,7 @@
 	item_state = "det_suit"
 	blood_overlay_type = "coat"
 	flags_inv = 0
+	body_parts_covered = UPPER_TORSO|ARMS
 
 
 /obj/item/clothing/suit/armor/det_suit
@@ -96,7 +98,7 @@
 	icon_state = "detective-armor"
 	item_state = "armor"
 	blood_overlay_type = "armor"
-	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
+	flags = ONESIZEFITSALL
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
 	armor = list(melee = 50, bullet = 15, laser = 50, energy = 10, bomb = 25, bio = 0, rad = 0)
 
@@ -111,7 +113,6 @@
 	item_state = "reactiveoff"
 	blood_overlay_type = "armor"
 	slowdown = 1
-	flags = FPRINT | TABLEPASS
 	armor = list(melee = 0, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 0, rad = 0)
 
 /obj/item/clothing/suit/armor/reactive/IsShield()
@@ -227,3 +228,34 @@
 					"\blue You draw \the [holstered], pointing it at the ground.")
 				usr.put_in_hands(holstered)
 			holstered = null
+
+//Non-hardsuit ERT armor.
+/obj/item/clothing/suit/armor/vest/ert
+	name = "emergency response team armor"
+	desc = "A set of armor worn by members of the NanoTrasen Emergency Response Team."
+	icon_state = "ertarmor_cmd"
+	item_state = "armor"
+	armor = list(melee = 60, bullet = 60, laser = 60, energy = 40, bomb = 20, bio = 0, rad = 0)
+
+//Commander
+/obj/item/clothing/suit/armor/vest/ert/command
+	name = "emergency response team commander armor"
+	desc = "A set of armor worn by the commander of a NanoTrasen Emergency Response Team. Has blue highlights."
+
+//Security
+/obj/item/clothing/suit/armor/vest/ert/security
+	name = "emergency response team security armor"
+	desc = "A set of armor worn by security members of the NanoTrasen Emergency Response Team. Has red highlights."
+	icon_state = "ertarmor_sec"
+
+//Engineer
+/obj/item/clothing/suit/armor/vest/ert/engineer
+	name = "emergency response team engineer armor"
+	desc = "A set of armor worn by engineering members of the NanoTrasen Emergency Response Team. Has orange highlights."
+	icon_state = "ertarmor_eng"
+
+//Medical
+/obj/item/clothing/suit/armor/vest/ert/medical
+	name = "emergency response team medical armor"
+	desc = "A set of armor worn by medical members of the NanoTrasen Emergency Response Team. Has red and white highlights."
+	icon_state = "ertarmor_med"

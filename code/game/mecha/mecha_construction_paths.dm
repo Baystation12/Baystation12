@@ -18,17 +18,16 @@
 	else if(istype(used_atom, /obj/item/weapon/wirecutters))
 		playsound(holder, 'sound/items/Wirecutter.ogg', 50, 1)
 
-	else if(istype(used_atom, /obj/item/weapon/cable_coil))
-		var/obj/item/weapon/cable_coil/C = used_atom
-		if(C.amount<4)
+	else if(istype(used_atom, /obj/item/stack/cable_coil))
+		var/obj/item/stack/cable_coil/C = used_atom
+		if(C.use(4))
+			playsound(holder, 'sound/items/Deconstruct.ogg', 50, 1)
+		else
 			user << ("There's not enough cable to finish the task.")
 			return 0
-		else
-			C.use(4)
-			playsound(holder, 'sound/items/Deconstruct.ogg', 50, 1)
 	else if(istype(used_atom, /obj/item/stack))
 		var/obj/item/stack/S = used_atom
-		if(S.amount < 5)
+		if(S.get_amount() < 5)
 			user << ("There's not enough material in this stack.")
 			return 0
 		else
@@ -51,17 +50,16 @@
 	else if(istype(used_atom, /obj/item/weapon/wirecutters))
 		playsound(holder, 'sound/items/Wirecutter.ogg', 50, 1)
 
-	else if(istype(used_atom, /obj/item/weapon/cable_coil))
-		var/obj/item/weapon/cable_coil/C = used_atom
-		if(C.amount<4)
+	else if(istype(used_atom, /obj/item/stack/cable_coil))
+		var/obj/item/stack/cable_coil/C = used_atom
+		if(C.use(4))
+			playsound(holder, 'sound/items/Deconstruct.ogg', 50, 1)
+		else
 			user << ("There's not enough cable to finish the task.")
 			return 0
-		else
-			C.use(4)
-			playsound(holder, 'sound/items/Deconstruct.ogg', 50, 1)
 	else if(istype(used_atom, /obj/item/stack))
 		var/obj/item/stack/S = used_atom
-		if(S.amount < 5)
+		if(S.get_amount() < 5)
 			user << ("There's not enough material in this stack.")
 			return 0
 		else
@@ -146,7 +144,7 @@
 					 		"backkey"=/obj/item/weapon/screwdriver,
 					 		"desc"="The wiring is added"),
 					 //12
-					 list("key"=/obj/item/weapon/cable_coil,
+					 list("key"=/obj/item/stack/cable_coil,
 					 		"backkey"=/obj/item/weapon/screwdriver,
 					 		"desc"="The hydraulic systems are active."),
 					 //13
@@ -190,7 +188,7 @@
 					holder.icon_state = "ripley4"
 				else
 					user.visible_message("[user] removes the wiring from [holder].", "You remove the wiring from [holder].")
-					var/obj/item/weapon/cable_coil/coil = new /obj/item/weapon/cable_coil(get_turf(holder))
+					var/obj/item/stack/cable_coil/coil = new /obj/item/stack/cable_coil(get_turf(holder))
 					coil.amount = 4
 					holder.icon_state = "ripley2"
 			if(10)
@@ -380,7 +378,7 @@
 					 		"backkey"=/obj/item/weapon/screwdriver,
 					 		"desc"="The wiring is added"),
 					 //18
-					 list("key"=/obj/item/weapon/cable_coil,
+					 list("key"=/obj/item/stack/cable_coil,
 					 		"backkey"=/obj/item/weapon/screwdriver,
 					 		"desc"="The hydraulic systems are active."),
 					 //19
@@ -424,7 +422,7 @@
 					holder.icon_state = "gygax4"
 				else
 					user.visible_message("[user] removes the wiring from [holder].", "You remove the wiring from [holder].")
-					var/obj/item/weapon/cable_coil/coil = new /obj/item/weapon/cable_coil(get_turf(holder))
+					var/obj/item/stack/cable_coil/coil = new /obj/item/stack/cable_coil(get_turf(holder))
 					coil.amount = 4
 					holder.icon_state = "gygax2"
 			if(16)
@@ -642,7 +640,7 @@
 					 		"backkey"=/obj/item/weapon/screwdriver,
 					 		"desc"="The wiring is added"),
 					 //13
-					 list("key"=/obj/item/weapon/cable_coil,
+					 list("key"=/obj/item/stack/cable_coil,
 					 		"backkey"=/obj/item/weapon/screwdriver,
 					 		"desc"="The hydraulic systems are active."),
 					 //14
@@ -686,7 +684,7 @@
 					holder.icon_state = "fireripley4"
 				else
 					user.visible_message("[user] removes the wiring from [holder].", "You remove the wiring from [holder].")
-					var/obj/item/weapon/cable_coil/coil = new /obj/item/weapon/cable_coil(get_turf(holder))
+					var/obj/item/stack/cable_coil/coil = new /obj/item/stack/cable_coil(get_turf(holder))
 					coil.amount = 4
 					holder.icon_state = "fireripley2"
 			if(11)
@@ -781,85 +779,6 @@
 	spawn_result()
 		..()
 		feedback_inc("mecha_firefighter_created",1)
-		return
-
-
-
-/datum/construction/mecha/honker_chassis
-	steps = list(list("key"=/obj/item/mecha_parts/part/honker_torso),//1
-					 list("key"=/obj/item/mecha_parts/part/honker_left_arm),//2
-					 list("key"=/obj/item/mecha_parts/part/honker_right_arm),//3
-					 list("key"=/obj/item/mecha_parts/part/honker_left_leg),//4
-					 list("key"=/obj/item/mecha_parts/part/honker_right_leg),//5
-					 list("key"=/obj/item/mecha_parts/part/honker_head)
-					)
-
-	action(atom/used_atom,mob/user as mob)
-		return check_all_steps(used_atom,user)
-
-	custom_action(step, atom/used_atom, mob/user)
-		user.visible_message("[user] has connected [used_atom] to [holder].", "You connect [used_atom] to [holder]")
-		holder.overlays += used_atom.icon_state+"+o"
-		del used_atom
-		return 1
-
-	spawn_result()
-		var/obj/item/mecha_parts/chassis/const_holder = holder
-		const_holder.construct = new /datum/construction/mecha/honker(const_holder)
-		const_holder.density = 1
-		spawn()
-			del src
-		return
-
-
-/datum/construction/mecha/honker
-	result = "/obj/mecha/combat/honker"
-	steps = list(list("key"=/obj/item/weapon/bikehorn),//1
-					 list("key"=/obj/item/clothing/shoes/clown_shoes),//2
-					 list("key"=/obj/item/weapon/bikehorn),//3
-					 list("key"=/obj/item/clothing/mask/gas/clown_hat),//4
-					 list("key"=/obj/item/weapon/bikehorn),//5
-					 list("key"=/obj/item/weapon/circuitboard/mecha/honker/targeting),//6
-					 list("key"=/obj/item/weapon/bikehorn),//7
-					 list("key"=/obj/item/weapon/circuitboard/mecha/honker/peripherals),//8
-					 list("key"=/obj/item/weapon/bikehorn),//9
-					 list("key"=/obj/item/weapon/circuitboard/mecha/honker/main),//10
-					 list("key"=/obj/item/weapon/bikehorn),//11
-					 )
-
-	action(atom/used_atom,mob/user as mob)
-		return check_step(used_atom,user)
-
-	custom_action(step, atom/used_atom, mob/user)
-		if(!..())
-			return 0
-
-		if(istype(used_atom, /obj/item/weapon/bikehorn))
-			playsound(holder, 'sound/items/bikehorn.ogg', 50, 1)
-			user.visible_message("HONK!")
-
-		//TODO: better messages.
-		switch(step)
-			if(10)
-				user.visible_message("[user] installs the central control module into [holder].", "You install the central control module into [holder].")
-				del used_atom
-			if(8)
-				user.visible_message("[user] installs the peripherals control module into [holder].", "You install the peripherals control module into [holder].")
-				del used_atom
-			if(6)
-				user.visible_message("[user] installs the weapon control module into [holder].", "You install the weapon control module into [holder].")
-				del used_atom
-			if(4)
-				user.visible_message("[user] puts clown wig and mask on [holder].", "You put clown wig and mask on [holder].")
-				del used_atom
-			if(2)
-				user.visible_message("[user] puts clown boots on [holder].", "You put clown boots on [holder].")
-				del used_atom
-		return 1
-
-	spawn_result()
-		..()
-		feedback_inc("mecha_honker_created",1)
 		return
 
 /datum/construction/mecha/durand_chassis
@@ -962,7 +881,7 @@
 					 		"backkey"=/obj/item/weapon/screwdriver,
 					 		"desc"="The wiring is added"),
 					 //18
-					 list("key"=/obj/item/weapon/cable_coil,
+					 list("key"=/obj/item/stack/cable_coil,
 					 		"backkey"=/obj/item/weapon/screwdriver,
 					 		"desc"="The hydraulic systems are active."),
 					 //19
@@ -1007,7 +926,7 @@
 					holder.icon_state = "durand4"
 				else
 					user.visible_message("[user] removes the wiring from [holder].", "You remove the wiring from [holder].")
-					var/obj/item/weapon/cable_coil/coil = new /obj/item/weapon/cable_coil(get_turf(holder))
+					var/obj/item/stack/cable_coil/coil = new /obj/item/stack/cable_coil(get_turf(holder))
 					coil.amount = 4
 					holder.icon_state = "durand2"
 			if(16)
@@ -1242,7 +1161,7 @@
 					 		"backkey"=/obj/item/weapon/screwdriver,
 					 		"desc"="The wiring is added"),
 					 //12
-					 list("key"=/obj/item/weapon/cable_coil,
+					 list("key"=/obj/item/stack/cable_coil,
 					 		"backkey"=/obj/item/weapon/screwdriver,
 					 		"desc"="The hydraulic systems are active."),
 					 //13
@@ -1286,7 +1205,7 @@
 					holder.icon_state = "odysseus4"
 				else
 					user.visible_message("[user] removes the wiring from [holder].", "You remove the wiring from [holder].")
-					var/obj/item/weapon/cable_coil/coil = new /obj/item/weapon/cable_coil(get_turf(holder))
+					var/obj/item/stack/cable_coil/coil = new /obj/item/stack/cable_coil(get_turf(holder))
 					coil.amount = 4
 					holder.icon_state = "odysseus2"
 			if(10)
@@ -1352,6 +1271,7 @@
 				else
 					user.visible_message("[user] cuts internal armor layer from [holder].", "You cut the internal armor layer from [holder].")
 					holder.icon_state = "odysseus10"
+			if(2)
 				if(diff==FORWARD)
 					user.visible_message("[user] secures external armor layer.", "You secure external reinforced armor layer.")
 					holder.icon_state = "odysseus13"

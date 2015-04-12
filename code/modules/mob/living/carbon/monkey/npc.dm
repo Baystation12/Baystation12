@@ -53,7 +53,7 @@ mob/living/carbon/monkey/proc/npc_act()
 				hiding_behind = null
 				hid_behind = 0
 
-			if(loc == prevloc) dir = get_dir(src, npc_fleeing)
+			if(loc == prevloc) set_dir(get_dir(src, npc_fleeing))
 		else
 			if(prob(33) && canmove && isturf(loc))
 				step(src, pick(cardinal))
@@ -87,13 +87,3 @@ mob/living/carbon/monkey/react_to_attack(mob/M)
 
 		npc_fleeing = M
 		fleeing_duration = 30
-
-
-/*/mob/living/proc/apply_damage(var/damage = 0,var/damagetype = BRUTE, var/def_zone = null, var/blocked = 0, var/slash = 0, var/used_weapon = null)
-	if(!client && !stat)
-		if(damage > 10)
-			if(prob(40) || health == 100)
-				emote("me", 2, pick("screams loudly!", "whimpers in pain!"))
-		else if(health == 100 || (damage > 0 && prob(10)))
-			emote("me", 1, pick("flails about wildly!", "cringes visibly!", "chimpers nervously."))
-	return ..()*/

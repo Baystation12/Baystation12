@@ -34,9 +34,6 @@
 /obj/machinery/door_timer/New()
 	..()
 
-	pixel_x = ((src.dir & 3)? (0) : (src.dir == 4 ? 32 : -32))
-	pixel_y = ((src.dir & 3)? (src.dir ==1 ? 24 : -32) : (0))
-
 	spawn(20)
 		for(var/obj/machinery/door/window/brigdoor/M in world)
 			if (M.id == src.id)
@@ -324,43 +321,26 @@
 /obj/machinery/door_timer/cell_1
 	name = "Cell 1"
 	id = "Cell 1"
-	dir = 2
-	pixel_y = -32
-
 
 /obj/machinery/door_timer/cell_2
 	name = "Cell 2"
 	id = "Cell 2"
-	dir = 2
-	pixel_y = -32
-
 
 /obj/machinery/door_timer/cell_3
 	name = "Cell 3"
 	id = "Cell 3"
-	dir = 2
-	pixel_y = -32
-
 
 /obj/machinery/door_timer/cell_4
 	name = "Cell 4"
 	id = "Cell 4"
-	dir = 2
-	pixel_y = -32
-
 
 /obj/machinery/door_timer/cell_5
 	name = "Cell 5"
 	id = "Cell 5"
-	dir = 2
-	pixel_y = -32
-
 
 /obj/machinery/door_timer/cell_6
 	name = "Cell 6"
 	id = "Cell 6"
-	dir = 4
-	pixel_x = 32
 
 #undef FONT_SIZE
 #undef FONT_COLOR

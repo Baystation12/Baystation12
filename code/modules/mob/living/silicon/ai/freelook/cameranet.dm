@@ -7,9 +7,15 @@ var/datum/cameranet/cameranet = new()
 /datum/cameranet
 	// The cameras on the map, no matter if they work or not. Updated in obj/machinery/camera.dm by New() and Del().
 	var/list/cameras = list()
+	var/cameras_unsorted = 1
 	// The chunks of the map, mapping the areas that the cameras can see.
 	var/list/chunks = list()
 	var/ready = 0
+
+/datum/cameranet/proc/process_sort()
+	if(cameras_unsorted)
+		cameras = dd_sortedObjectList(cameras)
+		cameras_unsorted = 0
 
 // Checks if a chunk has been Generated in x, y, z.
 /datum/cameranet/proc/chunkGenerated(x, y, z)
@@ -128,6 +134,9 @@ var/datum/cameranet/cameranet = new()
 
 	// 0xf = 15
 	var/turf/position = get_turf(target)
+	return checkTurfVis(position)
+
+/datum/cameranet/proc/checkTurfVis(var/turf/position)
 	var/datum/camerachunk/chunk = getCameraChunk(position.x, position.y, position.z)
 	if(chunk)
 		if(chunk.changed)
@@ -135,7 +144,6 @@ var/datum/cameranet/cameranet = new()
 		if(chunk.visibleTurfs[position])
 			return 1
 	return 0
-
 
 // Debug verb for VVing the chunk that the turf is in.
 /*

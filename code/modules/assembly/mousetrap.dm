@@ -2,16 +2,15 @@
 	name = "mousetrap"
 	desc = "A handy little spring-loaded trap for catching pesty rodents."
 	icon_state = "mousetrap"
-	m_amt = 100
-	w_amt = 10
+	matter = list("metal" = 100, "waste" = 10)
 	origin_tech = "combat=1"
 	var/armed = 0
 
 
-	examine()
-		..()
+	examine(mob/user)
+		..(user)
 		if(armed)
-			usr << "It looks like it's armed."
+			user << "It looks like it's armed."
 
 	update_icon()
 		if(armed)
@@ -82,7 +81,7 @@
 		..()
 
 
-	HasEntered(AM as mob|obj)
+	Crossed(AM as mob|obj)
 		if(armed)
 			if(ishuman(AM))
 				var/mob/living/carbon/H = AM

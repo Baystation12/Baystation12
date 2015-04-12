@@ -4,11 +4,12 @@
 	icon_state = "electropack0"
 	item_state = "electropack"
 	frequency = 1449
-	flags = FPRINT | CONDUCT | TABLEPASS
+	flags = CONDUCT
 	slot_flags = SLOT_BACK
 	w_class = 5.0
-	g_amt = 2500
-	m_amt = 10000
+
+	matter = list("metal" = 10000,"glass" = 2500)
+
 	var/code = 2
 
 /obj/item/device/radio/electropack/attack_hand(mob/user as mob)

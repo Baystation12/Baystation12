@@ -110,9 +110,11 @@
 		sleep(48)
 		del(animation)
 
-	var/mob/living/carbon/human/O = new( src )
+	var/mob/living/carbon/human/O
 	if(Mo.greaterform)
-		O.set_species(Mo.greaterform)
+		O = new(src, Mo.greaterform)
+	else
+		O = new(src)
 
 	if (M.dna.GetUIState(DNA_UI_GENDER))
 		O.gender = FEMALE
@@ -158,6 +160,7 @@
 			continue
 		else
 			O.real_name = randomname
+			O.dna.real_name = randomname
 			i++
 	O.UpdateAppearance()
 	O.take_overall_damage(M.getBruteLoss(), M.getFireLoss())

@@ -2,7 +2,6 @@
  * Contains:
  *		First Aid Kits
  * 		Pill Bottles
- *		Dice Pack (in a pill bottle)
  */
 
 /*
@@ -124,29 +123,7 @@
 	allow_quick_gather = 1
 	use_to_pickup = 1
 	storage_slots = 14
-
-/obj/item/weapon/storage/pill_bottle/MouseDrop(obj/over_object as obj) //Quick pillbottle fix. -Agouri
-
-	if (ishuman(usr) || ismonkey(usr)) //Can monkeys even place items in the pocket slots? Leaving this in just in case~
-		var/mob/M = usr
-		if (!( istype(over_object, /obj/screen) ))
-			return ..()
-		if ((!( M.restrained() ) && !( M.stat ) /*&& M.pocket == src*/))
-			switch(over_object.name)
-				if("r_hand")
-					M.u_equip(src)
-					M.put_in_r_hand(src)
-				if("l_hand")
-					M.u_equip(src)
-					M.put_in_l_hand(src)
-			src.add_fingerprint(usr)
-			return
-		if(over_object == usr && in_range(src, usr) || usr.contents.Find(src))
-			if (usr.s_active)
-				usr.s_active.close(usr)
-			src.show_to(usr)
-			return
-	return
+	use_sound = null
 
 /obj/item/weapon/storage/pill_bottle/kelotane
 	name = "bottle of kelotane pills"
@@ -163,7 +140,7 @@
 		new /obj/item/weapon/reagent_containers/pill/kelotane( src )
 
 /obj/item/weapon/storage/pill_bottle/antitox
-	name = "Dylovene pills"
+	name = "bottle of Dylovene pills"
 	desc = "Contains pills used to counter toxins."
 
 	New()
@@ -177,7 +154,7 @@
 		new /obj/item/weapon/reagent_containers/pill/antitox( src )
 
 /obj/item/weapon/storage/pill_bottle/inaprovaline
-	name = "Inaprovaline pills"
+	name = "bottle of Inaprovaline pills"
 	desc = "Contains pills used to stabilize patients."
 
 	New()
@@ -191,7 +168,7 @@
 		new /obj/item/weapon/reagent_containers/pill/inaprovaline( src )
 
 /obj/item/weapon/storage/pill_bottle/tramadol
-	name = "Tramadol Pills"
+	name = "bottle of Tramadol Pills"
 	desc = "Contains pills used to relieve pain."
 
 	New()
@@ -203,13 +180,3 @@
 		new /obj/item/weapon/reagent_containers/pill/tramadol( src )
 		new /obj/item/weapon/reagent_containers/pill/tramadol( src )
 		new /obj/item/weapon/reagent_containers/pill/tramadol( src )
-
-/obj/item/weapon/storage/pill_bottle/dice
-	name = "pack of dice"
-	desc = "It's a small container with dice inside."
-
-	New()
-		..()
-		new /obj/item/weapon/dice( src )
-		new /obj/item/weapon/dice/d20( src )
-

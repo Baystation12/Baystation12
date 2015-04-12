@@ -41,7 +41,7 @@
 
 /obj/structure/bookcase/attack_hand(var/mob/user as mob)
 	if(contents.len)
-		var/obj/item/weapon/book/choice = input("Which book would you like to remove from the shelf?") in contents as obj|null
+		var/obj/item/weapon/book/choice = input("Which book would you like to remove from the shelf?") as null|obj in contents
 		if(choice)
 			if(!usr.canmove || usr.stat || usr.restrained() || !in_range(loc, usr))
 				return
@@ -126,7 +126,6 @@
 	throw_speed = 1
 	throw_range = 5
 	w_class = 3		 //upped to three because books are, y'know, pretty big. (and you could hide them inside eachother recursively forever)
-	flags = FPRINT | TABLEPASS
 	attack_verb = list("bashed", "whacked", "educated")
 	var/dat			 // Actual page content
 	var/due_date = 0 // Game time in 1/10th seconds
@@ -237,6 +236,12 @@
 	else
 		..()
 
+/obj/item/weapon/book/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
+	if(user.zone_sel.selecting == "eyes")
+		user.visible_message("<span class='notice'>You open up the book and show it to [M]. </span>", \
+			"<span class='notice'> [user] opens up a book and shows it to [M]. </span>")
+		M << browse("<TT><I>Penned by [author].</I></TT> <BR>" + "[dat]", "window=book")
+
 
 /*
  * Barcode Scanner
@@ -248,7 +253,6 @@
 	throw_speed = 1
 	throw_range = 5
 	w_class = 2.0
-	flags = FPRINT | TABLEPASS
 	var/obj/machinery/librarycomp/computer // Associated computer - Modes 1 to 3 use this
 	var/obj/item/weapon/book/book	 //  Currently scanned book
 	var/mode = 0 					// 0 - Scan only, 1 - Scan and Set Buffer, 2 - Scan and Attempt to Check In, 3 - Scan and Attempt to Add to Inventory
