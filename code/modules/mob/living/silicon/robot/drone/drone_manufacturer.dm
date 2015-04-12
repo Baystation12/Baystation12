@@ -136,7 +136,6 @@
 		if(DF.stat & NOPOWER || !DF.produce_drones)
 			continue
 		if(DF.drone_progress >= 100)
-			DF.create_drone(src.client)
 			all_fabricators[DF.fabricator_tag] = DF
 
 	if(!all_fabricators.len)
