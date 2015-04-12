@@ -1,6 +1,6 @@
 /mob/living/carbon/slime/say(var/message)
 
-	message = sanitize(message)
+	message = sanitize(message, ja_mode = TEMP)
 
 	var/verb = say_quote(message)
 

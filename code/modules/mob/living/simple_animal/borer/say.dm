@@ -1,6 +1,6 @@
 /mob/living/simple_animal/borer/say(var/message)
 
-	message = sanitize(message)
+	message = sanitize(message, ja_mode = TEMP)
 	message = capitalize(message)
 
 	if(!message)
@@ -24,7 +24,7 @@
 
 	var/datum/language/L = parse_language(message)
 	if(L && L.flags & HIVEMIND)
-		L.broadcast(src,trim(copytext(message,3)),src.truename)
+		L.broadcast(src,sanitize_chat(trim(copytext(message,3))),src.truename)
 		return
 
 	if(!host)

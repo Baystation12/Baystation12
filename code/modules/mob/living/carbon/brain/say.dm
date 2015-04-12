@@ -3,7 +3,7 @@
 	if (silent)
 		return
 
-	message = sanitize(message)
+	message = sanitize(message, ja_mode = TEMP)
 
 	if(!(container && istype(container, /obj/item/device/mmi)))
 		return //No MMI, can't speak, bucko./N
@@ -28,7 +28,7 @@
 				message = Gibberish(message, (emp_damage*6))//scrambles the message, gets worse when emp_damage is higher
 
 		if(speaking && speaking.flags & HIVEMIND)
-			speaking.broadcast(src,trim(message))
+			speaking.broadcast(src,sanitize_chat(trim(message)))
 			return
 
 		if(istype(container, /obj/item/device/mmi/radio_enabled))

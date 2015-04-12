@@ -163,7 +163,7 @@ proc/get_radio_key_from_channel(var/channel)
 		// This is broadcast to all mobs with the language,
 		// irrespective of distance or anything else.
 		if(speaking.flags & HIVEMIND)
-			speaking.broadcast(src,trim(message))
+			speaking.broadcast(src,sanitize_chat(trim(message)))
 			return
 		//If we've gotten this far, keep going!
 		verb = speaking.get_spoken_verb(ending)
@@ -181,7 +181,7 @@ proc/get_radio_key_from_channel(var/channel)
 		return
 
 	var/list/obj/item/used_radios = new
-	if(handle_message_mode(message_mode, message, verb, speaking, used_radios, alt_name))
+	if(handle_message_mode(message_mode, sanitize_chat(message), verb, speaking, used_radios, alt_name))
 		return
 
 	var/list/handle_v = handle_speech_sound()
@@ -215,7 +215,7 @@ proc/get_radio_key_from_channel(var/channel)
 				src.custom_emote(1, "[pick(speaking.signlang_verb)].")
 
 		if (speaking.flags & SIGNLANG)
-			return say_signlang(message, pick(speaking.signlang_verb), speaking)
+			return say_signlang(sanitize_chat(message), pick(speaking.signlang_verb), speaking)
 
 	var/list/listening = list()
 	var/list/listening_obj = list()

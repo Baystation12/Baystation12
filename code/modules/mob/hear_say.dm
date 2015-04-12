@@ -75,11 +75,11 @@
 			src.playsound_local(source, speech_sound, sound_vol, 1)
 
 /mob/proc/on_hear_say(var/message)
-	src << message
+	src << sanitize_chat(message)
 
 /mob/living/silicon/on_hear_say(var/message)
 	var/time = say_timestamp()
-	src << "[time] [message]"
+	src << "[time] [sanitize_chat(message)]"
 
 /mob/proc/hear_radio(var/message, var/verb="says", var/datum/language/language=null, var/part_a, var/part_b, var/mob/speaker = null, var/hard_to_hear = 0, var/vname ="")
 
@@ -197,18 +197,18 @@
 	return "<span class='say_quote'>\[[worldtime2text()]\]</span>"
 
 /mob/proc/on_hear_radio(part_a, speaker_name, track, part_b, formatted)
-	src << "[part_a][speaker_name][part_b][formatted]</span></span>"
+	src << "[part_a][speaker_name][part_b][sanitize_chat(formatted)]</span></span>"
 
 /mob/dead/observer/on_hear_radio(part_a, speaker_name, track, part_b, formatted)
-	src << "[part_a][track][part_b][formatted]</span></span>"
+	src << "[part_a][track][part_b][sanitize_chat(formatted)]</span></span>"
 
 /mob/living/silicon/on_hear_radio(part_a, speaker_name, track, part_b, formatted)
 	var/time = say_timestamp()
-	src << "[time][part_a][speaker_name][part_b][formatted]</span></span>"
+	src << "[time][part_a][speaker_name][part_b][sanitize_chat(formatted)]</span></span>"
 
 /mob/living/silicon/ai/on_hear_radio(part_a, speaker_name, track, part_b, formatted)
 	var/time = say_timestamp()
-	src << "[time][part_a][track][part_b][formatted]</span></span>"
+	src << "[time][part_a][track][part_b][sanitize_chat(formatted)]</span></span>"
 
 /mob/proc/hear_signlang(var/message, var/verb = "gestures", var/datum/language/language, var/mob/speaker = null)
 	if(!client)
@@ -237,7 +237,7 @@
 			heardword = copytext(heardword,2)
 		if(copytext(heardword,-1) in punctuation)
 			heardword = copytext(heardword,1,lentext(heardword))
-		heard = "<span class = 'game_say'>...You hear something about...[heardword]</span>"
+		heard = "<span class = 'game_say'>...You hear something about...[sanitize_chat(heardword)]</span>"
 
 	else
 		heard = "<span class = 'game_say'>...<i>You almost hear someone talking</i>...</span>"
