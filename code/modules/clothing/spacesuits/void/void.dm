@@ -139,7 +139,7 @@
 	if(H.wear_suit != src) return
 
 	if(H.head == helmet)
-		H << "\blue You retract your suit helmet."
+		H << "<span class='notice'>You retract your suit helmet.</span>"
 		helmet.canremove = 1
 		H.drop_from_inventory(helmet)
 		helmet.loc = src
@@ -150,8 +150,31 @@
 		if(H.equip_to_slot_if_possible(helmet, slot_head))
 			helmet.pickup(H)
 			helmet.canremove = 0
-			H << "<font color='blue'><b>You deploy your suit helmet, sealing you off from the world.</b></font>"
+			H << "<span class='info'>You deploy your suit helmet, sealing you off from the world.</span>"
 	helmet.update_light(H)
+
+/obj/item/clothing/suit/space/void/verb/eject_tank()
+
+	set name = "Eject Tank"
+	set category = "Object"
+	set src in usr
+
+	if(!istype(src.loc,/mob/living)) return
+
+	if(!tank)
+		usr << "There is no tank inserted."
+		return
+
+	var/mob/living/carbon/human/H = usr
+
+	if(!istype(H)) return
+	if(H.stat) return
+	if(H.wear_suit != src) return
+
+	H << "<span class='info'>You press the emergency release, ejecting \the [tank] from your suit.</span>"
+	tank.canremove = 1
+	H.drop_from_inventory(tank)
+	src.tank = null
 
 /obj/item/clothing/suit/space/void/attackby(obj/item/W as obj, mob/user as mob)
 
