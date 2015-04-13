@@ -18,6 +18,7 @@
 		use_power()
 		process_killswitch()
 		process_locks()
+		process_queued_alarms()
 	update_canmove()
 
 /mob/living/silicon/robot/proc/clamp_values()
@@ -129,10 +130,11 @@
 	if (src.stat != 0)
 		uneq_all()
 
-	if(!is_component_functioning("radio"))
-		radio.on = 0
-	else
-		radio.on = 1
+	if(radio)
+		if(!is_component_functioning("radio"))
+			radio.on = 0
+		else
+			radio.on = 1
 
 	if(is_component_functioning("camera"))
 		src.blinded = 0
@@ -225,9 +227,7 @@
 				if(tra.current)
 					var/I = image('icons/mob/mob.dmi', loc = tra.current, icon_state = "traitor")
 					src.client.images += I
-		if(src.connected_ai)
-			src.connected_ai.connected_robots -= src
-			src.connected_ai = null
+		src.disconnect_from_ai()
 		if(src.mind)
 			if(!src.mind.special_role)
 				src.mind.special_role = "traitor"

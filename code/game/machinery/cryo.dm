@@ -42,7 +42,6 @@
 	if(!node)
 		return
 	if(!on)
-		updateUsrDialog()
 		return
 
 	if(occupant)
@@ -57,7 +56,6 @@
 	if(abs(temperature_archived-air_contents.temperature) > 1)
 		network.update = 1
 
-	updateUsrDialog()
 	return 1
 
 
@@ -193,7 +191,6 @@
 		var/mob/M = G:affecting
 		if(put_mob(M))
 			del(G)
-	updateUsrDialog()
 	return
 
 /obj/machinery/atmospherics/unary/cryo_cell/update_icon()
@@ -293,6 +290,7 @@
 		M.client.eye = src
 	M.stop_pulling()
 	M.loc = src
+	M.ExtinguishMob()
 	if(M.health > -100 && (M.health < 0 || M.sleeping))
 		M << "\blue <b>You feel a cold liquid surround you. Your skin starts to freeze up.</b>"
 	occupant = M

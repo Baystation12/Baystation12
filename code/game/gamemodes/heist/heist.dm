@@ -114,7 +114,8 @@ var/global/list/obj/cortical_stacks = list() //Stacks for 'leave nobody behind' 
 	for(var/datum/organ/external/limb in vox.organs)
 		limb.status &= ~(ORGAN_DESTROYED | ORGAN_ROBOT)
 
-	// Keep track of their stack.
+	// Add and keep track of their stack.
+	new /datum/organ/internal/stack/vox(vox)
 	if(vox.internal_organs_by_name["stack"])
 		cortical_stacks |= vox.internal_organs_by_name["stack"]
 

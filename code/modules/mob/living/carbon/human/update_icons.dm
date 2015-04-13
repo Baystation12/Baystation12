@@ -107,27 +107,29 @@ Please contact me on #coderbus IRC. ~Carn x
 //Human Overlays Indexes/////////
 #define MUTATIONS_LAYER			1
 #define DAMAGE_LAYER			2
-#define UNIFORM_LAYER			3
-#define TAIL_LAYER				4		//bs12 specific. this hack is probably gonna come back to haunt me
+#define SURGERY_LEVEL			3		//bs12 specific.
+#define UNIFORM_LAYER			4
 #define ID_LAYER				5
 #define SHOES_LAYER				6
 #define GLOVES_LAYER			7
 #define SUIT_LAYER				8
-#define GLASSES_LAYER			9
-#define BELT_LAYER				10		//Possible make this an overlay of somethign required to wear a belt?
-#define SUIT_STORE_LAYER		11
-#define BACK_LAYER				12
-#define HAIR_LAYER				13		//TODO: make part of head layer?
-#define EARS_LAYER				14
-#define FACEMASK_LAYER			15
-#define HEAD_LAYER				16
-#define COLLAR_LAYER			17
-#define HANDCUFF_LAYER			18
-#define LEGCUFF_LAYER			19
-#define L_HAND_LAYER			20
-#define R_HAND_LAYER			21
-#define TARGETED_LAYER			22		//BS12: Layer for the target overlay from weapon targeting system
-#define TOTAL_LAYERS			22
+#define TAIL_LAYER				9		//bs12 specific. this hack is probably gonna come back to haunt me
+#define GLASSES_LAYER			10
+#define BELT_LAYER				11		//Possible make this an overlay of somethign required to wear a belt?
+#define SUIT_STORE_LAYER		12
+#define BACK_LAYER				13
+#define HAIR_LAYER				14		//TODO: make part of head layer?
+#define EARS_LAYER				15
+#define FACEMASK_LAYER			16
+#define HEAD_LAYER				17
+#define COLLAR_LAYER			18
+#define HANDCUFF_LAYER			19
+#define LEGCUFF_LAYER			20
+#define L_HAND_LAYER			21
+#define R_HAND_LAYER			22
+#define FIRE_LAYER				23		//If you're on fire
+#define TARGETED_LAYER			24		//BS12: Layer for the target overlay from weapon targeting system
+#define TOTAL_LAYERS			24
 //////////////////////////////////
 
 /mob/living/carbon/human
@@ -288,7 +290,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 			if(part.status & ORGAN_DESTROYED)
 				continue
 
-			if (istype(part, /datum/organ/external/groin) || istype(part, /datum/organ/external/head))
+			if (istype(part, /datum/organ/external/groin) || istype(part, /datum/organ/external/head) || istype(part, /datum/organ/external/chest))
 				temp = part.get_icon(race_icon,deform_icon,g)
 			else
 				temp = part.get_icon(race_icon,deform_icon)
@@ -375,12 +377,11 @@ proc/get_damage_icon_part(damage_state, body_part)
 			stand_icon.Blend(new/icon('icons/mob/human_face.dmi', "lips_[lip_style]_s"), ICON_OVERLAY)
 
 	//Underwear
-	if(underwear >0 && underwear < 12 && species.flags & HAS_UNDERWEAR)
-		if(!fat && !skeleton)
-			stand_icon.Blend(new /icon('icons/mob/human.dmi', "underwear[underwear]_[g]_s"), ICON_OVERLAY)
+	if(underwear && species.flags & HAS_UNDERWEAR)
+		stand_icon.Blend(new /icon('icons/mob/human.dmi', underwear), ICON_OVERLAY)
 
-	if(undershirt>0 && undershirt < 5 && species.flags & HAS_UNDERWEAR)
-		stand_icon.Blend(new /icon('icons/mob/human.dmi', "undershirt[undershirt]_s"), ICON_OVERLAY)
+	if(undershirt && species.flags & HAS_UNDERWEAR)
+		stand_icon.Blend(new /icon('icons/mob/human.dmi', undershirt), ICON_OVERLAY)
 
 	if(update_icons)
 		update_icons()
@@ -508,6 +509,8 @@ proc/get_damage_icon_part(damage_state, body_part)
 	update_inv_handcuffed(0)
 	update_inv_legcuffed(0)
 	update_inv_pockets(0)
+	update_fire(0)
+	update_surgery(0)
 	UpdateDamageIcon()
 	update_icons()
 	//Hud Stuff
@@ -535,10 +538,11 @@ proc/get_damage_icon_part(damage_state, body_part)
 			bloodsies.color		= w_uniform.blood_color
 			standing.overlays	+= bloodsies
 
-		if(w_uniform:hastie)	//WE CHECKED THE TYPE ABOVE. THIS REALLY SHOULD BE FINE.
-			var/tie_color = w_uniform:hastie.item_color
-			if(!tie_color) tie_color = w_uniform:hastie.icon_state
-			standing.overlays	+= image("icon" = 'icons/mob/ties.dmi', "icon_state" = "[tie_color]")
+		if(w_uniform:accessories.len)	//WE CHECKED THE TYPE ABOVE. THIS REALLY SHOULD BE FINE.
+			for(var/obj/item/clothing/accessory/A in w_uniform:accessories)
+				var/tie_color = A.item_color
+				if(!tie_color) tie_color = A.icon_state
+				standing.overlays	+= image("icon" = 'icons/mob/ties.dmi', "icon_state" = "[tie_color]")
 
 		overlays_standing[UNIFORM_LAYER]	= standing
 	else
@@ -560,8 +564,8 @@ proc/get_damage_icon_part(damage_state, body_part)
 	else
 		overlays_standing[ID_LAYER]	= null
 
-	hud_updateflag |= 1 << ID_HUD
-	hud_updateflag |= 1 << WANTED_HUD
+	BITSET(hud_updateflag, ID_HUD)
+	BITSET(hud_updateflag, WANTED_HUD)
 
 	if(update_icons)   update_icons()
 
@@ -714,13 +718,22 @@ proc/get_damage_icon_part(damage_state, body_part)
 		belt.screen_loc = ui_belt	//TODO
 		var/t_state = belt.item_state
 		if(!t_state)	t_state = belt.icon_state
+		var/image/standing	= image("icon_state" = "[t_state]")
 
 		if(belt.icon_override)
-			overlays_standing[BELT_LAYER] = image("icon" = belt.icon_override, "icon_state" = "[t_state]")
+			standing.icon = belt.icon_override
 		else if(belt.sprite_sheets && belt.sprite_sheets[species.name])
-			overlays_standing[BELT_LAYER] = image("icon" = belt.sprite_sheets[species.name], "icon_state" = "[t_state]")
+			standing.icon = belt.sprite_sheets[species.name]
 		else
-			overlays_standing[BELT_LAYER] = image("icon" = 'icons/mob/belt.dmi', "icon_state" = "[t_state]")
+			standing.icon = 'icons/mob/belt.dmi'
+
+		if(belt.contents.len && istype(belt, /obj/item/weapon/storage/belt))
+			for(var/obj/item/i in belt.contents)
+				var/i_state = i.item_state
+				if(!i_state) i_state = i.icon_state
+				standing.overlays	+= image("icon" = 'icons/mob/belt.dmi', "icon_state" = "[i_state]")
+
+		overlays_standing[BELT_LAYER] = standing
 	else
 		overlays_standing[BELT_LAYER] = null
 	if(update_icons)   update_icons()
@@ -771,7 +784,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 
 
 /mob/living/carbon/human/update_inv_wear_mask(var/update_icons=1)
-	if( wear_mask && ( istype(wear_mask, /obj/item/clothing/mask) || istype(wear_mask, /obj/item/clothing/tie) ) && !(head && head.flags_inv & HIDEMASK))
+	if( wear_mask && ( istype(wear_mask, /obj/item/clothing/mask) || istype(wear_mask, /obj/item/clothing/accessory) ) && !(head && head.flags_inv & HIDEMASK))
 		wear_mask.screen_loc = ui_mask	//TODO
 
 		var/image/standing
@@ -782,7 +795,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 		else
 			standing = image("icon" = 'icons/mob/mask.dmi', "icon_state" = "[wear_mask.icon_state]")
 
-		if( !istype(wear_mask, /obj/item/clothing/mask/cigarette) && wear_mask.blood_DNA )
+		if( !istype(wear_mask, /obj/item/clothing/mask/smokable/cigarette) && wear_mask.blood_DNA )
 			var/image/bloodsies = image("icon" = 'icons/effects/blood.dmi', "icon_state" = "maskblood")
 			bloodsies.color = wear_mask.blood_color
 			standing.overlays	+= bloodsies
@@ -843,37 +856,47 @@ proc/get_damage_icon_part(damage_state, body_part)
 /mob/living/carbon/human/update_inv_r_hand(var/update_icons=1)
 	if(r_hand)
 		r_hand.screen_loc = ui_rhand	//TODO
+		
+		var/t_icon = INV_R_HAND_DEF_ICON
+		if(r_hand.item_icons && (icon_r_hand in r_hand.item_icons))
+			t_icon = r_hand.item_icons[icon_r_hand]
+		
 		var/t_state = r_hand.item_state //useful for clothing that changes icon_state but retains the same sprite on the mob when held in hand
 		if(!t_state)	t_state = r_hand.icon_state
-
 		if(r_hand.icon_override)
 			t_state = "[t_state]_r"
 			overlays_standing[R_HAND_LAYER] = image("icon" = r_hand.icon_override, "icon_state" = "[t_state]")
 		else
-			overlays_standing[R_HAND_LAYER] = image("icon" = 'icons/mob/items_righthand.dmi', "icon_state" = "[t_state]")
+			overlays_standing[R_HAND_LAYER] = image("icon" = t_icon, "icon_state" = "[t_state]")
 
 		if (handcuffed) drop_r_hand()
 	else
 		overlays_standing[R_HAND_LAYER] = null
-	if(update_icons)   update_icons()
+	
+	if(update_icons) update_icons()
 
 
 /mob/living/carbon/human/update_inv_l_hand(var/update_icons=1)
 	if(l_hand)
 		l_hand.screen_loc = ui_lhand	//TODO
+		
+		var/t_icon = INV_L_HAND_DEF_ICON
+		if(l_hand.item_icons && (icon_l_hand in l_hand.item_icons))
+			t_icon = l_hand.item_icons[icon_l_hand]
+		
 		var/t_state = l_hand.item_state //useful for clothing that changes icon_state but retains the same sprite on the mob when held in hand
 		if(!t_state)	t_state = l_hand.icon_state
-
 		if(l_hand.icon_override)
 			t_state = "[t_state]_l"
 			overlays_standing[L_HAND_LAYER] = image("icon" = l_hand.icon_override, "icon_state" = "[t_state]")
 		else
-			overlays_standing[L_HAND_LAYER] = image("icon" = 'icons/mob/items_lefthand.dmi', "icon_state" = "[t_state]")
+			overlays_standing[L_HAND_LAYER] = image("icon" = t_icon, "icon_state" = "[t_state]")
 
 		if (handcuffed) drop_l_hand()
 	else
 		overlays_standing[L_HAND_LAYER] = null
-	if(update_icons)   update_icons()
+	
+	if(update_icons) update_icons()
 
 /mob/living/carbon/human/proc/update_tail_showing(var/update_icons=1)
 	overlays_standing[TAIL_LAYER] = null
@@ -903,6 +926,23 @@ proc/get_damage_icon_part(damage_state, body_part)
 
 	if(update_icons)   update_icons()
 
+
+/mob/living/carbon/human/update_fire(var/update_icons=1)
+	overlays_standing[FIRE_LAYER] = null
+	if(on_fire)
+		overlays_standing[FIRE_LAYER] = image("icon"='icons/mob/OnFire.dmi', "icon_state"="Standing", "layer"=FIRE_LAYER)
+
+	if(update_icons)   update_icons()
+
+/mob/living/carbon/human/proc/update_surgery(var/update_icons=1)
+	overlays_standing[SURGERY_LEVEL] = null
+	var/image/total = new
+	for(var/datum/organ/external/E in organs)
+		if(E.open)
+			var/image/I = image("icon"='icons/mob/surgery.dmi', "icon_state"="[E.name][round(E.open)]", "layer"=-SURGERY_LEVEL)
+			total.overlays += I
+	overlays_standing[SURGERY_LEVEL] = total
+	if(update_icons)   update_icons()
 
 // Used mostly for creating head items
 /mob/living/carbon/human/proc/generate_head_icon()
@@ -942,13 +982,14 @@ proc/get_damage_icon_part(damage_state, body_part)
 //Human Overlays Indexes/////////
 #undef MUTATIONS_LAYER
 #undef DAMAGE_LAYER
+#undef SURGERY_LEVEL
 #undef UNIFORM_LAYER
-#undef TAIL_LAYER
 #undef ID_LAYER
 #undef SHOES_LAYER
 #undef GLOVES_LAYER
 #undef EARS_LAYER
 #undef SUIT_LAYER
+#undef TAIL_LAYER
 #undef GLASSES_LAYER
 #undef FACEMASK_LAYER
 #undef BELT_LAYER
@@ -962,4 +1003,5 @@ proc/get_damage_icon_part(damage_state, body_part)
 #undef L_HAND_LAYER
 #undef R_HAND_LAYER
 #undef TARGETED_LAYER
+#undef FIRE_LAYER
 #undef TOTAL_LAYERS

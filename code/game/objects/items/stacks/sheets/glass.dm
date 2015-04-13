@@ -22,12 +22,13 @@
 	var/list/construction_options = list("One Direction", "Full Window")
 
 /obj/item/stack/sheet/glass/cyborg
-	name = "glass"
-	desc = "HOLY SHEET! That is a lot of glass."
-	singular_name = "glass sheet"
-	icon_state = "sheet-glass"
+	name = "glass synthesizer"
+	desc = "A device that makes glass."
+	gender = NEUTER
+	singular_name = "glass"
 	matter = null
-	created_window = /obj/structure/window/basic
+	uses_charge = 1
+	charge_costs = list(1000)
 	stacktype = /obj/item/stack/sheet/glass
 
 /obj/item/stack/sheet/glass/attack_self(mob/user as mob)
@@ -69,7 +70,7 @@
 	if(!user.IsAdvancedToolUser())
 		return 0
 	var/title = "Sheet-[name]"
-	title += " ([src.amount] sheet\s left)"
+	title += " ([src.get_amount()] sheet\s left)"
 	switch(input(title, "What would you like to construct?") as null|anything in construction_options)
 		if("One Direction")
 			if(!src)	return 1
@@ -102,7 +103,7 @@
 		if("Full Window")
 			if(!src)	return 1
 			if(src.loc != user)	return 1
-			if(src.amount < 4)
+			if(src.get_amount() < 4)
 				user << "\red You need more glass to do that."
 				return 1
 			if(locate(/obj/structure/window) in user.loc)
@@ -124,7 +125,7 @@
 				user << "\red There is already a windoor in that location."
 				return 1
 
-			if(src.amount < 5)
+			if(src.get_amount() < 5)
 				user << "\red You need more glass to do that."
 				return 1
 
@@ -151,10 +152,16 @@
 	construction_options = list("One Direction", "Full Window", "Windoor")
 
 /obj/item/stack/sheet/glass/reinforced/cyborg
-	name = "reinforced glass"
-	desc = "Glass which has been reinforced with metal rods."
+	name = "reinforced glass synthesizer"
+	desc = "A device that makes reinforced glass."
+	gender = NEUTER
+	matter = null
+	uses_charge = 2
+	charge_costs = list(1000)
 	singular_name = "reinforced glass sheet"
 	icon_state = "sheet-rglass"
+	charge_costs = list(500, 1000)
+	stacktype = /obj/item/stack/sheet/glass/reinforced
 
 /*
  * Phoron Glass sheets

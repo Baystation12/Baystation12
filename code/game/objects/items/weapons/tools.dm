@@ -119,6 +119,8 @@
 		"You cut \the [C]'s restraints with \the [src]!",\
 		"You hear cable being cut.")
 		C.handcuffed = null
+		if(C.buckled && C.buckled.buckle_require_restraints)
+			C.buckled.unbuckle_mob()
 		C.update_inv_handcuffed()
 		return
 	else
@@ -259,6 +261,9 @@
 	if (src.welding)
 		remove_fuel(1)
 		var/turf/location = get_turf(user)
+		if(isliving(O))
+			var/mob/living/L = O
+			L.IgniteMob()
 		if (istype(location, /turf))
 			location.hotspot_expose(700, 50, 1)
 	return

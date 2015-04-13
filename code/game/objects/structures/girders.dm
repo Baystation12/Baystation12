@@ -5,6 +5,7 @@
 	layer = 2
 	var/state = 0
 	var/health = 200
+	var/cover = 50 //how much cover the girder provides against projectiles.
 
 /obj/structure/girder/attack_generic(var/mob/user, var/damage, var/attack_message = "smashes apart", var/wallbreaker)
 	if(!damage || !wallbreaker)
@@ -14,19 +15,25 @@
 	return 1
 
 /obj/structure/girder/bullet_act(var/obj/item/projectile/Proj)
+	//Girders only provide partial cover. There's a chance that the projectiles will just pass through. (unless you are trying to shoot the girder)
+	if(Proj.original != src && !prob(cover))
+		return -1 //pass through
 
 	//Tasers and the like should not damage girders.
-	if(Proj.damage_type == HALLOSS || Proj.damage_type == TOX || Proj.damage_type == CLONE)
+	if(!(Proj.damage_type == BRUTE || Proj.damage_type == BURN))
 		return
 
-	if(istype(Proj, /obj/item/projectile/beam))
-		health -= Proj.damage
-		..()
-		if(health <= 0)
-			new /obj/item/stack/sheet/metal(get_turf(src))
-			del(src)
+	var/damage = Proj.damage
+	if(!istype(Proj, /obj/item/projectile/beam))
+		damage *= 0.4 //non beams do reduced damage
 
-		return
+	health -= damage
+	..()
+	if(health <= 0)
+		new /obj/item/stack/sheet/metal(get_turf(src))
+		del(src)
+
+	return
 
 /obj/structure/girder/attackby(obj/item/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/weapon/wrench) && state == 0)
@@ -106,7 +113,7 @@
 							del(src)
 					return
 
-			if(/obj/item/stack/sheet/plasteel)
+			if(/obj/item/stack/sheet/plasteel, /obj/item/stack/sheet/plasteel/cyborg)
 				if(!anchored)
 					if(S.use(2))
 						user << "\blue You create a false wall! Push on it to open or close the passage."
@@ -137,6 +144,10 @@
 
 		if(S.sheettype)
 			var/M = S.sheettype
+			// Ugly hack, will suffice for now. Need to fix it upstream as well, may rewrite mineral walls. ~Z
+			if(M in list("mhydrogen","osmium","tritium","platinum","iron"))
+				user << "You cannot plate the girder in that material."
+				return
 			if(!anchored)
 				if(S.amount < 2) return
 				S.use(2)
@@ -209,11 +220,13 @@
 	icon_state = "displaced"
 	anchored = 0
 	health = 50
+	cover = 25
 
 /obj/structure/girder/reinforced
 	icon_state = "reinforced"
 	state = 2
 	health = 500
+	cover = 80
 
 /obj/structure/cultgirder
 	icon= 'icons/obj/cult.dmi'
@@ -222,6 +235,7 @@
 	density = 1
 	layer = 2
 	var/health = 250
+	var/cover = 70
 
 /obj/structure/cultgirder/attack_generic(var/mob/user, var/damage, var/attack_message = "smashes apart", var/wallbreaker)
 	if(!damage || !wallbreaker)
@@ -258,6 +272,14 @@
 		dismantle()
 
 /obj/structure/cultgirder/bullet_act(var/obj/item/projectile/Proj) //No beam check- How else will you destroy the cult girder with silver bullets?????
+	//Girders only provide partial cover. There's a chance that the projectiles will just pass through. (unless you are trying to shoot the girder)
+	if(Proj.original != src && !prob(cover))
+		return -1 //pass through
+
+	//Tasers and the like should not damage cultgirders.
+	if(!(Proj.damage_type == BRUTE || Proj.damage_type == BURN))
+		return
+
 	health -= Proj.damage
 	..()
 	if(health <= 0)

@@ -10,7 +10,6 @@
 	recommended_enemies = 1
 
 	uplink_welcome = "Crazy AI Uplink Console:"
-	uplink_uses = 10
 
 	var/const/waittime_l = 600
 	var/const/waittime_h = 1800 // started at 1800
@@ -199,7 +198,7 @@
 	var/obj/item/device/radio/R	= new (src)
 	var/AN = "Self-Destruct System"
 
-	R.autosay("Caution. Self-Destruct sequence has been actived. Self-destructing in Ten..", AN)
+	R.autosay("Caution. Self-Destruct sequence has been activated. Self-destructing in Ten..", AN)
 	for (var/i=9 to 1 step -1)
 		sleep(10)
 		var/msg = ""

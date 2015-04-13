@@ -41,6 +41,9 @@
 	canister_color = "blue"
 	can_label = 0
 
+/obj/machinery/portable_atmospherics/canister/oxygen/prechilled
+	name = "Canister: \[O2 (Cryo)\]"
+
 /obj/machinery/portable_atmospherics/canister/phoron
 	name = "Canister \[Phoron\]"
 	icon_state = "orange"
@@ -216,6 +219,9 @@ update_flag
 	return
 
 /obj/machinery/portable_atmospherics/canister/bullet_act(var/obj/item/projectile/Proj)
+	if(!(Proj.damage_type == BRUTE || Proj.damage_type == BURN))
+		return
+	
 	if(Proj.damage)
 		src.health -= round(Proj.damage / 2)
 		healthcheck()
@@ -291,6 +297,7 @@ update_flag
 /obj/machinery/portable_atmospherics/canister/Topic(href, href_list)
 
 	//Do not use "if(..()) return" here, canisters will stop working in unpowered areas like space or on the derelict. // yeah but without SOME sort of Topic check any dick can mess with them via exploits as he pleases -walter0o
+	//First comment might be outdated.
 	if (!istype(src.loc, /turf))
 		return 0
 
@@ -363,6 +370,14 @@ update_flag
 	..()
 
 	src.air_contents.adjust_gas("oxygen", MolesForPressure())
+	src.update_icon()
+	return 1
+
+/obj/machinery/portable_atmospherics/canister/oxygen/prechilled/New()
+	..()
+
+	src.air_contents.adjust_gas("oxygen", MolesForPressure())
+	src.air_contents.temperature = 80
 	src.update_icon()
 	return 1
 

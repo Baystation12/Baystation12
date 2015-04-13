@@ -27,22 +27,19 @@
 	ninja.special_role = "Ninja"
 	ninja.original = ninja.current
 
-	/*if(ninjastart.len == 0)
-		ninja.current << "<B>\red A proper starting location for you could not be found, please report this bug!</B>"
-		ninja.current << "<B>\red Attempting to place at a carpspawn.</B>"*/
+	if(ninjastart.len == 0)
+		for(var/obj/effect/landmark/L in landmarks_list)
+			if(L.name == "carpspawn")
+				ninjastart.Add(L)
 
-	//Until such a time as people want to place ninja spawn points, carpspawn will do fine.
-	for(var/obj/effect/landmark/L in landmarks_list)
-		if(L.name == "carpspawn")
-			ninjastart.Add(L)
-	if(ninjastart.len == 0 && latejoin.len > 0)
-		ninja.current << "<B>\red No spawneable locations could be found. Defaulting to latejoin.</B>"
+	if(ninjastart.len)
 		return 1
-	else if (ninjastart.len == 0)
-		ninja.current << "<B>\red No spawneable locations could be found. Aborting.</B>"
-		return 0
-
+	if(ninjastart.len == 0 && latejoin.len > 0)
+		ninja.current << "<B>\red No spawn locations could be found. Defaulting to late-join locations.</B>"
 	return 1
+
+	ninja.current << "<B>\red No spawn locations could be found. Aborting.</B>"
+	return 0
 
 /datum/game_mode/ninja/pre_setup()
 	for(var/datum/mind/ninja in ninjas)

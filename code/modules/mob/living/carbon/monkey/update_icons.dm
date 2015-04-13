@@ -5,7 +5,8 @@
 #define M_L_HAND_LAYER			4
 #define M_R_HAND_LAYER			5
 #define TARGETED_LAYER			6
-#define M_TOTAL_LAYERS			6
+#define M_FIRE_LAYER			6
+#define M_TOTAL_LAYERS			7
 /////////////////////////////////
 
 /mob/living/carbon/monkey
@@ -19,6 +20,7 @@
 	update_inv_r_hand(0)
 	update_inv_l_hand(0)
 	update_inv_handcuffed(0)
+	update_fire(0)
 	update_icons()
 	//Hud Stuff
 	update_hud()
@@ -53,26 +55,38 @@
 
 /mob/living/carbon/monkey/update_inv_r_hand(var/update_icons=1)
 	if(r_hand)
+		var/t_icon = INV_R_HAND_DEF_ICON
+		if(r_hand.item_icons && (icon_r_hand in r_hand.item_icons))
+			t_icon = r_hand.item_icons[icon_r_hand]
+		
 		var/t_state = r_hand.item_state
 		if(!t_state)	t_state = r_hand.icon_state
-		overlays_standing[M_R_HAND_LAYER]	= image("icon" = 'icons/mob/items_righthand.dmi', "icon_state" = t_state)
+		
+		overlays_standing[M_R_HAND_LAYER]	= image("icon" = t_icon, "icon_state" = t_state)
 		r_hand.screen_loc = ui_rhand
 		if (handcuffed) drop_r_hand()
 	else
 		overlays_standing[M_R_HAND_LAYER]	= null
-	if(update_icons)		update_icons()
+	
+	if(update_icons) update_icons()
 
 
 /mob/living/carbon/monkey/update_inv_l_hand(var/update_icons=1)
 	if(l_hand)
+		var/t_icon = INV_L_HAND_DEF_ICON
+		if(l_hand.item_icons && (icon_l_hand in l_hand.item_icons))
+			t_icon = l_hand.item_icons[icon_l_hand]
+		
 		var/t_state = l_hand.item_state
 		if(!t_state)	 t_state = l_hand.icon_state
-		overlays_standing[M_L_HAND_LAYER]	= image("icon" = 'icons/mob/items_lefthand.dmi', "icon_state" = t_state)
+		
+		overlays_standing[M_L_HAND_LAYER]	= image("icon" = t_icon, "icon_state" = t_state)
 		l_hand.screen_loc = ui_lhand
 		if (handcuffed) drop_l_hand()
 	else
 		overlays_standing[M_L_HAND_LAYER]	= null
-	if(update_icons)		update_icons()
+	
+	if(update_icons) update_icons()
 
 
 /mob/living/carbon/monkey/update_inv_back(var/update_icons=1)
@@ -109,6 +123,12 @@
 		overlays_standing[TARGETED_LAYER]	= null
 	if(update_icons)		update_icons()
 
+/mob/living/carbon/monkey/update_fire(var/update_icons=1)
+	if(on_fire)
+		overlays_standing[M_FIRE_LAYER] = image("icon"='icons/mob/OnFire.dmi', "icon_state"="Standing", "layer"= -M_FIRE_LAYER)
+	else
+		overlays_standing[M_FIRE_LAYER] = null
+	if(update_icons)		update_icons()
 //Monkey Overlays Indexes////////
 #undef M_MASK_LAYER
 #undef M_BACK_LAYER
@@ -116,5 +136,6 @@
 #undef M_L_HAND_LAYER
 #undef M_R_HAND_LAYER
 #undef TARGETED_LAYER
+#undef M_FIRE_LAYER
 #undef M_TOTAL_LAYERS
 

@@ -234,6 +234,21 @@ steam.start() -- spawns the effect
 	return 1
 
 /////////////////////////////////////////////
+// Illumination
+/////////////////////////////////////////////
+
+/obj/effect/effect/smoke/illumination
+	name = "illumination"
+	opacity = 0
+	icon = 'icons/effects/effects.dmi'
+	icon_state = "sparks"
+
+/obj/effect/effect/smoke/illumination/New(var/newloc, var/brightness=15, var/lifetime=10)
+	time_to_live=lifetime
+	..()
+	SetLuminosity(brightness)
+
+/////////////////////////////////////////////
 // Bad smoke
 /////////////////////////////////////////////
 

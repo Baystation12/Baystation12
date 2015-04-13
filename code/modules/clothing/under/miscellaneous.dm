@@ -406,6 +406,13 @@
 	item_color = "sundress_white"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
 
+/obj/item/clothing/under/blackjumpskirt
+	name = "black jumpskirt"
+	desc = "A black jumpskirt, Sol size 0."
+	icon_state = "blackjumpskirt"
+	item_state = "blackjumpskirt"
+	item_color = "blackjumpskirt"
+
 /obj/item/clothing/under/captainformal
 	name = "captain's formal uniform"
 	desc = "A captain's formal-wear, for special occasions."
@@ -472,9 +479,9 @@
 /obj/item/clothing/under/serviceoveralls
 	name = "Workman outfit"
 	desc = "The very image of a working man. Not that you're probably doing work."
-	icon_state = "mechanic_s"
-	item_state = "mechanic_s"
-	item_color = "mechanic_s"
+	icon_state = "mechanic"
+	item_state = "mechanic"
+	item_color = "mechanic"
 
 /obj/item/clothing/under/cheongsam
 	name = "White Cheongsam"
@@ -483,3 +490,10 @@
 	item_state = "mai_yang"
 	item_color = "mai_yang"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS
+
+/obj/item/clothing/under/blazer
+	name = "blue blazer"
+	desc = "A bold but yet conservative outfit, red corduroys, navy blazer and a tie." 
+	icon_state = "blue_blazer"
+	item_state = "blue_blazer"
+	item_color = "blue_blazer"

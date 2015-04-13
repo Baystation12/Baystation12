@@ -104,7 +104,14 @@
 
 	// Okay, it wasn't a terminal being touched, check for all the simple insertions.
 	if(input_device.type in list(/obj/item/device/paicard, /obj/item/device/mmi, /obj/item/device/mmi/digital/posibrain))
-		integrate_ai(input_device,user)
+		if(integrated_ai)
+			integrated_ai.attackby(input_device,user)
+			// If the transfer was successful, we can clear out our vars.
+			if(integrated_ai.loc != src)
+				integrated_ai = null
+				eject_ai()
+		else
+			integrate_ai(input_device,user)
 		return 1
 
 	return 0
@@ -442,3 +449,31 @@
 	drain_loc = null
 	interfaced_with = null
 	total_power_drained = 0
+
+/*
+//Maybe make this use power when active or something
+/obj/item/rig_module/emp_shielding
+	name = "\improper EMP dissipation module"
+	desc = "A bewilderingly complex bundle of fiber optics and chips."
+	toggleable = 1
+	usable = 0
+
+	activate_string = "Enable active EMP shielding"
+	deactivate_string = "Disable active EMP shielding"
+
+	interface_name = "active EMP shielding system"
+	interface_desc = "A highly experimental system that augments the hardsuit's existing EM shielding."
+	var/protection_amount = 20
+
+/obj/item/rig_module/emp_shielding/activate()
+	if(!..())
+		return
+
+	holder.emp_protection += protection_amount
+
+/obj/item/rig_module/emp_shielding/deactivate()
+	if(!..())
+		return
+
+	holder.emp_protection = max(0,(holder.emp_protection - protection_amount))
+*/

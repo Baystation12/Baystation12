@@ -23,9 +23,9 @@
 	var/stamps		//The (text for the) stamps on the paper.
 	var/fields		//Amount of user created fields
 	var/list/stamped
-	var/ico[0]      //Icons and
-	var/offset_x[0] //offsets stored for later
-	var/offset_y[0] //usage by the photocopier
+	var/list/ico[0]      //Icons and
+	var/list/offset_x[0] //offsets stored for later
+	var/list/offset_y[0] //usage by the photocopier
 	var/rigged = 0
 	var/spam_flag = 0
 

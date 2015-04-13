@@ -28,8 +28,9 @@
 
 	if(stat == DEAD) return
 
-	hud_updateflag |= 1 << HEALTH_HUD
-	hud_updateflag |= 1 << STATUS_HUD
+	BITSET(hud_updateflag, HEALTH_HUD)
+	BITSET(hud_updateflag, STATUS_HUD)
+
 	handle_hud_list()
 
 	//Handle species-specific deaths.
@@ -79,7 +80,7 @@
 
 	mutations.Add(HUSK)
 	status_flags |= DISFIGURED	//makes them unknown without fucking up other stuff like admintools
-	update_body(0)
+	update_body(1)
 	return
 
 /mob/living/carbon/human/proc/Drain()

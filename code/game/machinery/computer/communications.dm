@@ -47,7 +47,7 @@
 
 /obj/machinery/computer/communications/Topic(href, href_list)
 	if(..())
-		return
+		return 1
 	if (src.z > 1)
 		usr << "\red <b>Unable to establish a connection</b>: \black You're too far away from the station!"
 		return
@@ -439,7 +439,7 @@
 		return
 
 	if(world.time < 6000) // Ten minute grace period to let the game get going without lolmetagaming. -- TLE
-		user << "The emergency shuttle is refueling. Please wait another [round((6000-world.time)/60)] minutes before trying again."
+		user << "The emergency shuttle is refueling. Please wait another [round((6000-world.time)/600)] minute\s before trying again."
 		return
 
 	if(emergency_shuttle.going_to_centcom())

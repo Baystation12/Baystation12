@@ -17,6 +17,9 @@
 	var/amount = 1
 	var/max_amount //also see stack recipes initialisation, param "max_res_amount" must be equal to this max_amount
 	var/stacktype //determines whether different stack types can merge
+	var/uses_charge = 0
+	var/list/charge_costs = null
+	var/list/datum/matter_synth/synths = null
 
 /obj/item/stack/New(var/loc, var/amount=null)
 	..()
@@ -27,13 +30,18 @@
 	return
 
 /obj/item/stack/Del()
+	if(uses_charge)
+		return
 	if (src && usr && usr.machine == src)
 		usr << browse(null, "window=stack")
 	..()
 
 /obj/item/stack/examine(mob/user)
 	if(..(user, 1))
-		user << "There are [src.amount] [src.singular_name]\s in the stack."
+		if(!uses_charge)
+			user << "There are [src.amount] [src.singular_name]\s in the stack."
+		else
+			user << "There is enough charge for [get_amount()]."
 
 /obj/item/stack/attack_self(mob/user as mob)
 	list_recipes(user)
@@ -41,14 +49,14 @@
 /obj/item/stack/proc/list_recipes(mob/user as mob, recipes_sublist)
 	if (!recipes)
 		return
-	if (!src || amount<=0)
+	if (!src || get_amount() <= 0)
 		user << browse(null, "window=stack")
 	user.set_machine(src) //for correct work of onclose
 	var/list/recipe_list = recipes
 	if (recipes_sublist && recipe_list[recipes_sublist] && istype(recipe_list[recipes_sublist], /datum/stack_recipe_list))
 		var/datum/stack_recipe_list/srl = recipe_list[recipes_sublist]
 		recipe_list = srl.recipes
-	var/t1 = text("<HTML><HEAD><title>Constructions from []</title></HEAD><body><TT>Amount Left: []<br>", src, src.amount)
+	var/t1 = text("<HTML><HEAD><title>Constructions from []</title></HEAD><body><TT>Amount Left: []<br>", src, src.get_amount())
 	for(var/i=1;i<=recipe_list.len,i++)
 		var/E = recipe_list[i]
 		if (isnull(E))
@@ -60,14 +68,14 @@
 
 		if (istype(E, /datum/stack_recipe_list))
 			var/datum/stack_recipe_list/srl = E
-			if (src.amount >= srl.req_amount)
+			if (src.get_amount() >= srl.req_amount)
 				t1 += "<a href='?src=\ref[src];sublist=[i]'>[srl.title] ([srl.req_amount] [src.singular_name]\s)</a>"
 			else
 				t1 += "[srl.title] ([srl.req_amount] [src.singular_name]\s)<br>"
 
 		if (istype(E, /datum/stack_recipe))
 			var/datum/stack_recipe/R = E
-			var/max_multiplier = round(src.amount / R.req_amount)
+			var/max_multiplier = round(src.get_amount() / R.req_amount)
 			var/title as text
 			var/can_build = 1
 			can_build = can_build && (max_multiplier>0)
@@ -142,7 +150,7 @@
 		list_recipes(usr, text2num(href_list["sublist"]))
 
 	if (href_list["make"])
-		if (src.amount < 1) del(src) //Never should happen
+		if (src.get_amount() < 1) del(src) //Never should happen
 
 		var/list/recipes_list = recipes
 		if (href_list["sublist"])
@@ -165,28 +173,44 @@
 //Return 1 if an immediate subsequent call to use() would succeed.
 //Ensures that code dealing with stacks uses the same logic
 /obj/item/stack/proc/can_use(var/used)
-	if (amount < used)
+	if (get_amount() < used)
 		return 0
 	return 1
 
 /obj/item/stack/proc/use(var/used)
 	if (!can_use(used))
 		return 0
-	amount -= used
-	if (amount <= 0)
-		spawn(0) //delete the empty stack once the current context yields
-			if (amount <= 0) //check again in case someone transferred stuff to us
-				if(usr)
-					usr.before_take_item(src)
-				del(src)
-	return 1
+	if(!uses_charge)
+		amount -= used
+		if (amount <= 0)
+			spawn(0) //delete the empty stack once the current context yields
+				if (amount <= 0) //check again in case someone transferred stuff to us
+					if(usr)
+						usr.before_take_item(src)
+					del(src)
+		return 1
+	else
+		if(get_amount() < used)
+			return 0
+		for(var/i = 1 to uses_charge)
+			var/datum/matter_synth/S = synths[i]
+			S.use_charge(charge_costs[i] * used) // Doesn't need to be deleted
+		return 1
+	return 0
 
 /obj/item/stack/proc/add(var/extra)
-	if(amount + extra > max_amount)
+	if(!uses_charge)
+		if(amount + extra > get_max_amount())
+			return 0
+		else
+			amount += extra
+		return 1
+	else if(!synths || synths.len < uses_charge)
 		return 0
 	else
-		amount += extra
-	return 1
+		for(var/i = 1 to uses_charge)
+			var/datum/matter_synth/S = synths[i]
+			S.add_charge(charge_costs[i] * extra)
 
 /*
 	The transfer and split procs work differently than use() and add().
@@ -196,16 +220,16 @@
 
 //attempts to transfer amount to S, and returns the amount actually transferred
 /obj/item/stack/proc/transfer_to(obj/item/stack/S, var/tamount=null)
-	if (!amount)
+	if (!get_amount())
 		return 0
 	if (stacktype != S.stacktype)
 		return 0
 	if (isnull(tamount))
-		tamount = src.amount
+		tamount = src.get_amount()
 
-	var/transfer = max(min(tamount, src.amount, (S.max_amount - S.amount)), 0)
+	var/transfer = max(min(tamount, src.get_amount(), (S.get_max_amount() - S.get_amount())), 0)
 
-	var/orig_amount = src.amount
+	var/orig_amount = src.get_amount()
 	if (transfer && src.use(transfer))
 		S.add(transfer)
 		if (prob(transfer/orig_amount * 100))
@@ -219,6 +243,8 @@
 //creates a new stack with the specified amount
 /obj/item/stack/proc/split(var/tamount)
 	if (!amount)
+		return null
+	if(uses_charge)
 		return null
 
 	var/transfer = max(min(tamount, src.amount, initial(max_amount)), 0)
@@ -234,7 +260,30 @@
 	return null
 
 /obj/item/stack/proc/get_amount()
+	if(uses_charge)
+		if(!synths || synths.len < uses_charge)
+			return 0
+		var/datum/matter_synth/S = synths[1]
+		. = round(S.get_charge() / charge_costs[1])
+		if(uses_charge > 1)
+			for(var/i = 2 to uses_charge)
+				S = synths[i]
+				. = min(., round(S.get_charge() / charge_costs[i]))
+		return
 	return amount
+
+/obj/item/stack/proc/get_max_amount()
+	if(uses_charge)
+		if(!synths || synths.len < uses_charge)
+			return 0
+		var/datum/matter_synth/S = synths[1]
+		. = round(S.max_energy / charge_costs[1])
+		if(uses_charge > 1)
+			for(var/i = 2 to uses_charge)
+				S = synths[i]
+				. = min(., round(S.max_energy / charge_costs[i]))
+		return
+	return max_amount
 
 /obj/item/stack/proc/add_to_stacks(mob/usr as mob)
 	for (var/obj/item/stack/item in usr.loc)

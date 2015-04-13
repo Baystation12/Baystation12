@@ -142,7 +142,7 @@
 			del(W)
 		else
 			if(!disable_warning)
-				src << "\red You are unable to equip that." //Only print if del_on_fail is false
+				src << "\red You are unable to equip \the [W]." //Only print if del_on_fail is false
 		return 0
 
 	equip_to_slot(W, slot, redraw_mob) //This proc should not ever fail.
@@ -228,7 +228,7 @@ var/list/slot_equipment_priority = list( \
 
 	if((is_blind(src) || usr.stat) && !isobserver(src))
 		src << "<span class='notice'>Something is there but you can't see it.</span>"
-		return
+		return 1
 
 	face_atom(A)
 	A.examine(src)
@@ -797,25 +797,25 @@ note dizziness decrements automatically in the mob's Life() proc.
 /mob/Stat()
 	..()
 
-	if(statpanel("Status"))	//not looking at that panel
-
-		if(client && client.holder)
+	if(client && client.holder)
+		if(statpanel("Status"))
 			stat(null,"Location:\t([x], [y], [z])")
 			stat(null,"CPU:\t[world.cpu]")
 			stat(null,"Instances:\t[world.contents.len]")
-
-			if(master_controller)
-				stat(null,"MasterController-[last_tick_duration] ([master_controller.processing?"On":"Off"]-[controller_iteration])")
-				stat(null,"Air-[master_controller.air_cost]\tSun-[master_controller.sun_cost]")
-				stat(null,"Mob-[master_controller.mobs_cost]\t#[mob_list.len]")
-				stat(null,"Dis-[master_controller.diseases_cost]\t#[active_diseases.len]")
-				stat(null,"Mch-[master_controller.machines_cost]\t#[machines.len]")
-				stat(null,"Obj-[master_controller.objects_cost]\t#[processing_objects.len]")
-				stat(null,"Net-[master_controller.networks_cost]\tPnet-[master_controller.powernets_cost]")
-				stat(null,"NanoUI-[master_controller.nano_cost]\t#[nanomanager.processing_uis.len]")
-				stat(null,"Tick-[master_controller.ticker_cost]\tALL-[master_controller.total_cost]")
-			else
-				stat(null,"MasterController-ERROR")
+		if(statpanel("Status") && master_controller)
+			stat(null,"MasterController-[last_tick_duration] ([master_controller.processing?"On":"Off"]-[controller_iteration])")
+			stat(null,"Air-[master_controller.air_cost]\tSun-[master_controller.sun_cost]")
+			stat(null,"Mob-[master_controller.mobs_cost]\t#[mob_list.len]")
+			stat(null,"Dis-[master_controller.diseases_cost]\t#[active_diseases.len]")
+			stat(null,"Mch-[master_controller.machines_cost]\t#[machines.len]")
+			stat(null,"Obj-[master_controller.objects_cost]\t#[processing_objects.len]")
+			stat(null,"Net-[master_controller.networks_cost]\tPnet-[master_controller.powernets_cost]")
+			stat(null,"NanoUI-[master_controller.nano_cost]\t#[nanomanager.processing_uis.len]")
+			stat(null,"Event-[master_controller.events_cost]\t#[event_manager.active_events.len]")
+			alarm_manager.stat_entry()
+			stat(null,"Tick-[master_controller.ticker_cost]\tALL-[master_controller.total_cost]")
+		else
+			stat(null,"MasterController-ERROR")
 
 	if(listed_turf && client)
 		if(!TurfAdjacent(listed_turf))
@@ -841,12 +841,11 @@ note dizziness decrements automatically in the mob's Life() proc.
 
 
 
+
 // facing verbs
 /mob/proc/canface()
 	if(!canmove)						return 0
-	if(client.moving)					return 0
-	if(world.time < client.move_delay)	return 0
-	if(stat==2)							return 0
+	if(stat)							return 0
 	if(anchored)						return 0
 	if(monkeyizing)						return 0
 	return 1
@@ -860,27 +859,23 @@ note dizziness decrements automatically in the mob's Life() proc.
 			canmove = 0
 			pixel_y = V.mob_offset_y - 5
 		else
-			lying = 0
+			if(buckled.buckle_lying != -1) lying = buckled.buckle_lying
 			canmove = 1
 			pixel_y = V.mob_offset_y
 	else if(buckled)
-		// var/movable is defined at /obj/structure/stool/bed level
-		// If we're buckled to something else, such as vines, assume it's stationary.
-		if (!istype(buckled) || !buckled.movable)
-			anchored = 1
-			canmove = 0
-			if(istype(buckled,/obj/structure/stool/bed/chair) )
-				lying = 0
-			else
-				lying = 1
-		else
-			anchored = 0
-			canmove = 1
-			lying = 0
+		anchored = 1
+		canmove = 0
+		if(istype(buckled))
+			if(buckled.buckle_lying != -1)
+				lying = buckled.buckle_lying
+			if(buckled.buckle_movable)
+				anchored = 0
+				canmove = 1
+
 	else if( stat || weakened || paralysis || resting || sleeping || (status_flags & FAKEDEATH))
 		lying = 1
 		canmove = 0
-	else if( stunned )
+	else if(stunned)
 		canmove = 0
 	else if(captured)
 		anchored = 1
@@ -897,6 +892,11 @@ note dizziness decrements automatically in the mob's Life() proc.
 	else
 		density = 1
 
+	for(var/obj/item/weapon/grab/G in grabbed_by)
+		if(G.state >= GRAB_AGGRESSIVE)
+			canmove = 0
+			break
+
 	//Temporarily moved here from the various life() procs
 	//I'm fixing stuff incrementally so this will likely find a better home.
 	//It just makes sense for now. ~Carn
@@ -910,9 +910,10 @@ note dizziness decrements automatically in the mob's Life() proc.
 
 
 /mob/proc/facedir(var/ndir)
-	if(!canface())	return 0
+	if(!canface() || client.moving || world.time < client.move_delay)
+		return 0
 	set_dir(ndir)
-	if(buckled && buckled.movable)
+	if(buckled && buckled.buckle_movable)
 		buckled.set_dir(ndir)
 	client.move_delay += movement_delay()
 	return 1
@@ -944,6 +945,7 @@ note dizziness decrements automatically in the mob's Life() proc.
 
 /mob/proc/Stun(amount)
 	if(status_flags & CANSTUN)
+		facing_dir = null
 		stunned = max(max(stunned,amount),0) //can't go below 0, getting a low amount of stun doesn't lower your current stun
 	return
 
@@ -959,6 +961,7 @@ note dizziness decrements automatically in the mob's Life() proc.
 
 /mob/proc/Weaken(amount)
 	if(status_flags & CANWEAKEN)
+		facing_dir = null
 		weakened = max(max(weakened,amount),0)
 		update_canmove()	//updates lying, canmove and icons
 	return
@@ -977,6 +980,7 @@ note dizziness decrements automatically in the mob's Life() proc.
 
 /mob/proc/Paralyse(amount)
 	if(status_flags & CANPARALYSE)
+		facing_dir = null
 		paralysis = max(max(paralysis,amount),0)
 	return
 
@@ -991,6 +995,7 @@ note dizziness decrements automatically in the mob's Life() proc.
 	return
 
 /mob/proc/Sleeping(amount)
+	facing_dir = null
 	sleeping = max(max(sleeping,amount),0)
 	return
 
@@ -1003,6 +1008,7 @@ note dizziness decrements automatically in the mob's Life() proc.
 	return
 
 /mob/proc/Resting(amount)
+	facing_dir = null
 	resting = max(max(resting,amount),0)
 	return
 
@@ -1166,3 +1172,53 @@ mob/proc/yank_out_object()
 
 /mob/proc/updateicon()
 	return
+
+/mob/verb/face_direction()
+
+	set name = "Face Direction"
+	set category = "IC"
+	set src = usr
+
+	set_face_dir()
+
+	if(!facing_dir)
+		usr << "You are now not facing anything."
+	else
+		usr << "You are now facing [dir2text(facing_dir)]."
+
+/mob/proc/set_face_dir(var/newdir)
+	if(newdir == facing_dir)
+		facing_dir = null
+	else if(newdir)
+		set_dir(newdir)
+		facing_dir = newdir
+	else if(facing_dir)
+		facing_dir = null
+	else
+		set_dir(dir)
+		facing_dir = dir
+
+/mob/set_dir()
+	if(facing_dir)
+		if(!canface() || lying || buckled || restrained())
+			facing_dir = null
+		else if(dir != facing_dir)
+			return ..(facing_dir)
+	else
+		return ..()
+
+/mob/verb/northfaceperm()
+	set hidden = 1
+	set_face_dir(NORTH)
+
+/mob/verb/southfaceperm()
+	set hidden = 1
+	set_face_dir(SOUTH)
+
+/mob/verb/eastfaceperm()
+	set hidden = 1
+	set_face_dir(EAST)
+
+/mob/verb/westfaceperm()
+	set hidden = 1
+	set_face_dir(WEST)

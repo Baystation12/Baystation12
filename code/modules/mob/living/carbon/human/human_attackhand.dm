@@ -210,20 +210,20 @@
 				w_uniform.add_fingerprint(M)
 			var/datum/organ/external/affecting = get_organ(ran_zone(M.zone_sel.selecting))
 
-			if (istype(r_hand,/obj/item/weapon/gun) || istype(l_hand,/obj/item/weapon/gun))
+			if(istype(r_hand,/obj/item/weapon/gun) || istype(l_hand,/obj/item/weapon/gun))
 				var/obj/item/weapon/gun/W = null
 				var/chance = 0
 
 				if (istype(l_hand,/obj/item/weapon/gun))
 					W = l_hand
-					chance = hand ? 40 : 20
+					chance += hand ? 40 : 20
 
-				if (istype(r_hand,/obj/item/weapon/gun))
+				else if (istype(r_hand,/obj/item/weapon/gun))
 					W = r_hand
-					chance = !hand ? 40 : 20
+					chance += !hand ? 40 : 20
 
 				if (prob(chance))
-					visible_message("<spawn class=danger>[src]'s [W] goes off during struggle!")
+					visible_message("<span class='danger'>[src]'s [W.name] goes off during struggle!")
 					var/list/turfs = list()
 					for(var/turf/T in view())
 						turfs += T
@@ -232,9 +232,13 @@
 
 			var/randn = rand(1, 100)
 			if(!(species.flags & NO_SLIP) && randn <= 25)
-				apply_effect(3, WEAKEN, run_armor_check(affecting, "melee"))
+				var/armor_check = run_armor_check(affecting, "melee")
+				apply_effect(3, WEAKEN, armor_check)
 				playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
-				visible_message("\red <B>[M] has pushed [src]!</B>")
+				if(armor_check < 2)
+					visible_message("<span class='danger'>[M] has pushed [src]!</span>")
+				else
+					visible_message("<span class='warning'>[M] attempted to push [src]!</span>")
 				return
 
 			var/talked = 0	// BubbleWrap

@@ -6,7 +6,6 @@
 	unacidable = 1
 
 /obj/effect/landmark/New()
-
 	..()
 	tag = text("landmark*[]", name)
 	invisibility = 101
@@ -113,6 +112,13 @@
 
 	return 1
 
+/obj/effect/landmark/start/ninja
+	name = "ninja"
+
+/obj/effect/landmark/start/ninja/New()
+	..()
+	ninjastart += src
+
 //Costume spawner landmarks
 
 /obj/effect/landmark/costume/New() //costume spawner, selects a random subclass and disappears
@@ -144,7 +150,7 @@
 /obj/effect/landmark/costume/elpresidente/New()
 	new /obj/item/clothing/under/gimmick/rank/captain/suit(src.loc)
 	new /obj/item/clothing/head/flatcap(src.loc)
-	new /obj/item/clothing/mask/cigarette/cigar/havana(src.loc)
+	new /obj/item/clothing/mask/smokable/cigarette/cigar/havana(src.loc)
 	new /obj/item/clothing/shoes/jackboots(src.loc)
 	del(src)
 

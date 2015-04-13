@@ -99,7 +99,7 @@
 	var/update_count = 0
 	for (var/ui_key in open_uis[src_object_key])
 		for (var/datum/nanoui/ui in open_uis[src_object_key][ui_key])
-			if(ui && ui.src_object && ui.user)
+			if(ui && ui.src_object && ui.user && ui.src_object.nano_host())
 				ui.process(1)
 				update_count++
 	return update_count
@@ -186,7 +186,8 @@
 		return 0 // wasn't open
 
 	processing_uis.Remove(ui)
-	ui.user.open_uis.Remove(ui)
+	if(ui.user)	// Sanity check in case a user has been deleted (say a blown up borg watching the alarm interface)
+		ui.user.open_uis.Remove(ui)
 	var/list/uis = open_uis[src_object_key][ui.ui_key]
 	uis.Remove(ui)
 

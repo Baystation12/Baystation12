@@ -283,7 +283,7 @@
 
 /obj/machinery/computer/message_monitor/Topic(href, href_list)
 	if(..())
-		return
+		return 1
 	if(stat & (NOPOWER|BROKEN))
 		return
 	if(!istype(usr, /mob/living))

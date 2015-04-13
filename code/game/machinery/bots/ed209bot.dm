@@ -34,10 +34,10 @@
 		var/obj/item/weapon/gun/energy/taser/G = new /obj/item/weapon/gun/energy/taser(Tsec)
 		G.power_supply.charge = 0
 	else if(lasercolor == "b")
-		var/obj/item/weapon/gun/energy/laser/bluetag/G = new /obj/item/weapon/gun/energy/laser/bluetag(Tsec)
+		var/obj/item/weapon/gun/energy/lasertag/blue/G = new (Tsec)
 		G.power_supply.charge = 0
 	else if(lasercolor == "r")
-		var/obj/item/weapon/gun/energy/laser/redtag/G = new /obj/item/weapon/gun/energy/laser/redtag(Tsec)
+		var/obj/item/weapon/gun/energy/lasertag/red/G = new (Tsec)
 		G.power_supply.charge = 0
 	if (prob(50))
 		new /obj/item/robot_parts/l_leg(Tsec)
@@ -84,7 +84,7 @@
 				lasercolor = "r"
 			else if( istype(W, /obj/item/clothing/suit/bluetag) )
 				lasercolor = "b"
-			if( lasercolor || istype(W, /obj/item/clothing/suit/armor/vest) )
+			if( lasercolor || istype(W, /obj/item/clothing/suit/storage/vest) )
 				user.drop_item()
 				del(W)
 				build_step++
@@ -137,11 +137,11 @@
 		if(7)
 			switch(lasercolor)
 				if("b")
-					if( !istype(W, /obj/item/weapon/gun/energy/laser/bluetag) )
+					if( !istype(W, /obj/item/weapon/gun/energy/lasertag/blue) )
 						return
 					name = "bluetag ED-209 assembly"
 				if("r")
-					if( !istype(W, /obj/item/weapon/gun/energy/laser/redtag) )
+					if( !istype(W, /obj/item/weapon/gun/energy/lasertag/red) )
 						return
 					name = "redtag ED-209 assembly"
 				if("")

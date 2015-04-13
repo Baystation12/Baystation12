@@ -85,7 +85,7 @@
 	var/transfer_moles = (set_flow_rate*mixing_inputs[air1]/air1.volume)*air1.total_moles + (set_flow_rate*mixing_inputs[air1]/air2.volume)*air2.total_moles
 
 	var/power_draw = -1
-	if (transfer_moles > MINUMUM_MOLES_TO_FILTER)
+	if (transfer_moles > MINIMUM_MOLES_TO_FILTER)
 		power_draw = mix_gas(src, mixing_inputs, air3, transfer_moles, power_rating)
 
 		if(network1 && mixing_inputs[air1])
@@ -156,7 +156,7 @@
 	return
 
 /obj/machinery/atmospherics/trinary/mixer/Topic(href,href_list)
-	if(..()) return
+	if(..()) return 1
 	if(href_list["power"])
 		use_power = !use_power
 	if(href_list["set_press"])

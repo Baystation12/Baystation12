@@ -26,6 +26,7 @@ datum/controller/game_controller
 	var/powernets_cost	= 0
 	var/nano_cost		= 0
 	var/events_cost		= 0
+	var/alarms_cost		= 0
 	var/ticker_cost		= 0
 	var/total_cost		= 0
 
@@ -33,8 +34,7 @@ datum/controller/game_controller
 	var/mob/list/expensive_mobs = list()
 
 	var/list/shuttle_list	                    // For debugging and VV
-	var/datum/ore_distribution/asteroid_ore_map // For debugging and VV.
-
+	var/datum/random_map/ore/asteroid_ore_map   // For debugging and VV.
 
 datum/controller/game_controller/New()
 	//There can be only one master_controller. Out with the old and in with the new.
@@ -59,6 +59,9 @@ datum/controller/game_controller/New()
 datum/controller/game_controller/proc/setup()
 	world.tick_lag = config.Ticklag
 
+	//Create the asteroid Z-level.
+	new /datum/random_map(null,13,32,5,217,223)
+
 	spawn(20)
 		createRandomZlevel()
 
@@ -76,9 +79,6 @@ datum/controller/game_controller/proc/setup()
 	SetupXenoarch()
 
 	transfer_controller = new
-
-	for(var/i=0, i<max_secret_rooms, i++)
-		make_mining_asteroid_secret()
 
 	spawn(0)
 		if(ticker)
@@ -108,14 +108,15 @@ datum/controller/game_controller/proc/setup_objects()
 			var/obj/machinery/atmospherics/unary/vent_scrubber/T = U
 			T.broadcast_status()
 
-	//Create the mining ore distribution map.
-	asteroid_ore_map = new /datum/ore_distribution()
-	asteroid_ore_map.populate_distribution_map()
+	// Create the mining ore distribution map.
+	// These values determine the specific area that the map is applied to.
+	// If you do not use the official Baycode asteroid map, you will need to change them.
+	asteroid_ore_map = new /datum/random_map/ore(null,13,32,5,217,223)
 
 	//Shitty hack to fix mining turf overlays, for some reason New() is not being called.
-	for(var/turf/simulated/floor/plating/airless/asteroid/T in world)
-		T.updateMineralOverlays()
-		T.name = "asteroid"
+	//for(var/turf/simulated/floor/plating/airless/asteroid/T in world)
+	//	T.updateMineralOverlays()
+	//	T.name = "asteroid"
 
 	//Set up spawn points.
 	populate_spawn_points()
@@ -231,6 +232,11 @@ datum/controller/game_controller/proc/process()
 				process_events()
 				events_cost = (world.timeofday - timer) / 10
 
+				//ALARMS
+				timer = world.timeofday
+				process_alarms()
+				alarms_cost = (world.timeofday - timer) / 10
+
 				//TICKER
 				timer = world.timeofday
 				last_thing_processed = ticker.type
@@ -238,7 +244,7 @@ datum/controller/game_controller/proc/process()
 				ticker_cost = (world.timeofday - timer) / 10
 
 				//TIMING
-				total_cost = air_cost + sun_cost + mobs_cost + diseases_cost + machines_cost + objects_cost + networks_cost + powernets_cost + nano_cost + events_cost + ticker_cost
+				total_cost = air_cost + sun_cost + mobs_cost + diseases_cost + machines_cost + objects_cost + networks_cost + powernets_cost + nano_cost + events_cost + alarms_cost + ticker_cost
 
 				var/end_time = world.timeofday
 				if(end_time < start_time)	//why not just use world.time instead?
@@ -334,8 +340,12 @@ datum/controller/game_controller/proc/process_nano()
 		nanomanager.processing_uis.Cut(i,i+1)
 
 datum/controller/game_controller/proc/process_events()
-	last_thing_processed = /datum/event
+	last_thing_processed = /datum/event_manager
 	event_manager.process()
+
+datum/controller/game_controller/proc/process_alarms()
+	last_thing_processed = /datum/subsystem/alarm
+	alarm_manager.fire()
 
 datum/controller/game_controller/proc/Recover()		//Mostly a placeholder for now.
 	var/msg = "## DEBUG: [time2text(world.timeofday)] MC restarted. Reports:\n"

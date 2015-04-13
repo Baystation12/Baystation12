@@ -10,11 +10,11 @@
 	var/ending = copytext(text, length(text))
 
 	if (ending == "?")
-		return "telepathically asks";
+		return "asks";
 	else if (ending == "!")
-		return "telepathically cries";
+		return "cries";
 
-	return "telepathically chirps";
+	return "chirps";
 
 /mob/living/carbon/slime/say_understands(var/other)
 	if (istype(other, /mob/living/carbon/slime))

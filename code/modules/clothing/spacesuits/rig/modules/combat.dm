@@ -85,7 +85,7 @@
 	desc = "A shoulder-mounted battery-powered laser cannon mount."
 	selectable = 1
 	usable = 1
-	use_power_cost = 10
+	module_cooldown = 0
 
 	engage_string = "Configure"
 
@@ -151,7 +151,7 @@
 	selectable = 1
 	toggleable = 1
 	use_power_cost = 50
-	active_power_cost = 5
+	active_power_cost = 10
 	passive_power_cost = 0
 
 	gun_type = /obj/item/weapon/gun/energy/crossbow/ninja

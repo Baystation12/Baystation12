@@ -1,5 +1,5 @@
 /obj/machinery/disease2/diseaseanalyser
-	name = "Disease Analyser"
+	name = "disease analyser"
 	icon = 'icons/obj/virology.dmi'
 	icon_state = "analyser"
 	anchored = 1
@@ -43,7 +43,9 @@
 				<hr>
 				<u>Additional Notes:</u>&nbsp;
 "}
+			dish.basic_info = dish.virus2.get_basic_info()
 			dish.info = r
+			dish.name = "[initial(dish.name)] ([dish.virus2.name()])"
 			dish.analysed = 1
 			dish.loc = src.loc
 			dish = null

@@ -20,7 +20,7 @@
 	item_state = "hardhat0_red"
 	item_color = "red"
 	name = "firefighter helmet"
-	flags = STOPSPRESSUREDMAGE
+	flags = STOPPRESSUREDAMAGE
 	heat_protection = HEAD
 	max_heat_protection_temperature = FIRE_HELMET_MAX_HEAT_PROTECTION_TEMPERATURE
 
@@ -28,7 +28,7 @@
 	icon_state = "hardhat0_white"
 	item_state = "hardhat0_white"
 	item_color = "white"
-	flags = STOPSPRESSUREDMAGE
+	flags = STOPPRESSUREDAMAGE
 	heat_protection = HEAD
 	max_heat_protection_temperature = FIRE_HELMET_MAX_HEAT_PROTECTION_TEMPERATURE
 

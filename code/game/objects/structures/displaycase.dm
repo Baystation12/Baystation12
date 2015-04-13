@@ -15,7 +15,7 @@
 		if (1)
 			new /obj/item/weapon/shard( src.loc )
 			if (occupied)
-				new /obj/item/weapon/gun/energy/laser/captain( src.loc )
+				new /obj/item/weapon/gun/energy/captain( src.loc )
 				occupied = 0
 			del(src)
 		if (2)
@@ -39,14 +39,14 @@
 	if (prob(75))
 		new /obj/item/weapon/shard( src.loc )
 		if (occupied)
-			new /obj/item/weapon/gun/energy/laser/captain( src.loc )
+			new /obj/item/weapon/gun/energy/captain( src.loc )
 			occupied = 0
 		del(src)
 
 
 /obj/structure/displaycase/meteorhit(obj/O as obj)
 		new /obj/item/weapon/shard( src.loc )
-		new /obj/item/weapon/gun/energy/laser/captain( src.loc )
+		new /obj/item/weapon/gun/energy/captain( src.loc )
 		del(src)
 
 
@@ -78,7 +78,7 @@
 
 /obj/structure/displaycase/attack_hand(mob/user as mob)
 	if (src.destroyed && src.occupied)
-		new /obj/item/weapon/gun/energy/laser/captain( src.loc )
+		new /obj/item/weapon/gun/energy/captain( src.loc )
 		user << "\b You deactivate the hover field built into the case."
 		src.occupied = 0
 		src.add_fingerprint(user)

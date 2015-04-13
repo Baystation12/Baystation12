@@ -10,6 +10,7 @@
 	heat_protection =    HEAD|FACE|EYES
 	cold_protection =    HEAD|FACE|EYES
 	brightness_on = 4
+	sprite_sheets = list("Tajara" = 'icons/mob/species/tajaran/helmet.dmi',"Skrell" = 'icons/mob/species/skrell/helmet.dmi',"Unathi" = 'icons/mob/species/unathi/helmet.dmi')
 	species_restricted = null
 
 /obj/item/clothing/gloves/rig
@@ -36,12 +37,13 @@
 	heat_protection =    UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 	cold_protection =    UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 	flags_inv =          HIDEJUMPSUIT|HIDETAIL
-	flags =              STOPSPRESSUREDMAGE | THICKMATERIAL | AIRTIGHT
+	flags =              STOPPRESSUREDAMAGE | THICKMATERIAL | AIRTIGHT
 	slowdown = 0
-	//With 0.2 resiliance, will reach 10 breach damage after 9 laser carbine blasts. Completely immune to smg hits.
-	breach_threshold = 28
-	resilience = 0.1
+	//will reach 10 breach damage after 25 laser carbine blasts, 3 revolver hits, or ~1 PTR hit. Completely immune to smg or sts hits.
+	breach_threshold = 38
+	resilience = 0.2
 	can_breach = 1
+	sprite_sheets = list("Tajara" = 'icons/mob/species/tajaran/suit.dmi',"Unathi" = 'icons/mob/species/unathi/suit.dmi')
 	supporting_limbs = list()
 
 //TODO: move this to modules

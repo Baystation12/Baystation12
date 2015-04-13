@@ -183,9 +183,6 @@
 	if(terminal)
 		disconnect_terminal()
 
-	//If there's no more APC then there shouldn't be a cause for alarm I guess
-	area.poweralert(1, src) //so that alarms don't go on forever
-
 	..()
 
 /obj/machinery/power/apc/proc/make_terminal()
@@ -538,7 +535,8 @@
 					var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 					s.set_up(5, 1, src)
 					s.start()
-					return
+					if(user.stunned)
+						return
 				C.use(10)
 				user.visible_message(\
 					"<span class='warning'>[user.name] has added cables to the APC frame!</span>",\
@@ -558,7 +556,8 @@
 					var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 					s.set_up(5, 1, src)
 					s.start()
-					return
+					if(usr.stunned)
+						return
 				new /obj/item/stack/cable_coil(loc,10)
 				user << "<span class='notice'>You cut the cables and dismantle the power terminal.</span>"
 				del(terminal) // qdel
@@ -723,6 +722,11 @@
 		return
 	// do APC interaction
 	src.interact(user)
+
+/obj/machinery/power/apc/attack_ghost(user as mob)
+	if(stat & (BROKEN|MAINT))
+		return
+	return ui_interact(user)
 
 /obj/machinery/power/apc/interact(mob/user)
 	if(!user)
@@ -1190,7 +1194,7 @@
 		equipment = autoset(equipment, 0)
 		lighting = autoset(lighting, 0)
 		environ = autoset(environ, 0)
-		area.poweralert(0, src)
+		power_alarm.triggerAlarm(loc, src)
 		autoflag = 0
 
 	// update icon & area power if anything changed
@@ -1213,29 +1217,27 @@
 			lighting = autoset(lighting, 1)
 			environ = autoset(environ, 1)
 			autoflag = 3
-			area.poweralert(1, src)
-			if(cell.charge >= 4000)
-				area.poweralert(1, src)
+			power_alarm.clearAlarm(loc, src)
 	else if((cell.percent() <= 30) && (cell.percent() > 15) && longtermpower < 0)                       // <30%, turn off equipment
 		if(autoflag != 2)
 			equipment = autoset(equipment, 2)
 			lighting = autoset(lighting, 1)
 			environ = autoset(environ, 1)
-			area.poweralert(0, src)
+			power_alarm.triggerAlarm(loc, src)
 			autoflag = 2
 	else if(cell.percent() <= 15)        // <15%, turn off lighting & equipment
 		if((autoflag > 1 && longtermpower < 0) || (autoflag > 1 && longtermpower >= 0))
 			equipment = autoset(equipment, 2)
 			lighting = autoset(lighting, 2)
 			environ = autoset(environ, 1)
-			area.poweralert(0, src)
+			power_alarm.triggerAlarm(loc, src)
 			autoflag = 1
 	else                                   // zero charge, turn all off
 		if(autoflag != 0)
 			equipment = autoset(equipment, 0)
 			lighting = autoset(lighting, 0)
 			environ = autoset(environ, 0)
-			area.poweralert(0, src)
+			power_alarm.triggerAlarm(loc, src)
 			autoflag = 0
 
 // val 0=off, 1=off(auto) 2=on 3=on(auto)

@@ -72,7 +72,7 @@ datum/mind
 				current.remove_changeling_powers()
 				current.verbs -= /datum/changeling/proc/EvolutionMenu
 			current.mind = null
-			
+
 			nanomanager.user_transferred(current, new_character) // transfer active NanoUI instances to new user
 		if(new_character.mind)		//remove any mind currently in our new body's mind variable
 			new_character.mind.current = null
@@ -500,7 +500,7 @@ datum/mind
 		else if(href_list["implant"])
 			var/mob/living/carbon/human/H = current
 
-			H.hud_updateflag |= (1 << IMPLOYAL_HUD)   // updates that players HUD images so secHUD's pick up they are implanted or not.
+			BITSET(H.hud_updateflag, IMPLOYAL_HUD)   // updates that players HUD images so secHUD's pick up they are implanted or not.
 
 			switch(href_list["implant"])
 				if("remove")
@@ -540,7 +540,7 @@ datum/mind
 
 
 		else if (href_list["revolution"])
-			current.hud_updateflag |= (1 << SPECIALROLE_HUD)
+			BITSET(current.hud_updateflag, SPECIALROLE_HUD)
 
 			switch(href_list["revolution"])
 				if("clear")
@@ -635,7 +635,7 @@ datum/mind
 						usr << "\red Reequipping revolutionary goes wrong!"
 
 		else if (href_list["cult"])
-			current.hud_updateflag |= (1 << SPECIALROLE_HUD)
+			BITSET(current.hud_updateflag, SPECIALROLE_HUD)
 			switch(href_list["cult"])
 				if("clear")
 					if(src in ticker.mode.cult)
@@ -685,7 +685,7 @@ datum/mind
 						usr << "\red Spawning amulet failed!"
 
 		else if (href_list["wizard"])
-			current.hud_updateflag |= (1 << SPECIALROLE_HUD)
+			BITSET(current.hud_updateflag, SPECIALROLE_HUD)
 
 			switch(href_list["wizard"])
 				if("clear")
@@ -715,7 +715,7 @@ datum/mind
 						usr << "\blue The objectives for wizard [key] have been generated. You can edit them and anounce manually."
 
 		else if (href_list["changeling"])
-			current.hud_updateflag |= (1 << SPECIALROLE_HUD)
+			BITSET(current.hud_updateflag, SPECIALROLE_HUD)
 			switch(href_list["changeling"])
 				if("clear")
 					if(src in ticker.mode.changelings)
@@ -751,7 +751,7 @@ datum/mind
 		else if (href_list["mercenary"])
 			var/mob/living/carbon/human/H = current
 
-			current.hud_updateflag |= (1 << SPECIALROLE_HUD)
+			BITSET(current.hud_updateflag, SPECIALROLE_HUD)
 
 			switch(href_list["mercenary"])
 				if("clear")
@@ -805,7 +805,7 @@ datum/mind
 						usr << "\red No valid nuke found!"
 
 		else if (href_list["traitor"])
-			current.hud_updateflag |= (1 << SPECIALROLE_HUD)
+			BITSET(current.hud_updateflag, SPECIALROLE_HUD)
 			switch(href_list["traitor"])
 				if("clear")
 					if(src in ticker.mode.traitors)
@@ -888,7 +888,7 @@ datum/mind
 						current.radiation -= 50
 
 		else if (href_list["silicon"])
-			current.hud_updateflag |= (1 << SPECIALROLE_HUD)
+			BITSET(current.hud_updateflag, SPECIALROLE_HUD)
 			switch(href_list["silicon"])
 				if("unmalf")
 					if(src in ticker.mode.malf_ai)
@@ -1289,10 +1289,3 @@ datum/mind
 	..()
 	mind.assigned_role = "Juggernaut"
 	mind.special_role = "Cultist"
-
-/mob/living/simple_animal/vox/armalis/mind_initialize()
-	..()
-	mind.assigned_role = "Armalis"
-	mind.special_role = "Vox Raider"
-
-

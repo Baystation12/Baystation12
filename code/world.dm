@@ -55,7 +55,7 @@ var/global/datum/global_init/init = new ()
 	// Set up roundstart seed list. This is here because vendors were
 	// bugging out and not populating with the correct packet names
 	// due to this list not being instantiated.
-	populate_seed_list()
+	plant_controller = new()
 
 	// Create autolathe recipes, as above.
 	populate_lathe_recipes()

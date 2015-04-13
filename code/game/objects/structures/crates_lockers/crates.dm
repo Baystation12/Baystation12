@@ -30,7 +30,8 @@
 				var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 				s.set_up(5, 1, src)
 				s.start()
-				return 2
+				if(usr.stunned)
+					return 2
 
 	playsound(src.loc, 'sound/machines/click.ogg', 15, 1, -3)
 	for(var/obj/O in src)
@@ -55,8 +56,8 @@
 			break
 		if(O.density || O.anchored || istype(O,/obj/structure/closet))
 			continue
-		if(istype(O, /obj/structure/stool/bed)) //This is only necessary because of rollerbeds and swivel chairs.
-			var/obj/structure/stool/bed/B = O
+		if(istype(O, /obj/structure/bed)) //This is only necessary because of rollerbeds and swivel chairs.
+			var/obj/structure/bed/B = O
 			if(B.buckled_mob)
 				continue
 		O.loc = src
@@ -341,8 +342,10 @@
 
 /obj/structure/closet/crate/freezer/rations/New()
 	..()
-	new /obj/item/weapon/storage/box/donkpockets(src)
-	new /obj/item/weapon/storage/box/donkpockets(src)
+	new /obj/item/weapon/reagent_containers/food/snacks/liquidfood(src)
+	new /obj/item/weapon/reagent_containers/food/snacks/liquidfood(src)
+	new /obj/item/weapon/reagent_containers/food/snacks/liquidfood(src)
+	new /obj/item/weapon/reagent_containers/food/snacks/liquidfood(src)
 
 /obj/structure/closet/crate/bin
 	name = "large bin"

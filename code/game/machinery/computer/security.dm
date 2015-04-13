@@ -208,7 +208,7 @@ I can't be bothered to look more of the actual code outside of switch but that p
 What a mess.*/
 /obj/machinery/computer/secure_data/Topic(href, href_list)
 	if(..())
-		return
+		return 1
 	if (!( data_core.general.Find(active1) ))
 		active1 = null
 	if (!( data_core.security.Find(active2) ))
@@ -534,7 +534,7 @@ What a mess.*/
 					if ("Change Criminal Status")
 						if (active2)
 							for(var/mob/living/carbon/human/H in player_list)
-								H.hud_updateflag |= 1 << WANTED_HUD
+								BITSET(H.hud_updateflag, WANTED_HUD)
 							switch(href_list["criminal2"])
 								if("none")
 									active2.fields["criminal"] = "None"
