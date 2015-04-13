@@ -67,7 +67,7 @@
 		var/obj/item/organ/external/head = H.get_organ("head")
 		if(!head) //???
 			return
-		H.visible_message("<span class='danger'>\The [src] rips gaping holes in \the [H]'s brain and flesh as it is torn loose!</span>")
+		H.visible_message("<span class='danger'>\The [src] rips gaping holes in \the [H]'s flesh as it is torn loose!</span>")
 		head.take_damage(rand(60,80))
 		for(var/obj/item/organ/O in head.contents)
 			O.take_damage(rand(20,30))

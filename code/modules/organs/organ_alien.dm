@@ -141,6 +141,12 @@
 /obj/item/organ/diona/process()
 	return
 
+/obj/item/organ/diona
+	name = "diona nymph"
+	icon = 'icons/obj/objects.dmi'
+	icon_state = "nymph"
+	organ_tag = "special" // Turns into a nymph instantly, no transplanting possible.
+
 /obj/item/organ/diona/strata
 	name = "neural strata"
 	parent_organ = "chest"
@@ -164,12 +170,6 @@
 /obj/item/organ/diona/nutrients
 	name = "nutrient vessel"
 	parent_organ = "chest"
-
-/obj/item/organ/diona
-	name = "diona nymph"
-	icon = 'icons/obj/objects.dmi'
-	icon_state = "nymph"
-	organ_tag = "special" // Turns into a nymph instantly, no transplanting possible.
 
 /obj/item/organ/diona/removed(var/mob/living/user)
 
@@ -205,6 +205,10 @@
 //CORTICAL BORER ORGANS.
 /obj/item/organ/borer
 	name = "cortical borer"
+	icon = 'icons/obj/objects.dmi'
+	icon_state = "borer"
+	organ_tag = "brain"
+	desc = "A disgusting space slug."
 	parent_organ = "head"
 	vital = 1
 
@@ -230,13 +234,6 @@
 			goo.basecolor = "#412464"
 			goo.update_icon()
 
-/obj/item/organ/borer
-	name = "cortical borer"
-	icon = 'icons/obj/objects.dmi'
-	icon_state = "borer"
-	organ_tag = "brain"
-	desc = "A disgusting space slug."
-
 /obj/item/organ/borer/removed(var/mob/living/user)
 
 	..()
@@ -250,13 +247,22 @@
 		del(src)
 
 //XENOMORPH ORGANS
+/obj/item/organ/xenos
+	name = "xeno organ"
+	icon = 'icons/effects/blood.dmi'
+	desc = "It smells like an accident in a chemical factory."
+
 /obj/item/organ/xenos/eggsac
 	name = "egg sac"
+	organ_tag = "egg sac"
 	parent_organ = "groin"
+	icon_state = "xgibmid1"
 
 /obj/item/organ/xenos/plasmavessel
 	name = "plasma vessel"
 	parent_organ = "chest"
+	organ_tag = "plasma vessel"
+	icon_state = "xgibdown1"
 	var/stored_plasma = 0
 	var/max_plasma = 500
 
@@ -276,42 +282,18 @@
 
 /obj/item/organ/xenos/acidgland
 	name = "acid gland"
+	organ_tag = "acid gland"
 	parent_organ = "head"
+	icon_state = "xgibtorso"
 
 /obj/item/organ/xenos/hivenode
 	name = "hive node"
+	organ_tag = "hive node"
 	parent_organ = "chest"
+	icon_state = "xgibmid2"
 
 /obj/item/organ/xenos/resinspinner
 	name = "resin spinner"
-	parent_organ = "head"
-
-/obj/item/organ/xenos
-	name = "xeno organ"
-	icon = 'icons/effects/blood.dmi'
-	desc = "It smells like an accident in a chemical factory."
-
-/obj/item/organ/xenos/eggsac
-	name = "egg sac"
-	icon_state = "xgibmid1"
-	organ_tag = "egg sac"
-
-/obj/item/organ/xenos/plasmavessel
-	name = "plasma vessel"
-	icon_state = "xgibdown1"
-	organ_tag = "plasma vessel"
-
-/obj/item/organ/xenos/acidgland
-	name = "acid gland"
-	icon_state = "xgibtorso"
-	organ_tag = "acid gland"
-
-/obj/item/organ/xenos/hivenode
-	name = "hive node"
-	icon_state = "xgibmid2"
-	organ_tag = "hive node"
-
-/obj/item/organ/xenos/resinspinner
-	name = "hive node"
-	icon_state = "xgibmid2"
 	organ_tag = "resin spinner"
+	parent_organ = "head"
+	icon_state = "xgibmid2"
