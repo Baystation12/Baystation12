@@ -76,6 +76,7 @@ var/list/gamemode_cache = list()
 	var/ToRban = 0
 	var/automute_on = 0					//enables automuting/spam prevention
 	var/jobs_have_minimal_access = 0	//determines whether jobs use minimal access or expanded access.
+	var/use_cortical_stacks = 0
 
 	var/cult_ghostwriter = 1               //Allows ghosts to write in blood in cult rounds...
 	var/cult_ghostwriter_req_cultists = 10 //...so long as this many cultists are active.
@@ -476,6 +477,9 @@ var/list/gamemode_cache = list()
 
 				if("protect_roles_from_antagonist")
 					config.protect_roles_from_antagonist = 1
+
+				if("use_cortical_stacks")
+					config.use_cortical_stacks = 1
 
 				if ("probability")
 					var/prob_pos = findtext(value, " ")

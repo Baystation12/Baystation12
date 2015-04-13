@@ -111,6 +111,7 @@ datum/preferences
 	var/savefile/loaded_preferences
 	var/savefile/loaded_character
 	var/datum/category_collection/player_setup_collection/player_setup
+	var/has_cortical_stack = 1
 
 /datum/preferences/New(client/C)
 	player_setup = new(src)
@@ -213,9 +214,9 @@ datum/preferences
 	user << browse(dat, "window=preferences;size=635x736")
 
 /datum/preferences/proc/process_link(mob/user, list/href_list)
-	if(!user)	return
 
-	if(!istype(user, /mob/new_player))	return
+	if(!user)	return
+	if(istype(user, /mob/living)) return
 
 	if(href_list["preference"] == "open_whitelist_forum")
 		if(config.forumurl)

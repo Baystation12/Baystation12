@@ -12,6 +12,7 @@
 	has_fine_manipulation = 0
 	siemens_coefficient = 0
 	gluttonous = GLUT_ANYTHING
+	spawns_with_stack = 0
 
 	eyes = "blank_eyes"
 

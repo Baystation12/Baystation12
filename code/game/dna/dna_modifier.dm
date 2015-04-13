@@ -109,8 +109,9 @@
 		usr << "<span class='warning'>The subject cannot have abiotic items on.</span>"
 		return
 	usr.stop_pulling()
-	usr.client.perspective = EYE_PERSPECTIVE
-	usr.client.eye = src
+	if(usr.client)
+		usr.client.perspective = EYE_PERSPECTIVE
+		usr.client.eye = src
 	usr.loc = src
 	src.occupant = usr
 	src.icon_state = "scanner_1"
@@ -153,16 +154,17 @@
 	src.icon_state = "scanner_1"
 
 	// search for ghosts, if the corpse is empty and the scanner is connected to a cloner
-	if(locate(/obj/machinery/computer/cloning, get_step(src, NORTH)) \
-		|| locate(/obj/machinery/computer/cloning, get_step(src, SOUTH)) \
-		|| locate(/obj/machinery/computer/cloning, get_step(src, EAST)) \
-		|| locate(/obj/machinery/computer/cloning, get_step(src, WEST)))
+	if(!config.use_cortical_stacks)
+		if(locate(/obj/machinery/computer/cloning, get_step(src, NORTH)) \
+			|| locate(/obj/machinery/computer/cloning, get_step(src, SOUTH)) \
+			|| locate(/obj/machinery/computer/cloning, get_step(src, EAST)) \
+			|| locate(/obj/machinery/computer/cloning, get_step(src, WEST)))
 
-		if(!M.client && M.mind)
-			for(var/mob/dead/observer/ghost in player_list)
-				if(ghost.mind == M.mind)
-					ghost << "<b><font color = #330033><font size = 3>Your corpse has been placed into a cloning scanner. Return to your body if you want to be resurrected/cloned!</b> (Verbs -> Ghost -> Re-enter corpse)</font></font>"
-					break
+			if(!M.client && M.mind)
+				for(var/mob/dead/observer/ghost in player_list)
+					if(ghost.mind == M.mind)
+						ghost << "<b><font color = #330033><font size = 3>Your corpse has been placed into a cloning scanner. Return to your body if you want to be resurrected/cloned!</b> (Verbs -> Ghost -> Re-enter corpse)</font color>"
+						break
 	return
 
 /obj/machinery/dna_scannernew/proc/go_out()
@@ -209,7 +211,7 @@
 
 /obj/machinery/computer/scan_consolenew
 	name = "DNA Modifier Access Console"
-	desc = "Scand DNA."
+	desc = "Scan DNA."
 	icon = 'icons/obj/computer.dmi'
 	icon_keyboard = "med_key"
 	icon_screen = "dna"

@@ -20,6 +20,7 @@
 
 	warning_low_pressure = 50
 	hazard_low_pressure = 0
+	spawns_with_stack = 0
 
 	cold_level_1 = 80
 	cold_level_2 = 50

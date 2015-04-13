@@ -11,6 +11,7 @@
 	darksight = 8
 	has_organ = list()
 	siemens_coefficient = 0
+	spawns_with_stack = 0
 
 	blood_color = "#CCCCCC"
 	flesh_color = "#AAAAAA"
