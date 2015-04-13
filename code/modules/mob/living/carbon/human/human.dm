@@ -1359,3 +1359,11 @@
 	if(W in organs)
 		return
 	..()
+
+/mob/living/carbon/human/proc/create_stack()
+	var/obj/item/organ/stack/S = new(src,1)
+	S.owner = src
+	internal_organs_by_name[S.organ_tag] = S
+	internal_organs |= S
+	spawn(5)
+		src << "<span class='warning'>You feel a faint buzz behind your eyes as your cortical stack boots.</span>"

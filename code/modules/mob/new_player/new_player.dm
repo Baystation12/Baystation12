@@ -476,8 +476,14 @@
 		new_character.force_update_limbs()
 		new_character.update_eyes()
 		new_character.regenerate_icons()
-
 		new_character.key = key		//Manually transfer the key to log them in
+
+		if(config && config.use_cortical_stacks)
+			if(new_character.client && new_character.client.prefs.has_cortical_stack)
+				if(new_character.species.spawns_with_stack)
+					new_character.create_stack()
+				else
+					new_character << "<span class='danger'>[new_character.species.name_plural] cannot spawn with a cortical stack.</span>"
 
 		return new_character
 

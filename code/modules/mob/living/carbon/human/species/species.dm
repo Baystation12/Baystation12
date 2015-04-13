@@ -201,13 +201,6 @@
 		var/organ_type = has_organ[organ]
 		H.internal_organs_by_name[organ] = new organ_type(H,1)
 
-	if(config && config.use_cortical_stacks)
-		if(H.client && H.client.prefs && H.client.prefs.has_cortical_stack)
-			if(!spawns_with_stack)
-				H << "<span class='danger'>This species cannot spawn with a cortical stack.</span>"
-			else
-				new /obj/item/organ/stack(H)
-
 	for(var/name in H.organs_by_name)
 		H.organs |= H.organs_by_name[name]
 

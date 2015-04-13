@@ -305,6 +305,15 @@ datum/preferences
 	dat += "<br><table><tr><td><b>Body</b> "
 	dat += "(<a href='?_src_=prefs;preference=all;task=random'>&reg;</A>)"
 	dat += "<br>"
+
+	if(config.use_cortical_stacks)
+		dat += "<br>Cortical stack: "
+		if(has_cortical_stack)
+			dat += "present."
+		else
+			dat += "<b>not present.<br/>Character is unclonable.</b>"
+		dat += " <a href='byond://?src=\ref[user];preference=stack;task=change'>\[toggle\]</a><br/><br>"
+
 	dat += "Species: <a href='?src=\ref[user];preference=species;task=change'>[species]</a><br>"
 	dat += "Secondary Language:<br><a href='byond://?src=\ref[user];preference=language;task=input'>[language]</a><br>"
 	dat += "Blood Type: <a href='byond://?src=\ref[user];preference=b_type;task=input'>[b_type]</a><br>"
@@ -312,14 +321,6 @@ datum/preferences
 	//dat += "Skin pattern: <a href='byond://?src=\ref[user];preference=skin_style;task=input'>Adjust</a><br>"
 	dat += "Needs Glasses: <a href='?_src_=prefs;preference=disabilities'><b>[disabilities == 0 ? "No" : "Yes"]</b></a><br>"
 	dat += "Limbs: <a href='byond://?src=\ref[user];preference=limbs;task=input'>Adjust</a><br>"
-
-	if(config.use_cortical_stacks)
-		dat += "Cortical stack: "
-		if(has_cortical_stack)
-			dat += "present."
-		else
-			dat += "<span class='danger'>not present.<br/>Character is unclonable.</span>"
-		dat += " <a href='byond://?src=\ref[user];preference=stack;task=change'>\[toggle\]</a><br/>"
 
 	dat += "Internal Organs: <a href='byond://?src=\ref[user];preference=organs;task=input'>Adjust</a><br>"
 
