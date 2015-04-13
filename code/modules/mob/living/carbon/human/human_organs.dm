@@ -74,7 +74,7 @@
 			stance_damage += 2
 		else if (E.status & ORGAN_DESTROYED)
 			stance_damage += 2 // let it fail even if just foot&leg
-		else if (E.is_malfunctioning() || (E.is_broken() && !(E.status & ORGAN_SPLINTED)) || !E.is_usable())
+		else if (E.is_malfunctioning() || E.is_broken() || !E.is_usable())
 			stance_damage += 1
 
 	// Canes and crutches help you stand (if the latter is ever added)

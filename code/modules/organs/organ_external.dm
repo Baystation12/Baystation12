@@ -333,8 +333,12 @@ This function completely restores a damaged organ to perfect condition.
 			   PROCESSING & UPDATING
 ****************************************************/
 
-//Determines if we even need to process this organ.
+//external organs handle brokenness a bit differently when it comes to damage. Instead brute_dam is checked inside process()
+//this also ensures that an external organ cannot be "broken" without broken_description being set.
+/obj/item/organ/external/is_broken()
+	return ((status & ORGAN_CUT_AWAY) || ((status & ORGAN_BROKEN) && !(status & ORGAN_SPLINTED)))
 
+//Determines if we even need to process this organ.
 /obj/item/organ/external/proc/need_process()
 	if(status && status != ORGAN_ROBOT) // If it's robotic, that's fine it will have a status.
 		return 1
