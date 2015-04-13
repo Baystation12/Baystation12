@@ -29,26 +29,19 @@
 		if(owner.mind) backup = owner.mind
 		if(owner.ckey) backup_key = owner.ckey
 
+/obj/item/organ/stack/proc/backup_inviable()
+	return 	(!backup_key || !istype(owner) || !istype(backup) || backup == owner.mind || (backup.current && backup.current.stat != DEAD))
+
 /obj/item/organ/stack/replaced()
-
 	..()
-
-	if(!backup || !backup_key || !owner)
+	if(backup_inviable())
 		return
+	var/current_owner = owner
+	var/response = alert(backup, "Your cortical stack has been installed into a new sleeve. Do you wish to return to life?", "Resleeving", "Yes", "No")
+	if(response == "Yes" && owner == current_owner)
+		overwrite()
 
-	var/datum/mind/clonemind
-	clonemind = locate(backup)
-
-	if(!istype(clonemind) || (clonemind.current && clonemind.current.stat != DEAD))
-		return 0
-
-	if(clonemind.active)
-		for(var/mob/dead/observer/G in player_list)
-			if(G.ckey == backup_key)
-				if(G.can_reenter_corpse)
-					break
-				else
-					return 0
+/obj/item/organ/stack/proc/overwrite()
 
 	if(owner.mind && owner.ckey) //Someone is already in this body!
 		owner.visible_message("<span class='danger'>\The [owner] spasms violently!</span>")
@@ -57,12 +50,14 @@
 			update_backup() //Overwrite the stored mind on the stack.
 			return
 
-	owner.dna.real_name = clonemind.name
+	owner.dna.real_name = backup.name
 	owner.real_name = owner.dna.real_name
 	owner.name = owner.real_name
-	clonemind.transfer_to(owner)
+	backup.transfer_to(owner)
 	owner.ckey = backup_key
 	owner << "<span class='notice'>Consciousness slowly creeps over you as your new body begins to awaken.</span>"
+
+
 
 /obj/item/organ/stack/vox
 	name = "alien cortical stack"

@@ -887,9 +887,9 @@ datum/preferences
 	return 1
 
 /datum/preferences/proc/process_link(mob/user, list/href_list)
-	if(!user)	return
 
-	if(!istype(user, /mob/new_player))	return
+	if(!user)	return
+	if(istype(user, /mob/living)) return
 
 	if(href_list["preference"] == "open_whitelist_forum")
 		if(config.forumurl)
