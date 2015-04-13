@@ -231,7 +231,7 @@ var/list/transplantable_special_organs = list("stack") // This should go somewhe
 		var/list/attached_organs = list()
 		for(var/organ in target.internal_organs_by_name)
 			var/obj/item/organ/I = target.internal_organs_by_name[organ]
-			if(I && !I.status && I.parent_organ == target_zone)
+			if(I && !(I.status & ORGAN_CUT_AWAY) && I.parent_organ == target_zone)
 				attached_organs |= organ
 
 		var/organ_to_remove = input(user, "Which organ do you want to prepare for removal?") as null|anything in attached_organs
@@ -286,7 +286,7 @@ var/list/transplantable_special_organs = list("stack") // This should go somewhe
 		var/list/removable_organs = list()
 		for(var/organ in target.internal_organs_by_name)
 			var/obj/item/organ/I = target.internal_organs_by_name[organ]
-			if(I.status & ORGAN_CUT_AWAY && I.parent_organ == target_zone)
+			if((I.status & ORGAN_CUT_AWAY) && I.parent_organ == target_zone)
 				removable_organs |= organ
 
 		var/organ_to_remove = input(user, "Which organ do you want to remove?") as null|anything in removable_organs

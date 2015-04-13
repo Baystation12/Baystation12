@@ -11,11 +11,19 @@
 	var/backup_time = 0
 	var/datum/mind/backup
 
+/obj/item/organ/stack/New()
+	..()
+	spawn(1)
+		update_backup()
+
 /obj/item/organ/stack/process()
 
+	..()
 	if(world.time < (backup_time + STACK_TICK_TIME))
 		return
+	update_backup()
 
+/obj/item/organ/stack/proc/update_backup()
 	if(owner && owner.stat != 2 && !is_broken())
 		backup_time = world.time
 		if(owner.mind) backup = owner.mind
@@ -46,7 +54,7 @@
 		owner.visible_message("<span class='danger'>\The [owner] spasms violently!</span>")
 		if(prob(66))
 			owner << "<span class='danger'>You fight off the invading tendrils of another mind, holding onto your own body!</span>"
-			process() //Overwrite the stored mind on the stack.
+			update_backup() //Overwrite the stored mind on the stack.
 			return
 
 	owner.dna.real_name = clonemind.name

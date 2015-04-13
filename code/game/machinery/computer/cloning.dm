@@ -47,7 +47,7 @@
 
 /obj/machinery/computer/cloning/proc/findcloner()
 	pods.Cut()
-	for(var/obj/machinery/clonepod/P in get_area(src))
+	for(var/obj/machinery/clonepod/P in range(3,src))
 		if(!P.connected || (P.connected == src))
 			pods += P
 	return

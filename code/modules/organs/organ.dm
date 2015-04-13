@@ -63,13 +63,13 @@ var/list/organ_cache = list()
 	if(istype(loc,/obj/item/device/mmi) || istype(loc,/obj/item/bodybag/cryobag) || istype(loc,/obj/structure/closet/crate/freezer))
 		return
 
+	if(loc != owner)
+		owner = null
+
 	//Process infections
 	if (robotic >= 2 || (owner && owner.species && (owner.species.flags & IS_PLANT)))
 		germ_level = 0
 		return
-
-	if(loc != owner)
-		owner = null
 
 	if(!owner)
 		var/datum/reagent/blood/B = locate(/datum/reagent/blood) in reagents.reagent_list

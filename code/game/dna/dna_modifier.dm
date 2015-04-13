@@ -157,7 +157,7 @@
 	src.icon_state = "scanner_1"
 
 	// search for ghosts, if the corpse is empty and the scanner is connected to a cloner
-	if(config.use_cortical_stacks)
+	if(!config.use_cortical_stacks)
 		if(locate(/obj/machinery/computer/cloning, get_step(src, NORTH)) \
 			|| locate(/obj/machinery/computer/cloning, get_step(src, SOUTH)) \
 			|| locate(/obj/machinery/computer/cloning, get_step(src, EAST)) \
