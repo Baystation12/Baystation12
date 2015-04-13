@@ -394,7 +394,7 @@ var/list/advance_cures = 	list(
 
 	if(D.symptoms.len > 0)
 
-		var/new_name = input(user, "Name your new disease.", "New Name")
+		var/new_name = sanitizeSafe(input(user, "Name your new disease.", "New Name"), MAX_NAME_LEN)
 		D.AssignName(new_name)
 		D.Refresh()
 

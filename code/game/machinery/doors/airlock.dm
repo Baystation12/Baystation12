@@ -593,7 +593,7 @@ About the new airlock wires panel:
 			playsound(src.loc, 'sound/effects/bang.ogg', 25, 1)
 			if(!istype(H.head, /obj/item/clothing/head/helmet))
 				visible_message("\red [user] headbutts the airlock.")
-				var/datum/organ/external/affecting = H.get_organ("head")
+				var/obj/item/organ/external/affecting = H.get_organ("head")
 				H.Stun(8)
 				H.Weaken(5)
 				if(affecting.take_damage(10, 0))
@@ -610,7 +610,7 @@ About the new airlock wires panel:
 		..(user)
 	return
 
-/obj/machinery/door/airlock/CanUseTopic(var/mob/user, href_list)
+/obj/machinery/door/airlock/CanUseTopic(var/mob/user)
 	if(!user.isSilicon())
 		return STATUS_CLOSE
 
@@ -844,19 +844,20 @@ About the new airlock wires panel:
 		return 0
 	return ..()
 
-/obj/machinery/door/airlock/can_close(var/forced)
+/obj/machinery/door/airlock/can_close(var/forced=0)
 	if(locked || welded)
 		return 0
+
 	if(!forced)
 		//despite the name, this wire is for general door control.
-		//Bolts are already covered by the check for locked, above
 		if(!arePowerSystemsOn() || isWireCut(AIRLOCK_WIRE_OPEN_DOOR))
 			return	0
+
 	return ..()
 
 /obj/machinery/door/airlock/close(var/forced=0)
 	if(!can_close(forced))
-		return
+		return 0
 
 	if(safe)
 		for(var/turf/turf in locs)

@@ -96,8 +96,8 @@
 
 /client/verb/drop_item()
 	set hidden = 1
-	if(!isrobot(mob))
-		mob.drop_item_v()
+	if(!isrobot(mob) && mob.stat == CONSCIOUS && isturf(mob.loc))
+		return mob.drop_item()
 	return
 
 
@@ -188,9 +188,9 @@
 
 	if(mob.stat==2)	return
 
-	// handle possible AI movement
-	if(isAI(mob))
-		return AIMove(n,direct,mob)
+	// handle possible Eye movement
+	if(mob.eyeobj)
+		return mob.EyeMove(n,direct)
 
 	if(mob.monkeyizing)	return//This is sota the goto stop mobs from moving var
 
@@ -289,8 +289,8 @@
 			else if(istype(mob.buckled, /obj/structure/bed/chair/wheelchair))
 				if(ishuman(mob.buckled))
 					var/mob/living/carbon/human/driver = mob.buckled
-					var/datum/organ/external/l_hand = driver.get_organ("l_hand")
-					var/datum/organ/external/r_hand = driver.get_organ("r_hand")
+					var/obj/item/organ/external/l_hand = driver.get_organ("l_hand")
+					var/obj/item/organ/external/r_hand = driver.get_organ("r_hand")
 					if((!l_hand || (l_hand.status & ORGAN_DESTROYED)) && (!r_hand || (r_hand.status & ORGAN_DESTROYED)))
 						return // No hands to drive your chair? Tough luck!
 				//drunk wheelchair driving
@@ -457,12 +457,12 @@
 			var/area/A = turf.loc
 			if(istype(A) && A.has_gravity == 0)
 				var/can_walk = 0
-				
+
 				if(ishuman(src))  // Only humans can wear magboots, so we give them a chance to.
 					var/mob/living/carbon/human/H = src
 					if(istype(H.shoes, /obj/item/clothing/shoes/magboots) && (H.shoes.flags & NOSLIP))
 						can_walk = 1
-				
+
 				if(!can_walk)
 					continue
 

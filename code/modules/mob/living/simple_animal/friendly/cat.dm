@@ -103,7 +103,7 @@
 
 /mob/living/simple_animal/cat/attack_hand(mob/living/carbon/human/M as mob)
 	. = ..()
-	if(M.a_intent == "hurt")
+	if(M.a_intent == I_HURT)
 		set_flee_target(M)
 
 /mob/living/simple_animal/cat/ex_act()

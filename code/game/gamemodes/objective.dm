@@ -455,15 +455,21 @@ datum/objective/harm
 				return 0
 
 			var/mob/living/carbon/human/H = target.current
-			for(var/datum/organ/external/E in H.organs)
+			for(var/obj/item/organ/external/E in H.organs)
 				if(E.status & ORGAN_BROKEN)
-					already_completed = 1
 					return 1
-				if(E.status & ORGAN_DESTROYED && !E.amputated)
-					already_completed = 1
+			for(var/limb_tag in H.species.has_limbs) //todo check prefs for robotic limbs and amputations.
+				var/list/organ_data = H.species.has_limbs[limb_tag]
+				var/limb_type = organ_data["path"]
+				var/found
+				for(var/obj/item/organ/external/E in H.organs)
+					if(limb_type == E.type)
+						found = 1
+						break
+				if(!found)
 					return 1
 
-			var/datum/organ/external/head/head = H.get_organ("head")
+			var/obj/item/organ/external/head/head = H.get_organ("head")
 			if(head.disfigured)
 				return 1
 		return 0
@@ -536,7 +542,7 @@ datum/objective/steal
 			var/tmp_obj = new custom_target
 			var/custom_name = tmp_obj:name
 			del(tmp_obj)
-			custom_name = sanitize(copytext(input("Enter target name:", "Objective target", custom_name) as text|null,1,MAX_MESSAGE_LEN))
+			custom_name = sanitize(input("Enter target name:", "Objective target", custom_name) as text|null)
 			if (!custom_name) return
 			target_name = custom_name
 			steal_target = custom_target
@@ -648,9 +654,6 @@ datum/objective/capture
 				worth*=0.5
 				continue
 			captured_amount += worth
-
-		for(var/mob/living/carbon/monkey/M in A)//Monkeys are almost worthless, you failure.
-			captured_amount+=0.1
 
 		for(var/mob/living/carbon/alien/larva/M in A)//Larva are important for research.
 			if(M.stat==2)

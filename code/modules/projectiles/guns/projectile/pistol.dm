@@ -8,7 +8,7 @@
 	load_method = MAGAZINE
 
 /obj/item/weapon/gun/projectile/colt/detective
-	desc = "A cheap Martian knock-off of a Colt M1911. Uses less-than-lethal .45 rounds."
+	desc = "A cheap Martian knock-off of a Colt M1911. Uses .45 rounds."
 	magazine_type = /obj/item/ammo_magazine/c45m/rubber
 
 /obj/item/weapon/gun/projectile/colt/detective/verb/rename_gun()
@@ -22,7 +22,7 @@
 		M << "<span class='notice'>You don't feel cool enough to name this gun, chump.</span>"
 		return 0
 
-	var/input = stripped_input(usr,"What do you want to name the gun?", ,"", MAX_NAME_LEN)
+	var/input = sanitizeSafe(input("What do you want to name the gun?", ,""), MAX_NAME_LEN)
 
 	if(src && input && !M.stat && in_range(M,src))
 		name = input
@@ -30,7 +30,7 @@
 		return 1
 
 /obj/item/weapon/gun/projectile/sec
-	desc = "A NanoTrasen designed sidearm, found pretty much everywhere humans are. Uses less-than-lethal .45 rounds."
+	desc = "A NanoTrasen designed sidearm, found pretty much everywhere humans are. Uses .45 rounds."
 	name = "\improper NT Mk58"
 	icon_state = "secguncomp"
 	magazine_type = /obj/item/ammo_magazine/c45m/rubber
@@ -40,11 +40,10 @@
 
 /obj/item/weapon/gun/projectile/sec/flash
 	name = "\improper NT Mk58 signal pistol"
-	desc = "A NanoTrasen designed sidearm, found pretty much everywhere humans are. Uses .45 signal flash rounds."
 	magazine_type = /obj/item/ammo_magazine/c45m/flash
 
 /obj/item/weapon/gun/projectile/sec/wood
-	desc = "A Nanotrasen designed sidearm, this one has a sweet wooden grip. Uses less-than-lethal .45 rounds."
+	desc = "A Nanotrasen designed sidearm, this one has a sweet wooden grip. Uses .45 rounds."
 	name = "\improper Custom NT Mk58"
 	icon_state = "secgundark"
 
@@ -63,6 +62,7 @@
 	name = "desert eagle"
 	desc = "A robust handgun that uses .50 AE ammo"
 	icon_state = "deagle"
+	item_state = "deagle"
 	force = 14.0
 	caliber = ".50"
 	load_method = MAGAZINE
@@ -107,6 +107,7 @@
 	name = "\improper Stechtkin pistol"
 	desc = "A small, easily concealable gun. Uses 9mm rounds."
 	icon_state = "pistol"
+	item_state = null
 	w_class = 2
 	caliber = "9mm"
 	silenced = 0
@@ -116,7 +117,7 @@
 
 /obj/item/weapon/gun/projectile/pistol/flash
 	name = "\improper Stechtkin signal pistol"
-	desc = "A small, easily concealable gun. Uses 9mm signal flash rounds."
+	desc = "A small, easily concealable gun. Uses 9mm rounds."
 	magazine_type = /obj/item/ammo_magazine/mc9mm/flash
 
 /obj/item/weapon/gun/projectile/pistol/attack_hand(mob/user as mob)

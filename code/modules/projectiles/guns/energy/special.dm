@@ -26,6 +26,7 @@
 	name = "biological demolecularisor"
 	desc = "A gun that discharges high amounts of controlled radiation to slowly break a target into component elements."
 	icon_state = "decloner"
+	item_state = "decloner"
 	fire_sound = 'sound/weapons/pulse3.ogg'
 	origin_tech = "combat=5;materials=4;powerstorage=3"
 	charge_cost = 100
@@ -35,7 +36,7 @@
 	name = "floral somatoray"
 	desc = "A tool that discharges controlled radiation which induces mutation in plant cells."
 	icon_state = "floramut100"
-	item_state = "obj/item/gun.dmi"
+	item_state = "floramut"
 	fire_sound = 'sound/effects/stealthoff.ogg'
 	charge_cost = 100
 	projectile_type = /obj/item/projectile/energy/floramut
@@ -59,7 +60,7 @@
 			projectile_type = /obj/item/projectile/energy/floramut
 			modifystate = "floramut"
 	update_icon()
-	return
+	update_held_icon()
 
 /obj/item/weapon/gun/energy/floragun/afterattack(obj/target, mob/user, adjacent_flag)
 	//allow shooting into adjacent hydrotrays regardless of intent
@@ -115,6 +116,7 @@
 	name = "staff of change"
 	desc = "An artefact that spits bolts of coruscating energy which cause the target's very form to reshape itself"
 	icon = 'icons/obj/gun.dmi'
+	item_icons = null
 	icon_state = "staffofchange"
 	item_state = "staffofchange"
 	fire_sound = 'sound/weapons/emitter.ogg'
@@ -168,6 +170,7 @@ obj/item/weapon/gun/energy/staff/focus
 	desc = "It's a cute rubber duck.  With an evil gleam in it's eye."
 	projectile_type = /obj/item/projectile/icarus/pointdefense
 	icon = 'icons/obj/watercloset.dmi'
+	item_icons = null
 	icon_state = "rubberducky"
 	item_state = "rubberducky"
 	charge_cost = 0

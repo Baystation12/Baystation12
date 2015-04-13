@@ -18,6 +18,13 @@
 	rotting_destroy_touch = 0
 	rotting_touch_message = "\blue This wall feels rather unstable."
 
+/turf/simulated/wall/r_wall/attack_generic(var/mob/user, var/damage, var/attack_message, var/wallbreaker)
+	if(!rotting && wallbreaker < 2)
+		user << "You push the wall but nothing happens."
+		return
+
+	return ..()
+
 /turf/simulated/wall/r_wall/attackby(obj/item/W as obj, mob/user as mob)
 
 	if (!(istype(user, /mob/living/carbon/human) || ticker) && ticker.mode.name != "monkey")

@@ -45,6 +45,8 @@
 	species_restricted = null
 	body_parts_covered = 0
 
+	wizard_garb = 1
+
 /obj/item/clothing/shoes/sandal/marisa
 	desc = "A pair of magic, black shoes."
 	name = "magic shoes"

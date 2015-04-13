@@ -62,7 +62,7 @@
 	matter = list("metal" = 3750)
 	var/digspeed = 40 //moving the delay to an item var so R&D can make improved picks. --NEO
 	origin_tech = "materials=1;engineering=1"
-	attack_verb = list("hit", "pierced", "sliced", "attacked", "drilled")
+	attack_verb = list("hit", "pierced", "sliced", "attacked")
 	var/drill_sound = 'sound/weapons/Genhit.ogg'
 	var/drill_verb = "drilling"
 	sharp = 1
@@ -107,6 +107,7 @@
 	digspeed = 20
 	origin_tech = "materials=4"
 	desc = "This makes no metallurgic sense."
+	drill_verb = "picking"
 
 /obj/item/weapon/pickaxe/plasmacutter
 	name = "plasma cutter"
@@ -118,6 +119,8 @@
 	origin_tech = "materials=4;phorontech=3;engineering=3"
 	desc = "A rock cutter that uses bursts of hot plasma. You could use it to cut limbs off of xenos! Or, you know, mine stuff."
 	drill_verb = "cutting"
+	sharp = 1
+	edge = 1
 
 /obj/item/weapon/pickaxe/diamond
 	name = "diamond pickaxe"
@@ -125,7 +128,8 @@
 	item_state = "dpickaxe"
 	digspeed = 10
 	origin_tech = "materials=6;engineering=4"
-	desc = "A pickaxe with a diamond pick head, this is just like minecraft."
+	desc = "A pickaxe with a diamond pick head."
+	drill_verb = "picking"
 
 /obj/item/weapon/pickaxe/diamonddrill //When people ask about the badass leader of the mining tools, they are talking about ME!
 	name = "diamond mining drill"

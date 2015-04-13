@@ -111,6 +111,8 @@
 	w_class = 2
 	flags = NOSHIELD | NOBLOODY
 	origin_tech = "magnets=3;syndicate=4"
+	sharp = 1
+	edge = 1
 
 /obj/item/weapon/melee/energy/sword/dropped(var/mob/user)
 	..()
@@ -207,7 +209,7 @@
 		if(istype(loc,/mob/living))
 			var/mob/living/carbon/human/host = loc
 			if(istype(host))
-				for(var/datum/organ/external/organ in host.organs)
+				for(var/obj/item/organ/external/organ in host.organs)
 					for(var/obj/item/O in organ.implants)
 						if(O == src)
 							organ.implants -= src

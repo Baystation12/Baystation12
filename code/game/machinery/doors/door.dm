@@ -1,7 +1,4 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:31
-#define DOOR_OPEN_LAYER 2.7		//Under all objects if opened. 2.7 due to tables being at 2.6
-#define DOOR_CLOSED_LAYER 3.1	//Above most items if closed
-
 #define DOOR_REPAIR_AMOUNT 50	//amount of health regained per stack amount used
 
 /obj/machinery/door
@@ -88,10 +85,10 @@
 		return 0
 	return 1
 
-/obj/machinery/door/proc/can_close(var/forced = 0)
-	if(!density && !operating && !(!forced && (stat & (BROKEN|NOPOWER))))
-		return 1
-	return 0
+/obj/machinery/door/proc/can_close()
+	if(density || operating || !ticker)
+		return 0
+	return 1
 
 /obj/machinery/door/Bumped(atom/AM)
 	if(p_open || operating) return
@@ -262,7 +259,7 @@
 		return
 
 	//psa to whoever coded this, there are plenty of objects that need to call attack() on doors without bludgeoning them.
-	if(src.density && istype(I, /obj/item/weapon) && user.a_intent == "hurt" && !istype(I, /obj/item/weapon/card))
+	if(src.density && istype(I, /obj/item/weapon) && user.a_intent == I_HURT && !istype(I, /obj/item/weapon/card))
 		var/obj/item/weapon/W = I
 		if(W.damtype == BRUTE || W.damtype == BURN)
 			if(W.force < min_force)
@@ -306,6 +303,17 @@
 		visible_message("\The [src] shows signs of damage!" )
 	update_icon()
 	return
+
+
+/obj/machinery/door/examine(mob/user)
+	..()
+	if(src.health < src.maxhealth / 4)
+		user << "\The [src] looks like it's about to break!"
+	else if(src.health < src.maxhealth / 2)
+		user << "\The [src] looks seriously damaged!"
+	else if(src.health < src.maxhealth * 3/4)
+		user << "\The [src] shows signs of damage!"
+
 
 /obj/machinery/door/proc/set_broken()
 	stat |= BROKEN

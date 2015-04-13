@@ -15,29 +15,30 @@
 	log = do_log
 	newscast = do_newscast
 
-/datum/announcement/priority/New(var/do_log = 1, var/new_sound = sound('sound/misc/notice2.ogg'), var/do_newscast = 0)
+/datum/announcement/priority/New(var/do_log = 1, var/new_sound = 'sound/misc/notice2.ogg', var/do_newscast = 0)
 	..(do_log, new_sound, do_newscast)
 	title = "Priority Announcement"
 	announcement_type = "Priority Announcement"
 
-/datum/announcement/priority/command/New(var/do_log = 1, var/new_sound = sound('sound/misc/notice2.ogg'), var/do_newscast = 0)
+/datum/announcement/priority/command/New(var/do_log = 1, var/new_sound = 'sound/misc/notice2.ogg', var/do_newscast = 0)
 	..(do_log, new_sound, do_newscast)
 	title = "[command_name()] Update"
 	announcement_type = "[command_name()] Update"
 
-/datum/announcement/priority/security/New(var/do_log = 1, var/new_sound = sound('sound/misc/notice2.ogg'), var/do_newscast = 0)
+/datum/announcement/priority/security/New(var/do_log = 1, var/new_sound = 'sound/misc/notice2.ogg', var/do_newscast = 0)
 	..(do_log, new_sound, do_newscast)
 	title = "Security Announcement"
 	announcement_type = "Security Announcement"
 
-/datum/announcement/proc/Announce(var/message as text, var/new_title = "", var/new_sound = null, var/do_newscast = newscast)
+/datum/announcement/proc/Announce(var/message as text, var/new_title = "", var/new_sound = null, var/do_newscast = newscast, var/msg_sanitized = 0)
 	if(!message)
 		return
-	var/tmp/message_title = new_title ? new_title : title
-	var/tmp/message_sound = new_sound ? sound(new_sound) : sound
+	var/message_title = new_title ? new_title : title
+	var/message_sound = new_sound ? new_sound : sound
 
-	message = trim_strip_html_properly(message)
-	message_title = html_encode(message_title)
+	if(!msg_sanitized)
+		message = sanitize(message, extra = 0)
+	message_title = sanitizeSafe(message_title)
 
 	Message(message, message_title)
 	if(do_newscast)
@@ -102,8 +103,8 @@ datum/announcement/proc/Sound(var/message_sound)
 	PlaySound(message_sound)
 
 datum/announcement/priority/Sound(var/message_sound)
-	if(sound)
-		world << sound
+	if(message_sound)
+		world << message_sound
 
 datum/announcement/priority/command/Sound(var/message_sound)
 	PlaySound(message_sound)

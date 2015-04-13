@@ -12,10 +12,15 @@
 	icon_state = "cameras"
 	var/obj/machinery/camera/current = null
 	var/last_pic = 1.0
-	var/list/network = list("SS13")
+	var/list/network
 	var/mapping = 0//For the overview file, interesting bit of code.
 	circuit = /obj/item/weapon/circuitboard/security
 	var/camera_cache = null
+
+	New()
+		if(!network)
+			network = station_networks
+		..()
 
 	attack_ai(var/mob/user as mob)
 		return attack_hand(user)
@@ -235,8 +240,12 @@
 	name = "engineering camera monitor"
 	desc = "Used to monitor fires and breaches."
 	icon_state = "engineeringcameras"
-	network = list("Engineering","Power Alarms","Atmosphere Alarms","Fire Alarms")
 	circuit = /obj/item/weapon/circuitboard/security/engineering
+
+/obj/machinery/computer/security/engineering/New()
+	if(!network)
+		network = engineering_networks
+	..()
 
 /obj/machinery/computer/security/nuclear
 	name = "head mounted camera monitor"

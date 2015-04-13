@@ -542,7 +542,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	if (!ui)
 		// the ui does not exist, so we'll create a new() one
 	        // for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
-		ui = new(user, src, ui_key, "pda.tmpl", title, 520, 400)
+		ui = new(user, src, ui_key, "pda.tmpl", title, 520, 400, state = inventory_state)
 		// when the ui is first opened this is the data it will use
 
 		ui.load_cached_data(ManifestJSON)
@@ -689,7 +689,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		if ("Edit")
 			var/n = input(U, "Please enter message", name, notehtml) as message
 			if (in_range(src, U) && loc == U)
-				n = copytext(adminscrub(n), 1, MAX_MESSAGE_LEN)
+				n = sanitizeSafe(n, extra = 0)
 				if (mode == 1)
 					note = html_decode(n)
 					notehtml = note
@@ -726,7 +726,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 						U << "The PDA softly beeps."
 						ui.close()
 					else
-						t = sanitize(copytext(t, 1, 20))
+						t = sanitize(t, 20)
 						ttone = t
 			else
 				ui.close()
@@ -735,7 +735,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			var/t = input(U, "Please enter new news tone", name, newstone) as text
 			if (in_range(src, U) && loc == U)
 				if (t)
-					t = sanitize(copytext(t, 1, 20))
+					t = sanitize(t, 20)
 					newstone = t
 			else
 				ui.close()
@@ -825,7 +825,8 @@ var/global/list/obj/item/device/pda/PDAs = list()
 							difficulty += P.cartridge.access_engine
 							difficulty += P.cartridge.access_clown
 							difficulty += P.cartridge.access_janitor
-							difficulty += 3 * P.hidden_uplink
+							if(P.hidden_uplink)
+								difficulty += 3
 
 						if(prob(difficulty))
 							U.show_message("\red An error flashes on your [src].", 1)
@@ -971,8 +972,9 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		U.visible_message("<span class='notice'>[U] taps on \his PDA's screen.</span>")
 	U.last_target_click = world.time
 	var/t = input(U, "Please enter message", P.name, null) as text
-	t = sanitize(copytext(t, 1, MAX_MESSAGE_LEN))
-	t = readd_quotes(t)
+	t = sanitize(t)
+	//t = readd_quotes(t)
+	t = replace_characters(t, list("&#34;" = "\""))
 	if (!t || !istype(P))
 		return
 	if (!in_range(src, U) && loc != U)
@@ -1206,8 +1208,8 @@ var/global/list/obj/item/device/pda/PDAs = list()
 					var/list/damaged = H.get_damaged_organs(1,1)
 					user.show_message("\blue Localized Damage, Brute/Burn:",1)
 					if(length(damaged)>0)
-						for(var/datum/organ/external/org in damaged)
-							user.show_message(text("\blue \t []: []\blue-[]",capitalize(org.display_name),(org.brute_dam > 0)?"\red [org.brute_dam]":0,(org.burn_dam > 0)?"\red [org.burn_dam]":0),1)
+						for(var/obj/item/organ/external/org in damaged)
+							user.show_message(text("\blue \t []: []\blue-[]",capitalize(org.name),(org.brute_dam > 0)?"\red [org.brute_dam]":0,(org.burn_dam > 0)?"\red [org.burn_dam]":0),1)
 					else
 						user.show_message("\blue \t Limbs are OK.",1)
 
@@ -1218,9 +1220,6 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			if(2)
 				if (!istype(C:dna, /datum/dna))
 					user << "\blue No fingerprints found on [C]"
-				else if(!istype(C, /mob/living/carbon/monkey))
-					if(!isnull(C:gloves))
-						user << "\blue No fingerprints found on [C]"
 				else
 					user << text("\blue [C]'s Fingerprints: [md5(C:dna.uni_identity)]")
 				if ( !(C:blood_DNA) )

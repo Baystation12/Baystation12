@@ -140,6 +140,7 @@
 			S.dry = 1
 			item_quants[S.name]--
 			S.name = "dried [S.name]"
+			S.color = "#AAAAAA"
 			S.loc = loc
 		else
 			var/D = S.dried_type
@@ -197,7 +198,7 @@
 			user << "<span class='notice'>\The [src] is full.</span>"
 			return 1
 		else
-			user.before_take_item(O)
+			user.remove_from_mob(O)
 			O.loc = src
 			if(item_quants[O.name])
 				item_quants[O.name]++
@@ -244,7 +245,7 @@
 	..()
 
 /obj/machinery/smartfridge/attack_ai(mob/user as mob)
-	return 0
+	attack_hand(user)
 
 /obj/machinery/smartfridge/attack_hand(mob/user as mob)
 	if(stat & (NOPOWER|BROKEN))

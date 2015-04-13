@@ -112,7 +112,7 @@
 				"\blue [user] has added one of [O] to \the [src].", \
 				"\blue You add one of [O] to \the [src].")
 		else
-		//	user.before_take_item(O)	//This just causes problems so far as I can tell. -Pete
+		//	user.remove_from_mob(O)	//This just causes problems so far as I can tell. -Pete
 			user.drop_item()
 			O.loc = src
 			user.visible_message( \
@@ -135,11 +135,12 @@
 		return 1
 	else
 		user << "\red You have no idea what you can cook with this [O]."
-		return 1
+	..()
 	src.updateUsrDialog()
 
 /obj/machinery/microwave/attack_ai(mob/user as mob)
-	return 0
+	if(istype(user, /mob/living/silicon/robot) && Adjacent(user))
+		attack_hand(user)
 
 /obj/machinery/microwave/attack_hand(mob/user as mob)
 	user.set_machine(src)

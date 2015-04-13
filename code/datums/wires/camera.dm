@@ -58,7 +58,7 @@ var/const/CAMERA_WIRE_NOTHING2 = 32
 			C.setViewRange(new_range)
 
 		if(CAMERA_WIRE_POWER)
-			C.deactivate(null) // Deactivate the camera
+			C.kick_viewers() // Kicks anyone watching the camera
 
 		if(CAMERA_WIRE_LIGHT)
 			C.light_disabled = !C.light_disabled

@@ -3,6 +3,10 @@
 	name = "gun"
 	desc = "Its a gun. It's pretty terrible, though."
 	icon = 'icons/obj/gun.dmi'
+	item_icons = list(
+		icon_l_hand = 'icons/mob/items/lefthand_guns.dmi',
+		icon_r_hand = 'icons/mob/items/righthand_guns.dmi',
+		)
 	icon_state = "detective"
 	item_state = "gun"
 	flags =  CONDUCT
@@ -90,14 +94,14 @@
 	if(user && user.client && !(A in aim_targets))
 		var/client/C = user.client
 		//If help intent is on and we have clicked on an eligible target, switch to aim mode automatically
-		if(user.a_intent == "help" && isliving(A) && !C.gun_mode)
+		if(user.a_intent == I_HELP && isliving(A) && !C.gun_mode)
 			C.ToggleGunMode()
 
 		if(C.gun_mode)
 			aiming = PreFire(A,user,params) //They're using the new gun system, locate what they're aiming at.
 
 	if (!aiming)
-		if(user && user.a_intent == "help") //regardless of what happens, refuse to shoot if help intent is on
+		if(user && user.a_intent == I_HELP) //regardless of what happens, refuse to shoot if help intent is on
 			user << "\red You refrain from firing your [src] as your intent is set to help."
 		else
 			Fire(A,user,params) //Otherwise, fire normally.
@@ -105,7 +109,7 @@
 /obj/item/weapon/gun/attack(atom/A, mob/living/user, def_zone)
 	if (A == user && user.zone_sel.selecting == "mouth" && !mouthshoot)
 		handle_suicide(user)
-	else if(user.a_intent == "hurt") //point blank shooting
+	else if(user.a_intent == I_HURT) //point blank shooting
 		Fire(A, user, pointblank=1)
 	else
 		return ..() //Pistolwhippin'
@@ -134,10 +138,7 @@
 		handle_post_fire(user, target, pointblank, reflex)
 
 		update_icon()
-		if(user.hand)
-			user.update_inv_l_hand()
-		else
-			user.update_inv_r_hand()
+		update_held_icon()
 
 
 //obtains the next projectile to fire
@@ -166,11 +167,19 @@
 		playsound(user, fire_sound, 10, 1)
 	else
 		playsound(user, fire_sound, 50, 1)
-		user.visible_message(
-			"<span class='danger'>[user] fires [src][pointblank ? "  point blank at [target]":""][reflex ? " by reflex":""]!</span>",
-			"<span class='warning'>You fire [src][reflex ? "by reflex":""]!</span>",
-			"You hear a [fire_sound_text]!"
-		)
+		
+		if(reflex)
+			user.visible_message(
+				"<span class='reflex_shoot'><b>\The [user] fires \the [src][pointblank ? " point blank at \the [target]":""] by reflex!<b></span>",
+				"<span class='reflex_shoot'>You fire \the [src] by reflex!</span>",
+				"You hear a [fire_sound_text]!"
+			)
+		else
+			user.visible_message(
+				"<span class='danger'>\The [user] fires \the [src][pointblank ? " point blank at \the [target]":""]!</span>",
+				"<span class='warning'>You fire \the [src]!</span>",
+				"You hear a [fire_sound_text]!"
+				)
 	
 	if(recoil)
 		spawn()

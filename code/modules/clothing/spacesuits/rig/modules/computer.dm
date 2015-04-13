@@ -29,6 +29,7 @@
 
 	name = "IIS module"
 	desc = "An integrated intelligence system module suitable for most hardsuits."
+	icon_state = "IIS"
 	toggleable = 1
 	usable = 1
 	disruptive = 0
@@ -104,7 +105,14 @@
 
 	// Okay, it wasn't a terminal being touched, check for all the simple insertions.
 	if(input_device.type in list(/obj/item/device/paicard, /obj/item/device/mmi, /obj/item/device/mmi/digital/posibrain))
-		integrate_ai(input_device,user)
+		if(integrated_ai)
+			integrated_ai.attackby(input_device,user)
+			// If the transfer was successful, we can clear out our vars.
+			if(integrated_ai.loc != src)
+				integrated_ai = null
+				eject_ai()
+		else
+			integrate_ai(input_device,user)
 		return 1
 
 	return 0
@@ -202,6 +210,7 @@
 
 	name = "datajack module"
 	desc = "A simple induction datalink module."
+	icon_state = "datajack"
 	toggleable = 1
 	activates_on_touch = 1
 	usable = 0
@@ -292,6 +301,7 @@
 
 	name = "electrowarfare module"
 	desc = "A bewilderingly complex bundle of fiber optics and chips."
+	icon_state = "ewar"
 	toggleable = 1
 	usable = 0
 
@@ -322,6 +332,7 @@
 
 	name = "hardsuit power sink"
 	desc = "An heavy-duty power sink."
+	icon_state = "powersink"
 	toggleable = 1
 	activates_on_touch = 1
 	disruptive = 0

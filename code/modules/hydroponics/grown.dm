@@ -13,7 +13,8 @@
 /obj/item/weapon/reagent_containers/food/snacks/grown/New(newloc,planttype)
 
 	..()
-
+	if(!dried_type)
+		dried_type = type
 	src.pixel_x = rand(-5.0, 5)
 	src.pixel_y = rand(-5.0, 5)
 
@@ -226,7 +227,7 @@
 	if(user == M)
 		return ..()
 
-	if(user.a_intent == "hurt")
+	if(user.a_intent == I_HURT)
 
 		// This is being copypasted here because reagent_containers (WHY DOES FOOD DESCEND FROM THAT) overrides it completely.
 		// TODO: refactor all food paths to be less horrible and difficult to work with in this respect. ~Z
@@ -291,7 +292,7 @@
 	if(istype(user.loc,/turf/space))
 		return
 
-	if(user.a_intent == "hurt")
+	if(user.a_intent == I_HURT)
 		user.visible_message("<span class='danger'>\The [user] squashes \the [src]!</span>")
 		seed.thrown_at(src,user)
 		sleep(-1)
@@ -319,6 +320,7 @@
 		del(src)
 		return
 
+	/*
 	if(seed.kitchen_tag)
 		switch(seed.kitchen_tag)
 			if("shand")
@@ -333,6 +335,7 @@
 				user << "<span class='notice'>You mash the petals into a poultice.</span>"
 				del(src)
 				return
+	*/
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/pickup(mob/user)
 	..()
@@ -352,9 +355,8 @@
 		seed.do_sting(H,src,pick("r_hand","l_hand"))
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/dropped(mob/user)
-	if(!..() || !seed)
-		return
-	if(seed.get_trait(TRAIT_BIOLUM))
+	..()
+	if(seed && seed.get_trait(TRAIT_BIOLUM))
 		user.SetLuminosity(user.luminosity - seed.get_trait(TRAIT_BIOLUM))
 		SetLuminosity(seed.get_trait(TRAIT_BIOLUM))
 
