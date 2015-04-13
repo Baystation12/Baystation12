@@ -18,7 +18,7 @@
 	src.whitelist = species_whitelist
 	src.blacklist = species_blacklist
 
-/obj/nano_module/appearance_changer/Topic(ref, href_list)
+/obj/nano_module/appearance_changer/Topic(ref, href_list, var/nowindow, var/datum/topic_state/state = default_state)
 	if(..())
 		return 1
 
@@ -35,13 +35,13 @@
 	if(href_list["skin_tone"])
 		if(can_change_skin_tone())
 			var/new_s_tone = input(usr, "Choose your character's skin-tone:\n(Light 1 - 220 Dark)", "Skin Tone", owner.s_tone) as num|null
-			if(isnum(new_s_tone) && CanUseTopic(usr) == STATUS_INTERACTIVE)
+			if(isnum(new_s_tone) && can_still_topic(state))
 				new_s_tone = 35 - max(min( round(new_s_tone), 220),1)
 				return owner.change_skin_tone(new_s_tone)
 	if(href_list["skin_color"])
 		if(can_change_skin_color())
 			var/new_skin = input(usr, "Choose your character's skin colour: ", "Skin Color", rgb(owner.r_skin, owner.g_skin, owner.b_skin)) as color|null
-			if(new_skin && can_still_topic())
+			if(new_skin && can_still_topic(state))
 				var/r_skin = hex2num(copytext(new_skin, 2, 4))
 				var/g_skin = hex2num(copytext(new_skin, 4, 6))
 				var/b_skin = hex2num(copytext(new_skin, 6, 8))
@@ -56,7 +56,7 @@
 	if(href_list["hair_color"])
 		if(can_change(APPEARANCE_HAIR_COLOR))
 			var/new_hair = input("Please select hair color.", "Hair Color", rgb(owner.r_hair, owner.g_hair, owner.b_hair)) as color|null
-			if(new_hair && can_still_topic())
+			if(new_hair && can_still_topic(state))
 				var/r_hair = hex2num(copytext(new_hair, 2, 4))
 				var/g_hair = hex2num(copytext(new_hair, 4, 6))
 				var/b_hair = hex2num(copytext(new_hair, 6, 8))
@@ -71,7 +71,7 @@
 	if(href_list["facial_hair_color"])
 		if(can_change(APPEARANCE_FACIAL_HAIR_COLOR))
 			var/new_facial = input("Please select facial hair color.", "Facial Hair Color", rgb(owner.r_facial, owner.g_facial, owner.b_facial)) as color|null
-			if(new_facial && can_still_topic())
+			if(new_facial && can_still_topic(state))
 				var/r_facial = hex2num(copytext(new_facial, 2, 4))
 				var/g_facial = hex2num(copytext(new_facial, 4, 6))
 				var/b_facial = hex2num(copytext(new_facial, 6, 8))
@@ -81,7 +81,7 @@
 	if(href_list["eye_color"])
 		if(can_change(APPEARANCE_EYE_COLOR))
 			var/new_eyes = input("Please select eye color.", "Eye Color", rgb(owner.r_eyes, owner.g_eyes, owner.b_eyes)) as color|null
-			if(new_eyes && can_still_topic())
+			if(new_eyes && can_still_topic(state))
 				var/r_eyes = hex2num(copytext(new_eyes, 2, 4))
 				var/g_eyes = hex2num(copytext(new_eyes, 4, 6))
 				var/b_eyes = hex2num(copytext(new_eyes, 6, 8))
@@ -91,7 +91,7 @@
 
 	return 0
 
-/obj/nano_module/appearance_changer/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+/obj/nano_module/appearance_changer/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
 	generate_data(check_whitelist, whitelist, blacklist)
 	var/data[0]
 
@@ -128,7 +128,7 @@
 	data["change_facial_hair_color"] = can_change(APPEARANCE_FACIAL_HAIR_COLOR)
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
-		ui = new(user, src, ui_key, "appearance_changer.tmpl", "[src.name]", 800, 450)
+		ui = new(user, src, ui_key, "appearance_changer.tmpl", "[src.name]", 800, 450, state = state)
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)

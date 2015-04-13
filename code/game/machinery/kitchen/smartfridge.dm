@@ -140,6 +140,7 @@
 			S.dry = 1
 			item_quants[S.name]--
 			S.name = "dried [S.name]"
+			S.color = "#AAAAAA"
 			S.loc = loc
 		else
 			var/D = S.dried_type
@@ -244,7 +245,7 @@
 	..()
 
 /obj/machinery/smartfridge/attack_ai(mob/user as mob)
-	return 0
+	attack_hand(user)
 
 /obj/machinery/smartfridge/attack_hand(mob/user as mob)
 	if(stat & (NOPOWER|BROKEN))

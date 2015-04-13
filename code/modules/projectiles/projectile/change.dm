@@ -79,8 +79,8 @@
 				A.randomize_appearance_for(H)
 
 		if(new_mob)
-			for (var/obj/effect/proc_holder/spell/S in M.spell_list)
-				new_mob.spell_list += new S.type
+			for (var/spell/S in M.spell_list)
+				new_mob.add_spell(new S.type)
 
 			new_mob.a_intent = "hurt"
 			if(M.mind)

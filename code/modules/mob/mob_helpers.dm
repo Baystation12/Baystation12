@@ -108,6 +108,15 @@
 /mob/living/silicon/isSynthetic()
 	return 1
 
+/mob/living/carbon/human/isMonkey()
+	return istype(species, /datum/species/monkey)
+
+/mob/proc/isMonkey()
+	return 0
+
+/mob/living/carbon/human/isMonkey()
+	return istype(species, /datum/species/monkey)
+
 /proc/ispAI(A)
 	if(istype(A, /mob/living/silicon/pai))
 		return 1

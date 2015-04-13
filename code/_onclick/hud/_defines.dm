@@ -66,6 +66,7 @@
 #define ui_gun2 "14:28, 4:7"
 #define ui_gun3 "13:26,4:7"
 #define ui_gun_select "14:28,3:7"
+#define ui_gun4 "12:24,3:7"
 
 //Upper-middle right (damage indicators)
 #define ui_toxin "14:28,13:27"
@@ -118,3 +119,6 @@
 
 #define ui_iarrowleft "SOUTH-1,11"
 #define ui_iarrowright "SOUTH-1,13"
+
+#define ui_spell_master "14:16,14:16"
+#define ui_genetic_master "14:16,12:16"
