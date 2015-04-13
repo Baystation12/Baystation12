@@ -1,4 +1,4 @@
-/var/global/datum/topic_state/default_state = new()
+/var/global/datum/topic_state/default/default_state = new()
 
 /datum/topic_state/default/href_list(var/mob/user)
 	return list()
