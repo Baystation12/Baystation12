@@ -13,7 +13,8 @@
 /obj/item/weapon/reagent_containers/food/snacks/grown/New(newloc,planttype)
 
 	..()
-
+	if(!dried_type)
+		dried_type = type
 	src.pixel_x = rand(-5.0, 5)
 	src.pixel_y = rand(-5.0, 5)
 
