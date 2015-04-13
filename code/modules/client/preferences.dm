@@ -120,6 +120,7 @@ datum/preferences
 	var/med_record = ""
 	var/sec_record = ""
 	var/gen_record = ""
+	var/has_cortical_stack = 1
 	var/exploit_record = ""
 	var/disabilities = 0
 
@@ -311,6 +312,15 @@ datum/preferences
 	//dat += "Skin pattern: <a href='byond://?src=\ref[user];preference=skin_style;task=input'>Adjust</a><br>"
 	dat += "Needs Glasses: <a href='?_src_=prefs;preference=disabilities'><b>[disabilities == 0 ? "No" : "Yes"]</b></a><br>"
 	dat += "Limbs: <a href='byond://?src=\ref[user];preference=limbs;task=input'>Adjust</a><br>"
+
+	if(config.use_cortical_stacks)
+		dat += "Cortical stack: "
+		if(has_cortical_stack)
+			dat += "present."
+		else
+			dat += "<span class='danger'>not present.<br/>Character is unclonable.</span>"
+		dat += " <a href='byond://?src=\ref[user];preference=stack;task=change'>\[toggle\]</a><br/>"
+
 	dat += "Internal Organs: <a href='byond://?src=\ref[user];preference=organs;task=input'>Adjust</a><br>"
 
 	//display limbs below
@@ -1131,12 +1141,18 @@ datum/preferences
 
 	switch(href_list["task"])
 		if("change")
-			if(href_list["preference"] == "species")
-				// Actual whitelist checks are handled elsewhere, this is just for accessing the preview window.
-				var/choice = input("Which species would you like to look at?") as null|anything in playable_species
-				if(!choice) return
-				species_preview = choice
-				SetSpecies(user)
+			switch(href_list["preference"])
+				if("stack")
+					if(has_cortical_stack)
+						has_cortical_stack = 0
+					else
+						has_cortical_stack = 1
+				if("species")
+					// Actual whitelist checks are handled elsewhere, this is just for accessing the preview window.
+					var/choice = input("Which species would you like to look at?") as null|anything in playable_species
+					if(!choice) return
+					species_preview = choice
+					SetSpecies(user)
 
 		if("random")
 			switch(href_list["preference"])

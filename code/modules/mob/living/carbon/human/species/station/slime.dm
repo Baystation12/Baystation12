@@ -11,6 +11,7 @@
 	flags = IS_RESTRICTED | NO_BLOOD | NO_SCAN | NO_SLIP | NO_BREATHE
 	siemens_coefficient = 3
 	darksight = 3
+	spawns_with_stack = 0
 
 	blood_color = "#05FF9B"
 	flesh_color = "#05FFFB"

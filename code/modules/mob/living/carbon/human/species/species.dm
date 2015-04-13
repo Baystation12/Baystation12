@@ -56,6 +56,7 @@
 	var/dusted_anim = "dust-h"
 	var/death_sound
 	var/death_message = "seizes up and falls limp, their eyes dead and lifeless..."
+	var/spawns_with_stack = 1
 
 	// Environment tolerance/life processes vars.
 	var/reagent_tag                                   //Used for metabolizing reagents.
@@ -199,6 +200,13 @@
 	for(var/organ in has_organ)
 		var/organ_type = has_organ[organ]
 		H.internal_organs_by_name[organ] = new organ_type(H,1)
+
+	if(config && config.use_cortical_stacks)
+		if(H.client && H.client.prefs && H.client.prefs.has_cortical_stack)
+			if(!spawns_with_stack)
+				H << "<span class='danger'>This species cannot spawn with a cortical stack.</span>"
+			else
+				new /obj/item/organ/stack(H)
 
 	for(var/name in H.organs_by_name)
 		H.organs |= H.organs_by_name[name]
