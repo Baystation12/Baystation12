@@ -355,9 +355,8 @@
 		seed.do_sting(H,src,pick("r_hand","l_hand"))
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/dropped(mob/user)
-	if(!..() || !seed)
-		return
-	if(seed.get_trait(TRAIT_BIOLUM))
+	..()
+	if(seed && seed.get_trait(TRAIT_BIOLUM))
 		user.SetLuminosity(user.luminosity - seed.get_trait(TRAIT_BIOLUM))
 		SetLuminosity(seed.get_trait(TRAIT_BIOLUM))
 
