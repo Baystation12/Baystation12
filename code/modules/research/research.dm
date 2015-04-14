@@ -59,6 +59,12 @@ research holder datum.
 		possible_designs += new D(src)
 	RefreshResearch()
 
+/datum/research/techonly
+
+/datum/research/techonly/New()
+	for(var/T in typesof(/datum/tech) - /datum/tech)
+		possible_tech += new T(src)
+	RefreshResearch()
 
 
 //Checks to see if tech has all the required pre-reqs.

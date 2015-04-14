@@ -65,6 +65,8 @@
 		if(cameranet && !cameranet.checkTurfVis(get_turf(src_object)))
 			return apc_override ? STATUS_INTERACTIVE : STATUS_CLOSE
 		return STATUS_INTERACTIVE
+	else if(get_dist(src_object, src) <= client.view)	// View does not return what one would expect while installed in an inteliCard
+		return STATUS_INTERACTIVE
 
 	return STATUS_CLOSE
 

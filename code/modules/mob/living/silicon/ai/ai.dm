@@ -46,7 +46,7 @@ var/list/ai_verbs_default = list(
 	density = 1
 	status_flags = CANSTUN|CANPARALYSE|CANPUSH
 	shouldnt_see = list(/obj/effect/rune)
-	var/list/network = list("SS13")
+	var/list/network = list("Exodus")
 	var/obj/machinery/camera/camera = null
 	var/list/connected_robots = list()
 	var/aiRestorePowerRoutine = 0
@@ -530,6 +530,8 @@ var/list/ai_verbs_default = list(
 		view_core()
 		return
 
+	src.network = network
+
 	for(var/obj/machinery/camera/C in cameranet.cameras)
 		if(!C.can_use())
 			continue
@@ -691,14 +693,14 @@ var/list/ai_verbs_default = list(
 
 /mob/living/silicon/ai/proc/check_unable(var/flags = 0)
 	if(stat == DEAD)
-		usr << "\red You are dead!"
+		src << "<span class='warning'>You are dead!</span>"
 		return 1
 
 	if((flags & AI_CHECK_WIRELESS) && src.control_disabled)
-		usr << "\red Wireless control is disabled!"
+		src << "<span class='warning'>Wireless control is disabled!</span>"
 		return 1
 	if((flags & AI_CHECK_RADIO) && src.aiRadio.disabledAi)
-		src << "\red System Error - Transceiver Disabled!"
+		src << "<span class='warning'>System Error - Transceiver Disabled!</span>"
 		return 1
 	return 0
 
