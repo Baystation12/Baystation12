@@ -339,7 +339,7 @@ var/global/list/gear_datums = list()
 	cost = 1
 
 /datum/gear/suit_black_shiny
-	display_name = "suit, shiny_black"
+	display_name = "suit, shiny black"
 	path = /obj/item/clothing/under/lawyer/black
 	slot = slot_w_uniform
 	cost = 1
@@ -351,7 +351,7 @@ var/global/list/gear_datums = list()
 	cost = 1
 
 /datum/gear/suit_lawyer_blue
-	display_name = "suit, lawyer-blue"
+	display_name = "suit, lawyer blue"
 	path = /obj/item/clothing/under/lawyer/blue
 	slot = slot_w_uniform
 	cost = 1
@@ -381,7 +381,7 @@ var/global/list/gear_datums = list()
 	cost = 1
 
 /datum/gear/suit_executive_female
-	display_name = "suit, female_executive"
+	display_name = "suit, female executive"
 	path = /obj/item/clothing/under/suit_jacket/female
 	slot = slot_w_uniform
 	cost = 1
@@ -411,7 +411,7 @@ var/global/list/gear_datums = list()
 	cost = 1
 
 /datum/gear/suit_lawyer_red
-	display_name = "suit, lawyer_red"
+	display_name = "suit, lawyer red"
 	path = /obj/item/clothing/under/lawyer/red
 	slot = slot_w_uniform
 	cost = 1
@@ -773,7 +773,7 @@ var/global/list/gear_datums = list()
 	slot = slot_gloves
 
 /datum/gear/light_brown_gloves
-	display_name = "gloves, light-brown"
+	display_name = "gloves, light brown"
 	path = /obj/item/clothing/gloves/light_brown
 	cost = 1
 	slot = slot_gloves
