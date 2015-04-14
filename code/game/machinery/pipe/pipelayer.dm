@@ -1,6 +1,6 @@
 /obj/machinery/pipelayer
 
-	name = "Automatic pipe layer"
+	name = "automatic pipe layer"
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "pipe_d"
 	density = 1
@@ -30,7 +30,7 @@
 
 /obj/machinery/pipelayer/attack_hand(mob/user as mob)
 	on=!on
-	visible_message("[src] [!on?"dea":"a"]ctivated.", "[user] [!on?"dea":"a"]ctivated [src].")
+	visible_message("\The [src] [!on?"dea":"a"]ctivated.", "[user] [!on?"dea":"a"]ctivated \the [src].")
 	return
 
 /obj/machinery/pipelayer/attackby(var/obj/item/W as obj, var/mob/user as mob)
@@ -55,7 +55,7 @@
 
 	if(istype(W, /obj/item/weapon/crowbar))
 		a_dis=!a_dis
-		visible_message("[src] auto dismantle [!on?"dea":"a"]ctivated.")
+		visible_message("\The [src] auto dismantle [!on?"dea":"a"]ctivated.")
 		return
 
 	if(istype(W, /obj/item/stack/sheet/metal))
@@ -67,7 +67,7 @@
 		else if(!result)
 			message = "Stack is full."
 		else
-			message = "[result] scheets of metal successfully loaded."
+			message = "[result] schets of metal successfully loaded."
 
 		visible_message("[message]")
 		return
@@ -82,7 +82,7 @@
 				var/obj/item/stack/sheet/metal/MM = new (get_turf(src))
 				MM.amount = m
 		else
-			user.visible_message("\The [src] is empty.")
+			user << "\The [src] is empty."
 		return
 	..()
 
