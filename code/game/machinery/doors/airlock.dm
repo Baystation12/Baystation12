@@ -627,7 +627,7 @@ About the new airlock wires panel:
 				user << "<span class='warning'>Unable to interface: Connection refused.</span>"
 		return STATUS_CLOSE
 
-	return STATUS_INTERACTIVE
+	return ..()
 
 /obj/machinery/door/airlock/Topic(href, href_list, var/nowindow = 0)
 	if(..())
