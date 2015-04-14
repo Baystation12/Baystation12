@@ -57,6 +57,20 @@
 	var/obj/item/clothing/head/helmet/helmet = null   // Deployable helmet, if any.
 	var/obj/item/weapon/tank/tank = null              // Deployable tank, if any.
 
+/obj/item/clothing/suit/space/void/examine(user)
+	..(user)
+	if(boots || helmet || tank)
+		var/D = "Installed equipment: "
+		var/first = 1
+		for(var/obj/item/I in list(helmet,boots,tank))
+			if (I)
+				D += "[first?"":", "]\the [I]\icon[I]"
+				first = 0
+		D += "."
+		user << D
+	if(tank && in_range(src,user))
+		user << "<span class='notice'>The wrist-mounted pressure gauge reads [max(round(tank.air_contents.return_pressure()),0)] kPa remaining in \the [tank].</span>"
+
 /obj/item/clothing/suit/space/void/refit_for_species(var/target_species)
 	..()
 	if(istype(helmet))
@@ -115,7 +129,7 @@
 				boots.canremove = 1
 				H.drop_from_inventory(boots)
 				boots.loc = src
-	
+
 	if(tank)
 		tank.canremove = 1
 		tank.loc = src
