@@ -36,10 +36,10 @@
 		if(damage >= 10)
 			if(src.density)
 				visible_message("<span class='danger'>\The [user] forces \the [src] open!</span>")
-				open()
+				open(1)
 			else
 				visible_message("<span class='danger'>\The [user] forces \the [src] closed!</span>")
-				close()
+				close(1)
 		else
 			visible_message("<span class='notice'>\The [user] strains fruitlessly to force \the [src] [density ? "open" : "closed"].</span>")
 		return
@@ -776,7 +776,7 @@ About the new airlock wires panel:
 			user << "\blue The airlock's motors resist your efforts to force it."
 		else if(locked)
 			user << "\blue The airlock's bolts prevent it from being forced."
-		else if( !welded && !operating )
+		else
 			if(density)
 				spawn(0)	open(1)
 			else
@@ -825,11 +825,8 @@ About the new airlock wires panel:
 	return
 
 /obj/machinery/door/airlock/open(var/forced=0)
-	if(!can_open())
+	if(!can_open(forced))
 		return 0
-	if(!forced)
-		if( !arePowerSystemsOn() || isWireCut(AIRLOCK_WIRE_OPEN_DOOR) )
-			return 0
 	use_power(360)	//360 W seems much more appropriate for an actuator moving an industrial door capable of crushing people
 	if(istype(src, /obj/machinery/door/airlock/glass))
 		playsound(src.loc, 'sound/machines/windowdoor.ogg', 100, 1)
@@ -839,7 +836,11 @@ About the new airlock wires panel:
 		src.closeOther.close()
 	return ..()
 
-/obj/machinery/door/airlock/can_open()
+/obj/machinery/door/airlock/can_open(var/forced=0)
+	if(!forced)
+		if(!arePowerSystemsOn() || isWireCut(AIRLOCK_WIRE_OPEN_DOOR))
+			return 0
+
 	if(locked || welded)
 		return 0
 	return ..()

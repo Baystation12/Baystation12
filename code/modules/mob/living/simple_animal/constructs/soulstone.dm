@@ -1,3 +1,6 @@
+/obj/item/device/soulstone/cultify()
+	return
+
 /obj/item/device/soulstone
 	name = "Soul Stone Shard"
 	icon = 'icons/obj/wizard.dmi'
@@ -8,7 +11,6 @@
 	slot_flags = SLOT_BELT
 	origin_tech = "bluespace=4;materials=4"
 	var/imprinted = "empty"
-
 
 //////////////////////////////Capturing////////////////////////////////////////////////////////
 

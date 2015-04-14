@@ -27,6 +27,11 @@
 		if(A.name == N)
 			return A
 	return 0
+    
+/proc/get_area_master(const/O)
+	var/area/A = get_area(O)
+	if (isarea(A))
+		return A.master
 
 /proc/in_range(source, user)
 	if(get_dist(source, user) <= 1)

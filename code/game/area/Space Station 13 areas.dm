@@ -2025,6 +2025,7 @@ area/space/atmosalert()
 	luminosity = 1
 	lighting_use_dynamic = 0
 	requires_power = 0
+	ambience = list()
 	var/sound/mysound = null
 
 	New()

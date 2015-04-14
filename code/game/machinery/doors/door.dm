@@ -34,6 +34,9 @@
 	dir = EAST
 	var/width = 1
 
+	// turf animation
+	var/atom/movable/overlay/c_animation = null
+
 /obj/machinery/door/attack_generic(var/mob/user, var/damage)
 	if(damage >= 10)
 		visible_message("<span class='danger'>\The [user] smashes into the [src]!</span>")
@@ -385,9 +388,8 @@
 	return
 
 
-/obj/machinery/door/proc/open()
-	if(!can_open()) return
-	if(!operating)	operating = 1
+/obj/machinery/door/proc/open(var/forced = 0)
+	if(!can_open(forced)) return
 
 	do_animate("opening")
 	icon_state = "door0"
@@ -411,8 +413,8 @@
 /obj/machinery/door/proc/next_close_time()
 	return world.time + (normalspeed ? 150 : 5)
 
-/obj/machinery/door/proc/close()
-	if(!can_close())
+/obj/machinery/door/proc/close(var/forced = 0)
+	if(!can_close(forced))
 		return
 	operating = 1
 
