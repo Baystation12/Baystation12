@@ -67,16 +67,17 @@
 		else if(!result)
 			message = "Stack is full."
 		else
-			message = "[result] schets of metal successfully loaded."
+			message = "[result] sheets of metal successfully loaded."
 
 		visible_message("[message]")
 		return
 
 	if(istype(W, /obj/item/weapon/screwdriver))
 		if(metal)
-			var/m = round(input(usr,"Please specify the amount of metal to remove","Remove metal",min(metal,50)) as num, 1)
+			var/m = round(input(usr,"Please specify the amount of metal to remove","Remove metal",min(round(metal),50)) as num, 1)
 			m = min(m, 50)
-			m = min(m, metal)
+			m = min(m, round(metal))
+			m = round(m)
 			if(m)
 				use_metal(m)
 				var/obj/item/stack/sheet/metal/MM = new (get_turf(src))
@@ -97,7 +98,7 @@
 /obj/machinery/pipelayer/proc/load_metal(var/obj/item/stack/sheet/metal/MM)
 	if(istype(MM) && MM.get_amount())
 		var/cur_amount = metal
-		var/to_load = max(max_metal - cur_amount,0)
+		var/to_load = max(max_metal - round(cur_amount),0)
 		if(to_load)
 			to_load = min(MM.get_amount(), to_load)
 			metal += to_load
@@ -109,7 +110,7 @@
 
 /obj/machinery/pipelayer/proc/use_metal(amount)
 	if(!metal || metal<amount)
-		visible_message("Metal depleted. [src] deactivated.")
+		visible_message("Metal depleted. \The [src] deactivated.")
 		return
 	metal-=amount
 	return 1
