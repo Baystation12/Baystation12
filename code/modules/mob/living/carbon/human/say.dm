@@ -3,12 +3,11 @@
 	if(name != GetVoice())
 		alt_name = "(as [get_id_name("Unknown")])"
 
-	if (istype(src.wear_mask, /obj/item/clothing/mask/muzzle))
-		src << "<span class='danger'>You're muzzled and cannot speak!</span>"
-		return
-
 	message = sanitize(message)
-	..(message, alt_name = alt_name)	//ohgod we should really be passing a datum here.
+	..(message, alt_name = alt_name)
+
+/mob/living/carbon/human/is_muzzled()
+	return istype(src.wear_mask, /obj/item/clothing/mask/muzzle)
 
 /mob/living/carbon/human/proc/forcesay(list/append)
 	if(stat == CONSCIOUS)
