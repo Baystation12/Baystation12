@@ -188,7 +188,9 @@
 			if(S.victim == mob)
 				return
 
-	if(mob.stat==2)	return
+	if(mob.stat==2)
+		mob.ghostize()
+		return
 
 	// handle possible Eye movement
 	if(mob.eyeobj)
@@ -198,9 +200,6 @@
 
 	if(isliving(mob))
 		var/mob/living/L = mob
-		if(L.incorporeal_move)//Move though walls
-			Process_Incorpmove(direct)
-			return
 		if(mob.client)
 			if(mob.client.view != world.view) // If mob moves while zoomed in with device, unzoom them.
 				for(var/obj/item/item in mob.contents)
