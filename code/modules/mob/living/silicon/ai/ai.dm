@@ -46,7 +46,7 @@ var/list/ai_verbs_default = list(
 	density = 1
 	status_flags = CANSTUN|CANPARALYSE|CANPUSH
 	shouldnt_see = list(/obj/effect/rune)
-	var/list/network = list("SS13")
+	var/list/network = list("Exodus")
 	var/obj/machinery/camera/camera = null
 	var/list/connected_robots = list()
 	var/aiRestorePowerRoutine = 0
@@ -529,6 +529,8 @@ var/list/ai_verbs_default = list(
 	if(!eyeobj)
 		view_core()
 		return
+
+	src.network = network
 
 	for(var/obj/machinery/camera/C in cameranet.cameras)
 		if(!C.can_use())
