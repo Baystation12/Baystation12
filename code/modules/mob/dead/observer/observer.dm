@@ -482,6 +482,14 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 	src << browse(dat, "window=manifest;size=370x420;can_close=1")
 
+//This is called when a ghost is drag clicked to something.
+/mob/dead/observer/MouseDrop(atom/over)
+	if (isobserver(usr) && usr.client && usr.client.holder && isliving(over))
+		if (usr.client.holder.cmd_ghost_drag(src,over))
+			return
+
+	return ..()
+
 //Used for drawing on walls with blood puddles as a spooky ghost.
 /mob/dead/verb/bloody_doodle()
 
