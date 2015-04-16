@@ -30,7 +30,7 @@
 
 /obj/machinery/pipelayer/attack_hand(mob/user as mob)
 	on=!on
-	visible_message("\The [src] [!on?"dea":"a"]ctivated.", "[user] [!on?"dea":"a"]ctivated \the [src].")
+	user.visible_message("\The [src] [!on?"dea":"a"]ctivated.", "[user] [!on?"dea":"a"]ctivated \the [src].")
 	return
 
 /obj/machinery/pipelayer/attackby(var/obj/item/W as obj, var/mob/user as mob)
@@ -89,7 +89,7 @@
 
 /obj/machinery/pipelayer/examine(mob/user)
 	..()
-	user.visible_message("\The [src] has [metal] sheet\s, is set to produce [P_type_t], and auto-dismantle is [!on?"de":""]activated.")
+	user << "\The [src] has [metal] sheet\s, is set to produce [P_type_t], and auto-dismantle is [!on?"de":""]activated."
 
 /obj/machinery/pipelayer/proc/reset()
 	on=0
