@@ -717,62 +717,59 @@ note dizziness decrements automatically in the mob's Life() proc.
 	//reset the pixel offsets to zero
 	is_floating = 0
 
-/proc/getStatName(var/datum/controller/process/process)
-	return uppertext(copytext(process.name, 1, 4))
-
 /mob/Stat()
 	..()
 
 	if(client && client.holder)
 		if(statpanel("Status"))
-			stat(null,"Location:\t([x], [y], [z])")
-			stat(null,"CPU:\t[world.cpu]")
-			stat(null,"Instances:\t[world.contents.len]")
+			statpanel("Status","Location:","([x], [y], [z])")
+			statpanel("Status","CPU:","[world.cpu]")
+			statpanel("Status","Instances:","[world.contents.len]")
 		if(statpanel("Status") && processScheduler && processScheduler.getIsRunning())
 			var/datum/controller/process/process
 
 			process = processScheduler.getProcess("air")
-			stat(null, "[getStatName(process)]\t - #[process.getTicks()]\t - [process.getLastRunTime()]")
+			statpanel("Status",process.name, "#[process.getTicks()]\t- [process.getLastRunTime()]")
 
 			process = processScheduler.getProcess("alarm")
 			var/list/alarms = alarm_manager.active_alarms()
-			stat(null, "[getStatName(process)]([alarms.len])\t - #[process.getTicks()]\t - [process.getLastRunTime()]")
+			statpanel("Status",process.name+"([alarms.len])","#[process.getTicks()]\t- [process.getLastRunTime()]")
 
 			process = processScheduler.getProcess("disease")
-			stat(null, "[getStatName(process)]([active_diseases.len])\t - #[process.getTicks()]\t - [process.getLastRunTime()]")
+			statpanel("Status",process.name+"([active_diseases.len])","#[process.getTicks()]\t- [process.getLastRunTime()]")
 
 			process = processScheduler.getProcess("garbage")
-			stat(null, "[getStatName(process)]([garbage_collector.destroyed.len])\t - #[process.getTicks()]\t - [process.getLastRunTime()]")
+			statpanel("Status",process.name+"([garbage_collector.destroyed.len])","#[process.getTicks()]\t- [process.getLastRunTime()]")
 
 			process = processScheduler.getProcess("machinery")
-			stat(null, "[getStatName(process)]([machines.len])\t - #[process.getTicks()]\t - [process.getLastRunTime()]")
+			statpanel("Status",process.name+"([machines.len])","#[process.getTicks()]\t- [process.getLastRunTime()]")
 
 			process = processScheduler.getProcess("mob")
-			stat(null, "[getStatName(process)]([mob_list.len])\t - #[process.getTicks()]\t - [process.getLastRunTime()]")
+			statpanel("Status",process.name+"([mob_list.len])","#[process.getTicks()]\t- [process.getLastRunTime()]")
 
 			process = processScheduler.getProcess("nanoui")
-			stat(null, "[getStatName(process)]([nanomanager.processing_uis.len])\t - #[process.getTicks()]\t - [process.getLastRunTime()]")
+			statpanel("Status",process.name+"([nanomanager.processing_uis.len])","t#[process.getTicks()]\t- [process.getLastRunTime()]")
 
 			process = processScheduler.getProcess("lighting")
-			stat(null, "[getStatName(process)]\t - #[process.getTicks()]\t - [process.getLastRunTime()]")
+			statpanel("Status",process.name, "#[process.getTicks()]\t- [process.getLastRunTime()]")
 
 			process = processScheduler.getProcess("obj")
-			stat(null, "[getStatName(process)]([processing_objects.len])\t - #[process.getTicks()]\t - [process.getLastRunTime()]")
+			statpanel("Status",process.name+"([processing_objects.len])","#[process.getTicks()]\t- [process.getLastRunTime()]")
 
 			process = processScheduler.getProcess("pipenet")
-			stat(null, "[getStatName(process)]([pipe_networks.len])\t - #[process.getTicks()]\t - [process.getLastRunTime()]")
+			statpanel("Status",process.name+"([pipe_networks.len])","#[process.getTicks()]\t- [process.getLastRunTime()]")
 
 			process = processScheduler.getProcess("powernet")
-			stat(null, "[getStatName(process)]([powernets.len])\t - #[process.getTicks()]\t - [process.getLastRunTime()]")
+			statpanel("Status",process.name+"([powernets.len])","#[process.getTicks()]\t- [process.getLastRunTime()]")
 
 			process = processScheduler.getProcess("sun")
-			stat(null, "[getStatName(process)]\t - #[process.getTicks()]\t - [process.getLastRunTime()]")
+			statpanel("Status",process.name, "#[process.getTicks()]\t- [process.getLastRunTime()]")
 
 			process = processScheduler.getProcess("ticker")
-			stat(null, "[getStatName(process)]\t - #[process.getTicks()]\t - [process.getLastRunTime()]")
+			statpanel("Status",process.name, "#[process.getTicks()]\t- [process.getLastRunTime()]")
 
 		else
-			stat(null, "processScheduler is not running.")
+			statpanel("Status","processScheduler is not running.")
 
 
 	if(listed_turf && client)
