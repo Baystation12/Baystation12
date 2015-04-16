@@ -52,7 +52,7 @@
 		if(beaker)
 			user << "<span class='notice'>]The [src] is already loaded.</span>"
 		else
-			user.before_take_item(O)
+			user.remove_from_mob(O)
 			O.loc = src
 			beaker = O
 			updateUsrDialog()
@@ -74,6 +74,7 @@
 			if(i < 10)
 				user << "<span class='notice'>You empty \the [O] into \the [src].</span>"
 
+
 	else if(!istype(O, /obj/item/weapon/reagent_containers/food/snacks/grown))
 		user << "<span class='notice'>You cannot put this in \the [src].</span>"
 	else
@@ -83,7 +84,7 @@
 		if(i >= 10)
 			user << "<span class='notice'>\The [src] is full! Activate it.</span>"
 		else
-			user.before_take_item(O)
+			user.remove_from_mob(O)
 			O.loc = src
 			user << "<span class='notice'>You put \the [O] in \the [src]</span>"
 	update_icon()

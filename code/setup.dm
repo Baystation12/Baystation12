@@ -255,6 +255,11 @@
 #define slot_legs        21
 #define slot_tie         22
 
+// Mob sprite sheets. These need to be strings as numbers
+// cannot be used as associative list keys.
+#define icon_l_hand		"slot_l_hand"
+#define icon_r_hand		"slot_r_hand"
+
 // Bitflags for clothing parts.
 #define HEAD        1
 #define FACE        2
@@ -425,10 +430,6 @@
 #define SEC_LEVEL_RED   2
 #define SEC_LEVEL_DELTA 3
 
-// Click cooldowns, in tenths of a second.
-#define CLICK_CD_MELEE 8
-#define CLICK_CD_RANGE 4
-
 #define TRANSITIONEDGE 7 // Distance from edge to move to another z-level.
 
 // A set of constants used to determine which type of mute an admin wishes to apply.
@@ -502,6 +503,7 @@
 #define SALVED           512
 #define ORGAN_DEAD       1024
 #define ORGAN_MUTATED    2048
+#define ORGAN_ASSISTED   4096
 
 // Admin permissions. Please don't edit these values without speaking to Errorage first. ~Carn
 #define R_BUILDMODE     1
@@ -617,22 +619,23 @@ var/list/be_special_flags = list(
 #define GETPULSE_TOOL 1 // More accurate. (med scanner, sleeper, etc.)
 
 // Species flags.
-#define NO_BLOOD       1     // Vessel var is not filled with blood, cannot bleed out.
-#define NO_BREATHE     2     // Cannot suffocate or take oxygen loss.
-#define NO_SCAN        4     // Cannot be scanned in a DNA machine/genome-stolen.
-#define NO_PAIN        8     // Cannot suffer halloss/recieves deceptive health indicator.
-#define NO_SLIP        16    // Cannot fall over.
-#define NO_POISON      32    // Cannot not suffer toxloss.
-#define HAS_SKIN_TONE  64    // Skin tone selectable in chargen. (0-255)
-#define HAS_SKIN_COLOR 128   // Skin colour selectable in chargen. (RGB)
-#define HAS_LIPS       256   // Lips are drawn onto the mob icon. (lipstick)
-#define HAS_UNDERWEAR  512   // Underwear is drawn onto the mob icon.
-#define IS_PLANT       1024  // Is a treeperson.
-#define IS_WHITELISTED 2048  // Must be whitelisted to play.
-#define IS_SYNTHETIC   4096  // Is a machine race.
-#define HAS_EYE_COLOR  8192  // Eye colour selectable in chargen. (RGB)
-#define CAN_JOIN       16384 // Species is selectable in chargen.
-#define IS_RESTRICTED  32768 // Is not a core/normally playable species. (castes, mutantraces)
+#define NO_BLOOD          1     // Vessel var is not filled with blood, cannot bleed out.
+#define NO_BREATHE        2     // Cannot suffocate or take oxygen loss.
+#define NO_SCAN           4     // Cannot be scanned in a DNA machine/genome-stolen.
+#define NO_PAIN           8     // Cannot suffer halloss/recieves deceptive health indicator.
+#define NO_SLIP           16    // Cannot fall over.
+#define NO_POISON         32    // Cannot not suffer toxloss.
+#define HAS_SKIN_TONE     64    // Skin tone selectable in chargen. (0-255)
+#define HAS_SKIN_COLOR    128   // Skin colour selectable in chargen. (RGB)
+#define HAS_LIPS          256   // Lips are drawn onto the mob icon. (lipstick)
+#define HAS_UNDERWEAR     512   // Underwear is drawn onto the mob icon.
+#define IS_PLANT          1024  // Is a treeperson.
+#define IS_WHITELISTED    2048  // Must be whitelisted to play.
+#define IS_SYNTHETIC      4096  // Is a machine race.
+#define HAS_EYE_COLOR     8192  // Eye colour selectable in chargen. (RGB)
+#define CAN_JOIN          16384 // Species is selectable in chargen.
+#define IS_RESTRICTED     32768 // Is not a core/normally playable species. (castes, mutantraces)
+#define REGENERATES_LIMBS 65536 // Attempts to regenerate unamputated limbs.
 
 // Language flags.
 #define WHITELISTED 1   // Language is available if the speaker is whitelisted.
@@ -643,7 +646,7 @@ var/list/be_special_flags = list(
 #define NONGLOBAL   32  // Do not add to general languages list.
 #define INNATE      64  // All mobs can be assumed to speak and understand this language. (audible emotes)
 #define NO_TALK_MSG 128 // Do not show the "\The [speaker] talks into \the [radio]" message
-#define NO_STUTTER 256		// No stuttering, slurring, or other speech problems
+#define NO_STUTTER 256	// No stuttering, slurring, or other speech problems
 
 //Flags for zone sleeping
 #define ZONE_ACTIVE   1
@@ -753,6 +756,7 @@ var/list/be_special_flags = list(
 #define MAX_MESSAGE_LEN       1024
 #define MAX_PAPER_MESSAGE_LEN 3072
 #define MAX_BOOK_MESSAGE_LEN  9216
+#define MAX_LNAME_LEN         64
 #define MAX_NAME_LEN          26
 
 // Event defines.
@@ -775,8 +779,6 @@ var/list/be_special_flags = list(
 //General-purpose life speed define for plants.
 #define HYDRO_SPEED_MULTIPLIER 1
 
-#define NANO_IGNORE_DISTANCE 1
-
 // Robot AI notifications
 #define ROBOT_NOTIFICATION_NEW_UNIT 1
 #define ROBOT_NOTIFICATION_NEW_NAME 2
@@ -787,15 +789,15 @@ var/list/be_special_flags = list(
 
 // Appearance change flags
 #define APPEARANCE_UPDATE_DNA 1
-#define APPEARANCE_RACE	2|APPEARANCE_UPDATE_DNA
-#define APPEARANCE_GENDER 4|APPEARANCE_UPDATE_DNA
+#define APPEARANCE_RACE	(2|APPEARANCE_UPDATE_DNA)
+#define APPEARANCE_GENDER (4|APPEARANCE_UPDATE_DNA)
 #define APPEARANCE_SKIN 8
 #define APPEARANCE_HAIR 16
 #define APPEARANCE_HAIR_COLOR 32
 #define APPEARANCE_FACIAL_HAIR 64
 #define APPEARANCE_FACIAL_HAIR_COLOR 128
 #define APPEARANCE_EYE_COLOR 256
-#define APPEARANCE_ALL_HAIR APPEARANCE_HAIR|APPEARANCE_HAIR_COLOR|APPEARANCE_FACIAL_HAIR|APPEARANCE_FACIAL_HAIR_COLOR
+#define APPEARANCE_ALL_HAIR (APPEARANCE_HAIR|APPEARANCE_HAIR_COLOR|APPEARANCE_FACIAL_HAIR|APPEARANCE_FACIAL_HAIR_COLOR)
 #define APPEARANCE_ALL 511
 
 // Antagonist datum flags.
@@ -836,3 +838,82 @@ var/list/be_special_flags = list(
 
 //Area flags, possibly more to come
 #define RAD_SHIELDED 1 //shielded from radiation, clearly
+
+//intent flags, why wasn't this done the first time?
+#define I_HELP		"help"
+#define I_DISARM	"disarm"
+#define I_GRAB		"grab"
+#define I_HURT		"hurt"
+
+/*
+	These are used Bump() code for living mobs, in the mob_bump_flag, mob_swap_flags, and mob_push_flags vars to determine whom can bump/swap with whom.
+*/
+#define HUMAN 1
+#define MONKEY 2
+#define ALIEN 4
+#define ROBOT 8
+#define SLIME 16
+#define SIMPLE_ANIMAL 32
+
+#define ALLMOBS (HUMAN|MONKEY|ALIEN|ROBOT|SLIME|SIMPLE_ANIMAL)
+
+#define NEXT_MOVE_DELAY 8
+
+#define DROPLIMB_EDGE 0
+#define DROPLIMB_BLUNT 1
+#define DROPLIMB_BURN 2
+
+// Custom layer definitions, supplementing the default TURF_LAYER, MOB_LAYER, etc.
+#define DOOR_OPEN_LAYER 2.7		//Under all objects if opened. 2.7 due to tables being at 2.6
+#define DOOR_CLOSED_LAYER 3.1	//Above most items if closed
+#define OBFUSCATION_LAYER 14	//Where images covering the view for eyes are put
+#define SCREEN_LAYER 17			//Mob HUD/effects layer
+
+
+/////////////////
+////WIZARD //////
+/////////////////
+
+/*		WIZARD SPELL FLAGS		*/
+#define GHOSTCAST		1	//can a ghost cast it?
+#define NEEDSCLOTHES	2	//does it need the wizard garb to cast? Nonwizard spells should not have this
+#define NEEDSHUMAN		4	//does it require the caster to be human?
+#define Z2NOCAST		8	//if this is added, the spell can't be cast at centcomm
+#define STATALLOWED		16	//if set, the user doesn't have to be conscious to cast. Required for ghost spells
+#define IGNOREPREV		32	//if set, each new target does not overlap with the previous one
+//The following flags only affect different types of spell, and therefore overlap
+//Targeted spells
+#define INCLUDEUSER		64	//does the spell include the caster in its target selection?
+#define SELECTABLE		128	//can you select each target for the spell?
+//AOE spells
+#define IGNOREDENSE		64	//are dense turfs ignored in selection?
+#define IGNORESPACE		128	//are space turfs ignored in selection?
+//End split flags
+#define CONSTRUCT_CHECK	256	//used by construct spells - checks for nullrods
+#define NO_BUTTON		512	//spell won't show up in the HUD with this
+
+//invocation
+#define SpI_SHOUT	"shout"
+#define SpI_WHISPER	"whisper"
+#define SpI_EMOTE	"emote"
+#define SpI_NONE	"none"
+
+//upgrading
+#define Sp_SPEED	"speed"
+#define Sp_POWER	"power"
+#define Sp_TOTAL	"total"
+
+//casting costs
+#define Sp_RECHARGE	"recharge"
+#define Sp_CHARGES	"charges"
+#define Sp_HOLDVAR	"holdervar"
+
+///////WIZ END/////////
+
+//singularity defines
+#define STAGE_ONE 	1
+#define STAGE_TWO 	3
+#define STAGE_THREE	5
+#define STAGE_FOUR	7
+#define STAGE_FIVE	9
+#define STAGE_SUPER	11

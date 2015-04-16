@@ -165,9 +165,7 @@
 				return
 
 			user << "\red You slip [W] inside [src]."
-			user.u_equip(W)
-			if ((user.client && user.s_active != src))
-				user.client.screen -= W
+			user.remove_from_mob(W)
 			W.dropped(user)
 			add_fingerprint(user)
 			contents += W
@@ -557,18 +555,6 @@
 	New()
 		..()
 		reagents.add_reagent("protein", 2)
-
-/obj/item/weapon/reagent_containers/food/snacks/flour
-	name = "flour sack"
-	desc = "A big bag of flour. Good for baking!"
-	icon = 'icons/obj/food.dmi'
-	icon_state = "flour"
-	item_state = "flour"
-	New()
-		..()
-		reagents.add_reagent("flour", 30)
-		src.pixel_x = rand(-10.0, 10)
-		src.pixel_y = rand(-10.0, 10)
 
 /obj/item/weapon/reagent_containers/food/snacks/organ
 	name = "organ"
@@ -1576,9 +1562,9 @@
 			surprise.transform *= 0.6
 			surprise.add_blood(M)
 			var/mob/living/carbon/human/H = M
-			var/datum/organ/external/E = H.get_organ("chest")
+			var/obj/item/organ/external/E = H.get_organ("chest")
 			E.fracture()
-			for (var/datum/organ/internal/I in E.internal_organs)
+			for (var/obj/item/organ/I in E.internal_organs)
 				I.take_damage(rand(I.min_bruised_damage, I.min_broken_damage+1))
 
 			if (!E.hidden && prob(60)) //set it snuggly

@@ -332,29 +332,7 @@
 		defer_powernet_rebuild = 1
 	// Let's just make this one loop.
 	for(var/atom/X in orange(pull_radius,src))
-		// Movable atoms only
-		if(istype(X, /atom/movable))
-			if(is_type_in_list(X, uneatable))	continue
-			if(((X) && (!istype(X,/mob/living/carbon/human))))
-				step_towards(X,src)
-				if(istype(X, /obj)) //unanchored objects pulled twice as fast
-					var/obj/O = X
-					if(!O.anchored)
-						step_towards(X,src)
-				else
-					step_towards(X,src)
-				if(istype(X, /obj/structure/window)) //shatter windows
-					var/obj/structure/window/W = X
-					W.ex_act(2.0)
-			else if(istype(X,/mob/living/carbon/human))
-				var/mob/living/carbon/human/H = X
-				if(istype(H.shoes,/obj/item/clothing/shoes/magboots))
-					var/obj/item/clothing/shoes/magboots/M = H.shoes
-					if(M.magpulse)
-						step_towards(H,src) //step just once with magboots
-						continue
-				step_towards(H,src) //step twice
-				step_towards(H,src)
+		X.singularity_pull(src, STAGE_FIVE)
 
 	if(defer_powernet_rebuild != 2)
 		defer_powernet_rebuild = 0

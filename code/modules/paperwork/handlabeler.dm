@@ -58,7 +58,7 @@
 	if(mode)
 		user << "<span class='notice'>You turn on \the [src].</span>"
 		//Now let them chose the text.
-		var/str = copytext(reject_bad_text(input(user,"Label text?","Set label","")),1,MAX_NAME_LEN)
+		var/str = sanitizeSafe(input(user,"Label text?","Set label",""), MAX_NAME_LEN)
 		if(!str || !length(str))
 			user << "<span class='notice'>Invalid text.</span>"
 			return

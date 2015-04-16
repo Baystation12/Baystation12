@@ -236,6 +236,9 @@
 		H.g_eyes = hex2num(getblock(structure,9,3))
 		H.b_eyes = hex2num(getblock(structure,10,3))
 
+		if(H.internal_organs_by_name["eyes"])
+			H.update_eyes()
+
 		if (isblockon(getblock(structure, 11,3),11 , 1))
 			H.gender = FEMALE
 		else

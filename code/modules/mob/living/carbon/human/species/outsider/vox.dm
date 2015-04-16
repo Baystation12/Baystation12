@@ -30,7 +30,7 @@
 	poison_type = "oxygen"
 	siemens_coefficient = 0.2
 
-	flags = IS_WHITELISTED | NO_SCAN | HAS_EYE_COLOR
+	flags = CAN_JOIN | IS_WHITELISTED | NO_SCAN | HAS_EYE_COLOR
 
 	blood_color = "#2299FC"
 	flesh_color = "#808D11"
@@ -42,56 +42,14 @@
 		)
 
 	has_organ = list(
-		"heart" =    /datum/organ/internal/heart,
-		"lungs" =    /datum/organ/internal/lungs,
-		"liver" =    /datum/organ/internal/liver,
-		"kidneys" =  /datum/organ/internal/kidney,
-		"brain" =    /datum/organ/internal/brain,
-		"eyes" =     /datum/organ/internal/eyes,
-		"stack" =    /datum/organ/internal/stack/vox
+		"heart" =    /obj/item/organ/heart,
+		"lungs" =    /obj/item/organ/lungs,
+		"liver" =    /obj/item/organ/liver,
+		"kidneys" =  /obj/item/organ/kidneys,
+		"brain" =    /obj/item/organ/brain,
+		"eyes" =     /obj/item/organ/eyes
 		)
 
 /datum/species/vox/get_random_name(var/gender)
 	var/datum/language/species_language = all_languages[default_language]
 	return species_language.get_random_name(gender)
-
-/datum/species/vox/armalis
-	name = "Vox Armalis"
-	name_plural = "Vox"
-	icobase = 'icons/mob/human_races/r_armalis.dmi'
-	deform = 'icons/mob/human_races/r_armalis.dmi'
-	rarity_value = 10
-
-	warning_low_pressure = 50
-	hazard_low_pressure = 0
-
-	cold_level_1 = 80
-	cold_level_2 = 50
-	cold_level_3 = 0
-
-	heat_level_1 = 2000
-	heat_level_2 = 3000
-	heat_level_3 = 4000
-
-	brute_mod = 0.2
-	burn_mod = 0.2
-
-	eyes = "blank_eyes"
-	breath_type = "nitrogen"
-	poison_type = "oxygen"
-
-	flags = IS_RESTRICTED | NO_SCAN | NO_BLOOD | NO_PAIN | HAS_EYE_COLOR
-
-	blood_color = "#2299FC"
-	flesh_color = "#808D11"
-
-	tail = "armalis_tail"
-	icon_template = 'icons/mob/human_races/r_armalis.dmi'
-
-	reagent_tag = IS_VOX
-
-	inherent_verbs = list(
-		/mob/living/carbon/human/proc/leap,
-		/mob/living/carbon/human/proc/gut,
-		/mob/living/carbon/human/proc/commune
-		)

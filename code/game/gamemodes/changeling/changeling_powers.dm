@@ -213,7 +213,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 				src << "<span class='notice'>We stab [T] with the proboscis.</span>"
 				src.visible_message("<span class='danger'>[src] stabs [T] with the proboscis!</span>")
 				T << "<span class='danger'>You feel a sharp stabbing pain!</span>"
-				var/datum/organ/external/affecting = T.get_organ(src.zone_sel.selecting)
+				var/obj/item/organ/external/affecting = T.get_organ(src.zone_sel.selecting)
 				if(affecting.take_damage(39,0,1,0,"large organic needle"))
 					T:UpdateDamageIcon()
 
@@ -388,13 +388,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	del(animation)
 
 	for(var/obj/item/W in src)
-		C.u_equip(W)
-		if (C.client)
-			C.client.screen -= W
-		if (W)
-			W.loc = C.loc
-			W.dropped(C)
-			W.layer = initial(W.layer)
+		C.drop_from_inventory(W)
 
 	var/mob/living/carbon/human/O = new /mob/living/carbon/human( src )
 	if (C.dna.GetUIState(DNA_UI_GENDER))
@@ -469,7 +463,6 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 
 			// sending display messages
 			C << "<span class='notice'>We have regenerated.</span>"
-			C.visible_message("<span class='warning'>[src] appears to wake from the dead, having healed all wounds.</span>")
 
 
 	feedback_add_details("changeling_powers","FD")

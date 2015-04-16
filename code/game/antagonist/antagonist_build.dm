@@ -28,11 +28,13 @@
 	// This could use work.
 	if(flags & ANTAG_CLEAR_EQUIPMENT)
 		for(var/obj/item/thing in player.contents)
-			del(thing)
+			player.drop_from_inventory(thing)
+			if(thing.loc != player)
+				del(thing)
 	return 1
 
 	if(flags & ANTAG_SET_APPEARANCE)
-		player.change_appearance(APPEARANCE_ALL, player, player, valid_species)
+		player.change_appearance(APPEARANCE_ALL, player.loc, player, valid_species, state = z_state)
 
 /datum/antagonist/proc/unequip(var/mob/living/carbon/human/player)
 	if(!istype(player))
@@ -80,6 +82,7 @@
 /datum/antagonist/proc/create_id(var/assignment, var/mob/living/carbon/human/player)
 
 	var/obj/item/weapon/card/id/W = new id_type(player)
+	if(!W) return
 	W.name = "[player.real_name]'s ID Card"
 	W.access |= default_access
 	W.assignment = "[assignment]"

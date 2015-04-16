@@ -53,6 +53,9 @@ datum/nano_item_lists
 	var/uplink_owner = null//text-only
 	var/used_TC = 0
 
+/obj/item/device/uplink/nano_host()
+	return loc
+
 /obj/item/device/uplink/New()
 	..()
 	welcome = ticker.mode.uplink_welcome
@@ -219,7 +222,7 @@ datum/nano_item_lists
 	if (!ui)
 		// the ui does not exist, so we'll create a new() one
         // for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
-		ui = new(user, src, ui_key, "uplink.tmpl", title, 450, 600)
+		ui = new(user, src, ui_key, "uplink.tmpl", title, 450, 600, state = inventory_state)
 		// when the ui is first opened this is the data it will use
 		ui.set_initial_data(data)
 		// open the new ui window

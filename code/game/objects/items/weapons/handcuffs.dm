@@ -74,16 +74,16 @@ var/last_chew = 0
 
 	var/mob/living/carbon/human/H = A
 	if (!H.handcuffed) return
-	if (H.a_intent != "hurt") return
+	if (H.a_intent != I_HURT) return
 	if (H.zone_sel.selecting != "mouth") return
 	if (H.wear_mask) return
 	if (istype(H.wear_suit, /obj/item/clothing/suit/straight_jacket)) return
 
-	var/datum/organ/external/O = H.organs_by_name[H.hand?"l_hand":"r_hand"]
+	var/obj/item/organ/external/O = H.organs_by_name[H.hand?"l_hand":"r_hand"]
 	if (!O) return
 
-	var/s = "\red [H.name] chews on \his [O.display_name]!"
-	H.visible_message(s, "\red You chew on your [O.display_name]!")
+	var/s = "\red [H.name] chews on \his [O.name]!"
+	H.visible_message(s, "\red You chew on your [O.name]!")
 	H.attack_log += text("\[[time_stamp()]\] <font color='red'>[s] ([H.ckey])</font>")
 	log_attack("[s] ([H.ckey])")
 

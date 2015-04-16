@@ -1,3 +1,6 @@
+/obj/item/device/soulstone/cultify()
+	return
+
 /obj/item/device/soulstone
 	name = "Soul Stone Shard"
 	icon = 'icons/obj/wizard.dmi'
@@ -8,7 +11,6 @@
 	slot_flags = SLOT_BELT
 	origin_tech = "bluespace=4;materials=4"
 	var/imprinted = "empty"
-
 
 //////////////////////////////Capturing////////////////////////////////////////////////////////
 
@@ -86,7 +88,14 @@
 	name = "empty shell"
 	icon = 'icons/obj/wizard.dmi'
 	icon_state = "construct"
-	desc = "A wicked machine used by those skilled in magical arts. It is inactive"
+	desc = "A wicked machine used by those skilled in magical arts. It is inactive."
+
+/obj/structure/constructshell/cultify()
+	return
+
+/obj/structure/constructshell/cult
+	icon_state = "construct-cult"
+	desc = "This eerie contraption looks like it would come alive if supplied with a missing ingredient."
 
 /obj/structure/constructshell/attackby(obj/item/O as obj, mob/user as mob)
 	if(istype(O, /obj/item/device/soulstone))

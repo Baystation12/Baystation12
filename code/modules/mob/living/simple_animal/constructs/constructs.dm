@@ -1,4 +1,3 @@
-
 /mob/living/simple_animal/construct
 	name = "Construct"
 	real_name = "Construct"
@@ -6,15 +5,16 @@
 	speak_emote = list("hisses")
 	emote_hear = list("wails","screeches")
 	response_help  = "thinks better of touching"
-	response_disarm = "flails at"
-	response_harm   = "punches"
+	response_disarm = "flailed at"
+	response_harm   = "punched"
 	icon_dead = "shade_dead"
 	speed = -1
-	a_intent = "harm"
+	a_intent = I_HURT
 	stop_automated_movement = 1
 	status_flags = CANPUSH
-	universal_speak = 1
-	attack_sound = 'sound/weapons/punch1.ogg'
+	universal_speak = 0
+	universal_understand = 1
+	attack_sound = 'sound/weapons/spiderlunge.ogg'
 	min_oxy = 0
 	max_oxy = 0
 	min_tox = 0
@@ -24,15 +24,29 @@
 	min_n2 = 0
 	max_n2 = 0
 	minbodytemp = 0
+	show_stat_health = 1
 	faction = "cult"
+	supernatural = 1
+	var/nullblock = 0
+
+	mob_swap_flags = HUMAN|SIMPLE_ANIMAL|SLIME|MONKEY
+	mob_push_flags = ALLMOBS
+
 	var/list/construct_spells = list()
+
+/mob/living/simple_animal/construct/cultify()
+	return
 
 /mob/living/simple_animal/construct/New()
 	..()
 	name = text("[initial(name)] ([rand(1, 1000)])")
 	real_name = name
+	add_language("Cult")
+	add_language("Occult")
 	for(var/spell in construct_spells)
-		spell_list += new spell(src)
+		src.add_spell(new spell, "const_spell_ready")
+	updateicon()
+	add_glow()
 
 /mob/living/simple_animal/construct/death()
 	new /obj/item/weapon/ectoplasm (src.loc)
@@ -40,12 +54,11 @@
 	ghostize()
 	del src
 
-
 /mob/living/simple_animal/construct/attack_generic(var/mob/user)
 	if(istype(user, /mob/living/simple_animal/construct/builder))
 		if(health < maxHealth)
 			adjustBruteLoss(-5)
-			user.visible_message("<b>\The [user]</b> mends some of \the [src]'s wounds.")
+			user.visible_message("<span class='notice'>\The [user]</b> mends some of \the [src]'s wounds.</span>")
 		else
 			user << "<span class='notice'>\The [src] is undamaged.</span>"
 		return
@@ -53,7 +66,7 @@
 
 /mob/living/simple_animal/construct/examine(mob/user)
 	..(user)
-	var/msg = ""
+	var/msg = "<span cass='info'>*---------*\nThis is \icon[src] \a <EM>[src]</EM>!\n"
 	if (src.health < src.maxHealth)
 		msg += "<span class='warning'>"
 		if (src.health >= src.maxHealth/2)
@@ -64,54 +77,12 @@
 	msg += "*---------*</span>"
 
 	user << msg
-	return
-
-/mob/living/simple_animal/construct/Bump(atom/movable/AM as mob|obj, yes)
-	if ((!( yes ) || now_pushing))
-		return
-	now_pushing = 1
-	if(ismob(AM))
-		var/mob/tmob = AM
-		if(!(tmob.status_flags & CANPUSH))
-			now_pushing = 0
-			return
-
-		tmob.LAssailant = src
-	now_pushing = 0
-	..()
-	if (!istype(AM, /atom/movable))
-		return
-	if (!( now_pushing ))
-		now_pushing = 1
-		if (!( AM.anchored ))
-			var/t = get_dir(src, AM)
-			if (istype(AM, /obj/structure/window))
-				var/obj/structure/window/W = AM
-				if(W.is_full_window())
-					for(var/obj/structure/window/win in get_step(AM,t))
-						now_pushing = 0
-						return
-			step(AM, t)
-		now_pushing = null
-
-/mob/living/simple_animal/construct/attackby(var/obj/item/O as obj, var/mob/user as mob)
-	if(O.force)
-		var/damage = O.force
-		if (O.damtype == HALLOSS)
-			damage = 0
-		adjustBruteLoss(damage)
-		for(var/mob/M in viewers(src, null))
-			if ((M.client && !( M.blinded )))
-				M.show_message("\red \b [src] has been attacked with [O] by [user]. ")
-	else
-		usr << "\red This weapon is ineffective, it does no damage."
-		for(var/mob/M in viewers(src, null))
-			if ((M.client && !( M.blinded )))
-				M.show_message("\red [user] gently taps [src] with [O]. ")
-
 
 
 /////////////////Juggernaut///////////////
+
+
+
 /mob/living/simple_animal/construct/armoured
 	name = "Juggernaut"
 	real_name = "Juggernaut"
@@ -128,31 +99,11 @@
 	attacktext = "smashed their armoured gauntlet into"
 	mob_size = 20
 	speed = 3
-	wall_smash = 1
-	attack_sound = 'sound/weapons/punch3.ogg'
+	environment_smash = 2
+	attack_sound = 'sound/weapons/heavysmash.ogg'
 	status_flags = 0
-	construct_spells = list(/obj/effect/proc_holder/spell/aoe_turf/conjure/lesserforcewall)
-
-/mob/living/simple_animal/construct/armoured/attackby(var/obj/item/O as obj, var/mob/user as mob)
-	if(O.force)
-		if(O.force >= 11)
-			var/damage = O.force
-			if (O.damtype == HALLOSS)
-				damage = 0
-			adjustBruteLoss(damage)
-			for(var/mob/M in viewers(src, null))
-				if ((M.client && !( M.blinded )))
-					M.show_message("\red \b [src] has been attacked with [O] by [user]. ")
-		else
-			for(var/mob/M in viewers(src, null))
-				if ((M.client && !( M.blinded )))
-					M.show_message("\red \b [O] bounces harmlessly off of [src]. ")
-	else
-		usr << "\red This weapon is ineffective, it does no damage."
-		for(var/mob/M in viewers(src, null))
-			if ((M.client && !( M.blinded )))
-				M.show_message("\red [user] gently taps [src] with [O]. ")
-
+	resistance = 10
+	construct_spells = list(/spell/aoe_turf/conjure/forcewall/lesser)
 
 /mob/living/simple_animal/construct/armoured/Life()
 	weakened = 0
@@ -163,8 +114,8 @@
 		var/reflectchance = 80 - round(P.damage/3)
 		if(prob(reflectchance))
 			adjustBruteLoss(P.damage * 0.5)
-			visible_message("<span class='danger'>\The [P] was reflected by \the [src]'s shell!</span>", \
-							"<span class='userdanger'>\The [P] was reflected by \the [src]'s shell!</span>")
+			visible_message("<span class='danger'>The [P.name] gets reflected by [src]'s shell!</span>", \
+							"<span class='userdanger'>The [P.name] gets reflected by [src]'s shell!</span>")
 
 			// Find a turf near or on the original location to bounce to
 			if(P.starting)
@@ -198,10 +149,10 @@
 	melee_damage_upper = 25
 	attacktext = "slashed"
 	speed = -1
+	environment_smash = 1
 	see_in_dark = 7
-	attack_sound = 'sound/weapons/bladeslice.ogg'
-	construct_spells = list(/obj/effect/proc_holder/spell/targeted/ethereal_jaunt/shift)
-
+	attack_sound = 'sound/weapons/rapidslice.ogg'
+	construct_spells = list(/spell/targeted/ethereal_jaunt/shift)
 
 
 /////////////////////////////Artificer/////////////////////////
@@ -217,18 +168,20 @@
 	icon_living = "artificer"
 	maxHealth = 50
 	health = 50
-	response_harm = "viciously beats"
+	response_harm = "viciously beaten"
 	harm_intent_damage = 5
 	melee_damage_lower = 5
 	melee_damage_upper = 5
 	attacktext = "rammed"
 	speed = 0
-	wall_smash = 1
-	attack_sound = 'sound/weapons/punch2.ogg'
-	construct_spells = list(/obj/effect/proc_holder/spell/aoe_turf/conjure/construct/lesser,
-							/obj/effect/proc_holder/spell/aoe_turf/conjure/wall,
-							/obj/effect/proc_holder/spell/aoe_turf/conjure/floor,
-							/obj/effect/proc_holder/spell/aoe_turf/conjure/soulstone,)
+	environment_smash = 1
+	attack_sound = 'sound/weapons/rapidslice.ogg'
+	construct_spells = list(/spell/aoe_turf/conjure/construct/lesser,
+							/spell/aoe_turf/conjure/wall,
+							/spell/aoe_turf/conjure/floor,
+							/spell/aoe_turf/conjure/soulstone,
+							/spell/aoe_turf/conjure/pylon
+							)
 
 
 /////////////////////////////Behemoth/////////////////////////
@@ -244,66 +197,138 @@
 	maxHealth = 750
 	health = 750
 	speak_emote = list("rumbles")
-	response_harm   = "harmlessly punches"
+	response_harm   = "harmlessly punched"
 	harm_intent_damage = 0
 	melee_damage_lower = 50
 	melee_damage_upper = 50
 	attacktext = "brutally crushed"
 	speed = 5
-	wall_smash = 1
-	attack_sound = 'sound/weapons/punch4.ogg'
-	mob_size = 20
+	environment_smash = 2
+	attack_sound = 'sound/weapons/heavysmash.ogg'
+	resistance = 10
 	var/energy = 0
 	var/max_energy = 1000
+	construct_spells = list(/spell/aoe_turf/conjure/forcewall/lesser)
 
-/mob/living/simple_animal/construct/behemoth/attackby(var/obj/item/O as obj, var/mob/user as mob)
-	if(O.force)
-		if(O.force >= 11)
-			var/damage = O.force
-			if (O.damtype == HALLOSS)
-				damage = 0
-			adjustBruteLoss(damage)
-			for(var/mob/M in viewers(src, null))
-				if ((M.client && !( M.blinded )))
-					M.show_message("\red \b [src] has been attacked with [O] by [user]. ")
-		else
-			for(var/mob/M in viewers(src, null))
-				if ((M.client && !( M.blinded )))
-					M.show_message("\red \b [O] bounces harmlessly off of [src]. ")
-	else
-		usr << "\red This weapon is ineffective, it does no damage."
-		for(var/mob/M in viewers(src, null))
-			if ((M.client && !( M.blinded )))
-				M.show_message("\red [user] gently taps [src] with [O]. ")
+////////////////////////Harvester////////////////////////////////
 
 
 
-////////////////Powers//////////////////
+/mob/living/simple_animal/construct/harvester
+	name = "Harvester"
+	real_name = "Harvester"
+	desc = "The promised reward of the livings who follow narsie. Obtained by offering their bodies to the geometer of blood"
+	icon = 'icons/mob/mob.dmi'
+	icon_state = "harvester"
+	icon_living = "harvester"
+	maxHealth = 150
+	health = 150
+	melee_damage_lower = 25
+	melee_damage_upper = 25
+	attacktext = "violently stabbed"
+	speed = -1
+	environment_smash = 1
+	see_in_dark = 7
+	attack_sound = 'sound/weapons/pierce.ogg'
+
+	construct_spells = list(
+			/spell/targeted/harvest,
+			/spell/aoe_turf/knock/harvester,
+			/spell/rune_write
+		)
+
+////////////////Glow//////////////////
+/mob/living/simple_animal/construct/proc/add_glow()
+	overlays = 0
+	var/overlay_layer = LIGHTING_LAYER+1
+	if(layer != MOB_LAYER)
+		overlay_layer=TURF_LAYER+0.2
+
+	overlays += image(icon,"glow-[icon_state]",overlay_layer)
+
+////////////////HUD//////////////////////
+
+/mob/living/simple_animal/construct/Life()
+	. = ..()
+	if(.)
+		if(fire)
+			if(fire_alert)							fire.icon_state = "fire1"
+			else									fire.icon_state = "fire0"
+		if(pullin)
+			if(pulling)								pullin.icon_state = "pull1"
+			else									pullin.icon_state = "pull0"
+
+		if(purged)
+			if(purge > 0)							purged.icon_state = "purge1"
+			else									purged.icon_state = "purge0"
+
+		silence_spells(purge)
+
+/mob/living/simple_animal/construct/armoured/Life()
+	..()
+	if(healths)
+		switch(health)
+			if(250 to INFINITY)		healths.icon_state = "juggernaut_health0"
+			if(208 to 249)			healths.icon_state = "juggernaut_health1"
+			if(167 to 207)			healths.icon_state = "juggernaut_health2"
+			if(125 to 166)			healths.icon_state = "juggernaut_health3"
+			if(84 to 124)			healths.icon_state = "juggernaut_health4"
+			if(42 to 83)			healths.icon_state = "juggernaut_health5"
+			if(1 to 41)				healths.icon_state = "juggernaut_health6"
+			else					healths.icon_state = "juggernaut_health7"
 
 
-/*
-/client/proc/summon_cultist()
-	set category = "Behemoth"
-	set name = "Summon Cultist (300)"
-	set desc = "Teleport a cultist to your location"
-	if (istype(usr,/mob/living/simple_animal/constructbehemoth))
+/mob/living/simple_animal/construct/behemoth/Life()
+	..()
+	if(healths)
+		switch(health)
+			if(750 to INFINITY)		healths.icon_state = "juggernaut_health0"
+			if(625 to 749)			healths.icon_state = "juggernaut_health1"
+			if(500 to 624)			healths.icon_state = "juggernaut_health2"
+			if(375 to 499)			healths.icon_state = "juggernaut_health3"
+			if(250 to 374)			healths.icon_state = "juggernaut_health4"
+			if(125 to 249)			healths.icon_state = "juggernaut_health5"
+			if(1 to 124)			healths.icon_state = "juggernaut_health6"
+			else					healths.icon_state = "juggernaut_health7"
 
-		if(usr.energy<300)
-			usr << "\red You do not have enough power stored!"
-			return
+/mob/living/simple_animal/construct/builder/Life()
+	..()
+	if(healths)
+		switch(health)
+			if(50 to INFINITY)		healths.icon_state = "artificer_health0"
+			if(42 to 49)			healths.icon_state = "artificer_health1"
+			if(34 to 41)			healths.icon_state = "artificer_health2"
+			if(26 to 33)			healths.icon_state = "artificer_health3"
+			if(18 to 25)			healths.icon_state = "artificer_health4"
+			if(10 to 17)			healths.icon_state = "artificer_health5"
+			if(1 to 9)				healths.icon_state = "artificer_health6"
+			else					healths.icon_state = "artificer_health7"
 
-		if(usr.stat)
-			return
 
-		usr.energy -= 300
-	var/list/mob/living/cultists = new
-	for(var/datum/mind/H in ticker.mode.cult)
-		if (istype(H.current,/mob/living))
-			cultists+=H.current
-			var/mob/cultist = input("Choose the one who you want to summon", "Followers of Geometer") as null|anything in (cultists - usr)
-			if(!cultist)
-				return
-			if (cultist == usr) //just to be sure.
-				return
-			cultist.loc = usr.loc
-			usr.visible_message("/red [cultist] appears in a flash of red light as [usr] glows with power")*/
+
+/mob/living/simple_animal/construct/wraith/Life()
+	..()
+	if(healths)
+		switch(health)
+			if(75 to INFINITY)		healths.icon_state = "wraith_health0"
+			if(62 to 74)			healths.icon_state = "wraith_health1"
+			if(50 to 61)			healths.icon_state = "wraith_health2"
+			if(37 to 49)			healths.icon_state = "wraith_health3"
+			if(25 to 36)			healths.icon_state = "wraith_health4"
+			if(12 to 24)			healths.icon_state = "wraith_health5"
+			if(1 to 11)				healths.icon_state = "wraith_health6"
+			else					healths.icon_state = "wraith_health7"
+
+
+/mob/living/simple_animal/construct/harvester/Life()
+	..()
+	if(healths)
+		switch(health)
+			if(150 to INFINITY)		healths.icon_state = "harvester_health0"
+			if(125 to 149)			healths.icon_state = "harvester_health1"
+			if(100 to 124)			healths.icon_state = "harvester_health2"
+			if(75 to 99)			healths.icon_state = "harvester_health3"
+			if(50 to 74)			healths.icon_state = "harvester_health4"
+			if(25 to 49)			healths.icon_state = "harvester_health5"
+			if(1 to 24)				healths.icon_state = "harvester_health6"
+			else					healths.icon_state = "harvester_health7"

@@ -237,7 +237,7 @@
 					src << "\red It becomes hard to see for some reason."
 					eye_blurry = 10
 			if(getBrainLoss() >= 35)
-				if(7 <= rn && rn <= 9) if(hand && equipped())
+				if(7 <= rn && rn <= 9) if(get_active_hand())
 					src << "\red Your hand won't respond properly, you drop what you're holding."
 					drop_item()
 			if(getBrainLoss() >= 50)
@@ -276,7 +276,7 @@
 		radiation = Clamp(radiation,0,100)
 
 		if (radiation)
-			var/datum/organ/internal/diona/nutrients/rad_organ = locate() in internal_organs
+			var/obj/item/organ/diona/nutrients/rad_organ = locate() in internal_organs
 			if(rad_organ && !rad_organ.is_broken())
 				var/rads = radiation/25
 				radiation -= rads
@@ -323,7 +323,7 @@
 				adjustToxLoss(damage * RADIATION_SPEED_COEFFICIENT)
 				updatehealth()
 				if(organs.len)
-					var/datum/organ/external/O = pick(organs)
+					var/obj/item/organ/external/O = pick(organs)
 					if(istype(O)) O.add_autopsy_data("Radiation Poisoning", damage)
 
 	/** breathing **/
@@ -388,8 +388,8 @@
 
 		// Lung damage increases the minimum safe pressure.
 		if(species.has_organ["lungs"])
-			var/datum/organ/internal/lungs/L = internal_organs_by_name["lungs"]
-			if(!L)
+			var/obj/item/organ/lungs/L = internal_organs_by_name["lungs"]
+			if(isnull(L))
 				safe_pressure_min = INFINITY //No lungs, how are you breathing?
 			else if(L.is_broken())
 				safe_pressure_min *= 1.5
@@ -871,7 +871,7 @@
 
 		if(status_flags & GODMODE)	return 0	//godmode
 
-		var/datum/organ/internal/diona/node/light_organ = locate() in internal_organs
+		var/obj/item/organ/diona/node/light_organ = locate() in internal_organs
 		if(light_organ && !light_organ.is_broken())
 			var/light_amount = 0 //how much light there is in the place, affects receiving nutrition and healing
 			if(isturf(loc)) //else, there's considered to be no light
@@ -1503,7 +1503,7 @@
 		if(pulse == PULSE_NONE || !species.has_organ["heart"])
 			return
 
-		var/datum/organ/internal/heart/H = internal_organs_by_name["heart"]
+		var/obj/item/organ/heart/H = internal_organs_by_name["heart"]
 
 		if(!H || H.robotic >=2 )
 			return

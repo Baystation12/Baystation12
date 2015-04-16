@@ -117,77 +117,6 @@
 /mob/proc/restrained()
 	return
 
-//This proc is called whenever someone clicks an inventory ui slot.
-/mob/proc/attack_ui(slot)
-	var/obj/item/W = get_active_hand()
-	if(istype(W))
-		equip_to_slot_if_possible(W, slot)
-
-/mob/proc/put_in_any_hand_if_possible(obj/item/W as obj, del_on_fail = 0, disable_warning = 1, redraw_mob = 1)
-	if(equip_to_slot_if_possible(W, slot_l_hand, del_on_fail, disable_warning, redraw_mob))
-		return 1
-	else if(equip_to_slot_if_possible(W, slot_r_hand, del_on_fail, disable_warning, redraw_mob))
-		return 1
-	return 0
-
-//This is a SAFE proc. Use this instead of equip_to_slot()!
-//set del_on_fail to have it delete W if it fails to equip
-//set disable_warning to disable the 'you are unable to equip that' warning.
-//unset redraw_mob to prevent the mob from being redrawn at the end.
-/mob/proc/equip_to_slot_if_possible(obj/item/W as obj, slot, del_on_fail = 0, disable_warning = 0, redraw_mob = 1)
-	if(!istype(W)) return 0
-
-	if(!W.mob_can_equip(src, slot))
-		if(del_on_fail)
-			del(W)
-		else
-			if(!disable_warning)
-				src << "\red You are unable to equip that." //Only print if del_on_fail is false
-		return 0
-
-	equip_to_slot(W, slot, redraw_mob) //This proc should not ever fail.
-	return 1
-
-//This is an UNSAFE proc. It merely handles the actual job of equipping. All the checks on whether you can or can't eqip need to be done before! Use mob_can_equip() for that task.
-//In most cases you will want to use equip_to_slot_if_possible()
-/mob/proc/equip_to_slot(obj/item/W as obj, slot)
-	return
-
-//This is just a commonly used configuration for the equip_to_slot_if_possible() proc, used to equip people when the rounds tarts and when events happen and such.
-/mob/proc/equip_to_slot_or_del(obj/item/W as obj, slot)
-	return equip_to_slot_if_possible(W, slot, 1, 1, 0)
-
-//The list of slots by priority. equip_to_appropriate_slot() uses this list. Doesn't matter if a mob type doesn't have a slot.
-var/list/slot_equipment_priority = list( \
-		slot_back,\
-		slot_wear_id,\
-		slot_w_uniform,\
-		slot_wear_suit,\
-		slot_wear_mask,\
-		slot_head,\
-		slot_shoes,\
-		slot_gloves,\
-		slot_l_ear,\
-		slot_r_ear,\
-		slot_glasses,\
-		slot_belt,\
-		slot_s_store,\
-		slot_tie,\
-		slot_l_store,\
-		slot_r_store\
-	)
-
-//puts the item "W" into an appropriate slot in a human's inventory
-//returns 0 if it cannot, 1 if successful
-/mob/proc/equip_to_appropriate_slot(obj/item/W)
-	if(!istype(W)) return 0
-
-	for(var/slot in slot_equipment_priority)
-		if(equip_to_slot_if_possible(W, slot, del_on_fail=0, disable_warning=1, redraw_mob=1))
-			return 1
-
-	return 0
-
 /mob/proc/reset_view(atom/A)
 	if (client)
 		if (istype(A, /atom/movable))
@@ -334,7 +263,6 @@ var/list/slot_equipment_priority = list( \
 	set name = "Add Note"
 	set category = "IC"
 
-	msg = copytext(msg, 1, MAX_MESSAGE_LEN)
 	msg = sanitize(msg)
 
 	if(mind)
@@ -589,8 +517,8 @@ var/list/slot_equipment_priority = list( \
 		var/mob/living/carbon/human/H = src
 		if(H.health - H.halloss <= config.health_threshold_softcrit)
 			for(var/name in H.organs_by_name)
-				var/datum/organ/external/e = H.organs_by_name[name]
-				if(H.lying)
+				var/obj/item/organ/external/e = H.organs_by_name[name]
+				if(e && H.lying)
 					if(((e.status & ORGAN_BROKEN && !(e.status & ORGAN_SPLINTED)) || e.status & ORGAN_BLEEDING) && (H.getBruteLoss() + H.getFireLoss() >= 100))
 						return 1
 						break
@@ -800,27 +728,33 @@ note dizziness decrements automatically in the mob's Life() proc.
 			stat(null,"Location:\t([x], [y], [z])")
 			stat(null,"CPU:\t[world.cpu]")
 			stat(null,"Instances:\t[world.contents.len]")
-		if(statpanel("Status") && processScheduler.getIsRunning())
+		if(statpanel("Status") && processScheduler && processScheduler.getIsRunning())
 			var/datum/controller/process/process
 
-			process = processScheduler.getProcess("ticker")
-			stat(null, "[getStatName(process)]\t - #[process.getTicks()]\t - [process.getLastRunTime()]")
-
 			process = processScheduler.getProcess("air")
-			stat(null, "[getStatName(process)]\t - #[process.getTicks()]\t - [process.getLastRunTime()]")
-
-			process = processScheduler.getProcess("lighting")
 			stat(null, "[getStatName(process)]\t - #[process.getTicks()]\t - [process.getLastRunTime()]")
 
 			process = processScheduler.getProcess("alarm")
 			var/list/alarms = alarm_manager.active_alarms()
 			stat(null, "[getStatName(process)]([alarms.len])\t - #[process.getTicks()]\t - [process.getLastRunTime()]")
 
-			process = processScheduler.getProcess("mob")
-			stat(null, "[getStatName(process)]([mob_list.len])\t - #[process.getTicks()]\t - [process.getLastRunTime()]")
+			process = processScheduler.getProcess("disease")
+			stat(null, "[getStatName(process)]([active_diseases.len])\t - #[process.getTicks()]\t - [process.getLastRunTime()]")
+
+			process = processScheduler.getProcess("garbage")
+			stat(null, "[getStatName(process)]([garbage_collector.destroyed.len])\t - #[process.getTicks()]\t - [process.getLastRunTime()]")
 
 			process = processScheduler.getProcess("machinery")
 			stat(null, "[getStatName(process)]([machines.len])\t - #[process.getTicks()]\t - [process.getLastRunTime()]")
+
+			process = processScheduler.getProcess("mob")
+			stat(null, "[getStatName(process)]([mob_list.len])\t - #[process.getTicks()]\t - [process.getLastRunTime()]")
+
+			process = processScheduler.getProcess("nanoui")
+			stat(null, "[getStatName(process)]([nanomanager.processing_uis.len])\t - #[process.getTicks()]\t - [process.getLastRunTime()]")
+
+			process = processScheduler.getProcess("lighting")
+			stat(null, "[getStatName(process)]\t - #[process.getTicks()]\t - [process.getLastRunTime()]")
 
 			process = processScheduler.getProcess("obj")
 			stat(null, "[getStatName(process)]([processing_objects.len])\t - #[process.getTicks()]\t - [process.getLastRunTime()]")
@@ -831,13 +765,10 @@ note dizziness decrements automatically in the mob's Life() proc.
 			process = processScheduler.getProcess("powernet")
 			stat(null, "[getStatName(process)]([powernets.len])\t - #[process.getTicks()]\t - [process.getLastRunTime()]")
 
-			process = processScheduler.getProcess("nanoui")
-			stat(null, "[getStatName(process)]([nanomanager.processing_uis.len])\t - #[process.getTicks()]\t - [process.getLastRunTime()]")
-
-			process = processScheduler.getProcess("disease")
-			stat(null, "[getStatName(process)]([active_diseases.len])\t - #[process.getTicks()]\t - [process.getLastRunTime()]")
-
 			process = processScheduler.getProcess("sun")
+			stat(null, "[getStatName(process)]\t - #[process.getTicks()]\t - [process.getLastRunTime()]")
+
+			process = processScheduler.getProcess("ticker")
 			stat(null, "[getStatName(process)]\t - #[process.getTicks()]\t - [process.getLastRunTime()]")
 
 		else
@@ -855,19 +786,6 @@ note dizziness decrements automatically in the mob's Life() proc.
 				if(is_type_in_list(A, shouldnt_see))
 					continue
 				statpanel(listed_turf.name, null, A)
-
-	if(spell_list && spell_list.len)
-		for(var/obj/effect/proc_holder/spell/S in spell_list)
-			switch(S.charge_type)
-				if("recharge")
-					statpanel("Spells","[S.charge_counter/10.0]/[S.charge_max/10]",S)
-				if("charges")
-					statpanel("Spells","[S.charge_counter]/[S.charge_max]",S)
-				if("holdervar")
-					statpanel("Spells","[S.holder_var_type] [S.holder_var_amount]",S)
-
-
-
 
 // facing verbs
 /mob/proc/canface()
@@ -1101,7 +1019,7 @@ mob/proc/yank_out_object()
 	else
 		U << "<span class='warning'>You attempt to get a good grip on [selection] in [S]'s body.</span>"
 
-	if(!do_after(U, 80))
+	if(!do_after(U, 30))
 		return
 	if(!selection || !S || !U)
 		return
@@ -1116,9 +1034,9 @@ mob/proc/yank_out_object()
 
 	if(ishuman(src))
 		var/mob/living/carbon/human/H = src
-		var/datum/organ/external/affected
+		var/obj/item/organ/external/affected
 
-		for(var/datum/organ/external/organ in H.organs) //Grab the organ holding the implant.
+		for(var/obj/item/organ/external/organ in H.organs) //Grab the organ holding the implant.
 			for(var/obj/item/O in organ.implants)
 				if(O == selection)
 					affected = organ
@@ -1137,6 +1055,8 @@ mob/proc/yank_out_object()
 			human_user.bloody_hands(H)
 
 	selection.loc = get_turf(src)
+	if(!(U.l_hand && U.r_hand))
+		U.put_in_hands(selection)
 
 	for(var/obj/item/weapon/O in pinned)
 		if(O == selection)

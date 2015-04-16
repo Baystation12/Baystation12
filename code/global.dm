@@ -1,4 +1,7 @@
 //#define TESTING
+#if DM_VERSION < 506
+#warn This compiler is out of date. You may experience issues with projectile animations.
+#endif
 
 // Items that ask to be called every cycle.
 var/global/obj/effect/datacore/data_core = null
@@ -26,6 +29,8 @@ var/global/defer_powernet_rebuild = 0      // True if net rebuild will be called
 // 4: Derelict.
 // 3: AI satellite.
 // 5: Empty space.
+
+var/global/datum/universal_state/universe = new
 
 var/global/list/global_map = null
 //var/global/list/global_map = list(list(1,5),list(4,3))
@@ -228,7 +233,8 @@ var/list/cheartstopper = list("potassium_chloride")                       // Thi
 // Used by robots and robot preferences.
 var/list/robot_module_types = list(
 	"Standard", "Engineering", "Construction", "Surgeon",  "Crisis",
-	"Miner",    "Janitor",     "Service",      "Clerical", "Security"
+	"Miner",    "Janitor",     "Service",      "Clerical", "Security",
+	"Research"
 )
 
 // Some scary sounds.

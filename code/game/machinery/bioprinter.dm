@@ -43,18 +43,14 @@
 		if(prints_prosthetics)
 			O.robotic = 2
 		else if(loaded_dna)
-			visible_message("<span class='notice'>The printer injects stored DNA in used biomass.</span>.")
-			var/datum/organ/internal/I = new O.organ_type
-			I.transplant_data = list()
+			visible_message("<span class='notice'>The printer injects the stored DNA into the biomass.</span>.")
+			O.transplant_data = list()
 			var/mob/living/carbon/C = loaded_dna["donor"]
-			I.transplant_data["species"] =    C.species.name
-			I.transplant_data["blood_type"] = loaded_dna["blood_type"]
-			I.transplant_data["blood_DNA"] =  loaded_dna["blood_DNA"]
-			O.organ_data = I
-			I.organ_holder = O
+			O.transplant_data["species"] =    C.species.name
+			O.transplant_data["blood_type"] = loaded_dna["blood_type"]
+			O.transplant_data["blood_DNA"] =  loaded_dna["blood_DNA"]
 
-
-		visible_message("<span class='info'>The bioprinter spits out a new organ.")
+		visible_message("<span class='info'>The bioprinter spits out a new organ.</span>")
 
 	else
 		user << "<span class='warning'>There is not enough matter in the printer.</span>"

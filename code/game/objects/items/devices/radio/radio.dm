@@ -202,7 +202,7 @@
 	if(wires.IsIndexCut(WIRE_TRANSMIT)) // The device has to have all its wires and shit intact
 		return 0
 
-	M.last_target_click = world.time
+	M.last_target_radio = world.time // For the projectile targeting system
 
 	/* Quick introduction:
 		This new radio system uses a very robust FTL signaling technology unoriginally

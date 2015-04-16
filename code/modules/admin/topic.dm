@@ -968,11 +968,7 @@
 
 		//strip their stuff and stick it in the crate
 		for(var/obj/item/I in M)
-			M.u_equip(I)
-			if(I)
-				I.loc = locker
-				I.layer = initial(I.layer)
-				I.dropped(M)
+			M.drop_from_inventory(I, locker)
 		M.update_icons()
 
 		//so they black out before warping
@@ -1005,11 +1001,7 @@
 			return
 
 		for(var/obj/item/I in M)
-			M.u_equip(I)
-			if(I)
-				I.loc = M.loc
-				I.layer = initial(I.layer)
-				I.dropped(M)
+			M.drop_from_inventory(I)
 
 		M.Paralyse(5)
 		sleep(5)
@@ -1034,11 +1026,7 @@
 			return
 
 		for(var/obj/item/I in M)
-			M.u_equip(I)
-			if(I)
-				I.loc = M.loc
-				I.layer = initial(I.layer)
-				I.dropped(M)
+			M.drop_from_inventory(I)
 
 		M.Paralyse(5)
 		sleep(5)
@@ -1085,11 +1073,7 @@
 			return
 
 		for(var/obj/item/I in M)
-			M.u_equip(I)
-			if(I)
-				I.loc = M.loc
-				I.layer = initial(I.layer)
-				I.dropped(M)
+			M.drop_from_inventory(I)
 
 		if(istype(M, /mob/living/carbon/human))
 			var/mob/living/carbon/human/observer = M
@@ -1333,21 +1317,27 @@
 			M.stuttering = 20
 
 	else if(href_list["CentcommReply"])
-		var/mob/living/carbon/human/H = locate(href_list["CentcommReply"])
-		if(!istype(H))
-			usr << "This can only be used on instances of type /mob/living/carbon/human"
-			return
-		if(!istype(H.l_ear, /obj/item/device/radio/headset) && !istype(H.r_ear, /obj/item/device/radio/headset))
-			usr << "The person you are trying to contact is not wearing a headset"
+		var/mob/living/L = locate(href_list["CentcommReply"])
+		if(!istype(L))
+			usr << "This can only be used on instances of type /mob/living/"
 			return
 
-		var/input = sanitize(input(src.owner, "Please enter a message to reply to [key_name(H)] via their headset.","Outgoing message from Centcomm", ""))
-		if(!input)	return
+		if(L.can_centcom_reply())
+			var/input = input(src.owner, "Please enter a message to reply to [key_name(L)] via their headset.","Outgoing message from Centcomm", "")
+			if(!input)		return
 
-		src.owner << "You sent [input] to [H] via a secure channel."
-		log_admin("[src.owner] replied to [key_name(H)]'s Centcomm message with the message [input].")
-		message_admins("[src.owner] replied to [key_name(H)]'s Centcom message with: \"[input]\"")
-		H << "You hear something crackle in your headset for a moment before a voice speaks.  \"Please stand by for a message from Central Command.  Message as follows. <b>\"[input]\"</b>  Message ends.\""
+			src.owner << "You sent [input] to [L] via a secure channel."
+			log_admin("[src.owner] replied to [key_name(L)]'s Centcomm message with the message [input].")
+			message_admins("[src.owner] replied to [key_name(L)]'s Centcom message with: \"[input]\"")
+			if(!L.isAI())
+				L << "<span class='info'>You hear something crackle in your headset for a moment before a voice speaks.</span>"
+			L << "<span class='info'>Please stand by for a message from Central Command.</span>"
+			L << "<span class='info'>Message as follows.</span>"
+			L << "<span class='notice'>[input]</span>"
+			L << "<span class='info'>Message ends.</span>"
+		else
+			src.owner << "The person you are trying to contact does not have functional radio equipment."
+
 
 	else if(href_list["SyndicateReply"])
 		var/mob/living/carbon/human/H = locate(href_list["SyndicateReply"])
@@ -1835,16 +1825,10 @@
 					if(!security)
 						//strip their stuff before they teleport into a cell :downs:
 						for(var/obj/item/weapon/W in H)
-							if(istype(W, /datum/organ/external))
+							if(istype(W, /obj/item/organ/external))
 								continue
 								//don't strip organs
-							H.u_equip(W)
-							if (H.client)
-								H.client.screen -= W
-							if (W)
-								W.loc = H.loc
-								W.dropped(H)
-								W.layer = initial(W.layer)
+							H.drop_from_inventory(W)
 						//teleport person to cell
 						H.loc = pick(prisonwarp)
 						H.equip_to_slot_or_del(new /obj/item/clothing/under/color/orange(H), slot_w_uniform)
@@ -2273,6 +2257,33 @@
 				feedback_add_details("admin_secrets_fun_used","OO")
 				only_one()
 				message_admins("[key_name_admin(usr)] has triggered a battle to the death (only one)")
+
+			if("togglenarsie")
+				feedback_inc("admin_secrets_fun_used",1)
+				feedback_add_details("admin_secrets_fun_used","NA")
+				var/choice = input("How do you wish for narsie to interact with her surroundings?") in list("CultStation13", "Nar-Singulo")
+				if(choice == "CultStation13")
+					message_admins("[key_name_admin(usr)] has set narsie's behaviour to \"CultStation13\".")
+					narsie_behaviour = "CultStation13"
+				if(choice == "Nar-Singulo")
+					message_admins("[key_name_admin(usr)] has set narsie's behaviour to \"Nar-Singulo\".")
+					narsie_behaviour = "Nar-Singulo"
+			if("hellonearth")
+				feedback_inc("admin_secrets_fun_used",1)
+				feedback_add_details("admin_secrets_fun_used","NS")
+				var/choice = input("You sure you want to end the round and summon narsie at your location? Misuse of this could result in removal of flags or halarity.") in list("PRAISE SATAN", "Cancel")
+				if(choice == "PRAISE SATAN")
+					new /obj/machinery/singularity/narsie/large(get_turf(usr))
+					message_admins("[key_name_admin(usr)] has summoned narsie and brought about a new realm of suffering.")
+			if("supermattercascade")
+				feedback_inc("admin_secrets_fun_used",1)
+				feedback_add_details("admin_secrets_fun_used","SC")
+				var/choice = input("You sure you want to destroy the universe and create a large explosion at your location? Misuse of this could result in removal of flags or halarity.") in list("NO TIME TO EXPLAIN", "Cancel")
+				if(choice == "NO TIME TO EXPLAIN")
+					explosion(get_turf(usr), 8, 16, 24, 32, 1)
+					new /turf/unsimulated/wall/supermatter(get_turf(usr))
+					SetUniversalState(/datum/universal_state/supermatter_cascade)
+					message_admins("[key_name_admin(usr)] has managed to destroy the universe with a supermatter cascade. Good job, [key_name_admin(usr)]")
 		if(usr)
 			log_admin("[key_name(usr)] used secret [href_list["secretsfun"]]")
 			if (ok)
@@ -2641,3 +2652,12 @@
 			if("list")
 				PlayerNotesPage(text2num(href_list["index"]))
 		return
+
+mob/living/proc/can_centcom_reply()
+	return 0
+
+mob/living/carbon/human/can_centcom_reply()
+	return istype(l_ear, /obj/item/device/radio/headset) || istype(r_ear, /obj/item/device/radio/headset)
+
+mob/living/silicon/ai/can_centcom_reply()
+	return common_radio != null && !check_unable(2)

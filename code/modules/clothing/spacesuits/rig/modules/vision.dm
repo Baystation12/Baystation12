@@ -1,8 +1,12 @@
 /*
  * Contains
  * /obj/item/rig_module/vision
+ * /obj/item/rig_module/vision/multi
  * /obj/item/rig_module/vision/meson
  * /obj/item/rig_module/vision/thermal
+ * /obj/item/rig_module/vision/nvg
+ * /obj/item/rig_module/vision/medhud
+ * /obj/item/rig_module/vision/sechud
  */
 
 /datum/rig_vision
@@ -24,10 +28,21 @@
 /datum/rig_vision/meson/New()
 	glasses = new /obj/item/clothing/glasses/meson
 
+/datum/rig_vision/sechud
+	mode = "security HUD"
+/datum/rig_vision/sechud/New()
+	glasses = new /obj/item/clothing/glasses/hud/security
+
+/datum/rig_vision/medhud
+	mode = "medical HUD"
+/datum/rig_vision/medhud/New()
+	glasses = new /obj/item/clothing/glasses/hud/health
+
 /obj/item/rig_module/vision
 
 	name = "hardsuit visor"
 	desc = "A layered, translucent visor system for a hardsuit."
+	icon_state = "optics"
 
 	interface_name = "optical scanners"
 	interface_desc = "An integrated multi-mode vision system."
@@ -49,10 +64,27 @@
 
 	var/vision_index
 
+/obj/item/rig_module/vision/multi
+
+	name = "hardsuit optical package"
+	desc = "A complete visor system of optical scanners and vision modes."
+	icon_state = "fulloptics"
+
+
+	interface_name = "multi optical visor"
+	interface_desc = "An integrated multi-mode vision system."
+
+	vision_modes = list(/datum/rig_vision/meson,
+						/datum/rig_vision/nvg,
+						/datum/rig_vision/thermal,
+						/datum/rig_vision/sechud,
+						/datum/rig_vision/medhud)
+
 /obj/item/rig_module/vision/meson
 
 	name = "hardsuit meson scanner"
 	desc = "A layered, translucent visor system for a hardsuit."
+	icon_state = "meson"
 
 	usable = 0
 
@@ -65,6 +97,7 @@
 
 	name = "hardsuit thermal scanner"
 	desc = "A layered, translucent visor system for a hardsuit."
+	icon_state = "thermal"
 
 	usable = 0
 
@@ -72,6 +105,46 @@
 	interface_desc = "An integrated thermal scanner."
 
 	vision_modes = list(/datum/rig_vision/thermal)
+
+/obj/item/rig_module/vision/nvg
+
+	name = "hardsuit night vision interface"
+	desc = "A multi input night vision system for a hardsuit."
+	icon_state = "night"
+
+	usable = 0
+
+	interface_name = "night vision interface"
+	interface_desc = "An integrated night vision system."
+
+	vision_modes = list(/datum/rig_vision/nvg)
+
+/obj/item/rig_module/vision/sechud
+
+	name = "hardsuit security hud"
+	desc = "A simple tactical information system for a hardsuit."
+	icon_state = "securityhud"
+
+	usable = 0
+
+	interface_name = "security HUD"
+	interface_desc = "An integrated security heads up display."
+
+	vision_modes = list(/datum/rig_vision/sechud)
+
+/obj/item/rig_module/vision/medhud
+
+	name = "hardsuit medical hud"
+	desc = "A simple medical status indicator for a hardsuit."
+	icon_state = "healthhud"
+
+	usable = 0
+
+	interface_name = "medical HUD"
+	interface_desc = "An integrated medical heads up display."
+
+	vision_modes = list(/datum/rig_vision/medhud)
+
 
 // There should only ever be one vision module installed in a suit.
 /obj/item/rig_module/vision/installed()
