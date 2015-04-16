@@ -85,10 +85,10 @@ var/datum/controller/process/garbage_collector/garbage_collector
 			A.finalize_qdel()
 
 /datum/proc/finalize_qdel()
-	del(src)
+	garbage_collector.AddTrash(src)
 
 /turf/finalize_qdel()
-	garbage_collector.AddTrash(src)
+	del(src)
 
 // Default implementation of clean-up code.
 // This should be overridden to remove all references pointing to the object being destroyed.

@@ -84,3 +84,12 @@
 				"<span class='notice'>You hear metal clanking.</span>")
 		add_fingerprint(user)
 	return M
+
+//Cleanup
+/obj/Destroy()
+	. = ..()
+	unbuckle_mob()
+
+/obj/Del()
+	. = ..()
+	unbuckle_mob()
