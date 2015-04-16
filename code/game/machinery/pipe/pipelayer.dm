@@ -21,7 +21,7 @@
 /obj/machinery/pipelayer/Move(new_turf,M_Dir)
 	..()
 
-	if(on ||a_dis)
+	if(on && a_dis)
 		dismantleFloor(new_turf)
 	layPipe(old_turf,M_Dir,old_dir)
 
