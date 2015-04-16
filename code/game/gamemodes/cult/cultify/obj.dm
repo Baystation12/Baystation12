@@ -125,7 +125,7 @@
 /obj/structure/mineral_door/wood/cultify()
 	return
 
-/obj/machinery/singularity/cultify()
+/obj/singularity/cultify()
 	var/dist = max((current_size - 2), 1)
 	explosion(get_turf(src), dist, dist * 2, dist * 4)
 	qdel(src)

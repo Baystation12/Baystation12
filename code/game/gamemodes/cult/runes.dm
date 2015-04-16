@@ -190,7 +190,7 @@ var/list/sacrificed = list()
 					cultists += 1
 			if(cultists.len >= 9)
 				log_and_message_admins_many(cultists, "summoned Nar-sie.")
-				new /obj/machinery/singularity/narsie/large(src.loc)
+				new /obj/singularity/narsie/large(src.loc)
 				return
 			else
 				return fizzle()

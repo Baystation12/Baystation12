@@ -54,7 +54,7 @@
 	cult.allow_narsie = 0
 	PlayerSet()
 
-	new /obj/machinery/singularity/narsie/large/exit(pick(endgame_exits))
+	new /obj/singularity/narsie/large/exit(pick(endgame_exits))
 	spawn(rand(30,60) SECONDS)
 		var/txt = {"
 There's been a galaxy-wide electromagnetic pulse.  All of our systems are heavily damaged and many personnel are dead or dying. We are seeing increasing indications of the universe itself beginning to unravel.
