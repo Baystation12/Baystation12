@@ -22,6 +22,7 @@
 			if(O.buckled_mob)
 				return
 			if(locate(/mob/living) in O)
+				occupant_message("<font color='red'>You can't load living things into the cargo compartment.</font>")
 				return
 			if(O.anchored)
 				occupant_message("<font color='red'>[target] is firmly secured.</font>")
