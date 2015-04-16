@@ -13,6 +13,7 @@
 	var/max_metal = 50
 	var/metal = 10
 	var/obj/item/weapon/wrench/W
+	var/list/Pipes = list("regular pipes"=0,"scrubbers pipes"=31,"supply pipes"=29,"heat exchange pipes"=2)
 
 /obj/machinery/pipelayer/New()
 	W = new(src)
@@ -29,7 +30,7 @@
 	old_dir = turn(M_Dir,180)
 
 /obj/machinery/pipelayer/attack_hand(mob/user as mob)
-	if(!metal)
+	if(!metal&&!on)
 		user << "\The [src] don't work with no metal."
 		return
 	on=!on
@@ -39,6 +40,9 @@
 /obj/machinery/pipelayer/attackby(var/obj/item/W as obj, var/mob/user as mob)
 
 	if (istype(W, /obj/item/weapon/wrench))
+		P_type_t = input("Choose pipe type", "Pipe type") as null|anything in Pipes
+		P_type = Pipes[P_type_t]
+/*
 		switch(P_type)
 			if(31)
 				P_type = 0
@@ -52,7 +56,7 @@
 			if(0)
 				P_type = 2
 				P_type_t = "heat exchange pipes"
-
+*/
 		user.visible_message("[user] has set \the [src] to manufacture [P_type_t] .", "You set \the [src] to manufacture [P_type_t].")
 		return
 
