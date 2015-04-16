@@ -29,6 +29,9 @@
 	old_dir = turn(M_Dir,180)
 
 /obj/machinery/pipelayer/attack_hand(mob/user as mob)
+	if(!metal)
+		user << "\The [src] don't work with no metal."
+		return
 	on=!on
 	user.visible_message("\The [src] [!on?"dea":"a"]ctivated.", "[user] [!on?"dea":"a"]ctivated \the [src].")
 	return
