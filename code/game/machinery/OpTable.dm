@@ -28,12 +28,12 @@
 	switch(severity)
 		if(1.0)
 			//SN src = null
-			del(src)
+			qdel(src)
 			return
 		if(2.0)
 			if (prob(50))
 				//SN src = null
-				del(src)
+				qdel(src)
 				return
 		if(3.0)
 			if (prob(25))
@@ -43,14 +43,14 @@
 
 /obj/machinery/optable/blob_act()
 	if(prob(75))
-		del(src)
+		qdel(src)
 
 /obj/machinery/optable/attack_hand(mob/user as mob)
 	if (HULK in usr.mutations)
 		usr << text("\blue You destroy the table.")
 		visible_message("\red [usr] destroys the operating table!")
 		src.density = 0
-		del(src)
+		qdel(src)
 	return
 
 /obj/machinery/optable/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
@@ -130,7 +130,7 @@
 		var/obj/item/weapon/grab/G = W
 		if(iscarbon(G.affecting) && check_table(G.affecting))
 			take_victim(G.affecting,usr)
-			del(W)
+			qdel(W)
 			return
 
 /obj/machinery/optable/proc/check_table(mob/living/carbon/patient as mob)

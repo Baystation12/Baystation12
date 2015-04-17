@@ -14,7 +14,7 @@ var/global/list/minor_air_alarms = list()
 	..()
 	atmosphere_alarm.register(src, /obj/machinery/computer/station_alert/update_icon)
 
-/obj/machinery/computer/atmos_alert/Del()
+/obj/machinery/computer/atmos_alert/Destroy()
     atmosphere_alarm.unregister(src)
     ..()
 

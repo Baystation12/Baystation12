@@ -29,7 +29,7 @@
 		src.amount = amount
 	return
 
-/obj/item/stack/Del()
+/obj/item/stack/Destroy()
 	if(uses_charge)
 		return
 	if (src && usr && usr.machine == src)
@@ -139,7 +139,7 @@
 
 		if (istype(O, /obj/item/weapon/storage)) //BubbleWrap - so newly formed boxes are empty
 			for (var/obj/item/I in O)
-				del(I)
+				qdel(I)
 
 /obj/item/stack/Topic(href, href_list)
 	..()
@@ -150,7 +150,7 @@
 		list_recipes(usr, text2num(href_list["sublist"]))
 
 	if (href_list["make"])
-		if (src.get_amount() < 1) del(src) //Never should happen
+		if (src.get_amount() < 1) qdel(src) //Never should happen
 
 		var/list/recipes_list = recipes
 		if (href_list["sublist"])
@@ -187,7 +187,7 @@
 				if (amount <= 0) //check again in case someone transferred stuff to us
 					if(usr)
 						usr.remove_from_mob(src)
-					del(src)
+					qdel(src)
 		return 1
 	else
 		if(get_amount() < used)

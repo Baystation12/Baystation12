@@ -23,4 +23,4 @@
 /datum/species/shadow/handle_death(var/mob/living/carbon/human/H)
 	spawn(1)
 		new /obj/effect/decal/cleanable/ash(H.loc)
-		del(H)
+		qdel(H)

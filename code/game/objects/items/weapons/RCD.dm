@@ -47,7 +47,7 @@
 			user << "<span class='notice'>The RCD can't hold any more matter-units.</span>"
 			return
 		user.drop_from_inventory(W)
-		del(W)
+		qdel(W)
 		stored_matter += 10
 		playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
 		user << "<span class='notice'>The RCD now holds [stored_matter]/30 matter-units.</span>"
@@ -138,7 +138,7 @@
 	else if(build_other)
 		new build_other(T)
 	else
-		del(T)
+		qdel(T)
 
 	playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 	return 1

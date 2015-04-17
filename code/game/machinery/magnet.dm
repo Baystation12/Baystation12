@@ -164,7 +164,7 @@
 				if(prob(electricity_level))
 					explosion(loc, 0, 1, 2, 3) // ooo dat shit EXPLODES son
 					spawn(2)
-						del(src)
+						qdel(src)
 		*/
 
 		updateicon()
@@ -364,7 +364,7 @@
 				// N, S, E, W are directional
 				// C is center
 				// R is random (in magnetic field's bounds)
-				del(signal)
+				qdel(signal)
 				break // break the loop if the character located is invalid
 
 			signal.data["command"] = nextmove

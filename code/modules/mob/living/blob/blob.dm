@@ -246,7 +246,7 @@
 	B << "To create this node you will have to be on a normal blob tile and far enough away from any other node."
 	B << "Check your Blob verbs and hit Create Node to build a node."
 	spawn(10)
-		del(G_found)
+		qdel(G_found)
 
 
 

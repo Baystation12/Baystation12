@@ -29,7 +29,7 @@
 			user << "You have added the anti-Hydrogen to the storage ring, it now contains [src.fuel]kg"
 		if(istype(F, /obj/item/weapon/fuel/H))
 			src.fuel += F.fuel
-			del(F)
+			qdel(F)
 			src:annihilation(src.fuel)
 	if(istype(src, /obj/item/weapon/fuel/H))
 		if(istype(F, /obj/item/weapon/fuel/H))
@@ -38,7 +38,7 @@
 			user << "You have added the Hydrogen to the storage ring, it now contains [src.fuel]kg"
 		if(istype(F, /obj/item/weapon/fuel/antiH))
 			src.fuel += F.fuel
-			del(src)
+			qdel(src)
 			F:annihilation(F.fuel)
 
 /obj/item/weapon/fuel/antiH/proc/annihilation(var/mass)
@@ -54,7 +54,7 @@
 			if (strength > (300+T0C))
 				explosion(T, 0, 0, 2, 3)
 
-		del(src)
+		qdel(src)
 		return
 
 	var/turf/ground_zero = get_turf(loc)
@@ -63,7 +63,7 @@
 	explosion(ground_zero, ground_zero_range, ground_zero_range*2, ground_zero_range*3, ground_zero_range*4)
 
 	//SN src = null
-	del(src)
+	qdel(src)
 	return
 
 
@@ -77,7 +77,7 @@
 			M.gib()
 		if("Hydrogen")
 			M << "\blue You feel very light, as if you might just float away..."
-	del(src)
+	qdel(src)
 	return
 
 /obj/item/weapon/fuel/attack(mob/M as mob, mob/user as mob)

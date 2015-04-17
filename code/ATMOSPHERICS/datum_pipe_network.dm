@@ -31,7 +31,7 @@ datum/pipe_network
 		//Notes: Assuming that members will add themselves to appropriate roster in network_expand()
 
 		if(!start_normal)
-			del(src)
+			qdel(src)
 
 		start_normal.network_expand(src, reference)
 
@@ -40,7 +40,7 @@ datum/pipe_network
 		if((normal_members.len>0)||(line_members.len>0))
 			pipe_networks += src
 		else
-			del(src)
+			qdel(src)
 
 	proc/merge(datum/pipe_network/giver)
 		if(giver==src) return 0

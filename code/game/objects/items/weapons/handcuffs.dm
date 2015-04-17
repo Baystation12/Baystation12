@@ -132,7 +132,7 @@ var/last_chew = 0
 
 			user.put_in_hands(W)
 			user << "<span class='notice'>You wrap the cable restraint around the top of the rod.</span>"
-			del(src)
+			qdel(src)
 			update_icon(user)
 
 

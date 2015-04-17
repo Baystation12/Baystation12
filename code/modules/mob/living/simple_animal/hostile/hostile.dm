@@ -188,7 +188,7 @@
 	if(!A)	return
 
 	if (!istype(target, /turf))
-		del(A)
+		qdel(A)
 		return
 	A.current = target
 	A.starting = get_turf(src)

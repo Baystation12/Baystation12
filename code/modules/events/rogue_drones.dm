@@ -40,7 +40,7 @@
 		D.z = config.admin_levels[1]
 		D.has_loot = 0
 
-		del(D)
+		qdel(D)
 		num_recovered++
 
 	if(num_recovered > drones_list.len * 0.75)

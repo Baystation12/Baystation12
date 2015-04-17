@@ -25,10 +25,10 @@
 		var/obj/effect/decal/cleanable/blood/gibs/gib = null
 		for(var/datum/disease/D in viruses)
 			if(D.spread_type == SPECIAL)
-				del(D)
+				qdel(D)
 
 		if(sparks)
-			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+			var/datum/effect/effect/system/spark_spread/s = PoolOrNew(/datum/effect/effect/system/spark_spread)
 			s.set_up(2, 1, get_turf(location)) // Not sure if it's safe to pass an arbitrary object to set_up, todo
 			s.start()
 
@@ -63,4 +63,4 @@
 						if(directions.len)
 							gib.streak(directions)
 
-		del(src)
+		qdel(src)

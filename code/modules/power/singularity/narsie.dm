@@ -1,5 +1,4 @@
 var/global/narsie_behaviour = "CultStation13"
-var/global/narsie_cometh = 0
 var/global/list/narsie_list = list()
 /obj/singularity/narsie //Moving narsie to its own file for the sake of being clearer
 	name = "Nar-Sie"
@@ -50,7 +49,6 @@ var/global/list/narsie_list = list()
 
 	if(narnar)
 		SetUniversalState(/datum/universal_state/hell)
-	narsie_cometh = 1
 
 	spawn(10 SECONDS)
 		if(emergency_shuttle && emergency_shuttle.can_call())

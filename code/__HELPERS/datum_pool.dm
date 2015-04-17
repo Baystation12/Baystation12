@@ -50,7 +50,7 @@ var/global/list/GlobalPool = list()
 	var/datum/D = pick_n_take(GlobalPool[get_type])
 	if(D)
 		D.ResetVars()
-		D.Prepare()
+		D.Prepare(second_arg)
 		return D
 	return 0
 
@@ -60,9 +60,9 @@ var/global/list/GlobalPool = list()
 
 	if(length(GlobalPool[D.type]) > ATOM_POOL_COUNT)
 		#ifdef DEBUG_ATOM_POOL
-		world << text("DEBUG_DATUM_POOL: PlaceInPool([]) exceeds [] discarding...", D.type, ATOM_POOL_COUNT)
+		world << text("DEBUG_DATUM_POOL: PlaceInPool([]) exceeds []. Discarding.", D.type, ATOM_POOL_COUNT)
 		#endif
-		qdel(D)
+		del(D)
 		return
 
 	if(D in GlobalPool[D.type])
@@ -71,7 +71,7 @@ var/global/list/GlobalPool = list()
 	if(!GlobalPool[D.type])
 		GlobalPool[D.type] = list()
 
-	GlobalPool[D.type] |= D
+	GlobalPool[D.type] += D
 
 	D.Destroy()
 	D.ResetVars()
@@ -86,7 +86,6 @@ var/global/list/GlobalPool = list()
 /atom/movable/Prepare(args)
 	if(islist(args))
 		loc = args[1]
-	else
 		loc = args
 	..()
 

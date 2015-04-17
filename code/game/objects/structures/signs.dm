@@ -8,19 +8,19 @@
 /obj/structure/sign/ex_act(severity)
 	switch(severity)
 		if(1.0)
-			del(src)
+			qdel(src)
 			return
 		if(2.0)
-			del(src)
+			qdel(src)
 			return
 		if(3.0)
-			del(src)
+			qdel(src)
 			return
 		else
 	return
 
 /obj/structure/sign/blob_act()
-	del(src)
+	qdel(src)
 	return
 
 /obj/structure/sign/attackby(obj/item/tool as obj, mob/user as mob)	//deconstruction
@@ -33,7 +33,7 @@
 		//var/icon/I = icon('icons/obj/decals.dmi', icon_state)
 		//S.icon = I.Scale(24, 24)
 		S.sign_state = icon_state
-		del(src)
+		qdel(src)
 	else ..()
 
 /obj/item/sign
@@ -62,7 +62,7 @@
 		S.desc = desc
 		S.icon_state = sign_state
 		user << "You fasten \the [S] with your [tool]."
-		del(src)
+		qdel(src)
 	else ..()
 
 /obj/structure/sign/double/map

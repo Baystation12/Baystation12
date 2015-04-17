@@ -25,12 +25,12 @@
 	switch(severity)
 		if(1.0)
 			//SN src = null
-			del(src)
+			qdel(src)
 			return
 		if(2.0)
 			if (prob(50))
 				//SN src = null
-				del(src)
+				qdel(src)
 				return
 		else
 	return
@@ -204,7 +204,7 @@
 			for(var/atom/movable/A as mob|obj in src)
 				A.loc = src.loc
 				A.blob_act()
-			del(src)
+			qdel(src)
 		return
 
 	attackby(var/obj/item/weapon/G as obj, var/mob/user as mob)
@@ -252,7 +252,7 @@
 					icon_state = "sleeper_1-r"
 
 				src.add_fingerprint(user)
-				del(G)
+				qdel(G)
 			return
 		return
 
@@ -265,21 +265,21 @@
 				for(var/atom/movable/A as mob|obj in src)
 					A.loc = src.loc
 					ex_act(severity)
-				del(src)
+				qdel(src)
 				return
 			if(2.0)
 				if(prob(50))
 					for(var/atom/movable/A as mob|obj in src)
 						A.loc = src.loc
 						ex_act(severity)
-					del(src)
+					qdel(src)
 					return
 			if(3.0)
 				if(prob(25))
 					for(var/atom/movable/A as mob|obj in src)
 						A.loc = src.loc
 						ex_act(severity)
-					del(src)
+					qdel(src)
 					return
 		return
 	emp_act(severity)
@@ -435,7 +435,7 @@
 				icon_state = "sleeper_1-r"
 
 			for(var/obj/O in src)
-				del(O)
+				qdel(O)
 			src.add_fingerprint(usr)
 			return
 		return

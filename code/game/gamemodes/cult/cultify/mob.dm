@@ -35,8 +35,8 @@
 /mob/proc/see_narsie(var/obj/singularity/narsie/large/N, var/dir)
 	if(N.chained)
 		if(narsimage)
-			del(narsimage)
-			del(narglow)
+			qdel(narsimage)
+			qdel(narglow)
 		return
 	if((N.z == src.z)&&(get_dist(N,src) <= (N.consume_range+10)) && !(N in view(src)))
 		if(!narsimage) //Create narsimage
@@ -59,5 +59,5 @@
 		src << narglow
 	else
 		if(narsimage)
-			del(narsimage)
-			del(narglow)
+			qdel(narsimage)
+			qdel(narglow)

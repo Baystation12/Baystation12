@@ -235,7 +235,7 @@
 		user << "<span class='notice'>\The [src] processes \the [W].</span>"
 		biomass += 50
 		user.drop_item()
-		del(W)
+		qdel(W)
 		return
 	else if(istype(W, /obj/item/weapon/wrench))
 		if(locked && (anchored || occupant))
@@ -328,7 +328,7 @@
 		update_icon()
 		occupant.ghostize()
 		spawn(5)
-			del(occupant)
+			qdel(occupant)
 	return
 
 /obj/machinery/clonepod/relaymove(mob/user as mob)
@@ -348,21 +348,21 @@
 			for(var/atom/movable/A as mob|obj in src)
 				A.loc = loc
 				ex_act(severity)
-			del(src)
+			qdel(src)
 			return
 		if(2.0)
 			if(prob(50))
 				for(var/atom/movable/A as mob|obj in src)
 					A.loc = loc
 					ex_act(severity)
-				del(src)
+				qdel(src)
 				return
 		if(3.0)
 			if(prob(25))
 				for(var/atom/movable/A as mob|obj in src)
 					A.loc = loc
 					ex_act(severity)
-				del(src)
+				qdel(src)
 				return
 		else
 	return

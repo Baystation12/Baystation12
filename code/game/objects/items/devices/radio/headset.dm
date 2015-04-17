@@ -26,6 +26,11 @@
 		keyslot2 = new ks2type(src)
 	recalculateChannels(1)
 
+/obj/item/device/radio/headset/Destroy()
+	qdel(keyslot1)
+	qdel(keyslot2)
+	..()
+
 /obj/item/device/radio/headset/examine(mob/user)
 	if(!(..(user, 1) && radio_desc))
 		return

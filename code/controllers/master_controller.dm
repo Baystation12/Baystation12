@@ -19,7 +19,7 @@ datum/controller/game_controller/New()
 	if(master_controller != src)
 		log_debug("Rebuilding Master Controller")
 		if(istype(master_controller))
-			del(master_controller)
+			qdel(master_controller)
 		master_controller = src
 
 	if(!job_master)

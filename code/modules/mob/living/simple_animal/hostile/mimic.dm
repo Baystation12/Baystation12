@@ -43,7 +43,7 @@
 
 /mob/living/simple_animal/hostile/mimic/death()
 	..()
-	del(src)
+	qdel(src)
 
 //
 // Crate Mimic

@@ -19,8 +19,8 @@
 	if(do_gibs) gibs(loc, viruses, dna)
 
 	spawn(15)
-		if(animation)	del(animation)
-		if(src)			del(src)
+		if(animation)	qdel(animation)
+		if(src)			qdel(src)
 
 //This is the proc for turning a mob into ash. Mostly a copy of gib code (above).
 //Originally created for wizard disintegrate. I've removed the virus code since it's irrelevant here.
@@ -43,8 +43,8 @@
 
 	dead_mob_list -= src
 	spawn(15)
-		if(animation)	del(animation)
-		if(src)			del(src)
+		if(animation)	qdel(animation)
+		if(src)			qdel(src)
 
 
 /mob/proc/death(gibbed,deathmessage="seizes up and falls limp...")

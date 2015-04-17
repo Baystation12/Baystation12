@@ -78,4 +78,4 @@
 
 	else
 		if(riftimage)
-			del(riftimage)
+			qdel(riftimage)

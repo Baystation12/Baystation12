@@ -288,7 +288,7 @@
 							src.transfer_fingerprints_to(P)
 							P.set_dir(dir)
 
-						del(src)
+						qdel(src)
 						return
 				else
 					user << "You need more welding fuel to complete this task."

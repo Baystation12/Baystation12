@@ -82,7 +82,7 @@
 	c_animation.icon_state = "breakdoor"
 	flick("cultification",c_animation)
 	spawn(10)
-		del(c_animation)
+		qdel(c_animation)
 		qdel(src)
 
 /obj/machinery/door/firedoor/cultify()

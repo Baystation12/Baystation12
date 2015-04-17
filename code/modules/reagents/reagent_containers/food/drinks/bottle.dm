@@ -30,7 +30,7 @@
 	user.put_in_active_hand(B)
 	src.transfer_fingerprints_to(B)
 
-	del(src)
+	qdel(src)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/attack(mob/living/target as mob, mob/living/user as mob)
 
@@ -83,7 +83,7 @@
 			O.show_message(text("\blue <B>The contents of the [src] splashes all over [target]!</B>"), 1)
 		src.reagents.reaction(target, TOUCH)
 
-	//Finally, smash the bottle. This kills (del) the bottle.
+	//Finally, smash the bottle. This kills (qdel) the bottle.
 	src.smash(target, user)
 
 	return

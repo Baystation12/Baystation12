@@ -18,7 +18,7 @@
 	processing_objects.Add(src)
 
 
-/obj/item/weapon/gun/energy/temperature/Del()
+/obj/item/weapon/gun/energy/temperature/Destroy()
 	processing_objects.Remove(src)
 	..()
 

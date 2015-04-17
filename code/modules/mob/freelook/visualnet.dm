@@ -12,7 +12,7 @@
 	..()
 	visual_nets += src
 
-/datum/visualnet/Del()
+/datum/visualnet/Destroy()
 	visual_nets -= src
 	..()
 

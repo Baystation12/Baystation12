@@ -76,7 +76,7 @@
 
 /obj/machinery/power/port_gen/proc/explode()
 	explosion(src.loc, -1, 3, 5, -1)
-	del(src)
+	qdel(src)
 
 #define TEMPERATURE_DIVISOR 40
 #define TEMPERATURE_CHANGE_MAX 20
@@ -125,7 +125,7 @@
 	component_parts += new board_path(src)
 	RefreshParts()
 
-/obj/machinery/power/port_gen/pacman/Del()
+/obj/machinery/power/port_gen/pacman/Destroy()
 	DropFuel()
 	..()
 
@@ -301,7 +301,7 @@
 
 			new_frame.state = 2
 			new_frame.icon_state = "box_1"
-			del(src)
+			qdel(src)
 
 /obj/machinery/power/port_gen/pacman/attack_hand(mob/user as mob)
 	..()
@@ -424,7 +424,7 @@
 		L.apply_effect(max(20, round(rads/get_dist(L,src))), IRRADIATE)
 
 	explosion(src.loc, 3, 3, 5, 3)
-	del(src)
+	qdel(src)
 
 /obj/machinery/power/port_gen/pacman/mrs
 	name = "M.R.S.P.A.C.M.A.N.-type Portable Generator"
@@ -446,4 +446,4 @@
 /obj/machinery/power/port_gen/pacman/mrs/explode()
 	//no special effects, but the explosion is pretty big (same as a supermatter shard).
 	explosion(src.loc, 3, 6, 12, 16, 1)
-	del(src)
+	qdel(src)

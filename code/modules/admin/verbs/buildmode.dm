@@ -8,7 +8,7 @@
 			M.client.show_popup_menus = 1
 			for(var/obj/effect/bmode/buildholder/H)
 				if(H.cl == M.client)
-					del(H)
+					qdel(H)
 		else
 			log_admin("[key_name(usr)] has entered build mode.")
 			M.client.buildmode = 1
@@ -220,7 +220,7 @@
 					T.ChangeTurf(/turf/simulated/wall)
 					return
 				else if(istype(object,/obj))
-					del(object)
+					qdel(object)
 					return
 			else if(istype(object,/turf) && pa.Find("alt") && pa.Find("left"))
 				new/obj/machinery/door/airlock(get_turf(object))
@@ -250,7 +250,7 @@
 					var/obj/A = new holder.buildmode.objholder (get_turf(object))
 					A.set_dir(holder.builddir.dir)
 			else if(pa.Find("right"))
-				if(isobj(object)) del(object)
+				if(isobj(object)) qdel(object)
 			if(pa.Find("middle"))
 				holder.buildmode.objholder = text2path("[object.type]")
 				if(holder.buildmode.objsay)	usr << "[object.type]"

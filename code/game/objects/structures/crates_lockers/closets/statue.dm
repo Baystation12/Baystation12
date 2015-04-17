@@ -40,7 +40,7 @@
 			desc = "If it takes forever, I will wait for you..."
 
 	if(health == 0) //meaning if the statue didn't find a valid target
-		del(src)
+		qdel(src)
 		return
 
 	processing_objects.Add(src)
@@ -56,7 +56,7 @@
 	if (timer <= 0)
 		dump_contents()
 		processing_objects.Remove(src)
-		del(src)
+		qdel(src)
 
 /obj/structure/closet/statue/dump_contents()
 
@@ -130,4 +130,4 @@
 		user.dust()
 	dump_contents()
 	visible_message("<span class='warning'>[src] shatters!.</span>")
-	del(src)
+	qdel(src)

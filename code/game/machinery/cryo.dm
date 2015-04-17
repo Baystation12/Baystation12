@@ -24,7 +24,7 @@
 	..()
 	initialize_directions = dir
 
-/obj/machinery/atmospherics/unary/cryo_cell/Del()
+/obj/machinery/atmospherics/unary/cryo_cell/Destroy()
 	if(occupant)
 		occupant.loc = loc
 	..()
@@ -190,7 +190,7 @@
 				return
 		var/mob/M = G:affecting
 		if(put_mob(M))
-			del(G)
+			qdel(G)
 	return
 
 /obj/machinery/atmospherics/unary/cryo_cell/update_icon()

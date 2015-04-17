@@ -32,7 +32,7 @@ var/datum/antagonist/highlander/highlanders
 	for (var/obj/item/I in player)
 		if (istype(I, /obj/item/weapon/implant))
 			continue
-		del(I)
+		qdel(I)
 
 	player.equip_to_slot_or_del(new /obj/item/clothing/under/kilt(player), slot_w_uniform)
 	player.equip_to_slot_or_del(new /obj/item/device/radio/headset/heads/captain(player), slot_l_ear)

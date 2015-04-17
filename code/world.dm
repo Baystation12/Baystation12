@@ -8,7 +8,7 @@ var/global/datum/global_init/init = new ()
 	makeDatumRefLists()
 	load_configuration()
 
-	del(src)
+	qdel(src)
 
 
 /world

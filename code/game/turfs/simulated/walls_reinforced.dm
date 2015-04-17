@@ -41,7 +41,7 @@
 				user << "<span class='notice'>You burn away the fungi with \the [WT].</span>"
 				playsound(src, 'sound/items/Welder.ogg', 10, 1)
 				for(var/obj/effect/E in src) if(E.name == "Wallrot")
-					del E
+					qdel(E)
 				rotting = 0
 				return
 		else if(!is_sharp(W) && W.force >= 10 || W.force >= 20)
@@ -126,7 +126,7 @@
 				if (O.amount > 1)
 					O.amount--
 				else
-					del(O)
+					qdel(O)
 				return
 
 		if(2)
@@ -272,7 +272,7 @@
 			if (MS.amount > 1)
 				MS.amount--
 			else
-				del(MS)
+				qdel(MS)
 
 	//APC
 	else if( istype(W,/obj/item/apc_frame) )

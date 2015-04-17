@@ -15,23 +15,23 @@
 	var/mob/pulledby = null
 
 /atom/movable/Del()
-	if(isnull(gc_destroyed) && loc)
+	if(isnull(gcDestroyed) && loc)
 		testing("GC: -- [type] was deleted via del() rather than qdel() --")
-		Destroy()
-	else if(isnull(gc_destroyed))
-		testing("GC: [type] was deleted via GC without qdel()") //Not really a huge issue but from now on, please qdel()
+		CRASH()	// Debug until I can get a clean server start.
+//	else if(isnull(gcDestroyed))
+//		testing("GC: [type] was deleted via GC without qdel()") //Not really a huge issue but from now on, please qdel()
 //	else
 //		testing("GC: [type] was deleted via GC with qdel()")
 	..()
 
 /atom/movable/Destroy()
-	. = ..()
-	if(reagents)
-		qdel(reagents)
-	for(var/atom/movable/AM in contents)
-		qdel(AM)
+	if(opacity)
+		if(isturf(loc))
+			if(loc:lighting_lumcount > 1)
+				UpdateAffectingLights()
 	loc = null
-	invisibility = 101
+
+	..()
 
 /atom/movable/Bump(var/atom/A, yes)
 	if(src.throwing)

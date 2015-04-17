@@ -292,7 +292,7 @@
 	switch(lowertext(query_list[1]))
 		if("delete")
 			for(var/datum/t in objs)
-				del t
+				qdel(t)
 
 		if("update")
 			for(var/datum/t in objs)

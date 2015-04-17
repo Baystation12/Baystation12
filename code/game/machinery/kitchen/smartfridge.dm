@@ -33,8 +33,8 @@
 	else
 		wires = new/datum/wires/smartfridge(src)
 
-/obj/machinery/smartfridge/Del()
-	del(wires) // qdel
+/obj/machinery/smartfridge/Destroy()
+	qdel(wires)
 	..()
 
 /obj/machinery/smartfridge/proc/accept_check(var/obj/item/O as obj)
@@ -146,7 +146,7 @@
 			var/D = S.dried_type
 			new D(loc)
 			item_quants[S.name]--
-			del(S)
+			qdel(S)
 		return
 	return
 

@@ -36,7 +36,7 @@ In my current plan for it, 'solid' will be defined as anything with density == 1
 			if(clong.density || prob(10))
 				clong.meteorhit(src)
 		else
-			del(src)
+			qdel(src)
 
 		if(clong && prob(25))
 			src.loc = clong.loc
@@ -81,7 +81,7 @@ In my current plan for it, 'solid' will be defined as anything with density == 1
 		if (isNotStationLevel(immrod.z))
 			immrod.z = pick(config.station_levels)
 		if(immrod.loc == end)
-			del(immrod)
+			qdel(immrod)
 		sleep(10)
 	for(var/obj/effect/immovablerod/imm in world)
 		return

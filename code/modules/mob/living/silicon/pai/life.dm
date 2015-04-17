@@ -8,7 +8,7 @@
 			var/turf/T = get_turf_or_move(src.loc)
 			for (var/mob/M in viewers(T))
 				M.show_message("\red The data cable rapidly retracts back into its spool.", 3, "\red You hear a click and the sound of wire spooling rapidly.", 2)
-			del(src.cable)
+			qdel(src.cable)
 
 	regular_hud_updates()
 

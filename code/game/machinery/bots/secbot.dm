@@ -773,7 +773,7 @@ Auto Patrol: []"},
 	s.start()
 
 	new /obj/effect/decal/cleanable/blood/oil(src.loc)
-	del(src)
+	qdel(src)
 
 
 /obj/machinery/bot/secbot/proc/on_explosion(var/turf/Tsec)
@@ -793,12 +793,12 @@ Auto Patrol: []"},
 		return
 
 	if(S.secured)
-		del(S)
+		qdel(S)
 		var/obj/item/weapon/secbot_assembly/A = new /obj/item/weapon/secbot_assembly
 		user.put_in_hands(A)
 		user << "You add the signaler to the helmet."
 		user.drop_from_inventory(src)
-		del(src)
+		qdel(src)
 	else
 		return
 
@@ -817,7 +817,7 @@ Auto Patrol: []"},
 		user << "You add the prox sensor to [src]!"
 		src.overlays += image('icons/obj/aibots.dmi', "hs_eye")
 		src.name = "helmet/signaler/prox sensor assembly"
-		del(W)
+		qdel(W)
 
 	else if(((istype(W, /obj/item/robot_parts/l_arm)) || (istype(W, /obj/item/robot_parts/r_arm))) && (src.build_step == 2))
 		user.drop_item()
@@ -825,7 +825,7 @@ Auto Patrol: []"},
 		user << "You add the robot arm to [src]!"
 		src.name = "helmet/signaler/prox sensor/robot arm assembly"
 		src.overlays += image('icons/obj/aibots.dmi', "hs_arm")
-		del(W)
+		qdel(W)
 
 	else if((istype(W, /obj/item/weapon/melee/baton)) && (src.build_step >= 3))
 		user.drop_item()
@@ -834,8 +834,8 @@ Auto Patrol: []"},
 		var/obj/machinery/bot/secbot/S = new /obj/machinery/bot/secbot
 		S.loc = get_turf(src)
 		S.name = src.created_name
-		del(W)
-		del(src)
+		qdel(W)
+		qdel(src)
 
 	else if(istype(W, /obj/item/weapon/pen))
 		var/t = sanitizeSafe(input(user, "Enter new robot name", src.name, src.created_name), MAX_NAME_LEN)
@@ -892,14 +892,14 @@ Auto Patrol: []"},
 	if(severity==2 && prob(70))
 		..(severity-1)
 	else
-		var/obj/effect/overlay/pulse2 = new/obj/effect/overlay ( src.loc )
+		var/obj/effect/overlay/pulse2 = PoolOrNew(/obj/effect/overlay, src.loc)
 		pulse2.icon = 'icons/effects/effects.dmi'
 		pulse2.icon_state = "empdisable"
 		pulse2.name = "emp sparks"
 		pulse2.anchored = 1
 		pulse2.set_dir(pick(cardinal))
 		spawn(10)
-			pulse2.delete()
+			qdel(pulse2)
 		var/list/mob/living/carbon/targets = new
 		for(var/mob/living/carbon/C in view(12,src))
 			if(C.stat==2)

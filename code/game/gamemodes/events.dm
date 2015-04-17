@@ -49,7 +49,7 @@
 			var/turf/T = pick(blobstart)
 			var/obj/effect/bhole/bh = new /obj/effect/bhole( T.loc, 30 )
 			spawn(rand(50, 300))
-				del(bh)
+				qdel(bh)
 		/*
 		if(3) //Leaving the code in so someone can try and delag it, but this event can no longer occur randomly, per SoS's request. --NEO
 			command_alert("Space-time anomalies detected on the station. There is no additional data.", "Anomaly Alert")
@@ -71,7 +71,7 @@
 						P.icon_state = "anom"
 						P.name = "wormhole"
 						spawn(rand(300,600))
-							del(P)
+							qdel(P)
 		*/
 		if(3)
 			if((world.time/10)>=3600 && config.ninjas_allowed && !sent_ninja_to_station)//If an hour has passed, relatively speaking. Also, if ninjas are allowed to spawn and if there is not already a ninja for the round.

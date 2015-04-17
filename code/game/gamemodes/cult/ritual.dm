@@ -74,7 +74,7 @@ var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","
 				AI.client.images += blood_image
 		rune_list.Add(src)
 
-	Del()
+	Destroy()
 		for(var/mob/living/silicon/ai/AI in player_list)
 			if(AI.client)
 				AI.client.images -= blood_image
@@ -92,11 +92,11 @@ var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","
 	attackby(I as obj, user as mob)
 		if(istype(I, /obj/item/weapon/book/tome) && iscultist(user))
 			user << "You retrace your steps, carefully undoing the lines of the rune."
-			del(src)
+			qdel(src)
 			return
 		else if(istype(I, /obj/item/weapon/nullrod))
 			user << "\blue You disrupt the vile magic with the deadening field of the null rod!"
-			del(src)
+			qdel(src)
 			return
 		return
 

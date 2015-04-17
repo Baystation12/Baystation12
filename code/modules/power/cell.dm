@@ -118,8 +118,7 @@
 
 	explosion(T, devastation_range, heavy_impact_range, light_impact_range, flash_range)
 
-	spawn(1)
-		del(src)
+	qdel(src)
 
 /obj/item/weapon/cell/proc/corrupt()
 	charge /= 2
@@ -144,17 +143,17 @@
 
 	switch(severity)
 		if(1.0)
-			del(src)
+			qdel(src)
 			return
 		if(2.0)
 			if (prob(50))
-				del(src)
+				qdel(src)
 				return
 			if (prob(50))
 				corrupt()
 		if(3.0)
 			if (prob(25))
-				del(src)
+				qdel(src)
 				return
 			if (prob(25))
 				corrupt()

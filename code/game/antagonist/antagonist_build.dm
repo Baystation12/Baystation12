@@ -15,7 +15,7 @@
 		var/mob/holder = player.current
 		player.current = new mob_path(get_turf(player.current))
 		player.transfer_to(player.current)
-		if(holder) del(holder)
+		if(holder) qdel(holder)
 
 	player.original = player.current
 	return player.current
@@ -30,7 +30,7 @@
 		for(var/obj/item/thing in player.contents)
 			player.drop_from_inventory(thing)
 			if(thing.loc != player)
-				del(thing)
+				qdel(thing)
 	return 1
 
 	if(flags & ANTAG_SET_APPEARANCE)

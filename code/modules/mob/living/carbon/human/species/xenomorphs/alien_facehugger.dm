@@ -41,7 +41,7 @@ var/const/MAX_ACTIVE_TIME = 400
 	if(config.aliens_allowed)
 		..()
 	else
-		del(src)
+		qdel(src)
 
 /obj/item/clothing/mask/facehugger/examine(mob/user)
 	..(user)

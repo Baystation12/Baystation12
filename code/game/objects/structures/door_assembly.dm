@@ -166,7 +166,7 @@
 					if(!src || !WT.isOn()) return
 					user << "\blue You dissasembled the airlock assembly!"
 					new /obj/item/stack/sheet/metal(src.loc, 4)
-					del (src)
+					qdel (src)
 		else
 			user << "\blue You need more welding fuel."
 			return
@@ -277,7 +277,7 @@
 
 			var/obj/machinery/door/new_airlock = new path(src.loc, src)
 			new_airlock.dir = src.dir
-			del(src)
+			qdel(src)
 	else
 		..()
 	update_state()

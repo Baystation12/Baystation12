@@ -78,7 +78,7 @@
 						if(I.reliability != 100 && crit_fail)
 							I.crit_fail = 1
 						I.loc = src.loc
-					del(src)
+					qdel(src)
 					return 1
 				else
 					user << "<span class='warning'>Turn off the [src] before dismantling it.</span>"

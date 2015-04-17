@@ -21,7 +21,7 @@
 	if(!name)
 		var/atom/tmp = new path
 		src.product_name = initial(tmp.name)
-		del(tmp)
+		qdel(tmp)
 	else
 		src.product_name = name
 
@@ -143,22 +143,22 @@
 
 			src.product_records.Add(product)
 
-/obj/machinery/vending/Del()
-	del(wires) // qdel
+/obj/machinery/vending/Destroy()
+	qdel(wires)
 	wires = null
 	if(coin)
-		del(coin) // qdel
+		qdel(coin)
 		coin = null
 	..()
 
 /obj/machinery/vending/ex_act(severity)
 	switch(severity)
 		if(1.0)
-			del(src)
+			qdel(src)
 			return
 		if(2.0)
 			if (prob(50))
-				del(src)
+				qdel(src)
 				return
 		if(3.0)
 			if (prob(25))
@@ -173,7 +173,7 @@
 	if (prob(50))
 		spawn(0)
 			src.malfunction()
-			del(src)
+			qdel(src)
 		return
 
 	return
@@ -251,7 +251,7 @@
 		for(var/datum/data/vending_product/R in product_records)
 			if(istype(W, R.product_path))
 				stock(R, user)
-				del(W)
+				qdel(W)
 
 	else
 		..()
@@ -278,7 +278,7 @@
 
 		if(cashmoney_bundle.worth <= 0)
 			usr.drop_from_inventory(cashmoney_bundle)
-			del(cashmoney_bundle)
+			qdel(cashmoney_bundle)
 		else
 			cashmoney_bundle.update_icon()
 	else
@@ -290,7 +290,7 @@
 		visible_message("<span class='info'>\The [usr] inserts a bill into \the [src].</span>")
 		var/left = cashmoney.worth - currently_vending.price
 		usr.drop_from_inventory(cashmoney)
-		del(cashmoney)
+		qdel(cashmoney)
 
 		if(left)
 			spawn_money(left, src.loc, user)
@@ -533,10 +533,10 @@
 				user << "\blue You successfully pull the coin out before \the [src] could swallow it."
 			else
 				user << "\blue You weren't able to pull the coin out fast enough, the machine ate it, string and all."
-				del(coin)
+				qdel(coin)
 				categories &= ~CAT_COIN
 		else
-			del(coin)
+			qdel(coin)
 			categories &= ~CAT_COIN
 
 	R.amount--

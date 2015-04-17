@@ -24,7 +24,7 @@
 
 /obj/item/borg/upgrade/reset/action(var/mob/living/silicon/robot/R)
 	R.uneq_all()
-	del(R.module)
+	qdel(R.module)
 	R.module = null
 	R.modtype = "robot"
 	R.real_name = "Cyborg [R.ident]"

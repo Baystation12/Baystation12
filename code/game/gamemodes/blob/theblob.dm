@@ -110,7 +110,7 @@
 			B.loc = T
 		else
 			T.blob_act()//If we cant move in hit the turf
-			del(B)
+			qdel(B)
 		for(var/atom/A in T)//Hit everything in the turf
 			A.blob_act()
 		return 1
@@ -134,7 +134,7 @@
 	update_icon()//Needs to be updated with the types
 		if(health <= 0)
 			playsound(src.loc, 'sound/effects/splat.ogg', 50, 1)
-			del(src)
+			qdel(src)
 			return
 		if(health <= 15)
 			icon_state = "blob_damaged"
@@ -182,7 +182,7 @@
 				new/obj/effect/blob/factory(src.loc,src.health)
 			if("Shield")
 				new/obj/effect/blob/shield(src.loc,src.health*2)
-		del(src)
+		qdel(src)
 		return
 
 //////////////////////////////****IDLE BLOB***/////////////////////////////////////
@@ -201,7 +201,7 @@
 
 	proc/update_idle()
 		if(health<=0)
-			del(src)
+			qdel(src)
 			return
 		if(health<4)
 			icon_state = "blobc0"

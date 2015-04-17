@@ -48,7 +48,7 @@
 	// Now make the cardboard
 	user << "<span class='notice'>You fold [src] flat.</span>"
 	new src.foldable(get_turf(src))
-	del(src)
+	qdel(src)
 
 /obj/item/weapon/storage/box/survival/
 	New()

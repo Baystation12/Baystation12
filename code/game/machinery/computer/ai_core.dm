@@ -30,7 +30,7 @@
 					if(!src || !WT.remove_fuel(0, user)) return
 					user << "\blue You deconstruct the frame."
 					new /obj/item/stack/sheet/plasteel( loc, 4)
-					del(src)
+					qdel(src)
 		if(1)
 			if(istype(P, /obj/item/weapon/wrench))
 				playsound(loc, 'sound/items/Ratchet.ogg', 50, 1)
@@ -178,7 +178,7 @@
 					if(A) //if there's no brain, the mob is deleted and a structure/AIcore is created
 						A.rename_self("ai", 1)
 				feedback_inc("cyborg_ais_created",1)
-				del(src)
+				qdel(src)
 
 /obj/structure/AIcore/deactivated
 	name = "inactive AI"
@@ -187,7 +187,7 @@
 	anchored = 1
 	state = 20//So it doesn't interact based on the above. Not really necessary.
 
-/obj/structure/AIcore/deactivated/Del()
+/obj/structure/AIcore/deactivated/Destroy()
 	if(src in empty_playable_ai_cores)
 		empty_playable_ai_cores -= src
 	..()
@@ -208,7 +208,7 @@
 	if(card)
 		card.clear()
 
-	del(src)
+	qdel(src)
 
 /obj/structure/AIcore/deactivated/proc/check_malf(var/mob/living/silicon/ai/ai)
 	if(!ai) return

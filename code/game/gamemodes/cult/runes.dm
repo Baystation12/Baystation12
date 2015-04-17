@@ -24,7 +24,7 @@ var/list/sacrificed = list()
 				user << "\red You feel pain, as rune disappears in reality shift caused by too much wear of space-time fabric"
 				if (istype(user, /mob/living))
 					user.take_overall_damage(5, 0)
-				del(src)
+				qdel(src)
 			if(allrunesloc && index != 0)
 				if(istype(src,/obj/effect/rune))
 					user.say("Sas[pick("'","`")]so c'arta forbici!")//Only you can stop auto-muting
@@ -61,7 +61,7 @@ var/list/sacrificed = list()
 				user << "\red You feel pain, as rune disappears in reality shift caused by too much wear of space-time fabric"
 				if (istype(user, /mob/living))
 					user.take_overall_damage(5, 0)
-				del(src)
+				qdel(src)
 			for(var/mob/living/carbon/C in orange(1,src))
 				if(iscultist(C) && !C.stat)
 					culcount++
@@ -94,7 +94,7 @@ var/list/sacrificed = list()
 				new /obj/item/weapon/book/tome(src.loc)
 			else
 				new /obj/item/weapon/book/tome(usr.loc)
-			del(src)
+			qdel(src)
 			return
 
 
@@ -209,7 +209,7 @@ var/list/sacrificed = list()
 				T.hotspot_expose(700,125)
 			var/rune = src // detaching the proc - in theory
 			empulse(U, (range_red - 2), range_red)
-			del(rune)
+			qdel(rune)
 			return
 
 /////////////////////////////////////////SIXTH RUNE
@@ -369,7 +369,7 @@ var/list/sacrificed = list()
 					usr.say("Kla[pick("'","`")]atu barada nikt'o!")
 					for (var/mob/V in viewers(src))
 						V.show_message("\red The rune turns into gray dust, veiling the surrounding runes.", 3)
-					del(src)
+					qdel(src)
 				else
 					usr.whisper("Kla[pick("'","`")]atu barada nikt'o!")
 					usr << "\red Your talisman turns into gray dust, veiling the surrounding runes."
@@ -545,8 +545,8 @@ var/list/sacrificed = list()
 				for (var/mob/V in viewers(src))
 					V.show_message("\red The runes turn into dust, which then forms into an arcane image on the paper.", 3)
 				usr.say("H'drak v[pick("'","`")]loso, mir'kanas verbot!")
-				del(imbued_from)
-				del(newtalisman)
+				qdel(imbued_from)
+				qdel(newtalisman)
 			else
 				return fizzle()
 
@@ -593,7 +593,7 @@ var/list/sacrificed = list()
 			for(var/datum/mind/H in cult.current_antagonists)
 				if (H.current)
 					H.current << "\red \b [input]"
-			del(src)
+			qdel(src)
 			return 1
 
 /////////////////////////////////////////FIFTEENTH RUNE
@@ -745,7 +745,7 @@ var/list/sacrificed = list()
 					usr.say("Nikt[pick("'","`")]o barada kla'atu!")
 					for (var/mob/V in viewers(src))
 						V.show_message("\red The rune turns into red dust, reveaing the surrounding runes.", 3)
-					del(src)
+					qdel(src)
 					return
 				if(istype(W,/obj/item/weapon/paper/talisman))
 					usr.whisper("Nikt[pick("'","`")]o barada kla'atu!")
@@ -818,7 +818,7 @@ var/list/sacrificed = list()
 				for(var/mob/living/carbon/C in users)
 					user.take_overall_damage(dam, 0)
 					C.say("Khari[pick("'","`")]d! Gual'te nikka!")
-				del(src)
+				qdel(src)
 			return fizzle()
 
 /////////////////////////////////////////NINETEENTH RUNE
@@ -858,7 +858,7 @@ var/list/sacrificed = list()
 				user.visible_message("\red Rune disappears with a flash of red light, and in its place now a body lies.", \
 				"\red You are blinded by the flash of red light! After you're able to see again, you see that now instead of the rune there's a body.", \
 				"\red You hear a pop and smell ozone.")
-				del(src)
+				qdel(src)
 			return fizzle()
 
 /////////////////////////////////////////TWENTIETH RUNES
@@ -881,7 +881,7 @@ var/list/sacrificed = list()
 					usr.say("Sti[pick("'","`")] kaliedir!")
 					usr << "\red The world becomes quiet as the deafening rune dissipates into fine dust."
 					admin_attacker_log_many_victims(usr, affected, "Used a deafen rune.", "Was victim of a deafen rune.", "used a deafen rune on")
-					del(src)
+					qdel(src)
 				else
 					return fizzle()
 			else
@@ -926,7 +926,7 @@ var/list/sacrificed = list()
 					usr.say("Sti[pick("'","`")] kaliesin!")
 					usr << "\red The rune flashes, blinding those who not follow the Nar-Sie, and dissipates into fine dust."
 					admin_attacker_log_many_victims(usr, affected, "Used a blindness rune.", "Was victim of a blindness rune.", "used a blindness rune on")
-					del(src)
+					qdel(src)
 				else
 					return fizzle()
 			else
@@ -984,7 +984,7 @@ var/list/sacrificed = list()
 						C.take_overall_damage(15, 0)
 				admin_attacker_log_many_victims(usr, victims, "Used a blood boil rune.", "Was the victim of a blood boil rune.", "used a blood boil rune on")
 				log_and_message_admins_many(cultists - usr, "assisted activating a blood boil rune.")
-				del(src)
+				qdel(src)
 			else
 				return fizzle()
 			return
@@ -1014,8 +1014,8 @@ var/list/sacrificed = list()
 							M << "\red Blood suddenly ignites, burning you!"
 							var/turf/T = get_turf(B)
 							T.hotspot_expose(700,125)
-							del(B)
-				del(src)
+							qdel(B)
+				qdel(src)
 
 //////////             Rune 24 (counting burningblood, which kinda doesnt work yet.)
 
@@ -1038,7 +1038,7 @@ var/list/sacrificed = list()
 						S.Weaken(5)
 						S.show_message("\red BZZZT... The rune has exploded in a bright flash.", 3)
 						admin_attack_log(usr, S, "Used a stun rune.", "Was victim of a stun rune.", "used a stun rune on")
-				del(src)
+				qdel(src)
 			else                        ///When invoked as talisman, stun and mute the target mob.
 				usr.say("Dream sign ''Evil sealing talisman'[pick("'","`")]!")
 				var/obj/item/weapon/nullrod/N = locate() in T
@@ -1081,5 +1081,5 @@ var/list/sacrificed = list()
 			//the below calls update_icons() at the end, which will update overlay icons by using the (now updated) cache
 			user.put_in_hands(new /obj/item/weapon/melee/cultblade(user))	//put in hands or on floor
 
-			del(src)
+			qdel(src)
 			return

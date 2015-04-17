@@ -13,7 +13,7 @@
 /turf/drain_power()
 	return -1
 
-/turf/simulated/Del()
+/turf/simulated/Destroy()
 	updateVisibility(src)
 	..()
 
@@ -24,7 +24,7 @@
 
 // STRUCTURES
 
-/obj/structure/Del()
+/obj/structure/Destroy()
 	updateVisibility(src)
 	..()
 
@@ -34,7 +34,7 @@
 
 // EFFECTS
 
-/obj/effect/Del()
+/obj/effect/Destroy()
 	updateVisibility(src)
 	..()
 

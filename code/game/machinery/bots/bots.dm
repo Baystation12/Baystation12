@@ -27,7 +27,7 @@
 	SetLuminosity(0)
 
 /obj/machinery/bot/proc/explode()
-	del(src)
+	qdel(src)
 
 /obj/machinery/bot/proc/healthcheck()
 	if (src.health <= 0)
@@ -117,7 +117,7 @@
 /obj/machinery/bot/emp_act(severity)
 	var/was_on = on
 	stat |= EMPED
-	var/obj/effect/overlay/pulse2 = new/obj/effect/overlay ( src.loc )
+	var/obj/effect/overlay/pulse2 = PoolOrNew(/obj/effect/overlay, src.loc )
 	pulse2.icon = 'icons/effects/effects.dmi'
 	pulse2.icon_state = "empdisable"
 	pulse2.name = "emp sparks"
@@ -125,7 +125,7 @@
 	pulse2.set_dir(pick(cardinal))
 
 	spawn(10)
-		pulse2.delete()
+		qdel(pulse2)
 	if (on)
 		turn_off()
 	spawn(severity*300)

@@ -35,7 +35,7 @@
 					if(M.ckey == "nerezza" && M.real_name == "Asher Spock" && M.mind.role_alt_title && M.mind.role_alt_title != "Emergency Physician")
 						//only spawn ID if asher is joining as an emergency physician
 						ok = 1
-						del(Item)
+						qdel(Item)
 						goto skip
 					var/obj/item/weapon/card/id/I = Item
 					for(var/obj/item/weapon/card/id/C in M)
@@ -59,18 +59,18 @@
 							I.name = "[M.real_name]'s Technician ID ([M.mind.role_alt_title ? M.mind.role_alt_title : M.mind.assigned_role])"
 
 						//replace old ID
-						del(C)
+						qdel(C)
 						ok = M.equip_to_slot_if_possible(I, slot_wear_id, 0)	//if 1, last argument deletes on fail
 						break
 				else if(istype(Item,/obj/item/weapon/storage/belt))
 					if(M.ckey == "jakksergal" && M.real_name == "Nashi Ra'hal" && M.mind.role_alt_title && M.mind.role_alt_title != "Nurse" && M.mind.role_alt_title != "Chemist")
 						ok = 1
-						del(Item)
+						qdel(Item)
 						goto skip
 					var/obj/item/weapon/storage/belt/medical/fluff/nashi_belt/I = Item
 					if(istype(M.belt,/obj/item/weapon/storage/belt))
 						for(var/obj/item/weapon/storage/belt/B in M)
-							del(B)
+							qdel(B)
 							M.belt=null
 						ok = M.equip_to_slot_if_possible(I, slot_belt, 0)
 						break

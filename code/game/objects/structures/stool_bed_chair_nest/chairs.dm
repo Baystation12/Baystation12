@@ -26,7 +26,7 @@
 		E.part = SK
 		SK.loc = E
 		SK.master = E
-		del(src)
+		qdel(src)
 
 /obj/structure/bed/chair/attack_tk(mob/user as mob)
 	if(buckled_mob)
@@ -79,7 +79,7 @@
 	if(istype(W, /obj/item/weapon/wrench))
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 		new /obj/item/stack/sheet/wood(src.loc)
-		del(src)
+		qdel(src)
 	else
 		..()
 

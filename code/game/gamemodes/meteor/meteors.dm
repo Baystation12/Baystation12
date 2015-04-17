@@ -111,14 +111,14 @@
 				!istype(A,/obj/machinery/field_generator) && \
 				prob(detonation_chance))
 				explosion(loc, power, power + power_step, power + power_step * 2, power + power_step * 3, 0)
-			del(src)
+			qdel(src)
 	return
 
 
 /obj/effect/meteor/ex_act(severity)
 
 	if (severity < 4)
-		del(src)
+		qdel(src)
 	return
 
 /obj/effect/meteor/big
@@ -136,7 +136,7 @@
 			if(!istype(A,/obj/machinery/power/emitter) && \
 				!istype(A,/obj/machinery/field_generator))
 				if(--src.hits <= 0)
-					del(src) //Dont blow up singularity containment if we get stuck there.
+					qdel(src) //Dont blow up singularity containment if we get stuck there.
 
 			if (A)
 				for(var/mob/M in player_list)
@@ -150,11 +150,11 @@
 			if (--src.hits <= 0)
 				if(prob(detonation_chance) && !istype(A, /obj/structure/grille))
 					explosion(loc, power, power + power_step, power + power_step * 2, power + power_step * 3, 0)
-				del(src)
+				qdel(src)
 		return
 
 /obj/effect/meteor/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/weapon/pickaxe))
-		del(src)
+		qdel(src)
 		return
 	..()

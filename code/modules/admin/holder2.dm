@@ -16,7 +16,7 @@ var/list/admin_datums = list()
 /datum/admins/New(initial_rank = "Temporary Admin", initial_rights = 0, ckey)
 	if(!ckey)
 		error("Admin datum created without a ckey argument. Datum has been deleted")
-		del(src)
+		qdel(src)
 		return
 	admincaster_signature = "Nanotrasen Officer #[rand(0,9)][rand(0,9)][rand(0,9)]"
 	rank = initial_rank
@@ -92,5 +92,5 @@ you will have to do something like if(client.holder.rights & R_ADMIN) yourself.
 /client/proc/deadmin()
 	if(holder)
 		holder.disassociate()
-		//del(holder)
+		//qdel(holder)
 	return 1

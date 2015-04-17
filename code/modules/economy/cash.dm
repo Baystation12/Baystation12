@@ -26,7 +26,7 @@
 			user.drop_from_inventory(cash)
 			bundle = new (src.loc)
 			bundle.worth += cash.worth
-			del(cash)
+			qdel(cash)
 		else //is bundle
 			bundle = W
 		bundle.worth += src.worth
@@ -37,7 +37,7 @@
 			h_user.drop_from_inventory(bundle)
 			h_user.put_in_hands(bundle)
 		user << "<span class='notice'>You add [src.worth] Thalers worth of money to the bundles.<br>It holds [bundle.worth] Thalers now.</span>"
-		del(src)
+		qdel(src)
 
 /obj/item/weapon/spacecash/bundle
 	name = "pile of thalers"
@@ -87,7 +87,7 @@
 		bundle.update_icon()
 		usr.put_in_hands(bundle)
 	if(!worth)
-		del(src)
+		qdel(src)
 
 /obj/item/weapon/spacecash/c1
 	name = "1 Thaler"

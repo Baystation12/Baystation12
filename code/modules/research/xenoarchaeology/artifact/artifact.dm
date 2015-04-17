@@ -86,7 +86,7 @@
 			//failure
 			user.visible_message("<font color='red'><b>[src] suddenly crumbles away.</b></font>",\
 			"\red [src] has disintegrated under your onslaught, any secrets it was holding are long gone.")
-			del(src)
+			qdel(src)
 			return
 
 		if(prob(excavation_level))
@@ -102,7 +102,7 @@
 			else
 				user.visible_message("<font color='red'><b>[src] suddenly crumbles away.</b></font>",\
 				"\blue [src] has been whittled away under your careful excavation, but there was nothing of interest inside.")
-			del(src)
+			qdel(src)
 
 /obj/structure/boulder/Bumped(AM)
 	. = ..()

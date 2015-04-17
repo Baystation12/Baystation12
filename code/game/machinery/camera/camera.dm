@@ -136,7 +136,7 @@
 				assembly.loc = src.loc
 				assembly.state = 1
 				new /obj/item/stack/cable_coil(src.loc, length=2)
-			del(src)
+			qdel(src)
 
 	// OTHER
 	else if (can_use() && (istype(W, /obj/item/weapon/paper) || istype(W, /obj/item/device/pda)) && isliving(user))

@@ -46,7 +46,7 @@ var/const/Represents a special statement in the code triggered by a keyword.
 	nS_Keyword
 		New(inline=0)
 			if(inline)
-				del src
+				qdel(src)
 
 		kwReturn
 			Parse(n_Parser/nS_Parser/parser)

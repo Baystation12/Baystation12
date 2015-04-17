@@ -33,7 +33,7 @@
 		animation.master = src
 		flick("h2monkey", animation)
 		sleep(48)
-		del(animation)
+		qdel(animation)
 
 
 	var/mob/living/carbon/monkey/O = null
@@ -60,7 +60,7 @@
 
 
 	for(var/obj/T in (M.contents-implants))
-		del(T)
+		qdel(T)
 
 	O.loc = M.loc
 
@@ -82,7 +82,7 @@
 		I.loc = O
 		I.implanted = O
 //		O.update_icon = 1	//queue a full icon update at next life() call
-	del(M)
+	qdel(M)
 	return
 
 /datum/dna/gene/monkey/deactivate(var/mob/living/M, var/connected, var/flags)
@@ -108,7 +108,7 @@
 		animation.master = src
 		flick("monkey2h", animation)
 		sleep(48)
-		del(animation)
+		qdel(animation)
 
 	var/mob/living/carbon/human/O
 	if(Mo.greaterform)
@@ -136,7 +136,7 @@
 		M.viruses -= D
 
 	//for(var/obj/T in M)
-	//	del(T)
+	//	qdel(T)
 
 	O.loc = M.loc
 
@@ -171,5 +171,5 @@
 		I.loc = O
 		I.implanted = O
 //		O.update_icon = 1	//queue a full icon update at next life() call
-	del(M)
+	qdel(M)
 	return

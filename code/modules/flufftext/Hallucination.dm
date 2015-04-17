@@ -264,26 +264,26 @@ proc/check_panel(mob/M)
 		spawn(300)
 			if(my_target)
 				my_target.hallucinations -= src
-			del(src)
+			qdel(src)
 		step_away(src,my_target,2)
 		spawn attack_loop()
 
 
 	proc/updateimage()
-	//	del src.currentimage
+	//	qdel(src.currentimage)
 
 
 		if(src.dir == NORTH)
-			del src.currentimage
+			qdel(src.currentimage)
 			src.currentimage = new /image(up,src)
 		else if(src.dir == SOUTH)
-			del src.currentimage
+			qdel(src.currentimage)
 			src.currentimage = new /image(down,src)
 		else if(src.dir == EAST)
-			del src.currentimage
+			qdel(src.currentimage)
 			src.currentimage = new /image(right,src)
 		else if(src.dir == WEST)
-			del src.currentimage
+			qdel(src.currentimage)
 			src.currentimage = new /image(left,src)
 		my_target << currentimage
 
@@ -329,7 +329,7 @@ proc/check_panel(mob/M)
 	var/image/I = image('icons/effects/blood.dmi',O,"floor[rand(1,7)]",O.dir,1)
 	target << I
 	spawn(300)
-		del(O)
+		qdel(O)
 	return
 
 var/list/non_fakeattack_weapons = list(/obj/item/weapon/gun/projectile, /obj/item/ammo_magazine/a357,\

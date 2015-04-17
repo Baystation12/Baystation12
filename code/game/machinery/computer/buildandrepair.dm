@@ -29,7 +29,7 @@
 					if(!src || !WT.isOn()) return
 					user << "\blue You deconstruct the frame."
 					new /obj/item/stack/sheet/metal( src.loc, 5 )
-					del(src)
+					qdel(src)
 		if(1)
 			if(istype(P, /obj/item/weapon/wrench))
 				playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
@@ -111,4 +111,4 @@
 				user << "\blue You connect the monitor."
 				var/B = new src.circuit.build_path ( src.loc )
 				src.circuit.construct(B)
-				del(src)
+				qdel(src)

@@ -35,7 +35,7 @@ Note: Must be placed within 3 tiles of the R&D Console
 	min_reliability = 93 - T
 
 /obj/machinery/r_n_d/destructive_analyzer/meteorhit()
-	del(src)
+	qdel(src)
 	return
 
 /obj/machinery/r_n_d/destructive_analyzer/update_icon()

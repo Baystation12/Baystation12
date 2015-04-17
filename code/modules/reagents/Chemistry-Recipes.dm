@@ -869,7 +869,7 @@ datum
 									M.client.screen += blueeffect
 									sleep(20)
 									M.client.screen -= blueeffect
-									del(blueeffect)
+									qdel(blueeffect)
 		slimecrit
 			name = "Slime Crit"
 			id = "m_tele"

@@ -385,7 +385,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	animation.master = src
 	flick("monkey2h", animation)
 	sleep(48)
-	del(animation)
+	qdel(animation)
 
 	for(var/obj/item/W in src)
 		C.drop_from_inventory(W)
@@ -400,7 +400,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	O.real_name = chosen_dna.real_name
 
 	for(var/obj/T in C)
-		del(T)
+		qdel(T)
 
 	O.loc = C.loc
 
@@ -420,7 +420,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	O.changeling_update_languages(changeling.absorbed_languages)
 
 	feedback_add_details("changeling_powers","LFT")
-	del(C)
+	qdel(C)
 	return 1
 
 

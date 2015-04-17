@@ -149,7 +149,7 @@
 	return
 
 
-/obj/machinery/power/singularity_beacon/Del()
+/obj/machinery/power/singularity_beacon/Destroy()
 	if(active)
 		Deactivate()
 	..()

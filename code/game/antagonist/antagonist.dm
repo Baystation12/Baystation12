@@ -199,7 +199,7 @@
 			for(var/datum/uplink_item/UI in H.purchase_log)
 				var/obj/I = new UI.path
 				refined_log.Add("[H.purchase_log[UI]]x\icon[I][UI.name]")
-				del(I)
+				qdel(I)
 			purchases = english_list(refined_log, nothing_text = "")
 	if(uplink_true)
 		text += " (used [TC_uses] TC)"
@@ -215,7 +215,7 @@
 		if(antag.current && antag.current.client)
 			for(var/image/I in antag.current.client.images)
 				if(I.icon_state == antag_indicator)
-					del(I)
+					qdel(I)
 			for(var/datum/mind/other_antag in current_antagonists)
 				if(other_antag.current)
 					antag.current.client.images |= image('icons/mob/mob.dmi', loc = other_antag.current, icon_state = antag_indicator)
@@ -241,10 +241,10 @@
 				if(antag.current.client)
 					for(var/image/I in antag.current.client.images)
 						if(I.icon_state == antag_indicator && I.loc == player.current)
-							del(I)
+							qdel(I)
 		if(player.current && player.current.client)
 			for(var/image/I in player.current.client.images)
 				if(I.icon_state == antag_indicator)
-					del(I)
+					qdel(I)
 
 

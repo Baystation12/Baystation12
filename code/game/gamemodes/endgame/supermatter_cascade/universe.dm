@@ -33,6 +33,7 @@
 // Apply changes when entering state
 /datum/universal_state/supermatter_cascade/OnEnter()
 	set background = 1
+	garbage_collector.garbage_collect = 0
 	world << "<span class='sinister' style='font-size:22pt'>You are blinded by a brilliant flash of energy.</span>"
 
 	world << sound('sound/effects/cascade.ogg')

@@ -13,7 +13,7 @@
 
 /obj/effect/projectile/proc/activate()
 	spawn(3)
-		delete()	//see effect_system.dm - sets loc to null and lets GC handle removing these effects
+		qdel(src)	//see effect_system.dm - sets loc to null and lets GC handle removing these effects
 
 	return
 
@@ -100,13 +100,13 @@
 //----------------------------
 /obj/effect/projectile/emitter/tracer
 	icon_state = "emitter"
-	
+
 /obj/effect/projectile/emitter/muzzle
 	icon_state = "muzzle_emitter"
-	
+
 /obj/effect/projectile/emitter/impact
 	icon_state = "impact_emitter"
-	
+
 //----------------------------
 // Stun beam
 //----------------------------

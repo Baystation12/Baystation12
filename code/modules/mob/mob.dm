@@ -1,4 +1,4 @@
-/mob/Del()//This makes sure that mobs with clients/keys are not just deleted from the game.
+/mob/Destroy()//This makes sure that mobs with clients/keys are not just deleted from the game.
 	mob_list -= src
 	dead_mob_list -= src
 	living_mob_list -= src
@@ -179,7 +179,7 @@
 	P.invisibility = invisibility
 	spawn (20)
 		if(P)
-			del(P)	// qdel
+			qdel(P)	// qdel
 
 	face_atom(A)
 	return 1
@@ -213,7 +213,7 @@
 				var/list/temp = list(  )
 				temp += L.container
 				//L = null
-				del(L)
+				qdel(L)
 				return temp
 			else
 				return L.container
@@ -367,7 +367,7 @@
 	var/mob/new_player/M = new /mob/new_player()
 	if(!client)
 		log_game("[usr.key] AM failed due to disconnect.")
-		del(M)
+		qdel(M)
 		return
 
 	M.key = key
@@ -739,7 +739,7 @@ note dizziness decrements automatically in the mob's Life() proc.
 			statpanel("Status",process.name+"([active_diseases.len])","#[process.getTicks()]\t- [process.getLastRunTime()]")
 
 			process = processScheduler.getProcess("garbage")
-			statpanel("Status",process.name+"([garbage_collector.destroyed.len])","#[process.getTicks()]\t- [process.getLastRunTime()]")
+			statpanel("Status",process.name+"([garbage_collector.dels])","#[process.getTicks()]\t- [process.getLastRunTime()]")
 
 			process = processScheduler.getProcess("machinery")
 			statpanel("Status",process.name+"([machines.len])","#[process.getTicks()]\t- [process.getLastRunTime()]")

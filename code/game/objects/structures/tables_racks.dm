@@ -59,11 +59,11 @@
 	..()
 	for(var/obj/structure/table/T in src.loc)
 		if(T != src)
-			del(T)
+			qdel(T)
 	update_icon()
 	update_adjacent()
 
-/obj/structure/table/Del()
+/obj/structure/table/Destroy()
 	update_adjacent()
 	..()
 
@@ -328,7 +328,7 @@
 				return 0
 			else
 				visible_message("<span class='warning'>[src] breaks down!</span>")
-				destroy()
+				qdel(src)
 				return 1
 	return 1
 
@@ -375,7 +375,7 @@
 				G.affecting.loc = src.loc
 				G.affecting.Weaken(5)
 				visible_message("<span class='danger'>[G.assailant] puts [G.affecting] on \the [src].</span>")
-			del(W)
+			qdel(W)
 			return
 
 	// Handle dissembly.
@@ -386,7 +386,7 @@
 		user << "<span class='notice'>You locate the bolts and begin disassembling \the [src]...</span>"
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 		if(do_after(user,50))
-			destroy()
+			qdel(src)
 		return
 
 	// Handle weakening.
@@ -429,7 +429,7 @@
 		playsound(src.loc, 'sound/weapons/blade1.ogg', 50, 1)
 		playsound(src.loc, "sparks", 50, 1)
 		user.visible_message("<span class='danger'>The [src] was sliced apart by [user]!</span>")
-		destroy()
+		qdel(src)
 
 	user.drop_item(src.loc)
 	return

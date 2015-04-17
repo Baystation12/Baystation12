@@ -551,7 +551,7 @@
 	frequency.post_signal(src, status_signal)
 
 
-/obj/machinery/computer/communications/Del()
+/obj/machinery/computer/communications/Destroy()
 
 	for(var/obj/machinery/computer/communications/commconsole in world)
 		if(istype(commconsole.loc,/turf) && commconsole != src)
@@ -574,7 +574,7 @@
 
 	..()
 
-/obj/item/weapon/circuitboard/communications/Del()
+/obj/item/weapon/circuitboard/communications/Destroy()
 
 	for(var/obj/machinery/computer/communications/commconsole in world)
 		if(istype(commconsole.loc,/turf))

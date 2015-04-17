@@ -9,7 +9,7 @@
 				if(!istype(C.mob, /mob/dead))
 					log_access("AFK: [key_name(C)]")
 					C << "<SPAN CLASS='warning'>You have been inactive for more than 10 minutes and have been disconnected.</SPAN>"
-					del(C)
+					del(C)	// Don't qdel, cannot override finalize_qdel behaviour for clients.
 
 			scheck()
 

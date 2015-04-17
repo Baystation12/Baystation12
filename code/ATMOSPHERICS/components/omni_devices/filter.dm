@@ -24,7 +24,7 @@
 	for(var/datum/omni_port/P in ports)
 		P.air.volume = ATMOS_DEFAULT_VOLUME_FILTER
 
-/obj/machinery/atmospherics/omni/filter/Del()
+/obj/machinery/atmospherics/omni/filter/Destroy()
 	input = null
 	output = null
 	filters.Cut()

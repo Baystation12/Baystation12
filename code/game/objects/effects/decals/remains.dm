@@ -30,7 +30,7 @@
 	var/turf/simulated/floor/F = get_turf(src)
 	if (istype(F))
 		new /obj/effect/decal/cleanable/ash(F)
-	del(src)
+	qdel(src)
 
 /obj/effect/decal/remains/robot/attack_hand(mob/user as mob)
 	return

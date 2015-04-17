@@ -23,7 +23,7 @@
 	..()
 	cultnet.updateVisibility(src, 0)
 
-/mob/living/Del()
+/mob/living/Destroy()
 	cultnet.updateVisibility(src, 0)
 	..()
 

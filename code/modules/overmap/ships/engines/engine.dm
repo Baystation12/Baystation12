@@ -57,4 +57,4 @@ var/list/ship_engines = list()
 		if (E.z == zlevel)
 			E.engines -= src
 			break
-	del(src)
+	qdel(src)

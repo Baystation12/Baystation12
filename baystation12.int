@@ -1,6 +1,11 @@
 // BEGIN_INTERNALS
 /*
-MAP_ICON_TYPE: 0
+LAST_COMPILE_TIME: 1429517930
+DIR: code code\controllers code\controllers\Processes code\game code\game\objects code\game\objects\effects code\modules code\modules\client code\modules\examine code\modules\examine\descriptions code\modules\mob 
 AUTO_FILE_DIR: OFF
+MAP_ICON_TYPE: 0
+LAST_COMPILE_VERSION: 507.1283
+WINDOW: code\game\atoms.dm;code\game\atoms_movable.dm;code\modules\client\client procs.dm;code\game\objects\buckling.dm
+FILE: code\game\objects\buckling.dm
 */
 // END_INTERNALS

@@ -23,7 +23,7 @@
 	spawn(4)
 		// Not really the best way to do this, but it's better than "contents = list()"!
 		for(var/atom/movable/AM in contents)
-			del(AM)
+			qdel(AM)
 		new /obj/item/clothing/under/color/white( src )
 		new /obj/item/clothing/shoes/white( src )
 	return
@@ -55,7 +55,7 @@
 	spawn(4)
 		// Not really the best way to do this, but it's better than "contents = list()"!
 		for(var/atom/movable/AM in contents)
-			del(AM)
+			qdel(AM)
 		new /obj/item/weapon/storage/backpack/satchel/withwallet( src )
 		new /obj/item/device/radio/headset( src )
 	return

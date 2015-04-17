@@ -163,7 +163,7 @@
 
 	New(obj/item/sample as obj)
 		if(!istype(sample))
-			del(src)
+			qdel(src)
 		sample_object = sample
 		number = 1
 

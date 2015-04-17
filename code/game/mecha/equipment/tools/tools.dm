@@ -215,7 +215,7 @@
 
 			for(var/a=0, a<5, a++)
 				spawn(0)
-					var/obj/effect/effect/water/W = new /obj/effect/effect/water( get_turf(chassis) )
+					var/obj/effect/effect/water/W = PoolOrNew(/obj/effect/effect/water, get_turf(chassis))
 					var/turf/my_target = pick(the_targets)
 					var/datum/reagents/R = new/datum/reagents(5)
 					if(!W) return
@@ -235,7 +235,7 @@
 							W.reagents.reaction(atm)
 						if(W.loc == my_target) break
 						sleep(2)
-					W.delete()
+					qdel(W)
 			return 1
 
 	get_equip_info()
@@ -294,7 +294,7 @@
 					if(do_after_cooldown(target))
 						if(disabled) return
 						chassis.spark_system.start()
-						del(target)
+						qdel(target)
 						playsound(target, 'sound/items/Deconstruct.ogg', 50, 1)
 						chassis.use_power(energy_drain)
 			if(1)
@@ -417,7 +417,7 @@
 		do_after_cooldown()
 		src = null
 		spawn(rand(150,300))
-			del(P)
+			qdel(P)
 		return
 
 /obj/item/mecha_parts/mecha_equipment/gravcatapult

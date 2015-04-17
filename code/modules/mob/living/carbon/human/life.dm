@@ -974,7 +974,7 @@
 
 			else
 				for(var/atom/a in hallucinations)
-					del a
+					qdel(a)
 
 				if(halloss > 100)
 					src << "<span class='notice'>You're in too much pain to keep going...</span>"
@@ -1404,7 +1404,7 @@
 					if(M.stat == 2)
 						M.death(1)
 						stomach_contents.Remove(M)
-						del(M)
+						qdel(M)
 						continue
 					if(air_master.current_cycle%3==1)
 						if(!(M.status_flags & GODMODE))

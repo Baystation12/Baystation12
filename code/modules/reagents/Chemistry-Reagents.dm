@@ -246,7 +246,7 @@ datum
 				//Put out fires.
 				var/hotspot = (locate(/obj/fire) in T)
 				if(hotspot)
-					del(hotspot)
+					qdel(hotspot)
 					if(environment)
 						environment.react() //react at the new temperature
 
@@ -258,7 +258,7 @@ datum
 					lowertemp.temperature = max( min(lowertemp.temperature-2000,lowertemp.temperature / 2) ,0)
 					lowertemp.react()
 					T.assume_air(lowertemp)
-					del(hotspot)
+					qdel(hotspot)
 				if(istype(O,/obj/item/weapon/reagent_containers/food/snacks/monkeycube))
 					var/obj/item/weapon/reagent_containers/food/snacks/monkeycube/cube = O
 					if(!cube.wrapped)
@@ -372,7 +372,7 @@ datum
 					M.invisibility = 101
 					for(var/obj/item/W in M)
 						if(istype(W, /obj/item/weapon/implant))	//TODO: Carn. give implants a dropped() or something
-							del(W)
+							qdel(W)
 							continue
 						W.layer = initial(W.layer)
 						W.loc = M.loc
@@ -384,7 +384,7 @@ datum
 						M.mind.transfer_to(new_mob)
 					else
 						new_mob.key = M.key
-					del(M)
+					qdel(M)
 				..()
 				return
 
@@ -940,7 +940,7 @@ datum
 
 			reaction_obj(var/obj/O, var/volume)
 				if(istype(O,/obj/effect/decal/cleanable))
-					del(O)
+					qdel(O)
 				else
 					if(O)
 						O.clean_blood()
@@ -953,7 +953,7 @@ datum
 					T.clean_blood()
 					for(var/obj/effect/decal/cleanable/C in T.contents)
 						src.reaction_obj(C, volume)
-						del(C)
+						qdel(C)
 
 					for(var/mob/living/carbon/slime/M in T)
 						M.adjustToxLoss(rand(5,10))
@@ -1847,7 +1847,7 @@ datum
 					var/turf/simulated/wall/W = T
 					if(W.rotting)
 						W.rotting = 0
-						for(var/obj/effect/E in W) if(E.name == "Wallrot") del E
+						for(var/obj/effect/E in W) if(E.name == "Wallrot") qdel(E)
 
 						for(var/mob/O in viewers(W, null))
 							O.show_message(text("\blue The fungi are completely dissolved by the solution!"), 1)
@@ -2036,7 +2036,7 @@ datum
 						if(H.head)
 							if(prob(meltprob) && !H.head.unacidable)
 								H << "<span class='danger'>Your headgear melts away but protects you from the acid!</span>"
-								del(H.head)
+								qdel(H.head)
 								H.update_inv_head(0)
 								H.update_hair(0)
 							else
@@ -2046,7 +2046,7 @@ datum
 						if(H.wear_mask)
 							if(prob(meltprob) && !H.wear_mask.unacidable)
 								H << "<span class='danger'>Your mask melts away but protects you from the acid!</span>"
-								del (H.wear_mask)
+								qdel (H.wear_mask)
 								H.update_inv_wear_mask(0)
 								H.update_hair(0)
 							else
@@ -2056,7 +2056,7 @@ datum
 						if(H.glasses) //Doesn't protect you from the acid but can melt anyways!
 							if(prob(meltprob) && !H.glasses.unacidable)
 								H << "<span class='danger'>Your glasses melts away!</span>"
-								del (H.glasses)
+								qdel (H.glasses)
 								H.update_inv_glasses(0)
 
 					if(!M.unacidable)
@@ -2083,7 +2083,7 @@ datum
 						I.desc = "Looks like this was \an [O] some time ago."
 						for(var/mob/M in viewers(5, O))
 							M << "\red \the [O] melts."
-						del(O)
+						qdel(O)
 
 		toxin/acid/polyacid
 			name = "Polytrinic acid"
@@ -2467,7 +2467,7 @@ datum
 					lowertemp.temperature = max( min(lowertemp.temperature-2000,lowertemp.temperature / 2) ,0)
 					lowertemp.react()
 					T.assume_air(lowertemp)
-					del(hotspot)
+					qdel(hotspot)
 
 		enzyme
 			name = "Universal Enzyme"

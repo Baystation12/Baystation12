@@ -93,9 +93,9 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	flags |= NOREACT // so it doesn't react until you light it
 	create_reagents(chem_volume) // making the cigarrete a chemical holder with a maximum volume of 15
 
-/obj/item/clothing/mask/smokable/Del()
+/obj/item/clothing/mask/smokable/Destroy()
 	..()
-	del(reagents)
+	qdel(reagents)
 
 /obj/item/clothing/mask/smokable/process()
 	var/turf/location = get_turf(src)
@@ -127,13 +127,13 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 			var/datum/effect/effect/system/reagents_explosion/e = new()
 			e.set_up(round(reagents.get_reagent_amount("phoron") / 2.5, 1), get_turf(src), 0, 0)
 			e.start()
-			del(src)
+			qdel(src)
 			return
 		if(reagents.get_reagent_amount("fuel")) // the fuel explodes, too, but much less violently
 			var/datum/effect/effect/system/reagents_explosion/e = new()
 			e.set_up(round(reagents.get_reagent_amount("fuel") / 5, 1), get_turf(src), 0, 0)
 			e.start()
-			del(src)
+			qdel(src)
 			return
 		flags &= ~NOREACT // allowing reagents to react after being lit
 		reagents.handle_reactions()
@@ -162,7 +162,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 			M.update_inv_l_hand(0)
 			M.update_inv_r_hand(1)
 		processing_objects.Remove(src)
-		del(src)
+		qdel(src)
 	else
 		new /obj/effect/decal/cleanable/ash(T)
 		if(ismob(loc))
@@ -377,7 +377,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		if(G.reagents)
 			G.reagents.trans_to(src, G.reagents.total_volume)
 		name = "[G.name]-packed [initial(name)]"
-		del(G)
+		qdel(G)
 
 	else if(istype(W, /obj/item/weapon/flame/lighter))
 		var/obj/item/weapon/flame/lighter/L = W

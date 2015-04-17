@@ -22,7 +22,7 @@
 			user << "\red That was stupid of you."
 			explosion(get_turf(src),-1,0,2)
 			if(src)
-				del(src)
+				qdel(src)
 			return
 		else
 			if(T.welding)

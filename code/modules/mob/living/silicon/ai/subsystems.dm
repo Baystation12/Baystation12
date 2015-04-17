@@ -11,7 +11,7 @@
 
 /mob/living/silicon/ai/init_subsystems()
 	..()
-	del(alarm_monitor)
+	qdel(alarm_monitor)
 	alarm_monitor = new/obj/nano_module/alarm_monitor/ai(src)
 	crew_monitor = new(src)
 	rcon = new(src)

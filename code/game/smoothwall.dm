@@ -100,7 +100,7 @@
 
 	..()*/
 
-/turf/simulated/wall/Del()
+/turf/simulated/wall/Destroy()
 	spawn(10)
 		for(var/turf/simulated/wall/W in range(src,1))
 			W.relativewall()

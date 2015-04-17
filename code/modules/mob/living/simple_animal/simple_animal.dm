@@ -274,7 +274,7 @@
 					adjustBruteLoss(-MED.heal_brute)
 					MED.amount -= 1
 					if(MED.amount <= 0)
-						del(MED)
+						qdel(MED)
 					for(var/mob/M in viewers(src, null))
 						if ((M.client && !( M.blinded )))
 							M.show_message("<span class='notice>[user] applies the [MED] on [src].</span>")
@@ -361,7 +361,7 @@
 //Call when target overlay should be added/removed
 /mob/living/simple_animal/update_targeted()
 	if(!targeted_by && target_locked)
-		del(target_locked)
+		qdel(target_locked)
 	overlays = null
 	if (targeted_by && target_locked)
 		overlays += target_locked
@@ -392,7 +392,7 @@
 		if(small)
 			user.visible_message("<span class='danger'>[user] chops up \the [src]!</span>")
 			new/obj/effect/decal/cleanable/blood/splatter(get_turf(src))
-			del(src)
+			qdel(src)
 		else
 			user.visible_message("<span class='danger'>[user] butchers \the [src] messily!</span>")
 			gib()
