@@ -46,13 +46,16 @@ var/global/list/narsie_list = list()
 		world << "<font size='15' color='red'><b>[uppertext(name)] HAS RISEN</b></font>"
 		world << sound('sound/effects/wind/wind_5_1.ogg')
 
-	if(emergency_shuttle && emergency_shuttle.can_call())
-		emergency_shuttle.call_evac()
-		emergency_shuttle.launch_time = 0	// Cannot recall
+	narsie_spawn_animation()
 
 	if(narnar)
 		SetUniversalState(/datum/universal_state/hell)
 	narsie_cometh = 1
+
+	spawn(10 SECONDS)
+		if(emergency_shuttle && emergency_shuttle.can_call())
+			emergency_shuttle.call_evac()
+			emergency_shuttle.launch_time = 0	// Cannot recall
 
 /obj/singularity/narsie/process()
 	eat()
@@ -355,3 +358,12 @@ var/global/list/narsie_list = list()
 
 	for (var/turf/T in trange(consume_range, src))
 		consume(T)
+
+/obj/singularity/narsie/proc/narsie_spawn_animation()
+	icon = 'icons/obj/narsie_spawn_anim.dmi'
+	dir = SOUTH
+	move_self = 0
+	flick("narsie_spawn_anim",src)
+	sleep(11)
+	move_self = 1
+	icon = initial(icon)

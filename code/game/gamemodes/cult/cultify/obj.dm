@@ -65,8 +65,11 @@
 	new /obj/structure/cult/tome(loc)
 	qdel(src)
 
-/obj/machinery/door/cultify()
+/obj/machinery/door/airlock/external/cultify()
 	new /obj/structure/mineral_door/wood(loc)
+	..()
+
+/obj/machinery/door/cultify()
 	icon_state = "null"
 	density = 0
 	c_animation = new /atom/movable/overlay(src.loc)
