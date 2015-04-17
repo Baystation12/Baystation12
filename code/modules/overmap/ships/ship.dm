@@ -8,6 +8,7 @@
 	var/last_burn = 0
 	var/list/last_movement = list(0,0)
 	var/fore_dir = NORTH
+	var/standart_icon
 
 	var/obj/effect/map/current_sector
 	var/obj/machinery/computer/helm/nav_control
@@ -23,6 +24,7 @@
 			nav_control = H
 			break
 	processing_objects.Add(src)
+	standart_icon = icon
 
 /obj/effect/map/ship/relaymove(mob/user, direction)
 	accelerate(direction)
@@ -98,9 +100,14 @@
 	if(!is_still())
 		var/list/deltas = list(0,0)
 		for(var/i=1, i<=2, i++)
-			if(speed[i] && world.time > last_movement[i] + default_delay - speed[i])
+			if(speed[i] && world.time > last_movement[i] + default_delay - abs(speed[i]))
 				deltas[i] = speed[i] > 0 ? 1 : -1
 				last_movement[i] = world.time
 		var/turf/newloc = locate(x + deltas[1], y + deltas[2], z)
 		if(newloc)
 			Move(newloc)
+		rotate()
+
+/obj/effect/map/ship/proc/rotate()
+	var/direct = get_heading()
+	src.icon = turn(src.standart_icon,dir2angle(direct))
