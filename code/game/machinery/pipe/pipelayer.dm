@@ -23,7 +23,7 @@
 	..()
 
 	if(on && a_dis)
-		dismantleFloor(new_turf)
+		dismantleFloor(old_turf)
 	layPipe(old_turf,M_Dir,old_dir)
 
 	old_turf = new_turf
