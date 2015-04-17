@@ -15,7 +15,7 @@
 	action(atom/target)
 		if(!action_checks(target)) return
 		if(!cargo_holder) return
-		
+
 		//loading
 		if(istype(target,/obj))
 			var/obj/O = target
@@ -29,7 +29,7 @@
 			if(cargo_holder.cargo.len >= cargo_holder.cargo_capacity)
 				occupant_message("<font color='red'>Not enough room in cargo compartment.</font>")
 				return
-			
+
 			occupant_message("You lift [target] and start to load it into cargo compartment.")
 			chassis.visible_message("[chassis] lifts [target] and starts to load it into cargo compartment.")
 			set_ready_state(0)
@@ -637,6 +637,11 @@
 		pr_repair_droid.set_delay(equip_cooldown)
 		return
 
+	Destroy()
+		qdel(pr_repair_droid)
+		pr_repair_droid = null
+		..()
+
 	attach(obj/mecha/M as obj)
 		..()
 		droid_overlay = new(src.icon, icon_state = "repair_droid")
@@ -725,6 +730,11 @@
 		pr_energy_relay = new /datum/global_iterator/mecha_energy_relay(list(src),0)
 		pr_energy_relay.set_delay(equip_cooldown)
 		return
+
+	Destroy()
+		qdel(pr_energy_relay)
+		pr_energy_relay = null
+		..()
 
 	detach()
 		pr_energy_relay.stop()
@@ -841,6 +851,11 @@
 		..()
 		init()
 		return
+
+	Destroy()
+		qdel(pr_mech_generator)
+		pr_mech_generator = null
+		..()
 
 	proc/init()
 		fuel = new /obj/item/stack/sheet/mineral/phoron(src)

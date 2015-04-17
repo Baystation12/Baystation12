@@ -82,6 +82,7 @@
 /obj/mecha/New()
 	..()
 	events = new
+
 	icon_state += "-open"
 	add_radio()
 	add_cabin()
@@ -98,11 +99,60 @@
 	mechas_list += src //global mech list
 	return
 
-/obj/mecha/Del()
+/obj/mecha/Destroy()
 	src.go_out()
+	for(var/mob/M in src) //Let's just be ultra sure
+		M.Move(loc)
+
+	if(loc)
+		loc.Exited(src)
+	loc = null
+
+	if(prob(30))
+		explosion(get_turf(loc), 0, 0, 1, 3)
+
+	if(wreckage)
+		var/obj/effect/decal/mecha_wreckage/WR = new wreckage(loc)
+		for(var/obj/item/mecha_parts/mecha_equipment/E in equipment)
+			if(E.salvageable && prob(30))
+				WR.crowbar_salvage += E
+				E.forceMove(WR)
+				E.equip_ready = 1
+				E.reliability = round(rand(E.reliability/3,E.reliability))
+			else
+				E.forceMove(loc)
+				E.destroy()
+		if(cell)
+			WR.crowbar_salvage += cell
+			cell.forceMove(WR)
+			cell.charge = rand(0, cell.charge)
+		if(internal_tank)
+			WR.crowbar_salvage += internal_tank
+			internal_tank.forceMove(WR)
+	else
+		for(var/obj/item/mecha_parts/mecha_equipment/E in equipment)
+			E.detach(loc)
+			E.destroy()
+		if(cell)
+			qdel(cell)
+		if(internal_tank)
+			qdel(internal_tank)
+	equipment.Cut()
+	cell = null
+	internal_tank = null
+
+	qdel(pr_int_temp_processor)
+	qdel(pr_inertial_movement)
+	qdel(pr_give_air)
+	qdel(pr_internal_damage)
+	qdel(spark_system)
+	pr_int_temp_processor = null
+	pr_give_air = null
+	pr_internal_damage = null
+	spark_system = null
+
 	mechas_list -= src //global mech list
 	..()
-	return
 
 ////////////////////////
 ////// Helpers /////////
@@ -452,7 +502,7 @@
 	if(src.health > 0)
 		src.spark_system.start()
 	else
-		src.destroy()
+		qdel(src)
 	return
 
 /obj/mecha/attack_hand(mob/user as mob)
@@ -555,52 +605,6 @@
 	Proj.on_hit(src)
 	return
 
-/obj/mecha/proc/destroy()
-	spawn()
-		go_out()
-		var/turf/T = get_turf(src)
-		tag = "\ref[src]" //better safe then sorry
-		if(loc)
-			loc.Exited(src)
-		loc = null
-		if(T)
-			if(istype(src, /obj/mecha/working/ripley/))
-				var/obj/mecha/working/ripley/R = src
-				if(R.cargo)
-					for(var/obj/O in R.cargo) //Dump contents of stored cargo
-						O.loc = T
-						R.cargo -= O
-						T.Entered(O)
-
-			if(prob(30))
-				explosion(T, 0, 0, 1, 3)
-			spawn(0)
-				if(wreckage)
-					var/obj/effect/decal/mecha_wreckage/WR = new wreckage(T)
-					for(var/obj/item/mecha_parts/mecha_equipment/E in equipment)
-						if(E.salvageable && prob(30))
-							WR.crowbar_salvage += E
-							E.forceMove(WR)
-							E.equip_ready = 1
-							E.reliability = round(rand(E.reliability/3,E.reliability))
-						else
-							E.forceMove(T)
-							E.destroy()
-					if(cell)
-						WR.crowbar_salvage += cell
-						cell.forceMove(WR)
-						cell.charge = rand(0, cell.charge)
-					if(internal_tank)
-						WR.crowbar_salvage += internal_tank
-						internal_tank.forceMove(WR)
-				else
-					for(var/obj/item/mecha_parts/mecha_equipment/E in equipment)
-						E.forceMove(T)
-						E.destroy()
-		spawn(0)
-			del(src)
-	return
-
 /obj/mecha/ex_act(severity)
 	src.log_message("Affected by explosion of severity: [severity].",1)
 	if(prob(src.deflect_chance))
@@ -608,16 +612,16 @@
 		src.log_append_to_last("Armor saved, changing severity to [severity].")
 	switch(severity)
 		if(1.0)
-			src.destroy()
+			qdel(src)
 		if(2.0)
 			if (prob(30))
-				src.destroy()
+				qdel(src)
 			else
 				src.take_damage(initial(src.health)/2)
 				src.check_for_internal_damage(list(MECHA_INT_FIRE,MECHA_INT_TEMP_CONTROL,MECHA_INT_TANK_BREACH,MECHA_INT_CONTROL_LOST,MECHA_INT_SHORT_CIRCUIT),1)
 		if(3.0)
 			if (prob(5))
-				src.destroy()
+				qdel(src)
 			else
 				src.take_damage(initial(src.health)/5)
 				src.check_for_internal_damage(list(MECHA_INT_FIRE,MECHA_INT_TEMP_CONTROL,MECHA_INT_TANK_BREACH,MECHA_INT_CONTROL_LOST,MECHA_INT_SHORT_CIRCUIT),1)

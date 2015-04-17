@@ -76,6 +76,10 @@
 	ME.attach(src)
 	return
 
+/obj/mecha/combat/marauder/Destroy()
+	qdel(smoke_system)
+	..()
+
 /obj/mecha/combat/marauder/relaymove(mob/user,direction)
 	if(user != src.occupant) //While not "realistic", this piece is player friendly.
 		user.loc = get_turf(src)

@@ -9,6 +9,16 @@
 	wreckage = /obj/effect/decal/mecha_wreckage/ripley
 	cargo_capacity = 10
 
+/obj/mecha/working/ripley/Destroy()
+	for(var/atom/movable/A in src.cargo)
+		A.loc = loc
+		var/turf/T = loc
+		if(istype(T))
+			T.Entered(A)
+		step_rand(A)
+	cargo.Cut()
+	..()
+
 /obj/mecha/working/ripley/firefighter
 	desc = "Standart APLU chassis was refitted with additional thermal protection and cistern."
 	name = "APLU \"Firefighter\""
