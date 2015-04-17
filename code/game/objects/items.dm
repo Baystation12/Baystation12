@@ -60,6 +60,12 @@
 	*/
 	var/list/sprite_sheets_obj = null
 
+/obj/item/Destroy()
+	if(ismob(loc))
+		var/mob/m = loc
+		m.unEquip(src, 1)
+	return ..()
+
 /obj/item/device
 	icon = 'icons/obj/device.dmi'
 

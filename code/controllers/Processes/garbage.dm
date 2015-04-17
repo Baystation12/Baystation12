@@ -3,8 +3,8 @@ var/datum/controller/process/garbage_collector/garbage_collector
 // #define GC_DEBUG 1
 /datum/controller/process/garbage_collector
 	var/collection_timeout = 300	//deciseconds to wait to let running procs finish before we just say fuck it and force del() the object
-	var/max_checks_multiplier = 5	//multiplier (per-decisecond) for calculating max number of tests per SS tick. These tests check if our GC'd objects are actually GC'd
-	var/max_forcedel_multiplier = 1	//multiplier (per-decisecond) for calculating max number of force del() calls per SS tick.
+	var/max_checks_multiplier = 5	//multiplier (per-decisecond) for calculating max number of tests per tick. These tests check if our GC'd objects are actually GC'd
+	var/max_forcedel_multiplier = 1	//multiplier (per-decisecond) for calculating max number of force del() calls per tick.
 
 	var/dels = 0				// number of del()'s we've done this tick
 	var/list/destroyed = list() // list of refID's of things that should be garbage collected
@@ -16,7 +16,7 @@ var/datum/controller/process/garbage_collector/garbage_collector
 
 /datum/controller/process/garbage_collector/setup()
 	name = "garbage"
-	schedule_interval = 60 // every 6 seconds
+	schedule_interval = 20 // every 2 seconds
 
 	if(!garbage_collector)
 		garbage_collector = src
@@ -94,6 +94,7 @@ var/datum/controller/process/garbage_collector/garbage_collector
 // This should be overridden to remove all references pointing to the object being destroyed.
 // Return true if the the GC controller should allow the object to continue existing. (Useful if pooling objects.)
 /datum/proc/Destroy()
+	tag = null
 	return
 
 /datum/var/gc_destroyed //Time when this object was destroyed.
