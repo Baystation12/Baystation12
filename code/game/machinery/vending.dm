@@ -1013,3 +1013,21 @@
 					/obj/item/device/assembly/signaler = 20, /obj/item/device/assembly/timer = 20, /obj/item/device/assembly/voice = 10,
 					/obj/item/device/transfer_valve = 10, /obj/item/weapon/reagent_containers/glass/beaker/large = 5, /obj/item/weapon/reagent_containers/glass/beaker = 20,
 					/obj/item/weapon/reagent_containers/syringe = 10)
+
+/obj/machinery/vending/cafvend
+	name = "Botany FastFood Inc"
+	desc = "A fastfood machine courtesy of the Botany FastFood Corporation, based out of Mars"
+	icon_state = "cafvend"
+	product_slogans = "Botany FastFood Inc: Feeding the masses!"
+	product_ads = "Tastes like home!;Homegrown and Tastey!;Let us be lazy so you don't have to!;Almost as good as Solent Green!;More cheesy than you!"
+	products = list(/obj/item/weapon/reagent_containers/food/snacks/taco = 3, /obj/item/weapon/reagent_containers/food/snacks/cheeseburger = 5,
+					/obj/item/weapon/reagent_containers/food/snacks/cheesyfries = 3, /obj/item/weapon/reagent_containers/food/snacks/grilledcheese = 3,
+					/obj/item/weapon/reagent_containers/food/snacks/hotdog = 5, /obj/item/weapon/reagent_containers/food/snacks/meatpizzaslice = 3,
+					/obj/item/weapon/reagent_containers/food/snacks/toastedsandwich = 3, /obj/item/weapon/reagent_containers/food/snacks/muffin = 3)
+	contraband = list(/obj/item/weapon/reagent_containers/food/snacks/flamintaco= 3)
+	premium = list(/mob/living/simple_animal/mouse/brown/Mousse = 1)
+	prices = list(/obj/item/weapon/reagent_containers/food/snacks/taco = 19,/obj/item/weapon/reagent_containers/food/snacks/cheeseburger = 21,
+					/obj/item/weapon/reagent_containers/food/snacks/cheesyfries = 14,/obj/item/weapon/reagent_containers/food/snacks/grilledcheese = 11,
+					/obj/item/weapon/reagent_containers/food/snacks/hotdog = 20,/obj/item/weapon/reagent_containers/food/snacks/meatpizzaslice = 20,
+					/obj/item/weapon/reagent_containers/food/snacks/toastedsandwich = 13, /obj/item/weapon/reagent_containers/food/snacks/muffin = 10)
+	idle_power_usage = 211 //refrigerator - believe it or not, this is actually the average power consumption of a refrigerated vending machine according to NRCan.

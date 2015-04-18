@@ -818,8 +818,11 @@ var/list/ghostteleportlocs = list()
 /area/maintenance/substation/civilian_west // Cargo, PTS, locker room, probably arrivals, ...)
 	name = "Civilian West Substation"
 
-/area/maintenance/substation/command // AI and central cluster. This one will be between HoP office and meeting room (probably).
-	name = "Command Substation"
+/area/maintenance/substation/command //
+	name = "Lower Command Substation"
+
+/area/maintenance/substation/command2 //
+	name = "Upper Command Substation"
 
 /area/maintenance/substation/security // Security, Brig, Permabrig, etc.
 	name = "Security Substation"
@@ -895,6 +898,22 @@ var/list/ghostteleportlocs = list()
 	name = "Bridge"
 	icon_state = "bridge"
 	music = "signal"
+
+/area/bridge/crewbrief
+	name = "Crew Briefing Area"
+	icon_state = "bridge"
+
+/area/bridge/commandhallway
+	name = "Lower Command Hallway"
+	icon_state = "bridge"
+
+/area/bridge/commandhallway2
+	name = "Upper Command Hallway"
+	icon_state = "bridge"
+
+/area/bridge/bridgeoffice
+	name = "Upper Command Offices"
+	icon_state = "bridge"
 
 /area/bridge/meeting_room
 	name = "Heads of Staff Meeting Room"
@@ -1526,7 +1545,7 @@ var/list/ghostteleportlocs = list()
 	icon_state = "security"
 
 /area/security/vacantoffice2
-	name = "Vacant Office"
+	name = "Blueshield's Office"
 	icon_state = "security"
 
 /area/quartermaster

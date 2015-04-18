@@ -52,3 +52,6 @@
 
 /area/mine/west_outpost
 	name = "West Mining Outpost"
+
+/area/mine/maint
+	name = "Mining station Maintenance"
