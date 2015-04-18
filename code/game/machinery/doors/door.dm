@@ -294,7 +294,7 @@
 
 
 /obj/machinery/door/examine(mob/user)
-	..()
+	. = ..()
 	if(src.health < src.maxhealth / 4)
 		user << "\The [src] looks like it's about to break!"
 	else if(src.health < src.maxhealth / 2)
