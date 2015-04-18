@@ -34,7 +34,7 @@
 	if(max_length)
 		input = copytext(input,1,max_length)
 
-	input = replacetext(input, "ÿ", JA_TEMP)
+	input = replacetext(input, JA, JA_TEMP)
 
 	if(extra)
 		input = replace_characters(input, list("\n"=" ","\t"=" "))

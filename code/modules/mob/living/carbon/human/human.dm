@@ -450,11 +450,11 @@
 						if (R.fields["id"] == E.fields["id"])
 							if(hasHUD(usr,"security"))
 								usr << "<b>Name:</b> [R.fields["name"]]	<b>Criminal Status:</b> [R.fields["criminal"]]"
-								usr << "<b>Minor Crimes:</b> [R.fields["mi_crim"]]"
-								usr << "<b>Details:</b> [R.fields["mi_crim_d"]]"
-								usr << "<b>Major Crimes:</b> [R.fields["ma_crim"]]"
-								usr << "<b>Details:</b> [R.fields["ma_crim_d"]]"
-								usr << "<b>Notes:</b> [R.fields["notes"]]"
+								usr << "<b>Minor Crimes:</b> [sanitize_chat(R.fields["mi_crim"])]"
+								usr << "<b>Details:</b> [sanitize_chat(R.fields["mi_crim_d"])]"
+								usr << "<b>Major Crimes:</b> [sanitize_chat(R.fields["ma_crim"])]"
+								usr << "<b>Details:</b> [sanitize_chat(R.fields["ma_crim_d"])]"
+								usr << "<b>Notes:</b> [sanitize_chat(R.fields["notes"])]"
 								usr << "<a href='?src=\ref[src];secrecordComment=`'>\[View Comment Log\]</a>"
 								read = 1
 
@@ -482,7 +482,7 @@
 								read = 1
 								var/counter = 1
 								while(R.fields[text("com_[]", counter)])
-									usr << text("[]", R.fields[text("com_[]", counter)])
+									usr << sanitize_chat(text("[]", R.fields[text("com_[]", counter)]))
 									counter++
 								if (counter == 1)
 									usr << "No comment found"
@@ -507,7 +507,7 @@
 					for (var/datum/data/record/R in data_core.security)
 						if (R.fields["id"] == E.fields["id"])
 							if(hasHUD(usr,"security"))
-								var/t1 = sanitize(input("Add Comment:", "Sec. records", null, null)  as message)
+								var/t1 = sanitize(input("Add Comment:", "Sec. records", null, null)  as message, ja_mode = POPUP)
 								if ( !(t1) || usr.stat || usr.restrained() || !(hasHUD(usr,"security")) )
 									return
 								var/counter = 1
@@ -579,11 +579,11 @@
 							if(hasHUD(usr,"medical"))
 								usr << "<b>Name:</b> [R.fields["name"]]	<b>Blood Type:</b> [R.fields["b_type"]]"
 								usr << "<b>DNA:</b> [R.fields["b_dna"]]"
-								usr << "<b>Minor Disabilities:</b> [R.fields["mi_dis"]]"
-								usr << "<b>Details:</b> [R.fields["mi_dis_d"]]"
-								usr << "<b>Major Disabilities:</b> [R.fields["ma_dis"]]"
-								usr << "<b>Details:</b> [R.fields["ma_dis_d"]]"
-								usr << "<b>Notes:</b> [R.fields["notes"]]"
+								usr << "<b>Minor Disabilities:</b> [sanitize_chat(R.fields["mi_dis"])]"
+								usr << "<b>Details:</b> [sanitize_chat(R.fields["mi_dis_d"])]"
+								usr << "<b>Major Disabilities:</b> [sanitize_chat(R.fields["ma_dis"])]"
+								usr << "<b>Details:</b> [sanitize_chat(R.fields["ma_dis_d"])]"
+								usr << "<b>Notes:</b> [sanitize_chat(R.fields["notes"])]"
 								usr << "<a href='?src=\ref[src];medrecordComment=`'>\[View Comment Log\]</a>"
 								read = 1
 
@@ -611,7 +611,7 @@
 								read = 1
 								var/counter = 1
 								while(R.fields[text("com_[]", counter)])
-									usr << text("[]", R.fields[text("com_[]", counter)])
+									usr << sanitize_chat(text("[]", R.fields[text("com_[]", counter)]))
 									counter++
 								if (counter == 1)
 									usr << "No comment found"
@@ -636,7 +636,7 @@
 					for (var/datum/data/record/R in data_core.medical)
 						if (R.fields["id"] == E.fields["id"])
 							if(hasHUD(usr,"medical"))
-								var/t1 = sanitize(input("Add Comment:", "Med. records", null, null)  as message)
+								var/t1 = sanitize(input("Add Comment:", "Med. records", null, null)  as message, ja_mode = POPUP)
 								if ( !(t1) || usr.stat || usr.restrained() || !(hasHUD(usr,"medical")) )
 									return
 								var/counter = 1
@@ -663,11 +663,11 @@
 				src << browse(null, "window=flavor_changes")
 				return
 			if("general")
-				var/msg = sanitize(input(usr,"Update the general description of your character. This will be shown regardless of clothing, and may include OOC notes and preferences.","Flavor Text",html_decode(flavor_texts[href_list["flavor_change"]])) as message, extra = 0)
+				var/msg = sanitize(input(usr,"Update the general description of your character. This will be shown regardless of clothing, and may include OOC notes and preferences.","Flavor Text",html_decode(revert_ja(flavor_texts[href_list["flavor_change"]]))) as message, extra = 0, ja_mode = POPUP)
 				flavor_texts[href_list["flavor_change"]] = msg
 				return
 			else
-				var/msg = sanitize(input(usr,"Update the flavor text for your [href_list["flavor_change"]].","Flavor Text",html_decode(flavor_texts[href_list["flavor_change"]])) as message, extra = 0)
+				var/msg = sanitize(input(usr,"Update the flavor text for your [href_list["flavor_change"]].","Flavor Text",html_decode(revert_ja(flavor_texts[href_list["flavor_change"]]))) as message, extra = 0, ja_mode = POPUP)
 				flavor_texts[href_list["flavor_change"]] = msg
 				set_flavor()
 				return
@@ -1266,6 +1266,7 @@
 			if((T == "head" && head_exposed) || (T == "face" && face_exposed) || (T == "eyes" && eyes_exposed) || (T == "torso" && torso_exposed) || (T == "arms" && arms_exposed) || (T == "hands" && hands_exposed) || (T == "legs" && legs_exposed) || (T == "feet" && feet_exposed))
 				flavor_text += flavor_texts[T]
 				flavor_text += "\n\n"
+
 	if(!shrink)
 		return flavor_text
 	else

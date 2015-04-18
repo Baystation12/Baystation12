@@ -32,13 +32,14 @@ var/ja_temp_ascii = text2ascii(JA_TEMP)
 * В некоторых местах необходимо возвращать "я" в нормальный вид, для окон редактирования прошедшего
 * sanitize() текста (к примеру редактирование флавора), или для файлов логов.
 * К сожалению, я не нашел способа обхитрить бьенд и выводить нормальную "я", пока довольствуемся "¶".
+* Используется для приведения к нужному виду данных из файла сохранения.
 */
 /proc/revert_ja(var/text)
 	#ifdef DEBUG_CYRILLIC
 	world << "\magenta DEBUG: \red <b>revert_ja() entered, text:</b> <i>[text]</i>"
 	#endif
 
-	text = replace_characters(text, list(JA_CHAT=JA_TEMP, JA_POPUP=JA_TEMP))
+	text = replace_characters(text, list(JA_CHAT=JA_TEMP, JA_POPUP=JA_TEMP, JA=JA_TEMP))
 
 	#ifdef DEBUG_CYRILLIC
 	world << "\magenta DEBUG: \blue <b>revert_ja() finished, text:</b> <i>[text]</i>"
