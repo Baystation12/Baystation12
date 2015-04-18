@@ -97,6 +97,10 @@
 				mode = "white"
 				mode_nice = "white"
 				return
+			if(design == "dark")
+				mode = "dark"
+				mode_nice = "dark"
+				return
 			if(design == "showroom" || design == "hydro" || design == "freezer")
 				mode = "[design]floor"
 				mode_nice = design
