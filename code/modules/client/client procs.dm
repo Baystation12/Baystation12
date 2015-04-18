@@ -259,8 +259,9 @@
 	getFiles(
 		'html/search.js',
 		'html/panels.css',
-		'html/painew.png',
-		'html/loading.gif',
+		'html/images/loading.gif',
+		'html/images/ntlogo.png',
+		'html/images/talisman.png',
 		'icons/pda_icons/pda_atmos.png',
 		'icons/pda_icons/pda_back.png',
 		'icons/pda_icons/pda_bell.png',
@@ -298,7 +299,5 @@
 		'icons/spideros_icons/sos_11.png',
 		'icons/spideros_icons/sos_12.png',
 		'icons/spideros_icons/sos_13.png',
-		'icons/spideros_icons/sos_14.png',
-		'html/images/ntlogo.png',
-		'html/images/talisman.png'
+		'icons/spideros_icons/sos_14.png'
 		)
