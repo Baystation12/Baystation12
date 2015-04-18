@@ -30,6 +30,8 @@ var/global/defer_powernet_rebuild = 0      // True if net rebuild will be called
 // 3: AI satellite.
 // 5: Empty space.
 
+var/global/datum/universal_state/universe = new
+
 var/global/list/global_map = null
 //var/global/list/global_map = list(list(1,5),list(4,3))
 

@@ -2,7 +2,7 @@
 	name = "overlay"
 	unacidable = 1
 	var/i_attached//Added for possible image attachments to objects. For hallucinations and the like.
-	
+
 /obj/effect/overlay/Destroy()
 	PlaceInPool(src)
 	return 1 //cancels the GCing
@@ -36,3 +36,9 @@
 	name = "Coconuts"
 	icon = 'icons/misc/beach.dmi'
 	icon_state = "coconuts"
+
+/obj/effect/overlay/bluespacify
+	name = "Bluespace"
+	icon = 'icons/turf/space.dmi'
+	icon_state = "bluespacify"
+	layer = LIGHTING_LAYER

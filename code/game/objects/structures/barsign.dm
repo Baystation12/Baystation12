@@ -2,6 +2,7 @@
 	icon = 'icons/obj/barsigns.dmi'
 	icon_state = "empty"
 	anchored = 1
+	var/cult = 0
 	New()
 		ChangeSign(pick("pinkflamingo", "magmasea", "limbo", "rustyaxe", "armokbar", "brokendrum", "meadbay", "thedamnwall", "thecavern", "cindikate", "theorchard", "thesaucyclown", "theclownshead", "whiskeyimplant", "carpecarp", "robustroadhouse", "greytide", "theredshirt"))
 		return
@@ -12,6 +13,9 @@
 		return
 
 /obj/structure/sign/double/barsign/attackby(obj/item/I, mob/user)
+	if(cult)
+		return
+
 	if(istype(I, /obj/item/weapon/card/id))
 		var/obj/item/weapon/card/id/card = I
 		if(access_bar in card.GetAccess())

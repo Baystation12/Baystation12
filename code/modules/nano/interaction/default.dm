@@ -1,4 +1,4 @@
-/var/global/datum/topic_state/default_state = new()
+/var/global/datum/topic_state/default/default_state = new()
 
 /datum/topic_state/default/href_list(var/mob/user)
 	return list()
@@ -64,6 +64,8 @@
 		//apc_override is needed here because AIs use their own APC when powerless
 		if(cameranet && !cameranet.checkTurfVis(get_turf(src_object)))
 			return apc_override ? STATUS_INTERACTIVE : STATUS_CLOSE
+		return STATUS_INTERACTIVE
+	else if(get_dist(src_object, src) <= client.view)	// View does not return what one would expect while installed in an inteliCard
 		return STATUS_INTERACTIVE
 
 	return STATUS_CLOSE

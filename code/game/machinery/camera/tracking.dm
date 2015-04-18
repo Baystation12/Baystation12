@@ -15,7 +15,6 @@
 	cameranet.process_sort()
 
 	var/list/T = list()
-	T["Cancel"] = "Cancel"
 	for (var/obj/machinery/camera/C in cameranet.cameras)
 		var/list/tempnetwork = C.network&src.network
 		if (tempnetwork.len)
@@ -30,11 +29,10 @@
 	set category = "AI Commands"
 	set name = "Show Camera List"
 
-	if(src.stat == 2)
-		src << "You can't list the cameras because you are dead!"
+	if(check_unable())
 		return
 
-	if (!camera || camera == "Cancel")
+	if (!camera)
 		return 0
 
 	var/obj/machinery/camera/C = track.cameras[camera]

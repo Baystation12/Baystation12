@@ -214,7 +214,7 @@
 		usr << "<span class='notice'>\The [src] has to be secured first!</span>"
 		return STATUS_CLOSE
 
-	return STATUS_INTERACTIVE
+	return ..()
 
 
 /obj/machinery/porta_turret/Topic(href, href_list, var/nowindow = 0)

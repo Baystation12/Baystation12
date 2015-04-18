@@ -9,7 +9,7 @@
 	return list()
 
 /datum/topic_state/proc/can_use_topic(var/src_object, var/mob/user)
-	return STATUS_INTERACTIVE
+	return STATUS_CLOSE
 
 /mob/proc/shared_nano_interaction()
 	if (src.stat || !client)
