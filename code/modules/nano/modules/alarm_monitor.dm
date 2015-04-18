@@ -63,7 +63,7 @@
 		usr.switch_to_camera(C)
 		return 1
 
-/obj/nano_module/alarm_monitor/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+/obj/nano_module/alarm_monitor/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
 	var/data[0]
 
 	var/categories[0]
@@ -90,7 +90,7 @@
 
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
-		ui = new(user, src, ui_key, "alarm_monitor.tmpl", "Alarm Monitoring Console", 800, 800)
+		ui = new(user, src, ui_key, "alarm_monitor.tmpl", "Alarm Monitoring Console", 800, 800, state = state)
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)

@@ -17,10 +17,10 @@
 	set name = "Alarm Monitor"
 	set category = "Subystems"
 
-	alarm_monitor.ui_interact(usr)
+	alarm_monitor.ui_interact(usr, state = self_state)
 
 /mob/living/silicon/proc/subsystem_law_manager()
 	set name = "Law Manager"
 	set category = "Subystems"
 
-	law_manager.ui_interact(usr)
+	law_manager.ui_interact(usr, state = self_state)

@@ -396,10 +396,10 @@
 	var/changed_name = ""
 	if(custom_name)
 		changed_name = custom_name
+		notify_ai(ROBOT_NOTIFICATION_NEW_NAME, real_name, changed_name)
 	else
 		changed_name = "[modtype] [braintype]-[num2text(ident)]"
 
-	notify_ai(ROBOT_NOTIFICATION_NEW_NAME, real_name, changed_name)
 	real_name = changed_name
 	name = real_name
 
