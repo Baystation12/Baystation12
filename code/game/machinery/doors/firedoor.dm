@@ -77,7 +77,7 @@
 
 
 /obj/machinery/door/firedoor/examine(mob/user)
-	. = ..()
+	. = ..(user, 1)
 	if(!. || !density)
 		return
 
