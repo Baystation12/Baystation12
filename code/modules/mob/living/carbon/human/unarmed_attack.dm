@@ -78,6 +78,12 @@
 	user.visible_message("<span class='warning'>[user] [pick(attack_verb)] [target] in the [affecting.display_name]!</span>")
 	playsound(user.loc, attack_sound, 25, 1, -1)
 
+/datum/unarmed_attack/obsedai
+	attack_verb = list("smash", "bludgeon")
+	damage = 40
+	attack_sound = "punch"
+	miss_sound = 'sound/weapons/punchmiss.ogg'
+
 /datum/unarmed_attack/bite
 	attack_verb = list("bit")
 	attack_sound = 'sound/weapons/bite.ogg'
