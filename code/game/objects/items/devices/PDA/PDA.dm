@@ -617,16 +617,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			ownrank = id.rank
 			name = "PDA-[owner] ([ownjob])"
 		if("Eject")//Ejects the cart, only done from hub.
-			if (!isnull(cartridge))
-				var/turf/T = loc
-				if(ismob(T))
-					T = T.loc
-				cartridge.loc = T
-				mode = 0
-				scanmode = 0
-				if (cartridge.radio)
-					cartridge.radio.hostpda = null
-				cartridge = null
+			verb_remove_cartridge()
 
 //MENU FUNCTIONS===================================
 
@@ -1120,6 +1111,30 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	else
 		usr << "<span class='notice'>You cannot do this while restrained.</span>"
 
+/obj/item/device/pda/verb/verb_remove_cartridge()
+	set category = "Object"
+	set name = "Remove cartridge"
+	set src in usr
+
+	if(issilicon(usr))
+		return
+
+	if (can_use(usr) && !isnull(cartridge))
+		var/turf/T = get_turf(src)
+		cartridge.loc = T
+		if (ismob(loc))
+			var/mob/M = loc
+			M.put_in_hands(cartridge)
+		else
+			cartridge.loc = get_turf(src)
+		mode = 0
+		scanmode = 0
+		if (cartridge.radio)
+			cartridge.radio.hostpda = null
+		cartridge = null
+		usr << "<span class='notice'>You remove \the [cartridge] from the [name].</span>"
+	else
+		usr << "<span class='notice'>You cannot do this while restrained.</span>"
 
 /obj/item/device/pda/proc/id_check(mob/user as mob, choice as num)//To check for IDs; 1 for in-pda use, 2 for out of pda use.
 	if(choice == 1)
