@@ -222,7 +222,7 @@
 	invisa_view = 2
 
 	emp_act(severity)
-		if(istype(src.loc, /mob/living/carbon/human))
+		if(prob(100/severity) && istype(src.loc, /mob/living/carbon/human))
 			var/mob/living/carbon/human/M = src.loc
 			M << "\red The Optical Thermal Scanner overloads and blinds you!"
 			if(M.glasses == src)

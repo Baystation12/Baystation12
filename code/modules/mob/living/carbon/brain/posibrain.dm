@@ -102,19 +102,6 @@
 	user << msg
 	return
 
-/obj/item/device/mmi/digital/posibrain/emp_act(severity)
-	if(!src.brainmob)
-		return
-	else
-		switch(severity)
-			if(1)
-				src.brainmob.emp_damage += rand(20,30)
-			if(2)
-				src.brainmob.emp_damage += rand(10,20)
-			if(3)
-				src.brainmob.emp_damage += rand(0,10)
-	..()
-
 /obj/item/device/mmi/digital/posibrain/New()
 	..()
 	src.brainmob.name = "[pick(list("PBU","HIU","SINA","ARMA","OSI"))]-[rand(100, 999)]"

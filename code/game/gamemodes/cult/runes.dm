@@ -208,7 +208,7 @@ var/list/sacrificed = list()
 			if(T)
 				T.hotspot_expose(700,125)
 			var/rune = src // detaching the proc - in theory
-			empulse(U, (range_red - 2), range_red)
+			empulse(U, (range_red - 2), range_red, range_red)
 			del(rune)
 			return
 

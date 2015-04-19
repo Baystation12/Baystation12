@@ -405,7 +405,7 @@
 	outputting(rand(0,1))
 	output_level = rand(0, output_level_max)
 	input_level = rand(0, input_level_max)
-	charge -= 1e6/severity
+	charge -= capacity/severity
 	if (charge < 0)
 		charge = 0
 	update_icon()

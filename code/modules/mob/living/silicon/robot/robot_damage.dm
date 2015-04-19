@@ -84,7 +84,7 @@
 			burn -= absorb_burn
 			src << "\red Your shield absorbs some of the impact!"
 
-	if(!emp)
+	if(!emp) //emp bypasses armour
 		var/datum/robot_component/armour/A = get_armour()
 		if(A)
 			A.take_damage(brute,burn,sharp,edge)

@@ -49,14 +49,17 @@
 /mob/living/silicon/emp_act(severity)
 	switch(severity)
 		if(1)
-			src.take_organ_damage(0,20,emp=1)
-			Stun(rand(5,10))
+			src.take_organ_damage(0, 40, emp=1)
+			Stun(rand(10,15))
 		if(2)
-			src.take_organ_damage(0,10,emp=1)
+			src.take_organ_damage(0, 30, emp=1)
+			Stun(rand(5,10))
+		if(3)
+			src.take_organ_damage(0, 20, emp=1) //10 ion rifle hits to destroy a borg
 			Stun(rand(1,5))
 	flick("noise", src:flash)
-	src << "\red <B>*BZZZT*</B>"
-	src << "\red Warning: Electromagnetic pulse detected."
+	src << "<span class='danger'>*BZZZT*</span>"
+	src << "<span class='warning'>Warning: Electromagnetic pulse detected.</span>"
 	..()
 
 /mob/living/silicon/stun_effect_act(var/stun_amount, var/agony_amount)

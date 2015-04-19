@@ -138,6 +138,27 @@
 			   DAMAGE PROCS
 ****************************************************/
 
+/obj/item/organ/external/emp_act(severity)
+	if(!(status & ORGAN_ROBOT))
+		return
+	var/probability = 30
+	var/damage = 15
+	switch(severity)
+		if(1)
+			probability = 30
+			damage = 15
+		if(2)
+			probability = 10
+			damage = 5
+		if(3)
+			probability = 1
+			damage = 3
+
+	if(prob(probability))
+		droplimb(1)
+	else
+		take_damage(damage, 0, 1, 1, used_weapon = "EMP")
+
 /obj/item/organ/external/take_damage(brute, burn, sharp, edge, used_weapon = null, list/forbidden_limbs = list())
 	if((brute <= 0) && (burn <= 0))
 		return 0

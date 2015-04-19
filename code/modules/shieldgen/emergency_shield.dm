@@ -91,6 +91,9 @@
 		if(2)
 			if(prob(50))
 				del(src)
+		if(3)
+			if(prob(25))
+				del(src)
 
 /obj/machinery/shield/blob_act()
 	del(src)

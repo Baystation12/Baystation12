@@ -651,8 +651,10 @@
 
 /obj/mecha/emp_act(severity)
 	if(get_charge())
-		use_power((cell.charge/2)/severity)
-		take_damage(50 / severity,"energy")
+		take_damage(150 / severity, "energy")
+	if(cell)
+		cell.emp_act(severity*2)
+	
 	src.log_message("EMP detected",1)
 	check_for_internal_damage(list(MECHA_INT_FIRE,MECHA_INT_TEMP_CONTROL,MECHA_INT_CONTROL_LOST,MECHA_INT_SHORT_CIRCUIT),1)
 	return

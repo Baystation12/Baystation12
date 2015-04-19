@@ -6,6 +6,6 @@
 
 	prime()
 		..()
-		if(empulse(src, 4, 10))
+		if(empulse(src, 4, 10, 10))
 			del(src)
 		return

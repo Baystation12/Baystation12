@@ -23,7 +23,7 @@
 	energy = min(energy + amount, max_energy)
 
 /datum/matter_synth/proc/emp_act(var/severity)
-	use_charge(max_energy * 0.1 / severity)
+	use_charge(max_energy / severity)
 
 /datum/matter_synth/medicine
 	name = "Medicine Synthesizer"

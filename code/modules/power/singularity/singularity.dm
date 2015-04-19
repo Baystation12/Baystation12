@@ -442,9 +442,9 @@
 
 /obj/machinery/singularity/proc/emp_area()
 	if(current_size != 11)
-		empulse(src, 8, 10)
+		empulse(src, 8, 9, 10)
 	else
-		empulse(src, 12, 16)
+		empulse(src, 12, 14, 16)
 
 /obj/machinery/singularity/proc/smwave()
 	for(var/mob/living/M in view(10, src.loc))

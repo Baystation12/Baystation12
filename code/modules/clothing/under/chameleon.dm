@@ -21,12 +21,13 @@
 	return
 
 /obj/item/clothing/under/chameleon/emp_act(severity)
-	name = "psychedelic"
-	desc = "Groovy!"
-	icon_state = "psyche"
-	item_color = "psyche"
-	update_icon()
-	update_clothing_icon()
+	if(prob(100/severity))
+		name = "psychedelic"
+		desc = "Groovy!"
+		icon_state = "psyche"
+		item_color = "psyche"
+		update_icon()
+		update_clothing_icon()
 
 /obj/item/clothing/under/chameleon/verb/change()
 	set name = "Change Jumpsuit Appearance"
@@ -73,12 +74,14 @@
 	return
 
 /obj/item/clothing/head/chameleon/emp_act(severity) //Because we don't have psych for all slots right now but still want a downside to EMP.  In this case your cover's blown.
-	name = "grey cap"
-	desc = "It's a baseball hat in a tasteful grey colour."
-	icon_state = "greysoft"
-	item_color = "grey"
-	update_icon()
-	update_clothing_icon()
+	if(prob(100/severity))
+		name = initial(name)
+		desc = initial(desc)
+		icon_state = initial(icon_state)
+		item_state = initial(item_state)
+		item_color = initial(item_color)
+		update_icon()
+		update_clothing_icon()
 
 /obj/item/clothing/head/chameleon/verb/change()
 	set name = "Change Hat/Helmet Appearance"
@@ -125,12 +128,14 @@
 	return
 
 /obj/item/clothing/suit/chameleon/emp_act(severity) //Because we don't have psych for all slots right now but still want a downside to EMP.  In this case your cover's blown.
-	name = "armor"
-	desc = "An armored vest that protects against some damage."
-	icon_state = "armor"
-	item_color = "armor"
-	update_icon()
-	update_clothing_icon()
+	if(prob(100/severity))
+		name = initial(name)
+		desc = initial(desc)
+		icon_state = initial(icon_state)
+		item_state = initial(item_state)
+		item_color = initial(item_color)
+		update_icon()
+		update_clothing_icon()
 
 /obj/item/clothing/suit/chameleon/verb/change()
 	set name = "Change Exosuit Appearance"
@@ -176,13 +181,14 @@
 	return
 
 /obj/item/clothing/shoes/chameleon/emp_act(severity) //Because we don't have psych for all slots right now but still want a downside to EMP.  In this case your cover's blown.
-	name = "black shoes"
-	desc = "A pair of black shoes."
-	icon_state = "black"
-	item_state = "black"
-	item_color = "black"
-	update_icon()
-	update_clothing_icon()
+	if(prob(100/severity))
+		name = initial(name)
+		desc = initial(desc)
+		icon_state = initial(icon_state)
+		item_state = initial(item_state)
+		item_color = initial(item_color)
+		update_icon()
+		update_clothing_icon()
 
 /obj/item/clothing/shoes/chameleon/verb/change()
 	set name = "Change Footwear Appearance"
@@ -225,14 +231,16 @@
 	return
 
 /obj/item/weapon/storage/backpack/chameleon/emp_act(severity) //Because we don't have psych for all slots right now but still want a downside to EMP.  In this case your cover's blown.
-	name = "backpack"
-	desc = "You wear this on your back and put items into it."
-	icon_state = "backpack"
-	item_state = "backpack"
-	update_icon()
-	if (ismob(src.loc))
-		var/mob/M = src.loc
-		M.update_inv_back()
+	if(prob(100/severity))
+		name = initial(name)
+		desc = initial(desc)
+		icon_state = initial(icon_state)
+		item_state = initial(item_state)
+		item_color = initial(item_color)
+		update_icon()
+		if (ismob(src.loc))
+			var/mob/M = src.loc
+			M.update_inv_back()
 
 /obj/item/weapon/storage/backpack/chameleon/verb/change()
 	set name = "Change Backpack Appearance"
@@ -281,12 +289,14 @@
 	return
 
 /obj/item/clothing/gloves/chameleon/emp_act(severity) //Because we don't have psych for all slots right now but still want a downside to EMP.  In this case your cover's blown.
-	name = "black gloves"
-	desc = "It looks like a pair of gloves, but it seems to have a small dial inside."
-	icon_state = "black"
-	item_color = "brown"
-	update_icon()
-	update_clothing_icon()
+	if(prob(100/severity))
+		name = initial(name)
+		desc = initial(desc)
+		icon_state = initial(icon_state)
+		item_state = initial(item_state)
+		item_color = initial(item_color)
+		update_icon()
+		update_clothing_icon()
 
 /obj/item/clothing/gloves/chameleon/verb/change()
 	set name = "Change Gloves Appearance"
@@ -332,11 +342,14 @@
 	return
 
 /obj/item/clothing/mask/chameleon/emp_act(severity) //Because we don't have psych for all slots right now but still want a downside to EMP.  In this case your cover's blown.
-	name = "gas mask"
-	desc = "It's a gas mask."
-	icon_state = "gas_alt"
-	update_icon()
-	update_clothing_icon()
+	if(prob(100/severity))
+		name = initial(name)
+		desc = initial(desc)
+		icon_state = initial(icon_state)
+		item_state = initial(item_state)
+		item_color = initial(item_color)
+		update_icon()
+		update_clothing_icon()
 
 /obj/item/clothing/mask/chameleon/verb/change()
 	set name = "Change Mask Appearance"
@@ -381,11 +394,14 @@
 	return
 
 /obj/item/clothing/glasses/chameleon/emp_act(severity) //Because we don't have psych for all slots right now but still want a downside to EMP.  In this case your cover's blown.
-	name = "Optical Meson Scanner"
-	desc = "It's a set of mesons."
-	icon_state = "meson"
-	update_icon()
-	update_clothing_icon()
+	if(prob(100/severity))
+		name = initial(name)
+		desc = initial(desc)
+		icon_state = initial(icon_state)
+		item_state = initial(item_state)
+		item_color = initial(item_color)
+		update_icon()
+		update_clothing_icon()
 
 /obj/item/clothing/glasses/chameleon/verb/change()
 	set name = "Change Glasses Appearance"
@@ -432,14 +448,17 @@
 	return
 
 /obj/item/weapon/gun/projectile/chameleon/emp_act(severity)
-	name = "desert eagle"
-	desc = "It's a desert eagle."
-	icon_state = "deagle"
-	update_icon()
-	if (ismob(src.loc))
-		var/mob/M = src.loc
-		M.update_inv_r_hand()
-		M.update_inv_l_hand()
+	if(prob(100/severity))
+		name = initial(name)
+		desc = initial(desc)
+		icon_state = initial(icon_state)
+		item_state = initial(item_state)
+		item_color = initial(item_color)
+		update_icon()
+		if (ismob(src.loc))
+			var/mob/M = src.loc
+			M.update_inv_r_hand()
+			M.update_inv_l_hand()
 
 /obj/item/weapon/gun/projectile/chameleon/verb/change(picked in gun_choices)
 	set name = "Change Gun Appearance"
