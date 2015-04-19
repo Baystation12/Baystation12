@@ -203,7 +203,7 @@ emp_act
 				"\blue You have attached \the [I] where [src]'s [affected.display_name] used to be.")
 				affected.germ_level = 0
 				affected.robotize()
-				affected.sabotaged = lL.sabotaged
+				affected.sabotaged = L.sabotaged
 				affected.brute_dam = L.brute_dam
 				affected.burn_dam = L.burn_dam
 				update_body()
