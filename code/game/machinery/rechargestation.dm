@@ -108,6 +108,14 @@
 			if(99 to 110)
 				overlays += image('icons/obj/objects.dmi', "statn_c100")
 
+	attackby(var/obj/item/O as obj, var/mob/user as mob)
+		if (istype(O, /obj/item/weapon/grab))
+			var/obj/item/weapon/grab/G = O
+			var/mob/living/carbon/human/H = G.affecting
+			if (istype(H))
+				if (H.species && H.species.flags & IS_SYNTHETIC)
+					go_in(H)
+
 	proc
 		build_icon()
 			if(NOPOWER|BROKEN)
@@ -166,20 +174,7 @@
 			update_use_power(1)
 			return
 
-
-	verb
-		move_eject()
-			set category = "Object"
-			set src in oview(1)
-			if (usr.stat != 0)
-				return
-			src.go_out()
-			add_fingerprint(usr)
-			return
-
-		move_inside()
-			set category = "Object"
-			set src in oview(1)
+		go_in(var/mob/usr)
 			if (usr.stat == 2)
 				//Whoever had it so that a borg with a dead cell can't enter this thing should be shot. --NEO
 				return
@@ -214,3 +209,19 @@
 			build_icon()
 			update_use_power(1)
 			return
+
+
+	verb
+		move_eject()
+			set category = "Object"
+			set src in oview(1)
+			if (usr.stat != 0)
+				return
+			src.go_out()
+			add_fingerprint(usr)
+			return
+
+		move_inside()
+			set category = "Object"
+			set src in oview(1)
+			go_in(usr)
