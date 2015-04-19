@@ -77,7 +77,8 @@
 
 
 /obj/machinery/door/firedoor/examine(mob/user)
-	if(!..(user, 1) && !isAI(user))
+	. = ..()
+	if(!. || !density)
 		return
 
 	if(pdiff >= FIREDOOR_MAX_PRESSURE_DIFF)
