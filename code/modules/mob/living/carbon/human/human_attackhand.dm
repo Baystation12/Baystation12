@@ -89,7 +89,12 @@
 			LAssailant = M
 
 			playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
-			visible_message("<span class='warning'>[M] has grabbed [src] passively!</span>")
+			if(M.dir == src.dir)
+				G.state = GRAB_AGGRESSIVE
+				G.adjust_position()
+				visible_message("<span class ='warning'>[M] has grabbed [src] from behind!</span>")
+			else
+				visible_message("<span class='warning'>[M] has grabbed [src] passively!</span>")
 			return 1
 
 		if(I_HURT)
@@ -255,11 +260,6 @@
 						visible_message("<span class='danger'>[M] has disarmed [src]!</span>")
 						playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 						return
-			
-			//if M (and only M) has a grab on src, start dislocating limbs
-			if(grab_joint(M))
-				playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
-				return
 
 			playsound(loc, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
 			visible_message("\red <B>[M] attempted to disarm [src]!</B>")
@@ -308,10 +308,10 @@
 		if(G.affecting == src && G.state == GRAB_NECK)
 			has_grab = 1
 			break
-	
+
 	if(!has_grab)
 		return 0
-	
+
 	if(!def_zone) def_zone = user.zone_sel.selecting
 	var/target_zone = check_zone(def_zone)
 	if(!target_zone)
@@ -319,7 +319,7 @@
 	var/obj/item/organ/external/organ = get_organ(check_zone(target_zone))
 	if(!organ || organ.is_dislocated() || organ.dislocated == -1)
 		return 0
-	
+
 	user.visible_message("<span class='warning'>[user] begins to dislocate [src]'s [organ.joint]!</span>")
 	if(do_after(user, 100))
 		organ.dislocate()

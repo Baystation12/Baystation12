@@ -5,14 +5,15 @@
 	name = "grab"
 	icon = 'icons/mob/screen1.dmi'
 	icon_state = "reinforce"
-	flags = NOBLUDGEON
+	flags = 0
 	var/obj/screen/grab/hud = null
-	var/mob/affecting = null
-	var/mob/assailant = null
+	var/mob/living/carbon/affecting = null
+	var/mob/living/carbon/human/assailant = null
 	var/state = GRAB_PASSIVE
 
 	var/allow_upgrade = 1
 	var/last_upgrade = 0
+	var/last_hit_zone = 0
 
 	layer = 21
 	abstract = 1
@@ -83,9 +84,27 @@
 			var/obj/item/weapon/grab/G = assailant.r_hand
 			if(G.affecting != affecting)
 				allow_upgrade = 0
-		if(state == GRAB_AGGRESSIVE)
+		if(state >= GRAB_AGGRESSIVE)
 			affecting.drop_l_hand()
 			affecting.drop_r_hand()
+
+			var/hit_zone = assailant.zone_sel.selecting
+			var/announce = 0
+			if(hit_zone != last_hit_zone)
+				announce = 1
+			last_hit_zone = hit_zone
+			switch(hit_zone)
+				if("mouth")
+					if(announce)
+						assailant.visible_message("<span class='warning'>[assailant] covers [affecting]'s mouth!</span>")
+					if(affecting.silent < 3)
+						affecting.silent = 3
+				if("eyes")
+					if(announce)
+						assailant.visible_message("<span class='warning'>[assailant] covers [affecting]'s eyes!</span>")
+					if(affecting.eye_blind < 3)
+						affecting.eye_blind = 3
+
 			//disallow upgrading past aggressive if we're being grabbed aggressively
 			for(var/obj/item/weapon/grab/G in affecting.grabbed_by)
 				if(G == src) continue
@@ -263,3 +282,15 @@
 	affecting.layer = 4
 	del(hud)
 	..()
+
+/obj/item/weapon/grab/attack(mob/living/carbon/human/victim, mob/living/attacker)
+	if(victim != affecting)	return
+	if(istype(victim))
+		switch(assailant.a_intent)
+			if(I_HURT)
+				if(state < GRAB_NECK)
+					assailant << "<span class='warning'>You require a better grab to do this.</span>"
+					return
+				if(victim.grab_joint(assailant))
+					playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
+					return
