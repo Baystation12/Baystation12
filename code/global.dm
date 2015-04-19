@@ -36,7 +36,8 @@ var/global/list/global_map = null
 //var/global/list/global_map = list(list(1,5),list(4,3))
 
 // Noises made when hit while typing.
-var/list/hit_appends = list("-OOF", "-ACK", "-UGH", "-HRNK", "-HURGH", "-GLORF")
+//var/list/hit_appends = list("-OOF", "-ACK", "-UGH", "-HRNK", "-HURGH", "-GLORF")
+var/list/hit_appends = list("-Œ…", "-¿…", "-”‘", "- ’–", "-ﬂ…!", "-›…!", "-¿–√’!", "-¡Àﬂ!")
 
 var/list/paper_tag_whitelist = list(
 	"center",  "p",     "div",   "span", "pre", "h1", "h2", "h3",  "h4",  "h5", "h6", "br", "hr",
