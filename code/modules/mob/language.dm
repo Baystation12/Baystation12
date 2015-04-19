@@ -223,9 +223,13 @@
 	name = "Tummese"
 	desc = "The common tongue of the Obsedai. It sounds like deep rumbling and resonant notes to everyone else."
 	speech_verb = "rumbles"
-	colour = "rough"
-	key = "r"
+	ask_verb = "mumbles"
+	exclaim_verb = "crashes"
+	colour = "#008B8B"
+	key = "9"
+	native = 1
 	flags = WHITELISTED
+	syllables = list("gr","plonk","bang","bash","creak","crash","grumble")
 
 /datum/language/diona
 	name = "Rootspeak"

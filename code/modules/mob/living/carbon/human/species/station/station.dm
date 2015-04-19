@@ -98,6 +98,33 @@
 
 	reagent_tag = IS_SKRELL
 
+/datum/species/obsedai
+	name = "Obsedai"
+	name_plural = "Obsedai"
+	icobase = 'icons/mob/human_races/r_obsedai.dmi'
+	language = "Tummese"
+	unarmed_types = list (/datum/unarmed_attack/obsedai)
+	total_health = 500
+	darksight = 8
+	slowdown = 0.4
+	brute_mod = 0.5
+	blurb = "This is a place holder intill a Obsedai loremin writes this."
+
+	cold_level_1 = -1 //Default 260
+	cold_level_2 = -1 //Default 200
+	cold_level_3 = -1 //Default 120
+
+	heat_level_1 = 4000 //Default 360
+	heat_level_2 = 5000 //Default 400
+	heat_level_3 = 5500 //Default 1000
+
+	primitive = /mob/living/carbon/monkey/tajara
+
+	flags = IS_WHITELISTED | NO_SLIP | NO_BREATHE | CAN_JOIN | IS_WHITELISTED
+
+	warning_low_pressure = 50
+	hazard_low_pressure = -1
+
 /datum/species/diona
 	name = "Diona"
 	name_plural = "Dionaea"
