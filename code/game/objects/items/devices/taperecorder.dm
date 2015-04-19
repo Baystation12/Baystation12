@@ -25,7 +25,7 @@
 		timestamp += timerecorded
 
 		if(speaking)
-			storedinfo += "\[[time2text(timerecorded*10,"mm:ss")]\] [M.name] [speaking.format_message_plain(msg, verb)]"
+			storedinfo += "\[[time2text(timerecorded*10,"mm:ss")]\] [M.name] [sanitize_popup(speaking.format_message_plain(msg, verb))]"
 		else
 			storedinfo += "\[[time2text(timerecorded*10,"mm:ss")]\] [M.name] [verb], \"[msg]\""
 
@@ -146,7 +146,7 @@
 		if(storedinfo.len < i)
 			break
 		var/turf/T = get_turf(src)
-		T.visible_message("<font color=Maroon><B>Tape Recorder</B>: [storedinfo[i]]</font>")
+		T.visible_message("<font color=Maroon><B>Tape Recorder</B>: [sanitize_chat(storedinfo[i])]</font>")
 		if(storedinfo.len < i+1)
 			playsleepseconds = 1
 			sleep(10)
