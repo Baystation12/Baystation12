@@ -154,6 +154,13 @@
 	body_color = "brown"
 	icon_state = "mouse_brown"
 
+/mob/living/simple_animal/mouse/brown/Mousse
+	name = "Mousse"
+	desc = "Not as good as a Chocolate Mousse, but he's still pretty cute."
+	response_help  = "pets"
+	response_disarm = "gently pushes aside"
+	response_harm   = "splats"
+
 //TOM IS ALIVE! SQUEEEEEEEE~K :)
 /mob/living/simple_animal/mouse/brown/Tom
 	name = "Tom"
