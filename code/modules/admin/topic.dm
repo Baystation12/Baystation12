@@ -1323,7 +1323,7 @@
 			return
 
 		if(L.can_centcom_reply())
-			var/input = input(src.owner, "Please enter a message to reply to [key_name(L)] via their headset.","Outgoing message from Centcomm", "")
+			var/input = sanitize(input(src.owner, "Please enter a message to reply to [key_name(L)] via their headset.","Outgoing message from Centcomm", ""))
 			if(!input)		return
 
 			src.owner << "You sent [input] to [L] via a secure channel."
