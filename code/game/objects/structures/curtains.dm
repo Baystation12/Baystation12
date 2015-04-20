@@ -50,14 +50,10 @@
 	alpha = 200
 
 /obj/structure/curtain/open/shower/engineering
-	name = "shower curtain"
 	color = "#FFA500"
-	alpha = 200
 
 /obj/structure/curtain/open/shower/security
-	name = "shower curtain"
 	color = "#9F2828"
-	alpha = 200
 
 #undef SHOWER_OPEN_LAYER
 #undef SHOWER_CLOSED_LAYER
