@@ -51,7 +51,7 @@
 			res |= SOUTH
 
 	var/matrix/M = matrix()
-	M.Turn([dir2angle(res))
+	M.Turn(dir2angle(res))
 	src.transform = M //Rotate ship
 
 	return res
