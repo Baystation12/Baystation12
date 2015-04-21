@@ -8,7 +8,6 @@
 	var/last_burn = 0
 	var/list/last_movement = list(0,0)
 	var/fore_dir = NORTH
-	var/standart_icon
 
 	var/obj/effect/map/current_sector
 	var/obj/machinery/computer/helm/nav_control
@@ -50,6 +49,11 @@
 			res |= NORTH
 		else
 			res |= SOUTH
+
+	var/matrix/M = matrix()
+	M.Turn([dir2angle(res))
+	src.transform = M //Rotate ship
+
 	return res
 
 /obj/effect/map/ship/proc/adjust_speed(n_x, n_y)
@@ -106,8 +110,3 @@
 		var/turf/newloc = locate(x + deltas[1], y + deltas[2], z)
 		if(newloc)
 			Move(newloc)
-		rotate()
-
-/obj/effect/map/ship/proc/rotate()
-	var/direct = get_heading()
-	src.icon = turn(src.standart_icon,dir2angle(direct))
