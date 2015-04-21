@@ -44,11 +44,11 @@
 	var/dat = "<title>[name]</title>"
 
 	for(var/obj/item/weapon/paper/P in src)
-		dat += "<A href='?src=\ref[src];remove=\ref[P]'>Remove</A> - <A href='?src=\ref[src];read=\ref[P]'>[P.name]</A><BR>"
+		dat += "<A href='?src=\ref[src];remove=\ref[P]'>Remove</A> <A href='?src=\ref[src];rename=\ref[P]'>Rename</A> - <A href='?src=\ref[src];read=\ref[P]'>[P.name]</A><BR>"
 	for(var/obj/item/weapon/photo/Ph in src)
-		dat += "<A href='?src=\ref[src];remove=\ref[Ph]'>Remove</A> - <A href='?src=\ref[src];look=\ref[Ph]'>[Ph.name]</A><BR>"
+		dat += "<A href='?src=\ref[src];remove=\ref[Ph]'>Remove</A> <A href='?src=\ref[src];rename=\ref[Ph]'>Rename</A> - <A href='?src=\ref[src];look=\ref[Ph]'>[Ph.name]</A><BR>"
 	for(var/obj/item/weapon/paper_bundle/Pb in src)
-		dat += "<A href='?src=\ref[src];remove=\ref[Pb]'>Remove</A> - <A href='?src=\ref[src];browse=\ref[Pb]'>[Pb.name]</A><BR>"
+		dat += "<A href='?src=\ref[src];remove=\ref[Pb]'>Remove</A> <A href='?src=\ref[src];rename=\ref[Pb]'>Rename</A> - <A href='?src=\ref[src];browse=\ref[Pb]'>[Pb.name]</A><BR>"
 	user << browse(dat, "window=folder")
 	onclose(user, "folder")
 	add_fingerprint(usr)
@@ -85,7 +85,22 @@
 			if(P && (P.loc == src) && istype(P))
 				P.attack_self(usr)
 				onclose(usr, "[P.name]")
-
+		else if(href_list["rename"])
+			var/obj/item/weapon/O = locate(href_list["rename"])
+			
+			if(O && (O.loc == src))
+				if(istype(O, /obj/item/weapon/paper))
+					var/obj/item/weapon/paper/to_rename = O
+					to_rename.rename()
+					
+				else if(istype(O, /obj/item/weapon/photo))
+					var/obj/item/weapon/photo/to_rename = O
+					to_rename.rename()
+					
+				else if(istype(O, /obj/item/weapon/paper_bundle))
+					var/obj/item/weapon/paper_bundle/to_rename = O
+					to_rename.rename()
+					
 		//Update everything
 		attack_self(usr)
 		update_icon()
