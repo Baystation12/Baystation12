@@ -219,3 +219,40 @@
 		M << "\green You hear a strange, alien voice in your head... \italic [msg]"
 		src << "\green You said: \"[msg]\" to [M]"
 	return
+
+/mob/living/carbon/human/proc/diona_split_nymph()
+	set name = "Split"
+	set desc = "Split your humanoid form into its constituent nymphs."
+	set category = "Abilities"
+
+	var/turf/T = get_turf(src)
+
+	var/mob/living/carbon/alien/diona/S = new(T)
+	S.set_dir(dir)
+	if(mind)
+		mind.transfer_to(S)
+
+	message_admins("\The [src] has split into nymphs; player now controls [key_name_admin(S)]")
+	log_admin("\The [src] has split into nymphs; player now controls [key_name(S)]")
+
+	var/nymphs = 1
+
+	for(var/mob/living/carbon/alien/diona/D in src)
+		nymphs++
+		D.loc = T
+		D.set_dir(pick(NORTH, SOUTH, EAST, WEST))
+
+	if(nymphs < 5)
+		for(var/i in nymphs to 4)
+			var/mob/M = new /mob/living/carbon/alien/diona(T)
+			M.set_dir(pick(NORTH, SOUTH, EAST, WEST))
+
+
+	for(var/obj/item/W in src)
+		drop_from_inventory(W)
+
+	visible_message("<span class='warning'>\The [src] quivers slightly, then splits apart with a wet slithering noise.</span>")
+
+	del(src)
+
+
