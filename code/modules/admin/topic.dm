@@ -1369,8 +1369,8 @@
 			var/data = ""
 			var/obj/item/weapon/paper_bundle/B = fax
 
-			for (var/page = 1, page <= B.amount, page++)
-				var/obj/pageobj = B.contents[page]
+			for (var/page = 1, page <= B.pages.len, page++)
+				var/obj/pageobj = B.pages[page]
 				data += "<A href='?src=\ref[src];AdminFaxViewPage=[page];paper_bundle=\ref[B]'>Page [page] - [pageobj.name]</A><BR>"
 
 			usr << browse(data, "window=[B.name]")
@@ -1383,11 +1383,11 @@
 
 		if (!bundle) return
 
-		if (istype(bundle.contents[page], /obj/item/weapon/paper))
-			var/obj/item/weapon/paper/P = bundle.contents[page]
+		if (istype(bundle.pages[page], /obj/item/weapon/paper))
+			var/obj/item/weapon/paper/P = bundle.pages[page]
 			P.show_content(src.owner, 1)
-		else if (istype(bundle.contents[page], /obj/item/weapon/photo))
-			var/obj/item/weapon/photo/H = bundle.contents[page]
+		else if (istype(bundle.pages[page], /obj/item/weapon/photo))
+			var/obj/item/weapon/photo/H = bundle.pages[page]
 			H.show(src.owner)
 		return
 
