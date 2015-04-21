@@ -23,7 +23,6 @@
 			nav_control = H
 			break
 	processing_objects.Add(src)
-	standart_icon = icon
 
 /obj/effect/map/ship/relaymove(mob/user, direction)
 	accelerate(direction)
