@@ -239,7 +239,7 @@
 		//	zone.RemoveTurf(src)
 		//	if(!zone.CheckStatus())
 		//		zone.SetStatus(ZONE_ACTIVE)
-
+		var/old_opacity = opacity
 		var/turf/simulated/W = new N( locate(src.x, src.y, src.z) )
 		//W.Assimilate_Air()
 
@@ -264,6 +264,11 @@
 			S.update_starlight()
 
 		W.levelupdate()
+
+		// Testing if this fixes bugs with lighting not updating.
+		if(old_opacity != W.opacity)
+			W.UpdateAffectingLights()
+
 		return W
 
 	else

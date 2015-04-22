@@ -95,13 +95,13 @@
 
 
 /turf/simulated/mineral/proc/UpdateMineral()
+	clear_ore_effects()
 	if(!mineral)
 		name = "\improper Rock"
 		icon_state = "rock"
 		return
 	name = "\improper [mineral.display_name] deposit"
-	overlays.Cut()
-	overlays += "rock_[mineral.name]"
+	new /obj/effect/mineral(src, mineral)
 
 //Not even going to touch this pile of spaghetti
 /turf/simulated/mineral/attackby(obj/item/weapon/W as obj, mob/user as mob)
@@ -234,10 +234,15 @@
 	else
 		return attack_hand(user)
 
+/turf/simulated/mineral/proc/clear_ore_effects()
+	for(var/obj/effect/mineral/M in contents)
+		del(M)
+
 /turf/simulated/mineral/proc/DropMineral()
 	if(!mineral)
 		return
 
+	clear_ore_effects()
 	var/obj/item/weapon/ore/O = new mineral.ore (src)
 	if(istype(O))
 		geologic_data.UpdateNearbyArtifactInfo(src)
@@ -274,6 +279,7 @@
 	var/list/step_overlays = list("n" = NORTH, "s" = SOUTH, "e" = EAST, "w" = WEST)
 
 	//Add some rubble,  you did just clear out a big chunk of rock.
+
 	var/turf/simulated/floor/plating/airless/asteroid/N = ChangeTurf(/turf/simulated/floor/plating/airless/asteroid)
 	N.overlay_detail = "asteroid[rand(0,9)]"
 

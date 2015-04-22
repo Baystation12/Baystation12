@@ -1,12 +1,3 @@
-/**********************Light************************/
-
-//this item is intended to give the effect of entering the mine, so that light gradually fades
-/obj/effect/light_emitter
-	name = "Light-emtter"
-	anchored = 1
-	unacidable = 1
-	luminosity = 8
-
 /**********************Miner Lockers**************************/
 
 /obj/structure/closet/secure_closet/miner
@@ -35,8 +26,66 @@
 	new /obj/item/device/flashlight/lantern(src)
 	new /obj/item/weapon/shovel(src)
 	new /obj/item/weapon/pickaxe(src)
-	new /obj/item/clothing/glasses/meson(src)
+	new /obj/item/clothing/glasses/orescanner(src)
 
+/******************************Goggles*******************************/
+
+/obj/item/clothing/glasses/orescanner
+	name = "resonance scanners"
+	desc = "A set of goggles geared towards detecting different concentrations of minerals."
+	icon_state = "meson"
+	item_state = "glasses"
+	icon_action_button = "action_meson"
+	toggleable = 1
+	active = 0
+
+	var/mob/living/carbon/human/wearer
+	var/list/ore_nodes = list()
+
+/obj/item/clothing/glasses/orescanner/New()
+	..()
+	processing_objects |= src
+
+/obj/item/clothing/glasses/orescanner/Del()
+	processing_objects -= src
+	..()
+
+/obj/item/clothing/glasses/orescanner/equipped(var/mob/living/carbon/human/M)
+	..()
+	remove_ore_images()
+	wearer = null
+	if(istype(M) && M.glasses == src)
+		wearer = M
+
+/obj/item/clothing/glasses/orescanner/dropped()
+	..()
+	remove_ore_images()
+	wearer = null
+
+/obj/item/clothing/glasses/orescanner/process()
+	remove_ore_images()
+	if(active)
+		if(!wearer || wearer.glasses != src)
+			return
+		for(var/obj/effect/mineral/M in range(wearer,6))
+			// Maybe make a cache for this so multiple miners aren't spawning copies.
+			ore_nodes += image(M.icon, loc = get_turf(M), icon_state = M.icon_state)
+		if(ore_nodes.len && wearer.client && wearer.client.images)
+			wearer.client.images |= ore_nodes
+
+/obj/item/clothing/glasses/orescanner/proc/remove_ore_images()
+	if(!ore_nodes)
+		ore_nodes = list()
+	if(ore_nodes.len)
+		if(wearer && wearer.client && wearer.client.images)
+			for(var/image/I in ore_nodes)
+				wearer.client.images -= I
+				del(I)
+		ore_nodes.Cut()
+
+/obj/item/clothing/glasses/orescanner/dropped()
+	remove_ore_images()
+	wearer = null
 
 /******************************Lantern*******************************/
 
