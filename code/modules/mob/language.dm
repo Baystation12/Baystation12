@@ -148,7 +148,7 @@
 	colour = "soghun"
 	key = "o"
 	flags = WHITELISTED
-	syllables = list("ss","ss","ss","ss","skak","seeki","resh","las","esi","kor","sh")
+	syllables = list("ss","ss","ss","ss","skak","seeki","resh","las","esi","kor","sh","oss","traat","khiss","voht","ghas","tiss","thuus","stos","sso","saa","sch","esh","ets","kass","hoss","huf")
 
 /datum/language/soghun/get_random_name()
 
@@ -234,12 +234,13 @@
 /datum/language/diona
 	name = "Rootspeak"
 	desc = "A creaking, subvocal language spoken instinctively by the Dionaea. Due to the unique makeup of the average Diona, a phrase of Rootspeak can be a combination of anywhere from one to twelve individual voices and notes."
-	speech_verb = "creaks and rustles"
-	ask_verb = "creaks"
-	exclaim_verb = "rustles"
-	colour = "soghun"
+	speech_verb = "sings"
+	ask_verb = "chimes"
+	exclaim_verb = "resonates"
+	colour = "#008B8B"
 	key = "q"
-	flags = RESTRICTED
+	native = 1
+	flags = WHITELISTED | HIVEMIND
 	syllables = list("hs","zt","kr","st","sh")
 
 /datum/language/diona/get_random_name()
@@ -307,6 +308,36 @@
 	colour = "rough"
 	key = "3"
 	syllables = list ("gra","ba","ba","breh","bra","rah","dur","ra","ro","gro","go","ber","bar","geh","heh", "gra")
+
+/datum/language/mwc
+	name = "Milky Way Common"
+	desc = "An old language modified and now predominately used within the Milky Way Collective."
+	speech_verb = "stresses"
+	ask_verb = "accentuates"
+	exclaim_verb = "whoops"
+	colour = "#008B8B"
+	key = "5"
+	syllables = list ("ahz","aaktz","areid","nos","bal","kir","zet","jut","tar","vex","urk","ost","gaz","kel","mer","das","heirr","got","svin","erz","mur","faz","tey","lak","fret","wilz","boz","bren","kol","til","ekt","tur","zas","ver","rien","kesh")
+
+/datum/language/caravazan
+	name = "Caravazan"
+	desc = "A language originating from a single planet, and then brought across the Caravazan Empire."
+	speech_verb = "declares"
+	ask_verb = "inquires"
+	exclaim_verb = "asserts"
+	colour = "#008B8B"
+	key = "6"
+	syllables = list ( "pol","aker","os","lil","ols","kev","vlitch","pois","slel","dit","van","vlad","in","hen","maen","da","so","kils","der","blat","nur","ma","mar","wen","nir","grad","prus","tri","gal","tar","kov","flen","jur","wed","stal","len","er")
+
+/datum/language/sirian
+	name = "Sirian"
+	desc = "Initially a bastardization of several languages, developed into the official language of the Federation of Sirius."
+	speech_verb = "conveys"
+	ask_verb = "ponders"
+	exclaim_verb = "bellows"
+	colour = "#008B8B"
+	key = "7"
+	syllables = list ( "reis", "du", "sé", "mëo", "waíse", "wëy", "gü", "lai", "kp", "du", "dauth", "brun", "bjart", "äen", "älf", "ach", "yawë", "uni", "taune", "sköl", "skul", "sem", "shurt", "rú", "röth", "ram", "fra", "hóre", "gywnn", "völ", "caí", "eyre", "lát", "fram", "gëul", "böll", "rïsh", "nen", "thrys", "tuath", "ono" )
 
 /datum/language/xenocommon
 	name = "Xenomorph"
