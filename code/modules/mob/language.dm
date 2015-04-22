@@ -234,12 +234,13 @@
 /datum/language/diona
 	name = "Rootspeak"
 	desc = "A creaking, subvocal language spoken instinctively by the Dionaea. Due to the unique makeup of the average Diona, a phrase of Rootspeak can be a combination of anywhere from one to twelve individual voices and notes."
-	speech_verb = "creaks and rustles"
-	ask_verb = "creaks"
-	exclaim_verb = "rustles"
-	colour = "soghun"
+	speech_verb = "sings"
+	ask_verb = "chimes"
+	exclaim_verb = "resonates"
+	colour = "#008B8B"
 	key = "q"
-	flags = RESTRICTED
+	native = 1
+	flags = WHITELISTED | HIVEMIND
 	syllables = list("hs","zt","kr","st","sh")
 
 /datum/language/diona/get_random_name()
