@@ -271,6 +271,7 @@
 	icon_state = "thermalimplants"
 	item_state = "syringe_kit"
 
+/* These do not currently work, commenting out pending fixes.
 /obj/item/clothing/glasses/minerals
 	name = "resonance scanners"
 	desc = "A set of goggles geared towards detecting different concentrations of minerals."
@@ -312,8 +313,8 @@
 			return
 		for(var/obj/effect/mineral/M in range(wearer,6))
 			// Maybe make a cache for this so multiple miners aren't spawning copies.
-			ore_nodes += M.scanner_image
-		if(ore_nodes.len && wearer.client)
+			ore_nodes |= M.get_scan_overlay()
+		if(wearer.client)
 			wearer.client.images |= ore_nodes
 
 /obj/item/clothing/glasses/minerals/proc/remove_ore_images()
@@ -325,7 +326,4 @@
 				wearer.client.images -= I
 				del(I)
 		ore_nodes.Cut()
-
-/obj/item/clothing/glasses/minerals/dropped()
-	remove_ore_images()
-	wearer = null
+*/

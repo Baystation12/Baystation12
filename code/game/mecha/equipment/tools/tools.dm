@@ -89,8 +89,13 @@
 		var/C = target.loc	//why are these backwards? we may never know -Pete
 		if(do_after_cooldown(target))
 			if(T == chassis.loc && src == chassis.selected)
-				if(istype(target, /turf/simulated/wall/r_wall))
-					occupant_message("<span class='warning'>[target] is too durable to drill through.</span>")
+				if(istype(target, /turf/simulated/wall))
+					var/turf/simulated/wall/W = target
+					if(W.reinf_material)
+						occupant_message("<span class='warning'>[target] is too durable to drill through.</span>")
+					else
+						log_message("Drilled through [target]")
+						target.ex_act(2)
 				else if(istype(target, /turf/simulated/mineral))
 					for(var/turf/simulated/mineral/M in range(chassis,1))
 						if(get_dir(chassis,M)&chassis.dir)
@@ -140,8 +145,9 @@
 		var/C = target.loc	//why are these backwards? we may never know -Pete
 		if(do_after_cooldown(target))
 			if(T == chassis.loc && src == chassis.selected)
-				if(istype(target, /turf/simulated/wall/r_wall))
-					if(do_after_cooldown(target))//To slow down how fast mechs can drill through the station
+				if(istype(target, /turf/simulated/wall))
+					var/turf/simulated/wall/W = target
+					if(!W.reinf_material || do_after_cooldown(target))//To slow down how fast mechs can drill through the station
 						log_message("Drilled through [target]")
 						target.ex_act(3)
 				else if(istype(target, /turf/simulated/mineral))

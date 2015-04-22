@@ -917,3 +917,6 @@ var/list/be_special_flags = list(
 #define STAGE_FOUR	7
 #define STAGE_FIVE	9
 #define STAGE_SUPER	11
+
+#define WALL_CAN_OPEN 1
+#define WALL_OPENING 2

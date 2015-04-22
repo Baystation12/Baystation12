@@ -106,18 +106,19 @@
 	return 2
 
 /turf/simulated/wall/singularity_pull(S, current_size)
-	if(current_size >= STAGE_FIVE)
-		if(prob(75))
-			dismantle_wall()
-		return
-	if(current_size == STAGE_FOUR)
-		if(prob(30))
-			dismantle_wall()
 
-/turf/simulated/wall/r_wall/singularity_pull(S, current_size)
-	if(current_size >= STAGE_FIVE)
-		if(prob(30))
-			dismantle_wall()
+	if(!reinf_material)
+		if(current_size >= STAGE_FIVE)
+			if(prob(75))
+				dismantle_wall()
+			return
+		if(current_size == STAGE_FOUR)
+			if(prob(30))
+				dismantle_wall()
+	else
+		if(current_size >= STAGE_FIVE)
+			if(prob(30))
+				dismantle_wall()
 
 /turf/space/singularity_act()
 	return

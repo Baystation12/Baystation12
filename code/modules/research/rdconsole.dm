@@ -438,11 +438,11 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 	else if(href_list["lathe_ejectsheet"] && linked_lathe) //Causes the protolathe to eject a sheet of material
 		var/desired_num_sheets = text2num(href_list["amount"])
 		var/res_amount, type
-		var/material/M = name_to_mineral[href_list["lathe_ejectsheet"]]
+		var/material/M = name_to_material[href_list["lathe_ejectsheet"]]
 		if(istype(M))
 			type = M.stack_type
 
-		switch(name_to_mineral[href_list["lathe_ejectsheet"]])
+		switch(name_to_material[href_list["lathe_ejectsheet"]])
 			if("steel")
 				res_amount = "m_amount"
 			if("glass")

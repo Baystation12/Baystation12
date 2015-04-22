@@ -1845,12 +1845,10 @@ datum
 			reaction_turf(var/turf/T, var/volume)
 				if(istype(T, /turf/simulated/wall))
 					var/turf/simulated/wall/W = T
-					if(W.rotting)
-						W.rotting = 0
-						for(var/obj/effect/E in W) if(E.name == "Wallrot") del E
-
-						for(var/mob/O in viewers(W, null))
-							O.show_message(text("\blue The fungi are completely dissolved by the solution!"), 1)
+					if(locate(/obj/effect/overlay/wallrot) in W)
+						for(var/obj/effect/overlay/wallrot/E in W)
+							del(E)
+						W.visible_message("<span class='notice'>The fungi are completely dissolved by the solution!</span>")
 
 			reaction_obj(var/obj/O, var/volume)
 				if(istype(O,/obj/effect/alien/weeds/))

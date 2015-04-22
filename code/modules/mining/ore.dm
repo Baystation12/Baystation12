@@ -4,71 +4,71 @@
 	icon_state = "ore2"
 	w_class = 2
 	var/datum/geosample/geologic_data
-	var/mineral
+	var/material
 
 /obj/item/weapon/ore/uranium
 	name = "pitchblende"
 	icon_state = "ore_uranium"
 	origin_tech = "materials=5"
-	mineral = "uranium"
+	material = "uranium"
 
 /obj/item/weapon/ore/iron
 	name = "hematite"
 	icon_state = "ore_iron"
 	origin_tech = "materials=1"
-	mineral = "hematite"
+	material = "hematite"
 
 /obj/item/weapon/ore/coal
-	name = "carbonaceous rock"
+	name = "raw carbon"
 	icon_state = "ore_coal"
 	origin_tech = "materials=1"
-	mineral = "coal"
+	material = "carbon"
 
 /obj/item/weapon/ore/glass
 	name = "impure silicates"
 	icon_state = "ore_glass"
 	origin_tech = "materials=1"
-	mineral = "sand"
+	material = "sand"
 
 /obj/item/weapon/ore/phoron
 	name = "phoron crystals"
 	icon_state = "ore_phoron"
 	origin_tech = "materials=2"
-	mineral = "phoron"
+	material = "phoron"
 
 /obj/item/weapon/ore/silver
 	name = "native silver ore"
 	icon_state = "ore_silver"
 	origin_tech = "materials=3"
-	mineral = "silver"
+	material = "silver"
 
 /obj/item/weapon/ore/gold
 	name = "native gold ore"
 	icon_state = "ore_gold"
 	origin_tech = "materials=4"
-	mineral = "gold"
+	material = "gold"
 
 /obj/item/weapon/ore/diamond
 	name = "diamonds"
 	icon_state = "ore_diamond"
 	origin_tech = "materials=6"
-	mineral = "diamond"
+	material = "diamond"
 
 /obj/item/weapon/ore/osmium
 	name = "raw platinum"
 	icon_state = "ore_platinum"
-	mineral = "platinum"
+	material = "platinum"
 
 /obj/item/weapon/ore/hydrogen
 	name = "raw hydrogen"
 	icon_state = "ore_hydrogen"
-	mineral = "mhydrogen"
+	material = "mhydrogen"
 
 /obj/item/weapon/ore/slag
 	name = "Slag"
 	desc = "Someone screwed up..."
 	icon_state = "slag"
-	mineral = "slag"
+	material = null
 
 /obj/item/weapon/ore/New()
 	pixel_x = rand(0,16)-8

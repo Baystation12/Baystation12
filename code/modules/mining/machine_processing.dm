@@ -42,8 +42,9 @@
 	for(var/ore in machine.ores_processing)
 
 		if(!machine.ores_stored[ore] && !show_all_ores) continue
-
-		dat += "<tr><td width = 40><b>[capitalize(ore)]</b></td><td width = 30>[machine.ores_stored[ore]]</td><td width = 100><font color='"
+		var/ore/O = ore_data[ore]
+		if(!O) continue
+		dat += "<tr><td width = 40><b>[capitalize(O.display_name)]</b></td><td width = 30>[machine.ores_stored[ore]]</td><td width = 100><font color='"
 		if(machine.ores_processing[ore])
 			switch(machine.ores_processing[ore])
 				if(0)
@@ -150,8 +151,10 @@
 	for(var/i = 0,i<sheets_per_tick,i++)
 		var/obj/item/weapon/ore/O = locate() in input.loc
 		if(!O) break
-		if(!isnull(ores_stored[O.name])) ores_stored[O.name]++
-		O.loc = null
+		if(!isnull(ores_stored[O.material]))
+			ores_stored[O.material]++
+
+		del(O)
 
 	if(!active)
 		return
@@ -206,7 +209,7 @@
 				var/can_make = Clamp(ores_stored[metal],0,sheets_per_tick-sheets)
 				if(can_make%2>0) can_make--
 
-				var/material/M = name_to_mineral[O.compresses_to]
+				var/material/M = name_to_material[O.compresses_to]
 
 				if(!istype(M) || !can_make || ores_stored[metal] < 1)
 					continue
@@ -220,7 +223,7 @@
 
 				var/can_make = Clamp(ores_stored[metal],0,sheets_per_tick-sheets)
 
-				var/material/M = name_to_mineral[O.smelts_to]
+				var/material/M = name_to_material[O.smelts_to]
 				if(!istype(M) || !can_make || ores_stored[metal] < 1)
 					continue
 

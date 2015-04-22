@@ -38,7 +38,7 @@ var/global/list/ore_data = list()
 	xarch_source_mineral = "potassium"
 
 /ore/hematite
-	name = "iron"
+	name = "hematite"
 	display_name = "hematite"
 	smelts_to = "iron"
 	alloy = 1
@@ -48,8 +48,8 @@ var/global/list/ore_data = list()
 	scan_icon = "mineral_common"
 
 /ore/coal
-	name = "coal"
-	display_name = "carbonaceous rock"
+	name = "carbon"
+	display_name = "raw carbon"
 	smelts_to = "plastic"
 	alloy = 1
 	result_amount = 5
@@ -105,7 +105,7 @@ var/global/list/ore_data = list()
 		)
 
 /ore/diamond
-	name = "diamonds"
+	name = "diamond"
 	display_name = "diamond"
 	compresses_to = "diamond"
 	result_amount = 5

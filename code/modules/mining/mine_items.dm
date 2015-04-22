@@ -26,7 +26,7 @@
 	new /obj/item/device/flashlight/lantern(src)
 	new /obj/item/weapon/shovel(src)
 	new /obj/item/weapon/pickaxe(src)
-	new /obj/item/clothing/glasses/minerals(src)
+	new /obj/item/clothing/glasses/material(src)
 
 /******************************Lantern*******************************/
 

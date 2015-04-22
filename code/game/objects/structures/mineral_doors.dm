@@ -119,7 +119,7 @@
 			Dismantle(1)
 
 	proc/Dismantle(devastated = 0)
-		var/material/M = name_to_mineral[mineralType]
+		var/material/M = name_to_material[mineralType]
 		if(istype(M))
 			for(var/i = (devastated? 1 : 3), i <= oreAmount, i++)
 				new M.stack_type(get_turf(src))
