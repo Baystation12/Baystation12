@@ -103,7 +103,7 @@
 
 
 
-//Chemist is a medical job damnit	//YEAH FUCK YOU SCIENCE	-Pete	//Guys, behave -Erro
+//Chemist is a medical job damnit	//YEAH FUCK YOU SCIENCE	-Pete	//Guys, behave -Erro // MEDSCI FOREVER
 /datum/job/chemist
 	title = "Chemist"
 	flag = CHEMIST
@@ -112,10 +112,11 @@
 	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2
-	supervisors = "the chief medical officer"
+	supervisors = "the chief medical officer and/or research director"
 	selection_color = "#ffeef0"
-	access = list(access_medical, access_morgue, access_surgery, access_chemistry, access_virology, access_genetics)
-	minimal_access = list(access_medical, access_chemistry)
+	// access_tox is *not* Toxins, that's access_tox_storage. Not sure why, but that's how it is. access_tox is R&D.
+	access = list(access_medical, access_morgue, access_surgery, access_chemistry, access_virology, access_genetics, access_research, access_tox)
+	minimal_access = list(access_medical, access_chemistry, access_research)
 	alt_titles = list("Pharmacist")
 
 
