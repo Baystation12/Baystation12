@@ -17,7 +17,7 @@
 	var/time_coeff = 1.5 //can be upgraded with research
 	var/resource_coeff = 1.5 //can be upgraded with research
 	var/list/resources = list(
-										"metal"=0,
+										"steel"=0,
 										"glass"=0,
 										"gold"=0,
 										"silver"=0,
@@ -719,7 +719,7 @@
 /obj/machinery/mecha_part_fabricator/proc/remove_material(var/mat_string, var/amount)
 	var/type
 	switch(mat_string)
-		if("metal")
+		if("steel")
 			type = /obj/item/stack/sheet/metal
 		if("glass")
 			type = /obj/item/stack/sheet/glass
@@ -774,9 +774,9 @@
 				if(I.reliability != 100 && crit_fail)
 					I.crit_fail = 1
 				I.loc = src.loc
-			if(src.resources["metal"] >= 3750)
+			if(src.resources["steel"] >= 3750)
 				var/obj/item/stack/sheet/metal/G = new /obj/item/stack/sheet/metal(src.loc)
-				G.amount = round(src.resources["metal"] / G.perunit)
+				G.amount = round(src.resources["steel"] / G.perunit)
 			if(src.resources["glass"] >= 3750)
 				var/obj/item/stack/sheet/glass/G = new /obj/item/stack/sheet/glass(src.loc)
 				G.amount = round(src.resources["glass"] / G.perunit)
@@ -816,7 +816,7 @@
 		if(/obj/item/stack/sheet/mineral/phoron)
 			material = "phoron"
 		if(/obj/item/stack/sheet/metal)
-			material = "metal"
+			material = "steel"
 		if(/obj/item/stack/sheet/glass)
 			material = "glass"
 		if(/obj/item/stack/sheet/mineral/uranium)

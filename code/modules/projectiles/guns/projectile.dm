@@ -8,7 +8,7 @@
 	icon_state = "revolver"
 	origin_tech = "combat=2;materials=2"
 	w_class = 3
-	matter = list("metal" = 1000)
+	matter = list("steel" = 1000)
 	recoil = 1
 
 	var/caliber = "357"		//determines which casings will fit
@@ -50,7 +50,7 @@
 		chambered = ammo_magazine.stored_ammo[1]
 		if(handle_casings != HOLD_CASINGS)
 			ammo_magazine.stored_ammo -= chambered
-	
+
 	if (chambered)
 		return chambered.BB
 	return null

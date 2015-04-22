@@ -11,7 +11,7 @@
 	density = 1
 	blocks_air = 1
 	temperature = T0C
-	var/mineral/mineral
+	var/ore/mineral
 	var/mined_ore = 0
 	var/last_act = 0
 	var/emitter_blasts_taken = 0 // EMITTER MINING! Muhehe.
@@ -375,12 +375,9 @@
 /turf/simulated/mineral/random/New()
 	if (prob(mineralChance) && !mineral)
 		var/mineral_name = pickweight(mineralSpawnChanceList) //temp mineral name
-
-		if(!name_to_mineral)
-			SetupMinerals()
-
-		if (mineral_name && mineral_name in name_to_mineral)
-			mineral = name_to_mineral[mineral_name]
+		mineral_name = lowertext(mineral_name)
+		if (mineral_name && (mineral_name in ore_data))
+			mineral = ore_data[mineral_name]
 			UpdateMineral()
 
 	. = ..()

@@ -11,7 +11,7 @@
 	throw_speed = 1
 	throw_range = 2
 
-	matter = list("metal" = 750,"waste" = 750)
+	matter = list("steel" = 750,"waste" = 750)
 
 	origin_tech = "powerstorage=3;syndicate=5"
 	var/drain_rate = 1000000		// amount of power to drain per tick

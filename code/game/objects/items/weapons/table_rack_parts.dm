@@ -6,7 +6,7 @@
 	gender = PLURAL
 	icon = 'icons/obj/items.dmi'
 	icon_state = "table_parts"
-	matter = list("metal" = 3750)
+	matter = list("steel" = 3750)
 	flags = CONDUCT
 	attack_verb = list("slammed", "bashed", "battered", "bludgeoned", "thrashed", "whacked")
 
@@ -49,7 +49,7 @@
 	desc = "Hard table parts. Well... harder."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "reinf_tableparts"
-	matter = list("metal" = 7500)
+	matter = list("steel" = 7500)
 	flags = CONDUCT
 
 	stack_types = list(/obj/item/stack/sheet/metal, /obj/item/stack/rods)

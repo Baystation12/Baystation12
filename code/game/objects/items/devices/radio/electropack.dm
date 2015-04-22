@@ -8,7 +8,7 @@
 	slot_flags = SLOT_BACK
 	w_class = 5.0
 
-	matter = list("metal" = 10000,"glass" = 2500)
+	matter = list("steel" = 10000,"glass" = 2500)
 
 	var/code = 2
 

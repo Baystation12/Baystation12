@@ -5,7 +5,7 @@
 	icon_state = ""
 	flags = CONDUCT
 	w_class = 2.0
-	matter = list("metal" = 100)
+	matter = list("steel" = 100)
 	throwforce = 2
 	throw_speed = 3
 	throw_range = 10

@@ -26,7 +26,7 @@
 	throw_range = 9
 	w_class = 2
 
-	matter = list("glass" = 25,"metal" = 75)
+	matter = list("glass" = 25,"steel" = 75)
 	var/const/FREQ_LISTENING = 1
 
 

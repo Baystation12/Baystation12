@@ -63,6 +63,10 @@ var/global/list/datum/stack_recipe/iron_recipes = list ( \
 	w_class = 3.0
 	throw_speed = 3
 	throw_range = 3
+	var/walltype_solid
+	var/walltype_false
+	var/doortype_solid
+	var/doortype_machine
 
 /obj/item/stack/sheet/mineral/New()
 	..()

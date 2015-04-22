@@ -80,18 +80,18 @@ var/global/list/datum/stack_recipe/metal_recipes = list ( \
 )
 
 /obj/item/stack/sheet/metal
-	name = "metal"
-	desc = "Sheets made out off metal. It has been dubbed Metal Sheets."
+	name = "steel"
+	desc = "Sheets made out off steel."
 	singular_name = "metal sheet"
 	icon_state = "sheet-metal"
-	matter = list("metal" = 3750)
+	matter = list("steel" = 3750)
 	throwforce = 14.0
 	flags = CONDUCT
 	origin_tech = "materials=1"
 
 /obj/item/stack/sheet/metal/cyborg
-	name = "metal synthesizer"
-	desc = "A device that makes metal sheets."
+	name = "steel synthesizer"
+	desc = "A device that makes steel sheets."
 	gender = NEUTER
 	matter = null
 	uses_charge = 1
@@ -120,7 +120,7 @@ var/global/list/datum/stack_recipe/plasteel_recipes = list ( \
 	desc = "This sheet is an alloy of iron and phoron."
 	icon_state = "sheet-plasteel"
 	item_state = "sheet-metal"
-	matter = list("metal" = 7500)
+	matter = list("steel" = 7500)
 	throwforce = 15.0
 	flags = CONDUCT
 	origin_tech = "materials=2"

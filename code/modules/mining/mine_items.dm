@@ -26,66 +26,7 @@
 	new /obj/item/device/flashlight/lantern(src)
 	new /obj/item/weapon/shovel(src)
 	new /obj/item/weapon/pickaxe(src)
-	new /obj/item/clothing/glasses/orescanner(src)
-
-/******************************Goggles*******************************/
-
-/obj/item/clothing/glasses/orescanner
-	name = "resonance scanners"
-	desc = "A set of goggles geared towards detecting different concentrations of minerals."
-	icon_state = "meson"
-	item_state = "glasses"
-	icon_action_button = "action_meson"
-	toggleable = 1
-	active = 0
-
-	var/mob/living/carbon/human/wearer
-	var/list/ore_nodes = list()
-
-/obj/item/clothing/glasses/orescanner/New()
-	..()
-	processing_objects |= src
-
-/obj/item/clothing/glasses/orescanner/Del()
-	processing_objects -= src
-	..()
-
-/obj/item/clothing/glasses/orescanner/equipped(var/mob/living/carbon/human/M)
-	..()
-	remove_ore_images()
-	wearer = null
-	if(istype(M) && M.glasses == src)
-		wearer = M
-
-/obj/item/clothing/glasses/orescanner/dropped()
-	..()
-	remove_ore_images()
-	wearer = null
-
-/obj/item/clothing/glasses/orescanner/process()
-	remove_ore_images()
-	if(active)
-		if(!wearer || wearer.glasses != src)
-			return
-		for(var/obj/effect/mineral/M in range(wearer,6))
-			// Maybe make a cache for this so multiple miners aren't spawning copies.
-			ore_nodes += image(M.icon, loc = get_turf(M), icon_state = M.icon_state)
-		if(ore_nodes.len && wearer.client && wearer.client.images)
-			wearer.client.images |= ore_nodes
-
-/obj/item/clothing/glasses/orescanner/proc/remove_ore_images()
-	if(!ore_nodes)
-		ore_nodes = list()
-	if(ore_nodes.len)
-		if(wearer && wearer.client && wearer.client.images)
-			for(var/image/I in ore_nodes)
-				wearer.client.images -= I
-				del(I)
-		ore_nodes.Cut()
-
-/obj/item/clothing/glasses/orescanner/dropped()
-	remove_ore_images()
-	wearer = null
+	new /obj/item/clothing/glasses/minerals(src)
 
 /******************************Lantern*******************************/
 
@@ -108,7 +49,7 @@
 	icon_state = "pickaxe"
 	item_state = "jackhammer"
 	w_class = 4.0
-	matter = list("metal" = 3750)
+	matter = list("steel" = 3750)
 	var/digspeed = 40 //moving the delay to an item var so R&D can make improved picks. --NEO
 	origin_tech = "materials=1;engineering=1"
 	attack_verb = list("hit", "pierced", "sliced", "attacked")
@@ -168,6 +109,7 @@
 	origin_tech = "materials=4;phorontech=3;engineering=3"
 	desc = "A rock cutter that uses bursts of hot plasma. You could use it to cut limbs off of xenos! Or, you know, mine stuff."
 	drill_verb = "cutting"
+	drill_sound = 'sound/items/Welder.ogg'
 	sharp = 1
 	edge = 1
 
@@ -210,7 +152,7 @@
 	throwforce = 4.0
 	item_state = "shovel"
 	w_class = 3.0
-	matter = list("metal" = 50)
+	matter = list("steel" = 50)
 	origin_tech = "materials=1;engineering=1"
 	attack_verb = list("bashed", "bludgeoned", "thrashed", "whacked")
 	sharp = 0

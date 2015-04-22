@@ -10,39 +10,30 @@
 	desc = "A wall with gold plating. Swag!"
 	icon_state = "gold0"
 	walltype = "gold"
-	mineral = "gold"
-	//var/electro = 1
-	//var/shocked = null
 
 /turf/simulated/wall/mineral/silver
 	name = "silver wall"
 	desc = "A wall with silver plating. Shiny!"
 	icon_state = "silver0"
 	walltype = "silver"
-	mineral = "silver"
-	//var/electro = 0.75
-	//var/shocked = null
 
 /turf/simulated/wall/mineral/diamond
 	name = "diamond wall"
 	desc = "A wall with diamond plating. You monster."
 	icon_state = "diamond0"
 	walltype = "diamond"
-	mineral = "diamond"
 
 /turf/simulated/wall/mineral/sandstone
 	name = "sandstone wall"
 	desc = "A wall with sandstone plating."
 	icon_state = "sandstone0"
 	walltype = "sandstone"
-	mineral = "sandstone"
 
 /turf/simulated/wall/mineral/uranium
 	name = "uranium wall"
 	desc = "A wall with uranium plating. This is probably a bad idea."
 	icon_state = "uranium0"
 	walltype = "uranium"
-	mineral = "uranium"
 
 /turf/simulated/wall/mineral/uranium/proc/radiate()
 	if(!active)

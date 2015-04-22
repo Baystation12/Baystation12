@@ -6,7 +6,7 @@
 	desc = "A huge chunk of metal used to seperate rooms."
 	anchored = 1
 	icon = 'icons/turf/walls.dmi'
-	var/mineral = "metal"
+	var/mineral = "steel"
 	var/opening = 0
 
 /obj/structure/falsewall/New()
@@ -87,65 +87,45 @@
 		user << "\red You must wait until the door has stopped moving."
 		return
 
-	if(density)
-		var/turf/T = get_turf(src)
-		if(T.density)
-			user << "\red The wall is blocked!"
+	var/material/M = name_to_mineral[mineral]
+
+	if(istype(W, /obj/item/weapon/screwdriver))
+		if(!istype(M) || !M.walltype_solid)
+			user << "You cannot find any bolts on the wall."
 			return
-		if(istype(W, /obj/item/weapon/screwdriver))
-			user.visible_message("[user] tightens some bolts on the wall.", "You tighten the bolts on the wall.")
-			if(!mineral || mineral == "metal")
-				T.ChangeTurf(/turf/simulated/wall)
-			else
-				T.ChangeTurf(text2path("/turf/simulated/wall/mineral/[mineral]"))
+		user.visible_message("[user] tightens some bolts on the wall.", "You tighten the bolts on the wall.")
+		var/turf/T = get_turf(src)
+		if(T)
+			T.ChangeTurf(M.walltype_solid)
+		del(src)
+		return
+
+	var/cutting
+	if(istype(W, /obj/item/weapon/melee/energy/blade) || istype(W, /obj/item/weapon/pickaxe))
+		cutting = 1
+	else if(istype(W, /obj/item/weapon/weldingtool))
+		var/obj/item/weapon/weldingtool/WT = W
+		if(WT.welding)
+			cutting = 1
+
+	if(cutting)
+		if(density)
+			var/turf/T = get_turf(src)
+			if(T.density)
+				user << "\red The wall is blocked!"
+				return
+
+			if(!istype(M) || !M.walltype_solid)
+				user << "You cannot weld this wall."
+				return
+			T.ChangeTurf(M.walltype_solid)
+			if(mineral != "phoron")//Stupid shit keeps me from pushing the attackby() to phoron walls -Sieve
+				T = get_turf(src)  // Still not sure what the above is for, leaving it for now. ~Z
+				T.attackby(W,user)
 			del(src)
-
-		if( istype(W, /obj/item/weapon/weldingtool) )
-			var/obj/item/weapon/weldingtool/WT = W
-			if( WT:welding )
-				if(!mineral)
-					T.ChangeTurf(/turf/simulated/wall)
-				else
-					T.ChangeTurf(text2path("/turf/simulated/wall/mineral/[mineral]"))
-				if(mineral != "phoron")//Stupid shit keeps me from pushing the attackby() to phoron walls -Sieve
-					T = get_turf(src)
-					T.attackby(W,user)
-				del(src)
-	else
-		user << "\blue You can't reach, close it first!"
-
-	if( istype(W, /obj/item/weapon/pickaxe/plasmacutter) )
-		var/turf/T = get_turf(src)
-		if(!mineral)
-			T.ChangeTurf(/turf/simulated/wall)
 		else
-			T.ChangeTurf(text2path("/turf/simulated/wall/mineral/[mineral]"))
-		if(mineral != "phoron")
-			T = get_turf(src)
-			T.attackby(W,user)
-		del(src)
+			user << "\blue You can't reach, close it first!"
 
-	//DRILLING
-	else if (istype(W, /obj/item/weapon/pickaxe/diamonddrill))
-		var/turf/T = get_turf(src)
-		if(!mineral)
-			T.ChangeTurf(/turf/simulated/wall)
-		else
-			T.ChangeTurf(text2path("/turf/simulated/wall/mineral/[mineral]"))
-		T = get_turf(src)
-		T.attackby(W,user)
-		del(src)
-
-	else if( istype(W, /obj/item/weapon/melee/energy/blade) )
-		var/turf/T = get_turf(src)
-		if(!mineral)
-			T.ChangeTurf(/turf/simulated/wall)
-		else
-			T.ChangeTurf(text2path("/turf/simulated/wall/mineral/[mineral]"))
-		if(mineral != "phoron")
-			T = get_turf(src)
-			T.attackby(W,user)
-		del(src)
 
 /obj/structure/falsewall/update_icon()//Calling icon_update will refresh the smoothwalls if it's closed, otherwise it will make sure the icon is correct if it's open
 	..()
@@ -167,7 +147,7 @@
 	density = 1
 	opacity = 1
 	anchored = 1
-	var/mineral = "metal"
+	var/mineral = "steel"
 	var/opening = 0
 
 /obj/structure/falserwall/New()

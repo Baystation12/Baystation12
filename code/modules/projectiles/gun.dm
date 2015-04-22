@@ -11,7 +11,7 @@
 	item_state = "gun"
 	flags =  CONDUCT
 	slot_flags = SLOT_BELT|SLOT_HOLSTER
-	matter = list("metal" = 2000)
+	matter = list("steel" = 2000)
 	w_class = 3
 	throwforce = 5
 	throw_speed = 4
@@ -30,7 +30,7 @@
 	var/scoped_accuracy = null
 
 	var/last_fired = 0
-	
+
 	//aiming system stuff
 	var/keep_aim = 1 	//1 for keep shooting until aim is lowered
 						//0 for one bullet after tarrget moves and aim is lowered
@@ -61,9 +61,9 @@
 		return 0
 	if(!user.IsAdvancedToolUser())
 		return 0
-	
+
 	var/mob/living/M = user
-	
+
 	if(HULK in M.mutations)
 		M << "<span class='danger'>Your fingers are much too large for the trigger guard!</span>"
 		return 0
@@ -73,7 +73,7 @@
 			if(process_projectile(P, user, user, pick("l_foot", "r_foot")))
 				handle_post_fire(user, user)
 				user.visible_message(
-					"<span class='danger'>[user] shoots \himself in the foot with \the [src]!</span>", 
+					"<span class='danger'>[user] shoots \himself in the foot with \the [src]!</span>",
 					"<span class='danger'>You shoot yourself in the foot with \the [src]!</span>"
 					)
 				M.drop_item()
@@ -149,7 +149,7 @@
 /obj/item/weapon/gun/proc/can_hit(atom/target as mob, var/mob/living/user as mob)
 	if(!special_check(user))
 		return 2
-	//just assume we can shoot through glass and stuff. No big deal, the player can just choose to not target someone 
+	//just assume we can shoot through glass and stuff. No big deal, the player can just choose to not target someone
 	//on the other side of a window if it makes a difference. Or if they run behind a window, too bad.
 	return check_trajectory(target, user)
 
@@ -167,7 +167,7 @@
 		playsound(user, fire_sound, 10, 1)
 	else
 		playsound(user, fire_sound, 50, 1)
-		
+
 		if(reflex)
 			user.visible_message(
 				"<span class='reflex_shoot'><b>\The [user] fires \the [src][pointblank ? " point blank at \the [target]":""] by reflex!<b></span>",
@@ -180,7 +180,7 @@
 				"<span class='warning'>You fire \the [src]!</span>",
 				"You hear a [fire_sound_text]!"
 				)
-	
+
 	if(recoil)
 		spawn()
 			shake_camera(user, recoil+1, recoil)
@@ -190,9 +190,9 @@
 /obj/item/weapon/gun/proc/process_projectile(obj/projectile, mob/user, atom/target, var/target_zone, var/params=null, var/pointblank=0, var/reflex=0)
 	if(!istype(projectile, /obj/item/projectile))
 		return 0 //default behaviour only applies to true projectiles
-	
+
 	var/obj/item/projectile/P = projectile
-	
+
 	//shooting while in shock
 	var/x_offset = 0
 	var/y_offset = 0
@@ -206,9 +206,9 @@
 			x_offset = rand(-1,1)
 
 	//Point blank bonus
-	if(pointblank) 
+	if(pointblank)
 		var/damage_mult = 1.3 //default point blank multiplier
-		
+
 		//determine multiplier due to the target being grabbed
 		if(ismob(target))
 			var/mob/M = target
@@ -220,7 +220,7 @@
 					damage_mult = 3.0
 				else if (grabstate >= GRAB_AGGRESSIVE)
 					damage_mult = 1.5
-		
+
 		P.damage *= damage_mult
 
 	if(params)
@@ -234,7 +234,7 @@
 	if(!ishuman(user))
 		return
 	var/mob/living/carbon/human/M = user
-	
+
 	mouthshoot = 1
 	M.visible_message("\red [user] sticks their gun in their mouth, ready to pull the trigger...")
 	if(!do_after(user, 40))
@@ -274,7 +274,7 @@
 	var/zoom_offset = round(world.view * zoom_amount)
 	var/view_size = round(world.view + zoom_amount)
 	var/scoped_accuracy_mod = zoom_offset
-	
+
 	zoom(zoom_offset, view_size)
 	if(zoom)
 		accuracy = scoped_accuracy + scoped_accuracy_mod

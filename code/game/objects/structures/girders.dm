@@ -89,87 +89,67 @@
 			new/obj/structure/girder/displaced( src.loc )
 			del(src)
 
+	else if(istype(W, /obj/item/stack/sheet/plasteel))
+		var/obj/item/stack/sheet/S = W
+		if(!anchored)
+			if(S.use(2))
+				user << "\blue You create a false wall! Push on it to open or close the passage."
+				new /obj/structure/falserwall (src.loc)
+				del(src)
+		else
+			if (src.icon_state == "reinforced") //I cant believe someone would actually write this line of code...
+				if(S.get_amount() < 1) return ..()
+				user << "<span class='notice'>Now finalising reinforced wall.</span>"
+				if(do_after(user, 50))
+					if (S.use(1))
+						user << "<span class='notice'>Wall fully reinforced!</span>"
+						var/turf/Tsrc = get_turf(src)
+						Tsrc.ChangeTurf(/turf/simulated/wall/r_wall)
+						for(var/turf/simulated/wall/r_wall/X in Tsrc.loc)
+							if(X)	X.add_hiddenprint(usr)
+						del(src)
+				return
+			else
+				if(S.get_amount() < 1) return ..()
+				user << "<span class='notice'>Now reinforcing girders...</span>"
+				if (do_after(user,60))
+					if(S.use(1))
+						user << "<span class='notice'>Girders reinforced!</span>"
+						new/obj/structure/girder/reinforced( src.loc )
+						del(src)
+				return
+
 	else if(istype(W, /obj/item/stack/sheet))
 
 		var/obj/item/stack/sheet/S = W
-		switch(S.type)
-
-			if(/obj/item/stack/sheet/metal, /obj/item/stack/sheet/metal/cyborg)
-				if(!anchored)
-					if(S.use(2))
-						user << "<span class='notice'>You create a false wall! Push on it to open or close the passage.</span>"
-						new /obj/structure/falsewall (src.loc)
-						del(src)
-				else
-					if(S.get_amount() < 2) return ..()
-					user << "<span class='notice'>Now adding plating...</span>"
-					if (do_after(user,40))
-						if (S.use(2))
-							user << "<span class='notice'>You added the plating!</span>"
-							var/turf/Tsrc = get_turf(src)
-							Tsrc.ChangeTurf(/turf/simulated/wall)
-							for(var/turf/simulated/wall/X in Tsrc.loc)
-								if(X)	X.add_hiddenprint(usr)
-							del(src)
-					return
-
-			if(/obj/item/stack/sheet/plasteel, /obj/item/stack/sheet/plasteel/cyborg)
-				if(!anchored)
-					if(S.use(2))
-						user << "\blue You create a false wall! Push on it to open or close the passage."
-						new /obj/structure/falserwall (src.loc)
-						del(src)
-				else
-					if (src.icon_state == "reinforced") //I cant believe someone would actually write this line of code...
-						if(S.get_amount() < 1) return ..()
-						user << "<span class='notice'>Now finalising reinforced wall.</span>"
-						if(do_after(user, 50))
-							if (S.use(1))
-								user << "<span class='notice'>Wall fully reinforced!</span>"
-								var/turf/Tsrc = get_turf(src)
-								Tsrc.ChangeTurf(/turf/simulated/wall/r_wall)
-								for(var/turf/simulated/wall/r_wall/X in Tsrc.loc)
-									if(X)	X.add_hiddenprint(usr)
-								del(src)
-						return
-					else
-						if(S.get_amount() < 1) return ..()
-						user << "<span class='notice'>Now reinforcing girders...</span>"
-						if (do_after(user,60))
-							if(S.use(1))
-								user << "<span class='notice'>Girders reinforced!</span>"
-								new/obj/structure/girder/reinforced( src.loc )
-								del(src)
-						return
-
-		if(S.sheettype)
-			var/M = S.sheettype
-			// Ugly hack, will suffice for now. Need to fix it upstream as well, may rewrite mineral walls. ~Z
-			if(M in list("mhydrogen","osmium","tritium","platinum","iron"))
-				user << "You cannot plate the girder in that material."
-				return
-			if(!anchored)
-				if(S.amount < 2) return
-				S.use(2)
-				user << "\blue You create a false wall! Push on it to open or close the passage."
-				var/F = text2path("/obj/structure/falsewall/[M]")
-				new F (src.loc)
-				del(src)
-			else
-				if(S.amount < 2) return ..()
-				user << "\blue Now adding plating..."
-				if (do_after(user,40))
-					if(!src || !S || S.amount < 2) return
-					S.use(2)
-					user << "\blue You added the plating!"
-					var/turf/Tsrc = get_turf(src)
-					Tsrc.ChangeTurf(text2path("/turf/simulated/wall/mineral/[M]"))
-					for(var/turf/simulated/wall/mineral/X in Tsrc.loc)
-						if(X)	X.add_hiddenprint(usr)
-					del(src)
-				return
-
+		var/material/M = name_to_mineral[S.sheettype]
 		add_hiddenprint(usr)
+
+		if(!anchored)
+			if(!istype(M) || !M.walltype_false)
+				user << "<span class='notice'>You cannot make a false wall using this material.</span>"
+				return
+			if(S.use(2))
+				user << "<span class='notice'>You create a false wall! Push on it to open or close the passage.</span>"
+				new M.walltype_false (src.loc)
+				del(src)
+		else
+			if(!istype(M) || !M.walltype_solid)
+				user << "<span class='notice'>You cannot plate a wall in this material.</span>"
+				return
+			if(S.get_amount() < 2)
+				return ..()
+			user << "<span class='notice'>Now adding plating...</span>"
+			if (do_after(user,40))
+				if (S.use(2))
+					user << "<span class='notice'>You added the plating!</span>"
+					var/turf/Tsrc = get_turf(src)
+					Tsrc.ChangeTurf(M.walltype_solid)
+					for(var/turf/simulated/wall/X in Tsrc.loc)
+						if(X)
+							X.add_hiddenprint(usr)
+					del(src)
+			return
 
 	else if(istype(W, /obj/item/pipe))
 		var/obj/item/pipe/P = W

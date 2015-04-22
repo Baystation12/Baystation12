@@ -147,7 +147,7 @@
 	slot_flags = SLOT_BELT|SLOT_HOLSTER
 	w_class = 3.0
 
-	matter = list("glass" = 10,"metal" = 10)
+	matter = list("glass" = 10,"steel" = 10)
 
 	attack_verb = list("struck", "pistol whipped", "hit", "bashed")
 	var/bullets = 7.0
@@ -202,7 +202,7 @@
 	flags = CONDUCT
 	w_class = 1.0
 
-	matter = list("metal" = 10,"glass" = 10)
+	matter = list("steel" = 10,"glass" = 10)
 
 	var/amount_left = 7.0
 

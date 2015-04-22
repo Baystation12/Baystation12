@@ -2,7 +2,7 @@
 	name = "wall"
 	desc = "A huge chunk of metal used to seperate rooms."
 	icon = 'icons/turf/walls.dmi'
-	var/mineral = "metal"
+	var/mineral = "steel"
 	var/rotting = 0
 
 	var/damage = 0
@@ -20,7 +20,7 @@
 	thermal_conductivity = WALL_HEAT_TRANSFER_COEFFICIENT
 	heat_capacity = 312500 //a little over 5 cm thick , 312500 for 1 m by 2.5 m by 0.25 m plasteel wall
 
-	var/walltype = "metal"
+	var/walltype = "steel"
 
 /turf/simulated/wall/bullet_act(var/obj/item/projectile/Proj)
 
@@ -107,7 +107,8 @@
 //Damage
 
 /turf/simulated/wall/melt()
-	if(mineral == "diamond")
+
+	if(!can_melt())
 		return
 
 	src.ChangeTurf(/turf/simulated/floor/plating)
@@ -167,23 +168,13 @@
 		if(!devastated)
 			playsound(src, 'sound/items/Welder.ogg', 100, 1)
 			new /obj/structure/girder(src)
-			if (mineral == "metal")
-				new /obj/item/stack/sheet/metal( src )
-				new /obj/item/stack/sheet/metal( src )
+			var/material/M = name_to_mineral[mineral]
+			if(istype(M) && M.stack_type)
+				for(var/x=1;x<(devastated?2:3);x++)
+					new M.stack_type(src)
 			else
-				var/M = text2path("/obj/item/stack/sheet/mineral/[mineral]")
-				new M( src )
-				new M( src )
-		else
-			if (mineral == "metal")
-				new /obj/item/stack/sheet/metal( src )
-				new /obj/item/stack/sheet/metal( src )
-				new /obj/item/stack/sheet/metal( src )
-			else
-				var/M = text2path("/obj/item/stack/sheet/mineral/[mineral]")
-				new M( src )
-				new M( src )
-				new /obj/item/stack/sheet/metal( src )
+				for(var/x=1;x<(devastated?2:3);x++)
+					new /obj/item/stack/sheet/metal(src)
 
 	for(var/obj/O in src.contents) //Eject contents!
 		if(istype(O,/obj/structure/sign/poster))
@@ -231,8 +222,15 @@
 			O.layer = 5
 			O.mouse_opacity = 0
 
+
+/turf/simulated/wall/proc/can_melt()
+	var/material/M = name_to_mineral[mineral]
+	if(istype(M) && M.unmeltable)
+		return 0
+	return 1
+
 /turf/simulated/wall/proc/thermitemelt(mob/user as mob)
-	if(mineral == "diamond")
+	if(!can_melt())
 		return
 	var/obj/effect/overlay/O = new/obj/effect/overlay( src )
 	O.name = "Thermite"
@@ -359,6 +357,11 @@
 
 	var/turf/T = user.loc	//get user's location for delay checks
 
+	var/cut_delay = 60
+	var/material/M = name_to_mineral[mineral]
+	if(istype(M))
+		cut_delay -= M.cut_delay
+
 	//DECONSTRUCTION
 	if( istype(W, /obj/item/weapon/weldingtool) )
 
@@ -392,40 +395,24 @@
 			user << "<span class='notice'>You need more welding fuel to complete this task.</span>"
 			return
 
-	else if( istype(W, /obj/item/weapon/pickaxe/plasmacutter) )
+	else if( istype(W, /obj/item/weapon/pickaxe) )
 
-		user << "<span class='notice'>You begin slicing through the outer plating.</span>"
-		playsound(src, 'sound/items/Welder.ogg', 100, 1)
+		var/obj/item/weapon/pickaxe/P = W
+		user << "<span class='notice'>You begin [P.drill_verb] through the outer plating.</span>"
+		if(P.drill_sound)
+			playsound(src, P.drill_sound, 100, 1)
 
-		var/delay = 60
-		if(mineral == "diamond")
-			delay += 60
+		cut_delay -= P.digspeed
+		if(cut_delay<0)
+			cut_delay = 0
 
-		if(!do_after(user,delay))
+		if(!do_after(user,cut_delay))
 			return
 
 		user << "<span class='notice'>You remove the outer plating.</span>"
 		dismantle_wall()
 		for(var/mob/O in viewers(user, 5))
-			O.show_message("<span class='warning'>The wall was sliced apart by [user]!</span>", 1, "<span class='warning'>You hear metal being sliced apart.</span>", 2)
-		return
-
-	//DRILLING
-	else if (istype(W, /obj/item/weapon/pickaxe/diamonddrill))
-
-		user << "<span class='notice'>You begin to drill though the wall.</span>"
-
-		var/delay = 60
-		if(mineral == "diamond")
-			delay += 60
-
-		if(!do_after(user,delay))
-			return
-
-		user << "<span class='notice'>Your drill tears though the last of the reinforced plating.</span>"
-		dismantle_wall()
-		for(var/mob/O in viewers(user, 5))
-			O.show_message("<span class='warning'>The wall was drilled through by [user]!</span>", 1, "<span class='warning'>You hear the grinding of metal.</span>", 2)
+			O.show_message("<span class='warning'>The wall was torn open by [user]!</span>", 1, "<span class='warning'>You hear metal being sliced apart.</span>", 2)
 		return
 
 	else if( istype(W, /obj/item/weapon/melee/energy/blade) )
@@ -435,9 +422,9 @@
 		user << "<span class='notice'>You stab \the [EB] into the wall and begin to slice it apart.</span>"
 		playsound(src, "sparks", 50, 1)
 
-		sleep(70)
-		if(mineral == "diamond")
-			sleep(70)
+		if(!do_after(user,cut_delay))
+			return
+
 		if( !istype(src, /turf/simulated/wall) || !user || !EB || !T )	return
 
 		if( user.loc == T && user.get_active_hand() == W )

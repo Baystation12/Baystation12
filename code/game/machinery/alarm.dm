@@ -866,7 +866,7 @@ Just a object used in constructing air alarms
 	icon_state = "door_electronics"
 	desc = "Looks like a circuit. Probably is."
 	w_class = 2.0
-	matter = list("metal" = 50, "glass" = 50)
+	matter = list("steel" = 50, "glass" = 50)
 
 
 /*
@@ -1188,7 +1188,7 @@ Just a object used in constructing fire alarms
 	icon_state = "door_electronics"
 	desc = "A circuit. It has a label on it, it says \"Can handle heat levels up to 40 degrees celsius!\""
 	w_class = 2.0
-	matter = list("metal" = 50, "glass" = 50)
+	matter = list("steel" = 50, "glass" = 50)
 
 
 /*

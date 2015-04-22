@@ -111,7 +111,6 @@
 	var/sheets_per_tick = 10
 	var/list/ores_processing[0]
 	var/list/ores_stored[0]
-	var/list/ore_data[0]
 	var/list/alloy_data[0]
 	var/active = 0
 
@@ -123,11 +122,12 @@
 	for(var/alloytype in typesof(/datum/alloy)-/datum/alloy)
 		alloy_data += new alloytype()
 
-	for(var/oretype in typesof(/datum/ore)-/datum/ore)
-		var/datum/ore/OD = new oretype()
-		ore_data[OD.oretag] = OD
-		ores_processing[OD.oretag] = 0
-		ores_stored[OD.oretag] = 0
+	if(!ore_data || !ore_data.len)
+		for(var/oretype in typesof(/ore)-/ore)
+			var/ore/OD = new oretype()
+			ore_data[OD.name] = OD
+			ores_processing[OD.name] = 0
+			ores_stored[OD.name] = 0
 
 	//Locate our output and input machinery.
 	spawn(5)
@@ -150,7 +150,7 @@
 	for(var/i = 0,i<sheets_per_tick,i++)
 		var/obj/item/weapon/ore/O = locate() in input.loc
 		if(!O) break
-		if(!isnull(ores_stored[O.oretag])) ores_stored[O.oretag]++
+		if(!isnull(ores_stored[O.name])) ores_stored[O.name]++
 		O.loc = null
 
 	if(!active)
@@ -164,7 +164,7 @@
 
 		if(ores_stored[metal] > 0 && ores_processing[metal] != 0)
 
-			var/datum/ore/O = ore_data[metal]
+			var/ore/O = ore_data[metal]
 
 			if(!O) continue
 
@@ -206,24 +206,28 @@
 				var/can_make = Clamp(ores_stored[metal],0,sheets_per_tick-sheets)
 				if(can_make%2>0) can_make--
 
-				if(!can_make || ores_stored[metal] < 1)
+				var/material/M = name_to_mineral[O.compresses_to]
+
+				if(!istype(M) || !can_make || ores_stored[metal] < 1)
 					continue
 
 				for(var/i=0,i<can_make,i+=2)
 					ores_stored[metal]-=2
 					sheets+=2
-					new O.compresses_to(output.loc)
+					new M.stack_type(output.loc)
 
 			else if(ores_processing[metal] == 1 && O.smelts_to) //Smelting.
 
 				var/can_make = Clamp(ores_stored[metal],0,sheets_per_tick-sheets)
-				if(!can_make || ores_stored[metal] < 1)
+
+				var/material/M = name_to_mineral[O.smelts_to]
+				if(!istype(M) || !can_make || ores_stored[metal] < 1)
 					continue
 
 				for(var/i=0,i<can_make,i++)
 					ores_stored[metal]--
 					sheets++
-					new O.smelts_to(output.loc)
+					new M.stack_type(output.loc)
 			else
 				ores_stored[metal]--
 				sheets++
