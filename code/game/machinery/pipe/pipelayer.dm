@@ -31,10 +31,10 @@
 
 /obj/machinery/pipelayer/attack_hand(mob/user as mob)
 	if(!metal&&!on)
-		user << "\The [src] don't work with no metal."
+		user << "<span class='warning'>\The [src] doesn't work without metal.</span>"
 		return
 	on=!on
-	user.visible_message("\The [src] [!on?"dea":"a"]ctivated.", "[user] [!on?"dea":"a"]ctivated \the [src].")
+	user.visible_message("<span class='notice'>[user] has [!on?"de":""]activated \the [src].</span>", "<span class='notice'>You [!on?"de":""]activate \the [src].</span>")
 	return
 
 /obj/machinery/pipelayer/attackby(var/obj/item/W as obj, var/mob/user as mob)
@@ -42,26 +42,24 @@
 	if (istype(W, /obj/item/weapon/wrench))
 		P_type_t = input("Choose pipe type", "Pipe type") as null|anything in Pipes
 		P_type = Pipes[P_type_t]
-		user.visible_message("[user] has set \the [src] to manufacture [P_type_t] .", "You set \the [src] to manufacture [P_type_t].")
+		user.visible_message("<span class='notice'>[user] has set \the [src] to manufacture [P_type_t].</span>", "<span class='notice'>You set \the [src] to manufacture [P_type_t].</span>")
 		return
 
 	if(istype(W, /obj/item/weapon/crowbar))
 		a_dis=!a_dis
-		visible_message("\The [src] auto dismantle [!a_dis?"dea":"a"]ctivated.")
+		user.visible_message("<span class='notice'>[user] has [!a_dis?"de":""]activated auto-dismantling.</span>", "<span class='notice'>You [!a_dis?"de":""]activate auto-dismantling.</span>")
 		return
 
 	if(istype(W, /obj/item/stack/sheet/metal))
 
 		var/result = load_metal(W)
-		var/message
 		if(isnull(result))
-			message = "Unable to load [W] - no metal found."
+			user << "<span class='warning'>Unable to load [W] - no metal found.</span>"
 		else if(!result)
-			message = "Stack is full."
+			user << "<span class='notice'>\The [src] is full.</span>"
 		else
-			message = "[result] sheets of metal successfully loaded."
+			user.visible_message("<span class='notice'>[user] has loaded metal into \the [src].</span>", "<span class='notice'>You load metal into \the [src]</span>")
 
-		visible_message("[message]")
 		return
 
 	if(istype(W, /obj/item/weapon/screwdriver))
@@ -74,6 +72,7 @@
 				use_metal(m)
 				var/obj/item/stack/sheet/metal/MM = new (get_turf(src))
 				MM.amount = m
+				user.visible_message("<span class='notice'>[user] removes [m] sheet\s of metal from the \the [src].</span>", "<span class='notice'>You remove [m] sheet\s of metal from \the [src]</span>")
 		else
 			user << "\The [src] is empty."
 		return
@@ -81,7 +80,7 @@
 
 /obj/machinery/pipelayer/examine(mob/user)
 	..()
-	user << "\The [src] has [metal] sheet\s, is set to produce [P_type_t], and auto-dismantle is [!on?"de":""]activated."
+	user << "\The [src] has [metal] sheet\s, is set to produce [P_type_t], and auto-dismantling is [!a_dis?"de":""]activated."
 
 /obj/machinery/pipelayer/proc/reset()
 	on=0
@@ -102,7 +101,7 @@
 
 /obj/machinery/pipelayer/proc/use_metal(amount)
 	if(!metal || metal<amount)
-		visible_message("Metal depleted. \The [src] deactivated.")
+		visible_message("\The [src] deactivates as its metal source depletes.")
 		return
 	metal-=amount
 	return 1
