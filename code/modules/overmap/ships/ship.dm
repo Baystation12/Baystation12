@@ -8,6 +8,7 @@
 	var/last_burn = 0
 	var/list/last_movement = list(0,0)
 	var/fore_dir = NORTH
+	var/rotate = 1 //For proc rotate
 
 	var/obj/effect/map/current_sector
 	var/obj/machinery/computer/helm/nav_control
@@ -48,11 +49,6 @@
 			res |= NORTH
 		else
 			res |= SOUTH
-
-	var/matrix/M = matrix()
-	M.Turn(dir2angle(res))
-	src.transform = M //Rotate ship
-
 	return res
 
 /obj/effect/map/ship/proc/adjust_speed(n_x, n_y)
@@ -99,6 +95,12 @@
 		if(direction & SOUTH)
 			adjust_speed(0, -get_acceleration())
 
+
+/obj/effect/map/ship/rotate(var/direction)
+	var/matrix/M = matrix()
+	M.Turn(dir2angle(direction))
+	src.transform = M //Rotate ship
+
 /obj/effect/map/ship/process()
 	if(!is_still())
 		var/list/deltas = list(0,0)
@@ -109,3 +111,5 @@
 		var/turf/newloc = locate(x + deltas[1], y + deltas[2], z)
 		if(newloc)
 			Move(newloc)
+		if(rotate)	
+			rotate(get_heading())
