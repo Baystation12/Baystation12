@@ -119,7 +119,6 @@
    desc = "A medical apparatus intended to ease in listening to the sounds of the human body. This one looks cleaner and sparklier than the rest. There is a small silver plaque attached to the tubing, with the words 'Lucy Kemmerer' engraved on it."
    icon_state = "lucystethos"
    item_state = "lucystethos"
-   item_color ="lucystethos"
    icon = 'icons/obj/custom_items.dmi'
 
 /obj/item/weapon/pen/fluff/multi //spaceman96: Trenna Seber
@@ -167,7 +166,6 @@
 	desc = "A faded badge, backed with leather, that reads 'NT Security Force' across the front. It bears the emblem of the Forensic division."
 	icon_state = "ana_badge"
 	item_state = "ana_badge"
-	item_color = "ana_badge"
 
 /obj/item/fluff/ana_issek_2/attack_self(mob/user as mob)
 	if(isliving(user))
@@ -544,7 +542,6 @@
 		desc = kit.new_helmet_desc
 		icon_state = kit.helmet_icon
 		item_state = kit.helmet_icon
-		item_color = kit.helmet_color
 
 		if(kit.new_light_overlay)
 			light_overlay = kit.new_light_overlay
@@ -652,9 +649,8 @@
 	desc = "Reinforced sterile gloves custom tailored to comfortably accommodate Tajaran claws."
 	icon_state = "latex"
 	item_state = "lgloves"
-	siemens_coefficient = 0.30
+	siemens_coefficient = 1.00
 	permeability_coefficient = 0.01
-	item_color="white"
 	species_restricted = list("exclude","Unathi")
 
 /obj/item/clothing/gloves/fluff/walter_brooks_1 //botanistpower: Walter Brooks
@@ -663,7 +659,6 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "walter_brooks_1"
 	item_state = "bluegloves"
-	item_color="blue"
 
 /obj/item/clothing/gloves/fluff/chal_appara_1 //furlucis: Chal Appara
 	name = "Left Black Glove"
@@ -886,7 +881,6 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "leatherjack"
 	item_state = "leatherjack"
-	item_color = "leatherjack"
 
 /obj/item/clothing/suit/armor/vest/fluff/deus_blueshield //deusdactyl
 	name = "blue shield security armor"
@@ -1130,7 +1124,6 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "parker_eliza_arms"
 	item_state = "parker_eliza_arms"
-	item_color = "parker_eliza_arms"
 
 
 ////////////// Accessories /////
@@ -1143,7 +1136,6 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "radi_pendant"
 	item_state = "radi_pendant"
-	item_color = "radi_pendant"
 	w_class = 2.0
 
 //////////// Masks ////////////
@@ -1195,7 +1187,6 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "altair_locket"
 	item_state = "altair_locket"
-	item_color = "altair_locket"
 	slot_flags = 0
 	w_class = 2
 	slot_flags = SLOT_MASK | SLOT_TIE
@@ -1208,7 +1199,6 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "konaahirano"
 	item_state = "konaahirano"
-	item_color = "konaahirano"
 	slot_flags = 0
 	w_class = 2
 	slot_flags = SLOT_MASK | SLOT_TIE
@@ -1326,7 +1316,6 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "retpolcoat"
 	item_state = "retpolcoat"
-	item_color = "retpolcoat"
 
 /obj/item/clothing/head/det_hat/fluff/retpolcap
 	name = "retired colony patrolman's cap"

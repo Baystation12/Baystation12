@@ -113,6 +113,7 @@
 	origin_tech = "magnets=3;syndicate=4"
 	sharp = 1
 	edge = 1
+	var/blade_color
 
 /obj/item/weapon/melee/energy/sword/dropped(var/mob/user)
 	..()
@@ -120,26 +121,26 @@
 		deactivate(user)
 
 /obj/item/weapon/melee/energy/sword/New()
-	item_color = pick("red","blue","green","purple")
+	blade_color = pick("red","blue","green","purple")
 
 /obj/item/weapon/melee/energy/sword/green/New()
-	item_color = "green"
+	blade_color = "green"
 
 /obj/item/weapon/melee/energy/sword/red/New()
-	item_color = "red"
+	blade_color = "red"
 
 /obj/item/weapon/melee/energy/sword/blue/New()
-	item_color = "blue"
+	blade_color = "blue"
 
 /obj/item/weapon/melee/energy/sword/purple/New()
-	item_color = "purple"
+	blade_color = "purple"
 
 /obj/item/weapon/melee/energy/sword/activate(mob/living/user)
 	if(!active)
 		user << "<span class='notice'>\The [src] is now energised.</span>"
 	..()
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
-	icon_state = "sword[item_color]"
+	icon_state = "sword[blade_color]"
 
 /obj/item/weapon/melee/energy/sword/deactivate(mob/living/user)
 	if(active)

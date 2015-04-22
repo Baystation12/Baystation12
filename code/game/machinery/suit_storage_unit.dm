@@ -987,7 +987,6 @@
 				helmet.name = "engineering voidsuit helmet"
 				helmet.icon_state = "rig0-engineering"
 				helmet.item_state = "eng_helm"
-				helmet.item_color = "engineering"
 			if(suit)
 				suit.name = "engineering voidsuit"
 				suit.icon_state = "rig-engineering"
@@ -997,7 +996,6 @@
 				helmet.name = "mining voidsuit helmet"
 				helmet.icon_state = "rig0-mining"
 				helmet.item_state = "mining_helm"
-				helmet.item_color = "mining"
 			if(suit)
 				suit.name = "mining voidsuit"
 				suit.icon_state = "rig-mining"
@@ -1007,7 +1005,6 @@
 				helmet.name = "medical voidsuit helmet"
 				helmet.icon_state = "rig0-medical"
 				helmet.item_state = "medical_helm"
-				helmet.item_color = "medical"
 			if(suit)
 				suit.name = "medical voidsuit"
 				suit.icon_state = "rig-medical"
@@ -1017,7 +1014,6 @@
 				helmet.name = "security voidsuit helmet"
 				helmet.icon_state = "rig0-sec"
 				helmet.item_state = "sec_helm"
-				helmet.item_color = "sec"
 			if(suit)
 				suit.name = "security voidsuit"
 				suit.icon_state = "rig-sec"
@@ -1027,7 +1023,6 @@
 				helmet.name = "atmospherics voidsuit helmet"
 				helmet.icon_state = "rig0-atmos"
 				helmet.item_state = "atmos_helm"
-				helmet.item_color = "atmos"
 			if(suit)
 				suit.name = "atmospherics voidsuit"
 				suit.icon_state = "rig-atmos"
@@ -1037,7 +1032,6 @@
 				helmet.name = "blood-red voidsuit helmet"
 				helmet.icon_state = "rig0-syndie"
 				helmet.item_state = "syndie_helm"
-				helmet.item_color = "syndie"
 			if(suit)
 				suit.name = "blood-red voidsuit"
 				suit.item_state = "syndie_voidsuit"

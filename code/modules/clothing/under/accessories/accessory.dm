@@ -4,16 +4,16 @@
 	icon = 'icons/obj/clothing/ties.dmi'
 	icon_state = "bluetie"
 	item_state = ""	//no inhands
-	item_color = "bluetie"
 	slot_flags = SLOT_TIE
 	w_class = 2.0
 	var/slot = "decor"
 	var/obj/item/clothing/under/has_suit = null		//the suit the tie may be attached to
 	var/image/inv_overlay = null	//overlay used when attached to clothing.
+	var/overlay_state = null
 
 /obj/item/clothing/accessory/New()
 	..()
-	inv_overlay = image("icon" = 'icons/obj/clothing/ties_overlay.dmi', "icon_state" = "[item_color? "[item_color]" : "[icon_state]"]")
+	inv_overlay = image("icon" = 'icons/obj/clothing/ties_overlay.dmi', "icon_state" = "[overlay_state? "[overlay_state]" : "[icon_state]"]")
 
 //when user attached an accessory to S
 /obj/item/clothing/accessory/proc/on_attached(obj/item/clothing/under/S, mob/user as mob)
@@ -47,24 +47,20 @@
 /obj/item/clothing/accessory/blue
 	name = "blue tie"
 	icon_state = "bluetie"
-	item_color = "bluetie"
 
 /obj/item/clothing/accessory/red
 	name = "red tie"
 	icon_state = "redtie"
-	item_color = "redtie"
 
 /obj/item/clothing/accessory/horrible
 	name = "horrible tie"
 	desc = "A neosilk clip-on tie. This one is disgusting."
 	icon_state = "horribletie"
-	item_color = "horribletie"
 
 /obj/item/clothing/accessory/stethoscope
 	name = "stethoscope"
 	desc = "An outdated medical apparatus for listening to the sounds of the human body. It also makes you look like you know what you're doing."
 	icon_state = "stethoscope"
-	item_color = "stethoscope"
 
 /obj/item/clothing/accessory/stethoscope/attack(mob/living/carbon/human/M, mob/living/user)
 	if(ishuman(M) && isliving(user))
@@ -105,7 +101,6 @@
 	name = "bronze medal"
 	desc = "A bronze medal."
 	icon_state = "bronze"
-	item_color = "bronze"
 
 /obj/item/clothing/accessory/medal/conduct
 	name = "distinguished conduct medal"
@@ -124,7 +119,6 @@
 	name = "silver medal"
 	desc = "A silver medal."
 	icon_state = "silver"
-	item_color = "silver"
 
 /obj/item/clothing/accessory/medal/silver/valor
 	name = "medal of valor"
@@ -138,7 +132,6 @@
 	name = "gold medal"
 	desc = "A prestigious golden medal."
 	icon_state = "gold"
-	item_color = "gold"
 
 /obj/item/clothing/accessory/medal/gold/captain
 	name = "medal of captaincy"
@@ -158,7 +151,6 @@
 	name = "holobadge"
 	desc = "This glowing blue badge marks the holder as THE LAW."
 	icon_state = "holobadge"
-	item_color = "holobadge"
 	slot_flags = SLOT_BELT | SLOT_TIE
 
 	var/emagged = 0 //Emagging removes Sec check.
@@ -166,7 +158,6 @@
 
 /obj/item/clothing/accessory/holobadge/cord
 	icon_state = "holobadge-cord"
-	item_color = "holobadge-cord"
 	slot_flags = SLOT_MASK | SLOT_TIE
 
 /obj/item/clothing/accessory/holobadge/attack_self(mob/user as mob)

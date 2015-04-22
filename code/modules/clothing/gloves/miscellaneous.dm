@@ -3,7 +3,6 @@
 	name = "captain's gloves"
 	icon_state = "captain"
 	item_state = "egloves"
-	item_color = "captain"
 
 /obj/item/clothing/gloves/cyborg
 	desc = "beep boop borp"
@@ -44,7 +43,6 @@
 	item_state = "lgloves"
 	siemens_coefficient = 1.0 //thin latex gloves, much more conductive than fabric gloves (basically a capacitor for AC)
 	permeability_coefficient = 0.01
-	item_color="white"
 
 /obj/item/clothing/gloves/botanic_leather
 	desc = "These leather work gloves protect against thorns, barbs, prickles, spikes and other harmful objects of floral origin."

@@ -4,7 +4,6 @@
 	desc = "An advanced helmet designed for work in special operations. Property of Gorlex Marauders."
 	icon_state = "rig0-syndie"
 	item_state = "syndie_helm"
-	item_color = "syndie"
 	armor = list(melee = 60, bullet = 50, laser = 30,energy = 15, bomb = 35, bio = 100, rad = 60)
 	siemens_coefficient = 0.6
 	species_restricted = list("exclude","Unathi","Tajara","Skrell","Vox", "Xenomorph", "Xenomorph Drone", "Xenomorph Hunter", "Xenomorph Sentinel", "Xenomorph Queen")

@@ -408,6 +408,7 @@ BLIND     // can't see anything
 	var/displays_id = 1
 	var/rolled_down = -1 //0 = unrolled, 1 = rolled, -1 = cannot be toggled
 	sprite_sheets = list("Vox" = 'icons/mob/species/vox/uniform.dmi')
+	var/item_color //temporary until item_state override is implemented
 
 /obj/item/clothing/under/New()
 	//autodetect rollability
