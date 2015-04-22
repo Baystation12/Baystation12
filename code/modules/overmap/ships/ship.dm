@@ -96,7 +96,7 @@
 			adjust_speed(0, -get_acceleration())
 
 
-/obj/effect/map/ship/rotate(var/direction)
+/obj/effect/map/ship/proc/rotate(var/direction)
 	var/matrix/M = matrix()
 	M.Turn(dir2angle(direction))
 	src.transform = M //Rotate ship
