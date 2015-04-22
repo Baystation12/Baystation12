@@ -42,27 +42,12 @@
 	if (istype(W, /obj/item/weapon/wrench))
 		P_type_t = input("Choose pipe type", "Pipe type") as null|anything in Pipes
 		P_type = Pipes[P_type_t]
-/*
-		switch(P_type)
-			if(31)
-				P_type = 0
-				P_type_t = "regular pipes"
-			if(29)
-				P_type = 31
-				P_type_t = "scrubbers pipes"
-			if(2)
-				P_type = 29
-				P_type_t = "supply pipes"
-			if(0)
-				P_type = 2
-				P_type_t = "heat exchange pipes"
-*/
 		user.visible_message("[user] has set \the [src] to manufacture [P_type_t] .", "You set \the [src] to manufacture [P_type_t].")
 		return
 
 	if(istype(W, /obj/item/weapon/crowbar))
 		a_dis=!a_dis
-		visible_message("\The [src] auto dismantle [!on?"dea":"a"]ctivated.")
+		visible_message("\The [src] auto dismantle [!a_dis?"dea":"a"]ctivated.")
 		return
 
 	if(istype(W, /obj/item/stack/sheet/metal))
