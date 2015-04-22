@@ -103,7 +103,7 @@
 
 
 
-//Chemist is a medical job damnit	//YEAH FUCK YOU SCIENCE	-Pete	//Guys, behave -Erro
+//Chemist is a medical job damnit	//YEAH FUCK YOU SCIENCE	-Pete	//Guys, behave -Erro // MEDSCI FOREVER
 /datum/job/chemist
 	title = "Chemist"
 	flag = CHEMIST
@@ -112,16 +112,17 @@
 	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2
-	supervisors = "the chief medical officer"
+	supervisors = "the chief medical officer and/or research director"
 	selection_color = "#ffeef0"
-	access = list(access_medical, access_morgue, access_surgery, access_chemistry, access_virology, access_genetics)
-	minimal_access = list(access_medical, access_chemistry)
+	// access_tox is *not* Toxins, that's access_tox_storage. Not sure why, but that's how it is. access_tox is R&D.
+	access = list(access_medical, access_morgue, access_surgery, access_chemistry, access_virology, access_genetics, access_research, access_tox)
+	minimal_access = list(access_medical, access_chemistry, access_research)
 	alt_titles = list("Pharmacist")
 
 
 	equip(var/mob/living/carbon/human/H)
 		if(!H)	return 0
-		H.equip_to_slot_or_del(new /obj/item/device/radio/headset/headset_med(H), slot_l_ear)
+		H.equip_to_slot_or_del(new /obj/item/device/radio/headset/headset_medsci(H), slot_l_ear)
 		H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/chemist(H), slot_w_uniform)
 		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/white(H), slot_shoes)
 		H.equip_to_slot_or_del(new /obj/item/device/pda/chemist(H), slot_belt)
