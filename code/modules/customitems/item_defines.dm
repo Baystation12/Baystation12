@@ -1131,6 +1131,7 @@
 	icon_state = "parker_eliza_arms"
 	item_state = "parker_eliza_arms"
 	item_color = "parker_eliza_arms"
+	canremove = 0
 
 
 ////////////// Accessories /////
