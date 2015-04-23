@@ -188,7 +188,7 @@
 			if(S.victim == mob)
 				return
 
-	if(mob.stat==2)
+	if(mob.stat==DEAD && isliving(mob))
 		mob.ghostize()
 		return
 
