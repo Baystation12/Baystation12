@@ -1,5 +1,0 @@
-author: PsiOmegaDelta
-delete-after: True
-
-changes: 
-  - bugfix: "Added a mass driver door in disposals to prevent trash from floating out into space before proper ejection."
