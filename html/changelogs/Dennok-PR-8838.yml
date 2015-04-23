@@ -1,0 +1,5 @@
+author: Dennok
+delete-after: True
+
+changes: 
+  - rscadd: "Added an automatic Pipelayer."

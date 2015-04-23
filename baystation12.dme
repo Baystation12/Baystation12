@@ -477,6 +477,7 @@
 #include "code\game\machinery\kitchen\smartfridge.dm"
 #include "code\game\machinery\pipe\construction.dm"
 #include "code\game\machinery\pipe\pipe_dispenser.dm"
+#include "code\game\machinery\pipe\pipelayer.dm"
 #include "code\game\machinery\telecomms\broadcaster.dm"
 #include "code\game\machinery\telecomms\logbrowser.dm"
 #include "code\game\machinery\telecomms\machine_interactions.dm"
