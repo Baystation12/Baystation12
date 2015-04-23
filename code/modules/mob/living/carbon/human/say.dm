@@ -65,7 +65,7 @@
 
 	if(speech_problem_flag)
 		if(!speaking || !(speaking.flags & NO_STUTTER))
-			var/list/handle_r = handle_speech_problems(message)
+			var/list/handle_r = handle_speech_problems(message, verb)
 			message = handle_r[1]
 			verb = handle_r[2]
 			speech_problem_flag = handle_r[3]
@@ -271,10 +271,9 @@
 
 	return verb
 
-/mob/living/carbon/human/proc/handle_speech_problems(var/message)
+/mob/living/carbon/human/proc/handle_speech_problems(var/message, var/verb = "says")
 
 	var/list/returns[3]
-	var/verb = "says"
 	var/handled = 0
 	if(silent || (sdisabilities & MUTE))
 		message = ""

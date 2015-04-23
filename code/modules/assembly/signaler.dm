@@ -169,4 +169,5 @@
 		set desc = "BOOOOM!"
 		deadman = 1
 		processing_objects.Add(src)
+		log_and_message_admins("is threatening to trigger a signaler deadman's switch")
 		usr.visible_message("\red [usr] moves their finger over [src]'s signal button...")
