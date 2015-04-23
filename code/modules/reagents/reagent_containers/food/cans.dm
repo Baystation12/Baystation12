@@ -173,8 +173,7 @@
 	center_of_mass = list("x"=16, "y"=10)
 	New()
 		..()
-		reagents.add_reagent("cola", 15)
-		reagents.add_reagent("orangejuice", 15)
+		reagents.add_reagent("brownstar", 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/space_up
 	name = "Space-Up"
