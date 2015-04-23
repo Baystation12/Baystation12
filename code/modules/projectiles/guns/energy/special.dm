@@ -1,6 +1,6 @@
 /obj/item/weapon/gun/energy/ionrifle
-	name = "ion rifle"
-	desc = "A man portable anti-armor weapon designed to disable mechanical threats"
+	name = "NT Mk60 EW Halicon"
+	desc = "A man portable anti-armor weapon designed to disable mechanical threats, manufactured by NT."
 	icon_state = "ionrifle"
 	item_state = "ionrifle"
 	fire_sound = 'sound/weapons/Laser.ogg'

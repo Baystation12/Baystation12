@@ -1,6 +1,6 @@
 /obj/item/weapon/gun/projectile/shotgun/pump
-	name = "shotgun"
-	desc = "Useful for sweeping alleys."
+	name = "W-T Remmington 29x"
+	desc = "A mass manufactured and cheap Ward-Takahashi shotgun, mainly seen in police and security forces for close quarter combat. Useful for sweeping alleys!"
 	icon_state = "shotgun"
 	item_state = "shotgun"
 	max_shells = 4
@@ -41,6 +41,7 @@
 
 /obj/item/weapon/gun/projectile/shotgun/pump/combat
 	name = "combat shotgun"
+	desc = "Based on a russian design, this combat shotgun is manufactured by Hesphaistos Industries and is distributed as close quarter weaponry. Useful for sweeping alleys!"
 	icon_state = "cshotgun"
 	item_state = "cshotgun"
 	origin_tech = "combat=5;materials=2"

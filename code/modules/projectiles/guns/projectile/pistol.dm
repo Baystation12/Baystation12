@@ -104,7 +104,7 @@
 		icon_state = "gyropistol"
 
 /obj/item/weapon/gun/projectile/pistol
-	name = "\improper Stechtkin pistol"
+	name = "\improper Lumoco Arms P3 Whisper"
 	desc = "A small, easily concealable gun. Uses 9mm rounds."
 	icon_state = "pistol"
 	item_state = null

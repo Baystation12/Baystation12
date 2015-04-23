@@ -1,5 +1,5 @@
 /obj/item/weapon/gun/projectile/revolver
-	name = "revolver"
+	name = "Lumoco Arms HE Colt"
 	desc = "A classic revolver. Uses .357 ammo"
 	icon_state = "revolver"
 	item_state = "revolver"
