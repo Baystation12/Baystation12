@@ -128,12 +128,10 @@
 
 	return verb
 
-/mob/living/carbon/human/handle_speech_problems(var/message, var/verb)
-	if(!speech_problem_flag)
-		return ..()
+/mob/living/carbon/human/proc/handle_speech_problems(var/message, var/verb = "says")
 
 	var/list/returns[3]
-	speech_problem_flag = 0
+	var/handled = 0
 	if(silent || (sdisabilities & MUTE))
 		message = ""
 		speech_problem_flag = 1
