@@ -757,8 +757,8 @@ var/global/list/damage_icon_parts = list()
 		
 		//determine state to use
 		var/overlay_state
-		if(back.item_state_slots && back.item_state_slots[slot_back_key])
-			overlay_state = back.item_state_slots[slot_back_key]
+		if(back.item_state_slots && back.item_state_slots[slot_back_str])
+			overlay_state = back.item_state_slots[slot_back_str]
 		else if(back.item_state)
 			overlay_state = back.item_state
 		else
@@ -811,15 +811,15 @@ var/global/list/damage_icon_parts = list()
 		var/icon/t_icon
 		if(r_hand.icon_override)
 			t_icon = r_hand.icon_override
-		else if(r_hand.item_icons && (slot_r_hand_key in r_hand.item_icons))
-			t_icon = r_hand.item_icons[slot_r_hand_key]
+		else if(r_hand.item_icons && (slot_r_hand_str in r_hand.item_icons))
+			t_icon = r_hand.item_icons[slot_r_hand_str]
 		else
 			t_icon = INV_R_HAND_DEF_ICON
 
 		//determine icon state to use
 		var/t_state
-		if(r_hand.item_state_slots && r_hand.item_state_slots[slot_r_hand_key])
-			t_state = r_hand.item_state_slots[slot_r_hand_key]
+		if(r_hand.item_state_slots && r_hand.item_state_slots[slot_r_hand_str])
+			t_state = r_hand.item_state_slots[slot_r_hand_str]
 		else if(r_hand.item_state)
 			t_state = r_hand.item_state
 		else
@@ -842,15 +842,15 @@ var/global/list/damage_icon_parts = list()
 		var/icon/t_icon
 		if(l_hand.icon_override)
 			t_icon = l_hand.icon_override
-		else if(l_hand.item_icons && (slot_l_hand_key in l_hand.item_icons))
-			t_icon = l_hand.item_icons[slot_l_hand_key]
+		else if(l_hand.item_icons && (slot_l_hand_str in l_hand.item_icons))
+			t_icon = l_hand.item_icons[slot_l_hand_str]
 		else
 			t_icon = INV_L_HAND_DEF_ICON
 
 		//determine icon state to use
 		var/t_state
-		if(l_hand.item_state_slots && l_hand.item_state_slots[slot_l_hand_key])
-			t_state = l_hand.item_state_slots[slot_l_hand_key]
+		if(l_hand.item_state_slots && l_hand.item_state_slots[slot_l_hand_str])
+			t_state = l_hand.item_state_slots[slot_l_hand_str]
 		else if(l_hand.item_state)
 			t_state = l_hand.item_state
 		else

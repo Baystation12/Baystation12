@@ -7,15 +7,15 @@
 	name = "backpack"
 	desc = "You wear this on your back and put items into it."
 	item_icons = list(
-		slot_l_hand_key = 'icons/mob/items/lefthand_backpacks.dmi',
-		slot_r_hand_key = 'icons/mob/items/righthand_backpacks.dmi',
+		slot_l_hand_str = 'icons/mob/items/lefthand_backpacks.dmi',
+		slot_r_hand_str = 'icons/mob/items/righthand_backpacks.dmi',
 		)
 	icon_state = "backpack"
 	item_state = null
 	//most backpacks use the default backpack state for inhand overlays
 	item_state_slots = list(
-		slot_l_hand_key = "backpack",
-		slot_r_hand_key = "backpack",
+		slot_l_hand_str = "backpack",
+		slot_r_hand_str = "backpack",
 		)
 	w_class = 4
 	slot_flags = SLOT_BACK
@@ -190,8 +190,8 @@
 	desc = "A tough satchel with extra pockets."
 	icon_state = "satchel-eng"
 	item_state_slots = list(
-		slot_l_hand_key = "engiepack",
-		slot_r_hand_key = "engiepack",
+		slot_l_hand_str = "engiepack",
+		slot_r_hand_str = "engiepack",
 		)
 
 /obj/item/weapon/storage/backpack/satchel_med
@@ -199,8 +199,8 @@
 	desc = "A sterile satchel used in medical departments."
 	icon_state = "satchel-med"
 	item_state_slots = list(
-		slot_l_hand_key = "medicalpack",
-		slot_r_hand_key = "medicalpack",
+		slot_l_hand_str = "medicalpack",
+		slot_r_hand_str = "medicalpack",
 		)
 
 /obj/item/weapon/storage/backpack/satchel_vir
@@ -228,8 +228,8 @@
 	desc = "A robust satchel for security related needs."
 	icon_state = "satchel-sec"
 	item_state_slots = list(
-		slot_l_hand_key = "securitypack",
-		slot_r_hand_key = "securitypack",
+		slot_l_hand_str = "securitypack",
+		slot_r_hand_str = "securitypack",
 		)
 
 /obj/item/weapon/storage/backpack/satchel_hyd
@@ -250,8 +250,8 @@
 	desc = "A spacious backpack with lots of pockets, used by members of the Nanotrasen Emergency Response Team."
 	icon_state = "ert_commander"
 	item_state_slots = list(
-		slot_l_hand_key = "securitypack",
-		slot_r_hand_key = "securitypack",
+		slot_l_hand_str = "securitypack",
+		slot_r_hand_str = "securitypack",
 		)
 
 //Commander

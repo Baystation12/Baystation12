@@ -257,10 +257,11 @@
 
 // Inventory slot strings. 
 // since numbers cannot be used as associative list keys.
-#define slot_l_hand_key		"slot_l_hand"
-#define slot_r_hand_key		"slot_r_hand"
-#define slot_w_uniform_key	"w_uniform"
-#define slot_back_key		"back"
+#define slot_l_hand_str		"slot_l_hand"
+#define slot_r_hand_str		"slot_r_hand"
+#define slot_w_uniform_str	"w_uniform"
+#define slot_back_str		"back"
+#define slot_w_uniform_str	"w_uniform"
 
 // Bitflags for clothing parts.
 #define HEAD        1
