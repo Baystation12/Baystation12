@@ -325,7 +325,8 @@
 		var/id = href_list["write"]
 		//var/t = strip_html_simple(input(usr, "What text do you wish to add to " + (id=="end" ? "the end of the paper" : "field "+id) + "?", "[name]", null),8192) as message
 
-		var/textlimit = MAX_PAPER_MESSAGE_LEN - length(info)
+		var/textlimit = MAX_BOOK_MESSAGE_LEN - length(strip_html_properly(info, 0))
+
 		if(textlimit <= 0)
 			usr << "<span class='info'>You're trying to find a free place on paper, but can't!</span>"
 			return
