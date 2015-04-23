@@ -255,10 +255,12 @@
 #define slot_legs        21
 #define slot_tie         22
 
-// Mob sprite sheets. These need to be strings as numbers
-// cannot be used as associative list keys.
-#define icon_l_hand		"slot_l_hand"
-#define icon_r_hand		"slot_r_hand"
+// Inventory slot strings. 
+// since numbers cannot be used as associative list keys.
+#define slot_l_hand_key		"slot_l_hand"
+#define slot_r_hand_key		"slot_r_hand"
+#define slot_w_uniform_key	"w_uniform"
+#define slot_back_key		"back"
 
 // Bitflags for clothing parts.
 #define HEAD        1

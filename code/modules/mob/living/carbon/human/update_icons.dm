@@ -741,19 +741,36 @@ var/global/list/damage_icon_parts = list()
 /mob/living/carbon/human/update_inv_back(var/update_icons=1)
 	if(back)
 		back.screen_loc = ui_back	//TODO
-		var/obj/item/weapon/rig/rig = back
+		
+		//determine the icon to use
+		var/icon/overlay_icon
 		if(back.icon_override)
-			overlays_standing[BACK_LAYER] = image("icon" = back.icon_override, "icon_state" = "[back.icon_state]")
-		//If this is a rig and a mob_icon is set, it will take species into account in the rig update_icon() proc.
-		else if(istype(rig) && rig.mob_icon)
-			overlays_standing[BACK_LAYER]  = rig.mob_icon
+			overlay_icon = back.icon_override
+		else if(istype(back, /obj/item/weapon/rig))
+			//If this is a rig and a mob_icon is set, it will take species into account in the rig update_icon() proc.
+			var/obj/item/weapon/rig/rig = back
+			overlay_icon = rig.mob_icon
 		else if(back.sprite_sheets && back.sprite_sheets[species.name])
-			overlays_standing[BACK_LAYER] = image("icon" = back.sprite_sheets[species.name], "icon_state" = "[back.icon_state]")
+			overlay_icon = back.sprite_sheets[species.name]
 		else
-			overlays_standing[BACK_LAYER] = image("icon" = 'icons/mob/back.dmi', "icon_state" = "[back.icon_state]")
+			overlay_icon = INV_BACK_DEF_ICON
+		
+		//determine state to use
+		var/overlay_state
+		if(back.item_state_slots && back.item_state_slots[slot_back_key])
+			overlay_state = back.item_state_slots[slot_back_key]
+		else if(back.item_state)
+			overlay_state = back.item_state
+		else
+			overlay_state = back.icon_state
+		
+		//create the image
+		overlays_standing[BACK_LAYER] = image(icon = overlay_icon, icon_state = overlay_state)
 	else
-		overlays_standing[BACK_LAYER]	= null
-	if(update_icons)   update_icons()
+		overlays_standing[BACK_LAYER] = null
+
+	if(update_icons) 
+		update_icons()
 
 
 /mob/living/carbon/human/update_hud()	//TODO: do away with this if possible
@@ -790,19 +807,27 @@ var/global/list/damage_icon_parts = list()
 	if(r_hand)
 		r_hand.screen_loc = ui_rhand	//TODO
 
-		var/t_icon = INV_R_HAND_DEF_ICON
-		if(r_hand.item_icons && (icon_r_hand in r_hand.item_icons))
-			t_icon = r_hand.item_icons[icon_r_hand]
-
-		var/t_state = r_hand.item_state //useful for clothing that changes icon_state but retains the same sprite on the mob when held in hand
-		if(!t_state)	t_state = r_hand.icon_state
+		//determine icon to use
+		var/icon/t_icon
 		if(r_hand.icon_override)
-			t_state = "[t_state]_r"
-			overlays_standing[R_HAND_LAYER] = image("icon" = r_hand.icon_override, "icon_state" = "[t_state]")
+			t_icon = r_hand.icon_override
+		else if(r_hand.item_icons && (slot_r_hand_key in r_hand.item_icons))
+			t_icon = r_hand.item_icons[slot_r_hand_key]
 		else
-			overlays_standing[R_HAND_LAYER] = image("icon" = t_icon, "icon_state" = "[t_state]")
+			t_icon = INV_R_HAND_DEF_ICON
 
-		if (handcuffed) drop_r_hand()
+		//determine icon state to use
+		var/t_state
+		if(r_hand.item_state_slots && r_hand.item_state_slots[slot_r_hand_key])
+			t_state = r_hand.item_state_slots[slot_r_hand_key]
+		else if(r_hand.item_state)
+			t_state = r_hand.item_state
+		else
+			t_state = r_hand.icon_state
+		
+		overlays_standing[R_HAND_LAYER] = image(icon = t_icon, icon_state = t_state)
+
+		if (handcuffed) drop_r_hand() //this should be moved out of icon code
 	else
 		overlays_standing[R_HAND_LAYER] = null
 
@@ -813,19 +838,27 @@ var/global/list/damage_icon_parts = list()
 	if(l_hand)
 		l_hand.screen_loc = ui_lhand	//TODO
 
-		var/t_icon = INV_L_HAND_DEF_ICON
-		if(l_hand.item_icons && (icon_l_hand in l_hand.item_icons))
-			t_icon = l_hand.item_icons[icon_l_hand]
-
-		var/t_state = l_hand.item_state //useful for clothing that changes icon_state but retains the same sprite on the mob when held in hand
-		if(!t_state)	t_state = l_hand.icon_state
+		//determine icon to use
+		var/icon/t_icon
 		if(l_hand.icon_override)
-			t_state = "[t_state]_l"
-			overlays_standing[L_HAND_LAYER] = image("icon" = l_hand.icon_override, "icon_state" = "[t_state]")
+			t_icon = l_hand.icon_override
+		else if(l_hand.item_icons && (slot_l_hand_key in l_hand.item_icons))
+			t_icon = l_hand.item_icons[slot_l_hand_key]
 		else
-			overlays_standing[L_HAND_LAYER] = image("icon" = t_icon, "icon_state" = "[t_state]")
+			t_icon = INV_L_HAND_DEF_ICON
 
-		if (handcuffed) drop_l_hand()
+		//determine icon state to use
+		var/t_state
+		if(l_hand.item_state_slots && l_hand.item_state_slots[slot_l_hand_key])
+			t_state = l_hand.item_state_slots[slot_l_hand_key]
+		else if(l_hand.item_state)
+			t_state = l_hand.item_state
+		else
+			t_state = l_hand.icon_state
+		
+		overlays_standing[L_HAND_LAYER] = image(icon = t_icon, icon_state = t_state)
+
+		if (handcuffed) drop_l_hand() //This probably should not be here
 	else
 		overlays_standing[L_HAND_LAYER] = null
 
