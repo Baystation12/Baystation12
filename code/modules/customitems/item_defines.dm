@@ -528,7 +528,7 @@
 	var/new_suit_desc   // Sets suit desc.
 	var/helmet_icon     // Sets helmet icon_state and item_state.
 	var/suit_icon       // Sets suit icon_state and item_state.
-	var/helmet_color    // Sets item_color.
+	var/helmet_color    // Sets worn_state.
 	var/uses = 2        // Uses before the kit deletes itself.
 	var/new_light_overlay
 
@@ -941,8 +941,8 @@
 	desc = "A uniform jacket, its buttons polished to a shine, coupled with a dark pair of trousers. 'Hachert' is embroidered upon the jacket�s shoulder bar."
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "milohachert"
-	item_state = "milohachert"
-	item_color = "milohachert"
+	item_state = "gy_suit"
+	worn_state = "milohachert"
 
 
 /obj/item/clothing/under/fluff/kaine_kalim_2
@@ -950,24 +950,24 @@
     desc = "An unusually sterile and pressed uniform. It seems to have a string of vials crossing the chest."
     icon = 'icons/obj/custom_items.dmi'
     icon_state = "kaineuniform"
-    item_state = "kaineuniform"
-    item_color = "kaineuniform"
+    item_state = "w_suit"
+    worn_state = "kaineuniform"
 
 /obj/item/clothing/under/fluff/jumpsuitdown //searif: Yuki Matsuda
 	name = "rolled down jumpsuit"
 	desc = "A rolled down jumpsuit. Great for mechanics."
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "jumpsuitdown"
-	item_state = "jumpsuitdown"
-	item_color = "jumpsuitdown"
+	item_state = "gy_suit"
+	worn_state = "jumpsuitdown"
 
 /obj/item/clothing/under/fluff/lilith_vinous_1 //slyhidden: Lilith Vinous
 	name = "casual security uniform"
 	desc = "A less formal version of the traditional dark red Security uniform. It has the top button undone, rolled up sleeves and different belt."
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "lilith_uniform"
-	item_state = "lilith_uniform"
-	item_color = "lilith_uniform"
+	item_state = "r_suit"
+	worn_state = "lilith_uniform"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS
 
 /obj/item/clothing/under/fluff/ana_issek_1 //suethecake: Ana Issek
@@ -975,8 +975,8 @@
 	desc = "A silken blouse paired with dark-colored slacks. It has the words 'Chief Investigator' embroidered into the shoulder bar."
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "ana_uniform"
-	item_state = "ana_uniform"
-	item_color = "ana_uniform"
+	item_state = "r_suit"
+	worn_state = "ana_uniform"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS
 
 /obj/item/clothing/under/fluff/olddressuniform //desiderium: Momiji Inubashiri
@@ -984,15 +984,16 @@
 	desc = "A retired Station Head of Staff uniform, phased out twenty years ago for the newer jumpsuit design, but still acceptable dress. Lovingly maintained."
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "olddressuniform"
-	item_state = "olddressuniform"
-	item_color = "olddressuniform"
+	item_state = "b_suit"
+	worn_state = "olddressuniform"
 
 /obj/item/clothing/under/rank/security/fluff/jeremy_wolf_1 //whitewolf41: Jeremy Wolf
 	name = "worn officer's uniform"
 	desc = "An old red security jumpsuit. Seems to have some slight modifications."
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "jeremy_wolf_1"
-	item_color = "jeremy_wolf_1"
+	item_state = "r_suit"
+	worn_state = "jeremy_wolf_1"
 
 //////////////////// PRC Uniform - Ronan Harper - Raptor1628 ///////////////////
 
@@ -1002,7 +1003,7 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "harper_uniform"
 	item_state = "jensensuit"
-	item_color = "harper_uniform"
+	worn_state = "harper_uniform"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS
 
 //////////////////// Corporate Cap - Robert Mason - Masterrbc ////////////////////
@@ -1016,8 +1017,8 @@
 	desc = "A nicely tailored purple dress made for the taller woman."
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "tian_dress"
-	item_state = "tian_dress"
-	item_color = "tian_dress"
+	item_state = "r_suit"
+	worn_state = "tian_dress"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
 
 /obj/item/clothing/under/rank/bartender/fluff/classy	//searif: Ara Al-Jazari
@@ -1025,32 +1026,32 @@
 	desc = "A prim and proper uniform that looks very similar to a bartender's, the only differences being a red tie, waistcoat and a rag hanging out of the back pocket."
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "ara_bar_uniform"
-	item_state = "ara_bar_uniform"
-	item_color = "ara_bar_uniform"
+	item_state = "ba_suit"
+	worn_state = "ara_bar_uniform"
 
 /obj/item/clothing/under/fluff/callum_suit //roaper: Callum Leamus
 	name = "knockoff suit"
 	desc = "A knockoff of a suit commonly worn by the upper class."
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "callum_suit"
-	item_state = "callum_suit"
-	item_color = "callum_suit"
+	item_state = "ba_suit"
+	worn_state = "callum_suit"
 
 /obj/item/clothing/under/fluff/solara_light_1 //bluefishie: Solara Born-In-Light
 	name = "Elaborate Purple Dress"
 	desc = "An expertly tailored dress, made out of fine fabrics. The interwoven necklace appears to be made out of gold, with three complicated symbols engraved in the front."
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "solara_dress"
-	item_state = "solara_dress"
-	item_color = "solara_dress"
+	item_state = "p_suit"
+	worn_state = "solara_dress"
 
 /obj/item/clothing/under/rank/nursesuit/fluff/sasha
 	name = "RN Uniform"
 	desc = "A nurse's uniform that is dark blue and gold. It looks like it's been tailored for a short person."
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "sasha"
-	item_state = "sasha"
-	item_color = "sasha"
+	item_state = "b_suit"
+	worn_state = "sasha"
 
 /////// NT-SID Suit //Zuhayr: Jane Doe
 
@@ -1060,8 +1061,8 @@
 
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "jane_sid_suit"
-	item_state = "jane_sid_suit"
-	item_color = "jane_sid_suit"
+	item_state = "o_suit"
+	worn_state = "jane_sid_suit"
 	has_sensor = 2
 	sensor_mode = 3
 
@@ -1075,14 +1076,13 @@
 		return 0
 
 	if(src.icon_state == "jane_sid_suit_down")
-		src.item_color = "jane_sid_suit"
+		src.icon_state = "jane_sid_suit"
 		usr << "You zip up the [src]."
 	else
-		src.item_color = "jane_sid_suit_down"
+		src.icon_state = "jane_sid_suit_down"
 		usr << "You unzip and roll down the [src]."
 
-	src.icon_state = "[item_color]"
-	src.item_state = "[item_color]"
+	src.item_state_slots[slot_w_uniform_str] = "[src.icon_state]"
 	update_clothing_icon()
 
 ////// Wyatt's Ex-Commander Jumpsuit - RawrTaicho
@@ -1092,8 +1092,8 @@
 	desc = "A standard Central Command Engineering Commander jumpsuit tailored to fight the wearer tightly. It has a Medal of Service pinned onto the left side of it."
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "wyatt_uniform"
-	item_state = "wyatt_uniform"
-	item_color = "wyatt_uniform"
+	//item_state = "wyatt_uniform"
+	worn_state = "wyatt_uniform"
 
 ////// Black Dress - Lillian Amsel - PapaDrow
 /obj/item/clothing/under/fluff/lillian_amsel_1
@@ -1101,8 +1101,8 @@
 	desc = "A knee-length, dark gray and black dress made of a soft, velvety material."
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "lillian_dress"
-	item_state = "lillian_dress"
-	item_color = "lillian_dress"
+	//item_state = "lillian_dress"
+	worn_state = "lillian_dress"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
 
 ////// Tailored Security Uniform - Parker Eliza - MrSnapwalk
@@ -1112,8 +1112,8 @@
 	desc = "A red uniform shirt (tailored for easy access to the shoulder joint) and black cargo pants, paired with a set of somewhat bulky white casings for robotic limbs. The arms have a small label on the inner elbow, which reads \"Bishop Corporation Cybernetic Solutions\"."
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "parker_eliza"
-	item_state = "parker_eliza"
-	item_color = "parker_eliza"
+	//item_state = "parker_eliza"
+	worn_state = "parker_eliza"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS|HANDS
 
 ////// Bishop "GOLEM" V2200 Industrial Limb Augments - Parker Eliza - MrSnapwalk
@@ -1124,6 +1124,7 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "parker_eliza_arms"
 	item_state = "parker_eliza_arms"
+
 
 
 ////////////// Accessories /////
@@ -1175,7 +1176,7 @@
 	name = "painted mask"
 	desc = "A ghoulish mask with a stylized painting of a flame over the left eye, and a painted tear stream coming from the right eye."
 	icon = 'icons/obj/custom_items.dmi'
-	item_state = "cicero"
+	//item_state = "cicero"
 	icon_state = "cicero"
 	body_parts_covered = FACE|EYES
 
@@ -1299,7 +1300,7 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "medical_short"
 	item_state = "medical_short"
-	item_color = "medical_short"
+	worn_state = "medical_short"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS
 
 /obj/item/clothing/suit/storage/labcoat/fluff/red
@@ -1328,7 +1329,7 @@
 	desc = "A meticulously clean police uniform belonging to Precinct 31, Outer Light Colony. The word \"RETIRED\" is engraved tastefully and professionally in the badge below the number, 501."
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "retpoluniform"
-	item_color = "retpoluniform"
+	worn_state = "retpoluniform"
 
 //////////// Weapons ////////////
 
@@ -1374,7 +1375,7 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "sakura_hokkaido_kimono"
 	item_state = "sakura_hokkaido_kimono"
-	item_color = "sakura_hokkaido_kimono"
+	worn_state = "sakura_hokkaido_kimono"
 
 ///////////////////////////// Astronovus - Harold's Cane ////////////////////////////
 

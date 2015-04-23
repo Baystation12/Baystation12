@@ -391,6 +391,10 @@ BLIND     // can't see anything
 //Under clothing
 /obj/item/clothing/under
 	icon = 'icons/obj/clothing/uniforms.dmi'
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/items/lefthand_uniforms.dmi',
+		slot_r_hand_str = 'icons/mob/items/righthand_uniforms.dmi',
+		)
 	name = "under"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 	permeability_coefficient = 0.90
@@ -408,12 +412,22 @@ BLIND     // can't see anything
 	var/displays_id = 1
 	var/rolled_down = -1 //0 = unrolled, 1 = rolled, -1 = cannot be toggled
 	sprite_sheets = list("Vox" = 'icons/mob/species/vox/uniform.dmi')
-	var/item_color //temporary until item_state override is implemented
+	
+	//convenience var for defining the icon state for the overlay used when the clothing is worn.
+	//Also used by rolling/unrolling.
+	var/worn_state = null
 
 /obj/item/clothing/under/New()
+	if(worn_state)
+		if(!item_state_slots) 
+			item_state_slots = list()
+		item_state_slots[slot_w_uniform_str] = worn_state
+	else
+		worn_state = icon_state
+		
 	//autodetect rollability
 	if(rolled_down < 0)
-		if((initial(item_color) + "_d_s") in icon_states('icons/mob/uniform.dmi'))
+		if((worn_state + "_d_s") in icon_states('icons/mob/uniform.dmi'))
 			rolled_down = 0
 
 /obj/item/clothing/under/update_clothing_icon()
@@ -563,10 +577,10 @@ BLIND     // can't see anything
 	rolled_down = !rolled_down
 	if(rolled_down)
 		body_parts_covered &= LOWER_TORSO|LEGS|FEET
-		item_color = "[initial(item_color)]_d"
+		item_state_slots[slot_w_uniform_str] = "[worn_state]_d"
 	else
 		body_parts_covered = initial(body_parts_covered)
-		item_color = initial(item_color)
+		item_state_slots[slot_w_uniform_str] = "[worn_state]"
 	update_clothing_icon()
 
 /obj/item/clothing/under/proc/remove_accessory(mob/user, obj/item/clothing/accessory/A)

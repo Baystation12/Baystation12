@@ -7,7 +7,7 @@
 	name = "black jumpsuit"
 	icon_state = "black"
 	item_state = "bl_suit"
-	item_color = "black"
+	worn_state = "black"
 	desc = "It's a plain jumpsuit. It seems to have a small dial on the wrist."
 	origin_tech = "syndicate=3"
 	var/list/clothing_choices = list()
@@ -24,7 +24,7 @@
 	name = "psychedelic"
 	desc = "Groovy!"
 	icon_state = "psyche"
-	item_color = "psyche"
+	item_state_slots[slot_w_uniform_str] = "psyche"
 	update_icon()
 	update_clothing_icon()
 
@@ -46,7 +46,8 @@
 	name = A.name
 	icon_state = A.icon_state
 	item_state = A.item_state
-	item_color = A.item_color
+	item_state_slots = A.item_state_slots
+	worn_state = A.worn_state
 	body_parts_covered = A.body_parts_covered
 	update_clothing_icon()	//so our overlays update.
 

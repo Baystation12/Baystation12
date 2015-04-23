@@ -457,26 +457,42 @@ var/global/list/damage_icon_parts = list()
 /mob/living/carbon/human/update_inv_w_uniform(var/update_icons=1)
 	if(w_uniform && istype(w_uniform, /obj/item/clothing/under) )
 		w_uniform.screen_loc = ui_iclothing
-		var/t_color = w_uniform:item_color
-		if(!t_color)		t_color = icon_state
-		var/image/standing	= image("icon_state" = "[t_color]_s")
 
+		//determine the icon to use
+		var/icon/under_icon
 		if(w_uniform.icon_override)
-			standing.icon = w_uniform.icon_override
+			under_icon = w_uniform.icon_override
 		else if(w_uniform.sprite_sheets && w_uniform.sprite_sheets[species.name])
-			standing.icon = w_uniform.sprite_sheets[species.name]
+			under_icon = w_uniform.sprite_sheets[species.name]
+		else if(w_uniform.item_icons && w_uniform.item_icons[slot_w_uniform_str])
+			under_icon = w_uniform.item_icons[slot_w_uniform_str]
 		else
-			standing.icon = 'icons/mob/uniform.dmi'
+			under_icon = INV_W_UNIFORM_DEF_ICON
+		
+		//determine state to use
+		var/under_state
+		if(w_uniform.item_state_slots && w_uniform.item_state_slots[slot_w_uniform_str])
+			under_state = w_uniform.item_state_slots[slot_w_uniform_str]
+		else if(w_uniform.item_state)
+			under_state = w_uniform.item_state
+		else
+			under_state = w_uniform.icon_state
 
+		//need to append _s to the icon state for legacy compatibility
+		var/image/standing = image(icon = under_icon, icon_state = "[under_state]_s")
+		
+		//apply blood overlay
 		if(w_uniform.blood_DNA)
-			var/image/bloodsies	= image("icon" = species.blood_mask, "icon_state" = "uniformblood")
+			var/image/bloodsies	= image(icon = species.blood_mask, icon_state = "uniformblood")
 			bloodsies.color		= w_uniform.blood_color
 			standing.overlays	+= bloodsies
 
-		if(w_uniform:accessories.len)	//WE CHECKED THE TYPE ABOVE. THIS REALLY SHOULD BE FINE.
-			for(var/obj/item/clothing/accessory/A in w_uniform:accessories)
+		//accessories
+		var/obj/item/clothing/under/under = w_uniform
+		if(under.accessories.len)
+			for(var/obj/item/clothing/accessory/A in under.accessories)
 				var/accessory_state = A.overlay_state? A.overlay_state : A.icon_state
-				standing.overlays	+= image("icon" = 'icons/mob/ties.dmi', "icon_state" = "[accessory_state]")
+				standing.overlays	+= image(icon = INV_ACCESSORIES_DEF_ICON, icon_state = accessory_state)
 
 		overlays_standing[UNIFORM_LAYER]	= standing
 	else
@@ -485,8 +501,10 @@ var/global/list/damage_icon_parts = list()
 		// Automatically drop anything in store / id / belt if you're not wearing a uniform.	//CHECK IF NECESARRY
 		for( var/obj/item/thing in list(r_store, l_store, wear_id, belt) )
 			if(thing)
-				remove_from_mob(thing)
-	if(update_icons)   update_icons()
+				drop_from_inventory(thing)
+
+	if(update_icons)
+		update_icons()
 
 /mob/living/carbon/human/update_inv_wear_id(var/update_icons=1)
 	if(wear_id)
@@ -752,6 +770,8 @@ var/global/list/damage_icon_parts = list()
 			overlay_icon = rig.mob_icon
 		else if(back.sprite_sheets && back.sprite_sheets[species.name])
 			overlay_icon = back.sprite_sheets[species.name]
+		else if(back.item_icons && (slot_l_hand_str in back.item_icons))
+			overlay_icon = back.item_icons[slot_l_hand_str]
 		else
 			overlay_icon = INV_BACK_DEF_ICON
 		
