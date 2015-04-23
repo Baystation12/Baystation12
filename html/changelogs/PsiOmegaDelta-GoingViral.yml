@@ -1,5 +1,0 @@
-author: PsiOmegaDelta
-delete-after: True
-
-changes: 
-  - bugfix: "The virus event will now only infect mobs on the station, currently controlled by player that has been active in the last 5 minutes."
