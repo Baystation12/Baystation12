@@ -1124,8 +1124,8 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "parker_eliza_arms"
 	item_state = "parker_eliza_arms"
-
-
+	body_parts_covered = 0 //technicially it's underneath everything, being part of the body
+	canremove = 0
 
 ////////////// Accessories /////
 
