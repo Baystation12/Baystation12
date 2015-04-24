@@ -146,9 +146,8 @@
 /obj/machinery/vending/Destroy()
 	qdel(wires)
 	wires = null
-	if(coin)
-		qdel(coin)
-		coin = null
+	qdel(coin)
+	coin = null
 	..()
 
 /obj/machinery/vending/ex_act(severity)

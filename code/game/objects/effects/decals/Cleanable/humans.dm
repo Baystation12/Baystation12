@@ -24,7 +24,7 @@ var/global/list/image/splatter_cache=list()
 /obj/effect/decal/cleanable/blood/Destroy()
 	for(var/datum/disease/D in viruses)
 		D.cure(0)
-	..()
+	return ..()
 
 /obj/effect/decal/cleanable/blood/New()
 	..()

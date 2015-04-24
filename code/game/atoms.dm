@@ -24,10 +24,12 @@
 
 /atom/Destroy()
 	. = ..()
+	density = 0
 	SetOpacity(0)
 
 	if(reagents)
 		qdel(reagents)
+		reagents = null
 	for(var/atom/movable/AM in contents)
 		qdel(AM)
 	invisibility = 101

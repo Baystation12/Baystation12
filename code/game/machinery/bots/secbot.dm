@@ -107,6 +107,11 @@
 			if((lasercolor == "r") && (name == created_name))
 				name = pick("RED RAMPAGE","RED ROVER","RED KILLDEATH MURDERBOT")
 
+/obj/machinery/bot/mulebot/Destroy()
+	if(radio_controller)
+		radio_controller.remove_object(src,beacon_freq)
+		radio_controller.remove_object(src,control_freq)
+	..()
 
 /obj/machinery/bot/secbot/update_icon()
 	if(on && is_attacking)

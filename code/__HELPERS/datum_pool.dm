@@ -76,6 +76,10 @@ var/global/list/GlobalPool = list()
 	D.Destroy()
 	D.ResetVars()
 
+/proc/IsPooled(var/datum/D)
+	if(isnull(GlobalPool[D.type]) || length(GlobalPool[D.type]) == 0)
+		return 0
+	return 1
 
 /datum/proc/Prepare(args)
 	if(islist(args))

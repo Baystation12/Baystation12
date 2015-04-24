@@ -30,7 +30,7 @@
 
 /obj/effect/landmark/zcontroller/Destroy()
 	processing_objects.Remove(src)
-	return
+	return ..()
 
 /obj/effect/landmark/zcontroller/process()
 	if (world.time > fast_time)

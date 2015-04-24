@@ -23,8 +23,7 @@ would spawn and follow the beaker, even if it is carried or thrown.
 /obj/effect/Destroy()
 	if(reagents)
 		reagents.delete()
-	PlaceInPool(src)
-	return 1
+	return ..()
 
 /obj/effect/effect/water/Move(turf/newloc)
 	//var/turf/T = src.loc
@@ -140,8 +139,7 @@ steam.start() -- spawns the effect
 	var/turf/T = src.loc
 	if (istype(T, /turf))
 		T.hotspot_expose(1000,100)
-	..()
-	return
+	return ..()
 
 /obj/effect/effect/sparks/Move()
 	..()

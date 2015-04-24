@@ -162,7 +162,7 @@ datum
 
 /* Must check the transfering of reagents and their data first. They all can point to one disease datum.
 
-			Del()
+			Destroy()
 				if(src.data["virus"])
 					var/datum/disease/D = src.data["virus"]
 					D.cure(0)
@@ -1790,7 +1790,7 @@ datum
 				..()
 				return
 
-			Del()
+			Destroy()
 				if(holder && ismob(holder.my_atom))
 					var/mob/M = holder.my_atom
 					M.status_flags &= ~FAKEDEATH
@@ -4427,6 +4427,10 @@ datum
 					M.confused = max(M.confused+15,15)
 				..()
 				return
+
+datum/reagent/Destroy() // This should only be called by the holder, so it's already handled clearing its references
+	..()
+	holder = null
 
 // Undefine the alias for REAGENTS_EFFECT_MULTIPLER
 #undef REM

@@ -40,6 +40,11 @@
 	spark_system.set_up(5, 0, src)
 	spark_system.attach(src)
 
+/obj/item/weapon/rcd/Destroy()
+	qdel(spark_system)
+	spark_system = null
+	return ..()
+
 /obj/item/weapon/rcd/attackby(obj/item/weapon/W, mob/user)
 
 	if(istype(W, /obj/item/weapon/rcd_ammo))

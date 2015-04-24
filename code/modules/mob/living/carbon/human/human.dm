@@ -47,6 +47,11 @@
 		dna.real_name = real_name
 	make_blood()
 
+/mob/living/carbon/human/Destroy()
+	for(var/organ in organs)
+		qdel(organ)
+	return ..()
+
 /mob/living/carbon/human/Stat()
 	..()
 	statpanel("Status")

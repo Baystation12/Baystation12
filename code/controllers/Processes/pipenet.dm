@@ -10,3 +10,6 @@
 			continue
 
 		pipe_networks.Remove(pipeNetwork)
+
+/datum/controller/process/pipenet/getStatName()
+	return ..()+"([pipe_networks.len])"

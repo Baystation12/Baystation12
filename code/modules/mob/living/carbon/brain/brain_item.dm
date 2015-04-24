@@ -27,6 +27,12 @@
 		if(brainmob && brainmob.client)
 			brainmob.client.screen.len = null //clear the hud
 
+/obj/item/organ/brain/Destroy()
+	if(brainmob)
+		qdel(brainmob)
+		brainmob = null
+	..()
+
 /obj/item/organ/brain/proc/transfer_identity(var/mob/living/carbon/H)
 	name = "\the [H]'s [initial(src.name)]"
 	brainmob = new(src)

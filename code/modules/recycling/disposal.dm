@@ -43,6 +43,11 @@
 		air_contents.volume = PRESSURE_TANK_VOLUME
 		update()
 
+/obj/machinery/disposal/Destroy()
+	eject()
+	if(trunk)
+		trunk.linked = null
+	..()
 
 // attack by item places it in to disposal
 /obj/machinery/disposal/attackby(var/obj/item/I, var/mob/user)
@@ -638,6 +643,11 @@
 		location.assume_air(gas)  // vent all gas to turf
 		return
 
+/obj/structure/disposalholder/Destroy()
+	qdel(gas)
+	active = 0
+	..()
+
 // Disposal pipes
 
 /obj/structure/disposalpipe
@@ -663,7 +673,7 @@
 
 	// pipe is deleted
 	// ensure if holder is present, it is expelled
-	Del()
+	Destroy()
 		var/obj/structure/disposalholder/H = locate() in src
 		if(H)
 			// holder was present
@@ -919,6 +929,30 @@
 		C.update()
 
 		qdel(src)
+
+// pipe is deleted
+// ensure if holder is present, it is expelled
+/obj/structure/disposalpipe/Destroy()
+	var/obj/structure/disposalholder/H = locate() in src
+	if(H)
+		// holder was present
+		H.active = 0
+		var/turf/T = src.loc
+		if(T.density)
+			// deleting pipe is inside a dense turf (wall)
+			// this is unlikely, but just dump out everything into the turf in case
+
+			for(var/atom/movable/AM in H)
+				AM.loc = T
+				AM.pipe_eject(0)
+			qdel(H)
+			..()
+			return
+
+		// otherwise, do normal expel from turf
+		if(H)
+			expel(H, T, 0)
+	..()
 
 // *** TEST verb
 //client/verb/dispstop()
@@ -1467,8 +1501,6 @@
 			else
 				user << "You need more welding fuel to complete this task."
 				return
-
-
 
 // called when movable is expelled from a disposal pipe or outlet
 // by default does nothing, override for special behaviour

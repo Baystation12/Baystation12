@@ -307,6 +307,16 @@
 
 		return
 
+/obj/structure/bigDelivery/Destroy()
+	if(wrapped) //sometimes items can disappear. For example, bombs. --rastaf0
+		wrapped.loc = (get_turf(loc))
+		if(istype(wrapped, /obj/structure/closet))
+			var/obj/structure/closet/O = wrapped
+			O.welded = 0
+	var/turf/T = get_turf(src)
+	for(var/atom/movable/AM in contents)
+		AM.loc = T
+	..()
 
 /obj/item/device/destTagger
 	name = "destination tagger"
@@ -440,3 +450,8 @@
 			else
 				user << "You need more welding fuel to complete this task."
 				return
+
+/obj/machinery/disposal/deliveryChute/Destroy()
+	if(trunk)
+		trunk.linked = null
+	..()

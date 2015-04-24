@@ -83,7 +83,7 @@
 
 /obj/effect/landmark/Destroy()
 	landmarks_list -= src
-	..()
+	return ..()
 
 /obj/effect/landmark/start
 	name = "start"
@@ -103,7 +103,8 @@
 
 /obj/effect/landmark/start/ninja/New()
 	..()
-	ninjastart += src
+	ninjastart += loc
+	qdel(src)
 
 //Costume spawner landmarks
 

@@ -27,6 +27,10 @@
 	active_power_usage = initial(active_power_usage) * (strength + 1)
 	..()
 
+/obj/machinery/particle_accelerator/control_box/Destroy()
+	if(active)
+		toggle_power()
+	..()
 
 /obj/machinery/particle_accelerator/control_box/attack_hand(mob/user as mob)
 	if(construction_state >= 3)

@@ -76,6 +76,12 @@
 			suffix = "#[count]"
 		name = "Mulebot ([suffix])"
 
+/obj/machinery/bot/mulebot/Destroy()
+	if(radio_controller)
+		radio_controller.remove_object(src,beacon_freq)
+		radio_controller.remove_object(src,control_freq)
+	..()
+
 // attack by item
 // emag : lock/unlock,
 // screwdriver: open/close hatch

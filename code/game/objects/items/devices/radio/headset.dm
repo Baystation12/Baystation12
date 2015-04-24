@@ -29,6 +29,8 @@
 /obj/item/device/radio/headset/Destroy()
 	qdel(keyslot1)
 	qdel(keyslot2)
+	keyslot1 = null
+	keyslot2 = null
 	..()
 
 /obj/item/device/radio/headset/examine(mob/user)

@@ -2,6 +2,11 @@
 	mob_list -= src
 	dead_mob_list -= src
 	living_mob_list -= src
+	qdel(hud_used)
+	if(mind && mind.current == src)
+		spellremove(src)
+	for(var/infection in viruses)
+		qdel(infection)
 	ghostize()
 	..()
 
@@ -726,51 +731,10 @@ note dizziness decrements automatically in the mob's Life() proc.
 			statpanel("Status","CPU:","[world.cpu]")
 			statpanel("Status","Instances:","[world.contents.len]")
 		if(statpanel("Status") && processScheduler && processScheduler.getIsRunning())
-			var/datum/controller/process/process
-
-			process = processScheduler.getProcess("air")
-			statpanel("Status",process.name, "#[process.getTicks()]\t- [process.getLastRunTime()]")
-
-			process = processScheduler.getProcess("alarm")
-			var/list/alarms = alarm_manager.active_alarms()
-			statpanel("Status",process.name+"([alarms.len])","#[process.getTicks()]\t- [process.getLastRunTime()]")
-
-			process = processScheduler.getProcess("disease")
-			statpanel("Status",process.name+"([active_diseases.len])","#[process.getTicks()]\t- [process.getLastRunTime()]")
-
-			process = processScheduler.getProcess("garbage")
-			statpanel("Status",process.name+"([garbage_collector.dels])","#[process.getTicks()]\t- [process.getLastRunTime()]")
-
-			process = processScheduler.getProcess("machinery")
-			statpanel("Status",process.name+"([machines.len])","#[process.getTicks()]\t- [process.getLastRunTime()]")
-
-			process = processScheduler.getProcess("mob")
-			statpanel("Status",process.name+"([mob_list.len])","#[process.getTicks()]\t- [process.getLastRunTime()]")
-
-			process = processScheduler.getProcess("nanoui")
-			statpanel("Status",process.name+"([nanomanager.processing_uis.len])","t#[process.getTicks()]\t- [process.getLastRunTime()]")
-
-			process = processScheduler.getProcess("lighting")
-			statpanel("Status",process.name, "#[process.getTicks()]\t- [process.getLastRunTime()]")
-
-			process = processScheduler.getProcess("obj")
-			statpanel("Status",process.name+"([processing_objects.len])","#[process.getTicks()]\t- [process.getLastRunTime()]")
-
-			process = processScheduler.getProcess("pipenet")
-			statpanel("Status",process.name+"([pipe_networks.len])","#[process.getTicks()]\t- [process.getLastRunTime()]")
-
-			process = processScheduler.getProcess("powernet")
-			statpanel("Status",process.name+"([powernets.len])","#[process.getTicks()]\t- [process.getLastRunTime()]")
-
-			process = processScheduler.getProcess("sun")
-			statpanel("Status",process.name, "#[process.getTicks()]\t- [process.getLastRunTime()]")
-
-			process = processScheduler.getProcess("ticker")
-			statpanel("Status",process.name, "#[process.getTicks()]\t- [process.getLastRunTime()]")
-
+			for(var/datum/controller/process/P in processScheduler.processes)
+				statpanel("Status",P.getStatName(), P.getTickTime())
 		else
 			statpanel("Status","processScheduler is not running.")
-
 
 	if(listed_turf && client)
 		if(!TurfAdjacent(listed_turf))

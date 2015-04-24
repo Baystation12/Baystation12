@@ -45,6 +45,15 @@
 	if(radio_controller)
 		initialize()
 
+/obj/item/device/radio/Destroy()
+	qdel(wires)
+	wires = null
+	if(radio_controller)
+		radio_controller.remove_object(src, frequency)
+		for (var/ch_name in channels)
+			radio_controller.remove_object(src, radiochannels[ch_name])
+	..()
+
 
 /obj/item/device/radio/initialize()
 
@@ -624,7 +633,6 @@
 	user << browse(dat, "window=radio")
 	onclose(user, "radio")
 	return
-
 
 /obj/item/device/radio/proc/config(op)
 	if(radio_controller)

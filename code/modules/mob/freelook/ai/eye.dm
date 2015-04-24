@@ -43,6 +43,7 @@
 	if(eyeobj)
 		eyeobj.owner = null
 		qdel(eyeobj) // No AI, no Eye
+		eyeobj = null
 	..()
 
 /atom/proc/move_camera_by_click()

@@ -39,6 +39,12 @@
 	field = new/list()
 	..()
 
+/obj/machinery/shield_gen/Destroy()
+	for(var/obj/effect/energy_field/D in field)
+		field.Remove(D)
+		D.loc = null
+	..()
+
 /obj/machinery/shield_gen/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/weapon/card/id))
 		var/obj/item/weapon/card/id/C = W

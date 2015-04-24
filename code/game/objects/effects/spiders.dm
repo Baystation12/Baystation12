@@ -209,4 +209,4 @@
 	src.visible_message("\red \the [src] splits open.")
 	for(var/atom/movable/A in contents)
 		A.loc = src.loc
-	..()
+	return ..()

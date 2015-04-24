@@ -115,6 +115,15 @@
 			locked = 1
 			return
 
+/obj/item/device/mmi/Destroy()
+	if(isrobot(loc))
+		var/mob/living/silicon/robot/borg = loc
+		borg.mmi = null
+	if(brainmob)
+		qdel(brainmob)
+		brainmob = null
+	..()
+
 /obj/item/device/mmi/radio_enabled
 	name = "radio-enabled man-machine interface"
 	desc = "The Warrior's bland acronym, MMI, obscures the true horror of this monstrosity. This one comes with a built-in radio."

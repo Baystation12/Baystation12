@@ -314,3 +314,9 @@ datum/controller/process/proc/enable()
 
 /datum/controller/process/proc/getTicks()
 	return ticks
+
+/datum/controller/process/proc/getStatName()
+	return name
+
+/datum/controller/process/proc/getTickTime()
+	return "#[getTicks()]\t- [getLastRunTime()]"

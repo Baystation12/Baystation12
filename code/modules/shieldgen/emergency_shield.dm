@@ -153,7 +153,6 @@
 	collapse_shields()
 	..()
 
-
 /obj/machinery/shieldgen/proc/shields_up()
 	if(active) return 0 //If it's already turned on, how did this get called?
 
@@ -161,7 +160,7 @@
 	update_icon()
 
 	create_shields()
-	
+
 	idle_power_usage = 0
 	for(var/obj/machinery/shield/shield_tile in deployed_shields)
 		idle_power_usage += shield_tile.shield_idle_power
@@ -174,7 +173,7 @@
 	update_icon()
 
 	collapse_shields()
-	
+
 	update_use_power(0)
 
 /obj/machinery/shieldgen/proc/create_shields()
@@ -201,22 +200,22 @@
 /obj/machinery/shieldgen/process()
 	if (!active || (stat & NOPOWER))
 		return
-	
+
 	if(malfunction)
 		if(deployed_shields.len && prob(5))
 			qdel(pick(deployed_shields))
 	else
 		if (check_delay <= 0)
 			create_shields()
-			
+
 			var/new_power_usage = 0
 			for(var/obj/machinery/shield/shield_tile in deployed_shields)
 				new_power_usage += shield_tile.shield_idle_power
-			
+
 			if (new_power_usage != idle_power_usage)
 				idle_power_usage = new_power_usage
 				use_power(0)
-			
+
 			check_delay = 60
 		else
 			check_delay--

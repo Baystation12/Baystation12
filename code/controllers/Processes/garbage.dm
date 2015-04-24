@@ -1,14 +1,14 @@
 var/datum/controller/process/garbage_collector/garbage_collector
 var/list/delayed_garbage = list()
 
-#define GC_DEBUG 1
 /datum/controller/process/garbage_collector
 	var/garbage_collect = 1			// Whether or not to actually do work
 	var/collection_timeout = 300	//deciseconds to wait to let running procs finish before we just say fuck it and force del() the object
 	var/max_checks_multiplier = 5	//multiplier (per-decisecond) for calculating max number of tests per tick. These tests check if our GC'd objects are actually GC'd
 	var/max_forcedel_multiplier = 1	//multiplier (per-decisecond) for calculating max number of force del() calls per tick.
 
-	var/dels = 0				// number of del()'s we've done this tick
+	var/dels 		= 0			// number of del()'s we've done this tick
+	var/hard_dels 	= 0			// number of hard dels in total
 	var/list/destroyed = list() // list of refID's of things that should be garbage collected
 								// refID's are associated with the time at which they time out and need to be manually del()
 								// we do this so we aren't constantly locating them and preventing them from being gc'd
@@ -60,6 +60,7 @@ var/list/delayed_garbage = list()
 			logging["[A.type]"]++
 			del(A)
 			++dels
+			++hard_dels
 		#ifdef GC_DEBUG
 		else
 			testing("GC: [refID] properly GC'd at [world.time] with timeout [GCd_at_time]")
@@ -76,6 +77,8 @@ var/list/delayed_garbage = list()
 	destroyed -= "\ref[A]" // Removing any previous references that were GC'd so that the current object will be at the end of the list.
 	destroyed["\ref[A]"] = world.time
 
+/datum/controller/process/garbage_collector/getStatName()
+	return ..()+"([garbage_collector.dels]/[garbage_collector.hard_dels])"
 
 // Should be treated as a replacement for the 'del' keyword.
 // Datums passed to this will be given a chance to clean up references to allow the GC to collect them.
@@ -92,6 +95,7 @@ var/list/delayed_garbage = list()
 		//warning("qdel() passed object of type [A.type]. qdel() can only handle /datum types.")
 		del(A)
 		garbage_collector.dels++
+		garbage_collector.hard_dels++
 	else if(isnull(A.gcDestroyed))
 		// Let our friend know they're about to get collected
 		. = !A.Destroy()
@@ -99,13 +103,19 @@ var/list/delayed_garbage = list()
 			A.finalize_qdel()
 
 /datum/proc/finalize_qdel()
-	del(src)
+	if(IsPooled(src))
+		PlaceInPool(src)
+	else
+		del(src)
 
 /atom/finalize_qdel()
-	if(garbage_collector)
-		garbage_collector.AddTrash(src)
+	if(IsPooled(src))
+		PlaceInPool(src)
 	else
-		delayed_garbage |= src
+		if(garbage_collector)
+			garbage_collector.AddTrash(src)
+		else
+			delayed_garbage |= src
 
 /icon/finalize_qdel()
 	del(src)
@@ -126,7 +136,6 @@ var/list/delayed_garbage = list()
 	tag = null
 	return
 
-#define TESTING 1
 #ifdef TESTING
 /client/var/running_find_references
 

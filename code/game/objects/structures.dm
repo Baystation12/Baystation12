@@ -6,10 +6,11 @@
 	var/parts
 
 /obj/structure/Destroy()
-	..()
+	if(opacity)
+		UpdateAffectingLights()
 	if(parts)
 		new parts(loc)
-	density = 0
+	..()
 
 /obj/structure/attack_hand(mob/user)
 	if(breakable)

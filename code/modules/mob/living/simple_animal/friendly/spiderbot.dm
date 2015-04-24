@@ -210,7 +210,7 @@
 	held_item = null
 
 	gibs(loc, viruses, null, null, /obj/effect/gibspawner/robot) //TODO: use gib() or refactor spiderbots into synthetics.
-	src.Del()
+	qdel(src)
 	return
 
 //Cannibalized from the parrot mob. ~Zuhayr

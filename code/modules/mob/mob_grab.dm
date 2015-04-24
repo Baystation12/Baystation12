@@ -37,7 +37,14 @@
 
 /obj/item/weapon/grab/Destroy()
 	//make sure the grabbed_by list doesn't fill up with nulls
-	if(affecting) affecting.grabbed_by -= src
+	if(affecting)
+		affecting.grabbed_by -= src
+		affecting = null
+	if(assailant)
+		if(assailant.client)
+			assailant.client.screen -= hud
+		assailant = null
+	qdel(hud)
 	..()
 
 //Used by throw code to hand over the mob, instead of throwing the grab. The grab is then deleted by the throw code.

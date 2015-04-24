@@ -18,3 +18,6 @@
 	if(updateQueueInstance)
 		updateQueueInstance.init(mob_list, "Life")
 		updateQueueInstance.Run()
+
+/datum/controller/process/mob/getStatName()
+	return ..()+"([mob_list.len])"

@@ -36,7 +36,7 @@
 
 /obj/effect/Destroy()
 	updateVisibility(src)
-	..()
+	return ..()
 
 /obj/effect/New()
 	..()

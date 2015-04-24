@@ -148,7 +148,7 @@ turf/simulated
 					if(istype(target))
 						air_master.tiles_to_update.Add(target)
 
-	Del()
+	Destroy()
 		if(air_master)
 			if(parent)
 				air_master.groups_to_rebuild.Add(parent)

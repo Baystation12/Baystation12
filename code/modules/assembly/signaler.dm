@@ -141,6 +141,8 @@
 
 
 	proc/set_frequency(new_frequency)
+		if(!frequency)
+			return
 		if(!radio_controller)
 			sleep(20)
 		if(!radio_controller)
@@ -170,3 +172,9 @@
 		deadman = 1
 		processing_objects.Add(src)
 		usr.visible_message("\red [usr] moves their finger over [src]'s signal button...")
+
+/obj/item/device/assembly/signaler/Destroy()
+	if(radio_controller)
+		radio_controller.remove_object(src,frequency)
+	frequency = 0
+	..()

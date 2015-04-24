@@ -11,6 +11,17 @@
 	var/obj/item/emag = null
 	var/obj/item/borg/upgrade/jetpack = null
 
+/obj/item/weapon/robot_module/Destroy()	
+	qdel(modules)
+	qdel(synths)
+	qdel(emag)
+	qdel(jetpack)
+	modules = null
+	synths = null
+	emag = null
+	jetpack = null
+	..()
+
 /obj/item/weapon/robot_module/emp_act(severity)
 	if(modules)
 		for(var/obj/O in modules)

@@ -3,7 +3,7 @@
 // The datum containing all the chunks.
 
 /datum/visualnet/camera
-	// The cameras on the map, no matter if they work or not. Updated in obj/machinery/camera.dm by New() and Del().
+	// The cameras on the map, no matter if they work or not. Updated in obj/machinery/camera.dm by New() and Destroy().
 	var/list/cameras = list()
 	var/cameras_unsorted = 1
 	chunk_type = /datum/chunk/camera

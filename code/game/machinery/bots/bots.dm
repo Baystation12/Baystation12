@@ -15,7 +15,6 @@
 	var/locked = 1
 	//var/emagged = 0 //Urist: Moving that var to the general /bot tree as it's used by most bots
 
-
 /obj/machinery/bot/proc/turn_on()
 	if(stat)	return 0
 	on = 1
