@@ -1,0 +1,6 @@
+author: Dennok
+delete-after: True
+
+changes:
+  - bugfix: "Fix don't correct process() delay calculation."
+  - rscadd: "Added a rotate() proc to ship, and rotate var for don't rotatable ships."

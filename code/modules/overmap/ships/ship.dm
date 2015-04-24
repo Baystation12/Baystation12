@@ -8,6 +8,7 @@
 	var/last_burn = 0
 	var/list/last_movement = list(0,0)
 	var/fore_dir = NORTH
+	var/rotate = 1 //For proc rotate
 
 	var/obj/effect/map/current_sector
 	var/obj/machinery/computer/helm/nav_control
@@ -70,7 +71,7 @@
 /obj/effect/map/ship/proc/get_brake_path()
 	if(!get_acceleration())
 		return INFINITY
-	return max(abs(speed[1]),abs(speed[2]))/get_acceleration()
+	return get_speed()/get_acceleration()
 
 #define SIGN(X) (X == 0 ? 0 : (X > 0 ? 1 : -1))
 /obj/effect/map/ship/proc/decelerate()
@@ -94,13 +95,21 @@
 		if(direction & SOUTH)
 			adjust_speed(0, -get_acceleration())
 
+
+/obj/effect/map/ship/proc/rotate(var/direction)
+	var/matrix/M = matrix()
+	M.Turn(dir2angle(direction))
+	src.transform = M //Rotate ship
+
 /obj/effect/map/ship/process()
 	if(!is_still())
 		var/list/deltas = list(0,0)
 		for(var/i=1, i<=2, i++)
-			if(speed[i] && world.time > last_movement[i] + default_delay - speed[i])
+			if(speed[i] && world.time > last_movement[i] + default_delay - abs(speed[i]))
 				deltas[i] = speed[i] > 0 ? 1 : -1
 				last_movement[i] = world.time
 		var/turf/newloc = locate(x + deltas[1], y + deltas[2], z)
 		if(newloc)
 			Move(newloc)
+		if(rotate)	
+			rotate(get_heading())
