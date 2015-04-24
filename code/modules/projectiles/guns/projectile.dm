@@ -189,9 +189,9 @@
 
 /obj/item/weapon/gun/projectile/examine(mob/user)
 	..(user)
-	user << "Has [getAmmo()] round\s remaining."
 	if(ammo_magazine)
 		user << "It has \a [ammo_magazine] loaded."
+	user << "Has [getAmmo()] round\s remaining."
 	return
 
 /obj/item/weapon/gun/projectile/proc/getAmmo()

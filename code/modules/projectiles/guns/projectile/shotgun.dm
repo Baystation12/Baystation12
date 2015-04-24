@@ -65,6 +65,12 @@
 	caliber = "shotgun"
 	origin_tech = "combat=3;materials=1"
 	ammo_type = /obj/item/ammo_casing/shotgun/beanbag
+	
+	burst_delay = 0
+	firemodes = list(
+		list(name="one barrel at a time", burst=1),
+		list(name="both barrels at once", burst=2),
+		)
 
 /obj/item/weapon/gun/projectile/shotgun/doublebarrel/flare
 	name = "signal shotgun"

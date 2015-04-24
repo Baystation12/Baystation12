@@ -1,3 +1,32 @@
+/*
+	Defines a firing mode for a gun.
+	
+	burst			number of shots to fire in a burst
+	burst_delay 	tick delay between shots in a burst
+	fire_delay		tick delay after the last shot before the gun may be used again
+	move_delay		tick delay after the last shot before the player may move
+	dispersion		dispersion of each shot in the burst measured in tiles per 7 tiles angle ratio
+	accuracy		accuracy modifier applied to each shot in tiles. Applied on top of the weapon accuracy.
+*/
+/datum/firemode
+	var/name = "default"
+	var/burst = 1
+	var/burst_delay = null
+	var/fire_delay = null
+	var/move_delay = 1
+	var/list/accuracy = list(0)
+	var/list/dispersion = list(0)
+
+//using a list makes defining fire modes for new guns much nicer, 
+//however we convert the lists to datums in part so that firemodes can be VVed if necessary.
+/datum/firemode/New(list/properties = null)
+	..()
+	if(!properties) return
+
+	for(var/propname in vars)
+		if(!isnull(properties[propname]))
+			src.vars[propname] = properties[propname]
+
 //Parent gun type. Guns are weapons that can be aimed at mobs and act over a distance
 /obj/item/weapon/gun
 	name = "gun"
@@ -22,14 +51,18 @@
 	zoomdevicename = "scope"
 
 	var/fire_delay = 6
+	var/burst_delay = 2 //delay between shots, if firing in bursts
 	var/fire_sound = 'sound/weapons/Gunshot.ogg'
 	var/fire_sound_text = "gunshot"
 	var/recoil = 0		//screen shake
 	var/silenced = 0
-	var/accuracy = 0 //accuracy is measured in tiles. +1 accuracy means that everything is effectively one tile closer for the purpose of miss chance, -1 means the opposite. launchers are not supported, at the moment.
+	var/accuracy = 0   //accuracy is measured in tiles. +1 accuracy means that everything is effectively one tile closer for the purpose of miss chance, -1 means the opposite. launchers are not supported, at the moment.
 	var/scoped_accuracy = null
 
-	var/last_fired = 0
+	var/next_fire_time = 0
+
+	var/sel_mode = 1 //index of the currently selected mode
+	var/list/firemodes = null
 	
 	//aiming system stuff
 	var/keep_aim = 1 	//1 for keep shooting until aim is lowered
@@ -42,16 +75,17 @@
 
 /obj/item/weapon/gun/New()
 	..()
+	if(!firemodes || !firemodes.len)
+		firemodes = list( new/datum/firemode )
+	else
+		for(var/i in 1 to firemodes.len)
+			firemodes[i] = new/datum/firemode(firemodes[i])
+	
+	if(firemodes.len <= 1)
+		verbs -= /obj/item/weapon/gun/verb/switch_firemodes
+	
 	if(isnull(scoped_accuracy))
 		scoped_accuracy = accuracy
-
-//Returns 1 if the gun is able to be fired
-/obj/item/weapon/gun/proc/ready_to_fire()
-	if(world.time >= last_fired + fire_delay)
-		last_fired = world.time
-		return 1
-	else
-		return 0
 
 //Checks whether a given mob can use the gun
 //Any checks that shouldn't result in handle_click_empty() being called if they fail should go here.
@@ -114,7 +148,7 @@
 	else
 		return ..() //Pistolwhippin'
 
-/obj/item/weapon/gun/proc/Fire(atom/target, mob/living/user, params, pointblank=0, reflex=0)
+/obj/item/weapon/gun/proc/Fire(atom/target, mob/living/user, clickparams, pointblank=0, reflex=0)
 	if(!user || !target) return
 
 	add_fingerprint(user)
@@ -122,24 +156,49 @@
 	if(!special_check(user))
 		return
 
-	if (!ready_to_fire())
+	if(world.time < next_fire_time)
 		if (world.time % 3) //to prevent spam
 			user << "<span class='warning'>[src] is not ready to fire again!"
 		return
+	
+	//unpack firemode data
+	var/datum/firemode/firemode = firemodes[sel_mode]
+	var/_burst = firemode.burst
+	var/_burst_delay = isnull(firemode.burst_delay)? src.burst_delay : firemode.burst_delay
+	var/_fire_delay = isnull(firemode.fire_delay)? src.fire_delay : firemode.fire_delay
+	var/_move_delay = firemode.move_delay
 
-	var/obj/projectile = consume_next_projectile(user)
-	if(!projectile)
-		handle_click_empty(user)
-		return
+	var/shoot_time = (_burst - 1)*_burst_delay
+	user.next_move = world.time + shoot_time  //no clicking on things while shooting
+	if(user.client) user.client.move_delay = world.time + shoot_time //no moving while shooting either
+	next_fire_time = world.time + shoot_time
 
+	//actually attempt to shoot
+	for(var/i in 1 to _burst)
+		var/obj/projectile = consume_next_projectile(user)
+		if(!projectile)
+			handle_click_empty(user)
+			break
+		
+		var/acc = firemode.accuracy[min(i, firemode.accuracy.len)]
+		var/disp = firemode.dispersion[min(i, firemode.dispersion.len)]
+		process_accuracy(projectile, user, target, acc, disp)
+		
+		if(pointblank) 
+			process_point_blank(projectile, user, target)
+		
+		if(process_projectile(projectile, user, target, user.zone_sel.selecting, clickparams))
+			handle_post_fire(user, target, pointblank, reflex)
+			update_icon()
+		
+		sleep(_burst_delay)
+	
+	update_held_icon()
+	
+	//update timing
 	user.next_move = world.time + 4
-
-	if(process_projectile(projectile, user, target, user.zone_sel.selecting, params, pointblank, reflex))
-		handle_post_fire(user, target, pointblank, reflex)
-
-		update_icon()
-		update_held_icon()
-
+	if(user.client) user.client.move_delay = world.time + _move_delay
+	next_fire_time = world.time + _fire_delay
 
 //obtains the next projectile to fire
 /obj/item/weapon/gun/proc/consume_next_projectile()
@@ -186,12 +245,52 @@
 			shake_camera(user, recoil+1, recoil)
 	update_icon()
 
-//does the actual shooting
-/obj/item/weapon/gun/proc/process_projectile(obj/projectile, mob/user, atom/target, var/target_zone, var/params=null, var/pointblank=0, var/reflex=0)
-	if(!istype(projectile, /obj/item/projectile))
+
+/obj/item/weapon/gun/proc/process_point_blank(obj/projectile, mob/user, atom/target)
+	var/obj/item/projectile/P = projectile
+	if(!istype(projectile))
+		return //default behaviour only applies to true projectiles
+
+	//default point blank multiplier
+	var/damage_mult = 1.3
+	
+	//determine multiplier due to the target being grabbed
+	if(ismob(target))
+		var/mob/M = target
+		if(M.grabbed_by.len)
+			var/grabstate = 0
+			for(var/obj/item/weapon/grab/G in M.grabbed_by)
+				grabstate = max(grabstate, G.state)
+			if(grabstate >= GRAB_NECK)
+				damage_mult = 3.0
+			else if(grabstate >= GRAB_AGGRESSIVE)
+				damage_mult = 1.5
+	P.damage *= damage_mult
+
+/obj/item/weapon/gun/proc/process_accuracy(obj/projectile, mob/user, atom/target, acc_mod, dispersion)
+	var/obj/item/projectile/P = projectile
+	if(!istype(projectile))
+		return //default behaviour only applies to true projectiles
+	
+	//Accuracy modifiers
+	P.accuracy = accuracy + acc_mod
+	P.dispersion = dispersion
+	
+	//accuracy bonus from aiming
+	if (aim_targets && (target in aim_targets))
+		//If you aim at someone beforehead, it'll hit more often.
+		//Kinda balanced by fact you need like 2 seconds to aim
+		//As opposed to no-delay pew pew
+		P.accuracy += 2
+
+//does the actual launching of the projectile
+/obj/item/weapon/gun/proc/process_projectile(obj/projectile, mob/user, atom/target, var/target_zone, var/params=null)
+	var/obj/item/projectile/P = projectile
+	if(!istype(projectile))
 		return 0 //default behaviour only applies to true projectiles
 	
-	var/obj/item/projectile/P = projectile
+	if(params)
+		P.set_clickpoint(params)
 	
 	//shooting while in shock
 	var/x_offset = 0
@@ -204,27 +303,6 @@
 		else if(mob.shock_stage > 70)
 			y_offset = rand(-1,1)
 			x_offset = rand(-1,1)
-
-	//Point blank bonus
-	if(pointblank) 
-		var/damage_mult = 1.3 //default point blank multiplier
-		
-		//determine multiplier due to the target being grabbed
-		if(ismob(target))
-			var/mob/M = target
-			if(M.grabbed_by.len)
-				var/grabstate = 0
-				for(var/obj/item/weapon/grab/G in M.grabbed_by)
-					grabstate = max(grabstate, G.state)
-				if(grabstate >= GRAB_NECK)
-					damage_mult = 3.0
-				else if (grabstate >= GRAB_AGGRESSIVE)
-					damage_mult = 1.5
-		
-		P.damage *= damage_mult
-
-	if(params)
-		P.set_clickpoint(params)
 
 	return !P.launch(target, user, src, target_zone, x_offset, y_offset)
 
@@ -287,3 +365,22 @@
 	if(!zoom)
 		accuracy = initial(accuracy)
 		recoil = initial(recoil)
+
+/obj/item/weapon/gun/examine(mob/user)
+	..()
+	if(firemodes.len > 1)
+		var/datum/firemode/current_mode = firemodes[sel_mode]
+		user << "The fire selector is set to [current_mode.name]."
+
+/obj/item/weapon/gun/verb/switch_firemodes()
+	set name = "Switch Fire Mode"
+	set category = "Object"
+	set src in usr
+	
+	if(usr.stat || usr.restrained()) return
+	
+	sel_mode++
+	if(sel_mode > firemodes.len)
+		sel_mode = 1
+	var/datum/firemode/new_mode = firemodes[sel_mode]
+	usr << "<span class='notice'>You switch \the [src] to [new_mode.name].</span>"

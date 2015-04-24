@@ -52,7 +52,7 @@ return_location()
 	var/offset_x = 0	// distance to increment each step
 	var/offset_y = 0
 
-/datum/plot_vector/proc/setup(var/turf/S, var/turf/T, var/xo = 0, var/yo = 0)
+/datum/plot_vector/proc/setup(var/turf/S, var/turf/T, var/xo = 0, var/yo = 0, var/angle_offset=0)
 	source = S
 	target = T
 	
@@ -78,7 +78,7 @@ return_location()
 		return
 
 	// calculate the angle
-	angle = Atan2(dx, dy)
+	angle = Atan2(dx, dy) + angle_offset
 
 	// and some rounding to stop the increments jumping whole turfs - because byond favours certain angles
 	if(angle > -135 && angle < 45)
