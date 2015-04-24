@@ -46,6 +46,10 @@
 	var/obj/item/ai_card  // Reference to the MMI, posibrain, intellicard or pAI card previously holding the AI.
 	var/obj/item/ai_verbs/verb_holder
 
+/obj/item/rig_module/ai_container/process()
+	if(integrated_ai && loc)
+		integrated_ai.SetupStat(loc.get_rig())
+
 /obj/item/rig_module/ai_container/proc/update_verb_holder()
 	if(!verb_holder)
 		verb_holder = new(src)

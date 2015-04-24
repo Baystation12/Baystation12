@@ -54,5 +54,7 @@
 		return
 	if( href_list["clear"] )
 		active_sensor = null
+	if( href_list["refresh"] )
+		refresh_sensors()
 	else if( href_list["setsensor"] )
 		active_sensor = href_list["setsensor"]

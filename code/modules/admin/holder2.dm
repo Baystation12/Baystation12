@@ -55,8 +55,7 @@ proc/admin_proc()
 	if(!check_rights(R_ADMIN)) return
 	world << "you have enough rights!"
 
-NOTE: it checks usr! not src! So if you're checking somebody's rank in a proc which they did not call
-you will have to do something like if(client.holder.rights & R_ADMIN) yourself.
+NOTE: It checks usr by default. Supply the "user" argument if you wish to check for a specific mob.
 */
 /proc/check_rights(rights_required, show_msg=1, var/mob/user = usr)
 	if(user && user.client)

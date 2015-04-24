@@ -574,22 +574,22 @@ var/list/sacrificed = list()
 		// returns 0 if the rune is not used. returns 1 if the rune is used.
 		communicate()
 			. = 1 // Default output is 1. If the rune is deleted it will return 1
-			var/input = sanitize(input(usr, "Please choose a message to tell to the other acolytes.", "Voice of Blood", ""))
+			var/input = input(usr, "Please choose a message to tell to the other acolytes.", "Voice of Blood", "")//sanitize() below, say() and whisper() have their own
 			if(!input)
 				if (istype(src))
 					fizzle()
 					return 0
 				else
 					return 0
-			if(istype(src,/obj/effect/rune))
-				usr.say("O bidai nabora se[pick("'","`")]sma!")
-			else
-				usr.whisper("O bidai nabora se[pick("'","`")]sma!")
 
 			if(istype(src,/obj/effect/rune))
+				usr.say("O bidai nabora se[pick("'","`")]sma!")
 				usr.say("[input]")
 			else
+				usr.whisper("O bidai nabora se[pick("'","`")]sma!")
 				usr.whisper("[input]")
+
+			input = sanitize(input)
 			for(var/datum/mind/H in cult.current_antagonists)
 				if (H.current)
 					H.current << "\red \b [input]"

@@ -1256,6 +1256,8 @@ var/global/floorIsLava = 0
 //*********************************************************************************************************
 //
 
+//Returns 1 to let the dragdrop code know we are trapping this event
+//Returns 0 if we don't plan to trap the event
 /datum/admins/proc/cmd_ghost_drag(var/mob/dead/observer/frommob, var/mob/living/tomob)
 	if(!istype(frommob))
 		return //Extra sanity check to make sure only observers are shoved into things
@@ -1271,6 +1273,8 @@ var/global/floorIsLava = 0
 	question += "Are you sure you want to place [frommob.name]([frommob.key]) in control of [tomob.name]?"
 	var/ask = alert(question, "Place ghost in control of mob?", "Yes", "No")
 	if (ask != "Yes")
+		return 1
+	if (!frommob || !tomob) //make sure the mobs don't go away while we waited for a response
 		return 1
 	if(tomob.client) //No need to ghostize if there is no client
 		tomob.ghostize(0)

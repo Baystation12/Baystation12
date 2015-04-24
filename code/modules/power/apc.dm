@@ -1195,10 +1195,12 @@ obj/machinery/power/apc/proc/autoset(var/val, var/on)
 	equipment = 0
 	environ = 0
 	update()
+	update_icon()
 
 	spawn(600)
 		update_channels()
 		update()
+		update_icon()
 	..()
 
 /obj/machinery/power/apc/ex_act(severity)

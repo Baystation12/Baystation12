@@ -315,7 +315,7 @@
 				O.loc = src
 
 	//Delete all items not on the preservation list.
-	var/list/items = src.contents
+	var/list/items = src.contents.Copy()
 	items -= occupant // Don't delete the occupant
 	items -= announce // or the autosay radio.
 
@@ -398,9 +398,9 @@
 	announce.autosay("[occupant.real_name] [on_store_message]", "[on_store_name]")
 	visible_message("<span class='notice'>\The [initial(name)] hums and hisses as it moves [occupant.real_name] into storage.</span>", 3)
 
-	set_occupant(null)
 	// Delete the mob.
 	qdel(occupant)
+	set_occupant(null)
 
 
 /obj/machinery/cryopod/attackby(var/obj/item/weapon/G as obj, var/mob/user as mob)

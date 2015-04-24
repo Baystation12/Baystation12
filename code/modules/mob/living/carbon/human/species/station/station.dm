@@ -168,6 +168,10 @@
 		"r_foot" = list("path" = /obj/item/organ/external/diona/foot/right)
 		)
 
+	inherent_verbs = list(
+		/mob/living/carbon/human/proc/diona_split_nymph
+		)
+
 	warning_low_pressure = 50
 	hazard_low_pressure = -1
 
