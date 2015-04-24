@@ -118,7 +118,7 @@ return_location()
 /datum/plot_vector/proc/return_location(var/datum/vector_loc/data)
 	if(!data)
 		data = new()
-	data.loc = locate(round(loc_x / world.icon_size), round(loc_y / world.icon_size), loc_z)
+	data.loc = locate(round(loc_x / world.icon_size, 1), round(loc_y / world.icon_size, 1), loc_z)
 	if(!data.loc)
 		return
 	data.pixel_x = loc_x - (data.loc.x * world.icon_size)
