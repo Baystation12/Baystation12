@@ -77,22 +77,24 @@
 /obj/machinery/clonepod/proc/growclone(var/datum/dna2/record/R)
 	if(mess || attempting)
 		return 0
-	var/datum/mind/clonemind = locate(R.mind)
+	var/datum/mind/clonemind
 
-	if(!istype(clonemind, /datum/mind))	//not a mind
-		return 0
-	if(clonemind.current && clonemind.current.stat != DEAD)	//mind is associated with a non-dead body
-		return 0
-	if(clonemind.active)	//somebody is using that mind
-		if(ckey(clonemind.key) != R.ckey)
+	if(!config.use_cortical_stacks)
+		clonemind = locate(R.mind)
+		if(!istype(clonemind, /datum/mind))	//not a mind
 			return 0
-	else
-		for(var/mob/dead/observer/G in player_list)
-			if(G.ckey == R.ckey)
-				if(G.can_reenter_corpse)
-					break
-				else
-					return 0
+		if(clonemind.current && clonemind.current.stat != DEAD)	//mind is associated with a non-dead body
+			return 0
+		if(clonemind.active)	//somebody is using that mind
+			if(ckey(clonemind.key) != R.ckey)
+				return 0
+		else
+			for(var/mob/dead/observer/G in player_list)
+				if(G.ckey == R.ckey)
+					if(G.can_reenter_corpse)
+						break
+					else
+						return 0
 
 	attempting = 1 //One at a time!!
 	locked = 1
@@ -104,7 +106,7 @@
 	var/mob/living/carbon/human/H = new /mob/living/carbon/human(src, R.dna.species)
 	occupant = H
 
-	if(!R.dna.real_name)	//to prevent null names
+	if(!R.dna.real_name || config.use_cortical_stacks)	//to prevent null names
 		R.dna.real_name = "clone ([rand(0,999)])"
 	H.real_name = R.dna.real_name
 
@@ -116,9 +118,11 @@
 	//Here let's calculate their health so the pod doesn't immediately eject them!!!
 	H.updatehealth()
 
-	clonemind.transfer_to(H)
-	H.ckey = R.ckey
-	H << "<span class='notice'><b>Consciousness slowly creeps over you as your body regenerates.</b><br><i>So this is what cloning feels like?</i></span>"
+	if(clonemind)
+		clonemind.transfer_to(H)
+		if(R.ckey)
+			H.ckey = R.ckey
+			H << "<span class='notice'><b>Consciousness slowly creeps over you as your body regenerates.</b><br><i>So this is what cloning feels like?</i></span>"
 
 	// -- Mode/mind specific stuff goes here
 	callHook("clone", list(H))
@@ -156,7 +160,7 @@
 		return
 
 	if((occupant) && (occupant.loc == src))
-		if((occupant.stat == DEAD) || (occupant.suiciding) || !occupant.key)  //Autoeject corpses and suiciding dudes.
+		if((occupant.stat == DEAD) || (occupant.suiciding))  //Autoeject corpses and suiciding dudes.
 			locked = 0
 			go_out()
 			connected_message("Clone Rejected: Deceased.")

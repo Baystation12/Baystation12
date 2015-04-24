@@ -171,12 +171,12 @@
 	S["skill_specialization"] >> skill_specialization
 	S["organ_data"]			>> organ_data
 	S["rlimb_data"]			>> rlimb_data
+	S["has_cortical_stack"]	>> has_cortical_stack
 	S["gear"]				>> gear
 	S["home_system"] 		>> home_system
 	S["citizenship"] 		>> citizenship
 	S["faction"] 			>> faction
 	S["religion"] 			>> religion
-
 	S["nanotrasen_relation"] >> nanotrasen_relation
 	//S["skin_style"]			>> skin_style
 
@@ -200,9 +200,11 @@
 	if(isnum(undershirt))
 		undershirt = undershirt_t[undershirt_t[undershirt]]
 
-	if(isnull(language)) language = "None"
-	if(isnull(spawnpoint)) spawnpoint = "Arrivals Shuttle"
-	if(isnull(nanotrasen_relation)) nanotrasen_relation = initial(nanotrasen_relation)
+	if(isnull(language)) language = 		"None"
+	if(isnull(spawnpoint)) spawnpoint = 	"Arrivals Shuttle"
+	if(isnull(nanotrasen_relation)) 		nanotrasen_relation = initial(nanotrasen_relation)
+	if(isnull(has_cortical_stack)) 			has_cortical_stack = initial(has_cortical_stack)
+
 	if(!real_name) real_name = random_name(gender)
 	be_random_name	= sanitize_integer(be_random_name, 0, 1, initial(be_random_name))
 	gender			= sanitize_gender(gender)
@@ -334,6 +336,7 @@
 	S["religion"] 			<< religion
 
 	S["nanotrasen_relation"] << nanotrasen_relation
+	S["has_cortical_stack"]  << has_cortical_stack
 	//S["skin_style"]			<< skin_style
 
 	S["uplinklocation"] << uplinklocation

@@ -9,6 +9,7 @@
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/punch)
 	flags = IS_RESTRICTED | NO_BREATHE | NO_PAIN | NO_BLOOD | NO_SCAN | NO_POISON
 	siemens_coefficient = 0
+	spawns_with_stack = 0
 
 	breath_type = null
 	poison_type = null

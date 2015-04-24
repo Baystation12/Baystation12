@@ -15,6 +15,7 @@
 	has_fine_manipulation = 0
 	show_ssd = 0
 	eyes = "blank_eyes"
+	spawns_with_stack = 0
 
 	gibbed_anim = "gibbed-m"
 	dusted_anim = "dust-m"

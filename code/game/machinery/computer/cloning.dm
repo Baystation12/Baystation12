@@ -47,10 +47,9 @@
 
 /obj/machinery/computer/cloning/proc/findcloner()
 	pods.Cut()
-	for(var/obj/machinery/clonepod/P in get_area(src))
-		if(!P.connected)
+	for(var/obj/machinery/clonepod/P in range(3,src))
+		if(!P.connected || (P.connected == src))
 			pods += P
-
 	return
 
 /obj/machinery/computer/cloning/attackby(obj/item/W as obj, mob/user as mob)
@@ -316,17 +315,24 @@
 					del(C)
 					menu = 1
 				else
-
-					var/mob/selected = find_dead_player("[C.ckey]")
-					selected << 'sound/machines/chime.ogg'	//probably not the best sound but I think it's reasonable
-					var/answer = alert(selected,"Do you want to return to life?","Cloning","Yes","No")
-					if(answer != "No" && pod.growclone(C))
+					var/cloning
+					if(config.use_cortical_stacks)
+						cloning = 1
+						pod.growclone(C)
+					else
+						var/mob/selected = find_dead_player("[C.ckey]")
+						selected << 'sound/machines/chime.ogg'	//probably not the best sound but I think it's reasonable
+						var/answer = alert(selected,"Do you want to return to life?","Cloning","Yes","No")
+						if(answer != "No" && pod.growclone(C))
+							cloning = 1
+					if(cloning)
 						temp = "Initiating cloning cycle..."
 						records.Remove(C)
 						del(C)
 						menu = 1
 					else
 						temp = "Initiating cloning cycle...<br>Error: Post-initialisation failed. Cloning cycle aborted."
+
 
 		else
 			temp = "Error: Data corruption."
@@ -342,27 +348,28 @@
 	if ((isnull(subject)) || (!(ishuman(subject))) || (!subject.dna))
 		scantemp = "Error: Unable to locate valid genetic data."
 		return
-	if (!subject.has_brain())
-		if(istype(subject, /mob/living/carbon/human))
-			var/mob/living/carbon/human/H = subject
-			if(H.species.has_organ["brain"])
+	if(!config.use_cortical_stacks)
+		if (!subject.has_brain())
+			if(istype(subject, /mob/living/carbon/human))
+				var/mob/living/carbon/human/H = subject
+				if(H.species.has_organ["brain"])
+					scantemp = "Error: No signs of intelligence detected."
+			else
 				scantemp = "Error: No signs of intelligence detected."
-		else
-			scantemp = "Error: No signs of intelligence detected."
-		return
-	if (subject.suiciding == 1)
-		scantemp = "Error: Subject's brain is not responding to scanning stimuli."
-		return
-	if ((!subject.ckey) || (!subject.client))
-		scantemp = "Error: Mental interface failure."
-		return
+			return
+		if (subject.suiciding == 1)
+			scantemp = "Error: Subject's brain is not responding to scanning stimuli."
+			return
+		if ((!subject.ckey) || (!subject.client))
+			scantemp = "Error: Mental interface failure."
+			return
 	if (NOCLONE in subject.mutations)
-		scantemp = "Error: Mental interface failure."
+		scantemp = "Error: Major genetic degradation."
 		return
 	if (subject.species && subject.species.flags & NO_SCAN)
-		scantemp = "Error: Mental interface failure."
+		scantemp = "Error: Incompatible species."
 		return
-	if (!isnull(find_record(subject.ckey)))
+	if (subject.ckey && !isnull(find_record(subject.ckey)))
 		scantemp = "Subject already in database."
 		return
 
@@ -370,7 +377,7 @@
 
 	var/datum/dna2/record/R = new /datum/dna2/record()
 	R.dna=subject.dna
-	R.ckey = subject.ckey
+	R.ckey = subject.ckey ? subject.ckey : "no ckey"
 	R.id= copytext(md5(subject.real_name), 2, 6)
 	R.name=R.dna.real_name
 	R.types=DNA2_BUF_UI|DNA2_BUF_UE|DNA2_BUF_SE

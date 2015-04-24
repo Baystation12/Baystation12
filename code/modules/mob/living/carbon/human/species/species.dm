@@ -56,6 +56,7 @@
 	var/dusted_anim = "dust-h"
 	var/death_sound
 	var/death_message = "seizes up and falls limp, their eyes dead and lifeless..."
+	var/spawns_with_stack = 1
 
 	// Environment tolerance/life processes vars.
 	var/reagent_tag                                   //Used for metabolizing reagents.

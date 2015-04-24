@@ -1169,3 +1169,13 @@ mob/proc/yank_out_object()
 /mob/verb/westfaceperm()
 	set hidden = 1
 	set_face_dir(WEST)
+
+/mob/verb/show_preferences()
+
+        set category = "OOC"
+        set name = "Show Preferences"
+        set desc = "Open the preferences window."
+
+        if(client)
+                if(client.prefs)
+                        client.prefs.ShowChoices(src)
