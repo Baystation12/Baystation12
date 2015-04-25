@@ -157,10 +157,9 @@
 	if(times_fired)
 		handle_post_fire(user, target, pointblank, reflex, times_fired)
 
-		update_icon()
-		update_held_icon()
-
-		user.next_move = world.time + 2 + times_fired * burst_delay
+		user.next_move = world.time + times_fired * burst_delay + 2
+		if(user.client)
+			user.client.move_delay = world.time + times_fired * burst_delay + 2  //no moving while shooting
 
 
 //obtains the next projectile to fire
@@ -216,6 +215,7 @@
 				shake_camera(user, recoil+1, recoil)
 
 	update_icon()
+	update_held_icon()
 
 //does the actual shooting
 /obj/item/weapon/gun/proc/process_projectile(obj/projectile, mob/user, atom/target, var/target_zone, var/params=null, var/pointblank=0, var/reflex=0)

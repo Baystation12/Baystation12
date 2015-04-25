@@ -96,6 +96,7 @@
 	item_state = "z8carbine"
 	w_class = 4
 	force = 10
+	burst_delay = 3
 	burst_size = 2
 	caliber = "a556"
 	origin_tech = "combat=8;materials=3"
