@@ -243,6 +243,20 @@
 		new /obj/item/ammo_casing/shotgun/stunshell(src)
 		new /obj/item/ammo_casing/shotgun/stunshell(src)
 
+/obj/item/weapon/storage/box/practiceshells
+	name = "box of practice shells"
+	desc = "It has a picture of a gun and several warning symbols on the front.<br>WARNING: Live ammunition. Misuse may result in serious injury or death."
+
+	New()
+		..()
+		new /obj/item/ammo_casing/shotgun/practice(src)
+		new /obj/item/ammo_casing/shotgun/practice(src)
+		new /obj/item/ammo_casing/shotgun/practice(src)
+		new /obj/item/ammo_casing/shotgun/practice(src)
+		new /obj/item/ammo_casing/shotgun/practice(src)
+		new /obj/item/ammo_casing/shotgun/practice(src)
+		new /obj/item/ammo_casing/shotgun/practice(src)
+
 /obj/item/weapon/storage/box/sniperammo
 	name = "box of 14.5mm shells"
 	desc = "It has a picture of a gun and several warning symbols on the front.<br>WARNING: Live ammunition. Misuse may result in serious injury or death."

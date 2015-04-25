@@ -38,11 +38,21 @@
 	caliber = "9mm"
 	projectile_type = /obj/item/projectile/bullet/pistol/rubber
 
+/obj/item/ammo_casing/c9mmp
+	desc = "A 9mm practice bullet casing."
+	caliber = "9mm"
+	projectile_type = /obj/item/projectile/bullet/pistol/practice
+
 
 /obj/item/ammo_casing/c45
 	desc = "A .45 bullet casing."
 	caliber = ".45"
 	projectile_type = /obj/item/projectile/bullet/pistol/medium
+
+/obj/item/ammo_casing/c45p
+	desc = "A .45 practice bullet casing."
+	caliber = ".45"
+	projectile_type = /obj/item/projectile/bullet/pistol/practice
 
 /obj/item/ammo_casing/c45r
 	desc = "A .45 rubber bullet casing."
@@ -80,6 +90,13 @@
 	desc = "A blank shell."
 	icon_state = "blshell"
 	projectile_type = /obj/item/projectile/bullet/blank
+	matter = list("metal" = 90)
+
+/obj/item/ammo_casing/shotgun/practice
+	name = "shotgun shell"
+	desc = "A practice shell."
+	icon_state = "pshell"
+	projectile_type = /obj/item/projectile/bullet/shotgun/practice
 	matter = list("metal" = 90)
 
 /obj/item/ammo_casing/shotgun/beanbag
@@ -129,6 +146,11 @@
 	desc = "A 5.56mm bullet casing."
 	caliber = "a556"
 	projectile_type = /obj/item/projectile/bullet/rifle/a556
+
+/obj/item/ammo_casing/a556p
+	desc = "A 5.56mm practice bullet casing."
+	caliber = "a556"
+	projectile_type = /obj/item/projectile/bullet/rifle/a556/practice
 
 /obj/item/ammo_casing/rocket
 	name = "rocket shell"
