@@ -1,22 +1,4 @@
 // PRESETS
-#define NETWORK_CRESCENT "Crescent"
-#define NETWORK_CIVILIAN_EAST "Civilian East"
-#define NETWORK_CIVILIAN_WEST "Civilian West"
-#define NETWORK_COMMAND "Command"
-#define NETWORK_ENGINE "Engine"
-#define NETWORK_ENGINEERING "Engineering"
-#define NETWORK_ENGINEERING_OUTPOST "Engineering Outpost"
-#define NETWORK_ERT "ERT"
-#define NETWORK_EXODUS "Exodus"
-#define NETWORK_MEDBAY "Medbay"
-#define NETWORK_MINE "MINE"
-#define NETWORK_RESEARCH "Research"
-#define NETWORK_RESEARCH_OUTPOST "Research Outpost"
-#define NETWORK_PRISON "Prison"
-#define NETWORK_SECURITY "Security"
-#define NETWORK_TELECOM "Tcomsat"
-#define NETWORK_THUNDER "thunder"
-
 var/global/list/station_networks = list(
 										NETWORK_CIVILIAN_EAST,
 										NETWORK_CIVILIAN_WEST,
@@ -25,7 +7,7 @@ var/global/list/station_networks = list(
 										NETWORK_ENGINEERING,
 										NETWORK_ENGINEERING_OUTPOST,
 										NETWORK_EXODUS,
-										NETWORK_MEDBAY,
+										NETWORK_MEDICAL,
 										NETWORK_MINE,
 										NETWORK_RESEARCH,
 										NETWORK_RESEARCH_OUTPOST,
@@ -73,7 +55,7 @@ var/global/list/engineering_networks = list(
 	network = list(NETWORK_PRISON)
 
 /obj/machinery/camera/network/medbay
-	network = list(NETWORK_MEDBAY)
+	network = list(NETWORK_MEDICAL)
 
 /obj/machinery/camera/network/research
 	network = list(NETWORK_RESEARCH)
@@ -105,7 +87,7 @@ var/global/list/engineering_networks = list(
 	network = list(NETWORK_SECURITY)
 
 /obj/machinery/camera/xray/medbay
-	network = list(NETWORK_MEDBAY)
+	network = list(NETWORK_MEDICAL)
 
 /obj/machinery/camera/xray/research
 	network = list(NETWORK_RESEARCH)
@@ -191,21 +173,3 @@ var/global/list/engineering_networks = list(
 	if (isMotion())
 		mult++
 	active_power_usage = mult*initial(active_power_usage)
-
-#undef NETWORK_CENTRAL_CRESCENT
-#undef NETWORK_CIVILIAN_EAST
-#undef NETWORK_CIVILIAN_WEST
-#undef NETWORK_COMMAND
-#undef NETWORK_ENGINE
-#undef NETWORK_ENGINEERING
-#undef NETWORK_ENGINEERING_OUTPOST
-#undef NETWORK_ERT
-#undef NETWORK_EXODUS
-#undef NETWORK_MEDBAY
-#undef NETWORK_MINE
-#undef NETWORK_RESEARCH
-#undef NETWORK_RESEARCH_OUTPOST
-#undef NETWORK_PRISON
-#undef NETWORK_SECURITY
-#undef NETWORK_TELECOM
-#undef NETWORK_THUNDER

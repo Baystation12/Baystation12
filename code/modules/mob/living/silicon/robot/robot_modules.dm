@@ -1,3 +1,18 @@
+var/global/list/robot_modules = list(
+	"Standard"		= /obj/item/weapon/robot_module/standard,
+	"Service" 		= /obj/item/weapon/robot_module/butler,
+	"Clerical" 		= /obj/item/weapon/robot_module/clerical,
+	"Research" 		= /obj/item/weapon/robot_module/research,
+	"Miner" 		= /obj/item/weapon/robot_module/miner,
+	"Crisis" 		= /obj/item/weapon/robot_module/crisis,
+	"Surgeon" 		= /obj/item/weapon/robot_module/surgeon,
+	"Security" 		= /obj/item/weapon/robot_module/security/general,
+	"Engineering"	= /obj/item/weapon/robot_module/engineering/general,
+	"Construction"	= /obj/item/weapon/robot_module/engineering/construction,
+	"Janitor" 		= /obj/item/weapon/robot_module/janitor,
+	"Combat" 		= /obj/item/weapon/robot_module/security/combat
+	)
+
 /obj/item/weapon/robot_module
 	name = "robot module"
 	icon = 'icons/obj/module.dmi'
@@ -6,10 +21,38 @@
 	item_state = "electronic"
 	flags = CONDUCT
 	var/channels = list()
+	var/networks = list()
+	var/languages = list(LANGUAGE_SOL_COMMON = 1, LANGUAGE_TRADEBAND = 1, LANGUAGE_UNATHI = 0, LANGUAGE_SIIK_TAJR = 0, LANGUAGE_SKRELLIAN = 0, LANGUAGE_GUTTER = 0)
+	var/sprites = list()
+	var/can_be_pushed = 1
+	var/no_slip = 0
 	var/list/modules = list()
 	var/list/datum/matter_synth/synths = list()
 	var/obj/item/emag = null
 	var/obj/item/borg/upgrade/jetpack = null
+
+	var/list/obj/item/borg/upgrade/supported_upgrades = list()
+
+	// Bookkeeping
+	var/list/added_languages = list()
+	var/list/added_networks = list()
+	var/obj/item/device/radio/borg/modified_radio = null
+	var/list/modified_key = null
+	var/list/original_radio_channels = list()
+
+/obj/item/weapon/robot_module/New(var/mob/living/silicon/robot/R)
+	..()
+	add_camera_networks(R)
+	add_languages(R)
+	add_radio_channels(R)
+	apply_status_flags(R)
+
+/obj/item/weapon/robot_module/proc/Reset(var/mob/living/silicon/robot/R)
+	..()
+	remove_camera_networks(R)
+	remove_languages(R)
+	remove_radio_channels(R)
+	remove_status_flags(R)
 
 /obj/item/weapon/robot_module/emp_act(severity)
 	if(modules)
@@ -24,7 +67,6 @@
 	return
 
 /obj/item/weapon/robot_module/proc/respawn_consumable(var/mob/living/silicon/robot/R, var/rate)
-
 	if(!synths || !synths.len)
 		return
 
@@ -39,16 +81,59 @@
 			modules += O
 
 /obj/item/weapon/robot_module/proc/add_languages(var/mob/living/silicon/robot/R)
-	//full set of languages
-	R.add_language("Sol Common", 1)
-	R.add_language("Tradeband", 1)
-	R.add_language("Sinta'unathi", 0)
-	R.add_language("Siik'tajr", 0)
-	R.add_language("Skrellian", 0)
-	R.add_language("Gutter", 0)
+	for(var/language in languages)
+		if(R.add_language(language, languages[language]))
+			added_languages |= language
+
+/obj/item/weapon/robot_module/proc/remove_languages(var/mob/living/silicon/robot/R)
+	for(var/language in added_languages)
+		R.remove_language(language)
+	added_languages.Cut()
+
+/obj/item/weapon/robot_module/proc/add_camera_networks(var/mob/living/silicon/robot/R)
+	if(R.camera && "Robots" in R.camera.network)
+		for(var/network in networks)
+			if(!(network in R.camera.network))
+				R.camera.add_network(network)
+				added_networks |= network
+
+/obj/item/weapon/robot_module/proc/remove_camera_networks(var/mob/living/silicon/robot/R)
+	if(R.camera)
+		R.camera.remove_networks(added_networks)
+	added_networks.Cut()
+
+/obj/item/weapon/robot_module/proc/add_radio_channels(var/mob/living/silicon/robot/R)
+	if(!R.radio)
+		return
+
+	modified_radio = R.radio
+	modified_key = R.radio.keyslot
+	original_radio_channels = modified_radio.channels.Copy()
+	modified_radio.config(channels)
+
+/obj/item/weapon/robot_module/proc/remove_radio_channels(var/mob/living/silicon/robot/R)
+	// Only reset if the original radio component hasn't been altered/replaced
+	if(!(R.radio && R.radio == modified_radio && R.radio.keyslot == modified_key))
+		return
+
+	modified_radio.config(original_radio_channels)
+	original_radio_channels.Cut()
+
+/obj/item/weapon/robot_module/proc/apply_status_flags(var/mob/living/silicon/robot/R)
+	if(!can_be_pushed)
+		R.status_flags &= ~CANPUSH
+
+/obj/item/weapon/robot_module/proc/remove_status_flags(var/mob/living/silicon/robot/R)
+	if(!can_be_pushed)
+		R.status_flags |= CANPUSH
 
 /obj/item/weapon/robot_module/standard
 	name = "standard robot module"
+	sprites = list(	"Basic" = "robot_old",
+					"Android" = "droid",
+					"Default" = "robot",
+					"Drone" = "drone-standard"
+				  )
 
 /obj/item/weapon/robot_module/standard/New()
 	..()
@@ -63,6 +148,16 @@
 
 /obj/item/weapon/robot_module/surgeon
 	name = "surgeon robot module"
+	channels = list("Medical" = 1)
+	networks = list(NETWORK_MEDICAL)
+	can_be_pushed = 0
+	sprites = list(
+					"Basic" = "Medbot",
+					"Standard" = "surgeon",
+					"Advanced Droid" = "droid-medical",
+					"Needles" = "medicalrobot",
+					"Drone" = "drone-surgery"
+					)
 
 /obj/item/weapon/robot_module/surgeon/New()
 	..()
@@ -107,6 +202,17 @@
 
 /obj/item/weapon/robot_module/crisis
 	name = "crisis robot module"
+	channels = list("Medical" = 1)
+	networks = list(NETWORK_MEDICAL)
+	can_be_pushed = 0
+	sprites = list(
+					"Basic" = "Medbot",
+					"Standard" = "surgeon",
+					"Advanced Droid" = "droid-medical",
+					"Needles" = "medicalrobot",
+					"Drone - Medical" = "drone-medical",
+					"Drone - Chemistry" = "drone-chemistry"
+					)
 
 /obj/item/weapon/robot_module/crisis/New()
 	..()
@@ -160,10 +266,24 @@
 
 	..()
 
-/obj/item/weapon/robot_module/construction
-	name = "construction robot module"
 
-/obj/item/weapon/robot_module/construction/New()
+/obj/item/weapon/robot_module/engineering
+	name = "engineering robot module"
+	channels = list("Engineering" = 1)
+	networks = list(NETWORK_ENGINEERING)
+	sprites = list(
+					"Basic" = "Engineering",
+					"Antique" = "engineerrobot",
+					"Landmate" = "landmate",
+					"Landmate - Treaded" = "engiborg+tread",
+					"Drone" = "drone-engineer"
+					)
+
+/obj/item/weapon/robot_module/engineering/construction
+	name = "construction robot module"
+	no_slip = 1
+
+/obj/item/weapon/robot_module/engineering/construction/New()
 	..()
 	src.modules += new /obj/item/device/flash(src)
 	src.modules += new /obj/item/borg/sight/meson(src)
@@ -198,10 +318,7 @@
 	RG.synths = list(metal, glass)
 	src.modules += RG
 
-/obj/item/weapon/robot_module/engineering
-	name = "engineering robot module"
-
-/obj/item/weapon/robot_module/engineering/New()
+/obj/item/weapon/robot_module/engineering/general/New()
 	..()
 	src.modules += new /obj/item/device/flash(src)
 	src.modules += new /obj/item/borg/sight/meson(src)
@@ -259,8 +376,22 @@
 
 /obj/item/weapon/robot_module/security
 	name = "security robot module"
+	channels = list("Security" = 1)
+	networks = list(NETWORK_SECURITY)
+	can_be_pushed = 0
+	supported_upgrades = list(/obj/item/borg/upgrade/tasercooler)
 
-/obj/item/weapon/robot_module/security/New()
+/obj/item/weapon/robot_module/security/general
+	sprites = list(
+					"Basic" = "secborg",
+					"Red Knight" = "Security",
+					"Black Knight" = "securityrobot",
+					"Bloodhound" = "bloodhound",
+					"Bloodhound - Treaded" = "secborg+tread",
+					"Drone" = "drone-sec"
+				)
+
+/obj/item/weapon/robot_module/security/general/New()
 	..()
 	src.modules += new /obj/item/device/flash(src)
 	src.modules += new /obj/item/borg/sight/hud/sec(src)
@@ -288,6 +419,13 @@
 
 /obj/item/weapon/robot_module/janitor
 	name = "janitorial robot module"
+	channels = list("Service" = 1)
+	sprites = list(
+					"Basic" = "JanBot2",
+					"Mopbot"  = "janitorrobot",
+					"Mop Gear Rex" = "mopgearrex",
+					"Drone" = "drone-janitor"
+					)
 
 /obj/item/weapon/robot_module/janitor/New()
 	..()
@@ -310,6 +448,25 @@
 
 /obj/item/weapon/robot_module/butler
 	name = "service robot module"
+	channels = list("Service" = 1)
+	languages = list(
+					LANGUAGE_SOL_COMMON	= 1,
+					LANGUAGE_UNATHI		= 1,
+					LANGUAGE_SIIK_MAAS	= 1,
+					LANGUAGE_SIIK_TAJR	= 0,
+					LANGUAGE_SKRELLIAN	= 1,
+					LANGUAGE_ROOTSPEAK	= 1,
+					LANGUAGE_TRADEBAND	= 1,
+					LANGUAGE_GUTTER		= 1
+					)
+	sprites = list(	"Waitress" = "Service",
+					"Kent" = "toiletbot",
+					"Bro" = "Brobot",
+					"Rich" = "maximillion",
+					"Default" = "Service2",
+					"Drone - Service" = "drone-service",
+					"Drone - Hydro" = "drone-hydro"
+				  	)
 
 /obj/item/weapon/robot_module/butler/New()
 	..()
@@ -343,19 +500,27 @@
 	src.emag.name = "Mickey Finn's Special Brew"
 	return
 
-/obj/item/weapon/robot_module/butler/add_languages(var/mob/living/silicon/robot/R)
-	//full set of languages
-	R.add_language("Sol Common", 1)
-	R.add_language("Sinta'unathi", 1)
-	R.add_language("Siik'maas", 1)
-	R.add_language("Siik'tajr", 0)
-	R.add_language("Skrellian", 1)
-	R.add_language("Rootspeak", 1)
-	R.add_language("Tradeband", 1)
-	R.add_language("Gutter", 1)
-
 /obj/item/weapon/robot_module/clerical
 	name = "clerical robot module"
+	channels = list("Service" = 1)
+	languages = list(
+					LANGUAGE_SOL_COMMON = 1,
+					LANGUAGE_UNATHI = 1,
+					LANGUAGE_SIIK_MAAS = 1,
+					LANGUAGE_SIIK_TAJR = 0,
+					LANGUAGE_SKRELLIAN = 1,
+					LANGUAGE_ROOTSPEAK = 1,
+					LANGUAGE_TRADEBAND = 1,
+					LANGUAGE_GUTTER = 1
+					)
+	sprites = list(
+					"Waitress" = "Service",
+					"Kent" = "toiletbot",
+					"Bro" = "Brobot",
+					"Rich" = "maximillion",
+					"Default" = "Service2",
+					"Drone" = "drone-service"
+					)
 
 /obj/item/weapon/robot_module/clerical/New()
 	..()
@@ -366,16 +531,6 @@
 	src.modules += new /obj/item/weapon/hand_labeler(src)
 	src.emag = new /obj/item/weapon/stamp/denied(src)
 
-/obj/item/weapon/robot_module/clerical/add_languages(var/mob/living/silicon/robot/R)
-	R.add_language("Sol Common", 1)
-	R.add_language("Sinta'unathi", 1)
-	R.add_language("Siik'maas", 1)
-	R.add_language("Siik'tajr", 0)
-	R.add_language("Skrellian", 1)
-	R.add_language("Rootspeak", 1)
-	R.add_language("Tradeband", 1)
-	R.add_language("Gutter", 1)
-
 /obj/item/weapon/robot_module/butler/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
 	var/obj/item/weapon/reagent_containers/food/condiment/enzyme/E = locate() in src.modules
 	E.reagents.add_reagent("enzyme", 2 * amount)
@@ -385,6 +540,15 @@
 
 /obj/item/weapon/robot_module/miner
 	name = "miner robot module"
+	channels = list("Supply" = 1)
+	networks = list(NETWORK_MINE)
+	sprites = list(
+					"Basic" = "Miner_old",
+					"Advanced Droid" = "droid-miner",
+					"Treadhead" = "Miner",
+					"Drone" = "drone-miner"
+				)
+	supported_upgrades = list(/obj/item/borg/upgrade/jetpack)
 
 /obj/item/weapon/robot_module/miner/New()
 	..()
@@ -403,6 +567,11 @@
 
 /obj/item/weapon/robot_module/research
 	name = "research module"
+	channels = list("Science" = 1)
+	sprites = list(
+					"Droid" = "droid-science",
+					"Drone" = "drone-science"
+					)
 
 /obj/item/weapon/robot_module/research/New()
 	..()
@@ -435,6 +604,14 @@
 
 /obj/item/weapon/robot_module/syndicate
 	name = "illegal robot module"
+	languages = list(
+					LANGUAGE_SOL_COMMON = 1,
+					LANGUAGE_TRADEBAND = 1,
+					LANGUAGE_UNATHI = 0,
+					LANGUAGE_SIIK_TAJR = 0,
+					LANGUAGE_SKRELLIAN = 0,
+					LANGUAGE_GUTTER = 1
+					)
 
 /obj/item/weapon/robot_module/syndicate/New(var/mob/living/silicon/robot/R)
 	..()
@@ -448,17 +625,9 @@
 	R.internals = jetpack
 	return
 
-/obj/item/weapon/robot_module/syndicate/add_languages(var/mob/living/silicon/robot/R)
-	//full set of languages
-	R.add_language("Sol Common", 1)
-	R.add_language("Tradeband", 1)
-	R.add_language("Sinta'unathi", 0)
-	R.add_language("Siik'tajr", 0)
-	R.add_language("Skrellian", 0)
-	R.add_language("Gutter", 1)
-
-/obj/item/weapon/robot_module/combat
+/obj/item/weapon/robot_module/security/combat
 	name = "combat robot module"
+	sprites = list("Combat Android" = "droid-combat")
 
 /obj/item/weapon/robot_module/combat/New()
 	..()
@@ -473,6 +642,7 @@
 
 /obj/item/weapon/robot_module/drone
 	name = "drone module"
+	no_slip = 1
 
 /obj/item/weapon/robot_module/drone/New()
 	..()
@@ -544,13 +714,12 @@
 
 /obj/item/weapon/robot_module/drone/construction
 	name = "construction drone module"
+	channels = list("Engineering" = 1)
+	languages = list()
 
 /obj/item/weapon/robot_module/drone/construction/New()
 	..()
 	src.modules += new /obj/item/weapon/rcd/borg(src)
-
-/obj/item/weapon/robot_module/drone/add_languages(var/mob/living/silicon/robot/R)
-	return	//not much ROM to spare in that tiny microprocessor!
 
 /obj/item/weapon/robot_module/drone/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
 	var/obj/item/device/lightreplacer/LR = locate() in src.modules

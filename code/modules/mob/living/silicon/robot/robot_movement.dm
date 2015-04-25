@@ -1,5 +1,5 @@
 /mob/living/silicon/robot/Process_Spaceslipping(var/prob_slip)
-	if(module && (istype(module,/obj/item/weapon/robot_module/construction) || istype(module,/obj/item/weapon/robot_module/drone)))
+	if(module && module.no_slip)
 		return 0
 	..(prob_slip)
 
