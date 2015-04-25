@@ -19,6 +19,35 @@
 	light_overlay = "helmet_light_dual"
 	camera_networks = list("Security")
 
+/obj/item/clothing/head/helmet/space/rig/captain
+	camera_networks = list("Security")
+
+/obj/item/weapon/rig/captain
+	name = "captain's hardsuit control module"
+	suit_type = "captain's hardsuit"
+	desc = "A bulky, heavy-duty piece of exclusive Nanotrasen armor. Now with cool swishing noises as you deploy and retract your helmet!"
+	icon_state = "captain_rig"
+	armor = list(melee = 65, bullet = 50, laser = 50, energy = 25, bomb = 50, bio = 100, rad = 50)
+	slowdown = 1.5
+	offline_slowdown = 1.5
+	offline_vision_restriction = 0
+
+	helm_type = /obj/item/clothing/head/helmet/space/rig/captain
+
+	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit)
+
+	req_access = list()
+	req_one_access = list()
+
+/obj/item/weapon/rig/captain/equipped
+
+	req_access = list(access_captain)
+
+	initial_modules = list(
+		/obj/item/rig_module/ai_container,
+		/obj/item/rig_module/maneuvering_jets
+		)
+
 /obj/item/weapon/rig/industrial
 	name = "industrial suit control module"
 	suit_type = "industrial hardsuit"
