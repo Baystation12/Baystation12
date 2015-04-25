@@ -147,11 +147,8 @@
 
 	src.throwing = 0
 	if (src.loc == user)
-		//canremove==0 means that object may not be removed. You can still wear it. This only applies to clothing. /N
-		if(!src.canremove)
+		if(!user.unEquip(src))
 			return
-		else
-			user.u_equip(src)
 	else
 		if(isliving(src.loc))
 			return
@@ -160,7 +157,6 @@
 	if(src.loc == user)
 		src.pickup(user)
 	return
-
 
 /obj/item/attack_ai(mob/user as mob)
 	if (istype(src.loc, /obj/item/weapon/robot_module))

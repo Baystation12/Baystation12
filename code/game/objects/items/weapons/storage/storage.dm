@@ -30,7 +30,7 @@
 
 	if (ishuman(usr) || issmall(usr)) //so monkeys can take off their backpacks -- Urist
 
-		if (istype(usr.loc,/obj/mecha)) // stops inventory actions in a mech
+		if (istype(usr.loc,/obj/mecha)) // stops inventory actions in a mech. why?
 			return
 
 		if(over_object == usr && Adjacent(usr)) // this must come before the screen objects only block
@@ -44,18 +44,21 @@
 		//there's got to be a better way of doing this.
 		if (!(src.loc == usr) || (src.loc && src.loc.loc == usr))
 			return
-
-		if (!( usr.restrained() ) && !( usr.stat ))
-			switch(over_object.name)
-				if("r_hand")
-					usr.u_equip(src)
-					usr.put_in_r_hand(src)
-				if("l_hand")
-					usr.u_equip(src)
-					usr.put_in_l_hand(src)
-			src.add_fingerprint(usr)
+		
+		if (( usr.restrained() ) || ( usr.stat ))
 			return
-	return
+		
+		if ((src.loc == usr) && !usr.unEquip(src))
+			return
+
+		switch(over_object.name)
+			if("r_hand")
+				usr.u_equip(src)
+				usr.put_in_r_hand(src)
+			if("l_hand")
+				usr.u_equip(src)
+				usr.put_in_l_hand(src)
+		src.add_fingerprint(usr)
 
 
 /obj/item/weapon/storage/proc/return_inv()
