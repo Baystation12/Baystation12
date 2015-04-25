@@ -205,11 +205,11 @@ datum/track/New(var/title_name, var/audio)
 
 	var/area/main_area = get_area(src)
 	for(var/area/related_area in main_area.related)
-		related_area.forced_ambience = sound(current_track.sound, channel = 1, repeat = 1, volume = 25)
+		related_area.forced_ambience = list(current_track.sound)
 
 		for(var/mob/living/M in mobs_in_area(related_area))
 			if(M.mind)
-				related_area.play_ambience(related_area)
+				related_area.play_ambience(M)
 
 	playing = 1
 	update_use_power(2)

@@ -262,13 +262,15 @@ var/list/mob/living/forced_ambiance_list = new
 		L << sound('sound/ambience/shipambience.ogg', repeat = 1, wait = 0, volume = 35, channel = 2)
 
 	if(forced_ambience)
-		forced_ambiance_list += L
-		L << forced_ambience
+		if(forced_ambience.len)
+			forced_ambiance_list |= L
+			L << sound(pick(forced_ambience), repeat = 1, wait = 0, volume = 25, channel = 1)
+		else
+			L << sound(null, channel = 1)
 	else if(src.ambience.len && prob(35))
 		if((world.time >= L.client.played + 600))
-			var/musVolume = 25
 			var/sound = pick(ambience)
-			L << sound(sound, repeat = 0, wait = 0, volume = musVolume, channel = 1)
+			L << sound(sound, repeat = 0, wait = 0, volume = 25, channel = 1)
 			L.client.played = world.time
 
 /area/proc/gravitychange(var/gravitystate = 0, var/area/A)
