@@ -33,6 +33,7 @@ var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","
 	var/word1
 	var/word2
 	var/word3
+	var/image/blood_image
 	var/list/converting = list()
 
 // Places these combos are mentioned: this file - twice in the rune code, once in imbued tome, once in tome's HTML runes.dm - in the imbue rune code. If you change a combination - dont forget to change it everywhere.
@@ -66,10 +67,21 @@ var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","
 // join hide technology - stun rune. Rune color: bright pink.
 	New()
 		..()
-		var/image/blood = image(loc = src)
-		blood.override = 1
+		blood_image = image(loc = src)
+		blood_image.override = 1
 		for(var/mob/living/silicon/ai/AI in player_list)
-			AI.client.images += blood
+			if(AI.client)
+				AI.client.images += blood_image
+		rune_list.Add(src)
+
+	Del()
+		for(var/mob/living/silicon/ai/AI in player_list)
+			if(AI.client)
+				AI.client.images -= blood_image
+		qdel(blood_image)
+		blood_image = null
+		rune_list.Remove(src)
+		..()
 
 	examine(mob/user)
 		..()
@@ -497,6 +509,9 @@ var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","
 			user << "An old, dusty tome with frayed edges and a sinister looking cover."
 		else
 			user << "The scriptures of Nar-Sie, The One Who Sees, The Geometer of Blood. Contains the details of every ritual his followers could think of. Most of these are useless, though."
+
+/obj/item/weapon/book/tome/cultify()
+	return
 
 /obj/item/weapon/book/tome/imbued //admin tome, spawns working runes without waiting
 	w_class = 2.0

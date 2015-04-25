@@ -111,6 +111,7 @@
 			user.visible_message( \
 				"\blue [user] has added one of [O] to \the [src].", \
 				"\blue You add one of [O] to \the [src].")
+			return
 		else
 		//	user.remove_from_mob(O)	//This just causes problems so far as I can tell. -Pete
 			user.drop_item()
@@ -118,6 +119,7 @@
 			user.visible_message( \
 				"\blue [user] has added \the [O] to \the [src].", \
 				"\blue You add \the [O] to \the [src].")
+			return
 	else if(istype(O,/obj/item/weapon/reagent_containers/glass) || \
 	        istype(O,/obj/item/weapon/reagent_containers/food/drinks) || \
 	        istype(O,/obj/item/weapon/reagent_containers/food/condiment) \
@@ -135,11 +137,12 @@
 		return 1
 	else
 		user << "\red You have no idea what you can cook with this [O]."
-		return 1
+	..()
 	src.updateUsrDialog()
 
 /obj/machinery/microwave/attack_ai(mob/user as mob)
-	return 0
+	if(istype(user, /mob/living/silicon/robot) && Adjacent(user))
+		attack_hand(user)
 
 /obj/machinery/microwave/attack_hand(mob/user as mob)
 	user.set_machine(src)

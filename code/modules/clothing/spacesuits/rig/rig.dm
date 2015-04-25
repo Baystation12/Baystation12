@@ -776,6 +776,14 @@
 		return 0
 	wearer.Move(null,dir)*/
 
+/atom/proc/get_rig()
+	if(loc)
+		return loc.get_rig()
+	return null
+
+/obj/item/weapon/rig/get_rig()
+	return src
+
 #undef ONLY_DEPLOY
 #undef ONLY_RETRACT
 #undef SEAL_DELAY

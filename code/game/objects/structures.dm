@@ -4,6 +4,7 @@
 	var/climbable
 	var/breakable
 	var/parts
+	var/list/climbers = list()
 
 /obj/structure/proc/destroy()
 	if(parts)
@@ -20,6 +21,12 @@
 			var/mob/living/carbon/human/H = user
 			if(H.species.can_shred(user))
 				attack_generic(user,1,"slices")
+
+	if(climbers.len && !(user in climbers))
+		user.visible_message("<span class='warning'>[user.name] shakes \the [src].</span>", \
+					"<span class='notice'>You shake \the [src].</span>")
+		structure_shaken()
+
 	return ..()
 
 /obj/structure/blob_act()
@@ -73,7 +80,7 @@
 		return ..()
 
 /obj/structure/proc/can_climb(var/mob/living/user)
-	if (!can_touch(user) || !climbable)
+	if (!can_touch(user) || !climbable || (user in climbers))
 		return 0
 
 	if (!user.Adjacent(src))
@@ -103,25 +110,32 @@
 		return
 
 	usr.visible_message("<span class='warning'>[user] starts climbing onto \the [src]!</span>")
+	climbers |= user
 
 	if(!do_after(user,50))
+		climbers -= user
 		return
 
 	if (!can_climb(user))
+		climbers -= user
 		return
 
 	usr.forceMove(get_turf(src))
 
 	if (get_turf(user) == get_turf(src))
 		usr.visible_message("<span class='warning'>[user] climbs onto \the [src]!</span>")
+	climbers -= user
 
 /obj/structure/proc/structure_shaken()
+	for(var/mob/living/M in climbers)
+		M.Weaken(1)
+		M << "<span class='danger'>You topple as you are shaken off \the [src]!</span>"
+		climbers.Cut(1,2)
 
 	for(var/mob/living/M in get_turf(src))
-
 		if(M.lying) return //No spamming this on people.
 
-		M.Weaken(5)
+		M.Weaken(3)
 		M << "<span class='danger'>You topple as \the [src] moves under you!</span>"
 
 		if(prob(25))

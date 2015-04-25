@@ -265,7 +265,8 @@
 			module_sprites["Bro"] = "Brobot"
 			module_sprites["Rich"] = "maximillion"
 			module_sprites["Default"] = "Service2"
-			module_sprites["Drone"] = "drone-service" // How does this even work...? Oh well.
+			module_sprites["Drone - Service"] = "drone-service"
+			module_sprites["Drone - Hydro"] = "drone-hydro"
 
 		if("Clerical")
 			module = new /obj/item/weapon/robot_module/clerical(src)
@@ -276,6 +277,12 @@
 			module_sprites["Rich"] = "maximillion"
 			module_sprites["Default"] = "Service2"
 			module_sprites["Drone"] = "drone-service"
+
+		if("Research")
+			module = new /obj/item/weapon/robot_module/research(src)
+			module.channels = list("Science" = 1)
+			module_sprites["Droid"] = "droid-science"
+			module_sprites["Drone"] = "drone-science"
 
 		if("Miner")
 			module = new /obj/item/weapon/robot_module/miner(src)
@@ -296,7 +303,8 @@
 			module_sprites["Standard"] = "surgeon"
 			module_sprites["Advanced Droid"] = "droid-medical"
 			module_sprites["Needles"] = "medicalrobot"
-			module_sprites["Drone" ] = "drone-medical"
+			module_sprites["Drone - Medical" ] = "drone-medical"
+			module_sprites["Drone - Chemistry" ] = "drone-chemistry"
 
 		if("Surgeon")
 			module = new /obj/item/weapon/robot_module/surgeon(src)
@@ -731,7 +739,7 @@
 		else
 			user << "Unable to locate a radio."
 
-	else if (istype(W, /obj/item/weapon/card/id)||istype(W, /obj/item/device/pda))			// trying to unlock the interface with an ID card
+	else if (istype(W, /obj/item/weapon/card/id)||istype(W, /obj/item/device/pda)||istype(W, /obj/item/weapon/card/robot))			// trying to unlock the interface with an ID card
 		if(emagged)//still allow them to open the cover
 			user << "The interface seems slightly damaged"
 		if(opened)
@@ -867,6 +875,10 @@
 		var/mob/living/carbon/human/H = M
 		//if they are holding or wearing a card that has access, that works
 		if(check_access(H.get_active_hand()) || check_access(H.wear_id))
+			return 1
+	else if(istype(M, /mob/living/silicon/robot))
+		var/mob/living/silicon/robot/R = M
+		if(check_access(R.get_active_hand()) || istype(R.get_active_hand(), /obj/item/weapon/card/robot))
 			return 1
 	return 0
 

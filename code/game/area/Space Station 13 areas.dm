@@ -56,7 +56,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	var/air_doors_activated = 0
 	var/list/ambience = list('sound/ambience/ambigen1.ogg','sound/ambience/ambigen3.ogg','sound/ambience/ambigen4.ogg','sound/ambience/ambigen5.ogg','sound/ambience/ambigen6.ogg','sound/ambience/ambigen7.ogg','sound/ambience/ambigen8.ogg','sound/ambience/ambigen9.ogg','sound/ambience/ambigen10.ogg','sound/ambience/ambigen11.ogg','sound/ambience/ambigen12.ogg','sound/ambience/ambigen14.ogg')
 	var/sound/forced_ambience = null
-
+	var/sound_env = 2	//reverb preset for sounds played in this area, see sound datum reference for more
 /*Adding a wizard area teleport list because motherfucking lag -- Urist*/
 /*I am far too lazy to make it a proper list of areas so I'll just make it run the usual telepot routine at the start of the game*/
 var/list/teleportlocs = list()
@@ -808,6 +808,9 @@ area/space/atmosalert()
 
 //Hallway
 
+/area/hallway/primary/
+	sound_env = 12 //hallway
+
 /area/hallway/primary/fore
 	name = "\improper Fore Primary Hallway"
 	icon_state = "hallF"
@@ -873,27 +876,27 @@ area/space/atmosalert()
 	music = null
 
 /area/crew_quarters/captain
-	name = "\improper Captain's Office"
+	name = "\improper Command - Captain's Office"
 	icon_state = "captain"
 
 /area/crew_quarters/heads/hop
-	name = "\improper Head of Personnel's Office"
+	name = "\improper Command - HoP's Office"
 	icon_state = "head_quarters"
 
 /area/crew_quarters/heads/hor
-	name = "\improper Research Director's Office"
+	name = "\improper Research - RD's Office"
 	icon_state = "head_quarters"
 
 /area/crew_quarters/heads/chief
-	name = "\improper Chief Engineer's Office"
+	name = "\improper Engineering - CE's Office"
 	icon_state = "head_quarters"
 
 /area/crew_quarters/heads/hos
-	name = "\improper Head of Security's Office"
+	name = "\improper Security - HoS' Office"
 	icon_state = "head_quarters"
 
 /area/crew_quarters/heads/cmo
-	name = "\improper Chief Medical Officer's Office"
+	name = "\improper Medbay - CMO's Office"
 	icon_state = "head_quarters"
 
 /area/crew_quarters/courtroom
@@ -1085,7 +1088,7 @@ area/space/atmosalert()
 	icon_state = "atmos_storage"
 
 /area/engineering/drone_fabrication
-	name = "\improper Drone Fabrication"
+	name = "\improper Engineering Drone Fabrication"
 	icon_state = "drone_fab"
 
 /area/engineering/engine_smes
@@ -1171,23 +1174,23 @@ area/space/atmosalert()
 		icon_state = "panelsP"
 
 /area/maintenance/auxsolarport
-	name = "Fore Port Solar Maintenance"
+	name = "Solar Maintenance - Fore Port"
 	icon_state = "SolarcontrolP"
 
 /area/maintenance/starboardsolar
-	name = "Aft Starboard Solar Maintenance"
+	name = "Solar Maintenance - Aft Starboard"
 	icon_state = "SolarcontrolS"
 
 /area/maintenance/portsolar
-	name = "Aft Port Solar Maintenance"
+	name = "Solar Maintenance - Aft Port"
 	icon_state = "SolarcontrolP"
 
 /area/maintenance/auxsolarstarboard
-	name = "Fore Starboard Solar Maintenance"
+	name = "Solar Maintenance - Fore Starboard"
 	icon_state = "SolarcontrolS"
 
 /area/maintenance/foresolar
-	name = "Fore Solar Maintenance"
+	name = "Solar Maintenance - Fore"
 	icon_state = "SolarcontrolA"
 
 /area/assembly/chargebay
@@ -1754,7 +1757,7 @@ area/space/atmosalert()
 //Construction
 
 /area/construction
-	name = "\improper Construction Area"
+	name = "\improper Engineering Construction Area"
 	icon_state = "yellow"
 
 /area/construction/supplyshuttle
@@ -2025,6 +2028,7 @@ area/space/atmosalert()
 	luminosity = 1
 	lighting_use_dynamic = 0
 	requires_power = 0
+	ambience = list()
 	var/sound/mysound = null
 
 	New()
