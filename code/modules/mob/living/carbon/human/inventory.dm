@@ -317,6 +317,48 @@ This saves us from having to call add_fingerprint() any time something is put in
 
 	return 1
 
+//Checks if a given slot can be accessed at this time, either to equip or unequip I
+/mob/living/carbon/human/slot_is_accessible(var/slot, var/obj/item/I, mob/user=null)
+	var/obj/item/covering = null
+	var/check_flags = 0
+	
+	switch(slot)
+		if(slot_wear_mask)
+			covering = src.head
+			check_flags = HEADCOVERSMOUTH
+		if(slot_glasses)
+			covering = src.head
+			check_flags = HEADCOVERSEYES
+		if(slot_gloves, slot_w_uniform)
+			covering = src.wear_suit
+	
+	if(covering)
+		if((covering.body_parts_covered & I.body_parts_covered) || (covering.flags & check_flags))
+			user << "<span class='warning'>\The [covering] is in the way.</span>"
+			return 0
+	return 1
+
+/mob/living/carbon/human/get_equipped_item(var/slot)
+	switch(slot)
+		if(slot_wear_suit) return wear_suit
+		if(slot_gloves) return gloves
+		if(slot_shoes) return shoes
+		if(slot_belt) return belt
+		if(slot_glasses) return glasses
+		if(slot_head) return head
+		if(slot_l_ear) return l_ear
+		if(slot_r_ear) return r_ear
+		if(slot_w_uniform) return w_uniform
+		if(slot_wear_id) return wear_id
+		if(slot_l_store) return l_store
+		if(slot_r_store) return r_store
+		if(slot_s_store) return s_store
+		if(slot_handcuffed) return handcuffed
+		if(slot_legcuffed) return legcuffed
+	return ..()
+
+///Bizarre equip effect system below
+
 /*
 	MouseDrop human inventory menu
 */
