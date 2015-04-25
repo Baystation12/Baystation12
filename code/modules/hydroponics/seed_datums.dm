@@ -38,7 +38,7 @@
 	seed_name = "berry"
 	display_name = "berry bush"
 	mutants = list("glowberries","poisonberries")
-	chems = list("nutriment" = list(1,10), "berryjuice" = list(1,10))
+	chems = list("nutriment" = list(1,10), "berryjuice" = list(10,10))
 	kitchen_tag = "berries"
 
 /datum/seed/berry/New()
@@ -76,7 +76,7 @@
 	seed_name = "poison berry"
 	display_name = "poison berry bush"
 	mutants = list("deathberries")
-	chems = list("nutriment" = list(1), "toxin" = list(3,5), "poisonberryjuice" = list(3,5))
+	chems = list("nutriment" = list(1), "toxin" = list(3,5), "poisonberryjuice" = list(10,5))
 
 /datum/seed/berry/poison/New()
 	..()
@@ -138,7 +138,7 @@
 	seed_name = "tomato"
 	display_name = "tomato plant"
 	mutants = list("bluetomato","bloodtomato")
-	chems = list("nutriment" = list(1,10), "tomatojuice" = list(1,10))
+	chems = list("nutriment" = list(1,10), "tomatojuice" = list(10,10))
 	kitchen_tag = "tomato"
 
 /datum/seed/tomato/New()
@@ -196,7 +196,7 @@
 	seed_name = "bluespace tomato"
 	display_name = "bluespace tomato plant"
 	mutants = null
-	chems = list("nutriment" = list(1,20), "singulo" = list(1,5))
+	chems = list("nutriment" = list(1,20), "singulo" = list(10,5))
 
 /datum/seed/tomato/blue/teleport/New()
 	..()
@@ -544,7 +544,7 @@
 	seed_name = "grape"
 	display_name = "grapevines"
 	mutants = list("greengrapes")
-	chems = list("nutriment" = list(1,10), "sugar" = list(1,5), "grapejuice" = list(1,10))
+	chems = list("nutriment" = list(1,10), "sugar" = list(1,5), "grapejuice" = list(10,10))
 
 /datum/seed/grapes/New()
 	..()
@@ -563,7 +563,7 @@
 	seed_name = "green grape"
 	display_name = "green grapevines"
 	mutants = null
-	chems = list("nutriment" = list(1,10), "kelotane" = list(3,5), "grapejuice" = list(1,10))
+	chems = list("nutriment" = list(1,10), "kelotane" = list(3,5), "grapejuice" = list(10,10))
 
 /datum/seed/grapes/green/New()
 	..()
@@ -610,7 +610,7 @@
 	name = "banana"
 	seed_name = "banana"
 	display_name = "banana tree"
-	chems = list("banana" = list(1,10))
+	chems = list("banana" = list(10,10))
 	trash_type = /obj/item/weapon/bananapeel
 	kitchen_tag = "banana"
 
@@ -648,7 +648,7 @@
 	name = "potato"
 	seed_name = "potato"
 	display_name = "potatoes"
-	chems = list("nutriment" = list(1,10), "potato" = list(1,10))
+	chems = list("nutriment" = list(1,10), "potato" = list(10,10))
 	kitchen_tag = "potato"
 
 /datum/seed/potato/New()
@@ -666,7 +666,7 @@
 	name = "soybean"
 	seed_name = "soybean"
 	display_name = "soybeans"
-	chems = list("nutriment" = list(1,20), "soymilk" = list(1,20))
+	chems = list("nutriment" = list(1,20), "soymilk" = list(10,20))
 	kitchen_tag = "soybeans"
 
 /datum/seed/soybean/New()
@@ -720,7 +720,7 @@
 	name = "carrot"
 	seed_name = "carrot"
 	display_name = "carrots"
-	chems = list("nutriment" = list(1,20), "imidazoline" = list(3,5), "carrotjuice" = list(1,20))
+	chems = list("nutriment" = list(1,20), "imidazoline" = list(3,5), "carrotjuice" = list(10,20))
 	kitchen_tag = "carrot"
 
 /datum/seed/carrots/New()
@@ -790,7 +790,7 @@
 	name = "watermelon"
 	seed_name = "watermelon"
 	display_name = "watermelon vine"
-	chems = list("nutriment" = list(1,6), "watermelonjuice" = list(1,6))
+	chems = list("nutriment" = list(1,6), "watermelonjuice" = list(10,6))
 
 /datum/seed/watermelon/New()
 	..()
@@ -828,7 +828,7 @@
 	name = "lime"
 	seed_name = "lime"
 	display_name = "lime trees"
-	chems = list("nutriment" = list(1,20), "limejuice" = list(1,20))
+	chems = list("nutriment" = list(1,20), "limejuice" = list(10,20))
 	kitchen_tag = "lime"
 
 /datum/seed/citrus/New()
@@ -847,7 +847,7 @@
 	name = "lemon"
 	seed_name = "lemon"
 	display_name = "lemon trees"
-	chems = list("nutriment" = list(1,20), "lemonjuice" = list(1,20))
+	chems = list("nutriment" = list(1,20), "lemonjuice" = list(10,20))
 	kitchen_tag = "lemon"
 
 /datum/seed/citrus/lemon/New()
@@ -860,7 +860,7 @@
 	seed_name = "orange"
 	display_name = "orange trees"
 	kitchen_tag = "orange"
-	chems = list("nutriment" = list(1,20), "orangejuice" = list(1,20))
+	chems = list("nutriment" = list(1,20), "orangejuice" = list(10,20))
 
 /datum/seed/citrus/orange/New()
 	..()
@@ -906,7 +906,7 @@
 	seed_name = "cherry"
 	seed_noun = "pits"
 	display_name = "cherry tree"
-	chems = list("nutriment" = list(1,15), "sugar" = list(1,15), "cherryjelly" = list(1,15))
+	chems = list("nutriment" = list(1,15), "sugar" = list(1,15), "cherryjelly" = list(10,15))
 	kitchen_tag = "cherries"
 
 /datum/seed/cherries/New()
