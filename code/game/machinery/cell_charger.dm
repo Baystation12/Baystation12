@@ -11,7 +11,7 @@
 	var/obj/item/weapon/cell/charging = null
 	var/chargelevel = -1
 	
-/obj/machinery/cell_charger/proc/updateicon()
+/obj/machinery/cell_charger/update_icon()
 	icon_state = "ccharger[charging ? 1 : 0]"
 
 	if(charging && !(stat & (BROKEN|NOPOWER)) )
@@ -57,7 +57,7 @@
 			charging = W
 			user.visible_message("[user] inserts a cell into the charger.", "You insert a cell into the charger.")
 			chargelevel = -1
-		updateicon()
+		update_icon()
 	else if(istype(W, /obj/item/weapon/wrench))
 		if(charging)
 			user << "\red Remove the cell first!"
@@ -76,7 +76,7 @@
 		src.charging = null
 		user.visible_message("[user] removes the cell from the charger.", "You remove the cell from the charger.")
 		chargelevel = -1
-		updateicon()
+		update_icon()
 
 /obj/machinery/cell_charger/attack_ai(mob/user)
 	if(istype(user, /mob/living/silicon/robot) && Adjacent(user)) // Borgs can remove the cell if they are near enough
@@ -108,6 +108,6 @@
 		charging.give(active_power_usage*CELLRATE)
 		update_use_power(2)
 		
-		updateicon()
+		update_icon()
 	else
 		update_use_power(1)
