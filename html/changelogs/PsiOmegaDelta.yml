@@ -1,3 +1,4 @@
 author: PsiOmegaDelta
-changes: []
+changes:
+  - tweak: "The mental health office door now requires psychiatrist access, and the related button now opens/closes the door instead of bolting."
 delete-after: false
