@@ -490,7 +490,8 @@ About the new airlock wires panel:
 		if("deny")
 			if(density && src.arePowerSystemsOn())
 				flick("door_deny", src)
-				playsound(src.loc, 'sound/machines/buzz-two.ogg', 50, 0)
+				if(secured_wires)
+					playsound(src.loc, 'sound/machines/buzz-two.ogg', 50, 0)
 	return
 
 /obj/machinery/door/airlock/attack_ai(mob/user as mob)
@@ -927,6 +928,11 @@ About the new airlock wires panel:
 		M.show_message("You hear a click from the bottom of the door.", 2)
 	update_icon()
 	return 1
+
+/obj/machinery/door/airlock/allowed(mob/M)
+	if(locked)
+		return 0
+	return ..(M)
 
 /obj/machinery/door/airlock/New(var/newloc, var/obj/structure/door_assembly/assembly=null)
 	..()
