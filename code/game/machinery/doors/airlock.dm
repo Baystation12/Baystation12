@@ -862,6 +862,9 @@ About the new airlock wires panel:
 /obj/machinery/door/blocks_airlock()
 	return 0
 
+/obj/machinery/mech_sensor/blocks_airlock()
+	return 0
+
 /mob/living/blocks_airlock()
 	return 1
 
