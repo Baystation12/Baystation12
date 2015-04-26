@@ -70,7 +70,7 @@
 //Best used for sanitize object names, window titles.
 //If you have a problem with sanitize() in chat, when quotes and >, < are displayed as html entites -
 //this is a problem of double-encode(when & becomes &amp;), use sanitize() with encode=0, but not the sanitizeSafe()!
-/proc/sanitizeSafe(var/input, var/max_length = MAX_MESSAGE_LEN, var/encode = 1, var/trim = 1, var/extra = 1, var/ja_mode = 1)
+/proc/sanitizeSafe(var/input, var/max_length = MAX_MESSAGE_LEN, var/encode = 1, var/trim = 1, var/extra = 1, var/ja_mode = CHAT)
 	return sanitize(replace_characters(input, list(">"=" ","<"=" ", "\""="'"), max_length, encode, trim, extra))
 
 //Filters out undesirable characters from names
