@@ -917,3 +917,32 @@ var/list/be_special_flags = list(
 #define STAGE_FOUR	7
 #define STAGE_FIVE	9
 #define STAGE_SUPER	11
+
+// Camera networks
+#define NETWORK_CRESCENT "Crescent"
+#define NETWORK_CIVILIAN_EAST "Civilian East"
+#define NETWORK_CIVILIAN_WEST "Civilian West"
+#define NETWORK_COMMAND "Command"
+#define NETWORK_ENGINE "Engine"
+#define NETWORK_ENGINEERING "Engineering"
+#define NETWORK_ENGINEERING_OUTPOST "Engineering Outpost"
+#define NETWORK_ERT "ERT"
+#define NETWORK_EXODUS "Exodus"
+#define NETWORK_MEDICAL "Medical"
+#define NETWORK_MINE "MINE"
+#define NETWORK_RESEARCH "Research"
+#define NETWORK_RESEARCH_OUTPOST "Research Outpost"
+#define NETWORK_PRISON "Prison"
+#define NETWORK_SECURITY "Security"
+#define NETWORK_TELECOM "Tcomsat"
+#define NETWORK_THUNDER "thunder"
+
+// Languages
+#define LANGUAGE_SOL_COMMON "Sol Common"
+#define LANGUAGE_UNATHI "Sinta'unathi"
+#define LANGUAGE_SIIK_MAAS "Siik'maas"
+#define LANGUAGE_SIIK_TAJR "Siik'tajr"
+#define LANGUAGE_SKRELLIAN "Skrellian"
+#define LANGUAGE_ROOTSPEAK "Rootspeak"
+#define LANGUAGE_TRADEBAND "Tradeband"
+#define LANGUAGE_GUTTER "Gutter"
