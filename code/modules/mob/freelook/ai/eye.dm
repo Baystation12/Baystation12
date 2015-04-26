@@ -39,10 +39,11 @@
 		if(eyeobj)
 			eyeobj.loc = src.loc
 
-/mob/living/silicon/ai/Del()
+/mob/living/silicon/ai/Destroy()
 	if(eyeobj)
 		eyeobj.owner = null
-		del(eyeobj) // No AI, no Eye
+		qdel(eyeobj) // No AI, no Eye
+		eyeobj = null
 	..()
 
 /atom/proc/move_camera_by_click()

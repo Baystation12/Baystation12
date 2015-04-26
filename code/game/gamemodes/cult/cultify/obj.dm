@@ -65,8 +65,11 @@
 	new /obj/structure/cult/tome(loc)
 	qdel(src)
 
-/obj/machinery/door/cultify()
+/obj/machinery/door/airlock/external/cultify()
 	new /obj/structure/mineral_door/wood(loc)
+	..()
+
+/obj/machinery/door/cultify()
 	icon_state = "null"
 	density = 0
 	c_animation = new /atom/movable/overlay(src.loc)
@@ -79,7 +82,7 @@
 	c_animation.icon_state = "breakdoor"
 	flick("cultification",c_animation)
 	spawn(10)
-		del(c_animation)
+		qdel(c_animation)
 		qdel(src)
 
 /obj/machinery/door/firedoor/cultify()
@@ -125,7 +128,7 @@
 /obj/structure/mineral_door/wood/cultify()
 	return
 
-/obj/machinery/singularity/cultify()
+/obj/singularity/cultify()
 	var/dist = max((current_size - 2), 1)
 	explosion(get_turf(src), dist, dist * 2, dist * 4)
 	qdel(src)

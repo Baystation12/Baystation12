@@ -18,7 +18,7 @@
 
 /mob/living/silicon/ai
 	alarm_monitor_type = /obj/nano_module/alarm_monitor/ai
-	list/silicon_subsystems = list(
+	silicon_subsystems = list(
 		/mob/living/silicon/proc/subsystem_alarm_monitor,
 		/mob/living/silicon/proc/subsystem_atmos_control,
 		/mob/living/silicon/proc/subsystem_crew_monitor,

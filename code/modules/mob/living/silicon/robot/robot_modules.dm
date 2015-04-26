@@ -56,6 +56,17 @@ var/global/list/robot_modules = list(
 	remove_subsystems(R)
 	remove_status_flags(R)
 
+/obj/item/weapon/robot_module/Destroy()	
+	qdel(modules)
+	qdel(synths)
+	qdel(emag)
+	qdel(jetpack)
+	modules = null
+	synths = null
+	emag = null
+	jetpack = null
+	..()
+
 /obj/item/weapon/robot_module/emp_act(severity)
 	if(modules)
 		for(var/obj/O in modules)

@@ -48,7 +48,7 @@
 	if(T)
 		T.hotspot_expose(700,125)
 		explosion(T, -1, -1, 0, 4)
-	del(src)
+	qdel(src)
 	return
 
 /obj/item/device/taperecorder/verb/record()

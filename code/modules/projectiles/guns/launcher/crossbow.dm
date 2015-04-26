@@ -43,7 +43,7 @@
 		user  << "[src] shatters into a scattering of overstressed metal shards as it leaves the crossbow."
 		var/obj/item/weapon/shard/shrapnel/S = new()
 		S.loc = get_turf(src)
-		src.Del()
+		qdel(src)
 
 /obj/item/weapon/gun/launcher/crossbow
 	name = "powered crossbow"
@@ -257,7 +257,7 @@
 		if(buildstate == 5)
 			user << "\blue You secure the crossbow's various parts."
 			new /obj/item/weapon/gun/launcher/crossbow(get_turf(src))
-			del(src)
+			qdel(src)
 		return
 	else
 		..()

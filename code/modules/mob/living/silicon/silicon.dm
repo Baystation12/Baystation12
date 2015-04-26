@@ -31,7 +31,7 @@
 	add_language("Galactic Common")
 	init_subsystems()
 
-/mob/living/silicon/Del()
+/mob/living/silicon/Destroy()
 	for(var/datum/alarm_handler/AH in alarm_manager.all_handlers)
 		AH.unregister(src)
 	..()

@@ -20,7 +20,7 @@
 
 	if(!W.mob_can_equip(src, slot))
 		if(del_on_fail)
-			del(W)
+			qdel(W)
 		else
 			if(!disable_warning)
 				src << "\red You are unable to equip that." //Only print if del_on_fail is false
