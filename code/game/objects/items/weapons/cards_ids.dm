@@ -97,7 +97,7 @@
 		/obj/machinery/shieldgen,
 		/obj/machinery/turretid,
 		/obj/machinery/vending,
-		/obj/machinery/bot,
+		/mob/living/bot,
 		/obj/machinery/door,
 		/obj/machinery/telecomms,
 		/obj/machinery/mecha_part_fabricator,

@@ -37,7 +37,7 @@
 
 /obj/item/radio/integrated/beepsky
 	var/list/botlist = null		// list of bots
-	var/obj/machinery/bot/secbot/active 	// the active bot; if null, show bot list
+	var/mob/living/bot/secbot/active 	// the active bot; if null, show bot list
 	var/list/botstatus			// the status signal sent by the bot
 
 	var/control_freq = AI_FREQ
