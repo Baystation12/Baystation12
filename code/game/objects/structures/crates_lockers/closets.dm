@@ -160,16 +160,19 @@
 					A.ex_act(severity++)
 				qdel(src)
 
+/obj/structure/closet/proc/damage(var/damage)
+	health -= damage
+	if(health <= 0)
+		for(var/atom/movable/A in src)
+			A.loc = src.loc
+		qdel(src)
+
 /obj/structure/closet/bullet_act(var/obj/item/projectile/Proj)
 	if(!(Proj.damage_type == BRUTE || Proj.damage_type == BURN))
 		return
 
-	health -= Proj.damage
 	..()
-	if(health <= 0)
-		for(var/atom/movable/A as mob|obj in src)
-			A.loc = src.loc
-		qdel(src)
+	damage(Proj.damage)
 
 	return
 

@@ -856,40 +856,65 @@ About the new airlock wires panel:
 
 	return ..()
 
+/atom/movable/proc/blocks_airlock()
+	return density
+
+/obj/machinery/door/blocks_airlock()
+	return 0
+
+/mob/living/blocks_airlock()
+	return 1
+
+/atom/movable/proc/airlock_crush(var/crush_damage)
+	return
+
+/obj/machinery/portable_atmospherics/canister/airlock_crush(var/crush_damage)
+	health -= crush_damage
+	healthcheck()
+
+/obj/structure/closet/airlock_crush(var/crush_damage)
+	damage(crush_damage)
+	for(var/atom/movable/AM in src)
+		AM.airlock_crush()
+
+/mob/living/airlock_crush(var/crush_damage)
+	adjustBruteLoss(crush_damage)
+	SetStunned(5)
+	SetWeakened(5)
+	var/obj/effect/stop/S
+	S = new /obj/effect/stop
+	S.victim = src
+	S.loc = loc
+	spawn(20)
+		qdel(S)
+	var/turf/T = get_turf(src)
+	T.add_blood(src)
+
+/mob/living/carbon/airlock_crush(var/crush_damage)
+	..()
+	if (!(species && (species.flags & NO_PAIN)))
+		emote("scream")
+
+/mob/living/silicon/robot/airlock_crush(var/crush_damage)
+	adjustBruteLoss(crush_damage)
+
 /obj/machinery/door/airlock/close(var/forced=0)
 	if(!can_close(forced))
 		return 0
 
 	if(safe)
 		for(var/turf/turf in locs)
-			if(locate(/mob/living) in turf)
-				if(world.time > next_beep_at)
-					playsound(src.loc, 'sound/machines/buzz-two.ogg', 50, 0)
-					next_beep_at = world.time + SecondsToTicks(10)
-				close_door_at = world.time + 6
-				return
+			for(var/atom/movable/AM in turf)
+				if(AM.blocks_airlock())
+					if(world.time > next_beep_at)
+						playsound(src.loc, 'sound/machines/buzz-two.ogg', 50, 0)
+						next_beep_at = world.time + SecondsToTicks(10)
+					close_door_at = world.time + 6
+					return
 
 	for(var/turf/turf in locs)
-		for(var/mob/living/M in turf)
-			if(isrobot(M))
-				M.adjustBruteLoss(DOOR_CRUSH_DAMAGE)
-			else
-				M.adjustBruteLoss(DOOR_CRUSH_DAMAGE)
-				M.SetStunned(5)
-				M.SetWeakened(5)
-				var/obj/effect/stop/S
-				S = new /obj/effect/stop
-				S.victim = M
-				S.loc = M.loc
-				spawn(20)
-					qdel(S)
-				if (iscarbon(M))
-					var/mob/living/carbon/C = M
-					if (!(C.species && (C.species.flags & NO_PAIN)))
-						M.emote("scream")
-			var/turf/location = src.loc
-			if(istype(location, /turf/simulated))
-				location.add_blood(M)
+		for(var/atom/movable/AM in turf)
+			AM.airlock_crush(DOOR_CRUSH_DAMAGE)
 
 	use_power(360)	//360 W seems much more appropriate for an actuator moving an industrial door capable of crushing people
 	if(istype(src, /obj/machinery/door/airlock/glass))
