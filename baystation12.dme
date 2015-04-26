@@ -1202,7 +1202,6 @@
 #include "code\modules\mob\living\silicon\ai\login.dm"
 #include "code\modules\mob\living\silicon\ai\logout.dm"
 #include "code\modules\mob\living\silicon\ai\say.dm"
-#include "code\modules\mob\living\silicon\ai\subsystems.dm"
 #include "code\modules\mob\living\silicon\decoy\death.dm"
 #include "code\modules\mob\living\silicon\decoy\decoy.dm"
 #include "code\modules\mob\living\silicon\decoy\life.dm"

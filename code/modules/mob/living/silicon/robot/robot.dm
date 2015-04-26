@@ -262,7 +262,8 @@
 	hands.icon_state = lowertext(modtype)
 	feedback_inc("cyborg_[lowertext(modtype)]",1)
 	updatename()
-	choose_icon(6, set_module_sprites(module.sprites))
+	set_module_sprites(module.sprites)
+	choose_icon(module_sprites.len + 1, module_sprites)
 	notify_ai(ROBOT_NOTIFICATION_NEW_MODULE, module.name)
 
 /mob/living/silicon/robot/proc/updatename(var/prefix as text)
@@ -1013,7 +1014,6 @@
 	return
 
 /mob/living/silicon/robot/proc/choose_icon(var/triesleft, var/list/module_sprites)
-
 	if(triesleft<1 || !module_sprites.len)
 		return
 	else
@@ -1040,6 +1040,7 @@
 		var/choice = input("Look at your icon - is this what you want?") in list("Yes","No")
 		if(choice=="No")
 			choose_icon(triesleft, module_sprites)
+			return
 		else
 			triesleft = 0
 			return
@@ -1054,11 +1055,11 @@
 
 /mob/living/silicon/robot/proc/add_robot_verbs()
 	src.verbs |= robot_verbs_default
-	src.verbs |= silicon_verbs_subsystems
+	src.verbs |= silicon_subsystems
 
 /mob/living/silicon/robot/proc/remove_robot_verbs()
 	src.verbs -= robot_verbs_default
-	src.verbs -= silicon_verbs_subsystems
+	src.verbs -= silicon_subsystems
 
 // Uses power from cyborg's cell. Returns 1 on success or 0 on failure.
 // Properly converts using CELLRATE now! Amount is in Joules.
