@@ -1,0 +1,6 @@
+author: PsiOmegaDelta
+delete-after: True
+changes: 
+  - rscadd: "AIs now have a personal atmospherics control subsystem."
+  - rscadd: "Some borg modules now have additional subsystems."
+  - tweak: "Improves borg module handling."

@@ -28,20 +28,17 @@
 /obj/item/borg/upgrade/reset/action(var/mob/living/silicon/robot/R)
 	if(..()) return 0
 	R.uneq_all()
-	R.hands.icon_state = "nomod"
-	R.icon_state = "robot"
-	//world << R.custom_sprite
-	if(R.custom_sprite == 1)
-		//world << R.icon_state
-		icon = 'icons/mob/custom-synthetic.dmi'
-		R.icon_state = "[R.ckey]-Standard"
-	qdel(R.module)
+	R.modtype = initial(R.modtype)
+	R.hands.icon_state = initial(R.hands.icon_state)
+
+	R.choose_icon(1, R.set_module_sprites(list("Default" = "robot")))
+
 	R.notify_ai(ROBOT_NOTIFICATION_MODULE_RESET, R.module.name)
+	R.module.Reset(R)
+	qdel(R.module)
 	R.module = null
-	R.camera.remove_networks(list("Engineering","Medical","MINE"))
+
 	R.updatename("Default")
-	R.status_flags |= CANPUSH
-	R.updateicon()
 
 	return 1
 
@@ -116,7 +113,7 @@
 /obj/item/borg/upgrade/tasercooler/action(var/mob/living/silicon/robot/R)
 	if(..()) return 0
 
-	if(!istype(R.module, /obj/item/weapon/robot_module/security))
+	if(!R.module || !(src in R.module.supported_upgrades))
 		R << "Upgrade mounting error!  No suitable hardpoint detected!"
 		usr << "There's no mounting point for the module!"
 		return 0
@@ -150,7 +147,7 @@
 /obj/item/borg/upgrade/jetpack/action(var/mob/living/silicon/robot/R)
 	if(..()) return 0
 
-	if(!istype(R.module, /obj/item/weapon/robot_module/miner))
+	if(!R.module || !(src in R.module.supported_upgrades))
 		R << "Upgrade mounting error!  No suitable hardpoint detected!"
 		usr << "There's no mounting point for the module!"
 		return 0
