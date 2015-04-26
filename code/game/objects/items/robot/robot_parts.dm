@@ -128,13 +128,13 @@
 	if(istype(W, /obj/item/stack/sheet/metal) && !l_arm && !r_arm && !l_leg && !r_leg && !chest && !head)
 		var/obj/item/stack/sheet/metal/M = W
 		if (M.use(1))
-			//var/obj/item/weapon/secbot_assembly/ed209_assembly/B = new /obj/item/weapon/secbot_assembly/ed209_assembly
-			//B.loc = get_turf(src)
+			var/obj/item/weapon/secbot_assembly/ed209_assembly/B = new /obj/item/weapon/secbot_assembly/ed209_assembly
+			B.loc = get_turf(src)
 			user << "<span class='notice'>You armed the robot frame.</span>"
 			if (user.get_inactive_hand()==src)
 				user.remove_from_mob(src)
-			//	user.put_in_inactive_hand(B)
-			del(src)
+				user.put_in_inactive_hand(B)
+			qdel(src)
 		else
 			user << "<span class='warning'>You need one sheet of metal to arm the robot frame.</span>"
 	if(istype(W, /obj/item/robot_parts/l_leg))
@@ -250,7 +250,7 @@
 			callHook("borgify", list(O))
 			O.Namepick()
 
-			del(src)
+			qdel(src)
 		else
 			user << "\blue The MMI must go in after everything else!"
 
@@ -303,8 +303,8 @@
 		user << "\blue You install some manipulators and modify the head, creating a functional spider-bot!"
 		new /mob/living/simple_animal/spiderbot(get_turf(loc))
 		user.drop_item()
-		del(W)
-		del(src)
+		qdel(W)
+		qdel(src)
 		return
 	return
 

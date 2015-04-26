@@ -10,3 +10,6 @@
 			continue
 
 		powernets.Remove(powerNetwork)
+
+/datum/controller/process/powernet/getStatName()
+	return ..()+"([powernets.len])"

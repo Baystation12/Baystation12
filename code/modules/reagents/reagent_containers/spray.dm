@@ -71,7 +71,7 @@
 		spawn(0)
 			D.reagents.reaction(A)
 			sleep(5)
-			del(D)
+			qdel(D)
 	else
 		var/obj/effect/decal/chempuff/D = new/obj/effect/decal/chempuff(get_turf(src))
 		D.create_reagents(amount_per_transfer_from_this)
@@ -93,7 +93,7 @@
 						D.reagents.reaction(A_turf)
 					sleep(2)
 				sleep(3)
-			del(D)
+			qdel(D)
 
 	return
 
@@ -229,7 +229,7 @@
 				for(var/atom/t in get_turf(D))
 					D.reagents.reaction(t)
 				sleep(2)
-			del(D)
+			qdel(D)
 
 	return
 

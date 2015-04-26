@@ -75,7 +75,7 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 	..()
 	return
 
-/obj/machinery/message_server/Del()
+/obj/machinery/message_server/Destroy()
 	message_servers -= src
 	..()
 	return
@@ -122,7 +122,7 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 		istype(O,/obj/item/weapon/circuitboard/message_monitor))
 		spamfilter_limit += round(MESSAGE_SERVER_DEFAULT_SPAM_LIMIT / 2)
 		user.drop_item()
-		del(O)
+		qdel(O)
 		user << "You install additional memory and processors into message server. Its filtering capabilities been enhanced."
 	else
 		..(O, user)
@@ -221,14 +221,14 @@ var/obj/machinery/blackbox_recorder/blackbox
 
 	var/list/datum/feedback_variable/feedback = new()
 
-	//Only one can exsist in the world!
+	//Only one can exist in the world!
 /obj/machinery/blackbox_recorder/New()
 	if(blackbox)
 		if(istype(blackbox,/obj/machinery/blackbox_recorder))
-			del(src)
+			qdel(src)
 	blackbox = src
 
-/obj/machinery/blackbox_recorder/Del()
+/obj/machinery/blackbox_recorder/Destroy()
 	var/turf/T = locate(1,1,2)
 	if(T)
 		blackbox = null

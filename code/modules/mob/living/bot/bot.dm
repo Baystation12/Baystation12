@@ -120,4 +120,4 @@
 	update_icons()
 
 /mob/living/bot/proc/explode()
-	del(src)
+	qdel(src)

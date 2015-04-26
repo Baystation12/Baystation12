@@ -178,7 +178,7 @@ var/global/list/holodeck_programs = list(
 	//		loadProgram(target)
 
 //This could all be done better, but it works for now.
-/obj/machinery/computer/HolodeckControl/Del()
+/obj/machinery/computer/HolodeckControl/Destroy()
 	emergencyShutdown()
 	..()
 
@@ -257,7 +257,7 @@ var/global/list/holodeck_programs = list(
 	if(!silent)
 		var/obj/oldobj = obj
 		visible_message("The [oldobj.name] fades away!")
-	del(obj)
+	qdel(obj)
 
 /obj/machinery/computer/HolodeckControl/proc/checkInteg(var/area/A)
 	for(var/turf/T in A)
@@ -321,7 +321,7 @@ var/global/list/holodeck_programs = list(
 		C.derez()
 
 	for(var/obj/effect/decal/cleanable/blood/B in linkedholodeck)
-		del(B)
+		qdel(B)
 
 	holographic_objs = A.copy_contents_to(linkedholodeck , 1)
 	for(var/obj/holo_obj in holographic_objs)

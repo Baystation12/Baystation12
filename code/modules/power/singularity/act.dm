@@ -40,8 +40,7 @@
 /obj/singularity_act()
 	ex_act(1)
 	if(src)
-		spawn(0)
-			qdel(src)
+		qdel(src)
 	return 2
 
 /obj/singularity_pull(S, current_size)
@@ -72,6 +71,7 @@
 	return
 
 /obj/machinery/power/supermatter/shard/singularity_act()
+	src.loc = null
 	qdel(src)
 	return 5000
 
@@ -83,8 +83,8 @@
 	SetUniversalState(/datum/universal_state/supermatter_cascade)
 	log_admin("New super singularity made by eating a SM crystal [prints]. Last touched by [src.fingerprintslast].")
 	message_admins("New super singularity made by eating a SM crystal [prints]. Last touched by [src.fingerprintslast].")
-	spawn(0)
-		qdel(src)
+	src.loc = null
+	qdel(src)
 	return 50000
 
 /obj/item/projectile/beam/emitter/singularity_pull()

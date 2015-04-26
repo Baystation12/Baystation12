@@ -149,12 +149,12 @@
 
 	update_icon(1)
 
-/obj/item/weapon/rig/Del()
+/obj/item/weapon/rig/Destroy()
 	for(var/obj/item/piece in list(gloves,boots,helmet,chest))
 		var/mob/living/M = piece.loc
 		if(istype(M))
 			M.drop_from_inventory(piece)
-		del(piece)
+		qdel(piece)
 	processing_objects -= src
 	..()
 
@@ -659,25 +659,25 @@
 			var/obj/item/garbage = H.head
 			H.drop_from_inventory(garbage)
 			H.head = null
-			del(garbage)
+			qdel(garbage)
 
 		if(H.gloves)
 			var/obj/item/garbage = H.gloves
 			H.drop_from_inventory(garbage)
 			H.gloves = null
-			del(garbage)
+			qdel(garbage)
 
 		if(H.shoes)
 			var/obj/item/garbage = H.shoes
 			H.drop_from_inventory(garbage)
 			H.shoes = null
-			del(garbage)
+			qdel(garbage)
 
 		if(H.wear_suit)
 			var/obj/item/garbage = H.wear_suit
 			H.drop_from_inventory(garbage)
 			H.wear_suit = null
-			del(garbage)
+			qdel(garbage)
 
 	for(var/piece in list("helmet","gauntlets","chest","boots"))
 		toggle_piece(piece, H, ONLY_DEPLOY)
@@ -775,6 +775,14 @@
 	if(!wearer || wearer.back != src)
 		return 0
 	wearer.Move(null,dir)*/
+
+/atom/proc/get_rig()
+	if(loc)
+		return loc.get_rig()
+	return null
+
+/obj/item/weapon/rig/get_rig()
+	return src
 
 #undef ONLY_DEPLOY
 #undef ONLY_RETRACT

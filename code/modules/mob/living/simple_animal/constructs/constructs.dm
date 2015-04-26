@@ -52,7 +52,7 @@
 	new /obj/item/weapon/ectoplasm (src.loc)
 	..(null,"collapses in a shattered heap.")
 	ghostize()
-	del src
+	qdel(src)
 
 /mob/living/simple_animal/construct/attack_generic(var/mob/user)
 	if(istype(user, /mob/living/simple_animal/construct/builder))

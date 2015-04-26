@@ -32,7 +32,7 @@ proc/spawn_room(var/atom/start_loc,var/x_size,var/y_size,var/wall,var/floor , va
 			var/cur_loc = locate(start_loc.x+x,start_loc.y+y,start_loc.z)
 			if(clean)
 				for(var/O in cur_loc)
-					del(O)
+					qdel(O)
 
 			var/area/asteroid/artifactroom/A = new
 			if(name)

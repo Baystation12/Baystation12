@@ -33,6 +33,7 @@
 // Apply changes when entering state
 /datum/universal_state/supermatter_cascade/OnEnter()
 	set background = 1
+	garbage_collector.garbage_collect = 0
 	world << "<span class='sinister' style='font-size:22pt'>You are blinded by a brilliant flash of energy.</span>"
 
 	world << sound('sound/effects/cascade.ogg')
@@ -54,7 +55,7 @@
 	cult.allow_narsie = 0
 	PlayerSet()
 
-	new /obj/machinery/singularity/narsie/large/exit(pick(endgame_exits))
+	new /obj/singularity/narsie/large/exit(pick(endgame_exits))
 	spawn(rand(30,60) SECONDS)
 		var/txt = {"
 There's been a galaxy-wide electromagnetic pulse.  All of our systems are heavily damaged and many personnel are dead or dying. We are seeing increasing indications of the universe itself beginning to unravel.

@@ -252,7 +252,7 @@
 	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 	s.set_up(3, 1, src)
 	s.start()
-	del(src)
+	qdel(src)
 	return
 
 /mob/living/bot/medbot/proc/valid_healing_target(var/mob/living/carbon/human/H)
@@ -310,11 +310,11 @@
 	else if(istype(src, /obj/item/weapon/storage/firstaid/o2))
 		A.skin = "o2"
 
-	del(S)
+	qdel(S)
 	user.put_in_hands(A)
 	user << "<span class='notice'>You add the robot arm to the first aid kit.</span>"
 	user.drop_from_inventory(src)
-	del(src)
+	qdel(src)
 
 /obj/item/weapon/firstaid_arm_assembly
 	name = "first aid/robot arm assembly"
@@ -346,7 +346,7 @@
 			if(0)
 				if(istype(W, /obj/item/device/healthanalyzer))
 					user.drop_item()
-					del(W)
+					qdel(W)
 					build_step++
 					user << "<span class='notice'>You add the health sensor to [src].</span>"
 					name = "First aid/robot arm/health analyzer assembly"
@@ -355,11 +355,11 @@
 			if(1)
 				if(isprox(W))
 					user.drop_item()
-					del(W)
+					qdel(W)
 					user << "<span class='notice'>You complete the Medibot! Beep boop.</span>"
 					var/turf/T = get_turf(src)
 					var/mob/living/bot/medbot/S = new /mob/living/bot/medbot(T)
 					S.skin = skin
 					S.name = created_name
 					user.drop_from_inventory(src)
-					del(src)
+					qdel(src)
