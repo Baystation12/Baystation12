@@ -53,6 +53,14 @@
 		ASSERT(src.network.len > 0)
 	..()
 
+/obj/machinery/camera/Destroy()
+	deactivate(null, 0) //kick anyone viewing out
+	if(assembly)
+		qdel(assembly)
+		assembly = null
+	qdel(wires)
+	..()
+
 /obj/machinery/camera/emp_act(severity)
 	if(!isEmpProof())
 		if(prob(100/severity))
@@ -136,7 +144,7 @@
 				assembly.loc = src.loc
 				assembly.state = 1
 				new /obj/item/stack/cable_coil(src.loc, length=2)
-			del(src)
+			qdel(src)
 
 	// OTHER
 	else if (can_use() && (istype(W, /obj/item/weapon/paper) || istype(W, /obj/item/device/pda)) && isliving(user))

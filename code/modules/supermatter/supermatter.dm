@@ -92,8 +92,8 @@
 	radio = new /obj/item/device/radio{channels=list("Engineering")}(src)
 
 
-/obj/machinery/power/supermatter/Del()
-	del radio
+/obj/machinery/power/supermatter/Destroy()
+	qdel(radio)
 	. = ..()
 
 /obj/machinery/power/supermatter/proc/explode()
@@ -112,7 +112,7 @@
 			mob.apply_effect(rads, IRRADIATE)
 	spawn(pull_time)
 		explosion(get_turf(src), explosion_power, explosion_power * 2, explosion_power * 3, explosion_power * 4, 1)
-		del src
+		qdel(src)
 		return
 
 //Changes color and luminosity of the light to these values if they were not already set
@@ -320,7 +320,7 @@
 		user.dust()
 		power += 200
 	else
-		del user
+		qdel(user)
 
 	power += 200
 

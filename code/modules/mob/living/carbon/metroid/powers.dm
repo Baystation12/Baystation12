@@ -161,7 +161,7 @@
 				src.mind.transfer_to(new_slime)
 			else
 				new_slime.key = src.key
-			del(src)
+			qdel(src)
 		else
 			src << "<span class='notice'>I am not ready to reproduce yet...</span>"
 	else

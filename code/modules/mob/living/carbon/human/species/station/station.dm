@@ -213,7 +213,7 @@
 		if(D.client)
 			D.loc = H.loc
 		else
-			del(D)
+			qdel(D)
 
 	H.visible_message("\red[H] splits apart with a wet slithering noise!")
 

@@ -17,7 +17,7 @@
 	..()
 	update_nearby_tiles(need_rebuild=1)
 
-/obj/machinery/shield/Del()
+/obj/machinery/shield/Destroy()
 	opacity = 0
 	density = 0
 	update_nearby_tiles()
@@ -41,7 +41,7 @@
 
 	if (src.health <= 0)
 		visible_message("\blue The [src] dissipates!")
-		del(src)
+		qdel(src)
 		return
 
 	opacity = 1
@@ -54,7 +54,7 @@
 
 	if(src.health <= 0)
 		visible_message("\blue The [src] dissipates!")
-		del(src)
+		qdel(src)
 		return
 
 	opacity = 1
@@ -66,7 +66,7 @@
 	..()
 	if(health <=0)
 		visible_message("\blue The [src] dissipates!")
-		del(src)
+		qdel(src)
 		return
 	opacity = 1
 	spawn(20) if(src) opacity = 0
@@ -75,25 +75,25 @@
 	switch(severity)
 		if(1.0)
 			if (prob(75))
-				del(src)
+				qdel(src)
 		if(2.0)
 			if (prob(50))
-				del(src)
+				qdel(src)
 		if(3.0)
 			if (prob(25))
-				del(src)
+				qdel(src)
 	return
 
 /obj/machinery/shield/emp_act(severity)
 	switch(severity)
 		if(1)
-			del(src)
+			qdel(src)
 		if(2)
 			if(prob(50))
-				del(src)
+				qdel(src)
 
 /obj/machinery/shield/blob_act()
-	del(src)
+	qdel(src)
 
 
 /obj/machinery/shield/hitby(AM as mob|obj)
@@ -115,7 +115,7 @@
 	//Handle the destruction of the shield
 	if (src.health <= 0)
 		visible_message("\blue The [src] dissipates!")
-		del(src)
+		qdel(src)
 		return
 
 	//The shield becomes dense to absorb the blow.. purely asthetic.
@@ -149,10 +149,9 @@
 	use_power = 0
 	idle_power_usage = 0
 
-/obj/machinery/shieldgen/Del()
+/obj/machinery/shieldgen/Destroy()
 	collapse_shields()
 	..()
-
 
 /obj/machinery/shieldgen/proc/shields_up()
 	if(active) return 0 //If it's already turned on, how did this get called?
@@ -161,7 +160,7 @@
 	update_icon()
 
 	create_shields()
-	
+
 	idle_power_usage = 0
 	for(var/obj/machinery/shield/shield_tile in deployed_shields)
 		idle_power_usage += shield_tile.shield_idle_power
@@ -174,7 +173,7 @@
 	update_icon()
 
 	collapse_shields()
-	
+
 	update_use_power(0)
 
 /obj/machinery/shieldgen/proc/create_shields()
@@ -187,7 +186,7 @@
 
 /obj/machinery/shieldgen/proc/collapse_shields()
 	for(var/obj/machinery/shield/shield_tile in deployed_shields)
-		del(shield_tile)
+		qdel(shield_tile)
 
 /obj/machinery/shieldgen/power_change()
 	..()
@@ -201,22 +200,22 @@
 /obj/machinery/shieldgen/process()
 	if (!active || (stat & NOPOWER))
 		return
-	
+
 	if(malfunction)
 		if(deployed_shields.len && prob(5))
-			del(pick(deployed_shields))
+			qdel(pick(deployed_shields))
 	else
 		if (check_delay <= 0)
 			create_shields()
-			
+
 			var/new_power_usage = 0
 			for(var/obj/machinery/shield/shield_tile in deployed_shields)
 				new_power_usage += shield_tile.shield_idle_power
-			
+
 			if (new_power_usage != idle_power_usage)
 				idle_power_usage = new_power_usage
 				use_power(0)
-			
+
 			check_delay = 60
 		else
 			check_delay--
@@ -227,7 +226,7 @@
 	if(health <= 0)
 		spawn(0)
 			explosion(get_turf(src.loc), 0, 0, 1, 0, 0, 0)
-		del(src)
+		qdel(src)
 	update_icon()
 	return
 

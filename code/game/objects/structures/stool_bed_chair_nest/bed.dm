@@ -20,27 +20,27 @@
 /obj/structure/bed/ex_act(severity)
 	switch(severity)
 		if(1.0)
-			del(src)
+			qdel(src)
 			return
 		if(2.0)
 			if (prob(50))
-				del(src)
+				qdel(src)
 				return
 		if(3.0)
 			if (prob(5))
-				del(src)
+				qdel(src)
 				return
 
 /obj/structure/bed/blob_act()
 	if(prob(75))
 		new /obj/item/stack/sheet/metal(src.loc)
-		del(src)
+		qdel(src)
 
 /obj/structure/bed/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/weapon/wrench))
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 		new /obj/item/stack/sheet/metal(src.loc)
-		del(src)
+		qdel(src)
 	else
 		..()
 
@@ -71,7 +71,7 @@
 			visible_message("[user] collapses \the [src.name].")
 			new/obj/item/roller(get_turf(src))
 			spawn(0)
-				del(src)
+				qdel(src)
 		return
 	..()
 
@@ -85,7 +85,7 @@
 /obj/item/roller/attack_self(mob/user)
 		var/obj/structure/bed/roller/R = new /obj/structure/bed/roller(user.loc)
 		R.add_fingerprint(user)
-		del(src)
+		qdel(src)
 
 /obj/item/roller/attackby(obj/item/weapon/W as obj, mob/user as mob)
 
@@ -119,7 +119,7 @@
 	user << "\blue You deploy the roller bed."
 	var/obj/structure/bed/roller/R = new /obj/structure/bed/roller(user.loc)
 	R.add_fingerprint(user)
-	del(held)
+	qdel(held)
 	held = null
 
 
@@ -153,5 +153,5 @@
 		visible_message("[usr] collapses \the [src.name].")
 		new/obj/item/roller(get_turf(src))
 		spawn(0)
-			del(src)
+			qdel(src)
 		return

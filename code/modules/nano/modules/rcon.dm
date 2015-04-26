@@ -8,7 +8,7 @@
 	var/hide_SMES_details = 0
 	var/hide_breakers = 0
 
-/obj/nano_module/rcon/ui_interact(mob/user, ui_key = "rcon", datum/nanoui/ui=null, force_open=1)
+/obj/nano_module/rcon/ui_interact(mob/user, ui_key = "rcon", datum/nanoui/ui=null, force_open=1, var/datum/topic_state/state = default_state)
 	FindDevices() // Update our devices list
 	var/data[0]
 
@@ -41,7 +41,7 @@
 
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
-		ui = new(user, src, ui_key, "rcon.tmpl", "RCON Console", 600, 400)
+		ui = new(user, src, ui_key, "rcon.tmpl", "RCON Console", 600, 400, state = state)
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)

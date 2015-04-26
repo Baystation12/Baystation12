@@ -6,11 +6,9 @@ By RemieRichards
 
 Creation/Deletion is laggy, so let's reduce reuse and recycle!
 
-Locked to /atom/movable and it's subtypes due to Loc being a const var on /atom
-but being read&write on /movable due to how they... move.
-
 */
-
+#define ATOM_POOL_COUNT 100
+// "define DEBUG_ATOM_POOL 1
 var/global/list/GlobalPool = list()
 
 //You'll be using this proc 90% of the time.
@@ -20,7 +18,7 @@ var/global/list/GlobalPool = list()
 //The new created atom when it eventually
 //Goes into the pool
 
-//Second argument can be a new location
+//Second argument can be a new location, if the type is /atom/movable
 //Or a list of arguments
 //Either way it gets passed to new
 
@@ -28,17 +26,16 @@ var/global/list/GlobalPool = list()
 	if(!get_type)
 		return
 
-	var/atom/movable/AM
-	AM = GetFromPool(get_type,second_arg)
+	var/datum/D
+	D = GetFromPool(get_type,second_arg)
 
-	if(!AM)
+	if(!D)
 		if(ispath(get_type))
 			if(islist(second_arg))
 				return new get_type (arglist(second_arg))
 			else
 				return new get_type (second_arg)
-	return AM
-
+	return D
 
 /proc/GetFromPool(var/get_type,var/second_arg)
 	if(!get_type)
@@ -50,38 +47,53 @@ var/global/list/GlobalPool = list()
 	if(length(GlobalPool[get_type]) == 0)
 		return 0
 
-	var/atom/movable/AM = pick_n_take(GlobalPool[get_type])
-	if(AM)
-		AM.ResetVars()
-		if(islist(second_arg))
-			AM.loc = second_arg[1]
-			AM.New(arglist(second_arg))
-		else
-			AM.loc = second_arg
-			AM.New(second_arg)
-		return AM
+	var/datum/D = pick_n_take(GlobalPool[get_type])
+	if(D)
+		D.ResetVars()
+		D.Prepare(second_arg)
+		return D
 	return 0
 
-
-
-/proc/PlaceInPool(var/atom/movable/AM)
-	if(!istype(AM))
+/proc/PlaceInPool(var/datum/D)
+	if(!istype(D))
 		return
 
-	if(AM in GlobalPool[AM.type])
+	if(length(GlobalPool[D.type]) > ATOM_POOL_COUNT)
+		#ifdef DEBUG_ATOM_POOL
+		world << text("DEBUG_DATUM_POOL: PlaceInPool([]) exceeds []. Discarding.", D.type, ATOM_POOL_COUNT)
+		#endif
+		del(D)
 		return
 
-	if(!GlobalPool[AM.type])
-		GlobalPool[AM.type] = list()
+	if(D in GlobalPool[D.type])
+		return
 
-	GlobalPool[AM.type] |= AM
+	if(!GlobalPool[D.type])
+		GlobalPool[D.type] = list()
 
-	AM.Destroy()
-	AM.ResetVars()
+	GlobalPool[D.type] += D
 
+	D.Destroy()
+	D.ResetVars()
 
+/proc/IsPooled(var/datum/D)
+	if(isnull(GlobalPool[D.type]) || length(GlobalPool[D.type]) == 0)
+		return 0
+	return 1
 
-/atom/movable/proc/ResetVars(var/list/exlude = list())
+/datum/proc/Prepare(args)
+	if(islist(args))
+		New(arglist(args))
+	else
+		New(args)
+
+/atom/movable/Prepare(args)
+	if(islist(args))
+		loc = args[1]
+		loc = args
+	..()
+
+/datum/proc/ResetVars(var/list/exlude = list())
 	var/list/excluded = list("animate_movement", "loc", "locs", "parent_type", "vars", "verbs", "type") + exlude
 
 	for(var/V in vars)
@@ -90,4 +102,8 @@ var/global/list/GlobalPool = list()
 
 		vars[V] = initial(vars[V])
 
+/atom/movable/ResetVars()
+	..()
 	vars["loc"] = null
+
+#undef ATOM_POOL_COUNT
