@@ -881,12 +881,6 @@ About the new airlock wires panel:
 	adjustBruteLoss(crush_damage)
 	SetStunned(5)
 	SetWeakened(5)
-	var/obj/effect/stop/S
-	S = new /obj/effect/stop
-	S.victim = src
-	S.loc = loc
-	spawn(20)
-		qdel(S)
 	var/turf/T = get_turf(src)
 	T.add_blood(src)
 
