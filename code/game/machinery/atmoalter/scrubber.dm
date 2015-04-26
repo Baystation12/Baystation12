@@ -103,6 +103,7 @@
 	data["rate"] = round(volume_rate)
 	data["minrate"] = round(minrate)
 	data["maxrate"] = round(maxrate)
+	data["powerDraw"] = round(last_power_draw)
 	data["cellCharge"] = cell ? cell.charge : 0
 	data["cellMaxCharge"] = cell ? cell.maxcharge : 1
 	data["on"] = on ? 1 : 0

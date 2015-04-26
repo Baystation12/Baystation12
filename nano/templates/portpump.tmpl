@@ -19,6 +19,15 @@
 
 <div class="item">
 	<div class="itemLabel">
+		Load:
+	</div>
+	<div class="itemContent">
+		{{:data.powerDraw}} W
+	</div>
+</div>
+
+<div class="item">
+	<div class="itemLabel">
 		Cell Charge:
 	</div>
 	<div class="itemContent">
@@ -54,7 +63,7 @@
 <h3>Power Regulator Status</h3>
 <div class="item">
 	<div class="itemLabel">
-		Volume Rate:
+		Target Pressure:
 	</div>
 	<div class="itemContent">
 		{{:helper.displayBar(data.targetpressure, data.minpressure, data.maxpressure)}}
@@ -63,7 +72,7 @@
 			{{:helper.link('-', null, {'pressure_adj' : -100}, (data.targetpressure > data.minpressure) ? null : 'disabled')}}
 			{{:helper.link('-', null, {'pressure_adj' : -10}, (data.targetpressure > data.minpressure) ? null : 'disabled')}}
 			{{:helper.link('-', null, {'pressure_adj' : -1}, (data.targetpressure > data.minpressure) ? null : 'disabled')}}
-			<div style="float: left; width: 80px; text-align: center;">&nbsp;{{:data.targetpressure}} L/s&nbsp;</div>
+			<div style="float: left; width: 80px; text-align: center;">&nbsp;{{:data.targetpressure}} kPa&nbsp;</div>
 			{{:helper.link('+', null, {'pressure_adj' : 1}, (data.targetpressure < data.maxpressure) ? null : 'disabled')}}
 			{{:helper.link('+', null, {'pressure_adj' : 10}, (data.targetpressure < data.maxpressure) ? null : 'disabled')}}
 			{{:helper.link('+', null, {'pressure_adj' : 100}, (data.targetpressure < data.maxpressure) ? null : 'disabled')}}

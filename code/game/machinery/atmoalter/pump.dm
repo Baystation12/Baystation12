@@ -7,7 +7,7 @@
 
 	var/on = 0
 	var/direction_out = 0 //0 = siphoning, 1 = releasing
-	var/target_pressure = 100
+	var/target_pressure = ONE_ATMOSPHERE
 
 	var/pressuremin = 0
 	var/pressuremax = 10 * ONE_ATMOSPHERE
@@ -127,6 +127,7 @@
 	data["pump_dir"] = direction_out
 	data["minpressure"] = round(pressuremin)
 	data["maxpressure"] = round(pressuremax)
+	data["powerDraw"] = round(last_power_draw)
 	data["cellCharge"] = cell ? cell.charge : 0
 	data["cellMaxCharge"] = cell ? cell.maxcharge : 1
 	data["on"] = on ? 1 : 0
@@ -137,7 +138,7 @@
 
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
-		ui = new(user, src, ui_key, "portpump.tmpl", "Portable Pump", 480, 400, state = physical_state)
+		ui = new(user, src, ui_key, "portpump.tmpl", "Portable Pump", 480, 410, state = physical_state)
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)
