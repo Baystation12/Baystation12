@@ -213,13 +213,6 @@ datum
 			required_catalysts = list("phoron" = 5)
 			result_amount = 2
 
-		virus_food
-			name = "Virus Food"
-			id = "virusfood"
-			result = "virusfood"
-			required_reagents = list("water" = 1, "milk" = 1)
-			result_amount = 5
-
 		leporazine
 			name = "Leporazine"
 			id = "leporazine"
@@ -538,8 +531,8 @@ datum
 			name = "Virus Food"
 			id = "virusfood"
 			result = "virusfood"
-			required_reagents = list("water" = 5, "milk" = 5, "oxygen" = 5)
-			result_amount = 15
+			required_reagents = list("water" = 1, "milk" = 1, "oxygen" = 1)
+			result_amount = 3
 /*
 		mix_virus
 			name = "Mix Virus"
@@ -1629,7 +1622,9 @@ datum
 			required_reagents = list("egg" = 3, "flour" = 10)
 			result_amount = 1
 			on_reaction(var/datum/reagents/holder, var/created_volume)
-				new /obj/item/weapon/reagent_containers/food/snacks/dough(get_turf(holder.my_atom))
+				var/turf/T = get_turf(holder.my_atom)
+				for(var/i = 1 to created_volume)
+					new /obj/item/weapon/reagent_containers/food/snacks/dough(T)
 				return
 
 		syntiflesh
@@ -1639,8 +1634,9 @@ datum
 			required_reagents = list("blood" = 5, "clonexadone" = 1)
 			result_amount = 1
 			on_reaction(var/datum/reagents/holder, var/created_volume)
-				var/location = get_turf(holder.my_atom)
-				new /obj/item/weapon/reagent_containers/food/snacks/meat/syntiflesh(location)
+				var/turf/T = get_turf(holder.my_atom)
+				for(var/i = 1 to created_volume)
+					new /obj/item/weapon/reagent_containers/food/snacks/meat/syntiflesh(T)
 				return
 
 		hot_ramen

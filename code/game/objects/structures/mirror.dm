@@ -80,11 +80,11 @@
 				var/mob/living/carbon/human/vox/vox = new(get_turf(src),"Vox")
 				vox.gender = user.gender
 				raiders.equip(vox)
+				new /obj/item/organ/stack/vox(vox)
 				if(user.mind)
 					user.mind.transfer_to(vox)
 				spawn(1)
-					var/newname = input(vox,"Enter a name, or leave blank for the default name.", "Name change","") as text
-					newname = sanitize(newname)
+					var/newname = sanitizeSafe(input(vox,"Enter a name, or leave blank for the default name.", "Name change","") as text, MAX_NAME_LEN)
 					if(!newname || newname == "")
 						var/datum/language/L = all_languages[vox.species.default_language]
 						newname = L.get_random_name()

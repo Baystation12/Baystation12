@@ -168,6 +168,10 @@
 
 /datum/species/proc/get_random_name(var/gender)
 	var/datum/language/species_language = all_languages[language]
+	if(!species_language)
+		species_language = all_languages[default_language]
+	if(!species_language)
+		return "unknown"
 	return species_language.get_random_name(gender)
 
 /datum/species/proc/create_organs(var/mob/living/carbon/human/H) //Handles creation of mob organs.

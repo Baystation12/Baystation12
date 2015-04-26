@@ -39,6 +39,7 @@
 	var/maxbodytemp = 350
 	var/heat_damage_per_tick = 3	//amount of damage applied if animal's body temperature is higher than maxbodytemp
 	var/cold_damage_per_tick = 2	//same as heat_damage_per_tick, only if the bodytemperature it's lower than minbodytemp
+	var/fire_alert = 0
 
 	//Atmos effect - Yes, you can make creatures that require phoron or co2 to survive. N2O is a trace gas and handled separately, hence why it isn't here. It'd be hard to add it. Hard and me don't mix (Yes, yes make all the dick jokes you want with that.) - Errorage
 	var/min_oxy = 5
@@ -78,6 +79,7 @@
 	return
 
 /mob/living/simple_animal/Life()
+	..()
 
 	//Health
 	if(stat == DEAD)
@@ -191,9 +193,13 @@
 
 	//Atmos effect
 	if(bodytemperature < minbodytemp)
+		fire_alert = 2
 		adjustBruteLoss(cold_damage_per_tick)
 	else if(bodytemperature > maxbodytemp)
+		fire_alert = 1
 		adjustBruteLoss(heat_damage_per_tick)
+	else
+		fire_alert = 0
 
 	if(!atmos_suitable)
 		adjustBruteLoss(unsuitable_atoms_damage)
@@ -313,10 +319,10 @@
 	if(statpanel("Status") && show_stat_health)
 		stat(null, "Health: [round((health / maxHealth) * 100)]%")
 
-/mob/living/simple_animal/death()
+/mob/living/simple_animal/death(gibbed, deathmessage="")
 	icon_state = icon_dead
 	density = 0
-	return ..(deathmessage = "no message")
+	return ..()
 
 /mob/living/simple_animal/ex_act(severity)
 	if(!blinded)
@@ -350,7 +356,7 @@
 		var/obj/machinery/bot/B = target_mob
 		if(B.health > 0)
 			return (0)
-	return (1)
+	return 1
 
 //Call when target overlay should be added/removed
 /mob/living/simple_animal/update_targeted()

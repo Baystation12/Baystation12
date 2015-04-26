@@ -10,6 +10,7 @@
 	siemens_coefficient = 0.7
 	sprite_sheets_refit = null
 	sprite_sheets_obj = null
+	wizard_garb = 1
 
 /obj/item/clothing/suit/space/void/wizard
 	icon_state = "rig-wiz"
@@ -23,3 +24,4 @@
 	siemens_coefficient = 0.7
 	sprite_sheets_refit = null
 	sprite_sheets_obj = null
+	wizard_garb = 1

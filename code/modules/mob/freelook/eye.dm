@@ -12,6 +12,7 @@
 	var/sprint = 10
 	var/cooldown = 0
 	var/acceleration = 1
+	var/owner_follows_eye = 0
 
 	see_in_dark = 7
 	status_flags = GODMODE
@@ -35,12 +36,14 @@ mob/eye/Del()
 		ghost_darkness_images -= ghostimage
 		ghost_sightless_images -= ghostimage
 		del(ghostimage)
-		ghostimage = null;
+		ghostimage = null
 		updateallghostimages()
 	..()
 
 // Movement code. Returns 0 to stop air movement from moving it.
-/mob/eye/Move()
+/mob/eye/Move(n, direct)
+	if(owner == src)
+		EyeMove(n, direct)
 	return 0
 
 /mob/eye/examinate()
@@ -60,14 +63,34 @@ mob/eye/Del()
 /mob/eye/proc/setLoc(var/T)
 	if(owner)
 		T = get_turf(T)
-		loc = T
+		if(T != loc)
+			loc = T
 
-		if(owner.client)
-			owner.client.eye = src
+			if(owner.client)
+				owner.client.eye = src
 
-		visualnet.visibility(src)
-		return 1
+			if(owner_follows_eye)
+				visualnet.updateVisibility(owner, 0)
+				owner.loc = loc
+				visualnet.updateVisibility(owner, 0)
+
+			visualnet.visibility(src)
+			return 1
 	return 0
+
+/mob/eye/proc/getLoc()
+	if(owner)
+		if(!isturf(owner.loc) || !owner.client)
+			return
+		return loc
+/mob
+	var/mob/eye/eyeobj
+
+/mob/proc/EyeMove(n, direct)
+	if(!eyeobj)
+		return
+
+	return eyeobj.EyeMove(n, direct)
 
 /mob/eye/EyeMove(n, direct)
 	var/initial = initial(sprint)
@@ -86,18 +109,3 @@ mob/eye/Del()
 		sprint = min(sprint + 0.5, max_sprint)
 	else
 		sprint = initial
-
-/mob/eye/proc/getLoc()
-	if(owner)
-		if(!isturf(owner.loc) || !owner.client)
-			return
-		return loc
-
-/mob
-	var/mob/eye/eyeobj
-
-/mob/proc/EyeMove(n, direct)
-	if(!eyeobj)
-		return
-
-	return eyeobj.EyeMove(n, direct)

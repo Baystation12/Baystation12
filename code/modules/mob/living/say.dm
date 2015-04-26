@@ -80,7 +80,10 @@ proc/get_radio_key_from_channel(var/channel)
 		if(dongle.translate_binary) return 1
 
 /mob/living/proc/get_default_language()
-	return null
+	return default_language
+
+/mob/living/proc/is_muzzled()
+	return 0
 
 /mob/living/proc/handle_speech_problems(var/message, var/verb)
 	var/list/returns[3]
@@ -133,6 +136,10 @@ proc/get_radio_key_from_channel(var/channel)
 	if(stat)
 		if(stat == 2)
 			return say_dead(message)
+		return
+
+	if(is_muzzled())
+		src << "<span class='danger'>You're muzzled and cannot speak!</span>"
 		return
 
 	var/message_mode = parse_message_mode(message, "headset")

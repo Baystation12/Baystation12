@@ -195,7 +195,7 @@
 		else
 			I.lower_aim()
 			return
-		if(m_intent == "run" && T.client.target_can_move == 1 && T.client.target_can_run == 0)
+		if(iscarbon(src) && m_intent == "run" && T.client.target_can_move == 1 && T.client.target_can_run == 0)
 			src << "<span class='danger'>Your move intent is now set to walk, as your targeter permits it.</span>"  //Self explanitory.
 			set_m_intent("walk")
 
@@ -236,7 +236,7 @@
 	if(!I.aim_targets.len)
 		del(I.aim_targets)
 	var/mob/living/T = I.loc //Remove the targeting icons
-	if(T && ismob(T) && !I.aim_targets)
+	if(T && ismob(T) && !I.aim_targets && T.client)
 		T.client.remove_gun_icons()
 	if(!targeted_by.len)
 		del target_locked //Remove the overlay

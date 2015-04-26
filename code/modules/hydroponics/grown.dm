@@ -13,7 +13,8 @@
 /obj/item/weapon/reagent_containers/food/snacks/grown/New(newloc,planttype)
 
 	..()
-
+	if(!dried_type)
+		dried_type = type
 	src.pixel_x = rand(-5.0, 5)
 	src.pixel_y = rand(-5.0, 5)
 
@@ -354,9 +355,8 @@
 		seed.do_sting(H,src,pick("r_hand","l_hand"))
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/dropped(mob/user)
-	if(!..() || !seed)
-		return
-	if(seed.get_trait(TRAIT_BIOLUM))
+	..()
+	if(seed && seed.get_trait(TRAIT_BIOLUM))
 		user.SetLuminosity(user.luminosity - seed.get_trait(TRAIT_BIOLUM))
 		SetLuminosity(seed.get_trait(TRAIT_BIOLUM))
 

@@ -246,3 +246,6 @@ var/list/accessible_z_levels = list("1" = 5, "3" = 10, "4" = 15, "5" = 10, "6" =
 				if ((A && A.loc))
 					A.loc.Entered(A)
 	return
+
+/turf/space/ChangeTurf(var/turf/N, var/tell_universe=1, var/force_lighting_update = 0)
+	return ..(N, tell_universe, 1)

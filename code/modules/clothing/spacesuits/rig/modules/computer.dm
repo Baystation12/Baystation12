@@ -105,7 +105,14 @@
 
 	// Okay, it wasn't a terminal being touched, check for all the simple insertions.
 	if(input_device.type in list(/obj/item/device/paicard, /obj/item/device/mmi, /obj/item/device/mmi/digital/posibrain))
-		integrate_ai(input_device,user)
+		if(integrated_ai)
+			integrated_ai.attackby(input_device,user)
+			// If the transfer was successful, we can clear out our vars.
+			if(integrated_ai.loc != src)
+				integrated_ai = null
+				eject_ai()
+		else
+			integrate_ai(input_device,user)
 		return 1
 
 	return 0

@@ -28,8 +28,19 @@
 	faction = "cult"
 	status_flags = CANPUSH
 
+/mob/living/simple_animal/shade/cultify()
+	return
+
 /mob/living/simple_animal/shade/Life()
 	..()
+	OnDeathInLife()
+
+/mob/living/simple_animal/shade/attackby(var/obj/item/O as obj, var/mob/user as mob)  //Marker -Agouri
+	if(istype(O, /obj/item/device/soulstone))
+		O.transfer_soul("SHADE", src, user)
+		return
+
+/mob/living/simple_animal/shade/proc/OnDeathInLife()
 	if(stat == 2)
 		new /obj/item/weapon/ectoplasm (src.loc)
 		for(var/mob/M in viewers(src, null))
@@ -38,10 +49,3 @@
 				ghostize()
 		del src
 		return
-
-
-/mob/living/simple_animal/shade/attackby(var/obj/item/O as obj, var/mob/user as mob)  //Marker -Agouri
-	if(istype(O, /obj/item/device/soulstone))
-		O.transfer_soul("SHADE", src, user)
-		return
-	return ..()

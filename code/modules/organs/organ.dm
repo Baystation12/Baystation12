@@ -3,7 +3,7 @@ var/list/organ_cache = list()
 /obj/item/organ
 	name = "organ"
 	icon = 'icons/obj/surgery.dmi'
-
+	var/dead_icon
 	var/mob/living/carbon/human/owner = null
 	var/status = 0
 	var/vital //Lose a vital limb, die immediately.
@@ -50,11 +50,12 @@ var/list/organ_cache = list()
 			holder.internal_organs |= src
 
 /obj/item/organ/proc/die()
-	name = "dead [initial(name)]"
-	health = 0
+	if(status & ORGAN_ROBOT)
+		return
+	damage = max_damage
 	processing_objects -= src
-	//TODO: Grey out the icon state.
-	//TODO: Inject an organ with peridaxon to make it alive again.
+	if(dead_icon)
+		icon_state = dead_icon
 
 /obj/item/organ/process()
 
@@ -75,10 +76,10 @@ var/list/organ_cache = list()
 		if(B && prob(40))
 			reagents.remove_reagent("blood",0.1)
 			blood_splatter(src,B,1)
-
-		health -= rand(1,3)
-		if(health <= 0)
+		damage += rand(1,3)
+		if(damage >= max_damage)
 			die()
+
 	else if(owner.bodytemperature >= 170)	//cryo stops germs from moving and doing their bad stuffs
 		//** Handle antibiotics and curing infections
 		handle_antibiotics()
@@ -145,7 +146,7 @@ var/list/organ_cache = list()
 	return damage >= min_bruised_damage
 
 /obj/item/organ/proc/is_broken()
-	return (damage >= min_broken_damage || (status & ORGAN_CUT_AWAY) || ((status & ORGAN_BROKEN) && !(status & ORGAN_SPLINTED)))
+	return (damage >= min_broken_damage || (status & ORGAN_CUT_AWAY) || (status & ORGAN_BROKEN))
 
 //Germs
 /obj/item/organ/proc/handle_antibiotics()
@@ -179,9 +180,10 @@ var/list/organ_cache = list()
 	else
 		src.damage += amount
 
-	var/obj/item/organ/external/parent = owner.get_organ(parent_organ)
-	if (!silent)
-		owner.custom_pain("Something inside your [parent.name] hurts a lot.", 1)
+	if(owner && parent_organ)
+		var/obj/item/organ/external/parent = owner.get_organ(parent_organ)
+		if(parent && !silent)
+			owner.custom_pain("Something inside your [parent.name] hurts a lot.", 1)
 
 /obj/item/organ/proc/robotize() //Being used to make robutt hearts, etc
 	robotic = 2
@@ -241,7 +243,7 @@ var/list/organ_cache = list()
 	var/obj/item/organ/external/affected = owner.get_organ(parent_organ)
 	if(affected) affected.internal_organs -= src
 
-	loc = owner.loc
+	loc = get_turf(owner)
 	processing_objects |= src
 	rejecting = null
 	var/datum/reagent/blood/organ_blood = locate(/datum/reagent/blood) in reagents.reagent_list
@@ -254,6 +256,8 @@ var/list/organ_cache = list()
 			owner.attack_log += "\[[time_stamp()]\]<font color='orange'> had a vital organ ([src]) removed by [user.name] ([user.ckey]) (INTENT: [uppertext(user.a_intent)])</font>"
 			msg_admin_attack("[user.name] ([user.ckey]) removed a vital organ ([src]) from [owner.name] ([owner.ckey]) (INTENT: [uppertext(user.a_intent)]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
 		owner.death()
+
+	owner = null
 
 /obj/item/organ/proc/replaced(var/mob/living/carbon/human/target,var/obj/item/organ/external/affected)
 
@@ -271,13 +275,13 @@ var/list/organ_cache = list()
 		transplant_data["blood_DNA"] =  transplant_blood.data["blood_DNA"]
 
 	owner = target
+	loc = owner
 	processing_objects -= src
 	target.internal_organs |= src
 	affected.internal_organs |= src
 	target.internal_organs_by_name[organ_tag] = src
-	status |= ORGAN_CUT_AWAY
-
-	del(src)
+	if(robotic)
+		status |= ORGAN_ROBOT
 
 /obj/item/organ/eyes/replaced(var/mob/living/carbon/human/target)
 
@@ -286,7 +290,7 @@ var/list/organ_cache = list()
 		target.r_eyes = eye_colour[1]
 		target.g_eyes = eye_colour[2]
 		target.b_eyes = eye_colour[3]
-		target.update_body()
+		target.update_eyes()
 	..()
 
 /obj/item/organ/proc/bitten(mob/user)
@@ -297,7 +301,6 @@ var/list/organ_cache = list()
 	user << "\blue You take an experimental bite out of \the [src]."
 	var/datum/reagent/blood/B = locate(/datum/reagent/blood) in reagents.reagent_list
 	blood_splatter(src,B,1)
-
 
 	user.drop_from_inventory(src)
 	var/obj/item/weapon/reagent_containers/food/snacks/organ/O = new(get_turf(src))

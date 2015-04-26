@@ -191,7 +191,7 @@
 	src.modules += R
 
 	var/obj/item/stack/sheet/plasteel/cyborg/S = new /obj/item/stack/sheet/plasteel/cyborg(src)
-	S.synths = list(metal)
+	S.synths = list(plasteel)
 	src.modules += S
 
 	var/obj/item/stack/sheet/glass/reinforced/cyborg/RG = new /obj/item/stack/sheet/glass/reinforced/cyborg(src)
@@ -314,8 +314,13 @@
 /obj/item/weapon/robot_module/butler/New()
 	..()
 	src.modules += new /obj/item/device/flash(src)
-	src.modules += new /obj/item/weapon/reagent_containers/food/drinks/cans/beer(src)
-	src.modules += new /obj/item/weapon/reagent_containers/food/condiment/enzyme(src)
+	src.modules += new /obj/item/weapon/gripper/service(src)
+	src.modules += new /obj/item/weapon/reagent_containers/glass/bucket(src)
+	src.modules += new /obj/item/weapon/minihoe(src)
+	src.modules += new /obj/item/weapon/hatchet(src)
+	src.modules += new /obj/item/device/analyzer/plant_analyzer(src)
+	src.modules += new /obj/item/weapon/storage/bag/plants(src)
+	src.modules += new /obj/item/weapon/robot_harvester(src)
 
 	var/obj/item/weapon/rsf/M = new /obj/item/weapon/rsf(src)
 	M.stored_matter = 30
@@ -358,6 +363,7 @@
 	src.modules += new /obj/item/weapon/pen/robopen(src)
 	src.modules += new /obj/item/weapon/form_printer(src)
 	src.modules += new /obj/item/weapon/gripper/paperwork(src)
+	src.modules += new /obj/item/weapon/hand_labeler(src)
 	src.emag = new /obj/item/weapon/stamp/denied(src)
 
 /obj/item/weapon/robot_module/clerical/add_languages(var/mob/living/silicon/robot/R)
@@ -393,6 +399,38 @@
 	src.modules += new /obj/item/weapon/mining_scanner(src)
 	src.modules += new /obj/item/weapon/crowbar(src)
 	src.emag = new /obj/item/weapon/pickaxe/plasmacutter(src)
+	return
+
+/obj/item/weapon/robot_module/research
+	name = "research module"
+
+/obj/item/weapon/robot_module/research/New()
+	..()
+	src.modules += new /obj/item/device/flash(src)
+	src.modules += new /obj/item/weapon/portable_destructive_analyzer(src)
+	src.modules += new /obj/item/weapon/gripper/research(src)
+	src.modules += new /obj/item/weapon/gripper/no_use/loader(src)
+	src.modules += new /obj/item/device/robotanalyzer(src)
+	src.modules += new /obj/item/weapon/card/robot(src)
+	src.modules += new /obj/item/weapon/wrench(src)
+	src.modules += new /obj/item/weapon/screwdriver(src)
+	src.modules += new /obj/item/weapon/crowbar(src)
+	src.modules += new /obj/item/weapon/scalpel(src)
+	src.modules += new /obj/item/weapon/circular_saw(src)
+	src.modules += new /obj/item/weapon/extinguisher/mini(src)
+	src.modules += new /obj/item/weapon/reagent_containers/syringe(src)
+	src.modules += new /obj/item/weapon/reagent_containers/glass/beaker/large(src)
+	src.emag = new /obj/item/weapon/hand_tele(src)
+
+	var/datum/matter_synth/nanite = new /datum/matter_synth/nanite(10000)
+	synths += nanite
+
+	var/obj/item/stack/nanopaste/N = new /obj/item/stack/nanopaste(src)
+	N.uses_charge = 1
+	N.charge_costs = list(1000)
+	N.synths = list(nanite)
+	src.modules += N
+
 	return
 
 /obj/item/weapon/robot_module/syndicate
@@ -446,7 +484,7 @@
 	src.modules += new /obj/item/device/multitool(src)
 	src.modules += new /obj/item/device/lightreplacer(src)
 	src.modules += new /obj/item/weapon/gripper(src)
-	src.modules += new /obj/item/weapon/reagent_containers/spray/cleaner/drone(src)
+	src.modules += new /obj/item/weapon/soap(src)
 	src.emag = new /obj/item/weapon/pickaxe/plasmacutter(src)
 	src.emag.name = "Plasma Cutter"
 
@@ -504,16 +542,19 @@
 	P.synths = list(plastic)
 	src.modules += P
 
+/obj/item/weapon/robot_module/drone/construction
+	name = "construction drone module"
+
+/obj/item/weapon/robot_module/drone/construction/New()
+	..()
+	src.modules += new /obj/item/weapon/rcd/borg(src)
+
 /obj/item/weapon/robot_module/drone/add_languages(var/mob/living/silicon/robot/R)
 	return	//not much ROM to spare in that tiny microprocessor!
 
 /obj/item/weapon/robot_module/drone/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
-	var/obj/item/weapon/reagent_containers/spray/cleaner/C = locate() in src.modules
-	C.reagents.add_reagent("cleaner", 3 * amount)
-
 	var/obj/item/device/lightreplacer/LR = locate() in src.modules
 	LR.Charge(R, amount)
-
 	..()
 	return
 
@@ -521,7 +562,5 @@
 /obj/item/proc/is_robot_module()
 	if (!istype(src.loc, /mob/living/silicon/robot))
 		return 0
-
 	var/mob/living/silicon/robot/R = src.loc
-
 	return (src in R.module.modules)

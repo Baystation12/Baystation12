@@ -250,7 +250,7 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 
 	if(href_list["sendAnnouncement"])
 		if(!announcementConsole)	return
-		announcement.Announce(message)
+		announcement.Announce(message, msg_sanitized = 1)
 		reset_announce()
 		screen = 0
 

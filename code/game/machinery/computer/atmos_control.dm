@@ -76,7 +76,7 @@
 			var/obj/machinery/alarm/alarm = locate(href_list["alarm"]) in (monitored_alarms ? monitored_alarms : machines)
 			if(alarm)
 				var/datum/topic_state/TS = generate_state(alarm)
-				alarm.ui_interact(usr, master_ui = ui_ref, custom_state = TS)
+				alarm.ui_interact(usr, master_ui = ui_ref, state = TS)
 		return 1
 
 /obj/machinery/computer/atmoscontrol/proc/generate_state(var/alarm)
@@ -86,7 +86,6 @@
 	return state
 
 /datum/topic_state/air_alarm
-	flags = NANO_IGNORE_DISTANCE
 	var/obj/machinery/computer/atmoscontrol/atmos_control = null
 	var/obj/machinery/alarm/air_alarm	= null
 

@@ -214,7 +214,7 @@
 		usr << "<span class='notice'>\The [src] has to be secured first!</span>"
 		return STATUS_CLOSE
 
-	return STATUS_INTERACTIVE
+	return ..()
 
 
 /obj/machinery/porta_turret/Topic(href, href_list, var/nowindow = 0)
@@ -858,8 +858,7 @@
 				return
 
 	if(istype(I, /obj/item/weapon/pen))	//you can rename turrets like bots!
-		var/t = input(user, "Enter new turret name", name, finish_name) as text
-		t = sanitize(t)
+		var/t = sanitizeSafe(input(user, "Enter new turret name", name, finish_name) as text, MAX_NAME_LEN)
 		if(!t)
 			return
 		if(!in_range(src, usr) && loc != usr)

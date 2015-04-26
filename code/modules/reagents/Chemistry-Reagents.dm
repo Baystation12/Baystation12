@@ -156,6 +156,8 @@ datum
 				else if(istype(self.data["donor"], /mob/living/carbon/alien))
 					var/obj/effect/decal/cleanable/blood/B = blood_splatter(T,self,1)
 					if(B) B.blood_DNA["UNKNOWN DNA STRUCTURE"] = "X*"
+				if(volume >= 5 && !istype(T.loc, /area/chapel)) //blood desanctifies non-chapel tiles
+					T.holy = 0
 				return
 
 /* Must check the transfering of reagents and their data first. They all can point to one disease datum.
@@ -287,6 +289,12 @@ datum
 					if(M.mind && cult.is_antagonist(M.mind) && prob(10))
 						cult.remove_antagonist(M.mind)
 				holder.remove_reagent(src.id, 10 * REAGENTS_METABOLISM) //high metabolism to prevent extended uncult rolls.
+				return
+
+			reaction_turf(var/turf/T, var/volume)
+				src = null
+				if(volume >= 5)
+					T.holy = 1
 				return
 
 		lube

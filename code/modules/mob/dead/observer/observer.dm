@@ -29,6 +29,7 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 	var/image/ghostimage = null //this mobs ghost image, for deleting and stuff
 	var/ghostvision = 1 //is the ghost able to see things humans can't?
 	var/seedarkness = 1
+	incorporeal_move = 1
 
 /mob/dead/observer/New(mob/body)
 	sight |= SEE_TURFS | SEE_MOBS | SEE_OBJS | SEE_SELF
@@ -193,29 +194,6 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		ghost.timeofdeath = world.time // Because the living mob won't have a time of death and we want the respawn timer to work properly.
 		announce_ghost_joinleave(ghost)
 
-
-/mob/dead/observer/Move(NewLoc, direct)
-	following = null
-	set_dir(direct)
-	if(NewLoc)
-		loc = NewLoc
-		for(var/obj/effect/step_trigger/S in NewLoc)
-			S.Crossed(src)
-
-		return
-	loc = get_turf(src) //Get out of closets and such as a ghost
-	if((direct & NORTH) && y < world.maxy)
-		y++
-	else if((direct & SOUTH) && y > 1)
-		y--
-	if((direct & EAST) && x < world.maxx)
-		x++
-	else if((direct & WEST) && x > 1)
-		x--
-
-	for(var/obj/effect/step_trigger/S in locate(x, y, z))	//<-- this is dumb
-		S.Crossed(src)
-
 /mob/dead/observer/can_use_hands()	return 0
 /mob/dead/observer/is_active()		return 0
 
@@ -316,11 +294,23 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	if(!thearea)	return
 
 	var/list/L = list()
-	for(var/turf/T in get_area_turfs(thearea.type))
-		L+=T
+	var/holyblock = 0
+
+	if(usr.invisibility <= SEE_INVISIBLE_LIVING || (usr.mind in cult.current_antagonists))
+		for(var/turf/T in get_area_turfs(thearea.type))
+			if(!T.holy)
+				L+=T
+			else
+				holyblock = 1
+	else
+		for(var/turf/T in get_area_turfs(thearea.type))
+			L+=T
 
 	if(!L || !L.len)
-		usr << "No area available."
+		if(holyblock)
+			usr << "<span class='warning'>This area has been entirely made into sacred grounds, you cannot enter it while you are in this plane of existence!</span>"
+		else
+			usr << "No area available."
 
 	usr.loc = pick(L)
 	following = null
@@ -336,7 +326,14 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 // This is the ghost's follow verb with an argument
 /mob/dead/observer/proc/ManualFollow(var/atom/movable/target)
-	if(target && target != src)
+	if(!target)
+		return
+
+	var/turf/targetloc = get_turf(target)
+	if(check_holy(targetloc))
+		usr << "<span class='warning'>You cannot follow a mob standing on holy grounds!</span>"
+		return
+	if(target != src)
 		if(following && following == target)
 			return
 		following = target
@@ -350,6 +347,15 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 				if(loc != T)
 					loc = T
 				sleep(15)
+
+/mob/proc/check_holy(var/turf/T)
+	return 0
+
+/mob/dead/observer/check_holy(var/turf/T)
+	if(check_rights(R_ADMIN|R_FUN, 0, src))
+		return 0
+
+	return (T && T.holy) && (invisibility <= SEE_INVISIBLE_LIVING || (mind in cult.current_antagonists))
 
 /mob/dead/observer/verb/jumptomob(target in getmobs()) //Moves the ghost instead of just changing the ghosts's eye -Nodrak
 	set category = "Ghost"
@@ -392,6 +398,9 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 /mob/dead/observer/add_memory()
 	set hidden = 1
 	src << "\red You are dead! You have no mind to store memory!"
+
+/mob/dead/observer/Post_Incorpmove()
+	following = null
 
 /mob/dead/observer/verb/analyze_air()
 	set name = "Analyze Air"
@@ -472,6 +481,14 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	dat += data_core.get_manifest()
 
 	src << browse(dat, "window=manifest;size=370x420;can_close=1")
+
+//This is called when a ghost is drag clicked to something.
+/mob/dead/observer/MouseDrop(atom/over)
+	if (isobserver(usr) && usr.client && usr.client.holder && isliving(over))
+		if (usr.client.holder.cmd_ghost_drag(src,over))
+			return
+
+	return ..()
 
 //Used for drawing on walls with blood puddles as a spooky ghost.
 /mob/dead/verb/bloody_doodle()

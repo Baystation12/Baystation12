@@ -1,5 +1,8 @@
 var/list/sacrificed = list()
 
+/obj/effect/rune/cultify()
+	return
+
 /obj/effect/rune
 
 /////////////////////////////////////////FIRST RUNE
@@ -99,6 +102,7 @@ var/list/sacrificed = list()
 /////////////////////////////////////////THIRD RUNE
 
 		convert()
+			var/mob/attacker = usr
 			var/mob/living/carbon/target = null
 			for(var/mob/living/carbon/M in src.loc)
 				if(!iscultist(M) && M.stat < DEAD && !(M in converting))
@@ -123,10 +127,10 @@ var/list/sacrificed = list()
 					if(target.getFireLoss() < 100)
 						target.hallucination = min(target.hallucination, 500)
 					return 0
-
 				target.take_overall_damage(0, rand(5, 20)) // You dirty resister cannot handle the damage to your mind. Easily. - even cultists who accept right away should experience some effects
 				// Resist messages go!
 				if(initial_message) //don't do this stuff right away, only if they resist or hesitate.
+					admin_attack_log(attacker, target, "Used a convert rune", "Was subjected to a convert rune", "used a convert rune on")
 					switch(target.getFireLoss())
 						if(0 to 25)
 							target << "<span class='danger'>Your blood boils as you force yourself to resist the corruption invading every corner of your mind.</span>"
@@ -176,12 +180,16 @@ var/list/sacrificed = list()
 /////////////////////////////////////////FOURTH RUNE
 
 		tearreality()
-			var/cultist_count = 0
+			if(!cult.allow_narsie)
+				return fizzle()
+
+			var/list/cultists = new()
 			for(var/mob/M in range(1,src))
 				if(iscultist(M) && !M.stat)
 					M.say("Tok-lyr rqa'nap g[pick("'","`")]lt-ulotf!")
-					cultist_count += 1
-			if(cultist_count >= 9)
+					cultists += 1
+			if(cultists.len >= 9)
+				log_and_message_admins_many(cultists, "summoned Nar-sie.")
 				new /obj/machinery/singularity/narsie/large(src.loc)
 				return
 			else
@@ -190,6 +198,7 @@ var/list/sacrificed = list()
 /////////////////////////////////////////FIFTH RUNE
 
 		emp(var/U,var/range_red) //range_red - var which determines by which number to reduce the default emp range, U is the source loc, needed because of talisman emps which are held in hand at the moment of using and that apparently messes things up -- Urist
+			log_and_message_admins("activated an EMP rune.")
 			if(istype(src,/obj/effect/rune))
 				usr.say("Ta'gh fara[pick("'","`")]qha fel d'amar det!")
 			else
@@ -211,6 +220,7 @@ var/list/sacrificed = list()
 				if(R.word1==cultwords["travel"] && R.word2==cultwords["blood"] && R.word3==cultwords["self"])
 					for(var/mob/living/carbon/D in R.loc)
 						if(D.stat!=2)
+							admin_attack_log(usr, D, "Used a blood drain rune.", "Was victim of a blood drain rune.", "used a blood drain rune on")
 							var/bdrain = rand(1,25)
 							D << "\red You feel weakened."
 							D.take_overall_damage(bdrain, 0)
@@ -443,6 +453,7 @@ var/list/sacrificed = list()
 				D.real_name += " "
 				D.real_name += pick("Apparition", "Aptrgangr", "Dis", "Draugr", "Dybbuk", "Eidolon", "Fetch", "Fylgja", "Ghast", "Ghost", "Gjenganger", "Haint", "Phantom", "Phantasm", "Poltergeist", "Revenant", "Shade", "Shadow", "Soul", "Spectre", "Spirit", "Spook", "Visitant", "Wraith")
 
+			log_and_message_admins("used a manifest rune.")
 			var/mob/living/user = usr
 			while(this_rune && user && user.stat==CONSCIOUS && user.client && user.loc==this_rune.loc)
 				user.take_organ_damage(1, 0)
@@ -657,6 +668,7 @@ var/list/sacrificed = list()
 								usr << "\red The victim is still alive, you will need more cultists chanting for the sacrifice to succeed."
 							else
 								if(prob(40))
+
 									usr << "\red The Geometer of blood accepts this sacrifice."
 									cult.grant_runeword(usr)
 								else
@@ -853,7 +865,7 @@ var/list/sacrificed = list()
 
 		deafen()
 			if(istype(src,/obj/effect/rune))
-				var/affected = 0
+				var/list/affected = new()
 				for(var/mob/living/carbon/C in range(7,src))
 					if (iscultist(C))
 						continue
@@ -862,17 +874,18 @@ var/list/sacrificed = list()
 						continue
 					C.ear_deaf += 50
 					C.show_message("\red The world around you suddenly becomes quiet.", 3)
-					affected++
+					affected += C
 					if(prob(1))
 						C.sdisabilities |= DEAF
-				if(affected)
+				if(affected.len)
 					usr.say("Sti[pick("'","`")] kaliedir!")
 					usr << "\red The world becomes quiet as the deafening rune dissipates into fine dust."
+					admin_attacker_log_many_victims(usr, affected, "Used a deafen rune.", "Was victim of a deafen rune.", "used a deafen rune on")
 					del(src)
 				else
 					return fizzle()
 			else
-				var/affected = 0
+				var/list/affected = new()
 				for(var/mob/living/carbon/C in range(7,usr))
 					if (iscultist(C))
 						continue
@@ -882,10 +895,11 @@ var/list/sacrificed = list()
 					C.ear_deaf += 30
 					//talismans is weaker.
 					C.show_message("\red The world around you suddenly becomes quiet.", 3)
-					affected++
-				if(affected)
+					affected += C
+				if(affected.len)
 					usr.whisper("Sti[pick("'","`")] kaliedir!")
 					usr << "\red Your talisman turns into gray dust, deafening everyone around."
+					admin_attacker_log_many_victims(usr, affected, "Used a deafen rune.", "Was victim of a deafen rune.", "used a deafen rune on")
 					for (var/mob/V in orange(1,src))
 						if(!(iscultist(V)))
 							V.show_message("\red Dust flows from [usr]'s hands for a moment, and the world suddenly becomes quiet..", 3)
@@ -893,7 +907,7 @@ var/list/sacrificed = list()
 
 		blind()
 			if(istype(src,/obj/effect/rune))
-				var/affected = 0
+				var/list/affected = new()
 				for(var/mob/living/carbon/C in viewers(src))
 					if (iscultist(C))
 						continue
@@ -907,15 +921,16 @@ var/list/sacrificed = list()
 						if(prob(10))
 							C.sdisabilities |= BLIND
 					C.show_message("\red Suddenly you see red flash that blinds you.", 3)
-					affected++
-				if(affected)
+					affected += C
+				if(affected.len)
 					usr.say("Sti[pick("'","`")] kaliesin!")
 					usr << "\red The rune flashes, blinding those who not follow the Nar-Sie, and dissipates into fine dust."
+					admin_attacker_log_many_victims(usr, affected, "Used a blindness rune.", "Was victim of a blindness rune.", "used a blindness rune on")
 					del(src)
 				else
 					return fizzle()
 			else
-				var/affected = 0
+				var/list/affected = new()
 				for(var/mob/living/carbon/C in view(2,usr))
 					if (iscultist(C))
 						continue
@@ -925,11 +940,12 @@ var/list/sacrificed = list()
 					C.eye_blurry += 30
 					C.eye_blind += 10
 					//talismans is weaker.
-					affected++
+					affected += C
 					C.show_message("\red You feel a sharp pain in your eyes, and the world disappears into darkness..", 3)
-				if(affected)
+				if(affected.len)
 					usr.whisper("Sti[pick("'","`")] kaliesin!")
 					usr << "\red Your talisman turns into gray dust, blinding those who not follow the Nar-Sie."
+					admin_attacker_log_many_victims(usr, affected, "Used a blindness rune.", "Was victim of a blindness rune.", "used a blindness rune on")
 			return
 
 
@@ -940,12 +956,13 @@ var/list/sacrificed = list()
 				if (istype(H.current,/mob/living/carbon))
 					cultists+=H.current
 */
-			var/culcount = 0 //also, wording for it is old wording for obscure rune, which is now hide-see-blood.
+			var/list/cultists = new //also, wording for it is old wording for obscure rune, which is now hide-see-blood.
+			var/list/victims = new
 //			var/list/cultboil = list(cultists-usr) //and for this words are destroy-see-blood.
 			for(var/mob/living/carbon/C in orange(1,src))
 				if(iscultist(C) && !C.stat)
-					culcount++
-			if(culcount>=3)
+					cultists+=C
+			if(cultists.len>=3)
 				for(var/mob/living/carbon/M in viewers(usr))
 					if(iscultist(M))
 						continue
@@ -954,6 +971,7 @@ var/list/sacrificed = list()
 						continue
 					M.take_overall_damage(51,51)
 					M << "\red Your blood boils!"
+					victims += M
 					if(prob(5))
 						spawn(5)
 							M.gib()
@@ -964,6 +982,8 @@ var/list/sacrificed = list()
 					if(iscultist(C) && !C.stat)
 						C.say("Dedo ol[pick("'","`")]btoh!")
 						C.take_overall_damage(15, 0)
+				admin_attacker_log_many_victims(usr, victims, "Used a blood boil rune.", "Was the victim of a blood boil rune.", "used a blood boil rune on")
+				log_and_message_admins_many(cultists - usr, "assisted activating a blood boil rune.")
 				del(src)
 			else
 				return fizzle()
@@ -1003,7 +1023,6 @@ var/list/sacrificed = list()
 			if(istype(src,/obj/effect/rune))   ///When invoked as rune, flash and stun everyone around.
 				usr.say("Fuu ma[pick("'","`")]jin!")
 				for(var/mob/living/L in viewers(src))
-
 					if(iscarbon(L))
 						var/mob/living/carbon/C = L
 						flick("e_flash", C.flash)
@@ -1012,11 +1031,13 @@ var/list/sacrificed = list()
 						C.Weaken(1)
 						C.Stun(1)
 						C.show_message("\red The rune explodes in a bright flash.", 3)
+						admin_attack_log(usr, C, "Used a stun rune.", "Was victim of a stun rune.", "used a stun rune on")
 
 					else if(issilicon(L))
 						var/mob/living/silicon/S = L
 						S.Weaken(5)
 						S.show_message("\red BZZZT... The rune has exploded in a bright flash.", 3)
+						admin_attack_log(usr, S, "Used a stun rune.", "Was victim of a stun rune.", "used a stun rune on")
 				del(src)
 			else                        ///When invoked as talisman, stun and mute the target mob.
 				usr.say("Dream sign ''Evil sealing talisman'[pick("'","`")]!")
@@ -1030,7 +1051,7 @@ var/list/sacrificed = list()
 
 					if(issilicon(T))
 						T.Weaken(15)
-
+						admin_attack_log(usr, T, "Used a stun rune.", "Was victim of a stun rune.", "used a stun rune on")
 					else if(iscarbon(T))
 						var/mob/living/carbon/C = T
 						flick("e_flash", C.flash)
@@ -1038,6 +1059,7 @@ var/list/sacrificed = list()
 							C.silent += 15
 						C.Weaken(25)
 						C.Stun(25)
+						admin_attack_log(usr, C, "Used a stun rune.", "Was victim of a stun rune.", "used a stun rune on")
 				return
 
 /////////////////////////////////////////TWENTY-FIFTH RUNE

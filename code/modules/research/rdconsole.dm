@@ -256,7 +256,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 								screen = 1.0
 								return
 							if(linked_destroy.loaded_item.reliability >= linked_destroy.min_reliability)
-								var/list/temp_tech = linked_destroy.ConvertReqString2List(linked_destroy.loaded_item.origin_tech)
+								var/list/temp_tech = ConvertReqString2List(linked_destroy.loaded_item.origin_tech)
 								for(var/T in temp_tech)
 									files.UpdateTech(T, temp_tech[T])
 							if(linked_destroy.loaded_item.reliability < 100 && linked_destroy.loaded_item.crit_fail)
@@ -753,7 +753,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			dat += "Name: [linked_destroy.loaded_item.name]<BR>"
 			dat += "Origin Tech:"
 			dat += "<UL>"
-			var/list/temp_tech = linked_destroy.ConvertReqString2List(linked_destroy.loaded_item.origin_tech)
+			var/list/temp_tech = ConvertReqString2List(linked_destroy.loaded_item.origin_tech)
 			for(var/T in temp_tech)
 				dat += "<LI>[CallTechName(T)] [temp_tech[T]]"
 				for(var/datum/tech/F in files.known_tech)

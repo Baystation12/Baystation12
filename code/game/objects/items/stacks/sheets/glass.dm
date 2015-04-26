@@ -161,6 +161,7 @@
 	singular_name = "reinforced glass sheet"
 	icon_state = "sheet-rglass"
 	charge_costs = list(500, 1000)
+	stacktype = /obj/item/stack/sheet/glass/reinforced
 
 /*
  * Phoron Glass sheets

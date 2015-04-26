@@ -79,6 +79,14 @@
 			xeno_spawn += loc
 			del(src)
 
+		if("endgame_exit")
+			endgame_safespawns += loc
+			del(src)
+
+		if("bluespacerift")
+			endgame_exits += loc
+			del(src)
+
 	landmarks_list += src
 	return 1
 
