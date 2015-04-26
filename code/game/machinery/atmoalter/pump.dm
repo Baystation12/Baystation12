@@ -127,6 +127,8 @@
 	data["pump_dir"] = direction_out
 	data["minpressure"] = round(pressuremin)
 	data["maxpressure"] = round(pressuremax)
+	data["cellCharge"] = cell ? cell.charge : 0
+	data["cellMaxCharge"] = cell ? cell.maxcharge : 1
 	data["on"] = on ? 1 : 0
 
 	data["hasHoldingTank"] = holding ? 1 : 0

@@ -1,4 +1,4 @@
-<h3>Scrubber Status</h3>
+<h3>Pump Status</h3>
 <div class="item">
 	<div class="itemLabel">
 		Tank Pressure:
@@ -14,6 +14,15 @@
 	</div>
 	<div class="itemContent">
 		{{:data.portConnected ? '<span class="good">Connected</span>' : '<span class="average">Disconnected</span>'}}
+	</div>
+</div>
+
+<div class="item">
+	<div class="itemLabel">
+		Cell Charge:
+	</div>
+	<div class="itemContent">
+		{{:helper.displayBar(data.cellCharge, 0, data.cellMaxCharge)}}
 	</div>
 </div>
 
@@ -54,7 +63,7 @@
 			{{:helper.link('-', null, {'pressure_adj' : -100}, (data.targetpressure > data.minpressure) ? null : 'disabled')}}
 			{{:helper.link('-', null, {'pressure_adj' : -10}, (data.targetpressure > data.minpressure) ? null : 'disabled')}}
 			{{:helper.link('-', null, {'pressure_adj' : -1}, (data.targetpressure > data.minpressure) ? null : 'disabled')}}
-			<div style="float: left; width: 80px; text-align: center;">&nbsp;{{:data.targetpressure}} kPa&nbsp;</div>
+			<div style="float: left; width: 80px; text-align: center;">&nbsp;{{:data.targetpressure}} L/s&nbsp;</div>
 			{{:helper.link('+', null, {'pressure_adj' : 1}, (data.targetpressure < data.maxpressure) ? null : 'disabled')}}
 			{{:helper.link('+', null, {'pressure_adj' : 10}, (data.targetpressure < data.maxpressure) ? null : 'disabled')}}
 			{{:helper.link('+', null, {'pressure_adj' : 100}, (data.targetpressure < data.maxpressure) ? null : 'disabled')}}
@@ -68,7 +77,7 @@
 		Power Switch:
 	</div>
 	<div class="itemContent">
-		{{:helper.link('On', 'unlocked', {'power' : 1}, data.on ? 'selected' : null)}}{{:helper.link('Off', 'locked', {'power' : 1}, data.on ? null : 'selected')}}
+		{{:helper.link('On', 'unlocked', {'power' : 1}, data.on ? 'selected' : null)}} {{:helper.link('Off', 'locked', {'power' : 1}, data.on ? null : 'selected')}}
 	</div>
 </div>
 
@@ -77,6 +86,6 @@
 		Pump Direction:
 	</div>
 	<div class="itemContent">
-		{{:helper.link('Out', 'arrowreturn-1-e', {'direction' : 1}, data.pump_dir ? 'selected' : null)}}{{:helper.link('In', 'arrowreturn-1-w', {'direction' : 1}, data.pump_dir ? null : 'selected')}}
+		{{:helper.link('Out', 'arrowreturn-1-e', {'direction' : 1}, data.pump_dir ? 'selected' : null)}} {{:helper.link('In', 'arrowreturn-1-w', {'direction' : 1}, data.pump_dir ? null : 'selected')}}
 	</div>
 </div>

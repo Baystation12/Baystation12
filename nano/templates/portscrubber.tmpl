@@ -17,6 +17,15 @@
 	</div>
 </div>
 
+<div class="item">
+	<div class="itemLabel">
+		Cell Charge:
+	</div>
+	<div class="itemContent">
+		{{:helper.displayBar(data.cellCharge, 0, data.cellMaxCharge)}}
+	</div>
+</div>
+
 <h3>Holding Tank Status</h3>
 {{if data.hasHoldingTank}}
 	<div class="item">
@@ -54,7 +63,7 @@
 			{{:helper.link('-', null, {'volume_adj' : -100}, (data.rate > data.minrate) ? null : 'disabled')}}
 			{{:helper.link('-', null, {'volume_adj' : -10}, (data.rate > data.minrate) ? null : 'disabled')}}
 			{{:helper.link('-', null, {'volume_adj' : -1}, (data.rate > data.minrate) ? null : 'disabled')}}
-			<div style="float: left; width: 80px; text-align: center;">&nbsp;{{:data.rate}} kPa&nbsp;</div>
+			<div style="float: left; width: 80px; text-align: center;">&nbsp;{{:data.rate}} L/s&nbsp;</div>
 			{{:helper.link('+', null, {'volume_adj' : 1}, (data.rate < data.maxrate) ? null : 'disabled')}}
 			{{:helper.link('+', null, {'volume_adj' : 10}, (data.rate < data.maxrate) ? null : 'disabled')}}
 			{{:helper.link('+', null, {'volume_adj' : 100}, (data.rate < data.maxrate) ? null : 'disabled')}}
@@ -68,6 +77,6 @@
 		Power Switch:
 	</div>
 	<div class="itemContent">
-		{{:helper.link('On', 'unlocked', {'power' : 1}, data.on ? 'selected' : null)}}{{:helper.link('Off', 'locked', {'power' : 1}, data.on ? null : 'selected')}}
+		{{:helper.link('On', 'unlocked', {'power' : 1}, data.on ? 'selected' : null)}} {{:helper.link('Off', 'locked', {'power' : 1}, data.on ? null : 'selected')}}
 	</div>
 </div>
