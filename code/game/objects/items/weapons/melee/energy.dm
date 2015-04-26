@@ -193,16 +193,16 @@
 
 	processing_objects |= src
 
-/obj/item/weapon/melee/energy/blade/Del()
+/obj/item/weapon/melee/energy/blade/Destroy()
 	processing_objects -= src
 	..()
 
 /obj/item/weapon/melee/energy/blade/attack_self(mob/user as mob)
 	user.drop_from_inventory(src)
-	spawn(1) if(src) del(src)
+	spawn(1) if(src) qdel(src)
 
 /obj/item/weapon/melee/energy/blade/dropped()
-	spawn(1) if(src) del(src)
+	spawn(1) if(src) qdel(src)
 
 /obj/item/weapon/melee/energy/blade/process()
 	if(!creator || loc != creator || (creator.l_hand != src && creator.r_hand != src))
@@ -217,4 +217,4 @@
 			host.pinned -= src
 			host.embedded -= src
 			host.drop_from_inventory(src)
-		spawn(1) if(src) del(src)
+		spawn(1) if(src) qdel(src)

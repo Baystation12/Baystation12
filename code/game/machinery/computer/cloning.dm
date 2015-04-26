@@ -221,7 +221,7 @@
 		src.active_record = locate(href_list["view_rec"])
 		if(istype(src.active_record,/datum/dna2/record))
 			if ((isnull(src.active_record.ckey)))
-				del(src.active_record)
+				qdel(src.active_record)
 				src.temp = "ERROR: Record Corrupt"
 			else
 				src.menu = 3
@@ -241,7 +241,7 @@
 			if (istype(C)||istype(C, /obj/item/device/pda))
 				if(src.check_access(C))
 					src.records.Remove(src.active_record)
-					del(src.active_record)
+					qdel(src.active_record)
 					src.temp = "Record deleted."
 					src.menu = 2
 				else
@@ -313,7 +313,7 @@
 				else if(pod.growclone(C))
 					temp = "Initiating cloning cycle..."
 					records.Remove(C)
-					del(C)
+					qdel(C)
 					menu = 1
 				else
 
@@ -323,7 +323,7 @@
 					if(answer != "No" && pod.growclone(C))
 						temp = "Initiating cloning cycle..."
 						records.Remove(C)
-						del(C)
+						qdel(C)
 						menu = 1
 					else
 						temp = "Initiating cloning cycle...<br>Error: Post-initialisation failed. Cloning cycle aborted."

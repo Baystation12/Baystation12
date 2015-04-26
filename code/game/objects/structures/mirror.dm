@@ -91,5 +91,5 @@
 					vox.real_name = newname
 					vox.name = vox.real_name
 					raiders.update_access(vox)
-				del(user)
+				qdel(user)
 	..()

@@ -99,7 +99,7 @@ obj/machinery/atmospherics/mains_pipe
 		for(var/obj/machinery/atmospherics/pipe/mains_component/node in nodes)
 			node.disconnect()
 
-	Del()
+	Destroy()
 		disconnect()
 		..()
 
@@ -152,7 +152,7 @@ obj/machinery/atmospherics/mains_pipe/simple
 
 		else
 			if(!nodes[1]&&!nodes[2])
-				del(src) //TODO: silent deleting looks weird
+				qdel(src) //TODO: silent deleting looks weird
 			var/have_node1 = nodes[1]?1:0
 			var/have_node2 = nodes[2]?1:0
 			icon_state = "exposed[have_node1][have_node2][invisibility ? "-f" : "" ]"

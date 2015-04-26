@@ -19,11 +19,11 @@
 		if(istype(M, /mob/living/silicon/robot))
 			var/mob/living/silicon/robot/Robot = M
 			if(Robot.mmi)
-				del(Robot.mmi)
+				qdel(Robot.mmi)
 		else
 			for(var/obj/item/W in M)
 				if(istype(W, /obj/item/weapon/implant))	//TODO: Carn. give implants a dropped() or something
-					del(W)
+					qdel(W)
 					continue
 				M.drop_from_inventory(W)
 
@@ -90,7 +90,7 @@
 
 			new_mob << "<span class='warning'>Your form morphs into that of \a [lowertext(randomize)].</span>"
 
-			del(M)
+			qdel(M)
 			return
 		else
 			M << "<span class='warning'>Your form morphs into that of \a [lowertext(randomize)].</span>"

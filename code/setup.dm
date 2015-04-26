@@ -192,6 +192,7 @@
 #define NOBLOODY           512  // Used for items if they don't want to get a blood overlay.
 #define NODELAY            8192 // 1 second attack-by delay skipped (Can be used once every 0.2s). Most objects have a 1s attack-by delay, which doesn't require a flag.
 
+//Use these flags to indicate if an item obscures the specified slots from view, whereas body_parts_covered seems to be used to indicate what body parts the item protects.
 #define GLASSESCOVERSEYES 256
 #define    MASKCOVERSEYES 256 // Get rid of some of the other retardation in these flags.
 #define    HEADCOVERSEYES 256 // Feel free to reallocate these numbers for other purposes.
@@ -919,3 +920,32 @@ var/list/be_special_flags = list(
 #define STAGE_FOUR	7
 #define STAGE_FIVE	9
 #define STAGE_SUPER	11
+
+// Camera networks
+#define NETWORK_CRESCENT "Crescent"
+#define NETWORK_CIVILIAN_EAST "Civilian East"
+#define NETWORK_CIVILIAN_WEST "Civilian West"
+#define NETWORK_COMMAND "Command"
+#define NETWORK_ENGINE "Engine"
+#define NETWORK_ENGINEERING "Engineering"
+#define NETWORK_ENGINEERING_OUTPOST "Engineering Outpost"
+#define NETWORK_ERT "ERT"
+#define NETWORK_EXODUS "Exodus"
+#define NETWORK_MEDICAL "Medical"
+#define NETWORK_MINE "MINE"
+#define NETWORK_RESEARCH "Research"
+#define NETWORK_RESEARCH_OUTPOST "Research Outpost"
+#define NETWORK_PRISON "Prison"
+#define NETWORK_SECURITY "Security"
+#define NETWORK_TELECOM "Tcomsat"
+#define NETWORK_THUNDER "thunder"
+
+// Languages
+#define LANGUAGE_SOL_COMMON "Sol Common"
+#define LANGUAGE_UNATHI "Sinta'unathi"
+#define LANGUAGE_SIIK_MAAS "Siik'maas"
+#define LANGUAGE_SIIK_TAJR "Siik'tajr"
+#define LANGUAGE_SKRELLIAN "Skrellian"
+#define LANGUAGE_ROOTSPEAK "Rootspeak"
+#define LANGUAGE_TRADEBAND "Tradeband"
+#define LANGUAGE_GUTTER "Gutter"

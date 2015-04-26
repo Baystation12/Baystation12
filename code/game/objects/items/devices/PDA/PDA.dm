@@ -938,7 +938,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		j = prob(10)
 
 	if(j) //This kills the PDA
-		P.Del()
+		qdel(P)
 		if(message)
 			message += "It melts in a puddle of plastic."
 		else
@@ -1240,7 +1240,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 				if ( !(C:blood_DNA) )
 					user << "\blue No blood found on [C]"
 					if(C:blood_DNA)
-						del(C:blood_DNA)
+						qdel(C:blood_DNA)
 				else
 					user << "\blue Blood found on [C]. Analysing..."
 					spawn(15)
@@ -1370,7 +1370,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		explosion(T, 0, 0, 1, rand(1,2))
 	return
 
-/obj/item/device/pda/Del()
+/obj/item/device/pda/Destroy()
 	PDAs -= src
 	if (src.id && prob(90)) //IDs are kept in 90% of the cases
 		src.id.loc = get_turf(src.loc)

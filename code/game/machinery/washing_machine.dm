@@ -50,7 +50,7 @@
 	for(var/obj/item/stack/sheet/hairlesshide/HH in contents)
 		var/obj/item/stack/sheet/wetleather/WL = new(src)
 		WL.amount = HH.amount
-		del(HH)
+		qdel(HH)
 
 	if( locate(/mob,contents) )
 		state = 7
@@ -91,7 +91,7 @@
 			var/obj/item/weapon/grab/G = W
 			if(ishuman(G.assailant) && iscorgi(G.affecting))
 				G.affecting.loc = src
-				del(G)
+				qdel(G)
 				state = 3
 		else
 			..()

@@ -81,10 +81,10 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 	real_name = name
 	..()
 
-/mob/dead/observer/Del()
+/mob/dead/observer/Destroy()
 	if (ghostimage)
 		ghost_darkness_images -= ghostimage
-		del(ghostimage)
+		qdel(ghostimage)
 		ghostimage = null
 		updateallghostimages()
 	..()
@@ -598,7 +598,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	for(var/image/I in client.images)
 		if(I.icon_state == icon)
 			iconRemoved = 1
-			del(I)
+			qdel(I)
 
 	if(!iconRemoved)
 		var/image/J = image('icons/mob/mob.dmi', loc = src, icon_state = icon)
