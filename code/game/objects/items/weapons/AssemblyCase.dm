@@ -65,7 +65,7 @@
 
 /obj/item/weapon/assemblycase/examine(mob/user)
 	..()
-	user << "A huge briefcase with inbuilt auto assembly system. [mach?"It designed for [src] parts.":"It program is brocken."] \The [src] [full?"full of useful parts.":"is empty."]"
+	user << "A huge briefcase with an inbuilt auto-assembly system. [mach?"It is designed for [src] parts.":"It's program is broken."] \The [src] [full?"is full of useful parts.":"is empty."]"
 
 
 /obj/item/weapon/assemblycase/empty
