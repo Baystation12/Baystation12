@@ -140,6 +140,7 @@
 			S.dry = 1
 			item_quants[S.name]--
 			S.name = "dried [S.name]"
+			S.color = "#AAAAAA"
 			S.loc = loc
 		else
 			var/D = S.dried_type

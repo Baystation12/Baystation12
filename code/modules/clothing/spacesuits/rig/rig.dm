@@ -631,8 +631,9 @@
 						use_obj.loc = src
 
 		else if (deploy_mode != ONLY_RETRACT)
-			if(check_slot && check_slot != use_obj)
-				H << "<span class='danger'>You are unable to deploy \the [piece] as \the [check_slot] [check_slot.gender == PLURAL ? "are" : "is"] in the way.</span>"
+			if(check_slot)
+				if(check_slot != use_obj)
+					H << "<span class='danger'>You are unable to deploy \the [piece] as \the [check_slot] [check_slot.gender == PLURAL ? "are" : "is"] in the way.</span>"
 				return
 			else
 				use_obj.loc = H

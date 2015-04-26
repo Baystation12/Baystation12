@@ -47,7 +47,7 @@
 /obj/item/weapon/gun/proc/PreFire(atom/A as mob|obj|turf|area, mob/living/user as mob|obj, params)
 	//Lets not spam it.
 	if(lock_time > world.time - 2) return
-	
+
 	user.set_dir(get_cardinal_dir(src, A))
 	if(isliving(A) && !(A in aim_targets))
 		Aim(A) 	//Clicked a mob, aim at them
@@ -58,7 +58,7 @@
 	if(isliving(M) && (M in view(user)) && !(M in aim_targets))
 		Aim(M) //Aha!  Aim at them!
 		return 1
-	
+
 	return 0
 
 //Aiming at the target mob.
@@ -83,12 +83,12 @@
 	if(src != M.equipped())
 		stop_aim()
 		return
-	
+
 	//reflex firing is disabled when help intent is set
 	if (M.a_intent == "help")
 		M << "\red You refrain from firing your [src] as your intent is set to help."
 		return
-	
+
 	M.last_move_intent = world.time
 	var/firing_check = can_hit(T,usr) //0 if it cannot hit them, 1 if it is capable of hitting, and 2 if a special check is preventing it from firing.
 	if(firing_check > 0)
@@ -194,7 +194,7 @@
 		else
 			I.lower_aim()
 			return
-		if(m_intent == "run" && T.client.target_can_move == 1 && T.client.target_can_run == 0)
+		if(iscarbon(src) && m_intent == "run" && T.client.target_can_move == 1 && T.client.target_can_run == 0)
 			src << "\red Your move intent is now set to walk, as your targeter permits it."  //Self explanitory.
 			set_m_intent("walk")
 

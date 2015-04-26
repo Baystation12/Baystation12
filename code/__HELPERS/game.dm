@@ -18,9 +18,9 @@
 
 /proc/get_area(O)
 	var/turf/loc = get_turf(O)
-	if(!loc)
-		return null
-	return loc.loc
+	if(loc)
+		var/area/res = loc.loc
+		.= res.master
 
 /proc/get_area_name(N) //get area by its name
 	for(var/area/A in world)
@@ -493,6 +493,6 @@ datum/projectile_data
 
 /proc/MinutesToTicks(var/minutes)
 	return SecondsToTicks(60 * minutes)
-	
+
 /proc/SecondsToTicks(var/seconds)
 	return seconds * 10
