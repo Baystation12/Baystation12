@@ -1006,6 +1006,7 @@
 #include "code\modules\genetics\side_effects.dm"
 #include "code\modules\holodeck\HolodeckControl.dm"
 #include "code\modules\holodeck\HolodeckObjects.dm"
+#include "code\modules\holodeck\HolodeckPrograms.dm"
 #include "code\modules\hydroponics\_hydro_setup.dm"
 #include "code\modules\hydroponics\grown.dm"
 #include "code\modules\hydroponics\grown_inedible.dm"
