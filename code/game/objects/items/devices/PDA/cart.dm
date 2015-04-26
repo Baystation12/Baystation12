@@ -115,7 +115,9 @@
 	spawn(5)
 		radio = new /obj/item/radio/integrated/signal(src)
 
-
+/obj/item/weapon/cartridge/signal/Destroy()
+	qdel(radio)
+	..()
 
 /obj/item/weapon/cartridge/quartermaster
 	name = "\improper Space Parts & Space Vendors cartridge"

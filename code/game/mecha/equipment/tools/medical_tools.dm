@@ -21,6 +21,10 @@
 		pr_mech_sleeper.set_delay(equip_cooldown)
 		return
 
+	Destroy()
+		qdel(pr_mech_sleeper)
+		..()
+
 	allow_drop()
 		return 0
 

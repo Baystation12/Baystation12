@@ -6,11 +6,12 @@
 	var/parts
 	var/list/climbers = list()
 
-/obj/structure/proc/destroy()
+/obj/structure/Destroy()
+	if(opacity)
+		UpdateAffectingLights()
 	if(parts)
 		new parts(loc)
-	density = 0
-	del(src)
+	..()
 
 /obj/structure/attack_hand(mob/user)
 	if(breakable)
@@ -31,10 +32,10 @@
 
 /obj/structure/blob_act()
 	if(prob(50))
-		del(src)
+		qdel(src)
 
 /obj/structure/meteorhit(obj/O as obj)
-	destroy(src)
+	qdel(src)
 
 /obj/structure/attack_tk()
 	return
@@ -42,24 +43,24 @@
 /obj/structure/ex_act(severity)
 	switch(severity)
 		if(1.0)
-			del(src)
+			qdel(src)
 			return
 		if(2.0)
 			if(prob(50))
-				del(src)
+				qdel(src)
 				return
 		if(3.0)
 			return
 
 /obj/structure/meteorhit(obj/O as obj)
-	del(src)
+	qdel(src)
 
 /obj/structure/New()
 	..()
 	if(climbable)
 		verbs += /obj/structure/proc/climb_on
 
-/obj/structure/Del()
+/obj/structure/Destroy()
 	..()
 
 /obj/structure/proc/climb_on()
@@ -193,5 +194,5 @@
 	if(!breakable || !damage || !wallbreaker)
 		return 0
 	visible_message("<span class='danger'>[user] [attack_verb] the [src] apart!</span>")
-	spawn(1) destroy()
+	spawn(1) qdel(src)
 	return 1

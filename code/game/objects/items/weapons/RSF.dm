@@ -28,7 +28,7 @@ RSF
 			user << "The RSF can't hold any more matter."
 			return
 
-		del(W)
+		qdel(W)
 
 		stored_matter += 10
 		playsound(src.loc, 'sound/machines/click.ogg', 10, 1)

@@ -41,11 +41,11 @@
 /obj/machinery/computer/ex_act(severity)
 	switch(severity)
 		if(1.0)
-			del(src)
+			qdel(src)
 			return
 		if(2.0)
 			if (prob(25))
-				del(src)
+				qdel(src)
 				return
 			if (prob(50))
 				for(var/x in verbs)
@@ -129,7 +129,7 @@
 				A.state = 4
 				A.icon_state = "4"
 			M.deconstruct(src)
-			del(src)
+			qdel(src)
 	else
 		src.attack_hand(user)
 	return

@@ -31,7 +31,7 @@
 	if(seed_name && plant_controller)
 		seed = plant_controller.seeds[seed_name]
 	if(!seed)
-		del(src)
+		qdel(src)
 	..()
 
 /datum/effect/effect/system/smoke_spread/chem/New()
@@ -204,7 +204,7 @@
 	if(passed_smoke)
 		smoke = passed_smoke
 	else
-		smoke = new(location)
+		smoke = PoolOrNew(/obj/effect/effect/smoke/chem, location)
 
 	if(chemholder.reagents.reagent_list.len)
 		chemholder.reagents.copy_to(smoke, chemholder.reagents.total_volume / dist, safety = 1)	//copy reagents to the smoke so mob/breathe() can handle inhaling the reagents
@@ -218,10 +218,10 @@
 	sleep(150+rand(0,20))	// turning it off before it is deleted results in cleaner
 	smoke.opacity = 0		// lighting and view range updates
 	fadeOut(smoke)
-	smoke.delete()
+	qdel(src)
 
 /datum/effect/effect/system/smoke_spread/chem/spores/spawnSmoke(var/turf/T, var/icon/I, var/dist = 1)
-	var/obj/effect/effect/smoke/chem/spores = new(location)
+	var/obj/effect/effect/smoke/chem/spores = PoolOrNew(/obj/effect/effect/smoke/chem, location)
 	spores.name = "cloud of [seed.seed_name] [seed.seed_noun]"
 	..(T, I, dist, spores)
 

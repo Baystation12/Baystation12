@@ -216,7 +216,7 @@
 
 			for(var/a=0, a<5, a++)
 				spawn(0)
-					var/obj/effect/effect/water/W = new /obj/effect/effect/water( get_turf(chassis) )
+					var/obj/effect/effect/water/W = PoolOrNew(/obj/effect/effect/water, get_turf(chassis))
 					var/turf/my_target = pick(the_targets)
 					var/datum/reagents/R = new/datum/reagents(5)
 					if(!W) return
@@ -236,7 +236,7 @@
 							W.reagents.reaction(atm)
 						if(W.loc == my_target) break
 						sleep(2)
-					W.delete()
+					qdel(W)
 			return 1
 
 	get_equip_info()
@@ -295,7 +295,7 @@
 					if(do_after_cooldown(target))
 						if(disabled) return
 						chassis.spark_system.start()
-						del(target)
+						qdel(target)
 						playsound(target, 'sound/items/Deconstruct.ogg', 50, 1)
 						chassis.use_power(energy_drain)
 			if(1)
@@ -418,7 +418,7 @@
 		do_after_cooldown()
 		src = null
 		spawn(rand(150,300))
-			del(P)
+			qdel(P)
 		return
 
 /obj/item/mecha_parts/mecha_equipment/gravcatapult
@@ -638,6 +638,11 @@
 		pr_repair_droid.set_delay(equip_cooldown)
 		return
 
+	Destroy()
+		qdel(pr_repair_droid)
+		pr_repair_droid = null
+		..()
+
 	attach(obj/mecha/M as obj)
 		..()
 		droid_overlay = new(src.icon, icon_state = "repair_droid")
@@ -726,6 +731,11 @@
 		pr_energy_relay = new /datum/global_iterator/mecha_energy_relay(list(src),0)
 		pr_energy_relay.set_delay(equip_cooldown)
 		return
+
+	Destroy()
+		qdel(pr_energy_relay)
+		pr_energy_relay = null
+		..()
 
 	detach()
 		pr_energy_relay.stop()
@@ -842,6 +852,11 @@
 		..()
 		init()
 		return
+
+	Destroy()
+		qdel(pr_mech_generator)
+		pr_mech_generator = null
+		..()
 
 	proc/init()
 		fuel = new /obj/item/stack/sheet/mineral/phoron(src)

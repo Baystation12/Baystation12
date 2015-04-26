@@ -58,7 +58,7 @@ client/verb/JoinResponseTeam()
 				L.name = "Commando"
 				return
 			create_response_team(L.loc, new_name)
-			del(L)
+			qdel(L)
 
 	else
 		usr << "You need to be an observer or new player to use this."

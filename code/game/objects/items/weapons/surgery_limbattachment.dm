@@ -65,7 +65,7 @@
 			H.update_body()
 			M.updatehealth()
 			M.UpdateDamageIcon()
-			del(src)
+			qdel(src)
 
 			return 1
 		return 0

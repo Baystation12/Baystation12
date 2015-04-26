@@ -16,16 +16,16 @@ datum/puddle/proc/process()
 		L.apply_calculated_effect()
 
 	if(liquid_objects.len == 0)
-		del(src)
+		qdel(src)
 
 datum/puddle/New()
 	..()
 	puddles += src
 
-datum/puddle/Del()
+datum/puddle/Destroy()
 	puddles -= src
 	for(var/obj/O in liquid_objects)
-		del(O)
+		qdel(O)
 	..()
 
 client/proc/splash()
@@ -63,11 +63,11 @@ obj/effect/liquid
 obj/effect/liquid/New()
 	..()
 	if( !isturf(loc) )
-		del(src)
+		qdel(src)
 
 	for( var/obj/effect/liquid/L in loc )
 		if(L != src)
-			del(L)
+			qdel(L)
 
 obj/effect/liquid/proc/spread()
 
@@ -124,14 +124,14 @@ obj/effect/liquid/proc/apply_calculated_effect()
 	volume += new_volume
 
 	if(volume < LIQUID_TRANSFER_THRESHOLD)
-		del(src)
+		qdel(src)
 	new_volume = 0
 	update_icon2()
 
 obj/effect/liquid/Move()
 	return 0
 
-obj/effect/liquid/Del()
+obj/effect/liquid/Destroy()
 	src.controller.liquid_objects.Remove(src)
 	..()
 
@@ -140,7 +140,7 @@ obj/effect/liquid/proc/update_icon2()
 
 	switch(volume)
 		if(0 to 0.1)
-			del(src)
+			qdel(src)
 		if(0.1 to 5)
 			icon_state = "1"
 		if(5 to 10)

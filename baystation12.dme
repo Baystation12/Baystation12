@@ -16,7 +16,7 @@
 #include "code\setup.dm"
 #include "code\stylesheet.dm"
 #include "code\world.dm"
-#include "code\__HELPERS\atom_pool.dm"
+#include "code\__HELPERS\datum_pool.dm"
 #include "code\__HELPERS\files.dm"
 #include "code\__HELPERS\game.dm"
 #include "code\__HELPERS\global_lists.dm"

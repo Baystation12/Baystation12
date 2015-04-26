@@ -47,6 +47,11 @@
 		dna.real_name = real_name
 	make_blood()
 
+/mob/living/carbon/human/Destroy()
+	for(var/organ in organs)
+		qdel(organ)
+	return ..()
+
 /mob/living/carbon/human/Stat()
 	..()
 	statpanel("Status")
@@ -65,7 +70,7 @@
 
 		if (internal)
 			if (!internal.air_contents)
-				del(internal)
+				qdel(internal)
 			else
 				stat("Internal Atmosphere Info", internal.name)
 				stat("Tank Pressure", internal.air_contents.return_pressure())
@@ -818,7 +823,7 @@
 	for(var/x in all_hairs)
 		var/datum/sprite_accessory/hair/H = new x // create new hair datum based on type x
 		hairs.Add(H.name) // add hair name to hairs
-		del(H) // delete the hair after it's all done
+		qdel(H) // delete the hair after it's all done
 
 	var/new_style = input("Please select hair style", "Character Generation",h_style)  as null|anything in hairs
 
@@ -833,7 +838,7 @@
 	for(var/x in all_fhairs)
 		var/datum/sprite_accessory/facial_hair/H = new x
 		fhairs.Add(H.name)
-		del(H)
+		qdel(H)
 
 	new_style = input("Please select facial style", "Character Generation",f_style)  as null|anything in fhairs
 
@@ -944,7 +949,7 @@
 				if(H.brainmob.real_name == src.real_name)
 					if(H.brainmob.mind)
 						H.brainmob.mind.transfer_to(src)
-						del(H)
+						qdel(H)
 
 	for (var/datum/disease/virus in viruses)
 		virus.cure()
@@ -1017,7 +1022,7 @@
 	.=..()
 	if(clean_feet && !shoes && istype(feet_blood_DNA, /list) && feet_blood_DNA.len)
 		feet_blood_color = null
-		del(feet_blood_DNA)
+		qdel(feet_blood_DNA)
 		update_inv_shoes(1)
 		return 1
 
@@ -1143,7 +1148,7 @@
 	if(client && client.screen)
 		client.screen.len = null
 		if(hud_used)
-			del(hud_used)
+			qdel(hud_used)
 		hud_used = new /datum/hud(src)
 
 	if(species)
