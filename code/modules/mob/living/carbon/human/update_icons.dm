@@ -482,11 +482,7 @@ var/global/list/damage_icon_parts = list()
 		overlays_standing[UNIFORM_LAYER]	= standing
 	else
 		overlays_standing[UNIFORM_LAYER]	= null
-		// This really, really seems like it should not be mixed in the middle of display code...
-		// Automatically drop anything in store / id / belt if you're not wearing a uniform.	//CHECK IF NECESARRY
-		for( var/obj/item/thing in list(r_store, l_store, wear_id, belt) )
-			if(thing)
-				remove_from_mob(thing)
+
 	if(update_icons)   update_icons()
 
 /mob/living/carbon/human/update_inv_wear_id(var/update_icons=1)

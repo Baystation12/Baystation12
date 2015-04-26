@@ -192,6 +192,7 @@
 #define NOBLOODY           512  // Used for items if they don't want to get a blood overlay.
 #define NODELAY            8192 // 1 second attack-by delay skipped (Can be used once every 0.2s). Most objects have a 1s attack-by delay, which doesn't require a flag.
 
+//Use these flags to indicate if an item obscures the specified slots from view, whereas body_parts_covered seems to be used to indicate what body parts the item protects.
 #define GLASSESCOVERSEYES 256
 #define    MASKCOVERSEYES 256 // Get rid of some of the other retardation in these flags.
 #define    HEADCOVERSEYES 256 // Feel free to reallocate these numbers for other purposes.

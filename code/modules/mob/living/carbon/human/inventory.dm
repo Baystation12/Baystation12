@@ -317,6 +317,48 @@ This saves us from having to call add_fingerprint() any time something is put in
 
 	return 1
 
+//Checks if a given slot can be accessed at this time, either to equip or unequip I
+/mob/living/carbon/human/slot_is_accessible(var/slot, var/obj/item/I, mob/user=null)
+	var/obj/item/covering = null
+	var/check_flags = 0
+	
+	switch(slot)
+		if(slot_wear_mask)
+			covering = src.head
+			check_flags = HEADCOVERSMOUTH
+		if(slot_glasses)
+			covering = src.head
+			check_flags = HEADCOVERSEYES
+		if(slot_gloves, slot_w_uniform)
+			covering = src.wear_suit
+	
+	if(covering)
+		if((covering.body_parts_covered & I.body_parts_covered) || (covering.flags & check_flags))
+			user << "<span class='warning'>\The [covering] is in the way.</span>"
+			return 0
+	return 1
+
+/mob/living/carbon/human/get_equipped_item(var/slot)
+	switch(slot)
+		if(slot_wear_suit) return wear_suit
+		if(slot_gloves) return gloves
+		if(slot_shoes) return shoes
+		if(slot_belt) return belt
+		if(slot_glasses) return glasses
+		if(slot_head) return head
+		if(slot_l_ear) return l_ear
+		if(slot_r_ear) return r_ear
+		if(slot_w_uniform) return w_uniform
+		if(slot_wear_id) return wear_id
+		if(slot_l_store) return l_store
+		if(slot_r_store) return r_store
+		if(slot_s_store) return s_store
+		if(slot_handcuffed) return handcuffed
+		if(slot_legcuffed) return legcuffed
+	return ..()
+
+///Bizarre equip effect system below
+
 /*
 	MouseDrop human inventory menu
 */
@@ -566,7 +608,7 @@ It can still be worn/put on as normal.
 	if ((source.restrained() || source.stat)) return //Source restrained or unconscious / dead
 
 	var/slot_to_process
-	var/strip_item //this will tell us which item we will be stripping - if any.
+	var/obj/item/strip_item //this will tell us which item we will be stripping - if any.
 
 	switch(place)	//here we go again...
 		if("mask")
@@ -748,17 +790,21 @@ It can still be worn/put on as normal.
 							target.internals.icon_state = "internal1"
 	if(slot_to_process)
 		if(strip_item) //Stripping an item from the mob
-			var/obj/item/W = strip_item
-			target.remove_from_mob(W)
-			W.add_fingerprint(source)
-			if(slot_to_process == slot_l_store) //pockets! Needs to process the other one too. Snowflake code, wooo! It's not like anyone will rewrite this anytime soon. If I'm wrong then... CONGRATULATIONS! ;)
-				if(target.r_store)
-					target.remove_from_mob(target.r_store) //At this stage l_store is already processed by the code above, we only need to process r_store.
-		else
-			if(item && target.has_organ_for_slot(slot_to_process)) //Placing an item on the mob
-				if(item.mob_can_equip(target, slot_to_process, 0))
-					source.remove_from_mob(item)
-					target.equip_to_slot_if_possible(item, slot_to_process, 0, 1, 1)
+			if(strip_item.mob_can_unequip(target, slot_to_process, 0))
+				target.drop_from_inventory(strip_item)
+				source.put_in_hands(strip_item)
+				strip_item.add_fingerprint(source)
+				if(slot_to_process == slot_l_store) //pockets! Needs to process the other one too. Snowflake code, wooo! It's not like anyone will rewrite this anytime soon. If I'm wrong then... CONGRATULATIONS! ;)
+					if(target.r_store)
+						target.drop_from_inventory(target.r_store) //At this stage l_store is already processed by the code above, we only need to process r_store.
+			else
+				source << "<span class='warning'>You fail to remove \the [strip_item] from [target]!</span>"
+		else if(item) 
+			if(target.has_organ_for_slot(slot_to_process) && item.mob_can_equip(target, slot_to_process, 0)) //Placing an item on the mob
+				source.drop_from_inventory(item)
+				target.equip_to_slot_if_possible(item, slot_to_process, 0, 1, 1)
+			else
+				source << "<span class='warning'>You fail to place \the [item] on [target]!</span>"
 
 	if(source && target)
 		if(source.machine == target)
