@@ -8,8 +8,8 @@
 	body_parts_covered = FACE|HEAD
 	w_class = 2
 	sprite_sheets = list(
-		"Tajara" = 'icons/mob/species/tajaran/helmet.dmi',
-		"Unathi" = 'icons/mob/species/unathi/helmet.dmi',
+		"Tajara" = 'icons/mob/species/tajaran/mask.dmi',
+		"Unathi" = 'icons/mob/species/unathi/mask.dmi',
 		)
 
 /obj/item/clothing/mask/balaclava/tactical
@@ -21,8 +21,8 @@
 	flags_inv = HIDEFACE
 	w_class = 2
 	sprite_sheets = list(
-		"Tajara" = 'icons/mob/species/tajaran/helmet.dmi',
-		"Unathi" = 'icons/mob/species/unathi/helmet.dmi',
+		"Tajara" = 'icons/mob/species/tajaran/mask.dmi',
+		"Unathi" = 'icons/mob/species/unathi/mask.dmi',
 		)
 
 /obj/item/clothing/mask/luchador
