@@ -102,8 +102,8 @@
 			bumpopen(M)
 		return
 
-	if(istype(AM, /obj/machinery/bot))
-		var/obj/machinery/bot/bot = AM
+	if(istype(AM, /mob/living/bot))
+		var/mob/living/bot/bot = AM
 		if(src.check_access(bot.botcard))
 			if(density)
 				open()

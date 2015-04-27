@@ -494,13 +494,52 @@
 		return check_anomalies ? TURRET_PRIORITY_TARGET	: TURRET_NOT_TARGET
 
 	if(ishuman(L))	//if the target is a human, analyze threat level
-		if(assess_perp(L, check_weapons, check_records, check_arrest) < 4)
+		if(assess_perp(L) < 4)
 			return TURRET_NOT_TARGET	//if threat level < 4, keep going
 
 	if(L.lying)		//if the perp is lying down, it's still a target but a less-important target
 		return lethal ? TURRET_SECONDARY_TARGET : TURRET_NOT_TARGET
 
 	return TURRET_PRIORITY_TARGET	//if the perp has passed all previous tests, congrats, it is now a "shoot-me!" nominee
+
+/obj/machinery/porta_turret/proc/assess_perp(var/mob/living/carbon/human/H)
+	if(!H || !istype(H))
+		return
+
+	if(emagged)
+		return 10
+
+	var/threatcount = 0
+	var/obj/item/weapon/card/id/id = GetIdCard(H) //Agent cards lower threatlevel.
+	if(id && istype(id, /obj/item/weapon/card/id/syndicate))
+		threatcount -= 2
+
+	if(check_weapons && !allowed(H))
+		if(istype(H.l_hand, /obj/item/weapon/gun) || istype(H.l_hand, /obj/item/weapon/melee))
+			threatcount += 4
+
+		if(istype(H.r_hand, /obj/item/weapon/gun) || istype(H.r_hand, /obj/item/weapon/melee))
+			threatcount += 4
+
+		if(istype(H.belt, /obj/item/weapon/gun) || istype(H.belt, /obj/item/weapon/melee))
+			threatcount += 2
+
+		if(H.species.name != "Human")
+			threatcount += 2
+
+	if(check_records || check_arrest)
+		var/perpname = H.name
+		if(id)
+			perpname = id.registered_name
+
+		var/datum/data/record/R = find_security_record("name", perpname)
+		if(check_records && !R)
+			threatcount += 4
+
+		if(check_arrest && R && (R.fields["criminal"] == "*Arrest*"))
+			threatcount += 4
+
+	return threatcount
 
 /obj/machinery/porta_turret/proc/tryToShootAt(var/list/mob/living/targets)
 	if(targets.len && last_target && (last_target in targets) && target(last_target))
@@ -549,12 +588,14 @@
 	update_icon()
 
 
+/*
 /obj/machinery/porta_turret/on_assess_perp(mob/living/carbon/human/perp)
 	if((check_access || attacked) && !allowed(perp))
 		//if the turret has been attacked or is angry, target all non-authorized personnel, see req_access
 		return 10
 
 	return ..()
+	*/
 
 
 /obj/machinery/porta_turret/proc/target(var/mob/living/target)
