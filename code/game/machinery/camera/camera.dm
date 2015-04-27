@@ -37,6 +37,7 @@
 	wires = new(src)
 	assembly = new(src)
 	assembly.state = 4
+	world_cameras += src
 
 	/* // Use this to look for cameras that have the same c_tag.
 	for(var/obj/machinery/camera/C in cameranet.cameras)
@@ -54,6 +55,7 @@
 	..()
 
 /obj/machinery/camera/Destroy()
+	world_cameras -= src
 	deactivate(null, 0) //kick anyone viewing out
 	if(assembly)
 		qdel(assembly)
