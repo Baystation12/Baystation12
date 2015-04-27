@@ -210,6 +210,7 @@
 
 	// sync the organ's damage with its wounds
 	src.update_damages()
+	owner.updatehealth() //droplimb will call updatehealth() again if it does end up being called
 
 	//If limb took enough damage, try to cut or tear it off
 	if(owner && loc == owner)
@@ -232,7 +233,6 @@
 					else
 						droplimb(0,DROPLIMB_BLUNT)
 
-	owner.updatehealth()
 	return update_icon()
 
 /obj/item/organ/external/proc/heal_damage(brute, burn, internal = 0, robo_repair = 0)
@@ -689,9 +689,9 @@ Note that amputating the affected organ does in fact remove the infection from t
 				if(src && istype(loc,/turf))
 					throw_at(get_edge_target_turf(src,pick(alldirs)),rand(1,3),30)
 				dir = 2
-			return
 		if(DROPLIMB_BURN)
 			new /obj/effect/decal/cleanable/ash(get_turf(victim))
+			qdel(src)
 		if(DROPLIMB_BLUNT)
 			var/obj/effect/decal/cleanable/blood/gibs/gore = new owner.species.single_gib_type(get_turf(victim))
 			if(victim.species.flesh_color)
@@ -705,8 +705,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 				I.removed()
 				if(istype(loc,/turf))
 					I.throw_at(get_edge_target_turf(src,pick(alldirs)),rand(1,3),30)
-
-	qdel(src)
+			qdel(src)
 
 /****************************************************
 			   HELPERS
