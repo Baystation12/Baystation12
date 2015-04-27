@@ -173,6 +173,7 @@
 	next_fire_time = world.time + shoot_time
 
 	//actually attempt to shoot
+	var/turf/targloc = get_turf(target) //cache this in case target gets deleted during shooting, e.g. if it was a securitron that got destroyed.
 	for(var/i in 1 to _burst)
 		var/obj/projectile = consume_next_projectile(user)
 		if(!projectile)
@@ -190,7 +191,12 @@
 			handle_post_fire(user, target, pointblank, reflex)
 			update_icon()
 		
-		sleep(_burst_delay)
+		if(i < _burst)
+			sleep(_burst_delay)
+		
+		if(!target)
+			target = targloc
+			pointblank = 0
 	
 	update_held_icon()
 	
@@ -247,7 +253,7 @@
 
 /obj/item/weapon/gun/proc/process_point_blank(obj/projectile, mob/user, atom/target)
 	var/obj/item/projectile/P = projectile
-	if(!istype(projectile))
+	if(!istype(P))
 		return //default behaviour only applies to true projectiles
 
 	//default point blank multiplier
@@ -268,7 +274,7 @@
 
 /obj/item/weapon/gun/proc/process_accuracy(obj/projectile, mob/user, atom/target, acc_mod, dispersion)
 	var/obj/item/projectile/P = projectile
-	if(!istype(projectile))
+	if(!istype(P))
 		return //default behaviour only applies to true projectiles
 	
 	//Accuracy modifiers
@@ -285,7 +291,7 @@
 //does the actual launching of the projectile
 /obj/item/weapon/gun/proc/process_projectile(obj/projectile, mob/user, atom/target, var/target_zone, var/params=null)
 	var/obj/item/projectile/P = projectile
-	if(!istype(projectile))
+	if(!istype(P))
 		return 0 //default behaviour only applies to true projectiles
 	
 	if(params)
