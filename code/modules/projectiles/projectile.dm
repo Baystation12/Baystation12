@@ -33,6 +33,7 @@
 	var/p_x = 16
 	var/p_y = 16 // the pixel location of the tile that the player clicked. Default is the center
 
+	var/accuracy = 0
 	var/damage = 10
 	var/damage_type = BRUTE //BRUTE, BURN, TOX, OXY, CLONE are the only things that should be in here
 	var/nodamage = 0 //Determines if the projectile will skip any damage inflictions
@@ -132,6 +133,11 @@
 	shot_from = launcher
 	silenced = launcher.silenced
 
+	if (istype(shot_from, /obj/item/weapon/gun))
+		var/obj/item/weapon/gun/daddy = shot_from
+		accuracy = daddy.accuracy - daddy.cumulative_accuracy_penalty
+		//user << "Accuracy: [accuracy]"
+
 	spawn()
 		process()
 
@@ -155,7 +161,7 @@
 	//accuracy bonus from aiming
 	if (istype(shot_from, /obj/item/weapon/gun))
 		var/obj/item/weapon/gun/daddy = shot_from
-		miss_modifier -= round(15*daddy.accuracy)
+		miss_modifier -= round(15*accuracy)
 
 		//If you aim at someone beforehead, it'll hit more often.
 		//Kinda balanced by fact you need like 2 seconds to aim

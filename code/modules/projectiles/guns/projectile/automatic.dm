@@ -1,4 +1,4 @@
-/obj/item/weapon/gun/projectile/automatic //Hopefully someone will find a way to make these fire in bursts or something. --Superxpdude
+/obj/item/weapon/gun/projectile/automatic
 	name = "submachine gun"
 	desc = "A lightweight, fast firing gun. Uses 9mm rounds."
 	icon_state = "saber"	//ugly
@@ -11,6 +11,7 @@
 	ammo_type = /obj/item/ammo_casing/c9mm
 	multi_aim = 1
 	fire_delay = 0
+	burst_toggleable = 1
 
 /obj/item/weapon/gun/projectile/automatic/mini_uzi
 	name = "\improper Uzi"
@@ -71,6 +72,7 @@
 	icon_state = "wt550"
 	item_state = "wt550"
 	w_class = 3
+	burst_size = 2
 	caliber = "9mm"
 	origin_tech = "combat=5;materials=2"
 	slot_flags = SLOT_BELT
@@ -94,6 +96,8 @@
 	item_state = "z8carbine"
 	w_class = 4
 	force = 10
+	burst_delay = 3
+	burst_size = 2
 	caliber = "a556"
 	origin_tech = "combat=8;materials=3"
 	ammo_type = "/obj/item/ammo_casing/a556"
@@ -103,7 +107,7 @@
 	magazine_type = /obj/item/ammo_magazine/a556
 	auto_eject = 1
 	auto_eject_sound = 'sound/weapons/smg_empty_alarm.ogg'
-	
+
 	var/use_launcher = 0
 	var/obj/item/weapon/gun/launcher/grenade/underslung/launcher
 
@@ -159,6 +163,7 @@
 	force = 10
 	slot_flags = 0
 	max_shells = 50
+	burst_size = 5
 	caliber = "a762"
 	origin_tech = "combat=6;materials=1;syndicate=2"
 	slot_flags = SLOT_BACK

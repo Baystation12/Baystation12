@@ -1,0 +1,6 @@
+author: RavingManiac
+
+delete-after: True
+
+changes: 
+  - rscadd: "Automatic weapons like the W-T 550 and C-20r can now be set to burst fire, trading accuracy for power."
