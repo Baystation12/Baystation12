@@ -68,8 +68,7 @@
 	update_nearby_tiles(need_rebuild=1)
 	return
 
-
-/obj/machinery/door/Del()
+/obj/machinery/door/Destroy()
 	density = 0
 	update_nearby_tiles()
 	..()
@@ -103,8 +102,8 @@
 			bumpopen(M)
 		return
 
-	if(istype(AM, /obj/machinery/bot))
-		var/obj/machinery/bot/bot = AM
+	if(istype(AM, /mob/living/bot))
+		var/mob/living/bot/bot = AM
 		if(src.check_access(bot.botcard))
 			if(density)
 				open()
@@ -168,7 +167,7 @@
 					new /obj/item/stack/rods(src.loc, 3)
 				if(BURN)
 					new /obj/effect/decal/cleanable/ash(src.loc) // Turn it to ashes!
-			del(src)
+			qdel(src)
 
 	if(Proj.damage)
 		//cap projectile damage so that there's still a minimum number of hits required to break the door
@@ -251,7 +250,7 @@
 				user << "<span class='notice'>You finish repairing the damage to \the [src].</span>"
 				health = between(health, health + repairing.amount*DOOR_REPAIR_AMOUNT, maxhealth)
 				update_icon()
-				del(repairing)
+				qdel(repairing)
 		return
 
 	if(repairing && istype(I, /obj/item/weapon/crowbar))
@@ -329,7 +328,7 @@
 
 /obj/machinery/door/blob_act()
 	if(prob(40))
-		del(src)
+		qdel(src)
 	return
 
 
@@ -342,10 +341,10 @@
 /obj/machinery/door/ex_act(severity)
 	switch(severity)
 		if(1.0)
-			del(src)
+			qdel(src)
 		if(2.0)
 			if(prob(25))
-				del(src)
+				qdel(src)
 			else
 				take_damage(300)
 		if(3.0)
@@ -434,7 +433,7 @@
 	//I shall not add a check every x ticks if a door has closed over some fire.
 	var/obj/fire/fire = locate() in loc
 	if(fire)
-		del fire
+		qdel(fire)
 	return
 
 /obj/machinery/door/proc/requiresID()

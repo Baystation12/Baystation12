@@ -315,7 +315,7 @@
 					user.drop_from_inventory(src)
 
 				new /obj/effect/decal/cleanable/ash(src.loc)
-				del(src)
+				qdel(src)
 
 			else
 				user << "\red You must hold \the [P] steady to burn \the [src]."

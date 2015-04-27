@@ -117,7 +117,7 @@
 		O = (H.l_ear == src ? H.r_ear : H.l_ear)
 		user.u_equip(O)
 		if(!istype(src,/obj/item/clothing/ears/offear))
-			del(O)
+			qdel(O)
 			O = src
 	else
 		O = src
@@ -129,7 +129,7 @@
 		O.add_fingerprint(user)
 
 	if(istype(src,/obj/item/clothing/ears/offear))
-		del(src)
+		qdel(src)
 
 /obj/item/clothing/ears/update_clothing_icon()
 	if (ismob(src.loc))
@@ -464,17 +464,18 @@ BLIND     // can't see anything
 		if (!(src.loc == usr))
 			return
 
-		if (!( usr.restrained() ) && !( usr.stat ))
-			switch(over_object.name)
-				if("r_hand")
-					usr.u_equip(src)
-					usr.put_in_r_hand(src)
-				if("l_hand")
-					usr.u_equip(src)
-					usr.put_in_l_hand(src)
-			src.add_fingerprint(usr)
+		if (( usr.restrained() ) || ( usr.stat ))
 			return
-	return
+		
+		if (!usr.unEquip(src))
+			return
+		
+		switch(over_object.name)
+			if("r_hand")
+				usr.put_in_r_hand(src)
+			if("l_hand")
+				usr.put_in_l_hand(src)
+		src.add_fingerprint(usr)
 
 /obj/item/clothing/under/examine(mob/user)
 	..(user)

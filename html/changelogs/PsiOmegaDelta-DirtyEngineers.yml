@@ -1,5 +1,0 @@
-author: PsiOmegaDelta
-delete-after: True
-
-changes: 
-  - bugfix: "Shower curtains no longer lose their default color upon being washed."

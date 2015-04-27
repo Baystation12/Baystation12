@@ -177,7 +177,7 @@ datum
 					BR.reaction(target, INGEST)
 					spawn(5)
 						BR.trans_to(target, BR.total_volume)
-						del(B)
+						qdel(B)
 
 				return amount
 
@@ -405,7 +405,7 @@ datum
 					var/datum/reagent/R = A
 					if (R.id == reagent)
 						reagent_list -= A
-						del(A)
+						qdel(A)
 						update_total()
 						my_atom.on_reagent_change()
 						return 0
@@ -648,6 +648,15 @@ datum
 					trans_data["virus2"] = v.Copy()
 
 				return trans_data
+
+datum/reagents/Destroy()
+	..()
+	for(var/datum/reagent/R in reagent_list)
+		qdel(R)
+	reagent_list.Cut()
+	reagent_list = null
+	if(my_atom && my_atom.reagents == src)
+		my_atom.reagents = null
 
 ///////////////////////////////////////////////////////////////////////////////////
 

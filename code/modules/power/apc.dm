@@ -100,7 +100,6 @@
 	var/update_overlay = -1
 	var/global/status_overlays = 0
 	var/updating_icon = 0
-	var/standard_max_charge
 	var/global/list/status_overlays_lock
 	var/global/list/status_overlays_charging
 	var/global/list/status_overlays_equipment
@@ -143,9 +142,6 @@
 /obj/machinery/power/apc/New(turf/loc, var/ndir, var/building=0)
 	..()
 	wires = new(src)
-	var/tmp/obj/item/weapon/cell/tmp_cell = new
-	standard_max_charge = tmp_cell.maxcharge
-	del(tmp_cell)
 
 	// offset 24 pixels in direction of dir
 	// this allows the APC to be embedded in a wall, yet still inside an area
@@ -169,16 +165,19 @@
 		spawn(5)
 			src.update()
 
-/obj/machinery/power/apc/Del()
+/obj/machinery/power/apc/Destroy()
 	if(operating && malf && src.z in config.station_levels) //if (is_type_in_list(get_area(src), the_station_areas))
 		malf.hacked_apcs -= src
 	area.power_light = 0
 	area.power_equip = 0
 	area.power_environ = 0
 	area.power_change()
-	del(wires)
+	if(wires)
+		wires.Destroy()
+		wires = null
 	if(cell)
-		del(cell) // qdel
+		cell.loc = loc
+		cell = null
 	if(terminal)
 		disconnect_terminal()
 
@@ -559,7 +558,7 @@
 						return
 				new /obj/item/stack/cable_coil(loc,10)
 				user << "<span class='notice'>You cut the cables and dismantle the power terminal.</span>"
-				del(terminal) // qdel
+				qdel(terminal)
 	else if (istype(W, /obj/item/weapon/module/power_control) && opened && has_electronics==0 && !((stat & BROKEN) || malfhack))
 		user.visible_message("<span class='warning'>[user.name] inserts the power control board into [src].</span>", \
 							"You start to insert the power control board into the frame...")
@@ -568,7 +567,7 @@
 			if(has_electronics==0)
 				has_electronics = 1
 				user << "<span class='notice'>You place the power control board inside the frame.</span>"
-				del(W) // qdel
+				qdel(W)
 	else if (istype(W, /obj/item/weapon/module/power_control) && opened && has_electronics==0 && ((stat & BROKEN) || malfhack))
 		user << "<span class='warning'>You cannot put the board inside, the frame is damaged.</span>"
 		return
@@ -595,7 +594,7 @@
 					"<span class='warning'>[src] has been cut from the wall by [user.name] with the weldingtool.</span>",\
 					"<span class='notice'>You cut the APC frame from the wall.</span>",\
 					"You hear welding.")
-			del(src) // qdel
+			qdel(src)
 			return
 	else if (istype(W, /obj/item/apc_frame) && opened && emagged)
 		emagged = 0
@@ -604,7 +603,7 @@
 		user.visible_message(\
 			"<span class='warning'>[user.name] has replaced the damaged APC frontal panel with a new one.</span>",\
 			"<span class='notice'>You replace the damaged APC frontal panel with a new one.</span>")
-		del(W) // qdel
+		qdel(W)
 		update_icon()
 	else if (istype(W, /obj/item/apc_frame) && opened && ((stat & BROKEN) || malfhack))
 		if (has_electronics)
@@ -616,7 +615,7 @@
 			user.visible_message(\
 				"<span class='notice'>[user.name] has replaced the damaged APC frame with new one.</span>",\
 				"You replace the damaged APC frame with new one.")
-			del(W) // qdel
+			qdel(W)
 			stat &= ~BROKEN
 			malfai = null
 			malfhack = 0
@@ -1211,7 +1210,7 @@ obj/machinery/power/apc/proc/autoset(var/val, var/on)
 			//set_broken() //now Del() do what we need
 			if (cell)
 				cell.ex_act(1.0) // more lags woohoo
-			del(src) // qdel
+			qdel(src)
 			return
 		if(2.0)
 			if (prob(50))

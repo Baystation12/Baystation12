@@ -1,19 +1,5 @@
 author: PsiOmegaDelta
-delete-after: False
-
-changes: 
-  - rscadd: Rig/Hardsuit module tab - Less informative than the NanoUI hardsuit interface but allows quicker access to the various rig modules.
-  - rscadd: Silicons with the medical augmentation sensors enabled now also see alive/dead status if sensors are set accordingly.
-  - rscadd: Emergency shutters opened by silicons are now treated as having been forced open by a crowbar.
-  - rscadd: An active AI chassis can now be pushed, just as an empty chassis can be.
-  - rscadd: The AI can now use the crew monitor console to track crew members with full sensors enabled.
-  - rscadd: The AI now has a shortcut to track people holding up messages to cameras.
-  - rscadd: The AI now has a shortcut to track people sending PDA messages.
-  - rscadd: Multiple AIs can now share the same holopad.
-  - rscadd: Admin ghosts can now transfer other ghosts into mobs by drag-clicking.
-  - rscadd: Ghosts can now toggle seeing darkness and other ghosts separately.
-  - rscadd: Moving while dead now auto-ghosts you.
-  - rscadd: Two new random events: Space dust and gravitation failure.
-  - rscadd: Upgraded wizard spell interface and new spells.
-  - rscadd: More uplink items.
-  - rscadd: Uplink items now have rudimentary descriptions.
+changes:
+  - soundadd: "Restores an old soundtrack 'Thunderdome.ogg'."
+  - rscadd: "Some holodeck programs now have custom ambience tracks."
+delete-after: false

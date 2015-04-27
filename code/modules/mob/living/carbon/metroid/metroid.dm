@@ -178,7 +178,7 @@
 	var/f_loss = null
 	switch (severity)
 		if (1.0)
-			del(src)
+			qdel(src)
 			return
 
 		if (2.0)

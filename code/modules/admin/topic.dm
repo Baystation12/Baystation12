@@ -745,7 +745,7 @@
 			log_admin("[key_name(usr)] booted [key_name(M)].")
 			message_admins("\blue [key_name_admin(usr)] booted [key_name_admin(M)].", 1)
 			//M.client = null
-			del(M.client)
+			qdel(M.client)
 /*
 	//Player Notes
 	else if(href_list["notes"])
@@ -811,8 +811,8 @@
 				log_admin("[usr.client.ckey] has banned [M.ckey].\nReason: [reason]\nThis will be removed in [mins] minutes.")
 				message_admins("\blue[usr.client.ckey] has banned [M.ckey].\nReason: [reason]\nThis will be removed in [mins] minutes.")
 
-				del(M.client)
-				//del(M)	// See no reason why to delete mob. Important stuff can be lost. And ban can be lifted before round ends.
+				qdel(M.client)
+				//qdel(M)	// See no reason why to delete mob. Important stuff can be lost. And ban can be lifted before round ends.
 			if("No")
 				if(!check_rights(R_BAN))   return
 				var/reason = sanitize(input(usr,"Reason?","reason","Griefer") as text|null)
@@ -836,8 +836,8 @@
 				feedback_inc("ban_perma",1)
 				DB_ban_record(BANTYPE_PERMA, M, -1, reason)
 
-				del(M.client)
-				//del(M)
+				qdel(M.client)
+				//qdel(M)
 			if("Cancel")
 				return
 
@@ -1301,7 +1301,7 @@
 		S.victim = M
 		S.loc = M.loc
 		spawn(20)
-			del(S)
+			qdel(S)
 
 		var/turf/simulated/floor/T = get_turf(M)
 		if(istype(T))
@@ -1424,7 +1424,7 @@
 			src.owner << "\red Message reply failed."
 
 		spawn(100)
-			del(P)
+			qdel(P)
 		return
 
 	else if(href_list["SolGovFaxReply"])
@@ -1669,28 +1669,28 @@
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","SC")
 				for(var/obj/item/clothing/under/O in world)
-					del(O)
+					qdel(O)
 				ok = 1
 			if("sec_all_clothes")
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","SAC")
 				for(var/obj/item/clothing/O in world)
-					del(O)
+					qdel(O)
 				ok = 1
 			if("sec_classic1")
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","SC1")
 				for(var/obj/item/clothing/suit/fire/O in world)
-					del(O)
+					qdel(O)
 				for(var/obj/structure/grille/O in world)
-					del(O)
+					qdel(O)
 /*					for(var/obj/machinery/vehicle/pod/O in world)
 					for(var/mob/M in src)
 						M.loc = src.loc
 						if (M.client)
 							M.client.perspective = MOB_PERSPECTIVE
 							M.client.eye = M
-					del(O)
+					qdel(O)
 				ok = 1*/
 			if("monkey")
 				feedback_inc("admin_secrets_fun_used",1)
@@ -2044,7 +2044,7 @@
 				var/turf/T = pick(blobstart)
 				var/obj/effect/bhole/bh = new /obj/effect/bhole( T.loc, 30 )
 				spawn(rand(100, 600))
-					del(bh)
+					qdel(bh)
 
 			if("timeanomalies")	//dear god this code was awful :P Still needs further optimisation
 				feedback_inc("admin_secrets_fun_used",1)
@@ -2273,7 +2273,7 @@
 				feedback_add_details("admin_secrets_fun_used","NS")
 				var/choice = input("You sure you want to end the round and summon narsie at your location? Misuse of this could result in removal of flags or halarity.") in list("PRAISE SATAN", "Cancel")
 				if(choice == "PRAISE SATAN")
-					new /obj/machinery/singularity/narsie/large(get_turf(usr))
+					new /obj/singularity/narsie/large(get_turf(usr))
 					message_admins("[key_name_admin(usr)] has summoned narsie and brought about a new realm of suffering.")
 			if("supermattercascade")
 				feedback_inc("admin_secrets_fun_used",1)

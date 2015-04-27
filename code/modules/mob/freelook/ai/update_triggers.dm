@@ -41,7 +41,7 @@
 		dd_insertObjectList(cameranet.cameras, src)
 	update_coverage(1)
 
-/obj/machinery/camera/Del()
+/obj/machinery/camera/Destroy()
 	cameranet.cameras -= src
 	clear_all_networks()
 	..()

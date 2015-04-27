@@ -1,0 +1,40 @@
+################################
+# Example Changelog File
+#
+# Note: This file, and files beginning with ".", and files that don't end in ".yml" will not be read. If you change this file, you will look really dumb.
+#
+# Your changelog will be merged with a master changelog. (New stuff added only, and only on the date entry for the day it was merged.)
+# When it is, any changes listed below will disappear.
+#
+# Valid Prefixes: 
+#   bugfix
+#   wip (For works in progress)
+#   tweak
+#   soundadd
+#   sounddel
+#   rscadd (general adding of nice things)
+#   rscdel (general deleting of nice things)
+#   imageadd
+#   imagedel
+#   spellcheck (typo fixes)
+#   experiment
+#################################
+
+# Your name.  
+author: Kelenius
+
+# Optional: Remove this file after generating master changelog.  Useful for PR changelogs that won't get used again.
+delete-after: True
+
+changes: 
+  - rscadd: "Good news to the roboticists! The long waited firmware update for the bots has arrived. You can expect the following changes:"
+  - rscadd: "Medbots have improved the disease detection algorithms."
+  - rscadd: "Floorbot firmware has been bugtested. In particular, they will no longer get stuck near the windows, hopelessly trying to fix the floor under the glass."
+  - rscadd: "Floorbots have also received an internal low-power metal synthesizer. They will use it to make their own tiles. Slowly."
+  - rscadd: "Following the complains from humanitarian organizations regarding securitron brutality, stength of their stunners has been toned down. They will also politely demand that you get on the floor before arresting you. Except for the taser-mounted guys, they will still tase you down."
+  - rscadd: "Other minor fixes."
+  - rscdel: "The lasertag bots are now forbidden to build and use following the incident #1526672. Please don't let it happen again."
+  - scaadd: "The farmbot design has been finished! Made from a watertank, robot arm, plant analyzer, bucket, minihoe and a proximity sensor, these small (not really) bots will be a useful companion to any gardener and/or xenobotanist."
+  - tweak: "Spider learning alert: they have learned to recognize the bots and will mercilessly attack them."
+  - scadd: "An experimental CPU upgrade would theoretically allow any of the bots to function with the same intelligence capacity as the maintenance drones. We still have no idea what causes it to boot up. Science!"
+  - scadd: "INCOMING TRANSMISSION: Greetings to agents, pirates, operatives, and anyone who otherwise uses our equipment. Following the NT update of bot firmware, we have updated the cryptographic sequencer's hacking routines as well. The medbots you emag will not poison you anymore, the clanbots won't clean after themselves immediately, and floorbots... wear a space suit. Oh, and it works on the new farmbots, too."

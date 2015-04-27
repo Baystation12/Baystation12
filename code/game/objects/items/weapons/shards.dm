@@ -64,7 +64,7 @@
 				G.attackby(NG, user)
 				usr << "You add the newly-formed glass to the stack. It now contains [NG.amount] sheets."
 			//SN src = null
-			del(src)
+			qdel(src)
 			return
 	return ..()
 
