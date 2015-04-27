@@ -869,18 +869,22 @@ About the new airlock wires panel:
 	return 1
 
 /atom/movable/proc/airlock_crush(var/crush_damage)
-	return
+	return 0
 
 /obj/machinery/portable_atmospherics/canister/airlock_crush(var/crush_damage)
+	. = ..()
 	health -= crush_damage
 	healthcheck()
 
 /obj/structure/closet/airlock_crush(var/crush_damage)
+	..()
 	damage(crush_damage)
 	for(var/atom/movable/AM in src)
 		AM.airlock_crush()
+	return 1
 
 /mob/living/airlock_crush(var/crush_damage)
+	. = ..()
 	adjustBruteLoss(crush_damage)
 	SetStunned(5)
 	SetWeakened(5)
@@ -888,12 +892,13 @@ About the new airlock wires panel:
 	T.add_blood(src)
 
 /mob/living/carbon/airlock_crush(var/crush_damage)
-	..()
+	. = ..()
 	if (!(species && (species.flags & NO_PAIN)))
 		emote("scream")
 
 /mob/living/silicon/robot/airlock_crush(var/crush_damage)
 	adjustBruteLoss(crush_damage)
+	return 0
 
 /obj/machinery/door/airlock/close(var/forced=0)
 	if(!can_close(forced))
@@ -911,7 +916,8 @@ About the new airlock wires panel:
 
 	for(var/turf/turf in locs)
 		for(var/atom/movable/AM in turf)
-			AM.airlock_crush(DOOR_CRUSH_DAMAGE)
+			if(AM.airlock_crush(DOOR_CRUSH_DAMAGE))
+				take_damage(DOOR_CRUSH_DAMAGE)
 
 	use_power(360)	//360 W seems much more appropriate for an actuator moving an industrial door capable of crushing people
 	if(istype(src, /obj/machinery/door/airlock/glass))

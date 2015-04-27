@@ -498,8 +498,10 @@
 	return damage*(listgetindex(damage_absorption,damage_type) || 1)
 
 /obj/mecha/airlock_crush(var/crush_damage)
+	..()
 	take_damage(crush_damage)
 	check_for_internal_damage(list(MECHA_INT_TEMP_CONTROL,MECHA_INT_TANK_BREACH,MECHA_INT_CONTROL_LOST))
+	return 1
 
 /obj/mecha/proc/update_health()
 	if(src.health > 0)
