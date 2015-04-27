@@ -68,14 +68,20 @@
 	
 	burst_delay = 0
 	firemodes = list(
-		list(name="one barrel at a time", burst=1),
-		list(name="both barrels at once", burst=2),
+		list(name="fire one barrel at a time", burst=1),
+		list(name="fire both barrels at once", burst=2),
 		)
+
+/obj/item/weapon/gun/projectile/shotgun/doublebarrel/pellet
+	ammo_type = /obj/item/ammo_casing/shotgun/pellet
 
 /obj/item/weapon/gun/projectile/shotgun/doublebarrel/flare
 	name = "signal shotgun"
 	desc = "A double-barreled shotgun meant to fire signal flash shells."
 	ammo_type = /obj/item/ammo_casing/shotgun/flash
+
+/obj/item/weapon/gun/projectile/shotgun/doublebarrel/unload_ammo(user, allow_dump)
+	..(user, allow_dump=1)
 
 //this is largely hacky and bad :(	-Pete
 /obj/item/weapon/gun/projectile/shotgun/doublebarrel/attackby(var/obj/item/A as obj, mob/user as mob)

@@ -1,12 +1,13 @@
 /*
 	Defines a firing mode for a gun.
 	
-	burst			number of shots to fire in a burst
+	burst			number of shots fired when the gun is used
 	burst_delay 	tick delay between shots in a burst
 	fire_delay		tick delay after the last shot before the gun may be used again
 	move_delay		tick delay after the last shot before the player may move
 	dispersion		dispersion of each shot in the burst measured in tiles per 7 tiles angle ratio
-	accuracy		accuracy modifier applied to each shot in tiles. Applied on top of the weapon accuracy.
+	accuracy		accuracy modifier applied to each shot in tiles. 
+					applied on top of the base weapon accuracy.
 */
 /datum/firemode
 	var/name = "default"
@@ -50,8 +51,8 @@
 	attack_verb = list("struck", "hit", "bashed")
 	zoomdevicename = "scope"
 
-	var/fire_delay = 6
-	var/burst_delay = 2 //delay between shots, if firing in bursts
+	var/fire_delay = 6 	//delay after shooting before the gun can be used again
+	var/burst_delay = 2	//delay between shots, if firing in bursts
 	var/fire_sound = 'sound/weapons/Gunshot.ogg'
 	var/fire_sound_text = "gunshot"
 	var/recoil = 0		//screen shake
@@ -62,7 +63,8 @@
 	var/next_fire_time = 0
 
 	var/sel_mode = 1 //index of the currently selected mode
-	var/list/firemodes = null
+	var/list/firemodes = list()
+	var/firemode_type = /datum/firemode //for subtypes that need custom firemode data
 	
 	//aiming system stuff
 	var/keep_aim = 1 	//1 for keep shooting until aim is lowered
@@ -75,14 +77,11 @@
 
 /obj/item/weapon/gun/New()
 	..()
-	if(!firemodes || !firemodes.len)
-		firemodes = list( new/datum/firemode )
+	if(!firemodes.len)
+		firemodes += new firemode_type
 	else
 		for(var/i in 1 to firemodes.len)
-			firemodes[i] = new/datum/firemode(firemodes[i])
-	
-	if(firemodes.len <= 1)
-		verbs -= /obj/item/weapon/gun/verb/switch_firemodes
+			firemodes[i] = new firemode_type(firemodes[i])
 	
 	if(isnull(scoped_accuracy))
 		scoped_accuracy = accuracy
@@ -372,15 +371,14 @@
 		var/datum/firemode/current_mode = firemodes[sel_mode]
 		user << "The fire selector is set to [current_mode.name]."
 
-/obj/item/weapon/gun/verb/switch_firemodes()
-	set name = "Switch Fire Mode"
-	set category = "Object"
-	set src in usr
-	
-	if(usr.stat || usr.restrained()) return
-	
+/obj/item/weapon/gun/proc/switch_firemodes(mob/user=null)
 	sel_mode++
 	if(sel_mode > firemodes.len)
 		sel_mode = 1
 	var/datum/firemode/new_mode = firemodes[sel_mode]
-	usr << "<span class='notice'>You switch \the [src] to [new_mode.name].</span>"
+	user << "<span class='notice'>\The [src] is now set to [new_mode.name].</span>"
+
+/obj/item/weapon/gun/attack_self(mob/user)
+	if(firemodes.len > 1)
+		switch_firemodes(user)
+
