@@ -19,12 +19,12 @@
 				cam.wires.UpdateCut(CAMERA_WIRE_ALARM, 0)
 
 /datum/event/camera_damage/proc/acquire_random_camera(var/remaining_attempts = 5)
-	if(!world_cameras.len)
+	if(!cameranet.cameras.len)
 		return
 	if(!remaining_attempts)
 		return
 
-	var/obj/machinery/camera/C = pick(world_cameras)
+	var/obj/machinery/camera/C = pick(cameranet.cameras)
 	if(is_valid_camera(C))
 		return C
 	return acquire_random_camera(remaining_attempts--)
