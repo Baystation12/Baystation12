@@ -1,18 +1,24 @@
 /obj/item/weapon/flame/candle
 	name = "red candle"
-	desc = "a candle"
+	desc = "a small pillar candle. Its specially-formulated fuel-oxidizer wax mixture allows continued combustion in airless environments."
 	icon = 'icons/obj/candle.dmi'
 	icon_state = "candle1"
 	item_state = "candle1"
 	w_class = 1
 
-	var/wax = 200
+	var/wax = 0
+	var/starting_wax = 0
+
+/obj/item/weapon/flame/candle/New()
+	wax = rand(800, 1000) // Enough for 27-33 minutes. 30 minutes on average.
+	starting_wax = wax
+	..()
 
 /obj/item/weapon/flame/candle/update_icon()
 	var/i
-	if(wax>150)
+	if(wax > starting_wax*3/4)
 		i = 1
-	else if(wax>80)
+	else if(wax > starting_wax*2/5)
 		i = 2
 	else i = 3
 	icon_state = "candle[i][lit ? "_lit" : ""]"
