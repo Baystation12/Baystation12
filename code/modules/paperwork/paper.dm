@@ -196,7 +196,7 @@
 /obj/item/weapon/paper/proc/clearpaper()
 	info = null
 	stamps = null
-	free_space = MAX_BOOK_MESSAGE_LEN
+	free_space = MAX_PAPER_MESSAGE_LEN
 	stamped = list()
 	overlays.Cut()
 	updateinfolinks()
