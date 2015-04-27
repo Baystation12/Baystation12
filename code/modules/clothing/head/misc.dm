@@ -202,6 +202,12 @@
 	item_state = "fez"
 	desc = "You should wear a fez. Fezzes are cool."
 
+/obj/item/clothing/head/cowboy
+	name = "cowboy hat"
+	icon_state = "cowboy"
+	item_state = "cowboy"
+	desc = "Reminds you of the good old days where men settled disputes with a six shooter."
+
 //end bs12 hats
 
 /obj/item/clothing/head/witchwig
