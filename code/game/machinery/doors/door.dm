@@ -388,7 +388,9 @@
 
 
 /obj/machinery/door/proc/open(var/forced = 0)
-	if(!can_open(forced)) return
+	if(!can_open(forced))
+		return
+	operating = 1
 
 	do_animate("opening")
 	icon_state = "door0"
@@ -401,8 +403,7 @@
 	update_icon()
 	SetOpacity(0)
 	update_nearby_tiles()
-
-	if(operating)	operating = 0
+	operating = 0
 
 	if(autoclose)
 		close_door_at = next_close_time()
