@@ -203,6 +203,7 @@
 	w_class = 2.0
 	flags = NOSHIELD | NOBLOODY
 	var/active = 0
+	var/item_color
 
 /obj/item/weapon/holo/esword/green
 	New()

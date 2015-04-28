@@ -33,9 +33,7 @@
 		ui.open()
 		ui.set_auto_update(1)
 
-// Proc: refresh_sensors()
-// Parameters: None
-// Description: Refreshes list of active sensors kept on this computer.
+// Refreshes list of active sensors kept on this computer.
 /obj/nano_module/power_monitor/proc/refresh_sensors()
 	grid_sensors = list()
 	var/turf/T = get_turf(src)
@@ -46,9 +44,7 @@
 			else
 				grid_sensors += S
 
-// Proc: Topic()
-// Parameters: 2 (href, href_list - allows us to process UI clicks)
-// Description: Allows us to process UI clicks, which are relayed in form of hrefs.
+// Allows us to process UI clicks, which are relayed in form of hrefs.
 /obj/nano_module/power_monitor/Topic(href, href_list)
 	if(..())
 		return

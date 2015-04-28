@@ -1,0 +1,5 @@
+author: Yoshax
+delete-after: True
+
+changes: 
+  - bugfix: "Fixes HoS' office door to not be CMO locked."

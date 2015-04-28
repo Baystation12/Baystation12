@@ -1,0 +1,4 @@
+author: PsiOmegaDelta
+changes:
+  - rscadd: "Beware. Airlocks can now crush more things than just mobs."
+delete-after: True

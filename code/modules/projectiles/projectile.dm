@@ -278,6 +278,7 @@
 		if(kill_count-- < 1)
 			on_impact(src.loc) //for any final impact behaviours
 			qdel(src)
+			return
 		if((!( current ) || loc == current))
 			current = locate(min(max(x + xo, 1), world.maxx), min(max(y + yo, 1), world.maxy), z)
 		if((x == 1 || x == world.maxx || y == 1 || y == world.maxy))
@@ -289,6 +290,7 @@
 
 		if(!location)
 			qdel(src)	// if it's left the world... kill it
+			return
 
 		before_move()
 		Move(location.return_turf())

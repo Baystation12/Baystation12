@@ -191,7 +191,7 @@ BLIND     // can't see anything
 	gender = PLURAL //Carn: for grammarically correct text-parsing
 	w_class = 2.0
 	icon = 'icons/obj/clothing/gloves.dmi'
-	siemens_coefficient = 0.50
+	siemens_coefficient = 0.75
 	var/wired = 0
 	var/obj/item/weapon/cell/cell = 0
 	var/clipped = 0
@@ -391,13 +391,17 @@ BLIND     // can't see anything
 //Under clothing
 /obj/item/clothing/under
 	icon = 'icons/obj/clothing/uniforms.dmi'
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/items/lefthand_uniforms.dmi',
+		slot_r_hand_str = 'icons/mob/items/righthand_uniforms.dmi',
+		)
 	name = "under"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 	permeability_coefficient = 0.90
 	slot_flags = SLOT_ICLOTHING
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	w_class = 3
-	var/has_sensor = 1//For the crew computer 2 = unable to change mode
+	var/has_sensor = 1 //For the crew computer 2 = unable to change mode
 	var/sensor_mode = 0
 		/*
 		1 = Report living/dead
@@ -406,7 +410,25 @@ BLIND     // can't see anything
 		*/
 	var/list/accessories = list()
 	var/displays_id = 1
+	var/rolled_down = -1 //0 = unrolled, 1 = rolled, -1 = cannot be toggled
 	sprite_sheets = list("Vox" = 'icons/mob/species/vox/uniform.dmi')
+	
+	//convenience var for defining the icon state for the overlay used when the clothing is worn.
+	//Also used by rolling/unrolling.
+	var/worn_state = null
+
+/obj/item/clothing/under/New()
+	if(worn_state)
+		if(!item_state_slots) 
+			item_state_slots = list()
+		item_state_slots[slot_w_uniform_str] = worn_state
+	else
+		worn_state = icon_state
+		
+	//autodetect rollability
+	if(rolled_down < 0)
+		if((worn_state + "_d_s") in icon_states('icons/mob/uniform.dmi'))
+			rolled_down = 0
 
 /obj/item/clothing/under/update_clothing_icon()
 	if (ismob(src.loc))
@@ -549,17 +571,18 @@ BLIND     // can't see anything
 	if(!istype(usr, /mob/living)) return
 	if(usr.stat) return
 
-	if(initial(item_color) + "_d_s" in icon_states('icons/mob/uniform.dmi'))
-		if (item_color == initial(item_color))
-			body_parts_covered &= LOWER_TORSO|LEGS|FEET
-			item_color = "[initial(item_color)]_d"
-		else
-			body_parts_covered = initial(body_parts_covered)
-			item_color = initial(item_color)
-
-		update_clothing_icon()
+	if(rolled_down < 0)
+		usr << "<span class='notice'>You cannot roll down [src]!</span>"
+		return
+	
+	rolled_down = !rolled_down
+	if(rolled_down)
+		body_parts_covered &= LOWER_TORSO|LEGS|FEET
+		item_state_slots[slot_w_uniform_str] = "[worn_state]_d"
 	else
-		usr << "<span class='notice'>You cannot roll down the uniform!</span>"
+		body_parts_covered = initial(body_parts_covered)
+		item_state_slots[slot_w_uniform_str] = "[worn_state]"
+	update_clothing_icon()
 
 /obj/item/clothing/under/proc/remove_accessory(mob/user, obj/item/clothing/accessory/A)
 	if(!(A in accessories))
