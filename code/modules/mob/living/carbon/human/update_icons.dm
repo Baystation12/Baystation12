@@ -765,8 +765,8 @@ var/global/list/damage_icon_parts = list()
 			overlay_icon = rig.mob_icon
 		else if(back.sprite_sheets && back.sprite_sheets[species.name])
 			overlay_icon = back.sprite_sheets[species.name]
-		else if(back.item_icons && (slot_l_hand_str in back.item_icons))
-			overlay_icon = back.item_icons[slot_l_hand_str]
+		else if(back.item_icons && (slot_back_str in back.item_icons))
+			overlay_icon = back.item_icons[slot_back_str]
 		else
 			overlay_icon = INV_BACK_DEF_ICON
 		
