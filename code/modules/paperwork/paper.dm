@@ -95,12 +95,15 @@
 		usr << "<span class='warning'>You cut yourself on the paper.</span>"
 		return
 	var/n_name = sanitizeSafe(input(usr, "What would you like to label the paper?", "Paper Labelling", null)  as text, MAX_NAME_LEN)
-	if((loc == usr && usr.stat == 0))
-		name = "[(n_name ? text("[n_name]") : initial(name))]"
-	if(name != "paper")
-		desc = "This is a paper titled '" + name + "'."
-	add_fingerprint(usr)
-	return
+	
+	// We check loc one level up, so we can rename in clipboards and such. See also: /obj/item/weapon/photo/rename()
+	if((loc == usr || loc.loc && loc.loc == usr) && usr.stat == 0 && n_name)
+		name = n_name
+		if(n_name != "paper")
+			desc = "This is a paper titled '" + name + "'."
+		
+		add_fingerprint(usr)
+	return	
 
 /obj/item/weapon/paper/attack_self(mob/living/user as mob)
 	user.examinate(src)
@@ -447,7 +450,9 @@
 		user << "<span class='notice'>You clip the [P.name] to [(src.name == "paper") ? "the paper" : src.name].</span>"
 		src.loc = B
 		P.loc = B
-		B.amount++
+		
+		B.pages.Add(src)
+		B.pages.Add(P)
 		B.update_icon()
 
 	else if(istype(P, /obj/item/weapon/pen) || istype(P, /obj/item/toy/crayon))
