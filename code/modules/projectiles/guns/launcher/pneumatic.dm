@@ -14,17 +14,20 @@
 	var/max_w_class = 3                                 // Hopper intake size.
 	var/max_combined_w_class = 20                       // Total internal storage size.
 	var/obj/item/weapon/tank/tank = null                // Tank of gas for use in firing the cannon.
-	var/obj/item/weapon/storage/tank_container  // Something to hold the tank item so we don't accidentally fire it.
+	
+	var/obj/item/weapon/storage/item_storage
 	var/pressure_setting = 10                           // Percentage of the gas in the tank used to fire the projectile.
 	var/possible_pressure_amounts = list(5,10,20,25,50) // Possible pressure settings.
-	var/minimum_tank_pressure = 10                      // Minimum pressure to fire the gun.
 	var/force_divisor = 400                             // Force equates to speed. Speed/5 equates to a damage multiplier for whoever you hit.
 	                                                    // For reference, a fully pressurized oxy tank at 50% gas release firing a health
 	                                                    // analyzer with a force_divisor of 10 hit with a damage multiplier of 3000+.
 /obj/item/weapon/gun/launcher/pneumatic/New()
 	..()
-	tank_container = new(src)
-	tank_container.tag = "gas_tank_holder"
+	item_storage = new(src)
+	item_storage.name = "hopper"
+	item_storage.max_w_class = max_w_class
+	item_storage.max_combined_w_class = max_combined_w_class
+	item_storage.use_sound = null
 
 /obj/item/weapon/gun/launcher/pneumatic/verb/set_pressure() //set amount of tank pressure.
 	set name = "Set Valve Pressure"
@@ -54,31 +57,19 @@
 
 /obj/item/weapon/gun/launcher/pneumatic/attackby(obj/item/W as obj, mob/user as mob)
 	if(!tank && istype(W,/obj/item/weapon/tank))
-		user.drop_item()
+		user.drop_from_inventory(W, src)
 		tank = W
-		tank.loc = src.tank_container
 		user.visible_message("[user] jams [W] into [src]'s valve and twists it closed.","You jam [W] into [src]'s valve and twist it closed.")
 		icon_state = "pneumatic-tank"
 		item_state = "pneumatic-tank"
 		user.update_icons()
-	else if(istype(W) && W.w_class <= max_w_class)
-		var/total_stored = 0
-		for(var/obj/item/O in src.contents)
-			total_stored += O.w_class
-		if(total_stored + W.w_class <= max_combined_w_class)
-			user.drop_item(W)
-			W.loc = src
-			user << "You shove [W] into the hopper."
-		else
-			user << "That won't fit into the hopper - it's full."
-		return
-	else
-		user << "That won't fit into the hopper."
+	else if(istype(W) && item_storage.can_be_inserted(W))
+		item_storage.handle_item_insertion(W)
 
 /obj/item/weapon/gun/launcher/pneumatic/attack_self(mob/user as mob)
-	if(contents.len > 0)
-		var/obj/item/removing = contents[contents.len]
-		removing.loc = get_turf(src)
+	if(item_storage.contents.len > 0)
+		var/obj/item/removing = item_storage.contents[item_storage.contents.len]
+		item_storage.remove_from_storage(removing, src.loc)
 		user.put_in_hands(removing)
 		user << "You remove [removing] from the hopper."
 	else
@@ -86,18 +77,27 @@
 	return
 
 /obj/item/weapon/gun/launcher/pneumatic/consume_next_projectile(mob/user=null)
-	if(!contents.len)
+	if(!item_storage.contents.len)
 		return null
 	if (!tank)
 		user << "There is no gas tank in [src]!"
 		return null
 
-	var/fire_pressure = (tank.air_contents.return_pressure()/100)*pressure_setting
-	if(fire_pressure < minimum_tank_pressure)
+	var/environment_pressure = 10 
+	var/turf/T = get_turf(src)
+	if(T)
+		var/datum/gas_mixture/environment = T.return_air()
+		if(environment)
+			environment_pressure = environment.return_pressure()
+	
+	var/fire_pressure = (tank.air_contents.return_pressure() - environment_pressure)*pressure_setting/100
+	if(fire_pressure < 10)
 		user << "There isn't enough gas in the tank to fire [src]."
 		return null
 
-	return contents[1]
+	var/obj/item/launched = item_storage.contents[1]
+	item_storage.remove_from_storage(launched, src)
+	return launched
 
 /obj/item/weapon/gun/launcher/pneumatic/examine(mob/user)
 	if(!..(user, 2))
@@ -149,7 +149,7 @@
 /obj/item/weapon/cannonframe/attackby(obj/item/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/pipe))
 		if(buildstate == 0)
-			user.drop_item()
+			user.remove_from_mob(W)
 			del(W)
 			user << "\blue You secure the piping inside the frame."
 			buildstate++
@@ -167,7 +167,7 @@
 			return
 	else if(istype(W,/obj/item/device/transfer_valve))
 		if(buildstate == 4)
-			user.drop_item()
+			user.remove_from_mob(W)
 			del(W)
 			user << "\blue You install the transfer valve and connect it to the piping."
 			buildstate++
