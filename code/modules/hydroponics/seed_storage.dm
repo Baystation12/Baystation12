@@ -231,12 +231,15 @@
 		S.remove_from_storage(O, src)
 
 	O.loc = src
+	var/newID = 0
 
 	for (var/datum/seed_pile/N in piles)
 		if (N.matches(O))
 			++N.amount
 			N.seeds += (O)
 			return
+		else if(N.ID >= newID)
+			newID = N.ID + 1
 
-	piles += new /datum/seed_pile(O, piles.len)
+	piles += new /datum/seed_pile(O, newID)
 	return
