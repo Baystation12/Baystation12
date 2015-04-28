@@ -229,7 +229,7 @@
 	key = "9"
 	native = 1
 	flags = WHITELISTED
-	syllables = list("gr","plonk","bang","bash","creak","crash","grumble")
+	syllables = list("kau", "sah", "kerh", "sti", "ruh", "vi", "li", "avi")
 
 /datum/language/diona
 	name = "Rootspeak"
