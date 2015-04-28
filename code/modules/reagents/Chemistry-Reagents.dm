@@ -27,7 +27,8 @@ datum
 		var/glass_desc = null
 		var/glass_center_of_mass = null
 		//var/list/viruses = list()
-		var/color = "#000000" // rgb: 0, 0, 0 (does not support alpha channels - yet!)
+		var/color = "#000000" // rgb: 0, 0, 0, 0 - supports alpha channels
+		var/color_weight = 1
 
 		proc
 			reaction_mob(var/mob/M, var/method=TOUCH, var/volume) //By default we have a chance to transfer some
@@ -89,7 +90,7 @@ datum
 				return
 
 			// Called when two reagents of the same are mixing. <-- Blatant lies
-			on_merge(var/data)
+			on_merge(var/newdata, var/newamount)
 				return
 
 			on_update(var/atom/A)
@@ -135,9 +136,32 @@ datum
 					var/mob/living/carbon/C = M
 					C.antibodies |= self.data["antibodies"]
 
-			on_merge(var/data)
-				if(data["blood_colour"])
-					color = data["blood_colour"]
+			on_merge(var/newdata, var/newamount)
+				if(!data || !newdata)
+					return
+				if(newdata["blood_colour"])
+					color = newdata["blood_colour"]
+				if(data && newdata)
+					if(data["viruses"] || newdata["viruses"])
+
+						var/list/mix1 = data["viruses"]
+						var/list/mix2 = newdata["viruses"]
+
+						// Stop issues with the list changing during mixing.
+						var/list/to_mix = list()
+
+						for(var/datum/disease/advance/AD in mix1)
+							to_mix += AD
+						for(var/datum/disease/advance/AD in mix2)
+							to_mix += AD
+
+						var/datum/disease/advance/AD = Advance_Mix(to_mix)
+						if(AD)
+							var/list/preserve = list(AD)
+							for(var/D in data["viruses"])
+								if(!istype(D, /datum/disease/advance))
+									preserve += D
+							data["viruses"] = preserve
 				return ..()
 
 			on_update(var/atom/A)
@@ -204,7 +228,7 @@ datum
 			id = "water"
 			description = "A ubiquitous chemical substance that is composed of hydrogen and oxygen."
 			reagent_state = LIQUID
-			color = "#0064C8" // rgb: 0, 100, 200
+			color = "#0064C877" // rgb: 0, 100, 200
 			custom_metabolism = 0.01
 
 			glass_icon_state = "glass_clear"
@@ -1593,6 +1617,11 @@ datum
 			reagent_state = LIQUID
 			color = "#808080"
 			overdose = 15
+			color_weight = 20
+
+			New()
+				..()
+				data = color
 
 			reaction_turf(var/turf/T, var/volume)
 				..()
@@ -1609,6 +1638,35 @@ datum
 				if(istype(M,/mob) && !istype(M,/mob/dead))
 					//painting ghosts: not allowed
 					M.color = color
+
+			on_merge(var/newdata, var/newamount)
+				if(!data || !newdata)
+					return
+				var/list/colors = list(0, 0, 0, 0)
+				var/tot_w = 0
+
+				var/hex1 = uppertext(color)
+				var/hex2 = uppertext(newdata)
+				if(length(hex1) == 7)
+					hex1 += "FF"
+				if(length(hex2) == 7)
+					hex2 += "FF"
+				if(length(hex1) != 9 || length(hex2) != 9)
+					return
+				colors[1] += hex2num(copytext(hex1, 2, 4)) * volume
+				colors[2] += hex2num(copytext(hex1, 4, 6)) * volume
+				colors[3] += hex2num(copytext(hex1, 6, 8)) * volume
+				colors[4] += hex2num(copytext(hex1, 8, 10)) * volume
+				tot_w += volume
+				colors[1] += hex2num(copytext(hex2, 2, 4)) * newamount
+				colors[2] += hex2num(copytext(hex2, 4, 6)) * newamount
+				colors[3] += hex2num(copytext(hex2, 6, 8)) * newamount
+				colors[4] += hex2num(copytext(hex2, 8, 10)) * newamount
+				tot_w += newamount
+
+				color = rgb(colors[1] / tot_w, colors[2] / tot_w, colors[3] / tot_w, colors[4] / tot_w)
+				data = color
+				return
 
 
 //////////////////////////Poison stuff///////////////////////

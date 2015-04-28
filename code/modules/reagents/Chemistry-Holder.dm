@@ -470,47 +470,9 @@ datum
 
 					var/datum/reagent/R = A
 					if (R.id == reagent)
+						R.on_merge(data, amount)
 						R.volume += amount
 						update_total()
-
-						// mix dem viruses
-						if(R.id == "blood" && reagent == "blood")
-							if(R.data && data)
-
-								if(R.data["viruses"] || data["viruses"])
-
-									var/list/mix1 = R.data["viruses"]
-									var/list/mix2 = data["viruses"]
-
-									// Stop issues with the list changing during mixing.
-									var/list/to_mix = list()
-
-									for(var/datum/disease/advance/AD in mix1)
-										to_mix += AD
-									for(var/datum/disease/advance/AD in mix2)
-										to_mix += AD
-
-									var/datum/disease/advance/AD = Advance_Mix(to_mix)
-									if(AD)
-										var/list/preserve = list(AD)
-										for(var/D in R.data["viruses"])
-											if(!istype(D, /datum/disease/advance))
-												preserve += D
-										R.data["viruses"] = preserve
-						if(R.id == "paint" && reagent == "paint")
-							if(R.color && data)
-								var/list/mix = new /list(2)
-								//fill the list
-								var/datum/reagent/paint/P = chemical_reagents_list["paint"]
-								var/datum/reagent/paint/P1 = new P.type()
-								P1.color = R.color
-								P1.volume = R.volume - amount //since we just increased that
-								var/datum/reagent/paint/P2 = new P.type()
-								P2.color = data
-								P2.volume = amount
-								mix[1] = P1
-								mix[2] = P2
-								R.color = mix_color_from_reagents(mix)
 						if(!safety)
 							handle_reactions()
 						my_atom.on_reagent_change()
