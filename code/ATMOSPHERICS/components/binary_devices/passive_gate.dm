@@ -80,7 +80,7 @@
 				transfer_moles = min(transfer_moles, calculate_transfer_moles(air1, air2, pressure_delta, (network2)? network2.volume : 0))
 		
 		//pump_gas() will return a negative number if no flow occurred
-		returnval = pump_gas(src, air1, air2, transfer_moles, available_power=0)	//available_power=0 means we only move gas if it would flow naturally
+		returnval = pump_gas_passive(src, air1, air2, transfer_moles)
 	
 	if (returnval >= 0)
 		if(network1)
@@ -258,4 +258,4 @@
 			"\blue You have unfastened \the [src].", \
 			"You hear ratchet.")
 		new /obj/item/pipe(loc, make_from=src)
-		del(src)
+		qdel(src)

@@ -20,7 +20,7 @@
 
 	if(!W.mob_can_equip(src, slot))
 		if(del_on_fail)
-			del(W)
+			qdel(W)
 		else
 			if(!disable_warning)
 				src << "\red You are unable to equip that." //Only print if del_on_fail is false
@@ -57,6 +57,10 @@ var/list/slot_equipment_priority = list( \
 		slot_l_store,\
 		slot_r_store\
 	)
+
+//Checks if a given slot can be accessed at this time, either to equip or unequip I
+/mob/proc/slot_is_accessible(var/slot, var/obj/item/I, mob/user=null)
+	return 1
 
 //puts the item "W" into an appropriate slot in a human's inventory
 //returns 0 if it cannot, 1 if successful
@@ -143,7 +147,8 @@ var/list/slot_equipment_priority = list( \
 		W.dropped()
 		return 0
 
-// Removes an item from inventory and places it in the target atom
+// Removes an item from inventory and places it in the target atom.
+// If canremove or other conditions need to be checked then use unEquip instead.
 /mob/proc/drop_from_inventory(var/obj/item/W, var/atom/Target = null)
 	if(W)
 		if(!Target)
@@ -151,7 +156,7 @@ var/list/slot_equipment_priority = list( \
 
 		remove_from_mob(W)
 		if(!W) return 1 // self destroying objects (tk, grabs)
-		
+
 		W.forceMove(Target)
 		update_icons()
 		return 1
@@ -165,7 +170,7 @@ var/list/slot_equipment_priority = list( \
 /mob/proc/drop_r_hand(var/atom/Target)
 	return drop_from_inventory(r_hand, Target)
 
-//Drops the item in our active hand.
+//Drops the item in our active hand. TODO: rename this to drop_active_hand or something
 /mob/proc/drop_item(var/atom/Target)
 	if(hand)	return drop_l_hand(Target)
 	else		return drop_r_hand(Target)
@@ -173,11 +178,11 @@ var/list/slot_equipment_priority = list( \
 /*
 	Removes the object from any slots the mob might have, calling the appropriate icon update proc.
 	Does nothing else.
-	
+
 	DO NOT CALL THIS PROC DIRECTLY. It is meant to be called only by other inventory procs.
 	It's probably okay to use it if you are transferring the item between slots on the same mob,
 	but chances are you're safer calling remove_from_mob() or drop_from_inventory() anyways.
-	
+
 	As far as I can tell the proc exists so that mobs with different inventory slots can override
 	the search through all the slots, without having to duplicate the rest of the item dropping.
 */
@@ -196,15 +201,21 @@ var/list/slot_equipment_priority = list( \
 		update_inv_wear_mask(0)
 	return
 
-//This differs from remove_from_mob() in that it checks canremove first.
+//This differs from remove_from_mob() in that it checks if the item can be unequipped first.
 /mob/proc/unEquip(obj/item/I, force = 0) //Force overrides NODROP for things like wizarditis and admin undress.
 	if(!I) //If there's nothing to drop, the drop is automatically successful.
 		return 1
 
-	if(!I.canremove && !force)
+	var/slot
+	for(var/s in slot_back to slot_tie) //kind of worries me
+		if(get_equipped_item(s) == I)
+			slot = s
+			break
+
+	if(slot && !I.mob_can_unequip(src, slot))
 		return 0
 
-	remove_from_mob(I)
+	drop_from_inventory(I)
 	return 1
 
 //Attemps to remove an object on a mob.  Will not move it to another area or such, just removes from the mob.
@@ -216,9 +227,18 @@ var/list/slot_equipment_priority = list( \
 	O.screen_loc = null
 	if(istype(O, /obj/item))
 		var/obj/item/I = O
-		I.dropped()
+		I.dropped(src)
 	return 1
 
+
+//Returns the item equipped to the specified slot, if any.
+/mob/proc/get_equipped_item(var/slot)
+	switch(slot)
+		if(slot_l_hand) return l_hand
+		if(slot_r_hand) return r_hand
+		if(slot_back) return back
+		if(slot_wear_mask) return wear_mask
+	return null
 
 //Outdated but still in use apparently. This should at least be a human proc.
 /mob/proc/get_equipped_items()

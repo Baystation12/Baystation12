@@ -27,7 +27,7 @@ var/datum/antagonist/rogue_ai/malf
 	hacked_apcs |= apc
 
 /datum/antagonist/rogue_ai/proc/update_takeover_time()
-	hack_time -= ((hacked_apcs.len/6)*tickerProcess.getLastTickerTimeDuration())
+	hack_time -= ((hacked_apcs.len/6)*2.0)
 
 /datum/antagonist/rogue_ai/tick()
 	if(revealed && hacked_apcs.len >= 3)
@@ -213,7 +213,7 @@ var/datum/antagonist/rogue_ai/malf
 							/client/proc/reactivate_camera)
 
 						current:laws = new /datum/ai_laws/nanotrasen
-						del(current:malf_picker)
+						qdel(current:malf_picker)
 						current:show_laws()
 						current.icon_state = "ai"
 

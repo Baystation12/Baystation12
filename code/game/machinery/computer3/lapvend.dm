@@ -31,7 +31,7 @@
 /obj/machinery/lapvend/blob_act()
 	if (prob(50))
 		spawn(0)
-			del(src)
+			qdel(src)
 		return
 
 	return
@@ -202,10 +202,10 @@
 	if (network == 3)
 		newlap.spawn_parts += (/obj/item/part/computer/networking/cable)
 	if (power == 1)
-		del(newlap.battery)
+		qdel(newlap.battery)
 		newlap.battery = new /obj/item/weapon/cell/high(newlap)
 	if (power == 2)
-		del(newlap.battery)
+		qdel(newlap.battery)
 		newlap.battery = new /obj/item/weapon/cell/super(newlap)
 
 	newlap.spawn_parts()
@@ -404,7 +404,7 @@
 	T.time = worldtime2text()
 	vendor_account.transaction_log.Add(T)
 
-	del(relap)
+	qdel(relap)
 	vendmode = 0
 	cardreader = 0
 	floppy = 0

@@ -50,7 +50,7 @@
 		user << "<span class='notice'>You swallow some of contents of \the [src].</span>"
 
 	on_reagent_change()
-		if(icon_state == "saltshakersmall" || icon_state == "peppermillsmall")
+		if(icon_state == "saltshakersmall" || icon_state == "peppermillsmall" || icon_state == "flour")
 			return
 		if(reagents.reagent_list.len > 0)
 			switch(reagents.get_master_reagent_id())
@@ -147,3 +147,15 @@
 	New()
 		..()
 		reagents.add_reagent("blackpepper", 20)
+
+/obj/item/weapon/reagent_containers/food/condiment/flour
+	name = "flour sack"
+	desc = "A big bag of flour. Good for baking!"
+	icon = 'icons/obj/food.dmi'
+	icon_state = "flour"
+	item_state = "flour"
+	New()
+		..()
+		reagents.add_reagent("flour", 30)
+		src.pixel_x = rand(-10.0, 10)
+		src.pixel_y = rand(-10.0, 10)

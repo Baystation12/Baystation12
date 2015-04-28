@@ -28,7 +28,7 @@
 		/obj/machinery/atmospherics/unary/cryo_cell,
 		/obj/machinery/dna_scannernew,
 		/obj/item/weapon/grenade/chem_grenade,
-		/obj/machinery/bot/medbot,
+		/mob/living/bot/medbot,
 		/obj/machinery/computer/pandemic,
 		/obj/item/weapon/storage/secure/safe,
 		/obj/machinery/iv_drip,
@@ -224,10 +224,10 @@
 	attackby(var/obj/D, mob/user as mob)
 		if(isprox(D))
 			user << "You add [D] to [src]."
-			del(D)
+			qdel(D)
 			user.put_in_hands(new /obj/item/weapon/bucket_sensor)
 			user.drop_from_inventory(src)
-			del(src)
+			qdel(src)
 
 	update_icon()
 		overlays.Cut()

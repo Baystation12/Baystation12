@@ -41,12 +41,12 @@
 				if (target.l_hand)
 					// Disarm left hand
 					//Urist McAssistant dropped the macguffin with a scream just sounds odd. Plus it doesn't work with NO_PAIN
-					target.visible_message("<span class='danger'>\The [target.l_hand] was knocked right out of [src]'s grasp!</span>")
+					target.visible_message("<span class='danger'>\The [target.l_hand] was knocked right out of [target]'s grasp!</span>")
 					target.drop_l_hand()
 			if("r_arm", "r_hand")
 				if (target.r_hand)
 					// Disarm right hand
-					target.visible_message("<span class='danger'>\The [target.r_hand] was knocked right out of [src]'s grasp!</span>")
+					target.visible_message("<span class='danger'>\The [target.r_hand] was knocked right out of [target]'s grasp!</span>")
 					target.drop_r_hand()
 			if("chest")
 				if(!target.lying)

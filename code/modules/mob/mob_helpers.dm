@@ -108,6 +108,15 @@
 /mob/living/silicon/isSynthetic()
 	return 1
 
+/mob/living/carbon/human/isMonkey()
+	return istype(species, /datum/species/monkey)
+
+/mob/proc/isMonkey()
+	return 0
+
+/mob/living/carbon/human/isMonkey()
+	return istype(species, /datum/species/monkey)
+
 /proc/ispAI(A)
 	if(istype(A, /mob/living/silicon/pai))
 		return 1
@@ -606,3 +615,7 @@ proc/is_blind(A)
 
 	eyeobj.setLoc(C)
 	return 1
+
+// Returns true if the mob has a client which has been active in the last given X minutes.
+/mob/proc/is_client_active(var/active = 1)
+	return client && client.inactivity < active MINUTES

@@ -2,6 +2,9 @@
 	name = "brain"
 	health = 400 //They need to live awhile longer than other organs.
 	desc = "A piece of juicy meat found in a person's head."
+	organ_tag = "brain"
+	parent_organ = "head"
+	vital = 1
 	icon_state = "brain2"
 	force = 1.0
 	w_class = 2.0
@@ -23,6 +26,12 @@
 	spawn(5)
 		if(brainmob && brainmob.client)
 			brainmob.client.screen.len = null //clear the hud
+
+/obj/item/organ/brain/Destroy()
+	if(brainmob)
+		qdel(brainmob)
+		brainmob = null
+	..()
 
 /obj/item/organ/brain/proc/transfer_identity(var/mob/living/carbon/H)
 	name = "\the [H]'s [initial(src.name)]"
@@ -46,7 +55,7 @@
 
 /obj/item/organ/brain/removed(var/mob/living/user)
 
-	..()
+	name = "[owner.real_name]'s brain"
 
 	var/mob/living/simple_animal/borer/borer = owner.has_brain_worms()
 
@@ -56,6 +65,8 @@
 	var/obj/item/organ/brain/B = src
 	if(istype(B) && istype(owner))
 		B.transfer_identity(owner)
+
+	..()
 
 /obj/item/organ/brain/replaced(var/mob/living/target)
 

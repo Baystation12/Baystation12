@@ -102,10 +102,10 @@
 	if(!istype(target))
 		if(istype(target, /mob/living/simple_animal/mouse))
 			new /obj/effect/decal/remains/mouse(get_turf(target))
-			del(target)
+			qdel(target)
 		else if(istype(target, /mob/living/simple_animal/lizard))
 			new /obj/effect/decal/remains/lizard(get_turf(target))
-			del(target)
+			qdel(target)
 		return
 
 
@@ -229,7 +229,7 @@
 				apply_special_effect(M)
 			splatter(T,thrown)
 		origin_turf.visible_message("<span class='danger'>The [thrown.name] explodes!</span>")
-		del(thrown)
+		qdel(thrown)
 		return
 
 	if(istype(target,/mob/living))
@@ -242,7 +242,7 @@
 	if(get_trait(TRAIT_JUICY) && splatted)
 		splatter(origin_turf,thrown)
 		origin_turf.visible_message("<span class='danger'>The [thrown.name] splatters against [target]!</span>")
-		del(thrown)
+		qdel(thrown)
 
 /datum/seed/proc/handle_environment(var/turf/current_turf, var/datum/gas_mixture/environment, var/light_supplied, var/check_only)
 

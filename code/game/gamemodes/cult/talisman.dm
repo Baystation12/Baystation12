@@ -35,7 +35,7 @@
 			user.take_organ_damage(5, 0)
 			if(src && src.imbue!="supply" && src.imbue!="runestun")
 				if(delete)
-					del(src)
+					qdel(src)
 			return
 		else
 			user << "You see strange symbols on the paper. Are they supposed to mean something?"
@@ -47,7 +47,7 @@
 			if(imbue == "runestun")
 				user.take_organ_damage(5, 0)
 				call(/obj/effect/rune/proc/runestun)(T)
-				del(src)
+				qdel(src)
 			else
 				..()   ///If its some other talisman, use the generic attack code, is this supposed to work this way?
 		else
@@ -56,7 +56,7 @@
 
 	proc/supply(var/key)
 		if (!src.uses)
-			del(src)
+			qdel(src)
 			return
 
 		var/dat = "<B>There are [src.uses] bloody runes on the parchment.</B><BR>"
@@ -106,7 +106,7 @@
 				if("soulstone")
 					new /obj/item/device/soulstone(get_turf(usr))
 				if("construct")
-					new /obj/structure/constructshell(get_turf(usr))
+					new /obj/structure/constructshell/cult(get_turf(usr))
 			src.uses--
 			supply()
 		return

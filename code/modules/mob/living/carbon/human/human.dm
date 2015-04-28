@@ -20,6 +20,12 @@
 		else
 			set_species()
 
+	if(species)
+		real_name = species.get_random_name(gender)
+		name = real_name
+		if(mind)
+			mind.name = real_name
+
 	hud_list[HEALTH_HUD]      = image('icons/mob/hud.dmi', src, "hudhealth100")
 	hud_list[STATUS_HUD]      = image('icons/mob/hud.dmi', src, "hudhealthy")
 	hud_list[LIFE_HUD]	      = image('icons/mob/hud.dmi', src, "hudhealthy")
@@ -36,6 +42,11 @@
 	if(dna)
 		dna.real_name = real_name
 	make_blood()
+
+/mob/living/carbon/human/Destroy()
+	for(var/organ in organs)
+		qdel(organ)
+	return ..()
 
 /mob/living/carbon/human/Stat()
 	..()
@@ -55,7 +66,7 @@
 
 		if (internal)
 			if (!internal.air_contents)
-				del(internal)
+				qdel(internal)
 			else
 				stat("Internal Atmosphere Info", internal.name)
 				stat("Tank Pressure", internal.air_contents.return_pressure())
@@ -322,8 +333,8 @@
 
 //Returns "Unknown" if facially disfigured and real_name if not. Useful for setting name when polyacided or when updating a human's name variable
 /mob/living/carbon/human/proc/get_face_name()
-	var/obj/item/organ/external/head/head = get_organ("head")
-	if( !head || head.disfigured || (head.status & ORGAN_DESTROYED) || !real_name || (HUSK in mutations) )	//disfigured. use id-name if possible
+	var/obj/item/organ/external/head = get_organ("head")
+	if(!head || head.disfigured || (head.status & ORGAN_DESTROYED) || !real_name || (HUSK in mutations) )	//disfigured. use id-name if possible
 		return "Unknown"
 	return real_name
 
@@ -808,7 +819,7 @@
 	for(var/x in all_hairs)
 		var/datum/sprite_accessory/hair/H = new x // create new hair datum based on type x
 		hairs.Add(H.name) // add hair name to hairs
-		del(H) // delete the hair after it's all done
+		qdel(H) // delete the hair after it's all done
 
 	var/new_style = input("Please select hair style", "Character Generation",h_style)  as null|anything in hairs
 
@@ -823,7 +834,7 @@
 	for(var/x in all_fhairs)
 		var/datum/sprite_accessory/facial_hair/H = new x
 		fhairs.Add(H.name)
-		del(H)
+		qdel(H)
 
 	new_style = input("Please select facial style", "Character Generation",f_style)  as null|anything in fhairs
 
@@ -856,11 +867,11 @@
 	var/list/creatures = list()
 	for(var/mob/living/carbon/h in world)
 		creatures += h
-	var/mob/target = input ("Who do you want to project your mind to ?") as null|anything in creatures
+	var/mob/target = input("Who do you want to project your mind to ?") as null|anything in creatures
 	if (isnull(target))
 		return
 
-	var/say = input ("What do you wish to say")
+	var/say = sanitize(input("What do you wish to say"))
 	if(mRemotetalk in target.mutations)
 		target.show_message("\blue You hear [src.real_name]'s voice: [say]")
 	else
@@ -919,23 +930,12 @@
 		germ_level += n
 
 /mob/living/carbon/human/revive()
-	for (var/obj/item/organ/external/O in organs)
-		O.status &= ~ORGAN_BROKEN
-		O.status &= ~ORGAN_BLEEDING
-		O.status &= ~ORGAN_SPLINTED
-		O.status &= ~ORGAN_CUT_AWAY
-		O.status &= ~ORGAN_ATTACHABLE
-		O.wounds.Cut()
-		O.heal_damage(1000,1000,1,1)
-
-	var/obj/item/organ/external/head/h = organs_by_name["head"]
-	h.disfigured = 0
 
 	if(species && !(species.flags & NO_BLOOD))
 		vessel.add_reagent("blood",560-vessel.total_volume)
 		fixblood()
 
-	// Fix up any missing organs.
+	// Fix up all organs.
 	// This will ignore any prosthetics in the prefs currently.
 	species.create_organs(src)
 
@@ -945,13 +945,11 @@
 				if(H.brainmob.real_name == src.real_name)
 					if(H.brainmob.mind)
 						H.brainmob.mind.transfer_to(src)
-						del(H)
-
-	for(var/obj/item/organ/I in internal_organs)
-		I.damage = 0
+						qdel(H)
 
 	for (var/datum/disease/virus in viruses)
 		virus.cure()
+
 	for (var/ID in virus2)
 		var/datum/disease2/disease/V = virus2[ID]
 		V.cure(src)
@@ -1020,7 +1018,7 @@
 	.=..()
 	if(clean_feet && !shoes && istype(feet_blood_DNA, /list) && feet_blood_DNA.len)
 		feet_blood_color = null
-		del(feet_blood_DNA)
+		qdel(feet_blood_DNA)
 		update_inv_shoes(1)
 		return 1
 
@@ -1115,8 +1113,6 @@
 
 	species = all_species[new_species]
 
-	species.create_organs(src)
-
 	if(species.language)
 		add_language(species.language)
 
@@ -1133,6 +1129,8 @@
 		g_skin = 0
 		b_skin = 0
 
+	species.create_organs(src)
+
 	species.handle_post_spawn(src)
 
 	maxHealth = species.total_health
@@ -1146,7 +1144,7 @@
 	if(client && client.screen)
 		client.screen.len = null
 		if(hud_used)
-			del(hud_used)
+			qdel(hud_used)
 		hud_used = new /datum/hud(src)
 
 	if(species)
@@ -1357,3 +1355,8 @@
 		U << "<span class='danger'>You pop [S]'s [current_limb.joint] back in!</span>"
 		S << "<span class='danger'>[U] pops your [current_limb.joint] back in!</span>"
 	current_limb.undislocate()
+
+/mob/living/carbon/human/drop_from_inventory(var/obj/item/W, var/atom/Target = null)
+	if(W in organs)
+		return
+	..()

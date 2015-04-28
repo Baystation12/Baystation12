@@ -88,6 +88,10 @@
 		return data
 	return null
 
+/datum/reagent/Destroy() // This should only be called by the holder, so it's already handled clearing its references
+	..()
+	holder = null
+
 /* DEPRECATED - TODO: REMOVE EVERYWHERE */
 
 /datum/reagent/proc/reaction_turf(var/turf/target)
@@ -226,7 +230,7 @@
 		lowertemp.temperature = max(min(lowertemp.temperature-2000, lowertemp.temperature / 2), 0)
 		lowertemp.react()
 		T.assume_air(lowertemp)
-		del(hotspot)
+		qdel(hotspot)
 
 	if (environment && environment.temperature > min_temperature) // Abstracted as steam or something
 		var/removed_heat = between(0, volume * WATER_LATENT_HEAT, -environment.get_thermal_energy_change(min_temperature))
@@ -579,7 +583,7 @@
 				return
 			else if(removed > meltdose)
 				H << "<span class='danger'>Your [H.head] melts away!</span>"
-				del(H.head)
+				qdel(H.head)
 				H.update_inv_head(1)
 				H.update_hair(1)
 				removed -= meltdose
@@ -593,7 +597,7 @@
 				return
 			else if(removed > meltdose)
 				H << "<span class='danger'>Your [H.wear_mask] melts away!</span>"
-				del(H.wear_mask)
+				qdel(H.wear_mask)
 				H.update_inv_wear_mask(1)
 				H.update_hair(1)
 				removed -= meltdose
@@ -606,7 +610,7 @@
 				removed /= 2
 			else if(removed > meltdose)
 				H << "<span class='danger'>Your [H.glasses] melt away!</span>"
-				del(H.glasses)
+				qdel(H.glasses)
 				H.update_inv_glasses(1)
 				removed -= meltdose / 2
 		if(removed <= 0)
@@ -637,7 +641,7 @@
 		I.desc = "Looks like this was \an [O] some time ago."
 		for(var/mob/M in viewers(5, O))
 			M << "<span class='warning'>\The [O] melts.</span>"
-		del(O)
+		qdel(O)
 		remove_self(meltdose) // 10 units of acid will not melt EVERYTHING on the tile
 
 /datum/reagent/silicon
@@ -1282,7 +1286,7 @@
 	M.silent = max(M.silent, 10)
 	M.tod = worldtime2text()
 
-/datum/reagent/toxin/zombiepowder/Del()
+/datum/reagent/toxin/zombiepowder/Destroy()
 	if(holder && holder.my_atom && ismob(holder.my_atom))
 		var/mob/M = holder.my_atom
 		M.status_flags &= ~FAKEDEATH
@@ -1323,7 +1327,7 @@
 			W.rotting = 0
 			for(var/obj/effect/E in W)
 				if(E.name == "Wallrot")
-					del(E)
+					qdel(E)
 
 			W.visible_message("<span class='notice'>The fungi are completely dissolved by the solution!</span>")
 
@@ -1333,7 +1337,7 @@
 		alien_weeds.health -= rand(15, 35)
 		alien_weeds.healthcheck()
 	else if(istype(O, /obj/effect/plant))
-		del(O)
+		qdel(O)
 
 /datum/reagent/toxin/plantbgone/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/location)
 	..()
@@ -1630,7 +1634,7 @@
 	M.invisibility = 101
 	for(var/obj/item/W in M)
 		if(istype(W, /obj/item/weapon/implant)) //TODO: Carn. give implants a dropped() or something
-			del(W)
+			qdel(W)
 			continue
 		W.layer = initial(W.layer)
 		W.loc = M.loc
@@ -1642,7 +1646,7 @@
 		M.mind.transfer_to(new_mob)
 	else
 		new_mob.key = M.key
-	del(M)
+	qdel(M)
 
 /datum/reagent/nanites
 	name = "Nanomachines"
@@ -1787,7 +1791,7 @@
 		lowertemp.temperature = max(min(lowertemp.temperature-2000, lowertemp.temperature / 2), 0)
 		lowertemp.react()
 		T.assume_air(lowertemp)
-		del(hotspot)
+		qdel(hotspot)
 
 	if(volume >= 3)
 		if(T.wet >= 1)
@@ -3898,7 +3902,7 @@
 
 /datum/reagent/space_cleaner/touch_obj(var/obj/O)
 	if(istype(O, /obj/effect/decal/cleanable))
-		del(O)
+		qdel(O)
 	else
 		O.clean_blood()
 

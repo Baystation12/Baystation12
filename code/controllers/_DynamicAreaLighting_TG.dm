@@ -161,15 +161,6 @@ atom/movable/New()
 		trueLuminosity = luminosity * luminosity
 		light = new(src)
 
-//Objects with opacity will trigger nearby lights to update at next lighting process.
-atom/movable/Del()
-	if(opacity)
-		if(isturf(loc))
-			if(loc:lighting_lumcount > 1)
-				UpdateAffectingLights()
-
-	..()
-
 //Sets our luminosity.
 //If we have no light it will create one.
 //If we are setting luminosity to 0 the light will be cleaned up by the controller and garbage collected once all its
@@ -323,6 +314,7 @@ turf/proc/shift_to_subarea()
 			A.SetLightLevel(level, color_light)
 
 		A.contents += src	// move the turf into the area
+	universe.OnTurfTick(src)
 
 // Dedicated lighting sublevel for space turfs
 // helps us depower things in space, remove space fire alarms,

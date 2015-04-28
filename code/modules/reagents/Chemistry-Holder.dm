@@ -43,6 +43,15 @@
 				chemical_reactions_list[id] += D
 				break // Don't bother adding ourselves to other reagent ids, it is redundant.
 
+/datum/reagents/Destroy()
+	..()
+	for(var/datum/reagent/R in reagent_list)
+		qdel(R)
+	reagent_list.Cut()
+	reagent_list = null
+	if(my_atom && my_atom.reagents == src)
+		my_atom.reagents = null
+
 /* Internal procs */
 
 /datum/reagents/proc/get_free_space() // Returns free space.
@@ -199,7 +208,7 @@
 	for(var/datum/reagent/current in reagent_list)
 		if (current.id == id)
 			reagent_list -= current
-			del(current)
+			qdel(current)
 			update_total()
 			if(my_atom)
 				my_atom.on_reagent_change()

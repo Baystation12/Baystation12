@@ -54,10 +54,10 @@ using metal and glass, it uses glass and reagents (usually sulfuric acis).
 
 /obj/machinery/r_n_d/circuit_imprinter/blob_act()
 	if(prob(50))
-		del(src)
+		qdel(src)
 
 /obj/machinery/r_n_d/circuit_imprinter/meteorhit()
-	del(src)
+	qdel(src)
 	return
 
 /obj/machinery/r_n_d/circuit_imprinter/proc/TotalMaterials()
@@ -104,46 +104,51 @@ using metal and glass, it uses glass and reagents (usually sulfuric acis).
 		return 1
 	if(O.is_open_container())
 		return 0
-	if(!istype(O, /obj/item/stack/sheet/glass) && !istype(O, /obj/item/stack/sheet/mineral/gold) && !istype(O, /obj/item/stack/sheet/mineral/diamond) && !istype(O, /obj/item/stack/sheet/mineral/uranium))
-		user << "<span class='notice'>You cannot insert this item into \the [src]!</span>"
-		return 1
+//	if(!istype(O, /obj/item/stack/sheet/glass) && !istype(O, /obj/item/stack/sheet/mineral/gold) && !istype(O, /obj/item/stack/sheet/mineral/diamond) && !istype(O, /obj/item/stack/sheet/mineral/uranium))
+//		user << "<span class='notice'>You cannot insert this item into \the [src]!</span>"
+//		return 1
 	if(stat)
 		return 1
 	if(busy)
 		user << "<span class='notice'>\The [src] is busy. Please wait for completion of previous operation.</span>"
 		return 1
-	var/obj/item/stack/sheet/stack = O
-	if((TotalMaterials() + stack.perunit) > max_material_amount)
-		user << "<span class='notice'>\The [src] is full. Please remove glass from \the [src] in order to insert more.</span>"
-		return 1
 
-	var/amount = round(input("How many sheets do you want to add?") as num)
-	if(amount < 0)
-		amount = 0
-	if(amount == 0)
-		return
-	if(amount > stack.amount)
-		amount = min(stack.amount, round((max_material_amount - TotalMaterials()) / stack.perunit))
+	if(istype(O, /obj/item/stack/sheet/glass) || istype(O, /obj/item/stack/sheet/mineral/gold) || istype(O, /obj/item/stack/sheet/mineral/diamond) || istype(O, /obj/item/stack/sheet/mineral/uranium))
 
-	busy = 1
-	use_power(max(1000, (3750 * amount / 10)))
-	var/stacktype = stack.type
-	stack.use(amount)
-	if(do_after(usr, 16))
-		user << "<span class='notice'>You add [amount] sheets to \the [src].</span>"
-		switch(stacktype)
-			if(/obj/item/stack/sheet/glass)
-				g_amount += amount * 3750
-			if(/obj/item/stack/sheet/mineral/gold)
-				gold_amount += amount * 2000
-			if(/obj/item/stack/sheet/mineral/diamond)
-				diamond_amount += amount * 2000
-			if(/obj/item/stack/sheet/mineral/uranium)
-				uranium_amount += amount * 2000
-	else
-		new stacktype(loc, amount)
-	busy = 0
-	updateUsrDialog()
+		var/obj/item/stack/sheet/stack = O
+		if((TotalMaterials() + stack.perunit) > max_material_amount)
+			user << "<span class='notice'>\The [src] is full. Please remove glass from \the [src] in order to insert more.</span>"
+			return 1
+
+		var/amount = round(input("How many sheets do you want to add?") as num)
+		if(amount < 0)
+			amount = 0
+		if(amount == 0)
+			return
+		if(amount > stack.amount)
+			amount = min(stack.amount, round((max_material_amount - TotalMaterials()) / stack.perunit))
+
+		busy = 1
+		use_power(max(1000, (3750 * amount / 10)))
+		var/stacktype = stack.type
+		stack.use(amount)
+		if(do_after(usr, 16))
+			user << "<span class='notice'>You add [amount] sheets to \the [src].</span>"
+			switch(stacktype)
+				if(/obj/item/stack/sheet/glass)
+					g_amount += amount * 3750
+				if(/obj/item/stack/sheet/mineral/gold)
+					gold_amount += amount * 2000
+				if(/obj/item/stack/sheet/mineral/diamond)
+					diamond_amount += amount * 2000
+				if(/obj/item/stack/sheet/mineral/uranium)
+					uranium_amount += amount * 2000
+		else
+			new stacktype(loc, amount)
+		busy = 0
+		updateUsrDialog()
+
+	..()
 
 //This is to stop these machines being hackable via clicking.
 /obj/machinery/r_n_d/circuit_imprinter/attack_hand(mob/user as mob)

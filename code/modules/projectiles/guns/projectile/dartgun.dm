@@ -27,7 +27,7 @@
 	projectile_type = /obj/item/projectile/bullet/chemdart
 
 /obj/item/ammo_casing/chemdart/expend()
-	del(src)
+	qdel(src)
 
 /obj/item/ammo_magazine/chemdart
 	name = "dart cartridge"

@@ -31,7 +31,7 @@
 		processing_objects.Add(src)
 	update_icon()
 
-/obj/item/weapon/gun/energy/Del()
+/obj/item/weapon/gun/energy/Destroy()
 	if(self_recharge)
 		processing_objects.Remove(src)
 	..()

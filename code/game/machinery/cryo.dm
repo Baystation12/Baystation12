@@ -24,9 +24,11 @@
 	..()
 	initialize_directions = dir
 
-/obj/machinery/atmospherics/unary/cryo_cell/Del()
-	if(occupant)
-		occupant.loc = loc
+/obj/machinery/atmospherics/unary/cryo_cell/Destroy()
+	var/turf/T = loc
+	T.contents += contents
+	if(beaker)
+		beaker.loc = get_step(loc, SOUTH) //Beaker is carefully ejected from the wreckage of the cryotube
 	..()
 
 /obj/machinery/atmospherics/unary/cryo_cell/initialize()
@@ -190,7 +192,7 @@
 				return
 		var/mob/M = G:affecting
 		if(put_mob(M))
-			del(G)
+			qdel(G)
 	return
 
 /obj/machinery/atmospherics/unary/cryo_cell/update_icon()

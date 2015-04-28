@@ -39,4 +39,4 @@
 
 	sleep(10)
 	if(src)
-		del(src)
+		qdel(src)

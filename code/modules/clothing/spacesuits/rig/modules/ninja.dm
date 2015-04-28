@@ -66,6 +66,7 @@
 
 	name = "teleportation module"
 	desc = "A complex, sleek-looking, hardsuit-integrated teleportation module."
+	icon_state = "teleporter"
 	use_power_cost = 40
 	redundant = 1
 	usable = 1
@@ -126,6 +127,7 @@
 
 	name = "net projector"
 	desc = "Some kind of complex energy projector with a hardsuit mount."
+	icon_state = "enet"
 
 	interface_name = "energy net launcher"
 	interface_desc = "An advanced energy-patterning projector used to capture targets."
@@ -147,6 +149,7 @@
 
 	name = "self-destruct module"
 	desc = "Oh my God, Captain. A bomb."
+	icon_state = "deadman"
 	usable = 1
 	active = 1
 	permanent = 1
@@ -176,12 +179,12 @@
 	explosion(get_turf(src), 1, 2, 4, 5)
 	if(holder && holder.wearer)
 		holder.wearer.drop_from_inventory(src)
-		del(holder)
-	del(src)
+		qdel(holder)
+	qdel(src)
 
 /obj/item/rig_module/self_destruct/small/engage()
 	explosion(get_turf(src), 0, 0, 3, 4)
 	if(holder && holder.wearer)
 		holder.wearer.drop_from_inventory(src)
-		del(holder)
-	del(src)
+		qdel(holder)
+	qdel(src)

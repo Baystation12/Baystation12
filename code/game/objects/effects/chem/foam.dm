@@ -32,7 +32,7 @@
 			M.updateicon()
 		flick("[icon_state]-disolve", src)
 		sleep(5)
-		delete()
+		qdel(src)
 	return
 
 /obj/effect/effect/foam/proc/checkReagents() // transfer any reagents to the floor
@@ -69,7 +69,7 @@
 		flick("[icon_state]-disolve", src)
 
 		spawn(5)
-			delete()
+			qdel(src)
 
 /obj/effect/effect/foam/Crossed(var/atom/movable/AM)
 	if(metal)
@@ -106,7 +106,7 @@
 			F.amount += amount
 			return
 
-		F = new(location, metal)
+		F = PoolOrNew(/obj/effect/effect/foam, list(location, metal))
 		F.amount = amount
 
 		if(!metal) // don't carry other chemicals if a metal foam
@@ -134,7 +134,7 @@
 	..()
 	update_nearby_tiles(1)
 
-/obj/structure/foamedmetal/Del()
+/obj/structure/foamedmetal/Destroy()
 	density = 0
 	update_nearby_tiles(1)
 	..()
@@ -146,19 +146,19 @@
 		icon_state = "ironfoam"
 
 /obj/structure/foamedmetal/ex_act(severity)
-	del(src)
+	qdel(src)
 
 /obj/structure/foamedmetal/blob_act()
-	del(src)
+	qdel(src)
 
 /obj/structure/foamedmetal/bullet_act()
 	if(metal == 1 || prob(50))
-		del(src)
+		qdel(src)
 
 /obj/structure/foamedmetal/attack_hand(var/mob/user)
 	if ((HULK in user.mutations) || (prob(75 - metal * 25)))
 		user.visible_message("<span class='warning'>[user] smashes through the foamed metal.</span>", "<span class='notice'>You smash through the metal foam wall.</span>")
-		del(src)
+		qdel(src)
 	else
 		user << "<span class='notice'>You hit the metal foam but bounce off it.</span>"
 	return
@@ -168,13 +168,13 @@
 		var/obj/item/weapon/grab/G = I
 		G.affecting.loc = src.loc
 		visible_message("<span class='warning'>[G.assailant] smashes [G.affecting] through the foamed metal wall.</span>")
-		del(I)
-		del(src)
+		qdel(I)
+		qdel(src)
 		return
 
 	if(prob(I.force * 20 - metal * 25))
 		user.visible_message("<span class='warning'>[user] smashes through the foamed metal.</span>", "<span class='notice'>You smash through the foamed metal with \the [I].</span>")
-		del(src)
+		qdel(src)
 	else
 		user << "<span class='notice'>You hit the metal foam to no effect.</span>"
 

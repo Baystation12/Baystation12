@@ -24,7 +24,7 @@
 	if(istype(A, /obj/item/weapon/storage) || istype(A, /obj/structure/table) || istype(A, /obj/structure/closet) || istype(A, /obj/item/weapon/reagent_containers) || istype(A, /obj/structure/sink) || istype(A, /obj/structure/janitorialcart))
 		return
 
-	if(istype(A, /obj/effect/proc_holder/spell))
+	if(istype(A, /spell))
 		return
 
 	if(proximity)
@@ -64,7 +64,6 @@
 			reagents.trans_to_obj(D, amount_per_transfer_from_this)
 			D.set_color()
 			D.set_up(my_target, spray_size, 10)
-
 	return
 
 /obj/item/weapon/reagent_containers/spray/attack_self(var/mob/user)

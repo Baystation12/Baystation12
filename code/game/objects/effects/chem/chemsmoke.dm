@@ -29,7 +29,7 @@
 	if(seed_name && plant_controller)
 		seed = plant_controller.seeds[seed_name]
 	if(!seed)
-		del(src)
+		qdel(src)
 	..()
 
 /datum/effect/effect/system/smoke_spread/chem/New()
@@ -140,8 +140,17 @@
 				spawn(0)
 					spawnSmoke(T, I, range)
 
-/datum/effect/effect/system/smoke_spread/chem/proc/spawnSmoke(var/turf/T, var/icon/I, var/dist = 1) // Randomizes and spawns the smoke effect. Also handles deleting the smoke once the effect is finished.
-	var/obj/effect/effect/smoke/chem/smoke = new(location)
+//------------------------------------------
+// Randomizes and spawns the smoke effect.
+// Also handles deleting the smoke once the effect is finished.
+//------------------------------------------
+/datum/effect/effect/system/smoke_spread/chem/proc/spawnSmoke(var/turf/T, var/icon/I, var/dist = 1, var/obj/effect/effect/smoke/chem/passed_smoke)
+
+	var/obj/effect/effect/smoke/chem/smoke
+	if(passed_smoke)
+		smoke = passed_smoke
+	else
+		smoke = PoolOrNew(/obj/effect/effect/smoke/chem, location)
 
 	if(chemholder.reagents.reagent_list.len)
 		chemholder.reagents.trans_to_obj(smoke, chemholder.reagents.total_volume / dist, copy = 1) //copy reagents to the smoke so mob/breathe() can handle inhaling the reagents
@@ -155,10 +164,10 @@
 	sleep(150+rand(0,20))	// turning it off before it is deleted results in cleaner
 	smoke.opacity = 0		// lighting and view range updates
 	fadeOut(smoke)
-	smoke.delete()
+	qdel(src)
 
 /datum/effect/effect/system/smoke_spread/chem/spores/spawnSmoke(var/turf/T, var/icon/I, var/dist = 1)
-	var/obj/effect/effect/smoke/chem/spores = new(location)
+	var/obj/effect/effect/smoke/chem/spores = PoolOrNew(/obj/effect/effect/smoke/chem, location)
 	spores.name = "cloud of [seed.seed_name] [seed.seed_noun]"
 	..(T, I, dist, spores)
 

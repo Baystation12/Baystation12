@@ -78,6 +78,8 @@ h1.alert, h2.alert		{color: #000000;}
 .alium					{color: #00ff00;}
 .cult					{color: #800080; font-weight: bold; font-style: italic;}
 
+.reflex_shoot			{color: #000099; font-style: italic;}
+
 /* Languages */
 
 .alien					{color: #543354;}

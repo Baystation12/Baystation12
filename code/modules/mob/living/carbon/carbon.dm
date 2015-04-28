@@ -17,6 +17,13 @@
 	if(germ_level < GERM_LEVEL_AMBIENT && prob(30))	//if you're just standing there, you shouldn't get more germs beyond an ambient level
 		germ_level++
 
+/mob/living/carbon/Destroy()
+	for(var/guts in internal_organs)
+		qdel(guts)
+	for(var/food in stomach_contents)
+		qdel(food)
+	return ..()
+
 /mob/living/carbon/Move(NewLoc, direct)
 	. = ..()
 	if(.)
@@ -41,10 +48,9 @@
 				var/d = rand(round(I.force / 4), I.force)
 				if(istype(src, /mob/living/carbon/human))
 					var/mob/living/carbon/human/H = src
-					var/organ = H.get_organ("chest")
-					if (istype(organ, /obj/item/organ/external))
-						var/obj/item/organ/external/temp = organ
-						if(temp.take_damage(d, 0))
+					var/obj/item/organ/external/organ = H.get_organ("chest")
+					if (istype(organ))
+						if(organ.take_damage(d, 0))
 							H.UpdateDamageIcon()
 					H.updatehealth()
 				else
@@ -338,7 +344,7 @@
 
 	if(!item) return //Grab processing has a chance of returning null
 
-	
+
 	src.remove_from_mob(item)
 	item.loc = src.loc
 
@@ -473,6 +479,9 @@
 		chem_effects[effect] = magnitude
 
 /mob/living/carbon/get_default_language()
+	if(default_language)
+		return default_language
+
 	if(!species)
 		return null
 	return species.default_language ? all_languages[species.default_language] : null

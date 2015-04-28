@@ -42,3 +42,7 @@
 			#endif
 
 		scheck()
+
+
+/datum/controller/process/machinery/getStatName()
+	return ..()+"([machines.len])"

@@ -29,7 +29,7 @@
 			M.drop_from_inventory(src) //icon update
 			if(reagents.total_volume)
 				reagents.trans_to_mob(M, reagents.total_volume, CHEM_INGEST)
-			del(src)
+			qdel(src)
 			return 1
 
 		else if(istype(M, /mob/living/carbon/human))
@@ -54,7 +54,7 @@
 
 			if(reagents.total_volume)
 				reagents.trans_to_mob(M, reagents.total_volume, CHEM_INGEST)
-			del(src)
+			qdel(src)
 
 			return 1
 
@@ -76,7 +76,7 @@
 			for(var/mob/O in viewers(2, user))
 				O.show_message("<span class='warning'>[user] puts something in \the [target].</span>", 1)
 
-			del(src)
+			qdel(src)
 
 		return
 

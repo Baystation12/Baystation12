@@ -69,6 +69,7 @@
 	mutation_chance = rand(25, 35)
 	var/sanitizedcolour = replacetext(colour, " ", "")
 	coretype = text2path("/obj/item/slime_extract/[sanitizedcolour]")
+	regenerate_icons()
 	..(location)
 
 /mob/living/carbon/slime/movement_delay()
@@ -175,7 +176,7 @@
 	var/f_loss = null
 	switch (severity)
 		if (1.0)
-			del(src)
+			qdel(src)
 			return
 
 		if (2.0)

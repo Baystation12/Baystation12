@@ -97,5 +97,5 @@
 		for (var/obj/item/weapon/ore/O in contents)
 			O.loc = src.loc
 			O.ex_act(severity++)
-		del(src)
+		qdel(src)
 		return

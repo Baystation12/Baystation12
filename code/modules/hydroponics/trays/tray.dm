@@ -98,22 +98,22 @@
 
 	// Beneficial reagents also have values for modifying yield_mod and mut_mod (in that order).
 	var/global/list/beneficial_reagents = list(
-		"beer" =           list( -0.05, 0,   0   ),
-		"fluorine" =       list( -2,    0,   0   ),
-		"chlorine" =       list( -1,    0,   0   ),
-		"phosphorus" =     list( -0.75, 0,   0   ),
-		"sodawater" =      list(  0.1,  0,   0   ),
-		"sacid" =          list( -1,    0,   0   ),
-		"pacid" =          list( -2,    0,   0   ),
-		"plantbgone" =     list( -2,    0,   0.2 ),
-		"cryoxadone" =     list(  3,    0,   0   ),
-		"ammonia" =        list(  0.5,  0,   0   ),
-		"diethylamine" =   list(  1,    0,   0   ),
-		"nutriment" =      list(  0.5,  0.1,   0 ),
-		"radium" =         list( -1.5,  0,   0.2 ),
-		"adminordrazine" = list(  1,    1,   1   ),
-		"robustharvest" =  list(  0,    0.2, 0   ),
-		"left4zed" =       list(  0,    0,   0.2 )
+		"beer" =           list( -0.05, 0,   0  ),
+		"fluorine" =       list( -2,    0,   0  ),
+		"chlorine" =       list( -1,    0,   0  ),
+		"phosphorus" =     list( -0.75, 0,   0  ),
+		"sodawater" =      list(  0.1,  0,   0  ),
+		"sacid" =          list( -1,    0,   0  ),
+		"pacid" =          list( -2,    0,   0  ),
+		"plantbgone" =     list( -2,    0,   0.2),
+		"cryoxadone" =     list(  3,    0,   0  ),
+		"ammonia" =        list(  0.5,  0,   0  ),
+		"diethylamine" =   list(  1,    0,   0  ),
+		"nutriment" =      list(  0.5,  0.1, 0  ),
+		"radium" =         list( -1.5,  0,   0.2),
+		"adminordrazine" = list(  1,    1,   1  ),
+		"robustharvest" =  list(  0,    0.2, 0  ),
+		"left4zed" =       list(  0,    0,   0.2)
 		)
 
 	// Mutagen list specifies minimum value for the mutation to take place, rather
@@ -457,7 +457,7 @@
 
 			if(!S.seed)
 				user << "The packet seems to be empty. You throw it away."
-				del(O)
+				qdel(O)
 				return
 
 			user << "You plant the [S.seed.seed_name] [S.seed.seed_noun]."
@@ -468,7 +468,7 @@
 			health = (istype(S, /obj/item/seeds/cutting) ? round(seed.get_trait(TRAIT_ENDURANCE)/rand(2,5)) : seed.get_trait(TRAIT_ENDURANCE))
 			lastcycle = world.time
 
-			del(O)
+			qdel(O)
 
 			check_health()
 
@@ -503,7 +503,7 @@
 		weedlevel -= spray.weed_kill_str
 		user << "You spray [src] with [O]."
 		playsound(loc, 'sound/effects/spray3.ogg', 50, 1, -6)
-		del(O)
+		qdel(O)
 		check_health()
 
 	else if(mechanical && istype(O, /obj/item/weapon/wrench))
@@ -522,13 +522,13 @@
 			user << "<span class='danger'>[src] is already occupied!</span>"
 		else
 			user.drop_item()
-			del(O)
+			qdel(O)
 
 			var/obj/machinery/apiary/A = new(src.loc)
 			A.icon = src.icon
 			A.icon_state = src.icon_state
 			A.hydrotray_type = src.type
-			del(src)
+			qdel(src)
 	else if(O.force && seed)
 		user.visible_message("<span class='danger'>\The [seed.display_name] has been attacked by [user] with \the [O]!</span>")
 		if(!dead)

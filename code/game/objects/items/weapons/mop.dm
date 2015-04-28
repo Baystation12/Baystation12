@@ -24,7 +24,7 @@
 			T.dirt = 0
 		for(var/obj/effect/O in src)
 			if(istype(O,/obj/effect/rune) || istype(O,/obj/effect/decal/cleanable) || istype(O,/obj/effect/overlay))
-				del(O)
+				qdel(O)
 	source.reagents.trans_to_turf(src, 1, 10)	//10 is the multiplier for the reaction effect. probably needed to wet the floor properly.
 
 /obj/item/weapon/mop/afterattack(atom/A, mob/user, proximity)

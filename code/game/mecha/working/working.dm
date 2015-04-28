@@ -10,7 +10,7 @@
 		new /obj/item/mecha_parts/mecha_tracking(src)
 	return
 
-/obj/mecha/working/Del()
+/obj/mecha/working/Destroy()
 	for(var/mob/M in src)
 		if(M==src.occupant)
 			continue

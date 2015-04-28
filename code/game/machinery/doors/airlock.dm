@@ -36,10 +36,10 @@
 		if(damage >= 10)
 			if(src.density)
 				visible_message("<span class='danger'>\The [user] forces \the [src] open!</span>")
-				open()
+				open(1)
 			else
 				visible_message("<span class='danger'>\The [user] forces \the [src] closed!</span>")
-				close()
+				close(1)
 		else
 			visible_message("<span class='notice'>\The [user] strains fruitlessly to force \the [src] [density ? "open" : "closed"].</span>")
 		return
@@ -264,13 +264,13 @@
 	for(var/obj/structure/falsewall/phoron/F in range(3,src))//Hackish as fuck, but until temperature_expose works, there is nothing I can do -Sieve
 		var/turf/T = get_turf(F)
 		T.ChangeTurf(/turf/simulated/wall/mineral/phoron/)
-		del (F)
+		qdel (F)
 	for(var/turf/simulated/wall/mineral/phoron/W in range(3,src))
 		W.ignite((temperature/4))//Added so that you can't set off a massive chain reaction with a small flame
 	for(var/obj/machinery/door/airlock/phoron/D in range(3,src))
 		D.ignite(temperature/4)
 	new/obj/structure/door_assembly( src.loc )
-	del (src)
+	qdel(src)
 
 /obj/machinery/door/airlock/sandstone
 	name = "Sandstone Airlock"
@@ -490,7 +490,8 @@ About the new airlock wires panel:
 		if("deny")
 			if(density && src.arePowerSystemsOn())
 				flick("door_deny", src)
-				playsound(src.loc, 'sound/machines/buzz-two.ogg', 50, 0)
+				if(secured_wires)
+					playsound(src.loc, 'sound/machines/buzz-two.ogg', 50, 0)
 	return
 
 /obj/machinery/door/airlock/attack_ai(mob/user as mob)
@@ -610,7 +611,7 @@ About the new airlock wires panel:
 		..(user)
 	return
 
-/obj/machinery/door/airlock/CanUseTopic(var/mob/user, href_list)
+/obj/machinery/door/airlock/CanUseTopic(var/mob/user)
 	if(!user.isSilicon())
 		return STATUS_CLOSE
 
@@ -627,7 +628,7 @@ About the new airlock wires panel:
 				user << "<span class='warning'>Unable to interface: Connection refused.</span>"
 		return STATUS_CLOSE
 
-	return STATUS_INTERACTIVE
+	return ..()
 
 /obj/machinery/door/airlock/Topic(href, href_list, var/nowindow = 0)
 	if(..())
@@ -770,13 +771,13 @@ About the new airlock wires panel:
 					electronics.loc = src.loc
 					electronics = null
 
-				del(src)
+				qdel(src)
 				return
 		else if(arePowerSystemsOn())
 			user << "\blue The airlock's motors resist your efforts to force it."
 		else if(locked)
 			user << "\blue The airlock's bolts prevent it from being forced."
-		else if( !welded && !operating )
+		else
 			if(density)
 				spawn(0)	open(1)
 			else
@@ -825,11 +826,8 @@ About the new airlock wires panel:
 	return
 
 /obj/machinery/door/airlock/open(var/forced=0)
-	if(!can_open())
+	if(!can_open(forced))
 		return 0
-	if(!forced)
-		if( !arePowerSystemsOn() || isWireCut(AIRLOCK_WIRE_OPEN_DOOR) )
-			return 0
 	use_power(360)	//360 W seems much more appropriate for an actuator moving an industrial door capable of crushing people
 	if(istype(src, /obj/machinery/door/airlock/glass))
 		playsound(src.loc, 'sound/machines/windowdoor.ogg', 100, 1)
@@ -839,7 +837,11 @@ About the new airlock wires panel:
 		src.closeOther.close()
 	return ..()
 
-/obj/machinery/door/airlock/can_open()
+/obj/machinery/door/airlock/can_open(var/forced=0)
+	if(!forced)
+		if(!arePowerSystemsOn() || isWireCut(AIRLOCK_WIRE_OPEN_DOOR))
+			return 0
+
 	if(locked || welded)
 		return 0
 	return ..()
@@ -855,40 +857,68 @@ About the new airlock wires panel:
 
 	return ..()
 
+/atom/movable/proc/blocks_airlock()
+	return density
+
+/obj/machinery/door/blocks_airlock()
+	return 0
+
+/obj/machinery/mech_sensor/blocks_airlock()
+	return 0
+
+/mob/living/blocks_airlock()
+	return 1
+
+/atom/movable/proc/airlock_crush(var/crush_damage)
+	return 0
+
+/obj/machinery/portable_atmospherics/canister/airlock_crush(var/crush_damage)
+	. = ..()
+	health -= crush_damage
+	healthcheck()
+
+/obj/structure/closet/airlock_crush(var/crush_damage)
+	..()
+	damage(crush_damage)
+	for(var/atom/movable/AM in src)
+		AM.airlock_crush()
+	return 1
+
+/mob/living/airlock_crush(var/crush_damage)
+	. = ..()
+	adjustBruteLoss(crush_damage)
+	SetStunned(5)
+	SetWeakened(5)
+	var/turf/T = get_turf(src)
+	T.add_blood(src)
+
+/mob/living/carbon/airlock_crush(var/crush_damage)
+	. = ..()
+	if (!(species && (species.flags & NO_PAIN)))
+		emote("scream")
+
+/mob/living/silicon/robot/airlock_crush(var/crush_damage)
+	adjustBruteLoss(crush_damage)
+	return 0
+
 /obj/machinery/door/airlock/close(var/forced=0)
 	if(!can_close(forced))
 		return 0
 
 	if(safe)
 		for(var/turf/turf in locs)
-			if(locate(/mob/living) in turf)
-				if(world.time > next_beep_at)
-					playsound(src.loc, 'sound/machines/buzz-two.ogg', 50, 0)
-					next_beep_at = world.time + SecondsToTicks(10)
-				close_door_at = world.time + 6
-				return
+			for(var/atom/movable/AM in turf)
+				if(AM.blocks_airlock())
+					if(world.time > next_beep_at)
+						playsound(src.loc, 'sound/machines/buzz-two.ogg', 50, 0)
+						next_beep_at = world.time + SecondsToTicks(10)
+					close_door_at = world.time + 6
+					return
 
 	for(var/turf/turf in locs)
-		for(var/mob/living/M in turf)
-			if(isrobot(M))
-				M.adjustBruteLoss(DOOR_CRUSH_DAMAGE)
-			else
-				M.adjustBruteLoss(DOOR_CRUSH_DAMAGE)
-				M.SetStunned(5)
-				M.SetWeakened(5)
-				var/obj/effect/stop/S
-				S = new /obj/effect/stop
-				S.victim = M
-				S.loc = M.loc
-				spawn(20)
-					del(S)
-				if (iscarbon(M))
-					var/mob/living/carbon/C = M
-					if (!(C.species && (C.species.flags & NO_PAIN)))
-						M.emote("scream")
-			var/turf/location = src.loc
-			if(istype(location, /turf/simulated))
-				location.add_blood(M)
+		for(var/atom/movable/AM in turf)
+			if(AM.airlock_crush(DOOR_CRUSH_DAMAGE))
+				take_damage(DOOR_CRUSH_DAMAGE)
 
 	use_power(360)	//360 W seems much more appropriate for an actuator moving an industrial door capable of crushing people
 	if(istype(src, /obj/machinery/door/airlock/glass))
@@ -926,6 +956,11 @@ About the new airlock wires panel:
 		M.show_message("You hear a click from the bottom of the door.", 2)
 	update_icon()
 	return 1
+
+/obj/machinery/door/airlock/allowed(mob/M)
+	if(locked)
+		return 0
+	return ..(M)
 
 /obj/machinery/door/airlock/New(var/newloc, var/obj/structure/door_assembly/assembly=null)
 	..()

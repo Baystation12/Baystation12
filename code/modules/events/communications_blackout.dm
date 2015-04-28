@@ -12,7 +12,7 @@
 		A << "<br>"
 
 	if(prob(30))	//most of the time, we don't want an announcement, so as to allow AIs to fake blackouts.
-		command_announcement.Announce(alert, new_sound = 'sound/misc/interference.ogg')
+		command_announcement.Announce(alert, new_sound = sound('sound/misc/interference.ogg', volume=50))
 
 
 /datum/event/communications_blackout/start()

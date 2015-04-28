@@ -1,0 +1,6 @@
+author: PsiOmegaDelta
+changes:
+  - tweak: "The mental health office door now requires psychiatrist access, and the related button now opens/closes the door instead of bolting."
+  - soundadd: "Restores an old soundtrack 'Thunderdome.ogg'."
+  - rscadd: "Some holodeck programs now have custom ambience tracks."
+delete-after: false

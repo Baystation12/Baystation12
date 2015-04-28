@@ -35,6 +35,11 @@
 		die_off()
 		return 0
 
+	for(var/obj/effect/effect/smoke/chem/smoke in view(1, src))
+		if(smoke.reagents.has_reagent("plantbgone"))
+			die_off()
+			return
+
 	// Handle life.
 	var/turf/simulated/T = get_turf(src)
 	if(istype(T))
@@ -94,6 +99,6 @@
 		for(var/obj/effect/plant/neighbor in check_turf.contents)
 			neighbor.neighbors |= check_turf
 			plant_controller.add_plant(neighbor)
-	spawn(1) if(src) del(src)
+	spawn(1) if(src) qdel(src)
 
 #undef NEIGHBOR_REFRESH_TIME
