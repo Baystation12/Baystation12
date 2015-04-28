@@ -1,5 +1,0 @@
-author: Yoshax
-delete-after: True
-
-changes: 
-  - tweak: "Adjusts custom loadout costs to be more standardised and balances. Purely cosmetic items, shoes, hats, and all things that do not provide a straight advtange (sterile mask, or pAI, protection from viruses and possible door hacking or records access, respectively), each cost 1 point, items that provide an advantage like those just mentioned, or provide armor or storage cost 2 points."

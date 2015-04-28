@@ -1,8 +1,0 @@
-author: Yoshax
-delete-after: True
-
-changes: 
-  - rscadd: "Adds practice rounds, both .45 for Sec and Detective's guns, also 9mm top mounted for the Saber, and for the Bulldog
-  - rscadd: "Adds the .45 and 9mm practice rounds to the armory."
-  - rscadd: "Adds all the practice rounds to the autolathe."
-  - tweak: "Adds r_walls to the back of the firing range, leaves the sides normal."
