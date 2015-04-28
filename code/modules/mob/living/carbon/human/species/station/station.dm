@@ -106,7 +106,7 @@
 	unarmed_types = list (/datum/unarmed_attack/obsedai)
 	total_health = 500
 	darksight = 8
-	slowdown = 0.4
+	slowdown = 8
 	brute_mod = 0.5
 	blurb = "This is a place holder intill a Obsedai loremin writes this."
 
@@ -120,7 +120,7 @@
 
 	primitive = /mob/living/carbon/monkey/tajara
 
-	flags = IS_WHITELISTED | NO_SLIP | NO_BREATHE | CAN_JOIN | IS_WHITELISTED
+	flags = IS_WHITELISTED | NO_SLIP | NO_BREATHE | CAN_JOIN | IS_WHITELISTED | NO_POISON
 
 	warning_low_pressure = 50
 	hazard_low_pressure = -1
@@ -133,7 +133,7 @@
 	language = "Rootspeak"
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/diona)
 	primitive = /mob/living/carbon/alien/diona
-	slowdown = 7
+	slowdown = 5
 	rarity_value = 3
 	hud_type = /datum/hud_data/diona
 	siemens_coefficient = 0.3
