@@ -446,9 +446,8 @@
 	result_amount = 1
 
 /datum/chemical_reaction/phoronsolidification/on_reaction(var/datum/reagents/holder, var/created_volume)
-		var/location = get_turf(holder.my_atom)
-		new /obj/item/stack/sheet/mineral/phoron(location)
-		return
+	new /obj/item/stack/sheet/mineral/phoron(get_turf(holder.my_atom), created_volume)
+	return
 
 /datum/chemical_reaction/plastication
 	name = "Plastic"
@@ -595,7 +594,7 @@
 	var/location = get_turf(holder.my_atom)
 
 	for(var/mob/M in viewers(5, location))
-		M << "\red The solution spews out foam!"
+		M << "<span class='warning'>The solution spews out foam!</span>"
 
 	var/datum/effect/effect/system/foam_spread/s = new()
 	s.set_up(created_volume, location, holder, 0)
@@ -614,7 +613,7 @@
 	var/location = get_turf(holder.my_atom)
 
 	for(var/mob/M in viewers(5, location))
-		M << "\red The solution spews out a metalic foam!"
+		M << "<span class='warning'>The solution spews out a metalic foam!</span>"
 
 	var/datum/effect/effect/system/foam_spread/s = new()
 	s.set_up(created_volume, location, holder, 1)
@@ -632,7 +631,7 @@
 	var/location = get_turf(holder.my_atom)
 
 	for(var/mob/M in viewers(5, location))
-		M << "\red The solution spews out a metalic foam!"
+		M << "<span class='warning'>The solution spews out a metalic foam!</span>"
 
 	var/datum/effect/effect/system/foam_spread/s = new()
 	s.set_up(created_volume, location, holder, 2)
@@ -1272,7 +1271,8 @@
 
 /datum/chemical_reaction/cheesewheel/on_reaction(var/datum/reagents/holder, var/created_volume)
 	var/location = get_turf(holder.my_atom)
-	new /obj/item/weapon/reagent_containers/food/snacks/sliceable/cheesewheel(location)
+	for(var/i = 1, i <= created_volume, i++)
+		new /obj/item/weapon/reagent_containers/food/snacks/sliceable/cheesewheel(location)
 	return
 
 /datum/chemical_reaction/meatball
@@ -1283,7 +1283,9 @@
 	result_amount = 3
 
 /datum/chemical_reaction/meatball/on_reaction(var/datum/reagents/holder, var/created_volume)
-	new /obj/item/weapon/reagent_containers/food/snacks/meatball(get_turf(holder.my_atom))
+	var/location = get_turf(holder.my_atom)
+	for(var/i = 1, i <= created_volume, i++)
+		new /obj/item/weapon/reagent_containers/food/snacks/meatball(location)
 	return
 
 /datum/chemical_reaction/dough
@@ -1294,7 +1296,9 @@
 	result_amount = 1
 
 /datum/chemical_reaction/dough/on_reaction(var/datum/reagents/holder, var/created_volume)
-	new /obj/item/weapon/reagent_containers/food/snacks/dough(get_turf(holder.my_atom))
+	var/location = get_turf(holder.my_atom)
+	for(var/i = 1, i <= created_volume, i++)
+		new /obj/item/weapon/reagent_containers/food/snacks/dough(location)
 	return
 
 /datum/chemical_reaction/syntiflesh
@@ -1306,7 +1310,8 @@
 
 /datum/chemical_reaction/syntiflesh/on_reaction(var/datum/reagents/holder, var/created_volume)
 	var/location = get_turf(holder.my_atom)
-	new /obj/item/weapon/reagent_containers/food/snacks/meat/syntiflesh(location)
+	for(var/i = 1, i <= created_volume, i++)
+		new /obj/item/weapon/reagent_containers/food/snacks/meat/syntiflesh(location)
 	return
 
 /datum/chemical_reaction/hot_ramen
