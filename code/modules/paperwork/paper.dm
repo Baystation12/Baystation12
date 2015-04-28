@@ -340,7 +340,7 @@
 			usr << "<span class='info'>There isn't enough space left on \the [src] to write anything.</span>"
 			return
 
-		var/t =  strip_html_simple(input("Enter what you want to write:", "Write", null, null) as message)
+		var/t =  strip_html_properly(input("Enter what you want to write:", "Write", null, null) as message)
 
 		if(!t)
 			return

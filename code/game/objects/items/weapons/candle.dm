@@ -10,7 +10,6 @@
 
 /obj/item/weapon/flame/candle/New()
 	wax = rand(800, 1000) // Enough for 27-33 minutes. 30 minutes on average.
-	starting_wax = wax
 	..()
 
 /obj/item/weapon/flame/candle/update_icon()
