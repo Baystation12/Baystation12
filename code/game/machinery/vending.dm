@@ -779,6 +779,98 @@
 	premium = list(/obj/item/weapon/reagent_containers/glass/bottle/ammonia = 10,/obj/item/weapon/reagent_containers/glass/bottle/diethylamine = 5)
 	idle_power_usage = 211 //refrigerator - believe it or not, this is actually the average power consumption of a refrigerated vending machine according to NRCan.
 
+/obj/machinery/vending/maleclothes
+	name = "Male Clothes Vendor"
+	desc = "If the clothes make the man these'll make you."
+	product_slogans = "Cover yourself... in style"
+	product_ads = "This will make you a manly princess!"
+	icon_state = "male"
+	products = list(/obj/item/clothing/under/suit_jacket = 10, /obj/item/clothing/under/gentlesuit = 10,
+	 /obj/item/clothing/under/rank/magistrate = 10, /obj/item/clothing/under/scratch = 10, /obj/item/clothing/under/waiter = 10,
+	 /obj/item/clothing/under/suit_jacket/really_black = 10, /obj/item/clothing/under/suit_jacket/red = 10, /obj/item/clothing/under/pirate = 1,
+	 /obj/item/clothing/under/overalls = 10, /obj/item/clothing/under/soviet = 10, /obj/item/clothing/under/kilt = 10, /obj/item/clothing/under/suit_jacket/charcoal = 10,
+	 /obj/item/clothing/under/assistantformal = 10, /obj/item/clothing/under/suit_jacket/burgundy = 10, /obj/item/clothing/under/suit_jacket/checkered = 10,
+	 /obj/item/clothing/under/suit_jacket/tan = 10)
+	contraband = list(/obj/item/clothing/under/owl = 1, /obj/item/clothing/mask/gas/owl_mask = 1)
+	prices = list(/obj/item/clothing/under/suit_jacket = 50, /obj/item/clothing/under/gentlesuit = 50,
+	 /obj/item/clothing/under/rank/magistrate = 50, /obj/item/clothing/under/scratch = 50, /obj/item/clothing/under/waiter = 25,
+	 /obj/item/clothing/under/suit_jacket/really_black = 50, /obj/item/clothing/under/suit_jacket/red = 50, /obj/item/clothing/under/pirate = 200,
+	 /obj/item/clothing/under/overalls = 50, /obj/item/clothing/under/soviet = 50, /obj/item/clothing/under/kilt = 50, /obj/item/clothing/under/suit_jacket/charcoal = 50,
+	 /obj/item/clothing/under/assistantformal = 50, /obj/item/clothing/under/suit_jacket/burgundy = 50, /obj/item/clothing/under/suit_jacket/checkered = 50,
+	 /obj/item/clothing/under/suit_jacket/tan = 50)
+
+/obj/machinery/vending/femaleclothes
+	name = "Female Clothes Vendor"
+	desc = "Dresses and Suits and Skirts Oh My."
+	product_slogans = "Cover yourself... in style"
+	product_ads = "This will make you a princess!"
+	icon_state = "female"
+	products = list(/obj/item/clothing/under/sundress = 10, /obj/item/clothing/under/sundress_white = 10,
+	 /obj/item/clothing/under/dress/plaid_purple = 10, /obj/item/clothing/under/dress/plaid_red = 10, /obj/item/clothing/under/dress/plaid_blue = 10,
+	 /obj/item/clothing/under/dress/dress_saloon = 10, /obj/item/clothing/under/dress/dress_yellow = 10, /obj/item/clothing/under/dress/dress_fire = 10,
+	 /obj/item/clothing/under/dress/dress_green = 10, /obj/item/clothing/under/dress/dress_orange = 10, /obj/item/clothing/under/dress/dress_pink = 10, /obj/item/clothing/under/schoolgirl = 10,
+	 /obj/item/clothing/under/blackskirt = 10, /obj/item/clothing/under/suit_jacket/female = 10, /obj/item/clothing/under/wedding/bride_white = 1,
+	 /obj/item/clothing/under/wedding/bride_blue = 1)
+	contraband = list(/obj/item/clothing/under/sexymime = 1, /obj/item/clothing/under/sexyclown = 1)
+	prices = list(/obj/item/clothing/under/sundress = 50, /obj/item/clothing/under/sundress_white = 50,
+	 /obj/item/clothing/under/dress/plaid_purple = 50, /obj/item/clothing/under/dress/plaid_red = 50, /obj/item/clothing/under/dress/plaid_blue = 50,
+	 /obj/item/clothing/under/dress/dress_saloon = 50, /obj/item/clothing/under/dress/dress_yellow = 50, /obj/item/clothing/under/dress/dress_fire = 50,
+	 /obj/item/clothing/under/dress/dress_green = 50, /obj/item/clothing/under/dress/dress_orange = 50, /obj/item/clothing/under/dress/dress_pink = 50, /obj/item/clothing/under/schoolgirl = 75,
+	 /obj/item/clothing/under/blackskirt = 25, /obj/item/clothing/under/suit_jacket/female = 50, /obj/item/clothing/under/wedding/bride_white = 200,
+	 /obj/item/clothing/under/wedding/bride_blue = 200)
+
+/obj/machinery/vending/hatclothes
+	name = "Hat Vendor"
+	desc = "Dapper and warm."
+	product_slogans = "Cover yourself... in style"
+	product_ads = "This will make you a hatted princess!"
+	icon_state = "hat"
+	products = list(/obj/item/clothing/head/that = 10, /obj/item/clothing/head/hairflower = 10,
+	 /obj/item/clothing/head/greenbandana = 10, /obj/item/clothing/head/pirate = 10, /obj/item/clothing/head/bandana = 10,
+	 /obj/item/clothing/head/bowler = 10, /obj/item/clothing/head/beaverhat = 10, /obj/item/clothing/head/fedora = 10,
+	 /obj/item/clothing/head/fez = 10, /obj/item/clothing/head/flatcap = 10, /obj/item/clothing/head/ushanka = 10)
+	contraband = list ( /obj/item/clothing/head/bearpelt = 1 )
+	prices = list (/obj/item/clothing/head/that = 20, /obj/item/clothing/head/hairflower = 5,
+	 /obj/item/clothing/head/greenbandana = 10, /obj/item/clothing/head/pirate = 10, /obj/item/clothing/head/bandana = 10,
+	 /obj/item/clothing/head/bowler = 25, /obj/item/clothing/head/beaverhat = 10, /obj/item/clothing/head/fedora = 10,
+	 /obj/item/clothing/head/fez = 25, /obj/item/clothing/head/flatcap = 20, /obj/item/clothing/head/ushanka = 50)
+
+/obj/machinery/vending/jumpsuitclothes
+	name = "Jumpsuit Vendor"
+	desc = "All the colours of the rainbow."
+	product_slogans = "Cover yourself... in style"
+	product_ads = "This will make you a  basic princess!"
+	icon_state = "jumpsuit"
+	products = list(/obj/item/clothing/under/color/black = 10, /obj/item/clothing/under/color/blackf = 10,
+     /obj/item/clothing/under/color/blue = 10, /obj/item/clothing/under/color/green = 10, /obj/item/clothing/under/color/grey = 10,
+     /obj/item/clothing/under/color/orange = 10, /obj/item/clothing/under/color/pink = 10, /obj/item/clothing/under/color/red = 10,
+     /obj/item/clothing/under/color/white = 10, /obj/item/clothing/under/color/yellow = 10, /obj/item/clothing/under/purple = 10,
+     /obj/item/clothing/under/aqua = 10, /obj/item/clothing/under/lightblue = 10, /obj/item/clothing/under/lightpurple = 10,
+     /obj/item/clothing/under/lightgreen = 10, /obj/item/clothing/under/lightblue = 10, /obj/item/clothing/under/brown = 10)
+	contraband = list(/obj/item/clothing/under/psyche = 1)
+	prices = list(/obj/item/clothing/under/color/black = 10, /obj/item/clothing/under/color/blackf = 10,
+     /obj/item/clothing/under/color/blue = 10, /obj/item/clothing/under/color/green = 10, /obj/item/clothing/under/color/grey = 10,
+     /obj/item/clothing/under/color/orange = 10, /obj/item/clothing/under/color/pink = 10, /obj/item/clothing/under/color/red = 10,
+     /obj/item/clothing/under/color/white = 10, /obj/item/clothing/under/color/yellow = 10, /obj/item/clothing/under/purple = 10,
+     /obj/item/clothing/under/aqua = 10, /obj/item/clothing/under/lightblue = 10, /obj/item/clothing/under/lightpurple = 10,
+     /obj/item/clothing/under/lightgreen = 10, /obj/item/clothing/under/lightblue = 10, /obj/item/clothing/under/brown = 10)
+
+/obj/machinery/vending/shoeclothes
+	name = "Shoe Vendor"
+	desc = "Walk with pride."
+	product_slogans = "Cover yourself... in style"
+	product_ads = "This will make you a... person with shoes!"
+	icon_state = "hat"
+	products = list(/obj/item/clothing/shoes/blue = 10, /obj/item/clothing/shoes/red = 10,
+	 /obj/item/clothing/shoes/yellow = 10, /obj/item/clothing/shoes/green = 10, /obj/item/clothing/shoes/orange = 10,
+	 /obj/item/clothing/shoes/purple = 10, /obj/item/clothing/shoes/red = 10, /obj/item/clothing/shoes/leather = 10,
+	 /obj/item/clothing/shoes/jackboots = 10)
+	contraband = list (/obj/item/clothing/shoes/clown_shoes = 1)
+	prices = list (/obj/item/clothing/shoes/blue = 10, /obj/item/clothing/shoes/red = 10,
+	 /obj/item/clothing/shoes/yellow = 10, /obj/item/clothing/shoes/green = 10, /obj/item/clothing/shoes/orange = 10,
+	 /obj/item/clothing/shoes/purple = 10, /obj/item/clothing/shoes/red = 10, /obj/item/clothing/shoes/leather = 10,
+	 /obj/item/clothing/shoes/jackboots = 25)
+
 /obj/machinery/vending/hydroseeds
 	name = "MegaSeed Servitor"
 	desc = "When you need seeds fast!"
