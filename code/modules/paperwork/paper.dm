@@ -22,6 +22,7 @@
 	var/info_links	//A different version of the paper which includes html links at fields and EOF
 	var/stamps		//The (text for the) stamps on the paper.
 	var/fields		//Amount of user created fields
+	var/free_space = MAX_PAPER_MESSAGE_LEN
 	var/list/stamped
 	var/list/ico[0]      //Icons and
 	var/list/offset_x[0] //offsets stored for later
@@ -51,6 +52,7 @@
 
 	spawn(2)
 		update_icon()
+		update_space(info)
 		updateinfolinks()
 		return
 
@@ -61,6 +63,12 @@
 		icon_state = "paper_words"
 		return
 	icon_state = "paper"
+
+/obj/item/weapon/paper/proc/update_space(var/new_text)
+	if(!new_text)
+		return
+
+	free_space -= length(strip_html_properly(new_text, 0))
 
 /obj/item/weapon/paper/examine(mob/user)
 	..()
@@ -188,6 +196,7 @@
 /obj/item/weapon/paper/proc/clearpaper()
 	info = null
 	stamps = null
+	free_space = MAX_PAPER_MESSAGE_LEN
 	stamped = list()
 	overlays.Cut()
 	updateinfolinks()
@@ -327,12 +336,11 @@
 		var/id = href_list["write"]
 		//var/t = strip_html_simple(input(usr, "What text do you wish to add to " + (id=="end" ? "the end of the paper" : "field "+id) + "?", "[name]", null),8192) as message
 
-		var/textlimit = MAX_PAPER_MESSAGE_LEN - length(info)
-		if(textlimit <= 0)
+		if(free_space <= 0)
 			usr << "<span class='info'>There isn't enough space left on \the [src] to write anything.</span>"
 			return
 
-		var/t =  sanitize(input("Enter what you want to write:", "Write", null, null) as message, textlimit, extra = 0)
+		var/t =  strip_html_simple(input("Enter what you want to write:", "Write", null, null) as message)
 
 		if(!t)
 			return
@@ -377,6 +385,8 @@
 		else
 			info += t // Oh, he wants to edit to the end of the file, let him.
 			updateinfolinks()
+
+		update_space(t)
 
 		usr << browse("<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY>[info_links][stamps]</BODY></HTML>", "window=[name]") // Update the window
 
