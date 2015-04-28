@@ -148,6 +148,7 @@
 	stun = 3
 	weaken = 3
 	penetrating = 5
+	hitscan = 1 //so the PTR isn't useless as a sniper weapon
 
 /obj/item/projectile/bullet/rifle/a556
 	damage = 40
