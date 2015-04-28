@@ -33,6 +33,9 @@
 	var/p_x = 16
 	var/p_y = 16 // the pixel location of the tile that the player clicked. Default is the center
 
+	var/accuracy = 0
+	var/dispersion = 0.0
+	
 	var/damage = 10
 	var/damage_type = BRUTE //BRUTE, BURN, TOX, OXY, CLONE are the only things that should be in here
 	var/nodamage = 0 //Determines if the projectile will skip any damage inflictions
@@ -100,6 +103,12 @@
 		p_x = text2num(mouse_control["icon-x"])
 	if(mouse_control["icon-y"])
 		p_y = text2num(mouse_control["icon-y"])
+	
+	//randomize clickpoint a bit based on dispersion
+	if(dispersion)
+		var/radius = round((dispersion*0.443)*world.icon_size*0.8) //0.443 = sqrt(pi)/4 = 2a, where a is the side length of a square that shares the same area as a circle with diameter = dispersion
+		p_x = between(0, p_x + rand(-radius, radius), world.icon_size)
+		p_y = between(0, p_y + rand(-radius, radius), world.icon_size)
 
 //called to launch a projectile from a gun
 /obj/item/projectile/proc/launch(atom/target, mob/user, obj/item/weapon/gun/launcher, var/target_zone, var/x_offset=0, var/y_offset=0)
@@ -147,24 +156,15 @@
 
 	yo = new_y - starting_loc.y
 	xo = new_x - starting_loc.x
+	setup_trajectory()
 
 //Called when the projectile intercepts a mob. Returns 1 if the projectile hit the mob, 0 if it missed and should keep flying.
 /obj/item/projectile/proc/attack_mob(var/mob/living/target_mob, var/distance, var/miss_modifier=0)
 	if(!istype(target_mob))
 		return
-	//accuracy bonus from aiming
-	if (istype(shot_from, /obj/item/weapon/gun))
-		var/obj/item/weapon/gun/daddy = shot_from
-		miss_modifier -= round(15*daddy.accuracy)
-
-		//If you aim at someone beforehead, it'll hit more often.
-		//Kinda balanced by fact you need like 2 seconds to aim
-		//As opposed to no-delay pew pew
-		if (daddy.aim_targets && original in daddy.aim_targets)
-			miss_modifier += -30
 
 	//roll to-hit
-	miss_modifier = max(miss_modifier + 15*(distance-2), 0)
+	miss_modifier = max(15*(distance-2) - round(15*accuracy) + miss_modifier, 0)
 	var/hit_zone = get_zone_with_miss_chance(def_zone, target_mob, miss_modifier, ranged_attack=(distance > 1))
 	if(!hit_zone)
 		visible_message("<span class='notice'>\The [src] misses [target_mob] narrowly!</span>")
@@ -316,10 +316,16 @@
 /obj/item/projectile/proc/before_move()
 
 /obj/item/projectile/proc/setup_trajectory()
+	// trajectory dispersion
+	var/offset = 0
+	if(dispersion)
+		var/radius = round(dispersion*9, 1)
+		offset = rand(-radius, radius)
+
 	// plot the initial trajectory
 	trajectory = new()
-	trajectory.setup(starting, original, pixel_x, pixel_y)
-
+	trajectory.setup(starting, original, pixel_x, pixel_y, angle_offset=offset)
+	
 	// generate this now since all visual effects the projectile makes can use it
 	effect_transform = new()
 	effect_transform.Scale(trajectory.return_hypotenuse(), 1)
