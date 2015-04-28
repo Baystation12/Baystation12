@@ -117,6 +117,23 @@
 
 
 
+/obj/effect/landmark/mobcorpse/assetprotection
+	name = "Asset Protection Operator"
+	corpseuniform = /obj/item/clothing/under/ert
+	corpsesuit = /obj/item/clothing/suit/armor/swat
+	corpseshoes = /obj/item/clothing/shoes/swat
+	corpsegloves = /obj/item/clothing/gloves/swat
+	corpseradio = /obj/item/device/radio/headset/ert
+	corpsemask = /obj/item/clothing/mask/breath
+	corpsehelmet = /obj/item/clothing/head/helmet/space/deathsquad
+	corpseback = /obj/item/weapon/tank/jetpack/carbondioxide
+	corpsepocket1 = /obj/item/weapon/tank/emergency_oxygen/double
+	corpseid = 1
+	corpseidjob = "Asset Protection Operator"
+	corpseidaccess = "Death Commando"
+
+
+
 /obj/effect/landmark/mobcorpse/clown
 	name = "Clown"
 	corpseuniform = /obj/item/clothing/under/rank/clown
