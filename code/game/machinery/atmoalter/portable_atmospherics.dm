@@ -21,7 +21,8 @@
 	return 1
 
 /obj/machinery/portable_atmospherics/Destroy()
-	del(air_contents)
+	qdel(air_contents)
+	qdel(holding)
 	..()
 
 /obj/machinery/portable_atmospherics/initialize()
