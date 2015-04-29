@@ -32,15 +32,15 @@
 	else, frequently even their own lives. They prefer warmer temperatures than most species and \
 	their native tongue is a heavy hissing laungage called Sinta'soghun."
 
-	cold_level_1 = 340 //Default 260 - Lower is better
-	cold_level_2 = 290 //Default 200
+	cold_level_1 = 290 //Default 260 - Lower is better
+	cold_level_2 = 240 //Default 200
 	cold_level_3 = 200 //Default 120
 
 	heat_level_1 = 420 //Default 360 - Higher is better
 	heat_level_2 = 480 //Default 400
 	heat_level_3 = 1100 //Default 1000
 
-	body_temperature = T0C + 15
+	body_temperature = T0C + 34
 
 	flags = CAN_JOIN | IS_WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
 
