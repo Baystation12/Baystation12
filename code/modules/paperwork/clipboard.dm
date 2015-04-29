@@ -68,14 +68,14 @@
 	//The topmost paper. I don't think there's any way to organise contents in byond, so this is what we're stuck with.	-Pete
 	if(toppaper)
 		var/obj/item/weapon/paper/P = toppaper
-		dat += "<A href='?src=\ref[src];write=\ref[P]'>Write</A> <A href='?src=\ref[src];remove=\ref[P]'>Remove</A> - <A href='?src=\ref[src];read=\ref[P]'>[P.name]</A><BR><HR>"
+		dat += "<A href='?src=\ref[src];write=\ref[P]'>Write</A> <A href='?src=\ref[src];remove=\ref[P]'>Remove</A> <A href='?src=\ref[src];rename=\ref[P]'>Rename</A> - <A href='?src=\ref[src];read=\ref[P]'>[P.name]</A><BR><HR>"
 
 	for(var/obj/item/weapon/paper/P in src)
 		if(P==toppaper)
 			continue
-		dat += "<A href='?src=\ref[src];remove=\ref[P]'>Remove</A> - <A href='?src=\ref[src];read=\ref[P]'>[P.name]</A><BR>"
+		dat += "<A href='?src=\ref[src];remove=\ref[P]'>Remove</A> <A href='?src=\ref[src];rename=\ref[P]'>Rename</A> - <A href='?src=\ref[src];read=\ref[P]'>[P.name]</A><BR>"
 	for(var/obj/item/weapon/photo/Ph in src)
-		dat += "<A href='?src=\ref[src];remove=\ref[Ph]'>Remove</A> - <A href='?src=\ref[src];look=\ref[Ph]'>[Ph.name]</A><BR>"
+		dat += "<A href='?src=\ref[src];remove=\ref[Ph]'>Remove</A> <A href='?src=\ref[src];rename=\ref[Ph]'>Rename</A> - <A href='?src=\ref[src];look=\ref[Ph]'>[Ph.name]</A><BR>"
 
 	user << browse(dat, "window=clipboard")
 	onclose(user, "clipboard")
@@ -129,6 +129,18 @@
 						toppaper = newtop
 					else
 						toppaper = null
+						
+		else if(href_list["rename"])
+			var/obj/item/weapon/O = locate(href_list["rename"])
+			
+			if(O && (O.loc == src))
+				if(istype(O, /obj/item/weapon/paper))
+					var/obj/item/weapon/paper/to_rename = O
+					to_rename.rename()
+					
+				else if(istype(O, /obj/item/weapon/photo))
+					var/obj/item/weapon/photo/to_rename = O
+					to_rename.rename()
 
 		else if(href_list["read"])
 			var/obj/item/weapon/paper/P = locate(href_list["read"])
