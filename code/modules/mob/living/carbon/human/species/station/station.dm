@@ -58,7 +58,7 @@
 	tail = "tajtail"
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/claws, /datum/unarmed_attack/bite/sharp)
 	total_health = 110
-	darksight = 12
+	darksight = 8
 	slowdown = 0.8
 	burn_mod = 1.5
 	blurb = "The Tajaran race is a species of feline-like bipeds hailing from the planet of Ahdomai in the \
@@ -106,8 +106,8 @@
 	heat_level_2 = 400 //Default 400
 	heat_level_3 = 1000 //Default 1000
 
-	warning_low_pressure = 60
-	hazard_low_pressure = 35
+	warning_high_pressure = 555
+	hazard_high_pressure = 750
 
 
 	flags = CAN_JOIN | IS_WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR
@@ -129,10 +129,6 @@
 	slowdown = 8
 	brute_mod = 0.5
 	blurb = "This is a place holder intill a Obsedai loremin writes this."
-
-	has_organ = list(
-		"plasma vessel" =   /datum/organ/internal/xenos/plasmavessel
-		)
 
 	cold_level_1 = -1 //Default 260
 	cold_level_2 = -1 //Default 200
@@ -236,6 +232,7 @@
 	rarity_value = 2
 
 	eyes = "blank_eyes"
+	total_health = 200
 	brute_mod = 0.5
 	burn_mod = 1
 
