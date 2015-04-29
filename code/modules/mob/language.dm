@@ -248,6 +248,18 @@
 	new_name += " [pick(list("the Void","the Sky","Encroaching Night","Planetsong","Starsong","the Wandering Star","the Empty Day","Daybreak","Nightfall","the Rain"))]"
 	return new_name
 
+/datum/language/ankalai
+	name = "Starspeak"
+	desc = "A humming, subvocal language communicated by the extra-universal An'kalai. While not auditory to most species it can be picked up across high frequency electronic recording devices as a sort of high pitched chaotic series of notes."
+	speech_verb = "hums"
+	ask_verb = "thrum"
+	exclaim_verb = "mumur"
+	colour = "#625053"
+	key = "i"
+	native = 1
+	flags = WHITELISTED | HIVEMIND
+	syllables = list("hmm","mm","nn","enn","emm","eem","knn","gmm")
+
 /datum/language/common
 	name = "Galactic Common"
 	desc = "The common galactic tongue."
