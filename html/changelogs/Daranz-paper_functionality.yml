@@ -1,5 +1,0 @@
-author: Daranz
-delete-after: True
-
-changes: 
-  - rscadd: "Paper bundles can now have papers inserted at arbitrary points. This can be done by clicking the previous/next page links with a sheet of paper in hand."
