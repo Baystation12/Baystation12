@@ -23,7 +23,7 @@
 	primitive = /mob/living/carbon/monkey/soghun
 	total_health = 125
 	darksight = 3
-	gluttonous = 2
+	gluttonous = 1
 	brute_mod = 0.8
 
 	blurb = "A heavily built reptillian species, Soghun hail from the \
