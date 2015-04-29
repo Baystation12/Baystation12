@@ -9,18 +9,17 @@
 	w_class = 5.0
 
 	var/obj/machine = null
-	var/mach = null
+	var/machine_path = null
 	var/full = 0
 
 /obj/item/weapon/assemblycase/attack_self(mob/user as mob)
-	if(mach&&full)
+	if(machine_path&&full)
 		if(!machine)
-			var/path = text2path(mach)
-			if(!ispath(path))
-				user << "\The [src] is blinks!"
-				mach = null
+			if(!ispath(machine_path))
+				src.visible_message("\The [src] blinks!")
+				machine_path = null
 				return
-			machine = new mach(src)
+			machine = new machine_path(src)
 		user.visible_message("<span class='notice'>[user] has activated \the [src] auto assembly sequence.</span>", "<span class='notice'>You activate \the [src] auto assembly sequence.</span>")
 		user.drop_item(src)
 		if(get_step(user,user.dir))
@@ -32,6 +31,7 @@
 			machine.loc = src.loc
 			src.anchored = 0
 			src.full = 0
+			machine = null
 		return
 	else if(!full)
 		user << "\The [src] is empty!"
@@ -43,15 +43,15 @@
 	if(full)
 		user << "\The [src] is full!"
 		return
-	if(M!=machine)
-		user << "\The [src] buzz!"
+	if(!istype(M, machine_path))
+		user << "\The [src] buzzes!"
 //		if(!emagged)
 //			return
 //		else
 //			machine = M
 		return
 	else
-		user << "\The [src] activate disassembly sequence!"
+		user << "\The [src] activates disassembly sequence!"
 		user.drop_item(src)
 		src.loc = M.loc
 		src.anchored = 1
@@ -59,20 +59,21 @@
 			M.loc = src
 			src.anchored = 0
 			src.full = 1
-			src.visible_message("<span class='notice'>\The [src] beeps finished auto disassembly sequence.</span>")
+			src.visible_message("<span class='notice'>\The [src] beeps, finishing auto disassembly sequence.</span>")
+			machine = M
 		return
 	..()
 
 /obj/item/weapon/assemblycase/examine(mob/user)
 	..()
-	user << "A huge briefcase with inbuilt auto assembly system. [mach?"It designed for [src] parts.":"It program is brocken."] \The [src] [full?"full of useful parts.":"is empty."]"
+	user << "A huge briefcase with inbuilt auto assembly system. [machine_path?"It designed for [src] parts.":"It program is brocken."] \The [src] [full?"full of useful parts.":"is empty."]"
 
 
 /obj/item/weapon/assemblycase/empty
 	icon_state = "inf_box"
 	desc = "A huge briefcase with inbuilt auto assembly system."
 
-	mach = null
+	machine_path = null
 	full = 0
 
 /obj/item/weapon/assemblycase/pipelayer
@@ -80,7 +81,7 @@
 	icon = 'icons/obj/storage.dmi'
 	icon_state = "lockbox"
 
-	mach = "/obj/machinery/pipelayer"
+	machine_path = /obj/machinery/pipelayer
 	full = 1
 
 /obj/item/weapon/assemblycase/floorlayer
@@ -88,7 +89,7 @@
 	icon = 'icons/obj/storage.dmi'
 	icon_state = "lockbox+b"
 
-	mach = "/obj/machinery/floorlayer"
+	machine_path = /obj/machinery/floorlayer
 	full = 1
 
 /obj/item/weapon/assemblycase/cablelayer
@@ -96,5 +97,5 @@
 	icon = 'icons/obj/storage.dmi'
 	icon_state = "lockbox+l"
 
-	mach = "/obj/machinery/cablelayer"
+	machine_path = /obj/machinery/cablelayer
 	full = 1
