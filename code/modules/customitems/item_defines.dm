@@ -1443,3 +1443,23 @@
 				friend = M
 				break
 	..()
+
+///////////////////////////// Sabess - Maria's Heart-Shaped Locket ///////////////////////////////////
+
+/obj/item/weapon/fluff/mariafontaine
+	name = "Heart-Shaped Locket"
+	desc = " A silver, heart-shaped locket. It flips open to reveal two pictures, one of a young red-headed woman and one of a brunette of similar age. Small writing is etched onto the back, reading 'M+L'. Some may regard it as cheesy."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "mariaclosed"
+	item_state = "mariaclosed"
+
+obj/item/weapon/fluff/mariafontaine/attack_self(mob/user as mob)
+	if(src.icon_state == "mariaclosed")
+		src.icon_state = "mariaopen"
+		src.item_state = "mariaopen"
+		user << "You flip the locket open."
+
+	else
+		src.icon_state = "mariaclosed"
+		src.item_state = "mariaclosed"
+		user << "You flip the locket closed."
