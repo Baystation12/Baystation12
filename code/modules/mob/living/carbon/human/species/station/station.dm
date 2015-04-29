@@ -21,8 +21,10 @@
 	tail = "sogtail"
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/claws, /datum/unarmed_attack/bite/sharp)
 	primitive = /mob/living/carbon/monkey/soghun
+	total_health = 125
 	darksight = 3
-	gluttonous = 1
+	gluttonous = 2
+	brute_mod = 0.8
 
 	blurb = "A heavily built reptillian species, Soghun hail from the \
 	Uuosa-Eso system, which roughly translates to 'burning mother'.<br/><br/>Coming from a harsh, radioactive \
@@ -30,9 +32,9 @@
 	else, frequently even their own lives. They prefer warmer temperatures than most species and \
 	their native tongue is a heavy hissing laungage called Sinta'soghun."
 
-	cold_level_1 = 280 //Default 260 - Lower is better
-	cold_level_2 = 220 //Default 200
-	cold_level_3 = 130 //Default 120
+	cold_level_1 = 340 //Default 260 - Lower is better
+	cold_level_2 = 290 //Default 200
+	cold_level_3 = 200 //Default 120
 
 	heat_level_1 = 420 //Default 360 - Higher is better
 	heat_level_2 = 480 //Default 400
@@ -55,16 +57,19 @@
 	language = "Siik'tajr"
 	tail = "tajtail"
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/claws, /datum/unarmed_attack/bite/sharp)
-	darksight = 8
+	total_health = 110
+	darksight = 12
+	slowdown = 0.8
+	burn_mod = 1.5
 	blurb = "The Tajaran race is a species of feline-like bipeds hailing from the planet of Ahdomai in the \
 	S'randarr system. They have been brought up into the space age by the Humans and Skrell, and have been \
 	influenced heavily by their long history of Slavemaster rule. They have a structured, clan-influenced way \
 	of family and politics. They prefer colder environments, and speak a variety of languages, mostly Siik'Maas, \
 	using unique inflections their mouths form."
 
-	cold_level_1 = 200 //Default 260
-	cold_level_2 = 140 //Default 200
-	cold_level_3 = 80 //Default 120
+	cold_level_1 = 180 //Default 260
+	cold_level_2 = 120 //Default 200
+	cold_level_3 = 60 //Default 120
 
 	heat_level_1 = 330 //Default 360
 	heat_level_2 = 380 //Default 400
@@ -86,11 +91,24 @@
 	language = "Skrellian"
 	primitive = /mob/living/carbon/monkey/skrell
 	unarmed_types = list(/datum/unarmed_attack/punch)
+	total_health = 90
 	blurb = "An amphibious species, Skrell come from the star system known as Qerr'Vallis, which translates to 'Star of \
 	the royals' or 'Light of the Crown'.<br/><br/>Skrell are a highly advanced and logical race who live under the rule \
 	of the Qerr'Katish, a caste within their society which keeps the empire of the Skrell running smoothly. Skrell are \
 	herbivores on the whole and tend to be co-operative with the other species of the galaxy, although they rarely reveal \
 	the secrets of their empire to their allies."
+
+	cold_level_1 = 280 //Default 260 - Lower is better
+	cold_level_2 = 240 //Default 200
+	cold_level_3 = 150 //Default 120
+
+	heat_level_1 = 360 //Default 360 - Higher is better
+	heat_level_2 = 400 //Default 400
+	heat_level_3 = 1000 //Default 1000
+
+	warning_low_pressure = 60
+	hazard_low_pressure = 35
+
 
 	flags = CAN_JOIN | IS_WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR
 
@@ -112,6 +130,10 @@
 	brute_mod = 0.5
 	blurb = "This is a place holder intill a Obsedai loremin writes this."
 
+	has_organ = list(
+		"plasma vessel" =   /datum/organ/internal/xenos/plasmavessel
+		)
+
 	cold_level_1 = -1 //Default 260
 	cold_level_2 = -1 //Default 200
 	cold_level_3 = -1 //Default 120
@@ -126,6 +148,7 @@
 
 	warning_low_pressure = 50
 	hazard_low_pressure = -1
+
 
 /datum/species/diona
 	name = "Diona"
@@ -223,7 +246,7 @@
 	cold_level_2 = -1
 	cold_level_3 = -1
 
-	heat_level_1 = 500		//gives them about 25 seconds in space before taking damage
+	heat_level_1 = 550		//gives them about 25-30 seconds in space before taking damage
 	heat_level_2 = 1000
 	heat_level_3 = 2000
 
