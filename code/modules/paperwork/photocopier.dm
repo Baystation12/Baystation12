@@ -56,7 +56,7 @@
 				sleep(15)
 			else if (istype(copyitem, /obj/item/weapon/paper_bundle))
 				var/obj/item/weapon/paper_bundle/B = bundlecopy(copyitem)
-				sleep(15*B.amount)
+				sleep(15*B.pages.len)
 			else
 				usr << "<span class='warning'>\The [copyitem] can't be copied by \the [src].</span>"
 				break
@@ -216,7 +216,7 @@
 //If need_toner is 0, the copies will still be lightened when low on toner, however it will not be prevented from printing. TODO: Implement print queues for fax machines and get rid of need_toner
 /obj/machinery/photocopier/proc/bundlecopy(var/obj/item/weapon/paper_bundle/bundle, var/need_toner=1)
 	var/obj/item/weapon/paper_bundle/p = new /obj/item/weapon/paper_bundle (src)
-	for(var/obj/item/weapon/W in bundle)
+	for(var/obj/item/weapon/W in bundle.pages)
 		if(toner <= 0 && need_toner)
 			toner = 0
 			visible_message("<span class='notice'>A red light on \the [src] flashes, indicating that it is out of toner.</span>")
@@ -227,8 +227,8 @@
 		else if(istype(W, /obj/item/weapon/photo))
 			W = photocopy(W)
 		W.loc = p
-		p.amount++
-	//p.amount--
+		p.pages += W
+		
 	p.loc = src.loc
 	p.update_icon()
 	p.icon_state = "paper_words"

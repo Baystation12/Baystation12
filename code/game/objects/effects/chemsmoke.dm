@@ -155,7 +155,7 @@
 
 
 	//build smoke icon
-	var/color = mix_color_from_reagents(chemholder.reagents.reagent_list)
+	var/color = chemholder.reagents.get_color()
 	var/icon/I
 	if(color)
 		I = icon('icons/effects/chemsmoke.dmi')

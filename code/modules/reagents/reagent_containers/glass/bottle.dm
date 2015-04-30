@@ -48,7 +48,7 @@
 				if(80 to 90)	filling.icon_state = "[icon_state]-80"
 				if(91 to INFINITY)	filling.icon_state = "[icon_state]-100"
 
-			filling.color = mix_color_from_reagents(reagents.reagent_list)
+			filling.color = reagents.get_color()
 			overlays += filling
 
 		if (!is_open_container())
