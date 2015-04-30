@@ -35,7 +35,7 @@
 
 	var/accuracy = 0
 	var/dispersion = 0.0
-	
+
 	var/damage = 10
 	var/damage_type = BRUTE //BRUTE, BURN, TOX, OXY, CLONE are the only things that should be in here
 	var/nodamage = 0 //Determines if the projectile will skip any damage inflictions
@@ -103,7 +103,7 @@
 		p_x = text2num(mouse_control["icon-x"])
 	if(mouse_control["icon-y"])
 		p_y = text2num(mouse_control["icon-y"])
-	
+
 	//randomize clickpoint a bit based on dispersion
 	if(dispersion)
 		var/radius = round((dispersion*0.443)*world.icon_size*0.8) //0.443 = sqrt(pi)/4 = 2a, where a is the side length of a square that shares the same area as a circle with diameter = dispersion
@@ -274,7 +274,7 @@
 	//plot the initial trajectory
 	setup_trajectory()
 
-	spawn while(src)
+	spawn while(src && src.loc)
 		if(kill_count-- < 1)
 			on_impact(src.loc) //for any final impact behaviours
 			qdel(src)
@@ -304,8 +304,8 @@
 		if(!bumped && !isturf(original))
 			if(loc == get_turf(original))
 				if(!(original in permutated))
-					Bump(original)
-
+					if(Bump(original))
+						return
 
 		if(!hitscan)
 			sleep(step_delay)	//add delay between movement iterations if it's not a hitscan weapon
@@ -325,7 +325,7 @@
 	// plot the initial trajectory
 	trajectory = new()
 	trajectory.setup(starting, original, pixel_x, pixel_y, angle_offset=offset)
-	
+
 	// generate this now since all visual effects the projectile makes can use it
 	effect_transform = new()
 	effect_transform.Scale(trajectory.return_hypotenuse(), 1)
