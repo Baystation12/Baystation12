@@ -45,8 +45,6 @@ obj/machinery/atmospherics/pipe/zpipe/New()
 			initialize_directions = EAST
 		if(SOUTHWEST)
 			initialize_directions = SOUTH
-	initialize()
-
 
 obj/machinery/atmospherics/pipe/zpipe/hide(var/i)
 	if(level == 1 && istype(loc, /turf/simulated))

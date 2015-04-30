@@ -9,12 +9,6 @@
 	var/circuit = null //The path to the circuit board type. If circuit==null, the computer can't be disassembled.
 	var/processing = 0
 
-/obj/machinery/computer/New()
-	..()
-	if(ticker)
-		initialize()
-
-
 /obj/machinery/computer/initialize()
 	power_change()
 

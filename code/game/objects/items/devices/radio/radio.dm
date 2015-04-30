@@ -42,8 +42,6 @@
 /obj/item/device/radio/New()
 	..()
 	wires = new(src)
-	if(radio_controller)
-		initialize()
 
 /obj/item/device/radio/Destroy()
 	qdel(wires)
