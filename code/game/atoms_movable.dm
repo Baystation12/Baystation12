@@ -38,6 +38,10 @@
 
 	..()
 
+
+/atom/movable/proc/initialize()
+	return
+
 /atom/movable/Bump(var/atom/A, yes)
 	if(src.throwing)
 		src.throw_impact(A)
