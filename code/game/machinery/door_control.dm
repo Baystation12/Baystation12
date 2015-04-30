@@ -1,7 +1,3 @@
-#define CONTROL_POD_DOORS 0
-#define CONTROL_NORMAL_DOORS 1
-#define CONTROL_EMITTERS 2
-
 /obj/machinery/button/remote
 	name = "remote object control"
 	desc = "It controls objects, remotely."
@@ -65,8 +61,8 @@
 
 	use_power(5)
 	icon_state = "doorctrl1"
-	trigger()
 	desiredstate = !desiredstate
+	trigger()
 	spawn(15)
 		update_icon()
 
@@ -173,9 +169,6 @@
 	icon_state = "launcherbtt"
 
 /obj/machinery/button/remote/driver/trigger(mob/user as mob)
-	if(..())
-		return
-
 	active = 1
 	update_icon()
 
