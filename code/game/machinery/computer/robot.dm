@@ -45,6 +45,10 @@
 		if(istype(user, /mob/living/silicon/ai) && (target.connected_ai != user))
 			user << "Access Denied. This robot is not linked to you."
 			return
+		// Cyborgs may blow up themselves via the console
+		if(istype(user, /mob/living/silicon/robot) && user != target)
+			user << "Access Denied."
+			return
 		var/choice = input("Really detonate [target.name]?") in list ("Yes", "No")
 		if(choice != "Yes")
 			return
@@ -74,6 +78,10 @@
 			user << "Access Denied. This robot is not linked to you."
 			return
 
+		if(istype(user, /mob/living/silicon/robot))
+			user << "Access Denied."
+			return
+
 		var/choice = input("Really [target.lockcharge ? "unlock" : "lockdown"] [target.name] ?") in list ("Yes", "No")
 		if(choice != "Yes")
 			return
@@ -98,7 +106,7 @@
 			return
 
 		// Antag AI checks
-		if(!istype(user, /mob/living/silicon/ai) || !user.mind.special_role || (user.mind.original != user) || (target.connected_ai != user))
+		if(!istype(user, /mob/living/silicon/ai) || !(user.mind.special_role && user.mind.original == user))
 			user << "Access Denied"
 			return
 
@@ -185,7 +193,7 @@
 		robot["master_ai"] = R.connected_ai ? R.connected_ai.name : "None"
 		robot["hackable"] = 0
 		// Antag AIs know whether linked cyborgs are hacked or not.
-		if(operator && istype(operator, /mob/living/silicon/ai) && (R.connected_ai == operator) && operator.mind.special_role && (operator.mind.original != operator))
+		if(operator && istype(operator, /mob/living/silicon/ai) && (R.connected_ai == operator) && (operator.mind.special_role && operator.mind.original == operator))
 			robot["hacked"] = R.emagged ? 1 : 0
 			robot["hackable"] = R.emagged? 0 : 1
 		robots.Add(list(robot))
