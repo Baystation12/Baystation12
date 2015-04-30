@@ -2,7 +2,7 @@
 	name = "Dispense Wizard Justice"
 	desc = "This spell dispenses wizard justice."
 
-	summon_type = list(/obj/machinery/bot/secbot/ed209)
+	summon_type = list(/mob/living/bot/secbot/ed209)
 	summon_amt = 10
 	range = 3
 	newVars = list("emagged" = 1,"name" = "Wizard's Justicebot")

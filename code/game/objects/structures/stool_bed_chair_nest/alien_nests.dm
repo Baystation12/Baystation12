@@ -79,5 +79,5 @@
 /obj/structure/bed/nest/proc/healthcheck()
 	if(health <=0)
 		density = 0
-		del(src)
+		qdel(src)
 	return

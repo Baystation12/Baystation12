@@ -7,7 +7,7 @@
 	name = "black jumpsuit"
 	icon_state = "black"
 	item_state = "bl_suit"
-	item_color = "black"
+	worn_state = "black"
 	desc = "It's a plain jumpsuit. It seems to have a small dial on the wrist."
 	origin_tech = "syndicate=3"
 	var/list/clothing_choices = list()
@@ -24,7 +24,7 @@
 	name = "psychedelic"
 	desc = "Groovy!"
 	icon_state = "psyche"
-	item_color = "psyche"
+	item_state_slots[slot_w_uniform_str] = "psyche"
 	update_icon()
 	update_clothing_icon()
 
@@ -37,7 +37,7 @@
 	if(!picked || !clothing_choices[picked])
 		return
 	var/newtype = clothing_choices[picked]
-	var/obj/item/clothing/A = new newtype
+	var/obj/item/clothing/under/A = new newtype
 
 	desc = null
 	permeability_coefficient = 0.90
@@ -46,7 +46,8 @@
 	name = A.name
 	icon_state = A.icon_state
 	item_state = A.item_state
-	item_color = A.item_color
+	item_state_slots = A.item_state_slots
+	worn_state = A.worn_state
 	body_parts_covered = A.body_parts_covered
 	update_clothing_icon()	//so our overlays update.
 
@@ -58,7 +59,6 @@
 	name = "grey cap"
 	icon_state = "greysoft"
 	item_state = "greysoft"
-	item_color = "grey"
 	desc = "It looks like a plain hat, but upon closer inspection, there's an advanced holographic array installed inside. It seems to have a small dial inside."
 	origin_tech = "syndicate=3"
 	body_parts_covered = 0
@@ -76,7 +76,6 @@
 	name = "grey cap"
 	desc = "It's a baseball hat in a tasteful grey colour."
 	icon_state = "greysoft"
-	item_color = "grey"
 	update_icon()
 	update_clothing_icon()
 
@@ -98,7 +97,6 @@
 	name = A.name
 	icon_state = A.icon_state
 	item_state = A.item_state
-	item_color = A.item_color
 	flags_inv = A.flags_inv
 	body_parts_covered = A.body_parts_covered
 	update_clothing_icon()	//so our overlays update.
@@ -128,7 +126,6 @@
 	name = "armor"
 	desc = "An armored vest that protects against some damage."
 	icon_state = "armor"
-	item_color = "armor"
 	update_icon()
 	update_clothing_icon()
 
@@ -150,7 +147,6 @@
 	name = A.name
 	icon_state = A.icon_state
 	item_state = A.item_state
-	item_color = A.item_color
 	flags_inv = A.flags_inv
 	body_parts_covered = A.body_parts_covered
 	update_clothing_icon()	//so our overlays update.
@@ -162,7 +158,6 @@
 	name = "black shoes"
 	icon_state = "black"
 	item_state = "black"
-	item_color = "black"
 	desc = "They're comfy black shoes, with clever cloaking technology built in. It seems to have a small dial on the back of each shoe."
 	origin_tech = "syndicate=3"
 	var/list/clothing_choices = list()
@@ -180,7 +175,6 @@
 	desc = "A pair of black shoes."
 	icon_state = "black"
 	item_state = "black"
-	item_color = "black"
 	update_icon()
 	update_clothing_icon()
 
@@ -202,7 +196,6 @@
 	name = A.name
 	icon_state = A.icon_state
 	item_state = A.item_state
-	item_color = A.item_color
 	update_clothing_icon()	//so our overlays update.
 
 //**********************
@@ -252,7 +245,6 @@
 	name = A.name
 	icon_state = A.icon_state
 	item_state = A.item_state
-	item_color = A.item_color
 
 	//so our overlays update.
 	if (ismob(src.loc))
@@ -267,7 +259,6 @@
 	name = "black gloves"
 	icon_state = "black"
 	item_state = "bgloves"
-	item_color = "brown"
 	desc = "It looks like a pair of gloves, but it seems to have a small dial inside."
 	origin_tech = "syndicate=3"
 	var/list/clothing_choices = list()
@@ -284,7 +275,6 @@
 	name = "black gloves"
 	desc = "It looks like a pair of gloves, but it seems to have a small dial inside."
 	icon_state = "black"
-	item_color = "brown"
 	update_icon()
 	update_clothing_icon()
 
@@ -306,7 +296,6 @@
 	name = A.name
 	icon_state = A.icon_state
 	item_state = A.item_state
-	item_color = A.item_color
 	flags_inv = A.flags_inv
 	update_clothing_icon()	//so our overlays update.
 

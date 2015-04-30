@@ -210,25 +210,29 @@
 
 	// sync the organ's damage with its wounds
 	src.update_damages()
+	owner.updatehealth() //droplimb will call updatehealth() again if it does end up being called
 
 	//If limb took enough damage, try to cut or tear it off
 	if(owner && loc == owner)
 		if(!cannot_amputate && config.limbs_can_break && (brute_dam + burn_dam) >= (max_damage * config.organ_health_multiplier))
-			var/threshold = max_damage/3
+			var/threshold = max_damage
 			var/dropped
 			if((burn >= threshold) && prob(burn/3))
 				dropped = 1
 				droplimb(0,DROPLIMB_BURN)
 			if(!dropped && prob(brute))
-				if(brute >= threshold)
-					if((sharp || edge) && istype(used_weapon,/obj/item))
-						var/obj/item/W = used_weapon
-						if(W.w_class >= 3)
-							droplimb(0,DROPLIMB_EDGE)
+				var/edge_eligible = 0
+				if(edge && istype(used_weapon,/obj/item))
+					var/obj/item/W = used_weapon
+					if(W.w_class >= 3)
+						edge_eligible = 1
+				
+				if(brute >= threshold || (edge_eligible && brute >= threshold/3))
+					if((sharp || edge))
+						droplimb(0,DROPLIMB_EDGE)
 					else
 						droplimb(0,DROPLIMB_BLUNT)
 
-	owner.updatehealth()
 	return update_icon()
 
 /obj/item/organ/external/proc/heal_damage(brute, burn, internal = 0, robo_repair = 0)
@@ -340,8 +344,12 @@ This function completely restores a damaged organ to perfect condition.
 			   PROCESSING & UPDATING
 ****************************************************/
 
-//Determines if we even need to process this organ.
+//external organs handle brokenness a bit differently when it comes to damage. Instead brute_dam is checked inside process()
+//this also ensures that an external organ cannot be "broken" without broken_description being set.
+/obj/item/organ/external/is_broken()
+	return ((status & ORGAN_CUT_AWAY) || ((status & ORGAN_BROKEN) && !(status & ORGAN_SPLINTED)))
 
+//Determines if we even need to process this organ.
 /obj/item/organ/external/proc/need_process()
 	if(status && status != ORGAN_ROBOT) // If it's robotic, that's fine it will have a status.
 		return 1
@@ -681,9 +689,9 @@ Note that amputating the affected organ does in fact remove the infection from t
 				if(src && istype(loc,/turf))
 					throw_at(get_edge_target_turf(src,pick(alldirs)),rand(1,3),30)
 				dir = 2
-			return
 		if(DROPLIMB_BURN)
 			new /obj/effect/decal/cleanable/ash(get_turf(victim))
+			qdel(src)
 		if(DROPLIMB_BLUNT)
 			var/obj/effect/decal/cleanable/blood/gibs/gore = new owner.species.single_gib_type(get_turf(victim))
 			if(victim.species.flesh_color)
@@ -697,8 +705,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 				I.removed()
 				if(istype(loc,/turf))
 					I.throw_at(get_edge_target_turf(src,pick(alldirs)),rand(1,3),30)
-
-	del(src)
+			qdel(src)
 
 /****************************************************
 			   HELPERS
@@ -817,7 +824,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 			name = "[R.company] [initial(name)]"
 			desc = "[R.desc]"
 
-	dislocated = -1
+	dislocated = -1 //TODO, make robotic limbs a separate type, remove snowflake
 	cannot_break = 1
 	get_icon()
 	for (var/obj/item/organ/external/T in children)
@@ -874,7 +881,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	victim.bad_external_organs -= src
 
 	for(var/implant in implants) //todo: check if this can be left alone
-		del(implant)
+		qdel(implant)
 
 	// Attached organs also fly off.
 	if(!ignore_children)
@@ -904,8 +911,8 @@ Note that amputating the affected organ does in fact remove the infection from t
 		spark_system.attach(owner)
 		spark_system.start()
 		spawn(10)
-			del(spark_system)
-		del(src)
+			qdel(spark_system)
+		qdel(src)
 
 /obj/item/organ/external/proc/disfigure(var/type = "brute")
 	if (disfigured)

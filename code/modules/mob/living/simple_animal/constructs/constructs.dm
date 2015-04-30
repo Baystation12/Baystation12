@@ -1,4 +1,3 @@
-
 /mob/living/simple_animal/construct
 	name = "Construct"
 	real_name = "Construct"
@@ -6,8 +5,8 @@
 	speak_emote = list("hisses")
 	emote_hear = list("wails","screeches")
 	response_help  = "thinks better of touching"
-	response_disarm = "flails at"
-	response_harm   = "punches"
+	response_disarm = "flailed at"
+	response_harm   = "punched"
 	icon_dead = "shade_dead"
 	speed = -1
 	a_intent = I_HURT
@@ -15,7 +14,7 @@
 	status_flags = CANPUSH
 	universal_speak = 0
 	universal_understand = 1
-	attack_sound = 'sound/weapons/punch1.ogg'
+	attack_sound = 'sound/weapons/spiderlunge.ogg'
 	min_oxy = 0
 	max_oxy = 0
 	min_tox = 0
@@ -25,7 +24,7 @@
 	min_n2 = 0
 	max_n2 = 0
 	minbodytemp = 0
-	show_stat_health = 0
+	show_stat_health = 1
 	faction = "cult"
 	supernatural = 1
 	var/nullblock = 0
@@ -35,6 +34,9 @@
 
 	var/list/construct_spells = list()
 
+/mob/living/simple_animal/construct/cultify()
+	return
+
 /mob/living/simple_animal/construct/New()
 	..()
 	name = text("[initial(name)] ([rand(1, 1000)])")
@@ -42,14 +44,15 @@
 	add_language("Cult")
 	add_language("Occult")
 	for(var/spell in construct_spells)
-		spell_list += new spell(src)
+		src.add_spell(new spell, "const_spell_ready")
 	updateicon()
+	add_glow()
 
 /mob/living/simple_animal/construct/death()
 	new /obj/item/weapon/ectoplasm (src.loc)
 	..(null,"collapses in a shattered heap.")
 	ghostize()
-	del src
+	qdel(src)
 
 /mob/living/simple_animal/construct/attack_generic(var/mob/user)
 	if(istype(user, /mob/living/simple_animal/construct/builder))
@@ -97,7 +100,7 @@
 	mob_size = 20
 	speed = 3
 	environment_smash = 2
-	attack_sound = 'sound/weapons/punch3.ogg'
+	attack_sound = 'sound/weapons/heavysmash.ogg'
 	status_flags = 0
 	resistance = 10
 	construct_spells = list(/spell/aoe_turf/conjure/forcewall/lesser)
@@ -148,7 +151,7 @@
 	speed = -1
 	environment_smash = 1
 	see_in_dark = 7
-	attack_sound = 'sound/weapons/bladeslice.ogg'
+	attack_sound = 'sound/weapons/rapidslice.ogg'
 	construct_spells = list(/spell/targeted/ethereal_jaunt/shift)
 
 
@@ -165,14 +168,14 @@
 	icon_living = "artificer"
 	maxHealth = 50
 	health = 50
-	response_harm = "viciously beats"
+	response_harm = "viciously beaten"
 	harm_intent_damage = 5
 	melee_damage_lower = 5
 	melee_damage_upper = 5
 	attacktext = "rammed"
 	speed = 0
-	environment_smash = 2
-	attack_sound = 'sound/weapons/punch2.ogg'
+	environment_smash = 1
+	attack_sound = 'sound/weapons/rapidslice.ogg'
 	construct_spells = list(/spell/aoe_turf/conjure/construct/lesser,
 							/spell/aoe_turf/conjure/wall,
 							/spell/aoe_turf/conjure/floor,
@@ -194,14 +197,14 @@
 	maxHealth = 750
 	health = 750
 	speak_emote = list("rumbles")
-	response_harm   = "harmlessly punches"
+	response_harm   = "harmlessly punched"
 	harm_intent_damage = 0
 	melee_damage_lower = 50
 	melee_damage_upper = 50
 	attacktext = "brutally crushed"
 	speed = 5
 	environment_smash = 2
-	attack_sound = 'sound/weapons/punch4.ogg'
+	attack_sound = 'sound/weapons/heavysmash.ogg'
 	resistance = 10
 	var/energy = 0
 	var/max_energy = 1000
@@ -222,7 +225,7 @@
 	health = 150
 	melee_damage_lower = 25
 	melee_damage_upper = 25
-	attacktext = "violently stabs"
+	attacktext = "violently stabbed"
 	speed = -1
 	environment_smash = 1
 	see_in_dark = 7
@@ -233,3 +236,99 @@
 			/spell/aoe_turf/knock/harvester,
 			/spell/rune_write
 		)
+
+////////////////Glow//////////////////
+/mob/living/simple_animal/construct/proc/add_glow()
+	overlays = 0
+	var/overlay_layer = LIGHTING_LAYER+1
+	if(layer != MOB_LAYER)
+		overlay_layer=TURF_LAYER+0.2
+
+	overlays += image(icon,"glow-[icon_state]",overlay_layer)
+
+////////////////HUD//////////////////////
+
+/mob/living/simple_animal/construct/Life()
+	. = ..()
+	if(.)
+		if(fire)
+			if(fire_alert)							fire.icon_state = "fire1"
+			else									fire.icon_state = "fire0"
+		if(pullin)
+			if(pulling)								pullin.icon_state = "pull1"
+			else									pullin.icon_state = "pull0"
+
+		if(purged)
+			if(purge > 0)							purged.icon_state = "purge1"
+			else									purged.icon_state = "purge0"
+
+		silence_spells(purge)
+
+/mob/living/simple_animal/construct/armoured/Life()
+	..()
+	if(healths)
+		switch(health)
+			if(250 to INFINITY)		healths.icon_state = "juggernaut_health0"
+			if(208 to 249)			healths.icon_state = "juggernaut_health1"
+			if(167 to 207)			healths.icon_state = "juggernaut_health2"
+			if(125 to 166)			healths.icon_state = "juggernaut_health3"
+			if(84 to 124)			healths.icon_state = "juggernaut_health4"
+			if(42 to 83)			healths.icon_state = "juggernaut_health5"
+			if(1 to 41)				healths.icon_state = "juggernaut_health6"
+			else					healths.icon_state = "juggernaut_health7"
+
+
+/mob/living/simple_animal/construct/behemoth/Life()
+	..()
+	if(healths)
+		switch(health)
+			if(750 to INFINITY)		healths.icon_state = "juggernaut_health0"
+			if(625 to 749)			healths.icon_state = "juggernaut_health1"
+			if(500 to 624)			healths.icon_state = "juggernaut_health2"
+			if(375 to 499)			healths.icon_state = "juggernaut_health3"
+			if(250 to 374)			healths.icon_state = "juggernaut_health4"
+			if(125 to 249)			healths.icon_state = "juggernaut_health5"
+			if(1 to 124)			healths.icon_state = "juggernaut_health6"
+			else					healths.icon_state = "juggernaut_health7"
+
+/mob/living/simple_animal/construct/builder/Life()
+	..()
+	if(healths)
+		switch(health)
+			if(50 to INFINITY)		healths.icon_state = "artificer_health0"
+			if(42 to 49)			healths.icon_state = "artificer_health1"
+			if(34 to 41)			healths.icon_state = "artificer_health2"
+			if(26 to 33)			healths.icon_state = "artificer_health3"
+			if(18 to 25)			healths.icon_state = "artificer_health4"
+			if(10 to 17)			healths.icon_state = "artificer_health5"
+			if(1 to 9)				healths.icon_state = "artificer_health6"
+			else					healths.icon_state = "artificer_health7"
+
+
+
+/mob/living/simple_animal/construct/wraith/Life()
+	..()
+	if(healths)
+		switch(health)
+			if(75 to INFINITY)		healths.icon_state = "wraith_health0"
+			if(62 to 74)			healths.icon_state = "wraith_health1"
+			if(50 to 61)			healths.icon_state = "wraith_health2"
+			if(37 to 49)			healths.icon_state = "wraith_health3"
+			if(25 to 36)			healths.icon_state = "wraith_health4"
+			if(12 to 24)			healths.icon_state = "wraith_health5"
+			if(1 to 11)				healths.icon_state = "wraith_health6"
+			else					healths.icon_state = "wraith_health7"
+
+
+/mob/living/simple_animal/construct/harvester/Life()
+	..()
+	if(healths)
+		switch(health)
+			if(150 to INFINITY)		healths.icon_state = "harvester_health0"
+			if(125 to 149)			healths.icon_state = "harvester_health1"
+			if(100 to 124)			healths.icon_state = "harvester_health2"
+			if(75 to 99)			healths.icon_state = "harvester_health3"
+			if(50 to 74)			healths.icon_state = "harvester_health4"
+			if(25 to 49)			healths.icon_state = "harvester_health5"
+			if(1 to 24)				healths.icon_state = "harvester_health6"
+			else					healths.icon_state = "harvester_health7"

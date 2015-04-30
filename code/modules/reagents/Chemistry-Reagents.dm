@@ -27,7 +27,8 @@ datum
 		var/glass_desc = null
 		var/glass_center_of_mass = null
 		//var/list/viruses = list()
-		var/color = "#000000" // rgb: 0, 0, 0 (does not support alpha channels - yet!)
+		var/color = "#000000" // rgb: 0, 0, 0, 0 - supports alpha channels
+		var/color_weight = 1
 
 		proc
 			reaction_mob(var/mob/M, var/method=TOUCH, var/volume) //By default we have a chance to transfer some
@@ -89,7 +90,7 @@ datum
 				return
 
 			// Called when two reagents of the same are mixing. <-- Blatant lies
-			on_merge(var/data)
+			on_merge(var/newdata, var/newamount)
 				return
 
 			on_update(var/atom/A)
@@ -135,9 +136,32 @@ datum
 					var/mob/living/carbon/C = M
 					C.antibodies |= self.data["antibodies"]
 
-			on_merge(var/data)
-				if(data["blood_colour"])
-					color = data["blood_colour"]
+			on_merge(var/newdata, var/newamount)
+				if(!data || !newdata)
+					return
+				if(newdata["blood_colour"])
+					color = newdata["blood_colour"]
+				if(data && newdata)
+					if(data["viruses"] || newdata["viruses"])
+
+						var/list/mix1 = data["viruses"]
+						var/list/mix2 = newdata["viruses"]
+
+						// Stop issues with the list changing during mixing.
+						var/list/to_mix = list()
+
+						for(var/datum/disease/advance/AD in mix1)
+							to_mix += AD
+						for(var/datum/disease/advance/AD in mix2)
+							to_mix += AD
+
+						var/datum/disease/advance/AD = Advance_Mix(to_mix)
+						if(AD)
+							var/list/preserve = list(AD)
+							for(var/D in data["viruses"])
+								if(!istype(D, /datum/disease/advance))
+									preserve += D
+							data["viruses"] = preserve
 				return ..()
 
 			on_update(var/atom/A)
@@ -156,11 +180,13 @@ datum
 				else if(istype(self.data["donor"], /mob/living/carbon/alien))
 					var/obj/effect/decal/cleanable/blood/B = blood_splatter(T,self,1)
 					if(B) B.blood_DNA["UNKNOWN DNA STRUCTURE"] = "X*"
+				if(volume >= 5 && !istype(T.loc, /area/chapel)) //blood desanctifies non-chapel tiles
+					T.holy = 0
 				return
 
 /* Must check the transfering of reagents and their data first. They all can point to one disease datum.
 
-			Del()
+			Destroy()
 				if(src.data["virus"])
 					var/datum/disease/D = src.data["virus"]
 					D.cure(0)
@@ -202,7 +228,7 @@ datum
 			id = "water"
 			description = "A ubiquitous chemical substance that is composed of hydrogen and oxygen."
 			reagent_state = LIQUID
-			color = "#0064C8" // rgb: 0, 100, 200
+			color = "#0064C877" // rgb: 0, 100, 200
 			custom_metabolism = 0.01
 
 			glass_icon_state = "glass_clear"
@@ -244,7 +270,7 @@ datum
 				//Put out fires.
 				var/hotspot = (locate(/obj/fire) in T)
 				if(hotspot)
-					del(hotspot)
+					qdel(hotspot)
 					if(environment)
 						environment.react() //react at the new temperature
 
@@ -256,7 +282,7 @@ datum
 					lowertemp.temperature = max( min(lowertemp.temperature-2000,lowertemp.temperature / 2) ,0)
 					lowertemp.react()
 					T.assume_air(lowertemp)
-					del(hotspot)
+					qdel(hotspot)
 				if(istype(O,/obj/item/weapon/reagent_containers/food/snacks/monkeycube))
 					var/obj/item/weapon/reagent_containers/food/snacks/monkeycube/cube = O
 					if(!cube.wrapped)
@@ -287,6 +313,12 @@ datum
 					if(M.mind && cult.is_antagonist(M.mind) && prob(10))
 						cult.remove_antagonist(M.mind)
 				holder.remove_reagent(src.id, 10 * REAGENTS_METABOLISM) //high metabolism to prevent extended uncult rolls.
+				return
+
+			reaction_turf(var/turf/T, var/volume)
+				src = null
+				if(volume >= 5)
+					T.holy = 1
 				return
 
 		lube
@@ -364,7 +396,7 @@ datum
 					M.invisibility = 101
 					for(var/obj/item/W in M)
 						if(istype(W, /obj/item/weapon/implant))	//TODO: Carn. give implants a dropped() or something
-							del(W)
+							qdel(W)
 							continue
 						W.layer = initial(W.layer)
 						W.loc = M.loc
@@ -376,7 +408,7 @@ datum
 						M.mind.transfer_to(new_mob)
 					else
 						new_mob.key = M.key
-					del(M)
+					qdel(M)
 				..()
 				return
 
@@ -932,7 +964,7 @@ datum
 
 			reaction_obj(var/obj/O, var/volume)
 				if(istype(O,/obj/effect/decal/cleanable))
-					del(O)
+					qdel(O)
 				else
 					if(O)
 						O.clean_blood()
@@ -945,7 +977,7 @@ datum
 					T.clean_blood()
 					for(var/obj/effect/decal/cleanable/C in T.contents)
 						src.reaction_obj(C, volume)
-						del(C)
+						qdel(C)
 
 					for(var/mob/living/carbon/slime/M in T)
 						M.adjustToxLoss(rand(5,10))
@@ -1585,6 +1617,11 @@ datum
 			reagent_state = LIQUID
 			color = "#808080"
 			overdose = 15
+			color_weight = 20
+
+			New()
+				..()
+				data = color
 
 			reaction_turf(var/turf/T, var/volume)
 				..()
@@ -1601,6 +1638,35 @@ datum
 				if(istype(M,/mob) && !istype(M,/mob/dead))
 					//painting ghosts: not allowed
 					M.color = color
+
+			on_merge(var/newdata, var/newamount)
+				if(!data || !newdata)
+					return
+				var/list/colors = list(0, 0, 0, 0)
+				var/tot_w = 0
+
+				var/hex1 = uppertext(color)
+				var/hex2 = uppertext(newdata)
+				if(length(hex1) == 7)
+					hex1 += "FF"
+				if(length(hex2) == 7)
+					hex2 += "FF"
+				if(length(hex1) != 9 || length(hex2) != 9)
+					return
+				colors[1] += hex2num(copytext(hex1, 2, 4)) * volume
+				colors[2] += hex2num(copytext(hex1, 4, 6)) * volume
+				colors[3] += hex2num(copytext(hex1, 6, 8)) * volume
+				colors[4] += hex2num(copytext(hex1, 8, 10)) * volume
+				tot_w += volume
+				colors[1] += hex2num(copytext(hex2, 2, 4)) * newamount
+				colors[2] += hex2num(copytext(hex2, 4, 6)) * newamount
+				colors[3] += hex2num(copytext(hex2, 6, 8)) * newamount
+				colors[4] += hex2num(copytext(hex2, 8, 10)) * newamount
+				tot_w += newamount
+
+				color = rgb(colors[1] / tot_w, colors[2] / tot_w, colors[3] / tot_w, colors[4] / tot_w)
+				data = color
+				return
 
 
 //////////////////////////Poison stuff///////////////////////
@@ -1782,7 +1848,7 @@ datum
 				..()
 				return
 
-			Del()
+			Destroy()
 				if(holder && ismob(holder.my_atom))
 					var/mob/M = holder.my_atom
 					M.status_flags &= ~FAKEDEATH
@@ -1839,7 +1905,7 @@ datum
 					var/turf/simulated/wall/W = T
 					if(W.rotting)
 						W.rotting = 0
-						for(var/obj/effect/E in W) if(E.name == "Wallrot") del E
+						for(var/obj/effect/E in W) if(E.name == "Wallrot") qdel(E)
 
 						for(var/mob/O in viewers(W, null))
 							O.show_message(text("\blue The fungi are completely dissolved by the solution!"), 1)
@@ -2028,7 +2094,7 @@ datum
 						if(H.head)
 							if(prob(meltprob) && !H.head.unacidable)
 								H << "<span class='danger'>Your headgear melts away but protects you from the acid!</span>"
-								del(H.head)
+								qdel(H.head)
 								H.update_inv_head(0)
 								H.update_hair(0)
 							else
@@ -2038,7 +2104,7 @@ datum
 						if(H.wear_mask)
 							if(prob(meltprob) && !H.wear_mask.unacidable)
 								H << "<span class='danger'>Your mask melts away but protects you from the acid!</span>"
-								del (H.wear_mask)
+								qdel (H.wear_mask)
 								H.update_inv_wear_mask(0)
 								H.update_hair(0)
 							else
@@ -2048,7 +2114,7 @@ datum
 						if(H.glasses) //Doesn't protect you from the acid but can melt anyways!
 							if(prob(meltprob) && !H.glasses.unacidable)
 								H << "<span class='danger'>Your glasses melts away!</span>"
-								del (H.glasses)
+								qdel (H.glasses)
 								H.update_inv_glasses(0)
 
 					if(!M.unacidable)
@@ -2075,7 +2141,7 @@ datum
 						I.desc = "Looks like this was \an [O] some time ago."
 						for(var/mob/M in viewers(5, O))
 							M << "\red \the [O] melts."
-						del(O)
+						qdel(O)
 
 		toxin/acid/polyacid
 			name = "Polytrinic acid"
@@ -2459,7 +2525,7 @@ datum
 					lowertemp.temperature = max( min(lowertemp.temperature-2000,lowertemp.temperature / 2) ,0)
 					lowertemp.react()
 					T.assume_air(lowertemp)
-					del(hotspot)
+					qdel(hotspot)
 
 		enzyme
 			name = "Universal Enzyme"
@@ -4419,6 +4485,10 @@ datum
 					M.confused = max(M.confused+15,15)
 				..()
 				return
+
+datum/reagent/Destroy() // This should only be called by the holder, so it's already handled clearing its references
+	..()
+	holder = null
 
 // Undefine the alias for REAGENTS_EFFECT_MULTIPLER
 #undef REM

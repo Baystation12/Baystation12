@@ -21,7 +21,7 @@
 	..()
 	overlays += "pai-off"
 
-/obj/item/device/paicard/Del()
+/obj/item/device/paicard/Destroy()
 	//Will stop people throwing friend pAIs into the singularity so they can respawn
 	if(!isnull(pai))
 		pai.death(0)
@@ -311,7 +311,7 @@
 	if(pai)
 		pai.ex_act(severity)
 	else
-		del(src)
+		qdel(src)
 
 /obj/item/device/paicard/see_emote(mob/living/M, text)
 	if(pai && pai.client)

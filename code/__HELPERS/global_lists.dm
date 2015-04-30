@@ -54,6 +54,12 @@ var/global/list/exclude_jobs = list(/datum/job/ai,/datum/job/cyborg)
 var/list/datum/visualnet/visual_nets = list()
 var/datum/visualnet/camera/cameranet = new()
 var/datum/visualnet/cult/cultnet = new()
+
+// Runes
+var/global/list/rune_list = new()
+var/global/list/escape_list = list()
+var/global/list/endgame_exits = list()
+var/global/list/endgame_safespawns = list()
 //////////////////////////
 /////Initial Building/////
 //////////////////////////

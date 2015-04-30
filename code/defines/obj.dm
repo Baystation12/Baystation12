@@ -319,6 +319,3 @@ var/global/ManifestJSON
 
 /obj/effect/spawner
 	name = "object spawner"
-
-/obj/proc/cultify()
-	qdel(src)

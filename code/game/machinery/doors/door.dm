@@ -34,6 +34,9 @@
 	dir = EAST
 	var/width = 1
 
+	// turf animation
+	var/atom/movable/overlay/c_animation = null
+
 /obj/machinery/door/attack_generic(var/mob/user, var/damage)
 	if(damage >= 10)
 		visible_message("<span class='danger'>\The [user] smashes into the [src]!</span>")
@@ -65,8 +68,7 @@
 	update_nearby_tiles(need_rebuild=1)
 	return
 
-
-/obj/machinery/door/Del()
+/obj/machinery/door/Destroy()
 	density = 0
 	update_nearby_tiles()
 	..()
@@ -100,8 +102,8 @@
 			bumpopen(M)
 		return
 
-	if(istype(AM, /obj/machinery/bot))
-		var/obj/machinery/bot/bot = AM
+	if(istype(AM, /mob/living/bot))
+		var/mob/living/bot/bot = AM
 		if(src.check_access(bot.botcard))
 			if(density)
 				open()
@@ -165,7 +167,7 @@
 					new /obj/item/stack/rods(src.loc, 3)
 				if(BURN)
 					new /obj/effect/decal/cleanable/ash(src.loc) // Turn it to ashes!
-			del(src)
+			qdel(src)
 
 	if(Proj.damage)
 		//cap projectile damage so that there's still a minimum number of hits required to break the door
@@ -248,7 +250,7 @@
 				user << "<span class='notice'>You finish repairing the damage to \the [src].</span>"
 				health = between(health, health + repairing.amount*DOOR_REPAIR_AMOUNT, maxhealth)
 				update_icon()
-				del(repairing)
+				qdel(repairing)
 		return
 
 	if(repairing && istype(I, /obj/item/weapon/crowbar))
@@ -306,7 +308,7 @@
 
 
 /obj/machinery/door/examine(mob/user)
-	..()
+	. = ..()
 	if(src.health < src.maxhealth / 4)
 		user << "\The [src] looks like it's about to break!"
 	else if(src.health < src.maxhealth / 2)
@@ -326,7 +328,7 @@
 
 /obj/machinery/door/blob_act()
 	if(prob(40))
-		del(src)
+		qdel(src)
 	return
 
 
@@ -339,10 +341,10 @@
 /obj/machinery/door/ex_act(severity)
 	switch(severity)
 		if(1.0)
-			del(src)
+			qdel(src)
 		if(2.0)
 			if(prob(25))
-				del(src)
+				qdel(src)
 			else
 				take_damage(300)
 		if(3.0)
@@ -385,9 +387,10 @@
 	return
 
 
-/obj/machinery/door/proc/open()
-	if(!can_open()) return
-	if(!operating)	operating = 1
+/obj/machinery/door/proc/open(var/forced = 0)
+	if(!can_open(forced))
+		return
+	operating = 1
 
 	do_animate("opening")
 	icon_state = "door0"
@@ -400,8 +403,7 @@
 	update_icon()
 	SetOpacity(0)
 	update_nearby_tiles()
-
-	if(operating)	operating = 0
+	operating = 0
 
 	if(autoclose)
 		close_door_at = next_close_time()
@@ -411,8 +413,8 @@
 /obj/machinery/door/proc/next_close_time()
 	return world.time + (normalspeed ? 150 : 5)
 
-/obj/machinery/door/proc/close()
-	if(!can_close())
+/obj/machinery/door/proc/close(var/forced = 0)
+	if(!can_close(forced))
 		return
 	operating = 1
 
@@ -432,7 +434,7 @@
 	//I shall not add a check every x ticks if a door has closed over some fire.
 	var/obj/fire/fire = locate() in loc
 	if(fire)
-		del fire
+		qdel(fire)
 	return
 
 /obj/machinery/door/proc/requiresID()

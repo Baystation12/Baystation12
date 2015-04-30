@@ -189,7 +189,7 @@ var/list/adminfaxes = list()	//cache for faxes that have been sent to admins
 	else if (istype(copyitem, /obj/item/weapon/photo))
 		rcvdcopy = photocopy(copyitem)
 	else if (istype(copyitem, /obj/item/weapon/paper_bundle))
-		rcvdcopy = bundlecopy(copyitem)
+		rcvdcopy = bundlecopy(copyitem, 0)
 	else
 		visible_message("[src] beeps, \"Error transmitting message.\"")
 		return

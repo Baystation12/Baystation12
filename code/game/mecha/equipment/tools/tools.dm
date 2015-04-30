@@ -15,21 +15,22 @@
 	action(atom/target)
 		if(!action_checks(target)) return
 		if(!cargo_holder) return
-		
+
 		//loading
 		if(istype(target,/obj))
 			var/obj/O = target
 			if(O.buckled_mob)
 				return
 			if(locate(/mob/living) in O)
+				occupant_message("<span class='warning'>You can't load living things into the cargo compartment.</span>")
 				return
 			if(O.anchored)
-				occupant_message("<font color='red'>[target] is firmly secured.</font>")
+				occupant_message("<span class='warning'>[target] is firmly secured.</span>")
 				return
 			if(cargo_holder.cargo.len >= cargo_holder.cargo_capacity)
-				occupant_message("<font color='red'>Not enough room in cargo compartment.</font>")
+				occupant_message("<span class='warning'>Not enough room in cargo compartment.</span>")
 				return
-			
+
 			occupant_message("You lift [target] and start to load it into cargo compartment.")
 			chassis.visible_message("[chassis] lifts [target] and starts to load it into cargo compartment.")
 			set_ready_state(0)
@@ -41,10 +42,10 @@
 					cargo_holder.cargo += O
 					O.loc = chassis
 					O.anchored = 0
-					occupant_message("<font color='blue'>[target] succesfully loaded.</font>")
+					occupant_message("<span class='notice'>[target] succesfully loaded.</span>")
 					log_message("Loaded [O]. Cargo compartment capacity: [cargo_holder.cargo_capacity - cargo_holder.cargo.len]")
 				else
-					occupant_message("<font color='red'>You must hold still while handling objects.</font>")
+					occupant_message("<span class='warning'>You must hold still while handling objects.</span>")
 					O.anchored = initial(O.anchored)
 
 		//attacking
@@ -55,8 +56,8 @@
 				M.take_overall_damage(dam_force)
 				M.adjustOxyLoss(round(dam_force/2))
 				M.updatehealth()
-				occupant_message("\red You squeeze [target] with [src.name]. Something cracks.")
-				chassis.visible_message("\red [chassis] squeezes [target].")
+				occupant_message("<span class='warning'>You squeeze [target] with [src.name]. Something cracks.</span>")
+				chassis.visible_message("<span class='warning'>[chassis] squeezes [target].</span>")
 			else
 				step_away(M,chassis)
 				occupant_message("You push [target] out of the way.")
@@ -82,14 +83,14 @@
 			if(!target_obj.vars.Find("unacidable") || target_obj.unacidable)	return
 		set_ready_state(0)
 		chassis.use_power(energy_drain)
-		chassis.visible_message("<font color='red'><b>[chassis] starts to drill [target]</b></font>", "You hear the drill.")
-		occupant_message("<font color='red'><b>You start to drill [target]</b></font>")
+		chassis.visible_message("<span class='danger'>[chassis] starts to drill [target]</span>", "<span class='warning'>You hear the drill.</span>")
+		occupant_message("<span class='danger'>You start to drill [target]</span>")
 		var/T = chassis.loc
 		var/C = target.loc	//why are these backwards? we may never know -Pete
 		if(do_after_cooldown(target))
 			if(T == chassis.loc && src == chassis.selected)
 				if(istype(target, /turf/simulated/wall/r_wall))
-					occupant_message("<font color='red'>[target] is too durable to drill through.</font>")
+					occupant_message("<span class='warning'>[target] is too durable to drill through.</span>")
 				else if(istype(target, /turf/simulated/mineral))
 					for(var/turf/simulated/mineral/M in range(chassis,1))
 						if(get_dir(chassis,M)&chassis.dir)
@@ -133,8 +134,8 @@
 			if(target_obj.unacidable)	return
 		set_ready_state(0)
 		chassis.use_power(energy_drain)
-		chassis.visible_message("<font color='red'><b>[chassis] starts to drill [target]</b></font>", "You hear the drill.")
-		occupant_message("<font color='red'><b>You start to drill [target]</b></font>")
+		chassis.visible_message("<span class='danger'>[chassis] starts to drill [target]</span>", "<span class='warning'>You hear the drill.</span>")
+		occupant_message("<span class='danger'>You start to drill [target]</span>")
 		var/T = chassis.loc
 		var/C = target.loc	//why are these backwards? we may never know -Pete
 		if(do_after_cooldown(target))
@@ -195,12 +196,12 @@
 			if( istype(target, /obj/structure/reagent_dispensers/watertank) && get_dist(chassis,target) <= 1)
 				var/obj/o = target
 				var/amount = o.reagents.trans_to(src, 200)
-				occupant_message("\blue [amount] units transferred into internal tank.")
+				occupant_message("<span class='notice'>[amount] units transferred into internal tank.</span>")
 				playsound(chassis, 'sound/effects/refill.ogg', 50, 1, -6)
 				return
 
 			if (src.reagents.total_volume < 1)
-				occupant_message("\red \The [src] is empty.")
+				occupant_message("<span class='warning'>\The [src] is empty.</span>")
 				return
 
 			playsound(chassis, 'sound/effects/extinguish.ogg', 75, 1, -3)
@@ -215,7 +216,7 @@
 
 			for(var/a=0, a<5, a++)
 				spawn(0)
-					var/obj/effect/effect/water/W = new /obj/effect/effect/water( get_turf(chassis) )
+					var/obj/effect/effect/water/W = PoolOrNew(/obj/effect/effect/water, get_turf(chassis))
 					var/turf/my_target = pick(the_targets)
 					var/datum/reagents/R = new/datum/reagents(5)
 					if(!W) return
@@ -235,7 +236,7 @@
 							W.reagents.reaction(atm)
 						if(W.loc == my_target) break
 						sleep(2)
-					W.delete()
+					qdel(W)
 			return 1
 
 	get_equip_info()
@@ -294,7 +295,7 @@
 					if(do_after_cooldown(target))
 						if(disabled) return
 						chassis.spark_system.start()
-						del(target)
+						qdel(target)
 						playsound(target, 'sound/items/Deconstruct.ogg', 50, 1)
 						chassis.use_power(energy_drain)
 			if(1)
@@ -417,7 +418,7 @@
 		do_after_cooldown()
 		src = null
 		spawn(rand(150,300))
-			del(P)
+			qdel(P)
 		return
 
 /obj/item/mecha_parts/mecha_equipment/gravcatapult
@@ -440,7 +441,7 @@
 			last_fired = world.time
 		else
 			if (world.time % 3)
-				occupant_message("<span class='warning'>[src] is not ready to fire again!")
+				occupant_message("<span class='warning'>[src] is not ready to fire again!</span>")
 			return 0
 
 		switch(mode)
@@ -536,8 +537,8 @@
 			user << "\red The [W] bounces off [chassis] armor."
 			chassis.log_append_to_last("Armor saved.")
 		else
-			chassis.occupant_message("<font color='red'><b>[user] hits [chassis] with [W].</b></font>")
-			user.visible_message("<font color='red'><b>[user] hits [chassis] with [W].</b></font>", "<font color='red'><b>You hit [src] with [W].</b></font>")
+			chassis.occupant_message("<span class='danger'>[user] hits [chassis] with [W].</span>")
+			user.visible_message("<span class='danger'><b>[user] hits [chassis] with [W].</span>", "<span class='danger'>You hit [src] with [W].</span>")
 			chassis.take_damage(round(W.force*damage_coeff),W.damtype)
 			chassis.check_for_internal_damage(list(MECHA_INT_TEMP_CONTROL,MECHA_INT_TANK_BREACH,MECHA_INT_CONTROL_LOST))
 		set_ready_state(0)
@@ -584,7 +585,7 @@
 		if(!action_checks(src))
 			return chassis.dynbulletdamage(Proj)
 		if(prob(chassis.deflect_chance*deflect_coeff))
-			chassis.occupant_message("\blue The armor deflects incoming projectile.")
+			chassis.occupant_message("<span class='notice'>The armor deflects incoming projectile.</span>")
 			chassis.visible_message("The [chassis.name] armor deflects the projectile")
 			chassis.log_append_to_last("Armor saved.")
 		else
@@ -600,7 +601,7 @@
 		if(!action_checks(A))
 			return chassis.dynhitby(A)
 		if(prob(chassis.deflect_chance*deflect_coeff) || istype(A, /mob/living) || istype(A, /obj/item/mecha_parts/mecha_tracking))
-			chassis.occupant_message("\blue The [A] bounces off the armor.")
+			chassis.occupant_message("<span class='notice'>The [A] bounces off the armor.</span>")
 			chassis.visible_message("The [A] bounces off the [chassis] armor")
 			chassis.log_append_to_last("Armor saved.")
 			if(istype(A, /mob/living))
@@ -636,6 +637,11 @@
 		pr_repair_droid = new /datum/global_iterator/mecha_repair_droid(list(src),0)
 		pr_repair_droid.set_delay(equip_cooldown)
 		return
+
+	Destroy()
+		qdel(pr_repair_droid)
+		pr_repair_droid = null
+		..()
 
 	attach(obj/mecha/M as obj)
 		..()
@@ -725,6 +731,11 @@
 		pr_energy_relay = new /datum/global_iterator/mecha_energy_relay(list(src),0)
 		pr_energy_relay.set_delay(equip_cooldown)
 		return
+
+	Destroy()
+		qdel(pr_energy_relay)
+		pr_energy_relay = null
+		..()
 
 	detach()
 		pr_energy_relay.stop()
@@ -842,6 +853,11 @@
 		init()
 		return
 
+	Destroy()
+		qdel(pr_mech_generator)
+		pr_mech_generator = null
+		..()
+
 	proc/init()
 		fuel = new /obj/item/stack/sheet/mineral/phoron(src)
 		fuel.amount = 0
@@ -877,7 +893,7 @@
 			var/result = load_fuel(target)
 			var/message
 			if(isnull(result))
-				message = "<font color='red'>[fuel] traces in target minimal. [target] cannot be used as fuel.</font>"
+				message = "<span class='warning'>[fuel] traces in target minimal. [target] cannot be used as fuel.</span>"
 			else if(!result)
 				message = "Unit is full."
 			else
@@ -902,7 +918,7 @@
 	attackby(weapon,mob/user)
 		var/result = load_fuel(weapon)
 		if(isnull(result))
-			user.visible_message("[user] tries to shove [weapon] into [src]. What a dumb-ass.","<font color='red'>[fuel] traces minimal. [weapon] cannot be used as fuel.</font>")
+			user.visible_message("[user] tries to shove [weapon] into [src]. What a dumb-ass.","<span class='warning'>[fuel] traces minimal. [weapon] cannot be used as fuel.</span>")
 		else if(!result)
 			user << "Unit is full."
 		else
@@ -1026,25 +1042,25 @@
 							cargo_holder.cargo += O
 							O.loc = chassis
 							O.anchored = 0
-							chassis.occupant_message("<font color='blue'>[target] succesfully loaded.</font>")
+							chassis.occupant_message("<span class='notice'>[target] succesfully loaded.</span>")
 							chassis.log_message("Loaded [O]. Cargo compartment capacity: [cargo_holder.cargo_capacity - cargo_holder.cargo.len]")
 						else
-							chassis.occupant_message("<font color='red'>You must hold still while handling objects.</font>")
+							chassis.occupant_message("<span class='warning'>You must hold still while handling objects.</span>")
 							O.anchored = initial(O.anchored)
 				else
-					chassis.occupant_message("<font color='red'>Not enough room in cargo compartment.</font>")
+					chassis.occupant_message("<span class='warning'>Not enough room in cargo compartment.</span>")
 			else
-				chassis.occupant_message("<font color='red'>[target] is firmly secured.</font>")
+				chassis.occupant_message("<span class='warning'>[target] is firmly secured.</span>")
 
 		else if(istype(target,/mob/living))
 			var/mob/living/M = target
 			if(M.stat>1) return
 			if(chassis.occupant.a_intent == I_HURT)
-				chassis.occupant_message("\red You obliterate [target] with [src.name], leaving blood and guts everywhere.")
-				chassis.visible_message("\red [chassis] destroys [target] in an unholy fury.")
+				chassis.occupant_message("<span class='danger'>You obliterate [target] with [src.name], leaving blood and guts everywhere.</span>")
+				chassis.visible_message("<span class='danger'>[chassis] destroys [target] in an unholy fury.<span>")
 			if(chassis.occupant.a_intent == I_DISARM)
-				chassis.occupant_message("\red You tear [target]'s limbs off with [src.name].")
-				chassis.visible_message("\red [chassis] rips [target]'s arms off.")
+				chassis.occupant_message("<span class='danger'>You tear [target]'s limbs off with [src.name].</span>")
+				chassis.visible_message("<span class='danger'>[chassis] rips [target]'s arms off.</span>")
 			else
 				step_away(M,chassis)
 				chassis.occupant_message("You smash into [target], sending them flying.")
@@ -1086,7 +1102,7 @@
 /obj/item/mecha_parts/mecha_equipment/tool/passenger/destroy()
 	for(var/atom/movable/AM in src)
 		AM.forceMove(get_turf(src))
-		AM << "<span class='danger'>You tumble out of the destroyed [src.name]!"
+		AM << "<span class='danger'>You tumble out of the destroyed [src.name]!</span>"
 	return ..()
 
 /obj/item/mecha_parts/mecha_equipment/tool/passenger/Exit(atom/movable/O)
@@ -1094,7 +1110,7 @@
 
 /obj/item/mecha_parts/mecha_equipment/tool/passenger/proc/move_inside(var/mob/user)
 	if (chassis)
-		chassis.visible_message("\blue [user] starts to climb into [chassis].")
+		chassis.visible_message("<span class='notice'>[user] starts to climb into [chassis].</span>")
 
 	if(do_after(user, 40, needhand=0))
 		if(!src.occupant)
@@ -1103,7 +1119,7 @@
 			log_message("[user] boarded.")
 			occupant_message("[user] boarded.")
 		else if(src.occupant != user)
-			user << "\red [src.occupant] was faster. Try better next time, loser."
+			user << "<span class='warning'>[src.occupant] was faster. Try better next time, loser.</span>"
 	else
 		user << "You stop entering the exosuit."
 
@@ -1178,18 +1194,18 @@
 		return
 
 	if (!isturf(usr.loc))
-		usr << "\red You can't reach the passenger compartment from here."
+		usr << "<span class='danger'>You can't reach the passenger compartment from here.</span>"
 		return
 
 	if(iscarbon(usr))
 		var/mob/living/carbon/C = usr
 		if(C.handcuffed)
-			usr << "\red Kinda hard to climb in while handcuffed don't you think?"
+			usr << "<span class='danger'>Kinda hard to climb in while handcuffed don't you think?</span>"
 			return
 
 	for(var/mob/living/carbon/slime/M in range(1,usr))
 		if(M.Victim == usr)
-			usr << "\red You're too busy getting your life sucked out of you."
+			usr << "<span class='danger'>You're too busy getting your life sucked out of you.</span>"
 			return
 
 	//search for a valid passenger compartment
@@ -1209,10 +1225,10 @@
 	//didn't find anything
 	switch (feedback)
 		if (OCCUPIED)
-			usr << "\red The passenger compartment is already occupied!"
+			usr << "<span class='danger'>The passenger compartment is already occupied!</span>"
 		if (LOCKED)
-			usr << "\red The passenger compartment hatch is locked!"
+			usr << "<span class='warning'>The passenger compartment hatch is locked!</span>"
 		if (OCCUPIED|LOCKED)
-			usr << "\red All of the passenger compartments are already occupied or locked!"
+			usr << "<span class='danger'>All of the passenger compartments are already occupied or locked!</span>"
 		if (0)
-			usr << "\red \The [src] doesn't have a passenger compartment."
+			usr << "<span class='warning'>\The [src] doesn't have a passenger compartment.</span>"

@@ -28,6 +28,9 @@
 	faction = "cult"
 	status_flags = CANPUSH
 
+/mob/living/simple_animal/shade/cultify()
+	return
+
 /mob/living/simple_animal/shade/Life()
 	..()
 	OnDeathInLife()
@@ -44,5 +47,5 @@
 			if((M.client && !( M.blinded )))
 				M.show_message("\red [src] lets out a contented sigh as their form unwinds. ")
 				ghostize()
-		del src
+		qdel(src)
 		return

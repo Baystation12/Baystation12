@@ -249,7 +249,11 @@ datum/hud/New(mob/owner)
 		robot_hud()
 	else if(isobserver(mymob))
 		ghost_hud()
+	else
+		mymob.instantiate_hud(src)
 
+/mob/proc/instantiate_hud(var/datum/hud/HUD)
+	return
 
 //Triggered when F12 is pressed (Unless someone changed something in the DMF)
 /mob/verb/button_pressed_F12(var/full = 0 as null)

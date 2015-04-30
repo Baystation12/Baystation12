@@ -4,7 +4,8 @@
 /var/global/datum/topic_state/inventory_state/inventory_state = new()
 
 /datum/topic_state/inventory_state/can_use_topic(var/src_object, var/mob/user)
-	if(!(src_object in src))
+	if(!(src_object in user))
 		return STATUS_CLOSE
+
 
 	return user.shared_nano_interaction()

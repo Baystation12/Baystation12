@@ -14,7 +14,7 @@
 	lawupdate = 0
 	density = 1
 	req_access = list(access_engine, access_robotics)
-	integrated_light_power = 2
+	integrated_light_power = 3
 	local_transmit = 1
 
 	mob_bump_flag = SIMPLE_ANIMAL
@@ -24,6 +24,11 @@
 
 	//Used for self-mailing.
 	var/mail_destination = ""
+	var/obj/machinery/drone_fabricator/master_fabricator
+	var/law_type = /datum/ai_laws/drone
+	var/module_type = /obj/item/weapon/robot_module/drone
+	var/can_pull_size = 2
+	var/can_pull_mobs
 
 	holder_type = /obj/item/weapon/holder/drone
 
@@ -35,9 +40,6 @@
 	remove_language("Robot Talk")
 	add_language("Robot Talk", 0)
 	add_language("Drone Talk", 1)
-
-	if(camera && "Robots" in camera.network)
-		camera.add_network("Engineering")
 
 	//They are unable to be upgraded, so let's give them a bit of a better battery.
 	cell.maxcharge = 10000
@@ -52,16 +54,18 @@
 		C.max_damage = 10
 
 	verbs -= /mob/living/silicon/robot/verb/Namepick
-	module = new /obj/item/weapon/robot_module/drone(src)
-
-	//Some tidying-up.
-	flavor_text = "It's a tiny little repair drone. The casing is stamped with an NT logo and the subscript: 'NanoTrasen Recursive Repair Systems: Fixing Tomorrow's Problem, Today!'"
 	updateicon()
 
 /mob/living/silicon/robot/drone/init()
-	laws = new /datum/ai_laws/drone()
+	if(!laws) laws = new law_type
+	if(!module) module = new module_type(src)
+
 	aiCamera = new/obj/item/device/camera/siliconcam/drone_camera(src)
+	flavor_text = "It's a tiny little repair drone. The casing is stamped with an NT logo and the subscript: 'NanoTrasen Recursive Repair Systems: Fixing Tomorrow's Problem, Today!'"
 	playsound(src.loc, 'sound/machines/twobeep.ogg', 50, 0)
+	spawn(1)
+		if(camera && ("Robots" in camera.network))
+			camera.add_network("Engineering")
 
 //Redefining some robot procs...
 /mob/living/silicon/robot/drone/SetName(pickedName as text)
@@ -91,26 +95,26 @@
 /mob/living/silicon/robot/drone/attackby(obj/item/weapon/W as obj, mob/user as mob)
 
 	if(istype(W, /obj/item/borg/upgrade/))
-		user << "\red The maintenance drone chassis not compatible with \the [W]."
+		user << "<span class='danger'>\The [src] is not compatible with \the [W].</span>"
 		return
 
 	else if (istype(W, /obj/item/weapon/crowbar))
-		user << "The machine is hermetically sealed. You can't open the case."
+		user << "<span class='danger'>\The [src] is hermetically sealed. You can't open the case.</span>"
 		return
 
 	else if (istype(W, /obj/item/weapon/card/emag))
 
 		if(!client || stat == 2)
-			user << "\red There's not much point subverting this heap of junk."
+			user << "<span class='danger'>There's not much point subverting this heap of junk.</span>"
 			return
 
 		if(emagged)
-			src << "\red [user] attempts to load subversive software into you, but your hacked subroutined ignore the attempt."
-			user << "\red You attempt to subvert [src], but the sequencer has no effect."
+			src << "<span class='danger'>\The [user] attempts to load subversive software into you, but your hacked subroutines ignore the attempt.</span>"
+			user << "<span class='danger'>You attempt to subvert [src], but the sequencer has no effect.</span>"
 			return
 
-		user << "\red You swipe the sequencer across [src]'s interface and watch its eyes flicker."
-		src << "\red You feel a sudden burst of malware loaded into your execute-as-root buffer. Your tiny brain methodically parses, loads and executes the script."
+		user << "<span class='danger'>You swipe the sequencer across [src]'s interface and watch its eyes flicker.</span>"
+		src << "<span class='danger'>You feel a sudden burst of malware loaded into your execute-as-root buffer. Your tiny brain methodically parses, loads and executes the script.</span>"
 
 		var/obj/item/weapon/card/emag/emag = W
 		emag.uses--
@@ -130,7 +134,7 @@
 
 		src << "<b>Obey these laws:</b>"
 		laws.show_laws(src)
-		src << "\red \b ALERT: [user.real_name] is your new master. Obey your new laws and his commands."
+		src << "<span class='danger'>ALERT: [user.real_name] is your new master. Obey your new laws and his commands.</span>"
 		return
 
 	else if (istype(W, /obj/item/weapon/card/id)||istype(W, /obj/item/device/pda))
@@ -138,14 +142,14 @@
 		if(stat == 2)
 
 			if(!config.allow_drone_spawn || emagged || health < -35) //It's dead, Dave.
-				user << "\red The interface is fried, and a distressing burned smell wafts from the robot's interior. You're not rebooting this one."
+				user << "<span class='danger'>The interface is fried, and a distressing burned smell wafts from the robot's interior. You're not rebooting this one.</span>"
 				return
 
 			if(!allowed(usr))
-				user << "\red Access denied."
+				user << "<span class='danger'>Access denied.</span>"
 				return
 
-			user.visible_message("\red \the [user] swipes \his ID card through \the [src], attempting to reboot it.", "\red You swipe your ID card through \the [src], attempting to reboot it.")
+			user.visible_message("<span class='danger'>\The [user] swipes \his ID card through \the [src], attempting to reboot it.</span>", "<span class='danger'>>You swipe your ID card through \the [src], attempting to reboot it.</span>")
 			var/drones = 0
 			for(var/mob/living/silicon/robot/drone/D in world)
 				if(D.key && D.client)
@@ -155,7 +159,7 @@
 			return
 
 		else
-			user.visible_message("\red \the [user] swipes \his ID card through \the [src], attempting to shut it down.", "\red You swipe your ID card through \the [src], attempting to shut it down.")
+			user.visible_message("<span class='danger'>\The [user] swipes \his ID card through \the [src], attempting to shut it down.</span>", "<span class='danger'>You swipe your ID card through \the [src], attempting to shut it down.</span>")
 
 			if(emagged)
 				return
@@ -163,7 +167,7 @@
 			if(allowed(usr))
 				shut_down()
 			else
-				user << "\red Access denied."
+				user << "<span class='danger'>Access denied.</span>"
 
 		return
 
@@ -185,7 +189,7 @@
 //Drones killed by damage will gib.
 /mob/living/silicon/robot/drone/handle_regular_status_updates()
 
-	if(health <= -35 && src.stat != 2)
+	if((health <= -35 || (master_fabricator && src.z != master_fabricator.z)) && src.stat != 2)
 		timeofdeath = world.time
 		death() //Possibly redundant, having trouble making death() cooperate.
 		gib()
@@ -194,32 +198,31 @@
 
 //DRONE MOVEMENT.
 /mob/living/silicon/robot/drone/Process_Spaceslipping(var/prob_slip)
-	//TODO: Consider making a magboot item for drones to equip. ~Z
 	return 0
 
 //CONSOLE PROCS
 /mob/living/silicon/robot/drone/proc/law_resync()
 	if(stat != 2)
 		if(emagged)
-			src << "\red You feel something attempting to modify your programming, but your hacked subroutines are unaffected."
+			src << "<span class='danger'>You feel something attempting to modify your programming, but your hacked subroutines are unaffected.</span>"
 		else
-			src << "\red A reset-to-factory directive packet filters through your data connection, and you obediently modify your programming to suit it."
+			src << "<span class='danger'>A reset-to-factory directive packet filters through your data connection, and you obediently modify your programming to suit it.</span>"
 			full_law_reset()
 			show_laws()
 
 /mob/living/silicon/robot/drone/proc/shut_down()
 	if(stat != 2)
 		if(emagged)
-			src << "\red You feel a system kill order percolate through your tiny brain, but it doesn't seem like a good idea to you."
+			src << "<span class='danger'>You feel a system kill order percolate through your tiny brain, but it doesn't seem like a good idea to you.</span>"
 		else
-			src << "\red You feel a system kill order percolate through your tiny brain, and you obediently destroy yourself."
+			src << "<span class='danger'>You feel a system kill order percolate through your tiny brain, and you obediently destroy yourself.</span>"
 			death()
 
 /mob/living/silicon/robot/drone/proc/full_law_reset()
 	clear_supplied_laws()
 	clear_inherent_laws()
 	clear_ion_laws()
-	laws = new /datum/ai_laws/drone
+	laws = new law_type
 
 //Reboot procs.
 
@@ -267,17 +270,32 @@
 		..()
 	else if(istype(AM,/obj/item))
 		var/obj/item/O = AM
-		if(O.w_class > 2)
+		if(O.w_class > can_pull_size)
 			src << "<span class='warning'>You are too small to pull that.</span>"
 			return
 		else
 			..()
 	else
-		src << "<span class='warning'>You are too small to pull that.</span>"
-		return
+		if(!can_pull_mobs)
+			src << "<span class='warning'>You are too small to pull that.</span>"
+			return
 
 /mob/living/silicon/robot/drone/add_robot_verbs()
-	src.verbs |= silicon_verbs_subsystems
+	src.verbs |= silicon_subsystems
 
 /mob/living/silicon/robot/drone/remove_robot_verbs()
-	src.verbs -= silicon_verbs_subsystems
+	src.verbs -= silicon_subsystems
+
+/mob/living/silicon/robot/drone/construction
+	law_type = /datum/ai_laws/construction_drone
+	module_type = /obj/item/weapon/robot_module/drone/construction
+	can_pull_size = 5
+	can_pull_mobs = 1
+
+/mob/living/silicon/robot/drone/construction/init()
+	..()
+	flavor_text = "It's a bulky construction drone stamped with a Sol Central glyph."
+
+/mob/living/silicon/robot/drone/construction/updatename()
+	real_name = "construction drone ([rand(100,999)])"
+	name = real_name

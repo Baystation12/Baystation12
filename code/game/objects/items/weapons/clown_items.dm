@@ -28,7 +28,11 @@
 		user << "<span class='notice'>You need to take that [target.name] off before cleaning it.</span>"
 	else if(istype(target,/obj/effect/decal/cleanable))
 		user << "<span class='notice'>You scrub \the [target.name] out.</span>"
-		del(target)
+		qdel(target)
+	else if(istype(target,/turf))
+		user << "<span class='notice'>You scrub \the [target.name] clean.</span>"
+		var/turf/T = target
+		T.clean()
 	else
 		user << "<span class='notice'>You clean \the [target.name].</span>"
 		target.clean_blood()

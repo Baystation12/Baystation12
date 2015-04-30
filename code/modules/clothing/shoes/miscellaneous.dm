@@ -13,7 +13,6 @@
 /obj/item/clothing/shoes/mime
 	name = "mime shoes"
 	icon_state = "mime"
-	item_color = "mime"
 
 /obj/item/clothing/shoes/swat
 	name = "\improper SWAT shoes"
@@ -68,7 +67,6 @@
 	icon_state = "clown"
 	item_state = "clown_shoes"
 	slowdown = SHOES_SLOWDOWN+1
-	item_color = "clown"
 	force = 0
 	var/footstep = 1	//used for squeeks whilst walking
 	species_restricted = null
@@ -88,7 +86,6 @@
 	desc = "Nanotrasen-issue Security combat boots for combat scenarios or combat situations. All combat, all the time."
 	icon_state = "jackboots"
 	item_state = "jackboots"
-	item_color = "hosred"
 	force = 3
 	siemens_coefficient = 0.7
 
@@ -97,7 +94,6 @@
 	desc = "A pair of boots worn by the followers of Nar-Sie."
 	icon_state = "cult"
 	item_state = "cult"
-	item_color = "cult"
 	force = 2
 	siemens_coefficient = 0.7
 
@@ -106,6 +102,9 @@
 	heat_protection = FEET
 	max_heat_protection_temperature = SHOE_MAX_HEAT_PROTECTION_TEMPERATURE
 	species_restricted = null
+
+/obj/item/clothing/shoes/cult/cultify()
+	return
 
 /obj/item/clothing/shoes/cyborg
 	name = "cyborg boots"

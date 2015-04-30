@@ -376,7 +376,8 @@ default behaviour is:
 
 /mob/living/proc/revive()
 	rejuvenate()
-	buckled = initial(src.buckled)
+	if(buckled)
+		buckled.unbuckle_mob()
 	if(iscarbon(src))
 		var/mob/living/carbon/C = src
 
@@ -511,7 +512,7 @@ default behaviour is:
 								for(var/mob/O in viewers(M, null))
 									O.show_message(text("\red [] has been pulled from []'s grip by []", G.affecting, G.assailant, src), 1)
 								//G = null
-								del(G)
+								qdel(G)
 						else
 							ok = 0
 						if (locate(/obj/item/weapon/grab, M.grabbed_by.len))
@@ -628,22 +629,22 @@ default behaviour is:
 		var/resisting = 0
 		for(var/obj/O in L.requests)
 			L.requests.Remove(O)
-			del(O)
+			qdel(O)
 			resisting++
 		for(var/obj/item/weapon/grab/G in usr.grabbed_by)
 			resisting++
 			switch(G.state)
 				if(GRAB_PASSIVE)
-					del(G)
+					qdel(G)
 				if(GRAB_AGGRESSIVE)
 					if(prob(60)) //same chance of breaking the grab as disarm
 						L.visible_message("<span class='warning'>[L] has broken free of [G.assailant]'s grip!</span>")
-						del(G)
+						qdel(G)
 				if(GRAB_NECK)
 					//If the you move when grabbing someone then it's easier for them to break free. Same if the affected mob is immune to stun.
 					if (((world.time - G.assailant.l_move_time < 30 || !L.stunned) && prob(15)) || prob(3))
 						L.visible_message("<span class='warning'>[L] has broken free of [G.assailant]'s headlock!</span>")
-						del(G)
+						qdel(G)
 		if(resisting)
 			L.visible_message("<span class='danger'>[L] resists!</span>")
 
@@ -777,7 +778,7 @@ default behaviour is:
 							O.show_message(text("\red <B>[] manages to break the handcuffs!</B>", CM), 1)
 						CM << "\red You successfully break your handcuffs."
 						CM.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!" ))
-						del(CM.handcuffed)
+						qdel(CM.handcuffed)
 						CM.handcuffed = null
 						if(buckled && buckled.buckle_require_restraints)
 							buckled.unbuckle_mob()
@@ -825,7 +826,7 @@ default behaviour is:
 							O.show_message(text("\red <B>[] manages to break the legcuffs!</B>", CM), 1)
 						CM << "\red You successfully break your legcuffs."
 						CM.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!" ))
-						del(CM.legcuffed)
+						qdel(CM.legcuffed)
 						CM.legcuffed = null
 						CM.update_inv_legcuffed()
 			else

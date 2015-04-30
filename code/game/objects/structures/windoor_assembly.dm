@@ -37,7 +37,7 @@ obj/structure/windoor_assembly/New(Loc, start_dir=NORTH, constructed=0)
 	
 	update_nearby_tiles(need_rebuild=1)
 
-obj/structure/windoor_assembly/Del()
+obj/structure/windoor_assembly/Destroy()
 	density = 0
 	update_nearby_tiles()
 	..()
@@ -79,7 +79,7 @@ obj/structure/windoor_assembly/Del()
 						new /obj/item/stack/sheet/glass/reinforced(get_turf(src), 5)
 						if(secure)
 							new /obj/item/stack/rods(get_turf(src), 4)
-						del(src)
+						qdel(src)
 				else
 					user << "\blue You need more welding fuel to dissassemble the windoor assembly."
 					return
@@ -249,7 +249,7 @@ obj/structure/windoor_assembly/Del()
 						src.electronics.loc = windoor
 
 
-					del(src)
+					qdel(src)
 
 
 			else

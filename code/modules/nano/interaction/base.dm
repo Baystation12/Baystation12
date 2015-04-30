@@ -9,7 +9,7 @@
 	return list()
 
 /datum/topic_state/proc/can_use_topic(var/src_object, var/mob/user)
-	return STATUS_INTERACTIVE
+	return STATUS_CLOSE
 
 /mob/proc/shared_nano_interaction()
 	if (src.stat || !client)
@@ -17,3 +17,18 @@
 	else if (restrained() || lying || stat || stunned || weakened)
 		return STATUS_UPDATE					// update only (orange visibility)
 	return STATUS_INTERACTIVE
+
+/mob/living/silicon/ai/shared_nano_interaction()
+	if(lacks_power())
+		return STATUS_CLOSE
+	if (check_unable(1))
+		return STATUS_CLOSE
+	return ..()
+
+/mob/living/silicon/robot/shared_nano_interaction()
+	. = STATUS_INTERACTIVE
+	if(cell.charge <= 0)
+		return STATUS_CLOSE
+	if(lockcharge)
+		. = STATUS_DISABLED
+	return min(., ..())

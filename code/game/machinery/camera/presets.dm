@@ -1,14 +1,76 @@
 // PRESETS
-var/global/list/station_networks = list("SS13","Civilian West","Engineering Outpost","MINE","Research Outpost","Prison","Security")
+var/global/list/station_networks = list(
+										NETWORK_CIVILIAN_EAST,
+										NETWORK_CIVILIAN_WEST,
+										NETWORK_COMMAND,
+										NETWORK_ENGINE,
+										NETWORK_ENGINEERING,
+										NETWORK_ENGINEERING_OUTPOST,
+										NETWORK_EXODUS,
+										NETWORK_MEDICAL,
+										NETWORK_MINE,
+										NETWORK_RESEARCH,
+										NETWORK_RESEARCH_OUTPOST,
+										NETWORK_PRISON,
+										NETWORK_SECURITY
+										)
+var/global/list/engineering_networks = list(
+										NETWORK_ENGINE,
+										NETWORK_ENGINEERING,
+										NETWORK_ENGINEERING_OUTPOST,
+										"Atmosphere Alarms",
+										"Fire Alarms",
+										"Power Alarms")
+/obj/machinery/camera/network/crescent
+	network = list(NETWORK_CRESCENT)
+
+/obj/machinery/camera/network/civilian_east
+	network = list(NETWORK_CIVILIAN_EAST)
 
 /obj/machinery/camera/network/civilian_west
-	network = list("Civilian West")
+	network = list(NETWORK_CIVILIAN_WEST)
+
+/obj/machinery/camera/network/command
+	network = list(NETWORK_COMMAND)
+
+/obj/machinery/camera/network/engine
+	network = list(NETWORK_ENGINE)
+
+/obj/machinery/camera/network/engineering
+	network = list(NETWORK_ENGINEERING)
+
+/obj/machinery/camera/network/engineering_outpost
+	network = list(NETWORK_ENGINEERING_OUTPOST)
+
+/obj/machinery/camera/network/ert
+	network = list(NETWORK_ERT)
+
+/obj/machinery/camera/network/exodus
+	network = list(NETWORK_EXODUS)
+
+/obj/machinery/camera/network/mining
+	network = list(NETWORK_MINE)
 
 /obj/machinery/camera/network/prison
-	network = list("Prison")
+	network = list(NETWORK_PRISON)
+
+/obj/machinery/camera/network/medbay
+	network = list(NETWORK_MEDICAL)
+
+/obj/machinery/camera/network/research
+	network = list(NETWORK_RESEARCH)
+
+/obj/machinery/camera/network/research_outpost
+	network = list(NETWORK_RESEARCH_OUTPOST)
 
 /obj/machinery/camera/network/security
-	network = list("Security")
+	network = list(NETWORK_SECURITY)
+
+/obj/machinery/camera/network/telecom
+	network = list(NETWORK_TELECOM)
+
+/obj/machinery/camera/network/thunder
+	network = list(NETWORK_THUNDER)
 
 // EMP
 
@@ -20,6 +82,15 @@ var/global/list/station_networks = list("SS13","Civilian West","Engineering Outp
 
 /obj/machinery/camera/xray
 	icon_state = "xraycam" // Thanks to Krutchen for the icons.
+
+/obj/machinery/camera/xray/security
+	network = list(NETWORK_SECURITY)
+
+/obj/machinery/camera/xray/medbay
+	network = list(NETWORK_MEDICAL)
+
+/obj/machinery/camera/xray/research
+	network = list(NETWORK_RESEARCH)
 
 /obj/machinery/camera/xray/New()
 	..()
@@ -33,6 +104,10 @@ var/global/list/station_networks = list("SS13","Civilian West","Engineering Outp
 
 // ALL UPGRADES
 
+
+/obj/machinery/camera/all/command
+	network = list(NETWORK_COMMAND)
+
 /obj/machinery/camera/all/New()
 	..()
 	upgradeEmpProof()
@@ -40,22 +115,6 @@ var/global/list/station_networks = list("SS13","Civilian West","Engineering Outp
 	upgradeMotion()
 
 // AUTONAME
-
-/obj/machinery/camera/autoname/civilian_west
-	network = list("Civilian West")
-
-/obj/machinery/camera/autoname/engineering_outpost
-	network = list("Engineering Outpost")
-
-/obj/machinery/camera/autoname/mining_outpost
-	network = list("MINE")
-
-/obj/machinery/camera/autoname/research_outpost
-	network = list("Research Outpost")
-
-/obj/machinery/camera/autoname/security
-	network = list("Security")
-
 /obj/machinery/camera/autoname
 	var/number = 0 //camera number in area
 
@@ -73,6 +132,7 @@ var/global/list/station_networks = list("SS13","Civilian West","Engineering Outp
 					if(C.number)
 						number = max(number, C.number+1)
 			c_tag = "[A.name] #[number]"
+		invalidateCameraCache()
 
 
 // CHECKS

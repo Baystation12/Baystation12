@@ -1,0 +1,8 @@
+author: Yoshax
+delete-after: True
+changes:
+   - rscadd: "Adds an option and verb to the AI to send emergency messages to Central, functions same as comms console option."
+   - tweak: "Changes comms console to only have one level of ID require, meaning all heads of staff have what was captain access, allowing them to change alert, send emergency messages and make announcements."
+   - rscadd: "Adds an emergency bluespace relay machine which is mapped into teletcomms, this machine takes emergency messages and sends them to central, if one does not exist on any Z, you cannot send any emergency messages."
+   - rscadd: "Adds an emergency bluespace relay assembly kit orderable from cargo for when the ones on telecomms are destroyed. Assembly is required."
+   - rscadd: "Adds the emergency bluespace relay circuitboard to be researchable and printable in R&D, with sufficient tech levels."

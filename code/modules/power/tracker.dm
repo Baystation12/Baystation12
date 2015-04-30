@@ -21,7 +21,7 @@
 	Make(S)
 	connect_to_network()
 
-/obj/machinery/power/tracker/Del()
+/obj/machinery/power/tracker/Destroy()
 	unset_control() //remove from control computer
 	..()
 
@@ -69,7 +69,7 @@
 				S.give_glass()
 			playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 			user.visible_message("<span class='notice'>[user] takes the glass off the tracker.</span>")
-			del(src) // qdel
+			qdel(src)
 		return
 	..()
 

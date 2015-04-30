@@ -145,9 +145,9 @@
 		else
 			icon_state = "grey_target_prism"
 
-/obj/machinery/porta_turret/Del()
+/obj/machinery/porta_turret/Destroy()
 	//deletes its own cover with it
-	del(cover) // qdel
+	qdel(cover)
 	..()
 
 /obj/machinery/porta_turret/proc/isLocked(mob/user)
@@ -214,7 +214,7 @@
 		usr << "<span class='notice'>\The [src] has to be secured first!</span>"
 		return STATUS_CLOSE
 
-	return STATUS_INTERACTIVE
+	return ..()
 
 
 /obj/machinery/porta_turret/Topic(href, href_list, var/nowindow = 0)
@@ -271,7 +271,7 @@
 						new /obj/item/device/assembly/prox_sensor(loc)
 				else
 					user << "<span class='notice'>You remove the turret but did not manage to salvage anything.</span>"
-				del(src) // qdel
+				qdel(src) // qdel
 
 	if(istype(I, /obj/item/weapon/card/emag) && !emagged)
 		//Emagging the turret makes it go bonkers and stun everyone. It also makes
@@ -317,7 +317,7 @@
 				user << "<span class='notice'>You unsecure the exterior bolts on the turret.</span>"
 				invisibility = 0
 				update_icon()
-				del(cover) //deletes the cover, and the turret instance itself becomes its own cover. - qdel
+				qdel(cover) //deletes the cover, and the turret instance itself becomes its own cover.
 		wrenching = 0
 
 	else if(istype(I, /obj/item/weapon/card/id)||istype(I, /obj/item/device/pda))
@@ -387,10 +387,10 @@
 /obj/machinery/porta_turret/ex_act(severity)
 	switch (severity)
 		if (1)
-			del(src)
+			qdel(src)
 		if (2)
 			if (prob(25))
-				del(src)
+				qdel(src)
 			else
 				take_damage(150) //should instakill most turrets
 		if (3)
@@ -404,7 +404,7 @@
 	spark_system.start()	//creates some sparks because they look cool
 	density = 1
 	update_icon()
-	del(cover)	//deletes the cover - no need on keeping it there! - del
+	qdel(cover)	//deletes the cover - no need on keeping it there!
 
 /obj/machinery/porta_turret/proc/create_cover()
 	if(cover == null && anchored)
@@ -418,7 +418,7 @@
 
 	if(cover == null && anchored)	//if it has no cover and is anchored
 		if(stat & BROKEN)	//if the turret is borked
-			del(cover)	//delete its cover, assuming it has one. Workaround for a pesky little bug - qdel
+			qdel(cover)	//delete its cover, assuming it has one. Workaround for a pesky little bug
 		else
 			create_cover()
 
@@ -494,13 +494,52 @@
 		return check_anomalies ? TURRET_PRIORITY_TARGET	: TURRET_NOT_TARGET
 
 	if(ishuman(L))	//if the target is a human, analyze threat level
-		if(assess_perp(L, check_weapons, check_records, check_arrest) < 4)
+		if(assess_perp(L) < 4)
 			return TURRET_NOT_TARGET	//if threat level < 4, keep going
 
 	if(L.lying)		//if the perp is lying down, it's still a target but a less-important target
 		return lethal ? TURRET_SECONDARY_TARGET : TURRET_NOT_TARGET
 
 	return TURRET_PRIORITY_TARGET	//if the perp has passed all previous tests, congrats, it is now a "shoot-me!" nominee
+
+/obj/machinery/porta_turret/proc/assess_perp(var/mob/living/carbon/human/H)
+	if(!H || !istype(H))
+		return
+
+	if(emagged)
+		return 10
+
+	var/threatcount = 0
+	var/obj/item/weapon/card/id/id = GetIdCard(H) //Agent cards lower threatlevel.
+	if(id && istype(id, /obj/item/weapon/card/id/syndicate))
+		threatcount -= 2
+
+	if(check_weapons && !allowed(H))
+		if(istype(H.l_hand, /obj/item/weapon/gun) || istype(H.l_hand, /obj/item/weapon/melee))
+			threatcount += 4
+
+		if(istype(H.r_hand, /obj/item/weapon/gun) || istype(H.r_hand, /obj/item/weapon/melee))
+			threatcount += 4
+
+		if(istype(H.belt, /obj/item/weapon/gun) || istype(H.belt, /obj/item/weapon/melee))
+			threatcount += 2
+
+		if(H.species.name != "Human")
+			threatcount += 2
+
+	if(check_records || check_arrest)
+		var/perpname = H.name
+		if(id)
+			perpname = id.registered_name
+
+		var/datum/data/record/R = find_security_record("name", perpname)
+		if(check_records && !R)
+			threatcount += 4
+
+		if(check_arrest && R && (R.fields["criminal"] == "*Arrest*"))
+			threatcount += 4
+
+	return threatcount
 
 /obj/machinery/porta_turret/proc/tryToShootAt(var/list/mob/living/targets)
 	if(targets.len && last_target && (last_target in targets) && target(last_target))
@@ -549,12 +588,14 @@
 	update_icon()
 
 
+/*
 /obj/machinery/porta_turret/on_assess_perp(mob/living/carbon/human/perp)
 	if((check_access || attacked) && !allowed(perp))
 		//if the turret has been attacked or is angry, target all non-authorized personnel, see req_access
 		return 10
 
 	return ..()
+	*/
 
 
 /obj/machinery/porta_turret/proc/target(var/mob/living/target)
@@ -671,7 +712,7 @@
 				playsound(loc, 'sound/items/Crowbar.ogg', 75, 1)
 				user << "<span class='notice'>You dismantle the turret construction.</span>"
 				new /obj/item/stack/sheet/metal( loc, 5)
-				del(src) // qdel
+				qdel(src) // qdel
 				return
 
 		if(1)
@@ -736,7 +777,7 @@
 					target_type = /obj/machinery/porta_turret
 
 				build_step = 4
-				del(I) //delete the gun :( qdel
+				qdel(I) //delete the gun :(
 				return
 
 			else if(istype(I, /obj/item/weapon/wrench))
@@ -752,7 +793,7 @@
 					user << "<span class='notice'>\the [I] is stuck to your hand, you cannot put it in \the [src]</span>"
 					return
 				user << "<span class='notice'>You add the prox sensor to the turret.</span>"
-				del(I) // qdel
+				qdel(I)
 				return
 
 			//attack_hand() removes the gun
@@ -807,7 +848,7 @@
 //					Turret.cover=new/obj/machinery/porta_turret_cover(loc)
 //					Turret.cover.Parent_Turret=Turret
 //					Turret.cover.name = finish_name
-					del(src) // qdel
+					qdel(src) // qdel
 
 			else if(istype(I, /obj/item/weapon/crowbar))
 				playsound(loc, 'sound/items/Crowbar.ogg', 75, 1)

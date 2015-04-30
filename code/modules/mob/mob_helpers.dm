@@ -615,3 +615,7 @@ proc/is_blind(A)
 
 	eyeobj.setLoc(C)
 	return 1
+
+// Returns true if the mob has a client which has been active in the last given X minutes.
+/mob/proc/is_client_active(var/active = 1)
+	return client && client.inactivity < active MINUTES
