@@ -21,16 +21,18 @@
 			machine = new machine_path(src)
 		user.visible_message("<span class='notice'>[user] has activated \the [src] auto assembly sequence.</span>", "<span class='notice'>You activate \the [src] auto assembly sequence.</span>")
 		user.drop_item(src)
-		if(get_step(user,user.dir))
-			src.loc = get_step(user,user.dir)
+		var/turf/T = get_step(user,user.dir)
+		if(T&&CanPass(src,T))
+			src.Move(T)
 		else
-			src.loc = user.loc
+			src.Move(get_turf(user))
 		src.anchored = 1
 		spawn(50)
-			machine.loc = src.loc
-			src.anchored = 0
-			src.full = 0
-			machine = null
+			if(machine)
+				machine.Move(get_turf(src))
+				src.anchored = 0
+				src.full = 0
+				machine = null
 		return
 	else if(!full)
 		user << "\The [src] is empty!"
@@ -52,20 +54,28 @@
 	else
 		user << "\The [src] activates disassembly sequence!"
 		user.drop_item(src)
-		src.loc = M.loc
+		src.Move(get_turf(M))
 		src.anchored = 1
 		spawn(50)
-			M.loc = src
-			src.anchored = 0
-			src.full = 1
-			src.visible_message("<span class='notice'>\The [src] beeps, finishing auto disassembly sequence.</span>")
-			machine = M
+			if(M)
+				M.Move(src)
+				src.anchored = 0
+				src.full = 1
+				src.visible_message("<span class='notice'>\The [src] beeps, finishing auto disassembly sequence.</span>")
+				machine = M
 		return
 	..()
 
 /obj/item/weapon/assemblycase/examine(mob/user)
 	..()
 	user << "A huge briefcase with an inbuilt auto-assembly system. [machine_path?"It is designed for [src] parts.":"It's program is broken."] \The [src] [full?"is full of useful parts.":"is empty."]"
+
+/obj/item/weapon/assemblycase/pickup(mob/user)
+	if(anchored)
+		return
+	else
+		..()
+
 
 /obj/item/weapon/assemblycase/empty
 	icon_state = "inf_box"
