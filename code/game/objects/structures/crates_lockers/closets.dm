@@ -316,10 +316,6 @@
 		return 0 //closed but not welded...
 	return 1
 
-/obj/structure/closet/secure_closet/req_breakout()
-	if(!opened && locked) return 1
-	return ..() //It's a secure closet, but isn't locked.
-
 /obj/structure/closet/proc/mob_breakout(var/mob/living/escapee)
 	var/breakout_time = 2 //2 minutes by default
 
@@ -329,7 +325,7 @@
 	//okay, so the closet is either welded or locked... resist!!!
 	escapee.next_move = world.time + 100
 	escapee.last_special = world.time + 100
-	escapee << "\red You lean on the back of \the [src] and start pushing the door open. (this will take about [breakout_time] minutes)"
+	escapee << "<span class='warning'>You lean on the back of \the [src] and start pushing the door open. (this will take about [breakout_time] minutes)</span>"
 	
 	visible_message("<span class='danger'>The [src] begins to shake violently!</span>")
 	playsound(src.loc, 'sound/effects/grillehit.ogg', 100, 1)
@@ -351,23 +347,6 @@
 
 /obj/structure/closet/proc/break_open()
 	welded = 0
-	update_icon()
-	//Do this to prevent contents from being opened into nullspace (read: bluespace)
-	if(istype(loc, /obj/structure/bigDelivery))
-		var/obj/structure/bigDelivery/BD = loc
-		BD.unwrap()
-	open()
-
-/obj/structure/closet/secure_closet/break_open()
-	desc += " It appears to be broken."
-	icon_state = icon_off
-	spawn()
-		flick(icon_broken, src)
-		sleep(10)
-		flick(icon_broken, src)
-		sleep(10)
-	broken = 1
-	locked = 0
 	update_icon()
 	//Do this to prevent contents from being opened into nullspace (read: bluespace)
 	if(istype(loc, /obj/structure/bigDelivery))

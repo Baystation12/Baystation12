@@ -492,10 +492,10 @@
 
 	if(istype(M))
 		M.drop_from_inventory(H)
-		M << "[H] wriggles out of your grip!"
-		src << "You wriggle out of [M]'s grip!"
+		M << "<span class='warning'>[H] wriggles out of your grip!</span>"
+		src << "<span class='warning'>You wriggle out of [M]'s grip!</span>"
 	else if(istype(H.loc,/obj/item))
-		src << "You struggle free of [H.loc]."
+		src << "<span class='warning'>You struggle free of [H.loc].</span>"
 		H.loc = get_turf(H)
 
 	if(istype(M))

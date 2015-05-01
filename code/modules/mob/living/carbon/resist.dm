@@ -10,12 +10,16 @@
 		fire_stacks -= 2 //reduced
 		Weaken(3)
 		spin(32,2)
-		visible_message("<span class='danger'>[src] rolls on the floor, trying to put themselves out!</span>", \
-			"<span class='notice'>You stop, drop, and roll!</span>")
+		visible_message(
+			"<span class='danger'>[src] rolls on the floor, trying to put themselves out!</span>",
+			"<span class='notice'>You stop, drop, and roll!</span>"
+			)
 		sleep(30)
 		if(fire_stacks <= 0)
-			visible_message("<span class='danger'>[src] has successfully extinguished themselves!</span>", \
-				"<span class='notice'>You extinguish yourself.</span>")
+			visible_message(
+				"<span class='danger'>[src] has successfully extinguished themselves!</span>",
+				"<span class='notice'>You extinguish yourself.</span>"
+				)
 			ExtinguishMob()
 		return
 	
@@ -46,14 +50,18 @@
 		breakouttime = HC.breakouttime
 		displaytime = breakouttime / 600 //Minutes
 	
-	src << "\red You attempt to remove \the [HC]. (This will take around [displaytime] minutes and you need to stand still)"
-	visible_message("\red <B>[src] attempts to remove \the [HC]!</B>")
+	visible_message(
+		"<span class='danger'>[src] attempts to remove \the [HC]!</span>",
+		"<span class='warning'>You attempt to remove \the [HC]. (This will take around [displaytime] minutes and you need to stand still)</span>"
+		)
 
 	if(do_after(src, breakouttime))
 		if(!handcuffed || buckled)
 			return
-		visible_message("\red <B>[src] manages to remove the handcuffs!</B>")
-		src << "\blue You successfully remove \the [handcuffed]."
+		visible_message(
+			"<span class='danger'>[src] manages to remove \the [handcuffed]!</span>",
+			"<span class='notice'>You successfully remove \the [handcuffed].</span>"
+			)
 		drop_from_inventory(handcuffed)
 
 /mob/living/carbon/proc/escape_legcuffs()
@@ -76,15 +84,17 @@
 		breakouttime = HC.breakouttime
 		displaytime = breakouttime / 600 //Minutes
 	
-	src << "\red You attempt to remove \the [HC]. (This will take around [displaytime] minutes and you need to stand still)"
-	visible_message( "\red <B>[usr] attempts to remove \the [HC]!</B>" )
+	visible_message( 
+		"<span class='danger'>[usr] attempts to remove \the [HC]!</span>", 
+		"<span class='warning'>You attempt to remove \the [HC]. (This will take around [displaytime] minutes and you need to stand still)</span>"
+		)
 
 	if(do_after(src, breakouttime))
 		if(!legcuffed || buckled)
 			return 
 		visible_message(
-			"\red <B>[src] manages to remove the legcuffs!</B>", 
-			"\blue You successfully remove \the [legcuffed]."
+			"<span class='danger'>[src] manages to remove \the [legcuffed]!</span>", 
+			"<span class='notice'>You successfully remove \the [legcuffed].</span>"
 			)
 		
 		drop_from_inventory(legcuffed)
@@ -96,16 +106,18 @@
 		return 1
 
 /mob/living/carbon/proc/break_handcuffs()
-	src << "\red You attempt to break your handcuffs. (This will take around 5 seconds and you need to stand still)"
-	visible_message(text("\red <B>[] is trying to break the handcuffs!</B>", src))
+	visible_message(
+		"<span class='danger'>[src] is trying to break \the [handcuffed]!</span>",
+		"<span class='warning'>You attempt to break your [handcuffed.name]. (This will take around 5 seconds and you need to stand still)</span>"
+		)
 	
 	if(do_after(src, 50))
 		if(!handcuffed || buckled)
 			return
 		
 		visible_message(
-			"\red <B>[src] manages to break the handcuffs!</B>", 
-			"\red You successfully break your handcuffs."
+			"<span class='danger'>[src] manages to break \the [handcuffed]!</span>", 
+			"<span class='warning'>You successfully break your [handcuffed.name].</span>"
 			)
 		
 		say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!" ))
@@ -117,16 +129,16 @@
 		update_inv_handcuffed()
 
 /mob/living/carbon/proc/break_legcuffs()
-	src << "\red You attempt to break your legcuffs. (This will take around 5 seconds and you need to stand still)"
-	visible_message("\red <B>[src] is trying to break the legcuffs!</B>")
+	src << "<span class='warning'>You attempt to break your legcuffs. (This will take around 5 seconds and you need to stand still)</span>"
+	visible_message("<span class='danger'>[src] is trying to break the legcuffs!</span>")
 
 	if(do_after(src, 50))
 		if(!legcuffed || buckled)
 			return
 		
 		visible_message(
-			"\red <B>[src] manages to break the legcuffs!</B>",
-			"\red You successfully break your legcuffs."
+			"<span class='danger'>[src] manages to break the legcuffs!</span>",
+			"<span class='warning'>You successfully break your legcuffs.</span>"
 			)
 		
 		say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!" ))
@@ -149,8 +161,10 @@
 	else
 		next_move = world.time + 100
 		last_special = world.time + 100
-		src << "\red You attempt to unbuckle yourself. (This will take around 2 minutes and you need to stand still)"
-		visible_message("\red <B>[usr] attempts to unbuckle themself!</B>")
+		visible_message(
+			"<span class='danger'>[usr] attempts to unbuckle themself!</span>",
+			"<span class='warning'>You attempt to unbuckle yourself. (This will take around 2 minutes and you need to stand still)</span>"
+			)
 
 		if(do_after(usr, 1200))
 			if(!buckled)
