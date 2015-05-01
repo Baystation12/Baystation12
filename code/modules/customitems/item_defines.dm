@@ -1467,25 +1467,25 @@ obj/item/weapon/fluff/maria_fontaine/attack_self(mob/user as mob)
 //////////////////////////// TheNightingale - Lucy Thorne's modified hailer ////////////////////////////
 
 /obj/item/device/hailer/fluff/lucy_thorne
-        name = "modified hailer"
-        desc = "A standard-issue security hailer with the initials 'L.T.' and a heart etched into the side. It seems to have been modified."
+		name = "modified hailer"
+		desc = "A standard-issue security hailer with the initials 'L.T.' and a heart etched into the side. It seems to have been modified."
 		var/list/msg = list("Hi, um... please halt!", "I just want to talk!", "Could... could you come over here? Please?", "I AM, uhm... I AM THE LAW!", "Wait! Um... please? Sorry...", "Hi, so, uhm... can I ask you some questions? Please?")
 
 /obj/item/device/hailer/fluff/lucy_thorne/attack_self(mob/living/carbon/user as mob)
-        if (spamcheck)
-                return
+		if (spamcheck)
+				return
 
-        if(emagged)
-                if(insults >= 1)
-                        playsound(get_turf(src), 'sound/voice/halt.ogg', 100, 1, vary = 0) //Lucy's too nice for binsult.ogg.
-                        user.show_message("<span class='warning'>[user]'s [name] pleads, \"S-stop! Please! I'll, I'll shoot, really!\"</span>",2) //It's a hearable message silly!
-                else
-                        user << "\red *BZZZZpleasewaitZZZZT*"
-        else
-                playsound(get_turf(src), 'sound/voice/halt.ogg', 100, 1, vary = 0) //Because custom voice files are hard
-                user.show_message("<span class='warning'>[user]'s [name] requests, \"[pick(msg)]\"</span>",1) //Picks a message from var/list/msg and plays it.
+		if(emagged)
+				if(insults >= 1)
+						playsound(get_turf(src), 'sound/voice/halt.ogg', 100, 1, vary = 0) //Lucy's too nice for binsult.ogg.
+						user.show_message("<span class='warning'>[user]'s [name] pleads, \"S-stop! Please! I'll, I'll shoot, really!\"</span>",2) //It's a hearable message silly!
+				else
+						user << "\red *BZZZZpleasewaitZZZZT*"
+		else
+				playsound(get_turf(src), 'sound/voice/halt.ogg', 100, 1, vary = 0) //Because custom voice files are hard
+				user.show_message("<span class='warning'>[user]'s [name] requests, \"[pick(msg)]\"</span>",1) //Picks a message from var/list/msg and plays it.
 
-        spamcheck = 1
-        spawn(20)
-                spamcheck = 0
+		spamcheck = 1
+		spawn(20)
+				spamcheck = 0
 
