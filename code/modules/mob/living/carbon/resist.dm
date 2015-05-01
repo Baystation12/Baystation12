@@ -1,9 +1,5 @@
 
-/mob/living/carbon/resist()
-	//need to allow !canmove, or otherwise neck grabs can't be resisted
-	//so just check weakened instead.
-	if(stat || weakened || next_move > world.time) 
-		return 
+/mob/living/carbon/process_resist()
 	
 	//drop && roll
 	if(on_fire)

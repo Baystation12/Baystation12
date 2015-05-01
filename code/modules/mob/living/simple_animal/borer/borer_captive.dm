@@ -34,7 +34,10 @@
 /mob/living/captive_brain/emote(var/message)
 	return
 
-/mob/living/captive_brain/resist()
+/mob/living/captive_brain/can_resist()
+	return !(stat || next_move > world.time)
+
+/mob/living/captive_brain/process_resist()
 	//Resisting control by an alien mind.
 	if(istype(src.loc,/mob/living/simple_animal/borer))
 		var/mob/living/simple_animal/borer/B = src.loc

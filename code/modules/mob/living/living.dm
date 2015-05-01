@@ -460,13 +460,20 @@
 	set name = "Resist"
 	set category = "IC"
 
+	if(can_resist())
+		next_move = world.time + 20
+		process_resist()
+
+/mob/living/proc/can_resist()
 	//need to allow !canmove, or otherwise neck grabs can't be resisted
 	//so just check weakened instead.
-	if(stat || weakened || next_move > world.time)
-		return
+	if(stat || weakened)
+		return 0
+	if(next_move > world.time)
+		return 0
+	return 1
 
-	next_move = world.time + 20
-
+/mob/living/proc/process_resist()
 	//Getting out of someone's inventory.
 	if(istype(src.loc, /obj/item/weapon/holder))
 		escape_inventory(src.loc)
