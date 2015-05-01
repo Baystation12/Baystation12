@@ -1063,6 +1063,7 @@
 #include "code\modules\mob\living\carbon\carbon_defines.dm"
 #include "code\modules\mob\living\carbon\carbon_powers.dm"
 #include "code\modules\mob\living\carbon\give.dm"
+#include "code\modules\mob\living\carbon\resist.dm"
 #include "code\modules\mob\living\carbon\shock.dm"
 #include "code\modules\mob\living\carbon\viruses.dm"
 #include "code\modules\mob\living\carbon\alien\alien.dm"

@@ -308,3 +308,69 @@
 	dump_contents()
 	spawn(1) del(src)
 	return 1
+
+/obj/structure/closet/proc/req_breakout()
+	if(opened)
+		return 0 //Door's open... wait, why are you in it's contents then?
+	if(!welded)
+		return 0 //closed but not welded...
+	return 1
+
+/obj/structure/closet/secure_closet/req_breakout()
+	if(!opened && locked) return 1
+	return ..() //It's a secure closet, but isn't locked.
+
+/obj/structure/closet/proc/mob_breakout(var/mob/living/escapee)
+	var/breakout_time = 2 //2 minutes by default
+
+	if(!req_breakout())
+		return
+
+	//okay, so the closet is either welded or locked... resist!!!
+	escapee.next_move = world.time + 100
+	escapee.last_special = world.time + 100
+	escapee << "\red You lean on the back of \the [src] and start pushing the door open. (this will take about [breakout_time] minutes)"
+	
+	visible_message("<span class='danger'>The [src] begins to shake violently!</span>")
+	playsound(src.loc, 'sound/effects/grillehit.ogg', 100, 1)
+
+	for(var/i in 1 to (6*breakout_time * 2)) //minutes * 6 * 5seconds * 2
+		if(!do_after(escapee, 50)) //5 seconds
+			return
+		if(!escapee || escapee.stat || escapee.loc != src) 
+			return //closet/user destroyed OR user dead/unconcious OR user no longer in closet OR closet opened
+		//Perform the same set of checks as above for weld and lock status to determine if there is even still a point in 'resisting'...
+		if(!req_breakout())
+			return
+		playsound(src.loc, 'sound/effects/grillehit.ogg', 100, 1)
+	
+	//Well then break it!
+	escapee << "<span class='warning'>You successfully break out!</span>"
+	visible_message("<span class='danger'>\the [escapee] successfully broke out of \the [src]!</span>")
+	break_open()
+
+/obj/structure/closet/proc/break_open()
+	welded = 0
+	update_icon()
+	//Do this to prevent contents from being opened into nullspace (read: bluespace)
+	if(istype(loc, /obj/structure/bigDelivery))
+		var/obj/structure/bigDelivery/BD = loc
+		BD.unwrap()
+	open()
+
+/obj/structure/closet/secure_closet/break_open()
+	desc += " It appears to be broken."
+	icon_state = icon_off
+	spawn()
+		flick(icon_broken, src)
+		sleep(10)
+		flick(icon_broken, src)
+		sleep(10)
+	broken = 1
+	locked = 0
+	update_icon()
+	//Do this to prevent contents from being opened into nullspace (read: bluespace)
+	if(istype(loc, /obj/structure/bigDelivery))
+		var/obj/structure/bigDelivery/BD = loc
+		BD.unwrap()
+	open()
