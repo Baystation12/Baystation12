@@ -1469,7 +1469,7 @@ obj/item/weapon/fluff/maria_fontaine/attack_self(mob/user as mob)
 /obj/item/device/hailer/fluff/lucy_thorne
         name = "modified hailer"
         desc = "A standard-issue security hailer with the initials 'L.T.' and a heart etched into the side. It seems to have been modified."
-var/list/msg = list("Hi, um... please halt!", "I just want to talk!", "Could... could you come over here? Please?", "I AM, uhm... I AM THE LAW!", "Wait! Um... please? Sorry...", "Hi, so, uhm... can I ask you some questions? Please?")
+		var/list/msg = list("Hi, um... please halt!", "I just want to talk!", "Could... could you come over here? Please?", "I AM, uhm... I AM THE LAW!", "Wait! Um... please? Sorry...", "Hi, so, uhm... can I ask you some questions? Please?")
 
 /obj/item/device/hailer/fluff/lucy_thorne/attack_self(mob/living/carbon/user as mob)
         if (spamcheck)
