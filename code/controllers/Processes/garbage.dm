@@ -18,7 +18,7 @@ var/list/delayed_garbage = list()
 
 /datum/controller/process/garbage_collector/setup()
 	name = "garbage"
-	schedule_interval = 6 SECONDS
+	schedule_interval = 2 SECONDS
 
 	if(!garbage_collector)
 		garbage_collector = src
