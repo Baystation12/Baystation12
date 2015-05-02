@@ -68,7 +68,7 @@
 	if(!new_text)
 		return
 
-	free_space -= length(strip_html_properly(new_text, 0))
+	free_space -= length(strip_html_properly(new_text))
 
 /obj/item/weapon/paper/examine(mob/user)
 	..()
@@ -95,15 +95,15 @@
 		usr << "<span class='warning'>You cut yourself on the paper.</span>"
 		return
 	var/n_name = sanitizeSafe(input(usr, "What would you like to label the paper?", "Paper Labelling", null)  as text, MAX_NAME_LEN)
-	
+
 	// We check loc one level up, so we can rename in clipboards and such. See also: /obj/item/weapon/photo/rename()
 	if((loc == usr || loc.loc && loc.loc == usr) && usr.stat == 0 && n_name)
 		name = n_name
 		if(n_name != "paper")
 			desc = "This is a paper titled '" + name + "'."
-		
+
 		add_fingerprint(usr)
-	return	
+	return
 
 /obj/item/weapon/paper/attack_self(mob/living/user as mob)
 	user.examinate(src)
@@ -343,7 +343,7 @@
 			usr << "<span class='info'>There isn't enough space left on \the [src] to write anything.</span>"
 			return
 
-		var/t =  strip_html_properly(input("Enter what you want to write:", "Write", null, null) as message)
+		var/t =  sanitize(input("Enter what you want to write:", "Write", null, null) as message, free_space, extra = 0)
 
 		if(!t)
 			return
@@ -450,7 +450,7 @@
 		user << "<span class='notice'>You clip the [P.name] to [(src.name == "paper") ? "the paper" : src.name].</span>"
 		src.loc = B
 		P.loc = B
-		
+
 		B.pages.Add(src)
 		B.pages.Add(P)
 		B.update_icon()
