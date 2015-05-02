@@ -228,8 +228,8 @@
 	density = 0
 	New()
 		..()
-		health -= rand(initial(health)*0.8, initial(health)*0.9) //Largely under broken threshold, this is used to adjust the health, NOT to break it
-		healthcheck() //Send this to healthcheck just in case we want to do something else with it
+		health = rand(-5, -1) //In the destroyed but not utterly threshold.
+		healthcheck() //Send this to healthcheck just in case we want to do something else with it.
 
 /obj/structure/grille/cult
 	name = "cult grille"
