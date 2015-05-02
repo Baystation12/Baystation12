@@ -1,0 +1,4 @@
+author: PsiOmegaDelta
+changes:
+  - tweak: "The spider infestation event now makes an announcement much sooner."
+delete-after: false
