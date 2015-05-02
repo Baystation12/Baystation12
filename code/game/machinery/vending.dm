@@ -860,7 +860,7 @@
 	desc = "Walk with pride."
 	product_slogans = "Cover yourself... in style"
 	product_ads = "This will make you a... person with shoes!"
-	icon_state = "hat"
+	icon_state = "shoe"
 	products = list(/obj/item/clothing/shoes/blue = 10, /obj/item/clothing/shoes/red = 10,
 	 /obj/item/clothing/shoes/yellow = 10, /obj/item/clothing/shoes/green = 10, /obj/item/clothing/shoes/orange = 10,
 	 /obj/item/clothing/shoes/purple = 10, /obj/item/clothing/shoes/red = 10, /obj/item/clothing/shoes/leather = 10,
