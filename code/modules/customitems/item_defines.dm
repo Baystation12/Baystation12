@@ -944,6 +944,13 @@
 	item_state = "gy_suit"
 	worn_state = "milohachert"
 
+/obj/item/clothing/under/fluff/john_saaland //GA Jumpsuit-John Saaland-Foxeye
+	name = "GA jumpsuit"
+	desc = "A tan jumpsuit, robustly constructed, with various velcro strips for name and ranking patches distributed over the torso and shoulders. Only one of these strips is in use, holding a patch with 'J. SAALAND' written on it in block lettering over the right breast pocket."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "saaland"
+	item_state = "saaland_suit"
+	worn_state = "saaland"
 
 /obj/item/clothing/under/fluff/kaine_kalim_2
     name = "Formal Medical Uniform"
