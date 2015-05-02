@@ -92,7 +92,7 @@
 		/obj/machinery/shield_gen,
 		/obj/machinery/clonepod,
 		/obj/machinery/deployable,
-		/obj/machinery/door_control,
+		/obj/machinery/button/remote,
 		/obj/machinery/porta_turret,
 		/obj/machinery/shieldgen,
 		/obj/machinery/turretid,

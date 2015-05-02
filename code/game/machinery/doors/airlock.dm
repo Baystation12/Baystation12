@@ -421,6 +421,33 @@ About the new airlock wires panel:
 	if(feedback && message)
 		usr << message
 
+/obj/machinery/door/airlock/proc/set_idscan(var/activate, var/feedback = 0)
+	var/message = ""
+	if(src.isWireCut(AIRLOCK_WIRE_IDSCAN))
+		message = "The IdScan wire is cut - IdScan feature permanently disabled."
+	else if(activate && src.aiDisabledIdScanner)
+		src.aiDisabledIdScanner = 0
+		message = "IdScan feature has been enabled."
+	else if(!activate && !src.aiDisabledIdScanner)
+		src.aiDisabledIdScanner = 1
+		message = "IdScan feature has been disabled."
+
+	if(feedback && message)
+		usr << message
+
+/obj/machinery/door/airlock/proc/set_safeties(var/activate, var/feedback = 0)
+	var/message = ""
+	// Safeties!  We don't need no stinking safeties!
+	if (src.isWireCut(AIRLOCK_WIRE_SAFETY))
+		message = text("The safety wire is cut - Cannot enable safeties.")
+	else if (!activate && src.safe)
+		safe = 0
+	else if (activate && !src.safe)
+		safe = 1
+
+	if(feedback && message)
+		usr << message
+
 // shock user with probability prb (if all connections & power are working)
 // returns 1 if shocked, 0 otherwise
 // The preceding comment was borrowed from the grille's shock script
@@ -637,14 +664,7 @@ About the new airlock wires panel:
 	var/activate = text2num(href_list["activate"])
 	switch (href_list["command"])
 		if("idscan")
-			if(src.isWireCut(AIRLOCK_WIRE_IDSCAN))
-				usr << "The IdScan wire has been cut - IdScan feature permanently disabled."
-			else if(activate && src.aiDisabledIdScanner)
-				src.aiDisabledIdScanner = 0
-				usr << "IdScan feature has been enabled."
-			else if(!activate && !src.aiDisabledIdScanner)
-				src.aiDisabledIdScanner = 1
-				usr << "IdScan feature has been disabled."
+			set_idscan(activate, 1)
 		if("main_power")
 			if(!main_power_lost_until)
 				src.loseMainPower()
@@ -653,7 +673,7 @@ About the new airlock wires panel:
 				src.loseBackupPower()
 		if("bolts")
 			if(src.isWireCut(AIRLOCK_WIRE_DOOR_BOLTS))
-				usr << "The door bolt control wire has been cut - Door bolts permanently dropped."
+				usr << "The door bolt control wire is cut - Door bolts permanently dropped."
 			else if(activate && src.lock())
 				usr << "The door bolts have been dropped."
 			else if(!activate && src.unlock())
@@ -672,13 +692,7 @@ About the new airlock wires panel:
 			else if(!activate && !density)
 				close()
 		if("safeties")
-			// Safeties!  We don't need no stinking safeties!
-			if (src.isWireCut(AIRLOCK_WIRE_SAFETY))
-				usr << text("The safety wire is cut - Cannot secure the door.")
-			else if (activate && src.safe)
-				safe = 0
-			else if (!activate && !src.safe)
-				safe = 1
+			set_safeties(!activate, 1)
 		if("timing")
 			// Door speed control
 			if(src.isWireCut(AIRLOCK_WIRE_SPEED))
@@ -690,7 +704,7 @@ About the new airlock wires panel:
 		if("lights")
 			// Bolt lights
 			if(src.isWireCut(AIRLOCK_WIRE_LIGHT))
-				usr << "The bolt lights wire has been cut - The door bolt lights are permanently disabled."
+				usr << "The bolt lights wire is cut - The door bolt lights are permanently disabled."
 			else if (!activate && src.lights)
 				lights = 0
 				usr << "The door bolt lights have been disabled."
