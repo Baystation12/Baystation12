@@ -18,7 +18,7 @@
 	var/projectile_type = /obj/item/projectile/beam/practice
 	var/modifystate
 	var/charge_meter = 1	//if set, the icon state will be chosen based on the current charge
-	
+
 	//self-recharging
 	var/self_recharge = 0	//if set, the weapon will recharge itself
 	var/use_external_power = 0 //if set, the weapon will look for an external power source to draw from, otherwise it recharges magically
@@ -33,7 +33,7 @@
 		modifystate = isnull(current_mode.modifystate)? initial(modifystate) : current_mode.modifystate
 		charge_cost = isnull(current_mode.charge_cost)? initial(charge_cost) : current_mode.charge_cost
 		fire_sound = isnull(current_mode.fire_sound)? initial(fire_sound) : current_mode.fire_sound
-		
+
 		update_icon()
 		update_held_icon()
 
@@ -60,15 +60,15 @@
 		charge_tick++
 		if(charge_tick < recharge_time) return 0
 		charge_tick = 0
-		
+
 		if(!power_supply || power_supply.charge >= power_supply.maxcharge)
 			return 0 // check if we actually need to recharge
-		
+
 		if(use_external_power)
 			var/obj/item/weapon/cell/external = get_external_power_supply()
 			if(!external || !external.use(charge_cost)) //Take power from the borg...
 				return 0
-		
+
 		power_supply.give(charge_cost) //... to recharge the shot
 		update_icon()
 	return 1
@@ -93,16 +93,22 @@
 					return suit.cell
 	return null
 
+/obj/item/weapon/gun/energy/examine(mob/user)
+	..(user)
+	var/shots_remaining = round(power_supply.charge / charge_cost)
+	user << "Has [shots_remaining] shot\s remaining."
+	return
+
 /obj/item/weapon/gun/energy/update_icon()
 	if(charge_meter)
 		var/ratio = power_supply.charge / power_supply.maxcharge
-		
+
 		//make sure that rounding down will not give us the empty state even if we have charge for a shot left.
 		if(power_supply.charge < charge_cost)
 			ratio = 0
 		else
 			ratio = max(round(ratio, 0.25) * 100, 25)
-		
+
 		if(modifystate)
 			icon_state = "[modifystate][ratio]"
 		else
