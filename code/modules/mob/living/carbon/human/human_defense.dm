@@ -203,10 +203,7 @@ emp_act
 				"\blue You have attached \the [I] where [src]'s [affected.display_name] used to be.")
 				affected.germ_level = 0
 				affected.robotize()
-				if(L.sabotaged)
-					affected.sabotaged = 1
-				else
-					affected.sabotaged = 0
+				affected.sabotaged = L.sabotaged
 				affected.brute_dam = L.brute_dam
 				affected.burn_dam = L.burn_dam
 				update_body()
@@ -224,13 +221,13 @@ emp_act
 				user << "That won't fit there!"
 		else if (istype(I, /obj/item/weapon/organ/head/posi) && species.flags & IS_SYNTHETIC)
 			var/datum/organ/external/affected = get_organ(target_zone)
-			user.visible_message("\blue [user] has attached [src]'s head to the body.",	\
-			"\blue You have attached [src]'s head to the body.")
+			user.visible_message("\blue [user] has attached a head to [src]'s body.",	\
+			"\blue You have attached a head to [src]'s body.")
 			affected.status = 0
 			affected.amputated = 0
 			affected.destspawn = 0
-			//if (stat & DEAD)
-				//stat -= DEAD // This can fuck off for now.
+			if (stat & DEAD)
+				stat = CONSCIOUS
 			update_body()
 			updatehealth()
 			UpdateDamageIcon()
