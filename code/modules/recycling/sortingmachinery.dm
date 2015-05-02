@@ -15,13 +15,15 @@
 	var/tag_x
 
 	attack_hand(mob/user as mob)
+		unwrap()
+
+	proc/unwrap()
 		if(wrapped) //sometimes items can disappear. For example, bombs. --rastaf0
 			wrapped.loc = (get_turf(src.loc))
 			if(istype(wrapped, /obj/structure/closet))
 				var/obj/structure/closet/O = wrapped
 				O.welded = 0
 		del(src)
-		return
 
 	attackby(obj/item/W as obj, mob/user as mob)
 		if(istype(W, /obj/item/device/destTagger))
