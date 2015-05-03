@@ -6,8 +6,9 @@
 	..()
 	charge = maxcharge
 
-	spawn(5)
-		updateicon()
+/obj/item/weapon/cell/initialize()
+	..()
+	updateicon()
 
 /obj/item/weapon/cell/drain_power(var/drain_check, var/surge, var/amount = 0)
 

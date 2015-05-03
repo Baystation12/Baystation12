@@ -155,25 +155,29 @@
 	if (building==0)
 		init()
 	else
-		area = src.loc.loc:master
+		area = get_area(src)
 		area.apc |= src
 		opened = 1
 		operating = 0
 		name = "[area.name] APC"
 		stat |= MAINT
 		src.update_icon()
-		spawn(5)
-			src.update()
+
+/obj/machinery/power/apc/initialize()
+	..()
+	src.update()
 
 /obj/machinery/power/apc/Destroy()
 	if(operating && malf && src.z in config.station_levels) //if (is_type_in_list(get_area(src), the_station_areas))
 		malf.hacked_apcs -= src
+
+	area.apc -= src
 	area.power_light = 0
 	area.power_equip = 0
 	area.power_environ = 0
 	area.power_change()
 	if(wires)
-		wires.Destroy()
+		qdel(wires)
 		wires = null
 	if(cell)
 		cell.loc = loc
