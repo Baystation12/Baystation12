@@ -785,7 +785,6 @@
 #include "code\modules\admin\verbs\BrokenInhands.dm"
 #include "code\modules\admin\verbs\buildmode.dm"
 #include "code\modules\admin\verbs\check_customitem_activity.dm"
-#include "code\modules\admin\verbs\cinematic.dm"
 #include "code\modules\admin\verbs\custom_event.dm"
 #include "code\modules\admin\verbs\deadsay.dm"
 #include "code\modules\admin\verbs\debug.dm"
