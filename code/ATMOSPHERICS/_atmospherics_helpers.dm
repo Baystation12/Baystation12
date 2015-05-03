@@ -427,12 +427,12 @@
 //If set, sink_volume_mod adjusts the effective output volume used in the calculation. This is useful when the output gas_mixture is
 //part of a pipenetwork, and so it's volume isn't representative of the actual volume since the gas will be shared across the pipenetwork when it processes.
 /proc/calculate_transfer_moles(datum/gas_mixture/source, datum/gas_mixture/sink, var/pressure_delta, var/sink_volume_mod=0)
-	//Make the approximation that the sink temperature is unchanged after transferring gas
-	var/air_temperature = (sink.temperature > 0)? sink.temperature : source.temperature
+	if(source.temperature == 0) return 0
+
 	var/output_volume = (sink.volume * sink.group_multiplier) + sink_volume_mod
 
 	//get the number of moles that would have to be transfered to bring sink to the target pressure
-	return pressure_delta*output_volume/(air_temperature * R_IDEAL_GAS_EQUATION)
+	return pressure_delta*output_volume/(source.temperature * R_IDEAL_GAS_EQUATION)
 
 //Calculates the APPROXIMATE amount of moles that would need to be transferred to bring source and sink to the same pressure
 /proc/calculate_equalize_moles(datum/gas_mixture/source, datum/gas_mixture/sink)
