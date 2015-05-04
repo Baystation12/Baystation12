@@ -1,0 +1,4 @@
+author: PsiOmegaDelta
+delete-after: True
+changes: 
+  - tweak: "Grilles no longer return too many rods when destroyed (using means other than wirecutters)."

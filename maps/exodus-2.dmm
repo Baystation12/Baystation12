@@ -663,7 +663,7 @@
 "mM" = (/turf/unsimulated/wall{icon_state = "phoron4"},/area/alien)
 "mN" = (/turf/unsimulated/wall{icon_state = "phoron13"},/area/alien)
 "mO" = (/turf/unsimulated/wall{icon_state = "phoron9"},/area/alien)
-"mP" = (/obj/structure/lattice,/obj/structure/grille{density = 0; icon_state = "brokengrille"},/turf/space,/area/space)
+"mP" = (/obj/structure/lattice,/obj/structure/grille/broken,/turf/space,/area/space)
 "mQ" = (/obj/structure/table,/obj/item/device/flashlight/lamp{pixel_x = 4; pixel_y = 8},/turf/unsimulated/floor{icon_state = "grimy"},/area/syndicate_mothership)
 "mR" = (/obj/structure/table,/obj/effect/landmark{name = "Nuclear-Code"},/turf/unsimulated/floor{icon_state = "grimy"},/area/syndicate_mothership)
 "mS" = (/obj/structure/table,/obj/item/weapon/paper_bin{pixel_x = -3; pixel_y = 8},/obj/item/weapon/pen{pixel_y = 4},/turf/unsimulated/floor{icon_state = "grimy"},/area/syndicate_mothership)
