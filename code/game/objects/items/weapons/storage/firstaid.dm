@@ -131,6 +131,7 @@
 /obj/item/weapon/storage/firstaid/surgery
 	name = "surgery kit"
 	desc = "Contains tools for surgery."
+	storage_slots = 10
 
 /obj/item/weapon/storage/firstaid/surgery/New()
 	..()
@@ -142,6 +143,9 @@
 	new /obj/item/weapon/retractor(src)
 	new /obj/item/weapon/scalpel(src)
 	new /obj/item/weapon/surgicaldrill(src)
+	new /obj/item/weapon/bonegel(src)
+	new /obj/item/weapon/FixOVein(src)
+	new /obj/item/stack/medical/advanced/bruise_pack(src)
 	return
 
 /*

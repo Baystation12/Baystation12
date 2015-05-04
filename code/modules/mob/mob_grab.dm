@@ -96,7 +96,7 @@
 		affecting.loc = assailant.loc
 
 	if(state >= GRAB_NECK)
-		affecting.Stun(1)
+		affecting.Stun(3)
 		if(isliving(affecting))
 			var/mob/living/L = affecting
 			L.adjustOxyLoss(1)

@@ -9,7 +9,7 @@
 #define LIGHT_BROKEN 2
 #define LIGHT_BURNED 3
 
-
+#define LIGHT_BULB_TEMPERATURE 400 //K - used value for a 60W bulb
 
 /obj/item/light_fixture_frame
 	name = "light fixture frame"
@@ -487,11 +487,13 @@
 		var/mob/living/carbon/human/H = user
 
 		if(istype(H))
-
-			if(H.gloves)
+			if(H.species.heat_level_1 > LIGHT_BULB_TEMPERATURE)
+				prot = 1
+			else if(H.gloves)
 				var/obj/item/clothing/gloves/G = H.gloves
 				if(G.max_heat_protection_temperature)
-					prot = (G.max_heat_protection_temperature > 360)
+					if(G.max_heat_protection_temperature > LIGHT_BULB_TEMPERATURE)
+						prot = 1
 		else
 			prot = 1
 

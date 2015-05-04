@@ -1,0 +1,5 @@
+author: HarpyEagle
+delete-after: True
+
+changes: 
+  - bugfix: "Neck-grabbing someone now stuns them properly."
