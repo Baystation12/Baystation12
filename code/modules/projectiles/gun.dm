@@ -124,7 +124,7 @@
 
 	if (!ready_to_fire())
 		if (world.time % 3) //to prevent spam
-			user << "<span class='warning'>[src] is not ready to fire again!"
+			user << "<span class='warning'>[src] is not ready to fire again!</span>"
 		return
 
 	var/obj/projectile = consume_next_projectile(user)
@@ -170,7 +170,7 @@
 		
 		if(reflex)
 			user.visible_message(
-				"<span class='reflex_shoot'><b>[user] fires [src][pointblank ? "  point blank at [target]":""] by reflex!<b></span>",
+				"<span class='reflex_shoot'><b>[user] fires [src][pointblank ? "  point blank at [target]":""] by reflex!</b></span>",
 				"<span class='reflex_shoot'>You fire [src] by reflex]!</span>",
 				"You hear a [fire_sound_text]!"
 			)
