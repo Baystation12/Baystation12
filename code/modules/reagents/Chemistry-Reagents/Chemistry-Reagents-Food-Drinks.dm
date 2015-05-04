@@ -558,7 +558,6 @@
 	glass_name = "cup of coffee"
 	glass_desc = "Don't drop it, or you'll send scalding liquid and glass shards everywhere."
 
-
 /datum/reagent/drink/coffee/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/location)
 	..()
 	if(alien == IS_DIONA)
@@ -1012,7 +1011,7 @@
 	M.dizziness = max(0, M.dizziness - 5)
 	M.drowsyness = max(0, M.drowsyness - 3)
 	M.sleeping = max(0, M.sleeping - 2)
-	if (M.bodytemperature > 310)
+	if(M.bodytemperature > 310)
 		M.bodytemperature = max(310, M.bodytemperature - (5 * TEMPERATURE_DAMAGE_COEFFICIENT))
 	M.make_jittery(5)
 
@@ -1363,9 +1362,9 @@
 	glass_name = "glass of Changeling Sting"
 	glass_desc = "A stingy drink."
 
-/datum/reagent/ethanol/classicmartini
+/datum/reagent/ethanol/martini
 	name = "Classic Martini"
-	id = "classicmartini"
+	id = "martini"
 	description = "Vermouth with Gin. Not quite how 007 enjoyed it, but still delicious."
 	color = "#664300"
 	strength = 25
@@ -1562,16 +1561,16 @@
 	glass_center_of_mass = list("x"=15, "y"=10)
 
 /datum/reagent/ethanol/irish_cream
-		name = "Irish Cream"
-		id = "irishcream"
-		description = "Whiskey-imbued cream, what else would you expect from the Irish."
-		color = "#664300"
-		strength = 25
+	name = "Irish Cream"
+	id = "irishcream"
+	description = "Whiskey-imbued cream, what else would you expect from the Irish."
+	color = "#664300"
+	strength = 25
 
-		glass_icon_state = "irishcreamglass"
-		glass_name = "glass of Irish cream"
-		glass_desc = "It's cream, mixed with whiskey. What else would you expect from the Irish?"
-		glass_center_of_mass = list("x"=16, "y"=9)
+	glass_icon_state = "irishcreamglass"
+	glass_name = "glass of Irish cream"
+	glass_desc = "It's cream, mixed with whiskey. What else would you expect from the Irish?"
+	glass_center_of_mass = list("x"=16, "y"=9)
 
 /datum/reagent/ethanol/longislandicedtea
 	name = "Long Island Iced Tea"

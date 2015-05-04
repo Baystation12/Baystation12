@@ -82,7 +82,7 @@
 		if(ptank)
 			ptank.loc = T
 			ptank = null
-		new /obj/item/stack/rods(T)
+		PoolOrNew(/obj/item/stack/rods, T)
 		qdel(src)
 		return
 

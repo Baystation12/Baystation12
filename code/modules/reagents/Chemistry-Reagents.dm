@@ -102,3 +102,10 @@
 
 /datum/reagent/proc/reaction_mob(var/mob/target)
 	touch_mob(target)
+
+/datum/reagent/woodpulp
+	name = "Wood Pulp"
+	id = "woodpulp"
+	description = "A mass of wood fibers."
+	reagent_state = LIQUID
+	color = "#B97A57"

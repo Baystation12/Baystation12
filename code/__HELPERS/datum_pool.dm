@@ -23,24 +23,20 @@ var/global/list/GlobalPool = list()
 //Either way it gets passed to new
 
 /proc/PoolOrNew(var/get_type,var/second_arg)
-	if(!get_type)
-		return
-
 	var/datum/D
 	D = GetFromPool(get_type,second_arg)
 
 	if(!D)
-		if(ispath(get_type))
-			if(islist(second_arg))
-				return new get_type (arglist(second_arg))
-			else
-				return new get_type (second_arg)
+		// So the GC knows we're pooling this type.
+		if(!GlobalPool[get_type])
+			GlobalPool[get_type] = list(new get_type)
+		if(islist(second_arg))
+			return new get_type (arglist(second_arg))
+		else
+			return new get_type (second_arg)
 	return D
 
 /proc/GetFromPool(var/get_type,var/second_arg)
-	if(!get_type)
-		return 0
-
 	if(isnull(GlobalPool[get_type]))
 		return 0
 
@@ -75,9 +71,10 @@ var/global/list/GlobalPool = list()
 
 	D.Destroy()
 	D.ResetVars()
+	D.disposed = 1 //Set to stop processing while pooled
 
 /proc/IsPooled(var/datum/D)
-	if(isnull(GlobalPool[D.type]) || length(GlobalPool[D.type]) == 0)
+	if(isnull(GlobalPool[D.type]))
 		return 0
 	return 1
 
@@ -86,10 +83,13 @@ var/global/list/GlobalPool = list()
 		New(arglist(args))
 	else
 		New(args)
+	disposed = null
 
 /atom/movable/Prepare(args)
-	if(islist(args))
+	var/list/args_list = args
+	if(istype(args_list) && args_list.len)
 		loc = args[1]
+	else
 		loc = args
 	..()
 

@@ -215,6 +215,11 @@
 		if(M.mind && cult.is_antagonist(M.mind) && prob(10))
 			cult.remove_antagonist(M.mind)
 
+/datum/reagent/water/holywater/touch_turf(var/turf/T)
+	if(volume >= 5)
+		T.holy = 1
+	return
+
 /datum/reagent/ammonia
 	name = "Ammonia"
 	id = "ammonia"

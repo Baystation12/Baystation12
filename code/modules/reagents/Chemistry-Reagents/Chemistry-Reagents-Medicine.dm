@@ -94,7 +94,7 @@
 	overdose = REAGENTS_OVERDOSE * 0.5
 	scannable = 1
 
-/datum/reagent/dexalin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/location)
+/datum/reagent/dexalinp/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/location)
 	if(alien == IS_VOX)
 		M.adjustToxLoss(removed * 9)
 	else if(alien != IS_DIONA)

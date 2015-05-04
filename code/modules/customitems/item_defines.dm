@@ -942,6 +942,13 @@
 	item_state = "gy_suit"
 	worn_state = "milohachert"
 
+/obj/item/clothing/under/fluff/john_saaland //GA Jumpsuit-John Saaland-Foxeye
+	name = "GA jumpsuit"
+	desc = "A tan jumpsuit, robustly constructed, with various velcro strips for name and ranking patches distributed over the torso and shoulders. Only one of these strips is in use, holding a patch with 'J. SAALAND' written on it in block lettering over the right breast pocket."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "saaland"
+	item_state = "saaland_suit"
+	worn_state = "saaland"
 
 /obj/item/clothing/under/fluff/kaine_kalim_2
     name = "Formal Medical Uniform"
@@ -1441,3 +1448,23 @@
 				friend = M
 				break
 	..()
+
+///////////////////////////// Sabess - Maria's Heart-Shaped Locket ///////////////////////////////////
+
+/obj/item/weapon/fluff/mariafontaine
+	name = "Heart-Shaped Locket"
+	desc = " A silver, heart-shaped locket. It flips open to reveal two pictures, one of a young red-headed woman and one of a brunette of similar age. Small writing is etched onto the back, reading 'M+L'. Some may regard it as cheesy."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "mariaclosed"
+	item_state = "mariaclosed"
+
+obj/item/weapon/fluff/mariafontaine/attack_self(mob/user as mob)
+	if(src.icon_state == "mariaclosed")
+		src.icon_state = "mariaopen"
+		src.item_state = "mariaopen"
+		user << "You flip the locket open."
+
+	else
+		src.icon_state = "mariaclosed"
+		src.item_state = "mariaclosed"
+		user << "You flip the locket closed."

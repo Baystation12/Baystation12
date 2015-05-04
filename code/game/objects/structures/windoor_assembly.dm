@@ -78,7 +78,7 @@ obj/structure/windoor_assembly/Destroy()
 						user << "\blue You dissasembled the windoor assembly!"
 						new /obj/item/stack/sheet/glass/reinforced(get_turf(src), 5)
 						if(secure)
-							new /obj/item/stack/rods(get_turf(src), 4)
+							PoolOrNew(/obj/item/stack/rods, list(get_turf(src), 4))
 						qdel(src)
 				else
 					user << "\blue You need more welding fuel to dissassemble the windoor assembly."
