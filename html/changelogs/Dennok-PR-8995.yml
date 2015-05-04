@@ -1,0 +1,7 @@
+author: Dennok
+
+delete-after: True
+
+changes: 
+  - rscadd: "Create assembly cases and add it to map."
+  - imageadd: "New buildmode icons made by BartNixon."
