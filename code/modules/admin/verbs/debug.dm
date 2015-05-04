@@ -553,7 +553,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 		return
 	feedback_add_details("admin_verb","SEQ") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	for (var/obj/item/I in M)
-		if (istype(I, /obj/item/weapon/implant))
+		if (M.organs.Find(I)||M.internal_organs.Find(I))
 			continue
 		del(I)
 	switch(dresscode)
