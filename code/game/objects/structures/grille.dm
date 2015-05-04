@@ -8,7 +8,7 @@
 	flags = CONDUCT
 	pressure_resistance = 5*ONE_ATMOSPHERE
 	layer = 2.9
-	explosion_resistance = 5
+	explosion_resistance = 1
 	var/health = 10
 	var/destroyed = 0
 
