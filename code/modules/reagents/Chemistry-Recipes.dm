@@ -222,13 +222,6 @@
 	inhibitors = list("sugar" = 1) // Messes up with inaprovaline
 	result_amount = 2
 
-/datum/chemical_reaction/metorapan
-	name = "Metorapan"
-	id = "metorapan"
-	result = "metorapan"
-	required_reagents = list("bicaridine" = 1, "iron" = 1, "nitrogen" = 1)
-	result_amount = 3
-
 /datum/chemical_reaction/hyperzine
 	name = "Hyperzine"
 	id = "hyperzine"
