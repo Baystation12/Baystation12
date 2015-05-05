@@ -16,6 +16,9 @@
 		return 1
 	return 0
 
+/proc/max_default_z_level()
+	return max(config.station_levels, max(config.admin_levels, config.player_levels))
+
 /proc/get_area(O)
 	var/turf/loc = get_turf(O)
 	if(loc)
@@ -27,7 +30,7 @@
 		if(A.name == N)
 			return A
 	return 0
-    
+
 /proc/get_area_master(const/O)
 	var/area/A = get_area(O)
 	if (isarea(A))
