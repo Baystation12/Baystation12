@@ -11,6 +11,8 @@
 	icon_state = "gsmes"
 	var/cells_amount = 0
 	var/capacitors_amount = 0
+	var/global/br_cacheinit = 0
+	var/global/list/br_cache = list()
 
 /obj/machinery/power/smes/batteryrack/New()
 	..()
@@ -48,15 +50,34 @@
 /obj/machinery/power/smes/batteryrack/update_icon()
 	overlays.Cut()
 	if(stat & BROKEN)	return
-
+	
+	if(!br_cacheinit)
+		br_cache.len = 7
+		br_cache[1] = image('icons/obj/power.dmi', "gsmes_outputting")
+		br_cache[2] = image('icons/obj/power.dmi', "gsmes_charging")
+		br_cache[3] = image('icons/obj/power.dmi', "gsmes_overcharge")
+		br_cache[4] = image('icons/obj/power.dmi', "gsmes_og1")
+		br_cache[5] = image('icons/obj/power.dmi', "gsmes_og2")
+		br_cache[6] = image('icons/obj/power.dmi', "gsmes_og3")
+		br_cache[7] = image('icons/obj/power.dmi', "gsmes_og4")
+		br_cacheinit = 1
+	
 	if (output_attempt)
-		overlays += image('icons/obj/power.dmi', "gsmes_outputting")
+		overlays += br_cache[1]
 	if(inputting)
-		overlays += image('icons/obj/power.dmi', "gsmes_charging")
+		overlays += br_cache[2]
 
 	var/clevel = chargedisplay()
 	if(clevel>0)
-		overlays += image('icons/obj/power.dmi', "gsmes_og[clevel]")
+		switch(clevel)
+			if(1)
+				overlays += br_cache[4]
+			if(2)
+				overlays += br_cache[5]
+			if(3)
+				overlays += br_cache[6]
+			if(4)
+				overlays += br_cache[7]
 	return
 
 
@@ -124,15 +145,23 @@
 	if(stat & BROKEN)	return
 
 	if (output_attempt)
-		overlays += image('icons/obj/power.dmi', "gsmes_outputting")
+		overlays += br_cache[1]
 	if(inputting)
-		overlays += image('icons/obj/power.dmi', "gsmes_charging")
+		overlays += br_cache[2]
 	if (overcharge_percent > 100)
-		overlays += image('icons/obj/power.dmi', "gsmes_overcharge")
+		overlays += br_cache[3]
 	else
 		var/clevel = chargedisplay()
 		if(clevel>0)
-			overlays += image('icons/obj/power.dmi', "gsmes_og[clevel]")
+			switch(clevel)
+				if(1)
+					overlays += br_cache[4]
+				if(2)
+					overlays += br_cache[5]
+				if(3)
+					overlays += br_cache[6]
+				if(4)
+					overlays += br_cache[7]
 	return
 
 //This mess of if-elses and magic numbers handles what happens if the engies don't pay attention and let it eat too much charge
