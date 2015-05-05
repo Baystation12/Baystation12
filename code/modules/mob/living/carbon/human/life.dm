@@ -32,7 +32,7 @@
 	var/temperature_alert = 0
 	var/in_stasis = 0
 	var/heartbeat = 0
-	var/global/overlays_cache
+	var/global/list/overlays_cache = null
 
 /mob/living/carbon/human/Life()
 
@@ -1084,7 +1084,6 @@
 
 	proc/handle_regular_hud_updates()
 		if(!overlays_cache)
-			overlays_cache = list()
 			overlays_cache.len = 23
 			overlays_cache[1] = image('icons/mob/screen1_full.dmi', "icon_state" = "passage1")
 			overlays_cache[2] = image('icons/mob/screen1_full.dmi', "icon_state" = "passage2")
