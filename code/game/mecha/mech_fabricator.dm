@@ -502,7 +502,7 @@
 		src.updateUsrDialog()
 		sleep(30) //only sleep if called by user
 	var/found = 0
-	for(var/obj/machinery/computer/rdconsole/RDC in get_area(src))
+	for(var/obj/machinery/computer/rdconsole/RDC in get_area_all_atoms(get_area(src)))
 		if(!RDC.sync)
 			continue
 		found++
