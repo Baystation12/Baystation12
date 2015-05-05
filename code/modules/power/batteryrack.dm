@@ -11,7 +11,7 @@
 	icon_state = "gsmes"
 	var/cells_amount = 0
 	var/capacitors_amount = 0
-	var/global/br_cache
+	var/global/list/br_cache = null
 
 /obj/machinery/power/smes/batteryrack/New()
 	..()
@@ -51,7 +51,6 @@
 	if(stat & BROKEN)	return
 	
 	if(!br_cache)
-		br_cache = list()
 		br_cache.len = 7
 		br_cache[1] = image('icons/obj/power.dmi', "gsmes_outputting")
 		br_cache[2] = image('icons/obj/power.dmi', "gsmes_charging")
