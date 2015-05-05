@@ -32,8 +32,7 @@
 	var/temperature_alert = 0
 	var/in_stasis = 0
 	var/heartbeat = 0
-	var/global/ol_cache = 0
-	var/global/list/overlays_cache = list()
+	var/global/overlays_cache
 
 /mob/living/carbon/human/Life()
 
@@ -1084,7 +1083,8 @@
 		return 1
 
 	proc/handle_regular_hud_updates()
-		if(!ol_cache)
+		if(!overlays_cache)
+			overlays_cache = list()
 			overlays_cache.len = 23
 			overlays_cache[1] = image('icons/mob/screen1_full.dmi', "icon_state" = "passage1")
 			overlays_cache[2] = image('icons/mob/screen1_full.dmi', "icon_state" = "passage2")
@@ -1109,7 +1109,6 @@
 			overlays_cache[21] = image('icons/mob/screen1_full.dmi', "icon_state" = "brutedamageoverlay4")
 			overlays_cache[22] = image('icons/mob/screen1_full.dmi', "icon_state" = "brutedamageoverlay5")
 			overlays_cache[23] = image('icons/mob/screen1_full.dmi', "icon_state" = "brutedamageoverlay6")
-			ol_cache = 1
 
 		if(hud_updateflag) // update our mob's hud overlays, AKA what others see flaoting above our head
 			handle_hud_list()
