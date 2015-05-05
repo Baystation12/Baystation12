@@ -68,15 +68,7 @@
 
 	var/clevel = chargedisplay()
 	if(clevel>0)
-		switch(clevel)
-			if(1)
-				overlays += br_cache[4]
-			if(2)
-				overlays += br_cache[5]
-			if(3)
-				overlays += br_cache[6]
-			if(4)
-				overlays += br_cache[7]
+		overlays += br_cache[3+clevel]
 	return
 
 
@@ -152,15 +144,7 @@
 	else
 		var/clevel = chargedisplay()
 		if(clevel>0)
-			switch(clevel)
-				if(1)
-					overlays += br_cache[4]
-				if(2)
-					overlays += br_cache[5]
-				if(3)
-					overlays += br_cache[6]
-				if(4)
-					overlays += br_cache[7]
+			overlays += br_cache[3+clevel]
 	return
 
 //This mess of if-elses and magic numbers handles what happens if the engies don't pay attention and let it eat too much charge
