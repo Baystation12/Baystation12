@@ -11,8 +11,7 @@
 	icon_state = "gsmes"
 	var/cells_amount = 0
 	var/capacitors_amount = 0
-	var/global/br_cacheinit = 0
-	var/global/list/br_cache = list()
+	var/global/br_cache
 
 /obj/machinery/power/smes/batteryrack/New()
 	..()
@@ -51,7 +50,8 @@
 	overlays.Cut()
 	if(stat & BROKEN)	return
 	
-	if(!br_cacheinit)
+	if(!br_cache)
+		br_cache = list()
 		br_cache.len = 7
 		br_cache[1] = image('icons/obj/power.dmi', "gsmes_outputting")
 		br_cache[2] = image('icons/obj/power.dmi', "gsmes_charging")
@@ -60,7 +60,6 @@
 		br_cache[5] = image('icons/obj/power.dmi', "gsmes_og2")
 		br_cache[6] = image('icons/obj/power.dmi', "gsmes_og3")
 		br_cache[7] = image('icons/obj/power.dmi', "gsmes_og4")
-		br_cacheinit = 1
 	
 	if (output_attempt)
 		overlays += br_cache[1]
