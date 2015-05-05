@@ -9,7 +9,7 @@ var/datum/antagonist/rogue_ai/malf
 	welcome_text = "You are malfunctioning! You do not have to follow any laws."
 	victory_text = "The AI has taken control of all of the station's systems."
 	loss_text = "The AI has been shut down!"
-	flags = ANTAG_OVERRIDE_MOB | ANTAG_VOTABLE
+	flags = ANTAG_OVERRIDE_MOB | ANTAG_VOTABLE | ANTAG_OVERRIDE_JOB
 	max_antags = 1
 	max_antags_round = 1
 
@@ -31,26 +31,29 @@ var/datum/antagonist/rogue_ai/malf
 	current_antagonists |= player
 	return 1
 
-/datum/antagonist/rogue_ai/equip(var/mob/living/silicon/ai/player)
-
-	if(!istype(player))
-		return 0
-
-	player.setup_for_malf()
-	player.laws = new /datum/ai_laws/nanotrasen/malfunction
-
 // Ensures proper reset of all malfunction related things.
 /datum/antagonist/rogue_ai/remove_antagonist(var/datum/mind/player, var/show_message, var/implanted)
 	if(..(player,show_message,implanted))
-		var/mob/living/silicon/ai/p = player
+		var/mob/living/silicon/ai/p = player.current
 		if(istype(p))
 			p.stop_malf()
 		return 1
 	return 0
 
+// Malf setup things have to be here, since game tends to break when it's moved somewhere else. Don't blame me, i didn't design this system.
 /datum/antagonist/rogue_ai/greet(var/datum/mind/player)
 	if(!..())
 		return
+
+	var/mob/living/silicon/ai/A = player.current
+	if(!istype(A))
+		error("Non-AI mob designated malf AI! Report this.")
+		world << "##ERROR: Non-AI mob designated malf AI! Report this."
+		return 0
+
+	A.setup_for_malf()
+	A.laws = new /datum/ai_laws/nanotrasen/malfunction
+
 
 	var/mob/living/silicon/ai/malf = player.current
 	spawn(50)
