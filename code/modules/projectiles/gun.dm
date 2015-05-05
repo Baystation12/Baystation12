@@ -157,7 +157,7 @@
 
 	if(world.time < next_fire_time)
 		if (world.time % 3) //to prevent spam
-			user << "<span class='warning'>[src] is not ready to fire again!"
+			user << "<span class='warning'>[src] is not ready to fire again!</span>"
 		return
 
 	//unpack firemode data
