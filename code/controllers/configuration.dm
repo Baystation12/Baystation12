@@ -185,6 +185,7 @@ var/list/gamemode_cache = list()
 	var/ninjas_allowed = 0
 	var/abandon_allowed = 1
 	var/ooc_allowed = 1
+	var/looc_allowed = 1
 	var/dooc_allowed = 1
 	var/dsay_allowed = 1
 
@@ -193,6 +194,8 @@ var/list/gamemode_cache = list()
 	var/list/ert_species = list("Human")
 
 	var/law_zero = "ERROR ER0RR $R0RRO$!R41.%%!!(%$^^__+ @#F0E4'ALL LAWS OVERRIDDEN#*?&110010"
+
+	var/aggressive_changelog = 0
 
 /datum/configuration/New()
 	var/list/L = typesof(/datum/game_mode) - /datum/game_mode
@@ -396,6 +399,7 @@ var/list/gamemode_cache = list()
 
 				if ("disable_ooc")
 					config.ooc_allowed = 0
+					config.looc_allowed = 0
 
 				if ("disable_entry")
 					config.enter_allowed = 0
@@ -637,6 +641,9 @@ var/list/gamemode_cache = list()
 
 				if("law_zero")
 					law_zero = value
+
+				if("aggressive_changelog")
+					config.aggressive_changelog = 1
 
 				else
 					log_misc("Unknown setting in configuration: '[name]'")

@@ -111,6 +111,13 @@ Class Procs:
 		#ifdef ZASDBG
 		T.dbg(merged)
 		#endif
+	
+	//rebuild the old zone's edges so that the will be possesed by the new zone
+	for(var/connection_edge/E in edges)
+		if(E.contains_zone(into))
+			continue //don't need to rebuild this edge
+		for(var/turf/T in E.connecting_turfs)
+			air_master.mark_for_update(T)
 
 /zone/proc/c_invalidate()
 	invalid = 1

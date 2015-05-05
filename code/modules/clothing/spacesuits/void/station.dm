@@ -22,7 +22,6 @@
 	desc = "A special helmet designed for work in a hazardous, low pressure environment. Has reinforced plating."
 	icon_state = "rig0-mining"
 	item_state = "mining_helm"
-	item_color = "mining"
 	armor = list(melee = 50, bullet = 5, laser = 20,energy = 5, bomb = 55, bio = 100, rad = 20)
 	light_overlay = "helmet_light_dual"
 
@@ -39,7 +38,6 @@
 	desc = "A special helmet designed for work in a hazardous, low pressure environment. Has minor radiation shielding."
 	icon_state = "rig0-medical"
 	item_state = "medical_helm"
-	item_color = "medical"
 	armor = list(melee = 30, bullet = 5, laser = 20,energy = 5, bomb = 25, bio = 100, rad = 50)
 
 /obj/item/clothing/suit/space/void/medical
@@ -56,7 +54,6 @@
 	desc = "A special helmet designed for work in a hazardous, low pressure environment. Has an additional layer of armor."
 	icon_state = "rig0-sec"
 	item_state = "sec_helm"
-	item_color = "sec"
 	armor = list(melee = 60, bullet = 10, laser = 30, energy = 5, bomb = 45, bio = 100, rad = 10)
 	siemens_coefficient = 0.7
 	light_overlay = "helmet_light_dual"
@@ -76,7 +73,6 @@
 	name = "atmospherics voidsuit helmet"
 	icon_state = "rig0-atmos"
 	item_state = "atmos_helm"
-	item_color = "atmos"
 	armor = list(melee = 40, bullet = 5, laser = 20,energy = 5, bomb = 35, bio = 100, rad = 50)
 	max_heat_protection_temperature = FIRE_HELMET_MAX_HEAT_PROTECTION_TEMPERATURE
 	light_overlay = "helmet_light_dual"

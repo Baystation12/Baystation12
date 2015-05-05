@@ -91,9 +91,11 @@
 
 /obj/item/weapon/cane/concealed/New()
 	..()
-	concealed_blade = new/obj/item/weapon/butterfly/switchblade(src)
+	var/obj/item/weapon/butterfly/switchblade/temp_blade = new(src)
+	concealed_blade = temp_blade
+	temp_blade.attack_self()
 
-/obj/item/weapon/cane/concealed/attack_self(mob/user)
+/obj/item/weapon/cane/concealed/attack_self(var/mob/user)
 	if(concealed_blade)
 		user.visible_message("<span class='warning'>[user] has unsheathed \a [concealed_blade] from \his [src]!</span>", "You unsheathe \the [concealed_blade] from \the [src].")
 		// Calling drop/put in hands to properly call item drop/pickup procs
@@ -101,8 +103,9 @@
 		user.drop_from_inventory(src)
 		user.put_in_hands(concealed_blade)
 		user.put_in_hands(src)
+		user.update_inv_l_hand(0)
+		user.update_inv_r_hand()
 		concealed_blade = null
-		update_icon()
 	else
 		..()
 
@@ -347,7 +350,7 @@
 /obj/item/weapon/module/power_control/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
 	if (istype(W, /obj/item/device/multitool))
 		var/obj/item/weapon/circuitboard/ghettosmes/newcircuit = new/obj/item/weapon/circuitboard/ghettosmes(user.loc)
-		del(src)
+		qdel(src)
 		user.put_in_hands(newcircuit)
 
 

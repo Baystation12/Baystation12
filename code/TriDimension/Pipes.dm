@@ -45,8 +45,6 @@ obj/machinery/atmospherics/pipe/zpipe/New()
 			initialize_directions = EAST
 		if(SOUTHWEST)
 			initialize_directions = SOUTH
-	initialize()
-
 
 obj/machinery/atmospherics/pipe/zpipe/hide(var/i)
 	if(level == 1 && istype(loc, /turf/simulated))
@@ -80,7 +78,7 @@ obj/machinery/atmospherics/pipe/zpipe/proc/burst()
 	var/datum/effect/effect/system/smoke_spread/smoke = new
 	smoke.set_up(1,0, src.loc, 0)
 	smoke.start()
-	del(src)
+	qdel(src) // NOT qdel.
 
 obj/machinery/atmospherics/pipe/zpipe/proc/normalize_dir()
 	if(dir==3)
@@ -88,7 +86,7 @@ obj/machinery/atmospherics/pipe/zpipe/proc/normalize_dir()
 	else if(dir==12)
 		set_dir(4)
 
-obj/machinery/atmospherics/pipe/zpipe/Del()
+obj/machinery/atmospherics/pipe/zpipe/Destroy()
 	if(node1)
 		node1.disconnect(src)
 	if(node2)
@@ -104,12 +102,12 @@ obj/machinery/atmospherics/pipe/zpipe/update_icon()
 obj/machinery/atmospherics/pipe/zpipe/disconnect(obj/machinery/atmospherics/reference)
 	if(reference == node1)
 		if(istype(node1, /obj/machinery/atmospherics/pipe))
-			del(parent)
+			qdel(parent)
 		node1 = null
 
 	if(reference == node2)
 		if(istype(node2, /obj/machinery/atmospherics/pipe))
-			del(parent)
+			qdel(parent)
 		node2 = null
 
 	return null

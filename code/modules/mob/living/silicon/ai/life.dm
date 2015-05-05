@@ -74,8 +74,7 @@
 		else
 			var/area/current_area = get_area(src)
 
-			if ((((!loc.master.power_equip) && current_area.requires_power == 1 || istype(T, /turf/space)) && !istype(src.loc,/obj/item))  && !APU_power)
-				//If our area lacks equipment power, and is not magically powered (i.e. centcom), or if we are in space and not carded and without active APU, lose power.
+			if (lacks_power())
 				if (src:aiRestorePowerRoutine==0)
 					src:aiRestorePowerRoutine = 1
 
@@ -143,10 +142,9 @@
 									sleep(50)
 									src << "Receiving control information from APC."
 									sleep(2)
-									//bring up APC dialog
-									apc_override = 1
-									theAPC.attack_ai(src)
-									apc_override = 0
+									theAPC.operating = 1
+									theAPC.equipment = 3
+									theAPC.update()
 									src:aiRestorePowerRoutine = 3
 									src << "Here are your current laws:"
 									src.show_laws()
@@ -160,6 +158,13 @@
 			process_sec_hud(src,0,src.eyeobj)
 		if (MED_HUD)
 			process_med_hud(src,0,src.eyeobj)
+
+/mob/living/silicon/ai/proc/lacks_power()
+	if(APU_power)
+		return 1
+	var/turf/T = get_turf(src)
+	var/area/A = get_area(src)
+	return ((!A.master.power_equip) && A.requires_power == 1 || istype(T, /turf/space)) && !istype(src.loc,/obj/item)
 
 /mob/living/silicon/ai/updatehealth()
 	if(status_flags & GODMODE)

@@ -49,7 +49,7 @@ Class Variables:
 Class Procs:
    New()                     'game/machinery/machine.dm'
 
-   Del()                     'game/machinery/machine.dm'
+   Destroy()                     'game/machinery/machine.dm'
 
    auto_use_power()            'game/machinery/machine.dm'
       This proc determines how power mode power is deducted by the machine.
@@ -121,7 +121,7 @@ Class Procs:
 		machines += src
 		machinery_sort_required = 1
 
-/obj/machinery/Del()
+/obj/machinery/Destroy()
 	machines -= src
 	..()
 
@@ -135,7 +135,7 @@ Class Procs:
 	if(use_power && stat == 0)
 		use_power(7500/severity)
 
-		var/obj/effect/overlay/pulse2 = new/obj/effect/overlay ( src.loc )
+		var/obj/effect/overlay/pulse2 = PoolOrNew(/obj/effect/overlay, src.loc)
 		pulse2.icon = 'icons/effects/effects.dmi'
 		pulse2.icon_state = "empdisable"
 		pulse2.name = "emp sparks"
@@ -143,28 +143,28 @@ Class Procs:
 		pulse2.set_dir(pick(cardinal))
 
 		spawn(10)
-			pulse2.delete()
+			qdel(pulse2)
 	..()
 
 /obj/machinery/ex_act(severity)
 	switch(severity)
 		if(1.0)
-			del(src)
+			qdel(src)
 			return
 		if(2.0)
 			if (prob(50))
-				del(src)
+				qdel(src)
 				return
 		if(3.0)
 			if (prob(25))
-				del(src)
+				qdel(src)
 				return
 		else
 	return
 
 /obj/machinery/blob_act()
 	if(prob(50))
-		del(src)
+		qdel(src)
 
 //sets the use_power var and then forces an area power update
 /obj/machinery/proc/update_use_power(var/new_use_power, var/force_update = 0)
@@ -185,7 +185,7 @@ Class Procs:
 /obj/machinery/proc/inoperable(var/additional_flags = 0)
 	return (stat & (NOPOWER|BROKEN|additional_flags))
 
-/obj/machinery/CanUseTopic(var/mob/user, var/be_close)
+/obj/machinery/CanUseTopic(var/mob/user)
 	if(!interact_offline && (stat & (NOPOWER|BROKEN)))
 		return STATUS_CLOSE
 
@@ -331,53 +331,5 @@ Class Procs:
 		if(I.reliability != 100 && crit_fail)
 			I.crit_fail = 1
 		I.loc = loc
-	del(src)
+	qdel(src)
 	return 1
-
-/obj/machinery/proc/on_assess_perp(mob/living/carbon/human/perp)
-	return 0
-
-/obj/machinery/proc/is_assess_emagged()
-	return emagged
-
-/obj/machinery/proc/assess_perp(mob/living/carbon/human/perp, var/auth_weapons, var/check_records, var/check_arrest)
-	var/threatcount = 0	//the integer returned
-
-	if(is_assess_emagged())
-		return 10	//if emagged, always return 10.
-
-	threatcount += on_assess_perp(perp)
-	if(threatcount >= 10)
-		return threatcount
-
-	//Agent cards lower threatlevel.
-	var/obj/item/weapon/card/id/id = GetIdCard(perp)
-	if(id && istype(id, /obj/item/weapon/card/id/syndicate))
-		threatcount -= 2
-
-	if(auth_weapons && !src.allowed(perp))
-		if(istype(perp.l_hand, /obj/item/weapon/gun) || istype(perp.l_hand, /obj/item/weapon/melee))
-			threatcount += 4
-
-		if(istype(perp.r_hand, /obj/item/weapon/gun) || istype(perp.r_hand, /obj/item/weapon/melee))
-			threatcount += 4
-
-		if(istype(perp.belt, /obj/item/weapon/gun) || istype(perp.belt, /obj/item/weapon/melee))
-			threatcount += 2
-
-		if(perp.species.name != "Human") //beepsky so racist.
-			threatcount += 2
-
-	if(check_records || check_arrest)
-		var/perpname = perp.name
-		if(id)
-			perpname = id.registered_name
-
-		var/datum/data/record/R = find_security_record("name", perpname)
-		if(check_records && !R)
-			threatcount += 4
-
-		if(check_arrest && R && (R.fields["criminal"] == "*Arrest*"))
-			threatcount += 4
-
-	return threatcount

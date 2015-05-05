@@ -73,9 +73,6 @@
 	if (!id_tag)
 		assign_uid()
 		id_tag = num2text(uid)
-	if(ticker && ticker.current_state == 3)//if the game is running
-		src.initialize()
-		src.broadcast_status()
 
 /obj/machinery/atmospherics/unary/vent_pump/high_volume
 	name = "Large Air Vent"
@@ -259,11 +256,12 @@
 /obj/machinery/atmospherics/unary/vent_pump/initialize()
 	..()
 
-	//some vents work his own spesial way
+	//some vents work his own special way
 	radio_filter_in = frequency==1439?(RADIO_FROM_AIRALARM):null
 	radio_filter_out = frequency==1439?(RADIO_TO_AIRALARM):null
 	if(frequency)
 		set_frequency(frequency)
+		src.broadcast_status()
 
 /obj/machinery/atmospherics/unary/vent_pump/receive_signal(datum/signal/signal)
 	if(stat & (NOPOWER|BROKEN))
@@ -383,7 +381,6 @@
 		user << "You are too far away to read the gauge."
 	if(welded)
 		user << "It seems welded shut."
-	..()
 
 /obj/machinery/atmospherics/unary/vent_pump/power_change()
 	var/old_stat = stat
@@ -415,9 +412,9 @@
 			"\blue You have unfastened \the [src].", \
 			"You hear ratchet.")
 		new /obj/item/pipe(loc, make_from=src)
-		del(src)
+		qdel(src)
 
-/obj/machinery/atmospherics/unary/vent_pump/Del()
+/obj/machinery/atmospherics/unary/vent_pump/Destroy()
 	if(initial_loc)
 		initial_loc.air_vent_info -= id_tag
 		initial_loc.air_vent_names -= id_tag

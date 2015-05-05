@@ -5,12 +5,12 @@
 	//This is a terrible hack and I should be ashamed.
 	var/datum/seed/diona = plant_controller.seeds["diona"]
 	if(!diona)
-		del(src)
+		qdel(src)
 
 	spawn(1) // So it has time to be thrown about by the gib() proc.
 		var/mob/living/carbon/alien/diona/D = new(get_turf(organ))
 		diona.request_player(D)
-		del(organ)
+		qdel(organ)
 
 /obj/item/organ/external/diona
 	name = "tendril"
@@ -130,7 +130,7 @@
 /obj/item/organ/external/diona/removed()
 	..()
 	if(!istype(owner))
-		del(src)
+		qdel(src)
 
 	if(!owner.organs.len)
 		owner.death()
@@ -175,7 +175,7 @@
 
 	..()
 	if(!istype(owner))
-		del(src)
+		qdel(src)
 
 	if(!owner.internal_organs.len)
 		owner.death()
@@ -247,7 +247,7 @@
 		B.ckey = owner.ckey
 
 	spawn(0)
-		del(src)
+		qdel(src)
 
 //XENOMORPH ORGANS
 /obj/item/organ/xenos/eggsac

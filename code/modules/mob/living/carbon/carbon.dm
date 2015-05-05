@@ -7,6 +7,13 @@
 	if(germ_level < GERM_LEVEL_AMBIENT && prob(30))	//if you're just standing there, you shouldn't get more germs beyond an ambient level
 		germ_level++
 
+/mob/living/carbon/Destroy()
+	for(var/guts in internal_organs)
+		qdel(guts)
+	for(var/food in stomach_contents)
+		qdel(food)
+	return ..()
+
 /mob/living/carbon/Move(NewLoc, direct)
 	. = ..()
 	if(.)
@@ -456,6 +463,9 @@
 	return 1
 
 /mob/living/carbon/get_default_language()
+	if(default_language)
+		return default_language
+
 	if(!species)
 		return null
 	return species.default_language ? all_languages[species.default_language] : null

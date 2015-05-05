@@ -76,6 +76,12 @@
 			suffix = "#[count]"
 		name = "Mulebot ([suffix])"
 
+/obj/machinery/bot/mulebot/Destroy()
+	if(radio_controller)
+		radio_controller.remove_object(src,beacon_freq)
+		radio_controller.remove_object(src,control_freq)
+	..()
+
 // attack by item
 // emag : lock/unlock,
 // screwdriver: open/close hatch
@@ -862,8 +868,8 @@
 	var/turf/Tsec = get_turf(src)
 
 	new /obj/item/device/assembly/prox_sensor(Tsec)
-	new /obj/item/stack/rods(Tsec)
-	new /obj/item/stack/rods(Tsec)
+	PoolOrNew(/obj/item/stack/rods, Tsec)
+	PoolOrNew(/obj/item/stack/rods, Tsec)
 	new /obj/item/stack/cable_coil/cut(Tsec)
 	if (cell)
 		cell.loc = Tsec
@@ -876,4 +882,4 @@
 
 	new /obj/effect/decal/cleanable/blood/oil(src.loc)
 	unload(0)
-	del(src)
+	qdel(src)

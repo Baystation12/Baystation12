@@ -10,7 +10,7 @@
 	var/welded = 0
 	var/wall_mounted = 0 //never solid (You can always pass over it)
 	var/health = 100
-	var/lastbang
+	var/breakout = 0 //if someone is currently breaking out. mutex
 	var/storage_capacity = 30 //This is so that someone can't pack hundreds of items in a locker/crate
 							  //then open it in a populated area to crash clients.
 	var/open_sound = 'sound/machines/click.ogg'
@@ -146,30 +146,33 @@
 			for(var/atom/movable/A as mob|obj in src)//pulls everything out of the locker and hits it with an explosion
 				A.loc = src.loc
 				A.ex_act(severity++)
-			del(src)
+			qdel(src)
 		if(2)
 			if(prob(50))
 				for (var/atom/movable/A as mob|obj in src)
 					A.loc = src.loc
 					A.ex_act(severity++)
-				del(src)
+				qdel(src)
 		if(3)
 			if(prob(5))
 				for(var/atom/movable/A as mob|obj in src)
 					A.loc = src.loc
 					A.ex_act(severity++)
-				del(src)
+				qdel(src)
+
+/obj/structure/closet/proc/damage(var/damage)
+	health -= damage
+	if(health <= 0)
+		for(var/atom/movable/A in src)
+			A.loc = src.loc
+		qdel(src)
 
 /obj/structure/closet/bullet_act(var/obj/item/projectile/Proj)
 	if(!(Proj.damage_type == BRUTE || Proj.damage_type == BURN))
 		return
 
-	health -= Proj.damage
 	..()
-	if(health <= 0)
-		for(var/atom/movable/A as mob|obj in src)
-			A.loc = src.loc
-		del(src)
+	damage(Proj.damage)
 
 	return
 
@@ -178,14 +181,14 @@
 	if(prob(75))
 		for(var/atom/movable/A as mob|obj in src)
 			A.loc = src.loc
-		del(src)
+		qdel(src)
 
 /obj/structure/closet/meteorhit(obj/O as obj)
 	if(O.icon_state == "flaming")
 		for(var/mob/M in src)
 			M.meteorhit(O)
 		src.dump_contents()
-		del(src)
+		qdel(src)
 
 /obj/structure/closet/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(src.opened)
@@ -202,7 +205,7 @@
 			new /obj/item/stack/sheet/metal(src.loc)
 			for(var/mob/M in viewers(src))
 				M.show_message("<span class='notice'>\The [src] has been cut apart by [user] with \the [WT].</span>", 3, "You hear welding.", 2)
-			del(src)
+			qdel(src)
 			return
 		if(isrobot(user))
 			return
@@ -249,18 +252,16 @@
 	src.add_fingerprint(user)
 	return
 
+/obj/structure/closet/attack_ai(mob/user)
+	if(istype(user, /mob/living/silicon/robot) && Adjacent(user)) // Robots can open/close it, but not the AI.
+		attack_hand(user)
+
 /obj/structure/closet/relaymove(mob/user as mob)
 	if(user.stat || !isturf(src.loc))
 		return
 
 	if(!src.open())
 		user << "<span class='notice'>It won't budge!</span>"
-		if(!lastbang)
-			lastbang = 1
-			for (var/mob/M in hearers(src, null))
-				M << text("<FONT size=[]>BANG, bang!</FONT>", max(0, 5 - get_dist(src, M)))
-			spawn(30)
-				lastbang = 0
 
 /obj/structure/closet/attack_hand(mob/user as mob)
 	src.add_fingerprint(user)
@@ -306,5 +307,66 @@
 		return
 	visible_message("<span class='danger'>[user] [attack_message] the [src]!</span>")
 	dump_contents()
-	spawn(1) del(src)
+	spawn(1) qdel(src)
 	return 1
+
+/obj/structure/closet/proc/req_breakout()
+	if(breakout)
+		return 0 //Already breaking out.
+	if(opened)
+		return 0 //Door's open... wait, why are you in it's contents then?
+	if(!welded)
+		return 0 //closed but not welded...
+	return 1
+
+/obj/structure/closet/proc/mob_breakout(var/mob/living/escapee)
+	var/breakout_time = 2 //2 minutes by default
+
+	if(!req_breakout())
+		return
+
+	//okay, so the closet is either welded or locked... resist!!!
+	escapee.next_move = world.time + 100
+	escapee.last_special = world.time + 100
+	escapee << "<span class='warning'>You lean on the back of \the [src] and start pushing the door open. (this will take about [breakout_time] minutes)</span>"
+	
+	visible_message("<span class='danger'>The [src] begins to shake violently!</span>")
+
+	breakout = 1 //can't think of a better way to do this right now.
+	for(var/i in 1 to (6*breakout_time * 2)) //minutes * 6 * 5seconds * 2
+		playsound(src.loc, 'sound/effects/grillehit.ogg', 100, 1)
+		animate_shake()
+		
+		if(!do_after(escapee, 50)) //5 seconds
+			breakout = 0
+			return
+		if(!escapee || escapee.stat || escapee.loc != src) 
+			breakout = 0
+			return //closet/user destroyed OR user dead/unconcious OR user no longer in closet OR closet opened
+		//Perform the same set of checks as above for weld and lock status to determine if there is even still a point in 'resisting'...
+		if(!req_breakout())
+			breakout = 0
+			return
+	
+	//Well then break it!
+	breakout = 0
+	escapee << "<span class='warning'>You successfully break out!</span>"
+	visible_message("<span class='danger'>\the [escapee] successfully broke out of \the [src]!</span>")
+	playsound(src.loc, 'sound/effects/grillehit.ogg', 100, 1)
+	break_open()
+	animate_shake()
+
+/obj/structure/closet/proc/break_open()
+	welded = 0
+	update_icon()
+	//Do this to prevent contents from being opened into nullspace (read: bluespace)
+	if(istype(loc, /obj/structure/bigDelivery))
+		var/obj/structure/bigDelivery/BD = loc
+		BD.unwrap()
+	open()
+
+/obj/structure/closet/proc/animate_shake()
+	var/init_px = pixel_x
+	var/shake_dir = pick(-1, 1)
+	animate(src, transform=turn(matrix(), 8*shake_dir), pixel_x=init_px + 2*shake_dir, time=1)
+	animate(transform=null, pixel_x=init_px, time=6, easing=ELASTIC_EASING)

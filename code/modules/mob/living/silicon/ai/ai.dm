@@ -6,6 +6,7 @@ var/list/ai_verbs_default = list(
 	/mob/living/silicon/ai/proc/ai_announcement,
 	/mob/living/silicon/ai/proc/ai_call_shuttle,
 	// /mob/living/silicon/ai/proc/ai_recall_shuttle,
+	/mob/living/silicon/ai/proc/ai_emergency_message,
 	/mob/living/silicon/ai/proc/ai_camera_track,
 	/mob/living/silicon/ai/proc/ai_camera_list,
 	/mob/living/silicon/ai/proc/ai_goto_location,
@@ -45,7 +46,7 @@ var/list/ai_verbs_default = list(
 	density = 1
 	status_flags = CANSTUN|CANPARALYSE|CANPUSH
 	shouldnt_see = list(/obj/effect/rune)
-	var/list/network = list("SS13")
+	var/list/network = list("Exodus")
 	var/obj/machinery/camera/camera = null
 	var/list/connected_robots = list()
 	var/aiRestorePowerRoutine = 0
@@ -55,7 +56,6 @@ var/list/ai_verbs_default = list(
 	var/obj/item/device/multitool/aiMulti = null
 	var/obj/item/device/radio/headset/heads/ai_integrated/aiRadio = null
 	var/custom_sprite = 0 //For our custom sprites
-	var/apc_override = 0 //hack for letting the AI use its APC even when visionless
 	var/camera_light_on = 0	//Defines if the AI toggled the light on the camera it's looking through.
 	var/datum/trackable/track = null
 	var/last_announcement = ""
@@ -82,13 +82,11 @@ var/list/ai_verbs_default = list(
 
 /mob/living/silicon/ai/proc/add_ai_verbs()
 	src.verbs |= ai_verbs_default
-	src.verbs |= ai_verbs_subsystems
-	src.verbs |= silicon_verbs_subsystems
+	src.verbs |= silicon_subsystems
 
 /mob/living/silicon/ai/proc/remove_ai_verbs()
 	src.verbs -= ai_verbs_default
-	src.verbs -= ai_verbs_subsystems
-	src.verbs -= silicon_verbs_subsystems
+	src.verbs -= silicon_subsystems
 
 /mob/living/silicon/ai/New(loc, var/datum/ai_laws/L, var/obj/item/device/mmi/B, var/safety = 0)
 	announcement = new()
@@ -148,7 +146,7 @@ var/list/ai_verbs_default = list(
 	if(!safety)//Only used by AIize() to successfully spawn an AI.
 		if (!B)//If there is no player/brain inside.
 			empty_playable_ai_cores += new/obj/structure/AIcore/deactivated(loc)//New empty terminal.
-			del(src)//Delete AI.
+			qdel(src)//Delete AI.
 			return
 		else
 			if (B.brainmob.mind)
@@ -198,9 +196,9 @@ var/list/ai_verbs_default = list(
 
 	job = "AI"
 
-/mob/living/silicon/ai/Del()
+/mob/living/silicon/ai/Destroy()
 	ai_list -= src
-	del(eyeobj)
+	qdel(eyeobj)
 	..()
 
 /mob/living/silicon/ai/pointed(atom/A as mob|obj|turf in view())
@@ -236,7 +234,7 @@ var/list/ai_verbs_default = list(
 	powered_ai = ai
 	powered_ai.psupply = src
 	if(isnull(powered_ai))
-		Del()
+		qdel(src)
 
 	loc = powered_ai.loc
 	use_power(1) // Just incase we need to wake up the power system.
@@ -245,7 +243,7 @@ var/list/ai_verbs_default = list(
 
 /obj/machinery/ai_powersupply/process()
 	if(!powered_ai || powered_ai.stat & DEAD)
-		Del()
+		qdel()
 	if(powered_ai.APU_power)
 		use_power = 0
 		return
@@ -370,6 +368,30 @@ var/list/ai_verbs_default = list(
 	if(confirm == "Yes")
 		cancel_call_proc(src)
 
+/mob/living/silicon/ai/var/emergency_message_cooldown = 0
+/mob/living/silicon/ai/proc/ai_emergency_message()
+	set category = "AI Commands"
+	set name = "Send Emergency Message"
+
+	if(check_unable(AI_CHECK_WIRELESS))
+		return
+	if(!is_relay_online())
+		usr <<"<span class='warning'>No Emergency Bluespace Relay detected. Unable to transmit message.</span>"
+		return
+	if(emergency_message_cooldown)
+		usr << "<span class='warning'>Arrays recycling. Please stand by.</span>"
+		return
+	var/input = input(usr, "Please choose a message to transmit to Centcomm via quantum entanglement.  Please be aware that this process is very expensive, and abuse will lead to... termination.  Transmission does not guarantee a response. There is a 30 second delay before you may send another message, be clear, full and concise.", "To abort, send an empty message.", "")
+	if(!input)
+		return
+	Centcomm_announce(input, usr)
+	usr << "<span class='notice'>Message transmitted.</span>"
+	log_say("[key_name(usr)] has made an IA Centcomm announcement: [input]")
+	emergency_message_cooldown = 1
+	spawn(300)
+		emergency_message_cooldown = 0
+
+
 /mob/living/silicon/ai/check_eye(var/mob/user as mob)
 	if (!camera)
 		return null
@@ -464,41 +486,41 @@ var/list/ai_verbs_default = list(
 //Replaces /mob/living/silicon/ai/verb/change_network() in ai.dm & camera.dm
 //Adds in /mob/living/silicon/ai/proc/ai_network_change() instead
 //Addition by Mord_Sith to define AI's network change ability
-/mob/living/silicon/ai/proc/ai_network_change()
-	set category = "AI Commands"
-	set name = "Jump To Network"
-	unset_machine()
-	var/cameralist[0]
-
+/mob/living/silicon/ai/proc/get_camera_network_list()
 	if(check_unable())
 		return
 
-	var/mob/living/silicon/ai/U = usr
-
+	var/list/cameralist = new()
 	for (var/obj/machinery/camera/C in cameranet.cameras)
 		if(!C.can_use())
 			continue
-
 		var/list/tempnetwork = difflist(C.network,restricted_camera_networks,1)
-		if(tempnetwork.len)
-			for(var/i in tempnetwork)
-				cameralist[i] = i
-	var/old_network = network
-	network = input(U, "Which network would you like to view?") as null|anything in cameralist
+		for(var/i in tempnetwork)
+			cameralist[i] = i
 
-	if(!U.eyeobj)
-		U.view_core()
+	cameralist = sortAssoc(cameralist)
+	return cameralist
+
+/mob/living/silicon/ai/proc/ai_network_change(var/network in get_camera_network_list())
+	set category = "AI Commands"
+	set name = "Jump To Network"
+	unset_machine()
+
+	if(!network)
 		return
 
-	if(isnull(network))
-		network = old_network // If nothing is selected
-	else
-		for(var/obj/machinery/camera/C in cameranet.cameras)
-			if(!C.can_use())
-				continue
-			if(network in C.network)
-				U.eyeobj.setLoc(get_turf(C))
-				break
+	if(!eyeobj)
+		view_core()
+		return
+
+	src.network = network
+
+	for(var/obj/machinery/camera/C in cameranet.cameras)
+		if(!C.can_use())
+			continue
+		if(network in C.network)
+			eyeobj.setLoc(get_turf(C))
+			break
 	src << "\blue Switched to [network] camera network."
 //End of code by Mord_Sith
 
@@ -533,7 +555,7 @@ var/list/ai_verbs_default = list(
 			input = input("Select a crew member:") as null|anything in personnel_list
 			var/icon/character_icon = personnel_list[input]
 			if(character_icon)
-				del(holo_icon)//Clear old icon so we're not storing it in memory.
+				qdel(holo_icon)//Clear old icon so we're not storing it in memory.
 				holo_icon = getHologramIcon(icon(character_icon))
 		else
 			alert("No suitable records found. Aborting.")
@@ -546,7 +568,7 @@ var/list/ai_verbs_default = list(
 		)
 		input = input("Please select a hologram:") as null|anything in icon_list
 		if(input)
-			del(holo_icon)
+			qdel(holo_icon)
 			switch(input)
 				if("default")
 					holo_icon = getHologramIcon(icon('icons/mob/AI.dmi',"holo1"))
@@ -647,14 +669,14 @@ var/list/ai_verbs_default = list(
 
 /mob/living/silicon/ai/proc/check_unable(var/flags = 0)
 	if(stat == DEAD)
-		usr << "\red You are dead!"
+		src << "<span class='warning'>You are dead!</span>"
 		return 1
 
 	if((flags & AI_CHECK_WIRELESS) && src.control_disabled)
-		usr << "\red Wireless control is disabled!"
+		src << "<span class='warning'>Wireless control is disabled!</span>"
 		return 1
 	if((flags & AI_CHECK_RADIO) && src.aiRadio.disabledAi)
-		src << "\red System Error - Transceiver Disabled!"
+		src << "<span class='warning'>System Error - Transceiver Disabled!</span>"
 		return 1
 	return 0
 

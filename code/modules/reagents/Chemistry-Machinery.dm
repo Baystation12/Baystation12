@@ -37,19 +37,19 @@
 /obj/machinery/chem_master/ex_act(severity)
 	switch(severity)
 		if(1.0)
-			del(src)
+			qdel(src)
 			return
 		if(2.0)
 			if (prob(50))
-				del(src)
+				qdel(src)
 				return
 
 /obj/machinery/chem_master/blob_act()
 	if (prob(50))
-		del(src)
+		qdel(src)
 
 /obj/machinery/chem_master/meteorhit()
-	del(src)
+	qdel(src)
 	return
 
 /obj/machinery/chem_master/attackby(var/obj/item/weapon/B as obj, var/mob/user as mob)
@@ -406,7 +406,7 @@
 				if(type in diseases) // Make sure this is a disease
 					D = new type(0, null)
 			var/list/data = list("viruses"=list(D))
-			var/name = sanitizeSafe(input(usr,"Name:","Name the culture",D.name))
+			var/name = sanitizeSafe(input(usr,"Name:","Name the culture",D.name), MAX_NAME_LEN)
 			if(!name || name == " ") name = D.name
 			B.name = "[name] culture bottle"
 			B.desc = "A small bottle. Contains [D.agent] culture in synthblood medium."
@@ -751,7 +751,7 @@
 
 /obj/machinery/reagentgrinder/proc/remove_object(var/obj/item/O)
 	holdingitems -= O
-	del(O)
+	qdel(O)
 
 /obj/machinery/reagentgrinder/proc/grind()
 

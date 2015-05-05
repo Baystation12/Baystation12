@@ -228,7 +228,7 @@
 		var/list/attached_organs = list()
 		for(var/organ in target.internal_organs_by_name)
 			var/obj/item/organ/I = target.internal_organs_by_name[organ]
-			if(!I.status && I.parent_organ == target_zone)
+			if(I && !I.status && I.parent_organ == target_zone)
 				attached_organs |= organ
 
 		var/organ_to_remove = input(user, "Which organ do you want to prepare for removal?") as null|anything in attached_organs
@@ -347,7 +347,7 @@
 			return 0
 		else if(target.species.has_organ[O.organ_tag])
 
-			if(O.is_damaged())
+			if(O.damage > (O.max_damage * 0.75))
 				user << "\red \The [O.organ_tag] [o_is] in no state to be transplanted."
 				return 2
 
@@ -410,7 +410,7 @@
 		var/list/removable_organs = list()
 		for(var/organ in target.internal_organs_by_name)
 			var/obj/item/organ/I = target.internal_organs_by_name[organ]
-			if(I.status & ORGAN_CUT_AWAY && I.parent_organ == target_zone)
+			if(I && I.status & ORGAN_CUT_AWAY && I.parent_organ == target_zone)
 				removable_organs |= organ
 
 		var/organ_to_replace = input(user, "Which organ do you want to reattach?") as null|anything in removable_organs

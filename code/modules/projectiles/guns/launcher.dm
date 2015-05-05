@@ -26,6 +26,3 @@
 	projectile.loc = get_turf(user)
 	projectile.throw_at(target, throw_distance, release_force, user)
 	return 1
-
-/obj/item/weapon/gun/launcher/attack_self(mob/living/user as mob)
-	return

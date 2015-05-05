@@ -42,8 +42,15 @@
 /obj/item/device/radio/New()
 	..()
 	wires = new(src)
+
+/obj/item/device/radio/Destroy()
+	qdel(wires)
+	wires = null
 	if(radio_controller)
-		initialize()
+		radio_controller.remove_object(src, frequency)
+		for (var/ch_name in channels)
+			radio_controller.remove_object(src, radiochannels[ch_name])
+	..()
 
 
 /obj/item/device/radio/initialize()
@@ -172,7 +179,7 @@
 						0, "*garbled automated announcement*", src,
 						message, from, "Automated Announcement", from, "synthesized voice",
 						4, 0, list(0), connection.frequency, "states")
-	del(A)
+	qdel(A)
 	return
 
 // Interprets the message mode when talking into a radio, possibly returning a connection datum
@@ -202,7 +209,7 @@
 	if(wires.IsIndexCut(WIRE_TRANSMIT)) // The device has to have all its wires and shit intact
 		return 0
 
-	M.last_target_click = world.time
+	M.last_target_radio = world.time // For the projectile targeting system
 
 	/* Quick introduction:
 		This new radio system uses a very robust FTL signaling technology unoriginally
@@ -624,7 +631,6 @@
 	user << browse(dat, "window=radio")
 	onclose(user, "radio")
 	return
-
 
 /obj/item/device/radio/proc/config(op)
 	if(radio_controller)

@@ -1149,7 +1149,7 @@ Buildable meters
 		"[user] fastens the [src].", \
 		"\blue You have fastened the [src].", \
 		"You hear ratchet.")
-	del(src)	// remove the pipe item
+	qdel(src)	// remove the pipe item
 
 	return
 	 //TODO: DEFERRED
@@ -1177,7 +1177,7 @@ Buildable meters
 	new/obj/machinery/meter( src.loc )
 	playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 	user << "\blue You have fastened the meter to the pipe"
-	del(src)
+	qdel(src)
 //not sure why these are necessary
 #undef PIPE_SIMPLE_STRAIGHT
 #undef PIPE_SIMPLE_BENT

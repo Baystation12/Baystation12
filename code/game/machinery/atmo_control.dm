@@ -67,11 +67,10 @@
 /obj/machinery/air_sensor/initialize()
 	set_frequency(frequency)
 
-/obj/machinery/air_sensor/New()
-	..()
-
+obj/machinery/air_sensor/Destroy()
 	if(radio_controller)
-		set_frequency(frequency)
+		radio_controller.remove_object(src,frequency)
+	..()
 
 /obj/machinery/computer/general_air_control
 	icon = 'icons/obj/computer.dmi'
@@ -85,6 +84,11 @@
 	var/list/sensor_information = list()
 	var/datum/radio_frequency/radio_connection
 	circuit = /obj/item/weapon/circuitboard/air_management
+
+obj/machinery/computer/general_air_control/Destroy()
+	if(radio_controller)
+		radio_controller.remove_object(src, frequency)
+	..()
 
 /obj/machinery/computer/general_air_control/attack_hand(mob/user)
 	if(..(user))
@@ -182,7 +186,7 @@
 
 	else
 		output += "<FONT color='red'>ERROR: Can not find input port</FONT> <A href='?src=\ref[src];in_refresh_status=1'>Search</A><BR>"
-	
+
 	output += "Flow Rate Limit: <A href='?src=\ref[src];adj_input_flow_rate=-100'>-</A> <A href='?src=\ref[src];adj_input_flow_rate=-10'>-</A> <A href='?src=\ref[src];adj_input_flow_rate=-1'>-</A> <A href='?src=\ref[src];adj_input_flow_rate=-0.1'>-</A> [round(input_flow_setting, 0.1)] L/s <A href='?src=\ref[src];adj_input_flow_rate=0.1'>+</A> <A href='?src=\ref[src];adj_input_flow_rate=1'>+</A> <A href='?src=\ref[src];adj_input_flow_rate=10'>+</A> <A href='?src=\ref[src];adj_input_flow_rate=100'>+</A><BR>"
 
 	output += "<BR>"
@@ -230,7 +234,7 @@ Max Output Pressure: [output_pressure] kPa<BR>"}
 		spawn(1)
 			src.updateUsrDialog()
 		return 1
-	
+
 	if(!radio_connection)
 		return 0
 	var/datum/signal/signal = new
@@ -239,32 +243,32 @@ Max Output Pressure: [output_pressure] kPa<BR>"}
 	if(href_list["in_refresh_status"])
 		input_info = null
 		signal.data = list ("tag" = input_tag, "status" = 1)
-		return 1
+		. = 1
 
 	if(href_list["in_toggle_injector"])
 		input_info = null
 		signal.data = list ("tag" = input_tag, "power_toggle" = 1)
-		return 1
+		. = 1
 
 	if(href_list["in_set_flowrate"])
 		input_info = null
 		signal.data = list ("tag" = input_tag, "set_volume_rate" = "[input_flow_setting]")
-		return 1
+		. = 1
 
 	if(href_list["out_refresh_status"])
 		output_info = null
 		signal.data = list ("tag" = output_tag, "status" = 1)
-		return 1
+		. = 1
 
 	if(href_list["out_toggle_power"])
 		output_info = null
 		signal.data = list ("tag" = output_tag, "power_toggle" = 1)
-		return 1
+		. = 1
 
 	if(href_list["out_set_pressure"])
 		output_info = null
 		signal.data = list ("tag" = output_tag, "set_internal_pressure" = "[pressure_setting]")
-		return 1
+		. = 1
 
 	signal.data["sigtype"]="command"
 	radio_connection.post_signal(src, signal, filter = RADIO_ATMOSIA)
@@ -302,7 +306,7 @@ Max Output Pressure: [output_pressure] kPa<BR>"}
 
 	else
 		output += "<FONT color='red'>ERROR: Can not find input port</FONT> <A href='?src=\ref[src];in_refresh_status=1'>Search</A><BR>"
-	
+
 	output += "Flow Rate Limit: <A href='?src=\ref[src];adj_input_flow_rate=-100'>-</A> <A href='?src=\ref[src];adj_input_flow_rate=-10'>-</A> <A href='?src=\ref[src];adj_input_flow_rate=-1'>-</A> <A href='?src=\ref[src];adj_input_flow_rate=-0.1'>-</A> [round(input_flow_setting, 0.1)] L/s <A href='?src=\ref[src];adj_input_flow_rate=0.1'>+</A> <A href='?src=\ref[src];adj_input_flow_rate=1'>+</A> <A href='?src=\ref[src];adj_input_flow_rate=10'>+</A> <A href='?src=\ref[src];adj_input_flow_rate=100'>+</A><BR>"
 
 	output += "<BR>"
@@ -350,7 +354,7 @@ Min Core Pressure: [pressure_limit] kPa<BR>"}
 		spawn(1)
 			src.updateUsrDialog()
 		return 1
-	
+
 	if(!radio_connection)
 		return 0
 	var/datum/signal/signal = new
@@ -359,32 +363,32 @@ Min Core Pressure: [pressure_limit] kPa<BR>"}
 	if(href_list["in_refresh_status"])
 		input_info = null
 		signal.data = list ("tag" = input_tag, "status" = 1)
-		return 1
+		. = 1
 
 	if(href_list["in_toggle_injector"])
 		input_info = null
 		signal.data = list ("tag" = input_tag, "power_toggle" = 1)
-		return 1
+		. = 1
 
 	if(href_list["in_set_flowrate"])
 		input_info = null
 		signal.data = list ("tag" = input_tag, "set_volume_rate" = "[input_flow_setting]")
-		return 1
+		. = 1
 
 	if(href_list["out_refresh_status"])
 		output_info = null
 		signal.data = list ("tag" = output_tag, "status" = 1)
-		return 1
+		. = 1
 
 	if(href_list["out_toggle_power"])
 		output_info = null
 		signal.data = list ("tag" = output_tag, "power_toggle" = 1)
-		return 1
+		. = 1
 
 	if(href_list["out_set_pressure"])
 		output_info = null
 		signal.data = list ("tag" = output_tag, "set_external_pressure" = "[pressure_setting]", "checks" = 1)
-		return 1
+		. = 1
 
 	signal.data["sigtype"]="command"
 	radio_connection.post_signal(src, signal, filter = RADIO_ATMOSIA)

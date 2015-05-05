@@ -118,4 +118,4 @@
 			if(power_drained >= max_power)
 				processing_objects.Remove(src)
 				explosion(src.loc, 3,6,9,12)
-				del(src)
+				qdel(src)

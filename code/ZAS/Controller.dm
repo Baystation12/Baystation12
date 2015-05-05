@@ -98,7 +98,7 @@ Class Procs:
 	set background = 1
 	#endif
 
-	world << "<span class='danger'>Processing Geometry...</span>"
+	admin_notice("<span class='danger'>Processing Geometry...</span>", R_DEBUG)
 	sleep(-1)
 
 	var/start_time = world.timeofday
@@ -109,14 +109,14 @@ Class Procs:
 		simulated_turf_count++
 		S.update_air_properties()
 
-	world << {"<span class='danger'>Geometry initialized in [round(0.1*(world.timeofday-start_time),0.1)] seconds.</b></span>
+	admin_notice({"<span class='danger'>Geometry initialized in [round(0.1*(world.timeofday-start_time),0.1)] seconds.</b></span>
 <span class='info'>
 Total Simulated Turfs: [simulated_turf_count]
 Total Zones: [zones.len]
 Total Edges: [edges.len]
 Total Active Edges: [active_edges.len ? "<span class='danger'>[active_edges.len]</span>" : "None"]
 Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_count]</font>
-</span>"}
+</span>"}, R_DEBUG)
 
 
 //	spawn Start()
@@ -154,7 +154,18 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 		#ifdef ZASDBG
 		var/updated = 0
 		#endif
+		
+		//defer updating of self-zone-blocked turfs until after all other turfs have been updated.
+		//this hopefully ensures that non-self-zone-blocked turfs adjacent to self-zone-blocked ones
+		//have valid zones when the self-zone-blocked turfs update.
+		var/list/deferred = list()
+		
 		for(var/turf/T in updating)
+			//check if the turf is self-zone-blocked
+			if(T.c_airblock(T) & ZONE_BLOCKED)
+				deferred += T
+				continue
+			
 			T.update_air_properties()
 			T.post_update_air_properties()
 			T.needs_air_update = 0
@@ -163,6 +174,15 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 			updated++
 			#endif
 			//sleep(1)
+
+		for(var/turf/T in deferred)
+			T.update_air_properties()
+			T.post_update_air_properties()
+			T.needs_air_update = 0
+			#ifdef ZASDBG
+			T.overlays -= mark
+			updated++
+			#endif
 
 		#ifdef ZASDBG
 		if(updated != updating.len)
@@ -307,7 +327,7 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 
 /datum/controller/air_system/proc/mark_edge_sleeping(connection_edge/E)
 	#ifdef ZASDBG
-	ASSERT(istype(E)
+	ASSERT(istype(E))
 	#endif
 	if(E.sleeping) return
 	active_edges.Remove(E)
@@ -315,7 +335,7 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 
 /datum/controller/air_system/proc/mark_edge_active(connection_edge/E)
 	#ifdef ZASDBG
-	ASSERT(istype(E)
+	ASSERT(istype(E))
 	#endif
 	if(!E.sleeping) return
 	active_edges.Add(E)

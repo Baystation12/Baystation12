@@ -26,6 +26,12 @@
 	var/has_resources
 	var/list/resources
 
+	// Flick animation
+	var/atom/movable/overlay/c_animation = null
+
+	// holy water
+	var/holy = 0
+
 /turf/New()
 	..()
 	for(var/atom/movable/AM as mob|obj in src)
@@ -191,10 +197,10 @@
 /turf/proc/RemoveLattice()
 	var/obj/structure/lattice/L = locate(/obj/structure/lattice, src)
 	if(L)
-		del L
+		qdel(L)
 
 //Creates a new turf
-/turf/proc/ChangeTurf(var/turf/N)
+/turf/proc/ChangeTurf(var/turf/N, var/tell_universe=1, var/force_lighting_update = 0)
 	if (!N)
 		return
 
@@ -227,20 +233,14 @@
 		if(S.zone) S.zone.rebuild()
 
 	if(ispath(N, /turf/simulated/floor))
-		//if the old turf had a zone, connect the new turf to it as well - Cael
-		//Adjusted by SkyMarshal 5/10/13 - The air master will handle the addition of the new turf.
-		//if(zone)
-		//	zone.RemoveTurf(src)
-		//	if(!zone.CheckStatus())
-		//		zone.SetStatus(ZONE_ACTIVE)
 
 		var/turf/simulated/W = new N( locate(src.x, src.y, src.z) )
 		//W.Assimilate_Air()
 
 		W.lighting_lumcount += old_lumcount
-
-		if(W.lighting_lumcount)
-			W.UpdateAffectingLights()
+		if((old_lumcount != W.lighting_lumcount) || (loc.name != "Space" && force_lighting_update))
+			W.lighting_changed = 1
+			lighting_controller.changed_turfs += W
 
 		if(old_fire)
 			fire = old_fire
@@ -248,8 +248,11 @@
 		if (istype(W,/turf/simulated/floor))
 			W.RemoveLattice()
 
+		if(tell_universe)
+			universe.OnTurfChange(W)
+
 		if(air_master)
-			air_master.mark_for_update(src)
+			air_master.mark_for_update(src) //handle the addition of the new turf.
 
 		for(var/turf/space/S in range(W,1))
 			S.update_starlight()
@@ -258,19 +261,18 @@
 		return W
 
 	else
-		//if(zone)
-		//	zone.RemoveTurf(src)
-		//	if(!zone.CheckStatus())
-		//		zone.SetStatus(ZONE_ACTIVE)
 
 		var/turf/W = new N( locate(src.x, src.y, src.z) )
 		W.lighting_lumcount += old_lumcount
-		if(old_lumcount != W.lighting_lumcount)
+		if((old_lumcount != W.lighting_lumcount) || (loc.name != "Space" && force_lighting_update))
 			W.lighting_changed = 1
 			lighting_controller.changed_turfs += W
 
 		if(old_fire)
 			old_fire.RemoveFire()
+
+		if(tell_universe)
+			universe.OnTurfChange(W)
 
 		if(air_master)
 			air_master.mark_for_update(src)
@@ -336,7 +338,8 @@
 
 /turf/proc/ReplaceWithLattice()
 	src.ChangeTurf(/turf/space)
-	new /obj/structure/lattice( locate(src.x, src.y, src.z) )
+	spawn()
+		new /obj/structure/lattice( locate(src.x, src.y, src.z) )
 
 /turf/proc/kill_creatures(mob/U = null)//Will kill people/creatures and damage mechs./N
 //Useful to batch-add creatures to the list.

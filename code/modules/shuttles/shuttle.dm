@@ -12,6 +12,12 @@
 
 	var/arrive_time = 0	//the time at which the shuttle arrives when long jumping
 
+/datum/shuttle/proc/init_docking_controllers()
+	if(docking_controller_tag)
+		docking_controller = locate(docking_controller_tag)
+		if(!istype(docking_controller))
+			world << "<span class='danger'>warning: shuttle with docking tag [docking_controller_tag] could not find it's controller!</span>"
+
 /datum/shuttle/proc/short_jump(var/area/origin,var/area/destination)
 	if(moving_status != SHUTTLE_IDLE) return
 
@@ -99,7 +105,7 @@
 		for(var/atom/movable/AM as mob|obj in T)
 			AM.Move(D)
 		if(istype(T, /turf/simulated))
-			del(T)
+			qdel(T)
 
 	for(var/mob/living/carbon/bug in destination)
 		bug.gib()

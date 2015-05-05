@@ -24,5 +24,6 @@
 		new /obj/item/weapon/minihoe(src)
 		new /obj/item/weapon/hatchet(src)
 		new /obj/item/weapon/wirecutters/clippers(src)
+		new /obj/item/weapon/reagent_containers/spray/plantbgone(src)
 //		new /obj/item/weapon/bee_net(src) //No more bees, March 2014
 		return

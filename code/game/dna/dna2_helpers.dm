@@ -166,6 +166,7 @@
 			H.f_style = facial_hair_styles_list[beard]
 
 		H.force_update_limbs()
+		H.update_eyes()
 		H.update_hair()
 
 		return 1

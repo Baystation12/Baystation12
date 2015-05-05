@@ -41,7 +41,7 @@
 			for(var/part_name in L.part)
 				if(!isnull(target.get_organ(part_name)))
 					continue
-				var/list/organ_data = target.species.has_limbs["[target_zone]"]
+				var/list/organ_data = target.species.has_limbs["[part_name]"]
 				if(!organ_data)
 					continue
 				var/new_limb_type = organ_data["path"]
@@ -54,7 +54,7 @@
 		target.updatehealth()
 		target.UpdateDamageIcon()
 
-		del(tool)
+		qdel(tool)
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		user.visible_message("\red [user]'s hand slips, damaging [target]'s flesh!", \
