@@ -1084,6 +1084,7 @@
 
 	proc/handle_regular_hud_updates()
 		if(!overlays_cache)
+			overlays_cache = list()
 			overlays_cache.len = 23
 			overlays_cache[1] = image('icons/mob/screen1_full.dmi', "icon_state" = "passage1")
 			overlays_cache[2] = image('icons/mob/screen1_full.dmi', "icon_state" = "passage2")
