@@ -25,6 +25,10 @@
 	var/datum/powernet/PN			// Our powernet
 	var/obj/structure/cable/attached		// the attached cable
 
+/obj/item/device/powersink/Destroy()
+	processing_objects.Remove(src)
+	..()
+
 /obj/item/device/powersink/attackby(var/obj/item/I, var/mob/user)
 	if(istype(I, /obj/item/weapon/screwdriver))
 		if(mode == 0)
@@ -113,7 +117,6 @@
 	if(power_drained > max_power * 0.95)
 		playsound(src, 'sound/effects/screech.ogg', 100, 1, 1)
 	if(power_drained >= max_power)
-		processing_objects.Remove(src)
 		explosion(src.loc, 3,6,9,12)
 		qdel(src)
 		return
