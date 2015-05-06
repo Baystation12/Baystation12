@@ -1,0 +1,4 @@
+author: PsiOmegaDelta
+delete-after: True
+changes: 
+  - bugfix: "The cloning computer can again successfully locate nearby cloning vats and DNA scanners at round start."
