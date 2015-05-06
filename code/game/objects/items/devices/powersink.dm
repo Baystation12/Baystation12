@@ -84,6 +84,7 @@
 
 	if(drained_this_tick)
 		return
+	drained_this_tick = 1
 
 	var/drained = 0
 
