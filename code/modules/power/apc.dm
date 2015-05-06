@@ -183,8 +183,8 @@
 		cell.loc = loc
 		cell = null
 	if(terminal)
-		disconnect_terminal()
-
+		qdel(terminal)
+		terminal = null
 	..()
 
 /obj/machinery/power/apc/proc/make_terminal()

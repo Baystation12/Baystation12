@@ -78,7 +78,7 @@ var/list/delayed_garbage = list()
 	destroyed["\ref[A]"] = world.time
 
 /datum/controller/process/garbage_collector/getStatName()
-	return ..()+"([garbage_collector.dels]/[garbage_collector.hard_dels])"
+	return ..()+"([garbage_collector.destroyed.len]/[garbage_collector.dels]/[garbage_collector.hard_dels])"
 
 // Should be treated as a replacement for the 'del' keyword.
 // Datums passed to this will be given a chance to clean up references to allow the GC to collect them.
@@ -120,7 +120,7 @@ var/list/delayed_garbage = list()
 /icon/finalize_qdel()
 	del(src)
 
-/imagine/finalize_qdel()
+/image/finalize_qdel()
 	del(src)
 
 /mob/finalize_qdel()
