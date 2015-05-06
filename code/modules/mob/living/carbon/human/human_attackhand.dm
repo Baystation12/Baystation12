@@ -89,12 +89,7 @@
 			LAssailant = M
 
 			playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
-			if(M.dir == src.dir)
-				G.state = GRAB_AGGRESSIVE
-				G.adjust_position()
-				visible_message("<span class ='warning'>[M] has grabbed [src] from behind!</span>")
-			else
-				visible_message("<span class='warning'>[M] has grabbed [src] passively!</span>")
+			visible_message("<span class='warning'>[M] has grabbed [src] passively!</span>")
 			return 1
 
 		if(I_HURT)

@@ -41,6 +41,16 @@
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 		new /obj/item/stack/sheet/metal(src.loc)
 		del(src)
+	else if(istype(W, /obj/item/weapon/grab))
+		user.visible_message("<span class='notice'>[user] attempts to buckle [W:affecting] into \the [src]!</span>")
+		if(do_after(user, 20))
+			W:affecting.loc = loc
+			if(buckle_mob(W:affecting))
+				W:affecting.visible_message(\
+					"<span class='danger'>[W:affecting.name] is buckled to [src] by [user.name]!</span>",\
+					"<span class='danger'>You are buckled to [src] by [user.name]!</span>",\
+					"<span class='notice'>You hear metal clanking.</span>")
+
 	else
 		..()
 
