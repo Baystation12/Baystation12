@@ -347,14 +347,17 @@ Class Procs:
 	if(is_assess_emagged())
 		return 10	//if emagged, always return 10.
 
-	threatcount += on_assess_perp(perp)
-	if(threatcount >= 10)
-		return threatcount
-
 	//Agent cards lower threatlevel.
 	var/obj/item/weapon/card/id/id = GetIdCard(perp)
 	if(id && istype(id, /obj/item/weapon/card/id/syndicate))
 		threatcount -= 2
+	// A proper	CentCom id is hard currency.
+	else if(id && istype(id, /obj/item/weapon/card/id/centcom))
+		return 0
+
+	threatcount += on_assess_perp(perp)
+	if(threatcount >= 10)
+		return threatcount
 
 	if(auth_weapons && !src.allowed(perp))
 		if(istype(perp.l_hand, /obj/item/weapon/gun) || istype(perp.l_hand, /obj/item/weapon/melee))
