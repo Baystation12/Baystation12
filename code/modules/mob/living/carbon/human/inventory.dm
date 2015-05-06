@@ -315,6 +315,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 
 	W.layer = 20
 
+	update_action_buttons()
 	return 1
 
 //Checks if a given slot can be accessed at this time, either to equip or unequip I

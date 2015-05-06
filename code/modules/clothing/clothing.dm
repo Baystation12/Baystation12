@@ -265,6 +265,7 @@ BLIND     // can't see anything
 		on = !on
 		user << "You [on ? "enable" : "disable"] the helmet light."
 		update_light(user)
+		user.update_action_buttons()
 	else
 		return ..(user)
 

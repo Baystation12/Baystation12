@@ -25,6 +25,7 @@
 		if(icon_base) icon_state = "[icon_base]1"
 		user << "You enable the mag-pulse traction system."
 	user.update_inv_shoes()	//so our mob-overlays update
+	user.update_action_buttons()
 
 /obj/item/clothing/shoes/magboots/examine(mob/user)
 	..(user)

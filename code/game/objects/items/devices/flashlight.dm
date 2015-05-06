@@ -43,6 +43,7 @@
 		return 0
 	on = !on
 	update_brightness(user)
+	user.update_action_buttons()
 	return 1
 
 
