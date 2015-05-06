@@ -33,7 +33,7 @@
 			icon_state = "breath"
 			user << "You pull the mask up to cover your face."
 		update_clothing_icon()
-		update_action_buttons()
+		user.update_action_buttons()
 
 /obj/item/clothing/mask/breath/attack_self(mob/user)
 	adjust_mask(user)

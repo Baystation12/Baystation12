@@ -49,7 +49,7 @@
 			icon_state = "[initial(icon_state)]up"
 			usr << "You push the [src] up out of your face."
 		update_clothing_icon()	//so our mob-overlays update
-		update_action_buttons()
+		usr.update_action_buttons()
 
 
 /*
