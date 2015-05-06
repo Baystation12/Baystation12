@@ -151,13 +151,13 @@ var/list/solars_list = list()
 
 /obj/machinery/power/solar/ex_act(severity)
 	switch(severity)
-		if(1.0)
+		if(0.0 to 1.0)
 			if(prob(15))
 				new /obj/item/weapon/shard( src.loc )
 			qdel(src)
 			return
 
-		if(2.0)
+		if(1.0 to 2.0)
 			if (prob(25))
 				new /obj/item/weapon/shard( src.loc )
 				qdel(src)
@@ -166,7 +166,7 @@ var/list/solars_list = list()
 			if (prob(50))
 				broken()
 
-		if(3.0)
+		if(2.0 to 3.0)
 			if (prob(25))
 				broken()
 	return
@@ -527,14 +527,14 @@ var/list/solars_list = list()
 
 /obj/machinery/power/solar_control/ex_act(severity)
 	switch(severity)
-		if(1.0)
+		if(0.0 to 1.0)
 			//SN src = null
 			qdel(src)
 			return
-		if(2.0)
+		if(1.0 to 2.0)
 			if (prob(50))
 				broken()
-		if(3.0)
+		if(2.0 to 3.0)
 			if (prob(25))
 				broken()
 	return

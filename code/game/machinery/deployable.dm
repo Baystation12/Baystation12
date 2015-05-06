@@ -96,11 +96,11 @@ for reference:
 
 	ex_act(severity)
 		switch(severity)
-			if(1.0)
+			if(0.0 to 1.0)
 				visible_message("\red <B>The barricade is blown apart!</B>")
 				qdel(src)
 				return
-			if(2.0)
+			if(1.0 to 2.0)
 				src.health -= 25
 				if (src.health <= 0)
 					visible_message("\red <B>The barricade is blown apart!</B>")
@@ -224,10 +224,10 @@ for reference:
 
 	ex_act(severity)
 		switch(severity)
-			if(1.0)
+			if(0.0 to 1.0)
 				src.explode()
 				return
-			if(2.0)
+			if(1.0 to 2.0)
 				src.health -= 25
 				if (src.health <= 0)
 					src.explode()

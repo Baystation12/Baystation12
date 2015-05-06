@@ -237,14 +237,14 @@
 
 /obj/effect/plant/ex_act(severity)
 	switch(severity)
-		if(1.0)
+		if(0.0 to 1.0)
 			die_off()
 			return
-		if(2.0)
+		if(1.0 to 2.0)
 			if (prob(50))
 				die_off()
 				return
-		if(3.0)
+		if(2.0 to 3.0)
 			if (prob(5))
 				die_off()
 				return

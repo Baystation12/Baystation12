@@ -328,16 +328,16 @@
 	if(!blinded)
 		flick("flash", flash)
 	switch (severity)
-		if (1.0)
+		if(0.0 to 1.0)
 			adjustBruteLoss(500)
 			gib()
 			return
 
-		if (2.0)
+		if(1.0 to 2.0)
 			adjustBruteLoss(60)
 
 
-		if(3.0)
+		if(2.0 to 3.0)
 			adjustBruteLoss(30)
 
 /mob/living/simple_animal/adjustBruteLoss(damage)

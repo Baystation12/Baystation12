@@ -1206,18 +1206,18 @@ obj/machinery/power/apc/proc/autoset(var/val, var/on)
 /obj/machinery/power/apc/ex_act(severity)
 
 	switch(severity)
-		if(1.0)
+		if(0.0 to 1.0)
 			//set_broken() //now Del() do what we need
 			if (cell)
 				cell.ex_act(1.0) // more lags woohoo
 			qdel(src)
 			return
-		if(2.0)
+		if(1.0 to 2.0)
 			if (prob(50))
 				set_broken()
 				if (cell && prob(50))
 					cell.ex_act(2.0)
-		if(3.0)
+		if(2.0 to 3.0)
 			if (prob(25))
 				set_broken()
 				if (cell && prob(25))

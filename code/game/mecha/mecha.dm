@@ -616,15 +616,15 @@
 		severity++
 		src.log_append_to_last("Armor saved, changing severity to [severity].")
 	switch(severity)
-		if(1.0)
+		if(0.0 to 1.0)
 			qdel(src)
-		if(2.0)
+		if(1.0 to 2.0)
 			if (prob(30))
 				qdel(src)
 			else
 				src.take_damage(initial(src.health)/2)
 				src.check_for_internal_damage(list(MECHA_INT_FIRE,MECHA_INT_TEMP_CONTROL,MECHA_INT_TANK_BREACH,MECHA_INT_CONTROL_LOST,MECHA_INT_SHORT_CIRCUIT),1)
-		if(3.0)
+		if(2.0 to 3.0)
 			if (prob(5))
 				qdel(src)
 			else

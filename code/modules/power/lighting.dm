@@ -580,13 +580,13 @@
 
 /obj/machinery/light/ex_act(severity)
 	switch(severity)
-		if(1.0)
+		if(0.0 to 1.0)
 			qdel(src)
 			return
-		if(2.0)
+		if(1.0 to 2.0)
 			if (prob(75))
 				broken()
-		if(3.0)
+		if(2.0 to 3.0)
 			if (prob(50))
 				broken()
 	return
