@@ -37,5 +37,4 @@
 		i++
 
 /obj/item/weapon/storage/donut_box/empty
-	icon_state = "donutbox0"
 	startswith = 0
