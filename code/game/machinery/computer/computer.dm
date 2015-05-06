@@ -60,6 +60,9 @@
 	return
 
 /obj/machinery/computer/bullet_act(var/obj/item/projectile/Proj)
+	if(!(Proj.damage_type == BRUTE || Proj.damage_type == BURN))
+		return
+
 	if(prob(Proj.damage))
 		set_broken()
 	..()
