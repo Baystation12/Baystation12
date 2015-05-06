@@ -294,3 +294,11 @@
 	New()
 		access = get_all_centcom_access()
 		..()
+
+/obj/item/weapon/card/id/centcom/ERT
+	name = "\improper Emergency Response Team ID"
+	assignment = "Emergency Response Team"
+		
+/obj/item/weapon/card/id/centcom/ERT/New()
+	..()
+	access += get_all_accesses()
