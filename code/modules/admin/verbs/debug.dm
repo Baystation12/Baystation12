@@ -555,7 +555,9 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	for (var/obj/item/I in M)
 		if (istype(I, /obj/item/weapon/implant))
 			continue
-		qdel(I)
+		M.drop_from_inventory(I)
+		if(I.loc != M)
+			qdel(I)
 	switch(dresscode)
 		if ("strip")
 			//do nothing
