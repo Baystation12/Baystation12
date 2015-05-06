@@ -30,6 +30,12 @@
 	power_change()		// all machines set to current power level, also updates lighting icon
 	InitializeLighting()
 
+/area/proc/get_contents()
+	var/list/concat_contents = list()
+	for (var/area/RA in related)
+		concat_contents |= RA.contents
+	return concat_contents
+
 /area/proc/get_cameras()
 	var/list/cameras = list()
 	for (var/area/RA in related)
