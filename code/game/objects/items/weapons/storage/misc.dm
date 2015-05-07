@@ -36,6 +36,10 @@
 		overlays += img
 		i++
 
+<<<<<<< HEAD
 /obj/item/weapon/storage/box/donut/empty
 	icon_state = "donutbox0"
+=======
+/obj/item/weapon/storage/donut_box/empty
+>>>>>>> upstream/master
 	startswith = 0
