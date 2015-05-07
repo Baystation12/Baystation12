@@ -27,7 +27,7 @@
 	for(var/mob/dead/observer/O in player_list)
 		if(jobban_isbanned(O, "Dionaea"))
 			continue
-		if(O.client)
+		if(O.client && O.MayRespawn())
 			if(O.client.prefs.be_special & BE_PLANT && !(O.client in currently_querying))
 				currently_querying |= O.client
 				question(O.client,host)
