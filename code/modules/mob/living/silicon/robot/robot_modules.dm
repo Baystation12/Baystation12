@@ -36,27 +36,31 @@ var/global/list/robot_modules = list(
 	// Bookkeeping
 	var/list/added_languages = list()
 	var/list/added_networks = list()
-	var/obj/item/device/radio/borg/modified_radio = null
-	var/list/modified_key = null
-	var/list/original_radio_channels = list()
 
 /obj/item/weapon/robot_module/New(var/mob/living/silicon/robot/R)
 	..()
 	add_camera_networks(R)
 	add_languages(R)
-	add_radio_channels(R)
 	add_subsystems(R)
 	apply_status_flags(R)
 
+	if(R.radio)
+		R.radio.recalculateChannels()
+
 /obj/item/weapon/robot_module/proc/Reset(var/mob/living/silicon/robot/R)
-	..()
+	R.module = null
+
 	remove_camera_networks(R)
 	remove_languages(R)
-	remove_radio_channels(R)
 	remove_subsystems(R)
 	remove_status_flags(R)
 
-/obj/item/weapon/robot_module/Destroy()	
+	if(R.radio)
+		R.radio.recalculateChannels()
+
+	qdel(src)
+
+/obj/item/weapon/robot_module/Destroy()
 	qdel(modules)
 	qdel(synths)
 	qdel(emag)
@@ -114,23 +118,6 @@ var/global/list/robot_modules = list(
 	if(R.camera)
 		R.camera.remove_networks(added_networks)
 	added_networks.Cut()
-
-/obj/item/weapon/robot_module/proc/add_radio_channels(var/mob/living/silicon/robot/R)
-	if(!R.radio)
-		return
-
-	modified_radio = R.radio
-	modified_key = R.radio.keyslot
-	original_radio_channels = modified_radio.channels.Copy()
-	modified_radio.config(channels)
-
-/obj/item/weapon/robot_module/proc/remove_radio_channels(var/mob/living/silicon/robot/R)
-	// Only reset if the original radio component hasn't been altered/replaced
-	if(!(R.radio && R.radio == modified_radio && R.radio.keyslot == modified_key))
-		return
-
-	modified_radio.config(original_radio_channels)
-	original_radio_channels.Cut()
 
 /obj/item/weapon/robot_module/proc/add_subsystems(var/mob/living/silicon/robot/R)
 	R.verbs |= subsystems
