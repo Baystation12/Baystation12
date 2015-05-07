@@ -342,18 +342,16 @@
 	switch(severity)
 		if(0.0 to 1.0)
 			qdel(src)
-		if(1.0 to 2.0)
-			if(prob(25))
-				qdel(src)
-			else
-				take_damage(300)
-		if(2.0 to 3.0)
+		if(1.0 to 3.0)
 			if(prob(80))
 				var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 				s.set_up(2, 1, src)
 				s.start()
+			var/damage_taken = (3-severity) * maxhealth
+			if (src.health - damage_taken <= -maxhealth/2)
+				qdel(src)
 			else
-				take_damage(150)
+				take_damage(damage_taken)
 	return
 
 

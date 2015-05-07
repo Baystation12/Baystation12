@@ -103,7 +103,7 @@ var/list/wood_icons = list("wood","wood-broken")
 				src.break_tile()
 			src.hotspot_expose(1000,CELL_VOLUME)
 		if(2.0 to 3.0)
-			if (prob(50))
+			if (prob((3.0-severity)*100))
 				src.break_tile()
 				src.hotspot_expose(1000,CELL_VOLUME)
 	return

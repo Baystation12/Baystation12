@@ -46,10 +46,7 @@ proc/explosion_rec(turf/epicenter, power)
 		if(explosion_turfs[T] <= 0) continue
 		if(!T) continue
 
-		//Wow severity looks confusing to calculate... Fret not, I didn't leave you with any additional instructions or help. (just kidding, see the line under the calculation)
-		var/severity = 4 - max(min( 3, ((explosion_turfs[T] - T.explosion_resistance) / (max(3,(power/3)))) ) ,1)								//sanity			effective power on tile				divided by either 3 or one third the total explosion power
-								//															One third because there are three power levels and I
-								//															want each one to take up a third of the crater
+		var/severity = max(min( 3.00 - 3*((explosion_turfs[T] - (T.explosion_resistance-1)/3)/25) ,3.0),0.0)		//Explosion resistance divided by 3 so that walls get damaged more. Stuff divided by 25 because that seems to work best (increasing the number decreases the proportion of the explosion area "devastated")
 		var/x = T.x
 		var/y = T.y
 		var/z = T.z
@@ -89,7 +86,7 @@ proc/explosion_rec(turf/epicenter, power)
 	explosion_resistance = 10
 
 /turf/simulated/wall/r_wall
-	explosion_resistance = 25
+	explosion_resistance = 20
 
 //Code-wise, a safe value for power is something up to ~25 or ~30.. This does quite a bit of damage to the station.
 //direction is the direction that the spread took to come to this tile. So it is pointing in the main blast direction - meaning where this tile should spread most of it's force.
@@ -116,7 +113,7 @@ proc/explosion_rec(turf/epicenter, power)
 	T = get_step(src, turn(direction,90))
 	T.explosion_spread(spread_power, turn(direction,90))
 	T = get_step(src, turn(direction,-90))
-	T.explosion_spread(spread_power, turn(direction,90))
+	T.explosion_spread(spread_power, turn(direction,-90))
 
 /turf/unsimulated/explosion_spread(power)
 	return //So it doesn't get to the parent proc, which simulates explosions

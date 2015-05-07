@@ -22,9 +22,9 @@
 	closed_layer = 3.3 // Above airlocks when closed
 	var/id = 1.0
 	dir = 1
-	explosion_resistance = 25
-	
-	//Most blast doors are infrequently toggled and sometimes used with regular doors anyways, 
+	explosion_resistance = 20
+
+	//Most blast doors are infrequently toggled and sometimes used with regular doors anyways,
 	//turning this off prevents awkward zone geometry in places like medbay lobby, for example.
 	block_air_zones = 0
 
@@ -179,3 +179,4 @@ obj/machinery/door/blast/regular
 	icon_state_closed = "shutter1"
 	icon_state_closing = "shutterc1"
 	icon_state = "shutter1"
+	explosion_resistance = 5

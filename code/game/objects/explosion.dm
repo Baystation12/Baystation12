@@ -90,9 +90,9 @@ proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impa
 		for(var/turf/T in range(epicenter, max_range))
 			var/dist = cheap_pythag(T.x - x0,T.y - y0)
 
-			if(dist < devastation_range)		dist = 1
-			else if(dist < heavy_impact_range)	dist = 2
-			else if(dist < light_impact_range)	dist = 3
+			if(dist < devastation_range)		dist = rand(1,10)/10
+			else if(dist < heavy_impact_range)	dist = rand(11,20)/10
+			else if(dist < light_impact_range)	dist = rand(21,30)/10
 			else								continue
 
 			T.ex_act(dist)
@@ -124,7 +124,7 @@ proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impa
 
 proc/secondaryexplosion(turf/epicenter, range)
 	for(var/turf/tile in range(range, epicenter))
-		tile.ex_act(2)
+		tile.ex_act(rand(11,20)/10)
 
 ///// Z-Level Stuff
 proc/explosion_z_transfer(turf/epicenter, devastation_range, heavy_impact_range, light_impact_range, flash_range, up = 1, down = 1)
