@@ -442,18 +442,21 @@
 		if(cell)
 			user << "There is a power cell already installed."
 			return
-		else
-			if (stat & MAINT)
-				user << "<span class='warning'>There is no connector for your power cell.</span>"
-				return
-			user.drop_item()
-			W.loc = src
-			cell = W
-			user.visible_message(\
-				"<span class='warning'>[user.name] has inserted the power cell to [src.name]!</span>",\
-				"<span class='notice'>You insert the power cell.</span>")
-			chargecount = 0
-			update_icon()
+		if (stat & MAINT)
+			user << "<span class='warning'>There is no connector for your power cell.</span>"
+			return
+		if(W.w_class != 3)
+			user << "\The [W] is too [W.w_class < 3? "small" : "large"] to fit here."
+			return
+		
+		user.drop_item()
+		W.loc = src
+		cell = W
+		user.visible_message(\
+			"<span class='warning'>[user.name] has inserted the power cell to [src.name]!</span>",\
+			"<span class='notice'>You insert the power cell.</span>")
+		chargecount = 0
+		update_icon()
 	else if	(istype(W, /obj/item/weapon/screwdriver))	// haxing
 		if(opened)
 			if (cell)
