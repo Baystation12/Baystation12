@@ -1,5 +1,0 @@
-author: RavingManiac
-delete-after: true
-changes:
-  - rscadd: "Muzzle-flash lighting effect for guns"
-  - rscadd: "Energy guns now display shots remaining on examine"

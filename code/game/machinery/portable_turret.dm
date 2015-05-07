@@ -504,42 +504,12 @@
 
 /obj/machinery/porta_turret/proc/assess_perp(var/mob/living/carbon/human/H)
 	if(!H || !istype(H))
-		return
+		return 0
 
 	if(emagged)
 		return 10
 
-	var/threatcount = 0
-	var/obj/item/weapon/card/id/id = GetIdCard(H) //Agent cards lower threatlevel.
-	if(id && istype(id, /obj/item/weapon/card/id/syndicate))
-		threatcount -= 2
-
-	if(check_weapons && !allowed(H))
-		if(istype(H.l_hand, /obj/item/weapon/gun) || istype(H.l_hand, /obj/item/weapon/melee))
-			threatcount += 4
-
-		if(istype(H.r_hand, /obj/item/weapon/gun) || istype(H.r_hand, /obj/item/weapon/melee))
-			threatcount += 4
-
-		if(istype(H.belt, /obj/item/weapon/gun) || istype(H.belt, /obj/item/weapon/melee))
-			threatcount += 2
-
-		if(H.species.name != "Human")
-			threatcount += 2
-
-	if(check_records || check_arrest)
-		var/perpname = H.name
-		if(id)
-			perpname = id.registered_name
-
-		var/datum/data/record/R = find_security_record("name", perpname)
-		if(check_records && !R)
-			threatcount += 4
-
-		if(check_arrest && R && (R.fields["criminal"] == "*Arrest*"))
-			threatcount += 4
-
-	return threatcount
+	return H.assess_perp(src, check_weapons, check_records, check_arrest)
 
 /obj/machinery/porta_turret/proc/tryToShootAt(var/list/mob/living/targets)
 	if(targets.len && last_target && (last_target in targets) && target(last_target))
@@ -587,17 +557,6 @@
 	invisibility = INVISIBILITY_LEVEL_TWO
 	update_icon()
 
-
-/*
-/obj/machinery/porta_turret/on_assess_perp(mob/living/carbon/human/perp)
-	if((check_access || attacked) && !allowed(perp))
-		//if the turret has been attacked or is angry, target all non-authorized personnel, see req_access
-		return 10
-
-	return ..()
-	*/
-
-
 /obj/machinery/porta_turret/proc/target(var/mob/living/target)
 	if(disabled)
 		return
@@ -613,7 +572,7 @@
 
 /obj/machinery/porta_turret/proc/shootAt(var/mob/living/target)
 	//any emagged turrets will shoot extremely fast! This not only is deadly, but drains a lot power!
-	if(!emagged)	//if it hasn't been emagged, it has to obey a cooldown rate
+	if(!(emagged || attacked))		//if it hasn't been emagged or attacked, it has to obey a cooldown rate
 		if(last_fired || !raised)	//prevents rapid-fire shooting, unless it's been emagged
 			return
 		last_fired = 1
