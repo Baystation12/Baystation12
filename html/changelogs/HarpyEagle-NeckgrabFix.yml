@@ -3,3 +3,4 @@ delete-after: True
 
 changes: 
   - bugfix: "Neck-grabbing someone now stuns them properly."
+  - rscadd: "Breaking out of lockers now has sound and animation."
