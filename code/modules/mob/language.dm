@@ -254,7 +254,7 @@
 	speech_verb = "hums"
 	ask_verb = "thrum"
 	exclaim_verb = "mumur"
-	colour = "#625053"
+	colour = "#7ED6CB"
 	key = "i"
 	native = 1
 	flags = WHITELISTED | HIVEMIND
