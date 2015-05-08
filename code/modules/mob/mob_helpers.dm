@@ -93,10 +93,10 @@
 /mob/living/silicon/ai/isAI()
 	return 1
 
-/mob/proc/isRobot()
+/mob/proc/isMobAI()
 	return 0
 
-/mob/living/silicon/robot/isRobot()
+/mob/living/silicon/ai/isMobAI()
 	return 1
 
 /mob/proc/isSynthetic()
