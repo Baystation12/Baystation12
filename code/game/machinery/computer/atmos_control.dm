@@ -93,6 +93,6 @@
 /datum/topic_state/air_alarm/href_list(var/mob/user)
 	var/list/extra_href = list()
 	extra_href["remote_connection"] = 1
-	extra_href["remote_access"] = user && (user.isAI() || atmos_control.allowed(user) || atmos_control.emagged || air_alarm.rcon_setting == RCON_YES || (air_alarm.alarm_area.atmosalm && air_alarm.rcon_setting == RCON_AUTO))
+	extra_href["remote_access"] = user && (user.isMobAI() || atmos_control.allowed(user) || atmos_control.emagged || air_alarm.rcon_setting == RCON_YES || (air_alarm.alarm_area.atmosalm && air_alarm.rcon_setting == RCON_AUTO))
 
 	return extra_href
