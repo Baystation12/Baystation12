@@ -82,6 +82,7 @@
 
 /mob/living/silicon/isSilicon()
 	return 1
+
 /proc/isAI(A)
 	if(istype(A, /mob/living/silicon/ai))
 		return 1
