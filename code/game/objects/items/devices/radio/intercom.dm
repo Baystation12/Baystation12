@@ -11,12 +11,17 @@
 	var/mob/living/silicon/ai/ai = list()
 	var/last_tick //used to delay the powercheck
 
-/obj/item/device/radio/intercom/New()
+/obj/item/device/radio/intercom/New(turf/loc, var/ndir = 0)
 	..()
-	processing_objects += src
+	processing_objects.Add(src)
+	if(ndir)
+		pixel_x = (ndir & (NORTH|SOUTH))? 0 : (ndir == EAST ? 28 : -28)
+		pixel_y = (ndir & (NORTH|SOUTH))? (ndir == NORTH ? 28 : -28) : 0
+		set_dir(ndir)
+	update_icon()
 
 /obj/item/device/radio/intercom/Destroy()
-	processing_objects -= src
+	processing_objects.Remove(src)
 	..()
 
 /obj/item/device/radio/intercom/attack_ai(mob/user as mob)
@@ -28,6 +33,14 @@
 	src.add_fingerprint(user)
 	spawn (0)
 		attack_self(user)
+
+/obj/item/device/radio/intercom/attack_self(mob/user as mob)
+	if(b_stat && wires.IsAllCut() && !user.isMobAI())
+		var/frame = new /obj/item/mounted/frame/intercom(get_turf(src))
+		user.visible_message("<span class='warning'>[user] has removed \the [frame] from the wall!</span>", "<span class='notice'>You remove \the [frame] from the wall.</span>")
+		qdel(src)
+	else
+		..()
 
 /obj/item/device/radio/intercom/receive_range(freq, level)
 	if (!on)
