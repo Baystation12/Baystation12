@@ -535,6 +535,28 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 				log.parameters["message"] = signal.data["message"]
 				log.parameters["name"] = signal.data["name"]
 				log.parameters["realname"] = signal.data["realname"]
+				log.parameters["language"] = signal.data["language"]
+
+				var/race = "unknown"
+				if(ishuman(M))
+					var/mob/living/carbon/human/H = M
+					race = "[H.species.name]"
+					log.parameters["intelligible"] = 1
+				else if(isbrain(M))
+					var/mob/living/carbon/brain/B = M
+					race = "[B.species.name]"
+					log.parameters["intelligible"] = 1
+				else if(ismonkey(M))
+					race = "Monkey"
+				else if(issilicon(M))
+					race = "Artificial Life"
+					log.parameters["intelligible"] = 1
+				else if(isslime(M))
+					race = "Slime"
+				else if(isanimal(M))
+					race = "Domestic Animal"
+
+				log.parameters["race"] = race
 
 				if(!istype(M, /mob/new_player) && M)
 					log.parameters["uspeech"] = M.universal_speak
