@@ -1,0 +1,5 @@
+author: Yoshax
+delete-after: True
+
+changes: 
+  - tweak: "Reduces sleep toxin pumped into clones from 10 to 3, allowing clones to wake up on their own without Doctor assistance in a more reasonable amount of time."

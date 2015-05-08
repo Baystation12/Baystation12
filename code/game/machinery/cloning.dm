@@ -186,8 +186,8 @@
 				occupant.reagents.add_reagent("inaprovaline", 60)
 
 			//So clones will remain asleep for long enough to get them into cryo (Bay RP edit)
-			if(occupant.reagents.get_reagent_amount("stoxin") < 10)
-				occupant.reagents.add_reagent("stoxin", 5)
+			if(occupant.reagents.get_reagent_amount("stoxin") < 3)
+				occupant.reagents.add_reagent("stoxin", 3)
 			if(occupant.reagents.get_reagent_amount("chloralhydrate") < 1)
 				occupant.reagents.add_reagent("chloralhydrate", 1)
 
