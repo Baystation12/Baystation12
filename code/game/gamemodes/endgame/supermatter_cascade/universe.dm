@@ -83,11 +83,10 @@ AUTOMATED ALERT: Link to [command_name()] lost."}
 		return
 
 /datum/universal_state/supermatter_cascade/proc/AreaSet()
-	for(var/area/ca in world)
-		var/area/A=ca.master
+	for(var/area/A in world)
 		if(A.z in config.admin_levels)
 			continue
-		if(!istype(A,/area) || istype(A,/area/space))
+		if(istype(A,/area/space))
 			continue
 
 		// Reset all alarms.

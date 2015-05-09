@@ -96,18 +96,17 @@
 * Assisting procs *
 ******************/
 /atom/proc/get_alarm_area()
-	var/area/A = get_area(src)
-	return A.master
+	return get_area(src)
 
 /area/get_alarm_area()
-	return src.master
+	return src
 
 /atom/proc/get_alarm_name()
 	var/area/A = get_area(src)
-	return A.master.name
+	return A.name
 
 /area/get_alarm_name()
-	return master.name
+	return name
 
 /mob/get_alarm_name()
 	return name

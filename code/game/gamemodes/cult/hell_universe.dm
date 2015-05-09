@@ -54,9 +54,8 @@ In short:
 	runedec += 9000	//basically removing the rune cap
 
 /datum/universal_state/hell/proc/AreaSet()
-	for(var/area/ca in world)
-		var/area/A = ca.master
-		if(!istype(A,/area) || A.name=="Space")
+	for(var/area/A in world)
+		if(A.name=="Space")
 			continue
 
 		// Reset all alarms.

@@ -152,8 +152,7 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 		if(HOLOPAD_MODE == AREA_BASED)
 			var/area/holo_area = get_area(src)
 			var/area/eye_area = get_area(master.eyeobj)
-			
-			if(!(eye_area in holo_area.master.related))
+			if(eye_area != holo_area)
 				clear_holo(master)
 				continue
 

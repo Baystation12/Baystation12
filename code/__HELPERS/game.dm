@@ -23,7 +23,7 @@
 	var/turf/loc = get_turf(O)
 	if(loc)
 		var/area/res = loc.loc
-		.= res.master
+		.= res
 
 /proc/get_area_name(N) //get area by its name
 	for(var/area/A in world)
@@ -34,7 +34,7 @@
 /proc/get_area_master(const/O)
 	var/area/A = get_area(O)
 	if (isarea(A))
-		return A.master
+		return A
 
 /proc/in_range(source, user)
 	if(get_dist(source, user) <= 1)
