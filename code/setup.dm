@@ -190,12 +190,10 @@
                              // To successfully stop you taking all pressure damage you must have both a suit and head item with this flag.
 #define NOBLUDGEON         2    // When an item has this it produces no "X has been hit by Y with Z" message with the default handler.
 #define AIRTIGHT           4    // Functions with internals.
-#define USEDELAY           8    // 1 second extra delay on use. (Can be used once every 2s)
 #define NOSHIELD           16   // Weapon not affected by shield.
 #define CONDUCT            32   // Conducts electricity. (metal etc.)
 #define ON_BORDER          64   // Item has priority to check when entering or leaving.
 #define NOBLOODY           512  // Used for items if they don't want to get a blood overlay.
-#define NODELAY            8192 // 1 second attack-by delay skipped (Can be used once every 0.2s). Most objects have a 1s attack-by delay, which doesn't require a flag.
 
 //Use these flags to indicate if an item obscures the specified slots from view, whereas body_parts_covered seems to be used to indicate what body parts the item protects.
 #define GLASSESCOVERSEYES 256
@@ -864,8 +862,6 @@ var/list/be_special_flags = list(
 #define SIMPLE_ANIMAL 32
 
 #define ALLMOBS (HUMAN|MONKEY|ALIEN|ROBOT|SLIME|SIMPLE_ANIMAL)
-
-#define NEXT_MOVE_DELAY 8
 
 #define DROPLIMB_EDGE 0
 #define DROPLIMB_BLUNT 1

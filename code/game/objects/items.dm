@@ -159,7 +159,6 @@
 	else
 		if(isliving(src.loc))
 			return
-		user.next_move = max(user.next_move+2,world.time + 2)
 	user.put_in_active_hand(src)
 	if(src.loc == user)
 		src.pickup(user)

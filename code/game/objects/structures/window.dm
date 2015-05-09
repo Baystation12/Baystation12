@@ -175,6 +175,7 @@
 	playsound(loc, 'sound/effects/Glasshit.ogg', 50, 1)
 
 /obj/structure/window/attack_hand(mob/user as mob)
+	user.changeNextMove(8)
 	if(HULK in user.mutations)
 		user.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!"))
 		user.visible_message("<span class='danger'>[user] smashes through [src]!</span>")
@@ -200,6 +201,7 @@
 	return
 
 /obj/structure/window/attack_generic(var/mob/user, var/damage)
+	user.changeNextMove(8)
 	if(!damage)
 		return
 	if(damage >= 10)
@@ -268,6 +270,7 @@
 				new glasstype(loc)
 			qdel(src)
 	else
+		user.changeNextMove(8)
 		if(W.damtype == BRUTE || W.damtype == BURN)
 			hit(W.force)
 			if(health <= 7)

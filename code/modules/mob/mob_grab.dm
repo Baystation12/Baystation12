@@ -120,7 +120,7 @@
 		return
 	if(state == GRAB_UPGRADING)
 		return
-	if(assailant.next_move > world.time)
+	if(!assailant.canClick())
 		return
 	if(world.time < (last_upgrade + UPGRADE_COOLDOWN))
 		return
@@ -170,7 +170,7 @@
 			assailant.attack_log += "\[[time_stamp()]\] <font color='red'>Strangled (kill intent) [affecting.name] ([affecting.ckey])</font>"
 			msg_admin_attack("[key_name(assailant)] strangled (kill intent) [key_name(affecting)]")
 
-			assailant.next_move = world.time + 10
+			affecting.changeNextMove(10)
 			affecting.losebreath += 1
 		else
 			assailant.visible_message("<span class='warning'>[assailant] was unable to tighten \his grip on [affecting]'s neck!</span>")

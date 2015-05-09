@@ -331,7 +331,7 @@
 
 	else
 		//if the turret was attacked with the intention of harming it:
-		user.changeNext_move(NEXT_MOVE_DELAY)
+		user.changeNextMove(8)
 		take_damage(I.force * 0.5)
 		if(I.force * 0.5 > 1) //if the force of impact dealt at least 1 damage, the turret gets pissed off
 			if(!attacked && !emagged)

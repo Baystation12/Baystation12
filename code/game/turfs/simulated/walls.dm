@@ -272,6 +272,7 @@
 
 //Interactions
 /turf/simulated/wall/attack_hand(mob/user as mob)
+	user.changeNextMove(8)
 	if (HULK in user.mutations)
 		if (prob(hulk_destroy_prob) || rotting)
 			usr << text("\blue You smash through the wall.")
@@ -298,6 +299,7 @@
 	return 0
 
 /turf/simulated/wall/attack_generic(var/mob/user, var/damage, var/attack_message, var/wallbreaker)
+	user.changeNextMove(8)
 	if(!damage || !wallbreaker)
 		user << "You push the wall but nothing happens."
 		return

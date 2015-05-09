@@ -263,6 +263,7 @@
 	//psa to whoever coded this, there are plenty of objects that need to call attack() on doors without bludgeoning them.
 	if(src.density && istype(I, /obj/item/weapon) && user.a_intent == I_HURT && !istype(I, /obj/item/weapon/card))
 		var/obj/item/weapon/W = I
+		user.changeNextMove(8)
 		if(W.damtype == BRUTE || W.damtype == BURN)
 			if(W.force < min_force)
 				user.visible_message("\red <B>\The [user] hits \the [src] with \the [W] with no visible effect.</B>" )

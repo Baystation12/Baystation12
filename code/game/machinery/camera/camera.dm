@@ -187,6 +187,7 @@
 			src.bugged = 1
 
 	else if(W.damtype == BRUTE || W.damtype == BURN) //bashing cameras
+		user.changeNextMove(8)
 		if (W.force >= src.toughness)
 			visible_message("<span class='warning'><b>[src] has been [pick(W.attack_verb)] with [W] by [user]!</b></span>")
 			if (istype(W, /obj/item)) //is it even possible to get into attackby() with non-items?

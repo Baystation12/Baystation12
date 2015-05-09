@@ -80,6 +80,7 @@ for reference:
 					return
 			return
 		else
+			user.changeNextMove(8)
 			switch(W.damtype)
 				if("fire")
 					src.health -= W.force * 1
