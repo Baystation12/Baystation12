@@ -815,6 +815,7 @@
 #include "code\modules\admin\verbs\deadsay.dm"
 #include "code\modules\admin\verbs\debug.dm"
 #include "code\modules\admin\verbs\diagnostics.dm"
+#include "code\modules\admin\verbs\dice.dm"
 #include "code\modules\admin\verbs\getlogs.dm"
 #include "code\modules\admin\verbs\icarus.dm"
 #include "code\modules\admin\verbs\mapping.dm"
