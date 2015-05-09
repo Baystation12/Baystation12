@@ -56,8 +56,7 @@ var/list/command_positions = list(
 	"Head of Security",
 	"Chief Engineer",
 	"Research Director",
-	"Chief Medical Officer",
-	"Lawyer"
+	"Chief Medical Officer"
 )
 
 
@@ -97,6 +96,7 @@ var/list/civilian_positions = list(
 	"Quartermaster",
 	"Cargo Technician",
 	"Shaft Miner",
+	"Lawyer",
 	"Chaplain",
 	"Assistant"
 )
