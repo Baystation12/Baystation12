@@ -198,18 +198,26 @@
 	if(armed)
 		if(ishuman(AM))
 			if(isturf(src.loc))
-				var/mob/living/carbon/H = AM
+				var/mob/living/carbon/human/H = AM
 				if(H.m_intent == "run")
 					armed = 0
 					H.legcuffed = src
 					src.loc = H
 					H.update_inv_legcuffed()
-					H << "\red <B>You step on \the [src]!</B>"
+					H << "<span class='danger'>You step on \the [src]!</span>"
+
+					var/obj/item/organ/external/affecting = H.get_organ(pick("l_leg", "r_leg"))
 					feedback_add_details("handcuffs","B") //Yes, I know they're legcuffs. Don't change this, no need for an extra variable. The "B" is used to tell them apart.
 					for(var/mob/O in viewers(H, null))
 						if(O == H)
 							continue
-						O.show_message("\red <B>[H] steps on \the [src].</B>", 1)
+						O.show_message("<span class='danger'>[H] steps on \the [src].</span>", 1)
+
+					affecting.take_damage(35, 0)
+					H.UpdateDamageIcon()
+					H.updatehealth()
+
+
 		if(isanimal(AM) && !istype(AM, /mob/living/simple_animal/parrot) && !istype(AM, /mob/living/simple_animal/construct) && !istype(AM, /mob/living/simple_animal/shade) && !istype(AM, /mob/living/simple_animal/hostile/viscerator))
 			armed = 0
 			var/mob/living/simple_animal/SA = AM
