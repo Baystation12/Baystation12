@@ -19,6 +19,7 @@ Thus, the two variables affect pump operation are set in New():
 
 	name = "gas pump"
 	desc = "A pump"
+	var/on = 0
 	var/badpump = 0
 	var/on = 0
 	var/alerted = 0
@@ -26,11 +27,10 @@ Thus, the two variables affect pump operation are set in New():
 
 	//var/max_volume_transfer = 10000
 
-	use_power = 1
+	use_power = 0
 	idle_power_usage = 150		//internal circuitry, friction losses and stuff
-	active_power_usage = 7500	//This also doubles as a measure of how powerful the pump is, in Watts. 7500 W ~ 10 HP
+	power_rating = 7500			//7500 W ~ 10 HP
 
-	var/last_power_draw = 0			//for UI
 	var/max_pressure_setting = 15000	//kPa
 
 	var/frequency = 0
@@ -44,14 +44,14 @@ Thus, the two variables affect pump operation are set in New():
 
 /obj/machinery/atmospherics/binary/pump/on
 	icon_state = "map_on"
-	on = 1
+	use_power = 1
 
 
 /obj/machinery/atmospherics/binary/pump/update_icon()
 	if(!powered())
 		icon_state = "off"
 	else
-		icon_state = "[on ? "on" : "off"]"
+		icon_state = "[use_power ? "on" : "off"]"
 
 /obj/machinery/atmospherics/binary/pump/update_underlays()
 	if(..())
@@ -66,10 +66,10 @@ Thus, the two variables affect pump operation are set in New():
 	update_underlays()
 
 /obj/machinery/atmospherics/binary/pump/process()
-	if((stat & (NOPOWER|BROKEN)) || !on)
-		update_use_power(0)	//usually we get here because a player turned a pump off - definitely want to update.
-		last_power_draw = 0
-		last_flow_rate = 0
+	last_power_draw = 0
+	last_flow_rate = 0
+
+	if((stat & (NOPOWER|BROKEN)) || !use_power)
 		return
 	var/power_draw = -1
 	var/pressure_delta = target_pressure - air2.return_pressure()
@@ -79,22 +79,12 @@ Thus, the two variables affect pump operation are set in New():
 
 	if(pressure_delta > 0.01 && air1.temperature > 0)
 		//Figure out how much gas to transfer to meet the target pressure.
-		var/air_temperature = (air2.temperature > 0)? air2.temperature : air1.temperature
-		var/output_volume = air2.volume + (network2? network2.volume : 0)
+		var/transfer_moles = calculate_transfer_moles(air1, air2, pressure_delta, (network2)? network2.volume : 0)
+		power_draw = pump_gas(src, air1, air2, transfer_moles, power_rating)
 
-		//get the number of moles that would have to be transfered to bring sink to the target pressure
-		var/transfer_moles = pressure_delta*output_volume/(air_temperature * R_IDEAL_GAS_EQUATION)
-
-		power_draw = pump_gas(src, air1, air2, transfer_moles, active_power_usage)
-
-	if (power_draw < 0)
-		//update_use_power(0)
-		use_power = 0	//don't force update - easier on CPU
-		last_power_draw = 0
-		last_flow_rate = 0
-	else
-		last_power_draw = handle_power_draw(power_draw)
-
+	if (power_draw >= 0)
+		last_power_draw = power_draw
+		use_power(power_draw)
 		if(network1)
 			network1.update = 1
 
@@ -122,7 +112,7 @@ Thus, the two variables affect pump operation are set in New():
 	signal.data = list(
 		"tag" = id,
 		"device" = "AGP",
-		"power" = on,
+		"power" = use_power,
 		"target_output" = target_pressure,
 		"sigtype" = "status"
 	)
@@ -139,12 +129,12 @@ Thus, the two variables affect pump operation are set in New():
 	var/data[0]
 
 	data = list(
-		"on" = on,
+		"on" = use_power,
 		"pressure_set" = round(target_pressure*100),	//Nano UI can't handle rounded non-integers, apparently.
 		"max_pressure" = max_pressure_setting,
 		"last_flow_rate" = round(last_flow_rate*10),
 		"last_power_draw" = round(last_power_draw),
-		"max_power_draw" = active_power_usage,
+		"max_power_draw" = power_rating,
 	)
 
 	// update the ui if it exists, returns null if no ui is passed/found
@@ -168,12 +158,12 @@ Thus, the two variables affect pump operation are set in New():
 
 	if(signal.data["power"])
 		if(text2num(signal.data["power"]))
-			on = 1
+			use_power = 1
 		else
-			on = 0
+			use_power = 0
 
 	if("power_toggle" in signal.data)
-		on = !on
+		use_power = !use_power
 
 	if(signal.data["set_output_pressure"])
 		target_pressure = between(
@@ -204,10 +194,10 @@ Thus, the two variables affect pump operation are set in New():
 	return
 
 /obj/machinery/atmospherics/binary/pump/Topic(href,href_list)
-	if(..()) return
+	if(..()) return 1
 
 	if(href_list["power"])
-		on = !on
+		use_power = !use_power
 
 	switch(href_list["set_press"])
 		if ("min")
@@ -232,7 +222,7 @@ Thus, the two variables affect pump operation are set in New():
 /obj/machinery/atmospherics/binary/pump/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
 	if (!istype(W, /obj/item/weapon/wrench))
 		return ..()
-	if (!(stat & NOPOWER) && on)
+	if (!(stat & NOPOWER) && use_power)
 		user << "\red You cannot unwrench this [src], turn it off first."
 		return 1
 	var/datum/gas_mixture/int_air = return_air()

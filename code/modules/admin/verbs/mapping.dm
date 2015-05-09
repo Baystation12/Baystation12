@@ -162,9 +162,6 @@ var/list/debug_verbs = list (
         ,/client/proc/testZAScolors
         ,/client/proc/testZAScolors_remove
         ,/client/proc/setup_supermatter_engine
-        ,/client/proc/view_power_update_stats_area
-        ,/client/proc/view_power_update_stats_machines
-        ,/client/proc/toggle_power_update_profiling
 		,/client/proc/atmos_toggle_debug
 		,/client/proc/getruntimelog                    /*allows us to access runtime logs to somebody*/
 		,/client/proc/Debug2

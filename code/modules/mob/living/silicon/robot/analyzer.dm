@@ -6,14 +6,14 @@
 	icon_state = "robotanalyzer"
 	item_state = "analyzer"
 	desc = "A hand-held scanner able to diagnose robotic injuries."
-	flags = FPRINT | TABLEPASS | CONDUCT
+	flags = CONDUCT
 	slot_flags = SLOT_BELT
 	throwforce = 3
 	w_class = 2.0
 	throw_speed = 5
 	throw_range = 10
-	matter = list("metal" = 200)
-	origin_tech = "magnets=1;biotech=1"
+	matter = list("metal" = 500, "glass" = 200)
+	origin_tech = "magnets=2;biotech=1;engineering=2"
 	var/mode = 1;
 
 /obj/item/device/robotanalyzer/attack(mob/living/M as mob, mob/living/user as mob)

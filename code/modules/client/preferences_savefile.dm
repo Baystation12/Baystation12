@@ -62,7 +62,7 @@
 	lastchangelog	= sanitize_text(lastchangelog, initial(lastchangelog))
 	UI_style		= sanitize_inlist(UI_style, list("White", "Midnight","Orange","old"), initial(UI_style))
 	be_special		= sanitize_integer(be_special, 0, 65535, initial(be_special))
-	default_slot	= sanitize_integer(default_slot, 1, MAX_SAVE_SLOTS, initial(default_slot))
+	default_slot	= sanitize_integer(default_slot, 1, config.character_slots, initial(default_slot))
 	toggles			= sanitize_integer(toggles, 0, 65535, initial(toggles))
 	UI_style_color	= sanitize_hexcolor(UI_style_color, initial(UI_style_color))
 	UI_style_alpha	= sanitize_integer(UI_style_alpha, 0, 255, initial(UI_style_alpha))
@@ -94,7 +94,7 @@
 	if(!S)					return 0
 	S.cd = "/"
 	if(!slot)	slot = default_slot
-	slot = sanitize_integer(slot, 1, MAX_SAVE_SLOTS, initial(default_slot))
+	slot = sanitize_integer(slot, 1, config.character_slots, initial(default_slot))
 	if(slot != default_slot)
 		default_slot = slot
 		S["default_slot"] << slot
@@ -155,6 +155,11 @@
 	S["flavor_texts_legs"]		>> flavor_texts["legs"]
 	S["flavor_texts_feet"]		>> flavor_texts["feet"]
 
+	//Flavour text for robots.
+	S["flavour_texts_robot_Default"] >> flavour_texts_robot["Default"]
+	for(var/module in robot_module_types)
+		S["flavour_texts_robot_[module]"] >> flavour_texts_robot[module]
+
 	//Miscellaneous
 	S["med_record"]			>> med_record
 	S["sec_record"]			>> sec_record
@@ -185,8 +190,16 @@
 	metadata		= sanitize_text(metadata, initial(metadata))
 	real_name		= reject_bad_name(real_name)
 
-	if(isnull(species))
+	//if(isnull(species))
+	if(isnull(species) || !(species in playable_species))
 		species = "Human"
+
+	if(isnum(underwear))
+		var/list/undies = gender == MALE ? underwear_m : underwear_f
+		underwear = undies[undies[underwear]]
+
+	if(isnum(undershirt))
+		undershirt = undershirt_t[undershirt_t[undershirt]]
 
 	if(isnull(language)) language = "None"
 	if(isnull(spawnpoint)) spawnpoint = "Arrivals Shuttle"
@@ -210,8 +223,6 @@
 	r_eyes			= sanitize_integer(r_eyes, 0, 255, initial(r_eyes))
 	g_eyes			= sanitize_integer(g_eyes, 0, 255, initial(g_eyes))
 	b_eyes			= sanitize_integer(b_eyes, 0, 255, initial(b_eyes))
-	underwear		= sanitize_integer(underwear, 1, underwear_m.len, initial(underwear))
-	undershirt		= sanitize_integer(undershirt, 1, undershirt_t.len, initial(undershirt))
 	backbag			= sanitize_integer(backbag, 1, backbaglist.len, initial(backbag))
 	b_type			= sanitize_text(b_type, initial(b_type))
 
@@ -298,6 +309,11 @@
 	S["flavor_texts_hands"]		<< flavor_texts["hands"]
 	S["flavor_texts_legs"]		<< flavor_texts["legs"]
 	S["flavor_texts_feet"]		<< flavor_texts["feet"]
+
+	//Flavour text for robots.
+	S["flavour_texts_robot_Default"] << flavour_texts_robot["Default"]
+	for(var/module in robot_module_types)
+		S["flavour_texts_robot_[module]"] << flavour_texts_robot[module]
 
 	//Miscellaneous
 	S["med_record"]			<< med_record

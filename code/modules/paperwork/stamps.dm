@@ -4,7 +4,6 @@
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "stamp-qm"
 	item_state = "stamp"
-	flags = FPRINT | TABLEPASS
 	throwforce = 0
 	w_class = 1.0
 	throw_speed = 7
@@ -70,11 +69,7 @@
 	item_color = "green"
 	desc = "A stamp for approving documents."
 
-/obj/item/weapon/stamp/attack_paw(mob/user as mob)
-	return attack_hand(user)
-
 // Syndicate stamp to forge documents.
-
 /obj/item/weapon/stamp/chameleon/attack_self(mob/user as mob)
 
 	var/list/stamp_types = typesof(/obj/item/weapon/stamp) - src.type // Get all stamp types except our own

@@ -43,7 +43,7 @@
 
 /obj/machinery/mineral/stacking_unit_console/Topic(href, href_list)
 	if(..())
-		return
+		return 1
 
 	if(href_list["change_stack"])
 		var/choice = input("What would you like to set the stack amount to?") as null|anything in list(1,5,10,20,50)

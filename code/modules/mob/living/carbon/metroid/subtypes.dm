@@ -1,4 +1,4 @@
-proc/mutation_table(var/colour)
+/mob/living/carbon/slime/proc/mutation_table(var/colour)
 	var/list/slime_mutation[4]
 	switch(colour)
 		//Tier 1
@@ -31,24 +31,24 @@ proc/mutation_table(var/colour)
 		//Tier 3
 		if("dark blue")
 			slime_mutation[1] = "purple"
-			slime_mutation[2] = "blue"
-			slime_mutation[3] = "cerulean"
-			slime_mutation[4] = "cerulean"
+			slime_mutation[2] = "purple"
+			slime_mutation[3] = "blue"
+			slime_mutation[4] = "blue"
 		if("dark purple")
 			slime_mutation[1] = "purple"
-			slime_mutation[2] = "orange"
-			slime_mutation[3] = "sepia"
-			slime_mutation[4] = "sepia"
+			slime_mutation[2] = "purple"
+			slime_mutation[3] = "orange"
+			slime_mutation[4] = "orange"
 		if("yellow")
 			slime_mutation[1] = "metal"
-			slime_mutation[2] = "orange"
-			slime_mutation[3] = "bluespace"
-			slime_mutation[4] = "bluespace"
+			slime_mutation[2] = "metal"
+			slime_mutation[3] = "orange"
+			slime_mutation[4] = "orange"
 		if("silver")
 			slime_mutation[1] = "metal"
-			slime_mutation[2] = "blue"
-			slime_mutation[3] = "pyrite"
-			slime_mutation[4] = "pyrite"
+			slime_mutation[2] = "metal"
+			slime_mutation[3] = "blue"
+			slime_mutation[4] = "blue"
 		//Tier 4
 		if("pink")
 			slime_mutation[1] = "pink"

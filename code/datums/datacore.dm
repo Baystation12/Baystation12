@@ -51,7 +51,6 @@
 			assignment = "Unassigned"
 
 		var/id = add_zero(num2hex(rand(1, 1.6777215E7)), 6)	//this was the best they could come up with? A large random number? *sigh*
-
 		var/icon/front = new(get_id_photo(H), dir = SOUTH)
 		var/icon/side = new(get_id_photo(H), dir = WEST)
 		//General Record
@@ -182,7 +181,8 @@ proc/get_id_photo(var/mob/living/carbon/human/H)
 
 	var/icon/eyes_s = new/icon("icon" = 'icons/mob/human_face.dmi', "icon_state" = H.species ? H.species.eyes : "eyes_s")
 
-	eyes_s.Blend(rgb(H.r_eyes, H.g_eyes, H.b_eyes), ICON_ADD)
+	if (H.species.flags & HAS_EYE_COLOR)
+		eyes_s.Blend(rgb(H.r_eyes, H.g_eyes, H.b_eyes), ICON_ADD)
 
 	var/datum/sprite_accessory/hair_style = hair_styles_list[H.h_style]
 	if(hair_style)

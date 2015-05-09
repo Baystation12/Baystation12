@@ -150,7 +150,7 @@
 	)
 	var/where = mob.equip_in_one_of_slots(T, slots)
 	if (!where)
-		mob << "The Syndicate were unfortunately unable to get you a flash."
+		mob << "Your employers were unfortunately unable to get you a flash."
 	else
 		mob << "The flash in your [where] will help you to persuade the crew to join your cause."
 		mob.update_icons()
@@ -205,7 +205,7 @@
 	if(rev_mind in revolutionaries)
 		revolutionaries -= rev_mind
 		rev_mind.special_role = null
-		rev_mind.current.hud_updateflag |= 1 << SPECIALROLE_HUD
+		BITSET(rev_mind.current.hud_updateflag, SPECIALROLE_HUD)
 
 		if(beingborged)
 			rev_mind.current << "\red <FONT size = 3><B>The frame's firmware detects and deletes your neural reprogramming!  You remember nothing from the moment you were flashed until now.</B></FONT>"
@@ -337,7 +337,7 @@
 /datum/game_mode/revolution/proc/check_heads_victory()
 	for(var/datum/mind/rev_mind in head_revolutionaries)
 		var/turf/T = get_turf(rev_mind.current)
-		if((rev_mind) && (rev_mind.current) && (rev_mind.current.stat != 2) && T && (T.z == 1))
+		if((rev_mind) && (rev_mind.current) && (rev_mind.current.stat != 2) && T && (T.z in config.station_levels))
 			if(ishuman(rev_mind.current))
 				return 0
 	return 1
@@ -367,7 +367,7 @@
 			if(headrev.current)
 				if(headrev.current.stat == DEAD)
 					text += "died"
-				else if(headrev.current.z != 1)
+				else if(isNotStationLevel(headrev.current.z))
 					text += "fled the station"
 				else
 					text += "survived the revolution"
@@ -390,7 +390,7 @@
 			if(rev.current)
 				if(rev.current.stat == DEAD)
 					text += "died"
-				else if(rev.current.z != 1)
+				else if(isNotStationLevel(rev.current.z))
 					text += "fled the station"
 				else
 					text += "survived the revolution"
@@ -415,7 +415,7 @@
 			if(head.current)
 				if(head.current.stat == DEAD)
 					text += "died"
-				else if(head.current.z != 1)
+				else if(isNotStationLevel(head.current.z))
 					text += "fled the station"
 				else
 					text += "survived the revolution"

@@ -6,7 +6,7 @@
 	desc = "yummy"
 	icon = 'icons/obj/drinks.dmi'
 	icon_state = null
-	flags = FPRINT | TABLEPASS | OPENCONTAINER
+	flags = OPENCONTAINER
 	var/gulp_size = 5 //This is now officially broken ... need to think of a nice way to fix it.
 	possible_transfer_amounts = list(5,10,25)
 	volume = 50
@@ -122,20 +122,19 @@
 
 		return ..()
 
-	examine()
-		set src in view()
-		..()
-		if (!(usr in range(0)) && usr!=src.loc) return
+	examine(mob/user)
+		if(!..(user, 1))
+			return
 		if(!reagents || reagents.total_volume==0)
-			usr << "\blue \The [src] is empty!"
+			user << "\blue \The [src] is empty!"
 		else if (reagents.total_volume<=src.volume/4)
-			usr << "\blue \The [src] is almost empty!"
+			user << "\blue \The [src] is almost empty!"
 		else if (reagents.total_volume<=src.volume*0.66)
-			usr << "\blue \The [src] is half full!"
+			user << "\blue \The [src] is half full!"
 		else if (reagents.total_volume<=src.volume*0.90)
-			usr << "\blue \The [src] is almost full!"
+			user << "\blue \The [src] is almost full!"
 		else
-			usr << "\blue \The [src] is full!"
+			user << "\blue \The [src] is full!"
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -153,7 +152,7 @@
 	amount_per_transfer_from_this = 20
 	possible_transfer_amounts = null
 	volume = 150
-	flags = FPRINT | CONDUCT | TABLEPASS | OPENCONTAINER
+	flags = CONDUCT | OPENCONTAINER
 
 /obj/item/weapon/reagent_containers/food/drinks/golden_cup/tournament_26_06_2011
 	desc = "A golden cup. It will be presented to a winner of tournament 26 june and name of the winner will be graved on it."
@@ -173,20 +172,6 @@
 	New()
 		..()
 		reagents.add_reagent("milk", 50)
-
-/* Flour is no longer a reagent
-/obj/item/weapon/reagent_containers/food/drinks/flour
-	name = "flour sack"
-	desc = "A big bag of flour. Good for baking!"
-	icon = 'icons/obj/food.dmi'
-	icon_state = "flour"
-	item_state = "flour"
-	New()
-		..()
-		reagents.add_reagent("flour", 30)
-		src.pixel_x = rand(-10.0, 10)
-		src.pixel_y = rand(-10.0, 10)
-*/
 
 /obj/item/weapon/reagent_containers/food/drinks/soymilk
 	name = "SoyMilk"
@@ -272,7 +257,7 @@
 	desc = "A metal shaker to mix drinks in."
 	icon_state = "shaker"
 	amount_per_transfer_from_this = 10
-	volume = 100
+	volume = 120
 	center_of_mass = list("x"=17, "y"=10)
 
 /obj/item/weapon/reagent_containers/food/drinks/flask

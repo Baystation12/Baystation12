@@ -36,6 +36,7 @@
 		icon = 'icons/mob/custom-synthetic.dmi'
 		R.icon_state = "[R.ckey]-Standard"
 	del(R.module)
+	R.notify_ai(ROBOT_NOTIFICATION_MODULE_RESET, R.module.name)
 	R.module = null
 	for(var/obj/item/borg/sight/hud/sec/S in R)
 		del S
@@ -43,7 +44,7 @@
 		del M
 	R.sight_mode = 0
 	R.hud = null
-	R.camera.network.Remove(list("Engineering","Medical","MINE"))
+	R.camera.remove_networks(list("Engineering","Medical","MINE"))
 	R.updatename("Default")
 	R.status_flags |= CANPUSH
 	R.updateicon()
@@ -62,6 +63,7 @@
 
 /obj/item/borg/upgrade/rename/action(var/mob/living/silicon/robot/R)
 	if(..()) return 0
+	R.notify_ai(ROBOT_NOTIFICATION_NEW_NAME, R.name, heldname)
 	R.name = heldname
 	R.custom_name = heldname
 	R.real_name = heldname
@@ -86,6 +88,9 @@
 				R.key = ghost.key
 
 	R.stat = CONSCIOUS
+	dead_mob_list -= R
+	living_mob_list |= R
+	R.notify_ai(ROBOT_NOTIFICATION_NEW_UNIT)
 	return 1
 
 
@@ -122,7 +127,7 @@
 		usr << "There's no mounting point for the module!"
 		return 0
 
-	var/obj/item/weapon/gun/energy/taser/cyborg/T = locate() in R.module
+	var/obj/item/weapon/gun/energy/taser/mounted/cyborg/T = locate() in R.module
 	if(!T)
 		T = locate() in R.module.contents
 	if(!T)

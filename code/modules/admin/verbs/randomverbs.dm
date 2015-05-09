@@ -465,15 +465,13 @@ Traitors and the like can also be revived with the previous role mostly intact.
 			new_character.loc = pick(wizardstart)
 			//ticker.mode.learn_basic_spells(new_character)
 			ticker.mode.equip_wizard(new_character)
-		if("Syndicate")
+		if("Mercenary")
 			var/obj/effect/landmark/synd_spawn = locate("landmark*Syndicate-Spawn")
 			if(synd_spawn)
 				new_character.loc = get_turf(synd_spawn)
 			call(/datum/game_mode/proc/equip_syndicate)(new_character)
 		if("Ninja")
 			new_character.equip_space_ninja()
-			new_character.internal = new_character.s_store
-			new_character.internals.icon_state = "internal1"
 			if(ninjastart.len == 0)
 				new_character << "<B>\red A proper starting location for you could not be found, please report this bug!</B>"
 				new_character << "<B>\red Attempting to place at a carpspawn.</B>"

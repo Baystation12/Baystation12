@@ -40,10 +40,20 @@
 	ghostize()
 	del src
 
-/mob/living/simple_animal/construct/examine()
-	set src in oview()
 
-	var/msg = "<span cass='info'>*---------*\nThis is \icon[src] \a <EM>[src]</EM>!\n"
+/mob/living/simple_animal/construct/attack_generic(var/mob/user)
+	if(istype(user, /mob/living/simple_animal/construct/builder))
+		if(health < maxHealth)
+			adjustBruteLoss(-5)
+			user.visible_message("<b>\The [user]</b> mends some of \the [src]'s wounds.")
+		else
+			user << "<span class='notice'>\The [src] is undamaged.</span>"
+		return
+	return ..()
+
+/mob/living/simple_animal/construct/examine(mob/user)
+	..(user)
+	var/msg = ""
 	if (src.health < src.maxHealth)
 		msg += "<span class='warning'>"
 		if (src.health >= src.maxHealth/2)
@@ -53,7 +63,7 @@
 		msg += "</span>"
 	msg += "*---------*</span>"
 
-	usr << msg
+	user << msg
 	return
 
 /mob/living/simple_animal/construct/Bump(atom/movable/AM as mob|obj, yes)
@@ -83,25 +93,6 @@
 						return
 			step(AM, t)
 		now_pushing = null
-
-
-/mob/living/simple_animal/construct/attack_animal(mob/living/M as mob)
-	if(istype(M, /mob/living/simple_animal/construct/builder))
-		health += 5
-		M.emote("mends some of \the <EM>[src]'s</EM> wounds.")
-	else
-		if(M.melee_damage_upper <= 0)
-			M.emote("[M.friendly] \the <EM>[src]</EM>")
-		else
-			if(M.attack_sound)
-				playsound(loc, M.attack_sound, 50, 1, 1)
-			for(var/mob/O in viewers(src, null))
-				O.show_message("<span class='attack'>\The <EM>[M]</EM> [M.attacktext] \the <EM>[src]</EM>!</span>", 1)
-			M.attack_log += text("\[[time_stamp()]\] <font color='red'>attacked [src.name] ([src.ckey])</font>")
-			src.attack_log += text("\[[time_stamp()]\] <font color='orange'>was attacked by [M.name] ([M.ckey])</font>")
-
-			var/damage = rand(M.melee_damage_lower, M.melee_damage_upper)
-			adjustBruteLoss(damage)
 
 /mob/living/simple_animal/construct/attackby(var/obj/item/O as obj, var/mob/user as mob)
 	if(O.force)
@@ -137,7 +128,8 @@
 	harm_intent_damage = 0
 	melee_damage_lower = 30
 	melee_damage_upper = 30
-	attacktext = "smashes their armoured gauntlet into"
+	attacktext = "smashed their armoured gauntlet into"
+	mob_size = 20
 	speed = 3
 	wall_smash = 1
 	attack_sound = 'sound/weapons/punch3.ogg'
@@ -174,8 +166,8 @@
 		var/reflectchance = 80 - round(P.damage/3)
 		if(prob(reflectchance))
 			adjustBruteLoss(P.damage * 0.5)
-			visible_message("<span class='danger'>The [P.name] gets reflected by [src]'s shell!</span>", \
-							"<span class='userdanger'>The [P.name] gets reflected by [src]'s shell!</span>")
+			visible_message("<span class='danger'>\The [P] was reflected by \the [src]'s shell!</span>", \
+							"<span class='userdanger'>\The [P] was reflected by \the [src]'s shell!</span>")
 
 			// Find a turf near or on the original location to bounce to
 			if(P.starting)
@@ -184,12 +176,7 @@
 				var/turf/curloc = get_turf(src)
 
 				// redirect the projectile
-				P.original = locate(new_x, new_y, P.z)
-				P.starting = curloc
-				P.current = curloc
-				P.firer = src
-				P.yo = new_y - curloc.y
-				P.xo = new_x - curloc.x
+				P.redirect(new_x, new_y, curloc, src)
 
 			return -1 // complete projectile permutation
 
@@ -212,7 +199,7 @@
 	health = 75
 	melee_damage_lower = 25
 	melee_damage_upper = 25
-	attacktext = "slashes"
+	attacktext = "slashed"
 	speed = -1
 	see_in_dark = 7
 	attack_sound = 'sound/weapons/bladeslice.ogg'
@@ -237,7 +224,7 @@
 	harm_intent_damage = 5
 	melee_damage_lower = 5
 	melee_damage_upper = 5
-	attacktext = "rams"
+	attacktext = "rammed"
 	speed = 0
 	wall_smash = 1
 	attack_sound = 'sound/weapons/punch2.ogg'
@@ -264,10 +251,11 @@
 	harm_intent_damage = 0
 	melee_damage_lower = 50
 	melee_damage_upper = 50
-	attacktext = "brutally crushes"
+	attacktext = "brutally crushed"
 	speed = 5
 	wall_smash = 1
 	attack_sound = 'sound/weapons/punch4.ogg'
+	mob_size = 20
 	var/energy = 0
 	var/max_energy = 1000
 

@@ -1,5 +1,5 @@
 /obj/structure/closet/syndicate
-	name = "armoury closet"
+	name = "armory closet"
 	desc = "Why is this here?"
 	icon_state = "syndicate"
 	icon_closed = "syndicate"
@@ -11,12 +11,11 @@
 
 /obj/structure/closet/syndicate/personal/New()
 	..()
-	sleep(2)
 	new /obj/item/weapon/tank/jetpack/oxygen(src)
 	new /obj/item/clothing/mask/gas/syndicate(src)
 	new /obj/item/clothing/under/syndicate(src)
-	new /obj/item/clothing/head/helmet/space/rig/syndi(src)
-	new /obj/item/clothing/suit/space/rig/syndi(src)
+	new /obj/item/clothing/head/helmet/space/void/merc(src)
+	new /obj/item/clothing/suit/space/void/merc(src)
 	new /obj/item/weapon/crowbar/red(src)
 	new /obj/item/weapon/cell/high(src)
 	new /obj/item/weapon/card/id/syndicate(src)
@@ -26,16 +25,15 @@
 
 
 /obj/structure/closet/syndicate/suit
-	desc = "It's a storage unit for rig suits."
+	desc = "It's a storage unit for voidsuits."
 
 /obj/structure/closet/syndicate/suit/New()
 	..()
-	sleep(2)
 	new /obj/item/weapon/tank/jetpack/oxygen(src)
 	new /obj/item/clothing/shoes/magboots(src)
-	new /obj/item/clothing/suit/space/rig/syndi(src)
+	new /obj/item/clothing/suit/space/void/merc(src)
 	new /obj/item/clothing/mask/gas/syndicate(src)
-	new /obj/item/clothing/head/helmet/space/rig/syndi(src)
+	new /obj/item/clothing/head/helmet/space/void/merc(src)
 
 
 /obj/structure/closet/syndicate/nuclear
@@ -43,7 +41,7 @@
 
 /obj/structure/closet/syndicate/nuclear/New()
 	..()
-	sleep(2)
+	
 	new /obj/item/ammo_magazine/a12mm(src)
 	new /obj/item/ammo_magazine/a12mm(src)
 	new /obj/item/ammo_magazine/a12mm(src)
@@ -77,7 +75,6 @@
 		var/rare_max = 20 //Maximum HONK HONK HONK in the HONK for HONK rare HONK
 
 
-		sleep(2)
 
 		var/pickednum = rand(1, 50)
 
@@ -141,7 +138,6 @@
 		/obj/item/stack/rods
 		)
 
-		sleep(2)
 
 		for(var/i = 0, i<2, i++)
 			for(var/res in resources)

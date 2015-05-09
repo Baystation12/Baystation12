@@ -12,13 +12,8 @@ proc/process_med_hud(var/mob/M, var/local_scanner, var/mob/Alt)
 		if(P.Mob.see_invisible < patient.invisibility)
 			continue
 
-		if(!local_scanner)
-			if(istype(patient.w_uniform, /obj/item/clothing/under))
-				var/obj/item/clothing/under/U = patient.w_uniform
-				if(U.sensor_mode < 2)
-					continue
-			else
-				continue
+		if(!(local_scanner || hassensorlevel(patient, SUIT_SENSOR_VITAL)))
+			continue
 
 		P.Client.images += patient.hud_list[HEALTH_HUD]
 		if(local_scanner)

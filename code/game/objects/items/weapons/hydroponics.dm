@@ -4,13 +4,12 @@
 //uncomment when this is updated to match storage update
 /*
 /obj/item/weapon/seedbag
-	icon = 'icons/obj/hydroponics.dmi'
+	icon = 'icons/obj/hydroponics_machines.dmi'
 	icon_state = "seedbag"
 	name = "Seed Bag"
 	desc = "A small satchel made for organizing seeds."
 	var/mode = 1;  //0 = pick one at a time, 1 = pick all on tile
 	var/capacity = 500; //the number of seeds it can carry.
-	flags = FPRINT | TABLEPASS
 	slot_flags = SLOT_BELT
 	w_class = 1
 	var/list/item_quants = list()

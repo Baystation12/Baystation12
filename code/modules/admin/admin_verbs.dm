@@ -53,6 +53,7 @@ var/list/admin_verbs_admin = list(
 	/client/proc/cmd_admin_create_centcom_report,
 	/client/proc/check_words,			/*displays cult-words*/
 	/client/proc/check_ai_laws,			/*shows AI and borg laws*/
+	/client/proc/rename_silicon,		/*properly renames silicons*/
 	/client/proc/check_antagonists,
 	/client/proc/admin_memo,			/*admin memo system. show/delete/write. +SERVER needed to delete admin memos of others*/
 	/client/proc/dsay,					/*talk in deadchat using our ckey/fakekey*/
@@ -97,6 +98,10 @@ var/list/admin_verbs_admin = list(
     /client/proc/edit_vip_permissions,
     ///client/proc/hidevsay
     /datum/admins/proc/cancelfuelexplosion
+	/client/proc/allow_character_respawn,    /* Allows a ghost to respawn */
+	/client/proc/event_manager_panel,
+	/client/proc/empty_ai_core_toggle_latejoin
+
 )
 var/list/admin_verbs_ban = list(
 	/client/proc/unban_panel,
@@ -121,14 +126,19 @@ var/list/admin_verbs_fun = list(
 	/client/proc/cmd_admin_add_random_ai_law,
 	/client/proc/make_sound,
 	/client/proc/toggle_random_events,
-	/client/proc/set_ooc,
 	/client/proc/editappear,
 	/client/proc/trigger_random_event,
 	/client/proc/artillery
 	)
 var/list/admin_verbs_spawn = list(
+	/datum/admins/proc/spawn_fruit,
+	/datum/admins/proc/spawn_plant,
 	/datum/admins/proc/spawn_atom,		/*allows us to spawn instances*/
-	/client/proc/respawn_character
+	/client/proc/respawn_character,
+	/client/proc/FireLaser,
+	/client/proc/FireCannons,
+	/client/proc/ChangeIcarusPosition,
+	/client/proc/virus2_editor
 	)
 var/list/admin_verbs_server = list(
 	/client/proc/Set_Holiday,
@@ -171,8 +181,8 @@ var/list/admin_verbs_debug = list(
 	/client/proc/reload_mentors,
 	/client/proc/reload_vips,
 	/client/proc/restart_controller,
-	/client/proc/remake_distribution_map,
-	/client/proc/show_distribution_map,
+	/client/proc/print_random_map,
+	/client/proc/create_random_map,
 	/client/proc/show_plant_genes,
 	/client/proc/enable_debug_verbs,
 	/client/proc/callproc,
@@ -478,7 +488,6 @@ R_DEBUG admin_verbs_headadmin
 */
 //verbs which can be hidden - needs work
 var/list/admin_verbs_hideable = list(
-	/client/proc/set_ooc,
 	/client/proc/deadmin_self,
 //	/client/proc/deadchat,
 	/client/proc/toggleprayers,
@@ -559,7 +568,7 @@ var/list/admin_verbs_hideable = list(
 		if(holder.rights & R_SERVER)		verbs += admin_verbs_server
 		if(holder.rights & R_DEBUG)
 			verbs += admin_verbs_debug
-			if(config.debugparanoid && !check_rights(R_ADMIN))
+			if(config.debugparanoid && !(holder.rights & R_ADMIN))
 				verbs.Remove(admin_verbs_paranoid_debug)			//Right now it's just callproc but we can easily add others later on.
 		if(holder.rights & R_POSSESS)		verbs += admin_verbs_possess
 		if(holder.rights & R_PERMISSIONS)	verbs += admin_verbs_permissions
@@ -599,18 +608,6 @@ var/list/admin_verbs_hideable = list(
 		admin_verbs_rejuv,
 		admin_verbs_sounds,
 		admin_verbs_spawn,
-		*/
-		admin_verbs_dev,
-		admin_verbs_mentor,
-		admin_verbs_mod,
-		admin_verbs_mod2,
-		admin_verbs_mod3,
-		admin_verbs_admin,
-		admin_verbs_admin2,
-		admin_verbs_admin3,
-		admin_verbs_headadmin,
-		admin_verbs_gamemaster,
-
 		/*Debug verbs added by "show debug verbs"*/
 		/client/proc/Cell,
 		/client/proc/do_not_use_these,
@@ -629,6 +626,37 @@ var/list/admin_verbs_hideable = list(
 		/client/proc/kaboom,
 		/client/proc/splash,
 		/client/proc/cmd_admin_areatest
+		*/
+		admin_verbs_dev,
+		admin_verbs_mentor,
+		admin_verbs_mod,
+		admin_verbs_mod2,
+		admin_verbs_mod3,
+		admin_verbs_admin,
+		admin_verbs_admin2,
+		admin_verbs_admin3,
+		admin_verbs_headadmin,
+		admin_verbs_gamemaster,
+
+		/*Debug verbs added by "show debug verbs"
+		/client/proc/Cell,
+		/client/proc/do_not_use_these,
+		/client/proc/camera_view,
+		/client/proc/sec_camera_report,
+		/client/proc/intercom_view,
+		/client/proc/atmosscan,
+		/client/proc/powerdebug,
+		/client/proc/count_objects_on_z_level,
+		/client/proc/count_objects_all,
+		/client/proc/cmd_assume_direct_control,
+		/client/proc/jump_to_dead_group,
+		/client/proc/startSinglo,
+		/client/proc/ticklag,
+		/client/proc/cmd_admin_grantfullaccess,
+		/client/proc/kaboom,
+		/client/proc/splash,
+		/client/proc/cmd_admin_areatest*/
+		debug_verbs#
 		)
 
 /client/proc/hide_most_verbs()//Allows you to keep some functionality while hiding some verbs
@@ -689,7 +717,8 @@ var/list/admin_verbs_hideable = list(
 	else
 		//ghostize
 		var/mob/body = mob
-		body.ghostize(1)
+		var/mob/dead/observer/ghost = body.ghostize(1)
+		ghost.admin_ghosted = 1
 		if(body && !body.key)
 			body.key = "@[key]"	//Haaaaaaaack. But the people have spoken. If it breaks; blame adminbus
 		feedback_add_details("admin_verb","O") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
@@ -778,10 +807,13 @@ var/list/admin_verbs_hideable = list(
 	set category = "Fun"
 	set name = "OOC Text Color"
 	if(!holder)	return
-	var/new_ooccolor = input(src, "Please select your OOC colour.", "OOC colour") as color|null
-	if(new_ooccolor)
-		prefs.ooccolor = new_ooccolor
-		prefs.save_preferences()
+	var/response = alert(src, "Please choose a distinct color that is easy to read and doesn't mix with all the other chat and radio frequency colors.", "Change own OOC color", "Pick new color", "Reset to default", "Cancel")
+	if(response == "Pick new color")
+		prefs.ooccolor = input(src, "Please select your OOC colour.", "OOC colour") as color
+	else if(response == "Reset to default")
+		prefs.ooccolor = initial(prefs.ooccolor)
+	prefs.save_preferences()
+
 	feedback_add_details("admin_verb","OC") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	return
 
@@ -911,12 +943,14 @@ var/list/admin_verbs_hideable = list(
 
 	var/datum/disease2/disease/D = new /datum/disease2/disease()
 
-	var/greater = ((input("Is this a lesser or greater disease?", "Give Disease") in list("Lesser", "Greater")) == "Greater")
+	var/severity = 1
+	var/greater = input("Is this a lesser, greater, or badmin disease?", "Give Disease") in list("Lesser", "Greater", "Badmin")
+	switch(greater)
+		if ("Lesser") severity = 1
+		if ("Greater") severity = 2
+		if ("Badmin") severity = 99
 
-	D.makerandom(greater)
-	if (!greater)
-		D.infectionchance = 1
-
+	D.makerandom(severity)
 	D.infectionchance = input("How virulent is this disease? (1-100)", "Give Disease", D.infectionchance) as num
 
 	if(istype(T,/mob/living/carbon/human))
@@ -929,9 +963,9 @@ var/list/admin_verbs_hideable = list(
 	infect_virus2(T,D,1)
 
 	feedback_add_details("admin_verb","GD2") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-	log_admin("[key_name(usr)] gave [key_name(T)] a [(greater)? "greater":"lesser"] disease2 with infection chance [D.infectionchance].")
-	log_admin_single("[key_name(usr)] gave [key_name(T)] a [(greater)? "greater":"lesser"] disease2 with infection chance [D.infectionchance].")
-	message_admins("\blue [key_name_admin(usr)] gave [key_name(T)] a [(greater)? "greater":"lesser"] disease2 with infection chance [D.infectionchance].", 1)
+	log_admin("[key_name(usr)] gave [key_name(T)] a [greater] disease2 with infection chance [D.infectionchance].")
+	log_admin_single("[key_name(usr)] gave [key_name(T)] a [greater] disease2 with infection chance [D.infectionchance].")
+	message_admins("\blue [key_name_admin(usr)] gave [key_name(T)] a [greater] disease2 with infection chance [D.infectionchance].", 1)
 
 /client/proc/make_sound(var/obj/O in world) // -- TLE
 	set category = "Special Verbs"
@@ -982,6 +1016,17 @@ var/list/admin_verbs_hideable = list(
 	log_admin_single("[key_name(usr)] used 'kill air'.")
 	message_admins("\blue [key_name_admin(usr)] used 'kill air'.", 1)
 
+/client/proc/readmin_self()
+	set name = "Re-Admin self"
+	set category = "Admin"
+
+	if(deadmin_holder)
+		deadmin_holder.reassociate()
+		log_admin("[src] re-admined themself.")
+		message_admins("[src] re-admined themself.", 1)
+		src << "<span class='interface'>You now have the keys to control the planet, or atleast a small space station</span>"
+		verbs -= /client/proc/readmin_self
+
 /client/proc/deadmin_self()
 	set name = "De-admin self"
 	set category = "Admin"
@@ -993,6 +1038,7 @@ var/list/admin_verbs_hideable = list(
 			message_admins("[src] deadmined themself.", 1)
 			deadmin()
 			src << "<span class='interface'>You are now a normal player.</span>"
+			verbs |= /client/proc/readmin_self
 	feedback_add_details("admin_verb","DAS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/toggle_log_hrefs()
@@ -1012,6 +1058,17 @@ var/list/admin_verbs_hideable = list(
 	set category = "Admin"
 	if(holder)
 		src.holder.output_ai_laws()
+
+/client/proc/rename_silicon(mob/living/silicon/S in world)
+	set name = "Rename Silicon"
+	set category = "Admin"
+
+	if(holder)
+		var/new_name = trim_strip_input(src, "Enter new name. Leave blank or as is to cancel.", "Enter new silicon name", S.real_name)
+		if(new_name && new_name != S.real_name)
+			admin_log_and_message_admins("has renamed the silicon '[S.real_name]' to '[new_name]'")
+			S.SetName(new_name)
+	feedback_add_details("admin_verb","RAI") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 
 //---- bs12 verbs ----
@@ -1105,16 +1162,18 @@ var/list/admin_verbs_hideable = list(
 			usr << "There are no fully staffed jobs."
 			return
 		var/job = input("Please select job slot to free", "Free job slot")  as null|anything in jobs
-		if(job)
+		if (job)
 			if(job == "Department Guard")
 				var/list/departments = list("Medical","Engineering","Research")
 				var/dept = input("Please select a department to free up", "Free Department Guard slot") as null|anything in departments
+			job_master.FreeRole(job)
+			message_admins("A job slot for [job] has been opened by [key_name_admin(usr)]")
+			return
 
 				if(dept)
 					job_master.FreeDGRole(job,dept)
 			else
 				job_master.FreeRole(job)
-	return
 
 /client/proc/toggleattacklogs()
 	set name = "Toggle Attack Log Messages"

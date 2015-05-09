@@ -5,7 +5,7 @@ world/IsBanned(key,address,computer_id)
 		return ..()
 
 	//Guest Checking
-	if(!guests_allowed && IsGuestKey(key))
+	if(!config.guests_allowed && IsGuestKey(key))
 		log_access("Failed Login: [key] - Guests not allowed")
 		message_admins("\blue Failed Login: [key] - Guests not allowed")
 		return list("reason"="guest", "desc"="\nReason: Guests not allowed. Please sign in with a byond account.")

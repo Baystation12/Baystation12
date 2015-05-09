@@ -25,7 +25,7 @@
 	New(loc, var/h = 30)
 		blobs += src
 		src.health = h
-		src.dir = pick(1,2,4,8)
+		src.set_dir(pick(1,2,4,8))
 		src.update_icon()
 		..(loc)
 		return
@@ -158,7 +158,7 @@
 
 	attackby(var/obj/item/weapon/W, var/mob/user)
 		playsound(src.loc, 'sound/effects/attackblob.ogg', 50, 1)
-		src.visible_message("\red <B>The [src.name] has been attacked with \the [W][(user ? " by [user]." : ".")]")
+		src.visible_message("<span class='danger'>The [src.name] has been attacked with \the [W][(user ? " by [user]." : ".")]</span>")
 		var/damage = 0
 		switch(W.damtype)
 			if("fire")
@@ -195,7 +195,7 @@
 
 	New(loc, var/h = 10)
 		src.health = h
-		src.dir = pick(1,2,4,8)
+		src.set_dir(pick(1,2,4,8))
 		src.update_idle()
 
 

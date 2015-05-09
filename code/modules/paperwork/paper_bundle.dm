@@ -35,8 +35,9 @@
 		user.drop_from_inventory(P)
 		P.loc = src
 		if(istype(user,/mob/living/carbon/human))
-			user:update_inv_l_hand()
-			user:update_inv_r_hand()
+			var/mob/living/carbon/human/H = user
+			H.update_inv_l_hand()
+			H.update_inv_r_hand()
 	else if(istype(W, /obj/item/weapon/photo))
 		amount++
 		if(screen == 2)
@@ -57,6 +58,8 @@
 		user << "<span class='notice'>You add \the [W.name] to [(src.name == "paper bundle") ? "the paper bundle" : src.name].</span>"
 		del(W)
 	else
+		if(istype(W, /obj/item/weapon/tape_roll))
+			return 0
 		if(istype(W, /obj/item/weapon/pen) || istype(W, /obj/item/toy/crayon))
 			usr << browse("", "window=[name]") //Closes the dialog
 		P = src[page]
@@ -93,57 +96,50 @@
 			else
 				user << "\red You must hold \the [P] steady to burn \the [src]."
 
-
-/obj/item/weapon/paper_bundle/examine()
-	set src in oview(1)
-
-	usr << desc
-	if(in_range(usr, src))
-		src.attack_self(usr)
+/obj/item/weapon/paper_bundle/examine(mob/user)
+	if(..(user, 1))
+		src.show_content(user)
 	else
-		usr << "<span class='notice'>It is too far away.</span>"
+		user << "<span class='notice'>It is too far away.</span>"
 	return
 
+/obj/item/weapon/paper_bundle/proc/show_content(mob/user as mob)
+	var/dat
+	var/obj/item/weapon/W = src[page]
+	switch(screen)
+		if(0)
+			dat+= "<DIV STYLE='float:left; text-align:left; width:33.33333%'></DIV>"
+			dat+= "<DIV STYLE='float:left; text-align:center; width:33.33333%'><A href='?src=\ref[src];remove=1'>Remove [(istype(W, /obj/item/weapon/paper)) ? "paper" : "photo"]</A></DIV>"
+			dat+= "<DIV STYLE='float:left; text-align:right; width:33.33333%'><A href='?src=\ref[src];next_page=1'>Next Page</A></DIV><BR><HR>"
+		if(1)
+			dat+= "<DIV STYLE='float:left; text-align:left; width:33.33333%'><A href='?src=\ref[src];prev_page=1'>Previous Page</A></DIV>"
+			dat+= "<DIV STYLE='float:left; text-align:center; width:33.33333%'><A href='?src=\ref[src];remove=1'>Remove [(istype(W, /obj/item/weapon/paper)) ? "paper" : "photo"]</A></DIV>"
+			dat+= "<DIV STYLE='float:left; text-align:right; width:33.33333%'><A href='?src=\ref[src];next_page=1'>Next Page</A></DIV><BR><HR>"
+		if(2)
+			dat+= "<DIV STYLE='float:left; text-align:left; width:33.33333%'><A href='?src=\ref[src];prev_page=1'>Previous Page</A></DIV>"
+			dat+= "<DIV STYLE='float:left; text-align:center; width:33.33333%'><A href='?src=\ref[src];remove=1'>Remove [(istype(W, /obj/item/weapon/paper)) ? "paper" : "photo"]</A></DIV><BR><HR>"
+			dat+= "<DIV STYLE='float;left; text-align:right; with:33.33333%'></DIV>"
+	if(istype(src[page], /obj/item/weapon/paper))
+		var/obj/item/weapon/paper/P = W
+		if(!(istype(usr, /mob/living/carbon/human) || istype(usr, /mob/dead/observer) || istype(usr, /mob/living/silicon)))
+			dat+= "<HTML><HEAD><TITLE>[P.name]</TITLE></HEAD><BODY>[stars(P.info)][P.stamps]</BODY></HTML>"
+		else
+			dat+= "<HTML><HEAD><TITLE>[P.name]</TITLE></HEAD><BODY>[P.info][P.stamps]</BODY></HTML>"
+		user << browse(dat, "window=[name]")
+	else if(istype(src[page], /obj/item/weapon/photo))
+		var/obj/item/weapon/photo/P = W
+		user << browse_rsc(P.img, "tmp_photo.png")
+		user << browse(dat + "<html><head><title>[P.name]</title></head>" \
+		+ "<body style='overflow:hidden'>" \
+		+ "<div> <img src='tmp_photo.png' width = '180'" \
+		+ "[P.scribble ? "<div> Written on the back:<br><i>[P.scribble]</i>" : ]"\
+		+ "</body></html>", "window=[name]")
 
 /obj/item/weapon/paper_bundle/attack_self(mob/user as mob)
-	if(ishuman(user))
-		var/mob/living/carbon/human/human_user = user
-		var/dat
-		var/obj/item/weapon/W = src[page]
-		switch(screen)
-			if(0)
-				dat+= "<DIV STYLE='float:left; text-align:left; width:33.33333%'></DIV>"
-				dat+= "<DIV STYLE='float:left; text-align:center; width:33.33333%'><A href='?src=\ref[src];remove=1'>Remove [(istype(W, /obj/item/weapon/paper)) ? "paper" : "photo"]</A></DIV>"
-				dat+= "<DIV STYLE='float:left; text-align:right; width:33.33333%'><A href='?src=\ref[src];next_page=1'>Next Page</A></DIV><BR><HR>"
-			if(1)
-				dat+= "<DIV STYLE='float:left; text-align:left; width:33.33333%'><A href='?src=\ref[src];prev_page=1'>Previous Page</A></DIV>"
-				dat+= "<DIV STYLE='float:left; text-align:center; width:33.33333%'><A href='?src=\ref[src];remove=1'>Remove [(istype(W, /obj/item/weapon/paper)) ? "paper" : "photo"]</A></DIV>"
-				dat+= "<DIV STYLE='float:left; text-align:right; width:33.33333%'><A href='?src=\ref[src];next_page=1'>Next Page</A></DIV><BR><HR>"
-			if(2)
-				dat+= "<DIV STYLE='float:left; text-align:left; width:33.33333%'><A href='?src=\ref[src];prev_page=1'>Previous Page</A></DIV>"
-				dat+= "<DIV STYLE='float:left; text-align:center; width:33.33333%'><A href='?src=\ref[src];remove=1'>Remove [(istype(W, /obj/item/weapon/paper)) ? "paper" : "photo"]</A></DIV><BR><HR>"
-				dat+= "<DIV STYLE='float;left; text-align:right; with:33.33333%'></DIV>"
-		if(istype(src[page], /obj/item/weapon/paper))
-			var/obj/item/weapon/paper/P = W
-			if(!(istype(usr, /mob/living/carbon/human) || istype(usr, /mob/dead/observer) || istype(usr, /mob/living/silicon)))
-				dat+= "<HTML><HEAD><TITLE>[P.name]</TITLE></HEAD><BODY>[stars(P.info)][P.stamps]</BODY></HTML>"
-			else
-				dat+= "<HTML><HEAD><TITLE>[P.name]</TITLE></HEAD><BODY>[P.info][P.stamps]</BODY></HTML>"
-			human_user << browse(dat, "window=[name]")
-			P.add_fingerprint(usr)
-		else if(istype(src[page], /obj/item/weapon/photo))
-			var/obj/item/weapon/photo/P = W
-			human_user << browse_rsc(P.img, "tmp_photo.png")
-			human_user << browse(dat + "<html><head><title>[P.name]</title></head>" \
-			+ "<body style='overflow:hidden'>" \
-			+ "<div> <img src='tmp_photo.png' width = '180'" \
-			+ "[P.scribble ? "<div> Written on the back:<br><i>[P.scribble]</i>" : ]"\
-			+ "</body></html>", "window=[name]")
-			P.add_fingerprint(usr)
-		add_fingerprint(usr)
-		update_icon()
+	src.show_content(user)
+	add_fingerprint(usr)
+	update_icon()
 	return
-
 
 /obj/item/weapon/paper_bundle/Topic(href, href_list)
 	..()
@@ -196,7 +192,7 @@
 	set category = "Object"
 	set src in usr
 
-	var/n_name = copytext(sanitize(input(usr, "What would you like to label the bundle?", "Bundle Labelling", null)  as text), 1, MAX_NAME_LEN)
+	var/n_name = sanitize(copytext(input(usr, "What would you like to label the bundle?", "Bundle Labelling", null)  as text, 1, MAX_NAME_LEN))
 	if((loc == usr && usr.stat == 0))
 		name = "[(n_name ? text("[n_name]") : "paper")]"
 	add_fingerprint(usr)

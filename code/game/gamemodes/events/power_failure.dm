@@ -12,20 +12,20 @@
 
 	for(var/obj/machinery/power/smes/S in world)
 		var/area/current_area = get_area(S)
-		if(current_area.type in skipped_areas || S.z != 1)
+		if(current_area.type in skipped_areas || !(S.z in config.station_levels))
 			continue
-		S.last_charge = S.charge
-		S.last_output = S.output
-		S.last_online = S.online
+		S.last_charge			= S.charge
+		S.last_output_attempt	= S.output_attempt
+		S.last_input_attempt 	= S.input_attempt
 		S.charge = 0
-		S.output = 0
-		S.online = 0
-		S.updateicon()
+		S.inputting(0)
+		S.outputting(0)
+		S.update_icon()
 		S.power_change()
 
 
 	for(var/obj/machinery/power/apc/C in world)
-		if(C.cell && (C.z == 1 || C.z == 7 || C.z == 8))
+		if(C.cell && C.z in config.station_levels)
 			C.cell.charge = 0
 			C.operating = 0
 			C.chargemode = 0
@@ -43,7 +43,7 @@
 	if(announce)
 		command_announcement.Announce("Power has been restored to [station_name()]. We apologize for the inconvenience.", "Power Systems Nominal", new_sound = 'sound/AI/poweron.ogg')
 	for(var/obj/machinery/power/apc/C in world)
-		if(C.cell && (C.z == 1 || C.z == 7 || C.z == 8))
+		if(C.cell && C.z in config.station_levels)
 			C.cell.charge = C.cell.maxcharge
 			C.operating = 1
 			C.chargemode = 1
@@ -52,12 +52,12 @@
 
 	for(var/obj/machinery/power/smes/S in world)
 		var/area/current_area = get_area(S)
-		if(current_area.type in skipped_areas || S.z != 1)
+		if(current_area.type in skipped_areas || isNotStationLevel(S.z))
 			continue
 		S.charge = S.last_charge
-		S.output = S.last_output
-		S.online = S.last_online
-		S.updateicon()
+		S.output_attempt = S.last_output_attempt
+		S.input_attempt = S.last_input_attempt
+		S.update_icon()
 		S.power_change()
 
 /proc/power_restore_quick(var/announce = 1)
@@ -65,10 +65,11 @@
 	if(announce)
 		command_announcement.Announce("All SMESs on [station_name()] have been recharged. We apologize for the inconvenience.", "Power Systems Nominal", new_sound = 'sound/AI/poweron.ogg')
 	for(var/obj/machinery/power/smes/S in world)
-		if(S.z != 1)
+		if(isNotStationLevel(S.z))
 			continue
 		S.charge = S.capacity
-		S.output = S.output_level_max // Most new SMESs on map are of buildable type, and may actually have higher output limit than 200kW. Use max output of that SMES instead.
-		S.online = 1
-		S.updateicon()
+		S.output_level = S.output_level_max
+		S.output_attempt = 1
+		S.input_attempt = 1
+		S.update_icon()
 		S.power_change()

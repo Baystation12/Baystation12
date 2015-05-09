@@ -1,5 +1,5 @@
 /obj/structure/closet/secure_closet/engineering_chief
-	name = "Chief Engineer's Locker"
+	name = "chief engineer's locker"
 	req_access = list(access_ce)
 	icon_state = "securece1"
 	icon_closed = "securece"
@@ -11,15 +11,14 @@
 
 	New()
 		..()
-		sleep(2)
 		if(prob(50))
 			new /obj/item/weapon/storage/backpack/industrial(src)
 		else
 			new /obj/item/weapon/storage/backpack/satchel_eng(src)
 		if (prob(70))
-			new /obj/item/clothing/tie/storage/brown_vest(src)
+			new /obj/item/clothing/accessory/storage/brown_vest(src)
 		else
-			new /obj/item/clothing/tie/storage/webbing(src)
+			new /obj/item/clothing/accessory/storage/webbing(src)
 		new /obj/item/blueprints(src)
 		new /obj/item/clothing/under/rank/chief_engineer(src)
 		new /obj/item/clothing/head/hardhat/white(src)
@@ -39,7 +38,7 @@
 
 
 /obj/structure/closet/secure_closet/engineering_electrical
-	name = "Electrical Supplies"
+	name = "electrical supplies"
 	req_access = list(access_engine_equip)
 	icon_state = "secureengelec1"
 	icon_closed = "secureengelec"
@@ -51,7 +50,6 @@
 
 	New()
 		..()
-		sleep(2)
 		new /obj/item/clothing/gloves/yellow(src)
 		new /obj/item/clothing/gloves/yellow(src)
 		new /obj/item/weapon/storage/toolbox/electrical(src)
@@ -68,7 +66,7 @@
 
 
 /obj/structure/closet/secure_closet/engineering_welding
-	name = "Welding Supplies"
+	name = "welding supplies"
 	req_access = list(access_construction)
 	icon_state = "secureengweld1"
 	icon_closed = "secureengweld"
@@ -80,7 +78,6 @@
 
 	New()
 		..()
-		sleep(2)
 		new /obj/item/clothing/head/welding(src)
 		new /obj/item/clothing/head/welding(src)
 		new /obj/item/clothing/head/welding(src)
@@ -95,7 +92,7 @@
 
 
 /obj/structure/closet/secure_closet/engineering_personal
-	name = "Engineer's Locker"
+	name = "engineer's locker"
 	req_access = list(access_engine_equip)
 	icon_state = "secureeng1"
 	icon_closed = "secureeng"
@@ -107,15 +104,14 @@
 
 	New()
 		..()
-		sleep(2)
 		if(prob(50))
 			new /obj/item/weapon/storage/backpack/industrial(src)
 		else
 			new /obj/item/weapon/storage/backpack/satchel_eng(src)
 		if (prob(70))
-			new /obj/item/clothing/tie/storage/brown_vest(src)
+			new /obj/item/clothing/accessory/storage/brown_vest(src)
 		else
-			new /obj/item/clothing/tie/storage/webbing(src)
+			new /obj/item/clothing/accessory/storage/webbing(src)
 		new /obj/item/weapon/storage/toolbox/mechanical(src)
 		new /obj/item/device/radio/headset/headset_eng(src)
 		new /obj/item/clothing/suit/storage/hazardvest(src)
@@ -125,7 +121,7 @@
 		new /obj/item/taperoll/engineering(src)
 		return
 /obj/structure/closet/secure_closet/atmos_personal
-	name = "Technician's Locker"
+	name = "technician's locker"
 	req_access = list(access_atmospherics)
 	icon_state = "secureatm1"
 	icon_closed = "secureatm"
@@ -137,15 +133,14 @@
 
 	New()
 		..()
-		sleep(2)
 		if(prob(50))
 			new /obj/item/weapon/storage/backpack/industrial(src)
 		else
 			new /obj/item/weapon/storage/backpack/satchel_eng(src)
 		if (prob(70))
-			new /obj/item/clothing/tie/storage/brown_vest(src)
+			new /obj/item/clothing/accessory/storage/brown_vest(src)
 		else
-			new /obj/item/clothing/tie/storage/webbing(src)
+			new /obj/item/clothing/accessory/storage/webbing(src)
 		new /obj/item/clothing/suit/fire/firefighter(src)
 		new /obj/item/device/flashlight(src)
 		new /obj/item/weapon/extinguisher(src)

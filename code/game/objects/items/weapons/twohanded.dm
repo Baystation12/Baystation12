@@ -18,14 +18,14 @@
  */
 /obj/item/weapon/twohanded
 	var/wielded = 0
-	var/force_unwielded = 0
 	var/force_wielded = 0
 	var/wieldsound = null
 	var/unwieldsound = null
+	var/base_icon
 
 /obj/item/weapon/twohanded/proc/unwield()
 	wielded = 0
-	force = force_unwielded
+	force = initial(force)
 	name = "[initial(name)]"
 	update_icon()
 
@@ -33,6 +33,10 @@
 	wielded = 1
 	force = force_wielded
 	name = "[initial(name)] (Wielded)"
+	update_icon()
+
+/obj/item/weapon/twohanded/New()
+	..()
 	update_icon()
 
 /obj/item/weapon/twohanded/mob_can_equip(M as mob, slot)
@@ -52,7 +56,8 @@
 	return	unwield()
 
 /obj/item/weapon/twohanded/update_icon()
-	return
+	icon_state = "[base_icon][wielded]"
+	item_state = icon_state
 
 /obj/item/weapon/twohanded/pickup(mob/user)
 	unwield()
@@ -63,6 +68,7 @@
 		return
 
 	..()
+
 	if(wielded) //Trying to unwield it
 		unwield()
 		user << "<span class='notice'>You are now carrying the [name] with one hand.</span>"
@@ -72,7 +78,6 @@
 		var/obj/item/weapon/twohanded/offhand/O = user.get_inactive_hand()
 		if(O && istype(O))
 			O.unwield()
-		return
 
 	else //Trying to wield it
 		if(user.get_inactive_hand())
@@ -87,7 +92,13 @@
 		O.name = "[initial(name)] - offhand"
 		O.desc = "Your second grip on the [initial(name)]"
 		user.put_in_inactive_hand(O)
-		return
+
+	if(istype(user,/mob/living/carbon/human))
+		var/mob/living/carbon/human/H = user
+		H.update_inv_l_hand()
+		H.update_inv_r_hand()
+
+	return
 
 ///////////OFFHAND///////////////
 /obj/item/weapon/twohanded/offhand
@@ -101,25 +112,24 @@
 	wield()
 		del(src)
 
+/obj/item/weapon/twohanded/offhand/update_icon()
+	return
+
 /*
  * Fireaxe
  */
 /obj/item/weapon/twohanded/fireaxe  // DEM AXES MAN, marker -Agouri
 	icon_state = "fireaxe0"
+	base_icon = "fireaxe"
 	name = "fire axe"
 	desc = "Truly, the weapon of a madman. Who would think to fight fire with an axe?"
-	force = 5
+	force = 10
 	sharp = 1
 	edge = 1
 	w_class = 4.0
 	slot_flags = SLOT_BACK
-	force_unwielded = 10
 	force_wielded = 40
 	attack_verb = list("attacked", "chopped", "cleaved", "torn", "cut")
-
-/obj/item/weapon/twohanded/fireaxe/update_icon()  //Currently only here to fuck with the on-mob icons.
-	icon_state = "fireaxe[wielded]"
-	return
 
 /obj/item/weapon/twohanded/fireaxe/afterattack(atom/A as mob|obj|turf|area, mob/user as mob, proximity)
 	if(!proximity) return
@@ -142,6 +152,7 @@
  */
 /obj/item/weapon/twohanded/dualsaber
 	icon_state = "dualsaber0"
+	base_icon = "dualsaber"
 	name = "double-bladed energy sword"
 	desc = "Handle with care."
 	force = 3
@@ -149,19 +160,14 @@
 	throw_speed = 1
 	throw_range = 5
 	w_class = 2.0
-	force_unwielded = 3
 	force_wielded = 30
 	wieldsound = 'sound/weapons/saberon.ogg'
 	unwieldsound = 'sound/weapons/saberoff.ogg'
-	flags = FPRINT | TABLEPASS | NOSHIELD
+	flags = NOSHIELD
 	origin_tech = "magnets=3;syndicate=4"
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	sharp = 1
 	edge = 1
-
-/obj/item/weapon/twohanded/dualsaber/update_icon()
-	icon_state = "dualsaber[wielded]"
-	return
 
 /obj/item/weapon/twohanded/dualsaber/attack(target as mob, mob/living/user as mob)
 	..()
@@ -172,7 +178,7 @@
 	if((wielded) && prob(50))
 		spawn(0)
 			for(var/i in list(1,2,4,8,4,2,1,2,4,8,4,2))
-				user.dir = i
+				user.set_dir(i)
 				sleep(1)
 
 /obj/item/weapon/twohanded/dualsaber/IsShield()
@@ -184,22 +190,44 @@
 //spears, bay edition
 /obj/item/weapon/twohanded/spear
 	icon_state = "spearglass0"
+	base_icon = "spearglass"
 	name = "spear"
 	desc = "A haphazardly-constructed yet still deadly weapon of ancient design."
 	force = 14
 	w_class = 4.0
 	slot_flags = SLOT_BACK
-	force_unwielded = 14
 	force_wielded = 22 // Was 13, Buffed - RR
 	throwforce = 20
 	throw_speed = 3
-	edge = 1
+	edge = 0
 	sharp = 1
 	flags = NOSHIELD
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	attack_verb = list("attacked", "poked", "jabbed", "torn", "gored")
 
-/obj/item/weapon/twohanded/spear/update_icon()
-	icon_state = "spearglass[wielded]"
-	return
+/obj/item/weapon/twohanded/baseballbat
+	name = "wooden bat"
+	desc = "HOME RUN!"
+	icon_state = "woodbat0"
+	base_icon = "woodbat"
+	item_state = "woodbat"
+	sharp = 0
+	edge = 0
+	w_class = 3
+	force = 15
+	throw_speed = 3
+	throw_range = 7
+	throwforce = 7
+	attack_verb = list("smashed", "beaten", "slammed", "smacked", "striked", "battered", "bonked")
+	hitsound = 'sound/weapons/genhit3.ogg'
+	force_wielded = 23
 
+/obj/item/weapon/twohanded/baseballbat/metal
+	name = "metal bat"
+	desc = "A shiny metal bat."
+	icon_state = "metalbat0"
+	base_icon = "metalbat"
+	item_state = "metalbat"
+	force = 18
+	w_class = 3.0
+	force_wielded = 27

@@ -6,14 +6,14 @@
 	name = "high power gas pump"
 	desc = "A pump. Has double the power rating of the standard gas pump."
 
-	active_power_usage = 15000	//This also doubles as a measure of how powerful the pump is, in Watts. 15000 W ~ 20 HP
+	power_rating = 15000	//15000 W ~ 20 HP
 
 /obj/machinery/atmospherics/binary/pump/high_power/on
-	on = 1
+	use_power = 1
 	icon_state = "map_on"
 
 /obj/machinery/atmospherics/binary/pump/high_power/update_icon()
 	if(!powered())
 		icon_state = "off"
 	else
-		icon_state = "[on ? "on" : "off"]"
+		icon_state = "[use_power ? "on" : "off"]"

@@ -1,5 +1,5 @@
 /obj/machinery/computer/diseasesplicer
-	name = "Disease Splicer"
+	name = "disease splicer"
 	icon = 'icons/obj/computer.dmi'
 	icon_state = "crew"
 
@@ -36,9 +36,6 @@
 /obj/machinery/computer/diseasesplicer/attack_ai(var/mob/user as mob)
 	return src.attack_hand(user)
 
-/obj/machinery/computer/diseasesplicer/attack_paw(var/mob/user as mob)
-	return src.attack_hand(user)
-
 /obj/machinery/computer/diseasesplicer/attack_hand(var/mob/user as mob)
 	if(..()) return
 	ui_interact(user)
@@ -52,7 +49,7 @@
 	data["affected_species"] = null
 
 	if (memorybank)
-		data["buffer"] = list("name" = (analysed ? memorybank.effect.name : "Unknown Symptom"), "stage" = memorybank.stage)
+		data["buffer"] = list("name" = (analysed ? memorybank.effect.name : "Unknown Symptom"), "stage" = memorybank.effect.stage)
 	if (species_buffer)
 		data["species_buffer"] = analysed ? list2text(species_buffer, ", ") : "Unknown Species"
 
@@ -125,7 +122,7 @@
 			nanomanager.update_uis(src)
 
 /obj/machinery/computer/diseasesplicer/Topic(href, href_list)
-	if(..()) return 0
+	if(..()) return 1
 
 	var/mob/user = usr
 	var/datum/nanoui/ui = nanomanager.get_open_ui(user, src, "main")
@@ -163,13 +160,25 @@
 
 	if(href_list["splice"])
 		if(dish)
-			if (memorybank)
-				for(var/datum/disease2/effectholder/e in dish.virus2.effects)
-					if(e.stage == memorybank.stage)
-						e.effect = memorybank.effect
+			var/target = text2num(href_list["splice"]) // target = 1 to 4 for effects, 5 for species
+			if(memorybank && 0 < target && target <= 4)
+				if(target < memorybank.effect.stage) return // too powerful, catching this for href exploit prevention
 
-			if (species_buffer)
+				var/datum/disease2/effectholder/target_holder
+				var/list/illegal_types = list()
+				for(var/datum/disease2/effectholder/e in dish.virus2.effects)
+					if(e.stage == target)
+						target_holder = e
+					else
+						illegal_types += e.effect.type
+				if(memorybank.effect.type in illegal_types) return
+				target_holder.effect = memorybank.effect
+
+			else if(species_buffer && target == 5)
 				dish.virus2.affected_species = species_buffer
+
+			else
+				return
 
 			splicing = 10
 			dish.virus2.uniqueID = rand(0,10000)

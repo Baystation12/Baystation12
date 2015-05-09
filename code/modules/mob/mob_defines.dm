@@ -91,6 +91,7 @@
 	var/list/speak_emote = list("says") // Verbs used when speaking. Defaults to 'say' if speak_emote is null.
 	var/emote_type = 1		// Define emote default type, 1 for seen emotes, 2 for heard emotes
 	var/slaver = null
+	var/facing_dir = null   // Used for the ancient art of moonwalking.
 	var/name_archive //For admin things like possession
 
 	var/timeofdeath = 0.0//Living
@@ -123,7 +124,7 @@
 	var/m_int = null//Living
 	var/m_intent = "run"//Living
 	var/lastKnownIP = null
-	var/obj/structure/stool/bed/buckled = null//Living
+	var/obj/buckled = null//Living
 	var/obj/item/l_hand = null//Living
 	var/obj/item/r_hand = null//Living
 	var/obj/item/weapon/back = null//Human/Monkey
@@ -216,13 +217,15 @@
 	var/universal_speak = 0 // Set to 1 to enable the mob to speak to everyone -- TLE
 	var/universal_understand = 0 // Set to 1 to enable the mob to understand everyone, not necessarily speak
 
-	var/has_limbs = 1 //Whether this mob have any limbs he can move with
-	var/can_stand = 1 //Whether this mob have ability to stand
+	var/stance_damage = 0 //Whether this mob's ability to stand has been affected
 
-	var/immune_to_ssd = 0
+	//SSD var, changed it up some so people can have special things happen for different mobs when SSD.
+	var/player_logged = 0
 
-	var/turf/listed_turf = null  //the current turf being examined in the stat panel
+	var/turf/listed_turf = null  	//the current turf being examined in the stat panel
+	var/list/shouldnt_see = list()	//list of objects that this mob shouldn't see in the stat panel. this silliness is needed because of AI alt+click and cult blood runes
 
 	var/list/active_genes=list()
 	var/iaa = 0
 	var/iaarevoked = 0
+

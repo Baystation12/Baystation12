@@ -5,6 +5,7 @@
 	icon_state = "repairbot"
 	maxHealth = 35
 	health = 35
+	cell_emp_mult = 1
 	universal_speak = 0
 	universal_understand = 1
 	gender = NEUTER
@@ -15,14 +16,6 @@
 	req_access = list(access_engine, access_robotics)
 	integrated_light_power = 2
 	local_transmit = 1
-
-	// We need to keep track of a few module items so we don't need to do list operations
-	// every time we need them. These get set in New() after the module is chosen.
-	var/obj/item/stack/sheet/metal/cyborg/stack_metal = null
-	var/obj/item/stack/sheet/wood/cyborg/stack_wood = null
-	var/obj/item/stack/sheet/glass/cyborg/stack_glass = null
-	var/obj/item/stack/sheet/mineral/plastic/cyborg/stack_plastic = null
-	var/obj/item/weapon/matter_decompiler/decompiler = null
 
 	//Used for self-mailing.
 	var/mail_destination = ""
@@ -41,7 +34,7 @@
 	add_language("Drone Talk", 1)
 
 	if(camera && "Robots" in camera.network)
-		camera.network.Add("Engineering")
+		camera.add_network("Engineering")
 
 	//They are unable to be upgraded, so let's give them a bit of a better battery.
 	cell.maxcharge = 10000
@@ -58,27 +51,21 @@
 	verbs -= /mob/living/silicon/robot/verb/Namepick
 	module = new /obj/item/weapon/robot_module/drone(src)
 
-	//Grab stacks.
-	stack_metal = locate(/obj/item/stack/sheet/metal/cyborg) in src.module
-	stack_wood = locate(/obj/item/stack/sheet/wood/cyborg) in src.module
-	stack_glass = locate(/obj/item/stack/sheet/glass/cyborg) in src.module
-	stack_plastic = locate(/obj/item/stack/sheet/mineral/plastic/cyborg) in src.module
-
-	//Grab decompiler.
-	decompiler = locate(/obj/item/weapon/matter_decompiler) in src.module
-
 	//Some tidying-up.
 	flavor_text = "It's a tiny little repair drone. The casing is stamped with an NT logo and the subscript: 'NanoTrasen Recursive Repair Systems: Fixing Tomorrow's Problem, Today!'"
 	updateicon()
 
 /mob/living/silicon/robot/drone/init()
 	laws = new /datum/ai_laws/drone()
-	connected_ai = null
-
 	aiCamera = new/obj/item/device/camera/siliconcam/drone_camera(src)
 	playsound(src.loc, 'sound/machines/twobeep.ogg', 50, 0)
 
 //Redefining some robot procs...
+/mob/living/silicon/robot/drone/SetName(pickedName as text)
+	// Would prefer to call the grandparent proc but this isn't possible, so..
+	real_name = pickedName
+	name = real_name
+
 /mob/living/silicon/robot/drone/updatename()
 	real_name = "maintenance drone ([rand(100,999)])"
 	name = real_name
@@ -136,7 +123,7 @@
 		clear_supplied_laws()
 		clear_inherent_laws()
 		laws = new /datum/ai_laws/syndicate_override
-		set_zeroth_law("Only [user.real_name] and people he designates as being such are Syndicate Agents.")
+		set_zeroth_law("Only [user.real_name] and people he designates as being such are operatives.")
 
 		src << "<b>Obey these laws:</b>"
 		laws.show_laws(src)
@@ -302,6 +289,7 @@
 		return
 
 /mob/living/silicon/robot/drone/add_robot_verbs()
+	src.verbs |= robot_verbs_subsystems
 
 /mob/living/silicon/robot/drone/remove_robot_verbs()
-
+	src.verbs -= robot_verbs_subsystems

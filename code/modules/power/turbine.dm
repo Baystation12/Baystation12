@@ -22,7 +22,6 @@
 	anchored = 1
 	density = 1
 	var/obj/machinery/compressor/compressor
-	directwired = 1
 	var/turf/simulated/outturf
 	var/lastgen
 
@@ -35,7 +34,7 @@
 	anchored = 1
 	density = 1
 	var/obj/machinery/compressor/compressor
-	var/list/obj/machinery/door/poddoor/doors
+	var/list/obj/machinery/door/blast/doors
 	var/id = 0
 	var/door_status = 0
 
@@ -223,7 +222,7 @@
 			if(id == C.comp_id)
 				compressor = C
 		doors = new /list()
-		for(var/obj/machinery/door/poddoor/P in machines)
+		for(var/obj/machinery/door/blast/P in machines)
 			if(P.id == id)
 				doors += P
 
@@ -297,7 +296,7 @@
 		else if( href_list["str"] )
 			src.compressor.starter = !src.compressor.starter
 		else if (href_list["doors"])
-			for(var/obj/machinery/door/poddoor/D in src.doors)
+			for(var/obj/machinery/door/blast/D in src.doors)
 				if (door_status == 0)
 					spawn( 0 )
 						D.open()

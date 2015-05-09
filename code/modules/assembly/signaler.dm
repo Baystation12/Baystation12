@@ -12,6 +12,7 @@
 	var/code = 30
 	var/frequency = 1457
 	var/delay = 0
+	var/datum/wires/connected = null
 	var/datum/radio_frequency/radio_connection
 	var/deadman = 0
 
@@ -68,7 +69,7 @@
 
 
 	Topic(href, href_list)
-		..()
+		if(..()) return 1
 
 		if(!usr.canmove || usr.stat || usr.restrained() || !in_range(loc, usr))
 			usr << browse(null, "window=radio")
@@ -117,7 +118,9 @@
 
 
 	pulse(var/radio = 0)
-		if(holder)
+		if(src.connected && src.wires)
+			connected.Pulse(src)
+		else if(holder)
 			holder.process_activation(src, 1, 0)
 		else
 			..(radio)
@@ -165,4 +168,5 @@
 		set desc = "BOOOOM!"
 		deadman = 1
 		processing_objects.Add(src)
+		log_and_message_admins("is threatening to trigger a signaler deadman's switch")
 		usr.visible_message("\red [usr] moves their finger over [src]'s signal button...")

@@ -58,13 +58,14 @@
 	else
 		icon_state = "[initial(name)]"
 
-/obj/item/weapon/melee/baton/examine()
-	set src in view(1)
-	..()
+/obj/item/weapon/melee/baton/examine(mob/user)
+	if(!..(user, 1))
+		return
+	
 	if(bcell)
-		usr <<"<span class='notice'>The baton is [round(bcell.percent())]% charged.</span>"
+		user <<"<span class='notice'>The baton is [round(bcell.percent())]% charged.</span>"
 	if(!bcell)
-		usr <<"<span class='warning'>The baton does not have a power source installed.</span>"
+		user <<"<span class='warning'>The baton does not have a power source installed.</span>"
 
 /obj/item/weapon/melee/baton/attackby(obj/item/weapon/W, mob/user)
 	if(istype(W, /obj/item/weapon/cell))

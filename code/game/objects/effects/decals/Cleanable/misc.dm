@@ -143,3 +143,12 @@
 	icon = 'icons/effects/effects.dmi'
 	random_icon_states = list("brokenplant")
 
+/obj/effect/decal/cleanable/fruit_smudge
+	name = "smudge"
+	desc = "Some kind of fruit smear."
+	density = 0
+	anchored = 1
+	layer = 2
+	icon = 'icons/effects/blood.dmi'
+	icon_state = "mfloor1"
+	random_icon_states = list("mfloor1", "mfloor2", "mfloor3", "mfloor4", "mfloor5", "mfloor6", "mfloor7")

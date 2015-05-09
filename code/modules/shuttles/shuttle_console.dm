@@ -67,7 +67,7 @@
 
 /obj/machinery/computer/shuttle_control/Topic(href, href_list)
 	if(..())
-		return
+		return 1
 
 	usr.set_machine(src)
 	src.add_fingerprint(usr)

@@ -42,11 +42,11 @@
 				acceptable_reagents |= reagent
 			if (recipe.items)
 				max_n_of_items = max(max_n_of_items,recipe.items.len)
-
 		// This will do until I can think of a fun recipe to use dionaea in -
 		// will also allow anything using the holder item to be microwaved into
 		// impure carbon. ~Z
 		acceptable_items |= /obj/item/weapon/holder
+		acceptable_items |= /obj/item/weapon/reagent_containers/food/snacks/grown
 
 /*******************
 *   Item Adding
@@ -137,9 +137,6 @@
 		user << "\red You have no idea what you can cook with this [O]."
 		return 1
 	src.updateUsrDialog()
-
-/obj/machinery/microwave/attack_paw(mob/user as mob)
-	return src.attack_hand(user)
 
 /obj/machinery/microwave/attack_ai(mob/user as mob)
 	return 0
@@ -277,7 +274,7 @@
 			cooked.loc = src.loc
 		return
 
-/obj/machinery/microwave/proc/wzhzhzh(var/seconds as num)
+/obj/machinery/microwave/proc/wzhzhzh(var/seconds as num) // Whoever named this proc is fucking literally Satan. ~ Z
 	for (var/i=1 to seconds)
 		if (stat & (NOPOWER|BROKEN))
 			return 0

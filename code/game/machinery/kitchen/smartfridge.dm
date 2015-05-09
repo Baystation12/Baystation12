@@ -16,17 +16,26 @@
 	var/icon_off = "smartfridge-off"
 	var/icon_panel = "smartfridge-panel"
 	var/item_quants = list()
-	var/ispowered = 1 //starts powered
-	var/isbroken = 0
 	var/seconds_electrified = 0;
 	var/shoot_inventory = 0
 	var/locked = 0
-	var/panel_open = 0 //Hacking a smartfridge
-	var/wires = 7
-	var/const/WIRE_SHOCK = 1
-	var/const/WIRE_SHOOTINV = 2
-	var/const/WIRE_SCANID = 3 //Only used by the secure smartfridge, but required by the cut, mend and pulse procs.
+	var/scan_id = 1
+	var/is_secure = 0
+	var/datum/wires/smartfridge/wires = null
 
+/obj/machinery/smartfridge/secure
+	is_secure = 1
+
+/obj/machinery/smartfridge/New()
+	..()
+	if(is_secure)
+		wires = new/datum/wires/smartfridge/secure(src)
+	else
+		wires = new/datum/wires/smartfridge(src)
+
+/obj/machinery/smartfridge/Del()
+	del(wires) // qdel
+	..()
 
 /obj/machinery/smartfridge/proc/accept_check(var/obj/item/O as obj)
 	if(istype(O,/obj/item/weapon/reagent_containers/food/snacks/grown/) || istype(O,/obj/item/seeds/))
@@ -109,8 +118,40 @@
 	if(istype(O,/obj/item/weapon/reagent_containers/glass) || istype(O,/obj/item/weapon/reagent_containers/food/drinks) || istype(O,/obj/item/weapon/reagent_containers/food/condiment))
 		return 1
 
+/obj/machinery/smartfridge/drying_rack
+	name = "\improper Drying Rack"
+	desc = "A machine for drying plants."
+
+/obj/machinery/smartfridge/drying_rack/accept_check(var/obj/item/O as obj)
+	if(istype(O, /obj/item/weapon/reagent_containers/food/snacks/))
+		var/obj/item/weapon/reagent_containers/food/snacks/S = O
+		if (S.dried_type)
+			return 1
+	return 0
+
+/obj/machinery/smartfridge/drying_rack/process()
+	..()
+	if (contents.len)
+		dry()
+
+/obj/machinery/smartfridge/drying_rack/proc/dry()
+	for(var/obj/item/weapon/reagent_containers/food/snacks/S in contents)
+		if(S.dried_type == S.type)
+			S.dry = 1
+			item_quants[S.name]--
+			S.name = "dried [S.name]"
+			S.color = "#AAAAAA"
+			S.loc = loc
+		else
+			var/D = S.dried_type
+			new D(loc)
+			item_quants[S.name]--
+			del(S)
+		return
+	return
+
 /obj/machinery/smartfridge/process()
-	if(!src.ispowered)
+	if(stat & (BROKEN|NOPOWER))
 		return
 	if(src.seconds_electrified > 0)
 		src.seconds_electrified--
@@ -118,16 +159,16 @@
 		src.throw_item()
 
 /obj/machinery/smartfridge/power_change()
+	var/old_stat = stat
 	..()
-	if( !(stat & NOPOWER) )
-		src.ispowered = 1
-		if(!isbroken)
-			icon_state = icon_on
+	if(old_stat != stat)
+		update_icon()
+
+/obj/machinery/smartfridge/update_icon()
+	if(stat & (BROKEN|NOPOWER))
+		icon_state = icon_off
 	else
-		spawn(rand(0, 15))
-			src.ispowered = 0
-			if(!isbroken)
-				icon_state = icon_off
+		icon_state = icon_on
 
 /*******************
 *   Item Adding
@@ -136,7 +177,7 @@
 /obj/machinery/smartfridge/attackby(var/obj/item/O as obj, var/mob/user as mob)
 	if(istype(O, /obj/item/weapon/screwdriver))
 		panel_open = !panel_open
-		user << "You [panel_open ? "open" : "close"] the maintenance panel."
+		user.visible_message("[user] [panel_open ? "opens" : "closes"] the maintenance panel of \the [src].", "You [panel_open ? "open" : "close"] the maintenance panel of \the [src].")
 		overlays.Cut()
 		if(panel_open)
 			overlays += image(icon, icon_panel)
@@ -148,7 +189,7 @@
 			attack_hand(user)
 		return
 
-	if(!src.ispowered)
+	if(stat & NOPOWER)
 		user << "<span class='notice'>\The [src] is unpowered and useless.</span>"
 		return
 
@@ -163,13 +204,12 @@
 				item_quants[O.name]++
 			else
 				item_quants[O.name] = 1
-			user.visible_message("<span class='notice'>[user] has added \the [O] to \the [src].", \
-								 "<span class='notice'>You add \the [O] to \the [src].")
+			user.visible_message("<span class='notice'>[user] has added \the [O] to \the [src].", "<span class='notice'>You add \the [O] to \the [src].")
 
 			nanomanager.update_uis(src)
 
-	else if(istype(O, /obj/item/weapon/storage/bag/plants))
-		var/obj/item/weapon/storage/bag/plants/P = O
+	else if(istype(O, /obj/item/weapon/storage/bag))
+		var/obj/item/weapon/storage/bag/P = O
 		var/plants_loaded = 0
 		for(var/obj/G in P.contents)
 			if(accept_check(G))
@@ -185,9 +225,7 @@
 					plants_loaded++
 		if(plants_loaded)
 
-			user.visible_message( \
-				"<span class='notice'>[user] loads \the [src] with \the [P].</span>", \
-				"<span class='notice'>You load \the [src] with \the [P].</span>")
+			user.visible_message("<span class='notice'>[user] loads \the [src] with \the [P].</span>", "<span class='notice'>You load \the [src] with \the [P].</span>")
 			if(P.contents.len > 0)
 				user << "<span class='notice'>Some items are refused.</span>"
 
@@ -198,7 +236,7 @@
 		return 1
 
 /obj/machinery/smartfridge/secure/attackby(var/obj/item/O as obj, var/mob/user as mob)
-	if (istype(O, /obj/item/weapon/card/emag))
+	if(istype(O, /obj/item/weapon/card/emag))
 		emagged = 1
 		locked = -1
 		user << "You short out the product lock on [src]."
@@ -206,18 +244,13 @@
 
 	..()
 
-/obj/machinery/smartfridge/attack_paw(mob/user as mob)
-	return attack_hand(user)
-
 /obj/machinery/smartfridge/attack_ai(mob/user as mob)
 	return 0
 
 /obj/machinery/smartfridge/attack_hand(mob/user as mob)
-	if(!ispowered) return
-	if(seconds_electrified != 0)
-		if(shock(user, 100))
-			return
-
+	if(stat & (NOPOWER|BROKEN))
+		return
+	wires.Interact(user)
 	ui_interact(user)
 
 /*******************
@@ -227,12 +260,8 @@
 /obj/machinery/smartfridge/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	user.set_machine(src)
 
-	var/is_secure = istype(src,/obj/machinery/smartfridge/secure)
-
 	var/data[0]
 	data["contents"] = null
-	data["wires"] = null
-	data["panel_open"] = panel_open
 	data["electrified"] = seconds_electrified > 0
 	data["shoot_inventory"] = shoot_inventory
 	data["locked"] = locked
@@ -242,52 +271,32 @@
 	for (var/i=1 to length(item_quants))
 		var/K = item_quants[i]
 		var/count = item_quants[K]
-		if (count > 0)
+		if(count > 0)
 			items.Add(list(list("display_name" = html_encode(capitalize(K)), "vend" = i, "quantity" = count)))
 
-	if (items.len > 0)
+	if(items.len > 0)
 		data["contents"] = items
 
-	var/list/vendwires = null
-	if (is_secure)
-		vendwires = list(
-			"Violet" = 1,
-			"Orange" = 2,
-			"Green" = 3)
-	else
-		vendwires = list(
-			"Blue" = 1,
-			"Red" = 2,
-			"Black" = 3)
-
-	var/list/vendor_wires[0]
-	for (var/wire in vendwires)
-		var is_uncut = wires & APCWireColorToFlag[vendwires[wire]]
-		vendor_wires.Add(list(list("wire" = wire, "cut" = !is_uncut, "index" = vendwires[wire])))
-
-	if (vendor_wires.len > 0)
-		data["wires"] = vendor_wires
-
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
-	if (!ui)
+	if(!ui)
 		ui = new(user, src, ui_key, "smartfridge.tmpl", src.name, 400, 500)
 		ui.set_initial_data(data)
 		ui.open()
 
 /obj/machinery/smartfridge/Topic(href, href_list)
-	if (..()) return 0
+	if(..()) return 0
 
 	var/mob/user = usr
 	var/datum/nanoui/ui = nanomanager.get_open_ui(user, src, "main")
 
 	src.add_fingerprint(user)
 
-	if (href_list["close"])
+	if(href_list["close"])
 		user.unset_machine()
 		ui.close()
 		return 0
 
-	if (href_list["vend"])
+	if(href_list["vend"])
 		var/index = text2num(href_list["vend"])
 		var/amount = text2num(href_list["amount"])
 		var/K = item_quants[index]
@@ -299,88 +308,14 @@
 
 			var/i = amount
 			for(var/obj/O in contents)
-				if (O.name == K)
+				if(O.name == K)
 					O.loc = loc
 					i--
-					if (i <= 0)
+					if(i <= 0)
 						return 1
 
 		return 1
-
-	if (panel_open)
-		if (href_list["cutwire"])
-			if (!( istype(usr.get_active_hand(), /obj/item/weapon/wirecutters) ))
-				user << "You need wirecutters!"
-				return 1
-
-			var/wire_index = text2num(href_list["cutwire"])
-			if (isWireColorCut(wire_index))
-				mend(wire_index)
-			else
-				cut(wire_index)
-			return 1
-
-		if (href_list["pulsewire"])
-			if (!istype(usr.get_active_hand(), /obj/item/device/multitool))
-				usr << "You need a multitool!"
-				return 1
-
-			var/wire_index = text2num(href_list["pulsewire"])
-			if (isWireColorCut(wire_index))
-				usr << "You can't pulse a cut wire."
-				return 1
-
-			pulse(wire_index)
-			return 1
-
 	return 0
-
-/*************
-*	Hacking
-**************/
-
-/obj/machinery/smartfridge/proc/cut(var/wireColor)
-	var/wireFlag = APCWireColorToFlag[wireColor]
-	var/wireIndex = APCWireColorToIndex[wireColor]
-	src.wires &= ~wireFlag
-	switch(wireIndex)
-		if(WIRE_SHOCK)
-			src.seconds_electrified = -1
-		if (WIRE_SHOOTINV)
-			if(!src.shoot_inventory)
-				src.shoot_inventory = 1
-		if(WIRE_SCANID)
-			src.locked = 1
-
-/obj/machinery/smartfridge/proc/mend(var/wireColor)
-	var/wireFlag = APCWireColorToFlag[wireColor]
-	var/wireIndex = APCWireColorToIndex[wireColor]
-	src.wires |= wireFlag
-	switch(wireIndex)
-		if(WIRE_SHOCK)
-			src.seconds_electrified = 0
-		if (WIRE_SHOOTINV)
-			src.shoot_inventory = 0
-		if(WIRE_SCANID)
-			src.locked = 0
-
-/obj/machinery/smartfridge/proc/pulse(var/wireColor)
-	var/wireIndex = APCWireColorToIndex[wireColor]
-	switch(wireIndex)
-		if(WIRE_SHOCK)
-			src.seconds_electrified = 30
-		if(WIRE_SHOOTINV)
-			src.shoot_inventory = !src.shoot_inventory
-		if(WIRE_SCANID)
-			src.locked = -1
-
-/obj/machinery/smartfridge/proc/isWireColorCut(var/wireColor)
-	var/wireFlag = APCWireColorToFlag[wireColor]
-	return ((src.wires & wireFlag) == 0)
-
-/obj/machinery/smartfridge/proc/isWireCut(var/wireIndex)
-	var/wireFlag = APCIndexToFlag[wireIndex]
-	return ((src.wires & wireFlag) == 0)
 
 /obj/machinery/smartfridge/proc/throw_item()
 	var/obj/throw_item = null
@@ -411,9 +346,9 @@
 *************************/
 
 /obj/machinery/smartfridge/secure/Topic(href, href_list)
-	if(!ispowered) return 0
-	if (usr.contents.Find(src) || (in_range(src, usr) && istype(loc, /turf)))
-		if (!allowed(usr) && !emagged && locked != -1 && href_list["vend"])
-			usr << "\red Access denied."
+	if(stat & (NOPOWER|BROKEN)) return 0
+	if(usr.contents.Find(src) || (in_range(src, usr) && istype(loc, /turf)))
+		if(!allowed(usr) && !emagged && locked != -1 && href_list["vend"])
+			usr << "<span class='warning'>Access denied.</span>"
 			return 0
 	return ..()

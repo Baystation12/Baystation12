@@ -1,12 +1,12 @@
 ///////////////ANTIBODY SCANNER///////////////
 
 /obj/item/device/antibody_scanner
-	name = "\improper Antibody Scanner"
+	name = "antibody scanner"
 	desc = "Scans living beings for antibodies in their blood."
 	icon_state = "anti"
 	w_class = 2.0
 	item_state = "electronic"
-	flags = FPRINT | TABLEPASS | CONDUCT
+	flags = CONDUCT
 
 /obj/item/device/antibody_scanner/attack(mob/M as mob, mob/user as mob)
 	if(!istype(M,/mob/living/carbon/))
@@ -20,7 +20,7 @@
 			report("Scan aborted: The target does not have blood.", user)
 			return
 
-	if(!C.antibodies)
+	if(!C.antibodies.len)
 		report("Scan Complete: No antibodies detected.", user)
 		return
 
@@ -36,11 +36,12 @@
 ///////////////VIRUS DISH///////////////
 
 /obj/item/weapon/virusdish
-	name = "virus containment/growth dish"
+	name = "virus dish"
 	icon = 'icons/obj/items.dmi'
 	icon_state = "implantcase-b"
 	var/datum/disease2/disease/virus2 = null
 	var/growth = 0
+	var/basic_info = null
 	var/info = 0
 	var/analysed = 0
 
@@ -65,11 +66,18 @@
 					infect_virus2(target, src.virus2)
 		del src
 
-/obj/item/weapon/virusdish/examine()
-	usr << "This is a virus containment dish."
-	if(src.info)
-		usr << "It has the following information about its contents:"
-		usr << src.info
+/obj/item/weapon/virusdish/examine(mob/user)
+	..()
+	if(basic_info)
+		user << "[basic_info] : <a href='?src=\ref[src];info=1'>More Information</a>"
+
+/obj/item/weapon/virusdish/Topic(href, href_list)
+	. = ..()
+	if(.) return 1
+
+	if(href_list["info"])
+		usr << browse(info, "window=info_\ref[src]")
+		return 1
 
 /obj/item/weapon/ruinedvirusdish
 	name = "ruined virus sample"

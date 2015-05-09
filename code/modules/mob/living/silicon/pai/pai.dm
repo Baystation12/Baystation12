@@ -53,19 +53,23 @@
 	var/secHUD = 0			// Toggles whether the Security HUD is active or not
 	var/medHUD = 0			// Toggles whether the Medical  HUD is active or not
 
+	var/medical_cannotfind = 0
 	var/datum/data/record/medicalActive1		// Datacore record declarations for record software
 	var/datum/data/record/medicalActive2
 
+	var/security_cannotfind = 0
 	var/datum/data/record/securityActive1		// Could probably just combine all these into one
 	var/datum/data/record/securityActive2
 
 	var/obj/machinery/door/hackdoor		// The airlock being hacked
-	var/hackprogress = 0				// Possible values: 0 - 100, >= 100 means the hack is complete and will be reset upon next check
+	var/hackprogress = 0				// Possible values: 0 - 1000, >= 1000 means the hack is complete and will be reset upon next check
+	var/hack_aborted = 0
 
 	var/obj/item/radio/integrated/signal/sradio // AI's signaller
 
 	var/translator_on = 0 // keeps track of the translator module
 
+	var/current_pda_messaging = null
 
 /mob/living/silicon/pai/New(var/obj/item/device/paicard)
 
@@ -259,18 +263,19 @@
 		return
 
 	last_special = world.time + 100
-	canmove = 1
 
 	//I'm not sure how much of this is necessary, but I would rather avoid issues.
-	if(istype(card.loc,/mob))
+	if(istype(card.loc,/obj/item/rig_module))
+		src << "There is no room to unfold inside this rig module. You're good and stuck."
+		return 0
+	else if(istype(card.loc,/mob))
 		var/mob/holder = card.loc
 		holder.drop_from_inventory(card)
-	else if(istype(card.loc,/obj/item/clothing/suit/space/space_ninja))
-		var/obj/item/clothing/suit/space/space_ninja/holder = card.loc
-		holder.pai = null
 	else if(istype(card.loc,/obj/item/device/pda))
 		var/obj/item/device/pda/holder = card.loc
 		holder.pai = null
+
+	canmove = 1
 
 	src.client.perspective = EYE_PERSPECTIVE
 	src.client.eye = src
@@ -313,6 +318,7 @@
 
 	chassis = possible_chassis[choice]
 	verbs -= /mob/living/silicon/pai/proc/choose_chassis
+	verbs += /mob/living/proc/hide
 
 /mob/living/silicon/pai/proc/choose_verbs()
 	set category = "pAI Commands"
@@ -388,33 +394,9 @@
 			..()
 		else
 			src << "<span class='warning'>You are too small to pull that.</span>"
-
-/mob/living/silicon/pai/examine()
-
-	set src in oview()
-
-	if(!usr || !src)	return
-	if( (usr.sdisabilities & BLIND || usr.blinded || usr.stat) && !istype(usr,/mob/dead/observer) )
-		usr << "<span class='notice'>Something is there but you can't see it.</span>"
+	else
+		src << "<span class='warning'>You are too small to pull that.</span>"
 		return
-
-	var/msg = "<span class='info'>*---------*\nThis is \icon[src][name], a personal AI!"
-
-	switch(src.stat)
-		if(CONSCIOUS)
-			if(!src.client)	msg += "\nIt appears to be in stand-by mode." //afk
-		if(UNCONSCIOUS)		msg += "\n<span class='warning'>It doesn't seem to be responding.</span>"
-		if(DEAD)			msg += "\n<span class='deadsay'>It looks completely unsalvageable.</span>"
-	msg += "\n*---------*</span>"
-
-	if(print_flavor_text()) msg += "\n[print_flavor_text()]\n"
-
-	if (pose)
-		if( findtext(pose,".",lentext(pose)) == 0 && findtext(pose,"!",lentext(pose)) == 0 && findtext(pose,"?",lentext(pose)) == 0 )
-			pose = addtext(pose,".") //Makes sure all emotes end with a period.
-		msg += "\nIt is [pose]"
-
-	usr << msg
 
 // No binary for pAIs.
 /mob/living/silicon/pai/binarycheck()

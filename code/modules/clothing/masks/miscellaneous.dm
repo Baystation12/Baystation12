@@ -3,19 +3,16 @@
 	desc = "To stop that awful noise."
 	icon_state = "muzzle"
 	item_state = "muzzle"
-	flags = FPRINT|TABLEPASS|MASKCOVERSMOUTH
+	flags = MASKCOVERSMOUTH
 	body_parts_covered = 0
 	w_class = 2
 	gas_transfer_coefficient = 0.90
 
-//Monkeys can not take the muzzle off of themself! Call PETA!
-/obj/item/clothing/mask/muzzle/attack_paw(mob/user as mob)
-	if (src == user.wear_mask)
-		return
-	else
-		..()
-	return
-
+// Clumsy folks can't take the mask off themselves.
+/obj/item/clothing/mask/muzzle/attack_hand(mob/user as mob)
+	if(user.wear_mask == src && !user.IsAdvancedToolUser())
+		return 0
+	..()
 
 /obj/item/clothing/mask/surgical
 	name = "sterile mask"
@@ -23,17 +20,16 @@
 	icon_state = "sterile"
 	item_state = "sterile"
 	w_class = 2
-	flags = FPRINT|TABLEPASS|MASKCOVERSMOUTH
+	flags = MASKCOVERSMOUTH
 	body_parts_covered = 0
 	gas_transfer_coefficient = 0.90
 	permeability_coefficient = 0.01
-	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 25, rad = 0)
+	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 60, rad = 0)
 
 /obj/item/clothing/mask/fakemoustache
 	name = "fake moustache"
 	desc = "Warning: moustache is fake."
 	icon_state = "fake-moustache"
-	flags = FPRINT|TABLEPASS
 	flags_inv = HIDEFACE
 	body_parts_covered = 0
 
@@ -41,7 +37,6 @@
 	name = "Snorkel"
 	desc = "For the Swimming Savant."
 	icon_state = "snorkel"
-	flags = FPRINT|TABLEPASS
 	flags_inv = HIDEFACE
 	body_parts_covered = 0
 
@@ -52,7 +47,7 @@
 	desc = "A blue neck scarf."
 	icon_state = "blueneckscarf"
 	item_state = "blueneckscarf"
-	flags = FPRINT|TABLEPASS|MASKCOVERSMOUTH
+	flags = MASKCOVERSMOUTH
 	w_class = 2
 	gas_transfer_coefficient = 0.90
 
@@ -61,7 +56,7 @@
 	desc = "A red and white checkered neck scarf."
 	icon_state = "redwhite_scarf"
 	item_state = "redwhite_scarf"
-	flags = FPRINT|TABLEPASS|MASKCOVERSMOUTH
+	flags = MASKCOVERSMOUTH
 	w_class = 2
 	gas_transfer_coefficient = 0.90
 
@@ -70,7 +65,7 @@
 	desc = "A green neck scarf."
 	icon_state = "green_scarf"
 	item_state = "green_scarf"
-	flags = FPRINT|TABLEPASS|MASKCOVERSMOUTH
+	flags = MASKCOVERSMOUTH
 	w_class = 2
 	gas_transfer_coefficient = 0.90
 
@@ -79,7 +74,7 @@
 	desc = "A stealthy, dark scarf."
 	icon_state = "ninja_scarf"
 	item_state = "ninja_scarf"
-	flags = FPRINT|TABLEPASS|MASKCOVERSMOUTH
+	flags = MASKCOVERSMOUTH
 	w_class = 2
 	gas_transfer_coefficient = 0.90
 	siemens_coefficient = 0
@@ -89,7 +84,7 @@
 	desc = "A rubber pig mask."
 	icon_state = "pig"
 	item_state = "pig"
-	flags = FPRINT|TABLEPASS|BLOCKHAIR
+	flags = BLOCKHAIR
 	flags_inv = HIDEFACE
 	w_class = 2
 	siemens_coefficient = 0.9
@@ -100,7 +95,7 @@
 	desc = "A mask made of soft vinyl and latex, representing the head of a horse."
 	icon_state = "horsehead"
 	item_state = "horsehead"
-	flags = FPRINT|TABLEPASS|BLOCKHAIR
+	flags = BLOCKHAIR
 	flags_inv = HIDEFACE
 	body_parts_covered = HEAD|FACE|EYES
 	w_class = 2

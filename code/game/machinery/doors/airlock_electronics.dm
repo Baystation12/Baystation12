@@ -10,6 +10,7 @@
 
 	req_access = list(access_engine)
 
+	var/secure = 0 //if set, then wires will be randomized and bolts will drop if the door is broken
 	var/list/conf_access = null
 	var/one_access = 0 //if set to 1, door would receive req_one_access instead of req_access
 	var/last_configurator = null
@@ -113,4 +114,5 @@
 /obj/item/weapon/airlock_electronics/secure
 	name = "secure airlock electronics"
 	desc = "designed to be somewhat more resistant to hacking than standard electronics."
-	origin_tech = "programming=3"
+	origin_tech = "programming=2"
+	secure = 1

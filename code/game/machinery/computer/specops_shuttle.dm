@@ -12,7 +12,7 @@ var/specops_shuttle_time = 0
 var/specops_shuttle_timeleft = 0
 
 /obj/machinery/computer/specops_shuttle
-	name = "Spec. Ops. Shuttle Console"
+	name = "special operations shuttle control console"
 	icon = 'icons/obj/computer.dmi'
 	icon_state = "shuttle"
 	req_access = list(access_cent_specops)
@@ -140,7 +140,7 @@ var/specops_shuttle_timeleft = 0
 
 	//Begin Marauder launchpad.
 	spawn(0)//So it parallel processes it.
-		for(var/obj/machinery/door/poddoor/M in special_ops)
+		for(var/obj/machinery/door/blast/M in special_ops)
 			switch(M.id)
 				if("ASSAULT0")
 					spawn(10)//1 second delay between each.
@@ -188,7 +188,7 @@ var/specops_shuttle_timeleft = 0
 
 		sleep(50)//Doors remain open for 5 seconds.
 
-		for(var/obj/machinery/door/poddoor/M in special_ops)
+		for(var/obj/machinery/door/blast/M in special_ops)
 			switch(M.id)//Doors close at the same time.
 				if("ASSAULT0")
 					spawn(0)
@@ -248,9 +248,6 @@ var/specops_shuttle_timeleft = 0
 /obj/machinery/computer/specops_shuttle/attack_ai(var/mob/user as mob)
 	return attack_hand(user)
 
-/obj/machinery/computer/specops_shuttle/attack_paw(var/mob/user as mob)
-	return attack_hand(user)
-
 /obj/machinery/computer/specops_shuttle/attackby(I as obj, user as mob)
 	if(istype(I,/obj/item/weapon/card/emag))
 		user << "\blue The electronic systems in this console are far too advanced for your primitive hacking peripherals."
@@ -286,7 +283,7 @@ var/specops_shuttle_timeleft = 0
 
 /obj/machinery/computer/specops_shuttle/Topic(href, href_list)
 	if(..())
-		return
+		return 1
 
 	if ((usr.contents.Find(src) || (in_range(src, usr) && istype(loc, /turf))) || (istype(usr, /mob/living/silicon)))
 		usr.machine = src
@@ -544,7 +541,7 @@ var/specops_shuttle_timeleft = 0
 
 /obj/machinery/computer/specops_shuttle/Topic(href, href_list)
 	if(..())
-		return
+		return 1
 
 	if ((usr.contents.Find(src) || (in_range(src, usr) && istype(loc, /turf))) || (istype(usr, /mob/living/silicon)))
 		usr.set_machine(src)

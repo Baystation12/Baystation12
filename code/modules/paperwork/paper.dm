@@ -22,10 +22,11 @@
 	var/info_links	//A different version of the paper which includes html links at fields and EOF
 	var/stamps		//The (text for the) stamps on the paper.
 	var/fields		//Amount of user created fields
+	var/free_space = MAX_PAPER_MESSAGE_LEN
 	var/list/stamped
-	var/ico[0]      //Icons and
-	var/offset_x[0] //offsets stored for later
-	var/offset_y[0] //usage by the photocopier
+	var/list/ico[0]      //Icons and
+	var/list/offset_x[0] //offsets stored for later
+	var/list/offset_y[0] //usage by the photocopier
 	var/rigged = 0
 	var/spam_flag = 0
 
@@ -41,6 +42,9 @@
 	pixel_x = rand(-9, 9)
 	stamps = ""
 
+	if(name != "paper")
+		desc = "This is a paper titled '" + name + "'."
+
 	if(info != initial(info))
 		info = html_encode(info)
 		info = replacetext(info, "\n", "<BR>")
@@ -48,6 +52,7 @@
 
 	spawn(2)
 		update_icon()
+		update_space(info)
 		updateinfolinks()
 		return
 
@@ -59,22 +64,27 @@
 		return
 	icon_state = "paper"
 
-/obj/item/weapon/paper/examine()
-	set src in oview(1)
+/obj/item/weapon/paper/proc/update_space(var/new_text)
+	if(!new_text)
+		return
 
-//	..()	//We don't want them to see the dumb "this is a paper" thing every time.
-// I didn't like the idea that people can read tiny pieces of paper from across the room.
-// Now you need to be next to the paper in order to read it.
-	if(in_range(usr, src))
-		if(!(istype(usr, /mob/living/carbon/human) || istype(usr, /mob/dead/observer) || istype(usr, /mob/living/silicon)))
-			usr << browse("<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY>[stars(info)][stamps]</BODY></HTML>", "window=[name]")
-			onclose(usr, "[name]")
-		else
-			usr << browse("<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY>[info][stamps]</BODY></HTML>", "window=[name]")
-			onclose(usr, "[name]")
+	free_space -= length(strip_html_properly(new_text, 0))
+
+/obj/item/weapon/paper/examine(mob/user)
+	..()
+	if(in_range(user, src) || istype(user, /mob/dead/observer))
+		show_content(usr)
 	else
-		usr << "<span class='notice'>It is too far away.</span>"
+		user << "<span class='notice'>You have to go closer if you want to read it.</span>"
 	return
+
+/obj/item/weapon/paper/proc/show_content(var/mob/user, var/forceshow=0)
+	if(!(istype(user, /mob/living/carbon/human) || istype(user, /mob/dead/observer) || istype(user, /mob/living/silicon)) && !forceshow)
+		user << browse("<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY>[stars(info)][stamps]</BODY></HTML>", "window=[name]")
+		onclose(user, "[name]")
+	else
+		user << browse("<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY>[info][stamps]</BODY></HTML>", "window=[name]")
+		onclose(user, "[name]")
 
 /obj/item/weapon/paper/verb/rename()
 	set name = "Rename paper"
@@ -84,14 +94,16 @@
 	if((CLUMSY in usr.mutations) && prob(50))
 		usr << "<span class='warning'>You cut yourself on the paper.</span>"
 		return
-	var/n_name = copytext(sanitize(input(usr, "What would you like to label the paper?", "Paper Labelling", null)  as text), 1, MAX_NAME_LEN)
+	var/n_name = sanitize(copytext(input(usr, "What would you like to label the paper?", "Paper Labelling", null)  as text, 1, MAX_NAME_LEN))
 	if((loc == usr && usr.stat == 0))
-		name = "[(n_name ? text("[n_name]") : "paper")]"
+		name = "[(n_name ? text("[n_name]") : initial(name))]"
+	if(name != "paper")
+		desc = "This is a paper titled '" + name + "'."
 	add_fingerprint(usr)
 	return
 
 /obj/item/weapon/paper/attack_self(mob/living/user as mob)
-	examine()
+	user.examinate(src)
 	if(rigged && (Holiday == "April Fool's Day"))
 		if(spam_flag == 0)
 			spam_flag = 1
@@ -118,7 +130,7 @@
 	if(user.zone_sel.selecting == "eyes")
 		user.visible_message("<span class='notice'>You show the paper to [M]. </span>", \
 			"<span class='notice'> [user] holds up a paper and shows it to [M]. </span>")
-		M << examine()
+		M.examinate(src)
 
 	else if(user.zone_sel.selecting == "mouth") // lipstick wiping
 		if(ishuman(M))
@@ -184,11 +196,16 @@
 /obj/item/weapon/paper/proc/clearpaper()
 	info = null
 	stamps = null
+	free_space = MAX_PAPER_MESSAGE_LEN
 	stamped = list()
 	overlays.Cut()
 	updateinfolinks()
 	update_icon()
 
+/obj/item/weapon/paper/proc/get_signature(var/obj/item/weapon/pen/P, mob/user as mob)
+	if(P && istype(P, /obj/item/weapon/pen))
+		return P.get_signature(user)
+	return (user && user.real_name) ? user.real_name : "Anonymous"
 
 /obj/item/weapon/paper/proc/parsepencode(var/t, var/obj/item/weapon/pen/P, mob/user as mob, var/iscrayon = 0)
 //	t = copytext(sanitize(t),1,MAX_MESSAGE_LEN)
@@ -204,16 +221,16 @@
 	t = replacetext(t, "\[/u\]", "</U>")
 	t = replacetext(t, "\[large\]", "<font size=\"4\">")
 	t = replacetext(t, "\[/large\]", "</font>")
-	t = replacetext(t, "\[sign\]", "<font face=\"[signfont]\"><i>[user ? user.real_name : "Anonymous"]</i></font>")
+	t = replacetext(t, "\[sign\]", "<font face=\"[signfont]\"><i>[get_signature(P, user)]</i></font>")
 	t = replacetext(t, "\[field\]", "<span class=\"paper_field\"></span>")
-	
+
 	t = replacetext(t, "\[h1\]", "<H1>")
 	t = replacetext(t, "\[/h1\]", "</H1>")
 	t = replacetext(t, "\[h2\]", "<H2>")
 	t = replacetext(t, "\[/h2\]", "</H2>")
 	t = replacetext(t, "\[h3\]", "<H3>")
 	t = replacetext(t, "\[/h3\]", "</H3>")
-	
+
 	if(!iscrayon)
 		t = replacetext(t, "\[*\]", "<li>")
 		t = replacetext(t, "\[hr\]", "<HR>")
@@ -316,8 +333,16 @@
 	if(href_list["write"])
 		var/id = href_list["write"]
 		//var/t = strip_html_simple(input(usr, "What text do you wish to add to " + (id=="end" ? "the end of the paper" : "field "+id) + "?", "[name]", null),8192) as message
-		//var/t =  strip_html_simple(input("Enter what you want to write:", "Write", null, null)  as message, MAX_MESSAGE_LEN)
-		var/t =  input("Enter what you want to write:", "Write", null, null)  as message
+
+		if(free_space <= 0)
+			usr << "<span class='info'>You're trying to find a free place on paper, but can't!</span>"
+			return
+
+		var/t =  strip_html_simple(input("Enter what you want to write:", "Write", null, null) as message, free_space)
+
+		if(!t)
+			return
+
 		var/obj/item/i = usr.get_active_hand() // Check to see if he still got that darn pen, also check if he's using a crayon or pen.
 		var/iscrayon = 0
 		if(!istype(i, /obj/item/weapon/pen))
@@ -340,15 +365,25 @@
 				message_admins("PAPER: [usr] ([usr.ckey]) tried to use forbidden word in [src]: [bad].")
 				return
 */
+		var last_fields_value = fields
+
 		t = html_encode(t)
 		t = replacetext(t, "\n", "<BR>")
 		t = parsepencode(t, i, usr, iscrayon) // Encode everything from pencode to html
+
+
+		if(fields > 50)//large amount of fields creates a heavy load on the server, see updateinfolinks() and addtofield()
+			usr << "<span class='warning'>Too many fields. Sorry, you can't do this.</span>"
+			fields = last_fields_value
+			return
 
 		if(id!="end")
 			addtofield(text2num(id), t) // He wants to edit a field, let him.
 		else
 			info += t // Oh, he wants to edit to the end of the file, let him.
 			updateinfolinks()
+
+		update_space(t)
 
 		usr << browse("<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY>[info_links][stamps]</BODY></HTML>", "window=[name]") // Update the window
 
@@ -360,6 +395,11 @@
 	var/clown = 0
 	if(user.mind && (user.mind.assigned_role == "Clown"))
 		clown = 1
+
+	if(istype(P, /obj/item/weapon/tape_roll))
+		var/obj/item/weapon/tape_roll/tape = P
+		tape.stick(src, user)
+		return
 
 	if(istype(P, /obj/item/weapon/paper) || istype(P, /obj/item/weapon/photo))
 		if (istype(P, /obj/item/weapon/paper/carbon))

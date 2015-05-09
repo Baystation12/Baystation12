@@ -64,7 +64,7 @@
 	else
 		changed = 1
 
-// The actual updating. It gathers the visible turfs from cameras and puts them into the appropiate lists.
+// The actual updating. It gathers the visible turfs from cameras and puts them into the appropriate lists.
 
 /datum/camerachunk/proc/update()
 
@@ -75,7 +75,8 @@
 	for(var/camera in cameras)
 		var/obj/machinery/camera/c = camera
 
-		if(!c)
+		if(!istype(c))
+			cameras -= c
 			continue
 
 		if(!c.can_use())
@@ -83,7 +84,7 @@
 
 		var/turf/point = locate(src.x + 8, src.y + 8, src.z)
 		if(get_dist(point, c) > 24)
-			continue
+			cameras -= c
 
 		for(var/turf/t in c.can_see())
 			newVisibleTurfs[t] = t
@@ -143,14 +144,8 @@
 		if(t.x >= x && t.y >= y && t.x < x + 16 && t.y < y + 16)
 			turfs[t] = t
 
-	for(var/camera in cameras)
-		var/obj/machinery/camera/c = camera
-		if(!c)
-			continue
-
-		if(!c.can_use())
-			continue
-
+	// At this point we only have functional cameras
+	for(var/obj/machinery/camera/c in cameras)
 		for(var/turf/t in c.can_see())
 			visibleTurfs[t] = t
 

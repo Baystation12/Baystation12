@@ -1,7 +1,7 @@
 /obj/item/device/chameleon
-	name = "chameleon-projector"
+	name = "chameleon projector"
 	icon_state = "shield0"
-	flags = FPRINT | TABLEPASS| CONDUCT
+	flags = CONDUCT
 	slot_flags = SLOT_BELT
 	item_state = "electronic"
 	throwforce = 5.0
@@ -95,7 +95,7 @@
 	icon = new_icon
 	icon_state = new_iconstate
 	overlays = new_overlays
-	dir = O.dir
+	set_dir(O.dir)
 	M.loc = src
 	master = C
 	master.active_dummy = src

@@ -3,7 +3,7 @@
 	name = "breath mask"
 	icon_state = "breath"
 	item_state = "breath"
-	flags = FPRINT | TABLEPASS | MASKCOVERSMOUTH | MASKINTERNALS
+	flags = MASKCOVERSMOUTH | AIRTIGHT
 	body_parts_covered = 0
 	w_class = 2
 	gas_transfer_coefficient = 0.10
@@ -24,14 +24,14 @@
 			if(!src.hanging)
 				src.hanging = !src.hanging
 				gas_transfer_coefficient = 1 //gas is now escaping to the turf and vice versa
-				flags &= ~(MASKCOVERSMOUTH | MASKINTERNALS)
+				flags &= ~(MASKCOVERSMOUTH | AIRTIGHT)
 				icon_state = "breathdown"
 				usr << "Your mask is now hanging on your neck."
 
 			else
 				src.hanging = !src.hanging
 				gas_transfer_coefficient = 0.10
-				flags |= MASKCOVERSMOUTH | MASKINTERNALS
+				flags |= MASKCOVERSMOUTH | AIRTIGHT
 				icon_state = "breath"
 				usr << "You pull the mask up to cover your face."
 			update_clothing_icon()

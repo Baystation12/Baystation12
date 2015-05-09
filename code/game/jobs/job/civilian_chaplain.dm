@@ -27,7 +27,7 @@
 			H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H.back), slot_in_backpack)
 		spawn(0)
 			var/religion_name = "Christianity"
-			var/new_religion = copytext(sanitize(input(H, "You are the crew services officer. Would you like to change your religion? Default is Christianity, in SPACE.", "Name change", religion_name)),1,MAX_NAME_LEN)
+			var/new_religion = sanitize(copytext(input(H, "You are the crew services officer. Would you like to change your religion? Default is Christianity, in SPACE.", "Name change", religion_name),1,MAX_NAME_LEN))
 
 			if (!new_religion)
 				new_religion = religion_name
@@ -62,7 +62,7 @@
 
 		spawn(1)
 			var/deity_name = "Space Jesus"
-			var/new_deity = copytext(sanitize(input(H, "Would you like to change your deity? Default is Space Jesus.", "Name change", deity_name)),1,MAX_NAME_LEN)
+			var/new_deity = sanitize(copytext(input(H, "Would you like to change your deity? Default is Space Jesus.", "Name change", deity_name),1,MAX_NAME_LEN))
 
 			if ((length(new_deity) == 0) || (new_deity == "Space Jesus") )
 				new_deity = deity_name
@@ -84,12 +84,13 @@
 						for(var/area/chapel/main/A in world)
 							for(var/turf/T in A.contents)
 								if(T.icon_state == "carpetsymbol")
-									T.dir = 4
+									T.set_dir(4)
 					if("Machine")
 						B.icon_state = "bmachine"
 						B.item_state = "bmachine"
 						var/cardBorgHat = new /obj/item/clothing/head/cardborg(H.loc)
 						H.equip_to_slot_or_del(cardBorgHat, slot_head)
+
 					if("Scrapbook")
 						B.icon_state = "scrapbook"
 						B.item_state = "scrapbook"
@@ -108,7 +109,7 @@
 						for(var/area/chapel/main/A in world)
 							for(var/turf/T in A.contents)
 								if(T.icon_state == "carpetsymbol")
-									T.dir = 10
+									T.set_dir(10)
 					if("Tome")
 						B.icon_state = "tome"
 						B.item_state = "syringe_kit"
@@ -124,7 +125,7 @@
 						for(var/area/chapel/main/A in world)
 							for(var/turf/T in A.contents)
 								if(T.icon_state == "carpetsymbol")
-									T.dir = 8
+									T.set_dir(8)
 					if("the bible melts")
 						B.icon_state = "melted"
 						B.item_state = "melted"
@@ -138,7 +139,7 @@
 						for(var/area/chapel/main/A in world)
 							for(var/turf/T in A.contents)
 								if(T.icon_state == "carpetsymbol")
-									T.dir = 2
+									T.set_dir(2)
 
 				H.update_inv_l_hand() // so that it updates the bible's item_state in his hand
 

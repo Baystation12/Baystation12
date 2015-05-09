@@ -8,11 +8,11 @@
 
 	use_power = 1
 	idle_power_usage = 150		//internal circuitry, friction losses and stuff
-	active_power_usage = 3700	//This also doubles as a measure of how powerful the mixer is, in Watts. 3700 W ~ 5 HP
+	power_rating = 3700	//This also doubles as a measure of how powerful the mixer is, in Watts. 3700 W ~ 5 HP
 
 	var/set_flow_rate = ATMOS_DEFAULT_VOLUME_MIXER
 	var/list/mixing_inputs
-	
+
 	//for mapping
 	var/node1_concentration = 0.5
 	var/node2_concentration = 0.5
@@ -30,10 +30,10 @@
 	if(!powered())
 		icon_state += "off"
 	else if(node2 && node3 && node1)
-		icon_state += on ? "on" : "off"
+		icon_state += use_power ? "on" : "off"
 	else
 		icon_state += "off"
-		on = 0
+		use_power = 0
 
 /obj/machinery/atmospherics/trinary/mixer/update_underlays()
 	if(..())
@@ -68,26 +68,26 @@
 	air1.volume = ATMOS_DEFAULT_VOLUME_MIXER
 	air2.volume = ATMOS_DEFAULT_VOLUME_MIXER
 	air3.volume = ATMOS_DEFAULT_VOLUME_MIXER * 1.5
+	
+	if (!mixing_inputs)
+		mixing_inputs = list(src.air1 = node1_concentration, src.air2 = node2_concentration)
 
 /obj/machinery/atmospherics/trinary/mixer/process()
 	..()
-	
-	//For some reason this doesn't work even in initialize(), so it goes here.
-	if (!mixing_inputs)
-		mixing_inputs = list(src.air1 = node1_concentration, src.air2 = node2_concentration)
-	
-	if((stat & (NOPOWER|BROKEN)) || !on)
-		update_use_power(0)	//usually we get here because a player turned a pump off - definitely want to update.
-		last_flow_rate = 0
+
+	last_power_draw = 0
+	last_flow_rate = 0
+
+	if((stat & (NOPOWER|BROKEN)) || !use_power)
 		return
-	
+
 	//Figure out the amount of moles to transfer
 	var/transfer_moles = (set_flow_rate*mixing_inputs[air1]/air1.volume)*air1.total_moles + (set_flow_rate*mixing_inputs[air1]/air2.volume)*air2.total_moles
-	
+
 	var/power_draw = -1
-	if (transfer_moles > MINUMUM_MOLES_TO_FILTER)
-		power_draw = mix_gas(src, mixing_inputs, air3, transfer_moles, active_power_usage)
-		
+	if (transfer_moles > MINIMUM_MOLES_TO_FILTER)
+		power_draw = mix_gas(src, mixing_inputs, air3, transfer_moles, power_rating)
+
 		if(network1 && mixing_inputs[air1])
 			network1.update = 1
 
@@ -97,13 +97,10 @@
 		if(network3)
 			network3.update = 1
 
-	if (power_draw < 0)
-		//update_use_power(0)
-		use_power = 0	//don't force update - easier on CPU
-		last_flow_rate = 0
-	else
-		handle_power_draw(power_draw)
-	
+	if (power_draw >= 0)
+		last_power_draw = power_draw
+		use_power(power_draw)
+
 	return 1
 
 /obj/machinery/atmospherics/trinary/mixer/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
@@ -133,7 +130,7 @@
 		user << "\red Access denied."
 		return
 	usr.set_machine(src)
-	var/dat = {"<b>Power: </b><a href='?src=\ref[src];power=1'>[on?"On":"Off"]</a><br>
+	var/dat = {"<b>Power: </b><a href='?src=\ref[src];power=1'>[use_power?"On":"Off"]</a><br>
 				<b>Set Flow Rate Limit: </b>
 				[set_flow_rate]L/s | <a href='?src=\ref[src];set_press=1'>Change</a>
 				<br>
@@ -159,9 +156,9 @@
 	return
 
 /obj/machinery/atmospherics/trinary/mixer/Topic(href,href_list)
-	if(..()) return
+	if(..()) return 1
 	if(href_list["power"])
-		on = !on
+		use_power = !use_power
 	if(href_list["set_press"])
 		var/max_flow_rate = min(air1.volume, air2.volume)
 		var/new_flow_rate = input(usr,"Enter new flow rate limit (0-[max_flow_rate]L/s)","Flow Rate Control",src.set_flow_rate) as num

@@ -77,10 +77,10 @@ datum/mind
 			if(vampire)
 				current.remove_vampire_powers()
 			current.mind = null
+
+			nanomanager.user_transferred(current, new_character) // transfer active NanoUI instances to new user
 		if(new_character.mind)		//remove any mind currently in our new body's mind variable
 			new_character.mind.current = null
-
-		nanomanager.user_transferred(current, new_character) // transfer active NanoUI instances to new user
 
 		current = new_character		//link ourself to our new body
 		new_character.mind = src	//and link our new body to ourself
@@ -125,7 +125,7 @@ datum/mind
 			"cult",
 			"wizard",
 			"changeling",
-			"nuclear",
+			"mercenary",
 			"traitor", // "traitorchan",
 			"vampire",
 			"monkey",
@@ -244,23 +244,23 @@ datum/mind
 				text += " yes | <font color='#00FF00'>NO</font></b>"
 			sections["vampire"] = text
 			/** NUCLEAR ***/
-			text = "nuclear"
-			if (ticker.mode.config_tag=="nuclear")
+			text = "mercenary"
+			if (ticker.mode.config_tag=="mercenary")
 				text = uppertext(text)
 			text = "<i><b>[text]</b></i>: "
 			if (src in ticker.mode.syndicates)
-				text += "<b>OPERATIVE</b>|<a href='?src=\ref[src];nuclear=clear'>nanotrasen</a>"
-				text += "<br><a href='?src=\ref[src];nuclear=lair'>To shuttle</a>, <a href='?src=\ref[src];common=undress'>undress</a>, <a href='?src=\ref[src];nuclear=dressup'>dress up</a>."
+				text += "<b>OPERATIVE</b>|<a href='?src=\ref[src];mercenary=clear'>nanotrasen</a>"
+				text += "<br><a href='?src=\ref[src];mercenary=lair'>To shuttle</a>, <a href='?src=\ref[src];common=undress'>undress</a>, <a href='?src=\ref[src];mercenary=dressup'>dress up</a>."
 				var/code
 				for (var/obj/machinery/nuclearbomb/bombue in machines)
 					if (length(bombue.r_code) <= 5 && bombue.r_code != "LOLNO" && bombue.r_code != "ADMIN")
 						code = bombue.r_code
 						break
 				if (code)
-					text += " Code is [code]. <a href='?src=\ref[src];nuclear=tellcode'>tell the code.</a>"
+					text += " Code is [code]. <a href='?src=\ref[src];mercenary=tellcode'>tell the code.</a>"
 			else
-				text += "<a href='?src=\ref[src];nuclear=nuclear'>operative</a>|<b>NANOTRASEN</b>"
-			sections["nuclear"] = text
+				text += "<a href='?src=\ref[src];mercenary=mercenary'>operative</a>|<b>NANOTRASEN</b>"
+			sections["mercenary"] = text
 
 		/** TRAITOR ***/
 		text = "traitor"
@@ -389,7 +389,7 @@ datum/mind
 			assigned_role = new_role
 
 		else if (href_list["memory_edit"])
-			var/new_memo = copytext(sanitize(input("Write new memory", "Memory", memory) as null|message),1,MAX_MESSAGE_LEN)
+			var/new_memo = sanitize(copytext(input("Write new memory", "Memory", memory) as null|message,1,MAX_MESSAGE_LEN))
 			if (isnull(new_memo)) return
 			memory = new_memo
 
@@ -409,7 +409,7 @@ datum/mind
 				if(!def_value)//If it's a custom objective, it will be an empty string.
 					def_value = "custom"
 
-			var/new_obj_type = input("Select objective type:", "Objective type", def_value) as null|anything in list("assassinate", "debrain", "protect", "prevent", "harm", "brig", "hijack", "escape", "survive", "steal", "download", "nuclear", "capture", "absorb", "custom")
+			var/new_obj_type = input("Select objective type:", "Objective type", def_value) as null|anything in list("assassinate", "debrain", "protect", "prevent", "harm", "brig", "hijack", "escape", "survive", "steal", "download", "mercenary", "capture", "absorb", "custom")
 			if (!new_obj_type) return
 
 			var/datum/objective/new_objective = null
@@ -463,7 +463,7 @@ datum/mind
 					new_objective = new /datum/objective/survive
 					new_objective.owner = src
 
-				if ("nuclear")
+				if ("mercenary")
 					new_objective = new /datum/objective/nuclear
 					new_objective.owner = src
 
@@ -500,7 +500,7 @@ datum/mind
 					new_objective.target_amount = target_number
 
 				if ("custom")
-					var/expl = copytext(sanitize(input("Custom objective:", "Objective", objective ? objective.explanation_text : "") as text|null),1,MAX_MESSAGE_LEN)
+					var/expl = sanitize(copytext(input("Custom objective:", "Objective", objective ? objective.explanation_text : "") as text|null,1,MAX_MESSAGE_LEN))
 					if (!expl) return
 					new_objective = new /datum/objective
 					new_objective.owner = src
@@ -527,7 +527,7 @@ datum/mind
 		else if(href_list["implant"])
 			var/mob/living/carbon/human/H = current
 
-			H.hud_updateflag |= (1 << IMPLOYAL_HUD)   // updates that players HUD images so secHUD's pick up they are implanted or not.
+			BITSET(H.hud_updateflag, IMPLOYAL_HUD)   // updates that players HUD images so secHUD's pick up they are implanted or not.
 
 			switch(href_list["implant"])
 				if("remove")
@@ -568,7 +568,7 @@ datum/mind
 
 
 		else if (href_list["revolution"])
-			current.hud_updateflag |= (1 << SPECIALROLE_HUD)
+			BITSET(current.hud_updateflag, SPECIALROLE_HUD)
 
 			switch(href_list["revolution"])
 				if("clear")
@@ -666,7 +666,7 @@ datum/mind
 						usr << "\red Reequipping revolutionary goes wrong!"
 
 		else if (href_list["cult"])
-			current.hud_updateflag |= (1 << SPECIALROLE_HUD)
+			BITSET(current.hud_updateflag, SPECIALROLE_HUD)
 			switch(href_list["cult"])
 				if("clear")
 					if(src in ticker.mode.cult)
@@ -718,7 +718,7 @@ datum/mind
 						usr << "\red Spawning amulet failed!"
 
 		else if (href_list["wizard"])
-			current.hud_updateflag |= (1 << SPECIALROLE_HUD)
+			BITSET(current.hud_updateflag, SPECIALROLE_HUD)
 
 			switch(href_list["wizard"])
 				if("clear")
@@ -750,7 +750,7 @@ datum/mind
 						usr << "\blue The objectives for wizard [key] have been generated. You can edit them and anounce manually."
 
 		else if (href_list["changeling"])
-			current.hud_updateflag |= (1 << SPECIALROLE_HUD)
+			BITSET(current.hud_updateflag, SPECIALROLE_HUD)
 			switch(href_list["changeling"])
 				if("clear")
 					if(src in ticker.mode.changelings)
@@ -815,12 +815,12 @@ datum/mind
 						ticker.mode.forge_vampire_objectives(src)
 					usr << "\blue The objectives for vampire [key] have been generated. You can edit them and announce manually."
 
-		else if (href_list["nuclear"])
+		else if (href_list["mercenary"])
 			var/mob/living/carbon/human/H = current
 
-			current.hud_updateflag |= (1 << SPECIALROLE_HUD)
+			BITSET(current.hud_updateflag, SPECIALROLE_HUD)
 
-			switch(href_list["nuclear"])
+			switch(href_list["mercenary"])
 				if("clear")
 					if(src in ticker.mode.syndicates)
 						ticker.mode.syndicates -= src
@@ -828,10 +828,9 @@ datum/mind
 						special_role = null
 						for (var/datum/objective/nuclear/O in objectives)
 							objectives-=O
-						current << "\red <FONT size = 3><B>You have been brainwashed! You are no longer a syndicate operative!</B></FONT>"
-						log_admin("[key_name_admin(usr)] has de-nuke op'ed [current].")
-						log_admin_single("[key_name_admin(usr)] has de-nuke op'ed [current].")
-				if("nuclear")
+						current << "\red <FONT size = 3><B>You have been brainwashed! You are no longer an operative!</B></FONT>"
+						log_admin("[key_name_admin(usr)] has de-merc'd [current].")
+				if("mercenary")
 					if(!(src in ticker.mode.syndicates))
 						ticker.mode.syndicates += src
 						ticker.mode.update_synd_icons_added(src)
@@ -839,14 +838,13 @@ datum/mind
 							ticker.mode.prepare_syndicate_leader(src)
 						else
 							current.real_name = "[syndicate_name()] Operative #[ticker.mode.syndicates.len-1]"
-						special_role = "Syndicate"
+						special_role = "Mercenary"
 						current << "\blue You are a [syndicate_name()] agent!"
 						ticker.mode.forge_syndicate_objectives(src)
 						ticker.mode.greet_syndicate(src)
-						log_admin("[key_name_admin(usr)] has nuke op'ed [current].")
-						log_admin_single("[key_name_admin(usr)] has nuke op'ed [current].")
+						log_admin("[key_name_admin(usr)] has merc'd [current].")
 				if("lair")
-					current.loc = get_turf(locate("landmark*Syndicate-Spawn"))
+					current.loc = pick(synd_spawn)
 				if("dressup")
 					del(H.belt)
 					del(H.back)
@@ -860,7 +858,7 @@ datum/mind
 					del(H.w_uniform)
 
 					if (!ticker.mode.equip_syndicate(current))
-						usr << "\red Equipping a syndicate failed!"
+						usr << "\red Equipping an operative failed!"
 				if("tellcode")
 					var/code
 					for (var/obj/machinery/nuclearbomb/bombue in machines)
@@ -868,13 +866,13 @@ datum/mind
 							code = bombue.r_code
 							break
 					if (code)
-						store_memory("<B>Syndicate Nuclear Bomb Code</B>: [code]", 0, 0)
+						store_memory("<B>Nuclear Bomb Code</B>: [code]", 0, 0)
 						current << "The nuclear authorization code is: <B>[code]</B>"
 					else
 						usr << "\red No valid nuke found!"
 
 		else if (href_list["traitor"])
-			current.hud_updateflag |= (1 << SPECIALROLE_HUD)
+			BITSET(current.hud_updateflag, SPECIALROLE_HUD)
 			switch(href_list["traitor"])
 				if("clear")
 					if(src in ticker.mode.traitors)
@@ -962,7 +960,7 @@ datum/mind
 						current.radiation -= 50
 
 		else if (href_list["silicon"])
-			current.hud_updateflag |= (1 << SPECIALROLE_HUD)
+			BITSET(current.hud_updateflag, SPECIALROLE_HUD)
 			switch(href_list["silicon"])
 				if("unmalf")
 					if(src in ticker.mode.malf_ai)
@@ -1044,13 +1042,13 @@ datum/mind
 						var/crystals
 						if (suplink)
 							crystals = suplink.uses
-						crystals = input("Amount of telecrystals for [key]","Syndicate uplink", crystals) as null|num
+						crystals = input("Amount of telecrystals for [key]","Operative uplink", crystals) as null|num
 						if (!isnull(crystals))
 							if (suplink)
 								suplink.uses = crystals
 				if("uplink")
 					if (!ticker.mode.equip_traitor(current, !(src in ticker.mode.traitors)))
-						usr << "\red Equipping a syndicate failed!"
+						usr << "\red Equipping an operative failed!"
 
 		else if (href_list["obj_announce"])
 			var/obj_count = 1
@@ -1135,13 +1133,13 @@ datum/mind
 				ticker.mode.prepare_syndicate_leader(src)
 			else
 				current.real_name = "[syndicate_name()] Operative #[ticker.mode.syndicates.len-1]"
-			special_role = "Syndicate"
+			special_role = "Mercenary"
 			assigned_role = "MODE"
-			current << "\blue You are a [syndicate_name()] agent!"
+			current << "\blue You are a [syndicate_name()] mercenary!"
 			ticker.mode.forge_syndicate_objectives(src)
 			ticker.mode.greet_syndicate(src)
 
-			current.loc = get_turf(locate("landmark*Syndicate-Spawn"))
+			current.loc = pick(synd_spawn)
 
 			var/mob/living/carbon/human/H = current
 			del(H.belt)
@@ -1280,7 +1278,15 @@ datum/mind
 		return (duration <= world.time - brigged_since)
 
 
-
+//Antagonist role check
+/mob/living/proc/check_special_role(role)
+	if(mind)
+		if(!role)
+			return mind.special_role
+		else
+			return (mind.special_role == role) ? 1 : 0
+	else
+		return 0
 
 //Initialisation procs
 /mob/living/proc/mind_initialize()
@@ -1357,10 +1363,3 @@ datum/mind
 	..()
 	mind.assigned_role = "Juggernaut"
 	mind.special_role = "Cultist"
-
-/mob/living/simple_animal/vox/armalis/mind_initialize()
-	..()
-	mind.assigned_role = "Armalis"
-	mind.special_role = "Vox Raider"
-
-

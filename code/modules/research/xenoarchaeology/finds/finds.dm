@@ -345,7 +345,7 @@
 			/obj/item/weapon/gun/energy/laser/practice/xenoarch,\
 			/obj/item/weapon/gun/energy/laser/xenoarch,\
 			/obj/item/weapon/gun/energy/xray/xenoarch,\
-			/obj/item/weapon/gun/energy/laser/captain/xenoarch)
+			/obj/item/weapon/gun/energy/captain/xenoarch)
 			if(spawn_type)
 				var/obj/item/weapon/gun/energy/new_gun = new spawn_type(src.loc)
 				new_item = new_gun
@@ -367,7 +367,7 @@
 			item_type = "gun"
 		if(27)
 			//revolver
-			var/obj/item/weapon/gun/projectile/new_gun = new /obj/item/weapon/gun/projectile(src.loc)
+			var/obj/item/weapon/gun/projectile/new_gun = new /obj/item/weapon/gun/projectile/revolver(src.loc)
 			new_item = new_gun
 			new_item.icon_state = "gun[rand(1,4)]"
 			new_item.icon = 'icons/obj/xenoarchaeology.dmi'
@@ -383,7 +383,7 @@
 				if(num_bullets < new_gun.loaded.len)
 					new_gun.loaded.Cut()
 					for(var/i = 1, i <= num_bullets, i++)
-						var/A = text2path(new_gun.ammo_type)
+						var/A = new_gun.ammo_type
 						new_gun.loaded += new A(new_gun)
 				else
 					for(var/obj/item/I in new_gun)
@@ -545,13 +545,9 @@
 		new_item.desc = src.desc
 
 		if(talkative)
-			new_item.talking_atom = new()
-			talking_atom.holder_atom = new_item
-			talking_atom.init()
+			new_item.talking_atom = new(new_item)
 
 		del(src)
 
 	else if(talkative)
-		src.talking_atom = new()
-		talking_atom.holder_atom = src
-		talking_atom.init()
+		src.talking_atom = new(src)

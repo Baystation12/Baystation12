@@ -5,33 +5,18 @@
 	opacity = 1
 	density = 1
 
-	damage_cap = 200
+	damage_cap = 800
 	max_temperature = 6000
 
 	walltype = "rwall"
 
 	var/d_state = 0
 
-/turf/simulated/wall/r_wall/attack_hand(mob/user as mob)
-	if (HULK in user.mutations)
-		if (prob(10) || rotting)
-			usr << text("\blue You smash through the wall.")
-			usr.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!" ))
-			dismantle_wall(1)
-			return
-		else
-			usr << text("\blue You punch the wall.")
-			return
-
-	if(rotting)
-		user << "\blue This wall feels rather unstable."
-		return
-
-	user << "\blue You push the wall but nothing happens!"
-	playsound(src, 'sound/weapons/Genhit.ogg', 25, 1)
-	src.add_fingerprint(user)
-	return
-
+/turf/simulated/wall/r_wall
+	hulk_destroy_prob = 10
+	hulk_take_damage = 0
+	rotting_destroy_touch = 0
+	rotting_touch_message = "\blue This wall feels rather unstable."
 
 /turf/simulated/wall/r_wall/attackby(obj/item/W as obj, mob/user as mob)
 
@@ -306,10 +291,8 @@
 		AH.try_build(src)
 		return
 
-	//Poster stuff
-	else if(istype(W,/obj/item/weapon/contraband/poster))
-		place_poster(W,user)
-		return
+	else if(istype(W, /obj/item/weapon/reagent_containers))
+		return // They tend to have meaningful afterattack - let them apply it without destroying a rotting wall
 
 	//Finally, CHECKING FOR FALSE WALLS if it isn't damaged
 	else if(!d_state)

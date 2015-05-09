@@ -17,7 +17,7 @@
 	item_color = "skrell_helmet_black"
 
 /obj/item/clothing/suit/space/skrell
-	name = "Skrellian hardsuit"
+	name = "Skrellian voidsuit"
 	desc = "Seems like a wetsuit with reinforced plating seamlessly attached to it. Very chic."
 	armor = list(melee = 20, bullet = 20, laser = 50,energy = 50, bomb = 50, bio = 100, rad = 100)
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/weapon/storage/bag/ore,/obj/item/device/t_scanner,/obj/item/weapon/pickaxe, /obj/item/weapon/rcd)
@@ -35,50 +35,6 @@
 	item_state = "skrell_suit_black"
 	item_color = "skrell_suit_black"
 
-//Unathi space gear. Huge and restrictive.
-/obj/item/clothing/head/helmet/space/unathi
-	armor = list(melee = 40, bullet = 30, laser = 30,energy = 15, bomb = 35, bio = 100, rad = 50)
-	heat_protection = HEAD
-	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE
-	var/up = 0 //So Unathi helmets play nicely with the weldervision check.
-	species_restricted = list("Unathi")
-
-/obj/item/clothing/head/helmet/space/unathi/helmet_cheap
-	name = "NT breacher helmet"
-	desc = "Hey! Watch it with that thing! It's a knock-off of a Unathi battle-helm, and that spike could put someone's eye out."
-	icon_state = "unathi_helm_cheap"
-	item_state = "unathi_helm_cheap"
-	item_color = "unathi_helm_cheap"
-
-/obj/item/clothing/suit/space/unathi
-	armor = list(melee = 40, bullet = 30, laser = 30,energy = 15, bomb = 35, bio = 100, rad = 50)
-	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/weapon/storage/bag/ore,/obj/item/device/t_scanner,/obj/item/weapon/pickaxe, /obj/item/weapon/rcd)
-	heat_protection = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
-	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE
-	species_restricted = list("Unathi")
-
-/obj/item/clothing/suit/space/unathi/rig_cheap
-	name = "NT breacher chassis"
-	desc = "A cheap NT knock-off of a Unathi battle-rig. Looks like a fish, moves like a fish, steers like a cow."
-	icon_state = "rig-unathi-cheap"
-	item_state = "rig-unathi-cheap"
-	slowdown = 3
-
-/obj/item/clothing/head/helmet/space/unathi/breacher
-	name = "breacher helm"
-	desc = "Weathered, ancient and battle-scarred. The helmet is too."
-	icon_state = "unathi_breacher"
-	item_state = "unathi_breacher"
-	item_color = "unathi_breacher"
-
-/obj/item/clothing/suit/space/unathi/breacher
-	name = "breacher chassis"
-	desc = "Huge, bulky and absurdly heavy. It must be like wearing a tank."
-	icon_state = "unathi_breacher"
-	item_state = "unathi_breacher"
-	item_color = "unathi_breacher"
-	slowdown = 1
-
 // Vox space gear (vaccuum suit, low pressure armour)
 // Can't be equipped by any other species due to bone structure and vox cybernetics.
 /obj/item/clothing/suit/space/vox
@@ -89,21 +45,15 @@
 	siemens_coefficient = 0.6
 	heat_protection = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE
-	species_restricted = list("Vox", "Vox Armalis")
-	sprite_sheets = list(
-		"Vox" = 'icons/mob/species/vox/suit.dmi',
-		"Vox Armalis" = 'icons/mob/species/armalis/suit.dmi',
-		)
+	species_restricted = list("Vox")
+	sprite_sheets = list("Vox" = 'icons/mob/species/vox/suit.dmi')
 
 /obj/item/clothing/head/helmet/space/vox
 	armor = list(melee = 60, bullet = 50, laser = 30, energy = 15, bomb = 30, bio = 30, rad = 30)
 	siemens_coefficient = 0.6
-	flags = HEADCOVERSEYES|STOPSPRESSUREDMAGE
-	species_restricted = list("Vox","Vox Armalis")
-	sprite_sheets = list(
-		"Vox" = 'icons/mob/species/vox/head.dmi',
-		"Vox Armalis" = 'icons/mob/species/armalis/head.dmi',
-		)
+	flags = HEADCOVERSEYES|STOPPRESSUREDAMAGE
+	species_restricted = list("Vox")
+	sprite_sheets = list("Vox" = 'icons/mob/species/vox/head.dmi')
 
 /obj/item/clothing/head/helmet/space/vox/pressure
 	name = "alien helmet"
@@ -181,22 +131,15 @@
 	siemens_coefficient = 0
 	permeability_coefficient = 0.05
 	item_color = "gloves-vox"
-	species_restricted = list("Vox","Vox Armalis")
-	sprite_sheets = list(
-		"Vox" = 'icons/mob/species/vox/gloves.dmi',
-		"Vox Armalis" = 'icons/mob/species/armalis/gloves.dmi',
-		)
+	species_restricted = list("Vox")
+	sprite_sheets = list("Vox" = 'icons/mob/species/vox/gloves.dmi')
 /obj/item/clothing/shoes/magboots/vox
 
 	desc = "A pair of heavy, jagged armoured foot pieces, seemingly suitable for a velociraptor."
 	name = "vox magclaws"
 	item_state = "boots-vox"
 	icon_state = "boots-vox"
-
-	species_restricted = list("Vox","Vox Armalis")
-	sprite_sheets = list(
-		"Vox Armalis" = 'icons/mob/species/armalis/feet.dmi'
-		)
+	species_restricted = list("Vox")
 
 	action_button_name = "Toggle the magclaws"
 
@@ -231,8 +174,7 @@
 		magpulse = 0
 		canremove = 1
 
-/obj/item/clothing/shoes/magboots/vox/examine()
-	set src in view()
-	..()
+/obj/item/clothing/shoes/magboots/vox/examine(mob/user)
+	..(user)
 	if (magpulse)
-		usr << "It would be hard to take these off without relaxing your grip first." //theoretically this message should only be seen by the wearer when the claws are equipped.
+		user << "It would be hard to take these off without relaxing your grip first." //theoretically this message should only be seen by the wearer when the claws are equipped.

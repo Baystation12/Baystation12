@@ -14,6 +14,10 @@
 	var/talk_interval = 50
 	var/talk_chance = 10
 
+/datum/talking_atom/New(atom/holder)
+	holder_atom = holder
+	init()
+
 /datum/talking_atom/proc/init()
 	if(holder_atom)
 		processing_objects.Add(src)
@@ -55,7 +59,7 @@
 
 	if(prob(30))
 		var/list/options = list("[holder_atom] seems to be listening intently to [source]...",\
-			"[holder_atom] seems to be focussing on [source]...",\
+			"[holder_atom] seems to be focusing on [source]...",\
 			"[holder_atom] seems to turn it's attention to [source]...")
 		holder_atom.loc.visible_message("\blue \icon[holder_atom] [pick(options)]")
 

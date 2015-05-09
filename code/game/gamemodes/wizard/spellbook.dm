@@ -6,7 +6,6 @@
 	throw_speed = 1
 	throw_range = 5
 	w_class = 2.0
-	flags = FPRINT | TABLEPASS
 	var/uses = 5
 	var/temp = null
 	var/max_uses = 5
@@ -24,18 +23,18 @@
 		dat += "<HR>"
 		dat += "<B>Memorize which spell:</B><BR>"
 		dat += "<I>The number after the spell name is the cooldown time.</I><BR>"
-		dat += "<A href='byond://?src=\ref[src];spell_choice=magicmissile'>Magic Missile</A> (10)<BR>"
+		dat += "<A href='byond://?src=\ref[src];spell_choice=magicmissile'>Magic Missile</A> (15)<BR>"
 		dat += "<A href='byond://?src=\ref[src];spell_choice=fireball'>Fireball</A> (10)<BR>"
 		//dat += "<A href='byond://?src=\ref[src];spell_choice=disintegrate'>Disintegrate</A> (60)<BR>"
-		dat += "<A href='byond://?src=\ref[src];spell_choice=disabletech'>Disable Technology</A> (60)<BR>"
-		dat += "<A href='byond://?src=\ref[src];spell_choice=smoke'>Smoke</A> (10)<BR>"
+		dat += "<A href='byond://?src=\ref[src];spell_choice=disabletech'>Disable Technology</A> (40)<BR>"
+		dat += "<A href='byond://?src=\ref[src];spell_choice=smoke'>Smoke</A> (12)<BR>"
 		dat += "<A href='byond://?src=\ref[src];spell_choice=blind'>Blind</A> (30)<BR>"
 		dat += "<A href='byond://?src=\ref[src];spell_choice=mindswap'>Mind Transfer</A> (60)<BR>"
 		dat += "<A href='byond://?src=\ref[src];spell_choice=forcewall'>Forcewall</A> (10)<BR>"
 		dat += "<A href='byond://?src=\ref[src];spell_choice=blink'>Blink</A> (2)<BR>"
 		dat += "<A href='byond://?src=\ref[src];spell_choice=teleport'>Teleport</A> (60)<BR>"
-		dat += "<A href='byond://?src=\ref[src];spell_choice=mutate'>Mutate</A> (60)<BR>"
-		dat += "<A href='byond://?src=\ref[src];spell_choice=etherealjaunt'>Ethereal Jaunt</A> (60)<BR>"
+		dat += "<A href='byond://?src=\ref[src];spell_choice=mutate'>Mutate</A> (40)<BR>"
+		dat += "<A href='byond://?src=\ref[src];spell_choice=etherealjaunt'>Ethereal Jaunt</A> (30)<BR>"
 		dat += "<A href='byond://?src=\ref[src];spell_choice=knock'>Knock</A> (10)<BR>"
 		dat += "<A href='byond://?src=\ref[src];spell_choice=horseman'>Curse of the Horseman</A> (15)<BR>"
 //		if(op)
@@ -103,7 +102,7 @@
 						if("magicmissile")
 							feedback_add_details("wizard_spell_learned","MM") //please do not change the abbreviation to keep data processing consistent. Add a unique id to any new spells
 							H.spell_list += new /obj/effect/proc_holder/spell/targeted/projectile/magic_missile(H)
-							temp = "This spell fires several, slow moving, magic projectiles at nearby targets. If they hit a target, it is paralyzed and takes minor damage."
+							temp = "This spell fires several, slow moving, magic projectiles at nearby targets. If a projectile hits a target, the target is stunned for some time."
 						if("fireball")
 							feedback_add_details("wizard_spell_learned","FB") //please do not change the abbreviation to keep data processing consistent. Add a unique id to any new spells
 							H.spell_list += new /obj/effect/proc_holder/spell/dumbfire/fireball(H)
@@ -115,11 +114,11 @@
 						if("disabletech")
 							feedback_add_details("wizard_spell_learned","DT") //please do not change the abbreviation to keep data processing consistent. Add a unique id to any new spells
 							H.spell_list += new /obj/effect/proc_holder/spell/targeted/emplosion/disable_tech(H)
-							temp = "This spell disables all weapons, cameras and most other technology in range."
+							temp = "This spell releases an EMP from your person disabling most technology within range; computers, doors, prosthetics, etc."
 						if("smoke")
 							feedback_add_details("wizard_spell_learned","SM") //please do not change the abbreviation to keep data processing consistent. Add a unique id to any new spells
 							H.spell_list += new /obj/effect/proc_holder/spell/targeted/smoke(H)
-							temp = "This spell spawns a cloud of choking smoke at your location and does not require wizard garb."
+							temp = "This spell spawns a cloud of vision obscuring smoke at your location and does not require wizard garb."
 						if("blind")
 							feedback_add_details("wizard_spell_learned","BD") //please do not change the abbreviation to keep data processing consistent. Add a unique id to any new spells
 							H.spell_list += new /obj/effect/proc_holder/spell/targeted/trigger/blind(H)
@@ -139,11 +138,11 @@
 						if("teleport")
 							feedback_add_details("wizard_spell_learned","TP") //please do not change the abbreviation to keep data processing consistent. Add a unique id to any new spells
 							H.spell_list += new /obj/effect/proc_holder/spell/targeted/area_teleport/teleport(H)
-							temp = "This spell teleports you to a type of area of your selection. Very useful if you are in danger, but has a decent cooldown, and is unpredictable."
+							temp = "This spell teleports you to an area of your selection, and creates a cloud of smoke around you upon arrival. Very useful if you are in danger.."
 						if("mutate")
 							feedback_add_details("wizard_spell_learned","MU") //please do not change the abbreviation to keep data processing consistent. Add a unique id to any new spells
 							H.spell_list += new /obj/effect/proc_holder/spell/targeted/genetic/mutate(H)
-							temp = "This spell causes you to turn into a hulk and gain telekinesis for a short while."
+							temp = "This spell causes you to turn into a hulk, gaining super strength and the ability to punch down walls! You also gain the ability to fire lasers from your eyes!"
 						if("etherealjaunt")
 							feedback_add_details("wizard_spell_learned","EJ") //please do not change the abbreviation to keep data processing consistent. Add a unique id to any new spells
 							H.spell_list += new /obj/effect/proc_holder/spell/targeted/ethereal_jaunt(H)
@@ -181,8 +180,8 @@
 							feedback_add_details("wizard_spell_learned","HS") //please do not change the abbreviation to keep data processing consistent. Add a unique id to any new spells
 							new /obj/item/clothing/shoes/sandal(get_turf(H)) //In case they've lost them.
 							new /obj/item/clothing/gloves/purple(get_turf(H))//To complete the outfit
-							new /obj/item/clothing/suit/space/rig/wizard(get_turf(H))
-							new /obj/item/clothing/head/helmet/space/rig/wizard(get_turf(H))
+							new /obj/item/clothing/suit/space/void/wizard(get_turf(H))
+							new /obj/item/clothing/head/helmet/space/void/wizard(get_turf(H))
 							temp = "An artefact suit of armor that allows you to cast spells while providing more protection against attacks and the void of space."
 							max_uses--
 						if("staffanimation")

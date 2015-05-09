@@ -7,10 +7,10 @@
 	var/armed = 0
 
 
-	examine()
-		..()
+	examine(mob/user)
+		..(user)
 		if(armed)
-			usr << "It looks like it's armed."
+			user << "It looks like it's armed."
 
 	update_icon()
 		if(armed)

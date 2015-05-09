@@ -1,7 +1,7 @@
 /obj/machinery/seed_extractor
 	name = "seed extractor"
 	desc = "Extracts and bags seeds from produce."
-	icon = 'icons/obj/hydroponics.dmi'
+	icon = 'icons/obj/hydroponics_machines.dmi'
 	icon_state = "sextractor"
 	density = 1
 	anchored = 1
@@ -16,10 +16,10 @@ obj/machinery/seed_extractor/attackby(var/obj/item/O as obj, var/mob/user as mob
 		var/datum/seed/new_seed_type
 		if(istype(O, /obj/item/weapon/grown))
 			var/obj/item/weapon/grown/F = O
-			new_seed_type = seed_types[F.plantname]
+			new_seed_type = plant_controller.seeds[F.plantname]
 		else
 			var/obj/item/weapon/reagent_containers/food/snacks/grown/F = O
-			new_seed_type = seed_types[F.plantname]
+			new_seed_type = plant_controller.seeds[F.plantname]
 
 		if(new_seed_type)
 			user << "<span class='notice'>You extract some seeds from [O].</span>"

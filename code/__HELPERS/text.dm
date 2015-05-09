@@ -34,11 +34,17 @@
 	return t
 
 //Removes a few problematic characters
-/proc/sanitize_simple(var/t,var/list/repl_chars = list("\n"="#","\t"="#","�"="�"))
+/proc/sanitize_simple(var/t,var/list/repl_chars = list("\n"="#","\t"="#"))
+	for(var/char in repl_chars)
+		t = replacetext(t, char, repl_chars[char])
+	return t
+
+/proc/readd_quotes(var/t)
+	var/list/repl_chars = list("&#34;" = "\"")
 	for(var/char in repl_chars)
 		var/index = findtext(t, char)
 		while(index)
-			t = copytext(t, 1, index) + repl_chars[char] + copytext(t, index+1)
+			t = copytext(t, 1, index) + repl_chars[char] + copytext(t, index+5)
 			index = findtext(t, char)
 	return t
 
@@ -70,10 +76,14 @@
 			else			non_whitespace = 1
 	if(non_whitespace)		return text		//only accepts the text if it has some non-spaces
 
-// Used to get a sanitized input.
+// Used to get a properly sanitized input, of max_length
 /proc/stripped_input(var/mob/user, var/message = "", var/title = "", var/default = "", var/max_length=MAX_RECORDS)
 	var/name = input(user, message, title, default)
-	return strip_html_simple(name, max_length)
+	return strip_html_properly(name, max_length)
+
+// Used to get a trimmed, properly sanitized input, of max_length
+/proc/trim_strip_input(var/mob/user, var/message = "", var/title = "", var/default = "", var/max_length=MAX_MESSAGE_LEN)
+	return trim(stripped_input(user, message, title, default, max_length))
 
 //Filters out undesirable characters from names
 /proc/reject_bad_name(var/t_in, var/allow_numbers=0, var/max_length=MAX_NAME_LEN)
@@ -314,3 +324,42 @@ proc/TextPreview(var/string,var/len=40)
 			return string
 	else
 		return "[copytext(string, 1, 37)]..."
+
+//This proc strips html properly, but it's not lazy like the other procs.
+//This means that it doesn't just remove < and > and call it a day.
+//Also limit the size of the input, if specified.
+/proc/strip_html_properly(var/input, var/max_length = MAX_MESSAGE_LEN)
+	if(!input)
+		return
+	var/opentag = 1 //These store the position of < and > respectively.
+	var/closetag = 1
+	while(1)
+		opentag = findtext(input, "<")
+		closetag = findtext(input, ">")
+		if(closetag && opentag)
+			if(closetag < opentag)
+				input = copytext(input, (closetag + 1))
+			else
+				input = copytext(input, 1, opentag) + copytext(input, (closetag + 1))
+		else if(closetag || opentag)
+			if(opentag)
+				input = copytext(input, 1, opentag)
+			else
+				input = copytext(input, (closetag + 1))
+		else
+			break
+	if(max_length)
+		input = copytext(input,1,max_length)
+	return sanitize(input)
+
+/proc/trim_strip_html_properly(var/input, var/max_length = MAX_MESSAGE_LEN)
+    return trim(strip_html_properly(input, max_length))
+
+//For generating neat chat tag-images
+//The icon var could be local in the proc, but it's a waste of resources
+//	to always create it and then throw it out.
+/var/icon/text_tag_icons = new('./icons/chattags.dmi')
+/proc/create_text_tag(var/tagname, var/tagdesc = tagname, var/client/C = null)
+	if(C && (C.prefs.toggles & CHAT_NOICONS))
+		return tagdesc
+	return "<IMG src='\ref[text_tag_icons.icon]' class='text_tag' iconstate='[tagname]'" + (tagdesc ? " alt='[tagdesc]'" : "") + ">"

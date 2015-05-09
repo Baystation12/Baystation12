@@ -19,8 +19,8 @@
 		spawn(0)
 
 			if(target.buckled)
-				var/obj/structure/stool/bed/buckled_to = target.buckled.
-				buckled_to.unbuckle()
+				var/obj/structure/bed/buckled_to = target.buckled.
+				buckled_to.unbuckle_mob()
 
 			var/mobloc = get_turf(target.loc)
 			var/obj/effect/dummy/spell_jaunt/holder = new /obj/effect/dummy/spell_jaunt( mobloc )

@@ -65,10 +65,10 @@
 		)
 		radio_connection.post_signal(src, signal)
 
-/obj/machinery/meter/examine()
+/obj/machinery/meter/examine(mob/user)
 	var/t = "A gas flow meter. "
 
-	if(get_dist(usr, src) > 3 && !(istype(usr, /mob/living/silicon/ai) || istype(usr, /mob/dead)))
+	if(get_dist(user, src) > 3 && !(istype(user, /mob/living/silicon/ai) || istype(user, /mob/dead)))
 		t += "\blue <B>You are too far away to read it.</B>"
 
 	else if(stat & (NOPOWER|BROKEN))
@@ -83,12 +83,12 @@
 	else
 		t += "The connect error light is blinking."
 
-	usr << t
+	user << t
 
 /obj/machinery/meter/Click()
 
 	if (get_dist(usr, src) <= 3 || istype(usr, /mob/living/silicon/ai) || istype(usr, /mob/dead))
-		examine()
+		usr.examinate(src)
 		return 1
 
 	return ..()

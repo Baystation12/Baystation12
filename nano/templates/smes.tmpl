@@ -50,6 +50,14 @@
 	</div>
 	<div class="itemContent">
 		{{:helper.link('Online', 'power', {'online' : 1}, data.outputOnline ? 'selected' : null)}}{{:helper.link('Offline', 'close', {'online' : 1}, data.outputOnline ? null : 'selected')}}
+		&nbsp;
+		{{if data.outputting == 2}}
+			[<span class='good'>Outputting</span>]
+		{{else data.outputting == 1}}
+			[<span class='average'>Stored energy too low</span>]
+		{{else}}
+			[<span class='bad'>Not Outputting</span>]
+		{{/if}}
 	</div>
 </div>
 

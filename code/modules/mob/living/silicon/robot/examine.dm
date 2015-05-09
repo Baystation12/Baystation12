@@ -1,12 +1,8 @@
-/mob/living/silicon/robot/examine()
-	set src in oview()
+/mob/living/silicon/robot/examine(mob/user)
+	var/custom_infix = custom_name ? ", [modtype] [braintype]" : ""
+	..(user, infix = custom_infix)
 
-	if(!usr || !src)	return
-	if( (usr.sdisabilities & BLIND || usr.blinded || usr.stat) && !istype(usr,/mob/dead/observer) )
-		usr << "<span class='notice'>Something is there but you can't see it.</span>"
-		return
-
-	var/msg = "<span class='info'>*---------*\nThis is \icon[src] \a <EM>[src]</EM>[custom_name ? ", [modtype] [braintype]" : ""]!\n"
+	var/msg = ""
 	msg += "<span class='warning'>"
 	if (src.getBruteLoss())
 		if (src.getBruteLoss() < 75)
@@ -48,5 +44,5 @@
 			pose = addtext(pose,".") //Makes sure all emotes end with a period.
 		msg += "\nIt is [pose]"
 
-	usr << msg
+	user << msg
 	return

@@ -1,6 +1,5 @@
 /datum/event/disease_outbreak
 	announceWhen	= 15
-	oneShot			= 1
 
 
 /datum/event/disease_outbreak/announce()
@@ -17,7 +16,7 @@
 		var/turf/T = get_turf(H)
 		if(!T)
 			continue
-		if(T.z != 1)
+		if(isNotStationLevel(T.z))
 			continue
 		for(var/datum/disease/D in H.viruses)
 			foundAlready = 1

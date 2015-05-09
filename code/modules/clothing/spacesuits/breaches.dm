@@ -3,7 +3,7 @@
 //They can be healed with plastic or metal sheeting.
 
 /datum/breach
-	var/class = 0                           // Size. Lower is smaller.
+	var/class = 0                           // Size. Lower is smaller. Uses floating point values!
 	var/descriptor                          // 'gaping hole' etc.
 	var/damtype = BURN                      // Punctured or melted
 	var/obj/item/clothing/suit/space/holder // Suit containing the list of breaches holding this instance.
@@ -22,8 +22,8 @@
 /obj/item/clothing/head/helmet/space
 	var/can_breach = 1                      // Set to 0 to disregard all breaching.
 	var/list/breaches = list()              // Breach datum container.
-	var/resilience = 0.2                    // Multiplier that turns damage into breach class. 1 is 100% of damage to breach, 0.1 is 10%.
-	var/breach_threshold = 7               // Min damage before a breach is possible.
+	var/resilience = 0.2                    // Multiplier that turns damage into breach class. 1 is 100% of damage to breach, 0.1 is 10%. 0.2 -> 50 brute/burn damage to cause 10 breach damage
+	var/breach_threshold = 3                // Min damage before a breach is possible. Damage is subtracted by this amount, it determines the "hardness" of the suit.
 	var/damage = 0                          // Current total damage
 	var/brute_damage = 0                    // Specifically brute damage.
 	var/burn_damage = 0                     // Specifically burn damage.
@@ -78,7 +78,8 @@ var/global/list/breach_burn_descriptors_helmet = list(
 /datum/breach/proc/update_descriptor_torso()
 
 	//Sanity...
-	class = max(1,min(class,5))
+	//class = max(1,min(class,5))
+	class = between(1, round(class), 5)
 	//Apply the correct descriptor.
 	if(damtype == BURN)
 		descriptor = breach_burn_descriptors_torso[class]
@@ -88,7 +89,6 @@ var/global/list/breach_burn_descriptors_helmet = list(
 /datum/breach/proc/update_descriptor_helmet()
 
 	//Sanity...
-	class = max(1,min(class,5))
 	//Apply the correct descriptor.
 	if(damtype == BURN)
 		descriptor = breach_burn_descriptors_helmet[class]
@@ -131,7 +131,10 @@ var/global/list/breach_burn_descriptors_helmet = list(
 
 /obj/item/clothing/suit/space/proc/create_breaches(var/damtype, var/amount)
 
-	if(!can_breach || !amount)
+	amount -= src.breach_threshold
+	amount *= src.resilience
+
+	if(!can_breach || amount <= 0)
 		return
 
 	if(!breaches)
@@ -143,14 +146,14 @@ var/global/list/breach_burn_descriptors_helmet = list(
 	var/turf/T = get_turf(src)
 	if(!T) return
 
-	amount = amount * src.resilience
-
 	//Increase existing breaches.
 	for(var/datum/breach/existing in breaches)
 
 		if(existing.damtype != damtype)
 			continue
 
+		//keep in mind that 10 breach damage == full pressure loss.
+		//a breach can have at most 5 breach damage
 		if (existing.class < 5)
 			var/needs = 5 - existing.class
 			if(amount < needs)
@@ -259,8 +262,8 @@ var/global/list/breach_burn_descriptors_helmet = list(
 
 	..()
 
-/obj/item/clothing/suit/space/examine()
-	..()
+/obj/item/clothing/suit/space/examine(mob/user)
+	..(user)
 	if(can_breach && breaches && breaches.len)
 		for(var/datum/breach/B in breaches)
 			usr << "\red <B>It has \a [B.descriptor].</B>"
@@ -398,4 +401,3 @@ var/global/list/breach_burn_descriptors_helmet = list(
 		name = "[base_name]"
 
 	return damage
-

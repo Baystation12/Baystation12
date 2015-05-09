@@ -8,7 +8,6 @@ var/global/list/rad_collectors = list()
 	icon_state = "ca"
 	anchored = 0
 	density = 1
-	directwired = 1
 	req_access = list(access_engine_equip)
 //	use_power = 0
 	var/obj/item/weapon/tank/phoron/P = null
@@ -99,10 +98,9 @@ var/global/list/rad_collectors = list()
 		return 1
 	return ..()
 
-/obj/machinery/power/rad_collector/examine()
-	..()
-	if (get_dist(usr, src) <= 3)
-		usr << "The meter indicates that \the [src] is collecting [last_power] W."
+/obj/machinery/power/rad_collector/examine(mob/user)
+	if (..(user, 3))
+		user << "The meter indicates that \the [src] is collecting [last_power] W."
 		return 1
 
 /obj/machinery/power/rad_collector/ex_act(severity)

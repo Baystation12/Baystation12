@@ -19,7 +19,7 @@
 	desc = "A wrench with many common uses. Can be usually found in your hand."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "wrench"
-	flags = FPRINT | TABLEPASS| CONDUCT
+	flags = CONDUCT
 	slot_flags = SLOT_BELT
 	force = 5.0
 	throwforce = 7.0
@@ -37,7 +37,7 @@
 	desc = "You can be totally screwwy with this."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "screwdriver"
-	flags = FPRINT | TABLEPASS| CONDUCT
+	flags = CONDUCT
 	slot_flags = SLOT_BELT
 	force = 5.0
 	w_class = 1.0
@@ -96,7 +96,7 @@
 	desc = "This cuts wires."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "cutters"
-	flags = FPRINT | TABLEPASS| CONDUCT
+	flags = CONDUCT
 	slot_flags = SLOT_BELT
 	force = 6.0
 	throw_speed = 2
@@ -119,6 +119,8 @@
 		"You cut \the [C]'s restraints with \the [src]!",\
 		"You hear cable being cut.")
 		C.handcuffed = null
+		if(C.buckled && C.buckled.buckle_require_restraints)
+			C.buckled.unbuckle_mob()
 		C.update_inv_handcuffed()
 		return
 	else
@@ -131,7 +133,7 @@
 	name = "welding tool"
 	icon = 'icons/obj/items.dmi'
 	icon_state = "welder"
-	flags = FPRINT | TABLEPASS| CONDUCT
+	flags = CONDUCT
 	slot_flags = SLOT_BELT
 
 	//Amount of OUCH when it's thrown
@@ -161,10 +163,9 @@
 	return
 
 
-/obj/item/weapon/weldingtool/examine()
-	set src in usr
-	usr << text("\icon[] [] contains []/[] units of fuel!", src, src.name, get_fuel(),src.max_fuel )
-	return
+/obj/item/weapon/weldingtool/examine(mob/user)
+	if(..(user, 0))
+		user << text("\icon[] [] contains []/[] units of fuel!", src, src.name, get_fuel(),src.max_fuel )
 
 
 /obj/item/weapon/weldingtool/attackby(obj/item/W as obj, mob/user as mob)
@@ -279,6 +280,9 @@
 	if (src.welding)
 		remove_fuel(1)
 		var/turf/location = get_turf(user)
+		if(isliving(O))
+			var/mob/living/L = O
+			L.IgniteMob()
 		if (istype(location, /turf))
 			location.hotspot_expose(700, 50, 1)
 	return
@@ -416,20 +420,20 @@
 
 
 /obj/item/weapon/weldingtool/largetank
-	name = "Industrial Welding Tool"
+	name = "industrial welding tool"
 	max_fuel = 40
 	matter = list("metal" = 70, "glass" = 60)
 	origin_tech = "engineering=2"
 
 /obj/item/weapon/weldingtool/hugetank
-	name = "Upgraded Welding Tool"
+	name = "upgraded welding tool"
 	max_fuel = 80
 	w_class = 3.0
 	matter = list("metal" = 70, "glass" = 120)
 	origin_tech = "engineering=3"
 
 /obj/item/weapon/weldingtool/experimental
-	name = "Experimental Welding Tool"
+	name = "experimental welding tool"
 	max_fuel = 40
 	w_class = 3.0
 	matter = list("metal" = 70, "glass" = 120)
@@ -453,7 +457,7 @@
 	desc = "Used to remove floors and to pry open doors."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "crowbar"
-	flags = FPRINT | TABLEPASS| CONDUCT
+	flags = CONDUCT
 	slot_flags = SLOT_BELT
 	force = 5.0
 	throwforce = 7.0
@@ -509,3 +513,61 @@
 
 	else
 		return ..()
+
+/*/obj/item/weapon/combitool
+	name = "combi-tool"
+	desc = "It even has one of those nubbins for doing the thingy."
+	icon = 'icons/obj/items.dmi'
+	icon_state = "combitool"
+	w_class = 2
+
+	var/list/spawn_tools = list(
+		/obj/item/weapon/screwdriver,
+		/obj/item/weapon/wrench,
+		/obj/item/weapon/wirecutters,
+		/obj/item/weapon/kitchen/utensil/knife,
+		/obj/item/weapon/kitchen/utensil/fork,
+		/obj/item/weapon/hatchet
+		)
+	var/list/tools = list()
+	var/current_tool = 1
+
+/obj/item/weapon/combitool/examine()
+	..()
+	if(loc == usr && tools.len)
+		usr << "It has the following fittings:"
+		for(var/obj/item/tool in tools)
+			usr << "\icon[tool] - [tool.name][tools[current_tool]==tool?" (selected)":""]"
+
+/obj/item/weapon/combitool/New()
+	..()
+	for(var/type in spawn_tools)
+		tools |= new type(src)
+
+/obj/item/weapon/combitool/attack_self(mob/user as mob)
+	if(++current_tool > tools.len) current_tool = 1
+	var/obj/item/tool = tools[current_tool]
+	if(!tool)
+		user << "You can't seem to find any fittings in \the [src]."
+	else
+		user << "You switch \the [src] to the [tool.name] fitting."
+	return 1
+
+/obj/item/weapon/combitool/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
+	if(!M.Adjacent(user))
+		return 0
+	var/obj/item/tool = tools[current_tool]
+	if(!tool) return 0
+	return (tool ? tool.attack(M,user) : 0)
+
+/obj/item/weapon/combitool/afterattack(var/atom/target, var/mob/living/user, proximity, params)
+	if(!proximity)
+		return 0
+	var/obj/item/tool = tools[current_tool]
+	if(!tool) return 0
+	tool.loc = user
+	var/resolved = target.attackby(tool,user)
+	if(!resolved && tool && target)
+		tool.afterattack(target,user,1)
+	if(tool)
+		tool.loc = src*/

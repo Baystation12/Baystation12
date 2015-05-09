@@ -102,7 +102,6 @@ var/global/list/obj/cortical_stacks = list() //Stacks for 'leave nobody behind' 
 	vox.name = vox.real_name
 	newraider.name = vox.name
 	vox.age = rand(12,20)
-	vox.dna.mutantrace = "vox"
 	vox.set_species("Vox")
 	vox.languages = list() // Removing language from chargen.
 	vox.flavor_text = ""
@@ -115,7 +114,8 @@ var/global/list/obj/cortical_stacks = list() //Stacks for 'leave nobody behind' 
 	for(var/datum/organ/external/limb in vox.organs)
 		limb.status &= ~(ORGAN_DESTROYED | ORGAN_ROBOT)
 
-	// Keep track of their stack.
+	// Add and keep track of their stack.
+	new /datum/organ/internal/stack/vox(vox)
 	if(vox.internal_organs_by_name["stack"])
 		cortical_stacks |= vox.internal_organs_by_name["stack"]
 

@@ -11,12 +11,8 @@
 	amount_per_transfer_from_this = 5
 	volume = 30
 	possible_transfer_amounts = null
-	flags = FPRINT | TABLEPASS | OPENCONTAINER
+	flags = OPENCONTAINER
 	slot_flags = SLOT_BELT
-
-/obj/item/weapon/reagent_containers/hypospray/attack_paw(mob/user as mob)
-	return src.attack_hand(user)
-
 
 /obj/item/weapon/reagent_containers/hypospray/New() //comment this to make hypos start off empty
 	..()
@@ -77,9 +73,9 @@
 	else
 		icon_state = "[initial(icon_state)]0"
 
-/obj/item/weapon/reagent_containers/hypospray/autoinjector/examine()
-	..()
+/obj/item/weapon/reagent_containers/hypospray/autoinjector/examine(mob/user)
+	..(user)
 	if(reagents && reagents.reagent_list.len)
-		usr << "\blue It is currently loaded."
+		user << "\blue It is currently loaded."
 	else
-		usr << "\blue It is spent."
+		user << "\blue It is spent."

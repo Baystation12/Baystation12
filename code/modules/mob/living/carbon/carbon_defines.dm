@@ -3,7 +3,7 @@
 	var/datum/species/species //Contains icon generation and language information, set during New().
 	var/list/stomach_contents = list()
 	var/list/datum/disease2/disease/virus2 = list()
-	var/antibodies = 0
+	var/list/antibodies = list()
 	var/last_eating = 0 	//Not sure what this does... I found it hidden in food.dm
 
 	var/life_tick = 0      // The amount of life ticks that have processed on this mob.

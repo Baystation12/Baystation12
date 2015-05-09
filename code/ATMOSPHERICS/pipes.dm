@@ -12,6 +12,13 @@
 	var/alert_pressure = 80*ONE_ATMOSPHERE
 		//minimum pressure before check_pressure(...) should be called
 
+	can_buckle = 1
+	buckle_require_restraints = 1
+	buckle_lying = -1
+
+/obj/machinery/atmospherics/pipe/drain_power()
+	return -1
+
 /obj/machinery/atmospherics/pipe/New()
 	..()
 	//so pipes under walls are hidden
@@ -216,9 +223,9 @@
 
 /obj/machinery/atmospherics/pipe/simple/proc/normalize_dir()
 	if(dir==3)
-		dir = 1
+		set_dir(1)
 	else if(dir==12)
-		dir = 4
+		set_dir(4)
 
 /obj/machinery/atmospherics/pipe/simple/Del()
 	if(node1)
@@ -277,18 +284,12 @@
 
 	for(var/obj/machinery/atmospherics/target in get_step(src,node1_dir))
 		if(target.initialize_directions & get_dir(target,src))
-			var/c = check_connect_types(target,src)
-			if (c)
-				target.connected_to = c
-				src.connected_to = c
+			if (check_connect_types(target,src))
 				node1 = target
 				break
 	for(var/obj/machinery/atmospherics/target in get_step(src,node2_dir))
 		if(target.initialize_directions & get_dir(target,src))
-			var/c = check_connect_types(target,src)
-			if (c)
-				target.connected_to = c
-				src.connected_to = c
+			if (check_connect_types(target,src))
 				node2 = target
 				break
 
@@ -324,7 +325,7 @@
 	name = "Scrubbers pipe"
 	desc = "A one meter section of scrubbers pipe"
 	icon_state = "intact-scrubbers"
-	connect_types = list(3)
+	connect_types = CONNECT_TYPE_SCRUBBER
 	layer = 2.38
 	icon_connect_type = "-scrubbers"
 	color = PIPE_COLOR_RED
@@ -333,7 +334,7 @@
 	name = "Air supply pipe"
 	desc = "A one meter section of supply pipe"
 	icon_state = "intact-supply"
-	connect_types = list(2)
+	connect_types = CONNECT_TYPE_SUPPLY
 	layer = 2.39
 	icon_connect_type = "-supply"
 	color = PIPE_COLOR_BLUE
@@ -359,7 +360,7 @@
 	name = "Scrubbers pipe"
 	desc = "A one meter section of scrubbers pipe"
 	icon_state = "intact-scrubbers"
-	connect_types = list(3)
+	connect_types = CONNECT_TYPE_SCRUBBER
 	layer = 2.38
 	icon_connect_type = "-scrubbers"
 	color = PIPE_COLOR_RED
@@ -368,7 +369,7 @@
 	name = "Air supply pipe"
 	desc = "A one meter section of supply pipe"
 	icon_state = "intact-supply"
-	connect_types = list(2)
+	connect_types = CONNECT_TYPE_SUPPLY
 	layer = 2.39
 	icon_connect_type = "-supply"
 	color = PIPE_COLOR_BLUE
@@ -532,10 +533,7 @@
 		if(direction&connect_directions)
 			for(var/obj/machinery/atmospherics/target in get_step(src,direction))
 				if(target.initialize_directions & get_dir(target,src))
-					var/c = check_connect_types(target,src)
-					if (c)
-						target.connected_to = c
-						src.connected_to = c
+					if (check_connect_types(target,src))
 						node1 = target
 						connect_directions &= ~direction
 						break
@@ -547,10 +545,7 @@
 		if(direction&connect_directions)
 			for(var/obj/machinery/atmospherics/target in get_step(src,direction))
 				if(target.initialize_directions & get_dir(target,src))
-					var/c = check_connect_types(target,src)
-					if (c)
-						target.connected_to = c
-						src.connected_to = c
+					if (check_connect_types(target,src))
 						node2 = target
 						connect_directions &= ~direction
 						break
@@ -562,10 +557,7 @@
 		if(direction&connect_directions)
 			for(var/obj/machinery/atmospherics/target in get_step(src,direction))
 				if(target.initialize_directions & get_dir(target,src))
-					var/c = check_connect_types(target,src)
-					if (c)
-						target.connected_to = c
-						src.connected_to = c
+					if (check_connect_types(target,src))
 						node3 = target
 						connect_directions &= ~direction
 						break
@@ -589,7 +581,7 @@
 	name="Scrubbers pipe manifold"
 	desc = "A manifold composed of scrubbers pipes"
 	icon_state = "map-scrubbers"
-	connect_types = list(3)
+	connect_types = CONNECT_TYPE_SCRUBBER
 	layer = 2.38
 	icon_connect_type = "-scrubbers"
 	color = PIPE_COLOR_RED
@@ -598,7 +590,7 @@
 	name="Air supply pipe manifold"
 	desc = "A manifold composed of supply pipes"
 	icon_state = "map-supply"
-	connect_types = list(2)
+	connect_types = CONNECT_TYPE_SUPPLY
 	layer = 2.39
 	icon_connect_type = "-supply"
 	color = PIPE_COLOR_BLUE
@@ -624,7 +616,7 @@
 	name="Scrubbers pipe manifold"
 	desc = "A manifold composed of scrubbers pipes"
 	icon_state = "map-scrubbers"
-	connect_types = list(3)
+	connect_types = CONNECT_TYPE_SCRUBBER
 	layer = 2.38
 	icon_connect_type = "-scrubbers"
 	color = PIPE_COLOR_RED
@@ -633,7 +625,7 @@
 	name="Air supply pipe manifold"
 	desc = "A manifold composed of supply pipes"
 	icon_state = "map-supply"
-	connect_types = list(2)
+	connect_types = CONNECT_TYPE_SUPPLY
 	layer = 2.39
 	icon_connect_type = "-supply"
 	color = PIPE_COLOR_BLUE
@@ -796,37 +788,25 @@
 
 	for(var/obj/machinery/atmospherics/target in get_step(src,1))
 		if(target.initialize_directions & 2)
-			var/c = check_connect_types(target,src)
-			if (c)
-				target.connected_to = c
-				src.connected_to = c
+			if (check_connect_types(target,src))
 				node1 = target
 				break
 
 	for(var/obj/machinery/atmospherics/target in get_step(src,2))
 		if(target.initialize_directions & 1)
-			var/c = check_connect_types(target,src)
-			if (c)
-				target.connected_to = c
-				src.connected_to = c
+			if (check_connect_types(target,src))
 				node2 = target
 				break
 
 	for(var/obj/machinery/atmospherics/target in get_step(src,4))
 		if(target.initialize_directions & 8)
-			var/c = check_connect_types(target,src)
-			if (c)
-				target.connected_to = c
-				src.connected_to = c
+			if (check_connect_types(target,src))
 				node3 = target
 				break
 
 	for(var/obj/machinery/atmospherics/target in get_step(src,8))
 		if(target.initialize_directions & 4)
-			var/c = check_connect_types(target,src)
-			if (c)
-				target.connected_to = c
-				src.connected_to = c
+			if (check_connect_types(target,src))
 				node4 = target
 				break
 
@@ -847,7 +827,7 @@
 	name="4-way scrubbers pipe manifold"
 	desc = "A manifold composed of scrubbers pipes"
 	icon_state = "map_4way-scrubbers"
-	connect_types = list(3)
+	connect_types = CONNECT_TYPE_SCRUBBER
 	layer = 2.38
 	icon_connect_type = "-scrubbers"
 	color = PIPE_COLOR_RED
@@ -856,7 +836,7 @@
 	name="4-way air supply pipe manifold"
 	desc = "A manifold composed of supply pipes"
 	icon_state = "map_4way-supply"
-	connect_types = list(2)
+	connect_types = CONNECT_TYPE_SUPPLY
 	layer = 2.39
 	icon_connect_type = "-supply"
 	color = PIPE_COLOR_BLUE
@@ -882,7 +862,7 @@
 	name="4-way scrubbers pipe manifold"
 	desc = "A manifold composed of scrubbers pipes"
 	icon_state = "map_4way-scrubbers"
-	connect_types = list(3)
+	connect_types = CONNECT_TYPE_SCRUBBER
 	layer = 2.38
 	icon_connect_type = "-scrubbers"
 	color = PIPE_COLOR_RED
@@ -891,7 +871,7 @@
 	name="4-way air supply pipe manifold"
 	desc = "A manifold composed of supply pipes"
 	icon_state = "map_4way-supply"
-	connect_types = list(2)
+	connect_types = CONNECT_TYPE_SUPPLY
 	layer = 2.39
 	icon_connect_type = "-supply"
 	color = PIPE_COLOR_BLUE
@@ -974,10 +954,7 @@
 /obj/machinery/atmospherics/pipe/cap/initialize()
 	for(var/obj/machinery/atmospherics/target in get_step(src, dir))
 		if(target.initialize_directions & get_dir(target,src))
-			var/c = check_connect_types(target,src)
-			if (c)
-				target.connected_to = c
-				src.connected_to = c
+			if (check_connect_types(target,src))
 				node = target
 				break
 
@@ -993,7 +970,7 @@
 	name = "scrubbers pipe endcap"
 	desc = "An endcap for scrubbers pipes"
 	icon_state = "cap-scrubbers"
-	connect_types = list(3)
+	connect_types = CONNECT_TYPE_SCRUBBER
 	layer = 2.38
 	icon_connect_type = "-scrubbers"
 	color = PIPE_COLOR_RED
@@ -1002,7 +979,7 @@
 	name = "supply pipe endcap"
 	desc = "An endcap for supply pipes"
 	icon_state = "cap-supply"
-	connect_types = list(2)
+	connect_types = CONNECT_TYPE_SUPPLY
 	layer = 2.39
 	icon_connect_type = "-supply"
 	color = PIPE_COLOR_BLUE
@@ -1016,7 +993,7 @@
 	name = "scrubbers pipe endcap"
 	desc = "An endcap for scrubbers pipes"
 	icon_state = "cap-f-scrubbers"
-	connect_types = list(3)
+	connect_types = CONNECT_TYPE_SCRUBBER
 	layer = 2.38
 	icon_connect_type = "-scrubbers"
 	color = PIPE_COLOR_RED
@@ -1025,7 +1002,7 @@
 	name = "supply pipe endcap"
 	desc = "An endcap for supply pipes"
 	icon_state = "cap-f-supply"
-	connect_types = list(2)
+	connect_types = CONNECT_TYPE_SUPPLY
 	layer = 2.39
 	icon_connect_type = "-supply"
 	color = PIPE_COLOR_BLUE
@@ -1084,10 +1061,7 @@
 
 	for(var/obj/machinery/atmospherics/target in get_step(src,connect_direction))
 		if(target.initialize_directions & get_dir(target,src))
-			var/c = check_connect_types(target,src)
-			if (c)
-				target.connected_to = c
-				src.connected_to = c
+			if (check_connect_types(target,src))
 				node1 = target
 				break
 
@@ -1259,7 +1233,7 @@
 	if(node1)
 		icon_state = "intact"
 
-		dir = get_dir(src, node1)
+		set_dir(get_dir(src, node1))
 
 	else
 		icon_state = "exposed"
@@ -1269,10 +1243,7 @@
 
 	for(var/obj/machinery/atmospherics/target in get_step(src,connect_direction))
 		if(target.initialize_directions & get_dir(target,src))
-			var/c = check_connect_types(target,src)
-			if (c)
-				target.connected_to = c
-				src.connected_to = c
+			if (check_connect_types(target,src))
 				node1 = target
 				break
 
@@ -1291,7 +1262,7 @@
 /obj/machinery/atmospherics/pipe/vent/hide(var/i) //to make the little pipe section invisible, the icon changes.
 	if(node1)
 		icon_state = "[i == 1 && istype(loc, /turf/simulated) ? "h" : "" ]intact"
-		dir = get_dir(src, node1)
+		set_dir(get_dir(src, node1))
 	else
 		icon_state = "exposed"
 
@@ -1299,7 +1270,7 @@
 /obj/machinery/atmospherics/pipe/simple/visible/universal
 	name="Universal pipe adapter"
 	desc = "An adapter for regular, supply and scrubbers pipes"
-	connect_types = list(1,2,3)
+	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_SCRUBBER
 	icon_state = "map_universal"
 
 /obj/machinery/atmospherics/pipe/simple/visible/universal/update_icon(var/safety = 0)
@@ -1334,7 +1305,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/universal
 	name="Universal pipe adapter"
 	desc = "An adapter for regular, supply and scrubbers pipes"
-	connect_types = list(1,2,3)
+	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_SCRUBBER
 	icon_state = "map_universal"
 
 /obj/machinery/atmospherics/pipe/simple/hidden/universal/update_icon(var/safety = 0)

@@ -6,8 +6,8 @@ var/global/list/uneatable = list(
 	)
 
 /obj/machinery/singularity/
-	name = "Gravitational Singularity"
-	desc = "A Gravitational Singularity."
+	name = "gravitational singularity"
+	desc = "A gravitational singularity."
 	icon = 'icons/obj/singularity.dmi'
 	icon_state = "singularity_s1"
 	anchored = 1
@@ -43,7 +43,7 @@ var/global/list/uneatable = list(
 		spawn(temp)
 			del(src)
 	..()
-	for(var/obj/machinery/singularity_beacon/singubeacon in machines)
+	for(var/obj/machinery/power/singularity_beacon/singubeacon in machines)
 		if(singubeacon.active)
 			target = singubeacon
 			break
@@ -224,8 +224,6 @@ var/global/list/uneatable = list(
 
 /obj/machinery/singularity/proc/eat()
 	set background = 1
-	if(defer_powernet_rebuild != 2)
-		defer_powernet_rebuild = 1
 	// Let's just make this one loop.
 	for(var/atom/X in orange(grav_pull,src))
 		var/dist = get_dist(X, src)
@@ -244,9 +242,6 @@ var/global/list/uneatable = list(
 		// Turf and movable atoms
 		else if(dist <= consume_range && (isturf(X) || istype(X, /atom/movable)))
 			consume(X)
-
-	if(defer_powernet_rebuild != 2)
-		defer_powernet_rebuild = 0
 	return
 
 
@@ -654,11 +649,7 @@ var/global/list/uneatable = list(
 
 /obj/machinery/singularity/narsie/wizard/eat()
 	set background = 1
-	if(defer_powernet_rebuild != 2)
-		defer_powernet_rebuild = 1
 	for(var/atom/X in orange(consume_range,src))
 		if(isturf(X) || istype(X, /atom/movable))
 			consume(X)
-	if(defer_powernet_rebuild != 2)
-		defer_powernet_rebuild = 0
 	return

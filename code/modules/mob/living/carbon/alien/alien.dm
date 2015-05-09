@@ -5,19 +5,14 @@
 	icon = 'icons/mob/alien.dmi'
 	icon_state = "alien"
 	pass_flags = PASSTABLE
-	melee_damage_lower = 1
-	melee_damage_upper = 3
-	attacktext = "bites"
-	attack_sound = null
-	friendly = "nuzzles"
-	wall_smash = 0
 	health = 100
 	maxHealth = 100
+	mob_size = 4
 
 	var/adult_form
 	var/dead_icon
 	var/amount_grown = 0
-	var/max_grown = 10
+	var/max_grown = 200
 	var/time_of_birth
 	var/language
 

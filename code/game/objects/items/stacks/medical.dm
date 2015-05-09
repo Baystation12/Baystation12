@@ -123,23 +123,6 @@
 			else
 				user << "<span class='notice'>The [affecting.display_name] is cut open, you'll need more than a bandage!</span>"
 
-/obj/item/stack/medical/bruise_pack/tajaran
-	name = "\improper S'rendarr's Hand leaf"
-	singular_name = "S'rendarr's Hand leaf"
-	desc = "A poultice made of soft leaves that is rubbed on bruises."
-	icon = 'icons/obj/harvest.dmi'
-	icon_state = "shandp"
-	heal_brute = 7
-
-/obj/item/stack/medical/ointment/tajaran
-	name = "\improper Messa's Tear petals"
-	singular_name = "Messa's Tear petals"
-	desc = "A poultice made of cold, blue petals that is rubbed on burns."
-	icon = 'icons/obj/harvest.dmi'
-	icon_state = "mtearp"
-	heal_burn = 7
-
-
 /obj/item/stack/medical/advanced/bruise_pack
 	name = "advanced trauma kit"
 	singular_name = "advanced trauma kit"
@@ -159,7 +142,7 @@
 		if(affecting.open == 0)
 			var/bandaged = affecting.bandage()
 			var/disinfected = affecting.disinfect()
-		
+
 			if(!(bandaged || disinfected))
 				user << "\red The wounds on [M]'s [affecting.display_name] have already been treated."
 				return 1

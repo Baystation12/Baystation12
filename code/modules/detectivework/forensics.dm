@@ -71,3 +71,11 @@ atom/proc/add_fibers(mob/living/carbon/human/M)
 
 	fields["area"] = other.fields["area"]
 	fields["time"] = other.fields["time"]
+
+/datum/data/record/forensic/proc/update_prints(var/list/o_prints)
+	var/list/prints = fields["fprints"]
+	for(var/print in o_prints)
+		if(prints[print])
+			prints[print] = stringmerge(prints[print], o_prints[print])
+			.=1
+	fields["fprints"] = prints

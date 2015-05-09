@@ -14,6 +14,7 @@
 	var/mineral/mineral
 	var/mined_ore = 0
 	var/last_act = 0
+	var/emitter_blasts_taken = 0 // EMITTER MINING! Muhehe.
 
 	var/datum/geosample/geologic_data
 	var/excavation_level = 0
@@ -28,7 +29,8 @@
 
 /turf/simulated/mineral/New()
 
-	MineralSpread()
+	spawn(0)
+		MineralSpread()
 
 	spawn(2)
 		var/list/step_overlays = list("s" = NORTH, "n" = SOUTH, "w" = EAST, "e" = WEST)
@@ -50,6 +52,16 @@
 				GetDrilled()
 		if(1.0)
 			mined_ore = 2 //some of the stuff gets blown up
+			GetDrilled()
+
+/turf/simulated/mineral/bullet_act(var/obj/item/projectile/Proj)
+
+	// Emitter blasts
+	if(istype(Proj, /obj/item/projectile/beam/emitter))
+		emitter_blasts_taken++
+
+		if(emitter_blasts_taken > 2) // 3 blasts per tile
+			mined_ore = 1
 			GetDrilled()
 
 /turf/simulated/mineral/Bumped(AM)
@@ -75,7 +87,7 @@
 	if(mineral && mineral.spread)
 		for(var/trydir in cardinal)
 			if(prob(mineral.spread_chance))
-				var/turf/simulated/mineral/random/target_turf = get_step(src, trydir)
+				var/turf/simulated/mineral/target_turf = get_step(src, trydir)
 				if(istype(target_turf) && !target_turf.mineral)
 					target_turf.mineral = mineral
 					target_turf.UpdateMineral()
@@ -352,7 +364,7 @@
 /turf/simulated/mineral/random
 	name = "Mineral deposit"
 	var/mineralSpawnChanceList = list("Uranium" = 5, "Platinum" = 5, "Iron" = 35, "Coal" = 35, "Diamond" = 1, "Gold" = 5, "Silver" = 5, "Phoron" = 10)
-	var/mineralChance = 10  //means 10% chance of this plot changing to a mineral deposit
+	var/mineralChance = 100 //10 //means 10% chance of this plot changing to a mineral deposit
 
 /turf/simulated/mineral/random/New()
 	if (prob(mineralChance) && !mineral)
@@ -368,7 +380,7 @@
 	. = ..()
 
 /turf/simulated/mineral/random/high_chance
-	mineralChance = 25
+	mineralChance = 100 //25
 	mineralSpawnChanceList = list("Uranium" = 10, "Platinum" = 10, "Iron" = 20, "Coal" = 20, "Diamond" = 2, "Gold" = 10, "Silver" = 10, "Phoron" = 20)
 
 
@@ -379,9 +391,9 @@
 	name = "asteroid"
 	icon = 'icons/turf/floors.dmi'
 	icon_state = "asteroid"
-	oxygen = 0.01
-	nitrogen = 0.01
-	temperature = T0C
+	oxygen = 0
+	nitrogen = 0
+	temperature = TCMB
 	icon_plating = "asteroid"
 	var/dug = 0       //0 = has not yet been dug, 1 = has already been dug
 	var/overlay_detail

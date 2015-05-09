@@ -1,9 +1,8 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:31
 
-
 /obj/machinery/computer/robotics
-	name = "Robotics Control"
-	desc = "Used to remotely lockdown or detonate linked Cyborgs."
+	name = "robotics control console"
+	desc = "Used to remotely lockdown or detonate linked cyborgs."
 	icon = 'icons/obj/computer.dmi'
 	icon_state = "robot"
 	req_access = list(access_robotics)
@@ -19,11 +18,6 @@
 
 /obj/machinery/computer/robotics/attack_ai(var/mob/user as mob)
 	return src.attack_hand(user)
-
-/obj/machinery/computer/robotics/attack_paw(var/mob/user as mob)
-
-	return src.attack_hand(user)
-	return
 
 /obj/machinery/computer/robotics/attack_hand(var/mob/user as mob)
 	if(..())
@@ -104,7 +98,7 @@
 
 /obj/machinery/computer/robotics/Topic(href, href_list)
 	if(..())
-		return
+		return 1
 	if ((usr.contents.Find(src) || (in_range(src, usr) && istype(src.loc, /turf))) || (istype(usr, /mob/living/silicon)))
 		usr.set_machine(src)
 

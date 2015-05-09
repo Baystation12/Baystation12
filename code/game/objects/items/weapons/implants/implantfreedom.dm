@@ -23,6 +23,8 @@
 			if (source.handcuffed)
 				var/obj/item/weapon/W = source.handcuffed
 				source.handcuffed = null
+				if(source.buckled && source.buckled.buckle_require_restraints)
+					source.buckled.unbuckle_mob()
 				source.update_inv_handcuffed()
 				if (source.client)
 					source.client.screen -= W
@@ -67,5 +69,3 @@ mechanisms<BR>
 life can drive down to only 1 use.<HR>
 No Implant Specifics"}
 		return dat
-
-

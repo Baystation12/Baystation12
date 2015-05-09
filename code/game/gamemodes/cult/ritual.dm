@@ -20,7 +20,7 @@ var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", 
 		runewords-=cultwords[word]
 
 /obj/effect/rune
-	desc = ""
+	desc = "A strange collection of symbols drawn in blood."
 	anchored = 1
 	icon = 'icons/obj/rune.dmi'
 	icon_state = "1"
@@ -32,6 +32,8 @@ var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", 
 	var/word1
 	var/word2
 	var/word3
+	var/list/converting = list()
+	
 // Places these combos are mentioned: this file - twice in the rune code, once in imbued tome, once in tome's HTML runes.dm - in the imbue rune code. If you change a combination - dont forget to change it everywhere.
 
 // travel self [word] - Teleport to random [rune with word destination matching]
@@ -68,26 +70,10 @@ var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", 
 		for(var/mob/living/silicon/ai/AI in player_list)
 			AI.client.images += blood
 
-	examine()
-		set src in view(2)
-
-		if(!iscultist(usr))
-			usr << "A strange collection of symbols drawn in blood."
-			return
-			/* Explosions... really?
-			if(desc && !usr.stat)
-				usr << "It reads: <i>[desc]</i>."
-				sleep(30)
-				explosion(src.loc, 0, 2, 5, 5)
-				if(src)
-					del(src)
-			*/
-		if(!desc)
-			usr << "A spell circle drawn in blood. It reads: <i>[word1] [word2] [word3]</i>."
-		else
-			usr << "Explosive Runes inscription in blood. It reads: <i>[desc]</i>."
-
-		return
+	examine(mob/user)
+		..()
+		if(iscultist(user))
+			user << "This spell circle reads: <i>[word1] [word2] [word3]</i>."
 
 
 	attackby(I as obj, user as mob)
@@ -185,7 +171,6 @@ var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", 
 	throw_speed = 1
 	throw_range = 5
 	w_class = 2.0
-	flags = FPRINT | TABLEPASS
 	unique = 1
 	var/notedat = ""
 	var/tomedat = ""
@@ -346,11 +331,8 @@ var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", 
 		msg_admin_attack("[user.name] ([user.ckey]) used [name] on [M.name] ([M.ckey]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
 
 		if(istype(M,/mob/dead))
-			M.invisibility = 0
-			user.visible_message( \
-				"\red [user] drags the ghost to our plan of reality!", \
-				"\red You drag the ghost to our plan of reality!" \
-			)
+			var/mob/dead/D = M
+			D.manifest(user)
 			return
 		if(!istype(M))
 			return
@@ -478,6 +460,8 @@ var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", 
 			user << "\red You slice open one of your fingers and begin drawing a rune on the floor whilst chanting the ritual that binds your life essence with the dark arcane energies flowing through the surrounding world."
 			user.take_overall_damage((rand(9)+1)/10) // 0.1 to 1.0 damage
 			if(do_after(user, 50))
+				var/area/A = get_area(user)
+				log_and_message_admins("created \an [chosen_rune] rune at \the [A.name] - [user.loc.x]-[user.loc.y]-[user.loc.z].")
 				if(usr.get_active_hand() != src)
 					return
 				var/mob/living/carbon/human/H = user
@@ -510,12 +494,11 @@ var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", 
 			user << "You copy the translation notes from your tome."
 
 
-	examine()
-		set src in usr
-		if(!iscultist(usr))
-			usr << "An old, dusty tome with frayed edges and a sinister looking cover."
+	examine(mob/user)
+		if(!iscultist(user))
+			user << "An old, dusty tome with frayed edges and a sinister looking cover."
 		else
-			usr << "The scriptures of Nar-Sie, The One Who Sees, The Geometer of Blood. Contains the details of every ritual his followers could think of. Most of these are useless, though."
+			user << "The scriptures of Nar-Sie, The One Who Sees, The Geometer of Blood. Contains the details of every ritual his followers could think of. Most of these are useless, though."
 
 /obj/item/weapon/book/tome/imbued //admin tome, spawns working runes without waiting
 	w_class = 2.0
@@ -536,6 +519,8 @@ var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", 
 				var/mob/living/carbon/human/H = user
 				R.blood_DNA = list()
 				R.blood_DNA[H.dna.unique_enzymes] = H.dna.b_type
+			var/area/A = get_area(user)
+			log_and_message_admins("created \an [r] rune at \the [A.name] - [user.loc.x]-[user.loc.y]-[user.loc.z].")
 			switch(r)
 				if("teleport")
 					var/list/words = list("ire", "ego", "nahlizet", "certum", "veri", "jatkaa", "balaq", "mgar", "karazet", "geeri")

@@ -9,7 +9,7 @@
 	recommended_enemies = 3
 
 	uplink_welcome = "AntagCorp Uplink Console:"
-	uplink_uses = 5
+	uplink_uses = 7
 
 	newscaster_announcements = /datum/news_announcement/revolution_inciting_event
 
@@ -109,7 +109,7 @@
 	rev_mind.special_role = "Revolutionary"
 	show_objectives(rev_mind)
 	update_rev_icons_added(rev_mind)
-	H.hud_updateflag |= 1 << SPECIALROLE_HUD
+	BITSET(H.hud_updateflag, SPECIALROLE_HUD)
 	return 1
 
 /////////////////////////////
@@ -123,7 +123,7 @@
 			//       probably wanna export this stuff into a separate function for use by both
 			//       revs and heads
 			//assume that only carbon mobs can become rev heads for now
-			if(!rev_mind.current:handcuffed && T && T.z == 1)
+			if(!rev_mind.current:handcuffed && T && T.z in config.station_levels)
 				return 0
 	return 1
 

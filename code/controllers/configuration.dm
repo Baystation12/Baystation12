@@ -72,6 +72,8 @@
 	var/cult_ghostwriter = 1               //Allows ghosts to write in blood in cult rounds...
 	var/cult_ghostwriter_req_cultists = 10 //...so long as this many cultists are active.
 
+	var/character_slots = 10				// The number of available character slots
+
 	var/max_maint_drones = 5				//This many drones can spawn,
 	var/allow_drone_spawn = 1				//assuming the admin allow them to.
 	var/drone_build_time = 1200				//A drone will become available every X ticks since last drone spawn. Default is 2 minutes.
@@ -83,6 +85,7 @@
 	var/limitalienplayers = 0
 	var/alien_to_human_ratio = 0.5
 
+	var/guests_allowed = 1
 	var/debugparanoid = 0
 
 	var/server
@@ -118,6 +121,8 @@
 
 	var/use_loyalty_implants = 0
 
+	var/welder_vision = 1
+
 	//Used for modifying movement speed for mobs.
 	//Unversal modifiers
 	var/run_speed = 0
@@ -146,6 +151,8 @@
 
 	var/comms_password = ""
 
+	var/enter_allowed = 1
+
 	var/use_irc_bot = 0
 	var/irc_bot_host = ""
 	var/main_irc = ""
@@ -153,6 +160,32 @@
 	var/python_path = "" //Path to the python executable.  Defaults to "python" on windows and "/usr/bin/env python2" on unix
 	var/use_lib_nudge = 0 //Use the C library nudge instead of the python nudge.
 	var/use_overmap = 0
+
+	var/list/station_levels = list(1)				// Defines which Z-levels the station exists on.
+	var/list/admin_levels= list(2)					// Defines which Z-levels which are for admin functionality, for example including such areas as Central Command and the Syndicate Shuttle
+	var/list/contact_levels = list(1, 5)			// Defines which Z-levels which, for example, a Code Red announcement may affect
+	var/list/player_levels = list(1, 3, 4, 5, 6)	// Defines all Z-levels a character can typically reach
+
+	// Event settings
+	var/expected_round_length = 3 * 60 * 60 * 10 // 3 hours
+	// If the first delay has a custom start time
+	// No custom time, no custom time, between 80 to 100 minutes respectively.
+	var/list/event_first_run   = list(EVENT_LEVEL_MUNDANE = null, 	EVENT_LEVEL_MODERATE = null,	EVENT_LEVEL_MAJOR = list("lower" = 48000, "upper" = 60000))
+	// The lowest delay until next event
+	// 10, 30, 50 minutes respectively
+	var/list/event_delay_lower = list(EVENT_LEVEL_MUNDANE = 6000,	EVENT_LEVEL_MODERATE = 18000,	EVENT_LEVEL_MAJOR = 30000)
+	// The upper delay until next event
+	// 15, 45, 70 minutes respectively
+	var/list/event_delay_upper = list(EVENT_LEVEL_MUNDANE = 9000,	EVENT_LEVEL_MODERATE = 27000,	EVENT_LEVEL_MAJOR = 42000)
+
+	var/aliens_allowed = 0
+	var/ninjas_allowed = 0
+	var/abandon_allowed = 1
+	var/ooc_allowed = 1
+	var/dooc_allowed = 1
+	var/dsay_allowed = 1
+
+	var/starlight = 0	// Whether space turfs have ambient light or not
 
 /datum/configuration/New()
 	var/list/L = typesof(/datum/game_mode) - /datum/game_mode
@@ -359,7 +392,22 @@
 					config.guest_jobban = 1
 
 				if ("guest_ban")
-					guests_allowed = 0
+					config.guests_allowed = 0
+
+				if ("disable_ooc")
+					config.ooc_allowed = 0
+
+				if ("disable_entry")
+					config.enter_allowed = 0
+
+				if ("disable_dead_ooc")
+					config.dooc_allowed = 0
+
+				if ("disable_dsay")
+					config.dsay_allowed = 0
+
+				if ("disable_respawn")
+					config.abandon_allowed = 0
 
 				if ("usewhitelist")
 					config.usewhitelist = 1
@@ -372,6 +420,12 @@
 
 				if ("traitor_scaling")
 					config.traitor_scaling = 1
+
+				if ("aliens_allowed")
+					config.aliens_allowed = 1
+
+				if ("ninjas_allowed")
+					config.ninjas_allowed = 1
 
 				if ("objectives_disabled")
 					config.objectives_disabled = 1
@@ -496,11 +550,6 @@
 				if("python_path")
 					if(value)
 						config.python_path = value
-					else
-						if(world.system_type == UNIX)
-							config.python_path = "/usr/bin/env python2"
-						else //probably windows, if not this should work anyway
-							config.python_path = "python"
 
 				if("use_lib_nudge")
 					config.use_lib_nudge = 1
@@ -510,6 +559,9 @@
 
 				if("req_cult_ghostwriter")
 					config.cult_ghostwriter_req_cultists = text2num(value)
+
+				if("character_slots")
+					config.character_slots = text2num(value)
 
 				if("allow_drone_spawn")
 					config.allow_drone_spawn = text2num(value)
@@ -522,6 +574,51 @@
 
 				if("use_overmap")
 					config.use_overmap = 1
+
+				if("station_levels")
+					config.station_levels = text2numlist(value, ";")
+
+				if("admin_levels")
+					config.admin_levels = text2numlist(value, ";")
+
+				if("contact_levels")
+					config.contact_levels = text2numlist(value, ";")
+
+				if("player_levels")
+					config.player_levels = text2numlist(value, ";")
+
+				if("expected_round_length")
+					config.expected_round_length = MinutesToTicks(text2num(value))
+
+				if("disable_welder_vision")
+					config.welder_vision = 0
+
+				if("event_custom_start_mundane")
+					var/values = text2numlist(value, ";")
+					config.event_first_run[EVENT_LEVEL_MUNDANE] = list("lower" = MinutesToTicks(values[1]), "upper" = MinutesToTicks(values[2]))
+
+				if("event_custom_start_moderate")
+					var/values = text2numlist(value, ";")
+					config.event_first_run[EVENT_LEVEL_MODERATE] = list("lower" = MinutesToTicks(values[1]), "upper" = MinutesToTicks(values[2]))
+
+				if("event_custom_start_major")
+					var/values = text2numlist(value, ";")
+					config.event_first_run[EVENT_LEVEL_MAJOR] = list("lower" = MinutesToTicks(values[1]), "upper" = MinutesToTicks(values[2]))
+
+				if("event_delay_lower")
+					var/values = text2numlist(value, ";")
+					config.event_delay_lower[EVENT_LEVEL_MUNDANE] = MinutesToTicks(values[1])
+					config.event_delay_lower[EVENT_LEVEL_MODERATE] = MinutesToTicks(values[2])
+					config.event_delay_lower[EVENT_LEVEL_MAJOR] = MinutesToTicks(values[3])
+
+				if("event_delay_upper")
+					var/values = text2numlist(value, ";")
+					config.event_delay_upper[EVENT_LEVEL_MUNDANE] = MinutesToTicks(values[1])
+					config.event_delay_upper[EVENT_LEVEL_MODERATE] = MinutesToTicks(values[2])
+					config.event_delay_upper[EVENT_LEVEL_MAJOR] = MinutesToTicks(values[3])
+
+				if("starlight")
+					config.starlight = 1
 
 				else
 					log_misc("Unknown setting in configuration: '[name]'")
@@ -691,3 +788,11 @@
 			runnable_modes[M] = probabilities[M.config_tag]
 			//world << "DEBUG: runnable_mode\[[runnable_modes.len]\] = [M.config_tag]"
 	return runnable_modes
+
+/datum/configuration/proc/post_load()
+	//apply a default value to config.python_path, if needed
+	if (!config.python_path)
+		if(world.system_type == UNIX)
+			config.python_path = "/usr/bin/env python2"
+		else //probably windows, if not this should work anyway
+			config.python_path = "python"

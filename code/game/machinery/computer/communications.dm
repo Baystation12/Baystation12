@@ -2,8 +2,8 @@
 
 // The communications computer
 /obj/machinery/computer/communications
-	name = "Communications Console"
-	desc = "This can be used for various important functions. Still under developement."
+	name = "command and communications console"
+	desc = "Used to command and control the station. Can relay long-range communications."
 	icon_state = "comm"
 	req_access = list(access_heads)
 	circuit = "/obj/item/weapon/circuitboard/communications"
@@ -47,7 +47,7 @@
 
 /obj/machinery/computer/communications/Topic(href, href_list)
 	if(..())
-		return
+		return 1
 	if (!(src.z == 1 || src.z == 7 || src.z == 8))
 		usr << "\red <b>Unable to establish a connection</b>: \black You're too far away from the station!"
 		return
@@ -112,7 +112,7 @@
 				if(message_cooldown)
 					usr << "Please allow at least one minute to pass between announcements"
 					return
-				var/input = stripped_input(usr, "Please write a message to announce to the station crew.", "Priority Announcement")
+				var/input = input(usr, "Please write a message to announce to the station crew.", "Priority Announcement")
 				if(!input || !(usr in view(1,src)))
 					return
 				crew_announcement.Announce(input)
@@ -177,10 +177,10 @@
 					post_status(href_list["statdisp"])
 
 		if("setmsg1")
-			stat_msg1 = reject_bad_text(trim(copytext(sanitize(input("Line 1", "Enter Message Text", stat_msg1) as text|null), 1, 40)), 40)
+			stat_msg1 = reject_bad_text(trim(sanitize(copytext(input("Line 1", "Enter Message Text", stat_msg1) as text|null, 1, 40))), 40)
 			src.updateDialog()
 		if("setmsg2")
-			stat_msg2 = reject_bad_text(trim(copytext(sanitize(input("Line 2", "Enter Message Text", stat_msg2) as text|null), 1, 40)), 40)
+			stat_msg2 = reject_bad_text(trim(sanitize(copytext(input("Line 2", "Enter Message Text", stat_msg2) as text|null, 1, 40))), 40)
 			src.updateDialog()
 
 		// OMG CENTCOMM LETTERHEAD
@@ -227,7 +227,7 @@
 					return
 				Syndicate_announce(input, usr)
 				usr << "\blue Message transmitted."
-				log_say("[key_name(usr)] has made a Syndicate announcement: [input]")
+				log_say("[key_name(usr)] has made an illegal announcement: [input]")
 				centcomm_message_cooldown = 1
 				spawn(300)//10 minute cooldown
 					centcomm_message_cooldown = 0
@@ -293,11 +293,6 @@
 
 /obj/machinery/computer/communications/attack_ai(var/mob/user as mob)
 	return src.attack_hand(user)
-
-
-/obj/machinery/computer/communications/attack_paw(var/mob/user as mob)
-	return src.attack_hand(user)
-
 
 /obj/machinery/computer/communications/attack_hand(var/mob/user as mob)
 	if(..())
@@ -467,7 +462,7 @@
 		return
 
 	if(world.time < 6000) // Ten minute grace period to let the game get going without lolmetagaming. -- TLE
-		user << "The emergency shuttle is refueling. Please wait another [round((6000-world.time)/60)] minutes before trying again."
+		user << "The emergency shuttle is refueling. Please wait another [round((6000-world.time)/600)] minute\s before trying again."
 		return
 
 	if(emergency_shuttle.going_to_centcom())
@@ -524,8 +519,14 @@
 			return
 
 	emergency_shuttle.call_transfer()
-	log_game("[key_name(user)] has called the shuttle.")
-	message_admins("[key_name_admin(user)] has called the shuttle.", 1)
+
+	//delay events in case of an autotransfer
+	if (isnull(user))
+		event_manager.delay_events(EVENT_LEVEL_MODERATE, 9000) //15 minutes
+		event_manager.delay_events(EVENT_LEVEL_MAJOR, 9000)
+
+	log_game("[user? key_name(user) : "Autotransfer"] has called the shuttle.")
+	message_admins("[user? key_name_admin(user) : "Autotransfer"] has called the shuttle.", 1)
 
 	return
 

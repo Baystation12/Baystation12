@@ -120,7 +120,7 @@
 
 /obj/machinery/mineral/mint/Topic(href, href_list)
 	if(..())
-		return
+		return 1
 	usr.set_machine(src)
 	src.add_fingerprint(usr)
 	if(processing==1)

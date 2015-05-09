@@ -56,6 +56,7 @@ Hotkey-Mode: (hotkey-mode must be on)
 \te = equip
 \tr = throw
 \tt = say
+\t5 = emote
 \tx = swap-hand
 \tz = activate held object (or y)
 \tf = cycle-intents-left
@@ -83,6 +84,10 @@ Any-Mode: (hotkey doesn't need to be on)
 \tCtrl+2 = disarm-intent
 \tCtrl+3 = grab-intent
 \tCtrl+4 = harm-intent
+\tF1 = adminhelp
+\tF2 = ooc
+\tF3 = say
+\tF4 = emote
 \tDEL = pull
 \tINS = cycle-intents-right
 \tHOME = drop

@@ -363,13 +363,14 @@ var/global/datum/controller/occupations/job_master
 		for(var/mob/new_player/player in unassigned)
 			if(player.client.prefs.alternate_option == RETURN_TO_LOBBY)
 				player.ready = 0
+				player.new_player_panel_proc()
 				unassigned -= player
 		return 1
 
 
 	proc/EquipRank(var/mob/living/carbon/human/H, var/rank, var/joined_late = 0)
 
-		if(!H)	return 0
+		if(!H)	return null
 
 		var/datum/job/job = GetJob(rank)
 		var/list/spawn_in_storage = list()
@@ -377,6 +378,8 @@ var/global/datum/controller/occupations/job_master
 		if(job)
 
 			//Equip custom gear loadout.
+			var/list/custom_equip_slots = list() //If more than one item takes the same slot, all after the first one spawn in storage.
+			var/list/custom_equip_leftovers = list()
 			if(H.client.prefs.gear && H.client.prefs.gear.len && job.title != "Cyborg" && job.title != "AI")
 
 				for(var/thing in H.client.prefs.gear)
@@ -397,14 +400,18 @@ var/global/datum/controller/occupations/job_master
 							H << "\red Your current job or whitelist status does not permit you to spawn with [thing]!"
 							continue
 
-						if(G.slot)
-							H.equip_to_slot_or_del(new G.path(H), G.slot)
-							H << "\blue Equipping you with [thing]!"
-
+						if(G.slot && !(G.slot in custom_equip_slots))
+							// This is a miserable way to fix the loadout overwrite bug, but the alternative requires
+							// adding an arg to a bunch of different procs. Will look into it after this merge. ~ Z
+							if(G.slot == slot_wear_mask || G.slot == slot_wear_suit || G.slot == slot_head)
+								custom_equip_leftovers += thing
+							else if(H.equip_to_slot_or_del(new G.path(H), G.slot))
+								H << "\blue Equipping you with [thing]!"
+								custom_equip_slots.Add(G.slot)
+							else
+								custom_equip_leftovers.Add(thing)
 						else
 							spawn_in_storage += thing
-
-
 			//Equip job items.
 			if(istype(job,/datum/job/deptguard))
 				var/avaiabledept = getDGdept()
@@ -412,6 +419,18 @@ var/global/datum/controller/occupations/job_master
 				H.mind.assigned_DG_dept = avaiabledept
 			else
 				job.equip(H)
+				job.apply_fingerprints(H)
+				//If some custom items could not be equipped before, try again now.
+				for(var/thing in custom_equip_leftovers)
+					var/datum/gear/G = gear_datums[thing]
+					if(G.slot in custom_equip_slots)
+						spawn_in_storage += thing
+					else
+						if(H.equip_to_slot_or_del(new G.path(H), G.slot))
+							H << "\blue Equipping you with [thing]!"
+							custom_equip_slots.Add(G.slot)
+						else
+							spawn_in_storage += thing
 		else
 			H << "Your job is [rank] and the game just can't handle it! Please report this bug to an administrator."
 
@@ -451,9 +470,9 @@ var/global/datum/controller/occupations/job_master
 
 				H.loc = S.loc
 			// Moving wheelchair if they have one
-			if(H.buckled && istype(H.buckled, /obj/structure/stool/bed/chair/wheelchair))
+			if(H.buckled && istype(H.buckled, /obj/structure/bed/chair/wheelchair))
 				H.buckled.loc = H.loc
-				H.buckled.dir = H.dir
+				H.buckled.set_dir(H.dir)
 
 		//give them an account in the station database
 		var/datum/money_account/M = create_account(H.real_name, rand(50,500)*10, null)
@@ -496,9 +515,10 @@ var/global/datum/controller/occupations/job_master
 
 			switch(rank)
 				if("Cyborg")
-					H.Robotize()
-					return 1
-				if("AI","Clown")	//don't need bag preference stuff!
+					return H.Robotize()
+				if("AI")
+					return H
+				if("Clown")	//don't need bag preference stuff!
 				else
 					switch(H.backbag) //BS12 EDIT
 						if(1)
@@ -549,10 +569,10 @@ var/global/datum/controller/occupations/job_master
 			var/datum/organ/external/l_foot = H.get_organ("l_foot")
 			var/datum/organ/external/r_foot = H.get_organ("r_foot")
 			if((!l_foot || l_foot.status & ORGAN_DESTROYED) && (!r_foot || r_foot.status & ORGAN_DESTROYED))
-				var/obj/structure/stool/bed/chair/wheelchair/W = new /obj/structure/stool/bed/chair/wheelchair(H.loc)
+				var/obj/structure/bed/chair/wheelchair/W = new /obj/structure/bed/chair/wheelchair(H.loc)
 				H.buckled = W
 				H.update_canmove()
-				W.dir = H.dir
+				W.set_dir(H.dir)
 				W.buckled_mob = H
 				W.add_fingerprint(H)
 
@@ -574,10 +594,10 @@ var/global/datum/controller/occupations/job_master
 				G.prescription = 1
 //		H.update_icons()
 
-		H.hud_updateflag |= (1 << ID_HUD)
-		H.hud_updateflag |= (1 << IMPLOYAL_HUD)
-		H.hud_updateflag |= (1 << SPECIALROLE_HUD)
-		return 1
+		BITSET(H.hud_updateflag, ID_HUD)
+		BITSET(H.hud_updateflag, IMPLOYAL_HUD)
+		BITSET(H.hud_updateflag, SPECIALROLE_HUD)
+		return H
 
 
 	proc/spawnId(var/mob/living/carbon/human/H, rank, title)
@@ -621,6 +641,7 @@ var/global/datum/controller/occupations/job_master
 			var/obj/item/device/pda/pda = locate(/obj/item/device/pda,H)
 			pda.owner = H.real_name
 			pda.ownjob = C.assignment
+			pda.ownrank = C.rank
 			pda.name = "PDA-[H.real_name] ([pda.ownjob])"
 
 		return 1

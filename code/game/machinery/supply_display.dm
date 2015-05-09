@@ -3,7 +3,7 @@
 
 /obj/machinery/status_display/supply_display/update()
 	if(!..() && mode == STATUS_DISPLAY_CUSTOM)
-		message1 = "SUPPLY"
+		message1 = "CARGO"
 		message2 = ""
 
 		var/datum/shuttle/ferry/supply/shuttle = supply_controller.shuttle

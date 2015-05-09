@@ -4,7 +4,7 @@
 	damage = 0
 	damage_type = BURN
 	nodamage = 1
-	flag = "energy"
+	check_armour = "energy"
 
 	on_hit(var/atom/change)
 		wabbajack(change)
@@ -84,4 +84,3 @@
 
 		del(M)
 		return new_mob
-

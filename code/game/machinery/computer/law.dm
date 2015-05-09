@@ -1,7 +1,7 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:31
 
 /obj/machinery/computer/aiupload
-	name = "AI Upload"
+	name = "\improper AI upload console"
 	desc = "Used to upload laws to the AI."
 	icon_state = "command"
 	circuit = "/obj/item/weapon/circuitboard/aiupload"
@@ -65,11 +65,13 @@
 		else
 			usr << "[src.current.name] selected for law changes."
 		return
-
+	
+	attack_ghost(user as mob)
+		return 1
 
 
 /obj/machinery/computer/borgupload
-	name = "Cyborg Upload"
+	name = "cyborg upload console"
 	desc = "Used to upload laws to Cyborgs."
 	icon_state = "command"
 	circuit = "/obj/item/weapon/circuitboard/borgupload"
@@ -98,3 +100,6 @@
 		else
 			usr << "[src.current.name] selected for law changes."
 		return
+
+	attack_ghost(user as mob)
+		return 1

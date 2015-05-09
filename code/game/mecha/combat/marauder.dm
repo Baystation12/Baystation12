@@ -151,6 +151,7 @@
 			smoke_ready = 1
 	return
 
+//TODO replace this with zoom code that doesn't increase peripherial vision
 /obj/mecha/combat/marauder/verb/zoom()
 	set category = "Exosuit Interface"
 	set name = "Zoom"

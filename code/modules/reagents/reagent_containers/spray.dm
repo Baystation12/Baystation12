@@ -4,7 +4,7 @@
 	icon = 'icons/obj/janitor.dmi'
 	icon_state = "cleaner"
 	item_state = "cleaner"
-	flags = TABLEPASS|OPENCONTAINER|FPRINT|NOBLUDGEON
+	flags = OPENCONTAINER|NOBLUDGEON
 	slot_flags = SLOT_BELT
 	throwforce = 3
 	w_class = 2.0
@@ -21,8 +21,8 @@
 	..()
 	src.verbs -= /obj/item/weapon/reagent_containers/verb/set_APTFT
 
-/obj/item/weapon/reagent_containers/spray/afterattack(atom/A as mob|obj, mob/user as mob)
-	if(istype(A, /obj/item/weapon/storage) || istype(A, /obj/structure/table) || istype(A, /obj/structure/rack) || istype(A, /obj/structure/closet) \
+/obj/item/weapon/reagent_containers/spray/afterattack(atom/A as mob|obj, mob/user as mob, proximity)
+	if(istype(A, /obj/item/weapon/storage) || istype(A, /obj/structure/table) || istype(A, /obj/structure/closet) \
 	|| istype(A, /obj/item/weapon/reagent_containers) || istype(A, /obj/structure/sink) || istype(A, /obj/structure/janitorialcart))
 		return
 
@@ -46,7 +46,7 @@
 		user << "<span class='notice'>\The [src] is empty!</span>"
 		return
 
-	Spray_at(A)
+	Spray_at(A, user, proximity)
 
 	playsound(src.loc, 'sound/effects/spray2.ogg', 50, 1, -6)
 
@@ -61,28 +61,39 @@
 		log_game("[key_name(user)] fired Space lube from \a [src].")
 	return
 
-/obj/item/weapon/reagent_containers/spray/proc/Spray_at(atom/A as mob|obj)
-	var/obj/effect/decal/chempuff/D = new/obj/effect/decal/chempuff(get_turf(src))
-	D.create_reagents(amount_per_transfer_from_this)
-	reagents.trans_to(D, amount_per_transfer_from_this, 1/spray_size)
-	D.icon += mix_color_from_reagents(D.reagents.reagent_list)
+/obj/item/weapon/reagent_containers/spray/proc/Spray_at(atom/A as mob|obj, mob/user as mob, proximity)
+	if (A.density && proximity)
+		A.visible_message("[usr] sprays [A] with [src].")
+		var/obj/D = new/obj()
+		D.create_reagents(amount_per_transfer_from_this)
+		reagents.trans_to(D, amount_per_transfer_from_this)
+		D.icon += mix_color_from_reagents(D.reagents.reagent_list)
+		spawn(0)
+			D.reagents.reaction(A)
+			sleep(5)
+			del(D)
+	else
+		var/obj/effect/decal/chempuff/D = new/obj/effect/decal/chempuff(get_turf(src))
+		D.create_reagents(amount_per_transfer_from_this)
+		reagents.trans_to(D, amount_per_transfer_from_this, 1/spray_size)
+		D.icon += mix_color_from_reagents(D.reagents.reagent_list)
 
-	var/turf/A_turf = get_turf(A)//BS12
+		var/turf/A_turf = get_turf(A)//BS12
 
-	spawn(0)
-		for(var/i=0, i<spray_size, i++)
-			step_towards(D,A)
-			D.reagents.reaction(get_turf(D))
-			for(var/atom/T in get_turf(D))
-				D.reagents.reaction(T)
+		spawn(0)
+			for(var/i=0, i<spray_size, i++)
+				step_towards(D,A)
+				D.reagents.reaction(get_turf(D))
+				for(var/atom/T in get_turf(D))
+					D.reagents.reaction(T)
 
-				// When spraying against the wall, also react with the wall, but
-				// not its contents. BS12
-				if(get_dist(D, A_turf) == 1 && A_turf.density)
-					D.reagents.reaction(A_turf)
-				sleep(2)
-			sleep(3)
-		del(D)
+					// When spraying against the wall, also react with the wall, but
+					// not its contents. BS12
+					if(get_dist(D, A_turf) == 1 && A_turf.density)
+						D.reagents.reaction(A_turf)
+					sleep(2)
+				sleep(3)
+			del(D)
 
 	return
 
@@ -94,10 +105,9 @@
 	user << "<span class='notice'>You adjusted the pressure nozzle. You'll now use [amount_per_transfer_from_this] units per spray.</span>"
 
 
-/obj/item/weapon/reagent_containers/spray/examine()
-	set src in usr
-	..()
-	usr << "[round(src.reagents.total_volume)] units left."
+/obj/item/weapon/reagent_containers/spray/examine(mob/user)
+	if(..(user, 0) && user==src.loc)
+		user << "[round(src.reagents.total_volume)] units left."
 	return
 
 /obj/item/weapon/reagent_containers/spray/verb/empty()
@@ -142,10 +152,9 @@
 	..()
 	reagents.add_reagent("condensedcapsaicin", 40)
 
-/obj/item/weapon/reagent_containers/spray/pepper/examine()
-	..()
-	if(get_dist(usr,src) <= 1)
-		usr << "The safety is [safety ? "on" : "off"]."
+/obj/item/weapon/reagent_containers/spray/pepper/examine(mob/user)
+	if(..(user, 1))
+		user << "The safety is [safety ? "on" : "off"]."
 
 /obj/item/weapon/reagent_containers/spray/pepper/attack_self(var/mob/user)
 	safety = !safety
@@ -161,7 +170,7 @@
 /obj/item/weapon/reagent_containers/spray/waterflower
 	name = "water flower"
 	desc = "A seemingly innocent sunflower...with a twist."
-	icon = 'icons/obj/harvest.dmi'
+	icon = 'icons/obj/device.dmi'
 	icon_state = "sunflower"
 	item_state = "sunflower"
 	amount_per_transfer_from_this = 1
@@ -228,7 +237,7 @@
 /obj/item/weapon/reagent_containers/spray/plantbgone // -- Skie
 	name = "Plant-B-Gone"
 	desc = "Kills those pesky weeds!"
-	icon = 'icons/obj/hydroponics.dmi'
+	icon = 'icons/obj/hydroponics_machines.dmi'
 	icon_state = "plantbgone"
 	item_state = "plantbgone"
 	volume = 100

@@ -113,7 +113,7 @@
 		world.Reboot()
 
 	var/datum/disease2/disease/lethal = new
-	lethal.makerandom(1)
+	lethal.makerandom(3)
 	lethal.infectionchance = 5
 
 	// the more doctors, the more will be infected

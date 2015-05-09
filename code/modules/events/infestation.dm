@@ -31,7 +31,7 @@
 			spawn_area_type = /area/crew_quarters/kitchen
 			locstring = "the kitchen"
 		if(LOC_ATMOS)
-			spawn_area_type = /area/atmos
+			spawn_area_type = /area/engineering/atmos
 			locstring = "atmospherics"
 		if(LOC_INCIN)
 			spawn_area_type = /area/maintenance/incinerator

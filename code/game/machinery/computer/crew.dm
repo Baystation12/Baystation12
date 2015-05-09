@@ -1,16 +1,15 @@
 /obj/machinery/computer/crew
-	name = "Crew monitoring computer"
+	name = "crew monitoring computer"
 	desc = "Used to monitor active health sensors built into most of the crew's uniforms."
 	icon_state = "crew"
 	use_power = 1
 	idle_power_usage = 250
 	active_power_usage = 500
 	circuit = "/obj/item/weapon/circuitboard/crew"
-	var/list/tracked = list(  )
-
+	var/obj/nano_module/crew_monitor/crew_monitor
 
 /obj/machinery/computer/crew/New()
-	tracked = list()
+	crew_monitor = new(src)
 	..()
 
 
@@ -25,6 +24,8 @@
 		return
 	ui_interact(user)
 
+/obj/machinery/computer/crew/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+	crew_monitor.ui_interact(user, ui_key, ui, force_open)
 
 /obj/machinery/computer/crew/update_icon()
 
@@ -38,8 +39,7 @@
 			icon_state = initial(icon_state)
 			stat &= ~NOPOWER
 
-
-/obj/machinery/computer/crew/Topic(href, href_list)
+/*/obj/machinery/computer/crew/Topic(href, href_list)
 	if(..()) return
 	if (src.z > 8)
 		usr << "\red <b>Unable to establish a connection</b>: \black You're too far away from the station!"
@@ -53,9 +53,9 @@
 	if(href_list["update"])
 		src.updateDialog()
 		return 1
-
+*/
 /obj/machinery/computer/crew/interact(mob/user)
-	ui_interact(user)
+/*	ui_interact(user)
 
 /obj/machinery/computer/crew/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	if(stat & (BROKEN|NOPOWER))
@@ -144,4 +144,5 @@
 			var/obj/item/clothing/under/C = H.w_uniform
 			if (C.has_sensor)
 				tracked |= C
-	return 1
+	return 1*/
+	crew_monitor.ui_interact(user)

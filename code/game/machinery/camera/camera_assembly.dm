@@ -1,6 +1,6 @@
 /obj/item/weapon/camera_assembly
 	name = "camera assembly"
-	desc = "The basic construction for Nanotrasen-Always-Watching-You cameras."
+	desc = "A pre-fabricated security camera kit, ready to be assembled and mounted to a surface."
 	icon = 'icons/obj/monitors.dmi'
 	icon_state = "cameracase"
 	w_class = 2
@@ -78,7 +78,7 @@
 			if(isscrewdriver(W))
 				playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 
-				var/input = strip_html(input(usr, "Which networks would you like to connect this camera to? Seperate networks with a comma. No Spaces!\nFor example: SS13,Security,Secret ", "Set Network", "SS13"))
+				var/input = strip_html(input(usr, "Which networks would you like to connect this camera to? Separate networks with a comma. No Spaces!\nFor example: SS13,Security,Secret ", "Set Network", "SS13"))
 				if(!input)
 					usr << "No input found please hang up and try your call again."
 					return
@@ -99,10 +99,7 @@
 
 				C.auto_turn()
 
-				C.network = uniquelist(tempnetwork)
-				tempnetwork = difflist(C.network,RESTRICTED_CAMERA_NETWORKS)
-				if(!tempnetwork.len)//Camera isn't on any open network - remove its chunk from AI visibility.
-					cameranet.removeCamera(C)
+				C.replace_networks(uniquelist(tempnetwork))
 
 				C.c_tag = input
 

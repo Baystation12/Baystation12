@@ -239,7 +239,7 @@
 /datum/surgery_step/generic/cauterize
 	allowed_tools = list(
 	/obj/item/weapon/cautery = 100,			\
-	/obj/item/clothing/mask/cigarette = 75,	\
+	/obj/item/clothing/mask/smokable/cigarette = 75,	\
 	/obj/item/weapon/flame/lighter = 50,			\
 	/obj/item/weapon/weldingtool = 25
 	)
@@ -305,7 +305,7 @@
 		var/datum/organ/external/affected = target.get_organ(target_zone)
 		user.visible_message("\blue [user] cuts off [target]'s [affected.display_name] with \the [tool].", \
 		"\blue You cut off [target]'s [affected.display_name] with \the [tool].")
-		affected.droplimb(1,0)
+		affected.droplimb(1,1,1)
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/datum/organ/external/affected = target.get_organ(target_zone)

@@ -4,7 +4,7 @@
 #define ENTRY "entry"
 
 /obj/machinery/disease2/isolator/
-	name = "Pathogenic Isolator"
+	name = "pathogenic isolator"
 	density = 1
 	anchored = 1
 	icon = 'icons/obj/virology.dmi'
@@ -120,7 +120,7 @@
 			update_icon()
 
 /obj/machinery/disease2/isolator/Topic(href, href_list)
-	if (..()) return 0
+	if (..()) return 1
 
 	var/mob/user = usr
 	var/datum/nanoui/ui = nanomanager.get_open_ui(user, src, "main")

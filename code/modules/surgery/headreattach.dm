@@ -119,7 +119,7 @@
 /datum/surgery_step/head/prepare
 	allowed_tools = list(
 	/obj/item/weapon/cautery = 100,			\
-	/obj/item/clothing/mask/cigarette = 75,	\
+	/obj/item/clothing/mask/smokable/cigarette = 75,	\
 	/obj/item/weapon/flame/lighter = 50,			\
 	/obj/item/weapon/weldingtool = 25
 	)
@@ -181,11 +181,11 @@
 		target.update_body()
 		target.updatehealth()
 		target.UpdateDamageIcon()
-		var/obj/item/weapon/organ/head/B = tool
-		if (B.brainmob.mind)
-			B.brainmob.mind.transfer_to(target)
-		del(B)
-
+		for(var/obj/item/organ/replacing_organ in tool)
+			replacing_organ.loc = get_turf(tool)
+			replacing_organ.replaced(target,affected)
+			del(replacing_organ) //Just in case.
+		del(tool)
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/datum/organ/external/affected = target.get_organ(target_zone)

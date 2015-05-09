@@ -62,7 +62,7 @@
 	var/datum/robot_component/picked = pick(parts)
 	picked.heal_damage(brute,burn)
 
-/mob/living/silicon/robot/take_organ_damage(var/brute = 0, var/burn = 0, var/sharp = 0, var/edge = 0)
+/mob/living/silicon/robot/take_organ_damage(var/brute = 0, var/burn = 0, var/sharp = 0, var/edge = 0, var/emp = 0)
 	var/list/components = get_damageable_components()
 	if(!components.len)
 		return
@@ -84,10 +84,11 @@
 			burn -= absorb_burn
 			src << "\red Your shield absorbs some of the impact!"
 
-	var/datum/robot_component/armour/A = get_armour()
-	if(A)
-		A.take_damage(brute,burn,sharp,edge)
-		return
+	if(!emp)
+		var/datum/robot_component/armour/A = get_armour()
+		if(A)
+			A.take_damage(brute,burn,sharp,edge)
+			return
 
 	var/datum/robot_component/C = pick(components)
 	C.take_damage(brute,burn,sharp,edge)

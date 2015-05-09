@@ -1,5 +1,5 @@
 /obj/machinery/computer/cloning
-	name = "Cloning console"
+	name = "cloning control console"
 	icon = 'icons/obj/computer.dmi'
 	icon_state = "dna"
 	circuit = "/obj/item/weapon/circuitboard/cloning"
@@ -68,9 +68,6 @@
 	else
 		..()
 	return
-
-/obj/machinery/computer/cloning/attack_paw(mob/user as mob)
-	return attack_hand(user)
 
 /obj/machinery/computer/cloning/attack_ai(mob/user as mob)
 	return attack_hand(user)
@@ -191,7 +188,7 @@
 
 /obj/machinery/computer/cloning/Topic(href, href_list)
 	if(..())
-		return
+		return 1
 
 	if(loading)
 		return

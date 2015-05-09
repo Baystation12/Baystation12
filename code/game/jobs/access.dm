@@ -434,78 +434,32 @@ var/const/access_blueshield = 153
 	return all_jobs
 
 /proc/get_all_centcom_jobs()
-	return list("VIP Guest","Custodian","Thunderdome Overseer","Intel Officer","Medical Officer","Death Commando","Research Officer","BlackOps Commander","Supreme Commander")
+	return list("VIP Guest",
+		"Custodian",
+		"Thunderdome Overseer",
+		"Intel Officer",
+		"Medical Officer",
+		"Death Commando",
+		"Research Officer",
+		"BlackOps Commander",
+		"Supreme Commander",
+		"Emergency Response Team",
+		"Emergency Response Team Leader")
 
-//gets the actual job rank (ignoring alt titles)
-//this is used solely for sechuds
-/obj/proc/GetJobRealName()
-	if (!istype(src, /obj/item/device/pda) && !istype(src,/obj/item/weapon/card/id))
-		return
-
-	var/rank
-	var/assignment
-	if(istype(src, /obj/item/device/pda))
-		if(src:id)
-			rank = src:id:rank
-			assignment = src:id:assignment
-	else if(istype(src, /obj/item/weapon/card/id))
-		rank = src:rank
-		assignment = src:assignment
-
-	if( rank in joblist )
-		return rank
-
-	if( assignment in joblist )
-		return assignment
-
-	return "Unknown"
-
-//gets the alt title, failing that the actual job rank
-//this is unused
-/obj/proc/sdsdsd()	//GetJobDisplayName
-	if (!istype(src, /obj/item/device/pda) && !istype(src,/obj/item/weapon/card/id))
-		return
-
-	var/assignment
-	if(istype(src, /obj/item/device/pda))
-		if(src:id)
-			assignment = src:id:assignment
-	else if(istype(src, /obj/item/weapon/card/id))
-		assignment = src:assignment
-
-	if(assignment)
-		return assignment
-
-	return "Unknown"
+proc/GetIdCard(var/mob/living/carbon/human/H)
+	if(H.wear_id)
+		var/id = H.wear_id.GetID()
+		if(id)
+			return id
+	if(H.get_active_hand())
+		var/obj/item/I = H.get_active_hand()
+		return I.GetID()
 
 proc/FindNameFromID(var/mob/living/carbon/human/H)
 	ASSERT(istype(H))
-	var/obj/item/weapon/card/id/C = H.get_active_hand()
-	if( istype(C) || istype(C, /obj/item/device/pda) )
-		var/obj/item/weapon/card/id/ID = C
-
-		if( istype(C, /obj/item/device/pda) )
-			var/obj/item/device/pda/pda = C
-			ID = pda.id
-		if(!istype(ID))
-			ID = null
-
-		if(ID)
-			return ID.registered_name
-
-	C = H.wear_id
-
-	if( istype(C) || istype(C, /obj/item/device/pda) )
-		var/obj/item/weapon/card/id/ID = C
-
-		if( istype(C, /obj/item/device/pda) )
-			var/obj/item/device/pda/pda = C
-			ID = pda.id
-		if(!istype(ID))
-			ID = null
-
-		if(ID)
-			return ID.registered_name
+	var/obj/item/weapon/card/id/C = GetIdCard(H)
+	if(C)
+		return C.registered_name
 
 proc/get_all_job_icons() //For all existing HUD icons
 	return joblist + list("Prisoner")

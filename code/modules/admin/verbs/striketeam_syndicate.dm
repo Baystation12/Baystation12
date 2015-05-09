@@ -4,7 +4,7 @@ var/const/syndicate_commandos_possible = 6 //if more Commandos are needed in the
 var/global/sent_syndicate_strike_team = 0
 /client/proc/syndicate_strike_team()
 	set category = "Fun"
-	set name = "Spawn Syndicate Strike Team"
+	set name = "Spawn Mercenary Strike Team"
 	set desc = "Spawns a squad of commandos in the Syndicate Mothership if you want to run an admin event."
 	if(!src.holder)
 		src << "Only administrators may use this command."
@@ -16,15 +16,15 @@ var/global/sent_syndicate_strike_team = 0
 //		alert("Not so fast, buddy. Wait a few minutes until the game gets going. There are [(6000-world.time)/10] seconds remaining.")
 //		return
 	if(sent_syndicate_strike_team == 1)
-		alert("The Syndicate are already sending a team, Mr. Dumbass.")
+		alert("Criminal elements are already sending a team, Mr. Dumbass.")
 		return
-	if(alert("Do you want to send in the Syndicate Strike Team? Once enabled, this is irreversible.",,"Yes","No")=="No")
+	if(alert("Do you want to send in the Mercenary Strike Team? Once enabled, this is irreversible.",,"Yes","No")=="No")
 		return
-	alert("This 'mode' will go on until everyone is dead or the station is destroyed. You may also admin-call the evac shuttle when appropriate. Spawned syndicates have internals cameras which are viewable through a monitor inside the Syndicate Mothership Bridge. Assigning the team's detailed task is recommended from there. While you will be able to manually pick the candidates from active ghosts, their assignment in the squad will be random.")
+	alert("This 'mode' will go on until everyone is dead or the station is destroyed. You may also admin-call the evac shuttle when appropriate. Spawned mercs have internals cameras which are viewable through a monitor inside the Syndicate Mothership Bridge. Assigning the team's detailed task is recommended from there. While you will be able to manually pick the candidates from active ghosts, their assignment in the squad will be random.")
 
 	var/input = null
 	while(!input)
-		input = copytext(sanitize(input(src, "Please specify which mission the syndicate strike team shall undertake.", "Specify Mission", "")),1,MAX_MESSAGE_LEN)
+		input = sanitize(copytext(input(src, "Please specify which mission the strike team shall undertake.", "Specify Mission", ""),1,MAX_MESSAGE_LEN))
 		if(!input)
 			if(alert("Error, no mission set. Do you want to exit the setup process?",,"Yes","No")=="Yes")
 				return
@@ -81,7 +81,7 @@ var/global/sent_syndicate_strike_team = 0
 				new_syndicate_commando.mind.store_memory("<B>Nuke Code:</B> \red [nuke_code].")
 			new_syndicate_commando.mind.store_memory("<B>Mission:</B> \red [input].")
 
-			new_syndicate_commando << "\blue You are an Elite Syndicate. [!syndicate_leader_selected?"commando":"<B>LEADER</B>"] in the service of the Syndicate. \nYour current mission is: \red<B>[input]</B>"
+			new_syndicate_commando << "\blue You are an Elite Mercenary. [!syndicate_leader_selected?"commando":"<B>LEADER</B>"] in the service of criminal elements hostile to NanoTrasen. \nYour current mission is: \red<B>[input]</B>"
 
 			syndicate_commando_number--
 
@@ -98,9 +98,9 @@ var/global/sent_syndicate_strike_team = 0
 			new /obj/effect/spawner/newbomb/timer/syndicate(L.loc)
 			del(L)
 
-	message_admins("\blue [key_name_admin(usr)] has spawned a Syndicate strike squad.", 1)
-	log_admin("[key_name(usr)] used Spawn Syndicate Squad.")
-	log_admin_single("[key_name(usr)] used Spawn Syndicate Squad.")
+message_admins("\blue [key_name_admin(usr)] has spawned a mercenary strike squad.", 1)
+	log_admin("[key_name(usr)] used Spawn Mercenary Squad.")
+	log_admin_single("[key_name(usr)] used Spawn Mercenary Squad.")
 	feedback_add_details("admin_verb","SDTHS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/create_syndicate_death_commando(obj/spawn_location, syndicate_leader_selected = 0)
@@ -122,7 +122,7 @@ var/global/sent_syndicate_strike_team = 0
 	//Creates mind stuff.
 	new_syndicate_commando.mind_initialize()
 	new_syndicate_commando.mind.assigned_role = "MODE"
-	new_syndicate_commando.mind.special_role = "Syndicate Commando"
+	new_syndicate_commando.mind.special_role = "Mercenary"
 	ticker.mode.traitors |= new_syndicate_commando.mind	//Adds them to current traitor list. Which is really the extra antagonist list.
 	new_syndicate_commando.equip_syndicate_commando(syndicate_leader_selected)
 	del(spawn_location)
@@ -172,7 +172,7 @@ var/global/sent_syndicate_strike_team = 0
 	W.icon_state = "id"
 	W.access = get_all_accesses()//They get full station access because obviously the syndicate has HAAAX, and can make special IDs for their most elite members.
 	W.access += list(access_cent_general, access_cent_specops, access_cent_living, access_cent_storage, access_syndicate)//Let's add their forged CentCom access and syndicate access.
-	W.assignment = "Syndicate Commando"
+	W.assignment = "Mercenary"
 	W.registered_name = real_name
 	equip_to_slot_or_del(W, slot_wear_id)
 

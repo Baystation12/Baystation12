@@ -7,9 +7,15 @@ var/datum/cameranet/cameranet = new()
 /datum/cameranet
 	// The cameras on the map, no matter if they work or not. Updated in obj/machinery/camera.dm by New() and Del().
 	var/list/cameras = list()
+	var/cameras_unsorted = 1
 	// The chunks of the map, mapping the areas that the cameras can see.
 	var/list/chunks = list()
 	var/ready = 0
+
+/datum/cameranet/proc/process_sort()
+	if(cameras_unsorted)
+		cameras = dd_sortedObjectList(cameras)
+		cameras_unsorted = 0
 
 // Checks if a chunk has been Generated in x, y, z.
 /datum/cameranet/proc/chunkGenerated(x, y, z)
@@ -114,12 +120,14 @@ var/datum/cameranet/cameranet = new()
 			for(var/y = y1; y <= y2; y += 16)
 				if(chunkGenerated(x, y, T.z))
 					var/datum/camerachunk/chunk = getCameraChunk(x, y, T.z)
-					if(choice == 0)
-						// Remove the camera.
-						chunk.cameras -= c
-					else if(choice == 1)
-						// You can't have the same camera in the list twice.
-						chunk.cameras |= c
+					// Only add actual cameras to the list of cameras
+					if(istype(c, /obj/machinery/camera))
+						if(choice == 0)
+							// Remove the camera.
+							chunk.cameras -= c
+						else if(choice == 1)
+							// You can't have the same camera in the list twice.
+							chunk.cameras |= c
 					chunk.hasChanged()
 
 // Will check if a mob is on a viewable turf. Returns 1 if it is, otherwise returns 0.

@@ -1,11 +1,11 @@
 /obj/structure/grille
-	desc = "A flimsy lattice of metal rods, with screws to secure it to the floor."
 	name = "grille"
+	desc = "A flimsy lattice of metal rods, with screws to secure it to the floor."
 	icon = 'icons/obj/structures.dmi'
 	icon_state = "grille"
 	density = 1
 	anchored = 1
-	flags = FPRINT | CONDUCT
+	flags = CONDUCT
 	pressure_resistance = 5*ONE_ATMOSPHERE
 	layer = 2.9
 	explosion_resistance = 5
@@ -31,27 +31,17 @@
 /obj/structure/grille/Bumped(atom/user)
 	if(ismob(user)) shock(user, 70)
 
-
-/obj/structure/grille/attack_paw(mob/user as mob)
-	attack_hand(user)
-
 /obj/structure/grille/attack_hand(mob/user as mob)
 
 	playsound(loc, 'sound/effects/grillehit.ogg', 80, 1)
 
-	var/damage_dealt
+	var/damage_dealt = 1
+	var/attack_message = "kicks"
 	if(istype(user,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = user
 		if(H.species.can_shred(H))
+			attack_message = "mangles"
 			damage_dealt = 5
-			user.visible_message("<span class='warning'>[user] mangles [src].</span>", \
-					 "<span class='warning'>You mangle [src].</span>", \
-					 "You hear twisting metal.")
-
-	if(!damage_dealt)
-		user.visible_message("<span class='warning'>[user] kicks [src].</span>", \
-						 "<span class='warning'>You kick [src].</span>", \
-						 "You hear twisting metal.")
 
 	if(shock(user, 70))
 		return
@@ -61,35 +51,7 @@
 	else
 		damage_dealt += 1
 
-	health -= damage_dealt
-	healthcheck()
-
-/obj/structure/grille/attack_slime(mob/user as mob)
-	var/mob/living/carbon/slime/S = user
-	if (!S.is_adult)
-		return
-
-	playsound(loc, 'sound/effects/grillehit.ogg', 80, 1)
-	user.visible_message("<span class='warning'>[user] smashes against [src].</span>", \
-						 "<span class='warning'>You smash against [src].</span>", \
-						 "You hear twisting metal.")
-
-	health -= rand(2,3)
-	healthcheck()
-	return
-
-/obj/structure/grille/attack_animal(var/mob/living/simple_animal/M as mob)
-	if(M.melee_damage_upper == 0)	return
-
-	playsound(loc, 'sound/effects/grillehit.ogg', 80, 1)
-	M.visible_message("<span class='warning'>[M] smashes against [src].</span>", \
-					  "<span class='warning'>You smash against [src].</span>", \
-					  "You hear twisting metal.")
-
-	health -= M.melee_damage_upper
-	healthcheck()
-	return
-
+	attack_generic(user,damage_dealt,attack_message)
 
 /obj/structure/grille/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(air_group || (height==0)) return 1
@@ -102,16 +64,40 @@
 			return !density
 
 /obj/structure/grille/bullet_act(var/obj/item/projectile/Proj)
-
 	if(!Proj)	return
 
 	//Tasers and the like should not damage grilles.
-	if(Proj.damage_type == HALLOSS)
+	if(!(Proj.damage_type == BRUTE || Proj.damage_type == BURN))
 		return
 
-	src.health -= Proj.damage*0.2
-	healthcheck()
-	return 0
+	//Flimsy grilles aren't so great at stopping projectiles. However they can absorb some of the impact
+	var/damage = Proj.damage
+	var/passthrough = 0
+
+	//20% chance that the grille provides a bit more cover than usual. Support structure for example might take up 20% of the grille's area.
+	//If they click on the grille itself then we assume they are aiming at the grille itself and the extra cover behaviour is always used.
+	switch(Proj.damage_type)
+		if(BRUTE)
+			//bullets
+			if(Proj.original == src || prob(20))
+				Proj.damage *= between(0, Proj.damage/60, 0.5)
+				if(prob(max((damage-10)/25, 0))*100)
+					passthrough = 1
+			else
+				Proj.damage *= between(0, Proj.damage/60, 1)
+				passthrough = 1
+		if(BURN)
+			//beams and other projectiles are either blocked completely by grilles or stop half the damage.
+			if(!(Proj.original == src || prob(20)))
+				Proj.damage *= 0.5
+				passthrough = 1
+
+	if(passthrough)
+		. = -1
+		damage = between(0, (damage - Proj.damage)*(Proj.damage_type == BRUTE? 0.4 : 1), 10) //if the bullet passes through then the grille avoids most of the damage
+
+	src.health -= damage*0.2
+	spawn(0) healthcheck() //spawn to make sure we return properly if the grille is deleted
 
 /obj/structure/grille/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(iswirecutter(W))
@@ -211,10 +197,13 @@
 	var/obj/structure/cable/C = T.get_cable_node()
 	if(C)
 		if(electrocute_mob(user, C, src))
+			if(C.powernet)
+				C.powernet.trigger_warning()
 			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 			s.set_up(3, 1, src)
 			s.start()
-			return 1
+			if(user.stunned)
+				return 1
 		else
 			return 0
 	return 0
@@ -225,3 +214,9 @@
 			health -= 1
 			healthcheck()
 	..()
+
+/obj/structure/grille/attack_generic(var/mob/user, var/damage, var/attack_verb)
+	visible_message("<span class='danger'>[user] [attack_verb] the [src]!</span>")
+	health -= damage
+	spawn(1) healthcheck()
+	return 1

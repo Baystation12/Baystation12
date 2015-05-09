@@ -127,9 +127,6 @@
 	healthcheck()
 	return
 
-/obj/effect/alien/resin/attack_paw()
-	return attack_hand()
-
 /obj/effect/alien/resin/attackby(obj/item/weapon/W as obj, mob/user as mob)
 
 	var/aforce = W.force
@@ -348,7 +345,7 @@ Alien plants should do something if theres a lot of poison
 	var/status = GROWING //can be GROWING, GROWN or BURST; all mutually exclusive
 
 /obj/effect/alien/egg/New()
-	if(aliens_allowed)
+	if(config.aliens_allowed)
 		..()
 		spawn(rand(MIN_GROWTH_TIME,MAX_GROWTH_TIME))
 			Grow()

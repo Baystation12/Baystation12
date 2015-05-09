@@ -115,7 +115,7 @@
 				security_announcement_down.Announce("[config.alert_desc_green]", "Attention! Security level lowered to green")
 				security_level = SEC_LEVEL_GREEN
 				for(var/obj/machinery/firealarm/FA in machines)
-					if(FA.z == 1 || FA.z == 5 || FA.z == 7 || FA.z == 8)
+					if(FA.z in config.contact_levels)
 						FA.overlays = list()
 						FA.overlays += image('icons/obj/monitors.dmi', "overlay_green")
 				removesecaccess()
@@ -130,7 +130,7 @@
 					security_announcement_down.Announce("[config.alert_desc_blue_downto]", "Attention! Security level lowered to blue")
 				security_level = SEC_LEVEL_BLUE
 				for(var/obj/machinery/firealarm/FA in machines)
-					if(FA.z == 1 || FA.z == 5 || FA.z == 7 || FA.z == 8)
+					if(FA.z in config.contact_levels)
 						FA.overlays = list()
 						FA.overlays += image('icons/obj/monitors.dmi', "overlay_blue")
 				removesecaccess()
@@ -159,7 +159,7 @@
 				security_announcement_up.Announce("A biological threat to the station has been confirmed. The station is now under quarantine. No personnel are allowed to leave the stations at this time. Security personnel are to ensure quarantine protocols are upheld. Medical and research personnel are to remain on stand-by. All personnel must report to their supervisors immediately.", "Attention! Code black!")
 				security_level = SEC_LEVEL_BLACK
 				for(var/obj/machinery/firealarm/FA in machines)
-					if(FA.z == 1 || FA.z == 5 || FA.z == 7 || FA.z == 8)
+					if(FA.z in config.contact_levels)
 						FA.overlays = list()
 						FA.overlays += image('icons/obj/monitors.dmi', "overlay_black")
 				opencoderedaccess()
@@ -168,7 +168,7 @@
 				security_announcement_delta.Announce("[config.alert_desc_delta]", "Attention! Delta security level reached!")
 				security_level = SEC_LEVEL_DELTA
 				for(var/obj/machinery/firealarm/FA in machines)
-					if(FA.z == 1 || FA.z == 5 || FA.z == 7 || FA.z == 8)
+					if(FA.z in config.contact_levels)
 						FA.overlays = list()
 						FA.overlays += image('icons/obj/monitors.dmi', "overlay_delta")
 				opencoderedaccess()

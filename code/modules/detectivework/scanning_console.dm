@@ -59,17 +59,23 @@
 		fresh.fields["label"] = old.fields["label"]
 	files[fresh.uid] = fresh
 
+	//updating partial prints on other things
+	var/list/fprints = fresh.fields["fprints"]
+	if(fprints.len)
+		for(var/id in files)
+			var/datum/data/record/forensic/rec = files[id]
+			if(rec.update_prints(fprints))
+				files[id] = rec
+
 /obj/machinery/computer/forensic_scanning/proc/process_card(var/obj/item/weapon/f_card/card)
 	if(card.fingerprints)
 		usr << "<span class='notice'>\The [src] sucks in \the [card] and whirrs, scanning it.</span>"
 		var/found = 0
 		for(var/id in files)
 			var/datum/data/record/forensic/rec = files[id]
-			var/list/prints = rec.fields["fprints"]
-			for(var/master_print in card.fingerprints)
-				if(prints[master_print])
-					prints[master_print] = master_print
-					found = 1
+			found = rec.update_prints(card.fingerprints)
+			if (found)
+				files[id] = rec
 		if(found)
 			usr << "<span class='notice'>Complete match found.</span>"
 		else
@@ -189,7 +195,7 @@
 					dat += "<br>NO RECORD SELECTED"
 				else
 					dat += get_printable_data(current)
-					dat += "<b>Labels:</b> "
+					dat += "<br><b>Labels:</b> "
 					dat += "<a href='?src=\ref[src];operation=label'>[current.fields["label"] ? current.fields["label"] : "None"]</a><br>"
 					dat += "<a href='?src=\ref[src];operation=print'>Print record</a><br>"
 
@@ -207,6 +213,7 @@
 	onclose(user,"fscanner")
 
 /obj/machinery/computer/forensic_scanning/Topic(href,href_list)
+	if(..()) return 1
 	switch(href_list["operation"])
 		if("login")
 			var/mob/M = usr

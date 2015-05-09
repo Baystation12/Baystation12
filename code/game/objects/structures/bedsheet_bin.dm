@@ -93,8 +93,6 @@ LINEN BINS
 	item_color = "brown"
 
 
-
-
 /obj/structure/bedsheetbin
 	name = "linen bin"
 	desc = "A linen bin. It looks rather cosy."
@@ -106,15 +104,16 @@ LINEN BINS
 	var/obj/item/hidden = null
 
 
-/obj/structure/bedsheetbin/examine()
-	usr << desc
+/obj/structure/bedsheetbin/examine(mob/user)
+	..(user)
+
 	if(amount < 1)
-		usr << "There are no bed sheets in the bin."
+		user << "There are no bed sheets in the bin."
 		return
 	if(amount == 1)
-		usr << "There is one bed sheet in the bin."
+		user << "There is one bed sheet in the bin."
 		return
-	usr << "There are [amount] bed sheets in the bin."
+	user << "There are [amount] bed sheets in the bin."
 
 
 /obj/structure/bedsheetbin/update_icon()
@@ -136,12 +135,6 @@ LINEN BINS
 		I.loc = src
 		hidden = I
 		user << "<span class='notice'>You hide [I] among the sheets.</span>"
-
-
-
-/obj/structure/bedsheetbin/attack_paw(mob/user as mob)
-	return attack_hand(user)
-
 
 /obj/structure/bedsheetbin/attack_hand(mob/user as mob)
 	if(amount >= 1)

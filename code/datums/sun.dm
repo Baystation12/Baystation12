@@ -1,65 +1,47 @@
+#define SOLAR_UPDATE_TIME 600 //duration between two updates of the whole sun/solars positions
+
 /datum/sun
 	var/angle
 	var/dx
 	var/dy
-//	var/counter = 50		// to make the vars update during 1st call
 	var/rate
 	var/list/solars			// for debugging purposes, references solars_list at the constructor
-	var/nexttime = 3600		// Replacement for var/counter to force the sun to move every X IC minutes
-	var/lastAngleUpdate
+	var/solar_next_update	// last time the sun position was checked and adjusted
 
 /datum/sun/New()
 
 	solars = solars_list
-	rate = rand(750,1250)/1000			// 75.0% - 125.0% of standard rotation
-	if(prob(50))
+	rate = rand(50,200)/100			// 50% - 200% of standard rotation
+	if(prob(50))					// same chance to rotate clockwise than counter-clockwise
 		rate = -rate
+	solar_next_update = world.time	// init the timer
+	angle = rand (0,360)			// the station position to the sun is randomised at round start
 
 /hook/startup/proc/createSun()
 	sun = new /datum/sun()
 	return 1
 
 // calculate the sun's position given the time of day
-
+// at the standard rate (100%) the angle is increase/decreased by 6 degrees every minute.
+// a full rotation thus take a game hour in that case
 /datum/sun/proc/calc_position()
 
-/*	counter++
-	if(counter<50)		// count 50 pticks (50 seconds, roughly - about a 5deg change)
-		return
-	counter = 0 */
+	if(world.time < solar_next_update) //if less than 60 game secondes have passed, do nothing
+		return;
 
-	angle = ((rate*world.time/100)%360 + 360)%360
+	angle = (360 + angle + rate * 6) % 360	 // increase/decrease the angle to the sun, adjusted by the rate
 
-	/*
-		Yields a 45 - 75 IC minute rotational period
-		Rotation rate can vary from 4.8 deg/min to 8 deg/min (288 to 480 deg/hr)
-	*/
-
-	if(lastAngleUpdate != angle)
-		for(var/obj/machinery/power/tracker/T in solars_list)
-			if(!T.powernet)
-				solars_list.Remove(T)
-				continue
-			T.set_angle(angle)
-	lastAngleUpdate=angle
-
-
-
-	if(nexttime > world.time)
-		return
-	nexttime = nexttime + 600	// 600 world.time ticks = 1 minute
+	solar_next_update += SOLAR_UPDATE_TIME // since we updated the angle, set the proper time for the next loop
 
 	// now calculate and cache the (dx,dy) increments for line drawing
 
 	var/s = sin(angle)
 	var/c = cos(angle)
 
-	if(c == 0)
+	// Either "abs(s) < abs(c)" or "abs(s) >= abs(c)"
+	// In both cases, the greater is greater than 0, so, no "if 0" check is needed for the divisions
 
-		dx = 0
-		dy = s
-
-	else if( abs(s) < abs(c))
+	if( abs(s) < abs(c))
 
 		dx = s / abs(c)
 		dy = c / abs(c)
@@ -68,40 +50,9 @@
 		dx = s/abs(s)
 		dy = c / abs(s)
 
-
-	for(var/obj/machinery/power/solar/S in solars_list)
-
-		if(!S.powernet)
-			solars_list.Remove(S)
+	//now tell the solar control computers to update their status and linked devices
+	for(var/obj/machinery/power/solar_control/SC in solars_list)
+		if(!SC.powernet)
+			solars_list.Remove(SC)
 			continue
-		if(S.control)
-			occlusion(S)
-
-
-
-// for a solar panel, trace towards sun to see if we're in shadow
-
-/datum/sun/proc/occlusion(var/obj/machinery/power/solar/S)
-
-	var/ax = S.x		// start at the solar panel
-	var/ay = S.y
-
-	for(var/i = 1 to 20)		// 20 steps is enough
-		ax += dx	// do step
-		ay += dy
-
-		var/turf/T = locate( round(ax,0.5),round(ay,0.5),S.z)
-
-		if(T.x == 1 || T.x==world.maxx || T.y==1 || T.y==world.maxy)		// not obscured if we reach the edge
-			break
-
-		if(T.density)			// if we hit a solid turf, panel is obscured
-			S.obscured = 1
-			return
-
-	S.obscured = 0		// if hit the edge or stepped 20 times, not obscured
-	S.update_solar_exposure()
-
-
-
-
+		SC.update()

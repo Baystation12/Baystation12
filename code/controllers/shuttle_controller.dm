@@ -260,7 +260,8 @@ var/global/datum/shuttle_controller/shuttle_controller
 		"South of the station" = locate(/area/syndicate_station/south),
 		"Southeast of the station" = locate(/area/syndicate_station/southeast),
 		"Telecomms Satellite" = locate(/area/syndicate_station/commssat),
-		"Mining Asteroid" = locate(/area/syndicate_station/mining)
+		"Mining Asteroid" = locate(/area/syndicate_station/mining),
+		"Arrivals dock" = locate(/area/syndicate_station/arrivals_dock),
 		)
 
 	MS.announcer = "NSV Icarus"
@@ -269,7 +270,7 @@ var/global/datum/shuttle_controller/shuttle_controller
 	MS.interim = locate(/area/syndicate_station/transit)
 
 	MS.warmup_time = 0
-	shuttles["Syndicate"] = MS
+	shuttles["Mercenary"] = MS
 
 
 //This is called by gameticker after all the machines and radio frequencies have been properly initialized

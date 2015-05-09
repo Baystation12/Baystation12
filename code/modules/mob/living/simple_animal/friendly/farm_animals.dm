@@ -14,11 +14,11 @@
 	see_in_dark = 6
 	meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat
 	meat_amount = 4
-	response_help  = "pets the"
-	response_disarm = "gently pushes aside the"
-	response_harm   = "kicks the"
+	response_help  = "pets"
+	response_disarm = "gently pushes aside"
+	response_harm   = "kicks"
 	faction = "goat"
-	attacktext = "kicks"
+	attacktext = "kicked"
 	health = 40
 	melee_damage_lower = 1
 	melee_damage_upper = 5
@@ -45,17 +45,15 @@
 			if(udder && prob(5))
 				udder.add_reagent("milk", rand(5, 10))
 
-		if(locate(/obj/effect/plantsegment) in loc)
-			var/obj/effect/plantsegment/SV = locate(/obj/effect/plantsegment) in loc
-			del(SV)
-			if(prob(10))
-				say("Nom")
+		if(locate(/obj/effect/plant) in loc)
+			var/obj/effect/plant/SV = locate() in loc
+			SV.die_off(1)
 
 		if(!pulledby)
 			for(var/direction in shuffle(list(1,2,4,8,5,6,9,10)))
 				var/step = get_step(src, direction)
 				if(step)
-					if(locate(/obj/effect/plantsegment) in step)
+					if(locate(/obj/effect/plant) in step)
 						Move(step)
 
 /mob/living/simple_animal/hostile/retaliate/goat/Retaliate()
@@ -65,11 +63,8 @@
 /mob/living/simple_animal/hostile/retaliate/goat/Move()
 	..()
 	if(!stat)
-		if(locate(/obj/effect/plantsegment) in loc)
-			var/obj/effect/plantsegment/SV = locate(/obj/effect/plantsegment) in loc
-			del(SV)
-			if(prob(10))
-				say("Nom")
+		for(var/obj/effect/plant/SV in loc)
+			SV.die_off(1)
 
 /mob/living/simple_animal/hostile/retaliate/goat/attackby(var/obj/item/O as obj, var/mob/user as mob)
 	var/obj/item/weapon/reagent_containers/glass/G = O
@@ -99,10 +94,10 @@
 	see_in_dark = 6
 	meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat
 	meat_amount = 6
-	response_help  = "pets the"
-	response_disarm = "gently pushes aside the"
-	response_harm   = "kicks the"
-	attacktext = "kicks"
+	response_help  = "pets"
+	response_disarm = "gently pushes aside"
+	response_harm   = "kicks"
+	attacktext = "kicked"
 	health = 50
 	var/datum/reagents/udder = null
 
@@ -160,10 +155,10 @@
 	turns_per_move = 2
 	meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat
 	meat_amount = 1
-	response_help  = "pets the"
-	response_disarm = "gently pushes aside the"
-	response_harm   = "kicks the"
-	attacktext = "kicks"
+	response_help  = "pets"
+	response_disarm = "gently pushes aside"
+	response_harm   = "kicks"
+	attacktext = "kicked"
 	health = 1
 	var/amount_grown = 0
 	pass_flags = PASSTABLE | PASSGRILLE
@@ -201,10 +196,10 @@ var/global/chicken_count = 0
 	turns_per_move = 3
 	meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat
 	meat_amount = 2
-	response_help  = "pets the"
-	response_disarm = "gently pushes aside the"
-	response_harm   = "kicks the"
-	attacktext = "kicks"
+	response_help  = "pets"
+	response_disarm = "gently pushes aside"
+	response_harm   = "kicks"
+	attacktext = "kicked"
 	health = 10
 	var/eggsleft = 0
 	var/body_color
@@ -227,15 +222,18 @@ var/global/chicken_count = 0
 	chicken_count -= 1
 
 /mob/living/simple_animal/chicken/attackby(var/obj/item/O as obj, var/mob/user as mob)
-	if(istype(O, /obj/item/weapon/reagent_containers/food/snacks/grown/wheat)) //feedin' dem chickens
-		if(!stat && eggsleft < 8)
-			user.visible_message("\blue [user] feeds [O] to [name]! It clucks happily.","\blue You feed [O] to [name]! It clucks happily.")
-			user.drop_item()
-			del(O)
-			eggsleft += rand(1, 4)
-			//world << eggsleft
+	if(istype(O, /obj/item/weapon/reagent_containers/food/snacks/grown)) //feedin' dem chickens
+		var/obj/item/weapon/reagent_containers/food/snacks/grown/G = O
+		if(G.seed && G.seed.kitchen_tag == "wheat")
+			if(!stat && eggsleft < 8)
+				user.visible_message("\blue [user] feeds [O] to [name]! It clucks happily.","\blue You feed [O] to [name]! It clucks happily.")
+				user.drop_item()
+				del(O)
+				eggsleft += rand(1, 4)
+			else
+				user << "\blue [name] doesn't seem hungry!"
 		else
-			user << "\blue [name] doesn't seem hungry!"
+			user << "[name] doesn't seem interested in that."
 	else
 		..()
 

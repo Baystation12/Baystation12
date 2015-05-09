@@ -30,11 +30,12 @@
 	next_turf:
 		for(var/turf/T in world)
 			for(var/dir in cardinal)
-				var/check = 0
+				var/list/connect_types = list(1 = 0, 2 = 0, 3 = 0)
 				for(var/obj/machinery/atmospherics/pipe in T)
 					if(dir & pipe.initialize_directions)
-						check++
-						if(check > 1)
+						for(var/connect_type in pipe.connect_types)
+							connect_types[connect_type] += 1
+						if(connect_types[1] > 1 || connect_types[2] > 1 || connect_types[3] > 1)
 							usr << "Overlapping pipe ([pipe.name]) located at [T.x],[T.y],[T.z] ([get_area(T)])"
 							continue next_turf */
 	usr << "Done"

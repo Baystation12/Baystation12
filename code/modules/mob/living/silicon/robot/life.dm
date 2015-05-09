@@ -18,6 +18,7 @@
 		use_power()
 		process_killswitch()
 		process_locks()
+		process_queued_alarms()
 	update_canmove()
 
 /mob/living/silicon/robot/proc/clamp_values()
@@ -62,7 +63,7 @@
 /mob/living/silicon/robot/proc/handle_regular_status_updates()
 
 	if(src.camera && !scrambledcodes)
-		if(src.stat == 2 || isWireCut(5))
+		if(src.stat == 2 || wires.IsIndexCut(BORG_WIRE_CAMERA))
 			src.camera.status = 0
 		else
 			src.camera.status = 1
@@ -129,10 +130,11 @@
 	if (src.stat != 0)
 		uneq_all()
 
-	if(!is_component_functioning("radio"))
-		radio.on = 0
-	else
-		radio.on = 1
+	if(radio)
+		if(!is_component_functioning("radio"))
+			radio.on = 0
+		else
+			radio.on = 1
 
 	if(is_component_functioning("camera"))
 		src.blinded = 0
@@ -166,8 +168,9 @@
 		src.sight &= ~SEE_MOBS
 		src.sight &= ~SEE_TURFS
 		src.sight &= ~SEE_OBJS
-		src.see_in_dark = 8
-		src.see_invisible = SEE_INVISIBLE_LEVEL_TWO
+		src.see_in_dark = 8 			 // see_in_dark means you can FAINTLY see in the dark, humans have a range of 3 or so, tajaran have it at 8
+		src.see_invisible = SEE_INVISIBLE_LIVING // This is normal vision (25), setting it lower for normal vision means you don't "see" things like darkness since darkness
+							 // has a "invisible" value of 15
 
 	regular_hud_updates()
 
@@ -224,9 +227,7 @@
 				if(tra.current)
 					var/I = image('icons/mob/mob.dmi', loc = tra.current, icon_state = "traitor")
 					src.client.images += I
-		if(src.connected_ai)
-			src.connected_ai.connected_robots -= src
-			src.connected_ai = null
+		src.disconnect_from_ai()
 		if(src.mind)
 			if(!src.mind.special_role)
 				src.mind.special_role = "traitor"
@@ -262,8 +263,6 @@
 			else
 				src.bodytemp.icon_state = "temp-2"
 
-
-	if(src.pullin)	src.pullin.icon_state = "pull[src.pulling ? 1 : 0]"
 //Oxygen and fire does nothing yet!!
 //	if (src.oxygen) src.oxygen.icon_state = "oxy[src.oxygen_alert ? 1 : 0]"
 //	if (src.fire) src.fire.icon_state = "fire[src.fire_alert ? 1 : 0]"

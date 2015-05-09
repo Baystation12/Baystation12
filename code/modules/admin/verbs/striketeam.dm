@@ -19,7 +19,7 @@ var/global/sent_strike_team = 0
 
 	var/input = null
 	while(!input)
-		input = copytext(sanitize(input(src, "Please specify which mission the death commando squad shall undertake.", "Specify Mission", "")),1,MAX_MESSAGE_LEN)
+		input = sanitize(copytext(input(src, "Please specify which mission the death commando squad shall undertake.", "Specify Mission", ""),1,MAX_MESSAGE_LEN))
 		if(!input)
 			if(alert("Error, no mission set. Do you want to exit the setup process?",,"Yes","No")=="Yes")
 				return
@@ -154,7 +154,7 @@ var/global/sent_strike_team = 0
 	equip_to_slot_or_del(new /obj/item/weapon/melee/energy/sword(src), slot_l_store)
 	equip_to_slot_or_del(new /obj/item/weapon/grenade/flashbang(src), slot_r_store)
 	equip_to_slot_or_del(new /obj/item/weapon/tank/emergency_oxygen(src), slot_s_store)
-	equip_to_slot_or_del(new /obj/item/weapon/gun/projectile/mateba(src), slot_belt)
+	equip_to_slot_or_del(new /obj/item/weapon/gun/projectile/revolver/mateba(src), slot_belt)
 
 	equip_to_slot_or_del(new /obj/item/weapon/gun/energy/pulse_rifle(src), slot_r_hand)
 

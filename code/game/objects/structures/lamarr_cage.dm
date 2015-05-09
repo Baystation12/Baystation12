@@ -1,5 +1,5 @@
 /obj/structure/lamarr
-	name = "Lab Cage"
+	name = "lab cage"
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "labcage1"
 	desc = "A glass lab container for storing interesting creatures."
@@ -71,9 +71,6 @@
 	src.healthcheck()
 	..()
 	return
-
-/obj/structure/lamarr/attack_paw(mob/user as mob)
-	return src.attack_hand(user)
 
 /obj/structure/lamarr/attack_hand(mob/user as mob)
 	if (src.destroyed)

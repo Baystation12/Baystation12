@@ -33,11 +33,11 @@
 	playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
 	use_power(5000) // Use a lot of power.
 	var/mob/living/silicon/robot = H.Robotize()
-	robot.lying = 1
+	robot.SetLockDown()
 	spawn(50) // So he can't jump out the gate right away.
 		playsound(src.loc, 'sound/machines/ping.ogg', 50, 0)
 		if(robot)
-			robot.lying = 0
+			robot.SetLockDown(0)
 
 /obj/machinery/transformer/conveyor/New()
 	..()
