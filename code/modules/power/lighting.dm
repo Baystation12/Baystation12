@@ -241,6 +241,10 @@
 	..()
 
 	spawn(2)
+		var/area/A = get_area(src)
+		if(A && !A.requires_power)
+			on = 1
+
 		switch(fitting)
 			if("tube")
 				brightness = 8
