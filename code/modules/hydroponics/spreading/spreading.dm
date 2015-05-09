@@ -221,6 +221,7 @@
 
 /obj/effect/plant/attackby(var/obj/item/weapon/W, var/mob/user)
 
+	user.changeNextMove(8)
 	plant_controller.add_plant(src)
 
 	if(istype(W, /obj/item/weapon/wirecutters) || istype(W, /obj/item/weapon/scalpel))
