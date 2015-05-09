@@ -28,10 +28,10 @@
 	reagent_state = GAS
 	color = "#808080"
 
-/datum/reagent/chlorine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/location)
+/datum/reagent/chlorine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.take_organ_damage(1*REM, 0)
 
-/datum/reagent/chlorine/affect_touch(var/mob/living/carbon/M, var/alien, var/removed, var/location)
+/datum/reagent/chlorine/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
 	M.take_organ_damage(1*REM, 0)
 
 /datum/reagent/copper
@@ -59,15 +59,15 @@
 	glass_name = "glass of ethanol"
 	glass_desc = "A well-known alcohol with a variety of applications."
 
-/datum/reagent/ethanol/affect_touch(var/mob/living/carbon/M, var/alien, var/removed, var/location)
+/datum/reagent/ethanol/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
 	M.adjust_fire_stacks(removed / 15)
 	return
 
-/datum/reagent/ethanol/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/location)
+/datum/reagent/ethanol/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.adjustToxLoss(removed * 2 * toxicity)
 	return
 
-/datum/reagent/ethanol/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/location)
+/datum/reagent/ethanol/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	M.nutrition += nutriment_factor * removed
 
 	var/strength_mod = 1
@@ -129,10 +129,10 @@
 	reagent_state = GAS
 	color = "#808080"
 
-/datum/reagent/fluorine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/location)
+/datum/reagent/fluorine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.adjustToxLoss(removed)
 
-/datum/reagent/fluorine/affect_touch(var/mob/living/carbon/M, var/alien, var/removed, var/location)
+/datum/reagent/fluorine/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
 	M.adjustToxLoss(removed)
 
 /datum/reagent/hydrogen
@@ -149,7 +149,7 @@
 	reagent_state = SOLID
 	color = "#353535"
 
-/datum/reagent/iron/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/location)
+/datum/reagent/iron/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien != IS_DIONA)
 		M.add_chemical_effect(CE_BLOODRESTORE, 8 * removed)
 
@@ -160,7 +160,7 @@
 	reagent_state = SOLID
 	color = "#808080"
 
-/datum/reagent/lithium/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/location)
+/datum/reagent/lithium/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien != IS_DIONA)
 		if(M.canmove && !M.restrained() && istype(M.loc, /turf/space))
 			step(M, pick(cardinal))
@@ -174,7 +174,7 @@
 	reagent_state = LIQUID
 	color = "#484848"
 
-/datum/reagent/mercury/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/location)
+/datum/reagent/mercury/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien != IS_DIONA)
 		if(M.canmove && !M.restrained() && istype(M.loc, /turf/space))
 			step(M, pick(cardinal))
@@ -189,7 +189,7 @@
 	reagent_state = GAS
 	color = "#808080"
 
-/datum/reagent/nitrogen/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/location)
+/datum/reagent/nitrogen/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_VOX)
 		M.adjustOxyLoss(-removed * 3)
 
@@ -200,7 +200,7 @@
 	reagent_state = GAS
 	color = "#808080"
 
-/datum/reagent/oxygen/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/location)
+/datum/reagent/oxygen/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_VOX)
 		M.adjustToxLoss(removed * 3)
 
@@ -225,7 +225,7 @@
 	reagent_state = SOLID
 	color = "#C7C7C7"
 
-/datum/reagent/radium/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/location)
+/datum/reagent/radium/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.apply_effect(10 * removed, IRRADIATE, 0) // Radium may increase your chances to cure a disease
 	if(M.virus2.len)
 		for(var/ID in M.virus2)
@@ -260,10 +260,10 @@
 	var/power = 5
 	var/meltdose = 10 // How much is needed to melt
 
-/datum/reagent/acid/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/location)
+/datum/reagent/acid/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.take_organ_damage(0, removed * power * 2)
 
-/datum/reagent/acid/affect_touch(var/mob/living/carbon/M, var/alien, var/removed, var/location) // This is the most interesting
+/datum/reagent/acid/affect_touch(var/mob/living/carbon/M, var/alien, var/removed) // This is the most interesting
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		if(H.head)
@@ -358,7 +358,7 @@
 	glass_name = "glass of sugar"
 	glass_desc = "The organic compound commonly known as table sugar and sometimes called saccharose. This white, odorless, crystalline powder has a pleasing, sweet taste."
 
-/datum/reagent/sugar/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/location)
+/datum/reagent/sugar/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.nutrition += removed * 3
 
 /datum/reagent/sulfur

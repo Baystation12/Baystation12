@@ -50,13 +50,13 @@
 		if(B)
 			B.blood_DNA["UNKNOWN DNA STRUCTURE"] = "X*"
 
-/datum/reagent/blood/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/location)
+/datum/reagent/blood/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	if(dose > 5)
 		M.adjustToxLoss(removed)
 	if(dose > 15)
 		M.adjustToxLoss(removed)
 
-/datum/reagent/blood/affect_touch(var/mob/living/carbon/M, var/alien, var/removed, var/location)
+/datum/reagent/blood/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
 	if(data && data["viruses"])
 		for(var/datum/disease/D in data["viruses"])
 			if(D.spread_type == SPECIAL || D.spread_type == NON_CONTAGIOUS)
@@ -71,7 +71,7 @@
 	if(data && data["antibodies"])
 		M.antibodies |= data["antibodies"]
 
-/datum/reagent/blood/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/location)
+/datum/reagent/blood/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.inject_blood(src, volume)
 	remove_self(volume)
 
@@ -81,7 +81,7 @@
 	reagent_state = LIQUID
 	color = "#C81040"
 
-/datum/reagent/vaccine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/location)
+/datum/reagent/vaccine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(data)
 		for(var/datum/disease/D in M.viruses)
 			if(istype(D, /datum/disease/advance))
@@ -155,7 +155,7 @@
 		if(!cube.wrapped)
 			cube.Expand()
 
-/datum/reagent/water/affect_touch(var/mob/living/carbon/M, var/alien, var/removed, var/location)
+/datum/reagent/water/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
 	if(istype(M, /mob/living/carbon/slime))
 		var/mob/living/carbon/slime/S = M
 		S.adjustToxLoss(15 * removed) // Babies have 150 health, adults have 200; So, 10 units and 13.5
@@ -191,8 +191,8 @@
 	remove_self(volume)
 	return
 
-/datum/reagent/fuel/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/location)
+/datum/reagent/fuel/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.adjustToxLoss(2 * removed)
 
-/datum/reagent/fuel/affect_touch(var/mob/living/carbon/M, var/alien, var/removed, var/location) // Splashing people with welding fuel to make them easy to ignite!
+/datum/reagent/fuel/affect_touch(var/mob/living/carbon/M, var/alien, var/removed) // Splashing people with welding fuel to make them easy to ignite!
 	M.adjust_fire_stacks(0.1 * removed)

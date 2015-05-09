@@ -69,7 +69,7 @@
 	if(istype(M) && !istype(M, /mob/dead)) //painting ghosts: not allowed
 		M.color = color
 
-/datum/reagent/paint/affect_touch(var/mob/living/carbon/M, var/alien, var/removed, var/location)
+/datum/reagent/paint/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
 	M.color = color
 
 /datum/reagent/paint/get_data()
@@ -119,10 +119,10 @@
 	glass_name = "golden cup"
 	glass_desc = "It's magic. We don't have to explain it."
 
-/datum/reagent/adminordrazine/affect_touch(var/mob/living/carbon/M, var/alien, var/removed, var/location)
+/datum/reagent/adminordrazine/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
 	affect_blood(M, alien, removed)
 
-/datum/reagent/adminordrazine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/location)
+/datum/reagent/adminordrazine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.setCloneLoss(0)
 	M.setOxyLoss(0)
 	M.radiation = 0
@@ -171,10 +171,10 @@
 	reagent_state = SOLID
 	color = "#B8B8C0"
 
-/datum/reagent/uranium/affect_touch(var/mob/living/carbon/M, var/alien, var/removed, var/location)
+/datum/reagent/uranium/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
 	affect_ingest(M, alien, removed)
 
-/datum/reagent/uranium/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/location)
+/datum/reagent/uranium/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.apply_effect(5 * removed, IRRADIATE, 0)
 
 /datum/reagent/uranium/touch_turf(var/turf/T)
@@ -192,7 +192,7 @@
 	reagent_state = LIQUID
 	color = "#C8A5DC"
 
-/datum/reagent/adrenaline/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/location)
+/datum/reagent/adrenaline/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
 		return
 	M.SetParalysis(0)
@@ -209,7 +209,7 @@
 	glass_name = "glass of holy water"
 	glass_desc = "An ashen-obsidian-water mix, this solution will alter certain sections of the brain's rationality."
 
-/datum/reagent/water/holywater/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/location)
+/datum/reagent/water/holywater/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
 	if(ishuman(M)) // Any location
 		if(M.mind && cult.is_antagonist(M.mind) && prob(10))
@@ -265,11 +265,11 @@
 			remove_self(5)
 	return
 
-/datum/reagent/thermite/affect_touch(var/mob/living/carbon/M, var/alien, var/removed, var/location)
+/datum/reagent/thermite/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
 	M.adjust_fire_stacks(removed * 0.2)
 	return
 
-/datum/reagent/thermite/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/location)
+/datum/reagent/thermite/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.adjustFireLoss(3 * removed)
 
 /datum/reagent/space_cleaner
@@ -296,7 +296,7 @@
 		for(var/mob/living/carbon/slime/M in T)
 			M.adjustToxLoss(rand(5, 10))
 
-/datum/reagent/space_cleaner/affect_touch(var/mob/living/carbon/M, var/alien, var/removed, var/location)
+/datum/reagent/space_cleaner/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
 	if(M.r_hand)
 		M.r_hand.clean_blood()
 	if(M.l_hand)
