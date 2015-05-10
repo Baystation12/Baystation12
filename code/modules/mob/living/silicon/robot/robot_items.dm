@@ -43,11 +43,11 @@
 							S.use(1)
 							loaded_item = S
 						else
-							del(S)
+							qdel(S)
 							desc = initial(desc)
 							icon_state = initial(icon_state)
 					else
-						del(I)
+						qdel(I)
 						desc = initial(desc)
 						icon_state = initial(icon_state)
 			else

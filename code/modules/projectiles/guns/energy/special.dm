@@ -43,24 +43,11 @@
 	origin_tech = "materials=2;biotech=3;powerstorage=3"
 	modifystate = "floramut"
 	self_recharge = 1
-	var/mode = 0 //0 = mutate, 1 = yield boost
 
-/obj/item/weapon/gun/energy/floragun/attack_self(mob/living/user as mob)
-	switch(mode)
-		if(0)
-			mode = 1
-			charge_cost = 100
-			user << "<span class='warning'>The [src.name] is now set to increase yield.</span>"
-			projectile_type = /obj/item/projectile/energy/florayield
-			modifystate = "florayield"
-		if(1)
-			mode = 0
-			charge_cost = 100
-			user << "<span class='warning'>The [src.name] is now set to induce mutations.</span>"
-			projectile_type = /obj/item/projectile/energy/floramut
-			modifystate = "floramut"
-	update_icon()
-	update_held_icon()
+	firemodes = list(
+		list(name="induce mutations", projectile_type=/obj/item/projectile/energy/floramut, modifystate="floramut"),
+		list(name="increase yield", projectile_type=/obj/item/projectile/energy/florayield, modifystate="florayield"),
+		)
 
 /obj/item/weapon/gun/energy/floragun/afterattack(obj/target, mob/user, adjacent_flag)
 	//allow shooting into adjacent hydrotrays regardless of intent

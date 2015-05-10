@@ -1447,7 +1447,7 @@ datum/preferences
 							rlimb_data[limb] = choice
 							organ_data[limb] = "cyborg"
 							if(second_limb)
-								organ_data[second_limb] = choice
+								rlimb_data[second_limb] = choice
 								organ_data[second_limb] = "cyborg"
 							if(third_limb && organ_data[third_limb] == "amputated")
 								organ_data[third_limb] = null

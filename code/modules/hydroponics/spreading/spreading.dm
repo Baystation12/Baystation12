@@ -26,13 +26,13 @@
 	color = DEAD_PLANT_COLOUR
 
 /obj/effect/dead_plant/attack_hand()
-	del(src)
+	qdel(src)
 
 /obj/effect/dead_plant/attackby()
 	..()
 	for(var/obj/effect/plant/neighbor in range(1))
 		neighbor.update_neighbors()
-	del(src)
+	qdel(src)
 
 /obj/effect/plant
 	name = "plant"
@@ -60,7 +60,7 @@
 	var/last_tick = 0
 	var/obj/machinery/portable_atmospherics/hydroponics/soil/invisible/plant
 
-/obj/effect/plant/Del()
+/obj/effect/plant/Destroy()
 	if(plant_controller)
 		plant_controller.remove_plant(src)
 	for(var/obj/effect/plant/neighbor in range(1,src))
@@ -81,14 +81,14 @@
 		sleep(250) // ugly hack, should mean roundstart plants are fine.
 	if(!plant_controller)
 		world << "<span class='danger'>Plant controller does not exist and [src] requires it. Aborting.</span>"
-		del(src)
+		qdel(src)
 		return
 
 	if(!istype(newseed))
 		newseed = plant_controller.seeds[DEFAULT_SEED]
 	seed = newseed
 	if(!seed)
-		del(src)
+		qdel(src)
 		return
 
 	name = seed.display_name

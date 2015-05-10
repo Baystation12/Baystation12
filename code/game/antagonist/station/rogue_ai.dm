@@ -213,7 +213,7 @@ var/datum/antagonist/rogue_ai/malf
 							/client/proc/reactivate_camera)
 
 						current:laws = new /datum/ai_laws/nanotrasen
-						del(current:malf_picker)
+						qdel(current:malf_picker)
 						current:show_laws()
 						current.icon_state = "ai"
 

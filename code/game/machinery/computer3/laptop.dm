@@ -52,7 +52,7 @@
 					O.loc = loc
 			usr << "\The [src] crumbles to pieces."
 			spawn(5)
-				del src
+				qdel(src)
 			return
 
 		if(!stored_computer.manipulating)
@@ -65,7 +65,7 @@
 
 			spawn(5)
 				stored_computer.manipulating = 0
-				del src
+				qdel(src)
 		else
 			usr << "\red You are already opening the computer!"
 
@@ -185,12 +185,12 @@
 		else
 			stat &= ~NOPOWER
 
-	Del()
+	Destroy()
 		if(istype(loc,/obj/item/device/laptop))
 			var/obj/O = loc
 			spawn(5)
 				if(O)
-					del O
+					qdel(O)
 		..()
 
 

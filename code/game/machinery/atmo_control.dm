@@ -67,11 +67,10 @@
 /obj/machinery/air_sensor/initialize()
 	set_frequency(frequency)
 
-/obj/machinery/air_sensor/New()
-	..()
-
+obj/machinery/air_sensor/Destroy()
 	if(radio_controller)
-		set_frequency(frequency)
+		radio_controller.remove_object(src,frequency)
+	..()
 
 /obj/machinery/computer/general_air_control
 	icon = 'icons/obj/computer.dmi'
@@ -85,6 +84,11 @@
 	var/list/sensor_information = list()
 	var/datum/radio_frequency/radio_connection
 	circuit = /obj/item/weapon/circuitboard/air_management
+
+obj/machinery/computer/general_air_control/Destroy()
+	if(radio_controller)
+		radio_controller.remove_object(src, frequency)
+	..()
 
 /obj/machinery/computer/general_air_control/attack_hand(mob/user)
 	if(..(user))

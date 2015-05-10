@@ -311,7 +311,7 @@ datum/mind
 					for(var/obj/item/weapon/implant/loyalty/I in H.contents)
 						for(var/obj/item/organ/external/organs in H.organs)
 							if(I in organs.implants)
-								I.Del()
+								qdel(I)
 								break
 					H << "<span class='notice'><font size =3><B>Your loyalty implant has been deactivated.</font></span>"
 					log_admin("[key_name_admin(usr)] has de-loyalty implanted [current].")
@@ -368,7 +368,7 @@ datum/mind
 						src = null
 						m2h.inject(M)
 						src = mobfinder.loc:mind
-						del(mobfinder)
+						qdel(mobfinder)
 						current.radiation -= 50
 		*/
 		else if (href_list["silicon"])
@@ -445,10 +445,10 @@ datum/mind
 		var/list/L = current.get_contents()
 		for (var/t in L)
 			if (istype(t, /obj/item/device/pda))
-				if (t:uplink) del(t:uplink)
+				if (t:uplink) qdel(t:uplink)
 				t:uplink = null
 			else if (istype(t, /obj/item/device/radio))
-				if (t:traitorradio) del(t:traitorradio)
+				if (t:traitorradio) qdel(t:traitorradio)
 				t:traitorradio = null
 				t:traitor_frequency = 0.0
 			else if (istype(t, /obj/item/weapon/SWF_uplink) || istype(t, /obj/item/weapon/syndicate_uplink))
@@ -457,7 +457,7 @@ datum/mind
 					R.loc = current.loc
 					R.traitorradio = null
 					R.traitor_frequency = 0.0
-				del(t)
+				qdel(t)
 
 		// remove wizards spells
 		//If there are more special powers that need removal, they can be procced into here./N
@@ -479,7 +479,7 @@ datum/mind
 	proc/take_uplink()
 		var/obj/item/device/uplink/hidden/H = find_syndicate_uplink()
 		if(H)
-			del(H)
+			qdel(H)
 
 
 	// check whether this mind's mob has been brigged for the given duration

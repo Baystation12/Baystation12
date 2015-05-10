@@ -102,7 +102,7 @@
 			p4.air_contents.temperature = btemp + T0C
 			p2.secured = 1
 
-	del(src)
+	qdel(src)
 */
 
 /obj/effect/spawner/newbomb
@@ -168,4 +168,4 @@
 
 	V.update_icon()
 
-	del(src)
+	qdel(src)

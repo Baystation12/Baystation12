@@ -25,7 +25,7 @@
 		if(!has_spread)
 			Spread()
 		else
-			del(src)
+			qdel(src)
 
 	proc/Spread(exclude=list())
 		//Allows liquid fuels to sometimes flow into other tiles.
