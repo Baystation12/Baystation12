@@ -62,7 +62,7 @@
 		flick("[mineral]fwall_opening", src)
 		sleep(15)
 		src.density = 0
-		SetOpacity(0)
+		set_opacity(0)
 		opening = 0
 	else
 		opening = 1
@@ -70,7 +70,7 @@
 		icon_state = "[mineral]0"
 		density = 1
 		sleep(15)
-		SetOpacity(1)
+		set_opacity(1)
 		src.relativewall()
 		opening = 0
 
@@ -186,7 +186,7 @@
 		flick("frwall_opening", src)
 		sleep(15)
 		density = 0
-		SetOpacity(0)
+		set_opacity(0)
 		opening = 0
 	else
 		opening = 1
@@ -194,7 +194,7 @@
 		flick("frwall_closing", src)
 		density = 1
 		sleep(15)
-		SetOpacity(1)
+		set_opacity(1)
 		relativewall()
 		opening = 0
 

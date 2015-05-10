@@ -91,11 +91,11 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 	anchored = 1
 	mouse_opacity = 0
 
-	//luminosity = 3
+	blend_mode = BLEND_ADD
 
 	icon = 'icons/effects/fire.dmi'
 	icon_state = "1"
-	l_color = "#ED9200"
+	light_color = "#ED9200"
 	layer = TURF_LAYER
 
 	var/firelevel = 10000 //Calculated by gas_mixture.calculate_firelevel()
@@ -114,13 +114,13 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 
 	if(firelevel > 6)
 		icon_state = "3"
-		SetLuminosity(7)
+		set_light(7, 3)
 	else if(firelevel > 2.5)
 		icon_state = "2"
-		SetLuminosity(5)
+		set_light(5, 2)
 	else
 		icon_state = "1"
-		SetLuminosity(3)
+		set_light(3, 1)
 
 	//im not sure how to implement a version that works for every creature so for now monkeys are firesafe
 	for(var/mob/living/L in loc)
@@ -158,6 +158,9 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 			else
 				enemy_tile.adjacent_fire_act(loc, air_contents, air_contents.temperature, air_contents.volume)
 
+	animate(src, color = heat2color(air_contents.temperature), 5)
+	set_light(l_color = color)
+
 /obj/fire/New(newLoc,fl)
 	..()
 
@@ -165,7 +168,11 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 		qdel(src)
 
 	set_dir(pick(cardinal))
-	SetLuminosity(3)
+	
+	var/datum/gas_mixture/air_contents = loc.return_air()
+	color = heat2color(air_contents.temperature)
+	set_light(3, 1, color)
+
 	firelevel = fl
 	air_master.active_hotspots.Add(src)
 
@@ -178,7 +185,7 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 
 /obj/fire/proc/RemoveFire()
 	if (istype(loc, /turf))
-		SetLuminosity(0)
+		set_light(0)
 
 		loc = null
 	air_master.active_hotspots.Remove(src)

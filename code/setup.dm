@@ -954,3 +954,5 @@ var/list/be_special_flags = list(
 #define LANGUAGE_ROOTSPEAK "Rootspeak"
 #define LANGUAGE_TRADEBAND "Tradeband"
 #define LANGUAGE_GUTTER "Gutter"
+
+#define CLAMP01(x) max(0, min(1, x))
