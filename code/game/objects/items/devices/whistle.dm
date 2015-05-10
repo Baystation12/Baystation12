@@ -10,6 +10,9 @@
 	var/emagged = 0
 	var/insults = 0//just in case
 
+	var/list/msgs = list("Halt!  Security!")
+	var/verb = "rasps"
+
 /obj/item/device/hailer/attack_self(mob/living/carbon/user as mob)
 	if (spamcheck)
 		return
@@ -23,7 +26,9 @@
 			user << "\red *BZZZZcuntZZZZT*"
 	else
 		playsound(get_turf(src), 'sound/voice/halt.ogg', 100, 1, vary = 0)
-		user.show_message("<span class='warning'>[user]'s [name] rasps, \"Halt! Security!\"</span>",1)
+		var/msg = pick(msgs)
+		user.show_message("<span class='warning'>[user]'s [name] [verb], \"[msg]\"</span>",2)
+
 
 	spamcheck = 1
 	spawn(20)

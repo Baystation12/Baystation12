@@ -1470,3 +1470,9 @@ obj/item/weapon/fluff/mariafontaine/attack_self(mob/user as mob)
 		src.icon_state = "mariaclosed"
 		src.item_state = "mariaclosed"
 		user << "You flip the locket closed."
+
+/obj/item/device/hailer/fluff/lucy_thorne
+		name = "modified hailer"
+		desc = "A standard-issue security hailer with the initials 'L.T.' and a heart etched into the side. It seems to have been modified."
+		msgs = list("Hi, um... please halt!", "I just want to talk!", "Could... could you come over here? Please?", "I AM, uhm... I AM THE LAW!", "Wait! Um... please? Sorry...", "Hi, so, uhm... can I ask you some questions? Please?")
+		verb = "requests"
