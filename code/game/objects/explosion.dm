@@ -27,9 +27,10 @@ proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impa
 		if(!epicenter) return
 
 		var/max_range = max(devastation_range, heavy_impact_range, light_impact_range, flash_range)
-		//playsound(epicenter, 'sound/effects/explosionfar.ogg', 100, 1, round(devastation_range*2,1) )
-		//playsound(epicenter, "explosion", 100, 1, round(devastation_range,1) )
-
+		var/approximate_intensity = (devastation_range * 3) + (heavy_impact_range * 2) + light_impact_range
+		if(approximate_intensity > 20) // Semi-large explosion, kill some load
+			defer_powernet_rebuild = 1
+			lighting_processing_killed = 1
 // Play sounds; we want sounds to be different depending on distance so we will manually do it ourselves.
 
 // Stereo users will also hear the direction of the explosion!
@@ -68,15 +69,7 @@ proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impa
 			message_admins("Explosion with size ([devastation_range], [heavy_impact_range], [light_impact_range]) in area [epicenter.loc.name] ([epicenter.x],[epicenter.y],[epicenter.z]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[epicenter.x];Y=[epicenter.y];Z=[epicenter.z]'>JMP</a>)")
 			log_game("Explosion with size ([devastation_range], [heavy_impact_range], [light_impact_range]) in area [epicenter.loc.name] ")
 
-		var/lighting_controller_was_processing = lighting_controller.processing	//Pause the lighting updates for a bit
-		lighting_controller.processing = 0
 
-
-		var/approximate_intensity = (devastation_range * 3) + (heavy_impact_range * 2) + light_impact_range
-		var/powernet_rebuild_was_deferred_already = defer_powernet_rebuild
-		// Large enough explosion. For performance reasons, powernets will be rebuilt manually
-		if(!defer_powernet_rebuild && (approximate_intensity > 25))
-			defer_powernet_rebuild = 1
 
 		if(heavy_impact_range > 1)
 			var/datum/effect/system/explosion/E = new/datum/effect/system/explosion()
@@ -87,7 +80,7 @@ proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impa
 		var/y0 = epicenter.y
 		var/z0 = epicenter.z
 
-		for(var/turf/T in range(epicenter, max_range))
+		for(var/turf/T in range(max_range, epicenter))
 			var/dist = cheap_pythag(T.x - x0,T.y - y0)
 
 			if(dist < devastation_range)		dist = 1
@@ -111,13 +104,9 @@ proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impa
 			if(Array)
 				Array.sense_explosion(x0,y0,z0,devastation_range,heavy_impact_range,light_impact_range,took)
 
-		sleep(8)
-
-		if(!lighting_controller.processing)	lighting_controller.processing = lighting_controller_was_processing
-		if(!powernet_rebuild_was_deferred_already && defer_powernet_rebuild)
-			makepowernets()
+		spawn(20)
 			defer_powernet_rebuild = 0
-
+			lighting_processing_killed = 0
 	return 1
 
 

@@ -11,7 +11,6 @@
 	deny_respawn = 1
 
 /datum/game_mode/meteor/post_setup()
-	defer_powernet_rebuild = 2//Might help with the lag
 	..()
 
 /datum/game_mode/meteor/process()

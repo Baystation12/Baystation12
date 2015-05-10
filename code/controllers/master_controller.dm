@@ -9,6 +9,7 @@ var/global/last_tick_duration = 0
 
 var/global/air_processing_killed = 0
 var/global/pipe_processing_killed = 0
+var/global/lighting_processing_killed = 0
 
 datum/controller/game_controller
 	var/list/shuttle_list	                    // For debugging and VV
