@@ -235,7 +235,6 @@
 						affecting.take_damage(30, 0)
 						affecting.embed(src)
 						H.UpdateDamageIcon()
-						H.updatehealth()
 					else
 						var/list/potentialorgans = list()
 						for(var/organ in list("l_leg", "r_leg", "l_foot", "r_foot"))
@@ -246,7 +245,6 @@
 						affecting.take_damage(30, 0)
 						affecting.embed(src)
 						H.UpdateDamageIcon()
-						H.updatehealth()
 
 
 		if(isanimal(AM) && !istype(AM, /mob/living/simple_animal/parrot) && !istype(AM, /mob/living/simple_animal/construct) && !istype(AM, /mob/living/simple_animal/shade) && !istype(AM, /mob/living/simple_animal/hostile/viscerator))
