@@ -228,25 +228,15 @@
 				if(H.m_intent == "run")
 					armed = 0
 					update_icon()
-					//H.legcuffed = src
-					//src.loc = H
-					//H.update_inv_legcuffed()
 					H << "<span class='danger'>You step on \the [src]!</span>"
-
-					feedback_add_details("handcuffs","B")
 					for(var/mob/O in viewers(H, null))
 						if(O == H)
 							continue
 						O.show_message("<span class='danger'>[H] steps on \the [src].</span>", 1)
 					if(H.lying)
-						var/list/potentialorgans = list()
-						for(var/organ in list("l_leg", "l_foot", "r_leg", "r_foot", "groin", "chest", "head", "r_arm", "r_hand", "l_arm", "l_hand")) //iterate over names
-							var/obj/item/organ/external/R = H.get_organ(organ)
-							if(R && !(R.status & ORGAN_DESTROYED))
-								potentialorgans += R
-						var/obj/item/organ/external/affecting = pick(potentialorgans)
+						var/obj/item/organ/external/affecting = pick(H.organs)
 						affecting.take_damage(30, 0)
-						affecting.embed(src, 1)
+						affecting.embed(src)
 						H.UpdateDamageIcon()
 						H.updatehealth()
 					else
@@ -257,7 +247,7 @@
 								potentialorgans += R
 						var/obj/item/organ/external/affecting = pick(potentialorgans)
 						affecting.take_damage(30, 0)
-						affecting.embed(src, 1)
+						affecting.embed(src)
 						H.UpdateDamageIcon()
 						H.updatehealth()
 
