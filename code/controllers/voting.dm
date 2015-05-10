@@ -253,7 +253,8 @@ datum/controller/vote
 					world << sound('sound/ambience/alarm4.ogg', repeat = 0, wait = 0, volume = 50, channel = 3)
 			if(mode == "gamemode" && going)
 				going = 0
-				world << "<font color='red'><b>Round start has been delayed.</b></font>
+				world << "<font color='red'><b>Round start has been delayed.</b></font>"
+
 			time_remaining = round(config.vote_period/10)
 			return 1
 		return 0

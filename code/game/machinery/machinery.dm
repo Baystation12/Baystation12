@@ -111,6 +111,7 @@ Class Procs:
 	var/global/gl_uid = 1
 	var/interact_offline = 0 // Can the machine be interacted with while de-powered.
 //if(!machinery_sort_required && ticker)   //Breaks all machines for some reason, someone fix please ;-;
+
 /obj/machinery/New(l, d=0)
 	..(l)
 	if(d)
@@ -335,7 +336,7 @@ Class Procs:
 	del(src)
 	return 1
 
-/obj/machinery/proc/default_unfasten_wrench(mob/user, obj/item/weapon/wrench/W, time = 20)
+/*/obj/machinery/proc/default_unfasten_wrench(mob/user, obj/item/weapon/wrench/W, time = 20)
 	if(istype(W))
 		user << "<span class='notice'>Now [anchored ? "un" : ""]securing [name]</span>"
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
@@ -363,6 +364,56 @@ Class Procs:
 	var/obj/item/weapon/card/id/id = GetIdCard(perp)
 	if(id && istype(id, /obj/item/weapon/card/id/syndicate))
 		threatcount -= 2
+
+	if(auth_weapons && !src.allowed(perp))
+		if(istype(perp.l_hand, /obj/item/weapon/gun) || istype(perp.l_hand, /obj/item/weapon/melee))
+			threatcount += 4
+
+		if(istype(perp.r_hand, /obj/item/weapon/gun) || istype(perp.r_hand, /obj/item/weapon/melee))
+			threatcount += 4
+
+		if(istype(perp.belt, /obj/item/weapon/gun) || istype(perp.belt, /obj/item/weapon/melee))
+			threatcount += 2
+
+		if(perp.species.name != "Human") //beepsky so racist.
+			threatcount += 2
+
+	if(check_records || check_arrest)
+		var/perpname = perp.name
+		if(id)
+			perpname = id.registered_name
+
+		var/datum/data/record/R = find_security_record("name", perpname)
+		if(check_records && !R)
+			threatcount += 4
+
+		if(check_arrest && R && (R.fields["criminal"] == "*Arrest*"))
+			threatcount += 4
+
+	return threatcount*/
+/obj/machinery/proc/on_assess_perp(mob/living/carbon/human/perp)
+	return 0
+
+/obj/machinery/proc/is_assess_emagged()
+	return emagged
+
+/obj/machinery/proc/assess_perp(mob/living/carbon/human/perp, var/auth_weapons, var/check_records, var/check_arrest)
+	var/threatcount = 0	//the integer returned
+
+	if(is_assess_emagged())
+		return 10	//if emagged, always return 10.
+
+	//Agent cards lower threatlevel.
+	var/obj/item/weapon/card/id/id = GetIdCard(perp)
+	if(id && istype(id, /obj/item/weapon/card/id/syndicate))
+		threatcount -= 2
+	// A proper	CentCom id is hard currency.
+	else if(id && istype(id, /obj/item/weapon/card/id/centcom))
+		return 0
+
+	threatcount += on_assess_perp(perp)
+	if(threatcount >= 10)
+		return threatcount
 
 	if(auth_weapons && !src.allowed(perp))
 		if(istype(perp.l_hand, /obj/item/weapon/gun) || istype(perp.l_hand, /obj/item/weapon/melee))

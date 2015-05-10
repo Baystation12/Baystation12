@@ -117,22 +117,12 @@
 //Bay Changes
 
 	/*if (!user.IsAdvancedToolUser())
-		user << "\red You don't have the dexterity to do this!"
-		return
-	if(istype(user, /mob/living))
-		var/mob/living/M = user
-		if (HULK in M.mutations)
-			M << "\red Your meaty finger is much too large for the trigger guard!"
-			return
 
 		if (istype(src, /obj/item/weapon/gun/energy/staff))
 			if(M.iswizard == 0)
 				M << "\red Have have no idea how to use the.. [src]"
 				return
 
-	if(ishuman(user))
-		if(user.dna && user.dna.mutantrace == "adamantine")
-			user << "\red Your metal fingers don't fit in the trigger guard!"
 			return*/
 /obj/item/weapon/gun/proc/Fire(atom/target, mob/living/user, params, pointblank=0, reflex=0)
 	if(!user || !target) return
@@ -144,7 +134,7 @@
 
 	if (!ready_to_fire())
 		if (world.time % 3) //to prevent spam
-			user << "<span class='warning'>[src] is not ready to fire again!"
+			user << "<span class='warning'>[src] is not ready to fire again!</span>"
 		return
 
 	var/obj/projectile = consume_next_projectile(user)
@@ -190,7 +180,7 @@
 		
 		if(reflex)
 			user.visible_message(
-				"<span class='reflex_shoot'><b>[user] fires [src][pointblank ? "  point blank at [target]":""] by reflex!<b></span>",
+				"<span class='reflex_shoot'><b>[user] fires [src][pointblank ? "  point blank at [target]":""] by reflex!</b></span>",
 				"<span class='reflex_shoot'>You fire [src] by reflex]!</span>",
 				"You hear a [fire_sound_text]!"
 			)

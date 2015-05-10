@@ -503,35 +503,29 @@
 	set name = "Resist"
 	set category = "IC"
 
-	if(usr.stat || !isliving(usr) || usr.next_move > world.time)
-		return
+	//if(usr.stat || !isliving(usr) || usr.next_move > world.time)
+	//	return
+	if(can_resist())
+		next_move = world.time + 20
+		process_resist()
 
-	usr.next_move = world.time + 20
 
-	var/mob/living/L = usr
+/mob/living/proc/can_resist()
+	//need to allow !canmove, or otherwise neck grabs can't be resisted
+	//so just check weakened instead.
+	if(stat || weakened)
+		return 0
+	if(next_move > world.time)
+		return 0
+	return 1
 
+/mob/living/proc/process_resist()
 	//Getting out of someone's inventory.
-	if(istype(src.loc,/obj/item/weapon/holder))
-		var/obj/item/weapon/holder/H = src.loc //Get our item holder.
-		var/mob/M = H.loc                      //Get our mob holder (if any).
-
-		if(istype(M))
-			M.drop_from_inventory(H)
-			M << "[H] wriggles out of your grip!"
-			src << "You wriggle out of [M]'s grip!"
-		else if(istype(H.loc,/obj/item))
-			src << "You struggle free of [H.loc]."
-			H.loc = get_turf(H)
-
-		if(istype(M))
-			for(var/atom/A in M.contents)
-				if(istype(A,/mob/living/simple_animal/borer) || istype(A,/obj/item/weapon/holder))
-					return
-
-		M.status_flags &= ~PASSEMOTES
+	if(istype(src.loc, /obj/item/weapon/holder))
+		escape_inventory(src.loc)
 		return
 
-	//Resisting control by an alien mind.
+		/*//Resisting control by an alien mind.
 	if(istype(src.loc,/mob/living/simple_animal/borer))
 		var/mob/living/simple_animal/borer/B = src.loc
 		var/mob/living/captive_brain/H = src
@@ -554,10 +548,10 @@
 			verbs -= /mob/living/carbon/proc/punish_host
 			verbs -= /mob/living/carbon/proc/spawn_larvae
 
-			return
+			return*/
 
 	//resisting grabs (as if it helps anyone...)
-	if ((!( L.stat ) && !( L.restrained() )))
+	/*if ((!( L.stat ) && !( L.restrained() )))
 		var/resisting = 0
 		for(var/obj/O in L.requests)
 			L.requests.Remove(O)
@@ -576,13 +570,21 @@
 					//If the you move when grabbing someone then it's easier for them to break free. Same if the affected mob is immune to stun.
 					if (((world.time - G.assailant.l_move_time < 30 || !L.stunned) && prob(15)) || prob(3))
 						L.visible_message("<span class='warning'>[L] has broken free of [G.assailant]'s headlock!</span>")
-						del(G)
-		if(resisting)
-			L.visible_message("<span class='danger'>[L] resists!</span>")
+						del(G)*/
+	if (!restrained())
+		resist_grab()
+				else
+					if (G.state == 3)
+						if (prob(5))
+							for(var/mob/O in viewers(usr, null))
+								O.show_message(text("\red [] has broken free of []'s headlock!", L, G.assailant), 1)
+							del(G)
+		//if(resisting)
+		//	L.visible_message("<span class='danger'>[L] resists!</span>")
 
 
 	//unbuckling yourself
-	if(L.buckled && (L.last_special <= world.time) )
+	/*if(L.buckled && (L.last_special <= world.time) )
 		if(iscarbon(L))
 			var/mob/living/carbon/C = L
 			if( C.handcuffed )
@@ -600,78 +602,63 @@
 						C << "\blue You successfully unbuckle yourself."
 						C.buckled.user_unbuckle_mob(C)
 		else
-			L.buckled.user_unbuckle_mob(L)
+			L.buckled.user_unbuckle_mob(L)*/
+	if(buckled)
+		spawn() escape_buckle()
 
 	//Breaking out of a locker?
-	else if( src.loc && (istype(src.loc, /obj/structure/closet)) )
-		var/breakout_time = 2 //2 minutes by default
+	if( src.loc && (istype(src.loc, /obj/structure/closet)) )
+		var/obj/structure/closet/C = loc
+		spawn() C.mob_breakout(src)
 
-		var/obj/structure/closet/C = L.loc
-		if(C.opened)
-			return //Door's open... wait, why are you in it's contents then?
-		if(istype(L.loc, /obj/structure/closet/secure_closet))
-			var/obj/structure/closet/secure_closet/SC = L.loc
-			if(!SC.locked && !SC.welded)
-				return //It's a secure closet, but isn't locked. Easily escapable from, no need to 'resist'
-		else
-			if(!C.welded)
-				return //closed but not welded...
-		//	else Meh, lets just keep it at 2 minutes for now
-		//		breakout_time++ //Harder to get out of welded lockers than locked lockers
+/mob/living/proc/escape_inventory(obj/item/weapon/holder/H)
+	if(H != src.loc) return
+	
+	var/mob/M = H.loc //Get our mob holder (if any).
 
-		//okay, so the closet is either welded or locked... resist!!!
-		usr.next_move = world.time + 100
-		L.last_special = world.time + 100
-		L << "\red You lean on the back of \the [C] and start pushing the door open. (this will take about [breakout_time] minutes)"
-		for(var/mob/O in viewers(usr.loc))
-			O.show_message("\red <B>The [L.loc] begins to shake violently!</B>", 1)
+	if(istype(M))
+		M.drop_from_inventory(H)
+		M << "<span class='warning'>[H] wriggles out of your grip!</span>"
+		src << "<span class='warning'>You wriggle out of [M]'s grip!</span>"
+	else if(istype(H.loc,/obj/item))
+		src << "<span class='warning'>You struggle free of [H.loc].</span>"
+		H.loc = get_turf(H)
 
+	if(istype(M))
+		for(var/atom/A in M.contents)
+			if(istype(A,/mob/living/simple_animal/borer) || istype(A,/obj/item/weapon/holder))
+				return
 
-		spawn(0)
-			if(do_after(usr,(breakout_time*60*10))) //minutes * 60seconds * 10deciseconds
-				if(!C || !L || L.stat != CONSCIOUS || L.loc != C || C.opened) //closet/user destroyed OR user dead/unconcious OR user no longer in closet OR closet opened
-					return
+	M.status_flags &= ~PASSEMOTES
 
-				//Perform the same set of checks as above for weld and lock status to determine if there is even still a point in 'resisting'...
-				if(istype(L.loc, /obj/structure/closet/secure_closet))
-					var/obj/structure/closet/secure_closet/SC = L.loc
-					if(!SC.locked && !SC.welded)
-						return
-				else
-					if(!C.welded)
-						return
+/mob/living/proc/escape_buckle()
+	if(buckled)
+		buckled.user_unbuckle_mob(src)
 
-				//Well then break it!
-				if(istype(usr.loc, /obj/structure/closet/secure_closet))
-					var/obj/structure/closet/secure_closet/SC = L.loc
-					SC.desc = "It appears to be broken."
-					SC.icon_state = SC.icon_off
-					flick(SC.icon_broken, SC)
-					sleep(10)
-					flick(SC.icon_broken, SC)
-					sleep(10)
-					SC.broken = 1
-					SC.locked = 0
-					SC.update_icon()
-					usr << "\red You successfully break out!"
-					for(var/mob/O in viewers(L.loc))
-						O.show_message("\red <B>\the [usr] successfully broke out of \the [SC]!</B>", 1)
-					if(istype(SC.loc, /obj/structure/bigDelivery)) //Do this to prevent contents from being opened into nullspace (read: bluespace)
-						var/obj/structure/bigDelivery/BD = SC.loc
-						BD.attack_hand(usr)
-					SC.open()
-				else
-					C.welded = 0
-					C.update_icon()
-					usr << "\red You successfully break out!"
-					for(var/mob/O in viewers(L.loc))
-						O.show_message("\red <B>\the [usr] successfully broke out of \the [C]!</B>", 1)
-					if(istype(C.loc, /obj/structure/bigDelivery)) //nullspace ect.. read the comment above
-						var/obj/structure/bigDelivery/BD = C.loc
-						BD.attack_hand(usr)
-					C.open()
+/mob/living/proc/resist_grab()
+	var/resisting = 0
+	for(var/obj/O in requests)
+		requests.Remove(O)
+		del(O)
+		resisting++
+	for(var/obj/item/weapon/grab/G in grabbed_by)
+		resisting++
+		switch(G.state)
+			if(GRAB_PASSIVE)
+				del(G)
+			if(GRAB_AGGRESSIVE)
+				if(prob(60)) //same chance of breaking the grab as disarm
+					visible_message("<span class='warning'>[src] has broken free of [G.assailant]'s grip!</span>")
+					del(G)
+			if(GRAB_NECK)
+				//If the you move when grabbing someone then it's easier for them to break free. Same if the affected mob is immune to stun.
+				if (((world.time - G.assailant.l_move_time < 30 || !stunned) && prob(15)) || prob(3))
+					visible_message("<span class='warning'>[src] has broken free of [G.assailant]'s headlock!</span>")
+					del(G)
+	if(resisting)
+		visible_message("<span class='danger'>[src] resists!</span>")
 
-	//drop && roll or breaking out of handcuffs
+	/*//drop && roll or breaking out of handcuffs
 	else if(iscarbon(L))
 		var/mob/living/carbon/CM = L
 		if(CM.on_fire && CM.canmove)
@@ -706,8 +693,9 @@
 				if(H.species.can_shred(H,1))
 					can_break_cuffs = 1
 				if(H.species.dhts == 1)
-					can_break_cuffs = 1
-			if(can_break_cuffs) //Don't want to do a lot of logic gating here.
+					can_break_cuffs = 1*/
+			
+			/*if(can_break_cuffs) //Don't want to do a lot of logic gating here.
 				usr << "\red You attempt to break your handcuffs. (This will take around 5 seconds and you need to stand still)"
 				for(var/mob/O in viewers(CM))
 					O.show_message(text("\red <B>[] is trying to break the handcuffs!</B>", CM), 1)
@@ -793,7 +781,7 @@
 						CM << "\blue You successfully remove \the [CM.legcuffed]."
 						CM.drop_from_inventory(CM.legcuffed)
 						CM.legcuffed = null
-						CM.update_inv_legcuffed()
+						CM.update_inv_legcuffed()*/
 
 /mob/living/verb/lay_down()
 	set name = "Rest"

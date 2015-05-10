@@ -6,13 +6,7 @@
 /mob/living/silicon/ai/var/stored_locations[0]
 
 /*/mob/living/silicon/ai/proc/InvalidTurf(turf/T as turf)
-	if(!T)
-		return 1
-	if(T.z == 2)
-		return 1
 	if(T.z > 8)
-		return 1
-	return 0
 */
 /proc/InvalidPlayerTurf(turf/T as turf)
 	return !(T && T.z in config.player_levels)

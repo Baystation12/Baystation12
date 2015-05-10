@@ -146,25 +146,7 @@ datum/hud/New(mob/owner)
 	if(ishuman(mymob))
 		var/mob/living/carbon/human/H = mymob
 		/*if(inventory_shown && hud_shown)
-			if(H.shoes)		H.shoes.screen_loc = ui_shoes
-			if(H.gloves)	H.gloves.screen_loc = ui_gloves
-			if(H.l_ear)		H.l_ear.screen_loc = ui_l_ear
-			if(H.r_ear)		H.r_ear.screen_loc = ui_r_ear
-			if(H.glasses)	H.glasses.screen_loc = ui_glasses
-			if(H.w_uniform)	H.w_uniform.screen_loc = ui_iclothing
-			if(H.wear_suit)	H.wear_suit.screen_loc = ui_oclothing
-			if(H.wear_mask)	H.wear_mask.screen_loc = ui_mask
 			if(H.neck)		H.neck.screen_loc = ui_neck
-			if(H.head)		H.head.screen_loc = ui_head
-		else
-			if(H.shoes)		H.shoes.screen_loc = null
-			if(H.gloves)	H.gloves.screen_loc = null
-			if(H.l_ear)		H.l_ear.screen_loc = null
-			if(H.r_ear)		H.r_ear.screen_loc = null
-			if(H.glasses)	H.glasses.screen_loc = null
-			if(H.w_uniform)	H.w_uniform.screen_loc = null
-			if(H.wear_suit)	H.wear_suit.screen_loc = null
-			if(H.wear_mask)	H.wear_mask.screen_loc = null
 			if(H.neck)		H.neck.screen_loc = null
 			if(H.head)		H.head.screen_loc = null*/
 		for(var/gear_slot in H.species.hud.gear)
@@ -287,11 +269,10 @@ datum/hud/New(mob/owner)
 	if(!hud_used)
 		usr << "\red This mob type does not use a HUD."
 		return
-		
 	if(!ishuman(src))
 		usr << "\red Inventory hiding is currently only supported for human mobs, sorry."
 		return
-	
+
 	if(!client) return
 	if(client.view != world.view)
 		return
@@ -354,6 +335,7 @@ datum/hud/New(mob/owner)
 	if(client.view != world.view)
 		return
 	
+
 	if(hud_used.hud_shown)
 		hud_used.hud_shown = 0
 		if(src.hud_used.adding)
@@ -365,6 +347,7 @@ datum/hud/New(mob/owner)
 		if(src.hud_used.item_action_list)
 			src.client.screen -= src.hud_used.item_action_list
 		src.client.screen -= src.internals
+		src.client.screen += src.hud_used.action_intent		//we want the intent swticher visible
 	else
 		hud_used.hud_shown = 1
 		if(src.hud_used.adding)

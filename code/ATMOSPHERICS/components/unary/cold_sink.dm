@@ -13,6 +13,9 @@
 
 	var/heatsink_temperature = T20C	// The constant temperature reservoir into which the freezer pumps heat. Probably the hull of the station or something.
 	var/internal_volume = 600		// L
+	idle_power_usage = 5			// 5 Watts for thermostat related circuitry
+	var/heatsink_temperature = T20C	// The constant temperature reservoir into which the freezer pumps heat. Probably the hull of the station or something.
+	var/internal_volume = 600		// L
 	var/max_power_rating = 20000	// Power rating when the usage is turned up to 100
 	var/power_setting = 100
 

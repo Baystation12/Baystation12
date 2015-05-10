@@ -329,7 +329,6 @@ TO-DO:
 						set_dir(NORTH)
 					else
 						set_dir(SOUTH)
-						dir = SOUTH
 
 					if(isturf(movement_target.loc) )
 						UnarmedAttack(movement_target)

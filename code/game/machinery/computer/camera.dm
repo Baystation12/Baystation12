@@ -93,12 +93,41 @@
 		else
 			. = ..()
 
+
+		if(ui)
+			ui.load_cached_data(camera_cache)
+		ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+		if (!ui)
+			ui = new(user, src, ui_key, "sec_camera.tmpl", "Camera Console", 900, 800)
+			// adding a template with the key "mapContent" enables the map ui functionality
+			ui.add_template("mapContent", "sec_camera_map_content.tmpl")
+			// adding a template with the key "mapHeader" replaces the map header content
+			ui.add_template("mapHeader", "sec_camera_map_header.tmpl")
+			ui.load_cached_data(camera_cache)
+			ui.set_initial_data(data)
+			ui.open()
+			ui.set_auto_update(1)
+	Topic(href, href_list)
+		if(href_list["switchTo"])
+			if(src.z>6 || stat&(NOPOWER|BROKEN)) return
+			if(usr.stat || ((get_dist(usr, src) > 1 || !( usr.canmove ) || usr.blinded) && !istype(usr, /mob/living/silicon))) return
+			var/obj/machinery/camera/C = locate(href_list["switchTo"]) in cameranet.cameras
+			if(!C) return
+			switch_to_camera(usr, C)
+			return 1
+		else if(href_list["reset"])
+			if(src.z>6 || stat&(NOPOWER|BROKEN)) return
+			if(usr.stat || ((get_dist(usr, src) > 1 || !( usr.canmove ) || usr.blinded) && !istype(usr, /mob/living/silicon))) return
+			reset_current()
+			usr.check_eye(current)
+			return 1
+		else
+			. = ..()
 	attack_hand(var/mob/user as mob)
 		if (src.z > 8)
 			user << "\red <b>Unable to establish a connection</b>: \black You're too far away from the station!"
 			return
 		if(stat & (NOPOWER|BROKEN))	return
-
 		if(!isAI(user))
 			user.set_machine(src)
 		ui_interact(user)

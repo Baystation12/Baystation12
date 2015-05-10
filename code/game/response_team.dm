@@ -381,7 +381,7 @@ proc/trigger_armed_response_team(var/force = 0)
 	equip_to_slot_or_del(new /obj/item/weapon/storage/box/engineer(src), slot_in_backpack)
 	equip_to_slot_or_del(new /obj/item/weapon/storage/firstaid/regular(src), slot_in_backpack)
 */
-	var/obj/item/weapon/card/id/W = new(src)
+	var/obj/item/weapon/card/id/centcom/ERT/W = new(src)
 	var/ID_assignment
 	if(src.ert_role == 1)
 		W.assignment = "Emergency Response Team Security"
@@ -400,9 +400,7 @@ proc/trigger_armed_response_team(var/force = 0)
 		ID_assignment = "Emergency Response Team Commander"
 		W.access = get_centcom_access("Commander")
 	W.registered_name = real_name
-	W.name = "[real_name]'s ID Card ([ID_assignment])"
-	W.icon_state = "centcom"
-	W.access += get_all_accesses()
+	W.name = "[real_name]'s ID Card ([W.assignment])"
 	equip_to_slot_or_del(W, slot_wear_id)
 
 	return 1

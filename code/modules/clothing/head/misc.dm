@@ -244,7 +244,6 @@
 	desc = "Woof!"
 	icon_state = "corgihead"
 	item_state = "chickensuit"
-	flags = FPRINT | TABLEPASS | BLOCKHAIR
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE
 	siemens_coefficient = 2.0
 	body_parts_covered = HEAD|FACE|EYES

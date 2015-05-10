@@ -22,7 +22,7 @@ emp_act
 			if(!(def_zone in list("chest", "groin")))
 				reflectchance /= 2
 			if(prob(reflectchance))
-				visible_message("\red <B>The [P.name] gets reflected by [src]'s [wear_suit.name]!</B>")
+				visible_message("\red <B>\The [P] gets reflected by \the [src]'s [wear_suit.name]!</B>")
 
 				// Find a turf near or on the original location to bounce to
 				if(P.starting)
@@ -31,23 +31,18 @@ emp_act
 					var/turf/curloc = get_turf(src)
 
 					// redirect the projectile
-					P.original = locate(new_x, new_y, P.z)
-					P.starting = curloc
-					P.current = curloc
-					P.firer = src
-					P.yo = new_y - curloc.y
-					P.xo = new_x - curloc.x
+					P.redirect(new_x, new_y, curloc, src)
 
 				return -1 // complete projectile permutation
 
 	//Shrapnel
-	if (P.damage_type == BRUTE)
+	if(P.can_embed())
 		var/armor = getarmor_organ(organ, "bullet")
-		if((P.embed && prob(20 + max(P.damage - armor, -10))))
+		if(prob(20 + max(P.damage - armor, -10)))
 			var/obj/item/weapon/shard/shrapnel/SP = new()
-			(SP.name) = "[P.name] shrapnel"
-			(SP.desc) = "[SP.desc] It looks like it was fired from [P.shot_from]."
-			(SP.loc) = organ
+			SP.name = (P.name != "shrapnel")? "[P.name] shrapnel" : "shrapnel"
+			SP.desc = "[SP.desc] It looks like it was fired from [P.shot_from]."
+			SP.loc = organ
 			organ.embed(SP)
 
 	return (..(P , def_zone))
@@ -75,8 +70,8 @@ emp_act
 				if (affected.status & ORGAN_ROBOT)
 					emote("me", 1, "drops what they were holding, their [affected.display_name] malfunctioning!")
 				else
-					var/emote_scream = pick("screams in pain and", "lets out a sharp cry and", "cries out and")
-					emote("me", 1, "[(species && species.flags & NO_PAIN) ? "" : emote_scream ] drops what they were holding in their [affected.display_name]!")
+					var/emote_scream = pick("screams in pain and ", "lets out a sharp cry and ", "cries out and ")
+					emote("me", 1, "[(species && species.flags & NO_PAIN) ? "" : emote_scream ]drops what they were holding in their [affected.display_name]!")
 
 	..(stun_amount, agony_amount, def_zone)
 
@@ -105,7 +100,7 @@ emp_act
 	if (!def_zone)
 		return 1.0
 
-	var/siemens_coefficient = 1.0
+	var/siemens_coefficient = species.siemens_coefficient
 
 	var/list/clothing_items = list(head, wear_mask, wear_suit, w_uniform, gloves, shoes) // What all are we checking?
 	for(var/obj/item/clothing/C in clothing_items)
@@ -118,7 +113,7 @@ emp_act
 /mob/living/carbon/human/proc/getarmor_organ(var/datum/organ/external/def_zone, var/type)
 	if(!type)	return 0
 	var/protection = 0
-	var/list/protective_gear = list(head, wear_mask, wear_suit, w_uniform)
+	var/list/protective_gear = list(head, wear_mask, wear_suit, w_uniform, gloves, shoes)
 	for(var/gear in protective_gear)
 		if(gear && istype(gear ,/obj/item/clothing))
 			var/obj/item/clothing/C = gear
@@ -342,7 +337,7 @@ emp_act
 		forcesay(hit_appends)	//forcesay checks stat already
 
 	//Melee weapon embedded object code.
-	if (I.damtype == BRUTE && !I.is_robot_module())
+	if (I && I.damtype == BRUTE && !I.anchored && !I.is_robot_module())
 		var/damage = I.force
 		if (armor)
 			damage /= armor+1
@@ -357,11 +352,11 @@ emp_act
 	return 1
 
 //this proc handles being hit by a thrown atom
-/mob/living/carbon/human/hitby(atom/movable/AM as mob|obj,var/speed = 5)
+/mob/living/carbon/human/hitby(atom/movable/AM as mob|obj,var/speed = THROWFORCE_SPEED_DIVISOR)
 	if(istype(AM,/obj/))
 		var/obj/O = AM
 
-		if(in_throw_mode && !get_active_hand() && speed <= 5)	//empty active hand and we're in throw mode
+		if(in_throw_mode && !get_active_hand() && speed <= THROWFORCE_SPEED_DIVISOR)	//empty active hand and we're in throw mode
 			if(canmove && !restrained())
 				if(isturf(O.loc))
 					put_in_active_hand(O)
@@ -369,11 +364,8 @@ emp_act
 					throw_mode_off()
 					return
 
-		var/dtype = BRUTE
-		if(istype(O,/obj/item/weapon))
-			var/obj/item/weapon/W = O
-			dtype = W.damtype
-		var/throw_damage = O.throwforce*(speed/5)
+		var/dtype = O.damtype
+		var/throw_damage = O.throwforce*(speed/THROWFORCE_SPEED_DIVISOR)
 
 		var/zone
 		if (istype(O.thrower, /mob/living))
@@ -383,11 +375,11 @@ emp_act
 			zone = ran_zone("chest",75)	//Hits a random part of the body, geared towards the chest
 
 		//check if we hit
+		var/miss_chance = 15
 		if (O.throw_source)
 			var/distance = get_dist(O.throw_source, loc)
-			zone = get_zone_with_miss_chance(zone, src, min(15*(distance-2), 0))
-		else
-			zone = get_zone_with_miss_chance(zone, src, 15)
+			miss_chance = max(15*(distance-2), 0)
+		zone = get_zone_with_miss_chance(zone, src, miss_chance, ranged_attack=1)
 
 		if(!zone)
 			visible_message("\blue \The [O] misses [src] narrowly!")
@@ -435,17 +427,21 @@ emp_act
 					affecting.embed(I)
 
 		// Begin BS12 momentum-transfer code.
-		if(O.throw_source && speed >= 15)
-			var/obj/item/weapon/W = O
-			var/momentum = speed/2
+		var/mass = 1.5
+		if(istype(O, /obj/item))
+			var/obj/item/I = O
+			mass = I.w_class/THROWNOBJ_KNOCKBACK_DIVISOR
+		var/momentum = speed*mass
+		
+		if(O.throw_source && momentum >= THROWNOBJ_KNOCKBACK_SPEED)
 			var/dir = get_dir(O.throw_source, src)
 
 			visible_message("\red [src] staggers under the impact!","\red You stagger under the impact!")
 			src.throw_at(get_edge_target_turf(src,dir),1,momentum)
+			
+			if(!O || !src) return
 
-			if(!W || !src) return
-
-			if(W.loc == src && W.sharp) //Projectile is embedded and suitable for pinning.
+			if(O.loc == src && O.sharp) //Projectile is embedded and suitable for pinning.
 				var/turf/T = near_wall(dir,2)
 
 				if(T)
@@ -453,6 +449,13 @@ emp_act
 					visible_message("<span class='warning'>[src] is pinned to the wall by [O]!</span>","<span class='warning'>You are pinned to the wall by [O]!</span>")
 					src.anchored = 1
 					src.pinned += O
+
+/mob/living/carbon/human/embed(var/obj/O, var/def_zone=null)
+	if(!def_zone) ..()
+	
+	var/datum/organ/external/affecting = get_organ(def_zone)
+	if(affecting)
+		affecting.embed(O)
 
 
 /mob/living/carbon/human/proc/bloody_hands(var/mob/living/source, var/amount = 2)
@@ -474,12 +477,19 @@ emp_act
 		w_uniform.add_blood(source)
 		update_inv_w_uniform(0)
 
-/mob/living/carbon/human/proc/handle_suit_punctures_torso(var/damtype, var/damage)
+/mob/living/carbon/human/proc/handle_suit_punctures(var/damtype, var/damage, var/def_zone)
 
-	if(!wear_suit) return
-	if(!istype(wear_suit,/obj/item/clothing/suit/space)) return
+	// Tox and oxy don't matter to suits.
 	if(damtype != BURN && damtype != BRUTE) return
 
+	// The rig might soak this hit, if we're wearing one.
+	if(back && istype(back,/obj/item/weapon/rig))
+		var/obj/item/weapon/rig/rig = back
+		rig.take_hit(damage)
+
+	// We may also be taking a suit breach.
+	if(!wear_suit) return
+	if(!istype(wear_suit,/obj/item/clothing/suit/space)) return
 	var/obj/item/clothing/suit/space/SS = wear_suit
 	var/penetrated_dam = max(0,(damage - SS.breach_threshold)) // - SS.damage)) - Consider uncommenting this if suits seem too hardy on dev.
 

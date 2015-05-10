@@ -102,13 +102,6 @@ var/list/sacrificed = list()
 			var/mob/living/carbon/target = null
 			for(var/mob/living/carbon/M in src.loc)
 				/*if(iscultist(M))
-					continue
-				if(M.stat==2)
-					continue
-				usr.say("Mah[pick("'","`")]weyh pleggh at e'ntrath!")
-				
-				if (M.species && (M.species.flags & NO_PAIN))
-					M.visible_message("\red The markings below [M] glow a bloody red.")
 				if(iscultist(M))
 					continue
 				if(M.stat==2)
@@ -183,25 +176,7 @@ var/list/sacrificed = list()
 						else if (BurnLoss < 100) 	M << "<font color=\"red\"><b>Your mind turns to ash as the burning flames engulf your very soul and images of Nar'Sie begin to bombard the last remnants of mental resistance."
 						else 						M << "<font color=\"red\"><b>Your entire broken soul and being is engulfed in corruption and flames as your mind shatters away into nothing."
 						return 0
-					var/choice = alert(M,"Do you want to join the cult?","Submit to Nar'Sie","Resist","Submit")
-					if(choice == "Submit")
-						ticker.mode.add_cultist(M.mind)
-						M.mind.special_role = "Cultist"
-						M << "<font color=\"purple\"><b><i>Your blood pulses. Your head throbs. The world goes red. All at once you are aware of a horrible, horrible truth. The veil of reality has been ripped away and in the festering wound left behind something sinister takes root.</b></i></font>"
-						M << "<font color=\"purple\"><b><i>Assist your new compatriots in their dark dealings. Their goal is yours, and yours is theirs. You serve the Dark One above all else. Bring It back.</b></i></font>"
 						ticker.mode:grant_runeword(usr)
-						return 1
-
-					else if(choice == "Resist")
-
-						M.take_overall_damage(0, rand(5, 10)) // You dirty resister cannot handle the damage to your mind. Easily.
-						// Resist messages go!
-						var/BurnLoss = M.getFireLoss()
-						if (BurnLoss < 25) 			M << "<font color=\"red\"><b>Your blood boils as you force yourself to resist the corruption invading every corner of your mind."
-						else if (BurnLoss < 45) 	M << "<font color=\"red\"><b>Your blood boils and your body burns as the corruption further forces itself into your body and mind."
-						else if (BurnLoss < 75) 	M << "<font color=\"red\"><b>You begin to hallucinate images of a dark and incomprehensible being and your entire body feels like its engulfed in flame as your mental defenses crumble."
-						else if (BurnLoss < 100) 	M << "<font color=\"red\"><b>Your mind turns to ash as the burning flames engulf your very soul and images of Nar'Sie begin to bombard the last remnants of mental resistance."
-						else 						M << "<font color=\"red\"><b>Your entire broken soul and being is engulfed in corruption and flames as your mind shatters away into nothing."
 						return 0*/
 				initial_message = 1
 				if (target.species && (target.species.flags & NO_PAIN))

@@ -601,10 +601,6 @@ Note that amputating the affected organ does in fact remove the infection from t
 			parent.wounds += W
 			parent.update_damages()
 
-		// If any organs are attached to this, destroy them
-		for(var/datum/organ/external/O in children)
-			O.droplimb(1, no_explode, showmessage, damage)
-
 		// If any organs are attached to this, destroy them // MERGE1 Bay shit
 		//for(var/datum/organ/external/O in children)
 		//	O.droplimb(1)
@@ -619,10 +615,6 @@ Note that amputating the affected organ does in fact remove the infection from t
 						organ= new /obj/item/weapon/organ/head/posi(owner.loc, owner)
 					else
 						organ= new /obj/item/weapon/organ/head(owner.loc, owner)
-				owner.u_equip(owner.glasses)
-				owner.u_equip(owner.head)
-				owner.u_equip(owner.l_ear)
-				owner.u_equip(owner.r_ear)
 				owner.u_equip(owner.wear_mask)  MERGE1 */
 				organ = new /obj/item/weapon/organ/head(owner.loc, owner)
 				dropped_items = list(owner.glasses, owner.head, owner.l_ear, owner.r_ear, owner.wear_mask)

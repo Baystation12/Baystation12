@@ -39,13 +39,11 @@
 	singular_name = "gravel floor tile"
 	desc = "A patch of gravel and grass like they often use in parks."
 	icon_state = "tile_gravel"
-	w_class = 3.0
 	force = 1.0
 	throwforce = 1.0
 	throw_speed = 5
 	throw_range = 20
-	flags = FPRINT | TABLEPASS | CONDUCT
-	max_amount = 60
+	flags = CONDUCT
 	origin_tech = "biotech=1"
 
 /*

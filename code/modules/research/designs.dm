@@ -542,9 +542,6 @@ datum/design/circuit/mecha/durand_main
 	name = "'Durand' central control"
 	id = "durand_main"
 	req_tech = list("programming" = 4)
-	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
-	build_path = "/obj/item/weapon/circuitboard/mecha/durand/main"
 	locked = 1
 	build_path = /obj/item/weapon/circuitboard/mecha/durand/main
 

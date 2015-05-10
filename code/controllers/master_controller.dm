@@ -33,7 +33,6 @@ datum/controller/game_controller
 
 	var/last_thing_processed
 	var/mob/list/expensive_mobs = list()
-	var/rebuild_active_areas = 0
 
 	var/list/shuttle_list	                    // For debugging and VV
 	var/datum/random_map/ore/asteroid_ore_map   // For debugging and VV.
@@ -336,6 +335,11 @@ datum/controller/game_controller/proc/process_pipenets()
 	last_thing_processed = /datum/powernet
 	for(var/datum/powernet/Powernet in powernets)
 		Powernet.reset()
+
+	// This is necessary to ensure powersinks are always the first devices that drain power from powernet.
+	// Otherwise APCs or other stuff go first, resulting in bad things happening.
+	for(var/obj/item/device/powersink/S in processing_objects)
+		S.drain()
 
 datum/controller/game_controller/proc/process_nano()
 	last_thing_processed = /datum/nanoui

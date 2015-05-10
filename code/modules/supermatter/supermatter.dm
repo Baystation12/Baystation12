@@ -166,42 +166,15 @@
 				announce_warning()
 			explode()
 	else if(damage > warning_point) // while the core is still damaged and it's still worth noting its status
-		shift_light(5, warning_color)   
 		/*if((world.timeofday - lastwarning) / 10 >= WARNING_DELAY)     // Our old SM Code
-			var/stability = num2text(round((damage / explosion_point) * 100))
-			var/alert_msg
-
-			if(damage > emergency_point)
-				shift_light(7, emergency_color)
-				alert_msg = addtext(emergency_alert, " Instability: ",stability,"%")
-				lastwarning = world.timeofday
+		shift_light(5, warning_color)
 				for(var/client/C in admins)
 					C << 'sound/ambience/alarm4.ogg'
 				message_admins("Got some noob engineers this round the Supermatter is about to blow! (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</a>) (<A HREF='?_src_=holder;deletesm=\ref[usr]'>Delete!</A>)")
 
-			else if(damage >= damage_archived) // The damage is still going up
-				alert_msg = addtext(warning_alert," Instability: ",stability,"%")
-				lastwarning = world.timeofday - 150
 				message_admins("Warning...you best keep an eye on the Supermatter just in case. (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</a>)")
 
-			else // Phew, we're safe
-				alert_msg = safe_alert
-				lastwarning = world.timeofday
 				message_admins("Supermatter crystal is now safe")
-
-			if(!istype(L, /turf/space) && alert_msg)
-				radio.autosay(alert_msg, "Supermatter Monitor")
-
-		if(damage > explosion_point)
-			for(var/mob/living/mob in living_mob_list)
-				if(loc.z == mob.loc.z)
-					if(istype(mob, /mob/living/carbon/human))
-						//Hilariously enough, running into a closet should make you get hit the hardest.
-						var/mob/living/carbon/human/H = mob
-						H.hallucination += max(50, min(300, DETONATION_HALLUCINATION * sqrt(1 / (get_dist(mob, src) + 1)) ) )
-					var/rads = DETONATION_RADS * sqrt( 1 / (get_dist(mob, src) + 1) )
-					mob.apply_effect(rads, IRRADIATE)
-
 			explode()*/
 		if(damage > emergency_point)
 			shift_light(7, emergency_color)

@@ -60,7 +60,8 @@
 /mob/living/carbon/human/proc/handle_organs(var/manualForce = 0)
 
 	number_wounds = 0
-	var/force_process = manualForce
+	//var/force_process = manualForce
+	var/force_process = 0
 	var/damage_this_tick = getBruteLoss() + getFireLoss() + getToxLoss()
 	if(damage_this_tick > last_dam)
 		force_process = 1

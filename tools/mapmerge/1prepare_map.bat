@@ -1,9 +1,7 @@
 set MAPFILE=Mutizphoenix2.dmm
-/*SET z_levels=6
-cd ../../maps
 
-FOR /L %%i IN (1,1,%z_levels%) DO (
-  copy exodus-%%i.dmm exodus-%%i.dmm.backup
-)
-*/
+cd ../../maps
+copy %MAPFILE% %MAPFILE%.backup
+
 pause
+

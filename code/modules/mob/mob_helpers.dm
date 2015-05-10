@@ -86,10 +86,26 @@
 /mob/living/silicon/isSilicon()
 	return 1
 
-/mob/proc/isAI()
+/*mob/proc/isAI()
 	return 0
 
 /mob/living/silicon/ai/isAI()
+	return 1
+
+/mob/proc/isSynthetic()
+	return 0
+
+/mob/living/carbon/human/isSynthetic()
+	return species.flags & IS_SYNTHETIC
+
+/mob/living/silicon/isSynthetic()
+	return 1
+*/
+
+/mob/proc/isMobAI()
+	return 0
+
+/mob/living/silicon/ai/isMobAI()
 	return 1
 
 /mob/proc/isSynthetic()

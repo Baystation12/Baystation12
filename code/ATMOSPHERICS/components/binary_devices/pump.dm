@@ -19,7 +19,6 @@ Thus, the two variables affect pump operation are set in New():
 
 	name = "gas pump"
 	desc = "A pump"
-	var/on = 0
 	var/badpump = 0
 	var/on = 0
 	var/alerted = 0

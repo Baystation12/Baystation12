@@ -102,6 +102,13 @@
 	permeability_coefficient = 0.01
 	armor = list(melee = 40, bullet = 5, laser = 20,energy = 5, bomb = 35, bio = 100, rad = 80)
 
+//Orange emergency space suit
+/obj/item/clothing/head/helmet/space/emergency
+	name = "Emergency Space Helmet"
+	icon_state = "emergencyhelm"
+	item_state = "emergencyhelm"
+	desc = "A simple helmet with a built in light, smells like mothballs."
+
 /obj/item/clothing/suit/armor/clown
 	name = "clown's armor"
 	desc = "A bulky, heavy-duty piece of exclusive Clown armor. Honk!"

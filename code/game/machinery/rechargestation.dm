@@ -167,15 +167,6 @@
 				if (H.species && H.species.flags & IS_SYNTHETIC)
 					go_in(H)
 
-	proc
-		build_icon()
-			if(NOPOWER|BROKEN)
-				if(src.occupant)
-					icon_state = "borgcharger1"
-				else
-					icon_state = "borgcharger0"
-			else
-				icon_state = "borgcharger0"
 /obj/machinery/recharge_station/proc/build_icon()
 	if(NOPOWER|BROKEN)
 		if(occupant)
@@ -185,23 +176,6 @@
 	else
 		icon_state = "borgcharger0"
 
-		process_occupant()
-			if(src.occupant)
-				if (istype(occupant, /mob/living/silicon/robot))
-					var/mob/living/silicon/robot/R = occupant
-					if(R.module)
-						R.module.respawn_consumable(R)
-					if(!R.cell)
-						return
-					if(!R.cell.fully_charged())
-						var/diff = min(R.cell.maxcharge - R.cell.charge, 250) 	// Capped at 250 charge / tick
-						diff = min(diff, current_internal_charge) 				// No over-discharging
-						R.cell.give(diff)
-						current_internal_charge -= diff
-					else
-						update_use_power(1)
-		go_out()
-			if(!( src.occupant ))
 		process_occupant()
 			if(src.occupant)
 				if (istype(occupant, /mob/living/silicon/robot))
@@ -245,16 +219,6 @@
 				R.module.respawn_consumable(R, charge_rate / 250)
 			if(!R.cell)
 				return
-			//for(var/obj/O in src)
-			//	O.loc = src.loc
-			if (src.occupant.client)
-				src.occupant.client.eye = src.occupant.client.mob
-				src.occupant.client.perspective = MOB_PERSPECTIVE
-			src.occupant.loc = src.loc
-			src.occupant = null
-			build_icon()
-			update_use_power(1)
-			return
 			//for(var/obj/O in src)
 			//	O.loc = src.loc
 			if (src.occupant.client)
@@ -373,11 +337,9 @@
 	add_fingerprint(usr)
 	build_icon()
 	update_use_power(1)
-	return
+	/*return
 			return
 			return
-
-
 	verb
 		move_eject()
 			set category = "Object"
@@ -391,4 +353,5 @@
 		move_inside()
 			set category = "Object"
 			set src in oview(1)
-			go_in(usr)
+			go_in(usr)*/
+	return

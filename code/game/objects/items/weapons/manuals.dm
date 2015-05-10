@@ -20,7 +20,7 @@
 		</head>
 
 		<body>
-			<iframe width='100%' height='97%' src="[config.wikiurl]Guide_to_construction&printable=yes&remove_links=1" frameborder="0" id="main_frame"></iframe>
+		<iframe width='100%' height='97%' src="[config.wikiurl]Guide_to_construction&printable=yes&remove_links=1" frameborder="0" id="main_frame"></iframe>
 		</body>
 
 		</html>
@@ -130,7 +130,8 @@
 				<li>Ensure that reactor temperature does not exceed 5000K. In event of reactor temperature exceeding 5000K, see EMERGENCY COOLING PROCEDURE.</li>
 				<li>In event of imminent and/or unavoidable delamination, see EJECTION PROCEDURE.</li>
 				</ol>
-				<br><h2>EMERGENCY COOLING PROCEDURE</h2>
+				<br>
+				<h2>EMERGENCY COOLING PROCEDURE</h2>
 				<ol>
 				<li>Open Emergency Cooling Valve 1 and Emergency Cooling Valve 2.</li>
 				<li>When reactor temperature returns to safe operating levels, close Emergency Cooling Valve 1 and Emergency Cooling Valve 2.</li>

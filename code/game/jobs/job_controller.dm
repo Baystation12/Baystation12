@@ -427,10 +427,21 @@ var/global/datum/controller/occupations/job_master
 						spawn_in_storage += thing
 					else
 						if(H.equip_to_slot_or_del(new G.path(H), G.slot))
-							H << "\blue Equipping you with [thing]!"
 							custom_equip_slots.Add(G.slot)
 						else
 							spawn_in_storage += thing
+			job.apply_fingerprints(H)
+			//If some custom items could not be equipped before, try again now.
+			for(var/thing in custom_equip_leftovers)
+				var/datum/gear/G = gear_datums[thing]
+				if(G.slot in custom_equip_slots)
+					spawn_in_storage += thing
+				else
+					if(H.equip_to_slot_or_del(new G.path(H), G.slot))
+						H << "\blue Equipping you with [thing]!"
+						custom_equip_slots.Add(G.slot)
+					else
+						spawn_in_storage += thing
 		else
 			H << "Your job is [rank] and the game just can't handle it! Please report this bug to an administrator."
 

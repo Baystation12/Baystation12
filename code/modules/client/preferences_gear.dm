@@ -195,7 +195,6 @@ var/global/list/gear_datums = list()
 /datum/gear/cargocap
 	display_name = "cap. cargo"
 	path = /obj/item/clothing/head/soft
-	cost = 2
 	slot = slot_head
 
 /datum/gear/corpcap
@@ -985,7 +984,6 @@ var/global/list/gear_datums = list()
 /datum/gear/digiboots
 	display_name = "digitigrade jackboots"
 	path = /obj/item/clothing/shoes/jackboots/digitigrade
-	cost = 2
 	slot = slot_shoes
 
 /datum/gear/sandal

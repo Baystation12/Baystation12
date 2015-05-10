@@ -10,7 +10,7 @@
 #define IDEAL_GAS_ENTROPY_CONSTANT 1164    // (mol^3 * s^3) / (kg^3 * L).
 
 // Radiation constants.
-#define STEFAN_BOLTZMANN_CONSTANT    5.6704e-8 // W/(m^2*K^4).4
+#define STEFAN_BOLTZMANN_CONSTANT    5.6704e-8 // W/(m^2*K^4).
 #define COSMIC_RADIATION_TEMPERATURE 3.15      // K.
 #define AVERAGE_SOLAR_RADIATION      200       // W/m^2. Kind of arbitrary. Really this should depend on the sun position much like solars.
 #define RADIATOR_OPTIMUM_PRESSURE    3771      // kPa at 20 C. This should be higher as gases aren't great conductors until they are dense. Used the critical pressure for air.
@@ -219,83 +219,10 @@
 #define HIDEEYES 4 // Glasses.
 #define HIDEFACE 8 // Dictates whether we appear as "Unknown".
 
-//ITEM INVENTORY SLOT BITMASKS
-#define SLOT_OCLOTHING 1
-#define SLOT_ICLOTHING 2
-#define SLOT_GLOVES 4
-#define SLOT_EYES 8
-#define SLOT_EARS 16
-#define SLOT_MASK 32
-#define SLOT_HEAD 64
-#define SLOT_FEET 128
-#define SLOT_ID 256
-#define SLOT_BELT 512
-#define SLOT_BACK 1024
-#define SLOT_POCKET 2048		//this is to allow items with a w_class of 3 or 4 to fit in pockets.
-#define SLOT_DENYPOCKET 4096	//this is to deny items with a w_class of 2 or 1 to fit in pockets.
 #define SLOT_NECK 8192
 #define SLOT_TWOEARS 16384
 #define SLOT_PDA 32768
 #define SLOT_LEGS 65536
-
-
-//FLAGS BITMASK
-#define STOPSPRESSUREDMAGE 1	//This flag is used on the flags variable for SUIT and HEAD items which stop pressure damage. Note that the flag 1 was previous used as ONBACK, so it is possible for some code to use (flags & 1) when checking if something can be put on your back. Replace this code with (inv_flags & SLOT_BACK) if you see it anywhere
-                                //To successfully stop you taking all pressure damage you must have both a suit and head item with this flag.
-#define TABLEPASS 2			// can pass by a table or rack
-
-#define MASKINTERNALS	8	// mask allows internals
-//#define SUITSPACE		8	// suit protects against space
-
-#define USEDELAY 	16		// 1 second extra delay on use (Can be used once every 2s)
-#define NODELAY 	32768	// 1 second attackby delay skipped (Can be used once every 0.2s). Most objects have a 1s attackby delay, which doesn't require a flag.
-#define NOSHIELD	32		// weapon not affected by shield
-#define CONDUCT		64		// conducts electricity (metal etc.)
-#define FPRINT		256		// takes a fingerprint
-#define ON_BORDER	512		// item has priority to check when entering or leaving
-#define NOBLUDGEON  4  // when an item has this it produces no "X has been hit by Y with Z" message with the default handler
-#define NOBLOODY	2048	// used to items if they don't want to get a blood overlay
-
-#define GLASSESCOVERSEYES	1024
-#define MASKCOVERSEYES		1024		// get rid of some of the other retardation in these flags
-#define HEADCOVERSEYES		1024		// feel free to realloc these numbers for other purposes
-#define MASKCOVERSMOUTH		2048		// on other items, these are just for mask/head
-#define HEADCOVERSMOUTH		2048
-
-#define THICKMATERIAL 1024		//From /tg: prevents syringes, parapens and hypos if the external suit or helmet (if targeting head) has this flag. Example: space suits, biosuit, bombsuits, thick suits that cover your body. (NOTE: flag shared with NOSLIP for shoes)
-#define NOSLIP		1024 		//prevents from slipping on wet floors, in space etc
-
-#define OPENCONTAINER	4096	// is an open container for chemistry purposes
-
-#define BLOCK_GAS_SMOKE_EFFECT 8192	// blocks the effect that chemical clouds would have on a mob --glasses, mask and helmets ONLY! (NOTE: flag shared with ONESIZEFITSALL)
-#define ONESIZEFITSALL 8192
-#define PHORONGUARD 16384			//Does not get contaminated by phoron.
-
-#define	NOREACT		16384 			//Reagents dont' react inside this container.
-
-#define BLOCKHEADHAIR 4             // temporarily removes the user's hair overlay. Leaves facial hair.
-#define BLOCKHAIR	32768			// temporarily removes the user's hair, facial and otherwise.
-
-//flags for pass_flags
-#define PASSTABLE	1
-#define PASSGLASS	2
-#define PASSGRILLE	4
-#define PASSBLOB	8
-
-//turf-only flags
-#define NOJAUNT		1
-
-
-//Bit flags for the flags_inv variable, which determine when a piece of clothing hides another. IE a helmet hiding glasses.
-#define HIDEGLOVES		1	//APPLIES ONLY TO THE EXTERIOR SUIT!!
-#define HIDESUITSTORAGE	2	//APPLIES ONLY TO THE EXTERIOR SUIT!!
-#define HIDEJUMPSUIT	4	//APPLIES ONLY TO THE EXTERIOR SUIT!!
-#define HIDESHOES		8	//APPLIES ONLY TO THE EXTERIOR SUIT!!
-#define HIDETAIL 		16	//APPLIES ONLY TO THE EXTERIOR SUIT!!
-#define HIDEMASK	1	//APPLIES ONLY TO HELMETS/MASKS!!
-#define HIDEEARS	2	//APPLIES ONLY TO HELMETS/MASKS!! (ears means headsets and such)
-#define HIDEEYES	4	//APPLIES ONLY TO HELMETS/MASKS!! (eyes means glasses)
-#define HIDEFACE	8	//APPLIES ONLY TO HELMETS/MASKS!! Dictates whether we appear as unknown.
 
 // Slots.
 #define slot_back        1
@@ -506,12 +433,11 @@
 #define SEC_LEVEL_RED   2
 #define SEC_LEVEL_DELTA 3
 
-//Security levels
-#define SEC_LEVEL_GREEN	0
-#define SEC_LEVEL_BLUE	1
-#define SEC_LEVEL_RED	2
-#define SEC_LEVEL_DELTA	3
 #define SEC_LEVEL_BLACK 4
+
+// Click cooldowns, in tenths of a second.
+#define CLICK_CD_MELEE 8
+#define CLICK_CD_RANGE 4
 
 // Click cooldowns, in tenths of a second.
 #define CLICK_CD_MELEE 8
@@ -519,37 +445,20 @@
 
 #define TRANSITIONEDGE 7 // Distance from edge to move to another z-level.
 
-/*var/list/liftable_structures = list(\
-	/obj/machinery/autolathe, \
-	/obj/machinery/constructable_frame, \
-	/obj/machinery/portable_atmospherics/hydroponics, \
-	/obj/machinery/computer, \
-	/obj/machinery/optable, \
-	/obj/structure/dispenser, \
-	/obj/machinery/gibber, \
-	/obj/machinery/microwave, \
-	/obj/machinery/vending, \
-	/obj/machinery/seed_extractor, \
-	/obj/machinery/space_heater, \
-	/obj/machinery/recharge_station, \
-	/obj/machinery/flasher, \
-	/obj/structure/stool, \
-	/obj/structure/closet, \
-	/obj/machinery/photocopier, \
-	/obj/structure/filingcabinet, \
-	/obj/structure/reagent_dispensers, \
-	/obj/machinery/portable_atmospherics/canister)
-*/
-//A set of constants used to determine which type of mute an admin wishes to apply:
-//Please read and understand the muting/automuting stuff before changing these. MUTE_IC_AUTO etc = (MUTE_IC << 1)
-//Therefore there needs to be a gap between the flags for the automute flags
-#define MUTE_IC			1
-#define MUTE_OOC		2
+
+// A set of constants used to determine which type of mute an admin wishes to apply.
+// Please read and understand the muting/automuting stuff before changing these. MUTE_IC_AUTO, etc. = (MUTE_IC << 1)
+// Therefore there needs to be a gap between the flags for the automute flags.
+#define MUTE_IC        1
+#define MUTE_OOC       2
 #define MUTE_LOOC		4
 #define MUTE_PRAY		8
 #define MUTE_ADMINHELP	16
 #define MUTE_DEADCHAT	31
 #define MUTE_ALL		62
+
+/*var/list/liftable_structures = list(\
+*/
 
 // Number of identical messages required to get the spam-prevention auto-mute thing to trigger warnings and automutes.
 #define SPAM_TRIGGER_WARNING  5
@@ -631,6 +540,7 @@
 #define R_MOD           8192
 #define R_MENTOR        16384
 #define R_HOST          32768
+
 #define R_MAXPERMISSION 32768 // This holds the maximum value for a permission. It is used in iteration, so keep it updated.
 
 //VIP Permissions
@@ -663,21 +573,20 @@
 #define R_MAXPERMISSION 65536 //This holds the maximum value for a permission. It is used in iteration, so keep it updated.
 
 
-
-//Preference toggles
-#define SOUND_ADMINHELP	1
-#define SOUND_MIDI		2
-#define SOUND_AMBIENCE	4
-#define SOUND_LOBBY		8
-#define CHAT_OOC		16
-#define CHAT_DEAD		32
-#define CHAT_GHOSTEARS	64
-#define CHAT_GHOSTSIGHT	128
-#define CHAT_PRAYER		256
-#define CHAT_RADIO		512
-#define CHAT_ATTACKLOGS	1024
-#define CHAT_DEBUGLOGS	2048
-#define CHAT_LOOC		4096
+// Preference toggles.
+#define SOUND_ADMINHELP 1
+#define SOUND_MIDI      2
+#define SOUND_AMBIENCE  4
+#define SOUND_LOBBY     8
+#define CHAT_OOC        16
+#define CHAT_DEAD       32
+#define CHAT_GHOSTEARS  64
+#define CHAT_GHOSTSIGHT 128
+#define CHAT_PRAYER     256
+#define CHAT_RADIO      512
+#define CHAT_ATTACKLOGS 1024
+#define CHAT_DEBUGLOGS  2048
+#define CHAT_LOOC       4096
 #define CHAT_GHOSTRADIO 8192
 #define SHOW_TYPING		16384
 #define CHAT_DEVSAY		32768
@@ -705,23 +614,9 @@
 #define BE_PAI        65536
 
 var/list/be_special_flags = list(
-	"Traitor" = BE_TRAITOR,
-	"Operative" = BE_OPERATIVE,
-	"Changeling" = BE_CHANGELING,
-	"Wizard" = BE_WIZARD,
-	"Malf AI" = BE_MALF,
-	"Revolutionary" = BE_REV,
-	"Xenomorph" = BE_ALIEN,
-	"pAI" = BE_PAI,
-	"Cultist" = BE_CULTIST,
-	"Monkey" = BE_MONKEY,
-	"Ninja" = BE_NINJA,
-	"Raider" = BE_RAIDER,
-	"Diona" = BE_PLANT,
 	"Mutineer" = BE_MUTINEER,
 	"Meme" = BE_MEME,
 	"Vampire" = BE_VAMPIRE
-	)
 	"Traitor"          = BE_TRAITOR,
 	"Operative"        = BE_OPERATIVE,
 	"Changeling"       = BE_CHANGELING,
@@ -737,8 +632,11 @@ var/list/be_special_flags = list(
 	"Diona"            = BE_PLANT,
 	"Mutineer"         = BE_MUTINEER,
 	"pAI"              = BE_PAI,
-	"Meme" 				= BE_MEME,
-	"Vampire" 			= BE_VAMPIRE
+	"Meme" 			   = BE_MEME,
+	"Vampire" 		   = BE_VAMPIRE
+	"Mutineer" 		   = BE_MUTINEER,
+	"Meme"			   = BE_MEME,
+	"Vampire"		   = BE_VAMPIRE
 )
 
 // Age limits on a character.
@@ -864,6 +762,7 @@ var/list/be_special_flags = list(
 #define COLOR_WHITE  "#FFFFFF"
 #define COLOR_BLACK  "#000000"
 #define COLOR_PURPLE 	"#993399"
+
 /*
  *	Germs and infections.
 */

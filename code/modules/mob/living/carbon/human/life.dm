@@ -93,7 +93,7 @@
 		handle_random_events()
 
 		//Check if we're on fire
-		handle_fire()
+		//handle_fire()
 
 		//stuff in the stomach
 		handle_stomach()

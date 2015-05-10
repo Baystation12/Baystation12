@@ -13,7 +13,6 @@
 	var/c_tag_order = 999
 	var/status = 1
 	anchored = 1.0
-	var/panel_open = 0 // 0 = Closed / 1 = Open
 	var/invuln = null
 	var/bugged = 0
 	var/obj/item/weapon/camera_assembly/assembly = null

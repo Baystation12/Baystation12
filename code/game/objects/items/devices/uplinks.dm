@@ -254,6 +254,7 @@ datum/nano_item_lists
 		if(href_list["menu"])
 			nanoui_menu = text2num(href_list["menu"])
 			update_nano_data(href_list["id"])
+
 /*
 			var/obj/I = new UI.path(get_turf(usr))
 			if(ishuman(usr))
@@ -267,6 +268,7 @@ datum/nano_item_lists
 				var/mob/living/carbon/human/A = usr
 				A.put_in_any_hand_if_possible(I)
 			purchase_log += "[usr] ([usr.ckey]) bought [I]."*/
+
 	interact(usr)
 	return 1
 

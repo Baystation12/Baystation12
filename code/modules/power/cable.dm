@@ -80,10 +80,7 @@ By design, d1 is the smallest direction and d2 is the highest
 	d2 = text2num( copytext( icon_state, dash+1 ) )
 
 	var/turf/T = src.loc			// hide if turf is not intact
-
-	if(level==1)
-		if(T)
-			hide(T.intact)
+	if(level==1) hide(T.intact)
 	cable_list += src //add it to the global cable list
 
 
@@ -654,10 +651,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 				color = COLOR_RED
 		user << "<span class='notice'>You draw over the cable changing its colour.</span>"
 		src.color = color
-		src.updateicon()
-		src.update_wclass()
 		return
-
 	else if(istype(W, /obj/item/stack/cable_coil))
 		var/obj/item/stack/cable_coil/C = W
 		if(C.get_amount() >= get_max_amount())

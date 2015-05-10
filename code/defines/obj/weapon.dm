@@ -328,26 +328,6 @@
 	w_class = 2.0
 	flags = NOSHIELD
 
-/obj/item/weapon/table_parts/reinforced
-	name = "reinforced table parts"
-	desc = "Hard table parts. Well...harder..."
-	icon = 'icons/obj/items.dmi'
-	icon_state = "reinf_tableparts"
-	matter = list("metal" = 7500)
-	flags = FPRINT | TABLEPASS| CONDUCT
-
-/obj/item/weapon/table_parts/wood
-	name = "wooden table parts"
-	desc = "Keep away from fire."
-	icon_state = "wood_tableparts"
-	flags = null
-
-/obj/item/weapon/table_parts/gambling
-	name = "gamble table parts"
-	desc = "Keep away from security."
-	icon_state = "gamble_tableparts"
-	flags = null
-
 /obj/item/weapon/wire
 	desc = "This is just a simple piece of regular insulated wire."
 	name = "wire"

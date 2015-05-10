@@ -105,7 +105,6 @@
 	var/global/list/status_overlays_lighting
 	var/global/list/status_overlays_environ
 	luminosity = 2
-
 /obj/machinery/power/apc/updateDialog()
 	if (stat & (BROKEN|MAINT))
 		return

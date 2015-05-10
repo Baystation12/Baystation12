@@ -2943,7 +2943,6 @@
 	bitesize = 3
 	New()
 		..()
-		reagents.add_reagent("nutriment", 7)
 		reagents.add_reagent("condensedcapsaicin", 30)
 
 /obj/item/weapon/reagent_containers/food/snacks/rawcutlet

@@ -922,30 +922,6 @@ proc/anim(turf/location as turf,target as mob|obj,a_icon,a_icon_state as text,fl
 					refined_trg -= B
 					continue moving
 
-	var/list/doors = new/list()
-
-	if(toupdate.len)
-		for(var/turf/simulated/T1 in toupdate)
-			for(var/obj/machinery/door/D2 in T1)
-				doors += D2
-			/*if(T1.parent)
-				air_master.groups_to_rebuild += T1.parent
-			else
-				air_master.tiles_to_update += T1*/
-
-	if(fromupdate.len)
-		for(var/turf/simulated/T2 in fromupdate)
-			for(var/obj/machinery/door/D2 in T2)
-				doors += D2
-			/*if(T2.parent)
-				air_master.groups_to_rebuild += T2.parent
-			else
-				air_master.tiles_to_update += T2*/
-
-	for(var/obj/O in doors)
-		O:update_nearby_tiles(1)
-
-
 
 proc/DuplicateObject(obj/original, var/perfectcopy = 0 , var/sameloc = 0)
 	if(!original)

@@ -48,6 +48,7 @@
 		if("help")
 
 			if(istype(H) && health < config.health_threshold_crit)
+
 				if((H.head && (H.head.flags & HEADCOVERSMOUTH)) || (H.wear_mask && (H.wear_mask.flags & MASKCOVERSMOUTH)))
 					H << "\blue <B>Remove your mask!</B>"
 					return 0
@@ -195,6 +196,7 @@
 					M.handle_bloodsucking(src)
 					return
 			//end vampire codes
+
 			if(!istype(H))
 				attack_generic(H,rand(1,3),"punched")
 				return
@@ -243,7 +245,6 @@
 						 2.2% chance you miss
 
 			/*M.attack_log += text("\[[time_stamp()]\] <font color='red'>[pick(attack.attack_verb)]ed [src.name] ([src.ckey])</font>")
-			src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been [pick(attack.attack_verb)]ed by [M.name] ([M.ckey])</font>")
 			msg_admin_attack("[key_name(M)] [pick(attack.attack_verb)]ed [key_name(src)] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>)")*/
 					If aiming for something else:
 						23.2% chance you hit your target organ

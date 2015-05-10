@@ -320,6 +320,9 @@ datum/preferences
 	dat += "<br><table><tr><td><b>Body</b> "
 	dat += "(<a href='?_src_=prefs;preference=all;task=random'>&reg;</A>)"
 	dat += "<br>"
+	dat += "Species: <a href='?src=\ref[user];preference=species;task=change'>[species]</a><br>"
+	dat += "Secondary Language:<br><a href='byond://?src=\ref[user];preference=language;task=input'>[language]</a><br>"
+	dat += "Blood Type: <a href='byond://?src=\ref[user];preference=b_type;task=input'>[b_type]</a><br>"
 	dat += "Skin Tone: <a href='?_src_=prefs;preference=s_tone;task=input'>[-s_tone + 35]/220<br></a>"
 	//dat += "Skin pattern: <a href='byond://?src=\ref[user];preference=skin_style;task=input'>Adjust</a><br>"
 	dat += "Needs Glasses: <a href='?_src_=prefs;preference=disabilities'><b>[disabilities == 0 ? "No" : "Yes"]</b></a><br>"
@@ -886,6 +889,14 @@ datum/preferences
 	if(!user)	return
 
 	if(!istype(user, /mob/new_player) && !istype(user, /mob/dead/observer))	return
+	/*if(!istype(user, /mob/new_player))	return
+
+	if(href_list["preference"] == "open_whitelist_forum")
+		if(config.forumurl)
+			user << link(config.forumurl)
+		else
+			user << "<span class='danger'>The forum URL is not set in the server configuration.</span>"
+			return*/
 
 	if(href_list["preference"] == "job")
 		switch(href_list["task"])
@@ -1228,18 +1239,6 @@ datum/preferences
 					user << browse(null, "window=species")
 					var/prev_species = species
 					/*var/whitelisted = 0
-
-					if(config.usealienwhitelist) //If we're using the whitelist, make sure to check it!
-						for(var/S in whitelisted_species)
-							if(is_alien_whitelisted(user,S))
-								new_species += S
-								whitelisted = 1
-						if(!whitelisted)
-							alert(user, "You cannot change your species as you need to be whitelisted. If you wish to be whitelisted contact an admin in-game, on the forums, or on IRC.")
-					else //Not using the whitelist? Aliens for everyone!
-						new_species = whitelisted_species
-
-					species = input("Please select a species", "Character Generation", null) in new_species
 					if(jobban_isbanned(usr, species))
 						usr << "\red <B>You have been banned from using [species] if you wish to be unbanned contact an admin in-game or on the forums</B>"
 						species = "Human"

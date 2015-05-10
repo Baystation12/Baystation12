@@ -180,6 +180,7 @@
 	"hal","ket","jurl","mah","tul","cresh","azu","ragh", "mro", "mra")
 
 /datum/language/tajaran/get_random_name(var/gender)
+
 	var/new_name = ..(gender,1)
 	if(prob(80))
 		new_name += " [pick(list("Hadii","Kaytam","Zhan-Khazan","Hharar","Njarir'Akhan"))]"
@@ -216,8 +217,8 @@
 	ask_verb = "creels"
 	exclaim_verb = "SHRIEKS"
 	colour = "vox"
-	key = "v"
-	flags = RESTRICTED
+	key = "5"
+	flags = WHITELISTED
 	syllables = list("ti","ti","ti","hi","hi","ki","ki","ki","ki","ya","ta","ha","ka","ya","chi","cha","kah", \
 	"SKRE","AHK","EHK","RAWK","KRA","AAA","EEE","KI","II","KRI","KA")
 

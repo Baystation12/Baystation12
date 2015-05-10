@@ -182,7 +182,6 @@
 		var/text = "<FONT size = 2><B>The traitors were:</B></FONT>"
 		for(var/datum/mind/traitor in traitors)
 			var/traitorwin = 1
-			text += printplayer(traitor)
 			text += "<br><b>Uplink Items: </b>"
 			if(traitor.uplinkitems != 0)
 				for(var/A in traitor.uplinkitems)

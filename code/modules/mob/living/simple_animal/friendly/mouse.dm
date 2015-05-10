@@ -99,6 +99,10 @@
 	verbs += /mob/living/proc/ventcrawl
 	verbs += /mob/living/proc/hide
 
+	if(name == initial(name))
+		name = "[name] ([rand(1, 1000)])"
+	real_name = name
+
 	if(!body_color)
 		body_color = pick( list("brown","gray","white") )
 
@@ -168,6 +172,11 @@
 /mob/living/simple_animal/mouse/brown/Tom
 	name = "Tom"
 	desc = "Jerry the cat is not amused."
+
+/mob/living/simple_animal/mouse/brown/Tom/New()
+	..()
+	// Change my name back, don't want to be named Tom (666)
+	name = initial(name)
 
 /mob/living/simple_animal/mouse/can_use_vents()
 	return

@@ -165,7 +165,6 @@
 				continue
 			if(X.key!=key && X.key!=AA.key && (X.holder.rights & R_ADMIN) || (X.holder.rights & R_MOD) )
 				X << "<B><font color='blue'>PM: [key_name(src)]</B> \blue [msg]</font>" //inform X
-
 /client/proc/cmd_admin_irc_pm()
 	if(prefs.muted & MUTE_ADMINHELP)
 		src << "<font color='red'>Error: Private-Message: You are unable to use PM-s (muted).</font>"

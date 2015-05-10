@@ -551,4 +551,19 @@ As such, it's hard-coded for now. No reason for it not to be, really.
 			internals.icon_state = "internal1"
 		else
 			src << "<span class='danger'>You forgot to turn on your internals! Quickly, toggle the valve!</span>"
+		if(!istype(U:gloves, /obj/item/clothing/gloves/space_ninja))
+			U << "\red <B>ERROR</B>: 110223 \black UNABLE TO LOCATE HAND GEAR\nABORTING..."
+			return 0
+
+		affecting = U
+		canremove = 0
+		slowdown = 0
+		n_hood = U:head
+		n_hood.canremove=0
+		n_shoes = U:shoes
+		n_shoes.canremove=0
+		n_shoes.slowdown--
+		n_gloves = U:gloves
+		n_gloves.canremove=0
+
 	return 1

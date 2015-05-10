@@ -107,7 +107,7 @@ Please contact me on #coderbus IRC. ~Carn x
 //Human Overlays Indexes/////////
 #define MUTATIONS_LAYER			1
 #define DAMAGE_LAYER			2
-#define SURGERY_LEVEL			3		//bs12 specific.		//bs12 specific. this hack is probably gonna come back to haunt me
+#define SURGERY_LEVEL			3		//bs12 specific.
 #define UNIFORM_LAYER			4
 #define ID_LAYER				5
 #define SHOES_LAYER				6

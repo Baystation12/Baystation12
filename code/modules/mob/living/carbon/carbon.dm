@@ -530,3 +530,4 @@
 	Stun(stun_duration)
 	Weaken(Floor(stun_duration/2))
 	return 1
+

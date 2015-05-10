@@ -89,10 +89,11 @@ var/event       = 0
 var/hadevent    = 0
 var/blobevent   = 0
 var/diary = null
-var/href_logfile = null
 var/station_name = "NSS Phoenix"
-var/game_version = "Baystation12"
 var/diary          = null
+var/href_logfile   = null
+var/station_name   = "NSS Exodus"
+var/game_version   = "Baystation12"
 var/changelog_hash = ""
 var/game_year      = (text2num(time2text(world.realtime, "YYYY")) + 544)
 
@@ -199,25 +200,7 @@ var/datum/subsystem/alarm/alarm_manager	= new() // Alarm Manager, the manager fo
 
 var/list/awaydestinations = list() // Away missions. A list of landmarks that the warpgate can take you to.
 
-#define SPEED_OF_LIGHT 3e8 //not exact but hey!
-#define SPEED_OF_LIGHT_SQ 9e+16
-#define FIRE_DAMAGE_MODIFIER 0.0215 //Higher values result in more external fire damage to the skin (default 0.0215)
-#define AIR_DAMAGE_MODIFIER 2.025 //More means less damage from hot air scalding lungs, less = more damage. (default 2.025)
-#define INFINITY 1.#INF
-
-	//Don't set this very much higher then 1024 unless you like inviting people in to dos your server with message spam
-#define MAX_MESSAGE_LEN 1024
-#define MAX_PAPER_MESSAGE_LEN 3072
 #define MAX_RECORDS 6144
-#define MAX_BOOK_MESSAGE_LEN 9216
-#define MAX_NAME_LEN 26
-
-#define shuttle_time_in_station 1800 // 3 minutes in the station
-#define shuttle_time_to_arrive 6000 // 10 minutes to arrive
-
-	//away missions
-var/list/awaydestinations = list()	//a list of landmarks that the warpgate can take you to
-
 // MySQL configuration
 var/sqladdress = "localhost"
 var/sqlport    = "3306"

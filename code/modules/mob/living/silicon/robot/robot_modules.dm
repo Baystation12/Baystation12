@@ -52,7 +52,6 @@
 	R.add_language("Rootspeak", 0)
 	R.add_language("Encoded Audio Language", 0)
 	R.add_language("Xenomorph", 0)
-
 /obj/item/weapon/robot_module/standard
 	name = "standard robot module"
 
@@ -133,6 +132,7 @@
 	src.emag = new /obj/item/weapon/reagent_containers/spray(src)
 	src.emag.reagents.add_reagent("pacid", 250)
 	src.emag.name = "Polyacid spray"
+
 	var/datum/matter_synth/medicine = new /datum/matter_synth/medicine(15000)
 	synths += medicine
 
@@ -176,6 +176,7 @@
 	..()
 	src.modules += new /obj/item/device/flash(src)
 	//src.modules += new /obj/item/borg/sight/meson(src)
+	//src.modules += new /obj/item/borg/sight/meson(src)
 	src.modules += new /obj/item/weapon/extinguisher(src)
 	src.modules += new /obj/item/weapon/rcd/borg(src)
 	src.modules += new /obj/item/weapon/screwdriver(src)
@@ -198,6 +199,7 @@
 	var/obj/item/stack/rods/cyborg/R = new /obj/item/stack/rods/cyborg(src)
 	R.synths = list(metal)
 	src.modules += R
+
 	var/obj/item/stack/sheet/plasteel/cyborg/S = new /obj/item/stack/sheet/plasteel/cyborg(src)
 	S.synths = list(plasteel)
 	src.modules += S
@@ -272,6 +274,7 @@
 /obj/item/weapon/robot_module/security/New()
 	..()
 	src.modules += new /obj/item/device/flash(src)
+	//src.modules += new /obj/item/borg/sight/hud/sec(src)
 	//src.modules += new /obj/item/borg/sight/hud/sec(src)
 	src.modules += new /obj/item/weapon/handcuffs/cyborg(src)
 	src.modules += new /obj/item/weapon/melee/baton/robot(src)
@@ -378,6 +381,12 @@
 
 /obj/item/weapon/robot_module/clerical/add_languages(var/mob/living/silicon/robot/R)
 	//full set of languages
+	R.add_language("Aviachirp", 1)
+	R.add_language("Chittin", 1)
+	R.add_language("Vox-pidgin", 1)
+	R.add_language("Rootspeak", 1)
+	R.add_language("Encoded Audio Language", 1)
+	R.add_language("Xenomorph", 0)
 	R.add_language("Sol Common", 1)
 	R.add_language("Sinta'unathi", 1)
 	R.add_language("Siik'maas", 1)
@@ -386,12 +395,6 @@
 	R.add_language("Rootspeak", 1)
 	R.add_language("Tradeband", 1)
 	R.add_language("Gutter", 1)
-	R.add_language("Aviachirp", 1)
-	R.add_language("Chittin", 1)
-	R.add_language("Vox-pidgin", 1)
-	R.add_language("Rootspeak", 1)
-	R.add_language("Encoded Audio Language", 1)
-	R.add_language("Xenomorph", 0)
 
 /obj/item/weapon/robot_module/butler/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
 	var/obj/item/weapon/reagent_containers/food/condiment/enzyme/E = locate() in src.modules
@@ -406,6 +409,7 @@
 /obj/item/weapon/robot_module/miner/New()
 	..()
 	src.modules += new /obj/item/device/flash(src)
+	//src.modules += new /obj/item/borg/sight/meson(src)
 	//src.modules += new /obj/item/borg/sight/meson(src)
 	src.modules += new /obj/item/weapon/wrench(src)
 	src.modules += new /obj/item/weapon/screwdriver(src)
@@ -436,12 +440,13 @@
 /obj/item/weapon/robot_module/syndicate/add_languages(var/mob/living/silicon/robot/R)
 	//full set of languages
 	R.add_language("Sol Common", 1)
-	R.add_language("Sinta'unathi", 1)
 	R.add_language("Siik'maas", 1)
+	R.add_language("Tradeband", 1)
+	R.add_language("Sinta'unathi", 0)
 	R.add_language("Siik'tajr", 0)
-	R.add_language("Skrellian", 1)
 	R.add_language("Rootspeak", 1)
 	R.add_language("Tradeband", 1)
+	R.add_language("Skrellian", 0)
 	R.add_language("Gutter", 1)
 	R.add_language("Aviachirp", 1)
 	R.add_language("Chittin", 1)

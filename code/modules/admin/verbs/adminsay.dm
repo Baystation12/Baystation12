@@ -9,7 +9,6 @@
 
 	log_admin("[key_name(src)] : [msg]")
 	log_admin_single("[key_name(src)] : [msg]")
-
 	var/color = "adminsay"
 	if(check_rights(R_PERMISSIONS,0))
 		color = "headminsay"
@@ -33,12 +32,8 @@
 
 	if (!msg)
 		return
-	var/color = "mod"
-	if (check_rights(R_ADMIN,0))
-		color = "adminmod"
 
 /*	var/channel = "MOD:"
-	if(config.mods_are_mentors)
 		channel = "MENTOR:"*/
 	var/channel = "STAFF:"
 	var/sender_name = src.key

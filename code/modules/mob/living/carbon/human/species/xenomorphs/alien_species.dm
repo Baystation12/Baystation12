@@ -142,7 +142,6 @@
 	name = "Xenomorph Drone"
 	caste_name = "drone"
 	weeds_plasma_rate = 30
-	slowdown = 1
 	tail = "xenos_drone_tail"
 	rarity_value = 5
 	unarmed_type = /datum/unarmed_attack/alien/drone
