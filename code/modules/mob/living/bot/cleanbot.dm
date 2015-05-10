@@ -226,7 +226,7 @@
 				beacon_freq = freq
 		if("screw")
 			screwloose = !screwloose
-			usr << "<span class='notice>You twiddle the screw.</span>"
+			usr << "<span class='notice'>You twiddle the screw.</span>"
 		if("oddbutton")
 			oddbutton = !oddbutton
 			usr << "<span class='notice'>You press the weird button.</span>"
