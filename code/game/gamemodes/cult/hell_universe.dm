@@ -73,9 +73,8 @@ In short:
 		spess.overlays += I
 
 /datum/universal_state/hell/proc/AmbientSet()
-	for(var/turf/T in world)
-		if(istype(T, /turf/space))	continue
-		T.update_lumcount(1, 255, 0, 0, 0)
+	for(var/atom/movable/lighting_overlay/L in world)
+		L.update_lumcount(1, 0, 0)
 
 /datum/universal_state/hell/proc/MiscSet()
 	for(var/turf/simulated/floor/T in world)

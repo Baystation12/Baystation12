@@ -26,7 +26,7 @@
 /atom/Destroy()
 	. = ..()
 	density = 0
-	SetOpacity(0)
+	set_opacity(0)
 
 	if(reagents)
 		qdel(reagents)

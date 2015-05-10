@@ -37,7 +37,7 @@ var/const/HOLOPAD_MODE = RANGE_BASED
 	icon_state = "holopad0"
 
 	layer = TURF_LAYER+0.1 //Preventing mice and drones from sneaking under them.
-	
+
 	var/power_per_hologram = 500 //per usage per hologram
 	idle_power_usage = 5
 	use_power = 1
@@ -120,10 +120,10 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 	hologram.layer = FLY_LAYER//Above all the other objects/mobs. Or the vast majority of them.
 	hologram.anchored = 1//So space wind cannot drag it.
 	hologram.name = "[A.name] (Hologram)"//If someone decides to right click.
-	hologram.SetLuminosity(2)	//hologram lighting
+	hologram.set_light(2)	//hologram lighting
 	hologram.color = color //painted holopad gives coloured holograms
 	masters[A] = hologram
-	SetLuminosity(2)			//pad lighting
+	set_light(2)			//pad lighting
 	icon_state = "holopad1"
 	A.holo = src
 	return 1
@@ -134,7 +134,7 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 	qdel(masters[user])//Get rid of user's hologram
 	masters -= user //Discard AI from the list of those who use holopad
 	if (!masters.len)//If no users left
-		SetLuminosity(0)			//pad lighting (hologram lighting will be handled automatically since its owner was deleted)
+		set_light(0)			//pad lighting (hologram lighting will be handled automatically since its owner was deleted)
 		icon_state = "holopad0"
 	return 1
 
@@ -144,11 +144,11 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 		if((stat & NOPOWER) || !active_ai)
 			clear_holo(master)
 			continue
-		
+
 		if((HOLOPAD_MODE == RANGE_BASED && (get_dist(master.eyeobj, src) > holo_range)))
 			clear_holo(master)
 			continue
-		
+
 		if(HOLOPAD_MODE == AREA_BASED)
 			var/area/holo_area = get_area(src)
 			var/area/eye_area = get_area(master.eyeobj)

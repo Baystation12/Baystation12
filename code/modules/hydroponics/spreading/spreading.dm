@@ -145,14 +145,13 @@
 		color = icon_colour
 	// Apply colour and light from seed datum.
 	if(seed.get_trait(TRAIT_BIOLUM))
-		SetLuminosity(1+round(seed.get_trait(TRAIT_POTENCY)/20))
+		var/clr
 		if(seed.get_trait(TRAIT_BIOLUM_COLOUR))
-			l_color = seed.get_trait(TRAIT_BIOLUM_COLOUR)
-		else
-			l_color = null
+			clr = seed.get_trait(TRAIT_BIOLUM_COLOUR)
+		set_light(1+round(seed.get_trait(TRAIT_POTENCY)/20), l_color = clr)
 		return
 	else
-		SetLuminosity(0)
+		set_light(0)
 
 /obj/effect/plant/proc/refresh_icon()
 	var/growth = min(max_growth,round(health/growth_threshold))

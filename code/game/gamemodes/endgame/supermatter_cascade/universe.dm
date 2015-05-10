@@ -110,10 +110,9 @@ AUTOMATED ALERT: Link to [command_name()] lost."}
 		spess.overlays += "end01"
 
 /datum/universal_state/supermatter_cascade/proc/AmbientSet()
-	for(var/turf/T in world)
-		if(istype(T, /turf/space))	continue
-		if(!(T.z in config.admin_levels))
-			T.update_lumcount(1, 160, 255, 0, 0)
+	for(var/atom/movable/lighting_overlay/L in world)
+		if(!(L.z in config.admin_levels))
+			L.update_lumcount(0.5, 1, 0)
 
 /datum/universal_state/supermatter_cascade/proc/MiscSet()
 	for (var/obj/machinery/firealarm/alm in world)

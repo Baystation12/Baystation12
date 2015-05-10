@@ -479,10 +479,10 @@
 /obj/structure/window/reinforced/polarized/proc/toggle()
 	if(opacity)
 		animate(src, color="#FFFFFF", time=5)
-		SetOpacity(0)
+		set_opacity(0)
 	else
 		animate(src, color="#222222", time=5)
-		SetOpacity(1)
+		set_opacity(1)
 
 
 
