@@ -17,12 +17,12 @@
 
 /turf/simulated/floor/engine/ex_act(severity)
 	switch(severity)
-		if(1.0)
+		if(0.0 to 1.0)
 			ChangeTurf(/turf/space)
 			qdel(src)
 			return
-		if(2.0)
-			if (prob(50))
+		if(1.0 to 1.5)
+			if (prob(20))
 				ChangeTurf(/turf/space)
 				qdel(src)
 				return

@@ -116,11 +116,11 @@
 
 /obj/machinery/power/am_control_unit/ex_act(severity)
 	switch(severity)
-		if(1.0)
+		if(0.0 to 1.0)
 			stability -= 60
-		if(2.0)
+		if(1.0 to 2.0)
 			stability -= 40
-		if(3.0)
+		if(2.0 to 3.0)
 			stability -= 20
 	check_stability()
 	return

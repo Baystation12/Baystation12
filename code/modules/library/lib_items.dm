@@ -54,18 +54,18 @@
 
 /obj/structure/bookcase/ex_act(severity)
 	switch(severity)
-		if(1.0)
+		if(0.0 to 1.0)
 			for(var/obj/item/weapon/book/b in contents)
 				qdel(b)
 			qdel(src)
 			return
-		if(2.0)
+		if(1.0 to 2.0)
 			for(var/obj/item/weapon/book/b in contents)
 				if (prob(50)) b.loc = (get_turf(src))
 				else qdel(b)
 			qdel(src)
 			return
-		if(3.0)
+		if(2.0 to 3.0)
 			if (prob(50))
 				for(var/obj/item/weapon/book/b in contents)
 					b.loc = (get_turf(src))

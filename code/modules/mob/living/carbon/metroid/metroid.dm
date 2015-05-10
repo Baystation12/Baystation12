@@ -177,17 +177,17 @@
 	var/b_loss = null
 	var/f_loss = null
 	switch (severity)
-		if (1.0)
+		if(0.0 to 1.0)
 			qdel(src)
 			return
 
-		if (2.0)
+		if(1.0 to 2.0)
 
 			b_loss += 60
 			f_loss += 60
 
 
-		if(3.0)
+		if(2.0 to 3.0)
 			b_loss += 30
 
 	adjustBruteLoss(b_loss)

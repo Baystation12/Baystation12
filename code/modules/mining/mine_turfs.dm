@@ -46,11 +46,11 @@
 
 /turf/simulated/mineral/ex_act(severity)
 	switch(severity)
-		if(2.0)
+		if(1.0 to 2.0)
 			if (prob(70))
 				mined_ore = 1 //some of the stuff gets blown up
 				GetDrilled()
-		if(1.0)
+		if(0.0 to 1.0)
 			mined_ore = 2 //some of the stuff gets blown up
 			GetDrilled()
 
@@ -406,12 +406,12 @@
 
 /turf/simulated/floor/plating/airless/asteroid/ex_act(severity)
 	switch(severity)
-		if(3.0)
+		if(2.0 to 3.0)
 			return
-		if(2.0)
+		if(1.0 to 2.0)
 			if (prob(70))
 				gets_dug()
-		if(1.0)
+		if(0.0 to 1.0)
 			gets_dug()
 	return
 

@@ -131,7 +131,9 @@
 	if(rotting)
 		cap = cap / 10
 
-	if(damage >= cap)
+	if(damage >= cap * 1.5)
+		dismantle_wall(1)
+	else if(damage >= cap)
 		dismantle_wall()
 	else
 		update_icon()
@@ -196,16 +198,11 @@
 
 /turf/simulated/wall/ex_act(severity)
 	switch(severity)
-		if(1.0)
+		if(0.0 to 1.0)
 			src.ChangeTurf(/turf/space)
 			return
-		if(2.0)
-			if(prob(75))
-				take_damage(rand(150, 250))
-			else
-				dismantle_wall(1,1)
-		if(3.0)
-			take_damage(rand(0, 250))
+		if(1.0 to 3.0)
+			take_damage( (3-severity) * damage_cap )
 		else
 	return
 

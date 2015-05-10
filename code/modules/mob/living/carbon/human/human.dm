@@ -99,7 +99,7 @@
 	var/b_loss = null
 	var/f_loss = null
 	switch (severity)
-		if (1.0)
+		if(0.0 to 1.0)
 			b_loss += 500
 			if (!prob(getarmor(null, "bomb")))
 				gib()
@@ -111,7 +111,7 @@
 //				var/atom/target = get_edge_target_turf(user, get_dir(src, get_step_away(user, src)))
 				//user.throw_at(target, 200, 4)
 
-		if (2.0)
+		if(1.0 to 2.0)
 			if (!shielded)
 				b_loss += 60
 
@@ -127,7 +127,7 @@
 			if (prob(70) && !shielded)
 				Paralyse(10)
 
-		if(3.0)
+		if(2.0 to 3.0)
 			b_loss += 30
 			if (prob(getarmor(null, "bomb")))
 				b_loss = b_loss/2

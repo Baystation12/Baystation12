@@ -222,10 +222,10 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 
 /obj/machinery/newscaster/ex_act(severity)
 	switch(severity)
-		if(1.0)
+		if(0.0 to 1.0)
 			qdel(src)
 			return
-		if(2.0)
+		if(1.0 to 2.0)
 			src.isbroken=1
 			if(prob(50))
 				qdel(src)

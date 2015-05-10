@@ -342,8 +342,8 @@ var/list/valid_secondary_effect_types = list(\
 
 /obj/machinery/artifact/ex_act(severity)
 	switch(severity)
-		if(1.0) qdel(src)
-		if(2.0)
+		if(0.0 to 1.0) qdel(src)
+		if(1.0 to 2.0)
 			if (prob(50))
 				qdel(src)
 			else
@@ -351,7 +351,7 @@ var/list/valid_secondary_effect_types = list(\
 					my_effect.ToggleActivate()
 				if(secondary_effect && (secondary_effect.trigger == TRIGGER_FORCE || secondary_effect.trigger == TRIGGER_HEAT) && prob(25))
 					secondary_effect.ToggleActivate(0)
-		if(3.0)
+		if(2.0 to 3.0)
 			if (my_effect.trigger == TRIGGER_FORCE || my_effect.trigger == TRIGGER_HEAT)
 				my_effect.ToggleActivate()
 			if(secondary_effect && (secondary_effect.trigger == TRIGGER_FORCE || secondary_effect.trigger == TRIGGER_HEAT) && prob(25))
