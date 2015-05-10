@@ -273,7 +273,7 @@ var/list/global/wall_cache = list()
 	radiate()
 	..()
 
-/turf/simulated/wall/Del()
+/turf/simulated/wall/Destroy()
 	clear_plants()
 	check_relatives()
 	..()

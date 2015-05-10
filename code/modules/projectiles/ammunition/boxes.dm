@@ -40,6 +40,10 @@
 	name = "magazine (.45 rubber)"
 	ammo_type = /obj/item/ammo_casing/c45r
 
+/obj/item/ammo_magazine/c45m/practice
+	name = "magazine (.45 practice)"
+	ammo_type = /obj/item/ammo_casing/c45p
+
 /obj/item/ammo_magazine/c45m/flash
 	name = "magazine (.45 flash)"
 	ammo_type = "/obj/item/ammo_casing/c45f"
@@ -90,6 +94,10 @@
 	name = "top mounted magazine (9mm rubber)"
 	ammo_type = /obj/item/ammo_casing/c9mmr
 
+/obj/item/ammo_magazine/mc9mmt/practice
+	name = "top mounted magazine (9mm practice)"
+	ammo_type = /obj/item/ammo_casing/c9mmp
+
 /obj/item/ammo_magazine/c45
 	name = "ammunition Box (.45)"
 	icon_state = "9mm"
@@ -129,6 +137,10 @@
 
 /obj/item/ammo_magazine/a556/empty
 	initial_ammo = 0
+
+/obj/item/ammo_magazine/a556/practice
+	name = "magazine (5.56mm practice)"
+	ammo_type = /obj/item/ammo_casing/a556p
 
 /obj/item/ammo_magazine/a50
 	name = "magazine (.50)"

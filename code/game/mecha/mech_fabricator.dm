@@ -193,9 +193,9 @@
 	if(time_coeff!=diff)
 		time_coeff = diff
 
-/obj/machinery/mecha_part_fabricator/Del()
+/obj/machinery/mecha_part_fabricator/Destroy()
 	for(var/atom/A in src)
-		del A
+		qdel(A)
 	..()
 	return
 
@@ -268,7 +268,7 @@
 	if(!istype(apart)) return 0
 	for(var/obj/O in part_set)
 		if(O.type == apart.type)
-			del apart
+			qdel(apart)
 			return 0
 	part_set[++part_set.len] = apart
 	return 1
@@ -511,7 +511,7 @@
 		src.updateUsrDialog()
 		sleep(30) //only sleep if called by user
 	var/found = 0
-	for(var/obj/machinery/computer/rdconsole/RDC in get_area(src))
+	for(var/obj/machinery/computer/rdconsole/RDC in get_area_all_atoms(get_area(src)))
 		if(!RDC.sync)
 			continue
 		found++
@@ -749,7 +749,7 @@
 		res.Move(src.loc)
 		result = res.amount
 	else
-		del res
+		qdel(res)
 	return result
 
 
@@ -795,7 +795,7 @@
 			if(src.resources["diamond"] >= 2000)
 				var/obj/item/stack/sheet/mineral/diamond/G = new /obj/item/stack/sheet/mineral/diamond(src.loc)
 				G.amount = round(src.resources["diamond"] / G.perunit)
-			del(src)
+			qdel(src)
 			return 1
 		else
 			user << "\red You can't load the [src.name] while it's opened."

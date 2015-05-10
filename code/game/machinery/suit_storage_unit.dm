@@ -76,12 +76,12 @@
 		if(1.0)
 			if(prob(50))
 				src.dump_everything() //So suits dont survive all the time
-			del(src)
+			qdel(src)
 			return
 		if(2.0)
 			if(prob(50))
 				src.dump_everything()
-				del(src)
+				qdel(src)
 			return
 		else
 			return
@@ -465,7 +465,7 @@
 		src.update_icon()
 
 //		for(var/obj/O in src)
-//			del(O)
+//			qdel(O)
 
 		src.add_fingerprint(usr)
 		src.updateUsrDialog()
@@ -511,7 +511,7 @@
 			//for(var/obj/O in src)
 			//	O.loc = src.loc
 			src.add_fingerprint(user)
-			del(G)
+			qdel(G)
 			src.updateUsrDialog()
 			src.update_icon()
 			return
@@ -612,10 +612,10 @@
 	wires = new(src)
 	target_department = departments[1]
 	target_species = species[1]
-	if(!target_department || !target_species) del(src)
+	if(!target_department || !target_species) qdel(src)
 
-/obj/machinery/suit_cycler/Del()
-	del(wires) // qdel
+/obj/machinery/suit_cycler/Destroy()
+	qdel(wires)
 	wires = null
 	..()
 
@@ -696,7 +696,7 @@
 			src.occupant = M
 
 			src.add_fingerprint(user)
-			del(G)
+			qdel(G)
 
 			src.updateUsrDialog()
 
@@ -987,7 +987,6 @@
 				helmet.name = "engineering voidsuit helmet"
 				helmet.icon_state = "rig0-engineering"
 				helmet.item_state = "eng_helm"
-				helmet.item_color = "engineering"
 			if(suit)
 				suit.name = "engineering voidsuit"
 				suit.icon_state = "rig-engineering"
@@ -997,7 +996,6 @@
 				helmet.name = "mining voidsuit helmet"
 				helmet.icon_state = "rig0-mining"
 				helmet.item_state = "mining_helm"
-				helmet.item_color = "mining"
 			if(suit)
 				suit.name = "mining voidsuit"
 				suit.icon_state = "rig-mining"
@@ -1007,7 +1005,6 @@
 				helmet.name = "medical voidsuit helmet"
 				helmet.icon_state = "rig0-medical"
 				helmet.item_state = "medical_helm"
-				helmet.item_color = "medical"
 			if(suit)
 				suit.name = "medical voidsuit"
 				suit.icon_state = "rig-medical"
@@ -1017,7 +1014,6 @@
 				helmet.name = "security voidsuit helmet"
 				helmet.icon_state = "rig0-sec"
 				helmet.item_state = "sec_helm"
-				helmet.item_color = "sec"
 			if(suit)
 				suit.name = "security voidsuit"
 				suit.icon_state = "rig-sec"
@@ -1027,7 +1023,6 @@
 				helmet.name = "atmospherics voidsuit helmet"
 				helmet.icon_state = "rig0-atmos"
 				helmet.item_state = "atmos_helm"
-				helmet.item_color = "atmos"
 			if(suit)
 				suit.name = "atmospherics voidsuit"
 				suit.icon_state = "rig-atmos"
@@ -1037,7 +1032,6 @@
 				helmet.name = "blood-red voidsuit helmet"
 				helmet.icon_state = "rig0-syndie"
 				helmet.item_state = "syndie_helm"
-				helmet.item_color = "syndie"
 			if(suit)
 				suit.name = "blood-red voidsuit"
 				suit.item_state = "syndie_voidsuit"

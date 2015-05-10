@@ -148,6 +148,7 @@
 	stun = 3
 	weaken = 3
 	penetrating = 5
+	hitscan = 1 //so the PTR isn't useless as a sniper weapon
 
 /obj/item/projectile/bullet/rifle/a556
 	damage = 40
@@ -184,3 +185,15 @@
 /obj/item/projectile/bullet/chameleon
 	damage = 1 // stop trying to murderbone with a fake gun dumbass!!!
 	embed = 0 // nope
+
+/* Practice */
+
+/obj/item/projectile/bullet/pistol/practice
+	damage = 5
+
+/obj/item/projectile/bullet/rifle/a556/practice
+	damage = 5
+
+/obj/item/projectile/bullet/shotgun/practice
+	name = "practice"
+	damage = 5

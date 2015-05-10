@@ -14,20 +14,18 @@
 	var/obj/item/weapon/disk/data/diskette = null //Mostly so the geneticist can steal everything.
 	var/loading = 0 // Nice loading text
 
-/obj/machinery/computer/cloning/New()
+/obj/machinery/computer/cloning/initialize()
 	..()
-	spawn(5)
-		updatemodules()
-		return
-	return
+	updatemodules()
+
+/obj/machinery/computer/cloning/Destroy()
+	releasecloner()
+	..()
 
 /obj/machinery/computer/cloning/proc/updatemodules()
 	src.scanner = findscanner()
+	releasecloner()
 	findcloner()
-	var/num = 1
-	for (var/obj/machinery/clonepod/pod in pods)
-		pod.connected = src
-		pod.name = "[initial(pod.name)] #[num++]"
 
 /obj/machinery/computer/cloning/proc/findscanner()
 	var/obj/machinery/dna_scannernew/scannerf = null
@@ -40,18 +38,26 @@
 
 	//Then look for a free one in the area
 	if(!scannerf)
-		for(var/obj/machinery/dna_scannernew/S in get_area(src))
+		var/area/A = get_area(src)
+		for(var/obj/machinery/dna_scannernew/S in A.get_contents())
 			return S
 
 	return
 
-/obj/machinery/computer/cloning/proc/findcloner()
+/obj/machinery/computer/cloning/proc/releasecloner()
+	for(var/obj/machinery/clonepod/P in pods)
+		P.connected = null
+		P.name = initial(P.name)
 	pods.Cut()
-	for(var/obj/machinery/clonepod/P in get_area(src))
+
+/obj/machinery/computer/cloning/proc/findcloner()
+	var/num = 1
+	var/area/A = get_area(src)
+	for(var/obj/machinery/clonepod/P in A.get_contents())
 		if(!P.connected)
 			pods += P
-
-	return
+			P.connected = src
+			P.name = "[initial(P.name)] #[num++]"
 
 /obj/machinery/computer/cloning/attackby(obj/item/W as obj, mob/user as mob)
 	if (istype(W, /obj/item/weapon/disk/data)) //INSERT SOME DISKETTES
@@ -221,7 +227,7 @@
 		src.active_record = locate(href_list["view_rec"])
 		if(istype(src.active_record,/datum/dna2/record))
 			if ((isnull(src.active_record.ckey)))
-				del(src.active_record)
+				qdel(src.active_record)
 				src.temp = "ERROR: Record Corrupt"
 			else
 				src.menu = 3
@@ -241,7 +247,7 @@
 			if (istype(C)||istype(C, /obj/item/device/pda))
 				if(src.check_access(C))
 					src.records.Remove(src.active_record)
-					del(src.active_record)
+					qdel(src.active_record)
 					src.temp = "Record deleted."
 					src.menu = 2
 				else
@@ -313,7 +319,7 @@
 				else if(pod.growclone(C))
 					temp = "Initiating cloning cycle..."
 					records.Remove(C)
-					del(C)
+					qdel(C)
 					menu = 1
 				else
 
@@ -323,7 +329,7 @@
 					if(answer != "No" && pod.growclone(C))
 						temp = "Initiating cloning cycle..."
 						records.Remove(C)
-						del(C)
+						qdel(C)
 						menu = 1
 					else
 						temp = "Initiating cloning cycle...<br>Error: Post-initialisation failed. Cloning cycle aborted."

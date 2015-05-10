@@ -98,6 +98,10 @@
 	TLV["temperature"] =	list(20, 40, 140, 160) // K
 	target_temperature = 90
 
+/obj/machinery/alarm/Destroy()
+	if(radio_controller)
+		radio_controller.remove_object(src, frequency)
+	..()
 
 /obj/machinery/alarm/New(var/loc, var/dir, var/building = 0)
 	..()
@@ -620,7 +624,7 @@
 	if(buildstage != 2)
 		return STATUS_CLOSE
 
-	if(aidisabled && user.isAI())
+	if(aidisabled && user.isMobAI())
 		user << "<span class='warning'>AI control for \the [src] interface has been disabled.</span>"
 		return STATUS_CLOSE
 
@@ -831,7 +835,7 @@
 		if(0)
 			if(istype(W, /obj/item/weapon/airalarm_electronics))
 				user << "You insert the circuit!"
-				del(W)
+				qdel(W)
 				buildstage = 1
 				update_icon()
 				return
@@ -840,7 +844,7 @@
 				user << "You remove the fire alarm assembly from the wall!"
 				new /obj/item/frame/air_alarm(get_turf(user))
 				playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-				del(src)
+				qdel(src)
 
 	return ..()
 
@@ -970,7 +974,7 @@ FIRE ALARM
 			if(0)
 				if(istype(W, /obj/item/weapon/firealarm_electronics))
 					user << "You insert the circuit!"
-					del(W)
+					qdel(W)
 					buildstage = 1
 					update_icon()
 
@@ -978,7 +982,7 @@ FIRE ALARM
 					user << "You remove the fire alarm assembly from the wall!"
 					new /obj/item/frame/fire_alarm(get_turf(user))
 					playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-					del(src)
+					qdel(src)
 		return
 
 	src.alarm()

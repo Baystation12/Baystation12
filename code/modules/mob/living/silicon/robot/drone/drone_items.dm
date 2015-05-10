@@ -253,7 +253,7 @@
 		if(istype(M,/mob/living/simple_animal/lizard) || istype(M,/mob/living/simple_animal/mouse))
 			src.loc.visible_message("<span class='danger'>[src.loc] sucks [M] into its decompiler. There's a horrible crunching noise.</span>","<span class='danger'>It's a bit of a struggle, but you manage to suck [M] into your decompiler. It makes a series of visceral crunching noises.</span>")
 			new/obj/effect/decal/cleanable/blood/splatter(get_turf(src))
-			del(M)
+			qdel(M)
 			if(wood)
 				wood.add_charge(2000)
 			if(plastic)
@@ -276,7 +276,7 @@
 			if(!M || !D) return
 
 			D << "<span class='danger'>You carefully and thoroughly decompile [M], storing as much of its resources as you can within yourself.</span>"
-			del(M)
+			qdel(M)
 			new/obj/effect/decal/cleanable/blood/oil(get_turf(src))
 
 			if(metal)
@@ -344,7 +344,7 @@
 		else
 			continue
 
-		del(W)
+		qdel(W)
 		grabbed_something = 1
 
 	if(grabbed_something)

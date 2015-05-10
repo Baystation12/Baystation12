@@ -56,7 +56,7 @@
 	for(var/obj/machinery/door/firedoor/F in loc)
 		if(F != src)
 			spawn(1)
-				del src
+				qdel(src)
 			return .
 	var/area/A = get_area(src)
 	ASSERT(istype(A))
@@ -70,7 +70,7 @@
 			A.all_doors.Add(src)
 			areas_added += A
 
-/obj/machinery/door/firedoor/Del()
+/obj/machinery/door/firedoor/Destroy()
 	for(var/area/A in areas_added)
 		A.all_doors.Remove(src)
 	. = ..()
@@ -231,7 +231,7 @@
 					FA.density = 1
 					FA.wired = 1
 					FA.update_icon()
-					del(src)
+					qdel(src)
 		return
 
 	if(blocked)

@@ -9,12 +9,6 @@
 	var/circuit = null //The path to the circuit board type. If circuit==null, the computer can't be disassembled.
 	var/processing = 0
 
-/obj/machinery/computer/New()
-	..()
-	if(ticker)
-		initialize()
-
-
 /obj/machinery/computer/initialize()
 	power_change()
 
@@ -41,11 +35,11 @@
 /obj/machinery/computer/ex_act(severity)
 	switch(severity)
 		if(1.0)
-			del(src)
+			qdel(src)
 			return
 		if(2.0)
 			if (prob(25))
-				del(src)
+				qdel(src)
 				return
 			if (prob(50))
 				for(var/x in verbs)
@@ -60,6 +54,9 @@
 	return
 
 /obj/machinery/computer/bullet_act(var/obj/item/projectile/Proj)
+	if(!(Proj.damage_type == BRUTE || Proj.damage_type == BURN))
+		return
+
 	if(prob(Proj.damage))
 		set_broken()
 	..()
@@ -129,7 +126,7 @@
 				A.state = 4
 				A.icon_state = "4"
 			M.deconstruct(src)
-			del(src)
+			qdel(src)
 	else
 		src.attack_hand(user)
 	return

@@ -54,9 +54,6 @@
 	air2.volume = ATMOS_DEFAULT_VOLUME_FILTER
 	air3.volume = ATMOS_DEFAULT_VOLUME_FILTER
 
-	if(radio_controller)
-		initialize()
-
 /obj/machinery/atmospherics/trinary/filter/update_icon()
 	if(istype(src, /obj/machinery/atmospherics/trinary/filter/m_filter))
 		icon_state = "m"
@@ -148,7 +145,7 @@
 			"\blue You have unfastened \the [src].", \
 			"You hear ratchet.")
 		new /obj/item/pipe(loc, make_from=src)
-		del(src)
+		qdel(src)
 
 
 /obj/machinery/atmospherics/trinary/filter/attack_hand(user as mob) // -- TLE

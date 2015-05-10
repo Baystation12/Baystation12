@@ -1,9 +1,10 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:31
 
 /proc/invalidateCameraCache()
-	for(var/obj/machinery/computer/security/s in world)
+	for(var/obj/machinery/computer/security/s in machines)
 		s.camera_cache = null
-	for(var/datum/alarm/A in world)
+	var/datum/alarm_handler/AHandler = new /datum/alarm_handler()
+	for(var/datum/alarm/A in AHandler.alarms)
 		A.cameras = null
 
 /obj/machinery/computer/security

@@ -149,7 +149,7 @@
 /obj/vehicle/emp_act(severity)
 	var/was_on = on
 	stat |= EMPED
-	var/obj/effect/overlay/pulse2 = new/obj/effect/overlay ( src.loc )
+	var/obj/effect/overlay/pulse2 = PoolOrNew(new/obj/effect/overlay, src.loc)
 	pulse2.icon = 'icons/effects/effects.dmi'
 	pulse2.icon_state = "empdisable"
 	pulse2.name = "emp sparks"
@@ -157,7 +157,7 @@
 	pulse2.set_dir(pick(cardinal))
 
 	spawn(10)
-		pulse2.delete()
+		qdel(pulse2)
 	if(on)
 		turn_off()
 	spawn(severity*300)
@@ -201,8 +201,8 @@
 	src.visible_message("\red <B>[src] blows apart!</B>", 1)
 	var/turf/Tsec = get_turf(src)
 
-	new /obj/item/stack/rods(Tsec)
-	new /obj/item/stack/rods(Tsec)
+	PoolOrNew(/obj/item/stack/rods, Tsec)
+	PoolOrNew(/obj/item/stack/rods, Tsec)
 	new /obj/item/stack/cable_coil/cut(Tsec)
 
 	if(cell)
@@ -220,7 +220,7 @@
 	new /obj/effect/gibspawner/robot(Tsec)
 	new /obj/effect/decal/cleanable/blood/oil(src.loc)
 
-	del(src)
+	qdel(src)
 
 /obj/vehicle/proc/healthcheck()
 	if(health <= 0)

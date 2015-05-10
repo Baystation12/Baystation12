@@ -325,7 +325,7 @@
 		if(!S || S.field_type != get_responsive_reagent(F.find_type))
 			if(X)
 				visible_message("\red<b>[pick("[display_name] crumbles away into dust","[display_name] breaks apart")].</b>")
-				del(X)
+				qdel(X)
 
 	finds.Remove(F)
 
@@ -510,7 +510,7 @@
 	..()
 	if(istype(M,/mob/living/silicon/robot))
 		var/mob/living/silicon/robot/R = M
-		if(istype(R.module, /obj/item/weapon/robot_module/miner))
+		if(R.module)
 			if(istype(R.module_state_1,/obj/item/weapon/storage/bag/ore))
 				attackby(R.module_state_1,R)
 			else if(istype(R.module_state_2,/obj/item/weapon/storage/bag/ore))

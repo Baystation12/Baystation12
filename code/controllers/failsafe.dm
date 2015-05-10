@@ -14,7 +14,7 @@ var/datum/controller/failsafe/Failsafe
 	//There can be only one failsafe. Out with the old in with the new (that way we can restart the Failsafe by spawning a new one)
 	if(Failsafe != src)
 		if(istype(Failsafe))
-			del(Failsafe)
+			qdel(Failsafe)
 	Failsafe = src
 	Failsafe.process()
 

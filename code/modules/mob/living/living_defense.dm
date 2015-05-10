@@ -60,7 +60,7 @@
 	if(P.taser_effect)
 		stun_effect_act(0, P.agony, def_zone, P)
 		src <<"\red You have been hit by [P]!"
-		del P
+		qdel(P)
 		return
 
 	//Armor

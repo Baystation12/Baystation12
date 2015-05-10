@@ -48,6 +48,9 @@
 			if(bomb.timing)
 				user << "Extreme danger.  Arming signal detected.   Time remaining: [bomb.timeleft]"
 
+/obj/item/weapon/pinpointer/Destroy()
+	active = 0
+	..()
 
 /obj/item/weapon/pinpointer/advpinpointer
 	name = "Advanced Pinpointer"

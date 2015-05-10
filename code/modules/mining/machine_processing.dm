@@ -18,7 +18,7 @@
 		if (machine)
 			machine.console = src
 		else
-			del(src)
+			qdel(src)
 
 /obj/machinery/mineral/processing_unit_console/attack_hand(mob/user)
 	add_fingerprint(user)

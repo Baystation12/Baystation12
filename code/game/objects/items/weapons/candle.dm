@@ -1,12 +1,16 @@
 /obj/item/weapon/flame/candle
 	name = "red candle"
-	desc = "a candle"
+	desc = "a small pillar candle. Its specially-formulated fuel-oxidizer wax mixture allows continued combustion in airless environments."
 	icon = 'icons/obj/candle.dmi'
 	icon_state = "candle1"
 	item_state = "candle1"
 	w_class = 1
 
 	var/wax = 2000
+
+/obj/item/weapon/flame/candle/New()
+	wax = rand(800, 1000) // Enough for 27-33 minutes. 30 minutes on average.
+	..()
 
 /obj/item/weapon/flame/candle/update_icon()
 	var/i
@@ -56,7 +60,7 @@
 		new/obj/item/trash/candle(src.loc)
 		if(istype(src.loc, /mob))
 			src.dropped()
-		del(src)
+		qdel(src)
 	update_icon()
 	if(istype(loc, /turf)) //start a fire if possible
 		var/turf/T = loc

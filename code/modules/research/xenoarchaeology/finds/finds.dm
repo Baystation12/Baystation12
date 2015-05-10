@@ -57,7 +57,7 @@
 				else
 					for(var/mob/M in viewers(world.view, user))
 						M.show_message("<span class='info'>[src] burns away into nothing.</span>",1)
-				del(src)
+				qdel(src)
 				w.remove_fuel(4)
 			else
 				for(var/mob/M in viewers(world.view, user))
@@ -73,7 +73,7 @@
 	..()
 	if(prob(33))
 		src.visible_message("<span class='warning'>[src] crumbles away, leaving some dust and gravel behind.</span>")
-		del(src)
+		qdel(src)
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Archaeological finds
@@ -323,7 +323,7 @@
 			apply_material_decorations = 0
 		if(23)
 			apply_prefix = 0
-			new_item = new /obj/item/stack/rods(src.loc)
+			new_item = PoolOrNew(/obj/item/stack/rods, src.loc)
 			apply_image_decorations = 0
 			apply_material_decorations = 0
 		if(24)
@@ -548,7 +548,7 @@
 		if(talkative)
 			new_item.talking_atom = new(new_item)
 
-		del(src)
+		qdel(src)
 
 	else if(talkative)
 		src.talking_atom = new(src)

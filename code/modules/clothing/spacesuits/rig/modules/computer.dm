@@ -157,8 +157,8 @@
 			user << "<span class='danger'>You purge the remaining scraps of data from your previous AI, freeing it for use.</span>"
 			if(integrated_ai)
 				integrated_ai.ghostize()
-				del(integrated_ai)
-			if(ai_card) del(ai_card)
+				qdel(integrated_ai)
+			if(ai_card) qdel(ai_card)
 		else if(user)
 			user.put_in_hands(ai_card)
 		else

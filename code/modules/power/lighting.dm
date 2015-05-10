@@ -8,6 +8,7 @@
 #define LIGHT_EMPTY 1
 #define LIGHT_BROKEN 2
 #define LIGHT_BURNED 3
+#define LIGHT_BULB_TEMPERATURE 400 //K - used value for a 60W bulb
 
 /obj/machinery/light_construct
 	name = "light fixture frame"
@@ -53,7 +54,7 @@
 			user.visible_message("[user.name] deconstructs [src].", \
 				"You deconstruct [src].", "You hear a noise.")
 			playsound(src.loc, 'sound/items/Deconstruct.ogg', 75, 1)
-			del(src)
+			qdel(src)
 		if (src.stage == 2)
 			usr << "You have to remove the wires first."
 			return
@@ -111,7 +112,7 @@
 
 			newlight.dir = src.dir
 			src.transfer_fingerprints_to(newlight)
-			del(src)
+			qdel(src)
 			return
 	..()
 
@@ -195,7 +196,7 @@
 		spawn(1)
 			update(0)
 
-/obj/machinery/light/Del()
+/obj/machinery/light/Destroy()
 	var/area/A = get_area(src)
 	if(A)
 		on = 0
@@ -312,7 +313,7 @@
 				update()
 
 				user.drop_item()	//drop the item to update overlays and such
-				del(L)
+				qdel(L)
 
 				if(on && rigged)
 
@@ -366,7 +367,7 @@
 			newlight.fingerprints = src.fingerprints
 			newlight.fingerprintshidden = src.fingerprintshidden
 			newlight.fingerprintslast = src.fingerprintslast
-			del(src)
+			qdel(src)
 			return
 
 		user << "You stick \the [W] into the light socket!"
@@ -429,11 +430,13 @@
 		var/mob/living/carbon/human/H = user
 
 		if(istype(H))
-
-			if(H.gloves)
+			if(H.species.heat_level_1 > LIGHT_BULB_TEMPERATURE)
+				prot = 1
+			else if(H.gloves)
 				var/obj/item/clothing/gloves/G = H.gloves
 				if(G.max_heat_protection_temperature)
-					prot = (G.max_heat_protection_temperature > 360)
+					if(G.max_heat_protection_temperature > LIGHT_BULB_TEMPERATURE)
+						prot = 1
 		else
 			prot = 1
 
@@ -521,7 +524,7 @@
 /obj/machinery/light/ex_act(severity)
 	switch(severity)
 		if(1.0)
-			del(src)
+			qdel(src)
 			return
 		if(2.0)
 			if (prob(75))
@@ -571,7 +574,7 @@
 		sleep(2)
 		explosion(T, 0, 0, 2, 2)
 		sleep(1)
-		del(src)
+		qdel(src)
 
 // the light item
 // can be tube or bulb subtypes

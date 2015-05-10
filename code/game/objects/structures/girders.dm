@@ -2,8 +2,7 @@
 	icon_state = "girder"
 	anchored = 1
 	density = 1
-	layer = 4
-
+	layer = 2
 	var/state = 0
 	var/health = 200
 	var/cover = 50 //how much cover the girder provides against projectiles.
@@ -199,7 +198,7 @@
 
 /obj/structure/girder/proc/dismantle()
 	new /obj/item/stack/sheet/metal(get_turf(src))
-	del(src)
+	qdel(src)
 
 /obj/structure/girder/attack_hand(mob/user as mob)
 	if (HULK in user.mutations)
@@ -210,12 +209,13 @@
 
 /obj/structure/girder/blob_act()
 	if(prob(40))
-		del(src)
+		qdel(src)
+
 
 /obj/structure/girder/ex_act(severity)
 	switch(severity)
 		if(1.0)
-			del(src)
+			qdel(src)
 			return
 		if(2.0)
 			if (prob(30))
@@ -245,11 +245,13 @@
 		if(do_after(user,40))
 			user << "<span class='notice'>You dissasembled the girder!</span>"
 			dismantle()
+
 	else if(istype(W, /obj/item/weapon/pickaxe/plasmacutter))
 		user << "<span class='notice'>Now slicing apart the girder..."
 		if(do_after(user,30))
 			user << "<span class='notice'>You slice apart the girder!</span>"
 		dismantle()
+
 	else if(istype(W, /obj/item/weapon/pickaxe/diamonddrill))
 		user << "<span class='notice'>You drill through the girder!</span>"
 		new /obj/effect/decal/remains/human(get_turf(src))

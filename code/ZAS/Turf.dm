@@ -46,6 +46,7 @@
 				air_master.connect(sim, src)
 
 /turf/simulated/update_air_properties()
+
 	if(zone && zone.invalid)
 		c_copy_air()
 		zone = null //Easier than iterating through the list at the zone.
@@ -58,7 +59,8 @@
 		#endif
 		if(zone)
 			var/zone/z = zone
-			if(locate(/obj/machinery/door/airlock) in src) //Hacky, but prevents normal airlocks from rebuilding zones all the time
+			
+			if(s_block & ZONE_BLOCKED) //Hacky, but prevents normal airlocks from rebuilding zones all the time
 				z.remove(src)
 			else
 				z.rebuild()
@@ -102,7 +104,7 @@
 			//This happens when windows move or are constructed. We need to rebuild.
 			if((previously_open & d) && istype(unsim, /turf/simulated))
 				var/turf/simulated/sim = unsim
-				if(sim.zone == zone)
+				if(zone && sim.zone == zone)
 					zone.rebuild()
 					return
 
@@ -120,8 +122,10 @@
 				//Might have assigned a zone, since this happens for each direction.
 				if(!zone)
 
-					//if((block & ZONE_BLOCKED) || (r_block & ZONE_BLOCKED && !(s_block & ZONE_BLOCKED)))
-					if(((block & ZONE_BLOCKED) && !(r_block & ZONE_BLOCKED)) || (r_block & ZONE_BLOCKED && !(s_block & ZONE_BLOCKED)))
+					//We do not merge if 
+					//    they are blocking us and we are not blocking them, or if
+					//    we are blocking them and not blocking ourselves - this prevents tiny zones from forming on doorways.
+					if(((block & ZONE_BLOCKED) && !(r_block & ZONE_BLOCKED)) || ((r_block & ZONE_BLOCKED) && !(s_block & ZONE_BLOCKED)))
 						#ifdef ZASDBG
 						if(verbose) world << "[d] is zone blocked."
 						//dbg(zone_blocked, d)

@@ -341,6 +341,7 @@ datum/hud/New(mob/owner)
 		if(src.hud_used.item_action_list)
 			src.client.screen -= src.hud_used.item_action_list
 		src.client.screen -= src.internals
+		src.client.screen += src.hud_used.action_intent		//we want the intent swticher visible
 	else
 		hud_used.hud_shown = 1
 		if(src.hud_used.adding)

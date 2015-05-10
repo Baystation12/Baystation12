@@ -92,12 +92,12 @@
 		/obj/machinery/shield_gen,
 		/obj/machinery/clonepod,
 		/obj/machinery/deployable,
-		/obj/machinery/door_control,
+		/obj/machinery/button/remote,
 		/obj/machinery/porta_turret,
 		/obj/machinery/shieldgen,
 		/obj/machinery/turretid,
 		/obj/machinery/vending,
-		/obj/machinery/bot,
+		/mob/living/bot,
 		/obj/machinery/door,
 		/obj/machinery/telecomms,
 		/obj/machinery/mecha_part_fabricator,
@@ -118,7 +118,7 @@
 		user.drop_item()
 		var/obj/item/weapon/card/emag_broken/junk = new(user.loc)
 		junk.add_fingerprint(user)
-		del(src)
+		qdel(src)
 		return
 
 	..()
@@ -170,7 +170,7 @@
 		src.desc = W.desc
 		src.icon = W.icon
 		src.icon_state = W.icon_state
-		del(W)
+		qdel(W)
 		return
 
 /obj/item/weapon/card/id/verb/read()
@@ -293,3 +293,11 @@
 	New()
 		access = get_all_centcom_access()
 		..()
+
+/obj/item/weapon/card/id/centcom/ERT
+	name = "\improper Emergency Response Team ID"
+	assignment = "Emergency Response Team"
+		
+/obj/item/weapon/card/id/centcom/ERT/New()
+	..()
+	access += get_all_accesses()

@@ -222,7 +222,7 @@
 
 			filling.icon_state = "syringe[rounded_vol]"
 
-			filling.color = mix_color_from_reagents(reagents.reagent_list)
+			filling.color = reagents.get_color()
 			overlays += filling
 
 
@@ -251,7 +251,7 @@
 				for(var/mob/O in viewers(world.view, user))
 					O.show_message(text("\red <B>[user] tries to stab [target] in \the [hit_area] with [src.name], but the attack is deflected by armor!</B>"), 1)
 				user.remove_from_mob(src)
-				del(src)
+				qdel(src)
 				return
 
 			for(var/mob/O in viewers(world.view, user))
