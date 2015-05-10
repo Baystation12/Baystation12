@@ -116,7 +116,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 		update_inv_glasses()
 	else if (W == head)
 		head = null
-		
+
 		var/update_hair = 0
 		if((W.flags & BLOCKHAIR) || (W.flags & BLOCKHEADHAIR))
 			update_hair = 1
@@ -128,7 +128,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 			update_hair(0)	//rebuild hair
 			update_inv_ears(0)
 			update_inv_wear_mask(0)
-		
+
 		update_inv_head()
 	else if (W == l_ear)
 		l_ear = null
@@ -183,7 +183,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 		update_inv_l_hand()
 	else
 		return 0
-	
+
 	update_action_buttons()
 	return 1
 
@@ -314,14 +314,15 @@ This saves us from having to call add_fingerprint() any time something is put in
 		update_inv_r_hand()
 
 	W.layer = 20
-
+	if(W.icon_action_button) // Actuallh needs to update at all?
+		update_action_buttons()
 	return 1
 
 //Checks if a given slot can be accessed at this time, either to equip or unequip I
 /mob/living/carbon/human/slot_is_accessible(var/slot, var/obj/item/I, mob/user=null)
 	var/obj/item/covering = null
 	var/check_flags = 0
-	
+
 	switch(slot)
 		if(slot_wear_mask)
 			covering = src.head
@@ -331,7 +332,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 			check_flags = HEADCOVERSEYES
 		if(slot_gloves, slot_w_uniform)
 			covering = src.wear_suit
-	
+
 	if(covering)
 		if((covering.body_parts_covered & I.body_parts_covered) || (covering.flags & check_flags))
 			user << "<span class='warning'>\The [covering] is in the way.</span>"
@@ -799,7 +800,7 @@ It can still be worn/put on as normal.
 						target.drop_from_inventory(target.r_store) //At this stage l_store is already processed by the code above, we only need to process r_store.
 			else
 				source << "<span class='warning'>You fail to remove \the [strip_item] from [target]!</span>"
-		else if(item) 
+		else if(item)
 			if(target.has_organ_for_slot(slot_to_process) && item.mob_can_equip(target, slot_to_process, 0)) //Placing an item on the mob
 				source.drop_from_inventory(item)
 				target.equip_to_slot_if_possible(item, slot_to_process, 0, 1, 1)

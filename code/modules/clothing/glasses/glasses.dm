@@ -30,6 +30,7 @@
 			if(activation_sound)
 				usr << activation_sound
 			usr << "You activate the optical matrix on the [src]."
+			user.update_action_buttons()
 
 /obj/item/clothing/glasses/meson
 	name = "Optical Meson Scanner"
