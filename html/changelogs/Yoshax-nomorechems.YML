@@ -1,0 +1,5 @@
+author: Yoshax
+delete-after: True
+
+changes: 
+  - tweak: "Removes sleepy chems from being cloned, adds a consistent period of 30 tick sleep."
