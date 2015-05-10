@@ -175,47 +175,91 @@
 	origin_tech = "materials=1"
 	var/breakouttime = 300	//Deciseconds = 30s = 0.5 minute
 
-/obj/item/weapon/legcuffs/beartrap
+/obj/item/weapon/beartrap
 	name = "bear trap"
 	throw_speed = 2
 	throw_range = 1
+	gender = PLURAL
+	icon = 'icons/obj/items.dmi'
 	icon_state = "beartrap0"
 	desc = "A trap used to catch bears and other legged creatures."
+	throwforce = 0
+	w_class = 3.0
+	origin_tech = "materials=1"
 	var/armed = 0
+	var/deployed = 0
 
 	suicide_act(mob/user)
-		viewers(user) << "\red <b>[user] is putting the [src.name] on \his head! It looks like \he's trying to commit suicide.</b>"
+		viewers(user) << "<span class='danger'>[user] is putting the [src.name] on \his head! It looks like \he's trying to commit suicide.</span>"
 		return (BRUTELOSS)
 
-/obj/item/weapon/legcuffs/beartrap/attack_self(mob/user as mob)
+/obj/item/weapon/beartrap/attack_self(mob/user as mob)
 	..()
 	if(ishuman(user) && !user.stat && !user.restrained())
-		armed = !armed
-		icon_state = "beartrap[armed]"
-		user << "<span class='notice'>[src] is now [armed ? "armed" : "disarmed"]</span>"
+		if(deployed==0)
+			user.visible_message("<span class='danger'>[user] is deploying \the [src]</span>", "<span class='danger'>You are deploying \the [src]!</span>")
+			if (do_after(user, 60))
+				user.visible_message("<span class='danger'>[user] has deployed \the [src]</span>", "<span class='danger'>You have deployed \the [src]!</span>")
+				deployed = 1
+				armed = 1
+				user.drop_from_inventory(src, user.loc)
+				update_icon()
+				anchored = 1
 
-/obj/item/weapon/legcuffs/beartrap/Crossed(AM as mob|obj)
+/obj/item/weapon/beartrap/attack_hand(mob/user as mob)
+	if(ishuman(user) && !user.stat && !user.restrained())
+		if(deployed==1)
+			user.visible_message("<span class='danger'>[user] is disarming \the [src]</span>", "<span class='danger'>You are disarming \the [src]!</span>")
+			if (do_after(user, 60))
+				user.visible_message("<span class='danger'>[user] has disarmed \the [src]</span>", "<span class='danger'>You have disarmed \the [src]!</span>")
+				deployed = 0
+				armed = 0
+				anchored = 0
+				update_icon()
+
+		if(deployed==0)
+			..()
+
+/obj/item/weapon/beartrap/Crossed(AM as mob|obj)
 	if(armed)
 		if(ishuman(AM))
 			if(isturf(src.loc))
 				var/mob/living/carbon/human/H = AM
 				if(H.m_intent == "run")
 					armed = 0
-					H.legcuffed = src
-					src.loc = H
-					H.update_inv_legcuffed()
+					update_icon()
+					//H.legcuffed = src
+					//src.loc = H
+					//H.update_inv_legcuffed()
 					H << "<span class='danger'>You step on \the [src]!</span>"
 
-					var/obj/item/organ/external/affecting = H.get_organ(pick("l_leg", "r_leg"))
-					feedback_add_details("handcuffs","B") //Yes, I know they're legcuffs. Don't change this, no need for an extra variable. The "B" is used to tell them apart.
+					feedback_add_details("handcuffs","B")
 					for(var/mob/O in viewers(H, null))
 						if(O == H)
 							continue
 						O.show_message("<span class='danger'>[H] steps on \the [src].</span>", 1)
-
-					affecting.take_damage(35, 0)
-					H.UpdateDamageIcon()
-					H.updatehealth()
+					if(H.lying)
+						var/list/potentialorgans = list()
+						for(var/organ in list("l_leg", "l_foot", "r_leg", "r_foot", "groin", "chest", "head", "r_arm", "r_hand", "l_arm", "l_hand")) //iterate over names
+							var/obj/item/organ/external/R = H.get_organ(organ)
+							if(R && !(R.status & ORGAN_DESTROYED))
+								potentialorgans += R
+						var/obj/item/organ/external/affecting = pick(potentialorgans)
+						affecting.take_damage(30, 0)
+						affecting.embed(src, 1)
+						H.UpdateDamageIcon()
+						H.updatehealth()
+					else
+						var/list/potentialorgans = list()
+						for(var/organ in list("l_leg", "r_leg", "l_foot", "r_foot"))
+							var/obj/item/organ/external/R = H.get_organ(organ)
+							if(R && !(R.status & ORGAN_DESTROYED))
+								potentialorgans += R
+						var/obj/item/organ/external/affecting = pick(potentialorgans)
+						affecting.take_damage(30, 0)
+						affecting.embed(src, 1)
+						H.UpdateDamageIcon()
+						H.updatehealth()
 
 
 		if(isanimal(AM) && !istype(AM, /mob/living/simple_animal/parrot) && !istype(AM, /mob/living/simple_animal/construct) && !istype(AM, /mob/living/simple_animal/shade) && !istype(AM, /mob/living/simple_animal/hostile/viscerator))
@@ -224,6 +268,13 @@
 			SA.health -= 20
 	..()
 
+/obj/item/weapon/beartrap/update_icon()
+	..()
+
+	if(armed == 0)
+		icon_state = "beartrap0"
+	else
+		icon_state = "beartrap1"
 
 
 /obj/item/weapon/caution
