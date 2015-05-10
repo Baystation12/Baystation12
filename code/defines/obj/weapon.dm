@@ -186,7 +186,6 @@
 	throwforce = 0
 	w_class = 3.0
 	origin_tech = "materials=1"
-	var/armed = 0
 	var/deployed = 0
 
 	suicide_act(mob/user)
@@ -201,7 +200,6 @@
 			if (do_after(user, 60))
 				user.visible_message("<span class='danger'>[user] has deployed \the [src]</span>", "<span class='danger'>You have deployed \the [src]!</span>")
 				deployed = 1
-				armed = 1
 				user.drop_from_inventory(src, user.loc)
 				update_icon()
 				anchored = 1
@@ -213,7 +211,6 @@
 			if (do_after(user, 60))
 				user.visible_message("<span class='danger'>[user] has disarmed \the [src]</span>", "<span class='danger'>You have disarmed \the [src]!</span>")
 				deployed = 0
-				armed = 0
 				anchored = 0
 				update_icon()
 
@@ -221,12 +218,12 @@
 			..()
 
 /obj/item/weapon/beartrap/Crossed(AM as mob|obj)
-	if(armed)
+	if(deployed)
 		if(ishuman(AM))
 			if(isturf(src.loc))
 				var/mob/living/carbon/human/H = AM
 				if(H.m_intent == "run")
-					armed = 0
+					deployed = 0
 					update_icon()
 					H << "<span class='danger'>You step on \the [src]!</span>"
 					for(var/mob/O in viewers(H, null))
@@ -253,7 +250,7 @@
 
 
 		if(isanimal(AM) && !istype(AM, /mob/living/simple_animal/parrot) && !istype(AM, /mob/living/simple_animal/construct) && !istype(AM, /mob/living/simple_animal/shade) && !istype(AM, /mob/living/simple_animal/hostile/viscerator))
-			armed = 0
+			deployed = 0
 			var/mob/living/simple_animal/SA = AM
 			SA.health -= 20
 	..()
@@ -261,7 +258,7 @@
 /obj/item/weapon/beartrap/update_icon()
 	..()
 
-	if(armed == 0)
+	if(deployed == 0)
 		icon_state = "beartrap0"
 	else
 		icon_state = "beartrap1"
