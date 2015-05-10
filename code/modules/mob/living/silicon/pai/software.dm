@@ -10,11 +10,10 @@ var/list/pai_emotions = list(
 		"What" = 9,
 		"Neutral" = 10,
 		"Silly" = 11,
-		"Nose" = 12
-		"Glasses" = 13,
-		"Smirk" = 14,
-		"Exclamation Points" = 15,
-		"Question Mark" = 16,
+		"Nose" = 12,
+		"Smirk" = 13,
+		"Exclamation Points" = 14,
+		"Question Mark" = 15,
 	)
 
 
