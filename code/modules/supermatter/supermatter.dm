@@ -337,14 +337,15 @@
 
 /obj/machinery/power/supermatter/proc/supermatter_pull()
 	//following is adapted from singulo code
-	if(defer_powernet_rebuild != 2)
-		defer_powernet_rebuild = 1
+	defer_powernet_rebuild = 1
+	lighting_processing_killed = 1
 	// Let's just make this one loop.
 	for(var/atom/X in orange(pull_radius,src))
 		X.singularity_pull(src, STAGE_FIVE)
 
-	if(defer_powernet_rebuild != 2)
+	spawn(20)
 		defer_powernet_rebuild = 0
+		lighting_processing_killed = 0
 	return
 
 

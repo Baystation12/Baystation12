@@ -3,13 +3,14 @@
 	schedule_interval = 20 // every 2 seconds
 
 /datum/controller/process/powernet/doWork()
-	for(var/datum/powernet/powerNetwork in powernets)
-		if(istype(powerNetwork) && !powerNetwork.disposed)
-			powerNetwork.reset()
-			scheck()
-			continue
+	if(!defer_powernet_rebuild)
+		for(var/datum/powernet/powerNetwork in powernets)
+			if(istype(powerNetwork) && !powerNetwork.disposed)
+				powerNetwork.reset()
+				scheck()
+				continue
 
-		powernets.Remove(powerNetwork)
+			powernets.Remove(powerNetwork)
 
 	// This is necessary to ensure powersinks are always the first devices that drain power from powernet.
 	// Otherwise APCs or other stuff go first, resulting in bad things happening.
