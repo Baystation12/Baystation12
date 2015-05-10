@@ -24,7 +24,7 @@
 	assailant = user
 	affecting = victim
 
-	if(affecting.anchored)
+	if(affecting.anchored || !assailant.Adjacent(victim))
 		qdel(src)
 		return
 
@@ -36,7 +36,6 @@
 	hud.master = src
 
 /obj/item/weapon/grab/Destroy()
-	//make sure the grabbed_by list doesn't fill up with nulls
 	if(affecting)
 		affecting.grabbed_by -= src
 		affecting = null
@@ -45,6 +44,7 @@
 			assailant.client.screen -= hud
 		assailant = null
 	qdel(hud)
+	hud = null
 	..()
 
 //Used by throw code to hand over the mob, instead of throwing the grab. The grab is then deleted by the throw code.
@@ -68,6 +68,9 @@
 
 /obj/item/weapon/grab/process()
 	confirm()
+	if(!assailant)
+		qdel(src)
+		return
 
 	if(assailant.client)
 		assailant.client.screen -= hud
@@ -227,8 +230,5 @@
 
 
 /obj/item/weapon/grab/dropped()
+	loc = null
 	qdel(src)
-
-/obj/item/weapon/grab/Destroy()
-	qdel(hud)
-	..()
