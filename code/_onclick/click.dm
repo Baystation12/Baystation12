@@ -99,8 +99,9 @@
 			update_inv_r_hand(0)
 		return
 
-	// A is your location but is not a turf; or is on you (backpack); or is on something on you (box in backpack); but not next to you and not in a box in a backpack on you
-	if(!isturf(A) && A == loc || (A in contents) || (A.loc in contents))
+	// A is your location but is not a turf; or is on you (backpack); or is on something on you (box in backpack); sdepth is needed here because webbings and coat pockets are hacky
+	var/sdepth = A.storage_depth(src)
+	if(!isturf(A) && A == loc || (sdepth != -1 && sdepth <= 1))
 		if(W)
 			var/resolved = A.attackby(W, src)
 			if(!resolved && A && W)
@@ -115,7 +116,8 @@
 		return
 
 	// A is a turf or is on a turf, or in something on a turf (pen in a box); but not something in something on a turf (pen in a box in a backpack)
-	if(isturf(A) || isturf(A.loc) || isturf(A.loc.loc))
+	sdepth = A.storage_depth_turf()
+	if(isturf(A) || isturf(A.loc) || (sdepth != -1 && sdepth <= 1))
 		if(A.Adjacent(src)) // see adjacent.dm
 			if(W)
 				var/resolved = A.attackby(W, src) // Return 1 in attackby() to prevent afterattack() effects (when safely moving items for example)
