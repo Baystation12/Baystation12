@@ -705,7 +705,6 @@ datum/design/grapple_l_hand
 	name = "Grappling Device (Left Hand)"
 	desc = "Grappling Device"
 	id = "grapple_l_hand"
-	build_type = MECHFAB
 	req_tech = list("programming"= 4, "engineering" = 3, "materials" = 5)
 	build_path = "/obj/item/robot_parts/grapple/l_hand"
 	category = "Robot Parts"

@@ -72,10 +72,12 @@ var/engineer_slots = 0
 	log_admin_single("[key_name(usr)] used Dispatch Response Team.")
 	trigger_armed_response_team(1)
 
-
 client/verb/JoinResponseTeam()
 	set category = "IC"
 	var/role_new
+
+	if(!MayRespawn(1))
+		return
 
 	if(istype(usr,/mob/dead/observer) || istype(usr,/mob/new_player))
 		if(!send_emergency_team)

@@ -151,11 +151,11 @@
 	syllables = list("ss","ss","ss","ss","skak","seeki","resh","las","esi","kor","sh")
 
 /datum/language/unathi/get_random_name()
+
 	var/new_name = ..()
 	while(findtextEx(new_name,"sss",1,null))
 		new_name = replacetext(new_name, "sss", "ss")
 	return capitalize(new_name)
-
 
 /datum/language/Aviskree
 	name = "Aviachirp"

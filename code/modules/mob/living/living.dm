@@ -525,7 +525,7 @@
 		escape_inventory(src.loc)
 		return
 
-		/*//Resisting control by an alien mind.
+	/*//Resisting control by an alien mind.
 	if(istype(src.loc,/mob/living/simple_animal/borer))
 		var/mob/living/simple_animal/borer/B = src.loc
 		var/mob/living/captive_brain/H = src
@@ -549,23 +549,14 @@
 			verbs -= /mob/living/carbon/proc/spawn_larvae
 
 			return*/
-
 	//resisting grabs (as if it helps anyone...)
 	/*if ((!( L.stat ) && !( L.restrained() )))
-		var/resisting = 0
-		for(var/obj/O in L.requests)
-			L.requests.Remove(O)
-			del(O)
-			resisting++
-		for(var/obj/item/weapon/grab/G in usr.grabbed_by)
-			resisting++
 			switch(G.state)
 				if(GRAB_PASSIVE)
 					del(G)
 				if(GRAB_AGGRESSIVE)
 					if(prob(60)) //same chance of breaking the grab as disarm
 						L.visible_message("<span class='warning'>[L] has broken free of [G.assailant]'s grip!</span>")
-						del(G)
 				if(GRAB_NECK)
 					//If the you move when grabbing someone then it's easier for them to break free. Same if the affected mob is immune to stun.
 					if (((world.time - G.assailant.l_move_time < 30 || !L.stunned) && prob(15)) || prob(3))
@@ -585,23 +576,7 @@
 
 	//unbuckling yourself
 	/*if(L.buckled && (L.last_special <= world.time) )
-		if(iscarbon(L))
-			var/mob/living/carbon/C = L
-			if( C.handcuffed )
-				C.next_move = world.time + 100
-				C.last_special = world.time + 100
-				C << "\red You attempt to unbuckle yourself. (This will take around 2 minutes and you need to stand still)"
-				for(var/mob/O in viewers(L))
-					O.show_message("\red <B>[usr] attempts to unbuckle themself!</B>", 1)
-				spawn(0)
-					if(do_after(usr, 1200))
-						if(!C.buckled)
-							return
-						for(var/mob/O in viewers(C))
-							O.show_message("\red <B>[usr] manages to unbuckle themself!</B>", 1)
-						C << "\blue You successfully unbuckle yourself."
 						C.buckled.user_unbuckle_mob(C)
-		else
 			L.buckled.user_unbuckle_mob(L)*/
 	if(buckled)
 		spawn() escape_buckle()

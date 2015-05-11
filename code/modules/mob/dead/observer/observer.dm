@@ -429,9 +429,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		src << "<span class='warning'>Spawning as a mouse is currently disabled.</span>"
 		return
 
-	var/mob/dead/observer/M = usr
-	if(config.antag_hud_restricted && M.has_enabled_antagHUD == 1)
-		src << "<span class='warning'>antagHUD restrictions prevent you from spawning in as a mouse.</span>"
+	if(!MayRespawn(1))
 		return
 
 	var/timedifference = world.time - client.time_died_as_mouse
@@ -550,17 +548,6 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		W.message = message
 		W.add_hiddenprint(src)
 		W.visible_message("\red Invisible fingers crudely paint something in blood on [T]...")
-
-
-/mob/dead/observer/verb/char_edit()
-	set category = "Ghost"
-	set name = "Edit character"
-	set desc = "Edit your saved characters while waiting. (Doesn't change your ghost's sprites!)"
-
-	set src = usr
-
-	client.prefs.ShowChoices(usr) //Let's see if this works.
-
 /mob/dead/observer/pointed(atom/A as mob|obj|turf in view())
 	if(!..())
 		return 0
@@ -632,3 +619,19 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 /mob/dead/observer/canface()
 	return 1
+
+mob/dead/observer/MayRespawn(var/feedback = 0)
+	if(config.antag_hud_restricted && has_enabled_antagHUD == 1)
+		if(feedback)
+			src << "<span class='warning'>antagHUD restrictions prevent you from respawning.</span>"
+		return 0
+	return 1
+
+/mob/dead/observer/verb/char_edit()
+	set category = "Ghost"
+	set name = "Edit character"
+	set desc = "Edit your saved characters while waiting. (Doesn't change your ghost's sprites!)"
+
+	set src = usr
+
+	client.prefs.ShowChoices(usr) //Let's see if this works.

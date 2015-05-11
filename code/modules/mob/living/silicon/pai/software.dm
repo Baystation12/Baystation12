@@ -117,9 +117,8 @@ var/global/list/default_pai_software = list()
 			ram -= S.ram_cost
 			software[S.id] = S
 		return 1
-/*
 
-		remove_language("Aviachirp")
+		/*remove_language("Aviachirp")
 		remove_language("Chittin")
 		remove_language("Vox-pidgin")
 		remove_language("Rootspeak")

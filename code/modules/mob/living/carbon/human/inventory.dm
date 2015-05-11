@@ -478,13 +478,8 @@ This saves us from having to call add_fingerprint() any time something is put in
 				target_item = target.gloves
 			if("eyes")
 				target_part = "eyes"
-				target_item = target.glasses
+				target_item = target.glasses			
 			if("PDA")
-				target.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has had their PDA ([target.wear_pda]) removed by [source.name] ([source.ckey])</font>")
-				source.attack_log += text("\[[time_stamp()]\] <font color='red'>Attempted to remove [target.name]'s ([target.ckey]) PDA ([target.wear_pda])</font>")
-				message = "\red <B>[source] is trying to take off [target.wear_pda] from [target]'s uniform!</B>"
-			if("neck")
-				target.attack_log += text("\[[time_stamp()]\			if("PDA")
 				target.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has had their PDA ([target.wear_pda]) removed by [source.name] ([source.ckey])</font>")
 				source.attack_log += text("\[[time_stamp()]\] <font color='red'>Attempted to remove [target.name]'s ([target.ckey]) PDA ([target.wear_pda])</font>")
 				message = "\red <B>[source] is trying to take off [target.wear_pda] from [target]'s uniform!</B>"

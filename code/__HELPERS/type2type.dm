@@ -272,8 +272,8 @@ proc/tg_list2text(list/list, glue=",")
 		if (BLEND_SUBTRACT) return ICON_SUBTRACT
 		else                return ICON_OVERLAY
 
-//Converts a rights bitfield into a string
 /*
+// Converts a rights bitfield into a string
 /proc/rights2text(rights,seperator="")
 	if(rights & R_BUILDMODE)	. += "[seperator]+BUILDMODE"
 	if(rights & R_ADMIN)		. += "[seperator]+ADMIN"

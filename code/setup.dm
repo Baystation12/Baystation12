@@ -223,7 +223,6 @@
 #define SLOT_TWOEARS 16384
 #define SLOT_PDA 32768
 #define SLOT_LEGS 65536
-
 // Slots.
 #define slot_back        1
 #define slot_wear_mask   2
@@ -459,7 +458,6 @@
 
 /*var/list/liftable_structures = list(\
 */
-
 // Number of identical messages required to get the spam-prevention auto-mute thing to trigger warnings and automutes.
 #define SPAM_TRIGGER_WARNING  5
 #define SPAM_TRIGGER_AUTOMUTE 10
@@ -552,27 +550,9 @@
 
 
 //Please don't edit these values without speaking to Jamie First.
-//Admin Permissions
-#define R_BUILDMODE		1
-#define R_ADMIN			2
-#define R_BAN			4
-#define R_FUN			8
-#define R_SERVER		16
-#define R_DEBUG			32
-#define R_POSSESS		64
-#define R_PERMISSIONS	128
-#define R_STEALTH		256
-#define R_REJUVINATE	512
-#define R_VAREDIT		1024
-#define R_SOUNDS		2048
-#define R_SPAWN			4096
-#define R_MOD			8192
-#define R_MENTOR		16384
 #define R_DEV			32768
 #define R_HOST			65536
 #define R_MAXPERMISSION 65536 //This holds the maximum value for a permission. It is used in iteration, so keep it updated.
-
-
 // Preference toggles.
 #define SOUND_ADMINHELP 1
 #define SOUND_MIDI      2
@@ -593,7 +573,6 @@
 #define SHOW_SHUTTERLOGS 65536
 //#define CHAT_NOICONS    32768
 #define TOGGLES_DEFAULT (SOUND_ADMINHELP|SOUND_MIDI|SOUND_AMBIENCE|SOUND_LOBBY|CHAT_OOC|CHAT_DEAD|CHAT_GHOSTEARS|CHAT_GHOSTSIGHT|CHAT_PRAYER|CHAT_RADIO|CHAT_ATTACKLOGS|CHAT_LOOC|CHAT_DEVSAY)
-
 
 #define BE_TRAITOR    1
 #define BE_OPERATIVE  2
@@ -762,7 +741,6 @@ var/list/be_special_flags = list(
 #define COLOR_WHITE  "#FFFFFF"
 #define COLOR_BLACK  "#000000"
 #define COLOR_PURPLE 	"#993399"
-
 /*
  *	Germs and infections.
 */

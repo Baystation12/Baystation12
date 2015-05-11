@@ -67,7 +67,6 @@
 
 /obj/machinery/meter/examine(mob/user)
 	var/t = "A gas flow meter. "
-
 	if(get_dist(user, src) > 3 && !(istype(user, /mob/living/silicon/ai) || istype(user, /mob/dead)))
 		t += "\blue <B>You are too far away to read it.</B>"
 
@@ -81,12 +80,10 @@
 		else
 			t += "The sensor error light is blinking."
 	else
-		t += "The connect error light is blinking."
-
+		t += "The connect error light is blinking."	
 	user << t
 
 /obj/machinery/meter/Click()
-
 	if (get_dist(usr, src) <= 3 || istype(usr, /mob/living/silicon/ai) || istype(usr, /mob/dead))
 		usr.examinate(src)
 		return 1

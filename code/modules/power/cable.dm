@@ -80,6 +80,7 @@ By design, d1 is the smallest direction and d2 is the highest
 	d2 = text2num( copytext( icon_state, dash+1 ) )
 
 	var/turf/T = src.loc			// hide if turf is not intact
+
 	if(level==1) hide(T.intact)
 	cable_list += src //add it to the global cable list
 
@@ -629,7 +630,6 @@ obj/structure/cable/proc/cableColor(var/colorC)
 		user << "You cut a piece off the cable coil."
 		src.update_icon()
 		return
-
 	if( istype(W, /obj/item/toy/crayon))
 		var/crayon = W.type
 		switch(crayon)

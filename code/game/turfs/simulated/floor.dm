@@ -438,7 +438,6 @@ turf/simulated/floor/proc/update_icon()
 	intact = 1
 	if(T)
 		if(istype(T,/obj/item/stack/tile/gravel))
-			floor_tile = T
 			update_icon()
 			levelupdate()
 			return

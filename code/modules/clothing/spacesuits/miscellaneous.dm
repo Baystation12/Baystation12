@@ -85,6 +85,13 @@
 	siemens_coefficient = 0.9
 	body_parts_covered = UPPER_TORSO|ARMS
 
+//Orange emergency space suit
+/obj/item/clothing/head/helmet/space/emergency
+	name = "Emergency Space Helmet"
+	icon_state = "emergencyhelm"
+	item_state = "emergencyhelm"
+	desc = "A simple helmet with a built in light, smells like mothballs."
+
 //clown suit
 //Orange emergency space suit
 /obj/item/clothing/head/helmet/space/emergency
@@ -128,7 +135,6 @@
 	siemens_coefficient = 0.7
 
 //Mime Suit
-
 /obj/item/clothing/head/helmet/space/mimespace
 	name = "Mime helmet"
 	icon_state = "mimespace"

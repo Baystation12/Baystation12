@@ -898,9 +898,7 @@
 #include "code\modules\admin\verbs\ticklag.dm"
 #include "code\modules\admin\verbs\tripAI.dm"
 #include "code\modules\admin\verbs\vox_raiders.dm"
-<<<<<<< HEAD
 #include "code\modules\admin\WIP\Codingale\sendfax.dm"
-=======
 #include "code\modules\alarm\alarm.dm"
 #include "code\modules\alarm\alarm_handler.dm"
 #include "code\modules\alarm\atmosphere_alarm.dm"
@@ -908,7 +906,6 @@
 #include "code\modules\alarm\fire_alarm.dm"
 #include "code\modules\alarm\motion_alarm.dm"
 #include "code\modules\alarm\power_alarm.dm"
->>>>>>> 513579b8ac3036f1720ba4f2797a788ce009677f
 #include "code\modules\assembly\assembly.dm"
 #include "code\modules\assembly\bomb.dm"
 #include "code\modules\assembly\helpers.dm"
@@ -944,11 +941,7 @@
 #include "code\modules\clothing\gloves\boxing.dm"
 #include "code\modules\clothing\gloves\color.dm"
 #include "code\modules\clothing\gloves\miscellaneous.dm"
-<<<<<<< HEAD
-#include "code\modules\clothing\gloves\ninja.dm"
 #include "code\modules\clothing\gloves\stungloves.dm"
-=======
->>>>>>> 513579b8ac3036f1720ba4f2797a788ce009677f
 #include "code\modules\clothing\head\collectable.dm"
 #include "code\modules\clothing\head\hardhat.dm"
 #include "code\modules\clothing\head\helmet.dm"
@@ -960,11 +953,9 @@
 #include "code\modules\clothing\masks\breath.dm"
 #include "code\modules\clothing\masks\gasmask.dm"
 #include "code\modules\clothing\masks\miscellaneous.dm"
-<<<<<<< HEAD
 #include "code\modules\clothing\neck\neck.dm"
-=======
 #include "code\modules\clothing\masks\voice.dm"
->>>>>>> 513579b8ac3036f1720ba4f2797a788ce009677f
+#include "code\modules\clothing\masks\voice.dm"
 #include "code\modules\clothing\shoes\colour.dm"
 #include "code\modules\clothing\shoes\magboots.dm"
 #include "code\modules\clothing\shoes\miscellaneous.dm"
@@ -1647,14 +1638,11 @@
 #include "code\modules\vehicles\cargo_train.dm"
 #include "code\modules\vehicles\train.dm"
 #include "code\modules\vehicles\vehicle.dm"
-<<<<<<< HEAD
 #include "code\modules\vip\vip_ranks.dm"
 #include "code\modules\vip\vipholder.dm"
 #include "code\modules\vip\viptopics.dm"
 #include "code\modules\vip\verbs\vip_verbs.dm"
-=======
 #include "code\modules\virus2\admin.dm"
->>>>>>> 513579b8ac3036f1720ba4f2797a788ce009677f
 #include "code\modules\virus2\analyser.dm"
 #include "code\modules\virus2\antibodies.dm"
 #include "code\modules\virus2\centrifuge.dm"
@@ -1673,7 +1661,6 @@
 #include "code\TriDimension\Structures.dm"
 #include "code\TriDimension\Structures_presets.dm"
 #include "code\TriDimension\Turfs.dm"
-<<<<<<< HEAD
 #include "code\WorkInProgress\autopsy.dm"
 #include "code\WorkInProgress\buildmode.dm"
 #include "code\WorkInProgress\explosion_particles.dm"
@@ -1759,8 +1746,6 @@
 #include "code\WorkInProgress\Susan\susan_desert_turfs.dm"
 #include "code\WorkInProgress\Wrongnumber\weldbackpack.dm"
 #include "code\WorkInProgress\yashaldie\virtualgameboard.dm"
-=======
->>>>>>> 513579b8ac3036f1720ba4f2797a788ce009677f
 #include "code\ZAS\_docs.dm"
 #include "code\ZAS\_gas_mixture_xgm.dm"
 #include "code\ZAS\_xgm_gas_data.dm"
@@ -1780,14 +1765,5 @@
 #include "code\ZAS\Zone.dm"
 #include "interface\interface.dm"
 #include "interface\skin.dmf"
-<<<<<<< HEAD
 #include "maps\Mutizphoenix2.dmm"
-=======
-#include "maps\exodus-1.dmm"
-#include "maps\exodus-2.dmm"
-#include "maps\exodus-3.dmm"
-#include "maps\exodus-4.dmm"
-#include "maps\exodus-5.dmm"
-#include "maps\exodus-6.dmm"
->>>>>>> 513579b8ac3036f1720ba4f2797a788ce009677f
 // END_INCLUDE

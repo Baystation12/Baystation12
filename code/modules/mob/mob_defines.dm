@@ -227,6 +227,7 @@
 	var/list/shouldnt_see = list()	//list of objects that this mob shouldn't see in the stat panel. this silliness is needed because of AI alt+click and cult blood runes
 
 	var/list/active_genes=list()
+
+
 	var/iaa = 0
 	var/iaarevoked = 0
-

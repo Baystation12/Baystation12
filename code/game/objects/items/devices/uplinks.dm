@@ -254,7 +254,10 @@ datum/nano_item_lists
 		if(href_list["menu"])
 			nanoui_menu = text2num(href_list["menu"])
 			update_nano_data(href_list["id"])
-
+		else if(..(href, href_list) == 1)
+			var/datum/uplink_item/UI = ItemsReference[href_list["buy_item"]]
+			if(!UI)
+				return
 /*
 			var/obj/I = new UI.path(get_turf(usr))
 			if(ishuman(usr))

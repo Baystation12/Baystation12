@@ -3,8 +3,6 @@
 	desc = "Apply butt."
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "stool"
-	anchored = 1.0
-	pressure_resistance = 15
 	pixel_y = 0
 	force = 10
 	throwforce = 10
@@ -49,22 +47,17 @@
 		del(src)
 	..()
 
-
 /obj/structure/stool/bed/chair/bench
 	name = "bench"
 	desc = "It has a massive mark!"
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "bench"
 
-
 /obj/structure/stool/bed/chair/bench/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	return
 
-
 /obj/structure/stool/bed/chair/bench/MouseDrop(atom/over_object)
 	return
-
-
 
 /obj/structure/stool/bed/chair/bench/handle_rotation()
 	if(src.dir == (NORTH))

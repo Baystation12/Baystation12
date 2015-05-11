@@ -22,6 +22,7 @@ Thus, the two variables affect pump operation are set in New():
 	var/badpump = 0
 	var/on = 0
 	var/alerted = 0
+
 	var/target_pressure = ONE_ATMOSPHERE
 
 	//var/max_volume_transfer = 10000

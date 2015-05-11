@@ -68,7 +68,6 @@
 	icon_state = "stamp-app"
 	item_color = "green"
 	desc = "A stamp for approving documents."
-
 // Syndicate stamp to forge documents.
 /obj/item/weapon/stamp/chameleon/attack_self(mob/user as mob)
 
