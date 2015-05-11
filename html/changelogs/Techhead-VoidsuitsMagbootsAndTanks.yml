@@ -1,6 +1,0 @@
-+author: Techhead
- +delete-after: True
- +changes: 
-+  - rscadd: "Voidsuits can have tanks inserted into the storage slot."
-+  - rscadd: "Voidsuits display helpful information on their contents on examine."
-+  - rscadd: "Magboots can be equipped over other shoes. Except other magboots."
