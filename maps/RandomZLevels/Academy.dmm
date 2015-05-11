@@ -77,7 +77,7 @@
 "by" = (/turf/simulated/floor/plating{tag = "icon-warnplate (WEST)"; icon_state = "warnplate"; dir = 8},/area/awaymission/academy/classrooms)
 "bz" = (/turf/simulated/floor/plating,/area/awaymission/academy/classrooms)
 "bA" = (/turf/simulated/floor/plating{tag = "icon-warnplate (EAST)"; icon_state = "warnplate"; dir = 4},/area/awaymission/academy/classrooms)
-"bB" = (/obj/machinery/door_control{id = "AcademyAuto"; pixel_y = 24},/turf/simulated/floor,/area/awaymission/academy/classrooms)
+"bB" = (/obj/machinery/button/remote/blast_door{id = "AcademyAuto"; pixel_y = 24},/turf/simulated/floor,/area/awaymission/academy/classrooms)
 "bC" = (/turf/simulated/wall,/area/awaymission/academy/classrooms)
 "bD" = (/turf/simulated/shuttle/wall{tag = "icon-swallc2"; icon_state = "swallc2"},/area/awaymission/academy/classrooms)
 "bE" = (/turf/simulated/shuttle/wall{tag = "icon-swall12"; icon_state = "swall12"; dir = 2},/area/awaymission/academy/classrooms)
@@ -529,7 +529,7 @@
 "ki" = (/obj/machinery/gateway,/turf/simulated/floor/plating,/area/awaymission/academy/academygate)
 "kj" = (/obj/machinery/gateway{dir = 6},/turf/simulated/floor/plating,/area/awaymission/academy/academygate)
 "kk" = (/obj/machinery/light,/turf/simulated/floor/carpet,/area/awaymission/academy/academygate)
-"kl" = (/obj/machinery/door_control{id = "AcademyGate"; pixel_y = -24},/turf/simulated/floor/carpet{icon_state = "carpetsymbol"},/area/awaymission/academy/academygate)
+"kl" = (/obj/machinery/button/remote/blast_door{id = "AcademyGate"; pixel_y = -24},/turf/simulated/floor/carpet{icon_state = "carpetsymbol"},/area/awaymission/academy/academygate)
 "km" = (/turf/simulated/floor/carpet{icon_state = "carpetsymbol"},/area/awaymission/academy/academygate)
 "kn" = (/obj/machinery/door/poddoor/shutters{id = "AcademyGate"},/turf/simulated/floor/plating{dir = 2; icon_state = "warnplate"; tag = "icon-warnplate (NORTH)"},/area/awaymission/academy/academygate)
 
