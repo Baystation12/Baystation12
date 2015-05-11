@@ -832,7 +832,6 @@ note dizziness decrements automatically in the mob's Life() proc.
 				stat(null,"Tick-[master_controller.ticker_cost]\tALL-[master_controller.total_cost]")
 			else
 				stat(null,"MasterController-ERROR")*/
-
 	if(listed_turf && client)
 		if(!TurfAdjacent(listed_turf))
 			listed_turf = null

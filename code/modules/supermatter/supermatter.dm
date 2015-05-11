@@ -171,9 +171,7 @@
 				for(var/client/C in admins)
 					C << 'sound/ambience/alarm4.ogg'
 				message_admins("Got some noob engineers this round the Supermatter is about to blow! (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</a>) (<A HREF='?_src_=holder;deletesm=\ref[usr]'>Delete!</A>)")
-
 				message_admins("Warning...you best keep an eye on the Supermatter just in case. (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</a>)")
-
 				message_admins("Supermatter crystal is now safe")
 			explode()*/
 		if(damage > emergency_point)

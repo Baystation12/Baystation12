@@ -798,7 +798,6 @@ client
 		if(H.dna)
 			H.dna.mutantrace = new_mutantrace
 			H.update_mutantrace()
-
 	else if(href_list["setspecies"])
 		if(!check_rights(/*R_SPAWN*/R_SERVER))	return
 

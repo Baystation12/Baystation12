@@ -54,6 +54,7 @@
 		src.updateDialog()
 		return 1
 */
+
 /obj/machinery/computer/crew/interact(mob/user)
 /*	ui_interact(user)
 		if((C) && (C.has_sensor) && (pos) && C.sensor_mode)

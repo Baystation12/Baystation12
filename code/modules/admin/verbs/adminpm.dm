@@ -117,7 +117,6 @@
 		//check client/X is an admin and isn't the sender or recipient
 		if(X == C || X == src)
 			continue
-
 		if(X.key!=key && X.key!=C.key && (X.holder.rights & R_ADMIN) || (X.holder.rights & (R_MOD|R_MENTOR|R_DEV)) )
 			X << "<B><font color='blue'>PM: [key_name(src, X, 0)]-&gt;[key_name(C, X, 0)] (<A HREF='?_src_=holder;takeadminhelp=\ref[C]'>TAKE</A>):</B> \blue [msg]</font>" //inform X
 

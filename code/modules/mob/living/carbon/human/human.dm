@@ -267,7 +267,6 @@
 					return 1
 	return 0
 
-
 /mob/living/carbon/human/proc/implant_slave(mob/living/carbon/human/M, override = FALSE) // Won't override by default.
 	if(!config.use_loyalty_implants && !override) return // Nuh-uh.
 

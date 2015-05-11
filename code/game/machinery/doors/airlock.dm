@@ -661,43 +661,8 @@ About the new airlock wires panel:
 	if(src.p_open)
 		user.set_machine(src)
 		/*var/t1 = text("<B>Access Panel</B><br>\n")
-		var/t1 = text("<B>Access Panel</B><br>\n")
-
-		//t1 += text("[]: ", airlockFeatureNames[airlockWireColorToIndex[9]])
-		var/list/wires = list(
-			"Orange" = 1,
-			"Dark red" = 2,
-			"White" = 3,
-			"Yellow" = 4,
-			"Red" = 5,
-			"Blue" = 6,
-			"Green" = 7,
-			"Grey" = 8,
-			"Black" = 9,
-			"Gold" = 10,
-			"Aqua" = 11,
-			"Pink" = 12
-		)
-		for(var/wiredesc in wires)
-			var/is_uncut = src.wires & airlockWireColorToFlag[wires[wiredesc]]
-			t1 += "[wiredesc] wire: "
-			if(!is_uncut)
-				t1 += "<a href='?src=\ref[src];wires=[wires[wiredesc]]'>Mend</a>"
-			else
-				t1 += "<a href='?src=\ref[src];wires=[wires[wiredesc]]'>Cut</a> "
-				t1 += "<a href='?src=\ref[src];pulse=[wires[wiredesc]]'>Pulse</a> "
-				if(src.signalers[wires[wiredesc]])
 					t1 += "<a href='?src=\ref[src];remove-signaler=[wires[wiredesc]]'>Detach activator</a>"
-				else
 					t1 += "<a href='?src=\ref[src];signaler=[wires[wiredesc]]'>Attach activator</a>"
-			t1 += "<br>"
-
-		t1 += text("<br>\n[]<br>\n[]<br>\n[]<br>\n[]<br>\n[]<br>\n[]", (src.locked ? "The door bolts have fallen!" : "The door bolts look up."), (src.lights ? "The door bolt lights are on." : "The door bolt lights are off!"), ((src.arePowerSystemsOn()) ? "The test light is on." : "The test light is off!"), (src.aiControlDisabled==0 ? "The 'AI control allowed' light is on." : "The 'AI control allowed' light is off."),  (src.safe==0 ? "The 'Check Wiring' light is on." : "The 'Check Wiring' light is off."), (src.normalspeed==0 ? "The 'Check Timing Mechanism' light is on." : "The 'Check Timing Mechanism' light is off."))
-
-		t1 += text("<p><a href='?src=\ref[];close=1'>Close</a></p>\n", src)
-
-		user << browse(t1, "window=airlock")
-		onclose(user, "airlock")
 */
 		wires.Interact(user)
 	else

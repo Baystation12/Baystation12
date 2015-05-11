@@ -19,7 +19,6 @@
 	var/store_misc = 1
 	var/store_items = 1
 	var/store_mobs = 1
-
 	var/const/default_mob_size = 3
 
 /obj/structure/closet/initialize()
@@ -255,6 +254,7 @@
 
 	if(!src.open())
 		user << "<span class='notice'>It won't budge!</span>"
+
 
 /obj/structure/closet/attack_robot(mob/user as mob)
 	if(Adjacent(user))

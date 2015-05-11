@@ -41,7 +41,7 @@
 	var/mob_size            // Used by lockers.
 	var/wall_smash = 0
 	var/iswizard = 0
-	var/on_fire = 0 //The "Are we on fire?" var
 	//var/fire_stacks = 0 //Tracks how many stacks of fire we have on, max is usually 20
+	var/on_fire = 0 //The "Are we on fire?" var
 	var/fire_stacks
 

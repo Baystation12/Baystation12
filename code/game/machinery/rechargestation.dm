@@ -150,15 +150,6 @@
 			overlays += image('icons/obj/objects.dmi', "statn_c100")
 
 
-	proc
-		build_icon()
-			if(NOPOWER|BROKEN)
-				if(src.occupant)
-					icon_state = "borgcharger1"
-				else
-					icon_state = "borgcharger0"
-			else
-				icon_state = "borgcharger0"
 	attackby(var/obj/item/O as obj, var/mob/user as mob)
 		if (istype(O, /obj/item/weapon/grab))
 			var/obj/item/weapon/grab/G = O
@@ -176,21 +167,6 @@
 	else
 		icon_state = "borgcharger0"
 
-		process_occupant()
-			if(src.occupant)
-				if (istype(occupant, /mob/living/silicon/robot))
-					var/mob/living/silicon/robot/R = occupant
-					if(R.module)
-						R.module.respawn_consumable(R)
-					if(!R.cell)
-						return
-					if(!R.cell.fully_charged())
-						var/diff = min(R.cell.maxcharge - R.cell.charge, 250) 	// Capped at 250 charge / tick
-						diff = min(diff, current_internal_charge) 				// No over-discharging
-						R.cell.give(diff)
-						current_internal_charge -= diff
-					else
-						update_use_power(1)
 				if (istype(occupant, /mob/living/carbon/human))
 					if(occupant.nutrition >= 440)
 						if(saidrecharge <=0)
@@ -209,8 +185,6 @@
 							if(E.burn_dam && (E.status & ORGAN_ROBOT))
 								E.heal_damage(2,0,0,1)
 
-		go_out()
-			if(!( src.occupant ))
 /obj/machinery/recharge_station/proc/process_occupant()
 	if(occupant)
 		if(istype(occupant, /mob/living/silicon/robot))
@@ -219,17 +193,7 @@
 				R.module.respawn_consumable(R, charge_rate / 250)
 			if(!R.cell)
 				return
-			//for(var/obj/O in src)
-			//	O.loc = src.loc
-			if (src.occupant.client)
-				src.occupant.client.eye = src.occupant.client.mob
-				src.occupant.client.perspective = MOB_PERSPECTIVE
-			src.occupant.loc = src.loc
-			src.occupant = null
 			saidrecharge = 0
-			build_icon()
-			update_use_power(1)
-			return
 			if(!R.cell.fully_charged())
 				var/diff = min(R.cell.maxcharge - R.cell.charge, charge_rate) 	// Capped at charge_rate charge / tick
 				if (cell.use(diff))
@@ -345,7 +309,6 @@
 			set category = "Object"
 			set src in oview(1)
 			if (usr.stat != 0)
-				return
 			src.go_out()
 			add_fingerprint(usr)
 			return

@@ -93,6 +93,7 @@
 	var/mob/living/silicon/ai/occupier = null
 	var/longtermpower = 10
 	var/empproof = 0
+	luminosity = 2
 	var/datum/wires/apc/wires = null
 	var/update_state = -1
 	var/update_overlay = -1
@@ -104,7 +105,7 @@
 	var/global/list/status_overlays_equipment
 	var/global/list/status_overlays_lighting
 	var/global/list/status_overlays_environ
-	luminosity = 2
+
 /obj/machinery/power/apc/updateDialog()
 	if (stat & (BROKEN|MAINT))
 		return

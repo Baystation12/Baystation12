@@ -1697,7 +1697,7 @@
 		var/mob/sender = locate(href_list["CentcommFaxReply"])
 		var/obj/machinery/photocopier/faxmachine/fax = locate(href_list["originfax"])
 
-		var/inputsubject = input(src.owner, "Please enter a Subject", "Outgoing message from Centcomm", "") as text|null
+	var/inputsubject = input(src.owner, "Please enter a Subject", "Outgoing message from Centcomm", "") as text|null
 		if(!inputsubject)	return
 
 		var/inputmessage = input(src.owner, "Please enter a message to reply to [key_name(H)] via secure connection. Use <br> for line breaks.", "Outgoing message from Centcomm", "") as message|null
@@ -1726,11 +1726,7 @@
 		P.overlays += stampoverlay
 		P.stamps += "<HR><i>This paper has been stamped by the Central Command Quantum Relay.</i>"
 
-					// give the sprite some time to flick
-					spawn(20)
-						var/obj/item/weapon/paper/P = new /obj/item/weapon/paper( F.loc )
 						P.name = "[command_name()] - [customname]"
-						P.info = input
 						P.update_icon()*/
 		if(fax.recievefax(P))
 			src.owner << "\blue Message reply to transmitted successfully."
@@ -1742,13 +1738,6 @@
 		spawn(100)
 			del(P)
 		return
-			/*	src.owner << "Message reply to transmitted successfully."  //MERGE1
-				log_admin("[key_name(src.owner)] replied to a fax message from [key_name(H)]: [input]")
-				log_admin_single("[key_name(src.owner)] replied to a fax message from [key_name(H)]: [input]")
-				send_investigate_log("[key_name(src.owner)] replied to a fax message from [key_name(H)]: <a href='?_src_=holder;CentcommFaxView=\ref[input]'>view message</a>","fax")
-				message_admins("[key_name_admin(src.owner)] replied to a fax message from [key_name_admin(H)]", 1)
-				return
-		src.owner << "/red Unable to locate fax!"*/
 
 	else if(href_list["SolGovFaxReply"])
 		//TODO

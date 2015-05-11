@@ -269,6 +269,7 @@ datum/hud/New(mob/owner)
 	if(!hud_used)
 		usr << "\red This mob type does not use a HUD."
 		return
+
 	if(!ishuman(src))
 		usr << "\red Inventory hiding is currently only supported for human mobs, sorry."
 		return

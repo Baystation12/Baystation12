@@ -14,10 +14,8 @@
 	/*verb/toggle()
 			if("aeneasrinil")
 				src.icon_state = "aeneasrinil_open"
-				usr << "You unbutton the labcoat."
 			if("aeneasrinil_open")
 				src.icon_state = "aeneasrinil"
-				usr << "You button up the labcoat."
 			if("kidafrag_open")
 				src.icon_state = "kidafrag_buttoned"
 				src.icon_state = "kidafrag_buttoned"

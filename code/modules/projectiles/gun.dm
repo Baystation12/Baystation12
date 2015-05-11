@@ -121,7 +121,6 @@
 		if (istype(src, /obj/item/weapon/gun/energy/staff))
 			if(M.iswizard == 0)
 				M << "\red Have have no idea how to use the.. [src]"
-				return
 
 			return*/
 /obj/item/weapon/gun/proc/Fire(atom/target, mob/living/user, params, pointblank=0, reflex=0)

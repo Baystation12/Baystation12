@@ -301,7 +301,7 @@ var/list/robot_verbs_default = list(
 			module_sprites["Standard"] = "surgeon"
 			module_sprites["Advanced Droid"] = "droid-medical"
 			module_sprites["Needles"] = "medicalrobot"
-			module_sprites["Drone"] = "drone-medical"
+			module_sprites["Drone" ] = "drone-medical"
 			hud = new /obj/item/borg/sight/hud/med(src)
 			sight_mode = 0
 

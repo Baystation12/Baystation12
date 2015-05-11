@@ -364,6 +364,7 @@
 	icon_state = "tdgreen"
 	item_state = "tdgreen"
 	siemens_coefficient = 1
+
 /*
 /obj/item/clothing/suit/armor/tactical
 	name = "tactical armor"

@@ -264,7 +264,7 @@ var/global/list/breach_burn_descriptors_helmet = list(
 	..(user)
 	if(can_breach && breaches && breaches.len)
 		for(var/datum/breach/B in breaches)
-			usr << "\red <B>It has \a [B.descriptor].</B>"
+			user << "\red <B>It has \a [B.descriptor].</B>"
 
 
 //--------------------------------------------------------------

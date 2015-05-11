@@ -889,14 +889,14 @@ datum/preferences
 	if(!user)	return
 
 	if(!istype(user, /mob/new_player) && !istype(user, /mob/dead/observer))	return
-	/*if(!istype(user, /mob/new_player))	return
+	//if(!istype(user, /mob/new_player))	return
 
 	if(href_list["preference"] == "open_whitelist_forum")
 		if(config.forumurl)
 			user << link(config.forumurl)
 		else
 			user << "<span class='danger'>The forum URL is not set in the server configuration.</span>"
-			return*/
+			return
 
 	if(href_list["preference"] == "job")
 		switch(href_list["task"])
