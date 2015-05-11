@@ -104,7 +104,7 @@ var/list/sacrificed = list()
 				if(!iscultist(M) && M.stat < DEAD && !(M in converting))
 					target = M
 					break
-			
+
 			if(!target) //didn't find any new targets
 				if(!converting.len)
 					fizzle()
@@ -113,7 +113,7 @@ var/list/sacrificed = list()
 				return
 
 			usr.say("Mah[pick("'","`")]weyh pleggh at e'ntrath!")
-			
+
 			converting |= target
 			var/list/waiting_for_input = list(target = 0) //need to box this up in order to be able to reset it again from inside spawn, apparently
 			var/initial_message = 0
@@ -123,7 +123,7 @@ var/list/sacrificed = list()
 					if(target.getFireLoss() < 100)
 						target.hallucination = min(target.hallucination, 500)
 					return 0
-				
+
 				target.take_overall_damage(0, rand(5, 20)) // You dirty resister cannot handle the damage to your mind. Easily. - even cultists who accept right away should experience some effects
 				// Resist messages go!
 				if(initial_message) //don't do this stuff right away, only if they resist or hesitate.
@@ -139,7 +139,7 @@ var/list/sacrificed = list()
 							target << "<span class='cult'>Your mind turns to ash as the burning flames engulf your very soul and images of an unspeakable horror begin to bombard the last remnants of mental resistance.</span>"
 							//broken mind - 5000 may seem like a lot I wanted the effect to really stand out for maxiumum losing-your-mind-spooky
 							//hallucination is reduced when the step off as well, provided they haven't hit the last stage...
-							target.hallucination += 5000 
+							target.hallucination += 5000
 							target.apply_effect(10, STUTTER)
 							target.adjustBrainLoss(1)
 						if(100 to INFINITY)
@@ -160,8 +160,8 @@ var/list/sacrificed = list()
 					if(!is_convertable_to_cult(target.mind) || jobban_isbanned(target, "cultist"))//putting jobban check here because is_convertable uses mind as argument
 						//waiting_for_input ensures this is only shown once, so they basically auto-resist from here on out. They still need to find a way to get off the freaking rune if they don't want to burn to death, though.
 						target << "<span class='cult'>Your blood pulses. Your head throbs. The world goes red. All at once you are aware of a horrible, horrible truth. The veil of reality has been ripped away and in the festering wound left behind something sinister takes root.</span>"
-						target << "<span class='danger'>And you were able to force it out of your mind. You now know the truth, there's something horrible out there, stop it and its minions at all costs.</span>" 
-						
+						target << "<span class='danger'>And you were able to force it out of your mind. You now know the truth, there's something horrible out there, stop it and its minions at all costs.</span>"
+
 					else spawn()
 						var/choice = alert(target,"Do you want to join the cult?","Submit to Nar'Sie","Resist","Submit")
 						waiting_for_input[target] = 0
@@ -172,7 +172,7 @@ var/list/sacrificed = list()
 							target << "<span class='cult'>Assist your new compatriots in their dark dealings. Their goal is yours, and yours is theirs. You serve the Dark One above all else. Bring It back.</span>"
 							converting -= target
 							target.hallucination = 0 //sudden clarity
-				
+
 				sleep(100) //proc once every 10 seconds
 			return 1
 
@@ -415,6 +415,7 @@ var/list/sacrificed = list()
 			var/mob/dead/observer/ghost
 			for(var/mob/dead/observer/O in this_rune.loc)
 				if(!O.client)	continue
+				if(!O.MayRespawn()) continue
 				if(O.mind && O.mind.current && O.mind.current.stat != DEAD)	continue
 				ghost = O
 				break
