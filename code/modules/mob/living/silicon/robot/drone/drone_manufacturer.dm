@@ -102,6 +102,9 @@
 	if(jobban_isbanned(src,"Cyborg"))
 		usr << "\red You are banned from playing synthetics and cannot spawn as a drone."
 		return
+		
+	if(!MayRespawn(1))
+		return
 
 	var/deathtime = world.time - src.timeofdeath
 	if(istype(src,/mob/dead/observer))
