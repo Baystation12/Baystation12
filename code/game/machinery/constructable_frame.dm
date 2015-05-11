@@ -53,7 +53,7 @@
 						playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 						user << "\blue You dismantle the frame"
 						new /obj/item/stack/sheet/metal(src.loc, 5)
-						del(src)
+						qdel(src)
 			if(2)
 				if(istype(P, /obj/item/weapon/circuitboard))
 					var/obj/item/weapon/circuitboard/B = P
@@ -129,7 +129,7 @@
 							else
 								circuit.loc = null
 							new_machine.RefreshParts()
-							del(src)
+							qdel(src)
 					else
 						if(istype(P, /obj/item))
 							for(var/I in req_components)

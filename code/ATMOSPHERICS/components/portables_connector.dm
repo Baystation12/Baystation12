@@ -60,7 +60,7 @@
 
 	return null
 
-/obj/machinery/atmospherics/portables_connector/Del()
+/obj/machinery/atmospherics/portables_connector/Destroy()
 	loc = null
 
 	if(connected_device)
@@ -68,7 +68,7 @@
 
 	if(node)
 		node.disconnect(src)
-		del(network)
+		qdel(network)
 
 	node = null
 
@@ -122,7 +122,7 @@
 
 /obj/machinery/atmospherics/portables_connector/disconnect(obj/machinery/atmospherics/reference)
 	if(reference==node)
-		del(network)
+		qdel(network)
 		node = null
 
 	update_underlays()
@@ -152,4 +152,4 @@
 			"\blue You have unfastened \the [src].", \
 			"You hear ratchet.")
 		new /obj/item/pipe(loc, make_from=src)
-		del(src)
+		qdel(src)

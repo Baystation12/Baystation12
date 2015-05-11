@@ -3,14 +3,7 @@
 	var/list_cameras = 0						// Whether or not to list camera references. A future goal would be to merge this with the enginering/security camera console. Currently really only for AI-use.
 	var/list/datum/alarm_handler/alarm_handlers // The particular list of alarm handlers this alarm monitor should present to the user.
 
-/obj/nano_module/alarm_monitor/ai
-	list_cameras = 1
-
-/obj/nano_module/alarm_monitor/ai/New()
-	..()
-	alarm_handlers = alarm_manager.all_handlers
-
-/obj/nano_module/alarm_monitor/borg/New()
+/obj/nano_module/alarm_monitor/all/New()
 	..()
 	alarm_handlers = alarm_manager.all_handlers
 
@@ -63,7 +56,7 @@
 		usr.switch_to_camera(C)
 		return 1
 
-/obj/nano_module/alarm_monitor/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+/obj/nano_module/alarm_monitor/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
 	var/data[0]
 
 	var/categories[0]
@@ -73,7 +66,7 @@
 			var/cameras[0]
 			var/lost_sources[0]
 
-			if(list_cameras)
+			if(user.isMobAI())
 				for(var/obj/machinery/camera/C in A.cameras())
 					cameras[++cameras.len] = C.nano_structure()
 			for(var/datum/alarm_source/AS in A.sources)
@@ -85,12 +78,12 @@
 					"origin_lost" = A.origin == null,
 					"has_cameras" = cameras.len,
 					"cameras" = cameras,
-					"lost_sources" = sanitize(english_list(lost_sources, nothing_text = "", and_text = ", "))))
+					"lost_sources" = lost_sources.len ? sanitize(english_list(lost_sources, nothing_text = "", and_text = ", ")) : ""))
 	data["categories"] = categories
 
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
-		ui = new(user, src, ui_key, "alarm_monitor.tmpl", "Alarm Monitoring Console", 800, 800)
+		ui = new(user, src, ui_key, "alarm_monitor.tmpl", "Alarm Monitoring Console", 800, 800, state = state)
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)

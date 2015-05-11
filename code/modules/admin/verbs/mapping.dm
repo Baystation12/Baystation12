@@ -55,7 +55,7 @@ var/intercom_range_display_status = 0
 
 
 	for(var/obj/effect/debugging/camera_range/C in world)
-		del(C)
+		qdel(C)
 
 	if(camera_range_display_status)
 		for(var/obj/machinery/camera/C in cameranet.cameras)
@@ -114,14 +114,14 @@ var/intercom_range_display_status = 0
 		intercom_range_display_status = 1
 
 	for(var/obj/effect/debugging/marker/M in world)
-		del(M)
+		qdel(M)
 
 	if(intercom_range_display_status)
 		for(var/obj/item/device/radio/intercom/I in world)
 			for(var/turf/T in orange(7,I))
 				var/obj/effect/debugging/marker/F = new/obj/effect/debugging/marker(T)
 				if (!(F in view(7,I.loc)))
-					del(F)
+					qdel(F)
 	feedback_add_details("admin_verb","mIRD") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 var/list/debug_verbs = list (
@@ -276,7 +276,7 @@ var/list/debug_verbs = list (
 		var/datum/controller/air_system/old_air = air_master
 		for(var/zone/zone in old_air.zones)
 			zone.c_invalidate()
-		del old_air
+		qdel(old_air)
 		air_master = new
 		air_master.Setup()
 		spawn air_master.Start()

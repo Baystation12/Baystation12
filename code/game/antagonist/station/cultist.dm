@@ -24,11 +24,13 @@ var/datum/antagonist/cultist/cult
 	flags = ANTAG_SUSPICIOUS | ANTAG_RANDSPAWN | ANTAG_VOTABLE
 	max_antags = 200 // No upper limit.
 	max_antags_round = 200
+	var/allow_narsie = 1
 
 	var/datum/mind/sacrifice_target
 	var/list/startwords = list("blood","join","self","hell")
 	var/list/allwords = list("travel","self","see","hell","blood","join","tech","destroy", "other", "hide")
 	var/list/sacrificed = list()
+	var/list/harvested = list()
 
 /datum/antagonist/cultist/New()
 	..()

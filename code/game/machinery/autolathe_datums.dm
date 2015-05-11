@@ -16,7 +16,7 @@
 			recipe.resources = list()
 			for(var/material in I.matter)
 				recipe.resources[material] = I.matter[material]*1.25 // More expensive to produce than they are to recycle.
-			del(I)
+			qdel(I)
 
 /datum/autolathe/recipe
 	var/name = "object"
@@ -40,6 +40,11 @@
 /datum/autolathe/recipe/extinguisher
 	name = "extinguisher"
 	path = /obj/item/weapon/extinguisher
+	category = "General"
+
+/datum/autolathe/recipe/jar
+	name = "jar"
+	path = /obj/item/glass_jar
 	category = "General"
 
 /datum/autolathe/recipe/crowbar

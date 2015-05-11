@@ -59,7 +59,7 @@
 					health = min(maxHealth, health + MED.heal_brute)
 					MED.amount -= 1
 					if(MED.amount <= 0)
-						del(MED)
+						qdel(MED)
 					for(var/mob/M in viewers(src, null))
 						if ((M.client && !( M.blinded )))
 							M.show_message("\blue [user] applies the [MED] on [src]")
@@ -94,7 +94,7 @@
 					emote_hear = list("clicks")
 					emote_see = list("clacks")
 					desc = "Free crabs!"
-					src.sd_SetLuminosity(0)
+					src.sd_set_light(0)
 					inventory_head.loc = src.loc
 					inventory_head = null
 				else

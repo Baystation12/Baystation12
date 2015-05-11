@@ -28,7 +28,7 @@
 	if(src.can_use())
 		cameranet.addCamera(src)
 	else
-		src.SetLuminosity(0)
+		src.set_light(0)
 		cameranet.removeCamera(src)
 
 /obj/machinery/camera/New()
@@ -41,7 +41,7 @@
 		dd_insertObjectList(cameranet.cameras, src)
 	update_coverage(1)
 
-/obj/machinery/camera/Del()
+/obj/machinery/camera/Destroy()
 	cameranet.cameras -= src
 	clear_all_networks()
 	..()

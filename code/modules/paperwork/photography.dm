@@ -42,7 +42,7 @@ var/global/photo_count = 0
 	user.examinate(src)
 
 /obj/item/weapon/photo/attackby(obj/item/weapon/P as obj, mob/user as mob)
-	if(istype(P, /obj/item/weapon/pen) || istype(P, /obj/item/toy/crayon))
+	if(istype(P, /obj/item/weapon/pen))
 		var/txt = sanitize(input(user, "What would you like to write on the back?", "Photo Writing", null)  as text, 128)
 		if(loc == user && user.stat == 0)
 			scribble = txt
@@ -159,7 +159,7 @@ var/global/photo_count = 0
 			return
 		user << "<span class='notice'>You insert [I] into [src].</span>"
 		user.drop_item()
-		del(I)
+		qdel(I)
 		pictures_left = pictures_max
 		return
 	..()

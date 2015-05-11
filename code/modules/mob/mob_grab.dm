@@ -24,8 +24,8 @@
 	assailant = user
 	affecting = victim
 
-	if(affecting.anchored)
-		del(src)
+	if(affecting.anchored || !assailant.Adjacent(victim))
+		qdel(src)
 		return
 
 	affecting.grabbed_by += src
@@ -35,9 +35,16 @@
 	hud.name = "reinforce grab"
 	hud.master = src
 
-/obj/item/weapon/grab/Del()
-	//make sure the grabbed_by list doesn't fill up with nulls
-	if(affecting) affecting.grabbed_by -= src
+/obj/item/weapon/grab/Destroy()
+	if(affecting)
+		affecting.grabbed_by -= src
+		affecting = null
+	if(assailant)
+		if(assailant.client)
+			assailant.client.screen -= hud
+		assailant = null
+	qdel(hud)
+	hud = null
 	..()
 
 //Used by throw code to hand over the mob, instead of throwing the grab. The grab is then deleted by the throw code.
@@ -61,6 +68,9 @@
 
 /obj/item/weapon/grab/process()
 	confirm()
+	if(!assailant)
+		qdel(src)
+		return
 
 	if(assailant.client)
 		assailant.client.screen -= hud
@@ -96,7 +106,7 @@
 		affecting.loc = assailant.loc
 
 	if(state >= GRAB_NECK)
-		affecting.Stun(1)
+		affecting.Stun(3)
 		if(isliving(affecting))
 			var/mob/living/L = affecting
 			L.adjustOxyLoss(1)
@@ -118,7 +128,7 @@
 	if(world.time < (last_upgrade + UPGRADE_COOLDOWN))
 		return
 	if(!assailant.canmove || assailant.lying)
-		del(src)
+		qdel(src)
 		return
 
 	last_upgrade = world.time
@@ -152,10 +162,10 @@
 			if(state == GRAB_KILL)
 				return
 			if(!affecting)
-				del(src)
+				qdel(src)
 				return
 			if(!assailant.canmove || assailant.lying)
-				del(src)
+				qdel(src)
 				return
 			state = GRAB_KILL
 			assailant.visible_message("<span class='danger'>[assailant] has tightened \his grip on [affecting]'s neck!</span>")
@@ -174,12 +184,12 @@
 //This is used to make sure the victim hasn't managed to yackety sax away before using the grab.
 /obj/item/weapon/grab/proc/confirm()
 	if(!assailant || !affecting)
-		del(src)
+		qdel(src)
 		return 0
 
 	if(affecting)
 		if(!isturf(assailant.loc) || ( !isturf(affecting.loc) || assailant.loc != affecting.loc && get_dist(assailant, affecting) > 1) )
-			del(src)
+			qdel(src)
 			return 0
 
 	return 1
@@ -216,12 +226,9 @@
 			user.visible_message("<span class='danger'>[user] devours [affecting]!</span>")
 			affecting.loc = user
 			attacker.stomach_contents.Add(affecting)
-			del(src)
+			qdel(src)
 
 
 /obj/item/weapon/grab/dropped()
-	del(src)
-
-/obj/item/weapon/grab/Del()
-	del(hud)
-	..()
+	loc = null
+	qdel(src)

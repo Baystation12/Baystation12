@@ -28,12 +28,12 @@
 	switch(severity)
 		if(1.0)
 			//SN src = null
-			del(src)
+			qdel(src)
 			return
 		if(2.0)
 			if (prob(50))
 				//SN src = null
-				del(src)
+				qdel(src)
 				return
 		if(3.0)
 			if (prob(25))
@@ -43,14 +43,14 @@
 
 /obj/machinery/optable/blob_act()
 	if(prob(75))
-		del(src)
+		qdel(src)
 
 /obj/machinery/optable/attack_hand(mob/user as mob)
 	if (HULK in usr.mutations)
 		usr << text("\blue You destroy the table.")
 		visible_message("\red [usr] destroys the operating table!")
 		src.density = 0
-		del(src)
+		qdel(src)
 	return
 
 /obj/machinery/optable/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
@@ -105,6 +105,16 @@
 	else
 		icon_state = "table2-idle"
 
+/obj/machinery/optable/MouseDrop_T(mob/target, mob/user)
+
+	var/mob/living/M = user
+	if(user.stat || user.restrained() || !check_table(user) || !iscarbon(target))
+		return
+	if(istype(M))
+		take_victim(target,user)
+	else
+		return ..()
+
 /obj/machinery/optable/verb/climb_on()
 	set name = "Climb On Table"
 	set category = "Object"
@@ -120,7 +130,7 @@
 		var/obj/item/weapon/grab/G = W
 		if(iscarbon(G.affecting) && check_table(G.affecting))
 			take_victim(G.affecting,usr)
-			del(W)
+			qdel(W)
 			return
 
 /obj/machinery/optable/proc/check_table(mob/living/carbon/patient as mob)

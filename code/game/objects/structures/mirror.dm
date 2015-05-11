@@ -80,6 +80,7 @@
 				var/mob/living/carbon/human/vox/vox = new(get_turf(src),"Vox")
 				vox.gender = user.gender
 				raiders.equip(vox)
+				new /obj/item/organ/stack/vox(vox)
 				if(user.mind)
 					user.mind.transfer_to(vox)
 				spawn(1)
@@ -90,5 +91,5 @@
 					vox.real_name = newname
 					vox.name = vox.real_name
 					raiders.update_access(vox)
-				del(user)
+				qdel(user)
 	..()

@@ -89,7 +89,7 @@ rcd light flash thingy on matter drain
 					V.show_message("\blue You hear a loud electrical buzzing sound!", 2)
 				spawn(50)
 					explosion(get_turf(M), 0,1,2,3)
-					del(M)
+					qdel(M)
 			else usr << "Out of uses."
 	else usr << "That's not a machine."
 

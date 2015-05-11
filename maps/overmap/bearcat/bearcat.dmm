@@ -10,7 +10,7 @@
 "aj" = (/obj/effect/mapinfo/ship/bearcat,/turf/space,/area)
 "ak" = (/obj/structure/table,/obj/machinery/light,/obj/item/device/radio,/obj/item/device/radio/intercom{pixel_y = -32},/turf/simulated/floor{tag = "icon-gcircuit (SOUTHEAST)"; icon_state = "gcircuit"; dir = 6},/area/ship/scrap/command)
 "al" = (/obj/structure/stool/bed/chair/comfy/teal{tag = "icon-comfychair_teal (NORTH)"; icon_state = "comfychair_teal"; dir = 1},/obj/machinery/atmospherics/unary/vent_pump{dir = 2; on = 1},/obj/effect/landmark/start{name = "Captain"},/turf/simulated/floor{tag = "icon-gcircuitoff"; icon_state = "gcircuitoff"; dir = 2},/area/ship/scrap/command)
-"am" = (/obj/structure/table,/obj/machinery/light,/obj/machinery/newscaster{pixel_y = -32},/obj/machinery/door_control{id = "scraplock"; name = "External Lockdown"},/turf/simulated/floor{tag = "icon-gcircuit (SOUTHEAST)"; icon_state = "gcircuit"; dir = 6},/area/ship/scrap/command)
+"am" = (/obj/structure/table,/obj/machinery/light,/obj/machinery/newscaster{pixel_y = -32},/obj/machinery/button/remote/blast_door{id = "scraplock"; name = "External Lockdown"},/turf/simulated/floor{tag = "icon-gcircuit (SOUTHEAST)"; icon_state = "gcircuit"; dir = 6},/area/ship/scrap/command)
 "an" = (/turf/simulated/wall/r_wall,/area/ship/scrap/command)
 "ao" = (/obj/machinery/door/airlock/hatch,/obj/machinery/atmospherics/pipe/simple{dir = 2; icon_state = "intact"; level = 1; tag = "icon-intact"},/turf/simulated/floor,/area/ship/scrap/command)
 "ap" = (/turf/simulated/wall/r_wall,/area/ship/scrap/comms)

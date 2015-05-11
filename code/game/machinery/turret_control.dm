@@ -37,7 +37,7 @@
 	lethal = 1
 	icon_state = "control_kill"
 
-/obj/machinery/turretid/Del()
+/obj/machinery/turretid/Destroy()
 	if(control_area)
 		var/area/A = control_area
 		if(A && istype(A))
@@ -46,12 +46,11 @@
 
 /obj/machinery/turretid/initialize()
 	if(!control_area)
-		var/area/CA = get_area(src)
-		control_area = CA.master
+		control_area = get_area(src)
 	else if(istext(control_area))
 		for(var/area/A in world)
 			if(A.name && A.name==control_area)
-				control_area = A.master
+				control_area = A
 				break
 
 	if(control_area)
@@ -79,7 +78,7 @@
 	if(isLocked(user))
 		return STATUS_CLOSE
 
-	return STATUS_INTERACTIVE
+	return ..()
 
 /obj/machinery/turretid/attackby(obj/item/weapon/W, mob/user)
 	if(stat & BROKEN)
@@ -178,9 +177,8 @@
 	TC.ailock = ailock
 
 	if(istype(control_area))
-		for(var/area/sub_area in control_area.related)
-			for (var/obj/machinery/porta_turret/aTurret in sub_area)
-				aTurret.setState(TC)
+		for (var/obj/machinery/porta_turret/aTurret in control_area)
+			aTurret.setState(TC)
 
 	update_icon()
 

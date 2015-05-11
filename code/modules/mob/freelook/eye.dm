@@ -31,12 +31,12 @@
 	updateallghostimages()
 	..()
 
-mob/eye/Del()
+mob/eye/Destroy()
 	if (ghostimage)
 		ghost_darkness_images -= ghostimage
 		ghost_sightless_images -= ghostimage
-		del(ghostimage)
-		ghostimage = null;
+		qdel(ghostimage)
+		ghostimage = null
 		updateallghostimages()
 	..()
 

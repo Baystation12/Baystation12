@@ -120,7 +120,7 @@
 			new/obj/item/clothing/mask/gas/clown_hat(src)
 			new/obj/item/weapon/bikehorn(src)
 			//new/obj/item/weapon/stamp/clown(src) I'd add it, but only clowns can use it
-			new/obj/item/toy/crayon/rainbow(src)
+			new/obj/item/weapon/pen/crayon/rainbow(src)
 			new/obj/item/toy/waterflower(src)
 		if(95)
 			new/obj/item/clothing/under/mime(src)
@@ -130,7 +130,7 @@
 			new/obj/item/clothing/mask/gas/mime(src)
 			new/obj/item/clothing/head/beret(src)
 			new/obj/item/clothing/suit/suspenders(src)
-			new/obj/item/toy/crayon/mime(src)
+			new/obj/item/weapon/pen/crayon/mime(src)
 			new/obj/item/weapon/reagent_containers/food/drinks/bottle/bottleofnothing(src)
 		if(96)
 			new/obj/item/weapon/vampiric(src)
@@ -164,7 +164,7 @@
 					user << "<span class='danger'>The crate's anti-tamper system activates!</span>"
 					var/turf/T = get_turf(src.loc)
 					explosion(T, 0, 0, 0, 1)
-					del(src)
+					qdel(src)
 					return
 		else
 			user << "<span class='notice'>You attempt to interact with the device using a hand gesture, but it appears this crate is from before the DECANECT came out.</span>"

@@ -14,7 +14,7 @@ atom/movable/proc/experience_pressure_difference(pressure_difference, direction)
 
 turf
 	assume_air(datum/gas_mixture/giver) //use this for machines to adjust air
-		del(giver)
+		qdel(giver)
 		return 0
 
 	return_air()
@@ -148,7 +148,7 @@ turf/simulated
 					if(istype(target))
 						air_master.tiles_to_update.Add(target)
 
-	Del()
+	Destroy()
 		if(air_master)
 			if(parent)
 				air_master.groups_to_rebuild.Add(parent)

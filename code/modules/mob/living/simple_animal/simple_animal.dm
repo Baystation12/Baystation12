@@ -39,6 +39,7 @@
 	var/maxbodytemp = 350
 	var/heat_damage_per_tick = 3	//amount of damage applied if animal's body temperature is higher than maxbodytemp
 	var/cold_damage_per_tick = 2	//same as heat_damage_per_tick, only if the bodytemperature it's lower than minbodytemp
+	var/fire_alert = 0
 
 	//Atmos effect - Yes, you can make creatures that require phoron or co2 to survive. N2O is a trace gas and handled separately, hence why it isn't here. It'd be hard to add it. Hard and me don't mix (Yes, yes make all the dick jokes you want with that.) - Errorage
 	var/min_oxy = 5
@@ -78,6 +79,7 @@
 	return
 
 /mob/living/simple_animal/Life()
+	..()
 
 	//Health
 	if(stat == DEAD)
@@ -191,9 +193,13 @@
 
 	//Atmos effect
 	if(bodytemperature < minbodytemp)
+		fire_alert = 2
 		adjustBruteLoss(cold_damage_per_tick)
 	else if(bodytemperature > maxbodytemp)
+		fire_alert = 1
 		adjustBruteLoss(heat_damage_per_tick)
+	else
+		fire_alert = 0
 
 	if(!atmos_suitable)
 		adjustBruteLoss(unsuitable_atoms_damage)
@@ -268,12 +274,12 @@
 					adjustBruteLoss(-MED.heal_brute)
 					MED.amount -= 1
 					if(MED.amount <= 0)
-						del(MED)
+						qdel(MED)
 					for(var/mob/M in viewers(src, null))
 						if ((M.client && !( M.blinded )))
-							M.show_message("<span class='notice>[user] applies the [MED] on [src].</span>")
+							M.show_message("<span class='notice'>[user] applies the [MED] on [src].</span>")
 		else
-			user << "<span class='notice>\The [src] is dead, medical items won't bring it back to life.</span>"
+			user << "<span class='notice'>\The [src] is dead, medical items won't bring it back to life.</span>"
 	if(meat_type && (stat == DEAD))	//if the animal has a meat, and if it is dead.
 		if(istype(O, /obj/item/weapon/kitchenknife) || istype(O, /obj/item/weapon/butch))
 			harvest(user)
@@ -294,7 +300,7 @@
 			usr << "<span class='danger>This weapon is ineffective, it does no damage.</span>"
 			for(var/mob/M in viewers(src, null))
 				if ((M.client && !( M.blinded )))
-					M.show_message("<span class='notice>[user] gently taps [src] with the [O].</span>")
+					M.show_message("<span class='notice'>[user] gently taps [src] with \the [O].</span>")
 
 /mob/living/simple_animal/movement_delay()
 	var/tally = 0 //Incase I need to add stuff other than "speed" later
@@ -313,10 +319,10 @@
 	if(statpanel("Status") && show_stat_health)
 		stat(null, "Health: [round((health / maxHealth) * 100)]%")
 
-/mob/living/simple_animal/death()
+/mob/living/simple_animal/death(gibbed, deathmessage="")
 	icon_state = icon_dead
 	density = 0
-	return ..(deathmessage = "no message")
+	return ..()
 
 /mob/living/simple_animal/ex_act(severity)
 	if(!blinded)
@@ -355,7 +361,7 @@
 //Call when target overlay should be added/removed
 /mob/living/simple_animal/update_targeted()
 	if(!targeted_by && target_locked)
-		del(target_locked)
+		qdel(target_locked)
 	overlays = null
 	if (targeted_by && target_locked)
 		overlays += target_locked
@@ -386,7 +392,7 @@
 		if(small)
 			user.visible_message("<span class='danger'>[user] chops up \the [src]!</span>")
 			new/obj/effect/decal/cleanable/blood/splatter(get_turf(src))
-			del(src)
+			qdel(src)
 		else
 			user.visible_message("<span class='danger'>[user] butchers \the [src] messily!</span>")
 			gib()

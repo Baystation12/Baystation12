@@ -37,9 +37,11 @@ var/can_call_ert
 	log_admin("[key_name(usr)] used Dispatch Response Team.")
 	trigger_armed_response_team(1)
 
-
 client/verb/JoinResponseTeam()
 	set category = "IC"
+
+	if(!MayRespawn(1))
+		return
 
 	if(istype(usr,/mob/dead/observer) || istype(usr,/mob/new_player))
 		if(!send_emergency_team)
@@ -58,7 +60,7 @@ client/verb/JoinResponseTeam()
 				L.name = "Commando"
 				return
 			create_response_team(L.loc, new_name)
-			del(L)
+			qdel(L)
 
 	else
 		usr << "You need to be an observer or new player to use this."

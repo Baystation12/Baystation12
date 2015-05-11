@@ -120,7 +120,7 @@
 			var/obj/item/stack/tile/plasteel/S = C
 			if (S.get_amount() < 1)
 				return
-			del(L)
+			qdel(L)
 			playsound(src.loc, 'sound/weapons/Genhit.ogg', 50, 1)
 			S.build(src)
 			S.use(1)

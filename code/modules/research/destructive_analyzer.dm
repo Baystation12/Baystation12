@@ -13,7 +13,7 @@ Note: Must be placed within 3 tiles of the R&D Console
 	var/obj/item/weapon/loaded_item = null
 	var/decon_mod = 1
 	var/min_reliability = 90
-	
+
 	use_power = 1
 	idle_power_usage = 30
 	active_power_usage = 2500
@@ -35,14 +35,8 @@ Note: Must be placed within 3 tiles of the R&D Console
 	min_reliability = 93 - T
 
 /obj/machinery/r_n_d/destructive_analyzer/meteorhit()
-	del(src)
+	qdel(src)
 	return
-
-/obj/machinery/r_n_d/destructive_analyzer/proc/ConvertReqString2List(var/list/source_list)
-	var/list/temp_list = params2list(source_list)
-	for(var/O in temp_list)
-		temp_list[O] = text2num(temp_list[O])
-	return temp_list
 
 /obj/machinery/r_n_d/destructive_analyzer/update_icon()
 	if(panel_open)

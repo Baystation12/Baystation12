@@ -35,7 +35,6 @@
 
 	var/locked = 0
 	var/mob/living/carbon/brain/brainmob = null//The current occupant.
-	var/mob/living/silicon/robot = null//Appears unused.
 	var/obj/mecha = null//This does not appear to be used outside of reference in mecha.dm.
 
 	attackby(var/obj/item/O as obj, var/mob/user as mob)
@@ -61,7 +60,7 @@
 			living_mob_list += brainmob
 
 			user.drop_item()
-			del(O)
+			qdel(O)
 
 			name = "Man-Machine Interface: [brainmob.real_name]"
 			icon_state = "mmi_full"
@@ -114,6 +113,15 @@
 			icon_state = "mmi_full"
 			locked = 1
 			return
+
+/obj/item/device/mmi/Destroy()
+	if(isrobot(loc))
+		var/mob/living/silicon/robot/borg = loc
+		borg.mmi = null
+	if(brainmob)
+		qdel(brainmob)
+		brainmob = null
+	..()
 
 /obj/item/device/mmi/radio_enabled
 	name = "radio-enabled man-machine interface"

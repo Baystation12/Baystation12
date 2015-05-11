@@ -277,6 +277,13 @@ var/global/floorIsLava = 0
 	var/dat = "<html><head><title>Info on [key]</title></head>"
 	dat += "<body>"
 
+	var/p_age = "unknown"
+	for(var/client/C in clients)
+		if(C.ckey == key)
+			p_age = C.player_age
+			break
+	dat +="<span style='color:#000000; font-weight: bold'>Player age: [p_age]</span><br>"
+
 	var/savefile/info = new("data/player_saves/[copytext(key, 1, 2)]/[key]/info.sav")
 	var/list/infos
 	info >> infos
@@ -670,6 +677,16 @@ var/global/floorIsLava = 0
 	if(check_rights(R_SERVER,0))
 		dat += "<A href='?src=\ref[src];secretsfun=togglebombcap'>Toggle bomb cap</A><BR>"
 
+	if(check_rights(R_SERVER|R_FUN,0))
+		dat += {"
+			<BR>
+			<B>Final Solutions</B><BR>
+			<I>(Warning, these will end the round!)</I><BR>
+			<BR>
+			<A href='?src=\ref[src];secretsfun=hellonearth'>Summon Nar-Sie</A><BR>
+			<A href='?src=\ref[src];secretsfun=supermattercascade'>Start a Supermatter Cascade</A><BR>
+			"}
+
 	dat += "<BR>"
 
 	if(check_rights(R_DEBUG,0))
@@ -737,20 +754,43 @@ var/global/floorIsLava = 0
 	set category = "Server"
 	set desc="Globally Toggles OOC"
 	set name="Toggle OOC"
+
+	if(!check_rights(R_ADMIN))
+		return
+
 	config.ooc_allowed = !(config.ooc_allowed)
 	if (config.ooc_allowed)
 		world << "<B>The OOC channel has been globally enabled!</B>"
 	else
 		world << "<B>The OOC channel has been globally disabled!</B>"
-	log_admin("[key_name(usr)] toggled OOC.")
-	message_admins("[key_name_admin(usr)] toggled OOC.", 1)
+	log_and_message_admins("toggled OOC.")
 	feedback_add_details("admin_verb","TOOC") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+
+/datum/admins/proc/togglelooc()
+	set category = "Server"
+	set desc="Globally Toggles LOOC"
+	set name="Toggle LOOC"
+
+	if(!check_rights(R_ADMIN))
+		return
+
+	config.looc_allowed = !(config.looc_allowed)
+	if (config.looc_allowed)
+		world << "<B>The LOOC channel has been globally enabled!</B>"
+	else
+		world << "<B>The LOOC channel has been globally disabled!</B>"
+	log_and_message_admins("toggled LOOC.")
+	feedback_add_details("admin_verb","TLOOC") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 
 /datum/admins/proc/toggledsay()
 	set category = "Server"
 	set desc="Globally Toggles DSAY"
 	set name="Toggle DSAY"
+
+	if(!check_rights(R_ADMIN))
+		return
+
 	config.dsay_allowed = !(config.dsay_allowed)
 	if (config.dsay_allowed)
 		world << "<B>Deadchat has been globally enabled!</B>"
@@ -764,6 +804,10 @@ var/global/floorIsLava = 0
 	set category = "Server"
 	set desc="Toggle Dead OOC."
 	set name="Toggle Dead OOC"
+
+	if(!check_rights(R_ADMIN))
+		return
+
 	config.dooc_allowed = !( config.dooc_allowed )
 	log_admin("[key_name(usr)] toggled Dead OOC.")
 	message_admins("[key_name_admin(usr)] toggled Dead OOC.", 1)
@@ -1245,3 +1289,32 @@ var/global/floorIsLava = 0
 //ALL DONE
 //*********************************************************************************************************
 //
+
+//Returns 1 to let the dragdrop code know we are trapping this event
+//Returns 0 if we don't plan to trap the event
+/datum/admins/proc/cmd_ghost_drag(var/mob/dead/observer/frommob, var/mob/living/tomob)
+	if(!istype(frommob))
+		return //Extra sanity check to make sure only observers are shoved into things
+
+	//Same as assume-direct-control perm requirements.
+	if (!check_rights(R_VAREDIT,0) || !check_rights(R_ADMIN|R_DEBUG,0))
+		return 0
+	if (!frommob.ckey)
+		return 0
+	var/question = ""
+	if (tomob.ckey)
+		question = "This mob already has a user ([tomob.key]) in control of it! "
+	question += "Are you sure you want to place [frommob.name]([frommob.key]) in control of [tomob.name]?"
+	var/ask = alert(question, "Place ghost in control of mob?", "Yes", "No")
+	if (ask != "Yes")
+		return 1
+	if (!frommob || !tomob) //make sure the mobs don't go away while we waited for a response
+		return 1
+	if(tomob.client) //No need to ghostize if there is no client
+		tomob.ghostize(0)
+	message_admins("<span class='adminnotice'>[key_name_admin(usr)] has put [frommob.ckey] in control of [tomob.name].</span>")
+	log_admin("[key_name(usr)] stuffed [frommob.ckey] into [tomob.name].")
+	feedback_add_details("admin_verb","CGD")
+	tomob.ckey = frommob.ckey
+	qdel(frommob)
+	return 1

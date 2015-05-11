@@ -14,6 +14,29 @@
 	var/moved_recently = 0
 	var/mob/pulledby = null
 
+/atom/movable/New()
+	..()
+	if(ticker && ticker.current_state == GAME_STATE_PLAYING)
+		initialize()
+
+/atom/movable/Del()
+	if(isnull(gcDestroyed) && loc)
+		testing("GC: -- [type] was deleted via del() rather than qdel() --")
+		CRASH()	// Debug until I can get a clean server start.
+//	else if(isnull(gcDestroyed))
+//		testing("GC: [type] was deleted via GC without qdel()") //Not really a huge issue but from now on, please qdel()
+//	else
+//		testing("GC: [type] was deleted via GC with qdel()")
+	..()
+
+/atom/movable/Destroy()
+	. = ..()
+
+	loc = null
+
+/atom/movable/proc/initialize()
+	return
+
 /atom/movable/Bump(var/atom/A, yes)
 	if(src.throwing)
 		src.throw_impact(A)

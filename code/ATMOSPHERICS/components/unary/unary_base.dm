@@ -28,12 +28,12 @@
 
 		return null
 
-	Del()
+	Destroy()
 		loc = null
 
 		if(node)
 			node.disconnect(src)
-			del(network)
+			qdel(network)
 
 		node = null
 
@@ -84,7 +84,7 @@
 
 	disconnect(obj/machinery/atmospherics/reference)
 		if(reference==node)
-			del(network)
+			qdel(network)
 			node = null
 
 		update_icon()

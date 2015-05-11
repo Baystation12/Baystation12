@@ -41,7 +41,7 @@
 				user << "<span class='notice'>You burn away the fungi with \the [WT].</span>"
 				playsound(src, 'sound/items/Welder.ogg', 10, 1)
 				for(var/obj/effect/E in src) if(E.name == "Wallrot")
-					del E
+					qdel(E)
 				rotting = 0
 				return
 		else if(!is_sharp(W) && W.force >= 10 || W.force >= 20)
@@ -98,7 +98,7 @@
 				playsound(src, 'sound/items/Wirecutter.ogg', 100, 1)
 				src.d_state = 1
 				src.icon_state = "r_wall-1"
-				new /obj/item/stack/rods( src )
+				PoolOrNew(/obj/item/stack/rods, src)
 				user << "<span class='notice'>You cut the outer grille.</span>"
 				return
 
@@ -126,7 +126,7 @@
 				if (O.amount > 1)
 					O.amount--
 				else
-					del(O)
+					qdel(O)
 				return
 
 		if(2)
@@ -206,7 +206,7 @@
 					if( d_state == 5 && user.loc == T && user.get_active_hand() == WT )
 						src.d_state = 6
 						src.icon_state = "r_wall-6"
-						new /obj/item/stack/rods( src )
+						PoolOrNew(/obj/item/stack/rods, src)
 						user << "<span class='notice'>The support rods drop out as you cut them loose from the frame.</span>"
 				else
 					user << "<span class='notice'>You need more welding fuel to complete this task.</span>"
@@ -223,7 +223,7 @@
 				if( d_state == 5 && user.loc == T && user.get_active_hand() == W )
 					src.d_state = 6
 					src.icon_state = "r_wall-6"
-					new /obj/item/stack/rods( src )
+					PoolOrNew(/obj/item/stack/rods, src)
 					user << "<span class='notice'>The support rods drop out as you cut them loose from the frame.</span>"
 				return
 
@@ -272,7 +272,7 @@
 			if (MS.amount > 1)
 				MS.amount--
 			else
-				del(MS)
+				qdel(MS)
 
 	//APC
 	else if( istype(W,/obj/item/apc_frame) )

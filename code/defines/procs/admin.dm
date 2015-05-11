@@ -1,6 +1,11 @@
-proc/log_and_message_admins(var/message as text)
-	log_admin(usr ? "[key_name(usr)] [message]" : "EVENT [message]")
-	message_admins(usr ? "[key_name(usr)] [message]" : "EVENT [message]")
+proc/admin_notice(var/message, var/rights)
+	for(var/mob/M in mob_list)
+		if(check_rights(rights, 0, M))
+			M << message
+
+proc/log_and_message_admins(var/message as text, var/mob/user = usr)
+	log_admin(user ? "[key_name(user)] [message]" : "EVENT [message]")
+	message_admins(user ? "[key_name(user)] [message]" : "EVENT [message]")
 
 proc/log_and_message_admins_many(var/list/mob/users, var/message)
 	if(!users || !users.len)
