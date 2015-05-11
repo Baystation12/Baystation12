@@ -161,7 +161,7 @@
 		var/hide_item = !has_edge(W) || !can_slice_here
 
 		if (hide_item)
-			if (W.w_class >= src.w_class || W.is_robot_module())
+			if (W.w_class >= src.w_class || is_robot_module(W))
 				return
 
 			user << "\red You slip [W] inside [src]."

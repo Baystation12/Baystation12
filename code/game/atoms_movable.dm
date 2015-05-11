@@ -30,14 +30,9 @@
 	..()
 
 /atom/movable/Destroy()
-	if(opacity)
-		if(isturf(loc))
-			if(loc:lighting_lumcount > 1)
-				UpdateAffectingLights()
+	. = ..()
+
 	loc = null
-
-	..()
-
 
 /atom/movable/proc/initialize()
 	return

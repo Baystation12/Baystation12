@@ -3,6 +3,7 @@
 	name = "Station Alert Console"
 	desc = "Used to access the station's automated alert system."
 	icon_state = "alert:0"
+	light_color = "#e6ffff"
 	circuit = /obj/item/weapon/circuitboard/stationalert_engineering
 	var/obj/nano_module/alarm_monitor/alarm_monitor
 	var/monitor_type = /obj/nano_module/alarm_monitor/engineering

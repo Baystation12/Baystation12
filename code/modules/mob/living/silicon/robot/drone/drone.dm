@@ -287,6 +287,7 @@
 	src.verbs -= silicon_subsystems
 
 /mob/living/silicon/robot/drone/construction
+	icon_state = "constructiondrone"
 	law_type = /datum/ai_laws/construction_drone
 	module_type = /obj/item/weapon/robot_module/drone/construction
 	can_pull_size = 5
