@@ -2,6 +2,7 @@
 	name = "cloning control console"
 	icon = 'icons/obj/computer.dmi'
 	icon_state = "dna"
+	light_color = "#315ab4"
 	circuit = "/obj/item/weapon/circuitboard/cloning"
 	req_access = list(access_heads) //Only used for record deletion right now.
 	var/obj/machinery/dna_scannernew/scanner = null //Linked scanner. For scanning.

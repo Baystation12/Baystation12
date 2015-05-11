@@ -1,0 +1,6 @@
+author: Mloc
+delete-after: True
+changes: 
+  - experiment: "Rewritten lighting system."
+  - rscadd: "Better coloured lights."
+  - rscadd: "Animated transitions."
