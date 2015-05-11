@@ -266,7 +266,7 @@ datum
 						cube.Expand()
 
 			reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume)
-	Bay Shit/*	if(!istype(M, /mob/living))
+		/*	//Bay Shit	if(!istype(M, /mob/living))
 					return
 
 			// Put out fire

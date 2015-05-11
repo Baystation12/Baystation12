@@ -564,18 +564,18 @@
 						del(G)*/
 	if (!restrained())
 		resist_grab()
-				else
-					if (G.state == 3)
-						if (prob(5))
-							for(var/mob/O in viewers(usr, null))
-								O.show_message(text("\red [] has broken free of []'s headlock!", L, G.assailant), 1)
-							del(G)
+	/*else
+		if (G.state == 3)
+			if (prob(5))
+				for(var/mob/O in viewers(usr, null))
+					O.show_message(text("\red [] has broken free of []'s headlock!", L, G.assailant), 1)
+						del(G)
 		//if(resisting)
 		//	L.visible_message("<span class='danger'>[L] resists!</span>")
 
 
 	//unbuckling yourself
-	/*if(L.buckled && (L.last_special <= world.time) )
+	if(L.buckled && (L.last_special <= world.time) )
 						C.buckled.user_unbuckle_mob(C)
 			L.buckled.user_unbuckle_mob(L)*/
 	if(buckled)
@@ -588,7 +588,7 @@
 
 /mob/living/proc/escape_inventory(obj/item/weapon/holder/H)
 	if(H != src.loc) return
-	
+
 	var/mob/M = H.loc //Get our mob holder (if any).
 
 	if(istype(M))
@@ -669,7 +669,7 @@
 					can_break_cuffs = 1
 				if(H.species.dhts == 1)
 					can_break_cuffs = 1*/
-			
+
 			/*if(can_break_cuffs) //Don't want to do a lot of logic gating here.
 				usr << "\red You attempt to break your handcuffs. (This will take around 5 seconds and you need to stand still)"
 				for(var/mob/O in viewers(CM))

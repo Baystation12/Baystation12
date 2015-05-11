@@ -139,7 +139,7 @@
 			var/obj/item/I = O
 			mass = I.w_class/THROWNOBJ_KNOCKBACK_DIVISOR
 		var/momentum = speed*mass
-		
+
 		if(O.throw_source && momentum >= THROWNOBJ_KNOCKBACK_SPEED)
 			var/dir = get_dir(O.throw_source, src)
 
@@ -184,8 +184,8 @@
 	return 0
 
 // End BS12 momentum-transfer code.
-
-/*/Mobs on Fire
+/*
+//Mobs on Fire
 /mob/living/proc/IgniteMob()
 	if(fire_stacks > 0)
 		on_fire = 1
@@ -234,7 +234,8 @@
 	if(fire_stacks > 9 && !on_fire)
 		IgniteMob()
 
-//Mobs on Fire end*/
+//Mobs on Fire end
+*/
 /mob/living/attack_generic(var/mob/user, var/damage, var/attack_message)
 
 	if(!damage)
@@ -269,18 +270,18 @@
 /mob/living/proc/handle_fire()
 	if(fire_stacks < 0)
 		fire_stacks = max(0, fire_stacks++) //If we've doused ourselves in water to avoid fire, dry off slowly
-	
+
 	if(!on_fire)
 		return 1
 	else if(fire_stacks <= 0)
 		ExtinguishMob() //Fire's been put out.
 		return 1
-	
+
 	var/datum/gas_mixture/G = loc.return_air() // Check if we're standing in an oxygenless environment
 	if(G.gas["oxygen"] < 1)
 		ExtinguishMob() //If there's no oxygen in the tile we're on, put out the fire
 		return 1
-	
+
 	var/turf/location = get_turf(src)
 	location.hotspot_expose(fire_burn_temperature(), 50, 1)
 
@@ -292,6 +293,6 @@
 /mob/living/proc/fire_burn_temperature()
 	if (fire_stacks <= 0)
 		return 0
-	
+
 	//Scale quadratically so that single digit numbers of fire stacks don't burn ridiculously hot.
 	return round(FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE*(fire_stacks/FIRE_MAX_FIRESUIT_STACKS)**2)

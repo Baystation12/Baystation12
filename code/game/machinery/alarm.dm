@@ -562,7 +562,7 @@
 	data["target_temperature"] = "[target_temperature - T0C]C"
 
 /obj/machinery/alarm/proc/populate_controls(var/list/data)
-	switch(scree))
+	switch(screen)
 		if (AALARM_SCREEN_MAI)
 		if(AALARM_SCREEN_MAIN)
 			data["mode"] = mode

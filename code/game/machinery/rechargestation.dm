@@ -149,14 +149,13 @@
 		if(99 to 110)
 			overlays += image('icons/obj/objects.dmi', "statn_c100")
 
-
-	attackby(var/obj/item/O as obj, var/mob/user as mob)
-		if (istype(O, /obj/item/weapon/grab))
-			var/obj/item/weapon/grab/G = O
-			var/mob/living/carbon/human/H = G.affecting
-			if (istype(H))
-				if (H.species && H.species.flags & IS_SYNTHETIC)
-					go_in(H)
+/obj/machinery/recharge_station/attackby(var/obj/item/O as obj, var/mob/user as mob)
+	if (istype(O, /obj/item/weapon/grab))
+		var/obj/item/weapon/grab/G = O
+		var/mob/living/carbon/human/H = G.affecting
+		if (istype(H))
+			if (H.species && H.species.flags & IS_SYNTHETIC)
+				go_in(H)
 
 /obj/machinery/recharge_station/proc/build_icon()
 	if(NOPOWER|BROKEN)
@@ -167,23 +166,23 @@
 	else
 		icon_state = "borgcharger0"
 
-				if (istype(occupant, /mob/living/carbon/human))
-					if(occupant.nutrition >= 440)
-						if(saidrecharge <=0)
-							occupant << "\blue You are fully Recharged "
-							saidrecharge = 1
-					else
-						occupant.nutrition += 20
+	if (istype(occupant, /mob/living/carbon/human))
+		if(occupant.nutrition >= 440)
+			if(saidrecharge <=0)
+				occupant << "\blue You are fully Recharged "
+				saidrecharge = 1
+		else
+			occupant.nutrition += 20
 
-					var/mob/living/carbon/human/D = occupant
-					if(hasorgans(D))
-						var/list/datum/organ/external/S = D.get_damaged_organs(1, 1)
-						if (!S) return
-						for(var/datum/organ/external/E in S)
-							if(E.brute_dam && (E.status & ORGAN_ROBOT))
-								E.heal_damage(2,0,0,1)
-							if(E.burn_dam && (E.status & ORGAN_ROBOT))
-								E.heal_damage(2,0,0,1)
+		var/mob/living/carbon/human/D = occupant
+		if(hasorgans(D))
+		var/list/datum/organ/external/S = D.get_damaged_organs(1, 1)
+		if (!S) return
+		for(var/datum/organ/external/E in S)
+			if(E.brute_dam && (E.status & ORGAN_ROBOT))
+				E.heal_damage(2,0,0,1)
+			if(E.burn_dam && (E.status & ORGAN_ROBOT))
+				E.heal_damage(2,0,0,1)
 
 /obj/machinery/recharge_station/proc/process_occupant()
 	if(occupant)
@@ -206,51 +205,51 @@
 				update_use_power(1)
 
 
-	verb
-		move_eject()
-			set category = "Object"
-			set src in oview(1)
-			if (usr.stat != 0)
-				return
-			src.go_out()
-			add_fingerprint(usr)
+/obj/machinery/recharge_station/verb/move_eject()
+	set category = "Object"
+	set src in oview(1)
+	if (usr.stat != 0)
+		return
+	src.go_out()
+	add_fingerprint(usr)
+	return
+
+/obj/machinery/recharge_station/verb/move_inside()
+	set category = "Object"
+	set src in oview(1)
+	if (usr.stat == 2)
+		//Whoever had it so that a borg with a dead cell can't enter this thing should be shot. --NEO
+		return
+	if (!(istype(usr, /mob/living/silicon/)))
+		usr << "\blue <B>Only non-organics may enter the recharger!</B>"
+		return
+	if (src.occupant)
+		usr << "\blue <B>The cell is already occupied!</B>"
+		return
+
+/obj/machinery/recharge_station/proc/go_in(var/mob/usr)
+	if (usr.stat == 2)
+		//Whoever had it so that a borg with a dead cell can't enter this thing should be shot. --NEO
+		return
+
+	var/CanEnter = 0
+	if (istype(usr, /mob/living/silicon/))
+		if (!usr:cell)
+			usr<<"\blue Without a powercell, you can't be recharged."
+			//Make sure they actually HAVE a cell, now that they can get in while powerless. --NEO
 			return
-
-		move_inside()
-			set category = "Object"
-			set src in oview(1)
-			if (usr.stat == 2)
-				//Whoever had it so that a borg with a dead cell can't enter this thing should be shot. --NEO
-				return
-			if (!(istype(usr, /mob/living/silicon/)))
-				usr << "\blue <B>Only non-organics may enter the recharger!</B>"
-				return
-			if (src.occupant)
-				usr << "\blue <B>The cell is already occupied!</B>"
-				return
-		go_in(var/mob/usr)
-			if (usr.stat == 2)
-				//Whoever had it so that a borg with a dead cell can't enter this thing should be shot. --NEO
-				return
-
-			var/CanEnter = 0
-			if (istype(usr, /mob/living/silicon/))
-				if (!usr:cell)
-					usr<<"\blue Without a powercell, you can't be recharged."
-					//Make sure they actually HAVE a cell, now that they can get in while powerless. --NEO
-					return
-				else
-					CanEnter = 1
-			if (istype(usr, /mob/living/carbon/human))
-				var/mob/living/carbon/human/H = usr
-				if (H.species && H.species.flags & IS_SYNTHETIC)
-					CanEnter = 1
-			if (!CanEnter)
-				usr << "\blue <B>Only non-organics may enter the recharger!</B>"
-				return
-			if (src.occupant)
-				usr << "\blue <B>The cell is already occupied!</B>"
-				return
+		else
+			CanEnter = 1
+	if (istype(usr, /mob/living/carbon/human))
+		var/mob/living/carbon/human/H = usr
+		if (H.species && H.species.flags & IS_SYNTHETIC)
+			CanEnter = 1
+	if (!CanEnter)
+		usr << "\blue <B>Only non-organics may enter the recharger!</B>"
+		return
+	if (src.occupant)
+		usr << "\blue <B>The cell is already occupied!</B>"
+		return
 /obj/machinery/recharge_station/proc/go_out()
 	if(!(occupant))
 		return

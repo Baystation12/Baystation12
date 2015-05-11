@@ -249,7 +249,7 @@
 #define slot_r_ear 23
 #define slot_tie   24
 
-// Mob sprite sheets. These need to be strings as numbers 
+// Mob sprite sheets. These need to be strings as numbers
 // cannot be used as associative list keys.
 #define icon_l_hand		"slot_l_hand"
 #define icon_r_hand		"slot_r_hand"
@@ -375,7 +375,8 @@
 //(Exceptions: extended, sandbox and nuke) -Errorage
 //Was list("3" = 30, "4" = 70).
 //Spacing should be a reliable method of getting rid of a body -- Urist.
-//Go away Urist, I'm restoring this to the longer list. ~Errorage*/
+//Go away Urist, I'm restoring this to the longer list. ~Errorage
+*/
 
 #define IS_MODE_COMPILED(MODE) (ispath(text2path("/datum/game_mode/"+(MODE))))
 
@@ -593,29 +594,24 @@
 #define BE_PAI        65536
 
 var/list/be_special_flags = list(
-	"Mutineer" = BE_MUTINEER,
-	"Meme" = BE_MEME,
-	"Vampire" = BE_VAMPIRE
-	"Traitor"          = BE_TRAITOR,
-	"Operative"        = BE_OPERATIVE,
-	"Changeling"       = BE_CHANGELING,
-	"Wizard"           = BE_WIZARD,
-	"Malf AI"          = BE_MALF,
-	"Revolutionary"    = BE_REV,
-	"Xenomorph"        = BE_ALIEN,
-	"Positronic Brain" = BE_AI,
-	"Cultist"          = BE_CULTIST,
-	"Monkey"           = BE_MONKEY,
-	"Ninja"            = BE_NINJA,
-	"Raider"           = BE_RAIDER,
-	"Diona"            = BE_PLANT,
-	"Mutineer"         = BE_MUTINEER,
-	"pAI"              = BE_PAI,
-	"Meme" 			   = BE_MEME,
-	"Vampire" 		   = BE_VAMPIRE
-	"Mutineer" 		   = BE_MUTINEER,
-	"Meme"			   = BE_MEME,
-	"Vampire"		   = BE_VAMPIRE
+	"Traitor"          	= BE_TRAITOR,
+	"Operative"        	= BE_OPERATIVE,
+	"Changeling"       	= BE_CHANGELING,
+	"Wizard"           	= BE_WIZARD,
+	"Malf AI"          	= BE_MALF,
+	"Revolutionary"    	= BE_REV,
+	"Xenomorph"        	= BE_ALIEN,
+	"Positronic Brain" 	= BE_AI,
+	"Cultist"          	= BE_CULTIST,
+	"Monkey"           	= BE_MONKEY,
+	"Ninja"            	= BE_NINJA,
+	"Raider"           	= BE_RAIDER,
+	"Diona"            	= BE_PLANT,
+	"Mutineer"         	= BE_MUTINEER,
+	"pAI"              	= BE_PAI,
+	"Meme" 			   	= BE_MEME,
+	"Vampire" 		   	= BE_VAMPIRE,
+	"Mutineer" 		   	= BE_MUTINEER
 )
 
 // Age limits on a character.

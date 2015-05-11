@@ -19,10 +19,11 @@ var/global/list/special_roles = list( //keep synced with the defines BE_* in set
 	"diona" = 1,                                         // 12
 	"mutineer" = IS_MODE_COMPILED("mutiny"),            // 13
 	"meme" = IS_MODE_COMPILED("meme"),					// 14
-	"vampire" = IS_MODE_COMPILED("vampire")			 	// 15
-	"pAI candidate" = 1, // -- TLE                       // 16
+	"vampire" = IS_MODE_COMPILED("vampire"),		 	// 15
+	"pAI candidate" = 1 // -- TLE                       // 16
 )
 
+var/const/MAX_SAVE_SLOTS = 50
 //used for alternate_option
 #define GET_RANDOM_JOB 0
 #define BE_ASSISTANT 1

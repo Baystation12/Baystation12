@@ -659,33 +659,28 @@ Note that amputating the affected organ does in fact remove the infection from t
 						organ = new /obj/item/robot_parts/l_hand(owner.loc)
 					else
 						organ= new /obj/item/weapon/organ/l_hand(owner.loc, owner)
-/*
-				if(!(status & ORGAN_ROBOT))
+				/*if(!(status & ORGAN_ROBOT))
 					organ= new /obj/item/weapon/organ/l_hand(owner.loc, owner)
-				dropped_items = list(owner.gloves)
-*/			
+				dropped_items = list(owner.gloves)*/
 			if(FOOT_RIGHT)
 				if(!istype(organ))
 					if(status & ORGAN_ROBOT)
 						organ = new /obj/item/robot_parts/r_foot(owner.loc)
 					else
 						organ= new /obj/item/weapon/organ/r_foot/(owner.loc, owner)
-/*
-				if(!(status & ORGAN_ROBOT))
+
+			/*	if(!(status & ORGAN_ROBOT))
 					organ= new /obj/item/weapon/organ/r_foot/(owner.loc, owner)
-				dropped_items = list(owner.shoes)
-*/			
+				dropped_items = list(owner.shoes)*/
 			if(FOOT_LEFT)
 				if(!istype(organ))
 					if(status & ORGAN_ROBOT)
 						organ = new /obj/item/robot_parts/l_foot(owner.loc)
 					else
 						organ = new /obj/item/weapon/organ/l_foot(owner.loc, owner)
-/*
-				if(!(status & ORGAN_ROBOT))
+				/*if(!(status & ORGAN_ROBOT))
 					organ = new /obj/item/weapon/organ/l_foot(owner.loc, owner)
-				dropped_items = list(owner.shoes)
-*/
+				dropped_items = list(owner.shoes)*/
 		if(dropped_items)
 			for(var/obj/O in dropped_items)
 				owner.remove_from_mob(O)

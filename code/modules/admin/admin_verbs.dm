@@ -1162,18 +1162,16 @@ var/list/admin_verbs_hideable = list(
 			usr << "There are no fully staffed jobs."
 			return
 		var/job = input("Please select job slot to free", "Free job slot")  as null|anything in jobs
-		if (job)
+		if(job)
 			if(job == "Department Guard")
 				var/list/departments = list("Medical","Engineering","Research")
 				var/dept = input("Please select a department to free up", "Free Department Guard slot") as null|anything in departments
-			job_master.FreeRole(job)
-			message_admins("A job slot for [job] has been opened by [key_name_admin(usr)]")
-			return
 
 				if(dept)
 					job_master.FreeDGRole(job,dept)
 			else
 				job_master.FreeRole(job)
+	return
 
 /client/proc/toggleattacklogs()
 	set name = "Toggle Attack Log Messages"

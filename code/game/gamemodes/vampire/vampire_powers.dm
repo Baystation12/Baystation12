@@ -166,8 +166,8 @@
 	holder.effect += O
 	holder.chance = 10
 	shutdown.infectionchance = 100
-	shutdown.antigen |= text2num(pick(ANTIGENS))
-	shutdown.antigen |= text2num(pick(ANTIGENS))
+	shutdown.antigen |= text2num(pick(ALL_ANTIGENS))
+	shutdown.antigen |= text2num(pick(ALL_ANTIGENS))
 	shutdown.spreadtype = "None"
 	shutdown.uniqueID = rand(0,10000)
 	shutdown.effects += holder

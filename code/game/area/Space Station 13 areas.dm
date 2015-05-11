@@ -33,6 +33,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	var/eject = null
 
 	var/debug = 0
+	var/powerupdate = 10		//We give everything 10 ticks to settle out it's power usage.
 	var/requires_power = 1
 	var/unlimited_power = 0
 	var/always_unpowered = 0	//this gets overriden to 1 for space in area/New()
@@ -55,9 +56,6 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	var/list/all_doors = list()		//Added by Strumpetplaya - Alarm Change - Contains a list of doors adjacent to this area
 	var/air_doors_activated = 0
 	var/list/ambience = list('sound/ambience/ambigen1.ogg','sound/ambience/ambigen3.ogg','sound/ambience/ambigen4.ogg','sound/ambience/ambigen5.ogg','sound/ambience/ambigen6.ogg','sound/ambience/ambigen7.ogg','sound/ambience/ambigen8.ogg','sound/ambience/ambigen9.ogg','sound/ambience/ambigen10.ogg','sound/ambience/ambigen11.ogg','sound/ambience/ambigen12.ogg','sound/ambience/ambigen14.ogg')
-	var/sound/forced_ambience = null
-
-	var/rad_shielded = 0
 
 /*Adding a wizard area teleport list because motherfucking lag -- Urist*/
 /*I am far too lazy to make it a proper list of areas so I'll just make it run the usual telepot routine at the start of the game*/
@@ -68,8 +66,7 @@ var/list/teleportlocs = list()
 		if(istype(AR, /area/shuttle) || istype(AR, /area/syndicate_station) || istype(AR, /area/wizard_station)) continue
 		if(teleportlocs.Find(AR.name)) continue
 		var/turf/picked = pick(get_area_turfs(AR.type))
-		//if (picked.z == 1|| picked.z==7 || picked.z==8) // For multi-z teleports!
-		if (picked.z in config.station_levels)
+		if (picked.z == 1|| picked.z==7 || picked.z==8) // For multi-z teleports!
 			teleportlocs += AR.name
 			teleportlocs[AR.name] = AR
 
@@ -86,7 +83,7 @@ var/list/ghostteleportlocs = list()
 			ghostteleportlocs += AR.name
 			ghostteleportlocs[AR.name] = AR
 		var/turf/picked = pick(get_area_turfs(AR.type))
-		if (picked.z in config.player_levels)
+		if (picked.z == 1 || picked.z == 3 || picked.z == 4 || picked.z == 5)
 			ghostteleportlocs += AR.name
 			ghostteleportlocs[AR.name] = AR
 
@@ -95,14 +92,8 @@ var/list/ghostteleportlocs = list()
 	return 1
 
 /*-----------------------------------------------------------------------------*/
-
-/////////
-//SPACE//
-/////////
-
 /area/space
 	name = "Space"
-	icon_state = "space"
 	requires_power = 1
 	always_unpowered = 1
 	lighting_use_dynamic = 1
@@ -111,13 +102,7 @@ var/list/ghostteleportlocs = list()
 	power_environ = 0
 	ambience = list('sound/ambience/ambispace.ogg','sound/music/title2.ogg','sound/music/space.ogg','sound/music/main.ogg','sound/music/traitor.ogg')
 
-area/space/atmosalert()
-	return
-
-/area/space/fire_alert()
-	return
-
-/area/space/fire_reset()
+/area/space/firealert()
 	return
 
 /area/space/readyalert()
@@ -125,7 +110,8 @@ area/space/atmosalert()
 
 /area/space/partyalert()
 	return
-
+/area/engine/
+	ambience = list('sound/ambience/ambisin1.ogg','sound/ambience/ambisin2.ogg','sound/ambience/ambisin3.ogg','sound/ambience/ambisin4.ogg')
 /area/turret_protected/
 
 /area/arrival
@@ -141,12 +127,9 @@ area/space/atmosalert()
 
 
 
-////////////
-//SHUTTLES//
-////////////
-//shuttle areas must contain at least two areas in a subgroup if you want to move a shuttle from one
+//These are shuttle areas, they must contain two areas in a subgroup if you want to move a shuttle from one
 //place to another. Look at escape shuttle for example.
-//All shuttles should now be under shuttle since we have smooth-wall code.
+//All shuttles show now be under shuttle since we have smooth-wall code.
 
 /area/shuttle //DO NOT TURN THE lighting_use_dynamic STUFF ON FOR SHUTTLES. IT BREAKS THINGS.
 	requires_power = 0
@@ -308,11 +291,11 @@ area/space/atmosalert()
 	icon_state = "shuttlered2"
 
 /area/shuttle/syndicate_elite/mothership
-	name = "Merc Elite Shuttle"
+	name = "Syndicate Elite Shuttle"
 	icon_state = "shuttlered"
 
 /area/shuttle/syndicate_elite/station
-	name = "Merc Elite Shuttle"
+	name = "Syndicate Elite Shuttle"
 	icon_state = "shuttlered2"
 
 /area/shuttle/administration/centcom
@@ -391,7 +374,6 @@ area/space/atmosalert()
 	name = "Centcom"
 	icon_state = "centcom"
 	requires_power = 0
-	unlimited_power = 1
 
 /area/centcom/control
 	name = "Centcom Control"
@@ -426,17 +408,17 @@ area/space/atmosalert()
 //SYNDICATES
 
 /area/syndicate_mothership
-	name = "Mercenary Base"
+	name = "Syndicate Base"
 	icon_state = "syndie-ship"
 	requires_power = 0
 	unlimited_power = 1
 
 /area/syndicate_mothership/control
-	name = "Mercenary Control Room"
+	name = "Syndicate Control Room"
 	icon_state = "syndie-control"
 
 /area/syndicate_mothership/elite_squad
-	name = "Elite Mercenary Squad"
+	name = "Syndicate Elite Squad"
 	icon_state = "syndie-elite"
 
 //EXTRA
@@ -499,14 +481,13 @@ area/space/atmosalert()
 
 //names are used
 /area/syndicate_station
-	name = "Independant Station"
+	name = "Syndicate Station"
 	icon_state = "yellow"
 	requires_power = 0
 	unlimited_power = 1
-	rad_shielded = 1
 
 /area/syndicate_station/start
-	name = "Mercenary Forward Operating Base"
+	name = "Syndicate Forward Operating Base"
 	icon_state = "yellow"
 
 /area/syndicate_station/southwest
@@ -541,14 +522,6 @@ area/space/atmosalert()
 	name = "north east of the mining asteroid"
 	icon_state = "north"
 
-/area/syndicate_station/arrivals_dock
-	name = "\improper docked with station"
-	icon_state = "shuttle"
-
-/area/syndicate_station/maint_dock
-	name = "\improper docked with station"
-	icon_state = "shuttle"
-
 /area/syndicate_station/transit
 	name = "hyperspace"
 	icon_state = "shuttle"
@@ -558,33 +531,35 @@ area/space/atmosalert()
 	icon_state = "yellow"
 	requires_power = 0
 
-/area/vox_station
-	requires_power = 0
-	rad_shielded = 1
-
 /area/vox_station/transit
 	name = "hyperspace"
 	icon_state = "shuttle"
+	requires_power = 0
 
 /area/vox_station/southwest_solars
 	name = "aft port solars"
 	icon_state = "southwest"
+	requires_power = 0
 
 /area/vox_station/northwest_solars
 	name = "fore port solars"
 	icon_state = "northwest"
+	requires_power = 0
 
 /area/vox_station/northeast_solars
 	name = "fore starboard solars"
 	icon_state = "northeast"
+	requires_power = 0
 
 /area/vox_station/southeast_solars
 	name = "aft starboard solars"
 	icon_state = "southeast"
+	requires_power = 0
 
 /area/vox_station/mining
 	name = "nearby mining asteroid"
 	icon_state = "north"
+	requires_power = 0
 
 //PRISON
 /area/prison
@@ -669,14 +644,13 @@ area/space/atmosalert()
 	name = "Prison Cell Block C"
 	icon_state = "brig"
 
-////////////////////
-//SPACE STATION 13//
-////////////////////
+//STATION13
+
+/area/atmos
+ 	name = "Atmospherics"
+ 	icon_state = "atmos"
 
 //Maintenance
-
-/area/maintenance
-	rad_shielded = 1
 
 /area/maintenance/aft
 	name = "Aft Maintenance"
@@ -794,10 +768,6 @@ area/space/atmosalert()
 	name = "Incinerator"
 	icon_state = "disposal"
 
-/area/maintenance/library
-	name = "Library Maintenance"
-	icon_state = "maint_library"
-
 /area/maintenance/locker
 	name = "Locker Room Maintenance"
 	icon_state = "maint_locker"
@@ -807,11 +777,11 @@ area/space/atmosalert()
 	icon_state = "maint_medbay"
 
 /area/maintenance/research_port
-	name = "Research Maintenance - Port"
+	name = "Port Research Maintenance"
 	icon_state = "maint_research_port"
 
 /area/maintenance/research_starboard
-	name = "Research Maintenance - Starboard"
+	name = "Starboard Research Maintenance"
 	icon_state = "maint_research_starboard"
 
 /area/maintenance/research_shuttle
@@ -819,11 +789,11 @@ area/space/atmosalert()
 	icon_state = "maint_research_shuttle"
 
 /area/maintenance/security_port
-	name = "Security Maintenance - Port"
+	name = "Port Security Maintenance"
 	icon_state = "maint_security_port"
 
 /area/maintenance/security_starboard
-	name = "Security Maintenance - Starboard"
+	name = "Starboard Security Maintenance"
 	icon_state = "maint_security_starboard"
 
 /area/maintenance/storage
@@ -839,15 +809,8 @@ area/space/atmosalert()
 /area/maintenance/substation/engineering // Probably will be connected to engineering SMES room, as wires cannot be crossed properly without them sharing powernets.
 	name = "Engineering Substation"
 
-// No longer used:
 /area/maintenance/substation/medical_science // Medbay and Science. Each has it's own separated machinery, but it originates from the same room.
 	name = "Medical Research Substation"
-
-/area/maintenance/substation/medical // Medbay
-	name = "Medical Substation"
-
-/area/maintenance/substation/research // Research
-	name = "Research Substation"
 
 /area/maintenance/substation/civilian_east // Bar, kitchen, dorms, ...
 	name = "Civilian East Substation"
@@ -929,22 +892,6 @@ area/space/atmosalert()
 	name = "Arrival Shuttle Hallway"
 	icon_state = "entry"
 
-/area/hallway/secondary/entry/fore
-	name = "\improper Arrival Shuttle Hallway - Fore"
-	icon_state = "entry_1"
-
-/area/hallway/secondary/entry/port
-	name = "\improper Arrival Shuttle Hallway - Port"
-	icon_state = "entry_2"
-
-/area/hallway/secondary/entry/starboard
-	name = "\improper Arrival Shuttle Hallway - Starboard"
-	icon_state = "entry_3"
-
-/area/hallway/secondary/entry/aft
-	name = "\improper Arrival Shuttle Hallway - Aft"
-	icon_state = "entry_4"
-
 //Command
 
 /area/bridge
@@ -1022,7 +969,6 @@ area/space/atmosalert()
 /area/crew_quarters
 	name = "Dormitories"
 	icon_state = "Sleep"
-	rad_shielded = 1
 
 /area/crew_quarters/toilet
 	name = "Dormitory Toilets"
@@ -1131,6 +1077,9 @@ area/space/atmosalert()
 
 
 
+
+
+
 /area/holodeck
 	name = "Holodeck"
 	icon_state = "Holodeck"
@@ -1156,10 +1105,6 @@ area/space/atmosalert()
 
 /area/holodeck/source_thunderdomecourt
 	name = "Holodeck - Thunderdome Court"
-
-/area/holodeck/source_courtroom
-	name = "\improper Holodeck - Courtroom"
-	icon_state = "Holodeck"
 
 /area/holodeck/source_beach
 	name = "Holodeck - Beach"
@@ -1188,122 +1133,89 @@ area/space/atmosalert()
 
 /area/holodeck/source_space
 	name = "Holodeck - Space"
-	has_gravity = 0
+
+
+
 
 /area/centralpark
 		name = "Central Park"
 		icon_state = "blue2"
 
 
+
+
+
+
 //Engineering
 
-/area/engineering/
-	name = "\improper Engineering"
-	icon_state = "engineering"
-	ambience = list('sound/ambience/ambisin1.ogg','sound/ambience/ambisin2.ogg','sound/ambience/ambisin3.ogg','sound/ambience/ambisin4.ogg')
+/area/engine
 
-/area/engineering/atmos
- 	name = "Atmospherics"
- 	icon_state = "atmos"
+	drone_fabrication
+		name = "Drone Fabrication"
+		icon_state = "engine"
 
-/area/engineering/atmos/monitoring
-	name = "Atmospherics Monitoring Room"
-	icon_state = "atmos_monitoring"
+	engine_smes
+		name = "Engineering SMES"
+		icon_state = "engine_smes"
+//		requires_power = 0//This area only covers the batteries and they deal with their own power
 
-/area/engineering/engine_room
+	engine_room
 		name = "Singularity Engine"
 		icon_state = "engine"
 
-/area/engineering/atmos/storage
-	name = "\improper Atmospherics Storage"
-	icon_state = "atmos_storage"
-
-/area/engineering/engine_airlock
+	engine_airlock
 		name = "Engine Room Airlock"
 		icon_state = "engine"
 
-/area/engineering/drone_fabrication
-	name = "\improper Drone Fabrication"
-	icon_state = "drone_fab"
-
-/area/engineering/engine_monitoring
+	engine_monitoring
 		name = "Singularity Engine Monitoring Room"
 		icon_state = "engine_monitoring"
 
-/area/engineering/engine_smes
-	name = "\improper Engineering SMES"
-	icon_state = "engine_smes"
-
-/area/engineering/engine_waste
+	engine_waste
 		name = "Engine Waste Handling"
 		icon_state = "engine_waste"
 
-/area/engineering/engineering_monitoring
+	engineering_monitoring
 		name = "Engineering Monitoring Room"
 		icon_state = "engine_monitoring"
 
-/area/engineering/engine_monitoring
-	name = "\improper Engine Monitoring Room"
-	icon_state = "engine_monitoring"
+	atmos_monitoring
+		name = "Atmospherics Monitoring Room"
+		icon_state = "engine_monitoring"
 
-/area/engineering/engine_waste
-	name = "Engine Waste Handling"
-	icon_state = "engine_waste"
+	engineering
+		name = "Engineering"
+		icon_state = "engine_smes"
 
-/area/engineering/engineering_foyer
+	engineering_foyer
 		name = "Engineering Foyer"
 		icon_state = "engine"
 
-/area/engineering/engineering_monitoring
-	name = "Engineering Monitoring Room"
-	icon_state = "engine_monitoring"
-
-/area/engineering/break_room
+	break_room
 		name = "Engineering Break Room"
 		icon_state = "engine"
 
-/area/engineering/foyer
-	name = "\improper Engineering Foyer"
-	icon_state = "engineering_foyer"
-
-/area/engineering/hallway
+	hallway
 		name = "Engineering Hallway"
 		icon_state = "engine_hallway"
 
-/area/engineering/storage
-	name = "Engineering Storage"
-	icon_state = "engineering_storage"
-
-
-/area/engineering/engine_hallway
+	engine_hallway
 		name = "Engine Room Hallway"
 		icon_state = "engine_hallway"
 
-/area/engineering/break_room
-	name = "\improper Engineering Break Room"
-	icon_state = "engineering_break"
+	engine_eva
+		name = "Engine EVA"
+		icon_state = "engine_eva"
 
-/area/engineering/engine_eva
-	name = "Engine EVA"
-	icon_state = "engine_eva"
-
-/area/engineering/engine_eva_maintenance
+	engine_eva_maintenance
 		name = "Engine EVA Maintenance"
 		icon_state = "engine_eva"
 
-/area/engineering/locker_room
-	name = "\improper Engineering Locker Room"
-	icon_state = "engineering_locker"
-
-/area/engineering/workshop
+	workshop
 		name = "Engineering Workshop"
 		icon_state = "engine_storage"
 
-/area/engineering/workshop
-	name = "Engineering Workshop"
-	icon_state = "engineering_workshop"
-
-/area/engineering/locker_room
+	locker_room
 		name = "Engineering Locker Room"
 		icon_state = "engine_storage"
 
@@ -1370,7 +1282,7 @@ area/space/atmosalert()
 
 /area/rnd/robotics
 	name = "Robotics Lab"
-	icon_state = "robotics"
+	icon_state = "ass_line"
 
 /area/assembly/assembly_line //Derelict Assembly Line
 	name = "Assembly Line"
@@ -1400,28 +1312,24 @@ area/space/atmosalert()
 //MedBay
 
 /area/medical/medbay
-	name = "Medbay Hallway - Port"
+	name = "Medbay"
 	icon_state = "medbay"
 	music = 'sound/ambience/signal.ogg'
 
 //Medbay is a large area, these additional areas help level out APC load.
 /area/medical/medbay2
-	name = "Medbay Hallway - Starboard"
+	name = "Medbay CMO Hallway"
 	icon_state = "medbay2"
 	music = 'sound/ambience/signal.ogg'
 
 /area/medical/medbay3
-	name = "Medbay Hallway - Fore"
+	name = "Medbay South Hallway"
 	icon_state = "medbay3"
 	music = 'sound/ambience/signal.ogg'
 
 /area/medical/guard
 	name = "Medbay Guard Post"
 	icon_state = "security"
-
-/area/medical/medbay4
-	name = "Medbay Hallway - Aft"
-	icon_state = "medbay4"
 	music = 'sound/ambience/signal.ogg'
 
 /area/medical/biostorage
@@ -2337,6 +2245,7 @@ var/list/the_station_areas = list (
 	/area/shuttle/prison/station,
 	/area/shuttle/administration/station,
 	/area/shuttle/specops/station,
+	/area/atmos,
 	/area/maintenance,
 	/area/hallway,
 	/area/bridge,
@@ -2346,7 +2255,7 @@ var/list/the_station_areas = list (
 	/area/library,
 	/area/chapel,
 	/area/lawoffice,
-	/area/engineering,
+	/area/engine,
 	/area/solar,
 	/area/assembly,
 	/area/teleporter,

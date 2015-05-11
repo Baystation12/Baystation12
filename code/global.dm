@@ -87,6 +87,7 @@ var/event       = 0
 var/hadevent    = 0
 var/blobevent   = 0
 var/diary          = null
+var/admindiary = null
 var/href_logfile   = null
 var/station_name   = "NSS "
 var/game_version   = "Baystation12"
