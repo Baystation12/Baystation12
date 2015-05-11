@@ -9,6 +9,7 @@ var/global/list/minor_air_alarms = list()
 	desc = "Used to access the station's atmospheric sensors."
 	circuit = "/obj/item/weapon/circuitboard/atmos_alert"
 	icon_state = "alert:0"
+	light_color = "#e6ffff"
 
 /obj/machinery/computer/atmos_alert/New()
 	..()

@@ -7,8 +7,6 @@
 	var/list/climbers = list()
 
 /obj/structure/Destroy()
-	if(opacity)
-		UpdateAffectingLights()
 	if(parts)
 		new parts(loc)
 	..()

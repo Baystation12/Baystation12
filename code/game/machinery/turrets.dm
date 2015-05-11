@@ -13,9 +13,6 @@
 
 /area/turret_protected/Entered(O)
 	..()
-	if( master && master != src )
-		return master.Entered(O)
-
 	if( iscarbon(O) )
 		turretTargets |= O
 	else if( istype(O, /obj/mecha) )
@@ -27,9 +24,6 @@
 	return 1
 
 /area/turret_protected/Exited(O)
-	if( master && master != src )
-		return master.Exited(O)
-
 	if( ismob(O) && !issilicon(O) )
 		turretTargets -= O
 	else if( istype(O, /obj/mecha) )
@@ -148,8 +142,6 @@
 /obj/machinery/turret/proc/get_protected_area()
 	var/area/turret_protected/TP = get_area(src)
 	if(istype(TP))
-		if(TP.master && TP.master != TP)
-			TP = TP.master
 		return TP
 	return
 

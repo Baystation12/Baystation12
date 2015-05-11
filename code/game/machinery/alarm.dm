@@ -126,8 +126,6 @@
 
 /obj/machinery/alarm/proc/first_run()
 	alarm_area = get_area(src)
-	if (alarm_area.master)
-		alarm_area = alarm_area.master
 	area_uid = alarm_area.uid
 	if (name == "alarm")
 		name = "[alarm_area.name] Air Alarm"
@@ -288,11 +286,10 @@
 
 
 /obj/machinery/alarm/proc/elect_master()
-	for (var/area/A in alarm_area.related)
-		for (var/obj/machinery/alarm/AA in A)
-			if (!(AA.stat & (NOPOWER|BROKEN)))
-				alarm_area.master_air_alarm = AA
-				return 1
+	for (var/obj/machinery/alarm/AA in alarm_area)
+		if (!(AA.stat & (NOPOWER|BROKEN)))
+			alarm_area.master_air_alarm = AA
+			return 1
 	return 0
 
 /obj/machinery/alarm/proc/get_danger_level(var/current_value, var/list/danger_levels)
@@ -399,9 +396,8 @@
 /obj/machinery/alarm/proc/apply_mode()
 	//propagate mode to other air alarms in the area
 	//TODO: make it so that players can choose between applying the new mode to the room they are in (related area) vs the entire alarm area
-	for (var/area/RA in alarm_area.related)
-		for (var/obj/machinery/alarm/AA in RA)
-			AA.mode = mode
+	for (var/obj/machinery/alarm/AA in alarm_area)
+		AA.mode = mode
 
 	switch(mode)
 		if(AALARM_MODE_SCRUBBING)
@@ -1026,7 +1022,6 @@ FIRE ALARM
 	var/d2
 	if (istype(user, /mob/living/carbon/human) || istype(user, /mob/living/silicon))
 		A = A.loc
-		A = A.master
 
 		if (A.fire)
 			d1 = text("<A href='?src=\ref[];reset=1'>Reset - Lockdown</A>", src)
@@ -1093,9 +1088,8 @@ FIRE ALARM
 	if (!( src.working ))
 		return
 	var/area/area = get_area(src)
-	for(var/area/A in area.related)
-		for(var/obj/machinery/firealarm/FA in A)
-			fire_alarm.clearAlarm(loc, FA)
+	for(var/obj/machinery/firealarm/FA in area)
+		fire_alarm.clearAlarm(loc, FA)
 	update_icon()
 	return
 
@@ -1103,9 +1097,8 @@ FIRE ALARM
 	if (!( src.working))
 		return
 	var/area/area = get_area(src)
-	for(var/area/A in area.related)
-		for(var/obj/machinery/firealarm/FA in A)
-			fire_alarm.triggerAlarm(loc, FA, duration)
+	for(var/obj/machinery/firealarm/FA in area)
+		fire_alarm.triggerAlarm(loc, FA, duration)
 	update_icon()
 	//playsound(src.loc, 'sound/ambience/signal.ogg', 75, 0)
 	return
@@ -1170,8 +1163,6 @@ Just a object used in constructing fire alarms
 	user.machine = src
 	var/area/A = get_area(src)
 	ASSERT(isarea(A))
-	if(A.master)
-		A = A.master
 	var/d1
 	var/d2
 	if (istype(user, /mob/living/carbon/human) || istype(user, /mob/living/silicon/ai))
@@ -1210,8 +1201,6 @@ Just a object used in constructing fire alarms
 		return
 	var/area/A = get_area(src)
 	ASSERT(isarea(A))
-	if(A.master)
-		A = A.master
 	A.partyreset()
 	return
 
@@ -1220,8 +1209,6 @@ Just a object used in constructing fire alarms
 		return
 	var/area/A = get_area(src)
 	ASSERT(isarea(A))
-	if(A.master)
-		A = A.master
 	A.partyalert()
 	return
 

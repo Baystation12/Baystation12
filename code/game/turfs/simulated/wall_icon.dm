@@ -24,9 +24,9 @@
 	set_wall_state("[material.icon_base]0")
 
 	if(material.opacity > 0.5 && !opacity)
-		SetOpacity(1)
+		set_light(1)
 	else if(material.opacity < 0.5 && opacity)
-		SetOpacity(0)
+		set_light(0)
 
 	update_icon()
 	check_relatives()

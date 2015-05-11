@@ -1,5 +1,0 @@
-author: GinjaNinja32
-delete-after: True
-
-changes: 
-  - rscadd: "Acting jobs on the manifest will now sort with their non-acting counterparts. All assignments beginning with the word 'acting', 'temporary', or 'interim' will do this."

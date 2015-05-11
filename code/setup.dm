@@ -957,3 +957,5 @@ var/list/be_special_flags = list(
 
 #define WALL_CAN_OPEN 1
 #define WALL_OPENING 2
+
+#define CLAMP01(x) max(0, min(1, x))
