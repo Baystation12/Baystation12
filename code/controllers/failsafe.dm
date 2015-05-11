@@ -25,7 +25,6 @@ var/datum/controller/failsafe/Failsafe
 		set background = 1
 		while(1)	//more efficient than recursivly calling ourself over and over. background = 1 ensures we do not trigger an infinite loop
 			if(!master_controller)		new /datum/controller/game_controller()	//replace the missing master_controller! This should never happen.
-			if(!lighting_controller)	new /datum/controller/lighting()		//replace the missing lighting_controller
 
 			if(processing)
 				if(lighting_controller.processing)

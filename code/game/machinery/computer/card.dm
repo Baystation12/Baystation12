@@ -4,6 +4,7 @@
 	name = "\improper ID card modification console"
 	desc = "Terminal for programming NanoTrasen employee ID cards to access parts of the station."
 	icon_state = "id"
+	light_color = "#0099ff"
 	req_access = list(access_change_ids)
 	circuit = "/obj/item/weapon/circuitboard/card"
 	var/obj/item/weapon/card/id/scan = null

@@ -38,17 +38,19 @@
 	..()
 
 /obj/singularity_act()
-	ex_act(1)
-	if(src)
-		qdel(src)
-	return 2
+	if(simulated)
+		ex_act(1)
+		if(src)
+			qdel(src)
+		return 2
 
 /obj/singularity_pull(S, current_size)
-	if(anchored)
-		if(current_size >= STAGE_FIVE)
+	if(simulated)
+		if(anchored)
+			if(current_size >= STAGE_FIVE)
+				step_towards(src, S)
+		else
 			step_towards(src, S)
-	else
-		step_towards(src, S)
 
 /obj/effect/beam/singularity_pull()
 	return

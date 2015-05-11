@@ -240,7 +240,7 @@
 ////////////////Glow//////////////////
 /mob/living/simple_animal/construct/proc/add_glow()
 	overlays = 0
-	var/overlay_layer = LIGHTING_LAYER+1
+	var/overlay_layer = 11
 	if(layer != MOB_LAYER)
 		overlay_layer=TURF_LAYER+0.2
 

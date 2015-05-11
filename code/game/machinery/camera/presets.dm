@@ -102,6 +102,12 @@ var/global/list/engineering_networks = list(
 	..()
 	upgradeMotion()
 
+/obj/machinery/camera/motion/engineering_outpost
+	network = list(NETWORK_ENGINEERING_OUTPOST)
+
+/obj/machinery/camera/motion/security
+	network = list(NETWORK_SECURITY)
+
 // ALL UPGRADES
 
 

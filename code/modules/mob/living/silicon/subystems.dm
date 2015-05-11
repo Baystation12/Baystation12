@@ -1,23 +1,19 @@
 /mob/living/silicon
 	var/register_alarms = 1
-	var/obj/nano_module/alarm_monitor/alarm_monitor
+	var/obj/nano_module/alarm_monitor/all/alarm_monitor
 	var/obj/nano_module/atmos_control/atmos_control
 	var/obj/nano_module/crew_monitor/crew_monitor
 	var/obj/nano_module/law_manager/law_manager
 	var/obj/nano_module/power_monitor/power_monitor
 	var/obj/nano_module/rcon/rcon
 
-	var/alarm_monitor_type = /obj/nano_module/alarm_monitor/borg
-
 /mob/living/silicon
-	alarm_monitor_type = /obj/nano_module/alarm_monitor/borg
 	var/list/silicon_subsystems = list(
 		/mob/living/silicon/proc/subsystem_alarm_monitor,
 		/mob/living/silicon/proc/subsystem_law_manager
 	)
 
 /mob/living/silicon/ai
-	alarm_monitor_type = /obj/nano_module/alarm_monitor/ai
 	silicon_subsystems = list(
 		/mob/living/silicon/proc/subsystem_alarm_monitor,
 		/mob/living/silicon/proc/subsystem_atmos_control,
@@ -32,7 +28,7 @@
 	silicon_subsystems = list(/mob/living/silicon/proc/subsystem_law_manager)
 
 /mob/living/silicon/proc/init_subsystems()
-	alarm_monitor 	= new alarm_monitor_type(src)
+	alarm_monitor 	= new(src)
 	atmos_control 	= new(src)
 	crew_monitor 	= new(src)
 	law_manager 	= new(src)

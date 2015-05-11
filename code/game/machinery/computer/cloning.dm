@@ -2,6 +2,7 @@
 	name = "cloning control console"
 	icon = 'icons/obj/computer.dmi'
 	icon_state = "dna"
+	light_color = "#315ab4"
 	circuit = "/obj/item/weapon/circuitboard/cloning"
 	req_access = list(access_heads) //Only used for record deletion right now.
 	var/obj/machinery/dna_scannernew/scanner = null //Linked scanner. For scanning.
@@ -14,20 +15,18 @@
 	var/obj/item/weapon/disk/data/diskette = null //Mostly so the geneticist can steal everything.
 	var/loading = 0 // Nice loading text
 
-/obj/machinery/computer/cloning/New()
+/obj/machinery/computer/cloning/initialize()
 	..()
-	spawn(5)
-		updatemodules()
-		return
-	return
+	updatemodules()
+
+/obj/machinery/computer/cloning/Destroy()
+	releasecloner()
+	..()
 
 /obj/machinery/computer/cloning/proc/updatemodules()
 	src.scanner = findscanner()
+	releasecloner()
 	findcloner()
-	var/num = 1
-	for (var/obj/machinery/clonepod/pod in pods)
-		pod.connected = src
-		pod.name = "[initial(pod.name)] #[num++]"
 
 /obj/machinery/computer/cloning/proc/findscanner()
 	var/obj/machinery/dna_scannernew/scannerf = null
@@ -40,18 +39,26 @@
 
 	//Then look for a free one in the area
 	if(!scannerf)
-		for(var/obj/machinery/dna_scannernew/S in get_area(src))
+		var/area/A = get_area(src)
+		for(var/obj/machinery/dna_scannernew/S in A.get_contents())
 			return S
 
 	return
 
-/obj/machinery/computer/cloning/proc/findcloner()
+/obj/machinery/computer/cloning/proc/releasecloner()
+	for(var/obj/machinery/clonepod/P in pods)
+		P.connected = null
+		P.name = initial(P.name)
 	pods.Cut()
-	for(var/obj/machinery/clonepod/P in get_area(src))
+
+/obj/machinery/computer/cloning/proc/findcloner()
+	var/num = 1
+	var/area/A = get_area(src)
+	for(var/obj/machinery/clonepod/P in A.get_contents())
 		if(!P.connected)
 			pods += P
-
-	return
+			P.connected = src
+			P.name = "[initial(P.name)] #[num++]"
 
 /obj/machinery/computer/cloning/attackby(obj/item/W as obj, mob/user as mob)
 	if (istype(W, /obj/item/weapon/disk/data)) //INSERT SOME DISKETTES

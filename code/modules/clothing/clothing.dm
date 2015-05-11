@@ -264,36 +264,18 @@ BLIND     // can't see anything
 			return
 		on = !on
 		user << "You [on ? "enable" : "disable"] the helmet light."
-		update_light(user)
+		update_flashlight(user)
 	else
 		return ..(user)
 
-/obj/item/clothing/head/proc/update_light(var/mob/user = null)
+/obj/item/clothing/head/proc/update_flashlight(var/mob/user = null)
 	if(on && !light_applied)
-		if(loc == user)
-			user.SetLuminosity(user.luminosity + brightness_on)
-		SetLuminosity(brightness_on)
+		set_light(brightness_on)
 		light_applied = 1
 	else if(!on && light_applied)
-		if(loc == user)
-			user.SetLuminosity(user.luminosity - brightness_on)
-		SetLuminosity(0)
+		set_light(0)
 		light_applied = 0
 	update_icon(user)
-
-/obj/item/clothing/head/equipped(mob/user)
-	..()
-	spawn(1)
-		if(on && loc == user && !light_applied)
-			user.SetLuminosity(user.luminosity + brightness_on)
-			light_applied = 1
-
-/obj/item/clothing/head/dropped(mob/user)
-	..()
-	spawn(1)
-		if(on && loc != user && light_applied)
-			user.SetLuminosity(user.luminosity - brightness_on)
-			light_applied = 0
 
 /obj/item/clothing/head/update_icon(var/mob/user)
 
@@ -307,18 +289,6 @@ BLIND     // can't see anything
 	if(istype(user,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = user
 		H.update_inv_head()
-
-/obj/item/clothing/head/equipped(mob/user)
-	..()
-	update_light(user)
-
-/obj/item/clothing/head/pickup(mob/user)
-	..()
-	update_light(user)
-
-/obj/item/clothing/head/dropped(mob/user)
-	..()
-	update_light(user)
 
 /obj/item/clothing/head/update_clothing_icon()
 	if (ismob(src.loc))
@@ -357,6 +327,7 @@ BLIND     // can't see anything
 	permeability_coefficient = 0.50
 	slowdown = SHOES_SLOWDOWN
 	force = 2
+	var/overshoes = 0
 	species_restricted = list("exclude","Unathi","Tajara")
 	sprite_sheets = list("Vox" = 'icons/mob/species/vox/shoes.dmi')
 

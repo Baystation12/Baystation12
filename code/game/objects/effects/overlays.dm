@@ -37,4 +37,4 @@
 	name = "Bluespace"
 	icon = 'icons/turf/space.dmi'
 	icon_state = "bluespacify"
-	layer = LIGHTING_LAYER
+	layer = 10

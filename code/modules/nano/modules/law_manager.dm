@@ -147,7 +147,7 @@
 				R << "<span class='danger'>Law Notice</span>"
 				R.laws.show_laws(R)
 		if(usr != owner)
-			usr << "<span class='notice>Laws displayed.</span>"
+			usr << "<span class='notice'>Laws displayed.</span>"
 		return 1
 
 	return 0
