@@ -146,7 +146,7 @@ var/list/organ_cache = list()
 	return damage >= min_bruised_damage
 
 /obj/item/organ/proc/is_broken()
-	return (damage >= min_broken_damage || (status & ORGAN_CUT_AWAY) || ((status & ORGAN_BROKEN) && !(status & ORGAN_SPLINTED)))
+	return (damage >= min_broken_damage || (status & ORGAN_CUT_AWAY) || (status & ORGAN_BROKEN))
 
 //Germs
 /obj/item/organ/proc/handle_antibiotics()
@@ -315,7 +315,7 @@ var/list/organ_cache = list()
 	if(fingerprintslast) O.fingerprintslast = fingerprintslast
 
 	user.put_in_active_hand(O)
-	del(src)
+	qdel(src)
 
 /obj/item/organ/attack_self(mob/user as mob)
 

@@ -20,7 +20,7 @@
 		new/obj/item/stack/sheet/glass(user.loc)
 		if(amount <= 0)
 			user.drop_from_inventory(src)
-			del(src)
+			qdel(src)
 
 	if(istype(O,/obj/item/stack/sheet/metal))
 		var/obj/item/stack/sheet/metal/M = O

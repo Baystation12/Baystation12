@@ -134,7 +134,7 @@
 			if (user.get_inactive_hand()==src)
 				user.remove_from_mob(src)
 				user.put_in_inactive_hand(B)
-			del(src)
+			qdel(src)
 		else
 			user << "<span class='warning'>You need one sheet of metal to arm the robot frame.</span>"
 	if(istype(W, /obj/item/robot_parts/l_leg))
@@ -250,7 +250,7 @@
 			callHook("borgify", list(O))
 			O.Namepick()
 
-			del(src)
+			qdel(src)
 		else
 			user << "\blue The MMI must go in after everything else!"
 
@@ -291,29 +291,38 @@
 	..()
 	if(istype(W, /obj/item/device/flash))
 		if(istype(user,/mob/living/silicon/robot))
-			user << "\red How do you propose to do that?"
-			return
-		else if(src.flash1 && src.flash2)
-			user << "\blue You have already inserted the eyes!"
-			return
-		else if(src.flash1)
-			user.drop_item()
-			W.loc = src
-			src.flash2 = W
-			user << "\blue You insert the flash into the eye socket!"
+			var/current_module = user.get_active_hand()
+			if(current_module == W)
+				user << "<span class='warning'>How do you propose to do that?</span>"
+				return
+			else
+				add_flashes(W,user)
 		else
-			user.drop_item()
-			W.loc = src
-			src.flash1 = W
-			user << "\blue You insert the flash into the eye socket!"
+			add_flashes(W,user)
 	else if(istype(W, /obj/item/weapon/stock_parts/manipulator))
 		user << "\blue You install some manipulators and modify the head, creating a functional spider-bot!"
 		new /mob/living/simple_animal/spiderbot(get_turf(loc))
 		user.drop_item()
-		del(W)
-		del(src)
+		qdel(W)
+		qdel(src)
 		return
 	return
+
+/obj/item/robot_parts/head/proc/add_flashes(obj/item/W as obj, mob/user as mob) //Made into a seperate proc to avoid copypasta
+	if(src.flash1 && src.flash2)
+		user << "<span class='notice'>You have already inserted the eyes!</span>"
+		return
+	else if(src.flash1)
+		user.drop_item()
+		W.loc = src
+		src.flash2 = W
+		user << "<span class='notice'>You insert the flash into the eye socket!</span>"
+	else
+		user.drop_item()
+		W.loc = src
+		src.flash1 = W
+		user << "<span class='notice'>You insert the flash into the eye socket!</span>"
+
 
 /obj/item/robot_parts/attackby(obj/item/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/weapon/card/emag))

@@ -7,7 +7,7 @@ datum/controller/transfer_controller/New()
 	timerbuffer = config.vote_autotransfer_initial
 	processing_objects += src
 
-datum/controller/transfer_controller/Del()
+datum/controller/transfer_controller/Destroy()
 	processing_objects -= src
 
 datum/controller/transfer_controller/proc/process()

@@ -18,7 +18,7 @@
 		if (machine)
 			machine.console = src
 		else
-			del(src)
+			qdel(src)
 
 /obj/machinery/mineral/processing_unit_console/attack_hand(mob/user)
 	add_fingerprint(user)
@@ -104,7 +104,7 @@
 	icon_state = "furnace"
 	density = 1
 	anchored = 1
-	luminosity = 3
+	light_range = 3
 	var/obj/machinery/mineral/input = null
 	var/obj/machinery/mineral/output = null
 	var/obj/machinery/mineral/console = null

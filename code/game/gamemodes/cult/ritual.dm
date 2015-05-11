@@ -2,7 +2,8 @@
 
 var/cultwords = list()
 var/runedec = 0
-var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", "self", "see", "other", "hide")
+var/global/list/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", "self", "see", "other", "hide")
+var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","mgar","balaq", "karazet", "geeri")
 
 /client/proc/check_words() // -- Urist
 	set category = "Special Verbs"
@@ -14,7 +15,7 @@ var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", 
 		usr << "[cultwords[word]] is [word]"
 
 /proc/runerandom() //randomizes word meaning
-	var/list/runewords=list("ire","ego","nahlizet","certum","veri","jatkaa","mgar","balaq", "karazet", "geeri") ///"orkan" and "allaq" removed.
+	var/list/runewords=rnwords
 	for (var/word in engwords)
 		cultwords[word] = pick(runewords)
 		runewords-=cultwords[word]
@@ -32,8 +33,9 @@ var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", 
 	var/word1
 	var/word2
 	var/word3
+	var/image/blood_image
 	var/list/converting = list()
-	
+
 // Places these combos are mentioned: this file - twice in the rune code, once in imbued tome, once in tome's HTML runes.dm - in the imbue rune code. If you change a combination - dont forget to change it everywhere.
 
 // travel self [word] - Teleport to random [rune with word destination matching]
@@ -65,10 +67,21 @@ var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", 
 // join hide technology - stun rune. Rune color: bright pink.
 	New()
 		..()
-		var/image/blood = image(loc = src)
-		blood.override = 1
+		blood_image = image(loc = src)
+		blood_image.override = 1
 		for(var/mob/living/silicon/ai/AI in player_list)
-			AI.client.images += blood
+			if(AI.client)
+				AI.client.images += blood_image
+		rune_list.Add(src)
+
+	Destroy()
+		for(var/mob/living/silicon/ai/AI in player_list)
+			if(AI.client)
+				AI.client.images -= blood_image
+		qdel(blood_image)
+		blood_image = null
+		rune_list.Remove(src)
+		..()
 
 	examine(mob/user)
 		..()
@@ -79,11 +92,11 @@ var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", 
 	attackby(I as obj, user as mob)
 		if(istype(I, /obj/item/weapon/book/tome) && iscultist(user))
 			user << "You retrace your steps, carefully undoing the lines of the rune."
-			del(src)
+			qdel(src)
 			return
 		else if(istype(I, /obj/item/weapon/nullrod))
 			user << "\blue You disrupt the vile magic with the deadening field of the null rod!"
-			del(src)
+			qdel(src)
 			return
 		return
 
@@ -496,6 +509,9 @@ var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", 
 			user << "An old, dusty tome with frayed edges and a sinister looking cover."
 		else
 			user << "The scriptures of Nar-Sie, The One Who Sees, The Geometer of Blood. Contains the details of every ritual his followers could think of. Most of these are useless, though."
+
+/obj/item/weapon/book/tome/cultify()
+	return
 
 /obj/item/weapon/book/tome/imbued //admin tome, spawns working runes without waiting
 	w_class = 2.0

@@ -238,7 +238,7 @@
 
 			camera_list = "Network Key: [key.title] [topic_link(src,"keyselect","\[ Select key \]")]<hr>"
 			for(var/obj/machinery/camera/C in temp_list)
-				if(C.status)
+				if(C.can_use())
 					camera_list += "[C.c_tag] - [topic_link(src,"show=\ref[C]","Show")]<br>"
 				else
 					camera_list += "[C.c_tag] - <b>DEACTIVATED</b><br>"
@@ -264,7 +264,7 @@
 
 		if("show" in href_list)
 			var/obj/machinery/camera/C = locate(href_list["show"])
-			if(istype(C) && C.status)
+			if(istype(C) && C.can_use())
 				set_current(C)
 				usr.reset_view(C)
 				interact()

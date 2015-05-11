@@ -63,7 +63,7 @@
 	if(equipment.len)//Now to remove it and equip anew.
 		for(ME in equipment)
 			equipment -= ME
-			del(ME)
+			qdel(ME)
 	ME = new /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/scattershot(src)
 	ME.attach(src)
 	ME = new /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack/explosive(src)
@@ -75,6 +75,10 @@
 	ME = new /obj/item/mecha_parts/mecha_equipment/antiproj_armor_booster(src)
 	ME.attach(src)
 	return
+
+/obj/mecha/combat/marauder/Destroy()
+	qdel(smoke_system)
+	..()
 
 /obj/mecha/combat/marauder/relaymove(mob/user,direction)
 	if(user != src.occupant) //While not "realistic", this piece is player friendly.

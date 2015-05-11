@@ -304,7 +304,7 @@
 			host.computer_id = null
 			host.lastKnownIP = null
 
-			del(host_brain)
+			qdel(host_brain)
 			host_brain = new(src)
 
 			host_brain.ckey = host.ckey

@@ -14,6 +14,7 @@ var/syndicate_elite_shuttle_timeleft = 0
 	name = "elite syndicate squad shuttle control console"
 	icon = 'icons/obj/computer.dmi'
 	icon_state = "syndishuttle"
+	light_color = "#00ffff"
 	req_access = list(access_cent_specops)
 	var/temp = null
 	var/hacked = 0
@@ -160,7 +161,7 @@ var/syndicate_elite_shuttle_timeleft = 0
 		for(var/atom/movable/AM as mob|obj in T)
 			AM.Move(D)
 		if(istype(T, /turf/simulated))
-			del(T)
+			qdel(T)
 
 	for(var/mob/living/carbon/bug in end_location) // If someone somehow is still in the shuttle's docking area...
 		bug.gib()

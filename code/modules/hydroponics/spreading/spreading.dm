@@ -1,22 +1,28 @@
 #define DEFAULT_SEED "glowshroom"
 #define VINE_GROWTH_STAGES 5
 
-/proc/spacevine_infestation()
+/proc/spacevine_infestation(var/potency_min=70, var/potency_max=100, var/maturation_min=5, var/maturation_max=15)
 	spawn() //to stop the secrets panel hanging
 		var/list/turf/simulated/floor/turfs = list() //list of all the empty floor turfs in the hallway areas
 		for(var/areapath in typesof(/area/hallway))
 			var/area/A = locate(areapath)
-			for(var/area/B in A.related)
-				for(var/turf/simulated/floor/F in B.contents)
-					if(!F.contents.len)
-						turfs += F
+			for(var/turf/simulated/floor/F in A.contents)
+				if(!F.contents.len)
+					turfs += F
 
 		if(turfs.len) //Pick a turf to spawn at if we can
 			var/turf/simulated/floor/T = pick(turfs)
 			var/datum/seed/seed = plant_controller.create_random_seed(1)
 			seed.set_trait(TRAIT_SPREAD,2)             // So it will function properly as vines.
-			seed.set_trait(TRAIT_POTENCY,rand(70,100)) // Guarantee a wide spread and powerful effects.
-			new /obj/effect/plant(T,seed)
+			seed.set_trait(TRAIT_POTENCY,rand(potency_min, potency_max)) // 70-100 potency will help guarantee a wide spread and powerful effects.
+			seed.set_trait(TRAIT_MATURATION,rand(maturation_min, maturation_max))
+			
+			//make vine zero start off fully matured
+			var/obj/effect/plant/vine = new(T,seed)
+			vine.health = vine.max_health
+			vine.mature_time = 0
+			vine.process()
+			
 			message_admins("<span class='notice'>Event: Spacevines spawned at [T.loc] ([T.x],[T.y],[T.z])</span>")
 
 /obj/effect/dead_plant
@@ -26,13 +32,13 @@
 	color = DEAD_PLANT_COLOUR
 
 /obj/effect/dead_plant/attack_hand()
-	del(src)
+	qdel(src)
 
 /obj/effect/dead_plant/attackby()
 	..()
 	for(var/obj/effect/plant/neighbor in range(1))
 		neighbor.update_neighbors()
-	del(src)
+	qdel(src)
 
 /obj/effect/plant
 	name = "plant"
@@ -57,10 +63,11 @@
 	var/spread_chance = 40
 	var/spread_distance = 3
 	var/evolve_chance = 2
+	var/mature_time		//minimum maturation time
 	var/last_tick = 0
 	var/obj/machinery/portable_atmospherics/hydroponics/soil/invisible/plant
 
-/obj/effect/plant/Del()
+/obj/effect/plant/Destroy()
 	if(plant_controller)
 		plant_controller.remove_plant(src)
 	for(var/obj/effect/plant/neighbor in range(1,src))
@@ -81,14 +88,14 @@
 		sleep(250) // ugly hack, should mean roundstart plants are fine.
 	if(!plant_controller)
 		world << "<span class='danger'>Plant controller does not exist and [src] requires it. Aborting.</span>"
-		del(src)
+		qdel(src)
 		return
 
 	if(!istype(newseed))
 		newseed = plant_controller.seeds[DEFAULT_SEED]
 	seed = newseed
 	if(!seed)
-		del(src)
+		qdel(src)
 		return
 
 	name = seed.display_name
@@ -112,6 +119,7 @@
 	if(max_growth > 2 && prob(50))
 		max_growth-- //Ensure some variation in final sprite, makes the carpet of crap look less wonky.
 
+	mature_time = world.time + seed.get_trait(TRAIT_MATURATION) + 15 //prevent vines from maturing until at least a few seconds after they've been created.
 	spread_chance = seed.get_trait(TRAIT_POTENCY)
 	spread_distance = ((growth_type>0) ? round(spread_chance*0.6) : round(spread_chance*0.3))
 	update_icon()
@@ -146,14 +154,13 @@
 		color = icon_colour
 	// Apply colour and light from seed datum.
 	if(seed.get_trait(TRAIT_BIOLUM))
-		SetLuminosity(1+round(seed.get_trait(TRAIT_POTENCY)/20))
+		var/clr
 		if(seed.get_trait(TRAIT_BIOLUM_COLOUR))
-			l_color = seed.get_trait(TRAIT_BIOLUM_COLOUR)
-		else
-			l_color = null
+			clr = seed.get_trait(TRAIT_BIOLUM_COLOUR)
+		set_light(1+round(seed.get_trait(TRAIT_POTENCY)/20), l_color = clr)
 		return
 	else
-		SetLuminosity(0)
+		set_light(0)
 
 /obj/effect/plant/proc/refresh_icon()
 	var/growth = min(max_growth,round(health/growth_threshold))
@@ -256,4 +263,4 @@
 		die_off()
 
 /obj/effect/plant/proc/is_mature()
-	return (health >= (max_health/3))
+	return (health >= (max_health/3) && world.time > mature_time)

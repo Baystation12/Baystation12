@@ -72,7 +72,7 @@
 		else
 			P.roll_and_drop(P.loc)
 	
-	del(oldsrc)	//delete it now to cut down on sanity checks afterwards. Agouri's code supports rerolling it anyway
+	qdel(oldsrc)	//delete it now to cut down on sanity checks afterwards. Agouri's code supports rerolling it anyway
 
 //############################## THE ACTUAL DECALS ###########################
 
@@ -125,7 +125,7 @@
 		playsound(loc, 'sound/items/Wirecutter.ogg', 100, 1)
 		if(ruined)
 			user << "<span class='notice'>You remove the remnants of the poster.</span>"
-			del(src)
+			qdel(src)
 		else
 			user << "<span class='notice'>You carefully remove the poster from the wall.</span>"
 			roll_and_drop(user.loc)
@@ -154,7 +154,7 @@
 	var/obj/item/weapon/contraband/poster/P = new(src, serial_number)
 	P.loc = newloc
 	src.loc = P
-	del(src)
+	qdel(src)
 
 /datum/poster
 	// Name suffix. Poster - [name]

@@ -9,12 +9,13 @@ var/global/list/minor_air_alarms = list()
 	desc = "Used to access the station's atmospheric sensors."
 	circuit = "/obj/item/weapon/circuitboard/atmos_alert"
 	icon_state = "alert:0"
+	light_color = "#e6ffff"
 
 /obj/machinery/computer/atmos_alert/New()
 	..()
 	atmosphere_alarm.register(src, /obj/machinery/computer/station_alert/update_icon)
-    
-/obj/machinery/computer/atmos_alert/Del()
+
+/obj/machinery/computer/atmos_alert/Destroy()
     atmosphere_alarm.unregister(src)
     ..()
 
@@ -68,16 +69,13 @@ var/global/list/minor_air_alarms = list()
 				var/obj/machinery/alarm/air_alarm = alarm_source.source
 				if(istype(air_alarm))
 					var/list/new_ref = list("atmos_reset" = 1)
-					air_alarm.Topic(href, new_ref, custom_state = atmos_alert_topic)
+					air_alarm.Topic(href, new_ref, state = air_alarm_topic)
 		return 1
 
 
-var/datum/topic_state/atmos_alert/atmos_alert_topic = new()
+var/datum/topic_state/air_alarm_topic/air_alarm_topic = new()
 
-/datum/topic_state/atmos_alert
-	flags = NANO_IGNORE_DISTANCE
-
-/datum/topic_state/air_alarm/href_list(var/mob/user)
+/datum/topic_state/air_alarm_topic/href_list(var/mob/user)
 	var/list/extra_href = list()
 	extra_href["remote_connection"] = 1
 	extra_href["remote_access"] = 1

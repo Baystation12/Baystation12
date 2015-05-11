@@ -13,7 +13,7 @@
 	relativewall_neighbours()
 	..()
 
-/obj/structure/falsewall/Del()
+/obj/structure/falsewall/Destroy()
 
 	var/temploc = src.loc
 
@@ -62,7 +62,7 @@
 		flick("[mineral]fwall_opening", src)
 		sleep(15)
 		src.density = 0
-		SetOpacity(0)
+		set_opacity(0)
 		opening = 0
 	else
 		opening = 1
@@ -70,7 +70,7 @@
 		icon_state = "[mineral]0"
 		density = 1
 		sleep(15)
-		SetOpacity(1)
+		set_opacity(1)
 		src.relativewall()
 		opening = 0
 
@@ -98,7 +98,7 @@
 				T.ChangeTurf(/turf/simulated/wall)
 			else
 				T.ChangeTurf(text2path("/turf/simulated/wall/mineral/[mineral]"))
-			del(src)
+			qdel(src)
 
 		if( istype(W, /obj/item/weapon/weldingtool) )
 			var/obj/item/weapon/weldingtool/WT = W
@@ -110,7 +110,7 @@
 				if(mineral != "phoron")//Stupid shit keeps me from pushing the attackby() to phoron walls -Sieve
 					T = get_turf(src)
 					T.attackby(W,user)
-				del(src)
+				qdel(src)
 	else
 		user << "\blue You can't reach, close it first!"
 
@@ -123,7 +123,7 @@
 		if(mineral != "phoron")
 			T = get_turf(src)
 			T.attackby(W,user)
-		del(src)
+		qdel(src)
 
 	//DRILLING
 	else if (istype(W, /obj/item/weapon/pickaxe/diamonddrill))
@@ -134,7 +134,7 @@
 			T.ChangeTurf(text2path("/turf/simulated/wall/mineral/[mineral]"))
 		T = get_turf(src)
 		T.attackby(W,user)
-		del(src)
+		qdel(src)
 
 	else if( istype(W, /obj/item/weapon/melee/energy/blade) )
 		var/turf/T = get_turf(src)
@@ -145,7 +145,7 @@
 		if(mineral != "phoron")
 			T = get_turf(src)
 			T.attackby(W,user)
-		del(src)
+		qdel(src)
 
 /obj/structure/falsewall/update_icon()//Calling icon_update will refresh the smoothwalls if it's closed, otherwise it will make sure the icon is correct if it's open
 	..()
@@ -186,7 +186,7 @@
 		flick("frwall_opening", src)
 		sleep(15)
 		density = 0
-		SetOpacity(0)
+		set_opacity(0)
 		opening = 0
 	else
 		opening = 1
@@ -194,7 +194,7 @@
 		flick("frwall_closing", src)
 		density = 1
 		sleep(15)
-		SetOpacity(1)
+		set_opacity(1)
 		relativewall()
 		opening = 0
 
@@ -232,7 +232,7 @@
 		var/turf/T = get_turf(src)
 		user.visible_message("[user] tightens some bolts on the r wall.", "You tighten the bolts on the wall.")
 		T.ChangeTurf(/turf/simulated/wall) //Intentionally makes a regular wall instead of an r-wall (no cheap r-walls for you).
-		del(src)
+		qdel(src)
 
 	if( istype(W, /obj/item/weapon/weldingtool) )
 		var/obj/item/weapon/weldingtool/WT = W
@@ -241,14 +241,14 @@
 			T.ChangeTurf(/turf/simulated/wall)
 			T = get_turf(src)
 			T.attackby(W,user)
-			del(src)
+			qdel(src)
 
 	else if( istype(W, /obj/item/weapon/pickaxe/plasmacutter) )
 		var/turf/T = get_turf(src)
 		T.ChangeTurf(/turf/simulated/wall)
 		T = get_turf(src)
 		T.attackby(W,user)
-		del(src)
+		qdel(src)
 
 	//DRILLING
 	else if (istype(W, /obj/item/weapon/pickaxe/diamonddrill))
@@ -256,14 +256,14 @@
 		T.ChangeTurf(/turf/simulated/wall)
 		T = get_turf(src)
 		T.attackby(W,user)
-		del(src)
+		qdel(src)
 
 	else if( istype(W, /obj/item/weapon/melee/energy/blade) )
 		var/turf/T = get_turf(src)
 		T.ChangeTurf(/turf/simulated/wall)
 		T = get_turf(src)
 		T.attackby(W,user)
-		del(src)
+		qdel(src)
 
 
 /*

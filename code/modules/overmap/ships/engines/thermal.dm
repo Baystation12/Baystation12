@@ -57,7 +57,7 @@
 	..()
 	controller = new(src)
 
-/obj/machinery/atmospherics/unary/engine/Del()
+/obj/machinery/atmospherics/unary/engine/Destroy()
 	..()
 	controller.die()
 

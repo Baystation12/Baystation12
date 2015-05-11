@@ -8,20 +8,25 @@
 	flags = CONDUCT
 	pressure_resistance = 5*ONE_ATMOSPHERE
 	layer = 2.9
-	explosion_resistance = 5
+	explosion_resistance = 1
 	var/health = 10
 	var/destroyed = 0
 
 
 /obj/structure/grille/ex_act(severity)
-	del(src)
+	qdel(src)
 
 /obj/structure/grille/blob_act()
-	del(src)
+	qdel(src)
 
 /obj/structure/grille/meteorhit(var/obj/M)
-	del(src)
+	qdel(src)
 
+/obj/structure/grille/update_icon()
+	if(destroyed)
+		icon_state = "[initial(icon_state)]-b"
+	else
+		icon_state = initial(icon_state)
 
 /obj/structure/grille/Bumped(atom/user)
 	if(ismob(user)) shock(user, 70)
@@ -98,8 +103,8 @@
 	if(iswirecutter(W))
 		if(!shock(user, 100))
 			playsound(loc, 'sound/items/Wirecutter.ogg', 100, 1)
-			new /obj/item/stack/rods(loc, 2)
-			del(src)
+			PoolOrNew(/obj/item/stack/rods, list(get_turf(src), destroyed ? 1 : 2))
+			qdel(src)
 	else if((isscrewdriver(W)) && (istype(loc, /turf/simulated) || anchored))
 		if(!shock(user, 90))
 			playsound(loc, 'sound/items/Screwdriver.ogg', 100, 1)
@@ -165,15 +170,15 @@
 /obj/structure/grille/proc/healthcheck()
 	if(health <= 0)
 		if(!destroyed)
-			icon_state = "brokengrille"
 			density = 0
 			destroyed = 1
-			new /obj/item/stack/rods(loc)
+			update_icon()
+			PoolOrNew(/obj/item/stack/rods, get_turf(src))
 
 		else
 			if(health <= -6)
-				new /obj/item/stack/rods(loc)
-				del(src)
+				PoolOrNew(/obj/item/stack/rods, get_turf(src))
+				qdel(src)
 				return
 	return
 
@@ -215,3 +220,24 @@
 	health -= damage
 	spawn(1) healthcheck()
 	return 1
+
+// Used in mapping to avoid
+/obj/structure/grille/broken
+	destroyed = 1
+	icon_state = "grille-b"
+	density = 0
+	New()
+		..()
+		health = rand(-5, -1) //In the destroyed but not utterly threshold.
+		healthcheck() //Send this to healthcheck just in case we want to do something else with it.
+
+/obj/structure/grille/cult
+	name = "cult grille"
+	desc = "A matrice built out of an unknown material, with some sort of force field blocking air around it"
+	icon_state = "grillecult"
+	health = 40 //Make it strong enough to avoid people breaking in too easily
+
+/obj/structure/grille/cult/CanPass(atom/movable/mover, turf/target, height = 1.5, air_group = 0)
+	if(air_group)
+		return 0 //Make sure air doesn't drain
+	..()

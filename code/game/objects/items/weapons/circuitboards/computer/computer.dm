@@ -57,9 +57,17 @@
 	name = T_BOARD("employment records console")
 	build_path = /obj/machinery/computer/skills
 
-/obj/item/weapon/circuitboard/stationalert
-	name = T_BOARD("station alert console")
+/obj/item/weapon/circuitboard/stationalert_engineering
+	name = T_BOARD("station alert console (engineering)")
 	build_path = /obj/machinery/computer/station_alert
+	
+/obj/item/weapon/circuitboard/stationalert_security
+	name = T_BOARD("station alert console (security)")
+	build_path = /obj/machinery/computer/station_alert
+	
+/obj/item/weapon/circuitboard/stationalert_all
+	name = T_BOARD("station alert console (all)")
+	build_path = /obj/machinery/computer/station_alert/all
 
 /obj/item/weapon/circuitboard/atmos_alert
 	name = T_BOARD("atmospheric alert console")

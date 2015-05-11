@@ -112,10 +112,10 @@
 	name = "offhand"
 
 	unwield()
-		del(src)
+		qdel(src)
 
 	wield()
-		del(src)
+		qdel(src)
 
 /obj/item/weapon/twohanded/offhand/update_icon()
 	return
@@ -144,12 +144,12 @@
 			var/obj/structure/window/W = A
 
 			new /obj/item/weapon/shard( W.loc )
-			if(W.reinf) new /obj/item/stack/rods( W.loc)
+			if(W.reinf) PoolOrNew(/obj/item/stack/rods, W.loc)
 
 			if (W.dir == SOUTHWEST)
 				new /obj/item/weapon/shard( W.loc )
-				if(W.reinf) new /obj/item/stack/rods( W.loc)
-		del(A)
+				if(W.reinf) PoolOrNew(/obj/item/stack/rods, W.loc)
+		qdel(A)
 
 
 /*

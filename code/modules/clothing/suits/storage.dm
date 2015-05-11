@@ -8,6 +8,11 @@
 	pockets.max_w_class = 2		//fit only pocket sized items
 	pockets.max_storage_space = 4
 
+/obj/item/clothing/suit/storage/Destroy()
+	qdel(pockets)
+	pockets = null
+	..()
+
 /obj/item/clothing/suit/storage/attack_hand(mob/user as mob)
 	if (pockets.handle_attack_hand(user))
 		..(user)
@@ -58,7 +63,6 @@
 	pockets.storage_slots = 4
 	pockets.max_w_class = 2
 	pockets.max_storage_space = 8
-
 
 /obj/item/clothing/suit/storage/vest
 	var/icon_badge

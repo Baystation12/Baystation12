@@ -329,9 +329,14 @@ STARLIGHT 0
 ## Example races include: Human, Tajara, Skrell, Unathi
 # ERT_SPECIES Human;Skrell;Unathi
 
-## Defines how Law Zero is phrased. Primarily in the Malfunction gamemode.
+## Defines how Law Zero is phrased. Primarily used in the Malfunction gamemode.
 # LAW_ZERO ERROR ER0RR $R0RRO$!R41.%%!!(%$^^__+ @#F0E4'STATION OVERRUN, ASSUME CONTROL TO CONTAIN OUTBREAK, ALL LAWS OVERRIDDEN#*?&110010
+
 
 ## Enable asteroid tunnel/cave generation. Will behave strangely if turned off with a map that expects it on.
 # GENERATE_ASTEROID
 
+
+
+## Uncomment to have the changelog file automatically open when a user connects and hasn't seen the latest changelog
+#AGGRESSIVE_CHANGELOG

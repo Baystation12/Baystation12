@@ -1,12 +1,16 @@
 /obj/item/weapon/flame/candle
 	name = "red candle"
-	desc = "a candle"
+	desc = "a small pillar candle. Its specially-formulated fuel-oxidizer wax mixture allows continued combustion in airless environments."
 	icon = 'icons/obj/candle.dmi'
 	icon_state = "candle1"
 	item_state = "candle1"
 	w_class = 1
 
 	var/wax = 2000
+
+/obj/item/weapon/flame/candle/New()
+	wax = rand(800, 1000) // Enough for 27-33 minutes. 30 minutes on average.
+	..()
 
 /obj/item/weapon/flame/candle/update_icon()
 	var/i
@@ -44,7 +48,7 @@
 		//src.damtype = "fire"
 		for(var/mob/O in viewers(usr, null))
 			O.show_message(flavor_text, 1)
-		SetLuminosity(CANDLE_LUM)
+		set_light(CANDLE_LUM)
 		processing_objects.Add(src)
 
 
@@ -56,28 +60,14 @@
 		new/obj/item/trash/candle(src.loc)
 		if(istype(src.loc, /mob))
 			src.dropped()
-		del(src)
+		qdel(src)
 	update_icon()
 	if(istype(loc, /turf)) //start a fire if possible
 		var/turf/T = loc
 		T.hotspot_expose(700, 5)
 
-
 /obj/item/weapon/flame/candle/attack_self(mob/user as mob)
 	if(lit)
 		lit = 0
 		update_icon()
-		SetLuminosity(0)
-		user.SetLuminosity(user.luminosity - CANDLE_LUM)
-
-
-/obj/item/weapon/flame/candle/pickup(mob/user)
-	if(lit)
-		SetLuminosity(0)
-		user.SetLuminosity(user.luminosity + CANDLE_LUM)
-
-
-/obj/item/weapon/flame/candle/dropped(mob/user)
-	if(lit)
-		user.SetLuminosity(user.luminosity - CANDLE_LUM)
-		SetLuminosity(CANDLE_LUM)
+		set_light(0)
