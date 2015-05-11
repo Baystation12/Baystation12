@@ -211,6 +211,9 @@
 
 	M.last_target_radio = world.time // For the projectile targeting system
 
+	if(!radio_connection)
+		set_frequency(frequency)
+
 	/* Quick introduction:
 		This new radio system uses a very robust FTL signaling technology unoriginally
 		dubbed "subspace" which is somewhat similar to 'blue-space' but can't
