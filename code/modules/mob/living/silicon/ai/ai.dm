@@ -77,7 +77,8 @@ var/list/ai_verbs_default = list(
 	var/errored = 0								// Set to 1 if runtime error occurs. Only way of this happening i can think of is admin fucking up with varedit.
 	var/bombing_core = 0						// Set to 1 if core auto-destruct is activated
 	var/bombing_station = 0						// Set to 1 if station nuke auto-destruct is activated
-
+	var/override_CPUStorage = 0					// Bonus/Penalty CPU Storage. For use by admins/testers.
+	var/override_CPURate = 0					// Bonus/Penalty CPU generation rate. For use by admins/testers.
 
 
 /mob/living/silicon/ai/proc/add_ai_verbs()
@@ -742,13 +743,22 @@ var/list/ai_verbs_default = list(
 
 // Recalculates CPU time gain and storage capacities.
 /mob/living/silicon/ai/proc/recalc_cpu()
-	var/apcs = hacked_apcs.len
-	research.max_cpu = (apcs * 10) + 10
+	// AI Starts with these values.
+	var/cpu_gain = 0.01
+	var/cpu_storage = 10
+
+	// Off-Station APCs should not count towards CPU generation.
+	for(var/obj/machinery/power/apc/A in hacked_apcs)
+		if(A.z == 1)
+			cpu_gain += 0.001
+			cpu_storage += 10
+
+	research.max_cpu = cpu_storage + override_CPUStorage
 	if(hardware && istype(hardware, /datum/malf_hardware/dual_ram))
 		research.max_cpu = research.max_cpu * 2
 	research.stored_cpu = min(research.stored_cpu, research.max_cpu)
 
-	research.cpu_increase_per_tick = (apcs * 0.005) + 0.01
+	research.cpu_increase_per_tick = cpu_gain + override_CPURate
 	if(hardware && istype(hardware, /datum/malf_hardware/dual_cpu))
 		research.cpu_increase_per_tick = research.cpu_increase_per_tick * 2
 
@@ -800,6 +810,7 @@ var/list/ai_verbs_default = list(
 		if(src.research)
 			stat(null, "Available CPU: [src.research.stored_cpu] TFlops")
 			stat(null, "Maximal CPU: [src.research.max_cpu] TFlops")
+			stat(null, "CPU generation rate: [src.research.cpu_increase_per_tick] TFlops/s")
 			stat(null, "Current research focus: [src.research.focus ? src.research.focus.name : "None"]")
 			if(src.research.focus)
 				stat(null, "Research completed: [round(src.research.focus.invested, 0.1)]/[round(src.research.focus.price)]")

@@ -27,12 +27,7 @@ var/datum/antagonist/rogue_ai/malf
 	if(!candidates.len)
 		return list()
 	return candidates
-/*
-/datum/antagonist/rogue_ai/attempt_spawn()
-	var/datum/mind/player = pick(candidates)
-	current_antagonists |= player
-	return 1
-*/
+
 
 // Ensures proper reset of all malfunction related things.
 /datum/antagonist/rogue_ai/remove_antagonist(var/datum/mind/player, var/show_message, var/implanted)
