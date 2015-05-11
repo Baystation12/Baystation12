@@ -456,7 +456,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 						user.apply_damage(2,BURN,"r_hand")
 					user.visible_message("<span class='notice'>After a few attempts, [user] manages to light the [src], they however burn their finger in the process.</span>")
 
-			user.SetLuminosity(user.luminosity + 2)
+			set_light(2)
 			processing_objects.Add(src)
 		else
 			lit = 0
@@ -467,7 +467,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 			else
 				user.visible_message("<span class='notice'>[user] quietly shuts off the [src].")
 
-			user.SetLuminosity(user.luminosity - 2)
+			set_light(0)
 			processing_objects.Remove(src)
 	else
 		return ..()
@@ -495,18 +495,4 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	var/turf/location = get_turf(src)
 	if(location)
 		location.hotspot_expose(700, 5)
-	return
-
-
-/obj/item/weapon/flame/lighter/pickup(mob/user)
-	if(lit)
-		SetLuminosity(0)
-		user.SetLuminosity(user.luminosity+2)
-	return
-
-
-/obj/item/weapon/flame/lighter/dropped(mob/user)
-	if(lit)
-		user.SetLuminosity(user.luminosity-2)
-		SetLuminosity(2)
 	return

@@ -10,7 +10,7 @@
 	announce=0
 	narnar=0
 
-	layer=LIGHTING_LAYER+2 // ITS SO BRIGHT
+	layer=12 // ITS SO BRIGHT
 
 	consume_range = 6
 
@@ -65,7 +65,7 @@
 /mob/proc/see_rift(var/obj/singularity/narsie/large/exit/R)
 	if((R.z == src.z) && (get_dist(R,src) <= (R.consume_range+10)) && !(R in view(src)))
 		if(!riftimage)
-			riftimage = image('icons/obj/rift.dmi',src.loc,"rift",LIGHTING_LAYER+2,1)
+			riftimage = image('icons/obj/rift.dmi',src.loc,"rift",12,1)
 			riftimage.mouse_opacity = 0
 
 		var/new_x = 32 * (R.x - src.x) + R.pixel_x
