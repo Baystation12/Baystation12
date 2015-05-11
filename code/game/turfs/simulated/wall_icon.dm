@@ -51,11 +51,20 @@
 		wall_cache["[new_state]-[material.icon_colour]"] = I
 	overlays |= wall_cache["[new_state]-[material.icon_colour]"]
 	if(reinf_material)
-		if(!wall_cache["[material.icon_reinf]-[reinf_material.icon_colour]"])
-			var/image/I = image(icon='icons/turf/wall_masks.dmi',icon_state="[material.icon_reinf]")
+
+		var/cache_key = "[material.icon_reinf]-[reinf_material.icon_colour]"
+		if(!isnull(construction_stage) && construction_stage<6)
+			cache_key = "reinf_construct-[reinf_material.icon_colour]-[construction_stage]"
+
+		if(!wall_cache[cache_key])
+			var/image/I
+			if(!isnull(construction_stage) && construction_stage<6)
+				I = image(icon='icons/turf/wall_masks.dmi',icon_state="reinf_construct-[construction_stage]")
+			else
+				I = image(icon='icons/turf/wall_masks.dmi',icon_state="[material.icon_reinf]")
 			I.color = reinf_material.icon_colour
-			wall_cache["[material.icon_reinf]-[reinf_material.icon_colour]"] = I
-		overlays |= wall_cache["[material.icon_reinf]-[reinf_material.icon_colour]"]
+			wall_cache[cache_key] = I
+		overlays |= wall_cache[cache_key]
 
 /turf/simulated/wall/proc/set_material(var/material/newmaterial, var/material/newrmaterial)
 	material = newmaterial
