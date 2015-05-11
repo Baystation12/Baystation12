@@ -232,9 +232,9 @@
 						O.show_message("<span class='danger'>[H] steps on \the [src].</span>", 1)
 					if(H.lying)
 						var/obj/item/organ/external/affecting = pick(H.organs)
-						affecting.take_damage(30, 0)
+						if(affecting.take_damage(30, 0))
+							H.UpdateDamageIcon()
 						affecting.embed(src)
-						H.UpdateDamageIcon()
 					else
 						var/list/potentialorgans = list()
 						for(var/organ in list("l_leg", "r_leg", "l_foot", "r_foot"))
@@ -242,9 +242,9 @@
 							if(R && !(R.status & ORGAN_DESTROYED))
 								potentialorgans += R
 						var/obj/item/organ/external/affecting = pick(potentialorgans)
-						affecting.take_damage(30, 0)
+						if(affecting.take_damage(30, 0))
+							H.UpdateDamageIcon()
 						affecting.embed(src)
-						H.UpdateDamageIcon()
 
 
 		if(isanimal(AM) && !istype(AM, /mob/living/simple_animal/parrot) && !istype(AM, /mob/living/simple_animal/construct) && !istype(AM, /mob/living/simple_animal/shade) && !istype(AM, /mob/living/simple_animal/hostile/viscerator))
