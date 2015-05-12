@@ -15,15 +15,27 @@
 # req_titles: Assistant, Security Officer
 # req_access: 1
 # }
+#
+# {
+# ckey: zuhayr
+# character_name: Jane Doe
+# item_path: /obj/item/device/kit/paint
+# item_name: APLU customisation kit
+# item_desc: A customisation kit with all the parts needed to turn an APLU into a "Titan's Fist" model.
+# kit_name: APLU "Titan's Fist"
+# kit_desc: Looks like an overworked, under-maintained Ripley with some horrific damage.
+# kit_icon: titan
+# additional_data: ripley, firefighter
+# }
+#
+# {
+# ckey: zuhayr
+# character_name: Jane Doe
+# item_path: /obj/item/device/kit/suit
+# item_name: salvage suit customisation kit
+# item_desc: A customisation kit with all the parts needed to convert a suit.
+# kit_name: salvage
+# kit_desc: An orange voidsuit. Reinforced!
+# kit_icon: salvage
+# }
 ##
-
-{
-ckey: zuhayr
-character_name: Jane Doe
-item_path: /obj/item/toy/plushie
-item_name: ugly plush toy
-item_icon: flagmask
-item_desc: It's truly hideous.
-req_titles: Assistant, Security Officer
-req_access: 1
-}
