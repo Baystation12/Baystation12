@@ -83,11 +83,10 @@ AUTOMATED ALERT: Link to [command_name()] lost."}
 		return
 
 /datum/universal_state/supermatter_cascade/proc/AreaSet()
-	for(var/area/ca in world)
-		var/area/A=ca.master
+	for(var/area/A in world)
 		if(A.z in config.admin_levels)
 			continue
-		if(!istype(A,/area) || istype(A,/area/space))
+		if(istype(A,/area/space))
 			continue
 
 		// Reset all alarms.
@@ -111,10 +110,9 @@ AUTOMATED ALERT: Link to [command_name()] lost."}
 		spess.overlays += "end01"
 
 /datum/universal_state/supermatter_cascade/proc/AmbientSet()
-	for(var/turf/T in world)
-		if(istype(T, /turf/space))	continue
-		if(!(T.z in config.admin_levels))
-			T.update_lumcount(1, 160, 255, 0, 0)
+	for(var/atom/movable/lighting_overlay/L in world)
+		if(!(L.z in config.admin_levels))
+			L.update_lumcount(0.5, 1, 0)
 
 /datum/universal_state/supermatter_cascade/proc/MiscSet()
 	for (var/obj/machinery/firealarm/alm in world)

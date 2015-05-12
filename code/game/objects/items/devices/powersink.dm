@@ -11,7 +11,7 @@
 	throw_speed = 1
 	throw_range = 2
 
-	matter = list("metal" = 750,"waste" = 750)
+	matter = list(DEFAULT_WALL_MATERIAL = 750,"waste" = 750)
 
 	origin_tech = "powerstorage=3;syndicate=5"
 	var/drain_rate = 1500000		// amount of power to drain per tick
@@ -52,7 +52,7 @@
 			anchored = 0
 			mode = 0
 			src.visible_message("<span class='notice'>[user] detaches [src] from the cable!</span>")
-			SetLuminosity(0)
+			set_light(0)
 			icon_state = "powersink0"
 
 			return
@@ -74,7 +74,7 @@
 		if(2)  //This switch option wasn't originally included. It exists now. --NeoFite
 			src.visible_message("<span class='notice'>[user] deactivates [src]!</span>")
 			mode = 1
-			SetLuminosity(0)
+			set_light(0)
 			icon_state = "powersink0"
 			processing_objects.Remove(src)
 
@@ -91,7 +91,7 @@
 	if(!PN)
 		return
 
-	SetLuminosity(12)
+	set_light(12)
 	PN.trigger_warning()
 	// found a powernet, so drain up to max power from it
 	drained = PN.draw_power(drain_rate)

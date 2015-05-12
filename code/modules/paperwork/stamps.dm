@@ -8,7 +8,7 @@
 	w_class = 1.0
 	throw_speed = 7
 	throw_range = 15
-	matter = list("metal" = 60)
+	matter = list(DEFAULT_WALL_MATERIAL = 60)
 	pressure_resistance = 2
 	attack_verb = list("stamped")
 

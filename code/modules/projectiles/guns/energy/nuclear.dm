@@ -4,8 +4,8 @@
 	icon_state = "energystun100"
 	item_state = null	//so the human update icon uses the icon_state instead.
 	fire_sound = 'sound/weapons/Taser.ogg'
+	max_shots = 10
 
-	charge_cost = 100 //How much energy is needed to fire.
 	projectile_type = /obj/item/projectile/beam/stun
 	origin_tech = "combat=3;magnets=2"
 	modifystate = "energystun"

@@ -6,7 +6,7 @@
 	w_class = 3
 	origin_tech = "engineering=4;materials=4;bluespace=2;programming=4"
 
-	construction_cost = list("metal"=500,"glass"=500,"silver"=200,"gold"=200,"phoron"=100,"diamond"=10)
+	construction_cost = list(DEFAULT_WALL_MATERIAL=500,"glass"=500,"silver"=200,"gold"=200,"phoron"=100,"diamond"=10)
 	construction_time = 75
 	var/searching = 0
 	var/askDelay = 10 * 60 * 1
@@ -26,7 +26,7 @@
 
 /obj/item/device/mmi/digital/posibrain/proc/request_player()
 	for(var/mob/dead/observer/O in player_list)
-		if(O.has_enabled_antagHUD == 1 && config.antag_hud_restricted)
+		if(!O.MayRespawn())
 			continue
 		if(jobban_isbanned(O, "AI") && jobban_isbanned(O, "Cyborg"))
 			continue
