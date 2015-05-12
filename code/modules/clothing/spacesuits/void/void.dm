@@ -59,15 +59,10 @@
 
 /obj/item/clothing/suit/space/void/examine(user)
 	..(user)
-	if(boots || helmet || tank)
-		var/D = "Installed equipment: "
-		var/first = 1
-		for(var/obj/item/I in list(helmet,boots,tank))
-			if (I)
-				D += "[first?"":", "]\the [I]\icon[I]"
-				first = 0
-		D += "."
-		user << D
+	var/list/part_list = new
+	for(var/obj/item/I in list(helmet,boots,tank))
+		part_list += "\a [I]"
+	user << "\The [src] has [english_list(part_list)] installed."
 	if(tank && in_range(src,user))
 		user << "<span class='notice'>The wrist-mounted pressure gauge reads [max(round(tank.air_contents.return_pressure()),0)] kPa remaining in \the [tank].</span>"
 

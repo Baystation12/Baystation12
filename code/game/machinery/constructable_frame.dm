@@ -18,15 +18,11 @@
 	proc/update_desc()
 		var/D
 		if(req_components)
-			D = "Requires "
-			var/first = 1
+			var/list/component_list = new
 			for(var/I in req_components)
 				if(req_components[I] > 0)
-					D += "[first?"":", "][num2text(req_components[I])] [req_component_names[I]]"
-					first = 0
-			if(first) // nothing needs to be added, then
-				D += "nothing"
-			D += "."
+					component_list += "[num2text(req_components[I])] [req_component_names[I]]"
+			D = "Requires [english_list(component_list)]."
 		desc = D
 
 /obj/machinery/constructable_frame/machine_frame
