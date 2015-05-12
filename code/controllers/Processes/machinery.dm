@@ -14,9 +14,16 @@
 		machines = dd_sortedObjectList(machines)
 
 /datum/controller/process/machinery/proc/internal_process()
-//#ifdef PROFILE_MACHINES
-	//machine_profiling.len = 0
-	//#endif
+	for(var/datum/powernet/powerNetwork in powernets)
+		if(istype(powerNetwork) && !powerNetwork.disposed)
+			powerNetwork.reset()
+			scheck()
+			continue
+
+		powernets.Remove(powerNetwork)
+
+	for(var/obj/item/device/powersink/S in processing_objects)
+		S.drain()
 
 	for(var/obj/machinery/M in machines)
 		if(M && !M.gcDestroyed)
