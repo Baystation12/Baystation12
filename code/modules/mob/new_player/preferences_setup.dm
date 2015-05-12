@@ -179,8 +179,8 @@ datum/preferences
 
 
 	proc/update_preview_icon()		//seriously. This is horrendous.
-		var/mob/living/carbon/human/H = new
-		H.set_species(species)
+		var/mob/living/carbon/human/H = new(null,species)
+//		H.set_species(species)
 		H.flags |= GODMODE
 		copy_to(H)
 
