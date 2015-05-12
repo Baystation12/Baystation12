@@ -22,8 +22,11 @@
 
 		powernets.Remove(powerNetwork)
 
-	for(var/obj/item/device/powersink/S in processing_objects)
-		S.drain()
+	// Currently only used by powersinks. These items get priority processed before machinery
+	for(var/obj/item/I in processing_power_items)
+		if(!I.pwr_drain()) // 0 = Process Kill, remove from processing list.
+			processing_power_items.Remove(I)
+		scheck()
 
 	for(var/obj/machinery/M in machines)
 		if(M && !M.gcDestroyed)
