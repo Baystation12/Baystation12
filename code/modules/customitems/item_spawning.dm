@@ -22,7 +22,7 @@
 	var/character_name
 	var/item_icon
 	var/item_desc
-	var/name = "unnamed item"
+	var/name
 	var/item_path = /obj/item
 	var/req_access = 0
 	var/list/req_titles = list()
