@@ -882,16 +882,59 @@ var/global/list/damage_icon_parts = list()
 /mob/living/carbon/human/proc/update_tail_showing(var/update_icons=1)
 	overlays_standing[TAIL_LAYER] = null
 
-	if(species.tail)
-		if(!wear_suit || !(wear_suit.flags_inv & HIDETAIL) && !istype(wear_suit, /obj/item/clothing/suit/space))
-			var/icon/tail_s = new/icon("icon" = 'icons/effects/species.dmi', "icon_state" = "[species.tail]_s")
-			tail_s.Blend(rgb(r_skin, g_skin, b_skin), ICON_ADD)
+	if(species.tail && !(wear_suit && wear_suit.flags_inv & HIDETAIL))
+		var/icon/tail_s = new/icon(icon = 'icons/effects/species.dmi')
+		tail_s.Blend(rgb(r_skin, g_skin, b_skin), ICON_ADD)
 
-			overlays_standing[TAIL_LAYER]	= image(tail_s)
+		overlays_standing[TAIL_LAYER]	= image(tail_s, icon_state = "[species.tail]_s")
 
 	if(update_icons)
 		update_icons()
 
+//Not really once, since BYOND can't do that.
+//Update this if the ability to flick() images or make looping animation start at the first frame is ever added.
+/mob/living/carbon/human/proc/animate_tail_once(var/update_icons=1)
+	var/t_state = "[species.tail]_once"
+	
+	var/image/tail_overlay = overlays_standing[TAIL_LAYER]
+	if(tail_overlay && tail_overlay.icon_state == t_state)
+		return //let the existing animation finish
+	
+	tail_overlay = set_tail_state(t_state)
+	if(tail_overlay)
+		spawn(15)
+			//check that the animation hasn't changed in the meantime
+			if(overlays_standing[TAIL_LAYER] == tail_overlay && tail_overlay.icon_state == t_state)
+				animate_tail_stop()
+	
+	if(update_icons)
+		update_icons()
+
+/mob/living/carbon/human/proc/animate_tail_start(var/update_icons=1)
+	set_tail_state("[species.tail]_slow")
+	
+	if(update_icons)
+		update_icons()
+
+/mob/living/carbon/human/proc/animate_tail_fast(var/update_icons=1)
+	set_tail_state("[species.tail]_loop")
+	
+	if(update_icons)
+		update_icons()
+
+/mob/living/carbon/human/proc/animate_tail_stop(var/update_icons=1)
+	set_tail_state("[species.tail]_s")
+	
+	if(update_icons)
+		update_icons()
+
+/mob/living/carbon/human/proc/set_tail_state(var/t_state)
+	var/image/tail_overlay = overlays_standing[TAIL_LAYER]
+	
+	if(tail_overlay && (t_state in icon_states(tail_overlay.icon)))
+		tail_overlay.icon_state = t_state
+		return tail_overlay
+	return null
 
 //Adds a collar overlay above the helmet layer if the suit has one
 //	Suit needs an identically named sprite in icons/mob/collar.dmi
