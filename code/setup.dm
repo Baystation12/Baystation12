@@ -960,8 +960,8 @@ var/list/be_special_flags = list(
 // Convoluted setup so defines can be supplied by Bay12 main server compile script.
 // Should still work fine for people jamming the icons into their repo.
 #ifndef CUSTOM_ITEM_OBJ
-#define CUSTOM_ITEM_OBJ 'icons/obj/custom_items.dmi'
+#define CUSTOM_ITEM_OBJ 'icons/obj/custom_items_obj.dmi'
 #endif
 #ifndef CUSTOM_ITEM_MOB
-#define CUSTOM_ITEM_MOB 'icons/mob/custom_items.dmi'
+#define CUSTOM_ITEM_MOB 'icons/mob/custom_items_mob.dmi'
 #endif
