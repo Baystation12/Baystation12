@@ -1,8 +1,17 @@
-//switch this out to use a database at some point
-//list of ckey/ real_name and item paths
-//gives item to specific people when they join if it can
-//see config/custom_items.txt how to to add things to it (yes crazy idea i know)
-//yes, it has to be an item, you can't pick up nonitems
+// Convoluted setup so defines can be supplied by Bay12 main server compile script.
+// Should still work fine for people jamming the icons into their repo.
+#ifndef CUSTOM_ITEM_OBJ
+#define CUSTOM_ITEM_OBJ 'icons/obj/custom_items.dmi'
+#endif
+#ifndef CUSTOM_ITEM_MOB
+#define CUSTOM_ITEM_MOB 'icons/mob/custom_items.dmi'
+#endif
+
+// Switch this out to use a database at some point. Each ckey is
+// associated with a list of custom item datums. When the character
+// spawns, the list is checked and all appropriate datums are spawned.
+// See config/example/custom_items.txt for a more detailed overview
+// of how the config system works.
 
 /var/list/custom_items = list()
 
@@ -33,8 +42,8 @@
 	if(item_desc)
 		item.desc = item_desc
 	if(item_icon)
-		item.icon = 'icons/obj/custom_items.dmi'
-		item.icon_override = 'icons/mob/custom_items.dmi'
+		item.icon = CUSTOM_ITEM_OBJ
+		item.icon_override = CUSTOM_ITEM_MOB
 		item.icon_state = item_icon
 
 	// Kits are dumb so this is going to have to be hardcoded/snowflake.
@@ -52,14 +61,15 @@
 
 	return item
 
-//parses the config file into the above listlist
-/hook/startup/proc/loadCustomItems()
+
+// Parses the config file into the custom_items list.
+/hook/startup/proc/load_custom_items()
 
 	var/datum/custom_item/current_data
 	for(var/line in text2list(file2text("config/custom_items.txt"), "\n"))
 
 		line = trim(line)
-		if(line == "" || !line || findtext(line, "#", 1, 2) || findtext(line, "}", 1, 2))
+		if(line == "" || !line || findtext(line, "#", 1, 2))
 			continue
 
 		if(findtext(line, "{", 1, 2) || findtext(line, "}", 1, 2)) // New block!
@@ -96,7 +106,7 @@
 			if("item_desc")
 				current_data.item_desc = field_data
 			if("req_access")
-				current_data.req_access = field_data
+				current_data.req_access = text2num(field_data)
 			if("req_titles")
 				current_data.req_titles = text2list(field_data,", ")
 			if("kit_name")
@@ -110,9 +120,7 @@
 	return 1
 
 //gets the relevant list for the key from the listlist if it exists, check to make sure they are meant to have it and then calls the giving function
-/proc/EquipCustomItems(mob/living/carbon/human/M)
-	return
-
+/proc/equip_custom_items(mob/living/carbon/human/M)
 	var/list/key_list = custom_items[M.ckey]
 	if(!key_list || key_list.len < 1)
 		return
@@ -120,7 +128,7 @@
 	for(var/datum/custom_item/citem in key_list)
 
 		// Check for requisite ckey and character name.
-		if(citem.assoc_key != M.ckey || citem.character_name != M.real_name)
+		if((lowertext(citem.assoc_key) != lowertext(M.ckey)) || (lowertext(citem.character_name) != lowertext(M.real_name)))
 			continue
 
 		// Check for required access.
@@ -174,3 +182,6 @@
 			return newitem
 	newitem.loc = get_turf(M.loc)
 	return newitem
+
+#undef CUSTOM_ITEM_OBJ
+#undef CUSTOM_ITEM_MOB
