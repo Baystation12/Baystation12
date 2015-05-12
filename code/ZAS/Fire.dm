@@ -78,11 +78,11 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 
 	fire = new(src, fl)
 	air_master.active_fire_zones |= zone
-	
+
 	var/obj/effect/decal/cleanable/liquid_fuel/fuel = locate() in src
 	zone.fire_tiles |= src
 	if(fuel) zone.fuel_objs += fuel
-	
+
 	return 0
 
 /obj/fire
@@ -91,11 +91,11 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 	anchored = 1
 	mouse_opacity = 0
 
-	//luminosity = 3
+	blend_mode = BLEND_ADD
 
 	icon = 'icons/effects/fire.dmi'
 	icon_state = "1"
-	l_color = "#ED9200"
+	light_color = "#ED9200"
 	layer = TURF_LAYER
 
 	var/firelevel = 10000 //Calculated by gas_mixture.calculate_firelevel()
@@ -114,13 +114,13 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 
 	if(firelevel > 6)
 		icon_state = "3"
-		SetLuminosity(7)
+		set_light(7, 3)
 	else if(firelevel > 2.5)
 		icon_state = "2"
-		SetLuminosity(5)
+		set_light(5, 2)
 	else
 		icon_state = "1"
-		SetLuminosity(3)
+		set_light(3, 1)
 
 	//im not sure how to implement a version that works for every creature so for now monkeys are firesafe
 	for(var/mob/living/L in loc)
@@ -158,19 +158,26 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 			else
 				enemy_tile.adjacent_fire_act(loc, air_contents, air_contents.temperature, air_contents.volume)
 
+	animate(src, color = heat2color(air_contents.temperature), 5)
+	set_light(l_color = color)
+
 /obj/fire/New(newLoc,fl)
 	..()
 
 	if(!istype(loc, /turf))
-		del src
+		qdel(src)
 
 	set_dir(pick(cardinal))
-	SetLuminosity(3)
+	
+	var/datum/gas_mixture/air_contents = loc.return_air()
+	color = heat2color(air_contents.temperature)
+	set_light(3, 1, color)
+
 	firelevel = fl
 	air_master.active_hotspots.Add(src)
 
 
-/obj/fire/Del()
+/obj/fire/Destroy()
 	if (istype(loc, /turf/simulated))
 		RemoveFire()
 
@@ -178,8 +185,8 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 
 /obj/fire/proc/RemoveFire()
 	if (istype(loc, /turf))
-		SetLuminosity(0)
-		
+		set_light(0)
+
 		loc = null
 	air_master.active_hotspots.Remove(src)
 
@@ -227,22 +234,22 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 
 		//determine how far the reaction can progress
 		var/reaction_limit = min(total_oxidizers*(FIRE_REACTION_FUEL_AMOUNT/FIRE_REACTION_OXIDIZER_AMOUNT), total_fuel) //stoichiometric limit
-		
+
 		//determine the actual rate of reaction, as measured by the amount of fuel reacting
-		
+
 		//vapour fuels are extremely volatile! The reaction progress is a percentage of the total fuel (similar to old zburn).
 		var/gas_reaction_progress = max(0.2*group_multiplier, (firelevel/vsc.fire_firelevel_multiplier)*gas_fuel)*FIRE_GAS_BURNRATE_MULT
 		//liquid fuels are not as volatile, and the reaction progress depends on the size of the area that is burning (which is sort of accounted for by firelevel). Having more fuel means a longer burn.
 		var/liquid_reaction_progress = (firelevel/vsc.fire_firelevel_multiplier)*FIRE_LIQUID_BURNRATE_MULT
-		
+
 		//world << "liquid_reaction_progress = [liquid_reaction_progress]"
 		//world << "gas_reaction_progress = [gas_reaction_progress]"
-		
+
 		var/total_reaction_progress = gas_reaction_progress + liquid_reaction_progress
 		var/used_fuel = min(total_reaction_progress, reaction_limit)
 		var/used_oxidizers = used_fuel*(FIRE_REACTION_OXIDIZER_AMOUNT/FIRE_REACTION_FUEL_AMOUNT)
 		//world << "used_fuel = [used_fuel]; used_oxidizers = [used_oxidizers]; reaction_limit=[reaction_limit]"
-		
+
 		//if the reaction is progressing too slow then it isn't self-sustaining anymore and burns out
 		if(zone && zone.fuel_objs.len)
 			if(used_fuel <= FIRE_LIQUD_MIN_BURNRATE)
@@ -250,13 +257,13 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 		else if(used_fuel <= FIRE_GAS_MIN_BURNRATE*group_multiplier) //purely gas fires have more stringent criteria
 			return 0
 
-		
+
 		//*** Remove fuel and oxidizer, add carbon dioxide and heat
-		
+
 		//remove and add gasses as calculated
 		var/used_gas_fuel = min(used_fuel*(gas_reaction_progress/total_reaction_progress), gas_fuel) //remove in proportion to the relative reaction progress
 		var/used_liquid_fuel = between(0, used_fuel-used_gas_fuel, liquid_fuel)
-		
+
 		//remove_by_flag() and adjust_gas() handle the group_multiplier for us.
 		remove_by_flag(XGM_GAS_OXIDIZER, used_oxidizers)
 		remove_by_flag(XGM_GAS_FUEL, used_gas_fuel)
@@ -272,14 +279,14 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 				if(!istype(fuel))
 					zone.fuel_objs -= fuel
 					continue
-				
+
 				fuel.amount -= fuel_to_remove
 				if(fuel.amount <= 0)
 					zone.fuel_objs -= fuel
 					if(liquidonly)
 						var/turf/T = fuel.loc
-						if(istype(T) && T.fire) del(T.fire)
-					del(fuel)
+						if(istype(T) && T.fire) qdel(T.fire)
+					qdel(fuel)
 
 		//calculate the energy produced by the reaction and then set the new temperature of the mix
 		temperature = (starting_energy + vsc.fire_fuel_energy_release * used_fuel) / heat_capacity()

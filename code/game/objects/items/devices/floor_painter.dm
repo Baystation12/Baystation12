@@ -139,9 +139,9 @@
 				mode_nice = design
 				mode = "whitebluegreencorners"
 				tile_dir_mode = 2
-			else if(design == "delivery" || design == "bot")
+			else if(design == "delivery" || design == "bot" || design == "white-delivery" || design == "white-bot")
 				mode_nice = design
-				mode = design
+				mode = replacetext(design, "-", "")
 				tile_dir_mode = 0
 			else if(design == "loadingarea")
 				mode_nice = design

@@ -85,7 +85,7 @@
 	icon_state = "boxing"
 	item_state = "boxing"
 
-/obj/structure/window/reinforced/holowindow/Del()
+/obj/structure/window/reinforced/holowindow/Destroy()
 	..()
 
 /obj/structure/window/reinforced/holowindow/attackby(obj/item/W as obj, mob/user as mob)
@@ -95,7 +95,7 @@
 		if(istype(G.affecting,/mob/living))
 			var/mob/living/M = G.affecting
 			var/state = G.state
-			del(W)	//gotta delete it here because if window breaks, it won't get deleted
+			qdel(W)	//gotta delete it here because if window breaks, it won't get deleted
 			switch (state)
 				if(1)
 					M.visible_message("<span class='warning'>[user] slams [M] against \the [src]!</span>")
@@ -138,13 +138,13 @@
 	playsound(src, "shatter", 70, 1)
 	if(display_message)
 		visible_message("[src] fades away as it shatters!")
-	del(src)
+	qdel(src)
 	return
 
-/obj/structure/window/reinforced/holowindow/disappearing/Del()
+/obj/structure/window/reinforced/holowindow/disappearing/Destroy()
 	..()
 
-/obj/machinery/door/window/holowindoor/Del()
+/obj/machinery/door/window/holowindoor/Destroy()
 	..()
 
 /obj/machinery/door/window/holowindoor/attackby(obj/item/weapon/I as obj, mob/user as mob)
@@ -180,9 +180,9 @@
 	playsound(src, "shatter", 70, 1)
 	if(display_message)
 		visible_message("[src] fades away as it shatters!")
-	del(src)
+	qdel(src)
 
-/obj/structure/bed/chair/holochair/Del()
+/obj/structure/bed/chair/holochair/Destroy()
 	..()
 
 /obj/structure/bed/chair/holochair/attackby(obj/item/weapon/W as obj, mob/user as mob)
@@ -192,6 +192,7 @@
 
 /obj/item/weapon/holo
 	damtype = HALLOSS
+	no_attack_log = 1
 
 /obj/item/weapon/holo/esword
 	desc = "May the force be within you. Sorta."
@@ -203,6 +204,7 @@
 	w_class = 2.0
 	flags = NOSHIELD | NOBLOODY
 	var/active = 0
+	var/item_color
 
 /obj/item/weapon/holo/esword/green
 	New()
@@ -274,7 +276,7 @@
 		G.affecting.loc = src.loc
 		G.affecting.Weaken(5)
 		visible_message("<span class='warning'>[G.assailant] dunks [G.affecting] into the [src]!</span>", 3)
-		del(W)
+		qdel(W)
 		return
 	else if (istype(W, /obj/item) && get_dist(src,user)<2)
 		user.drop_item(src.loc)
@@ -333,7 +335,7 @@
 
 	currentarea = get_area(src.loc)
 	if(!currentarea)
-		del(src)
+		qdel(src)
 
 	if(eventstarted)
 		usr << "The event has already begun!"
@@ -364,7 +366,7 @@
 	eventstarted = 1
 
 	for(var/obj/structure/window/reinforced/holowindow/disappearing/W in currentarea)
-		del(W)
+		qdel(W)
 
 	for(var/mob/M in currentarea)
 		M << "FIGHT!"
@@ -399,7 +401,7 @@
 
 /mob/living/simple_animal/hostile/carp/holodeck/New()
 	..()
-	SetLuminosity(2) //hologram lighting
+	set_light(2) //hologram lighting
 
 /mob/living/simple_animal/hostile/carp/holodeck/proc/set_safety(var/safe)
 	if (safe)
@@ -424,4 +426,4 @@
 
 /mob/living/simple_animal/hostile/carp/holodeck/proc/derez()
 	visible_message("<span class='notice'>\The [src] fades away!</span>")
-	del(src)
+	qdel(src)

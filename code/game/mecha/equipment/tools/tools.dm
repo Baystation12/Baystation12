@@ -89,8 +89,13 @@
 		var/C = target.loc	//why are these backwards? we may never know -Pete
 		if(do_after_cooldown(target))
 			if(T == chassis.loc && src == chassis.selected)
-				if(istype(target, /turf/simulated/wall/r_wall))
-					occupant_message("<span class='warning'>[target] is too durable to drill through.</span>")
+				if(istype(target, /turf/simulated/wall))
+					var/turf/simulated/wall/W = target
+					if(W.reinf_material)
+						occupant_message("<span class='warning'>[target] is too durable to drill through.</span>")
+					else
+						log_message("Drilled through [target]")
+						target.ex_act(2)
 				else if(istype(target, /turf/simulated/mineral))
 					for(var/turf/simulated/mineral/M in range(chassis,1))
 						if(get_dir(chassis,M)&chassis.dir)
@@ -123,7 +128,7 @@
 	desc = "This is an upgraded version of the drill that'll pierce the heavens! (Can be attached to: Combat and Engineering Exosuits)"
 	icon_state = "mecha_diamond_drill"
 	origin_tech = "materials=4;engineering=3"
-	construction_cost = list("metal"=10000,"diamond"=6500)
+	construction_cost = list(DEFAULT_WALL_MATERIAL=10000,"diamond"=6500)
 	equip_cooldown = 20
 	force = 15
 
@@ -140,8 +145,9 @@
 		var/C = target.loc	//why are these backwards? we may never know -Pete
 		if(do_after_cooldown(target))
 			if(T == chassis.loc && src == chassis.selected)
-				if(istype(target, /turf/simulated/wall/r_wall))
-					if(do_after_cooldown(target))//To slow down how fast mechs can drill through the station
+				if(istype(target, /turf/simulated/wall))
+					var/turf/simulated/wall/W = target
+					if(!W.reinf_material || do_after_cooldown(target))//To slow down how fast mechs can drill through the station
 						log_message("Drilled through [target]")
 						target.ex_act(3)
 				else if(istype(target, /turf/simulated/mineral))
@@ -216,7 +222,7 @@
 
 			for(var/a=0, a<5, a++)
 				spawn(0)
-					var/obj/effect/effect/water/W = new /obj/effect/effect/water( get_turf(chassis) )
+					var/obj/effect/effect/water/W = PoolOrNew(/obj/effect/effect/water, get_turf(chassis))
 					var/turf/my_target = pick(the_targets)
 					var/datum/reagents/R = new/datum/reagents(5)
 					if(!W) return
@@ -236,7 +242,7 @@
 							W.reagents.reaction(atm)
 						if(W.loc == my_target) break
 						sleep(2)
-					W.delete()
+					qdel(W)
 			return 1
 
 	get_equip_info()
@@ -255,7 +261,7 @@
 	energy_drain = 250
 	range = MELEE|RANGED
 	construction_time = 1200
-	construction_cost = list("metal"=30000,"phoron"=25000,"silver"=20000,"gold"=20000)
+	construction_cost = list(DEFAULT_WALL_MATERIAL=30000,"phoron"=25000,"silver"=20000,"gold"=20000)
 	var/mode = 0 //0 - deconstruct, 1 - wall or floor, 2 - airlock.
 	var/disabled = 0 //malf
 
@@ -295,7 +301,7 @@
 					if(do_after_cooldown(target))
 						if(disabled) return
 						chassis.spark_system.start()
-						del(target)
+						qdel(target)
 						playsound(target, 'sound/items/Deconstruct.ogg', 50, 1)
 						chassis.use_power(energy_drain)
 			if(1)
@@ -418,7 +424,7 @@
 		do_after_cooldown()
 		src = null
 		spawn(rand(150,300))
-			del(P)
+			qdel(P)
 		return
 
 /obj/item/mecha_parts/mecha_equipment/gravcatapult
@@ -505,7 +511,7 @@
 	equip_cooldown = 10
 	energy_drain = 50
 	range = 0
-	construction_cost = list("metal"=20000,"silver"=5000)
+	construction_cost = list(DEFAULT_WALL_MATERIAL=20000,"silver"=5000)
 	var/deflect_coeff = 1.15
 	var/damage_coeff = 0.8
 
@@ -555,7 +561,7 @@
 	equip_cooldown = 10
 	energy_drain = 50
 	range = 0
-	construction_cost = list("metal"=20000,"gold"=5000)
+	construction_cost = list(DEFAULT_WALL_MATERIAL=20000,"gold"=5000)
 	var/deflect_coeff = 1.15
 	var/damage_coeff = 0.8
 
@@ -626,7 +632,7 @@
 	equip_cooldown = 20
 	energy_drain = 100
 	range = 0
-	construction_cost = list("metal"=10000,"gold"=1000,"silver"=2000,"glass"=5000)
+	construction_cost = list(DEFAULT_WALL_MATERIAL=10000,"gold"=1000,"silver"=2000,"glass"=5000)
 	var/health_boost = 2
 	var/datum/global_iterator/pr_repair_droid
 	var/icon/droid_overlay
@@ -637,6 +643,11 @@
 		pr_repair_droid = new /datum/global_iterator/mecha_repair_droid(list(src),0)
 		pr_repair_droid.set_delay(equip_cooldown)
 		return
+
+	Destroy()
+		qdel(pr_repair_droid)
+		pr_repair_droid = null
+		..()
 
 	attach(obj/mecha/M as obj)
 		..()
@@ -716,7 +727,7 @@
 	equip_cooldown = 10
 	energy_drain = 0
 	range = 0
-	construction_cost = list("metal"=10000,"gold"=2000,"silver"=3000,"glass"=2000)
+	construction_cost = list(DEFAULT_WALL_MATERIAL=10000,"gold"=2000,"silver"=3000,"glass"=2000)
 	var/datum/global_iterator/pr_energy_relay
 	var/coeff = 100
 	var/list/use_channels = list(EQUIP,ENVIRON,LIGHT)
@@ -726,6 +737,11 @@
 		pr_energy_relay = new /datum/global_iterator/mecha_energy_relay(list(src),0)
 		pr_energy_relay.set_delay(equip_cooldown)
 		return
+
+	Destroy()
+		qdel(pr_energy_relay)
+		pr_energy_relay = null
+		..()
 
 	detach()
 		pr_energy_relay.stop()
@@ -762,7 +778,7 @@
 		var/pow_chan
 		if(A)
 			for(var/c in use_channels)
-				if(A.master && A.master.powered(c))
+				if(A.powered(c))
 					pow_chan = c
 					break
 		return pow_chan
@@ -809,13 +825,13 @@
 			if(A)
 				var/pow_chan
 				for(var/c in list(EQUIP,ENVIRON,LIGHT))
-					if(A.master.powered(c))
+					if(A.powered(c))
 						pow_chan = c
 						break
 				if(pow_chan)
 					var/delta = min(12, ER.chassis.cell.maxcharge-cur_charge)
 					ER.chassis.give_power(delta)
-					A.master.use_power(delta*ER.coeff, pow_chan)
+					A.use_power(delta*ER.coeff, pow_chan)
 		return
 
 
@@ -828,7 +844,7 @@
 	equip_cooldown = 10
 	energy_drain = 0
 	range = MELEE
-	construction_cost = list("metal"=10000,"silver"=500,"glass"=1000)
+	construction_cost = list(DEFAULT_WALL_MATERIAL=10000,"silver"=500,"glass"=1000)
 	var/datum/global_iterator/pr_mech_generator
 	var/coeff = 100
 	var/obj/item/stack/sheet/fuel
@@ -842,6 +858,11 @@
 		..()
 		init()
 		return
+
+	Destroy()
+		qdel(pr_mech_generator)
+		pr_mech_generator = null
+		..()
 
 	proc/init()
 		fuel = new /obj/item/stack/sheet/mineral/phoron(src)
@@ -963,7 +984,7 @@
 	desc = "Generates power using uranium. Pollutes the environment."
 	icon_state = "tesla"
 	origin_tech = "powerstorage=3;engineering=3"
-	construction_cost = list("metal"=10000,"silver"=500,"glass"=1000)
+	construction_cost = list(DEFAULT_WALL_MATERIAL=10000,"silver"=500,"glass"=1000)
 	max_fuel = 50000
 	fuel_per_cycle_idle = 10
 	fuel_per_cycle_active = 30
@@ -1074,7 +1095,7 @@
 	origin_tech = "engineering=1;biotech=1"
 	energy_drain = 10
 	range = MELEE
-	construction_cost = list("metal"=5000,"glass"=5000)
+	construction_cost = list(DEFAULT_WALL_MATERIAL=5000,"glass"=5000)
 	reliability = 1000
 	equip_cooldown = 20
 	var/mob/living/carbon/occupant = null

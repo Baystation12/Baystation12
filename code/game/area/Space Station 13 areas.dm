@@ -26,8 +26,8 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	icon = 'icons/turf/areas.dmi'
 	icon_state = "unknown"
 	layer = 10
+	luminosity = 1
 	mouse_opacity = 0
-	invisibility = INVISIBILITY_LIGHTING
 	var/lightswitch = 1
 
 	var/eject = null
@@ -48,15 +48,12 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	var/has_gravity = 1
 	var/list/apc = list()
 	var/no_air = null
-	var/area/master				// master area used for power calcluations
-								// (original area before splitting due to sd_DAL)
-	var/list/related			// the other areas of the same type as this
 //	var/list/lights				// list of all lights on this area
 	var/list/all_doors = list()		//Added by Strumpetplaya - Alarm Change - Contains a list of doors adjacent to this area
 	var/air_doors_activated = 0
 	var/list/ambience = list('sound/ambience/ambigen1.ogg','sound/ambience/ambigen3.ogg','sound/ambience/ambigen4.ogg','sound/ambience/ambigen5.ogg','sound/ambience/ambigen6.ogg','sound/ambience/ambigen7.ogg','sound/ambience/ambigen8.ogg','sound/ambience/ambigen9.ogg','sound/ambience/ambigen10.ogg','sound/ambience/ambigen11.ogg','sound/ambience/ambigen12.ogg','sound/ambience/ambigen14.ogg')
-	var/sound/forced_ambience = null
-
+	var/list/forced_ambience = null
+	var/sound_env = 2	//reverb preset for sounds played in this area, see sound datum reference for more
 /*Adding a wizard area teleport list because motherfucking lag -- Urist*/
 /*I am far too lazy to make it a proper list of areas so I'll just make it run the usual telepot routine at the start of the game*/
 var/list/teleportlocs = list()
@@ -102,7 +99,6 @@ var/list/ghostteleportlocs = list()
 	icon_state = "space"
 	requires_power = 1
 	always_unpowered = 1
-	lighting_use_dynamic = 1
 	power_light = 0
 	power_equip = 0
 	power_environ = 0
@@ -145,10 +141,8 @@ area/space/atmosalert()
 //place to another. Look at escape shuttle for example.
 //All shuttles should now be under shuttle since we have smooth-wall code.
 
-/area/shuttle //DO NOT TURN THE lighting_use_dynamic STUFF ON FOR SHUTTLES. IT BREAKS THINGS.
+/area/shuttle
 	requires_power = 0
-	luminosity = 1
-	lighting_use_dynamic = 0
 
 /area/shuttle/arrival
 	name = "\improper Arrival Shuttle"
@@ -249,15 +243,11 @@ area/space/atmosalert()
 	icon_state = "shuttle"
 	name = "\improper Alien Shuttle Base"
 	requires_power = 1
-	luminosity = 0
-	lighting_use_dynamic = 1
 
 /area/shuttle/alien/mine
 	icon_state = "shuttle"
 	name = "\improper Alien Shuttle Mine"
 	requires_power = 1
-	luminosity = 0
-	lighting_use_dynamic = 1
 
 /area/shuttle/prison/
 	name = "\improper Prison Shuttle"
@@ -343,7 +333,6 @@ area/space/atmosalert()
 	name = "start area"
 	icon_state = "start"
 	requires_power = 0
-	luminosity = 1
 	lighting_use_dynamic = 0
 	has_gravity = 1
 
@@ -361,6 +350,7 @@ area/space/atmosalert()
 	icon_state = "centcom"
 	requires_power = 0
 	unlimited_power = 1
+	lighting_use_dynamic = 0
 
 /area/centcom/control
 	name = "\improper Centcom Control"
@@ -399,6 +389,7 @@ area/space/atmosalert()
 	icon_state = "syndie-ship"
 	requires_power = 0
 	unlimited_power = 1
+	lighting_use_dynamic = 0
 
 /area/syndicate_mothership/control
 	name = "\improper Mercenary Control Room"
@@ -808,6 +799,9 @@ area/space/atmosalert()
 
 //Hallway
 
+/area/hallway/primary/
+	sound_env = 12 //hallway
+
 /area/hallway/primary/fore
 	name = "\improper Fore Primary Hallway"
 	icon_state = "hallF"
@@ -1006,16 +1000,13 @@ area/space/atmosalert()
 /area/holodeck
 	name = "\improper Holodeck"
 	icon_state = "Holodeck"
-	luminosity = 1
 	lighting_use_dynamic = 0
 
 /area/holodeck/alphadeck
 	name = "\improper Holodeck Alpha"
 
-
 /area/holodeck/source_plating
 	name = "\improper Holodeck - Off"
-	icon_state = "Holodeck"
 
 /area/holodeck/source_emptycourt
 	name = "\improper Holodeck - Empty Court"
@@ -1031,11 +1022,9 @@ area/space/atmosalert()
 
 /area/holodeck/source_courtroom
 	name = "\improper Holodeck - Courtroom"
-	icon_state = "Holodeck"
 
 /area/holodeck/source_beach
 	name = "\improper Holodeck - Beach"
-	icon_state = "Holodeck" // Lazy.
 
 /area/holodeck/source_burntest
 	name = "\improper Holodeck - Atmospheric Burn Test"
@@ -1061,9 +1050,6 @@ area/space/atmosalert()
 /area/holodeck/source_space
 	name = "\improper Holodeck - Space"
 	has_gravity = 0
-
-
-
 
 //Engineering
 
@@ -1143,7 +1129,6 @@ area/space/atmosalert()
 /area/solar
 	requires_power = 1
 	always_unpowered = 1
-	luminosity = 1
 	lighting_use_dynamic = 0
 
 	auxport

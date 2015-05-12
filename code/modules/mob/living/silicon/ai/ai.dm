@@ -72,7 +72,6 @@ var/list/ai_verbs_default = list(
 
 	var/mob/living/silicon/ai/parent = null
 
-	var/apc_override = 0 //hack for letting the AI use its APC even when visionless
 	var/camera_light_on = 0	//Defines if the AI toggled the light on the camera it's looking through.
 	var/datum/trackable/track = null
 	var/last_announcement = ""
@@ -80,13 +79,11 @@ var/list/ai_verbs_default = list(
 
 /mob/living/silicon/ai/proc/add_ai_verbs()
 	src.verbs |= ai_verbs_default
-	src.verbs |= ai_verbs_subsystems
-	src.verbs |= silicon_verbs_subsystems
+	src.verbs |= silicon_subsystems
 
 /mob/living/silicon/ai/proc/remove_ai_verbs()
 	src.verbs -= ai_verbs_default
-	src.verbs -= ai_verbs_subsystems
-	src.verbs -= silicon_verbs_subsystems
+	src.verbs -= silicon_subsystems
 
 /mob/living/silicon/ai/New(loc, var/datum/ai_laws/L, var/obj/item/device/mmi/B, var/safety = 0)
 	announcement = new()
@@ -146,7 +143,7 @@ var/list/ai_verbs_default = list(
 	if(!safety)//Only used by AIize() to successfully spawn an AI.
 		if (!B)//If there is no player/brain inside.
 			empty_playable_ai_cores += new/obj/structure/AIcore/deactivated(loc)//New empty terminal.
-			del(src)//Delete AI.
+			qdel(src)//Delete AI.
 			return
 		else
 			if (B.brainmob.mind)
@@ -196,9 +193,9 @@ var/list/ai_verbs_default = list(
 
 	job = "AI"
 
-/mob/living/silicon/ai/Del()
+/mob/living/silicon/ai/Destroy()
 	ai_list -= src
-	del(eyeobj)
+	qdel(eyeobj)
 	..()
 
 /mob/living/silicon/ai/pointed(atom/A as mob|obj|turf in view())
@@ -244,7 +241,7 @@ var/list/ai_verbs_default = list(
 /obj/machinery/ai_powersupply/New(var/mob/living/silicon/ai/ai=null)
 	powered_ai = ai
 	if(isnull(powered_ai))
-		Del()
+		qdel(src)
 
 	loc = powered_ai.loc
 	use_power(1) // Just incase we need to wake up the power system.
@@ -253,7 +250,7 @@ var/list/ai_verbs_default = list(
 
 /obj/machinery/ai_powersupply/process()
 	if(!powered_ai || powered_ai.stat & DEAD)
-		Del()
+		qdel(src)
 	if(!powered_ai.anchored)
 		loc = powered_ai.loc
 		use_power = 0
@@ -285,7 +282,7 @@ var/list/ai_verbs_default = list(
 		//if(icon_state == initial(icon_state))
 	var/icontype = ""
 	if (custom_sprite == 1) icontype = ("Custom")//automagically selects custom sprite if one is available
-	else icontype = input("Select an icon!", "AI", null, null) in list("Monochrome", "Rainbow", "Blue", "Inverted", "Text", "Smiley", "Angry", "Dorf", "Matrix", "Bliss", "Firewall", "Green", "Red", "Static", "Triumvirate", "Triumvirate Static", "Soviet", "Trapped", "Heartline", "Chatterbox")
+	else icontype = input("Select an icon!", "AI", null, null) in list("Monochrome", "Rainbow", "Blue", "Inverted", "Text", "Smiley", "Angry", "Dorf", "Matrix", "Bliss", "Firewall", "Green", "Red", "Static", "Triumvirate", "Triumvirate Static", "Soviet", "Trapped", "Heartline", "Chatterbox", "Helios", "Dug Too Deep", "Goon", "Database", "Glitchman", "Lonestar", "Nanotrasen")
 	switch(icontype)
 		if("Custom") icon_state = "[src.ckey]-ai"
 		if("Rainbow") icon_state = "ai-clown"
@@ -307,6 +304,13 @@ var/list/ai_verbs_default = list(
 		if("Trapped") icon_state = "ai-hades"
 		if("Heartline") icon_state = "ai-heartline"
 		if("Chatterbox") icon_state = "ai-president"
+		if("Helios") icon_state = "ai-helios"
+		if("Dug Too Deep") icon_state = "ai-toodeep"
+		if("Goon") icon_state = "ai-goon"
+		if("Database") icon_state = "ai-database"
+		if("Glitchman") icon_state = "ai-glitchman"
+		if("Lonestar") icon_state = "ai-lonestar"
+		if("Nanotrasen") icon_state = "ai-nanotrasen"
 		else icon_state = "ai"
 	//else
 			//usr <<"You can only change your display once!"
@@ -471,13 +475,13 @@ var/list/ai_verbs_default = list(
 
 /mob/living/silicon/ai/reset_view(atom/A)
 	if(camera)
-		camera.SetLuminosity(0)
+		camera.set_light(0)
 	if(istype(A,/obj/machinery/camera))
 		camera = A
 	..()
 	if(istype(A,/obj/machinery/camera))
-		if(camera_light_on)	A.SetLuminosity(AI_CAMERA_LUMINOSITY)
-		else				A.SetLuminosity(0)
+		if(camera_light_on)	A.set_light(AI_CAMERA_LUMINOSITY)
+		else				A.set_light(0)
 
 
 /mob/living/silicon/ai/proc/switchCamera(var/obj/machinery/camera/C)
@@ -579,7 +583,7 @@ var/list/ai_verbs_default = list(
 			input = input("Select a crew member:") as null|anything in personnel_list
 			var/icon/character_icon = personnel_list[input]
 			if(character_icon)
-				del(holo_icon)//Clear old icon so we're not storing it in memory.
+				qdel(holo_icon)//Clear old icon so we're not storing it in memory.
 				holo_icon = getHologramIcon(icon(character_icon))
 		else
 			alert("No suitable records found. Aborting.")
@@ -592,7 +596,7 @@ var/list/ai_verbs_default = list(
 		)
 		input = input("Please select a hologram:") as null|anything in icon_list
 		if(input)
-			del(holo_icon)
+			qdel(holo_icon)
 			switch(input)
 				if("default")
 					holo_icon = getHologramIcon(icon('icons/mob/AI.dmi',"holo1"))
@@ -615,7 +619,7 @@ var/list/ai_verbs_default = list(
 	src << "Camera lights [camera_light_on ? "activated" : "deactivated"]."
 	if(!camera_light_on)
 		if(camera)
-			camera.SetLuminosity(0)
+			camera.set_light(0)
 			camera = null
 	else
 		lightNearbyCamera()
@@ -630,20 +634,20 @@ var/list/ai_verbs_default = list(
 		if(src.camera)
 			var/obj/machinery/camera/camera = near_range_camera(src.eyeobj)
 			if(camera && src.camera != camera)
-				src.camera.SetLuminosity(0)
+				src.camera.set_light(0)
 				if(!camera.light_disabled)
 					src.camera = camera
-					src.camera.SetLuminosity(AI_CAMERA_LUMINOSITY)
+					src.camera.set_light(AI_CAMERA_LUMINOSITY)
 				else
 					src.camera = null
 			else if(isnull(camera))
-				src.camera.SetLuminosity(0)
+				src.camera.set_light(0)
 				src.camera = null
 		else
 			var/obj/machinery/camera/camera = near_range_camera(src.eyeobj)
 			if(camera && !camera.light_disabled)
 				src.camera = camera
-				src.camera.SetLuminosity(AI_CAMERA_LUMINOSITY)
+				src.camera.set_light(AI_CAMERA_LUMINOSITY)
 		camera_light_on = world.timeofday + 1 * 20 // Update the light every 2 seconds.
 
 

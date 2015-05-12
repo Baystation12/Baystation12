@@ -24,33 +24,41 @@
 			if(istype(M, /mob/living/carbon/human))
 				var/mob/living/carbon/human/H = M
 				if(H.species.flags & IS_SYNTHETIC)
-					H << "\red You have a monitor for a head, where do you think you're going to put that?"
+					H << "<span class='danger'>You have a monitor for a head, where do you think you're going to put that?</span>"
+					return
+			
+				var/obj/item/blocked = H.check_mouth_coverage()
+				if(blocked)
+					user << "<span class='warning'>\The [blocked] is in the way!</span>"
 					return
 
-			M << "\blue You swallow [src]."
+			M << "<span class='notice'>You swallow [src].</span>"
 			M.drop_from_inventory(src) //icon update
 			if(reagents.total_volume)
 				reagents.trans_to_ingest(M, reagents.total_volume)
-				del(src)
+				qdel(src)
 			else
-				del(src)
+				qdel(src)
 			return 1
 
 		else if(istype(M, /mob/living/carbon/human) )
 
 			var/mob/living/carbon/human/H = M
 			if(H.species.flags & IS_SYNTHETIC)
-				H << "\red They have a monitor for a head, where do you think you're going to put that?"
+				user << "<span class='danger'>They have a monitor for a head, where do you think you're going to put that?</span>"
+				return
+			
+			var/obj/item/blocked = H.check_mouth_coverage()
+			if(blocked)
+				user << "<span class='warning'>\The [blocked] is in the way!</span>"
 				return
 
-			for(var/mob/O in viewers(world.view, user))
-				O.show_message("\red [user] attempts to force [M] to swallow [src].", 1)
+			user.visible_message("<span class='danger'>[user] attempts to force [M] to swallow [src].</span>")
 
 			if(!do_mob(user, M)) return
 
 			user.drop_from_inventory(src) //icon update
-			for(var/mob/O in viewers(world.view, user))
-				O.show_message("\red [user] forces [M] to swallow [src].", 1)
+			user.visible_message("<span class='danger'>[user] forces [M] to swallow [src].</span>")
 
 			M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been fed [src.name] by [user.name] ([user.ckey]) Reagents: [reagentlist(src)]</font>")
 			user.attack_log += text("\[[time_stamp()]\] <font color='red'>Fed [M.name] by [M.name] ([M.ckey]) Reagents: [reagentlist(src)]</font>")
@@ -58,9 +66,9 @@
 
 			if(reagents.total_volume)
 				reagents.trans_to_ingest(M, reagents.total_volume)
-				del(src)
+				qdel(src)
 			else
-				del(src)
+				qdel(src)
 
 			return 1
 
@@ -83,7 +91,7 @@
 				O.show_message("\red [user] puts something in \the [target].", 1)
 
 			spawn(5)
-				del(src)
+				qdel(src)
 
 		return
 

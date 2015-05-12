@@ -25,7 +25,7 @@
 	w_class = 3
 	origin_tech = "biotech=3"
 
-	var/list/construction_cost = list("metal"=1000,"glass"=500)
+	var/list/construction_cost = list(DEFAULT_WALL_MATERIAL=1000,"glass"=500)
 	var/construction_time = 75
 	//these vars are so the mecha fabricator doesn't shit itself anymore. --NEO
 
@@ -60,7 +60,7 @@
 			living_mob_list += brainmob
 
 			user.drop_item()
-			del(O)
+			qdel(O)
 
 			name = "Man-Machine Interface: [brainmob.real_name]"
 			icon_state = "mmi_full"
@@ -113,6 +113,15 @@
 			icon_state = "mmi_full"
 			locked = 1
 			return
+
+/obj/item/device/mmi/Destroy()
+	if(isrobot(loc))
+		var/mob/living/silicon/robot/borg = loc
+		borg.mmi = null
+	if(brainmob)
+		qdel(brainmob)
+		brainmob = null
+	..()
 
 /obj/item/device/mmi/radio_enabled
 	name = "radio-enabled man-machine interface"

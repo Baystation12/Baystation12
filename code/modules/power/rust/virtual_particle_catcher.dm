@@ -14,11 +14,11 @@
 	for(var/obj/machinery/rust/em_field/field in range(6))
 		parent = field
 	if(!parent)
-		del(src)*/
+		qdel(src)*/
 
 /obj/effect/rust_particle_catcher/process()
 	if(!parent)
-		del(src)
+		qdel(src)
 
 /obj/effect/rust_particle_catcher/proc/SetSize(var/newsize)
 	name = "collector [newsize]"

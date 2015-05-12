@@ -1,6 +1,6 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:33
 
-/obj/machinery/singularity/
+/obj/singularity/
 	name = "gravitational singularity"
 	desc = "A gravitational singularity."
 	icon = 'icons/obj/singularity.dmi'
@@ -8,9 +8,8 @@
 	anchored = 1
 	density = 1
 	layer = 6
-	luminosity = 6
+	light_range = 6
 	unacidable = 1 //Don't comment this out.
-	use_power = 0
 
 	var/current_size = 1
 	var/allowed_size = 1
@@ -30,7 +29,7 @@
 
 	var/chained = 0//Adminbus chain-grab
 
-/obj/machinery/singularity/New(loc, var/starting_energy = 50, var/temp = 0)
+/obj/singularity/New(loc, var/starting_energy = 50, var/temp = 0)
 	//CARN: admin-alert for chuckle-fuckery.
 	admin_investigate_setup()
 	energy = starting_energy
@@ -40,19 +39,24 @@
 			qdel(src)
 
 	..()
+	processing_objects += src
 	for(var/obj/machinery/power/singularity_beacon/singubeacon in machines)
 		if(singubeacon.active)
 			target = singubeacon
 			break
 
-/obj/machinery/singularity/attack_hand(mob/user as mob)
+/obj/singularity/Destroy()
+	processing_objects -= src
+	..()
+
+/obj/singularity/attack_hand(mob/user as mob)
 	consume(user)
 	return 1
 
-/obj/machinery/singularity/blob_act(severity)
+/obj/singularity/blob_act(severity)
 	return
 
-/obj/machinery/singularity/ex_act(severity)
+/obj/singularity/ex_act(severity)
 	if(current_size == STAGE_SUPER)//IT'S UNSTOPPABLE
 		return
 	switch(severity)
@@ -67,16 +71,16 @@
 			energy += round((rand(20,60)/2),1)
 			return
 
-/obj/machinery/singularity/bullet_act(obj/item/projectile/P)
+/obj/singularity/bullet_act(obj/item/projectile/P)
 	return 0 //Will there be an impact? Who knows. Will we see it? No.
 
-/obj/machinery/singularity/Bump(atom/A)
+/obj/singularity/Bump(atom/A)
 	consume(A)
 
-/obj/machinery/singularity/Bumped(atom/A)
+/obj/singularity/Bumped(atom/A)
 	consume(A)
 
-/obj/machinery/singularity/process()
+/obj/singularity/process()
 	eat()
 	dissipate()
 	check_energy()
@@ -88,10 +92,10 @@
 		if (prob(event_chance)) //Chance for it to run a special event TODO: Come up with one or two more that fit.
 			event()
 
-/obj/machinery/singularity/attack_ai() //To prevent ais from gibbing themselves when they click on one.
+/obj/singularity/attack_ai() //To prevent ais from gibbing themselves when they click on one.
 	return
 
-/obj/machinery/singularity/proc/admin_investigate_setup()
+/obj/singularity/proc/admin_investigate_setup()
 	last_warning = world.time
 	var/count = locate(/obj/machinery/containment_field) in orange(30, src)
 
@@ -100,7 +104,7 @@
 
 	investigate_log("was created. [count ? "" : "<font color='red'>No containment fields were active.</font>"]", I_SINGULO)
 
-/obj/machinery/singularity/proc/dissipate()
+/obj/singularity/proc/dissipate()
 	if (!dissipate)
 		return
 
@@ -110,7 +114,7 @@
 	else
 		dissipate_track++
 
-/obj/machinery/singularity/proc/expand(var/force_size = 0, var/growing = 1)
+/obj/singularity/proc/expand(var/force_size = 0, var/growing = 1)
 	if(current_size == STAGE_SUPER)//if this is happening, this is an error
 		message_admins("expand() was called on a super singulo. This should not happen. Contact a coder immediately!")
 		return
@@ -241,7 +245,7 @@
 	else
 		return 0
 
-/obj/machinery/singularity/proc/check_energy()
+/obj/singularity/proc/check_energy()
 	if (energy <= 0)
 		investigate_log("collapsed.", I_SINGULO)
 		qdel(src)
@@ -265,12 +269,12 @@
 		expand(null, current_size > allowed_size)
 	return 1
 
-/obj/machinery/singularity/proc/eat()
+/obj/singularity/proc/eat()
 	set background = BACKGROUND_ENABLED
 
 	for(var/atom/X in orange(grav_pull, src))
 		var/dist = get_dist(X, src)
-		var/obj/machinery/singularity/S = src
+		var/obj/singularity/S = src
 		if(!istype(src))
 			return
 		if(dist > consume_range)
@@ -283,11 +287,11 @@
 
 	return
 
-/obj/machinery/singularity/proc/consume(const/atom/A)
+/obj/singularity/proc/consume(const/atom/A)
 	src.energy += A.singularity_act(src, current_size)
 	return
 
-/obj/machinery/singularity/proc/move(var/force_move = 0)
+/obj/singularity/proc/move(var/force_move = 0)
 	if(!move_self)
 		return 0
 
@@ -314,7 +318,7 @@
 		last_failed_movement = movement_dir
 	return 0
 
-/obj/machinery/singularity/proc/check_turfs_in(var/direction = 0, var/step = 0)
+/obj/singularity/proc/check_turfs_in(var/direction = 0, var/step = 0)
 	if(!direction)
 		return 0
 	var/steps = 0
@@ -368,7 +372,7 @@
 			return 0
 	return 1
 
-/obj/machinery/singularity/proc/can_move(const/turf/T)
+/obj/singularity/proc/can_move(const/turf/T)
 	if (!isturf(T))
 		return 0
 
@@ -386,7 +390,7 @@
 			return 0
 	return 1
 
-/obj/machinery/singularity/proc/event()
+/obj/singularity/proc/event()
 	var/numb = pick(1, 2, 3, 4, 5, 6)
 
 	switch (numb)
@@ -403,7 +407,7 @@
 	return 1
 
 
-/obj/machinery/singularity/proc/toxmob()
+/obj/singularity/proc/toxmob()
 	var/toxrange = 10
 	var/toxdamage = 4
 	var/radiation = 15
@@ -421,7 +425,7 @@
 	return
 
 
-/obj/machinery/singularity/proc/mezzer()
+/obj/singularity/proc/mezzer()
 	for(var/mob/living/carbon/M in oviewers(8, src))
 		if(istype(M, /mob/living/carbon/brain)) //Ignore brains
 			continue
@@ -440,13 +444,13 @@
 		for(var/mob/O in viewers(M, null))
 			O.show_message(text("<span class='danger'>[] stares blankly at The []!</span>", M, src), 1)
 
-/obj/machinery/singularity/proc/emp_area()
+/obj/singularity/proc/emp_area()
 	if(current_size != 11)
 		empulse(src, 8, 10)
 	else
 		empulse(src, 12, 16)
 
-/obj/machinery/singularity/proc/smwave()
+/obj/singularity/proc/smwave()
 	for(var/mob/living/M in view(10, src.loc))
 		if(prob(67))
 			M.apply_effect(rand(energy), IRRADIATE)
@@ -458,12 +462,12 @@
 			M.dust()
 	return
 
-/obj/machinery/singularity/proc/pulse()
+/obj/singularity/proc/pulse()
 	for(var/obj/machinery/power/rad_collector/R in rad_collectors)
 		if (get_dist(R, src) <= 15) //Better than using orange() every process.
 			R.receive_pulse(energy)
 
-/obj/machinery/singularity/proc/on_capture()
+/obj/singularity/proc/on_capture()
 	chained = 1
 	overlays = 0
 	move_self = 0
@@ -479,12 +483,12 @@
 		if(9)
 			overlays += image('icons/effects/288x288.dmi',"chain_s9")
 
-/obj/machinery/singularity/proc/on_release()
+/obj/singularity/proc/on_release()
 	chained = 0
 	overlays = 0
 	move_self = 1
 
-/obj/machinery/singularity/singularity_act(S, size)
+/obj/singularity/singularity_act(S, size)
     if(current_size <= size)
         var/gain = (energy/2)
         var/dist = max((current_size - 2), 1)

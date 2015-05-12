@@ -18,15 +18,11 @@
 	proc/update_desc()
 		var/D
 		if(req_components)
-			D = "Requires "
-			var/first = 1
+			var/list/component_list = new
 			for(var/I in req_components)
 				if(req_components[I] > 0)
-					D += "[first?"":", "][num2text(req_components[I])] [req_component_names[I]]"
-					first = 0
-			if(first) // nothing needs to be added, then
-				D += "nothing"
-			D += "."
+					component_list += "[num2text(req_components[I])] [req_component_names[I]]"
+			D = "Requires [english_list(component_list)]."
 		desc = D
 
 /obj/machinery/constructable_frame/machine_frame
@@ -53,7 +49,7 @@
 						playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 						user << "\blue You dismantle the frame"
 						new /obj/item/stack/sheet/metal(src.loc, 5)
-						del(src)
+						qdel(src)
 			if(2)
 				if(istype(P, /obj/item/weapon/circuitboard))
 					var/obj/item/weapon/circuitboard/B = P
@@ -74,10 +70,7 @@
 							var/cp = text2path(A)
 							var/obj/ct = new cp() // have to quickly instantiate it get name
 							req_component_names[A] = ct.name
-						if(circuit.frame_desc)
-							desc = circuit.frame_desc
-						else
-							update_desc()
+						update_desc()
 						user << desc
 					else
 						user << "\red This frame does not accept circuit boards of this type!"
@@ -129,7 +122,7 @@
 							else
 								circuit.loc = null
 							new_machine.RefreshParts()
-							del(src)
+							qdel(src)
 					else
 						if(istype(P, /obj/item))
 							for(var/I in req_components)

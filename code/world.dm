@@ -8,7 +8,7 @@ var/global/datum/global_init/init = new ()
 	makeDatumRefLists()
 	load_configuration()
 
-	del(src)
+	qdel(src)
 
 
 /world
@@ -54,6 +54,9 @@ var/global/datum/global_init/init = new ()
 
 	// Set up roundstart seed list.
 	plant_controller = new()
+
+	// This is kinda important. Set up details of what the hell things are made of.
+	populate_material_list()
 
 	//Create the asteroid Z-level.
 	if(config.generate_asteroid)

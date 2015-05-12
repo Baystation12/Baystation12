@@ -32,18 +32,18 @@
 	else
 		dust()
 
-/mob/proc/see_narsie(var/obj/machinery/singularity/narsie/large/N, var/dir)
+/mob/proc/see_narsie(var/obj/singularity/narsie/large/N, var/dir)
 	if(N.chained)
 		if(narsimage)
-			del(narsimage)
-			del(narglow)
+			qdel(narsimage)
+			qdel(narglow)
 		return
 	if((N.z == src.z)&&(get_dist(N,src) <= (N.consume_range+10)) && !(N in view(src)))
 		if(!narsimage) //Create narsimage
 			narsimage = image('icons/obj/narsie.dmi',src.loc,"narsie",9,1)
 			narsimage.mouse_opacity = 0
 		if(!narglow) //Create narglow
-			narglow = image('icons/obj/narsie.dmi',narsimage.loc,"glow-narsie",LIGHTING_LAYER+2,1)
+			narglow = image('icons/obj/narsie.dmi',narsimage.loc,"glow-narsie",12,1)
 			narglow.mouse_opacity = 0
 		//Else if no dir is given, simply send them the image of narsie
 		var/new_x = 32 * (N.x - src.x) + N.pixel_x
@@ -59,5 +59,5 @@
 		src << narglow
 	else
 		if(narsimage)
-			del(narsimage)
-			del(narglow)
+			qdel(narsimage)
+			qdel(narglow)

@@ -93,9 +93,9 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	flags |= NOREACT // so it doesn't react until you light it
 	create_reagents(chem_volume) // making the cigarrete a chemical holder with a maximum volume of 15
 
-/obj/item/clothing/mask/smokable/Del()
+/obj/item/clothing/mask/smokable/Destroy()
 	..()
-	del(reagents)
+	qdel(reagents)
 
 /obj/item/clothing/mask/smokable/process()
 	var/turf/location = get_turf(src)
@@ -127,13 +127,13 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 			var/datum/effect/effect/system/reagents_explosion/e = new()
 			e.set_up(round(reagents.get_reagent_amount("phoron") / 2.5, 1), get_turf(src), 0, 0)
 			e.start()
-			del(src)
+			qdel(src)
 			return
 		if(reagents.get_reagent_amount("fuel")) // the fuel explodes, too, but much less violently
 			var/datum/effect/effect/system/reagents_explosion/e = new()
 			e.set_up(round(reagents.get_reagent_amount("fuel") / 5, 1), get_turf(src), 0, 0)
 			e.start()
-			del(src)
+			qdel(src)
 			return
 		flags &= ~NOREACT // allowing reagents to react after being lit
 		reagents.handle_reactions()
@@ -146,10 +146,12 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 			M.update_inv_r_hand(1)
 		var/turf/T = get_turf(src)
 		T.visible_message(flavor_text)
+		set_light(2, 0.25, "#E38F46")
 		processing_objects.Add(src)
 
 /obj/item/clothing/mask/smokable/proc/die(var/nomessage = 0)
 	var/turf/T = get_turf(src)
+	set_light(0)
 	if (type_butt)
 		var/obj/item/butt = new type_butt(T)
 		transfer_fingerprints_to(butt)
@@ -162,7 +164,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 			M.update_inv_l_hand(0)
 			M.update_inv_r_hand(1)
 		processing_objects.Remove(src)
-		del(src)
+		qdel(src)
 	else
 		new /obj/effect/decal/cleanable/ash(T)
 		if(ismob(loc))
@@ -377,7 +379,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		if(G.reagents)
 			G.reagents.trans_to(src, G.reagents.total_volume)
 		name = "[G.name]-packed [initial(name)]"
-		del(G)
+		qdel(G)
 
 	else if(istype(W, /obj/item/weapon/flame/lighter))
 		var/obj/item/weapon/flame/lighter/L = W
@@ -456,7 +458,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 						user.apply_damage(2,BURN,"r_hand")
 					user.visible_message("<span class='notice'>After a few attempts, [user] manages to light the [src], they however burn their finger in the process.</span>")
 
-			user.SetLuminosity(user.luminosity + 2)
+			set_light(2)
 			processing_objects.Add(src)
 		else
 			lit = 0
@@ -467,7 +469,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 			else
 				user.visible_message("<span class='notice'>[user] quietly shuts off the [src].")
 
-			user.SetLuminosity(user.luminosity - 2)
+			set_light(0)
 			processing_objects.Remove(src)
 	else
 		return ..()
@@ -495,18 +497,4 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	var/turf/location = get_turf(src)
 	if(location)
 		location.hotspot_expose(700, 5)
-	return
-
-
-/obj/item/weapon/flame/lighter/pickup(mob/user)
-	if(lit)
-		SetLuminosity(0)
-		user.SetLuminosity(user.luminosity+2)
-	return
-
-
-/obj/item/weapon/flame/lighter/dropped(mob/user)
-	if(lit)
-		user.SetLuminosity(user.luminosity-2)
-		SetLuminosity(2)
 	return

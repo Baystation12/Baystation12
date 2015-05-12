@@ -2,6 +2,7 @@
 	name = "Exosuit Control"
 	icon = 'icons/obj/computer.dmi'
 	icon_state = "mecha"
+	light_color = "#a97faa"
 	req_access = list(access_robotics)
 	circuit = "/obj/item/weapon/circuitboard/mecha_control"
 	var/list/located = list()
@@ -69,7 +70,7 @@
 	icon_state = "motion2"
 	origin_tech = "programming=2;magnets=2"
 	construction_time = 50
-	construction_cost = list("metal"=500)
+	construction_cost = list(DEFAULT_WALL_MATERIAL=500)
 
 	proc/get_mecha_info()
 		if(!in_mecha())
@@ -90,11 +91,11 @@
 		return answer
 
 	emp_act()
-		del src
+		qdel(src)
 		return
 
 	ex_act()
-		del src
+		qdel(src)
 		return
 
 	proc/in_mecha()
@@ -106,7 +107,7 @@
 		var/obj/mecha/M = in_mecha()
 		if(M)
 			M.emp_act(2)
-		del(src)
+		qdel(src)
 
 	proc/get_mecha_log()
 		if(!src.in_mecha())

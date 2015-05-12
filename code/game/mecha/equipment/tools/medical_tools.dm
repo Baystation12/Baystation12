@@ -6,7 +6,7 @@
 	origin_tech = "programming=2;biotech=3"
 	energy_drain = 20
 	range = MELEE
-	construction_cost = list("metal"=5000,"glass"=10000)
+	construction_cost = list(DEFAULT_WALL_MATERIAL=5000,"glass"=10000)
 	reliability = 1000
 	equip_cooldown = 20
 	var/mob/living/carbon/occupant = null
@@ -20,6 +20,10 @@
 		pr_mech_sleeper = new /datum/global_iterator/mech_sleeper(list(src),0)
 		pr_mech_sleeper.set_delay(equip_cooldown)
 		return
+
+	Destroy()
+		qdel(pr_mech_sleeper)
+		..()
 
 	allow_drop()
 		return 0
@@ -390,7 +394,7 @@
 	equip_cooldown = 10
 	origin_tech = "materials=3;biotech=4;magnets=4;programming=3"
 	construction_time = 200
-	construction_cost = list("metal"=3000,"glass"=2000)
+	construction_cost = list(DEFAULT_WALL_MATERIAL=3000,"glass"=2000)
 	required_type = /obj/mecha/medical
 
 	New()

@@ -33,6 +33,7 @@
 // Apply changes when entering state
 /datum/universal_state/supermatter_cascade/OnEnter()
 	set background = 1
+	garbage_collector.garbage_collect = 0
 	world << "<span class='sinister' style='font-size:22pt'>You are blinded by a brilliant flash of energy.</span>"
 
 	world << sound('sound/effects/cascade.ogg')
@@ -54,7 +55,7 @@
 	cult.allow_narsie = 0
 	PlayerSet()
 
-	new /obj/machinery/singularity/narsie/large/exit(pick(endgame_exits))
+	new /obj/singularity/narsie/large/exit(pick(endgame_exits))
 	spawn(rand(30,60) SECONDS)
 		var/txt = {"
 There's been a galaxy-wide electromagnetic pulse.  All of our systems are heavily damaged and many personnel are dead or dying. We are seeing increasing indications of the universe itself beginning to unravel.
@@ -82,11 +83,10 @@ AUTOMATED ALERT: Link to [command_name()] lost."}
 		return
 
 /datum/universal_state/supermatter_cascade/proc/AreaSet()
-	for(var/area/ca in world)
-		var/area/A=ca.master
+	for(var/area/A in world)
 		if(A.z in config.admin_levels)
 			continue
-		if(!istype(A,/area) || istype(A,/area/space))
+		if(istype(A,/area/space))
 			continue
 
 		// Reset all alarms.
@@ -110,10 +110,9 @@ AUTOMATED ALERT: Link to [command_name()] lost."}
 		spess.overlays += "end01"
 
 /datum/universal_state/supermatter_cascade/proc/AmbientSet()
-	for(var/turf/T in world)
-		if(istype(T, /turf/space))	continue
-		if(!(T.z in config.admin_levels))
-			T.update_lumcount(1, 160, 255, 0, 0)
+	for(var/atom/movable/lighting_overlay/L in world)
+		if(!(L.z in config.admin_levels))
+			L.update_lumcount(0.5, 1, 0)
 
 /datum/universal_state/supermatter_cascade/proc/MiscSet()
 	for (var/obj/machinery/firealarm/alm in world)

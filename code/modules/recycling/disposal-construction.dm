@@ -10,7 +10,7 @@
 	anchored = 0
 	density = 0
 	pressure_resistance = 5*ONE_ATMOSPHERE
-	matter = list("metal" = 1850)
+	matter = list(DEFAULT_WALL_MATERIAL = 1850)
 	level = 2
 	var/ptype = 0
 	// 0=straight, 1=bent, 2=junction-j1, 3=junction-j2, 4=junction-y, 5=trunk, 6=disposal bin, 7=outlet, 8=inlet
@@ -288,7 +288,7 @@
 							src.transfer_fingerprints_to(P)
 							P.set_dir(dir)
 
-						del(src)
+						qdel(src)
 						return
 				else
 					user << "You need more welding fuel to complete this task."

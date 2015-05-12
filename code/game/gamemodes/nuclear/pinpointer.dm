@@ -8,7 +8,7 @@
 	item_state = "electronic"
 	throw_speed = 4
 	throw_range = 20
-	matter = list("metal" = 500)
+	matter = list(DEFAULT_WALL_MATERIAL = 500)
 	var/obj/item/weapon/disk/nuclear/the_disk = null
 	var/active = 0
 
@@ -48,6 +48,9 @@
 			if(bomb.timing)
 				user << "Extreme danger.  Arming signal detected.   Time remaining: [bomb.timeleft]"
 
+/obj/item/weapon/pinpointer/Destroy()
+	active = 0
+	..()
 
 /obj/item/weapon/pinpointer/advpinpointer
 	name = "Advanced Pinpointer"

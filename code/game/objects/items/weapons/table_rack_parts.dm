@@ -6,7 +6,7 @@
 	gender = PLURAL
 	icon = 'icons/obj/items.dmi'
 	icon_state = "table_parts"
-	matter = list("metal" = 3750)
+	matter = list(DEFAULT_WALL_MATERIAL = 3750)
 	flags = CONDUCT
 	attack_verb = list("slammed", "bashed", "battered", "bludgeoned", "thrashed", "whacked")
 
@@ -20,7 +20,7 @@
 	if (istype(W, /obj/item/weapon/wrench))
 		for(var/material_type in stack_types)
 			new material_type(get_turf(user))
-		del(src)
+		qdel(src)
 		return
 	else
 		if(alter_type && alter_with && istype(W,alter_with))
@@ -28,7 +28,7 @@
 			if (R.use(alter_cost))
 				var/obj/item/new_parts = new alter_type (get_turf(loc))
 				user << "<span class='notice'>You modify \the [name] into \a [new_parts].</span>"
-				del(src)
+				qdel(src)
 			else
 				user << "<span class='warning'>You need at least [alter_cost] sheets to reinforce the [name].</span>"
 			return
@@ -41,7 +41,7 @@
 
 	new build_type( user.loc )
 	user.drop_item()
-	del(src)
+	qdel(src)
 	return
 
 /obj/item/weapon/table_parts/reinforced
@@ -49,7 +49,7 @@
 	desc = "Hard table parts. Well... harder."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "reinf_tableparts"
-	matter = list("metal" = 7500)
+	matter = list(DEFAULT_WALL_MATERIAL = 7500)
 	flags = CONDUCT
 
 	stack_types = list(/obj/item/stack/sheet/metal, /obj/item/stack/rods)
@@ -87,7 +87,7 @@
 		new /obj/item/stack/tile/carpet( get_turf(loc) )
 		new /obj/item/weapon/table_parts/wood( get_turf(loc) )
 		user << "<span class='notice'>You pry the carpet out of the table.</span>"
-		del(src)
+		qdel(src)
 	..()
 
 /obj/item/weapon/table_parts/rack

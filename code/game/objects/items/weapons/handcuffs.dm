@@ -10,7 +10,7 @@
 	w_class = 2.0
 	throw_speed = 2
 	throw_range = 5
-	matter = list("metal" = 500)
+	matter = list(DEFAULT_WALL_MATERIAL = 500)
 	origin_tech = "materials=1"
 	var/dispenser = 0
 	var/breakouttime = 1200 //Deciseconds = 120s = 2 minutes
@@ -132,7 +132,7 @@ var/last_chew = 0
 
 			user.put_in_hands(W)
 			user << "<span class='notice'>You wrap the cable restraint around the top of the rod.</span>"
-			del(src)
+			qdel(src)
 			update_icon(user)
 
 

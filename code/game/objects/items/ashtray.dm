@@ -31,7 +31,7 @@
 				processing_objects.Remove(cig)
 				var/obj/item/butt = new cig.type_butt(src)
 				cig.transfer_fingerprints_to(butt)
-				del(cig)
+				qdel(cig)
 				W = butt
 			else if (cig.lit == 0)
 				user << "You place [cig] in [src] without even smoking it. Why would you do that?"
@@ -82,7 +82,7 @@
 	icon_broken  = "ashtray_bork_bl"
 	max_butts = 14
 	health = 24.0
-	matter = list("metal" = 30,"glass" = 30)
+	matter = list(DEFAULT_WALL_MATERIAL = 30,"glass" = 30)
 	empty_desc = "Cheap plastic ashtray."
 	throwforce = 3.0
 	die()
@@ -102,7 +102,7 @@
 	icon_broken  = "ashtray_bork_br"
 	max_butts = 10
 	health = 72.0
-	matter = list("metal" = 80)
+	matter = list(DEFAULT_WALL_MATERIAL = 80)
 	empty_desc = "Massive bronze ashtray."
 	throwforce = 10.0
 

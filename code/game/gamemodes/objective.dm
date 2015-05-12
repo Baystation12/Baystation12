@@ -13,7 +13,7 @@ datum/objective
 		if(text)
 			explanation_text = text
 
-	Del()
+	Destroy()
 		all_objectives -= src
 		..()
 
@@ -541,7 +541,7 @@ datum/objective/steal
 			if (!custom_target) return
 			var/tmp_obj = new custom_target
 			var/custom_name = tmp_obj:name
-			del(tmp_obj)
+			qdel(tmp_obj)
 			custom_name = sanitize(input("Enter target name:", "Objective target", custom_name) as text|null)
 			if (!custom_name) return
 			target_name = custom_name
@@ -798,7 +798,7 @@ datum/objective/heist/salvage
 	choose_target()
 		switch(rand(1,8))
 			if(1)
-				target = "metal"
+				target = DEFAULT_WALL_MATERIAL
 				target_amount = 300
 			if(2)
 				target = "glass"
@@ -916,7 +916,7 @@ datum/objective/heist/salvage
 	explanation_text = "Summon Nar-Sie via the use of the appropriate rune (Hell join self). It will only work if nine cultists stand on and around it. The convert rune is join blood self."
 
 /datum/objective/cult/eldergod/check_completion()
-	return (locate(/obj/machinery/singularity/narsie/large) in machines)
+	return (locate(/obj/singularity/narsie/large) in machines)
 
 /datum/objective/cult/sacrifice
 	explanation_text = "Conduct a ritual sacrifice for the glory of Nar-Sie."

@@ -8,7 +8,7 @@
 	icon_state = "revolver"
 	origin_tech = "combat=2;materials=2"
 	w_class = 3
-	matter = list("metal" = 1000)
+	matter = list(DEFAULT_WALL_MATERIAL = 1000)
 	recoil = 1
 
 	var/caliber = "357"		//determines which casings will fit
@@ -50,7 +50,7 @@
 		chambered = ammo_magazine.stored_ammo[1]
 		if(handle_casings != HOLD_CASINGS)
 			ammo_magazine.stored_ammo -= chambered
-	
+
 	if (chambered)
 		return chambered.BB
 	return null
@@ -165,7 +165,10 @@
 	load_ammo(A, user)
 
 /obj/item/weapon/gun/projectile/attack_self(mob/user as mob)
-	unload_ammo(user)
+	if(firemodes.len > 1)
+		switch_firemodes(user)
+	else
+		unload_ammo(user)
 
 /obj/item/weapon/gun/projectile/attack_hand(mob/user as mob)
 	if(user.get_inactive_hand() == src)
@@ -189,9 +192,9 @@
 
 /obj/item/weapon/gun/projectile/examine(mob/user)
 	..(user)
-	user << "Has [getAmmo()] round\s remaining."
 	if(ammo_magazine)
 		user << "It has \a [ammo_magazine] loaded."
+	user << "Has [getAmmo()] round\s remaining."
 	return
 
 /obj/item/weapon/gun/projectile/proc/getAmmo()
@@ -203,3 +206,15 @@
 	if(chambered)
 		bullets += 1
 	return bullets
+
+/* Unneeded -- so far.
+//in case the weapon has firemodes and can't unload using attack_hand()
+/obj/item/weapon/gun/projectile/verb/unload_gun()
+	set name = "Unload Ammo"
+	set category = "Object"
+	set src in usr
+
+	if(usr.stat || usr.restrained()) return
+
+	unload_ammo(usr)
+*/

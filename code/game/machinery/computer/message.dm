@@ -4,6 +4,7 @@
 	name = "messaging monitor console"
 	desc = "Used to access and maintain data on messaging servers. Allows you to view PDA and request console messages."
 	icon_state = "comm_logs"
+	light_color = "#00b000"
 	var/hack_icon = "comm_logsc"
 	var/normal_icon = "comm_logs"
 	circuit = "/obj/item/weapon/circuitboard/message_monitor"

@@ -38,7 +38,7 @@
 	animation.icon_state = "cultfloor"
 	flick("cultfloor",animation)
 	spawn(10)
-		del(animation)
+		qdel(animation)
 
 /spell/aoe_turf/conjure/wall
 	name = "Lesser Construction"
@@ -57,7 +57,7 @@
 	animation.icon_state = "cultwall"
 	flick("cultwall",animation)
 	spawn(10)
-		del(animation)
+		qdel(animation)
 
 /spell/aoe_turf/conjure/wall/reinforced
 	name = "Greater Construction"
@@ -130,8 +130,8 @@
 	name = "Juggerwall"
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "m_shield_cult"
-	l_color = "#B40000"
-	luminosity = 2
+	light_color = "#B40000"
+	light_range = 2
 
 /obj/effect/forcefield/cult/cultify()
 	return

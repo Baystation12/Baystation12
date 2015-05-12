@@ -67,16 +67,16 @@
 		var/obj/D = new/obj()
 		D.create_reagents(amount_per_transfer_from_this)
 		reagents.trans_to(D, amount_per_transfer_from_this)
-		D.icon += mix_color_from_reagents(D.reagents.reagent_list)
+		D.icon += D.reagents.get_color()
 		spawn(0)
 			D.reagents.reaction(A)
 			sleep(5)
-			del(D)
+			qdel(D)
 	else
 		var/obj/effect/decal/chempuff/D = new/obj/effect/decal/chempuff(get_turf(src))
 		D.create_reagents(amount_per_transfer_from_this)
 		reagents.trans_to(D, amount_per_transfer_from_this, 1/spray_size)
-		D.icon += mix_color_from_reagents(D.reagents.reagent_list)
+		D.icon += D.reagents.get_color()
 
 		var/turf/A_turf = get_turf(A)//BS12
 
@@ -93,7 +93,7 @@
 						D.reagents.reaction(A_turf)
 					sleep(2)
 				sleep(3)
-			del(D)
+			qdel(D)
 
 	return
 
@@ -204,7 +204,7 @@
 		D.create_reagents(amount_per_transfer_from_this)
 		src.reagents.trans_to(D, amount_per_transfer_from_this)
 
-		D.icon += mix_color_from_reagents(D.reagents.reagent_list)
+		D.icon += D.reagents.get_color()
 
 		Sprays[i] = D
 
@@ -229,7 +229,7 @@
 				for(var/atom/t in get_turf(D))
 					D.reagents.reaction(t)
 				sleep(2)
-			del(D)
+			qdel(D)
 
 	return
 

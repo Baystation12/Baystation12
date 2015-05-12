@@ -14,7 +14,7 @@ var/datum/controller/failsafe/Failsafe
 	//There can be only one failsafe. Out with the old in with the new (that way we can restart the Failsafe by spawning a new one)
 	if(Failsafe != src)
 		if(istype(Failsafe))
-			del(Failsafe)
+			qdel(Failsafe)
 	Failsafe = src
 	Failsafe.process()
 
@@ -25,7 +25,6 @@ var/datum/controller/failsafe/Failsafe
 		set background = 1
 		while(1)	//more efficient than recursivly calling ourself over and over. background = 1 ensures we do not trigger an infinite loop
 			if(!master_controller)		new /datum/controller/game_controller()	//replace the missing master_controller! This should never happen.
-			if(!lighting_controller)	new /datum/controller/lighting()		//replace the missing lighting_controller
 
 			if(processing)
 				if(lighting_controller.processing)

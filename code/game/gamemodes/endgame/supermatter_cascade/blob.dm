@@ -8,7 +8,7 @@
 
 	//luminosity = 5
 	//l_color="#0066FF"
-	layer = LIGHTING_LAYER+1
+	layer = 11
 
 	var/spawned=0 // DIR mask
 	var/next_check=0
@@ -49,7 +49,8 @@
 			for(var/atom/movable/A in T)
 				if(A)
 					if(istype(A,/mob/living))
-						del(A)
+						qdel(A)
+						continue
 					else if(istype(A,/mob)) // Observers, AI cameras.
 						continue
 					qdel(A)
@@ -114,4 +115,4 @@
 	if(istype(user,/mob/dead/observer))
 		return
 
-	del(user)
+	qdel(user)

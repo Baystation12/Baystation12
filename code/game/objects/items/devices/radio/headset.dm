@@ -4,7 +4,7 @@
 	var/radio_desc = ""
 	icon_state = "headset"
 	item_state = "headset"
-	matter = list("metal" = 75)
+	matter = list(DEFAULT_WALL_MATERIAL = 75)
 	subspace_transmission = 1
 	canhear_range = 0 // can't hear headsets from very far away
 
@@ -25,6 +25,13 @@
 	if(ks2type)
 		keyslot2 = new ks2type(src)
 	recalculateChannels(1)
+
+/obj/item/device/radio/headset/Destroy()
+	qdel(keyslot1)
+	qdel(keyslot2)
+	keyslot1 = null
+	keyslot2 = null
+	..()
 
 /obj/item/device/radio/headset/examine(mob/user)
 	if(!(..(user, 1) && radio_desc))

@@ -30,6 +30,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 /obj/machinery/computer/rdconsole
 	name = "R&D control console"
 	icon_state = "rdcomp"
+	light_color = "#a97faa"
 	circuit = /obj/item/weapon/circuitboard/rdconsole
 	var/datum/research/files							//Stores all the collected research data.
 	var/obj/item/weapon/disk/tech_disk/t_disk = null	//Stores the technology disk.
@@ -54,7 +55,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 		check_tech = new T()
 		if(check_tech.id == ID)
 			return_name = check_tech.name
-			del(check_tech)
+			qdel(check_tech)
 			check_tech = null
 			break
 
@@ -66,8 +67,8 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 	if (copytext(ID, 1, 2) == "$")
 		return_name = copytext(ID, 2)
 		switch(return_name)
-			if("metal")
-				return_name = "Metal"
+			if(DEFAULT_WALL_MATERIAL)
+				return_name = "Steel"
 			if("glass")
 				return_name = "Glass"
 			if("gold")
@@ -86,7 +87,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			temp_reagent = new R()
 			if(temp_reagent.id == ID)
 				return_name = temp_reagent.name
-				del(temp_reagent)
+				qdel(temp_reagent)
 				temp_reagent = null
 				break
 	return return_name
@@ -262,7 +263,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 							if(linked_destroy.loaded_item.reliability < 100 && linked_destroy.loaded_item.crit_fail)
 								files.UpdateDesign(linked_destroy.loaded_item.type)
 							if(linked_lathe && linked_destroy.loaded_item.matter) //Also sends salvaged materials to a linked protolathe, if any.
-								linked_lathe.m_amount += min((linked_lathe.max_material_storage - linked_lathe.TotalMaterials()), (linked_destroy.loaded_item.matter["metal"]*linked_destroy.decon_mod))
+								linked_lathe.m_amount += min((linked_lathe.max_material_storage - linked_lathe.TotalMaterials()), (linked_destroy.loaded_item.matter[DEFAULT_WALL_MATERIAL]*linked_destroy.decon_mod))
 								linked_lathe.g_amount += min((linked_lathe.max_material_storage - linked_lathe.TotalMaterials()), (linked_destroy.loaded_item.matter["glass"]*linked_destroy.decon_mod))
 							linked_destroy.loaded_item = null
 						for(var/obj/I in linked_destroy.contents)
@@ -274,11 +275,11 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 									S.use(1)
 									linked_destroy.loaded_item = S
 								else
-									del(S)
+									qdel(S)
 									linked_destroy.icon_state = "d_analyzer"
 							else
 								if(!(I in linked_destroy.component_parts))
-									del(I)
+									qdel(I)
 									linked_destroy.icon_state = "d_analyzer"
 						use_power(linked_destroy.active_power_usage)
 						screen = 1.0
@@ -438,27 +439,24 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 	else if(href_list["lathe_ejectsheet"] && linked_lathe) //Causes the protolathe to eject a sheet of material
 		var/desired_num_sheets = text2num(href_list["amount"])
 		var/res_amount, type
-		switch(href_list["lathe_ejectsheet"])
-			if("metal")
-				type = /obj/item/stack/sheet/metal
+		var/material/M = name_to_material[href_list["lathe_ejectsheet"]]
+		if(istype(M))
+			type = M.stack_type
+
+		switch(name_to_material[href_list["lathe_ejectsheet"]])
+			if(DEFAULT_WALL_MATERIAL)
 				res_amount = "m_amount"
 			if("glass")
-				type = /obj/item/stack/sheet/glass
 				res_amount = "g_amount"
 			if("gold")
-				type = /obj/item/stack/sheet/mineral/gold
 				res_amount = "gold_amount"
 			if("silver")
-				type = /obj/item/stack/sheet/mineral/silver
 				res_amount = "silver_amount"
 			if("phoron")
-				type = /obj/item/stack/sheet/mineral/phoron
 				res_amount = "phoron_amount"
 			if("uranium")
-				type = /obj/item/stack/sheet/mineral/uranium
 				res_amount = "uranium_amount"
 			if("diamond")
-				type = /obj/item/stack/sheet/mineral/diamond
 				res_amount = "diamond_amount"
 
 		if(ispath(type) && hasvar(linked_lathe, res_amount))
@@ -468,7 +466,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 				sheet.amount = min(available_num_sheets, desired_num_sheets)
 				linked_lathe.vars[res_amount] = max(0, (linked_lathe.vars[res_amount]-sheet.amount * sheet.perunit))
 			else
-				del sheet
+				qdel(sheet)
 	else if(href_list["imprinter_ejectsheet"] && linked_imprinter) //Causes the protolathe to eject a sheet of material
 		var/desired_num_sheets = text2num(href_list["amount"])
 		var/res_amount, type
@@ -492,7 +490,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 				sheet.amount = min(available_num_sheets, desired_num_sheets)
 				linked_imprinter.vars[res_amount] = max(0, (linked_imprinter.vars[res_amount]-sheet.amount * sheet.perunit))
 			else
-				del sheet
+				qdel(sheet)
 
 	else if(href_list["find_device"]) //The R&D console looks for devices nearby to link up with.
 		screen = 0.0
@@ -518,7 +516,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 		var/choice = alert("R&D Console Database Reset", "Are you sure you want to reset the R&D console's database? Data lost cannot be recovered.", "Continue", "Cancel")
 		if(choice == "Continue")
 			screen = 0.0
-			del(files)
+			qdel(files)
 			files = new /datum/research(src)
 			spawn(20)
 				screen = 1.6
@@ -817,11 +815,11 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			dat += "<A href='?src=\ref[src];menu=3.1'>Protolathe Menu</A><HR>"
 			dat += "Material Storage<BR><HR>"
 			dat += "<UL>"
-			for(var/M in list("metal", "glass", "gold", "silver", "phoron", "uranium", "diamond"))
+			for(var/M in list(DEFAULT_WALL_MATERIAL, "glass", "gold", "silver", "phoron", "uranium", "diamond"))
 				var/amount
 				var/sheetsize = 2000
 				switch(M)
-					if("metal")
+					if(DEFAULT_WALL_MATERIAL)
 						amount = linked_lathe.m_amount
 						sheetsize = 3750
 					if("glass")

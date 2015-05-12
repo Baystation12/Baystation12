@@ -85,8 +85,8 @@
 		return
 
 	if(!holder)
-		if(!config.ooc_allowed)
-			src << "<span class='danger'>OOC is globally muted.</span>"
+		if(!config.looc_allowed)
+			src << "<span class='danger'>LOOC is globally muted.</span>"
 			return
 		if(!config.dooc_allowed && (mob.stat == DEAD))
 			usr << "<span class='danger'>OOC for dead mobs has been turned off.</span>"

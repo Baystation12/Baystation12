@@ -16,10 +16,6 @@
 		stop_aim()
 		usr.visible_message("<span class='notice'> \The [usr] lowers \the [src]...</span>")
 
-//Clicking gun will still lower aim for guns that don't overwrite this
-/obj/item/weapon/gun/attack_self()
-	lower_aim()
-
 //Removing the lock and the buttons.
 /obj/item/weapon/gun/dropped(mob/user as mob)
 	stop_aim()
@@ -40,7 +36,7 @@
 		for(var/mob/living/M in aim_targets)
 			if(M)
 				M.NotTargeted(src) //Untargeting people.
-		del(aim_targets)
+		qdel(aim_targets)
 
 //Compute how to fire.....
 //Return 1 if a target was found, 0 otherwise.
@@ -69,7 +65,7 @@
 			for(var/mob/living/L in aim_targets)
 				if(L)
 					L.NotTargeted(src)
-			del(aim_targets)
+			qdel(aim_targets)
 			usr.visible_message("<span class='danger'><b>[usr] turns \the [src] on [M]!</b></span>")
 		else
 			usr.visible_message("<span class='danger'><b>[usr] aims \a [src] at [M]!</b></span>")
@@ -234,13 +230,13 @@
 	targeted_by -= I
 	I.aim_targets.Remove(src) //De-target them
 	if(!I.aim_targets.len)
-		del(I.aim_targets)
+		qdel(I.aim_targets)
 	var/mob/living/T = I.loc //Remove the targeting icons
 	if(T && ismob(T) && !I.aim_targets && T.client)
 		T.client.remove_gun_icons()
 	if(!targeted_by.len)
-		del target_locked //Remove the overlay
-		del targeted_by
+		qdel(target_locked) //Remove the overlay
+		qdel(targeted_by)
 	spawn(1) update_targeted()
 
 /mob/living/Move()
@@ -308,7 +304,7 @@
 	else
 		usr << "Target may no longer move."
 		target_can_run = 0
-		del(usr.gun_run_icon)	//no need for icon for running permission
+		qdel(usr.gun_run_icon)	//no need for icon for running permission
 
 	//Updating walking permission button
 	if(usr.gun_move_icon)

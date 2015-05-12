@@ -40,6 +40,7 @@ In short:
 // Apply changes when entering state
 /datum/universal_state/hell/OnEnter()
 	set background = 1
+	garbage_collector.garbage_collect = 0
 	escape_list = get_area_turfs(locate(/area/hallway/secondary/exit))
 
 	//Separated into separate procs for profiling
@@ -53,9 +54,8 @@ In short:
 	runedec += 9000	//basically removing the rune cap
 
 /datum/universal_state/hell/proc/AreaSet()
-	for(var/area/ca in world)
-		var/area/A = ca.master
-		if(!istype(A,/area) || A.name=="Space")
+	for(var/area/A in world)
+		if(A.name=="Space")
 			continue
 
 		// Reset all alarms.
@@ -73,9 +73,8 @@ In short:
 		spess.overlays += I
 
 /datum/universal_state/hell/proc/AmbientSet()
-	for(var/turf/T in world)
-		if(istype(T, /turf/space))	continue
-		T.update_lumcount(1, 255, 0, 0, 0)
+	for(var/atom/movable/lighting_overlay/L in world)
+		L.update_lumcount(1, 0, 0)
 
 /datum/universal_state/hell/proc/MiscSet()
 	for(var/turf/simulated/floor/T in world)

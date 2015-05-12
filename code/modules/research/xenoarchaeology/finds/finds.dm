@@ -57,7 +57,7 @@
 				else
 					for(var/mob/M in viewers(world.view, user))
 						M.show_message("<span class='info'>[src] burns away into nothing.</span>",1)
-				del(src)
+				qdel(src)
 				w.remove_fuel(4)
 			else
 				for(var/mob/M in viewers(world.view, user))
@@ -73,7 +73,7 @@
 	..()
 	if(prob(33))
 		src.visible_message("<span class='warning'>[src] crumbles away, leaving some dust and gravel behind.</span>")
-		del(src)
+		qdel(src)
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Archaeological finds
@@ -101,7 +101,7 @@
 	var/apply_prefix = 1
 	if(prob(40))
 		material_descriptor = pick("rusted ","dusty ","archaic ","fragile ")
-	source_material = pick("cordite","quadrinium","steel","titanium","aluminium","ferritic-alloy","plasteel","duranium")
+	source_material = pick("cordite","quadrinium",DEFAULT_WALL_MATERIAL,"titanium","aluminium","ferritic-alloy","plasteel","duranium")
 
 	var/talkative = 0
 	if(prob(5))
@@ -323,7 +323,7 @@
 			apply_material_decorations = 0
 		if(23)
 			apply_prefix = 0
-			new_item = new /obj/item/stack/rods(src.loc)
+			new_item = PoolOrNew(/obj/item/stack/rods, src.loc)
 			apply_image_decorations = 0
 			apply_material_decorations = 0
 		if(24)
@@ -490,7 +490,7 @@
 				new_item = new /obj/item/clothing/mask/gas(src.loc)
 	var/decorations = ""
 	if(apply_material_decorations)
-		source_material = pick("cordite","quadrinium","steel","titanium","aluminium","ferritic-alloy","plasteel","duranium")
+		source_material = pick("cordite","quadrinium",DEFAULT_WALL_MATERIAL,"titanium","aluminium","ferritic-alloy","plasteel","duranium")
 		desc = "A [material_descriptor ? "[material_descriptor] " : ""][item_type] made of [source_material], all craftsmanship is of [pick("the lowest","low","average","high","the highest")] quality."
 
 		var/list/descriptors = list()
@@ -548,7 +548,7 @@
 		if(talkative)
 			new_item.talking_atom = new(new_item)
 
-		del(src)
+		qdel(src)
 
 	else if(talkative)
 		src.talking_atom = new(src)

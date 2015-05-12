@@ -4,12 +4,12 @@
 	var/climbable
 	var/breakable
 	var/parts
+	var/list/climbers = list()
 
-/obj/structure/proc/destroy()
+/obj/structure/Destroy()
 	if(parts)
 		new parts(loc)
-	density = 0
-	del(src)
+	..()
 
 /obj/structure/attack_hand(mob/user)
 	if(breakable)
@@ -20,14 +20,20 @@
 			var/mob/living/carbon/human/H = user
 			if(H.species.can_shred(user))
 				attack_generic(user,1,"slices")
+
+	if(climbers.len && !(user in climbers))
+		user.visible_message("<span class='warning'>[user.name] shakes \the [src].</span>", \
+					"<span class='notice'>You shake \the [src].</span>")
+		structure_shaken()
+
 	return ..()
 
 /obj/structure/blob_act()
 	if(prob(50))
-		del(src)
+		qdel(src)
 
 /obj/structure/meteorhit(obj/O as obj)
-	destroy(src)
+	qdel(src)
 
 /obj/structure/attack_tk()
 	return
@@ -35,24 +41,24 @@
 /obj/structure/ex_act(severity)
 	switch(severity)
 		if(1.0)
-			del(src)
+			qdel(src)
 			return
 		if(2.0)
 			if(prob(50))
-				del(src)
+				qdel(src)
 				return
 		if(3.0)
 			return
 
 /obj/structure/meteorhit(obj/O as obj)
-	del(src)
+	qdel(src)
 
 /obj/structure/New()
 	..()
 	if(climbable)
 		verbs += /obj/structure/proc/climb_on
 
-/obj/structure/Del()
+/obj/structure/Destroy()
 	..()
 
 /obj/structure/proc/climb_on()
@@ -73,7 +79,7 @@
 		return ..()
 
 /obj/structure/proc/can_climb(var/mob/living/user)
-	if (!can_touch(user) || !climbable)
+	if (!can_touch(user) || !climbable || (user in climbers))
 		return 0
 
 	if (!user.Adjacent(src))
@@ -103,25 +109,32 @@
 		return
 
 	usr.visible_message("<span class='warning'>[user] starts climbing onto \the [src]!</span>")
+	climbers |= user
 
 	if(!do_after(user,50))
+		climbers -= user
 		return
 
 	if (!can_climb(user))
+		climbers -= user
 		return
 
 	usr.forceMove(get_turf(src))
 
 	if (get_turf(user) == get_turf(src))
 		usr.visible_message("<span class='warning'>[user] climbs onto \the [src]!</span>")
+	climbers -= user
 
 /obj/structure/proc/structure_shaken()
+	for(var/mob/living/M in climbers)
+		M.Weaken(1)
+		M << "<span class='danger'>You topple as you are shaken off \the [src]!</span>"
+		climbers.Cut(1,2)
 
 	for(var/mob/living/M in get_turf(src))
-
 		if(M.lying) return //No spamming this on people.
 
-		M.Weaken(5)
+		M.Weaken(3)
 		M << "<span class='danger'>You topple as \the [src] moves under you!</span>"
 
 		if(prob(25))
@@ -179,5 +192,5 @@
 	if(!breakable || !damage || !wallbreaker)
 		return 0
 	visible_message("<span class='danger'>[user] [attack_verb] the [src] apart!</span>")
-	spawn(1) destroy()
+	spawn(1) qdel(src)
 	return 1

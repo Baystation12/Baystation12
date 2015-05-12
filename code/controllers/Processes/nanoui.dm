@@ -9,3 +9,6 @@
 /datum/controller/process/nanoui/doWork()
 	updateQueueInstance.init(nanomanager.processing_uis, "process")
 	updateQueueInstance.Run()
+
+/datum/controller/process/nanoui/getStatName()
+	return ..()+"([nanomanager.processing_uis.len])"

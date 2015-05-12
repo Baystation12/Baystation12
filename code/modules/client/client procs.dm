@@ -33,7 +33,7 @@
 	if( findtext(href,"<script",1,0) )
 		world.log << "Attempted use of scripts within a topic call, by [src]"
 		message_admins("Attempted use of scripts within a topic call, by [src]")
-		//del(usr)
+		//qdel(usr)
 		return
 
 	//Admin PM
@@ -112,7 +112,7 @@
 
 	if(!config.guests_allowed && IsGuestKey(key))
 		alert(src,"This server doesn't allow guest accounts to play. Please go to http://www.byond.com/ and register for a key.","Guest","OK")
-		del(src)
+		qdel(src)
 		return
 
 	// Change the way they should download resources.
@@ -305,3 +305,14 @@
 		'icons/spideros_icons/sos_13.png',
 		'icons/spideros_icons/sos_14.png'
 		)
+
+
+mob/proc/MayRespawn()
+	return 0
+
+client/proc/MayRespawn()
+	if(mob)
+		return mob.MayRespawn()
+
+	// Something went wrong, client is usually kicked or transfered to a new mob at this point
+	return 0

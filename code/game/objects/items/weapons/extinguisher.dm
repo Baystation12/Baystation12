@@ -11,7 +11,7 @@
 	throw_speed = 2
 	throw_range = 10
 	force = 10.0
-	matter = list("metal" = 90)
+	matter = list(DEFAULT_WALL_MATERIAL = 90)
 	attack_verb = list("slammed", "whacked", "bashed", "thunked", "battered", "bludgeoned", "thrashed")
 
 	var/spray_particles = 6
@@ -115,7 +115,7 @@
 
 		for(var/a=0, a < spray_particles, a++)
 			spawn(0)
-				var/obj/effect/effect/water/W = new /obj/effect/effect/water( get_turf(src) )
+				var/obj/effect/effect/water/W = PoolOrNew(/obj/effect/effect/water, get_turf(src))
 				var/turf/my_target = pick(the_targets)
 				var/datum/reagents/R = new/datum/reagents(spray_amount)
 				if(!W) return
@@ -139,7 +139,7 @@
 							M.ExtinguishMob()
 					if(W.loc == my_target) break
 					sleep(2)
-				W.delete()
+				qdel(W)
 
 		if((istype(usr.loc, /turf/space)) || (usr.lastarea.has_gravity == 0))
 			user.inertia_dir = get_dir(target, user)

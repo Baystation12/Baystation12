@@ -17,7 +17,7 @@
 	var/time_coeff = 1.5 //can be upgraded with research
 	var/resource_coeff = 1.5 //can be upgraded with research
 	var/list/resources = list(
-										"metal"=0,
+										DEFAULT_WALL_MATERIAL=0,
 										"glass"=0,
 										"gold"=0,
 										"silver"=0,
@@ -193,9 +193,9 @@
 	if(time_coeff!=diff)
 		time_coeff = diff
 
-/obj/machinery/mecha_part_fabricator/Del()
+/obj/machinery/mecha_part_fabricator/Destroy()
 	for(var/atom/A in src)
-		del A
+		qdel(A)
 	..()
 	return
 
@@ -268,7 +268,7 @@
 	if(!istype(apart)) return 0
 	for(var/obj/O in part_set)
 		if(O.type == apart.type)
-			del apart
+			qdel(apart)
 			return 0
 	part_set[++part_set.len] = apart
 	return 1
@@ -511,7 +511,7 @@
 		src.updateUsrDialog()
 		sleep(30) //only sleep if called by user
 	var/found = 0
-	for(var/obj/machinery/computer/rdconsole/RDC in get_area(src))
+	for(var/obj/machinery/computer/rdconsole/RDC in get_area_all_atoms(get_area(src)))
 		if(!RDC.sync)
 			continue
 		found++
@@ -719,7 +719,7 @@
 /obj/machinery/mecha_part_fabricator/proc/remove_material(var/mat_string, var/amount)
 	var/type
 	switch(mat_string)
-		if("metal")
+		if(DEFAULT_WALL_MATERIAL)
 			type = /obj/item/stack/sheet/metal
 		if("glass")
 			type = /obj/item/stack/sheet/glass
@@ -749,7 +749,7 @@
 		res.Move(src.loc)
 		result = res.amount
 	else
-		del res
+		qdel(res)
 	return result
 
 
@@ -774,9 +774,9 @@
 				if(I.reliability != 100 && crit_fail)
 					I.crit_fail = 1
 				I.loc = src.loc
-			if(src.resources["metal"] >= 3750)
+			if(src.resources[DEFAULT_WALL_MATERIAL] >= 3750)
 				var/obj/item/stack/sheet/metal/G = new /obj/item/stack/sheet/metal(src.loc)
-				G.amount = round(src.resources["metal"] / G.perunit)
+				G.amount = round(src.resources[DEFAULT_WALL_MATERIAL] / G.perunit)
 			if(src.resources["glass"] >= 3750)
 				var/obj/item/stack/sheet/glass/G = new /obj/item/stack/sheet/glass(src.loc)
 				G.amount = round(src.resources["glass"] / G.perunit)
@@ -795,7 +795,7 @@
 			if(src.resources["diamond"] >= 2000)
 				var/obj/item/stack/sheet/mineral/diamond/G = new /obj/item/stack/sheet/mineral/diamond(src.loc)
 				G.amount = round(src.resources["diamond"] / G.perunit)
-			del(src)
+			qdel(src)
 			return 1
 		else
 			user << "\red You can't load the [src.name] while it's opened."
@@ -816,7 +816,7 @@
 		if(/obj/item/stack/sheet/mineral/phoron)
 			material = "phoron"
 		if(/obj/item/stack/sheet/metal)
-			material = "metal"
+			material = DEFAULT_WALL_MATERIAL
 		if(/obj/item/stack/sheet/glass)
 			material = "glass"
 		if(/obj/item/stack/sheet/mineral/uranium)
