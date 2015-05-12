@@ -22,13 +22,13 @@
 	var/obj/item/weapon/tank/phoron/ptank = null
 
 
-/obj/item/weapon/flamethrower/Del()
+/obj/item/weapon/flamethrower/Destroy()
 	if(weldtool)
-		del(weldtool)
+		qdel(weldtool)
 	if(igniter)
-		del(igniter)
+		qdel(igniter)
 	if(ptank)
-		del(ptank)
+		qdel(ptank)
 	..()
 	return
 
@@ -82,8 +82,8 @@
 		if(ptank)
 			ptank.loc = T
 			ptank = null
-		new /obj/item/stack/rods(T)
-		del(src)
+		PoolOrNew(/obj/item/stack/rods, T)
+		qdel(src)
 		return
 
 	if(isscrewdriver(W) && igniter && !lit)

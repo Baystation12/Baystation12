@@ -1,7 +1,7 @@
 mob/living/carbon/verb/give(var/mob/living/carbon/target in view(1)-usr)
 	set category = "IC"
 	set name = "Give"
-	if(target.stat == 2 || usr.stat == 2|| target.client == null)
+	if(!istype(target) || target.stat == 2 || usr.stat == 2|| target.client == null)
 		return
 	var/obj/item/I
 	if(!usr.hand && usr.r_hand == null)

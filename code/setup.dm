@@ -1,5 +1,10 @@
 #define DEBUG
 
+#define GAME_STATE_PREGAME		1
+#define GAME_STATE_SETTING_UP	2
+#define GAME_STATE_PLAYING		3
+#define GAME_STATE_FINISHED		4
+
 // Math constants.
 #define M_E     2.71828183
 #define M_PI    3.14159265
@@ -192,6 +197,7 @@
 #define NOBLOODY           512  // Used for items if they don't want to get a blood overlay.
 #define NODELAY            8192 // 1 second attack-by delay skipped (Can be used once every 0.2s). Most objects have a 1s attack-by delay, which doesn't require a flag.
 
+//Use these flags to indicate if an item obscures the specified slots from view, whereas body_parts_covered seems to be used to indicate what body parts the item protects.
 #define GLASSESCOVERSEYES 256
 #define    MASKCOVERSEYES 256 // Get rid of some of the other retardation in these flags.
 #define    HEADCOVERSEYES 256 // Feel free to reallocate these numbers for other purposes.
@@ -255,10 +261,12 @@
 #define slot_legs        21
 #define slot_tie         22
 
-// Mob sprite sheets. These need to be strings as numbers
-// cannot be used as associative list keys.
-#define icon_l_hand		"slot_l_hand"
-#define icon_r_hand		"slot_r_hand"
+// Inventory slot strings. 
+// since numbers cannot be used as associative list keys.
+#define slot_back_str		"back"
+#define slot_l_hand_str		"slot_l_hand"
+#define slot_r_hand_str		"slot_r_hand"
+#define slot_w_uniform_str	"w_uniform"
 
 // Bitflags for clothing parts.
 #define HEAD        1
@@ -917,3 +925,34 @@ var/list/be_special_flags = list(
 #define STAGE_FOUR	7
 #define STAGE_FIVE	9
 #define STAGE_SUPER	11
+
+// Camera networks
+#define NETWORK_CRESCENT "Crescent"
+#define NETWORK_CIVILIAN_EAST "Civilian East"
+#define NETWORK_CIVILIAN_WEST "Civilian West"
+#define NETWORK_COMMAND "Command"
+#define NETWORK_ENGINE "Engine"
+#define NETWORK_ENGINEERING "Engineering"
+#define NETWORK_ENGINEERING_OUTPOST "Engineering Outpost"
+#define NETWORK_ERT "ERT"
+#define NETWORK_EXODUS "Exodus"
+#define NETWORK_MEDICAL "Medical"
+#define NETWORK_MINE "MINE"
+#define NETWORK_RESEARCH "Research"
+#define NETWORK_RESEARCH_OUTPOST "Research Outpost"
+#define NETWORK_PRISON "Prison"
+#define NETWORK_SECURITY "Security"
+#define NETWORK_TELECOM "Tcomsat"
+#define NETWORK_THUNDER "thunder"
+
+// Languages
+#define LANGUAGE_SOL_COMMON "Sol Common"
+#define LANGUAGE_UNATHI "Sinta'unathi"
+#define LANGUAGE_SIIK_MAAS "Siik'maas"
+#define LANGUAGE_SIIK_TAJR "Siik'tajr"
+#define LANGUAGE_SKRELLIAN "Skrellian"
+#define LANGUAGE_ROOTSPEAK "Rootspeak"
+#define LANGUAGE_TRADEBAND "Tradeband"
+#define LANGUAGE_GUTTER "Gutter"
+
+#define CLAMP01(x) max(0, min(1, x))

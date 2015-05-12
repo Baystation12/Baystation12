@@ -31,7 +31,7 @@
 	add_language("Galactic Common")
 	init_subsystems()
 
-/mob/living/silicon/Del()
+/mob/living/silicon/Destroy()
 	for(var/datum/alarm_handler/AH in alarm_manager.all_handlers)
 		AH.unregister(src)
 	..()
@@ -277,14 +277,6 @@
 				adjustBruteLoss(30)
 
 	updatehealth()
-
-/mob/living/silicon/proc/init_subsystems()
-	alarm_monitor = new/obj/nano_module/alarm_monitor/borg(src)
-	law_manager = new/obj/nano_module/law_manager(src)
-
-	for(var/datum/alarm_handler/AH in alarm_manager.all_handlers)
-		AH.register(src, /mob/living/silicon/proc/receive_alarm)
-		queued_alarms[AH] = list()	// Makes sure alarms remain listed in consistent order
 
 /mob/living/silicon/proc/receive_alarm(var/datum/alarm_handler/alarm_handler, var/datum/alarm/alarm, was_raised)
 	if(!next_alarm_notice)

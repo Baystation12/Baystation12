@@ -19,14 +19,14 @@ datum/controller/game_controller/New()
 	if(master_controller != src)
 		log_debug("Rebuilding Master Controller")
 		if(istype(master_controller))
-			del(master_controller)
+			qdel(master_controller)
 		master_controller = src
 
 	if(!job_master)
 		job_master = new /datum/controller/occupations()
 		job_master.SetupOccupations()
 		job_master.LoadJobs("config/jobs.txt")
-		world << "<span class='danger'>Job setup complete</span>"
+		admin_notice("<span class='danger'>Job setup complete</span>", R_DEBUG)
 
 	if(!syndicate_code_phrase)		syndicate_code_phrase	= generate_code_phrase()
 	if(!syndicate_code_response)	syndicate_code_response	= generate_code_phrase()
@@ -46,17 +46,17 @@ datum/controller/game_controller/proc/setup()
 
 
 datum/controller/game_controller/proc/setup_objects()
-	world << "<span class='danger'>Initializing objects</span>"
+	admin_notice("<span class='danger'>Initializing objects</span>", R_DEBUG)
 	sleep(-1)
 	for(var/atom/movable/object in world)
 		object.initialize()
 
-	world << "<span class='danger'>Initializing pipe networks</span>"
+	admin_notice("<span class='danger'>Initializing pipe networks</span>", R_DEBUG)
 	sleep(-1)
 	for(var/obj/machinery/atmospherics/machine in machines)
 		machine.build_network()
 
-	world << "<span class='danger'>Initializing atmos machinery.</span>"
+	admin_notice("<span class='danger'>Initializing atmos machinery.</span>", R_DEBUG)
 	sleep(-1)
 	for(var/obj/machinery/atmospherics/unary/U in machines)
 		if(istype(U, /obj/machinery/atmospherics/unary/vent_pump))
@@ -77,5 +77,5 @@ datum/controller/game_controller/proc/setup_objects()
 	//Set up spawn points.
 	populate_spawn_points()
 
-	world << "<span class='danger'>Initializations complete.</span>"
+	admin_notice("<span class='danger'>Initializations complete.</span>", R_DEBUG)
 	sleep(-1)

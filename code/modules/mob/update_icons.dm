@@ -2,8 +2,11 @@
 //Having them here also makes for a nice reference list of the various overlay-updating procs available
 
 //default item on-mob icons
+#define INV_BACK_DEF_ICON 'icons/mob/back.dmi'
 #define INV_L_HAND_DEF_ICON 'icons/mob/items/lefthand.dmi'
 #define INV_R_HAND_DEF_ICON 'icons/mob/items/righthand.dmi'
+#define INV_W_UNIFORM_DEF_ICON 'icons/mob/uniform.dmi'
+#define INV_ACCESSORIES_DEF_ICON 'icons/mob/ties.dmi'
 
 
 /mob/proc/regenerate_icons()		//TODO: phase this out completely if possible

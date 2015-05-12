@@ -21,7 +21,7 @@
 	..()
 
 	var/destination = null
-	for(var/obj/machinery/singularity/narsie/large/N in narsie_list)
+	for(var/obj/singularity/narsie/large/N in narsie_list)
 		destination = N.loc
 		break
 	if(destination)

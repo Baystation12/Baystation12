@@ -81,10 +81,10 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 	real_name = name
 	..()
 
-/mob/dead/observer/Del()
+/mob/dead/observer/Destroy()
 	if (ghostimage)
 		ghost_darkness_images -= ghostimage
-		del(ghostimage)
+		qdel(ghostimage)
 		ghostimage = null
 		updateallghostimages()
 	..()
@@ -436,9 +436,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		src << "<span class='warning'>Spawning as a mouse is currently disabled.</span>"
 		return
 
-	var/mob/dead/observer/M = usr
-	if(config.antag_hud_restricted && M.has_enabled_antagHUD == 1)
-		src << "<span class='warning'>antagHUD restrictions prevent you from spawning in as a mouse.</span>"
+	if(!MayRespawn(1))
 		return
 
 	var/timedifference = world.time - client.time_died_as_mouse
@@ -484,6 +482,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 //This is called when a ghost is drag clicked to something.
 /mob/dead/observer/MouseDrop(atom/over)
+	if(!usr || !over) return
 	if (isobserver(usr) && usr.client && usr.client.holder && isliving(over))
 		if (usr.client.holder.cmd_ghost_drag(src,over))
 			return
@@ -597,7 +596,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	for(var/image/I in client.images)
 		if(I.icon_state == icon)
 			iconRemoved = 1
-			del(I)
+			qdel(I)
 
 	if(!iconRemoved)
 		var/image/J = image('icons/mob/mob.dmi', loc = src, icon_state = icon)
@@ -676,3 +675,10 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		client.images |= ghost_darkness_images
 		if (ghostimage)
 			client.images -= ghostimage //remove ourself
+
+mob/dead/observer/MayRespawn(var/feedback = 0)
+	if(config.antag_hud_restricted && has_enabled_antagHUD == 1)
+		if(feedback)
+			src << "<span class='warning'>antagHUD restrictions prevent you from respawning.</span>"
+		return 0
+	return 1

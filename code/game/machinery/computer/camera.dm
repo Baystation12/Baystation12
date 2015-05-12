@@ -1,19 +1,20 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:31
 
+/var/camera_cache_id = 1
+
 /proc/invalidateCameraCache()
-	for(var/obj/machinery/computer/security/s in world)
-		s.camera_cache = null
-	for(var/datum/alarm/A in world)
-		A.cameras = null
+	camera_cache_id = (++camera_cache_id % 999999)
 
 /obj/machinery/computer/security
 	name = "security camera monitor"
 	desc = "Used to access the various cameras on the station."
 	icon_state = "cameras"
+	light_color = "#a91515"
 	var/obj/machinery/camera/current = null
 	var/last_pic = 1.0
 	var/list/network
 	var/mapping = 0//For the overview file, interesting bit of code.
+	var/cache_id = 0
 	circuit = /obj/item/weapon/circuitboard/security
 	var/camera_cache = null
 
@@ -42,7 +43,8 @@
 
 		data["current"] = null
 
-		if(isnull(camera_cache))
+		if(camera_cache_id != cache_id)
+			cache_id = camera_cache_id
 			cameranet.process_sort()
 
 			var/cameras[0]

@@ -175,7 +175,7 @@
 
 	if(mob.control_object)	Move_object(direct)
 
-	if(mob.incorporeal_move)
+	if(mob.incorporeal_move && isobserver(mob))
 		Process_Incorpmove(direct)
 		return
 
@@ -188,7 +188,7 @@
 			if(S.victim == mob)
 				return
 
-	if(mob.stat==2)
+	if(mob.stat==DEAD && isliving(mob))
 		mob.ghostize()
 		return
 
@@ -200,6 +200,9 @@
 
 	if(isliving(mob))
 		var/mob/living/L = mob
+		if(L.incorporeal_move)//Move though walls
+			Process_Incorpmove(direct)
+			return
 		if(mob.client)
 			if(mob.client.view != world.view) // If mob moves while zoomed in with device, unzoom them.
 				for(var/obj/item/item in mob.contents)
@@ -371,6 +374,7 @@
 			var/turf/T = get_step(mob, direct)
 			if(mob.check_holy(T))
 				mob << "<span class='warning'>You cannot get past holy grounds while you are in this plane of existence!</span>"
+				return
 			else
 				mob.loc = get_step(mob, direct)
 				mob.dir = direct

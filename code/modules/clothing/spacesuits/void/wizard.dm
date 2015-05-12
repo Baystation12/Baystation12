@@ -4,7 +4,6 @@
 	desc = "A bizarre gem-encrusted helmet that radiates magical energies."
 	icon_state = "rig0-wiz"
 	item_state = "wiz_helm"
-	item_color = "wiz"
 	unacidable = 1 //No longer shall our kind be foiled by lone chemists with spray bottles!
 	armor = list(melee = 40, bullet = 20, laser = 20,energy = 20, bomb = 35, bio = 100, rad = 60)
 	siemens_coefficient = 0.7

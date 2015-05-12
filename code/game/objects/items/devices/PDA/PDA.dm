@@ -308,15 +308,6 @@ var/global/list/obj/item/device/pda/PDAs = list()
 /*
  *	The Actual PDA
  */
-/obj/item/device/pda/pickup(mob/user)
-	if(fon)
-		SetLuminosity(0)
-		user.SetLuminosity(user.luminosity + f_lum)
-
-/obj/item/device/pda/dropped(mob/user)
-	if(fon)
-		user.SetLuminosity(user.luminosity - f_lum)
-		SetLuminosity(f_lum)
 
 /obj/item/device/pda/New()
 	..()
@@ -617,16 +608,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			ownrank = id.rank
 			name = "PDA-[owner] ([ownjob])"
 		if("Eject")//Ejects the cart, only done from hub.
-			if (!isnull(cartridge))
-				var/turf/T = loc
-				if(ismob(T))
-					T = T.loc
-				cartridge.loc = T
-				mode = 0
-				scanmode = 0
-				if (cartridge.radio)
-					cartridge.radio.hostpda = null
-				cartridge = null
+			verb_remove_cartridge()
 
 //MENU FUNCTIONS===================================
 
@@ -653,12 +635,10 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		if("Light")
 			if(fon)
 				fon = 0
-				if(src in U.contents)	U.SetLuminosity(U.luminosity - f_lum)
-				else					SetLuminosity(0)
+				set_light(0)
 			else
 				fon = 1
-				if(src in U.contents)	U.SetLuminosity(U.luminosity + f_lum)
-				else					SetLuminosity(f_lum)
+				set_light(f_lum)
 		if("Medical Scan")
 			if(scanmode == 1)
 				scanmode = 0
@@ -947,7 +927,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		j = prob(10)
 
 	if(j) //This kills the PDA
-		P.Del()
+		qdel(P)
 		if(message)
 			message += "It melts in a puddle of plastic."
 		else
@@ -1120,6 +1100,30 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	else
 		usr << "<span class='notice'>You cannot do this while restrained.</span>"
 
+/obj/item/device/pda/verb/verb_remove_cartridge()
+	set category = "Object"
+	set name = "Remove cartridge"
+	set src in usr
+
+	if(issilicon(usr))
+		return
+
+	if (can_use(usr) && !isnull(cartridge))
+		var/turf/T = get_turf(src)
+		cartridge.loc = T
+		if (ismob(loc))
+			var/mob/M = loc
+			M.put_in_hands(cartridge)
+		else
+			cartridge.loc = get_turf(src)
+		mode = 0
+		scanmode = 0
+		if (cartridge.radio)
+			cartridge.radio.hostpda = null
+		cartridge = null
+		usr << "<span class='notice'>You remove \the [cartridge] from the [name].</span>"
+	else
+		usr << "<span class='notice'>You cannot do this while restrained.</span>"
 
 /obj/item/device/pda/proc/id_check(mob/user as mob, choice as num)//To check for IDs; 1 for in-pda use, 2 for out of pda use.
 	if(choice == 1)
@@ -1225,7 +1229,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 				if ( !(C:blood_DNA) )
 					user << "\blue No blood found on [C]"
 					if(C:blood_DNA)
-						del(C:blood_DNA)
+						qdel(C:blood_DNA)
 				else
 					user << "\blue Blood found on [C]. Analysing..."
 					spawn(15)
@@ -1355,7 +1359,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		explosion(T, 0, 0, 1, rand(1,2))
 	return
 
-/obj/item/device/pda/Del()
+/obj/item/device/pda/Destroy()
 	PDAs -= src
 	if (src.id && prob(90)) //IDs are kept in 90% of the cases
 		src.id.loc = get_turf(src.loc)

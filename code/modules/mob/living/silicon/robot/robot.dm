@@ -73,7 +73,6 @@
 	var/datum/effect/effect/system/ion_trail_follow/ion_trail = null
 	var/datum/effect/effect/system/spark_spread/spark_system//So they can initialize sparks whenever/N
 	var/jeton = 0
-	var/borgwires = 31 // 0b11111
 	var/killswitch = 0
 	var/killswitch_time = 60
 	var/weapon_lock = 0
@@ -227,13 +226,27 @@
 
 //If there's an MMI in the robot, have it ejected when the mob goes away. --NEO
 //Improved /N
-/mob/living/silicon/robot/Del()
-	if(mmi)//Safety for when a cyborg gets dust()ed. Or there is no MMI inside.
+/mob/living/silicon/robot/Destroy()
+	if(mmi && mind)//Safety for when a cyborg gets dust()ed. Or there is no MMI inside.
 		var/turf/T = get_turf(loc)//To hopefully prevent run time errors.
 		if(T)	mmi.loc = T
-		if(mind)	mind.transfer_to(mmi.brainmob)
+		if(mmi.brainmob)
+			mind.transfer_to(mmi.brainmob)
+		else
+			src << "<span class='danger'>Oops! Something went very wrong, your MMI was unable to receive your mind. You have been ghosted. Please make a bug report so we can fix this bug.</span>"
+			ghostize()
+			//ERROR("A borg has been destroyed, but its MMI lacked a brainmob, so the mind could not be transferred. Player: [ckey].")
 		mmi = null
+	if(connected_ai)
+		connected_ai.connected_robots -= src
 	..()
+
+/mob/living/silicon/robot/proc/set_module_sprites(var/list/new_sprites)
+	module_sprites = new_sprites
+	//Custom_sprite check and entry
+	if (custom_sprite == 1)
+		module_sprites["Custom"] = "[src.ckey]-[modtype]"
+	return module_sprites
 
 /mob/living/silicon/robot/proc/pick_module()
 	if(module)
@@ -247,138 +260,17 @@
 
 	if(module)
 		return
+	if(!(modtype in robot_modules))
+		return
 
-	module_sprites = list()
-	switch(modtype)
-		if("Standard")
-			module = new /obj/item/weapon/robot_module/standard(src)
-			module_sprites["Basic"] = "robot_old"
-			module_sprites["Android"] = "droid"
-			module_sprites["Default"] = "robot"
-			module_sprites["Drone"] = "drone-standard"
-
-		if("Service")
-			module = new /obj/item/weapon/robot_module/butler(src)
-			module.channels = list("Service" = 1)
-			module_sprites["Waitress"] = "Service"
-			module_sprites["Kent"] = "toiletbot"
-			module_sprites["Bro"] = "Brobot"
-			module_sprites["Rich"] = "maximillion"
-			module_sprites["Default"] = "Service2"
-			module_sprites["Drone - Service"] = "drone-service"
-			module_sprites["Drone - Hydro"] = "drone-hydro"
-
-		if("Clerical")
-			module = new /obj/item/weapon/robot_module/clerical(src)
-			module.channels = list("Service" = 1)
-			module_sprites["Waitress"] = "Service"
-			module_sprites["Kent"] = "toiletbot"
-			module_sprites["Bro"] = "Brobot"
-			module_sprites["Rich"] = "maximillion"
-			module_sprites["Default"] = "Service2"
-			module_sprites["Drone"] = "drone-service"
-
-		if("Research")
-			module = new /obj/item/weapon/robot_module/research(src)
-			module.channels = list("Science" = 1)
-			module_sprites["Droid"] = "droid-science"
-			module_sprites["Drone"] = "drone-science"
-
-		if("Miner")
-			module = new /obj/item/weapon/robot_module/miner(src)
-			module.channels = list("Supply" = 1)
-			if(camera && "Robots" in camera.network)
-				camera.add_network("MINE")
-			module_sprites["Basic"] = "Miner_old"
-			module_sprites["Advanced Droid"] = "droid-miner"
-			module_sprites["Treadhead"] = "Miner"
-			module_sprites["Drone"] = "drone-miner"
-
-		if("Crisis")
-			module = new /obj/item/weapon/robot_module/crisis(src)
-			module.channels = list("Medical" = 1)
-			if(camera && "Robots" in camera.network)
-				camera.add_network("Medical")
-			module_sprites["Basic"] = "Medbot"
-			module_sprites["Standard"] = "surgeon"
-			module_sprites["Advanced Droid"] = "droid-medical"
-			module_sprites["Needles"] = "medicalrobot"
-			module_sprites["Drone - Medical" ] = "drone-medical"
-			module_sprites["Drone - Chemistry" ] = "drone-chemistry"
-
-		if("Surgeon")
-			module = new /obj/item/weapon/robot_module/surgeon(src)
-			module.channels = list("Medical" = 1)
-			if(camera && "Robots" in camera.network)
-				camera.add_network("Medical")
-
-			module_sprites["Basic"] = "Medbot"
-			module_sprites["Standard"] = "surgeon"
-			module_sprites["Advanced Droid"] = "droid-medical"
-			module_sprites["Needles"] = "medicalrobot"
-			module_sprites["Drone"] = "drone-surgery"
-
-		if("Security")
-			module = new /obj/item/weapon/robot_module/security(src)
-			module.channels = list("Security" = 1)
-			module_sprites["Basic"] = "secborg"
-			module_sprites["Red Knight"] = "Security"
-			module_sprites["Black Knight"] = "securityrobot"
-			module_sprites["Bloodhound"] = "bloodhound"
-			module_sprites["Bloodhound - Treaded"] = "secborg+tread"
-			module_sprites["Drone"] = "drone-sec"
-
-		if("Engineering")
-			module = new /obj/item/weapon/robot_module/engineering(src)
-			module.channels = list("Engineering" = 1)
-			if(camera && "Robots" in camera.network)
-				camera.add_network("Engineering")
-			module_sprites["Basic"] = "Engineering"
-			module_sprites["Antique"] = "engineerrobot"
-			module_sprites["Landmate"] = "landmate"
-			module_sprites["Landmate - Treaded"] = "engiborg+tread"
-			module_sprites["Drone"] = "drone-engineer"
-
-		if("Construction")
-			module = new /obj/item/weapon/robot_module/construction(src)
-			module.channels = list("Engineering" = 1)
-			if(camera && "Robots" in camera.network)
-				camera.add_network("Engineering")
-			module_sprites["Basic"] = "Engineering"
-			module_sprites["Antique"] = "engineerrobot"
-			module_sprites["Landmate"] = "landmate"
-			module_sprites["Landmate - Treaded"] = "engiborg+tread"
-			module_sprites["Drone"] = "drone-engineer"
-
-		if("Janitor")
-			module = new /obj/item/weapon/robot_module/janitor(src)
-			module.channels = list("Service" = 1)
-			module_sprites["Basic"] = "JanBot2"
-			module_sprites["Mopbot"]  = "janitorrobot"
-			module_sprites["Mop Gear Rex"] = "mopgearrex"
-			module_sprites["Drone"] = "drone-janitor"
-
-		if("Combat")
-			module = new /obj/item/weapon/robot_module/combat(src)
-			module_sprites["Combat Android"] = "droid-combat"
-			module.channels = list("Security" = 1)
-
-	//languages
-	module.add_languages(src)
-
-	//Custom_sprite check and entry
-	if (custom_sprite == 1)
-		module_sprites["Custom"] = "[src.ckey]-[modtype]"
+	var/module_type = robot_modules[modtype]
+	module = new module_type(src)
 
 	hands.icon_state = lowertext(modtype)
 	feedback_inc("cyborg_[lowertext(modtype)]",1)
 	updatename()
-
-	if(modtype == "Medical" || modtype == "Security" || modtype == "Combat")
-		status_flags &= ~CANPUSH
-
-	choose_icon(6,module_sprites)
-	radio.config(module.channels)
+	set_module_sprites(module.sprites)
+	choose_icon(module_sprites.len + 1, module_sprites)
 	notify_ai(ROBOT_NOTIFICATION_NEW_MODULE, module.name)
 
 /mob/living/silicon/robot/proc/updatename(var/prefix as text)
@@ -396,10 +288,10 @@
 	var/changed_name = ""
 	if(custom_name)
 		changed_name = custom_name
+		notify_ai(ROBOT_NOTIFICATION_NEW_NAME, real_name, changed_name)
 	else
 		changed_name = "[modtype] [braintype]-[num2text(ident)]"
 
-	notify_ai(ROBOT_NOTIFICATION_NEW_NAME, real_name, changed_name)
 	real_name = changed_name
 	name = real_name
 
@@ -475,9 +367,9 @@
 	lights_on = !lights_on
 	usr << "You [lights_on ? "enable" : "disable"] your integrated light."
 	if(lights_on)
-		SetLuminosity(integrated_light_power) // 1.5x luminosity of flashlight
+		set_light(integrated_light_power) // 1.5x luminosity of flashlight
 	else
-		SetLuminosity(0)
+		set_light(0)
 
 /mob/living/silicon/robot/verb/self_diagnosis_verb()
 	set category = "Robot Commands"
@@ -662,7 +554,7 @@
 				C.r_arm = new/obj/item/robot_parts/r_arm(C)
 				C.updateicon()
 				new/obj/item/robot_parts/chest(loc)
-				src.Del()
+				qdel(src)
 			else
 				// Okay we're not removing the cell or an MMI, but maybe something else?
 				var/list/removable_components = list()
@@ -803,11 +695,14 @@
 					src << "<b>Obey these laws:</b>"
 					laws.show_laws(src)
 					src << "\red \b ALERT: [user.real_name] is your new master. Obey your new laws and his commands."
-					if(src.module && istype(src.module, /obj/item/weapon/robot_module/miner))
+					if(src.module)
+						var/rebuild = 0
 						for(var/obj/item/weapon/pickaxe/borgdrill/D in src.module.modules)
-							del(D)
-						src.module.modules += new /obj/item/weapon/pickaxe/diamonddrill(src.module)
-						src.module.rebuild()
+							qdel(D)
+							rebuild = 1
+						if(rebuild)
+							src.module.modules += new /obj/item/weapon/pickaxe/diamonddrill(src.module)
+							src.module.rebuild()
 					updateicon()
 				else
 					user << "You fail to hack [src]'s interface."
@@ -897,7 +792,6 @@
 	return 0
 
 /mob/living/silicon/robot/updateicon()
-
 	overlays.Cut()
 	if(stat == 0)
 		overlays += "eyes-[module_sprites[icontype]]"
@@ -924,7 +818,7 @@
 //Call when target overlay should be added/removed
 /mob/living/silicon/robot/update_targeted()
 	if(!targeted_by && target_locked)
-		del(target_locked)
+		qdel(target_locked)
 	updateicon()
 	if (targeted_by && target_locked)
 		overlays += target_locked
@@ -1058,7 +952,7 @@
 				for(var/A in tile)
 					if(istype(A, /obj/effect))
 						if(istype(A, /obj/effect/rune) || istype(A, /obj/effect/decal/cleanable) || istype(A, /obj/effect/overlay))
-							del(A)
+							qdel(A)
 					else if(istype(A, /obj/item))
 						var/obj/item/cleaned_item = A
 						cleaned_item.clean_blood()
@@ -1127,7 +1021,6 @@
 	return
 
 /mob/living/silicon/robot/proc/choose_icon(var/triesleft, var/list/module_sprites)
-
 	if(triesleft<1 || !module_sprites.len)
 		return
 	else
@@ -1136,6 +1029,8 @@
 	if (custom_sprite == 1)
 		icontype = "Custom"
 		triesleft = 0
+	else if(module_sprites.len == 1)
+		icontype = module_sprites[1]
 	else
 		icontype = input("Select an icon! [triesleft ? "You have [triesleft] more chances." : "This is your last try."]", "Robot", null, null) in module_sprites
 
@@ -1146,13 +1041,13 @@
 		icon_state = module_sprites[1]
 		return
 
-	overlays -= "eyes"
 	updateicon()
 
 	if (triesleft >= 1)
 		var/choice = input("Look at your icon - is this what you want?") in list("Yes","No")
 		if(choice=="No")
 			choose_icon(triesleft, module_sprites)
+			return
 		else
 			triesleft = 0
 			return
@@ -1167,11 +1062,11 @@
 
 /mob/living/silicon/robot/proc/add_robot_verbs()
 	src.verbs |= robot_verbs_default
-	src.verbs |= silicon_verbs_subsystems
+	src.verbs |= silicon_subsystems
 
 /mob/living/silicon/robot/proc/remove_robot_verbs()
 	src.verbs -= robot_verbs_default
-	src.verbs -= silicon_verbs_subsystems
+	src.verbs -= silicon_subsystems
 
 // Uses power from cyborg's cell. Returns 1 on success or 0 on failure.
 // Properly converts using CELLRATE now! Amount is in Joules.

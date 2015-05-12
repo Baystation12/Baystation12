@@ -28,7 +28,7 @@
 		/obj/machinery/atmospherics/unary/cryo_cell,
 		/obj/machinery/dna_scannernew,
 		/obj/item/weapon/grenade/chem_grenade,
-		/obj/machinery/bot/medbot,
+		/mob/living/bot/medbot,
 		/obj/machinery/computer/pandemic,
 		/obj/item/weapon/storage/secure/safe,
 		/obj/machinery/iv_drip,
@@ -195,7 +195,7 @@
 				if(80 to 90)	filling.icon_state = "[icon_state]80"
 				if(91 to INFINITY)	filling.icon_state = "[icon_state]100"
 
-			filling.color = mix_color_from_reagents(reagents.reagent_list)
+			filling.color = reagents.get_color()
 			overlays += filling
 
 		if (!is_open_container())
@@ -270,10 +270,10 @@
 	attackby(var/obj/D, mob/user as mob)
 		if(isprox(D))
 			user << "You add [D] to [src]."
-			del(D)
+			qdel(D)
 			user.put_in_hands(new /obj/item/weapon/bucket_sensor)
 			user.drop_from_inventory(src)
-			del(src)
+			qdel(src)
 
 	update_icon()
 		overlays.Cut()

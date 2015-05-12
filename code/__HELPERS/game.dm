@@ -16,22 +16,25 @@
 		return 1
 	return 0
 
+/proc/max_default_z_level()
+	return max(config.station_levels, max(config.admin_levels, config.player_levels))
+
 /proc/get_area(O)
 	var/turf/loc = get_turf(O)
-	if(!loc)
-		return null
-	return loc.loc
+	if(loc)
+		var/area/res = loc.loc
+		.= res
 
 /proc/get_area_name(N) //get area by its name
 	for(var/area/A in world)
 		if(A.name == N)
 			return A
 	return 0
-    
+
 /proc/get_area_master(const/O)
 	var/area/A = get_area(O)
 	if (isarea(A))
-		return A.master
+		return A
 
 /proc/in_range(source, user)
 	if(get_dist(source, user) <= 1)
@@ -65,18 +68,6 @@
 
 /proc/isNotAdminLevel(var/level)
 	return !isAdminLevel(level)
-
-//Magic constants obtained by using linear regression on right-angled triangles of sides 0<x<1, 0<y<1
-//They should approximate pythagoras theorem well enough for our needs.
-#define k1 0.934
-#define k2 0.427
-/proc/cheap_hypotenuse(Ax,Ay,Bx,By) // T is just the second atom to check distance to center with
-	var/dx = abs(Ax - Bx)	//sides of right-angled triangle
-	var/dy = abs(Ay - By)
-	if(dx>=dy)	return (k1*dx) + (k2*dy)	//No sqrt or powers :)
-	else		return (k2*dx) + (k1*dy)
-#undef k1
-#undef k2
 
 /proc/circlerange(center=usr,radius=3)
 
@@ -435,6 +426,34 @@ datum/projectile_data
 	var/b = mixOneColor(weights, blues)
 	return rgb(r,g,b)
 
+/proc/mixOneColor(var/list/weight, var/list/color)
+	if (!weight || !color || length(weight)!=length(color))
+		return 0
+
+	var/contents = length(weight)
+	var/i
+
+	//normalize weights
+	var/listsum = 0
+	for(i=1; i<=contents; i++)
+		listsum += weight[i]
+	for(i=1; i<=contents; i++)
+		weight[i] /= listsum
+
+	//mix them
+	var/mixedcolor = 0
+	for(i=1; i<=contents; i++)
+		mixedcolor += weight[i]*color[i]
+	mixedcolor = round(mixedcolor)
+
+	//until someone writes a formal proof for this algorithm, let's keep this in
+//	if(mixedcolor<0x00 || mixedcolor>0xFF)
+//		return 0
+	//that's not the kind of operation we are running here, nerd
+	mixedcolor=min(max(mixedcolor,0),255)
+
+	return mixedcolor
+
 /**
 * Gets the highest and lowest pressures from the tiles in cardinal directions
 * around us, then checks the difference.
@@ -498,6 +517,6 @@ datum/projectile_data
 
 /proc/MinutesToTicks(var/minutes)
 	return SecondsToTicks(60 * minutes)
-	
+
 /proc/SecondsToTicks(var/seconds)
 	return seconds * 10

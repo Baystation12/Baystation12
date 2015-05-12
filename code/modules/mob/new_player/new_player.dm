@@ -135,7 +135,7 @@
 				if(!client.holder && !config.antag_hud_allowed)           // For new ghosts we remove the verb from even showing up if it's not allowed.
 					observer.verbs -= /mob/dead/observer/verb/toggle_antagHUD        // Poor guys, don't know what they are missing!
 				observer.key = key
-				del(src)
+				qdel(src)
 
 				return 1
 
@@ -327,8 +327,8 @@
 			AnnounceCyborg(character, rank, "has been downloaded to the empty core in \the [character.loc.loc]")
 			ticker.mode.latespawn(character)
 
-			del(C)
-			del(src)
+			qdel(C)
+			qdel(src)
 			return
 
 		//Find our spawning point.
@@ -368,7 +368,7 @@
 		else
 			AnnounceCyborg(character, rank, join_message)
 
-		del(src)
+		qdel(src)
 
 	proc/AnnounceArrival(var/mob/living/carbon/human/character, var/rank, var/join_message)
 		if (ticker.current_state == GAME_STATE_PLAYING)
@@ -527,3 +527,6 @@
 
 /mob/new_player/hear_radio(var/message, var/verb="says", var/datum/language/language=null, var/part_a, var/part_b, var/mob/speaker = null, var/hard_to_hear = 0)
 	return
+
+mob/new_player/MayRespawn()
+	return 1

@@ -174,17 +174,9 @@
 			//So clones don't die of oxyloss in a running pod.
 			if(occupant.reagents.get_reagent_amount("inaprovaline") < 30)
 				occupant.reagents.add_reagent("inaprovaline", 60)
-
-			//So clones will remain asleep for long enough to get them into cryo (Bay RP edit)
-			if(occupant.reagents.get_reagent_amount("stoxin") < 10)
-				occupant.reagents.add_reagent("stoxin", 5)
-			if(occupant.reagents.get_reagent_amount("chloralhydrate") < 1)
-				occupant.reagents.add_reagent("chloralhydrate", 1)
-
+			occupant.Sleeping(30)
 			//Also heal some oxyloss ourselves because inaprovaline is so bad at preventing it!!
 			occupant.adjustOxyLoss(-4)
-			if(notoxin)
-				occupant.adjustToxLoss(-2) // If sufficiently upgraded - remove toxin damage from chloral
 
 			use_power(7500) //This might need tweaking.
 			return
@@ -235,7 +227,7 @@
 		user << "<span class='notice'>\The [src] processes \the [W].</span>"
 		biomass += 50
 		user.drop_item()
-		del(W)
+		qdel(W)
 		return
 	else if(istype(W, /obj/item/weapon/wrench))
 		if(locked && (anchored || occupant))
@@ -328,7 +320,7 @@
 		update_icon()
 		occupant.ghostize()
 		spawn(5)
-			del(occupant)
+			qdel(occupant)
 	return
 
 /obj/machinery/clonepod/relaymove(mob/user as mob)
@@ -348,21 +340,21 @@
 			for(var/atom/movable/A as mob|obj in src)
 				A.loc = loc
 				ex_act(severity)
-			del(src)
+			qdel(src)
 			return
 		if(2.0)
 			if(prob(50))
 				for(var/atom/movable/A as mob|obj in src)
 					A.loc = loc
 					ex_act(severity)
-				del(src)
+				qdel(src)
 				return
 		if(3.0)
 			if(prob(25))
 				for(var/atom/movable/A as mob|obj in src)
 					A.loc = loc
 					ex_act(severity)
-				del(src)
+				qdel(src)
 				return
 		else
 	return
