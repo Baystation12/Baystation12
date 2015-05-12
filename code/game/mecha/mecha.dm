@@ -814,32 +814,6 @@
 		user.visible_message("[user] attaches [W] to [src].", "You attach [W] to [src]")
 		return
 
-	else if(istype(W, /obj/item/device/kit/paint))
-
-		if(occupant)
-			user << "You can't customize a mech while someone is piloting it - that would be unsafe!"
-			return
-
-		var/obj/item/device/kit/paint/P = W
-		var/found = null
-
-		for(var/type in P.allowed_types)
-			if(type==src.initial_icon)
-				found = 1
-				break
-
-		if(!found)
-			user << "That kit isn't meant for use on this class of exosuit."
-			return
-
-		user.visible_message("[user] opens [P] and spends some quality time customising [src].")
-
-		src.name = P.new_name
-		src.desc = P.new_desc
-		src.initial_icon = P.new_icon
-		src.reset_icon()
-		P.use(1, user)
-
 	else
 		call((proc_res["dynattackby"]||src), "dynattackby")(W,user)
 /*

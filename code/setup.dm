@@ -261,7 +261,7 @@
 #define slot_legs        21
 #define slot_tie         22
 
-// Inventory slot strings. 
+// Inventory slot strings.
 // since numbers cannot be used as associative list keys.
 #define slot_back_str		"back"
 #define slot_l_hand_str		"slot_l_hand"
@@ -956,3 +956,12 @@ var/list/be_special_flags = list(
 #define LANGUAGE_GUTTER "Gutter"
 
 #define CLAMP01(x) max(0, min(1, x))
+
+// Convoluted setup so defines can be supplied by Bay12 main server compile script.
+// Should still work fine for people jamming the icons into their repo.
+#ifndef CUSTOM_ITEM_OBJ
+#define CUSTOM_ITEM_OBJ 'icons/obj/custom_items.dmi'
+#endif
+#ifndef CUSTOM_ITEM_MOB
+#define CUSTOM_ITEM_MOB 'icons/mob/custom_items.dmi'
+#endif

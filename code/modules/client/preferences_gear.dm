@@ -893,7 +893,7 @@ var/global/list/gear_datums = list()
 
 /datum/gear/toeless_jackboots
 	display_name = "toe-less jackboots"
-	path = /obj/item/clothing/shoes/jackboots/fluff/kecer_eldraran
+	path = /obj/item/clothing/shoes/jackboots/unathi
 	cost = 1
 	slot = slot_shoes
 
