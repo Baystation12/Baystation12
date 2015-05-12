@@ -245,6 +245,7 @@ var/list/ai_verbs_default = list(
 /obj/machinery/ai_powersupply/process()
 	if(!powered_ai || powered_ai.stat & DEAD)
 		qdel()
+		return
 	if(powered_ai.APU_power)
 		use_power = 0
 		return
