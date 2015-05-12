@@ -123,7 +123,7 @@
 		if(istype(M))
 			for(var/i = (devastated? 1 : 3), i <= oreAmount, i++)
 				new M.stack_type(get_turf(src))
-		del(src)
+		qdel(src)
 
 	ex_act(severity = 1)
 		switch(severity)

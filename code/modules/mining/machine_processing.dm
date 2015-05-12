@@ -154,7 +154,7 @@
 		if(!isnull(ores_stored[O.material]))
 			ores_stored[O.material]++
 
-		del(O)
+		qdel(O)
 
 	if(!active)
 		return

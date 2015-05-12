@@ -11,7 +11,7 @@
 /obj/item/frame/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (istype(W, /obj/item/weapon/wrench))
 		new refund_type( get_turf(src.loc), refund_amt)
-		del(src)
+		qdel(src)
 		return
 	..()
 
@@ -43,7 +43,7 @@
 	M.fingerprints = src.fingerprints
 	M.fingerprintshidden = src.fingerprintshidden
 	M.fingerprintslast = src.fingerprintslast
-	del(src)
+	qdel(src)
 
 /obj/item/frame/fire_alarm
 	name = "fire alarm frame"

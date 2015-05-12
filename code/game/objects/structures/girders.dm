@@ -140,7 +140,7 @@
 		if(wall_fake)
 			T.can_open = 1
 		T.add_hiddenprint(usr)
-		del(src)
+		qdel(src)
 		return
 
 	else if(istype(W, /obj/item/pipe))
@@ -236,7 +236,7 @@
 
 /obj/structure/girder/cult/dismantle()
 	new /obj/effect/decal/remains/human(get_turf(src))
-	del(src)
+	qdel(src)
 
 /obj/structure/girder/cult/attackby(obj/item/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/weapon/wrench))

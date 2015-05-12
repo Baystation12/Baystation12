@@ -236,7 +236,7 @@
 
 /turf/simulated/mineral/proc/clear_ore_effects()
 	for(var/obj/effect/mineral/M in contents)
-		del(M)
+		qdel(M)
 
 /turf/simulated/mineral/proc/DropMineral()
 	if(!mineral)

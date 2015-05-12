@@ -65,7 +65,7 @@ var/list/global/wall_cache = list()
 
 /turf/simulated/wall/proc/clear_plants()
 	for(var/obj/effect/overlay/wallrot/WR in src)
-		del(WR)
+		qdel(WR)
 	for(var/obj/effect/plant/plant in range(src, 1))
 		if(!plant.floor) //shrooms drop to the floor
 			plant.floor = 1
@@ -215,7 +215,8 @@ var/list/global/wall_cache = list()
 	user << "<span class='warning'>The thermite starts melting through the wall.</span>"
 
 	spawn(100)
-		if(O)	del(O)
+		if(O)
+			qdel(O)
 //	F.sd_LumReset()		//TODO: ~Carn
 	return
 
