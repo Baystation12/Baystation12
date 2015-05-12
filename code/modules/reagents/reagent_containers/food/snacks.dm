@@ -49,6 +49,12 @@
 				if(H.species.flags & IS_SYNTHETIC)
 					H << "\red You have a monitor for a head, where do you think you're going to put that?"
 					return
+			
+				var/obj/item/blocked = H.check_mouth_coverage()
+				if(blocked)
+					user << "<span class='warning'>\The [blocked] is in the way!</span>"
+					return
+			
 			if (fullness <= 50)
 				M << "\red You hungrily chew out a piece of [src] and gobble it!"
 			if (fullness > 50 && fullness <= 150)
@@ -64,7 +70,12 @@
 			if(istype(M,/mob/living/carbon/human))
 				var/mob/living/carbon/human/H = M
 				if(H.species.flags & IS_SYNTHETIC)
-					H << "\red They have a monitor for a head, where do you think you're going to put that?"
+					user << "\red They have a monitor for a head, where do you think you're going to put that?"
+					return
+				
+				var/obj/item/blocked = H.check_mouth_coverage()
+				if(blocked)
+					user << "<span class='warning'>\The [blocked] is in the way!</span>"
 					return
 
 			if(!istype(M, /mob/living/carbon/slime))		//If you're feeding it to someone else.

@@ -26,6 +26,11 @@
 				if(H.species.flags & IS_SYNTHETIC)
 					H << "\red You have a monitor for a head, where do you think you're going to put that?"
 					return
+			
+				var/obj/item/blocked = H.check_mouth_coverage()
+				if(blocked)
+					user << "<span class='warning'>\The [blocked] is in the way!</span>"
+					return
 
 			M << "\blue You swallow [src]."
 			M.drop_from_inventory(src) //icon update
@@ -40,7 +45,12 @@
 
 			var/mob/living/carbon/human/H = M
 			if(H.species.flags & IS_SYNTHETIC)
-				H << "\red They have a monitor for a head, where do you think you're going to put that?"
+				user << "\red They have a monitor for a head, where do you think you're going to put that?"
+				return
+			
+			var/obj/item/blocked = H.check_mouth_coverage()
+			if(blocked)
+				user << "<span class='warning'>\The [blocked] is in the way!</span>"
 				return
 
 			for(var/mob/O in viewers(world.view, user))

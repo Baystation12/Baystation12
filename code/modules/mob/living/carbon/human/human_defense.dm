@@ -138,6 +138,14 @@ emp_act
 				return 1
 	return 0
 
+//Used to check if they can be fed food/drinks/pills
+/mob/living/carbon/human/proc/check_mouth_coverage()
+	var/list/protective_gear = list(head, wear_mask, wear_suit, w_uniform)
+	for(var/obj/item/gear in protective_gear)
+		if(istype(gear) && (gear.body_parts_covered & FACE) && (gear.flags & (MASKCOVERSMOUTH|HEADCOVERSMOUTH)))
+			return gear
+	return null
+
 /mob/living/carbon/human/proc/check_shields(var/damage = 0, var/attack_text = "the attack")
 	if(l_hand && istype(l_hand, /obj/item/weapon))//Current base is the prob(50-d/3)
 		var/obj/item/weapon/I = l_hand
