@@ -1015,12 +1015,18 @@ About the new airlock wires panel:
 	else
 		wires = new/datum/wires/airlock(src)
 
+/obj/machinery/door/airlock/initialize()
 	if(src.closeOtherId != null)
-		spawn (5)
-			for (var/obj/machinery/door/airlock/A in world)
-				if(A.closeOtherId == src.closeOtherId && A != src)
-					src.closeOther = A
-					break
+		for (var/obj/machinery/door/airlock/A in world)
+			if(A.closeOtherId == src.closeOtherId && A != src)
+				src.closeOther = A
+				break
+
+/obj/machinery/door/airlock/Destroy()
+	if(wires)
+		qdel(wires)
+		wires = null
+	..()
 
 // Most doors will never be deconstructed over the course of a round,
 // so as an optimization defer the creation of electronics until

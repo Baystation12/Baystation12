@@ -17,7 +17,14 @@
 	return 0
 
 /proc/max_default_z_level()
-	return max(config.station_levels, max(config.admin_levels, config.player_levels))
+	var/max_z = 0
+	for(var/z in config.station_levels)
+		max_z = max(z, max_z)
+	for(var/z in config.admin_levels)
+		max_z = max(z, max_z)
+	for(var/z in config.player_levels)
+		max_z = max(z, max_z)
+	return max_z
 
 /proc/get_area(O)
 	var/turf/loc = get_turf(O)
