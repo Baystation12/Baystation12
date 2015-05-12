@@ -35,7 +35,7 @@
 	icon_state = "crossbow"
 	w_class = 2.0
 	item_state = "crossbow"
-	matter = list("metal" = 2000)
+	matter = list(DEFAULT_WALL_MATERIAL = 2000)
 	origin_tech = "combat=2;magnets=2;syndicate=5"
 	slot_flags = SLOT_BELT
 	silenced = 1
@@ -54,5 +54,5 @@
 	desc = "A weapon favored by mercenary infiltration teams."
 	w_class = 4
 	force = 10
-	matter = list("metal" = 200000)
+	matter = list(DEFAULT_WALL_MATERIAL = 200000)
 	projectile_type = /obj/item/projectile/energy/bolt/large
