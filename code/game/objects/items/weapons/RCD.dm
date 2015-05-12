@@ -13,7 +13,7 @@
 	throw_speed = 1
 	throw_range = 5
 	w_class = 3.0
-	matter = list("metal" = 50000)
+	matter = list(DEFAULT_WALL_MATERIAL = 50000)
 	origin_tech = "engineering=4;materials=2"
 	var/datum/effect/effect/system/spark_spread/spark_system
 	var/stored_matter = 0
@@ -105,9 +105,10 @@
 		build_type =  "floor"
 		build_turf =  /turf/simulated/floor/plating/airless
 	else if(deconstruct && istype(T,/turf/simulated/wall))
+		var/turf/simulated/wall/W = T
 		build_delay = deconstruct ? 50 : 40
 		build_cost =  5
-		build_type =  (!canRwall && istype(T,/turf/simulated/wall/r_wall)) ? null : "wall"
+		build_type =  (!canRwall && W.reinf_material) ? null : "wall"
 		build_turf =  /turf/simulated/floor
 	else if(istype(T,/turf/simulated/floor))
 		build_delay = deconstruct ? 50 : 20
@@ -158,7 +159,7 @@
 	density = 0
 	anchored = 0.0
 	origin_tech = "materials=2"
-	matter = list("metal" = 30000,"glass" = 15000)
+	matter = list(DEFAULT_WALL_MATERIAL = 30000,"glass" = 15000)
 
 /obj/item/weapon/rcd/borg
 	canRwall = 1

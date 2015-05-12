@@ -8,7 +8,7 @@
 	flags = CONDUCT
 	slot_flags = SLOT_BELT
 
-	matter = list("metal" = 50,"glass" = 20)
+	matter = list(DEFAULT_WALL_MATERIAL = 50,"glass" = 20)
 
 	icon_action_button = "action_flashlight"
 	var/on = 0
@@ -119,7 +119,7 @@
 	icon_state = "lampgreen"
 	item_state = "lampgreen"
 	brightness_on = 5
-
+	light_color = "#FFC58F"
 
 /obj/item/device/flashlight/lamp/verb/toggle_light()
 	set name = "Toggle light"
@@ -136,6 +136,7 @@
 	desc = "A red Nanotrasen issued flare. There are instructions on the side, it reads 'pull cord, make light'."
 	w_class = 2.0
 	brightness_on = 7 // Pretty bright.
+	light_color = "#e58775"
 	icon_state = "flare"
 	item_state = "flare"
 	icon_action_button = null	//just pull it manually, neckbeard.

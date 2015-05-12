@@ -70,7 +70,7 @@
 	icon_state = "motion2"
 	origin_tech = "programming=2;magnets=2"
 	construction_time = 50
-	construction_cost = list("metal"=500)
+	construction_cost = list(DEFAULT_WALL_MATERIAL=500)
 
 	proc/get_mecha_info()
 		if(!in_mecha())

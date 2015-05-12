@@ -955,7 +955,12 @@ var/list/be_special_flags = list(
 #define LANGUAGE_TRADEBAND "Tradeband"
 #define LANGUAGE_GUTTER "Gutter"
 
+#define WALL_CAN_OPEN 1
+#define WALL_OPENING 2
+
 #define CLAMP01(x) max(0, min(1, x))
+
+#define DEFAULT_WALL_MATERIAL "steel"
 
 // Convoluted setup so defines can be supplied by Bay12 main server compile script.
 // Should still work fine for people jamming the icons into their repo.

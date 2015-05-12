@@ -215,7 +215,7 @@
 	force = 5.0
 	throwforce = 7.0
 	w_class = 2.0
-	matter = list("metal" = 50)
+	matter = list(DEFAULT_WALL_MATERIAL = 50)
 	attack_verb = list("slashed", "sliced", "cut", "clawed")
 
 //Hatchets and things to kill kudzu
@@ -232,7 +232,7 @@
 	throw_range = 4
 	sharp = 1
 	edge = 1
-	matter = list("metal" = 15000)
+	matter = list(DEFAULT_WALL_MATERIAL = 15000)
 	origin_tech = "materials=2;combat=1"
 	attack_verb = list("chopped", "torn", "cut")
 
