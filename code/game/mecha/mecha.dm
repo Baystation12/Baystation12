@@ -814,13 +814,13 @@
 		user.visible_message("[user] attaches [W] to [src].", "You attach [W] to [src]")
 		return
 
-	else if(istype(W, /obj/item/weapon/paintkit))
+	else if(istype(W, /obj/item/device/kit/paint))
 
 		if(occupant)
 			user << "You can't customize a mech while someone is piloting it - that would be unsafe!"
 			return
 
-		var/obj/item/weapon/paintkit/P = W
+		var/obj/item/device/kit/paint/P = W
 		var/found = null
 
 		for(var/type in P.allowed_types)
@@ -838,9 +838,7 @@
 		src.desc = P.new_desc
 		src.initial_icon = P.new_icon
 		src.reset_icon()
-
-		user.drop_item()
-		qdel(P)
+		P.use(1, user)
 
 	else
 		call((proc_res["dynattackby"]||src), "dynattackby")(W,user)

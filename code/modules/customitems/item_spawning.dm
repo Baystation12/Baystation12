@@ -15,6 +15,10 @@
 	var/item_path = /obj/item
 	var/req_access = 0
 	var/list/req_titles = list()
+	var/kit_name
+	var/kit_desc
+	var/kit_icon
+	var/additional_data
 
 /datum/custom_item/proc/spawn_item(var/newloc)
 	var/obj/item/citem = new item_path(newloc)
@@ -32,6 +36,20 @@
 		item.icon = 'icons/obj/custom_items.dmi'
 		item.icon_override = 'icons/mob/custom_items.dmi'
 		item.icon_state = item_icon
+
+	// Kits are dumb so this is going to have to be hardcoded/snowflake.
+	if(istype(item, /obj/item/device/kit))
+		var/obj/item/device/kit/K = item
+		K.new_name = kit_name
+		K.new_desc = kit_desc
+		K.new_icon = kit_icon
+		if(istype(item, /obj/item/device/kit/paint))
+			var/obj/item/device/kit/paint/kit = item
+			kit.allowed_types = text2list(additional_data, ", ")
+		else if(istype(item, /obj/item/device/kit/suit))
+			var/obj/item/device/kit/suit/kit = item
+			kit.new_light_overlay = additional_data
+
 	return item
 
 //parses the config file into the above listlist
@@ -81,7 +99,14 @@
 				current_data.req_access = field_data
 			if("req_titles")
 				current_data.req_titles = text2list(field_data,", ")
-
+			if("kit_name")
+				current_data.kit_name = field_data
+			if("kit_desc")
+				current_data.kit_desc = field_data
+			if("kit_icon")
+				current_data.kit_icon = field_data
+			if("additional_data")
+				current_data.additional_data = field_data
 	return 1
 
 //gets the relevant list for the key from the listlist if it exists, check to make sure they are meant to have it and then calls the giving function
