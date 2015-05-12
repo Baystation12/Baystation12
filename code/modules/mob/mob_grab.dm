@@ -280,13 +280,14 @@
 	if(!affecting)
 		return
 
-	if(world.time < (last_action + 10))
+	if(world.time < (last_action + 20))
 		return
 
 	if(M == affecting)
 		if(ishuman(M))
 			last_action = world.time
 			var/hit_zone = assailant.zone_sel.selecting
+			flick(hud.icon_state, hud)
 			switch(assailant.a_intent)
 				if(I_HELP)
 					if(force_down)
@@ -345,26 +346,35 @@
 						var/obj/item/clothing/hat = assailant.head
 						if(istype(hat))
 							damage += hat.force * 10
-						affecting.apply_damage(damage*rand(90, 110)/100, BRUTE, "head", affecting:run_armor_check(affecting, "melee"))
+						var/armor = affecting:run_armor_check(affecting, "melee")
+						affecting.apply_damage(damage*rand(90, 110)/100, BRUTE, "head", armor)
 						assailant.apply_damage(10*rand(90, 110)/100, BRUTE, "head", assailant:run_armor_check("head", "melee"))
+						if(!armor && prob(damage))
+							affecting.apply_effect(20, PARALYZE)
+							affecting.visible_message("<span class='danger'>[affecting] has been knocked unconscious!</span>")
 						playsound(assailant.loc, "swing_hit", 25, 1, -1)
 						assailant.attack_log += text("\[[time_stamp()]\] <font color='red'>Headbutted [affecting.name] ([affecting.ckey])</font>")
 						affecting.attack_log += text("\[[time_stamp()]\] <font color='orange'>Headbutted by [assailant.name] ([assailant.ckey])</font>")
 						msg_admin_attack("[key_name(assailant)] has headbutted [key_name(affecting)]")
+						assailant.drop_from_inventory(src)
+						src.loc = null
+						qdel(src)
 						return
 				if(I_DISARM)
 					if(state < GRAB_AGGRESSIVE)
 						assailant << "<span class='warning'>You require a better grab to do this.</span>"
 						return
+					assailant << "<span class='warning'>You start forcing [affecting] to the ground.</span>"
 					if(!force_down)
-						assailant.visible_message("<span class='danger'>[assailant] is forcing [affecting] to the ground!</span>")
-						force_down = 1
-						affecting.Weaken(3)
-						affecting.lying = 1
-						step_to(assailant, affecting)
-						assailant.set_dir(EAST) //face the victim
-						affecting.set_dir(SOUTH) //face up
-						return
+						if(do_after(assailant, 20) && affecting)
+							assailant.visible_message("<span class='danger'>[assailant] is forcing [affecting] to the ground!</span>")
+							force_down = 1
+							affecting.Weaken(3)
+							affecting.lying = 1
+							step_to(assailant, affecting)
+							assailant.set_dir(EAST) //face the victim
+							affecting.set_dir(SOUTH) //face up
+							return
 					else
 						assailant << "<span class='warning'>You are already pinning [affecting] to the ground.</span>"
 						return
@@ -396,10 +406,12 @@
 
 
 /obj/item/weapon/grab/dropped()
-	del(src)
+	loc = null
+	qdel(src)
 
 /obj/item/weapon/grab/Destroy()
-	//make sure the grabbed_by list doesn't fill up with nulls
+	animate(affecting, pixel_x = 0, pixel_y = 0, 4, 1, LINEAR_EASING)
+	affecting.layer = 4
 	if(affecting)
 		affecting.grabbed_by -= src
 		affecting = null
@@ -407,10 +419,6 @@
 		if(assailant.client)
 			assailant.client.screen -= hud
 		assailant = null
-
-	animate(affecting, pixel_x = 0, pixel_y = 0, 4, 1, LINEAR_EASING)
-	affecting.layer = 4
-	loc = null
 	qdel(hud)
 	hud = null
 	..()
