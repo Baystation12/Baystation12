@@ -28,7 +28,7 @@ var/list/global/wall_cache = list()
 	if(!name_to_material)
 		populate_material_list()
 	if(!materialtype)
-		materialtype = "steel"
+		materialtype = DEFAULT_WALL_MATERIAL
 	material = name_to_material[materialtype]
 	if(!isnull(rmaterialtype))
 		reinf_material = name_to_material[rmaterialtype]

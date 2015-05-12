@@ -144,7 +144,7 @@
 	singular_name = "reinforced glass sheet"
 	icon_state = "sheet-rglass"
 
-	matter = list("steel" = 1875,"glass" = 3750)
+	matter = list(DEFAULT_WALL_MATERIAL = 1875,"glass" = 3750)
 	origin_tech = "materials=2"
 
 	created_window = /obj/structure/window/reinforced
@@ -200,7 +200,7 @@
 	desc = "Phoron glass which has been reinforced with metal rods."
 	singular_name = "reinforced phoron glass sheet"
 	icon_state = "sheet-phoronrglass"
-	matter = list("glass" = 7500,"steel" = 1875)
+	matter = list("glass" = 7500,DEFAULT_WALL_MATERIAL = 1875)
 
 	origin_tech = "materials=4;phorontech=2"
 	created_window = /obj/structure/window/phoronreinforced

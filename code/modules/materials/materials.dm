@@ -95,7 +95,7 @@ var/list/name_to_material
 	icon_colour = "#D9C179"
 
 /material/steel
-	name = "steel"
+	name = DEFAULT_WALL_MATERIAL
 	stack_type = /obj/item/stack/sheet/metal
 	icon_base = "solid"
 	icon_reinf = "reinf_over"

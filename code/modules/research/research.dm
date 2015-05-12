@@ -269,7 +269,7 @@ datum/tech/robotics
 	icon_state = "datadisk2"
 	item_state = "card-id"
 	w_class = 2.0
-	matter = list("steel" = 30, "glass" = 10)
+	matter = list(DEFAULT_WALL_MATERIAL = 30, "glass" = 10)
 	var/datum/tech/stored
 
 /obj/item/weapon/disk/tech_disk/New()
@@ -283,7 +283,7 @@ datum/tech/robotics
 	icon_state = "datadisk2"
 	item_state = "card-id"
 	w_class = 2.0
-	matter = list("steel" = 30,"glass" = 10)
+	matter = list(DEFAULT_WALL_MATERIAL = 30,"glass" = 10)
 	var/datum/design/blueprint
 
 /obj/item/weapon/disk/design_disk/New()

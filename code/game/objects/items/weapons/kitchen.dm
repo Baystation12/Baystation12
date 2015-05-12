@@ -145,7 +145,7 @@
 	throwforce = 6.0
 	throw_speed = 3
 	throw_range = 6
-	matter = list("steel" = 12000)
+	matter = list(DEFAULT_WALL_MATERIAL = 12000)
 	origin_tech = "materials=1"
 	attack_verb = list("slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 
@@ -175,7 +175,7 @@
 	throwforce = 8.0
 	throw_speed = 3
 	throw_range = 6
-	matter = list("steel" = 12000)
+	matter = list(DEFAULT_WALL_MATERIAL = 12000)
 	origin_tech = "materials=1"
 	attack_verb = list("cleaved", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	sharp = 1
@@ -247,7 +247,7 @@
 	throw_range = 5
 	w_class = 3.0
 	flags = CONDUCT
-	matter = list("steel" = 3000)
+	matter = list(DEFAULT_WALL_MATERIAL = 3000)
 	/* // NOPE
 	var/food_total= 0
 	var/burger_amt = 0

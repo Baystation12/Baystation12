@@ -49,7 +49,7 @@
 	icon_state = "pickaxe"
 	item_state = "jackhammer"
 	w_class = 4.0
-	matter = list("steel" = 3750)
+	matter = list(DEFAULT_WALL_MATERIAL = 3750)
 	var/digspeed = 40 //moving the delay to an item var so R&D can make improved picks. --NEO
 	origin_tech = "materials=1;engineering=1"
 	attack_verb = list("hit", "pierced", "sliced", "attacked")
@@ -152,7 +152,7 @@
 	throwforce = 4.0
 	item_state = "shovel"
 	w_class = 3.0
-	matter = list("steel" = 50)
+	matter = list(DEFAULT_WALL_MATERIAL = 50)
 	origin_tech = "materials=1;engineering=1"
 	attack_verb = list("bashed", "bludgeoned", "thrashed", "whacked")
 	sharp = 0

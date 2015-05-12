@@ -7,7 +7,7 @@
 	slot_flags = SLOT_BELT|SLOT_BACK
 	w_class = 3
 	force = 10
-	matter = list("steel" = 2000)
+	matter = list(DEFAULT_WALL_MATERIAL = 2000)
 	origin_tech = "combat=3;magnets=2"
 	projectile_type = /obj/item/projectile/beam
 	fire_delay = 1 //rapid fire
@@ -106,7 +106,7 @@ obj/item/weapon/gun/energy/retro
 	desc = "Standard issue weapon of the Imperial Guard"
 	origin_tech = "combat=1;magnets=2"
 	self_recharge = 1
-	matter = list("steel" = 2000)
+	matter = list(DEFAULT_WALL_MATERIAL = 2000)
 	fire_sound = 'sound/weapons/Laser.ogg'
 	projectile_type = /obj/item/projectile/beam/lastertag/blue
 	var/required_vest

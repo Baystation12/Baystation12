@@ -10,7 +10,7 @@
 	icon = 'icons/obj/doors/mineral_doors.dmi'
 	icon_state = "metal"
 
-	var/mineralType = "steel"
+	var/mineralType = DEFAULT_WALL_MATERIAL
 	var/state = 0 //closed, 1 == open
 	var/isSwitchingStates = 0
 	var/hardness = 1

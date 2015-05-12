@@ -8,7 +8,7 @@
 	icon_state = "revolver"
 	origin_tech = "combat=2;materials=2"
 	w_class = 3
-	matter = list("steel" = 1000)
+	matter = list(DEFAULT_WALL_MATERIAL = 1000)
 	recoil = 1
 
 	var/caliber = "357"		//determines which casings will fit
@@ -213,8 +213,8 @@
 	set name = "Unload Ammo"
 	set category = "Object"
 	set src in usr
-	
+
 	if(usr.stat || usr.restrained()) return
-	
+
 	unload_ammo(usr)
 */

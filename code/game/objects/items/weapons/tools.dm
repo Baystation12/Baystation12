@@ -24,7 +24,7 @@
 	force = 5.0
 	throwforce = 7.0
 	w_class = 2.0
-	matter = list("steel" = 150)
+	matter = list(DEFAULT_WALL_MATERIAL = 150)
 	origin_tech = "materials=1;engineering=1"
 	attack_verb = list("bashed", "battered", "bludgeoned", "whacked")
 
@@ -44,7 +44,7 @@
 	throwforce = 5.0
 	throw_speed = 3
 	throw_range = 5
-	matter = list("steel" = 75)
+	matter = list(DEFAULT_WALL_MATERIAL = 75)
 	attack_verb = list("stabbed")
 
 	suicide_act(mob/user)
@@ -102,7 +102,7 @@
 	throw_speed = 2
 	throw_range = 9
 	w_class = 2.0
-	matter = list("steel" = 80)
+	matter = list(DEFAULT_WALL_MATERIAL = 80)
 	origin_tech = "materials=1;engineering=1"
 	attack_verb = list("pinched", "nipped")
 	sharp = 1
@@ -144,7 +144,7 @@
 	w_class = 2.0
 
 	//Cost to make in the autolathe
-	matter = list("steel" = 70, "glass" = 30)
+	matter = list(DEFAULT_WALL_MATERIAL = 70, "glass" = 30)
 
 	//R&D tech level
 	origin_tech = "engineering=1"
@@ -403,21 +403,21 @@
 /obj/item/weapon/weldingtool/largetank
 	name = "industrial welding tool"
 	max_fuel = 40
-	matter = list("steel" = 70, "glass" = 60)
+	matter = list(DEFAULT_WALL_MATERIAL = 70, "glass" = 60)
 	origin_tech = "engineering=2"
 
 /obj/item/weapon/weldingtool/hugetank
 	name = "upgraded welding tool"
 	max_fuel = 80
 	w_class = 3.0
-	matter = list("steel" = 70, "glass" = 120)
+	matter = list(DEFAULT_WALL_MATERIAL = 70, "glass" = 120)
 	origin_tech = "engineering=3"
 
 /obj/item/weapon/weldingtool/experimental
 	name = "experimental welding tool"
 	max_fuel = 40
 	w_class = 3.0
-	matter = list("steel" = 70, "glass" = 120)
+	matter = list(DEFAULT_WALL_MATERIAL = 70, "glass" = 120)
 	origin_tech = "engineering=4;phorontech=3"
 	var/last_gen = 0
 
@@ -444,7 +444,7 @@
 	throwforce = 7.0
 	item_state = "crowbar"
 	w_class = 2.0
-	matter = list("steel" = 50)
+	matter = list(DEFAULT_WALL_MATERIAL = 50)
 	origin_tech = "engineering=1"
 	attack_verb = list("attacked", "bashed", "battered", "bludgeoned", "whacked")
 

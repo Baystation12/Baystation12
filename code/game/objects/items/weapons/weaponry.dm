@@ -185,14 +185,14 @@
 	desc = "A knife blade. Unusable as a weapon without a grip."
 	icon = 'icons/obj/buildingobject.dmi'
 	icon_state = "butterfly2"
-	matter = list("steel" = 5000)
+	matter = list(DEFAULT_WALL_MATERIAL = 5000)
 
 /obj/item/butterflyhandle
 	name = "concealed knife grip"
 	desc = "A plasteel grip with screw fittings for a blade."
 	icon = 'icons/obj/buildingobject.dmi'
 	icon_state = "butterfly1"
-	matter = list("steel" = 4000)
+	matter = list(DEFAULT_WALL_MATERIAL = 4000)
 
 /obj/item/butterflyhandle/attackby(obj/item/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/butterflyblade))
@@ -276,7 +276,7 @@ obj/item/weapon/wirerod/attackby(var/obj/item/I, mob/user as mob)
 	throw_range = 15
 	sharp = 1
 	edge =  1
-	matter = list("steel" = 500)
+	matter = list(DEFAULT_WALL_MATERIAL = 500)
 
 	var/poisoned = 0
 

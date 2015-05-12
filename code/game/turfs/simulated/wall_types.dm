@@ -1,7 +1,7 @@
 /turf/simulated/wall/r_wall
 	icon_state = "rgeneric"
 /turf/simulated/wall/r_wall/New(var/newloc)
-	..(newloc, "steel","plasteel") //3strong
+	..(newloc, DEFAULT_WALL_MATERIAL,"plasteel") //3strong
 /turf/simulated/wall/cult
 	icon_state = "cult"
 /turf/simulated/wall/cult/New(var/newloc)

@@ -798,7 +798,7 @@ datum/objective/heist/salvage
 	choose_target()
 		switch(rand(1,8))
 			if(1)
-				target = "steel"
+				target = DEFAULT_WALL_MATERIAL
 				target_amount = 300
 			if(2)
 				target = "glass"

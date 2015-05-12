@@ -67,7 +67,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 	if (copytext(ID, 1, 2) == "$")
 		return_name = copytext(ID, 2)
 		switch(return_name)
-			if("steel")
+			if(DEFAULT_WALL_MATERIAL)
 				return_name = "Steel"
 			if("glass")
 				return_name = "Glass"
@@ -263,7 +263,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 							if(linked_destroy.loaded_item.reliability < 100 && linked_destroy.loaded_item.crit_fail)
 								files.UpdateDesign(linked_destroy.loaded_item.type)
 							if(linked_lathe && linked_destroy.loaded_item.matter) //Also sends salvaged materials to a linked protolathe, if any.
-								linked_lathe.m_amount += min((linked_lathe.max_material_storage - linked_lathe.TotalMaterials()), (linked_destroy.loaded_item.matter["steel"]*linked_destroy.decon_mod))
+								linked_lathe.m_amount += min((linked_lathe.max_material_storage - linked_lathe.TotalMaterials()), (linked_destroy.loaded_item.matter[DEFAULT_WALL_MATERIAL]*linked_destroy.decon_mod))
 								linked_lathe.g_amount += min((linked_lathe.max_material_storage - linked_lathe.TotalMaterials()), (linked_destroy.loaded_item.matter["glass"]*linked_destroy.decon_mod))
 							linked_destroy.loaded_item = null
 						for(var/obj/I in linked_destroy.contents)
@@ -444,7 +444,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			type = M.stack_type
 
 		switch(name_to_material[href_list["lathe_ejectsheet"]])
-			if("steel")
+			if(DEFAULT_WALL_MATERIAL)
 				res_amount = "m_amount"
 			if("glass")
 				res_amount = "g_amount"
@@ -815,11 +815,11 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			dat += "<A href='?src=\ref[src];menu=3.1'>Protolathe Menu</A><HR>"
 			dat += "Material Storage<BR><HR>"
 			dat += "<UL>"
-			for(var/M in list("steel", "glass", "gold", "silver", "phoron", "uranium", "diamond"))
+			for(var/M in list(DEFAULT_WALL_MATERIAL, "glass", "gold", "silver", "phoron", "uranium", "diamond"))
 				var/amount
 				var/sheetsize = 2000
 				switch(M)
-					if("steel")
+					if(DEFAULT_WALL_MATERIAL)
 						amount = linked_lathe.m_amount
 						sheetsize = 3750
 					if("glass")

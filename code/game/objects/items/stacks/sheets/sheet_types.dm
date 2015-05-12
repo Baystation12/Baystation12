@@ -80,15 +80,15 @@ var/global/list/datum/stack_recipe/metal_recipes = list ( \
 )
 
 /obj/item/stack/sheet/metal
-	name = "steel"
+	name = DEFAULT_WALL_MATERIAL
 	desc = "Sheets made out off steel."
 	singular_name = "metal sheet"
 	icon_state = "sheet-metal"
-	matter = list("steel" = 3750)
+	matter = list(DEFAULT_WALL_MATERIAL = 3750)
 	throwforce = 14.0
 	flags = CONDUCT
 	origin_tech = "materials=1"
-	sheettype = "steel"
+	sheettype = DEFAULT_WALL_MATERIAL
 
 /obj/item/stack/sheet/metal/cyborg
 	name = "steel synthesizer"
@@ -121,7 +121,7 @@ var/global/list/datum/stack_recipe/plasteel_recipes = list ( \
 	desc = "This sheet is an alloy of iron and platinum."
 	icon_state = "sheet-plasteel"
 	item_state = "sheet-metal"
-	matter = list("steel" = 7500)
+	matter = list(DEFAULT_WALL_MATERIAL = 7500)
 	throwforce = 15.0
 	flags = CONDUCT
 	origin_tech = "materials=2"
