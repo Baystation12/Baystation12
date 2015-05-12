@@ -6,32 +6,28 @@
 	slot_flags = 0
 	w_class = 2
 	slot_flags = SLOT_MASK | SLOT_TIE
-	var/icon_open
-	var/icon_closed
+	var/base_icon
 	var/open
 	var/obj/item/held //Item inside locket.
 
 /obj/item/clothing/accessory/locket/heart
 	name = "heart-shaped locket"
 	desc = " A silver, heart-shaped locket. It flips open to reveal two pictures, one of a young red-headed woman and one of a brunette of similar age. Small writing is etched onto the back, reading 'M+L'. Some may regard it as cheesy."
-	icon_state = "heartlocket_closed"
-	item_state = "heartlocket_closed"
-	icon_open = "heartlocket_open"
-	icon_closed = "heartlocket_closed"
+	icon_state = "heartlocket"
 
 /obj/item/clothing/accessory/locket/attack_self(mob/user as mob)
+	if(!base_icon)
+		base_icon = icon_state
 	open = !open
 	user << "You flip \the [src] [open?"open":"closed"]."
 	if(open)
-		if(icon_open)
-			icon_state = icon_open
+		icon_state = "[base_icon]_open"
 		if(held)
 			user << "\The [held] falls out!"
 			held.loc = get_turf(user)
 			src.held = null
 	else
-		if(icon_closed)
-			icon_state = icon_closed
+		icon_state = "[base_icon]"
 
 /obj/item/clothing/accessory/locket/attackby(var/obj/item/O as obj, mob/user as mob)
 	if(!open)

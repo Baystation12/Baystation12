@@ -6,7 +6,7 @@
 
 /obj/item/clothing/accessory/badge
 	name = "detective's badge"
-	desc = "NanoTrasen Security Department detective's badge, made from gold. Badge number is 564."
+	desc = "NanoTrasen Security Department detective's badge, made from gold."
 	icon_state = "badge"
 	slot_flags = SLOT_BELT | SLOT_TIE
 

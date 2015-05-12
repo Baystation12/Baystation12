@@ -414,35 +414,33 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	icon = 'icons/obj/items.dmi'
 	icon_state = "lighter-g"
 	item_state = "lighter-g"
-	var/icon_on = "lighter-g-on"
-	var/icon_off = "lighter-g"
 	w_class = 1
 	throwforce = 4
 	flags = CONDUCT
 	slot_flags = SLOT_BELT
 	attack_verb = list("burnt", "singed")
+	var/base_state
 
 /obj/item/weapon/flame/lighter/zippo
 	name = "\improper Zippo lighter"
 	desc = "The zippo."
 	icon_state = "zippo"
 	item_state = "zippo"
-	icon_on = "zippoon"
-	icon_off = "zippo"
 
 /obj/item/weapon/flame/lighter/random
 	New()
-		var/color = pick("r","c","y","g")
-		icon_on = "lighter-[color]-on"
-		icon_off = "lighter-[color]"
-		icon_state = icon_off
+		icon_state = "lighter-[pick("r","c","y","g")]"
+		item_state = icon_state
+		base_state = icon_state
 
 /obj/item/weapon/flame/lighter/attack_self(mob/living/user)
+	if(!base_state)
+		base_state = icon_state
 	if(user.r_hand == src || user.l_hand == src)
 		if(!lit)
 			lit = 1
-			icon_state = icon_on
-			item_state = icon_on
+			icon_state = "[base_state]on"
+			item_state = "[base_state]on"
 			if(istype(src, /obj/item/weapon/flame/lighter/zippo) )
 				user.visible_message("<span class='rose'>Without even breaking stride, [user] flips open and lights [src] in one smooth movement.</span>")
 			else
@@ -460,8 +458,8 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 			processing_objects.Add(src)
 		else
 			lit = 0
-			icon_state = icon_off
-			item_state = icon_off
+			icon_state = "[base_state]"
+			item_state = "[base_state]"
 			if(istype(src, /obj/item/weapon/flame/lighter/zippo) )
 				user.visible_message("<span class='rose'>You hear a quiet click, as [user] shuts off [src] without even looking at what they're doing.")
 			else
