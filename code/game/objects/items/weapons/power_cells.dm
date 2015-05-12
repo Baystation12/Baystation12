@@ -22,6 +22,23 @@
 		viewers(user) << "\red <b>[user] is licking the electrodes of the [src.name]! It looks like \he's trying to commit suicide.</b>"
 		return (FIRELOSS)
 
+//currently only used by energy-type guns, that may change in the future.
+/obj/item/weapon/cell/device
+	name = "device power cell"
+	desc = "A small power cell designed to power handheld devices."
+	icon_state = "cell" //placeholder
+	w_class = 2
+	force = 0
+	throw_speed = 5
+	throw_range = 7
+	maxcharge = 1000
+	matter = list("metal" = 350, "glass" = 50)
+
+/obj/item/weapon/cell/device/variable/New(newloc, charge_amount)
+	..(newloc)
+	maxcharge = charge_amount
+	charge = maxcharge
+
 /obj/item/weapon/cell/crap
 	name = "\improper Nanotrasen brand rechargable AA battery"
 	desc = "You can't top the plasma top." //TOTALLY TRADEMARK INFRINGEMENT

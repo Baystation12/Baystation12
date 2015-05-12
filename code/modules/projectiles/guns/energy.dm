@@ -13,8 +13,9 @@
 	firemode_type = /datum/firemode/energy
 
 	var/obj/item/weapon/cell/power_supply //What type of power cell this uses
-	var/charge_cost = 100 //How much energy is needed to fire.
-	var/cell_type = /obj/item/weapon/cell
+	var/charge_cost = 200 //How much energy is needed to fire.
+	var/max_shots = 10 //Determines the capacity of the weapon's power cell. Specifying a cell_type overrides this value.
+	var/cell_type = null
 	var/projectile_type = /obj/item/projectile/beam/practice
 	var/modifystate
 	var/charge_meter = 1	//if set, the icon state will be chosen based on the current charge
@@ -45,7 +46,8 @@
 	..()
 	if(cell_type)
 		power_supply = new cell_type(src)
-		power_supply.give(power_supply.maxcharge)
+	else
+		power_supply = new /obj/item/weapon/cell/device/variable(src, max_shots*charge_cost)
 	if(self_recharge)
 		processing_objects.Add(src)
 	update_icon()
