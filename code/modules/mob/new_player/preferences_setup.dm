@@ -181,6 +181,7 @@ datum/preferences
 	proc/update_preview_icon()		//seriously. This is horrendous. //less so now
 		if(!dummy)
 			dummy = new(null, species)
+		dummy.set_species(species)
 		dummy.flags |= GODMODE
 		copy_to(dummy)
 
