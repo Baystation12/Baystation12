@@ -84,6 +84,7 @@ datum/preferences
 	var/religion = "None"               //Religious association.
 
 		//Mob preview
+	var/mob/living/carbon/human/dummy //the mannequin
 	var/icon/preview_icon = null
 	var/icon/preview_icon_front = null
 	var/icon/preview_icon_side = null

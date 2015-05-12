@@ -178,11 +178,11 @@ datum/preferences
 		b_skin = blue
 
 
-	proc/update_preview_icon()		//seriously. This is horrendous.
-		var/mob/living/carbon/human/H = new(null,species)
-//		H.set_species(species)
-		H.flags |= GODMODE
-		copy_to(H)
+	proc/update_preview_icon()		//seriously. This is horrendous. //less so now
+		if(!dummy)
+			dummy = new(null, species)
+		dummy.flags |= GODMODE
+		copy_to(dummy)
 
 		var/jobflag
 		var/dept
@@ -201,17 +201,17 @@ datum/preferences
 				if((J.department_flag & dept) && (J.flag & jobflag))
 					var/alt = GetPlayerAltTitle(J)
 					if(alt)	//more hacks
-						H.mind = new
-						H.mind.role_alt_title = alt
-					J.equip(H)
+						if(!dummy.mind)
+							dummy.mind = new
+						dummy.mind.role_alt_title = alt
+					J.equip(dummy)
 					break
-		H.update_eyes()
-		H.force_update_limbs()
-		H.regenerate_icons()
-		preview_icon = icon(H.icon)
-		for(var/image/I in H.overlays_standing)
+		dummy.update_eyes()
+		dummy.force_update_limbs()
+		dummy.regenerate_icons()
+		preview_icon = icon(dummy.icon)
+		for(var/image/I in dummy.overlays_standing)
 			if(I && I.icon)
 				preview_icon.Blend(icon(I.icon, I.icon_state), ICON_OVERLAY)
 		preview_icon_front = new(preview_icon, dir = SOUTH)
 		preview_icon_side = new(preview_icon, dir = WEST)
-		del(H) //RIP
