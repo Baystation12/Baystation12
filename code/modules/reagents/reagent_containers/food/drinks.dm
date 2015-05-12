@@ -23,7 +23,7 @@
 		var/fillevel = gulp_size
 
 		if(!R.total_volume || !R)
-			user << "\red The [src.name] is empty!"
+			user << "<span class='danger'>The [src.name] is empty!"
 			return 0
 
 		if(M == user)
@@ -31,7 +31,7 @@
 			if(istype(M,/mob/living/carbon/human))
 				var/mob/living/carbon/human/H = M
 				if(H.species.flags & IS_SYNTHETIC)
-					H << "\red You have a monitor for a head, where do you think you're going to put that?"
+					H << "<span class='danger'>You have a monitor for a head, where do you think you're going to put that?</span>"
 					return
 				
 				var/obj/item/blocked = H.check_mouth_coverage()
@@ -39,7 +39,7 @@
 					user << "<span class='warning'>\The [blocked] is in the way!</span>"
 					return
 
-			M << "\blue You swallow a gulp from \the [src]."
+			M << "<span class='notice'>You swallow a gulp from \the [src].</span>"
 			if(reagents.total_volume)
 				reagents.trans_to_ingest(M, gulp_size)
 
@@ -49,7 +49,7 @@
 
 			var/mob/living/carbon/human/H = M
 			if(H.species.flags & IS_SYNTHETIC)
-				user << "\red They have a monitor for a head, where do you think you're going to put that?"
+				user << "<span class='danger'>They have a monitor for a head, where do you think you're going to put that?</span>"
 				return
 			
 			var/obj/item/blocked = H.check_mouth_coverage()
@@ -57,11 +57,9 @@
 				user << "<span class='warning'>\The [blocked] is in the way!</span>"
 				return
 
-			for(var/mob/O in viewers(world.view, user))
-				O.show_message("\red [user] attempts to feed [M] [src].", 1)
+			user.visible_message("<span class='danger'>[user] attempts to feed [M] [src].</span>")
 			if(!do_mob(user, M)) return
-			for(var/mob/O in viewers(world.view, user))
-				O.show_message("\red [user] feeds [M] [src].", 1)
+			user.visible_message("<span class='danger'>[user] feeds [M] [src].</span>")
 
 			M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been fed [src.name] by [user.name] ([user.ckey]) Reagents: [reagentlist(src)]</font>")
 			user.attack_log += text("\[[time_stamp()]\] <font color='red'>Fed [M.name] by [M.name] ([M.ckey]) Reagents: [reagentlist(src)]</font>")
