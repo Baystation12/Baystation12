@@ -279,7 +279,7 @@ var/global/list/gear_datums = list()
 
 /datum/gear/scanning_goggles
 	display_name = "scanning goggles"
-	path = /obj/item/clothing/glasses/fluff/uzenwa_sissra_1
+	path = /obj/item/clothing/glasses/science/scanners
 	cost = 1
 	slot = slot_glasses
 
