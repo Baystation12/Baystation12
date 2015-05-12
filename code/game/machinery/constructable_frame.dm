@@ -70,10 +70,7 @@
 							var/cp = text2path(A)
 							var/obj/ct = new cp() // have to quickly instantiate it get name
 							req_component_names[A] = ct.name
-						if(circuit.frame_desc)
-							desc = circuit.frame_desc
-						else
-							update_desc()
+						update_desc()
 						user << desc
 					else
 						user << "\red This frame does not accept circuit boards of this type!"
