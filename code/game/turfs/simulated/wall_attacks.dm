@@ -73,11 +73,15 @@
 		try_touch(user, rotting)
 		return
 
-	if(rotting || !prob(material.hardness))
-		success_smash(user)
-	else
-		fail_smash(user)
-	return 1
+	if(rotting)
+		return success_smash(user)
+
+	if(reinf_material)
+		if((wallbreaker == 2) || (damage >= max(material.hardness,reinf_material.hardness)))
+			return success_smash(user)
+	else if(damage >= material.hardness)
+		return success_smash(user)
+	return fail_smash(user)
 
 /turf/simulated/wall/attackby(obj/item/weapon/W as obj, mob/user as mob)
 
