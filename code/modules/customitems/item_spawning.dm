@@ -6,102 +6,146 @@
 
 /var/list/custom_items = list()
 
+/datum/custom_item
+	var/assoc_key
+	var/character_name
+	var/item_icon
+	var/item_desc
+	var/name = "unnamed item"
+	var/item_path = /obj/item
+	var/req_access = 0
+	var/list/req_titles = list()
+
+/datum/custom_item/proc/spawn_item(var/newloc)
+	var/obj/item/citem = new item_path(newloc)
+	apply_to_item(citem)
+	return citem
+
+/datum/custom_item/proc/apply_to_item(var/obj/item/item)
+	if(!item)
+		return
+	if(name)
+		item.name = name
+	if(item_desc)
+		item.desc = item_desc
+	if(item_icon)
+		item.icon = 'icons/obj/custom_items.dmi'
+		item.icon_override = 'icons/mob/custom_items.dmi'
+		item.icon_state = item_icon
+	return item
+
 //parses the config file into the above listlist
 /hook/startup/proc/loadCustomItems()
-	var/custom_items_file = file2text("config/custom_items.txt")
-	var/list/file_list = text2list(custom_items_file, "\n")
-	for(var/line in file_list)
-		if(findtext(line, "#", 1, 2))
+
+	var/datum/custom_item/current_data
+	for(var/line in text2list(file2text("config/custom_items.txt"), "\n"))
+
+		line = trim(line)
+		if(line == "" || !line || findtext(line, "#", 1, 2) || findtext(line, "}", 1, 2))
 			continue
 
-		var/list/Entry = text2list(line, ":")
-		for(var/i = 1 to Entry.len)
-			Entry[i] = trim(Entry[i])
+		if(findtext(line, "{", 1, 2) || findtext(line, "}", 1, 2)) // New block!
+			if(current_data && current_data.assoc_key)
+				if(!custom_items[current_data.assoc_key])
+					custom_items[current_data.assoc_key] = list()
+				var/list/L = custom_items[current_data.assoc_key]
+				L |= current_data
+			current_data = null
 
-		if(Entry.len < 3)
-			continue;
+		var/split = findtext(line,":")
+		if(!split)
+			continue
+		var/field = trim(copytext(line,1,split))
+		var/field_data = trim(copytext(line,(split+1)))
+		if(!field || !field_data)
+			continue
 
-		if(!custom_items[Entry[1]])
-			custom_items[Entry[1]] = list()
-		custom_items[Entry[1]] += Entry
+		if(!current_data)
+			current_data = new()
+
+		switch(field)
+			if("ckey")
+				current_data.assoc_key = lowertext(field_data)
+			if("character_name")
+				current_data.character_name = lowertext(field_data)
+			if("item_path")
+				current_data.item_path = text2path(field_data)
+			if("item_name")
+				current_data.name = field_data
+			if("item_icon")
+				if(field_data in icon_states('icons/obj/custom_items.dmi'))
+					current_data.item_icon = field_data
+			if("item_desc")
+				current_data.item_desc = field_data
+			if("req_access")
+				current_data.req_access = field_data
+			if("req_titles")
+				current_data.req_titles = text2list(field_data,", ")
 
 	return 1
 
 //gets the relevant list for the key from the listlist if it exists, check to make sure they are meant to have it and then calls the giving function
 /proc/EquipCustomItems(mob/living/carbon/human/M)
+	return
+
 	var/list/key_list = custom_items[M.ckey]
 	if(!key_list || key_list.len < 1)
 		return
 
-	for(var/list/Entry in key_list)
-		if(Entry.len < 3)
-			continue;
+	for(var/datum/custom_item/citem in key_list)
 
-		if(Entry[1] != M.ckey || Entry[2] != "" || Entry[2] != M.real_name)
+		// Check for requisite ckey and character name.
+		if(citem.assoc_key != M.ckey || citem.character_name != M.real_name)
 			continue
 
-		//required access/job
-		var/obj/item/weapon/card/id/ID = M.wear_id	//should be an id even though pdas can also be there, due to this being run at spawn, before there is a chance to change it
-		if(Entry.len>=4 && length(Entry[4]) > 0)
-			var/required_access = 0;
-			required_access = text2num(Entry[4])
+		// Check for required access.
+		var/obj/item/weapon/card/id/current_id = M.wear_id
+		if(citem.req_access && !(istype(current_id) && (citem.req_access in current_id.access)))
+			continue
 
-			if(!required_access)
-				var/list/JobTitles = text2list(Entry[4])
-				var/ok = 0
-				var/CurrentTitle = M.mind.role_alt_title ? M.mind.role_alt_title : M.mind.assigned_role
-				for(var/title in JobTitles)
-					if(title == CurrentTitle)
-						ok = 1
-				if(ok == 0)
-					continue
+		// Check for required job title.
+		var/has_title
+		var/current_title = M.mind.role_alt_title ? M.mind.role_alt_title : M.mind.assigned_role
+		for(var/title in citem.req_titles)
+			if(title == current_title)
+				has_title = 1
+				break
+		if(!has_title)
+			continue
 
-			else if(required_access != 0)
-				if(!(required_access in ID.access))
-					continue
+		// ID cards and PDAs are applied directly to the existing object rather than spawned fresh.
+		var/obj/item/existing_item
+		if(citem.item_path == /obj/item/weapon/card/id && istype(current_id)) //Set earlier.
+			existing_item = M.wear_id
+		else if(citem.item_path == /obj/item/device/pda)
+			existing_item = locate(/obj/item/device/pda) in M.contents
 
-		//the else looks redundant and that it should probably be not an else and just not have the if, but then if there was a name/desc/icon_state set then all the items would get the same one, and i dont want the config file to be wider than it already has to be
-		if(findtext(Entry[3], ","))
-			var/list/Paths = text2list(Entry[3], ",")
-			for(var/P in Paths)
-				//ids make the standard id be different, instead of spawning a new one (because clunky as fuck)
-				if(P == "/obj/item/weapon/card/id")
-					continue
-				PlaceCustomItem(M, P)
+		// Spawn and equip the item.
+		if(existing_item)
+			citem.apply_to_item(existing_item)
 		else
-			var/obj/item/Item
-			if(Entry[3] == "/obj/item/weapon/card/id")
-				Item = ID
-			else
-				Item = PlaceCustomItem(M,Entry[3])
-			if(!istype(Item))
-				continue
-			if(Entry.len < 5)
-				continue
-			if(Entry[5] != "")
-				Item.name = Entry[5]
-				if(istype(Item, /obj/item/weapon/card/id))
-					Item.name += "[M.mind.role_alt_title ? M.mind.role_alt_title : M.mind.assigned_role]"
-			if(Entry.len < 6)
-				continue
-			if(Entry[6] != "")
-				Item.desc = Entry[6]
+			place_custom_item(M,citem)
+		return
 
-//actually sticks the item on the person
-/proc/PlaceCustomItem(mob/living/carbon/human/M, var/path)
-	if(!path) return
+// Places the item on the target mob.
+/proc/place_custom_item(mob/living/carbon/human/M, var/datum/custom_item/citem)
 
-	var/obj/item/Item = new path()
+	if(!citem) return
+	var/obj/item/newitem = citem.spawn_item()
 
-	if(M.equip_to_appropriate_slot(Item))
-		return Item
-	if(istype(M.back,/obj/item/weapon/storage) && M.back:contents.len < M.back:storage_slots) // Try to place it in something on the mob's back
-		Item.loc = M.back
-		return Item
-	else
-		for(var/obj/item/weapon/storage/S in M.contents) // Try to place it in any item that can store stuff, on the mob.
-			if (S.contents.len < S.storage_slots)
-				Item.loc = S
-				return Item
-		Item.loc = get_turf(M.loc)
-		return Item
+	if(M.equip_to_appropriate_slot(newitem))
+		return newitem
+
+	if(istype(M.back,/obj/item/weapon/storage))
+		var/obj/item/weapon/storage/backpack = M.back
+		if(backpack.contents.len < backpack.storage_slots)
+			newitem.loc = M.back
+			return newitem
+
+	// Try to place it in any item that can store stuff, on the mob.
+	for(var/obj/item/weapon/storage/S in M.contents)
+		if (S.contents.len < S.storage_slots)
+			newitem.loc = S
+			return newitem
+	newitem.loc = get_turf(M.loc)
+	return newitem

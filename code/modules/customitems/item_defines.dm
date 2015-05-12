@@ -2,11 +2,6 @@
 // Remember to change 'icon = 'icons/obj/custom_items.dmi'' for items not using /obj/item/fluff as a base
 // Clothing item_state doesn't use custom_items.dmi. Just add them to the normal clothing files.
 
-/obj/item/fluff // so that they don't spam up the object tree
-	icon = 'icons/obj/custom_items.dmi'
-	w_class = 1.0
-
-
 /////////////////////////////// 50_n00b - R.A.N.G.E.'s blue dress //////////////////////////
 
 /obj/item/clothing/suit/fluff/b_dress
