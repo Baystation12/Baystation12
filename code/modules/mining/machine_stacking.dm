@@ -89,8 +89,8 @@
 
 	stack_storage["glass"] = 0
 	stack_paths["glass"] = /obj/item/stack/sheet/glass
-	stack_storage["metal"] = 0
-	stack_paths["metal"] = /obj/item/stack/sheet/metal
+	stack_storage[DEFAULT_WALL_MATERIAL] = 0
+	stack_paths[DEFAULT_WALL_MATERIAL] = /obj/item/stack/sheet/metal
 	stack_storage["plasteel"] = 0
 	stack_paths["plasteel"] = /obj/item/stack/sheet/plasteel
 

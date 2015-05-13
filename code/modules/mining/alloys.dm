@@ -19,7 +19,7 @@
 	product = /obj/item/stack/sheet/plasteel
 
 /datum/alloy/steel
-	metaltag = "steel"
+	metaltag = DEFAULT_WALL_MATERIAL
 	requires = list(
 		"coal" = 1,
 		"hematite" = 1

@@ -222,6 +222,8 @@
 	desc = "Damn, why do they never have anything interesting on these things?"
 	icon = 'icons/obj/status_display.dmi'
 	icon_state = "entertainment"
+	light_color = "#FFEEDB"
+	light_range_on = 2
 	circuit = null
 
 /obj/machinery/computer/security/wooden_tv
@@ -229,7 +231,8 @@
 	desc = "An old TV hooked into the stations camera network."
 	icon_state = "security_det"
 	circuit = null
-
+	light_color = "#3848B3"
+	light_power_on = 0.5
 
 /obj/machinery/computer/security/mining
 	name = "outpost camera monitor"
@@ -237,12 +240,14 @@
 	icon_state = "miningcameras"
 	network = list("MINE")
 	circuit = /obj/item/weapon/circuitboard/security/mining
+	light_color = "#F9BBFC"
 
 /obj/machinery/computer/security/engineering
 	name = "engineering camera monitor"
 	desc = "Used to monitor fires and breaches."
 	icon_state = "engineeringcameras"
 	circuit = /obj/item/weapon/circuitboard/security/engineering
+	light_color = "#FAC54B"
 
 /obj/machinery/computer/security/engineering/New()
 	if(!network)

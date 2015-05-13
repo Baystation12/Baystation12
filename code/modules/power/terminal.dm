@@ -23,6 +23,7 @@
 /obj/machinery/power/terminal/Destroy()
 	if(master)
 		master.disconnect_terminal()
+		master = null
 	return ..()
 
 /obj/machinery/power/terminal/hide(var/i)

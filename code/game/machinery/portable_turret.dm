@@ -150,6 +150,7 @@
 /obj/machinery/porta_turret/Destroy()
 	//deletes its own cover with it
 	qdel(cover)
+	cover = null
 	..()
 
 /obj/machinery/porta_turret/proc/isLocked(mob/user)
@@ -869,6 +870,10 @@
 	layer = 3.5
 	density = 0
 	var/obj/machinery/porta_turret/Parent_Turret = null
+
+/obj/machinery/porta_turret_cover/Destroy()
+	Parent_Turret = null
+	..()
 
 /obj/machinery/porta_turret_cover/attack_ai(mob/user)
 	return attack_hand(user)
