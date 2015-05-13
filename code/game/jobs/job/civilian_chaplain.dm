@@ -22,7 +22,6 @@
 		H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/chaplain(H), slot_w_uniform)
 		H.equip_to_slot_or_del(new /obj/item/device/pda/chaplain(H), slot_belt)
 		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/black(H), slot_shoes)
-		H.species.equip_survival_gear(H)
 		spawn(0)
 			var/religion_name = "Christianity"
 			var/new_religion = sanitize(input(H, "You are the crew services officer. Would you like to change your religion? Default is Christianity, in SPACE.", "Name change", religion_name), MAX_NAME_LEN)
