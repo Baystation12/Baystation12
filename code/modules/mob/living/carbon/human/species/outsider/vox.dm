@@ -54,6 +54,12 @@
 	var/datum/language/species_language = all_languages[default_language]
 	return species_language.get_random_name(gender)
 
+/datum/species/vox/equip_survival_gear(var/mob/living/carbon/human/H)
+	if(H.backbag == 1)
+		H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival/vox(H), slot_r_hand)
+	else
+		H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival/vox(H.back), slot_in_backpack)
+
 /datum/species/vox/can_shred(var/mob/living/carbon/human/H, var/ignore_intent)
 	if(!H.mind || !H.mind.special_role) // Pariah check.
 		return 0

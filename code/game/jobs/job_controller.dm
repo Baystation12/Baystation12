@@ -505,7 +505,10 @@ var/global/datum/controller/occupations/job_master
 				H.equip_to_slot_or_del(new /obj/item/clothing/shoes/sandal(H),slot_shoes,1)
 			else if(H.species.name == "Vox")
 				H.equip_to_slot_or_del(new /obj/item/clothing/mask/breath(H), slot_wear_mask)
-				if(!H.r_hand)
+				if(!H.back)
+					H.equip_to_slot_or_del(new /obj/item/weapon/tank/nitrogen(H), slot_back)
+					H.internal = H.back
+				else if(!H.r_hand)
 					H.equip_to_slot_or_del(new /obj/item/weapon/tank/nitrogen(H), slot_r_hand)
 					H.internal = H.r_hand
 				else if (!H.l_hand)
