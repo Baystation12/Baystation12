@@ -149,6 +149,14 @@ var/list/name_to_material
 	stack_type = /obj/item/stack/sheet/mineral/iron
 	icon_colour = "#5C5454"
 
+/material/wood
+	name = "wood"
+	stack_type = /obj/item/stack/sheet/wood
+	icon_colour = "#824B28"
+	integrity = 25
+	icon_base = "solid"
+	explosion_resistance = 2
+
 /material/cult
 	name = "cult"
 	display_name = "disturbing stone"

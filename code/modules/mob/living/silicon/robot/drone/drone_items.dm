@@ -17,8 +17,6 @@
 		/obj/item/weapon/module/power_control,
 		/obj/item/weapon/stock_parts,
 		/obj/item/frame,
-		/obj/item/weapon/table_parts,
-		/obj/item/weapon/table_parts/rack,
 		/obj/item/weapon/camera_assembly,
 		/obj/item/weapon/tank,
 		/obj/item/weapon/circuitboard,

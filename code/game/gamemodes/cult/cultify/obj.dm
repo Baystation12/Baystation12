@@ -149,8 +149,12 @@
 	..()
 
 /obj/structure/table/cultify()
-	new /obj/structure/table/woodentable(loc)
-	..()
+	// Make it a wood-reinforced wooden table.
+	// There are cult materials available, but it'd make the table non-deconstructable with how holotables work.
+	// Could possibly use a new material var for holographic-ness?
+	material = name_to_material["wood"]
+	reinforced = name_to_material["wood"]
+	update_desc()
+	update_connections(1)
+	update_icon()
 
-/obj/structure/table/woodentable/cultify()
-	return

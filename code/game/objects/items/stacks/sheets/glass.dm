@@ -20,6 +20,7 @@
 	var/created_window = /obj/structure/window/basic
 	var/is_reinforced = 0
 	var/list/construction_options = list("One Direction", "Full Window")
+	sheettype = "glass"
 
 /obj/item/stack/sheet/glass/cyborg
 	name = "glass synthesizer"

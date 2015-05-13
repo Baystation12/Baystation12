@@ -1,0 +1,337 @@
+
+
+/obj/structure/table
+	name = "table frame"
+	icon = 'icons/obj/tables.dmi'
+	icon_state = "frame"
+	desc = "It's a table, for putting things on. Or standing on, if you really want to."
+	density = 1
+	anchored = 1
+	climbable = 1
+	var/flipped = 0
+	var/maxhealth = 10
+	var/health = 10
+
+	// For racks.
+	var/can_reinforce = 1
+	var/can_plate = 1
+
+	var/material/material = null
+	var/material/reinforced = null
+
+	// Gambling tables. I'd prefer reinforced with carpet/felt/cloth/whatever, but AFAIK it's either harder or impossible to get /obj/item/stack/sheet of those.
+	// Convert if/when you can easily get stacks of these.
+	var/carpeted = 0
+
+	var/list/connections = list("nw0", "ne0", "sw0", "se0")
+
+/obj/structure/table/proc/update_material()
+	var/old_maxhealth = maxhealth
+	if(!material)
+		maxhealth = 10
+	else
+		maxhealth = material.integrity / 2
+
+		if(reinforced)
+			maxhealth += reinforced.integrity / 2
+
+	health += maxhealth - old_maxhealth
+
+/obj/structure/table/New()
+	..()
+	// One table per turf.
+	for(var/obj/structure/table/T in loc)
+		if(T != src)
+			// There's another table here that's not us, break to metal.
+			// break_to_parts calls qdel(src)
+			break_to_parts(full_return = 1)
+			return
+
+/obj/structure/table/initialize()
+	..()
+	// reset color/alpha, since they're set for nice map previews
+	color = "#ffffff"
+	alpha = 255
+	update_connections(1)
+	update_icon()
+	update_desc()
+
+/obj/structure/table/Destroy()
+	material = null
+	update_connections(1) // Update tables around us to ignore us (material=null forces no connections)
+	for(var/obj/structure/table/T in oview(src, 1))
+		T.update_icon()
+	..()
+
+/obj/structure/table/attackby(obj/item/weapon/W, mob/user)
+
+	if(reinforced && istype(W, /obj/item/weapon/screwdriver))
+		remove_reinforced(W, user)
+		if(!reinforced)
+			update_desc()
+			update_icon()
+		return 1
+
+	if(!reinforced && material && istype(W, /obj/item/weapon/wrench))
+		remove_material(W, user)
+		if(!material)
+			update_connections(1)
+			update_icon()
+		return 1
+
+	if(!reinforced && !material && istype(W, /obj/item/weapon/wrench))
+		dismantle(W, user)
+		return 1
+
+	if(!material && can_plate && istype(W, /obj/item/stack/sheet))
+		material = common_material_add(W, user, "plat")
+		if(material)
+			update_connections(1)
+			update_icon()
+		return 1
+
+	return ..()
+
+/obj/structure/table/MouseDrop_T(obj/item/stack/sheet/what)
+	if(can_reinforce && isliving(usr) && (!usr.stat) && istype(what) && usr.get_active_hand() == what && Adjacent(usr))
+		reinforce_table(what, usr)
+	else
+		return ..()
+
+/obj/structure/table/proc/reinforce_table(obj/item/stack/sheet/S, mob/user)
+	if(reinforced)
+		user << "<span class='warning'>\The [src] is already reinforced!</span>"
+		return
+
+	if(!can_reinforce)
+		user << "<span class='warning'>\The [src] cannot be reinforced!</span>"
+
+	reinforced = common_material_add(S, user, "reinforc")
+	if(reinforced)
+		update_desc()
+		update_icon()
+
+/obj/structure/table/proc/update_desc()
+	if(material)
+		name = "[material.display_name] table"
+	else
+		name = "table frame"
+
+	if(reinforced)
+		name = "reinforced [name]"
+		desc = "[initial(desc)] This one seems to be reinforced with [reinforced.display_name]."
+	else
+		desc = initial(desc)
+
+// Returns the material to set the table to.
+/obj/structure/table/proc/common_material_add(obj/item/stack/sheet/S, mob/user, verb) // Verb is actually verb without 'e' or 'ing', which is added. Works for 'plate'/'plating' and 'reinforce'/'reinforcing'.
+	var/material/M = name_to_material[S.sheettype]
+	if(!istype(M))
+		user << "<span class='warning'>You cannot [verb]e \the [src] with \the [S].</span>"
+		return null
+	user << "<span class='notice'>You begin [verb]ing \the [src] with [M.display_name].</span>"
+	if(!do_after(user, 20) || !S.use(1))
+		return null
+	user.visible_message("<span class='notice'>\The [user] [verb]es \the [src] with [M.display_name].</span>", "<span class='notice'>You finish [verb]ing \the [src].</span>")
+	return M
+
+// Returns the material to set the table to.
+/obj/structure/table/proc/common_material_remove(mob/user, material/M, delay, what, type_holding)
+	if(!M.stack_type)
+		user << "<span class='warning'>You are unable to remove the [what] from this table!</span>"
+		return M
+
+	user.visible_message("<span class='notice'>\The [user] begins removing the [type_holding] holding \the [src]'s [M.display_name] [what] in place.</span>",
+	                              "<span class='notice'>You begin removing the [type_holding] holding \the [src]'s [M.display_name] [what] in place.</span>")
+	if(!do_after(user, 40))
+		return M
+	user.visible_message("<span class='notice'>\The [user] removes the [M.display_name] [what] from \the [src].</span>",
+	                              "<span class='notice'>You remove the [M.display_name] [what] from \the [src].</span>")
+	new M.stack_type(src.loc)
+	return null
+
+/obj/structure/table/proc/remove_reinforced(obj/item/weapon/screwdriver/S, mob/user)
+	reinforced = common_material_remove(user, reinforced, 40, "reinforcements", "screws")
+
+/obj/structure/table/proc/remove_material(obj/item/weapon/wrench/W, mob/user)
+	material = common_material_remove(user, material, 20, "plating", "bolts")
+
+/obj/structure/table/proc/dismantle(obj/item/weapon/wrench/W, mob/user)
+	user.visible_message("<span class='notice'>\The [user] begins dismantling \the [src].</span>",
+	                              "<span class='notice'>You begin dismantling \the [src].</span>")
+	if(!do_after(user, 20))
+		return
+	user.visible_message("<span class='notice'>\The [user] dismantles \the [src].</span>",
+	                              "<span class='notice'>You dismantle \the [src].</span>")
+	new /obj/item/stack/sheet/metal(src.loc)
+
+/obj/structure/table/proc/break_to_parts(full_return = 0)
+	if(reinforced && reinforced.stack_type && (full_return || prob(25)))
+		new reinforced.stack_type(src.loc)
+	if(material && material.stack_type && (full_return || prob(50)))
+		new material.stack_type(src.loc)
+	if(full_return || prob(50))
+		new /obj/item/stack/sheet/metal(src.loc)
+	qdel(src)
+	return
+
+/obj/structure/table/update_icon()
+	if(flipped != 1)
+		icon_state = "blank"
+		overlays.Cut()
+
+		// Base frame shape. Mostly done for glass/diamond tables, where this is visible.
+		for(var/n in connections)
+			overlays += n
+
+		// Standard table image
+		if(material)
+			for(var/n in connections)
+				var/image/I = image(icon, "[material.icon_base]_[n]")
+				I.color = material.icon_colour
+				I.alpha = 255 * material.opacity
+				overlays += I
+
+		// Reinforcements
+		if(reinforced)
+			for(var/n in connections)
+				var/image/I = image(icon, "[reinforced.icon_reinf]_[n]")
+				I.color = reinforced.icon_colour
+				I.alpha = 255 * reinforced.opacity
+				overlays += I
+
+		if(carpeted)
+			for(var/n in connections)
+				overlays += "carpet_[n]"
+	else
+		overlays.Cut()
+		var/type = 0
+		var/tabledirs = 0
+		for(var/direction in list(turn(dir,90), turn(dir,-90)) )
+			var/obj/structure/table/T = locate(/obj/structure/table ,get_step(src,direction))
+			if (T && T.flipped == 1 && T.dir == src.dir && T.material == material)
+				type++
+				tabledirs |= direction
+
+		type = "[type]"
+		if (type=="1")
+			if (tabledirs & turn(dir,90))
+				type += "-"
+			if (tabledirs & turn(dir,-90))
+				type += "+"
+
+		icon_state = "flip[type]"
+		if(material)
+			var/image/I = image(icon, "[material.icon_base]_flip[type]")
+			I.color = material.icon_colour
+			I.alpha = 255 * material.opacity
+			overlays += I
+			name = "[material.display_name] table"
+		else
+			name = "table frame"
+
+		if(reinforced)
+			var/image/I = image(icon, "[reinforced.icon_reinf]_flip[type]")
+			I.color = reinforced.icon_colour
+			I.alpha = 255 * reinforced.opacity
+			overlays += I
+
+		if(carpeted)
+			for(var/n in connections)
+				overlays += "carpet_flip[type]"
+
+// set propagate if you're updating a table that should update tables around it too, for example if it's a new table or something important has changed (like material).
+/obj/structure/table/proc/update_connections(propagate=0)
+	if(!material)
+		connections = list("nw0", "ne0", "sw0", "se0")
+
+		if(propagate)
+			for(var/obj/structure/table/T in oview(src, 1))
+				T.update_connections()
+		return
+
+	var/list/blocked_dirs = list()
+	for(var/obj/structure/window/W in get_turf(src))
+		if(W.is_fulltile())
+			connections = list("nw0", "ne0", "sw0", "se0")
+			return
+		blocked_dirs |= W.dir
+
+	for(var/D in list(NORTH, SOUTH, EAST, WEST) - blocked_dirs)
+		var/turf/T = get_step(src, D)
+		for(var/obj/structure/window/W in T)
+			if(W.is_fulltile() || W.dir == reverse_dir[D])
+				blocked_dirs |= D
+				break
+			else
+				if(W.dir != D) // it's off to the side
+					blocked_dirs |= W.dir|D // blocks the diagonal
+
+	for(var/D in list(NORTHEAST, NORTHWEST, SOUTHEAST, SOUTHWEST) - blocked_dirs)
+		var/turf/T = get_step(src, D)
+
+		for(var/obj/structure/window/W in T)
+			if(W.is_fulltile() || W.dir & reverse_dir[D])
+				blocked_dirs |= D
+				break
+
+	// Blocked cardinals block the adjacent diagonals too. Prevents weirdness with tables.
+	for(var/x in list(NORTH, SOUTH))
+		for(var/y in list(EAST, WEST))
+			if((x in blocked_dirs) || (y in blocked_dirs))
+				blocked_dirs |= x|y
+
+	var/list/connection_dirs = list()
+
+	for(var/obj/structure/table/T in oview(src, 1))
+		var/T_dir = get_dir(src, T)
+		if(T_dir in blocked_dirs) continue
+		if(material == T.material && flipped == T.flipped)
+			connection_dirs |= T_dir
+		if(propagate)
+			spawn(0)
+				T.update_connections()
+				T.update_icon()
+
+	connections = dirs_to_corner_states(connection_dirs)
+
+#define CORNER_NONE 0
+#define CORNER_EASTWEST 1
+#define CORNER_DIAGONAL 2
+#define CORNER_NORTHSOUTH 4
+
+/proc/dirs_to_corner_states(list/dirs)
+	if(!istype(dirs)) return
+
+	var/NE = CORNER_NONE
+	var/NW = CORNER_NONE
+	var/SE = CORNER_NONE
+	var/SW = CORNER_NONE
+
+	if(NORTH in dirs)
+		NE |= CORNER_NORTHSOUTH
+		NW |= CORNER_NORTHSOUTH
+	if(SOUTH in dirs)
+		SW |= CORNER_NORTHSOUTH
+		SE |= CORNER_NORTHSOUTH
+	if(EAST in dirs)
+		SE |= CORNER_EASTWEST
+		NE |= CORNER_EASTWEST
+	if(WEST in dirs)
+		NW |= CORNER_EASTWEST
+		SW |= CORNER_EASTWEST
+	if(NORTHWEST in dirs)
+		NW |= CORNER_DIAGONAL
+	if(NORTHEAST in dirs)
+		NE |= CORNER_DIAGONAL
+	if(SOUTHEAST in dirs)
+		SE |= CORNER_DIAGONAL
+	if(SOUTHWEST in dirs)
+		SW |= CORNER_DIAGONAL
+
+	return list("ne[NE]", "se[SE]", "sw[SW]", "nw[NW]")
+
+#undef CORNER_NONE
+#undef CORNER_EASTWEST
+#undef CORNER_DIAGONAL
+#undef CORNER_NORTHSOUTH
