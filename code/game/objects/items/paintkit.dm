@@ -168,7 +168,7 @@
 /obj/item/device/kit/paint/gygax/darkgygax
 	name = "\"Silhouette\" Gygax customisation kit"
 	new_name = "Gygax \"Silhouette\""
-	new_desc = "An ominous Gygax exosuit modelled after the fictional corporate 'death squads' that were popular back in 2554."
+	new_desc = "An ominous Gygax exosuit modelled after the fictional corporate 'death squads' that were popular in pulp action-thrillers back in 2554."
 	new_icon = "darkgygax"
 
 /obj/item/device/kit/paint/gygax/recitence
