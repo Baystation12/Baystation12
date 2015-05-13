@@ -106,7 +106,6 @@
 
 	if(loc)
 		loc.Exited(src)
-	loc = null
 
 	if(prob(30))
 		explosion(get_turf(loc), 0, 0, 1, 3)
@@ -460,6 +459,8 @@
 
 
 /obj/mecha/proc/setInternalDamage(int_dam_flag)
+	if(!pr_internal_damage) return
+
 	internal_damage |= int_dam_flag
 	pr_internal_damage.start()
 	log_append_to_last("Internal damage of type [int_dam_flag].",1)
