@@ -37,6 +37,12 @@
 
 	health += maxhealth - old_maxhealth
 
+/obj/structure/table/proc/take_damage(amount)
+	health -= amount
+	if(health <= 0)
+		visible_message("<span class='warning'>\The [src] breaks down!</span>")
+		break_to_parts()
+
 /obj/structure/table/New()
 	..()
 	// One table per turf.
@@ -55,6 +61,7 @@
 	update_connections(1)
 	update_icon()
 	update_desc()
+	update_material()
 
 /obj/structure/table/Destroy()
 	material = null
@@ -63,6 +70,17 @@
 		T.update_icon()
 	..()
 
+/obj/structure/table/examine(mob/user)
+	. = ..()
+	if(health < maxhealth)
+		switch(health / maxhealth)
+			if(0.0 to 0.5)
+				user << "<span class='warning'>It looks severely damaged!</span>"
+			if(0.25 to 0.5)
+				user << "<span class='warning'>It looks damaged!</span>"
+			if(0.5 to 1.0)
+				user << "<span class='notice'>It has a few scrapes and dents.</span>"
+
 /obj/structure/table/attackby(obj/item/weapon/W, mob/user)
 
 	if(reinforced && istype(W, /obj/item/weapon/screwdriver))
@@ -70,6 +88,7 @@
 		if(!reinforced)
 			update_desc()
 			update_icon()
+			update_material()
 		return 1
 
 	if(!reinforced && material && istype(W, /obj/item/weapon/wrench))
@@ -77,17 +96,34 @@
 		if(!material)
 			update_connections(1)
 			update_icon()
+			for(var/obj/structure/table/T in oview(src, 1))
+				T.update_icon()
+			update_desc()
+			update_material()
 		return 1
 
 	if(!reinforced && !material && istype(W, /obj/item/weapon/wrench))
 		dismantle(W, user)
 		return 1
 
+	if(health < maxhealth && istype(W, /obj/item/weapon/weldingtool))
+		var/obj/item/weapon/weldingtool/F = W
+		if(F.welding)
+			user << "<span class='notice'>You begin reparing damage to \the [src].</span>"
+			if(!do_after(user, 20) || !F.remove_fuel(1, user))
+				return
+			user.visible_message("<span class='notice'>\The [user] repairs some damage to \the [src].</span>",
+			                              "<span class='notice'>You repair some damage to \the [src].</span>")
+			health = max(health+(maxhealth/5), maxhealth) // 20% repair per application
+			return 1
+
 	if(!material && can_plate && istype(W, /obj/item/stack/sheet))
 		material = common_material_add(W, user, "plat")
 		if(material)
 			update_connections(1)
 			update_icon()
+			update_desc()
+			update_material()
 		return 1
 
 	return ..()
@@ -105,11 +141,17 @@
 
 	if(!can_reinforce)
 		user << "<span class='warning'>\The [src] cannot be reinforced!</span>"
+		return
+
+	if(!material)
+		user << "<span class='warning'>Plate \the [src] before reinforcing it!</span>"
+		return
 
 	reinforced = common_material_add(S, user, "reinforc")
 	if(reinforced)
 		update_desc()
 		update_icon()
+		update_material()
 
 /obj/structure/table/proc/update_desc()
 	if(material)

@@ -32,13 +32,6 @@
 /obj/item/weapon/storage/backpack/cultpack/cultify()
 	return
 
-/obj/item/weapon/table_parts/cultify()
-	new /obj/item/weapon/table_parts/wood(loc)
-	..()
-
-/obj/item/weapon/table_parts/wood/cultify()
-	return
-
 /obj/machinery/cultify()
 	// We keep the number of cultified machines down by only converting those that are dense
 	// The alternative is to keep a separate file of exceptions.

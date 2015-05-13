@@ -203,7 +203,7 @@
 "dU" = (/obj/structure/sign/atmosplaque{pixel_y = 31},/turf/simulated/floor/airless{icon_state = "damaged2"},/area/awaymission/northblock)
 "dV" = (/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"; tag = ""},/turf/simulated/floor/airless{icon_state = "floorscorched1"},/area/awaymission/northblock)
 "dW" = (/obj/structure/window/reinforced{dir = 4},/turf/simulated/floor{icon_state = "showroomfloor"},/area/awaymission/research)
-"dX" = (/obj/item/weapon/table_parts,/turf/simulated/floor{icon_state = "showroomfloor"},/area/awaymission/research)
+"dX" = (/obj/structure/table,/turf/simulated/floor{icon_state = "showroomfloor"},/area/awaymission/research)
 "dY" = (/obj/structure/table/standard,/obj/item/stack/cable_coil{amount = 5},/obj/item/weapon/screwdriver,/turf/simulated/floor{icon_state = "showroomfloor"},/area/awaymission/research)
 "dZ" = (/obj/structure/computerframe{anchored = 1},/turf/simulated/floor{icon_state = "showroomfloor"},/area/awaymission/research)
 "ea" = (/obj/machinery/light,/obj/structure/computerframe{anchored = 1},/turf/simulated/floor{icon_state = "showroomfloor"},/area/awaymission/research)

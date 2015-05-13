@@ -1,6 +1,7 @@
 var/list/name_to_material
 
 /proc/populate_material_list()
+	if(name_to_material) return // Already set up!
 	name_to_material = list()
 	for(var/type in typesof(/material) - /material)
 		var/material/new_mineral = new type
@@ -116,6 +117,7 @@ var/list/name_to_material
 	stack_type = /obj/item/stack/sheet/glass
 	icon_colour = "#00E1FF"
 	opacity = 0.3
+	integrity = 100
 
 /material/plastic
 	name = "plastic"

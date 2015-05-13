@@ -1,5 +1,7 @@
 
 /obj/structure/table/proc/straight_table_check(var/direction)
+	if(health > 100)
+		return 0
 	var/obj/structure/table/T
 	for(var/angle in list(-90,90))
 		T = locate() in get_step(src.loc,turn(direction,angle))
@@ -8,8 +10,6 @@
 	T = locate() in get_step(src.loc,direction)
 	if (!T || T.flipped == 1 || T.material != material)
 		return 1
-	if(T.health > 100)
-		return 0
 	return T.straight_table_check(direction)
 
 /obj/structure/table/verb/do_flip()
@@ -92,6 +92,7 @@
 		var/obj/structure/table/T = locate() in get_step(src,D)
 		if(T && T.flipped == 0 && T.material == material && material)
 			T.flip(direction)
+	take_damage(rand(5, 20))
 	update_connections(1)
 	update_icon()
 

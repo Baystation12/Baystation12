@@ -1,0 +1,5 @@
+author: GinjaNinja32
+delete-after: True
+
+changes:
+  - rscadd: "Rewrote tables. To construct a table, use steel to make a table frame, then plate the frame with a material such as steel, gold, wood, etc. Hold a stack in your hand and drag it to the table to reinforce it. To deconstruct a table, use a screwdriver to remove the reinforcements (if present), then a wrench to remove the plating, and a wrench again to dismantle the frame. Use a welder to repair any damage."
