@@ -14,20 +14,6 @@
 		machines = dd_sortedObjectList(machines)
 
 /datum/controller/process/machinery/proc/internal_process()
-	for(var/datum/powernet/powerNetwork in powernets)
-		if(istype(powerNetwork) && !powerNetwork.disposed)
-			powerNetwork.reset()
-			scheck()
-			continue
-
-		powernets.Remove(powerNetwork)
-
-	// Currently only used by powersinks. These items get priority processed before machinery
-	for(var/obj/item/I in processing_power_items)
-		if(!I.pwr_drain()) // 0 = Process Kill, remove from processing list.
-			processing_power_items.Remove(I)
-		scheck()
-
 	for(var/obj/machinery/M in machines)
 		if(M && !M.gcDestroyed)
 			#ifdef PROFILE_MACHINES
@@ -51,6 +37,20 @@
 			machine_profiling[M.type] += (time_end - time_start)
 			#endif
 
+		scheck()
+
+	for(var/datum/powernet/powerNetwork in powernets)
+		if(istype(powerNetwork) && !powerNetwork.disposed)
+			powerNetwork.reset()
+			scheck()
+			continue
+
+		powernets.Remove(powerNetwork)
+
+	// Currently only used by powersinks. These items get priority processed before machinery
+	for(var/obj/item/I in processing_power_items)
+		if(!I.pwr_drain()) // 0 = Process Kill, remove from processing list.
+			processing_power_items.Remove(I)
 		scheck()
 
 
