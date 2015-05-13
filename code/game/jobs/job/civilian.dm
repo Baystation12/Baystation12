@@ -23,7 +23,7 @@
 		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/black(H), slot_shoes)
 		H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/bartender(H), slot_w_uniform)
 		H.equip_to_slot_or_del(new /obj/item/device/pda/bar(H), slot_belt)
-		H.species.equip_survival_gear()
+		H.species.equip_survival_gear(H)
 		return 1
 
 
@@ -51,7 +51,7 @@
 		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/black(H), slot_shoes)
 		H.equip_to_slot_or_del(new /obj/item/clothing/head/chefhat(H), slot_head)
 		H.equip_to_slot_or_del(new /obj/item/device/pda/chef(H), slot_belt)
-		H.species.equip_survival_gear()
+		H.species.equip_survival_gear(H)
 		return 1
 
 
