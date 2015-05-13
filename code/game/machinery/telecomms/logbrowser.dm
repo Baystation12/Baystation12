@@ -63,64 +63,37 @@
 					// If the log is a speech file
 					if(C.input_type == "Speech File")
 
-						dat += "<li><font color = #008F00>[C.name]</font color>  <font color = #FF0000><a href='?src=\ref[src];delete=[i]'>\[X\]</a></font color><br>"
+						dat += "<li><font color = #008F00>[C.name]</font>  <font color = #FF0000><a href='?src=\ref[src];delete=[i]'>\[X\]</a></font><br>"
 
 						// -- Determine race of orator --
 
-						var/race			   // The actual race of the mob
-						var/language = "Human" // MMIs, pAIs, Cyborgs and humans all speak Human
-						var/mobtype = C.parameters["mobtype"]
-						var/mob/M = new mobtype
-
-						if(ishuman(M) || isbrain(M))
-							var/mob/living/carbon/human/H = M
-							race = "[H.species.name]"
-
-
-						else if(issmall(M))
-							race = "Monkey"
-							language = race
-
-						else if(issilicon(M) || C.parameters["job"] == "AI") // sometimes M gets deleted prematurely for AIs... just check the job
-							race = "Artificial Life"
-
-						else if(isslime(M)) // NT knows a lot about slimes, but not aliens. Can identify slimes
-							race = "slime"
-							language = race
-
-						else if(isanimal(M))
-							race = "Domestic Animal"
-							language = race
-
-						else
-							race = "<i>Unidentifiable</i>"
-							language = race
-
-						qdel(M)
+						var/race = C.parameters["race"]			   // The actual race of the mob
+						var/language = C.parameters["language"] // The language spoken, or null/""
 
 						// -- If the orator is a human, or universal translate is active, OR mob has universal speech on --
 
-						if(language == "Human" || universal_translate || C.parameters["uspeech"])
-							dat += "<u><font color = #18743E>Data type</font color></u>: [C.input_type]<br>"
-							dat += "<u><font color = #18743E>Source</font color></u>: [C.parameters["name"]] (Job: [C.parameters["job"]])<br>"
-							dat += "<u><font color = #18743E>Class</font color></u>: [race]<br>"
-							dat += "<u><font color = #18743E>Contents</font color></u>: \"[C.parameters["message"]]\"<br>"
-
+						if(universal_translate || C.parameters["uspeech"] || C.parameters["intelligible"])
+							dat += "<u><font color = #18743E>Data type</font></u>: [C.input_type]<br>"
+							dat += "<u><font color = #18743E>Source</font></u>: [C.parameters["name"]] (Job: [C.parameters["job"]])<br>"
+							dat += "<u><font color = #18743E>Class</font></u>: [race]<br>"
+							dat += "<u><font color = #18743E>Contents</font></u>: \"[C.parameters["message"]]\"<br>"
+							if(language)
+								dat += "<u><font color = #18743E>Language</font></u>: [language]<br/>"
 
 						// -- Orator is not human and universal translate not active --
 
 						else
-							dat += "<u><font color = #18743E>Data type</font color></u>: Audio File<br>"
-							dat += "<u><font color = #18743E>Source</font color></u>: <i>Unidentifiable</i><br>"
-							dat += "<u><font color = #18743E>Class</font color></u>: [race]<br>"
-							dat += "<u><font color = #18743E>Contents</font color></u>: <i>Unintelligble</i><br>"
+							dat += "<u><font color = #18743E>Data type</font></u>: Audio File<br>"
+							dat += "<u><font color = #18743E>Source</font></u>: <i>Unidentifiable</i><br>"
+							dat += "<u><font color = #18743E>Class</font></u>: [race]<br>"
+							dat += "<u><font color = #18743E>Contents</font></u>: <i>Unintelligble</i><br>"
 
 						dat += "</li><br>"
 
 					else if(C.input_type == "Execution Error")
 
-						dat += "<li><font color = #990000>[C.name]</font color>  <font color = #FF0000><a href='?src=\ref[src];delete=[i]'>\[X\]</a></font color><br>"
-						dat += "<u><font color = #787700>Output</font color></u>: \"[C.parameters["message"]]\"<br>"
+						dat += "<li><font color = #990000>[C.name]</font>  <font color = #FF0000><a href='?src=\ref[src];delete=[i]'>\[X\]</a></font color><br>"
+						dat += "<u><font color = #787700>Output</font></u>: \"[C.parameters["message"]]\"<br>"
 						dat += "</li><br>"
 
 

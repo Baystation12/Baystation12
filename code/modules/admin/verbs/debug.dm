@@ -525,6 +525,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	//log_admin("[key_name(src)] has alienized [M.key].")
 	var/list/dresspacks = list(
 		"strip",
+		"job",
 		"standard space gear",
 		"tournament standard red",
 		"tournament standard green",
@@ -555,10 +556,25 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	for (var/obj/item/I in M)
 		if (istype(I, /obj/item/weapon/implant))
 			continue
-		qdel(I)
+		M.drop_from_inventory(I)
+		if(I.loc != M)
+			qdel(I)
 	switch(dresscode)
 		if ("strip")
 			//do nothing
+		if ("job")
+			var/selected_job = input("Select job", "Robust quick dress shop") as null|anything in joblist
+			if (isnull(selected_job))
+				return
+
+			var/datum/job/job = job_master.GetJob(selected_job)
+			if(!job)
+				return
+
+			job.equip(M)
+			job.apply_fingerprints(M)
+			job_master.spawnId(M, selected_job)
+
 		if ("standard space gear")
 			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/black(M), slot_shoes)
 

@@ -26,18 +26,14 @@ var/list/mechtoys = list(
 /obj/item/weapon/paper/manifest
 	name = "supply manifest"
 
-/area/supply/station //DO NOT TURN THE lighting_use_dynamic STUFF ON FOR SHUTTLES. IT BREAKS THINGS.
+/area/supply/station
 	name = "Supply Shuttle"
 	icon_state = "shuttle3"
-	luminosity = 1
-	lighting_use_dynamic = 0
 	requires_power = 0
 
-/area/supply/dock //DO NOT TURN THE lighting_use_dynamic STUFF ON FOR SHUTTLES. IT BREAKS THINGS.
+/area/supply/dock
 	name = "Supply Shuttle"
 	icon_state = "shuttle3"
-	luminosity = 1
-	lighting_use_dynamic = 0
 	requires_power = 0
 
 /obj/structure/plasticflaps //HOW DO YOU CALL THOSE THINGS ANYWAY

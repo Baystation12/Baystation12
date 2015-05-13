@@ -1,4 +1,0 @@
-author: PsiOmegaDelta
-delete-after: True
-changes: 
-  - rscadd: "Examining a pen or crayon now lists the available special commands in the examine tab."

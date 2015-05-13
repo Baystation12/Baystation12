@@ -6,6 +6,7 @@ var/list/accessible_z_levels = list("1" = 5, "3" = 10, "4" = 15, "5" = 10, "6" =
 	icon = 'icons/turf/space.dmi'
 	name = "\proper space"
 	icon_state = "0"
+	dynamic_lighting = 0
 
 	temperature = T20C
 	thermal_conductivity = OPEN_HEAT_TRANSFER_COEFFICIENT
@@ -20,9 +21,9 @@ var/list/accessible_z_levels = list("1" = 5, "3" = 10, "4" = 15, "5" = 10, "6" =
 	if(!config.starlight)
 		return
 	if(locate(/turf/simulated) in orange(src,1))
-		SetLuminosity(config.starlight)
+		set_light(config.starlight)
 	else
-		SetLuminosity(0)
+		set_light(0)
 
 /turf/space/attackby(obj/item/C as obj, mob/user as mob)
 

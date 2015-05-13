@@ -1,38 +1,3 @@
-
-//frame assembly
-
-/obj/item/rust_fuel_compressor_frame
-	name = "Fuel Compressor frame"
-	icon = 'icons/rust.dmi'
-	icon_state = "fuel_compressor0"
-	w_class = 4
-	flags = CONDUCT
-
-/obj/item/rust_fuel_compressor_frame/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if (istype(W, /obj/item/weapon/wrench))
-		new /obj/item/stack/sheet/plasteel( get_turf(src.loc), 12 )
-		qdel(src)
-		return
-	..()
-
-/obj/item/rust_fuel_compressor_frame/proc/try_build(turf/on_wall)
-	if (get_dist(on_wall,usr)>1)
-		return
-	var/ndir = get_dir(usr,on_wall)
-	if (!(ndir in cardinal))
-		return
-	var/turf/loc = get_turf(usr)
-	var/area/A = loc.loc
-	if (!istype(loc, /turf/simulated/floor))
-		usr << "\red Compressor cannot be placed on this spot."
-		return
-	if (A.requires_power == 0 || A.name == "Space")
-		usr << "\red Compressor cannot be placed in this area."
-		return
-	new /obj/machinery/rust_fuel_assembly_port(loc, ndir, 1)
-	qdel(src)
-
-//construction steps
 /obj/machinery/rust_fuel_compressor/New(turf/loc, var/ndir, var/building=0)
 	..()
 
@@ -149,7 +114,7 @@
 		playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
 		if(do_after(user, 50))
 			if(!src || !WT.remove_fuel(3, user)) return
-			new /obj/item/rust_fuel_assembly_port_frame(loc)
+			new /obj/item/frame/rust(loc)
 			user.visible_message(\
 				"\red [src] has been cut away from the wall by [user.name].",\
 				"You detached the compressor frame.",\
