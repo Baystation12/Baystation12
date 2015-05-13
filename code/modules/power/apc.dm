@@ -618,7 +618,9 @@
 				"You replace the damaged APC frame with new one.")
 			qdel(W)
 			stat &= ~BROKEN
-			hacker = null
+			// Malf AI, removes the APC from AI's hacked APCs list.
+			if(hacker && hacker.hacked_apcs && src in hacker.hacked_apcs)
+				hacker.hacked_apcs -= src
 			if (opened==2)
 				opened = 1
 			update_icon()
@@ -735,21 +737,6 @@
 
 	return ui_interact(user)
 
-/*
-/obj/machinery/power/apc/proc/get_malf_status(mob/user)
-	if (malf && (user.mind in malf.current_antagonists) && istype(user, /mob/living/silicon/ai))
-		if (src.malfai == (user:parent ? user:parent : user))
-			if (src.occupier == user)
-				return 3 // 3 = User is shunted in this APC
-			else if (istype(user.loc, /obj/machinery/power/apc))
-				return 4 // 4 = User is shunted in another APC
-			else
-				return 2 // 2 = APC hacked by user, and user is in its core.
-		else
-			return 1 // 1 = APC not hacked.
-	else
-		return 0 // 0 = User is not a Malf AI
-*/
 
 /obj/machinery/power/apc/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	if(!user)
@@ -766,7 +753,6 @@
 		"totalCharging" = round(lastused_charging),
 		"coverLocked" = coverlocked,
 		"siliconUser" = istype(user, /mob/living/silicon),
-		/*"malfStatus" = get_malf_status(user),*/
 
 		"powerChannels" = list(
 			list(
