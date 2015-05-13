@@ -1511,7 +1511,32 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 					/obj/item/weapon/stock_parts/subspace/crystal,
 					/obj/item/weapon/storage/toolbox/electrical)
 
+/datum/supply_packs/randomised/exosuit_mod
+	num_contained = 1
+	contains = list(
+		/obj/item/device/kit/paint/ripley,
+		/obj/item/device/kit/paint/ripley/death,
+		/obj/item/device/kit/paint/ripley/flames_red,
+		/obj/item/device/kit/paint/ripley/flames_blue
+		)
+	name = "Random APLU modkit"
+	cost = 200
+	containertype = /obj/structure/closet/crate
+	containername = "heavy crate"
+	group = "Miscellaneous"
 
+/datum/supply_packs/randomised/exosuit_mod/durand
+	contains = list(
+		/obj/item/device/kit/paint/durand,
+		/obj/item/device/kit/paint/durand/seraph,
+		/obj/item/device/kit/paint/durand/phazon
+		)
+	name = "Random Durand exosuit modkit"
 
-
-
+/datum/supply_packs/randomised/exosuit_mod/gygax
+	contains = list(
+		/obj/item/device/kit/paint/gygax,
+		/obj/item/device/kit/paint/gygax/darkgygax,
+		/obj/item/device/kit/paint/gygax/recitence
+		)
+	name = "Random Gygax exosuit modkit"
