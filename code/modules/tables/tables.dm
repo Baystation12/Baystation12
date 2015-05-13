@@ -91,7 +91,26 @@
 			update_material()
 		return 1
 
-	if(!reinforced && material && istype(W, /obj/item/weapon/wrench))
+	if(carpeted && istype(W, /obj/item/weapon/crowbar))
+		user.visible_message("<span class='notice'>\The [user] removes the carpet from \the [src].</span>",
+		                              "<span class='notice'>You remove the carpet from \the [src].</span>")
+		new /obj/item/stack/tile/carpet(loc)
+		carpeted = 0
+		update_icon()
+		return 1
+
+	if(!carpeted && material && istype(W, /obj/item/stack/tile/carpet))
+		var/obj/item/stack/tile/carpet/C = W
+		if(C.use(1))
+			user.visible_message("<span class='notice'>\The [user] adds \the [C] to \the [src].</span>",
+			                              "<span class='notice'>You add \the [C] to \the [src].</span>")
+			carpeted = 1
+			update_icon()
+			return 1
+		else
+			user << "<span class='warning'>You don't have enough carpet!</span>"
+
+	if(!reinforced && !carpeted && material && istype(W, /obj/item/weapon/wrench))
 		remove_material(W, user)
 		if(!material)
 			update_connections(1)
@@ -102,7 +121,7 @@
 			update_material()
 		return 1
 
-	if(!reinforced && !material && istype(W, /obj/item/weapon/wrench))
+	if(!carpeted && !reinforced && !material && istype(W, /obj/item/weapon/wrench))
 		dismantle(W, user)
 		return 1
 
@@ -212,6 +231,8 @@
 		new reinforced.stack_type(src.loc)
 	if(material && material.stack_type && (full_return || prob(50)))
 		new material.stack_type(src.loc)
+	if(carpeted && (full_return || prob(50)))
+		new /obj/item/stack/tile/carpet(src.loc)
 	if(full_return || prob(50))
 		new /obj/item/stack/sheet/metal(src.loc)
 	qdel(src)
