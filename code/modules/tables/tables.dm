@@ -8,6 +8,8 @@
 	density = 1
 	anchored = 1
 	climbable = 1
+	layer = 2.8
+	throwpass = 1
 	var/flipped = 0
 	var/maxhealth = 10
 	var/health = 10
