@@ -310,14 +310,6 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	access = access_hydroponics
 	group = "Hydroponics"
 
-/datum/supply_packs/lisa
-	name = "Corgi crate"
-	contains = list()
-	cost = 50
-	containertype = /obj/structure/largecrate/animal/corgi
-	containername = "Corgi crate"
-	group = "Hydroponics"
-
 /datum/supply_packs/seeds
 	name = "Seeds crate"
 	contains = list(/obj/item/seeds/chiliseed,
