@@ -84,6 +84,7 @@
 					M.apply_damage(8,def_zone = "head")
 					visible_message("<span class='danger'>[G.assailant] slams [G.affecting]'s face against \the [src]!</span>")
 					playsound(src.loc, 'sound/weapons/tablehit1.ogg', 50, 1)
+					take_damage(rand(1,5))
 				else
 					user << "<span class='danger'>You need a better grip to do that!</span>"
 					return

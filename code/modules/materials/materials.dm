@@ -109,7 +109,7 @@ var/list/name_to_material
 	icon_colour = "#666666"
 
 /material/steel/holographic
-	name = "holographic [DEFAULT_WALL_MATERIAL]"
+	name = "holographic " + DEFAULT_WALL_MATERIAL
 	display_name = DEFAULT_WALL_MATERIAL
 	stack_type = null
 

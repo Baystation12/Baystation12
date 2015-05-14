@@ -18,6 +18,7 @@
 	var/can_reinforce = 1
 	var/can_plate = 1
 
+	var/manipulating = 0
 	var/material/material = null
 	var/material/reinforced = null
 
@@ -131,6 +132,7 @@
 		var/obj/item/weapon/weldingtool/F = W
 		if(F.welding)
 			user << "<span class='notice'>You begin reparing damage to \the [src].</span>"
+			playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
 			if(!do_after(user, 20) || !F.remove_fuel(1, user))
 				return
 			user.visible_message("<span class='notice'>\The [user] repairs some damage to \the [src].</span>",
@@ -192,37 +194,52 @@
 	if(!istype(M))
 		user << "<span class='warning'>You cannot [verb]e \the [src] with \the [S].</span>"
 		return null
+
+	if(manipulating) return M
+	manipulating = 1
 	user << "<span class='notice'>You begin [verb]ing \the [src] with [M.display_name].</span>"
 	if(!do_after(user, 20) || !S.use(1))
+		manipulating = 0
 		return null
 	user.visible_message("<span class='notice'>\The [user] [verb]es \the [src] with [M.display_name].</span>", "<span class='notice'>You finish [verb]ing \the [src].</span>")
+	manipulating = 0
 	return M
 
 // Returns the material to set the table to.
-/obj/structure/table/proc/common_material_remove(mob/user, material/M, delay, what, type_holding)
+/obj/structure/table/proc/common_material_remove(mob/user, material/M, delay, what, type_holding, sound)
 	if(!M.stack_type)
 		user << "<span class='warning'>You are unable to remove the [what] from this table!</span>"
 		return M
 
+	if(manipulating) return M
+	manipulating = 1
 	user.visible_message("<span class='notice'>\The [user] begins removing the [type_holding] holding \the [src]'s [M.display_name] [what] in place.</span>",
 	                              "<span class='notice'>You begin removing the [type_holding] holding \the [src]'s [M.display_name] [what] in place.</span>")
+	if(sound)
+		playsound(src.loc, sound, 50, 1)
 	if(!do_after(user, 40))
+		manipulating = 0
 		return M
 	user.visible_message("<span class='notice'>\The [user] removes the [M.display_name] [what] from \the [src].</span>",
 	                              "<span class='notice'>You remove the [M.display_name] [what] from \the [src].</span>")
 	new M.stack_type(src.loc)
+	manipulating = 0
 	return null
 
 /obj/structure/table/proc/remove_reinforced(obj/item/weapon/screwdriver/S, mob/user)
-	reinforced = common_material_remove(user, reinforced, 40, "reinforcements", "screws")
+	reinforced = common_material_remove(user, reinforced, 40, "reinforcements", "screws", 'sound/items/Screwdriver.ogg')
 
 /obj/structure/table/proc/remove_material(obj/item/weapon/wrench/W, mob/user)
-	material = common_material_remove(user, material, 20, "plating", "bolts")
+	material = common_material_remove(user, material, 20, "plating", "bolts", 'sound/items/Ratchet.ogg')
 
 /obj/structure/table/proc/dismantle(obj/item/weapon/wrench/W, mob/user)
+	if(manipulating) return
+	manipulating = 1
 	user.visible_message("<span class='notice'>\The [user] begins dismantling \the [src].</span>",
 	                              "<span class='notice'>You begin dismantling \the [src].</span>")
+	playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 	if(!do_after(user, 20))
+		manipulating = 0
 		return
 	user.visible_message("<span class='notice'>\The [user] dismantles \the [src].</span>",
 	                              "<span class='notice'>You dismantle \the [src].</span>")
@@ -276,7 +293,7 @@
 		var/tabledirs = 0
 		for(var/direction in list(turn(dir,90), turn(dir,-90)) )
 			var/obj/structure/table/T = locate(/obj/structure/table ,get_step(src,direction))
-			if (T && T.flipped == 1 && T.dir == src.dir && T.material.name == material.name)
+			if (T && T.flipped == 1 && T.dir == src.dir && material && T.material && T.material.name == material.name)
 				type++
 				tabledirs |= direction
 
@@ -353,7 +370,7 @@
 	for(var/obj/structure/table/T in oview(src, 1))
 		var/T_dir = get_dir(src, T)
 		if(T_dir in blocked_dirs) continue
-		if(material.name == T.material.name && flipped == T.flipped)
+		if(material && T.material && material.name == T.material.name && flipped == T.flipped)
 			connection_dirs |= T_dir
 		if(propagate)
 			spawn(0)
