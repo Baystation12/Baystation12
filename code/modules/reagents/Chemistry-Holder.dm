@@ -435,6 +435,8 @@ var/const/INGEST = 2
 	return 0
 
 /datum/reagents/proc/reaction(var/atom/A, var/method=TOUCH, var/volume_modifier=0)
+	if(!istype(A) || !A.simulated)
+		return
 
 	switch(method)
 		if(TOUCH)
