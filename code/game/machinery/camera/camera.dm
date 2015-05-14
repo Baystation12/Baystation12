@@ -138,8 +138,10 @@
 	else if(iswelder(W) && (wires.CanDeconstruct() || (stat & BROKEN)))
 		if(weld(W, user))
 			if (stat & BROKEN)
-				new /obj/item/weapon/circuitboard/broken(src.loc)
-				new /obj/item/stack/cable_coil(src.loc, length=2)
+				stat &= ~BROKEN
+				cancelCameraAlarm()
+				update_icon()
+				update_coverage()
 			else if(assembly)
 				assembly.loc = src.loc
 				assembly.state = 1
