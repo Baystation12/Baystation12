@@ -226,7 +226,7 @@
 	icon_state = "hatchet"
 	flags = CONDUCT
 	force = 12.0
-	w_class = 3.0
+	w_class = 2
 	throwforce = 15.0
 	throw_speed = 4
 	throw_range = 4
@@ -270,11 +270,3 @@
 	slot_flags = SLOT_BACK
 	origin_tech = "materials=2;combat=2"
 	attack_verb = list("chopped", "sliced", "cut", "reaped")
-
-/obj/item/weapon/scythe/afterattack(atom/A, mob/user as mob, proximity)
-	if(!proximity) return
-	if(istype(A, /obj/effect/plant))
-		for(var/obj/effect/plant/B in orange(A,1))
-			if(prob(80))
-				B.die_off(1)
-		qdel(A)

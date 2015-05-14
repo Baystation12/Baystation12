@@ -394,6 +394,8 @@ var/global/datum/controller/occupations/job_master
 			//Equip job items.
 			job.equip(H)
 			job.apply_fingerprints(H)
+			H.species.equip_survival_gear(H)
+
 			//If some custom items could not be equipped before, try again now.
 			for(var/thing in custom_equip_leftovers)
 				var/datum/gear/G = gear_datums[thing]
@@ -498,20 +500,6 @@ var/global/datum/controller/occupations/job_master
 								new G.path(B)
 						else
 							H << "\red Failed to locate a storage object on your mob, either you spawned with no arms and no backpack or this is a bug."
-
-		//TODO: Generalize this by-species
-		if(H.species)
-			if(H.species.name == "Tajara" || H.species.name == "Unathi")
-				H.equip_to_slot_or_del(new /obj/item/clothing/shoes/sandal(H),slot_shoes,1)
-			else if(H.species.name == "Vox")
-				H.equip_to_slot_or_del(new /obj/item/clothing/mask/breath(H), slot_wear_mask)
-				if(!H.r_hand)
-					H.equip_to_slot_or_del(new /obj/item/weapon/tank/nitrogen(H), slot_r_hand)
-					H.internal = H.r_hand
-				else if (!H.l_hand)
-					H.equip_to_slot_or_del(new /obj/item/weapon/tank/nitrogen(H), slot_l_hand)
-					H.internal = H.l_hand
-				H.internals.icon_state = "internal1"
 
 		if(istype(H)) //give humans wheelchairs, if they need them.
 			var/obj/item/organ/external/l_foot = H.get_organ("l_foot")
