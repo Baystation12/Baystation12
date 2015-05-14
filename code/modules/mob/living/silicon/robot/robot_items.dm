@@ -318,3 +318,54 @@
 	desc = "By retracting limbs and tucking in its head, a combat android can roll at high speeds."
 	icon = 'icons/obj/decals.dmi'
 	icon_state = "shock"
+
+/obj/item/weapon/inflatable_dispenser
+	name = "Inflatables Dispenser"
+	desc = "Small device which allows rapid deployment and removal of inflatables."
+	icon = 'icons/obj/storage.dmi'
+	icon_state = "inf_deployer"
+
+	// By default stores up to 10 walls and 5 doors. May be changed.
+	var/stored_walls = 10
+	var/stored_doors = 5
+	var/max_walls = 10
+	var/max_doors = 5
+	var/mode = 0 // 0 - Walls   1 - Doors
+
+/obj/item/weapon/inflatable_dispenser/examine(var/mob/user)
+	if(!..(user))
+		return
+	user << "It has [stored_walls] wall segments and [stored_doors] door segments stored."
+
+// Primarily used by cyborgs, also available in Engineering
+/obj/item/weapon/inflatable_dispenser/verb/switch_mode()
+	set name = "Change Dispenser Mode"
+	set category = "Object"
+
+	mode = !mode
+	usr << "You change the inflatable dispenser to [mode ? "doors" : "walls"] mode."
+
+/obj/item/weapon/inflatable_dispenser/attack_self(var/mob/user)
+	if(mode) // Door deployment
+		if(!stored_doors)
+			user << "The dispenser is out of doors!"
+			return
+
+		var/turf/T = get_turf(src)
+		if(T)
+			playsound(T, 'sound/items/zip.ogg', 75, 1)
+			user << "You deploy the inflatable door!"
+			new /obj/structure/inflatable/door(T)
+			stored_doors--
+
+	else // Wall deployment
+		if(!stored_walls)
+			user << "The dispenser is out of walls!"
+			return
+
+		var/turf/T = get_turf(src)
+		if(T)
+			playsound(T, 'sound/items/zip.ogg', 75, 1)
+			user << "You deploy the inflatable wall!"
+			new /obj/structure/inflatable/wall(T)
+			stored_walls--

@@ -5,13 +5,26 @@
 	icon_state = "folded_wall"
 	w_class = 3
 
-	attack_self(mob/user)
+/obj/item/inflatable/attack_self(mob/user)
 		playsound(loc, 'sound/items/zip.ogg', 75, 1)
 		user << "\blue You inflate [src]."
 		var/obj/structure/inflatable/R = new /obj/structure/inflatable(user.loc)
 		src.transfer_fingerprints_to(R)
 		R.add_fingerprint(user)
 		qdel(src)
+
+/obj/item/inflatable/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	if(istype(W, /obj/item/weapon/inflatable_dispenser))
+		if(istype(src, /obj/item/inflatable/door)) return ..()
+		var/obj/item/weapon/inflatable_dispenser/D = W
+		if(D.stored_walls < D.max_walls)
+			user << "You pick up [src] and load it into [D]"
+			D.stored_walls++
+			qdel(src)
+			return
+		else
+			user << "[D] is full!"
+	return ..()
 
 /obj/structure/inflatable
 	name = "inflatable wall"
@@ -40,7 +53,7 @@
 /obj/structure/inflatable/bullet_act(var/obj/item/projectile/Proj)
 	if(!(Proj.damage_type == BRUTE || Proj.damage_type == BURN))
 		return
-	
+
 	health -= Proj.damage
 	..()
 	if(health <= 0)
@@ -128,13 +141,25 @@
 	icon = 'icons/obj/inflatable.dmi'
 	icon_state = "folded_door"
 
-	attack_self(mob/user)
+/obj/item/inflatable/door/attack_self(mob/user)
 		playsound(loc, 'sound/items/zip.ogg', 75, 1)
 		user << "\blue You inflate [src]."
 		var/obj/structure/inflatable/door/R = new /obj/structure/inflatable/door(user.loc)
 		src.transfer_fingerprints_to(R)
 		R.add_fingerprint(user)
 		qdel(src)
+
+/obj/item/inflatable/door/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	if(istype(W, /obj/item/weapon/inflatable_dispenser))
+		var/obj/item/weapon/inflatable_dispenser/D = W
+		if(D.stored_doors < D.max_doors)
+			user << "You pick up [src] and load it into [D]"
+			D.stored_doors++
+			qdel(src)
+			return
+		else
+			user << "[D] is full!"
+	return ..()
 
 /obj/structure/inflatable/door //Based on mineral door code
 	name = "inflatable door"
@@ -206,6 +231,34 @@
 	state = 0
 	update_icon()
 	isSwitchingStates = 0
+
+/obj/structure/inflatable/door/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	if(istype(W, /obj/item/weapon/inflatable_dispenser))
+		var/obj/item/weapon/inflatable_dispenser/D = W
+		if(D.stored_doors < D.max_doors)
+			playsound(loc, 'sound/machines/hiss.ogg', 75, 1)
+			visible_message("[user] deflates the [src] with [D]!")
+			D.stored_doors++
+			qdel(src)
+			return
+		else
+			user << "The dispenser is full."
+			return
+	return ..()
+
+/obj/structure/inflatable/wall/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	if(istype(W, /obj/item/weapon/inflatable_dispenser))
+		var/obj/item/weapon/inflatable_dispenser/D = W
+		if(D.stored_walls < D.max_walls)
+			playsound(loc, 'sound/machines/hiss.ogg', 75, 1)
+			visible_message("[user] deflates the [src] with [D]!")
+			D.stored_walls++
+			qdel(src)
+			return
+		else
+			user << "The dispenser is full."
+			return
+	return ..()
 
 /obj/structure/inflatable/door/update_icon()
 	if(state)
