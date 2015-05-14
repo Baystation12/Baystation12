@@ -923,6 +923,11 @@
 	desc = "A plushie of a fuzzy spider! It has eight legs - all the better to hug you with."
 	icon_state = "spiderplushie"
 
+/obj/item/toy/plushie/farwa
+	name = "farwa plush"
+	desc = "A farwa plush doll. It's soft and comforting!"
+	icon_state = "farwaplushie"
+
 //Toy cult sword
 /obj/item/toy/cultsword
 	name = "foam sword"
