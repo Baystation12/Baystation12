@@ -118,7 +118,7 @@
 	var/list/L = hearers(src, dist)
 
 	for (var/obj/mecha/M in mechas_list)
-		if (get_dist(src, M) <= dist)
+		if (M.z == src.z && get_dist(src, M) <= dist)
 			L += M
 
 	return L

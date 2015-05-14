@@ -72,7 +72,7 @@ Radio:
 1355 - Medical
 1357 - Engineering
 1359 - Security
-1341 - death squad
+1341 - deathsquad
 1443 - Confession Intercom
 1347 - Cargo techs
 1349 - Service people

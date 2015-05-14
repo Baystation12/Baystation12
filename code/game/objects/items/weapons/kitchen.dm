@@ -145,7 +145,7 @@
 	throwforce = 6.0
 	throw_speed = 3
 	throw_range = 6
-	matter = list("metal" = 12000)
+	matter = list(DEFAULT_WALL_MATERIAL = 12000)
 	origin_tech = "materials=1"
 	attack_verb = list("slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 
@@ -154,6 +154,12 @@
 							"\red <b>[user] is slitting \his throat with the [src.name]! It looks like \he's trying to commit suicide.</b>", \
 							"\red <b>[user] is slitting \his stomach open with the [src.name]! It looks like \he's trying to commit seppuku.</b>")
 		return (BRUTELOSS)
+
+/obj/item/weapon/kitchenknife/hook
+	name = "meat hook"
+	desc = "A sharp, metal hook what sticks into things."
+	icon_state = "hook_knife"
+	item_state = "hook_knife"
 
 /obj/item/weapon/kitchenknife/ritual
 	name = "ritual knife"
@@ -175,7 +181,7 @@
 	throwforce = 8.0
 	throw_speed = 3
 	throw_range = 6
-	matter = list("metal" = 12000)
+	matter = list(DEFAULT_WALL_MATERIAL = 12000)
 	origin_tech = "materials=1"
 	attack_verb = list("cleaved", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	sharp = 1
@@ -247,7 +253,7 @@
 	throw_range = 5
 	w_class = 3.0
 	flags = CONDUCT
-	matter = list("metal" = 3000)
+	matter = list(DEFAULT_WALL_MATERIAL = 3000)
 	/* // NOPE
 	var/food_total= 0
 	var/burger_amt = 0

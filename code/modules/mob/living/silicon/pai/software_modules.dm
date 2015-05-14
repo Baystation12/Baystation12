@@ -125,16 +125,12 @@
 
 		var/data[0]
 		// This is dumb, but NanoUI breaks if it has no data to send
-		data["a"] = "a"
-
-		if(ui)
-			ui.load_cached_data(ManifestJSON)
+		data["manifest"] = list("__json_cache" = ManifestJSON)
 
 		ui = nanomanager.try_update_ui(user, user, id, ui, data, force_open)
 		if(!ui)
 			// Don't copy-paste this unless you're making a pAI software module!
 			ui = new(user, user, id, "pai_manifest.tmpl", "Crew Manifest", 450, 600)
-			ui.load_cached_data(ManifestJSON)
 			ui.set_initial_data(data)
 			ui.open()
 			ui.set_auto_update(1)
@@ -499,7 +495,6 @@
 		if(!ui)
 			// Don't copy-paste this unless you're making a pAI software module!
 			ui = new(user, user, id, "pai_signaller.tmpl", "Signaller", 320, 150)
-			ui.load_cached_data(ManifestJSON)
 			ui.set_initial_data(data)
 			ui.open()
 

@@ -23,7 +23,7 @@
 		var/fillevel = gulp_size
 
 		if(!R.total_volume || !R)
-			user << "\red The [src.name] is empty!"
+			user << "<span class='danger'>The [src.name] is empty!"
 			return 0
 
 		if(M == user)
@@ -31,10 +31,15 @@
 			if(istype(M,/mob/living/carbon/human))
 				var/mob/living/carbon/human/H = M
 				if(H.species.flags & IS_SYNTHETIC)
-					H << "\red You have a monitor for a head, where do you think you're going to put that?"
+					H << "<span class='danger'>You have a monitor for a head, where do you think you're going to put that?</span>"
+					return
+				
+				var/obj/item/blocked = H.check_mouth_coverage()
+				if(blocked)
+					user << "<span class='warning'>\The [blocked] is in the way!</span>"
 					return
 
-			M << "\blue You swallow a gulp from \the [src]."
+			M << "<span class='notice'>You swallow a gulp from \the [src].</span>"
 			if(reagents.total_volume)
 				reagents.trans_to_ingest(M, gulp_size)
 
@@ -44,14 +49,17 @@
 
 			var/mob/living/carbon/human/H = M
 			if(H.species.flags & IS_SYNTHETIC)
-				H << "\red They have a monitor for a head, where do you think you're going to put that?"
+				user << "<span class='danger'>They have a monitor for a head, where do you think you're going to put that?</span>"
+				return
+			
+			var/obj/item/blocked = H.check_mouth_coverage()
+			if(blocked)
+				user << "<span class='warning'>\The [blocked] is in the way!</span>"
 				return
 
-			for(var/mob/O in viewers(world.view, user))
-				O.show_message("\red [user] attempts to feed [M] [src].", 1)
+			user.visible_message("<span class='danger'>[user] attempts to feed [M] [src].</span>")
 			if(!do_mob(user, M)) return
-			for(var/mob/O in viewers(world.view, user))
-				O.show_message("\red [user] feeds [M] [src].", 1)
+			user.visible_message("<span class='danger'>[user] feeds [M] [src].</span>")
 
 			M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been fed [src.name] by [user.name] ([user.ckey]) Reagents: [reagentlist(src)]</font>")
 			user.attack_log += text("\[[time_stamp()]\] <font color='red'>Fed [M.name] by [M.name] ([M.ckey]) Reagents: [reagentlist(src)]</font>")
@@ -260,12 +268,31 @@
 	volume = 120
 	center_of_mass = list("x"=17, "y"=10)
 
+/obj/item/weapon/reagent_containers/food/drinks/teapot
+	name = "teapot"
+	desc = "An elegant teapot. It simply oozes class."
+	icon_state = "teapot"
+	item_state = "teapot"
+	amount_per_transfer_from_this = 10
+	volume = 120
+	center_of_mass = list("x"=17, "y"=7)
+
 /obj/item/weapon/reagent_containers/food/drinks/flask
 	name = "Captain's Flask"
 	desc = "A metal flask belonging to the captain"
 	icon_state = "flask"
 	volume = 60
 	center_of_mass = list("x"=17, "y"=7)
+
+/obj/item/weapon/reagent_containers/food/drinks/flask/shiny
+	name = "shiny flask"
+	desc = "A shiny metal flask. It appears to have a Greek symbol inscribed on it."
+	icon_state = "shinyflask"
+
+/obj/item/weapon/reagent_containers/food/drinks/flask/lithium
+	name = "lithium flask"
+	desc = "A flask with a Lithium Atom symbol on it."
+	icon_state = "lithiumflask"
 
 /obj/item/weapon/reagent_containers/food/drinks/flask/detflask
 	name = "Detective's Flask"

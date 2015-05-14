@@ -146,7 +146,7 @@
 	slot_flags = SLOT_BELT|SLOT_HOLSTER
 	w_class = 3.0
 
-	matter = list("glass" = 10,"metal" = 10)
+	matter = list("glass" = 10,DEFAULT_WALL_MATERIAL = 10)
 
 	attack_verb = list("struck", "pistol whipped", "hit", "bashed")
 	var/bullets = 7.0
@@ -201,7 +201,7 @@
 	flags = CONDUCT
 	w_class = 1.0
 
-	matter = list("metal" = 10,"glass" = 10)
+	matter = list(DEFAULT_WALL_MATERIAL = 10,"glass" = 10)
 
 	var/amount_left = 7.0
 
@@ -922,6 +922,11 @@
 	name = "spider plush"
 	desc = "A plushie of a fuzzy spider! It has eight legs - all the better to hug you with."
 	icon_state = "spiderplushie"
+
+/obj/item/toy/plushie/farwa
+	name = "farwa plush"
+	desc = "A farwa plush doll. It's soft and comforting!"
+	icon_state = "farwaplushie"
 
 //Toy cult sword
 /obj/item/toy/cultsword

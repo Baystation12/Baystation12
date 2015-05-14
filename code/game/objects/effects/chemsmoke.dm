@@ -149,7 +149,7 @@
 								if(!dist)
 									dist = 1
 								R.reaction_mob(A, volume = R.volume / dist)
-							else if(istype(A, /obj))
+							else if(istype(A, /obj) && !A.simulated)
 								R.reaction_obj(A, R.volume)
 					sleep(30)
 

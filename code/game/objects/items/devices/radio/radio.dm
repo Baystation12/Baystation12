@@ -26,7 +26,7 @@
 	throw_range = 9
 	w_class = 2
 
-	matter = list("glass" = 25,"metal" = 75)
+	matter = list("glass" = 25,DEFAULT_WALL_MATERIAL = 75)
 	var/const/FREQ_LISTENING = 1
 
 
@@ -210,6 +210,9 @@
 		return 0
 
 	M.last_target_radio = world.time // For the projectile targeting system
+
+	if(!radio_connection)
+		set_frequency(frequency)
 
 	/* Quick introduction:
 		This new radio system uses a very robust FTL signaling technology unoriginally

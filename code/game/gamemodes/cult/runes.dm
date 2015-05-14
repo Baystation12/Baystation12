@@ -127,6 +127,7 @@ var/list/sacrificed = list()
 					if(target.getFireLoss() < 100)
 						target.hallucination = min(target.hallucination, 500)
 					return 0
+
 				target.take_overall_damage(0, rand(5, 20)) // You dirty resister cannot handle the damage to your mind. Easily. - even cultists who accept right away should experience some effects
 				// Resist messages go!
 				if(initial_message) //don't do this stuff right away, only if they resist or hesitate.
@@ -417,6 +418,7 @@ var/list/sacrificed = list()
 			var/mob/dead/observer/ghost
 			for(var/mob/dead/observer/O in this_rune.loc)
 				if(!O.client)	continue
+				if(!O.MayRespawn()) continue
 				if(O.mind && O.mind.current && O.mind.current.stat != DEAD)	continue
 				ghost = O
 				break
