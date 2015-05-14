@@ -35,7 +35,8 @@
 
 /obj/item/weapon/melee/baton/proc/deductcharge(var/chrgdeductamt)
 	if(bcell)
-		if(bcell.use(chrgdeductamt))
+		if(bcell.charge >= chrgdeductamt)
+			bcell.use(chrgdeductamt)
 			return 1
 		else
 			status = 0
