@@ -268,12 +268,31 @@
 	volume = 120
 	center_of_mass = list("x"=17, "y"=10)
 
+/obj/item/weapon/reagent_containers/food/drinks/teapot
+	name = "teapot"
+	desc = "An elegant teapot. It simply oozes class."
+	icon_state = "teapot"
+	item_state = "teapot"
+	amount_per_transfer_from_this = 10
+	volume = 120
+	center_of_mass = list("x"=17, "y"=7)
+
 /obj/item/weapon/reagent_containers/food/drinks/flask
 	name = "Captain's Flask"
 	desc = "A metal flask belonging to the captain"
 	icon_state = "flask"
 	volume = 60
 	center_of_mass = list("x"=17, "y"=7)
+
+/obj/item/weapon/reagent_containers/food/drinks/flask/shiny
+	name = "shiny flask"
+	desc = "A shiny metal flask. It appears to have a Greek symbol inscribed on it."
+	icon_state = "shinyflask"
+
+/obj/item/weapon/reagent_containers/food/drinks/flask/lithium
+	name = "lithium flask"
+	desc = "A flask with a Lithium Atom symbol on it."
+	icon_state = "lithiumflask"
 
 /obj/item/weapon/reagent_containers/food/drinks/flask/detflask
 	name = "Detective's Flask"

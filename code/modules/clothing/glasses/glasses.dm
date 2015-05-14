@@ -62,6 +62,11 @@
 	..()
 	overlay = global_hud.science
 
+/obj/item/clothing/glasses/science/scanners
+	name = "Scanning Goggles"
+	desc = "A very oddly shaped pair of goggles with bits of wire poking out the sides. A soft humming sound emanates from it."
+	icon_state = "uzenwa_sissra_1"
+
 /obj/item/clothing/glasses/night
 	name = "Night Vision Goggles"
 	desc = "You can totally see in the dark now!"

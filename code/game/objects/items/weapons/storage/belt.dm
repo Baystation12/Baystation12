@@ -92,11 +92,8 @@
 /obj/item/weapon/storage/belt/medical/emt
 	name = "EMT utility belt"
 	desc = "A sturdy black webbing belt with attached pouches."
-	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "emsbelt"
 	item_state = "emsbelt"
-
-
 
 /obj/item/weapon/storage/belt/security
 	name = "security belt"
