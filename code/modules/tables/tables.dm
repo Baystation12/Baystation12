@@ -227,6 +227,8 @@
 	user.visible_message("<span class='notice'>\The [user] dismantles \the [src].</span>",
 	                              "<span class='notice'>You dismantle \the [src].</span>")
 	new /obj/item/stack/sheet/metal(src.loc)
+	qdel(src)
+	return
 
 /obj/structure/table/proc/break_to_parts(full_return = 0)
 	if(reinforced && reinforced.stack_type && (full_return || prob(25)))
@@ -274,7 +276,7 @@
 		var/tabledirs = 0
 		for(var/direction in list(turn(dir,90), turn(dir,-90)) )
 			var/obj/structure/table/T = locate(/obj/structure/table ,get_step(src,direction))
-			if (T && T.flipped == 1 && T.dir == src.dir && T.material == material)
+			if (T && T.flipped == 1 && T.dir == src.dir && T.material.name == material.name)
 				type++
 				tabledirs |= direction
 
@@ -351,7 +353,7 @@
 	for(var/obj/structure/table/T in oview(src, 1))
 		var/T_dir = get_dir(src, T)
 		if(T_dir in blocked_dirs) continue
-		if(material == T.material && flipped == T.flipped)
+		if(material.name == T.material.name && flipped == T.flipped)
 			connection_dirs |= T_dir
 		if(propagate)
 			spawn(0)

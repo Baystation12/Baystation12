@@ -1,7 +1,7 @@
 var/list/name_to_material
 
-/proc/populate_material_list()
-	if(name_to_material) return // Already set up!
+/proc/populate_material_list(force_remake=0)
+	if(name_to_material && !force_remake) return // Already set up!
 	name_to_material = list()
 	for(var/type in typesof(/material) - /material)
 		var/material/new_mineral = new type
@@ -9,6 +9,12 @@ var/list/name_to_material
 			continue
 		name_to_material[lowertext(new_mineral.name)] = new_mineral
 	return 1
+
+/proc/get_material_by_name(name)
+	if(!name_to_material)
+		populate_material_list()
+
+	return name_to_material[name]
 
 /*
 	Valid sprite masks:
@@ -102,6 +108,11 @@ var/list/name_to_material
 	icon_reinf = "reinf_over"
 	icon_colour = "#666666"
 
+/material/steel/holographic
+	name = "holographic [DEFAULT_WALL_MATERIAL]"
+	display_name = DEFAULT_WALL_MATERIAL
+	stack_type = null
+
 /material/plasteel
 	name = "plasteel"
 	stack_type = /obj/item/stack/sheet/plasteel
@@ -158,6 +169,11 @@ var/list/name_to_material
 	integrity = 25
 	icon_base = "solid"
 	explosion_resistance = 2
+
+/material/wood/holographic
+	name = "holographic wood"
+	display_name = "wood"
+	stack_type = null
 
 /material/cult
 	name = "cult"

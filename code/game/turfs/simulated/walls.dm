@@ -25,11 +25,9 @@ var/list/global/wall_cache = list()
 /turf/simulated/wall/New(var/newloc, var/materialtype, var/rmaterialtype)
 	..(newloc)
 	icon_state = "blank"
-	if(!name_to_material)
-		populate_material_list()
 	if(!materialtype)
 		materialtype = DEFAULT_WALL_MATERIAL
-	material = name_to_material[materialtype]
+	material = get_material_by_name(materialtype)
 	if(!isnull(rmaterialtype))
 		reinf_material = name_to_material[rmaterialtype]
 	update_material()
