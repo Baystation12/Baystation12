@@ -42,10 +42,8 @@
 	if(rigged && amount > 0)
 		explode()
 		return 0
-
-	if(charge < amount)	return 0
-	charge = (charge - amount)
-	return 1
+	charge = max(0, charge - amount)
+	return charge
 
 // recharge the cell
 /obj/item/weapon/cell/proc/give(var/amount)
