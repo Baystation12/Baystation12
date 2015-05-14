@@ -53,21 +53,20 @@
 /obj/item/weapon/storage/box/survival/
 	New()
 		..()
-		contents = list()
-		sleep(1)
 		new /obj/item/clothing/mask/breath( src )
 		new /obj/item/weapon/tank/emergency_oxygen( src )
-		return
+
+/obj/item/weapon/storage/box/survival/vox/
+	New()
+		..()
+		new /obj/item/clothing/mask/breath( src )
+		new /obj/item/weapon/tank/emergency_nitrogen( src )
 
 /obj/item/weapon/storage/box/engineer/
 	New()
 		..()
-		contents = list()
-		sleep(1)
 		new /obj/item/clothing/mask/breath( src )
 		new /obj/item/weapon/tank/emergency_oxygen/engi( src )
-		return
-
 
 /obj/item/weapon/storage/box/gloves
 	name = "box of latex gloves"
