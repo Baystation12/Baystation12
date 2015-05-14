@@ -59,15 +59,10 @@
 
 /obj/item/clothing/suit/space/void/examine(user)
 	..(user)
-	if(boots || helmet || tank)
-		var/D = "Installed equipment: "
-		var/first = 1
-		for(var/obj/item/I in list(helmet,boots,tank))
-			if (I)
-				D += "[first?"":", "]\the [I]\icon[I]"
-				first = 0
-		D += "."
-		user << D
+	var/list/part_list = new
+	for(var/obj/item/I in list(helmet,boots,tank))
+		part_list += "\a [I]"
+	user << "\The [src] has [english_list(part_list)] installed."
 	if(tank && in_range(src,user))
 		user << "<span class='notice'>The wrist-mounted pressure gauge reads [max(round(tank.air_contents.return_pressure()),0)] kPa remaining in \the [tank].</span>"
 
@@ -96,10 +91,7 @@
 			helmet.canremove = 0
 
 	if(boots)
-		if(H.shoes)
-			M << "You are unable to deploy your suit's magboots as \the [H.shoes] are in the way."
-		else if (H.equip_to_slot_if_possible(boots, slot_shoes))
-			M << "Your suit's boots deploy with a hiss."
+		if (H.equip_to_slot_if_possible(boots, slot_shoes))
 			boots.canremove = 0
 
 	if(tank)
@@ -115,18 +107,18 @@
 	var/mob/living/carbon/human/H
 
 	if(helmet)
+		helmet.canremove = 1
 		H = helmet.loc
 		if(istype(H))
 			if(helmet && H.head == helmet)
-				helmet.canremove = 1
 				H.drop_from_inventory(helmet)
 				helmet.loc = src
 
 	if(boots)
+		boots.canremove = 1
 		H = boots.loc
 		if(istype(H))
 			if(boots && H.shoes == boots)
-				boots.canremove = 1
 				H.drop_from_inventory(boots)
 				boots.loc = src
 

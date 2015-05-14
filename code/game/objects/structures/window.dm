@@ -88,11 +88,11 @@
 		index = 0
 		while(index < 2)
 			new shardtype(loc)
-			if(reinf) new /obj/item/stack/rods(loc)
+			if(reinf) PoolOrNew(/obj/item/stack/rods, loc)
 			index++
 	else
 		new shardtype(loc)
-		if(reinf) new /obj/item/stack/rods(loc)
+		if(reinf) PoolOrNew(/obj/item/stack/rods, loc)
 	qdel(src)
 	return
 
@@ -479,10 +479,10 @@
 /obj/structure/window/reinforced/polarized/proc/toggle()
 	if(opacity)
 		animate(src, color="#FFFFFF", time=5)
-		SetOpacity(0)
+		set_opacity(0)
 	else
 		animate(src, color="#222222", time=5)
-		SetOpacity(1)
+		set_opacity(1)
 
 
 

@@ -308,12 +308,6 @@ var/list/solars_list = list()
 /obj/machinery/power/solar_control/drain_power()
 	return -1
 
-/obj/machinery/power/solar_control/New()
-	..()
-	if(ticker)
-		initialize()
-	connect_to_network()
-
 /obj/machinery/power/solar_control/Destroy()
 	for(var/obj/machinery/power/solar/M in connected_panels)
 		M.unset_control()
@@ -368,6 +362,7 @@ var/list/solars_list = list()
 	..()
 	if(!powernet) return
 	set_panels(cdir)
+	connect_to_network()
 
 /obj/machinery/power/solar_control/update_icon()
 	if(stat & BROKEN)

@@ -76,7 +76,6 @@ move an amendment</a> to the drawing.</p>
 /obj/item/blueprints/proc/get_area()
 	var/turf/T = get_turf(usr)
 	var/area/A = T.loc
-	A = A.master
 	return A
 
 /obj/item/blueprints/proc/get_area_type(var/area/A = get_area())
@@ -122,7 +121,6 @@ move an amendment</a> to the drawing.</p>
 		return
 	var/area/A = new
 	A.name = str
-	A.tagbase = "[A.type]_[md5(str)]" // without this dynamic light system ruin everithing
 	//var/ma
 	//ma = A.master ? "[A.master]" : "(null)"
 	//world << "DEBUG: create_area: <br>A.name=[A.name]<br>A.tag=[A.tag]<br>A.master=[ma]"
@@ -133,9 +131,6 @@ move an amendment</a> to the drawing.</p>
 	move_turfs_to_area(turfs, A)
 
 	A.always_unpowered = 0
-	for(var/turf/T in A.contents)
-		T.lighting_changed = 1
-		lighting_controller.changed_turfs += T
 
 	spawn(5)
 		//ma = A.master ? "[A.master]" : "(null)"
@@ -161,8 +156,7 @@ move an amendment</a> to the drawing.</p>
 		usr << "\red Text too long."
 		return
 	set_area_machinery_title(A,str,prevname)
-	for(var/area/RA in A.related)
-		RA.name = str
+	A.name = str
 	usr << "\blue You set the area '[prevname]' title to '[str]'."
 	interact()
 	return
@@ -172,17 +166,17 @@ move an amendment</a> to the drawing.</p>
 /obj/item/blueprints/proc/set_area_machinery_title(var/area/A,var/title,var/oldtitle)
 	if (!oldtitle) // or replacetext goes to infinite loop
 		return
-	for(var/area/RA in A.related)
-		for(var/obj/machinery/alarm/M in RA)
-			M.name = replacetext(M.name,oldtitle,title)
-		for(var/obj/machinery/power/apc/M in RA)
-			M.name = replacetext(M.name,oldtitle,title)
-		for(var/obj/machinery/atmospherics/unary/vent_scrubber/M in RA)
-			M.name = replacetext(M.name,oldtitle,title)
-		for(var/obj/machinery/atmospherics/unary/vent_pump/M in RA)
-			M.name = replacetext(M.name,oldtitle,title)
-		for(var/obj/machinery/door/M in RA)
-			M.name = replacetext(M.name,oldtitle,title)
+
+	for(var/obj/machinery/alarm/M in A)
+		M.name = replacetext(M.name,oldtitle,title)
+	for(var/obj/machinery/power/apc/M in A)
+		M.name = replacetext(M.name,oldtitle,title)
+	for(var/obj/machinery/atmospherics/unary/vent_scrubber/M in A)
+		M.name = replacetext(M.name,oldtitle,title)
+	for(var/obj/machinery/atmospherics/unary/vent_pump/M in A)
+		M.name = replacetext(M.name,oldtitle,title)
+	for(var/obj/machinery/door/M in A)
+		M.name = replacetext(M.name,oldtitle,title)
 	//TODO: much much more. Unnamed airlocks, cameras, etc.
 
 /obj/item/blueprints/proc/check_tile_is_border(var/turf/T2,var/dir)
@@ -206,10 +200,6 @@ move an amendment</a> to the drawing.</p>
 		if(turn(dir,180) == D.dir)
 			return BORDER_BETWEEN
 	if (locate(/obj/machinery/door) in T2)
-		return BORDER_2NDTILE
-	if (locate(/obj/structure/falsewall) in T2)
-		return BORDER_2NDTILE
-	if (locate(/obj/structure/falserwall) in T2)
 		return BORDER_2NDTILE
 
 	return BORDER_NONE

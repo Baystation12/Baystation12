@@ -106,7 +106,6 @@ var/list/tape_roll_applications = list()
 				var/obj/item/tape/P = new tape_type(cur)
 				P.icon_state = "[P.icon_base]_[dir]"
 			cur = get_step_towards(cur,end)
-	//is_blocked_turf(var/turf/T)
 		usr << "\blue You finish placing the [src]."	//Git Test
 
 /obj/item/taperoll/afterattack(var/atom/A, mob/user as mob, proximity)

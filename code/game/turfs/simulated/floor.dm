@@ -41,7 +41,7 @@ var/list/wood_icons = list("wood","wood-broken")
 	var/lava = 0
 	var/broken = 0
 	var/burnt = 0
-	var/mineral = "metal"
+	var/mineral = DEFAULT_WALL_MATERIAL
 	var/floor_type = /obj/item/stack/tile/plasteel
 	var/lightfloor_state // for light floors, this is the state of the tile. 0-7, 0x4 is on-bit - use the helper procs below
 
@@ -82,19 +82,19 @@ var/list/wood_icons = list("wood","wood-broken")
 		if(1.0)
 			src.ChangeTurf(/turf/space)
 		if(2.0)
-			switch(pick(1,2;75,3))
+			switch(pick(40;1,40;2,3))
 				if (1)
-					src.ReplaceWithLattice()
 					if(prob(33)) new /obj/item/stack/sheet/metal(src)
+					src.ReplaceWithLattice()
 				if(2)
 					src.ChangeTurf(/turf/space)
 				if(3)
+					if(prob(33)) new /obj/item/stack/sheet/metal(src)
 					if(prob(80))
 						src.break_tile_to_plating()
 					else
 						src.break_tile()
 					src.hotspot_expose(1000,CELL_VOLUME)
-					if(prob(33)) new /obj/item/stack/sheet/metal(src)
 		if(3.0)
 			if (prob(50))
 				src.break_tile()
@@ -133,19 +133,19 @@ turf/simulated/floor/proc/update_icon()
 			switch(get_lightfloor_state())
 				if(LIGHTFLOOR_STATE_OK)
 					icon_state = "light_on"
-					SetLuminosity(5)
+					set_light(5)
 				if(LIGHTFLOOR_STATE_FLICKER)
 					var/num = pick("1","2","3","4")
 					icon_state = "light_on_flicker[num]"
-					SetLuminosity(5)
+					set_light(5)
 				if(LIGHTFLOOR_STATE_BREAKING)
 					icon_state = "light_on_broken"
-					SetLuminosity(5)
+					set_light(5)
 				if(LIGHTFLOOR_STATE_BROKEN)
 					icon_state = "light_off"
-					SetLuminosity(0)
+					set_light(0)
 		else
-			SetLuminosity(0)
+			set_light(0)
 			icon_state = "light_off"
 	else if(is_grass_floor())
 		if(!broken && !burnt)
@@ -339,7 +339,7 @@ turf/simulated/floor/proc/update_icon()
 
 	if(!floor_type) return
 	icon_plating = "plating"
-	SetLuminosity(0)
+	set_light(0)
 	floor_type = null
 	intact = 0
 	broken = 0
@@ -355,7 +355,7 @@ turf/simulated/floor/proc/update_icon()
 	broken = 0
 	burnt = 0
 	intact = 1
-	SetLuminosity(0)
+	set_light(0)
 	if(T)
 		if(istype(T,/obj/item/stack/tile/plasteel))
 			floor_type = T.type

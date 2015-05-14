@@ -188,8 +188,8 @@
 //Standard robots use config for crit, which is somewhat excessive for these guys.
 //Drones killed by damage will gib.
 /mob/living/silicon/robot/drone/handle_regular_status_updates()
-
-	if((health <= -35 || (master_fabricator && src.z != master_fabricator.z)) && src.stat != 2)
+	var/turf/T = get_turf(src)
+	if((!T || health <= -35 || (master_fabricator && T.z != master_fabricator.z)) && src.stat != DEAD)
 		timeofdeath = world.time
 		death() //Possibly redundant, having trouble making death() cooperate.
 		gib()
@@ -287,6 +287,7 @@
 	src.verbs -= silicon_subsystems
 
 /mob/living/silicon/robot/drone/construction
+	icon_state = "constructiondrone"
 	law_type = /datum/ai_laws/construction_drone
 	module_type = /obj/item/weapon/robot_module/drone/construction
 	can_pull_size = 5

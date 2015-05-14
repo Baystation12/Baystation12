@@ -82,6 +82,7 @@
 
 /mob/living/silicon/isSilicon()
 	return 1
+
 /proc/isAI(A)
 	if(istype(A, /mob/living/silicon/ai))
 		return 1
@@ -93,10 +94,10 @@
 /mob/living/silicon/ai/isAI()
 	return 1
 
-/mob/proc/isRobot()
+/mob/proc/isMobAI()
 	return 0
 
-/mob/living/silicon/robot/isRobot()
+/mob/living/silicon/ai/isMobAI()
 	return 1
 
 /mob/proc/isSynthetic()
@@ -619,3 +620,61 @@ proc/is_blind(A)
 // Returns true if the mob has a client which has been active in the last given X minutes.
 /mob/proc/is_client_active(var/active = 1)
 	return client && client.inactivity < active MINUTES
+
+#define SAFE_PERP -50
+/mob/living/proc/assess_perp(var/auth_weapons, var/check_records, var/check_arrest)
+	if(stat == DEAD)
+		return SAFE_PERP
+
+	return 0
+
+/mob/living/carbon/human/assess_perp(var/obj/access_obj, var/auth_weapons, var/check_records, var/check_arrest)
+	var/threatcount = ..()
+	if(. == SAFE_PERP)
+		return SAFE_PERP
+
+	//Agent cards lower threatlevel.
+	var/obj/item/weapon/card/id/id = GetIdCard(src)
+	if(id && istype(id, /obj/item/weapon/card/id/syndicate))
+		threatcount -= 2
+	// A proper	CentCom id is hard currency.
+	else if(id && istype(id, /obj/item/weapon/card/id/centcom))
+		return SAFE_PERP
+
+	if(auth_weapons && !access_obj.allowed(src))
+		if(istype(l_hand, /obj/item/weapon/gun) || istype(l_hand, /obj/item/weapon/melee))
+			threatcount += 4
+
+		if(istype(r_hand, /obj/item/weapon/gun) || istype(r_hand, /obj/item/weapon/melee))
+			threatcount += 4
+
+		if(istype(belt, /obj/item/weapon/gun) || istype(belt, /obj/item/weapon/melee))
+			threatcount += 2
+
+		if(species.name != "Human")
+			threatcount += 2
+
+	if(check_records || check_arrest)
+		var/perpname = name
+		if(id)
+			perpname = id.registered_name
+
+		var/datum/data/record/R = find_security_record("name", perpname)
+		if(check_records && !R)
+			threatcount += 4
+
+		if(check_arrest && R && (R.fields["criminal"] == "*Arrest*"))
+			threatcount += 4
+
+	return threatcount
+
+/mob/living/simple_animal/hostile/assess_perp(var/obj/access_obj, var/auth_weapons, var/check_records, var/check_arrest)
+	var/threatcount = ..()
+	if(. == SAFE_PERP)
+		return SAFE_PERP
+
+	if(!istype(src, /mob/living/simple_animal/hostile/retaliate/goat))
+		threatcount += 4
+	return threatcount
+
+#undef SAFE_PERP

@@ -149,7 +149,7 @@
 								if(!dist)
 									dist = 1
 								R.reaction_mob(A, volume = R.volume / dist)
-							else if(istype(A, /obj))
+							else if(istype(A, /obj) && !A.simulated)
 								R.reaction_obj(A, R.volume)
 					sleep(30)
 
@@ -229,6 +229,10 @@
 // Fades out the smoke smoothly using it's alpha variable.
 //------------------------------------------
 /datum/effect/effect/system/smoke_spread/chem/proc/fadeOut(var/atom/A, var/frames = 16)
+	if(A.alpha == 0) //Handle already transparent case
+		return
+	if(frames == 0)
+		frames = 1 //We will just assume that by 0 frames, the coder meant "during one frame".
 	var/step = A.alpha / frames
 	for(var/i = 0, i < frames, i++)
 		A.alpha -= step

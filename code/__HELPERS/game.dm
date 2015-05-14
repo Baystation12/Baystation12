@@ -16,22 +16,32 @@
 		return 1
 	return 0
 
+/proc/max_default_z_level()
+	var/max_z = 0
+	for(var/z in config.station_levels)
+		max_z = max(z, max_z)
+	for(var/z in config.admin_levels)
+		max_z = max(z, max_z)
+	for(var/z in config.player_levels)
+		max_z = max(z, max_z)
+	return max_z
+
 /proc/get_area(O)
 	var/turf/loc = get_turf(O)
 	if(loc)
 		var/area/res = loc.loc
-		.= res.master
+		.= res
 
 /proc/get_area_name(N) //get area by its name
 	for(var/area/A in world)
 		if(A.name == N)
 			return A
 	return 0
-    
+
 /proc/get_area_master(const/O)
 	var/area/A = get_area(O)
 	if (isarea(A))
-		return A.master
+		return A
 
 /proc/in_range(source, user)
 	if(get_dist(source, user) <= 1)
@@ -65,18 +75,6 @@
 
 /proc/isNotAdminLevel(var/level)
 	return !isAdminLevel(level)
-
-//Magic constants obtained by using linear regression on right-angled triangles of sides 0<x<1, 0<y<1
-//They should approximate pythagoras theorem well enough for our needs.
-#define k1 0.934
-#define k2 0.427
-/proc/cheap_hypotenuse(Ax,Ay,Bx,By) // T is just the second atom to check distance to center with
-	var/dx = abs(Ax - Bx)	//sides of right-angled triangle
-	var/dy = abs(Ay - By)
-	if(dx>=dy)	return (k1*dx) + (k2*dy)	//No sqrt or powers :)
-	else		return (k2*dx) + (k1*dy)
-#undef k1
-#undef k2
 
 /proc/circlerange(center=usr,radius=3)
 

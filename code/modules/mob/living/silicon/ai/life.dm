@@ -48,7 +48,7 @@
 			loc = T.loc
 			if (istype(loc, /area))
 				//stage = 4
-				if (!loc.master.power_equip && !istype(src.loc,/obj/item))
+				if (!loc.power_equip && !istype(src.loc,/obj/item))
 					//stage = 5
 					blind = 1
 
@@ -115,7 +115,7 @@
 					spawn(20)
 						src << "Backup battery online. Scanners, camera, and radio interface offline. Beginning fault-detection."
 						sleep(50)
-						if (loc.master.power_equip)
+						if (loc.power_equip)
 							if (!istype(T, /turf/space))
 								src << "Alert cancelled. Power has been restored without our assistance."
 								src:aiRestorePowerRoutine = 0
@@ -135,18 +135,17 @@
 
 						var/PRP
 						for (PRP=1, PRP<=4, PRP++)
-							for(var/area/A in current_area.master.related)
-								for (var/obj/machinery/power/apc/APC in A)
-									if (!(APC.stat & BROKEN))
-										theAPC = APC
-										break
+							for (var/obj/machinery/power/apc/APC in current_area)
+								if (!(APC.stat & BROKEN))
+									theAPC = APC
+									break
 							if (!theAPC)
 								switch(PRP)
 									if (1) src << "Unable to locate APC!"
 									else src << "Lost connection with the APC!"
 								src:aiRestorePowerRoutine = 2
 								return
-							if (loc.master.power_equip)
+							if (loc.power_equip)
 								if (!istype(T, /turf/space))
 									src << "Alert cancelled. Power has been restored without our assistance."
 									src:aiRestorePowerRoutine = 0
@@ -181,7 +180,7 @@
 /mob/living/silicon/ai/proc/lacks_power()
 	var/turf/T = get_turf(src)
 	var/area/A = get_area(src)
-	return ((!A.master.power_equip) && A.requires_power == 1 || istype(T, /turf/space)) && !istype(src.loc,/obj/item)
+	return ((!A.power_equip) && A.requires_power == 1 || istype(T, /turf/space)) && !istype(src.loc,/obj/item)
 
 /mob/living/silicon/ai/updatehealth()
 	if(status_flags & GODMODE)

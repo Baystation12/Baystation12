@@ -75,7 +75,6 @@ datum/design/rust_fuel_compressor
 	build_path = "/obj/machinery/power/rust_core"
 	board_type = "machine"
 	origin_tech = "bluespace=3;phorontech=4;magnets=5;powerstorage=6"
-	frame_desc = "Requires 2 Pico Manipulators, 1 Ultra Micro-Laser, 5 Pieces of Cable, 1 Subspace Crystal and 1 Console Screen."
 	req_components = list(
 							"/obj/item/weapon/stock_parts/manipulator/pico" = 2,
 							"/obj/item/weapon/stock_parts/micro_laser/ultra" = 1,
@@ -101,7 +100,6 @@ datum/design/rust_core
 	build_path = "/obj/machinery/power/rust_fuel_injector"
 	board_type = "machine"
 	origin_tech = "powerstorage=3;engineering=4;phorontech=4;materials=6"
-	frame_desc = "Requires 2 Pico Manipulators, 1 Phasic Scanning Module, 1 Super Matter Bin, 1 Console Screen and 5 Pieces of Cable."
 	req_components = list(
 							"/obj/item/weapon/stock_parts/manipulator/pico" = 2,
 							"/obj/item/weapon/stock_parts/scanning_module/phasic" = 1,

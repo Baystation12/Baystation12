@@ -164,7 +164,7 @@
 			switch (Proj.damage_type)
 				if(BRUTE)
 					new /obj/item/stack/sheet/metal(src.loc, 2)
-					new /obj/item/stack/rods(src.loc, 3)
+					PoolOrNew(/obj/item/stack/rods, list(src.loc, 3))
 				if(BURN)
 					new /obj/effect/decal/cleanable/ash(src.loc) // Turn it to ashes!
 			qdel(src)
@@ -394,14 +394,14 @@
 
 	do_animate("opening")
 	icon_state = "door0"
-	src.SetOpacity(0)
+	set_opacity(0)
 	sleep(3)
 	src.density = 0
 	sleep(7)
 	src.layer = open_layer
 	explosion_resistance = 0
 	update_icon()
-	SetOpacity(0)
+	set_opacity(0)
 	update_nearby_tiles()
 	operating = 0
 
@@ -427,7 +427,7 @@
 	sleep(7)
 	update_icon()
 	if(visible && !glass)
-		SetOpacity(1)	//caaaaarn!
+		set_opacity(1)	//caaaaarn!
 	operating = 0
 	update_nearby_tiles()
 

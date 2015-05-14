@@ -10,7 +10,7 @@
 	throw_speed = 1
 	throw_range = 5
 	w_class = 3.0
-	matter = list("metal" = 500)
+	matter = list(DEFAULT_WALL_MATERIAL = 500)
 	origin_tech = "combat=1;phorontech=1"
 	var/status = 0
 	var/throw_amount = 100
@@ -82,7 +82,7 @@
 		if(ptank)
 			ptank.loc = T
 			ptank = null
-		new /obj/item/stack/rods(T)
+		PoolOrNew(/obj/item/stack/rods, T)
 		qdel(src)
 		return
 

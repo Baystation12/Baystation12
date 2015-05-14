@@ -14,6 +14,11 @@
 	var/moved_recently = 0
 	var/mob/pulledby = null
 
+/atom/movable/New()
+	..()
+	if(ticker && ticker.current_state == GAME_STATE_PLAYING)
+		initialize()
+
 /atom/movable/Del()
 	if(isnull(gcDestroyed) && loc)
 		testing("GC: -- [type] was deleted via del() rather than qdel() --")
@@ -25,13 +30,12 @@
 	..()
 
 /atom/movable/Destroy()
-	if(opacity)
-		if(isturf(loc))
-			if(loc:lighting_lumcount > 1)
-				UpdateAffectingLights()
+	. = ..()
+
 	loc = null
 
-	..()
+/atom/movable/proc/initialize()
+	return
 
 /atom/movable/Bump(var/atom/A, yes)
 	if(src.throwing)

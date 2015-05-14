@@ -68,7 +68,7 @@
 	if(!new_text)
 		return
 
-	free_space -= length(strip_html_properly(new_text, 0))
+	free_space -= length(strip_html_properly(new_text))
 
 /obj/item/weapon/paper/examine(mob/user)
 	..()
@@ -95,15 +95,15 @@
 		usr << "<span class='warning'>You cut yourself on the paper.</span>"
 		return
 	var/n_name = sanitizeSafe(input(usr, "What would you like to label the paper?", "Paper Labelling", null)  as text, MAX_NAME_LEN)
-	
+
 	// We check loc one level up, so we can rename in clipboards and such. See also: /obj/item/weapon/photo/rename()
 	if((loc == usr || loc.loc && loc.loc == usr) && usr.stat == 0 && n_name)
 		name = n_name
 		if(n_name != "paper")
 			desc = "This is a paper titled '" + name + "'."
-		
+
 		add_fingerprint(usr)
-	return	
+	return
 
 /obj/item/weapon/paper/attack_self(mob/living/user as mob)
 	user.examinate(src)
@@ -280,31 +280,6 @@
 
 	return t
 
-
-/obj/item/weapon/paper/proc/openhelp(mob/user as mob)
-	user << browse({"<HTML><HEAD><TITLE>Pen Help</TITLE></HEAD>
-	<BODY>
-		<b><center>Crayon&Pen commands</center></b><br>
-		<br>
-		\[br\] : Creates a linebreak.<br>
-		\[center\] - \[/center\] : Centers the text.<br>
-		\[h1\] - \[/h1\] : Makes the text a first level heading<br>
-		\[h2\] - \[/h2\] : Makes the text a second level heading<br>
-		\[h3\] - \[/h3\] : Makes the text a third level heading<br>
-		\[b\] - \[/b\] : Makes the text <b>bold</b>.<br>
-		\[i\] - \[/i\] : Makes the text <i>italic</i>.<br>
-		\[u\] - \[/u\] : Makes the text <u>underlined</u>.<br>
-		\[large\] - \[/large\] : Increases the <font size = \"4\">size</font> of the text.<br>
-		\[sign\] : Inserts a signature of your name in a foolproof way.<br>
-		\[field\] : Inserts an invisible field which lets you start type from there. Useful for forms.<br>
-		<br>
-		<b><center>Pen exclusive commands</center></b><br>
-		\[small\] - \[/small\] : Decreases the <font size = \"1\">size</font> of the text.<br>
-		\[list\] - \[/list\] : A list.<br>
-		\[*\] : A dot used for lists.<br>
-		\[hr\] : Adds a horizontal rule.
-	</BODY></HTML>"}, "window=paper_help")
-
 /obj/item/weapon/paper/proc/burnpaper(obj/item/weapon/flame/P, mob/user)
 	var/class = "<span class='warning'>"
 
@@ -343,7 +318,7 @@
 			usr << "<span class='info'>There isn't enough space left on \the [src] to write anything.</span>"
 			return
 
-		var/t =  strip_html_properly(input("Enter what you want to write:", "Write", null, null) as message)
+		var/t =  sanitize(input("Enter what you want to write:", "Write", null, null) as message, free_space, extra = 0)
 
 		if(!t)
 			return
@@ -351,8 +326,8 @@
 		var/obj/item/i = usr.get_active_hand() // Check to see if he still got that darn pen, also check if he's using a crayon or pen.
 		var/iscrayon = 0
 		if(!istype(i, /obj/item/weapon/pen))
-			if(!istype(i, /obj/item/toy/crayon))
-				return
+			return
+		if(istype(i, /obj/item/weapon/pen/crayon))
 			iscrayon = 1
 
 
@@ -450,17 +425,17 @@
 		user << "<span class='notice'>You clip the [P.name] to [(src.name == "paper") ? "the paper" : src.name].</span>"
 		src.loc = B
 		P.loc = B
-		
+
 		B.pages.Add(src)
 		B.pages.Add(P)
 		B.update_icon()
 
-	else if(istype(P, /obj/item/weapon/pen) || istype(P, /obj/item/toy/crayon))
-		if ( istype(P, /obj/item/weapon/pen/robopen) && P:mode == 2 )
-			P:RenamePaper(user,src)
+	else if(istype(P, /obj/item/weapon/pen))
+		var/obj/item/weapon/pen/robopen/RP = P
+		if ( istype(RP) && RP.mode == 2 )
+			RP.RenamePaper(user,src)
 		else
 			user << browse("<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY>[info_links][stamps]</BODY></HTML>", "window=[name]")
-		//openhelp(user)
 		return
 
 	else if(istype(P, /obj/item/weapon/stamp))

@@ -8,6 +8,7 @@
 	desc = "Computer designed to remotely monitor power levels around the station"
 	icon = 'icons/obj/computer.dmi'
 	icon_state = "power"
+	light_color = "#ffcc33"
 
 	//computer stuff
 	density = 1

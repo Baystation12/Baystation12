@@ -22,7 +22,7 @@
 
 /obj/machinery/portable_atmospherics/powered/pump/New()
 	..()
-	cell = new/obj/item/weapon/cell(src)
+	cell = new/obj/item/weapon/cell/apc(src)
 
 	var/list/air_mix = StandardAirMix()
 	src.air_contents.adjust_multi("oxygen", air_mix["oxygen"], "nitrogen", air_mix["nitrogen"])
@@ -78,7 +78,7 @@
 			output_volume = environment.volume * environment.group_multiplier
 			air_temperature = environment.temperature? environment.temperature : air_contents.temperature
 		else
-			pressure_delta = target_pressure - air_contents.return_pressure()
+			pressure_delta = environment.return_pressure() - target_pressure
 			output_volume = air_contents.volume * air_contents.group_multiplier
 			air_temperature = air_contents.temperature? air_contents.temperature : environment.temperature
 

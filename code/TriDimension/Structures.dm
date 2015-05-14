@@ -97,7 +97,7 @@
 
 			src.d_state = 1
 			if(target)
-				var/obj/item/stack/rods/R = new /obj/item/stack/rods(target.loc)
+				var/obj/item/stack/rods/R = PoolOrNew(/obj/item/stack/rods, target.loc)
 				R.amount = 2
 				qdel(Target)
 

@@ -1,12 +1,12 @@
 /*
 	Defines a firing mode for a gun.
-	
+
 	burst			number of shots fired when the gun is used
 	burst_delay 	tick delay between shots in a burst
 	fire_delay		tick delay after the last shot before the gun may be used again
 	move_delay		tick delay after the last shot before the player may move
 	dispersion		dispersion of each shot in the burst measured in tiles per 7 tiles angle ratio
-	accuracy		accuracy modifier applied to each shot in tiles. 
+	accuracy		accuracy modifier applied to each shot in tiles.
 					applied on top of the base weapon accuracy.
 */
 /datum/firemode
@@ -18,7 +18,7 @@
 	var/list/accuracy = list(0)
 	var/list/dispersion = list(0)
 
-//using a list makes defining fire modes for new guns much nicer, 
+//using a list makes defining fire modes for new guns much nicer,
 //however we convert the lists to datums in part so that firemodes can be VVed if necessary.
 /datum/firemode/New(list/properties = null)
 	..()
@@ -41,7 +41,7 @@
 	item_state = "gun"
 	flags =  CONDUCT
 	slot_flags = SLOT_BELT|SLOT_HOLSTER
-	matter = list("metal" = 2000)
+	matter = list(DEFAULT_WALL_MATERIAL = 2000)
 	w_class = 3
 	throwforce = 5
 	throw_speed = 4
@@ -57,6 +57,7 @@
 	var/fire_sound_text = "gunshot"
 	var/recoil = 0		//screen shake
 	var/silenced = 0
+	var/muzzle_flash = 3
 	var/accuracy = 0   //accuracy is measured in tiles. +1 accuracy means that everything is effectively one tile closer for the purpose of miss chance, -1 means the opposite. launchers are not supported, at the moment.
 	var/scoped_accuracy = null
 
@@ -65,7 +66,7 @@
 	var/sel_mode = 1 //index of the currently selected mode
 	var/list/firemodes = list()
 	var/firemode_type = /datum/firemode //for subtypes that need custom firemode data
-	
+
 	//aiming system stuff
 	var/keep_aim = 1 	//1 for keep shooting until aim is lowered
 						//0 for one bullet after tarrget moves and aim is lowered
@@ -82,7 +83,7 @@
 	else
 		for(var/i in 1 to firemodes.len)
 			firemodes[i] = new firemode_type(firemodes[i])
-	
+
 	if(isnull(scoped_accuracy))
 		scoped_accuracy = accuracy
 
@@ -94,9 +95,9 @@
 		return 0
 	if(!user.IsAdvancedToolUser())
 		return 0
-	
+
 	var/mob/living/M = user
-	
+
 	if(HULK in M.mutations)
 		M << "<span class='danger'>Your fingers are much too large for the trigger guard!</span>"
 		return 0
@@ -106,7 +107,7 @@
 			if(process_projectile(P, user, user, pick("l_foot", "r_foot")))
 				handle_post_fire(user, user)
 				user.visible_message(
-					"<span class='danger'>[user] shoots \himself in the foot with \the [src]!</span>", 
+					"<span class='danger'>[user] shoots \himself in the foot with \the [src]!</span>",
 					"<span class='danger'>You shoot yourself in the foot with \the [src]!</span>"
 					)
 				M.drop_item()
@@ -157,9 +158,9 @@
 
 	if(world.time < next_fire_time)
 		if (world.time % 3) //to prevent spam
-			user << "<span class='warning'>[src] is not ready to fire again!"
+			user << "<span class='warning'>[src] is not ready to fire again!</span>"
 		return
-	
+
 	//unpack firemode data
 	var/datum/firemode/firemode = firemodes[sel_mode]
 	var/_burst = firemode.burst
@@ -179,27 +180,27 @@
 		if(!projectile)
 			handle_click_empty(user)
 			break
-		
+
 		var/acc = firemode.accuracy[min(i, firemode.accuracy.len)]
 		var/disp = firemode.dispersion[min(i, firemode.dispersion.len)]
 		process_accuracy(projectile, user, target, acc, disp)
-		
-		if(pointblank) 
+
+		if(pointblank)
 			process_point_blank(projectile, user, target)
-		
+
 		if(process_projectile(projectile, user, target, user.zone_sel.selecting, clickparams))
 			handle_post_fire(user, target, pointblank, reflex)
 			update_icon()
-		
+
 		if(i < _burst)
 			sleep(_burst_delay)
-		
-		if(!target)
+
+		if(!(target && target.loc))
 			target = targloc
 			pointblank = 0
-	
+
 	update_held_icon()
-	
+
 	//update timing
 	user.next_move = world.time + 4
 	if(user.client) user.client.move_delay = world.time + _move_delay
@@ -213,7 +214,7 @@
 /obj/item/weapon/gun/proc/can_hit(atom/target as mob, var/mob/living/user as mob)
 	if(!special_check(user))
 		return 2
-	//just assume we can shoot through glass and stuff. No big deal, the player can just choose to not target someone 
+	//just assume we can shoot through glass and stuff. No big deal, the player can just choose to not target someone
 	//on the other side of a window if it makes a difference. Or if they run behind a window, too bad.
 	return check_trajectory(target, user)
 
@@ -231,7 +232,7 @@
 		playsound(user, fire_sound, 10, 1)
 	else
 		playsound(user, fire_sound, 50, 1)
-		
+
 		if(reflex)
 			user.visible_message(
 				"<span class='reflex_shoot'><b>\The [user] fires \the [src][pointblank ? " point blank at \the [target]":""] by reflex!<b></span>",
@@ -244,7 +245,13 @@
 				"<span class='warning'>You fire \the [src]!</span>",
 				"You hear a [fire_sound_text]!"
 				)
-	
+
+		if(muzzle_flash)
+			var/turf/T_user = get_turf(user)
+			var/turf/T_target = get_turf(target)
+			var/obj/effect/effect/smoke/illumination/I = new /obj/effect/effect/smoke/illumination(get_step(T_user, get_dir(T_user,T_target)), brightness=muzzle_flash, lifetime=8)
+			I.alpha = 0
+
 	if(recoil)
 		spawn()
 			shake_camera(user, recoil+1, recoil)
@@ -258,7 +265,7 @@
 
 	//default point blank multiplier
 	var/damage_mult = 1.3
-	
+
 	//determine multiplier due to the target being grabbed
 	if(ismob(target))
 		var/mob/M = target
@@ -276,11 +283,11 @@
 	var/obj/item/projectile/P = projectile
 	if(!istype(P))
 		return //default behaviour only applies to true projectiles
-	
+
 	//Accuracy modifiers
 	P.accuracy = accuracy + acc_mod
 	P.dispersion = dispersion
-	
+
 	//accuracy bonus from aiming
 	if (aim_targets && (target in aim_targets))
 		//If you aim at someone beforehead, it'll hit more often.
@@ -293,10 +300,10 @@
 	var/obj/item/projectile/P = projectile
 	if(!istype(P))
 		return 0 //default behaviour only applies to true projectiles
-	
+
 	if(params)
 		P.set_clickpoint(params)
-	
+
 	//shooting while in shock
 	var/x_offset = 0
 	var/y_offset = 0
@@ -317,7 +324,7 @@
 	if(!ishuman(user))
 		return
 	var/mob/living/carbon/human/M = user
-	
+
 	mouthshoot = 1
 	M.visible_message("\red [user] sticks their gun in their mouth, ready to pull the trigger...")
 	if(!do_after(user, 40))
@@ -357,7 +364,7 @@
 	var/zoom_offset = round(world.view * zoom_amount)
 	var/view_size = round(world.view + zoom_amount)
 	var/scoped_accuracy_mod = zoom_offset
-	
+
 	zoom(zoom_offset, view_size)
 	if(zoom)
 		accuracy = scoped_accuracy + scoped_accuracy_mod

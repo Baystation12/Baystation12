@@ -736,6 +736,10 @@
 			user << "<span class='danger'>The cycler already contains a helmet.</span>"
 			return
 
+		if(I.icon_override == CUSTOM_ITEM_MOB)
+			user << "You cannot refit a customised voidsuit."
+			return
+
 		user << "You fit \the [I] into the suit cycler."
 		user.drop_item()
 		I.loc = src
@@ -753,6 +757,10 @@
 
 		if(suit)
 			user << "<span class='danger'>The cycler already contains a voidsuit.</span>"
+			return
+
+		if(I.icon_override == CUSTOM_ITEM_MOB)
+			user << "You cannot refit a customised voidsuit."
 			return
 
 		user << "You fit \the [I] into the suit cycler."
