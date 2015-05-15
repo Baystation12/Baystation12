@@ -101,6 +101,10 @@
 
 	var/mob/living/carbon/human/H = holder.wearer
 
+	if(!istype(H.loc, /turf))
+		H << "<span class='warning'>You cannot teleport out of your current location.</span>"
+		return 0
+
 	var/turf/T
 	if(target)
 		T = get_turf(target)
