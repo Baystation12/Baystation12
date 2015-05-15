@@ -174,6 +174,12 @@
 		return "unknown"
 	return species_language.get_random_name(gender)
 
+/datum/species/proc/equip_survival_gear(var/mob/living/carbon/human/H)
+	if(H.backbag == 1)
+		H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H), slot_r_hand)
+	else
+		H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H.back), slot_in_backpack)
+
 /datum/species/proc/create_organs(var/mob/living/carbon/human/H) //Handles creation of mob organs.
 
 	for(var/obj/item/organ/organ in H.contents)

@@ -214,7 +214,7 @@
 	icon = 'icons/obj/janitor.dmi'
 	icon_state = "bucket"
 	item_state = "bucket"
-	matter = list("metal" = 200)
+	matter = list(DEFAULT_WALL_MATERIAL = 200)
 	w_class = 3.0
 	amount_per_transfer_from_this = 20
 	possible_transfer_amounts = list(10,20,30,60,120)

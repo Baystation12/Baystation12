@@ -163,13 +163,10 @@
 /datum/reagent/toxin/plantbgone/touch_turf(var/turf/T)
 	if(istype(T, /turf/simulated/wall))
 		var/turf/simulated/wall/W = T
-		if(W.rotting)
-			W.rotting = 0
-			for(var/obj/effect/E in W)
-				if(E.name == "Wallrot")
-					qdel(E)
-
-			W.visible_message("<span class='notice'>The fungi are completely dissolved by the solution!</span>")
+		if(locate(/obj/effect/overlay/wallrot) in W)
+			for(var/obj/effect/overlay/wallrot/E in W)
+				qdel(E)
+			W.visible_message("<span class='notice'>The fungi are completely dissolved by the solution!")
 
 /datum/reagent/toxin/plantbgone/touch_obj(var/obj/O, var/volume)
 	if(istype(O, /obj/effect/alien/weeds/))

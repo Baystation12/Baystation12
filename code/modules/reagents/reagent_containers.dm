@@ -102,6 +102,11 @@
 				H << "<span class='notice'>You have a monitor for a head, where do you think you're going to put that?</span>"
 				return 1
 
+			var/obj/item/blocked = H.check_mouth_coverage()
+			if(blocked)
+				user << "<span class='warning'>\The [blocked] is in the way!</span>"
+				return
+
 		self_feed_message(user)
 		reagents.trans_to_mob(user, amount_per_transfer_from_this, CHEM_INGEST)
 		feed_sound(user)
@@ -111,6 +116,11 @@
 			var/mob/living/carbon/human/H = target
 			if(H.species.flags & IS_SYNTHETIC)
 				H << "<span class='notice'>They have a monitor for a head, where do you think you're going to put that?</span>"
+				return
+
+			var/obj/item/blocked = H.check_mouth_coverage()
+			if(blocked)
+				user << "<span class='warning'>\The [blocked] is in the way!</span>"
 				return
 
 		other_feed_message_start(user, target)

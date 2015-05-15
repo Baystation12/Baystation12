@@ -102,7 +102,7 @@
 			for(var/atom/A in T.contents)
 				if(istype(A, /obj/effect/effect/smoke/chem) || istype(A, /mob))
 					continue
-				else if(isobj(A))
+				else if(isobj(A) && !A.simulated)
 					chemholder.reagents.touch_obj(A)
 
 	var/color = chemholder.reagents.get_color() //build smoke icon

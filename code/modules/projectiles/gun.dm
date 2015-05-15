@@ -41,7 +41,7 @@
 	item_state = "gun"
 	flags =  CONDUCT
 	slot_flags = SLOT_BELT|SLOT_HOLSTER
-	matter = list("metal" = 2000)
+	matter = list(DEFAULT_WALL_MATERIAL = 2000)
 	w_class = 3
 	throwforce = 5
 	throw_speed = 4
@@ -57,6 +57,7 @@
 	var/fire_sound_text = "gunshot"
 	var/recoil = 0		//screen shake
 	var/silenced = 0
+	var/muzzle_flash = 3
 	var/accuracy = 0   //accuracy is measured in tiles. +1 accuracy means that everything is effectively one tile closer for the purpose of miss chance, -1 means the opposite. launchers are not supported, at the moment.
 	var/scoped_accuracy = null
 
@@ -157,7 +158,7 @@
 
 	if(world.time < next_fire_time)
 		if (world.time % 3) //to prevent spam
-			user << "<span class='warning'>[src] is not ready to fire again!"
+			user << "<span class='warning'>[src] is not ready to fire again!</span>"
 		return
 
 	//unpack firemode data
@@ -244,6 +245,12 @@
 				"<span class='warning'>You fire \the [src]!</span>",
 				"You hear a [fire_sound_text]!"
 				)
+
+		if(muzzle_flash)
+			var/turf/T_user = get_turf(user)
+			var/turf/T_target = get_turf(target)
+			var/obj/effect/effect/smoke/illumination/I = new /obj/effect/effect/smoke/illumination(get_step(T_user, get_dir(T_user,T_target)), brightness=muzzle_flash, lifetime=8)
+			I.alpha = 0
 
 	if(recoil)
 		spawn()

@@ -5,7 +5,7 @@
 	icon_state = "candle1"
 	item_state = "candle1"
 	w_class = 1
-
+	light_color = "#E09D37"
 	var/wax = 2000
 
 /obj/item/weapon/flame/candle/New()
@@ -48,7 +48,7 @@
 		//src.damtype = "fire"
 		for(var/mob/O in viewers(usr, null))
 			O.show_message(flavor_text, 1)
-		SetLuminosity(CANDLE_LUM)
+		set_light(CANDLE_LUM)
 		processing_objects.Add(src)
 
 
@@ -66,22 +66,8 @@
 		var/turf/T = loc
 		T.hotspot_expose(700, 5)
 
-
 /obj/item/weapon/flame/candle/attack_self(mob/user as mob)
 	if(lit)
 		lit = 0
 		update_icon()
-		SetLuminosity(0)
-		user.SetLuminosity(user.luminosity - CANDLE_LUM)
-
-
-/obj/item/weapon/flame/candle/pickup(mob/user)
-	if(lit)
-		SetLuminosity(0)
-		user.SetLuminosity(user.luminosity + CANDLE_LUM)
-
-
-/obj/item/weapon/flame/candle/dropped(mob/user)
-	if(lit)
-		user.SetLuminosity(user.luminosity - CANDLE_LUM)
-		SetLuminosity(CANDLE_LUM)
+		set_light(0)

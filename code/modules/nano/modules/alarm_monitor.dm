@@ -3,14 +3,7 @@
 	var/list_cameras = 0						// Whether or not to list camera references. A future goal would be to merge this with the enginering/security camera console. Currently really only for AI-use.
 	var/list/datum/alarm_handler/alarm_handlers // The particular list of alarm handlers this alarm monitor should present to the user.
 
-/obj/nano_module/alarm_monitor/ai
-	list_cameras = 1
-
-/obj/nano_module/alarm_monitor/ai/New()
-	..()
-	alarm_handlers = alarm_manager.all_handlers
-
-/obj/nano_module/alarm_monitor/borg/New()
+/obj/nano_module/alarm_monitor/all/New()
 	..()
 	alarm_handlers = alarm_manager.all_handlers
 
@@ -73,7 +66,7 @@
 			var/cameras[0]
 			var/lost_sources[0]
 
-			if(list_cameras)
+			if(user.isMobAI())
 				for(var/obj/machinery/camera/C in A.cameras())
 					cameras[++cameras.len] = C.nano_structure()
 			for(var/datum/alarm_source/AS in A.sources)

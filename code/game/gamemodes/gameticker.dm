@@ -292,7 +292,7 @@ var/global/datum/controller/gameticker/ticker
 				if(player.mind.assigned_role != "MODE")
 					job_master.EquipRank(player, player.mind.assigned_role, 0)
 					UpdateFactionList(player)
-					EquipCustomItems(player)
+					equip_custom_items(player)
 		if(captainless)
 			for(var/mob/M in player_list)
 				if(!istype(M,/mob/new_player))
@@ -418,7 +418,7 @@ var/global/datum/controller/gameticker/ticker
 				robo.laws.show_laws(world)
 
 	if(dronecount)
-		world << "<b>There [dronecount>1 ? "were" : "was"] [dronecount] industrious maintenance [dronecount>1 ? "drones" : "drone"] at the end of this round."
+		world << "<b>There [dronecount>1 ? "were" : "was"] [dronecount] industrious maintenance [dronecount>1 ? "drones" : "drone"] at the end of this round.</b>"
 
 	mode.declare_completion()//To declare normal completion.
 

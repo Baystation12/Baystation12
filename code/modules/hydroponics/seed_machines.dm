@@ -88,7 +88,7 @@
 		if(S.seed && S.seed.get_trait(TRAIT_IMMUTABLE) > 0)
 			user << "That seed is not compatible with our genetics technology."
 		else
-			user.remove_from_mob(W)
+			user.drop_from_inventory(W)
 			W.loc = src
 			seed = W
 			user << "You load [W] into [src]."
@@ -120,7 +120,7 @@
 					user << "That disk does not have any gene data loaded."
 					return
 
-			user.remove_from_mob(W)
+			user.drop_from_inventory(W)
 			W.loc = src
 			loaded_disk = W
 			user << "You load [W] into [src]."

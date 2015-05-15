@@ -8,7 +8,6 @@
  *		Toy swords
  *		Toy bosun's whistle
  *      Toy mechs
- *		Crayons
  *		Snap pops
  *		Water flower
  *      Therapy dolls
@@ -147,7 +146,7 @@
 	slot_flags = SLOT_BELT|SLOT_HOLSTER
 	w_class = 3.0
 
-	matter = list("glass" = 10,"metal" = 10)
+	matter = list("glass" = 10,DEFAULT_WALL_MATERIAL = 10)
 
 	attack_verb = list("struck", "pistol whipped", "hit", "bashed")
 	var/bullets = 7.0
@@ -202,7 +201,7 @@
 	flags = CONDUCT
 	w_class = 1.0
 
-	matter = list("metal" = 10,"glass" = 10)
+	matter = list(DEFAULT_WALL_MATERIAL = 10,"glass" = 10)
 
 	var/amount_left = 7.0
 
@@ -374,31 +373,6 @@
 	throwforce = 5
 	w_class = 3
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced")
-
-/*
- * Crayons
- */
-
-/obj/item/toy/crayon
-	name = "crayon"
-	desc = "A colourful crayon. Please refrain from eating it or putting it in your nose."
-	icon = 'icons/obj/crayons.dmi'
-	icon_state = "crayonred"
-	w_class = 1.0
-	attack_verb = list("attacked", "coloured")
-	var/colour = "#FF0000" //RGB
-	var/shadeColour = "#220000" //RGB
-	var/uses = 30 //0 for unlimited uses
-	var/instant = 0
-	var/colourName = "red" //for updateIcon purposes
-
-	suicide_act(mob/user)
-		viewers(user) << "\red <b>[user] is jamming the [src.name] up \his nose and into \his brain. It looks like \he's trying to commit suicide.</b>"
-		return (BRUTELOSS|OXYLOSS)
-
-	New()
-		name = "[colourName] crayon"
-		..()
 
 /*
  * Snap pops
@@ -948,6 +922,11 @@
 	name = "spider plush"
 	desc = "A plushie of a fuzzy spider! It has eight legs - all the better to hug you with."
 	icon_state = "spiderplushie"
+
+/obj/item/toy/plushie/farwa
+	name = "farwa plush"
+	desc = "A farwa plush doll. It's soft and comforting!"
+	icon_state = "farwaplushie"
 
 //Toy cult sword
 /obj/item/toy/cultsword

@@ -93,27 +93,27 @@
 	storage_slots = 6
 	icon_type = "crayon"
 	can_hold = list(
-		/obj/item/toy/crayon
+		/obj/item/weapon/pen/crayon
 	)
 
 /obj/item/weapon/storage/fancy/crayons/New()
 	..()
-	new /obj/item/toy/crayon/red(src)
-	new /obj/item/toy/crayon/orange(src)
-	new /obj/item/toy/crayon/yellow(src)
-	new /obj/item/toy/crayon/green(src)
-	new /obj/item/toy/crayon/blue(src)
-	new /obj/item/toy/crayon/purple(src)
+	new /obj/item/weapon/pen/crayon/red(src)
+	new /obj/item/weapon/pen/crayon/orange(src)
+	new /obj/item/weapon/pen/crayon/yellow(src)
+	new /obj/item/weapon/pen/crayon/green(src)
+	new /obj/item/weapon/pen/crayon/blue(src)
+	new /obj/item/weapon/pen/crayon/purple(src)
 	update_icon()
 
 /obj/item/weapon/storage/fancy/crayons/update_icon()
 	overlays = list() //resets list
 	overlays += image('icons/obj/crayons.dmi',"crayonbox")
-	for(var/obj/item/toy/crayon/crayon in contents)
+	for(var/obj/item/weapon/pen/crayon/crayon in contents)
 		overlays += image('icons/obj/crayons.dmi',crayon.colourName)
 
 /obj/item/weapon/storage/fancy/crayons/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(W,/obj/item/toy/crayon))
+	if(istype(W,/obj/item/weapon/pen/crayon))
 		switch(W:colourName)
 			if("mime")
 				usr << "This crayon is too sad to be contained in this box."

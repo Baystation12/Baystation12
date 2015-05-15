@@ -3,13 +3,18 @@
 	name = "Station Alert Console"
 	desc = "Used to access the station's automated alert system."
 	icon_state = "alert:0"
-	circuit = "/obj/item/weapon/circuitboard/stationalert"
+	light_color = "#e6ffff"
+	circuit = /obj/item/weapon/circuitboard/stationalert_engineering
 	var/obj/nano_module/alarm_monitor/alarm_monitor
 	var/monitor_type = /obj/nano_module/alarm_monitor/engineering
 
 /obj/machinery/computer/station_alert/security
-	name = "Security Alert Console"
 	monitor_type = /obj/nano_module/alarm_monitor/security
+	circuit = /obj/item/weapon/circuitboard/stationalert_security
+
+/obj/machinery/computer/station_alert/all
+	monitor_type = /obj/nano_module/alarm_monitor/all
+	circuit = /obj/item/weapon/circuitboard/stationalert_all
 
 /obj/machinery/computer/station_alert/New()
 	..()
@@ -18,6 +23,7 @@
 
 /obj/machinery/computer/station_alert/Destroy()
 	alarm_monitor.unregister(src)
+	qdel(alarm_monitor)
 	..()
 
 /obj/machinery/computer/station_alert/attack_ai(mob/user)

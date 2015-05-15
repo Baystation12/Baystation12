@@ -76,7 +76,7 @@
 	/*if(istype(W,/obj/item/weapon/screwdriver))
 		panel = !panel
 		user << "\blue you [panel ? "open" : "close"] the [src]'s maintenance panel"*/
-	if(istype(W,/obj/item/toy/crayon) ||istype(W,/obj/item/weapon/stamp))
+	if(istype(W,/obj/item/weapon/pen/crayon) || istype(W,/obj/item/weapon/stamp))
 		if( state in list(	1, 3, 6 ) )
 			if(!crayon)
 				user.drop_item()
