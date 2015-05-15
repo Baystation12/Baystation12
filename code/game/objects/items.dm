@@ -269,7 +269,7 @@ var/list/global/slot_flags_enumeration = list(
 	if(!M) return 0
 
 	if(!ishuman(M)) return 0
-	
+
 	var/mob/living/carbon/human/H = M
 	var/list/mob_equip = list()
 	if(H.species.hud && H.species.hud.equip_slots)
@@ -277,22 +277,22 @@ var/list/global/slot_flags_enumeration = list(
 
 	if(H.species && !(slot in mob_equip))
 		return 0
-	
+
 	//First check if the item can be equipped to the desired slot.
 	if("[slot]" in slot_flags_enumeration)
 		var/req_flags = slot_flags_enumeration["[slot]"]
 		if(!(req_flags & slot_flags))
 			return 0
-	
+
 	//Next check that the slot is free
 	if(H.get_equipped_item(slot))
 		return 0
-	
+
 	//Next check if the slot is accessible.
 	var/mob/_user = disable_warning? null : H
 	if(!H.slot_is_accessible(slot, src, _user))
 		return 0
-	
+
 	//Lastly, check special rules for the desired slot.
 	switch(slot)
 		if(slot_l_ear, slot_r_ear)
@@ -355,7 +355,7 @@ var/list/global/slot_flags_enumeration = list(
 /obj/item/proc/mob_can_unequip(mob/M, slot, disable_warning = 0)
 	if(!slot) return 0
 	if(!M) return 0
-	
+
 	if(!canremove)
 		return 0
 	if(!M.slot_is_accessible(slot, src, disable_warning? null : M))
@@ -601,3 +601,7 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 			usr.visible_message("[zoomdevicename ? "[usr] looks up from the [src.name]" : "[usr] lowers the [src.name]"].")
 
 	return
+
+
+/obj/item/proc/pwr_drain()
+	return 0 // Process Kill

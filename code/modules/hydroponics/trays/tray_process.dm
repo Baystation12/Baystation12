@@ -3,7 +3,7 @@
 	// Handle nearby smoke if any.
 	for(var/obj/effect/effect/smoke/chem/smoke in view(1, src))
 		if(smoke.reagents.total_volume)
-			smoke.reagents.copy_to(src, 5)
+			smoke.reagents.trans_to_obj(src, 5, copy = 1)
 
 	//Do this even if we're not ready for a plant cycle.
 	process_reagents()

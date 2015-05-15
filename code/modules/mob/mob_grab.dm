@@ -71,10 +71,13 @@
 
 
 /obj/item/weapon/grab/process()
+	if(gcDestroyed) // GC is trying to delete us, we'll kill our processing so we can cleanly GC
+		return PROCESS_KILL
+
 	confirm()
 	if(!assailant)
-		qdel(src)
-		return
+		qdel(src) // Same here, except we're trying to delete ourselves.
+		return PROCESS_KILL
 
 	if(assailant.client)
 		assailant.client.screen -= hud
@@ -407,7 +410,11 @@
 
 /obj/item/weapon/grab/dropped()
 	loc = null
-	qdel(src)
+	if(!destroying)
+		qdel(src)
+
+/obj/item/weapon/grab
+	var/destroying = 0
 
 /obj/item/weapon/grab/Destroy()
 	animate(affecting, pixel_x = 0, pixel_y = 0, 4, 1, LINEAR_EASING)
@@ -421,4 +428,5 @@
 		assailant = null
 	qdel(hud)
 	hud = null
+	destroying = 1 // stops us calling qdel(src) on dropped()
 	..()

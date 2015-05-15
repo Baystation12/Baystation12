@@ -61,7 +61,7 @@ Note: Must be placed west/left of and R&D console to function.
 /obj/machinery/r_n_d/protolathe/dismantle()
 	for(var/obj/I in component_parts)
 		if(istype(I, /obj/item/weapon/reagent_containers/glass/beaker))
-			reagents.trans_to(I, reagents.total_volume)
+			reagents.trans_to_obj(I, reagents.total_volume)
 	if(m_amount >= 3750)
 		var/obj/item/stack/sheet/metal/G = new /obj/item/stack/sheet/metal(loc)
 		G.amount = round(m_amount / G.perunit)

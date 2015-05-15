@@ -16,31 +16,20 @@
 	var/list/spray_sizes = list(1,3)
 	volume = 250
 
-
 /obj/item/weapon/reagent_containers/spray/New()
 	..()
 	src.verbs -= /obj/item/weapon/reagent_containers/verb/set_APTFT
 
 /obj/item/weapon/reagent_containers/spray/afterattack(atom/A as mob|obj, mob/user as mob, proximity)
-	if(istype(A, /obj/item/weapon/storage) || istype(A, /obj/structure/table) || istype(A, /obj/structure/closet) \
-	|| istype(A, /obj/item/weapon/reagent_containers) || istype(A, /obj/structure/sink) || istype(A, /obj/structure/janitorialcart))
+	if(istype(A, /obj/item/weapon/storage) || istype(A, /obj/structure/table) || istype(A, /obj/structure/closet) || istype(A, /obj/item/weapon/reagent_containers) || istype(A, /obj/structure/sink) || istype(A, /obj/structure/janitorialcart))
 		return
 
 	if(istype(A, /spell))
 		return
 
-	if(istype(A, /obj/structure/reagent_dispensers) && get_dist(src,A) <= 1) //this block copypasted from reagent_containers/glass, for lack of a better solution
-		if(!A.reagents.total_volume && A.reagents)
-			user << "<span class='notice'>\The [A] is empty.</span>"
+	if(proximity)
+		if(standard_dispenser_refill(user, A))
 			return
-
-		if(reagents.total_volume >= reagents.maximum_volume)
-			user << "<span class='notice'>\The [src] is full.</span>"
-			return
-
-		var/trans = A.reagents.trans_to(src, A:amount_per_transfer_from_this)
-		user << "<span class='notice'>You fill \the [src] with [trans] units of the contents of \the [A].</span>"
-		return
 
 	if(reagents.total_volume < amount_per_transfer_from_this)
 		user << "<span class='notice'>\The [src] is empty!</span>"
@@ -64,37 +53,17 @@
 /obj/item/weapon/reagent_containers/spray/proc/Spray_at(atom/A as mob|obj, mob/user as mob, proximity)
 	if (A.density && proximity)
 		A.visible_message("[usr] sprays [A] with [src].")
-		var/obj/D = new/obj()
-		D.create_reagents(amount_per_transfer_from_this)
-		reagents.trans_to(D, amount_per_transfer_from_this)
-		D.icon += D.reagents.get_color()
-		spawn(0)
-			D.reagents.reaction(A)
-			sleep(5)
-			qdel(D)
+		reagents.trans_to(A, amount_per_transfer_from_this)
 	else
-		var/obj/effect/decal/chempuff/D = new/obj/effect/decal/chempuff(get_turf(src))
-		D.create_reagents(amount_per_transfer_from_this)
-		reagents.trans_to(D, amount_per_transfer_from_this, 1/spray_size)
-		D.icon += D.reagents.get_color()
-
-		var/turf/A_turf = get_turf(A)//BS12
-
 		spawn(0)
-			for(var/i=0, i<spray_size, i++)
-				step_towards(D,A)
-				D.reagents.reaction(get_turf(D))
-				for(var/atom/T in get_turf(D))
-					D.reagents.reaction(T)
-
-					// When spraying against the wall, also react with the wall, but
-					// not its contents. BS12
-					if(get_dist(D, A_turf) == 1 && A_turf.density)
-						D.reagents.reaction(A_turf)
-					sleep(2)
-				sleep(3)
-			qdel(D)
-
+			var/obj/effect/effect/water/chempuff/D = new/obj/effect/effect/water/chempuff(get_turf(src))
+			var/turf/my_target = get_turf(A)
+			D.create_reagents(amount_per_transfer_from_this)
+			if(!src)
+				return
+			reagents.trans_to_obj(D, amount_per_transfer_from_this)
+			D.set_color()
+			D.set_up(my_target, spray_size, 10)
 	return
 
 /obj/item/weapon/reagent_containers/spray/attack_self(var/mob/user)
@@ -104,10 +73,9 @@
 	spray_size = next_in_list(spray_size, spray_sizes)
 	user << "<span class='notice'>You adjusted the pressure nozzle. You'll now use [amount_per_transfer_from_this] units per spray.</span>"
 
-
 /obj/item/weapon/reagent_containers/spray/examine(mob/user)
-	if(..(user, 0) && user==src.loc)
-		user << "[round(src.reagents.total_volume)] units left."
+	if(..(user, 0) && loc == user)
+		user << "[round(reagents.total_volume)] units left."
 	return
 
 /obj/item/weapon/reagent_containers/spray/verb/empty()
@@ -120,8 +88,7 @@
 		return
 	if(isturf(usr.loc))
 		usr << "<span class='notice'>You empty \the [src] onto the floor.</span>"
-		reagents.reaction(usr.loc)
-		spawn(5) src.reagents.clear_reagents()
+		reagents.trans_to(usr.loc, reagents.total_volume)
 
 //space cleaner
 /obj/item/weapon/reagent_containers/spray/cleaner
@@ -135,8 +102,8 @@
 
 /obj/item/weapon/reagent_containers/spray/cleaner/New()
 	..()
-	reagents.add_reagent("cleaner", src.volume)
-//pepperspray
+	reagents.add_reagent("cleaner", volume)
+
 /obj/item/weapon/reagent_containers/spray/pepper
 	name = "pepperspray"
 	desc = "Manufactured by UhangInc, used to blind and down an opponent quickly."
@@ -146,7 +113,6 @@
 	possible_transfer_amounts = null
 	volume = 40
 	var/safety = 1
-
 
 /obj/item/weapon/reagent_containers/spray/pepper/New()
 	..()
@@ -166,7 +132,6 @@
 		return
 	..()
 
-//water flower
 /obj/item/weapon/reagent_containers/spray/waterflower
 	name = "water flower"
 	desc = "A seemingly innocent sunflower...with a twist."
@@ -181,7 +146,6 @@
 	..()
 	reagents.add_reagent("water", 10)
 
-//chemsprayer
 /obj/item/weapon/reagent_containers/spray/chemsprayer
 	name = "chem sprayer"
 	desc = "A utility used to spray large amounts of reagent in a given area."
@@ -194,47 +158,27 @@
 	volume = 600
 	origin_tech = "combat=3;materials=3;engineering=3"
 
-
-//this is a big copypasta clusterfuck, but it's still better than it used to be!
 /obj/item/weapon/reagent_containers/spray/chemsprayer/Spray_at(atom/A as mob|obj)
-	var/Sprays[3]
-	for(var/i=1, i<=3, i++) // intialize sprays
-		if(src.reagents.total_volume < 1) break
-		var/obj/effect/decal/chempuff/D = new/obj/effect/decal/chempuff(get_turf(src))
-		D.create_reagents(amount_per_transfer_from_this)
-		src.reagents.trans_to(D, amount_per_transfer_from_this)
-
-		D.icon += D.reagents.get_color()
-
-		Sprays[i] = D
-
 	var/direction = get_dir(src, A)
 	var/turf/T = get_turf(A)
 	var/turf/T1 = get_step(T,turn(direction, 90))
 	var/turf/T2 = get_step(T,turn(direction, -90))
-	var/list/the_targets = list(T,T1,T2)
+	var/list/the_targets = list(T, T1, T2)
 
-	for(var/i=1, i<=Sprays.len, i++)
-		spawn()
-			var/obj/effect/decal/chempuff/D = Sprays[i]
-			if(!D) continue
-
-			// Spreads the sprays a little bit
-			var/turf/my_target = pick(the_targets)
-			the_targets -= my_target
-
-			for(var/j=1, j<=rand(6,8), j++)
-				step_towards(D, my_target)
-				D.reagents.reaction(get_turf(D))
-				for(var/atom/t in get_turf(D))
-					D.reagents.reaction(t)
-				sleep(2)
-			qdel(D)
-
+	for(var/a = 1 to 3)
+		spawn(0)
+			if(reagents.total_volume < 1) break
+			var/obj/effect/effect/water/chempuff/D = new/obj/effect/effect/water/chempuff(get_turf(src))
+			var/turf/my_target = the_targets[a]
+			D.create_reagents(amount_per_transfer_from_this)
+			if(!src)
+				return
+			reagents.trans_to_obj(D, amount_per_transfer_from_this)
+			D.set_color()
+			D.set_up(my_target, rand(6, 8), 2)
 	return
 
-// Plant-B-Gone
-/obj/item/weapon/reagent_containers/spray/plantbgone // -- Skie
+/obj/item/weapon/reagent_containers/spray/plantbgone
 	name = "Plant-B-Gone"
 	desc = "Kills those pesky weeds!"
 	icon = 'icons/obj/hydroponics_machines.dmi'
@@ -242,16 +186,14 @@
 	item_state = "plantbgone"
 	volume = 100
 
-
 /obj/item/weapon/reagent_containers/spray/plantbgone/New()
 	..()
 	reagents.add_reagent("plantbgone", 100)
 
-
 /obj/item/weapon/reagent_containers/spray/plantbgone/afterattack(atom/A as mob|obj, mob/user as mob, proximity)
 	if(!proximity) return
 
-	if (istype(A, /obj/effect/blob)) // blob damage in blob code
+	if(istype(A, /obj/effect/blob)) // blob damage in blob code
 		return
 
 	..()

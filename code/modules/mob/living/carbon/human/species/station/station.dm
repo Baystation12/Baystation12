@@ -59,6 +59,10 @@
 		"Your scales bristle against the cold."
 		)
 
+/datum/species/unathi/equip_survival_gear(var/mob/living/carbon/human/H)
+	..()
+	H.equip_to_slot_or_del(new /obj/item/clothing/shoes/sandal(H),slot_shoes,1)
+
 /datum/species/tajaran
 	name = "Tajara"
 	name_plural = "Tajaran"
@@ -99,6 +103,10 @@
 		"Your overheated skin itches."
 		)
 	cold_discomfort_level = 275
+
+/datum/species/tajaran/equip_survival_gear(var/mob/living/carbon/human/H)
+	..()
+	H.equip_to_slot_or_del(new /obj/item/clothing/shoes/sandal(H),slot_shoes,1)
 
 /datum/species/skrell
 	name = "Skrell"
@@ -198,6 +206,12 @@
 		return 1
 	return 0
 
+/datum/species/diona/equip_survival_gear(var/mob/living/carbon/human/H)
+	if(H.backbag == 1)
+		H.equip_to_slot_or_del(new /obj/item/device/flashlight/flare(H), slot_r_hand)
+	else
+		H.equip_to_slot_or_del(new /obj/item/device/flashlight/flare(H.back), slot_in_backpack)
+
 /datum/species/diona/handle_post_spawn(var/mob/living/carbon/human/H)
 	H.gender = NEUTER
 	return ..()
@@ -250,6 +264,8 @@
 	flesh_color = "#575757"
 
 	has_organ = list() //TODO: Positronic brain.
+
+/datum/species/machine/equip_survival_gear(var/mob/living/carbon/human/H)
 
 /datum/species/machine/handle_death(var/mob/living/carbon/human/H)
 	..()

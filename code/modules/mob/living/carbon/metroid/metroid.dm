@@ -61,8 +61,6 @@
 
 	verbs += /mob/living/proc/ventcrawl
 
-	create_reagents(100)
-
 	src.colour = colour
 	number = rand(1, 1000)
 	name = "[colour] [is_adult ? "adult" : "baby"] slime ([number])"
@@ -412,14 +410,6 @@
 			powerlevel = 10
 			adjustToxLoss(-10)
 	nutrition = max(nutrition, get_max_nutrition())
-
-/mob/living/carbon/slime/proc/apply_water(var/amount)
-	adjustToxLoss(15 + amount)
-	if (!client)
-		if (Target) // Like cats
-			Target = null
-			++Discipline
-	return
 
 /mob/living/carbon/slime/can_use_vents()
 	if(Victim)

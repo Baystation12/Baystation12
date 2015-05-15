@@ -49,7 +49,7 @@
 			return ..()
 
 	if (reagents.total_volume > 0)
-		reagents.trans_to_ingest(M, reagents.total_volume)
+		reagents.trans_to_mob(M, reagents.total_volume, CHEM_INGEST)
 		if(M == user)
 			for(var/mob/O in viewers(M, null))
 				O.show_message(text("\blue [] eats some [] from \the [].", user, loaded, src), 1)
@@ -154,6 +154,12 @@
 							"\red <b>[user] is slitting \his throat with the [src.name]! It looks like \he's trying to commit suicide.</b>", \
 							"\red <b>[user] is slitting \his stomach open with the [src.name]! It looks like \he's trying to commit seppuku.</b>")
 		return (BRUTELOSS)
+
+/obj/item/weapon/kitchenknife/hook
+	name = "meat hook"
+	desc = "A sharp, metal hook what sticks into things."
+	icon_state = "hook_knife"
+	item_state = "hook_knife"
 
 /obj/item/weapon/kitchenknife/ritual
 	name = "ritual knife"

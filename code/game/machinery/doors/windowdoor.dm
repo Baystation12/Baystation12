@@ -7,7 +7,7 @@
 	min_force = 4
 	hitsound = 'sound/effects/Glasshit.ogg'
 	maxhealth = 150 //If you change this, consiter changing ../door/window/brigdoor/ health at the bottom of this .dm file
-	health
+	health = 150
 	visible = 0.0
 	use_power = 0
 	flags = ON_BORDER
@@ -249,13 +249,14 @@
 
 
 /obj/machinery/door/window/brigdoor
-	name = "Secure Door"
+	name = "secure door"
 	icon = 'icons/obj/doors/windoor.dmi'
 	icon_state = "leftsecure"
 	base_state = "leftsecure"
 	req_access = list(access_security)
 	var/id = null
-	health = 300.0 //Stronger doors for prison (regular window door health is 200)
+	maxhealth = 300
+	health = 300.0 //Stronger doors for prison (regular window door health is 150)
 
 
 /obj/machinery/door/window/northleft
