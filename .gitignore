@@ -6,3 +6,4 @@
 *.lk
 *.backup
 data/
+cfg/
