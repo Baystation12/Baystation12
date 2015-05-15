@@ -26,7 +26,7 @@
 				if(H.species.flags & IS_SYNTHETIC)
 					H << "<span class='danger'>You have a monitor for a head, where do you think you're going to put that?</span>"
 					return
-			
+
 				var/obj/item/blocked = H.check_mouth_coverage()
 				if(blocked)
 					user << "<span class='warning'>\The [blocked] is in the way!</span>"
@@ -47,7 +47,7 @@
 			if(H.species.flags & IS_SYNTHETIC)
 				user << "<span class='danger'>They have a monitor for a head, where do you think you're going to put that?</span>"
 				return
-			
+
 			var/obj/item/blocked = H.check_mouth_coverage()
 			if(blocked)
 				user << "<span class='warning'>\The [blocked] is in the way!</span>"
@@ -55,7 +55,8 @@
 
 			user.visible_message("<span class='danger'>[user] attempts to force [M] to swallow [src].</span>")
 
-			if(!do_mob(user, M)) return
+			if(!do_after(user, 20))
+				return
 
 			user.drop_from_inventory(src) //icon update
 			user.visible_message("<span class='danger'>[user] forces [M] to swallow [src].</span>")
