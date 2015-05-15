@@ -26,10 +26,6 @@
 		if(mind)
 			mind.name = real_name
 
-	var/datum/reagents/R = new/datum/reagents(1000)
-	reagents = R
-	R.my_atom = src
-
 	hud_list[HEALTH_HUD]      = image('icons/mob/hud.dmi', src, "hudhealth100")
 	hud_list[STATUS_HUD]      = image('icons/mob/hud.dmi', src, "hudhealthy")
 	hud_list[LIFE_HUD]	      = image('icons/mob/hud.dmi', src, "hudhealthy")
@@ -1297,7 +1293,7 @@
 /mob/living/carbon/human/has_eyes()
 	if(internal_organs_by_name["eyes"])
 		var/obj/item/organ/eyes = internal_organs_by_name["eyes"]
-		if(eyes && istype(eyes) && !eyes.status & ORGAN_CUT_AWAY)
+		if(eyes && istype(eyes) && !(eyes.status & ORGAN_CUT_AWAY))
 			return 1
 	return 0
 

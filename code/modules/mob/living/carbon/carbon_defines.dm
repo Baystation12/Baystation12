@@ -17,5 +17,8 @@
 	var/datum/surgery_status/op_stage = new/datum/surgery_status
 	//Active emote/pose
 	var/pose = null
+	var/list/chem_effects = list()
+	var/datum/reagents/ingested = null
+	var/datum/reagents/touching = null
 
 	var/pulse = PULSE_NORM	//current pulse level

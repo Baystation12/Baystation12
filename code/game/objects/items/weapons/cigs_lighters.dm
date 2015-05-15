@@ -114,10 +114,9 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 					if(H.species.flags & IS_SYNTHETIC)
 						return
 
-				reagents.trans_to(C, REAGENTS_METABOLISM, 0.2) // Most of it is not inhaled... balance reasons.
-				reagents.reaction(C)
+				reagents.trans_to_mob(C, REM, CHEM_INGEST, 0.2) // Most of it is not inhaled... balance reasons.
 		else // else just remove some of the reagents
-			reagents.remove_any(REAGENTS_METABOLISM)
+			reagents.remove_any(REM)
 
 /obj/item/clothing/mask/smokable/proc/light(var/flavor_text = "[usr] lights the [name].")
 	if(!src.lit)
@@ -232,7 +231,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	if(!proximity)
 		return
 	if(istype(glass)) //you can dip cigarettes into beakers
-		var/transfered = glass.reagents.trans_to(src, chem_volume)
+		var/transfered = glass.reagents.trans_to_obj(src, chem_volume)
 		if(transfered)	//if reagents were transfered, show the message
 			user << "<span class='notice'>You dip \the [src] into \the [glass].</span>"
 		else			//if not, either the beaker was empty, or the cigarette was full
@@ -377,7 +376,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 			return
 		smoketime = 1000
 		if(G.reagents)
-			G.reagents.trans_to(src, G.reagents.total_volume)
+			G.reagents.trans_to_obj(src, G.reagents.total_volume)
 		name = "[G.name]-packed [initial(name)]"
 		qdel(G)
 
@@ -416,35 +415,33 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	icon = 'icons/obj/items.dmi'
 	icon_state = "lighter-g"
 	item_state = "lighter-g"
-	var/icon_on = "lighter-g-on"
-	var/icon_off = "lighter-g"
 	w_class = 1
 	throwforce = 4
 	flags = CONDUCT
 	slot_flags = SLOT_BELT
 	attack_verb = list("burnt", "singed")
+	var/base_state
 
 /obj/item/weapon/flame/lighter/zippo
 	name = "\improper Zippo lighter"
 	desc = "The zippo."
 	icon_state = "zippo"
 	item_state = "zippo"
-	icon_on = "zippoon"
-	icon_off = "zippo"
 
 /obj/item/weapon/flame/lighter/random
 	New()
-		var/color = pick("r","c","y","g")
-		icon_on = "lighter-[color]-on"
-		icon_off = "lighter-[color]"
-		icon_state = icon_off
+		icon_state = "lighter-[pick("r","c","y","g")]"
+		item_state = icon_state
+		base_state = icon_state
 
 /obj/item/weapon/flame/lighter/attack_self(mob/living/user)
+	if(!base_state)
+		base_state = icon_state
 	if(user.r_hand == src || user.l_hand == src)
 		if(!lit)
 			lit = 1
-			icon_state = icon_on
-			item_state = icon_on
+			icon_state = "[base_state]on"
+			item_state = "[base_state]on"
 			if(istype(src, /obj/item/weapon/flame/lighter/zippo) )
 				user.visible_message("<span class='rose'>Without even breaking stride, [user] flips open and lights [src] in one smooth movement.</span>")
 			else
@@ -462,8 +459,8 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 			processing_objects.Add(src)
 		else
 			lit = 0
-			icon_state = icon_off
-			item_state = icon_off
+			icon_state = "[base_state]"
+			item_state = "[base_state]"
 			if(istype(src, /obj/item/weapon/flame/lighter/zippo) )
 				user.visible_message("<span class='rose'>You hear a quiet click, as [user] shuts off [src] without even looking at what they're doing.")
 			else

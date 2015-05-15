@@ -209,7 +209,7 @@
 		new_meat.reagents.add_reagent("nutriment",slab_nutrition)
 
 		if(src.occupant.reagents)
-			src.occupant.reagents.trans_to(new_meat, round(occupant.reagents.total_volume/slab_count,1))
+			src.occupant.reagents.trans_to_obj(new_meat, round(occupant.reagents.total_volume/slab_count,1))
 
 	src.occupant.attack_log += "\[[time_stamp()]\] Was gibbed by <b>[user]/[user.ckey]</b>" //One shall not simply gib a mob unnoticed!
 	user.attack_log += "\[[time_stamp()]\] Gibbed <b>[src.occupant]/[src.occupant.ckey]</b>"

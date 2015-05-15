@@ -40,6 +40,9 @@ var/list/name_to_material
 	if(!display_name)
 		display_name = name
 
+/material/placeholder
+	name = "placeholder"
+
 /material/proc/place_dismantled_girder(var/turf/target, var/material/reinf_material)
 	var/obj/structure/girder/G = new(target)
 	if(reinf_material)
