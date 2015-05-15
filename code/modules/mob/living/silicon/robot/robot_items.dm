@@ -324,6 +324,7 @@
 	desc = "Small device which allows rapid deployment and removal of inflatables."
 	icon = 'icons/obj/storage.dmi'
 	icon_state = "inf_deployer"
+	w_class = 3
 
 	// By default stores up to 10 walls and 5 doors. May be changed.
 	var/stored_walls = 10
@@ -336,6 +337,7 @@
 	if(!..(user))
 		return
 	user << "It has [stored_walls] wall segments and [stored_doors] door segments stored."
+	user << "It is set to deploy [mode ? "doors" : "walls"]"
 
 // Primarily used by cyborgs, also available in Engineering
 /obj/item/weapon/inflatable_dispenser/verb/switch_mode()
@@ -343,12 +345,12 @@
 	set category = "Object"
 
 	mode = !mode
-	usr << "You change the inflatable dispenser to [mode ? "doors" : "walls"] mode."
+	usr << "You change \The [src] to [mode ? "doors" : "walls"] mode."
 
 /obj/item/weapon/inflatable_dispenser/attack_self(var/mob/user)
 	if(mode) // Door deployment
 		if(!stored_doors)
-			user << "The dispenser is out of doors!"
+			user << "\The [src] is out of doors!"
 			return
 
 		var/turf/T = get_turf(src)
@@ -360,7 +362,7 @@
 
 	else // Wall deployment
 		if(!stored_walls)
-			user << "The dispenser is out of walls!"
+			user << "\The [src] is out of walls!"
 			return
 
 		var/turf/T = get_turf(src)

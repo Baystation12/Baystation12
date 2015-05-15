@@ -1,29 +1,58 @@
 /obj/item/inflatable
+	name = "Inflatable"
+	w_class = 2
+	icon = 'icons/obj/inflatable.dmi'
+
+/obj/item/inflatable/wall
 	name = "inflatable wall"
 	desc = "A folded membrane which rapidly expands into a large cubical shape on activation."
-	icon = 'icons/obj/inflatable.dmi'
 	icon_state = "folded_wall"
-	w_class = 3
 
-/obj/item/inflatable/attack_self(mob/user)
+
+/obj/item/inflatable/wall/attack_self(mob/user)
 		playsound(loc, 'sound/items/zip.ogg', 75, 1)
 		user << "\blue You inflate [src]."
-		var/obj/structure/inflatable/R = new /obj/structure/inflatable(user.loc)
+		var/obj/structure/inflatable/wall/R = new /obj/structure/inflatable/wall(user.loc)
 		src.transfer_fingerprints_to(R)
 		R.add_fingerprint(user)
 		qdel(src)
 
-/obj/item/inflatable/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/item/inflatable/wall/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/weapon/inflatable_dispenser))
-		if(istype(src, /obj/item/inflatable/door)) return ..()
 		var/obj/item/weapon/inflatable_dispenser/D = W
 		if(D.stored_walls < D.max_walls)
-			user << "You pick up [src] and load it into [D]"
+			user << "You pick up [src] and load it into \The [D]"
 			D.stored_walls++
 			qdel(src)
 			return
 		else
-			user << "[D] is full!"
+			user << "\The [D] is full!"
+	return ..()
+
+/obj/item/inflatable/door/
+	name = "inflatable door"
+	desc = "A folded membrane which rapidly expands into a simple door on activation."
+	icon = 'icons/obj/inflatable.dmi'
+	icon_state = "folded_door"
+
+/obj/item/inflatable/door/attack_self(mob/user)
+		playsound(loc, 'sound/items/zip.ogg', 75, 1)
+		user << "\blue You inflate [src]."
+		var/obj/structure/inflatable/door/R = new /obj/structure/inflatable/door(user.loc)
+		src.transfer_fingerprints_to(R)
+		R.add_fingerprint(user)
+		qdel(src)
+
+/obj/item/inflatable/door/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	if(istype(W, /obj/item/weapon/inflatable_dispenser))
+		var/obj/item/weapon/inflatable_dispenser/D = W
+		if(D.stored_doors < D.max_doors)
+			user << "You pick up [src] and load it into \The [D]"
+			D.stored_doors++
+			qdel(src)
+			return
+		else
+			user << "\The [D] is full!"
 	return ..()
 
 /obj/structure/inflatable
@@ -32,7 +61,6 @@
 	density = 1
 	anchored = 1
 	opacity = 0
-
 	icon = 'icons/obj/inflatable.dmi'
 	icon_state = "wall"
 
@@ -135,32 +163,6 @@
 		user.visible_message("<span class='danger'>[user] [attack_verb] at [src]!</span>")
 	return 1
 
-/obj/item/inflatable/door/
-	name = "inflatable door"
-	desc = "A folded membrane which rapidly expands into a simple door on activation."
-	icon = 'icons/obj/inflatable.dmi'
-	icon_state = "folded_door"
-
-/obj/item/inflatable/door/attack_self(mob/user)
-		playsound(loc, 'sound/items/zip.ogg', 75, 1)
-		user << "\blue You inflate [src]."
-		var/obj/structure/inflatable/door/R = new /obj/structure/inflatable/door(user.loc)
-		src.transfer_fingerprints_to(R)
-		R.add_fingerprint(user)
-		qdel(src)
-
-/obj/item/inflatable/door/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/weapon/inflatable_dispenser))
-		var/obj/item/weapon/inflatable_dispenser/D = W
-		if(D.stored_doors < D.max_doors)
-			user << "You pick up [src] and load it into [D]"
-			D.stored_doors++
-			qdel(src)
-			return
-		else
-			user << "[D] is full!"
-	return ..()
-
 /obj/structure/inflatable/door //Based on mineral door code
 	name = "inflatable door"
 	density = 1
@@ -237,12 +239,12 @@
 		var/obj/item/weapon/inflatable_dispenser/D = W
 		if(D.stored_doors < D.max_doors)
 			playsound(loc, 'sound/machines/hiss.ogg', 75, 1)
-			visible_message("[user] deflates the [src] with [D]!")
+			visible_message("[user] deflates the [src] with \The [D]!")
 			D.stored_doors++
 			qdel(src)
 			return
 		else
-			user << "The dispenser is full."
+			user << "\The [D] is full."
 			return
 	return ..()
 
@@ -251,12 +253,12 @@
 		var/obj/item/weapon/inflatable_dispenser/D = W
 		if(D.stored_walls < D.max_walls)
 			playsound(loc, 'sound/machines/hiss.ogg', 75, 1)
-			visible_message("[user] deflates the [src] with [D]!")
+			visible_message("[user] deflates the [src] with \The [D]!")
 			D.stored_walls++
 			qdel(src)
 			return
 		else
-			user << "The dispenser is full."
+			user << "\The [D] is full."
 			return
 	return ..()
 
@@ -305,6 +307,7 @@
 	desc = "Contains inflatable walls and doors."
 	icon_state = "inf_box"
 	item_state = "syringe_kit"
+	w_class = 3
 	max_storage_space = 28
 	can_hold = list(/obj/item/inflatable)
 
@@ -313,7 +316,7 @@
 		new /obj/item/inflatable/door(src)
 		new /obj/item/inflatable/door(src)
 		new /obj/item/inflatable/door(src)
-		new /obj/item/inflatable(src)
-		new /obj/item/inflatable(src)
-		new /obj/item/inflatable(src)
-		new /obj/item/inflatable(src)
+		new /obj/item/inflatable/wall(src)
+		new /obj/item/inflatable/wall(src)
+		new /obj/item/inflatable/wall(src)
+		new /obj/item/inflatable/wall(src)
