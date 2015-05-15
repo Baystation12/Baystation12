@@ -83,8 +83,19 @@
 					if (prob(15))	M.Weaken(5)
 					M.apply_damage(8,def_zone = "head")
 					visible_message("<span class='danger'>[G.assailant] slams [G.affecting]'s face against \the [src]!</span>")
-					playsound(src.loc, 'sound/weapons/tablehit1.ogg', 50, 1)
-					take_damage(rand(1,5))
+					if(material)
+						playsound(loc, material.tableslam_noise, 50, 1)
+					else
+						playsound(loc, 'sound/weapons/tablehit1.ogg', 50, 1)
+					var/list/L = take_damage(rand(1,5))
+					// Shards. Extra damage, plus potentially the fact YOU LITERALLY HAVE A PIECE OF GLASS/METAL/WHATEVER IN YOUR FACE
+					for(var/obj/item/weapon/shard/S in L)
+						if(prob(50))
+							M.visible_message("<span class='danger'>\The [S] slices [M]'s face messily!</span>",
+							                   "<span class='danger'>\The [S] slices your face messily!</span>")
+							M.apply_damage(10, def_zone = "head")
+							if(prob(2))
+								M.embed(S, def_zone = "head")
 				else
 					user << "<span class='danger'>You need a better grip to do that!</span>"
 					return

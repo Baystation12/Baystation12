@@ -41,10 +41,17 @@
 	health += maxhealth - old_maxhealth
 
 /obj/structure/table/proc/take_damage(amount)
+	// If the table is made of a brittle material, and is *not* reinforced with a non-brittle material, damage is multiplied by TABLE_BRITTLE_MATERIAL_MULTIPLIER
+	if(material && material.is_brittle())
+		if(reinforced)
+			if(reinforced.is_brittle())
+				amount *= TABLE_BRITTLE_MATERIAL_MULTIPLIER
+		else
+			amount *= TABLE_BRITTLE_MATERIAL_MULTIPLIER
 	health -= amount
 	if(health <= 0)
 		visible_message("<span class='warning'>\The [src] breaks down!</span>")
-		break_to_parts()
+		return break_to_parts() // if we break and form shards, return them to the caller to do !FUN! things with
 
 /obj/structure/table/New()
 	..()
@@ -68,6 +75,7 @@
 
 /obj/structure/table/Destroy()
 	material = null
+	reinforced = null
 	update_connections(1) // Update tables around us to ignore us (material=null forces no connections)
 	for(var/obj/structure/table/T in oview(src, 1))
 		T.update_icon()
@@ -247,17 +255,39 @@
 	qdel(src)
 	return
 
+// Returns a list of /obj/item/weapon/shard objects that were created as a result of this table's breakage.
+// Used for !fun! things such as embedding shards in the faces of tableslammed people.
+
+// The repeated
+//     S = [x].place_shard(loc)
+//     if(S) shards += S
+// is to avoid filling the list with nulls, as place_shard won't place shards of certain materials (holo-wood, holo-steel)
+
 /obj/structure/table/proc/break_to_parts(full_return = 0)
-	if(reinforced && reinforced.stack_type && (full_return || prob(25)))
-		new reinforced.stack_type(src.loc)
-	if(material && material.stack_type && (full_return || prob(50)))
-		new material.stack_type(src.loc)
-	if(carpeted && (full_return || prob(50)))
+	var/list/shards = list()
+	var/obj/item/weapon/shard/S = null
+	if(reinforced)
+		if(reinforced.stack_type && (full_return || prob(20)))
+			reinforced.place_sheet(loc)
+		else
+			S = reinforced.place_shard(loc)
+			if(S) shards += S
+	if(material)
+		if(material.stack_type && (full_return || prob(20)))
+			material.place_sheet(loc)
+		else
+			S = material.place_shard(loc)
+			if(S) shards += S
+	if(carpeted && (full_return || prob(50))) // Higher chance to get the carpet back intact, since there's no non-intact option
 		new /obj/item/stack/tile/carpet(src.loc)
-	if(full_return || prob(50))
+	if(full_return || prob(20))
 		new /obj/item/stack/sheet/metal(src.loc)
+	else
+		var/material/M = get_material_by_name(DEFAULT_WALL_MATERIAL)
+		S = M.place_shard(loc)
+		if(S) shards += S
 	qdel(src)
-	return
+	return shards
 
 /obj/structure/table/update_icon()
 	if(flipped != 1)

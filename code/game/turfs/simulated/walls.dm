@@ -189,7 +189,7 @@ var/list/global/wall_cache = list()
 		new/obj/effect/overlay/wallrot(src)
 
 /turf/simulated/wall/proc/can_melt()
-	if(material.unmeltable)
+	if(material.flags & MATERIAL_UNMELTABLE)
 		return 0
 	return 1
 
