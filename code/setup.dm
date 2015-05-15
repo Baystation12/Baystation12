@@ -99,9 +99,15 @@
 #define DOOR_CRUSH_DAMAGE 10
 
 #define HUNGER_FACTOR              0.05 // Factor of how fast mob nutrition decreases
-#define REAGENTS_METABOLISM        0.2  // How many units of reagent are consumed per tick, by default.
-#define REAGENTS_EFFECT_MULTIPLIER (REAGENTS_METABOLISM / 0.4) // By defining the effect multiplier this way, it'll exactly adjust
-                                                               // all effects according to how they originally were with the 0.4 metabolism
+#define REM 0.2 // Means 'Reagent Effect Multiplier'. This is how many units of reagent are consumed per tick
+#define CHEM_TOUCH 1
+#define CHEM_INGEST 2
+#define CHEM_BLOOD 3
+#define MINIMUM_CHEMICAL_VOLUME 0.01
+#define SOLID 1
+#define LIQUID 2
+#define GAS 3
+#define REAGENTS_OVERDOSE 30
 
 #define MINIMUM_AIR_RATIO_TO_SUSPEND 0.05 // Minimum ratio of air that must move to/from a tile to suspend group processing
 #define MINIMUM_AIR_TO_SUSPEND       (MOLES_CELLSTANDARD * MINIMUM_AIR_RATIO_TO_SUSPEND) // Minimum amount of air that has to move before a group processing can be suspended
@@ -743,10 +749,6 @@ var/list/be_special_flags = list(
 #define ATMOS_DEFAULT_VOLUME_FILTER 200 // L.
 #define ATMOS_DEFAULT_VOLUME_MIXER  200 // L.
 #define ATMOS_DEFAULT_VOLUME_PIPE   70  // L.
-
-// Reagent metabolism defines.
-#define FOOD_METABOLISM    0.4
-#define ALCOHOL_METABOLISM 0.1
 
 // Chemistry.
 #define CHEM_SYNTH_ENERGY 500 // How much energy does it take to synthesize 1 unit of chemical, in Joules.
