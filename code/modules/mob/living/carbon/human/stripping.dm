@@ -1,51 +1,9 @@
-// I swear this proc already exists but I can't find it. ~ Z
-/mob/living/carbon/human/proc/get_item_in_slot(var/slot_define)
-	switch(slot_define)
-		if(slot_back)
-			return back
-		if(slot_legcuffed)
-			return legcuffed
-		if(slot_handcuffed)
-			return handcuffed
-		if(slot_l_store)
-			return l_store
-		if(slot_r_store)
-			return r_store
-		if(slot_wear_mask)
-			return wear_mask
-		if(slot_l_hand)
-			return l_hand
-		if(slot_r_hand)
-			return r_hand
-		if(slot_wear_id)
-			return wear_id
-		if(slot_glasses)
-			return glasses
-		if(slot_gloves)
-			return gloves
-		if(slot_head)
-			return head
-		if(slot_shoes)
-			return shoes
-		if(slot_wear_suit)
-			return wear_suit
-		if(slot_w_uniform)
-			return w_uniform
-		if(slot_s_store)
-			return s_store
-		if(slot_l_ear)
-			return l_ear
-		if(slot_r_ear)
-			return r_ear
-		else
-			return null
-
 /mob/living/carbon/human/proc/handle_strip(var/slot_to_strip,var/mob/living/user)
 
 	if(!slot_to_strip || !istype(user))
 		return
 
-	var/obj/item/target_slot = get_item_in_slot(text2num(slot_to_strip))
+	var/obj/item/target_slot = get_equipped_item(text2num(slot_to_strip))
 
 	switch(slot_to_strip)
 		// Handle things that are part of this interface but not removing/replacing a given item.

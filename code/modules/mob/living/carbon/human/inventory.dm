@@ -340,19 +340,23 @@ This saves us from having to call add_fingerprint() any time something is put in
 
 /mob/living/carbon/human/get_equipped_item(var/slot)
 	switch(slot)
-		if(slot_wear_suit) return wear_suit
-		if(slot_gloves) return gloves
-		if(slot_shoes) return shoes
-		if(slot_belt) return belt
-		if(slot_glasses) return glasses
-		if(slot_head) return head
-		if(slot_l_ear) return l_ear
-		if(slot_r_ear) return r_ear
-		if(slot_w_uniform) return w_uniform
-		if(slot_wear_id) return wear_id
-		if(slot_l_store) return l_store
-		if(slot_r_store) return r_store
-		if(slot_s_store) return s_store
+		if(slot_back)       return back
+		if(slot_legcuffed)  return legcuffed
 		if(slot_handcuffed) return handcuffed
-		if(slot_legcuffed) return legcuffed
+		if(slot_l_store)    return l_store
+		if(slot_r_store)    return r_store
+		if(slot_wear_mask)  return wear_mask
+		if(slot_l_hand)     return l_hand
+		if(slot_r_hand)     return r_hand
+		if(slot_wear_id)    return wear_id
+		if(slot_glasses)    return glasses
+		if(slot_gloves)     return gloves
+		if(slot_head)       return head
+		if(slot_shoes)      return shoes
+		if(slot_belt)       return belt
+		if(slot_wear_suit)  return wear_suit
+		if(slot_w_uniform)  return w_uniform
+		if(slot_s_store)    return s_store
+		if(slot_l_ear)      return l_ear
+		if(slot_r_ear)      return r_ear
 	return ..()
