@@ -52,8 +52,7 @@
 			//unfortuately we don't know where the dart will actually hit, since that's done by the parent.
 			if(L.can_inject())
 				if(syringe.reagents)
-					syringe.reagents.trans_to(L, 15)
-
+					syringe.reagents.trans_to_mob(L, 15, CHEM_BLOOD)
 		syringe.break_syringe(iscarbon(hit_atom)? hit_atom : null)
 		syringe.update_icon()
 

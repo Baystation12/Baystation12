@@ -247,7 +247,7 @@
 /obj/item/weapon/weldingtool/afterattack(obj/O as obj, mob/user as mob, proximity)
 	if(!proximity) return
 	if (istype(O, /obj/structure/reagent_dispensers/fueltank) && get_dist(src,O) <= 1 && !src.welding)
-		O.reagents.trans_to(src, max_fuel)
+		O.reagents.trans_to_obj(src, max_fuel)
 		user << "\blue Welder refueled"
 		playsound(src.loc, 'sound/effects/refill.ogg', 50, 1, -6)
 		return

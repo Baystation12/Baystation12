@@ -76,7 +76,7 @@
 		return
 	..()
 	if(reagents.total_volume)
-		if(M.reagents) reagents.trans_to(M, 50) //used to be 150
+		if(M.reagents) reagents.trans_to_mob(M, 50, CHEM_BLOOD) //used to be 150
 	return
 
 
@@ -99,7 +99,7 @@
 
 	if(M.can_inject(user,1))
 		if(reagents.total_volume)
-			if(M.reagents) reagents.trans_to(M, 50)
+			if(M.reagents) reagents.trans_to_mob(M, 50, CHEM_BLOOD)
 	return
 
 

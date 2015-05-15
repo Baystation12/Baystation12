@@ -66,7 +66,7 @@ using metal and glass, it uses glass and reagents (usually sulfuric acis).
 /obj/machinery/r_n_d/circuit_imprinter/dismantle()
 	for(var/obj/I in component_parts)
 		if(istype(I, /obj/item/weapon/reagent_containers/glass/beaker))
-			reagents.trans_to(I, reagents.total_volume)
+			reagents.trans_to_obj(I, reagents.total_volume)
 	if(g_amount >= 3750)
 		var/obj/item/stack/sheet/glass/G = new /obj/item/stack/sheet/glass(loc)
 		G.amount = round(g_amount / 3750)

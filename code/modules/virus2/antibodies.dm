@@ -55,10 +55,10 @@ datum/reagent/antibodies
 	reagent_state = LIQUID
 	color = "#0050F0"
 
-	reaction_mob(var/mob/M, var/method=TOUCH, var/volume)
+	reaction_mob(var/mob/M, var/method=CHEM_TOUCH, var/volume)
 		if(istype(M,/mob/living/carbon))
 			var/mob/living/carbon/C = M
-			if(src.data && method == INGEST)
+			if(src.data && method == CHEM_INGEST)
 				//if(C.virus2) if(src.data["antibodies"] & C.virus2.antigen)
 				//	C.virus2.dead = 1
 				C.antibodies |= src.data["antibodies"]

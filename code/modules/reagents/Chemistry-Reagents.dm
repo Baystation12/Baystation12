@@ -1,102 +1,107 @@
-#define SOLID 1
-#define LIQUID 2
-#define GAS 3
-#define REAGENTS_OVERDOSE 30
-#define REM REAGENTS_EFFECT_MULTIPLIER
-
-//The reaction procs must ALWAYS set src = null, this detaches the proc from the object (the reagent)
-//so that it can continue working when the reagent is deleted while the proc is still active.
-
-
 /datum/reagent
 	var/name = "Reagent"
 	var/id = "reagent"
-	var/description = ""
+	var/description = "A non-descript chemical."
 	var/datum/reagents/holder = null
 	var/reagent_state = SOLID
 	var/list/data = null
 	var/volume = 0
-	var/nutriment_factor = 0
-	var/custom_metabolism = REAGENTS_METABOLISM
+	var/metabolism = REM // This would be 0.2 normally
+	var/ingest_met = 0
+	var/touch_met = 0
+	var/dose = 0
+	var/max_dose = 0
 	var/overdose = 0
-	var/overdose_dam = 1
-	var/scannable = 0 //shows up on health analyzers
+	var/scannable = 0 // Shows up on health analyzers.
+	var/affects_dead = 0
 	var/glass_icon_state = null
 	var/glass_name = null
 	var/glass_desc = null
 	var/glass_center_of_mass = null
-	//var/list/viruses = list()
-	var/color = "#000000" // rgb: 0, 0, 0, 0 - supports alpha channels
+	var/color = "#000000"
 	var/color_weight = 1
 
-/datum/reagent/proc/reaction_mob(var/mob/M, var/method=TOUCH, var/volume) //By default we have a chance to transfer some
-	if(!istype(M, /mob/living))	return 0
-	var/datum/reagent/self = src
-	src = null										  //of the reagent to the mob on TOUCHING it.
+/datum/reagent/proc/remove_self(var/amount) // Shortcut
+	holder.remove_reagent(id, amount)
 
-	if(self.holder)		//for catching rare runtimes
-		if(!istype(self.holder.my_atom, /obj/effect/effect/smoke/chem))
-			// If the chemicals are in a smoke cloud, do not try to let the chemicals "penetrate" into the mob's system (balance station 13) -- Doohl
-
-			if(method == TOUCH)
-
-				var/chance = 1
-				var/block  = 0
-
-				for(var/obj/item/clothing/C in M.get_equipped_items())
-					if(C.permeability_coefficient < chance) chance = C.permeability_coefficient
-					if(istype(C, /obj/item/clothing/suit/bio_suit))
-						// bio suits are just about completely fool-proof - Doohl
-						// kind of a hacky way of making bio suits more resistant to chemicals but w/e
-						if(prob(75))
-							block = 1
-
-					if(istype(C, /obj/item/clothing/head/bio_hood))
-						if(prob(75))
-							block = 1
-
-				chance = chance * 100
-
-				if(prob(chance) && !block)
-					if(M.reagents)
-						M.reagents.add_reagent(self.id,self.volume/2)
-	return 1
-
-/datum/reagent/proc/reaction_obj(var/obj/O, var/volume) //By default we transfer a small part of the reagent to the object
-	src = null						//if it can hold reagents. nope!
-	//if(O.reagents)
-	//	O.reagents.add_reagent(id,volume/3)
+/datum/reagent/proc/touch_mob(var/mob/M) // This doesn't apply to being splashed - this is for, e.g. extinguishers and sprays. The difference is that reagent is not on the mob - it's in another object.
 	return
 
-/datum/reagent/proc/reaction_turf(var/turf/T, var/volume)
-	src = null
+/datum/reagent/proc/touch_obj(var/obj/O) // Acid melting, cleaner cleaning, etc
 	return
 
-/datum/reagent/proc/on_mob_life(var/mob/living/M as mob, var/alien)
-	if(!istype(M, /mob/living))
-		return //Noticed runtime errors from pacid trying to damage ghosts, this should fix. --NEO
-	if( (overdose > 0) && (volume >= overdose))//Overdosing, wooo
-		M.adjustToxLoss(overdose_dam)
-	holder.remove_reagent(src.id, custom_metabolism) //By default it slowly disappears.
+/datum/reagent/proc/touch_turf(var/turf/T) // Cleaner cleaning, lube lubbing, etc, all go here
 	return
 
-/datum/reagent/proc/on_move(var/mob/M)
+/datum/reagent/proc/on_mob_life(var/mob/living/carbon/M, var/alien, var/location) // Currently, on_mob_life is called on carbons. Any interaction with non-carbon mobs (lube) will need to be done in touch_mob.
+	if(!istype(M))
+		return
+	if(!affects_dead && M.stat == DEAD)
+		return
+	if(overdose && (location == CHEM_BLOOD))
+		overdose(M, alien)
+	var/removed = metabolism
+	if(ingest_met && (location == CHEM_INGEST))
+		removed = ingest_met
+	if(touch_met && (location == CHEM_TOUCH))
+		removed = touch_met
+	removed = min(removed, volume)
+	max_dose = max(volume, max_dose)
+	dose = min(dose + removed, max_dose)
+	if(removed >= (metabolism * 0.1) || removed >= 0.1) // If there's too little chemical, don't affect the mob, just remove it
+		switch(location)
+			if(CHEM_BLOOD)
+				affect_blood(M, alien, removed)
+			if(CHEM_INGEST)
+				affect_ingest(M, alien, removed)
+			if(CHEM_TOUCH)
+				affect_touch(M, alien, removed)
+	remove_self(removed)
 	return
 
-// Called after add_reagents creates a new reagent.
-/datum/reagent/proc/on_new(var/data)
+/datum/reagent/proc/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	return
 
-// Called when two reagents of the same are mixing. <-- Blatant lies
-/datum/reagent/proc/on_merge(var/newdata, var/newamount)
+/datum/reagent/proc/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+	affect_blood(M, alien, removed * 0.5)
 	return
 
-/datum/reagent/proc/on_update(var/atom/A)
+/datum/reagent/proc/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
 	return
+
+/datum/reagent/proc/overdose(var/mob/living/carbon/M, var/alien) // Overdose effect. Doesn't happen instantly.
+	M.adjustToxLoss(REM)
+	return
+
+/datum/reagent/proc/initialize_data(var/newdata) // Called when the reagent is created.
+	if(!isnull(newdata))
+		data = newdata
+	return
+
+/datum/reagent/proc/mix_data(var/newdata, var/newamount) // You have a reagent with data, and new reagent with its own data get added, how do you deal with that?
+	return
+
+/datum/reagent/proc/get_data() // Just in case you have a reagent that handles data differently.
+	if(data && istype(data, /list))
+		return data.Copy()
+	else if(data)
+		return data
+	return null
 
 /datum/reagent/Destroy() // This should only be called by the holder, so it's already handled clearing its references
 	..()
 	holder = null
+
+/* DEPRECATED - TODO: REMOVE EVERYWHERE */
+
+/datum/reagent/proc/reaction_turf(var/turf/target)
+	touch_turf(target)
+
+/datum/reagent/proc/reaction_obj(var/obj/target)
+	touch_obj(target)
+
+/datum/reagent/proc/reaction_mob(var/mob/target)
+	touch_mob(target)
 
 /datum/reagent/woodpulp
 	name = "Wood Pulp"
