@@ -15,7 +15,7 @@
 	var/brute_damage = 0                    // Specifically brute damage.
 	var/burn_damage = 0                     // Specifically burn damage.
 	var/base_name                           // Used to keep the original name safe while we apply modifiers.
-
+	var/resilience = 0.2
 
 /obj/item/clothing/head/helmet/space
 	var/can_breach = 1                      // Set to 0 to disregard all breaching.

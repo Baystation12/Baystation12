@@ -139,7 +139,7 @@
 	action_button_name = "HALT!"
 	icon_state = "officermask"
 	icon_action_button = "action_blank"
-	flags = FPRINT|TABLEPASS|MASKCOVERSMOUTH
+	flags = MASKCOVERSMOUTH
 	w_class = 2
 	gas_transfer_coefficient = 0.90
 	var/cooldown = 0

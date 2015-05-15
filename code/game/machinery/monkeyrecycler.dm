@@ -13,8 +13,8 @@
 
 
 /obj/machinery/monkeyrecycler/attackby(var/obj/item/O as obj, var/mob/user as mob)
-	if(default_unfasten_wrench(user, O))
-		return
+	//if(default_unfasten_wrench(user, O))
+//		return
 
 	if (src.stat != 0) //NOPOWER etc
 		return

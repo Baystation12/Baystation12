@@ -3,7 +3,6 @@
 	name = "Gold Chain"
 	desc = "A Beutiful Gold Chain"
 	icon_state = "gchain"
-	flags = FPRINT | TABLEPASS
 	item_state = "gchain"
 	siemens_coefficient = 0.5
 
@@ -12,7 +11,6 @@
 	name = "Silver Chain"
 	desc = "A Beutiful Silver Chain"
 	icon_state = "schain"
-	flags = FPRINT | TABLEPASS
 	item_state = "schain"
 	siemens_coefficient = 0.5
 
@@ -20,7 +18,6 @@
 	name = "Gold $ Chain"
 	desc = "A Gangsta Chain"
 	icon_state = "dchain"
-	flags = FPRINT | TABLEPASS
 	item_state = "dchain"
 	siemens_coefficient = 0.5
 
@@ -28,7 +25,6 @@
 	name = "Emerald Necklace"
 	desc = "A Gold Chain with an Emerald on it."
 	icon_state = "Eneck"
-	flags = FPRINT | TABLEPASS
 	item_state = "Eneck"
 	siemens_coefficient = 0.5
 
@@ -36,7 +32,6 @@
 	name = "Ruby Necklace"
 	desc = "A Gold Chain with an Ruby on it."
 	icon_state = "Rneck"
-	flags = FPRINT | TABLEPASS
 	item_state = "Rneck"
 	siemens_coefficient = 0.5
 
@@ -45,7 +40,7 @@
 	name = "Blue Neckerchief"
 	desc = "A Blue Neckerchief with SS03 embroidered on it."
 	icon_state = "Bnecker"
-	flags = FPRINT | TABLEPASS
+
 	item_state = "Bnecker"
 	siemens_coefficient = 0.5
 
@@ -53,9 +48,9 @@
 	name = "Red Bandana"
 	desc = "A Red Bandana with a nice embroidery."
 	icon_state = "Rbandana"
-	flags = FPRINT | TABLEPASS
 
-	slot_flags = SLOT_NECK
+
+	slot_ SLOT_NECK
 	siemens_coefficient = 0.5
 	var/hanging = 1
 
@@ -84,7 +79,6 @@
 	name = "Green Bandana"
 	desc = "A Green Bandana with a nice embroidery."
 	icon_state = "Gbandana"
-	flags = FPRINT | TABLEPASS
 	siemens_coefficient = 0.5
 	var/hanging = 1
 
@@ -113,7 +107,6 @@
 	name = "Blue Bandana"
 	desc = "A Blue Bandana with a nice embroidery."
 	icon_state = "Bbandana"
-	flags = FPRINT | TABLEPASS
 	siemens_coefficient = 0.5
 	var/hanging = 1
 
@@ -142,7 +135,6 @@
 	name = "Grey Bandana"
 	desc = "A Grey Bandana with a nice embroidery."
 	icon_state = "Grbandana"
-	flags = FPRINT | TABLEPASS
 	siemens_coefficient = 0.5
 	var/hanging = 1
 
@@ -171,7 +163,6 @@
 	name = "Purple Bandana"
 	desc = "A Purple Bandana with a nice embroidery."
 	icon_state = "Pubandana"
-	flags = FPRINT | TABLEPASS
 	siemens_coefficient = 0.5
 	var/hanging = 1
 
@@ -200,7 +191,6 @@
 	name = "Pirate Bandana"
 	desc = "A Dark Red Bandana with a Pirate embroidery."
 	icon_state = "Pbandana"
-	flags = FPRINT | TABLEPASS
 	siemens_coefficient = 0.5
 	var/hanging = 1
 
@@ -229,6 +219,5 @@
 	name = "Aviskree Medallion"
 	desc = "A Silver Medallion on a chain, a name is written on it in Aviachirp"
 	icon_state = "Aneck"
-	flags = FPRINT | TABLEPASS
 	item_state = "Aneck"
 	siemens_coefficient = 0.5

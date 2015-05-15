@@ -2691,32 +2691,32 @@
 			if("togglebombcap")
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","BC")
-				switch(MAX_EXPLOSION_RANGE)
-					if(14)	MAX_EXPLOSION_RANGE = 16
-					if(16)	MAX_EXPLOSION_RANGE = 20
-					if(20)	MAX_EXPLOSION_RANGE = 28
-					if(28)	MAX_EXPLOSION_RANGE = 56
-					if(56)	MAX_EXPLOSION_RANGE = 128
-					if(128)	MAX_EXPLOSION_RANGE = 14
-				var/range_dev = MAX_EXPLOSION_RANGE *0.25
-				var/range_high = MAX_EXPLOSION_RANGE *0.5
-				var/range_low = MAX_EXPLOSION_RANGE
+				switch(max_explosion_range)
+					if(14)	max_explosion_range = 16
+					if(16)	max_explosion_range = 20
+					if(20)	max_explosion_range = 28
+					if(28)	max_explosion_range = 56
+					if(56)	max_explosion_range = 128
+					if(128)	max_explosion_range = 14
+				var/range_dev = max_explosion_range *0.25
+				var/range_high = max_explosion_range *0.5
+				var/range_low = max_explosion_range
 				message_admins("\red <b> [key_name_admin(usr)] changed the bomb cap to [range_dev], [range_high], [range_low]</b>", 1)
-				log_admin("[key_name_admin(usr)] changed the bomb cap to [MAX_EXPLOSION_RANGE]")
-				log_admin_single("[key_name_admin(usr)] changed the bomb cap to [MAX_EXPLOSION_RANGE]")
+				log_admin("[key_name_admin(usr)] changed the bomb cap to [max_explosion_range]")
+				log_admin_single("[key_name_admin(usr)] changed the bomb cap to [max_explosion_range]")
 
 			if("togglebomboff")
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","BCF")
-				if(MAX_EXPLOSION_RANGE != 0)
-					MAX_EXPLOSION_RANGE = 0
+				if(max_explosion_range != 0)
+					max_explosion_range = 0
 				else
-					MAX_EXPLOSION_RANGE = 14
-				var/range_dev = MAX_EXPLOSION_RANGE *0.25
-				var/range_high = MAX_EXPLOSION_RANGE *0.5
-				var/range_low = MAX_EXPLOSION_RANGE
+					max_explosion_range = 14
+				var/range_dev = max_explosion_range *0.25
+				var/range_high = max_explosion_range *0.5
+				var/range_low = max_explosion_range
 				message_admins("\red <b> [key_name_admin(usr)] changed the bomb cap to [range_dev], [range_high], [range_low]</b>", 1)
-				log_admin("[key_name_admin(usr)] changed the bomb cap to [MAX_EXPLOSION_RANGE]")
+				log_admin("[key_name_admin(usr)] changed the bomb cap to [max_explosion_range]")
 
 	else if(href_list["secretsadmin"])
 		if(!check_rights(R_ADMIN))	return

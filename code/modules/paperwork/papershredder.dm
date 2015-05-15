@@ -10,8 +10,8 @@
 
 
 /obj/machinery/papershredder/attackby(obj/item/W as obj, mob/user as mob)
-	if(default_unfasten_wrench(user, W))
-		return
+//	if(default_unfasten_wrench(user, W))
+//		return
 	if (istype(W, /obj/item/weapon/paper))
 		if(paperamount == max_paper)
 			if(prob(5))

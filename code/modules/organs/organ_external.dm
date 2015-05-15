@@ -1176,6 +1176,9 @@ obj/item/weapon/organ/head/New(loc, mob/living/carbon/human/H)
 	name = "[H.real_name]'s head"
 	H.regenerate_icons()
 
+/obj/item/weapon/organ/head/posi
+	name = "robotic head"
+
 obj/item/weapon/organ/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	switch(op_stage)
 		if(0)

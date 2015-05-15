@@ -52,7 +52,7 @@
 	var/attacktext = "attacked"
 	var/attack_sound = null
 	var/friendly = "nuzzles"
-	var/wall_smash = 0
+
 
 /mob/living/simple_animal/New()
 	..()

@@ -373,7 +373,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 								var/obj/item/weapon/storage/lockbox/L = new/obj/item/weapon/storage/lockbox(linked_lathe.loc)
 								new_item.loc = L
 								L.name += " ([new_item.name])"
-								if(istype(being_built, /datum/design/rapidsyringe))
+								if(istype(being_built, /datum/design/item/weapon/rapidsyringe))
 									L.req_access = list()
 									L.req_one_access = list(access_cmo,access_rd)
 							else
@@ -424,10 +424,10 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 						var/obj/item/weapon/storage/lockbox/L = new/obj/item/weapon/storage/lockbox(linked_imprinter.loc)
 						new_item.loc = L
 						L.name += " ([new_item.name])"
-						if(istype(being_built, /datum/design/gygax_main))
+						if(istype(being_built, /datum/design/circuit/mecha/gygax_main))
 							L.req_access = list()
 							L.req_one_access = list(access_hos,access_rd)
-						if(istype(being_built, /datum/design/durand_main))
+						if(istype(being_built, /datum/design/circuit/mecha/durand_main))
 							L.req_access = list()
 							L.req_one_access = list(access_hos,access_rd)
 					else

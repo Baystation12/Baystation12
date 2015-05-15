@@ -166,24 +166,6 @@
 	else
 		icon_state = "borgcharger0"
 
-	if (istype(occupant, /mob/living/carbon/human))
-		if(occupant.nutrition >= 440)
-			if(saidrecharge <=0)
-				occupant << "\blue You are fully Recharged "
-				saidrecharge = 1
-		else
-			occupant.nutrition += 20
-
-		var/mob/living/carbon/human/D = occupant
-		if(hasorgans(D))
-		var/list/datum/organ/external/S = D.get_damaged_organs(1, 1)
-		if (!S) return
-		for(var/datum/organ/external/E in S)
-			if(E.brute_dam && (E.status & ORGAN_ROBOT))
-				E.heal_damage(2,0,0,1)
-			if(E.burn_dam && (E.status & ORGAN_ROBOT))
-				E.heal_damage(2,0,0,1)
-
 /obj/machinery/recharge_station/proc/process_occupant()
 	if(occupant)
 		if(istype(occupant, /mob/living/silicon/robot))
@@ -204,28 +186,23 @@
 			else
 				update_use_power(1)
 
+		if (istype(occupant, /mob/living/carbon/human))
+			if(occupant.nutrition >= 440)
+				if(saidrecharge <=0)
+					occupant << "\blue You are fully Recharged "
+					saidrecharge = 1
+			else
+				occupant.nutrition += 20
 
-/obj/machinery/recharge_station/verb/move_eject()
-	set category = "Object"
-	set src in oview(1)
-	if (usr.stat != 0)
-		return
-	src.go_out()
-	add_fingerprint(usr)
-	return
-
-/obj/machinery/recharge_station/verb/move_inside()
-	set category = "Object"
-	set src in oview(1)
-	if (usr.stat == 2)
-		//Whoever had it so that a borg with a dead cell can't enter this thing should be shot. --NEO
-		return
-	if (!(istype(usr, /mob/living/silicon/)))
-		usr << "\blue <B>Only non-organics may enter the recharger!</B>"
-		return
-	if (src.occupant)
-		usr << "\blue <B>The cell is already occupied!</B>"
-		return
+		var/mob/living/carbon/human/D = occupant
+		if(hasorgans(D))
+			var/list/datum/organ/external/S = D.get_damaged_organs(1, 1)
+			if (!S) return
+			for(var/datum/organ/external/E in S)
+				if(E.brute_dam && (E.status & ORGAN_ROBOT))
+					E.heal_damage(2,0,0,1)
+				if(E.burn_dam && (E.status & ORGAN_ROBOT))
+					E.heal_damage(2,0,0,1)
 
 /obj/machinery/recharge_station/proc/go_in(var/mob/usr)
 	if (usr.stat == 2)
@@ -250,6 +227,7 @@
 	if (src.occupant)
 		usr << "\blue <B>The cell is already occupied!</B>"
 		return
+
 /obj/machinery/recharge_station/proc/go_out()
 	if(!(occupant))
 		return
@@ -263,6 +241,29 @@
 	build_icon()
 	update_use_power(1)
 	return
+
+
+/obj/machinery/recharge_station/verb/move_eject()
+	set category = "Object"
+	set src in oview(1)
+	if (usr.stat != 0)
+		return
+	src.go_out()
+	add_fingerprint(usr)
+	return
+
+/obj/machinery/recharge_station/verb/move_inside()
+	set category = "Object"
+	set src in oview(1)
+	if (usr.stat == 2)
+		//Whoever had it so that a borg with a dead cell can't enter this thing should be shot. --NEO
+		return
+	if (!(istype(usr, /mob/living/silicon/)))
+		usr << "\blue <B>Only non-organics may enter the recharger!</B>"
+		return
+	if (src.occupant)
+		usr << "\blue <B>The cell is already occupied!</B>"
+		return
 
 /obj/machinery/recharge_station/verb/move_eject()
 	set category = "Object"

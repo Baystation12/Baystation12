@@ -374,7 +374,7 @@ This function restores all organs.
 	if(def_zone == "head")
 		handle_suit_punctures_helmet(damagetype, damage, def_zone)
 	if(def_zone == "chest" || def_zone == "groin" ||  def_zone == "l_arm" ||  def_zone == "r_arm" ||  def_zone == "l_leg" ||  def_zone == "r_leg")
-		handle_suit_punctures_torso(damagetype, damage, def_zone)
+		handle_suit_punctures(damagetype, damage, def_zone)
 	//handle_suit_punctures(damagetype, damage, def_zone)
 
 	if(blocked >= 2)	return 0

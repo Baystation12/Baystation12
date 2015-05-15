@@ -779,7 +779,6 @@ steam.start() -- spawns the effect
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "blood_extinguish"
 	var/life = 15.0
-	flags = TABLEPASS
 	mouse_opacity = 0
 
 

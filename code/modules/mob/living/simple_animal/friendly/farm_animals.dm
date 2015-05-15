@@ -347,7 +347,7 @@ var/global/chicken_count = 0
 			for(var/direction in shuffle(list(1,2,4,8,5,6,9,10)))
 				var/step = get_step(src, direction)
 				if(step)
-					if(locate(/obj/effect/plantsegment) in step)
+					if(locate(/obj/effect/plant) in step)
 						Move(step)
 
 /mob/living/simple_animal/hostile/retaliate/goose/Retaliate()

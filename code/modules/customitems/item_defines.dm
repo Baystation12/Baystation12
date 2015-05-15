@@ -1422,7 +1422,7 @@
 	 icon_state = "cane"
 	 item_state = "stick"
 
-
+/*
 // Yithani
 /obj/item/weapon/kitchenknife/ritual/yithani
 	name = "pearl-hilted knife"
@@ -1451,6 +1451,7 @@
 /obj/item/clothing/under/lawyer/black/yithani
 	name = "Zaramiyrh's suit"
 	desc = "A silk-woven black suit with dull gold embroidery. A clip hangs from the side, allowing a harness to be attached."
+*/
 
 /obj/item/clothing/suit/storage/labcoat/kidafrag //Fraggloid
 	name = "frag jacket"
@@ -1478,7 +1479,6 @@
 	name = "R.I.S beret"
 	desc = "A worn looking beret with a small metal brooch, a pair of crossed blades over a clenched fist. Getting too close, it bears a faint chemical smell."
 	icon_state = "beret_badge"
-	flags = FPRINT | TABLEPASS
 
 /obj/item/clothing/under/rank/security/ris //Cdb
 	name = "R.I.S uniform"
@@ -1487,7 +1487,6 @@
 	item_state = "harper_uniform"
 	item_color = "harper_uniform"
 	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
-	flags = FPRINT | TABLEPASS
 	siemens_coefficient = 0.9
 
 ////////////////////////////// Foxler - Erstatz Vryroxes /////////////////////////////////////////////////

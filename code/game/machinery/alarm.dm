@@ -563,7 +563,6 @@
 
 /obj/machinery/alarm/proc/populate_controls(var/list/data)
 	switch(screen)
-		if (AALARM_SCREEN_MAI)
 		if(AALARM_SCREEN_MAIN)
 			data["mode"] = mode
 		if(AALARM_SCREEN_VENT)
@@ -645,7 +644,6 @@
 	if(buildstage != 2)
 		return STATUS_CLOSE
 
-	if(aidisabled && user.isAI())
 	if(aidisabled && user.isMobAI())
 		user << "<span class='warning'>AI control for \the [src] interface has been disabled.</span>"
 		return STATUS_CLOSE
