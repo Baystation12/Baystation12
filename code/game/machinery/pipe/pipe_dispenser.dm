@@ -182,6 +182,8 @@ Nah
 <A href='?src=\ref[src];dmake=8'>Sorting</A><BR>
 <A href='?src=\ref[src];dmake=9'>Sorting (Wildcard)</A><BR>
 <A href='?src=\ref[src];dmake=10'>Sorting (Untagged)</A><BR>
+<A href='?src=\ref[src];dmake=11'>Tagger</A><BR>
+<A href='?src=\ref[src];dmake=12'>Tagger (Partial)</A><BR>
 "}
 ///// Z-Level stuff
 
@@ -232,6 +234,10 @@ Nah
 				if(10)
 					C.ptype = 9
 					C.subtype = 2
+				if(11)
+					C.ptype = 13
+				if(12)
+					C.ptype = 14
 ///// Z-Level stuff
 				if(21)
 					C.ptype = 11
