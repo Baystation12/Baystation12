@@ -19,30 +19,34 @@
 /obj/item/weapon/twohanded
 	var/wielded = 0
 	var/force_wielded = 0
+	var/force_unwielded
 	var/wieldsound = null
 	var/unwieldsound = null
 	var/base_icon
+	var/base_name
 
 /obj/item/weapon/twohanded/proc/unwield()
 	wielded = 0
-	force = initial(force)
-	name = "[initial(name)]"
+	force = force_unwielded
+	name = "[base_name]"
 	update_icon()
 
 /obj/item/weapon/twohanded/proc/wield()
 	wielded = 1
 	force = force_wielded
-	name = "[initial(name)] (Wielded)"
+	name = "[base_name] (Wielded)"
 	update_icon()
 
 /obj/item/weapon/twohanded/New()
 	..()
 	update_icon()
+	force_unwielded = force
+	base_name = name
 
 /obj/item/weapon/twohanded/mob_can_equip(M as mob, slot)
 	//Cannot equip wielded items.
 	if(wielded)
-		M << "<span class='warning'>Unwield the [initial(name)] first!</span>"
+		M << "<span class='warning'>Unwield the [base_name] first!</span>"
 		return 0
 
 	return ..()
@@ -89,13 +93,13 @@
 			user << "<span class='warning'>You need your other hand to be empty</span>"
 			return
 		wield()
-		user << "<span class='notice'>You grab the [initial(name)] with both hands.</span>"
+		user << "<span class='notice'>You grab the [base_name] with both hands.</span>"
 		if (src.wieldsound)
 			playsound(src.loc, wieldsound, 50, 1)
 
 		var/obj/item/weapon/twohanded/offhand/O = new(user) ////Let's reserve his other hand~
-		O.name = "[initial(name)] - offhand"
-		O.desc = "Your second grip on the [initial(name)]"
+		O.name = "[base_name] - offhand"
+		O.desc = "Your second grip on the [base_name]"
 		user.put_in_inactive_hand(O)
 
 	if(istype(user,/mob/living/carbon/human))
@@ -111,11 +115,11 @@
 	icon_state = "offhand"
 	name = "offhand"
 
-	unwield()
-		qdel(src)
+/obj/item/weapon/twohanded/offhand/unwield()
+	qdel(src)
 
-	wield()
-		qdel(src)
+/obj/item/weapon/twohanded/offhand/wield()
+	qdel(src)
 
 /obj/item/weapon/twohanded/offhand/update_icon()
 	return
@@ -142,15 +146,7 @@
 	if(A && wielded && (istype(A,/obj/structure/window) || istype(A,/obj/structure/grille))) //destroys windows and grilles in one hit
 		if(istype(A,/obj/structure/window)) //should just make a window.Break() proc but couldn't bother with it
 			var/obj/structure/window/W = A
-
-			new /obj/item/weapon/shard( W.loc )
-			if(W.reinf) PoolOrNew(/obj/item/stack/rods, W.loc)
-
-			if (W.dir == SOUTHWEST)
-				new /obj/item/weapon/shard( W.loc )
-				if(W.reinf) PoolOrNew(/obj/item/stack/rods, W.loc)
-		qdel(A)
-
+			W.shatter()
 
 /*
  * Double-Bladed Energy Swords - Cheridan
@@ -209,30 +205,3 @@
 	flags = NOSHIELD
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	attack_verb = list("attacked", "poked", "jabbed", "torn", "gored")
-
-/obj/item/weapon/twohanded/baseballbat
-	name = "wooden bat"
-	desc = "HOME RUN!"
-	icon_state = "woodbat0"
-	base_icon = "woodbat"
-	item_state = "woodbat"
-	sharp = 0
-	edge = 0
-	w_class = 3
-	force = 10
-	throw_speed = 3
-	throw_range = 7
-	throwforce = 7
-	attack_verb = list("smashed", "beaten", "slammed", "smacked", "struck", "battered", "bonked")
-	hitsound = 'sound/weapons/genhit3.ogg'
-	force_wielded = 20
-
-/obj/item/weapon/twohanded/baseballbat/metal
-	name = "metal bat"
-	desc = "A shiny metal bat."
-	icon_state = "metalbat0"
-	base_icon = "metalbat"
-	item_state = "metalbat"
-	force = 15
-	w_class = 3.0
-	force_wielded = 25
