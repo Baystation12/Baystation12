@@ -21,6 +21,12 @@ var/list/name_to_material
 	metal
 	solid
 	cult
+	Valid door icons:
+	stone
+	metal
+	resin
+	wood
+
 */
 
 /material
@@ -31,6 +37,7 @@ var/list/name_to_material
 
 	// Shards/tables/structures
 	var/tableslam_noise = 'sound/weapons/tablehit1.ogg'
+	var/dooropen_noise = 'sound/effects/stonedoor_openclose.ogg'
 	var/shard_type = SHARD_SHRAPNEL
 	var/shard_icon
 	var/shard_can_repair = 1
@@ -39,6 +46,7 @@ var/list/name_to_material
 	// Icons
 	var/icon_colour
 	var/icon_base = "metal"
+	var/door_icon_base = "metal"
 	var/icon_reinf = "reinf_metal"
 	var/stack_type = /obj/item/stack/material/steel
 	var/stack_origin_tech = "materials=1"
@@ -66,6 +74,9 @@ var/list/name_to_material
 
 /material/proc/get_blunt_damage()
 	return weight //todo
+
+/material/proc/can_open_material_door(var/mob/living/user)
+	return 1
 
 /material/proc/get_edge_damage()
 	return round(hardness/4) //todo
@@ -106,6 +117,7 @@ var/list/name_to_material
 	icon_colour = "#007A00"
 	weight = 22
 	stack_origin_tech = "materials=5"
+	door_icon_base = "stone"
 
 /material/diamond
 	name = "diamond"
@@ -145,6 +157,7 @@ var/list/name_to_material
 	shard_type = SHARD_SHARD
 	hardness = 30
 	stack_origin_tech = "phorontech=2;materials=2"
+	door_icon_base = "stone"
 
 /material/sandstone
 	name = "sandstone"
@@ -155,6 +168,7 @@ var/list/name_to_material
 	shard_type = SHARD_STONE_PIECE
 	weight = 22
 	hardness = 55
+	door_icon_base = "stone"
 
 /material/steel
 	name = DEFAULT_WALL_MATERIAL
@@ -194,6 +208,7 @@ var/list/name_to_material
 	tableslam_noise = 'sound/effects/Glasshit.ogg'
 	hardness = 15
 	weight = 15
+	door_icon_base = "stone"
 
 /material/glass/phoron
 	name = "phoron glass"
@@ -281,6 +296,8 @@ var/list/name_to_material
 	hardness = 15
 	weight = 18
 	stack_origin_tech = "materials=1;biotech=1"
+	dooropen_noise = 'sound/effects/doorcreaky.ogg'
+	door_icon_base = "wood"
 
 /material/wood/holographic
 	name = "holographic wood"
@@ -298,10 +315,12 @@ var/list/name_to_material
 	hardness = 1
 	weight = 1
 	stack_origin_tech = "materials=1"
+	door_icon_base = "wood"
 
 /material/cloth //todo
 	name = "cloth"
 	stack_origin_tech = "materials=2"
+	door_icon_base = "wood"
 
 /material/cult
 	name = "cult"
@@ -323,3 +342,15 @@ var/list/name_to_material
 
 /material/cult/reinf/place_dismantled_product(var/turf/target)
 	new /obj/effect/decal/remains/human(target)
+
+/material/resin
+	name = "resin"
+	icon_colour = "#E85DD8"
+	dooropen_noise = 'sound/effects/attackblob.ogg'
+	door_icon_base = "resin"
+
+/material/resin/can_open_material_door(var/mob/living/user)
+	var/mob/living/carbon/M = user
+	if(istype(M) && locate(/obj/item/organ/xenos/hivenode) in M.internal_organs)
+		return 1
+	return 0

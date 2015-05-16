@@ -79,6 +79,7 @@ obj/item/stack/material/iron
 	name = "iron"
 	icon_state = "sheet-silver"
 	default_type = "iron"
+	apply_colour = 1
 
 /obj/item/stack/material/sandstone
 	name = "sandstone brick"

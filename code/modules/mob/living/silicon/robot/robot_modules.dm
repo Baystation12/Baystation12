@@ -310,7 +310,7 @@ var/global/list/robot_modules = list(
 	synths += plasteel
 	synths += glass
 
-	var/obj/item/stack/material/steel/cyborg/M = new /obj/item/stack/material/steel/cyborg(src)
+	var/obj/item/stack/material/cyborg/steel/M = new (src)
 	M.synths = list(metal)
 	src.modules += M
 
@@ -322,7 +322,7 @@ var/global/list/robot_modules = list(
 	S.synths = list(plasteel)
 	src.modules += S
 
-	var/obj/item/stack/material/glass/reinforced/cyborg/RG = new /obj/item/stack/material/glass/reinforced/cyborg(src)
+	var/obj/item/stack/material/cyborg/glass/reinforced/RG = new (src)
 	RG.synths = list(metal, glass)
 	src.modules += RG
 
@@ -356,11 +356,11 @@ var/global/list/robot_modules = list(
 	MD.glass = glass
 	src.modules += MD
 
-	var/obj/item/stack/material/steel/cyborg/M = new /obj/item/stack/material/steel/cyborg(src)
+	var/obj/item/stack/material/cyborg/steel/M = new (src)
 	M.synths = list(metal)
 	src.modules += M
 
-	var/obj/item/stack/material/glass/cyborg/G = new /obj/item/stack/material/glass/cyborg(src)
+	var/obj/item/stack/material/cyborg/glass/G = new (src)
 	G.synths = list(glass)
 	src.modules += G
 
@@ -376,7 +376,7 @@ var/global/list/robot_modules = list(
 	S.synths = list(metal)
 	src.modules += S
 
-	var/obj/item/stack/material/glass/reinforced/cyborg/RG = new /obj/item/stack/material/glass/reinforced/cyborg(src)
+	var/obj/item/stack/material/cyborg/glass/reinforced/RG = new (src)
 	RG.synths = list(metal, glass)
 	src.modules += RG
 
@@ -676,11 +676,11 @@ var/global/list/robot_modules = list(
 	MD.plastic = plastic
 	src.modules += MD
 
-	var/obj/item/stack/material/steel/cyborg/M = new /obj/item/stack/material/steel/cyborg(src)
+	var/obj/item/stack/material/cyborg/steel/M = new (src)
 	M.synths = list(metal)
 	src.modules += M
 
-	var/obj/item/stack/material/glass/cyborg/G = new /obj/item/stack/material/glass/cyborg(src)
+	var/obj/item/stack/material/cyborg/glass/G = new (src)
 	G.synths = list(glass)
 	src.modules += G
 
@@ -696,7 +696,7 @@ var/global/list/robot_modules = list(
 	S.synths = list(metal)
 	src.modules += S
 
-	var/obj/item/stack/material/glass/reinforced/cyborg/RG = new /obj/item/stack/material/glass/reinforced/cyborg(src)
+	var/obj/item/stack/material/cyborg/glass/reinforced/RG = new (src)
 	RG.synths = list(metal, glass)
 	src.modules += RG
 

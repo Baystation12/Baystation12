@@ -143,7 +143,7 @@
 	singular_name = "phoron glass sheet"
 	icon_state = "sheet-phoronglass"
 	created_window = /obj/structure/window/phoronbasic
-	default_type = "phoronglass"
+	default_type = "phoron glass"
 
 /obj/item/stack/material/glass/phoronglass/attackby(obj/item/W, mob/user)
 	..()

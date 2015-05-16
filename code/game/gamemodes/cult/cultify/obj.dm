@@ -59,7 +59,7 @@
 	qdel(src)
 
 /obj/machinery/door/airlock/external/cultify()
-	new /obj/structure/mineral_door/wood(loc)
+	new /obj/structure/simple_door/wood(loc)
 	..()
 
 /obj/machinery/door/cultify()
@@ -114,11 +114,11 @@
 /obj/structure/grille/cult/cultify()
 	return
 
-/obj/structure/mineral_door/cultify()
-	new /obj/structure/mineral_door/wood(loc)
+/obj/structure/simple_door/cultify()
+	new /obj/structure/simple_door/wood(loc)
 	..()
 
-/obj/structure/mineral_door/wood/cultify()
+/obj/structure/simple_door/wood/cultify()
 	return
 
 /obj/singularity/cultify()

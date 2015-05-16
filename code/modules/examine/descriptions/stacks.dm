@@ -5,18 +5,18 @@
 /obj/item/stack/material/glass
 	description_info = "Use in your hand to build a window.  Can be upgraded to reinforced glass by adding metal rods, which are made from metal sheets."
 
-/obj/item/stack/material/glass/cyborg
+/obj/item/stack/material/cyborg/glass
 	description_info = "Use in your hand to build a window.  Can be upgraded to reinforced glass by adding metal rods, which are made from metal sheets.<br>\
 	As a synthetic, you can acquire more sheets of glass by recharging."
 
 /obj/item/stack/material/glass/reinforced
 	description_info = "Use in your hand to build a window.  Reinforced glass is much stronger against damage."
 
-/obj/item/stack/material/glass/reinforced/cyborg
+/obj/item/stack/material/cyborg/glass/reinforced
 	description_info = "Use in your hand to build a window. Reinforced glass is much stronger against damage.<br>\
 	As a synthetic, you can gain more reinforced glass by recharging."
 
-/obj/item/stack/material/steel/cyborg
+/obj/item/stack/material/cyborg/steel
 	description_info = "Use in your hand to bring up the recipe menu.  If you have enough sheets, click on something on the list to build it.<br>\
 	You can replenish your supply of metal as a synthetic by recharging."
 
