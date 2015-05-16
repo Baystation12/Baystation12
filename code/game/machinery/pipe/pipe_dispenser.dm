@@ -179,6 +179,9 @@ Nah
 <A href='?src=\ref[src];dmake=7'>Chute</A><BR>
 <A href='?src=\ref[src];dmake=21'>Upwards</A><BR>
 <A href='?src=\ref[src];dmake=22'>Downwards</A><BR>
+<A href='?src=\ref[src];dmake=8'>Sorting</A><BR>
+<A href='?src=\ref[src];dmake=9'>Sorting (Wildcard)</A><BR>
+<A href='?src=\ref[src];dmake=10'>Sorting (Untagged)</A><BR>
 "}
 ///// Z-Level stuff
 
@@ -220,6 +223,15 @@ Nah
 				if(7)
 					C.ptype = 8
 					C.density = 1
+				if(8)
+					C.ptype = 9
+					C.subtype = 0
+				if(9)
+					C.ptype = 9
+					C.subtype = 1
+				if(10)
+					C.ptype = 9
+					C.subtype = 2
 ///// Z-Level stuff
 				if(21)
 					C.ptype = 11
