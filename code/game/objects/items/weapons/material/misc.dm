@@ -9,4 +9,3 @@
 	throwforce = 15
 	w_class = 3
 	attack_verb = list("jabbed","stabbed","ripped")
-	default_material = "steel"

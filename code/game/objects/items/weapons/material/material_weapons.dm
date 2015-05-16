@@ -3,6 +3,7 @@
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	gender = NEUTER
 
+	var/applies_material_colour
 	var/unbreakable
 	var/damage_divisor = 0.5
 	var/default_material = DEFAULT_WALL_MATERIAL
@@ -24,7 +25,8 @@
 	else
 		name = "[material.display_name] bat"
 		health = round(material.integrity/10)
-		color = material.icon_colour
+		if(applies_material_colour)
+			color = material.icon_colour
 		if(material.products_need_process())
 			processing_objects |= src
 		update_force()
