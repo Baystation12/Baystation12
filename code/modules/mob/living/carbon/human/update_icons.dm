@@ -330,7 +330,7 @@ var/global/list/damage_icon_parts = list()
 	overlays_standing[HAIR_LAYER]	= null
 
 	var/obj/item/organ/external/head/head_organ = get_organ("head")
-	if( !head_organ || (head_organ.status & ORGAN_DESTROYED) )
+	if(!head_organ || head_organ.is_stump() || (head_organ.status & ORGAN_DESTROYED) )
 		if(update_icons)   update_icons()
 		return
 
@@ -491,8 +491,7 @@ var/global/list/damage_icon_parts = list()
 		var/obj/item/clothing/under/under = w_uniform
 		if(under.accessories.len)
 			for(var/obj/item/clothing/accessory/A in under.accessories)
-				var/accessory_state = A.overlay_state? A.overlay_state : A.icon_state
-				standing.overlays	+= image(icon = INV_ACCESSORIES_DEF_ICON, icon_state = accessory_state)
+				standing.overlays |= A.get_inv_mob_overlay()
 
 		overlays_standing[UNIFORM_LAYER]	= standing
 	else

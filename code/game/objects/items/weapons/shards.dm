@@ -1,18 +1,21 @@
 // Glass shards
 
 /obj/item/weapon/shard
-	name = "glass shard"
+	name = "shard"
 	icon = 'icons/obj/shards.dmi'
 	icon_state = "large"
 	sharp = 1
 	edge = 1
-	desc = "Could probably be used as ... a throwing weapon?"
+	desc = "Made of nothing. How does this even exist?" // set based on material, if this desc is visible it's a bug (shards default to being made of glass)
 	w_class = 2.0
 	force = 5.0
 	throwforce = 8.0
 	item_state = "shard-glass"
-	matter = list("glass" = 3750)
+	//matter = list("glass" = 3750) // Weld it into sheets before you use it!
 	attack_verb = list("stabbed", "slashed", "sliced", "cut")
+
+	gender = "neuter"
+	var/material/material = null
 
 /obj/item/weapon/shard/suicide_act(mob/user)
 		viewers(user) << pick("\red <b>[user] is slitting \his wrists with \the [src]! It looks like \he's trying to commit suicide.</b>", \
@@ -34,36 +37,54 @@
 		return
 	return
 
-/obj/item/weapon/shard/New()
+/obj/item/weapon/shard/New(loc, material/material)
+	..(loc)
 
-	src.icon_state = pick("large", "medium", "small")
-	switch(src.icon_state)
-		if("small")
-			src.pixel_x = rand(-12, 12)
-			src.pixel_y = rand(-12, 12)
-		if("medium")
-			src.pixel_x = rand(-8, 8)
-			src.pixel_y = rand(-8, 8)
-		if("large")
-			src.pixel_x = rand(-5, 5)
-			src.pixel_y = rand(-5, 5)
+	if(!material || !istype(material)) // We either don't have a material or we've been passed an invalid material. Use glass instead.
+		material = get_material_by_name("glass")
+
+	set_material(material)
+
+/obj/item/weapon/shard/proc/set_material(material/material)
+	if(istype(material))
+		src.material = material
+		icon_state = "[material.shard_icon][pick("large", "medium", "small")]"
+		pixel_x = rand(-8, 8)
+		pixel_y = rand(-8, 8)
+		update_material()
+		update_icon()
+
+/obj/item/weapon/shard/proc/update_material()
+	if(material)
+		if(material.shard_type)
+			name = "[material.display_name] [material.shard_type]"
+			desc = "A small piece of [material.display_name]. It looks sharp, you wouldn't want to step on it barefoot. Could probably be used as ... a throwing weapon?"
+			switch(material.shard_type)
+				if(SHARD_SPLINTER, SHARD_SHRAPNEL)
+					gender = "plural"
+				else
+					gender = "neuter"
 		else
-	return
+			qdel(src)
+			return
+	else
+		name = initial(name)
+		desc = initial(desc)
+
+/obj/item/weapon/shard/update_icon()
+	if(material)
+		color = material.icon_colour
+		// 1-(1-x)^2, so that glass shards with 0.3 opacity end up somewhat visible at 0.51 opacity
+		alpha = 255 * (1 - (1 - material.opacity)*(1 - material.opacity))
+	else
+		color = "#ffffff"
+		alpha = 255
 
 /obj/item/weapon/shard/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	..()
-	if ( istype(W, /obj/item/weapon/weldingtool))
+	if(istype(W, /obj/item/weapon/weldingtool) && material.shard_can_repair)
 		var/obj/item/weapon/weldingtool/WT = W
 		if(WT.remove_fuel(0, user))
-			var/obj/item/stack/sheet/glass/NG = new (user.loc)
-			for (var/obj/item/stack/sheet/glass/G in user.loc)
-				if(G==NG)
-					continue
-				if(G.amount>=G.max_amount)
-					continue
-				G.attackby(NG, user)
-				usr << "You add the newly-formed glass to the stack. It now contains [NG.amount] sheets."
-			//SN src = null
+			material.place_sheet(loc)
 			qdel(src)
 			return
 	return ..()
@@ -90,26 +111,10 @@
 					H.Weaken(3)
 	..()
 
-// Shrapnel
+// Preset types - left here for the code that uses them
 
-/obj/item/weapon/shard/shrapnel
-	name = "shrapnel"
-	icon = 'icons/obj/shards.dmi'
-	icon_state = "shrapnellarge"
-	desc = "A bunch of tiny bits of shattered metal."
+/obj/item/weapon/shard/shrapnel/New(loc)
+	..(loc, get_material_by_name("steel"))
 
-/obj/item/weapon/shard/shrapnel/New()
-
-	src.icon_state = pick("shrapnellarge", "shrapnelmedium", "shrapnelsmall")
-	switch(src.icon_state)
-		if("shrapnelsmall")
-			src.pixel_x = rand(-12, 12)
-			src.pixel_y = rand(-12, 12)
-		if("shrapnelmedium")
-			src.pixel_x = rand(-8, 8)
-			src.pixel_y = rand(-8, 8)
-		if("shrapnellarge")
-			src.pixel_x = rand(-5, 5)
-			src.pixel_y = rand(-5, 5)
-		else
-	return
+/obj/item/weapon/shard/phoron/New(loc)
+	..(loc, get_material_by_name("phoron glass"))

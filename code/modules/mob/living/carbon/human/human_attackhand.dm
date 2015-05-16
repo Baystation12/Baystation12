@@ -46,25 +46,32 @@
 
 	switch(M.a_intent)
 		if(I_HELP)
-
-			if(istype(H) && health < config.health_threshold_crit)
-
+			if(istype(H) && health < config.health_threshold_crit && health > config.health_threshold_dead)
 				if((H.head && (H.head.flags & HEADCOVERSMOUTH)) || (H.wear_mask && (H.wear_mask.flags & MASKCOVERSMOUTH)))
-					H << "\blue <B>Remove your mask!</B>"
+					H << "<span class='notice'>Remove your mask!</span>"
 					return 0
 				if((head && (head.flags & HEADCOVERSMOUTH)) || (wear_mask && (wear_mask.flags & MASKCOVERSMOUTH)))
-					H << "\blue <B>Remove [src]'s mask!</B>"
+					H << "<span class='notice'>Remove [src]'s mask!</span>"
 					return 0
 
-				var/obj/effect/equip_e/human/O = new /obj/effect/equip_e/human()
-				O.source = M
-				O.target = src
-				O.s_loc = M.loc
-				O.t_loc = loc
-				O.place = "CPR"
-				requests += O
-				spawn(0)
-					O.process()
+				if (!cpr_time)
+					return 0
+
+				cpr_time = 0
+				spawn(30)
+					cpr_time = 1
+
+				H.visible_message("<span class='danger'>\The [H] is trying perform CPR on \the [src]!</span>")
+
+				if(!do_after(H, 30))
+					return
+
+				adjustOxyLoss(-(min(getOxyLoss(), 5)))
+				updatehealth()
+				H.visible_message("<span class='danger'>\The [H] performs CPR on \the [src]!</span>")
+				src << "<span class='notice'>You feel a breath of fresh air enter your lungs. It feels good.</span>"
+				H << "<span class='warning'>Repeat at least every 7 seconds.</span>"
+
 			else
 				help_shake_act(M)
 			return 1

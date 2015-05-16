@@ -142,7 +142,7 @@
 	else
 		if(istype(O, /turf/simulated/wall))
 			var/turf/simulated/wall/W = O
-			if(W.material.unmeltable)
+			if(W.material.flags & MATERIAL_UNMELTABLE)
 				cannot_melt = 1
 		else if(istype(O, /turf/simulated/floor/engine))
 			cannot_melt = 1

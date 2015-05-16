@@ -1,6 +1,7 @@
 var/list/name_to_material
 
-/proc/populate_material_list()
+/proc/populate_material_list(force_remake=0)
+	if(name_to_material && !force_remake) return // Already set up!
 	name_to_material = list()
 	for(var/type in typesof(/material) - /material)
 		var/material/new_mineral = new type
@@ -8,6 +9,12 @@ var/list/name_to_material
 			continue
 		name_to_material[lowertext(new_mineral.name)] = new_mineral
 	return 1
+
+/proc/get_material_by_name(name)
+	if(!name_to_material)
+		populate_material_list()
+
+	return name_to_material[name]
 
 /*
 	Valid sprite masks:
@@ -20,11 +27,11 @@ var/list/name_to_material
 /material
 	var/name	          // Tag for use in overlay generation/list population	.
 	var/display_name
+	var/flags = 0
 	var/icon_base = "metal"
 	var/icon_colour
 	var/icon_reinf = "reinf_metal"
 	var/stack_type
-	var/unmeltable
 	var/cut_delay = 0
 	var/radioactivity
 	var/ignition_point
@@ -34,11 +41,17 @@ var/list/name_to_material
 	var/rotting_touch_message = "crumbles under your touch"
 	var/opacity = 1
 	var/explosion_resistance = 5
+	var/shard_type = SHARD_SHRAPNEL
+	var/shard_icon
+	var/shard_can_repair = 1
+	var/tableslam_noise = 'sound/weapons/tablehit1.ogg'
 
 /material/New()
 	..()
 	if(!display_name)
 		display_name = name
+	if(!shard_icon)
+		shard_icon = shard_type
 
 /material/placeholder
 	name = "placeholder"
@@ -55,7 +68,14 @@ var/list/name_to_material
 
 /material/proc/place_sheet(var/turf/target)
 	if(stack_type)
-		new stack_type(target)
+		return new stack_type(target)
+
+/material/proc/place_shard(var/turf/target)
+	if(shard_type)
+		return new /obj/item/weapon/shard(target, src)
+
+/material/proc/is_brittle()
+	return !!(flags & MATERIAL_BRITTLE)
 
 /material/uranium
 	name = "uranium"
@@ -68,10 +88,12 @@ var/list/name_to_material
 /material/diamond
 	name = "diamond"
 	stack_type = /obj/item/stack/sheet/mineral/diamond
-	unmeltable = 1
+	flags = MATERIAL_UNMELTABLE
 	cut_delay = 60
 	icon_colour = "#00FFE1"
 	opacity = 0.4
+	shard_type = SHARD_SHARD
+	tableslam_noise = 'sound/effects/Glasshit.ogg'
 
 /material/gold
 	name = "gold"
@@ -89,6 +111,7 @@ var/list/name_to_material
 	ignition_point = 300
 	icon_base = "stone"
 	icon_colour = "#FC2BC5"
+	shard_type = SHARD_SHARD
 
 /material/sandstone
 	name = "sandstone"
@@ -96,6 +119,7 @@ var/list/name_to_material
 	icon_base = "stone"
 	icon_reinf = "reinf_stone"
 	icon_colour = "#D9C179"
+	shard_type = SHARD_STONE_PIECE
 
 /material/steel
 	name = DEFAULT_WALL_MATERIAL
@@ -103,6 +127,12 @@ var/list/name_to_material
 	icon_base = "solid"
 	icon_reinf = "reinf_over"
 	icon_colour = "#666666"
+
+/material/steel/holographic
+	name = "holographic " + DEFAULT_WALL_MATERIAL
+	display_name = DEFAULT_WALL_MATERIAL
+	stack_type = null
+	shard_type = SHARD_NONE
 
 /material/plasteel
 	name = "plasteel"
@@ -117,12 +147,25 @@ var/list/name_to_material
 /material/glass
 	name = "glass"
 	stack_type = /obj/item/stack/sheet/glass
+	flags = MATERIAL_BRITTLE
 	icon_colour = "#00E1FF"
 	opacity = 0.3
+	integrity = 100
+	shard_type = SHARD_SHARD
+	tableslam_noise = 'sound/effects/Glasshit.ogg'
+
+/material/glass/phoron
+	name = "phoron glass"
+	stack_type = /obj/item/stack/sheet/glass/phoronglass
+	flags = MATERIAL_BRITTLE
+	ignition_point = 300
+	integrity = 200 // idk why but phoron windows are strong, so.
+	icon_colour = "#FC2BC5"
 
 /material/plastic
 	name = "plastic"
 	stack_type = /obj/item/stack/sheet/mineral/plastic
+	flags = MATERIAL_BRITTLE
 	icon_base = "solid"
 	icon_reinf = "reinf_over"
 	icon_colour = "#CCCCCC"
@@ -152,12 +195,29 @@ var/list/name_to_material
 	stack_type = /obj/item/stack/sheet/mineral/iron
 	icon_colour = "#5C5454"
 
+/material/wood
+	name = "wood"
+	stack_type = /obj/item/stack/sheet/wood
+	icon_colour = "#824B28"
+	integrity = 25
+	icon_base = "solid"
+	explosion_resistance = 2
+	shard_type = SHARD_SPLINTER
+	shard_can_repair = 0 // you can't weld splinters back into planks
+
+/material/wood/holographic
+	name = "holographic wood"
+	display_name = "wood"
+	stack_type = null
+	shard_type = SHARD_NONE
+
 /material/cult
 	name = "cult"
 	display_name = "disturbing stone"
 	icon_base = "cult"
 	icon_colour = "#402821"
 	icon_reinf = "reinf_cult"
+	shard_type = SHARD_STONE_PIECE
 
 /material/cult/place_dismantled_girder(var/turf/target)
 	new /obj/structure/girder/cult(target)
