@@ -48,7 +48,7 @@
 
 /obj/item/weapon/wirerod/attackby(var/obj/item/I, mob/user as mob)
 	..()
-	if(istype(I, /obj/item/weapon/shard))
+	if(istype(I, /obj/item/weapon/material/shard))
 		var/obj/item/weapon/twohanded/spear/S = new /obj/item/weapon/twohanded/spear
 
 		user.put_in_hands(S)

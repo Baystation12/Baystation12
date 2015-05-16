@@ -1,77 +1,49 @@
 // Glass shards
 
-/obj/item/weapon/shard
+/obj/item/weapon/material/shard
 	name = "shard"
 	icon = 'icons/obj/shards.dmi'
 	icon_state = "large"
 	sharp = 1
 	edge = 1
 	desc = "Made of nothing. How does this even exist?" // set based on material, if this desc is visible it's a bug (shards default to being made of glass)
-	w_class = 2.0
-	force = 5.0
-	throwforce = 8.0
+	w_class = 2
+	force = 5
+	throwforce = 8
 	item_state = "shard-glass"
-	//matter = list("glass" = 3750) // Weld it into sheets before you use it!
 	attack_verb = list("stabbed", "slashed", "sliced", "cut")
+	default_material = "glass"
+	unbreakable = 1 //It's already broken.
+	damage_divisor = 0.1 //So tiny.
 
-	gender = "neuter"
-	var/material/material = null
+/obj/item/weapon/material/shard/suicide_act(mob/user)
+	viewers(user) << pick("\red <b>[user] is slitting \his wrists with \the [src]! It looks like \he's trying to commit suicide.</b>", \
+						"\red <b>[user] is slitting \his throat with \the [src]! It looks like \he's trying to commit suicide.</b>")
+	return (BRUTELOSS)
 
-/obj/item/weapon/shard/suicide_act(mob/user)
-		viewers(user) << pick("\red <b>[user] is slitting \his wrists with \the [src]! It looks like \he's trying to commit suicide.</b>", \
-							"\red <b>[user] is slitting \his throat with \the [src]! It looks like \he's trying to commit suicide.</b>")
-		return (BRUTELOSS)
-
-/obj/item/weapon/shard/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
-	playsound(loc, 'sound/weapons/bladeslice.ogg', 50, 1, -1)
-	return ..()
-
-/obj/item/weapon/shard/Bump()
-
-	spawn( 0 )
-		if (prob(20))
-			src.force = 15
-		else
-			src.force = 4
-		..()
+/obj/item/weapon/material/shard/set_material(var/new_material)
+	..(new_material)
+	if(!istype(material))
 		return
-	return
 
-/obj/item/weapon/shard/New(loc, material/material)
-	..(loc)
+	icon_state = "[material.shard_icon][pick("large", "medium", "small")]"
+	pixel_x = rand(-8, 8)
+	pixel_y = rand(-8, 8)
+	update_icon()
 
-	if(!material || !istype(material)) // We either don't have a material or we've been passed an invalid material. Use glass instead.
-		material = get_material_by_name("glass")
-
-	set_material(material)
-
-/obj/item/weapon/shard/proc/set_material(material/material)
-	if(istype(material))
-		src.material = material
-		icon_state = "[material.shard_icon][pick("large", "medium", "small")]"
-		pixel_x = rand(-8, 8)
-		pixel_y = rand(-8, 8)
-		update_material()
-		update_icon()
-
-/obj/item/weapon/shard/proc/update_material()
-	if(material)
-		if(material.shard_type)
-			name = "[material.display_name] [material.shard_type]"
-			desc = "A small piece of [material.display_name]. It looks sharp, you wouldn't want to step on it barefoot. Could probably be used as ... a throwing weapon?"
-			switch(material.shard_type)
-				if(SHARD_SPLINTER, SHARD_SHRAPNEL)
-					gender = "plural"
-				else
-					gender = "neuter"
-		else
-			qdel(src)
-			return
+	if(material.shard_type)
+		name = "[material.display_name] [material.shard_type]"
+		desc = "A small piece of [material.display_name]. It looks sharp, you wouldn't want to step on it barefoot. Could probably be used as ... a throwing weapon?"
+		switch(material.shard_type)
+			if(SHARD_SPLINTER, SHARD_SHRAPNEL)
+				gender = PLURAL
+			else
+				gender = NEUTER
 	else
-		name = initial(name)
-		desc = initial(desc)
+		qdel(src)
 
-/obj/item/weapon/shard/update_icon()
+
+/obj/item/weapon/material/shard/update_icon()
 	if(material)
 		color = material.icon_colour
 		// 1-(1-x)^2, so that glass shards with 0.3 opacity end up somewhat visible at 0.51 opacity
@@ -80,7 +52,7 @@
 		color = "#ffffff"
 		alpha = 255
 
-/obj/item/weapon/shard/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/item/weapon/material/shard/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/weapon/weldingtool) && material.shard_can_repair)
 		var/obj/item/weapon/weldingtool/WT = W
 		if(WT.remove_fuel(0, user))
@@ -89,7 +61,7 @@
 			return
 	return ..()
 
-/obj/item/weapon/shard/Crossed(AM as mob|obj)
+/obj/item/weapon/material/shard/Crossed(AM as mob|obj)
 	if(ismob(AM))
 		var/mob/M = AM
 		M << "\red <B>You step on \the [src]!</B>"
@@ -112,9 +84,8 @@
 	..()
 
 // Preset types - left here for the code that uses them
+/obj/item/weapon/material/shard/shrapnel/New(loc)
+	..(loc, "steel")
 
-/obj/item/weapon/shard/shrapnel/New(loc)
-	..(loc, get_material_by_name("steel"))
-
-/obj/item/weapon/shard/phoron/New(loc)
-	..(loc, get_material_by_name("phoron glass"))
+/obj/item/weapon/material/shard/phoron/New(loc)
+	..(loc, "phoron glass")

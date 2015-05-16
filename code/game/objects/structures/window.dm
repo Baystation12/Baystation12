@@ -13,7 +13,7 @@
 	var/state = 2
 	var/reinf = 0
 	var/basestate
-	var/shardtype = /obj/item/weapon/shard
+	var/shardtype = /obj/item/weapon/material/shard
 	var/glasstype = null // Set this in subtypes. Null is assumed strange or otherwise impossible to dismantle, such as for shuttle glass.
 	var/silicate = 0 // number of units of silicate
 
@@ -406,7 +406,7 @@
 	desc = "A phoron-glass alloy window. It looks insanely tough to break. It appears it's also insanely tough to burn through."
 	basestate = "phoronwindow"
 	icon_state = "phoronwindow"
-	shardtype = /obj/item/weapon/shard/phoron
+	shardtype = /obj/item/weapon/material/shard/phoron
 	glasstype = /obj/item/stack/sheet/glass/phoronglass
 	maxhealth = 120
 
@@ -420,7 +420,7 @@
 	desc = "A phoron-glass alloy window, with rods supporting it. It looks hopelessly tough to break. It also looks completely fireproof, considering how basic phoron windows are insanely fireproof."
 	basestate = "phoronrwindow"
 	icon_state = "phoronrwindow"
-	shardtype = /obj/item/weapon/shard/phoron
+	shardtype = /obj/item/weapon/material/shard/phoron
 	glasstype = /obj/item/stack/sheet/glass/phoronrglass
 	reinf = 1
 	maxhealth = 160

@@ -1,18 +1,27 @@
 /obj/item/weapon/material
 	health = 10
+	hitsound = 'sound/weapons/bladeslice.ogg'
+	gender = NEUTER
+
+	var/unbreakable
+	var/damage_divisor = 0.5
+	var/default_material = DEFAULT_WALL_MATERIAL
 	var/material/material
 
 /obj/item/weapon/material/New(var/newloc, var/material_key)
 	..(newloc)
 	if(!material_key)
-		material_key = "wood"
-	material = get_material_by_name(material_key)
+		material_key = default_material
+	set_material(material_key)
+
+/obj/item/weapon/material/proc/set_material(var/new_material)
+	material = get_material_by_name(new_material)
 	if(!material)
 		qdel(src)
 	else
 		name = "[material.display_name] bat"
 		health = round(material.integrity/10)
-		force = round(material.get_blunt_damage()/2)
+		force = round(material.get_blunt_damage()*damage_divisor)
 		color = material.icon_colour
 		if(material.products_need_process())
 			processing_objects |= src
@@ -24,10 +33,11 @@
 /obj/item/weapon/material/attack()
 	if(!..())
 		return
-	if(!prob(material.hardness))
-		health--
-	if(health<=0)
-		shatter()
+	if(!unbreakable)
+		if(!prob(material.hardness))
+			health--
+		if(health<=0)
+			shatter()
 
 /obj/item/weapon/material/proc/shatter()
 	var/turf/T = get_turf(src)

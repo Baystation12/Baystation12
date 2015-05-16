@@ -315,9 +315,9 @@
 			apply_material_decorations = 0
 		if(22)
 			if(prob(50))
-				new_item = new /obj/item/weapon/shard(src.loc)
+				new_item = new /obj/item/weapon/material/shard(src.loc)
 			else
-				new_item = new /obj/item/weapon/shard/phoron(src.loc)
+				new_item = new /obj/item/weapon/material/shard/phoron(src.loc)
 			apply_prefix = 0
 			apply_image_decorations = 0
 			apply_material_decorations = 0
@@ -337,7 +337,7 @@
 			apply_material_decorations = 0
 		if(25)
 			apply_prefix = 0
-			new_item = new /obj/item/weapon/katana(src.loc)
+			new_item = new /obj/item/weapon/material/katana(src.loc)
 			new_item.force = 10
 			item_type = new_item.name
 		if(26)

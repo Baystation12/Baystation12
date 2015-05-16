@@ -87,7 +87,7 @@ var/list/name_to_material
 
 /material/proc/place_shard(var/turf/target)
 	if(shard_type)
-		return new /obj/item/weapon/shard(target, src)
+		return new /obj/item/weapon/material/shard(target, src.name)
 
 /material/proc/is_brittle()
 	return !!(flags & MATERIAL_BRITTLE)
