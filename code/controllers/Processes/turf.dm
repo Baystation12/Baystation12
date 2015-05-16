@@ -2,7 +2,7 @@ var/global/list/turf/processing_turfs = list()
 
 /datum/controller/process/turf/setup()
 	name = "turf"
-	schedule_interval = 30 // every 3 seconds
+	schedule_interval = 20 // every 2 seconds
 
 /datum/controller/process/turf/doWork()
 	for(var/turf/T in processing_turfs)

@@ -32,11 +32,19 @@ var/list/global/wall_cache = list()
 	if(!isnull(rmaterialtype))
 		reinf_material = name_to_material[rmaterialtype]
 	update_material()
+
 	processing_turfs |= src
+
+/turf/simulated/wall/Destroy()
+	processing_turfs -= src
+	dismantle_wall(null,null,1)
+	..()
+
 
 /turf/simulated/wall/process()
 	// Calling parent will kill processing
-	radiate()
+	if(!radiate())
+		return PROCESS_KILL
 
 /turf/simulated/wall/bullet_act(var/obj/item/projectile/Proj)
 	if(istype(Proj,/obj/item/projectile/beam))
@@ -238,12 +246,13 @@ var/list/global/wall_cache = list()
 	return 0
 
 /turf/simulated/wall/proc/radiate()
-	if(!material.radioactivity)
+	var/total_radiation = material.radioactivity + (reinf_material ? reinf_material.radioactivity / 2 : 0)
+	if(!total_radiation)
 		return
 
 	for(var/mob/living/L in range(3,src))
-		L.apply_effect(material.radioactivity,IRRADIATE,0)
-	return
+		L.apply_effect(total_radiation, IRRADIATE,0)
+	return total_radiation
 
 /turf/simulated/wall/proc/burn(temperature)
 	spawn(2)
@@ -264,9 +273,4 @@ var/list/global/wall_cache = list()
 	if(exposed_temperature > material.ignition_point)//If the temperature of the object is over 300, then ignite
 		burn(exposed_temperature)
 		return
-	..()
-
-/turf/simulated/wall/Destroy()
-	processing_turfs -= src
-	dismantle_wall(null,null,1)
 	..()
