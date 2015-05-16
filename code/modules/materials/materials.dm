@@ -354,3 +354,7 @@ var/list/name_to_material
 	if(istype(M) && locate(/obj/item/organ/xenos/hivenode) in M.internal_organs)
 		return 1
 	return 0
+
+/material/leather //todo
+	name = "leather"
+	icon_colour = "#5C4831"
