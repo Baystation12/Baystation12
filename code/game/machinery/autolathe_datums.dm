@@ -81,12 +81,12 @@
 	name = "wrench"
 	path = /obj/item/weapon/wrench
 	category = "Tools"
-	
+
 /datum/autolathe/recipe/hatchet
 	name = "hatchet"
 	path = /obj/item/weapon/hatchet
 	category = "Tools"
-	
+
 /datum/autolathe/recipe/minihoe
 	name = "mini hoe"
 	path = /obj/item/weapon/minihoe
@@ -133,7 +133,7 @@
 
 /datum/autolathe/recipe/knife
 	name = "kitchen knife"
-	path = /obj/item/weapon/kitchenknife
+	path = /obj/item/weapon/material/knife
 	category = "General"
 
 /datum/autolathe/recipe/taperecorder

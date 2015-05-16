@@ -211,7 +211,7 @@
 
 	allowed_tools = list(
 	/obj/item/weapon/scalpel = 100,		\
-	/obj/item/weapon/kitchenknife = 75,	\
+	/obj/item/weapon/material/knife = 75,	\
 	/obj/item/weapon/material/shard = 50, 		\
 	)
 
@@ -447,7 +447,7 @@
 // /datum/surgery_step/ribcage/heart/cut
 //	allowed_tools = list(
 //	/obj/item/weapon/scalpel = 100,		\
-//	/obj/item/weapon/kitchenknife = 75,	\
+//	/obj/item/weapon/material/knife = 75,	\
 //	/obj/item/weapon/material/shard = 50, 		\
 //	)
 

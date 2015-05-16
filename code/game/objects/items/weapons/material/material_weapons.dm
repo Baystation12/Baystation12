@@ -14,6 +14,9 @@
 		material_key = default_material
 	set_material(material_key)
 
+/obj/item/weapon/material/proc/update_force()
+	force = round(material.get_blunt_damage()*damage_divisor)
+
 /obj/item/weapon/material/proc/set_material(var/new_material)
 	material = get_material_by_name(new_material)
 	if(!material)
@@ -21,10 +24,10 @@
 	else
 		name = "[material.display_name] bat"
 		health = round(material.integrity/10)
-		force = round(material.get_blunt_damage()*damage_divisor)
 		color = material.icon_colour
 		if(material.products_need_process())
 			processing_objects |= src
+		update_force()
 
 /obj/item/weapon/material/Destroy()
 	processing_objects -= src
