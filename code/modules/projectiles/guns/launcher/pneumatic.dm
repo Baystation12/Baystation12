@@ -38,22 +38,36 @@
 		pressure_setting = N
 		usr << "You dial the pressure valve to [pressure_setting]%."
 
-/obj/item/weapon/gun/launcher/pneumatic/verb/eject_tank() //Remove the tank.
-	set name = "Eject Tank"
-	set category = "Object"
-	set src in range(0)
+/obj/item/weapon/gun/launcher/pneumatic/proc/eject_tank(mob/user) //Remove the tank.
+	if(!tank)
+		user << "There's no tank in [src]."
+		return
+	
+	user << "You twist the valve and pop the tank out of [src]."
+	user.put_in_hands(tank)
+	tank = null
+	
+	icon_state = "pneumatic"
+	item_state = "pneumatic"
+	if (ismob(src.loc))
+		var/mob/M = src.loc
+		M.update_inv_r_hand()
+		M.update_inv_l_hand()
 
-	if(tank)
-		usr << "You twist the valve and pop the tank out of [src]."
-		tank.loc = usr.loc
-		tank = null
-		icon_state = "pneumatic"
-		item_state = "pneumatic"
-		if (ismob(src.loc))
-			var/mob/M = src.loc
-			M.update_icons()
+/obj/item/weapon/gun/launcher/pneumatic/proc/unload_hopper(mob/user)
+	if(item_storage.contents.len > 0)
+		var/obj/item/removing = item_storage.contents[item_storage.contents.len]
+		item_storage.remove_from_storage(removing, src.loc)
+		user.put_in_hands(removing)
+		user << "You remove [removing] from the hopper."
 	else
-		usr << "There's no tank in [src]."
+		user << "There is nothing to remove in \the [src]."
+
+/obj/item/weapon/gun/launcher/pneumatic/attack_hand(mob/user as mob)
+	if(user.get_inactive_hand() == src)
+		unload_hopper(user)
+	else
+		return ..()
 
 /obj/item/weapon/gun/launcher/pneumatic/attackby(obj/item/W as obj, mob/user as mob)
 	if(!tank && istype(W,/obj/item/weapon/tank))
@@ -67,14 +81,7 @@
 		item_storage.handle_item_insertion(W)
 
 /obj/item/weapon/gun/launcher/pneumatic/attack_self(mob/user as mob)
-	if(item_storage.contents.len > 0)
-		var/obj/item/removing = item_storage.contents[item_storage.contents.len]
-		item_storage.remove_from_storage(removing, src.loc)
-		user.put_in_hands(removing)
-		user << "You remove [removing] from the hopper."
-	else
-		user << "There is nothing to remove in \the [src]."
-	return
+	eject_tank(user)
 
 /obj/item/weapon/gun/launcher/pneumatic/consume_next_projectile(mob/user=null)
 	if(!item_storage.contents.len)
@@ -90,7 +97,7 @@
 		if(environment)
 			environment_pressure = environment.return_pressure()
 	
-	var/fire_pressure = (tank.air_contents.return_pressure() - environment_pressure)*pressure_setting/100
+	fire_pressure = (tank.air_contents.return_pressure() - environment_pressure)*pressure_setting/100
 	if(fire_pressure < 10)
 		user << "There isn't enough gas in the tank to fire [src]."
 		return null
