@@ -157,17 +157,18 @@
 /* Holder-to-chemical */
 
 /datum/reagents/proc/add_reagent(var/id, var/amount, var/data = null, var/safety = 0)
-	if(!isnum(amount))
+	if(!isnum(amount) || amount <= 0)
 		return 0
+
 	update_total()
 	amount = min(amount, get_free_space())
 
 	for(var/datum/reagent/current in reagent_list)
 		if(current.id == id)
 			current.volume += amount
-			update_total()
 			if(!isnull(data)) // For all we know, it could be zero or empty string and meaningful
 				current.mix_data(data, amount)
+			update_total()
 			if(!safety)
 				handle_reactions()
 			if(my_atom)
@@ -179,8 +180,8 @@
 		reagent_list += R
 		R.holder = src
 		R.volume = amount
-		update_total()
 		R.initialize_data(data)
+		update_total()
 		if(!safety)
 			handle_reactions()
 		if(my_atom)
