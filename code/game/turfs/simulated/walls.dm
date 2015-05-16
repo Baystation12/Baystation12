@@ -15,7 +15,6 @@ var/list/global/wall_cache = list()
 	var/damage_overlay
 	var/global/damage_overlays[8]
 	var/active
-	var/last_event
 	var/can_open = 0
 	var/material/material
 	var/material/reinf_material
@@ -33,10 +32,13 @@ var/list/global/wall_cache = list()
 	if(!isnull(rmaterialtype))
 		reinf_material = name_to_material[rmaterialtype]
 	update_material()
+	processing_turfs |= src
+
+/turf/simulated/wall/process()
+	// Calling parent will kill processing
+	radiate()
 
 /turf/simulated/wall/bullet_act(var/obj/item/projectile/Proj)
-
-	radiate()
 	if(istype(Proj,/obj/item/projectile/beam))
 		ignite(2500)
 	else if(istype(Proj,/obj/item/projectile/ion))
@@ -236,20 +238,11 @@ var/list/global/wall_cache = list()
 	return 0
 
 /turf/simulated/wall/proc/radiate()
-	var/material/M = name_to_material[material]
-	if(!istype(M) || !M.radioactivity)
+	if(!material.radioactivity)
 		return
 
-	if(!active)
-		if(world.time > last_event+15)
-			active = 1
-			for(var/mob/living/L in range(3,src))
-				L.apply_effect(M.radioactivity,IRRADIATE,0)
-			for(var/turf/simulated/wall/T in range(3,src))
-				T.radiate()
-			last_event = world.time
-			active = null
-			return
+	for(var/mob/living/L in range(3,src))
+		L.apply_effect(material.radioactivity,IRRADIATE,0)
 	return
 
 /turf/simulated/wall/proc/burn(temperature)
@@ -266,19 +259,14 @@ var/list/global/wall_cache = list()
 		D.ignite(temperature/4)
 
 /turf/simulated/wall/proc/ignite(var/exposed_temperature)
-
-	var/material/M = name_to_material[material]
-	if(!istype(M) || !isnull(M.ignition_point))
+	if(isnull(material.ignition_point))
 		return
-	if(exposed_temperature > M.ignition_point)//If the temperature of the object is over 300, then ignite
+	if(exposed_temperature > material.ignition_point)//If the temperature of the object is over 300, then ignite
 		burn(exposed_temperature)
 		return
 	..()
 
-/turf/simulated/wall/Bumped(AM as mob|obj)
-	radiate()
-	..()
-
 /turf/simulated/wall/Destroy()
+	processing_turfs -= src
 	dismantle_wall(null,null,1)
 	..()
