@@ -32,13 +32,6 @@
 /obj/item/weapon/storage/backpack/cultpack/cultify()
 	return
 
-/obj/item/weapon/table_parts/cultify()
-	new /obj/item/weapon/table_parts/wood(loc)
-	..()
-
-/obj/item/weapon/table_parts/wood/cultify()
-	return
-
 /obj/machinery/cultify()
 	// We keep the number of cultified machines down by only converting those that are dense
 	// The alternative is to keep a separate file of exceptions.
@@ -149,8 +142,12 @@
 	..()
 
 /obj/structure/table/cultify()
-	new /obj/structure/table/woodentable(loc)
-	..()
-
-/obj/structure/table/woodentable/cultify()
-	return
+	// Make it a wood-reinforced wooden table.
+	// There are cult materials available, but it'd make the table non-deconstructable with how holotables work.
+	// Could possibly use a new material var for holographic-ness?
+	material = name_to_material["wood"]
+	reinforced = name_to_material["wood"]
+	update_desc()
+	update_connections(1)
+	update_icon()
+	update_material()

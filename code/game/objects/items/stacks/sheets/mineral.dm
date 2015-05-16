@@ -134,6 +134,7 @@ obj/item/stack/sheet/mineral/iron/New()
 	icon_state = "sheet-plastic"
 	origin_tech = "materials=3"
 	perunit = 2000
+	sheettype = "plastic"
 
 /obj/item/stack/sheet/mineral/plastic/New()
 	..()
