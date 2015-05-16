@@ -269,8 +269,6 @@
 	else
 		if(M)
 			M << "<span class='notice'>You need more welding fuel to complete this task.</span>"
-		else
-			visible_message("<span class='notice'>\The [src] sputters and switches off.</span>")
 		return 0
 
 //Returns whether or not the welding tool is currently on.
@@ -281,7 +279,7 @@
 	..()
 	icon_state = welding ? "welder1" : "welder"
 	var/mob/M = loc
-	if(M)
+	if(istype(M))
 		M.update_inv_l_hand()
 		M.update_inv_r_hand()
 
@@ -295,9 +293,9 @@
 	if(set_welding && !welding)
 		if (remove_fuel(1))
 			if(M)
-				M.visible_message("<span class='danger'>[M] has ignited \the [src] on.</span>", "<span class='notice'>You ignite \the [src].</span>", "<span class='danger'>You hear the sound of \a [src] being ignited.</span>")
+				M << "<span class='notice'>You switch the [src] on.</span>"
 			else if(T)
-				T.visible_message("<span class='danger'>\The [src] has been ignited.</span>","<span class='danger'>You hear the sound of \a [src] being ignited.</span>")
+				T.visible_message("<span class='danger'>\The [src] turns on.</span>")
 			src.force = 15
 			src.damtype = "fire"
 			src.w_class = 4
@@ -306,17 +304,15 @@
 			processing_objects |= src
 		else
 			if(M)
-				M.visible_message("<span class='warning'>\The [src] sputters as [M] fail to ignite it.</span>", "<span class='notice'>You fail to ignite \the [src] on.</span>", "<span class='warning'>You hear the sputtering sound of \a [src] failing to ignite.</span>")
-			else if(T)
-				T.visible_message("<span class='warning'>\The [src] sputters as it fails to ignite.</span>", "<span class='warning'>You hear the sputtering sound of \a [src] failing to ignite.</span>")
+				M << "<span class='notice'>You need more welding fuel to complete this task.</span>"
 			return
 	//Otherwise
 	else if(!set_welding && welding)
 		processing_objects -= src
 		if(M)
-			M.visible_message("<span class='warning'>[M] has turned off \the [src].</span>", "<span class='notice'>You turn off \the [src].</span>", "<span class='warning'>You hear the sound of a gas fire suddenly stopping.</span>")
+			M << "<span class='notice'>You switch \the [src] off.</span>"
 		else if(T)
-			T.visible_message("<span class='warning'>\The [src] turns off.</span>", "<span class='warning'>You hear the sound of a gas fire suddenly stopping.</span>")
+			T.visible_message("<span class='warning'>\The [src] turns off.</span>")
 		src.force = 3
 		src.damtype = "brute"
 		src.w_class = initial(src.w_class)
