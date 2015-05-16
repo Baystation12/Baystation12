@@ -50,7 +50,7 @@
 		else
 			assignment = "Unassigned"
 
-		var/id = add_zero(num2hex(rand(1, 1.6777215E7)), 6)	//this was the best they could come up with? A large random number? *sigh*
+		var/id = num2hex(rand(1, 1.6777215E7), 6)	//this was the best they could come up with? A large random number? *sigh*
 		var/icon/front = new(get_id_photo(H), dir = SOUTH)
 		var/icon/side = new(get_id_photo(H), dir = WEST)
 		//General Record
