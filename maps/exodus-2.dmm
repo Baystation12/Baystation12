@@ -1706,7 +1706,7 @@
 "GP" = (/turf/simulated/floor/bluegrid,/area/tdome)
 "GQ" = (/obj/machinery/flasher{id = "flash"; name = "Thunderdome Flash"},/turf/simulated/floor/bluegrid,/area/tdome)
 "GR" = (/obj/structure/closet{icon_closed = "cabinet_closed"; icon_opened = "cabinet_open"; icon_state = "cabinet_closed"; name = "Clothing Storage"},/obj/item/clothing/glasses/sunglasses,/turf/unsimulated/beach/sand{tag = "icon-desert"; icon_state = "desert"},/area/centcom/holding)
-"GS" = (/obj/machinery/atmospherics/pipe/vent,/turf/simulated/floor/bluegrid,/area/tdome)
+"GS" = (/obj/machinery/atmospherics/pipe/passive_vent,/turf/simulated/floor/bluegrid,/area/tdome)
 "GT" = (/obj/structure/closet{icon_closed = "cabinet_closed"; icon_opened = "cabinet_open"; icon_state = "cabinet_closed"; name = "Clothing Storage"},/obj/item/clothing/head/bandana{pixel_y = -10},/obj/item/clothing/glasses/sunglasses,/turf/unsimulated/beach/sand{tag = "icon-desert"; icon_state = "desert"},/area/centcom/holding)
 "GU" = (/turf/unsimulated/beach/sand{density = 1; opacity = 1},/area/beach)
 "GV" = (/obj/machinery/atmospherics/pipe/simple/visible{tag = "icon-intact (NORTHEAST)"; icon_state = "intact"; dir = 5},/turf/simulated/floor,/area/tdome)
