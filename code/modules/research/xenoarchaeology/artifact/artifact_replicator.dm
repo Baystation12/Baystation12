@@ -59,7 +59,6 @@
 	/obj/item/weapon/light/tube,\
 	/obj/item/weapon/pickaxe,\
 	/obj/item/weapon/shovel,\
-	/obj/item/weapon/table_parts,\
 	/obj/item/weapon/weldingtool,\
 	/obj/item/weapon/wirecutters,\
 	/obj/item/weapon/wrench,\

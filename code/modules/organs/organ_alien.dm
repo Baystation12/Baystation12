@@ -342,3 +342,48 @@
 
 /obj/item/organ/stack/vox
 	name = "vox cortical stack"
+
+// Slime limbs.
+/obj/item/organ/external/chest/slime
+	cannot_break = 1
+	dislocated = -1
+
+/obj/item/organ/external/groin/slime
+	cannot_break = 1
+	dislocated = -1
+
+/obj/item/organ/external/arm/slime
+	cannot_break = 1
+	dislocated = -1
+
+/obj/item/organ/external/arm/right/slime
+	cannot_break = 1
+	dislocated = -1
+
+/obj/item/organ/external/leg/slime
+	cannot_break = 1
+	dislocated = -1
+
+/obj/item/organ/external/leg/right/slime
+	cannot_break = 1
+	dislocated = -1
+
+/obj/item/organ/external/foot/slime
+	cannot_break = 1
+	dislocated = -1
+
+/obj/item/organ/external/foot/right/slime
+	cannot_break = 1
+	dislocated = -1
+
+/obj/item/organ/external/hand/slime
+	cannot_break = 1
+	dislocated = -1
+
+/obj/item/organ/external/hand/right/slime
+	cannot_break = 1
+	dislocated = -1
+
+/obj/item/organ/external/head/slime
+	cannot_break = 1
+	dislocated = -1

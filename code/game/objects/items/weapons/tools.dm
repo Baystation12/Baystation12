@@ -334,26 +334,27 @@
 	src.welding = !( src.welding )
 	if (src.welding)
 		if (remove_fuel(1))
-			usr << "\blue You switch the [src] on."
+			usr << "<span class='notice'>You switch the [src] on.</span>"
 			src.force = 15
 			src.damtype = "fire"
 			src.icon_state = "welder1"
 			src.w_class = 4
 			processing_objects.Add(src)
 		else
-			usr << "\blue Need more fuel!"
+			usr << "<span class='notice'>You need more fuel!</span>"
 			src.welding = 0
-			return
 	else
 		if(!message)
-			usr << "\blue You switch the [src] off."
+			usr << "<span class='notice'>You switch \the [src] off.</span>"
 		else
-			usr << "\blue The [src] shuts off!"
+			usr << "<span class='notice'>\The [src] shuts off!</span>"
 		src.force = 3
 		src.damtype = "brute"
 		src.icon_state = "welder"
 		src.welding = 0
 		src.w_class = initial(src.w_class)
+	usr.update_inv_l_hand()
+	usr.update_inv_r_hand()
 
 //Decides whether or not to damage a player's eyes based on what they're wearing as protection
 //Note: This should probably be moved to mob

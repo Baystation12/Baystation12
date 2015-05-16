@@ -56,6 +56,10 @@
 		if(src.Adjacent(C))
 			choices += C
 
+	if(!choices.len)
+		src << "There are no viable hosts within range..."
+		return
+
 	var/mob/living/carbon/M = input(src,"Who do you wish to infest?") in null|choices
 
 	if(!M || !src) return

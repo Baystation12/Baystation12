@@ -43,6 +43,7 @@
 			if(H.species.flags & IS_SYNTHETIC)
 				H << "<span class='notice'>They have a monitor for a head, where do you think you're going to put that?</span>"
 				return
+
 			var/obj/item/blocked = H.check_mouth_coverage()
 
 			if(blocked)
