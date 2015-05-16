@@ -254,7 +254,7 @@
 "aeT" = (/obj/item/device/radio/intercom{broadcasting = 0; freerange = 0; frequency = 1475; listening = 1; name = "Station Intercom (Security)"; pixel_x = 30; pixel_y = 0},/obj/machinery/camera/network/security{c_tag = "Security - Briefing"; dir = 8},/turf/simulated/floor{dir = 2; icon_state = "redcorner"},/area/security/main)
 "aeU" = (/obj/structure/grille,/turf/simulated/floor/plating,/area/maintenance/security_port)
 "aeV" = (/obj/structure/grille,/obj/structure/window/reinforced{dir = 1},/turf/simulated/floor/plating,/area/maintenance/security_port)
-"aeW" = (/obj/structure/grille,/obj/structure/window/reinforced,/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 1},/obj/structure/barricade/wooden,/turf/simulated/floor/plating,/area/maintenance/security_port)
+"aeW" = (/obj/structure/grille,/obj/structure/window/reinforced,/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 1},/obj/structure/barricade,/turf/simulated/floor/plating,/area/maintenance/security_port)
 "aeX" = (/obj/structure/cable/green{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{dir = 8},/turf/simulated/floor{icon_state = "floorgrime"},/area/security/warden)
 "aeY" = (/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 8},/turf/simulated/floor{icon_state = "floorgrime"},/area/security/warden)
 "aeZ" = (/obj/machinery/alarm{dir = 8; icon_state = "alarm0"; pixel_x = 24},/turf/simulated/floor,/area/security/warden)
