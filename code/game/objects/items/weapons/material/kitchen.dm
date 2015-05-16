@@ -5,9 +5,9 @@
  * Utensils
  */
 /obj/item/weapon/material/kitchen/utensil
-	force = 5.0
-	w_class = 1.0
-	throwforce = 5.0
+	force = 5
+	w_class = 1
+	throwforce = 5
 	throw_speed = 3
 	throw_range = 5
 	flags = CONDUCT
@@ -17,9 +17,9 @@
 	var/loaded      //Descriptive string for currently loaded food object.
 
 /obj/item/weapon/material/kitchen/utensil/New()
+	..()
 	if (prob(60))
 		src.pixel_y = rand(0, 4)
-
 	create_reagents(5)
 	return
 
@@ -38,13 +38,9 @@
 	if (reagents.total_volume > 0)
 		reagents.trans_to_mob(M, reagents.total_volume, CHEM_INGEST)
 		if(M == user)
-			for(var/mob/O in viewers(M, null))
-				O.show_message(text("\blue [] eats some [] from \the [].", user, loaded, src), 1)
-				M.reagents.add_reagent("nutriment", 1)
+			M.visible_message("<span class='notice'>\The [user] eats some [loaded] from \the [src].</span>")
 		else
-			for(var/mob/O in viewers(M, null))
-				O.show_message(text("\blue [] feeds [] some [] from \the []", user, M, loaded, src), 1)
-				M.reagents.add_reagent("nutriment", 1)
+			M.visible_message("<span class='notice'>\The [user] feeds some [loaded] to \the [M] with \the [src].</span>")
 		playsound(M.loc,'sound/items/eatfood.ogg', rand(10,40), 1)
 		overlays.Cut()
 		return
@@ -80,7 +76,7 @@
 	sharp = 1
 	edge = 1
 
-	suicide_act(mob/user)
+/obj/item/weapon/material/kitchen/utensil/knife/suicide_act(mob/user)
 		viewers(user) << pick("\red <b>[user] is slitting \his wrists with the [src.name]! It looks like \he's trying to commit suicide.</b>", \
 							"\red <b>[user] is slitting \his throat with the [src.name]! It looks like \he's trying to commit suicide.</b>", \
 							"\red <b>[user] is slitting \his stomach open with the [src.name]! It looks like \he's trying to commit seppuku.</b>")
@@ -119,6 +115,7 @@
 	throw_range = 7
 	w_class = 3.0
 	attack_verb = list("bashed", "battered", "bludgeoned", "thrashed", "whacked") //I think the rollingpin attackby will end up ignoring this anyway.
+	default_material = "wood"
 
 /obj/item/weapon/material/kitchen/rollingpin/attack(mob/living/M as mob, mob/living/user as mob)
 	if ((CLUMSY in user.mutations) && prob(50))

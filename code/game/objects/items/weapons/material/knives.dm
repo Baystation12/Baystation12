@@ -13,7 +13,6 @@
 	throw_range = 4
 	throwforce = 7
 	attack_verb = list("patted", "tapped")
-	applies_material_colour = 1
 
 /obj/item/weapon/material/butterfly/update_force()
 	if(active)
@@ -70,7 +69,6 @@
 	origin_tech = "materials=1"
 	attack_verb = list("slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	unbreakable = 1
-	applies_material_colour = 1
 
 /obj/item/weapon/material/knife/suicide_act(mob/user)
 	viewers(user) << pick("\red <b>[user] is slitting \his wrists with the [src.name]! It looks like \he's trying to commit suicide.</b>", \
@@ -89,6 +87,7 @@
 	desc = "The unearthly energies that once powered this blade are now dormant."
 	icon = 'icons/obj/wizard.dmi'
 	icon_state = "render"
+	applies_material_colour = 0
 
 /obj/item/weapon/material/knife/butch
 	name = "butcher's cleaver"

@@ -21,7 +21,7 @@
 	new /obj/item/weapon/book/tome(loc)
 	..()
 
-/obj/item/weapon/claymore/cultify()
+/obj/item/weapon/material/claymore/cultify()
 	new /obj/item/weapon/melee/cultblade(loc)
 	..()
 

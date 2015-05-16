@@ -294,7 +294,7 @@
 			new_item.desc = ""
 		if(19)
 			apply_prefix = 0
-			new_item = new /obj/item/weapon/claymore(src.loc)
+			new_item = new /obj/item/weapon/material/claymore(src.loc)
 			new_item.force = 10
 			item_type = new_item.name
 		if(20)

@@ -102,7 +102,7 @@
 
 		var/obj/item/weapon/material/twohanded/offhand/O = new(user) ////Let's reserve his other hand~
 		O.name = "[base_name] - offhand"
-		O.desc = "Your second grip on the [base_name]"
+		O.desc = "Your second grip on the [base_name]."
 		user.put_in_inactive_hand(O)
 
 	if(istype(user,/mob/living/carbon/human))
@@ -143,6 +143,7 @@
 	slot_flags = SLOT_BACK
 	force_wielded = 30
 	attack_verb = list("attacked", "chopped", "cleaved", "torn", "cut")
+	applies_material_colour = 0
 
 /obj/item/weapon/material/twohanded/fireaxe/afterattack(atom/A as mob|obj|turf|area, mob/user as mob, proximity)
 	if(!proximity) return
@@ -173,6 +174,7 @@
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	sharp = 1
 	edge = 1
+	applies_material_colour = 0
 
 /obj/item/weapon/material/twohanded/dualsaber/attack(target as mob, mob/living/user as mob)
 	..()
