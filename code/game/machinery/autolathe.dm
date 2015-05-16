@@ -1,5 +1,5 @@
 /obj/machinery/autolathe
-	name = "\improper autolathe"
+	name = "autolathe"
 	desc = "It produces items using metal and glass."
 	icon_state = "autolathe"
 	density = 1
@@ -138,6 +138,9 @@
 			return
 
 	if(O.loc != user && !(istype(O,/obj/item/stack)))
+		return 0
+
+	if(is_robot_module(O))
 		return 0
 
 	//Resources are being loaded.

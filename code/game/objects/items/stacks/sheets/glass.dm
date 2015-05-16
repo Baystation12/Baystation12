@@ -20,6 +20,7 @@
 	var/created_window = /obj/structure/window/basic
 	var/is_reinforced = 0
 	var/list/construction_options = list("One Direction", "Full Window")
+	sheettype = "glass"
 
 /obj/item/stack/sheet/glass/cyborg
 	name = "glass synthesizer"
@@ -174,6 +175,7 @@
 	matter = list("glass" = 7500)
 	origin_tech = "materials=3;phorontech=2"
 	created_window = /obj/structure/window/phoronbasic
+	sheettype = "phoronglass"
 
 /obj/item/stack/sheet/glass/phoronglass/attackby(obj/item/W, mob/user)
 	..()
