@@ -1260,7 +1260,7 @@
 			pump_gas_passive(src, environment, internal)//, transfer_moles)
 
 
-/obj/machinery/atmospherics/pipe/passive_vent/Del()
+/obj/machinery/atmospherics/pipe/passive_vent/Destroy()
 	if(node1)
 		node1.disconnect(src)
 	..()
@@ -1285,7 +1285,7 @@
 /obj/machinery/atmospherics/pipe/passive_vent/disconnect(obj/machinery/atmospherics/reference)
 	if(reference == node1)
 		if(istype(node1, /obj/machinery/atmospherics/pipe))
-			del(parent)
+			qdel(parent)
 		node1 = null
 
 	update_icon()
@@ -1415,7 +1415,7 @@
 	var/datum/effect/effect/system/smoke_spread/smoke = new
 	smoke.set_up(1,0, src.loc, 0)
 	smoke.start()
-	del(src)
+	qdel(src)
 
 
 /obj/machinery/atmospherics/pipe/universal/proc/normalize_dir()
@@ -1425,7 +1425,7 @@
 		set_dir(4)
 
 
-/obj/machinery/atmospherics/pipe/universal/Del()
+/obj/machinery/atmospherics/pipe/universal/Destroy()
 	if(node1)
 		node1.disconnect(src)
 	if(node2)
@@ -1521,7 +1521,7 @@
 				node6 = target
 
 	if(!node1 && !node2 && !node3 && !node4 && !node5 && !node6)
-		del(src)
+		qdel(src)
 		return
 
 	var/turf/T = get_turf(src)
@@ -1533,32 +1533,32 @@
 /obj/machinery/atmospherics/pipe/universal/disconnect(obj/machinery/atmospherics/reference)
 	if(reference == node1)
 		if(istype(node1, /obj/machinery/atmospherics/pipe))
-			del(parent)
+			qdel(parent)
 		node1 = null
 
 	if(reference == node2)
 		if(istype(node2, /obj/machinery/atmospherics/pipe))
-			del(parent)
+			qdel(parent)
 		node2 = null
 
 	if(reference == node3)
 		if(istype(node3, /obj/machinery/atmospherics/pipe))
-			del(parent)
+			qdel(parent)
 		node3 = null
 
 	if(reference == node4)
 		if(istype(node4, /obj/machinery/atmospherics/pipe))
-			del(parent)
+			qdel(parent)
 		node4 = null
 
 	if(reference == node5)
 		if(istype(node5, /obj/machinery/atmospherics/pipe))
-			del(parent)
+			qdel(parent)
 		node5 = null
 
 	if(reference == node6)
 		if(istype(node6, /obj/machinery/atmospherics/pipe))
-			del(parent)
+			qdel(parent)
 		node6 = null
 
 	update_icon()
