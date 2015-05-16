@@ -439,7 +439,7 @@
 	result_amount = 1
 
 /datum/chemical_reaction/phoronsolidification/on_reaction(var/datum/reagents/holder, var/created_volume)
-	new /obj/item/stack/sheet/mineral/phoron(get_turf(holder.my_atom), created_volume)
+	new /obj/item/stack/material/phoron(get_turf(holder.my_atom), created_volume)
 	return
 
 /datum/chemical_reaction/plastication
@@ -450,7 +450,7 @@
 	result_amount = 1
 
 /datum/chemical_reaction/plastication/on_reaction(var/datum/reagents/holder, var/created_volume)
-	new /obj/item/stack/sheet/mineral/plastic(get_turf(holder.my_atom), created_volume)
+	new /obj/item/stack/material/plastic(get_turf(holder.my_atom), created_volume)
 	return
 
 /* Grenade reactions */
@@ -934,10 +934,10 @@
 	required = /obj/item/slime_extract/metal
 
 /datum/chemical_reaction/slime/metal/on_reaction(var/datum/reagents/holder)
-	var/obj/item/stack/sheet/metal/M = new /obj/item/stack/sheet/metal
+	var/obj/item/stack/material/steel/M = new /obj/item/stack/material/steel
 	M.amount = 15
 	M.loc = get_turf(holder.my_atom)
-	var/obj/item/stack/sheet/plasteel/P = new /obj/item/stack/sheet/plasteel
+	var/obj/item/stack/material/plasteel/P = new /obj/item/stack/material/plasteel
 	P.amount = 5
 	P.loc = get_turf(holder.my_atom)
 	..()
@@ -1104,7 +1104,7 @@
 
 /datum/chemical_reaction/slime/plasma/on_reaction(var/datum/reagents/holder)
 	..()
-	var/obj/item/stack/sheet/mineral/phoron/P = new /obj/item/stack/sheet/mineral/phoron
+	var/obj/item/stack/material/phoron/P = new /obj/item/stack/material/phoron
 	P.amount = 10
 	P.loc = get_turf(holder.my_atom)
 

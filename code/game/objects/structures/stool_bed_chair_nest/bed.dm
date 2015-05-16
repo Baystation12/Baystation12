@@ -33,13 +33,13 @@
 
 /obj/structure/bed/blob_act()
 	if(prob(75))
-		new /obj/item/stack/sheet/metal(src.loc)
+		new /obj/item/stack/material/steel(src.loc)
 		qdel(src)
 
 /obj/structure/bed/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/weapon/wrench))
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-		new /obj/item/stack/sheet/metal(src.loc)
+		new /obj/item/stack/material/steel(src.loc)
 		qdel(src)
 	else if(istype(W, /obj/item/weapon/grab))
 		user.visible_message("<span class='notice'>[user] attempts to buckle [W:affecting] into \the [src]!</span>")

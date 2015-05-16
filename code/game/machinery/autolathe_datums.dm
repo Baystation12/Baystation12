@@ -109,19 +109,19 @@
 
 /datum/autolathe/recipe/metal
 	name = "steel sheets"
-	path = /obj/item/stack/sheet/metal
+	path = /obj/item/stack/material/steel
 	category = "General"
 	is_stack = 1
 
 /datum/autolathe/recipe/glass
 	name = "glass sheets"
-	path = /obj/item/stack/sheet/glass
+	path = /obj/item/stack/material/glass
 	category = "General"
 	is_stack = 1
 
 /datum/autolathe/recipe/rglass
 	name = "reinforced glass sheets"
-	path = /obj/item/stack/sheet/glass/reinforced
+	path = /obj/item/stack/material/glass/reinforced
 	category = "General"
 	is_stack = 1
 

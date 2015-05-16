@@ -96,12 +96,12 @@
 		else
 			usr << "<span class='notice'>[src]'s motors resist your effort.</span>"
 		return
-	if(istype(C, /obj/item/stack/sheet/plasteel))
+	if(istype(C, /obj/item/stack/material/plasteel))
 		var/amt = repair_price()
 		if(!amt)
 			usr << "<span class='notice'>\The [src] is already fully repaired.</span>"
 			return
-		var/obj/item/stack/sheet/plasteel/P = C
+		var/obj/item/stack/material/plasteel/P = C
 		if(P.amount < amt)
 			usr << "<span class='warning'>You don't have enough sheets to repair this! You need at least [amt] sheets.</span>"
 			return

@@ -50,10 +50,10 @@ var/list/solars_list = list()
 /obj/machinery/power/solar/proc/Make(var/obj/item/solar_assembly/S)
 	if(!S)
 		S = new /obj/item/solar_assembly(src)
-		S.glass_type = /obj/item/stack/sheet/glass
+		S.glass_type = /obj/item/stack/material/glass
 		S.anchored = 1
 	S.loc = src
-	if(S.glass_type == /obj/item/stack/sheet/glass/reinforced) //if the panel is in reinforced glass
+	if(S.glass_type == /obj/item/stack/material/glass/reinforced) //if the panel is in reinforced glass
 		health *= 2 								 //this need to be placed here, because panels already on the map don't have an assembly linked to
 	update_icon()
 
@@ -231,7 +231,7 @@ var/list/solars_list = list()
 // Give back the glass type we were supplied with
 /obj/item/solar_assembly/proc/give_glass()
 	if(glass_type)
-		var/obj/item/stack/sheet/S = new glass_type(src.loc)
+		var/obj/item/stack/material/S = new glass_type(src.loc)
 		S.amount = 2
 		glass_type = null
 
@@ -251,8 +251,8 @@ var/list/solars_list = list()
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 			return 1
 
-		if(istype(W, /obj/item/stack/sheet/glass))
-			var/obj/item/stack/sheet/S = W
+		if(istype(W, /obj/item/stack/material/glass))
+			var/obj/item/stack/material/S = W
 			if(S.use(2))
 				glass_type = W.type
 				playsound(src.loc, 'sound/machines/click.ogg', 50, 1)

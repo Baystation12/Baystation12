@@ -92,7 +92,7 @@
 	icon_state = "gripper-sheet"
 
 	can_hold = list(
-		/obj/item/stack/sheet
+		/obj/item/stack/material
 		)
 
 /obj/item/weapon/gripper/attack_self(mob/user as mob)

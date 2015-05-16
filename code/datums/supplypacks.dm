@@ -445,7 +445,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 
 /datum/supply_packs/metal50
 	name = "50 metal sheets"
-	contains = list(/obj/item/stack/sheet/metal)
+	contains = list(/obj/item/stack/material/steel)
 	amount = 50
 	cost = 10
 	containertype = /obj/structure/closet/crate
@@ -454,7 +454,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 
 /datum/supply_packs/glass50
 	name = "50 glass sheets"
-	contains = list(/obj/item/stack/sheet/glass)
+	contains = list(/obj/item/stack/material/glass)
 	amount = 50
 	cost = 10
 	containertype = /obj/structure/closet/crate
@@ -463,7 +463,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 
 /datum/supply_packs/wood50
 	name = "50 wooden planks"
-	contains = list(/obj/item/stack/sheet/wood)
+	contains = list(/obj/item/stack/material/wood)
 	amount = 50
 	cost = 10
 	containertype = /obj/structure/closet/crate
@@ -472,7 +472,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 
 /datum/supply_packs/plastic50
 	name = "50 plastic sheets"
-	contains = list(/obj/item/stack/sheet/mineral/plastic)
+	contains = list(/obj/item/stack/material/plastic)
 	amount = 50
 	cost = 10
 	containertype = /obj/structure/closet/crate
@@ -1255,7 +1255,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	group = "Hydroponics"
 
 /datum/supply_packs/cardboard_sheets
-	contains = list(/obj/item/stack/sheet/cardboard)
+	contains = list(/obj/item/stack/material/cardboard)
 	name = "50 cardboard sheets"
 	amount = 50
 	cost = 10

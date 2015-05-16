@@ -205,13 +205,13 @@ var/list/mechtoys = list(
 						continue
 
 					// Sell phoron
-					if(istype(A, /obj/item/stack/sheet/mineral/phoron))
-						var/obj/item/stack/sheet/mineral/phoron/P = A
+					if(istype(A, /obj/item/stack/material/phoron))
+						var/obj/item/stack/material/phoron/P = A
 						phoron_count += P.get_amount()
 
 					// Sell platinum
-					if(istype(A, /obj/item/stack/sheet/mineral/platinum))
-						var/obj/item/stack/sheet/mineral/platinum/P = A
+					if(istype(A, /obj/item/stack/material/platinum))
+						var/obj/item/stack/material/platinum/P = A
 						plat_count += P.get_amount()
 
 			qdel(MA)

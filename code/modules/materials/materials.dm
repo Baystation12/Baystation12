@@ -34,12 +34,15 @@ var/list/name_to_material
 	var/shard_type = SHARD_SHRAPNEL
 	var/shard_icon
 	var/shard_can_repair = 1
+	var/list/recipes
 
 	// Icons
 	var/icon_colour
 	var/icon_base = "metal"
 	var/icon_reinf = "reinf_metal"
-	var/stack_type
+	var/stack_type = /obj/item/stack/material/steel
+	var/stack_origin_tech = "materials=1"
+	var/stack_per_sheet = 2000
 
 	// Attributes
 	var/cut_delay = 0
@@ -51,6 +54,8 @@ var/list/name_to_material
 	var/opacity = 1
 	var/explosion_resistance = 5
 	var/weight = 20
+	var/conductive = 1
+	var/list/composite_material
 
 /material/New()
 	..()
@@ -94,16 +99,17 @@ var/list/name_to_material
 
 /material/uranium
 	name = "uranium"
-	stack_type = /obj/item/stack/sheet/mineral/uranium
+	stack_type = /obj/item/stack/material/uranium
 	radioactivity = 12
 	icon_base = "stone"
 	icon_reinf = "reinf_stone"
 	icon_colour = "#007A00"
 	weight = 22
+	stack_origin_tech = "materials=5"
 
 /material/diamond
 	name = "diamond"
-	stack_type = /obj/item/stack/sheet/mineral/diamond
+	stack_type = /obj/item/stack/material/diamond
 	flags = MATERIAL_UNMELTABLE
 	cut_delay = 60
 	icon_colour = "#00FFE1"
@@ -111,33 +117,38 @@ var/list/name_to_material
 	shard_type = SHARD_SHARD
 	tableslam_noise = 'sound/effects/Glasshit.ogg'
 	hardness = 100
+	stack_origin_tech = "materials=6"
+	stack_per_sheet = 3750
 
 /material/gold
 	name = "gold"
-	stack_type = /obj/item/stack/sheet/mineral/gold
+	stack_type = /obj/item/stack/material/gold
 	icon_colour = "#EDD12F"
 	weight = 24
 	hardness = 40
+	stack_origin_tech = "materials=4"
 
 /material/silver
 	name = "silver"
-	stack_type = /obj/item/stack/sheet/mineral/silver
+	stack_type = /obj/item/stack/material/silver
 	icon_colour = "#D1E6E3"
 	weight = 22
 	hardness = 50
+	stack_origin_tech = "materials=3"
 
 /material/phoron
 	name = "phoron"
-	stack_type = /obj/item/stack/sheet/mineral/phoron
+	stack_type = /obj/item/stack/material/phoron
 	ignition_point = 300
 	icon_base = "stone"
 	icon_colour = "#FC2BC5"
 	shard_type = SHARD_SHARD
 	hardness = 30
+	stack_origin_tech = "phorontech=2;materials=2"
 
 /material/sandstone
 	name = "sandstone"
-	stack_type = /obj/item/stack/sheet/mineral/sandstone
+	stack_type = /obj/item/stack/material/sandstone
 	icon_base = "stone"
 	icon_reinf = "reinf_stone"
 	icon_colour = "#D9C179"
@@ -147,7 +158,7 @@ var/list/name_to_material
 
 /material/steel
 	name = DEFAULT_WALL_MATERIAL
-	stack_type = /obj/item/stack/sheet/metal
+	stack_type = /obj/item/stack/material/steel
 	icon_base = "solid"
 	icon_reinf = "reinf_over"
 	icon_colour = "#666666"
@@ -160,7 +171,7 @@ var/list/name_to_material
 
 /material/plasteel
 	name = "plasteel"
-	stack_type = /obj/item/stack/sheet/plasteel
+	stack_type = /obj/item/stack/material/plasteel
 	integrity = 800
 	melting_point = 6000
 	icon_base = "solid"
@@ -169,10 +180,12 @@ var/list/name_to_material
 	explosion_resistance = 25
 	hardness = 80
 	weight = 23
+	stack_origin_tech = "materials=2"
+	composite_material = list() //todo
 
 /material/glass
 	name = "glass"
-	stack_type = /obj/item/stack/sheet/glass
+	stack_type = /obj/item/stack/material/glass
 	flags = MATERIAL_BRITTLE
 	icon_colour = "#00E1FF"
 	opacity = 0.3
@@ -184,54 +197,81 @@ var/list/name_to_material
 
 /material/glass/phoron
 	name = "phoron glass"
-	stack_type = /obj/item/stack/sheet/glass/phoronglass
+	stack_type = /obj/item/stack/material/glass/phoronglass
 	flags = MATERIAL_BRITTLE
 	ignition_point = 300
 	integrity = 200 // idk why but phoron windows are strong, so.
 	icon_colour = "#FC2BC5"
 	hardness = 10
 	weight = 10
+	stack_origin_tech = "materials=3;phorontech=2"
+
+/material/glass/phoron/reinforced
+	name = "reinforced phoron glass"
+	stack_type = /obj/item/stack/material/glass/phoronrglass
+	stack_origin_tech = "materials=4;phorontech=2"
+	composite_material = list() //todo
+
+/material/glass/reinforced
+	name = "reinforced glass"
+	stack_type = /obj/item/stack/material/glass/reinforced
+	flags = MATERIAL_BRITTLE
+	icon_colour = "#00E1FF"
+	opacity = 0.3
+	integrity = 100
+	shard_type = SHARD_SHARD
+	tableslam_noise = 'sound/effects/Glasshit.ogg'
+	hardness = 15
+	weight = 15
+	stack_origin_tech = "materials=2"
+	composite_material = list() //todo
 
 /material/plastic
 	name = "plastic"
-	stack_type = /obj/item/stack/sheet/mineral/plastic
+	stack_type = /obj/item/stack/material/plastic
 	flags = MATERIAL_BRITTLE
 	icon_base = "solid"
 	icon_reinf = "reinf_over"
 	icon_colour = "#CCCCCC"
 	hardness = 10
 	weight = 12
+	stack_origin_tech = "materials=3"
 
 /material/osmium
 	name = "osmium"
-	stack_type = /obj/item/stack/sheet/mineral/osmium
+	stack_type = /obj/item/stack/material/osmium
 	icon_colour = "#9999FF"
+	stack_origin_tech = "materials=5"
 
 /material/tritium
 	name = "tritium"
-	stack_type = /obj/item/stack/sheet/mineral/tritium
+	stack_type = /obj/item/stack/material/tritium
 	icon_colour = "#777777"
+	stack_origin_tech = "materials=5"
 
 /material/mhydrogen
 	name = "mhydrogen"
-	stack_type = /obj/item/stack/sheet/mineral/mhydrogen
+	stack_type = /obj/item/stack/material/mhydrogen
 	icon_colour = "#E6C5DE"
+	stack_origin_tech = "materials=6;powerstorage=5;magnets=5"
 
 /material/platinum
 	name = "platinum"
-	stack_type = /obj/item/stack/sheet/mineral/platinum
+	stack_type = /obj/item/stack/material/platinum
 	icon_colour = "#9999FF"
 	weight = 27
+	stack_origin_tech = "materials=2"
 
 /material/iron
 	name = "iron"
-	stack_type = /obj/item/stack/sheet/mineral/iron
+	stack_type = /obj/item/stack/material/iron
 	icon_colour = "#5C5454"
 	weight = 22
+	stack_per_sheet = 3750
 
 /material/wood
 	name = "wood"
-	stack_type = /obj/item/stack/sheet/wood
+	stack_type = /obj/item/stack/material/wood
 	icon_colour = "#824B28"
 	integrity = 25
 	icon_base = "solid"
@@ -240,12 +280,28 @@ var/list/name_to_material
 	shard_can_repair = 0 // you can't weld splinters back into planks
 	hardness = 15
 	weight = 18
+	stack_origin_tech = "materials=1;biotech=1"
 
 /material/wood/holographic
 	name = "holographic wood"
 	display_name = "wood"
 	stack_type = null
 	shard_type = SHARD_NONE
+
+/material/cardboard
+	name = "cardboard"
+	stack_type = /obj/item/stack/material/cardboard
+	flags = MATERIAL_BRITTLE
+	icon_base = "solid"
+	icon_reinf = "reinf_over"
+	icon_colour = "#AAAAAA"
+	hardness = 1
+	weight = 1
+	stack_origin_tech = "materials=1"
+
+/material/cloth //todo
+	name = "cloth"
+	stack_origin_tech = "materials=2"
 
 /material/cult
 	name = "cult"

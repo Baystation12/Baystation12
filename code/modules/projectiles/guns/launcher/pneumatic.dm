@@ -119,7 +119,7 @@
 	if(tank)
 		var/lost_gas_amount = tank.air_contents.total_moles*(pressure_setting/100)
 		var/datum/gas_mixture/removed = tank.air_contents.remove(lost_gas_amount)
-		
+
 		var/turf/T = get_turf(src.loc)
 		if(T) T.assume_air(removed)
 	..()
@@ -155,9 +155,9 @@
 			buildstate++
 			update_icon()
 			return
-	else if(istype(W,/obj/item/stack/sheet/metal))
+	else if(istype(W,/obj/item/stack/material/steel))
 		if(buildstate == 2)
-			var/obj/item/stack/sheet/metal/M = W
+			var/obj/item/stack/material/steel/M = W
 			if(M.use(5))
 				user << "\blue You assemble a chassis around the cannon frame."
 				buildstate++

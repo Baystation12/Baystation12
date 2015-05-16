@@ -11,7 +11,7 @@
 	if (prob(5) && istype(M,/mob/living))
 		user.visible_message("\red [user] breaks [src] over [M]'s back!")
 		user.remove_from_mob(src)
-		var/obj/item/stack/sheet/metal/m = new/obj/item/stack/sheet/metal
+		var/obj/item/stack/material/steel/m = new/obj/item/stack/material/steel
 		m.loc = get_turf(src)
 		qdel(src)
 		var/mob/living/T = M
@@ -36,12 +36,12 @@
 
 /obj/item/weapon/stool/blob_act()
 	if(prob(75))
-		new /obj/item/stack/sheet/metal(src.loc)
+		new /obj/item/stack/material/steel(src.loc)
 		qdel(src)
 
 /obj/item/weapon/stool/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/weapon/wrench))
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-		new /obj/item/stack/sheet/metal(src.loc)
+		new /obj/item/stack/material/steel(src.loc)
 		qdel(src)
 	..()

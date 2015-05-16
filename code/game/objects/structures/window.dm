@@ -262,7 +262,7 @@
 		else
 			visible_message("<span class='notice'>[user] dismantles \the [src].</span>")
 			if(dir == SOUTHWEST)
-				var/obj/item/stack/sheet/mats = new glasstype(loc)
+				var/obj/item/stack/material/mats = new glasstype(loc)
 				mats.amount = is_fulltile() ? 4 : 2
 			else
 				new glasstype(loc)
@@ -398,7 +398,7 @@
 	desc = "It looks thin and flimsy. A few knocks with... anything, really should shatter it."
 	icon_state = "window"
 	basestate = "window"
-	glasstype = /obj/item/stack/sheet/glass
+	glasstype = /obj/item/stack/material/glass
 
 
 /obj/structure/window/phoronbasic
@@ -407,7 +407,7 @@
 	basestate = "phoronwindow"
 	icon_state = "phoronwindow"
 	shardtype = /obj/item/weapon/material/shard/phoron
-	glasstype = /obj/item/stack/sheet/glass/phoronglass
+	glasstype = /obj/item/stack/material/glass/phoronglass
 	maxhealth = 120
 
 /obj/structure/window/phoronbasic/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
@@ -421,7 +421,7 @@
 	basestate = "phoronrwindow"
 	icon_state = "phoronrwindow"
 	shardtype = /obj/item/weapon/material/shard/phoron
-	glasstype = /obj/item/stack/sheet/glass/phoronrglass
+	glasstype = /obj/item/stack/material/glass/phoronrglass
 	reinf = 1
 	maxhealth = 160
 
@@ -435,7 +435,7 @@
 	basestate = "rwindow"
 	maxhealth = 40
 	reinf = 1
-	glasstype = /obj/item/stack/sheet/glass/reinforced
+	glasstype = /obj/item/stack/material/glass/reinforced
 
 /obj/structure/window/New(Loc, constructed=0)
 	..()

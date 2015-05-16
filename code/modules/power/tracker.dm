@@ -41,7 +41,7 @@
 /obj/machinery/power/tracker/proc/Make(var/obj/item/solar_assembly/S)
 	if(!S)
 		S = new /obj/item/solar_assembly(src)
-		S.glass_type = /obj/item/stack/sheet/glass
+		S.glass_type = /obj/item/stack/material/glass
 		S.tracker = 1
 		S.anchored = 1
 	S.loc = src
