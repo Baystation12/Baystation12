@@ -322,7 +322,7 @@ var/global/list/datum/dna/gene/dna_genes[0]
 
 
 /proc/EncodeDNABlock(var/value)
-	return add_zero2(num2hex(value,1), 3)
+	return num2hex(min(value, 4095), 3)
 
 /datum/dna/proc/UpdateUI()
 	src.uni_identity=""

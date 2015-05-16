@@ -87,10 +87,10 @@ var/global/datum/controller/plants/plant_controller // Set in New().
 	var/list/plant_traits = ALL_GENES
 	while(plant_traits && plant_traits.len)
 		var/gene_tag = pick(plant_traits)
-		var/gene_mask = "[uppertext(num2hex(rand(0,255)))]"
+		var/gene_mask = "[uppertext(num2hex(rand(0,255), 2))]"
 
 		while(gene_mask in used_masks)
-			gene_mask = "[uppertext(num2hex(rand(0,255)))]"
+			gene_mask = "[uppertext(num2hex(rand(0,255), 2))]"
 
 		used_masks += gene_mask
 		plant_traits -= gene_tag
