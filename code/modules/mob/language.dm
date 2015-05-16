@@ -255,8 +255,7 @@
 	ask_verb = "thrum"
 	exclaim_verb = "mumur"
 	colour = "#7ED6CB"
-	key = "i"
-	native = 1
+	key = "8"
 	flags = WHITELISTED | HIVEMIND
 	syllables = list("hmm","mm","nn","enn","emm","eem","knn","gmm")
 
