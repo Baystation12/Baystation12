@@ -53,6 +53,9 @@ var/list/name_to_material
 	if(!shard_icon)
 		shard_icon = shard_type
 
+/material/placeholder
+	name = "placeholder"
+
 /material/proc/place_dismantled_girder(var/turf/target, var/material/reinf_material)
 	var/obj/structure/girder/G = new(target)
 	if(reinf_material)

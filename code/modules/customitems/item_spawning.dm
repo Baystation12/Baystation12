@@ -106,8 +106,7 @@
 			if("item_name")
 				current_data.name = field_data
 			if("item_icon")
-				if(field_data in icon_states(CUSTOM_ITEM_OBJ))
-					current_data.item_icon = field_data
+				current_data.item_icon = field_data
 			if("item_desc")
 				current_data.item_desc = field_data
 			if("req_access")

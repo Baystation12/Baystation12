@@ -142,15 +142,15 @@ var/list/global/wall_cache = list()
 
 	return ..()
 
-/turf/simulated/wall/proc/dismantle_wall(devastated=0, explode=0)
+/turf/simulated/wall/proc/dismantle_wall(var/devastated, var/explode, var/no_product)
 
 	playsound(src, 'sound/items/Welder.ogg', 100, 1)
-	if(reinf_material)
-		reinf_material.place_dismantled_girder(src, reinf_material)
-		reinf_material.place_dismantled_product(src,devastated)
-	else
-		material.place_dismantled_girder(src)
-	material.place_dismantled_product(src,devastated)
+	if(!no_product)
+		if(reinf_material)
+			reinf_material.place_dismantled_girder(src, reinf_material)
+		else
+			material.place_dismantled_girder(src)
+		material.place_dismantled_product(src,devastated)
 
 	for(var/obj/O in src.contents) //Eject contents!
 		if(istype(O,/obj/structure/sign/poster))
@@ -158,6 +158,11 @@ var/list/global/wall_cache = list()
 			P.roll_and_drop(src)
 		else
 			O.loc = src
+
+	clear_plants()
+	material = name_to_material["placeholder"]
+	reinf_material = null
+	check_relatives()
 
 	ChangeTurf(/turf/simulated/floor/plating)
 
@@ -273,6 +278,5 @@ var/list/global/wall_cache = list()
 	..()
 
 /turf/simulated/wall/Destroy()
-	clear_plants()
-	check_relatives()
+	dismantle_wall(null,null,1)
 	..()
