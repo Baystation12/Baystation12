@@ -92,7 +92,7 @@ Buildable meters
 			src.pipe_type = PIPE_SCRUBBERS_STRAIGHT + is_bent
 			connect_types = CONNECT_TYPE_SCRUBBER
 			src.color = PIPE_COLOR_RED
-		else if(istype(make_from, /obj/machinery/atmospherics/pipe/simple/visible/universal) || istype(make_from, /obj/machinery/atmospherics/pipe/simple/hidden/universal))
+		else if(istype(make_from, /obj/machinery/atmospherics/pipe/universal/visible) || istype(make_from, /obj/machinery/atmospherics/pipe/universal/hidden) || istype(make_from, /obj/machinery/atmospherics/pipe/universal))
 			src.pipe_type = PIPE_UNIVERSAL
 			connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_SCRUBBER
 		else if(istype(make_from, /obj/machinery/atmospherics/pipe/simple))
@@ -513,7 +513,7 @@ Buildable meters
 				P.node2.build_network()
 
 		if(PIPE_UNIVERSAL)
-			var/obj/machinery/atmospherics/pipe/simple/hidden/universal/P = new( src.loc )
+			var/obj/machinery/atmospherics/pipe/universal/hidden/P = new( src.loc )
 			P.color = color
 			P.set_dir(src.dir)
 			P.initialize_directions = pipe_dir
@@ -530,6 +530,18 @@ Buildable meters
 			if (P.node2)
 				P.node2.initialize()
 				P.node2.build_network()
+			if (P.node3)
+				P.node3.initialize()
+				P.node3.build_network()
+			if (P.node4)
+				P.node4.initialize()
+				P.node4.build_network()
+			if (P.node5)
+				P.node5.initialize()
+				P.node5.build_network()
+			if (P.node6)
+				P.node6.initialize()
+				P.node6.build_network()
 
 		if(PIPE_HE_STRAIGHT, PIPE_HE_BENT)
 			var/obj/machinery/atmospherics/pipe/simple/heat_exchanging/P = new ( src.loc )
