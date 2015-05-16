@@ -1,0 +1,12 @@
+author: Kelenius
+delete-after: True
+
+changes: 
+  - tweak: "There has been a big update to the reagent system. A full-ish changelog can be found here: http://pastebin.com/imHXTRHz. In particular:"
+  - tweak: "Reagents now differentiate between being ingested (food, pills, smoke), injected (syringes, IV drips), and put on the skin (sprays, beaker splashing)."
+  - tweak: "Injecting food and drinks will cause bad effects."
+  - tweak: "Healing reagents, generally speaking, have stronger effects when injected."
+  - tweak: "Toxins now work slower and deal more damage. Seek medical help!"
+  - tweak: "Alcohol robustness has been lowered."
+  - tweak: "Acid will no longer melt large numbers of items at once."
+  - tweak: "Synaptizine is no longer hilariously deadly."
