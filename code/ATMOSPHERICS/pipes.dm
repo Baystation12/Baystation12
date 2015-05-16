@@ -72,7 +72,7 @@
 /obj/machinery/atmospherics/pipe/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
 	if (istype(src, /obj/machinery/atmospherics/pipe/tank))
 		return ..()
-	if (istype(src, /obj/machinery/atmospherics/pipe/vent))
+	if (istype(src, /obj/machinery/atmospherics/pipe/passive_vent))
 		return ..()
 
 	if(istype(W,/obj/item/device/pipe_painter))
@@ -1270,18 +1270,6 @@
 	return list(node1)
 
 
-/obj/machinery/atmospherics/pipe/passive_vent/update_icon()
-	if(node1)
-		icon_state = "intact"
-		set_dir(get_dir(src, node1))
-	else
-		icon_state = "exposed"
-	if(level == 1)
-		icon_state += "-f"
-	if(welded)
-		icon_state += "-weld"
-
-
 /obj/machinery/atmospherics/pipe/passive_vent/initialize()
 	var/connect_direction = dir
 
@@ -1317,11 +1305,12 @@
 	if(!istype(T))
 		return
 
-	if(T.intact && node && node.level == 1 && istype(node, /obj/machinery/atmospherics/pipe))
+	if(T.intact && level == 1)
 		vent_icon += "h"
 
 	if(welded)
 		vent_icon += "weld"
+
 	vent_icon += "off"
 
 	overlays += icon_manager.get_atmos_icon("device", , , vent_icon)
@@ -1333,11 +1322,11 @@
 		var/turf/T = get_turf(src)
 		if(!istype(T))
 			return
-		if(T.intact && node && node.level == 1 && istype(node, /obj/machinery/atmospherics/pipe))
+		if(T.intact && node1 && node1.level == 1 && istype(node1, /obj/machinery/atmospherics/pipe))
 			return
 		else
-			if(node)
-				add_underlay(T, node, dir, node.icon_connect_type)
+			if(node1)
+				add_underlay(T, node1, dir, node1.icon_connect_type)
 			else
 				add_underlay(T,, dir)
 
