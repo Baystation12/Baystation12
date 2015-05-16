@@ -1,10 +1,10 @@
-/obj/item/weapon/kitchen
+/obj/item/weapon/material/kitchen
 	icon = 'icons/obj/kitchen.dmi'
 
 /*
  * Utensils
  */
-/obj/item/weapon/kitchen/utensil
+/obj/item/weapon/material/kitchen/utensil
 	force = 5.0
 	w_class = 1.0
 	throwforce = 5.0
@@ -14,17 +14,16 @@
 	origin_tech = "materials=1"
 	attack_verb = list("attacked", "stabbed", "poked")
 	sharp = 0
-
 	var/loaded      //Descriptive string for currently loaded food object.
 
-/obj/item/weapon/kitchen/utensil/New()
+/obj/item/weapon/material/kitchen/utensil/New()
 	if (prob(60))
 		src.pixel_y = rand(0, 4)
 
 	create_reagents(5)
 	return
 
-/obj/item/weapon/kitchen/utensil/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
+/obj/item/weapon/material/kitchen/utensil/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
 	if(!istype(M))
 		return ..()
 
@@ -52,32 +51,27 @@
 	else
 		..()
 
-/obj/item/weapon/kitchen/utensil/fork
+/obj/item/weapon/material/kitchen/utensil/fork
 	name = "fork"
 	desc = "It's a fork. Sure is pointy."
 	icon_state = "fork"
 
-/obj/item/weapon/kitchen/utensil/pfork
-	name = "plastic fork"
-	desc = "Yay, no washing up to do."
-	icon_state = "pfork"
+/obj/item/weapon/material/kitchen/utensil/fork/plastic
+	default_material = "plastic"
 
-/obj/item/weapon/kitchen/utensil/spoon
+/obj/item/weapon/material/kitchen/utensil/spoon
 	name = "spoon"
 	desc = "It's a spoon. You can see your own upside-down face in it."
 	icon_state = "spoon"
 	attack_verb = list("attacked", "poked")
 
-/obj/item/weapon/kitchen/utensil/pspoon
-	name = "plastic spoon"
-	desc = "It's a plastic spoon. How dull."
-	icon_state = "pspoon"
-	attack_verb = list("attacked", "poked")
+/obj/item/weapon/material/kitchen/utensil/spoon/plastic
+	default_material = "plastic"
 
 /*
  * Knives
  */
-/obj/item/weapon/kitchen/utensil/knife
+/obj/item/weapon/material/kitchen/utensil/knife
 	name = "knife"
 	desc = "Can cut through any food."
 	icon_state = "knife"
@@ -92,7 +86,7 @@
 							"\red <b>[user] is slitting \his stomach open with the [src.name]! It looks like \he's trying to commit seppuku.</b>")
 		return (BRUTELOSS)
 
-/obj/item/weapon/kitchen/utensil/knife/attack(target as mob, mob/living/user as mob)
+/obj/item/weapon/material/kitchen/utensil/knife/attack(target as mob, mob/living/user as mob)
 	if ((CLUMSY in user.mutations) && prob(50))
 		user << "\red You accidentally cut yourself with the [src]."
 		user.take_organ_damage(20)
@@ -100,16 +94,7 @@
 	playsound(loc, 'sound/weapons/bladeslice.ogg', 50, 1, -1)
 	return ..()
 
-/obj/item/weapon/kitchen/utensil/pknife
-	name = "plastic knife"
-	desc = "The bluntest of blades."
-	icon_state = "pknife"
-	force = 1
-	throwforce = 1
-	sharp = 0
-	edge = 1 //for cutting pizzas
-
-/obj/item/weapon/kitchen/utensil/knife/attack(target as mob, mob/living/user as mob)
+/obj/item/weapon/material/kitchen/utensil/knife/attack(target as mob, mob/living/user as mob)
 	if ((CLUMSY in user.mutations) && prob(50))
 		user << "\red You somehow managed to cut yourself with the [src]."
 		user.take_organ_damage(20)
@@ -117,11 +102,14 @@
 	playsound(loc, 'sound/weapons/bladeslice.ogg', 50, 1, -1)
 	return ..()
 
+/obj/item/weapon/material/kitchen/utensil/knife/plastic
+	default_material = "plastic"
+
 /*
  * Rolling Pins
  */
 
-/obj/item/weapon/kitchen/rollingpin
+/obj/item/weapon/material/kitchen/rollingpin
 	name = "rolling pin"
 	desc = "Used to knock out the Bartender."
 	icon_state = "rolling_pin"
@@ -132,7 +120,7 @@
 	w_class = 3.0
 	attack_verb = list("bashed", "battered", "bludgeoned", "thrashed", "whacked") //I think the rollingpin attackby will end up ignoring this anyway.
 
-/obj/item/weapon/kitchen/rollingpin/attack(mob/living/M as mob, mob/living/user as mob)
+/obj/item/weapon/material/kitchen/rollingpin/attack(mob/living/M as mob, mob/living/user as mob)
 	if ((CLUMSY in user.mutations) && prob(50))
 		user << "\red The [src] slips out of your hand and hits your head."
 		user.take_organ_damage(10)
@@ -165,228 +153,3 @@
 				H.eye_blurry += 3
 	return ..()
 
-/*
- * Trays - Agouri
- */
-/obj/item/weapon/tray
-	name = "tray"
-	icon = 'icons/obj/food.dmi'
-	icon_state = "tray"
-	desc = "A metal tray to lay food on."
-	throwforce = 12.0
-	throwforce = 10.0
-	throw_speed = 1
-	throw_range = 5
-	w_class = 3.0
-	flags = CONDUCT
-	matter = list(DEFAULT_WALL_MATERIAL = 3000)
-	/* // NOPE
-	var/food_total= 0
-	var/burger_amt = 0
-	var/cheese_amt = 0
-	var/fries_amt = 0
-	var/classyalcdrink_amt = 0
-	var/alcdrink_amt = 0
-	var/bottle_amt = 0
-	var/soda_amt = 0
-	var/carton_amt = 0
-	var/pie_amt = 0
-	var/meatbreadslice_amt = 0
-	var/salad_amt = 0
-	var/miscfood_amt = 0
-	*/
-	var/list/carrying = list() // List of things on the tray. - Doohl
-	var/max_carry = 10 // w_class = 1 -- takes up 1
-					   // w_class = 2 -- takes up 3
-					   // w_class = 3 -- takes up 5
-
-/obj/item/weapon/tray/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
-
-	// Drop all the things. All of them.
-	overlays.Cut()
-	for(var/obj/item/I in carrying)
-		I.loc = M.loc
-		carrying.Remove(I)
-		if(isturf(I.loc))
-			spawn()
-				for(var/i = 1, i <= rand(1,2), i++)
-					if(I)
-						step(I, pick(NORTH,SOUTH,EAST,WEST))
-						sleep(rand(2,4))
-
-
-	if((CLUMSY in user.mutations) && prob(50))              //What if he's a clown?
-		M << "\red You accidentally slam yourself with the [src]!"
-		M.Weaken(1)
-		user.take_organ_damage(2)
-		if(prob(50))
-			playsound(M, 'sound/items/trayhit1.ogg', 50, 1)
-			return
-		else
-			playsound(M, 'sound/items/trayhit2.ogg', 50, 1) //sound playin'
-			return //it always returns, but I feel like adding an extra return just for safety's sakes. EDIT; Oh well I won't :3
-
-	var/mob/living/carbon/human/H = M      ///////////////////////////////////// /Let's have this ready for later.
-
-
-	if(!(user.zone_sel.selecting == ("eyes" || "head"))) //////////////hitting anything else other than the eyes
-		if(prob(33))
-			src.add_blood(H)
-			var/turf/location = H.loc
-			if (istype(location, /turf/simulated))
-				location.add_blood(H)     ///Plik plik, the sound of blood
-
-		M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been attacked with [src.name] by [user.name] ([user.ckey])</font>")
-		user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [src.name] to attack [M.name] ([M.ckey])</font>")
-		msg_admin_attack("[user.name] ([user.ckey]) used the [src.name] to attack [M.name] ([M.ckey]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
-
-		if(prob(15))
-			M.Weaken(3)
-			M.take_organ_damage(3)
-		else
-			M.take_organ_damage(5)
-		if(prob(50))
-			playsound(M, 'sound/items/trayhit1.ogg', 50, 1)
-			for(var/mob/O in viewers(M, null))
-				O.show_message(text("\red <B>[] slams [] with the tray!</B>", user, M), 1)
-			return
-		else
-			playsound(M, 'sound/items/trayhit2.ogg', 50, 1)  //we applied the damage, we played the sound, we showed the appropriate messages. Time to return and stop the proc
-			for(var/mob/O in viewers(M, null))
-				O.show_message(text("\red <B>[] slams [] with the tray!</B>", user, M), 1)
-			return
-
-
-	if(istype(M, /mob/living/carbon/human) && ((H.head && H.head.flags & HEADCOVERSEYES) || (H.wear_mask && H.wear_mask.flags & MASKCOVERSEYES) || (H.glasses && H.glasses.flags & GLASSESCOVERSEYES)))
-		M << "\red You get slammed in the face with the tray, against your mask!"
-		if(prob(33))
-			src.add_blood(H)
-			if (H.wear_mask)
-				H.wear_mask.add_blood(H)
-			if (H.head)
-				H.head.add_blood(H)
-			if (H.glasses && prob(33))
-				H.glasses.add_blood(H)
-			var/turf/location = H.loc
-			if (istype(location, /turf/simulated))     //Addin' blood! At least on the floor and item :v
-				location.add_blood(H)
-
-		if(prob(50))
-			playsound(M, 'sound/items/trayhit1.ogg', 50, 1)
-			for(var/mob/O in viewers(M, null))
-				O.show_message(text("\red <B>[] slams [] with the tray!</B>", user, M), 1)
-		else
-			playsound(M, 'sound/items/trayhit2.ogg', 50, 1)  //sound playin'
-			for(var/mob/O in viewers(M, null))
-				O.show_message(text("\red <B>[] slams [] with the tray!</B>", user, M), 1)
-		if(prob(10))
-			M.Stun(rand(1,3))
-			M.take_organ_damage(3)
-			return
-		else
-			M.take_organ_damage(5)
-			return
-
-	else //No eye or head protection, tough luck!
-		M << "\red You get slammed in the face with the tray!"
-		if(prob(33))
-			src.add_blood(M)
-			var/turf/location = H.loc
-			if (istype(location, /turf/simulated))
-				location.add_blood(H)
-
-		if(prob(50))
-			playsound(M, 'sound/items/trayhit1.ogg', 50, 1)
-			for(var/mob/O in viewers(M, null))
-				O.show_message(text("\red <B>[] slams [] in the face with the tray!</B>", user, M), 1)
-		else
-			playsound(M, 'sound/items/trayhit2.ogg', 50, 1)  //sound playin' again
-			for(var/mob/O in viewers(M, null))
-				O.show_message(text("\red <B>[] slams [] in the face with the tray!</B>", user, M), 1)
-		if(prob(30))
-			M.Stun(rand(2,4))
-			M.take_organ_damage(4)
-			return
-		else
-			M.take_organ_damage(8)
-			if(prob(30))
-				M.Weaken(2)
-				return
-			return
-
-/obj/item/weapon/tray/var/cooldown = 0	//shield bash cooldown. based on world.time
-
-/obj/item/weapon/tray/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/weapon/kitchen/rollingpin))
-		if(cooldown < world.time - 25)
-			user.visible_message("<span class='warning'>[user] bashes [src] with [W]!</span>")
-			playsound(user.loc, 'sound/effects/shieldbash.ogg', 50, 1)
-			cooldown = world.time
-	else
-		..()
-
-/*
-===============~~~~~================================~~~~~====================
-=																			=
-=  Code for trays carrying things. By Doohl for Doohl erryday Doohl Doohl~  =
-=																			=
-===============~~~~~================================~~~~~====================
-*/
-/obj/item/weapon/tray/proc/calc_carry()
-	// calculate the weight of the items on the tray
-	var/val = 0 // value to return
-
-	for(var/obj/item/I in carrying)
-		if(I.w_class == 1.0)
-			val ++
-		else if(I.w_class == 2.0)
-			val += 3
-		else
-			val += 5
-
-	return val
-
-/obj/item/weapon/tray/pickup(mob/user)
-
-	if(!isturf(loc))
-		return
-
-	for(var/obj/item/I in loc)
-		if( I != src && !I.anchored && !istype(I, /obj/item/clothing/under) && !istype(I, /obj/item/clothing/suit) && !istype(I, /obj/item/projectile) )
-			var/add = 0
-			if(I.w_class == 1.0)
-				add = 1
-			else if(I.w_class == 2.0)
-				add = 3
-			else
-				add = 5
-			if(calc_carry() + add >= max_carry)
-				break
-
-			I.loc = src
-			carrying.Add(I)
-			overlays += image("icon" = I.icon, "icon_state" = I.icon_state, "layer" = 30 + I.layer)
-
-/obj/item/weapon/tray/dropped(mob/user)
-
-	var/mob/living/M
-	for(M in src.loc) //to handle hand switching
-		return
-
-	var/foundtable = 0
-	for(var/obj/structure/table/T in loc)
-		foundtable = 1
-		break
-
-	overlays.Cut()
-
-	for(var/obj/item/I in carrying)
-		I.loc = loc
-		carrying.Remove(I)
-		if(!foundtable && isturf(loc))
-			// if no table, presume that the person just shittily dropped the tray on the ground and made a mess everywhere!
-			spawn()
-				for(var/i = 1, i <= rand(1,2), i++)
-					if(I)
-						step(I, pick(NORTH,SOUTH,EAST,WEST))
-						sleep(rand(2,4))

@@ -73,8 +73,8 @@
 	..()
 	hold.max_storage_space = 4
 	hold.can_hold = list(/obj/item/weapon/hatchet/unathiknife,\
-	/obj/item/weapon/kitchen/utensil/knife,\
-	/obj/item/weapon/kitchen/utensil/pknife,\
+	/obj/item/weapon/material/kitchen/utensil/knife,\
+	/obj/item/weapon/material/kitchen/utensil/knife/plastic,\
 	/obj/item/weapon/material/knife,\
 	/obj/item/weapon/material/knife/ritual)
 

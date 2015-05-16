@@ -1,4 +1,4 @@
-/obj/item/weapon/star
+/obj/item/weapon/material/star
 	name = "shuriken"
 	desc = "A sharp, perfectly weighted piece of metal."
 	icon_state = "star"
@@ -10,22 +10,16 @@
 	edge =  1
 	matter = list(DEFAULT_WALL_MATERIAL = 500)
 
-	var/poisoned = 0
-
-/obj/item/weapon/star/New()
+/obj/item/weapon/material/star/New()
 	..()
 	src.pixel_x = rand(-12, 12)
 	src.pixel_y = rand(-12, 12)
 
-//TODO: consider making this something done with reagents.
-/obj/item/weapon/star/throw_impact(atom/hit_atom)
+/obj/item/weapon/material/star/throw_impact(atom/hit_atom)
 	..()
-	if(poisoned && istype(hit_atom,/mob/living))
+	if(material.radioactivity>0 && istype(hit_atom,/mob/living))
 		var/mob/living/M = hit_atom
 		M.adjustToxLoss(rand(20,40))
-		poisoned = 0
-		color = null
 
-/obj/item/weapon/star/ninja
-	color = "#007700"
-	poisoned = 1
+/obj/item/weapon/material/star/ninja
+	default_material = "uranium"

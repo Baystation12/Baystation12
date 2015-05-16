@@ -136,11 +136,11 @@
 		if(3)
 			item_type = "[pick("fork","spoon","knife")]"
 			if(prob(25))
-				new_item = new /obj/item/weapon/kitchen/utensil/fork(src.loc)
+				new_item = new /obj/item/weapon/material/kitchen/utensil/fork(src.loc)
 			else if(prob(50))
-				new_item = new /obj/item/weapon/kitchen/utensil/knife(src.loc)
+				new_item = new /obj/item/weapon/material/kitchen/utensil/knife(src.loc)
 			else
-				new_item = new /obj/item/weapon/kitchen/utensil/spoon(src.loc)
+				new_item = new /obj/item/weapon/material/kitchen/utensil/spoon(src.loc)
 			additional_desc = "[pick("It's like no [item_type] you've ever seen before",\
 			"It's a mystery how anyone is supposed to eat with this",\
 			"You wonder what the creator's mouth was shaped like")]."

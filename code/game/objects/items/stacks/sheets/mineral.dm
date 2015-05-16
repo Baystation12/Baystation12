@@ -42,9 +42,9 @@ var/global/list/datum/stack_recipe/phoron_recipes = list ( \
 var/global/list/datum/stack_recipe/plastic_recipes = list ( \
 	new/datum/stack_recipe("plastic crate", /obj/structure/closet/crate/plastic, 10, one_per_turf = 1, on_floor = 1), \
 	new/datum/stack_recipe("plastic ashtray", /obj/item/ashtray/plastic, 2, one_per_turf = 1, on_floor = 1), \
-	new/datum/stack_recipe("plastic fork", /obj/item/weapon/kitchen/utensil/pfork, 1, on_floor = 1), \
-	new/datum/stack_recipe("plastic spoon", /obj/item/weapon/kitchen/utensil/pspoon, 1, on_floor = 1), \
-	new/datum/stack_recipe("plastic knife", /obj/item/weapon/kitchen/utensil/pknife, 1, on_floor = 1), \
+	new/datum/stack_recipe("plastic fork", /obj/item/weapon/material/kitchen/utensil/fork/plastic, 1, on_floor = 1), \
+	new/datum/stack_recipe("plastic spoon", /obj/item/weapon/material/kitchen/utensil/spoon/plastic, 1, on_floor = 1), \
+	new/datum/stack_recipe("plastic knife", /obj/item/weapon/material/kitchen/utensil/knife/plastic, 1, on_floor = 1), \
 	new/datum/stack_recipe("plastic bag", /obj/item/weapon/storage/bag/plasticbag, 3, on_floor = 1), \
 	new/datum/stack_recipe("blood pack", /obj/item/weapon/reagent_containers/blood/empty, 4, on_floor = 0), \
 	new/datum/stack_recipe("reagent dispenser cartridge (large)", /obj/item/weapon/reagent_containers/chem_disp_cartridge,        5, on_floor=0), // 500u

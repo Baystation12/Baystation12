@@ -52,7 +52,7 @@
 /datum/surgery_step/eye/lift_eyes
 	allowed_tools = list(
 	/obj/item/weapon/retractor = 100,	\
-	/obj/item/weapon/kitchen/utensil/fork = 50
+	/obj/item/weapon/material/kitchen/utensil/fork = 50
 	)
 
 	min_duration = 30
