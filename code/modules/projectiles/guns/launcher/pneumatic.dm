@@ -46,13 +46,7 @@
 	user << "You twist the valve and pop the tank out of [src]."
 	user.put_in_hands(tank)
 	tank = null
-	
-	icon_state = "pneumatic"
-	item_state = "pneumatic"
-	if (ismob(src.loc))
-		var/mob/M = src.loc
-		M.update_inv_r_hand()
-		M.update_inv_l_hand()
+	update_icon()
 
 /obj/item/weapon/gun/launcher/pneumatic/proc/unload_hopper(mob/user)
 	if(item_storage.contents.len > 0)
@@ -74,9 +68,7 @@
 		user.drop_from_inventory(W, src)
 		tank = W
 		user.visible_message("[user] jams [W] into [src]'s valve and twists it closed.","You jam [W] into [src]'s valve and twist it closed.")
-		icon_state = "pneumatic-tank"
-		item_state = "pneumatic-tank"
-		user.update_icons()
+		update_icon()
 	else if(istype(W) && item_storage.can_be_inserted(W))
 		item_storage.handle_item_insertion(W)
 
@@ -130,6 +122,19 @@
 		var/turf/T = get_turf(src.loc)
 		if(T) T.assume_air(removed)
 	..()
+
+/obj/item/weapon/gun/launcher/pneumatic/update_icon()
+	if(tank)
+		icon_state = "pneumatic-tank"
+		item_state = "pneumatic-tank"
+	else
+		icon_state = "pneumatic"
+		item_state = "pneumatic"
+
+	if (ismob(src.loc))
+		var/mob/M = src.loc
+		M.update_inv_r_hand()
+		M.update_inv_l_hand()
 
 //Constructable pneumatic cannon.
 

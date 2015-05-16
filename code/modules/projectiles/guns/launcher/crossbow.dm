@@ -74,8 +74,8 @@
 
 /obj/item/weapon/gun/launcher/crossbow/handle_post_fire(mob/user, atom/target)
 	bolt = null
-	icon_state = "crossbow"
 	tension = 0
+	update_icon()
 	..()
 
 /obj/item/weapon/gun/launcher/crossbow/attack_self(mob/living/user as mob)
@@ -89,7 +89,7 @@
 		else
 			user.visible_message("[user] relaxes the tension on [src]'s string.","You relax the tension on [src]'s string.")
 		tension = 0
-		icon_state = "crossbow"
+		update_icon()
 	else
 		draw(user)
 
@@ -106,15 +106,19 @@
 	user.visible_message("[user] begins to draw back the string of [src].","<span class='notice'>You begin to draw back the string of [src].</span>")
 	tension = 1
 	
-	while(bolt && tension && current_user == user)
+	while(bolt && tension && loc == current_user)
 		if(!do_after(user, 25)) //crossbow strings don't just magically pull back on their own.
 			user.visible_message("[usr] stops drawing and relaxes the string of [src].","<span class='warning'>You stop drawing back and relax the string of [src].</span>")
 			tension = 0
-			icon_state = "crossbow"
+			update_icon()
+			return
+		
+		//double check that the user hasn't removed the bolt in the meantime
+		if(!(bolt && tension && loc == current_user))
 			return
 		
 		tension++
-		icon_state = "crossbow-drawn"
+		update_icon()
 
 		if(tension >= max_tension)
 			tension = max_tension
@@ -132,11 +136,10 @@
 /obj/item/weapon/gun/launcher/crossbow/attackby(obj/item/W as obj, mob/user as mob)
 	if(!bolt)
 		if (istype(W,/obj/item/weapon/arrow))
-			user.drop_item()
+			user.drop_from_inventory(W, src)
 			bolt = W
-			bolt.loc = src
 			user.visible_message("[user] slides [bolt] into [src].","You slide [bolt] into [src].")
-			icon_state = "crossbow-nocked"
+			update_icon()
 			return
 		else if(istype(W,/obj/item/stack/rods))
 			var/obj/item/stack/rods/R = W
@@ -144,7 +147,7 @@
 				bolt = new /obj/item/weapon/arrow/rod(src)
 				bolt.fingerprintslast = src.fingerprintslast
 				bolt.loc = src
-				icon_state = "crossbow-nocked"
+				update_icon()
 				user.visible_message("[user] jams [bolt] into [src].","You jam [bolt] into [src].")
 				superheat_rod(user)
 			return
@@ -181,6 +184,14 @@
 	bolt.throwforce = 15
 	bolt.icon_state = "metal-rod-superheated"
 	cell.use(500)
+
+/obj/item/weapon/gun/launcher/crossbow/update_icon()
+	if(tension > 1)
+		icon_state = "crossbow-drawn"
+	else if(bolt)
+		icon_state = "crossbow-nocked"
+	else
+		icon_state = "crossbow"
 
 
 // Crossbow construction.
