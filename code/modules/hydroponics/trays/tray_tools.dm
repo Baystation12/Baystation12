@@ -169,7 +169,7 @@
 
 	switch(grown_seed.get_trait(TRAIT_CARNIVOROUS))
 		if(1)
-			dat += "<br>It is carniovorous and will eat tray pests for sustenance."
+			dat += "<br>It is carnivorous and will eat tray pests for sustenance."
 		if(2)
 			dat	+= "<br>It is carnivorous and poses a significant threat to living things around it."
 
