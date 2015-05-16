@@ -51,6 +51,37 @@
 // blind_message (optional) is what blind people will hear e.g. "You hear something!"
 
 /mob/visible_message(var/message, var/self_message, var/blind_message)
+
+	var/list/seeing_obj = list()
+
+	for(var/I in view(world.view, get_turf(usr))) //get_turf is needed to stop weirdness with x-ray.
+		if(istype(I, /mob/))
+			var/mob/M = I
+			for(var/obj/O in M.contents)
+				seeing_obj |= O
+		else if(istype(I, /obj/))
+			var/obj/O = I
+			seeing_obj |= O
+
+	for (var/mob/O in viewers(get_turf(src), null))
+		if(O.see_invisible < invisibility)
+			continue // Cannot view the invisible
+		var/msg = message
+		if(O.status_flags & PASSEMOTES)
+			for(var/obj/item/weapon/holder/H in O.contents)
+				H.show_message( msg, 1, blind_message, 2)
+			for(var/mob/living/M in O.contents)
+				M.show_message( msg, 1, blind_message, 2)
+		if(self_message && O==src)
+			msg = self_message
+		O.show_message( msg, 1, blind_message, 2)
+
+	for(var/obj/O in seeing_obj)
+		spawn(0)
+			if(O) //It's possible that it could be deleted in the meantime.
+				O.show_message( message, 1, blind_message, 2)
+
+	/*
 	for(var/mob/M in viewers(src))
 		if(M.see_invisible < invisibility)
 			continue // Cannot view the invisible
@@ -58,14 +89,40 @@
 		if(self_message && M==src)
 			msg = self_message
 		M.show_message( msg, 1, blind_message, 2)
+	*/
 
 // Show a message to all mobs in sight of this atom
 // Use for objects performing visible actions
 // message is output to anyone who can see, e.g. "The [src] does something!"
 // blind_message (optional) is what blind people will hear e.g. "You hear something!"
 /atom/proc/visible_message(var/message, var/blind_message)
-	for(var/mob/M in viewers(src))
-		M.show_message( message, 1, blind_message, 2)
+
+	var/list/seeing_obj = list()
+
+	for(var/I in view(world.view, get_turf(src))) //get_turf is needed to stop weirdness with x-ray.
+		if(istype(I, /mob/))
+			var/mob/M = I
+			for(var/obj/O in M.contents)
+				seeing_obj |= O
+		else if(istype(I, /obj/))
+			var/obj/O = I
+			seeing_obj |= O
+
+	for (var/mob/O in viewers(get_turf(src), null))
+		if(O.see_invisible < invisibility)
+			continue // Cannot view the invisible
+		var/msg = message
+		if(O.status_flags & PASSEMOTES)
+			for(var/obj/item/weapon/holder/H in O.contents)
+				H.show_message( msg, 1, blind_message, 2)
+			for(var/mob/living/M in O.contents)
+				M.show_message( msg, 1, blind_message, 2)
+		O.show_message( msg, 1, blind_message, 2)
+
+	for(var/obj/O in seeing_obj)
+		spawn(0)
+			if(O) //It's possible that it could be deleted in the meantime.
+				O.show_message( message, 1, blind_message, 2)
 
 // Returns an amount of power drawn from the object (-1 if it's not viable).
 // If drain_check is set it will not actually drain power, just return a value.

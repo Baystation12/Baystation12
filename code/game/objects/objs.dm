@@ -141,3 +141,6 @@
 
 /obj/proc/see_emote(mob/M as mob, text, var/emote_type)
 	return
+
+/obj/proc/show_message(msg, type, alt, alt_type)
+	return

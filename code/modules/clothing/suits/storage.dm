@@ -33,6 +33,14 @@
 	pockets.hear_talk(M, msg, verb, speaking)
 	..()
 
+/obj/item/clothing/suit/storage/see_emote(mob/M as mob, text, var/emote_type)
+	pockets.see_emote(M, text, emote_type)
+	..()
+
+/obj/item/clothing/suit/storage/show_message(msg, type, alt, alt_type)
+	pockets.show_message(msg, type, alt, alt_type)
+	..()
+
 //Jackets with buttons, used for labcoats, IA jackets, First Responder jackets, and brown jackets.
 /obj/item/clothing/suit/storage/toggle
 	var/icon_open

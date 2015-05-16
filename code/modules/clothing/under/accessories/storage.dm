@@ -38,6 +38,14 @@
 	hold.hear_talk(M, msg, verb, speaking)
 	..()
 
+/obj/item/clothing/accessory/storage/see_emote(mob/M as mob, text, var/emote_type)
+	hold.see_emote(M, text, emote_type)
+	..()
+
+/obj/item/clothing/accessory/storage/show_message(msg, type, alt, alt_type)
+	hold.show_message(msg, type, alt, alt_type)
+	..()
+
 /obj/item/clothing/accessory/storage/attack_self(mob/user as mob)
 	user << "<span class='notice'>You empty [src].</span>"
 	var/turf/T = get_turf(src)

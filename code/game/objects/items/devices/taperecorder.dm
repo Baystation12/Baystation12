@@ -29,6 +29,25 @@
 		else
 			storedinfo += "\[[time2text(timerecorded*10,"mm:ss")]\] [M.name] [verb], \"[msg]\""
 
+/obj/item/device/taperecorder/see_emote(mob/M as mob, text, var/emote_type)
+	if(emote_type != 2) //only hearable emotes
+		return
+	if(recording)
+		timestamp += timerecorded
+		storedinfo += "\[[time2text(timerecorded*10,"mm:ss")]\] [strip_html_properly(text)]"
+
+/obj/item/device/taperecorder/show_message(msg, type, alt, alt_type)
+	var/recordedtext
+	if (msg && type == 2) //must be hearable
+		recordedtext = msg
+	else if (alt && alt_type == 2)
+		recordedtext = alt
+	else
+		return
+	if(recording)
+		timestamp += timerecorded
+		storedinfo += "*\[[time2text(timerecorded*10,"mm:ss")]\] *[strip_html_properly(recordedtext)]*" //"*" at front as a marker
+
 /obj/item/device/taperecorder/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	..()
 	if(istype(W, /obj/item/weapon/card/emag))
@@ -146,7 +165,10 @@
 		if(storedinfo.len < i)
 			break
 		var/turf/T = get_turf(src)
-		T.visible_message("<font color=Maroon><B>Tape Recorder</B>: [storedinfo[i]]</font>")
+		var/playedmessage = storedinfo[i]
+		if (findtextEx(playedmessage,"*",1,2)) //remove marker for action sounds
+			playedmessage = copytext(playedmessage,2)
+		T.visible_message("<font color=Maroon><B>Tape Recorder</B>: [playedmessage]</font>")
 		if(storedinfo.len < i+1)
 			playsleepseconds = 1
 			sleep(10)
@@ -200,7 +222,10 @@
 	var/obj/item/weapon/paper/P = new /obj/item/weapon/paper(get_turf(src))
 	var/t1 = "<B>Transcript:</B><BR><BR>"
 	for(var/i=1,storedinfo.len >= i,i++)
-		t1 += "[storedinfo[i]]<BR>"
+		var/printedmessage = storedinfo[i]
+		if (findtextEx(printedmessage,"*",1,2)) //replace action sounds
+			printedmessage = "\[[time2text(timestamp[i]*10,"mm:ss")]\] (Unrecognized sound)"
+		t1 += "[printedmessage]<BR>"
 	P.info = t1
 	P.name = "Transcript"
 	canprint = 0

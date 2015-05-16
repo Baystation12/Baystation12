@@ -258,6 +258,12 @@
 		occupant.show_message(rendered, 2)
 	..()
 
+/obj/mecha/show_message(msg, type, alt, alt_type)
+	if(occupant && occupant.client)
+		var/rendered = "<span class='message'>[msg]</span>"
+		occupant.show_message(rendered, type)
+	..()
+
 ////////////////////////////
 ///// Action processing ////
 ////////////////////////////

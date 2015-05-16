@@ -32,9 +32,9 @@
 	for(var/mob/M in src.contents)
 		M.attackby(W,user)
 
-/obj/item/weapon/holder/proc/show_message(var/message, var/m_type)
+/obj/item/weapon/holder/show_message(msg, type, alt, alt_type)
 	for(var/mob/living/M in contents)
-		M.show_message(message,m_type)
+		M.show_message(msg,type)
 
 //Mob procs and vars for scooping up
 /mob/living/var/holder_type
