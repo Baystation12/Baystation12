@@ -15,10 +15,11 @@
 	if(istype(H))
 		if((H != src) && check_shields(0, H.name))
 			visible_message("\red <B>[H] attempted to touch [src]!</B>")
+			H.do_attack_animation(src)
 			return 0
 
 		if(istype(H.gloves, /obj/item/clothing/gloves/boxing/hologlove))
-
+			H.do_attack_animation(src)
 			var/damage = rand(0, 9)
 			if(!damage)
 				playsound(loc, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
@@ -88,6 +89,7 @@
 			G.synch()
 			LAssailant = M
 
+			H.do_attack_animation(src)
 			playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 			visible_message("<span class='warning'>[M] has grabbed [src] passively!</span>")
 			return 1
@@ -179,6 +181,7 @@
 			if(!attack)
 				return 0
 
+			H.do_attack_animation(src)
 			if(!attack_message)
 				attack.show_attack(H, src, hit_zone, rand_damage)
 			else
@@ -213,6 +216,7 @@
 			src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been disarmed by [M.name] ([M.ckey])</font>")
 
 			msg_admin_attack("[key_name(M)] disarmed [src.name] ([src.ckey])")
+			M.do_attack_animation(src)
 
 			if(w_uniform)
 				w_uniform.add_fingerprint(M)
