@@ -5,6 +5,7 @@
 	var/spawning = 0//Referenced when you want to delete the new_player later on in the code.
 	var/totalPlayers = 0		 //Player counts for the Lobby tab
 	var/totalPlayersReady = 0
+
 	universal_speak = 1
 
 	invisibility = 101
@@ -130,6 +131,8 @@
 
 				if(client.prefs.be_random_name)
 					client.prefs.real_name = random_name(client.prefs.gender)
+				if(client.prefs.dummy)
+					qdel(client.prefs.dummy)
 				observer.real_name = client.prefs.real_name
 				observer.name = observer.real_name
 				if(!client.holder && !config.antag_hud_allowed)           // For new ghosts we remove the verb from even showing up if it's not allowed.
@@ -311,7 +314,7 @@
 		var/mob/living/character = create_character()	//creates the human and transfers vars and mind
 		character = job_master.EquipRank(character, rank, 1)					//equips the human
 		UpdateFactionList(character)
-		EquipCustomItems(character)
+		equip_custom_items(character)
 
 		// AIs don't need a spawnpoint, they must spawn at an empty core
 		if(character.mind.assigned_role == "AI")
@@ -449,7 +452,8 @@
 			client.prefs.randomize_appearance_for(new_character)
 		else
 			client.prefs.copy_to(new_character)
-
+		if(client.prefs.dummy)
+			qdel(client.prefs.dummy)
 		src << sound(null, repeat = 0, wait = 0, volume = 85, channel = 1) // MAD JAMS cant last forever yo
 
 		if(mind)

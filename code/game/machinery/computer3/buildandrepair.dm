@@ -15,7 +15,6 @@
 	var/list/req_components = null
 	var/powernet = null
 	var/list/records = null
-	var/frame_desc = null
 
 	var/datum/file/program/OS = new/datum/file/program/ntos
 

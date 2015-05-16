@@ -24,7 +24,7 @@
 	force = 5.0
 	throwforce = 7.0
 	w_class = 2.0
-	matter = list("metal" = 150)
+	matter = list(DEFAULT_WALL_MATERIAL = 150)
 	origin_tech = "materials=1;engineering=1"
 	attack_verb = list("bashed", "battered", "bludgeoned", "whacked")
 
@@ -44,7 +44,7 @@
 	throwforce = 5.0
 	throw_speed = 3
 	throw_range = 5
-	matter = list("metal" = 75)
+	matter = list(DEFAULT_WALL_MATERIAL = 75)
 	attack_verb = list("stabbed")
 
 	suicide_act(mob/user)
@@ -102,7 +102,7 @@
 	throw_speed = 2
 	throw_range = 9
 	w_class = 2.0
-	matter = list("metal" = 80)
+	matter = list(DEFAULT_WALL_MATERIAL = 80)
 	origin_tech = "materials=1;engineering=1"
 	attack_verb = list("pinched", "nipped")
 	sharp = 1
@@ -144,7 +144,7 @@
 	w_class = 2.0
 
 	//Cost to make in the autolathe
-	matter = list("metal" = 70, "glass" = 30)
+	matter = list(DEFAULT_WALL_MATERIAL = 70, "glass" = 30)
 
 	//R&D tech level
 	origin_tech = "engineering=1"
@@ -247,7 +247,7 @@
 /obj/item/weapon/weldingtool/afterattack(obj/O as obj, mob/user as mob, proximity)
 	if(!proximity) return
 	if (istype(O, /obj/structure/reagent_dispensers/fueltank) && get_dist(src,O) <= 1 && !src.welding)
-		O.reagents.trans_to(src, max_fuel)
+		O.reagents.trans_to_obj(src, max_fuel)
 		user << "\blue Welder refueled"
 		playsound(src.loc, 'sound/effects/refill.ogg', 50, 1, -6)
 		return
@@ -334,26 +334,27 @@
 	src.welding = !( src.welding )
 	if (src.welding)
 		if (remove_fuel(1))
-			usr << "\blue You switch the [src] on."
+			usr << "<span class='notice'>You switch the [src] on.</span>"
 			src.force = 15
 			src.damtype = "fire"
 			src.icon_state = "welder1"
 			src.w_class = 4
 			processing_objects.Add(src)
 		else
-			usr << "\blue Need more fuel!"
+			usr << "<span class='notice'>You need more fuel!</span>"
 			src.welding = 0
-			return
 	else
 		if(!message)
-			usr << "\blue You switch the [src] off."
+			usr << "<span class='notice'>You switch \the [src] off.</span>"
 		else
-			usr << "\blue The [src] shuts off!"
+			usr << "<span class='notice'>\The [src] shuts off!</span>"
 		src.force = 3
 		src.damtype = "brute"
 		src.icon_state = "welder"
 		src.welding = 0
 		src.w_class = initial(src.w_class)
+	usr.update_inv_l_hand()
+	usr.update_inv_r_hand()
 
 //Decides whether or not to damage a player's eyes based on what they're wearing as protection
 //Note: This should probably be moved to mob
@@ -403,21 +404,21 @@
 /obj/item/weapon/weldingtool/largetank
 	name = "industrial welding tool"
 	max_fuel = 40
-	matter = list("metal" = 70, "glass" = 60)
+	matter = list(DEFAULT_WALL_MATERIAL = 70, "glass" = 60)
 	origin_tech = "engineering=2"
 
 /obj/item/weapon/weldingtool/hugetank
 	name = "upgraded welding tool"
 	max_fuel = 80
 	w_class = 3.0
-	matter = list("metal" = 70, "glass" = 120)
+	matter = list(DEFAULT_WALL_MATERIAL = 70, "glass" = 120)
 	origin_tech = "engineering=3"
 
 /obj/item/weapon/weldingtool/experimental
 	name = "experimental welding tool"
 	max_fuel = 40
 	w_class = 3.0
-	matter = list("metal" = 70, "glass" = 120)
+	matter = list(DEFAULT_WALL_MATERIAL = 70, "glass" = 120)
 	origin_tech = "engineering=4;phorontech=3"
 	var/last_gen = 0
 
@@ -444,7 +445,7 @@
 	throwforce = 7.0
 	item_state = "crowbar"
 	w_class = 2.0
-	matter = list("metal" = 50)
+	matter = list(DEFAULT_WALL_MATERIAL = 50)
 	origin_tech = "engineering=1"
 	attack_verb = list("attacked", "bashed", "battered", "bludgeoned", "whacked")
 

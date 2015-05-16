@@ -20,6 +20,7 @@
 	var/created_window = /obj/structure/window/basic
 	var/is_reinforced = 0
 	var/list/construction_options = list("One Direction", "Full Window")
+	sheettype = "glass"
 
 /obj/item/stack/sheet/glass/cyborg
 	name = "glass synthesizer"
@@ -144,7 +145,7 @@
 	singular_name = "reinforced glass sheet"
 	icon_state = "sheet-rglass"
 
-	matter = list("metal" = 1875,"glass" = 3750)
+	matter = list(DEFAULT_WALL_MATERIAL = 1875,"glass" = 3750)
 	origin_tech = "materials=2"
 
 	created_window = /obj/structure/window/reinforced
@@ -174,6 +175,7 @@
 	matter = list("glass" = 7500)
 	origin_tech = "materials=3;phorontech=2"
 	created_window = /obj/structure/window/phoronbasic
+	sheettype = "phoronglass"
 
 /obj/item/stack/sheet/glass/phoronglass/attackby(obj/item/W, mob/user)
 	..()
@@ -200,7 +202,7 @@
 	desc = "Phoron glass which has been reinforced with metal rods."
 	singular_name = "reinforced phoron glass sheet"
 	icon_state = "sheet-phoronrglass"
-	matter = list("glass" = 7500,"metal" = 1875)
+	matter = list("glass" = 7500,DEFAULT_WALL_MATERIAL = 1875)
 
 	origin_tech = "materials=4;phorontech=2"
 	created_window = /obj/structure/window/phoronreinforced

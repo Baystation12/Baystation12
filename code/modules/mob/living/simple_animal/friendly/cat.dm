@@ -228,6 +228,23 @@
 	icon_dead = "kitten_dead"
 	gender = NEUTER
 
+// Leaving this here for now.
+/obj/item/weapon/holder/cat/fluff/bones
+	name = "Bones"
+	desc = "It's Bones! Meow."
+	gender = MALE
+	icon_state = "cat3"
+
+/mob/living/simple_animal/cat/fluff/bones
+	name = "Bones"
+	desc = "That's Bones the cat. He's a laid back, black cat. Meow."
+	gender = MALE
+	icon_state = "cat3"
+	icon_living = "cat3"
+	icon_dead = "cat3_dead"
+	holder_type = /obj/item/weapon/holder/cat/fluff/bones
+	var/friend_name = "Erstatz Vryroxes"
+
 /mob/living/simple_animal/cat/kitten/New()
 	gender = pick(MALE, FEMALE)
 	..()

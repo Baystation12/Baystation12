@@ -81,7 +81,7 @@
 		/obj/item/device/taperecorder,
 		/obj/item/device/hailer,
 		/obj/item/device/megaphone,
-		/obj/item/clothing/accessory/holobadge,
+		/obj/item/clothing/accessory/badge/holo,
 		/obj/structure/closet/crate/secure,
 		/obj/structure/closet/secure_closet,
 		/obj/machinery/librarycomp,
@@ -161,17 +161,6 @@
 
 /obj/item/weapon/card/id/GetID()
 	return src
-
-/obj/item/weapon/card/id/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	..()
-	if(istype(W,/obj/item/weapon/id_wallet))
-		user << "You slip [src] into [W]."
-		src.name = "[src.registered_name]'s [W.name] ([src.assignment])"
-		src.desc = W.desc
-		src.icon = W.icon
-		src.icon_state = W.icon_state
-		qdel(W)
-		return
 
 /obj/item/weapon/card/id/verb/read()
 	set name = "Read ID Card"
@@ -297,7 +286,7 @@
 /obj/item/weapon/card/id/centcom/ERT
 	name = "\improper Emergency Response Team ID"
 	assignment = "Emergency Response Team"
-		
+
 /obj/item/weapon/card/id/centcom/ERT/New()
 	..()
 	access += get_all_accesses()

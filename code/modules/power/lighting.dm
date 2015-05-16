@@ -8,64 +8,7 @@
 #define LIGHT_EMPTY 1
 #define LIGHT_BROKEN 2
 #define LIGHT_BURNED 3
-
 #define LIGHT_BULB_TEMPERATURE 400 //K - used value for a 60W bulb
-
-/obj/item/light_fixture_frame
-	name = "light fixture frame"
-	desc = "Used for building lights."
-	icon = 'icons/obj/lighting.dmi'
-	icon_state = "tube-construct-item"
-	flags = CONDUCT
-	var/fixture_type = "tube"
-	var/obj/machinery/light/newlight = null
-	var/sheets_refunded = 2
-
-/obj/item/light_fixture_frame/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if (istype(W, /obj/item/weapon/wrench))
-		new /obj/item/stack/sheet/metal( get_turf(src.loc), sheets_refunded )
-		qdel(src)
-		return
-	..()
-
-/obj/item/light_fixture_frame/proc/try_build(turf/on_wall)
-	if (get_dist(on_wall,usr)>1)
-		return
-	var/ndir = get_dir(usr,on_wall)
-	if (!(ndir in cardinal))
-		return
-	var/turf/loc = get_turf(usr)
-	if (!istype(loc, /turf/simulated/floor))
-		usr << "\red [src.name] cannot be placed on this spot."
-		return
-	usr << "Attaching [src] to the wall."
-	playsound(src.loc, 'sound/machines/click.ogg', 75, 1)
-	var/constrdir = usr.dir
-	var/constrloc = usr.loc
-	if (!do_after(usr, 30))
-		return
-	switch(fixture_type)
-		if("bulb")
-			newlight = new /obj/machinery/light_construct/small(constrloc)
-		if("tube")
-			newlight = new /obj/machinery/light_construct(constrloc)
-	newlight.dir = constrdir
-	newlight.fingerprints = src.fingerprints
-	newlight.fingerprintshidden = src.fingerprintshidden
-	newlight.fingerprintslast = src.fingerprintslast
-
-	usr.visible_message("[usr.name] attaches [src] to the wall.", \
-		"You attach [src] to the wall.")
-	qdel(src)
-
-/obj/item/light_fixture_frame/small
-	name = "small light fixture frame"
-	desc = "Used for building small lights."
-	icon = 'icons/obj/lighting.dmi'
-	icon_state = "bulb-construct-item"
-	flags = CONDUCT
-	fixture_type = "bulb"
-	sheets_refunded = 1
 
 /obj/machinery/light_construct
 	name = "light fixture frame"
@@ -658,7 +601,7 @@
 	var/status = 0		// LIGHT_OK, LIGHT_BURNED or LIGHT_BROKEN
 	var/base_state
 	var/switchcount = 0	// number of times switched
-	matter = list("metal" = 60)
+	matter = list(DEFAULT_WALL_MATERIAL = 60)
 	var/rigged = 0		// true if rigged to explode
 	var/brightness_range = 2 //how much light it gives off
 	var/brightness_power = 1

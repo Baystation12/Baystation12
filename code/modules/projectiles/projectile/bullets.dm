@@ -45,12 +45,12 @@
 	var/chance = 0
 	if(istype(A, /turf/simulated/wall))
 		var/turf/simulated/wall/W = A
-		chance = round(damage/W.damage_cap*180)
+		chance = round(damage/W.material.integrity*180)
 	else if(istype(A, /obj/machinery/door))
 		var/obj/machinery/door/D = A
 		chance = round(damage/D.maxhealth*180)
 		if(D.glass) chance *= 2
-	else if(istype(A, /obj/structure/girder) || istype(A, /obj/structure/cultgirder))
+	else if(istype(A, /obj/structure/girder))
 		chance = 100
 	else if(istype(A, /obj/machinery) || istype(A, /obj/structure))
 		chance = 25
