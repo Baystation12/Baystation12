@@ -50,7 +50,7 @@
 	/obj/item/weapon/clipboard,\
 	/obj/item/weapon/cell,\
 	/obj/item/weapon/circular_saw,\
-	/obj/item/weapon/hatchet,\
+	/obj/item/weapon/material/hatchet,\
 	/obj/item/weapon/handcuffs,\
 	/obj/item/weapon/hemostat,\
 	/obj/item/weapon/material/knife,\

@@ -84,12 +84,12 @@
 
 /datum/autolathe/recipe/hatchet
 	name = "hatchet"
-	path = /obj/item/weapon/hatchet
+	path = /obj/item/weapon/material/hatchet
 	category = "Tools"
 
 /datum/autolathe/recipe/minihoe
 	name = "mini hoe"
-	path = /obj/item/weapon/minihoe
+	path = /obj/item/weapon/material/minihoe
 	category = "Tools"
 
 /datum/autolathe/recipe/radio_headset
@@ -369,7 +369,7 @@
 
 /datum/autolathe/recipe/tacknife
 	name = "tactical knife"
-	path = /obj/item/weapon/hatchet/tacknife
+	path = /obj/item/weapon/material/hatchet/tacknife
 	hidden = 1
 	category = "Arms and Ammunition"
 

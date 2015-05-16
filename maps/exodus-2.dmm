@@ -1993,7 +1993,7 @@
 "Mq" = (/obj/machinery/door/airlock/medical{name = "Operating Theatre"; req_access = list(45)},/turf/unsimulated/floor{icon_state = "white"},/area/centcom/holding)
 "Mr" = (/obj/structure/table/rack,/obj/item/weapon/gun/energy/ionrifle,/obj/item/weapon/material/harpoon,/obj/item/clothing/suit/space/void/merc,/obj/item/clothing/head/helmet/space/void/merc,/obj/item/clothing/head/helmet/space/void/engineering,/obj/item/clothing/suit/space/void/engineering,/obj/item/weapon/tank/oxygen,/obj/item/weapon/tank/oxygen,/obj/item/clothing/shoes/magboots,/obj/item/clothing/shoes/magboots,/obj/item/weapon/rig/light/stealth,/turf/simulated/shuttle/plating,/area/shuttle/skipjack/station)
 "Ms" = (/obj/machinery/atmospherics/pipe/simple/visible,/turf/simulated/shuttle/plating,/area/shuttle/skipjack/station)
-"Mt" = (/obj/structure/table/standard,/obj/item/seeds/potatoseed,/obj/item/seeds/potatoseed,/obj/item/seeds/ambrosiavulgarisseed,/obj/item/weapon/minihoe,/turf/simulated/shuttle/plating,/area/shuttle/skipjack/station)
+"Mt" = (/obj/structure/table/standard,/obj/item/seeds/potatoseed,/obj/item/seeds/potatoseed,/obj/item/seeds/ambrosiavulgarisseed,/obj/item/weapon/material/minihoe,/turf/simulated/shuttle/plating,/area/shuttle/skipjack/station)
 "Mu" = (/obj/structure/table/standard,/obj/machinery/microwave{pixel_x = -1; pixel_y = 8},/turf/simulated/shuttle/plating,/area/shuttle/skipjack/station)
 "Mv" = (/obj/machinery/vending/hydroseeds,/turf/simulated/shuttle/plating,/area/shuttle/skipjack/station)
 "Mw" = (/obj/machinery/airlock_sensor{frequency = 1331; id_tag = "vox_west_sensor"; pixel_x = 25},/turf/simulated/shuttle/plating,/area/shuttle/skipjack/station)

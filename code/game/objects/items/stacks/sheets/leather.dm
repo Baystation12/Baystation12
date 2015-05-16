@@ -94,7 +94,7 @@
 	if(	istype(W, /obj/item/weapon/material/knife) || \
 		istype(W, /obj/item/weapon/material/kitchen/utensil/knife) || \
 		istype(W, /obj/item/weapon/material/twohanded/fireaxe) || \
-		istype(W, /obj/item/weapon/hatchet) )
+		istype(W, /obj/item/weapon/material/hatchet) )
 
 		//visible message on mobs is defined as visible_message(var/message, var/self_message, var/blind_message)
 		usr.visible_message("\blue \the [usr] starts cutting hair off \the [src]", "\blue You start cutting the hair off \the [src]", "You hear the sound of a knife rubbing against flesh")

@@ -64,7 +64,7 @@
 /datum/surgery_step/slime/saw_core
 	allowed_tools = list(
 	/obj/item/weapon/circular_saw = 100, \
-	/obj/item/weapon/hatchet = 75
+	/obj/item/weapon/material/hatchet = 75
 	)
 
 	min_duration = 50
