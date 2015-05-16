@@ -23,7 +23,8 @@
 	var/blood_color = "#A10808"                          // Red.
 	var/flesh_color = "#FFC896"                          // Pink.
 	var/base_color                                       // Used by changelings. Should also be used for icon previes..
-	var/tail                                             // Name of tail image in species effects icon file.
+	var/tail                                             // Name of tail state in species effects icon file.
+	var/tail_animation                                   // If set, the icon to obtain tail animation states from.
 	var/race_key = 0       	                             // Used for mob icon cache string.
 	var/icon/icon_template                               // Used for mob icon generation for non-32x32 species.
 	var/is_small
@@ -263,10 +264,6 @@
 
 // Builds the HUD using species-specific icons and usable slots.
 /datum/species/proc/build_hud(var/mob/living/carbon/human/H)
-	return
-
-// Grabs the window recieved when you click-drag someone onto you.
-/datum/species/proc/get_inventory_dialogue(var/mob/living/carbon/human/H)
 	return
 
 //Used by xenos understanding larvae and dionaea understanding nymphs.

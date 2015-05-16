@@ -1,0 +1,4 @@
+author: HarpyEagle
+delete-after: True
+changes: 
+  - rscadd: "Adds tail animations for tajaran and unathi. Animations are controlled using emotes."

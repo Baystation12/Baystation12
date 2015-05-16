@@ -152,6 +152,7 @@
 	if(isobserver(usr)) //to stop ghosts from deflating
 		return
 
+	verbs -= /obj/structure/inflatable/verb/hand_deflate
 	deflate()
 
 /obj/structure/inflatable/attack_generic(var/mob/user, var/damage, var/attack_verb)
