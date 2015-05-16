@@ -13,7 +13,6 @@ var/list/name_to_material
 /proc/get_material_by_name(name)
 	if(!name_to_material)
 		populate_material_list()
-
 	return name_to_material[name]
 
 /*
@@ -28,23 +27,30 @@ var/list/name_to_material
 	var/name	          // Tag for use in overlay generation/list population	.
 	var/display_name
 	var/flags = 0
-	var/icon_base = "metal"
+	var/rotting_touch_message = "crumbles under your touch"
+
+	// Shards/tables/structures
+	var/tableslam_noise = 'sound/weapons/tablehit1.ogg'
+	var/shard_type = SHARD_SHRAPNEL
+	var/shard_icon
+	var/shard_can_repair = 1
+
+	// Icons
 	var/icon_colour
+	var/icon_base = "metal"
 	var/icon_reinf = "reinf_metal"
 	var/stack_type
+
+	// Attributes
 	var/cut_delay = 0
 	var/radioactivity
 	var/ignition_point
 	var/melting_point = 1800 // K, walls will take damage if they're next to a fire hotter than this
 	var/integrity = 150      // Damage before wall falls apart, essentially.
 	var/hardness = 60        // Used to determine if a hulk can punch through this wall.
-	var/rotting_touch_message = "crumbles under your touch"
 	var/opacity = 1
 	var/explosion_resistance = 5
-	var/shard_type = SHARD_SHRAPNEL
-	var/shard_icon
-	var/shard_can_repair = 1
-	var/tableslam_noise = 'sound/weapons/tablehit1.ogg'
+	var/weight = 20
 
 /material/New()
 	..()
@@ -52,6 +58,15 @@ var/list/name_to_material
 		display_name = name
 	if(!shard_icon)
 		shard_icon = shard_type
+
+/material/proc/get_blunt_damage()
+	return weight //todo
+
+/material/proc/get_edge_damage()
+	return round(hardness/4) //todo
+
+/material/proc/products_need_process()
+	return (radioactivity>0) //todo
 
 /material/placeholder
 	name = "placeholder"
@@ -72,7 +87,7 @@ var/list/name_to_material
 
 /material/proc/place_shard(var/turf/target)
 	if(shard_type)
-		return new /obj/item/weapon/shard(target, src)
+		return new /obj/item/weapon/material/shard(target, src.name)
 
 /material/proc/is_brittle()
 	return !!(flags & MATERIAL_BRITTLE)
@@ -84,6 +99,7 @@ var/list/name_to_material
 	icon_base = "stone"
 	icon_reinf = "reinf_stone"
 	icon_colour = "#007A00"
+	weight = 22
 
 /material/diamond
 	name = "diamond"
@@ -94,16 +110,21 @@ var/list/name_to_material
 	opacity = 0.4
 	shard_type = SHARD_SHARD
 	tableslam_noise = 'sound/effects/Glasshit.ogg'
+	hardness = 100
 
 /material/gold
 	name = "gold"
 	stack_type = /obj/item/stack/sheet/mineral/gold
 	icon_colour = "#EDD12F"
+	weight = 24
+	hardness = 40
 
 /material/silver
 	name = "silver"
 	stack_type = /obj/item/stack/sheet/mineral/silver
 	icon_colour = "#D1E6E3"
+	weight = 22
+	hardness = 50
 
 /material/phoron
 	name = "phoron"
@@ -112,6 +133,7 @@ var/list/name_to_material
 	icon_base = "stone"
 	icon_colour = "#FC2BC5"
 	shard_type = SHARD_SHARD
+	hardness = 30
 
 /material/sandstone
 	name = "sandstone"
@@ -120,6 +142,8 @@ var/list/name_to_material
 	icon_reinf = "reinf_stone"
 	icon_colour = "#D9C179"
 	shard_type = SHARD_STONE_PIECE
+	weight = 22
+	hardness = 55
 
 /material/steel
 	name = DEFAULT_WALL_MATERIAL
@@ -143,6 +167,8 @@ var/list/name_to_material
 	icon_reinf = "reinf_over"
 	icon_colour = "#777777"
 	explosion_resistance = 25
+	hardness = 80
+	weight = 23
 
 /material/glass
 	name = "glass"
@@ -153,6 +179,8 @@ var/list/name_to_material
 	integrity = 100
 	shard_type = SHARD_SHARD
 	tableslam_noise = 'sound/effects/Glasshit.ogg'
+	hardness = 15
+	weight = 15
 
 /material/glass/phoron
 	name = "phoron glass"
@@ -161,6 +189,8 @@ var/list/name_to_material
 	ignition_point = 300
 	integrity = 200 // idk why but phoron windows are strong, so.
 	icon_colour = "#FC2BC5"
+	hardness = 10
+	weight = 10
 
 /material/plastic
 	name = "plastic"
@@ -169,6 +199,8 @@ var/list/name_to_material
 	icon_base = "solid"
 	icon_reinf = "reinf_over"
 	icon_colour = "#CCCCCC"
+	hardness = 10
+	weight = 12
 
 /material/osmium
 	name = "osmium"
@@ -189,11 +221,13 @@ var/list/name_to_material
 	name = "platinum"
 	stack_type = /obj/item/stack/sheet/mineral/platinum
 	icon_colour = "#9999FF"
+	weight = 27
 
 /material/iron
 	name = "iron"
 	stack_type = /obj/item/stack/sheet/mineral/iron
 	icon_colour = "#5C5454"
+	weight = 22
 
 /material/wood
 	name = "wood"
@@ -204,6 +238,8 @@ var/list/name_to_material
 	explosion_resistance = 2
 	shard_type = SHARD_SPLINTER
 	shard_can_repair = 0 // you can't weld splinters back into planks
+	hardness = 15
+	weight = 18
 
 /material/wood/holographic
 	name = "holographic wood"

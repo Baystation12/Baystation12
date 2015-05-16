@@ -136,11 +136,11 @@
 		if(3)
 			item_type = "[pick("fork","spoon","knife")]"
 			if(prob(25))
-				new_item = new /obj/item/weapon/kitchen/utensil/fork(src.loc)
+				new_item = new /obj/item/weapon/material/kitchen/utensil/fork(src.loc)
 			else if(prob(50))
-				new_item = new /obj/item/weapon/kitchen/utensil/knife(src.loc)
+				new_item = new /obj/item/weapon/material/kitchen/utensil/knife(src.loc)
 			else
-				new_item = new /obj/item/weapon/kitchen/utensil/spoon(src.loc)
+				new_item = new /obj/item/weapon/material/kitchen/utensil/spoon(src.loc)
 			additional_desc = "[pick("It's like no [item_type] you've ever seen before",\
 			"It's a mystery how anyone is supposed to eat with this",\
 			"You wonder what the creator's mouth was shaped like")]."
@@ -167,7 +167,7 @@
 				"You wonder what kind of music was made with it")]."
 		if(6)
 			item_type = "[pick("bladed knife","serrated blade","sharp cutting implement")]"
-			new_item = new /obj/item/weapon/kitchenknife(src.loc)
+			new_item = new /obj/item/weapon/material/knife(src.loc)
 			additional_desc = "[pick("It doesn't look safe.",\
 			"It looks wickedly jagged",\
 			"There appear to be [pick("dark red","dark purple","dark green","dark blue")] stains along the edges")]."
@@ -315,9 +315,9 @@
 			apply_material_decorations = 0
 		if(22)
 			if(prob(50))
-				new_item = new /obj/item/weapon/shard(src.loc)
+				new_item = new /obj/item/weapon/material/shard(src.loc)
 			else
-				new_item = new /obj/item/weapon/shard/phoron(src.loc)
+				new_item = new /obj/item/weapon/material/shard/phoron(src.loc)
 			apply_prefix = 0
 			apply_image_decorations = 0
 			apply_material_decorations = 0
@@ -337,7 +337,7 @@
 			apply_material_decorations = 0
 		if(25)
 			apply_prefix = 0
-			new_item = new /obj/item/weapon/katana(src.loc)
+			new_item = new /obj/item/weapon/material/katana(src.loc)
 			new_item.force = 10
 			item_type = new_item.name
 		if(26)
