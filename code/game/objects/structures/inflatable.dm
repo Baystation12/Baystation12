@@ -1,5 +1,5 @@
 /obj/item/inflatable
-	name = "Inflatable"
+	name = "inflatable"
 	w_class = 2
 	icon = 'icons/obj/inflatable.dmi'
 
@@ -10,12 +10,12 @@
 
 
 /obj/item/inflatable/wall/attack_self(mob/user)
-		playsound(loc, 'sound/items/zip.ogg', 75, 1)
-		user << "\blue You inflate [src]."
-		var/obj/structure/inflatable/wall/R = new /obj/structure/inflatable/wall(user.loc)
-		src.transfer_fingerprints_to(R)
-		R.add_fingerprint(user)
-		qdel(src)
+	playsound(loc, 'sound/items/zip.ogg', 75, 1)
+	user << "\blue You inflate [src]."
+	var/obj/structure/inflatable/wall/R = new /obj/structure/inflatable/wall(user.loc)
+	src.transfer_fingerprints_to(R)
+	R.add_fingerprint(user)
+	qdel(src)
 
 /obj/item/inflatable/wall/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/weapon/inflatable_dispenser))
@@ -36,12 +36,12 @@
 	icon_state = "folded_door"
 
 /obj/item/inflatable/door/attack_self(mob/user)
-		playsound(loc, 'sound/items/zip.ogg', 75, 1)
-		user << "\blue You inflate [src]."
-		var/obj/structure/inflatable/door/R = new /obj/structure/inflatable/door(user.loc)
-		src.transfer_fingerprints_to(R)
-		R.add_fingerprint(user)
-		qdel(src)
+	playsound(loc, 'sound/items/zip.ogg', 75, 1)
+	user << "\blue You inflate [src]."
+	var/obj/structure/inflatable/door/R = new /obj/structure/inflatable/door(user.loc)
+	src.transfer_fingerprints_to(R)
+	R.add_fingerprint(user)
+	qdel(src)
 
 /obj/item/inflatable/door/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/weapon/inflatable_dispenser))

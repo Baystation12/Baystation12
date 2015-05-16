@@ -320,7 +320,7 @@
 	icon_state = "shock"
 
 /obj/item/weapon/inflatable_dispenser
-	name = "Inflatables Dispenser"
+	name = "inflatables dispenser"
 	desc = "Small device which allows rapid deployment and removal of inflatables."
 	icon = 'icons/obj/storage.dmi'
 	icon_state = "inf_deployer"
