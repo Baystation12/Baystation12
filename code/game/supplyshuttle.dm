@@ -25,6 +25,7 @@ var/list/mechtoys = list(
 
 /obj/item/weapon/paper/manifest
 	name = "supply manifest"
+	var/is_copy = 1
 
 /area/supply/station
 	name = "Supply Shuttle"
@@ -197,8 +198,8 @@ var/list/mechtoys = list(
 					// Sell manifests
 					var/atom/A = atom
 					if(find_slip && istype(A,/obj/item/weapon/paper/manifest))
-						var/obj/item/weapon/paper/slip = A
-						if(slip.stamped && slip.stamped.len) //yes, the clown stamp will work. clown is the highest authority on the station, it makes sense
+						var/obj/item/weapon/paper/manifest/slip = A
+						if(!slip.is_copy && slip.stamped && slip.stamped.len) //yes, the clown stamp will work. clown is the highest authority on the station, it makes sense
 							points += points_per_slip
 							find_slip = 0
 						continue
@@ -256,6 +257,7 @@ var/list/mechtoys = list(
 			//supply manifest generation begin
 
 			var/obj/item/weapon/paper/manifest/slip = new /obj/item/weapon/paper/manifest(A)
+			slip.is_copy = 0
 			slip.info = "<h3>[command_name()] Shipping Manifest</h3><hr><br>"
 			slip.info +="Order #[SO.ordernum]<br>"
 			slip.info +="Destination: [station_name]<br>"
