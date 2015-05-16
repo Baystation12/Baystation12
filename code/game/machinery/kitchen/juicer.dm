@@ -17,10 +17,13 @@
 		/obj/item/weapon/reagent_containers/food/snacks/grown/banana  = "banana",
 		/obj/item/weapon/reagent_containers/food/snacks/grown/potato = "potato",
 		/obj/item/weapon/reagent_containers/food/snacks/grown/lemon = "lemonjuice",
+		/obj/item/weapon/reagent_containers/food/snacks/grown/apple = "applejuice",
 		/obj/item/weapon/reagent_containers/food/snacks/grown/orange = "orangejuice",
 		/obj/item/weapon/reagent_containers/food/snacks/grown/lime = "limejuice",
 		/obj/item/weapon/reagent_containers/food/snacks/watermelonslice = "watermelonjuice",
 		/obj/item/weapon/reagent_containers/food/snacks/grown/grapes = "grapejuice",
+		/obj/item/weapon/reagent_containers/food/snacks/grown/ginger = "gingerjuice",
+		/obj/item/weapon/reagent_containers/food/snacks/grown/strawberry = "strawberryjuice",
 		/obj/item/weapon/reagent_containers/food/snacks/grown/poisonberries = "poisonberryjuice",
 	)
 

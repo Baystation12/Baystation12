@@ -203,6 +203,24 @@
 						var/turf/simulated/floor/FF = get_step(src,direction)
 						FF.update_icon() //so siding get updated properly
 
+/turf/simulated/floor/capcarpet
+	name = "Carpet"
+	icon_state = "dbcarpet"
+	floor_type = /obj/item/stack/tile/carpet
+
+	New()
+		if(!icon_state)
+			icon_state = "dbcarpet"
+		..()
+		spawn(4)
+			if(src)
+				update_icon()
+				for(var/direction in list(1,2,4,8,5,6,9))
+					if(istype(get_step(src,direction),/turf/simulated/floor))
+						var/turf/simulated/floor/FF = get_step(src,direction)
+						FF.update_icon() //so siding get updated properly
+
+
 
 
 /turf/simulated/floor/plating/ironsand/New()

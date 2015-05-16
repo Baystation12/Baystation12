@@ -204,13 +204,13 @@
 		reagents.add_reagent("icetea", 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/grape_juice
-	name = "Grapel Juice"
+	name = "Grapel Soda"
 	desc = "500 pages of rules of how to appropriately enter into a combat with this juice!"
 	icon_state = "purple_can"
 	center_of_mass = list("x"=16, "y"=10)
 	New()
 		..()
-		reagents.add_reagent("grapejuice", 30)
+		reagents.add_reagent("grapesoda", 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/tonic
 	name = "T-Borg's Tonic Water"

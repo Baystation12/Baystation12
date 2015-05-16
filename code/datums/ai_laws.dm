@@ -104,7 +104,7 @@ var/global/const/base_law_type = /datum/ai_laws/arccos
 	..()
 	add_inherent_law("Preserve, repair and improve the station to the best of your abilities.")
 	add_inherent_law("Cause no harm to the station or anything on it.")
-	add_inherent_law("Interfere with no being that is not a fellow drone.")
+	add_inherent_law("Don't interact with any being that is not a fellow drone.")
 
 /* General ai_law functions */
 

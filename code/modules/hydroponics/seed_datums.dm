@@ -1244,6 +1244,40 @@ proc/populate_seed_list()
 	potency = 10
 	growth_stages = 1
 
+/datum/seed/ginger
+	name = "ginger"
+	seed_name = "ginger"
+	display_name = "ginger roots"
+	packet_icon = "seed-ginger"
+	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/ginger)
+	plant_icon = "ginger"
+	harvest_repeat = 1
+	chems = list("nutriment" = list(1,10))
+
+	lifespan = 55
+	maturation = 6
+	production = 6
+	yield = 2
+	potency = 10
+	growth_stages = 3
+
+/datum/seed/strawberry
+	name = "strawberry"
+	seed_name = "strawberry"
+	display_name = "strawberries"
+	packet_icon = "seed-strawberry"
+	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/strawberry)
+	plant_icon = "strawberry"
+	harvest_repeat = 1
+	chems = list("nutriment" = list(1,10))
+
+	lifespan = 20
+	maturation = 5
+	production = 5
+	yield = 4
+	potency = 10
+	growth_stages = 6
+
 /datum/seed/shand
 	name = "shand"
 	seed_name = "S'randar's hand"

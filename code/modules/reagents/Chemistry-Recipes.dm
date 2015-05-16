@@ -1572,6 +1572,13 @@ datum
 			required_reagents = list("gin" = 2, "vermouth" = 1)
 			result_amount = 3
 
+		appletini
+			name = "Appletini"
+			id = "appletini"
+			result = "appletini"
+			required_reagents = list("martini" = 2, "applejuice" = 1)
+			result_amount = 3
+
 		vodkamartini
 			name = "Vodka Martini"
 			id = "vodkamartini"
@@ -1663,6 +1670,48 @@ datum
 			required_reagents = list ("beer" = 1, "ale" = 2)
 			result_amount = 3
 
+		spritzer
+			name = "Whitewine Spritzer"
+			id = "spritzer"
+			result = "spritzer"
+			required_reagents = list ("whitewine" = 1, "sodawater" = 2)
+			result_amount = 3
+
+		crows_nest
+			name = "The Crows Nest"
+			id = "crowsnest"
+			result = "crowsnest"
+			required_reagents = list ("mangojuice" = 1, "whiskey" = 2)
+			result_amount = 3
+
+		australian_beer
+			name = "Australian Beer"
+			id = "australianbeer"
+			result = "australianbeer"
+			required_reagents = list ("water" = 1, "beer" = 1)
+			result_amount = 1
+
+		strawberry_daiquiri
+			name = "Strawberry_Daiquiri"
+			id = "strawberrydaiquiri"
+			result = "strawberrydaiquiri"
+			required_reagents = list("strawberryjuice" = 2, "rum" = 2)
+			result_amount = 4
+
+		ginger_beer
+			name = "Ginger Beer"
+			id = "gingerbeer"
+			result = "gingerbeer"
+			required_reagents = list("gingerjuice" = 2, "beer" = 1)
+			result_amount = 3
+
+		ginger_ale
+			name = "Ginger Ale"
+			id = "gingerale"
+			result = "gingerale"
+			required_reagents = list("gingerjuice" = 2, "ale" = 1)
+			result_amount = 3
+
 		hooch
 			name = "Hooch"
 			id = "hooch"
@@ -1696,6 +1745,13 @@ datum
 			id = "margarita"
 			result = "margarita"
 			required_reagents = list("tequilla" = 2, "limejuice" = 1)
+			result_amount = 3
+
+		watermelon_vodka
+			name = "Watermelon Vodka"
+			id = "watermelonvodka"
+			result = "watermelonvodka"
+			required_reagents = list("vodka" = 2, "watermelonjuice" = 1)
 			result_amount = 3
 
 		longislandicedtea
@@ -1767,6 +1823,13 @@ datum
 			result = "bahama_mama"
 			required_reagents = list("rum" = 2, "orangejuice" = 2, "limejuice" = 1, "ice" = 1)
 			result_amount = 6
+
+		spacepunch
+			name = "Punch"
+			id = "spacepunch"
+			result = "spacepunch"
+			required_reagents = list("grenadine" = 1, "space-up"= 2)
+			result_amount = 3
 
 		singulo
 			name = "Singulo"
@@ -1884,6 +1947,13 @@ datum
 			result = "acidspit"
 			required_reagents = list("sacid" = 1, "wine" = 5)
 			result_amount = 6
+
+		fireballwhiskey
+			name = "Fireball Whiskey"
+			id = "fireballwhiskey"
+			result = "fireballwhiskey"
+			required_reagents = list("whiskey" = 3, "capsaicin" = 1)
+			result_amount = 3
 
 		amasec
 			name = "Amasec"
@@ -2010,6 +2080,97 @@ datum
 			result = "milkshake"
 			required_reagents = list("cream" = 1, "ice" = 2, "milk" = 2)
 			result_amount = 5
+
+		strawberrymilkshake
+			name = "Strawberry Milkshake"
+			id = "strawberrymilkshake"
+			result = "strawberrymilkshake"
+			required_reagents = list("strawberryjuice" = 1, "milkshake" = 2)
+			result_amount = 3
+
+		bananamilkshake
+			name = "Banana Milkshake"
+			id = "bananamilkshake"
+			result = "bananamilkshake"
+			required_reagents = list("bananajuice" = 1, "milkshake" = 2)
+			result_amount = 3
+
+		orangemilkshake
+			name = "Orange Milkshake"
+			id = "orangemilkshake"
+			result = "orangemilkshake"
+			required_reagents = list("orangejuice" = 1, "milkshake" = 2)
+			result_amount = 3
+
+		limemilkshake
+			name = "Lime Milkshake"
+			id = "limemilkshake"
+			result = "limemilkshake"
+			required_reagents = list("limejuice" = 1, "milkshake" = 2)
+			result_amount = 3
+
+		watermelonmilkshake
+			name = "Watermelon Milkshake"
+			id = "watermelonmilkshake"
+			result = "watermelonmilkshake"
+			required_reagents = list("watermelonjuice" = 1, "milkshake" = 2)
+			result_amount = 3
+
+		tomatomilkshake
+			name = "Tomato Milkshake"
+			id = "tomatomilkshake"
+			result = "tomatomilkshake"
+			required_reagents = list("tomatojuice" = 1, "milkshake" = 2)
+			result_amount = 3
+
+		lemonmilkshake
+			name = "Lemon Milkshake"
+			id = "lemonmilkshake"
+			result = "lemonmilkshake"
+			required_reagents = list("lemonjuice" = 1, "milkshake" = 2)
+			result_amount = 3
+
+		mangomilkshake
+			name = "Mango Milkshake"
+			id = "mangomilkshake"
+			result = "mangomilkshake"
+			required_reagents = list("mangojuice" = 1, "milkshake" = 2)
+			result_amount = 3
+
+		gingermilkshake
+			name = "Ginger Milkshake"
+			id = "gingermilkshake"
+			result = "gingermilkshake"
+			required_reagents = list("gingerjuice" = 1, "milkshake" = 2)
+			result_amount = 3
+
+		berrymilkshake
+			name = "Berry Milkshake"
+			id = "berrymilkshake"
+			result = "berrymilkshake"
+			required_reagents = list("berryjuice" = 1, "milkshake" = 2)
+			result_amount = 3
+
+		grapemilkshake
+			name = "Grape Milkshake"
+			id = "grapemilkshake"
+			result = "grapemilkshake"
+			required_reagents = list("grapejuice" = 1, "milkshake" = 2)
+			result_amount = 3
+
+		grenadinemilkshake
+			name = "Grenadine Milkshake"
+			id = "grenadinemilkshake"
+			result = "grenadinemilkshake"
+			required_reagents = list("grenadine" = 1, "milkshake" = 2)
+			result_amount = 3
+
+		potatomilkshake
+			name = "Potato Milkshake"
+			id = "potatomilkshake"
+			result = "potatomilkshake"
+			required_reagents = list("potatojuice" = 1, "milkshake" = 2)
+			result_amount = 3
 
 		rewriter
 			name = "Rewriter"

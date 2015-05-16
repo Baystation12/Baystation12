@@ -185,7 +185,7 @@
 	energy = 100
 	accept_glass = 1
 	max_energy = 100
-	dispensable_reagents = list("water","ice","coffee","cream","tea","icetea","cola","spacemountainwind","dr_gibb","space_up","tonic","sodawater","lemon_lime","sugar","orangejuice","limejuice","watermelonjuice")
+	dispensable_reagents = list("water","ice","coffee","milk","tea","icetea","cola","spacemountainwind","dr_gibb","space_up","mangojuice","sodawater","lemon_lime","sugar","orangejuice","limejuice","watermelonjuice")
 
 /obj/machinery/chem_dispenser/soda/attackby(var/obj/item/weapon/B as obj, var/mob/user as mob)
 	..()
@@ -210,7 +210,7 @@
 	accept_glass = 1
 	max_energy = 100
 	desc = "A technological marvel, supposedly able to mix just the mixture you'd like to drink the moment you ask for one."
-	dispensable_reagents = list("lemon_lime","sugar","orangejuice","limejuice","sodawater","tonic","beer","kahlua","whiskey","wine","vodka","gin","rum","tequilla","vermouth","cognac","ale","mead")
+	dispensable_reagents = list("sodiumchloride","sugar","orangejuice","limejuice","sodawater","tonic","beer","kahlua","whiskey","wine","vodka","gin","rum","tequilla","vermouth","cognac","ale","mead")
 
 /obj/machinery/chem_dispenser/beer/attackby(var/obj/item/weapon/B as obj, var/mob/user as mob)
 	..()
@@ -863,7 +863,10 @@
 		/obj/item/weapon/reagent_containers/food/snacks/grown/banana = list("banana" = 0),
 		/obj/item/weapon/reagent_containers/food/snacks/grown/potato = list("potato" = 0),
 		/obj/item/weapon/reagent_containers/food/snacks/grown/lemon = list("lemonjuice" = 0),
+		/obj/item/weapon/reagent_containers/food/snacks/grown/apple = list("applejuice" = 0),
 		/obj/item/weapon/reagent_containers/food/snacks/grown/orange = list("orangejuice" = 0),
+		/obj/item/weapon/reagent_containers/food/snacks/grown/strawberry = list("strawberryjuice" = 0),
+		/obj/item/weapon/reagent_containers/food/snacks/grown/ginger = list("gingerjuice" = 0),
 		/obj/item/weapon/reagent_containers/food/snacks/grown/lime = list("limejuice" = 0),
 		/obj/item/weapon/reagent_containers/food/snacks/watermelonslice = list("watermelonjuice" = 0),
 		/obj/item/weapon/reagent_containers/food/snacks/grown/grapes = list("grapejuice" = 0),

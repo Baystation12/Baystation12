@@ -1669,10 +1669,10 @@ datum
 				..()
 				return
 
-		toxin/minttoxin
-			name = "Mint Toxin"
-			id = "minttoxin"
-			description = "Useful for dealing with undesirable customers."
+		toxin/menthol
+			name = "Menthol"
+			id = "menthol"
+			description = "Minty Fresh."
 			reagent_state = LIQUID
 			color = "#CF3600" // rgb: 207, 54, 0
 			toxpwr = 0
@@ -2609,6 +2609,16 @@ datum
 			glass_name = "glass of grape juice"
 			glass_desc = "It's grrrrrape!"
 
+		drink/mangojuice
+			name = "Mango Juice"
+			id = "mangojuice"
+			description = "Smells oddly of Bourbon!"
+			color = "#863333" // rgb: 134, 51, 51
+
+			glass_icon_state = "mangojuice"
+			glass_name = "glass of mango juice"
+			glass_desc = "Smells oddly of Bourbon!"
+
 		drink/grapesoda
 			name = "Grape Soda"
 			id = "grapesoda"
@@ -2645,6 +2655,26 @@ datum
 			glass_name = "glass of watermelon juice"
 			glass_desc = "Delicious juice made from watermelon."
 
+		drink/strawberryjuice
+			name = "Strawberry Juice"
+			id = "strawberryjuice"
+			description = "Like summer attacked your tastebuds."
+			color = "#af0000" // rgb: 175, 0, 0
+
+			glass_icon_state = "glass_red"
+			glass_name = "glass of strawberry juice"
+			glass_desc = "Delicious juice made from strawberry."
+
+		drink/gingerjuice
+			name = "Ginger Juice"
+			id = "gingerjuice"
+			description = "Why would you ever drink this space jesus christ."
+			color = "#af0000" // rgb: 175, 0, 0
+
+			glass_icon_state = "gingerjuice"
+			glass_name = "glass of ginger juice"
+			glass_desc = "Why would you ever drink this space jesus christ.."
+
 		drink/lemonjuice
 			name = "Lemon Juice"
 			id = "lemonjuice"
@@ -2654,6 +2684,16 @@ datum
 			glass_icon_state = "lemonjuice"
 			glass_name = "glass of lemon juice"
 			glass_desc = "Sour..."
+
+		drink/applejuice
+			name = "Apple Juice"
+			id = "applejuice"
+			description = "Best part of waking up."
+			color = "#863333" // rgb: 175, 175, 0
+
+			glass_icon_state = "applejuice"
+			glass_name = "glass of apple juice"
+			glass_desc = "Reminds you of home"
 
 		drink/banana
 			name = "Banana Juice"
@@ -2996,6 +3036,17 @@ datum
 			glass_name = "glass of Brown Star"
 			glass_desc = "It's not what it sounds like..."
 
+		drink/cold/spacepunch
+			name = "Punch"
+			description = "Its a drink not instructions!"
+			id = "spacepunch"
+			color = "#9F3400" // rgb: 159, 052, 000
+			adj_temp = - 2
+
+			glass_icon_state = "spacepunch"
+			glass_name = "glass of punch"
+			glass_desc = "Its a drink not instructions!"
+
 		drink/cold/milkshake
 			name = "Milkshake"
 			description = "Glorious brainfreezing mixture."
@@ -3006,6 +3057,56 @@ datum
 			glass_icon_state = "milkshake"
 			glass_name = "glass of milkshake"
 			glass_desc = "Glorious brainfreezing mixture."
+			glass_center_of_mass = list("x"=16, "y"=7)
+
+			on_mob_life(var/mob/living/M as mob)
+				if(!M)
+					M = holder.my_atom
+				if(prob(1))
+					M.emote("shiver")
+				M.bodytemperature = max(M.bodytemperature - 10 * TEMPERATURE_DAMAGE_COEFFICIENT, 0)
+				if(istype(M, /mob/living/carbon/slime))
+					M.bodytemperature = max(M.bodytemperature - rand(10,20), 0)
+				holder.remove_reagent("capsaicin", 5)
+				holder.remove_reagent(src.id, FOOD_METABOLISM)
+				..()
+				return
+
+		drink/cold/strawberrymilkshake
+			name = "Strawberry Milkshake"
+			description = "Glorious brainfreezing mixture now with hints of strawberry!"
+			id = "strawberrymilkshake"
+			color = "#AEE5E4" // rgb" 174, 229, 228
+			adj_temp = -9
+
+			glass_icon_state = "strawberrymilkshake"
+			glass_name = "glass of strawberry milkshake"
+			glass_desc = "Glorious brainfreezing mixture now with hints of strawberry!"
+			glass_center_of_mass = list("x"=16, "y"=7)
+
+			on_mob_life(var/mob/living/M as mob)
+				if(!M)
+					M = holder.my_atom
+				if(prob(1))
+					M.emote("shiver")
+				M.bodytemperature = max(M.bodytemperature - 10 * TEMPERATURE_DAMAGE_COEFFICIENT, 0)
+				if(istype(M, /mob/living/carbon/slime))
+					M.bodytemperature = max(M.bodytemperature - rand(10,20), 0)
+				holder.remove_reagent("capsaicin", 5)
+				holder.remove_reagent(src.id, FOOD_METABOLISM)
+				..()
+				return
+
+		drink/cold/bananamilkshake
+			name = "Banana Milkshake"
+			description = "Glorious brainfreezing mixture now with hints of banana!"
+			id = "bananamilkshake"
+			color = "#AEE5E4" // rgb" 174, 229, 228
+			adj_temp = -9
+
+			glass_icon_state = "bananamilkshake"
+			glass_name = "glass of banana milkshake"
+			glass_desc = "Glorious brainfreezing mixture now with hints of banana!"
 			glass_center_of_mass = list("x"=16, "y"=7)
 
 			on_mob_life(var/mob/living/M as mob)
@@ -3037,6 +3138,330 @@ datum
 				M.make_jittery(5)
 				return
 
+		drink/cold/orangemilkshake
+			name = "Orange Milkshake"
+			description = "Glorious brainfreezing mixture now with hints of orange!"
+			id = "orangemilkshake"
+			color = "#AEE5E4" // rgb" 174, 229, 228
+			adj_temp = -9
+
+			glass_icon_state = "orangemilkshake"
+			glass_name = "glass of orange milkshake"
+			glass_desc = "Glorious brainfreezing mixture now with hints of orange!"
+			glass_center_of_mass = list("x"=16, "y"=7)
+
+			on_mob_life(var/mob/living/M as mob)
+				if(!M)
+					M = holder.my_atom
+				if(prob(1))
+					M.emote("shiver")
+				M.bodytemperature = max(M.bodytemperature - 10 * TEMPERATURE_DAMAGE_COEFFICIENT, 0)
+				if(istype(M, /mob/living/carbon/slime))
+					M.bodytemperature = max(M.bodytemperature - rand(10,20), 0)
+				holder.remove_reagent("capsaicin", 5)
+				holder.remove_reagent(src.id, FOOD_METABOLISM)
+				..()
+				return
+
+		drink/cold/limemilkshake
+			name = "Lime Milkshake"
+			description = "Glorious brainfreezing mixture now with hints of lime!"
+			id = "limemilkshake"
+			color = "#AEE5E4" // rgb" 174, 229, 228
+			adj_temp = -9
+
+			glass_icon_state = "limemilkshake"
+			glass_name = "glass of lime milkshake"
+			glass_desc = "Glorious brainfreezing mixture now with hints of lime!"
+			glass_center_of_mass = list("x"=16, "y"=7)
+
+			on_mob_life(var/mob/living/M as mob)
+				if(!M)
+					M = holder.my_atom
+				if(prob(1))
+					M.emote("shiver")
+				M.bodytemperature = max(M.bodytemperature - 10 * TEMPERATURE_DAMAGE_COEFFICIENT, 0)
+				if(istype(M, /mob/living/carbon/slime))
+					M.bodytemperature = max(M.bodytemperature - rand(10,20), 0)
+				holder.remove_reagent("capsaicin", 5)
+				holder.remove_reagent(src.id, FOOD_METABOLISM)
+				..()
+				return
+
+		drink/cold/watermelonmilkshake
+			name = "Watermelon Milkshake"
+			description = "Glorious brainfreezing mixture now with hints of watermelon!"
+			id = "watermelonmilkshake"
+			color = "#AEE5E4" // rgb" 174, 229, 228
+			adj_temp = -9
+
+			glass_icon_state = "watermelonmilkshake"
+			glass_name = "glass of watermelon milkshake"
+			glass_desc = "Glorious brainfreezing mixture now with hints of watermelon!"
+			glass_center_of_mass = list("x"=16, "y"=7)
+
+			on_mob_life(var/mob/living/M as mob)
+				if(!M)
+					M = holder.my_atom
+				if(prob(1))
+					M.emote("shiver")
+				M.bodytemperature = max(M.bodytemperature - 10 * TEMPERATURE_DAMAGE_COEFFICIENT, 0)
+				if(istype(M, /mob/living/carbon/slime))
+					M.bodytemperature = max(M.bodytemperature - rand(10,20), 0)
+				holder.remove_reagent("capsaicin", 5)
+				holder.remove_reagent(src.id, FOOD_METABOLISM)
+				..()
+				return
+
+		drink/cold/tomatomilkshake
+			name = "Tomato Milkshake"
+			description = "The distant cousin of the Bloody Mary."
+			id = "tomatomilkshake"
+			color = "#AEE5E4" // rgb" 174, 229, 228
+			adj_temp = -9
+
+			glass_icon_state = "tomatomilkshake"
+			glass_name = "glass of tomato milkshake"
+			glass_desc = "The distant cousin of the Bloody Mary."
+			glass_center_of_mass = list("x"=16, "y"=7)
+
+			on_mob_life(var/mob/living/M as mob)
+				if(!M)
+					M = holder.my_atom
+				if(prob(1))
+					M.emote("shiver")
+				M.bodytemperature = max(M.bodytemperature - 10 * TEMPERATURE_DAMAGE_COEFFICIENT, 0)
+				if(istype(M, /mob/living/carbon/slime))
+					M.bodytemperature = max(M.bodytemperature - rand(10,20), 0)
+				holder.remove_reagent("capsaicin", 5)
+				holder.remove_reagent(src.id, FOOD_METABOLISM)
+				..()
+				return
+
+		drink/cold/lemonmilkshake
+			name = "Lemon Milkshake"
+			description = "Glorious brainfreezing mixture now with a citrus twist!"
+			id = "lemonmilkshake"
+			color = "#AEE5E4" // rgb" 174, 229, 228
+			adj_temp = -9
+
+			glass_icon_state = "lemonmilkshake"
+			glass_name = "glass of lemon milkshake"
+			glass_desc = "Glorious brainfreezing mixture now with a citrus twist!"
+			glass_center_of_mass = list("x"=16, "y"=7)
+
+			on_mob_life(var/mob/living/M as mob)
+				if(!M)
+					M = holder.my_atom
+				if(prob(1))
+					M.emote("shiver")
+				M.bodytemperature = max(M.bodytemperature - 10 * TEMPERATURE_DAMAGE_COEFFICIENT, 0)
+				if(istype(M, /mob/living/carbon/slime))
+					M.bodytemperature = max(M.bodytemperature - rand(10,20), 0)
+				holder.remove_reagent("capsaicin", 5)
+				holder.remove_reagent(src.id, FOOD_METABOLISM)
+				..()
+				return
+
+		drink/cold/mangomilkshake
+			name = "Mango Milkshake"
+			description = "Glorious brainfreezing mixture now with a tropical twist!"
+			id = "mangomilkshake"
+			color = "#AEE5E4" // rgb" 174, 229, 228
+			adj_temp = -9
+
+			glass_icon_state = "mangomilkshake"
+			glass_name = "glass of mango milkshake"
+			glass_desc = "Glorious brainfreezing mixture now with a tropical twist!"
+			glass_center_of_mass = list("x"=16, "y"=7)
+
+			on_mob_life(var/mob/living/M as mob)
+				if(!M)
+					M = holder.my_atom
+				if(prob(1))
+					M.emote("shiver")
+				M.bodytemperature = max(M.bodytemperature - 10 * TEMPERATURE_DAMAGE_COEFFICIENT, 0)
+				if(istype(M, /mob/living/carbon/slime))
+					M.bodytemperature = max(M.bodytemperature - rand(10,20), 0)
+				holder.remove_reagent("capsaicin", 5)
+				holder.remove_reagent(src.id, FOOD_METABOLISM)
+				..()
+				return
+
+		drink/cold/gingermilkshake
+			name = "Ginger Milkshake"
+			description = "Glorious brainfreezing mixture but oh god the flavour."
+			id = "gingermilkshake"
+			color = "#AEE5E4" // rgb" 174, 229, 228
+			adj_temp = -9
+
+			glass_icon_state = "gingermilkshake"
+			glass_name = "glass of ginger milkshake"
+			glass_desc = "Glorious brainfreezing mixture but oh god the flavour."
+			glass_center_of_mass = list("x"=16, "y"=7)
+
+			on_mob_life(var/mob/living/M as mob)
+				if(!M)
+					M = holder.my_atom
+				if(prob(1))
+					M.emote("shiver")
+				M.bodytemperature = max(M.bodytemperature - 10 * TEMPERATURE_DAMAGE_COEFFICIENT, 0)
+				if(istype(M, /mob/living/carbon/slime))
+					M.bodytemperature = max(M.bodytemperature - rand(10,20), 0)
+				holder.remove_reagent("capsaicin", 5)
+				holder.remove_reagent(src.id, FOOD_METABOLISM)
+				..()
+				return
+
+		drink/cold/chocolatemilkshake
+			name = "chocolate Milkshake"
+			description = "Glorious brainfreezing mixture AND ITS CHOCOLATE!"
+			id = "chocolatemilkshake"
+			color = "#AEE5E4" // rgb" 174, 229, 228
+			adj_temp = -9
+
+			glass_icon_state = "chocolatemilkshake"
+			glass_name = "glass of chocolate milkshake"
+			glass_desc = "Glorious brainfreezing mixture AND ITS CHOCOLATE!"
+			glass_center_of_mass = list("x"=16, "y"=7)
+
+			on_mob_life(var/mob/living/M as mob)
+				if(!M)
+					M = holder.my_atom
+				if(prob(1))
+					M.emote("shiver")
+				M.bodytemperature = max(M.bodytemperature - 10 * TEMPERATURE_DAMAGE_COEFFICIENT, 0)
+				if(istype(M, /mob/living/carbon/slime))
+					M.bodytemperature = max(M.bodytemperature - rand(10,20), 0)
+				holder.remove_reagent("capsaicin", 5)
+				holder.remove_reagent(src.id, FOOD_METABOLISM)
+				..()
+				return
+
+		drink/cold/berrymilkshake
+			name = "Berry Milkshake"
+			description = "Very Berry good!"
+			id = "berrymilkshake"
+			color = "#AEE5E4" // rgb" 174, 229, 228
+			adj_temp = -9
+
+			glass_icon_state = "berrymilkshake"
+			glass_name = "glass of berry milkshake"
+			glass_desc = "Very Berry good!."
+			glass_center_of_mass = list("x"=16, "y"=7)
+
+			on_mob_life(var/mob/living/M as mob)
+				if(!M)
+					M = holder.my_atom
+				if(prob(1))
+					M.emote("shiver")
+				M.bodytemperature = max(M.bodytemperature - 10 * TEMPERATURE_DAMAGE_COEFFICIENT, 0)
+				if(istype(M, /mob/living/carbon/slime))
+					M.bodytemperature = max(M.bodytemperature - rand(10,20), 0)
+				holder.remove_reagent("capsaicin", 5)
+				holder.remove_reagent(src.id, FOOD_METABOLISM)
+				..()
+				return
+
+		drink/cold/grapemilkshake
+			name = "Grape Milkshake"
+			description = "Glorious brainfreezing mixture I heard off the grapevine its pretty good!"
+			id = "grapemilkshake"
+			color = "#AEE5E4" // rgb" 174, 229, 228
+			adj_temp = -9
+
+			glass_icon_state = "grapemilkshake"
+			glass_name = "glass of grape milkshake"
+			glass_desc = "Glorious brainfreezing mixture I heard off the grapevine its pretty good!"
+			glass_center_of_mass = list("x"=16, "y"=7)
+
+			on_mob_life(var/mob/living/M as mob)
+				if(!M)
+					M = holder.my_atom
+				if(prob(1))
+					M.emote("shiver")
+				M.bodytemperature = max(M.bodytemperature - 10 * TEMPERATURE_DAMAGE_COEFFICIENT, 0)
+				if(istype(M, /mob/living/carbon/slime))
+					M.bodytemperature = max(M.bodytemperature - rand(10,20), 0)
+				holder.remove_reagent("capsaicin", 5)
+				holder.remove_reagent(src.id, FOOD_METABOLISM)
+				..()
+				return
+
+		drink/cold/grenadinemilkshake
+			name = "Grenadine Milkshake"
+			description = "Glorious brainfreezing mixture its so sweet its like puppys covered in diabetes!"
+			id = "grenadinemilkshake"
+			color = "#AEE5E4" // rgb" 174, 229, 228
+			adj_temp = -9
+
+			glass_icon_state = "grenadinemilkshake"
+			glass_name = "glass of grenadine milkshake"
+			glass_desc = "Glorious brainfreezing mixture its so sweet its like puppys covered in diabetes!"
+			glass_center_of_mass = list("x"=16, "y"=7)
+
+			on_mob_life(var/mob/living/M as mob)
+				if(!M)
+					M = holder.my_atom
+				if(prob(1))
+					M.emote("shiver")
+				M.bodytemperature = max(M.bodytemperature - 10 * TEMPERATURE_DAMAGE_COEFFICIENT, 0)
+				if(istype(M, /mob/living/carbon/slime))
+					M.bodytemperature = max(M.bodytemperature - rand(10,20), 0)
+				holder.remove_reagent("capsaicin", 5)
+				holder.remove_reagent(src.id, FOOD_METABOLISM)
+				..()
+				return
+
+		drink/cold/potatomilkshake
+			name = "Potato Milkshake"
+			description = "I don't think any amount of credits could make you drink this."
+			id = "potatomilkshake"
+			color = "#AEE5E4" // rgb" 174, 229, 228
+			adj_temp = -9
+
+			glass_icon_state = "potatomilkshake"
+			glass_name = "glass of potato milkshake"
+			glass_desc = "I don't think any amount of credits could make you drink this."
+			glass_center_of_mass = list("x"=16, "y"=7)
+
+			on_mob_life(var/mob/living/M as mob)
+				if(!M)
+					M = holder.my_atom
+				if(prob(1))
+					M.emote("shiver")
+				M.bodytemperature = max(M.bodytemperature - 10 * TEMPERATURE_DAMAGE_COEFFICIENT, 0)
+				if(istype(M, /mob/living/carbon/slime))
+					M.bodytemperature = max(M.bodytemperature - rand(10,20), 0)
+				holder.remove_reagent("capsaicin", 5)
+				holder.remove_reagent(src.id, FOOD_METABOLISM)
+				..()
+				return
+
+		drink/cold/applemilkshake
+			name = "Apple Milkshake"
+			description = "Stone cold Doctor killer."
+			id = "applemilkshake"
+			color = "#AEE5E4" // rgb" 174, 229, 228
+			adj_temp = -9
+
+			glass_icon_state = "applemilkshake"
+			glass_name = "glass of apple milkshake"
+			glass_desc = "Stone cold Doctor killer."
+			glass_center_of_mass = list("x"=16, "y"=7)
+
+			on_mob_life(var/mob/living/M as mob)
+				if(!M)
+					M = holder.my_atom
+				if(prob(1))
+					M.emote("shiver")
+				M.bodytemperature = max(M.bodytemperature - 10 * TEMPERATURE_DAMAGE_COEFFICIENT, 0)
+				if(istype(M, /mob/living/carbon/slime))
+					M.bodytemperature = max(M.bodytemperature - rand(10,20), 0)
+				holder.remove_reagent("capsaicin", 5)
+				holder.remove_reagent(src.id, FOOD_METABOLISM)
+				..()
+				return
 
 		doctor_delight
 			name = "The Doctor's Delight"
@@ -3475,6 +3900,21 @@ datum
 			glass_desc = "A very classy looking drink."
 			glass_center_of_mass = list("x"=15, "y"=7)
 
+		ethanol/whitewine
+			name = "White Wine"
+			id = "whitewine"
+			description = "An premium alchoholic beverage made from distilled grape juice."
+			color = "#7E4043" // rgb: 126, 64, 67
+			boozepwr = 1.5
+			dizzy_adj = 2
+			slur_start = 65			//amount absorbed after which mob starts slurring
+			confused_start = 145	//amount absorbed after which mob starts confusing directions
+
+			glass_icon_state = "whitewineglass"
+			glass_name = "glass of white wine"
+			glass_desc = "A very classy looking drink."
+			glass_center_of_mass = list("x"=15, "y"=7)
+
 		ethanol/cognac
 			name = "Cognac"
 			id = "cognac"
@@ -3697,6 +4137,18 @@ datum
 			glass_desc = "An innocent-looking mixture of cola and Whiskey. Delicious."
 			glass_center_of_mass = list("x"=16, "y"=9)
 
+		ethanol/appletini
+			name = "Appletini"
+			id = "appletini"
+			description = "If you destroy your liver with these does it keep the doctor away? "
+			color = "#3E1B00" // rgb: 62, 27, 0
+			boozepwr = 2
+
+			glass_icon_state = "appletini"
+			glass_name = "glass of appletini"
+			glass_desc = "If you destroy your liver with these does it keep the doctor away?"
+			glass_center_of_mass = list("x"=16, "y"=9)
+
 		ethanol/martini
 			name = "Classic Martini"
 			id = "martini"
@@ -3731,6 +4183,18 @@ datum
 			glass_icon_state = "whiterussianglass"
 			glass_name = "glass of White Russian"
 			glass_desc = "A very nice looking drink. But that's just, like, your opinion, man."
+			glass_center_of_mass = list("x"=16, "y"=9)
+
+		ethanol/watermelon_vodka
+			name = "Watermelon Vodka"
+			id = "watermelonvodka"
+			description = "The ultimate frat boy drink!"
+			color = "#A68340" // rgb: 166, 131, 64
+			boozepwr = 3
+
+			glass_icon_state = "watermelonvodka"
+			glass_name = "glass of Watermelon Vodka"
+			glass_desc = "The ultimate frat boy drink!"
 			glass_center_of_mass = list("x"=16, "y"=9)
 
 		ethanol/screwdrivercocktail
@@ -3848,6 +4312,85 @@ datum
 			glass_icon_state = "manlydorfglass"
 			glass_name = "glass of The Manly Dorf"
 			glass_desc = "A manly concotion made from Ale and Beer. Intended for true men only."
+
+		ethanol/ginger_beer
+			name = "Ginger Beer"
+			id = "gingerbeer"
+			description = "Snappy and fizzy though it feels souless."
+			color = "#664300" // rgb: 102, 67, 0
+			boozepwr = 1
+
+			glass_icon_state = "gingerbeer"
+			glass_name = "glass of ginger beer"
+			glass_desc = "Snappy and fizzy though it feels souless."
+
+		ethanol/fireball_whiskey
+			name = "Fireball Whiskey"
+			id = "fireballwhiskey"
+			description = "Warms the heart and the body."
+			color = "#664300" // rgb: 102, 67, 0
+			boozepwr = 4
+
+			glass_icon_state = "fireballwhiskey"
+			glass_name = "glass of fireball whiskey"
+			glass_desc = "Warms the heart and the body."
+
+		ethanol/ginger_ale
+			name = "Ginger Ale"
+			id = "gingerale"
+			description = "Stronger than gingerbeer, still snappy."
+			color = "#664300" // rgb: 102, 67, 0
+			boozepwr = 3
+
+			glass_icon_state = "gingerale"
+			glass_name = "glass of ginger ale"
+			glass_desc = "Stronger than gingerbeer, still snappy."
+
+		ethanol/crows_nest
+			name = "The Crows Nest"
+			id = "crowsnest"
+			description = "Short but packs a wallop."
+			color = "#664300" // rgb: 102, 67, 0
+			boozepwr = 3.5
+
+			glass_icon_state = "crowsnest"
+			glass_name = "glass of crows nest"
+			glass_desc = "Short but packs a wallop.."
+
+		ethanol/strawberry_daiquiri
+			name = "Strawberry Daiquiri"
+			id = "strawberrydaiquiri"
+			description = "About as straight as a rainbow."
+			color = "#664300" // rgb: 102, 67, 0
+			boozepwr = 2.5
+
+			glass_icon_state = "strawberrydaiquiri"
+			glass_name = "glass of Strawberry Daiquiri"
+			glass_desc = "About as straight as a rainbow."
+
+		ethanol/australian_beer
+			name = "Australian Beer"
+			id = "australianbeer"
+			description = "A higher percentage of water than the human body."
+			color = "#664300" // rgb: 102, 67, 0
+			boozepwr = 0.3
+
+			glass_icon_state = "australianbeer"
+			glass_name = "glass of Australian Beer"
+			glass_desc = "A higher percentage of water than the human body"
+
+
+		ethanol/spritzer
+			name = "Whitewine Spritzer"
+			id = "spritzer"
+			description = "Fizzy and Cool."
+			color = "#664300" // rgb: 102, 67, 0
+			boozepwr = 2
+
+			glass_icon_state = "spritzer"
+			glass_name = "glass of Whitewine Spritzer"
+			glass_desc = "Fizzy and Cool."
+
 
 		ethanol/longislandicedtea
 			name = "Long Island Iced Tea"

@@ -4,7 +4,7 @@
 /obj/item/weapon/card/id/guest
 	name = "guest pass"
 	desc = "Allows temporary access to station areas."
-	icon_state = "guest"
+	icon_state = "guestpass"
 
 	var/temp_access = list() //to prevent agent cards stealing access as permanent
 	var/expiration_time = 0

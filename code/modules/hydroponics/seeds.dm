@@ -73,6 +73,12 @@
 /obj/item/seeds/cabbageseed
 	seed_type = "cabbage"
 
+/obj/item/seeds/strawberryseed
+	seed_type = "strawberry"
+
+/obj/item/seeds/gingerseed
+	seed_type = "ginger"
+
 /obj/item/seeds/shandseed
 	seed_type = "shand"
 

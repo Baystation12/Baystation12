@@ -219,13 +219,22 @@
 		reagents.add_reagent("cognac", 100)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/wine
-	name = "Doublebeard Bearded Special Wine"
-	desc = "A faint aura of unease and asspainery surrounds the bottle."
+	name = "Anders Merlot"
+	desc = "A soft and fruity wine from a small vineyard in Tau Ceti."
 	icon_state = "winebottle"
 	center_of_mass = list("x"=16, "y"=4)
 	New()
 		..()
 		reagents.add_reagent("wine", 100)
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/whitewine
+	name = "Dark Dog White Wine"
+	desc = "A classy drink for a classy lady."
+	icon_state = "whitewinebottle"
+	center_of_mass = list("x"=16, "y"=4)
+	New()
+		..()
+		reagents.add_reagent("whitewine", 100)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/absinthe
 	name = "Jailbreaker Verte"
@@ -284,6 +293,16 @@
 	New()
 		..()
 		reagents.add_reagent("orangejuice", 100)
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/mangojuice
+	name = "Mango Juice"
+	desc = "Smells oddly like bourbon!"
+	icon_state = "bottleofmangojuice"
+	center_of_mass = list("x"=16, "y"=4)
+	isGlass = 1
+	New()
+		..()
+		reagents.add_reagent("mangojuice", 100)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/cream
 	name = "Milk Cream"
