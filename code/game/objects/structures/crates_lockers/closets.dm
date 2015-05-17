@@ -296,24 +296,6 @@
 	else
 		icon_state = icon_opened
 
-/obj/structure/closet/hear_talk(mob/M as mob, text, verb, datum/language/speaking)
-	for (var/atom/A in src)
-		if(istype(A,/obj/))
-			var/obj/O = A
-			O.hear_talk(M, text, verb, speaking)
-
-/obj/structure/closet/see_emote(mob/M as mob, text, var/emote_type)
-	for (var/atom/A in src)
-		if(istype(A,/obj/))
-			var/obj/O = A
-			O.see_emote(M, text, emote_type)
-
-/obj/structure/closet/show_message(msg, type, alt, alt_type)
-	for (var/atom/A in src)
-		if(istype(A,/obj/))
-			var/obj/O = A
-			O.show_message(msg, type, alt, alt_type)
-
 /obj/structure/closet/attack_generic(var/mob/user, var/damage, var/attack_message = "destroys", var/wallbreaker)
 	if(!damage || !wallbreaker)
 		return

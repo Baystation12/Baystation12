@@ -444,24 +444,6 @@
 			src.quick_empty()
 			return 1
 
-/obj/item/weapon/storage/hear_talk(mob/M as mob, text, verb, datum/language/speaking)
-	for (var/atom/A in src)
-		if(istype(A,/obj/))
-			var/obj/O = A
-			O.hear_talk(M, text, verb, speaking)
-
-/obj/item/weapon/storage/see_emote(mob/M as mob, text, var/emote_type)
-	for (var/atom/A in src)
-		if(istype(A,/obj/))
-			var/obj/O = A
-			O.see_emote(M, text, emote_type)
-
-/obj/item/weapon/storage/show_message(msg, type, alt, alt_type)
-	for (var/atom/A in src)
-		if(istype(A,/obj/))
-			var/obj/O = A
-			O.show_message(msg, type, alt, alt_type)
-
 //Returns the storage depth of an atom. This is the number of storage items the atom is contained in before reaching toplevel (the area).
 //Returns -1 if the atom was not found on container.
 /atom/proc/storage_depth(atom/container)

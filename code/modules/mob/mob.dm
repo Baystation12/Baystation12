@@ -44,7 +44,7 @@
 		src << msg
 	return
 
-// Show a message to all mobs in sight of this one
+// Show a message to all mobs and objects in sight of this one
 // This would be for visible actions by the src mob
 // message is the message output to anyone who can see e.g. "[src] does something!"
 // self_message (optional) is what the src mob sees  e.g. "You do something!"
@@ -52,77 +52,21 @@
 
 /mob/visible_message(var/message, var/self_message, var/blind_message)
 
-	var/list/seeing_obj = list()
+	var/list/see = get_mobs_or_objects_in_view(world.view,src) | viewers(get_turf(src), null)
 
-	for(var/I in view(world.view, get_turf(usr))) //get_turf is needed to stop weirdness with x-ray.
-		if(istype(I, /mob/))
+	for(var/I in see)
+		if(isobj(I))
+			spawn(0)
+				if(I) //It's possible that it could be deleted in the meantime.
+					var/obj/O = I
+					O.show_message( message, 1, blind_message, 2)
+		else if(ismob(I))
 			var/mob/M = I
-			for(var/obj/O in M.contents)
-				seeing_obj |= O
-		else if(istype(I, /obj/))
-			var/obj/O = I
-			seeing_obj |= O
-
-	for (var/mob/O in viewers(get_turf(src), null))
-		if(O.see_invisible < invisibility)
-			continue // Cannot view the invisible
-		var/msg = message
-		if(O.status_flags & PASSEMOTES)
-			for(var/obj/item/weapon/holder/H in O.contents)
-				H.show_message( msg, 1, blind_message, 2)
-			for(var/mob/living/M in O.contents)
+			if(M.see_invisible >= invisibility) // Cannot view the invisible
+				var/msg = message
+				if(self_message && M==src)
+					msg = self_message
 				M.show_message( msg, 1, blind_message, 2)
-		if(self_message && O==src)
-			msg = self_message
-		O.show_message( msg, 1, blind_message, 2)
-
-	for(var/obj/O in seeing_obj)
-		spawn(0)
-			if(O) //It's possible that it could be deleted in the meantime.
-				O.show_message( message, 1, blind_message, 2)
-
-	/*
-	for(var/mob/M in viewers(src))
-		if(M.see_invisible < invisibility)
-			continue // Cannot view the invisible
-		var/msg = message
-		if(self_message && M==src)
-			msg = self_message
-		M.show_message( msg, 1, blind_message, 2)
-	*/
-
-// Show a message to all mobs in sight of this atom
-// Use for objects performing visible actions
-// message is output to anyone who can see, e.g. "The [src] does something!"
-// blind_message (optional) is what blind people will hear e.g. "You hear something!"
-/atom/proc/visible_message(var/message, var/blind_message)
-
-	var/list/seeing_obj = list()
-
-	for(var/I in view(world.view, get_turf(src))) //get_turf is needed to stop weirdness with x-ray.
-		if(istype(I, /mob/))
-			var/mob/M = I
-			for(var/obj/O in M.contents)
-				seeing_obj |= O
-		else if(istype(I, /obj/))
-			var/obj/O = I
-			seeing_obj |= O
-
-	for (var/mob/O in viewers(get_turf(src), null))
-		if(O.see_invisible < invisibility)
-			continue // Cannot view the invisible
-		var/msg = message
-		if(O.status_flags & PASSEMOTES)
-			for(var/obj/item/weapon/holder/H in O.contents)
-				H.show_message( msg, 1, blind_message, 2)
-			for(var/mob/living/M in O.contents)
-				M.show_message( msg, 1, blind_message, 2)
-		O.show_message( msg, 1, blind_message, 2)
-
-	for(var/obj/O in seeing_obj)
-		spawn(0)
-			if(O) //It's possible that it could be deleted in the meantime.
-				O.show_message( message, 1, blind_message, 2)
 
 // Returns an amount of power drawn from the object (-1 if it's not viable).
 // If drain_check is set it will not actually drain power, just return a value.
@@ -131,33 +75,31 @@
 /atom/proc/drain_power(var/drain_check,var/surge, var/amount = 0)
 	return -1
 
-// Show a message to all mobs in earshot of this one
+// Show a message to all mobs and objects in earshot of this one
 // This would be for audible actions by the src mob
 // message is the message output to anyone who can hear.
 // self_message (optional) is what the src mob hears.
 // deaf_message (optional) is what deaf people will see.
 // hearing_distance (optional) is the range, how many tiles away the message can be heard.
 /mob/audible_message(var/message, var/deaf_message, var/hearing_distance, var/self_message)
-	var/range = 7
-	if(hearing_distance)
-		range = hearing_distance
-	var/msg = message
-	for(var/mob/M in get_mobs_in_view(range, src))
-		if(self_message && M==src)
-			msg = self_message
-		M.show_message( msg, 2, deaf_message, 1)
 
-// Show a message to all mobs in earshot of this atom
-// Use for objects performing audible actions
-// message is the message output to anyone who can hear.
-// deaf_message (optional) is what deaf people will see.
-// hearing_distance (optional) is the range, how many tiles away the message can be heard.
-/atom/proc/audible_message(var/message, var/deaf_message, var/hearing_distance)
-	var/range = 7
+	var/range = world.view
 	if(hearing_distance)
 		range = hearing_distance
-	for(var/mob/M in get_mobs_in_view(range, src))
-		M.show_message( message, 2, deaf_message, 1)
+	var/list/hear = get_mobs_or_objects_in_view(range,src)
+
+	for(var/I in hear)
+		if(isobj(I))
+			spawn(0)
+				if(I) //It's possible that it could be deleted in the meantime.
+					var/obj/O = I
+					O.show_message( message, 2, deaf_message, 1)
+		else if(ismob(I))
+			var/mob/M = I
+			var/msg = message
+			if(self_message && M==src)
+				msg = self_message
+			M.show_message( msg, 2, deaf_message, 1)
 
 
 /mob/proc/findname(msg)
