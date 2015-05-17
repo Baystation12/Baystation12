@@ -75,11 +75,11 @@ var/list/name_to_material
 /material/proc/get_blunt_damage()
 	return weight //todo
 
+/material/proc/get_edge_damage()
+	return hardness //todo
+
 /material/proc/can_open_material_door(var/mob/living/user)
 	return 1
-
-/material/proc/get_edge_damage()
-	return round(hardness/4) //todo
 
 /material/proc/products_need_process()
 	return (radioactivity>0) //todo
@@ -213,7 +213,7 @@ var/list/name_to_material
 	integrity = 100
 	shard_type = SHARD_SHARD
 	tableslam_noise = 'sound/effects/Glasshit.ogg'
-	hardness = 15
+	hardness = 30
 	weight = 15
 	door_icon_base = "stone"
 
@@ -224,8 +224,6 @@ var/list/name_to_material
 	ignition_point = 300
 	integrity = 200 // idk why but phoron windows are strong, so.
 	icon_colour = "#FC2BC5"
-	hardness = 10
-	weight = 10
 	stack_origin_tech = "materials=3;phorontech=2"
 
 /material/glass/phoron/reinforced
@@ -243,8 +241,8 @@ var/list/name_to_material
 	integrity = 100
 	shard_type = SHARD_SHARD
 	tableslam_noise = 'sound/effects/Glasshit.ogg'
-	hardness = 15
-	weight = 15
+	hardness = 40
+	weight = 30
 	stack_origin_tech = "materials=2"
 	composite_material = list() //todo
 

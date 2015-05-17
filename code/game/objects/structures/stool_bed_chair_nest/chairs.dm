@@ -70,7 +70,7 @@
 	icon_state = "wooden_chair"
 	name = "wooden chair"
 	desc = "Old is never too old to not be in fashion."
-	apply_cosmentics = 0
+	apply_cosmetics = 0
 
 /obj/structure/bed/chair/wood/New(var/newloc)
 	..(newloc, "wood")
@@ -84,7 +84,7 @@
 	icon_state = "comfychair"
 	color = rgb(255,255,255)
 	var/image/armrest = null
-	apply_cosmentics = 0
+	apply_cosmetics = 0
 
 /obj/structure/bed/chair/comfy/New()
 	armrest = image("icons/obj/objects.dmi", "comfychair_armrest")
@@ -125,7 +125,7 @@
 /obj/structure/bed/chair/office
 	anchored = 0
 	buckle_movable = 1
-	apply_cosmentics = 0
+	apply_cosmetics = 0
 
 /obj/structure/bed/chair/comfy/lime
 	color = rgb(255,251,0)

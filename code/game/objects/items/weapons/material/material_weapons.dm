@@ -2,10 +2,16 @@
 	health = 10
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	gender = NEUTER
+	throw_speed = 3
+	throw_range = 7
+	w_class = 3
+	sharp = 0
+	edge = 0
 
 	var/applies_material_colour = 1
 	var/unbreakable
-	var/damage_divisor = 0.5
+	var/force_divisor = 0.5
+	var/thrown_force_divisor = 0.5
 	var/default_material = DEFAULT_WALL_MATERIAL
 	var/material/material
 
@@ -16,7 +22,14 @@
 	set_material(material_key)
 
 /obj/item/weapon/material/proc/update_force()
-	force = round(material.get_blunt_damage()*damage_divisor)
+	if(edge || sharp)
+		force = material.get_edge_damage()
+	else
+		force = material.get_blunt_damage()
+	force = round(force*force_divisor)
+	throwforce = round(material.get_blunt_damage()*thrown_force_divisor)
+	//spawn(1)
+	//	world << "[src] has force [force] and throwforce [throwforce] when made from default material [material.name]"
 
 /obj/item/weapon/material/proc/set_material(var/new_material)
 	material = get_material_by_name(new_material)

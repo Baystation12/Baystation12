@@ -5,15 +5,14 @@
  * Utensils
  */
 /obj/item/weapon/material/kitchen/utensil
-	force = 5
 	w_class = 1
-	throwforce = 5
-	throw_speed = 3
-	throw_range = 5
-	flags = CONDUCT
+	thrown_force_divisor = 1
 	origin_tech = "materials=1"
 	attack_verb = list("attacked", "stabbed", "poked")
-	sharp = 0
+	sharp = 1
+	edge = 1
+	force_divisor = 0.1 // 6 when wielded with hardness 60 (steel)
+	thrown_force_divisor = 0.25 // 5 when thrown with weight 20 (steel)
 	var/loaded      //Descriptive string for currently loaded food object.
 
 /obj/item/weapon/material/kitchen/utensil/New()
@@ -60,6 +59,9 @@
 	desc = "It's a spoon. You can see your own upside-down face in it."
 	icon_state = "spoon"
 	attack_verb = list("attacked", "poked")
+	edge = 0
+	sharp = 0
+	force_divisor = 0.25 //5 when wielded with weight 20 (steel)
 
 /obj/item/weapon/material/kitchen/utensil/spoon/plastic
 	default_material = "plastic"
@@ -71,23 +73,13 @@
 	name = "knife"
 	desc = "Can cut through any food."
 	icon_state = "knife"
-	force = 10.0
-	throwforce = 10.0
-	sharp = 1
-	edge = 1
-
-/obj/item/weapon/material/kitchen/utensil/knife/suicide_act(mob/user)
-		viewers(user) << pick("\red <b>[user] is slitting \his wrists with the [src.name]! It looks like \he's trying to commit suicide.</b>", \
-							"\red <b>[user] is slitting \his throat with the [src.name]! It looks like \he's trying to commit suicide.</b>", \
-							"\red <b>[user] is slitting \his stomach open with the [src.name]! It looks like \he's trying to commit seppuku.</b>")
-		return (BRUTELOSS)
+	force_divisor = 0.2 // 12 when wielded with hardness 60 (steel)
 
 /obj/item/weapon/material/kitchen/utensil/knife/attack(target as mob, mob/living/user as mob)
 	if ((CLUMSY in user.mutations) && prob(50))
 		user << "\red You accidentally cut yourself with the [src]."
 		user.take_organ_damage(20)
 		return
-	playsound(loc, 'sound/weapons/bladeslice.ogg', 50, 1, -1)
 	return ..()
 
 /obj/item/weapon/material/kitchen/utensil/knife/attack(target as mob, mob/living/user as mob)
@@ -95,7 +87,6 @@
 		user << "\red You somehow managed to cut yourself with the [src]."
 		user.take_organ_damage(20)
 		return
-	playsound(loc, 'sound/weapons/bladeslice.ogg', 50, 1, -1)
 	return ..()
 
 /obj/item/weapon/material/kitchen/utensil/knife/plastic
@@ -109,13 +100,10 @@
 	name = "rolling pin"
 	desc = "Used to knock out the Bartender."
 	icon_state = "rolling_pin"
-	force = 8.0
-	throwforce = 10.0
-	throw_speed = 2
-	throw_range = 7
-	w_class = 3.0
 	attack_verb = list("bashed", "battered", "bludgeoned", "thrashed", "whacked") //I think the rollingpin attackby will end up ignoring this anyway.
 	default_material = "wood"
+	force_divisor = 0.7 // 10 when wielded with weight 15 (wood)
+	thrown_force_divisor = 1 // as above
 
 /obj/item/weapon/material/kitchen/rollingpin/attack(mob/living/M as mob, mob/living/user as mob)
 	if ((CLUMSY in user.mutations) && prob(50))
@@ -123,30 +111,4 @@
 		user.take_organ_damage(10)
 		user.Paralyse(2)
 		return
-
-	M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been attacked with [src.name] by [user.name] ([user.ckey])</font>")
-	user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [src.name] to attack [M.name] ([M.ckey])</font>")
-	msg_admin_attack("[user.name] ([user.ckey]) used the [src.name] to attack [M.name] ([M.ckey]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
-
-	var/t = user:zone_sel.selecting
-	if (t == "head")
-		if(ishuman(M))
-			var/mob/living/carbon/human/H = M
-			if (H.stat < 2 && H.health < 50 && prob(90))
-				// ******* Check
-				if (istype(H, /obj/item/clothing/head) && H.flags & 8 && prob(80))
-					H << "\red The helmet protects you from being hit hard in the head!"
-					return
-				var/time = rand(2, 6)
-				if (prob(75))
-					H.Paralyse(time)
-				else
-					H.Stun(time)
-				if(H.stat != 2)	H.stat = 1
-				user.visible_message("\red <B>[H] has been knocked unconscious!</B>", "\red <B>You knock [H] unconscious!</B>")
-				return
-			else
-				H.visible_message("\red [user] tried to knock [H] unconscious!", "\red [user] tried to knock you unconscious!")
-				H.eye_blurry += 3
 	return ..()
-

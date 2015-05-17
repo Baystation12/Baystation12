@@ -4,18 +4,12 @@
 	icon_state = "metalbat0"
 	base_icon = "metalbat"
 	item_state = "metalbat"
-	sharp = 0
-	edge = 0
-	w_class = 3
-	force = 10
-	throw_speed = 3
-	throw_range = 7
 	throwforce = 7
 	attack_verb = list("smashed", "beaten", "slammed", "smacked", "struck", "battered", "bonked")
 	hitsound = 'sound/weapons/genhit3.ogg'
-	force_wielded = 20
-	health = 10
 	default_material = "wood"
+	force_divisor = 1.35          // 27 when wielded with weight 20 (steel)
+	unwielded_force_divisor = 0.7 // 18 when unwielded based on above.
 
 //Predefined materials go here.
 /obj/item/weapon/material/twohanded/baseballbat/metal/New(var/newloc)

@@ -17,6 +17,7 @@
  * Twohanded
  */
 /obj/item/weapon/material/twohanded
+	w_class = 4
 	var/wielded = 0
 	var/force_wielded = 0
 	var/force_unwielded
@@ -24,6 +25,7 @@
 	var/unwieldsound = null
 	var/base_icon
 	var/base_name
+	var/unwielded_force_divisor = 0.25
 
 /obj/item/weapon/material/twohanded/proc/unwield()
 	wielded = 0
@@ -39,8 +41,15 @@
 
 /obj/item/weapon/material/twohanded/update_force()
 	base_name = name
-	force_unwielded = force
-	force_wielded = material.get_blunt_damage()
+	if(sharp || edge)
+		force_wielded = material.get_edge_damage()
+	else
+		force_wielded = material.get_blunt_damage()
+	force_wielded = round(force_wielded*force_divisor)
+	force_unwielded = round(force_wielded*unwielded_force_divisor)
+	force = force_unwielded
+	throwforce = round(force*thrown_force_divisor)
+	//world << "[src] has unwielded force [force_unwielded], wielded force [force_wielded] and throwforce [throwforce] when made from default material [material.name]"
 
 /obj/item/weapon/material/twohanded/New()
 	..()
@@ -51,7 +60,6 @@
 	if(wielded)
 		M << "<span class='warning'>Unwield the [base_name] first!</span>"
 		return 0
-
 	return ..()
 
 /obj/item/weapon/material/twohanded/dropped(mob/user as mob)
@@ -114,7 +122,7 @@
 
 ///////////OFFHAND///////////////
 /obj/item/weapon/material/twohanded/offhand
-	w_class = 5.0
+	w_class = 5
 	icon_state = "offhand"
 	name = "offhand"
 	default_material = "placeholder"
@@ -136,12 +144,11 @@
 	base_icon = "fireaxe"
 	name = "fire axe"
 	desc = "Truly, the weapon of a madman. Who would think to fight fire with an axe?"
-	force = 15
+	unwielded_force_divisor = 0.25
+	force_divisor = 0.7 // 10/42 with hardness 60 (steel) and 0.25 unwielded divisor
 	sharp = 1
 	edge = 1
-	w_class = 4.0
 	slot_flags = SLOT_BACK
-	force_wielded = 30
 	attack_verb = list("attacked", "chopped", "cleaved", "torn", "cut")
 	applies_material_colour = 0
 
@@ -154,8 +161,11 @@
 			W.shatter()
 
 /*
+/*
  * Double-Bladed Energy Swords - Cheridan
  */
+ // Not sure what to do with this one, it won't work nicely with the material system,
+ // but I don't want to copypaste all the twohanded procs..
 /obj/item/weapon/material/twohanded/dualsaber
 	icon_state = "dualsaber0"
 	base_icon = "dualsaber"
@@ -193,6 +203,7 @@
 		return 1
 	else
 		return 0
+*/
 
 //spears, bay edition
 /obj/item/weapon/material/twohanded/spear
@@ -200,13 +211,12 @@
 	base_icon = "spearglass"
 	name = "spear"
 	desc = "A haphazardly-constructed yet still deadly weapon of ancient design."
-	force = 10
-	w_class = 4.0
 	slot_flags = SLOT_BACK
-	force_wielded = 22 // Was 13, Buffed - RR
-	throwforce = 20
+	force_wielded = 0.75           // 22 when wielded with hardness 15 (glass)
+	unwielded_force_divisor = 0.65 // 14 when unwielded based on above
+	thrown_force_divisor = 1.5 // 20 when thrown with weight 15 (glass)
 	throw_speed = 3
-	edge = 0
+	edge = 1
 	sharp = 1
 	flags = NOSHIELD
 	hitsound = 'sound/weapons/bladeslice.ogg'

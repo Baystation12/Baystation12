@@ -3,18 +3,17 @@
 /obj/item/weapon/material/shard
 	name = "shard"
 	icon = 'icons/obj/shards.dmi'
+	desc = "Made of nothing. How does this even exist?" // set based on material, if this desc is visible it's a bug (shards default to being made of glass)
 	icon_state = "large"
 	sharp = 1
 	edge = 1
-	desc = "Made of nothing. How does this even exist?" // set based on material, if this desc is visible it's a bug (shards default to being made of glass)
 	w_class = 2
-	force = 5
-	throwforce = 8
+	force_divisor = 0.2 // 6 with hardness 30 (glass)
+	thrown_force_divisor = 0.4 // 4 with weight 15 (glass)
 	item_state = "shard-glass"
 	attack_verb = list("stabbed", "slashed", "sliced", "cut")
 	default_material = "glass"
 	unbreakable = 1 //It's already broken.
-	damage_divisor = 0.1 //So tiny.
 
 /obj/item/weapon/material/shard/suicide_act(mob/user)
 	viewers(user) << pick("\red <b>[user] is slitting \his wrists with \the [src]! It looks like \he's trying to commit suicide.</b>", \
@@ -41,7 +40,6 @@
 				gender = NEUTER
 	else
 		qdel(src)
-
 
 /obj/item/weapon/material/shard/update_icon()
 	if(material)

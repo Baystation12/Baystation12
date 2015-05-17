@@ -294,7 +294,7 @@
 			new_item.desc = ""
 		if(19)
 			apply_prefix = 0
-			new_item = new /obj/item/weapon/material/claymore(src.loc)
+			new_item = new /obj/item/weapon/material/sword(src.loc)
 			new_item.force = 10
 			item_type = new_item.name
 		if(20)
@@ -337,7 +337,7 @@
 			apply_material_decorations = 0
 		if(25)
 			apply_prefix = 0
-			new_item = new /obj/item/weapon/material/katana(src.loc)
+			new_item = new /obj/item/weapon/material/sword/katana(src.loc)
 			new_item.force = 10
 			item_type = new_item.name
 		if(26)
