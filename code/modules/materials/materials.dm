@@ -42,6 +42,7 @@ var/list/name_to_material
 	var/shard_icon
 	var/shard_can_repair = 1
 	var/list/recipes
+	var/destruction_desc = "breaks apart"
 
 	// Icons
 	var/icon_colour
@@ -151,7 +152,7 @@ var/list/name_to_material
 /material/phoron
 	name = "phoron"
 	stack_type = /obj/item/stack/material/phoron
-	ignition_point = 300
+	ignition_point = 100
 	icon_base = "stone"
 	icon_colour = "#FC2BC5"
 	shard_type = SHARD_SHARD
@@ -216,6 +217,7 @@ var/list/name_to_material
 	hardness = 30
 	weight = 15
 	door_icon_base = "stone"
+	destruction_desc = "shatters"
 
 /material/glass/phoron
 	name = "phoron glass"
@@ -303,6 +305,7 @@ var/list/name_to_material
 	stack_origin_tech = "materials=1;biotech=1"
 	dooropen_noise = 'sound/effects/doorcreaky.ogg'
 	door_icon_base = "wood"
+	destruction_desc = "splinters"
 
 /material/wood/holographic
 	name = "holographic wood"
@@ -321,6 +324,7 @@ var/list/name_to_material
 	weight = 1
 	stack_origin_tech = "materials=1"
 	door_icon_base = "wood"
+	destruction_desc = "crumples"
 
 /material/cloth //todo
 	name = "cloth"

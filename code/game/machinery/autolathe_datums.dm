@@ -293,7 +293,7 @@
 
 /datum/autolathe/recipe/ashtray_glass
 	name = "glass ashtray"
-	path = /obj/item/ashtray/glass
+	path = /obj/item/weapon/material/ashtray/glass
 	category = "General"
 
 /datum/autolathe/recipe/camera_assembly

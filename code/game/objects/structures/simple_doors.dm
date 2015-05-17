@@ -41,9 +41,12 @@
 		opacity = 0
 	else
 		opacity = 1
+	if(material.products_need_process())
+		processing_objects |= src
 	update_nearby_tiles(need_rebuild=1)
 
 /obj/structure/simple_door/Destroy()
+	processing_objects -= src
 	update_nearby_tiles()
 	..()
 
@@ -137,7 +140,7 @@
 	else if(istype(W,/obj/item/weapon/weldingtool))
 		var/obj/item/weapon/weldingtool/WT = W
 		if(material.ignition_point && WT.remove_fuel(0, user))
-			TemperatureAct(100)
+			TemperatureAct(150)
 	else
 		attack_hand(user)
 	return
@@ -164,6 +167,12 @@
 			hardness -= 0.1
 			CheckHardness()
 	return
+
+/obj/structure/simple_door/process()
+	if(!material.radioactivity)
+		return
+	for(var/mob/living/L in range(1,src))
+		L.apply_effect(round(material.radioactivity/3),IRRADIATE,0)
 
 /obj/structure/simple_door/iron/New(var/newloc,var/material_name)
 	..(newloc, "iron")

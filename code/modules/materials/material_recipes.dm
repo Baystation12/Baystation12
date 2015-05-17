@@ -5,16 +5,23 @@
 
 /material/proc/generate_recipes()
 	recipes = list()
-	recipes += new/datum/stack_recipe("[display_name] door", /obj/structure/simple_door, 10, one_per_turf = 1, on_floor = 1, supplied_material = "[name]")
-	recipes += new/datum/stack_recipe("[display_name] barricade", /obj/structure/barricade, 5, time = 50, one_per_turf = 1, on_floor = 1, supplied_material = "[name]")
-	recipes += new/datum/stack_recipe("[display_name] ashtray", /obj/item/ashtray, 2, one_per_turf = 1, on_floor = 1, supplied_material = "[name]")
-	recipes += new/datum/stack_recipe("[display_name] fork", /obj/item/weapon/material/kitchen/utensil/fork/plastic, 1, on_floor = 1, supplied_material = "[name]")
+
+	// If is_brittle() returns true, these are only good for a single strike.
+	recipes += new/datum/stack_recipe("[display_name] baseball bat", /obj/item/weapon/material/twohanded/baseballbat, 10, time = 20, one_per_turf = 0, on_floor = 1, supplied_material = "[name]")
+	recipes += new/datum/stack_recipe("[display_name] ashtray", /obj/item/weapon/material/ashtray, 2, one_per_turf = 1, on_floor = 1, supplied_material = "[name]")
 	recipes += new/datum/stack_recipe("[display_name] spoon", /obj/item/weapon/material/kitchen/utensil/spoon/plastic, 1, on_floor = 1, supplied_material = "[name]")
-	recipes += new/datum/stack_recipe("[display_name] knife", /obj/item/weapon/material/kitchen/utensil/knife/plastic, 1, on_floor = 1, supplied_material = "[name]")
-	recipes += new/datum/stack_recipe("[display_name] baseball bat", /obj/item/weapon/material/twohanded/baseballbat/metal, 10, time = 20, one_per_turf = 0, on_floor = 1, supplied_material = "[name]")
-	recipes += new/datum/stack_recipe("[display_name] stool", /obj/item/weapon/stool, one_per_turf = 1, on_floor = 1, supplied_material = "[name]")
-	recipes += new/datum/stack_recipe("[display_name] chair", /obj/structure/bed/chair, one_per_turf = 1, on_floor = 1, supplied_material = "[name]")
-	recipes += new/datum/stack_recipe("[display_name] bed", /obj/structure/bed, 2, one_per_turf = 1, on_floor = 1, supplied_material = "[name]")
+
+	if(integrity>=100)
+		recipes += new/datum/stack_recipe("[display_name] door", /obj/structure/simple_door, 10, one_per_turf = 1, on_floor = 1, supplied_material = "[name]")
+		recipes += new/datum/stack_recipe("[display_name] barricade", /obj/structure/barricade, 5, time = 50, one_per_turf = 1, on_floor = 1, supplied_material = "[name]")
+		recipes += new/datum/stack_recipe("[display_name] stool", /obj/item/weapon/stool, one_per_turf = 1, on_floor = 1, supplied_material = "[name]")
+		recipes += new/datum/stack_recipe("[display_name] chair", /obj/structure/bed/chair, one_per_turf = 1, on_floor = 1, supplied_material = "[name]")
+		recipes += new/datum/stack_recipe("[display_name] bed", /obj/structure/bed, 2, one_per_turf = 1, on_floor = 1, supplied_material = "[name]")
+
+	if(hardness>50)
+		recipes += new/datum/stack_recipe("[display_name] fork", /obj/item/weapon/material/kitchen/utensil/fork/plastic, 1, on_floor = 1, supplied_material = "[name]")
+		recipes += new/datum/stack_recipe("[display_name] knife", /obj/item/weapon/material/kitchen/utensil/knife/plastic, 1, on_floor = 1, supplied_material = "[name]")
+		recipes += new/datum/stack_recipe("[display_name] blade", /obj/item/weapon/material/butterflyblade, 6, time = 20, one_per_turf = 0, on_floor = 1, supplied_material = "[name]")
 
 /material/steel/generate_recipes()
 	..()
@@ -64,13 +71,12 @@
 		new/datum/stack_recipe("multi-tile airlock assembly", /obj/structure/door_assembly/multi_tile, 4, time = 50, one_per_turf = 1, on_floor = 1), \
 		), 4)
 
-	new/datum/stack_recipe("grenade casing", /obj/item/weapon/grenade/chem_grenade)
-	new/datum/stack_recipe("light fixture frame", /obj/item/frame/light, 2)
-	new/datum/stack_recipe("small light fixture frame", /obj/item/frame/light/small, 1)
-	new/datum/stack_recipe("apc frame", /obj/item/apc_frame, 2)
-	new/datum/stack_recipe("air alarm frame", /obj/item/frame/air_alarm, 2)
-	new/datum/stack_recipe("fire alarm frame", /obj/item/frame/fire_alarm, 2)
-	new/datum/stack_recipe("knife blade", /obj/item/butterflyblade, 6, time = 20, one_per_turf = 0, on_floor = 1)
+	recipes += new/datum/stack_recipe("grenade casing", /obj/item/weapon/grenade/chem_grenade)
+	recipes += new/datum/stack_recipe("light fixture frame", /obj/item/frame/light, 2)
+	recipes += new/datum/stack_recipe("small light fixture frame", /obj/item/frame/light/small, 1)
+	recipes += new/datum/stack_recipe("apc frame", /obj/item/apc_frame, 2)
+	recipes += new/datum/stack_recipe("air alarm frame", /obj/item/frame/air_alarm, 2)
+	recipes += new/datum/stack_recipe("fire alarm frame", /obj/item/frame/fire_alarm, 2)
 
 /material/plasteel/generate_recipes()
 	..()
@@ -78,7 +84,7 @@
 	recipes += new/datum/stack_recipe("Metal crate", /obj/structure/closet/crate, 10, time = 50, one_per_turf = 1)
 	recipes += new/datum/stack_recipe("RUST fuel assembly port frame", /obj/item/frame/rust/assembly, 12, time = 50, one_per_turf = 1)
 	recipes += new/datum/stack_recipe("RUST fuel compressor frame", /obj/item/frame/rust, 12, time = 50, one_per_turf = 1)
-	recipes += new/datum/stack_recipe("knife grip", /obj/item/butterflyhandle, 4, time = 20, one_per_turf = 0, on_floor = 1)
+	recipes += new/datum/stack_recipe("knife grip", /obj/item/weapon/material/butterflyhandle, 4, time = 20, one_per_turf = 0, on_floor = 1)
 
 /material/sandstone/generate_recipes()
 	..()

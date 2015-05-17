@@ -1,39 +1,49 @@
-/obj/item/ashtray
+var/global/list/ashtray_cache = list()
+
+/obj/item/weapon/material/ashtray
+	name = "ashtray"
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "blank"
-	var/max_butts = 0
-	var/material/material
+	force_divisor = 0.1
+	thrown_force_divisor = 0.1
+	var/image/base_image
+	var/max_butts = 10
 
-/obj/item/ashtray/New(var/newloc, var/material_name)
-	..(newloc)
-	if(!material_name)
-		material_name = "plastic"
-	material = get_material_by_name(material_name)
+/obj/item/weapon/material/ashtray/New(var/newloc, var/material_name)
+	..(newloc, material_name)
 	if(!material)
 		qdel(src)
 		return
-	name = "[material.display_name] ashtray"
+	max_butts = round(material.hardness/10) //This is arbitrary but whatever.
 	src.pixel_y = rand(-5, 5)
 	src.pixel_x = rand(-6, 6)
 	update_icon()
 	return
 
-/obj/item/ashtray/update_icon()
+/obj/item/weapon/material/ashtray/update_icon()
+	color = null
 	overlays.Cut()
-	var/image/I = image('icons/obj/objects.dmi',"ashtray")
-	I.color = material.icon_colour
-	overlays |= I
+	var/cache_key = "base-[material.name]"
+	if(!ashtray_cache[cache_key])
+		var/image/I = image('icons/obj/objects.dmi',"ashtray")
+		I.color = material.icon_colour
+		ashtray_cache[cache_key] = I
+	overlays |= ashtray_cache[cache_key]
 
 	if (contents.len == max_butts)
-		overlays |= image('icons/obj/objects.dmi',"ashtray_full")
+		if(!ashtray_cache["full"])
+			ashtray_cache["full"] = image('icons/obj/objects.dmi',"ashtray_full")
+		overlays |= ashtray_cache["full"]
 		desc = "It's stuffed full."
 	else if (contents.len > max_butts/2)
-		overlays |= image('icons/obj/objects.dmi',"ashtray_half")
+		if(!ashtray_cache["half"])
+			ashtray_cache["half"] = image('icons/obj/objects.dmi',"ashtray_half")
+		overlays |= ashtray_cache["half"]
 		desc = "It's half-filled."
 	else
 		desc = "An ashtray made of [material.display_name]."
 
-/obj/item/ashtray/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/item/weapon/material/ashtray/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (health <= 0)
 		return
 	if (istype(W,/obj/item/weapon/cigbutt) || istype(W,/obj/item/clothing/mask/smokable/cigarette) || istype(W, /obj/item/weapon/flame/match))
@@ -52,6 +62,8 @@
 				cig.transfer_fingerprints_to(butt)
 				qdel(cig)
 				W = butt
+				spawn(1)
+					TemperatureAct(150)
 			else if (cig.lit == 0)
 				user << "You place [cig] in [src] without even smoking it. Why would you do that?"
 
@@ -67,44 +79,29 @@
 			die()
 	return
 
-/obj/item/ashtray/throw_impact(atom/hit_atom)
+/obj/item/weapon/material/ashtray/throw_impact(atom/hit_atom)
 	if (health > 0)
 		health = max(0,health - 3)
 		if (health < 1)
 			die()
 			return
 		if (contents.len)
-			src.visible_message("\red [src] slams into [hit_atom] spilling its contents!")
+			src.visible_message("<span class='danger'>\The [src] slams into [hit_atom], spilling its contents!</span>")
 		for (var/obj/item/clothing/mask/smokable/cigarette/O in contents)
 			O.loc = src.loc
 		update_icon()
 	return ..()
 
-/obj/item/ashtray/proc/die()
+/obj/item/weapon/material/ashtray/proc/die()
 	material.place_shard(get_turf(src))
 	qdel(src)
 	return
 
-/obj/item/ashtray/plastic
-	max_butts = 14
-	health = 24
-	throwforce = 3
-
-/obj/item/ashtray/plastic/New(var/newloc)
+/obj/item/weapon/material/ashtray/plastic/New(var/newloc)
 	..(newloc, "plastic")
 
-/obj/item/ashtray/bronze
-	max_butts = 10
-	health = 72
-	throwforce = 10
-
-/obj/item/ashtray/bronze/New(var/newloc)
+/obj/item/weapon/material/ashtray/bronze/New(var/newloc)
 	..(newloc, "gold") //placeholder
 
-/obj/item/ashtray/glass
-	max_butts = 12
-	health = 12
-	throwforce = 6
-
-/obj/item/ashtray/glass/New(var/newloc)
+/obj/item/weapon/material/ashtray/glass/New(var/newloc)
 	..(newloc, "glass")

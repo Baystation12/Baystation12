@@ -52,14 +52,19 @@
 	if(!..())
 		return
 	if(!unbreakable)
-		if(!prob(material.hardness))
+		if(material.is_brittle())
+			health = 0
+		else if(!prob(material.hardness))
 			health--
-		if(health<=0)
-			shatter()
+		check_health()
+
+/obj/item/weapon/material/proc/check_health()
+	if(health<=0)
+		shatter()
 
 /obj/item/weapon/material/proc/shatter()
 	var/turf/T = get_turf(src)
-	T.visible_message("<span class='danger'>\The [src] shatters!</span>")
+	T.visible_message("<span class='danger'>\The [src] [material.destruction_desc]!</span>")
 	if(istype(loc, /mob/living))
 		var/mob/living/M = loc
 		M.drop_from_inventory(src)
@@ -72,3 +77,25 @@
 		return
 	for(var/mob/living/L in range(1,src))
 		L.apply_effect(round(material.radioactivity/3),IRRADIATE,0)
+
+/obj/item/weapon/material/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
+	if(exposed_temperature > material.ignition_point)
+		TemperatureAct(exposed_temperature)
+
+// This might need adjustment. Will work that out later.
+/obj/item/weapon/material/proc/TemperatureAct(temperature)
+	if(temperature > material.ignition_point)
+		for(var/turf/simulated/floor/target_tile in range(2,loc))
+			var/phoronToDeduce = temperature/30
+			target_tile.assume_gas("phoron", phoronToDeduce, 200+T0C)
+			spawn (0) target_tile.hotspot_expose(temperature, 400)
+			health -= phoronToDeduce/100
+			check_health()
+
+/obj/item/weapon/material/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	if(istype(W,/obj/item/weapon/weldingtool))
+		var/obj/item/weapon/weldingtool/WT = W
+		if(material.ignition_point && WT.remove_fuel(0, user))
+			TemperatureAct(150)
+	else
+		return ..()
