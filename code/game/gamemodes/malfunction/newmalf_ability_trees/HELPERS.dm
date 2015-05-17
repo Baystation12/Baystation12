@@ -25,11 +25,25 @@
 		return
 	var/note = null
 
-	if(choice)
-		note = choice.desc
+	var/datum/malf_hardware/C
+
+	switch(choice)
+		if("APU Generator")
+			C = new/datum/malf_hardware/apu_gen()
+		if("Turrets Focus Enhancer")
+			C = new/datum/malf_hardware/strong_turrets()
+		if("Secondary Processor Unit")
+			C = new/datum/malf_hardware/dual_cpu()
+		if("Secondary Memory Bank")
+			C = new/datum/malf_hardware/dual_ram()
+		if("Self-Destruct Explosives")
+			C = new/datum/malf_hardware/core_bomb()
+
+	if(C)
+		note = C.desc
 
 	if(!note)
-		error("Hardware without description: [choice]")
+		error("Hardware without description: [C]")
 		return
 
 	var/confirmation = input("[note] - Is this what you want?") in list("Yes", "No")
@@ -39,10 +53,8 @@
 
 	switch(choice)
 		if("APU Generator")
-			user.hardware = new/datum/malf_hardware/apu_gen()
 			user.verbs += new/datum/game_mode/malfunction/verb/ai_toggle_apu()
 		if("Turrets Focus Enhancer")
-			user.hardware = new/datum/malf_hardware/strong_turrets()
 			for(var/obj/machinery/turret/T in machines)
 				T.maxhealth += 30
 				T.shot_delay = 7 // Half of default time.
@@ -54,13 +66,11 @@
 				T.auto_repair = 1
 				T.active_power_usage = 25000
 		if("Secondary Processor Unit")
-			user.hardware = new/datum/malf_hardware/dual_cpu()
 		if("Secondary Memory Bank")
-			user.hardware = new/datum/malf_hardware/dual_ram()
 		if("Self-Destruct Explosives")
-			user.hardware = new/datum/malf_hardware/core_bomb()
 			user.verbs += new/datum/game_mode/malfunction/verb/ai_self_destruct()
 
+	user.hardware = C
 
 // Verb: ai_help()
 // Parameters: None
