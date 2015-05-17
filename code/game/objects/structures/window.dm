@@ -13,7 +13,7 @@
 	var/state = 2
 	var/reinf = 0
 	var/basestate
-	var/shardtype = /obj/item/weapon/shard
+	var/shardtype = /obj/item/weapon/material/shard
 	var/glasstype = null // Set this in subtypes. Null is assumed strange or otherwise impossible to dismantle, such as for shuttle glass.
 	var/silicate = 0 // number of units of silicate
 
@@ -87,11 +87,11 @@
 		var/index = null
 		index = 0
 		while(index < 2)
-			new shardtype(loc)
+			new shardtype(loc) //todo pooling?
 			if(reinf) PoolOrNew(/obj/item/stack/rods, loc)
 			index++
 	else
-		new shardtype(loc)
+		new shardtype(loc) //todo pooling?
 		if(reinf) PoolOrNew(/obj/item/stack/rods, loc)
 	qdel(src)
 	return
@@ -262,7 +262,7 @@
 		else
 			visible_message("<span class='notice'>[user] dismantles \the [src].</span>")
 			if(dir == SOUTHWEST)
-				var/obj/item/stack/sheet/mats = new glasstype(loc)
+				var/obj/item/stack/material/mats = new glasstype(loc)
 				mats.amount = is_fulltile() ? 4 : 2
 			else
 				new glasstype(loc)
@@ -398,7 +398,7 @@
 	desc = "It looks thin and flimsy. A few knocks with... anything, really should shatter it."
 	icon_state = "window"
 	basestate = "window"
-	glasstype = /obj/item/stack/sheet/glass
+	glasstype = /obj/item/stack/material/glass
 
 
 /obj/structure/window/phoronbasic
@@ -406,8 +406,8 @@
 	desc = "A phoron-glass alloy window. It looks insanely tough to break. It appears it's also insanely tough to burn through."
 	basestate = "phoronwindow"
 	icon_state = "phoronwindow"
-	shardtype = /obj/item/weapon/shard/phoron
-	glasstype = /obj/item/stack/sheet/glass/phoronglass
+	shardtype = /obj/item/weapon/material/shard/phoron
+	glasstype = /obj/item/stack/material/glass/phoronglass
 	maxhealth = 120
 
 /obj/structure/window/phoronbasic/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
@@ -420,8 +420,8 @@
 	desc = "A phoron-glass alloy window, with rods supporting it. It looks hopelessly tough to break. It also looks completely fireproof, considering how basic phoron windows are insanely fireproof."
 	basestate = "phoronrwindow"
 	icon_state = "phoronrwindow"
-	shardtype = /obj/item/weapon/shard/phoron
-	glasstype = /obj/item/stack/sheet/glass/phoronrglass
+	shardtype = /obj/item/weapon/material/shard/phoron
+	glasstype = /obj/item/stack/material/glass/phoronrglass
 	reinf = 1
 	maxhealth = 160
 
@@ -435,7 +435,7 @@
 	basestate = "rwindow"
 	maxhealth = 40
 	reinf = 1
-	glasstype = /obj/item/stack/sheet/glass/reinforced
+	glasstype = /obj/item/stack/material/glass/reinforced
 
 /obj/structure/window/New(Loc, constructed=0)
 	..()

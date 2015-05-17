@@ -150,7 +150,7 @@
 				if(do_after(user, 40))
 					if(!src || !WT.isOn()) return
 					user << "\blue You welded the [glass] plating off!"
-					var/M = text2path("/obj/item/stack/sheet/mineral/[glass]")
+					var/M = text2path("/obj/item/stack/material/[glass]")
 					new M(src.loc, 2)
 					glass = 0
 			else if(glass == 1)
@@ -158,14 +158,14 @@
 				if(do_after(user, 40))
 					if(!src || !WT.isOn()) return
 					user << "\blue You welded the glass panel out!"
-					new /obj/item/stack/sheet/glass/reinforced(src.loc)
+					new /obj/item/stack/material/glass/reinforced(src.loc)
 					glass = 0
 			else if(!anchored)
 				user.visible_message("[user] dissassembles the airlock assembly.", "You start to dissassemble the airlock assembly.")
 				if(do_after(user, 40))
 					if(!src || !WT.isOn()) return
 					user << "\blue You dissasembled the airlock assembly!"
-					new /obj/item/stack/sheet/metal(src.loc, 4)
+					new /obj/item/stack/material/steel(src.loc, 4)
 					qdel (src)
 		else
 			user << "\blue You need more welding fuel."
@@ -235,19 +235,19 @@
 			electronics.loc = src.loc
 			electronics = null
 
-	else if(istype(W, /obj/item/stack/sheet) && !glass)
-		var/obj/item/stack/sheet/S = W
+	else if(istype(W, /obj/item/stack/material) && !glass)
+		var/obj/item/stack/material/S = W
 		if (S)
 			if (S.get_amount() >= 1)
-				if(istype(S, /obj/item/stack/sheet/glass/reinforced))
+				if(istype(S, /obj/item/stack/material/glass/reinforced))
 					playsound(src.loc, 'sound/items/Crowbar.ogg', 100, 1)
 					user.visible_message("[user] adds [S.name] to the airlock assembly.", "You start to install [S.name] into the airlock assembly.")
 					if(do_after(user, 40) && !glass)
 						if (S.use(1))
 							user << "<span class='notice'>You installed reinforced glass windows into the airlock assembly.</span>"
 							glass = 1
-				else if(istype(S, /obj/item/stack/sheet/mineral) && S.sheettype)
-					var/M = S.sheettype
+				else if(istype(S, /obj/item/stack/material) && S.default_type)
+					var/M = S.default_type
 					// Ugly hack, will suffice for now. Need to fix it upstream as well, may rewrite mineral walls. ~Z
 					if(M in list("mhydrogen","osmium","tritium","platinum","iron"))
 						user << "You cannot make an airlock out of that material."

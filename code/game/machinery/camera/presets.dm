@@ -144,7 +144,7 @@ var/global/list/engineering_networks = list(
 // CHECKS
 
 /obj/machinery/camera/proc/isEmpProof()
-	var/O = locate(/obj/item/stack/sheet/mineral/osmium) in assembly.upgrades
+	var/O = locate(/obj/item/stack/material/osmium) in assembly.upgrades
 	return O
 
 /obj/machinery/camera/proc/isXRay()
@@ -160,7 +160,7 @@ var/global/list/engineering_networks = list(
 // UPGRADE PROCS
 
 /obj/machinery/camera/proc/upgradeEmpProof()
-	assembly.upgrades.Add(new /obj/item/stack/sheet/mineral/osmium(assembly))
+	assembly.upgrades.Add(new /obj/item/stack/material/osmium(assembly))
 	setPowerUsage()
 
 /obj/machinery/camera/proc/upgradeXRay()

@@ -452,7 +452,7 @@
 		if(W.w_class != 3)
 			user << "\The [W] is too [W.w_class < 3? "small" : "large"] to fit here."
 			return
-		
+
 		user.drop_item()
 		W.loc = src
 		cell = W
@@ -590,7 +590,7 @@
 		if(do_after(user, 50))
 			if(!src || !WT.remove_fuel(3, user)) return
 			if (emagged || malfhack || (stat & BROKEN) || opened==2)
-				new /obj/item/stack/sheet/metal(loc)
+				new /obj/item/stack/material/steel(loc)
 				user.visible_message(\
 					"<span class='warning'>[src] has been cut apart by [user.name] with the weldingtool.</span>",\
 					"<span class='notice'>You disassembled the broken APC frame.</span>",\

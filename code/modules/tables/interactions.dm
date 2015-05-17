@@ -89,7 +89,7 @@
 						playsound(loc, 'sound/weapons/tablehit1.ogg', 50, 1)
 					var/list/L = take_damage(rand(1,5))
 					// Shards. Extra damage, plus potentially the fact YOU LITERALLY HAVE A PIECE OF GLASS/METAL/WHATEVER IN YOUR FACE
-					for(var/obj/item/weapon/shard/S in L)
+					for(var/obj/item/weapon/material/shard/S in L)
 						if(prob(50))
 							M.visible_message("<span class='danger'>\The [S] slices [M]'s face messily!</span>",
 							                   "<span class='danger'>\The [S] slices your face messily!</span>")

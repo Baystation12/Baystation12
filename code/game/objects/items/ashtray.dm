@@ -1,25 +1,44 @@
 /obj/item/ashtray
-	icon = 'icons/ashtray.dmi'
-	var/
-		max_butts 	= 0
-		empty_desc 	= ""
-		icon_empty 	= ""
-		icon_half  	= ""
-		icon_full  	= ""
-		icon_broken	= ""
+	icon = 'icons/obj/objects.dmi'
+	icon_state = "blank"
+	var/max_butts = 0
+	var/material/material
 
-/obj/item/ashtray/New()
-	..()
+/obj/item/ashtray/New(var/newloc, var/material_name)
+	..(newloc)
+	if(!material_name)
+		material_name = "plastic"
+	material = get_material_by_name(material_name)
+	if(!material)
+		qdel(src)
+		return
+	name = "[material.display_name] ashtray"
 	src.pixel_y = rand(-5, 5)
 	src.pixel_x = rand(-6, 6)
+	update_icon()
 	return
 
+/obj/item/ashtray/update_icon()
+	overlays.Cut()
+	var/image/I = image('icons/obj/objects.dmi',"ashtray")
+	I.color = material.icon_colour
+	overlays |= I
+
+	if (contents.len == max_butts)
+		overlays |= image('icons/obj/objects.dmi',"ashtray_full")
+		desc = "It's stuffed full."
+	else if (contents.len > max_butts/2)
+		overlays |= image('icons/obj/objects.dmi',"ashtray_half")
+		desc = "It's half-filled."
+	else
+		desc = "An ashtray made of [material.display_name]."
+
 /obj/item/ashtray/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if (health < 1)
+	if (health <= 0)
 		return
 	if (istype(W,/obj/item/weapon/cigbutt) || istype(W,/obj/item/clothing/mask/smokable/cigarette) || istype(W, /obj/item/weapon/flame/match))
 		if (contents.len >= max_butts)
-			user << "This ashtray is full."
+			user << "\The [src] is full."
 			return
 		user.remove_from_mob(W)
 		W.loc = src
@@ -27,7 +46,7 @@
 		if (istype(W,/obj/item/clothing/mask/smokable/cigarette))
 			var/obj/item/clothing/mask/smokable/cigarette/cig = W
 			if (cig.lit == 1)
-				src.visible_message("[user] crushes [cig] in [src], putting it out.")
+				src.visible_message("[user] crushes [cig] in \the [src], putting it out.")
 				processing_objects.Remove(cig)
 				var/obj/item/butt = new cig.type_butt(src)
 				cig.transfer_fingerprints_to(butt)
@@ -40,12 +59,7 @@
 		user.update_inv_l_hand()
 		user.update_inv_r_hand()
 		add_fingerprint(user)
-		if (contents.len == max_butts)
-			icon_state = icon_full
-			desc = empty_desc + " It's stuffed full."
-		else if (contents.len > max_butts/2)
-			icon_state = icon_half
-			desc = empty_desc + " It's half-filled."
+		update_icon()
 	else
 		health = max(0,health - W.force)
 		user << "You hit [src] with [W]."
@@ -63,73 +77,34 @@
 			src.visible_message("\red [src] slams into [hit_atom] spilling its contents!")
 		for (var/obj/item/clothing/mask/smokable/cigarette/O in contents)
 			O.loc = src.loc
-		icon_state = icon_empty
+		update_icon()
 	return ..()
 
 /obj/item/ashtray/proc/die()
-	src.visible_message("\red [src] shatters spilling its contents!")
-	for (var/obj/item/clothing/mask/smokable/cigarette/O in contents)
-		O.loc = src.loc
-	icon_state = icon_broken
+	material.place_shard(get_turf(src))
+	qdel(src)
+	return
 
 /obj/item/ashtray/plastic
-	name = "plastic ashtray"
-	desc = "Cheap plastic ashtray."
-	icon_state = "ashtray_bl"
-	icon_empty = "ashtray_bl"
-	icon_half  = "ashtray_half_bl"
-	icon_full  = "ashtray_full_bl"
-	icon_broken  = "ashtray_bork_bl"
 	max_butts = 14
-	health = 24.0
-	matter = list(DEFAULT_WALL_MATERIAL = 30,"glass" = 30)
-	empty_desc = "Cheap plastic ashtray."
-	throwforce = 3.0
-	die()
-		..()
-		name = "pieces of plastic"
-		desc = "Pieces of plastic with ash on them."
-		return
+	health = 24
+	throwforce = 3
 
+/obj/item/ashtray/plastic/New(var/newloc)
+	..(newloc, "plastic")
 
 /obj/item/ashtray/bronze
-	name = "bronze ashtray"
-	desc = "Massive bronze ashtray."
-	icon_state = "ashtray_br"
-	icon_empty = "ashtray_br"
-	icon_half  = "ashtray_half_br"
-	icon_full  = "ashtray_full_br"
-	icon_broken  = "ashtray_bork_br"
 	max_butts = 10
-	health = 72.0
-	matter = list(DEFAULT_WALL_MATERIAL = 80)
-	empty_desc = "Massive bronze ashtray."
-	throwforce = 10.0
+	health = 72
+	throwforce = 10
 
-	die()
-		..()
-		name = "pieces of bronze"
-		desc = "Pieces of bronze with ash on them."
-		return
-
+/obj/item/ashtray/bronze/New(var/newloc)
+	..(newloc, "gold") //placeholder
 
 /obj/item/ashtray/glass
-	name = "glass ashtray"
-	desc = "Glass ashtray. Looks fragile."
-	icon_state = "ashtray_gl"
-	icon_empty = "ashtray_gl"
-	icon_half  = "ashtray_half_gl"
-	icon_full  = "ashtray_full_gl"
-	icon_broken  = "ashtray_bork_gl"
 	max_butts = 12
-	health = 12.0
-	matter = list("glass" = 60)
-	empty_desc = "Glass ashtray. Looks fragile."
-	throwforce = 6.0
+	health = 12
+	throwforce = 6
 
-	die()
-		..()
-		name = "shards of glass"
-		desc = "Shards of glass with ash on them."
-		playsound(src, "shatter", 30, 1)
-		return
+/obj/item/ashtray/glass/New(var/newloc)
+	..(newloc, "glass")

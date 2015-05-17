@@ -53,7 +53,7 @@
 	if(href_list["release_stack"])
 		if(machine.stack_storage[href_list["release_stack"]] > 0)
 			var/stacktype = machine.stack_paths[href_list["release_stack"]]
-			var/obj/item/stack/sheet/S = new stacktype (get_turf(machine.output))
+			var/obj/item/stack/material/S = new stacktype (get_turf(machine.output))
 			S.amount = machine.stack_storage[href_list["release_stack"]]
 			machine.stack_storage[href_list["release_stack"]] = 0
 
@@ -81,18 +81,18 @@
 /obj/machinery/mineral/stacking_machine/New()
 	..()
 
-	for(var/stacktype in typesof(/obj/item/stack/sheet/mineral)-/obj/item/stack/sheet/mineral)
+	for(var/stacktype in typesof(/obj/item/stack/material)-/obj/item/stack/material)
 		var/obj/item/stack/S = new stacktype(src)
 		stack_storage[S.name] = 0
 		stack_paths[S.name] = stacktype
 		qdel(S)
 
 	stack_storage["glass"] = 0
-	stack_paths["glass"] = /obj/item/stack/sheet/glass
+	stack_paths["glass"] = /obj/item/stack/material/glass
 	stack_storage[DEFAULT_WALL_MATERIAL] = 0
-	stack_paths[DEFAULT_WALL_MATERIAL] = /obj/item/stack/sheet/metal
+	stack_paths[DEFAULT_WALL_MATERIAL] = /obj/item/stack/material/steel
 	stack_storage["plasteel"] = 0
-	stack_paths["plasteel"] = /obj/item/stack/sheet/plasteel
+	stack_paths["plasteel"] = /obj/item/stack/material/plasteel
 
 	spawn( 5 )
 		for (var/dir in cardinal)
@@ -122,7 +122,7 @@
 	for(var/sheet in stack_storage)
 		if(stack_storage[sheet] >= stack_amt)
 			var/stacktype = stack_paths[sheet]
-			var/obj/item/stack/sheet/S = new stacktype (get_turf(output))
+			var/obj/item/stack/material/S = new stacktype (get_turf(output))
 			S.amount = stack_amt
 			stack_storage[sheet] -= stack_amt
 
