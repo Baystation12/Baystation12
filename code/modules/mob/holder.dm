@@ -32,10 +32,6 @@
 	for(var/mob/M in src.contents)
 		M.attackby(W,user)
 
-/obj/item/weapon/holder/show_message(msg, type, alt, alt_type)
-	for(var/mob/living/M in contents)
-		M.show_message(msg,type)
-
 //Mob procs and vars for scooping up
 /mob/living/var/holder_type
 
