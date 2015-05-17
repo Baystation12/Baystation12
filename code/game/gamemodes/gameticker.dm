@@ -163,7 +163,6 @@ var/global/datum/controller/gameticker/ticker
 	for(var/obj/multiz/ladder/L in world) L.connect() //Lazy hackfix for ladders. TODO: move this to an actual controller. ~ Z
 
 	if(config.sql_enabled)
-		spawn(3000)
 		statistic_cycle() // Polls population totals regularly and stores them in an SQL DB -- TLE
 
 	return 1
