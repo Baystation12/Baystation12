@@ -10,5 +10,5 @@
 
 /mob/living/carbon/alien/larva/New()
 	..()
-	add_language("Xenomorph") //Bonus language.
+	add_language("Xenophage") //Bonus language.
 	internal_organs |= new /obj/item/organ/xenos/hivenode(src)

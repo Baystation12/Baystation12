@@ -50,7 +50,7 @@
 	//Set species_restricted list
 	switch(target_species)
 		if("Human", "Skrell")	//humanoid bodytypes
-			species_restricted = list("exclude","Unathi","Tajara","Diona","Vox", "Xenomorph", "Xenomorph Drone", "Xenomorph Hunter", "Xenomorph Sentinel", "Xenomorph Queen")
+			species_restricted = list("exclude","Unathi","Tajara","Diona","Vox", "Xenophage", "Xenophage Drone", "Xenophage Hunter", "Xenophage Sentinel", "Xenophage Queen")
 		else
 			species_restricted = list(target_species)
 
@@ -72,9 +72,9 @@
 	//Set species_restricted list
 	switch(target_species)
 		if("Skrell")
-			species_restricted = list("exclude","Unathi","Tajara","Diona","Vox", "Xenomorph", "Xenomorph Drone", "Xenomorph Hunter", "Xenomorph Sentinel", "Xenomorph Queen")
+			species_restricted = list("exclude","Unathi","Tajara","Diona","Vox", "Xenophage", "Xenophage Drone", "Xenophage Hunter", "Xenophage Sentinel", "Xenophage Queen")
 		if("Human")
-			species_restricted = list("exclude","Skrell","Unathi","Tajara","Diona","Vox", "Xenomorph", "Xenomorph Drone", "Xenomorph Hunter", "Xenomorph Sentinel", "Xenomorph Queen")
+			species_restricted = list("exclude","Skrell","Unathi","Tajara","Diona","Vox", "Xenophage", "Xenophage Drone", "Xenophage Hunter", "Xenophage Sentinel", "Xenophage Queen")
 		else
 			species_restricted = list(target_species)
 
@@ -384,19 +384,19 @@ BLIND     // can't see anything
 	var/displays_id = 1
 	var/rolled_down = -1 //0 = unrolled, 1 = rolled, -1 = cannot be toggled
 	sprite_sheets = list("Vox" = 'icons/mob/species/vox/uniform.dmi')
-	
+
 	//convenience var for defining the icon state for the overlay used when the clothing is worn.
 	//Also used by rolling/unrolling.
 	var/worn_state = null
 
 /obj/item/clothing/under/New()
 	if(worn_state)
-		if(!item_state_slots) 
+		if(!item_state_slots)
 			item_state_slots = list()
 		item_state_slots[slot_w_uniform_str] = worn_state
 	else
 		worn_state = icon_state
-		
+
 	//autodetect rollability
 	if(rolled_down < 0)
 		if((worn_state + "_d_s") in icon_states('icons/mob/uniform.dmi'))
@@ -460,10 +460,10 @@ BLIND     // can't see anything
 
 		if (( usr.restrained() ) || ( usr.stat ))
 			return
-		
+
 		if (!usr.unEquip(src))
 			return
-		
+
 		switch(over_object.name)
 			if("r_hand")
 				usr.put_in_r_hand(src)
@@ -546,7 +546,7 @@ BLIND     // can't see anything
 	if(rolled_down < 0)
 		usr << "<span class='notice'>You cannot roll down [src]!</span>"
 		return
-	
+
 	rolled_down = !rolled_down
 	if(rolled_down)
 		body_parts_covered &= LOWER_TORSO|LEGS|FEET

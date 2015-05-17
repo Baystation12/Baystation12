@@ -2,7 +2,7 @@
 	for(var/mob/living/carbon/human/Q in living_mob_list)
 		if(self && ignore_self && self == Q)
 			continue
-		if(Q.species.name != "Xenomorph Queen")
+		if(Q.species.name != "Xenophage Queen")
 			continue
 		if(!Q.key || !Q.client || Q.stat)
 			continue
@@ -110,7 +110,7 @@
 
 	if(check_alien_ability(500))
 		visible_message("<span class='alium'><B>[src] begins to twist and contort!</B></span>", "<span class='alium'>You begin to evolve!</span>")
-		src.set_species("Xenomorph Queen")
+		src.set_species("Xenophage Queen")
 
 	return
 

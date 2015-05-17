@@ -178,7 +178,7 @@
 		qdel(t)
 
 	var/alien_caste = pick("Hunter","Sentinel","Drone")
-	var/mob/living/carbon/human/new_xeno = create_new_xenomorph(alien_caste,loc)
+	var/mob/living/carbon/human/new_xeno = create_new_xenophage(alien_caste,loc)
 
 	new_xeno.a_intent = I_HURT
 	new_xeno.key = key

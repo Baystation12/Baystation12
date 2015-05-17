@@ -1,9 +1,9 @@
 //Stand-in until this is made more lore-friendly.
 /datum/species/xenos
-	name = "Xenomorph"
-	name_plural = "Xenomorphs"
+	name = "Xenophage"
+	name_plural = "Xenophages"
 
-	default_language = "Xenomorph"
+	default_language = "Xenophage"
 	language = "Hivemind"
 	unarmed_types = list(/datum/unarmed_attack/claws/strong, /datum/unarmed_attack/bite/strong)
 	hud_type = /datum/hud_data/alien
@@ -145,7 +145,7 @@
 	..()
 
 /datum/species/xenos/drone
-	name = "Xenomorph Drone"
+	name = "Xenophage Drone"
 	caste_name = "drone"
 	weeds_plasma_rate = 15
 	slowdown = 1
@@ -184,7 +184,7 @@
 
 /datum/species/xenos/hunter
 
-	name = "Xenomorph Hunter"
+	name = "Xenophage Hunter"
 	weeds_plasma_rate = 5
 	caste_name = "hunter"
 	slowdown = -2
@@ -212,7 +212,7 @@
 		)
 
 /datum/species/xenos/sentinel
-	name = "Xenomorph Sentinel"
+	name = "Xenophage Sentinel"
 	weeds_plasma_rate = 10
 	caste_name = "sentinel"
 	slowdown = 0
@@ -242,7 +242,7 @@
 
 /datum/species/xenos/queen
 
-	name = "Xenomorph Queen"
+	name = "Xenophage Queen"
 	total_health = 250
 	weeds_heal_rate = 5
 	weeds_plasma_rate = 20

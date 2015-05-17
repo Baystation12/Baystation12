@@ -609,7 +609,7 @@ default behaviour is:
 
 /mob/living/proc/escape_inventory(obj/item/weapon/holder/H)
 	if(H != src.loc) return
-	
+
 	var/mob/M = H.loc //Get our mob holder (if any).
 
 	if(istype(M))
@@ -723,7 +723,7 @@ default behaviour is:
 
 	if(!ignore_items)
 		for(var/obj/item/carried_item in contents)//If the monkey got on objects.
-			if( !istype(carried_item, /obj/item/weapon/implant) && !istype(carried_item, /obj/item/clothing/mask/facehugger) )//If it's not an implant or a facehugger
+			if( !istype(carried_item, /obj/item/weapon/implant))//If it's not an implant
 				src << "\red You can't be carrying items or have items equipped when vent crawling!"
 				return
 
