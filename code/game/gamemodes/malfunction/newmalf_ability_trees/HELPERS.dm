@@ -24,18 +24,12 @@
 	if(choice == "CANCEL")
 		return
 	var/note = null
-	switch(choice)
-		if("APU Generator")
-			note = "APU Generator - When enabled it will keep your core powered. Power output is not large enough so your abilities won't be available while running on APU power. It is also very fragile and prone to failure when your physical core is damaged."
-		if("Turrets Focus Enhancer")
-			note = "Overcharges turrets to shoot faster. Turrets will also gain higher health and passive regeneration. This however massively increases power usage of turrets, espicially when regenerating."
-		if("Secondary Processor Unit")
-			note = "Doubles your CPU time generation."
-		if("Secondary Memory Bank")
-			note = "Doubles your CPU time storage."
-		if("Self-Destruct Explosives")
-			note = "High yield explosives are attached to your physical mainframe. This hardware comes with activation driver. Explosives will destroy your core and everything around it."
+
+	if(choice)
+		note = choice.desc
+
 	if(!note)
+		error("Hardware without description: [choice]")
 		return
 
 	var/confirmation = input("[note] - Is this what you want?") in list("Yes", "No")

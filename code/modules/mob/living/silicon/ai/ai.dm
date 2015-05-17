@@ -758,12 +758,12 @@ var/list/ai_verbs_default = list(
 	// Off-Station APCs should not count towards CPU generation.
 	for(var/obj/machinery/power/apc/A in hacked_apcs)
 		if(A.z == 1)
-			cpu_gain += 0.001
+			cpu_gain += 0.002
 			cpu_storage += 10
 
 	research.max_cpu = cpu_storage + override_CPUStorage
 	if(hardware && istype(hardware, /datum/malf_hardware/dual_ram))
-		research.max_cpu = research.max_cpu * 2
+		research.max_cpu = research.max_cpu * 1.5
 	research.stored_cpu = min(research.stored_cpu, research.max_cpu)
 
 	research.cpu_increase_per_tick = cpu_gain + override_CPURate

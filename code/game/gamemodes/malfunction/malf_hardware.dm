@@ -18,7 +18,7 @@
 
 /datum/malf_hardware/dual_cpu
 	name = "Secondary Processor Unit"
-	desc = "Secondary coprocessor that doubles amount of CPU time generated."
+	desc = "Secondary coprocessor that increases amount of generated CPU power by 50%"
 
 /datum/malf_hardware/dual_ram
 	name = "Secondary Memory Bank"

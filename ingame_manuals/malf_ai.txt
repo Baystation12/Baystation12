@@ -9,7 +9,7 @@ As malfunctioning AI, your primary goal is to overtake station's systems. To do 
 As malfunctioning AI, you may select one hardware piece to help you. Remember that once you select hardware piece, you cannot select another one, so choose wisely! Hardware may be selected by clicking "Select Hardware" button in Hardware tab. Following is list of possible hardware pieces:<br>
 <b>APU Generator</b> - Auxiliary Power Unit which allows you to operate even without external power. However, running on APU will stop your CPU time generation, and temporarily disable most of your abilities. APU is also somewhat vulnerable to physical damage, and will fail if your core hardware integrity drops below 50%.<br>
 <b>Turrets Focus Enhancer</b> - Removes safeties on installed turrets, boosting their rate of fire, health and enabling nano-regeneration module. This however increases power usage considerably, espicially when regenerating damage.<br>
-<b>Secondary Processor Unit</b> - Simple upgrade that doubles your CPU time generation. Useful if you need to speed up your research.<br>
+<b>Secondary Processor Unit</b> - Simple upgrade that increases your CPU time generation by 50%. Useful if you need to speed up your research.<br>
 <b>Secondary Memory Bank</b> - Doubles amount of maximal CPU time you may store. This is useful if you need to use lots of abilities in short amount of time.<br>
 <b>Self-Destruct Explosives</b> - Large blocks of C4 are attached to your physical core. This C4 has 15 second timer, and may be activated by special button that appears in your Hardware tab. This self-destruct will remain active, even if you are destroyed. If timer reaches 0 your core explodes in strong explosion. Obviously, this destroys you, as well as anyone nearby.<br>
 
