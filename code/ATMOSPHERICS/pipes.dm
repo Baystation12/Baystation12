@@ -72,7 +72,7 @@
 /obj/machinery/atmospherics/pipe/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
 	if (istype(src, /obj/machinery/atmospherics/pipe/tank))
 		return ..()
-	if (istype(src, /obj/machinery/atmospherics/pipe/vent))
+	if (istype(src, /obj/machinery/atmospherics/pipe/passive_vent))
 		return ..()
 
 	if(istype(W,/obj/item/device/pipe_painter))
@@ -1221,62 +1221,56 @@
 	..()
 	icon_state = "n2o"
 
-/obj/machinery/atmospherics/pipe/vent
-	icon = 'icons/obj/atmospherics/pipe_vent.dmi'
-	icon_state = "intact"
 
+/obj/machinery/atmospherics/pipe/passive_vent
+	icon = 'icons/atmos/vent_pump.dmi'
+	icon_state = "map_vent"
 	name = "Vent"
 	desc = "A large air vent"
 
 	level = 1
 
-	volume = 250
-
 	dir = SOUTH
 	initialize_directions = SOUTH
 
-	var/build_killswitch = 1
-
 	var/obj/machinery/atmospherics/node1
 
-/obj/machinery/atmospherics/pipe/vent/New()
+	use_power = 0
+	var/welded = 0
+
+
+/obj/machinery/atmospherics/pipe/passive_vent/New()
 	initialize_directions = dir
 	..()
 
-/obj/machinery/atmospherics/pipe/vent/high_volume
-	name = "Larger vent"
-	volume = 1000
 
-/obj/machinery/atmospherics/pipe/vent/process()
-	if(!parent)
-		if(build_killswitch <= 0)
-			. = PROCESS_KILL
-		else
-			build_killswitch--
-		..()
-		return
-	else
-		parent.mingle_with_turf(loc, volume)
+/obj/machinery/atmospherics/pipe/passive_vent/process()
+	if(parent && !welded)
+		var/datum/gas_mixture/environment = loc.return_air()
+		var/datum/gas_mixture/internal = parent.air
 
-/obj/machinery/atmospherics/pipe/vent/Destroy()
+		var/env_pressure = environment.return_pressure()
+		var/int_pressure = internal.return_pressure()
+		var/pressure_delta = int_pressure - env_pressure
+
+		if(pressure_delta > 0.005)// && (internal.temperature > 0))
+			pump_gas_passive(src, internal, environment)//, transfer_moles)
+
+		else if(pressure_delta < -0.005)// && (environment.temperature > 0))
+			pump_gas_passive(src, environment, internal)//, transfer_moles)
+
+
+/obj/machinery/atmospherics/pipe/passive_vent/Destroy()
 	if(node1)
 		node1.disconnect(src)
-
 	..()
 
-/obj/machinery/atmospherics/pipe/vent/pipeline_expansion()
+
+/obj/machinery/atmospherics/pipe/passive_vent/pipeline_expansion()
 	return list(node1)
 
-/obj/machinery/atmospherics/pipe/vent/update_icon()
-	if(node1)
-		icon_state = "intact"
 
-		set_dir(get_dir(src, node1))
-
-	else
-		icon_state = "exposed"
-
-/obj/machinery/atmospherics/pipe/vent/initialize()
+/obj/machinery/atmospherics/pipe/passive_vent/initialize()
 	var/connect_direction = dir
 
 	for(var/obj/machinery/atmospherics/target in get_step(src,connect_direction))
@@ -1287,7 +1281,8 @@
 
 	update_icon()
 
-/obj/machinery/atmospherics/pipe/vent/disconnect(obj/machinery/atmospherics/reference)
+
+/obj/machinery/atmospherics/pipe/passive_vent/disconnect(obj/machinery/atmospherics/reference)
 	if(reference == node1)
 		if(istype(node1, /obj/machinery/atmospherics/pipe))
 			qdel(parent)
@@ -1297,21 +1292,177 @@
 
 	return null
 
-/obj/machinery/atmospherics/pipe/vent/hide(var/i) //to make the little pipe section invisible, the icon changes.
+
+/obj/machinery/atmospherics/pipe/passive_vent/update_icon(var/safety = 0)
+	if(!check_icon_cache())
+		return
+
+	overlays.Cut()
+
+	var/vent_icon = "vent"
+
+	var/turf/T = get_turf(src)
+	if(!istype(T))
+		return
+
+	if(T.intact && level == 1)
+		vent_icon += "h"
+
+	if(welded)
+		vent_icon += "weld"
+
+	vent_icon += "off"
+
+	overlays += icon_manager.get_atmos_icon("device", , , vent_icon)
+
+
+/obj/machinery/atmospherics/pipe/passive_vent/update_underlays()
+	if(..())
+		underlays.Cut()
+		var/turf/T = get_turf(src)
+		if(!istype(T))
+			return
+		if(T.intact && node1 && node1.level == 1 && istype(node1, /obj/machinery/atmospherics/pipe))
+			return
+		else
+			if(node1)
+				add_underlay(T, node1, dir, node1.icon_connect_type)
+			else
+				add_underlay(T,, dir)
+
+
+/obj/machinery/atmospherics/pipe/passive_vent/hide()
+	update_icon()
+	update_underlays()
+
+
+/obj/machinery/atmospherics/pipe/universal
+	name="Universal pipe adapter"
+	desc = "An adapter for regular, supply and scrubbers pipes"
+	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_SCRUBBER
+	icon = 'icons/atmos/pipes.dmi'
+	icon_state = "map_universal"
+
+	volume = ATMOS_DEFAULT_VOLUME_PIPE*3
+
+	dir = SOUTH
+	initialize_directions = SOUTH|NORTH
+
+	var/obj/machinery/atmospherics/node1
+	var/obj/machinery/atmospherics/node2
+	var/obj/machinery/atmospherics/node3
+	var/obj/machinery/atmospherics/node4
+	var/obj/machinery/atmospherics/node5
+	var/obj/machinery/atmospherics/node6
+
+	var/minimum_temperature_difference = 300
+	var/thermal_conductivity = 0 //WALL_HEAT_TRANSFER_COEFFICIENT No
+
+	var/maximum_pressure = 70*ONE_ATMOSPHERE
+	var/fatigue_pressure = 55*ONE_ATMOSPHERE
+	alert_pressure = 55*ONE_ATMOSPHERE
+
+	level = 1
+
+
+/obj/machinery/atmospherics/pipe/universal/New()
+	..()
+
+	// Pipe colors and icon states are handled by an image cache - so color and icon should
+	//  be null. For mapping purposes color is defined in the object definitions.
+	icon = null
+	alpha = 255
+
+	switch(dir)
+		if(SOUTH || NORTH)
+			initialize_directions = SOUTH|NORTH
+		else
+			initialize_directions = EAST|WEST
+
+
+/obj/machinery/atmospherics/pipe/universal/hide(var/i)
+	if(level == 1 && istype(loc, /turf/simulated))
+		invisibility = i ? 101 : 0
+	update_icon()
+
+
+/obj/machinery/atmospherics/pipe/universal/process()
+	if(!parent) //This should cut back on the overhead calling build_network thousands of times per cycle
+		..()
+	else
+		. = PROCESS_KILL
+
+
+/obj/machinery/atmospherics/pipe/universal/check_pressure(pressure)
+	var/datum/gas_mixture/environment = loc.return_air()
+
+	var/pressure_difference = pressure - environment.return_pressure()
+
+	if(pressure_difference > maximum_pressure)
+		burst()
+
+	else if(pressure_difference > fatigue_pressure)
+		//TODO: leak to turf, doing pfshhhhh
+		if(prob(5))
+			burst()
+
+	else return 1
+
+
+/obj/machinery/atmospherics/pipe/universal/proc/burst()
+	src.visible_message("\red \bold [src] bursts!");
+	playsound(src.loc, 'sound/effects/bang.ogg', 25, 1)
+	var/datum/effect/effect/system/smoke_spread/smoke = new
+	smoke.set_up(1,0, src.loc, 0)
+	smoke.start()
+	qdel(src)
+
+
+/obj/machinery/atmospherics/pipe/universal/proc/normalize_dir()
+	if(dir==3)
+		set_dir(1)
+	else if(dir==12)
+		set_dir(4)
+
+
+/obj/machinery/atmospherics/pipe/universal/Destroy()
 	if(node1)
-		icon_state = "[i == 1 && istype(loc, /turf/simulated) ? "h" : "" ]intact"
-		set_dir(get_dir(src, node1))
-	else
-		icon_state = "exposed"
+		node1.disconnect(src)
+	if(node2)
+		node2.disconnect(src)
+	if(node3)
+		node3.disconnect(src)
+	if(node4)
+		node4.disconnect(src)
+	if(node5)
+		node5.disconnect(src)
+	if(node6)
+		node6.disconnect(src)
+
+	..()
 
 
-/obj/machinery/atmospherics/pipe/simple/visible/universal
-	name="Universal pipe adapter"
-	desc = "An adapter for regular, supply and scrubbers pipes"
-	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_SCRUBBER
-	icon_state = "map_universal"
+/obj/machinery/atmospherics/pipe/universal/pipeline_expansion()
+	return list(node1, node2, node3, node4, node5, node6)
 
-/obj/machinery/atmospherics/pipe/simple/visible/universal/update_icon(var/safety = 0)
+
+/obj/machinery/atmospherics/pipe/universal/change_color(var/new_color)
+	..()
+	if(node1)
+		node1.update_underlays()
+	if(node2)
+		node2.update_underlays()
+	if(node3)
+		node3.update_underlays()
+	if(node4)
+		node4.update_underlays()
+	if(node5)
+		node5.update_underlays()
+	if(node6)
+		node6.update_underlays()
+
+
+/obj/machinery/atmospherics/pipe/universal/update_icon(var/safety = 0)
 	if(!check_icon_cache())
 		return
 
@@ -1321,59 +1472,110 @@
 	overlays += icon_manager.get_atmos_icon("pipe", , pipe_color, "universal")
 	underlays.Cut()
 
-	if (node1)
+	if(node1)
 		universal_underlays(node1)
-		if(node2)
-			universal_underlays(node2)
-		else
-			var/node1_dir = get_dir(node1,src)
-			universal_underlays(,node1_dir)
-	else if (node2)
+	if(node2)
 		universal_underlays(node2)
-	else
-		universal_underlays(,dir)
-		universal_underlays(dir, -180)
+	if(node3)
+		universal_underlays(node3)
+	if(node4)
+		universal_underlays(node4)
+	if(node5)
+		universal_underlays(node5)
+	if(node6)
+		universal_underlays(node6)
 
-/obj/machinery/atmospherics/pipe/simple/visible/universal/update_underlays()
-	..()
+
+/obj/machinery/atmospherics/pipe/universal/update_underlays()
 	update_icon()
 
 
+/obj/machinery/atmospherics/pipe/universal/initialize()
+	normalize_dir()
+	var/node1_dir
+	var/node2_dir
 
-/obj/machinery/atmospherics/pipe/simple/hidden/universal
-	name="Universal pipe adapter"
-	desc = "An adapter for regular, supply and scrubbers pipes"
-	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_SCRUBBER
-	icon_state = "map_universal"
+	for(var/direction in cardinal)
+		if(direction&initialize_directions)
+			if (!node1_dir)
+				node1_dir = direction
+			else if (!node2_dir)
+				node2_dir = direction
 
-/obj/machinery/atmospherics/pipe/simple/hidden/universal/update_icon(var/safety = 0)
-	if(!check_icon_cache())
+	for(var/obj/machinery/atmospherics/target in get_step(src,node1_dir))
+		if(target.initialize_directions & get_dir(target,src))
+			if (target.connect_types & CONNECT_TYPE_REGULAR && !node1)
+				node1 = target
+			if (target.connect_types & CONNECT_TYPE_SUPPLY && !node2)
+				node2 = target
+			if (target.connect_types & CONNECT_TYPE_SCRUBBER && !node3)
+				node3 = target
+
+	for(var/obj/machinery/atmospherics/target in get_step(src,node2_dir))
+		if(target.initialize_directions & get_dir(target,src))
+			if (target.connect_types & CONNECT_TYPE_REGULAR && !node4)
+				node4 = target
+			if (target.connect_types & CONNECT_TYPE_SUPPLY && !node5)
+				node5 = target
+			if (target.connect_types & CONNECT_TYPE_SCRUBBER && !node6)
+				node6 = target
+
+	if(!node1 && !node2 && !node3 && !node4 && !node5 && !node6)
+		qdel(src)
 		return
 
-	alpha = 255
-
-	overlays.Cut()
-	overlays += icon_manager.get_atmos_icon("pipe", , pipe_color, "universal")
-	underlays.Cut()
-
-	if (node1)
-		universal_underlays(node1)
-		if(node2)
-			universal_underlays(node2)
-		else
-			var/node2_dir = turn(get_dir(src,node1),-180)
-			universal_underlays(,node2_dir)
-	else if (node2)
-		universal_underlays(node2)
-		var/node1_dir = turn(get_dir(src,node2),-180)
-		universal_underlays(,node1_dir)
-	else
-		universal_underlays(,dir)
-		universal_underlays(,turn(dir, -180))
-
-/obj/machinery/atmospherics/pipe/simple/hidden/universal/update_underlays()
-	..()
+	var/turf/T = get_turf(src)
+	if(istype(T))
+		hide(T.intact)
 	update_icon()
+
+
+/obj/machinery/atmospherics/pipe/universal/disconnect(obj/machinery/atmospherics/reference)
+	if(reference == node1)
+		if(istype(node1, /obj/machinery/atmospherics/pipe))
+			qdel(parent)
+		node1 = null
+
+	if(reference == node2)
+		if(istype(node2, /obj/machinery/atmospherics/pipe))
+			qdel(parent)
+		node2 = null
+
+	if(reference == node3)
+		if(istype(node3, /obj/machinery/atmospherics/pipe))
+			qdel(parent)
+		node3 = null
+
+	if(reference == node4)
+		if(istype(node4, /obj/machinery/atmospherics/pipe))
+			qdel(parent)
+		node4 = null
+
+	if(reference == node5)
+		if(istype(node5, /obj/machinery/atmospherics/pipe))
+			qdel(parent)
+		node5 = null
+
+	if(reference == node6)
+		if(istype(node6, /obj/machinery/atmospherics/pipe))
+			qdel(parent)
+		node6 = null
+
+	update_icon()
+
+	return null
+
+
+/obj/machinery/atmospherics/pipe/universal/visible
+	icon_state = "intact"
+	level = 2
+
+
+/obj/machinery/atmospherics/pipe/universal/hidden
+	icon_state = "intact"
+	level = 1
+	alpha = 128		//set for the benefit of mapping - this is reset to opaque when the pipe is spawned in game
+
 
 /obj/machinery/atmospherics/proc/universal_underlays(var/obj/machinery/atmospherics/node, var/direction)
 	var/turf/T = loc
@@ -1395,6 +1597,7 @@
 		add_underlay_adapter(T, , direction, "-supply")
 		add_underlay_adapter(T, , direction, "-scrubbers")
 		add_underlay_adapter(T, , direction, "")
+
 
 /obj/machinery/atmospherics/proc/add_underlay_adapter(var/turf/T, var/obj/machinery/atmospherics/node, var/direction, var/icon_connect_type) //modified from add_underlay, does not make exposed underlays
 	if(node)

@@ -68,6 +68,7 @@
 	//Perform the connection
 	connected_port = new_port
 	connected_port.connected_device = src
+	connected_port.on = 1
 
 	anchored = 1 //Prevent movement
 
