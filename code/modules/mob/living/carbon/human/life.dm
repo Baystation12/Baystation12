@@ -992,6 +992,7 @@
 				AdjustParalysis(-1)
 				blinded = 1
 				stat = UNCONSCIOUS
+				animate_tail_reset()
 				if(halloss > 0)
 					adjustHalLoss(-3)
 			else if(sleeping)
@@ -1006,6 +1007,7 @@
 						sleeping = max(sleeping-1, 0)
 				blinded = 1
 				stat = UNCONSCIOUS
+				animate_tail_reset()
 				if( prob(2) && health && !hal_crit )
 					spawn(0)
 						emote("snore")
