@@ -62,11 +62,10 @@
 					O.show_message( message, 1, blind_message, 2)
 		else if(ismob(I))
 			var/mob/M = I
+			if(self_message && M==src)
+				M.show_message( self_message, 1, blind_message, 2)
 			if(M.see_invisible >= invisibility) // Cannot view the invisible
-				var/msg = message
-				if(self_message && M==src)
-					msg = self_message
-				M.show_message( msg, 1, blind_message, 2)
+				M.show_message( messge, 1, blind_message, 2)
 
 // Returns an amount of power drawn from the object (-1 if it's not viable).
 // If drain_check is set it will not actually drain power, just return a value.

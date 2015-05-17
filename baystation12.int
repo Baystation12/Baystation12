@@ -1,6 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
+WINDOW: code\modules\mob\emote.dm;code\modules\mob\mob.dm;code\modules\mob\living\say.dm;code\game\atoms.dm;code\game\objects\objs.dm;code\game\objects\items\devices\taperecorder.dm;code\modules\clothing\suits\storage.dm;code\modules\clothing\under\accessories\storage.dm;code\game\objects\items\weapons\storage\storage.dm;code\game\objects\structures\crates_lockers\closets.dm;code\game\mecha\mecha.dm;code\__HELPERS\game.dm;code\game\verbs\ooc.dm;code\game\objects\items\devices\radio\radio.dm
+LAST_COMPILE_VERSION: 506.1249
+DIR: code code\__HELPERS code\game code\game\machinery code\game\mecha code\game\objects code\game\objects\items code\game\objects\items\devices code\game\objects\items\devices\radio code\game\objects\items\weapons code\game\objects\items\weapons\storage code\game\objects\structures code\game\objects\structures\crates_lockers code\game\verbs code\modules code\modules\clothing code\modules\clothing\suits code\modules\clothing\under code\modules\clothing\under\accessories code\modules\mob code\modules\mob\living 
+FILE: code\__HELPERS\game.dm
+LAST_COMPILE_TIME: 1431844804
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
