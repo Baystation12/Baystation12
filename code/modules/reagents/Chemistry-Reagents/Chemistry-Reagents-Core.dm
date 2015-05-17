@@ -181,6 +181,7 @@
 	description = "Required for welders. Flamable."
 	reagent_state = LIQUID
 	color = "#660000"
+	touch_met = 5
 
 	glass_icon_state = "dr_gibb_glass"
 	glass_name = "glass of welder fuel"

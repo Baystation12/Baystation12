@@ -24,21 +24,21 @@
 	name = "Inaprovaline"
 	id = "inaprovaline"
 	result = "inaprovaline"
-	required_reagents = list("oxygen" = 1, "carbon" = 1, "sugar" = 1)
+	required_reagents = list("acetone" = 1, "carbon" = 1, "sugar" = 1)
 	result_amount = 3
 
 /datum/chemical_reaction/dylovene
 	name = "Dylovene"
 	id = "anti_toxin"
 	result = "anti_toxin"
-	required_reagents = list("silicon" = 1, "potassium" = 1, "nitrogen" = 1)
+	required_reagents = list("silicon" = 1, "potassium" = 1, "ammonia" = 1)
 	result_amount = 3
 
 /datum/chemical_reaction/tramadol
 	name = "Tramadol"
 	id = "tramadol"
 	result = "tramadol"
-	required_reagents = list("inaprovaline" = 1, "ethanol" = 1, "oxygen" = 1)
+	required_reagents = list("inaprovaline" = 1, "ethanol" = 1, "acetone" = 1)
 	result_amount = 3
 
 /datum/chemical_reaction/paracetamol
@@ -60,35 +60,28 @@
 	name = "Sterilizine"
 	id = "sterilizine"
 	result = "sterilizine"
-	required_reagents = list("ethanol" = 1, "anti_toxin" = 1, "chlorine" = 1)
+	required_reagents = list("ethanol" = 1, "anti_toxin" = 1, "hclacid" = 1)
 	result_amount = 3
 
 /datum/chemical_reaction/silicate
 	name = "Silicate"
 	id = "silicate"
 	result = "silicate"
-	required_reagents = list("aluminum" = 1, "silicon" = 1, "oxygen" = 1)
+	required_reagents = list("aluminum" = 1, "silicon" = 1, "acetone" = 1)
 	result_amount = 3
 
 /datum/chemical_reaction/mutagen
 	name = "Unstable mutagen"
 	id = "mutagen"
 	result = "mutagen"
-	required_reagents = list("radium" = 1, "phosphorus" = 1, "chlorine" = 1)
+	required_reagents = list("radium" = 1, "phosphorus" = 1, "hclacid" = 1)
 	result_amount = 3
-
-/datum/chemical_reaction/water
-	name = "Water"
-	id = "water"
-	result = "water"
-	required_reagents = list("oxygen" = 1, "hydrogen" = 2)
-	result_amount = 1
 
 /datum/chemical_reaction/thermite
 	name = "Thermite"
 	id = "thermite"
 	result = "thermite"
-	required_reagents = list("aluminum" = 1, "iron" = 1, "oxygen" = 1)
+	required_reagents = list("aluminum" = 1, "iron" = 1, "acetone" = 1)
 	result_amount = 3
 
 /datum/chemical_reaction/space_drugs
@@ -102,14 +95,14 @@
 	name = "Space Lube"
 	id = "lube"
 	result = "lube"
-	required_reagents = list("water" = 1, "silicon" = 1, "oxygen" = 1)
+	required_reagents = list("water" = 1, "silicon" = 1, "acetone" = 1)
 	result_amount = 4
 
 /datum/chemical_reaction/pacid
 	name = "Polytrinic acid"
 	id = "pacid"
 	result = "pacid"
-	required_reagents = list("sacid" = 1, "chlorine" = 1, "potassium" = 1)
+	required_reagents = list("sacid" = 1, "hclacid" = 1, "potassium" = 1)
 	result_amount = 3
 
 /datum/chemical_reaction/synaptizine
@@ -130,14 +123,14 @@
 	name = "Arithrazine"
 	id = "arithrazine"
 	result = "arithrazine"
-	required_reagents = list("hyronalin" = 1, "hydrogen" = 1)
+	required_reagents = list("hyronalin" = 1, "hydrazine" = 1)
 	result_amount = 2
 
 /datum/chemical_reaction/impedrezene
 	name = "Impedrezene"
 	id = "impedrezene"
 	result = "impedrezene"
-	required_reagents = list("mercury" = 1, "oxygen" = 1, "sugar" = 1)
+	required_reagents = list("mercury" = 1, "acetone" = 1, "sugar" = 1)
 	result_amount = 2
 
 /datum/chemical_reaction/kelotane
@@ -174,7 +167,7 @@
 	name = "Cryptobiolin"
 	id = "cryptobiolin"
 	result = "cryptobiolin"
-	required_reagents = list("potassium" = 1, "oxygen" = 1, "sugar" = 1)
+	required_reagents = list("potassium" = 1, "acetone" = 1, "sugar" = 1)
 	result_amount = 3
 
 /datum/chemical_reaction/tricordrazine
@@ -188,14 +181,14 @@
 	name = "Alkysine"
 	id = "alkysine"
 	result = "alkysine"
-	required_reagents = list("chlorine" = 1, "nitrogen" = 1, "anti_toxin" = 1)
+	required_reagents = list("hclacid" = 1, "ammonia" = 1, "anti_toxin" = 1)
 	result_amount = 2
 
 /datum/chemical_reaction/dexalin
 	name = "Dexalin"
 	id = "dexalin"
 	result = "dexalin"
-	required_reagents = list("oxygen" = 2, "phoron" = 0.1)
+	required_reagents = list("acetone" = 2, "phoron" = 0.1)
 	catalysts = list("phoron" = 1)
 	inhibitors = list("water" = 1) // Messes with cryox
 	result_amount = 1
@@ -204,7 +197,7 @@
 	name = "Dermaline"
 	id = "dermaline"
 	result = "dermaline"
-	required_reagents = list("oxygen" = 1, "phosphorus" = 1, "kelotane" = 1)
+	required_reagents = list("acetone" = 1, "phosphorus" = 1, "kelotane" = 1)
 	result_amount = 3
 
 /datum/chemical_reaction/dexalinp
@@ -240,7 +233,7 @@
 	name = "Cryoxadone"
 	id = "cryoxadone"
 	result = "cryoxadone"
-	required_reagents = list("dexalin" = 1, "water" = 1, "oxygen" = 1)
+	required_reagents = list("dexalin" = 1, "water" = 1, "acetone" = 1)
 	result_amount = 3
 
 /datum/chemical_reaction/clonexadone
@@ -262,14 +255,14 @@
 	name = "imidazoline"
 	id = "imidazoline"
 	result = "imidazoline"
-	required_reagents = list("carbon" = 1, "hydrogen" = 1, "anti_toxin" = 1)
+	required_reagents = list("carbon" = 1, "hydrazine" = 1, "anti_toxin" = 1)
 	result_amount = 2
 
 /datum/chemical_reaction/ethylredoxrazine
 	name = "Ethylredoxrazine"
 	id = "ethylredoxrazine"
 	result = "ethylredoxrazine"
-	required_reagents = list("oxygen" = 1, "anti_toxin" = 1, "carbon" = 1)
+	required_reagents = list("acetone" = 1, "anti_toxin" = 1, "carbon" = 1)
 	result_amount = 3
 
 /datum/chemical_reaction/soporific
@@ -284,7 +277,7 @@
 	name = "Chloral Hydrate"
 	id = "chloralhydrate"
 	result = "chloralhydrate"
-	required_reagents = list("ethanol" = 1, "chlorine" = 3, "water" = 1)
+	required_reagents = list("ethanol" = 1, "hclacid" = 3, "water" = 1)
 	result_amount = 1
 
 /datum/chemical_reaction/potassium_chloride
@@ -312,7 +305,7 @@
 	name = "Mindbreaker Toxin"
 	id = "mindbreaker"
 	result = "mindbreaker"
-	required_reagents = list("silicon" = 1, "hydrogen" = 1, "anti_toxin" = 1)
+	required_reagents = list("silicon" = 1, "hydrazine" = 1, "anti_toxin" = 1)
 	result_amount = 3
 
 /datum/chemical_reaction/lipozine
@@ -323,18 +316,11 @@
 	result_amount = 3
 
 /datum/chemical_reaction/surfactant
-	name = "Foam surfactant"
-	id = "foam surfactant"
-	result = "fluorosurfactant"
-	required_reagents = list("fluorine" = 2, "carbon" = 2, "sacid" = 1)
+	name = "Azosurfactant"
+	id = "surfactant"
+	result = "surfactant"
+	required_reagents = list("hydrazine" = 2, "carbon" = 2, "sacid" = 1)
 	result_amount = 5
-
-/datum/chemical_reaction/ammonia
-	name = "Ammonia"
-	id = "ammonia"
-	result = "ammonia"
-	required_reagents = list("hydrogen" = 3, "nitrogen" = 1)
-	result_amount = 3
 
 /datum/chemical_reaction/diethylamine
 	name = "Diethylamine"
@@ -361,7 +347,7 @@
 	name = "Foaming Agent"
 	id = "foaming_agent"
 	result = "foaming_agent"
-	required_reagents = list("lithium" = 1, "hydrogen" = 1)
+	required_reagents = list("lithium" = 1, "hydrazine" = 1)
 	result_amount = 1
 
 /datum/chemical_reaction/glycerol
@@ -375,7 +361,7 @@
 	name = "Sodium Chloride"
 	id = "sodiumchloride"
 	result = "sodiumchloride"
-	required_reagents = list("sodium" = 1, "chlorine" = 1)
+	required_reagents = list("sodium" = 1, "hclacid" = 1)
 	result_amount = 2
 
 /datum/chemical_reaction/condensedcapsaicin
@@ -390,7 +376,7 @@
 	name = "Coolant"
 	id = "coolant"
 	result = "coolant"
-	required_reagents = list("tungsten" = 1, "oxygen" = 1, "water" = 1)
+	required_reagents = list("tungsten" = 1, "acetone" = 1, "water" = 1)
 	result_amount = 3
 
 /datum/chemical_reaction/rezadone
@@ -404,14 +390,14 @@
 	name = "Lexorin"
 	id = "lexorin"
 	result = "lexorin"
-	required_reagents = list("phoron" = 1, "hydrogen" = 1, "nitrogen" = 1)
+	required_reagents = list("phoron" = 1, "hydrazine" = 1, "ammonia" = 1)
 	result_amount = 3
 
 /datum/chemical_reaction/methylphenidate
 	name = "Methylphenidate"
 	id = "methylphenidate"
 	result = "methylphenidate"
-	required_reagents = list("mindbreaker" = 1, "hydrogen" = 1)
+	required_reagents = list("mindbreaker" = 1, "hydrazine" = 1)
 	result_amount = 3
 
 /datum/chemical_reaction/citalopram
@@ -426,7 +412,7 @@
 	name = "Paroxetine"
 	id = "paroxetine"
 	result = "paroxetine"
-	required_reagents = list("mindbreaker" = 1, "oxygen" = 1, "inaprovaline" = 1)
+	required_reagents = list("mindbreaker" = 1, "acetone" = 1, "inaprovaline" = 1)
 	result_amount = 3
 
 /* Solidification */
@@ -579,7 +565,7 @@
 	name = "Foam"
 	id = "foam"
 	result = null
-	required_reagents = list("fluorosurfactant" = 1, "water" = 1)
+	required_reagents = list("surfactant" = 1, "water" = 1)
 	result_amount = 2
 	mix_message = "The solution violently bubbles!"
 
@@ -1922,7 +1908,7 @@ datum
 			name = "Lithium Sodium Tungstate"
 			id = "lithiumsodiumtungstate"
 			result = "lithiumsodiumtungstate"
-			required_reagents = list("lithium" = 1, "sodium" = 2, "tungsten" = 1, "oxygen" = 4)
+			required_reagents = list("lithium" = 1, "sodium" = 2, "tungsten" = 1, "acetone" = 4)
 			result_amount = 8
 
 		density_separated_liquid
