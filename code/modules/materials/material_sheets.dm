@@ -165,9 +165,17 @@ obj/item/stack/material/iron
 	name = "cloth"
 	singular_name = "cloth roll"
 	icon_state = "sheet-cloth"
+	default_type = "cloth"
 
 /obj/item/stack/material/cardboard
 	name = "cardboard"
 	singular_name = "cardboard sheet"
 	icon_state = "sheet-card"
 	default_type = "cardboard"
+
+/obj/item/stack/material/leather
+	name = "leather"
+	desc = "The by-product of mob grinding."
+	singular_name = "leather piece"
+	icon_state = "sheet-leather"
+	default_type = "leather"

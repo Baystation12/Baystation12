@@ -358,3 +358,9 @@ var/list/name_to_material
 /material/leather //todo
 	name = "leather"
 	icon_colour = "#5C4831"
+	stack_origin_tech = "materials=2"
+
+/material/carpet
+	name = "carpet"
+	display_name = "padding"
+	icon_colour = "#A83C1B"

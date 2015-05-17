@@ -17,8 +17,7 @@
 	can_buckle = 1
 	buckle_lying = 1
 	var/material/material
-	var/apply_colour = 1
-	var/apply_strings = 1
+	var/apply_cosmentics = 1
 
 /obj/structure/bed/New(var/newloc, var/new_material)
 	..(newloc)
@@ -29,9 +28,8 @@
 	if(!istype(material))
 		qdel(src)
 		return
-	if(apply_colour)
+	if(apply_cosmentics)
 		color = material.icon_colour
-	if(apply_strings)
 		name = "[material.display_name] [initial(name)]"
 		desc = "[initial(desc)] It's made of [material.display_name]."
 
@@ -75,8 +73,7 @@
 	name = "psychiatrist's couch"
 	desc = "For prime comfort during psychiatric evaluations."
 	icon_state = "psychbed"
-	apply_colour = 0
-	apply_strings = 0
+	apply_cosmentics = 0
 
 /obj/structure/bed/psych/New(var/newloc)
 	..(newloc,"leather")
@@ -85,8 +82,8 @@
 	name = "resting contraption"
 	desc = "This looks similar to contraptions from earth. Could aliens be stealing our technology?"
 	icon_state = "abed"
-	apply_colour = 0
-	apply_strings = 0
+	apply_cosmentics = 0
+
 
 /obj/structure/bed/alien/New(var/newloc)
 	..(newloc,"resin")
@@ -99,8 +96,7 @@
 	icon = 'icons/obj/rollerbed.dmi'
 	icon_state = "down"
 	anchored = 0
-	apply_colour = 0
-	apply_strings = 0
+	apply_cosmentics = 0
 
 /obj/structure/bed/roller/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/roller_holder))

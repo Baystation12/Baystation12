@@ -79,17 +79,7 @@
 	var/wetness = 30 //Reduced when exposed to high temperautres
 	var/drying_threshold_temperature = 500 //Kelvin to start drying
 
-/obj/item/stack/material/leather
-	name = "leather"
-	desc = "The by-product of mob grinding."
-	singular_name = "leather piece"
-	icon_state = "sheet-leather"
-	origin_tech = "materials=2"
-
-
-
 //Step one - dehairing.
-
 /obj/item/stack/material/animalhide/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(	istype(W, /obj/item/weapon/material/knife) || \
 		istype(W, /obj/item/weapon/material/kitchen/utensil/knife) || \

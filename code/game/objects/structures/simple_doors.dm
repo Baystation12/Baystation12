@@ -3,7 +3,7 @@
 	density = 1
 	anchored = 1
 
-	icon = 'icons/obj/doors/mineral_doors.dmi'
+	icon = 'icons/obj/doors/material_doors.dmi'
 	icon_state = "metal"
 
 	var/material/material
