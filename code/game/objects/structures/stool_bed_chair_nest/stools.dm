@@ -14,7 +14,6 @@ var/global/list/stool_cache = list() //haha stool
 	var/material/padding_material
 
 /obj/item/weapon/stool/padded
-	name = "padded stool"
 	icon_state = "stool_padded_preview" //set for the map
 
 /obj/item/weapon/stool/New(var/newloc, var/new_material, var/new_padding_material)
@@ -56,10 +55,10 @@ var/global/list/stool_cache = list() //haha stool
 	// Strings.
 	if(padding_material)
 		name = "[padding_material.display_name] [initial(name)]" //this is not perfect but it will do for now.
-		desc = "A stool. Apply butt. It's made of [material.display_name] and covered with [padding_material.display_name]."
+		desc = "A padded stool. Apply butt. It's made of [material.display_name] and covered with [padding_material.display_name]."
 	else
 		name = "[material.display_name] [initial(name)]"
-		desc = "A stool. Apply butt. It's made of [material.display_name]."
+		desc = "A stool. Apply butt with care. It's made of [material.display_name]."
 
 /obj/item/weapon/stool/proc/add_padding(var/padding_type)
 	padding_material = get_material_by_name(padding_type)
@@ -73,11 +72,9 @@ var/global/list/stool_cache = list() //haha stool
 
 /obj/item/weapon/stool/attack(mob/M as mob, mob/user as mob)
 	if (prob(5) && istype(M,/mob/living))
-		user.visible_message("\red [user] breaks [src] over [M]'s back!")
+		user.visible_message("<span class='danger'>[user] breaks [src] over [M]'s back!</span>")
 		user.remove_from_mob(src)
-		material.place_sheet(get_turf(src))
-		if(padding_material)
-			padding_material.place_sheet(get_turf(src))
+		dismantle()
 		qdel(src)
 		var/mob/living/T = M
 		T.Weaken(10)
@@ -140,13 +137,12 @@ var/global/list/stool_cache = list() //haha stool
 			user.drop_from_inventory(src)
 			src.loc = get_turf(src)
 		user << "You add padding to \the [src]."
-		add_padding()
+		add_padding(padding_type)
 		return
 	else if (istype(W, /obj/item/weapon/wirecutters))
 		if(!padding_material)
 			user << "\The [src] has no padding to remove."
 			return
-		new /obj/item/stack/tile/carpet(get_turf(src),1)
 		user << "You remove the padding from \the [src]."
 		playsound(src, 'sound/items/Wirecutter.ogg', 100, 1)
 		remove_padding()

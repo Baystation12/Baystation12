@@ -159,7 +159,7 @@ var/list/name_to_material
 	stack_origin_tech = "phorontech=2;materials=2"
 	door_icon_base = "stone"
 
-/material/sandstone
+/material/stone
 	name = "sandstone"
 	stack_type = /obj/item/stack/material/sandstone
 	icon_base = "stone"
@@ -169,6 +169,13 @@ var/list/name_to_material
 	weight = 22
 	hardness = 55
 	door_icon_base = "stone"
+
+/material/stone/marble
+	name = "marble"
+	icon_colour = "#AAAAAA"
+	weight = 26
+	hardness = 100
+	integrity = 201 //hack to stop kitchen benches being flippable, todo: refactor into weight system
 
 /material/steel
 	name = DEFAULT_WALL_MATERIAL
