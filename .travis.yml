@@ -19,4 +19,5 @@ install:
 script:
   - shopt -s globstar
   - (! grep 'step_[xy]' maps/**/*.dmm)
+  - (! find nano/templates/ -type f -exec md5sum {} + | sort | uniq -D -w 32 | grep nano)
   - DreamMaker baystation12.dme
