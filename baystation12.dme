@@ -55,6 +55,7 @@
 #include "code\ATMOSPHERICS\_atmos_setup.dm"
 #include "code\ATMOSPHERICS\_atmospherics_helpers.dm"
 #include "code\ATMOSPHERICS\atmospherics.dm"
+#include "code\ATMOSPHERICS\buildFrom.dm"
 #include "code\ATMOSPHERICS\datum_pipe_network.dm"
 #include "code\ATMOSPHERICS\datum_pipeline.dm"
 #include "code\ATMOSPHERICS\he_pipes.dm"
