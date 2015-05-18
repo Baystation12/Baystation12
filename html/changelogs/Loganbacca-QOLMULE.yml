@@ -1,4 +1,0 @@
-author: Loganbacca
-delete-after: True
-changes: 
-  - tweak: "Changed MULE destination selection to be list based."

@@ -1,5 +1,0 @@
-author: PsiOmegaDelta
-delete-after: True
-
-changes:
-  - tweak: "Destroying a camera by brute force now has a chance to break the wiring within."
