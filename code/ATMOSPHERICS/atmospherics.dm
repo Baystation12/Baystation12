@@ -30,19 +30,17 @@ Pipelines + Other Objects -> Pipe network
 	var/list/obj/machinery/atmospherics/nodes = new()
 
 /obj/machinery/atmospherics/New()
+	if(!icon_manager)
+		icon_manager = new()
+
+	if(!pipe_color)
+		pipe_color = color
+	color = null
+
+	if(!pipe_color_check(pipe_color))
+		pipe_color = null
+
 	spawn(1)
-		if(!icon_manager)
-			icon_manager = new()
-
-		if(!pipe_color)
-			pipe_color = color
-		color = null
-
-		if(!pipe_color_check(pipe_color))
-			pipe_color = null
-
-	//	nodes = new/list()
-
 		..()
 
 /obj/machinery/atmospherics/attackby(atom/A, mob/user as mob)
@@ -121,6 +119,7 @@ obj/machinery/atmospherics/proc/check_connect_types(obj/machinery/atmospherics/a
 
 /obj/machinery/atmospherics/proc/disconnect(obj/machinery/atmospherics/reference)
 	if(nodes.Find(reference))	nodes -= reference
+	build_network()
 	update_icon()
 
 /obj/machinery/atmospherics/proc/connect(obj/machinery/atmospherics/reference)
@@ -128,6 +127,7 @@ obj/machinery/atmospherics/proc/check_connect_types(obj/machinery/atmospherics/a
 		nodes += reference
 		reference.initialize()
 		reference.build_network()
+	build_network()
 	update_icon()
 
 
@@ -159,3 +159,7 @@ obj/machinery/atmospherics/proc/check_connect_types(obj/machinery/atmospherics/a
 
 /obj/machinery/atmospherics/update_icon()
 	return null
+
+/obj/machinery/atmospherics/proc/buildFrom(var/mob/usr,var/obj/item/pipe/pipe)
+	error("[src] does not define a buildFrom!")
+	return FALSE

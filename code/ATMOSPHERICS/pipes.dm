@@ -106,7 +106,7 @@
 					if (check_connect_types(target,src))
 						connect(target)
 
-	if(!nodes)
+	if(!get_nodes_amount())
 		qdel(src)
 		return
 
