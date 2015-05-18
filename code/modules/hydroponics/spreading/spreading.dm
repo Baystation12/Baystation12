@@ -50,7 +50,7 @@
 	icon_state = "bush4-1"
 	layer = 3
 	pass_flags = PASSTABLE
-	mouse_opacity = 1
+	mouse_opacity = 2
 
 	var/health = 10
 	var/max_health = 100
