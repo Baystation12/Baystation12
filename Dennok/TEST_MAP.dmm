@@ -1,0 +1,44 @@
+"a" = (/turf/simulated/floor/plating,/area/centcom/test)
+"b" = (/obj/machinery/atmospherics/pipe/passive_vent,/turf/simulated/floor/plating,/area/centcom/test)
+"c" = (/obj/machinery/atmospherics/pipe/simple/visible,/obj/machinery/meter,/turf/simulated/floor/plating,/area/centcom/test)
+"d" = (/obj/machinery/atmospherics/binary/pump/high_power{dir = 1},/turf/simulated/floor/plating,/area/centcom/test)
+"e" = (/obj/effect/mapinfo/ship/bearcat,/turf/simulated/floor/plating,/area/centcom/test)
+"f" = (/obj/machinery/atmospherics/pipe/simple/visible/supply{dir = 4},/obj/machinery/meter,/turf/simulated/floor/plating,/area/centcom/test)
+"g" = (/obj/machinery/atmospherics/pipe/simple/visible/supply{dir = 10},/obj/machinery/atmospherics/pipe/simple/visible/scrubbers{dir = 6},/obj/machinery/atmospherics/pipe/simple/visible,/turf/simulated/floor/plating,/area/centcom/test)
+"h" = (/obj/machinery/atmospherics/pipe/simple/visible/scrubbers{dir = 4},/obj/machinery/meter,/turf/simulated/floor/plating,/area/centcom/test)
+"i" = (/obj/machinery/atmospherics/pipe/simple/visible/scrubbers,/obj/machinery/atmospherics/pipe/simple/visible/supply,/obj/machinery/atmospherics/pipe/simple/visible,/turf/simulated/floor/plating,/area/centcom/test)
+"j" = (/turf/simulated/floor/plating,/area/start)
+"k" = (/obj/machinery/atmospherics/pipe/universal,/turf/simulated/floor/plating,/area/centcom/test)
+"l" = (/obj/machinery/atmospherics/pipe/simple/visible,/obj/machinery/atmospherics/pipe/simple/visible/scrubbers,/obj/machinery/atmospherics/pipe/simple/visible/supply,/turf/simulated/floor/plating,/area/centcom/test)
+"m" = (/obj/machinery/computer/helm,/turf/simulated/floor/plating,/area/centcom/test)
+"n" = (/obj/machinery/computer/engines,/turf/simulated/floor/plating,/area/centcom/test)
+"o" = (/obj/machinery/atmospherics/pipe/simple/visible,/obj/machinery/atmospherics/pipe/simple/visible/supply{dir = 9},/obj/machinery/atmospherics/pipe/simple/visible/scrubbers{dir = 5},/turf/simulated/floor/plating,/area/centcom/test)
+"p" = (/obj/machinery/atmospherics/pipe/simple/visible,/turf/simulated/floor/plating,/area/centcom/test)
+"q" = (/obj/machinery/atmospherics/portables_connector{dir = 1},/turf/simulated/floor/plating,/area/centcom/test)
+"r" = (/obj/machinery/atmospherics/pipe/manifold/visible{dir = 1},/turf/simulated/floor/plating,/area/centcom/test)
+"s" = (/obj/machinery/atmospherics/pipe/simple/visible{dir = 4},/turf/simulated/floor/plating,/area/centcom/test)
+"t" = (/obj/machinery/atmospherics/pipe/manifold4w/visible,/turf/simulated/floor/plating,/area/centcom/test)
+"u" = (/obj/machinery/atmospherics/unary/engine{dir = 1; initialize_directions = 1},/turf/simulated/floor/plating,/area/centcom/test)
+
+(1,1,1) = {"
+aaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaa
+aaabaaaaaaaaaaaaaaaa
+aaacaaaaaaaaaaaaaaaa
+aaadaaaaaeaaaaaaaaaa
+aaacaaaaaaaaaaaaaaaa
+aafghaaaaaaaaaaaaaaa
+aaaiaaaaajaaaaaaaaaa
+aaakaaaaaaaaaaaaaaaa
+aaalaaaamanaaaaaaaaa
+aafohaaaaaaaaaaaaaaa
+aaacaaaaaaaaaaaaaaaa
+aaadaaaaaaaaaaaaaaaa
+aaacaaaaapaaaaaaaaaa
+aaaqarrsrtrsrraaaaaa
+aaaapppauuuapppaaaaa
+aaaauuuaaaaauuuaaaaa
+aaaaaaaaaaaaaaaaaaaa
+"}

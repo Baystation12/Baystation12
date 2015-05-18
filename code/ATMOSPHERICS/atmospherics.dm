@@ -27,17 +27,23 @@ Pipelines + Other Objects -> Pipe network
 
 	var/global/datum/pipe_icon_manager/icon_manager
 
+	var/list/obj/machinery/atmospherics/nodes = new()
+
 /obj/machinery/atmospherics/New()
-	if(!icon_manager)
-		icon_manager = new()
+	spawn(1)
+		if(!icon_manager)
+			icon_manager = new()
 
-	if(!pipe_color)
-		pipe_color = color
-	color = null
+		if(!pipe_color)
+			pipe_color = color
+		color = null
 
-	if(!pipe_color_check(pipe_color))
-		pipe_color = null
-	..()
+		if(!pipe_color_check(pipe_color))
+			pipe_color = null
+
+	//	nodes = new/list()
+
+		..()
 
 /obj/machinery/atmospherics/attackby(atom/A, mob/user as mob)
 	if(istype(A, /obj/item/device/pipe_painter))
@@ -45,7 +51,7 @@ Pipelines + Other Objects -> Pipe network
 	..()
 
 /obj/machinery/atmospherics/proc/add_underlay(var/turf/T, var/obj/machinery/atmospherics/node, var/direction, var/icon_connect_type)
-	if(node)
+	if(node && nodes.Find(node))
 		if(T.intact && node.level == 1 && istype(node, /obj/machinery/atmospherics/pipe))
 			//underlays += icon_manager.get_atmos_icon("underlay_down", direction, color_cache_name(node))
 			underlays += icon_manager.get_atmos_icon("underlay", direction, color_cache_name(node), "down" + icon_connect_type)
@@ -79,7 +85,7 @@ obj/machinery/atmospherics/proc/check_connect_types(obj/machinery/atmospherics/a
 
 /obj/machinery/atmospherics/proc/color_cache_name(var/obj/machinery/atmospherics/node)
 	//Don't use this for standard pipes
-	if(!istype(node))
+	if(!istype(node) || !nodes.Find(node))
 		return null
 
 	return node.pipe_color
@@ -114,6 +120,42 @@ obj/machinery/atmospherics/proc/check_connect_types(obj/machinery/atmospherics/a
 	// Is permitted to return null
 
 /obj/machinery/atmospherics/proc/disconnect(obj/machinery/atmospherics/reference)
+	if(nodes.Find(reference))	nodes -= reference
+	update_icon()
+
+/obj/machinery/atmospherics/proc/connect(obj/machinery/atmospherics/reference)
+	if(!nodes.Find(reference))
+		nodes += reference
+		reference.initialize()
+		reference.build_network()
+	update_icon()
+
+
+/obj/machinery/atmospherics/Destroy()
+	for(var/obj/machinery/atmospherics/node in nodes)
+		if(node) //maybe not needed, but better oversafe than undersafe
+			node.disconnect(src)
+	..()
+
+/obj/machinery/atmospherics/proc/change_color(var/new_color)
+	//only pass valid pipe colors please ~otherwise your pipe will turn invisible
+	if(!pipe_color_check(new_color))
+		return
+
+	pipe_color = new_color
+	update_icon()
+
+	//for updating connected atmos device pipes (i.e. vents, manifolds, etc)
+	for(var/obj/machinery/atmospherics/node in nodes)
+		if(node) //maybe not needed, but better oversafe than undersafe
+			node.update_underlays()
+
+/obj/machinery/atmospherics/proc/get_nodes_amount()
+	var/amount = 0
+	for(var/obj/machinery/atmospherics/node in nodes)
+		if(node) //maybe not needed, but better oversafe than undersafe
+			amount++
+	return amount
 
 /obj/machinery/atmospherics/update_icon()
 	return null

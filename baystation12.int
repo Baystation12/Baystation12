@@ -1,6 +1,11 @@
 // BEGIN_INTERNALS
 /*
-MAP_ICON_TYPE: 0
+LAST_COMPILE_TIME: 1431887797
+DIR: code code\__HELPERS code\ATMOSPHERICS code\controllers code\controllers\Processes code\game code\game\gamemodes code\game\gamemodes\cult code\game\gamemodes\cult\cultify code\game\machinery code\game\machinery\pipe code\modules code\modules\admin code\modules\admin\verbs code\modules\examine code\modules\examine\descriptions code\modules\mob code\modules\mob\living code\modules\mob\living\carbon 
 AUTO_FILE_DIR: OFF
+MAP_ICON_TYPE: 0
+LAST_COMPILE_VERSION: 507.1284
+WINDOW: code\modules\mob\living\carbon\breathe.dm;code\ATMOSPHERICS\atmospherics.dm;code\ATMOSPHERICS\pipes.dm;code\ATMOSPHERICS\he_pipes.dm;code\ATMOSPHERICS\mainspipe.dm;code\modules\admin\verbs\atmosdebug.dm;code\game\machinery\pipe\construction.dm
+FILE: code\ATMOSPHERICS\pipes.dm
 */
 // END_INTERNALS
