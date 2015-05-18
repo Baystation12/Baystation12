@@ -144,13 +144,11 @@
 			var/obj/structure/window/W = A
 			W.shatter()
 		else if(istype(A,/obj/structure/grille))
-			del(A)
+			qdel(A)
 		else if(istype(A,/obj/effect/plant))
 			var/obj/effect/plant/P = A
 			P.die_off()
 
-			if(W.reinf) PoolOrNew(/obj/item/stack/rods, W.loc)
-				if(W.reinf) PoolOrNew(/obj/item/stack/rods, W.loc)
 		qdel(A)
 /*
  * Double-Bladed Energy Swords - Cheridan
