@@ -297,6 +297,22 @@
 						assailant << "<span class='warning'>You are no longer pinning [affecting] to the ground.</span>"
 						force_down = 0
 						return
+					var/mob/living/carbon/human/H = M
+					var/obj/item/organ/external/E = H.get_organ(hit_zone)
+					if(E && !(E.status & ORGAN_DESTROYED))
+						assailant.visible_message("<span class='notice'>[assailant] starts inspecting [affecting]'s [E.name] carefully.</span>")
+						if(do_after(assailant, 10) && affecting && E)
+							if(E.wounds.len)
+								assailant << "<span class='warning'>You find [E.get_wounds_desc()]</span>"
+							else
+								assailant << "<span class='notice'>You find no visible wounds.</span>"
+						assailant << "<span class='notice'>Checking bones now...</span>"
+						if(do_after(assailant, 15) && affecting && E)
+							if(E.status & ORGAN_BROKEN)
+								assailant << "<span class='warning'>The [E.encased ? E.encased : "bone in the [E.name]"] is fractured!</span>"
+								H.custom_pain("Your [E.name] hurts where it's poked.")
+							else
+								assailant << "<span class='notice'>The [E.encased ? E.encased : "bones in the [E.name]"] seem to be fine.</span>"
 				if(I_GRAB)
 					if(state < GRAB_AGGRESSIVE)
 						assailant << "<span class='warning'>You require a better grab to do this.</span>"
