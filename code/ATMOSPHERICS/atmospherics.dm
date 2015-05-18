@@ -150,6 +150,12 @@ obj/machinery/atmospherics/proc/check_connect_types(obj/machinery/atmospherics/a
 		if(node) //maybe not needed, but better oversafe than undersafe
 			node.update_underlays()
 
+/obj/machinery/atmospherics/proc/get_nodes_amount()
+	var/amount = 0
+	for(var/obj/machinery/atmospherics/node in nodes)
+		if(node) //maybe not needed, but better oversafe than undersafe
+			amount++
+	return amount
 
 /obj/machinery/atmospherics/update_icon()
 	return null
