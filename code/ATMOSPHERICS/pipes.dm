@@ -267,7 +267,7 @@
 		overlays += icon_manager.get_atmos_icon("pipe", , pipe_color, "[pipe_icon]intact[icon_connect_type]")
 	else
 		var/obj/machinery/atmospherics/node = nodes[1]
-		if(get_dir(node,src) == src.dir)
+		if(get_dir(node,src) != src.dir)
 			overlays += icon_manager.get_atmos_icon("pipe", , pipe_color, "[pipe_icon]exposed10[icon_connect_type]")
 		else
 			overlays += icon_manager.get_atmos_icon("pipe", , pipe_color, "[pipe_icon]exposed01[icon_connect_type]")
@@ -390,7 +390,7 @@
 	layer = 2.4 //under wires with their 2.44
 
 /obj/machinery/atmospherics/pipe/manifold/New()
-	..()
+
 	alpha = 255
 	icon = null
 /*
@@ -406,6 +406,8 @@
 */
 	initialize_directions = turn(dir, 180) | turn(dir, 90) | turn(dir, -90)
 
+	..()
+
 /obj/machinery/atmospherics/pipe/manifold/hide(var/i)
 	if(level == 1 && istype(loc, /turf/simulated))
 		invisibility = i ? 101 : 0
@@ -418,7 +420,7 @@
 
 	alpha = 255
 
-	if(!nodes)
+	if(!get_nodes_amount())
 		var/turf/T = get_turf(src)
 		new /obj/item/pipe(loc, make_from=src)
 		for (var/obj/machinery/meter/meter in T)
@@ -433,8 +435,11 @@
 		underlays.Cut()
 
 		var/turf/T = get_turf(src)
+
 		var/list/directions = list(NORTH, SOUTH, EAST, WEST)
-		var/node1_direction = get_dir(src, nodes[1])
+		directions -= dir
+
+/*		var/node1_direction = get_dir(src, nodes[1])
 		var/node2_direction = get_dir(src, nodes[2])
 		var/node3_direction = get_dir(src, nodes[3])
 
@@ -443,6 +448,11 @@
 		directions -= add_underlay(T,nodes[1],node1_direction,icon_connect_type)
 		directions -= add_underlay(T,nodes[2],node2_direction,icon_connect_type)
 		directions -= add_underlay(T,nodes[3],node3_direction,icon_connect_type)
+*/
+		for(var/obj/machinery/atmospherics/node in nodes)
+			if(node) //maybe not needed, but better oversafe than undersafe
+				node_direction = get_dir(src, node)
+				directions -= add_underlay(T,node,node_direction,icon_connect_type)
 
 		for(var/D in directions)
 			add_underlay(T,,D,icon_connect_type)
