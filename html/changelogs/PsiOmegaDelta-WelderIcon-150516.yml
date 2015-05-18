@@ -1,0 +1,5 @@
+author: PsiOmegaDelta
+delete-after: True
+
+changes:
+  - bugfix: "Welders should now always update their icon and inhand states properly."
