@@ -93,12 +93,11 @@
 	if(!T) return
 	var/datum/gas_mixture/environment = T.return_air()
 	if(!environment) return
-
-	if(environment.gas["phoron"] > 0 || locate(/obj/effect/alien/weeds) in T)
-		if(!regenerate(H))
-			var/obj/item/organ/xenos/plasmavessel/P = H.internal_organs_by_name["plasma vessel"]
-			P.stored_plasma += weeds_plasma_rate
-			P.stored_plasma = min(max(P.stored_plasma,0),P.max_plasma)
+	var/obj/effect/plant/plant = locate() in T
+	if((environment.gas["phoron"] > 0 || (plant && plant.seed && plant.seed.name == "xenophage")) && !regenerate(H))
+		var/obj/item/organ/xenos/plasmavessel/P = H.internal_organs_by_name["plasma vessel"]
+		P.stored_plasma += weeds_plasma_rate
+		P.stored_plasma = min(max(P.stored_plasma,0),P.max_plasma)
 	..()
 
 /datum/species/xenos/proc/regenerate(var/mob/living/carbon/human/H)
