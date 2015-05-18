@@ -253,7 +253,9 @@
 
 	overlays.Cut()
 
-	if(!nodes)
+	var/nodes_amount = get_nodes_amount()
+
+	if(!nodes_amount)
 		var/turf/T = get_turf(src)
 		new /obj/item/pipe(loc, make_from=src)
 		for (var/obj/machinery/meter/meter in T)
@@ -261,10 +263,14 @@
 				new /obj/item/pipe_meter(T)
 				qdel(meter)
 		qdel(src)
-	else if(nodes[1] && nodes[2])
+	else if(nodes_amount == 2)
 		overlays += icon_manager.get_atmos_icon("pipe", , pipe_color, "[pipe_icon]intact[icon_connect_type]")
 	else
-		overlays += icon_manager.get_atmos_icon("pipe", , pipe_color, "[pipe_icon]exposed[nodes[1]?1:0][nodes[2]?1:0][icon_connect_type]")
+		var/obj/machinery/atmospherics/node = nodes[1]
+		if(get_dir(node,src) == src.dir)
+			overlays += icon_manager.get_atmos_icon("pipe", , pipe_color, "[pipe_icon]exposed10[icon_connect_type]")
+		else
+			overlays += icon_manager.get_atmos_icon("pipe", , pipe_color, "[pipe_icon]exposed01[icon_connect_type]")
 
 /obj/machinery/atmospherics/pipe/simple/update_underlays()
 	return
