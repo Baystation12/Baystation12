@@ -117,3 +117,7 @@ obj/machinery/atmospherics/proc/check_connect_types(obj/machinery/atmospherics/a
 
 /obj/machinery/atmospherics/update_icon()
 	return null
+
+/obj/machinery/atmospherics/proc/buildFrom(var/mob/usr,var/obj/item/pipe/pipe)
+	error("[src] does not define a buildFrom!")
+	return FALSE

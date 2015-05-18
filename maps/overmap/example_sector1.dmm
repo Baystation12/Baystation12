@@ -34,7 +34,7 @@
 "aH" = (/obj/item/device/radio/intercom{name = "Station Intercom (General)"; pixel_x = -29; pixel_y = 0},/turf/simulated/floor,/area/tcommsat/computer)
 "aI" = (/obj/structure/window/reinforced{dir = 4},/turf/space,/area/turret_protected/tcomsat)
 "aJ" = (/obj/structure/window/reinforced,/obj/machinery/atmospherics/pipe/simple/hidden/supply{req_access_txt = "0"},/obj/structure/window/reinforced{dir = 8},/turf/simulated/floor/plating,/area/turret_protected/tcomsat)
-"aK" = (/obj/machinery/atmospherics/valve/digital{pipe_color = "cyan"; icon_state = "valve1"; name = "Mixed Air Outlet Valve"; open = 1},/obj/structure/window/reinforced,/turf/simulated/floor/plating,/area/turret_protected/tcomsat)
+"aK" = (/obj/machinery/atmospherics/binary/valve/digital{pipe_color = "cyan"; icon_state = "valve1"; name = "Mixed Air Outlet Valve"; open = 1},/obj/structure/window/reinforced,/turf/simulated/floor/plating,/area/turret_protected/tcomsat)
 "aL" = (/obj/structure/window/reinforced,/turf/simulated/floor/plating,/area/turret_protected/tcomsat)
 "aM" = (/obj/structure/window/reinforced,/obj/structure/window/reinforced{dir = 4},/obj/structure/closet,/turf/simulated/floor/plating,/area/turret_protected/tcomsat)
 "aN" = (/obj/structure/window/reinforced{dir = 8},/turf/space,/area/turret_protected/tcomsat)
