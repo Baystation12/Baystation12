@@ -23,7 +23,7 @@
 	processing_turfs.Remove(src)
 	..()
 
-/turf/unsimulated/wall/supermatter/proc/process()
+/turf/unsimulated/wall/supermatter/process()
 	// Only check infrequently.
 	if(next_check>world.time) return
 

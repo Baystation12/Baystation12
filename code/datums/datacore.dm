@@ -2,10 +2,8 @@
 	data_core = new /obj/effect/datacore()
 	return 1
 
-/obj/effect/datacore/proc/manifest(var/nosleep = 0)
+/obj/effect/datacore/proc/manifest()
 	spawn()
-		if(!nosleep)
-			sleep(40)
 		for(var/mob/living/carbon/human/H in player_list)
 			manifest_inject(H)
 		return
