@@ -175,7 +175,7 @@
 	var/can_cut = (prob(brute*2) || sharp) && !(status & ORGAN_ROBOT)
 
 	// If the limbs can break, make sure we don't exceed the maximum damage a limb can take before breaking
-	// Non-vital organs are limited to max_damage. You can't kill someone by bludeonging their arm all the way to 200 -- you can 
+	// Non-vital organs are limited to max_damage. You can't kill someone by bludeonging their arm all the way to 200 -- you can
 	// push them faster into paincrit though, as the additional damage is converted into shock.
 	if(vital || (brute_dam + burn_dam + brute + burn) < max_damage || !config.limbs_can_break)
 		if(brute)
@@ -369,11 +369,6 @@ This function completely restores a damaged organ to perfect condition.
 
 /obj/item/organ/external/process()
 	if(owner)
-		//Dismemberment
-		if(status & ORGAN_DESTROYED)
-			if(config.limbs_can_break)
-				droplimb(0,DROPLIMB_EDGE) //Might be worth removing this check since take_damage handles it.
-			return
 		if(parent)
 			if(parent.status & ORGAN_DESTROYED)
 				status |= ORGAN_DESTROYED
