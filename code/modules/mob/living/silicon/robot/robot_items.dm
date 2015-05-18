@@ -347,14 +347,68 @@
 	mode = !mode
 	usr << "You change \The [src] to [mode ? "doors" : "walls"] mode."
 
-/obj/item/weapon/inflatable_dispenser/attack_self(var/mob/user)
+/obj/item/weapon/inflatable_dispenser/attack_self()
+	mode = !mode
+	usr << "You change \The [src] to [mode ? "doors" : "walls"] mode."
+
+/obj/item/weapon/inflatable_dispenser/afterattack(var/atom/A, var/mob/user)
+	..(A, user)
+	if(!user)
+		return
+	if(!user.Adjacent(A))
+		user << "You can't reach!"
+		return
+	if(istype(A, /turf))
+		try_deploy_inflatable(A, user)
+	if(istype(A, /obj/item/inflatable/door))
+		if(stored_doors < max_doors)
+			visible_message("[user] picks up the [A] with \The [src]!")
+			stored_doors++
+			qdel(A)
+			return
+		else
+			usr << "\The [src] is full!"
+			return
+	if(istype(A, /obj/item/inflatable/wall))
+		if(stored_walls < max_walls)
+			visible_message("[user] picks up the [A] with \The [src]!")
+			stored_walls++
+			qdel(A)
+			return
+		else
+			usr << "\The [src] is full!"
+			return
+	if(istype(A, /obj/structure/inflatable/door))
+		if(stored_doors < max_doors)
+			playsound(loc, 'sound/machines/hiss.ogg', 75, 1)
+			visible_message("[user] deflates the [A] with \The [src]!")
+			stored_doors++
+			qdel(A)
+			return
+		else
+			usr << "\The [src] is full."
+			return
+	if(istype(A, /obj/structure/inflatable/wall))
+		if(stored_walls < max_walls)
+			playsound(loc, 'sound/machines/hiss.ogg', 75, 1)
+			visible_message("[user] deflates the [A] with \The [src]!")
+			stored_walls++
+			qdel(A)
+			return
+		else
+			usr << "\The [src] is full."
+			return
+
+/obj/item/weapon/inflatable_dispenser/proc/try_deploy_inflatable(var/turf/T, var/mob/living/user)
+	if(!user.Adjacent(T))
+		user << "You can't reach!"
+		return
 	if(mode) // Door deployment
 		if(!stored_doors)
 			user << "\The [src] is out of doors!"
 			return
 
-		var/turf/T = get_turf(src)
-		if(T)
+		if(T && istype(T))
 			playsound(T, 'sound/items/zip.ogg', 75, 1)
 			user << "You deploy the inflatable door!"
 			new /obj/structure/inflatable/door(T)
@@ -365,8 +419,7 @@
 			user << "\The [src] is out of walls!"
 			return
 
-		var/turf/T = get_turf(src)
-		if(T)
+		if(T && istype(T))
 			playsound(T, 'sound/items/zip.ogg', 75, 1)
 			user << "You deploy the inflatable wall!"
 			new /obj/structure/inflatable/wall(T)

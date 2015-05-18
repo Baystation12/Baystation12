@@ -17,18 +17,6 @@
 	R.add_fingerprint(user)
 	qdel(src)
 
-/obj/item/inflatable/wall/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/weapon/inflatable_dispenser))
-		var/obj/item/weapon/inflatable_dispenser/D = W
-		if(D.stored_walls < D.max_walls)
-			user << "You pick up [src] and load it into \The [D]"
-			D.stored_walls++
-			qdel(src)
-			return
-		else
-			user << "\The [D] is full!"
-	return ..()
-
 /obj/item/inflatable/door/
 	name = "inflatable door"
 	desc = "A folded membrane which rapidly expands into a simple door on activation."
@@ -43,20 +31,8 @@
 	R.add_fingerprint(user)
 	qdel(src)
 
-/obj/item/inflatable/door/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/weapon/inflatable_dispenser))
-		var/obj/item/weapon/inflatable_dispenser/D = W
-		if(D.stored_doors < D.max_doors)
-			user << "You pick up [src] and load it into \The [D]"
-			D.stored_doors++
-			qdel(src)
-			return
-		else
-			user << "\The [D] is full!"
-	return ..()
-
 /obj/structure/inflatable
-	name = "inflatable wall"
+	name = "inflatable"
 	desc = "An inflated membrane. Do not puncture."
 	density = 1
 	anchored = 1
@@ -65,6 +41,9 @@
 	icon_state = "wall"
 
 	var/health = 50.0
+
+/obj/structure/inflatable/wall
+	name = "inflatable wall"
 
 
 /obj/structure/inflatable/New(location)
@@ -234,34 +213,6 @@
 	state = 0
 	update_icon()
 	isSwitchingStates = 0
-
-/obj/structure/inflatable/door/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/weapon/inflatable_dispenser))
-		var/obj/item/weapon/inflatable_dispenser/D = W
-		if(D.stored_doors < D.max_doors)
-			playsound(loc, 'sound/machines/hiss.ogg', 75, 1)
-			visible_message("[user] deflates the [src] with \The [D]!")
-			D.stored_doors++
-			qdel(src)
-			return
-		else
-			user << "\The [D] is full."
-			return
-	return ..()
-
-/obj/structure/inflatable/wall/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/weapon/inflatable_dispenser))
-		var/obj/item/weapon/inflatable_dispenser/D = W
-		if(D.stored_walls < D.max_walls)
-			playsound(loc, 'sound/machines/hiss.ogg', 75, 1)
-			visible_message("[user] deflates the [src] with \The [D]!")
-			D.stored_walls++
-			qdel(src)
-			return
-		else
-			user << "\The [D] is full."
-			return
-	return ..()
 
 /obj/structure/inflatable/door/update_icon()
 	if(state)
