@@ -15,6 +15,8 @@
 /datum/malf_hardware/apu_gen
 	name = "APU Generator"
 	desc = "Auxiliary Power Unit that will keep you operational even without external power. Has to be manually activated. When APU is operational most abilities will be unavailable, and ability research will temporarily stop."
+	driver = new/datum/game_mode/malfunction/verb/ai_toggle_apu()
+
 
 /datum/malf_hardware/dual_cpu
 	name = "Secondary Processor Unit"
@@ -27,7 +29,21 @@
 /datum/malf_hardware/core_bomb
 	name = "Self-Destruct Explosives"
 	desc = "High yield explosives are attached to your physical mainframe. This hardware comes with special driver that allows activation of these explosives. Timer is set to 15 seconds after manual activation. This is a doomsday device that will destroy both you and any intruders in your core."
+	driver = new/datum/game_mode/malfunction/verb/ai_self_destruct()
 
 /datum/malf_hardware/strong_turrets
 	name = "Turrets Focus Enhancer"
 	desc = "Turrets are upgraded to have larger rate of fire and much larger damage. This however massively increases power usage when firing."
+
+/datum/malf_hardware/strong_turrets/install()
+	..()
+	for(var/obj/machinery/turret/T in machines)
+		T.maxhealth += 30
+		T.shot_delay = 7 // Half of default time.
+		T.auto_repair = 1
+		T.active_power_usage = 25000
+	for(var/obj/machinery/porta_turret/T in machines)
+		T.maxhealth += 30
+		T.shot_delay = 7 // Half of default time.
+		T.auto_repair = 1
+		T.active_power_usage = 25000

@@ -693,6 +693,12 @@ var/list/ai_verbs_default = list(
 	return istype(loc, /turf)
 
 
+/mob/living/silicon/ai/ex_act(var/severity)
+	if(severity == 1.0)
+		qdel(src)
+		return
+	..()
+
 // NEWMALF FUNCTIONS/PROCEDURES
 
 // Sets up malfunction-related variables, research system and such.
@@ -757,7 +763,7 @@ var/list/ai_verbs_default = list(
 
 	// Off-Station APCs should not count towards CPU generation.
 	for(var/obj/machinery/power/apc/A in hacked_apcs)
-		if(A.z == 1)
+		if(A.z in config.station_levels)
 			cpu_gain += 0.002
 			cpu_storage += 10
 

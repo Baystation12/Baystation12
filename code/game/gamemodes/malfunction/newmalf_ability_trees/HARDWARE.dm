@@ -39,7 +39,7 @@
 			return
 		user << "** [timer] **"
 	explosion(user.loc, 3,6,12,24)
-	del(user)
+	qdel(user)
 
 
 /datum/game_mode/malfunction/verb/ai_toggle_apu()
