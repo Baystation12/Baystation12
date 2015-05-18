@@ -300,7 +300,7 @@
 	var/dislocation_str
 	if(prob(W.force))
 		dislocation_str = "[src]'s [organ.joint] [pick("gives way","caves in","crumbles","collapses")]!"
-		organ.dislocate()
+		organ.dislocate(1)
 	return dislocation_str
 
 //Used to attack a joint through grabbing
@@ -324,7 +324,7 @@
 
 	user.visible_message("<span class='warning'>[user] begins to dislocate [src]'s [organ.joint]!</span>")
 	if(do_after(user, 100))
-		organ.dislocate()
+		organ.dislocate(1)
 		src.visible_message("<span class='danger'>[src]'s [organ.joint] [pick("gives way","caves in","crumbles","collapses")]!</span>")
 		return 1
 	return 0
