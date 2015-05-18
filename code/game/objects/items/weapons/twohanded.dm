@@ -134,18 +134,15 @@
 /obj/item/weapon/twohanded/fireaxe/afterattack(atom/A as mob|obj|turf|area, mob/user as mob, proximity)
 	if(!proximity) return
 	..()
-	if(A && wielded && (istype(A,/obj/structure/window) || istype(A,/obj/structure/grille))) //destroys windows and grilles in one hit
-		if(istype(A,/obj/structure/window)) //should just make a window.Break() proc but couldn't bother with it
+	if(A && wielded)
+		if(istype(A,/obj/structure/window))
 			var/obj/structure/window/W = A
-
-			new /obj/item/weapon/shard( W.loc )
-			if(W.reinf) new /obj/item/stack/rods( W.loc)
-
-			if (W.dir == SOUTHWEST)
-				new /obj/item/weapon/shard( W.loc )
-				if(W.reinf) new /obj/item/stack/rods( W.loc)
-		del(A)
-
+			W.shatter()
+		else if(istype(A,/obj/structure/grille))
+			del(A)
+		else if(istype(A,/obj/effect/plant))
+			var/obj/effect/plant/P = A
+			P.die_off()
 
 /*
  * Double-Bladed Energy Swords - Cheridan
