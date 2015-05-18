@@ -1,0 +1,5 @@
+author: Hubblenaut
+delete-after: True
+
+changes: 
+  - rscadd: "Adds a light for available backup power on airlocks."
