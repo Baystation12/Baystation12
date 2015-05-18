@@ -1,4 +1,0 @@
-author: PsiOmegaDelta
-delete-after: True
-changes: 
-  - rscadd: "Turf are now processed. This, for example, causes radioactive walls to regularly irradiate nearby mobs."
