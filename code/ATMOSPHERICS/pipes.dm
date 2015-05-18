@@ -451,7 +451,7 @@
 */
 		for(var/obj/machinery/atmospherics/node in nodes)
 			if(node) //maybe not needed, but better oversafe than undersafe
-				node_direction = get_dir(src, node)
+				var/node_direction = get_dir(src, node)
 				directions -= add_underlay(T,node,node_direction,icon_connect_type)
 
 		for(var/D in directions)
@@ -600,7 +600,7 @@
 
 		var/turf/T = get_turf(src)
 		var/list/directions = list(NORTH, SOUTH, EAST, WEST)
-		var/node1_direction = get_dir(src, nodes[1])
+/*		var/node1_direction = get_dir(src, nodes[1])
 		var/node2_direction = get_dir(src, nodes[2])
 		var/node3_direction = get_dir(src, nodes[3])
 		var/node4_direction = get_dir(src, nodes[4])
@@ -611,6 +611,11 @@
 		directions -= add_underlay(T,nodes[2],node2_direction,icon_connect_type)
 		directions -= add_underlay(T,nodes[3],node3_direction,icon_connect_type)
 		directions -= add_underlay(T,nodes[4],node4_direction,icon_connect_type)
+*/
+		for(var/obj/machinery/atmospherics/node in nodes)
+			if(node) //maybe not needed, but better oversafe than undersafe
+				var/node_direction = get_dir(src, node)
+				directions -= add_underlay(T,node,node_direction,icon_connect_type)
 
 		for(var/D in directions)
 			add_underlay(T,,D,icon_connect_type)
