@@ -23,6 +23,8 @@ var/list/organ_cache = list()
 	var/list/trace_chemicals = list() // traces of chemicals in the organ,
 									  // links chemical IDs to number of ticks for which they'll stay in the blood
 	germ_level = 0
+	var/datum/dna/dna
+	var/datum/species/species
 
 /obj/item/organ/proc/update_health()
 	return
@@ -34,6 +36,12 @@ var/list/organ_cache = list()
 		max_damage = min_broken_damage * 2
 	if(istype(holder))
 		src.owner = holder
+		species = all_species["Human"]
+		if(holder.dna)
+			dna = holder.dna.Clone()
+			species = all_species[dna.species]
+		else
+			log_debug("[src] at [loc] spawned without a proper DNA.")
 		var/mob/living/carbon/human/H = holder
 		if(istype(H))
 			if(internal)
@@ -42,10 +50,10 @@ var/list/organ_cache = list()
 					if(E.internal_organs == null)
 						E.internal_organs = list()
 					E.internal_organs |= src
-			if(H.dna)
+			if(dna)
 				if(!blood_DNA)
 					blood_DNA = list()
-				blood_DNA[H.dna.unique_enzymes] = H.dna.b_type
+				blood_DNA[dna.unique_enzymes] = dna.b_type
 		if(internal)
 			holder.internal_organs |= src
 
@@ -123,24 +131,23 @@ var/list/organ_cache = list()
 /obj/item/organ/proc/handle_rejection()
 	// Process unsuitable transplants. TODO: consider some kind of
 	// immunosuppressant that changes transplant data to make it match.
-	if(transplant_data)
-		if(!rejecting && prob(20) && owner.dna && blood_incompatible(transplant_data["blood_type"],owner.dna.b_type,owner.species,transplant_data["species"]))
-			rejecting = 1
+	if(dna)
+		if(!rejecting)
+			if(blood_incompatible(dna.b_type, owner.dna.b_type, species, owner.species))
+				rejecting = 1
 		else
 			rejecting++ //Rejection severity increases over time.
 			if(rejecting % 10 == 0) //Only fire every ten rejection ticks.
 				switch(rejecting)
 					if(1 to 50)
-						take_damage(1)
+						germ_level++
 					if(51 to 200)
-						owner.reagents.add_reagent("toxin", 1)
-						take_damage(1)
+						germ_level += rand(1,2)
 					if(201 to 500)
-						take_damage(rand(2,3))
-						owner.reagents.add_reagent("toxin", 2)
+						germ_level += rand(2,3)
 					if(501 to INFINITY)
-						take_damage(4)
-						owner.reagents.add_reagent("toxin", rand(3,5))
+						germ_level += rand(3,5)
+						owner.reagents.add_reagent("toxin", rand(1,2))
 
 /obj/item/organ/proc/receive_chem(chemical as obj)
 	return 0
