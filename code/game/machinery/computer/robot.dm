@@ -19,7 +19,7 @@
 	data["robots"] = get_cyborgs(user)
 	data["safety"] = safety
 	// Also applies for cyborgs. Hides the manual self-destruct button.
-	data["is_ai"] = istype(user, /mob/living/silicon) ? 1 : 0
+	data["is_ai"] = user.isSilicon()
 
 
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
@@ -42,11 +42,11 @@
 		var/mob/living/silicon/robot/target = get_cyborg_by_name(href_list["detonate"])
 		if(!target || !istype(target))
 			return
-		if(istype(user, /mob/living/silicon/ai) && (target.connected_ai != user))
+		if(user.isMobAI() && (target.connected_ai != user))
 			user << "Access Denied. This robot is not linked to you."
 			return
 		// Cyborgs may blow up themselves via the console
-		if(istype(user, /mob/living/silicon/robot) && user != target)
+		if(user.isRobot() && user != target)
 			user << "Access Denied."
 			return
 		var/choice = input("Really detonate [target.name]?") in list ("Yes", "No")
@@ -74,11 +74,11 @@
 		if(!target || !istype(target))
 			return
 
-		if(istype(user, /mob/living/silicon/ai) && (target.connected_ai != user))
+		if(user.isMobAI() && (target.connected_ai != user))
 			user << "Access Denied. This robot is not linked to you."
 			return
 
-		if(istype(user, /mob/living/silicon/robot))
+		if(user.isRobot())
 			user << "Access Denied."
 			return
 
