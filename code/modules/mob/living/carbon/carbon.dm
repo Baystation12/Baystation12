@@ -205,6 +205,8 @@
 					status += "dislocated"
 				if(org.status & ORGAN_BROKEN)
 					status += "hurts when touched"
+				if(org.status & ORGAN_DEAD)
+					status += "is bruised and necrotic"
 				if(!org.is_usable())
 					status += "dangling uselessly"
 				if(status.len)
