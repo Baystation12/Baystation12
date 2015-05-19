@@ -305,7 +305,14 @@
 
 			if("destination")
 				refresh=0
-				var/new_dest = input("Enter new destination tag", "Mulebot [suffix ? "([suffix])" : ""]", destination) as text|null
+				var/new_dest
+				var/list/beaconlist = new()
+				for(var/obj/machinery/navbeacon/N in navbeacons)
+					beaconlist.Add(N.location)
+				if(beaconlist.len)
+					new_dest = input("Select new destination tag", "Mulebot [suffix ? "([suffix])" : ""]", destination) in beaconlist
+				else
+					alert("No destination beacons available.")
 				refresh=1
 				if(new_dest)
 					set_destination(new_dest)
@@ -741,11 +748,6 @@
 	if(!on)
 		return
 
-	/*
-	world << "rec signal: [signal.source]"
-	for(var/x in signal.data)
-		world << "* [x] = [signal.data[x]]"
-	*/
 	var/recv = signal.data["command"]
 	// process all-bot input
 	if(recv=="bot_status" && wires.RemoteRX())
@@ -868,8 +870,8 @@
 	var/turf/Tsec = get_turf(src)
 
 	new /obj/item/device/assembly/prox_sensor(Tsec)
-	new /obj/item/stack/rods(Tsec)
-	new /obj/item/stack/rods(Tsec)
+	PoolOrNew(/obj/item/stack/rods, Tsec)
+	PoolOrNew(/obj/item/stack/rods, Tsec)
 	new /obj/item/stack/cable_coil/cut(Tsec)
 	if (cell)
 		cell.loc = Tsec

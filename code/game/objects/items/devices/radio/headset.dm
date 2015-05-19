@@ -4,7 +4,7 @@
 	var/radio_desc = ""
 	icon_state = "headset"
 	item_state = "headset"
-	matter = list("metal" = 75)
+	matter = list(DEFAULT_WALL_MATERIAL = 75)
 	subspace_transmission = 1
 	canhear_range = 0 // can't hear headsets from very far away
 
@@ -211,6 +211,13 @@
 	item_state = "headset"
 	freerange = 1
 	ks2type = /obj/item/device/encryptionkey/ert
+
+/obj/item/device/radio/headset/ia
+	name = "internal affair's headset"
+	desc = "The headset of your worst enemy."
+	icon_state = "com_headset"
+	item_state = "headset"
+	ks2type = /obj/item/device/encryptionkey/heads/hos
 
 /obj/item/device/radio/headset/attackby(obj/item/weapon/W as obj, mob/user as mob)
 //	..()

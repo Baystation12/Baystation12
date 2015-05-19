@@ -360,7 +360,7 @@
 		src.Hatch()
 
 /obj/item/weapon/reagent_containers/food/snacks/egg/slime/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype( W, /obj/item/toy/crayon ))
+	if(istype( W, /obj/item/weapon/pen/crayon ))
 		return
 	else
 		..()

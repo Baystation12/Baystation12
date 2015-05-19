@@ -334,53 +334,13 @@
 		path = list()
 
 /mob/living/bot/secbot/proc/check_threat(var/mob/living/M)
-	if(M.stat == DEAD)
+	if(!M || !istype(M) || M.stat)
 		return 0
+
 	if(emagged)
 		return 10
 
-	var/threatcount = 0
-
-	if(ishuman(M))
-		var/mob/living/carbon/human/H = M
-
-		if(H.handcuffed)
-			return 0
-
-		var/obj/item/weapon/card/id/id = GetIdCard(H) //Agent cards lower threatlevel.
-		if(id && istype(id, /obj/item/weapon/card/id/syndicate))
-			threatcount -= 2
-
-		if(idcheck && !access_scanner.allowed(H))
-			if(istype(H.l_hand, /obj/item/weapon/gun) || istype(H.l_hand, /obj/item/weapon/melee))
-				threatcount += 4
-
-			if(istype(H.r_hand, /obj/item/weapon/gun) || istype(H.r_hand, /obj/item/weapon/melee))
-				threatcount += 4
-
-			if(istype(H.belt, /obj/item/weapon/gun) || istype(H.belt, /obj/item/weapon/melee))
-				threatcount += 2
-
-			if(H.species.name != "Human") //beepsky so racist.
-				threatcount += 2
-
-		if(check_records || check_arrest)
-			var/perpname = H.name
-			if(id)
-				perpname = id.registered_name
-
-			var/datum/data/record/R = find_security_record("name", perpname)
-			if(check_records && !R)
-				threatcount += 4
-
-			if(check_arrest && R && (R.fields["criminal"] == "*Arrest*"))
-				threatcount += 4
-
-	else if(isanimal(M))
-		if(istype(M, /mob/living/simple_animal/hostile) && !istype(M, /mob/living/simple_animal/hostile/retaliate/goat))
-			threatcount += 4
-
-	return threatcount
+	return M.assess_perp(access_scanner, idcheck, check_records, check_arrest)
 
 /mob/living/bot/secbot/proc/patrol_step()
 	if(loc == patrol_target)

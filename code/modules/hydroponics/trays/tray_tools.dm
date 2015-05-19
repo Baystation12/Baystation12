@@ -169,7 +169,7 @@
 
 	switch(grown_seed.get_trait(TRAIT_CARNIVOROUS))
 		if(1)
-			dat += "<br>It is carniovorous and will eat tray pests for sustenance."
+			dat += "<br>It is carnivorous and will eat tray pests for sustenance."
 		if(2)
 			dat	+= "<br>It is carnivorous and poses a significant threat to living things around it."
 
@@ -215,7 +215,7 @@
 	force = 5.0
 	throwforce = 7.0
 	w_class = 2.0
-	matter = list("metal" = 50)
+	matter = list(DEFAULT_WALL_MATERIAL = 50)
 	attack_verb = list("slashed", "sliced", "cut", "clawed")
 
 //Hatchets and things to kill kudzu
@@ -226,13 +226,13 @@
 	icon_state = "hatchet"
 	flags = CONDUCT
 	force = 12.0
-	w_class = 3.0
+	w_class = 2
 	throwforce = 15.0
 	throw_speed = 4
 	throw_range = 4
 	sharp = 1
 	edge = 1
-	matter = list("metal" = 15000)
+	matter = list(DEFAULT_WALL_MATERIAL = 15000)
 	origin_tech = "materials=2;combat=1"
 	attack_verb = list("chopped", "torn", "cut")
 
@@ -270,11 +270,3 @@
 	slot_flags = SLOT_BACK
 	origin_tech = "materials=2;combat=2"
 	attack_verb = list("chopped", "sliced", "cut", "reaped")
-
-/obj/item/weapon/scythe/afterattack(atom/A, mob/user as mob, proximity)
-	if(!proximity) return
-	if(istype(A, /obj/effect/plant))
-		for(var/obj/effect/plant/B in orange(A,1))
-			if(prob(80))
-				B.die_off(1)
-		qdel(A)

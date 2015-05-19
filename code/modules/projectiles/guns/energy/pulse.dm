@@ -6,14 +6,14 @@
 	slot_flags = SLOT_BELT|SLOT_BACK
 	force = 10
 	fire_sound='sound/weapons/Laser.ogg'
-	charge_cost = 50
 	projectile_type = /obj/item/projectile/beam
 	sel_mode = 2
+	max_shots = 10
 	
 	firemodes = list(
 		list(name="stun", projectile_type=/obj/item/projectile/beam/stun, fire_sound='sound/weapons/Taser.ogg'),
 		list(name="lethal", projectile_type=/obj/item/projectile/beam, fire_sound='sound/weapons/Laser.ogg'),
-		list(name="DESTROY", projectile_type=/obj/item/projectile/beam/pulse, fire_sound='sound/weapons/pulse.ogg', fire_delay=25, charge_cost=100),
+		list(name="DESTROY", projectile_type=/obj/item/projectile/beam/pulse, fire_sound='sound/weapons/pulse.ogg', fire_delay=25, charge_cost=400),
 		)
 
 /obj/item/weapon/gun/energy/pulse_rifle/mounted
@@ -27,6 +27,7 @@
 	fire_delay = 25
 	fire_sound='sound/weapons/pulse.ogg'
 	projectile_type=/obj/item/projectile/beam/pulse
+	charge_cost=400
 
 /obj/item/weapon/gun/energy/pulse_rifle/destroyer/attack_self(mob/living/user as mob)
 	user << "<span class='warning'>[src.name] has three settings, and they are all DESTROY.</span>"
@@ -37,4 +38,4 @@
 	desc = "It's not the size of the gun, it's the size of the hole it puts through people."
 	slot_flags = SLOT_BELT|SLOT_HOLSTER
 	icon_state = "m1911-p"
-	cell_type = /obj/item/weapon/cell/crap
+	max_shots = 5

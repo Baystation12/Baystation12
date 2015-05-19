@@ -20,7 +20,7 @@
 	w_class = 1.0
 	throw_speed = 7
 	throw_range = 15
-	matter = list("metal" = 10)
+	matter = list(DEFAULT_WALL_MATERIAL = 10)
 	var/colour = "black"	//what colour the ink is!
 	pressure_resistance = 2
 
@@ -76,7 +76,7 @@
 		return
 	..()
 	if(reagents.total_volume)
-		if(M.reagents) reagents.trans_to(M, 50) //used to be 150
+		if(M.reagents) reagents.trans_to_mob(M, 50, CHEM_BLOOD) //used to be 150
 	return
 
 
@@ -99,7 +99,7 @@
 
 	if(M.can_inject(user,1))
 		if(reagents.total_volume)
-			if(M.reagents) reagents.trans_to(M, 50)
+			if(M.reagents) reagents.trans_to_mob(M, 50, CHEM_BLOOD)
 	return
 
 
@@ -167,3 +167,28 @@
 				colour = COLOR_BLACK
 		usr << "<span class='info'>You select the [lowertext(selected_type)] ink container.</span>"
 
+
+/*
+ * Crayons
+ */
+
+/obj/item/weapon/pen/crayon
+	name = "crayon"
+	desc = "A colourful crayon. Please refrain from eating it or putting it in your nose."
+	icon = 'icons/obj/crayons.dmi'
+	icon_state = "crayonred"
+	w_class = 1.0
+	attack_verb = list("attacked", "coloured")
+	colour = "#FF0000" //RGB
+	var/shadeColour = "#220000" //RGB
+	var/uses = 30 //0 for unlimited uses
+	var/instant = 0
+	var/colourName = "red" //for updateIcon purposes
+
+	suicide_act(mob/user)
+		viewers(user) << "\red <b>[user] is jamming the [src.name] up \his nose and into \his brain. It looks like \he's trying to commit suicide.</b>"
+		return (BRUTELOSS|OXYLOSS)
+
+	New()
+		name = "[colourName] crayon"
+		..()

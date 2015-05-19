@@ -45,7 +45,7 @@
 	else
 		if(istype(W, /obj/item/weapon/tape_roll))
 			return 0
-		if(istype(W, /obj/item/weapon/pen) || istype(W, /obj/item/toy/crayon))
+		if(istype(W, /obj/item/weapon/pen))
 			usr << browse("", "window=[name]") //Closes the dialog
 		var/obj/P = pages[page]
 		P.attackby(W, user)

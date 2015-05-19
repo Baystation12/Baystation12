@@ -3,7 +3,7 @@
 	// Handle nearby smoke if any.
 	for(var/obj/effect/effect/smoke/chem/smoke in view(1, src))
 		if(smoke.reagents.total_volume)
-			smoke.reagents.copy_to(src, 5)
+			smoke.reagents.trans_to_obj(src, 5, copy = 1)
 
 	//Do this even if we're not ready for a plant cycle.
 	process_reagents()
@@ -119,6 +119,14 @@
 	 (!harvest && !dead))
 		harvest = 1
 		lastproduce = age
+
+	// If we're a vine which is not in a closed tray and is at least half mature, and there's no vine currently on our turf: make one (maybe)
+	if(!closed_system && \
+	 seed.get_trait(TRAIT_SPREAD) == 2 && \
+	 2 * age >= seed.get_trait(TRAIT_MATURATION) && \
+	 !(locate(/obj/effect/plant) in get_turf(src)) && \
+	 prob(2 * seed.get_trait(TRAIT_POTENCY)))
+		new /obj/effect/plant(get_turf(src), seed)
 
 	if(prob(3))  // On each tick, there's a chance the pest population will increase
 		pestlevel += 0.1 * HYDRO_SPEED_MULTIPLIER
