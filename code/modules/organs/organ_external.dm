@@ -99,7 +99,7 @@
 			if(child.dislocated == 1)
 				child.undislocate()
 	if(owner)
-		owner.shock_stage += 20
+		owner.apply_effect(20, AGONY)
 		for(var/obj/item/organ/external/limb in owner.organs)
 			if(limb.dislocated == 2)
 				return
@@ -209,7 +209,7 @@
 				burn = max(0, burn - can_inflict)
 		//If there are still hurties to dispense
 		if (burn || brute)
-			owner.shock_stage += (brute+burn) * config.organ_damage_spillover_multiplier
+			owner.apply_effect( (brute+burn)*config.organ_damage_spillover_multiplier, AGONY )
 
 	// sync the organ's damage with its wounds
 	src.update_damages()
