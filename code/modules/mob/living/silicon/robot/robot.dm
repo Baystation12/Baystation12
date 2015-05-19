@@ -1234,8 +1234,7 @@ var/list/robot_verbs_default = list(
 		return 0
 
 	var/power_use = amount * CYBORG_POWER_USAGE_MULTIPLIER
-	if(cell.charge >= CELLRATE * power_use)
-		cell.use(CELLRATE * power_use)
+	if(cell.checked_use(CELLRATE * power_use))
 		used_power_this_tick += power_use
 		return 1
 	return 0
