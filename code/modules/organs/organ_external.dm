@@ -209,7 +209,7 @@
 				burn = max(0, burn - can_inflict)
 		//If there are still hurties to dispense
 		if (burn || brute)
-			owner.apply_effect( (brute+burn)*config.organ_damage_spillover_multiplier, AGONY )
+			owner.apply_effect((brute+burn), AGONY)
 
 	// sync the organ's damage with its wounds
 	src.update_damages()
