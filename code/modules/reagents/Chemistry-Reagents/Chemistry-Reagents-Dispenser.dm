@@ -11,6 +11,17 @@
 	description = "A chemical element, the builing block of life."
 	reagent_state = SOLID
 	color = "#1C1300"
+	ingest_met = REM * 5
+
+/datum/reagent/carbon/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+	if(alien == IS_DIONA)
+		return
+	if(M.ingested && M.ingested.reagent_list.len > 1) // Need to have at least 2 reagents - cabon and something to remove
+		var/effect = 1 / (M.ingested.reagent_list.len - 1)
+		for(var/datum/reagent/R in M.ingested.reagent_list)
+			if(R == src)
+				continue
+			M.ingested.remove_reagent(R.id, removed * effect)
 
 /datum/reagent/carbon/touch_turf(var/turf/T)
 	if(!istype(T, /turf/space))
