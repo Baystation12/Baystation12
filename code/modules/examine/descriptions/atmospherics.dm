@@ -29,10 +29,16 @@
 	a Universal Adapter pipe."
 
 //Universal adapters
-/obj/machinery/atmospherics/pipe/simple/visible/universal
+/obj/machinery/atmospherics/pipe/universal
 	description_info = "This allows you to connect 'normal' pipes, red 'scrubber' pipes, and blue 'supply' pipes."
 
-/obj/machinery/atmospherics/pipe/simple/hidden/universal
+/obj/machinery/atmospherics/pipe/universal/hidden
+	description_info = "This allows you to connect 'normal' pipes, red 'scrubber' pipes, and blue 'supply' pipes."
+
+/obj/machinery/atmospherics/pipe/universal/visible
+	description_info = "This allows you to connect 'normal' pipes, red 'scrubber' pipes, and blue 'supply' pipes."
+
+/obj/machinery/atmospherics/pipe/universal/hidden
 	description_info = "This allows you to connect 'normal' pipes, red 'scrubber' pipes, and blue 'supply' pipes."
 
 //Three way manifolds

@@ -114,7 +114,7 @@ Buildable meters
 			src.pipe_type = PIPE_SCRUBBERS_STRAIGHT + is_bent
 			connect_types = CONNECT_TYPE_SCRUBBER
 			src.color = PIPE_COLOR_RED
-		else if(istype(make_from, /obj/machinery/atmospherics/pipe/simple/visible/universal) || istype(make_from, /obj/machinery/atmospherics/pipe/simple/hidden/universal))
+		else if(istype(make_from, /obj/machinery/atmospherics/pipe/universal/visible) || istype(make_from, /obj/machinery/atmospherics/pipe/universal/hidden) || istype(make_from, /obj/machinery/atmospherics/pipe/universal))
 			src.pipe_type = PIPE_UNIVERSAL
 			connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_SCRUBBER
 		else if(istype(make_from, /obj/machinery/atmospherics/pipe/simple))
@@ -477,8 +477,18 @@ Buildable meters
 
 	var/obj/machinery/atmospherics/P
 	switch(pipe_type)
+
+		if(PIPE_UNIVERSAL)
+			P=new/obj/machinery/atmospherics/pipe/universal(src.loc)
+
 		if(PIPE_SIMPLE_STRAIGHT, PIPE_SIMPLE_BENT)
 			P=new/obj/machinery/atmospherics/pipe/simple(src.loc)
+
+		if(PIPE_SUPPLY_STRAIGHT, PIPE_SUPPLY_BENT)
+			P = new/obj/machinery/atmospherics/pipe/simple/hidden/supply(src.loc)
+
+		if(PIPE_SCRUBBERS_STRAIGHT, PIPE_SCRUBBERS_BENT)
+			P = new/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers(src.loc)
 
 		if(PIPE_HE_STRAIGHT, PIPE_HE_BENT)
 			P=new/obj/machinery/atmospherics/pipe/simple/heat_exchanging(src.loc)

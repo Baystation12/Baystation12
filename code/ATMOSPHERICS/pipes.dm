@@ -99,12 +99,12 @@
 
 
 /obj/machinery/atmospherics/pipe/initialize()
-	for(var/direction in cardinal)
-		if(direction&initialize_directions)
-			for(var/obj/machinery/atmospherics/target in get_step(src,direction))
-				if(target.initialize_directions & get_dir(target,src))
-					if (check_connect_types(target,src))
-						connect(target)
+	var/list/dirs = get_initialize_dirs()
+	for(var/direction in dirs)
+		for(var/obj/machinery/atmospherics/target in get_step(src,direction))
+			if(target.initialize_directions & get_dir(target,src))
+				if (check_connect_types(target,src))
+					connect(target)
 
 	if(!get_nodes_amount())
 		qdel(src)
@@ -240,7 +240,7 @@
 
 /obj/machinery/atmospherics/pipe/simple/proc/normalize_dir()
 	if(dir==3)
-		set_dir(1)
+		set_dir(2)
 	else if(dir==12)
 		set_dir(4)
 
@@ -263,17 +263,28 @@
 				new /obj/item/pipe_meter(T)
 				qdel(meter)
 		qdel(src)
-	else if(nodes_amount == 2)
-		overlays += icon_manager.get_atmos_icon("pipe", , pipe_color, "[pipe_icon]intact[icon_connect_type]")
 	else
-		var/obj/machinery/atmospherics/node = nodes[1]
-		if(get_dir(node,src) != src.dir)
-			overlays += icon_manager.get_atmos_icon("pipe", , pipe_color, "[pipe_icon]exposed10[icon_connect_type]")
-		else
-			overlays += icon_manager.get_atmos_icon("pipe", , pipe_color, "[pipe_icon]exposed01[icon_connect_type]")
+		overlays.Cut()
+		world<<"[initialize_directions]"
+		overlays += icon_manager.get_atmos_icon("underlay", initialize_directions, pipe_color, "bent" + icon_connect_type)
+		underlays.Cut()
+
+		var/turf/T = get_turf(src)
+		var/list/directions = get_initialize_dirs()
+
+		for(var/obj/machinery/atmospherics/node in nodes)
+			if(node) //maybe not needed, but better oversafe than undersafe
+				var/node_direction = get_dir(src, node)
+				directions -= node_direction
+				add_underlay(T,node,node_direction,icon_connect_type)
+
+		for(var/D in directions)
+			add_underlay(T,,D,icon_connect_type)
+
 
 /obj/machinery/atmospherics/pipe/simple/update_underlays()
 	return
+
 
 /obj/machinery/atmospherics/pipe/simple/initialize()
 	normalize_dir()
@@ -436,23 +447,13 @@
 
 		var/turf/T = get_turf(src)
 
-		var/list/directions = list(NORTH, SOUTH, EAST, WEST)
-		directions -= dir
+		var/list/directions = get_initialize_dirs()
 
-/*		var/node1_direction = get_dir(src, nodes[1])
-		var/node2_direction = get_dir(src, nodes[2])
-		var/node3_direction = get_dir(src, nodes[3])
-
-		directions -= dir
-
-		directions -= add_underlay(T,nodes[1],node1_direction,icon_connect_type)
-		directions -= add_underlay(T,nodes[2],node2_direction,icon_connect_type)
-		directions -= add_underlay(T,nodes[3],node3_direction,icon_connect_type)
-*/
 		for(var/obj/machinery/atmospherics/node in nodes)
 			if(node) //maybe not needed, but better oversafe than undersafe
 				var/node_direction = get_dir(src, node)
-				directions -= add_underlay(T,node,node_direction,icon_connect_type)
+				directions -= node_direction
+				add_underlay(T,node,node_direction,icon_connect_type)
 
 		for(var/D in directions)
 			add_underlay(T,,D,icon_connect_type)
@@ -585,37 +586,15 @@
 		overlays += icon_manager.get_atmos_icon("manifold", , , "clamps_4way" + icon_connect_type)
 		underlays.Cut()
 
-		/*
-		var/list/directions = list(NORTH, SOUTH, EAST, WEST)
-
-
-		directions -= add_underlay(node1)
-		directions -= add_underlay(node2)
-		directions -= add_underlay(node3)
-		directions -= add_underlay(node4)
-
-		for(var/D in directions)
-			add_underlay(,D)
-		*/
 
 		var/turf/T = get_turf(src)
-		var/list/directions = list(NORTH, SOUTH, EAST, WEST)
-/*		var/node1_direction = get_dir(src, nodes[1])
-		var/node2_direction = get_dir(src, nodes[2])
-		var/node3_direction = get_dir(src, nodes[3])
-		var/node4_direction = get_dir(src, nodes[4])
+		var/list/directions = get_initialize_dirs()
 
-		directions -= dir
-
-		directions -= add_underlay(T,nodes[1],node1_direction,icon_connect_type)
-		directions -= add_underlay(T,nodes[2],node2_direction,icon_connect_type)
-		directions -= add_underlay(T,nodes[3],node3_direction,icon_connect_type)
-		directions -= add_underlay(T,nodes[4],node4_direction,icon_connect_type)
-*/
 		for(var/obj/machinery/atmospherics/node in nodes)
 			if(node) //maybe not needed, but better oversafe than undersafe
 				var/node_direction = get_dir(src, node)
-				directions -= add_underlay(T,node,node_direction,icon_connect_type)
+				directions -= node_direction
+				add_underlay(T,node,node_direction,icon_connect_type)
 
 		for(var/D in directions)
 			add_underlay(T,,D,icon_connect_type)
@@ -1188,11 +1167,11 @@
 			add_underlay_adapter(T, node, node_dir, "")
 			add_underlay_adapter(T, , node_dir, "-supply")
 			add_underlay_adapter(T, , node_dir, "-scrubbers")
-	else
+/*	else
 		add_underlay_adapter(T, , direction, "-supply")
 		add_underlay_adapter(T, , direction, "-scrubbers")
 		add_underlay_adapter(T, , direction, "")
-
+*/
 
 /obj/machinery/atmospherics/proc/add_underlay_adapter(var/turf/T, var/obj/machinery/atmospherics/node, var/direction, var/icon_connect_type) //modified from add_underlay, does not make exposed underlays
 	if(node)
@@ -1200,5 +1179,5 @@
 			underlays += icon_manager.get_atmos_icon("underlay", direction, color_cache_name(node), "down" + icon_connect_type)
 		else
 			underlays += icon_manager.get_atmos_icon("underlay", direction, color_cache_name(node), "intact" + icon_connect_type)
-	else
-		underlays += icon_manager.get_atmos_icon("underlay", direction, color_cache_name(node), "retracted" + icon_connect_type)
+//	else
+//		underlays += icon_manager.get_atmos_icon("underlay", direction, color_cache_name(node), "retracted" + icon_connect_type)
