@@ -173,8 +173,11 @@
 		add_autopsy_data("[used_weapon]", brute + burn)
 
 	var/can_cut = (prob(brute*2) || sharp) && !(status & ORGAN_ROBOT)
+
 	// If the limbs can break, make sure we don't exceed the maximum damage a limb can take before breaking
-	if((brute_dam + burn_dam + brute + burn) < max_damage || !config.limbs_can_break)
+	// Non-vital organs are limited to max_damage. You can't kill someone by bludeonging their arm all the way to 200 -- you can 
+	// push them faster into paincrit though, as the additional damage is converted into shock.
+	if(vital || (brute_dam + burn_dam + brute + burn) < max_damage || !config.limbs_can_break)
 		if(brute)
 			if(can_cut)
 				createwound( CUT, brute )
@@ -206,7 +209,7 @@
 				burn = max(0, burn - can_inflict)
 		//If there are still hurties to dispense
 		if (burn || brute)
-			owner.shock_stage += brute+burn
+			owner.shock_stage += (brute+burn) * config.organ_damage_spillover_multiplier
 
 	// sync the organ's damage with its wounds
 	src.update_damages()
