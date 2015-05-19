@@ -10,6 +10,8 @@ Attach to transfer valve and open. BOOM.
 
 */
 
+//#define FIREDBG
+
 /turf/var/obj/fire/fire = null
 
 //Some legacy definitions so fires can be started.
@@ -42,7 +44,6 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 	var/datum/gas_mixture/burn_gas = air.remove_ratio(vsc.fire_consuption_rate, fire_tiles.len)
 
 	var/firelevel = burn_gas.zburn(src, fire_tiles, force_burn = 1, no_check = 1)
-	//world << "[src]: firelevel [firelevel]"
 
 	air.merge(burn_gas)
 
@@ -225,9 +226,10 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 
 //Returns the firelevel
 /datum/gas_mixture/proc/zburn(zone/zone, force_burn, no_check = 0)
-	//if(zone)
-	//	world << "**********************************************"
-	//	world << "Burning [zone.name]!"
+	#ifdef FIREDBG
+	log_debug("***************** FIREDBG *****************")
+	if(zone) log_debug("Burning [zone.name]!")
+	#endif
 
 	. = 0
 	if((temperature > PHORON_MINIMUM_BURN_TEMPERATURE || force_burn) && (no_check ||check_recombustability(zone? zone.fuel_objs : null)))
@@ -267,7 +269,7 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 
 		//calculate the firelevel.
 		var/firelevel = calculate_firelevel(total_fuel, total_oxidizers, reaction_limit)
-		//world << "firelevel -> [firelevel] / [vsc.fire_firelevel_multiplier]"
+		
 
 		//vapour fuels are extremely volatile! The reaction progress is a percentage of the total fuel (similar to old zburn).
 		var/gas_reaction_progress = min(0.2, (firelevel/vsc.fire_firelevel_multiplier))*gas_fuel*FIRE_GAS_BURNRATE_MULT
@@ -275,13 +277,16 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 		//liquid fuels are not as volatile, and the reaction progress depends on the size of the area that is burning. Limit the burn rate to a certain amount per area.
 		var/liquid_reaction_progress = ((firelevel/vsc.fire_firelevel_multiplier)*0.2 + 0.05)*fuel_area*FIRE_LIQUID_BURNRATE_MULT
 
-		//world << "liquid_reaction_progress = [liquid_reaction_progress]"
-		//world << "gas_reaction_progress = [gas_reaction_progress]"
-
 		var/total_reaction_progress = gas_reaction_progress + liquid_reaction_progress
 		var/used_fuel = min(total_reaction_progress, reaction_limit)
 		var/used_oxidizers = used_fuel*(FIRE_REACTION_OXIDIZER_AMOUNT/FIRE_REACTION_FUEL_AMOUNT)
-		//world << "used_fuel = [used_fuel]; used_oxidizers = [used_oxidizers]; reaction_limit=[reaction_limit]"
+		
+		#ifdef FIREDBG
+		log_debug("firelevel -> [firelevel] / [vsc.fire_firelevel_multiplier]")
+		log_debug("liquid_reaction_progress = [liquid_reaction_progress]")
+		log_debug("gas_reaction_progress = [gas_reaction_progress]")
+		log_debug("used_fuel = [used_fuel]; used_oxidizers = [used_oxidizers]; reaction_limit=[reaction_limit]")
+		#endif
 
 		//if the reaction is progressing too slow then it isn't self-sustaining anymore and burns out
 		if(zone) //be less restrictive with canister and tank reactions
@@ -294,8 +299,6 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 		//remove and add gasses as calculated
 		var/used_gas_fuel = between(0.25, used_fuel*(gas_reaction_progress/total_reaction_progress), gas_fuel) //remove in proportion to the relative reaction progress
 		var/used_liquid_fuel = between(0.25, used_fuel-used_gas_fuel, liquid_fuel)
-		
-		//world << "used_gas_fuel = [used_gas_fuel]; used_liquid_fuel = [used_liquid_fuel]; total = [used_gas_fuel+used_liquid_fuel]"
 
 		//remove_by_flag() and adjust_gas() handle the group_multiplier for us.
 		remove_by_flag(XGM_GAS_OXIDIZER, used_oxidizers)
@@ -307,7 +310,11 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 
 		//calculate the energy produced by the reaction and then set the new temperature of the mix
 		temperature = (starting_energy + vsc.fire_fuel_energy_release * used_fuel) / heat_capacity()
-		//world << "new temperature = [temperature]"
+		
+		#ifdef FIREDBG
+		log_debug("used_gas_fuel = [used_gas_fuel]; used_liquid_fuel = [used_liquid_fuel]; total = [used_gas_fuel+used_liquid_fuel]")
+		log_debug("new temperature = [temperature]")
+		#endif
 
 		update_values()
 		return firelevel
@@ -365,8 +372,10 @@ datum/gas_mixture/proc/check_recombustability(list/fuel_objs)
 		//fires burn better when there is more oxidizer -- too much fuel will choke them out a bit, reducing firelevel.
 		var/mix_multiplier = 1 / (1 + (5 * ((total_fuel / total_combustables) ** 2)))
 		
-		if(dampening_multiplier > 1) world << "WTF? dampening_multiplier = [dampening_multiplier]"
-		if(mix_multiplier > 1) world << "WTF? mix_multiplier = [mix_multiplier]"
+		#ifdef FIREDBG
+		ASSERT(dampening_multiplier <= 1)
+		ASSERT(mix_multiplier <= 1)
+		#endif
 		
 		//toss everything together -- should produce a value between 0 and fire_firelevel_multiplier
 		firelevel = vsc.fire_firelevel_multiplier * mix_multiplier * dampening_multiplier
