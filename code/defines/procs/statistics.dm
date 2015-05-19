@@ -98,7 +98,7 @@ proc/statistic_cycle()
 		return
 	while(1)
 		sql_poll_population()
-		sleep(600)
+		sleep(6000)
 
 //This proc is used for feedback. It is executed at round end.
 proc/sql_commit_feedback()

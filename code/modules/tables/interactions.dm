@@ -123,7 +123,7 @@
 		break_to_parts()
 		return
 
-	if(!material)
+	if(can_plate && !material)
 		user << "<span class='warning'>There's nothing to put \the [W] on! Try adding plating to \the [src] first.</span>"
 		return
 

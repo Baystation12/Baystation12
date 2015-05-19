@@ -226,6 +226,8 @@
 //Used when someone breaks a camera
 /obj/machinery/camera/proc/destroy()
 	stat |= BROKEN
+	wires.RandomCutAll()
+
 	kick_viewers()
 	triggerCameraAlarm()
 	update_icon()

@@ -37,10 +37,11 @@ var/const/AIRLOCK_WIRE_LIGHT = 2048
 	var/haspower = A.arePowerSystemsOn() //If there's no power, then no lights will be on.
 
 	. += ..()
-	. += text("<br>\n[]<br>\n[]<br>\n[]<br>\n[]<br>\n[]<br>\n[]<br>\n[]",
+	. += text("<br>\n[]<br>\n[]<br>\n[]<br>\n[]<br>\n[]<br>\n[]<br>\n[]<br>\n[]",
 	(A.locked ? "The door bolts have fallen!" : "The door bolts look up."),
 	((A.lights && haspower) ? "The door bolt lights are on." : "The door bolt lights are off!"),
 	((haspower) ? "The test light is on." : "The test light is off!"),
+	((A.backupPowerCablesCut()) ? "The backup power light is off!" : "The backup power light is on."),
 	((A.aiControlDisabled==0 && !A.emagged && haspower)? "The 'AI control allowed' light is on." : "The 'AI control allowed' light is off."),
 	((A.safe==0 && haspower)? "The 'Check Wiring' light is on." : "The 'Check Wiring' light is off."),
 	((A.normalspeed==0 && haspower)? "The 'Check Timing Mechanism' light is on." : "The 'Check Timing Mechanism' light is off."),
@@ -124,7 +125,7 @@ var/const/AIRLOCK_WIRE_LIGHT = 2048
 			//Sending a pulse through flashes the red light on the door (if the door has power).
 			if(A.arePowerSystemsOn() && A.density)
 				A.do_animate("deny")
-		if(AIRLOCK_WIRE_MAIN_POWER1 || AIRLOCK_WIRE_MAIN_POWER2)
+		if(AIRLOCK_WIRE_MAIN_POWER1, AIRLOCK_WIRE_MAIN_POWER2)
 			//Sending a pulse through either one causes a breaker to trip, disabling the door for 10 seconds if backup power is connected, or 1 minute if not (or until backup power comes back on, whichever is shorter).
 			A.loseMainPower()
 		if(AIRLOCK_WIRE_DOOR_BOLTS)
@@ -135,7 +136,7 @@ var/const/AIRLOCK_WIRE_LIGHT = 2048
 			else
 				A.unlock()
 
-		if(AIRLOCK_WIRE_BACKUP_POWER1 || AIRLOCK_WIRE_BACKUP_POWER2)
+		if(AIRLOCK_WIRE_BACKUP_POWER1, AIRLOCK_WIRE_BACKUP_POWER2)
 			//two wires for backup power. Sending a pulse through either one causes a breaker to trip, but this does not disable it unless main power is down too (in which case it is disabled for 1 minute or however long it takes main power to come back, whichever is shorter).
 			A.loseBackupPower()
 		if(AIRLOCK_WIRE_AI_CONTROL)
