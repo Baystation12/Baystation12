@@ -42,7 +42,6 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 	var/screen = 1.0	//Which screen is currently showing.
 	var/id = 0			//ID of the computer (for server restrictions).
 	var/sync = 1		//If sync = 0, it doesn't show up on Server Control Console
-	var/picking_part = null
 
 	req_access = list(access_research)	//Data and setting manipulation requires scientist access.
 
@@ -412,33 +411,6 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			else
 				del sheet
 
-	else if(href_list["plan"])
-		if(linked_lathe)
-			for(var/datum/design/D in files.known_designs)
-				if(D.id == href_list["plan"])
-					linked_lathe.current_chassis = D
-					break
-			screen = 3.6
-		updateUsrDialog()
-
-	else if(href_list["pickpart"])
-		picking_part = href_list["pickpart"]
-		screen = 3.7
-		updateUsrDialog()
-
-	else if(href_list["choosepart"])
-		for(var/datum/design/D in files.known_designs)
-			if(D.id == href_list["choosepart"])
-				linked_lathe.choosePart(picking_part, D)
-				break
-		screen = 3.6
-		updateUsrDialog()
-
-	else if(href_list["buildchassis"])
-		linked_lathe.buildChassis()
-		screen = 3.1
-		updateUsrDialog()
-
 	else if(href_list["find_device"]) //The R&D console looks for devices nearby to link up with.
 		screen = 0.0
 		spawn(10)
@@ -713,7 +685,6 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 		if(3.1)
 			dat += "<A href='?src=\ref[src];menu=1.0'>Main Menu</A> || "
 			dat += "<A href='?src=\ref[src];menu=3.4'>View Queue</A> || "
-			dat += "<A href='?src=\ref[src];menu=3.5'>Assembly</A> || "
 			dat += "<A href='?src=\ref[src];menu=3.2'>Material Storage</A> || "
 			dat += "<A href='?src=\ref[src];menu=3.3'>Chemical Storage</A><HR>"
 			dat += "Protolathe Menu:<BR><BR>"
@@ -779,55 +750,6 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 					else
 						dat += "[tmp]: [D.name] <A href='?src=\ref[src];removeP=[tmp]'>(Remove)</A><BR>"
 					++tmp
-
-		if(3.5) // Protolathe assembly
-			dat += "<A href='?src=\ref[src];menu=1.0'>Main Menu</A> || "
-			dat += "<A href='?src=\ref[src];menu=3.1'>Protolathe Menu</A><HR>"
-			dat += "Chassis list<BR><HR>"
-			if(linked_lathe.queue.len)
-				dat += "Protolathe is in use"
-			else
-				dat += "<UL>"
-				for(var/datum/design/D in files.known_designs)
-					if(!D.build_path || !(D.build_type & CHASSIS))
-						continue
-					var/datum/design/chassis/C = D
-					if(!C || !istype(C))
-						continue
-					dat += "<LI><A href='?src=\ref[src];plan=[C.id]'>[C.name]</A>"
-				dat += "</UL>"
-
-		if(3.6)
-			dat += "<A href='?src=\ref[src];menu=1.0'>Main Menu</A> || "
-			dat += "<A href='?src=\ref[src];menu=3.5'>Back to list</A> || "
-			dat += "<A href='?src=\ref[src];menu=3.1'>Protolathe Menu</A><HR>"
-			dat += "Assembly<BR><HR>"
-			if(linked_lathe && linked_lathe.current_chassis)
-				dat += "<B>[linked_lathe.current_chassis.name]</B><BR>"
-				dat += "<UL>"
-				var/can_build = 1
-				for(var/T in linked_lathe.current_chassis.components)
-					var/datum/design/D = linked_lathe.current_components[T]
-					if(!D)
-						dat += "<LI>[T]: <A href='?src=\ref[src];pickpart=[T]'>Nothing</A>"
-						can_build = 0
-					else
-						dat += "<LI>[T]: <A href='?src=\ref[src];pickpart=[T]'>[D.name]</A>"
-				dat += "</UL>"
-				if(can_build)
-					dat += "<A href='?src=\ref[src];buildchassis=1'>BUILD</A>"
-			else
-				dat += "NO PROTOLATHE LINKED OR NO DESIGN LOADED"
-
-		if(3.7)
-			dat += "<A href='?src=\ref[src];menu=1.0'>Main Menu</A> || "
-			dat += "<A href='?src=\ref[src];menu=3.6'>Back to list</A> || "
-			dat += "<A href='?src=\ref[src];menu=3.1'>Protolathe Menu</A><HR>"
-			dat += "<B>[picking_part]</B><BR><UL>"
-			for(var/datum/design/D in files.known_designs)
-				if(linked_lathe.current_chassis.suitablePart(picking_part, D))
-					dat += "<LI><A href='?src=\ref[src];choosepart=[D.id]'>[D.name]</A>"
-			dat += "</UL>"
 
 		///////////////////CIRCUIT IMPRINTER SCREENS////////////////////
 		if(4.0)

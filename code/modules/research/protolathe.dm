@@ -7,16 +7,14 @@
 	idle_power_usage = 30
 	active_power_usage = 5000
 
+	var/max_material_storage = 100000
 	var/list/materials = list("metal" = 0, "glass" = 0, "gold" = 0, "silver" = 0, "phoron" = 0, "uranium" = 0, "diamond" = 0)
+
 	var/list/datum/design/queue = list()
 	var/progress = 0
 
-	var/max_material_storage = 100000 // All this could probably be done better with a list but meh.
 	var/mat_efficiency = 1
 	var/speed = 1
-
-	var/datum/design/chassis/current_chassis = null
-	var/list/datum/design/current_components = list()
 
 /obj/machinery/r_n_d/protolathe/New()
 	..()
@@ -239,17 +237,3 @@
 			if(new_item.matter && new_item.matter.len > 0)
 				for(var/i in new_item.matter)
 					new_item.matter[i] = new_item.matter[i] * mat_efficiency
-
-/obj/machinery/r_n_d/protolathe/proc/choosePart(var/name, var/datum/design/D)
-	current_components[name] = D
-
-/obj/machinery/r_n_d/protolathe/proc/buildChassis()
-	var/obj/item/I = new current_chassis.build_path(loc)
-	for(var/t in current_components)
-		var/datum/design/D = current_components[t]
-		var/obj/item/O = new D.build_path(I)
-		world << I
-		world << I.type
-		current_chassis.setup(I, O, t)
-	current_components.Cut()
-	current_chassis = null
