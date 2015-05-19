@@ -60,10 +60,11 @@ var/list/organ_cache = list()
 
 /obj/item/organ/process()
 
-	// Don't process if we're in a freezer, an MMI or a stasis bag. //TODO: ambient temperature?
-	if(istype(loc,/obj/item/device/mmi) || istype(loc,/obj/item/bodybag/cryobag) || istype(loc,/obj/structure/closet/crate/freezer))
+	// Don't process if we're in a freezer, an MMI or a stasis bag.or a freezer or something I dunno
+	if(istype(loc,/obj/item/device/mmi))
 		return
-
+	if(istype(loc,/obj/structure/closet/body_bag/cryobag) || istype(loc,/obj/structure/closet/crate/freezer) || istype(loc,/obj/item/weapon/storage/box/freezer))
+		return
 	//Process infections
 	if (robotic >= 2 || (owner && owner.species && (owner.species.flags & IS_PLANT)))
 		germ_level = 0
