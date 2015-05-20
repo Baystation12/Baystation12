@@ -1048,6 +1048,7 @@
 #include "code\modules\maps\writer.dm"
 #include "code\modules\materials\material_recipes.dm"
 #include "code\modules\materials\material_sheets.dm"
+#include "code\modules\materials\material_synth.dm"
 #include "code\modules\materials\materials.dm"
 #include "code\modules\mining\abandonedcrates.dm"
 #include "code\modules\mining\alloys.dm"

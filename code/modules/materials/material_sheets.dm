@@ -1,4 +1,4 @@
-// Stacked resources.
+// Stacked resources. They use a material datum for a lot of inherited values.
 /obj/item/stack/material
 	force = 5.0
 	throwforce = 5
@@ -44,36 +44,6 @@
 	else
 		matter[material.name] = material.stack_per_sheet
 	return 1
-
-/obj/item/stack/material/cyborg
-	uses_charge = 1
-	charge_costs = list(1000)
-	gender = NEUTER
-	matter = null
-
-/obj/item/stack/material/cyborg/New()
-	if(..())
-		name = "[material.display_name] synthesiser"
-		desc = "A device that synthesises [material.display_name]."
-
-/obj/item/stack/material/cyborg/plastic
-	default_type = "plastic"
-
-/obj/item/stack/material/cyborg/steel
-	default_type = "steel"
-
-/obj/item/stack/material/cyborg/plasteel
-	default_type = "plasteel"
-
-/obj/item/stack/material/cyborg/wood
-	default_type = "wood"
-
-/obj/item/stack/material/cyborg/glass
-	default_type = "glass"
-
-/obj/item/stack/material/cyborg/glass/reinforced
-	default_type = "reinforced glass"
-	charge_costs = list(500, 1000)
 
 obj/item/stack/material/iron
 	name = "iron"

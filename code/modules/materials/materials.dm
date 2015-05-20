@@ -1,5 +1,33 @@
+/*
+	MATERIAL DATUMS
+	This data is used by various parts of the game for basic physical properties and behaviors
+	of the metals/materials used for constructing many objects. Each var is commented and should be pretty
+	self-explanatory but the various object types may have their own documentation. ~Z
+
+	PATHS THAT USE DATUMS
+		/turf/simulated/wall
+		/obj/item/weapon/material
+		/obj/structure/barricade
+		/obj/item/stack/material
+		/obj/structure/table
+
+	VALID ICONS
+		WALLS
+			stone
+			metal
+			solid
+			cult
+		DOORS
+			stone
+			metal
+			resin
+			wood
+*/
+
+// Assoc list containing all material datums indexed by name.
 var/list/name_to_material
 
+// Builds the datum list above.
 /proc/populate_material_list(force_remake=0)
 	if(name_to_material && !force_remake) return // Already set up!
 	name_to_material = list()
@@ -10,62 +38,58 @@ var/list/name_to_material
 		name_to_material[lowertext(new_mineral.name)] = new_mineral
 	return 1
 
+// Safety proc to make sure the material list exists before trying to grab from it.
 /proc/get_material_by_name(name)
 	if(!name_to_material)
 		populate_material_list()
 	return name_to_material[name]
 
-/*
-	Valid sprite masks:
-	stone
-	metal
-	solid
-	cult
-	Valid door icons:
-	stone
-	metal
-	resin
-	wood
-
-*/
-
+// Material definition and procs follow.
 /material
-	var/name	          // Tag for use in overlay generation/list population	.
-	var/display_name
-	var/flags = 0
-	var/rotting_touch_message = "crumbles under your touch"
+	var/name	                          // Unique name for use in indexing the list.
+	var/display_name                      // Prettier name for display.
+	var/flags = 0                         // Various status modifiers.
 
 	// Shards/tables/structures
-	var/tableslam_noise = 'sound/weapons/tablehit1.ogg'
-	var/dooropen_noise = 'sound/effects/stonedoor_openclose.ogg'
-	var/shard_type = SHARD_SHRAPNEL
-	var/shard_icon
-	var/shard_can_repair = 1
-	var/list/recipes
-	var/destruction_desc = "breaks apart"
+	var/shard_type = SHARD_SHRAPNEL       // Path of debris object.
+	var/shard_icon                        // Related to above.
+	var/shard_can_repair = 1              // Can shards be turned into sheets with a welder?
+	var/list/recipes                      // Holder for all recipes usable with a sheet of this material.
+	var/destruction_desc = "breaks apart" // Fancy string for barricades/tables/objects exploding.
 
 	// Icons
-	var/icon_colour
-	var/icon_base = "metal"
-	var/door_icon_base = "metal"
-	var/icon_reinf = "reinf_metal"
-	var/stack_type = /obj/item/stack/material/steel
-	var/stack_origin_tech = "materials=1"
-	var/stack_per_sheet = 2000
+	var/icon_colour                       // Colour applied to products of this material.
+	var/icon_base = "metal"               // Wall and table base icon tag. See header.
+	var/door_icon_base = "metal"          // Door base icon tag. See header.
+	var/icon_reinf = "reinf_metal"        // Overlay used
+	var/stack_origin_tech = "materials=1" // Research level for stacks.
+	var/stack_per_sheet = 2000            // perunit value for stacks.
 
 	// Attributes
-	var/cut_delay = 0
-	var/radioactivity
-	var/ignition_point
-	var/melting_point = 1800 // K, walls will take damage if they're next to a fire hotter than this
-	var/integrity = 150      // Damage before wall falls apart, essentially.
-	var/hardness = 60        // Used to determine if a hulk can punch through this wall.
-	var/opacity = 1
-	var/explosion_resistance = 5
-	var/weight = 20
-	var/conductive = 1
-	var/list/composite_material
+	var/cut_delay = 0            // Delay in ticks when cutting through this wall.
+	var/radioactivity            // Radiation var. Used in wall and object processing to irradiate surroundings.
+	var/ignition_point           // Point at which the material catches on fire.
+	var/melting_point = 1800     // K, walls will take damage if they're next to a fire hotter than this
+	var/integrity = 150          // General-use HP value for products.
+	var/opacity = 1              // Is the material transparent? 0.5< makes transparent walls/doors.
+	var/explosion_resistance = 5 // Only used by walls currently.
+	var/conductive = 1           // Objects with this var add CONDUCTS to flags on spawn.
+	var/list/composite_material  // If set, object matter var will be a list containing these values.
 
+	// Damage values.
+	var/hardness = 60            // Prob of wall destruction by hulk, used for edge damage in weapons.
+	var/weight = 20              // Determines blunt damage/throwforce for weapons.
+
+	// Noise when someone is faceplanted onto a table made of this material.
+	var/tableslam_noise = 'sound/weapons/tablehit1.ogg'
+	// Noise made when a simple door made of this material opens or closes.
+	var/dooropen_noise = 'sound/effects/stonedoor_openclose.ogg'
+	// Path to resulting stacktype. Todo remove need for this.
+	var/stack_type = /obj/item/stack/material/steel
+	// Wallrot crumble message.
+	var/rotting_touch_message = "crumbles under your touch"
+
+// Make sure we have a display name and shard icon even if they aren't explicitly set.
 /material/New()
 	..()
 	if(!display_name)
@@ -73,42 +97,54 @@ var/list/name_to_material
 	if(!shard_icon)
 		shard_icon = shard_type
 
+// Weapons handle applying a divisor for this value locally.
 /material/proc/get_blunt_damage()
 	return weight //todo
 
+// As above.
 /material/proc/get_edge_damage()
 	return hardness //todo
 
+// Snowflakey, only checked for alien doors at the moment.
 /material/proc/can_open_material_door(var/mob/living/user)
 	return 1
 
+// Currently used for weapons and objects made of uranium to irradiate things.
 /material/proc/products_need_process()
 	return (radioactivity>0) //todo
 
+// Used by walls when qdel()ing to avoid neighbor merging.
 /material/placeholder
 	name = "placeholder"
 
+// Places a girder object when a wall is dismantled, also applies reinforced material.
 /material/proc/place_dismantled_girder(var/turf/target, var/material/reinf_material)
 	var/obj/structure/girder/G = new(target)
 	if(reinf_material)
 		G.reinf_material = reinf_material
 		G.reinforce_girder()
 
+// General wall debris product placement.
+// Not particularly necessary aside from snowflakey cult girders.
 /material/proc/place_dismantled_product(var/turf/target,var/is_devastated)
 	for(var/x=1;x<(is_devastated?2:3);x++)
 		place_sheet(target)
 
+// Debris product. Used ALL THE TIME.
 /material/proc/place_sheet(var/turf/target)
 	if(stack_type)
 		return new stack_type(target)
 
+// As above.
 /material/proc/place_shard(var/turf/target)
 	if(shard_type)
 		return new /obj/item/weapon/material/shard(target, src.name)
 
+// Used by walls and weapons to determine if they break or not.
 /material/proc/is_brittle()
 	return !!(flags & MATERIAL_BRITTLE)
 
+// Datum definitions follow.
 /material/uranium
 	name = "uranium"
 	stack_type = /obj/item/stack/material/uranium
