@@ -1156,6 +1156,7 @@
 #include "code\modules\mob\living\carbon\alien\diona\update_icons.dm"
 #include "code\modules\mob\living\carbon\alien\larva\larva.dm"
 #include "code\modules\mob\living\carbon\alien\larva\life.dm"
+#include "code\modules\mob\living\carbon\alien\larva\powers.dm"
 #include "code\modules\mob\living\carbon\alien\larva\progression.dm"
 #include "code\modules\mob\living\carbon\brain\brain.dm"
 #include "code\modules\mob\living\carbon\brain\brain_item.dm"

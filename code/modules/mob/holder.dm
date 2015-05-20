@@ -115,3 +115,9 @@
 	name = "neaera"
 	desc = "It's a neaera."
 	icon_state = "neara"
+
+/obj/item/weapon/holder/larva
+	name = "larva"
+	desc = "It's some kind of huge leech!"
+	icon_state = "larva"
+	w_class = 1

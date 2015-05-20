@@ -12,3 +12,4 @@
 	..()
 	add_language("Xenophage") //Bonus language.
 	internal_organs |= new /obj/item/organ/xenos/hivenode(src)
+	create_reagents(100)
