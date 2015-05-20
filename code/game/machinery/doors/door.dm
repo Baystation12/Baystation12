@@ -265,6 +265,7 @@
 	if(src.density && istype(I, /obj/item/weapon) && user.a_intent == I_HURT && !istype(I, /obj/item/weapon/card))
 		var/obj/item/weapon/W = I
 		if(W.damtype == BRUTE || W.damtype == BURN)
+			user.do_attack_animation(src)
 			if(W.force < min_force)
 				user.visible_message("\red <B>\The [user] hits \the [src] with \the [W] with no visible effect.</B>" )
 			else

@@ -34,6 +34,7 @@
 /obj/structure/grille/attack_hand(mob/user as mob)
 
 	playsound(loc, 'sound/effects/grillehit.ogg', 80, 1)
+	user.do_attack_animation(src)
 
 	var/damage_dealt = 1
 	var/attack_message = "kicks"
@@ -156,6 +157,7 @@
 	else if(istype(W, /obj/item/weapon/shard))
 		health -= W.force * 0.1
 	else if(!shock(user, 70))
+		user.do_attack_animation(src)
 		playsound(loc, 'sound/effects/grillehit.ogg', 80, 1)
 		switch(W.damtype)
 			if("fire")
