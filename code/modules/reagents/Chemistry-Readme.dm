@@ -218,17 +218,31 @@ About Recipes:
 			Basically like a reagent's data variable. You can set extra requirements for a
 			reaction with this.
 
-		stages
-			Amount of reaction iterations until completion; each step consumes 1/S of total available reagents
-			and decrements a local copy of the stages var, so that when it reaches 1, all remaining reagents are used up.
 
-			In an infinite container full of reagents it would speed up indefinitely, but in a finite one,
-			it just so happens to give us a constant decrement per stage.
+	kinetics:
+
+		rate
+			Fraction of how much of the total usable reagent actually is used in a reaction's iteration.
+			If the required_amount is 1 and reagent volume is 10, for example, a reaction with a rate of 2 will use
+			5 reagents in the first iteration, then 2.5 (0.5 * (10-5)) in the next, and so on.
+
+			KEEP IT >= 1! You can use floats >1 but values <1 will result in Shenanigans (TM) occuring.
 
 		reaction_delay
 			Delay between iterations (mixing is treated as iteration 0), in deciseconds.
 			Keep in mind when setting this that it adds up - if you want to keep a reaction slow, keeping the stages high is better.
-			Modify it for things like grenade reactions, as higher stages would keep the reaction going longer and/or less intense.
+
+			Modify it to get things like delayed grenade reactions, as higher stages would
+			also keep the reaction going longer and/or less intense.
+
+		cutoff
+			A safeguard for multi-stage reactions - a reaction will stop when the volume of reagents falls below cutoff*stoichiometry
+			of the reagent. Bear in mind it's not a predictable value - for a cutoff of 5, rate of 2 and reqs of 1, in a beaker
+			with 10u of reagent it will produce 7.5 units of product (pass at 10u and pass at 5u), 11u 8.25 (rounded to 8.3)
+			and so on by 0.75 increments but 9u will only yield 4.5 (pass at 9u, fail at 4.5u).
+
+			Reactions with rate > 1 have a hard minimum on cutoff to prevent overly long loops - BYOND hates them
+			(learn 1 simple trick to break SS13 servers they don't want you to know!)
 
 
 About the Tools:
