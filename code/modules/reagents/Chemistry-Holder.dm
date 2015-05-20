@@ -109,12 +109,18 @@
 	if(my_atom.flags & NOREACT) // No reactions here
 		return
 
-	var/reaction_occured = 0
+	var/reaction_incomplete = 1
+	var/potential_reactions = 0 // Can something still happen?
+	var/loop_repeat = -1
+
 	do
-		reaction_occured = 0
+		loop_repeat++
+		world.log << "LOOP REPEAT = [loop_repeat]"
 		for(var/datum/reagent/R in reagent_list)
 			for(var/datum/chemical_reaction/C in chemical_reactions_list[R.id])
+				var/stages_remaining = (C.stages - loop_repeat)
 				var/reagents_suitable = 1
+				potential_reactions++
 				for(var/B in C.required_reagents)
 					if(!has_reagent(B, C.required_reagents[B]))
 						reagents_suitable = 0
@@ -126,32 +132,49 @@
 						reagents_suitable = 0
 
 				if(!reagents_suitable || !C.can_happen(src))
+					potential_reactions--
+					world.log << "DEBUG: pot.reactions post-check = [potential_reactions]"
 					continue
 
-				var/use = -1
-				for(var/B in C.required_reagents)
-					if(use == -1)
-						use = get_reagent_amount(B) / C.required_reagents[B]
-					else
-						use = min(use, get_reagent_amount(B) / C.required_reagents[B])
 
-				var/newdata = C.send_data(src) // We need to get it before reagents are removed. See blood paint.
-				for(var/B in C.required_reagents)
-					remove_reagent(B, use * C.required_reagents[B], safety = 1)
+				world.log << "------------NEW ITER------------" //debug
+				world.log << "DEBUG: STAGES = [stages_remaining]"
+				spawn(C.reaction_delay)
+					var/use = -1
+					for(var/B in C.required_reagents)
+						if(use == -1)
+							use = (get_reagent_amount(B) / C.required_reagents[B])
+						else
+							use = min(use, (get_reagent_amount(B) / C.required_reagents[B]))
 
-				if(C.result)
-					add_reagent(C.result, C.result_amount * use, newdata)
+					var/debugthing = (use / stages_remaining)
+					world.log << "DEBUG: USE = [debugthing]"
+					var/newdata = C.send_data(src) // We need to get it before reagents are removed. See blood paint.
+					for(var/B in C.required_reagents)
+						remove_reagent(B, (use * C.required_reagents[B]) / stages_remaining, safety = 1)
 
-				if(!ismob(my_atom) && C.mix_message)
-					var/list/seen = viewers(4, get_turf(my_atom))
-					for(var/mob/M in seen)
-						M << "<span class='notice'>\icon[my_atom] [C.mix_message]</span>"
-					playsound(get_turf(my_atom), 'sound/effects/bubbles.ogg', 80, 1)
+					if(C.result)
+						add_reagent(C.result, (C.result_amount * use) / stages_remaining, newdata)
 
-				C.on_reaction(src, C.result_amount * use)
-				reaction_occured = 1
-	while(reaction_occured)
-	update_total()
+					if(!ismob(my_atom) && C.mix_message)
+						var/showmessage = 1
+						if(showmessage == 1)
+							var/list/seen = viewers(4, get_turf(my_atom))
+							for(var/mob/M in seen)
+								M << "<span class='notice'>\icon[my_atom] [C.mix_message]</span>"
+								showmessage = 0
+						else
+							spawn(30)
+								showmessage = 1
+						playsound(get_turf(my_atom), 'sound/effects/bubbles.ogg', 80, 1)
+
+					C.on_reaction(src, (C.result_amount * use) / stages_remaining)
+					update_total()
+				potential_reactions--
+
+		if(potential_reactions <= 0)
+			reaction_incomplete = 0
+	while(reaction_incomplete)
 	return
 
 /* Holder-to-chemical */

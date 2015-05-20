@@ -218,6 +218,18 @@ About Recipes:
 			Basically like a reagent's data variable. You can set extra requirements for a
 			reaction with this.
 
+		stages
+			Amount of reaction iterations until completion; each step consumes 1/S of total available reagents
+			and decrements a local copy of the stages var, so that when it reaches 1, all remaining reagents are used up.
+
+			In an infinite container full of reagents it would speed up indefinitely, but in a finite one,
+			it just so happens to give us a constant decrement per stage.
+
+		reaction_delay
+			Delay between iterations (mixing is treated as iteration 0), in deciseconds.
+			Keep in mind when setting this that it adds up - if you want to keep a reaction slow, keeping the stages high is better.
+			Modify it for things like grenade reactions, as higher stages would keep the reaction going longer and/or less intense.
+
 
 About the Tools:
 

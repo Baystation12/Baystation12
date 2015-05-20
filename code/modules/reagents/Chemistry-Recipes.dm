@@ -6,6 +6,9 @@
 	var/list/catalysts = list()
 	var/list/inhibitors = list()
 
+	var/reaction_delay = 10 // delay between each instance of reaction from mixing, in deciseconds.
+	var/stages = 1 // how many iterations it takes for the reaction to conclude, 1 amounts to old behavior;
+
 	var/result_amount = 0
 	var/mix_message = "The solution begins to bubble."
 
@@ -118,6 +121,7 @@
 	result = "synaptizine"
 	required_reagents = list("sugar" = 1, "lithium" = 1, "water" = 1)
 	result_amount = 3
+	stages = 6 //reminder to self - remove this
 
 /datum/chemical_reaction/hyronalin
 	name = "Hyronalin"
@@ -462,6 +466,8 @@
 	required_reagents = list("water" = 1, "potassium" = 1)
 	result_amount = 2
 	mix_message = null
+	reaction_delay = 0
+	stages = 1
 
 /datum/chemical_reaction/explosion_potassium/on_reaction(var/datum/reagents/holder, var/created_volume)
 	var/datum/effect/effect/system/reagents_explosion/e = new()
@@ -482,6 +488,8 @@
 	result = null
 	required_reagents = list("aluminum" = 1, "potassium" = 1, "sulfur" = 1 )
 	result_amount = null
+	reaction_delay = 0
+	stages = 1
 
 /datum/chemical_reaction/flash_powder/on_reaction(var/datum/reagents/holder, var/created_volume)
 	var/location = get_turf(holder.my_atom)
@@ -512,6 +520,8 @@
 	result = null
 	required_reagents = list("uranium" = 1, "iron" = 1) // Yes, laugh, it's the best recipe I could think of that makes a little bit of sense
 	result_amount = 2
+	reaction_delay = 0
+	stages = 1
 
 /datum/chemical_reaction/emp_pulse/on_reaction(var/datum/reagents/holder, var/created_volume)
 	var/location = get_turf(holder.my_atom)
@@ -527,6 +537,8 @@
 	result = "nitroglycerin"
 	required_reagents = list("glycerol" = 1, "pacid" = 1, "sacid" = 1)
 	result_amount = 2
+	reaction_delay = 0
+	stages = 1
 
 /datum/chemical_reaction/nitroglycerin/on_reaction(var/datum/reagents/holder, var/created_volume)
 	var/datum/effect/effect/system/reagents_explosion/e = new()
@@ -548,6 +560,8 @@
 	result = null
 	required_reagents = list("aluminum" = 1, "phoron" = 1, "sacid" = 1 )
 	result_amount = 1
+	reaction_delay = 0
+	stages = 1
 
 /datum/chemical_reaction/napalm/on_reaction(var/datum/reagents/holder, var/created_volume)
 	var/turf/location = get_turf(holder.my_atom.loc)
@@ -563,6 +577,8 @@
 	result = null
 	required_reagents = list("potassium" = 1, "sugar" = 1, "phosphorus" = 1)
 	result_amount = 0.4
+	reaction_delay = 0
+	stages = 1
 
 /datum/chemical_reaction/chemsmoke/on_reaction(var/datum/reagents/holder, var/created_volume)
 	var/location = get_turf(holder.my_atom)
@@ -582,6 +598,8 @@
 	required_reagents = list("fluorosurfactant" = 1, "water" = 1)
 	result_amount = 2
 	mix_message = "The solution violently bubbles!"
+	reaction_delay = 0
+	stages = 1
 
 /datum/chemical_reaction/foam/on_reaction(var/datum/reagents/holder, var/created_volume)
 	var/location = get_turf(holder.my_atom)
@@ -601,6 +619,8 @@
 	result = null
 	required_reagents = list("aluminum" = 3, "foaming_agent" = 1, "pacid" = 1)
 	result_amount = 5
+	reaction_delay = 0
+	stages = 1
 
 /datum/chemical_reaction/metalfoam/on_reaction(var/datum/reagents/holder, var/created_volume)
 	var/location = get_turf(holder.my_atom)
@@ -619,6 +639,8 @@
 	result = null
 	required_reagents = list("iron" = 3, "foaming_agent" = 1, "pacid" = 1)
 	result_amount = 5
+	reaction_delay = 0
+	stages = 1
 
 /datum/chemical_reaction/ironfoam/on_reaction(var/datum/reagents/holder, var/created_volume)
 	var/location = get_turf(holder.my_atom)
