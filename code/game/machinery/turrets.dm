@@ -341,6 +341,7 @@
 	if(stat & BROKEN)
 		user << "That object is useless to you."
 		return 0
+	user.do_attack_animation(src)
 	visible_message("<span class='danger'>[user] [attack_message] the [src]!</span>")
 	user.attack_log += text("\[[time_stamp()]\] <font color='red'>attacked [src.name]</font>")
 	src.health -= damage

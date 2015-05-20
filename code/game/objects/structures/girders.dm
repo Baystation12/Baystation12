@@ -17,6 +17,7 @@
 /obj/structure/girder/attack_generic(var/mob/user, var/damage, var/attack_message = "smashes apart", var/wallbreaker)
 	if(!damage || !wallbreaker)
 		return 0
+	user.do_attack_animation(src)
 	visible_message("<span class='danger'>[user] [attack_message] the [src]!</span>")
 	spawn(1) dismantle()
 	return 1
