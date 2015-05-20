@@ -16,10 +16,14 @@
 	return 0
 
 /proc/issmall(A)
-	if(A && istype(A, /mob/living/carbon/human))
-		var/mob/living/carbon/human/H = A
-		if(H.species && H.species.is_small)
+	if(ismob(A))
+		var/mob/M = A
+		if(M.small)
 			return 1
+		if(istype(A, /mob/living/carbon/human))
+			var/mob/living/carbon/human/H = A
+			if(H.species && H.species.is_small)
+				return 1
 	return 0
 
 /proc/isbrain(A)

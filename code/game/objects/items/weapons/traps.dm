@@ -83,11 +83,15 @@
 	if(!L.apply_damage(30, BRUTE, target_zone, blocked, used_weapon=src))
 		return 0
 
-	//trap the victim in place
+	//trap the victim in place or embed
 	if(!blocked)
-		set_dir(L.dir)
-		buckle_mob(L)
-		L << "<span class='danger'>The steel jaws of \the [src] bite into you, trapping you in place!</span>"
+		if(issmall(L))
+			set_dir(L.dir)
+			buckle_mob(L)
+			L << "<span class='danger'>The steel jaws of \the [src] bite into you, trapping you in place!</span>"
+		else
+			L.embed(src, target_zone)
+			anchored = 0
 
 /obj/item/weapon/beartrap/Crossed(AM as mob|obj)
 	if(isliving(AM))
