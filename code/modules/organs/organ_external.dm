@@ -928,6 +928,9 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 /obj/item/organ/external/proc/get_wounds_desc()
 	. = ""
+	if(status & ORGAN_DESTROYED && !is_stump())
+		. += "tear at [amputation_point] so bad it barely hangs on few tendons"
+
 	if(status & ORGAN_ROBOT)
 		if(brute_dam)
 			switch(brute_dam)
