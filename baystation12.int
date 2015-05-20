@@ -1,9 +1,6 @@
 // BEGIN_INTERNALS
 /*
-DIR: code code\__HELPERS code\game code\game\machinery code\game\machinery\computer code\modules code\modules\mob code\modules\mob\living code\modules\mob\living\silicon code\modules\mob\living\silicon\robot icons icons\mob 
-AUTO_FILE_DIR: OFF
 MAP_ICON_TYPE: 0
-WINDOW: code\game\machinery\computer\robot.dm;code\modules\mob\living\silicon\silicon.dm;code\modules\mob\mob_helpers.dm
-FILE: code\game\machinery\computer\robot.dm
+AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS

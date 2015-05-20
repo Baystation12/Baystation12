@@ -47,7 +47,7 @@
 			user << "Access Denied. This robot is not linked to you."
 			return
 		// Cyborgs may blow up themselves via the console
-		if(isrobot(user) && user != target)
+		if(user.isRobot() && user != target)
 			user << "Access Denied."
 			return
 		var/choice = input("Really detonate [target.name]?") in list ("Yes", "No")
@@ -79,7 +79,7 @@
 			user << "Access Denied. This robot is not linked to you."
 			return
 
-		if(isrobot(user))
+		if(user.isRobot())
 			user << "Access Denied."
 			return
 
