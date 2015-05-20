@@ -1,0 +1,4 @@
+author: HarpyEagle
+delete-after: True
+changes: 
+  - rscadd: "Re-implemented fuel fires. Tweaked fire behaviour overall."
