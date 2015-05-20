@@ -112,7 +112,6 @@ note dizziness decrements automatically in the mob's Life() proc.
 	is_floating = 0
 
 /atom/movable/proc/do_attack_animation(atom/A)
-	world << "[src].do_attack_animation([A])"
 
 	var/pixel_x_diff = 0
 	var/pixel_y_diff = 0
