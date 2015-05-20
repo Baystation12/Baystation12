@@ -1,2 +1,5 @@
-/obj/nano_module/proc/can_still_topic()
-	return CanUseTopic(usr, list(), default_state) == STATUS_INTERACTIVE
+/obj/nano_module/nano_host()
+	return loc
+
+/obj/nano_module/proc/can_still_topic(var/datum/topic_state/state = default_state)
+	return CanUseTopic(usr, state) == STATUS_INTERACTIVE

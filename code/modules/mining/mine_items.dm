@@ -1,12 +1,3 @@
-/**********************Light************************/
-
-//this item is intended to give the effect of entering the mine, so that light gradually fades
-/obj/effect/light_emitter
-	name = "Light-emtter"
-	anchored = 1
-	unacidable = 1
-	luminosity = 8
-
 /**********************Miner Lockers**************************/
 
 /obj/structure/closet/secure_closet/miner
@@ -35,8 +26,7 @@
 	new /obj/item/device/flashlight/lantern(src)
 	new /obj/item/weapon/shovel(src)
 	new /obj/item/weapon/pickaxe(src)
-	new /obj/item/clothing/glasses/meson(src)
-
+	new /obj/item/clothing/glasses/material(src)
 
 /******************************Lantern*******************************/
 
@@ -59,10 +49,10 @@
 	icon_state = "pickaxe"
 	item_state = "jackhammer"
 	w_class = 4.0
-	matter = list("metal" = 3750)
+	matter = list(DEFAULT_WALL_MATERIAL = 3750)
 	var/digspeed = 40 //moving the delay to an item var so R&D can make improved picks. --NEO
 	origin_tech = list(TECH_MATERIAL = 1, TECH_ENGINERING = 1)
-	attack_verb = list("hit", "pierced", "sliced", "attacked", "drilled")
+	attack_verb = list("hit", "pierced", "sliced", "attacked")
 	var/drill_sound = 'sound/weapons/Genhit.ogg'
 	var/drill_verb = "drilling"
 	sharp = 1
@@ -107,6 +97,7 @@
 	digspeed = 20
 	origin_tech = list(TECH_MATERIAL = 4)
 	desc = "This makes no metallurgic sense."
+	drill_verb = "picking"
 
 /obj/item/weapon/pickaxe/plasmacutter
 	name = "plasma cutter"
@@ -118,6 +109,7 @@
 	origin_tech = list(TECH_MATERIAL = 4, TECH_PHORON = 3, TECH_ENGINERING = 3)
 	desc = "A rock cutter that uses bursts of hot plasma. You could use it to cut limbs off of xenos! Or, you know, mine stuff."
 	drill_verb = "cutting"
+	drill_sound = 'sound/items/Welder.ogg'
 	sharp = 1
 	edge = 1
 
@@ -127,7 +119,8 @@
 	item_state = "dpickaxe"
 	digspeed = 10
 	origin_tech = list(TECH_MATERIAL = 6, TECH_ENGINERING = 4)
-	desc = "A pickaxe with a diamond pick head, this is just like minecraft."
+	desc = "A pickaxe with a diamond pick head."
+	drill_verb = "picking"
 
 /obj/item/weapon/pickaxe/diamonddrill //When people ask about the badass leader of the mining tools, they are talking about ME!
 	name = "diamond mining drill"
@@ -159,8 +152,8 @@
 	throwforce = 4.0
 	item_state = "shovel"
 	w_class = 3.0
-	matter = list("metal" = 50)
 	origin_tech = list(TECH_MATERIAL = 1, TECH_ENGINERING = 1)
+	matter = list(DEFAULT_WALL_MATERIAL = 50)
 	attack_verb = list("bashed", "bludgeoned", "thrashed", "whacked")
 	sharp = 0
 	edge = 1

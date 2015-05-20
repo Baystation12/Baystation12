@@ -745,7 +745,7 @@
 			log_admin("[key_name(usr)] booted [key_name(M)].")
 			message_admins("\blue [key_name_admin(usr)] booted [key_name_admin(M)].", 1)
 			//M.client = null
-			del(M.client)
+			qdel(M.client)
 /*
 	//Player Notes
 	else if(href_list["notes"])
@@ -811,8 +811,8 @@
 				log_admin("[usr.client.ckey] has banned [M.ckey].\nReason: [reason]\nThis will be removed in [mins] minutes.")
 				message_admins("\blue[usr.client.ckey] has banned [M.ckey].\nReason: [reason]\nThis will be removed in [mins] minutes.")
 
-				del(M.client)
-				//del(M)	// See no reason why to delete mob. Important stuff can be lost. And ban can be lifted before round ends.
+				qdel(M.client)
+				//qdel(M)	// See no reason why to delete mob. Important stuff can be lost. And ban can be lifted before round ends.
 			if("No")
 				if(!check_rights(R_BAN))   return
 				var/reason = sanitize(input(usr,"Reason?","reason","Griefer") as text|null)
@@ -836,8 +836,8 @@
 				feedback_inc("ban_perma",1)
 				DB_ban_record(BANTYPE_PERMA, M, -1, reason)
 
-				del(M.client)
-				//del(M)
+				qdel(M.client)
+				//qdel(M)
 			if("Cancel")
 				return
 
@@ -1301,7 +1301,7 @@
 		S.victim = M
 		S.loc = M.loc
 		spawn(20)
-			del(S)
+			qdel(S)
 
 		var/turf/simulated/floor/T = get_turf(M)
 		if(istype(T))
@@ -1317,21 +1317,27 @@
 			M.stuttering = 20
 
 	else if(href_list["CentcommReply"])
-		var/mob/living/carbon/human/H = locate(href_list["CentcommReply"])
-		if(!istype(H))
-			usr << "This can only be used on instances of type /mob/living/carbon/human"
-			return
-		if(!istype(H.l_ear, /obj/item/device/radio/headset) && !istype(H.r_ear, /obj/item/device/radio/headset))
-			usr << "The person you are trying to contact is not wearing a headset"
+		var/mob/living/L = locate(href_list["CentcommReply"])
+		if(!istype(L))
+			usr << "This can only be used on instances of type /mob/living/"
 			return
 
-		var/input = sanitize(input(src.owner, "Please enter a message to reply to [key_name(H)] via their headset.","Outgoing message from Centcomm", ""))
-		if(!input)	return
+		if(L.can_centcom_reply())
+			var/input = sanitize(input(src.owner, "Please enter a message to reply to [key_name(L)] via their headset.","Outgoing message from Centcomm", ""))
+			if(!input)		return
 
-		src.owner << "You sent [input] to [H] via a secure channel."
-		log_admin("[src.owner] replied to [key_name(H)]'s Centcomm message with the message [input].")
-		message_admins("[src.owner] replied to [key_name(H)]'s Centcom message with: \"[input]\"")
-		H << "You hear something crackle in your headset for a moment before a voice speaks.  \"Please stand by for a message from Central Command.  Message as follows. <b>\"[input]\"</b>  Message ends.\""
+			src.owner << "You sent [input] to [L] via a secure channel."
+			log_admin("[src.owner] replied to [key_name(L)]'s Centcomm message with the message [input].")
+			message_admins("[src.owner] replied to [key_name(L)]'s Centcom message with: \"[input]\"")
+			if(!L.isAI())
+				L << "<span class='info'>You hear something crackle in your headset for a moment before a voice speaks.</span>"
+			L << "<span class='info'>Please stand by for a message from Central Command.</span>"
+			L << "<span class='info'>Message as follows.</span>"
+			L << "<span class='notice'>[input]</span>"
+			L << "<span class='info'>Message ends.</span>"
+		else
+			src.owner << "The person you are trying to contact does not have functional radio equipment."
+
 
 	else if(href_list["SyndicateReply"])
 		var/mob/living/carbon/human/H = locate(href_list["SyndicateReply"])
@@ -1363,8 +1369,8 @@
 			var/data = ""
 			var/obj/item/weapon/paper_bundle/B = fax
 
-			for (var/page = 1, page <= B.amount, page++)
-				var/obj/pageobj = B.contents[page]
+			for (var/page = 1, page <= B.pages.len, page++)
+				var/obj/pageobj = B.pages[page]
 				data += "<A href='?src=\ref[src];AdminFaxViewPage=[page];paper_bundle=\ref[B]'>Page [page] - [pageobj.name]</A><BR>"
 
 			usr << browse(data, "window=[B.name]")
@@ -1377,11 +1383,11 @@
 
 		if (!bundle) return
 
-		if (istype(bundle.contents[page], /obj/item/weapon/paper))
-			var/obj/item/weapon/paper/P = bundle.contents[page]
+		if (istype(bundle.pages[page], /obj/item/weapon/paper))
+			var/obj/item/weapon/paper/P = bundle.pages[page]
 			P.show_content(src.owner, 1)
-		else if (istype(bundle.contents[page], /obj/item/weapon/photo))
-			var/obj/item/weapon/photo/H = bundle.contents[page]
+		else if (istype(bundle.pages[page], /obj/item/weapon/photo))
+			var/obj/item/weapon/photo/H = bundle.pages[page]
 			H.show(src.owner)
 		return
 
@@ -1418,7 +1424,7 @@
 			src.owner << "\red Message reply failed."
 
 		spawn(100)
-			del(P)
+			qdel(P)
 		return
 
 	else if(href_list["SolGovFaxReply"])
@@ -1663,28 +1669,28 @@
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","SC")
 				for(var/obj/item/clothing/under/O in world)
-					del(O)
+					qdel(O)
 				ok = 1
 			if("sec_all_clothes")
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","SAC")
 				for(var/obj/item/clothing/O in world)
-					del(O)
+					qdel(O)
 				ok = 1
 			if("sec_classic1")
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","SC1")
 				for(var/obj/item/clothing/suit/fire/O in world)
-					del(O)
+					qdel(O)
 				for(var/obj/structure/grille/O in world)
-					del(O)
+					qdel(O)
 /*					for(var/obj/machinery/vehicle/pod/O in world)
 					for(var/mob/M in src)
 						M.loc = src.loc
 						if (M.client)
 							M.client.perspective = MOB_PERSPECTIVE
 							M.client.eye = M
-					del(O)
+					qdel(O)
 				ok = 1*/
 			if("monkey")
 				feedback_inc("admin_secrets_fun_used",1)
@@ -2038,7 +2044,7 @@
 				var/turf/T = pick(blobstart)
 				var/obj/effect/bhole/bh = new /obj/effect/bhole( T.loc, 30 )
 				spawn(rand(100, 600))
-					del(bh)
+					qdel(bh)
 
 			if("timeanomalies")	//dear god this code was awful :P Still needs further optimisation
 				feedback_inc("admin_secrets_fun_used",1)
@@ -2210,7 +2216,6 @@
 				for(var/obj/item/clothing/under/W in world)
 					W.icon_state = "schoolgirl"
 					W.item_state = "w_suit"
-					W.item_color = "schoolgirl"
 				message_admins("[key_name_admin(usr)] activated Japanese Animes mode")
 				world << sound('sound/AI/animes.ogg')
 			if("paintball")
@@ -2251,6 +2256,33 @@
 				feedback_add_details("admin_secrets_fun_used","OO")
 				only_one()
 				message_admins("[key_name_admin(usr)] has triggered a battle to the death (only one)")
+
+			if("togglenarsie")
+				feedback_inc("admin_secrets_fun_used",1)
+				feedback_add_details("admin_secrets_fun_used","NA")
+				var/choice = input("How do you wish for narsie to interact with her surroundings?") in list("CultStation13", "Nar-Singulo")
+				if(choice == "CultStation13")
+					message_admins("[key_name_admin(usr)] has set narsie's behaviour to \"CultStation13\".")
+					narsie_behaviour = "CultStation13"
+				if(choice == "Nar-Singulo")
+					message_admins("[key_name_admin(usr)] has set narsie's behaviour to \"Nar-Singulo\".")
+					narsie_behaviour = "Nar-Singulo"
+			if("hellonearth")
+				feedback_inc("admin_secrets_fun_used",1)
+				feedback_add_details("admin_secrets_fun_used","NS")
+				var/choice = input("You sure you want to end the round and summon narsie at your location? Misuse of this could result in removal of flags or halarity.") in list("PRAISE SATAN", "Cancel")
+				if(choice == "PRAISE SATAN")
+					new /obj/singularity/narsie/large(get_turf(usr))
+					message_admins("[key_name_admin(usr)] has summoned narsie and brought about a new realm of suffering.")
+			if("supermattercascade")
+				feedback_inc("admin_secrets_fun_used",1)
+				feedback_add_details("admin_secrets_fun_used","SC")
+				var/choice = input("You sure you want to destroy the universe and create a large explosion at your location? Misuse of this could result in removal of flags or halarity.") in list("NO TIME TO EXPLAIN", "Cancel")
+				if(choice == "NO TIME TO EXPLAIN")
+					explosion(get_turf(usr), 8, 16, 24, 32, 1)
+					new /turf/unsimulated/wall/supermatter(get_turf(usr))
+					SetUniversalState(/datum/universal_state/supermatter_cascade)
+					message_admins("[key_name_admin(usr)] has managed to destroy the universe with a supermatter cascade. Good job, [key_name_admin(usr)]")
 		if(usr)
 			log_admin("[key_name(usr)] used secret [href_list["secretsfun"]]")
 			if (ok)
@@ -2619,3 +2651,12 @@
 			if("list")
 				PlayerNotesPage(text2num(href_list["index"]))
 		return
+
+mob/living/proc/can_centcom_reply()
+	return 0
+
+mob/living/carbon/human/can_centcom_reply()
+	return istype(l_ear, /obj/item/device/radio/headset) || istype(r_ear, /obj/item/device/radio/headset)
+
+mob/living/silicon/ai/can_centcom_reply()
+	return common_radio != null && !check_unable(2)

@@ -56,6 +56,13 @@ research holder datum.
 		possible_designs += new D(src)
 	RefreshResearch()
 
+/datum/research/techonly
+
+/datum/research/techonly/New()
+	for(var/T in typesof(/datum/tech) - /datum/tech)
+		known_tech += new T(src)
+	RefreshResearch()
+
 //Checks to see if design has all the required pre-reqs.
 //Input: datum/design; Output: 0/1 (false/true)
 /datum/research/proc/DesignHasReqs(var/datum/design/D)
@@ -190,7 +197,7 @@ research holder datum.
 	icon_state = "datadisk2"
 	item_state = "card-id"
 	w_class = 2.0
-	matter = list("metal" = 30, "glass" = 10)
+	matter = list(DEFAULT_WALL_MATERIAL = 30, "glass" = 10)
 	var/datum/tech/stored
 
 /obj/item/weapon/disk/tech_disk/New()
@@ -204,7 +211,7 @@ research holder datum.
 	icon_state = "datadisk2"
 	item_state = "card-id"
 	w_class = 2.0
-	matter = list("metal" = 30, "glass" = 10)
+	matter = list(DEFAULT_WALL_MATERIAL = 30, "glass" = 10)
 	var/datum/design/blueprint
 
 /obj/item/weapon/disk/design_disk/New()

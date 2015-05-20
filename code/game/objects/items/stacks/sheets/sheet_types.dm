@@ -31,8 +31,8 @@ var/global/list/datum/stack_recipe/metal_recipes = list ( \
 		new/datum/stack_recipe("green comfy chair", /obj/structure/bed/chair/comfy/green, 2, one_per_turf = 1, on_floor = 1), \
 		), 2), \
 	null, \
-	new/datum/stack_recipe("table parts", /obj/item/weapon/table_parts, 2), \
-	new/datum/stack_recipe("rack parts", /obj/item/weapon/table_parts/rack), \
+	new/datum/stack_recipe("table frame", /obj/structure/table, 1, time = 10, one_per_turf = 1, on_floor = 1), \
+	new/datum/stack_recipe("rack", /obj/structure/table/rack, 1, time = 5, one_per_turf = 1, on_floor = 1), \
 	new/datum/stack_recipe("metal baseball bat", /obj/item/weapon/twohanded/baseballbat/metal, 10, time = 20, one_per_turf = 0, on_floor = 1), \
 	new/datum/stack_recipe("closet", /obj/structure/closet, 2, time = 15, one_per_turf = 1, on_floor = 1), \
 	null, \
@@ -69,29 +69,30 @@ var/global/list/datum/stack_recipe/metal_recipes = list ( \
 		), 4), \
 	null, \
 	new/datum/stack_recipe("grenade casing", /obj/item/weapon/grenade/chem_grenade), \
-	new/datum/stack_recipe("light fixture frame", /obj/item/light_fixture_frame, 2), \
-	new/datum/stack_recipe("small light fixture frame", /obj/item/light_fixture_frame/small, 1), \
+	new/datum/stack_recipe("light fixture frame", /obj/item/frame/light, 2), \
+	new/datum/stack_recipe("small light fixture frame", /obj/item/frame/light/small, 1), \
 	null, \
 	new/datum/stack_recipe("apc frame", /obj/item/apc_frame, 2), \
-	new/datum/stack_recipe("air alarm frame", /obj/item/alarm_frame, 2), \
-	new/datum/stack_recipe("fire alarm frame", /obj/item/firealarm_frame, 2), \
+	new/datum/stack_recipe("air alarm frame", /obj/item/frame/air_alarm, 2), \
+	new/datum/stack_recipe("fire alarm frame", /obj/item/frame/fire_alarm, 2), \
 	null, \
 	new/datum/stack_recipe("knife blade", /obj/item/butterflyblade, 6, time = 20, one_per_turf = 0, on_floor = 1) \
 )
 
 /obj/item/stack/sheet/metal
-	name = "metal"
-	desc = "Sheets made out off metal. It has been dubbed Metal Sheets."
+	name = DEFAULT_WALL_MATERIAL
+	desc = "Sheets made out off steel."
 	singular_name = "metal sheet"
 	icon_state = "sheet-metal"
-	matter = list("metal" = 3750)
+	matter = list(DEFAULT_WALL_MATERIAL = 3750)
 	throwforce = 14.0
 	flags = CONDUCT
 	origin_tech = list(TECH_MATERIAL = 1)
+	sheettype = DEFAULT_WALL_MATERIAL
 
 /obj/item/stack/sheet/metal/cyborg
-	name = "metal synthesizer"
-	desc = "A device that makes metal sheets."
+	name = "steel synthesizer"
+	desc = "A device that makes steel sheets."
 	gender = NEUTER
 	matter = null
 	uses_charge = 1
@@ -109,21 +110,22 @@ var/global/list/datum/stack_recipe/metal_recipes = list ( \
 var/global/list/datum/stack_recipe/plasteel_recipes = list ( \
 	new/datum/stack_recipe("AI core", /obj/structure/AIcore, 4, time = 50, one_per_turf = 1), \
 	new/datum/stack_recipe("Metal crate", /obj/structure/closet/crate, 10, time = 50, one_per_turf = 1), \
-	new/datum/stack_recipe("RUST fuel assembly port frame", /obj/item/rust_fuel_assembly_port_frame, 12, time = 50, one_per_turf = 1), \
-	new/datum/stack_recipe("RUST fuel compressor frame", /obj/item/rust_fuel_compressor_frame, 12, time = 50, one_per_turf = 1), \
+	new/datum/stack_recipe("RUST fuel assembly port frame", /obj/item/frame/rust/assembly, 12, time = 50, one_per_turf = 1), \
+	new/datum/stack_recipe("RUST fuel compressor frame", /obj/item/frame/rust, 12, time = 50, one_per_turf = 1), \
 	new/datum/stack_recipe("knife grip", /obj/item/butterflyhandle, 4, time = 20, one_per_turf = 0, on_floor = 1),
 	)
 
 /obj/item/stack/sheet/plasteel
 	name = "plasteel"
 	singular_name = "plasteel sheet"
-	desc = "This sheet is an alloy of iron and phoron."
+	desc = "This sheet is an alloy of iron and platinum."
 	icon_state = "sheet-plasteel"
 	item_state = "sheet-metal"
-	matter = list("metal" = 7500)
+	matter = list(DEFAULT_WALL_MATERIAL = 7500)
 	throwforce = 15.0
 	flags = CONDUCT
 	origin_tech = list(TECH_MATERIAL = 2)
+	sheettype = "plasteel"
 
 /obj/item/stack/sheet/plasteel/cyborg
 	name = "plasteel synthesizer"
@@ -145,8 +147,7 @@ var/global/list/datum/stack_recipe/plasteel_recipes = list ( \
 var/global/list/datum/stack_recipe/wood_recipes = list ( \
 	new/datum/stack_recipe("wooden sandals", /obj/item/clothing/shoes/sandal, 1), \
 	new/datum/stack_recipe("wood floor tile", /obj/item/stack/tile/wood, 1, 4, 20), \
-	new/datum/stack_recipe("table parts", /obj/item/weapon/table_parts/wood, 2), \
-	new/datum/stack_recipe("wooden chair", /obj/structure/bed/chair/wood/normal, 3, time = 10, one_per_turf = 1, on_floor = 1), \
+	new/datum/stack_recipe("wooden chair", /obj/structure/bed/chair/wood, 3, time = 10, one_per_turf = 1, on_floor = 1), \
 	new/datum/stack_recipe("wooden barricade", /obj/structure/barricade/wooden, 5, time = 50, one_per_turf = 1, on_floor = 1), \
 	new/datum/stack_recipe("crossbow frame", /obj/item/weapon/crossbowframe, 5, time = 25, one_per_turf = 0, on_floor = 0), \
 	new/datum/stack_recipe("wooden door", /obj/structure/mineral_door/wood, 10, time = 20, one_per_turf = 1, on_floor = 1), \
@@ -161,6 +162,7 @@ var/global/list/datum/stack_recipe/wood_recipes = list ( \
 	singular_name = "wood plank"
 	icon_state = "sheet-wood"
 	origin_tech = list(TECH_MATERIAL = 1, TECH_BIO = 1)
+	sheettype = "wood"
 
 /obj/item/stack/sheet/wood/cyborg
 	name = "wood synthesizer"

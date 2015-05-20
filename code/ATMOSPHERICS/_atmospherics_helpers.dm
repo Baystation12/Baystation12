@@ -29,8 +29,6 @@
 	if (source.total_moles < MINIMUM_MOLES_TO_PUMP) //if we cant transfer enough gas just stop to avoid further processing
 		return -1
 
-	//var/source_moles_initial = source.total_moles
-
 	if (isnull(transfer_moles))
 		transfer_moles = source.total_moles
 	else
@@ -68,6 +66,40 @@
 	sink.merge(removed)
 
 	return power_draw
+
+//Gas 'pumping' proc for the case where the gas flow is passive and driven entirely by pressure differences (but still one-way).
+/proc/pump_gas_passive(var/obj/machinery/M, var/datum/gas_mixture/source, var/datum/gas_mixture/sink, var/transfer_moles = null)
+	if (source.total_moles < MINIMUM_MOLES_TO_PUMP) //if we cant transfer enough gas just stop to avoid further processing
+		return -1
+
+	if (isnull(transfer_moles))
+		transfer_moles = source.total_moles
+	else
+		transfer_moles = min(source.total_moles, transfer_moles)
+
+	var/equalize_moles = calculate_equalize_moles(source, sink)
+	transfer_moles = min(transfer_moles, equalize_moles)
+
+	if (transfer_moles < MINIMUM_MOLES_TO_PUMP) //if we cant transfer enough gas just stop to avoid further processing
+		return -1
+
+	//Update flow rate meter
+	if (istype(M, /obj/machinery/atmospherics))
+		var/obj/machinery/atmospherics/A = M
+		A.last_flow_rate = (transfer_moles/source.total_moles)*source.volume //group_multiplier gets divided out here
+		if (A.debug)
+			A.visible_message("[A]: moles transferred = [transfer_moles] mol")
+
+	if (istype(M, /obj/machinery/portable_atmospherics))
+		var/obj/machinery/portable_atmospherics/P = M
+		P.last_flow_rate = (transfer_moles/source.total_moles)*source.volume //group_multiplier gets divided out here
+
+	var/datum/gas_mixture/removed = source.remove(transfer_moles)
+	if(!removed) //Just in case
+		return -1
+	sink.merge(removed)
+
+	return 0
 
 //Generalized gas scrubbing proc.
 //Selectively moves specified gasses one gas_mixture to another and returns the amount of power needed (assuming 1 second), or -1 if no gas was filtered.
@@ -392,12 +424,34 @@
 	return specific_power
 
 //Calculates the APPROXIMATE amount of moles that would need to be transferred to change the pressure of sink by pressure_delta
-//If set, sink_volume_mod adjusts the effective output volume used in the calculation. This is useful when the output gas_mixture is 
+//If set, sink_volume_mod adjusts the effective output volume used in the calculation. This is useful when the output gas_mixture is
 //part of a pipenetwork, and so it's volume isn't representative of the actual volume since the gas will be shared across the pipenetwork when it processes.
 /proc/calculate_transfer_moles(datum/gas_mixture/source, datum/gas_mixture/sink, var/pressure_delta, var/sink_volume_mod=0)
-	//Make the approximation that the sink temperature is unchanged after transferring gas
-	var/air_temperature = (sink.temperature > 0)? sink.temperature : source.temperature
+	if(source.temperature == 0 || source.total_moles == 0) return 0
+
 	var/output_volume = (sink.volume * sink.group_multiplier) + sink_volume_mod
-		
+	var/source_total_moles = source.total_moles * source.group_multiplier
+
+	var/air_temperature = source.temperature
+	if(sink.total_moles > 0 && sink.temperature > 0)
+		//estimate the final temperature of the sink after transfer
+		var/estimate_moles = pressure_delta*output_volume/(sink.temperature * R_IDEAL_GAS_EQUATION)
+		var/sink_heat_capacity = sink.heat_capacity()
+		var/transfer_heat_capacity = source.heat_capacity()*estimate_moles/source_total_moles
+		air_temperature = (sink.temperature*sink_heat_capacity  + source.temperature*transfer_heat_capacity) / (sink_heat_capacity + transfer_heat_capacity)
+	
 	//get the number of moles that would have to be transfered to bring sink to the target pressure
 	return pressure_delta*output_volume/(air_temperature * R_IDEAL_GAS_EQUATION)
+
+//Calculates the APPROXIMATE amount of moles that would need to be transferred to bring source and sink to the same pressure
+/proc/calculate_equalize_moles(datum/gas_mixture/source, datum/gas_mixture/sink)
+	if(source.temperature == 0) return 0
+
+	//Make the approximation that the sink temperature is unchanged after transferring gas
+	var/source_volume = source.volume * source.group_multiplier
+	var/sink_volume = sink.volume * sink.group_multiplier
+
+	var/source_pressure = source.return_pressure()
+	var/sink_pressure = sink.return_pressure()
+
+	return (source_pressure - sink_pressure)/(R_IDEAL_GAS_EQUATION * (source.temperature/source_volume + sink.temperature/sink_volume))

@@ -113,6 +113,7 @@
 	origin_tech = list(TECH_MAGNET = 3, TECH_ILLEGAL = 4)
 	sharp = 1
 	edge = 1
+	var/blade_color
 
 /obj/item/weapon/melee/energy/sword/dropped(var/mob/user)
 	..()
@@ -120,26 +121,26 @@
 		deactivate(user)
 
 /obj/item/weapon/melee/energy/sword/New()
-	item_color = pick("red","blue","green","purple")
+	blade_color = pick("red","blue","green","purple")
 
 /obj/item/weapon/melee/energy/sword/green/New()
-	item_color = "green"
+	blade_color = "green"
 
 /obj/item/weapon/melee/energy/sword/red/New()
-	item_color = "red"
+	blade_color = "red"
 
 /obj/item/weapon/melee/energy/sword/blue/New()
-	item_color = "blue"
+	blade_color = "blue"
 
 /obj/item/weapon/melee/energy/sword/purple/New()
-	item_color = "purple"
+	blade_color = "purple"
 
 /obj/item/weapon/melee/energy/sword/activate(mob/living/user)
 	if(!active)
 		user << "<span class='notice'>\The [src] is now energised.</span>"
 	..()
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
-	icon_state = "sword[item_color]"
+	icon_state = "sword[blade_color]"
 
 /obj/item/weapon/melee/energy/sword/deactivate(mob/living/user)
 	if(active)
@@ -192,16 +193,16 @@
 
 	processing_objects |= src
 
-/obj/item/weapon/melee/energy/blade/Del()
+/obj/item/weapon/melee/energy/blade/Destroy()
 	processing_objects -= src
 	..()
 
 /obj/item/weapon/melee/energy/blade/attack_self(mob/user as mob)
 	user.drop_from_inventory(src)
-	spawn(1) if(src) del(src)
+	spawn(1) if(src) qdel(src)
 
 /obj/item/weapon/melee/energy/blade/dropped()
-	spawn(1) if(src) del(src)
+	spawn(1) if(src) qdel(src)
 
 /obj/item/weapon/melee/energy/blade/process()
 	if(!creator || loc != creator || (creator.l_hand != src && creator.r_hand != src))
@@ -216,4 +217,4 @@
 			host.pinned -= src
 			host.embedded -= src
 			host.drop_from_inventory(src)
-		spawn(1) if(src) del(src)
+		spawn(1) if(src) qdel(src)

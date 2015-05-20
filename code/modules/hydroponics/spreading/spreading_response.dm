@@ -7,11 +7,16 @@
 	if(!istype(M))
 		return
 
-	if(!buckled_mob && !M.buckled && !M.anchored && (M.small || prob(round(seed.get_trait(TRAIT_POTENCY)/2))))
-		entangle(M)
+	if(!buckled_mob && !M.buckled && !M.anchored && (M.small || prob(round(seed.get_trait(TRAIT_POTENCY)/6))))
+		//wait a tick for the Entered() proc that called HasProximity() to finish (and thus the moving animation),
+		//so we don't appear to teleport from two tiles away when moving into a turf adjacent to vines.
+		spawn(1)
+			entangle(M)
 
-/obj/effect/plant/attack_hand(mob/user as mob)
-	// Todo, cause damage.
+/obj/effect/plant/attack_hand(var/mob/user)
+	manual_unbuckle(user)
+
+/obj/effect/plant/attack_generic(var/mob/user)
 	manual_unbuckle(user)
 
 /obj/effect/plant/proc/trodden_on(var/mob/living/victim)
@@ -60,13 +65,11 @@
 	if(buckled_mob)
 		return
 
-	if(!Adjacent(victim))
+	if(victim.buckled)
 		return
 
-	victim.buckled = src
-	victim.update_canmove()
-	buckled_mob = victim
-	if(!victim.anchored && !victim.buckled && victim.loc != get_turf(src))
+	//grabbing people
+	if(!victim.anchored && Adjacent(victim) && victim.loc != get_turf(src))
 		var/can_grab = 1
 		if(istype(victim, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = victim
@@ -75,4 +78,9 @@
 		if(can_grab)
 			src.visible_message("<span class='danger'>Tendrils lash out from \the [src] and drag \the [victim] in!</span>")
 			victim.loc = src.loc
-	victim << "<span class='danger'>Tendrils [pick("wind", "tangle", "tighten")] around you!</span>"
+
+	//entangling people
+	if(victim.loc == src.loc)
+		buckle_mob(victim)
+		victim.set_dir(pick(cardinal))
+		victim << "<span class='danger'>Tendrils [pick("wind", "tangle", "tighten")] around you!</span>"

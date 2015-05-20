@@ -77,8 +77,8 @@
 		</table>
 	{{/if}}
 {{else}}
-	<div class="notice">
-		No active sensor. Printing sensor list.
+	<div class="notice" style="height: 22px">
+		{{:helper.link('Scan For Sensors', 'refresh', { 'refresh' : 1})}}   No active sensor. Printing sensor list.
 	</div><br><table>
 	{{for data.all_sensors}}
 		{{if value.alarm}}

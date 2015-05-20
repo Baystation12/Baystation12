@@ -6,8 +6,9 @@
 	..()
 	charge = maxcharge
 
-	spawn(5)
-		updateicon()
+/obj/item/weapon/cell/initialize()
+	..()
+	updateicon()
 
 /obj/item/weapon/cell/drain_power(var/drain_check, var/surge, var/amount = 0)
 
@@ -42,10 +43,8 @@
 	if(rigged && amount > 0)
 		explode()
 		return 0
-
-	if(charge < amount)	return 0
-	charge = (charge - amount)
-	return 1
+	charge = max(0, charge - amount)
+	return charge
 
 // recharge the cell
 /obj/item/weapon/cell/proc/give(var/amount)
@@ -110,8 +109,7 @@
 
 	explosion(T, devastation_range, heavy_impact_range, light_impact_range, flash_range)
 
-	spawn(1)
-		del(src)
+	qdel(src)
 
 /obj/item/weapon/cell/proc/corrupt()
 	charge /= 2
@@ -134,17 +132,17 @@
 
 	switch(severity)
 		if(1.0)
-			del(src)
+			qdel(src)
 			return
 		if(2.0)
 			if (prob(50))
-				del(src)
+				qdel(src)
 				return
 			if (prob(50))
 				corrupt()
 		if(3.0)
 			if (prob(25))
-				del(src)
+				qdel(src)
 				return
 			if (prob(25))
 				corrupt()

@@ -184,8 +184,7 @@ datum/controller/process/proc/kill()
 
 		killed = TRUE
 
-		// This should del
-		del(src)
+		del(src) // This should del
 
 datum/controller/process/proc/scheck(var/tickId = 0)
 	if (killed)
@@ -315,3 +314,9 @@ datum/controller/process/proc/enable()
 
 /datum/controller/process/proc/getTicks()
 	return ticks
+
+/datum/controller/process/proc/getStatName()
+	return name
+
+/datum/controller/process/proc/getTickTime()
+	return "#[getTicks()]\t- [getLastRunTime()]"

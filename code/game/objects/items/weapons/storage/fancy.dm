@@ -93,27 +93,27 @@
 	storage_slots = 6
 	icon_type = "crayon"
 	can_hold = list(
-		/obj/item/toy/crayon
+		/obj/item/weapon/pen/crayon
 	)
 
 /obj/item/weapon/storage/fancy/crayons/New()
 	..()
-	new /obj/item/toy/crayon/red(src)
-	new /obj/item/toy/crayon/orange(src)
-	new /obj/item/toy/crayon/yellow(src)
-	new /obj/item/toy/crayon/green(src)
-	new /obj/item/toy/crayon/blue(src)
-	new /obj/item/toy/crayon/purple(src)
+	new /obj/item/weapon/pen/crayon/red(src)
+	new /obj/item/weapon/pen/crayon/orange(src)
+	new /obj/item/weapon/pen/crayon/yellow(src)
+	new /obj/item/weapon/pen/crayon/green(src)
+	new /obj/item/weapon/pen/crayon/blue(src)
+	new /obj/item/weapon/pen/crayon/purple(src)
 	update_icon()
 
 /obj/item/weapon/storage/fancy/crayons/update_icon()
 	overlays = list() //resets list
 	overlays += image('icons/obj/crayons.dmi',"crayonbox")
-	for(var/obj/item/toy/crayon/crayon in contents)
+	for(var/obj/item/weapon/pen/crayon/crayon in contents)
 		overlays += image('icons/obj/crayons.dmi',crayon.colourName)
 
 /obj/item/weapon/storage/fancy/crayons/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(W,/obj/item/toy/crayon))
+	if(istype(W,/obj/item/weapon/pen/crayon))
 		switch(W:colourName)
 			if("mime")
 				usr << "This crayon is too sad to be contained in this box."
@@ -146,8 +146,8 @@
 		new /obj/item/clothing/mask/smokable/cigarette(src)
 	create_reagents(15 * storage_slots)//so people can inject cigarettes without opening a packet, now with being able to inject the whole one
 
-/obj/item/weapon/storage/fancy/cigarettes/Del()
-	del(reagents)
+/obj/item/weapon/storage/fancy/cigarettes/Destroy()
+	qdel(reagents)
 	..()
 
 
@@ -158,7 +158,7 @@
 /obj/item/weapon/storage/fancy/cigarettes/remove_from_storage(obj/item/W as obj, atom/new_location)
 		var/obj/item/clothing/mask/smokable/cigarette/C = W
 		if(!istype(C)) return // what
-		reagents.trans_to(C, (reagents.total_volume/contents.len))
+		reagents.trans_to_obj(C, (reagents.total_volume/contents.len))
 		..()
 
 /obj/item/weapon/storage/fancy/cigarettes/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
@@ -167,7 +167,7 @@
 
 	if(M == user && user.zone_sel.selecting == "mouth" && contents.len > 0 && !user.wear_mask)
 		var/obj/item/clothing/mask/smokable/cigarette/W = new /obj/item/clothing/mask/smokable/cigarette(user)
-		reagents.trans_to(W, (reagents.total_volume/contents.len))
+		reagents.trans_to_obj(W, (reagents.total_volume/contents.len))
 		user.equip_to_slot_if_possible(W, slot_wear_mask)
 		reagents.maximum_volume = 15 * contents.len
 		contents.len--
@@ -202,8 +202,8 @@
 		new /obj/item/clothing/mask/smokable/cigarette/cigar(src)
 	create_reagents(15 * storage_slots)
 
-/obj/item/weapon/storage/fancy/cigar/Del()
-	del(reagents)
+/obj/item/weapon/storage/fancy/cigar/Destroy()
+	qdel(reagents)
 	..()
 
 /obj/item/weapon/storage/fancy/cigar/update_icon()
@@ -213,7 +213,7 @@
 /obj/item/weapon/storage/fancy/cigar/remove_from_storage(obj/item/W as obj, atom/new_location)
 		var/obj/item/clothing/mask/smokable/cigarette/cigar/C = W
 		if(!istype(C)) return
-		reagents.trans_to(C, (reagents.total_volume/contents.len))
+		reagents.trans_to_obj(C, (reagents.total_volume/contents.len))
 		..()
 
 /obj/item/weapon/storage/fancy/cigar/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
@@ -222,7 +222,7 @@
 
 	if(M == user && user.zone_sel.selecting == "mouth" && contents.len > 0 && !user.wear_mask)
 		var/obj/item/clothing/mask/smokable/cigarette/cigar/W = new /obj/item/clothing/mask/smokable/cigarette/cigar(user)
-		reagents.trans_to(W, (reagents.total_volume/contents.len))
+		reagents.trans_to_obj(W, (reagents.total_volume/contents.len))
 		user.equip_to_slot_if_possible(W, slot_wear_mask)
 		reagents.maximum_volume = 15 * contents.len
 		contents.len--

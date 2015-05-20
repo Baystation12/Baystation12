@@ -66,7 +66,7 @@
 	flags = CONDUCT
 	slot_flags = SLOT_BELT
 	item_state = "syringe_kit"
-	matter = list("metal" = 500)
+	matter = list(DEFAULT_WALL_MATERIAL = 500)
 	throwforce = 5
 	w_class = 2
 	throw_speed = 4
@@ -135,7 +135,7 @@
 
 /obj/item/ammo_magazine/examine(mob/user)
 	..()
-	user << "There [(stored_ammo.len > 1)? "are" : "is"] [stored_ammo.len] round\s left!"
+	user << "There [(stored_ammo.len == 1)? "is" : "are"] [stored_ammo.len] round\s left!"
 
 //magazine icon state caching
 /var/global/list/magazine_icondata_keys = list()

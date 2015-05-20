@@ -18,6 +18,7 @@
 	var/list/sources = new()		//List of sources triggering the alarm. Used to determine when the alarm should be cleared.
 	var/list/sources_assoc = new()	//Associative list of source triggers. Used to efficiently acquire the alarm source.
 	var/list/cameras				//List of cameras that can be switched to, if the player has that capability.
+	var/cache_id					//ID for camera cache, changed by invalidateCameraCache().
 	var/area/last_area				//The last acquired area, used should origin be lost (for example a destroyed borg containing an alarming camera).
 	var/area/last_name				//The last acquired name, used should origin be lost
 	var/area/last_camera_area		//The last area in which cameras where fetched, used to see if the camera list should be updated.
@@ -74,8 +75,12 @@
 	return last_name
 
 /datum/alarm/proc/cameras()
+	// reset camera cache
+	if(camera_cache_id != cache_id)
+		cameras = null
+		cache_id = camera_cache_id
 	// If the alarm origin has changed area, for example a borg containing an alarming camera, reset the list of cameras
-	if(cameras && (last_camera_area != alarm_area()))
+	else if(cameras && (last_camera_area != alarm_area()))
 		cameras = null
 
 	// The list of cameras is also reset by /proc/invalidateCameraCache()
@@ -96,18 +101,17 @@
 * Assisting procs *
 ******************/
 /atom/proc/get_alarm_area()
-	var/area/A = get_area(src)
-	return A.master
+	return get_area(src)
 
 /area/get_alarm_area()
-	return src.master
+	return src
 
 /atom/proc/get_alarm_name()
 	var/area/A = get_area(src)
-	return A.master.name
+	return A.name
 
 /area/get_alarm_name()
-	return master.name
+	return name
 
 /mob/get_alarm_name()
 	return name

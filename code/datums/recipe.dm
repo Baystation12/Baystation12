@@ -54,8 +54,8 @@
 	. = 1
 	if(fruit && fruit.len)
 		var/list/checklist = list()
-		for(var/fruittype in fruit) // I do not trust Copy().
-			checklist[fruittype] = fruit[fruittype]
+		 // You should trust Copy().
+		checklist = fruit.Copy()
 		for(var/obj/item/weapon/reagent_containers/food/snacks/grown/G in container)
 			if(!G.seed || !G.seed.kitchen_tag || isnull(checklist[G.seed.kitchen_tag]))
 				continue
@@ -73,15 +73,15 @@
 	. = 1
 	if (items && items.len)
 		var/list/checklist = list()
-		for(var/item_type in items)
-			checklist |= item_type //Still don't trust Copy().
+		checklist = items.Copy() // You should really trust Copy
 		for(var/obj/O in container)
 			if(istype(O,/obj/item/weapon/reagent_containers/food/snacks/grown))
 				continue // Fruit is handled in check_fruit().
 			var/found = 0
-			for(var/item_type in checklist)
+			for(var/i = 1; i < checklist.len+1; i++)
+				var/item_type = checklist[i]
 				if (istype(O,item_type))
-					checklist-=item_type
+					checklist.Cut(i, i+1)
 					found = 1
 					break
 			if (!found)
@@ -94,8 +94,8 @@
 /datum/recipe/proc/make(var/obj/container as obj)
 	var/obj/result_obj = new result(container)
 	for (var/obj/O in (container.contents-result_obj))
-		O.reagents.trans_to(result_obj, O.reagents.total_volume)
-		del(O)
+		O.reagents.trans_to_obj(result_obj, O.reagents.total_volume)
+		qdel(O)
 	container.reagents.clear_reagents()
 	return result_obj
 
@@ -109,8 +109,8 @@
 		if (O.reagents)
 			O.reagents.del_reagent("nutriment")
 			O.reagents.update_total()
-			O.reagents.trans_to(result_obj, O.reagents.total_volume)
-		del(O)
+			O.reagents.trans_to_obj(result_obj, O.reagents.total_volume)
+		qdel(O)
 	container.reagents.clear_reagents()
 	return result_obj
 

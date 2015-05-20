@@ -30,7 +30,7 @@
 	poison_type = "oxygen"
 	siemens_coefficient = 0.2
 
-	flags = IS_WHITELISTED | NO_SCAN | HAS_EYE_COLOR
+	flags = CAN_JOIN | IS_WHITELISTED | NO_SCAN | HAS_EYE_COLOR
 
 	blood_color = "#2299FC"
 	flesh_color = "#808D11"
@@ -45,12 +45,35 @@
 		"heart" =    /obj/item/organ/heart,
 		"lungs" =    /obj/item/organ/lungs,
 		"liver" =    /obj/item/organ/liver,
-		"kidneys" =  /obj/item/organ/kidney,
+		"kidneys" =  /obj/item/organ/kidneys,
 		"brain" =    /obj/item/organ/brain,
-		"eyes" =     /obj/item/organ/eyes,
-		"stack" =    /obj/item/organ/stack/vox
+		"eyes" =     /obj/item/organ/eyes
 		)
 
 /datum/species/vox/get_random_name(var/gender)
 	var/datum/language/species_language = all_languages[default_language]
 	return species_language.get_random_name(gender)
+
+/datum/species/vox/equip_survival_gear(var/mob/living/carbon/human/H)
+	H.equip_to_slot_or_del(new /obj/item/clothing/mask/breath(H), slot_wear_mask)
+	if(!H.back)
+		H.equip_to_slot_or_del(new /obj/item/weapon/tank/nitrogen(H), slot_back)
+		H.internal = H.back
+	else if(!H.r_hand)
+		H.equip_to_slot_or_del(new /obj/item/weapon/tank/nitrogen(H), slot_r_hand)
+		H.internal = H.r_hand
+	else if (!H.l_hand)
+		H.equip_to_slot_or_del(new /obj/item/weapon/tank/nitrogen(H), slot_l_hand)
+		H.internal = H.l_hand
+	H.internals.icon_state = "internal1"
+
+	if(H.backbag == 1)
+		H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival/vox(H), slot_r_hand)
+	else
+		H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival/vox(H.back), slot_in_backpack)
+
+
+/datum/species/vox/can_shred(var/mob/living/carbon/human/H, var/ignore_intent)
+	if(!H.mind || !H.mind.special_role) // Pariah check.
+		return 0
+	return ..()

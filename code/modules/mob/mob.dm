@@ -1,7 +1,12 @@
-/mob/Del()//This makes sure that mobs with clients/keys are not just deleted from the game.
+/mob/Destroy()//This makes sure that mobs with clients/keys are not just deleted from the game.
 	mob_list -= src
 	dead_mob_list -= src
 	living_mob_list -= src
+	qdel(hud_used)
+	if(mind && mind.current == src)
+		spellremove(src)
+	for(var/infection in viruses)
+		qdel(infection)
 	ghostize()
 	..()
 
@@ -47,12 +52,13 @@
 
 /mob/visible_message(var/message, var/self_message, var/blind_message)
 	for(var/mob/M in viewers(src))
-		if(M.see_invisible < invisibility)
-			continue // Cannot view the invisible
-		var/msg = message
 		if(self_message && M==src)
-			msg = self_message
-		M.show_message( msg, 1, blind_message, 2)
+			M.show_message(self_message, 1, blind_message, 2)
+		else if(M.see_invisible < invisibility)  // Cannot view the invisible, but you can hear it.
+			if(blind_message)
+				M.show_message(blind_message, 2)
+		else
+			M.show_message(message, 1, blind_message, 2)
 
 // Show a message to all mobs in sight of this atom
 // Use for objects performing visible actions
@@ -131,23 +137,8 @@
 				client.eye = loc
 	return
 
-
+// This is not needed short of simple_animal and carbon/alien / carbon/human, who reimplement it.
 /mob/proc/show_inv(mob/user as mob)
-	user.set_machine(src)
-	var/dat = {"
-	<B><HR><FONT size=3>[name]</FONT></B>
-	<BR><HR>
-	<BR><B>Head(Mask):</B> <A href='?src=\ref[src];item=mask'>[(wear_mask ? wear_mask : "Nothing")]</A>
-	<BR><B>Left Hand:</B> <A href='?src=\ref[src];item=l_hand'>[(l_hand ? l_hand  : "Nothing")]</A>
-	<BR><B>Right Hand:</B> <A href='?src=\ref[src];item=r_hand'>[(r_hand ? r_hand : "Nothing")]</A>
-	<BR><B>Back:</B> <A href='?src=\ref[src];item=back'>[(back ? back : "Nothing")]</A> [((istype(wear_mask, /obj/item/clothing/mask) && istype(back, /obj/item/weapon/tank) && !( internal )) ? text(" <A href='?src=\ref[];item=internal'>Set Internal</A>", src) : "")]
-	<BR>[(internal ? text("<A href='?src=\ref[src];item=internal'>Remove Internal</A>") : "")]
-	<BR><A href='?src=\ref[src];item=pockets'>Empty Pockets</A>
-	<BR><A href='?src=\ref[user];refresh=1'>Refresh</A>
-	<BR><A href='?src=\ref[user];mach_close=mob[name]'>Close</A>
-	<BR>"}
-	user << browse(dat, text("window=mob[];size=325x500", name))
-	onclose(user, "mob[name]")
 	return
 
 //mob verbs are faster than object verbs. See http://www.byond.com/forum/?post=1326139&page=2#comment8198716 for why this isn't atom/verb/examine()
@@ -179,7 +170,7 @@
 	P.invisibility = invisibility
 	spawn (20)
 		if(P)
-			del(P)	// qdel
+			qdel(P)	// qdel
 
 	face_atom(A)
 	return 1
@@ -213,7 +204,7 @@
 				var/list/temp = list(  )
 				temp += L.container
 				//L = null
-				del(L)
+				qdel(L)
 				return temp
 			else
 				return L.container
@@ -263,7 +254,6 @@
 	set name = "Add Note"
 	set category = "IC"
 
-	msg = copytext(msg, 1, MAX_MESSAGE_LEN)
 	msg = sanitize(msg)
 
 	if(mind)
@@ -305,7 +295,7 @@
 		if(lentext(msg) <= 40)
 			return "\blue [msg]"
 		else
-			return "\blue [copytext(msg, 1, 37)]... <a href='byond://?src=\ref[src];flavor_more=1'>More...</a>"
+			return "\blue [copytext_preserve_html(msg, 1, 37)]... <a href='byond://?src=\ref[src];flavor_more=1'>More...</a>"
 
 /*
 /mob/verb/help()
@@ -368,7 +358,7 @@
 	var/mob/new_player/M = new /mob/new_player()
 	if(!client)
 		log_game("[usr.key] AM failed due to disconnect.")
-		del(M)
+		qdel(M)
 		return
 
 	M.key = key
@@ -379,8 +369,6 @@
 	set name = "Changelog"
 	set category = "OOC"
 	getFiles(
-		'html/postcardsmall.jpg',
-		'html/somerights20.png',
 		'html/88x31.png',
 		'html/bug-minus.png',
 		'html/cross-circle.png',
@@ -436,7 +424,7 @@
 				namecounts[name] = 1
 			creatures[name] = O
 
-		if(istype(O, /obj/machinery/singularity))
+		if(istype(O, /obj/singularity))
 			var/name = "Singularity"
 			if (names.Find(name))
 				namecounts[name]++
@@ -718,60 +706,19 @@ note dizziness decrements automatically in the mob's Life() proc.
 	//reset the pixel offsets to zero
 	is_floating = 0
 
-/proc/getStatName(var/datum/controller/process/process)
-	return uppertext(copytext(process.name, 1, 4))
-
 /mob/Stat()
 	..()
 
 	if(client && client.holder)
 		if(statpanel("Status"))
-			stat(null,"Location:\t([x], [y], [z])")
-			stat(null,"CPU:\t[world.cpu]")
-			stat(null,"Instances:\t[world.contents.len]")
-		if(statpanel("Status") && processScheduler.getIsRunning())
-			var/datum/controller/process/process
-
-			process = processScheduler.getProcess("ticker")
-			stat(null, "[getStatName(process)]\t - #[process.getTicks()]\t - [process.getLastRunTime()]")
-
-			process = processScheduler.getProcess("air")
-			stat(null, "[getStatName(process)]\t - #[process.getTicks()]\t - [process.getLastRunTime()]")
-
-			process = processScheduler.getProcess("lighting")
-			stat(null, "[getStatName(process)]\t - #[process.getTicks()]\t - [process.getLastRunTime()]")
-
-			process = processScheduler.getProcess("alarm")
-			var/list/alarms = alarm_manager.active_alarms()
-			stat(null, "[getStatName(process)]([alarms.len])\t - #[process.getTicks()]\t - [process.getLastRunTime()]")
-
-			process = processScheduler.getProcess("mob")
-			stat(null, "[getStatName(process)]([mob_list.len])\t - #[process.getTicks()]\t - [process.getLastRunTime()]")
-
-			process = processScheduler.getProcess("machinery")
-			stat(null, "[getStatName(process)]([machines.len])\t - #[process.getTicks()]\t - [process.getLastRunTime()]")
-
-			process = processScheduler.getProcess("obj")
-			stat(null, "[getStatName(process)]([processing_objects.len])\t - #[process.getTicks()]\t - [process.getLastRunTime()]")
-
-			process = processScheduler.getProcess("pipenet")
-			stat(null, "[getStatName(process)]([pipe_networks.len])\t - #[process.getTicks()]\t - [process.getLastRunTime()]")
-
-			process = processScheduler.getProcess("powernet")
-			stat(null, "[getStatName(process)]([powernets.len])\t - #[process.getTicks()]\t - [process.getLastRunTime()]")
-
-			process = processScheduler.getProcess("nanoui")
-			stat(null, "[getStatName(process)]([nanomanager.processing_uis.len])\t - #[process.getTicks()]\t - [process.getLastRunTime()]")
-
-			process = processScheduler.getProcess("disease")
-			stat(null, "[getStatName(process)]([active_diseases.len])\t - #[process.getTicks()]\t - [process.getLastRunTime()]")
-
-			process = processScheduler.getProcess("sun")
-			stat(null, "[getStatName(process)]\t - #[process.getTicks()]\t - [process.getLastRunTime()]")
-
+			statpanel("Status","Location:","([x], [y], [z])")
+			statpanel("Status","CPU:","[world.cpu]")
+			statpanel("Status","Instances:","[world.contents.len]")
+		if(statpanel("Status") && processScheduler && processScheduler.getIsRunning())
+			for(var/datum/controller/process/P in processScheduler.processes)
+				statpanel("Status",P.getStatName(), P.getTickTime())
 		else
-			stat(null, "processScheduler is not running.")
-
+			statpanel("Status","processScheduler is not running.")
 
 	if(listed_turf && client)
 		if(!TurfAdjacent(listed_turf))
@@ -779,24 +726,13 @@ note dizziness decrements automatically in the mob's Life() proc.
 		else
 			statpanel(listed_turf.name, null, listed_turf)
 			for(var/atom/A in listed_turf)
+				if(!A.mouse_opacity)
+					continue
 				if(A.invisibility > see_invisible)
 					continue
 				if(is_type_in_list(A, shouldnt_see))
 					continue
 				statpanel(listed_turf.name, null, A)
-
-	if(spell_list && spell_list.len)
-		for(var/obj/effect/proc_holder/spell/S in spell_list)
-			switch(S.charge_type)
-				if("recharge")
-					statpanel("Spells","[S.charge_counter/10.0]/[S.charge_max/10]",S)
-				if("charges")
-					statpanel("Spells","[S.charge_counter]/[S.charge_max]",S)
-				if("holdervar")
-					statpanel("Spells","[S.holder_var_type] [S.holder_var_amount]",S)
-
-
-
 
 // facing verbs
 /mob/proc/canface()

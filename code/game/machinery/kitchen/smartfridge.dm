@@ -33,8 +33,8 @@
 	else
 		wires = new/datum/wires/smartfridge(src)
 
-/obj/machinery/smartfridge/Del()
-	del(wires) // qdel
+/obj/machinery/smartfridge/Destroy()
+	qdel(wires)
 	..()
 
 /obj/machinery/smartfridge/proc/accept_check(var/obj/item/O as obj)
@@ -140,12 +140,13 @@
 			S.dry = 1
 			item_quants[S.name]--
 			S.name = "dried [S.name]"
+			S.color = "#AAAAAA"
 			S.loc = loc
 		else
 			var/D = S.dried_type
 			new D(loc)
 			item_quants[S.name]--
-			del(S)
+			qdel(S)
 		return
 	return
 
@@ -244,7 +245,7 @@
 	..()
 
 /obj/machinery/smartfridge/attack_ai(mob/user as mob)
-	return 0
+	attack_hand(user)
 
 /obj/machinery/smartfridge/attack_hand(mob/user as mob)
 	if(stat & (NOPOWER|BROKEN))

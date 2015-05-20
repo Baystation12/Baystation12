@@ -10,8 +10,8 @@
 	throw_speed = 1
 	throw_range = 5
 	w_class = 3.0
-	matter = list("metal" = 500)
 	origin_tech = list(TECH_COMBAT = 1, TECH_PHORON = 1)
+	matter = list(DEFAULT_WALL_MATERIAL = 500)
 	var/status = 0
 	var/throw_amount = 100
 	var/lit = 0	//on or off
@@ -22,13 +22,13 @@
 	var/obj/item/weapon/tank/phoron/ptank = null
 
 
-/obj/item/weapon/flamethrower/Del()
+/obj/item/weapon/flamethrower/Destroy()
 	if(weldtool)
-		del(weldtool)
+		qdel(weldtool)
 	if(igniter)
-		del(igniter)
+		qdel(igniter)
 	if(ptank)
-		del(ptank)
+		qdel(ptank)
 	..()
 	return
 
@@ -82,8 +82,8 @@
 		if(ptank)
 			ptank.loc = T
 			ptank = null
-		new /obj/item/stack/rods(T)
-		del(src)
+		PoolOrNew(/obj/item/stack/rods, T)
+		qdel(src)
 		return
 
 	if(isscrewdriver(W) && igniter && !lit)

@@ -33,7 +33,7 @@ var/list/global_huds = list(
 	screen.screen_loc = "1,1"
 	screen.icon = 'icons/obj/hud_full.dmi'
 	screen.icon_state = icon_state
-	screen.layer = 17
+	screen.layer = SCREEN_LAYER
 	screen.mouse_opacity = 0
 
 	return screen
@@ -249,7 +249,11 @@ datum/hud/New(mob/owner)
 		robot_hud()
 	else if(isobserver(mymob))
 		ghost_hud()
+	else
+		mymob.instantiate_hud(src)
 
+/mob/proc/instantiate_hud(var/datum/hud/HUD)
+	return
 
 //Triggered when F12 is pressed (Unless someone changed something in the DMF)
 /mob/verb/button_pressed_F12(var/full = 0 as null)
@@ -337,6 +341,7 @@ datum/hud/New(mob/owner)
 		if(src.hud_used.item_action_list)
 			src.client.screen -= src.hud_used.item_action_list
 		src.client.screen -= src.internals
+		src.client.screen += src.hud_used.action_intent		//we want the intent swticher visible
 	else
 		hud_used.hud_shown = 1
 		if(src.hud_used.adding)

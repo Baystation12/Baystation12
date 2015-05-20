@@ -4,7 +4,7 @@
 	icon = 'icons/obj/coatrack.dmi'
 	icon_state = "coatrack0"
 	var/obj/item/clothing/suit/coat
-	var/list/allowed = list(/obj/item/clothing/suit/storage/labcoat, /obj/item/clothing/suit/storage/toggle/labcoat, /obj/item/clothing/suit/storage/det_suit)
+	var/list/allowed = list(/obj/item/clothing/suit/storage/toggle/labcoat, /obj/item/clothing/suit/storage/det_suit)
 
 /obj/structure/coatrack/attack_hand(mob/user as mob)
 	user.visible_message("[user] takes [coat] off \the [src].", "You take [coat] off the \the [src]")
@@ -21,8 +21,7 @@
 	if (can_hang && !coat)
 		user.visible_message("[user] hangs [W] on \the [src].", "You hang [W] on the \the [src]")
 		coat = W
-		user.drop_item(src)
-		coat.loc = src
+		user.drop_from_inventory(coat, src)
 		update_icon()
 	else
 		user << "<span class='notice'>You cannot hang [W] on [src]</span>"

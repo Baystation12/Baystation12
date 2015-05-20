@@ -16,7 +16,7 @@
 	throw_speed = 3
 	desc = "You can use this on airlocks or APCs to try to hack them without cutting wires."
 
-	matter = list("metal" = 50,"glass" = 20)
+	matter = list(DEFAULT_WALL_MATERIAL = 50,"glass" = 20)
 
 	origin_tech = list(TECH_MAGNET = 1, TECH_ENGINERING = 1)
 	var/obj/machinery/telecomms/buffer // simple machine buffer for device linkage

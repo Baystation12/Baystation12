@@ -8,7 +8,7 @@
 	force = 5
 	origin_tech = list(TECH_MATERIAL = 2)
 	construction_time = 100
-	construction_cost = list("metal"=10000)
+	construction_cost = list(DEFAULT_WALL_MATERIAL=10000)
 	var/equip_cooldown = 0
 	var/equip_ready = 1
 	var/energy_drain = 0
@@ -57,7 +57,7 @@
 		else
 			chassis.occupant << sound('sound/mecha/critdestr.ogg',volume=50)
 	spawn
-		del src
+		qdel(src)
 	return
 
 /obj/item/mecha_parts/mecha_equipment/proc/critfail()
@@ -96,11 +96,11 @@
 
 	if (ispath(required_type))
 		return istype(M, required_type)
-	
+
 	for (var/path in required_type)
 		if (istype(M, path))
 			return 1
-	
+
 	return 0
 
 /obj/item/mecha_parts/mecha_equipment/proc/attach(obj/mecha/M as obj)

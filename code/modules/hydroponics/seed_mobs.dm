@@ -13,7 +13,7 @@
 	spawn(75)
 		if(!host.ckey && !host.client)
 			host.death()  // This seems redundant, but a lot of mobs don't
-			host.stat = 2 // handle death() properly. Better safe than etc.
+			host.stat = DEAD // handle death() properly. Better safe than etc.
 			host.visible_message("<span class='danger'>[host] is malformed and unable to survive. It expires pitifully, leaving behind some seeds.</span>")
 
 			var/total_yield = rand(1,3)
@@ -27,7 +27,7 @@
 	for(var/mob/dead/observer/O in player_list)
 		if(jobban_isbanned(O, "Dionaea"))
 			continue
-		if(O.client)
+		if(O.client && O.MayRespawn())
 			if(O.client.prefs.be_special & BE_PLANT && !(O.client in currently_querying))
 				currently_querying |= O.client
 				question(O.client,host)
@@ -73,8 +73,7 @@
 		host << "<B>You are [host], one of a race of drifting interstellar plantlike creatures that sometimes share their seeds with human traders.</B>"
 		host << "<B>Too much darkness will send you into shock and starve you, but light will help you heal.</B>"
 
-	var/newname = input(host,"Enter a name, or leave blank for the default name.", "Name change","") as text
-	newname = sanitize(newname)
+	var/newname = sanitizeSafe(input(host,"Enter a name, or leave blank for the default name.", "Name change","") as text, MAX_NAME_LEN)
 	if (newname != "")
 		host.real_name = newname
 		host.name = host.real_name

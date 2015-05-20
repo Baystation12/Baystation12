@@ -43,6 +43,11 @@
 		air_contents.volume = PRESSURE_TANK_VOLUME
 		update()
 
+/obj/machinery/disposal/Destroy()
+	eject()
+	if(trunk)
+		trunk.linked = null
+	..()
 
 // attack by item places it in to disposal
 /obj/machinery/disposal/attackby(var/obj/item/I, var/mob/user)
@@ -83,7 +88,7 @@
 					C.anchored = 1
 					C.density = 1
 					C.update()
-					del(src)
+					qdel(src)
 				return
 			else
 				user << "You need more welding fuel to complete this task."
@@ -115,7 +120,7 @@
 				GM.loc = src
 				for (var/mob/C in viewers(src))
 					C.show_message("\red [GM.name] has been placed in the [src] by [user].", 3)
-				del(G)
+				qdel(G)
 				usr.attack_log += text("\[[time_stamp()]\] <font color='red'>Has placed [GM.name] ([GM.ckey]) in disposals.</font>")
 				GM.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been placed in disposals by [usr.name] ([usr.ckey])</font>")
 				msg_admin_attack("[usr] ([usr.ckey]) placed [GM] ([GM.ckey]) in a disposals unit. (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[usr.x];Y=[usr.y];Z=[usr.z]'>JMP</a>)")
@@ -452,7 +457,7 @@
 						AM.throw_at(target, 5, 1)
 
 		H.vent_gas(loc)
-		del(H)
+		qdel(H)
 
 /obj/machinery/disposal/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if (istype(mover,/obj/item) && mover.throwing)
@@ -600,7 +605,7 @@
 
 		if(other.has_fat_guy)
 			has_fat_guy = 1
-		del(other)
+		qdel(other)
 
 
 	proc/settag(var/new_tag)
@@ -638,6 +643,11 @@
 		location.assume_air(gas)  // vent all gas to turf
 		return
 
+/obj/structure/disposalholder/Destroy()
+	qdel(gas)
+	active = 0
+	..()
+
 // Disposal pipes
 
 /obj/structure/disposalpipe
@@ -653,7 +663,8 @@
 	var/health = 10 	// health points 0-10
 	layer = 2.3			// slightly lower than wires and other pipes
 	var/base_icon_state	// initial icon state on map
-
+	var/sortType = ""
+	var/subtype = 0
 	// new pipe, set the icon_state as on map
 	New()
 		..()
@@ -663,7 +674,7 @@
 
 	// pipe is deleted
 	// ensure if holder is present, it is expelled
-	Del()
+	Destroy()
 		var/obj/structure/disposalholder/H = locate() in src
 		if(H)
 			// holder was present
@@ -676,7 +687,7 @@
 				for(var/atom/movable/AM in H)
 					AM.loc = T
 					AM.pipe_eject(0)
-				del(H)
+				qdel(H)
 				..()
 				return
 
@@ -773,7 +784,7 @@
 						if(AM)
 							AM.throw_at(target, 100, 1)
 				H.vent_gas(T)
-				del(H)
+				qdel(H)
 
 		else	// no specified direction, so throw in random direction
 
@@ -789,7 +800,7 @@
 							AM.throw_at(target, 5, 1)
 
 				H.vent_gas(T)	// all gas vent to turf
-				del(H)
+				qdel(H)
 
 		return
 
@@ -817,7 +828,7 @@
 				for(var/atom/movable/AM in H)
 					AM.loc = T
 					AM.pipe_eject(0)
-				del(H)
+				qdel(H)
 				return
 
 			// otherwise, do normal expel from turf
@@ -825,7 +836,7 @@
 				expel(H, T, 0)
 
 		spawn(2)	// delete pipe after 2 ticks to ensure expel proc finished
-			del(src)
+			qdel(src)
 
 
 	// pipe affected by explosion
@@ -900,8 +911,10 @@
 				C.ptype = 5
 			if("pipe-j1s")
 				C.ptype = 9
+				C.sortType = sortType
 			if("pipe-j2s")
 				C.ptype = 10
+				C.sortType = sortType
 ///// Z-Level stuff
 			if("pipe-u")
 				C.ptype = 11
@@ -912,13 +925,38 @@
 				C.ptype = 13
 			if("pipe-tagger-partial")
 				C.ptype = 14
+		C.subtype = src.subtype
 		src.transfer_fingerprints_to(C)
 		C.set_dir(dir)
 		C.density = 0
 		C.anchored = 1
 		C.update()
 
-		del(src)
+		qdel(src)
+
+// pipe is deleted
+// ensure if holder is present, it is expelled
+/obj/structure/disposalpipe/Destroy()
+	var/obj/structure/disposalholder/H = locate() in src
+	if(H)
+		// holder was present
+		H.active = 0
+		var/turf/T = src.loc
+		if(T.density)
+			// deleting pipe is inside a dense turf (wall)
+			// this is unlikely, but just dump out everything into the turf in case
+
+			for(var/atom/movable/AM in H)
+				AM.loc = T
+				AM.pipe_eject(0)
+			qdel(H)
+			..()
+			return
+
+		// otherwise, do normal expel from turf
+		if(H)
+			expel(H, T, 0)
+	..()
 
 // *** TEST verb
 //client/verb/dispstop()
@@ -1153,7 +1191,6 @@
 	icon_state = "pipe-j1s"
 	desc = "An underfloor disposal pipe with a package sorting mechanism."
 
-	var/sortType = ""
 	var/posdir = 0
 	var/negdir = 0
 	var/sortdir = 0
@@ -1244,7 +1281,7 @@
 /obj/structure/disposalpipe/sortjunction/wildcard
 	name = "wildcard sorting junction"
 	desc = "An underfloor disposal pipe which filters all wrapped and tagged items."
-
+	subtype = 1
 	divert_check(var/checkTag)
 		return checkTag != ""
 
@@ -1252,7 +1289,7 @@
 /obj/structure/disposalpipe/sortjunction/untagged
 	name = "untagged sorting junction"
 	desc = "An underfloor disposal pipe which filters all untagged items."
-
+	subtype = 2
 	divert_check(var/checkTag)
 		return checkTag == ""
 
@@ -1386,7 +1423,7 @@
 	welded()
 //		var/obj/item/scrap/S = new(src.loc)
 //		S.set_components(200,0,0)
-		del(src)
+		qdel(src)
 
 // the disposal outlet machine
 
@@ -1429,7 +1466,7 @@
 					spawn(5)
 						AM.throw_at(target, 3, 1)
 			H.vent_gas(src.loc)
-			del(H)
+			qdel(H)
 
 		return
 
@@ -1462,13 +1499,11 @@
 					C.update()
 					C.anchored = 1
 					C.density = 1
-					del(src)
+					qdel(src)
 				return
 			else
 				user << "You need more welding fuel to complete this task."
 				return
-
-
 
 // called when movable is expelled from a disposal pipe or outlet
 // by default does nothing, override for special behaviour

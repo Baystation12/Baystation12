@@ -268,7 +268,7 @@ max volume of phoron storeable by the field = the total volume of a number of ti
 	//todo: safety checks for field status
 	if(owned_field)
 		icon_state = "core0"
-		del(owned_field)
+		qdel(owned_field)
 		luminosity = 0
 		use_power = 1
 

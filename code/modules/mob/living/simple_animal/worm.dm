@@ -98,7 +98,7 @@
 
 		return
 
-	Del() //if a chunk a destroyed, make a new worm out of the split halves
+	Destroy() //if a chunk a destroyed, make a new worm out of the split halves
 		if(previous)
 			previous.Detach()
 		..()
@@ -137,10 +137,9 @@
 
 	proc/AttemptToEat(var/atom/target)
 		if(istype(target,/turf/simulated/wall))
-			if((!istype(target,/turf/simulated/wall/r_wall) && eatingDuration >= 100) || eatingDuration >= 200) //need 20 ticks to eat an rwall, 10 for a regular one
-				var/turf/simulated/wall/wall = target
-				wall.ChangeTurf(/turf/simulated/floor)
-				new /obj/item/stack/sheet/metal(src, flatPlasmaValue)
+			var/turf/simulated/wall/W = target
+			if((!W.reinf_material && eatingDuration >= 100) || eatingDuration >= 200) //need 20 ticks to eat an rwall, 10 for a regular one
+				W.dismantle_wall()
 				return 1
 		else if(istype(target,/atom/movable))
 			if(istype(target,/mob) || eatingDuration >= 50) //5 ticks to eat stuff like airlocks
@@ -170,7 +169,7 @@
 		if(die)
 			newHead.death()
 
-		del(src)
+		qdel(src)
 
 	proc/ProcessStomach()
 		for(var/atom/movable/stomachContent in contents)
@@ -179,16 +178,16 @@
 					if(!istype(stomachContent,/obj/item/stack/sheet/mineral/phoron))
 						var/obj/item/stack/oldStack = stomachContent
 						new /obj/item/stack/sheet/mineral/phoron(src, oldStack.get_amount())
-						del(oldStack)
+						qdel(oldStack)
 						continue
 				else if(istype(stomachContent,/obj/item)) //converts to plasma, keeping the w_class
 					var/obj/item/oldItem = stomachContent
 					new /obj/item/stack/sheet/mineral/phoron(src, oldItem.w_class)
-					del(oldItem)
+					qdel(oldItem)
 					continue
 				else
 					new /obj/item/stack/sheet/mineral/phoron(src, flatPlasmaValue) //just flat amount
-					del(stomachContent)
+					qdel(stomachContent)
 					continue
 
 		if(previous)

@@ -10,6 +10,10 @@
 
 	sleep(1)
 
+	for(var/obj/item/I in src)
+		drop_from_inventory(I)
+		I.throw_at(get_edge_target_turf(src,pick(alldirs)), rand(1,3), round(30/I.w_class))
+
 	..(species.gibbed_anim)
 	gibs(loc, viruses, dna, null, species.flesh_color, species.blood_color)
 
@@ -30,7 +34,8 @@
 	handle_hud_list()
 
 	//Handle species-specific deaths.
-	if(species) species.handle_death(src)
+	species.handle_death(src)
+	animate_tail_stop()
 
 	//Handle brain slugs.
 	var/obj/item/organ/external/head = get_organ("head")
@@ -74,7 +79,7 @@
 
 	mutations.Add(HUSK)
 	status_flags |= DISFIGURED	//makes them unknown without fucking up other stuff like admintools
-	update_body(0)
+	update_body(1)
 	return
 
 /mob/living/carbon/human/proc/Drain()

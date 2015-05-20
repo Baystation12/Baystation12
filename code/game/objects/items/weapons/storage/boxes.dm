@@ -48,26 +48,25 @@
 	// Now make the cardboard
 	user << "<span class='notice'>You fold [src] flat.</span>"
 	new src.foldable(get_turf(src))
-	del(src)
+	qdel(src)
 
 /obj/item/weapon/storage/box/survival/
 	New()
 		..()
-		contents = list()
-		sleep(1)
 		new /obj/item/clothing/mask/breath( src )
 		new /obj/item/weapon/tank/emergency_oxygen( src )
-		return
+
+/obj/item/weapon/storage/box/survival/vox/
+	New()
+		..()
+		new /obj/item/clothing/mask/breath( src )
+		new /obj/item/weapon/tank/emergency_nitrogen( src )
 
 /obj/item/weapon/storage/box/engineer/
 	New()
 		..()
-		contents = list()
-		sleep(1)
 		new /obj/item/clothing/mask/breath( src )
 		new /obj/item/weapon/tank/emergency_oxygen/engi( src )
-		return
-
 
 /obj/item/weapon/storage/box/gloves
 	name = "box of latex gloves"
@@ -242,6 +241,20 @@
 		new /obj/item/ammo_casing/shotgun/stunshell(src)
 		new /obj/item/ammo_casing/shotgun/stunshell(src)
 		new /obj/item/ammo_casing/shotgun/stunshell(src)
+
+/obj/item/weapon/storage/box/practiceshells
+	name = "box of practice shells"
+	desc = "It has a picture of a gun and several warning symbols on the front.<br>WARNING: Live ammunition. Misuse may result in serious injury or death."
+
+	New()
+		..()
+		new /obj/item/ammo_casing/shotgun/practice(src)
+		new /obj/item/ammo_casing/shotgun/practice(src)
+		new /obj/item/ammo_casing/shotgun/practice(src)
+		new /obj/item/ammo_casing/shotgun/practice(src)
+		new /obj/item/ammo_casing/shotgun/practice(src)
+		new /obj/item/ammo_casing/shotgun/practice(src)
+		new /obj/item/ammo_casing/shotgun/practice(src)
 
 /obj/item/weapon/storage/box/sniperammo
 	name = "box of 14.5mm shells"

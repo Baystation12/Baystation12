@@ -1,7 +1,4 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:31
-#define DOOR_OPEN_LAYER 2.7		//Under all objects if opened. 2.7 due to tables being at 2.6
-#define DOOR_CLOSED_LAYER 3.1	//Above most items if closed
-
 #define DOOR_REPAIR_AMOUNT 50	//amount of health regained per stack amount used
 
 /obj/machinery/door
@@ -37,6 +34,9 @@
 	dir = EAST
 	var/width = 1
 
+	// turf animation
+	var/atom/movable/overlay/c_animation = null
+
 /obj/machinery/door/attack_generic(var/mob/user, var/damage)
 	if(damage >= 10)
 		visible_message("<span class='danger'>\The [user] smashes into the [src]!</span>")
@@ -68,8 +68,7 @@
 	update_nearby_tiles(need_rebuild=1)
 	return
 
-
-/obj/machinery/door/Del()
+/obj/machinery/door/Destroy()
 	density = 0
 	update_nearby_tiles()
 	..()
@@ -103,8 +102,8 @@
 			bumpopen(M)
 		return
 
-	if(istype(AM, /obj/machinery/bot))
-		var/obj/machinery/bot/bot = AM
+	if(istype(AM, /mob/living/bot))
+		var/mob/living/bot/bot = AM
 		if(src.check_access(bot.botcard))
 			if(density)
 				open()
@@ -165,10 +164,10 @@
 			switch (Proj.damage_type)
 				if(BRUTE)
 					new /obj/item/stack/sheet/metal(src.loc, 2)
-					new /obj/item/stack/rods(src.loc, 3)
+					PoolOrNew(/obj/item/stack/rods, list(src.loc, 3))
 				if(BURN)
 					new /obj/effect/decal/cleanable/ash(src.loc) // Turn it to ashes!
-			del(src)
+			qdel(src)
 
 	if(Proj.damage)
 		//cap projectile damage so that there's still a minimum number of hits required to break the door
@@ -251,7 +250,7 @@
 				user << "<span class='notice'>You finish repairing the damage to \the [src].</span>"
 				health = between(health, health + repairing.amount*DOOR_REPAIR_AMOUNT, maxhealth)
 				update_icon()
-				del(repairing)
+				qdel(repairing)
 		return
 
 	if(repairing && istype(I, /obj/item/weapon/crowbar))
@@ -307,6 +306,17 @@
 	update_icon()
 	return
 
+
+/obj/machinery/door/examine(mob/user)
+	. = ..()
+	if(src.health < src.maxhealth / 4)
+		user << "\The [src] looks like it's about to break!"
+	else if(src.health < src.maxhealth / 2)
+		user << "\The [src] looks seriously damaged!"
+	else if(src.health < src.maxhealth * 3/4)
+		user << "\The [src] shows signs of damage!"
+
+
 /obj/machinery/door/proc/set_broken()
 	stat |= BROKEN
 	for (var/mob/O in viewers(src, null))
@@ -318,7 +328,7 @@
 
 /obj/machinery/door/blob_act()
 	if(prob(40))
-		del(src)
+		qdel(src)
 	return
 
 
@@ -331,10 +341,10 @@
 /obj/machinery/door/ex_act(severity)
 	switch(severity)
 		if(1.0)
-			del(src)
+			qdel(src)
 		if(2.0)
 			if(prob(25))
-				del(src)
+				qdel(src)
 			else
 				take_damage(300)
 		if(3.0)
@@ -377,23 +387,23 @@
 	return
 
 
-/obj/machinery/door/proc/open()
-	if(!can_open()) return
-	if(!operating)	operating = 1
+/obj/machinery/door/proc/open(var/forced = 0)
+	if(!can_open(forced))
+		return
+	operating = 1
 
 	do_animate("opening")
 	icon_state = "door0"
-	src.SetOpacity(0)
+	set_opacity(0)
 	sleep(3)
 	src.density = 0
 	sleep(7)
 	src.layer = open_layer
 	explosion_resistance = 0
 	update_icon()
-	SetOpacity(0)
+	set_opacity(0)
 	update_nearby_tiles()
-
-	if(operating)	operating = 0
+	operating = 0
 
 	if(autoclose)
 		close_door_at = next_close_time()
@@ -403,8 +413,8 @@
 /obj/machinery/door/proc/next_close_time()
 	return world.time + (normalspeed ? 150 : 5)
 
-/obj/machinery/door/proc/close()
-	if(!can_close())
+/obj/machinery/door/proc/close(var/forced = 0)
+	if(!can_close(forced))
 		return
 	operating = 1
 
@@ -417,14 +427,14 @@
 	sleep(7)
 	update_icon()
 	if(visible && !glass)
-		SetOpacity(1)	//caaaaarn!
+		set_opacity(1)	//caaaaarn!
 	operating = 0
 	update_nearby_tiles()
 
 	//I shall not add a check every x ticks if a door has closed over some fire.
 	var/obj/fire/fire = locate() in loc
 	if(fire)
-		del fire
+		qdel(fire)
 	return
 
 /obj/machinery/door/proc/requiresID()

@@ -9,12 +9,12 @@
 	density = 0
 	unacidable = 1
 	use_power = 0
-	luminosity = 4
+	light_range = 4
 	var/obj/machinery/field_generator/FG1 = null
 	var/obj/machinery/field_generator/FG2 = null
 	var/hasShocked = 0 //Used to add a delay between shocks. In some cases this used to crash servers by spawning hundreds of sparks every second.
 
-/obj/machinery/containment_field/Del()
+/obj/machinery/containment_field/Destroy()
 	if(FG1 && !FG1.clean_up)
 		FG1.cleanup()
 	if(FG2 && !FG2.clean_up)
@@ -54,7 +54,7 @@
 	if(hasShocked)
 		return 0
 	if(!FG1 || !FG2)
-		del(src)
+		qdel(src)
 		return 0
 	if(isliving(user))
 		hasShocked = 1

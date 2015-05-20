@@ -18,7 +18,7 @@
 		if (machine)
 			machine.console = src
 		else
-			del(src)
+			qdel(src)
 
 /obj/machinery/mineral/stacking_unit_console/attack_hand(mob/user)
 	add_fingerprint(user)
@@ -85,12 +85,12 @@
 		var/obj/item/stack/S = new stacktype(src)
 		stack_storage[S.name] = 0
 		stack_paths[S.name] = stacktype
-		del(S)
+		qdel(S)
 
 	stack_storage["glass"] = 0
 	stack_paths["glass"] = /obj/item/stack/sheet/glass
-	stack_storage["metal"] = 0
-	stack_paths["metal"] = /obj/item/stack/sheet/metal
+	stack_storage[DEFAULT_WALL_MATERIAL] = 0
+	stack_paths[DEFAULT_WALL_MATERIAL] = /obj/item/stack/sheet/metal
 	stack_storage["plasteel"] = 0
 	stack_paths["plasteel"] = /obj/item/stack/sheet/plasteel
 

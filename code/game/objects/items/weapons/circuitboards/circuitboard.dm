@@ -21,7 +21,6 @@
 	var/build_path = null
 	var/board_type = "computer"
 	var/list/req_components = null
-	var/frame_desc = null
 	var/contain_parts = 1
 
 //Called when the circuitboard is used to contruct a new machine.

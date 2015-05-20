@@ -13,35 +13,10 @@ would spawn and follow the beaker, even if it is carried or thrown.
 	unacidable = 1//So effect are not targeted by alien acid.
 	pass_flags = PASSTABLE | PASSGRILLE
 
-/obj/effect/effect/water
-	name = "water"
-	icon = 'icons/effects/effects.dmi'
-	icon_state = "extinguish"
-	var/life = 15.0
-	mouse_opacity = 0
-
-/obj/effect/proc/delete()
-	loc = null
+/obj/effect/Destroy()
 	if(reagents)
 		reagents.delete()
-	return
-
-/obj/effect/effect/water/Move(turf/newloc)
-	//var/turf/T = src.loc
-	//if (istype(T, /turf))
-	//	T.firelevel = 0 //TODO: FIX
-	if (--src.life < 1)
-		//SN src = null
-		delete()
-	if(newloc.density)
-		return 0
-	.=..()
-
-/obj/effect/effect/water/Bump(atom/A)
-	if(reagents)
-		reagents.reaction(A)
 	return ..()
-
 
 /datum/effect/effect/system
 	var/number = 3
@@ -100,7 +75,7 @@ steam.start() -- spawns the effect
 			spawn(0)
 				if(holder)
 					src.location = get_turf(holder)
-				var/obj/effect/effect/steam/steam = new /obj/effect/effect/steam(src.location)
+				var/obj/effect/effect/steam/steam = PoolOrNew(/obj/effect/effect/steam, src.location)
 				var/direction
 				if(src.cardinals)
 					direction = pick(cardinal)
@@ -110,7 +85,7 @@ steam.start() -- spawns the effect
 					sleep(5)
 					step(steam,direction)
 				spawn(20)
-					steam.delete()
+					qdel(steam)
 
 /////////////////////////////////////////////
 //SPARK SYSTEM (like steam system)
@@ -133,15 +108,14 @@ steam.start() -- spawns the effect
 	if (istype(T, /turf))
 		T.hotspot_expose(1000,100)
 	spawn (100)
-		delete()
+		qdel(src)
 	return
 
-/obj/effect/effect/sparks/Del()
+/obj/effect/effect/sparks/Destroy()
 	var/turf/T = src.loc
 	if (istype(T, /turf))
 		T.hotspot_expose(1000,100)
-	..()
-	return
+	return ..()
 
 /obj/effect/effect/sparks/Move()
 	..()
@@ -171,7 +145,7 @@ steam.start() -- spawns the effect
 			spawn(0)
 				if(holder)
 					src.location = get_turf(holder)
-				var/obj/effect/effect/sparks/sparks = new /obj/effect/effect/sparks(src.location)
+				var/obj/effect/effect/sparks/sparks = PoolOrNew(/obj/effect/effect/sparks, src.location)
 				src.total_sparks++
 				var/direction
 				if(src.cardinals)
@@ -183,7 +157,7 @@ steam.start() -- spawns the effect
 					step(sparks,direction)
 				spawn(20)
 					if(sparks)
-						sparks.delete()
+						qdel(sparks)
 					src.total_sparks--
 
 
@@ -212,7 +186,7 @@ steam.start() -- spawns the effect
 /obj/effect/effect/smoke/New()
 	..()
 	spawn (time_to_live)
-		delete()
+		qdel(src)
 	return
 
 /obj/effect/effect/smoke/Crossed(mob/living/carbon/M as mob )
@@ -246,7 +220,7 @@ steam.start() -- spawns the effect
 /obj/effect/effect/smoke/illumination/New(var/newloc, var/brightness=15, var/lifetime=10)
 	time_to_live=lifetime
 	..()
-	SetLuminosity(brightness)
+	set_light(brightness)
 
 /////////////////////////////////////////////
 // Bad smoke
@@ -357,7 +331,7 @@ steam.start() -- spawns the effect
 		spawn(0)
 			if(holder)
 				src.location = get_turf(holder)
-			var/obj/effect/effect/smoke/smoke = new smoke_type(src.location)
+			var/obj/effect/effect/smoke/smoke = PoolOrNew(smoke_type, src.location)
 			src.total_smoke++
 			var/direction = src.direction
 			if(!direction)
@@ -369,7 +343,7 @@ steam.start() -- spawns the effect
 				sleep(10)
 				step(smoke,direction)
 			spawn(smoke.time_to_live*0.75+rand(10,30))
-				if (smoke) smoke.delete()
+				if (smoke) qdel(smoke)
 				src.total_smoke--
 
 
@@ -415,13 +389,13 @@ steam.start() -- spawns the effect
 				var/turf/T = get_turf(src.holder)
 				if(T != src.oldposition)
 					if(istype(T, /turf/space))
-						var/obj/effect/effect/ion_trails/I = new /obj/effect/effect/ion_trails(src.oldposition)
+						var/obj/effect/effect/ion_trails/I = PoolOrNew(/obj/effect/effect/ion_trails, src.oldposition)
 						src.oldposition = T
 						I.set_dir(src.holder.dir)
 						flick("ion_fade", I)
 						I.icon_state = "blank"
 						spawn( 20 )
-							I.delete()
+							qdel(I)
 					spawn(2)
 						if(src.on)
 							src.processing = 1
@@ -461,12 +435,12 @@ steam.start() -- spawns the effect
 			src.processing = 0
 			spawn(0)
 				if(src.number < 3)
-					var/obj/effect/effect/steam/I = new /obj/effect/effect/steam(src.oldposition)
+					var/obj/effect/effect/steam/I = PoolOrNew(/obj/effect/effect/steam, src.oldposition)
 					src.number++
 					src.oldposition = get_turf(holder)
 					I.set_dir(src.holder.dir)
 					spawn(10)
-						I.delete()
+						qdel(I)
 						src.number--
 					spawn(2)
 						if(src.on)
@@ -481,227 +455,6 @@ steam.start() -- spawns the effect
 	proc/stop()
 		src.processing = 0
 		src.on = 0
-
-
-
-// Foam
-// Similar to smoke, but spreads out more
-// metal foams leave behind a foamed metal wall
-
-/obj/effect/effect/foam
-	name = "foam"
-	icon_state = "foam"
-	opacity = 0
-	anchored = 1
-	density = 0
-	layer = OBJ_LAYER + 0.9
-	mouse_opacity = 0
-	var/amount = 3
-	var/expand = 1
-	animate_movement = 0
-	var/metal = 0
-
-
-/obj/effect/effect/foam/New(loc, var/ismetal=0)
-	..(loc)
-	icon_state = "[ismetal ? "m":""]foam"
-	metal = ismetal
-	playsound(src, 'sound/effects/bubbles2.ogg', 80, 1, -3)
-	spawn(3 + metal*3)
-		process()
-		checkReagents()
-	spawn(120)
-		processing_objects.Remove(src)
-		sleep(30)
-
-		if(metal)
-			var/obj/structure/foamedmetal/M = new(src.loc)
-			M.metal = metal
-			M.updateicon()
-
-		flick("[icon_state]-disolve", src)
-		sleep(5)
-		delete()
-	return
-
-// transfer any reagents to the floor
-/obj/effect/effect/foam/proc/checkReagents()
-	if(!metal && reagents)
-		for(var/atom/A in src.loc.contents)
-			if(A == src)
-				continue
-			reagents.reaction(A, 1, 1)
-
-/obj/effect/effect/foam/process()
-	if(--amount < 0)
-		return
-
-
-	for(var/direction in cardinal)
-
-
-		var/turf/T = get_step(src,direction)
-		if(!T)
-			continue
-
-		if(!T.Enter(src))
-			continue
-
-		var/obj/effect/effect/foam/F = locate() in T
-		if(F)
-			continue
-
-		F = new(T, metal)
-		F.amount = amount
-		if(!metal)
-			F.create_reagents(10)
-			if (reagents)
-				for(var/datum/reagent/R in reagents.reagent_list)
-					F.reagents.add_reagent(R.id, 1, safety = 1)		//added safety check since reagents in the foam have already had a chance to react
-
-// foam disolves when heated
-// except metal foams
-/obj/effect/effect/foam/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
-	if(!metal && prob(max(0, exposed_temperature - 475)))
-		flick("[icon_state]-disolve", src)
-
-		spawn(5)
-			delete()
-
-
-/obj/effect/effect/foam/Crossed(var/atom/movable/AM)
-	if(metal)
-		return
-	if(istype(AM, /mob/living))
-		var/mob/living/M = AM
-		M.slip("the foam",6)
-
-/datum/effect/effect/system/foam_spread
-	var/amount = 5				// the size of the foam spread.
-	var/list/carried_reagents	// the IDs of reagents present when the foam was mixed
-	var/metal = 0				// 0=foam, 1=metalfoam, 2=ironfoam
-
-
-
-
-	set_up(amt=5, loca, var/datum/reagents/carry = null, var/metalfoam = 0)
-		amount = round(sqrt(amt / 3), 1)
-		if(istype(loca, /turf/))
-			location = loca
-		else
-			location = get_turf(loca)
-
-		carried_reagents = list()
-		metal = metalfoam
-
-
-		// bit of a hack here. Foam carries along any reagent also present in the glass it is mixed
-		// with (defaults to water if none is present). Rather than actually transfer the reagents,
-		// this makes a list of the reagent ids and spawns 1 unit of that reagent when the foam disolves.
-
-
-		if(carry && !metal)
-			for(var/datum/reagent/R in carry.reagent_list)
-				carried_reagents += R.id
-
-	start()
-		spawn(0)
-			var/obj/effect/effect/foam/F = locate() in location
-			if(F)
-				F.amount += amount
-				return
-
-			F = new(src.location, metal)
-			F.amount = amount
-
-			if(!metal)			// don't carry other chemicals if a metal foam
-				F.create_reagents(10)
-
-				if(carried_reagents)
-					for(var/id in carried_reagents)
-						F.reagents.add_reagent(id, 1, null, 1) //makes a safety call because all reagents should have already reacted anyway
-				else
-					F.reagents.add_reagent("water", 1, safety = 1)
-
-// wall formed by metal foams
-// dense and opaque, but easy to break
-
-/obj/structure/foamedmetal
-	icon = 'icons/effects/effects.dmi'
-	icon_state = "metalfoam"
-	density = 1
-	opacity = 1 	// changed in New()
-	anchored = 1
-	name = "foamed metal"
-	desc = "A lightweight foamed metal wall."
-	var/metal = 1		// 1=aluminum, 2=iron
-
-	New()
-		..()
-		update_nearby_tiles(1)
-
-
-
-	Del()
-
-		density = 0
-		update_nearby_tiles(1)
-		..()
-
-	proc/updateicon()
-		if(metal == 1)
-			icon_state = "metalfoam"
-		else
-			icon_state = "ironfoam"
-
-
-	ex_act(severity)
-		del(src)
-
-	blob_act()
-		del(src)
-
-	bullet_act()
-		if(metal==1 || prob(50))
-			del(src)
-
-	attack_hand(var/mob/user)
-		if ((HULK in user.mutations) || (prob(75 - metal*25)))
-			user << "\blue You smash through the metal foam wall."
-			for(var/mob/O in oviewers(user))
-				if ((O.client && !( O.blinded )))
-					O << "\red [user] smashes through the foamed metal."
-
-			del(src)
-		else
-			user << "\blue You hit the metal foam but bounce off it."
-		return
-
-
-	attackby(var/obj/item/I, var/mob/user)
-
-		if (istype(I, /obj/item/weapon/grab))
-			var/obj/item/weapon/grab/G = I
-			G.affecting.loc = src.loc
-			for(var/mob/O in viewers(src))
-				if (O.client)
-					O << "\red [G.assailant] smashes [G.affecting] through the foamed metal wall."
-			del(I)
-			del(src)
-			return
-
-		if(prob(I.force*20 - metal*25))
-			user << "\blue You smash through the foamed metal with \the [I]."
-			for(var/mob/O in oviewers(user))
-				if ((O.client && !( O.blinded )))
-					O << "\red [user] smashes through the foamed metal."
-			del(src)
-		else
-			user << "\blue You hit the metal foam to no effect."
-
-	CanPass(atom/movable/mover, turf/target, height=1.5, air_group = 0)
-		if(air_group) return 0
-		return !density
 
 /datum/effect/effect/system/reagents_explosion
 	var/amount 						// TNT equivalent
@@ -722,7 +475,7 @@ steam.start() -- spawns the effect
 
 	start()
 		if (amount <= 2)
-			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+			var/datum/effect/effect/system/spark_spread/s = PoolOrNew(/datum/effect/effect/system/spark_spread)
 			s.set_up(2, 1, location)
 			s.start()
 

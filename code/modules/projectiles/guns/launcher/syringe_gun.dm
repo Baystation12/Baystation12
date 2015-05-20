@@ -4,7 +4,7 @@
 	icon = 'icons/obj/ammo.dmi'
 	icon_state = "syringe-cartridge"
 	var/icon_flight = "syringe-cartridge-flight" //so it doesn't look so weird when shot
-	matter = list("metal" = 125, "glass" = 375)
+	matter = list(DEFAULT_WALL_MATERIAL = 125, "glass" = 375)
 	flags = CONDUCT
 	slot_flags = SLOT_BELT
 	throwforce = 3
@@ -52,11 +52,10 @@
 			//unfortuately we don't know where the dart will actually hit, since that's done by the parent.
 			if(L.can_inject())
 				if(syringe.reagents)
-					syringe.reagents.trans_to(L, 15)
-		
+					syringe.reagents.trans_to_mob(L, 15, CHEM_BLOOD)
 		syringe.break_syringe(iscarbon(hit_atom)? hit_atom : null)
 		syringe.update_icon()
-	
+
 	icon_state = initial(icon_state) //reset icon state
 	update_icon()
 
@@ -67,15 +66,15 @@
 	item_state = "syringegun"
 	w_class = 3
 	force = 7
-	matter = list("metal" = 2000)
+	matter = list(DEFAULT_WALL_MATERIAL = 2000)
 	slot_flags = SLOT_BELT
-	
+
 	fire_sound = 'sound/weapons/empty.ogg'
 	fire_sound_text = "a metallic thunk"
 	recoil = 0
 	release_force = 10
 	throw_distance = 10
-	
+
 	var/list/darts = list()
 	var/max_darts = 1
 	var/obj/item/weapon/syringe_cartridge/next

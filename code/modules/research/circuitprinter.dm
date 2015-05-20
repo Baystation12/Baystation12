@@ -81,10 +81,10 @@ using metal and glass, it uses glass and reagents (usually sulphuric acid).
 
 /obj/machinery/r_n_d/circuit_imprinter/blob_act()
 	if(prob(50))
-		del(src)
+		qdel(src)
 
 /obj/machinery/r_n_d/circuit_imprinter/meteorhit()
-	del(src)
+	qdel(src)
 	return
 
 /obj/machinery/r_n_d/circuit_imprinter/proc/TotalMaterials()
@@ -96,7 +96,7 @@ using metal and glass, it uses glass and reagents (usually sulphuric acid).
 /obj/machinery/r_n_d/circuit_imprinter/dismantle()
 	for(var/obj/I in component_parts)
 		if(istype(I, /obj/item/weapon/reagent_containers/glass/beaker))
-			reagents.trans_to(I, reagents.total_volume)
+			reagents.trans_to_obj(I, reagents.total_volume)
 	for(var/f in materials)
 		if(materials[f] >= SHEET_MATERIAL_AMOUNT)
 			var/path = getMaterialType(f)
@@ -159,41 +159,6 @@ using metal and glass, it uses glass and reagents (usually sulphuric acid).
 				materials[t] += amount * SHEET_MATERIAL_AMOUNT
 	busy = 0
 	updateUsrDialog()
-
-/obj/machinery/r_n_d/circuit_imprinter/proc/getMaterialType(var/name)
-	switch(name)
-		if("metal")
-			return /obj/item/stack/sheet/metal
-		if("glass")
-			return /obj/item/stack/sheet/glass
-		if("gold")
-			return /obj/item/stack/sheet/mineral/gold
-		if("silver")
-			return /obj/item/stack/sheet/mineral/silver
-		if("phoron")
-			return /obj/item/stack/sheet/mineral/phoron
-		if("uranium")
-			return /obj/item/stack/sheet/mineral/uranium
-		if("diamond")
-			return /obj/item/stack/sheet/mineral/diamond
-	return null
-
-/obj/machinery/r_n_d/circuit_imprinter/proc/getMaterialName(var/type)
-	switch(type)
-		if(/obj/item/stack/sheet/metal)
-			return "metal"
-		if(/obj/item/stack/sheet/glass)
-			return "glass"
-		if(/obj/item/stack/sheet/mineral/gold)
-			return "gold"
-		if(/obj/item/stack/sheet/mineral/silver)
-			return "silver"
-		if(/obj/item/stack/sheet/mineral/phoron)
-			return "phoron"
-		if(/obj/item/stack/sheet/mineral/uranium)
-			return "uranium"
-		if(/obj/item/stack/sheet/mineral/diamond)
-			return "diamond"
 
 /obj/machinery/r_n_d/circuit_imprinter/proc/addToQueue(var/datum/design/D)
 	queue += D

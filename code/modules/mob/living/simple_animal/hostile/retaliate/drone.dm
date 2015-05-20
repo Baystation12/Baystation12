@@ -159,9 +159,9 @@
 
 /mob/living/simple_animal/hostile/retaliate/malf_drone/death()
 	..(null,"suddenly breaks apart.")
-	del(src)
+	qdel(src)
 
-/mob/living/simple_animal/hostile/retaliate/malf_drone/Del()
+/mob/living/simple_animal/hostile/retaliate/malf_drone/Destroy()
 	//some random debris left behind
 	if(has_loot)
 		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
@@ -183,16 +183,16 @@
 			step_to(O, get_turf(pick(view(7, src))))
 
 		//rods
-		O = new /obj/item/stack/rods(src.loc)
+		O = PoolOrNew(/obj/item/stack/rods, src.loc)
 		step_to(O, get_turf(pick(view(7, src))))
 		if(prob(75))
-			O = new /obj/item/stack/rods(src.loc)
+			O = PoolOrNew(/obj/item/stack/rods, src.loc)
 			step_to(O, get_turf(pick(view(7, src))))
 		if(prob(50))
-			O = new /obj/item/stack/rods(src.loc)
+			O = PoolOrNew(/obj/item/stack/rods, src.loc)
 			step_to(O, get_turf(pick(view(7, src))))
 		if(prob(25))
-			O = new /obj/item/stack/rods(src.loc)
+			O = PoolOrNew(/obj/item/stack/rods, src.loc)
 			step_to(O, get_turf(pick(view(7, src))))
 
 		//plasteel

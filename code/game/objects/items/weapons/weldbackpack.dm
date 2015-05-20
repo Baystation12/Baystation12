@@ -22,12 +22,12 @@
 			user << "\red That was stupid of you."
 			explosion(get_turf(src),-1,0,2)
 			if(src)
-				del(src)
+				qdel(src)
 			return
 		else
 			if(T.welding)
 				user << "\red That was close!"
-			src.reagents.trans_to(W, T.max_fuel)
+			src.reagents.trans_to_obj(W, T.max_fuel)
 			user << "\blue Welder refilled!"
 			playsound(src.loc, 'sound/effects/refill.ogg', 50, 1, -6)
 			return
@@ -38,7 +38,7 @@
 	if(!proximity) // this replaces and improves the get_dist(src,O) <= 1 checks used previously
 		return
 	if (istype(O, /obj/structure/reagent_dispensers/fueltank) && src.reagents.total_volume < max_fuel)
-		O.reagents.trans_to(src, max_fuel)
+		O.reagents.trans_to_obj(src, max_fuel)
 		user << "\blue You crack the cap off the top of the pack and fill it back up again from the tank."
 		playsound(src.loc, 'sound/effects/refill.ogg', 50, 1, -6)
 		return

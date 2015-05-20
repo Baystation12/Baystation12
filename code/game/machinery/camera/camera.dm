@@ -8,7 +8,7 @@
 	active_power_usage = 10
 	layer = 5
 
-	var/list/network = list("SS13")
+	var/list/network = list("Exodus")
 	var/c_tag = null
 	var/c_tag_order = 999
 	var/status = 1
@@ -53,11 +53,19 @@
 		ASSERT(src.network.len > 0)
 	..()
 
+/obj/machinery/camera/Destroy()
+	deactivate(null, 0) //kick anyone viewing out
+	if(assembly)
+		qdel(assembly)
+		assembly = null
+	qdel(wires)
+	..()
+
 /obj/machinery/camera/emp_act(severity)
 	if(!isEmpProof())
 		if(prob(100/severity))
 			stat |= EMPED
-			SetLuminosity(0)
+			set_light(0)
 			kick_viewers()
 			triggerCameraAlarm(30 / severity)
 			update_icon()
@@ -130,13 +138,15 @@
 	else if(iswelder(W) && (wires.CanDeconstruct() || (stat & BROKEN)))
 		if(weld(W, user))
 			if (stat & BROKEN)
-				new /obj/item/weapon/circuitboard/broken(src.loc)
-				new /obj/item/stack/cable_coil(src.loc, length=2)
+				stat &= ~BROKEN
+				cancelCameraAlarm()
+				update_icon()
+				update_coverage()
 			else if(assembly)
 				assembly.loc = src.loc
 				assembly.state = 1
 				new /obj/item/stack/cable_coil(src.loc, length=2)
-			del(src)
+			qdel(src)
 
 	// OTHER
 	else if (can_use() && (istype(W, /obj/item/weapon/paper) || istype(W, /obj/item/device/pda)) && isliving(user))
@@ -216,6 +226,8 @@
 //Used when someone breaks a camera
 /obj/machinery/camera/proc/destroy()
 	stat |= BROKEN
+	wires.RandomCutAll()
+
 	kick_viewers()
 	triggerCameraAlarm()
 	update_icon()

@@ -83,7 +83,7 @@
 	force = 5.0
 	throwforce = 7.0
 	w_class = 2.0
-	matter = list("metal" = 50)
+	matter = list(DEFAULT_WALL_MATERIAL = 50)
 	attack_verb = list("bludgeoned", "whacked", "disciplined", "thrashed")
 
 /obj/item/weapon/cane/concealed
@@ -91,9 +91,11 @@
 
 /obj/item/weapon/cane/concealed/New()
 	..()
-	concealed_blade = new/obj/item/weapon/butterfly/switchblade(src)
+	var/obj/item/weapon/butterfly/switchblade/temp_blade = new(src)
+	concealed_blade = temp_blade
+	temp_blade.attack_self()
 
-/obj/item/weapon/cane/concealed/attack_self(mob/user)
+/obj/item/weapon/cane/concealed/attack_self(var/mob/user)
 	if(concealed_blade)
 		user.visible_message("<span class='warning'>[user] has unsheathed \a [concealed_blade] from \his [src]!</span>", "You unsheathe \the [concealed_blade] from \the [src].")
 		// Calling drop/put in hands to properly call item drop/pickup procs
@@ -101,8 +103,9 @@
 		user.drop_from_inventory(src)
 		user.put_in_hands(concealed_blade)
 		user.put_in_hands(src)
+		user.update_inv_l_hand(0)
+		user.update_inv_r_hand()
 		concealed_blade = null
-		update_icon()
 	else
 		..()
 
@@ -172,47 +175,91 @@
 	origin_tech = list(TECH_MATERIAL = 1)
 	var/breakouttime = 300	//Deciseconds = 30s = 0.5 minute
 
-/obj/item/weapon/legcuffs/beartrap
+/obj/item/weapon/beartrap
 	name = "bear trap"
 	throw_speed = 2
 	throw_range = 1
+	gender = PLURAL
+	icon = 'icons/obj/items.dmi'
 	icon_state = "beartrap0"
 	desc = "A trap used to catch bears and other legged creatures."
-	var/armed = 0
+	throwforce = 0
+	w_class = 3.0
+	origin_tech = "materials=1"
+	var/deployed = 0
 
 	suicide_act(mob/user)
-		viewers(user) << "\red <b>[user] is putting the [src.name] on \his head! It looks like \he's trying to commit suicide.</b>"
+		viewers(user) << "<span class='danger'>[user] is putting the [src.name] on \his head! It looks like \he's trying to commit suicide.</span>"
 		return (BRUTELOSS)
 
-/obj/item/weapon/legcuffs/beartrap/attack_self(mob/user as mob)
+/obj/item/weapon/beartrap/attack_self(mob/user as mob)
 	..()
 	if(ishuman(user) && !user.stat && !user.restrained())
-		armed = !armed
-		icon_state = "beartrap[armed]"
-		user << "<span class='notice'>[src] is now [armed ? "armed" : "disarmed"]</span>"
+		if(deployed==0)
+			user.visible_message("<span class='danger'>[user] is deploying \the [src]</span>", "<span class='danger'>You are deploying \the [src]!</span>")
+			if (do_after(user, 60))
+				user.visible_message("<span class='danger'>[user] has deployed \the [src]</span>", "<span class='danger'>You have deployed \the [src]!</span>")
+				deployed = 1
+				user.drop_from_inventory(src, user.loc)
+				update_icon()
+				anchored = 1
 
-/obj/item/weapon/legcuffs/beartrap/Crossed(AM as mob|obj)
-	if(armed)
+/obj/item/weapon/beartrap/attack_hand(mob/user as mob)
+	if(ishuman(user) && !user.stat && !user.restrained())
+		if(deployed==1)
+			user.visible_message("<span class='danger'>[user] is disarming \the [src]</span>", "<span class='danger'>You are disarming \the [src]!</span>")
+			if (do_after(user, 60))
+				user.visible_message("<span class='danger'>[user] has disarmed \the [src]</span>", "<span class='danger'>You have disarmed \the [src]!</span>")
+				deployed = 0
+				anchored = 0
+				update_icon()
+
+		if(deployed==0)
+			..()
+
+/obj/item/weapon/beartrap/Crossed(AM as mob|obj)
+	if(deployed)
 		if(ishuman(AM))
 			if(isturf(src.loc))
-				var/mob/living/carbon/H = AM
+				var/mob/living/carbon/human/H = AM
 				if(H.m_intent == "run")
-					armed = 0
-					H.legcuffed = src
-					src.loc = H
-					H.update_inv_legcuffed()
-					H << "\red <B>You step on \the [src]!</B>"
-					feedback_add_details("handcuffs","B") //Yes, I know they're legcuffs. Don't change this, no need for an extra variable. The "B" is used to tell them apart.
+					deployed = 0
+					update_icon()
+					H << "<span class='danger'>You step on \the [src]!</span>"
 					for(var/mob/O in viewers(H, null))
 						if(O == H)
 							continue
-						O.show_message("\red <B>[H] steps on \the [src].</B>", 1)
+						O.show_message("<span class='danger'>[H] steps on \the [src].</span>", 1)
+					if(H.lying)
+						var/obj/item/organ/external/affecting = pick(H.organs)
+						if(affecting.take_damage(30, 0))
+							H.UpdateDamageIcon()
+						affecting.embed(src)
+					else
+						var/list/potentialorgans = list()
+						for(var/organ in list("l_leg", "r_leg", "l_foot", "r_foot"))
+							var/obj/item/organ/external/R = H.get_organ(organ)
+							if(R && !(R.status & ORGAN_DESTROYED))
+								potentialorgans += R
+						var/obj/item/organ/external/affecting = pick(potentialorgans)
+						if(affecting.take_damage(30, 0))
+							H.UpdateDamageIcon()
+						affecting.embed(src)
+
+
 		if(isanimal(AM) && !istype(AM, /mob/living/simple_animal/parrot) && !istype(AM, /mob/living/simple_animal/construct) && !istype(AM, /mob/living/simple_animal/shade) && !istype(AM, /mob/living/simple_animal/hostile/viscerator))
-			armed = 0
+			deployed = 0
 			var/mob/living/simple_animal/SA = AM
 			SA.health -= 20
 	..()
 
+/obj/item/weapon/beartrap/update_icon()
+	..()
+
+	if(deployed == 0)
+		icon_state = "beartrap0"
+	else
+		icon_state = "beartrap1"
 
 
 /obj/item/weapon/caution
@@ -268,7 +315,7 @@
 	w_class = 2.0
 	throw_speed = 4
 	throw_range = 20
-	matter = list("metal" = 100)
+	matter = list(DEFAULT_WALL_MATERIAL = 100)
 	origin_tech = list(TECH_MAGNET = 1)
 
 /obj/item/weapon/staff
@@ -318,7 +365,7 @@
 	var/amount = 1.0
 	var/laying = 0.0
 	var/old_lay = null
-	matter = list("metal" = 40)
+	matter = list(DEFAULT_WALL_MATERIAL = 40)
 	attack_verb = list("whipped", "lashed", "disciplined", "tickled")
 
 	suicide_act(mob/user)
@@ -342,12 +389,12 @@
 	name = "power control module"
 	icon_state = "power_mod"
 	desc = "Heavy-duty switching circuits for power control."
-	matter = list("metal" = 50, "glass" = 50)
+	matter = list(DEFAULT_WALL_MATERIAL = 50, "glass" = 50)
 
 /obj/item/weapon/module/power_control/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
 	if (istype(W, /obj/item/device/multitool))
 		var/obj/item/weapon/circuitboard/ghettosmes/newcircuit = new/obj/item/weapon/circuitboard/ghettosmes(user.loc)
-		del(src)
+		qdel(src)
 		user.put_in_hands(newcircuit)
 
 
@@ -465,35 +512,35 @@
 	desc = "A basic capacitor used in the construction of a variety of devices."
 	icon_state = "capacitor"
 	origin_tech = list(TECH_POWER = 1)
-	matter = list("metal" = 50, "glass" = 50)
+	matter = list(DEFAULT_WALL_MATERIAL = 50,"glass" = 50)
 
 /obj/item/weapon/stock_parts/scanning_module
 	name = "scanning module"
 	desc = "A compact, high resolution scanning module used in the construction of certain devices."
 	icon_state = "scan_module"
 	origin_tech = list(TECH_MAGNET = 1)
-	matter = list("metal" = 50, "glass" = 20)
+	matter = list(DEFAULT_WALL_MATERIAL = 50,"glass" = 20)
 
 /obj/item/weapon/stock_parts/manipulator
 	name = "micro-manipulator"
 	desc = "A tiny little manipulator used in the construction of certain devices."
 	icon_state = "micro_mani"
 	origin_tech = list(TECH_MATERIAL = 1, TECH_DATA = 1)
-	matter = list("metal" = 30)
+	matter = list(DEFAULT_WALL_MATERIAL = 30)
 
 /obj/item/weapon/stock_parts/micro_laser
 	name = "micro-laser"
 	desc = "A tiny laser used in certain devices."
 	icon_state = "micro_laser"
 	origin_tech = list(TECH_MAGNET = 1)
-	matter = list("metal" = 10, "glass" = 20)
+	matter = list(DEFAULT_WALL_MATERIAL = 10,"glass" = 20)
 
 /obj/item/weapon/stock_parts/matter_bin
 	name = "matter bin"
 	desc = "A container for hold compressed matter awaiting re-construction."
 	icon_state = "matter_bin"
 	origin_tech = list(TECH_MATERIAL = 1)
-	matter = list("metal" = 80)
+	matter = list(DEFAULT_WALL_MATERIAL = 80)
 
 //Rank 2
 
@@ -502,7 +549,7 @@
 	desc = "An advanced capacitor used in the construction of a variety of devices."
 	origin_tech = list(TECH_POWER = 3)
 	rating = 2
-	matter = list("metal" = 50,"glass" = 50)
+	matter = list(DEFAULT_WALL_MATERIAL = 50,"glass" = 50)
 
 /obj/item/weapon/stock_parts/scanning_module/adv
 	name = "advanced scanning module"
@@ -510,7 +557,7 @@
 	icon_state = "scan_module"
 	origin_tech = list(TECH_MAGNET = 3)
 	rating = 2
-	matter = list("metal" = 50,"glass" = 20)
+	matter = list(DEFAULT_WALL_MATERIAL = 50,"glass" = 20)
 
 /obj/item/weapon/stock_parts/manipulator/nano
 	name = "nano-manipulator"
@@ -518,7 +565,7 @@
 	icon_state = "nano_mani"
 	origin_tech = list(TECH_MATERIAL = 3, TECH_DATA = 2)
 	rating = 2
-	matter = list("metal" = 30)
+	matter = list(DEFAULT_WALL_MATERIAL = 30)
 
 /obj/item/weapon/stock_parts/micro_laser/high
 	name = "high-power micro-laser"
@@ -526,7 +573,7 @@
 	icon_state = "high_micro_laser"
 	origin_tech = list(TECH_MAGNET = 3)
 	rating = 2
-	matter = list("metal" = 10,"glass" = 20)
+	matter = list(DEFAULT_WALL_MATERIAL = 10,"glass" = 20)
 
 /obj/item/weapon/stock_parts/matter_bin/adv
 	name = "advanced matter bin"
@@ -534,7 +581,7 @@
 	icon_state = "advanced_matter_bin"
 	origin_tech = list(TECH_MATERIAL = 3)
 	rating = 2
-	matter = list("metal" = 80)
+	matter = list(DEFAULT_WALL_MATERIAL = 80)
 
 //Rating 3
 
@@ -543,14 +590,14 @@
 	desc = "A super-high capacity capacitor used in the construction of a variety of devices."
 	origin_tech = list(TECH_POWER = 5, TECH_MATERIAL = 4)
 	rating = 3
-	matter = list("metal" = 50,"glass" = 50)
+	matter = list(DEFAULT_WALL_MATERIAL = 50,"glass" = 50)
 
 /obj/item/weapon/stock_parts/scanning_module/phasic
 	name = "phasic scanning module"
 	desc = "A compact, high resolution phasic scanning module used in the construction of certain devices."
 	origin_tech = list(TECH_MAGNET = 5)
 	rating = 3
-	matter = list("metal" = 50,"glass" = 20)
+	matter = list(DEFAULT_WALL_MATERIAL = 50,"glass" = 20)
 
 /obj/item/weapon/stock_parts/manipulator/pico
 	name = "pico-manipulator"
@@ -558,7 +605,7 @@
 	icon_state = "pico_mani"
 	origin_tech = list(TECH_MATERIAL = 5, TECH_DATA = 2)
 	rating = 3
-	matter = list("metal" = 30)
+	matter = list(DEFAULT_WALL_MATERIAL = 30)
 
 /obj/item/weapon/stock_parts/micro_laser/ultra
 	name = "ultra-high-power micro-laser"
@@ -566,7 +613,7 @@
 	desc = "A tiny laser used in certain devices."
 	origin_tech = list(TECH_MAGNET = 5)
 	rating = 3
-	matter = list("metal" = 10,"glass" = 20)
+	matter = list(DEFAULT_WALL_MATERIAL = 10,"glass" = 20)
 
 /obj/item/weapon/stock_parts/matter_bin/super
 	name = "super matter bin"
@@ -574,7 +621,7 @@
 	icon_state = "super_matter_bin"
 	origin_tech = list(TECH_MATERIAL = 5)
 	rating = 3
-	matter = list("metal" = 80)
+	matter = list(DEFAULT_WALL_MATERIAL = 80)
 
 // Subspace stock parts
 
@@ -583,35 +630,35 @@
 	icon_state = "subspace_ansible"
 	desc = "A compact module capable of sensing extradimensional activity."
 	origin_tech = list(TECH_DATA = 3, TECH_MAGNET = 5 ,TECH_MATERIAL = 4, TECH_BLUESPACE = 2)
-	matter = list("metal" = 30,"glass" = 10)
+	matter = list(DEFAULT_WALL_MATERIAL = 30,"glass" = 10)
 
 /obj/item/weapon/stock_parts/subspace/filter
 	name = "hyperwave filter"
 	icon_state = "hyperwave_filter"
 	desc = "A tiny device capable of filtering and converting super-intense radiowaves."
 	origin_tech = list(TECH_DATA = 4, TECH_MAGNET = 2)
-	matter = list("metal" = 30,"glass" = 10)
+	matter = list(DEFAULT_WALL_MATERIAL = 30,"glass" = 10)
 
 /obj/item/weapon/stock_parts/subspace/amplifier
 	name = "subspace amplifier"
 	icon_state = "subspace_amplifier"
 	desc = "A compact micro-machine capable of amplifying weak subspace transmissions."
 	origin_tech = list(TECH_DATA = 3, TECH_MAGNET = 4, TECH_MATERIAL = 4, TECH_BLUESPACE = 2)
-	matter = list("metal" = 30,"glass" = 10)
+	matter = list(DEFAULT_WALL_MATERIAL = 30,"glass" = 10)
 
 /obj/item/weapon/stock_parts/subspace/treatment
 	name = "subspace treatment disk"
 	icon_state = "treatment_disk"
 	desc = "A compact micro-machine capable of stretching out hyper-compressed radio waves."
 	origin_tech = list(TECH_DATA = 3, TECH_MAGNET = 2, TECH_MATERIAL = 5, TECH_BLUESPACE = 2)
-	matter = list("metal" = 30,"glass" = 10)
+	matter = list(DEFAULT_WALL_MATERIAL = 30,"glass" = 10)
 
 /obj/item/weapon/stock_parts/subspace/analyzer
 	name = "subspace wavelength analyzer"
 	icon_state = "wavelength_analyzer"
 	desc = "A sophisticated analyzer capable of analyzing cryptic subspace wavelengths."
 	origin_tech = list(TECH_DATA = 3, TECH_MAGNETS = 4, TECH_MATERIAL = 4, TECH_BLUESPACE = 2)
-	matter = list("metal" = 30,"glass" = 10)
+	matter = list(DEFAULT_WALL_MATERIAL = 30,"glass" = 10)
 
 /obj/item/weapon/stock_parts/subspace/crystal
 	name = "ansible crystal"
@@ -625,7 +672,7 @@
 	icon_state = "subspace_transmitter"
 	desc = "A large piece of equipment used to open a window into the subspace dimension."
 	origin_tech = list(TECH_MAGNET = 5, TECH_MATERIAL = 5, TECH_BLUESPACE = 3)
-	matter = list("metal" = 50)
+	matter = list(DEFAULT_WALL_MATERIAL = 50)
 
 /obj/item/weapon/ectoplasm
 	name = "ectoplasm"

@@ -59,7 +59,6 @@
 	/obj/item/weapon/light/tube,\
 	/obj/item/weapon/pickaxe,\
 	/obj/item/weapon/shovel,\
-	/obj/item/weapon/table_parts,\
 	/obj/item/weapon/weldingtool,\
 	/obj/item/weapon/wirecutters,\
 	/obj/item/weapon/wrench,\
@@ -102,7 +101,7 @@
 						spawned_obj.desc += " It is made of [source_material]."
 					else
 						spawned_obj.desc = "It is made of [source_material]."
-				del(source_material)
+				qdel(source_material)
 
 			spawn_progress_time = 0
 			max_spawn_time = rand(30,100)

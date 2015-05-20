@@ -5,12 +5,12 @@
 	//This is a terrible hack and I should be ashamed.
 	var/datum/seed/diona = plant_controller.seeds["diona"]
 	if(!diona)
-		del(src)
+		qdel(src)
 
 	spawn(1) // So it has time to be thrown about by the gib() proc.
 		var/mob/living/carbon/alien/diona/D = new(get_turf(organ))
 		diona.request_player(D)
-		del(organ)
+		qdel(organ)
 
 /obj/item/organ/external/diona
 	name = "tendril"
@@ -130,7 +130,7 @@
 /obj/item/organ/external/diona/removed()
 	..()
 	if(!istype(owner))
-		del(src)
+		qdel(src)
 
 	if(!owner.organs.len)
 		owner.death()
@@ -175,7 +175,7 @@
 
 	..()
 	if(!istype(owner))
-		del(src)
+		qdel(src)
 
 	if(!owner.internal_organs.len)
 		owner.death()
@@ -247,7 +247,7 @@
 		B.ckey = owner.ckey
 
 	spawn(0)
-		del(src)
+		qdel(src)
 
 //XENOMORPH ORGANS
 /obj/item/organ/xenos/eggsac
@@ -342,3 +342,48 @@
 
 /obj/item/organ/stack/vox
 	name = "vox cortical stack"
+
+// Slime limbs.
+/obj/item/organ/external/chest/slime
+	cannot_break = 1
+	dislocated = -1
+
+/obj/item/organ/external/groin/slime
+	cannot_break = 1
+	dislocated = -1
+
+/obj/item/organ/external/arm/slime
+	cannot_break = 1
+	dislocated = -1
+
+/obj/item/organ/external/arm/right/slime
+	cannot_break = 1
+	dislocated = -1
+
+/obj/item/organ/external/leg/slime
+	cannot_break = 1
+	dislocated = -1
+
+/obj/item/organ/external/leg/right/slime
+	cannot_break = 1
+	dislocated = -1
+
+/obj/item/organ/external/foot/slime
+	cannot_break = 1
+	dislocated = -1
+
+/obj/item/organ/external/foot/right/slime
+	cannot_break = 1
+	dislocated = -1
+
+/obj/item/organ/external/hand/slime
+	cannot_break = 1
+	dislocated = -1
+
+/obj/item/organ/external/hand/right/slime
+	cannot_break = 1
+	dislocated = -1
+
+/obj/item/organ/external/head/slime
+	cannot_break = 1
+	dislocated = -1

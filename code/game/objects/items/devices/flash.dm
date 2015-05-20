@@ -103,7 +103,7 @@
 			animation.master = user
 			flick("blspell", animation)
 			sleep(5)
-			del(animation)
+			qdel(animation)
 
 	if(!flashfail)
 		flick("flash2", src)
@@ -154,7 +154,7 @@
 			animation.master = user
 			flick("blspell", animation)
 			sleep(5)
-			del(animation)
+			qdel(animation)
 
 	for(var/mob/living/carbon/M in oviewers(3, null))
 		if(prob(50))
@@ -194,7 +194,7 @@
 	desc = "When a problem arises, SCIENCE is the solution."
 	icon_state = "sflash"
 	origin_tech = list(TECH_MAGNET = 2, TECH_COMBAT = 1)
-	var/construction_cost = list("metal"=750,"glass"=750)
+	var/construction_cost = list(DEFAULT_WALL_MATERIAL=750,"glass"=750)
 	var/construction_time=100
 
 /obj/item/device/flash/synthetic/attack(mob/living/M as mob, mob/user as mob)

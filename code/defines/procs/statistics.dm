@@ -1,34 +1,20 @@
-proc/sql_poll_players()
+proc/sql_poll_population()
 	if(!sqllogging)
 		return
+	var/admincount = admins.len
 	var/playercount = 0
 	for(var/mob/M in player_list)
 		if(M.client)
 			playercount += 1
 	establish_db_connection()
 	if(!dbcon.IsConnected())
-		log_game("SQL ERROR during player polling. Failed to connect.")
+		log_game("SQL ERROR during population polling. Failed to connect.")
 	else
 		var/sqltime = time2text(world.realtime, "YYYY-MM-DD hh:mm:ss")
-		var/DBQuery/query = dbcon_old.NewQuery("INSERT INTO population (playercount, time) VALUES ([playercount], '[sqltime]')")
+		var/DBQuery/query = dbcon_old.NewQuery("INSERT INTO `tgstation`.`population` (`playercount`, `admincount`, `time`) VALUES ([playercount], [admincount], '[sqltime]')")
 		if(!query.Execute())
 			var/err = query.ErrorMsg()
-			log_game("SQL ERROR during player polling. Error : \[[err]\]\n")
-
-
-proc/sql_poll_admins()
-	if(!sqllogging)
-		return
-	var/admincount = admins.len
-	establish_db_connection()
-	if(!dbcon.IsConnected())
-		log_game("SQL ERROR during admin polling. Failed to connect.")
-	else
-		var/sqltime = time2text(world.realtime, "YYYY-MM-DD hh:mm:ss")
-		var/DBQuery/query = dbcon_old.NewQuery("INSERT INTO population (admincount, time) VALUES ([admincount], '[sqltime]')")
-		if(!query.Execute())
-			var/err = query.ErrorMsg()
-			log_game("SQL ERROR during admin polling. Error : \[[err]\]\n")
+			log_game("SQL ERROR during population polling. Error : \[[err]\]\n")
 
 proc/sql_report_round_start()
 	// TODO
@@ -111,10 +97,8 @@ proc/statistic_cycle()
 	if(!sqllogging)
 		return
 	while(1)
-		sql_poll_players()
-		sleep(600)
-		sql_poll_admins()
-		sleep(6000) // Poll every ten minutes
+		sql_poll_population()
+		sleep(6000)
 
 //This proc is used for feedback. It is executed at round end.
 proc/sql_commit_feedback()

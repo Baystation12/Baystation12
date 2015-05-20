@@ -20,6 +20,11 @@
 
 	return 1
 
+/obj/machinery/portable_atmospherics/Destroy()
+	qdel(air_contents)
+	qdel(holding)
+	..()
+
 /obj/machinery/portable_atmospherics/initialize()
 	. = ..()
 	spawn()
@@ -35,8 +40,8 @@
 	else
 		update_icon()
 
-/obj/machinery/portable_atmospherics/Del()
-	del(air_contents)
+/obj/machinery/portable_atmospherics/Destroy()
+	qdel(air_contents)
 
 	..()
 
@@ -63,6 +68,7 @@
 	//Perform the connection
 	connected_port = new_port
 	connected_port.connected_device = src
+	connected_port.on = 1 //Activate port updates
 
 	anchored = 1 //Prevent movement
 

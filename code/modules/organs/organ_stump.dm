@@ -21,4 +21,4 @@
 
 /obj/item/organ/external/stump/removed()
 	..()
-	del(src)
+	qdel(src)

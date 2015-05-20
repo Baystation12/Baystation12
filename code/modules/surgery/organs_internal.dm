@@ -228,7 +228,7 @@
 		var/list/attached_organs = list()
 		for(var/organ in target.internal_organs_by_name)
 			var/obj/item/organ/I = target.internal_organs_by_name[organ]
-			if(!I.status && I.parent_organ == target_zone)
+			if(I && !I.status && I.parent_organ == target_zone)
 				attached_organs |= organ
 
 		var/organ_to_remove = input(user, "Which organ do you want to prepare for removal?") as null|anything in attached_organs
@@ -343,9 +343,11 @@
 		var/o_a =  (O.gender == PLURAL) ? "" : "a "
 		var/o_do = (O.gender == PLURAL) ? "don't" : "doesn't"
 
-		if(target.species.has_organ[O.organ_tag])
+		if(O.organ_tag == "limb")
+			return 0
+		else if(target.species.has_organ[O.organ_tag])
 
-			if(!O.health)
+			if(O.damage > (O.max_damage * 0.75))
 				user << "\red \The [O.organ_tag] [o_is] in no state to be transplanted."
 				return 2
 
@@ -355,7 +357,7 @@
 				user << "\red \The [target] already has [o_a][O.organ_tag]."
 				return 2
 
-			if(O && affected.name == O.parent_organ)
+			if(O && affected.limb_name == O.parent_organ)
 				organ_compatible = 1
 			else
 				user << "\red \The [O.organ_tag] [o_do] normally go in \the [affected.name]."
@@ -377,9 +379,9 @@
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 		user.visible_message("\blue [user] has transplanted \the [tool] into [target]'s [affected.name].", \
 		"\blue You have transplanted \the [tool] into [target]'s [affected.name].")
-		user.drop_item(tool)
 		var/obj/item/organ/O = tool
 		if(istype(O))
+			user.remove_from_mob(O)
 			O.replaced(target,affected)
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -408,7 +410,7 @@
 		var/list/removable_organs = list()
 		for(var/organ in target.internal_organs_by_name)
 			var/obj/item/organ/I = target.internal_organs_by_name[organ]
-			if(I.status & ORGAN_CUT_AWAY && I.parent_organ == target_zone)
+			if(I && I.status & ORGAN_CUT_AWAY && I.parent_organ == target_zone)
 				removable_organs |= organ
 
 		var/organ_to_replace = input(user, "Which organ do you want to reattach?") as null|anything in removable_organs

@@ -2,7 +2,7 @@
 	name = "temperature gun"
 	icon_state = "freezegun"
 	fire_sound = 'sound/weapons/pulse3.ogg'
-	desc = "A gun that changes temperatures."
+	desc = "A gun that changes temperatures. It has a small label on the side, 'More extreme temperatures will cost more charge!'"
 	var/temperature = T20C
 	var/current_temperature = T20C
 	charge_cost = 100
@@ -10,7 +10,7 @@
 	slot_flags = SLOT_BELT|SLOT_BACK
 
 	projectile_type = /obj/item/projectile/temp
-	cell_type = /obj/item/weapon/cell/crap
+	cell_type = /obj/item/weapon/cell/high
 
 
 /obj/item/weapon/gun/energy/temperature/New()
@@ -18,7 +18,7 @@
 	processing_objects.Add(src)
 
 
-/obj/item/weapon/gun/energy/temperature/Del()
+/obj/item/weapon/gun/energy/temperature/Destroy()
 	processing_objects.Remove(src)
 	..()
 

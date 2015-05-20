@@ -258,7 +258,7 @@
 					src.ping("DANGER! Magnetic containment field failure in 3 ... 2 ... 1 ...")
 					explosion(src.loc,1,2,4,8)
 					// Not sure if this is necessary, but just in case the SMES *somehow* survived..
-					del(src)
+					qdel(src)
 
 
 
@@ -343,7 +343,7 @@
 				M.icon_state = "box_1"
 				for(var/obj/I in component_parts)
 					I.loc = src.loc
-				del(src)
+				qdel(src)
 				return
 
 		// Superconducting Magnetic Coil - Upgrade the SMES

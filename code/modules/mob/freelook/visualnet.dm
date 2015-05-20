@@ -2,8 +2,6 @@
 //
 // The datum containing all the chunks.
 
-var/global/list/visual_nets = new()
-
 /datum/visualnet
 	// The chunks of the map, mapping the areas that an object can see.
 	var/list/chunks = list()
@@ -14,7 +12,7 @@ var/global/list/visual_nets = new()
 	..()
 	visual_nets += src
 
-/datum/visualnet/Del()
+/datum/visualnet/Destroy()
 	visual_nets -= src
 	..()
 

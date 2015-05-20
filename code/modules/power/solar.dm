@@ -30,7 +30,7 @@ var/list/solars_list = list()
 	Make(S)
 	connect_to_network()
 
-/obj/machinery/power/solar/Del()
+/obj/machinery/power/solar/Destroy()
 	unset_control() //remove from control computer
 	..()
 
@@ -71,7 +71,7 @@ var/list/solars_list = list()
 				S.give_glass()
 			playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 			user.visible_message("<span class='notice'>[user] takes the glass off the solar panel.</span>")
-			del(src) // qdel
+			qdel(src)
 		return
 	else if (W)
 		src.add_fingerprint(user)
@@ -93,7 +93,7 @@ var/list/solars_list = list()
 		else
 			new /obj/item/weapon/shard(src.loc)
 			new /obj/item/weapon/shard(src.loc)
-			del(src) // qdel
+			qdel(src)
 			return
 	return
 
@@ -154,13 +154,13 @@ var/list/solars_list = list()
 		if(1.0)
 			if(prob(15))
 				new /obj/item/weapon/shard( src.loc )
-			del(src) // qdel
+			qdel(src)
 			return
 
 		if(2.0)
 			if (prob(25))
 				new /obj/item/weapon/shard( src.loc )
-				del(src) // qdel
+				qdel(src)
 				return
 
 			if (prob(50))
@@ -270,7 +270,7 @@ var/list/solars_list = list()
 		if(istype(W, /obj/item/weapon/tracker_electronics))
 			tracker = 1
 			user.drop_item()
-			del(W) // qdel
+			qdel(W)
 			user.visible_message("<span class='notice'>[user] inserts the electronics into the solar assembly.</span>")
 			return 1
 	else
@@ -308,13 +308,7 @@ var/list/solars_list = list()
 /obj/machinery/power/solar_control/drain_power()
 	return -1
 
-/obj/machinery/power/solar_control/New()
-	..()
-	if(ticker)
-		initialize()
-	connect_to_network()
-
-/obj/machinery/power/solar_control/Del()
+/obj/machinery/power/solar_control/Destroy()
 	for(var/obj/machinery/power/solar/M in connected_panels)
 		M.unset_control()
 	if(connected_tracker)
@@ -368,6 +362,7 @@ var/list/solars_list = list()
 	..()
 	if(!powernet) return
 	set_panels(cdir)
+	connect_to_network()
 
 /obj/machinery/power/solar_control/update_icon()
 	if(stat & BROKEN)
@@ -433,7 +428,7 @@ var/list/solars_list = list()
 				A.state = 3
 				A.icon_state = "3"
 				A.anchored = 1
-				del(src) // qdel
+				qdel(src)
 			else
 				user << "\blue You disconnect the monitor."
 				var/obj/structure/computerframe/A = new /obj/structure/computerframe( src.loc )
@@ -444,7 +439,7 @@ var/list/solars_list = list()
 				A.state = 4
 				A.icon_state = "4"
 				A.anchored = 1
-				del(src) // qdel
+				qdel(src)
 	else
 		src.attack_hand(user)
 	return
@@ -534,7 +529,7 @@ var/list/solars_list = list()
 	switch(severity)
 		if(1.0)
 			//SN src = null
-			del(src) // qdel
+			qdel(src)
 			return
 		if(2.0)
 			if (prob(50))

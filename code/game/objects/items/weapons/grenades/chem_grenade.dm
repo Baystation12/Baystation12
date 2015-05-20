@@ -157,7 +157,7 @@
 
 			for(var/atom/A in view(affected_area, src.loc))
 				if( A == src ) continue
-				src.reagents.reaction(A, 1, 10)
+				src.reagents.touch(A)
 
 		if(istype(loc, /mob/living/carbon))		//drop dat grenade if it goes off in your hand
 			var/mob/living/carbon/C = loc
@@ -166,7 +166,7 @@
 
 		invisibility = INVISIBILITY_MAXIMUM //Why am i doing this?
 		spawn(50)		   //To make sure all reagents can work
-			del(src)	   //correctly before deleting the grenade.
+			qdel(src)	   //correctly before deleting the grenade.
 
 
 /obj/item/weapon/grenade/chem_grenade/large

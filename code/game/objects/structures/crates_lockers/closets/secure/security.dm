@@ -166,7 +166,7 @@
 
 /obj/structure/closet/secure_closet/security
 	name = "security officer's locker"
-	req_access = list(access_security)
+	req_access = list(access_brig)
 	icon_state = "sec1"
 	icon_closed = "sec"
 	icon_locked = "sec1"
@@ -286,8 +286,8 @@
 
 	New()
 		..()
-		new /obj/item/weapon/reagent_containers/ld50_syringe/choral(src)
-		new /obj/item/weapon/reagent_containers/ld50_syringe/choral(src)
+		new /obj/item/weapon/reagent_containers/syringe/ld50_syringe/choral(src)
+		new /obj/item/weapon/reagent_containers/syringe/ld50_syringe/choral(src)
 		return
 
 

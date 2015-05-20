@@ -7,7 +7,6 @@
 	build_path = "/obj/machinery/mining/drill"
 	board_type = "machine"
 	origin_tech = list(TECH_DATA = 1, TECH_ENGINERING = 1)
-	frame_desc = "Requires 1 capacitor, 1 cell, 1 matter bin, and 1 micro laser."
 	req_components = list(
 							"/obj/item/weapon/stock_parts/capacitor" = 1,
 							"/obj/item/weapon/cell" = 1,

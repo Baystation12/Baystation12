@@ -11,7 +11,7 @@
 	..()
 	if (!prob(spawn_nothing_percentage))
 		spawn_item()
-	del src
+	qdel(src)
 
 
 // this function should return a specific item to spawn
@@ -158,7 +158,7 @@
 	spawn_nothing_percentage = 50
 	item_to_spawn()
 		return pick(prob(3);/obj/item/weapon/storage/pill_bottle/tramadol,\
-					prob(4);/obj/item/weapon/haircomb/fluff/cado_keppel_1,\
+					prob(4);/obj/item/weapon/haircomb,\
 					prob(2);/obj/item/weapon/storage/pill_bottle/happy,\
 					prob(2);/obj/item/weapon/storage/pill_bottle/zoom,\
 					prob(5);/obj/item/weapon/contraband/poster,\

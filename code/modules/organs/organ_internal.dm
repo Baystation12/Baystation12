@@ -11,6 +11,7 @@
 	icon_state = "heart-on"
 	organ_tag = "heart"
 	parent_organ = "chest"
+	dead_icon = "heart-off"
 
 /obj/item/organ/lungs
 	name = "lungs"
@@ -44,7 +45,7 @@
 	organ_tag = "kidneys"
 	parent_organ = "groin"
 
-/obj/item/organ/kidney/process()
+/obj/item/organ/kidneys/process()
 
 	..()
 
@@ -61,7 +62,6 @@
 		else if(is_broken())
 			owner.adjustToxLoss(0.3 * PROCESS_ACCURACY)
 
-
 /obj/item/organ/eyes
 	name = "eyeballs"
 	icon_state = "eyes"
@@ -69,6 +69,15 @@
 	organ_tag = "eyes"
 	parent_organ = "head"
 	var/list/eye_colour = list(0,0,0)
+
+/obj/item/organ/eyes/proc/update_colour()
+	if(!owner)
+		return
+	eye_colour = list(
+		owner.r_eyes ? owner.r_eyes : 0,
+		owner.g_eyes ? owner.g_eyes : 0,
+		owner.b_eyes ? owner.b_eyes : 0
+		)
 
 /obj/item/organ/eyes/process() //Eye damage replaces the old eye_stat var.
 	..()
@@ -79,41 +88,11 @@
 	if(is_broken())
 		owner.eye_blind = 20
 
-/obj/item/organ/eyes/New()
-	..()
-	if(owner)
-		eye_colour = list(
-			owner.r_eyes ? owner.r_eyes : 0,
-			owner.g_eyes ? owner.g_eyes : 0,
-			owner.b_eyes ? owner.b_eyes : 0
-			)
-
-/obj/item/organ/eyes/removed(var/mob/living/target,var/mob/living/user)
-
-	if(!eye_colour)
-		eye_colour = list(0,0,0)
-
-	..() //Make sure target is set so we can steal their eye colour for later.
-	var/mob/living/carbon/human/H = target
-	if(istype(H))
-		eye_colour = list(
-			H.r_eyes ? H.r_eyes : 0,
-			H.g_eyes ? H.g_eyes : 0,
-			H.b_eyes ? H.b_eyes : 0
-			)
-
-		// Leave bloody red pits behind!
-		H.r_eyes = 128
-		H.g_eyes = 0
-		H.b_eyes = 0
-		H.update_body()
-
-
 /obj/item/organ/liver
 	name = "liver"
 	icon_state = "liver"
 	organ_tag = "liver"
-	parent_organ = "chest"
+	parent_organ = "groin"
 
 /obj/item/organ/liver/process()
 
@@ -156,36 +135,27 @@
 		if(is_broken())
 			filter_effect -= 2
 
-		// Do some reagent filtering/processing.
-		for(var/datum/reagent/R in owner.reagents.reagent_list)
-			// Damaged liver means some chemicals are very dangerous
-			// The liver is also responsible for clearing out alcohol and toxins.
-			// Ethanol and all drinks are bad.K
-			if(istype(R, /datum/reagent/ethanol))
-				if(filter_effect < 3)
-					owner.adjustToxLoss(0.1 * PROCESS_ACCURACY)
-				owner.reagents.remove_reagent(R.id, R.custom_metabolism*filter_effect)
-			// Can't cope with toxins at all
-			else if(istype(R, /datum/reagent/toxin))
-				if(filter_effect < 3)
-					owner.adjustToxLoss(0.3 * PROCESS_ACCURACY)
-				owner.reagents.remove_reagent(R.id, ALCOHOL_METABOLISM*filter_effect)
+		// Do some reagent processing.
+		if(owner.chem_effects[CE_ALCOHOL_TOXIC])
+			if(filter_effect < 3)
+				owner.adjustToxLoss(owner.chem_effects[CE_ALCOHOL_TOXIC] * 0.1 * PROCESS_ACCURACY)
+			else
+				take_damage(owner.chem_effects[CE_ALCOHOL_TOXIC] * 0.1 * PROCESS_ACCURACY, prob(1)) // Chance to warn them
 
 /obj/item/organ/appendix
 	name = "appendix"
 	icon_state = "appendix"
 	parent_organ = "groin"
+	organ_tag = "appendix"
 
 /obj/item/organ/appendix/removed()
-
+	if(owner)
+		var/inflamed = 0
+		for(var/datum/disease/appendicitis/appendicitis in owner.viruses)
+			inflamed = 1
+			appendicitis.cure()
+			owner.resistances += appendicitis
+		if(inflamed)
+			icon_state = "appendixinflamed"
+			name = "inflamed appendix"
 	..()
-
-	var/inflamed = 0
-	for(var/datum/disease/appendicitis/appendicitis in owner.viruses)
-		inflamed = 1
-		appendicitis.cure()
-		owner.resistances += appendicitis
-
-	if(inflamed)
-		icon_state = "appendixinflamed"
-		name = "inflamed appendix"

@@ -81,7 +81,7 @@
 		/obj/item/device/taperecorder,
 		/obj/item/device/hailer,
 		/obj/item/device/megaphone,
-		/obj/item/clothing/accessory/holobadge,
+		/obj/item/clothing/accessory/badge/holo,
 		/obj/structure/closet/crate/secure,
 		/obj/structure/closet/secure_closet,
 		/obj/machinery/librarycomp,
@@ -92,12 +92,12 @@
 		/obj/machinery/shield_gen,
 		/obj/machinery/clonepod,
 		/obj/machinery/deployable,
-		/obj/machinery/door_control,
+		/obj/machinery/button/remote,
 		/obj/machinery/porta_turret,
 		/obj/machinery/shieldgen,
 		/obj/machinery/turretid,
 		/obj/machinery/vending,
-		/obj/machinery/bot,
+		/mob/living/bot,
 		/obj/machinery/door,
 		/obj/machinery/telecomms,
 		/obj/machinery/mecha_part_fabricator,
@@ -118,7 +118,7 @@
 		user.drop_item()
 		var/obj/item/weapon/card/emag_broken/junk = new(user.loc)
 		junk.add_fingerprint(user)
-		del(src)
+		qdel(src)
 		return
 
 	..()
@@ -161,17 +161,6 @@
 
 /obj/item/weapon/card/id/GetID()
 	return src
-
-/obj/item/weapon/card/id/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	..()
-	if(istype(W,/obj/item/weapon/id_wallet))
-		user << "You slip [src] into [W]."
-		src.name = "[src.registered_name]'s [W.name] ([src.assignment])"
-		src.desc = W.desc
-		src.icon = W.icon
-		src.icon_state = W.icon_state
-		del(W)
-		return
 
 /obj/item/weapon/card/id/verb/read()
 	set name = "Read ID Card"
@@ -224,13 +213,13 @@
 /obj/item/weapon/card/id/syndicate/attack_self(mob/user as mob)
 	if(!src.registered_name)
 		//Stop giving the players unsanitized unputs! You are giving ways for players to intentionally crash clients! -Nodrak
-		var t = sanitizeName(input(user, "What name would you like to put on this card?", "Agent card name", ishuman(user) ? user.real_name : user.name))
+		var t = sanitizeName(input(user, "What name would you like to put on this card?", "Agent card name", ishuman(user) ? user.real_name : user.name), MAX_NAME_LEN)
 		if(!t) //Same as mob/new_player/prefrences.dm
 			alert("Invalid name.")
 			return
 		src.registered_name = t
 
-		var u = sanitize(input(user, "What occupation would you like to put on this card?\nNote: This will not grant any access levels other than Maintenance.", "Agent card job assignment", "Agent"))
+		var u = sanitize(input(user, "What occupation would you like to put on this card?\nNote: This will not grant any access levels other than Maintenance.", "Agent card job assignment", "Agent"), MAX_LNAME_LEN)
 		if(!u)
 			alert("Invalid assignment.")
 			src.registered_name = ""
@@ -293,3 +282,11 @@
 	New()
 		access = get_all_centcom_access()
 		..()
+
+/obj/item/weapon/card/id/centcom/ERT
+	name = "\improper Emergency Response Team ID"
+	assignment = "Emergency Response Team"
+
+/obj/item/weapon/card/id/centcom/ERT/New()
+	..()
+	access += get_all_accesses()

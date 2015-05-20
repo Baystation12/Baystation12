@@ -47,3 +47,13 @@
 		if(prob(12))
 			L.Weaken(3)
 			L.visible_message("<span class='danger'>\the [src] knocks down \the [L]!</span>")
+
+/mob/living/simple_animal/hostile/faithless/cult
+	faction = "cult"
+
+/mob/living/simple_animal/hostile/faithless/cult/cultify()
+	return
+
+/mob/living/simple_animal/hostile/faithless/cult/Life()
+	..()
+	check_horde()

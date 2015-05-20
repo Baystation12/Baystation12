@@ -13,9 +13,6 @@
 
 /area/turret_protected/Entered(O)
 	..()
-	if( master && master != src )
-		return master.Entered(O)
-
 	if( iscarbon(O) )
 		turretTargets |= O
 	else if( istype(O, /obj/mecha) )
@@ -27,9 +24,6 @@
 	return 1
 
 /area/turret_protected/Exited(O)
-	if( master && master != src )
-		return master.Exited(O)
-
 	if( ismob(O) && !issilicon(O) )
 		turretTargets -= O
 	else if( istype(O, /obj/mecha) )
@@ -74,7 +68,7 @@
 /obj/machinery/turret/proc/take_damage(damage)
 	src.health -= damage
 	if(src.health<=0)
-		del src
+		qdel(src)
 	return
 
 /obj/machinery/turret/attack_hand(var/mob/living/carbon/human/user)
@@ -105,7 +99,7 @@
 
 /obj/machinery/turret/proc/update_health()
 	if(src.health<=0)
-		del src
+		qdel(src)
 	return
 
 /obj/machinery/turretcover
@@ -148,8 +142,6 @@
 /obj/machinery/turret/proc/get_protected_area()
 	var/area/turret_protected/TP = get_area(src)
 	if(istype(TP))
-		if(TP.master && TP.master != TP)
-			TP = TP.master
 		return TP
 	return
 
@@ -305,7 +297,7 @@
 	src.health -= Proj.damage
 	..()
 	if(prob(45) && Proj.damage > 0) src.spark_system.start()
-	del (Proj)
+	qdel (Proj)
 	if (src.health <= 0)
 		src.die()
 	return
@@ -337,11 +329,11 @@
 	src.stat |= BROKEN
 	src.icon_state = "destroyed_target_prism"
 	if (cover!=null)
-		del(cover)
+		qdel(cover)
 	sleep(3)
 	flick("explosion", src)
 	spawn(13)
-		del(src)
+		qdel(src)
 
 /obj/machinery/turret/attack_generic(var/mob/user, var/damage, var/attack_message)
 	if(!damage)
@@ -376,7 +368,7 @@
 	proc/take_damage(damage)
 		src.health -= damage
 		if(src.health<=0)
-			del src
+			qdel(src)
 		return
 
 
@@ -389,15 +381,15 @@
 
 
 	ex_act()
-		del src
+		qdel(src)
 		return
 
 	emp_act()
-		del src
+		qdel(src)
 		return
 
 	meteorhit()
-		del src
+		qdel(src)
 		return
 
 	attack_hand(mob/user as mob)

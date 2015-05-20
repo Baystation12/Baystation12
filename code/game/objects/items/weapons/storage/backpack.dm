@@ -6,8 +6,17 @@
 /obj/item/weapon/storage/backpack
 	name = "backpack"
 	desc = "You wear this on your back and put items into it."
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/items/lefthand_backpacks.dmi',
+		slot_r_hand_str = 'icons/mob/items/righthand_backpacks.dmi',
+		)
 	icon_state = "backpack"
-	item_state = "backpack"
+	item_state = null
+	//most backpacks use the default backpack state for inhand overlays
+	item_state_slots = list(
+		slot_l_hand_str = "backpack",
+		slot_r_hand_str = "backpack",
+		)
 	w_class = 4
 	slot_flags = SLOT_BACK
 	max_w_class = 3
@@ -49,7 +58,7 @@
 	attackby(obj/item/weapon/W as obj, mob/user as mob)
 		if(istype(W, /obj/item/weapon/storage/backpack/holding))
 			user << "\red The Bluespace interfaces of the two devices conflict and malfunction."
-			del(W)
+			qdel(W)
 			return
 		..()
 	
@@ -68,6 +77,7 @@
 	storage_slots = 20
 	max_w_class = 3
 	max_storage_space = 400 // can store a ton of shit!
+	item_state_slots = null
 
 /obj/item/weapon/storage/backpack/cultpack
 	name = "trophy rack"
@@ -78,61 +88,56 @@
 	name = "Giggles von Honkerton"
 	desc = "It's a backpack made by Honk! Co."
 	icon_state = "clownpack"
-	item_state = "clownpack"
+	item_state_slots = null
 
 /obj/item/weapon/storage/backpack/medic
 	name = "medical backpack"
 	desc = "It's a backpack especially designed for use in a sterile environment."
 	icon_state = "medicalpack"
-	item_state = "medicalpack"
+	item_state_slots = null
 
 /obj/item/weapon/storage/backpack/security
 	name = "security backpack"
 	desc = "It's a very robust backpack."
 	icon_state = "securitypack"
-	item_state = "securitypack"
+	item_state_slots = null
 
 /obj/item/weapon/storage/backpack/captain
 	name = "captain's backpack"
 	desc = "It's a special backpack made exclusively for Nanotrasen officers."
 	icon_state = "captainpack"
-	item_state = "captainpack"
+	item_state_slots = null
 
 /obj/item/weapon/storage/backpack/industrial
 	name = "industrial backpack"
 	desc = "It's a tough backpack for the daily grind of station life."
 	icon_state = "engiepack"
-	item_state = "engiepack"
+	item_state_slots = null
 
 /obj/item/weapon/storage/backpack/toxins
 	name = "laboratory backpack"
 	desc = "It's a light backpack modeled for use in laboratories and other scientific institutions."
 	icon_state = "toxpack"
-	item_state = "toxpack"
 
 /obj/item/weapon/storage/backpack/hydroponics
 	name = "herbalist's backpack"
 	desc = "It's a green backpack with many pockets to store plants and tools in."
 	icon_state = "hydpack"
-	item_state = "hydpack"
 
 /obj/item/weapon/storage/backpack/genetics
 	name = "geneticist backpack"
 	desc = "It's a backpack fitted with slots for diskettes and other workplace tools."
 	icon_state = "genpack"
-	item_state = "genpack"
 
 /obj/item/weapon/storage/backpack/virology
 	name = "sterile backpack"
 	desc = "It's a sterile backpack able to withstand different pathogens from entering its fabric."
 	icon_state = "viropack"
-	item_state = "viropack"
 
 /obj/item/weapon/storage/backpack/chemistry
 	name = "chemistry backpack"
 	desc = "It's an orange backpack which was designed to hold beakers, pill bottles and bottles."
 	icon_state = "chempack"
-	item_state = "chempack"
 
 /*
  * Satchel Types
@@ -157,13 +162,19 @@
 	name = "industrial satchel"
 	desc = "A tough satchel with extra pockets."
 	icon_state = "satchel-eng"
-	item_state = "engiepack"
+	item_state_slots = list(
+		slot_l_hand_str = "engiepack",
+		slot_r_hand_str = "engiepack",
+		)
 
 /obj/item/weapon/storage/backpack/satchel_med
 	name = "medical satchel"
 	desc = "A sterile satchel used in medical departments."
 	icon_state = "satchel-med"
-	item_state = "medicalpack"
+	item_state_slots = list(
+		slot_l_hand_str = "medicalpack",
+		slot_r_hand_str = "medicalpack",
+		)
 
 /obj/item/weapon/storage/backpack/satchel_vir
 	name = "virologist satchel"
@@ -189,7 +200,10 @@
 	name = "security satchel"
 	desc = "A robust satchel for security related needs."
 	icon_state = "satchel-sec"
-	item_state = "securitypack"
+	item_state_slots = list(
+		slot_l_hand_str = "securitypack",
+		slot_r_hand_str = "securitypack",
+		)
 
 /obj/item/weapon/storage/backpack/satchel_hyd
 	name = "hydroponics satchel"
@@ -201,13 +215,17 @@
 	desc = "An exclusive satchel for Nanotrasen officers."
 	icon_state = "satchel-cap"
 	item_state = "captainpack"
+	item_state_slots = null
 
 //ERT backpacks.
 /obj/item/weapon/storage/backpack/ert
 	name = "emergency response team backpack"
 	desc = "A spacious backpack with lots of pockets, used by members of the Nanotrasen Emergency Response Team."
 	icon_state = "ert_commander"
-	item_state = "backpack"
+	item_state_slots = list(
+		slot_l_hand_str = "securitypack",
+		slot_r_hand_str = "securitypack",
+		)
 
 //Commander
 /obj/item/weapon/storage/backpack/ert/commander

@@ -55,9 +55,9 @@ var/datum/paiController/paiController			// Global handler for pAI candidates
 
 		switch(option)
 			if("name")
-				t = input("Enter a name for your pAI", "pAI Name", candidate.name) as text
+				t = sanitizeSafe(input("Enter a name for your pAI", "pAI Name", candidate.name) as text, MAX_NAME_LEN)
 				if(t)
-					candidate.name = sanitizeSafe(t, MAX_NAME_LEN)
+					candidate.name = t
 			if("desc")
 				t = input("Enter a description for your pAI", "pAI Description", candidate.description) as message
 				if(t)
@@ -234,7 +234,7 @@ var/datum/paiController/paiController			// Global handler for pAI candidates
 		if(c.ready)
 			var/found = 0
 			for(var/mob/dead/observer/o in player_list)
-				if(o.key == c.key)
+				if(o.key == c.key && o.MayRespawn())
 					found = 1
 			if(found)
 				available.Add(c)
@@ -347,7 +347,7 @@ var/datum/paiController/paiController			// Global handler for pAI candidates
 /datum/paiController/proc/requestRecruits(var/mob/user)
 	inquirer = user
 	for(var/mob/dead/observer/O in player_list)
-		if(O.has_enabled_antagHUD == 1 && config.antag_hud_restricted)
+		if(!O.MayRespawn())
 			continue
 		if(jobban_isbanned(O, "pAI"))
 			continue

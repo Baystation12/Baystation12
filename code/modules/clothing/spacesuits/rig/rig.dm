@@ -134,27 +134,28 @@
 		verbs |= /obj/item/weapon/rig/proc/toggle_chest
 
 	for(var/obj/item/piece in list(gloves,helmet,boots,chest))
-		if(!piece)
+		if(!istype(piece))
 			continue
 		piece.canremove = 0
 		piece.name = "[suit_type] [initial(piece.name)]"
 		piece.desc = "It seems to be part of a [src.name]."
 		piece.icon_state = "[initial(icon_state)]"
-		piece.armor = armor.Copy()
 		piece.min_cold_protection_temperature = min_cold_protection_temperature
 		piece.max_heat_protection_temperature = max_heat_protection_temperature
-		piece.siemens_coefficient = siemens_coefficient
+		if(piece.siemens_coefficient > siemens_coefficient) //So that insulated gloves keep their insulation.
+			piece.siemens_coefficient = siemens_coefficient
 		piece.permeability_coefficient = permeability_coefficient
 		piece.unacidable = unacidable
+		if(islist(armor)) piece.armor = armor.Copy()
 
 	update_icon(1)
 
-/obj/item/weapon/rig/Del()
+/obj/item/weapon/rig/Destroy()
 	for(var/obj/item/piece in list(gloves,boots,helmet,chest))
 		var/mob/living/M = piece.loc
 		if(istype(M))
 			M.drop_from_inventory(piece)
-		del(piece)
+		qdel(piece)
 	processing_objects -= src
 	..()
 
@@ -459,7 +460,7 @@
 
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
-		ui = new(user, src, ui_key, ((src.loc != user) ? ai_interface_path : interface_path), interface_title, 480, 550)
+		ui = new(user, src, ui_key, ((src.loc != user) ? ai_interface_path : interface_path), interface_title, 480, 550, data["ai"] ? contained_state : inventory_state)
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)
@@ -634,11 +635,13 @@
 			if(check_slot)
 				if(check_slot != use_obj)
 					H << "<span class='danger'>You are unable to deploy \the [piece] as \the [check_slot] [check_slot.gender == PLURAL ? "are" : "is"] in the way.</span>"
-					return
+				return
 			else
-				H << "<font color='blue'><b>Your [use_obj.name] [use_obj.gender == PLURAL ? "deploy" : "deploys"] swiftly.</b></span>"
 				use_obj.loc = H
-				H.equip_to_slot(use_obj, equip_to)
+				if(!H.equip_to_slot_if_possible(use_obj, equip_to, 0))
+					use_obj.loc = src
+				else
+					H << "<font color='blue'><b>Your [use_obj.name] [use_obj.gender == PLURAL ? "deploy" : "deploys"] swiftly.</b></span>"
 
 	if(piece == "helmet" && helmet)
 		helmet.update_light(H)
@@ -657,25 +660,25 @@
 			var/obj/item/garbage = H.head
 			H.drop_from_inventory(garbage)
 			H.head = null
-			del(garbage)
+			qdel(garbage)
 
 		if(H.gloves)
 			var/obj/item/garbage = H.gloves
 			H.drop_from_inventory(garbage)
 			H.gloves = null
-			del(garbage)
+			qdel(garbage)
 
 		if(H.shoes)
 			var/obj/item/garbage = H.shoes
 			H.drop_from_inventory(garbage)
 			H.shoes = null
-			del(garbage)
+			qdel(garbage)
 
 		if(H.wear_suit)
 			var/obj/item/garbage = H.wear_suit
 			H.drop_from_inventory(garbage)
 			H.wear_suit = null
-			del(garbage)
+			qdel(garbage)
 
 	for(var/piece in list("helmet","gauntlets","chest","boots"))
 		toggle_piece(piece, H, ONLY_DEPLOY)
@@ -773,6 +776,14 @@
 	if(!wearer || wearer.back != src)
 		return 0
 	wearer.Move(null,dir)*/
+
+/atom/proc/get_rig()
+	if(loc)
+		return loc.get_rig()
+	return null
+
+/obj/item/weapon/rig/get_rig()
+	return src
 
 #undef ONLY_DEPLOY
 #undef ONLY_RETRACT

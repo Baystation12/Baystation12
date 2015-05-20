@@ -1,5 +1,10 @@
 #define DEBUG
 
+#define GAME_STATE_PREGAME		1
+#define GAME_STATE_SETTING_UP	2
+#define GAME_STATE_PLAYING		3
+#define GAME_STATE_FINISHED		4
+
 // Math constants.
 #define M_E     2.71828183
 #define M_PI    3.14159265
@@ -94,9 +99,15 @@
 #define DOOR_CRUSH_DAMAGE 10
 
 #define HUNGER_FACTOR              0.05 // Factor of how fast mob nutrition decreases
-#define REAGENTS_METABOLISM        0.2  // How many units of reagent are consumed per tick, by default.
-#define REAGENTS_EFFECT_MULTIPLIER (REAGENTS_METABOLISM / 0.4) // By defining the effect multiplier this way, it'll exactly adjust
-                                                               // all effects according to how they originally were with the 0.4 metabolism
+#define REM 0.2 // Means 'Reagent Effect Multiplier'. This is how many units of reagent are consumed per tick
+#define CHEM_TOUCH 1
+#define CHEM_INGEST 2
+#define CHEM_BLOOD 3
+#define MINIMUM_CHEMICAL_VOLUME 0.01
+#define SOLID 1
+#define LIQUID 2
+#define GAS 3
+#define REAGENTS_OVERDOSE 30
 
 #define MINIMUM_AIR_RATIO_TO_SUSPEND 0.05 // Minimum ratio of air that must move to/from a tile to suspend group processing
 #define MINIMUM_AIR_TO_SUSPEND       (MOLES_CELLSTANDARD * MINIMUM_AIR_RATIO_TO_SUSPEND) // Minimum amount of air that has to move before a group processing can be suspended
@@ -192,6 +203,7 @@
 #define NOBLOODY           512  // Used for items if they don't want to get a blood overlay.
 #define NODELAY            8192 // 1 second attack-by delay skipped (Can be used once every 0.2s). Most objects have a 1s attack-by delay, which doesn't require a flag.
 
+//Use these flags to indicate if an item obscures the specified slots from view, whereas body_parts_covered seems to be used to indicate what body parts the item protects.
 #define GLASSESCOVERSEYES 256
 #define    MASKCOVERSEYES 256 // Get rid of some of the other retardation in these flags.
 #define    HEADCOVERSEYES 256 // Feel free to reallocate these numbers for other purposes.
@@ -255,10 +267,12 @@
 #define slot_legs        21
 #define slot_tie         22
 
-// Mob sprite sheets. These need to be strings as numbers 
-// cannot be used as associative list keys.
-#define icon_l_hand		"slot_l_hand"
-#define icon_r_hand		"slot_r_hand"
+// Inventory slot strings.
+// since numbers cannot be used as associative list keys.
+#define slot_back_str		"back"
+#define slot_l_hand_str		"slot_l_hand"
+#define slot_r_hand_str		"slot_r_hand"
+#define slot_w_uniform_str	"w_uniform"
 
 // Bitflags for clothing parts.
 #define HEAD        1
@@ -736,10 +750,6 @@ var/list/be_special_flags = list(
 #define ATMOS_DEFAULT_VOLUME_MIXER  200 // L.
 #define ATMOS_DEFAULT_VOLUME_PIPE   70  // L.
 
-// Reagent metabolism defines.
-#define FOOD_METABOLISM    0.4
-#define ALCOHOL_METABOLISM 0.1
-
 // Chemistry.
 #define CHEM_SYNTH_ENERGY 500 // How much energy does it take to synthesize 1 unit of chemical, in Joules.
 
@@ -756,6 +766,7 @@ var/list/be_special_flags = list(
 #define MAX_MESSAGE_LEN       1024
 #define MAX_PAPER_MESSAGE_LEN 3072
 #define MAX_BOOK_MESSAGE_LEN  9216
+#define MAX_LNAME_LEN         64
 #define MAX_NAME_LEN          26
 
 // Event defines.
@@ -777,8 +788,6 @@ var/list/be_special_flags = list(
 
 //General-purpose life speed define for plants.
 #define HYDRO_SPEED_MULTIPLIER 1
-
-#define NANO_IGNORE_DISTANCE 1
 
 // Robot AI notifications
 #define ROBOT_NOTIFICATION_NEW_UNIT 1
@@ -863,3 +872,115 @@ var/list/be_special_flags = list(
 #define DROPLIMB_EDGE 0
 #define DROPLIMB_BLUNT 1
 #define DROPLIMB_BURN 2
+
+// Custom layer definitions, supplementing the default TURF_LAYER, MOB_LAYER, etc.
+#define DOOR_OPEN_LAYER 2.7		//Under all objects if opened. 2.7 due to tables being at 2.6
+#define DOOR_CLOSED_LAYER 3.1	//Above most items if closed
+#define OBFUSCATION_LAYER 14	//Where images covering the view for eyes are put
+#define SCREEN_LAYER 17			//Mob HUD/effects layer
+
+
+/////////////////
+////WIZARD //////
+/////////////////
+
+/*		WIZARD SPELL FLAGS		*/
+#define GHOSTCAST		1	//can a ghost cast it?
+#define NEEDSCLOTHES	2	//does it need the wizard garb to cast? Nonwizard spells should not have this
+#define NEEDSHUMAN		4	//does it require the caster to be human?
+#define Z2NOCAST		8	//if this is added, the spell can't be cast at centcomm
+#define STATALLOWED		16	//if set, the user doesn't have to be conscious to cast. Required for ghost spells
+#define IGNOREPREV		32	//if set, each new target does not overlap with the previous one
+//The following flags only affect different types of spell, and therefore overlap
+//Targeted spells
+#define INCLUDEUSER		64	//does the spell include the caster in its target selection?
+#define SELECTABLE		128	//can you select each target for the spell?
+//AOE spells
+#define IGNOREDENSE		64	//are dense turfs ignored in selection?
+#define IGNORESPACE		128	//are space turfs ignored in selection?
+//End split flags
+#define CONSTRUCT_CHECK	256	//used by construct spells - checks for nullrods
+#define NO_BUTTON		512	//spell won't show up in the HUD with this
+
+//invocation
+#define SpI_SHOUT	"shout"
+#define SpI_WHISPER	"whisper"
+#define SpI_EMOTE	"emote"
+#define SpI_NONE	"none"
+
+//upgrading
+#define Sp_SPEED	"speed"
+#define Sp_POWER	"power"
+#define Sp_TOTAL	"total"
+
+//casting costs
+#define Sp_RECHARGE	"recharge"
+#define Sp_CHARGES	"charges"
+#define Sp_HOLDVAR	"holdervar"
+
+///////WIZ END/////////
+
+//singularity defines
+#define STAGE_ONE 	1
+#define STAGE_TWO 	3
+#define STAGE_THREE	5
+#define STAGE_FOUR	7
+#define STAGE_FIVE	9
+#define STAGE_SUPER	11
+
+// Camera networks
+#define NETWORK_CRESCENT "Crescent"
+#define NETWORK_CIVILIAN_EAST "Civilian East"
+#define NETWORK_CIVILIAN_WEST "Civilian West"
+#define NETWORK_COMMAND "Command"
+#define NETWORK_ENGINE "Engine"
+#define NETWORK_ENGINEERING "Engineering"
+#define NETWORK_ENGINEERING_OUTPOST "Engineering Outpost"
+#define NETWORK_ERT "ERT"
+#define NETWORK_EXODUS "Exodus"
+#define NETWORK_MEDICAL "Medical"
+#define NETWORK_MINE "MINE"
+#define NETWORK_RESEARCH "Research"
+#define NETWORK_RESEARCH_OUTPOST "Research Outpost"
+#define NETWORK_PRISON "Prison"
+#define NETWORK_SECURITY "Security"
+#define NETWORK_TELECOM "Tcomsat"
+#define NETWORK_THUNDER "thunder"
+
+// Languages
+#define LANGUAGE_SOL_COMMON "Sol Common"
+#define LANGUAGE_UNATHI "Sinta'unathi"
+#define LANGUAGE_SIIK_MAAS "Siik'maas"
+#define LANGUAGE_SIIK_TAJR "Siik'tajr"
+#define LANGUAGE_SKRELLIAN "Skrellian"
+#define LANGUAGE_ROOTSPEAK "Rootspeak"
+#define LANGUAGE_TRADEBAND "Tradeband"
+#define LANGUAGE_GUTTER "Gutter"
+
+#define WALL_CAN_OPEN 1
+#define WALL_OPENING 2
+
+#define CLAMP01(x) max(0, min(1, x))
+
+#define DEFAULT_WALL_MATERIAL "steel"
+
+// Convoluted setup so defines can be supplied by Bay12 main server compile script.
+// Should still work fine for people jamming the icons into their repo.
+#ifndef CUSTOM_ITEM_OBJ
+#define CUSTOM_ITEM_OBJ 'icons/obj/custom_items_obj.dmi'
+#endif
+#ifndef CUSTOM_ITEM_MOB
+#define CUSTOM_ITEM_MOB 'icons/mob/custom_items_mob.dmi'
+#endif
+
+#define SHARD_SHARD "shard"
+#define SHARD_SHRAPNEL "shrapnel"
+#define SHARD_STONE_PIECE "piece"
+#define SHARD_SPLINTER "splinters"
+#define SHARD_NONE ""
+
+#define MATERIAL_UNMELTABLE 1
+#define MATERIAL_BRITTLE 2
+
+#define TABLE_BRITTLE_MATERIAL_MULTIPLIER 4 // Amount table damage is multiplied by if it is made of a brittle material (e.g. glass)
+
