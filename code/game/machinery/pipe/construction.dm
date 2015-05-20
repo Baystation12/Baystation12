@@ -586,8 +586,9 @@ Buildable meters
 		return 0
 	else
 		// If the pipe's still around, nuke it.
-		if(P)
-			qdel(P)
+	//	if(P)
+	//		qdel(P)
+		error("[src]'s buildFrom does not return 1!")
 	return 1
 	 //TODO: DEFERRED
 

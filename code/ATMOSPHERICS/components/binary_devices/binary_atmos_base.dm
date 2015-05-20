@@ -60,7 +60,7 @@ obj/machinery/atmospherics/binary
 		..()
 
 	initialize()
-		if(node1 && node2) return
+		if(get_nodes_amount() == 2) return
 
 		var/node2_connect = dir
 		var/node1_connect = turn(dir, 180)
@@ -68,17 +68,21 @@ obj/machinery/atmospherics/binary
 		for(var/obj/machinery/atmospherics/target in get_step(src,node1_connect))
 			if(target.initialize_directions & get_dir(target,src))
 				if (check_connect_types(target,src))
+					connect(target)
 					node1 = target
 					break
 
 		for(var/obj/machinery/atmospherics/target in get_step(src,node2_connect))
 			if(target.initialize_directions & get_dir(target,src))
 				if (check_connect_types(target,src))
+					connect(target)
 					node2 = target
 					break
 
 		update_icon()
 		update_underlays()
+
+		return 1
 
 	build_network()
 		if(!network1 && node1)

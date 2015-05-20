@@ -40,10 +40,10 @@ Pipelines + Other Objects -> Pipe network
 
 	if(!pipe_color_check(pipe_color))
 		pipe_color = null
-
+/*
 	spawn()
 		..()
-
+*/
 
 /obj/machinery/atmospherics/attackby(atom/A, mob/user as mob)
 	if(istype(A, /obj/item/device/pipe_painter))
@@ -208,3 +208,4 @@ obj/machinery/atmospherics/proc/check_connect_types(obj/machinery/atmospherics/a
 			if(target.initialize_directions & get_dir(target,src))
 				if (check_connect_types(target,src))
 					connect(target)
+	return 1

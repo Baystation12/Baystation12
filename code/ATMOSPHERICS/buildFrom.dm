@@ -12,7 +12,7 @@
 	initialize_directions = pipe.get_pipe_dir()
 	var/turf/T = pipe.loc
 	level = T.intact ? 2 : 1
-	return 1
+	return initialize()
 
 
 /obj/machinery/atmospherics/pipe/simple/buildFrom(var/mob/usr,var/obj/item/pipe/pipe)
@@ -28,8 +28,10 @@
 
 
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging/buildFrom(var/mob/usr,var/obj/item/pipe/pipe)
-	initialize_directions_he = pipe.get_pipe_dir()
-	return ..()
+	set_dir(pipe.dir)
+	initialize_directions = pipe.get_pdir()
+	initialize_directions_he = pipe.get_hdir()
+	return initialize()
 
 
 /obj/machinery/atmospherics/portables_connector/buildFrom(var/mob/usr,var/obj/item/pipe/pipe)
@@ -39,7 +41,7 @@
 		name = pipe.pipename
 	var/turf/T = pipe.loc
 	level = T.intact ? 2 : 1
-	return 1
+	return initialize()
 
 
 /obj/machinery/atmospherics/pipe/manifold/buildFrom(var/mob/usr,var/obj/item/pipe/pipe)
@@ -70,7 +72,7 @@
 	set_dir(pipe.dir)
 	initialize_directions = pipe.get_pdir()
 	initialize_directions_he = pipe.get_hdir()
-	return 1
+	return initialize()
 
 
 /obj/machinery/atmospherics/unary/buildFrom(var/mob/usr,var/obj/item/pipe/pipe)
@@ -80,7 +82,11 @@
 		name = pipe.pipename
 	var/turf/T = pipe.loc
 	level = T.intact ? 2 : 1
-	return 1
+	return initialize()
+
+
+/obj/machinery/atmospherics/unary/portables_connector/buildFrom(var/mob/usr,var/obj/item/pipe/pipe)
+	return ..()
 
 
 /obj/machinery/atmospherics/unary/vent_pump/buildFrom(var/mob/usr,var/obj/item/pipe/pipe)
@@ -88,13 +94,13 @@
 
 
 /obj/machinery/atmospherics/binary/buildFrom(var/mob/usr,var/obj/item/pipe/pipe)
-	set_dir(dir)
+	set_dir(pipe.dir)
 	initialize_directions = pipe.get_pipe_dir()
 	if (pipe.pipename)
 		name = pipe.pipename
 	var/turf/T = pipe.loc
 	level = T.intact ? 2 : 1
-	return 1
+	return initialize()
 
 
 /obj/machinery/atmospherics/binary/valve/buildFrom(var/mob/usr,var/obj/item/pipe/pipe)
@@ -171,6 +177,7 @@
 
 
 /obj/machinery/atmospherics/unary/heat_exchanger/buildFrom(var/mob/usr,var/obj/item/pipe/pipe)
+	set_dir(pipe.dir)
 	return ..()
 
 
@@ -201,7 +208,7 @@
 /obj/machinery/atmospherics/omni/mixer/buildFrom(var/mob/usr,var/obj/item/pipe/pipe)
 	var/turf/T = src.loc
 	level = T.intact ? 2 : 1
-	return 1
+	return initialize()
 
 
 /obj/machinery/atmospherics/omni/mixer/buildFrom(var/mob/usr,var/obj/item/pipe/pipe)

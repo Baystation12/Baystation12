@@ -17,10 +17,12 @@ obj/machinery/atmospherics/pipe/simple/heat_exchanging
 
 // BubbleWrap
 obj/machinery/atmospherics/pipe/simple/heat_exchanging/New()
-	..()
+
 	initialize_directions_he = initialize_directions	// The auto-detection from /pipe is good enough for a simple HE pipe
 // BubbleWrap END
 	color = "#404040" //we don't make use of the fancy overlay system for colours, use this to set the default.
+
+	..()
 
 
 obj/machinery/atmospherics/pipe/simple/heat_exchanging/hide(var/i)
@@ -35,8 +37,20 @@ obj/machinery/atmospherics/pipe/simple/heat_exchanging/update_icon(var/safety = 
 	return
 
 obj/machinery/atmospherics/pipe/simple/heat_exchanging/initialize()
-	normalize_dir()
-	..()
+
+	for(var/direction in cardinal)
+		world<<"direction"
+		for(var/obj/machinery/atmospherics/pipe/simple/heat_exchanging/target in get_step(src,direction))
+			if(target.initialize_directions_he & get_dir(target,src))
+				if (check_connect_types(target,src))
+					connect(target)
+
+	if(!get_nodes_amount())
+		qdel(src)
+		return 0
+
+	update_icon()
+	return 1
 
 
 obj/machinery/atmospherics/pipe/simple/heat_exchanging/process()
@@ -100,6 +114,7 @@ obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction
 
 // BubbleWrap
 obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction/New()
+	..()
 	switch ( dir )
 		if ( SOUTH )
 			initialize_directions = NORTH
@@ -113,8 +128,6 @@ obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction/New()
 		if ( WEST )
 			initialize_directions = EAST
 			initialize_directions_he = WEST
-	spawn()
-		.. ()
 // BubbleWrap END
 
 obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction/initialize()
@@ -131,10 +144,10 @@ obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction/initialize()
 
 	if(!get_nodes_amount())
 		qdel(src)
-		return
+		return 0
 
 	update_icon()
-	return
+	return 1
 
 
 obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction/update_icon(var/safety = 0)

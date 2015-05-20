@@ -108,11 +108,13 @@
 
 	if(!get_nodes_amount())
 		qdel(src)
-		return
+		return 0
 
 	var/turf/T = get_turf(src)
 	if(istype(T))
 		hide(T.intact)
+
+	return 1
 
 
 /obj/machinery/atmospherics/pipe/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
@@ -287,7 +289,7 @@
 
 /obj/machinery/atmospherics/pipe/simple/initialize()
 	normalize_dir()
-	..()
+	return ..()
 
 
 /obj/machinery/atmospherics/pipe/simple/visible
@@ -604,7 +606,7 @@
 	update_icon()
 
 /obj/machinery/atmospherics/pipe/manifold4w/initialize()
-	..()
+	return ..()
 
 /obj/machinery/atmospherics/pipe/manifold4w/hide(var/i)
 	if(level == 1 && istype(loc, /turf/simulated))
@@ -807,7 +809,7 @@
 	update_underlays()
 
 /obj/machinery/atmospherics/pipe/tank/initialize()
-	..()
+	return ..()
 	update_underlays()
 
 /obj/machinery/atmospherics/pipe/tank/attackby(var/obj/item/W as obj, var/mob/user as mob)
@@ -1136,7 +1138,7 @@
 
 /obj/machinery/atmospherics/pipe/universal/initialize()
 	normalize_dir()
-	..()
+	return ..()
 
 
 /obj/machinery/atmospherics/pipe/universal/visible
