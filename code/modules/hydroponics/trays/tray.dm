@@ -475,7 +475,7 @@
 		else
 			user << "<span class='danger'>\The [src] already has seeds in it!</span>"
 
-	else if (istype(O, /obj/item/weapon/minihoe))  // The minihoe
+	else if (istype(O, /obj/item/weapon/material/minihoe))  // The minihoe
 
 		if(weedlevel > 0)
 			user.visible_message("<span class='danger'>[user] starts uprooting the weeds.</span>", "<span class='danger'>You remove the weeds from the [src].</span>")

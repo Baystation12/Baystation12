@@ -587,12 +587,12 @@
 	var/limit = 10
 	var/list/holdingitems = list()
 	var/list/sheet_reagents = list(
-		/obj/item/stack/sheet/mineral/iron = "iron",
-		/obj/item/stack/sheet/mineral/uranium = "uranium",
-		/obj/item/stack/sheet/mineral/phoron = "phoron",
-		/obj/item/stack/sheet/mineral/gold = "gold",
-		/obj/item/stack/sheet/mineral/silver = "silver",
-		/obj/item/stack/sheet/mineral/mhydrogen = "hydrogen"
+		/obj/item/stack/material/iron = "iron",
+		/obj/item/stack/material/uranium = "uranium",
+		/obj/item/stack/material/phoron = "phoron",
+		/obj/item/stack/material/gold = "gold",
+		/obj/item/stack/material/silver = "silver",
+		/obj/item/stack/material/mhydrogen = "hydrogen"
 		)
 
 /obj/machinery/reagentgrinder/New()

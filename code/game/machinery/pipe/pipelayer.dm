@@ -50,7 +50,7 @@
 		user.visible_message("<span class='notice'>[user] has [!a_dis?"de":""]activated auto-dismantling.</span>", "<span class='notice'>You [!a_dis?"de":""]activate auto-dismantling.</span>")
 		return
 
-	if(istype(W, /obj/item/stack/sheet/metal))
+	if(istype(W, /obj/item/stack/material/steel))
 
 		var/result = load_metal(W)
 		if(isnull(result))
@@ -70,7 +70,7 @@
 			m = round(m)
 			if(m)
 				use_metal(m)
-				var/obj/item/stack/sheet/metal/MM = new (get_turf(src))
+				var/obj/item/stack/material/steel/MM = new (get_turf(src))
 				MM.amount = m
 				user.visible_message("<span class='notice'>[user] removes [m] sheet\s of metal from the \the [src].</span>", "<span class='notice'>You remove [m] sheet\s of metal from \the [src]</span>")
 		else
@@ -86,7 +86,7 @@
 	on=0
 	return
 
-/obj/machinery/pipelayer/proc/load_metal(var/obj/item/stack/sheet/metal/MM)
+/obj/machinery/pipelayer/proc/load_metal(var/obj/item/stack/material/steel/MM)
 	if(istype(MM) && MM.get_amount())
 		var/cur_amount = metal
 		var/to_load = max(max_metal - round(cur_amount),0)

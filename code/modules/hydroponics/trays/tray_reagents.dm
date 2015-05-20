@@ -48,7 +48,7 @@
 	toxicity = 8
 	pest_kill_str = 7
 
-/obj/item/weapon/minihoe // -- Numbers
+/obj/item/weapon/material/minihoe // -- Numbers
 	name = "mini hoe"
 	desc = "It's used for removing weeds or scratching your back."
 	icon = 'icons/obj/weapons.dmi'
