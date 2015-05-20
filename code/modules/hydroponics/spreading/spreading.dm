@@ -16,13 +16,13 @@
 			seed.set_trait(TRAIT_SPREAD,2)             // So it will function properly as vines.
 			seed.set_trait(TRAIT_POTENCY,rand(potency_min, potency_max)) // 70-100 potency will help guarantee a wide spread and powerful effects.
 			seed.set_trait(TRAIT_MATURATION,rand(maturation_min, maturation_max))
-			
+
 			//make vine zero start off fully matured
 			var/obj/effect/plant/vine = new(T,seed)
 			vine.health = vine.max_health
 			vine.mature_time = 0
 			vine.process()
-			
+
 			message_admins("<span class='notice'>Event: Spacevines spawned at [T.loc] ([T.x],[T.y],[T.z])</span>")
 
 /obj/effect/dead_plant
@@ -49,6 +49,7 @@
 	icon_state = "bush4-1"
 	layer = 3
 	pass_flags = PASSTABLE
+	mouse_opacity = 2
 
 	var/health = 10
 	var/max_health = 100
