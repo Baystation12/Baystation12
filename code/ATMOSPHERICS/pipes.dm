@@ -265,7 +265,6 @@
 		qdel(src)
 	else
 		overlays.Cut()
-		world<<"[initialize_directions]"
 		overlays += icon_manager.get_atmos_icon("underlay", initialize_directions, pipe_color, "bent" + icon_connect_type)
 		underlays.Cut()
 
