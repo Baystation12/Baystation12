@@ -631,7 +631,7 @@
 
 /obj/item/weapon/storage/box/freezer
 	name = "portable freezer"
-	desc = "This nifty schok-resistant device will keep your 'groceries' nice and non-spoiled."
+	desc = "This nifty shock-resistant device will keep your 'groceries' nice and non-spoiled."
 	icon = 'icons/obj/storage.dmi'
 	icon_state = "portafreezer"
 	item_state = "medicalpack"
