@@ -16,9 +16,9 @@
 		switch (affected.name)
 			if ("head")
 				return 1
-			if ("chest")
+			if ("upper body")
 				return 3
-			if ("groin")
+			if ("lower body")
 				return 2
 		return 0
 
@@ -26,9 +26,9 @@
 		switch (affected.name)
 			if ("head")
 				return "cranial"
-			if ("chest")
+			if ("upper body")
 				return "thoracic"
-			if ("groin")
+			if ("lower body")
 				return "abdominal"
 		return ""
 

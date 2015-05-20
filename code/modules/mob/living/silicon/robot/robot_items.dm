@@ -129,7 +129,10 @@
 		return
 	if(istype(target,/obj/machinery/portable_atmospherics/hydroponics))
 		var/obj/machinery/portable_atmospherics/hydroponics/T = target
-		T.harvest(user)
+		if(T.harvest) //Try to harvest, assuming it's alive.
+			T.harvest(user)
+		else if(T.dead) //It's probably dead otherwise.
+			T.remove_dead(user)
 	else
 		user << "Harvesting \a [target] is not the purpose of this tool.  The [src] is for plants being grown."
 

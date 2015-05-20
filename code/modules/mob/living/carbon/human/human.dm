@@ -1321,7 +1321,6 @@
 	var/mob/S = src
 	var/mob/U = usr
 	var/self = null
-
 	if(S == U)
 		self = 1 // Removing object from yourself.
 
@@ -1330,8 +1329,7 @@
 		var/obj/item/organ/external/current_limb = organs_by_name[limb]
 		if(current_limb && current_limb.dislocated == 2)
 			limbs |= limb
-
-	var/choice = input(src,"Which joint do you wish to relocate?") as null|anything in limbs
+	var/choice = input(usr,"Which joint do you wish to relocate?") as null|anything in limbs
 
 	if(!choice)
 		return

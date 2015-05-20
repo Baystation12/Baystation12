@@ -82,7 +82,7 @@ for reference:
 /obj/structure/barricade/attackby(obj/item/W as obj, mob/user as mob)
 	if (istype(W, /obj/item/stack/material))
 		var/obj/item/stack/material/D = W
-		if(D.material != material)
+		if(D.material.name != material.name)
 			user << "<span class='warning'>That is the wrong material needed to repair \the [src].</span>"
 			return
 		if (health < maxhealth)

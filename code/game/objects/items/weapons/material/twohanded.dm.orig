@@ -60,7 +60,6 @@
 	if(wielded)
 		M << "<span class='warning'>Unwield the [base_name] first!</span>"
 		return 0
-
 	return ..()
 
 /obj/item/weapon/material/twohanded/dropped(mob/user as mob)
@@ -149,9 +148,7 @@
 	force_divisor = 0.7 // 10/42 with hardness 60 (steel) and 0.25 unwielded divisor
 	sharp = 1
 	edge = 1
-	w_class = 4.0
 	slot_flags = SLOT_BACK
-	force_wielded = 30
 	attack_verb = list("attacked", "chopped", "cleaved", "torn", "cut")
 	applies_material_colour = 0
 
@@ -162,13 +159,18 @@
 		if(istype(A,/obj/structure/window))
 			var/obj/structure/window/W = A
 			W.shatter()
+<<<<<<< HEAD:code/game/objects/items/weapons/material/twohanded.dm
+
+/*
+=======
 		else if(istype(A,/obj/structure/grille))
 			qdel(A)
 		else if(istype(A,/obj/effect/plant))
 			var/obj/effect/plant/P = A
 			P.die_off()
 
-/*
+		qdel(A)
+>>>>>>> 284d1cc1f5c67503fe0da89ce01985d73bb02038:code/game/objects/items/weapons/twohanded.dm
 /*
  * Double-Bladed Energy Swords - Cheridan
  */
@@ -219,8 +221,6 @@
 	base_icon = "spearglass"
 	name = "spear"
 	desc = "A haphazardly-constructed yet still deadly weapon of ancient design."
-	force = 10
-	w_class = 4.0
 	slot_flags = SLOT_BACK
 	force_wielded = 0.75           // 22 when wielded with hardness 15 (glass)
 	unwielded_force_divisor = 0.65 // 14 when unwielded based on above

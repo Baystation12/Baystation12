@@ -329,7 +329,7 @@
 	M.stuttering = 0
 	M.confused = 0
 	if(M.ingested)
-		for(var/datum/reagent/R in M.ingested)
+		for(var/datum/reagent/R in M.ingested.reagent_list)
 			if(istype(R, /datum/reagent/ethanol))
 				R.dose = max(R.dose - removed * 5, 0)
 
