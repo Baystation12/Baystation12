@@ -1353,10 +1353,24 @@ area/space/atmosalert()
 /area/security/brig
 	name = "\improper Security - Brig"
 	icon_state = "brig"
+	prison_break()
+		for(var/obj/structure/closet/secure_closet/brig/temp_closet in src)
+			temp_closet.locked = 0
+			temp_closet.icon_state = temp_closet.icon_closed
+		for(var/obj/machinery/door_timer/temp_timer in src)
+			temp_timer.releasetime = 1
+		..()
 
 /area/security/prison
 	name = "\improper Security - Prison Wing"
 	icon_state = "sec_prison"
+	prison_break()
+		for(var/obj/structure/closet/secure_closet/brig/temp_closet in src)
+			temp_closet.locked = 0
+			temp_closet.icon_state = temp_closet.icon_closed
+		for(var/obj/machinery/door_timer/temp_timer in src)
+			temp_timer.releasetime = 1
+		..()
 
 /area/security/warden
 	name = "\improper Security - Warden's Office"

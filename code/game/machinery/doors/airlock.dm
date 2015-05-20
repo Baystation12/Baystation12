@@ -1063,7 +1063,8 @@ About the new airlock wires panel:
 	update_icon()
 
 /obj/machinery/door/airlock/proc/prison_open()
-	src.unlock()
-	src.open()
-	src.lock()
+	if(arePowerSystemsOn())
+		src.unlock()
+		src.open()
+		src.lock()
 	return
