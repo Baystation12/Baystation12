@@ -275,6 +275,7 @@
 	user.attack_log += text("\[[time_stamp()]\] <font color='red'>attacked [src.name] ([src.ckey])</font>")
 	src.attack_log += text("\[[time_stamp()]\] <font color='orange'>was attacked by [user.name] ([user.ckey])</font>")
 	src.visible_message("<span class='danger'>[user] has [attack_message] [src]!</span>")
+	user.do_attack_animation(src)
 
 	var/dam_zone = pick("head", "chest", "l_arm", "r_arm", "l_leg", "r_leg", "groin")
 	var/obj/item/organ/external/affecting = get_organ(ran_zone(dam_zone))
