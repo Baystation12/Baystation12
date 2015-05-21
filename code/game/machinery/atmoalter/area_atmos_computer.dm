@@ -2,6 +2,7 @@
 	name = "Area Air Control"
 	desc = "A computer used to control the stationary scrubbers and pumps in the area."
 	icon_state = "area_atmos"
+	light_color = "#e6ffff"
 	circuit = "/obj/item/weapon/circuitboard/area_atmos"
 
 	var/list/connectedscrubbers = new()
@@ -147,14 +148,10 @@
 		var/turf/T_src = get_turf(src)
 		if(!T_src.loc) return 0
 		var/area/A_src = T_src.loc
-		if (A_src.master)
-			A_src = A_src.master
 
 		var/turf/T_scrub = get_turf(scrubber)
 		if(!T_scrub.loc) return 0
 		var/area/A_scrub = T_scrub.loc
-		if (A_scrub.master)
-			A_scrub = A_scrub.master
 
 		if(A_scrub != A_src)
 			return 0
@@ -169,13 +166,11 @@
 		var/turf/T = get_turf(src)
 		if(!T.loc) return
 		var/area/A = T.loc
-		if (A.master)
-			A = A.master
 		for(var/obj/machinery/portable_atmospherics/powered/scrubber/huge/scrubber in world )
 			var/turf/T2 = get_turf(scrubber)
 			if(T2 && T2.loc)
 				var/area/A2 = T2.loc
-				if(istype(A2) && A2.master && A2.master == A )
+				if(istype(A2) && A2 == A)
 					connectedscrubbers += scrubber
 					found = 1
 

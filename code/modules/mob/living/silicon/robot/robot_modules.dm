@@ -230,7 +230,7 @@ var/global/list/robot_modules = list(
 	src.modules += new /obj/item/roller_holder(src)
 	src.modules += new /obj/item/weapon/reagent_containers/borghypo/crisis(src)
 	src.modules += new /obj/item/weapon/reagent_containers/glass/beaker/large(src)
-	src.modules += new /obj/item/weapon/reagent_containers/robodropper(src)
+	src.modules += new /obj/item/weapon/reagent_containers/dropper/industrial(src)
 	src.modules += new /obj/item/weapon/reagent_containers/syringe(src)
 	src.modules += new /obj/item/weapon/extinguisher/mini(src)
 	src.emag = new /obj/item/weapon/reagent_containers/spray(src)
@@ -494,7 +494,7 @@ var/global/list/robot_modules = list(
 	M.stored_matter = 30
 	src.modules += M
 
-	src.modules += new /obj/item/weapon/reagent_containers/robodropper(src)
+	src.modules += new /obj/item/weapon/reagent_containers/dropper/industrial(src)
 
 	var/obj/item/weapon/flame/lighter/zippo/L = new /obj/item/weapon/flame/lighter/zippo(src)
 	L.lit = 1
@@ -726,10 +726,3 @@ var/global/list/robot_modules = list(
 	LR.Charge(R, amount)
 	..()
 	return
-
-//checks whether this item is a module of the robot it is located in.
-/obj/item/proc/is_robot_module()
-	if (!istype(src.loc, /mob/living/silicon/robot))
-		return 0
-	var/mob/living/silicon/robot/R = src.loc
-	return (src in R.module.modules)

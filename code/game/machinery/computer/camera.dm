@@ -1,20 +1,20 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:31
 
+/var/camera_cache_id = 1
+
 /proc/invalidateCameraCache()
-	for(var/obj/machinery/computer/security/s in machines)
-		s.camera_cache = null
-	var/datum/alarm_handler/AHandler = new /datum/alarm_handler()
-	for(var/datum/alarm/A in AHandler.alarms)
-		A.cameras = null
+	camera_cache_id = (++camera_cache_id % 999999)
 
 /obj/machinery/computer/security
 	name = "security camera monitor"
 	desc = "Used to access the various cameras on the station."
 	icon_state = "cameras"
+	light_color = "#a91515"
 	var/obj/machinery/camera/current = null
 	var/last_pic = 1.0
 	var/list/network
 	var/mapping = 0//For the overview file, interesting bit of code.
+	var/cache_id = 0
 	circuit = /obj/item/weapon/circuitboard/security
 	var/camera_cache = null
 
@@ -43,7 +43,8 @@
 
 		data["current"] = null
 
-		if(isnull(camera_cache))
+		if(camera_cache_id != cache_id)
+			cache_id = camera_cache_id
 			cameranet.process_sort()
 
 			var/cameras[0]
@@ -54,18 +55,11 @@
 				var/cam = C.nano_structure()
 				cameras[++cameras.len] = cam
 
-				if(C == current)
-					data["current"] = cam
+			camera_cache=list2json(cameras)
 
-			var/list/camera_list = list("cameras" = cameras)
-			camera_cache=list2json(camera_list)
-		else
-			if(current)
-				data["current"] = current.nano_structure()
-
-
-		if(ui)
-			ui.load_cached_data(camera_cache)
+		if(current)
+			data["current"] = current.nano_structure()
+		data["cameras"] = list("__json_cache" = camera_cache)
 
 		ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 		if (!ui)
@@ -75,8 +69,7 @@
 			ui.add_template("mapContent", "sec_camera_map_content.tmpl")
 			// adding a template with the key "mapHeader" replaces the map header content
 			ui.add_template("mapHeader", "sec_camera_map_header.tmpl")
-
-			ui.load_cached_data(camera_cache)
+			
 			ui.set_initial_data(data)
 			ui.open()
 			ui.set_auto_update(1)
@@ -221,6 +214,8 @@
 	desc = "Damn, why do they never have anything interesting on these things?"
 	icon = 'icons/obj/status_display.dmi'
 	icon_state = "entertainment"
+	light_color = "#FFEEDB"
+	light_range_on = 2
 	circuit = null
 
 /obj/machinery/computer/security/wooden_tv
@@ -228,7 +223,8 @@
 	desc = "An old TV hooked into the stations camera network."
 	icon_state = "security_det"
 	circuit = null
-
+	light_color = "#3848B3"
+	light_power_on = 0.5
 
 /obj/machinery/computer/security/mining
 	name = "outpost camera monitor"
@@ -236,12 +232,14 @@
 	icon_state = "miningcameras"
 	network = list("MINE")
 	circuit = /obj/item/weapon/circuitboard/security/mining
+	light_color = "#F9BBFC"
 
 /obj/machinery/computer/security/engineering
 	name = "engineering camera monitor"
 	desc = "Used to monitor fires and breaches."
 	icon_state = "engineeringcameras"
 	circuit = /obj/item/weapon/circuitboard/security/engineering
+	light_color = "#FAC54B"
 
 /obj/machinery/computer/security/engineering/New()
 	if(!network)

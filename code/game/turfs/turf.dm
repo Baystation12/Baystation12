@@ -32,6 +32,8 @@
 	// holy water
 	var/holy = 0
 
+	var/dynamic_lighting = 1
+
 /turf/New()
 	..()
 	for(var/atom/movable/AM as mob|obj in src)
@@ -218,8 +220,10 @@
 					return W
 ///// Z-Level Stuff
 
-	var/old_lumcount = lighting_lumcount - initial(lighting_lumcount)
 	var/obj/fire/old_fire = fire
+	var/old_opacity = opacity
+	var/old_dynamic_lighting = dynamic_lighting
+	var/list/old_affecting_lights = affecting_lights
 
 	//world << "Replacing [src.type] with [N]"
 
@@ -233,15 +237,7 @@
 		if(S.zone) S.zone.rebuild()
 
 	if(ispath(N, /turf/simulated/floor))
-
 		var/turf/simulated/W = new N( locate(src.x, src.y, src.z) )
-		//W.Assimilate_Air()
-
-		W.lighting_lumcount += old_lumcount
-		if((old_lumcount != W.lighting_lumcount) || (loc.name != "Space" && force_lighting_update))
-			W.lighting_changed = 1
-			lighting_controller.changed_turfs += W
-
 		if(old_fire)
 			fire = old_fire
 
@@ -258,15 +254,11 @@
 			S.update_starlight()
 
 		W.levelupdate()
-		return W
+		. = W
 
 	else
 
 		var/turf/W = new N( locate(src.x, src.y, src.z) )
-		W.lighting_lumcount += old_lumcount
-		if((old_lumcount != W.lighting_lumcount) || (loc.name != "Space" && force_lighting_update))
-			W.lighting_changed = 1
-			lighting_controller.changed_turfs += W
 
 		if(old_fire)
 			old_fire.RemoveFire()
@@ -281,7 +273,16 @@
 			S.update_starlight()
 
 		W.levelupdate()
-		return W
+		. =  W
+
+	affecting_lights = old_affecting_lights
+	if((old_opacity != opacity) || (dynamic_lighting != old_dynamic_lighting) || force_lighting_update)
+		reconsider_lights()
+	if(dynamic_lighting != old_dynamic_lighting)
+		if(dynamic_lighting)
+			lighting_build_overlays()
+		else
+			lighting_clear_overlays()
 
 
 //Commented out by SkyMarshal 5/10/13 - If you are patching up space, it should be vacuum.
@@ -377,3 +378,6 @@
 			if(!LinkBlocked(src, t) && !TurfBlockedNonWindow(t))
 				L.Add(t)
 	return L
+
+/turf/proc/process()
+	return PROCESS_KILL

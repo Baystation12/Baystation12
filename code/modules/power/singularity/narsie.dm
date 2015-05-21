@@ -31,8 +31,8 @@ var/global/list/narsie_list = list()
 	// Pixel stuff centers Narsie.
 	pixel_x = -236
 	pixel_y = -256
-	luminosity = 1
-	l_color = "#3e0000"
+	light_range = 1
+	light_color = "#3e0000"
 
 	current_size = 12
 	consume_range = 12 // How many tiles out do we eat.
@@ -144,7 +144,7 @@ var/global/list/narsie_list = list()
 		if(T.icon_state != "cult-narsie")
 			T.desc = "something that goes beyond your understanding went this way"
 			T.icon_state = "cult-narsie"
-			T.luminosity = 1
+			T.set_light(1)
 
 /obj/singularity/narsie/proc/narsiewall(var/turf/T)
 	T.desc = "An opening has been made on that wall, but who can say if what you seek truly lies on the other side?"
@@ -152,7 +152,7 @@ var/global/list/narsie_list = list()
 	T.icon_state = "cult-narsie"
 	T.opacity = 0
 	T.density = 0
-	luminosity = 1
+	set_light(1)
 
 /obj/singularity/narsie/large/consume(const/atom/A) //Has its own consume proc because it doesn't need energy and I don't want BoHs to explode it. --NEO
 //NEW BEHAVIOUR

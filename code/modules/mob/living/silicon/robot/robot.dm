@@ -367,9 +367,9 @@
 	lights_on = !lights_on
 	usr << "You [lights_on ? "enable" : "disable"] your integrated light."
 	if(lights_on)
-		SetLuminosity(integrated_light_power) // 1.5x luminosity of flashlight
+		set_light(integrated_light_power) // 1.5x luminosity of flashlight
 	else
-		SetLuminosity(0)
+		set_light(0)
 
 /mob/living/silicon/robot/verb/self_diagnosis_verb()
 	set category = "Robot Commands"
@@ -594,6 +594,8 @@
 			user << "Close the panel first."
 		else if(cell)
 			user << "There is a power cell already installed."
+		else if(W.w_class != 3)
+			user << "\The [W] is too [W.w_class < 3? "small" : "large"] to fit here."
 		else
 			user.drop_item()
 			W.loc = src

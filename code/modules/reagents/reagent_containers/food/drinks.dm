@@ -7,134 +7,63 @@
 	icon = 'icons/obj/drinks.dmi'
 	icon_state = null
 	flags = OPENCONTAINER
-	var/gulp_size = 5 //This is now officially broken ... need to think of a nice way to fix it.
-	possible_transfer_amounts = list(5,10,25)
+	amount_per_transfer_from_this = 5
 	volume = 50
 
 	on_reagent_change()
-		if (gulp_size < 5) gulp_size = 5
-		else gulp_size = max(round(reagents.total_volume / 5), 5)
+		return
 
 	attack_self(mob/user as mob)
 		return
 
 	attack(mob/M as mob, mob/user as mob, def_zone)
-		var/datum/reagents/R = src.reagents
-		var/fillevel = gulp_size
-
-		if(!R.total_volume || !R)
-			user << "\red The [src.name] is empty!"
-			return 0
-
-		if(M == user)
-
-			if(istype(M,/mob/living/carbon/human))
-				var/mob/living/carbon/human/H = M
-				if(H.species.flags & IS_SYNTHETIC)
-					H << "\red You have a monitor for a head, where do you think you're going to put that?"
-					return
-
-			M << "\blue You swallow a gulp from \the [src]."
-			if(reagents.total_volume)
-				reagents.trans_to_ingest(M, gulp_size)
-
-			playsound(M.loc,'sound/items/drink.ogg', rand(10,50), 1)
-			return 1
-		else if( istype(M, /mob/living/carbon/human) )
-
-			var/mob/living/carbon/human/H = M
-			if(H.species.flags & IS_SYNTHETIC)
-				H << "\red They have a monitor for a head, where do you think you're going to put that?"
-				return
-
-			for(var/mob/O in viewers(world.view, user))
-				O.show_message("\red [user] attempts to feed [M] [src].", 1)
-			if(!do_mob(user, M)) return
-			for(var/mob/O in viewers(world.view, user))
-				O.show_message("\red [user] feeds [M] [src].", 1)
-
-			M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been fed [src.name] by [user.name] ([user.ckey]) Reagents: [reagentlist(src)]</font>")
-			user.attack_log += text("\[[time_stamp()]\] <font color='red'>Fed [M.name] by [M.name] ([M.ckey]) Reagents: [reagentlist(src)]</font>")
-			msg_admin_attack("[key_name(user)] fed [key_name(M)] with [src.name] Reagents: [reagentlist(src)] (INTENT: [uppertext(user.a_intent)]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
-
-			if(reagents.total_volume)
-				reagents.trans_to_ingest(M, gulp_size)
-
-			if(isrobot(user)) //Cyborg modules that include drinks automatically refill themselves, but drain the borg's cell
-				var/mob/living/silicon/robot/bro = user
-				bro.cell.use(30)
-				var/refill = R.get_master_reagent_id()
-				spawn(600)
-					R.add_reagent(refill, fillevel)
-
-			playsound(M.loc,'sound/items/drink.ogg', rand(10,50), 1)
-			return 1
+		if(standard_feed_mob(user, M))
+			robot_refill(user)
+			return
 
 		return 0
-
 
 	afterattack(obj/target, mob/user, proximity)
 		if(!proximity) return
 
-		if(istype(target, /obj/structure/reagent_dispensers)) //A dispenser. Transfer FROM it TO us.
-
-			if(!target.reagents.total_volume)
-				user << "\red [target] is empty."
-				return
-
-			if(reagents.total_volume >= reagents.maximum_volume)
-				user << "\red [src] is full."
-				return
-
-			var/trans = target.reagents.trans_to(src, target:amount_per_transfer_from_this)
-			user << "\blue You fill [src] with [trans] units of the contents of [target]."
-
-		else if(target.is_open_container()) //Something like a glass. Player probably wants to transfer TO it.
-			if(!reagents.total_volume)
-				user << "\red [src] is empty."
-				return
-
-			if(target.reagents.total_volume >= target.reagents.maximum_volume)
-				user << "\red [target] is full."
-				return
-
-
-
-			var/datum/reagent/refill
-			var/datum/reagent/refillName
-			if(isrobot(user))
-				refill = reagents.get_master_reagent_id()
-				refillName = reagents.get_master_reagent_name()
-
-			var/trans = src.reagents.trans_to(target, amount_per_transfer_from_this)
-			user << "\blue You transfer [trans] units of the solution to [target]."
-
-			if(isrobot(user)) //Cyborg modules that include drinks automatically refill themselves, but drain the borg's cell
-				var/mob/living/silicon/robot/bro = user
-				var/chargeAmount = max(30,4*trans)
-				bro.cell.use(chargeAmount)
-				user << "Now synthesizing [trans] units of [refillName]..."
-
-
-				spawn(300)
-					reagents.add_reagent(refill, trans)
-					user << "Cyborg [src] refilled."
+		if(standard_dispenser_refill(user, target))
+			return
+		if(standard_pour_into(user, target))
+			robot_refill(user)
+			return
 
 		return ..()
+
+	proc/robot_refill(var/mob/living/silicon/robot/user)
+		if(!istype(user))
+			return 0
+
+		user.cell.use(30)
+		var/refill = reagents.get_master_reagent_id()
+		user << "Now synthesizing [amount_per_transfer_from_this] units of [refill]..."
+		spawn(300)
+			reagents.add_reagent(refill, amount_per_transfer_from_this)
+			user << "Cyborg [src] refilled."
+
+	self_feed_message(var/mob/user)
+		user << "<span class='notice'>You swallow a gulp from \the [src].</span>"
+
+	feed_sound(var/mob/user)
+		playsound(user.loc, 'sound/items/drink.ogg', rand(10, 50), 1)
 
 	examine(mob/user)
 		if(!..(user, 1))
 			return
-		if(!reagents || reagents.total_volume==0)
-			user << "\blue \The [src] is empty!"
-		else if (reagents.total_volume<=src.volume/4)
-			user << "\blue \The [src] is almost empty!"
-		else if (reagents.total_volume<=src.volume*0.66)
-			user << "\blue \The [src] is half full!"
-		else if (reagents.total_volume<=src.volume*0.90)
-			user << "\blue \The [src] is almost full!"
+		if(!reagents || reagents.total_volume == 0)
+			user << "<span class='notice'>\The [src] is empty!</span>"
+		else if (reagents.total_volume <= volume * 0.25)
+			user << "<span class='notice'>\The [src] is almost empty!</span>"
+		else if (reagents.total_volume <= volume * 0.66)
+			user << "<span class='notice'>\The [src] is half full!</span>"
+		else if (reagents.total_volume <= volume * 0.90)
+			user << "<span class='notice'>\The [src] is almost full!</span>"
 		else
-			user << "\blue \The [src] is full!"
+			user << "<span class='notice'>\The [src] is full!</span>"
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -260,12 +189,31 @@
 	volume = 120
 	center_of_mass = list("x"=17, "y"=10)
 
+/obj/item/weapon/reagent_containers/food/drinks/teapot
+	name = "teapot"
+	desc = "An elegant teapot. It simply oozes class."
+	icon_state = "teapot"
+	item_state = "teapot"
+	amount_per_transfer_from_this = 10
+	volume = 120
+	center_of_mass = list("x"=17, "y"=7)
+
 /obj/item/weapon/reagent_containers/food/drinks/flask
 	name = "Captain's Flask"
 	desc = "A metal flask belonging to the captain"
 	icon_state = "flask"
 	volume = 60
 	center_of_mass = list("x"=17, "y"=7)
+
+/obj/item/weapon/reagent_containers/food/drinks/flask/shiny
+	name = "shiny flask"
+	desc = "A shiny metal flask. It appears to have a Greek symbol inscribed on it."
+	icon_state = "shinyflask"
+
+/obj/item/weapon/reagent_containers/food/drinks/flask/lithium
+	name = "lithium flask"
+	desc = "A flask with a Lithium Atom symbol on it."
+	icon_state = "lithiumflask"
 
 /obj/item/weapon/reagent_containers/food/drinks/flask/detflask
 	name = "Detective's Flask"

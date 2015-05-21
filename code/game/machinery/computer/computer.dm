@@ -9,6 +9,9 @@
 	var/circuit = null //The path to the circuit board type. If circuit==null, the computer can't be disassembled.
 	var/processing = 0
 
+	var/light_range_on = 3
+	var/light_power_on = 1
+
 /obj/machinery/computer/initialize()
 	power_change()
 
@@ -21,7 +24,7 @@
 	for(var/x in verbs)
 		verbs -= x
 	set_broken()
-	var/datum/effect/effect/system/smoke_spread/smoke = new /datum/effect/effect/system/smoke_spread()
+	var/datum/effect/effect/system/smoke_spread/smoke = PoolOrNew(/datum/effect/effect/system/smoke_spread)
 	smoke.set_up(5, 0, src)
 	smoke.start()
 	return
@@ -86,6 +89,10 @@
 /obj/machinery/computer/power_change()
 	..()
 	update_icon()
+	if(stat & NOPOWER)
+		set_light(0)
+	else
+		set_light(light_range_on, light_power_on)
 
 
 /obj/machinery/computer/proc/set_broken()

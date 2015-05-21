@@ -1,5 +1,8 @@
 // Holographic Items!
 
+// Holographic tables are in code/modules/tables/presets.dm
+// Holographic racks are in code/modules/tables/rack.dm
+
 /turf/simulated/floor/holofloor/
 	thermal_conductivity = 0
 
@@ -39,36 +42,6 @@
 /turf/simulated/floor/holofloor/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	return
 	// HOLOFLOOR DOES NOT GIVE A FUCK
-
-/obj/structure/table/holotable
-	name = "table"
-	desc = "A square piece of metal standing on four metal legs. It can not move."
-	icon = 'icons/obj/structures.dmi'
-	icon_state = "table"
-	density = 1
-	anchored = 1.0
-	layer = 2.8
-	throwpass = 1	//You can throw objects over this, despite it's density.
-
-/obj/structure/table/holotable/attack_hand(mob/user as mob)
-	return // HOLOTABLE DOES NOT GIVE A FUCK
-
-
-/obj/structure/table/holotable/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if (istype(W, /obj/item/weapon/wrench))
-		user << "It's a holotable!  There are no bolts!"
-		return
-
-	if(isrobot(user))
-		return
-
-	..()
-
-/obj/structure/table/woodentable/holotable
-	name = "table"
-	desc = "A square piece of wood standing on four wooden legs. It can not move."
-	icon = 'icons/obj/structures.dmi'
-	icon_state = "wood_table"
 
 /obj/structure/holostool
 	name = "stool"
@@ -192,6 +165,7 @@
 
 /obj/item/weapon/holo
 	damtype = HALLOSS
+	no_attack_log = 1
 
 /obj/item/weapon/holo/esword
 	desc = "May the force be within you. Sorta."
@@ -370,22 +344,6 @@
 	for(var/mob/M in currentarea)
 		M << "FIGHT!"
 
-//Holorack
-
-/obj/structure/table/rack/holorack
-	name = "rack"
-	desc = "Different from the Middle Ages version."
-	icon = 'icons/obj/objects.dmi'
-	icon_state = "rack"
-
-/obj/structure/table/rack/holorack/attack_hand(mob/user as mob)
-	return
-
-/obj/structure/table/rack/holorack/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if (istype(W, /obj/item/weapon/wrench))
-		user << "It's a holorack!  You can't unwrench it!"
-		return
-
 //Holocarp
 
 /mob/living/simple_animal/hostile/carp/holodeck
@@ -400,7 +358,7 @@
 
 /mob/living/simple_animal/hostile/carp/holodeck/New()
 	..()
-	SetLuminosity(2) //hologram lighting
+	set_light(2) //hologram lighting
 
 /mob/living/simple_animal/hostile/carp/holodeck/proc/set_safety(var/safe)
 	if (safe)

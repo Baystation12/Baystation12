@@ -185,6 +185,14 @@
 	/obj/item/device/healthanalyzer, /obj/item/device/flashlight, /obj/item/device/radio, /obj/item/weapon/tank/emergency_oxygen)
 	body_parts_covered = UPPER_TORSO|ARMS
 
+/obj/item/clothing/suit/storage/toggle/fr_jacket/ems
+	name = "\improper EMS jacket"
+	desc = "A dark blue, martian-pattern, EMS jacket. It sports high-visibility reflective stripes and a star of life on the back."
+	icon_state = "ems_jacket_closed"
+	item_state = "ems_jacket_closed"
+	icon_open = "ems_jacket_open"
+	icon_closed = "ems_jacket_closed"
+
 //Mime
 /obj/item/clothing/suit/suspenders
 	name = "suspenders"

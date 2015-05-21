@@ -10,7 +10,7 @@
 	icon = 'icons/obj/doors/mineral_doors.dmi'
 	icon_state = "metal"
 
-	var/mineralType = "metal"
+	var/mineralType = DEFAULT_WALL_MATERIAL
 	var/state = 0 //closed, 1 == open
 	var/isSwitchingStates = 0
 	var/hardness = 1
@@ -119,24 +119,10 @@
 			Dismantle(1)
 
 	proc/Dismantle(devastated = 0)
-		if(!devastated)
-			if (mineralType == "metal")
-				var/ore = /obj/item/stack/sheet/metal
-				for(var/i = 1, i <= oreAmount, i++)
-					new ore(get_turf(src))
-			else
-				var/ore = text2path("/obj/item/stack/sheet/mineral/[mineralType]")
-				for(var/i = 1, i <= oreAmount, i++)
-					new ore(get_turf(src))
-		else
-			if (mineralType == "metal")
-				var/ore = /obj/item/stack/sheet/metal
-				for(var/i = 3, i <= oreAmount, i++)
-					new ore(get_turf(src))
-			else
-				var/ore = text2path("/obj/item/stack/sheet/mineral/[mineralType]")
-				for(var/i = 3, i <= oreAmount, i++)
-					new ore(get_turf(src))
+		var/material/M = name_to_material[mineralType]
+		if(istype(M))
+			for(var/i = (devastated? 1 : 3), i <= oreAmount, i++)
+				new M.stack_type(get_turf(src))
 		qdel(src)
 
 	ex_act(severity = 1)
@@ -155,7 +141,7 @@
 		return
 
 /obj/structure/mineral_door/iron
-	mineralType = "metal"
+	mineralType = "iron"
 	hardness = 3
 
 /obj/structure/mineral_door/silver
@@ -168,7 +154,7 @@
 /obj/structure/mineral_door/uranium
 	mineralType = "uranium"
 	hardness = 3
-	luminosity = 2
+	light_range = 2
 
 /obj/structure/mineral_door/sandstone
 	mineralType = "sandstone"
