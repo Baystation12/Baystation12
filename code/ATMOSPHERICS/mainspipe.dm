@@ -1,4 +1,5 @@
 // internal pipe, don't actually place or use these
+/*
 obj/machinery/atmospherics/pipe/mains_component
 	var/obj/machinery/atmospherics/mains_pipe/parent_pipe
 	var/list/obj/machinery/atmospherics/pipe/mains_component/nodes = new()
@@ -704,4 +705,5 @@ obj/machinery/atmospherics/mains_pipe/valve
 						close()
 					else
 						open()
+*/
 */

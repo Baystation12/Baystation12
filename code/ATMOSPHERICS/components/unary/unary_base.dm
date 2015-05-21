@@ -52,6 +52,7 @@
 
 		update_icon()
 		update_underlays()
+		return 1
 
 	build_network()
 		if(!network && node)

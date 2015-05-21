@@ -257,6 +257,8 @@
 
 	update_ports()
 
+	return 1
+
 /obj/machinery/atmospherics/omni/build_network()
 	for(var/datum/omni_port/P in ports)
 		if(!P.network && P.node)
