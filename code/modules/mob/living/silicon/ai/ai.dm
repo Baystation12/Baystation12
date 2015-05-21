@@ -819,7 +819,8 @@ var/list/ai_verbs_default = list(
 // Shows AI Malfunction related information to the AI.
 /mob/living/silicon/ai/show_malf_ai()
 	if(src.is_malf())
-		stat(null, "Hacked APCs: [src.hacked_apcs.len]")
+		if(src.hacked_apcs)
+			stat(null, "Hacked APCs: [src.hacked_apcs.len]")
 		stat(null, "System Status: [src.hacking ? "Busy" : "Stand-By"]")
 		if(src.research)
 			stat(null, "Available CPU: [src.research.stored_cpu] TFlops")
