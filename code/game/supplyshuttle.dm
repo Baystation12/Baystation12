@@ -235,7 +235,7 @@ var/list/mechtoys = list(
 			if(T.density)	continue
 			var/contcount
 			for(var/atom/A in T.contents)
-				if(A.simulated)
+				if(!A.simulated)
 					continue
 				contcount++
 			if(contcount)
