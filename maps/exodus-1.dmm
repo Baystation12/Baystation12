@@ -4927,7 +4927,7 @@
 "bQM" = (/obj/structure/table/standard,/obj/machinery/newscaster/security_unit{pixel_x = 0; pixel_y = 32},/obj/machinery/recharger{pixel_y = 0},/obj/item/weapon/packageWrap,/obj/item/weapon/hand_labeler,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/structure/cable/green{d1 = 4; d2 = 8; icon_state = "4-8"},/turf/simulated/floor,/area/crew_quarters/heads/hop)
 "bQN" = (/obj/machinery/disposal,/obj/structure/disposalpipe/trunk{dir = 1},/obj/machinery/light,/turf/simulated/floor,/area/janitor)
 "bQO" = (/obj/structure/janitorialcart,/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 4},/turf/simulated/floor,/area/janitor)
-"bQP" = (/obj/item/weapon/legcuffs/beartrap,/obj/item/weapon/legcuffs/beartrap,/obj/item/weapon/storage/box/mousetraps,/obj/item/weapon/storage/box/mousetraps,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/turf/simulated/floor,/area/janitor)
+"bQP" = (/obj/item/weapon/beartrap,/obj/item/weapon/storage/box/mousetraps,/obj/item/weapon/storage/box/mousetraps,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/item/weapon/beartrap,/turf/simulated/floor,/area/janitor)
 "bQQ" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 10},/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/structure/cable/green{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor,/area/janitor)
 "bQR" = (/obj/structure/reagent_dispensers/watertank,/turf/simulated/floor,/area/janitor)
 "bQS" = (/obj/effect/decal/cleanable/cobweb,/obj/effect/decal/cleanable/generic,/turf/simulated/floor/plating,/area/maintenance/engineering)

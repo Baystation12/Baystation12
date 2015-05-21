@@ -116,7 +116,7 @@
 			for(var/datum/chemical_reaction/C in chemical_reactions_list[R.id])
 				var/reagents_suitable = 1
 				for(var/B in C.required_reagents)
-					if(!has_reagent(B, C.required_reagents[B]))
+					if(!has_reagent(B))
 						reagents_suitable = 0
 				for(var/B in C.catalysts)
 					if(!has_reagent(B, C.catalysts[B]))

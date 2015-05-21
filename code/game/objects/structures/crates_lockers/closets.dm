@@ -24,9 +24,39 @@
 
 /obj/structure/closet/initialize()
 	if(!opened)		// if closed, any item at the crate's loc is put in the contents
-		for(var/obj/item/I in src.loc)
+		var/obj/item/I
+		for(I in src.loc)
 			if(I.density || I.anchored || I == src) continue
 			I.loc = src
+		// adjust locker size to hold all items with 5 units of free store room
+		var/content_size = 0
+		for(I in src.contents)
+			content_size += Ceiling(I.w_class/2)
+		if(content_size > storage_capacity-5)
+			storage_capacity = content_size + 5
+
+
+/obj/structure/closet/examine(mob/user)
+	if(get_dist(src, user) > 1)
+		return ..(user)
+
+	if(opened)
+		var/content_size = 0
+		for(var/obj/item/I in src.contents)
+			if(!I.anchored)
+				content_size += Ceiling(I.w_class/2)
+		if(!content_size)
+			user << "It is empty."
+		else if(storage_capacity > content_size*4)
+			user << "It is barely filled."
+		else if(storage_capacity > content_size*2)
+			user << "It is less than half full."
+		else if(storage_capacity > content_size)
+			user << "There is still some free space."
+		else
+			user << "It is full."
+
+
 
 /obj/structure/closet/alter_health()
 	return get_turf(src)
