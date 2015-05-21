@@ -114,8 +114,8 @@
 			return
 
 //window placing begin
-	else if(istype(W,/obj/item/stack/sheet/glass))
-		var/obj/item/stack/sheet/glass/ST = W
+	else if(istype(W,/obj/item/stack/material/glass))
+		var/obj/item/stack/material/glass/ST = W
 		var/dir_to_set = 1
 		if(loc == user.loc)
 			dir_to_set = user.dir
@@ -153,7 +153,7 @@
 		return
 //window placing end
 
-	else if(istype(W, /obj/item/weapon/shard))
+	else if(istype(W, /obj/item/weapon/material/shard))
 		health -= W.force * 0.1
 	else if(!shock(user, 70))
 		playsound(loc, 'sound/effects/grillehit.ogg', 80, 1)

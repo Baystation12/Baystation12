@@ -1,0 +1,7 @@
+author: Zuhayr
+delete-after: True
+changes: 
+  - rscadd: "Massive material refactor. Walls, beds, chairs, stools, tables, ashtrays, knives, baseball bats, axes, simple doors, barricades, so on."
+  - rscadd: "Tables are now built via steel then another sheet on the resulting frame. They can then be reinforced by dragging a stack of sheets onto the table."
+  - rscadd: "Walls are built with steel for girders, then right-click the girder and select the reinforce verb while holding a stack, then click the girders with a final sheet."
+  - rscadd: "Various things can be built with various sheet types. Experiment! Just keep in mind that uranium is now radioactive and phoron is now flammable."

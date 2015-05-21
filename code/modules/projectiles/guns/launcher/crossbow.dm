@@ -41,7 +41,7 @@
 /obj/item/weapon/arrow/rod/removed(mob/user)
 	if(throwforce == 15) // The rod has been superheated - we don't want it to be useable when removed from the bow.
 		user  << "[src] shatters into a scattering of overstressed metal shards as it leaves the crossbow."
-		var/obj/item/weapon/shard/shrapnel/S = new()
+		var/obj/item/weapon/material/shard/shrapnel/S = new()
 		S.loc = get_turf(src)
 		qdel(src)
 
@@ -254,9 +254,9 @@
 			else
 				user << "<span class='notice'>You need at least five segments of cable coil to complete this task.</span>"
 			return
-	else if(istype(W,/obj/item/stack/sheet/mineral/plastic))
+	else if(istype(W,/obj/item/stack/material/plastic))
 		if(buildstate == 3)
-			var/obj/item/stack/sheet/mineral/plastic/P = W
+			var/obj/item/stack/material/plastic/P = W
 			if(P.use(3))
 				user << "<span class='notice'>You assemble and install a heavy plastic lath onto the crossbow.</span>"
 				buildstate++
