@@ -4,4 +4,4 @@ delete-after: True
 
 changes: 
   - rscadd: "Tape recorders now record hearable emotes and action messages (e.g. gunshots)."
-  - bugfix: "You can how see actions from inside mechs and closets."
+  - bugfix: "You can now see actions from inside mechs and closets."
