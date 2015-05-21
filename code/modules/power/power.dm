@@ -374,7 +374,7 @@
 	if (source_area)
 		source_area.use_power(drained_energy/CELLRATE)
 	else if (istype(power_source,/datum/powernet))
-		var/drained_power = drained_energy/CELLRATE //convert from "joules" to "watts"
+		var/drained_power = drained_energy/CELLRATE
 		drained_power = PN.draw_power(drained_power)
 	else if (istype(power_source, /obj/item/weapon/cell))
 		cell.use(drained_energy)

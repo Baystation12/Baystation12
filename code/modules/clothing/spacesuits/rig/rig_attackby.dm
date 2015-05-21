@@ -3,9 +3,7 @@
 	if(!istype(user,/mob/living)) return 0
 
 	if(electrified != 0)
-		if(cell && cell.charge >= 100)
-			cell.use(100)
-		if(shock(user, 100))
+		if(shock(user)) //Handles removing charge from the cell, as well. No need to do that here.
 			return
 
 	// Pass repair items on to the chestpiece.
@@ -193,8 +191,6 @@
 /obj/item/weapon/rig/attack_hand(var/mob/user)
 
 	if(electrified != 0)
-		if(cell && cell.charge >= 100)
-			cell.use(100)
-		if(shock(user, 100))
+		if(shock(user)) //Handles removing charge from the cell, as well. No need to do that here.
 			return
 	..()
