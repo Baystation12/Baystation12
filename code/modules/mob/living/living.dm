@@ -794,3 +794,19 @@ default behaviour is:
 			set_dir(D)
 			spintime -= speed
 	return
+
+/mob/living/touch_map_edge()
+	var/list/disk_search = search_contents_for(/obj/item/weapon/disk/nuclear)
+	if(!isemptylist(disk_search) && client && stat != DEAD)
+		if(x <= TRANSITIONEDGE)
+			inertia_dir = 4
+		else if(x >= world.maxx -TRANSITIONEDGE)
+			inertia_dir = 8
+		else if(y <= TRANSITIONEDGE)
+			inertia_dir = 1
+		else if(y >= world.maxy -TRANSITIONEDGE)
+			inertia_dir = 2
+		src << "<span class='warning>Something you are carrying is preventing you from leaving.</span>"
+		return
+	
+	..() //Should make the disk respawn it is on a clientless mob or corpse

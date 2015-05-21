@@ -429,3 +429,6 @@ obj/machinery/nuclearbomb/proc/nukehack_win(mob/user as mob)
 		message_admins("[src] has been destroyed. Spawning [D] at ([D.x], [D.y], [D.z]).")
 		log_game("[src] has been destroyed. Spawning [D] at ([D.x], [D.y], [D.z]).")
 	..()
+
+/obj/item/weapon/disk/nuclear/touch_map_edge()
+	qdel(src)
