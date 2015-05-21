@@ -478,6 +478,8 @@ its easier to just keep the beam vertical.
 			var/mob/M = I
 			if(M.see_invisible >= invisibility) // Cannot view the invisible
 				M.show_message( message, 1, blind_message, 2)
+			else if (blind_message)
+				M.show_message(blind_message, 2)
 
 // Show a message to all mobs and objects in earshot of this atom
 // Use for objects performing audible actions

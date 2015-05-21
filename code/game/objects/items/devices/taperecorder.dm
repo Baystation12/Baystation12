@@ -116,7 +116,7 @@
 	else if(playing == 1)
 		playing = 0
 		var/turf/T = get_turf(src)
-		T.visible_message("<font color=Maroon><B>Tape Recorder</B>: Playback stopped.</font>")
+		T.audible_message("<font color=Maroon><B>Tape Recorder</B>: Playback stopped.</font>")
 		icon_state = "taperecorderidle"
 		return
 
@@ -168,37 +168,37 @@
 		var/playedmessage = storedinfo[i]
 		if (findtextEx(playedmessage,"*",1,2)) //remove marker for action sounds
 			playedmessage = copytext(playedmessage,2)
-		T.visible_message("<font color=Maroon><B>Tape Recorder</B>: [playedmessage]</font>")
+		T.audible_message("<font color=Maroon><B>Tape Recorder</B>: [playedmessage]</font>")
 		if(storedinfo.len < i+1)
 			playsleepseconds = 1
 			sleep(10)
 			T = get_turf(src)
-			T.visible_message("<font color=Maroon><B>Tape Recorder</B>: End of recording.</font>")
+			T.audible_message("<font color=Maroon><B>Tape Recorder</B>: End of recording.</font>")
 		else
 			playsleepseconds = timestamp[i+1] - timestamp[i]
 		if(playsleepseconds > 14)
 			sleep(10)
 			T = get_turf(src)
-			T.visible_message("<font color=Maroon><B>Tape Recorder</B>: Skipping [playsleepseconds] seconds of silence</font>")
+			T.audible_message("<font color=Maroon><B>Tape Recorder</B>: Skipping [playsleepseconds] seconds of silence</font>")
 			playsleepseconds = 1
 		i++
 	icon_state = "taperecorderidle"
 	playing = 0
 	if(emagged == 1.0)
 		var/turf/T = get_turf(src)
-		T.visible_message("<font color=Maroon><B>Tape Recorder</B>: This tape recorder will self-destruct in... Five.</font>")
+		T.audible_message("<font color=Maroon><B>Tape Recorder</B>: This tape recorder will self-destruct in... Five.</font>")
 		sleep(10)
 		T = get_turf(src)
-		T.visible_message("<font color=Maroon><B>Tape Recorder</B>: Four.</font>")
+		T.audible_message("<font color=Maroon><B>Tape Recorder</B>: Four.</font>")
 		sleep(10)
 		T = get_turf(src)
-		T.visible_message("<font color=Maroon><B>Tape Recorder</B>: Three.</font>")
+		T.audible_message("<font color=Maroon><B>Tape Recorder</B>: Three.</font>")
 		sleep(10)
 		T = get_turf(src)
-		T.visible_message("<font color=Maroon><B>Tape Recorder</B>: Two.</font>")
+		T.audible_message("<font color=Maroon><B>Tape Recorder</B>: Two.</font>")
 		sleep(10)
 		T = get_turf(src)
-		T.visible_message("<font color=Maroon><B>Tape Recorder</B>: One.</font>")
+		T.audible_message("<font color=Maroon><B>Tape Recorder</B>: One.</font>")
 		sleep(10)
 		explode()
 
