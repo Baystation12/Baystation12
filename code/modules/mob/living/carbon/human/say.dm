@@ -114,9 +114,11 @@
 				used_radios += R
 
 		if("intercom")
-			for(var/obj/item/device/radio/intercom/I in view(1, null))
-				I.talk_into(src, message, null, verb, speaking)
-				used_radios += I
+			if(!src.restrained())
+				for(var/obj/item/device/radio/intercom/I in view(1, null))
+					I.talk_into(src, message, null, verb, speaking)
+					I.add_fingerprint(src)
+					used_radios += I
 		if("whisper")
 			whisper_say(message, speaking, alt_name)
 			return
