@@ -328,6 +328,7 @@
 								bad = 1
 							if(E.status & ORGAN_DEAD)
 								assailant << "<span class='warning'>[E] is decaying!</span>"
+								bad = 1
 							if(!bad)
 								assailant << "<span class='notice'>[H]'s skin is normal.</span>"
 						else
