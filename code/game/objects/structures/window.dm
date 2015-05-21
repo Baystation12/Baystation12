@@ -178,6 +178,7 @@
 	if(HULK in user.mutations)
 		user.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!"))
 		user.visible_message("<span class='danger'>[user] smashes through [src]!</span>")
+		user.do_attack_animation(src)
 		shatter()
 
 	else if (usr.a_intent == I_HURT)
@@ -189,13 +190,14 @@
 				return
 
 		playsound(src.loc, 'sound/effects/glassknock.ogg', 80, 1)
-		usr.visible_message("\red [usr.name] bangs against the [src.name]!", \
-							"\red You bang against the [src.name]!", \
+		user.do_attack_animation(src)
+		usr.visible_message("\red [usr.name] bangs against the [src.name]!",
+							"\red You bang against the [src.name]!",
 							"You hear a banging sound.")
 	else
 		playsound(src.loc, 'sound/effects/glassknock.ogg', 80, 1)
-		usr.visible_message("[usr.name] knocks on the [src.name].", \
-							"You knock on the [src.name].", \
+		usr.visible_message("[usr.name] knocks on the [src.name].",
+							"You knock on the [src.name].",
 							"You hear a knocking sound.")
 	return
 
@@ -207,6 +209,7 @@
 		take_damage(damage)
 	else
 		visible_message("<span class='notice'>\The [user] bonks \the [src] harmlessly.</span>")
+	user.do_attack_animation(src)
 	return 1
 
 /obj/structure/window/attackby(obj/item/W as obj, mob/user as mob)
@@ -269,6 +272,7 @@
 			qdel(src)
 	else
 		if(W.damtype == BRUTE || W.damtype == BURN)
+			user.do_attack_animation(src)
 			hit(W.force)
 			if(health <= 7)
 				anchored = 0

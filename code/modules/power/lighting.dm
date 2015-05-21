@@ -271,6 +271,7 @@
 	if(!(status == LIGHT_OK||status == LIGHT_BURNED))
 		return
 	visible_message("<span class='danger'>[user] smashes the light!</span>")
+	user.do_attack_animation(src)
 	broken()
 	return 1
 

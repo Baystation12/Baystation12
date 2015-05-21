@@ -20,6 +20,15 @@
 /obj/item/proc/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
 	return
 
+//TODO: refactor mob attack code.
+/*
+Busy writing something else that I don't want to get mixed up in a general attack code, and I don't want to forget this so leaving a note here.
+leave attackby() as handling the general case of "using an item on a mob"
+attackby() will decide to call attacked_by() or not.
+attacked_by() will be made a living level proc and handle the specific case of "attacking with an item to cause harm"
+attacked_by() will then call attack() so that stunbatons and other weapons that have special attack effects can do their thing.
+attacked_by() will handle hitting/missing/logging as it does now, and will call attack() to apply the attack effects (damage) instead of the other way around (as it is now).
+*/
 
 /obj/item/proc/attack(mob/living/M as mob, mob/living/user as mob, def_zone)
 
@@ -57,6 +66,7 @@
 		power *= 2
 
 	// TODO: needs to be refactored into a mob/living level attacked_by() proc. ~Z
+	user.do_attack_animation(M)
 	if(istype(M, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = M
 

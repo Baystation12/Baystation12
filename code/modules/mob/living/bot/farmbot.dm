@@ -228,6 +228,7 @@
 		switch(action)
 			if("weed")
 				flick("farmbot_hoe", src)
+				do_attack_animation(A)
 				if(prob(50))
 					visible_message("<span class='danger'>[src] swings wildly at [A] with a minihoe, missing completely!</span>")
 					return
