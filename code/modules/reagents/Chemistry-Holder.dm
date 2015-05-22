@@ -3,7 +3,6 @@
 	var/total_volume = 0
 	var/maximum_volume = 100
 	var/atom/my_atom = null
-	var/reacting = 0 // Reacting right now
 
 /datum/reagents/New(var/max = 100)
 	maximum_volume = max
