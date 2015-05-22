@@ -7,7 +7,7 @@
 	min_force = 4
 	hitsound = 'sound/effects/Glasshit.ogg'
 	maxhealth = 150 //If you change this, consiter changing ../door/window/brigdoor/ health at the bottom of this .dm file
-	health = 150
+	health
 	visible = 0.0
 	use_power = 0
 	flags = ON_BORDER
@@ -25,7 +25,7 @@
 	return
 
 /obj/machinery/door/window/proc/shatter(var/display_message = 1)
-	new /obj/item/weapon/material/shard(src.loc)
+	new /obj/item/weapon/shard(src.loc)
 	var/obj/item/stack/cable_coil/CC = new /obj/item/stack/cable_coil(src.loc)
 	CC.amount = 2
 	var/obj/item/weapon/airlock_electronics/ae
@@ -249,14 +249,13 @@
 
 
 /obj/machinery/door/window/brigdoor
-	name = "secure door"
+	name = "Secure Door"
 	icon = 'icons/obj/doors/windoor.dmi'
 	icon_state = "leftsecure"
 	base_state = "leftsecure"
 	req_access = list(access_security)
 	var/id = null
-	maxhealth = 300
-	health = 300.0 //Stronger doors for prison (regular window door health is 150)
+	health = 300.0 //Stronger doors for prison (regular window door health is 200)
 
 
 /obj/machinery/door/window/northleft

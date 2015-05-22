@@ -129,11 +129,7 @@
 			return
 
 	if (use(required))
-		var/atom/O
-		if(recipe.use_material)
-			O = new recipe.result_type(user.loc, recipe.use_material)
-		else
-			O = new recipe.result_type(user.loc)
+		var/atom/O = new recipe.result_type(user.loc)
 		O.set_dir(user.dir)
 		O.add_fingerprint(user)
 
@@ -342,9 +338,7 @@
 	var/time = 0
 	var/one_per_turf = 0
 	var/on_floor = 0
-	var/use_material
-
-	New(title, result_type, req_amount = 1, res_amount = 1, max_res_amount = 1, time = 0, one_per_turf = 0, on_floor = 0, supplied_material = null)
+	New(title, result_type, req_amount = 1, res_amount = 1, max_res_amount = 1, time = 0, one_per_turf = 0, on_floor = 0)
 		src.title = title
 		src.result_type = result_type
 		src.req_amount = req_amount
@@ -353,7 +347,6 @@
 		src.time = time
 		src.one_per_turf = one_per_turf
 		src.on_floor = on_floor
-		src.use_material = supplied_material
 
 /*
  * Recipe list datum

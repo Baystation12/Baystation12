@@ -409,19 +409,6 @@
 		C.toggled = 1
 		src << "\red You enable [C.name]."
 
-// this function shows information about the malf_ai gameplay type in the status screen
-/mob/living/silicon/robot/show_malf_ai()
-	..()
-	for (var/datum/mind/malfai in malf.current_antagonists)
-		if(connected_ai)
-			if(connected_ai.mind == malfai)
-				if(malf.hacked_apcs >= 3)
-					stat(null, "Time until station control secured: [max(malf.hack_time/(malf.hacked_apcs/3), 0)] seconds")
-		else if(malf.revealed)
-			stat(null, "Time left: [max(malf.hack_time/(malf.hacked_apcs.len/3), 0)]")
-	return 0
-
-
 // this function displays jetpack pressure in the stat panel
 /mob/living/silicon/robot/proc/show_jetpack_pressure()
 	// if you have a jetpack, show the internal tank pressure
@@ -1081,9 +1068,8 @@
 	if(cell.charge == 0)
 		return 0
 
-	var/power_use = amount * CYBORG_POWER_USAGE_MULTIPLIER
-	if(cell.checked_use(CELLRATE * power_use))
-		used_power_this_tick += power_use
+	if(cell.use(amount * CELLRATE * CYBORG_POWER_USAGE_MULTIPLIER))
+		used_power_this_tick += amount * CYBORG_POWER_USAGE_MULTIPLIER
 		return 1
 	return 0
 

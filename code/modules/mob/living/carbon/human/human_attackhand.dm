@@ -15,11 +15,10 @@
 	if(istype(H))
 		if((H != src) && check_shields(0, H.name))
 			visible_message("\red <B>[H] attempted to touch [src]!</B>")
-			H.do_attack_animation(src)
 			return 0
 
 		if(istype(H.gloves, /obj/item/clothing/gloves/boxing/hologlove))
-			H.do_attack_animation(src)
+
 			var/damage = rand(0, 9)
 			if(!damage)
 				playsound(loc, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
@@ -47,32 +46,25 @@
 
 	switch(M.a_intent)
 		if(I_HELP)
-			if(istype(H) && health < config.health_threshold_crit && health > config.health_threshold_dead)
+
+			if(istype(H) && health < config.health_threshold_crit)
+
 				if((H.head && (H.head.flags & HEADCOVERSMOUTH)) || (H.wear_mask && (H.wear_mask.flags & MASKCOVERSMOUTH)))
-					H << "<span class='notice'>Remove your mask!</span>"
+					H << "\blue <B>Remove your mask!</B>"
 					return 0
 				if((head && (head.flags & HEADCOVERSMOUTH)) || (wear_mask && (wear_mask.flags & MASKCOVERSMOUTH)))
-					H << "<span class='notice'>Remove [src]'s mask!</span>"
+					H << "\blue <B>Remove [src]'s mask!</B>"
 					return 0
 
-				if (!cpr_time)
-					return 0
-
-				cpr_time = 0
-				spawn(30)
-					cpr_time = 1
-
-				H.visible_message("<span class='danger'>\The [H] is trying perform CPR on \the [src]!</span>")
-
-				if(!do_after(H, 30))
-					return
-
-				adjustOxyLoss(-(min(getOxyLoss(), 5)))
-				updatehealth()
-				H.visible_message("<span class='danger'>\The [H] performs CPR on \the [src]!</span>")
-				src << "<span class='notice'>You feel a breath of fresh air enter your lungs. It feels good.</span>"
-				H << "<span class='warning'>Repeat at least every 7 seconds.</span>"
-
+				var/obj/effect/equip_e/human/O = new /obj/effect/equip_e/human()
+				O.source = M
+				O.target = src
+				O.s_loc = M.loc
+				O.t_loc = loc
+				O.place = "CPR"
+				requests += O
+				spawn(0)
+					O.process()
 			else
 				help_shake_act(M)
 			return 1
@@ -96,7 +88,6 @@
 			G.synch()
 			LAssailant = M
 
-			H.do_attack_animation(src)
 			playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 			visible_message("<span class='warning'>[M] has grabbed [src] passively!</span>")
 			return 1
@@ -188,7 +179,6 @@
 			if(!attack)
 				return 0
 
-			H.do_attack_animation(src)
 			if(!attack_message)
 				attack.show_attack(H, src, hit_zone, rand_damage)
 			else
@@ -223,7 +213,6 @@
 			src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been disarmed by [M.name] ([M.ckey])</font>")
 
 			msg_admin_attack("[key_name(M)] disarmed [src.name] ([src.ckey])")
-			M.do_attack_animation(src)
 
 			if(w_uniform)
 				w_uniform.add_fingerprint(M)
@@ -282,7 +271,6 @@
 	user.attack_log += text("\[[time_stamp()]\] <font color='red'>attacked [src.name] ([src.ckey])</font>")
 	src.attack_log += text("\[[time_stamp()]\] <font color='orange'>was attacked by [user.name] ([user.ckey])</font>")
 	src.visible_message("<span class='danger'>[user] has [attack_message] [src]!</span>")
-	user.do_attack_animation(src)
 
 	var/dam_zone = pick("head", "chest", "l_arm", "r_arm", "l_leg", "r_leg", "groin")
 	var/obj/item/organ/external/affecting = get_organ(ran_zone(dam_zone))
@@ -305,7 +293,7 @@
 	var/dislocation_str
 	if(prob(W.force))
 		dislocation_str = "[src]'s [organ.joint] [pick("gives way","caves in","crumbles","collapses")]!"
-		organ.dislocate(1)
+		organ.dislocate()
 	return dislocation_str
 
 //Used to attack a joint through grabbing
@@ -329,7 +317,7 @@
 
 	user.visible_message("<span class='warning'>[user] begins to dislocate [src]'s [organ.joint]!</span>")
 	if(do_after(user, 100))
-		organ.dislocate(1)
+		organ.dislocate()
 		src.visible_message("<span class='danger'>[src]'s [organ.joint] [pick("gives way","caves in","crumbles","collapses")]!</span>")
 		return 1
 	return 0

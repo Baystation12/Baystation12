@@ -34,7 +34,6 @@ var/global/list/limb_icon_cache = list()
 /obj/item/organ/external/head/get_icon()
 
 	..()
-	overlays.Cut()
 	if(owner.species.has_organ["eyes"])
 		var/obj/item/organ/eyes/eyes = owner.internal_organs_by_name["eyes"]
 		if(owner.species.eyes)
@@ -44,12 +43,9 @@ var/global/list/limb_icon_cache = list()
 			else
 				eyes_icon.Blend(rgb(128,0,0), ICON_ADD)
 			mob_icon.Blend(eyes_icon, ICON_OVERLAY)
-			overlays |= eyes_icon
 
 	if(owner.lip_style && (owner.species && (owner.species.flags & HAS_LIPS)))
-		var/icon/lip_icon = new/icon('icons/mob/human_face.dmi', "lips_[owner.lip_style]_s")
-		overlays |= lip_icon
-		mob_icon.Blend(lip_icon, ICON_OVERLAY)
+		mob_icon.Blend(new/icon('icons/mob/human_face.dmi', "lips_[owner.lip_style]_s"), ICON_OVERLAY)
 
 	if(owner.f_style)
 		var/datum/sprite_accessory/facial_hair_style = facial_hair_styles_list[owner.f_style]

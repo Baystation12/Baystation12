@@ -90,15 +90,15 @@ var/global/datum/controller/gameticker/ticker
 			src.mode = new mtype
 	else
 		src.mode = config.pick_mode(master_mode)
+
+	job_master.DivideOccupations() // Apparently important for new antagonist system to register specific job antags properly.
+
 	if(!mode_started && !src.mode.can_start())
 		world << "<B>Unable to start [mode.name].</B> Not enough players, [mode.required_players] players needed. Reverting to pre-game lobby."
 		current_state = GAME_STATE_PREGAME
 		mode = null
 		job_master.ResetOccupations()
 		return 0
-
-	//Configure mode and assign player to special mode stuff
-	job_master.DivideOccupations() //Distribute jobs
 
 	if(hide_mode)
 		var/list/modes = new
@@ -110,11 +110,11 @@ var/global/datum/controller/gameticker/ticker
 	else
 		src.mode.announce()
 
-	current_state = GAME_STATE_PLAYING
 	create_characters() //Create player characters and transfer them
 	collect_minds()
 	equip_characters()
 	data_core.manifest()
+	current_state = GAME_STATE_PLAYING
 
 	callHook("roundstart")
 
@@ -155,6 +155,7 @@ var/global/datum/controller/gameticker/ticker
 	for(var/obj/multiz/ladder/L in world) L.connect() //Lazy hackfix for ladders. TODO: move this to an actual controller. ~ Z
 
 	if(config.sql_enabled)
+		spawn(3000)
 		statistic_cycle() // Polls population totals regularly and stores them in an SQL DB -- TLE
 
 	return 1
@@ -291,7 +292,7 @@ var/global/datum/controller/gameticker/ticker
 				if(player.mind.assigned_role != "MODE")
 					job_master.EquipRank(player, player.mind.assigned_role, 0)
 					UpdateFactionList(player)
-					equip_custom_items(player)
+					EquipCustomItems(player)
 		if(captainless)
 			for(var/mob/M in player_list)
 				if(!istype(M,/mob/new_player))

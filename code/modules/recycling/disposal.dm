@@ -663,8 +663,7 @@
 	var/health = 10 	// health points 0-10
 	layer = 2.3			// slightly lower than wires and other pipes
 	var/base_icon_state	// initial icon state on map
-	var/sortType = ""
-	var/subtype = 0
+
 	// new pipe, set the icon_state as on map
 	New()
 		..()
@@ -911,10 +910,8 @@
 				C.ptype = 5
 			if("pipe-j1s")
 				C.ptype = 9
-				C.sortType = sortType
 			if("pipe-j2s")
 				C.ptype = 10
-				C.sortType = sortType
 ///// Z-Level stuff
 			if("pipe-u")
 				C.ptype = 11
@@ -925,7 +922,6 @@
 				C.ptype = 13
 			if("pipe-tagger-partial")
 				C.ptype = 14
-		C.subtype = src.subtype
 		src.transfer_fingerprints_to(C)
 		C.set_dir(dir)
 		C.density = 0
@@ -1191,6 +1187,7 @@
 	icon_state = "pipe-j1s"
 	desc = "An underfloor disposal pipe with a package sorting mechanism."
 
+	var/sortType = ""
 	var/posdir = 0
 	var/negdir = 0
 	var/sortdir = 0
@@ -1281,7 +1278,7 @@
 /obj/structure/disposalpipe/sortjunction/wildcard
 	name = "wildcard sorting junction"
 	desc = "An underfloor disposal pipe which filters all wrapped and tagged items."
-	subtype = 1
+
 	divert_check(var/checkTag)
 		return checkTag != ""
 
@@ -1289,7 +1286,7 @@
 /obj/structure/disposalpipe/sortjunction/untagged
 	name = "untagged sorting junction"
 	desc = "An underfloor disposal pipe which filters all untagged items."
-	subtype = 2
+
 	divert_check(var/checkTag)
 		return checkTag == ""
 

@@ -54,10 +54,8 @@ var/const/MAX_ACTIVE_TIME = 400
 		user << "\red \b It looks like the proboscis has been removed."
 	return
 
-/obj/item/clothing/mask/facehugger/attackby(obj/item/I, mob/user)
-	if(I.force)
-		user.do_attack_animation(src)
-		Die()
+/obj/item/clothing/mask/facehugger/attackby()
+	Die()
 	return
 
 /obj/item/clothing/mask/facehugger/bullet_act()
@@ -65,7 +63,7 @@ var/const/MAX_ACTIVE_TIME = 400
 	return
 
 /obj/item/clothing/mask/facehugger/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
-	if(exposed_temperature > T0C+80)
+	if(exposed_temperature > 300)
 		Die()
 	return
 

@@ -279,7 +279,7 @@ var/global/list/gear_datums = list()
 
 /datum/gear/scanning_goggles
 	display_name = "scanning goggles"
-	path = /obj/item/clothing/glasses/science/scanners
+	path = /obj/item/clothing/glasses/fluff/uzenwa_sissra_1
 	cost = 1
 	slot = slot_glasses
 
@@ -893,7 +893,7 @@ var/global/list/gear_datums = list()
 
 /datum/gear/toeless_jackboots
 	display_name = "toe-less jackboots"
-	path = /obj/item/clothing/shoes/jackboots/unathi
+	path = /obj/item/clothing/shoes/jackboots/fluff/kecer_eldraran
 	cost = 1
 	slot = slot_shoes
 
@@ -1035,7 +1035,7 @@ var/global/list/gear_datums = list()
 
 /datum/gear/ashtray
 	display_name = "ashtray, plastic"
-	path = /obj/item/weapon/material/ashtray/plastic
+	path = /obj/item/ashtray/plastic
 	sort_category = "misc"
 	cost = 1
 

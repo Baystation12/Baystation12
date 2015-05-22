@@ -41,7 +41,7 @@
 /obj/item/weapon/arrow/rod/removed(mob/user)
 	if(throwforce == 15) // The rod has been superheated - we don't want it to be useable when removed from the bow.
 		user  << "[src] shatters into a scattering of overstressed metal shards as it leaves the crossbow."
-		var/obj/item/weapon/material/shard/shrapnel/S = new()
+		var/obj/item/weapon/shard/shrapnel/S = new()
 		S.loc = get_turf(src)
 		qdel(src)
 
@@ -68,14 +68,14 @@
 
 /obj/item/weapon/gun/launcher/crossbow/consume_next_projectile(mob/user=null)
 	if(tension <= 0)
-		user << "<span class='warning'>\The [src] is not drawn back!</span>"
+		user << "\red \The [src] is not drawn back!"
 		return null
 	return bolt
 
 /obj/item/weapon/gun/launcher/crossbow/handle_post_fire(mob/user, atom/target)
 	bolt = null
+	icon_state = "crossbow"
 	tension = 0
-	update_icon()
 	..()
 
 /obj/item/weapon/gun/launcher/crossbow/attack_self(mob/living/user as mob)
@@ -89,7 +89,7 @@
 		else
 			user.visible_message("[user] relaxes the tension on [src]'s string.","You relax the tension on [src]'s string.")
 		tension = 0
-		update_icon()
+		icon_state = "crossbow"
 	else
 		draw(user)
 
@@ -106,19 +106,15 @@
 	user.visible_message("[user] begins to draw back the string of [src].","<span class='notice'>You begin to draw back the string of [src].</span>")
 	tension = 1
 
-	while(bolt && tension && loc == current_user)
+	while(bolt && tension && current_user == user)
 		if(!do_after(user, 25)) //crossbow strings don't just magically pull back on their own.
 			user.visible_message("[usr] stops drawing and relaxes the string of [src].","<span class='warning'>You stop drawing back and relax the string of [src].</span>")
 			tension = 0
-			update_icon()
+			icon_state = "crossbow"
 			return
 
-		//double check that the user hasn't removed the bolt in the meantime
-		if(!(bolt && tension && loc == current_user))
-			return
-		
 		tension++
-		update_icon()
+		icon_state = "crossbow-drawn"
 
 		if(tension >= max_tension)
 			tension = max_tension
@@ -136,10 +132,11 @@
 /obj/item/weapon/gun/launcher/crossbow/attackby(obj/item/W as obj, mob/user as mob)
 	if(!bolt)
 		if (istype(W,/obj/item/weapon/arrow))
-			user.drop_from_inventory(W, src)
+			user.drop_item()
 			bolt = W
+			bolt.loc = src
 			user.visible_message("[user] slides [bolt] into [src].","You slide [bolt] into [src].")
-			update_icon()
+			icon_state = "crossbow-nocked"
 			return
 		else if(istype(W,/obj/item/stack/rods))
 			var/obj/item/stack/rods/R = W
@@ -147,7 +144,7 @@
 				bolt = new /obj/item/weapon/arrow/rod(src)
 				bolt.fingerprintslast = src.fingerprintslast
 				bolt.loc = src
-				update_icon()
+				icon_state = "crossbow-nocked"
 				user.visible_message("[user] jams [bolt] into [src].","You jam [bolt] into [src].")
 				superheat_rod(user)
 			return
@@ -185,14 +182,6 @@
 	bolt.icon_state = "metal-rod-superheated"
 	cell.use(500)
 
-/obj/item/weapon/gun/launcher/crossbow/update_icon()
-	if(tension > 1)
-		icon_state = "crossbow-drawn"
-	else if(bolt)
-		icon_state = "crossbow-nocked"
-	else
-		icon_state = "crossbow"
-
 
 // Crossbow construction.
 /obj/item/weapon/crossbowframe
@@ -220,11 +209,11 @@
 		if(buildstate == 0)
 			var/obj/item/stack/rods/R = W
 			if(R.use(3))
-				user << "<span class='notice'>You assemble a backbone of rods around the wooden stock.</span>"
+				user << "\blue You assemble a backbone of rods around the wooden stock."
 				buildstate++
 				update_icon()
 			else
-				user << "<span class='notice'>You need at least three rods to complete this task.</span>"
+				user << "\blue You need at least three rods to complete this task."
 			return
 	else if(istype(W,/obj/item/weapon/weldingtool))
 		if(buildstate == 1)
@@ -232,7 +221,7 @@
 			if(T.remove_fuel(0,user))
 				if(!src || !T.isOn()) return
 				playsound(src.loc, 'sound/items/Welder2.ogg', 100, 1)
-				user << "<span class='notice'>You weld the rods into place.</span>"
+				user << "\blue You weld the rods into place."
 			buildstate++
 			update_icon()
 		return
@@ -240,33 +229,33 @@
 		var/obj/item/stack/cable_coil/C = W
 		if(buildstate == 2)
 			if(C.use(5))
-				user << "<span class='notice'>You wire a crude cell mount into the top of the crossbow.</span>"
+				user << "\blue You wire a crude cell mount into the top of the crossbow."
 				buildstate++
 				update_icon()
 			else
-				user << "<span class='notice'>You need at least five segments of cable coil to complete this task.</span>"
+				user << "\blue You need at least five segments of cable coil to complete this task."
 			return
 		else if(buildstate == 4)
 			if(C.use(5))
-				user << "<span class='notice'>You string a steel cable across the crossbow's lath.</span>"
+				user << "\blue You string a steel cable across the crossbow's lath."
 				buildstate++
 				update_icon()
 			else
-				user << "<span class='notice'>You need at least five segments of cable coil to complete this task.</span>"
+				user << "\blue You need at least five segments of cable coil to complete this task."
 			return
-	else if(istype(W,/obj/item/stack/material/plastic))
+	else if(istype(W,/obj/item/stack/sheet/mineral/plastic))
 		if(buildstate == 3)
-			var/obj/item/stack/material/plastic/P = W
+			var/obj/item/stack/sheet/mineral/plastic/P = W
 			if(P.use(3))
-				user << "<span class='notice'>You assemble and install a heavy plastic lath onto the crossbow.</span>"
+				user << "\blue You assemble and install a heavy plastic lath onto the crossbow."
 				buildstate++
 				update_icon()
 			else
-				user << "<span class='notice'>You need at least three plastic sheets to complete this task.</span>"
+				user << "\blue You need at least three plastic sheets to complete this task."
 			return
 	else if(istype(W,/obj/item/weapon/screwdriver))
 		if(buildstate == 5)
-			user << "<span class='notice'>You secure the crossbow's various parts.</span>"
+			user << "\blue You secure the crossbow's various parts."
 			new /obj/item/weapon/gun/launcher/crossbow(get_turf(src))
 			qdel(src)
 		return

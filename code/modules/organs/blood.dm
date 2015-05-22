@@ -55,8 +55,12 @@ var/const/BLOOD_VOLUME_SURVIVE = 122
 							break
 
 				B.volume += 0.1 // regenerate blood VERY slowly
-				if(CE_BLOODRESTORE in chem_effects)
-					B.volume += chem_effects[CE_BLOODRESTORE]
+				if (reagents.has_reagent("nutriment"))	//Getting food speeds it up
+					B.volume += 0.4
+					reagents.remove_reagent("nutriment", 0.1)
+				if (reagents.has_reagent("iron"))	//Hematogen candy anyone?
+					B.volume += 0.8
+					reagents.remove_reagent("iron", 0.1)
 
 		// Damaged heart virtually reduces the blood volume, as the blood isn't
 		// being pumped properly anymore.
@@ -196,8 +200,9 @@ var/const/BLOOD_VOLUME_SURVIVE = 122
 	vessel.remove_reagent("blood",amount) // Removes blood if human
 
 //Transfers blood from container ot vessels
-/mob/living/carbon/proc/inject_blood(var/datum/reagent/blood/injected, var/amount)
-	if (!injected || !istype(injected))
+/mob/living/carbon/proc/inject_blood(obj/item/weapon/reagent_containers/container, var/amount)
+	var/datum/reagent/blood/injected = get_blood(container.reagents)
+	if (!injected)
 		return
 	var/list/sniffles = virus_copylist(injected.data["virus2"])
 	for(var/ID in sniffles)
@@ -211,8 +216,12 @@ var/const/BLOOD_VOLUME_SURVIVE = 122
 		src.reagents.add_reagent(C, (text2num(chems[C]) / 560) * amount)//adds trace chemicals to owner's blood
 	reagents.update_total()
 
-//Transfers blood from reagents to vessel, respecting blood types compatability.
-/mob/living/carbon/human/inject_blood(var/datum/reagent/blood/injected, var/amount)
+	container.reagents.remove_reagent("blood", amount)
+
+//Transfers blood from container ot vessels, respecting blood types compatability.
+/mob/living/carbon/human/inject_blood(obj/item/weapon/reagent_containers/container, var/amount)
+
+	var/datum/reagent/blood/injected = get_blood(container.reagents)
 
 	if(species && species.flags & NO_BLOOD)
 		reagents.add_reagent("blood", amount, injected.data)

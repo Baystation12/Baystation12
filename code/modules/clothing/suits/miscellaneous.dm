@@ -259,7 +259,7 @@
 	siemens_coefficient = 1
 
 /obj/item/clothing/under/stripper/mankini
-	name = "mankini"
+	name = "the mankini"
 	desc = "No honest man would wear this abomination"
 	icon_state = "mankini"
 	siemens_coefficient = 1

@@ -47,7 +47,6 @@
 	if (ismob(usr))
 		var/mob/M = usr
 		M.update_inv_back()
-		M.update_action_buttons()
 
 	usr << "You toggle the thrusters [on? "on":"off"]."
 

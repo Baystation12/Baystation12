@@ -16,9 +16,9 @@
 		switch (affected.name)
 			if ("head")
 				return 1
-			if ("upper body")
+			if ("chest")
 				return 3
-			if ("lower body")
+			if ("groin")
 				return 2
 		return 0
 
@@ -26,9 +26,9 @@
 		switch (affected.name)
 			if ("head")
 				return "cranial"
-			if ("upper body")
+			if ("chest")
 				return "thoracic"
-			if ("lower body")
+			if ("groin")
 				return "abdominal"
 		return ""
 
@@ -150,7 +150,7 @@
 	allowed_tools = list(
 	/obj/item/weapon/hemostat = 100,	\
 	/obj/item/weapon/wirecutters = 75,	\
-	/obj/item/weapon/material/kitchen/utensil/fork = 20
+	/obj/item/weapon/kitchen/utensil/fork = 20
 	)
 
 	min_duration = 80

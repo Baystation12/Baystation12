@@ -34,8 +34,7 @@
 	handle_hud_list()
 
 	//Handle species-specific deaths.
-	species.handle_death(src)
-	animate_tail_stop()
+	if(species) species.handle_death(src)
 
 	//Handle brain slugs.
 	var/obj/item/organ/external/head = get_organ("head")

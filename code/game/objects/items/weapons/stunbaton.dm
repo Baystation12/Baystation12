@@ -35,13 +35,12 @@
 
 /obj/item/weapon/melee/baton/proc/deductcharge(var/chrgdeductamt)
 	if(bcell)
-		if(bcell.checked_use(chrgdeductamt))
+		if(bcell.use(chrgdeductamt))
 			return 1
 		else
 			status = 0
 			update_icon()
 			return 0
-	return null
 
 /obj/item/weapon/melee/baton/update_icon()
 	if(status)

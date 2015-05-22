@@ -859,16 +859,10 @@
 	proc/handle_chemicals_in_body()
 
 		if(reagents && !(species.flags & IS_SYNTHETIC)) //Synths don't process reagents.
-			chem_effects.Cut()
-			analgesic = 0
 			var/alien = 0
 			if(species && species.reagent_tag)
 				alien = species.reagent_tag
-			touching.metabolize(alien, CHEM_TOUCH)
-			ingested.metabolize(alien, CHEM_INGEST)
-			reagents.metabolize(alien, CHEM_BLOOD)
-			if(CE_PAINKILLER in chem_effects)
-				analgesic = chem_effects[CE_PAINKILLER]
+			reagents.metabolize(src,alien)
 
 			var/total_phoronloss = 0
 			for(var/obj/item/I in src)
@@ -957,6 +951,9 @@
 				silent = 0
 				return 1
 
+			// the analgesic effect wears off slowly
+			analgesic = max(0, analgesic - 1)
+
 			//UNCONSCIOUS. NO-ONE IS HOME
 			if( (getOxyLoss() > 50) || (config.health_threshold_crit > health) )
 				Paralyse(3)
@@ -992,7 +989,6 @@
 				AdjustParalysis(-1)
 				blinded = 1
 				stat = UNCONSCIOUS
-				animate_tail_reset()
 				if(halloss > 0)
 					adjustHalLoss(-3)
 			else if(sleeping)
@@ -1007,7 +1003,6 @@
 						sleeping = max(sleeping-1, 0)
 				blinded = 1
 				stat = UNCONSCIOUS
-				animate_tail_reset()
 				if( prob(2) && health && !hal_crit )
 					spawn(0)
 						emote("snore")
@@ -1130,6 +1125,8 @@
 				client.images.Remove(hud)
 
 		client.screen.Remove(global_hud.blurry, global_hud.druggy, global_hud.vimpaired, global_hud.darkMask, global_hud.nvg, global_hud.thermal, global_hud.meson, global_hud.science)
+
+		update_action_buttons()
 
 		if(damageoverlay.overlays)
 			damageoverlay.overlays = list()
@@ -1260,7 +1257,7 @@
 				see_invisible = SEE_INVISIBLE_LIVING
 
 			if(healths)
-				if (analgesic > 100)
+				if (analgesic)
 					healths.icon_state = "health_health_numb"
 				else
 					switch(hal_screwyhud)
@@ -1452,7 +1449,7 @@
 	handle_shock()
 		..()
 		if(status_flags & GODMODE)	return 0	//godmode
-		if(species && species.flags & NO_PAIN) return
+		if(analgesic || (species && species.flags & NO_PAIN)) return // analgesic avoids all traumatic shock temporarily
 
 		if(health < config.health_threshold_softcrit)// health 0 makes you immediately collapse
 			shock_stage = max(shock_stage, 61)

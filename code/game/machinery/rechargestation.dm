@@ -169,8 +169,7 @@
 				return
 			if(!R.cell.fully_charged())
 				var/diff = min(R.cell.maxcharge - R.cell.charge, charge_rate) 	// Capped at charge_rate charge / tick
-				if (cell.charge >= diff)
-					cell.use(diff)
+				if (cell.use(diff))
 					R.cell.give(diff)
 			if(weld_rate && R.getBruteLoss())
 				R.adjustBruteLoss(-1)

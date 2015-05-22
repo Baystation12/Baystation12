@@ -34,7 +34,7 @@
 				sparks.set_up(3, 0, get_turf(M))
 				sparks.start()
 				//
-				M.Move(pick(trange(50, get_turf(holder))))
+				M.loc = pick(orange(get_turf(T), 50))
 				sparks = new /datum/effect/effect/system/spark_spread()
 				sparks.set_up(3, 0, get_turf(M))
 				sparks.start()

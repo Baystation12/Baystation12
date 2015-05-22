@@ -30,7 +30,6 @@
 			if(activation_sound)
 				usr << activation_sound
 			usr << "You activate the optical matrix on the [src]."
-		user.update_action_buttons()
 
 /obj/item/clothing/glasses/meson
 	name = "Optical Meson Scanner"
@@ -62,11 +61,6 @@
 /obj/item/clothing/glasses/science/New()
 	..()
 	overlay = global_hud.science
-
-/obj/item/clothing/glasses/science/scanners
-	name = "Scanning Goggles"
-	desc = "A very oddly shaped pair of goggles with bits of wire poking out the sides. A soft humming sound emanates from it."
-	icon_state = "uzenwa_sissra_1"
 
 /obj/item/clothing/glasses/night
 	name = "Night Vision Goggles"
@@ -174,8 +168,8 @@
 			body_parts_covered &= ~EYES
 			icon_state = "[initial(icon_state)]up"
 			usr << "You push \the [src] up out of your face."
+
 		update_clothing_icon()
-		usr.update_action_buttons()
 
 /obj/item/clothing/glasses/welding/superior
 	name = "superior welding goggles"
