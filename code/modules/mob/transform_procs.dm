@@ -106,7 +106,8 @@
 	O.add_ai_verbs()
 
 	O.rename_self("ai",1)
-	qdel(src)
+	spawn(0)	// Mobs still instantly del themselves, thus we need to spawn or O will never be returned
+		qdel(src)
 	return O
 
 //human -> robot
@@ -158,7 +159,8 @@
 	callHook("borgify", list(O))
 	O.Namepick()
 
-	qdel(src)
+	spawn(0)	// Mobs still instantly del themselves, thus we need to spawn or O will never be returned
+		qdel(src)
 	return O
 
 //human -> alien

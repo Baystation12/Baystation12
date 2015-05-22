@@ -28,6 +28,7 @@
 
 /turf/simulated/wall/proc/success_smash(var/mob/user)
 	user << "<span class='danger'>You smash through the wall!</span>"
+	user.do_attack_animation(src)
 	spawn(1)
 		dismantle_wall(1)
 

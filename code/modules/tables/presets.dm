@@ -7,6 +7,20 @@
 			material = get_material_by_name(DEFAULT_WALL_MATERIAL)
 			..()
 
+	plastic
+		icon_state = "plain_preview"
+		color = "#EEEEEE"
+		New()
+			material = get_material_by_name("plastic")
+			..()
+
+	marble
+		icon_state = "stone_preview"
+		color = "#CCCCCC"
+		New()
+			material = get_material_by_name("marble")
+			..()
+
 	reinforced
 		icon_state = "reinf_preview"
 		color = "#666666"

@@ -232,8 +232,8 @@
 		if(istype(A,/obj/machinery/door/airlock))
 			var/obj/machinery/door/airlock/D = A
 			D.open(1)
-		else if(istype(A,/obj/structure/mineral_door))
-			var/obj/structure/mineral_door/D = A
+		else if(istype(A,/obj/structure/simple_door))
+			var/obj/structure/simple_door/D = A
 			if(D.density)
 				D.Open()
 		else if(istype(A,/obj/structure/cult/pylon))

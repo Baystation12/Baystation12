@@ -228,6 +228,7 @@
 		switch(action)
 			if("weed")
 				flick("farmbot_hoe", src)
+				do_attack_animation(A)
 				if(prob(50))
 					visible_message("<span class='danger'>[src] swings wildly at [A] with a minihoe, missing completely!</span>")
 					return
@@ -241,7 +242,7 @@
 	visible_message("<span class='danger'>[src] blows apart!</span>")
 	var/turf/Tsec = get_turf(src)
 
-	new /obj/item/weapon/minihoe(Tsec)
+	new /obj/item/weapon/material/minihoe(Tsec)
 	new /obj/item/weapon/reagent_containers/glass/bucket(Tsec)
 	new /obj/item/device/assembly/prox_sensor(Tsec)
 	new /obj/item/device/analyzer/plant_analyzer(Tsec)
@@ -326,7 +327,7 @@
 		user.remove_from_mob(W)
 		qdel(W)
 
-	else if((istype(W, /obj/item/weapon/minihoe)) && (build_step == 2))
+	else if((istype(W, /obj/item/weapon/material/minihoe)) && (build_step == 2))
 		build_step++
 		user << "You add a minihoe to [src]."
 		name = "farmbot assembly with bucket and minihoe"
