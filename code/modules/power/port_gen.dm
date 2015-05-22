@@ -214,7 +214,10 @@
 	else if (temperature > upper_limit)
 		bias = max(round((temperature - average)/TEMPERATURE_DIVISOR, 1), -TEMPERATURE_CHANGE_MAX)
 
-	temperature += rand(-7 + bias, 7 + bias)
+	//limit temperature increase so that it cannot raise temperature above upper_limit,
+	//or if it is already above upper_limit, limit the increase to 0.
+	var/inc_limit = max(upper_limit - temperature, 0)
+	temperature += min(rand(-7 + bias, 7 + bias), inc_limit)
 
 	if (temperature > max_temperature)
 		overheat()
