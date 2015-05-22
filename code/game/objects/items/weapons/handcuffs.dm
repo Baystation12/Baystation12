@@ -147,13 +147,11 @@ var/last_chew = 0
 	if(istype(I, /obj/item/stack/rods))
 		var/obj/item/stack/rods/R = I
 		if (R.use(1))
-			var/obj/item/weapon/wirerod/W = new /obj/item/weapon/wirerod
-
+			var/obj/item/weapon/material/wirerod/W = new(get_turf(user))
 			user.put_in_hands(W)
 			user << "<span class='notice'>You wrap the cable restraint around the top of the rod.</span>"
 			qdel(src)
 			update_icon(user)
-
 
 /obj/item/weapon/handcuffs/cyborg
 	dispenser = 1

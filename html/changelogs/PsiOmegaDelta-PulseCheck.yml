@@ -1,0 +1,6 @@
+author: PsiOmegaDelta
+delete-after: True
+
+changes: 
+  - tweak: "Both the pulse taker and target must now remain still for the duration of the check or it will fail."
+

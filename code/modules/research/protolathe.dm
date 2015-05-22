@@ -115,7 +115,7 @@
 	if(!linked_console)
 		user << "<span class='notice'>\The [src] must be linked to an R&D console first!</span>"
 		return 1
-	if(!istype(O, /obj/item/stack/sheet))
+	if(!istype(O, /obj/item/stack/material))
 		user << "<span class='notice'>You cannot insert this item into \the [src]!</span>"
 		return 1
 	if(stat)
@@ -125,7 +125,7 @@
 		user << "<span class='notice'>\The [src]'s material bin is full. Please remove material before adding more.</span>"
 		return 1
 
-	var/obj/item/stack/sheet/stack = O
+	var/obj/item/stack/material/stack = O
 	var/amount = round(input("How many sheets do you want to add?") as num)//No decimals
 	if(!O)
 		return

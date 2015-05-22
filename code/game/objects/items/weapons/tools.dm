@@ -455,9 +455,9 @@
 		/obj/item/weapon/screwdriver,
 		/obj/item/weapon/wrench,
 		/obj/item/weapon/wirecutters,
-		/obj/item/weapon/kitchen/utensil/knife,
-		/obj/item/weapon/kitchen/utensil/fork,
-		/obj/item/weapon/hatchet
+		/obj/item/weapon/material/kitchen/utensil/knife,
+		/obj/item/weapon/material/kitchen/utensil/fork,
+		/obj/item/weapon/material/hatchet
 		)
 	var/list/tools = list()
 	var/current_tool = 1

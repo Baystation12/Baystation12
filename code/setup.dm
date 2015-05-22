@@ -137,17 +137,17 @@
 #define PHORON_FLASHPOINT                  (T0C +  246) //519 K - autoignite temperature in air if that ever gets implemented.
 
 //These control the mole ratio of oxidizer and fuel used in the combustion reaction
-#define FIRE_REACTION_OXIDIZER_AMOUNT	3
+#define FIRE_REACTION_OXIDIZER_AMOUNT	3 //should be greater than the fuel amount if fires are going to spread much
 #define FIRE_REACTION_FUEL_AMOUNT		2
 
 //These control the speed at which fire burns
 #define FIRE_GAS_BURNRATE_MULT			1
-#define FIRE_LIQUID_BURNRATE_MULT		0.5
+#define FIRE_LIQUID_BURNRATE_MULT		1
 
 //If the fire is burning slower than this rate then the reaction is going too slow to be self sustaining and the fire burns itself out.
 //This ensures that fires don't grind to a near-halt while still remaining active forever.
-#define FIRE_GAS_MIN_BURNRATE				0.1
-#define FIRE_LIQUD_MIN_BURNRATE				0.05
+#define FIRE_GAS_MIN_BURNRATE			0.01
+#define FIRE_LIQUD_MIN_BURNRATE			0.01
 
 //How many moles of fuel are contained within one solid/liquid fuel volume unit
 #define LIQUIDFUEL_AMOUNT_TO_MOL		1  //mol/volume unit

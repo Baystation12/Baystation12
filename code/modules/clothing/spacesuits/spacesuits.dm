@@ -35,6 +35,7 @@
 		camera.replace_networks(camera_networks)
 		camera.c_tag = user.name
 		user << "\blue User scanned as [camera.c_tag]. Camera activated."
+		user.update_action_buttons()
 		return 1
 
 	..()

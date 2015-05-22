@@ -232,7 +232,7 @@
 			if(!WT.remove_fuel(0,user))
 				user << "<span class='notice'>You need more welding fuel to complete this task.</span>"
 				return
-			new /obj/item/stack/sheet/metal(src.loc)
+			new /obj/item/stack/material/steel(src.loc)
 			for(var/mob/M in viewers(src))
 				M.show_message("<span class='notice'>\The [src] has been cut apart by [user] with \the [WT].</span>", 3, "You hear welding.", 2)
 			qdel(src)
@@ -335,6 +335,7 @@
 /obj/structure/closet/attack_generic(var/mob/user, var/damage, var/attack_message = "destroys", var/wallbreaker)
 	if(!damage || !wallbreaker)
 		return
+	user.do_attack_animation(src)
 	visible_message("<span class='danger'>[user] [attack_message] the [src]!</span>")
 	dump_contents()
 	spawn(1) qdel(src)

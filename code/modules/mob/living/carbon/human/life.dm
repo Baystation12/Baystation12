@@ -1131,8 +1131,6 @@
 
 		client.screen.Remove(global_hud.blurry, global_hud.druggy, global_hud.vimpaired, global_hud.darkMask, global_hud.nvg, global_hud.thermal, global_hud.meson, global_hud.science)
 
-		update_action_buttons()
-
 		if(damageoverlay.overlays)
 			damageoverlay.overlays = list()
 		

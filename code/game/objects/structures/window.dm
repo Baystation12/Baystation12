@@ -13,7 +13,7 @@
 	var/state = 2
 	var/reinf = 0
 	var/basestate
-	var/shardtype = /obj/item/weapon/shard
+	var/shardtype = /obj/item/weapon/material/shard
 	var/glasstype = null // Set this in subtypes. Null is assumed strange or otherwise impossible to dismantle, such as for shuttle glass.
 	var/silicate = 0 // number of units of silicate
 
@@ -87,11 +87,11 @@
 		var/index = null
 		index = 0
 		while(index < 2)
-			new shardtype(loc)
+			new shardtype(loc) //todo pooling?
 			if(reinf) PoolOrNew(/obj/item/stack/rods, loc)
 			index++
 	else
-		new shardtype(loc)
+		new shardtype(loc) //todo pooling?
 		if(reinf) PoolOrNew(/obj/item/stack/rods, loc)
 	qdel(src)
 	return
@@ -178,6 +178,7 @@
 	if(HULK in user.mutations)
 		user.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!"))
 		user.visible_message("<span class='danger'>[user] smashes through [src]!</span>")
+		user.do_attack_animation(src)
 		shatter()
 
 	else if (usr.a_intent == I_HURT)
@@ -189,13 +190,14 @@
 				return
 
 		playsound(src.loc, 'sound/effects/glassknock.ogg', 80, 1)
-		usr.visible_message("\red [usr.name] bangs against the [src.name]!", \
-							"\red You bang against the [src.name]!", \
+		user.do_attack_animation(src)
+		usr.visible_message("\red [usr.name] bangs against the [src.name]!",
+							"\red You bang against the [src.name]!",
 							"You hear a banging sound.")
 	else
 		playsound(src.loc, 'sound/effects/glassknock.ogg', 80, 1)
-		usr.visible_message("[usr.name] knocks on the [src.name].", \
-							"You knock on the [src.name].", \
+		usr.visible_message("[usr.name] knocks on the [src.name].",
+							"You knock on the [src.name].",
 							"You hear a knocking sound.")
 	return
 
@@ -207,6 +209,7 @@
 		take_damage(damage)
 	else
 		visible_message("<span class='notice'>\The [user] bonks \the [src] harmlessly.</span>")
+	user.do_attack_animation(src)
 	return 1
 
 /obj/structure/window/attackby(obj/item/W as obj, mob/user as mob)
@@ -262,13 +265,14 @@
 		else
 			visible_message("<span class='notice'>[user] dismantles \the [src].</span>")
 			if(dir == SOUTHWEST)
-				var/obj/item/stack/sheet/mats = new glasstype(loc)
+				var/obj/item/stack/material/mats = new glasstype(loc)
 				mats.amount = is_fulltile() ? 4 : 2
 			else
 				new glasstype(loc)
 			qdel(src)
 	else
 		if(W.damtype == BRUTE || W.damtype == BURN)
+			user.do_attack_animation(src)
 			hit(W.force)
 			if(health <= 7)
 				anchored = 0
@@ -398,7 +402,7 @@
 	desc = "It looks thin and flimsy. A few knocks with... anything, really should shatter it."
 	icon_state = "window"
 	basestate = "window"
-	glasstype = /obj/item/stack/sheet/glass
+	glasstype = /obj/item/stack/material/glass
 
 
 /obj/structure/window/phoronbasic
@@ -406,8 +410,8 @@
 	desc = "A phoron-glass alloy window. It looks insanely tough to break. It appears it's also insanely tough to burn through."
 	basestate = "phoronwindow"
 	icon_state = "phoronwindow"
-	shardtype = /obj/item/weapon/shard/phoron
-	glasstype = /obj/item/stack/sheet/glass/phoronglass
+	shardtype = /obj/item/weapon/material/shard/phoron
+	glasstype = /obj/item/stack/material/glass/phoronglass
 	maxhealth = 120
 
 /obj/structure/window/phoronbasic/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
@@ -420,8 +424,8 @@
 	desc = "A phoron-glass alloy window, with rods supporting it. It looks hopelessly tough to break. It also looks completely fireproof, considering how basic phoron windows are insanely fireproof."
 	basestate = "phoronrwindow"
 	icon_state = "phoronrwindow"
-	shardtype = /obj/item/weapon/shard/phoron
-	glasstype = /obj/item/stack/sheet/glass/phoronrglass
+	shardtype = /obj/item/weapon/material/shard/phoron
+	glasstype = /obj/item/stack/material/glass/phoronrglass
 	reinf = 1
 	maxhealth = 160
 
@@ -435,7 +439,7 @@
 	basestate = "rwindow"
 	maxhealth = 40
 	reinf = 1
-	glasstype = /obj/item/stack/sheet/glass/reinforced
+	glasstype = /obj/item/stack/material/glass/reinforced
 
 /obj/structure/window/New(Loc, constructed=0)
 	..()

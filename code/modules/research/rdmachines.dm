@@ -17,34 +17,34 @@
 /obj/machinery/r_n_d/proc/getMaterialType(var/name)
 	switch(name)
 		if("metal")
-			return /obj/item/stack/sheet/metal
+			return /obj/item/stack/material/steel
 		if("glass")
-			return /obj/item/stack/sheet/glass
+			return /obj/item/stack/material/glass
 		if("gold")
-			return /obj/item/stack/sheet/mineral/gold
+			return /obj/item/stack/material/gold
 		if("silver")
-			return /obj/item/stack/sheet/mineral/silver
+			return /obj/item/stack/material/silver
 		if("phoron")
-			return /obj/item/stack/sheet/mineral/phoron
+			return /obj/item/stack/material/phoron
 		if("uranium")
-			return /obj/item/stack/sheet/mineral/uranium
+			return /obj/item/stack/material/uranium
 		if("diamond")
-			return /obj/item/stack/sheet/mineral/diamond
+			return /obj/item/stack/material/diamond
 	return null
 
 /obj/machinery/r_n_d/proc/getMaterialName(var/type)
 	switch(type)
-		if(/obj/item/stack/sheet/metal)
+		if(/obj/item/stack/material/steel)
 			return "metal"
-		if(/obj/item/stack/sheet/glass)
+		if(/obj/item/stack/material/glass)
 			return "glass"
-		if(/obj/item/stack/sheet/mineral/gold)
+		if(/obj/item/stack/material/gold)
 			return "gold"
-		if(/obj/item/stack/sheet/mineral/silver)
+		if(/obj/item/stack/material/silver)
 			return "silver"
-		if(/obj/item/stack/sheet/mineral/phoron)
+		if(/obj/item/stack/material/phoron)
 			return "phoron"
-		if(/obj/item/stack/sheet/mineral/uranium)
+		if(/obj/item/stack/material/uranium)
 			return "uranium"
-		if(/obj/item/stack/sheet/mineral/diamond)
+		if(/obj/item/stack/material/diamond)
 			return "diamond"

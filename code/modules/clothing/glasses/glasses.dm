@@ -30,6 +30,7 @@
 			if(activation_sound)
 				usr << activation_sound
 			usr << "You activate the optical matrix on the [src]."
+		user.update_action_buttons()
 
 /obj/item/clothing/glasses/meson
 	name = "Optical Meson Scanner"
@@ -173,8 +174,8 @@
 			body_parts_covered &= ~EYES
 			icon_state = "[initial(icon_state)]up"
 			usr << "You push \the [src] up out of your face."
-
 		update_clothing_icon()
+		usr.update_action_buttons()
 
 /obj/item/clothing/glasses/welding/superior
 	name = "superior welding goggles"

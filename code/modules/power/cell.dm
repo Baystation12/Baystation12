@@ -10,7 +10,7 @@
 	..()
 	updateicon()
 
-/obj/item/weapon/cell/drain_power(var/drain_check, var/surge, var/amount = 0)
+/obj/item/weapon/cell/drain_power(var/drain_check, var/surge, var/power = 0)
 
 	if(drain_check)
 		return 1
@@ -18,9 +18,9 @@
 	if(charge <= 0)
 		return 0
 
-	var/cell_amt = min((amount * CELLRATE), charge)
-	use(cell_amt)
-	return cell_amt / CELLRATE
+	var/cell_amt = power * CELLRATE
+
+	return use(cell_amt) / CELLRATE
 
 /obj/item/weapon/cell/proc/updateicon()
 	overlays.Cut()
@@ -38,13 +38,26 @@
 /obj/item/weapon/cell/proc/fully_charged()
 	return (charge == maxcharge)
 
-// use power from a cell
+// checks if the power cell is able to provide the specified amount of charge
+/obj/item/weapon/cell/proc/check_charge(var/amount)
+	return (charge >= amount)
+
+// use power from a cell, returns the amount actually used
 /obj/item/weapon/cell/proc/use(var/amount)
 	if(rigged && amount > 0)
 		explode()
 		return 0
-	charge = max(0, charge - amount)
-	return charge
+	var/used = min(charge, amount)
+	charge -= used
+	return used
+
+// Checks if the specified amount can be provided. If it can, it removes the amount
+// from the cell and returns 1. Otherwise does nothing and returns 0.
+/obj/item/weapon/cell/proc/checked_use(var/amount)
+	if(!check_charge(amount))
+		return 0
+	use(amount)
+	return 1
 
 // recharge the cell
 /obj/item/weapon/cell/proc/give(var/amount)
