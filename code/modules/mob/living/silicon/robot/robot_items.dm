@@ -37,8 +37,8 @@
 				for(var/obj/I in contents)
 					for(var/mob/M in I.contents)
 						M.death()
-					if(istype(I,/obj/item/stack/material))//Only deconsturcts one sheet at a time instead of the entire stack
-						var/obj/item/stack/material/S = I
+					if(istype(I,/obj/item/stack/sheet))//Only deconsturcts one sheet at a time instead of the entire stack
+						var/obj/item/stack/sheet/S = I
 						if(S.get_amount() > 1)
 							S.use(1)
 							loaded_item = S
@@ -129,10 +129,7 @@
 		return
 	if(istype(target,/obj/machinery/portable_atmospherics/hydroponics))
 		var/obj/machinery/portable_atmospherics/hydroponics/T = target
-		if(T.harvest) //Try to harvest, assuming it's alive.
-			T.harvest(user)
-		else if(T.dead) //It's probably dead otherwise.
-			T.remove_dead(user)
+		T.harvest(user)
 	else
 		user << "Harvesting \a [target] is not the purpose of this tool.  The [src] is for plants being grown."
 

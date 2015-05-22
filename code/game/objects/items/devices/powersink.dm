@@ -27,7 +27,6 @@
 
 /obj/item/device/powersink/Destroy()
 	processing_objects.Remove(src)
-	processing_power_items.Remove(src)
 	..()
 
 /obj/item/device/powersink/attackby(var/obj/item/I, var/mob/user)
@@ -50,7 +49,6 @@
 		else
 			if (mode == 2)
 				processing_objects.Remove(src) // Now the power sink actually stops draining the station's power if you unhook it. --NeoFite
-				processing_power_items.Remove(src)
 			anchored = 0
 			mode = 0
 			src.visible_message("<span class='notice'>[user] detaches [src] from the cable!</span>")
@@ -73,27 +71,25 @@
 			mode = 2
 			icon_state = "powersink1"
 			processing_objects.Add(src)
-			processing_power_items.Add(src)
 		if(2)  //This switch option wasn't originally included. It exists now. --NeoFite
 			src.visible_message("<span class='notice'>[user] deactivates [src]!</span>")
 			mode = 1
 			set_light(0)
 			icon_state = "powersink0"
 			processing_objects.Remove(src)
-			processing_power_items.Remove(src)
 
-/obj/item/device/powersink/pwr_drain()
+/obj/item/device/powersink/proc/drain()
 	if(!attached)
-		return 0
+		return
 
 	if(drained_this_tick)
-		return 1
+		return
 	drained_this_tick = 1
 
 	var/drained = 0
 
 	if(!PN)
-		return 1
+		return
 
 	set_light(12)
 	PN.trigger_warning()
@@ -114,7 +110,6 @@
 					A.cell.use(drain_val * CELLRATE)
 					drained += drain_val
 	power_drained += drained
-	return 1
 
 
 /obj/item/device/powersink/process()

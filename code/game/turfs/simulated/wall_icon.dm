@@ -69,7 +69,6 @@
 /turf/simulated/wall/proc/set_material(var/material/newmaterial, var/material/newrmaterial)
 	material = newmaterial
 	reinf_material = newrmaterial
-	update_material()
 	check_relatives()
 	check_relatives(1)
 
@@ -86,10 +85,7 @@
 	else
 		set_wall_state("[material.icon_base]fwall_open")
 
-	var/dmg_amt = material.integrity
-	if(reinf_material)
-		dmg_amt += reinf_material.integrity
-	var/overlay = round(damage / dmg_amt * damage_overlays.len) + 1
+	var/overlay = round(damage / material.integrity * damage_overlays.len) + 1
 	if(overlay > damage_overlays.len)
 		overlay = damage_overlays.len
 	if(density)
@@ -119,11 +115,11 @@
 		var/turf/simulated/wall/T = get_step(src, checkdir)
 		if(!istype(T) || !T.material)
 			continue
-		if(update_self)
-			if(can_join_with(T))
+		if(T.material && can_join_with(T))
+			if(update_self)
 				junction |= get_dir(src,T) //Not too sure why, but using checkdir just breaks walls.
-		else
-			T.check_relatives(1)
+			else
+				T.check_relatives(1)
 	if(!isnull(junction))
 		set_wall_state("[material.icon_base][junction]")
 	return

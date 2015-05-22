@@ -720,23 +720,23 @@
 	var/type
 	switch(mat_string)
 		if(DEFAULT_WALL_MATERIAL)
-			type = /obj/item/stack/material/steel
+			type = /obj/item/stack/sheet/metal
 		if("glass")
-			type = /obj/item/stack/material/glass
+			type = /obj/item/stack/sheet/glass
 		if("gold")
-			type = /obj/item/stack/material/gold
+			type = /obj/item/stack/sheet/mineral/gold
 		if("silver")
-			type = /obj/item/stack/material/silver
+			type = /obj/item/stack/sheet/mineral/silver
 		if("diamond")
-			type = /obj/item/stack/material/diamond
+			type = /obj/item/stack/sheet/mineral/diamond
 		if("phoron")
-			type = /obj/item/stack/material/phoron
+			type = /obj/item/stack/sheet/mineral/phoron
 		if("uranium")
-			type = /obj/item/stack/material/uranium
+			type = /obj/item/stack/sheet/mineral/uranium
 		else
 			return 0
 	var/result = 0
-	var/obj/item/stack/material/res = new type(src)
+	var/obj/item/stack/sheet/res = new type(src)
 
 	// amount available to take out
 	var/total_amount = round(resources[mat_string]/res.perunit)
@@ -775,25 +775,25 @@
 					I.crit_fail = 1
 				I.loc = src.loc
 			if(src.resources[DEFAULT_WALL_MATERIAL] >= 3750)
-				var/obj/item/stack/material/steel/G = new /obj/item/stack/material/steel(src.loc)
+				var/obj/item/stack/sheet/metal/G = new /obj/item/stack/sheet/metal(src.loc)
 				G.amount = round(src.resources[DEFAULT_WALL_MATERIAL] / G.perunit)
 			if(src.resources["glass"] >= 3750)
-				var/obj/item/stack/material/glass/G = new /obj/item/stack/material/glass(src.loc)
+				var/obj/item/stack/sheet/glass/G = new /obj/item/stack/sheet/glass(src.loc)
 				G.amount = round(src.resources["glass"] / G.perunit)
 			if(src.resources["phoron"] >= 2000)
-				var/obj/item/stack/material/phoron/G = new /obj/item/stack/material/phoron(src.loc)
+				var/obj/item/stack/sheet/mineral/phoron/G = new /obj/item/stack/sheet/mineral/phoron(src.loc)
 				G.amount = round(src.resources["phoron"] / G.perunit)
 			if(src.resources["silver"] >= 2000)
-				var/obj/item/stack/material/silver/G = new /obj/item/stack/material/silver(src.loc)
+				var/obj/item/stack/sheet/mineral/silver/G = new /obj/item/stack/sheet/mineral/silver(src.loc)
 				G.amount = round(src.resources["silver"] / G.perunit)
 			if(src.resources["gold"] >= 2000)
-				var/obj/item/stack/material/gold/G = new /obj/item/stack/material/gold(src.loc)
+				var/obj/item/stack/sheet/mineral/gold/G = new /obj/item/stack/sheet/mineral/gold(src.loc)
 				G.amount = round(src.resources["gold"] / G.perunit)
 			if(src.resources["uranium"] >= 2000)
-				var/obj/item/stack/material/uranium/G = new /obj/item/stack/material/uranium(src.loc)
+				var/obj/item/stack/sheet/mineral/uranium/G = new /obj/item/stack/sheet/mineral/uranium(src.loc)
 				G.amount = round(src.resources["uranium"] / G.perunit)
 			if(src.resources["diamond"] >= 2000)
-				var/obj/item/stack/material/diamond/G = new /obj/item/stack/material/diamond(src.loc)
+				var/obj/item/stack/sheet/mineral/diamond/G = new /obj/item/stack/sheet/mineral/diamond(src.loc)
 				G.amount = round(src.resources["diamond"] / G.perunit)
 			qdel(src)
 			return 1
@@ -807,19 +807,19 @@
 
 	var/material
 	switch(W.type)
-		if(/obj/item/stack/material/gold)
+		if(/obj/item/stack/sheet/mineral/gold)
 			material = "gold"
-		if(/obj/item/stack/material/silver)
+		if(/obj/item/stack/sheet/mineral/silver)
 			material = "silver"
-		if(/obj/item/stack/material/diamond)
+		if(/obj/item/stack/sheet/mineral/diamond)
 			material = "diamond"
-		if(/obj/item/stack/material/phoron)
+		if(/obj/item/stack/sheet/mineral/phoron)
 			material = "phoron"
-		if(/obj/item/stack/material/steel)
+		if(/obj/item/stack/sheet/metal)
 			material = DEFAULT_WALL_MATERIAL
-		if(/obj/item/stack/material/glass)
+		if(/obj/item/stack/sheet/glass)
 			material = "glass"
-		if(/obj/item/stack/material/uranium)
+		if(/obj/item/stack/sheet/mineral/uranium)
 			material = "uranium"
 		else
 			return ..()
@@ -828,7 +828,7 @@
 		user << "The fabricator is currently processing. Please wait until completion."
 		return
 
-	var/obj/item/stack/material/stack = W
+	var/obj/item/stack/sheet/stack = W
 
 	var/sname = "[stack.name]"
 	var/amnt = stack.perunit

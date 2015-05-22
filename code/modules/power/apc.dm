@@ -591,7 +591,7 @@
 		if(do_after(user, 50))
 			if(!src || !WT.remove_fuel(3, user)) return
 			if (emagged || (stat & BROKEN) || opened==2)
-				new /obj/item/stack/material/steel(loc)
+				new /obj/item/stack/sheet/metal(loc)
 				user.visible_message(\
 					"<span class='warning'>[src] has been cut apart by [user.name] with the weldingtool.</span>",\
 					"<span class='notice'>You disassembled the broken APC frame.</span>",\
@@ -628,7 +628,6 @@
 			// Malf AI, removes the APC from AI's hacked APCs list.
 			if(hacker && hacker.hacked_apcs && src in hacker.hacked_apcs)
 				hacker.hacked_apcs -= src
-				hacker = null
 			if (opened==2)
 				opened = 1
 			update_icon()

@@ -16,8 +16,8 @@
 	disruptable = 1
 	disruptive = 0
 
-	use_power_cost = 50
-	active_power_cost = 10
+	use_power_cost = 5
+	active_power_cost = 1
 	passive_power_cost = 0
 	module_cooldown = 30
 
@@ -100,10 +100,6 @@
 	if(!..()) return 0
 
 	var/mob/living/carbon/human/H = holder.wearer
-
-	if(!istype(H.loc, /turf))
-		H << "<span class='warning'>You cannot teleport out of your current location.</span>"
-		return 0
 
 	var/turf/T
 	if(target)

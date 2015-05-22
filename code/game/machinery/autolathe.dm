@@ -1,5 +1,5 @@
 /obj/machinery/autolathe
-	name = "autolathe"
+	name = "\improper autolathe"
 	desc = "It produces items using metal and glass."
 	icon_state = "autolathe"
 	density = 1
@@ -138,9 +138,6 @@
 			return
 
 	if(O.loc != user && !(istype(O,/obj/item/stack)))
-		return 0
-
-	if(is_robot_module(O))
 		return 0
 
 	//Resources are being loaded.
@@ -293,7 +290,7 @@
 		var/material/M = name_to_material[mat]
 		if(!istype(M))
 			continue
-		var/obj/item/stack/material/S = new M.stack_type(get_turf(src))
+		var/obj/item/stack/sheet/S = new M.stack_type(get_turf(src))
 		if(stored_material[mat] > S.perunit)
 			S.amount = round(stored_material[mat] / S.perunit)
 		else

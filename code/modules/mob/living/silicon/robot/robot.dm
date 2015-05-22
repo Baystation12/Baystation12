@@ -1068,9 +1068,8 @@
 	if(cell.charge == 0)
 		return 0
 
-	var/power_use = amount * CYBORG_POWER_USAGE_MULTIPLIER
-	if(cell.checked_use(CELLRATE * power_use))
-		used_power_this_tick += power_use
+	if(cell.use(amount * CELLRATE * CYBORG_POWER_USAGE_MULTIPLIER))
+		used_power_this_tick += amount * CYBORG_POWER_USAGE_MULTIPLIER
 		return 1
 	return 0
 
