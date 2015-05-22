@@ -212,7 +212,6 @@
 		return src.master.attack_hand(a, b, c)
 	return
 
-//by default, transition randomly to another zlevel
 /atom/movable/proc/touch_map_edge()
 	if(z in config.sealed_levels) 
 		return
@@ -221,11 +220,6 @@
 		overmap_spacetravel(get_turf(src), src)
 		return
 	
-	var/list/disk_search = search_contents_for(/obj/item/weapon/disk/nuclear)
-	if(!isemptylist(disk_search))
-		for(var/obj/item/weapon/disk/nuclear/N in disk_search)
-			qdel(N)
-
 	var/move_to_z = src.get_transit_zlevel()
 	if(move_to_z)
 		z = move_to_z
@@ -246,12 +240,17 @@
 			y = TRANSITIONEDGE + 1
 			x = rand(TRANSITIONEDGE + 2, world.maxx - TRANSITIONEDGE - 2)
 
+		if(ticker && istype(ticker.mode, /datum/game_mode/nuclear)) //only really care if the game mode is nuclear
+			var/datum/game_mode/nuclear/G = ticker.mode
+			G.check_nuke_disks()
+
 		spawn(0)
 			if(loc) loc.Entered(src)
 
 //This list contains the z-level numbers which can be accessed via space travel and the percentile chances to get there.
 var/list/accessible_z_levels = list("1" = 5, "3" = 10, "4" = 15, "5" = 10, "6" = 60)
 
+//by default, transition randomly to another zlevel
 /atom/movable/proc/get_transit_zlevel()
 	var/list/candidates = accessible_z_levels.Copy()
 	candidates.Remove("[src.z]")
