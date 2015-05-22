@@ -142,7 +142,7 @@
 	else
 		if(istype(O, /turf/simulated/wall))
 			var/turf/simulated/wall/W = O
-			if(W.material.unmeltable)
+			if(W.material.flags & MATERIAL_UNMELTABLE)
 				cannot_melt = 1
 		else if(istype(O, /turf/simulated/floor/engine))
 			cannot_melt = 1
@@ -210,7 +210,7 @@
 	visible_message("<span class='warning'><B>[src] vomits up a thick purple substance and begins to shape it!</B></span>", "<span class='alium'>You shape a [choice].</span>")
 	switch(choice)
 		if("resin door")
-			new /obj/structure/mineral_door/resin(loc)
+			new /obj/structure/simple_door/resin(loc)
 		if("resin wall")
 			new /obj/effect/alien/resin/wall(loc)
 		if("resin membrane")

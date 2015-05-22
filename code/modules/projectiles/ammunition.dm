@@ -135,7 +135,7 @@
 
 /obj/item/ammo_magazine/examine(mob/user)
 	..()
-	user << "There [(stored_ammo.len > 1)? "are" : "is"] [stored_ammo.len] round\s left!"
+	user << "There [(stored_ammo.len == 1)? "is" : "are"] [stored_ammo.len] round\s left!"
 
 //magazine icon state caching
 /var/global/list/magazine_icondata_keys = list()

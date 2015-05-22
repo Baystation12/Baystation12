@@ -61,6 +61,16 @@
 	use_power = 1
 	icon_state = "map_vent_in"
 
+/obj/machinery/atmospherics/unary/vent_pump/siphon/on/atmos
+	use_power = 1
+	icon_state = "map_vent_in"
+	external_pressure_bound = 0
+	external_pressure_bound_default = 0
+	internal_pressure_bound = 2000
+	internal_pressure_bound_default = 2000
+	pressure_checks = 2
+	pressure_checks_default = 2
+
 /obj/machinery/atmospherics/unary/vent_pump/New()
 	..()
 	air_contents.volume = ATMOS_DEFAULT_VOLUME_PUMP

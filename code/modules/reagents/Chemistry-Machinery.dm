@@ -189,7 +189,7 @@
 				P.pixel_x = rand(-7, 7) //random position
 				P.pixel_y = rand(-7, 7)
 				P.icon_state = "pill"+pillsprite
-				reagents.trans_to(P,amount_per_pill)
+				reagents.trans_to_obj(P,amount_per_pill)
 				if(src.loaded_pill_bottle)
 					if(loaded_pill_bottle.contents.len < loaded_pill_bottle.storage_slots)
 						P.loc = loaded_pill_bottle
@@ -204,11 +204,11 @@
 				P.pixel_x = rand(-7, 7) //random position
 				P.pixel_y = rand(-7, 7)
 				P.icon_state = bottlesprite
-				reagents.trans_to(P,60)
+				reagents.trans_to_obj(P,60)
 				P.update_icon()
 			else
 				var/obj/item/weapon/reagent_containers/food/condiment/P = new/obj/item/weapon/reagent_containers/food/condiment(src.loc)
-				reagents.trans_to(P,50)
+				reagents.trans_to_obj(P,50)
 		else if(href_list["change_pill"])
 			#define MAX_PILL_SPRITE 20 //max icon state of the pill sprites
 			var/dat = "<table>"
@@ -587,12 +587,12 @@
 	var/limit = 10
 	var/list/holdingitems = list()
 	var/list/sheet_reagents = list(
-		/obj/item/stack/sheet/mineral/iron = "iron",
-		/obj/item/stack/sheet/mineral/uranium = "uranium",
-		/obj/item/stack/sheet/mineral/phoron = "phoron",
-		/obj/item/stack/sheet/mineral/gold = "gold",
-		/obj/item/stack/sheet/mineral/silver = "silver",
-		/obj/item/stack/sheet/mineral/mhydrogen = "hydrogen"
+		/obj/item/stack/material/iron = "iron",
+		/obj/item/stack/material/uranium = "uranium",
+		/obj/item/stack/material/phoron = "phoron",
+		/obj/item/stack/material/gold = "gold",
+		/obj/item/stack/material/silver = "silver",
+		/obj/item/stack/material/mhydrogen = "hydrogen"
 		)
 
 /obj/machinery/reagentgrinder/New()

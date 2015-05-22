@@ -58,7 +58,7 @@
 			if(stat & BROKEN)
 				user << "\blue The broken glass falls out."
 				var/obj/structure/computerframe/A = new /obj/structure/computerframe( loc )
-				new /obj/item/weapon/shard( loc )
+				new /obj/item/weapon/material/shard( loc )
 
 				//generate appropriate circuitboard. Accounts for /pod/old computer types
 				var/obj/item/weapon/circuitboard/pod/M = null

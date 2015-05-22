@@ -162,6 +162,10 @@
 	R.add_reagent("fuel", max_fuel)
 	return
 
+/obj/item/weapon/weldingtool/Destroy()
+	if(welding)
+		processing_objects -= src
+	..()
 
 /obj/item/weapon/weldingtool/examine(mob/user)
 	if(..(user, 0))
@@ -171,13 +175,13 @@
 /obj/item/weapon/weldingtool/attackby(obj/item/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/weapon/screwdriver))
 		if(welding)
-			user << "\red Stop welding first!"
+			user << "<span class='danger'>Stop welding first!</span>"
 			return
 		status = !status
 		if(status)
-			user << "\blue You resecure the welder."
+			user << "<span class='notice'>You secure the welder.</span>"
 		else
-			user << "\blue The welder can now be attached and modified."
+			user << "<span class='notice'>The welder can now be attached and modified.</span>"
 		src.add_fingerprint(user)
 		return
 
@@ -207,31 +211,8 @@
 
 
 /obj/item/weapon/weldingtool/process()
-	switch(welding)
-		//If off
-		if(0)
-			if(src.icon_state != "welder") //Check that the sprite is correct, if it isnt, it means toggle() was not called
-				src.force = 3
-				src.damtype = "brute"
-				src.icon_state = "welder"
-				src.welding = 0
-			processing_objects.Remove(src)
-			return
-		//Welders left on now use up fuel, but lets not have them run out quite that fast
-		if(1)
-			if(src.icon_state != "welder1") //Check that the sprite is correct, if it isnt, it means toggle() was not called
-				src.force = 15
-				src.damtype = "fire"
-				src.icon_state = "welder1"
-			if(prob(5))
-				remove_fuel(1)
-
-		//If you're actually actively welding, use fuel faster.
-		//Is this actually used or set anywhere? - Nodrak
-		if(2)
-			if(prob(75))
-				remove_fuel(1)
-
+	if(welding && prob(5) && !remove_fuel(1))
+		setWelding(0)
 
 	//I'm not sure what this does. I assume it has to do with starting fires...
 	//...but it doesnt check to see if the welder is on or not.
@@ -247,8 +228,8 @@
 /obj/item/weapon/weldingtool/afterattack(obj/O as obj, mob/user as mob, proximity)
 	if(!proximity) return
 	if (istype(O, /obj/structure/reagent_dispensers/fueltank) && get_dist(src,O) <= 1 && !src.welding)
-		O.reagents.trans_to(src, max_fuel)
-		user << "\blue Welder refueled"
+		O.reagents.trans_to_obj(src, max_fuel)
+		user << "<span class='notice'>Welder refueled</span>"
 		playsound(src.loc, 'sound/effects/refill.ogg', 50, 1, -6)
 		return
 	else if (istype(O, /obj/structure/reagent_dispensers/fueltank) && get_dist(src,O) <= 1 && src.welding)
@@ -270,7 +251,7 @@
 
 
 /obj/item/weapon/weldingtool/attack_self(mob/user as mob)
-	toggle()
+	setWelding(!welding, usr)
 	return
 
 //Returns the amount of fuel in the welder
@@ -280,80 +261,63 @@
 
 //Removes fuel from the welding tool. If a mob is passed, it will perform an eyecheck on the mob. This should probably be renamed to use()
 /obj/item/weapon/weldingtool/proc/remove_fuel(var/amount = 1, var/mob/M = null)
-	if(!welding || !check_fuel())
-		return 0
 	if(get_fuel() >= amount)
 		reagents.remove_reagent("fuel", amount)
-		check_fuel()
 		if(M)
 			eyecheck(M)
 		return 1
 	else
 		if(M)
-			M << "\blue You need more welding fuel to complete this task."
+			M << "<span class='notice'>You need more welding fuel to complete this task.</span>"
 		return 0
 
 //Returns whether or not the welding tool is currently on.
 /obj/item/weapon/weldingtool/proc/isOn()
 	return src.welding
 
+/obj/item/weapon/weldingtool/update_icon()
+	..()
+	icon_state = welding ? "welder1" : "welder"
+	var/mob/M = loc
+	if(istype(M))
+		M.update_inv_l_hand()
+		M.update_inv_r_hand()
+
 //Sets the welding state of the welding tool. If you see W.welding = 1 anywhere, please change it to W.setWelding(1)
 //so that the welding tool updates accordingly
-/obj/item/weapon/weldingtool/proc/setWelding(var/temp_welding)
+/obj/item/weapon/weldingtool/proc/setWelding(var/set_welding, var/mob/M)
+	if(!status)	return
+
+	var/turf/T = get_turf(src)
 	//If we're turning it on
-	if(temp_welding > 0)
+	if(set_welding && !welding)
 		if (remove_fuel(1))
-			usr << "\blue The [src] switches on."
+			if(M)
+				M << "<span class='notice'>You switch the [src] on.</span>"
+			else if(T)
+				T.visible_message("<span class='danger'>\The [src] turns on.</span>")
 			src.force = 15
 			src.damtype = "fire"
-			src.icon_state = "welder1"
-			processing_objects.Add(src)
+			src.w_class = 4
+			welding = 1
+			update_icon()
+			processing_objects |= src
 		else
-			usr << "\blue Need more fuel!"
-			src.welding = 0
+			if(M)
+				M << "<span class='notice'>You need more welding fuel to complete this task.</span>"
 			return
 	//Otherwise
-	else
-		usr << "\blue The [src] switches off."
+	else if(!set_welding && welding)
+		processing_objects -= src
+		if(M)
+			M << "<span class='notice'>You switch \the [src] off.</span>"
+		else if(T)
+			T.visible_message("<span class='warning'>\The [src] turns off.</span>")
 		src.force = 3
 		src.damtype = "brute"
-		src.icon_state = "welder"
-		src.welding = 0
-
-//Turns off the welder if there is no more fuel (does this really need to be its own proc?)
-/obj/item/weapon/weldingtool/proc/check_fuel()
-	if((get_fuel() <= 0) && welding)
-		toggle(1)
-		return 0
-	return 1
-
-
-//Toggles the welder off and on
-/obj/item/weapon/weldingtool/proc/toggle(var/message = 0)
-	if(!status)	return
-	src.welding = !( src.welding )
-	if (src.welding)
-		if (remove_fuel(1))
-			usr << "\blue You switch the [src] on."
-			src.force = 15
-			src.damtype = "fire"
-			src.icon_state = "welder1"
-			src.w_class = 4
-			processing_objects.Add(src)
-		else
-			usr << "\blue Need more fuel!"
-			src.welding = 0
-			return
-	else
-		if(!message)
-			usr << "\blue You switch the [src] off."
-		else
-			usr << "\blue The [src] shuts off!"
-		src.force = 3
-		src.damtype = "brute"
-		src.icon_state = "welder"
-		src.welding = 0
 		src.w_class = initial(src.w_class)
+		src.welding = 0
+		update_icon()
 
 //Decides whether or not to damage a player's eyes based on what they're wearing as protection
 //Note: This should probably be moved to mob
@@ -491,9 +455,9 @@
 		/obj/item/weapon/screwdriver,
 		/obj/item/weapon/wrench,
 		/obj/item/weapon/wirecutters,
-		/obj/item/weapon/kitchen/utensil/knife,
-		/obj/item/weapon/kitchen/utensil/fork,
-		/obj/item/weapon/hatchet
+		/obj/item/weapon/material/kitchen/utensil/knife,
+		/obj/item/weapon/material/kitchen/utensil/fork,
+		/obj/item/weapon/material/hatchet
 		)
 	var/list/tools = list()
 	var/current_tool = 1

@@ -110,11 +110,11 @@ var/global/datum/controller/gameticker/ticker
 	else
 		src.mode.announce()
 
+	current_state = GAME_STATE_PLAYING
 	create_characters() //Create player characters and transfer them
 	collect_minds()
 	equip_characters()
 	data_core.manifest()
-	current_state = GAME_STATE_PLAYING
 
 	callHook("roundstart")
 
@@ -155,7 +155,6 @@ var/global/datum/controller/gameticker/ticker
 	for(var/obj/multiz/ladder/L in world) L.connect() //Lazy hackfix for ladders. TODO: move this to an actual controller. ~ Z
 
 	if(config.sql_enabled)
-		spawn(3000)
 		statistic_cycle() // Polls population totals regularly and stores them in an SQL DB -- TLE
 
 	return 1
@@ -292,7 +291,7 @@ var/global/datum/controller/gameticker/ticker
 				if(player.mind.assigned_role != "MODE")
 					job_master.EquipRank(player, player.mind.assigned_role, 0)
 					UpdateFactionList(player)
-					EquipCustomItems(player)
+					equip_custom_items(player)
 		if(captainless)
 			for(var/mob/M in player_list)
 				if(!istype(M,/mob/new_player))

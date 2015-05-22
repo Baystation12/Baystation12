@@ -201,7 +201,7 @@
 		if(do_after_cooldown(target))
 			if( istype(target, /obj/structure/reagent_dispensers/watertank) && get_dist(chassis,target) <= 1)
 				var/obj/o = target
-				var/amount = o.reagents.trans_to(src, 200)
+				var/amount = o.reagents.trans_to_obj(src, 200)
 				occupant_message("<span class='notice'>[amount] units transferred into internal tank.</span>")
 				playsound(chassis, 'sound/effects/refill.ogg', 50, 1, -6)
 				return
@@ -220,29 +220,24 @@
 
 			var/list/the_targets = list(T,T1,T2)
 
-			for(var/a=0, a<5, a++)
+			for(var/a = 1 to 5)
 				spawn(0)
 					var/obj/effect/effect/water/W = PoolOrNew(/obj/effect/effect/water, get_turf(chassis))
-					var/turf/my_target = pick(the_targets)
-					var/datum/reagents/R = new/datum/reagents(5)
-					if(!W) return
-					W.reagents = R
-					R.my_atom = W
-					if(!W || !src) return
-					src.reagents.trans_to(W,1)
-					for(var/b=0, b<5, b++)
-						step_towards(W,my_target)
-						if(!W || !W.reagents) return
-						W.reagents.reaction(get_turf(W))
-						for(var/atom/atm in get_turf(W))
-							if(!W)
-								return
-							if(!W.reagents)
-								break
-							W.reagents.reaction(atm)
-						if(W.loc == my_target) break
-						sleep(2)
-					qdel(W)
+					var/turf/my_target
+					if(a == 1)
+						my_target = T
+					else if(a == 2)
+						my_target = T1
+					else if(a == 3)
+						my_target = T2
+					else
+						my_target = pick(the_targets)
+					W.create_reagents(5)
+					if(!W || !src)
+						return
+					reagents.trans_to_obj(W, spray_amount)
+					W.set_color()
+					W.set_up(my_target)
 			return 1
 
 	get_equip_info()
@@ -847,7 +842,7 @@
 	construction_cost = list(DEFAULT_WALL_MATERIAL=10000,"silver"=500,"glass"=1000)
 	var/datum/global_iterator/pr_mech_generator
 	var/coeff = 100
-	var/obj/item/stack/sheet/fuel
+	var/obj/item/stack/material/fuel
 	var/max_fuel = 150000
 	var/fuel_per_cycle_idle = 100
 	var/fuel_per_cycle_active = 500
@@ -865,7 +860,7 @@
 		..()
 
 	proc/init()
-		fuel = new /obj/item/stack/sheet/mineral/phoron(src)
+		fuel = new /obj/item/stack/material/phoron(src)
 		fuel.amount = 0
 		pr_mech_generator = new /datum/global_iterator/mecha_generator(list(src),0)
 		pr_mech_generator.set_delay(equip_cooldown)
@@ -908,7 +903,7 @@
 			occupant_message(message)
 		return
 
-	proc/load_fuel(var/obj/item/stack/sheet/P)
+	proc/load_fuel(var/obj/item/stack/material/P)
 		if(P.type == fuel.type && P.amount)
 			var/to_load = max(max_fuel - fuel.amount*fuel.perunit,0)
 			if(to_load)
@@ -993,7 +988,7 @@
 	reliability = 1000
 
 	init()
-		fuel = new /obj/item/stack/sheet/mineral/uranium(src)
+		fuel = new /obj/item/stack/material/uranium(src)
 		fuel.amount = 0
 		pr_mech_generator = new /datum/global_iterator/mecha_generator/nuclear(list(src),0)
 		pr_mech_generator.set_delay(equip_cooldown)
@@ -1075,18 +1070,6 @@
 			chassis.use_power(energy_drain)
 			do_after_cooldown()
 		return 1
-
-/obj/item/weapon/paintkit //Please don't use this for anything, it's a base type for custom mech paintjobs.
-	name = "mecha customisation kit"
-	desc = "A generic kit containing all the needed tools and parts to turn a mech into another mech."
-	icon = 'icons/obj/custom_items.dmi'
-	icon_state = "royce_kit"
-
-	var/new_name = "mech"    //What is the variant called?
-	var/new_desc = "A mech." //How is the new mech described?
-	var/new_icon = "ripley"  //What base icon will the new mech use?
-	var/removable = null     //Can the kit be removed?
-	var/list/allowed_types = list() //Types of mech that the kit will work on.
 
 /obj/item/mecha_parts/mecha_equipment/tool/passenger
 	name = "passenger compartment"

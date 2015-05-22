@@ -34,7 +34,6 @@
 	return
 
 /obj/item/weapon/reagent_containers/food/snacks/attack(mob/M as mob, mob/user as mob, def_zone)
-
 	if(!reagents.total_volume)
 		user << "<span class='danger'>None of [src] left!</span>"
 		user.drop_from_inventory(src)
@@ -49,12 +48,12 @@
 				if(H.species.flags & IS_SYNTHETIC)
 					H << "<span class='danger'>You have a monitor for a head, where do you think you're going to put that?</span>"
 					return
-			
+
 				var/obj/item/blocked = H.check_mouth_coverage()
 				if(blocked)
 					user << "<span class='warning'>\The [blocked] is in the way!</span>"
 					return
-			
+
 			if (fullness <= 50)
 				M << "<span class='danger'>You hungrily chew out a piece of [src] and gobble it!</span>"
 			if (fullness > 50 && fullness <= 150)
@@ -72,7 +71,7 @@
 				if(H.species.flags & IS_SYNTHETIC)
 					user << "<span class='danger'>They have a monitor for a head, where do you think you're going to put that?</span>"
 					return
-				
+
 				var/obj/item/blocked = H.check_mouth_coverage()
 				if(blocked)
 					user << "<span class='warning'>\The [blocked] is in the way!</span>"
@@ -102,15 +101,9 @@
 			playsound(M.loc,'sound/items/eatfood.ogg', rand(10,50), 1)
 			if(reagents.total_volume)
 				if(reagents.total_volume > bitesize)
-					/*
-					 * I totally cannot understand what this code supposed to do.
-					 * Right now every snack consumes in 2 bites, my popcorn does not work right, so I simplify it. -- rastaf0
-					var/temp_bitesize =  max(reagents.total_volume /2, bitesize)
-					reagents.trans_to(M, temp_bitesize)
-					*/
-					reagents.trans_to_ingest(M, bitesize)
+					reagents.trans_to_mob(M, bitesize, CHEM_INGEST)
 				else
-					reagents.trans_to_ingest(M, reagents.total_volume)
+					reagents.trans_to_mob(M, reagents.total_volume, CHEM_INGEST)
 				bitecount++
 				On_Consume(M)
 			return 1
@@ -135,8 +128,8 @@
 		return
 
 	// Eating with forks
-	if(istype(W,/obj/item/weapon/kitchen/utensil))
-		var/obj/item/weapon/kitchen/utensil/U = W
+	if(istype(W,/obj/item/weapon/material/kitchen/utensil))
+		var/obj/item/weapon/material/kitchen/utensil/U = W
 
 		if(!U.reagents)
 			U.create_reagents(5)
@@ -157,7 +150,7 @@
 		I.color = src.filling_color
 		U.overlays += I
 
-		reagents.trans_to(U,min(reagents.total_volume,5))
+		reagents.trans_to_obj(U, min(reagents.total_volume,5))
 
 		if (reagents.total_volume <= 0)
 			qdel(src)
@@ -194,7 +187,7 @@
 			var/reagents_per_slice = reagents.total_volume/slices_num
 			for(var/i=1 to (slices_num-slices_lost))
 				var/obj/slice = new slice_path (src.loc)
-				reagents.trans_to(slice,reagents_per_slice)
+				reagents.trans_to_obj(slice, reagents_per_slice)
 			qdel(src)
 			return
 
@@ -216,7 +209,7 @@
 	user.visible_message("<b>[user]</b> nibbles away at \the [src].","You nibble away at \the [src].")
 	bitecount++
 	if(reagents && user.reagents)
-		reagents.trans_to_ingest(user, bitesize)
+		reagents.trans_to_mob(user, bitesize, CHEM_INGEST)
 	spawn(5)
 		if(!src && !user.client)
 			user.custom_emote(1,"[pick("burps", "cries for more", "burps twice", "looks at the area where the food was")]")
@@ -490,7 +483,7 @@
 /obj/item/weapon/reagent_containers/food/snacks/egg/throw_impact(atom/hit_atom)
 	..()
 	new/obj/effect/decal/cleanable/egg_smudge(src.loc)
-	src.reagents.reaction(hit_atom, TOUCH)
+	src.reagents.trans_to(hit_atom, reagents.total_volume)
 	src.visible_message("\red [src.name] has been squashed.","\red You hear a smack.")
 	qdel(src)
 
@@ -2043,7 +2036,7 @@
 
 	New()
 		..()
-		reagents.add_reagent("minttoxin", 1)
+		reagents.add_reagent("mint", 1)
 		bitesize = 1
 
 /obj/item/weapon/reagent_containers/food/snacks/mushroomsoup
@@ -2826,7 +2819,7 @@
 
 // Dough + rolling pin = flat dough
 /obj/item/weapon/reagent_containers/food/snacks/dough/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W,/obj/item/weapon/kitchen/rollingpin))
+	if(istype(W,/obj/item/weapon/material/kitchen/rollingpin))
 		new /obj/item/weapon/reagent_containers/food/snacks/sliceable/flatdough(src)
 		user << "You flatten the dough."
 		qdel(src)
@@ -2971,7 +2964,7 @@
 
 // potato + knife = raw sticks
 /obj/item/weapon/reagent_containers/food/snacks/grown/potato/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W,/obj/item/weapon/kitchen/utensil/knife))
+	if(istype(W,/obj/item/weapon/material/kitchen/utensil/knife))
 		new /obj/item/weapon/reagent_containers/food/snacks/rawsticks(src)
 		user << "You cut the potato."
 		qdel(src)

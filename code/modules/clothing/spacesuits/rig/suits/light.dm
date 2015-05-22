@@ -60,6 +60,7 @@
 	slowdown = 0
 
 	chest_type = /obj/item/clothing/suit/space/rig/light/ninja
+	glove_type = /obj/item/clothing/gloves/rig/light/ninja
 
 	req_access = list(access_syndicate)
 
@@ -79,6 +80,10 @@
 		)
 
 	..()
+
+/obj/item/clothing/gloves/rig/light/ninja
+	name = "insulated gloves"
+	siemens_coefficient = 0
 
 /obj/item/clothing/suit/space/rig/light/ninja
 	breach_threshold = 38 //comparable to regular hardsuits

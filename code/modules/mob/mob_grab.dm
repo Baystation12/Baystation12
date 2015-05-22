@@ -71,10 +71,13 @@
 
 
 /obj/item/weapon/grab/process()
+	if(gcDestroyed) // GC is trying to delete us, we'll kill our processing so we can cleanly GC
+		return PROCESS_KILL
+
 	confirm()
 	if(!assailant)
-		qdel(src)
-		return
+		qdel(src) // Same here, except we're trying to delete ourselves.
+		return PROCESS_KILL
 
 	if(assailant.client)
 		assailant.client.screen -= hud
@@ -294,6 +297,44 @@
 						assailant << "<span class='warning'>You are no longer pinning [affecting] to the ground.</span>"
 						force_down = 0
 						return
+					var/mob/living/carbon/human/H = M
+					var/obj/item/organ/external/E = H.get_organ(hit_zone)
+					if(E && !(E.status & ORGAN_DESTROYED))
+						assailant.visible_message("<span class='notice'>[assailant] starts inspecting [affecting]'s [E.name] carefully.</span>")
+						if(do_mob(assailant,H, 10))
+							if(E.wounds.len)
+								assailant << "<span class='warning'>You find [E.get_wounds_desc()]</span>"
+							else
+								assailant << "<span class='notice'>You find no visible wounds.</span>"
+						else
+							assailant << "<span class='notice'>You must stand still to inspect [E] for wounds.</span>"
+						assailant << "<span class='notice'>Checking bones now...</span>"
+						if(do_mob(assailant, H, 20))
+							if(E.status & ORGAN_BROKEN)
+								assailant << "<span class='warning'>The [E.encased ? E.encased : "bone in the [E.name]"] moves slightly when you poke it!</span>"
+								H.custom_pain("Your [E.name] hurts where it's poked.")
+							else
+								assailant << "<span class='notice'>The [E.encased ? E.encased : "bones in the [E.name]"] seem to be fine.</span>"
+						else
+							assailant << "<span class='notice'>You must stand still to feel [E] for fractures.</span>"
+						assailant << "<span class='notice'>Checking skin now...</span>"
+						if(do_mob(assailant, H, 10))
+							var/bad = 0
+							if(H.getToxLoss() >= 40)
+								assailant << "<span class='warning'>[H] has an unhealthy skin discoloration.</span>"
+								bad = 1
+							if(H.getOxyLoss() >= 20)
+								assailant << "<span class='warning'>[H]'s skin is unusaly pale.</span>"
+								bad = 1
+							if(E.status & ORGAN_DEAD)
+								assailant << "<span class='warning'>[E] is decaying!</span>"
+								bad = 1
+							if(!bad)
+								assailant << "<span class='notice'>[H]'s skin is normal.</span>"
+						else
+							assailant << "<span class='notice'>You must stand still to check [H]'s skin for abnormalities.</span>"
+					else
+						assailant << "<span class='notice'>[H] is missing that bodypart.</span>"
 				if(I_GRAB)
 					if(state < GRAB_AGGRESSIVE)
 						assailant << "<span class='warning'>You require a better grab to do this.</span>"
@@ -407,7 +448,11 @@
 
 /obj/item/weapon/grab/dropped()
 	loc = null
-	qdel(src)
+	if(!destroying)
+		qdel(src)
+
+/obj/item/weapon/grab
+	var/destroying = 0
 
 /obj/item/weapon/grab/Destroy()
 	animate(affecting, pixel_x = 0, pixel_y = 0, 4, 1, LINEAR_EASING)
@@ -421,4 +466,5 @@
 		assailant = null
 	qdel(hud)
 	hud = null
+	destroying = 1 // stops us calling qdel(src) on dropped()
 	..()

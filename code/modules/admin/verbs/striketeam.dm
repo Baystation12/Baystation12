@@ -4,7 +4,7 @@ var/const/commandos_possible = 6 //if more Commandos are needed in the future
 /client/proc/strike_team()
 	set category = "Fun"
 	set name = "Spawn Strike Team"
-	set desc = "Spawns a death squad if you want to run an admin event."
+	set desc = "Spawns a strike team if you want to run an admin event."
 
 	if(!src.holder)
 		src << "Only administrators may use this command."
@@ -20,12 +20,12 @@ var/const/commandos_possible = 6 //if more Commandos are needed in the future
 
 	var/datum/antagonist/deathsquad/team
 
-	var/choice = input(usr, "Select type of strike team:") as null|anything in list("Death Squad", "Mercenaries")
+	var/choice = input(usr, "Select type of strike team:") as null|anything in list("Heavy Asset Protection", "Mercenaries")
 	if(!choice)
 		return
 
 	switch(choice)
-		if("Death Squad")
+		if("Heavy Asset Protection")
 			team = deathsquad
 		if("Mercenaries")
 			team = commandos

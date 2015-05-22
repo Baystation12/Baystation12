@@ -158,7 +158,7 @@
 /obj/item/weapon/storage/fancy/cigarettes/remove_from_storage(obj/item/W as obj, atom/new_location)
 		var/obj/item/clothing/mask/smokable/cigarette/C = W
 		if(!istype(C)) return // what
-		reagents.trans_to(C, (reagents.total_volume/contents.len))
+		reagents.trans_to_obj(C, (reagents.total_volume/contents.len))
 		..()
 
 /obj/item/weapon/storage/fancy/cigarettes/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
@@ -167,7 +167,7 @@
 
 	if(M == user && user.zone_sel.selecting == "mouth" && contents.len > 0 && !user.wear_mask)
 		var/obj/item/clothing/mask/smokable/cigarette/W = new /obj/item/clothing/mask/smokable/cigarette(user)
-		reagents.trans_to(W, (reagents.total_volume/contents.len))
+		reagents.trans_to_obj(W, (reagents.total_volume/contents.len))
 		user.equip_to_slot_if_possible(W, slot_wear_mask)
 		reagents.maximum_volume = 15 * contents.len
 		contents.len--
@@ -213,7 +213,7 @@
 /obj/item/weapon/storage/fancy/cigar/remove_from_storage(obj/item/W as obj, atom/new_location)
 		var/obj/item/clothing/mask/smokable/cigarette/cigar/C = W
 		if(!istype(C)) return
-		reagents.trans_to(C, (reagents.total_volume/contents.len))
+		reagents.trans_to_obj(C, (reagents.total_volume/contents.len))
 		..()
 
 /obj/item/weapon/storage/fancy/cigar/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
@@ -222,7 +222,7 @@
 
 	if(M == user && user.zone_sel.selecting == "mouth" && contents.len > 0 && !user.wear_mask)
 		var/obj/item/clothing/mask/smokable/cigarette/cigar/W = new /obj/item/clothing/mask/smokable/cigarette/cigar(user)
-		reagents.trans_to(W, (reagents.total_volume/contents.len))
+		reagents.trans_to_obj(W, (reagents.total_volume/contents.len))
 		user.equip_to_slot_if_possible(W, slot_wear_mask)
 		reagents.maximum_volume = 15 * contents.len
 		contents.len--
