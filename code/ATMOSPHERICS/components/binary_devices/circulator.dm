@@ -111,10 +111,10 @@
 				node2.build_network()
 		else
 			if(node1)
-				node1.disconnect(src)
+				disconnect(node1, src)
 				qdel(network1)
 			if(node2)
-				node2.disconnect(src)
+				disconnect(node2, src)
 				qdel(network2)
 
 			node1 = null

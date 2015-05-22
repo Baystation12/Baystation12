@@ -46,21 +46,21 @@ obj/machinery/atmospherics/binary
 
 	Destroy()
 		loc = null
-
+/*
 		if(node1)
 			node1.disconnect(src)
 			qdel(network1)
 		if(node2)
 			node2.disconnect(src)
-			qdel(network2)
-
+			qdel(network2)*/
+		disconnect_all(src)
 		node1 = null
 		node2 = null
 
 		..()
 
 	initialize()
-		if(node1 && node2) return
+		if(get_nodes_amount() == 2) return
 
 		var/node2_connect = dir
 		var/node1_connect = turn(dir, 180)
@@ -68,17 +68,21 @@ obj/machinery/atmospherics/binary
 		for(var/obj/machinery/atmospherics/target in get_step(src,node1_connect))
 			if(target.initialize_directions & get_dir(target,src))
 				if (check_connect_types(target,src))
+					connect(target)
 					node1 = target
 					break
 
 		for(var/obj/machinery/atmospherics/target in get_step(src,node2_connect))
 			if(target.initialize_directions & get_dir(target,src))
 				if (check_connect_types(target,src))
+					connect(target)
 					node2 = target
 					break
 
 		update_icon()
 		update_underlays()
+
+		return 1
 
 	build_network()
 		if(!network1 && node1)
@@ -120,7 +124,7 @@ obj/machinery/atmospherics/binary
 			results += air2
 
 		return results
-
+/*
 	disconnect(obj/machinery/atmospherics/reference)
 		if(reference==node1)
 			qdel(network1)
@@ -134,3 +138,4 @@ obj/machinery/atmospherics/binary
 		update_underlays()
 
 		return null
+*/

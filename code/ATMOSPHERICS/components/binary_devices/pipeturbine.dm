@@ -40,14 +40,14 @@
 
 	Destroy()
 		loc = null
-
+/*
 		if(node1)
 			node1.disconnect(src)
 			qdel(network1)
 		if(node2)
 			node2.disconnect(src)
-			qdel(network2)
-
+			qdel(network2)*/
+		disconnect_all(src)
 		node1 = null
 		node2 = null
 
@@ -108,13 +108,14 @@
 					node2.initialize()
 					node2.build_network()
 			else
-				if(node1)
+				disconnect_all(src)
+			/*	if(node1)
 					node1.disconnect(src)
 					qdel(network1)
 				if(node2)
 					node2.disconnect(src)
 					qdel(network2)
-
+*/
 				node1 = null
 				node2 = null
 
@@ -213,7 +214,7 @@
 			results += air_out
 
 		return results
-
+/*
 	disconnect(obj/machinery/atmospherics/reference)
 		if(reference==node1)
 			qdel(network1)
@@ -224,7 +225,7 @@
 			node2 = null
 
 		return null
-
+*/
 
 /obj/machinery/power/turbinemotor
 	name = "motor"

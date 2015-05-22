@@ -32,7 +32,7 @@
 		loc = null
 
 		if(node)
-			node.disconnect(src)
+			disconnect(node, src)
 			qdel(network)
 
 		node = null
@@ -52,6 +52,7 @@
 
 		update_icon()
 		update_underlays()
+		return 1
 
 	build_network()
 		if(!network && node)
@@ -81,7 +82,7 @@
 			results += air_contents
 
 		return results
-
+/*
 	disconnect(obj/machinery/atmospherics/reference)
 		if(reference==node)
 			qdel(network)
@@ -91,3 +92,4 @@
 		update_underlays()
 
 		return null
+*/

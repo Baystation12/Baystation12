@@ -236,7 +236,7 @@
 
 	for(var/datum/omni_port/P in ports)
 		if(P.node)
-			P.node.disconnect(src)
+			disconnect(P.node, src)
 			qdel(P.network)
 			P.node = null
 
@@ -256,6 +256,8 @@
 		P.update = 1
 
 	update_ports()
+
+	return 1
 
 /obj/machinery/atmospherics/omni/build_network()
 	for(var/datum/omni_port/P in ports)
@@ -288,7 +290,7 @@
 			results += P.air
 
 	return results
-
+/*
 /obj/machinery/atmospherics/omni/disconnect(obj/machinery/atmospherics/reference)
 	for(var/datum/omni_port/P in ports)
 		if(reference == P.node)
@@ -300,3 +302,4 @@
 	update_ports()
 
 	return null
+*/
