@@ -68,6 +68,7 @@
 			visible_message("\red \b [src] has been attacked with the [O] by [user]. ")
 		else
 			visible_message("\red \b [src] blocks the [O] with its shield! ")
+		//user.do_attack_animation(src)
 	else
 		usr << "\red This weapon is ineffective, it does no damage."
 		visible_message("\red [user] gently taps [src] with the [O]. ")

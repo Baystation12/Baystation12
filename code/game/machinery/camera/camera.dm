@@ -115,6 +115,7 @@
 
 	if(user.species.can_shred(user))
 		set_status(0)
+		user.do_attack_animation(src)
 		visible_message("<span class='warning'>\The [user] slashes at [src]!</span>")
 		playsound(src.loc, 'sound/weapons/slash.ogg', 100, 1)
 		icon_state = "[initial(icon_state)]1"
@@ -190,6 +191,7 @@
 
 	else if(W.damtype == BRUTE || W.damtype == BURN) //bashing cameras
 		if (W.force >= src.toughness)
+			user.do_attack_animation(src)
 			visible_message("<span class='warning'><b>[src] has been [pick(W.attack_verb)] with [W] by [user]!</b></span>")
 			if (istype(W, /obj/item)) //is it even possible to get into attackby() with non-items?
 				var/obj/item/I = W

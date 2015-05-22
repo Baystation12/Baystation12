@@ -114,7 +114,7 @@
 				sleep(60)
 				if(!user || !WT || !WT.isOn())	return
 
-				var/obj/item/stack/sheet/metal/S = new /obj/item/stack/sheet/metal( src )
+				var/obj/item/stack/material/steel/S = new /obj/item/stack/material/steel( src )
 				S.amount = 2
 				user << "<span class='notice'>You remove the ladder and close the hole.</span>"
 				qdel(src)
