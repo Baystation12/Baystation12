@@ -18,11 +18,32 @@
 /obj/item/device/mmi/digital/posibrain/attack_self(mob/user as mob)
 	if(brainmob && !brainmob.key && searching == 0)
 		//Start the process of searching for a new user.
-		user << "\blue You carefully locate the manual activation switch and start the positronic brain's boot process."
+		user << "<span class='notice'>You carefully locate the manual activation switch and start the positronic brain's boot process.</span>"
 		icon_state = "posibrain-searching"
 		src.searching = 1
 		src.request_player()
 		spawn(600) reset_search()
+
+/obj/item/device/mmi/digital/posibrain/attack_ghost(var/mob/dead/observer/user)
+	if(!istype(user))
+		return
+
+	if(!user.MayRespawn())
+		user << "You may not yet respawn and hence cannot enter \the [src]."
+		return
+
+	if(jobban_isbanned(user, "AI") && jobban_isbanned(user, "Cyborg"))
+		user << "You are banned from synthetic roles and hence cannot enter \the [src]."
+		return
+
+	if(searching || (brainmob && brainmob.ckey))
+		user << "\The [src] is occupied or searching for a client. Try again later."
+		return
+
+	var/response = alert(user, "Are you sure you want to play as a positronic brain?", "Positronic brain request", "Yes", "No")
+	if(response == "Yes")
+		transfer_personality(user)
+	return
 
 /obj/item/device/mmi/digital/posibrain/proc/request_player()
 	for(var/mob/dead/observer/O in player_list)
@@ -67,21 +88,17 @@
 	src.brainmob << "<b>Use say :b to speak to other artificial intelligences.</b>"
 	src.brainmob.mind.assigned_role = "Positronic Brain"
 
-	var/turf/T = get_turf_or_move(src.loc)
-	for (var/mob/M in viewers(T))
-		M.show_message("\blue The positronic brain chimes quietly.")
+	var/turf/T = get_turf(src)
+	T.visible_message("<span class='notice'>\The [src] chimes quietly.</span>")
 	icon_state = "posibrain-occupied"
 
 /obj/item/device/mmi/digital/posibrain/proc/reset_search() //We give the players sixty seconds to decide, then reset the timer.
-
-	if(src.brainmob && src.brainmob.key) return
-
+	if(!searching || (src.brainmob && src.brainmob.key))
+		return
 	src.searching = 0
 	icon_state = "posibrain"
-
-	var/turf/T = get_turf_or_move(src.loc)
-	for (var/mob/M in viewers(T))
-		M.show_message("\blue The positronic brain buzzes quietly, and the golden lights fade away. Perhaps you could try again?")
+	var/turf/T = get_turf(src)
+	T.visible_message("<span class='notice'>\The [src] brain buzzes quietly, and the golden lights fade away. Perhaps you could try again?</span>")
 
 /obj/item/device/mmi/digital/posibrain/examine(mob/user)
 	if(!..(user))
