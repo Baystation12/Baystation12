@@ -10,3 +10,6 @@
 
 /mob/living/carbon/alien/larva/show_evolution_blurb()
 	return
+
+/mob/living/carbon/alien/larva/can_progress()
+	return 0 // Handled by handle_chemicals_in_body()

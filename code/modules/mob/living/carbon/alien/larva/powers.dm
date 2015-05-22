@@ -8,7 +8,7 @@
 		src << "<span class='danger'>You cannot infest a target in your current state.</span>"
 		return 0
 	if(!M)
-		return 0
+		return 1
 	if(!M.lying)
 		src << "<span class='danger'>\The [M] is not prone.</span>"
 		return 0
@@ -28,16 +28,18 @@
 
 	var/list/choices = list()
 	for(var/mob/living/carbon/human/H in view(1,src))
-		if(src.Adjacent(H) || !H.lying)
+		if(src.Adjacent(H) && H.lying)
 			choices += H
 
 	if(!choices.len)
 		src << "<span class='danger'>There are no viable hosts within range.</span>"
 		return
 
-	var/mob/living/carbon/human/H = input(src,"Who do you wish to infest?") in null|choices
+	var/mob/living/carbon/human/H = input(src,"Who do you wish to infest?") as null|anything in choices
 
 	if(!H || !src || !H.lying) return
+
+	visible_message("<span class='danger'>\The [src] begins questing blindly towards \the [H]'s warm flesh...</span>")
 
 	if(!do_after(src,30))
 		return
@@ -45,8 +47,63 @@
 	if(!check_can_infest(H))
 		return
 
+	var/obj/item/organ/external/E = pick(H.organs)
+	src << "<span class='danger'>You burrow deeply into \the [H]'s [E.name]!</span>"
 	var/obj/item/weapon/holder/larva/holder = new (loc)
 	src.loc = holder
 	holder.name = src.name
-	var/obj/item/organ/external/E = pick(H.organs)
 	E.embed(holder,0,"\The [src] burrows deeply into \the [H]'s [E.name]!")
+
+/mob/living/carbon/alien/larva/verb/release_host()
+	set category = "Abilities"
+	set name = "Release Host"
+	set desc = "Release your host."
+
+	if(stat)
+		src << "You cannot leave your host in your current state."
+		return
+
+	if(!loc || !loc.loc)
+		src << "You are not inside a host."
+		return
+
+	var/mob/living/carbon/human/H = loc.loc
+
+	if(!istype(H))
+		src << "You are not inside a host."
+		return
+
+	src << "<span class='danger'>You begin writhing your way free of \the [H]'s flesh...</span>"
+
+	if(!do_after(src, 30))
+		return
+
+	if(!H || !src)
+		return
+
+	leave_host()
+
+/mob/living/carbon/alien/larva/proc/leave_host()
+	if(!loc || !loc.loc)
+		src << "You are not inside a host."
+		return
+	var/mob/living/carbon/human/H = loc.loc
+	if(!istype(H))
+		src << "You are not inside a host."
+		return
+	var/obj/item/weapon/holder/larva/holder = loc
+	var/obj/item/organ/external/affected
+	if(istype(holder))
+		for(var/obj/item/organ/external/organ in H.organs) //Grab the organ holding the implant.
+			for(var/obj/item/O in organ.implants)
+				if(O == holder)
+					affected = organ
+					break
+		affected.implants -= holder
+		holder.loc = get_turf(holder)
+	else
+		src.loc = get_turf(src)
+	if(affected)
+		src << "<span class='danger'>You crawl out of \the [H]'s [affected.name] and plop to the ground.</span>"
+	else
+		src << "<span class='danger'>You plop to the ground.</span>"

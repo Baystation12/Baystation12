@@ -1,4 +1,4 @@
-#define MIN_LARVA_BLOOD_DRINK 50
+#define MIN_LARVA_BLOOD_DRINK 0.5
 
 //Larvae regenerate health and nutrition from plasma and alien weeds.
 /mob/living/carbon/alien/larva/handle_environment(var/datum/gas_mixture/environment)
@@ -14,11 +14,18 @@
 // Maybe not the -best- place but it's semiappropriate and fitting.
 // Drink the blood of your host!
 /mob/living/carbon/alien/larva/handle_chemicals_in_body()
-	var/mob/living/carbon/human/M = loc
+	if(!loc)
+		return
+	if(!istype(loc, /obj/item/weapon/holder/larva))
+		return
+	var/mob/living/carbon/human/M = loc.loc //ergh, replace with a flag sometime
 	if(!istype(M))
 		return
 	if(M.vessel.total_volume > 0)
 		M.vessel.trans_to(src,min(M.vessel.total_volume,MIN_LARVA_BLOOD_DRINK))
 		update_progression()
+	else
+		src << "<span class='danger'>This host is depleted of blood...</span>"
+		leave_host()
 
 #undef MIN_LARVA_BLOOD_DRINK
