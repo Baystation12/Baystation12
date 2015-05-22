@@ -28,6 +28,8 @@
 
 	var/list/choices = list()
 	for(var/mob/living/carbon/human/H in view(1,src))
+		if(istype(H.species, /datum/species/xenos)) //Kinda gross, but easier and cleaner than a string check.
+			continue
 		if(src.Adjacent(H) && H.lying)
 			choices += H
 

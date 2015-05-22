@@ -2,6 +2,73 @@
 	name = "alien thing"
 	desc = "There's something alien about this."
 	icon = 'icons/mob/alien.dmi'
+	var/health = 50
+
+/obj/structure/alien/proc/healthcheck()
+	if(health <=0)
+		density = 0
+		qdel(src)
+	return
+
+/obj/structure/alien/bullet_act(var/obj/item/projectile/Proj)
+	health -= Proj.damage
+	..()
+	healthcheck()
+	return
+
+/obj/structure/alien/ex_act(severity)
+	switch(severity)
+		if(1.0)
+			health-=50
+		if(2.0)
+			health-=50
+		if(3.0)
+			if (prob(50))
+				health-=50
+			else
+				health-=25
+	healthcheck()
+	return
+
+/obj/structure/alien/blob_act()
+	health-=50
+	healthcheck()
+	return
+
+/obj/structure/alien/meteorhit()
+	health-=50
+	healthcheck()
+	return
+
+/obj/structure/alien/hitby(AM as mob|obj)
+	..()
+	visible_message("<span class='danger'>\The [src] was hit by \the [AM].</span>")
+	var/tforce = 0
+	if(ismob(AM))
+		tforce = 10
+	else
+		tforce = AM:throwforce
+	playsound(loc, 'sound/effects/attackblob.ogg', 100, 1)
+	health = max(0, health - tforce)
+	healthcheck()
+	..()
+	return
+
+/obj/structure/alien/attack_generic()
+	attack_hand(usr)
+
+/obj/structure/alien/attackby(var/obj/item/weapon/W, var/mob/user)
+	health = max(0, health - W.force)
+	playsound(loc, 'sound/effects/attackblob.ogg', 100, 1)
+	healthcheck()
+	..()
+	return
+
+/obj/structure/alien/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
+	if(air_group) return 0
+	if(istype(mover) && mover.checkpass(PASSGLASS))
+		return !opacity
+	return !density
 
 /obj/structure/alien/resin
 	name = "resin"
@@ -11,7 +78,7 @@
 	density = 1
 	opacity = 1
 	anchored = 1
-	var/health = 200
+	health = 200
 
 /obj/structure/alien/resin/wall
 	name = "resin wall"
@@ -35,59 +102,6 @@
 	T.thermal_conductivity = initial(T.thermal_conductivity)
 	..()
 
-/obj/structure/alien/resin/proc/healthcheck()
-	if(health <=0)
-		density = 0
-		qdel(src)
-	return
-
-/obj/structure/alien/resin/bullet_act(var/obj/item/projectile/Proj)
-	health -= Proj.damage
-	..()
-	healthcheck()
-	return
-
-/obj/structure/alien/resin/ex_act(severity)
-	switch(severity)
-		if(1.0)
-			health-=50
-		if(2.0)
-			health-=50
-		if(3.0)
-			if (prob(50))
-				health-=50
-			else
-				health-=25
-	healthcheck()
-	return
-
-/obj/structure/alien/resin/blob_act()
-	health-=50
-	healthcheck()
-	return
-
-/obj/structure/alien/resin/meteorhit()
-	health-=50
-	healthcheck()
-	return
-
-/obj/structure/alien/resin/hitby(AM as mob|obj)
-	..()
-	visible_message("<span class='danger'>\The [src] was hit by \the [AM].</span>")
-	var/tforce = 0
-	if(ismob(AM))
-		tforce = 10
-	else
-		tforce = AM:throwforce
-	playsound(loc, 'sound/effects/attackblob.ogg', 100, 1)
-	health = max(0, health - tforce)
-	healthcheck()
-	..()
-	return
-
-/obj/structure/alien/resin/attack_generic()
-	attack_hand(usr) //todo
-
 /obj/structure/alien/resin/attack_hand(var/mob/user)
 	if (HULK in user.mutations)
 		visible_message("<span class='danger'>\The [user] destroys \the [name]!</span>")
@@ -106,17 +120,3 @@
 		health -= rand(5,10)
 	healthcheck()
 	return
-
-/obj/structure/alien/resin/attackby(var/obj/item/weapon/W, var/mob/user)
-	health = max(0, health - W.force)
-	playsound(loc, 'sound/effects/attackblob.ogg', 100, 1)
-	healthcheck()
-	..()
-	return
-
-/obj/structure/alien/resin/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
-	if(air_group) return 0
-	if(istype(mover) && mover.checkpass(PASSGLASS))
-		return !opacity
-	return !density
-
