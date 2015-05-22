@@ -8,6 +8,11 @@
 	unarmed_types = list(/datum/unarmed_attack/claws/strong, /datum/unarmed_attack/bite/strong)
 	hud_type = /datum/hud_data/alien
 	rarity_value = 3
+	offset_x = -16
+
+	icobase = 'icons/mob/human_races/xenos/r_xenophage.dmi'
+	deform =  'icons/mob/human_races/xenos/r_xenophage.dmi'
+	icon_template = 'icons/mob/human_races/xenos/r_xenophage.dmi'
 
 	has_fine_manipulation = 0
 	siemens_coefficient = 0
@@ -50,6 +55,21 @@
 		"plasma vessel" =   /obj/item/organ/xenos/plasmavessel,
 		"hive node" =       /obj/item/organ/xenos/hivenode,
 		"nutrient vessel" = /obj/item/organ/diona/nutrients
+		)
+
+	// TODO: generalize limbs so that they can actually have a billion legs.
+	has_limbs = list(
+		"chest" =  list("path" = /obj/item/organ/external/chest/unbreakable),
+		"groin" =  list("path" = /obj/item/organ/external/groin/unbreakable),
+		"head" =   list("path" = /obj/item/organ/external/head/unbreakable),
+		"l_arm" =  list("path" = /obj/item/organ/external/arm/unbreakable/insectoid),
+		"r_arm" =  list("path" = /obj/item/organ/external/arm/right/unbreakable/insectoid),
+		"l_leg" =  list("path" = /obj/item/organ/external/leg/unbreakable/insectoid),
+		"r_leg" =  list("path" = /obj/item/organ/external/leg/right/unbreakable/insectoid),
+		"l_hand" = list("path" = /obj/item/organ/external/hand/unbreakable/insectoid),
+		"r_hand" = list("path" = /obj/item/organ/external/hand/right/unbreakable/insectoid),
+		"l_foot" = list("path" = /obj/item/organ/external/foot/unbreakable/insectoid),
+		"r_foot" = list("path" = /obj/item/organ/external/foot/right/unbreakable/insectoid)
 		)
 
 	bump_flag = ALIEN
@@ -135,24 +155,12 @@
 
 	return 0
 
-/datum/species/xenos/handle_login_special(var/mob/living/carbon/human/H)
-	H.AddInfectionImages()
-	..()
-
-/datum/species/xenos/handle_logout_special(var/mob/living/carbon/human/H)
-	H.RemoveInfectionImages()
-	..()
-
 /datum/species/xenos/drone
 	name = "Xenophage Drone"
 	caste_name = "drone"
 	weeds_plasma_rate = 15
 	slowdown = 1
-	tail = "xenos_drone_tail"
 	rarity_value = 5
-
-	icobase = 'icons/mob/human_races/xenos/r_xenos_drone.dmi'
-	deform =  'icons/mob/human_races/xenos/r_xenos_drone.dmi'
 
 	has_organ = list(
 		"heart" =           /obj/item/organ/heart,
@@ -188,10 +196,6 @@
 	caste_name = "hunter"
 	slowdown = -2
 	total_health = 150
-	tail = "xenos_hunter_tail"
-
-	icobase = 'icons/mob/human_races/xenos/r_xenos_hunter.dmi'
-	deform =  'icons/mob/human_races/xenos/r_xenos_hunter.dmi'
 
 	has_organ = list(
 		"heart" =           /obj/item/organ/heart,
@@ -216,10 +220,6 @@
 	caste_name = "sentinel"
 	slowdown = 0
 	total_health = 125
-	tail = "xenos_sentinel_tail"
-
-	icobase = 'icons/mob/human_races/xenos/r_xenos_sentinel.dmi'
-	deform =  'icons/mob/human_races/xenos/r_xenos_sentinel.dmi'
 
 	has_organ = list(
 		"heart" =           /obj/item/organ/heart,
@@ -247,11 +247,7 @@
 	weeds_plasma_rate = 20
 	caste_name = "queen"
 	slowdown = 4
-	tail = "xenos_queen_tail"
 	rarity_value = 10
-
-	icobase = 'icons/mob/human_races/xenos/r_xenos_queen.dmi'
-	deform =  'icons/mob/human_races/xenos/r_xenos_queen.dmi'
 
 	has_organ = list(
 		"heart" =           /obj/item/organ/heart,

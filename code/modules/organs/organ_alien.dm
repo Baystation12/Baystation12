@@ -343,47 +343,97 @@
 /obj/item/organ/stack/vox
 	name = "vox cortical stack"
 
-// Slime limbs.
-/obj/item/organ/external/chest/slime
+// Unbreakable limbs.
+/obj/item/organ/external/chest/unbreakable
 	cannot_break = 1
 	dislocated = -1
 
-/obj/item/organ/external/groin/slime
+/obj/item/organ/external/groin/unbreakable
 	cannot_break = 1
 	dislocated = -1
 
-/obj/item/organ/external/arm/slime
+/obj/item/organ/external/arm/unbreakable
 	cannot_break = 1
 	dislocated = -1
 
-/obj/item/organ/external/arm/right/slime
+/obj/item/organ/external/arm/right/unbreakable
 	cannot_break = 1
 	dislocated = -1
 
-/obj/item/organ/external/leg/slime
+/obj/item/organ/external/leg/unbreakable
 	cannot_break = 1
 	dislocated = -1
 
-/obj/item/organ/external/leg/right/slime
+/obj/item/organ/external/leg/right/unbreakable
 	cannot_break = 1
 	dislocated = -1
 
-/obj/item/organ/external/foot/slime
+/obj/item/organ/external/foot/unbreakable
 	cannot_break = 1
 	dislocated = -1
 
-/obj/item/organ/external/foot/right/slime
+/obj/item/organ/external/foot/right/unbreakable
 	cannot_break = 1
 	dislocated = -1
 
-/obj/item/organ/external/hand/slime
+/obj/item/organ/external/hand/unbreakable
 	cannot_break = 1
 	dislocated = -1
 
-/obj/item/organ/external/hand/right/slime
+/obj/item/organ/external/hand/right/unbreakable
 	cannot_break = 1
 	dislocated = -1
 
-/obj/item/organ/external/head/slime
+/obj/item/organ/external/head/unbreakable
 	cannot_break = 1
 	dislocated = -1
+
+// Xenophage limbs.
+// This is getting very Dwarf Fortress.
+/obj/item/organ/external/arm/unbreakable/insectoid
+	name = "front left legs"
+	gender = PLURAL
+	joint = "front left leg junction"
+	amputation_point = "front left leg plate"
+
+/obj/item/organ/external/arm/right/unbreakable/insectoid
+	name = "front right legs"
+	gender = PLURAL
+	joint = "front right leg junction"
+	amputation_point = "front right leg plate"
+
+/obj/item/organ/external/leg/unbreakable/insectoid
+	name = "rear left legs"
+	gender = PLURAL
+	joint = "rear left leg junction"
+	amputation_point = "rear left leg plate"
+
+/obj/item/organ/external/leg/right/unbreakable/insectoid
+	name = "rear right legs"
+	gender = PLURAL
+	joint = "rear right leg junction"
+	amputation_point = "rear right leg plate"
+
+/obj/item/organ/external/foot/unbreakable/insectoid
+	name = "rear left claws"
+	gender = PLURAL
+	joint = "rear left ankles"
+	amputation_point = "rear left legs"
+
+/obj/item/organ/external/foot/right/unbreakable/insectoid
+	name = "rear right claws"
+	gender = PLURAL
+	joint = "rear right ankles"
+	amputation_point = "rear right legs"
+
+/obj/item/organ/external/hand/unbreakable/insectoid
+	name = "front left claws"
+	gender = PLURAL
+	joint = "front left ankles"
+	amputation_point = "front left legs"
+
+/obj/item/organ/external/hand/right/unbreakable/insectoid
+	name = "front right claws"
+	gender = PLURAL
+	joint = "front right ankles"
+	amputation_point = "front right legs"
