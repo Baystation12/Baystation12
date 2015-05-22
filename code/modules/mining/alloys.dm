@@ -16,7 +16,7 @@
 		"hematite" = 2
 		)
 	product_mod = 0.3
-	product = /obj/item/stack/sheet/plasteel
+	product = /obj/item/stack/material/plasteel
 
 /datum/alloy/steel
 	metaltag = DEFAULT_WALL_MATERIAL
@@ -24,4 +24,4 @@
 		"coal" = 1,
 		"hematite" = 1
 		)
-	product = /obj/item/stack/sheet/metal
+	product = /obj/item/stack/material/steel

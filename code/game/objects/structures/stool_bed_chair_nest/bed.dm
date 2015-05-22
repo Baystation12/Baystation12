@@ -16,6 +16,22 @@
 	anchored = 1
 	can_buckle = 1
 	buckle_lying = 1
+	var/material/material
+	var/apply_cosmetics = 1
+
+/obj/structure/bed/New(var/newloc, var/new_material)
+	..(newloc)
+	if(!new_material)
+		new_material = DEFAULT_WALL_MATERIAL
+
+	material = get_material_by_name(new_material)
+	if(!istype(material))
+		qdel(src)
+		return
+	if(apply_cosmetics)
+		color = material.icon_colour
+		name = "[material.display_name] [initial(name)]"
+		desc = "[initial(desc)] It's made of [material.display_name]."
 
 /obj/structure/bed/ex_act(severity)
 	switch(severity)
@@ -33,13 +49,13 @@
 
 /obj/structure/bed/blob_act()
 	if(prob(75))
-		new /obj/item/stack/sheet/metal(src.loc)
+		material.place_sheet(get_turf(src))
 		qdel(src)
 
 /obj/structure/bed/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/weapon/wrench))
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-		new /obj/item/stack/sheet/metal(src.loc)
+		material.place_sheet(get_turf(src))
 		qdel(src)
 	else if(istype(W, /obj/item/weapon/grab))
 		user.visible_message("<span class='notice'>[user] attempts to buckle [W:affecting] into \the [src]!</span>")
@@ -54,14 +70,23 @@
 		..()
 
 /obj/structure/bed/psych
-	name = "psychiatrists couch"
+	name = "psychiatrist's couch"
 	desc = "For prime comfort during psychiatric evaluations."
 	icon_state = "psychbed"
+	apply_cosmetics = 0
+
+/obj/structure/bed/psych/New(var/newloc)
+	..(newloc,"leather")
 
 /obj/structure/bed/alien
 	name = "resting contraption"
 	desc = "This looks similar to contraptions from earth. Could aliens be stealing our technology?"
 	icon_state = "abed"
+	apply_cosmetics = 0
+
+
+/obj/structure/bed/alien/New(var/newloc)
+	..(newloc,"resin")
 
 /*
  * Roller beds
@@ -71,6 +96,7 @@
 	icon = 'icons/obj/rollerbed.dmi'
 	icon_state = "down"
 	anchored = 0
+	apply_cosmetics = 0
 
 /obj/structure/bed/roller/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/roller_holder))

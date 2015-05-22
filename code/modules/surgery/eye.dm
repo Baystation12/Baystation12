@@ -20,8 +20,8 @@
 /datum/surgery_step/eye/cut_open
 	allowed_tools = list(
 	/obj/item/weapon/scalpel = 100,		\
-	/obj/item/weapon/kitchenknife = 75,	\
-	/obj/item/weapon/shard = 50, 		\
+	/obj/item/weapon/material/knife = 75,	\
+	/obj/item/weapon/material/shard = 50, 		\
 	)
 
 	min_duration = 90
@@ -52,7 +52,7 @@
 /datum/surgery_step/eye/lift_eyes
 	allowed_tools = list(
 	/obj/item/weapon/retractor = 100,	\
-	/obj/item/weapon/kitchen/utensil/fork = 50
+	/obj/item/weapon/material/kitchen/utensil/fork = 50
 	)
 
 	min_duration = 30

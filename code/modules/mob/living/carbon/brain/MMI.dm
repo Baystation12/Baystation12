@@ -35,6 +35,7 @@
 
 	var/locked = 0
 	var/mob/living/carbon/brain/brainmob = null//The current occupant.
+	var/obj/item/organ/brain/brainobj = null	//The current brain organ.
 	var/obj/mecha = null//This does not appear to be used outside of reference in mecha.dm.
 
 	attackby(var/obj/item/O as obj, var/mob/user as mob)
@@ -60,7 +61,8 @@
 			living_mob_list += brainmob
 
 			user.drop_item()
-			qdel(O)
+			brainobj = O
+			brainobj.loc = src
 
 			name = "Man-Machine Interface: [brainmob.real_name]"
 			icon_state = "mmi_full"
@@ -91,7 +93,13 @@
 			user << "\red You upend the MMI, but the brain is clamped into place."
 		else
 			user << "\blue You upend the MMI, spilling the brain onto the floor."
-			var/obj/item/organ/brain/brain = new(user.loc)
+			var/obj/item/organ/brain/brain
+			if (brainobj)	//Pull brain organ out of MMI.
+				brainobj.loc = user.loc
+				brain = brainobj
+				brainobj = null
+			else	//Or make a new one if empty.
+				brain = new(user.loc)
 			brainmob.container = null//Reset brainmob mmi var.
 			brainmob.loc = brain//Throw mob into brain.
 			living_mob_list -= brainmob//Get outta here

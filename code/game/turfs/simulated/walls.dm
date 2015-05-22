@@ -15,7 +15,6 @@ var/list/global/wall_cache = list()
 	var/damage_overlay
 	var/global/damage_overlays[8]
 	var/active
-	var/last_event
 	var/can_open = 0
 	var/material/material
 	var/material/reinf_material
@@ -25,18 +24,27 @@ var/list/global/wall_cache = list()
 /turf/simulated/wall/New(var/newloc, var/materialtype, var/rmaterialtype)
 	..(newloc)
 	icon_state = "blank"
-	if(!name_to_material)
-		populate_material_list()
 	if(!materialtype)
 		materialtype = DEFAULT_WALL_MATERIAL
-	material = name_to_material[materialtype]
+	material = get_material_by_name(materialtype)
 	if(!isnull(rmaterialtype))
 		reinf_material = name_to_material[rmaterialtype]
 	update_material()
 
-/turf/simulated/wall/bullet_act(var/obj/item/projectile/Proj)
+	processing_turfs |= src
 
-	radiate()
+/turf/simulated/wall/Destroy()
+	processing_turfs -= src
+	dismantle_wall(null,null,1)
+	..()
+
+
+/turf/simulated/wall/process()
+	// Calling parent will kill processing
+	if(!radiate())
+		return PROCESS_KILL
+
+/turf/simulated/wall/bullet_act(var/obj/item/projectile/Proj)
 	if(istype(Proj,/obj/item/projectile/beam))
 		ignite(2500)
 	else if(istype(Proj,/obj/item/projectile/ion))
@@ -144,15 +152,15 @@ var/list/global/wall_cache = list()
 
 	return ..()
 
-/turf/simulated/wall/proc/dismantle_wall(devastated=0, explode=0)
+/turf/simulated/wall/proc/dismantle_wall(var/devastated, var/explode, var/no_product)
 
 	playsound(src, 'sound/items/Welder.ogg', 100, 1)
-	if(reinf_material)
-		reinf_material.place_dismantled_girder(src, reinf_material)
-		reinf_material.place_dismantled_product(src,devastated)
-	else
-		material.place_dismantled_girder(src)
-	material.place_dismantled_product(src,devastated)
+	if(!no_product)
+		if(reinf_material)
+			reinf_material.place_dismantled_girder(src, reinf_material)
+		else
+			material.place_dismantled_girder(src)
+		material.place_dismantled_product(src,devastated)
 
 	for(var/obj/O in src.contents) //Eject contents!
 		if(istype(O,/obj/structure/sign/poster))
@@ -160,6 +168,11 @@ var/list/global/wall_cache = list()
 			P.roll_and_drop(src)
 		else
 			O.loc = src
+
+	clear_plants()
+	material = name_to_material["placeholder"]
+	reinf_material = null
+	check_relatives()
 
 	ChangeTurf(/turf/simulated/floor/plating)
 
@@ -191,7 +204,7 @@ var/list/global/wall_cache = list()
 		new/obj/effect/overlay/wallrot(src)
 
 /turf/simulated/wall/proc/can_melt()
-	if(material.unmeltable)
+	if(material.flags & MATERIAL_UNMELTABLE)
 		return 0
 	return 1
 
@@ -231,21 +244,13 @@ var/list/global/wall_cache = list()
 	return 0
 
 /turf/simulated/wall/proc/radiate()
-	var/material/M = name_to_material[material]
-	if(!istype(M) || !M.radioactivity)
+	var/total_radiation = material.radioactivity + (reinf_material ? reinf_material.radioactivity / 2 : 0)
+	if(!total_radiation)
 		return
 
-	if(!active)
-		if(world.time > last_event+15)
-			active = 1
-			for(var/mob/living/L in range(3,src))
-				L.apply_effect(M.radioactivity,IRRADIATE,0)
-			for(var/turf/simulated/wall/T in range(3,src))
-				T.radiate()
-			last_event = world.time
-			active = null
-			return
-	return
+	for(var/mob/living/L in range(3,src))
+		L.apply_effect(total_radiation, IRRADIATE,0)
+	return total_radiation
 
 /turf/simulated/wall/proc/burn(temperature)
 	spawn(2)
@@ -261,20 +266,9 @@ var/list/global/wall_cache = list()
 		D.ignite(temperature/4)
 
 /turf/simulated/wall/proc/ignite(var/exposed_temperature)
-
-	var/material/M = name_to_material[material]
-	if(!istype(M) || !isnull(M.ignition_point))
+	if(isnull(material.ignition_point))
 		return
-	if(exposed_temperature > M.ignition_point)//If the temperature of the object is over 300, then ignite
+	if(exposed_temperature > material.ignition_point)//If the temperature of the object is over 300, then ignite
 		burn(exposed_temperature)
 		return
-	..()
-
-/turf/simulated/wall/Bumped(AM as mob|obj)
-	radiate()
-	..()
-
-/turf/simulated/wall/Destroy()
-	clear_plants()
-	check_relatives()
 	..()

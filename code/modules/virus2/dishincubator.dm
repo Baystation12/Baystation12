@@ -134,7 +134,7 @@
 
 		if (locate(/datum/reagent/toxin) in beaker.reagents.reagent_list)
 			for(var/datum/reagent/toxin/T in beaker.reagents.reagent_list)
-				toxins += max(T.toxpwr,1)
+				toxins += max(T.strength,1)
 				beaker.reagents.remove_reagent(T.id,1)
 			nanomanager.update_uis(src)
 

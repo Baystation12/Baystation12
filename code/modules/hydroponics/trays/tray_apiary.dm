@@ -63,7 +63,7 @@
 		else
 			user << "\blue You insert [O] into [src]. Now it just needs some bees."
 		qdel(O)
-	else if(istype(O, /obj/item/weapon/minihoe))
+	else if(istype(O, /obj/item/weapon/material/minihoe))
 		if(health > 0)
 			user << "\red <b>You begin to dislodge the apiary from the tray, the bees don't like that.</b>"
 			angry_swarm(user)
