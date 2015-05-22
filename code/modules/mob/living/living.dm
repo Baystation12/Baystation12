@@ -777,20 +777,3 @@ default behaviour is:
 		return
 	..()
 
-/mob/living/carbon/proc/spin(spintime, speed)
-	spawn()
-		var/D = dir
-		while(spintime >= speed)
-			sleep(speed)
-			switch(D)
-				if(NORTH)
-					D = EAST
-				if(SOUTH)
-					D = WEST
-				if(EAST)
-					D = SOUTH
-				if(WEST)
-					D = NORTH
-			set_dir(D)
-			spintime -= speed
-	return

@@ -598,7 +598,7 @@
 	icon_state = "light"
 	desc = "This box is shaped on the inside so that only light tubes and bulbs fit."
 	item_state = "syringe_kit"
-	foldable = /obj/item/stack/sheet/cardboard //BubbleWrap
+	foldable = /obj/item/stack/material/cardboard //BubbleWrap
 	storage_slots=21
 	can_hold = list(/obj/item/weapon/light/tube, /obj/item/weapon/light/bulb)
 	max_storage_space = 42	//holds 21 items of w_class 2

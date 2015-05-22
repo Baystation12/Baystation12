@@ -78,8 +78,8 @@
 	else
 		return ..()
 
-/obj/structure/proc/can_climb(var/mob/living/user)
-	if (!can_touch(user) || !climbable || (user in climbers))
+/obj/structure/proc/can_climb(var/mob/living/user, post_climb_check=0)
+	if (!can_touch(user) || !climbable || (!post_climb_check && (user in climbers)))
 		return 0
 
 	if (!user.Adjacent(src))
@@ -115,7 +115,7 @@
 		climbers -= user
 		return
 
-	if (!can_climb(user))
+	if (!can_climb(user, post_climb_check=1))
 		climbers -= user
 		return
 
@@ -192,5 +192,6 @@
 	if(!breakable || !damage || !wallbreaker)
 		return 0
 	visible_message("<span class='danger'>[user] [attack_verb] the [src] apart!</span>")
+	user.do_attack_animation(src)
 	spawn(1) qdel(src)
 	return 1

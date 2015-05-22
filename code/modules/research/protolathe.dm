@@ -63,25 +63,25 @@ Note: Must be placed west/left of and R&D console to function.
 		if(istype(I, /obj/item/weapon/reagent_containers/glass/beaker))
 			reagents.trans_to_obj(I, reagents.total_volume)
 	if(m_amount >= 3750)
-		var/obj/item/stack/sheet/metal/G = new /obj/item/stack/sheet/metal(loc)
+		var/obj/item/stack/material/steel/G = new /obj/item/stack/material/steel(loc)
 		G.amount = round(m_amount / G.perunit)
 	if(g_amount >= 3750)
-		var/obj/item/stack/sheet/glass/G = new /obj/item/stack/sheet/glass(loc)
+		var/obj/item/stack/material/glass/G = new /obj/item/stack/material/glass(loc)
 		G.amount = round(g_amount / G.perunit)
 	if(phoron_amount >= 2000)
-		var/obj/item/stack/sheet/mineral/phoron/G = new /obj/item/stack/sheet/mineral/phoron(loc)
+		var/obj/item/stack/material/phoron/G = new /obj/item/stack/material/phoron(loc)
 		G.amount = round(phoron_amount / G.perunit)
 	if(silver_amount >= 2000)
-		var/obj/item/stack/sheet/mineral/silver/G = new /obj/item/stack/sheet/mineral/silver(loc)
+		var/obj/item/stack/material/silver/G = new /obj/item/stack/material/silver(loc)
 		G.amount = round(silver_amount / G.perunit)
 	if(gold_amount >= 2000)
-		var/obj/item/stack/sheet/mineral/gold/G = new /obj/item/stack/sheet/mineral/gold(loc)
+		var/obj/item/stack/material/gold/G = new /obj/item/stack/material/gold(loc)
 		G.amount = round(gold_amount / G.perunit)
 	if(uranium_amount >= 2000)
-		var/obj/item/stack/sheet/mineral/uranium/G = new /obj/item/stack/sheet/mineral/uranium(loc)
+		var/obj/item/stack/material/uranium/G = new /obj/item/stack/material/uranium(loc)
 		G.amount = round(uranium_amount / G.perunit)
 	if(diamond_amount >= 2000)
-		var/obj/item/stack/sheet/mineral/diamond/G = new /obj/item/stack/sheet/mineral/diamond(loc)
+		var/obj/item/stack/material/diamond/G = new /obj/item/stack/material/diamond(loc)
 		G.amount = round(diamond_amount / G.perunit)
 	..()
 
@@ -118,13 +118,13 @@ Note: Must be placed west/left of and R&D console to function.
 		return 1
 	if(stat)
 		return 1
-	if(istype(O,/obj/item/stack/sheet))
-		var/obj/item/stack/sheet/S = O
+	if(istype(O,/obj/item/stack/material))
+		var/obj/item/stack/material/S = O
 		if(TotalMaterials() + S.perunit > max_material_storage)
 			user << "<span class='notice'>\The [src]'s material bin is full. Please remove material before adding more.</span>"
 			return 1
 
-		var/obj/item/stack/sheet/stack = O
+		var/obj/item/stack/material/stack = O
 		var/amount = round(input("How many sheets do you want to add?") as num)//No decimals
 		if(!O)
 			return
@@ -150,19 +150,19 @@ Note: Must be placed west/left of and R&D console to function.
 			user << "<span class='notice'>You add [amount] sheets to \the [src].</span>"
 			icon_state = "protolathe"
 			switch(stacktype)
-				if(/obj/item/stack/sheet/metal)
+				if(/obj/item/stack/material/steel)
 					m_amount += amount * 3750
-				if(/obj/item/stack/sheet/glass)
+				if(/obj/item/stack/material/glass)
 					g_amount += amount * 3750
-				if(/obj/item/stack/sheet/mineral/gold)
+				if(/obj/item/stack/material/gold)
 					gold_amount += amount * 2000
-				if(/obj/item/stack/sheet/mineral/silver)
+				if(/obj/item/stack/material/silver)
 					silver_amount += amount * 2000
-				if(/obj/item/stack/sheet/mineral/phoron)
+				if(/obj/item/stack/material/phoron)
 					phoron_amount += amount * 2000
-				if(/obj/item/stack/sheet/mineral/uranium)
+				if(/obj/item/stack/material/uranium)
 					uranium_amount += amount * 2000
-				if(/obj/item/stack/sheet/mineral/diamond)
+				if(/obj/item/stack/material/diamond)
 					diamond_amount += amount * 2000
 		else
 			new stacktype(loc, amount)
