@@ -43,17 +43,17 @@
 	/obj/item/weapon/autopsy_scanner,\
 	/obj/item/weapon/bikehorn,\
 	/obj/item/weapon/bonesetter,\
-	/obj/item/weapon/butch,\
+	/obj/item/weapon/material/knife/butch,\
 	/obj/item/weapon/caution,\
 	/obj/item/weapon/caution/cone,\
 	/obj/item/weapon/crowbar,\
 	/obj/item/weapon/clipboard,\
 	/obj/item/weapon/cell,\
 	/obj/item/weapon/circular_saw,\
-	/obj/item/weapon/hatchet,\
+	/obj/item/weapon/material/hatchet,\
 	/obj/item/weapon/handcuffs,\
 	/obj/item/weapon/hemostat,\
-	/obj/item/weapon/kitchenknife,\
+	/obj/item/weapon/material/knife,\
 	/obj/item/weapon/flame/lighter,\
 	/obj/item/weapon/light/bulb,\
 	/obj/item/weapon/light/tube,\

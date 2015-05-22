@@ -17,6 +17,7 @@
 /obj/structure/girder/attack_generic(var/mob/user, var/damage, var/attack_message = "smashes apart", var/wallbreaker)
 	if(!damage || !wallbreaker)
 		return 0
+	user.do_attack_animation(src)
 	visible_message("<span class='danger'>[user] [attack_message] the [src]!</span>")
 	spawn(1) dismantle()
 	return 1
@@ -105,13 +106,13 @@
 			health = 50
 			cover = 25
 
-	else if(istype(W, /obj/item/stack/sheet))
+	else if(istype(W, /obj/item/stack/material))
 
-		var/obj/item/stack/sheet/S = W
+		var/obj/item/stack/material/S = W
 		if(S.get_amount() < 2)
 			return ..()
 
-		var/material/M = name_to_material[S.sheettype]
+		var/material/M = name_to_material[S.default_type]
 		if(!istype(M))
 			return ..()
 
@@ -171,7 +172,7 @@
 		user << "\The [src] is already reinforced."
 		return
 
-	var/obj/item/stack/sheet/S = user.l_hand
+	var/obj/item/stack/material/S = user.l_hand
 	if(!istype(S))
 		S = user.r_hand
 	if(!istype(S))
@@ -182,7 +183,7 @@
 		user << "There is not enough material here to reinforce the girder."
 		return
 
-	var/material/M = name_to_material[S.sheettype]
+	var/material/M = name_to_material[S.default_type]
 	if(!istype(M) || M.integrity < 50)
 		user << "You cannot reinforce \the [src] with that; it is too soft."
 		return
@@ -197,7 +198,7 @@
 
 
 /obj/structure/girder/proc/dismantle()
-	new /obj/item/stack/sheet/metal(get_turf(src))
+	new /obj/item/stack/material/steel(get_turf(src))
 	qdel(src)
 
 /obj/structure/girder/attack_hand(mob/user as mob)

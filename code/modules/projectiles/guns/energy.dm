@@ -78,7 +78,7 @@
 /obj/item/weapon/gun/energy/consume_next_projectile()
 	if(!power_supply) return null
 	if(!ispath(projectile_type)) return null
-	if(!power_supply.use(charge_cost)) return null
+	if(!power_supply.checked_use(charge_cost)) return null
 	return new projectile_type(src)
 
 /obj/item/weapon/gun/energy/proc/get_external_power_supply()
