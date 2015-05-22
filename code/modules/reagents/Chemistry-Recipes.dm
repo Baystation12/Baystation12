@@ -1,3 +1,21 @@
+
+//Chemical Reactions - Initialises all /datum/chemical_reaction into a list
+// It is filtered into multiple lists within a list.
+// For example:
+// chemical_reaction_list["phoron"] is a list of all reactions relating to phoron
+// Note that entries in the list are NOT duplicated. So if a reaction pertains to
+// more than one chemical it will still only appear in only one of the sublists.
+/proc/initialize_chemical_reactions()
+	var/paths = typesof(/datum/chemical_reaction) - /datum/chemical_reaction
+	chemical_reactions_list = list()
+
+	for(var/path in paths)
+		var/datum/chemical_reaction/D = new path()
+
+		if(D.required_reagents && D.required_reagents.len)
+			var/reagent_id = D.required_reagents[1]
+			chemical_reactions_list[reagent_id] += D
+
 /datum/chemical_reaction
 	var/name = null
 	var/id = null
@@ -8,14 +26,68 @@
 
 	var/result_amount = 0
 	var/mix_message = "The solution begins to bubble."
+	var/reaction_sound = 'sound/effects/bubbles.ogg'
 
 /datum/chemical_reaction/proc/can_happen(var/datum/reagents/holder)
+	//check that all the required reagents are present
+	for(var/reagent in required_reagents)
+		if(!holder.has_reagent(reagent))
+			return 0
+
+	//check that all the required catalysts are present in the required amount
+	for(var/reagent in catalysts)
+		var/min_req_amt = catalysts[reagent]
+		if(!holder.has_reagent(reagent, min_req_amt))
+			return 0
+
+	//check that none of the inhibitors are present in the required amount
+	for(var/reagent in inhibitors)
+		var/min_req_amt = inhibitors[reagent]
+		if(holder.has_reagent(reagent, min_req_amt))
+			return 0
+
 	return 1
 
+/datum/chemical_reaction/proc/process(var/datum/reagents/holder)
+	//determine how far the reaction can proceed
+	var/list/reaction_limits = list()
+	for(var/reactant in required_reagents)
+		reaction_limits += holder.get_reagent_amount(reactant) / required_reagents[reactant]
+	var/reaction_limit = min(reaction_limits)
+	
+	//need to obtain the new reagent's data before anything is altered
+	var/data = send_data(holder, reaction_limit)
+	
+	//remove the reactants
+	for(var/reactant in required_reagents)
+		var/amt_used = required_reagents[reactant] * reaction_limit
+		holder.remove_reagent(reactant, amt_used, safety = 1)
+	
+	//add the product
+	var/amt_produced = result_amount * reaction_limit
+	if(result)
+		holder.add_reagent(result, amt_produced, data)
+	
+	//produces messages and sounds
+	var/atom/container = holder.my_atom
+	if(mix_message && container && !ismob(container))
+		var/turf/T = get_turf(container)
+		var/list/seen = viewers(4, T)
+		for(var/mob/M in seen)
+			M.show_message("<span class='notice'>\icon[container] [mix_message]</span>", 1)
+		playsound(T, reaction_sound, 80, 1)
+	
+	on_reaction(holder, amt_produced)
+	
+	return reaction_limit
+
+//called after a reaction occurs
 /datum/chemical_reaction/proc/on_reaction(var/datum/reagents/holder, var/created_volume)
 	return
 
-/datum/chemical_reaction/proc/send_data(var/datum/reagents/T)
+//obtains any special data that will be provided to the reaction products
+//this is called just before reactants are removed.
+/datum/chemical_reaction/proc/send_data(var/datum/reagents/holder, var/reaction_limit)
 	return null
 
 /* Common reactions */
@@ -875,7 +947,7 @@
 	if(holder.my_atom && istype(holder.my_atom, required))
 		var/obj/item/slime_extract/T = holder.my_atom
 		if(T.Uses > 0)
-			return 1
+			return ..()
 	return 0
 
 /datum/chemical_reaction/slime/on_reaction(var/datum/reagents/holder)

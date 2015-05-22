@@ -6,42 +6,8 @@
 	var/reacting = 0 // Reacting right now
 
 /datum/reagents/New(var/max = 100)
+	..()
 	maximum_volume = max
-	//I dislike having these here but map-objects are initialised before world/New() is called. >_>
-	if(!chemical_reagents_list)
-		//Chemical Reagents - Initialises all /datum/reagent into a list indexed by reagent id
-		var/paths = typesof(/datum/reagent) - /datum/reagent
-		chemical_reagents_list = list()
-		for(var/path in paths)
-			var/datum/reagent/D = new path()
-			if(!D.name)
-				continue
-			chemical_reagents_list[D.id] = D
-
-	if(!chemical_reactions_list)
-		//Chemical Reactions - Initialises all /datum/chemical_reaction into a list
-		// It is filtered into multiple lists within a list.
-		// For example:
-		// chemical_reaction_list["phoron"] is a list of all reactions relating to phoron
-
-		var/paths = typesof(/datum/chemical_reaction) - /datum/chemical_reaction
-		chemical_reactions_list = list()
-
-		for(var/path in paths)
-
-			var/datum/chemical_reaction/D = new path()
-			var/list/reaction_ids = list()
-
-			if(D.required_reagents && D.required_reagents.len)
-				for(var/reaction in D.required_reagents)
-					reaction_ids += reaction
-
-			// Create filters based on each reagent id in the required reagents list
-			for(var/id in reaction_ids)
-				if(!chemical_reactions_list[id])
-					chemical_reactions_list[id] = list()
-				chemical_reactions_list[id] += D
-				break // Don't bother adding ourselves to other reagent ids, it is redundant.
 
 /datum/reagents/Destroy()
 	..()
@@ -106,50 +72,30 @@
 /datum/reagents/proc/handle_reactions()
 	if(!my_atom) // No reactions in temporary holders
 		return
+	if(!my_atom.loc) //No reactions inside GC'd containers
+		return
 	if(my_atom.flags & NOREACT) // No reactions here
 		return
-
+	
+	var/list/eligible_reactions = list()
+	
 	var/reaction_occured = 0
 	do
 		reaction_occured = 0
+		
+		//need to rebuild this to account for chain reactions
 		for(var/datum/reagent/R in reagent_list)
-			for(var/datum/chemical_reaction/C in chemical_reactions_list[R.id])
-				var/reagents_suitable = 1
-				for(var/B in C.required_reagents)
-					if(!has_reagent(B))
-						reagents_suitable = 0
-				for(var/B in C.catalysts)
-					if(!has_reagent(B, C.catalysts[B]))
-						reagents_suitable = 0
-				for(var/B in C.inhibitors)
-					if(has_reagent(B, C.inhibitors[B]))
-						reagents_suitable = 0
-
-				if(!reagents_suitable || !C.can_happen(src))
-					continue
-
-				var/use = -1
-				for(var/B in C.required_reagents)
-					if(use == -1)
-						use = get_reagent_amount(B) / C.required_reagents[B]
-					else
-						use = min(use, get_reagent_amount(B) / C.required_reagents[B])
-
-				var/newdata = C.send_data(src) // We need to get it before reagents are removed. See blood paint.
-				for(var/B in C.required_reagents)
-					remove_reagent(B, use * C.required_reagents[B], safety = 1)
-
-				if(C.result)
-					add_reagent(C.result, C.result_amount * use, newdata)
-
-				if(!ismob(my_atom) && C.mix_message)
-					var/list/seen = viewers(4, get_turf(my_atom))
-					for(var/mob/M in seen)
-						M << "<span class='notice'>\icon[my_atom] [C.mix_message]</span>"
-					playsound(get_turf(my_atom), 'sound/effects/bubbles.ogg', 80, 1)
-
-				C.on_reaction(src, C.result_amount * use)
+			eligible_reactions |= chemical_reactions_list[R.id]
+		
+		for(var/datum/chemical_reaction/C in eligible_reactions)
+			if(!C.can_happen(src))
+				continue
+			
+			if(C.process(src))
 				reaction_occured = 1
+		
+		eligible_reactions.Cut()
+		
 	while(reaction_occured)
 	update_total()
 	return
