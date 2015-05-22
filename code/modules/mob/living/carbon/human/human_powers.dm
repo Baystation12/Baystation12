@@ -253,6 +253,6 @@
 
 	visible_message("<span class='warning'>\The [src] quivers slightly, then splits apart with a wet slithering noise.</span>")
 
-	del(src)
+	qdel(src)
 
 

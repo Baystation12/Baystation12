@@ -217,7 +217,7 @@
 	category = "Medical"
 
 /datum/autolathe/recipe/syringegun_ammo
-	name = "syringe"
+	name = "syringe gun cartridge"
 	path = /obj/item/weapon/syringe_cartridge
 	category = "Arms and Ammunition"
 
