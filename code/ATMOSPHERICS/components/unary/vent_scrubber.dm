@@ -261,7 +261,8 @@
 		user << "A small gauge in the corner reads [round(last_flow_rate, 0.1)] L/s; [round(last_power_draw)] W"
 	else
 		user << "You are too far away to read the gauge."
-
+	..()
+	
 /obj/machinery/atmospherics/unary/vent_scrubber/Del()
 	if(initial_loc)
 		initial_loc.air_scrub_info -= id_tag

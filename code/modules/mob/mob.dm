@@ -228,7 +228,7 @@ var/list/slot_equipment_priority = list( \
 
 	if((is_blind(src) || usr.stat) && !isobserver(src))
 		src << "<span class='notice'>Something is there but you can't see it.</span>"
-		return
+		return 1
 
 	face_atom(A)
 	A.examine(src)

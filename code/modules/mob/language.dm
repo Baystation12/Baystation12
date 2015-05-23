@@ -252,10 +252,11 @@
 	name = "Starspeak"
 	desc = "A humming, subvocal language communicated by the extra-universal An'kalai. While not auditory to most species it can be picked up across high frequency electronic recording devices as a sort of high pitched chaotic series of notes."
 	speech_verb = "hums"
-	ask_verb = "thrum"
-	exclaim_verb = "mumur"
+	ask_verb = "murmur"
+	exclaim_verb = "thrum"
+	whisper_verb = "croon"
 	colour = "#7ED6CB"
-	key = "8"
+	key = "i"
 	flags = WHITELISTED | HIVEMIND
 	syllables = list("hmm","mm","nn","enn","emm","eem","knn","gmm")
 
