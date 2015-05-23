@@ -139,22 +139,60 @@
 	if(!ability_prechecks(user, price))
 		return
 
-	if(!istype(M))
+	var/obj/machinery/power/N = M
+
+	var/explosion_intensity = 2
+
+	// Verify if we can overload the target, if yes, calculate explosion strength. Some things have higher explosion strength than others, depending on charge(APCs, SMESs)
+	if(N && istype(N)) // /obj/machinery/power first, these create bigger explosions due to direct powernet connection
+		if(!istype(N, /obj/machinery/power/apc) && !istype(N, /obj/machinery/power/smes/buildable) && (!N.powernet || !N.powernet.avail)) // Directly connected machine which is not an APC or SMES. Either it has no powernet connection or it's powernet does not have enough power to overload
+			user << "<span class='notice'>ERROR: Low network voltage. Unable to overload. Increase network power level and try again.</span>"
+			return
+		else if (istype(N, /obj/machinery/power/apc)) // APC. Explosion is increased by available cell power.
+			var/obj/machinery/power/apc/A = N
+			if(A.cell && A.cell.charge)
+				explosion_intensity = 4 + round(A.cell.charge / 2000) // Explosion is increased by 1 for every 2k charge in cell
+			else
+				user << "<span class='notice'>ERROR: APC Malfunction - Cell depleted or removed. Unable to overload.</span>"
+				return
+		else if (istype(N, /obj/machinery/power/smes/buildable)) // SMES. These explode in a very very very big boom. Similar to magnetic containment failure when messing with coils.
+			var/obj/machinery/power/smes/buildable/S = N
+			if(S.charge && S.RCon)
+				explosion_intensity = 4 + round(S.charge / 1000000)
+			else
+				// Different error texts
+				if(!S.charge)
+					user << "<span class='notice'>ERROR: SMES Depleted. Unable to overload. Please charge SMES unit and try again.</span>"
+				else
+					user << "<span class='notice'>ERROR: SMES RCon error - Unable to reach destination. Please verify wire connection.</span>"
+				return
+	else if(M && istype(M)) // Not power machinery, so it's a regular machine instead. These have weak explosions.
+		if(!M.use_power) // Not using power at all
+			user << "<span class='notice'>ERROR: No power grid connection. Unable to overload.</span>"
+			return
+		if(M.inoperable()) // Not functional
+			user << "<span class='notice'>ERROR: Unknown error. Machine is probably damaged or power supply is nonfunctional.</span>"
+	else // Not a machine at all (what the hell is this doing in Machines list anyway??)
 		user << "<span class='notice'>ERROR: Unable to overload - target is not a machine.</span>"
 		return
 
-	if(!M.use_power || M.inoperable())
-		user << "<span class='notice'>ERROR: Unable to overload - target is not connected to active power grid.</span>"
-		return
+	explosion_intensity = min(explosion_intensity, 12) // 3, 6, 12 explosion cap
 
-	M.use_power(1000000) // Major power spike, few of these will completely burn APC's cell - equivalent of 1GJ of power.
+	M.use_power(2000000) // Major power spike, few of these will completely burn APC's cell - equivalent of 2GJ of power.
 
 	// Trigger a powernet alarm. Careful engineers will probably notice something is going on.
 	var/area/temp_area = get_area(M)
 	if(temp_area)
 		var/obj/machinery/power/apc/temp_apc = temp_area.get_apc()
 		if(temp_apc && temp_apc.terminal && temp_apc.terminal.powernet)
-			temp_apc.terminal.powernet.trigger_warning()
+			temp_apc.terminal.powernet.trigger_warning(50) // Long alarm
+		if(temp_apc)
+			temp_apc.emp_act(3) // Such power surges are not good for APC electronics
+			if(temp_apc.cell)
+				temp_apc.cell.maxcharge -= between(0, (temp_apc.cell.maxcharge/2) + 500, temp_apc.cell.maxcharge)
+				if(temp_apc.cell.maxcharge < 100) // That's it, you busted the APC cell completely. Break the APC and completely destroy the cell.
+					qdel(temp_apc.cell)
+					temp_apc.set_broken()
 
 
 	if(!ability_pay(user,price))
@@ -162,11 +200,7 @@
 
 	M.visible_message("<span class='notice'>BZZZZZZZT</span>")
 	spawn(50)
-		// machinery/power is directly connected to powernet. Resulting explosion will be a bit stronger. This should be enough to kill someone standing next to the machine.
-		if(istype(M, /obj/machinery/power))
-			explosion(get_turf(M), 1,2,4,4)
-		else
-			explosion(get_turf(M), 0,1,2,4)
+		explosion(get_turf(M), round(explosion_intensity/4),round(explosion_intensity/2),round(explosion_intensity),round(explosion_intensity * 2))
 		if(M)
 			qdel(M)
 
