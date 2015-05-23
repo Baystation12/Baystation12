@@ -44,10 +44,13 @@
 	reagent_state = LIQUID
 	color = "#9D14DB"
 	strength = 30
+	touch_met = 5
 
 /datum/reagent/toxin/phoron/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
 	M.adjust_fire_stacks(removed / 5)
+	if(prob(50))
+		M.pl_effects()
 
 /datum/reagent/toxin/phoron/touch_turf(var/turf/simulated/T)
 	if(!istype(T))

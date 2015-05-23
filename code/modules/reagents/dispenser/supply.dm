@@ -31,18 +31,17 @@
 /datum/supply_packs/reagents
 	name = "Chemistry dispenser refill"
 	contains = list(
-			/obj/item/weapon/reagent_containers/chem_disp_cartridge/hydrogen,
+			/obj/item/weapon/reagent_containers/chem_disp_cartridge/hydrazine,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/lithium,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/carbon,
-			/obj/item/weapon/reagent_containers/chem_disp_cartridge/nitrogen,
-			/obj/item/weapon/reagent_containers/chem_disp_cartridge/oxygen,
-			/obj/item/weapon/reagent_containers/chem_disp_cartridge/fluorine,
+			/obj/item/weapon/reagent_containers/chem_disp_cartridge/ammonia,
+			/obj/item/weapon/reagent_containers/chem_disp_cartridge/acetone,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/sodium,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/aluminum,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/silicon,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/phosphorus,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/sulfur,
-			/obj/item/weapon/reagent_containers/chem_disp_cartridge/chlorine,
+			/obj/item/weapon/reagent_containers/chem_disp_cartridge/hclacid,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/potassium,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/iron,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/copper,
@@ -153,18 +152,17 @@
 
 // Chemistry-restricted (raw reagents excluding sugar/water)
 //      Datum path  Contents type                                                       Supply pack name                  Container name                         Cost  Container access
-SEC_PACK(hydrogen,  /obj/item/weapon/reagent_containers/chem_disp_cartridge/hydrogen,   "Reagent refill - Hydrogen",      "hydrogen reagent cartridge crate",      15, access_chemistry)
+SEC_PACK(hydrazine, /obj/item/weapon/reagent_containers/chem_disp_cartridge/hydrazine,  "Reagent refill - Hydrazine",     "hydrazine reagent cartridge crate",     15, access_chemistry)
 SEC_PACK(lithium,   /obj/item/weapon/reagent_containers/chem_disp_cartridge/lithium,    "Reagent refill - Lithium",       "lithium reagent cartridge crate",       15, access_chemistry)
 SEC_PACK(carbon,    /obj/item/weapon/reagent_containers/chem_disp_cartridge/carbon,     "Reagent refill - Carbon",        "carbon reagent cartridge crate",        15, access_chemistry)
-SEC_PACK(nitrogen,  /obj/item/weapon/reagent_containers/chem_disp_cartridge/nitrogen,   "Reagent refill - Nitrogen",      "nitrogen reagent cartridge crate",      15, access_chemistry)
-SEC_PACK(oxygen,    /obj/item/weapon/reagent_containers/chem_disp_cartridge/oxygen,     "Reagent refill - Oxygen",        "oxygen reagent cartridge crate",        15, access_chemistry)
-SEC_PACK(fluorine,  /obj/item/weapon/reagent_containers/chem_disp_cartridge/fluorine,   "Reagent refill - Fluorine",      "fluorine reagent cartridge crate",      15, access_chemistry)
+SEC_PACK(ammonia,   /obj/item/weapon/reagent_containers/chem_disp_cartridge/ammonia,    "Reagent refill - Ammonia",       "ammonia reagent cartridge crate",       15, access_chemistry)
+SEC_PACK(oxygen,    /obj/item/weapon/reagent_containers/chem_disp_cartridge/acetone,    "Reagent refill - Acetone",       "acetone reagent cartridge crate",       15, access_chemistry)
 SEC_PACK(sodium,    /obj/item/weapon/reagent_containers/chem_disp_cartridge/sodium,     "Reagent refill - Sodium",        "sodium reagent cartridge crate",        15, access_chemistry)
 SEC_PACK(aluminium, /obj/item/weapon/reagent_containers/chem_disp_cartridge/aluminum,   "Reagent refill - Aluminum",      "aluminum reagent cartridge crate",      15, access_chemistry)
 SEC_PACK(silicon,   /obj/item/weapon/reagent_containers/chem_disp_cartridge/silicon,    "Reagent refill - Silicon",       "silicon reagent cartridge crate",       15, access_chemistry)
 SEC_PACK(phosphorus,/obj/item/weapon/reagent_containers/chem_disp_cartridge/phosphorus, "Reagent refill - Phosphorus",    "phosphorus reagent cartridge crate",    15, access_chemistry)
 SEC_PACK(sulfur,    /obj/item/weapon/reagent_containers/chem_disp_cartridge/sulfur,     "Reagent refill - Sulfur",        "sulfur reagent cartridge crate",        15, access_chemistry)
-SEC_PACK(chlorine,  /obj/item/weapon/reagent_containers/chem_disp_cartridge/chlorine,   "Reagent refill - Chlorine",      "chlorine reagent cartridge crate",      15, access_chemistry)
+SEC_PACK(hclacid,   /obj/item/weapon/reagent_containers/chem_disp_cartridge/hclacid,    "Reagent refill - Hydrochloric Acid", "hydrochloric acid reagent cartridge crate", 15, access_chemistry)
 SEC_PACK(potassium, /obj/item/weapon/reagent_containers/chem_disp_cartridge/potassium,  "Reagent refill - Potassium",     "potassium reagent cartridge crate",     15, access_chemistry)
 SEC_PACK(iron,      /obj/item/weapon/reagent_containers/chem_disp_cartridge/iron,       "Reagent refill - Iron",          "iron reagent cartridge crate",          15, access_chemistry)
 SEC_PACK(copper,    /obj/item/weapon/reagent_containers/chem_disp_cartridge/copper,     "Reagent refill - Copper",        "copper reagent cartridge crate",        15, access_chemistry)

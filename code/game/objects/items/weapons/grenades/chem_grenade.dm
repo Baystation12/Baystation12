@@ -255,7 +255,7 @@
 		var/obj/item/weapon/reagent_containers/glass/beaker/B1 = new(src)
 		var/obj/item/weapon/reagent_containers/glass/beaker/B2 = new(src)
 
-		B1.reagents.add_reagent("fluorosurfactant", 40)
+		B1.reagents.add_reagent("surfactant", 40)
 		B2.reagents.add_reagent("water", 40)
 		B2.reagents.add_reagent("cleaner", 10)
 
