@@ -4363,7 +4363,7 @@ datum
 			color = "#664300" // rgb: 102, 67, 0
 			boozepwr = 3.5
 
-			glass_icon_state = "crowsnest"
+			glass_icon_state = "thecrowsnest"
 			glass_name = "glass of crows nest"
 			glass_desc = "Short but packs a wallop.."
 
