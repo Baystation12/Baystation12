@@ -144,7 +144,7 @@
 		_tname {\
 			name = _name ;\
 			containername = _cname ;\
-			containertype = /obj/structure/closet/crate/secure;\
+			containertype = /obj/structure/closet/crate;\
 			cost = _cost ;\
 			contains = list( _type , _type );\
 			group = "Reagent Cartridges"\
