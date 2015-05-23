@@ -269,8 +269,8 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 						for(var/obj/I in linked_destroy.contents)
 							for(var/mob/M in I.contents)
 								M.death()
-							if(istype(I,/obj/item/stack/sheet))//Only deconsturcts one sheet at a time instead of the entire stack
-								var/obj/item/stack/sheet/S = I
+							if(istype(I,/obj/item/stack/material))//Only deconsturcts one sheet at a time instead of the entire stack
+								var/obj/item/stack/material/S = I
 								if(S.get_amount() > 1)
 									S.use(1)
 									linked_destroy.loaded_item = S
@@ -460,7 +460,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 				res_amount = "diamond_amount"
 
 		if(ispath(type) && hasvar(linked_lathe, res_amount))
-			var/obj/item/stack/sheet/sheet = new type(linked_lathe.loc)
+			var/obj/item/stack/material/sheet = new type(linked_lathe.loc)
 			var/available_num_sheets = round(linked_lathe.vars[res_amount]/sheet.perunit)
 			if(available_num_sheets>0)
 				sheet.amount = min(available_num_sheets, desired_num_sheets)
@@ -472,19 +472,19 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 		var/res_amount, type
 		switch(href_list["imprinter_ejectsheet"])
 			if("glass")
-				type = /obj/item/stack/sheet/glass
+				type = /obj/item/stack/material/glass
 				res_amount = "g_amount"
 			if("gold")
-				type = /obj/item/stack/sheet/mineral/gold
+				type = /obj/item/stack/material/gold
 				res_amount = "gold_amount"
 			if("diamond")
-				type = /obj/item/stack/sheet/mineral/diamond
+				type = /obj/item/stack/material/diamond
 				res_amount = "diamond_amount"
 			if("uranium")
-				type = /obj/item/stack/sheet/mineral/uranium
+				type = /obj/item/stack/material/uranium
 				res_amount = "uranium_amount"
 		if(ispath(type) && hasvar(linked_imprinter, res_amount))
-			var/obj/item/stack/sheet/sheet = new type(linked_imprinter.loc)
+			var/obj/item/stack/material/sheet = new type(linked_imprinter.loc)
 			var/available_num_sheets = round(linked_imprinter.vars[res_amount]/sheet.perunit)
 			if(available_num_sheets>0)
 				sheet.amount = min(available_num_sheets, desired_num_sheets)

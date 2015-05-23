@@ -1,95 +1,189 @@
-//switch this out to use a database at some point
-//list of ckey/ real_name and item paths
-//gives item to specific people when they join if it can
-//for multiple items just add mutliple entries, unless i change it to be a listlistlist
-//yes, it has to be an item, you can't pick up nonitems
+// Switch this out to use a database at some point. Each ckey is
+// associated with a list of custom item datums. When the character
+// spawns, the list is checked and all appropriate datums are spawned.
+// See config/example/custom_items.txt for a more detailed overview
+// of how the config system works.
+
+// CUSTOM ITEM ICONS:
+// Inventory icons must be in CUSTOM_ITEM_OBJ with state name [item_icon].
+// On-mob icons must be in CUSTOM_ITEM_MOB with state name [item_icon].
+// Inhands must be in CUSTOM_ITEM_MOB as [icon_state]_l and [icon_state]_r.
+
+// Kits must have mech icons in CUSTOM_ITEM_OBJ under [kit_icon].
+// Broken must be [kit_icon]-broken and open must be [kit_icon]-open.
+
+// Kits must also have hardsuit icons in CUSTOM_ITEM_MOB as [kit_icon]_suit
+// and [kit_icon]_helmet, and in CUSTOM_ITEM_OBJ as [kit_icon].
 
 /var/list/custom_items = list()
 
-/hook/startup/proc/loadCustomItems()
-	var/custom_items_file = file2text("config/custom_items.txt")
-	custom_items = text2list(custom_items_file, "\n")
+/datum/custom_item
+	var/assoc_key
+	var/character_name
+	var/item_icon
+	var/item_desc
+	var/name
+	var/item_path = /obj/item
+	var/req_access = 0
+	var/list/req_titles = list()
+	var/kit_name
+	var/kit_desc
+	var/kit_icon
+	var/additional_data
+
+/datum/custom_item/proc/spawn_item(var/newloc)
+	var/obj/item/citem = new item_path(newloc)
+	apply_to_item(citem)
+	return citem
+
+/datum/custom_item/proc/apply_to_item(var/obj/item/item)
+	if(!item)
+		return
+	if(name)
+		item.name = name
+	if(item_desc)
+		item.desc = item_desc
+	if(item_icon)
+		item.icon = CUSTOM_ITEM_OBJ
+		item.icon_state = item_icon
+		if(istype(item, /obj/item))
+			item.icon_override = CUSTOM_ITEM_MOB
+
+	// Kits are dumb so this is going to have to be hardcoded/snowflake.
+	if(istype(item, /obj/item/device/kit))
+		var/obj/item/device/kit/K = item
+		K.new_name = kit_name
+		K.new_desc = kit_desc
+		K.new_icon = kit_icon
+		K.new_icon_file = CUSTOM_ITEM_OBJ
+		if(istype(item, /obj/item/device/kit/paint))
+			var/obj/item/device/kit/paint/kit = item
+			kit.allowed_types = text2list(additional_data, ", ")
+		else if(istype(item, /obj/item/device/kit/suit))
+			var/obj/item/device/kit/suit/kit = item
+			kit.new_light_overlay = additional_data
+			kit.new_mob_icon_file = CUSTOM_ITEM_MOB
+
+	return item
+
+
+// Parses the config file into the custom_items list.
+/hook/startup/proc/load_custom_items()
+
+	var/datum/custom_item/current_data
+	for(var/line in text2list(file2text("config/custom_items.txt"), "\n"))
+
+		line = trim(line)
+		if(line == "" || !line || findtext(line, "#", 1, 2))
+			continue
+
+		if(findtext(line, "{", 1, 2) || findtext(line, "}", 1, 2)) // New block!
+			if(current_data && current_data.assoc_key)
+				if(!custom_items[current_data.assoc_key])
+					custom_items[current_data.assoc_key] = list()
+				var/list/L = custom_items[current_data.assoc_key]
+				L |= current_data
+			current_data = null
+
+		var/split = findtext(line,":")
+		if(!split)
+			continue
+		var/field = trim(copytext(line,1,split))
+		var/field_data = trim(copytext(line,(split+1)))
+		if(!field || !field_data)
+			continue
+
+		if(!current_data)
+			current_data = new()
+
+		switch(field)
+			if("ckey")
+				current_data.assoc_key = lowertext(field_data)
+			if("character_name")
+				current_data.character_name = lowertext(field_data)
+			if("item_path")
+				current_data.item_path = text2path(field_data)
+			if("item_name")
+				current_data.name = field_data
+			if("item_icon")
+				current_data.item_icon = field_data
+			if("item_desc")
+				current_data.item_desc = field_data
+			if("req_access")
+				current_data.req_access = text2num(field_data)
+			if("req_titles")
+				current_data.req_titles = text2list(field_data,", ")
+			if("kit_name")
+				current_data.kit_name = field_data
+			if("kit_desc")
+				current_data.kit_desc = field_data
+			if("kit_icon")
+				current_data.kit_icon = field_data
+			if("additional_data")
+				current_data.additional_data = field_data
 	return 1
 
-/proc/EquipCustomItems(mob/living/carbon/human/M)
-	for(var/line in custom_items)
-		// split & clean up
-		var/list/Entry = text2list(line, ":")
-		for(var/i = 1 to Entry.len)
-			Entry[i] = trim(Entry[i])
+//gets the relevant list for the key from the listlist if it exists, check to make sure they are meant to have it and then calls the giving function
+/proc/equip_custom_items(mob/living/carbon/human/M)
+	var/list/key_list = custom_items[M.ckey]
+	if(!key_list || key_list.len < 1)
+		return
 
-		if(Entry.len < 3)
-			continue;
+	for(var/datum/custom_item/citem in key_list)
 
-		if(Entry[1] == M.ckey && Entry[2] == M.real_name)
-			var/list/Paths = text2list(Entry[3], ",")
-			for(var/P in Paths)
-				var/ok = 0  // 1 if the item was placed successfully
-				P = trim(P)
-				var/path = text2path(P)
-				if(!path) continue
+		// Check for requisite ckey and character name.
+		if((lowertext(citem.assoc_key) != lowertext(M.ckey)) || (lowertext(citem.character_name) != lowertext(M.real_name)))
+			continue
 
-				var/obj/item/Item = new path()
-				if(istype(Item,/obj/item/weapon/card/id))
-					//id card needs to replace the original ID
-					if(M.ckey == "nerezza" && M.real_name == "Asher Spock" && M.mind.role_alt_title && M.mind.role_alt_title != "Emergency Physician")
-						//only spawn ID if asher is joining as an emergency physician
-						ok = 1
-						qdel(Item)
-						goto skip
-					var/obj/item/weapon/card/id/I = Item
-					for(var/obj/item/weapon/card/id/C in M)
-						//default settings
-						I.name = "[M.real_name]'s ID Card ([M.mind.role_alt_title ? M.mind.role_alt_title : M.mind.assigned_role])"
-						I.registered_name = M.real_name
-						I.access = C.access
-						I.assignment = C.assignment
-						I.blood_type = C.blood_type
-						I.dna_hash = C.dna_hash
-						I.fingerprint_hash = C.fingerprint_hash
-						//I.pin = C.pin
+		// Check for required access.
+		var/obj/item/weapon/card/id/current_id = M.wear_id
+		if(citem.req_access && citem.req_access > 0)
+			if(!(istype(current_id) && (citem.req_access in current_id.access)))
+				continue
 
-						//custom stuff
-						if(M.ckey == "fastler" && M.real_name == "Fastler Greay") //This is a Lifetime ID
-							I.name = "[M.real_name]'s Lifetime ID Card ([M.mind.role_alt_title ? M.mind.role_alt_title : M.mind.assigned_role])"
-						else if(M.ckey == "nerezza" && M.real_name == "Asher Spock") //This is an Odysseus Specialist ID
-							I.name = "[M.real_name]'s Odysseus Specialist ID Card ([M.mind.role_alt_title ? M.mind.role_alt_title : M.mind.assigned_role])"
-							I.access += list(access_robotics) //Station-based mecha pilots need this to access the recharge bay.
-						else if(M.ckey == "roaper" && M.real_name == "Ian Colm") //This is a Technician ID
-							I.name = "[M.real_name]'s Technician ID ([M.mind.role_alt_title ? M.mind.role_alt_title : M.mind.assigned_role])"
+		// Check for required job title.
+		if(citem.req_titles && citem.req_titles.len > 0)
+			var/has_title
+			var/current_title = M.mind.role_alt_title ? M.mind.role_alt_title : M.mind.assigned_role
+			for(var/title in citem.req_titles)
+				if(title == current_title)
+					has_title = 1
+					break
+			if(!has_title)
+				continue
 
-						//replace old ID
-						qdel(C)
-						ok = M.equip_to_slot_if_possible(I, slot_wear_id, 0)	//if 1, last argument deletes on fail
-						break
-				else if(istype(Item,/obj/item/weapon/storage/belt))
-					if(M.ckey == "jakksergal" && M.real_name == "Nashi Ra'hal" && M.mind.role_alt_title && M.mind.role_alt_title != "Nurse" && M.mind.role_alt_title != "Chemist")
-						ok = 1
-						qdel(Item)
-						goto skip
-					var/obj/item/weapon/storage/belt/medical/fluff/nashi_belt/I = Item
-					if(istype(M.belt,/obj/item/weapon/storage/belt))
-						for(var/obj/item/weapon/storage/belt/B in M)
-							qdel(B)
-							M.belt=null
-						ok = M.equip_to_slot_if_possible(I, slot_belt, 0)
-						break
-					if(istype(M.belt,/obj/item/device/pda))
-						for(var/obj/item/device/pda/Pda in M)
-							M.belt=null
-							M.equip_to_slot_if_possible(Pda, slot_l_store, 0)
-						ok = M.equip_to_slot_if_possible(I, slot_belt, 0)
-				else if(istype(M.back,/obj/item/weapon/storage) && M.back:contents.len < M.back:storage_slots) // Try to place it in something on the mob's back
-					Item.loc = M.back
-					ok = 1
+		// ID cards and PDAs are applied directly to the existing object rather than spawned fresh.
+		var/obj/item/existing_item
+		if(citem.item_path == /obj/item/weapon/card/id && istype(current_id)) //Set earlier.
+			existing_item = M.wear_id
+		else if(citem.item_path == /obj/item/device/pda)
+			existing_item = locate(/obj/item/device/pda) in M.contents
 
-				else
-					for(var/obj/item/weapon/storage/S in M.contents) // Try to place it in any item that can store stuff, on the mob.
-						if (S.contents.len < S.storage_slots)
-							Item.loc = S
-							ok = 1
-							break
+		// Spawn and equip the item.
+		if(existing_item)
+			citem.apply_to_item(existing_item)
+		else
+			place_custom_item(M,citem)
 
-				skip:
-				if (ok == 0) // Finally, since everything else failed, place it on the ground
-					Item.loc = get_turf(M.loc)
+// Places the item on the target mob.
+/proc/place_custom_item(mob/living/carbon/human/M, var/datum/custom_item/citem)
+
+	if(!citem) return
+	var/obj/item/newitem = citem.spawn_item()
+
+	if(M.equip_to_appropriate_slot(newitem))
+		return newitem
+
+	if(istype(M.back,/obj/item/weapon/storage))
+		var/obj/item/weapon/storage/backpack = M.back
+		if(backpack.contents.len < backpack.storage_slots)
+			newitem.loc = M.back
+			return newitem
+
+	// Try to place it in any item that can store stuff, on the mob.
+	for(var/obj/item/weapon/storage/S in M.contents)
+		if (S.contents.len < S.storage_slots)
+			newitem.loc = S
+			return newitem
+	newitem.loc = get_turf(M.loc)
+	return newitem

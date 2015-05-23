@@ -71,8 +71,8 @@
 		Emag()
 		return
 
-	if(istype(W, /obj/item/stack/sheet/glass))
-		var/obj/item/stack/sheet/glass/G = W
+	if(istype(W, /obj/item/stack/material/glass))
+		var/obj/item/stack/material/glass/G = W
 		if(uses >= max_uses)
 			user << "<span class='warning'>[src.name] is full."
 			return

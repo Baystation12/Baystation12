@@ -14,12 +14,16 @@
 		user << "You have already selected your hardware."
 		return
 
-	var/possible_choices = list("APU Generator", \
-							"Turrets Focus Enhancer", \
-							"Secondary Processor Unit",\
-							"Secondary Memory Bank",\
-							"Self-Destruct Explosives",\
-							"CANCEL")
+	var/hardware_list = list()
+	for(var/H in typesof(/datum/malf_hardware))
+		var/datum/malf_hardware/HW = new H
+		hardware_list += HW
+
+	var/possible_choices = list()
+	for(var/datum/malf_hardware/H in hardware_list)
+		possible_choices += H.name
+
+	possible_choices += "CANCEL"
 	var/choice = input("Select desired hardware. You may only choose one hardware piece!: ") in possible_choices
 	if(choice == "CANCEL")
 		return
@@ -27,20 +31,17 @@
 
 	var/datum/malf_hardware/C
 
-	switch(choice)
-		if("APU Generator")
-			C = new/datum/malf_hardware/apu_gen()
-		if("Turrets Focus Enhancer")
-			C = new/datum/malf_hardware/strong_turrets()
-		if("Secondary Processor Unit")
-			C = new/datum/malf_hardware/dual_cpu()
-		if("Secondary Memory Bank")
-			C = new/datum/malf_hardware/dual_ram()
-		if("Self-Destruct Explosives")
-			C = new/datum/malf_hardware/core_bomb()
+	for (var/datum/malf_hardware/H in hardware_list)
+		if(H.name == choice)
+			C = H
+			break
 
 	if(C)
 		note = C.desc
+	else
+		user << "This hardware does not exist! Probably a bug in game. Please report this."
+		return
+
 
 	if(!note)
 		error("Hardware without description: [C]")
@@ -51,26 +52,9 @@
 		user << "Selection cancelled. Use command again to select"
 		return
 
-	switch(choice)
-		if("APU Generator")
-			user.verbs += new/datum/game_mode/malfunction/verb/ai_toggle_apu()
-		if("Turrets Focus Enhancer")
-			for(var/obj/machinery/turret/T in machines)
-				T.maxhealth += 30
-				T.shot_delay = 7 // Half of default time.
-				T.auto_repair = 1
-				T.active_power_usage = 25000
-			for(var/obj/machinery/porta_turret/T in machines)
-				T.maxhealth += 30
-				T.shot_delay = 7 // Half of default time.
-				T.auto_repair = 1
-				T.active_power_usage = 25000
-		if("Secondary Processor Unit")
-		if("Secondary Memory Bank")
-		if("Self-Destruct Explosives")
-			user.verbs += new/datum/game_mode/malfunction/verb/ai_self_destruct()
-
-	user.hardware = C
+	if(C)
+		C.owner = user
+		C.install()
 
 // Verb: ai_help()
 // Parameters: None

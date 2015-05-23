@@ -55,18 +55,11 @@
 				var/cam = C.nano_structure()
 				cameras[++cameras.len] = cam
 
-				if(C == current)
-					data["current"] = cam
+			camera_cache=list2json(cameras)
 
-			var/list/camera_list = list("cameras" = cameras)
-			camera_cache=list2json(camera_list)
-		else
-			if(current)
-				data["current"] = current.nano_structure()
-
-
-		if(ui)
-			ui.load_cached_data(camera_cache)
+		if(current)
+			data["current"] = current.nano_structure()
+		data["cameras"] = list("__json_cache" = camera_cache)
 
 		ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 		if (!ui)
@@ -76,8 +69,7 @@
 			ui.add_template("mapContent", "sec_camera_map_content.tmpl")
 			// adding a template with the key "mapHeader" replaces the map header content
 			ui.add_template("mapHeader", "sec_camera_map_header.tmpl")
-
-			ui.load_cached_data(camera_cache)
+			
 			ui.set_initial_data(data)
 			ui.open()
 			ui.set_auto_update(1)

@@ -144,7 +144,7 @@ var/global/list/engineering_networks = list(
 // CHECKS
 
 /obj/machinery/camera/proc/isEmpProof()
-	var/O = locate(/obj/item/stack/sheet/mineral/osmium) in assembly.upgrades
+	var/O = locate(/obj/item/stack/material/osmium) in assembly.upgrades
 	return O
 
 /obj/machinery/camera/proc/isXRay()
@@ -160,27 +160,21 @@ var/global/list/engineering_networks = list(
 // UPGRADE PROCS
 
 /obj/machinery/camera/proc/upgradeEmpProof()
-	assembly.upgrades.Add(new /obj/item/stack/sheet/mineral/osmium(assembly))
+	assembly.upgrades.Add(new /obj/item/stack/material/osmium(assembly))
 	setPowerUsage()
-	if(cameranet)
-		cameranet.updateVisibility(src)
-	update_nearby_tiles()
+	update_coverage()
 
 /obj/machinery/camera/proc/upgradeXRay()
 	assembly.upgrades.Add(new /obj/item/weapon/stock_parts/scanning_module/adv(assembly))
 	setPowerUsage()
-	if(cameranet)
-		cameranet.updateVisibility(src)
-	update_nearby_tiles()
+	update_coverage()
 
 /obj/machinery/camera/proc/upgradeMotion()
 	assembly.upgrades.Add(new /obj/item/device/assembly/prox_sensor(assembly))
 	setPowerUsage()
 	if(!(src in machines))
 		machines.Add(src)
-	if(cameranet)
-		cameranet.updateVisibility(src)
-	update_nearby_tiles()
+	update_coverage()
 
 /obj/machinery/camera/proc/setPowerUsage()
 	var/mult = 1

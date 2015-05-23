@@ -106,7 +106,6 @@
 
 	if(loc)
 		loc.Exited(src)
-	loc = null
 
 	if(prob(30))
 		explosion(get_turf(loc), 0, 0, 1, 3)
@@ -460,6 +459,8 @@
 
 
 /obj/mecha/proc/setInternalDamage(int_dam_flag)
+	if(!pr_internal_damage) return
+
 	internal_damage |= int_dam_flag
 	pr_internal_damage.start()
 	log_append_to_last("Internal damage of type [int_dam_flag].",1)
@@ -813,34 +814,6 @@
 		W.forceMove(src)
 		user.visible_message("[user] attaches [W] to [src].", "You attach [W] to [src]")
 		return
-
-	else if(istype(W, /obj/item/weapon/paintkit))
-
-		if(occupant)
-			user << "You can't customize a mech while someone is piloting it - that would be unsafe!"
-			return
-
-		var/obj/item/weapon/paintkit/P = W
-		var/found = null
-
-		for(var/type in P.allowed_types)
-			if(type==src.initial_icon)
-				found = 1
-				break
-
-		if(!found)
-			user << "That kit isn't meant for use on this class of exosuit."
-			return
-
-		user.visible_message("[user] opens [P] and spends some quality time customising [src].")
-
-		src.name = P.new_name
-		src.desc = P.new_desc
-		src.initial_icon = P.new_icon
-		src.reset_icon()
-
-		user.drop_item()
-		qdel(P)
 
 	else
 		call((proc_res["dynattackby"]||src), "dynattackby")(W,user)
@@ -1791,8 +1764,9 @@
 	if(!damage)
 		return 0
 
-	src.log_message("Attack by an animal. Attacker - [user].",1)
+	src.log_message("Attacked. Attacker - [user].",1)
 
+	user.do_attack_animation(src)
 	if(!prob(src.deflect_chance))
 		src.take_damage(damage)
 		src.check_for_internal_damage(list(MECHA_INT_TEMP_CONTROL,MECHA_INT_TANK_BREACH,MECHA_INT_CONTROL_LOST))

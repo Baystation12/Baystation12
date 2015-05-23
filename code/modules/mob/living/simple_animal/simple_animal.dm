@@ -92,7 +92,7 @@
 		return 0
 
 
-	if(health < 1)
+	if(health <= 0)
 		death()
 		return
 
@@ -240,6 +240,7 @@
 
 		if(I_DISARM)
 			M.visible_message("\blue [M] [response_disarm] \the [src]")
+			M.do_attack_animation(src)
 			//TODO: Push the mob away or something
 
 		if(I_GRAB)
@@ -257,10 +258,12 @@
 			LAssailant = M
 
 			M.visible_message("\red [M] has grabbed [src] passively!")
+			M.do_attack_animation(src)
 
 		if(I_HURT)
 			adjustBruteLoss(harm_intent_damage)
 			M.visible_message("\red [M] [response_harm] \the [src]")
+			M.do_attack_animation(src)
 
 	return
 
@@ -279,28 +282,33 @@
 						if ((M.client && !( M.blinded )))
 							M.show_message("<span class='notice'>[user] applies the [MED] on [src].</span>")
 		else
-			user << "<span class='notice'>\The [src] is dead, medical items won't bring it back to life.</span>"
+			user << "<span class='notice'>\The [src] is dead, medical items won't bring \him back to life.</span>"
 	if(meat_type && (stat == DEAD))	//if the animal has a meat, and if it is dead.
-		if(istype(O, /obj/item/weapon/kitchenknife) || istype(O, /obj/item/weapon/butch))
+		if(istype(O, /obj/item/weapon/material/knife) || istype(O, /obj/item/weapon/material/knife/butch))
 			harvest(user)
 	else
-		user.changeNext_move(8)
-		if(O.force > resistance)
-			var/damage = O.force
-			if (O.damtype == HALLOSS)
-				damage = 0
-			if(supernatural && istype(O,/obj/item/weapon/nullrod))
-				damage *= 2
-				purge = 3
-			adjustBruteLoss(damage)
-			for(var/mob/M in viewers(src, null))
-				if ((M.client && !( M.blinded )))
-					M.show_message("<span class='danger>[src] has been attacked with the [O] by [user].</span>")
-		else
-			usr << "<span class='danger>This weapon is ineffective, it does no damage.</span>"
-			for(var/mob/M in viewers(src, null))
-				if ((M.client && !( M.blinded )))
-					M.show_message("<span class='notice'>[user] gently taps [src] with \the [O].</span>")
+		attacked_with_item(O, user)
+
+//TODO: refactor mob attackby(), attacked_by(), and friends.
+/mob/living/simple_animal/proc/attacked_with_item(var/obj/item/O, var/mob/user)
+	user.changeNext_move(8)
+	if(!O.force)
+		visible_message("<span class='notice'>[user] gently taps [src] with \the [O].</span>")
+		return
+	
+	if(O.force > resistance)
+		var/damage = O.force
+		if (O.damtype == HALLOSS)
+			damage = 0
+		if(supernatural && istype(O,/obj/item/weapon/nullrod))
+			damage *= 2
+			purge = 3
+		adjustBruteLoss(damage)
+	else
+		usr << "<span class='danger>This weapon is ineffective, it does no damage.</span>"
+	
+	visible_message("<span class='danger>[src] has been attacked with the [O] by [user].</span>")
+	user.do_attack_animation(src)
 
 /mob/living/simple_animal/movement_delay()
 	var/tally = 0 //Incase I need to add stuff other than "speed" later

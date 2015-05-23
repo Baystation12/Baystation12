@@ -10,7 +10,7 @@
 	item_state = "apron"
 	blood_overlay_type = "armor"
 	body_parts_covered = 0
-	allowed = list (/obj/item/weapon/reagent_containers/spray/plantbgone,/obj/item/device/analyzer/plant_analyzer,/obj/item/seeds,/obj/item/weapon/reagent_containers/glass/fertilizer,/obj/item/weapon/minihoe)
+	allowed = list (/obj/item/weapon/reagent_containers/spray/plantbgone,/obj/item/device/analyzer/plant_analyzer,/obj/item/seeds,/obj/item/weapon/reagent_containers/glass/fertilizer,/obj/item/weapon/material/minihoe)
 	sprite_sheets = list("Vox" = 'icons/mob/species/vox/suit.dmi')
 //Captain
 /obj/item/clothing/suit/captunic
@@ -51,14 +51,14 @@
 
 //Chef
 /obj/item/clothing/suit/chef
-	name = "Chef's apron"
+	name = "chef's apron"
 	desc = "An apron used by a high class chef."
 	icon_state = "chef"
 	item_state = "chef"
 	gas_transfer_coefficient = 0.90
 	permeability_coefficient = 0.50
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
-	allowed = list (/obj/item/weapon/kitchenknife,/obj/item/weapon/butch)
+	allowed = list (/obj/item/weapon/material/knife)
 	sprite_sheets = list("Vox" = 'icons/mob/species/vox/suit.dmi')
 
 //Chef
@@ -184,6 +184,14 @@
 	allowed = list(/obj/item/stack/medical, /obj/item/weapon/reagent_containers/dropper, /obj/item/weapon/reagent_containers/hypospray, /obj/item/weapon/reagent_containers/syringe, \
 	/obj/item/device/healthanalyzer, /obj/item/device/flashlight, /obj/item/device/radio, /obj/item/weapon/tank/emergency_oxygen)
 	body_parts_covered = UPPER_TORSO|ARMS
+
+/obj/item/clothing/suit/storage/toggle/fr_jacket/ems
+	name = "\improper EMS jacket"
+	desc = "A dark blue, martian-pattern, EMS jacket. It sports high-visibility reflective stripes and a star of life on the back."
+	icon_state = "ems_jacket_closed"
+	item_state = "ems_jacket_closed"
+	icon_open = "ems_jacket_open"
+	icon_closed = "ems_jacket_closed"
 
 //Mime
 /obj/item/clothing/suit/suspenders

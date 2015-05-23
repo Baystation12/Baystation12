@@ -297,9 +297,9 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
 	{{else data.mode== 41}} <!-- Manifest uses cached data so we only use nanowriter when shit changes.-->
 	    <div class="item">
             <center><table class="pmon"><tbody>
-                {{if data.cached.heads.length}}
+                {{if data.manifest.heads.length}}
                     <tr><th colspan="3" class="command">Command</th></tr>
-                    {{for data.cached["heads"]}}
+                    {{for data.manifest["heads"]}}
                         {{if value.rank == "Captain"}}
                             <tr><td><span class="good">{{:value.name}}</span></td><td><span class="good">{{:value.rank}}</span></td><td><span class="good">{{:value.active}}</span></td></tr>
                         {{else}}
@@ -307,9 +307,9 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
                         {{/if}}
                     {{/for}}
                 {{/if}}
-                {{if data.cached.sec.length}}
+                {{if data.manifest.sec.length}}
                     <tr><th colspan="3" class="sec">Security</th></tr>
-                    {{for data.cached["sec"]}}
+                    {{for data.manifest["sec"]}}
                         {{if value.rank == "Head of Security"}}
                             <tr><td><span class="good">{{:value.name}}</span></td><td><span class="good">{{:value.rank}}</span></td><td><span class="good">{{:value.active}}</span></td></tr>
                         {{else}}
@@ -317,9 +317,9 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
                         {{/if}}
                     {{/for}}
                 {{/if}}
-                {{if data.cached.eng.length}}
+                {{if data.manifest.eng.length}}
                     <tr><th colspan="3" class="eng">Engineering</th></tr>
-                    {{for data.cached["eng"]}}
+                    {{for data.manifest["eng"]}}
                         {{if value.rank == "Chief Engineer"}}
                             <tr><td><span class="good">{{:value.name}}</span></td><td><span class="good">{{:value.rank}}</span></td><td><span class="good">{{:value.active}}</span></td></tr>
                         {{else}}
@@ -327,9 +327,9 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
                         {{/if}}
                     {{/for}}
                 {{/if}}
-                {{if data.cached.med.length}}
+                {{if data.manifest.med.length}}
                     <tr><th colspan="3" class="med">Medical</th></tr>
-                    {{for data.cached["med"]}}
+                    {{for data.manifest["med"]}}
                         {{if value.rank == "Chief Medical Officer"}}
                             <tr><td><span class="good">{{:value.name}}</span></td><td><span class="good">{{:value.rank}}</span></td><td><span class="good">{{:value.active}}</span></td></tr>
                         {{else}}
@@ -337,9 +337,9 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
                         {{/if}}
                     {{/for}}
                 {{/if}}
-                {{if data.cached.sci.length}}
+                {{if data.manifest.sci.length}}
                     <tr><th colspan="3" class="sci">Science</th></tr>
-                    {{for data.cached["sci"]}}
+                    {{for data.manifest["sci"]}}
                         {{if value.rank == "Research Director"}}
                             <tr><td><span class="good">{{:value.name}}</span></td><td><span class="good">{{:value.rank}}</span></td><td><span class="good">{{:value.active}}</span></td></tr>
                         {{else}}
@@ -347,9 +347,9 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
                         {{/if}}
                     {{/for}}
                 {{/if}}
-                {{if data.cached.civ.length}}
+                {{if data.manifest.civ.length}}
                     <tr><th colspan="3" class="civ">Civilian</th></tr>
-                    {{for data.cached["civ"]}}
+                    {{for data.manifest["civ"]}}
                         {{if value.rank == "Head of Personnel"}}
                             <tr><td><span class="good">{{:value.name}}</span></td><td><span class="good">{{:value.rank}}</span></td><td><span class="good">{{:value.active}}</span></td></tr>
                         {{else}}
@@ -357,9 +357,9 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
                         {{/if}}
                     {{/for}}
                 {{/if}}
-                {{if data.cached.misc.length}}
+                {{if data.manifest.misc.length}}
                     <tr><th colspan="3" class="misc">Misc</th></tr>
-                    {{for data.cached["misc"]}}
+                    {{for data.manifest["misc"]}}
                         <tr><td><span class="average">{{:value.name}}</span></td><td><span class="average">{{:value.rank}}</span></td><td><span class="average">{{:value.active}}</span></td></tr>
                     {{/for}}
                 {{/if}}

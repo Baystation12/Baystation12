@@ -170,16 +170,16 @@
 		var/obj/O
 
 		//shards
-		O = new /obj/item/weapon/shard(src.loc)
+		O = new /obj/item/weapon/material/shard(src.loc)
 		step_to(O, get_turf(pick(view(7, src))))
 		if(prob(75))
-			O = new /obj/item/weapon/shard(src.loc)
+			O = new /obj/item/weapon/material/shard(src.loc)
 			step_to(O, get_turf(pick(view(7, src))))
 		if(prob(50))
-			O = new /obj/item/weapon/shard(src.loc)
+			O = new /obj/item/weapon/material/shard(src.loc)
 			step_to(O, get_turf(pick(view(7, src))))
 		if(prob(25))
-			O = new /obj/item/weapon/shard(src.loc)
+			O = new /obj/item/weapon/material/shard(src.loc)
 			step_to(O, get_turf(pick(view(7, src))))
 
 		//rods
@@ -196,16 +196,16 @@
 			step_to(O, get_turf(pick(view(7, src))))
 
 		//plasteel
-		O = new /obj/item/stack/sheet/plasteel(src.loc)
+		O = new /obj/item/stack/material/plasteel(src.loc)
 		step_to(O, get_turf(pick(view(7, src))))
 		if(prob(75))
-			O = new /obj/item/stack/sheet/plasteel(src.loc)
+			O = new /obj/item/stack/material/plasteel(src.loc)
 			step_to(O, get_turf(pick(view(7, src))))
 		if(prob(50))
-			O = new /obj/item/stack/sheet/plasteel(src.loc)
+			O = new /obj/item/stack/material/plasteel(src.loc)
 			step_to(O, get_turf(pick(view(7, src))))
 		if(prob(25))
-			O = new /obj/item/stack/sheet/plasteel(src.loc)
+			O = new /obj/item/stack/material/plasteel(src.loc)
 			step_to(O, get_turf(pick(view(7, src))))
 
 		//also drop dummy circuit boards deconstructable for research (loot)
