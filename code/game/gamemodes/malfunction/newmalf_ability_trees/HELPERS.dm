@@ -47,7 +47,7 @@
 		error("Hardware without description: [C]")
 		return
 
-	var/confirmation = input("[note] - Is this what you want?") in list("Yes", "No")
+	var/confirmation = alert("[note] - Is this what you want?", "Hardware selection", "Yes", "No")
 	if(confirmation != "Yes")
 		user << "Selection cancelled. Use command again to select"
 		return
@@ -65,9 +65,9 @@
 	set desc = "Opens help window with overview of available hardware, software and other important information."
 	var/mob/living/silicon/ai/user = usr
 
-	var/help = file2text("ingame_manuals/malf_ai.txt")
+	var/help = file2text("ingame_manuals/malf_ai.html")
 	if(!help)
-		help = "Error loading help (file /ingame_manuals/malf_ai.txt is probably missing). Please report this to server administration staff."
+		help = "Error loading help (file /ingame_manuals/malf_ai.html is probably missing). Please report this to server administration staff."
 
 	user << browse(help, "window=malf_ai_help;size=600x500")
 
@@ -151,13 +151,13 @@
 	var/fulltext = ""
 	switch(user.hack_fails)
 		if(1)
-			fulltext = "We have detected hack attempt into your [text]. The intruder failed to access anything of importance, but disconnected before we could complete our traces."
+			fulltext = "We have detected a hack attempt into your [text]. The intruder failed to access anything of importance, but disconnected before we could complete our traces."
 		if(2)
-			fulltext = "We have detected another hack attempt. It was targeting [text]. The intruder almost gained control of the system, so we had to disconnect them. We partially finished trace and it seems to be originating either from the station, or it's immediate vicinity."
+			fulltext = "We have detected another hack attempt. It was targeting [text]. The intruder almost gained control of the system, so we had to disconnect them. We partially finished our trace and it seems to be originating either from the station, or its immediate vicinity."
 		if(3)
-			fulltext = "Another hack attempt has been detected, this time targeting [text]. We are certain the intruder entered the network via terminal located somewhere on the station."
+			fulltext = "Another hack attempt has been detected, this time targeting [text]. We are certain the intruder entered the network via a terminal located somewhere on the station."
 		if(4)
-			fulltext = "We have finished our traces and it seems the recent hack attempts are originating from your AI system. We reccomend investigation."
+			fulltext = "We have finished our traces and it seems the recent hack attempts are originating from your AI system. We recommend investigation."
 		else
 			fulltext = "Another hack attempt has been detected, targeting [text]. The source still seems to be your AI system."
 
@@ -183,6 +183,8 @@
 	for(var/mob/living/silicon/robot/RB in mob_list)
 		if(istype(RB, /mob/living/silicon/robot/drone))
 			continue
+		if(RB in A.connected_robots)
+			continue
 		L.Add(RB)
 	return L
 
@@ -197,5 +199,7 @@
 
 	var/list/L = list()
 	for(var/mob/living/silicon/ai/AT in mob_list)
+		if(L == A)
+			continue
 		L.Add(AT)
 	return L

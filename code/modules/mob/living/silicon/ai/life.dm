@@ -57,26 +57,26 @@
 			src.see_in_dark = 8
 			src.see_invisible = SEE_INVISIBLE_LIVING
 
-			if (src:aiRestorePowerRoutine==2)
+			if (aiRestorePowerRoutine==2)
 				src << "Alert cancelled. Power has been restored without our assistance."
-				src:aiRestorePowerRoutine = 0
+				aiRestorePowerRoutine = 0
 				src.blind.layer = 0
 				return
-			else if (src:aiRestorePowerRoutine==3)
+			else if (aiRestorePowerRoutine==3)
 				src << "Alert cancelled. Power has been restored."
-				src:aiRestorePowerRoutine = 0
+				aiRestorePowerRoutine = 0
 				src.blind.layer = 0
 				return
 			else if (APU_power)
-				src:aiRestorePowerRoutine = 0
+				aiRestorePowerRoutine = 0
 				src.blind.layer = 0
 				return
 		else
 			var/area/current_area = get_area(src)
 
 			if (lacks_power())
-				if (src:aiRestorePowerRoutine==0)
-					src:aiRestorePowerRoutine = 1
+				if (aiRestorePowerRoutine==0)
+					aiRestorePowerRoutine = 1
 
 					//Blind the AI
 
@@ -144,7 +144,7 @@
 									theAPC.operating = 1
 									theAPC.equipment = 3
 									theAPC.update()
-									src:aiRestorePowerRoutine = 3
+									aiRestorePowerRoutine = 3
 									src << "Here are your current laws:"
 									src.show_laws()
 							sleep(50)

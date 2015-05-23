@@ -23,8 +23,11 @@
 		user.bombing_core = 0
 		return
 
-	var/choice = input("Really destroy core?") in list("YES", "NO")
+	var/choice = alert("Really destroy core?", "Core self-destruct", "YES", "NO")
 	if(choice != "YES")
+		return
+
+	if(!ability_prechecks(user, 0, 1))
 		return
 
 	user.bombing_core = 1
@@ -79,8 +82,10 @@
 		user.bombing_station = 0
 		return
 
-	var/choice = input("Really destroy station?") in list("YES", "NO")
+	var/choice = alert("Really destroy station?", "Station self-destruct", "YES", "NO")
 	if(choice != "YES")
+		return
+	if(!ability_prechecks(user, 0, 0))
 		return
 	user << "***** STATION SELF-DESTRUCT SEQUENCE INITIATED *****"
 	user << "Self-destructing in 2 minutes. Use this command again to abort."

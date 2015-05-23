@@ -19,9 +19,9 @@
 				msg += "<B>Its casing is melted and heat-warped!</B>\n"
 		if (src.getOxyLoss())
 			if (src.getOxyLoss() > 175)
-				msg += "<B>It seems to be running on backup power. It's display is blinking \"BACKUP POWER CRITICAL\" warning.</B>\n"
+				msg += "<B>It seems to be running on backup power. Its display is blinking a \"BACKUP POWER CRITICAL\" warning.</B>\n"
 			else if(src.getOxyLoss() > 100)
-				msg += "<B>It seems to be running on backup power. It's display is blinking \"BACKUP POWER LOW\" warning.</B>\n"
+				msg += "<B>It seems to be running on backup power. Its display is blinking a \"BACKUP POWER LOW\" warning.</B>\n"
 			else
 				msg += "It seems to be running on backup power.\n"
 

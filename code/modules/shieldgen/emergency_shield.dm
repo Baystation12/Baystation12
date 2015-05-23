@@ -13,8 +13,8 @@
 	var/shield_idle_power = 1500		//how much power we use when just being sustained.
 
 /obj/machinery/shield/malfai
-	name = "Emergency Forcefield"
-	desc = "Weak forcefield which seems to be projected by station's emergency atmosphere containment field"
+	name = "emergency forcefield"
+	desc = "A weak forcefield which seems to be projected by the station's emergency atmosphere containment field"
 	health = max_health/2 // Half health, it's not suposed to resist much.
 
 /obj/machinery/shield/malfai/process()
@@ -23,7 +23,7 @@
 
 /obj/machinery/shield/proc/check_failure()
 	if (src.health <= 0)
-		visible_message("<span class='notice'>The [src] dissipates!</span>")
+		visible_message("<span class='notice'>\The [src] dissipates!</span>")
 		qdel(src)
 		return
 
@@ -100,7 +100,7 @@
 
 /obj/machinery/shield/hitby(AM as mob|obj)
 	//Let everyone know we've been hit!
-	visible_message("<span class='notice'><B>[src] was hit by [AM].</B></span>")
+	visible_message("<span class='notice'><B>\[src] was hit by [AM].</B></span>")
 
 	//Super realistic, resource-intensive, real-time damage calculations.
 	var/tforce = 0
