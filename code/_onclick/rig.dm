@@ -24,6 +24,8 @@
 		if(CTRL_CLICK)
 			src << "Hardsuit activation mode set to control-click."
 		else
+			// should never get here, but just in case:
+			soft_assert(0, "Bad hardsuit click mode: [hardsuit_click_mode] - expected 0 to [MAX_HARDSUIT_CLICK_MODE]")
 			src << "Somehow you bugged the system. Setting your hardsuit mode to middle-click."
 			hardsuit_click_mode = MIDDLE_CLICK
 
