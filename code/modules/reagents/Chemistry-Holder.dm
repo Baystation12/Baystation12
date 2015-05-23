@@ -1,3 +1,5 @@
+#define PROCESS_REACTION_ITER 5 //when processing a reaction, iterate this many times
+
 /datum/reagents
 	var/list/datum/reagent/reagent_list = list()
 	var/total_volume = 0
@@ -11,6 +13,9 @@
 
 /datum/reagents/Destroy()
 	..()
+	if(chemistryProcess)
+		chemistryProcess.active_holders -= src
+
 	for(var/datum/reagent/R in reagent_list)
 		qdel(R)
 	reagent_list.Cut()
@@ -70,17 +75,22 @@
 		my_atom.reagents = null
 
 /datum/reagents/proc/handle_reactions()
+	if(chemistryProcess)
+		chemistryProcess.mark_for_update(src)
+
+//returns 1 if the holder should continue reactiong, 0 otherwise.
+/datum/reagents/proc/process_reactions()
 	if(!my_atom) // No reactions in temporary holders
-		return
+		return 0
 	if(!my_atom.loc) //No reactions inside GC'd containers
-		return
+		return 0
 	if(my_atom.flags & NOREACT) // No reactions here
-		return
+		return 0
 	
+	var/reaction_occured
+	var/list/effect_reactions = list()
 	var/list/eligible_reactions = list()
-	
-	var/reaction_occured = 0
-	do
+	for(var/i in 1 to PROCESS_REACTION_ITER)
 		reaction_occured = 0
 		
 		//need to rebuild this to account for chain reactions
@@ -88,17 +98,20 @@
 			eligible_reactions |= chemical_reactions_list[R.id]
 		
 		for(var/datum/chemical_reaction/C in eligible_reactions)
-			if(!C.can_happen(src))
-				continue
-			
-			if(C.process(src))
+			if(C.can_happen(src) && C.process(src))
+				effect_reactions |= C
 				reaction_occured = 1
 		
 		eligible_reactions.Cut()
 		
-	while(reaction_occured)
+		if(!reaction_occured)
+			break
+	
+	for(var/datum/chemical_reaction/C in effect_reactions)
+		C.post_reaction(src)
+	
 	update_total()
-	return
+	return reaction_occured
 
 /* Holder-to-chemical */
 
