@@ -1078,7 +1078,7 @@
 		usr << "<span class='danger'>[src] has no pulse!</span>"	//it is REALLY UNLIKELY that a dead person would check his own pulse
 		return
 
-	usr << "You must [self ? "" : "both"] stand until counting is finished."
+	usr << "You must[self ? "" : " both"] remain still until counting is finished."
 	if(do_mob(usr, src, 60))
 		usr << "<span class='notice'>[self ? "Your" : "[src]'s"] pulse is [src.get_pulse(GETPULSE_HAND)].</span>"
 	else
