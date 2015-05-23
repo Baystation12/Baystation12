@@ -27,8 +27,8 @@
 	desc = "A stack of sheets of [material.display_name]."
 	recipes = material.get_recipes()
 	stacktype = material.stack_type
-	origin_tech = material.stack_origin_tech
-	perunit = material.stack_per_sheet
+	origin_tech = material.stack_origin_tech.Copy()
+	perunit = SHEET_MATERIAL_AMOUNT
 
 	if(apply_colour)
 		color = material.icon_colour
@@ -42,7 +42,7 @@
 		for(var/material_string in material.composite_material)
 			matter[material_string] = material.composite_material[material_string]
 	else
-		matter[material.name] = material.stack_per_sheet
+		matter[material.name] = SHEET_MATERIAL_AMOUNT
 	return 1
 
 obj/item/stack/material/iron
