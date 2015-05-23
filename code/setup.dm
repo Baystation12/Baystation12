@@ -645,11 +645,10 @@ var/list/be_special_flags = list(
 #define HAS_UNDERWEAR     512   // Underwear is drawn onto the mob icon.
 #define IS_PLANT          1024  // Is a treeperson.
 #define IS_WHITELISTED    2048  // Must be whitelisted to play.
-#define IS_SYNTHETIC      4096  // Is a machine race.
-#define HAS_EYE_COLOR     8192  // Eye colour selectable in chargen. (RGB)
-#define CAN_JOIN          16384 // Species is selectable in chargen.
-#define IS_RESTRICTED     32768 // Is not a core/normally playable species. (castes, mutantraces)
-#define REGENERATES_LIMBS 65536 // Attempts to regenerate unamputated limbs.
+#define HAS_EYE_COLOR     4096  // Eye colour selectable in chargen. (RGB)
+#define CAN_JOIN          8192  // Species is selectable in chargen.
+#define IS_RESTRICTED     16384 // Is not a core/normally playable species. (castes, mutantraces)
+// unused: 32768 - higher than this will overflow
 
 // Language flags.
 #define WHITELISTED 1   // Language is available if the speaker is whitelisted.
@@ -719,11 +718,12 @@ var/list/be_special_flags = list(
 #define NETWORK_FAILURE     32
 
 // Some on_mob_life() procs check for alien races.
-#define IS_DIONA  1
-#define IS_VOX    2
-#define IS_SKRELL 3
-#define IS_UNATHI 4
-#define IS_XENOS  5
+#define IS_DIONA   1
+#define IS_VOX     2
+#define IS_SKRELL  3
+#define IS_UNATHI  4
+#define IS_XENOS   5
+#define IS_MACHINE 6
 
 #define MAX_GEAR_COST 5 // Used in chargen for accessory loadout limit.
 

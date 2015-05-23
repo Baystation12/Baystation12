@@ -258,9 +258,6 @@
 
 	proc/handle_mutations_and_radiation()
 
-		if(species.flags & IS_SYNTHETIC) //Robots don't suffer from mutations or radloss.
-			return
-
 		if(getFireLoss())
 			if((COLD_RESISTANCE in mutations) || (prob(1)))
 				heal_organ_damage(0,1)
@@ -709,9 +706,9 @@
 	*/
 
 	proc/stabilize_body_temperature()
-		if (species.flags & IS_SYNTHETIC)
-			bodytemperature += species.synth_temp_gain		//just keep putting out heat.
-			return
+
+		if (species.passive_temp_gain) // We produce heat naturally.
+			bodytemperature += species.passive_temp_gain
 
 		var/body_temperature_difference = species.body_temperature - bodytemperature
 
@@ -858,7 +855,9 @@
 
 	proc/handle_chemicals_in_body()
 
-		if(reagents && !(species.flags & IS_SYNTHETIC)) //Synths don't process reagents.
+		// TODO: stomach and bloodstream organ.
+
+		if(reagents)
 			chem_effects.Cut()
 			analgesic = 0
 			var/alien = 0
@@ -931,7 +930,8 @@
 				take_overall_damage(2,0)
 				traumatic_shock++
 
-		if(!(species.flags & IS_SYNTHETIC)) handle_trace_chems()
+		// TODO: stomach and bloodstream organ.
+		handle_trace_chems()
 
 		updatehealth()
 
@@ -1133,7 +1133,7 @@
 
 		if(damageoverlay.overlays)
 			damageoverlay.overlays = list()
-		
+
 		if(stat == UNCONSCIOUS)
 			//Critical damage passage overlay
 			if(health <= 0)
@@ -1268,7 +1268,7 @@
 						if(2)	healths.icon_state = "health7"
 						else
 							//switch(health - halloss)
-							switch(100 - ((species && species.flags & NO_PAIN & !IS_SYNTHETIC) ? 0 : traumatic_shock))
+							switch(100 - ((species.flags & NO_PAIN) ? 0 : traumatic_shock))
 								if(100 to INFINITY)		healths.icon_state = "health0"
 								if(80 to 100)			healths.icon_state = "health1"
 								if(60 to 80)			healths.icon_state = "health2"

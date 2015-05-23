@@ -746,10 +746,17 @@
 			xylophone=0
 	return
 
+/mob/living/carbon/human/proc/check_has_mouth()
+	// Todo, check stomach organ when implemented.
+	var/obj/item/organ/external/head/H = get_organ("head")
+	if(!H || !H.can_intake_reagents)
+		return 0
+	return 1
+
 /mob/living/carbon/human/proc/vomit()
 
-	if(species.flags & IS_SYNTHETIC)
-		return //Machines don't throw up.
+	if(!check_has_mouth())
+		return
 
 	if(!lastpuke)
 		lastpuke = 1

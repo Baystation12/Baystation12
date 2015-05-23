@@ -45,7 +45,7 @@
 	var/list/res = list()
 	for (var/specie in all_species)
 		var/datum/species/S = all_species[specie]
-		if(!(S.flags & IS_SYNTHETIC))
+		if(!S.virus_immune)
 			meat += S.name
 	if(meat.len)
 		var/num = rand(1,meat.len)
