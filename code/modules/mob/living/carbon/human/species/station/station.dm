@@ -231,7 +231,7 @@
 		else
 			qdel(D)
 
-	H.visible_message("\red[H] splits apart with a wet slithering noise!")
+	H.visible_message("<span class='danger'>[H] splits apart with a wet slithering noise!</span>")
 
 /datum/species/machine
 	name = "Machine"
@@ -266,7 +266,10 @@
 	virus_immune = 1
 	reagent_tag = IS_MACHINE
 
-	has_organ = list() //TODO: Positronic brain.
+	has_organ = list(
+		"brain" = /obj/item/organ/mmi_holder/posibrain,
+		"cell" = /obj/item/organ/cell
+		)
 
 	has_limbs = list(
 		"chest" =  list("path" = /obj/item/organ/external/chest/ipc),

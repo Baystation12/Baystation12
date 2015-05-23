@@ -81,7 +81,8 @@
 	return
 
 /obj/item/weapon/screwdriver/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
-	if(!istype(M))	return ..()
+	if(!istype(M) || user.a_intent == "help")
+		return ..()
 	if(user.zone_sel.selecting != "eyes" && user.zone_sel.selecting != "head")
 		return ..()
 	if((CLUMSY in user.mutations) && prob(50))
@@ -426,8 +427,11 @@
 			return ..()
 
 		if(S.brute_dam)
-			S.heal_damage(15,0,0,1)
-			user.visible_message("\red \The [user] patches some dents on \the [M]'s [S.name] with \the [src].")
+			if(S.brute_dam < ROBOLIMB_SELF_REPAIR_CAP)
+				S.heal_damage(15,0,0,1)
+				user.visible_message("\red \The [user] patches some dents on \the [M]'s [S.name] with \the [src].")
+			else
+				user << "\red The damage is far too severe to patch over externally."
 			return
 		else
 			user << "Nothing to fix!"

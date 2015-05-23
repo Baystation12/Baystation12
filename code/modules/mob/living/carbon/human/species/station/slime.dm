@@ -8,7 +8,7 @@
 
 	language = "Sol Common" //todo?
 	unarmed_types = list(/datum/unarmed_attack/slime_glomp)
-	flags = IS_RESTRICTED | NO_BLOOD | NO_SCAN | NO_SLIP | NO_BREATHE
+	flags = IS_RESTRICTED | NO_SCAN | NO_SLIP | NO_BREATHE
 	siemens_coefficient = 3
 	darksight = 3
 

@@ -855,8 +855,6 @@
 
 	proc/handle_chemicals_in_body()
 
-		// TODO: stomach and bloodstream organ.
-
 		if(reagents)
 			chem_effects.Cut()
 			analgesic = 0
@@ -864,8 +862,9 @@
 			if(species && species.reagent_tag)
 				alien = species.reagent_tag
 			touching.metabolize(alien, CHEM_TOUCH)
-			ingested.metabolize(alien, CHEM_INGEST)
-			reagents.metabolize(alien, CHEM_BLOOD)
+			if(!(species.flags & NO_BLOOD))
+				ingested.metabolize(alien, CHEM_INGEST)
+				reagents.metabolize(alien, CHEM_BLOOD)
 			if(CE_PAINKILLER in chem_effects)
 				analgesic = chem_effects[CE_PAINKILLER]
 
@@ -1504,7 +1503,8 @@
 
 		if(life_tick % 5) return pulse	//update pulse every 5 life ticks (~1 tick/sec, depending on server load)
 
-		if(species && species.flags & NO_BLOOD) return PULSE_NONE //No blood, no pulse.
+		if(species && species.flags & NO_BLOOD)
+			return PULSE_NONE //No blood, no pulse.
 
 		if(stat == DEAD)
 			return PULSE_NONE	//that's it, you're dead, nothing can influence your pulse

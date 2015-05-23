@@ -984,3 +984,5 @@ var/list/be_special_flags = list(
 
 #define TABLE_BRITTLE_MATERIAL_MULTIPLIER 4 // Amount table damage is multiplied by if it is made of a brittle material (e.g. glass)
 
+// Damage above this value must be repaired with surgery.
+#define ROBOLIMB_SELF_REPAIR_CAP 30
