@@ -67,6 +67,9 @@ Buildable meters
 	w_class = 3
 	level = 2
 
+	var/connect_types = CONNECT_TYPE_REGULAR
+	var/list/obj/machinery/atmospherics/nodes = new()
+
 /obj/item/pipe/ex_act(severity)
 	switch(severity)
 		if(1)
@@ -91,6 +94,8 @@ Buildable meters
 
 
 	if (make_from)
+		src.connect_types = make_from.connect_types
+		src.nodes = make_from.nodes
 		src.set_dir(make_from.dir)
 		src.pipename = make_from.name
 		src.name = make_from.name

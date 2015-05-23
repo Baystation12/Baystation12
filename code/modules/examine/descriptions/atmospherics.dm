@@ -80,11 +80,11 @@
 	description_info = "This is a cosmetic attachment, as pipes currently do not spill their contents into the air."
 
 //T-shaped valves
-/obj/machinery/atmospherics/tvalve
+/obj/machinery/atmospherics/trinary/tvalve
 	description_info = "Click this to toggle the mode.  The direction with the green light is where the gas will flow."
 
 //Normal valves
-/obj/machinery/atmospherics/valve
+/obj/machinery/atmospherics/binary/valve
 	description_info = "Click this to turn the valve.  If red, the pipes on each end are seperated.  Otherwise, they are connected."
 
 //TEG ports

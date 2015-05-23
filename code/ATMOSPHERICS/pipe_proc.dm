@@ -34,11 +34,15 @@
 
 /*
 obj/machinery/atmospherics/pipe/initialize()
+	if(!cardinal.Find(dir))
+		init_dirs = dir
+		dir = 1
 	..()
+/*
 	if(!get_nodes_amount())
 		qdel(src)
 		return 0
-
+*/
 	var/turf/T = get_turf(src)
 	if(istype(T))
 		hide(T.intact)

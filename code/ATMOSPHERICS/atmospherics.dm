@@ -168,6 +168,9 @@ obj/machinery/atmospherics/proc/check_connect_types(obj/machinery/atmospherics/a
 
 
 /obj/machinery/atmospherics/initialize()
+	if(!cardinal.Find(dir))
+		init_dirs = dir
+		dir = 1
 
 	if(!icon_manager)
 		icon_manager = new()
@@ -188,6 +191,11 @@ obj/machinery/atmospherics/proc/check_connect_types(obj/machinery/atmospherics/a
 				if(target_initialize_directions.Find(get_dir(target,src)))
 					if(connect(src, target))
 						target.initialize()
+
+	var/turf/T = get_turf(src)
+	if(istype(T))
+		hide(T.intact)
+
 	update_icon()
 	return 1
 
