@@ -14,14 +14,14 @@
 	new /obj/structure/cult/pylon(loc)
 	..()
 
-/obj/item/stack/sheet/wood/cultify()
+/obj/item/stack/material/wood/cultify()
 	return
 
 /obj/item/weapon/book/cultify()
 	new /obj/item/weapon/book/tome(loc)
 	..()
 
-/obj/item/weapon/claymore/cultify()
+/obj/item/weapon/material/sword/cultify()
 	new /obj/item/weapon/melee/cultblade(loc)
 	..()
 
@@ -59,7 +59,7 @@
 	qdel(src)
 
 /obj/machinery/door/airlock/external/cultify()
-	new /obj/structure/mineral_door/wood(loc)
+	new /obj/structure/simple_door/wood(loc)
 	..()
 
 /obj/machinery/door/cultify()
@@ -114,11 +114,11 @@
 /obj/structure/grille/cult/cultify()
 	return
 
-/obj/structure/mineral_door/cultify()
-	new /obj/structure/mineral_door/wood(loc)
+/obj/structure/simple_door/cultify()
+	new /obj/structure/simple_door/wood(loc)
 	..()
 
-/obj/structure/mineral_door/wood/cultify()
+/obj/structure/simple_door/wood/cultify()
 	return
 
 /obj/singularity/cultify()

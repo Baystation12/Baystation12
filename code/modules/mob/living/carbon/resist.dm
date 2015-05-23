@@ -118,7 +118,7 @@
 
 		say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!" ))
 
-		del(handcuffed)
+		qdel(handcuffed)
 		handcuffed = null
 		if(buckled && buckled.buckle_require_restraints)
 			buckled.unbuckle_mob()
@@ -139,7 +139,7 @@
 
 		say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!" ))
 
-		del(legcuffed)
+		qdel(legcuffed)
 		legcuffed = null
 		update_inv_legcuffed()
 

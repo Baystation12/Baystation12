@@ -842,7 +842,7 @@
 	construction_cost = list(DEFAULT_WALL_MATERIAL=10000,"silver"=500,"glass"=1000)
 	var/datum/global_iterator/pr_mech_generator
 	var/coeff = 100
-	var/obj/item/stack/sheet/fuel
+	var/obj/item/stack/material/fuel
 	var/max_fuel = 150000
 	var/fuel_per_cycle_idle = 100
 	var/fuel_per_cycle_active = 500
@@ -860,7 +860,7 @@
 		..()
 
 	proc/init()
-		fuel = new /obj/item/stack/sheet/mineral/phoron(src)
+		fuel = new /obj/item/stack/material/phoron(src)
 		fuel.amount = 0
 		pr_mech_generator = new /datum/global_iterator/mecha_generator(list(src),0)
 		pr_mech_generator.set_delay(equip_cooldown)
@@ -903,7 +903,7 @@
 			occupant_message(message)
 		return
 
-	proc/load_fuel(var/obj/item/stack/sheet/P)
+	proc/load_fuel(var/obj/item/stack/material/P)
 		if(P.type == fuel.type && P.amount)
 			var/to_load = max(max_fuel - fuel.amount*fuel.perunit,0)
 			if(to_load)
@@ -988,7 +988,7 @@
 	reliability = 1000
 
 	init()
-		fuel = new /obj/item/stack/sheet/mineral/uranium(src)
+		fuel = new /obj/item/stack/material/uranium(src)
 		fuel.amount = 0
 		pr_mech_generator = new /datum/global_iterator/mecha_generator/nuclear(list(src),0)
 		pr_mech_generator.set_delay(equip_cooldown)

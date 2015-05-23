@@ -3,11 +3,10 @@
 	desc = "You sit in this. Either by will or force."
 	icon_state = "chair"
 	buckle_lying = 0 //force people to sit up in chairs when buckled
-
 	var/propelled = 0 // Check for fire-extinguisher-driven chairs
 
-/obj/structure/bed/chair/New()
-	..()
+/obj/structure/bed/chair/New(var/newloc, var/material)
+	..(newloc, material) //Todo make metal/stone chairs display as thrones
 	spawn(3)	//sorry. i don't think there's a better way to do this.
 		update_layer()
 	return
@@ -20,7 +19,7 @@
 			user << "<span class='notice'>[SK] is not ready to be attached!</span>"
 			return
 		user.drop_item()
-		var/obj/structure/bed/chair/e_chair/E = new /obj/structure/bed/chair/e_chair(src.loc)
+		var/obj/structure/bed/chair/e_chair/E = new (src.loc, material.name)
 		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 		E.set_dir(dir)
 		E.part = SK
@@ -71,17 +70,13 @@
 	icon_state = "wooden_chair"
 	name = "wooden chair"
 	desc = "Old is never too old to not be in fashion."
+	apply_cosmetics = 0
+
+/obj/structure/bed/chair/wood/New(var/newloc)
+	..(newloc, "wood")
 
 /obj/structure/bed/chair/wood/wings
 	icon_state = "wooden_chair_wings"
-
-/obj/structure/bed/chair/wood/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/weapon/wrench))
-		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-		new /obj/item/stack/sheet/wood(src.loc)
-		qdel(src)
-	else
-		..()
 
 /obj/structure/bed/chair/comfy
 	name = "comfy chair"
@@ -89,6 +84,7 @@
 	icon_state = "comfychair"
 	color = rgb(255,255,255)
 	var/image/armrest = null
+	apply_cosmetics = 0
 
 /obj/structure/bed/chair/comfy/New()
 	armrest = image("icons/obj/objects.dmi", "comfychair_armrest")
@@ -129,6 +125,7 @@
 /obj/structure/bed/chair/office
 	anchored = 0
 	buckle_movable = 1
+	apply_cosmetics = 0
 
 /obj/structure/bed/chair/comfy/lime
 	color = rgb(255,251,0)

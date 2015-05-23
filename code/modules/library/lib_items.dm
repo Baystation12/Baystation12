@@ -226,7 +226,7 @@
 							return
 					scanner.computer.inventory.Add(src)
 					user << "[W]'s screen flashes: 'Book stored in buffer. Title added to general inventory.'"
-	else if(istype(W, /obj/item/weapon/kitchenknife) || istype(W, /obj/item/weapon/wirecutters))
+	else if(istype(W, /obj/item/weapon/material/knife) || istype(W, /obj/item/weapon/wirecutters))
 		if(carved)	return
 		user << "<span class='notice'>You begin to carve out [title].</span>"
 		if(do_after(user, 30))

@@ -111,7 +111,7 @@
 
 		for(var/a = 1 to spray_particles)
 			spawn(0)
-				var/obj/effect/effect/water/W = PoolOrNew(new /obj/effect/effect/water, get_turf(src))
+				var/obj/effect/effect/water/W = PoolOrNew(/obj/effect/effect/water, get_turf(src))
 				var/turf/my_target
 				if(a == 1)
 					my_target = T

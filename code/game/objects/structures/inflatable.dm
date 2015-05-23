@@ -116,6 +116,7 @@
 
 /obj/structure/inflatable/attack_generic(var/mob/user, var/damage, var/attack_verb)
 	health -= damage
+	user.do_attack_animation(src)
 	if(health <= 0)
 		user.visible_message("<span class='danger'>[user] [attack_verb] open the [src]!</span>")
 		spawn(1) deflate(1)

@@ -1,8 +1,0 @@
-author: Chinsky
-
-delete-after: True
-
-changes: 
-  - rscadd: "Ghetto diagnosis. Grab patient, aim at bodypart you want to check, click on them with help intent. This will tell you about their wounds, fractures and other oddities (toxins/oxygen) for that bodypart."
-  - rscadd: "Fractures are visible on very damaged limbs. Dislocations are always visible. Surgery incisions now visible too."
-  - rscadd: "Stethoscopes actually make sense now. They care for heart/lungs status when reporting pulse and respiration now."
