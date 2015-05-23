@@ -256,7 +256,7 @@
 	exclaim_verb = "thrum"
 	whisper_verb = "croon"
 	colour = "#7ED6CB"
-	key = "i"
+	key = "8"
 	flags = WHITELISTED | HIVEMIND
 	syllables = list("hmm","mm","nn","enn","emm","eem","knn","gmm")
 
