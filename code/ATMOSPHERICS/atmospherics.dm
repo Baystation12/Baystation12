@@ -73,10 +73,10 @@ Pipelines + Other Objects -> Pipe network
 obj/machinery/atmospherics/proc/check_connect_types(obj/machinery/atmospherics/atmos1, obj/machinery/atmospherics/atmos2)
 	return (atmos1.connect_types & atmos2.connect_types)
 
-
+/*
 /obj/machinery/atmospherics/proc/check_connect_types_construction(obj/machinery/atmospherics/atmos1, obj/item/pipe/pipe2)
 	return (atmos1.connect_types & pipe2.connect_types)
-
+*/
 
 /obj/machinery/atmospherics/proc/check_icon_cache(var/safety = 0)
 	if(!istype(icon_manager))

@@ -5,7 +5,25 @@
 */
 
 
-/obj/machinery/atmospherics/pipe/buildFrom(var/mob/usr,var/obj/item/pipe/pipe)
+/obj/machinery/atmospherics/pipe/buildFrom(var/mob/user,var/obj/item/pipe/pipe)
+/*
+	for(var/obj/machinery/atmospherics/M in src.loc)
+
+		var/list/A = generate_initialize_directions(init_dirs)
+		var/list/B = generate_initialize_directions(M.init_dirs)
+
+		var/find = 0
+
+		for(var/DA in A)
+			if(find == 0)
+				for(var/DB in B)
+					if(DB == DA && find == 0)
+						find = 1
+
+		if((find != 0) && M.check_connect_types(M,src))	// matches at least one direction on either type of pipe & same connection type
+			user << "\red There is already a pipe of the same type at this location."
+			return 0
+*/
 	color = pipe.color
 	pipe_color = pipe.color
 	set_dir(pipe.dir)

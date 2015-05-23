@@ -17,13 +17,13 @@
 
 /proc/connect(var/obj/machinery/atmospherics/reference1,var/obj/machinery/atmospherics/reference2)
 	var/return_val
-	if(!reference1.nodes.Find(reference2))
+	if(reference1 && reference1.nodes && !reference1.nodes.Find(reference2))
 		reference1.nodes += reference2
 		reference1.build_network()
 		return_val = 1
 	else
 		return_val = 0
-	if(!reference2.nodes.Find(reference1))
+	if(reference2 && reference2.nodes && !reference2.nodes.Find(reference1))
 		reference2.nodes += reference1
 		reference2.build_network()
 		return_val = 1
@@ -37,13 +37,13 @@
 
 /proc/disconnect(var/obj/machinery/atmospherics/reference1,var/obj/machinery/atmospherics/reference2)
 	var/return_val
-	if(reference1.nodes.Find(reference2))
+	if(reference1 && reference1.nodes && reference1.nodes.Find(reference2))
 		reference1.nodes -= reference2
 		reference1.build_network()
 		return_val = 1
 	else
 		return_val = 0
-	if(reference2.nodes.Find(reference1))
+	if(reference2 && reference2.nodes && reference2.nodes.Find(reference1))
 		reference2.nodes -= reference1
 		reference2.build_network()
 		return_val = 1

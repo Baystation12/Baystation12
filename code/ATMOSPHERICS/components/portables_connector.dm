@@ -67,7 +67,7 @@
 		connected_device.disconnect()
 
 	if(node)
-		node.disconnect(src)
+		disconnect(src, node)
 		qdel(network)
 
 	node = null
@@ -119,7 +119,7 @@
 		results += connected_device.air_contents
 
 	return results
-
+/*
 /obj/machinery/atmospherics/portables_connector/disconnect(obj/machinery/atmospherics/reference)
 	if(reference==node)
 		qdel(network)
@@ -128,7 +128,7 @@
 	update_underlays()
 
 	return null
-
+*/
 
 /obj/machinery/atmospherics/portables_connector/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
 	if (!istype(W, /obj/item/weapon/wrench))

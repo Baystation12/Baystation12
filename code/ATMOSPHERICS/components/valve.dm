@@ -75,14 +75,15 @@
 
 /obj/machinery/atmospherics/valve/Destroy()
 	loc = null
-
+/*
 	if(node1)
 		node1.disconnect(src)
 		qdel(network_node1)
 	if(node2)
 		node2.disconnect(src)
 		qdel(network_node2)
-
+*/
+	disconnect_all()
 	node1 = null
 	node2 = null
 
@@ -205,7 +206,7 @@
 
 /obj/machinery/atmospherics/valve/return_network_air(datum/network/reference)
 	return null
-
+/*
 /obj/machinery/atmospherics/valve/disconnect(obj/machinery/atmospherics/reference)
 	if(reference==node1)
 		qdel(network_node1)
@@ -218,7 +219,7 @@
 	update_underlays()
 
 	return null
-
+*/
 /obj/machinery/atmospherics/valve/digital		// can be controlled by AI
 	name = "digital valve"
 	desc = "A digitally controlled valve."
