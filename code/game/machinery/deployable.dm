@@ -53,89 +53,101 @@ for reference:
 
 */
 
-
-//Barricades, maybe there will be a metal one later...
-/obj/structure/barricade/wooden
-	name = "wooden barricade"
-	desc = "This space is blocked off by a wooden barricade."
+//Barricades!
+/obj/structure/barricade
+	name = "barricade"
+	desc = "This space is blocked off by a barricade."
 	icon = 'icons/obj/structures.dmi'
-	icon_state = "woodenbarricade"
+	icon_state = "barricade"
 	anchored = 1.0
 	density = 1.0
-	var/health = 100.0
-	var/maxhealth = 100.0
+	var/health = 100
+	var/maxhealth = 100
+	var/material/material
 
-	attackby(obj/item/W as obj, mob/user as mob)
-		if (istype(W, /obj/item/stack/sheet/wood))
-			var/obj/item/stack/sheet/wood/D = W
-			if (health < maxhealth)
-				if (D.get_amount() < 1)
-					user << "<span class='warning'>You need one plank of wood to repair \the [src].</span>"
-					return
-				visible_message("<span class='notice'>[user] begins to repair \the [src].</span>")
-				if(do_after(user,20) && health < maxhealth)
-					if (D.use(1))
-						health = maxhealth
-						visible_message("<span class='notice'>[user] repairs \the [src].</span>")
-					return
-			return
-		else
-			switch(W.damtype)
-				if("fire")
-					src.health -= W.force * 1
-				if("brute")
-					src.health -= W.force * 0.75
-				else
-			if (src.health <= 0)
-				visible_message("\red <B>The barricade is smashed apart!</B>")
-				new /obj/item/stack/sheet/wood(get_turf(src))
-				new /obj/item/stack/sheet/wood(get_turf(src))
-				new /obj/item/stack/sheet/wood(get_turf(src))
-				qdel(src)
-			..()
-
-	ex_act(severity)
-		switch(severity)
-			if(1.0)
-				visible_message("\red <B>The barricade is blown apart!</B>")
-				qdel(src)
-				return
-			if(2.0)
-				src.health -= 25
-				if (src.health <= 0)
-					visible_message("\red <B>The barricade is blown apart!</B>")
-					new /obj/item/stack/sheet/wood(get_turf(src))
-					new /obj/item/stack/sheet/wood(get_turf(src))
-					new /obj/item/stack/sheet/wood(get_turf(src))
-					qdel(src)
-				return
-
-	meteorhit()
-		visible_message("\red <B>The barricade is smashed apart!</B>")
-		new /obj/item/stack/sheet/wood(get_turf(src))
-		new /obj/item/stack/sheet/wood(get_turf(src))
-		new /obj/item/stack/sheet/wood(get_turf(src))
+/obj/structure/barricade/New(var/newloc, var/material_name)
+	..(newloc)
+	if(!material_name)
+		material_name = "wood"
+	material = get_material_by_name("[material_name]")
+	if(!material)
 		qdel(src)
 		return
+	name = "[material.display_name] barricade"
+	desc = "This space is blocked off by a barricade made of [material.display_name]."
+	color = material.icon_colour
+	maxhealth = material.integrity
+	health = maxhealth
 
-	blob_act()
-		src.health -= 25
-		if (src.health <= 0)
-			visible_message("\red <B>The blob eats through the barricade!</B>")
-			qdel(src)
+/obj/structure/barricade/attackby(obj/item/W as obj, mob/user as mob)
+	if (istype(W, /obj/item/stack/material))
+		var/obj/item/stack/material/D = W
+		if(D.material.name != material.name)
+			user << "<span class='warning'>That is the wrong material needed to repair \the [src].</span>"
+			return
+		if (health < maxhealth)
+			if (D.get_amount() < 1)
+				user << "<span class='warning'>You need one sheet of [material.display_name] to repair \the [src].</span>"
+				return
+			visible_message("<span class='notice'>[user] begins to repair \the [src].</span>")
+			if(do_after(user,20) && health < maxhealth)
+				if (D.use(1))
+					health = maxhealth
+					visible_message("<span class='notice'>[user] repairs \the [src].</span>")
+				return
 		return
+	else
+		switch(W.damtype)
+			if("fire")
+				src.health -= W.force * 1
+			if("brute")
+				src.health -= W.force * 0.75
+			else
+		if (src.health <= 0)
+			visible_message("<span class='danger'>The barricade is smashed apart!</span>")
+			dismantle()
+			qdel(src)
+			return
+		..()
+/obj/structure/barricade/proc/dismantle()
+	material.place_dismantled_product(get_turf(src))
+	qdel(src)
+	return
 
-	CanPass(atom/movable/mover, turf/target, height=0, air_group=0)//So bullets will fly over and stuff.
-		if(air_group || (height==0))
-			return 1
-		if(istype(mover) && mover.checkpass(PASSTABLE))
-			return 1
-		else
-			return 0
+/obj/structure/barricade/ex_act(severity)
+	switch(severity)
+		if(1.0)
+			visible_message("<span class='danger'>\The [src] is blown apart!</span>")
+			qdel(src)
+			return
+		if(2.0)
+			src.health -= 25
+			if (src.health <= 0)
+				visible_message("<span class='danger'>\The [src] is blown apart!</span>")
+				dismantle()
+			return
 
+/obj/structure/barricade/meteorhit()
+	visible_message("<span class='danger'>\The [src] is smashed apart!</span>")
+	dismantle()
+	return
+
+/obj/structure/barricade/blob_act()
+	src.health -= 25
+	if (src.health <= 0)
+		visible_message("<span class='danger'>The blob eats through \the [src]!</span>")
+		qdel(src)
+	return
+
+/obj/structure/barricade/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)//So bullets will fly over and stuff.
+	if(air_group || (height==0))
+		return 1
+	if(istype(mover) && mover.checkpass(PASSTABLE))
+		return 1
+	else
+		return 0
 
 //Actual Deployable machinery stuff
-
 /obj/machinery/deployable
 	name = "deployable"
 	desc = "deployable"

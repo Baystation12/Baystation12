@@ -346,25 +346,25 @@
 				R.amount = rand(1,5)
 
 			if(3)
-				var/obj/item/stack/sheet/metal/R = new(src)
+				var/obj/item/stack/material/steel/R = new(src)
 				R.amount = rand(5,25)
 
 			if(4)
-				var/obj/item/stack/sheet/plasteel/R = new(src)
+				var/obj/item/stack/material/plasteel/R = new(src)
 				R.amount = rand(5,25)
 
 			if(5)
 				var/quantity = rand(1,3)
 				for(var/i=0, i<quantity, i++)
-					new /obj/item/weapon/shard(src)
+					new /obj/item/weapon/material/shard(src)
 
 			if(6)
 				var/quantity = rand(1,3)
 				for(var/i=0, i<quantity, i++)
-					new /obj/item/weapon/shard/phoron(src)
+					new /obj/item/weapon/material/shard/phoron(src)
 
 			if(7)
-				var/obj/item/stack/sheet/mineral/uranium/R = new(src)
+				var/obj/item/stack/material/uranium/R = new(src)
 				R.amount = rand(5,25)
 
 /turf/simulated/mineral/random

@@ -132,7 +132,7 @@
 /mob/living/carbon/proc/swap_hand()
 	var/obj/item/item_in_hand = src.get_active_hand()
 	if(item_in_hand) //this segment checks if the item in your hand is twohanded.
-		if(istype(item_in_hand,/obj/item/weapon/twohanded))
+		if(istype(item_in_hand,/obj/item/weapon/material/twohanded))
 			if(item_in_hand:wielded == 1)
 				usr << "<span class='warning'>Your other hand is too busy holding the [item_in_hand.name]</span>"
 				return
@@ -173,7 +173,7 @@
 				)
 
 			for(var/obj/item/organ/external/org in H.organs)
-				var/status = ""
+				var/list/status = list()
 				var/brutedamage = org.brute_dam
 				var/burndamage = org.burn_dam
 				if(halloss > 0)
@@ -181,29 +181,39 @@
 						brutedamage += halloss
 					if(prob(30))
 						burndamage += halloss
+				switch(brutedamage)
+					if(1 to 20)
+						status += "bruised"
+					if(20 to 40)
+						status += "wounded"
+					if(40 to INFINITY)
+						status += "mangled"
 
-				if(brutedamage > 0)
-					status = "bruised"
-				if(brutedamage > 20)
-					status = "bleeding"
-				if(brutedamage > 40)
-					status = "mangled"
-				if(brutedamage > 0 && burndamage > 0)
-					status += " and "
-				if(burndamage > 40)
-					status += "peeling away"
+				switch(burndamage)
+					if(1 to 10)
+						status += "numb"
+					if(10 to 40)
+						status += "blistered"
+					if(40 to INFINITY)
+						status += "peeling away"
 
-				else if(burndamage > 10)
-					status += "blistered"
-				else if(burndamage > 0)
-					status += "numb"
 				if(org.status & ORGAN_DESTROYED)
-					status = "MISSING!"
+					status += "MISSING"
 				if(org.status & ORGAN_MUTATED)
-					status = "weirdly shapen."
-				if(status == "")
-					status = "OK"
-				src.show_message(text("\t []My [] is [].",status=="OK"?"\blue ":"\red ",org.name,status),1)
+					status += "weirdly shapen"
+				if(org.dislocated == 2)
+					status += "dislocated"
+				if(org.status & ORGAN_BROKEN)
+					status += "hurts when touched"
+				if(org.status & ORGAN_DEAD)
+					status += "is bruised and necrotic"
+				if(!org.is_usable())
+					status += "dangling uselessly"
+				if(status.len)
+					src.show_message("My [org.name] is <span class='warning'> [english_list(status)].",1)
+				else
+					src.show_message("My [org.name] is <span class='notice'> OK.",1)
+
 			if((SKELETON in H.mutations) && (!H.w_uniform) && (!H.wear_suit))
 				H.play_xylophone()
 		else if (on_fire)
