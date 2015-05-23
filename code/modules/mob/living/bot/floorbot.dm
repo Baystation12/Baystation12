@@ -154,7 +154,7 @@
 				target = T
 				break
 		if(maketiles && !target)
-			for(var/obj/item/stack/sheet/metal/T in view(src))
+			for(var/obj/item/stack/material/steel/T in view(src))
 				if(T in ignorelist)
 					continue
 				target = T
@@ -249,8 +249,8 @@
 		target = null
 		repairing = 0
 		update_icons()
-	else if(istype(A, /obj/item/stack/sheet/metal) && amount + 3 < maxAmount)
-		var/obj/item/stack/sheet/metal/M = A
+	else if(istype(A, /obj/item/stack/material/steel) && amount + 3 < maxAmount)
+		var/obj/item/stack/material/steel/M = A
 		visible_message("<span class='notice'>[src] begins to make tiles.</span>")
 		repairing = 1
 		update_icons()

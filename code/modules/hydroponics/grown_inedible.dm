@@ -45,7 +45,7 @@
 
 /obj/item/weapon/corncob/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	..()
-	if(istype(W, /obj/item/weapon/circular_saw) || istype(W, /obj/item/weapon/hatchet) || istype(W, /obj/item/weapon/kitchen/utensil/knife) || istype(W, /obj/item/weapon/kitchenknife) || istype(W, /obj/item/weapon/kitchenknife/ritual))
+	if(istype(W, /obj/item/weapon/circular_saw) || istype(W, /obj/item/weapon/material/hatchet) || istype(W, /obj/item/weapon/material/kitchen/utensil/knife) || istype(W, /obj/item/weapon/material/knife) || istype(W, /obj/item/weapon/material/knife/ritual))
 		user << "<span class='notice'>You use [W] to fashion a pipe out of the corn cob!</span>"
 		new /obj/item/clothing/mask/smokable/pipe/cobpipe (user.loc)
 		qdel(src)
