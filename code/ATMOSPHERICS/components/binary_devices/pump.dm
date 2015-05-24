@@ -144,9 +144,9 @@ Thus, the two variables affect pump operation are set in New():
 		ui.set_auto_update(1)		// auto update every Master Controller tick
 
 /obj/machinery/atmospherics/binary/pump/initialize()
-	..()
 	if(frequency)
 		set_frequency(frequency)
+	return ..()
 
 /obj/machinery/atmospherics/binary/pump/receive_signal(datum/signal/signal)
 	if(!signal.data["tag"] || (signal.data["tag"] != id) || (signal.data["sigtype"]!="command"))

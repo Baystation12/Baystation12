@@ -8,6 +8,8 @@
 	anchored = 0
 	density = 1
 
+	init_dirs = EAST|WEST
+
 	var/efficiency = 0.4
 	var/kin_energy = 0
 	var/datum/gas_mixture/air_in = new
@@ -28,15 +30,6 @@
 		air_in.volume = 200
 		air_out.volume = 800
 		volume_ratio = air_in.volume / (air_in.volume + air_out.volume)
-		switch(dir)
-			if(NORTH)
-				initialize_directions = EAST|WEST
-			if(SOUTH)
-				initialize_directions = EAST|WEST
-			if(EAST)
-				initialize_directions = NORTH|SOUTH
-			if(WEST)
-				initialize_directions = NORTH|SOUTH
 
 	Destroy()
 		loc = null
@@ -94,11 +87,6 @@
 			user << "\blue You [anchored ? "secure" : "unsecure"] the bolts holding [src] to the floor."
 
 			if(anchored)
-				if(dir & (NORTH|SOUTH))
-					initialize_directions = EAST|WEST
-				else if(dir & (EAST|WEST))
-					initialize_directions = NORTH|SOUTH
-
 				initialize()
 				build_network()
 				if (node1)
@@ -165,12 +153,12 @@
 		var/node1_connect = turn(dir, 90)
 
 		for(var/obj/machinery/atmospherics/target in get_step(src,node1_connect))
-			if(target.initialize_directions & get_dir(target,src))
+			if(target.init_dirs & get_dir(target,src))
 				node1 = target
 				break
 
 		for(var/obj/machinery/atmospherics/target in get_step(src,node2_connect))
-			if(target.initialize_directions & get_dir(target,src))
+			if(target.init_dirs & get_dir(target,src))
 				node2 = target
 				break
 

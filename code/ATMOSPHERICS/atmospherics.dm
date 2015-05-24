@@ -28,6 +28,9 @@ Pipelines + Other Objects -> Pipe network
 
 	var/list/obj/machinery/atmospherics/nodes = new()
 
+	var/list/initialize_directions = new()
+	var/init_dirs = 0
+
 /obj/machinery/atmospherics/New()
 	return 1
 /*	if(!icon_manager)
@@ -73,10 +76,10 @@ Pipelines + Other Objects -> Pipe network
 obj/machinery/atmospherics/proc/check_connect_types(obj/machinery/atmospherics/atmos1, obj/machinery/atmospherics/atmos2)
 	return (atmos1.connect_types & atmos2.connect_types)
 
-/*
+
 /obj/machinery/atmospherics/proc/check_connect_types_construction(obj/machinery/atmospherics/atmos1, obj/item/pipe/pipe2)
 	return (atmos1.connect_types & pipe2.connect_types)
-*/
+
 
 /obj/machinery/atmospherics/proc/check_icon_cache(var/safety = 0)
 	if(!istype(icon_manager))
@@ -168,6 +171,7 @@ obj/machinery/atmospherics/proc/check_connect_types(obj/machinery/atmospherics/a
 
 
 /obj/machinery/atmospherics/initialize()
+
 	if(!cardinal.Find(dir))
 		init_dirs = dir
 		dir = 1
@@ -183,6 +187,8 @@ obj/machinery/atmospherics/proc/check_connect_types(obj/machinery/atmospherics/a
 		pipe_color = null
 
 	if( initialize_directions.len == 0 ) initialize_directions = generate_initialize_directions(init_dirs)
+
+	if(nodes.len == initialize_directions.len) return
 
 	for(var/direction in initialize_directions)
 		for(var/obj/machinery/atmospherics/target in get_step(src,direction))

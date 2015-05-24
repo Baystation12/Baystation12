@@ -6,7 +6,7 @@
 	icon = 'icons/atmos/omni_devices.dmi'
 	icon_state = "base"
 	use_power = 1
-	initialize_directions = 0
+	init_dirs = 0
 	level = 1
 
 	var/configuring = 0
@@ -41,7 +41,7 @@
 			if(WEST)
 				new_port.mode = tag_west
 		if(new_port.mode > 0)
-			initialize_directions |= d
+			init_dirs |= d
 		ports += new_port
 
 	build_icons()
@@ -247,8 +247,9 @@
 		if(P.node || P.mode == 0)
 			continue
 		for(var/obj/machinery/atmospherics/target in get_step(src, P.dir))
-			if(target.initialize_directions & get_dir(target,src))
+			if(target.init_dirs & get_dir(target,src))
 				if (check_connect_types(target,src))
+					connect(src, target)
 					P.node = target
 					break
 

@@ -195,6 +195,7 @@
 	..()
 	if(frequency)
 		set_frequency(frequency)
+	return 1
 
 /obj/machinery/atmospherics/binary/dp_vent_pump/examine(mob/user)
 	if(..(user, 1))

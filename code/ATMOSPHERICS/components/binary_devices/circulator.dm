@@ -22,6 +22,8 @@
 	var/volume_capacity_used = 0
 	var/stored_energy = 0
 
+	init_dirs = NORTH|SOUTH
+
 	density = 1
 
 /obj/machinery/atmospherics/binary/circulator/New()
@@ -96,10 +98,6 @@
 					"You hear a ratchet")
 
 		if(anchored)
-			if(dir & (NORTH|SOUTH))
-				initialize_directions = NORTH|SOUTH
-			else if(dir & (EAST|WEST))
-				initialize_directions = EAST|WEST
 
 			initialize()
 			build_network()

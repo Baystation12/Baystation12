@@ -7,6 +7,8 @@
 
 	level = 1
 
+	init_dirs = NORTH|SOUTH
+
 	var/open = 0
 	var/openDuringInit = 0
 
@@ -33,11 +35,6 @@
 	update_underlays()
 
 /obj/machinery/atmospherics/binary/valve/New()
-	switch(dir)
-		if(NORTH || SOUTH)
-			initialize_directions = NORTH|SOUTH
-		if(EAST || WEST)
-			initialize_directions = EAST|WEST
 	..()
 
 /obj/machinery/atmospherics/binary/valve/network_expand(datum/pipe_network/new_network, obj/machinery/atmospherics/pipe/reference)
@@ -134,38 +131,16 @@
 	return
 
 /obj/machinery/atmospherics/binary/valve/initialize()
-	normalize_dir()
-
-	var/node1_dir
-	var/node2_dir
-
-	for(var/direction in cardinal)
-		if(direction&initialize_directions)
-			if (!node1_dir)
-				node1_dir = direction
-			else if (!node2_dir)
-				node2_dir = direction
-
-	for(var/obj/machinery/atmospherics/target in get_step(src,node1_dir))
-		if(target.initialize_directions & get_dir(target,src))
-			if (check_connect_types(target,src))
-				node1 = target
-				break
-	for(var/obj/machinery/atmospherics/target in get_step(src,node2_dir))
-		if(target.initialize_directions & get_dir(target,src))
-			if (check_connect_types(target,src))
-				node2 = target
-				break
+	..()
 
 	build_network()
-
-	update_icon()
-	update_underlays()
 
 	if(openDuringInit)
 		close()
 		open()
 		openDuringInit = 0
+
+	return 1
 
 /obj/machinery/atmospherics/binary/valve/build_network()
 	if(!network1 && node1)
@@ -258,6 +233,7 @@
 	..()
 	if(frequency)
 		set_frequency(frequency)
+	return 1
 
 /obj/machinery/atmospherics/binary/valve/digital/receive_signal(datum/signal/signal)
 	if(!signal.data["tag"] || (signal.data["tag"] != id))

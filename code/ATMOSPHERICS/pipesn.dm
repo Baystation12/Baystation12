@@ -1,8 +1,3 @@
-/obj/machinery/atmospherics
-	var/list/initialize_directions = new()
-	var/init_dirs = 0
-
-
 /obj/machinery/atmospherics/proc/get_init_dir()
 	var/init_dir = 0
 	for(var/direction in initialize_directions)
@@ -13,13 +8,13 @@
 /obj/machinery/atmospherics/proc/generate_initialize_directions(var/init_dirs)
 	if(!init_dirs) init_dirs = dir
 
-	initialize_directions = new()
+	var/list/init_directions = new()
 	for(var/direction in cardinal)
 		if(direction&init_dirs)
 			var/angle = dir2angle(direction)
-			initialize_directions += turn(dir,-angle)
+			init_directions += turn(dir,-angle)
 
-	return initialize_directions
+	return init_directions
 
 
 /obj/machinery/atmospherics/proc/rotate_initialize_directions_clockwise()

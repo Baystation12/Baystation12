@@ -15,7 +15,8 @@
 			return EAST
 	return newdir
 
-/proc/connect(var/obj/machinery/atmospherics/reference1,var/obj/machinery/atmospherics/reference2)
+/obj/machinery/atmospherics/proc/connect(var/obj/machinery/atmospherics/reference1,var/obj/machinery/atmospherics/reference2)
+	if(!reference1 || !reference2) return 0
 	var/return_val
 	if(reference1 && reference1.nodes && !reference1.nodes.Find(reference2))
 		reference1.nodes += reference2
@@ -35,7 +36,8 @@
 
 	return return_val
 
-/proc/disconnect(var/obj/machinery/atmospherics/reference1,var/obj/machinery/atmospherics/reference2)
+/obj/machinery/atmospherics/proc/disconnect(var/obj/machinery/atmospherics/reference1,var/obj/machinery/atmospherics/reference2)
+	if(!reference1 || !reference2) return 0
 	var/return_val
 	if(reference1 && reference1.nodes && reference1.nodes.Find(reference2))
 		reference1.nodes -= reference2
@@ -56,7 +58,8 @@
 	return return_val
 
 
-proc/disconnect_all(var/obj/machinery/atmospherics/reference)
+/obj/machinery/atmospherics/proc/disconnect_all(var/obj/machinery/atmospherics/reference)
+	if(!reference) reference = src
 	for(var/obj/machinery/atmospherics/node in reference.nodes)
 		if(node) //maybe not needed, but better oversafe than undersafe
 			disconnect(reference, node)

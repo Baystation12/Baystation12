@@ -122,6 +122,7 @@
 	if (frequency)
 		set_frequency(frequency)
 		src.broadcast_status()
+	return 1
 
 /obj/machinery/atmospherics/unary/vent_scrubber/process()
 	..()

@@ -6,7 +6,7 @@
 	desc = "For connecting portables devices related to atmospherics control."
 
 	dir = SOUTH
-	initialize_directions = SOUTH
+	init_dirs = SOUTH
 
 	var/obj/machinery/portable_atmospherics/connected_device
 
@@ -16,7 +16,6 @@
 
 
 /obj/machinery/atmospherics/unary/portables_connector/New()
-	initialize_directions = dir
 	..()
 
 /obj/machinery/atmospherics/unary/portables_connector/update_icon()
@@ -73,16 +72,20 @@
 /obj/machinery/atmospherics/unary/portables_connector/initialize()
 	if(node) return
 
-	var/node_connect = dir
+	if(initialize_directions.len == 0) initialize_directions = generate_initialize_directions(init_dirs)
+
+	var/node_connect = initialize_directions[1]
 
 	for(var/obj/machinery/atmospherics/target in get_step(src,node_connect))
-		if(target.initialize_directions & get_dir(target,src))
+		if(target.init_dirs & get_dir(target,src))
 			if (check_connect_types(target,src))
 				node = target
 				break
 
 	update_icon()
 	update_underlays()
+
+	return 1
 
 /obj/machinery/atmospherics/unary/portables_connector/build_network()
 	if(!network && node)

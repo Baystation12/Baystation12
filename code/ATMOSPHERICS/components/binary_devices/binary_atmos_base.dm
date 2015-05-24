@@ -1,6 +1,6 @@
 obj/machinery/atmospherics/binary
 	dir = SOUTH
-	initialize_directions = SOUTH|NORTH
+	init_dirs = SOUTH|NORTH
 	use_power = 1
 
 	var/datum/gas_mixture/air1
@@ -14,15 +14,7 @@ obj/machinery/atmospherics/binary
 
 	New()
 		..()
-		switch(dir)
-			if(NORTH)
-				initialize_directions = NORTH|SOUTH
-			if(SOUTH)
-				initialize_directions = NORTH|SOUTH
-			if(EAST)
-				initialize_directions = EAST|WEST
-			if(WEST)
-				initialize_directions = EAST|WEST
+
 		air1 = new
 		air2 = new
 
@@ -46,13 +38,13 @@ obj/machinery/atmospherics/binary
 
 	Destroy()
 		loc = null
-/*
+
 		if(node1)
-			node1.disconnect(src)
+//			node1.disconnect(src)
 			qdel(network1)
 		if(node2)
-			node2.disconnect(src)
-			qdel(network2)*/
+//			node2.disconnect(src)
+			qdel(network2)
 		disconnect_all(src)
 		node1 = null
 		node2 = null
@@ -66,16 +58,16 @@ obj/machinery/atmospherics/binary
 		var/node1_connect = turn(dir, 180)
 
 		for(var/obj/machinery/atmospherics/target in get_step(src,node1_connect))
-			if(target.initialize_directions & get_dir(target,src))
+			if(target.init_dirs & get_dir(target,src))
 				if (check_connect_types(target,src))
-					connect(target)
+					connect(src,target)
 					node1 = target
 					break
 
 		for(var/obj/machinery/atmospherics/target in get_step(src,node2_connect))
-			if(target.initialize_directions & get_dir(target,src))
+			if(target.init_dirs & get_dir(target,src))
 				if (check_connect_types(target,src))
-					connect(target)
+					connect(src,target)
 					node2 = target
 					break
 
@@ -125,7 +117,7 @@ obj/machinery/atmospherics/binary
 
 		return results
 /*
-	disconnect(obj/machinery/atmospherics/reference)
+	disconnect(obj/machinery/atmospherics/reference2,obj/machinery/atmospherics/reference1)
 		if(reference==node1)
 			qdel(network1)
 			node1 = null

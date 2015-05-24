@@ -7,7 +7,7 @@
 
 	level = 1
 	dir = SOUTH
-	initialize_directions = SOUTH|NORTH|WEST
+	init_dirs = SOUTH|NORTH|WEST
 
 	// mirror = /obj/machinery/atmospherics/trinary/tvalve/mirrored
 
@@ -42,19 +42,8 @@
 	update_underlays()
 
 /obj/machinery/atmospherics/trinary/tvalve/New()
-	initialize_directions()
 	..()
 
-/obj/machinery/atmospherics/trinary/tvalve/proc/initialize_directions()
-	switch(dir)
-		if(NORTH)
-			initialize_directions = SOUTH|NORTH|EAST
-		if(SOUTH)
-			initialize_directions = NORTH|SOUTH|WEST
-		if(EAST)
-			initialize_directions = WEST|EAST|SOUTH
-		if(WEST)
-			initialize_directions = EAST|WEST|NORTH
 
 /obj/machinery/atmospherics/trinary/tvalve/network_expand(datum/pipe_network/new_network, obj/machinery/atmospherics/pipe/reference)
 	if(reference == node1)
@@ -191,23 +180,25 @@
 	node3_dir = dir
 
 	for(var/obj/machinery/atmospherics/target in get_step(src,node1_dir))
-		if(target.initialize_directions & get_dir(target,src))
+		if(target.init_dirs & get_dir(target,src))
 			if (check_connect_types(target,src))
 				node1 = target
 				break
 	for(var/obj/machinery/atmospherics/target in get_step(src,node2_dir))
-		if(target.initialize_directions & get_dir(target,src))
+		if(target.init_dirs & get_dir(target,src))
 			if (check_connect_types(target,src))
 				node2 = target
 				break
 	for(var/obj/machinery/atmospherics/target in get_step(src,node3_dir))
-		if(target.initialize_directions & get_dir(target,src))
+		if(target.init_dirs & get_dir(target,src))
 			if (check_connect_types(target,src))
 				node3 = target
 				break
 
 	update_icon()
 	update_underlays()
+
+	return 1
 
 /obj/machinery/atmospherics/trinary/tvalve/build_network()
 	if(!network1 && node1)
@@ -319,6 +310,7 @@
 	..()
 	if(frequency)
 		set_frequency(frequency)
+	return 1
 
 /obj/machinery/atmospherics/trinary/tvalve/digital/receive_signal(datum/signal/signal)
 	if(!signal.data["tag"] || (signal.data["tag"] != id))
@@ -368,16 +360,6 @@
 	icon_state = "map_tvalvem1"
 	state = 1
 
-/obj/machinery/atmospherics/trinary/tvalve/mirrored/initialize_directions()
-	switch(dir)
-		if(NORTH)
-			initialize_directions = SOUTH|NORTH|WEST
-		if(SOUTH)
-			initialize_directions = NORTH|SOUTH|EAST
-		if(EAST)
-			initialize_directions = WEST|EAST|NORTH
-		if(WEST)
-			initialize_directions = EAST|WEST|SOUTH
 
 /obj/machinery/atmospherics/trinary/tvalve/mirrored/initialize()
 	var/node1_dir
@@ -389,20 +371,22 @@
 	node3_dir = dir
 
 	for(var/obj/machinery/atmospherics/target in get_step(src,node1_dir))
-		if(target.initialize_directions & get_dir(target,src))
+		if(target.init_dirs & get_dir(target,src))
 			node1 = target
 			break
 	for(var/obj/machinery/atmospherics/target in get_step(src,node2_dir))
-		if(target.initialize_directions & get_dir(target,src))
+		if(target.init_dirs & get_dir(target,src))
 			node2 = target
 			break
 	for(var/obj/machinery/atmospherics/target in get_step(src,node3_dir))
-		if(target.initialize_directions & get_dir(target,src))
+		if(target.init_dirs & get_dir(target,src))
 			node3 = target
 			break
 
 	update_icon()
 	update_underlays()
+
+	return 1
 
 /obj/machinery/atmospherics/trinary/tvalve/mirrored/update_icon(animation)
 	if(animation)
@@ -457,6 +441,7 @@
 	..()
 	if(frequency)
 		set_frequency(frequency)
+	return 1
 
 /obj/machinery/atmospherics/trinary/tvalve/mirrored/digital/receive_signal(datum/signal/signal)
 	if(!signal.data["tag"] || (signal.data["tag"] != id))

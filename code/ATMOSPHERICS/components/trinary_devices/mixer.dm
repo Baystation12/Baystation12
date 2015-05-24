@@ -68,7 +68,7 @@
 	air1.volume = ATMOS_DEFAULT_VOLUME_MIXER
 	air2.volume = ATMOS_DEFAULT_VOLUME_MIXER
 	air3.volume = ATMOS_DEFAULT_VOLUME_MIXER * 1.5
-	
+
 	if (!mixing_inputs)
 		mixing_inputs = list(src.air1 = node1_concentration, src.air2 = node2_concentration)
 
@@ -179,21 +179,12 @@ obj/machinery/atmospherics/trinary/mixer/t_mixer
 	icon_state = "tmap"
 
 	dir = SOUTH
-	initialize_directions = SOUTH|EAST|WEST
+	init_dirs = SOUTH|EAST|WEST
 
 	//node 3 is the outlet, nodes 1 & 2 are intakes
 
 obj/machinery/atmospherics/trinary/mixer/t_mixer/New()
 	..()
-	switch(dir)
-		if(NORTH)
-			initialize_directions = EAST|NORTH|WEST
-		if(SOUTH)
-			initialize_directions = SOUTH|WEST|EAST
-		if(EAST)
-			initialize_directions = EAST|NORTH|SOUTH
-		if(WEST)
-			initialize_directions = WEST|NORTH|SOUTH
 
 obj/machinery/atmospherics/trinary/mixer/t_mixer/initialize()
 	..()
@@ -204,42 +195,36 @@ obj/machinery/atmospherics/trinary/mixer/t_mixer/initialize()
 	var/node3_connect = dir
 
 	for(var/obj/machinery/atmospherics/target in get_step(src,node1_connect))
-		if(target.initialize_directions & get_dir(target,src))
+		if(target.init_dirs & get_dir(target,src))
 			node1 = target
 			break
 
 	for(var/obj/machinery/atmospherics/target in get_step(src,node2_connect))
-		if(target.initialize_directions & get_dir(target,src))
+		if(target.init_dirs & get_dir(target,src))
 			node2 = target
 			break
 
 	for(var/obj/machinery/atmospherics/target in get_step(src,node3_connect))
-		if(target.initialize_directions & get_dir(target,src))
+		if(target.init_dirs & get_dir(target,src))
 			node3 = target
 			break
 
 	update_icon()
 	update_underlays()
 
+	return 1
+
 obj/machinery/atmospherics/trinary/mixer/m_mixer
 	icon_state = "mmap"
 
 	dir = SOUTH
-	initialize_directions = SOUTH|NORTH|EAST
+	init_dirs = SOUTH|NORTH|EAST
 
 	//node 3 is the outlet, nodes 1 & 2 are intakes
 
 obj/machinery/atmospherics/trinary/mixer/m_mixer/New()
 	..()
-	switch(dir)
-		if(NORTH)
-			initialize_directions = WEST|NORTH|SOUTH
-		if(SOUTH)
-			initialize_directions = SOUTH|EAST|NORTH
-		if(EAST)
-			initialize_directions = EAST|WEST|NORTH
-		if(WEST)
-			initialize_directions = WEST|SOUTH|EAST
+
 
 obj/machinery/atmospherics/trinary/mixer/m_mixer/initialize()
 	..()
@@ -250,19 +235,21 @@ obj/machinery/atmospherics/trinary/mixer/m_mixer/initialize()
 	var/node3_connect = dir
 
 	for(var/obj/machinery/atmospherics/target in get_step(src,node1_connect))
-		if(target.initialize_directions & get_dir(target,src))
+		if(target.init_dirs & get_dir(target,src))
 			node1 = target
 			break
 
 	for(var/obj/machinery/atmospherics/target in get_step(src,node2_connect))
-		if(target.initialize_directions & get_dir(target,src))
+		if(target.init_dirs & get_dir(target,src))
 			node2 = target
 			break
 
 	for(var/obj/machinery/atmospherics/target in get_step(src,node3_connect))
-		if(target.initialize_directions & get_dir(target,src))
+		if(target.init_dirs & get_dir(target,src))
 			node3 = target
 			break
 
 	update_icon()
 	update_underlays()
+
+	return 1

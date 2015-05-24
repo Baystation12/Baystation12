@@ -6,7 +6,7 @@
 	desc = "For connecting portables devices related to atmospherics control."
 
 	dir = SOUTH
-	initialize_directions = SOUTH
+	init_dirs = SOUTH
 
 	var/obj/machinery/portable_atmospherics/connected_device
 
@@ -20,11 +20,11 @@
 
 
 /obj/machinery/atmospherics/portables_connector/New()
-	initialize_directions = dir
 	..()
 
 /obj/machinery/atmospherics/portables_connector/update_icon()
 	icon_state = "connector"
+	update_underlays()
 
 /obj/machinery/atmospherics/portables_connector/update_underlays()
 	if(..())
@@ -67,9 +67,9 @@
 		connected_device.disconnect()
 
 	if(node)
-		disconnect(src, node)
 		qdel(network)
 
+	disconnect_all()
 	node = null
 
 	..()
@@ -80,13 +80,14 @@
 	var/node_connect = dir
 
 	for(var/obj/machinery/atmospherics/target in get_step(src,node_connect))
-		if(target.initialize_directions & get_dir(target,src))
+		if(target.init_dirs & get_dir(target,src))
 			if (check_connect_types(target,src))
 				node = target
 				break
 
 	update_icon()
 	update_underlays()
+	return 1
 
 /obj/machinery/atmospherics/portables_connector/build_network()
 	if(!network && node)
@@ -120,14 +121,14 @@
 
 	return results
 /*
-/obj/machinery/atmospherics/portables_connector/disconnect(obj/machinery/atmospherics/reference)
-	if(reference==node)
-		qdel(network)
-		node = null
+/obj/machinery/atmospherics/portables_connector/disconnect(obj/machinery/atmospherics/reference1, obj/machinery/atmospherics/reference2)
+	if(reference2==reference1.node)
+		qdel(reference1.network)
+		reference1.node = null
 
 	update_underlays()
 
-	return null
+	return ..()
 */
 
 /obj/machinery/atmospherics/portables_connector/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)

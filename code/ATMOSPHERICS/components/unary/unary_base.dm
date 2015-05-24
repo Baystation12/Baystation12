@@ -1,6 +1,6 @@
 /obj/machinery/atmospherics/unary
 	dir = SOUTH
-	initialize_directions = SOUTH
+	init_dirs = SOUTH
 	//layer = TURF_LAYER+0.1
 
 	var/datum/gas_mixture/air_contents
@@ -11,7 +11,7 @@
 
 	New()
 		..()
-		initialize_directions = dir
+
 		air_contents = new
 
 		air_contents.volume = 200
@@ -45,7 +45,7 @@
 		var/node_connect = dir
 
 		for(var/obj/machinery/atmospherics/target in get_step(src,node_connect))
-			if(target.initialize_directions & get_dir(target,src))
+			if(target.init_dirs & get_dir(target,src))
 				if (check_connect_types(target,src))
 					node = target
 					break

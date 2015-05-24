@@ -91,8 +91,6 @@ Buildable meters
 /obj/item/pipe/New(var/loc, var/pipe_type as num, var/dir as num, var/obj/machinery/atmospherics/make_from = null)
 	..()
 
-
-
 	if (make_from)
 		src.connect_types = make_from.connect_types
 		src.nodes = make_from.nodes
@@ -102,242 +100,10 @@ Buildable meters
 		src.color = make_from.pipe_color
 		src.pipe_type = make_from.type
 		src.icon = getFlatIcon(make_from)
-		update()
-	else
-		var/obj/machinery/atmospherics/P
-		switch(pipe_type)
+		src.pixel_x = rand(-5, 5)
+		src.pixel_y = rand(-5, 5)
+	else qdel(src)
 
-			if(PIPE_UNIVERSAL)
-				P=new/obj/machinery/atmospherics/pipe/universal(src.loc)
-
-			if(PIPE_SIMPLE_STRAIGHT)
-				P=new/obj/machinery/atmospherics/pipe/simple(src.loc)
-
-			if(PIPE_SIMPLE_BENT)
-				P=new/obj/machinery/atmospherics/pipe/bent(src.loc)
-
-			if(PIPE_SUPPLY_STRAIGHT)
-				P = new/obj/machinery/atmospherics/pipe/simple/hidden/supply(src.loc)
-
-			if(PIPE_SUPPLY_BENT)
-				P = new/obj/machinery/atmospherics/pipe/bent/hidden/supply(src.loc)
-
-			if(PIPE_SCRUBBERS_STRAIGHT)
-				P = new/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers(src.loc)
-
-			if(PIPE_SCRUBBERS_BENT)
-				P = new/obj/machinery/atmospherics/pipe/bent/hidden/scrubbers(src.loc)
-
-			if(PIPE_HE_STRAIGHT)
-				P=new/obj/machinery/atmospherics/pipe/simple/heat_exchanging(src.loc)
-
-			if(PIPE_HE_BENT)
-				P=new/obj/machinery/atmospherics/pipe/simple/heat_exchanging/bent(src.loc)
-
-			if(PIPE_CONNECTOR)		// connector
-				P=new/obj/machinery/atmospherics/unary/portables_connector(src.loc)
-
-			if(PIPE_MANIFOLD)		//manifold
-				P=new /obj/machinery/atmospherics/pipe/manifold(src.loc)
-
-			if(PIPE_MANIFOLD4W)		//4-way manifold
-				P=new /obj/machinery/atmospherics/pipe/manifold4w(src.loc)
-
-			if(PIPE_JUNCTION)
-				P=new /obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction(src.loc)
-
-			if(PIPE_UVENT)		//unary vent
-				P=new /obj/machinery/atmospherics/unary/vent_pump(src.loc)
-
-			if(PIPE_MVALVE)		//manual valve
-				P=new /obj/machinery/atmospherics/binary/valve(src.loc)
-
-			if(PIPE_DVALVE)		//digital valve
-				P=new /obj/machinery/atmospherics/binary/valve/digital(src.loc)
-
-			if(PIPE_PUMP)		//gas pump
-				P=new /obj/machinery/atmospherics/binary/pump(src.loc)
-
-			if(PIPE_GAS_FILTER)		//gas filter
-				P=new /obj/machinery/atmospherics/trinary/filter(src.loc)
-
-			if(PIPE_GAS_MIXER)		//gas mixer
-				P=new /obj/machinery/atmospherics/trinary/mixer(src.loc)
-
-			if(PIPE_SCRUBBER)		//scrubber
-				P=new /obj/machinery/atmospherics/unary/vent_scrubber(src.loc)
-
-			if(PIPE_INSULATED_STRAIGHT, PIPE_INSULATED_BENT)
-				P=new /obj/machinery/atmospherics/pipe/simple/insulated(src.loc)
-
-			if(PIPE_MTVALVE)		//manual t-valve
-				P=new /obj/machinery/atmospherics/trinary/tvalve(src.loc)
-
-			if(PIPE_CAP)
-				P=new /obj/machinery/atmospherics/pipe/cap(src.loc)
-
-			if(PIPE_PASSIVE_GATE)		//passive gate
-				P=new /obj/machinery/atmospherics/binary/passive_gate(src.loc)
-
-			if(PIPE_VOLUME_PUMP)		//volume pump
-				P=new /obj/machinery/atmospherics/binary/pump/high_power(src.loc)
-
-			if(PIPE_HEAT_EXCHANGE)		// heat exchanger
-				P=new /obj/machinery/atmospherics/unary/heat_exchanger(src.loc)
-
-			if(PIPE_INJECTOR)		//unary vent
-				P=new /obj/machinery/atmospherics/unary/outlet_injector(src.loc)
-
-			if(PIPE_DP_VENT)		//volume pump
-				P=new /obj/machinery/atmospherics/binary/dp_vent_pump(src.loc)
-
-			if(PIPE_UVENT)
-				P=new /obj/machinery/atmospherics/unary/vent_pump(src.loc)
-
-			if(PIPE_DTVALVE)
-				P=new /obj/machinery/atmospherics/trinary/tvalve/digital(src.loc)
-
-			///// Z-Level stuff
-			if(PIPE_UP)
-				P=new /obj/machinery/atmospherics/pipe/zpipe/up(src.loc)
-
-			if(PIPE_DOWN)
-				P=new /obj/machinery/atmospherics/pipe/zpipe/down(src.loc)
-
-			if(PIPE_SUPPLY_UP)
-				P=new /obj/machinery/atmospherics/pipe/zpipe/up/supply(src.loc)
-
-			if(PIPE_SUPPLY_DOWN)
-				P=new /obj/machinery/atmospherics/pipe/zpipe/down/supply(src.loc)
-
-			if(PIPE_SCRUBBERS_UP)
-				P=new /obj/machinery/atmospherics/pipe/zpipe/up/supply(src.loc)
-
-			if(PIPE_SCRUBBERS_DOWN)
-				P=new /obj/machinery/atmospherics/pipe/zpipe/down/supply(src.loc)
-			///// Z-Level stuff
-
-		if(P)
-			if(!P.icon_manager)
-				P.icon_manager = new()
-			if(!P.pipe_color)
-				P.pipe_color = color
-			P.color = null
-			P.initialize_directions = P.generate_initialize_directions(P.init_dirs)
-			P.update_icon()
-			spawn (1)
-				new /obj/item/pipe(loc, P)
-				qdel(src)
-				qdel(P)
-		else qdel(P)
-
-
-	src.pixel_x = rand(-5, 5)
-	src.pixel_y = rand(-5, 5)
-
-//update the name and icon of the pipe item depending on the type
-
-/obj/item/pipe/proc/update()
-	var/list/nlist = list( \
-		"pipe", \
-		"bent pipe", \
-		"h/e pipe", \
-		"bent h/e pipe", \
-		"connector", \
-		"manifold", \
-		"junction", \
-		"uvent", \
-		"mvalve", \
-		"pump", \
-		"scrubber", \
-		"insulated pipe", \
-		"bent insulated pipe", \
-		"gas filter", \
-		"gas mixer", \
-		"pressure regulator", \
-		"high power pump", \
-		"heat exchanger", \
-		"t-valve", \
-		"4-way manifold", \
-		"pipe cap", \
-///// Z-Level stuff
-		"pipe up", \
-		"pipe down", \
-///// Z-Level stuff
-		"gas filter m", \
-		"gas mixer t", \
-		"gas mixer m", \
-		"omni mixer", \
-		"omni filter", \
-///// Supply and scrubbers pipes
-		"universal pipe adapter", \
-		"supply pipe", \
-		"bent supply pipe", \
-		"scrubbers pipe", \
-		"bent scrubbers pipe", \
-		"supply manifold", \
-		"scrubbers manifold", \
-		"supply 4-way manifold", \
-		"scrubbers 4-way manifold", \
-		"supply pipe up", \
-		"scrubbers pipe up", \
-		"supply pipe down", \
-		"scrubbers pipe down", \
-		"supply pipe cap", \
-		"scrubbers pipe cap", \
-		"t-valve m", \
-	)
-	name = nlist[pipe_type+1] + " fitting"
-	var/list/islist = list( \
-		"simple", \
-		"simple", \
-		"he", \
-		"he", \
-		"connector", \
-		"manifold", \
-		"junction", \
-		"uvent", \
-		"mvalve", \
-		"pump", \
-		"scrubber", \
-		"insulated", \
-		"insulated", \
-		"filter", \
-		"mixer", \
-		"passivegate", \
-		"volumepump", \
-		"heunary", \
-		"mtvalve", \
-		"manifold4w", \
-		"cap", \
-///// Z-Level stuff
-		"cap", \
-		"cap", \
-///// Z-Level stuff
-		"m_filter", \
-		"t_mixer", \
-		"m_mixer", \
-		"omni_mixer", \
-		"omni_filter", \
-///// Supply and scrubbers pipes
-		"universal", \
-		"simple", \
-		"simple", \
-		"simple", \
-		"simple", \
-		"manifold", \
-		"manifold", \
-		"manifold4w", \
-		"manifold4w", \
-		"cap", \
-		"cap", \
-		"cap", \
-		"cap", \
-		"cap", \
-		"cap", \
-		"mtvalvem", \
-	)
-	icon_state = islist[pipe_type + 1]
 
 //called when a turf is attacked with a pipe item
 /obj/item/pipe/afterattack(turf/simulated/floor/target, mob/user, proximity)
@@ -391,7 +157,15 @@ Buildable meters
 	if(ispath(pipe_type))
 		P=new pipe_type(src.loc)
 
-	if(P.buildFrom(usr,src))
+	if(P)
+
+		P.color = color
+		P.pipe_color = color
+		P.set_dir(dir)
+		if (pipename)
+			P.name = pipename
+		var/turf/T = loc
+		P.level = T.intact ? 2 : 1
 
 		if(P.initialize())
 

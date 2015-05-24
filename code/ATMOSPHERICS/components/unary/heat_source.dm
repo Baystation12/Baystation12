@@ -22,7 +22,7 @@
 
 /obj/machinery/atmospherics/unary/heater/New()
 	..()
-	initialize_directions = dir
+
 
 	component_parts = list()
 	component_parts += new /obj/item/weapon/circuitboard/unary_atmos/heater(src)
@@ -40,11 +40,13 @@
 	var/node_connect = dir
 
 	for(var/obj/machinery/atmospherics/target in get_step(src, node_connect))
-		if(target.initialize_directions & get_dir(target, src))
+		if(target.init_dirs & get_dir(target, src))
 			node = target
 			break
 
 	update_icon()
+
+	return 1
 
 
 /obj/machinery/atmospherics/unary/heater/update_icon()
