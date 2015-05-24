@@ -996,7 +996,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 		if(!M.loc.loc)
 			continue
 
-		if(istype(M.loc.loc,/area/engineering/engine_room))
+		if(istype(M.loc.loc,/area/engine/engine_room))
 			if(istype(M,/obj/machinery/power/rad_collector))
 				var/obj/machinery/power/rad_collector/Rad = M
 				Rad.anchored = 1
@@ -1035,7 +1035,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 				SMES.input_level = 200000
 				SMES.output_level = 75000
 
-		else if(istype(M.loc.loc,/area/engineering/engine_smes))	//Set every SMES to charge and spit out 300,000 power between the 4 of them.
+		else if(istype(M.loc.loc,/area/engine/engine_smes))	//Set every SMES to charge and spit out 300,000 power between the 4 of them.
 			if(istype(M,/obj/machinery/power/smes))
 				var/obj/machinery/power/smes/SMES = M
 				SMES.input_attempt = 1

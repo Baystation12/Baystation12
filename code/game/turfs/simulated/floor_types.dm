@@ -197,7 +197,7 @@
 /turf/simulated/floor/gravel
 	name = "Gravel patch"
 	icon_state = "gravel"
-	floor_tile = new/obj/item/stack/tile/gravel
+	floor_type = new/obj/item/stack/tile/gravel
 
 
 /turf/simulated/floor/carpet

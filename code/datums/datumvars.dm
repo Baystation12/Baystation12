@@ -778,7 +778,7 @@ client
 			return
 		holder.Topic(href, list("makeai"=href_list["makeai"]))
 
-	else if(href_list["setmutantrace"])
+/*	else if(href_list["setmutantrace"])
 		if(!check_rights(/*R_SPAWN*/R_SERVER))	return
 
 		var/mob/living/carbon/human/H = locate(href_list["setmutantrace"])
@@ -797,7 +797,7 @@ client
 			return
 		if(H.dna)
 			H.dna.mutantrace = new_mutantrace
-			H.update_mutantrace()
+			H.update_mutantrace()*/
 	else if(href_list["setspecies"])
 		if(!check_rights(/*R_SPAWN*/R_SERVER))	return
 

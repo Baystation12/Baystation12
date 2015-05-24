@@ -163,7 +163,7 @@
 						del(G)
 
 				//Make an announcement and log the person entering storage.
-				frozen_crew += "[M.real_name]"
+				//frozen_crew += "[M.real_name]"
 
 				message_admins("\blue [key_name_admin(usr)] has admin cryoed [key_name(M)]")
 				log_admin("[key_name(usr)] admin cryoed [key_name(M)]")

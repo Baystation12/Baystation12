@@ -526,6 +526,10 @@ var/list/ghostteleportlocs = list()
 	name = "hyperspace"
 	icon_state = "shuttle"
 
+/area/syndicate_station/arrivals_dock
+	name = "Arrivals Dock"
+	icon_state = "south"
+
 /area/wizard_station
 	name = "Wizard's Den"
 	icon_state = "yellow"

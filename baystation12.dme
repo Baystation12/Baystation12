@@ -1653,7 +1653,6 @@
 #include "code\TriDimension\Turfs.dm"
 #include "code\WorkInProgress\Cib\meme.dm"
 #include "code\WorkInProgress\computer3\computers\iaa.dm"
-#include "code\WorkInProgress\kilakk\fax.dm"
 #include "code\WorkInProgress\yashaldie\virtualgameboard.dm"
 #include "code\ZAS\_docs.dm"
 #include "code\ZAS\_gas_mixture_xgm.dm"

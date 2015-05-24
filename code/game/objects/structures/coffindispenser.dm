@@ -90,14 +90,14 @@
 	return
 
 /obj/structure/Rollerbed_Despenser/proc/dispenseRB()
-	for(var/obj/structure/stool/bed/roller/C in src.loc.contents)
+	for(var/obj/structure/bed/roller/C in src.loc.contents)
 		usr << "\red Cannot despense due to a rollerbed in despensing area."
 		return
 	if(numofRB == 0)
 		usr << "\red Out of Rollerbeds please refill."
 		return
 	if(numofRB >= 1)
-		new /obj/structure/stool/bed/roller(src.loc)
+		new /obj/structure/bed/roller(src.loc)
 		numofRB--
 		update_icon()
 		return

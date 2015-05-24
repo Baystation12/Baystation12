@@ -264,7 +264,7 @@ turf/simulated/floor/proc/update_icon()
 		return 0
 
 /turf/simulated/floor/is_gravel_floor()
-	if(istype(floor_tile,/obj/item/stack/tile/gravel))
+	if(istype(floor_type,/obj/item/stack/tile/gravel))
 		return 1
 	else
 		return 0
@@ -442,7 +442,7 @@ turf/simulated/floor/proc/update_icon()
 			levelupdate()
 			return
 	//if you gave a valid parameter, it won't get thisf ar.
-	floor_tile = new/obj/item/stack/tile/gravel
+	floor_type = new/obj/item/stack/tile/gravel
 
 	update_icon()
 	levelupdate()

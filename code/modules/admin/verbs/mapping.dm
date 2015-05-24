@@ -177,8 +177,6 @@ var/list/debug_verbs = list (
 		,/client/proc/reload_admins
 		,/client/proc/reload_mentors
 		,/client/proc/restart_controller
-		,/client/proc/remake_distribution_map
-		,/client/proc/show_distribution_map
 		,/client/proc/show_plant_genes
 		,/client/proc/callproc
 		,/client/proc/toggledebuglogs
