@@ -888,6 +888,7 @@
 #include "code\modules\clothing\masks\miscellaneous.dm"
 #include "code\modules\clothing\masks\voice.dm"
 #include "code\modules\clothing\shoes\colour.dm"
+#include "code\modules\clothing\shoes\jobs.dm"
 #include "code\modules\clothing\shoes\magboots.dm"
 #include "code\modules\clothing\shoes\miscellaneous.dm"
 #include "code\modules\clothing\spacesuits\alien.dm"
