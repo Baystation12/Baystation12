@@ -2665,6 +2665,16 @@ datum
 			glass_name = "glass of strawberry juice"
 			glass_desc = "Delicious juice made from strawberry."
 
+		drink/greengrapejuice
+			name = "Green Grape Juice"
+			id = "greengrapejuice"
+			description = "Lighter than normal grape juice."
+			color = "#af0000" // rgb: 175, 0, 0
+
+			glass_icon_state = "glass_green"
+			glass_name = "glass of green grape juice"
+			glass_desc = "Lighter than normal grape juice."
+
 		drink/gingerjuice
 			name = "Ginger Juice"
 			id = "gingerjuice"
@@ -4353,7 +4363,7 @@ datum
 			color = "#664300" // rgb: 102, 67, 0
 			boozepwr = 3.5
 
-			glass_icon_state = "crowsnest"
+			glass_icon_state = "thecrowsnest"
 			glass_name = "glass of crows nest"
 			glass_desc = "Short but packs a wallop.."
 
