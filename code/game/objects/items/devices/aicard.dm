@@ -18,93 +18,70 @@
 		user << "<b>ERROR ERROR ERROR</b>"
 
 /obj/item/device/aicard/attack_self(mob/user)
-	if (!in_range(src, user))
-		return
-	user.set_machine(src)
-	var/dat = "<TT><B>Intelicard</B><BR>"
-	var/laws
-	for(var/mob/living/silicon/ai/A in src)
-		dat += "Stored AI: [A.name]<br>System integrity: [A.system_integrity()]%<br>"
+	ui_interact(user)
 
-		for (var/datum/ai_law/law in A.laws.all_laws())
-			laws += "[law.get_index()]: [law.law]<BR>"
+/obj/item/device/aicard/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = inventory_state)
+	var/data[0]
+	data["has_ai"] = carded_ai != null
+	if(carded_ai)
+		data["name"] = carded_ai.name
+		data["integrity"] = carded_ai.system_integrity()
+		data["radio"] = !carded_ai.aiRadio.disabledAi
+		data["wireless"] = !carded_ai.control_disabled
+		data["operational"] = carded_ai.stat != DEAD
+		data["flushing"] = flush
 
-		dat += "Laws:<br>[laws]<br>"
+		var/laws[0]
+		for(var/datum/ai_law/AL in carded_ai.laws.all_laws())
+			laws[++laws.len] = list("index" = AL.get_index(), "law" = sanitize(AL.law))
+		data["laws"] = laws
+		data["has_laws"] = laws.len
 
-		if (A.stat == 2)
-			dat += "<b>AI nonfunctional</b>"
-		else
-			if (!src.flush)
-				dat += {"<A href='byond://?src=\ref[src];choice=Wipe'>Wipe AI</A>"}
-			else
-				dat += "<b>Wipe in progress</b>"
-			dat += "<br>"
-			dat += {"<a href='byond://?src=\ref[src];choice=Wireless'>[A.control_disabled ? "Enable" : "Disable"] Wireless Activity</a>"}
-			dat += "<br>"
-			dat += {"<a href='byond://?src=\ref[src];choice=Radio'>[A.aiRadio.disabledAi ? "Enable" : "Disable"] Subspace Transceiver</a>"}
-			dat += "<br>"
-			dat += {"<a href='byond://?src=\ref[src];choice=Close'> Close</a>"}
-	user << browse(dat, "window=aicard")
-	onclose(user, "aicard")
-	return
+	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	if (!ui)
+		ui = new(user, src, ui_key, "aicard.tmpl", "[name]", 600, 400, state = state)
+		ui.set_initial_data(data)
+		ui.open()
+		ui.set_auto_update(1)
 
-/obj/item/device/aicard/Topic(href, href_list)
+/obj/item/device/aicard/Topic(href, href_list, nowindow, state)
+	if(..())
+		return 1
 
-	var/mob/U = usr
-	if (get_dist(get_turf(U),get_turf(src)) > 1 || U.machine != src)//If they are not in range of 1 or less or their machine is not the card (ie, clicked on something else).
-		U << browse(null, "window=aicard")
-		U.unset_machine()
-		return
+	if(!carded_ai)
+		return 1
 
-	add_fingerprint(U)
-	U.set_machine(src)
+	var/user = usr
+	if (href_list["wipe"])
+		var/confirm = alert("Are you sure you want to wipe this card's memory? This cannot be undone once started.", "Confirm Wipe", "Yes", "No")
+		if(confirm == "Yes" && (CanUseTopic(user, state) == STATUS_INTERACTIVE))
+			admin_attack_log(user, carded_ai, "Wiped using \the [src.name]", "Was wiped with \the [src.name]", "used \the [src.name] to wipe")
+			flush = 1
+			carded_ai.suiciding = 1
+			carded_ai << "Your core files are being wiped!"
+			while (carded_ai && carded_ai.stat != 2)
+				carded_ai.adjustOxyLoss(2)
+				carded_ai.updatehealth()
+				sleep(10)
+			flush = 0
+	if (href_list["radio"])
+		carded_ai.aiRadio.disabledAi = text2num(href_list["radio"])
+		carded_ai << "<span class='warning'>Your Subspace Transceiver has been [carded_ai.aiRadio.disabledAi ? "disabled" : "enabled"]!</span>"
+		user << "<span class='notice'>You [carded_ai.aiRadio.disabledAi ? "disable" : "enable"] the AI's Subspace Transceiver.</span>"
+	if (href_list["wireless"])
+		carded_ai.control_disabled = text2num(href_list["wireless"])
+		carded_ai << "<span class='warning'>Your wireless interface has been [carded_ai.control_disabled ? "disabled" : "enabled"]!</span>"
+		user << "<span class='notice'>You [carded_ai.control_disabled ? "disable" : "enable"] the AI's wireless interface.</span>"
+		update_icon()
 
-	switch(href_list["choice"])//Now we switch based on choice.
-		if ("Close")
-			U << browse(null, "window=aicard")
-			U.unset_machine()
-			return
-
-		if ("Radio")
-			for(var/mob/living/silicon/ai/A in src)
-				A.aiRadio.disabledAi = !A.aiRadio.disabledAi
-				A << "Your Subspace Transceiver has been: [A.aiRadio.disabledAi ? "disabled" : "enabled"]"
-				U << "You [A.aiRadio.disabledAi ? "Disable" : "Enable"] the AI's Subspace Transceiver"
-
-		if ("Wipe")
-			var/confirm = alert("Are you sure you want to wipe this card's memory? This cannot be undone once started.", "Confirm Wipe", "Yes", "No")
-			if(confirm == "Yes")
-				if(isnull(src)||!in_range(src, U)||U.machine!=src)
-					U << browse(null, "window=aicard")
-					U.unset_machine()
-					return
-				else
-					flush = 1
-					for(var/mob/living/silicon/ai/A in src)
-						A.suiciding = 1
-						A << "Your core files are being wiped!"
-						while (A.stat != 2)
-							A.adjustOxyLoss(2)
-							A.updatehealth()
-							sleep(10)
-						flush = 0
-
-		if ("Wireless")
-			for(var/mob/living/silicon/ai/A in src)
-				A.control_disabled = !A.control_disabled
-				A << "The intelicard's wireless port has been [A.control_disabled ? "disabled" : "enabled"]!"
-				update_icon()
-	attack_self(U)
+	return 1
 
 /obj/item/device/aicard/update_icon()
-	var/mob/living/silicon/ai/occupant = locate() in src
 	overlays.Cut()
-	if(occupant)
-		if (occupant.control_disabled)
-			overlays -= image('icons/obj/pda.dmi', "aicard-on")
-		else
+	if(carded_ai)
+		if (!carded_ai.control_disabled)
 			overlays += image('icons/obj/pda.dmi', "aicard-on")
-		if(occupant.stat)
+		if(carded_ai.stat)
 			icon_state = "aicard-404"
 		else
 			icon_state = "aicard-full"
@@ -112,23 +89,23 @@
 		icon_state = "aicard"
 
 /obj/item/device/aicard/proc/grab_ai(var/mob/living/silicon/ai/ai, var/mob/living/user)
-
 	if(!ai.client)
-		user << "\red <b>ERROR</b>: \black [name] data core is offline. Unable to download."
+		user << "<span class='danger'>ERROR:</span> [name] data core is offline. Unable to download."
 		return 0
 
-	if(locate(/mob/living/silicon/ai) in src)
-		user << "\red <b>Transfer failed</b>: \black Existing AI found on remote terminal. Remove existing AI to install a new one."
+	if(carded_ai)
+		user << "<span class='danger'>Transfer failed:</span> Existing AI found on remote terminal. Remove existing AI to install a new one."
 		return 0
 
 	if(ai.is_malf())
-		user << "\red <b>ERROR</b>: \black Remote transfer interface disabled."
+		user << "<span class='danger'>ERROR:</span> Remote transfer interface disabled."
 		return 0
 
 	if(istype(ai.loc, /turf/))
 		new /obj/structure/AIcore/deactivated(get_turf(ai))
 
-	src.name = "inteliCard - [ai.name]"
+	admin_attack_log(user, ai, "Carded with [src.name]", "Was carded with [src.name]", "used the [src.name] to card")
+	src.name = "[initial(name)] - [ai.name]"
 
 	ai.loc = src
 	ai.cancel_camera()
@@ -136,11 +113,6 @@
 	ai.aiRestorePowerRoutine = 0
 	ai.aiRadio.disabledAi = 1
 	carded_ai = ai
-
-
-	ai.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been carded with [src.name] by [user.name] ([user.ckey])</font>")
-	user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [src.name] to card [ai.name] ([ai.ckey])</font>")
-	msg_admin_attack("[user.name] ([user.ckey]) used the [src.name] to card [ai.name] ([ai.ckey]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
 
 	if(ai.client)
 		ai << "You have been downloaded to a mobile storage device. Remote access lost."
@@ -151,7 +123,7 @@
 	return 1
 
 /obj/item/device/aicard/proc/clear()
-	name = "inteliCard"
+	name = initial(name)
 	carded_ai = null
 	update_icon()
 
