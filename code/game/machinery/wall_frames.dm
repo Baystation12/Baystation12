@@ -6,7 +6,7 @@
 	flags = CONDUCT
 	var/build_machine_type
 	var/refund_amt = 2
-	var/refund_type = /obj/item/stack/sheet/metal
+	var/refund_type = /obj/item/stack/material/steel
 
 /obj/item/frame/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (istype(W, /obj/item/weapon/wrench))
@@ -73,7 +73,7 @@
 	icon = 'icons/rust.dmi'
 	icon_state = "fuel_compressor0"
 	w_class = 4
-	refund_type = /obj/item/stack/sheet/plasteel
+	refund_type = /obj/item/stack/material/plasteel
 	refund_amt = 12
 	build_machine_type = /obj/machinery/rust_fuel_compressor
 

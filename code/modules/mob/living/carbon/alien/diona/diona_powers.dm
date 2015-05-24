@@ -24,18 +24,21 @@
 
 	var/mob/living/M = input(src,"Who do you wish to merge with?") in null|choices
 
-	if(!M || !src || !(src.Adjacent(M))) return
+	if(!M)
+		src << "There is nothing nearby to merge with."
+	else if(!do_merge(M))
+		src << "You fail to merge with \the [M]..."
 
-	if(istype(M,/mob/living/carbon/human))
-		M << "You feel your being twine with that of [src] as it merges with your biomass."
-		M.status_flags |= PASSEMOTES
-
-		src << "You feel your being twine with that of [M] as you merge with its biomass."
-		src.loc = M
-		src.verbs += /mob/living/carbon/alien/diona/proc/split
-		src.verbs -= /mob/living/carbon/alien/diona/proc/merge
-	else
-		return
+/mob/living/carbon/alien/diona/proc/do_merge(var/mob/living/carbon/human/H)
+	if(!istype(H) || !src || !(src.Adjacent(H)))
+		return 0
+	H << "You feel your being twine with that of \the [src] as it merges with your biomass."
+	H.status_flags |= PASSEMOTES
+	src << "You feel your being twine with that of \the [H] as you merge with its biomass."
+	loc = H
+	verbs += /mob/living/carbon/alien/diona/proc/split
+	verbs -= /mob/living/carbon/alien/diona/proc/merge
+	return 1
 
 /mob/living/carbon/alien/diona/proc/split()
 

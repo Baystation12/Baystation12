@@ -192,12 +192,12 @@
 				qdel(src)
 				return
 			else if(seed.chems)
-				if(istype(W,/obj/item/weapon/hatchet) && !isnull(seed.chems["woodpulp"]))
+				if(istype(W,/obj/item/weapon/material/hatchet) && !isnull(seed.chems["woodpulp"]))
 					user.show_message("<span class='notice'>You make planks out of \the [src]!</span>", 1)
 					for(var/i=0,i<2,i++)
-						var/obj/item/stack/sheet/wood/NG = new (user.loc)
+						var/obj/item/stack/material/wood/NG = new (user.loc)
 						NG.color = seed.get_trait(TRAIT_PRODUCT_COLOUR)
-						for (var/obj/item/stack/sheet/wood/G in user.loc)
+						for (var/obj/item/stack/material/wood/G in user.loc)
 							if(G==NG)
 								continue
 							if(G.amount>=G.max_amount)

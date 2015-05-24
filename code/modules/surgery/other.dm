@@ -56,8 +56,8 @@
 	priority = 2
 	allowed_tools = list(
 		/obj/item/weapon/scalpel = 100,		\
-		/obj/item/weapon/kitchenknife = 75,	\
-		/obj/item/weapon/shard = 50, 		\
+		/obj/item/weapon/material/knife = 75,	\
+		/obj/item/weapon/material/shard = 50, 		\
 	)
 
 	can_infect = 1
@@ -144,9 +144,8 @@
 
 		var/obj/item/weapon/reagent_containers/container = tool
 
-		var/trans = container.reagents.trans_to(target, container.amount_per_transfer_from_this)
+		var/trans = container.reagents.trans_to_mob(target, container.amount_per_transfer_from_this, CHEM_BLOOD) //technically it's contact, but the reagents are being applied to internal tissue
 		if (trans > 0)
-			container.reagents.reaction(target, INGEST)	//technically it's contact, but the reagents are being applied to internal tissue
 
 			if(container.reagents.has_reagent("peridaxon"))
 				affected.status &= ~ORGAN_DEAD
@@ -162,8 +161,7 @@
 
 		var/obj/item/weapon/reagent_containers/container = tool
 
-		var/trans = container.reagents.trans_to(target, container.amount_per_transfer_from_this)
-		container.reagents.reaction(target, INGEST)	//technically it's contact, but the reagents are being applied to internal tissue
+		var/trans = container.reagents.trans_to_mob(target, container.amount_per_transfer_from_this, CHEM_BLOOD)
 
 		user.visible_message("\red [user]'s hand slips, applying [trans] units of the solution to the wrong place in [target]'s [affected.name] with the [tool]!" , \
 		"\red Your hand slips, applying [trans] units of the solution to the wrong place in [target]'s [affected.name] with the [tool]!")

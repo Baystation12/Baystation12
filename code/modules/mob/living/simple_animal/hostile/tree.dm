@@ -52,5 +52,5 @@
 
 /mob/living/simple_animal/hostile/tree/death()
 	..(null,"is hacked into pieces!")
-	new /obj/item/stack/sheet/wood(loc)
+	new /obj/item/stack/material/wood(loc)
 	qdel(src)

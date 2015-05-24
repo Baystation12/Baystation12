@@ -1035,7 +1035,7 @@ var/global/list/gear_datums = list()
 
 /datum/gear/ashtray
 	display_name = "ashtray, plastic"
-	path = /obj/item/ashtray/plastic
+	path = /obj/item/weapon/material/ashtray/plastic
 	sort_category = "misc"
 	cost = 1
 

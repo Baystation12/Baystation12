@@ -66,18 +66,18 @@ using metal and glass, it uses glass and reagents (usually sulfuric acis).
 /obj/machinery/r_n_d/circuit_imprinter/dismantle()
 	for(var/obj/I in component_parts)
 		if(istype(I, /obj/item/weapon/reagent_containers/glass/beaker))
-			reagents.trans_to(I, reagents.total_volume)
+			reagents.trans_to_obj(I, reagents.total_volume)
 	if(g_amount >= 3750)
-		var/obj/item/stack/sheet/glass/G = new /obj/item/stack/sheet/glass(loc)
+		var/obj/item/stack/material/glass/G = new /obj/item/stack/material/glass(loc)
 		G.amount = round(g_amount / 3750)
 	if(gold_amount >= 2000)
-		var/obj/item/stack/sheet/mineral/gold/G = new /obj/item/stack/sheet/mineral/gold(loc)
+		var/obj/item/stack/material/gold/G = new /obj/item/stack/material/gold(loc)
 		G.amount = round(gold_amount / 2000)
 	if(diamond_amount >= 2000)
-		var/obj/item/stack/sheet/mineral/diamond/G = new /obj/item/stack/sheet/mineral/diamond(loc)
+		var/obj/item/stack/material/diamond/G = new /obj/item/stack/material/diamond(loc)
 		G.amount = round(diamond_amount / 2000)
 	if(uranium_amount >= 2000)
-		var/obj/item/stack/sheet/mineral/uranium/G = new /obj/item/stack/sheet/mineral/uranium(loc)
+		var/obj/item/stack/material/uranium/G = new /obj/item/stack/material/uranium(loc)
 		G.amount = round(uranium_amount / 2000)
 	..()
 
@@ -104,7 +104,7 @@ using metal and glass, it uses glass and reagents (usually sulfuric acis).
 		return 1
 	if(O.is_open_container())
 		return 0
-//	if(!istype(O, /obj/item/stack/sheet/glass) && !istype(O, /obj/item/stack/sheet/mineral/gold) && !istype(O, /obj/item/stack/sheet/mineral/diamond) && !istype(O, /obj/item/stack/sheet/mineral/uranium))
+//	if(!istype(O, /obj/item/stack/material/glass) && !istype(O, /obj/item/stack/material/gold) && !istype(O, /obj/item/stack/material/diamond) && !istype(O, /obj/item/stack/material/uranium))
 //		user << "<span class='notice'>You cannot insert this item into \the [src]!</span>"
 //		return 1
 	if(stat)
@@ -113,9 +113,9 @@ using metal and glass, it uses glass and reagents (usually sulfuric acis).
 		user << "<span class='notice'>\The [src] is busy. Please wait for completion of previous operation.</span>"
 		return 1
 
-	if(istype(O, /obj/item/stack/sheet/glass) || istype(O, /obj/item/stack/sheet/mineral/gold) || istype(O, /obj/item/stack/sheet/mineral/diamond) || istype(O, /obj/item/stack/sheet/mineral/uranium))
+	if(istype(O, /obj/item/stack/material/glass) || istype(O, /obj/item/stack/material/gold) || istype(O, /obj/item/stack/material/diamond) || istype(O, /obj/item/stack/material/uranium))
 
-		var/obj/item/stack/sheet/stack = O
+		var/obj/item/stack/material/stack = O
 		if((TotalMaterials() + stack.perunit) > max_material_amount)
 			user << "<span class='notice'>\The [src] is full. Please remove glass from \the [src] in order to insert more.</span>"
 			return 1
@@ -135,13 +135,13 @@ using metal and glass, it uses glass and reagents (usually sulfuric acis).
 		if(do_after(usr, 16))
 			user << "<span class='notice'>You add [amount] sheets to \the [src].</span>"
 			switch(stacktype)
-				if(/obj/item/stack/sheet/glass)
+				if(/obj/item/stack/material/glass)
 					g_amount += amount * 3750
-				if(/obj/item/stack/sheet/mineral/gold)
+				if(/obj/item/stack/material/gold)
 					gold_amount += amount * 2000
-				if(/obj/item/stack/sheet/mineral/diamond)
+				if(/obj/item/stack/material/diamond)
 					diamond_amount += amount * 2000
-				if(/obj/item/stack/sheet/mineral/uranium)
+				if(/obj/item/stack/material/uranium)
 					uranium_amount += amount * 2000
 		else
 			new stacktype(loc, amount)

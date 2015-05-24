@@ -17,8 +17,6 @@
 		/obj/item/weapon/module/power_control,
 		/obj/item/weapon/stock_parts,
 		/obj/item/frame,
-		/obj/item/weapon/table_parts,
-		/obj/item/weapon/table_parts/rack,
 		/obj/item/weapon/camera_assembly,
 		/obj/item/weapon/tank,
 		/obj/item/weapon/circuitboard,
@@ -94,7 +92,7 @@
 	icon_state = "gripper-sheet"
 
 	can_hold = list(
-		/obj/item/stack/sheet
+		/obj/item/stack/material
 		)
 
 /obj/item/weapon/gripper/attack_self(mob/user as mob)
@@ -330,10 +328,10 @@
 		else if(istype(W,/obj/item/ammo_casing))
 			if(metal)
 				metal.add_charge(1000)
-		else if(istype(W,/obj/item/weapon/shard/shrapnel))
+		else if(istype(W,/obj/item/weapon/material/shard/shrapnel))
 			if(metal)
 				metal.add_charge(1000)
-		else if(istype(W,/obj/item/weapon/shard))
+		else if(istype(W,/obj/item/weapon/material/shard))
 			if(glass)
 				glass.add_charge(1000)
 		else if(istype(W,/obj/item/weapon/reagent_containers/food/snacks/grown))

@@ -212,7 +212,7 @@
 	interface_name = "death blossom launcher"
 	interface_desc = "An integrated microfactory that produces poisoned throwing stars from thin air and electricity."
 
-	var/fabrication_type = /obj/item/weapon/star/ninja
+	var/fabrication_type = /obj/item/weapon/material/star/ninja
 	var/fire_force = 30
 	var/fire_distance = 10
 

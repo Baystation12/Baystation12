@@ -142,7 +142,8 @@
 		piece.icon_state = "[initial(icon_state)]"
 		piece.min_cold_protection_temperature = min_cold_protection_temperature
 		piece.max_heat_protection_temperature = max_heat_protection_temperature
-		piece.siemens_coefficient = siemens_coefficient
+		if(piece.siemens_coefficient > siemens_coefficient) //So that insulated gloves keep their insulation.
+			piece.siemens_coefficient = siemens_coefficient
 		piece.permeability_coefficient = permeability_coefficient
 		piece.unacidable = unacidable
 		if(islist(armor)) piece.armor = armor.Copy()
@@ -706,7 +707,7 @@
 	take_hit((100/severity_class), "electrical pulse", 1)
 
 /obj/item/weapon/rig/proc/shock(mob/user)
-	if (electrocute_mob(user, cell, src))
+	if (electrocute_mob(user, cell, src)) //electrocute_mob() handles removing charge from the cell, no need to do that here.
 		spark_system.start()
 		if(user.stunned)
 			return 1

@@ -805,18 +805,18 @@ About the new airlock wires panel:
 			else
 				spawn(0)	close(1)
 
-	else if(istype(C, /obj/item/weapon/twohanded/fireaxe) && !arePowerSystemsOn())
+	else if(istype(C, /obj/item/weapon/material/twohanded/fireaxe) && !arePowerSystemsOn())
 		if(locked)
 			user << "\blue The airlock's bolts prevent it from being forced."
 		else if( !welded && !operating )
 			if(density)
-				var/obj/item/weapon/twohanded/fireaxe/F = C
+				var/obj/item/weapon/material/twohanded/fireaxe/F = C
 				if(F.wielded)
 					spawn(0)	open(1)
 				else
 					user << "\red You need to be wielding \the [C] to do that."
 			else
-				var/obj/item/weapon/twohanded/fireaxe/F = C
+				var/obj/item/weapon/material/twohanded/fireaxe/F = C
 				if(F.wielded)
 					spawn(0)	close(1)
 				else

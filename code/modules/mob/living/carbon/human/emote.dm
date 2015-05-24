@@ -541,8 +541,24 @@
 					message = "<B>[src]</B> makes a very loud noise."
 					m_type = 2
 
+		if("swish")
+			src.animate_tail_once()
+
+		if("wag", "sway")
+			src.animate_tail_start()
+
+		if("qwag", "fastsway")
+			src.animate_tail_fast()
+
+		if("swag", "stopsway")
+			src.animate_tail_stop()
+
 		if ("help")
-			src << "blink, blink_r, blush, bow-(none)/mob, burp, choke, chuckle, clap, collapse, cough,\ncry, custom, deathgasp, drool, eyebrow, frown, gasp, giggle, groan, grumble, handshake, hug-(none)/mob, glare-(none)/mob,\ngrin, laugh, look-(none)/mob, moan, mumble, nod, pale, point-atom, raise, salute, shake, shiver, shrug,\nsigh, signal-#1-10, smile, sneeze, sniff, snore, stare-(none)/mob, tremble, twitch, twitch_s, whimper,\nwink, yawn"
+			src << {"blink, blink_r, blush, bow-(none)/mob, burp, choke, chuckle, clap, collapse, cough,
+cry, custom, deathgasp, drool, eyebrow, frown, gasp, giggle, groan, grumble, handshake, hug-(none)/mob, glare-(none)/mob,
+grin, laugh, look-(none)/mob, moan, mumble, nod, pale, point-atom, raise, salute, shake, shiver, shrug,
+sigh, signal-#1-10, smile, sneeze, sniff, snore, stare-(none)/mob, tremble, twitch, twitch_s, whimper,
+wink, yawn, swish, sway/wag, fastsway/qwag, stopsway/swag"}
 
 		else
 			src << "\blue Unusable emote '[act]'. Say *help for a list."

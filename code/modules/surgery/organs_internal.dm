@@ -19,7 +19,7 @@
 	allowed_tools = list(
 	/obj/item/weapon/hemostat = 100,	\
 	/obj/item/weapon/wirecutters = 75,	\
-	/obj/item/weapon/kitchen/utensil/fork = 20
+	/obj/item/weapon/material/kitchen/utensil/fork = 20
 	)
 	blood_level = 2
 
@@ -211,8 +211,8 @@
 
 	allowed_tools = list(
 	/obj/item/weapon/scalpel = 100,		\
-	/obj/item/weapon/kitchenknife = 75,	\
-	/obj/item/weapon/shard = 50, 		\
+	/obj/item/weapon/material/knife = 75,	\
+	/obj/item/weapon/material/shard = 50, 		\
 	)
 
 	min_duration = 90
@@ -267,7 +267,7 @@
 	allowed_tools = list(
 	/obj/item/weapon/hemostat = 100,	\
 	/obj/item/weapon/wirecutters = 75,	\
-	/obj/item/weapon/kitchen/utensil/fork = 20
+	/obj/item/weapon/material/kitchen/utensil/fork = 20
 	)
 
 	min_duration = 60
@@ -447,8 +447,8 @@
 // /datum/surgery_step/ribcage/heart/cut
 //	allowed_tools = list(
 //	/obj/item/weapon/scalpel = 100,		\
-//	/obj/item/weapon/kitchenknife = 75,	\
-//	/obj/item/weapon/shard = 50, 		\
+//	/obj/item/weapon/material/knife = 75,	\
+//	/obj/item/weapon/material/shard = 50, 		\
 //	)
 
 //	min_duration = 30

@@ -28,6 +28,7 @@
 		icon_state = "[initial(icon_state)]-on"
 		set_light(brightness_on)
 	else
+		icon_state = "[initial(icon_state)]"
 		set_light(0)
 
 /obj/item/device/flashlight/attack_self(mob/user)
@@ -36,6 +37,7 @@
 		return 0
 	on = !on
 	update_brightness(user)
+	user.update_action_buttons()
 	return 1
 
 

@@ -9,11 +9,30 @@
 	var/slot = "decor"
 	var/obj/item/clothing/under/has_suit = null		//the suit the tie may be attached to
 	var/image/inv_overlay = null	//overlay used when attached to clothing.
+	var/image/inv_overlay_mob = null
 	var/overlay_state = null
 
-/obj/item/clothing/accessory/New()
-	..()
-	inv_overlay = image("icon" = 'icons/obj/clothing/ties_overlay.dmi', "icon_state" = "[overlay_state? "[overlay_state]" : "[icon_state]"]")
+/obj/item/clothing/accessory/proc/get_inv_overlay()
+	if(!inv_overlay)
+		var/tmp_icon_state = "[overlay_state? "[overlay_state]" : "[icon_state]"]"
+		if(icon_override)
+			if("[tmp_icon_state]_tie" in icon_states(icon_override))
+				tmp_icon_state = "[tmp_icon_state]_tie"
+			inv_overlay = image("icon" = icon_override, "icon_state" = "[tmp_icon_state]")
+		else
+			inv_overlay = image("icon" = 'icons/obj/clothing/ties_overlay.dmi', "icon_state" = "[tmp_icon_state]")
+	return inv_overlay
+
+/obj/item/clothing/accessory/proc/get_inv_mob_overlay()
+	if(!inv_overlay_mob)
+		var/tmp_icon_state = "[overlay_state? "[overlay_state]" : "[icon_state]"]"
+		if(icon_override)
+			if("[tmp_icon_state]_mob" in icon_states(icon_override))
+				tmp_icon_state = "[tmp_icon_state]_mob"
+			inv_overlay_mob = image("icon" = icon_override, "icon_state" = "[tmp_icon_state]")
+		else
+			inv_overlay_mob = image("icon" = 'icons/obj/clothing/ties_overlay.dmi', "icon_state" = "[tmp_icon_state]")
+	return inv_overlay_mob
 
 //when user attached an accessory to S
 /obj/item/clothing/accessory/proc/on_attached(obj/item/clothing/under/S, mob/user as mob)
@@ -21,7 +40,7 @@
 		return
 	has_suit = S
 	loc = has_suit
-	has_suit.overlays += inv_overlay
+	has_suit.overlays += get_inv_overlay()
 
 	user << "<span class='notice'>You attach [src] to [has_suit].</span>"
 	src.add_fingerprint(user)
@@ -29,7 +48,7 @@
 /obj/item/clothing/accessory/proc/on_removed(mob/user as mob)
 	if(!has_suit)
 		return
-	has_suit.overlays -= inv_overlay
+	has_suit.overlays -= get_inv_overlay()
 	has_suit = null
 	usr.put_in_hands(src)
 	src.add_fingerprint(user)
@@ -72,24 +91,42 @@
 					if(MALE)	their = "his"
 					if(FEMALE)	their = "her"
 
-				var/sound = "pulse"
-				var/sound_strength
-
+				var/sound = "heartbeat"
+				var/sound_strength = "cannot hear"
+				var/heartbeat = 0
+				if(M.species && M.species.has_organ["heart"])
+					var/obj/item/organ/heart/heart = M.internal_organs_by_name["heart"]
+					if(heart && !heart.robotic)
+						heartbeat = 1
 				if(M.stat == DEAD || (M.status_flags&FAKEDEATH))
 					sound_strength = "cannot hear"
 					sound = "anything"
 				else
-					sound_strength = "hear a weak"
 					switch(body_part)
 						if("chest")
-							if(M.oxyloss < 50)
-								sound_strength = "hear a healthy"
-							sound = "pulse and respiration"
+							sound_strength = "hear"
+							sound = "no heartbeat"
+							if(heartbeat)
+								var/obj/item/organ/heart/heart = M.internal_organs_by_name["heart"]
+								if(heart.is_bruised() || M.getOxyLoss() > 50)
+									sound = "[pick("odd noises in","weak")] heartbeat"
+								else
+									sound = "healthy heartbeat"
+
+							var/obj/item/organ/heart/L = M.internal_organs_by_name["lungs"]
+							if(!L || M.losebreath)
+								sound += " and no respiration"
+							else if(M.is_lung_ruptured() || M.getOxyLoss() > 50)
+								sound += " and [pick("wheezing","gurgling")] sounds"
+							else
+								sound += " and healthy respiration"
 						if("eyes","mouth")
 							sound_strength = "cannot hear"
 							sound = "anything"
 						else
-							sound_strength = "hear a weak"
+							if(heartbeat)
+								sound_strength = "hear a weak"
+								sound = "pulse"
 
 				user.visible_message("[user] places [src] against [M]'s [body_part] and listens attentively.", "You place [src] against [their] [body_part]. You [sound_strength] [sound].")
 				return
