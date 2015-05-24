@@ -25,7 +25,7 @@
 				src.reset_view(null)
 
 		// Handle power damage (oxy)
-		if(src:aiRestorePowerRoutine != 0 && !APU_power)
+		if(aiRestorePowerRoutine != 0 && !APU_power)
 			// Lose power
 			adjustOxyLoss(1)
 		else
@@ -99,7 +99,7 @@
 						if (loc.power_equip)
 							if (!istype(T, /turf/space))
 								src << "Alert cancelled. Power has been restored without our assistance."
-								src:aiRestorePowerRoutine = 0
+								aiRestorePowerRoutine = 0
 								src.blind.layer = 0
 								return
 						src << "Fault confirmed: missing external power. Shutting down main control system to save power."
@@ -108,7 +108,7 @@
 						sleep(50)
 						if (istype(T, /turf/space))
 							src << "Unable to verify! No power connection detected!"
-							src:aiRestorePowerRoutine = 2
+							aiRestorePowerRoutine = 2
 							return
 						src << "Connection verified. Searching for APC in power network."
 						sleep(50)
@@ -129,7 +129,7 @@
 							if (loc.power_equip)
 								if (!istype(T, /turf/space))
 									src << "Alert cancelled. Power has been restored without our assistance."
-									src:aiRestorePowerRoutine = 0
+									aiRestorePowerRoutine = 0
 									src.blind.layer = 0 //This, too, is a fix to issue 603
 									return
 							switch(PRP)
@@ -146,7 +146,7 @@
 									theAPC.update()
 									aiRestorePowerRoutine = 3
 									src << "Here are your current laws:"
-									src.show_laws()
+									show_laws()
 							sleep(50)
 							theAPC = null
 

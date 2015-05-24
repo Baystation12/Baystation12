@@ -111,7 +111,7 @@
 				return
 
 
-/datum/game_mode/malfunction/verb/emergency_forcefield(var/turf/T as null|turf in world)
+/datum/game_mode/malfunction/verb/emergency_forcefield(var/turf/T as turf in world)
 	set name = "Emergency Forcefield"
 	set desc = "275 CPU - Uses station's emergency shielding system to create temporary barrier which lasts for few minutes, but won't resist gunfire."
 	set category = "Software"
@@ -172,6 +172,7 @@
 			return
 		if(M.inoperable()) // Not functional
 			user << "<span class='notice'>ERROR: Unknown error. Machine is probably damaged or power supply is nonfunctional.</span>"
+			return
 	else // Not a machine at all (what the hell is this doing in Machines list anyway??)
 		user << "<span class='notice'>ERROR: Unable to overload - target is not a machine.</span>"
 		return

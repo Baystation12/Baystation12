@@ -11,7 +11,7 @@
 			owner.verbs += driver
 
 /datum/malf_hardware/proc/get_examine_desc()
-	return "It has some sort of hardware attached to it's core"
+	return "It has some sort of hardware attached to its core"
 
 
 
