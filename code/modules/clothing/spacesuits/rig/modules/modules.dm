@@ -234,7 +234,7 @@
 		SetupStat(R)
 
 /mob/proc/SetupStat(var/obj/item/weapon/rig/R)
-	if(R && !R.canremove && R.installed_modules.len && statpanel("Hardsuit Modules"))
+	if(src == usr && R && !R.canremove && R.installed_modules.len && statpanel("Hardsuit Modules"))
 		var/cell_status = R.cell ? "[R.cell.charge]/[R.cell.maxcharge]" : "ERROR"
 		statpanel("Hardsuit Modules", "Suit charge", cell_status)
 		for(var/obj/item/rig_module/module in R.installed_modules)

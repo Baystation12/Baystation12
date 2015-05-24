@@ -52,15 +52,6 @@
 	icon_state = "black"
 	body_parts_covered = FEET
 
-/obj/item/clothing/shoes/galoshes
-	desc = "Rubber boots"
-	name = "galoshes"
-	icon_state = "galoshes"
-	permeability_coefficient = 0.05
-	flags = NOSLIP
-	slowdown = SHOES_SLOWDOWN+1
-	species_restricted = null
-
 /obj/item/clothing/shoes/clown_shoes
 	desc = "The prankster's standard-issue clowning shoes. Damn they're huge!"
 	name = "clown shoes"
@@ -80,21 +71,6 @@
 			footstep++
 	else
 		playsound(src, "clownstep", 20, 1)
-
-/obj/item/clothing/shoes/jackboots
-	name = "jackboots"
-	desc = "Nanotrasen-issue Security combat boots for combat scenarios or combat situations. All combat, all the time."
-	icon_state = "jackboots"
-	item_state = "jackboots"
-	force = 3
-	siemens_coefficient = 0.7
-
-/obj/item/clothing/shoes/jackboots/unathi
-	name = "toe-less jackboots"
-	desc = "Modified pair of jackboots, particularly friendly to those species whose toes hold claws."
-	item_state = "digiboots"
-	icon_state = "digiboots"
-	species_restricted = null
 
 /obj/item/clothing/shoes/cult
 	name = "boots"
