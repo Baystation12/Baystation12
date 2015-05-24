@@ -79,6 +79,7 @@
 	desc = "It's a small rodent."
 	icon_state = "mouse_gray"
 	origin_tech = null
+	w_class = 1
 
 /obj/item/weapon/holder/mouse/gray
 	icon_state = "mouse_gray"

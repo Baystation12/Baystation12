@@ -63,7 +63,13 @@
 
 	if(!body_color)
 		body_color = pick( list("brown","gray","white") )
-		holder_type = text2path("/obj/item/weapon/holder/mouse/[body_color]")
+		switch(body_color)
+			if("brown")
+				holder_type = /obj/item/weapon/holder/mouse/brown
+			if("gray")
+				holder_type = /obj/item/weapon/holder/mouse/gray
+			if("white")
+				holder_type = /obj/item/weapon/holder/mouse/white
 	icon_state = "mouse_[body_color]"
 	icon_living = "mouse_[body_color]"
 	icon_dead = "mouse_[body_color]_dead"
