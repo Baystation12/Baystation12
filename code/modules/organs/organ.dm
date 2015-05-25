@@ -220,31 +220,17 @@ var/list/organ_cache = list()
 	min_broken_damage = 35
 
 /obj/item/organ/emp_act(severity)
-	switch(robotic)
-		if(0)
+	if(!(status & ORGAN_ROBOT))
+		return
+	switch (severity)
+		if (1.0)
+			take_damage(0,20)
 			return
-		if(1)
-			switch (severity)
-				if (1.0)
-					take_damage(20,0)
-					return
-				if (2.0)
-					take_damage(7,0)
-					return
-				if(3.0)
-					take_damage(3,0)
-					return
-		if(2)
-			switch (severity)
-				if (1.0)
-					take_damage(40,0)
-					return
-				if (2.0)
-					take_damage(15,0)
-					return
-				if(3.0)
-					take_damage(10,0)
-					return
+		if (2.0)
+			take_damage(0,7)
+			return
+		if(3.0)
+			take_damage(0,3)
 
 /obj/item/organ/proc/removed(var/mob/living/user)
 

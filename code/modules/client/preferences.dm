@@ -634,10 +634,6 @@ datum/preferences
 		dat += "</br><b>Has a variety of eye colours.</b>"
 	if(current_species.flags & IS_PLANT)
 		dat += "</br><b>Has a plantlike physiology.</b>"
-	if(current_species.flags & IS_SYNTHETIC)
-		dat += "</br><b>Is machine-based.</b>"
-	if(current_species.flags & REGENERATES_LIMBS)
-		dat += "</br><b>Has a plantlike physiology.</b>"
 	dat += "</small></td>"
 	dat += "</tr>"
 	dat += "</table><center><hr/>"

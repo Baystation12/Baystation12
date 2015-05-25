@@ -98,10 +98,9 @@
 	if(target == user)
 		if(istype(user, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = user
-			if(H.species.flags & IS_SYNTHETIC)
-				H << "<span class='notice'>You have a monitor for a head, where do you think you're going to put that?</span>"
-				return 1
-
+			if(!H.check_has_mouth())
+				user << "Where do you intend to put \the [src]? You don't have a mouth!"
+				return
 			var/obj/item/blocked = H.check_mouth_coverage()
 			if(blocked)
 				user << "<span class='warning'>\The [blocked] is in the way!</span>"
@@ -114,10 +113,9 @@
 	else
 		if(istype(user, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = target
-			if(H.species.flags & IS_SYNTHETIC)
-				H << "<span class='notice'>They have a monitor for a head, where do you think you're going to put that?</span>"
+			if(!H.check_has_mouth())
+				user << "Where do you intend to put \the [src]? \The [H] doesn't have a mouth!"
 				return
-
 			var/obj/item/blocked = H.check_mouth_coverage()
 			if(blocked)
 				user << "<span class='warning'>\The [blocked] is in the way!</span>"

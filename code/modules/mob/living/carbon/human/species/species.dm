@@ -29,6 +29,7 @@
 	var/icon/icon_template                               // Used for mob icon generation for non-32x32 species.
 	var/is_small
 	var/show_ssd = 1
+	var/virus_immune
 
 	// Language/culture vars.
 	var/default_language = "Galactic Common" // Default language is used when 'say' is used without modifiers.
@@ -69,7 +70,7 @@
 	var/heat_level_1 = 360                            // Heat damage level 1 above this point.
 	var/heat_level_2 = 400                            // Heat damage level 2 above this point.
 	var/heat_level_3 = 1000                           // Heat damage level 3 above this point.
-	var/synth_temp_gain = 0			                  // IS_SYNTHETIC species will gain this much temperature every second
+	var/passive_temp_gain = 0		                  // Species will gain this much temperature every second
 	var/hazard_high_pressure = HAZARD_HIGH_PRESSURE   // Dangerously high pressure.
 	var/warning_high_pressure = WARNING_HIGH_PRESSURE // High pressure warning.
 	var/warning_low_pressure = WARNING_LOW_PRESSURE   // Low pressure warning.
@@ -212,13 +213,6 @@
 
 	for(var/obj/item/organ/external/O in H.organs)
 		O.owner = H
-
-	if(flags & IS_SYNTHETIC)
-		for(var/obj/item/organ/external/E in H.organs)
-			if(E.status & ORGAN_CUT_AWAY || E.status & ORGAN_DESTROYED) continue
-			E.robotize()
-		for(var/obj/item/organ/I in H.internal_organs)
-			I.robotize()
 
 /datum/species/proc/hug(var/mob/living/carbon/human/H,var/mob/living/target)
 

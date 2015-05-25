@@ -33,7 +33,10 @@ var/datum/antagonist/xenos/borer/borers
 /datum/antagonist/xenos/borer/proc/get_hosts()
 	var/list/possible_hosts = list()
 	for(var/mob/living/carbon/human/H in mob_list)
-		if(H.stat != 2 && !(H.species.flags & IS_SYNTHETIC) && !H.has_brain_worms())
+		var/obj/item/organ/external/head/head = H.get_organ("head")
+		if(head.status & ORGAN_ROBOT)
+			continue
+		if(H.stat != DEAD && !H.has_brain_worms())
 			possible_hosts |= H
 	return possible_hosts
 
