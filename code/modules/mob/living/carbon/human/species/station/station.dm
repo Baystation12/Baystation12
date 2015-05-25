@@ -251,8 +251,8 @@
 	rarity_value = 2
 
 	eyes = "blank_eyes"
-	brute_mod = 0.5
-	burn_mod = 1
+	brute_mod = 2.5 // 100% * 2.5 * 0.6 (robolimbs) ~= 150%
+	burn_mod = 2.5  // So they take 50% extra damage from brute/burn overall.
 
 	warning_low_pressure = 50
 	hazard_low_pressure = 0
