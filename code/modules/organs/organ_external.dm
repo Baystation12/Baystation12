@@ -369,11 +369,6 @@ This function completely restores a damaged organ to perfect condition.
 
 /obj/item/organ/external/process()
 	if(owner)
-		//Dismemberment
-		if(status & ORGAN_DESTROYED)
-			if(config.limbs_can_break)
-				droplimb(0,DROPLIMB_EDGE) //Might be worth removing this check since take_damage handles it.
-			return
 		if(parent)
 			if(parent.status & ORGAN_DESTROYED)
 				status |= ORGAN_DESTROYED
@@ -933,6 +928,9 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 /obj/item/organ/external/proc/get_wounds_desc()
 	. = ""
+	if(status & ORGAN_DESTROYED && !is_stump())
+		. += "tear at [amputation_point] so bad it barely hangs on few tendons"
+
 	if(status & ORGAN_ROBOT)
 		if(brute_dam)
 			switch(brute_dam)

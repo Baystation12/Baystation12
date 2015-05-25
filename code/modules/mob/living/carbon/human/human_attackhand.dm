@@ -178,8 +178,13 @@
 				miss_type = 2
 
 			// See what attack they use
+			var/possible_moves = list()
 			var/datum/unarmed_attack/attack = null
-			for(var/datum/unarmed_attack/u_attack in H.species.unarmed_attacks)
+			for(var/part in list("l_hand","r_hand","l_foot","r_foot","head"))
+				var/obj/item/organ/external/E = H.get_organ(part)
+				possible_moves |= E.species.unarmed_attacks
+
+			for(var/datum/unarmed_attack/u_attack in possible_moves)
 				if(!u_attack.is_usable(H, src, hit_zone))
 					continue
 				else

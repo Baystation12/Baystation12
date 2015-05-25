@@ -118,6 +118,7 @@
 	b_skin = blue
 
 	force_update_limbs()
+	update_body()
 	return 1
 
 /mob/living/carbon/human/proc/change_skin_tone(var/tone)
@@ -127,6 +128,7 @@
 	s_tone = tone
 
 	force_update_limbs()
+	update_body()
 	return 1
 
 /mob/living/carbon/human/proc/update_dna()
