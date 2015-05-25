@@ -9,7 +9,7 @@
 		return 1
 	return 0
 
-/proc/isxenomorph(A)
+/proc/isxenophage(A)
 	if(istype(A, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = A
 		return istype(H.species, /datum/species/xenos)

@@ -1,7 +1,7 @@
 /datum/language/xenocommon
-	name = "Xenomorph"
+	name = "Xenophage"
 	colour = "alien"
-	desc = "The common tongue of the xenomorphs."
+	desc = "The common tongue of the xenophages."
 	speech_verb = "hisses"
 	ask_verb = "hisses"
 	exclaim_verb = "hisses"
@@ -11,7 +11,7 @@
 
 /datum/language/xenos
 	name = "Hivemind"
-	desc = "Xenomorphs have the strange ability to commune over a psychic hivemind."
+	desc = "Xenophages have the strange ability to commune over a psychic hivemind."
 	speech_verb = "hisses"
 	ask_verb = "hisses"
 	exclaim_verb = "hisses"

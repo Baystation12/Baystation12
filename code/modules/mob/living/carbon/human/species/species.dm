@@ -12,6 +12,8 @@
 	// Icon/appearance vars.
 	var/icobase = 'icons/mob/human_races/r_human.dmi'    // Normal icon set.
 	var/deform = 'icons/mob/human_races/r_def_human.dmi' // Mutated icon set.
+	var/offset_x                                         // Offset for the sprite. Used for sprites larger than 32x32.
+	var/offset_y                                         // As above.
 
 	// Damage overlay and masks.
 	var/damage_overlays = 'icons/mob/human_races/masks/dam_human.dmi'
@@ -22,13 +24,13 @@
 	var/eyes = "eyes_s"                                  // Icon for eyes.
 	var/blood_color = "#A10808"                          // Red.
 	var/flesh_color = "#FFC896"                          // Pink.
-	var/base_color                                       // Used by changelings. Should also be used for icon previes..
+	var/base_color                                       // Used by changelings. Should also be used for icon previews.
 	var/tail                                             // Name of tail state in species effects icon file.
 	var/tail_animation                                   // If set, the icon to obtain tail animation states from.
 	var/race_key = 0       	                             // Used for mob icon cache string.
 	var/icon/icon_template                               // Used for mob icon generation for non-32x32 species.
-	var/is_small
-	var/show_ssd = 1
+	var/is_small                                         // If set, mob will respond differently to some checks (beartraps etc)
+	var/show_ssd = 1                                     // If set, mob will not show the examine SSD message.
 	var/virus_immune
 
 	// Language/culture vars.
@@ -147,6 +149,14 @@
 	for(var/u_type in unarmed_types)
 		unarmed_attacks += new u_type()
 
+/datum/species/proc/map_tag_to_limb(var/limb_tag)
+	if(limb_tag in list("eyes", "mouth"))
+		return "head"
+	else if(limb_tag in list("chest", "groin", "head", "l_arm", "r_arm", "l_leg", "r_leg", "l_hand", "r_hand", "l_foot", "r_foot"))
+		return limb_tag
+	else
+		return "chest"
+
 /datum/species/proc/get_environment_discomfort(var/mob/living/carbon/human/H, var/msg_type)
 
 	if(!prob(5))
@@ -240,6 +250,8 @@
 
 /datum/species/proc/handle_post_spawn(var/mob/living/carbon/human/H) //Handles anything not already covered by basic species assignment.
 	add_inherent_verbs(H)
+	H.pixel_x = (offset_x ? offset_x : 0)
+	H.pixel_y = (offset_y ? offset_y : 0)
 
 /datum/species/proc/handle_death(var/mob/living/carbon/human/H) //Handles any species-specific death events (such as dionaea nymph spawns).
 	return

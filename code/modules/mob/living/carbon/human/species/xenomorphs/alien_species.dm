@@ -1,13 +1,18 @@
 //Stand-in until this is made more lore-friendly.
 /datum/species/xenos
-	name = "Xenomorph"
-	name_plural = "Xenomorphs"
+	name = "Xenophage"
+	name_plural = "Xenophages"
 
-	default_language = "Xenomorph"
+	default_language = "Xenophage"
 	language = "Hivemind"
 	unarmed_types = list(/datum/unarmed_attack/claws/strong, /datum/unarmed_attack/bite/strong)
 	hud_type = /datum/hud_data/alien
 	rarity_value = 3
+	offset_x = -16
+
+	icobase = 'icons/mob/human_races/xenos/r_xenophage.dmi'
+	deform =  'icons/mob/human_races/xenos/r_xenophage.dmi'
+	icon_template = 'icons/mob/human_races/xenos/r_xenophage.dmi'
 
 	has_fine_manipulation = 0
 	siemens_coefficient = 0
@@ -52,6 +57,21 @@
 		"nutrient vessel" = /obj/item/organ/diona/nutrients
 		)
 
+	// TODO: generalize limbs so that they can actually have a billion legs.
+	has_limbs = list(
+		"chest" =  list("path" = /obj/item/organ/external/chest/unbreakable),
+		"groin" =  list("path" = /obj/item/organ/external/groin/unbreakable),
+		"head" =   list("path" = /obj/item/organ/external/head/unbreakable),
+		"l_arm" =  list("path" = /obj/item/organ/external/arm/unbreakable/insectoid),
+		"r_arm" =  list("path" = /obj/item/organ/external/arm/right/unbreakable/insectoid),
+		"l_leg" =  list("path" = /obj/item/organ/external/leg/unbreakable/insectoid),
+		"r_leg" =  list("path" = /obj/item/organ/external/leg/right/unbreakable/insectoid),
+		"l_hand" = list("path" = /obj/item/organ/external/hand/unbreakable/insectoid),
+		"r_hand" = list("path" = /obj/item/organ/external/hand/right/unbreakable/insectoid),
+		"l_foot" = list("path" = /obj/item/organ/external/foot/unbreakable/insectoid),
+		"r_foot" = list("path" = /obj/item/organ/external/foot/right/unbreakable/insectoid)
+		)
+
 	bump_flag = ALIEN
 	swap_flags = ALLMOBS
 	push_flags = ALLMOBS ^ ROBOT
@@ -93,12 +113,11 @@
 	if(!T) return
 	var/datum/gas_mixture/environment = T.return_air()
 	if(!environment) return
-
-	if(environment.gas["phoron"] > 0 || locate(/obj/effect/alien/weeds) in T)
-		if(!regenerate(H))
-			var/obj/item/organ/xenos/plasmavessel/P = H.internal_organs_by_name["plasma vessel"]
-			P.stored_plasma += weeds_plasma_rate
-			P.stored_plasma = min(max(P.stored_plasma,0),P.max_plasma)
+	var/obj/effect/plant/plant = locate() in T
+	if((environment.gas["phoron"] > 0 || (plant && plant.seed && plant.seed.name == "xenophage")) && !regenerate(H))
+		var/obj/item/organ/xenos/plasmavessel/P = H.internal_organs_by_name["plasma vessel"]
+		P.stored_plasma += weeds_plasma_rate
+		P.stored_plasma = min(max(P.stored_plasma,0),P.max_plasma)
 	..()
 
 /datum/species/xenos/proc/regenerate(var/mob/living/carbon/human/H)
@@ -136,24 +155,12 @@
 
 	return 0
 
-/datum/species/xenos/handle_login_special(var/mob/living/carbon/human/H)
-	H.AddInfectionImages()
-	..()
-
-/datum/species/xenos/handle_logout_special(var/mob/living/carbon/human/H)
-	H.RemoveInfectionImages()
-	..()
-
 /datum/species/xenos/drone
-	name = "Xenomorph Drone"
+	name = "Xenophage Drone"
 	caste_name = "drone"
 	weeds_plasma_rate = 15
 	slowdown = 1
-	tail = "xenos_drone_tail"
 	rarity_value = 5
-
-	icobase = 'icons/mob/human_races/xenos/r_xenos_drone.dmi'
-	deform =  'icons/mob/human_races/xenos/r_xenos_drone.dmi'
 
 	has_organ = list(
 		"heart" =           /obj/item/organ/heart,
@@ -184,15 +191,11 @@
 
 /datum/species/xenos/hunter
 
-	name = "Xenomorph Hunter"
+	name = "Xenophage Hunter"
 	weeds_plasma_rate = 5
 	caste_name = "hunter"
 	slowdown = -2
 	total_health = 150
-	tail = "xenos_hunter_tail"
-
-	icobase = 'icons/mob/human_races/xenos/r_xenos_hunter.dmi'
-	deform =  'icons/mob/human_races/xenos/r_xenos_hunter.dmi'
 
 	has_organ = list(
 		"heart" =           /obj/item/organ/heart,
@@ -212,15 +215,11 @@
 		)
 
 /datum/species/xenos/sentinel
-	name = "Xenomorph Sentinel"
+	name = "Xenophage Sentinel"
 	weeds_plasma_rate = 10
 	caste_name = "sentinel"
 	slowdown = 0
 	total_health = 125
-	tail = "xenos_sentinel_tail"
-
-	icobase = 'icons/mob/human_races/xenos/r_xenos_sentinel.dmi'
-	deform =  'icons/mob/human_races/xenos/r_xenos_sentinel.dmi'
 
 	has_organ = list(
 		"heart" =           /obj/item/organ/heart,
@@ -242,17 +241,13 @@
 
 /datum/species/xenos/queen
 
-	name = "Xenomorph Queen"
+	name = "Xenophage Queen"
 	total_health = 250
 	weeds_heal_rate = 5
 	weeds_plasma_rate = 20
 	caste_name = "queen"
 	slowdown = 4
-	tail = "xenos_queen_tail"
 	rarity_value = 10
-
-	icobase = 'icons/mob/human_races/xenos/r_xenos_queen.dmi'
-	deform =  'icons/mob/human_races/xenos/r_xenos_queen.dmi'
 
 	has_organ = list(
 		"heart" =           /obj/item/organ/heart,

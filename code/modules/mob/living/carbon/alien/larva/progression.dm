@@ -1,12 +1,15 @@
 /mob/living/carbon/alien/larva/confirm_evolution()
 
-	src << "\blue <b>You are growing into a beautiful alien! It is time to choose a caste.</b>"
-	src << "\blue There are three to choose from:"
-	src << "<B>Hunters</B> \blue are strong and agile, able to hunt away from the hive and rapidly move through ventilation shafts. Hunters generate plasma slowly and have low reserves."
-	src << "<B>Sentinels</B> \blue are tasked with protecting the hive and are deadly up close and at a range. They are not as physically imposing nor fast as the hunters."
-	src << "<B>Drones</B> \blue are the working class, offering the largest plasma storage and generation. They are the only caste which may evolve again, turning into the dreaded alien queen."
+	src << "<span class='alium'><b>You begin to shed your skin, moulting into a more complex form. It is time to choose a caste.</b></span>"
+	src << "<span class='notice'>There are three to choose from:</span>"
+	src << "<span class='notice'><B>Hunters</B> are strong and agile, able to hunt away from the hive and rapidly move through ventilation shafts. Hunters generate plasma slowly and have low reserves.</span>"
+	src << "<span class='notice'><B>Sentinels</B> are tasked with protecting the hive and are deadly up close and at a range. They are not as physically imposing nor fast as the hunters.</span>"
+	src << "<span class='notice'><B>Drones</B> are the working class, offering the largest plasma storage and generation. They are the only caste which may evolve again, turning into the dreaded xenophage queen.</span>"
 	var/alien_caste = alert(src, "Please choose which alien caste you shall belong to.",,"Hunter","Sentinel","Drone")
-	return alien_caste ? "Xenomorph [alien_caste]" : null
+	return alien_caste ? "Xenophage [alien_caste]" : null
 
 /mob/living/carbon/alien/larva/show_evolution_blurb()
 	return
+
+/mob/living/carbon/alien/larva/can_progress()
+	return 0 // Handled by handle_chemicals_in_body()

@@ -1,7 +1,7 @@
 //Xenomicrobes
 
 /datum/disease/xeno_transformation
-	name = "Xenomorph Transformation"
+	name = "Xenophage Transformation"
 	max_stages = 5
 	spread = "Syringe"
 	spread_type = SPECIAL
