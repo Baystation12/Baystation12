@@ -36,7 +36,7 @@ var/datum/antagonist/xenos/borer/borers
 		var/obj/item/organ/external/head/head = H.get_organ("head")
 		if(head.status & ORGAN_ROBOT)
 			continue
-		if(H.stat != 2 && !H.has_brain_worms())
+		if(H.stat != DEAD && !H.has_brain_worms())
 			possible_hosts |= H
 	return possible_hosts
 

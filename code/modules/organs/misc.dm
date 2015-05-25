@@ -1,9 +1,4 @@
 //CORTICAL BORER ORGANS.
-/obj/item/organ/borer
-	name = "cortical borer"
-	parent_organ = "head"
-	vital = 1
-
 /obj/item/organ/borer/process()
 
 	// Borer husks regenerate health, feel no pain, and are resistant to stuns and brainloss.
@@ -32,6 +27,8 @@
 	icon_state = "borer"
 	organ_tag = "brain"
 	desc = "A disgusting space slug."
+	parent_organ = "head"
+	vital = 1
 
 /obj/item/organ/borer/removed(var/mob/living/user)
 
@@ -55,7 +52,7 @@
 	var/datum/mind/backup
 
 /obj/item/organ/stack/process()
-	if(owner && owner.stat != 2 && !is_broken())
+	if(owner && owner.stat != DEAD && !is_broken())
 		backup_time = world.time
 		if(owner.mind) backup = owner.mind
 

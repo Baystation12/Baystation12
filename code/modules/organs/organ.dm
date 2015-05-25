@@ -222,7 +222,6 @@ var/list/organ_cache = list()
 /obj/item/organ/emp_act(severity)
 	if(!(status & ORGAN_ROBOT))
 		return
-	world << "emp on [src] with sev [severity]."
 	switch (severity)
 		if (1.0)
 			take_damage(0,20)
