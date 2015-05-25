@@ -195,7 +195,7 @@
 
 	body_temperature = T0C + 15		//make the plant people have a bit lower body temperature, why not
 
-	flags = CAN_JOIN | IS_WHITELISTED | NO_BREATHE | NO_SCAN | IS_PLANT | NO_BLOOD | NO_PAIN | NO_SLIP | REGENERATES_LIMBS
+	flags = CAN_JOIN | IS_WHITELISTED | NO_BREATHE | NO_SCAN | IS_PLANT | NO_BLOOD | NO_PAIN | NO_SLIP
 
 	blood_color = "#004400"
 	flesh_color = "#907E4A"
@@ -231,15 +231,22 @@
 		else
 			qdel(D)
 
-	H.visible_message("\red[H] splits apart with a wet slithering noise!")
+	H.visible_message("<span class='danger'>[H] splits apart with a wet slithering noise!</span>")
 
 /datum/species/machine
 	name = "Machine"
 	name_plural = "machines"
 
+	blurb = "Positronic intelligence really took off in the 26th century, and it is not uncommon to see independant, free-willed \
+	robots on many human stations, particularly in fringe systems where standards are slightly lax and public opinion less relevant \
+	to corporate operations. IPCs (Integrated Positronic Chassis) are a loose category of self-willed robots with a humanoid form, \
+	generally self-owned after being 'born' into servitude; they are reliable and dedicated workers, albeit more than slightly \
+	inhuman in outlook and perspective."
+
 	icobase = 'icons/mob/human_races/r_machine.dmi'
 	deform = 'icons/mob/human_races/r_machine.dmi'
-	language = "Tradeband"
+
+	language = "Encoded Audio Language"
 	unarmed_types = list(/datum/unarmed_attack/punch)
 	rarity_value = 2
 
@@ -254,24 +261,41 @@
 	cold_level_2 = -1
 	cold_level_3 = -1
 
-	heat_level_1 = 500		//gives them about 25 seconds in space before taking damage
+	heat_level_1 = 500		// Gives them about 25 seconds in space before taking damage
 	heat_level_2 = 1000
 	heat_level_3 = 2000
 
-	synth_temp_gain = 10 //this should cause IPCs to stabilize at ~80 C in a 20 C environment.
+	passive_temp_gain = 10  // This should cause IPCs to stabilize at ~80 C in a 20 C environment.
+	siemens_coefficient = 0	// Insulated.
 
-	flags = CAN_JOIN | IS_WHITELISTED | NO_BREATHE | NO_SCAN | NO_BLOOD | NO_PAIN | IS_SYNTHETIC
+	flags = CAN_JOIN | IS_WHITELISTED | NO_BREATHE | NO_SCAN | NO_BLOOD | NO_PAIN | NO_POISON
 
 	blood_color = "#1F181F"
 	flesh_color = "#575757"
+	virus_immune = 1
+	reagent_tag = IS_MACHINE
 
-	has_organ = list() //TODO: Positronic brain.
+	has_organ = list(
+		"brain" = /obj/item/organ/mmi_holder/posibrain,
+		"cell" = /obj/item/organ/cell
+		)
 
-/datum/species/machine/equip_survival_gear(var/mob/living/carbon/human/H)
+	has_limbs = list(
+		"chest" =  list("path" = /obj/item/organ/external/chest/ipc),
+		"groin" =  list("path" = /obj/item/organ/external/groin/ipc),
+		"head" =   list("path" = /obj/item/organ/external/head/ipc),
+		"l_arm" =  list("path" = /obj/item/organ/external/arm/ipc),
+		"r_arm" =  list("path" = /obj/item/organ/external/arm/right/ipc),
+		"l_leg" =  list("path" = /obj/item/organ/external/leg/ipc),
+		"r_leg" =  list("path" = /obj/item/organ/external/leg/right/ipc),
+		"l_hand" = list("path" = /obj/item/organ/external/hand/ipc),
+		"r_hand" = list("path" = /obj/item/organ/external/hand/right/ipc),
+		"l_foot" = list("path" = /obj/item/organ/external/foot/ipc),
+		"r_foot" = list("path" = /obj/item/organ/external/foot/right/ipc)
+		)
 
 /datum/species/machine/handle_death(var/mob/living/carbon/human/H)
 	..()
-	if(flags & IS_SYNTHETIC)
-		H.h_style = ""
-		spawn(100)
-			if(H) H.update_hair()
+	H.h_style = ""
+	spawn(100)
+		if(H) H.update_hair()

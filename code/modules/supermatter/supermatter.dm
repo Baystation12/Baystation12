@@ -130,7 +130,7 @@
 /obj/machinery/power/supermatter/proc/announce_warning()
 	var/integrity = get_integrity()
 	var/alert_msg = " Integrity at [integrity]%"
-	
+
 	if(damage > emergency_point)
 		alert_msg = emergency_alert + alert_msg
 		lastwarning = world.timeofday - WARNING_DELAY * 4
@@ -153,7 +153,7 @@
 		else if(safe_warned && public_alert)
 			radio.autosay(alert_msg, "Supermatter Monitor")
 			public_alert = 0
-		
+
 
 /obj/machinery/power/supermatter/process()
 
