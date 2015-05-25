@@ -22,6 +22,7 @@
 
 	var/prone_icon                                       // If set, draws this from icobase when mob is prone.
 	var/eyes = "eyes_s"                                  // Icon for eyes.
+	var/has_floating_eyes
 	var/blood_color = "#A10808"                          // Red.
 	var/flesh_color = "#FFC896"                          // Pink.
 	var/base_color                                       // Used by changelings. Should also be used for icon previews.
@@ -148,6 +149,9 @@
 	unarmed_attacks = list()
 	for(var/u_type in unarmed_types)
 		unarmed_attacks += new u_type()
+
+/datum/species/proc/get_eyes(var/mob/living/carbon/human/H)
+	return
 
 /datum/species/proc/map_tag_to_limb(var/limb_tag)
 	if(limb_tag in list("eyes", "mouth"))

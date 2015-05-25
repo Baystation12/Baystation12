@@ -1,8 +1,6 @@
-//Stand-in until this is made more lore-friendly.
 /datum/species/xenos
 	name = "Xenophage"
 	name_plural = "Xenophages"
-
 	default_language = "Xenophage"
 	language = "Hivemind"
 	unarmed_types = list(/datum/unarmed_attack/claws/strong, /datum/unarmed_attack/bite/strong)
@@ -19,6 +17,7 @@
 	gluttonous = 2
 
 	eyes = "blank_eyes"
+	has_floating_eyes = 1
 
 	brute_mod = 0.5 // Hardened carapace.
 	burn_mod = 2    // Weak to fire.
@@ -30,7 +29,7 @@
 	cold_level_2 = -1
 	cold_level_3 = -1
 
-	flags = IS_RESTRICTED | NO_BREATHE | NO_SCAN | NO_PAIN | NO_SLIP | NO_POISON
+	flags = CAN_JOIN | HAS_SKIN_COLOR | IS_WHITELISTED | NO_BREATHE | NO_SCAN | NO_PAIN | NO_SLIP | NO_POISON
 
 	reagent_tag = IS_XENOS
 
@@ -52,9 +51,25 @@
 	has_organ = list(
 		"heart" =           /obj/item/organ/heart,
 		"brain" =           /obj/item/organ/brain/xeno,
-		"plasma vessel" =   /obj/item/organ/xenos/plasmavessel,
+		"egg sac" =         /obj/item/organ/xenos/eggsac,
+		"plasma vessel" =   /obj/item/organ/xenos/plasmavessel/queen,
+		"acid gland" =      /obj/item/organ/xenos/acidgland,
 		"hive node" =       /obj/item/organ/xenos/hivenode,
+		"resin spinner" =   /obj/item/organ/xenos/resinspinner,
 		"nutrient vessel" = /obj/item/organ/diona/nutrients
+		)
+
+	inherent_verbs = list(
+		/mob/living/proc/ventcrawl,
+		/mob/living/carbon/human/proc/tackle,
+		/mob/living/carbon/human/proc/psychic_whisper,
+		/mob/living/carbon/human/proc/regurgitate,
+		/mob/living/carbon/human/proc/lay_egg,
+		/mob/living/carbon/human/proc/plant,
+		/mob/living/carbon/human/proc/transfer_plasma,
+		/mob/living/carbon/human/proc/corrosive_acid,
+		/mob/living/carbon/human/proc/neurotoxin,
+		/mob/living/carbon/human/proc/resin
 		)
 
 	// TODO: generalize limbs so that they can actually have a billion legs.
@@ -77,12 +92,25 @@
 	push_flags = ALLMOBS ^ ROBOT
 
 	var/alien_number = 0
-	var/caste_name = "creature" // Used to update alien name.
 	var/weeds_heal_rate = 1     // Health regen on weeds.
 	var/weeds_plasma_rate = 5   // Plasma regen on weeds.
+	var/list/eye_overlays = list()
+	var/list/bloodline_colour = list()
+
+/datum/species/xenos/get_eyes(var/mob/living/carbon/human/H)
+	var/eye_cache_key = "[bloodline_colour[H.ckey]]"
+	if(!bloodline_colour[H.ckey])
+		bloodline_colour[H.ckey] = "#FF00FF"
+	if(isnull(eye_overlays[eye_cache_key]))
+		var/image/I = image('icons/mob/human_races/xenos/r_xenophage.dmi',"eyes")
+		I.color = bloodline_colour[H.ckey]
+		I.layer = 15 // Should draw over darkness.
+		eye_overlays[eye_cache_key] = I
+	H.overlays |= eye_overlays[eye_cache_key]
+	return
 
 /datum/species/xenos/get_random_name()
-	return "alien [caste_name] ([alien_number])"
+	return "alien ([alien_number])"
 
 /datum/species/xenos/can_understand(var/mob/other)
 
@@ -92,19 +120,16 @@
 	return 0
 
 /datum/species/xenos/hug(var/mob/living/carbon/human/H,var/mob/living/target)
-	H.visible_message("<span class='notice'>[H] caresses [target] with its scythe-like arm.</span>", \
-					"<span class='notice'>You caress [target] with your scythe-like arm.</span>")
+	H.visible_message("<span class='notice'>[H] caresses [target] with a multitude of serrated claws.</span>", \
+					"<span class='notice'>You caress [target] with a multitude of serrated claws.</span>")
 
 /datum/species/xenos/handle_post_spawn(var/mob/living/carbon/human/H)
-
 	if(H.mind)
 		H.mind.assigned_role = "Alien"
 		H.mind.special_role = "Alien"
-
 	alien_number++ //Keep track of how many aliens we've had so far.
-	H.real_name = "alien [caste_name] ([alien_number])"
+	H.real_name = "xenophage ([alien_number])"
 	H.name = H.real_name
-
 	..()
 
 /datum/species/xenos/handle_environment_special(var/mob/living/carbon/human/H)
@@ -154,133 +179,6 @@
 			return 1
 
 	return 0
-
-/datum/species/xenos/drone
-	name = "Xenophage Drone"
-	caste_name = "drone"
-	weeds_plasma_rate = 15
-	slowdown = 1
-	rarity_value = 5
-
-	has_organ = list(
-		"heart" =           /obj/item/organ/heart,
-		"brain" =           /obj/item/organ/brain/xeno,
-		"plasma vessel" =   /obj/item/organ/xenos/plasmavessel/queen,
-		"acid gland" =      /obj/item/organ/xenos/acidgland,
-		"hive node" =       /obj/item/organ/xenos/hivenode,
-		"resin spinner" =   /obj/item/organ/xenos/resinspinner,
-		"nutrient vessel" = /obj/item/organ/diona/nutrients
-		)
-
-	inherent_verbs = list(
-		/mob/living/proc/ventcrawl,
-		/mob/living/carbon/human/proc/regurgitate,
-		/mob/living/carbon/human/proc/plant,
-		/mob/living/carbon/human/proc/transfer_plasma,
-		/mob/living/carbon/human/proc/evolve,
-		/mob/living/carbon/human/proc/resin,
-		/mob/living/carbon/human/proc/corrosive_acid
-		)
-
-/datum/species/xenos/drone/handle_post_spawn(var/mob/living/carbon/human/H)
-
-	var/mob/living/carbon/human/A = H
-	if(!istype(A))
-		return ..()
-	..()
-
-/datum/species/xenos/hunter
-
-	name = "Xenophage Hunter"
-	weeds_plasma_rate = 5
-	caste_name = "hunter"
-	slowdown = -2
-	total_health = 150
-
-	has_organ = list(
-		"heart" =           /obj/item/organ/heart,
-		"brain" =           /obj/item/organ/brain/xeno,
-		"plasma vessel" =   /obj/item/organ/xenos/plasmavessel/hunter,
-		"hive node" =       /obj/item/organ/xenos/hivenode,
-		"nutrient vessel" = /obj/item/organ/diona/nutrients
-		)
-
-	inherent_verbs = list(
-		/mob/living/proc/ventcrawl,
-		/mob/living/carbon/human/proc/tackle,
-		/mob/living/carbon/human/proc/gut,
-		/mob/living/carbon/human/proc/leap,
-		/mob/living/carbon/human/proc/psychic_whisper,
-		/mob/living/carbon/human/proc/regurgitate
-		)
-
-/datum/species/xenos/sentinel
-	name = "Xenophage Sentinel"
-	weeds_plasma_rate = 10
-	caste_name = "sentinel"
-	slowdown = 0
-	total_health = 125
-
-	has_organ = list(
-		"heart" =           /obj/item/organ/heart,
-		"brain" =           /obj/item/organ/brain/xeno,
-		"plasma vessel" =   /obj/item/organ/xenos/plasmavessel/sentinel,
-		"acid gland" =      /obj/item/organ/xenos/acidgland,
-		"hive node" =       /obj/item/organ/xenos/hivenode,
-		"nutrient vessel" = /obj/item/organ/diona/nutrients
-		)
-
-	inherent_verbs = list(
-		/mob/living/proc/ventcrawl,
-		/mob/living/carbon/human/proc/tackle,
-		/mob/living/carbon/human/proc/regurgitate,
-		/mob/living/carbon/human/proc/transfer_plasma,
-		/mob/living/carbon/human/proc/corrosive_acid,
-		/mob/living/carbon/human/proc/neurotoxin
-		)
-
-/datum/species/xenos/queen
-
-	name = "Xenophage Queen"
-	total_health = 250
-	weeds_heal_rate = 5
-	weeds_plasma_rate = 20
-	caste_name = "queen"
-	slowdown = 4
-	rarity_value = 10
-
-	has_organ = list(
-		"heart" =           /obj/item/organ/heart,
-		"brain" =           /obj/item/organ/brain/xeno,
-		"egg sac" =         /obj/item/organ/xenos/eggsac,
-		"plasma vessel" =   /obj/item/organ/xenos/plasmavessel/queen,
-		"acid gland" =      /obj/item/organ/xenos/acidgland,
-		"hive node" =       /obj/item/organ/xenos/hivenode,
-		"resin spinner" =   /obj/item/organ/xenos/resinspinner,
-		"nutrient vessel" = /obj/item/organ/diona/nutrients
-		)
-
-	inherent_verbs = list(
-		/mob/living/proc/ventcrawl,
-		/mob/living/carbon/human/proc/psychic_whisper,
-		/mob/living/carbon/human/proc/regurgitate,
-		/mob/living/carbon/human/proc/lay_egg,
-		/mob/living/carbon/human/proc/plant,
-		/mob/living/carbon/human/proc/transfer_plasma,
-		/mob/living/carbon/human/proc/corrosive_acid,
-		/mob/living/carbon/human/proc/neurotoxin,
-		/mob/living/carbon/human/proc/resin
-		)
-
-/datum/species/xenos/queen/handle_login_special(var/mob/living/carbon/human/H)
-	..()
-	// Make sure only one official queen exists at any point.
-	if(!alien_queen_exists(1,H))
-		H.real_name = "alien queen ([alien_number])"
-		H.name = H.real_name
-	else
-		H.real_name = "alien princess ([alien_number])"
-		H.name = H.real_name
 
 /datum/hud_data/alien
 
