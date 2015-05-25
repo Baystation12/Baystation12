@@ -129,7 +129,22 @@
 		return
 	return ..()
 
+/obj/machinery/portable_atmospherics/hydroponics/attack_ghost(var/mob/dead/observer/user)
+
+	if(!(harvest && seed && seed.has_mob_product))
+		return
+
+	var/datum/ghosttrap/plant/G = get_ghost_trap("living plant")
+	if(!G.assess_candidate(user))
+		return
+	var/response = alert(user, "Are you sure you want to harvest this [seed.display_name]?", "Living plant request", "Yes", "No")
+	if(response == "Yes")
+		harvest()
+	return
+
 /obj/machinery/portable_atmospherics/hydroponics/attack_generic(var/mob/user)
+
+	// Why did I ever think this was a good idea. TODO: move this onto the nymph mob.
 	if(istype(user,/mob/living/carbon/alien/diona))
 		var/mob/living/carbon/alien/diona/nymph = user
 

@@ -1,15 +1,10 @@
 /proc/spawn_diona_nymph_from_organ(var/obj/item/organ/organ)
 	if(!istype(organ))
 		return
-
-	//This is a terrible hack and I should be ashamed.
-	var/datum/seed/diona = plant_controller.seeds["diona"]
-	if(!diona)
-		qdel(src)
-
 	spawn(1) // So it has time to be thrown about by the gib() proc.
 		var/mob/living/carbon/alien/diona/D = new(get_turf(organ))
-		diona.request_player(D)
+		var/datum/ghosttrap/plant/P = get_ghost_trap("living plant")
+		P.request_player(D, "A diona nymph has split off from its gestalt. ")
 		qdel(organ)
 
 /obj/item/organ/external/diona
