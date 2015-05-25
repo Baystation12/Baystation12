@@ -50,3 +50,52 @@
 	icon_state = "xgibmid2"
 	organ_tag = "resin spinner"
 
+// Xenophage limbs.
+// This is getting very Dwarf Fortress.
+/obj/item/organ/external/arm/unbreakable/insectoid
+	name = "front left legs"
+	gender = PLURAL
+	joint = "front left leg junction"
+	amputation_point = "front left leg plate"
+
+/obj/item/organ/external/arm/right/unbreakable/insectoid
+	name = "front right legs"
+	gender = PLURAL
+	joint = "front right leg junction"
+	amputation_point = "front right leg plate"
+
+/obj/item/organ/external/leg/unbreakable/insectoid
+	name = "rear left legs"
+	gender = PLURAL
+	joint = "rear left leg junction"
+	amputation_point = "rear left leg plate"
+
+/obj/item/organ/external/leg/right/unbreakable/insectoid
+	name = "rear right legs"
+	gender = PLURAL
+	joint = "rear right leg junction"
+	amputation_point = "rear right leg plate"
+
+/obj/item/organ/external/foot/unbreakable/insectoid
+	name = "rear left claws"
+	gender = PLURAL
+	joint = "rear left ankles"
+	amputation_point = "rear left legs"
+
+/obj/item/organ/external/foot/right/unbreakable/insectoid
+	name = "rear right claws"
+	gender = PLURAL
+	joint = "rear right ankles"
+	amputation_point = "rear right legs"
+
+/obj/item/organ/external/hand/unbreakable/insectoid
+	name = "front left claws"
+	gender = PLURAL
+	joint = "front left ankles"
+	amputation_point = "front left legs"
+
+/obj/item/organ/external/hand/right/unbreakable/insectoid
+	name = "front right claws"
+	gender = PLURAL
+	joint = "front right ankles"
+	amputation_point = "front right legs"

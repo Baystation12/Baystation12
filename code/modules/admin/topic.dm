@@ -1114,16 +1114,6 @@
 		log_admin("[key_name(usr)] AIized [key_name(H)]")
 		H.AIize()
 
-	else if(href_list["makealien"])
-		if(!check_rights(R_SPAWN))	return
-
-		var/mob/living/carbon/human/H = locate(href_list["makealien"])
-		if(!istype(H))
-			usr << "This can only be used on instances of type /mob/living/carbon/human"
-			return
-
-		usr.client.cmd_admin_alienize(H)
-
 	else if(href_list["makeslime"])
 		if(!check_rights(R_SPAWN))	return
 
@@ -1749,7 +1739,7 @@
 				feedback_add_details("admin_secrets_fun_used","Aliens")
 				log_admin("[key_name(usr)] spawned an alien infestation", 1)
 				message_admins("\blue [key_name_admin(usr)] attempted an alien infestation", 1)
-				xenomorphs.random_spawn()
+				xenophages.random_spawn()
 			if("borers")
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","Borers")
@@ -2061,7 +2051,7 @@
 			if("aliens")
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","AL")
-				if(xenomorphs.random_spawn())
+				if(xenophages.random_spawn())
 					message_admins("[key_name_admin(usr)] has spawned aliens", 1)
 			if("spiders")
 				feedback_inc("admin_secrets_fun_used",1)

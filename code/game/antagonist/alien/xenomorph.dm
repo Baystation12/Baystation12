@@ -1,12 +1,12 @@
-var/datum/antagonist/xenos/xenomorphs
+var/datum/antagonist/xenos/xenophages
 
 /datum/antagonist/xenos
 	id = MODE_XENOMORPH
 	role_type = BE_ALIEN
-	role_text = "Xenomorph"
-	role_text_plural = "Xenomorphs"
+	role_text = "Xenophage"
+	role_text_plural = "Xenophages"
 	mob_path = /mob/living/carbon/alien/larva
-	bantype = "Xenomorph"
+	bantype = "Xenophage"
 	flags = ANTAG_OVERRIDE_MOB | ANTAG_RANDSPAWN | ANTAG_OVERRIDE_JOB | ANTAG_VOTABLE
 	welcome_text = "Hiss! You are a larval alien. Hide and bide your time until you are ready to evolve."
 
@@ -21,7 +21,7 @@ var/datum/antagonist/xenos/xenomorphs
 /datum/antagonist/xenos/New(var/no_reference)
 	..()
 	if(!no_reference)
-		xenomorphs = src
+		xenophages = src
 
 /datum/antagonist/xenos/Topic(href, href_list)
 	if (..())

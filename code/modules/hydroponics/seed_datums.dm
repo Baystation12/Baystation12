@@ -1101,3 +1101,13 @@
 	set_trait(TRAIT_PRODUCTION,7)
 	set_trait(TRAIT_YIELD,3)
 	set_trait(TRAIT_POTENCY,3)
+
+// Xenophage plant. TODO
+/datum/seed/xenophage
+	name = "xenophage"
+	seed_name = "alien weed"
+	display_name = "alien weeds"
+
+/datum/seed/xenophage/New()
+	..()
+	set_trait(TRAIT_IMMUTABLE,1)

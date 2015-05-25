@@ -1,7 +1,7 @@
 //Xenomicrobes
 
 /datum/disease/xeno_transformation
-	name = "Xenomorph Transformation"
+	name = "Xenophage Transformation"
 	max_stages = 5
 	spread = "Syringe"
 	spread_type = SPECIAL
@@ -53,9 +53,13 @@
 			affected_mob.updatehealth()
 			if(prob(40))
 				if(gibbed != 0) return 0
-				var/turf/T = find_loc(affected_mob)
-				gibs(T)
 				src.cure(0)
 				gibbed = 1
-				affected_mob:Alienize()
+				var/mob/living/carbon/human/H = affected_mob
+				if(istype(H))
+					var/turf/T = find_loc(affected_mob)
+					gibs(T)
+					H.set_species("Xenophage")
+					return
+				affected_mob.gib()
 

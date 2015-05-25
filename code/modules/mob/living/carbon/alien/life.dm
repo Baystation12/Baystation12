@@ -12,7 +12,8 @@
 	if (stat != DEAD) //still breathing
 
 		// GROW!
-		update_progression()
+		if(can_progress())
+			update_progression()
 
 		// Radiation.
 		handle_mutations_and_radiation()
@@ -32,6 +33,10 @@
 
 	if(client)
 		handle_regular_hud_updates()
+
+
+/mob/living/carbon/alien/proc/can_progress()
+	return 1
 
 /mob/living/carbon/alien/proc/handle_chemicals_in_body()
 	return // Nothing yet. Maybe check it out at a later date.
@@ -183,6 +188,6 @@
 		adjustFireLoss((environment.temperature - (T0C+66))/5) // Might be too high, check in testing.
 		if (fire) fire.icon_state = "fire2"
 		if(prob(20))
-			src << "\red You feel a searing heat!"
+			src << "<span class='danger'>You feel a searing heat!</span>"
 	else
 		if (fire) fire.icon_state = "fire0"
