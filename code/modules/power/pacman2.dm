@@ -43,21 +43,16 @@
 
 	RefreshParts()
 		var/temp_rating = 0
-		var/temp_reliability = 0
 		for(var/obj/item/weapon/stock_parts/SP in component_parts)
 			if(istype(SP, /obj/item/weapon/stock_parts/matter_bin))
 				//max_coins = SP.rating * SP.rating * 1000
 			else if(istype(SP, /obj/item/weapon/stock_parts/micro_laser) || istype(SP, /obj/item/weapon/stock_parts/capacitor))
 				temp_rating += SP.rating
-		for(var/obj/item/weapon/CP in component_parts)
-			temp_reliability += CP.reliability
-		reliability = min(round(temp_reliability / 4), 100)
 		power_gen = round(initial(power_gen) * (max(2, temp_rating) / 2))
 
 	examine(mob/user)
 		..(user)
 		user << "\blue The generator has [P.air_contents.phoron] units of fuel left, producing [power_gen] per cycle."
-		if(crit_fail) user << "\red The generator seems to have broken down."
 
 	handleInactive()
 		heat -= 2
@@ -108,8 +103,6 @@
 			else if(istype(O, /obj/item/weapon/crowbar) && !open)
 				var/obj/machinery/constructable_frame/machine_frame/new_frame = new /obj/machinery/constructable_frame/machine_frame(src.loc)
 				for(var/obj/item/I in component_parts)
-					if(I.reliability < 100)
-						I.crit_fail = 1
 					I.loc = src.loc
 				new_frame.state = 2
 				new_frame.icon_state = "box_1"
@@ -159,7 +152,7 @@
 		src.add_fingerprint(usr)
 		if(href_list["action"])
 			if(href_list["action"] == "enable")
-				if(!active && HasFuel() && !crit_fail)
+				if(!active && HasFuel())
 					active = 1
 					icon_state = "portgen1"
 					src.updateUsrDialog()

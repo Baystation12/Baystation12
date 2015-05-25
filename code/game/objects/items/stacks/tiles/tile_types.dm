@@ -27,7 +27,7 @@
 	throw_speed = 5
 	throw_range = 20
 	flags = CONDUCT
-	origin_tech = "biotech=1"
+	origin_tech = list(TECH_BIO = 1)
 
 /*
  * Wood

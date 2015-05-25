@@ -94,15 +94,6 @@
 						/obj/item/mecha_parts/part/durand_right_leg,
 						/obj/item/mecha_parts/part/durand_armour
 					),
-	/*"H.O.N.K"=list(
-						/obj/item/mecha_parts/chassis/honker,
-						/obj/item/mecha_parts/part/honker_torso,
-						/obj/item/mecha_parts/part/honker_head,
-						/obj/item/mecha_parts/part/honker_left_arm,
-						/obj/item/mecha_parts/part/honker_right_arm,
-						/obj/item/mecha_parts/part/honker_left_leg,
-						/obj/item/mecha_parts/part/honker_right_leg
-						), No need for HONK stuff*/
 	"Exosuit Equipment"=list(
 						/obj/item/mecha_parts/mecha_equipment/tool/hydraulic_clamp,
 						/obj/item/mecha_parts/mecha_equipment/tool/drill,
@@ -116,10 +107,7 @@
 						/obj/item/mecha_parts/mecha_equipment/generator,
 						///obj/item/mecha_parts/mecha_equipment/jetpack, //TODO MECHA JETPACK SPRITE MISSING
 						/obj/item/mecha_parts/mecha_equipment/weapon/energy/taser,
-						/obj/item/mecha_parts/mecha_equipment/weapon/ballistic/lmg,
-						///obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack/banana_mortar/mousetrap_mortar, HONK-related mech part
-						///obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack/banana_mortar, Also HONK-related
-						///obj/item/mecha_parts/mecha_equipment/weapon/honker Thirdly HONK-related
+						/obj/item/mecha_parts/mecha_equipment/weapon/ballistic/lmg
 						),
 
 	"Robotic Upgrade Modules" = list(
@@ -131,16 +119,8 @@
 						/obj/item/borg/upgrade/jetpack
 						),
 
-
-
-
-
-
 	"Misc"=list(/obj/item/mecha_parts/mecha_tracking)
 	)
-
-
-
 
 /obj/machinery/mecha_part_fabricator/New()
 	..()
@@ -293,14 +273,6 @@
 				world << "Duplicate part set definition for [src](\ref[src])"
 				return 0
 		return 1
-*/
-/*
-	New()
-		..()
-		src.add_part_to_set("Test",list("result"="/obj/item/mecha_parts/part/gygax_armour","time"=600,"metal"=75000,"diamond"=10000))
-		src.add_part_to_set("Test",list("result"="/obj/item/mecha_parts/part/ripley_left_arm","time"=200,"metal"=25000))
-		src.remove_part_set("Gygax")
-		return
 */
 
 /obj/machinery/mecha_part_fabricator/proc/output_parts_list(set_name)
@@ -771,8 +743,6 @@
 			M.state = 2
 			M.icon_state = "box_1"
 			for(var/obj/I in component_parts)
-				if(I.reliability != 100 && crit_fail)
-					I.crit_fail = 1
 				I.loc = src.loc
 			if(src.resources[DEFAULT_WALL_MATERIAL] >= 3750)
 				var/obj/item/stack/material/steel/G = new /obj/item/stack/material/steel(src.loc)

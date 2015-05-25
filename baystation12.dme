@@ -34,6 +34,7 @@
 #include "code\__HELPERS\unsorted.dm"
 #include "code\__HELPERS\vector.dm"
 #include "code\_defines\chemical_effects.dm"
+#include "code\_defines\research.dm"
 #include "code\_onclick\adjacent.dm"
 #include "code\_onclick\ai.dm"
 #include "code\_onclick\click.dm"

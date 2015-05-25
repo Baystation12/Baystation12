@@ -6,7 +6,7 @@
 	load_method = SPEEDLOADER //yup. until someone sprites a magazine for it.
 	max_shells = 22
 	caliber = "9mm"
-	origin_tech = "combat=4;materials=2"
+	origin_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 2)
 	slot_flags = SLOT_BELT
 	ammo_type = /obj/item/ammo_casing/c9mm
 	multi_aim = 1
@@ -25,7 +25,7 @@
 	load_method = SPEEDLOADER //yup. until someone sprites a magazine for it.
 	max_shells = 15
 	caliber = ".45"
-	origin_tech = "combat=5;materials=2;syndicate=8"
+	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 2, TECH_ILLEGAL = 8)
 	ammo_type = /obj/item/ammo_casing/c45
 
 /obj/item/weapon/gun/projectile/automatic/c20r
@@ -36,7 +36,7 @@
 	w_class = 3
 	force = 10
 	caliber = "12mm"
-	origin_tech = "combat=5;materials=2;syndicate=8"
+	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 2, TECH_ILLEGAL = 8)
 	slot_flags = SLOT_BELT|SLOT_BACK
 	fire_sound = 'sound/weapons/Gunshot_smg.ogg'
 	load_method = MAGAZINE
@@ -60,7 +60,7 @@
 	w_class = 4
 	force = 10
 	caliber = "a762"
-	origin_tech = "combat=6;materials=1;syndicate=4"
+	origin_tech = list(TECH_COMBAT = 6, TECH_MATERIAL = 1, TECH_ILLEGAL = 4)
 	slot_flags = SLOT_BACK
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/c762
@@ -83,7 +83,7 @@
 	item_state = "wt550"
 	w_class = 3
 	caliber = "9mm"
-	origin_tech = "combat=5;materials=2"
+	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 2)
 	slot_flags = SLOT_BELT
 	ammo_type = "/obj/item/ammo_casing/c9mmr"
 	fire_sound = 'sound/weapons/Gunshot_smg.ogg'
@@ -109,7 +109,7 @@
 	w_class = 4
 	force = 10
 	caliber = "a556"
-	origin_tech = "combat=8;materials=3"
+	origin_tech = list(TECH_COMBAT = 8, TECH_MATERIAL = 3)
 	ammo_type = "/obj/item/ammo_casing/a556"
 	fire_sound = 'sound/weapons/Gunshot.ogg'
 	slot_flags = SLOT_BACK
@@ -179,7 +179,7 @@
 	slot_flags = 0
 	max_shells = 50
 	caliber = "a762"
-	origin_tech = "combat=6;materials=1;syndicate=2"
+	origin_tech = list(TECH_COMBAT = 6, TECH_MATERIAL = 1, TECH_ILLEGAL = 2)
 	slot_flags = SLOT_BACK
 	ammo_type = "/obj/item/ammo_casing/a762"
 	fire_sound = 'sound/weapons/Gunshot_smg.ogg'

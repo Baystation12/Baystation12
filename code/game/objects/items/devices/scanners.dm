@@ -18,7 +18,7 @@ REAGENT SCANNER
 
 	matter = list(DEFAULT_WALL_MATERIAL = 150)
 
-	origin_tech = "magnets=1;engineering=1"
+	origin_tech = list(TECH_MAGNET = 1, TECH_ENGINERING = 1)
 
 /obj/item/device/t_scanner/attack_self(mob/user)
 
@@ -74,7 +74,7 @@ REAGENT SCANNER
 	throw_speed = 5
 	throw_range = 10
 	matter = list(DEFAULT_WALL_MATERIAL = 200)
-	origin_tech = "magnets=1;biotech=1"
+	origin_tech = list(TECH_MAGNET = 1, TECH_BIO = 1)
 	var/mode = 1;
 
 
@@ -242,7 +242,7 @@ REAGENT SCANNER
 
 	matter = list(DEFAULT_WALL_MATERIAL = 30,"glass" = 20)
 
-	origin_tech = "magnets=1;engineering=1"
+	origin_tech = list(TECH_MAGNET = 1, TECH_ENGINERING = 1)
 
 /obj/item/device/analyzer/attack_self(mob/user as mob)
 
@@ -289,7 +289,7 @@ REAGENT SCANNER
 
 	matter = list(DEFAULT_WALL_MATERIAL = 30,"glass" = 20)
 
-	origin_tech = "magnets=2;biotech=2"
+	origin_tech = list(TECH_MAGNET = 2, TECH_BIO = 2)
 	var/details = 0
 	var/recent_fail = 0
 
@@ -308,9 +308,6 @@ REAGENT SCANNER
 /obj/item/device/mass_spectrometer/attack_self(mob/user as mob)
 	if (user.stat)
 		return
-	if (crit_fail)
-		user << "\red This device has critically failed and is no longer functional!"
-		return
 	if (!(istype(user, /mob/living/carbon/human) || ticker) && ticker.mode.name != "monkey")
 		user << "\red You don't have the dexterity to do this!"
 		return
@@ -326,19 +323,10 @@ REAGENT SCANNER
 				break
 		var/dat = "Trace Chemicals Found: "
 		for(var/R in blood_traces)
-			if(prob(reliability))
-				if(details)
-					dat += "[R] ([blood_traces[R]] units) "
-				else
-					dat += "[R] "
-				recent_fail = 0
+			if(details)
+				dat += "[R] ([blood_traces[R]] units) "
 			else
-				if(recent_fail)
-					crit_fail = 1
-					reagents.clear_reagents()
-					return
-				else
-					recent_fail = 1
+				dat += "[R] "
 		user << "[dat]"
 		reagents.clear_reagents()
 	return
@@ -347,7 +335,7 @@ REAGENT SCANNER
 	name = "advanced mass spectrometer"
 	icon_state = "adv_spectrometer"
 	details = 1
-	origin_tech = "magnets=4;biotech=2"
+	origin_tech = list(TECH_MAGNET = 4, TECH_BIO = 2)
 
 /obj/item/device/reagent_scanner
 	name = "reagent scanner"
@@ -362,7 +350,7 @@ REAGENT SCANNER
 	throw_range = 20
 	matter = list(DEFAULT_WALL_MATERIAL = 30,"glass" = 20)
 
-	origin_tech = "magnets=2;biotech=2"
+	origin_tech = list(TECH_MAGNET = 2, TECH_BIO = 2)
 	var/details = 0
 	var/recent_fail = 0
 
@@ -376,24 +364,13 @@ REAGENT SCANNER
 		return
 	if(!istype(O))
 		return
-	if (crit_fail)
-		user << "\red This device has critically failed and is no longer functional!"
-		return
 
 	if(!isnull(O.reagents))
 		var/dat = ""
 		if(O.reagents.reagent_list.len > 0)
 			var/one_percent = O.reagents.total_volume / 100
 			for (var/datum/reagent/R in O.reagents.reagent_list)
-				if(prob(reliability))
-					dat += "\n \t \blue [R][details ? ": [R.volume / one_percent]%" : ""]"
-					recent_fail = 0
-				else if(recent_fail)
-					crit_fail = 1
-					dat = null
-					break
-				else
-					recent_fail = 1
+				dat += "\n \t \blue [R][details ? ": [R.volume / one_percent]%" : ""]"
 		if(dat)
 			user << "\blue Chemicals found: [dat]"
 		else
@@ -407,13 +384,13 @@ REAGENT SCANNER
 	name = "advanced reagent scanner"
 	icon_state = "adv_spectrometer"
 	details = 1
-	origin_tech = "magnets=4;biotech=2"
+	origin_tech = list(TECH_MAGNET = 4, TECH_BIO = 2)
 
 /obj/item/device/slime_scanner
 	name = "slime scanner"
 	icon_state = "adv_spectrometer"
 	item_state = "analyzer"
-	origin_tech = "biotech=1"
+	origin_tech = list(TECH_BIO = 1)
 	w_class = 2.0
 	flags = CONDUCT
 	throwforce = 0

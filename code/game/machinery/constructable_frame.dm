@@ -27,9 +27,6 @@
 
 /obj/machinery/constructable_frame/machine_frame
 	attackby(obj/item/P as obj, mob/user as mob)
-		if(P.crit_fail)
-			user << "\red This part is faulty, you cannot add this to the machine!"
-			return
 		switch(state)
 			if(1)
 				if(istype(P, /obj/item/stack/cable_coil))

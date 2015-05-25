@@ -55,14 +55,14 @@
 	name = "diona nymph"
 	desc = "It's a tiny plant critter."
 	icon_state = "nymph"
-	origin_tech = "magnets=3;biotech=5"
+	origin_tech = list(TECH_MAGNET = 3, TECH_BIO = 5)
 	slot_flags = SLOT_HEAD | SLOT_OCLOTHING
 
 /obj/item/weapon/holder/drone
 	name = "maintenance drone"
 	desc = "It's a small maintenance robot."
 	icon_state = "drone"
-	origin_tech = "magnets=3;engineering=5"
+	origin_tech = list(TECH_MAGNET = 3, TECH_ENGINERING = 5)
 
 /obj/item/weapon/holder/cat
 	name = "cat"
@@ -90,7 +90,7 @@
 	name = "cortical borer"
 	desc = "It's a slimy brain slug. Gross."
 	icon_state = "borer"
-	origin_tech = "biotech=6"
+	origin_tech = list(TECH_BIO = 6)
 
 /obj/item/weapon/holder/monkey
 	name = "monkey"
