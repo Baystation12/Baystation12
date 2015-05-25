@@ -81,7 +81,8 @@
 	return
 
 /obj/item/weapon/screwdriver/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
-	if(!istype(M))	return ..()
+	if(!istype(M) || user.a_intent == "help")
+		return ..()
 	if(user.zone_sel.selecting != "eyes" && user.zone_sel.selecting != "head")
 		return ..()
 	if((CLUMSY in user.mutations) && prob(50))
@@ -329,8 +330,6 @@
 		var/obj/item/organ/eyes/E = H.internal_organs_by_name["eyes"]
 		if(!E)
 			return
-		if(H.species.flags & IS_SYNTHETIC)
-			return
 		switch(safety)
 			if(1)
 				usr << "\red Your eyes sting a little."
@@ -427,16 +426,12 @@
 		if(!(S.status & ORGAN_ROBOT) || user.a_intent != I_HELP)
 			return ..()
 
-		if(istype(M,/mob/living/carbon/human))
-			var/mob/living/carbon/human/H = M
-			if(H.species.flags & IS_SYNTHETIC)
-				if(M == user)
-					user << "\red You can't repair damage to your own body - it's against OH&S."
-					return
-
 		if(S.brute_dam)
-			S.heal_damage(15,0,0,1)
-			user.visible_message("\red \The [user] patches some dents on \the [M]'s [S.name] with \the [src].")
+			if(S.brute_dam < ROBOLIMB_SELF_REPAIR_CAP)
+				S.heal_damage(15,0,0,1)
+				user.visible_message("\red \The [user] patches some dents on \the [M]'s [S.name] with \the [src].")
+			else
+				user << "\red The damage is far too severe to patch over externally."
 			return
 		else
 			user << "Nothing to fix!"

@@ -1,0 +1,6 @@
+author: Atlantis
+delete-after: True
+
+changes: 
+  - rscadd: "NanoUI for Robotics Control Console"
+  - rscdel: "NanoUI for Supermatter Crystal - AI/Robot only, purely informational"

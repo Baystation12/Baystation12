@@ -628,3 +628,15 @@
 		new /obj/item/weapon/light/tube(src)
 	for(var/i = 0; i < 7; i++)
 		new /obj/item/weapon/light/bulb(src)
+
+/obj/item/weapon/storage/box/freezer
+	name = "portable freezer"
+	desc = "This nifty shock-resistant device will keep your 'groceries' nice and non-spoiled."
+	icon = 'icons/obj/storage.dmi'
+	icon_state = "portafreezer"
+	item_state = "medicalpack"
+	storage_slots=7
+	max_w_class = 3
+	can_hold = list(/obj/item/organ, /obj/item/weapon/reagent_containers/food, /obj/item/weapon/reagent_containers/glass)
+	max_storage_space = 21
+	use_to_pickup = 1 // for picking up broken bulbs, not that most people will try

@@ -74,6 +74,22 @@
 	icon_state = "cat"
 	origin_tech = null
 
+/obj/item/weapon/holder/mouse
+	name = "mouse"
+	desc = "It's a small rodent."
+	icon_state = "mouse_gray"
+	origin_tech = null
+	w_class = 1
+
+/obj/item/weapon/holder/mouse/gray
+	icon_state = "mouse_gray"
+
+/obj/item/weapon/holder/mouse/white
+	icon_state = "mouse_white"
+
+/obj/item/weapon/holder/mouse/brown
+	icon_state = "mouse_brown"
+
 /obj/item/weapon/holder/borer
 	name = "cortical borer"
 	desc = "It's a slimy brain slug. Gross."

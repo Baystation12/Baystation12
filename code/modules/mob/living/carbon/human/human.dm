@@ -746,10 +746,17 @@
 			xylophone=0
 	return
 
+/mob/living/carbon/human/proc/check_has_mouth()
+	// Todo, check stomach organ when implemented.
+	var/obj/item/organ/external/head/H = get_organ("head")
+	if(!H || !H.can_intake_reagents)
+		return 0
+	return 1
+
 /mob/living/carbon/human/proc/vomit()
 
-	if(species.flags & IS_SYNTHETIC)
-		return //Machines don't throw up.
+	if(!check_has_mouth())
+		return
 
 	if(!lastpuke)
 		lastpuke = 1
@@ -1078,7 +1085,7 @@
 		usr << "<span class='danger'>[src] has no pulse!</span>"	//it is REALLY UNLIKELY that a dead person would check his own pulse
 		return
 
-	usr << "You must [self ? "" : "both"] stand until counting is finished."
+	usr << "You must[self ? "" : " both"] remain still until counting is finished."
 	if(do_mob(usr, src, 60))
 		usr << "<span class='notice'>[self ? "Your" : "[src]'s"] pulse is [src.get_pulse(GETPULSE_HAND)].</span>"
 	else
@@ -1217,16 +1224,26 @@
 		else
 			target_zone = user.zone_sel.selecting
 
-	switch(target_zone)
-		if("head")
-			if(head && head.flags & THICKMATERIAL)
-				. = 0
-		else
-			if(wear_suit && wear_suit.flags & THICKMATERIAL)
-				. = 0
+	var/obj/item/organ/external/affecting = get_organ(target_zone)
+	var/fail_msg
+	if(!affecting)
+		. = 0
+		fail_msg = "They are missing that limb."
+	else if (affecting.status & ORGAN_ROBOT)
+		. = 0
+		fail_msg = "That limb is robotic."
+	else
+		switch(target_zone)
+			if("head")
+				if(head && head.flags & THICKMATERIAL)
+					. = 0
+			else
+				if(wear_suit && wear_suit.flags & THICKMATERIAL)
+					. = 0
 	if(!. && error_msg && user)
- 		// Might need re-wording.
-		user << "<span class='alert'>There is no exposed flesh or thin material [target_zone == "head" ? "on their head" : "on their body"] to inject into.</span>"
+		if(!fail_msg)
+			fail_msg = "There is no exposed flesh or thin material [target_zone == "head" ? "on their head" : "on their body"] to inject into."
+		user << "<span class='alert'>[fail_msg]</span>"
 
 /mob/living/carbon/human/print_flavor_text(var/shrink = 1)
 	var/list/equipment = list(src.head,src.wear_mask,src.glasses,src.w_uniform,src.wear_suit,src.gloves,src.shoes)
