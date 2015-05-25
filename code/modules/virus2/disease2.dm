@@ -66,6 +66,12 @@
 		if(prob(5))
 			mob.antibodies |= antigen // 20% immunity is a good chance IMO, because it allows finding an immune person easily
 
+	// Some species are flat out immune to organic viruses.
+	var/mob/living/carbon/human/H = mob
+	if(istype(H) && H.species.virus_immune)
+		cure(mob)
+		return
+
 	if(mob.radiation > 50)
 		if(prob(1))
 			majormutate()
