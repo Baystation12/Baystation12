@@ -7,7 +7,7 @@ obj/machinery/atmospherics/unary/oxygen_generator
 	desc = ""
 
 	dir = SOUTH
-	init_dirs = SOUTH
+	init_dirs = 1
 
 	var/on = 0
 

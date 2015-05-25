@@ -6,7 +6,7 @@
 	desc = "For connecting portables devices related to atmospherics control."
 
 	dir = SOUTH
-	init_dirs = SOUTH
+	init_dirs = 1
 
 	var/obj/machinery/portable_atmospherics/connected_device
 

@@ -1,6 +1,6 @@
 /obj/machinery/atmospherics/unary
 	dir = SOUTH
-	init_dirs = SOUTH
+	init_dirs = 1
 	//layer = TURF_LAYER+0.1
 
 	var/datum/gas_mixture/air_contents

@@ -51,7 +51,7 @@
 	return 1
 
 
-/obj/machinery/atmospherics/portables_connector/buildFrom(var/mob/usr,var/obj/item/pipe/pipe)
+/obj/machinery/atmospherics/unary/portables_connector/buildFrom(var/mob/usr,var/obj/item/pipe/pipe)
 	return ..()
 
 
