@@ -2560,7 +2560,7 @@
 	slices_num = 6
 	New()
 		..()
-		reagents.add_reagent("protein", 50)
+		reagents.add_reagent("protein", 44)
 		reagents.add_reagent("tomatojuice", 6)
 		bitesize = 2
 
@@ -2598,7 +2598,7 @@
 	slices_num = 6
 	New()
 		..()
-		reagents.add_reagent("nutriment", 30)
+		reagents.add_reagent("nutriment", 25)
 		reagents.add_reagent("protein", 5)
 		reagents.add_reagent("tomatojuice", 6)
 		reagents.add_reagent("imidazoline", 12)
