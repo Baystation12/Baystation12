@@ -11,7 +11,6 @@
 		)
 
 /obj/item/weapon/holder/New()
-	item_state = icon_state
 	..()
 	processing_objects.Add(src)
 
@@ -51,7 +50,7 @@
 	grabber << "You scoop up [src]."
 	src << "[grabber] scoops you up."
 	grabber.status_flags |= PASSEMOTES
-	return
+	return H
 
 //Mob specific holders.
 
@@ -115,3 +114,8 @@
 	name = "neaera"
 	desc = "It's a neaera."
 	icon_state = "neara"
+
+/obj/item/weapon/holder/pai
+	name = "pAI"
+	desc = "It's a little robot."
+	icon_state = "pai"
