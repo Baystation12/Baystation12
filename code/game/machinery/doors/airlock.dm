@@ -30,6 +30,9 @@
 	var/hasShocked = 0 //Prevents multiple shocks from happening
 	var/secured_wires = 0
 	var/datum/wires/airlock/wires = null
+	
+	var/open_sound_powered = 'sound/machines/airlock.ogg'
+	var/open_sound_unpowered = 'sound/machines/airlock_creaking.ogg'
 
 /obj/machinery/door/airlock/attack_generic(var/mob/user, var/damage)
 	if(stat & (BROKEN|NOPOWER))
@@ -79,6 +82,7 @@
 	name = "Glass Airlock"
 	icon = 'icons/obj/doors/Doorglass.dmi'
 	hitsound = 'sound/effects/Glasshit.ogg'
+	open_sound_powered = 'sound/machines/windowdoor.ogg'
 	maxhealth = 300
 	explosion_resistance = 5
 	opacity = 0
@@ -851,10 +855,13 @@ About the new airlock wires panel:
 	if(!can_open(forced))
 		return 0
 	use_power(360)	//360 W seems much more appropriate for an actuator moving an industrial door capable of crushing people
-	if(istype(src, /obj/machinery/door/airlock/glass))
-		playsound(src.loc, 'sound/machines/windowdoor.ogg', 100, 1)
+	
+	//if the door is unpowered then it doesn't make sense to hear the woosh of a pneumatic actuator
+	if(arePowerSystemsOn())
+		playsound(src.loc, open_sound_powered, 100, 1)
 	else
-		playsound(src.loc, 'sound/machines/airlock.ogg', 30, 1)
+		playsound(src.loc, open_sound_unpowered, 100, 1)
+	
 	if(src.closeOther != null && istype(src.closeOther, /obj/machinery/door/airlock/) && !src.closeOther.density)
 		src.closeOther.close()
 	return ..()
