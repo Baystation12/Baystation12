@@ -37,6 +37,8 @@
 
 //NOTE: STUFF STOLEN FROM AIRLOCK.DM thx
 
+/obj/machinery/power/apc/critical
+	is_critical = 1
 
 /obj/machinery/power/apc/high
 	cell_type = /obj/item/weapon/cell/high
@@ -44,8 +46,8 @@
 /obj/machinery/power/apc/super
 	cell_type = /obj/item/weapon/cell/super
 
-/obj/machinery/power/apc/super/equipment
-	equipment = 2
+/obj/machinery/power/apc/super/critical
+	is_critical = 1
 
 /obj/machinery/power/apc/hyper
 	cell_type = /obj/item/weapon/cell/hyper
