@@ -277,7 +277,7 @@ var/list/ai_verbs_default = list(
 
 			if(Entry[1] == src.ckey && Entry[2] == src.real_name)
 				custom_sprite = 1 //They're in the list? Custom sprite time
-				icon = 'icons/mob/custom-synthetic.dmi'
+				icon = CUSTOM_ITEM_SYNTH
 
 		//if(icon_state == initial(icon_state))
 	var/icontype = ""

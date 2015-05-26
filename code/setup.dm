@@ -972,6 +972,9 @@ var/list/be_special_flags = list(
 #ifndef CUSTOM_ITEM_MOB
 #define CUSTOM_ITEM_MOB 'icons/mob/custom_items_mob.dmi'
 #endif
+#ifndef CUSTOM_ITEM_SYNTH
+#define CUSTOM_ITEM_SYNTH 'icons/mob/custom_synthetic.dmi'
+#endif
 
 #define SHARD_SHARD "shard"
 #define SHARD_SHRAPNEL "shrapnel"

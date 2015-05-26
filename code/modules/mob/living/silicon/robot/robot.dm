@@ -317,7 +317,7 @@
 
 			if(Entry[1] == src.ckey && Entry[2] == src.real_name) //They're in the list? Custom sprite time, var and icon change required
 				custom_sprite = 1
-				icon = 'icons/mob/custom-synthetic.dmi'
+				icon = CUSTOM_ITEM_SYNTH
 				if(icon_state == "robot")
 					icon_state = "[src.ckey]-Standard"
 

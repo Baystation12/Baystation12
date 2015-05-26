@@ -5,6 +5,10 @@
 	icon = 'icons/obj/objects.dmi'
 	slot_flags = SLOT_HEAD
 	sprite_sheets = list("Vox" = 'icons/mob/species/vox/head.dmi')
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/items/lefthand_holder.dmi',
+		slot_r_hand_str = 'icons/mob/items/righthand_holder.dmi',
+		)
 
 /obj/item/weapon/holder/New()
 	item_state = icon_state
