@@ -88,7 +88,7 @@
 			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/imp_uplink, 10, "Uplink Implant (Contains 5 Telecrystals)", "UI")
 			),
 		"Medical" = list(
-			new/datum/uplink_item(/obj/item/weapon/storage/box/donkpockets, 1, "Box of Sin-Pockets", "DP"),
+			new/datum/uplink_item(/obj/item/weapon/storage/box/sinpockets, 1, "Box of Sin-Pockets", "DP"),
 			new/datum/uplink_item(/obj/item/weapon/storage/firstaid/surgery, 5, "Surgery kit", "SK"),
 			new/datum/uplink_item(/obj/item/weapon/storage/firstaid/combat, 5, "Combat medical kit", "CM")
 		),
