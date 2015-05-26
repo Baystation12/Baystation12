@@ -70,8 +70,8 @@ LOG_PDA
 ## sql switching
 # SQL_ENABLED
 
-## disconnect players who did nothing during 10 minutes
-# KICK_INACTIVE
+## disconnect players who did nothing during the set amount of minutes
+# KICK_INACTIVE 10
 
 ## Use Mentors instead of Moderators.  Mentors are designed with the idea that
 ###they help in pushing new people to be better at roleplay.  If you uncomment
