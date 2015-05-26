@@ -33,51 +33,48 @@ In short:
 
 
 /datum/universal_state/hell/OnTurfChange(var/turf/T)
-	var/turf/space/spess = T
-	if(istype(spess))
-		spess.overlays += "hell01"
+	if(istype(T, /turf/space))
+		T.color = "#FF0000"
+		T.set_light(2, 2, "#FF0000")
+	else
+		T.color = initial(T.color)
+		T.set_light(0)
 
 // Apply changes when entering state
 /datum/universal_state/hell/OnEnter()
 	set background = 1
 	garbage_collector.garbage_collect = 0
+
 	escape_list = get_area_turfs(locate(/area/hallway/secondary/exit))
 
 	//Separated into separate procs for profiling
 	AreaSet()
-	OverlaySet()
 	MiscSet()
 	APCSet()
 	KillMobs()
-	AmbientSet()
+	OverlayAndAmbientSet()
 
 	runedec += 9000	//basically removing the rune cap
 
-/datum/universal_state/hell/proc/AreaSet()
-	for(var/area/A in world)
-		if(A.name=="Space")
-			continue
 
-		// Reset all alarms.
-		A.fire     = null
-		A.atmos    = 1
-		A.atmosalm = 0
-		A.poweralm = 1
-		A.party    = null
+/datum/universal_state/hell/proc/AreaSet()
+	for(var/area/A in all_areas)
+		if(!istype(A,/area) || istype(A, /area/space))
+			continue
 
 		A.updateicon()
 
-/datum/universal_state/hell/proc/OverlaySet()
-	var/image/I = image("icon" = 'icons/turf/space.dmi', "icon_state" = "hell01", "layer" = 10)
-	for(var/turf/space/spess in world)
-		spess.overlays += I
+/datum/universal_state/hell/OverlayAndAmbientSet()
+	spawn(0)
+		for(var/atom/movable/lighting_overlay/L in world)
+			L.update_lumcount(1, 0, 0)
 
-/datum/universal_state/hell/proc/AmbientSet()
-	for(var/atom/movable/lighting_overlay/L in world)
-		L.update_lumcount(1, 0, 0)
+		for(var/turf/space/T in turfs)
+			T.color = "#FF0000"
+			T.set_light(2, 2, "#FF0000")
 
 /datum/universal_state/hell/proc/MiscSet()
-	for(var/turf/simulated/floor/T in world)
+	for(var/turf/simulated/floor/T in turfs)
 		if(!T.holy && prob(1))
 			new /obj/effect/gateway/active/cult(T)
 
@@ -87,7 +84,7 @@ In short:
 
 /datum/universal_state/hell/proc/APCSet()
 	for (var/obj/machinery/power/apc/APC in machines)
-		if (!(APC.stat & BROKEN) && !istype(APC.area,/area/turret_protected/ai))
+		if (!(APC.stat & BROKEN) && !APC.is_critical)
 			APC.chargemode = 0
 			if(APC.cell)
 				APC.cell.charge = 0

@@ -10,7 +10,7 @@
 	announce=0
 	narnar=0
 
-	layer=12 // ITS SO BRIGHT
+	layer=LIGHTING_LAYER+2 // ITS SO BRIGHT
 
 	consume_range = 6
 
@@ -35,7 +35,17 @@
 		return 0
 
 	if (istype(A, /mob/living/))
+		var/mob/living/L = A
+		if(L.buckled && istype(L.buckled,/obj/structure/bed/))
+			var/turf/O = L.buckled
+			do_teleport(O, pick(endgame_safespawns))
+			L.loc = O.loc
+		else
+			do_teleport(L, pick(endgame_safespawns)) //dead-on precision
+
+	else if (istype(A, /obj/mecha/))
 		do_teleport(A, pick(endgame_safespawns)) //dead-on precision
+
 	else if (isturf(A))
 		var/turf/T = A
 		var/dist = get_dist(T, src)
@@ -51,6 +61,9 @@
 				continue
 
 			if (dist > consume_range)
+				if(!(AM.singuloCanEat()))
+					continue
+
 				if (101 == AM.invisibility)
 					continue
 
@@ -63,19 +76,19 @@
 	var/image/riftimage = null
 
 /mob/proc/see_rift(var/obj/singularity/narsie/large/exit/R)
-	if((R.z == src.z) && (get_dist(R,src) <= (R.consume_range+10)) && !(R in view(src)))
+	var/turf/T_mob = get_turf(src)
+	if((R.z == T_mob.z) && (get_dist(R,T_mob) <= (R.consume_range+10)) && !(R in view(T_mob)))
 		if(!riftimage)
-			riftimage = image('icons/obj/rift.dmi',src.loc,"rift",12,1)
+			riftimage = image('icons/obj/rift.dmi',T_mob,"rift",LIGHTING_LAYER+2,1)
 			riftimage.mouse_opacity = 0
 
-		var/new_x = 32 * (R.x - src.x) + R.pixel_x
-		var/new_y = 32 * (R.y - src.y) + R.pixel_y
+		var/new_x = 32 * (R.x - T_mob.x) + R.pixel_x
+		var/new_y = 32 * (R.y - T_mob.y) + R.pixel_y
 		riftimage.pixel_x = new_x
 		riftimage.pixel_y = new_y
-		riftimage.loc = src.loc
+		riftimage.loc = T_mob
 
 		src << riftimage
-
 	else
 		if(riftimage)
 			qdel(riftimage)

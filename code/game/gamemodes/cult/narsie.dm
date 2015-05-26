@@ -1,4 +1,5 @@
 var/global/narsie_behaviour = "CultStation13"
+var/global/narsie_cometh = 0
 var/global/list/narsie_list = list()
 /obj/singularity/narsie //Moving narsie to its own file for the sake of being clearer
 	name = "Nar-Sie"
@@ -47,13 +48,15 @@ var/global/list/narsie_list = list()
 
 	narsie_spawn_animation()
 
-	if(narnar)
-		SetUniversalState(/datum/universal_state/hell)
+	if(!narsie_cometh)//so we don't initiate Hell more than one time.
+		if(narnar)
+			SetUniversalState(/datum/universal_state/hell)
+		narsie_cometh = 1
 
-	spawn(10 SECONDS)
-		if(emergency_shuttle && emergency_shuttle.can_call())
-			emergency_shuttle.call_evac()
-			emergency_shuttle.launch_time = 0	// Cannot recall
+		spawn(10 SECONDS)
+			if(emergency_shuttle)
+				emergency_shuttle.call_evac()
+				emergency_shuttle.launch_time = 0	// Cannot recall
 
 /obj/singularity/narsie/process()
 	eat()

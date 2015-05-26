@@ -98,6 +98,7 @@
 	var/datum/wires/apc/wires = null
 	var/update_state = -1
 	var/update_overlay = -1
+	var/is_critical = 0
 	var/global/status_overlays = 0
 	var/updating_icon = 0
 	var/global/list/status_overlays_lock

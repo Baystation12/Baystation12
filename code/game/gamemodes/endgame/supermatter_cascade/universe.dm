@@ -1,3 +1,5 @@
+var/global/universe_has_ended = 0
+
 
 /datum/universal_state/supermatter_cascade
  	name = "Supermatter Cascade"
@@ -11,9 +13,13 @@
 	return 0
 
 /datum/universal_state/supermatter_cascade/OnTurfChange(var/turf/T)
-	var/turf/space/spess = T
-	if(istype(spess))
-		spess.overlays += "end01"
+	if(istype(T, /turf/space))
+		T.color = "#0066FF"
+		T.set_light(2, 2, "#0066FF")
+	else
+		T.color = initial(T.color)
+		T.set_light(0)
+
 
 /datum/universal_state/supermatter_cascade/DecayTurf(var/turf/T)
 	if(istype(T,/turf/simulated/wall))
@@ -46,13 +52,13 @@
 		emergency_shuttle.recall()
 
 	AreaSet()
-	OverlaySet()
 	MiscSet()
 	APCSet()
-	AmbientSet()
+	OverlayAndAmbientSet()
 
 	// Disable Nar-Sie.
 	cult.allow_narsie = 0
+
 	PlayerSet()
 
 	new /obj/singularity/narsie/large/exit(pick(endgame_exits))
@@ -64,64 +70,50 @@ There's been a galaxy-wide electromagnetic pulse.  All of our systems are heavil
 
 You have five minutes before the universe collapses. Good l\[\[###!!!-
 
-AUTOMATED ALERT: Link to [command_name()] lost."}
+AUTOMATED ALERT: Link to [command_name()] lost.
+
+The access requirements on the Asteroid Shuttles' consoles have now been revoked.
+"}
 		priority_announcement.Announce(txt,"SUPERMATTER CASCADE DETECTED")
+
+		for(var/obj/machinery/computer/shuttle_control/C in machines)
+			if(istype(C, /obj/machinery/computer/shuttle_control/research) || istype(C, /obj/machinery/computer/shuttle_control/mining))
+				C.req_access = list()
+				C.req_one_access = list()
+
 		sleep(5 MINUTES)
-		ticker.declare_completion()
 		ticker.station_explosion_cinematic(0,null) // TODO: Custom cinematic
 
-		world << "<B>Resetting in 30 seconds!</B>"
-
-		feedback_set_details("end_error","Universe ended")
-
-		if(blackbox)
-			blackbox.save_all_data_to_sql()
-
-		sleep(300)
-		log_game("Rebooting due to universal collapse")
-		world.Reboot()
+		universe_has_ended = 1
 		return
 
 /datum/universal_state/supermatter_cascade/proc/AreaSet()
-	for(var/area/A in world)
-		if(A.z in config.admin_levels)
+	for(var/area/A in all_areas)
+		if(!istype(A,/area) || istype(A, /area/space) || istype(A,/area/beach))
 			continue
-		if(istype(A,/area/space))
-			continue
-
-		// Reset all alarms.
-		A.fire     = null
-		A.atmos    = 1
-		A.atmosalm = 0
-		A.poweralm = 1
-
-		// Slap on random alerts
-		if(prob(25))
-			switch(rand(1,4))
-				if(1)
-					A.fire=1
-				if(2)
-					A.atmosalm=1
 
 		A.updateicon()
 
-/datum/universal_state/supermatter_cascade/proc/OverlaySet()
-	for(var/turf/space/spess in world)
-		spess.overlays += "end01"
+/datum/universal_state/supermatter_cascade/OverlayAndAmbientSet()
+	spawn(0)
+		for(var/atom/movable/lighting_overlay/L in world)
+			if(L.z in config.admin_levels)
+				L.update_lumcount(1,1,1)
+			else
+				L.update_lumcount(0.0, 0.4, 1)
 
-/datum/universal_state/supermatter_cascade/proc/AmbientSet()
-	for(var/atom/movable/lighting_overlay/L in world)
-		if(!(L.z in config.admin_levels))
-			L.update_lumcount(0.5, 1, 0)
+		for(var/turf/space/T in turfs)
+			T.color = "#0066FF"
+			T.set_light(2, 2, "#0066FF")
 
 /datum/universal_state/supermatter_cascade/proc/MiscSet()
-	for (var/obj/machinery/firealarm/alm in world)
+	for (var/obj/machinery/firealarm/alm in machines)
 		if (!(alm.stat & BROKEN))
 			alm.ex_act(2)
 
 /datum/universal_state/supermatter_cascade/proc/APCSet()
-	for (var/obj/machinery/power/apc/APC in world)
-		if (!(APC.stat & BROKEN))
+	for (var/obj/machinery/power/apc/APC in machines)
+		if (!(APC.stat & BROKEN) && !APC.is_critical)
 			APC.chargemode = 0
 			if(APC.cell)
 				APC.cell.charge = 0
