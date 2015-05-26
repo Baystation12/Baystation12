@@ -1,0 +1,4 @@
+author: PsiOmegaDelta
+delete-after: True
+changes: 
+  - tweak: "The inactive check process now respects client holder status and can be configured how long clients may remain inactive before being kicked."
