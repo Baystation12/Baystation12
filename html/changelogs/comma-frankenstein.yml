@@ -1,9 +1,0 @@
-
-author: Chinsky
-
-delete-after: True
-
-changes: 
-  - rscadd: "Meat limbs now can be attached. Use limb on missing area, then hemostat to finalize it."
-  - rscadd: "Limbs from other races can be now attached. They'll cause rejection, but it can be kept at bay with spaceacilline to some point. Species special attack is carried over too, i.e. you can clawn people if you sew a cathand to yourself."
-  - rscadd: "Limbs that are left in open will rot in ~7 minutes. Use freezers or cryobags to stop it. You can still attach them, but you wish you couldn't."

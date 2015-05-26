@@ -1,5 +1,0 @@
-author: Zuhayr
-delete-after: True
-changes: 
-  - rscadd: "Added a ghost requisition system for posibrains and living plants."
-  - rscadd: "Added attack_ghost() to hydro trays and posibrains to allow ghosts to enter them."
