@@ -1,0 +1,5 @@
+author: Zuhayr
+delete-after: True
+changes: 
+  - rscadd: "Unfolded pAIs can now be scooped up and worn as hats."
+  - tweak: "Scoop-up behavior is now standardized to selecting help intent and dragging their icon onto yours."
