@@ -116,26 +116,31 @@
 	if(mob.stat != DEAD)
 		display_name = mob.name
 
-	var/prefix
-	var/admin_stuff
 	for(var/client/target in clients)
 		if(target.prefs.toggles & CHAT_LOOC)
-			admin_stuff = ""
+			var/prefix = ""
+			var/admin_stuff = ""
+			var/send = 0
+
 			if(target in admins)
-				prefix = "(R)"
 				admin_stuff += "/([key])"
 				if(target != src)
 					admin_stuff += "(<A HREF='?src=\ref[target.holder];adminplayerobservejump=\ref[mob]'>JMP</A>)"
-			if(target.mob in heard)
-				prefix = ""
 
-			var/send = 0
-			if((target.mob in heard) || (target in admins))
+			if(target.mob in heard)
 				send = 1
+				if(isAI(target.mob))
+					prefix = "(Core) "
+
 			else if(isAI(target.mob)) // Special case
 				var/mob/living/silicon/ai/A = target.mob
-				if(A.eyeobj in view(7, source))
+				if(A.eyeobj in hearers(7, source))
 					send = 1
+					prefix = "(Eye) "
+
+			if(!send && (target in admins))
+				send = 1
+				prefix = "(R)"
 
 			if(send)
 				target << "<span class='ooc'><span class='looc'>" + create_text_tag("looc", "LOOC:", target) + " <span class='prefix'>[prefix]</span><EM>[display_name][admin_stuff]:</EM> <span class='message'>[msg]</span></span></span>"
