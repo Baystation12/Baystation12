@@ -1030,24 +1030,36 @@
 						blinded = 1
 
 			// Check everything else.
-			if(!species.has_organ["eyes"]) // Presumably if a species has no eyes, they see via something else.
+			
+			//Vision
+			var/obj/item/organ/vision
+			if(species.vision_organ)
+				vision = internal_organs_by_name[species.vision_organ]
+			
+			if(!vision) // Presumably if a species has no vision organs, they see via some other means.
 				eye_blind =  0
 				blinded =    0
 				eye_blurry = 0
-			else if(!has_eyes())           // Eyes cut out? Permablind.
+			else if(vision.is_broken())   // Vision organs cut out or broken? Permablind.
 				eye_blind =  1
 				blinded =    1
 				eye_blurry = 1
-			else if(sdisabilities & BLIND) // Disabled-blind, doesn't get better on its own
-				blinded =    1
-			else if(eye_blind)		       // Blindness, heals slowly over time
-				eye_blind =  max(eye_blind-1,0)
-				blinded =    1
-			else if(istype(glasses, /obj/item/clothing/glasses/sunglasses/blindfold))	//resting your eyes with a blindfold heals blurry eyes faster
-				eye_blurry = max(eye_blurry-3, 0)
-				blinded =    1
-			else if(eye_blurry)	           // Blurry eyes heal slowly
-				eye_blurry = max(eye_blurry-1, 0)
+			else 
+				//blindness
+				if(sdisabilities & BLIND) // Disabled-blind, doesn't get better on its own
+					blinded =    1
+				else if(eye_blind)		       // Blindness, heals slowly over time
+					eye_blind =  max(eye_blind-1,0)
+					blinded =    1
+				else if(istype(glasses, /obj/item/clothing/glasses/sunglasses/blindfold))	//resting your eyes with a blindfold heals blurry eyes faster
+					eye_blurry = max(eye_blurry-3, 0)
+					blinded =    1
+				
+				//blurry sight
+				if(vision.is_bruised())   // Vision organs impaired? Permablurry.
+					eye_blurry = 1
+				if(eye_blurry)	           // Blurry eyes heal slowly
+					eye_blurry = max(eye_blurry-1, 0)
 
 			//Ears
 			if(sdisabilities & DEAF)	//disabled-deaf, doesn't get better on its own
