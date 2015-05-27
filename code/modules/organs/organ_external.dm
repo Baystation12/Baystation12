@@ -140,8 +140,8 @@
 /obj/item/organ/external/robotize()
 	..()
 	//robit limbs take reduced damage
-	brute_mod = 0.66
-	burn_mod = 0.66
+	brute_mod = 0.8
+	burn_mod = 0.8
 
 /****************************************************
 			   DAMAGE PROCS
