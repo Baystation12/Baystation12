@@ -8,6 +8,9 @@
 	dir = SOUTH
 	organ_tag = "limb"
 
+	var/brute_mod = 1
+	var/burn_mod = 1
+
 	var/icon_name = null
 	var/body_part = null
 	var/icon_position = 0
@@ -134,6 +137,12 @@
 				parent.children = list()
 			parent.children.Add(src)
 
+/obj/item/organ/external/robotize()
+	..()
+	//robit limbs take reduced damage
+	brute_mod = 0.66
+	burn_mod = 0.66
+
 /****************************************************
 			   DAMAGE PROCS
 ****************************************************/
@@ -143,11 +152,9 @@
 		return 0
 	if(status & ORGAN_DESTROYED)
 		return 0
-	if(status & ORGAN_ROBOT )
-		var/brmod = 0.66
-		var/bumod = 0.66
-		brute *= brmod //~2/3 damage for ROBOLIMBS
-		burn *= bumod //~2/3 damage for ROBOLIMBS
+
+	brute *= brute_mod
+	burn *= burn_mod
 
 	// High brute damage or sharp objects may damage internal organs
 	if(internal_organs && ((brute_dam >= max_damage) || (sharp && brute >= 5) || brute >= 10) && prob(5))
@@ -758,7 +765,8 @@ Note that amputating the affected organ does in fact remove the infection from t
 	return rval
 
 /obj/item/organ/external/proc/fracture()
-
+	if(status & ORGAN_ROBOT)
+		return	//ORGAN_BROKEN doesn't have the same meaning for robot limbs
 	if((status & ORGAN_BROKEN) || cannot_break)
 		return
 
