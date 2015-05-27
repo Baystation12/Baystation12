@@ -705,18 +705,18 @@ CIRCUITS BELOW
 
 /datum/design/circuit/AssembleDesignName()
 	..()
-	var/obj/item/weapon/circuitboard/C = new build_path()
-	if(C && istype(C))
-		if(C.board_type == "machine")
-			name = "Machine circuit design ([item_name])"
-			del(C)
-			return
-		else if(C.board_type == "computer")
-			name = "Computer circuit design ([item_name])"
-			del(C)
-			return
+	if(build_path)
+		var/obj/item/weapon/circuitboard/C = new build_path()
+		if(C && istype(C))
+			if(C.board_type == "machine")
+				name = "Machine circuit design ([item_name])"
+				qdel(C)
+				return
+			else if(C.board_type == "computer")
+				name = "Computer circuit design ([item_name])"
+				qdel(C)
+				return
 	name = "Circuit design ([item_name])"
-	del(C)
 
 /datum/design/circuit/AssembleDesignDesc()
 	if(!desc)
@@ -803,6 +803,7 @@ CIRCUITS BELOW
 	name = "teleporter control console"
 	id = "teleconsole"
 	req_tech = list(TECH_DATA = 3, TECH_BLUESPACE = 2)
+	build_path = /obj/item/weapon/circuitboard/teleporter
 	sort_string = "HAAAA"
 
 /datum/design/circuit/robocontrol
