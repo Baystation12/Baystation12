@@ -276,7 +276,8 @@
 
 	has_organ = list(
 		"brain" = /obj/item/organ/mmi_holder/posibrain,
-		"cell" = /obj/item/organ/cell
+		"cell" = /obj/item/organ/cell,
+		"eyes" = /obj/item/organ/optical_sensor
 		)
 
 	has_limbs = list(
