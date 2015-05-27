@@ -63,7 +63,7 @@ var/list/gamemode_cache = list()
 	var/guest_jobban = 1
 	var/usewhitelist = 0
 	var/mods_are_mentors = 0
-	var/kick_inactive = 0				//force disconnect for inactive players
+	var/kick_inactive = 0				//force disconnect for inactive players after this many minutes, if non-0
 	var/load_jobs_from_txt = 0
 	var/ToRban = 0
 	var/automute_on = 0					//enables automuting/spam prevention
@@ -114,7 +114,7 @@ var/list/gamemode_cache = list()
 
 	var/organ_health_multiplier = 1
 	var/organ_regeneration_multiplier = 1
-	
+
 	//Paincrit knocks someone down once they hit 60 shock_stage, so by default make it so that close to 100 additional damage needs to be dealt,
 	//so that it's similar to HALLOSS. Lowered it a bit since hitting paincrit takes much longer to wear off than a halloss stun.
 	var/organ_damage_spillover_multiplier = 0.5
@@ -460,7 +460,7 @@ var/list/gamemode_cache = list()
 					config.allow_random_events = 1
 
 				if("kick_inactive")
-					config.kick_inactive = 1
+					config.kick_inactive = text2num(value)
 
 				if("load_jobs_from_txt")
 					load_jobs_from_txt = 1
