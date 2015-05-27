@@ -175,15 +175,16 @@ var/list/organ_cache = list()
 	W.time_inflicted = world.time
 
 /obj/item/organ/proc/take_damage(amount, var/silent=0)
-	if(src.robotic == 2)
+	if(src.status & ORGAN_ROBOT)
 		src.damage += (amount * 0.8)
 	else
 		src.damage += amount
 
-	if(owner && parent_organ)
-		var/obj/item/organ/external/parent = owner.get_organ(parent_organ)
-		if(parent && !silent)
-			owner.custom_pain("Something inside your [parent.name] hurts a lot.", 1)
+		//only show this if the organ is not robotic
+		if(owner && parent_organ)
+			var/obj/item/organ/external/parent = owner.get_organ(parent_organ)
+			if(parent && !silent)
+				owner.custom_pain("Something inside your [parent.name] hurts a lot.", 1)
 
 /obj/item/organ/proc/robotize() //Being used to make robutt hearts, etc
 	robotic = 2
