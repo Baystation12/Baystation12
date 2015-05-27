@@ -10,7 +10,7 @@ mob/var/next_pain_time = 0
 mob/living/carbon/proc/pain(var/partname, var/amount, var/force, var/burning = 0)
 	if(stat >= 1) 
 		return
-	if(species && species.flags & NO_PAIN)
+	if(species && (species.flags & NO_PAIN))
 		return
 	if(analgesic > 40)
 		return
@@ -53,7 +53,7 @@ mob/living/carbon/proc/pain(var/partname, var/amount, var/force, var/burning = 0
 mob/living/carbon/human/proc/custom_pain(var/message, var/flash_strength)
 	if(stat >= 1) 
 		return
-	if(species && species.flags & NO_PAIN) 
+	if(species.flags & NO_PAIN) 
 		return
 	if(reagents.has_reagent("tramadol"))
 		return
@@ -74,7 +74,7 @@ mob/living/carbon/human/proc/custom_pain(var/message, var/flash_strength)
 mob/living/carbon/human/proc/handle_pain()
 	// not when sleeping
 
-	if(species && species.flags & NO_PAIN) return
+	if(species.flags & NO_PAIN) return
 
 	if(stat >= 2) return
 	if(analgesic > 70)
