@@ -20,7 +20,6 @@
 /obj/item/inflatable/door/
 	name = "inflatable door"
 	desc = "A folded membrane which rapidly expands into a simple door on activation."
-	icon = 'icons/obj/inflatable.dmi'
 	icon_state = "folded_door"
 
 /obj/item/inflatable/door/attack_self(mob/user)
@@ -150,7 +149,6 @@
 	anchored = 1
 	opacity = 0
 
-	icon = 'icons/obj/inflatable.dmi'
 	icon_state = "door_closed"
 
 	var/state = 0 //closed, 1 == open

@@ -339,14 +339,6 @@
 	user << "It has [stored_walls] wall segments and [stored_doors] door segments stored."
 	user << "It is set to deploy [mode ? "doors" : "walls"]"
 
-// Primarily used by cyborgs, also available in Engineering
-/obj/item/weapon/inflatable_dispenser/verb/switch_mode()
-	set name = "Change Dispenser Mode"
-	set category = "Object"
-
-	mode = !mode
-	usr << "You change \The [src] to [mode ? "doors" : "walls"] mode."
-
 /obj/item/weapon/inflatable_dispenser/attack_self()
 	mode = !mode
 	usr << "You change \The [src] to [mode ? "doors" : "walls"] mode."
@@ -360,44 +352,8 @@
 		return
 	if(istype(A, /turf))
 		try_deploy_inflatable(A, user)
-	if(istype(A, /obj/item/inflatable/door))
-		if(stored_doors < max_doors)
-			visible_message("[user] picks up the [A] with \The [src]!")
-			stored_doors++
-			qdel(A)
-			return
-		else
-			usr << "\The [src] is full!"
-			return
-	if(istype(A, /obj/item/inflatable/wall))
-		if(stored_walls < max_walls)
-			visible_message("[user] picks up the [A] with \The [src]!")
-			stored_walls++
-			qdel(A)
-			return
-		else
-			usr << "\The [src] is full!"
-			return
-	if(istype(A, /obj/structure/inflatable/door))
-		if(stored_doors < max_doors)
-			playsound(loc, 'sound/machines/hiss.ogg', 75, 1)
-			visible_message("[user] deflates the [A] with \The [src]!")
-			stored_doors++
-			qdel(A)
-			return
-		else
-			usr << "\The [src] is full."
-			return
-	if(istype(A, /obj/structure/inflatable/wall))
-		if(stored_walls < max_walls)
-			playsound(loc, 'sound/machines/hiss.ogg', 75, 1)
-			visible_message("[user] deflates the [A] with \The [src]!")
-			stored_walls++
-			qdel(A)
-			return
-		else
-			usr << "\The [src] is full."
-			return
+	if(istype(A, /obj/item/inflatable) || istype(A, /obj/structure/inflatable))
+		pick_up(A, user)
 
 /obj/item/weapon/inflatable_dispenser/proc/try_deploy_inflatable(var/turf/T, var/mob/living/user)
 	if(!user.Adjacent(T))
@@ -409,8 +365,6 @@
 			return
 
 		if(T && istype(T))
-			playsound(T, 'sound/items/zip.ogg', 75, 1)
-			user << "You deploy the inflatable door!"
 			new /obj/structure/inflatable/door(T)
 			stored_doors--
 
@@ -420,7 +374,44 @@
 			return
 
 		if(T && istype(T))
-			playsound(T, 'sound/items/zip.ogg', 75, 1)
-			user << "You deploy the inflatable wall!"
 			new /obj/structure/inflatable/wall(T)
 			stored_walls--
+
+	playsound(T, 'sound/items/zip.ogg', 75, 1)
+	user << "You deploy the inflatable [mode ? "door" : "wall"]!"
+
+/obj/item/weapon/inflatable_dispenser/proc/pick_up(var/obj/A, var/mob/living/user)
+	if(istype(A, /obj/structure/inflatable))
+		if(istype(A, /obj/structure/inflatable/wall))
+			if(stored_walls >= max_walls)
+				user << "\The [src] is full."
+				return
+			stored_walls++
+			qdel(A)
+		else
+			if(stored_doors >= max_doors)
+				user << "\The [src] is full."
+				return
+			stored_doors++
+			qdel(A)
+		playsound(loc, 'sound/machines/hiss.ogg', 75, 1)
+		visible_message("\The [user] deflates the [A] with \The [src]!")
+		return
+	if(istype(A, /obj/item/inflatable))
+		if(istype(A, /obj/item/inflatable/wall))
+			if(stored_walls >= max_walls)
+				user << "\The [src] is full."
+				return
+			stored_walls++
+			qdel(A)
+		else
+			if(stored_doors >= max_doors)
+				usr << "\The [src] is full!"
+				return
+			stored_doors++
+			qdel(A)
+		visible_message("\The [user] picks up the [A] with \The [src]!")
+		return
+
+	user << "You fail to pick up \the [A] with \the [src]"
+	return
