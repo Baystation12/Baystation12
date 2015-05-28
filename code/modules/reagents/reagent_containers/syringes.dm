@@ -219,10 +219,6 @@
 
 	proc/syringestab(mob/living/carbon/target as mob, mob/living/carbon/user as mob)
 
-		user.attack_log += "\[[time_stamp()]\]<font color='red'> Attacked [target.name] ([target.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])</font>"
-		target.attack_log += "\[[time_stamp()]\]<font color='orange'> Attacked by [user.name] ([user.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])</font>"
-		msg_admin_attack("[user.name] ([user.ckey]) attacked [target.name] ([target.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
-
 		if(istype(target, /mob/living/carbon/human))
 
 			var/mob/living/carbon/human/H = target
@@ -244,6 +240,11 @@
 					O.show_message(text("\red <B>[user] tries to stab [target] in \the [hit_area] with [src.name], but the attack is deflected by armor!</B>"), 1)
 				user.remove_from_mob(src)
 				qdel(src)
+
+				user.attack_log += "\[[time_stamp()]\]<font color='red'> Attacked [target.name] ([target.ckey]) with \the [src] (INTENT: HARM).</font>"
+				target.attack_log += "\[[time_stamp()]\]<font color='orange'> Attacked by [user.name] ([user.ckey]) with [src.name] (INTENT: HARM).</font>"
+				msg_admin_attack("[key_name_admin(user)] attacked [key_name_admin(target)] with [src.name] (INTENT: HARM) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
+
 				return
 
 			user.visible_message("<span class='danger'>[user] stabs [target] in \the [hit_area] with [src.name]!</span>")
@@ -255,7 +256,15 @@
 			user.visible_message("<span class='danger'>[user] stabs [target] with [src.name]!</span>")
 			target.take_organ_damage(3)// 7 is the same as crowbar punch
 
+
+
 		var/syringestab_amount_transferred = rand(0, (reagents.total_volume - 5)) //nerfed by popular demand
+		var/list/contained_reagents = list()
+		for(var/datum/reagent/R in reagents.reagent_list)
+			contained_reagents += R.name
+		user.attack_log += "\[[time_stamp()]\]<font color='red'> Stabbed [target.name] ([target.ckey]) with \the [src] (INTENT: HARM). Reagents: [english_list(contained_reagents)] ([syringestab_amount_transferred]u total)"
+		target.attack_log += "\[[time_stamp()]\]<font color='orange'> Stabbed by [user.name] ([user.ckey]) with \the [src] (INTENT: HARM). Reagents: [english_list(contained_reagents)] ([syringestab_amount_transferred]u total)"
+		msg_admin_attack("[key_name_admin(user)] stabbed [key_name_admin(target)] with \the [src] (INTENT: HARM). Reagents: [english_list(contained_reagents)] ([syringestab_amount_transferred]u total)")
 		reagents.trans_to_mob(target, syringestab_amount_transferred, CHEM_BLOOD)
 		break_syringe(target, user)
 

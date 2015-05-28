@@ -51,66 +51,59 @@
 	msg_admin_attack("[user.name] ([user.ckey]) Used the [name] to stab [M.name] ([M.ckey]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
 	return
 
+/*
+ * Reagent pens
+ */
+
+/obj/item/weapon/pen/reagent
+	flags = OPENCONTAINER
+	slot_flags = SLOT_BELT
+
+/obj/item/weapon/pen/reagent/New()
+	..()
+	create_reagents(30)
+
+/obj/item/weapon/pen/reagent/attack(mob/living/M as mob, mob/user as mob)
+
+	if(!istype(M))
+		return
+
+	. = ..()
+
+	if(M.can_inject(user,1))
+		if(reagents.total_volume)
+			if(M.reagents)
+				var/list/contained_reagents = list()
+				for(var/datum/reagent/R in reagents.reagent_list)
+					contained_reagents += R.name
+				M.attack_log += "\[[time_stamp()]\] <font color='orange'>Injected by [user.name] ([user.ckey]) with \the [src] (INTENT: [uppertext(user.a_intent)]) Reagents: [english_list(contained_reagents)]</font>"
+				user.attack_log += "\[[time_stamp()]\] <font color='orange'>Injected [M.name] ([M.ckey]) with \the [src] (INTENT: [uppertext(user.a_intent)]) Reagents: [english_list(contained_reagents)]</font>"
+				msg_admin_attack("[key_name_admin(user)] injected [key_name_admin(M)] with \the [src] (INTENT: [uppertext(user.a_intent)]) Reagents: [english_list(contained_reagents)]")
+				reagents.trans_to_mob(M, 30, CHEM_BLOOD)
+
 
 /*
  * Sleepy Pens
  */
-/obj/item/weapon/pen/sleepypen
+/obj/item/weapon/pen/reagent/sleepy
 	desc = "It's a black ink pen with a sharp point and a carefully engraved \"Waffle Co.\""
-	flags = OPENCONTAINER
-	slot_flags = SLOT_BELT
 	origin_tech = "materials=2;syndicate=5"
 
-
-/obj/item/weapon/pen/sleepypen/New()
-	var/datum/reagents/R = new/datum/reagents(30) //Used to be 300
-	reagents = R
-	R.my_atom = src
-	R.add_reagent("chloralhydrate", 22)	//Used to be 100 sleep toxin//30 Chloral seems to be fatal, reducing it to 22./N
+/obj/item/weapon/pen/reagent/sleepy/New()
 	..()
-	return
-
-
-/obj/item/weapon/pen/sleepypen/attack(mob/M as mob, mob/user as mob)
-	if(!(istype(M,/mob)))
-		return
-	..()
-	if(reagents.total_volume)
-		if(M.reagents) reagents.trans_to_mob(M, 50, CHEM_BLOOD) //used to be 150
-	return
+	reagents.add_reagent("chloralhydrate", 22)	//Used to be 100 sleep toxin//30 Chloral seems to be fatal, reducing it to 22./N
 
 
 /*
  * Parapens
  */
- /obj/item/weapon/pen/paralysis
-	flags = OPENCONTAINER
-	slot_flags = SLOT_BELT
+ /obj/item/weapon/pen/reagent/paralysis
 	origin_tech = "materials=2;syndicate=5"
 
-
-/obj/item/weapon/pen/paralysis/attack(mob/living/M as mob, mob/user as mob)
-
-	if(!(istype(M,/mob)))
-		return
-
+/obj/item/weapon/pen/reagent/paralysis/New()
 	..()
-
-
-	if(M.can_inject(user,1))
-		if(reagents.total_volume)
-			if(M.reagents) reagents.trans_to_mob(M, 50, CHEM_BLOOD)
-	return
-
-
-/obj/item/weapon/pen/paralysis/New()
-	var/datum/reagents/R = new/datum/reagents(50)
-	reagents = R
-	R.my_atom = src
-	R.add_reagent("zombiepowder", 10)
-	R.add_reagent("cryptobiolin", 15)
-	..()
-	return
+	reagents.add_reagent("zombiepowder", 10)
+	reagents.add_reagent("cryptobiolin", 15)
 
 /*
  * Chameleon pen

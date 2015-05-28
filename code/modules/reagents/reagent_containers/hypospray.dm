@@ -19,17 +19,19 @@
 	reagents.add_reagent("tricordrazine", 30)
 	return
 
-/obj/item/weapon/reagent_containers/hypospray/attack(mob/M as mob, mob/user as mob)
+/obj/item/weapon/reagent_containers/hypospray/attack(mob/living/M as mob, mob/user as mob)
 	if(!reagents.total_volume)
 		user << "<span class='warning'>[src] is empty.</span>"
 		return
 	if (!istype(M))
 		return
+	if(!M.can_inject(user, 1))
+		return
+
 	user << "<span class='notice'>You inject [M] with [src].</span>"
 	M << "<span class='notice'>You feel a tiny prick!</span>"
 
 	if(M.reagents)
-
 		var/contained = reagentlist()
 		M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been injected with [name] by [user.name] ([user.ckey]). Reagents: [contained]</font>")
 		user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [name] to inject [M.name] ([M.key]). Reagents: [contained]</font>")
