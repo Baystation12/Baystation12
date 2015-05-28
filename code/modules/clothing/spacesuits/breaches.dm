@@ -178,7 +178,7 @@ var/global/list/breach_burn_descriptors = list(
 //Handles repairs (and also upgrades).
 
 /obj/item/clothing/suit/space/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(W,/obj/item/stack/sheet/mineral/plastic) || istype(W,/obj/item/stack/sheet/metal))
+	if(istype(W,/obj/item/stack/material/plastic) || istype(W,/obj/item/stack/material/steel))
 
 		if(istype(src.loc,/mob/living))
 			user << "\red How do you intend to patch a hardsuit while someone is wearing it?"
@@ -188,13 +188,13 @@ var/global/list/breach_burn_descriptors = list(
 			user << "There is no surface damage on \the [src] to repair."
 			return
 
-		var/obj/item/stack/sheet/P = W
+		var/obj/item/stack/material/P = W
 		if(P.get_amount() < 3)
 			P.use(P.get_amount())
-			repair_breaches(BURN, ( istype(P,/obj/item/stack/sheet/mineral/plastic) ? P.get_amount() : (P.get_amount()*2) ), user)
+			repair_breaches(BURN, ( istype(P,/obj/item/stack/material/plastic) ? P.get_amount() : (P.get_amount()*2) ), user)
 		else
 			P.use(3)
-			repair_breaches(BURN, ( istype(P,/obj/item/stack/sheet/mineral/plastic) ? 3 : 5), user)
+			repair_breaches(BURN, ( istype(P,/obj/item/stack/material/plastic) ? 3 : 5), user)
 		return
 
 	else if(istype(W, /obj/item/weapon/weldingtool))

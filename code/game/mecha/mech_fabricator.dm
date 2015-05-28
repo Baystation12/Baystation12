@@ -94,15 +94,6 @@
 						/obj/item/mecha_parts/part/durand_right_leg,
 						/obj/item/mecha_parts/part/durand_armour
 					),
-	/*"H.O.N.K"=list(
-						/obj/item/mecha_parts/chassis/honker,
-						/obj/item/mecha_parts/part/honker_torso,
-						/obj/item/mecha_parts/part/honker_head,
-						/obj/item/mecha_parts/part/honker_left_arm,
-						/obj/item/mecha_parts/part/honker_right_arm,
-						/obj/item/mecha_parts/part/honker_left_leg,
-						/obj/item/mecha_parts/part/honker_right_leg
-						), No need for HONK stuff*/
 	"Exosuit Equipment"=list(
 						/obj/item/mecha_parts/mecha_equipment/tool/hydraulic_clamp,
 						/obj/item/mecha_parts/mecha_equipment/tool/drill,
@@ -116,10 +107,7 @@
 						/obj/item/mecha_parts/mecha_equipment/generator,
 						///obj/item/mecha_parts/mecha_equipment/jetpack, //TODO MECHA JETPACK SPRITE MISSING
 						/obj/item/mecha_parts/mecha_equipment/weapon/energy/taser,
-						/obj/item/mecha_parts/mecha_equipment/weapon/ballistic/lmg,
-						///obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack/banana_mortar/mousetrap_mortar, HONK-related mech part
-						///obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack/banana_mortar, Also HONK-related
-						///obj/item/mecha_parts/mecha_equipment/weapon/honker Thirdly HONK-related
+						/obj/item/mecha_parts/mecha_equipment/weapon/ballistic/lmg
 						),
 
 	"Robotic Upgrade Modules" = list(
@@ -131,16 +119,8 @@
 						/obj/item/borg/upgrade/jetpack
 						),
 
-
-
-
-
-
 	"Misc"=list(/obj/item/mecha_parts/mecha_tracking)
 	)
-
-
-
 
 /obj/machinery/mecha_part_fabricator/New()
 	..()
@@ -293,14 +273,6 @@
 				world << "Duplicate part set definition for [src](\ref[src])"
 				return 0
 		return 1
-*/
-/*
-	New()
-		..()
-		src.add_part_to_set("Test",list("result"="/obj/item/mecha_parts/part/gygax_armour","time"=600,"metal"=75000,"diamond"=10000))
-		src.add_part_to_set("Test",list("result"="/obj/item/mecha_parts/part/ripley_left_arm","time"=200,"metal"=25000))
-		src.remove_part_set("Gygax")
-		return
 */
 
 /obj/machinery/mecha_part_fabricator/proc/output_parts_list(set_name)
@@ -720,23 +692,23 @@
 	var/type
 	switch(mat_string)
 		if(DEFAULT_WALL_MATERIAL)
-			type = /obj/item/stack/sheet/metal
+			type = /obj/item/stack/material/steel
 		if("glass")
-			type = /obj/item/stack/sheet/glass
+			type = /obj/item/stack/material/glass
 		if("gold")
-			type = /obj/item/stack/sheet/mineral/gold
+			type = /obj/item/stack/material/gold
 		if("silver")
-			type = /obj/item/stack/sheet/mineral/silver
+			type = /obj/item/stack/material/silver
 		if("diamond")
-			type = /obj/item/stack/sheet/mineral/diamond
+			type = /obj/item/stack/material/diamond
 		if("phoron")
-			type = /obj/item/stack/sheet/mineral/phoron
+			type = /obj/item/stack/material/phoron
 		if("uranium")
-			type = /obj/item/stack/sheet/mineral/uranium
+			type = /obj/item/stack/material/uranium
 		else
 			return 0
 	var/result = 0
-	var/obj/item/stack/sheet/res = new type(src)
+	var/obj/item/stack/material/res = new type(src)
 
 	// amount available to take out
 	var/total_amount = round(resources[mat_string]/res.perunit)
@@ -771,29 +743,27 @@
 			M.state = 2
 			M.icon_state = "box_1"
 			for(var/obj/I in component_parts)
-				if(I.reliability != 100 && crit_fail)
-					I.crit_fail = 1
 				I.loc = src.loc
 			if(src.resources[DEFAULT_WALL_MATERIAL] >= 3750)
-				var/obj/item/stack/sheet/metal/G = new /obj/item/stack/sheet/metal(src.loc)
+				var/obj/item/stack/material/steel/G = new /obj/item/stack/material/steel(src.loc)
 				G.amount = round(src.resources[DEFAULT_WALL_MATERIAL] / G.perunit)
 			if(src.resources["glass"] >= 3750)
-				var/obj/item/stack/sheet/glass/G = new /obj/item/stack/sheet/glass(src.loc)
+				var/obj/item/stack/material/glass/G = new /obj/item/stack/material/glass(src.loc)
 				G.amount = round(src.resources["glass"] / G.perunit)
 			if(src.resources["phoron"] >= 2000)
-				var/obj/item/stack/sheet/mineral/phoron/G = new /obj/item/stack/sheet/mineral/phoron(src.loc)
+				var/obj/item/stack/material/phoron/G = new /obj/item/stack/material/phoron(src.loc)
 				G.amount = round(src.resources["phoron"] / G.perunit)
 			if(src.resources["silver"] >= 2000)
-				var/obj/item/stack/sheet/mineral/silver/G = new /obj/item/stack/sheet/mineral/silver(src.loc)
+				var/obj/item/stack/material/silver/G = new /obj/item/stack/material/silver(src.loc)
 				G.amount = round(src.resources["silver"] / G.perunit)
 			if(src.resources["gold"] >= 2000)
-				var/obj/item/stack/sheet/mineral/gold/G = new /obj/item/stack/sheet/mineral/gold(src.loc)
+				var/obj/item/stack/material/gold/G = new /obj/item/stack/material/gold(src.loc)
 				G.amount = round(src.resources["gold"] / G.perunit)
 			if(src.resources["uranium"] >= 2000)
-				var/obj/item/stack/sheet/mineral/uranium/G = new /obj/item/stack/sheet/mineral/uranium(src.loc)
+				var/obj/item/stack/material/uranium/G = new /obj/item/stack/material/uranium(src.loc)
 				G.amount = round(src.resources["uranium"] / G.perunit)
 			if(src.resources["diamond"] >= 2000)
-				var/obj/item/stack/sheet/mineral/diamond/G = new /obj/item/stack/sheet/mineral/diamond(src.loc)
+				var/obj/item/stack/material/diamond/G = new /obj/item/stack/material/diamond(src.loc)
 				G.amount = round(src.resources["diamond"] / G.perunit)
 			qdel(src)
 			return 1
@@ -807,19 +777,19 @@
 
 	var/material
 	switch(W.type)
-		if(/obj/item/stack/sheet/mineral/gold)
+		if(/obj/item/stack/material/gold)
 			material = "gold"
-		if(/obj/item/stack/sheet/mineral/silver)
+		if(/obj/item/stack/material/silver)
 			material = "silver"
-		if(/obj/item/stack/sheet/mineral/diamond)
+		if(/obj/item/stack/material/diamond)
 			material = "diamond"
-		if(/obj/item/stack/sheet/mineral/phoron)
+		if(/obj/item/stack/material/phoron)
 			material = "phoron"
-		if(/obj/item/stack/sheet/metal)
+		if(/obj/item/stack/material/steel)
 			material = DEFAULT_WALL_MATERIAL
-		if(/obj/item/stack/sheet/glass)
+		if(/obj/item/stack/material/glass)
 			material = "glass"
-		if(/obj/item/stack/sheet/mineral/uranium)
+		if(/obj/item/stack/material/uranium)
 			material = "uranium"
 		else
 			return ..()
@@ -828,7 +798,7 @@
 		user << "The fabricator is currently processing. Please wait until completion."
 		return
 
-	var/obj/item/stack/sheet/stack = W
+	var/obj/item/stack/material/stack = W
 
 	var/sname = "[stack.name]"
 	var/amnt = stack.perunit

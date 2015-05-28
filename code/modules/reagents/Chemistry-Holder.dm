@@ -3,7 +3,6 @@
 	var/total_volume = 0
 	var/maximum_volume = 100
 	var/atom/my_atom = null
-	var/reacting = 0 // Reacting right now
 
 /datum/reagents/New(var/max = 100)
 	maximum_volume = max
@@ -116,7 +115,7 @@
 			for(var/datum/chemical_reaction/C in chemical_reactions_list[R.id])
 				var/reagents_suitable = 1
 				for(var/B in C.required_reagents)
-					if(!has_reagent(B, C.required_reagents[B]))
+					if(!has_reagent(B))
 						reagents_suitable = 0
 				for(var/B in C.catalysts)
 					if(!has_reagent(B, C.catalysts[B]))

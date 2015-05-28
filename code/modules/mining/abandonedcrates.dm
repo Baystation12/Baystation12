@@ -109,7 +109,7 @@
 		if(91)
 			new/obj/item/device/soulstone(src)
 		if(92)
-			new/obj/item/weapon/katana(src)
+			new/obj/item/weapon/material/sword/katana(src)
 		if(93)
 			new/obj/item/weapon/dnainjector/xraymut(src) // Probably the least OP
 		if(94) // Why the hell not

@@ -113,6 +113,12 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 			master.show_message(rendered, 2)
 	return
 
+/obj/machinery/hologram/holopad/show_message(msg, type, alt, alt_type)
+	for(var/mob/living/silicon/ai/master in masters)
+		var/rendered = "<i><span class='game say'>Holopad received, <span class='message'>[msg]</span></span></i>"
+		master.show_message(rendered, type)
+	return
+
 /obj/machinery/hologram/holopad/proc/create_holo(mob/living/silicon/ai/A, turf/T = loc)
 	var/obj/effect/overlay/hologram = new(T)//Spawn a blank effect at the location.
 	hologram.icon = A.holo_icon

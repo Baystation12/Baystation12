@@ -328,8 +328,6 @@ Class Procs:
 	M.state = 2
 	M.icon_state = "box_1"
 	for(var/obj/I in component_parts)
-		if(I.reliability != 100 && crit_fail)
-			I.crit_fail = 1
 		I.loc = loc
 	qdel(src)
 	return 1

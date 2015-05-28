@@ -20,15 +20,14 @@
 	icon_state = "flood[open ? "o" : ""][open && cell ? "b" : ""]0[on]"
 
 /obj/machinery/floodlight/process()
-	if(on)
-		if(cell.charge >= use)
-			cell.use(use)
-		else
-			on = 0
-			updateicon()
-			set_light(0)
-			src.visible_message("<span class='warning'>[src] shuts down due to lack of power!</span>")
-			return
+	if(on && cell && cell.charge >= use)
+		cell.use(use)
+	else
+		on = 0
+		updateicon()
+		set_light(0)
+		src.visible_message("<span class='warning'>[src] shuts down due to lack of power!</span>")
+		return
 
 /obj/machinery/floodlight/attack_hand(mob/user as mob)
 	if(open && cell)
@@ -43,6 +42,8 @@
 		cell.updateicon()
 
 		src.cell = null
+		on = 0
+		set_light(0)
 		user << "You remove the power cell"
 		updateicon()
 		return

@@ -23,6 +23,10 @@
 /datum/job/proc/equip(var/mob/living/carbon/human/H)
 	return 1
 
+// overrideable separately so AIs/borgs can have cardborg hats without unneccessary new()/del()
+/datum/job/proc/equip_preview(mob/living/carbon/human/H)
+	return equip(H)
+
 /datum/job/proc/get_access()
 	if(!config || config.jobs_have_minimal_access)
 		return src.minimal_access.Copy()

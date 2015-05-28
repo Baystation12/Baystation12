@@ -169,14 +169,18 @@
 				return
 			if(!R.cell.fully_charged())
 				var/diff = min(R.cell.maxcharge - R.cell.charge, charge_rate) 	// Capped at charge_rate charge / tick
-				if (cell.use(diff))
+				if (cell.charge >= diff)
+					cell.use(diff)
 					R.cell.give(diff)
 			if(weld_rate && R.getBruteLoss())
 				R.adjustBruteLoss(-1)
 			if(wire_rate && R.getFireLoss())
 				R.adjustFireLoss(-1)
-			else
-				update_use_power(1)
+		else if(istype(occupant, /mob/living/carbon/human))
+			var/mob/living/carbon/human/H = occupant
+			if(!isnull(H.internal_organs_by_name["cell"]) && H.nutrition < 450)
+				H.nutrition = min(H.nutrition+10, 450)
+		update_use_power(1)
 
 /obj/machinery/recharge_station/proc/go_out()
 	if(!(occupant))
@@ -208,30 +212,42 @@
 	if(!user)
 		return
 
-	if(!(istype(user, /mob/living/silicon/robot)))
+	var/can_accept_user
+	if(istype(user, /mob/living/silicon/robot))
+
+		var/mob/living/silicon/robot/R = user
+
+		if(R.stat == 2)
+			//Whoever had it so that a borg with a dead cell can't enter this thing should be shot. --NEO
+			return
+		if(occupant)
+			R << "<span class='notice'>The cell is already occupied!</span>"
+			return
+		if(!R.cell)
+			R << "<span class='notice'>Without a powercell, you can't be recharged.</span>"
+			//Make sure they actually HAVE a cell, now that they can get in while powerless. --NEO
+			return
+		can_accept_user = 1
+
+	else if(istype(user, /mob/living/carbon/human))
+		var/mob/living/carbon/human/H = user
+		if(!isnull(H.internal_organs_by_name["cell"]))
+			can_accept_user = 1
+
+	if(!can_accept_user)
 		user << "<span class='notice'>Only non-organics may enter the recharger!</span>"
 		return
-	var/mob/living/silicon/robot/R = user
 
-	if(R.stat == 2)
-		//Whoever had it so that a borg with a dead cell can't enter this thing should be shot. --NEO
-		return
-	if(occupant)
-		R << "<span class='notice'>The cell is already occupied!</span>"
-		return
-	if(!R.cell)
-		R << "<span class='notice'>Without a powercell, you can't be recharged.</span>"
-		//Make sure they actually HAVE a cell, now that they can get in while powerless. --NEO
-		return
-	R.stop_pulling()
-	if(R.client)
-		R.client.perspective = EYE_PERSPECTIVE
-		R.client.eye = src
-	R.loc = src
-	occupant = R
+
+	user.stop_pulling()
+	if(user.client)
+		user.client.perspective = EYE_PERSPECTIVE
+		user.client.eye = src
+	user.loc = src
+	occupant = user
 	/*for(var/obj/O in src)
 		O.loc = loc*/
-	add_fingerprint(R)
+	add_fingerprint(user)
 	build_icon()
 	update_use_power(1)
 	return

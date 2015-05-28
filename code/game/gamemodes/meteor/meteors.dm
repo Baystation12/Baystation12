@@ -162,3 +162,6 @@
 		qdel(src)
 		return
 	..()
+
+/obj/effect/meteor/touch_map_edge()
+	qdel(src)

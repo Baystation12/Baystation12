@@ -229,17 +229,6 @@
 /mob/living/carbon/MiddleClickOn(var/atom/A)
 	swap_hand()
 
-/mob/living/carbon/human/MiddleClickOn(var/atom/A)
-
-	if(back)
-		var/obj/item/weapon/rig/rig = back
-		if(istype(rig) && rig.selected_module)
-			if(world.time <= next_move) return
-			next_move = world.time + 8
-			rig.selected_module.engage(A)
-			return
-
-	swap_hand()
 
 // In case of use break glass
 /*

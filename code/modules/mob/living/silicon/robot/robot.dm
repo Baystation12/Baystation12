@@ -317,7 +317,7 @@
 
 			if(Entry[1] == src.ckey && Entry[2] == src.real_name) //They're in the list? Custom sprite time, var and icon change required
 				custom_sprite = 1
-				icon = 'icons/mob/custom-synthetic.dmi'
+				icon = CUSTOM_ITEM_SYNTH
 				if(icon_state == "robot")
 					icon_state = "[src.ckey]-Standard"
 
@@ -1081,8 +1081,9 @@
 	if(cell.charge == 0)
 		return 0
 
-	if(cell.use(amount * CELLRATE * CYBORG_POWER_USAGE_MULTIPLIER))
-		used_power_this_tick += amount * CYBORG_POWER_USAGE_MULTIPLIER
+	var/power_use = amount * CYBORG_POWER_USAGE_MULTIPLIER
+	if(cell.checked_use(CELLRATE * power_use))
+		used_power_this_tick += power_use
 		return 1
 	return 0
 

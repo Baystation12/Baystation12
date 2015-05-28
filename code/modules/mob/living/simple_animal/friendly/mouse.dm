@@ -28,6 +28,7 @@
 	maxbodytemp = 323	//Above 50 Degrees Celcius
 	universal_speak = 0
 	universal_understand = 1
+	holder_type = /obj/item/weapon/holder/mouse
 	mob_size = 1
 
 /mob/living/simple_animal/mouse/Life()
@@ -62,6 +63,13 @@
 
 	if(!body_color)
 		body_color = pick( list("brown","gray","white") )
+		switch(body_color)
+			if("brown")
+				holder_type = /obj/item/weapon/holder/mouse/brown
+			if("gray")
+				holder_type = /obj/item/weapon/holder/mouse/gray
+			if("white")
+				holder_type = /obj/item/weapon/holder/mouse/white
 	icon_state = "mouse_[body_color]"
 	icon_living = "mouse_[body_color]"
 	icon_dead = "mouse_[body_color]_dead"
@@ -75,6 +83,22 @@
 	layer = MOB_LAYER
 	if(client)
 		client.time_died_as_mouse = world.time
+
+/mob/living/simple_animal/mouse/MouseDrop(atom/over_object)
+
+	var/mob/living/carbon/H = over_object
+	if(!istype(H) || !Adjacent(H)) return ..()
+
+	if(H.a_intent == "help")
+		get_scooped(H)
+		return
+	else
+		return ..()
+
+/mob/living/simple_animal/mouse/get_scooped(var/mob/living/carbon/grabber)
+	if (stat >= DEAD)
+		return
+	..()
 
 /mob/living/simple_animal/mouse/start_pulling(var/atom/movable/AM)//Prevents mouse from pulling things
 	src << "<span class='warning'>You are too small to pull anything.</span>"
@@ -101,14 +125,17 @@
 /mob/living/simple_animal/mouse/white
 	body_color = "white"
 	icon_state = "mouse_white"
+	holder_type = /obj/item/weapon/holder/mouse/white
 
 /mob/living/simple_animal/mouse/gray
 	body_color = "gray"
 	icon_state = "mouse_gray"
+	holder_type = /obj/item/weapon/holder/mouse/gray
 
 /mob/living/simple_animal/mouse/brown
 	body_color = "brown"
 	icon_state = "mouse_brown"
+	holder_type = /obj/item/weapon/holder/mouse/brown
 
 //TOM IS ALIVE! SQUEEEEEEEE~K :)
 /mob/living/simple_animal/mouse/brown/Tom

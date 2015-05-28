@@ -49,12 +49,16 @@
 			var/obj/effect/plant/SV = locate() in loc
 			SV.die_off(1)
 
+		if(locate(/obj/machinery/portable_atmospherics/hydroponics/soil/invisible) in loc)
+			var/obj/machinery/portable_atmospherics/hydroponics/soil/invisible/SP = locate() in loc
+			qdel(SP)
+
 		if(!pulledby)
-			for(var/direction in shuffle(list(1,2,4,8,5,6,9,10)))
-				var/step = get_step(src, direction)
-				if(step)
-					if(locate(/obj/effect/plant) in step)
-						Move(step)
+			var/obj/effect/plant/food
+			food = locate(/obj/effect/plant) in oview(5,loc)	
+			if(food)
+				var/step = get_step_to(src, food, 0) 	
+				Move(step)
 
 /mob/living/simple_animal/hostile/retaliate/goat/Retaliate()
 	..()

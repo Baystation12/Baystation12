@@ -29,7 +29,7 @@
 				if(do_after(user, 20))
 					if(!src || !WT.remove_fuel(0, user)) return
 					user << "\blue You deconstruct the frame."
-					new /obj/item/stack/sheet/plasteel( loc, 4)
+					new /obj/item/stack/material/plasteel( loc, 4)
 					qdel(src)
 		if(1)
 			if(istype(P, /obj/item/weapon/wrench))
@@ -88,8 +88,8 @@
 					var/obj/item/stack/cable_coil/A = new /obj/item/stack/cable_coil( loc )
 					A.amount = 5
 
-			if(istype(P, /obj/item/stack/sheet/glass/reinforced))
-				var/obj/item/stack/sheet/glass/reinforced/RG = P
+			if(istype(P, /obj/item/stack/material/glass/reinforced))
+				var/obj/item/stack/material/glass/reinforced/RG = P
 				if (RG.get_amount() < 2)
 					user << "<span class='warning'>You need two sheets of glass to put in the glass panel.</span>"
 					return
@@ -162,7 +162,7 @@
 					icon_state = "3b"
 				else
 					icon_state = "3"
-				new /obj/item/stack/sheet/glass/reinforced( loc, 2 )
+				new /obj/item/stack/material/glass/reinforced( loc, 2 )
 				return
 
 			if(istype(P, /obj/item/weapon/screwdriver))

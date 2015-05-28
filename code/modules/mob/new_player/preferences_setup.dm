@@ -184,7 +184,10 @@ datum/preferences
 		dummy.set_species(species)
 		dummy.flags |= GODMODE
 		copy_to(dummy)
-
+		for (var/obj/item/I in dummy)
+			dummy.drop_from_inventory(I)
+			if(I.loc != dummy)
+				qdel(I)
 		var/jobflag
 		var/dept
 		if(job_civilian_high)
@@ -205,7 +208,7 @@ datum/preferences
 						if(!dummy.mind)
 							dummy.mind = new
 						dummy.mind.role_alt_title = alt
-					J.equip(dummy)
+					J.equip_preview(dummy)
 					break
 		dummy.update_eyes()
 		dummy.force_update_limbs()

@@ -134,7 +134,6 @@
 	prime()
 		if(!stage || stage<2) return
 
-		//if(prob(reliability))
 		var/has_reagents = 0
 		for(var/obj/item/weapon/reagent_containers/glass/G in beakers)
 			if(G.reagents.total_volume) has_reagents = 1
@@ -175,7 +174,7 @@
 	desc = "An oversized grenade that affects a larger area."
 	icon_state = "large_grenade"
 	allowed_containers = list(/obj/item/weapon/reagent_containers/glass)
-	origin_tech = "combat=3;materials=3"
+	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 3)
 	affected_area = 4
 
 /obj/item/weapon/grenade/chem_grenade/metalfoam
@@ -255,7 +254,7 @@
 		var/obj/item/weapon/reagent_containers/glass/beaker/B1 = new(src)
 		var/obj/item/weapon/reagent_containers/glass/beaker/B2 = new(src)
 
-		B1.reagents.add_reagent("fluorosurfactant", 40)
+		B1.reagents.add_reagent("surfactant", 40)
 		B2.reagents.add_reagent("water", 40)
 		B2.reagents.add_reagent("cleaner", 10)
 

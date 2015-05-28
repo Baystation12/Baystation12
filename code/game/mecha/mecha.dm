@@ -117,7 +117,6 @@
 				WR.crowbar_salvage += E
 				E.forceMove(WR)
 				E.equip_ready = 1
-				E.reliability = round(rand(E.reliability/3,E.reliability))
 			else
 				E.forceMove(loc)
 				E.destroy()
@@ -251,12 +250,6 @@
 	if(M==occupant && radio.broadcasting)
 		radio.talk_into(M, text)
 	return
-
-/obj/mecha/see_emote(mob/living/M, text)
-	if(occupant && occupant.client)
-		var/rendered = "<span class='message'>[text]</span>"
-		occupant.show_message(rendered, 2)
-	..()
 
 ////////////////////////////
 ///// Action processing ////
@@ -1764,8 +1757,9 @@
 	if(!damage)
 		return 0
 
-	src.log_message("Attack by an animal. Attacker - [user].",1)
+	src.log_message("Attacked. Attacker - [user].",1)
 
+	user.do_attack_animation(src)
 	if(!prob(src.deflect_chance))
 		src.take_damage(damage)
 		src.check_for_internal_damage(list(MECHA_INT_TEMP_CONTROL,MECHA_INT_TANK_BREACH,MECHA_INT_CONTROL_LOST))
