@@ -159,7 +159,7 @@
 	else if(cell)
 		cell.loc = loc
 		cell.add_fingerprint(user)
-		cell.updateicon()
+		cell.update_icon()
 
 		icon_state = "suspension0"
 		cell = null
