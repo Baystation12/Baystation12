@@ -90,6 +90,7 @@
 	var/banappeals
 	var/wikiurl
 	var/forumurl
+	var/githuburl
 
 	//Alert level description
 	var/alert_desc_green = "All threats to the station have passed. Security may not have weapons visible, privacy laws are once again fully enforced."
@@ -375,6 +376,9 @@
 
 				if ("forumurl")
 					config.forumurl = value
+
+				if ("githuburl")
+					config.githuburl = value
 
 				if ("guest_jobban")
 					config.guest_jobban = 1
