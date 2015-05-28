@@ -152,7 +152,7 @@
 		init()
 	else
 		area = get_area(src)
-		area.apc |= src
+		area.apc = src
 		opened = 1
 		operating = 0
 		name = "[area.name] APC"
@@ -163,9 +163,7 @@
 	..()
 	src.update()
 
-
-/obj/machinery/power/apc/Destroy()
-	area.apc -= src
+	area.apc = null
 	area.power_light = 0
 	area.power_equip = 0
 	area.power_environ = 0
@@ -209,7 +207,7 @@
 	else
 		src.area = get_area_name(areastring)
 		name = "\improper [area.name] APC"
-	area.apc |= src
+	area.apc = src
 	update_icon()
 
 	make_terminal()
