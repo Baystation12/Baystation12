@@ -777,3 +777,22 @@ default behaviour is:
 		return
 	..()
 
+/mob/living/touch_map_edge()
+
+	//check for nuke disks
+	if(client && stat != DEAD) //if they are clientless and dead don't bother, the parent will treat them as any other container
+		if(ticker && istype(ticker.mode, /datum/game_mode/nuclear)) //only really care if the game mode is nuclear
+			var/datum/game_mode/nuclear/G = ticker.mode
+			if(G.check_mob(src))
+				if(x <= TRANSITIONEDGE)
+					inertia_dir = 4
+				else if(x >= world.maxx -TRANSITIONEDGE)
+					inertia_dir = 8
+				else if(y <= TRANSITIONEDGE)
+					inertia_dir = 1
+				else if(y >= world.maxy -TRANSITIONEDGE)
+					inertia_dir = 2
+				src << "<span class='warning>Something you are carrying is preventing you from leaving.</span>"
+				return
+	
+	..()
