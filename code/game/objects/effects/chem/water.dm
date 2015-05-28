@@ -20,12 +20,15 @@
 		step_towards(src, target)
 		var/turf/T = get_turf(src)
 		reagents.touch_turf(T)
-		var/mob/M = locate() in T
+		var/mob/M
+		for(var/atom/A in T)
+			if(!ismob(A)) // Mobs are handled differently
+				reagents.touch(A)
+			else if(!M)
+				M = A
 		if(M)
 			reagents.splash_mob(M, reagents.total_volume)
 			break
-		for(var/atom/A in T)
-			reagents.touch(A)
 		if(T == get_turf(target))
 			break
 		sleep(delay)
