@@ -84,7 +84,7 @@
 //A power generator that runs on solid plasma sheets.
 /obj/machinery/power/port_gen/pacman
 	name = "\improper P.A.C.M.A.N.-type Portable Generator"
-	desc = "A power generator that runs on solid phoron sheets. Rated for 80 kW max safe output."
+	desc = "A power generator that runs on solid phoron sheets."
 
 	var/sheet_name = "Phoron Sheets"
 	var/sheet_path = /obj/item/stack/material/phoron
@@ -141,6 +141,8 @@
 
 /obj/machinery/power/port_gen/pacman/examine(mob/user)
 	..(user)
+	var/max_safe = round(power_gen*max_safe_output/1000)
+	user << "The nameplate lists the rated max safe output as [max_safe] kW[max_safe >= 100? "!" : "."]"
 	user << "\The [src] appears to be producing [power_gen*power_output] W."
 	user << "There [sheets == 1 ? "is" : "are"] [sheets] sheet\s left in the hopper."
 	if(IsBroken()) user << "<span class='warning'>\The [src] seems to have broken down.</span>"
@@ -391,7 +393,7 @@
 
 /obj/machinery/power/port_gen/pacman/super
 	name = "S.U.P.E.R.P.A.C.M.A.N.-type Portable Generator"
-	desc = "A power generator that utilizes uranium sheets as fuel. Can run for much longer than the standard PACMAN type generators. Rated for 80 kW max safe output."
+	desc = "A power generator that utilizes uranium sheets as fuel. Can run for much longer than the standard PACMAN type generators. Mildly radioactive when on."
 	icon_state = "portgen1"
 	sheet_path = /obj/item/stack/material/uranium
 	sheet_name = "Uranium Sheets"
@@ -402,7 +404,7 @@
 	//produces a tiny amount of radiation when in use
 	if (prob(2*power_output))
 		for (var/mob/living/L in range(src, 5))
-			L.apply_effect(1, IRRADIATE) //should amount to ~5 rads per minute at max safe power
+			L.apply_effect(2, IRRADIATE) //should amount to ~10 rads per minute at max safe power
 	..()
 
 /obj/machinery/power/port_gen/pacman/super/explode()
@@ -418,7 +420,7 @@
 
 /obj/machinery/power/port_gen/pacman/mrs
 	name = "M.R.S.P.A.C.M.A.N.-type Portable Generator"
-	desc = "An advanced power generator that runs on tritium. Rated for 200 kW maximum safe output!"
+	desc = "An advanced power generator that runs on tritium."
 	icon_state = "portgen2"
 	sheet_path = /obj/item/stack/material/tritium
 	sheet_name = "Tritium Fuel Sheets"

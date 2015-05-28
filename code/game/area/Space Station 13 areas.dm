@@ -1894,12 +1894,12 @@ area/space/atmosalert()
 	ambience = list('sound/ambience/ambisin2.ogg', 'sound/ambience/signal.ogg', 'sound/ambience/signal.ogg', 'sound/ambience/ambigen10.ogg')
 
 /area/turret_protected/tcomwest
-	name = "\improper Telecommunications Satellite West Wing"
+	name = "\improper Telecoms Port Wing"
 	icon_state = "tcomsatwest"
 	ambience = list('sound/ambience/ambisin2.ogg', 'sound/ambience/signal.ogg', 'sound/ambience/signal.ogg', 'sound/ambience/ambigen10.ogg')
 
 /area/turret_protected/tcomeast
-	name = "\improper Telecommunications Satellite East Wing"
+	name = "\improper Telecoms Starboard Wing"
 	icon_state = "tcomsateast"
 	ambience = list('sound/ambience/ambisin2.ogg', 'sound/ambience/signal.ogg', 'sound/ambience/signal.ogg', 'sound/ambience/ambigen10.ogg')
 
@@ -1907,8 +1907,8 @@ area/space/atmosalert()
 	name = "\improper Telecoms Control Room"
 	icon_state = "tcomsatcomp"
 
-/area/tcommsat/lounge
-	name = "\improper Telecommunications Satellite Lounge"
+/area/tcommsat/generator
+	name = "\improper Telecoms Generator Room"
 	icon_state = "tcomsatlounge"
 
 

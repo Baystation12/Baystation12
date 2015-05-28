@@ -1,0 +1,5 @@
+author: HarpyEagle
+delete-after: True
+
+changes: 
+  - rscadd: "Replaced hack telecomms satellite generator with a SUPERPACMAN."
