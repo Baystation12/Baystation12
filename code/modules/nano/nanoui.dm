@@ -408,6 +408,18 @@ nanoui is used to open and update nano browser uis
 	nanomanager.ui_opened(src)
 
  /**
+  * Reinitialise this UI, potentially with a different template and/or initial data
+  *
+  * @return nothing
+  */
+/datum/nanoui/proc/reinitialise(template, new_initial_data)
+	if(template)
+		add_template("main", template)
+	if(new_initial_data)
+		set_initial_data(new_initial_data)
+	open()
+
+ /**
   * Close this UI
   *
   * @return nothing
