@@ -183,7 +183,7 @@
 	for(var/mob/living/silicon/robot/RB in mob_list)
 		if(istype(RB, /mob/living/silicon/robot/drone))
 			continue
-		if(RB in A.connected_robots)
+		if(RB.connected_ai == A)
 			continue
 		L.Add(RB)
 	return L
