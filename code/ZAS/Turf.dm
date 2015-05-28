@@ -45,6 +45,45 @@
 
 				air_master.connect(sim, src)
 
+/*
+	Simple heuristic for determining if removing the turf from it's zone may possibly partition the zone (A very bad thing).
+	Instead of analyzing the entire zone, we only check the nearest 3x3 turfs surrounding the src turf.
+	This implementation may produce false positives but it (hopefully) will not produce any false negatives.
+*/
+
+/turf/simulated/proc/can_safely_remove_from_zone()
+	#ifdef ZLEVELS
+	return 1 //not sure how to generalize this to multiz at the moment.
+	#else
+	
+	if(!zone) return 0
+	
+	var/check_dirs = get_zone_neighbours(src)
+	var/unconnected_dirs = check_dirs
+	
+	for(var/dir in list(NORTHWEST, NORTHEAST, SOUTHEAST, SOUTHWEST))
+		
+		//for each pair of "adjacent" cardinals (e.g. NORTH and WEST, but not NORTH and SOUTH)
+		if((dir & check_dirs) == dir)
+			//check that they are connected by the corner turf
+			var/connected_dirs = get_zone_neighbours(get_step(src, dir))
+			if(connected_dirs && (dir & turn(connected_dirs, 180)) == dir)
+				unconnected_dirs &= ~dir //they are, so unflag the cardinals in question
+	
+	//it is safe to remove src from the zone if all cardinals are connected by corner turfs
+	return !unconnected_dirs
+	
+	#endif
+
+//helper for can_safely_remove_from_zone()
+/turf/simulated/proc/get_zone_neighbours(turf/simulated/T)
+	. = 0
+	if(istype(T) && T.zone)
+		for(var/dir in cardinal)
+			var/turf/simulated/other = get_step(T, dir)
+			if(istype(other) && other.zone == T.zone && !(other.c_airblock(T) & AIR_BLOCKED) && get_dist(src, other) <= 1)
+				. |= dir
+
 /turf/simulated/update_air_properties()
 
 	if(zone && zone.invalid)
@@ -60,7 +99,7 @@
 		if(zone)
 			var/zone/z = zone
 			
-			if(s_block & ZONE_BLOCKED) //Hacky, but prevents normal airlocks from rebuilding zones all the time
+			if(can_safely_remove_from_zone()) //Helps normal airlocks avoid rebuilding zones all the time
 				z.remove(src)
 			else
 				z.rebuild()
