@@ -148,7 +148,7 @@ client/proc/Test_ZAS_Connection(var/turf/simulated/T as turf)
 		for(var/zone/Z in air_master.zones)
 			if(Z.air == air && Z != src)
 				var/turf/zloc = pick(Z.contents)
-				client << "\red Illegal air datum shared by: [zloc.loc.name]"*/
+				client << "<span class='danger'>Illegal air datum shared by: [zloc.loc.name]</span>"*/
 
 
 /*client/proc/TestZASRebuild()
