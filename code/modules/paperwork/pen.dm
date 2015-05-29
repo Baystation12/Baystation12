@@ -73,14 +73,9 @@
 	if(M.can_inject(user,1))
 		if(reagents.total_volume)
 			if(M.reagents)
-				var/list/contained_reagents = list()
-				for(var/datum/reagent/R in reagents.reagent_list)
-					contained_reagents += R.name
-				M.attack_log += "\[[time_stamp()]\] <font color='orange'>Injected by [user.name] ([user.ckey]) with \the [src] (INTENT: [uppertext(user.a_intent)]) Reagents: [english_list(contained_reagents)]</font>"
-				user.attack_log += "\[[time_stamp()]\] <font color='orange'>Injected [M.name] ([M.ckey]) with \the [src] (INTENT: [uppertext(user.a_intent)]) Reagents: [english_list(contained_reagents)]</font>"
-				msg_admin_attack("[key_name_admin(user)] injected [key_name_admin(M)] with \the [src] (INTENT: [uppertext(user.a_intent)]) Reagents: [english_list(contained_reagents)]")
-				reagents.trans_to_mob(M, 30, CHEM_BLOOD)
-
+				var/contained_reagents = reagents.get_reagents()
+				var/trans = reagents.trans_to_mob(M, 30, CHEM_BLOOD)
+				admin_inject_log(user, M, src, contained_reagents, trans)
 
 /*
  * Sleepy Pens

@@ -171,16 +171,11 @@
 
 					user.visible_message("<span class='warning'>[user] injects [target] with the syringe!</span>")
 
-					if(istype(target, /mob/living))
-						var/mob/living/M = target
-						var/contained = reagentlist()
-						M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been injected with [name] by [user.name] ([user.ckey]). Reagents: [contained]</font>")
-						user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [name] to inject [M.name] ([M.key]). Reagents: [contained]</font>")
-						msg_admin_attack("[user.name] ([user.ckey]) injected [M.name] ([M.key]) with [name]. Reagents: [contained] (INTENT: [uppertext(user.a_intent)]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
-
 				var/trans
 				if(ismob(target))
+					var/contained = reagentlist()
 					trans = reagents.trans_to_mob(target, amount_per_transfer_from_this, CHEM_BLOOD)
+					admin_inject_log(user, target, src, contained, trans)
 				else
 					trans = reagents.trans_to(target, amount_per_transfer_from_this)
 				user << "<span class='notice'>You inject [trans] units of the solution. The syringe now contains [src.reagents.total_volume] units.</span>"
@@ -259,13 +254,10 @@
 
 
 		var/syringestab_amount_transferred = rand(0, (reagents.total_volume - 5)) //nerfed by popular demand
-		var/list/contained_reagents = list()
-		for(var/datum/reagent/R in reagents.reagent_list)
-			contained_reagents += R.name
-		user.attack_log += "\[[time_stamp()]\]<font color='red'> Stabbed [target.name] ([target.ckey]) with \the [src] (INTENT: HARM). Reagents: [english_list(contained_reagents)] ([syringestab_amount_transferred]u total)"
-		target.attack_log += "\[[time_stamp()]\]<font color='orange'> Stabbed by [user.name] ([user.ckey]) with \the [src] (INTENT: HARM). Reagents: [english_list(contained_reagents)] ([syringestab_amount_transferred]u total)"
-		msg_admin_attack("[key_name_admin(user)] stabbed [key_name_admin(target)] with \the [src] (INTENT: HARM). Reagents: [english_list(contained_reagents)] ([syringestab_amount_transferred]u total)")
-		reagents.trans_to_mob(target, syringestab_amount_transferred, CHEM_BLOOD)
+		var/contained_reagents = reagents.get_reagents()
+		var/trans = reagents.trans_to_mob(target, syringestab_amount_transferred, CHEM_BLOOD)
+		if(isnull(trans)) trans = 0
+		admin_inject_log(user, target, src, contained_reagents, trans, violent=1)
 		break_syringe(target, user)
 
 	proc/break_syringe(mob/living/carbon/target, mob/living/carbon/user)
