@@ -39,7 +39,7 @@ var/global/list/stool_cache = list() //haha stool
 	// Base icon.
 	var/cache_key = "stool-[material.name]"
 	if(isnull(stool_cache[cache_key]))
-		var/image/I = image('icons/obj/objects.dmi', base_icon)
+		var/image/I = image(icon, base_icon)
 		I.color = material.icon_colour
 		stool_cache[cache_key] = I
 	overlays |= stool_cache[cache_key]
@@ -47,7 +47,7 @@ var/global/list/stool_cache = list() //haha stool
 	if(padding_material)
 		var/padding_cache_key = "stool-padding-[padding_material.name]"
 		if(isnull(stool_cache[padding_cache_key]))
-			var/image/I =  image('icons/obj/objects.dmi', "stool_padding")
+			var/image/I =  image(icon, "stool_padding")
 			I.color = padding_material.icon_colour
 			stool_cache[padding_cache_key] = I
 		overlays |= stool_cache[padding_cache_key]

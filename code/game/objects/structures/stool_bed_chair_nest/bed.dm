@@ -48,7 +48,7 @@
 	if(padding_material)
 		var/padding_cache_key = "[base_icon]-padding-[padding_material.name]"
 		if(isnull(stool_cache[padding_cache_key]))
-			var/image/I =  image('icons/obj/objects.dmi', "stool_padding")
+			var/image/I =  image(icon, "[base_icon]_padding")
 			I.color = padding_material.icon_colour
 			stool_cache[padding_cache_key] = I
 		overlays |= stool_cache[padding_cache_key]
