@@ -412,7 +412,7 @@ var/list/name_to_material
 /material/carpet
 	name = "carpet"
 	display_name = "comfy"
-	use_name = " red upholstery"
+	use_name = "red upholstery"
 	icon_colour = "#DA020A"
 
 /material/cotton

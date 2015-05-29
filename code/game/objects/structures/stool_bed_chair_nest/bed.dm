@@ -32,9 +32,6 @@
 		padding_material = get_material_by_name(new_padding_material)
 	update_icon()
 
-/obj/structure/bed/padded/New(var/newloc)
-	..(newloc,"steel","cotton")
-
 // Reuse the cache/code from stools, todo maybe unify.
 /obj/structure/bed/update_icon()
 	// Prep icon.
@@ -59,10 +56,10 @@
 	desc = initial(desc)
 	if(padding_material)
 		name = "[padding_material.display_name] [initial(name)]" //this is not perfect but it will do for now.
-		desc += " It's made of [material.display_name] and covered with [padding_material.display_name]."
+		desc += " It's made of [material.use_name] and covered with [padding_material.use_name]."
 	else
 		name = "[material.display_name] [initial(name)]"
-		desc += " It's made of [material.display_name]."
+		desc += " It's made of [material.use_name]."
 
 /obj/structure/bed/ex_act(severity)
 	switch(severity)
@@ -157,7 +154,10 @@
 	base_icon = "psychbed"
 
 /obj/structure/bed/psych/New(var/newloc)
-	..(newloc,"leather")
+	..(newloc,"wood","leather")
+
+/obj/structure/bed/padded/New(var/newloc)
+	..(newloc,"plastic","cotton")
 
 /obj/structure/bed/alien
 	name = "resting contraption"
