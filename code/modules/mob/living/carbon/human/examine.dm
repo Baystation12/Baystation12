@@ -260,10 +260,8 @@
 
 		var/obj/item/organ/external/E = organs_by_name[organ_tag]
 		if(!E)
-			world << "[organ_tag] missing"
 			wound_flavor_text["[organ_descriptor]"] = "<span class='warning'><b>[t_He] is missing [t_his] [organ_descriptor].</b></span>\n"
 		else if(E.is_stump())
-			world << "[E.name] is a stump"
 			wound_flavor_text["[organ_descriptor]"] = "<span class='warning'><b>[t_He] has a stump where [t_his] [organ_descriptor] should be.</b></span>\n"
 		else
 			is_destroyed["organ_descriptor"] = 0

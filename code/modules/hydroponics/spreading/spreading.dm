@@ -235,7 +235,7 @@
 
 	if(istype(W, /obj/item/weapon/wirecutters) || istype(W, /obj/item/weapon/scalpel))
 		if(!seed)
-			user << "<span classThere is nothing to take a sample from.</span>"
+			user << "<span class='danger'>There is nothing to take a sample from.</span>"
 			return
 		if(sampled)
 			user << "<span class='danger'>You cannot take another sample from \the [src].</span>"
