@@ -28,16 +28,17 @@ Pipelines + Other Objects -> Pipe network
 	var/global/datum/pipe_icon_manager/icon_manager
 
 /obj/machinery/atmospherics/New()
-	if(!icon_manager)
-		icon_manager = new()
+	spawn(1)
+		if(!icon_manager)
+			icon_manager = new()
 
-	if(!pipe_color)
-		pipe_color = color
-	color = null
+		if(!pipe_color)
+			pipe_color = color
+		color = null
 
-	if(!pipe_color_check(pipe_color))
-		pipe_color = null
-	..()
+		if(!pipe_color_check(pipe_color))
+			pipe_color = null
+		..()
 
 /obj/machinery/atmospherics/attackby(atom/A, mob/user as mob)
 	if(istype(A, /obj/item/device/pipe_painter))
