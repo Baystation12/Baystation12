@@ -25,6 +25,16 @@ Because if you select a player mob as owner it tries to do the proc for
 But you can call procs that are of type /mob/living/carbon/human/proc/ for that player.
 */
 
+//we can't allow call ANY proc
+var/list/proc_blacklist = list(
+	"ext_python",
+	"return_file_text",
+	"file2list",
+	"getFiles",
+	"browse_files",
+	"configuration/proc"
+)
+
 /client/proc/callproc()
 	set category = "Debug"
 	set name = "Advanced ProcCall"
@@ -64,6 +74,11 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 
 		var/procname = input("Proc path, eg: /proc/fake_blood","Path:", null) as text|null
 		if(!procname)	return
+
+		for(var/P in proc_blacklist)
+			if(findtext(procname, P))
+				usr << "<font color='red'>Sorry, you can't do it. Possible blacklist proc.</font>"
+				return
 
 		var/argnum = input("Number of arguments","Number:",0) as num|null
 		if(!argnum && (argnum!=0))	return
