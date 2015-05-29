@@ -246,6 +246,8 @@ var/list/ai_verbs_default = list(
 	if(!powered_ai || powered_ai.stat & DEAD)
 		qdel()
 		return
+	if(powered_ai.psupply != src) // For some reason, the AI has different powersupply object. Delete this one, it's no longer needed.
+		qdel(src)
 	if(powered_ai.APU_power)
 		use_power = 0
 		return
