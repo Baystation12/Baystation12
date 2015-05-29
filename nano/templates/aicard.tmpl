@@ -48,11 +48,17 @@ Used In File(s): \code\game\objects\items\devices\aicard.dm
  
 {{if data.has_ai}}
     <div class="item">
-        <div class="itemLabelNarrow">
-            Integrity:
+        <div class="itemLabel">
+            Hardware Integrity:
         </div>
-        <div class="itemContentWide">
-            {{:data.integrity}}%
+        <div class="itemContent">
+            {{:data.hardware_integrity}}%
+        </div>
+        <div class="itemLabel">
+            Backup Capacitor:
+        </div>
+        <div class="itemContent">
+            {{:data.backup_capacitor}}%
         </div>
     </div>
     

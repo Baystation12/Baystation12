@@ -468,38 +468,29 @@ var/global/datum/controller/occupations/job_master
 					return H.Robotize()
 				if("AI")
 					return H
-				if("Clown")	//don't need bag preference stuff!
+				if("Captain")
+					var/sound/announce_sound = (ticker.current_state <= GAME_STATE_SETTING_UP)? null : sound('sound/misc/boatswain.ogg', volume=20)
+					captain_announcement.Announce("All hands, Captain [H.real_name] on deck!", new_sound=announce_sound)
+
+			if(istype(H.back, /obj/item/weapon/storage))
+				new /obj/item/weapon/storage/box/survival(H.back)
+			else
+				H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H), slot_r_hand)
+
+			//Deferred item spawning.
+			if(spawn_in_storage && spawn_in_storage.len)
+				var/obj/item/weapon/storage/B
+				for(var/obj/item/weapon/storage/S in H.contents)
+					B = S
+					break
+
+				if(!isnull(B))
+					for(var/thing in spawn_in_storage)
+						H << "<span class='notice'>Placing [thing] in your [B]!</span>"
+						var/datum/gear/G = gear_datums[thing]
+						new G.path(B)
 				else
-					switch(H.backbag) //BS12 EDIT
-						if(1)
-							H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H), slot_r_hand)
-						if(2)
-							var/obj/item/weapon/storage/backpack/BPK = new/obj/item/weapon/storage/backpack(H)
-							new /obj/item/weapon/storage/box/survival(BPK)
-							H.equip_to_slot_or_del(BPK, slot_back,1)
-						if(3)
-							var/obj/item/weapon/storage/backpack/BPK = new/obj/item/weapon/storage/backpack/satchel_norm(H)
-							new /obj/item/weapon/storage/box/survival(BPK)
-							H.equip_to_slot_or_del(BPK, slot_back,1)
-						if(4)
-							var/obj/item/weapon/storage/backpack/BPK = new/obj/item/weapon/storage/backpack/satchel(H)
-							new /obj/item/weapon/storage/box/survival(BPK)
-							H.equip_to_slot_or_del(BPK, slot_back,1)
-
-					//Deferred item spawning.
-					if(spawn_in_storage && spawn_in_storage.len)
-						var/obj/item/weapon/storage/B
-						for(var/obj/item/weapon/storage/S in H.contents)
-							B = S
-							break
-
-						if(!isnull(B))
-							for(var/thing in spawn_in_storage)
-								H << "<span class='notice'>Placing [thing] in your [B]!</span>"
-								var/datum/gear/G = gear_datums[thing]
-								new G.path(B)
-						else
-							H << "<span class='danger'>Failed to locate a storage object on your mob, either you spawned with no arms and no backpack or this is a bug.</span>"
+					H << "<span class='danger'>Failed to locate a storage object on your mob, either you spawned with no arms and no backpack or this is a bug.</span>"
 
 		if(istype(H)) //give humans wheelchairs, if they need them.
 			var/obj/item/organ/external/l_foot = H.get_organ("l_foot")

@@ -138,6 +138,9 @@
 			   DAMAGE PROCS
 ****************************************************/
 
+/obj/item/organ/external/proc/is_damageable(var/additional_damage = 0)
+	return (vital || brute_dam + burn_dam + additional_damage < max_damage)
+
 /obj/item/organ/external/take_damage(brute, burn, sharp, edge, used_weapon = null, list/forbidden_limbs = list())
 	if((brute <= 0) && (burn <= 0))
 		return 0
@@ -168,7 +171,7 @@
 	// If the limbs can break, make sure we don't exceed the maximum damage a limb can take before breaking
 	// Non-vital organs are limited to max_damage. You can't kill someone by bludeonging their arm all the way to 200 -- you can
 	// push them faster into paincrit though, as the additional damage is converted into shock.
-	if(vital || (brute_dam + burn_dam + brute + burn) < max_damage || !config.limbs_can_break)
+	if(is_damageable(brute + burn) || !config.limbs_can_break)
 		if(brute)
 			if(can_cut)
 				createwound( CUT, brute )
