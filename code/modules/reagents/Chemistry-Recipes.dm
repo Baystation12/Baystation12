@@ -6,8 +6,19 @@
 	var/list/catalysts = list()
 	var/list/inhibitors = list()
 
+/* Kinetics vars - default to old behavior
+
+old grenade reactions are absolutely required to keep the values at 0-1-0 to work as intended */
+
+	var/reaction_delay = 10 // delay between each instance of reaction from mixing, in deciseconds. 0 is old behavior.
+	var/rate = 1 //fraction of reagent available used, 1 amounts to old behavior, 2 means half of reagent is consumed per iteration, etc.
+	var/cutoff = 0 //cutoff, only on multi-stage reactions - you could experiment with it for !!FUN!! behaviors
+
+/* end of kinetics */
+
 	var/result_amount = 0
 	var/mix_message = "The solution begins to bubble."
+
 
 /datum/chemical_reaction/proc/can_happen(var/datum/reagents/holder)
 	return 1
@@ -90,6 +101,7 @@
 	result = "space_drugs"
 	required_reagents = list("mercury" = 1, "sugar" = 1, "lithium" = 1)
 	result_amount = 3
+	rate = 4 //demonstration, but since it's illegal, making production longer and more conspicuous can't hurt for now
 
 /datum/chemical_reaction/lube
 	name = "Space Lube"
@@ -448,6 +460,8 @@
 	required_reagents = list("water" = 1, "potassium" = 1)
 	result_amount = 2
 	mix_message = null
+	reaction_delay = 0
+	rate = 1
 
 /datum/chemical_reaction/explosion_potassium/on_reaction(var/datum/reagents/holder, var/created_volume)
 	var/datum/effect/effect/system/reagents_explosion/e = new()
@@ -468,6 +482,8 @@
 	result = null
 	required_reagents = list("aluminum" = 1, "potassium" = 1, "sulfur" = 1 )
 	result_amount = null
+	reaction_delay = 0
+	rate = 1
 
 /datum/chemical_reaction/flash_powder/on_reaction(var/datum/reagents/holder, var/created_volume)
 	var/location = get_turf(holder.my_atom)
@@ -498,6 +514,8 @@
 	result = null
 	required_reagents = list("uranium" = 1, "iron" = 1) // Yes, laugh, it's the best recipe I could think of that makes a little bit of sense
 	result_amount = 2
+	reaction_delay = 0
+	rate = 1
 
 /datum/chemical_reaction/emp_pulse/on_reaction(var/datum/reagents/holder, var/created_volume)
 	var/location = get_turf(holder.my_atom)
@@ -513,6 +531,8 @@
 	result = "nitroglycerin"
 	required_reagents = list("glycerol" = 1, "pacid" = 1, "sacid" = 1)
 	result_amount = 2
+	reaction_delay = 0
+	rate = 1
 
 /datum/chemical_reaction/nitroglycerin/on_reaction(var/datum/reagents/holder, var/created_volume)
 	var/datum/effect/effect/system/reagents_explosion/e = new()
@@ -534,6 +554,8 @@
 	result = null
 	required_reagents = list("aluminum" = 1, "phoron" = 1, "sacid" = 1 )
 	result_amount = 1
+	reaction_delay = 0
+	rate = 1
 
 /datum/chemical_reaction/napalm/on_reaction(var/datum/reagents/holder, var/created_volume)
 	var/turf/location = get_turf(holder.my_atom.loc)
@@ -549,6 +571,8 @@
 	result = null
 	required_reagents = list("potassium" = 1, "sugar" = 1, "phosphorus" = 1)
 	result_amount = 0.4
+	reaction_delay = 0
+	rate = 1
 
 /datum/chemical_reaction/chemsmoke/on_reaction(var/datum/reagents/holder, var/created_volume)
 	var/location = get_turf(holder.my_atom)
@@ -568,6 +592,8 @@
 	required_reagents = list("surfactant" = 1, "water" = 1)
 	result_amount = 2
 	mix_message = "The solution violently bubbles!"
+	reaction_delay = 0
+	rate = 1
 
 /datum/chemical_reaction/foam/on_reaction(var/datum/reagents/holder, var/created_volume)
 	var/location = get_turf(holder.my_atom)
@@ -587,6 +613,8 @@
 	result = null
 	required_reagents = list("aluminum" = 3, "foaming_agent" = 1, "pacid" = 1)
 	result_amount = 5
+	reaction_delay = 0
+	rate = 1
 
 /datum/chemical_reaction/metalfoam/on_reaction(var/datum/reagents/holder, var/created_volume)
 	var/location = get_turf(holder.my_atom)
@@ -605,6 +633,8 @@
 	result = null
 	required_reagents = list("iron" = 3, "foaming_agent" = 1, "pacid" = 1)
 	result_amount = 5
+	reaction_delay = 0
+	rate = 1
 
 /datum/chemical_reaction/ironfoam/on_reaction(var/datum/reagents/holder, var/created_volume)
 	var/location = get_turf(holder.my_atom)

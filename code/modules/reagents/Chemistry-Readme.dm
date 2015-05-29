@@ -270,6 +270,32 @@ About Recipes:
 		send_data(var/datum/reagents/T)
 			Sets resulting reagent's data. Used by blood paint.
 
+	kinetics:
+
+		rate
+			Fraction of how much of the total usable reagent actually is used in a reaction's iteration.
+			If the required_amount is 1 and reagent volume is 10, for example, a reaction with a rate of 2 will use
+			5 reagents in the first iteration, then 2.5 (0.5 * (10-5)) in the next, and so on.
+
+			KEEP IT >= 1! You can use floats >1 but values <1 will result in Shenanigans (TM) occuring.
+
+		reaction_delay
+			Delay between iterations (mixing is treated as iteration 0), in deciseconds.
+			Keep in mind when setting this that it adds up - if you want to keep a reaction slow, keeping the stages high is better.
+
+			Modify it to get things like delayed grenade reactions, as higher stages would
+			also keep the reaction going longer and/or less intense.
+
+		cutoff
+			A safeguard for multi-stage reactions - a reaction will stop when the volume of reagents falls below cutoff*stoichiometry
+			of the reagent. Bear in mind it's not a predictable value - for a cutoff of 5, rate of 2 and reqs of 1, in a beaker
+			with 10u of reagent it will produce 7.5 units of product (pass at 10u and pass at 5u), 11u 8.25 (rounded to 8.3)
+			and so on by 0.75 increments but 9u will only yield 4.5 (pass at 9u, fail at 4.5u).
+
+			Reactions with rate > 1 have a hard minimum on cutoff to prevent overly long loops - BYOND hates them
+			(learn 1 simple trick to break SS13 servers they don't want you to know!)
+
+
 About the Tools:
 
 	By default, all atom have a reagents var - but its empty. if you want to use an object for the chem.

@@ -108,12 +108,15 @@
 	if(my_atom.flags & NOREACT) // No reactions here
 		return
 
-	var/reaction_occured = 0
+	var/reaction_incomplete = 1
+	var/potential_reactions = 0 // Can something still happen?
+	var/showmessage = 1
+
 	do
-		reaction_occured = 0
 		for(var/datum/reagent/R in reagent_list)
 			for(var/datum/chemical_reaction/C in chemical_reactions_list[R.id])
 				var/reagents_suitable = 1
+				potential_reactions++
 				for(var/B in C.required_reagents)
 					if(!has_reagent(B))
 						reagents_suitable = 0
@@ -123,34 +126,49 @@
 				for(var/B in C.inhibitors)
 					if(has_reagent(B, C.inhibitors[B]))
 						reagents_suitable = 0
+				if(C.rate > 1) //insta-reactions don't need no stinking checks for cutoff
+					for(var/B in C.required_reagents)
+						if(get_reagent_amount(B) < (max(1,C.cutoff * C.required_reagents[B]))) //but multis need a cutoff to prevent infinite loops
+							reagents_suitable = 0
 
 				if(!reagents_suitable || !C.can_happen(src))
+					potential_reactions--
 					continue
 
-				var/use = -1
-				for(var/B in C.required_reagents)
-					if(use == -1)
-						use = get_reagent_amount(B) / C.required_reagents[B]
-					else
-						use = min(use, get_reagent_amount(B) / C.required_reagents[B])
+				spawn(C.reaction_delay)
+					var/multiples = -1 //used to be use, but it would be non-indicative
+					for(var/B in C.required_reagents)
+						if(multiples == -1)
+							multiples = (get_reagent_amount(B) / C.required_reagents[B])
+						else
+							multiples = min(multiples, (get_reagent_amount(B) / C.required_reagents[B]))
 
-				var/newdata = C.send_data(src) // We need to get it before reagents are removed. See blood paint.
-				for(var/B in C.required_reagents)
-					remove_reagent(B, use * C.required_reagents[B], safety = 1)
+					var/use = round(multiples / C.rate, 1)//old use adjusted for rate coeff (donut confuz plz) round for less floaty value
+					var/newdata = C.send_data(src) // We need to get it before reagents are removed. See blood paint.
+					for(var/B in C.required_reagents)
+						remove_reagent(B, use * C.required_reagents[B], safety = 1)
 
-				if(C.result)
-					add_reagent(C.result, C.result_amount * use, newdata)
+					if(C.result)
+						add_reagent(C.result, C.result_amount * use, newdata)
 
-				if(!ismob(my_atom) && C.mix_message)
-					var/list/seen = viewers(4, get_turf(my_atom))
-					for(var/mob/M in seen)
-						M << "<span class='notice'>\icon[my_atom] [C.mix_message]</span>"
-					playsound(get_turf(my_atom), 'sound/effects/bubbles.ogg', 80, 1)
+					if(!ismob(my_atom) && C.mix_message)
+						if(showmessage == 1)
+							var/list/seen = viewers(4, get_turf(my_atom))
+							for(var/mob/M in seen)
+								M << "<span class='notice'>\icon[my_atom] [C.mix_message]</span>"
+								showmessage = 0
+						else
+							spawn(40)
+								showmessage = 1
+						playsound(get_turf(my_atom), 'sound/effects/bubbles.ogg', 80, 1)
 
-				C.on_reaction(src, C.result_amount * use)
-				reaction_occured = 1
-	while(reaction_occured)
-	update_total()
+					C.on_reaction(src, (C.result_amount * use))
+					update_total()
+				potential_reactions--
+
+		if(potential_reactions <= 0)
+			reaction_incomplete = 0
+	while(reaction_incomplete)
 	return
 
 /* Holder-to-chemical */
