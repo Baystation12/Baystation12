@@ -1394,11 +1394,11 @@
 					var/obj/item/clothing/glasses/welding/O = glasses
 					if(!O.up)
 						found_welder = 1
-				else if(istype(head, /obj/item/clothing/head/welding))
+				if(!found_welder && istype(head, /obj/item/clothing/head/welding))
 					var/obj/item/clothing/head/welding/O = head
 					if(!O.up)
 						found_welder = 1
-				else if(istype(back, /obj/item/weapon/rig))
+				if(!found_welder && istype(back, /obj/item/weapon/rig))
 					var/obj/item/weapon/rig/O = back
 					if(O.helmet && O.helmet == head && (O.helmet.body_parts_covered & EYES))
 						if((O.offline && O.offline_vision_restriction == 1) || (!O.offline && O.vision_restriction == 1))
