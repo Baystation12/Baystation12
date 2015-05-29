@@ -33,12 +33,11 @@ In short:
 
 
 /datum/universal_state/hell/OnTurfChange(var/turf/T)
-	if(istype(T, /turf/space))
-		T.color = "#FF0000"
-		T.set_light(2, 2, "#FF0000")
+	var/turf/space/S = T
+	if(istype(S))
+		S.color = "#FF0000"
 	else
-		T.color = initial(T.color)
-		T.set_light(0)
+		S.color = initial(S.color)
 
 // Apply changes when entering state
 /datum/universal_state/hell/OnEnter()
@@ -70,8 +69,7 @@ In short:
 			L.update_lumcount(1, 0, 0)
 
 		for(var/turf/space/T in turfs)
-			T.color = "#FF0000"
-			T.set_light(2, 2, "#FF0000")
+			OnTurfChange(T)
 
 /datum/universal_state/hell/proc/MiscSet()
 	for(var/turf/simulated/floor/T in turfs)

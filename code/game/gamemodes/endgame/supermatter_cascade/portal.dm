@@ -8,7 +8,7 @@
 
 	move_self = 0
 	announce=0
-	narnar=0
+	cause_hell=0
 
 	layer=LIGHTING_LAYER+2 // ITS SO BRIGHT
 

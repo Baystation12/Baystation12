@@ -13,13 +13,11 @@ var/global/universe_has_ended = 0
 	return 0
 
 /datum/universal_state/supermatter_cascade/OnTurfChange(var/turf/T)
-	if(istype(T, /turf/space))
-		T.color = "#0066FF"
-		T.set_light(2, 2, "#0066FF")
+	var/turf/space/S = T
+	if(istype(S))
+		S.color = "#0066FF"
 	else
-		T.color = initial(T.color)
-		T.set_light(0)
-
+		S.color = initial(S.color)
 
 /datum/universal_state/supermatter_cascade/DecayTurf(var/turf/T)
 	if(istype(T,/turf/simulated/wall))
@@ -103,8 +101,7 @@ The access requirements on the Asteroid Shuttles' consoles have now been revoked
 				L.update_lumcount(0.0, 0.4, 1)
 
 		for(var/turf/space/T in turfs)
-			T.color = "#0066FF"
-			T.set_light(2, 2, "#0066FF")
+			OnTurfChange(T)
 
 /datum/universal_state/supermatter_cascade/proc/MiscSet()
 	for (var/obj/machinery/firealarm/alm in machines)

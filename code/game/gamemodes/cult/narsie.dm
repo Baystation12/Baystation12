@@ -38,7 +38,7 @@ var/global/list/narsie_list = list()
 	current_size = 12
 	consume_range = 12 // How many tiles out do we eat.
 	var/announce=1
-	var/narnar = 1
+	var/cause_hell = 1
 
 /obj/singularity/narsie/large/New()
 	..()
@@ -49,7 +49,7 @@ var/global/list/narsie_list = list()
 	narsie_spawn_animation()
 
 	if(!narsie_cometh)//so we don't initiate Hell more than one time.
-		if(narnar)
+		if(cause_hell)
 			SetUniversalState(/datum/universal_state/hell)
 		narsie_cometh = 1
 
@@ -86,14 +86,14 @@ var/global/list/narsie_list = list()
 
 
 /obj/singularity/narsie/large/Bump(atom/A)
-	if(!narnar) return
+	if(!cause_hell) return
 	if(isturf(A))
 		narsiewall(A)
 	else if(istype(A, /obj/structure/cult))
 		qdel(A)
 
 /obj/singularity/narsie/large/Bumped(atom/A)
-	if(!narnar) return
+	if(!cause_hell) return
 	if(isturf(A))
 		narsiewall(A)
 	else if(istype(A, /obj/structure/cult))
