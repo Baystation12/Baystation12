@@ -217,7 +217,7 @@ var/datum/antagonist/rogue_ai/malf
 						current:show_laws()
 						current.icon_state = "ai"
 
-						current << "\red <FONT size = 3><B>You have been patched! You are no longer malfunctioning!</B></FONT>"
+						current << "<FONT size = 3><span class='danger'>You have been patched! You are no longer malfunctioning!</span></FONT>"
 						log_admin("[key_name_admin(usr)] has de-malf'ed [current].")
 
 				if("malf")

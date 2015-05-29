@@ -39,7 +39,7 @@ rcd light flash thingy on matter drain
 	for(var/mob/living/silicon/ai/ai in player_list)
 		ai.fire_res_on_core = 1
 	usr.verbs -= /client/proc/fireproof_core
-	usr << "\red Core fireproofed."
+	usr << "<span class='warning'>Core fireproofed.</span>"
 
 /datum/AI_Module/large/upgrade_turrets
 	module_name = "AI Turret upgrade"
@@ -86,7 +86,7 @@ rcd light flash thingy on matter drain
 			if(overload.uses > 0)
 				overload.uses --
 				for(var/mob/V in hearers(M, null))
-					V.show_message("\blue You hear a loud electrical buzzing sound!", 2)
+					V.show_message("<span class='warning'>You hear a loud electrical buzzing sound!</span>", 2)
 				spawn(50)
 					explosion(get_turf(M), 0,1,2,3)
 					qdel(M)
@@ -125,7 +125,7 @@ rcd light flash thingy on matter drain
 					C.status = !C.status
 					camera.uses --
 					for(var/mob/V in viewers(src, null))
-						V.show_message(text("\blue You hear a quiet click."))
+						V.show_message(text("<span class='notice'>You hear a quiet click.</span>"))
 				else
 					usr << "This camera is either active, or not repairable."
 			else usr << "Out of uses."
