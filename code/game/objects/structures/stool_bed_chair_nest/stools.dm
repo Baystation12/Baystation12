@@ -4,7 +4,7 @@ var/global/list/stool_cache = list() //haha stool
 /obj/item/weapon/stool
 	name = "stool"
 	desc = "Apply butt."
-	icon = 'icons/obj/objects.dmi'
+	icon = 'icons/obj/furniture.dmi'
 	icon_state = "stool_preview" //set for the map
 	force = 10
 	throwforce = 10
@@ -34,13 +34,12 @@ var/global/list/stool_cache = list() //haha stool
 
 /obj/item/weapon/stool/update_icon()
 	// Prep icon.
-	icon_state = "stool"
+	icon_state = ""
 	overlays.Cut()
 	// Base icon.
 	var/cache_key = "stool-[material.name]"
 	if(isnull(stool_cache[cache_key]))
 		var/image/I = image('icons/obj/objects.dmi', base_icon)
-		color = material.icon_colour
 		I.color = material.icon_colour
 		stool_cache[cache_key] = I
 	overlays |= stool_cache[cache_key]

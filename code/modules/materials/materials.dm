@@ -400,7 +400,8 @@ var/list/name_to_material
 		return 1
 	return 0
 
-/material/leather //todo
+//TODO PLACEHOLDERS:
+/material/leather
 	name = "leather"
 	icon_colour = "#5C4831"
 	stack_origin_tech = "materials=2"
@@ -408,4 +409,39 @@ var/list/name_to_material
 /material/carpet
 	name = "carpet"
 	display_name = "padding"
-	icon_colour = "#A83C1B"
+	icon_colour = "#DA020A"
+
+/material/cloth_teal
+	name = "teal"
+	display_name ="teal"
+	icon_colour = "#00EAFA"
+
+/material/cloth_black
+	name = "black"
+	display_name = "black"
+	icon_colour = "#505050"
+
+/material/cloth_
+	name = "green"
+	display_name = "green"
+	icon_colour = "#01C608"
+
+/material/cloth_puple
+	name = "purple"
+	display_name = "purple"
+	icon_colour = "#9C56C4"
+
+/material/cloth_blue
+	name = "blue"
+	display_name = "blue"
+	icon_colour = "#6B6FE3"
+
+/material/cloth_beige
+	name = "beige"
+	display_name = "beige"
+	icon_colour = "#E8E7C8"
+
+/material/cloth_lime
+	name = "lime"
+	display_name = "lime"
+	icon_colour = "#62E36C"
