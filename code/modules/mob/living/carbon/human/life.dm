@@ -942,7 +942,7 @@
 		if(status_flags & GODMODE)	return 0
 
 		//SSD check, if a logged player is awake put them back to sleep!
-		if(player_logged && sleeping < 2)
+		if((!client || !key || player_logged) && sleeping < 2)
 			sleeping = 2
 
 		if(stat == DEAD)	//DEAD. BROWN BREAD. SWIMMING WITH THE SPESS CARP
@@ -1135,7 +1135,7 @@
 
 		if(damageoverlay.overlays)
 			damageoverlay.overlays = list()
-		
+
 		if(stat == UNCONSCIOUS)
 			//Critical damage passage overlay
 			if(health <= 0)
