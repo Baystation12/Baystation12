@@ -48,6 +48,7 @@ var/list/name_to_material
 /material
 	var/name	                          // Unique name for use in indexing the list.
 	var/display_name                      // Prettier name for display.
+	var/use_name
 	var/flags = 0                         // Various status modifiers.
 
 	// Shards/tables/structures
@@ -85,7 +86,7 @@ var/list/name_to_material
 	// Noise made when a simple door made of this material opens or closes.
 	var/dooropen_noise = 'sound/effects/stonedoor_openclose.ogg'
 	// Path to resulting stacktype. Todo remove need for this.
-	var/stack_type = /obj/item/stack/material/steel
+	var/stack_type
 	// Wallrot crumble message.
 	var/rotting_touch_message = "crumbles under your touch"
 
@@ -94,6 +95,8 @@ var/list/name_to_material
 	..()
 	if(!display_name)
 		display_name = name
+	if(!use_name)
+		use_name = display_name
 	if(!shard_icon)
 		shard_icon = shard_type
 
@@ -408,40 +411,53 @@ var/list/name_to_material
 
 /material/carpet
 	name = "carpet"
-	display_name = "padding"
+	display_name = "comfy"
+	use_name = " red upholstery"
 	icon_colour = "#DA020A"
+
+/material/cotton
+	name = "cotton"
+	display_name ="cotton"
+	icon_colour = "#FFFFFF"
 
 /material/cloth_teal
 	name = "teal"
 	display_name ="teal"
+	use_name = "teal cloth"
 	icon_colour = "#00EAFA"
 
 /material/cloth_black
 	name = "black"
 	display_name = "black"
+	use_name = "black cloth"
 	icon_colour = "#505050"
 
-/material/cloth_
+/material/cloth_green
 	name = "green"
 	display_name = "green"
+	use_name = "green cloth"
 	icon_colour = "#01C608"
 
 /material/cloth_puple
 	name = "purple"
 	display_name = "purple"
+	use_name = "purple cloth"
 	icon_colour = "#9C56C4"
 
 /material/cloth_blue
 	name = "blue"
 	display_name = "blue"
+	use_name = "blue cloth"
 	icon_colour = "#6B6FE3"
 
 /material/cloth_beige
 	name = "beige"
 	display_name = "beige"
+	use_name = "beige cloth"
 	icon_colour = "#E8E7C8"
 
 /material/cloth_lime
 	name = "lime"
 	display_name = "lime"
+	use_name = "lime cloth"
 	icon_colour = "#62E36C"
