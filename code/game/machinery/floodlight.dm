@@ -51,7 +51,7 @@
 	set_light(brightness_on, brightness_on / 2)
 	update_icon()
 	if(loud)
-		visible_message("\the [src] turns on.")
+		visible_message("\The [src] turns on.")
 	return 1
 
 /obj/machinery/floodlight/proc/turn_off(var/loud = 0)
@@ -59,7 +59,17 @@
 	set_light(0, 0)
 	update_icon()
 	if(loud)
-		visible_message("\the [src] shuts down.")
+		visible_message("\The [src] shuts down.")
+
+/obj/machinery/floodlight/attack_ai(mob/user as mob)
+	if(istype(user, /mob/living/silicon/robot) && Adjacent(user))
+		return attack_hand(user)
+
+	if(on)
+		turn_off(1)
+	else
+		if(!turn_on(1))
+			user << "You try to turn on \the [src] but it does not work."
 
 
 /obj/machinery/floodlight/attack_hand(mob/user as mob)
