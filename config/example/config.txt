@@ -103,6 +103,9 @@ TRAITOR_SCALING
 ## make ERT's be only called by admins
 #ERT_ADMIN_ONLY
 
+## If uncommented, votes can be called to add extra antags to the round.
+#ALLOW_EXTRA_ANTAGS
+
 ## If security is prohibited from being most antagonists
 #PROTECT_ROLES_FROM_ANTAGONIST
 
