@@ -18,12 +18,12 @@
 
 	//Manifolds
 	for (var/obj/machinery/atmospherics/pipe/manifold/pipe in world)
-		if (!pipe.node1 || !pipe.node2 || !pipe.node3)
+		if (!pipe.get_nodes_amount())
 			usr << "Unconnected [pipe.name] located at [pipe.x],[pipe.y],[pipe.z] ([get_area(pipe.loc)])"
 
 	//Pipes
 	for (var/obj/machinery/atmospherics/pipe/simple/pipe in world)
-		if (!pipe.node1 || !pipe.node2)
+		if (!pipe.get_nodes_amount())
 			usr << "Unconnected [pipe.name] located at [pipe.x],[pipe.y],[pipe.z] ([get_area(pipe.loc)])"
 
 	usr << "Checking for overlapping pipes..."

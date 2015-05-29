@@ -14,7 +14,7 @@
 //--------------------------------------------
 // Omni port datum
 //
-// Used by omni devices to manage connections 
+// Used by omni devices to manage connections
 //  to other atmospheric objects.
 //--------------------------------------------
 /datum/omni_port
@@ -48,8 +48,7 @@
 
 /datum/omni_port/proc/disconnect()
 	if(node)
-		node.disconnect(master)
-		master.disconnect(node)
+		disconnect(node, master)
 
 
 //--------------------------------------------
@@ -70,10 +69,10 @@
 			string = "East"
 		if(WEST)
 			string = "West"
-	
+
 	if(!capitalize && string)
 		string = lowertext(string)
-	
+
 	return string
 
 //returns a direction flag based on the string passed to it
@@ -94,16 +93,15 @@
 
 /proc/mode_to_gasid(var/mode)
 	switch(mode)
-		if(ATM_O2) 
+		if(ATM_O2)
 			return "oxygen"
-		if(ATM_N2) 
+		if(ATM_N2)
 			return "nitrogen"
-		if(ATM_CO2) 
+		if(ATM_CO2)
 			return "carbon_dioxide"
-		if(ATM_P) 
+		if(ATM_P)
 			return "phoron"
-		if(ATM_N2O) 
+		if(ATM_N2O)
 			return "sleeping_agent"
 		else
 			return null
-	

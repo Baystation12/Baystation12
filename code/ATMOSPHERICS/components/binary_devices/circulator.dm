@@ -22,6 +22,8 @@
 	var/volume_capacity_used = 0
 	var/stored_energy = 0
 
+	init_dirs = NORTH|SOUTH
+
 	density = 1
 
 /obj/machinery/atmospherics/binary/circulator/New()
@@ -96,10 +98,6 @@
 					"You hear a ratchet")
 
 		if(anchored)
-			if(dir & (NORTH|SOUTH))
-				initialize_directions = NORTH|SOUTH
-			else if(dir & (EAST|WEST))
-				initialize_directions = EAST|WEST
 
 			initialize()
 			build_network()
@@ -111,10 +109,10 @@
 				node2.build_network()
 		else
 			if(node1)
-				node1.disconnect(src)
+				disconnect(node1, src)
 				qdel(network1)
 			if(node2)
-				node2.disconnect(src)
+				disconnect(node2, src)
 				qdel(network2)
 
 			node1 = null

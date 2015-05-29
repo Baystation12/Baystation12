@@ -1224,7 +1224,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	access = access_engine
 
 /datum/supply_packs/air_dispenser
-	contains = list(/obj/machinery/pipedispenser/orderable)
+//	contains = list(/obj/machinery/pipedispenser/orderable)
 	name = "Pipe Dispenser"
 	cost = 35
 	containertype = /obj/structure/closet/crate/secure/large
@@ -1233,7 +1233,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	access = access_atmospherics
 
 /datum/supply_packs/disposals_dispenser
-	contains = list(/obj/machinery/pipedispenser/disposal/orderable)
+//	contains = list(/obj/machinery/pipedispenser/disposal/orderable)
 	name = "Disposals Pipe Dispenser"
 	cost = 35
 	containertype = /obj/structure/closet/crate/secure/large

@@ -95,10 +95,10 @@
 
 /obj/machinery/atmospherics/trinary/filter/process()
 	..()
-	
+
 	last_power_draw = 0
 	last_flow_rate = 0
-	
+
 	if((stat & (NOPOWER|BROKEN)) || !use_power)
 		return
 
@@ -126,7 +126,7 @@
 
 /obj/machinery/atmospherics/trinary/filter/initialize()
 	set_frequency(frequency)
-	..()
+	return ..()
 
 /obj/machinery/atmospherics/trinary/filter/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
 	if (!istype(W, /obj/item/weapon/wrench))
@@ -236,19 +236,10 @@
 	icon_state = "mmap"
 
 	dir = SOUTH
-	initialize_directions = SOUTH|NORTH|EAST
+	init_dirs = SOUTH|NORTH|EAST
 
 obj/machinery/atmospherics/trinary/filter/m_filter/New()
 	..()
-	switch(dir)
-		if(NORTH)
-			initialize_directions = WEST|NORTH|SOUTH
-		if(SOUTH)
-			initialize_directions = SOUTH|EAST|NORTH
-		if(EAST)
-			initialize_directions = EAST|WEST|NORTH
-		if(WEST)
-			initialize_directions = WEST|SOUTH|EAST
 
 /obj/machinery/atmospherics/trinary/filter/m_filter/initialize()
 	set_frequency(frequency)
@@ -260,19 +251,21 @@ obj/machinery/atmospherics/trinary/filter/m_filter/New()
 	var/node3_connect = dir
 
 	for(var/obj/machinery/atmospherics/target in get_step(src,node1_connect))
-		if(target.initialize_directions & get_dir(target,src))
+		if(target.init_dirs & get_dir(target,src))
 			node1 = target
 			break
 
 	for(var/obj/machinery/atmospherics/target in get_step(src,node2_connect))
-		if(target.initialize_directions & get_dir(target,src))
+		if(target.init_dirs & get_dir(target,src))
 			node2 = target
 			break
 
 	for(var/obj/machinery/atmospherics/target in get_step(src,node3_connect))
-		if(target.initialize_directions & get_dir(target,src))
+		if(target.init_dirs & get_dir(target,src))
 			node3 = target
 			break
 
 	update_icon()
 	update_underlays()
+
+	return 1

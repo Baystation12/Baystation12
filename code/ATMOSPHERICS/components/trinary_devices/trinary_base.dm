@@ -1,6 +1,6 @@
 obj/machinery/atmospherics/trinary
 	dir = SOUTH
-	initialize_directions = SOUTH|NORTH|WEST
+	init_dirs = SOUTH|NORTH|WEST
 	use_power = 0
 
 	var/datum/gas_mixture/air1
@@ -17,15 +17,7 @@ obj/machinery/atmospherics/trinary
 
 	New()
 		..()
-		switch(dir)
-			if(NORTH)
-				initialize_directions = EAST|NORTH|SOUTH
-			if(SOUTH)
-				initialize_directions = SOUTH|WEST|NORTH
-			if(EAST)
-				initialize_directions = EAST|WEST|SOUTH
-			if(WEST)
-				initialize_directions = WEST|NORTH|EAST
+
 		air1 = new
 		air2 = new
 		air3 = new
@@ -56,15 +48,15 @@ obj/machinery/atmospherics/trinary
 		loc = null
 
 		if(node1)
-			node1.disconnect(src)
+//			node1.disconnect(src)
 			qdel(network1)
 		if(node2)
-			node2.disconnect(src)
+//			node2.disconnect(src)
 			qdel(network2)
 		if(node3)
-			node3.disconnect(src)
+//			node3.disconnect(src)
 			qdel(network3)
-
+		disconnect_all(src)
 		node1 = null
 		node2 = null
 		node3 = null
@@ -79,24 +71,25 @@ obj/machinery/atmospherics/trinary
 		var/node3_connect = dir
 
 		for(var/obj/machinery/atmospherics/target in get_step(src,node1_connect))
-			if(target.initialize_directions & get_dir(target,src))
+			if(target.init_dirs & get_dir(target,src))
 				if (check_connect_types(target,src))
 					node1 = target
 					break
 
 		for(var/obj/machinery/atmospherics/target in get_step(src,node2_connect))
-			if(target.initialize_directions & get_dir(target,src))
+			if(target.init_dirs & get_dir(target,src))
 				if (check_connect_types(target,src))
 					node2 = target
 					break
 		for(var/obj/machinery/atmospherics/target in get_step(src,node3_connect))
-			if(target.initialize_directions & get_dir(target,src))
+			if(target.init_dirs & get_dir(target,src))
 				if (check_connect_types(target,src))
 					node3 = target
 					break
 
 		update_icon()
 		update_underlays()
+		return 1
 
 	build_network()
 		if(!network1 && node1)
@@ -150,7 +143,7 @@ obj/machinery/atmospherics/trinary
 			results += air3
 
 		return results
-
+/*
 	disconnect(obj/machinery/atmospherics/reference)
 		if(reference==node1)
 			qdel(network1)
@@ -167,3 +160,4 @@ obj/machinery/atmospherics/trinary
 		update_underlays()
 
 		return null
+*/

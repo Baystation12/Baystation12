@@ -256,9 +256,9 @@
 /obj/machinery/atmospherics/omni/filter/proc/handle_port_change(var/datum/omni_port/P)
 	switch(P.mode)
 		if(ATM_NONE)
-			initialize_directions &= ~P.dir
+			init_dirs &= ~P.dir
 			P.disconnect()
 		else
-			initialize_directions |= P.dir
+			init_dirs |= P.dir
 			P.connect()
 	P.update = 1
