@@ -159,10 +159,8 @@
 		stat |= MAINT
 		src.update_icon()
 
-/obj/machinery/power/apc/initialize()
-	..()
+/obj/machinery/power/apc/Destroy()
 	src.update()
-
 	area.apc = null
 	area.power_light = 0
 	area.power_equip = 0
@@ -179,7 +177,7 @@
 		terminal = null
 
 	// Malf AI, removes the APC from AI's hacked APCs list.
-	if(hacker && hacker.hacked_apcs && src in hacker.hacked_apcs)
+	if((hacker) && (hacker.hacked_apcs) && (src in hacker.hacked_apcs))
 		hacker.hacked_apcs -= src
 
 	..()
