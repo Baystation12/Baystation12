@@ -203,6 +203,10 @@
 		..()
 
 /obj/machinery/camera/proc/deactivate(user as mob, var/choice = 1)
+	// The only way for AI to reactivate cameras are malf abilities, this gives them different messages.
+	if(istype(user, /mob/living/silicon/ai))
+		user = null
+
 	if(choice != 1)
 		//legacy support, if choice is != 1 then just kick viewers without changing status
 		kick_viewers()
@@ -210,12 +214,18 @@
 		update_coverage()
 		set_status( !src.status )
 		if (!(src.status))
-			visible_message("\red [user] has deactivated [src]!")
+			if(user)
+				visible_message("<span class='notice'> [user] has deactivated [src]!</span>")
+			else
+				visible_message("<span class='notice'> [src] clicks and shuts down. </span>")
 			playsound(src.loc, 'sound/items/Wirecutter.ogg', 100, 1)
 			icon_state = "[initial(icon_state)]1"
 			add_hiddenprint(user)
 		else
-			visible_message("\red [user] has reactivated [src]!")
+			if(user)
+				visible_message("<span class='notice'> [user] has reactivated [src]!</span>")
+			else
+				visible_message("<span class='notice'> [src] clicks and reactivates itself. </span>")
 			playsound(src.loc, 'sound/items/Wirecutter.ogg', 100, 1)
 			icon_state = initial(icon_state)
 			add_hiddenprint(user)
@@ -431,3 +441,14 @@
 		cameranet.updateVisibility(src, 0)
 
 	invalidateCameraCache()
+
+// Resets the camera's wires to fully operational state. Used by one of Malfunction abilities.
+/obj/machinery/camera/proc/reset_wires()
+	if(!wires)
+		return
+	if (stat & BROKEN) // Fix the camera
+		stat &= ~BROKEN
+	wires.CutAll()
+	wires.MendAll()
+	update_icon()
+	update_coverage()

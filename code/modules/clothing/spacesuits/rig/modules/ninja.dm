@@ -10,7 +10,7 @@
 
 	name = "active camouflage module"
 	desc = "A robust hardsuit-integrated stealth module."
-	icon_state = "stealth"
+	icon_state = "cloak"
 
 	toggleable = 1
 	disruptable = 1

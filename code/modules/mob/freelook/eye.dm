@@ -8,6 +8,7 @@
 	icon = 'icons/mob/eye.dmi'
 	icon_state = "default-eye"
 	alpha = 127
+	density = 0
 
 	var/sprint = 10
 	var/cooldown = 0
