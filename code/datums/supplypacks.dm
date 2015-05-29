@@ -348,7 +348,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 					/obj/item/weapon/grenade/chem_grenade/antiweed,
 					/obj/item/weapon/grenade/chem_grenade/antiweed)
 	cost = 25
-	containertype = /obj/structure/closet/crate/secure/hydrosec
+	containertype = /obj/structure/closet/crate/hydroponics
 	containername = "Weed control crate"
 	access = access_hydroponics
 	group = "Hydroponics"
