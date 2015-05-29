@@ -3,15 +3,15 @@
 	if(air_group || (height==0)) return 1
 	if(istype(mover,/obj/item/projectile))
 		return (check_cover(mover,target))
-	if(istype(mover) && mover.checkpass(PASSTABLE))
-		return 1
-	if(locate(/obj/structure/table) in get_turf(mover))
-		return 1
 	if (flipped == 1)
 		if (get_dir(loc, target) == dir)
 			return !density
 		else
 			return 1
+	if(istype(mover) && mover.checkpass(PASSTABLE))
+		return 1
+	if(locate(/obj/structure/table) in get_turf(mover))
+		return 1
 	return 0
 
 //checks if projectile 'P' from turf 'from' can hit whatever is behind the table. Returns 1 if it can, 0 if bullet stops.

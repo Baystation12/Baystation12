@@ -118,8 +118,12 @@
 		else if(E.is_malfunctioning())
 
 			if(E.body_part == HAND_LEFT)
+				if(!l_hand)
+					continue
 				drop_from_inventory(l_hand)
 			else
+				if(!r_hand)
+					continue
 				drop_from_inventory(r_hand)
 
 			emote("me", 1, "drops what they were holding, their [E.name] malfunctioning!")

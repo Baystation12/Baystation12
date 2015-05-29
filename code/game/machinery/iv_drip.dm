@@ -137,7 +137,7 @@
 	set src in view(1)
 
 	if(!istype(usr, /mob/living))
-		usr << "\red You can't do that."
+		usr << "<span class='warning'>You can't do that.</span>"
 		return
 
 	if(usr.stat)
@@ -154,10 +154,15 @@
 
 	if(beaker)
 		if(beaker.reagents && beaker.reagents.reagent_list.len)
-			usr << "\blue Attached is \a [beaker] with [beaker.reagents.total_volume] units of liquid."
+			usr << "<span class='notice'>Attached is \a [beaker] with [beaker.reagents.total_volume] units of liquid.</span>"
 		else
-			usr << "\blue Attached is an empty [beaker]."
+			usr << "<span class='notice'>Attached is an empty [beaker].</span>"
 	else
-		usr << "\blue No chemicals are attached."
+		usr << "<span class='notice'>No chemicals are attached.</span>"
 
-	usr << "\blue [attached ? attached : "No one"] is attached."
+	usr << "<span class='notice'>[attached ? attached : "No one"] is attached.</span>"
+
+/obj/machinery/iv_drip/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
+	if(height && istype(mover) && mover.checkpass(PASSTABLE)) //allow bullets, beams, thrown objects, mice, drones, and the like through.
+		return 1
+	return ..()

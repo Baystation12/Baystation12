@@ -18,6 +18,7 @@
 		user << "<b>ERROR ERROR ERROR</b>"
 
 /obj/item/device/aicard/attack_self(mob/user)
+
 	ui_interact(user)
 
 /obj/item/device/aicard/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = inventory_state)
@@ -25,7 +26,8 @@
 	data["has_ai"] = carded_ai != null
 	if(carded_ai)
 		data["name"] = carded_ai.name
-		data["integrity"] = carded_ai.system_integrity()
+		data["hardware_integrity"] = carded_ai.hardware_integrity()
+		data["backup_capacitor"] = carded_ai.backup_capacitor()
 		data["radio"] = !carded_ai.aiRadio.disabledAi
 		data["wireless"] = !carded_ai.control_disabled
 		data["operational"] = carded_ai.stat != DEAD
@@ -73,7 +75,6 @@
 		carded_ai << "<span class='warning'>Your wireless interface has been [carded_ai.control_disabled ? "disabled" : "enabled"]!</span>"
 		user << "<span class='notice'>You [carded_ai.control_disabled ? "disable" : "enable"] the AI's wireless interface.</span>"
 		update_icon()
-
 	return 1
 
 /obj/item/device/aicard/update_icon()
