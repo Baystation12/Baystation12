@@ -105,7 +105,27 @@
 		Weaken(5) //can't emote while weakened, apparently.
 
 /mob/living/carbon/human/proc/handle_grasp()
+	if(!l_hand && !r_hand)
+		return
 
+	// You should not be able to pick anything up, but stranger things have happened.
+	if(l_hand)
+		for(var/limb_tag in list("l_hand","l_arm"))
+			var/obj/item/organ/external/E = get_organ(limb_tag)
+			if(!E)
+				visible_message("<span class='danger'>Lacking a functioning left hand, \the [src] drops \the [l_hand].</span>")
+				drop_from_inventory(l_hand)
+				break
+
+	if(r_hand)
+		for(var/limb_tag in list("r_hand","r_arm"))
+			var/obj/item/organ/external/E = get_organ(limb_tag)
+			if(!E)
+				visible_message("<span class='danger'>Lacking a functioning right hand, \the [src] drops \the [r_hand].</span>")
+				drop_from_inventory(r_hand)
+				break
+
+	// Check again...
 	if(!l_hand && !r_hand)
 		return
 
