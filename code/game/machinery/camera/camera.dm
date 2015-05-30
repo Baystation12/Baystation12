@@ -180,13 +180,13 @@
 
 	else if (istype(W, /obj/item/weapon/camera_bug))
 		if (!src.can_use())
-			user << "\blue Camera non-functional"
+			user << "<span class='warning'>Camera non-functional.</span>"
 			return
 		if (src.bugged)
-			user << "\blue Camera bug removed."
+			user << "<span class='notice'>Camera bug removed.</span>"
 			src.bugged = 0
 		else
-			user << "\blue Camera bugged."
+			user << "<span class='notice'>Camera bugged.</span>"
 			src.bugged = 1
 
 	else if(W.damtype == BRUTE || W.damtype == BURN) //bashing cameras

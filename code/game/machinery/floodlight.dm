@@ -50,7 +50,7 @@
 
 	if(on)
 		on = 0
-		user << "\blue You turn off the light"
+		user << "<span class='notice'>You turn off the light</span>"
 		set_light(0)
 	else
 		if(!cell)
@@ -58,7 +58,7 @@
 		if(cell.charge <= 0)
 			return
 		on = 1
-		user << "\blue You turn on the light"
+		user << "<span class='notice'>You turn on the light</span>"
 		set_light(brightness_on)
 
 	updateicon()
