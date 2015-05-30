@@ -4,26 +4,40 @@
 						Cyborg Spec Items
 ***********************************************************************/
 //Might want to move this into several files later but for now it works here
+// Consider changing this to a child of the stun baton class. ~Z
 /obj/item/borg/stun
 	name = "electrified arm"
 	icon = 'icons/obj/decals.dmi'
 	icon_state = "shock"
 
-	attack(mob/M as mob, mob/living/silicon/robot/user as mob)
-		M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been attacked with [src.name] by [user.name] ([user.ckey])</font>")
-		user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [src.name] to attack [M.name] ([M.ckey])</font>")
-		msg_admin_attack("[user.name] ([user.ckey]) used the [src.name] to attack [M.name] ([M.ckey]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
+/obj/item/borg/stun/attack(var/mob/living/M, var/mob/living/silicon/robot/user)
 
-		user.cell.charge -= 30
+	if(!istype(M))
+		return
 
-		M.Weaken(5)
-		if (M.stuttering < 5)
-			M.stuttering = 5
-		M.Stun(5)
+	// How the Hell.
+	if(!istype(user))
+		var/mob/living/temp = user
+		if(istype(temp))
+			temp.drop_from_inventory(src)
+		qdel(src)
+		return
 
-		for(var/mob/O in viewers(M, null))
-			if (O.client)
-				O.show_message("\red <B>[user] has prodded [M] with an electrically-charged arm!</B>", 1, "\red You hear someone fall", 2)
+	M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been attacked with [src.name] by [user.name] ([user.ckey])</font>")
+	user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [src.name] to attack [M.name] ([M.ckey])</font>")
+	msg_admin_attack("[user.name] ([user.ckey]) used the [src.name] to attack [M.name] ([M.ckey]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
+
+	if(!user.cell || !user.cell.checked_use(1250)) //Slightly more than a baton.
+		user.visible_message("<span class='danger'>\The [user] has prodded \the [M] with its arm!</span>")
+		return
+
+	if (M.stuttering < 5)
+		M.stuttering = 5
+	M.stun_effect_act(0, 70, check_zone(user.zone_sel.selecting), src)
+	user.visible_message("<span class='danger'>\The [user] has prodded \the [M] with \a [src]!</span>")
+	if(ishuman(M))
+		var/mob/living/carbon/human/H = M
+		H.forcesay(hit_appends)
 
 /obj/item/borg/overdrive
 	name = "overdrive"

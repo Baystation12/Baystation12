@@ -733,7 +733,7 @@
 	if(opened && !wiresexposed && (!istype(user, /mob/living/silicon)))
 		var/datum/robot_component/cell_component = components["power cell"]
 		if(cell)
-			cell.updateicon()
+			cell.update_icon()
 			cell.add_fingerprint(user)
 			user.put_in_active_hand(cell)
 			user << "You remove \the [cell]."

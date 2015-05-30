@@ -1,4 +1,0 @@
-author: Kelenius
-delete-after: True
-changes: 
-  - tweak: "AI now hears LOOC both around its eye and its core, and speaks in LOOC around its eye. Keep in mind that you won't hear and won't be heard if there is a wall between your eye and the target."
