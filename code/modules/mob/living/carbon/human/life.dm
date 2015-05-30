@@ -235,16 +235,21 @@
 					custom_pain("Your head feels numb and painful.")
 			if(getBrainLoss() >= 15)
 				if(4 <= rn && rn <= 6) if(eye_blurry <= 0)
-					src << "\red It becomes hard to see for some reason."
+					src << "<span class='warning'>It becomes hard to see for some reason.</span>"
 					eye_blurry = 10
 			if(getBrainLoss() >= 35)
 				if(7 <= rn && rn <= 9) if(get_active_hand())
-					src << "\red Your hand won't respond properly, you drop what you're holding."
+					src << "<span class='danger'>Your hand won't respond properly, you drop what you're holding!</span>"
 					drop_item()
-			if(getBrainLoss() >= 50)
-				if(10 <= rn && rn <= 12) if(!lying)
-					src << "\red Your legs won't respond properly, you fall down."
-					resting = 1
+			if(getBrainLoss() >= 45)
+				if(10 <= rn && rn <= 12) 
+					if(prob(50))
+						src << "<span class='danger'>You suddenly black out!</span>"
+						Paralyse(10)
+					else if(!lying)
+						src << "<span class='danger'>Your legs won't respond properly, you fall down!</span>"
+						Weaken(10)
+
 
 	proc/handle_stasis_bag()
 		// Handle side effects from stasis bag
