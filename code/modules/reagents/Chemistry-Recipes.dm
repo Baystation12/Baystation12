@@ -178,7 +178,7 @@
 	id = "oxycodone"
 	result = "oxycodone"
 	required_reagents = list("ethanol" = 1, "tramadol" = 1)
-	catalysts = list("phoron" = 1)
+	catalysts = list("phoron" = 5)
 	result_amount = 1
 
 /datum/chemical_reaction/sterilizine
@@ -277,7 +277,7 @@
 	id = "peridaxon"
 	result = "peridaxon"
 	required_reagents = list("bicaridine" = 2, "clonexadone" = 2)
-	catalysts = list("phoron" = 1)
+	catalysts = list("phoron" = 5)
 	result_amount = 2
 
 /datum/chemical_reaction/virus_food
@@ -292,7 +292,7 @@
 	id = "leporazine"
 	result = "leporazine"
 	required_reagents = list("silicon" = 1, "copper" = 1)
-	catalysts = list("phoron" = 1)
+	catalysts = list("phoron" = 5)
 	result_amount = 2
 
 /datum/chemical_reaction/cryptobiolin
@@ -321,7 +321,7 @@
 	id = "dexalin"
 	result = "dexalin"
 	required_reagents = list("oxygen" = 2, "phoron" = 0.1)
-	catalysts = list("phoron" = 1)
+	catalysts = list("phoron" = 5)
 	inhibitors = list("water" = 1) // Messes with cryox
 	result_amount = 1
 
@@ -373,7 +373,7 @@
 	id = "clonexadone"
 	result = "clonexadone"
 	required_reagents = list("cryoxadone" = 1, "sodium" = 1, "phoron" = 0.1)
-	catalysts = list("phoron" = 1)
+	catalysts = list("phoron" = 5)
 	result_amount = 2
 
 /datum/chemical_reaction/spaceacillin
@@ -508,7 +508,7 @@
 	id = "condensedcapsaicin"
 	result = "condensedcapsaicin"
 	required_reagents = list("capsaicin" = 2)
-	catalysts = list("phoron" = 1)
+	catalysts = list("phoron" = 5)
 	result_amount = 1
 
 /datum/chemical_reaction/coolant
@@ -1330,7 +1330,7 @@
 	id = "tofu"
 	result = null
 	required_reagents = list("soymilk" = 10)
-	catalysts = list("enzyme" = 1)
+	catalysts = list("enzyme" = 5)
 	result_amount = 1
 
 /datum/chemical_reaction/tofu/on_reaction(var/datum/reagents/holder, var/created_volume)
@@ -1384,7 +1384,7 @@
 	id = "cheesewheel"
 	result = null
 	required_reagents = list("milk" = 40)
-	catalysts = list("enzyme" = 1)
+	catalysts = list("enzyme" = 5)
 	result_amount = 1
 
 /datum/chemical_reaction/cheesewheel/on_reaction(var/datum/reagents/holder, var/created_volume)
@@ -1495,7 +1495,7 @@
 	id = "moonshine"
 	result = "moonshine"
 	required_reagents = list("nutriment" = 10)
-	catalysts = list("enzyme" = 1)
+	catalysts = list("enzyme" = 5)
 	result_amount = 10
 
 /datum/chemical_reaction/grenadine
@@ -1503,7 +1503,7 @@
 	id = "grenadine"
 	result = "grenadine"
 	required_reagents = list("berryjuice" = 10)
-	catalysts = list("enzyme" = 1)
+	catalysts = list("enzyme" = 5)
 	result_amount = 10
 
 /datum/chemical_reaction/wine
@@ -1511,7 +1511,7 @@
 	id = "wine"
 	result = "wine"
 	required_reagents = list("grapejuice" = 10)
-	catalysts = list("enzyme" = 1)
+	catalysts = list("enzyme" = 5)
 	result_amount = 10
 
 /datum/chemical_reaction/pwine
@@ -1519,7 +1519,7 @@
 	id = "pwine"
 	result = "pwine"
 	required_reagents = list("poisonberryjuice" = 10)
-	catalysts = list("enzyme" = 1)
+	catalysts = list("enzyme" = 5)
 	result_amount = 10
 
 /datum/chemical_reaction/melonliquor
@@ -1527,7 +1527,7 @@
 	id = "melonliquor"
 	result = "melonliquor"
 	required_reagents = list("watermelonjuice" = 10)
-	catalysts = list("enzyme" = 1)
+	catalysts = list("enzyme" = 5)
 	result_amount = 10
 
 /datum/chemical_reaction/bluecuracao
@@ -1535,7 +1535,7 @@
 	id = "bluecuracao"
 	result = "bluecuracao"
 	required_reagents = list("orangejuice" = 10)
-	catalysts = list("enzyme" = 1)
+	catalysts = list("enzyme" = 5)
 	result_amount = 10
 
 /datum/chemical_reaction/spacebeer
@@ -1543,7 +1543,7 @@
 	id = "spacebeer"
 	result = "beer"
 	required_reagents = list("cornoil" = 10)
-	catalysts = list("enzyme" = 1)
+	catalysts = list("enzyme" = 5)
 	result_amount = 10
 
 /datum/chemical_reaction/vodka
@@ -1551,7 +1551,7 @@
 	id = "vodka"
 	result = "vodka"
 	required_reagents = list("potato" = 10)
-	catalysts = list("enzyme" = 1)
+	catalysts = list("enzyme" = 5)
 	result_amount = 10
 
 /datum/chemical_reaction/sake
@@ -1559,7 +1559,7 @@
 	id = "sake"
 	result = "sake"
 	required_reagents = list("rice" = 10)
-	catalysts = list("enzyme" = 1)
+	catalysts = list("enzyme" = 5)
 	result_amount = 10
 
 /datum/chemical_reaction/kahlua
@@ -1567,7 +1567,7 @@
 	id = "kahlua"
 	result = "kahlua"
 	required_reagents = list("coffee" = 5, "sugar" = 5)
-	catalysts = list("enzyme" = 1)
+	catalysts = list("enzyme" = 5)
 	result_amount = 5
 
 /datum/chemical_reaction/gin_tonic
@@ -1855,7 +1855,7 @@
 	id = "mead"
 	result = "mead"
 	required_reagents = list("sugar" = 1, "water" = 1)
-	catalysts = list("enzyme" = 1)
+	catalysts = list("enzyme" = 5)
 	result_amount = 2
 
 /datum/chemical_reaction/iced_beer
