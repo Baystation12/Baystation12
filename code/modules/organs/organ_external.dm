@@ -228,9 +228,12 @@
 				droplimb(0,DROPLIMB_BURN)
 			if(!dropped && prob(brute))
 				var/edge_eligible = 0
-				if(edge && istype(used_weapon,/obj/item))
-					var/obj/item/W = used_weapon
-					if(W.w_class >= 3)
+				if(edge)
+					if(istype(used_weapon,/obj/item))
+						var/obj/item/W = used_weapon
+						if(W.w_class >= w_class)
+							edge_eligible = 1
+					else
 						edge_eligible = 1
 
 				if(brute >= threshold || (edge_eligible && brute >= threshold/3))
@@ -996,6 +999,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	icon_name = "torso"
 	max_damage = 100
 	min_broken_damage = 35
+	w_class = 5
 	body_part = UPPER_TORSO
 	vital = 1
 	amputation_point = "spine"
@@ -1012,6 +1016,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	icon_name = "groin"
 	max_damage = 100
 	min_broken_damage = 35
+	w_class = 5
 	body_part = LOWER_TORSO
 	vital = 1
 	parent_organ = "chest"
@@ -1026,6 +1031,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	icon_name = "l_arm"
 	max_damage = 50
 	min_broken_damage = 30
+	w_class = 3
 	body_part = ARM_LEFT
 	parent_organ = "chest"
 	joint = "left elbow"
@@ -1046,6 +1052,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	icon_name = "l_leg"
 	max_damage = 50
 	min_broken_damage = 30
+	w_class = 3
 	body_part = LEG_LEFT
 	icon_position = LEFT
 	parent_organ = "groin"
@@ -1067,6 +1074,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	name = "left foot"
 	icon_name = "l_foot"
 	min_broken_damage = 15
+	w_class = 2
 	body_part = FOOT_LEFT
 	icon_position = LEFT
 	parent_organ = "l_leg"
@@ -1093,6 +1101,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	name = "left hand"
 	icon_name = "l_hand"
 	min_broken_damage = 15
+	w_class = 2
 	body_part = HAND_LEFT
 	parent_organ = "l_arm"
 	joint = "left wrist"
@@ -1118,6 +1127,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	name = "head"
 	max_damage = 75
 	min_broken_damage = 35
+	w_class = 3
 	body_part = HEAD
 	vital = 1
 	parent_organ = "chest"
