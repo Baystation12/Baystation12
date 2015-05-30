@@ -94,7 +94,7 @@
 	user << "<span class='notice>You begin to unfasten \the [src]...</span>"
 	if (do_after(user, 40))
 		user.visible_message( \
-			"<span class='notice'>\The[user] unfastens \the [src].</span>", \
+			"<span class='notice'>\The [user] unfastens \the [src].</span>", \
 			"<span class='notice'>You have unfastened \the [src].</span>", \
 			"You hear a ratchet.")
 		new /obj/item/pipe(loc, make_from=src)
