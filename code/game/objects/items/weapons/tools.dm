@@ -416,11 +416,11 @@
 	icon_state = "red_crowbar"
 	item_state = "crowbar_red"
 
-/obj/item/weapon/weldingtool/attack(mob/M as mob, mob/user as mob)
+/obj/item/weapon/weldingtool/afterattack(mob/M as mob, mob/user as mob)
 
-	if(hasorgans(M))
-
-		var/obj/item/organ/external/S = M:organs_by_name[user.zone_sel.selecting]
+	if(ishuman(M))
+		var/mob/living/carbon/human/H = M
+		var/obj/item/organ/external/S = H.organs_by_name[user.zone_sel.selecting]
 
 		if (!S) return
 		if(!(S.status & ORGAN_ROBOT) || user.a_intent != I_HELP)
@@ -429,12 +429,12 @@
 		if(S.brute_dam)
 			if(S.brute_dam < ROBOLIMB_SELF_REPAIR_CAP)
 				S.heal_damage(15,0,0,1)
-				user.visible_message("\red \The [user] patches some dents on \the [M]'s [S.name] with \the [src].")
-			else
-				user << "\red The damage is far too severe to patch over externally."
-			return
-		else
-			user << "Nothing to fix!"
+				user.visible_message("<span class='notice'>\The [user] patches some dents on \the [M]'s [S.name] with \the [src].</span>")
+			else if(!S.open)
+				user << "<span class='danger'>The damage is far too severe to patch over externally.</span>"
+			return 1
+		else if(!S.open)
+			user << "<span class='notice'>Nothing to fix!</span>"
 
 	else
 		return ..()

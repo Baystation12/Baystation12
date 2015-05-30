@@ -77,11 +77,11 @@
 										"\blue You bandage [W.desc] on [M]'s [affecting.name]." )
 						//H.add_side_effect("Itch")
 					else if (istype(W,/datum/wound/bruise))
-						user.visible_message( 	"\blue [user] places bruise patch over [W.desc] on [M]'s [affecting.name].", \
-										"\blue You place bruise patch over [W.desc] on [M]'s [affecting.name]." )
+						user.visible_message( 	"\blue [user] places a bruise patch over [W.desc] on [M]'s [affecting.name].", \
+										"\blue You place a bruise patch over [W.desc] on [M]'s [affecting.name]." )
 					else
-						user.visible_message( 	"\blue [user] places bandaid over [W.desc] on [M]'s [affecting.name].", \
-										"\blue You place bandaid over [W.desc] on [M]'s [affecting.name]." )
+						user.visible_message( 	"\blue [user] places a bandaid over [W.desc] on [M]'s [affecting.name].", \
+										"\blue You place a bandaid over [W.desc] on [M]'s [affecting.name]." )
 				use(1)
 		else
 			if (can_operate(H))        //Checks if mob is lying down on table for surgery
@@ -143,22 +143,22 @@
 			var/disinfected = affecting.disinfect()
 
 			if(!(bandaged || disinfected))
-				user << "\red The wounds on [M]'s [affecting.name] have already been treated."
+				user << "<span class='warning'>The wounds on [M]'s [affecting.name] have already been treated.</span>"
 				return 1
 			else
 				for (var/datum/wound/W in affecting.wounds)
 					if (W.internal)
 						continue
 					if (W.current_stage <= W.max_bleeding_stage)
-						user.visible_message( 	"\blue [user] cleans [W.desc] on [M]'s [affecting.name] and seals edges with bioglue.", \
-										"\blue You clean and seal [W.desc] on [M]'s [affecting.name]." )
+						user.visible_message("<span class='notice'>\The [user] cleans [W.desc] on [M]'s [affecting.name] and seals the edges with bioglue.</span>", \
+										"<span class='notice'>You clean and seal [W.desc] on [M]'s [affecting.name].</span>" )
 						//H.add_side_effect("Itch")
 					else if (istype(W,/datum/wound/bruise))
-						user.visible_message( 	"\blue [user] places medicine patch over [W.desc] on [M]'s [affecting.name].", \
-										"\blue You place medicine patch over [W.desc] on [M]'s [affecting.name]." )
+						user.visible_message("<span class='notice'>\The [user] places a medical patch over [W.desc] on [M]'s [affecting.name].</span>", \
+										"<span class='notice'>You place a medical patch over [W.desc] on [M]'s [affecting.name].</span>" )
 					else
-						user.visible_message( 	"\blue [user] smears some bioglue over [W.desc] on [M]'s [affecting.name].", \
-										"\blue You smear some bioglue over [W.desc] on [M]'s [affecting.name]." )
+						user.visible_message("<span class='notice'>\The [user] smears some bioglue over [W.desc] on [M]'s [affecting.name].</span>", \
+										"<span class='notice'>You smear some bioglue over [W.desc] on [M]'s [affecting.name].</span>" )
 				if (bandaged)
 					affecting.heal_damage(heal_brute,0)
 				use(1)
