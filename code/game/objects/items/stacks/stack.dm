@@ -223,10 +223,10 @@
 */
 
 //attempts to transfer amount to S, and returns the amount actually transferred
-/obj/item/stack/proc/transfer_to(obj/item/stack/S, var/tamount=null)
+/obj/item/stack/proc/transfer_to(obj/item/stack/S, var/tamount=null, var/type_verified)
 	if (!get_amount())
 		return 0
-	if (stacktype != S.stacktype)
+	if ((stacktype != S.stacktype) && !type_verified)
 		return 0
 	if (isnull(tamount))
 		tamount = src.get_amount()
@@ -240,7 +240,6 @@
 			transfer_fingerprints_to(S)
 			if(blood_DNA)
 				S.blood_DNA |= blood_DNA
-				//todo bloody overlay
 		return transfer
 	return 0
 
@@ -314,10 +313,8 @@
 	return
 
 /obj/item/stack/attackby(obj/item/W as obj, mob/user as mob)
-	..()
 	if (istype(W, /obj/item/stack))
 		var/obj/item/stack/S = W
-
 		if (user.get_inactive_hand()==src)
 			src.transfer_to(S, 1)
 		else
@@ -328,7 +325,8 @@
 				S.interact(usr)
 			if (src && usr.machine==src)
 				src.interact(usr)
-	else return ..()
+	else
+		return ..()
 
 /*
  * Recipe datum

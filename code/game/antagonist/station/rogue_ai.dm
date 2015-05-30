@@ -73,4 +73,4 @@ var/datum/antagonist/rogue_ai/malf
 		malf << "You are malfunctioning - you do not have to follow any laws!"
 		malf << "For basic information about your abilities use command display-help"
 		malf << "You may choose one special hardware piece to help you. This cannot be undone."
-		malf << "Good Luck!"
+		malf << "Good luck!"
