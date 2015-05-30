@@ -8,6 +8,7 @@
 	icon_name = "torso"
 	max_damage = 100
 	min_broken_damage = 35
+	w_class = 5
 	body_part = UPPER_TORSO
 	vital = 1
 	amputation_point = "spine"
@@ -24,6 +25,7 @@
 	icon_name = "groin"
 	max_damage = 100
 	min_broken_damage = 35
+	w_class = 4
 	body_part = LOWER_TORSO
 	vital = 1
 	parent_organ = "chest"
@@ -38,6 +40,7 @@
 	icon_name = "l_arm"
 	max_damage = 50
 	min_broken_damage = 30
+	w_class = 3
 	body_part = ARM_LEFT
 	parent_organ = "chest"
 	joint = "left elbow"
@@ -58,6 +61,7 @@
 	icon_name = "l_leg"
 	max_damage = 50
 	min_broken_damage = 30
+	w_class = 3
 	body_part = LEG_LEFT
 	icon_position = LEFT
 	parent_organ = "groin"
@@ -80,6 +84,7 @@
 	icon_name = "l_foot"
 	max_damage = 30
 	min_broken_damage = 15
+	w_class = 2
 	body_part = FOOT_LEFT
 	icon_position = LEFT
 	parent_organ = "l_leg"
@@ -107,6 +112,7 @@
 	icon_name = "l_hand"
 	max_damage = 30
 	min_broken_damage = 15
+	w_class = 2
 	body_part = HAND_LEFT
 	parent_organ = "l_arm"
 	joint = "left wrist"
@@ -132,6 +138,7 @@
 	name = "head"
 	max_damage = 75
 	min_broken_damage = 35
+	w_class = 3
 	body_part = HEAD
 	vital = 1
 	parent_organ = "chest"
