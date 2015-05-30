@@ -1,5 +1,0 @@
-author: PsiOmegaDelta
-delete-after: True
-
-changes: 
-  - rscadd: "You can now review the server revision date and hash by using the 'Show Server Revision' verb in the OOC category."
