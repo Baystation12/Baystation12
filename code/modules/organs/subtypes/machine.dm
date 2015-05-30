@@ -3,7 +3,7 @@
 	dislocated = -1
 	can_intake_reagents = 0
 	vital = 0
-	health = 50 //made same as arm, since it is not vital
+	max_damage = 50 //made same as arm, since it is not vital
 	min_broken_damage = 30
 	encased = null
 	

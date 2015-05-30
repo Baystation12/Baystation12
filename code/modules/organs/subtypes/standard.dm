@@ -6,7 +6,7 @@
 	name = "upper body"
 	limb_name = "chest"
 	icon_name = "torso"
-	health = 100
+	max_damage = 100
 	min_broken_damage = 35
 	body_part = UPPER_TORSO
 	vital = 1
@@ -22,7 +22,7 @@
 	name = "lower body"
 	limb_name = "groin"
 	icon_name = "groin"
-	health = 100
+	max_damage = 100
 	min_broken_damage = 35
 	body_part = LOWER_TORSO
 	vital = 1
@@ -36,7 +36,7 @@
 	limb_name = "l_arm"
 	name = "left arm"
 	icon_name = "l_arm"
-	health = 50
+	max_damage = 50
 	min_broken_damage = 30
 	body_part = ARM_LEFT
 	parent_organ = "chest"
@@ -56,7 +56,7 @@
 	limb_name = "l_leg"
 	name = "left leg"
 	icon_name = "l_leg"
-	health = 50
+	max_damage = 50
 	min_broken_damage = 30
 	body_part = LEG_LEFT
 	icon_position = LEFT
@@ -78,7 +78,7 @@
 	limb_name = "l_foot"
 	name = "left foot"
 	icon_name = "l_foot"
-	health = 30
+	max_damage = 30
 	min_broken_damage = 15
 	body_part = FOOT_LEFT
 	icon_position = LEFT
@@ -105,7 +105,7 @@
 	limb_name = "l_hand"
 	name = "left hand"
 	icon_name = "l_hand"
-	health = 30
+	max_damage = 30
 	min_broken_damage = 15
 	body_part = HAND_LEFT
 	parent_organ = "l_arm"
@@ -130,7 +130,7 @@
 	limb_name = "head"
 	icon_name = "head"
 	name = "head"
-	health = 75
+	max_damage = 75
 	min_broken_damage = 35
 	body_part = HEAD
 	vital = 1
