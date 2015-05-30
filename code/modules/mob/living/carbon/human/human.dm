@@ -54,9 +54,6 @@
 
 	stat(null, "Intent: [a_intent]")
 	stat(null, "Move Mode: [m_intent]")
-	if(ticker && ticker.mode && ticker.mode.name == "AI malfunction")
-		if(malf.revealed)
-			stat(null, "Time left: [max(malf.hack_time/(malf.hacked_apcs/3), 0)]")
 	if(emergency_shuttle)
 		var/eta_status = emergency_shuttle.get_status_panel_eta()
 		if(eta_status)

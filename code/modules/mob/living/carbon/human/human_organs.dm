@@ -72,7 +72,18 @@
 		var/obj/item/organ/external/E = organs_by_name[limb_tag]
 		if(!E || (E.status & (ORGAN_DESTROYED|ORGAN_DEAD)))
 			stance_damage += 2 // let it fail even if just foot&leg
-		else if (E.is_malfunctioning() || E.is_broken() || !E.is_usable())
+		else if (E.is_malfunctioning())
+			//malfunctioning only happens intermittently so treat it as a missing limb when it procs
+			stance_damage += 2
+			if(prob(10))
+				visible_message("\The [src]'s [E.name] [pick("twitches", "shudders")] and sparks!")
+				var/datum/effect/effect/system/spark_spread/spark_system = new ()
+				spark_system.set_up(5, 0, src)
+				spark_system.attach(src)
+				spark_system.start()
+				spawn(10)
+					qdel(spark_system)
+		else if (E.is_broken() || !E.is_usable())
 			stance_damage += 1
 		else if (E.is_dislocated())
 			stance_damage += 0.5
@@ -94,7 +105,27 @@
 		Weaken(5) //can't emote while weakened, apparently.
 
 /mob/living/carbon/human/proc/handle_grasp()
+	if(!l_hand && !r_hand)
+		return
 
+	// You should not be able to pick anything up, but stranger things have happened.
+	if(l_hand)
+		for(var/limb_tag in list("l_hand","l_arm"))
+			var/obj/item/organ/external/E = get_organ(limb_tag)
+			if(!E)
+				visible_message("<span class='danger'>Lacking a functioning left hand, \the [src] drops \the [l_hand].</span>")
+				drop_from_inventory(l_hand)
+				break
+
+	if(r_hand)
+		for(var/limb_tag in list("r_hand","r_arm"))
+			var/obj/item/organ/external/E = get_organ(limb_tag)
+			if(!E)
+				visible_message("<span class='danger'>Lacking a functioning right hand, \the [src] drops \the [r_hand].</span>")
+				drop_from_inventory(r_hand)
+				break
+
+	// Check again...
 	if(!l_hand && !r_hand)
 		return
 
@@ -118,8 +149,12 @@
 		else if(E.is_malfunctioning())
 
 			if(E.body_part == HAND_LEFT)
+				if(!l_hand)
+					continue
 				drop_from_inventory(l_hand)
 			else
+				if(!r_hand)
+					continue
 				drop_from_inventory(r_hand)
 
 			emote("me", 1, "drops what they were holding, their [E.name] malfunctioning!")

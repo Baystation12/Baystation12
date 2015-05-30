@@ -48,6 +48,36 @@
 	var/can_grasp
 	var/can_stand
 
+/obj/item/organ/external/attack_self(var/mob/user)
+	if(!contents.len)
+		return ..()
+	var/list/removable_objects = list()
+	for(var/obj/item/organ/external/E in (contents + src))
+		if(!istype(E))
+			continue
+		for(var/obj/item/I in E.contents)
+			if(istype(I,/obj/item/organ))
+				continue
+			removable_objects |= I
+	if(!removable_objects.len)
+		return ..()
+	var/obj/item/I = pick(removable_objects)
+	if(!istype(I))
+		return ..()
+	I.loc = get_turf(user)
+	if(!(user.l_hand && user.r_hand))
+		user.put_in_hands(I)
+	user.visible_message("<span class='danger'>\The [user] rips \the [I] out of \the [src]!</span>")
+
+/obj/item/organ/external/examine()
+	..()
+	if(in_range(usr, src) || istype(usr, /mob/dead/observer))
+		for(var/obj/item/I in contents)
+			if(istype(I, /obj/item/organ))
+				continue
+			usr << "<span class='danger'>There is \a [I] sticking out of it.</span>"
+	return
+
 /obj/item/organ/external/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	switch(stage)
 		if(0)
@@ -138,6 +168,9 @@
 			   DAMAGE PROCS
 ****************************************************/
 
+/obj/item/organ/external/proc/is_damageable(var/additional_damage = 0)
+	return (vital || brute_dam + burn_dam + additional_damage < max_damage)
+
 /obj/item/organ/external/take_damage(brute, burn, sharp, edge, used_weapon = null, list/forbidden_limbs = list())
 	if((brute <= 0) && (burn <= 0))
 		return 0
@@ -177,7 +210,7 @@
 	// If the limbs can break, make sure we don't exceed the maximum damage a limb can take before breaking
 	// Non-vital organs are limited to max_damage. You can't kill someone by bludeonging their arm all the way to 200 -- you can
 	// push them faster into paincrit though, as the additional damage is converted into shock.
-	if(vital || (brute_dam + burn_dam + brute + burn) < max_damage || !config.limbs_can_break)
+	if(is_damageable(brute + burn) || !config.limbs_can_break)
 		if(brute)
 			if(can_cut)
 				createwound( CUT, brute )
@@ -694,6 +727,9 @@ Note that amputating the affected organ does in fact remove the infection from t
 				dir = 2
 		if(DROPLIMB_BURN)
 			new /obj/effect/decal/cleanable/ash(get_turf(victim))
+			for(var/obj/item/I in src)
+				if(I.w_class > 2 && !istype(I,/obj/item/organ))
+					I.loc = get_turf(src)
 			qdel(src)
 		if(DROPLIMB_BLUNT)
 			var/obj/effect/decal/cleanable/blood/gibs/gore = new owner.species.single_gib_type(get_turf(victim))
@@ -708,6 +744,14 @@ Note that amputating the affected organ does in fact remove the infection from t
 				I.removed()
 				if(istype(loc,/turf))
 					I.throw_at(get_edge_target_turf(src,pick(alldirs)),rand(1,3),30)
+
+			for(var/obj/item/I in src)
+				if(I.w_class <= 2)
+					qdel(I)
+					continue
+				I.loc = get_turf(src)
+				I.throw_at(get_edge_target_turf(src,pick(alldirs)),rand(1,3),30)
+
 			qdel(src)
 
 /****************************************************
@@ -868,7 +912,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	W.add_blood(owner)
 	if(ismob(W.loc))
 		var/mob/living/H = W.loc
-		H.drop_item()
+		H.drop_from_inventory(W)
 	W.loc = owner
 
 /obj/item/organ/external/removed(var/mob/living/user, var/ignore_children)
@@ -883,8 +927,14 @@ Note that amputating the affected organ does in fact remove the infection from t
 	status |= ORGAN_DESTROYED
 	victim.bad_external_organs -= src
 
-	for(var/implant in implants) //todo: check if this can be left alone
-		qdel(implant)
+	for(var/obj/item/implant in implants)
+		if(!istype(implant))
+			return
+		if(implant.w_class <= 2)
+			qdel(implant)
+		else
+			implant.loc = src
+	implants.Cut()
 
 	// Attached organs also fly off.
 	if(!ignore_children)
@@ -892,6 +942,8 @@ Note that amputating the affected organ does in fact remove the infection from t
 			O.removed()
 			if(O)
 				O.loc = src
+				for(var/obj/item/I in O.contents)
+					I.loc = src
 
 	// Grab all the internal giblets too.
 	for(var/obj/item/organ/organ in internal_organs)

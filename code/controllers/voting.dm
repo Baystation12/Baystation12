@@ -336,7 +336,7 @@ datum/controller/vote
 				. += "\t(<a href='?src=\ref[src];vote=toggle_gamemode'>[config.allow_vote_mode?"Allowed":"Disallowed"]</a>)"
 			. += "</li><li>"
 			//extra antagonists
-			if(trialmin || (!antag_add_failed && config.allow_extra_antags))
+			if(!antag_add_failed && config.allow_extra_antags)
 				. += "<a href='?src=\ref[src];vote=add_antagonist'>Add Antagonist Type</a>"
 			else
 				. += "<font color='grey'>Restart (Disallowed)</font>"
@@ -375,7 +375,7 @@ datum/controller/vote
 				if(config.allow_vote_restart || usr.client.holder)
 					initiate_vote("crew_transfer",usr.key)
 			if("add_antagonist")
-				if(config.allow_extra_antags || usr.client.holder)
+				if(config.allow_extra_antags)
 					initiate_vote("add_antagonist",usr.key)
 			if("custom")
 				if(usr.client.holder)
