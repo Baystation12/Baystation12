@@ -19,7 +19,7 @@
 	reagents.add_reagent("tricordrazine", 30)
 	return
 
-/obj/item/weapon/reagent_containers/hypospray/attack(mob/M as mob, mob/user as mob)
+/obj/item/weapon/reagent_containers/hypospray/attack(mob/living/M as mob, mob/user as mob)
 	if(!reagents.total_volume)
 		user << "<span class='warning'>[src] is empty.</span>"
 		return
@@ -40,13 +40,9 @@
 	M << "<span class='notice'>You feel a tiny prick!</span>"
 
 	if(M.reagents)
-
 		var/contained = reagentlist()
-		M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been injected with [name] by [user.name] ([user.ckey]). Reagents: [contained]</font>")
-		user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [name] to inject [M.name] ([M.key]). Reagents: [contained]</font>")
-		msg_admin_attack("[user.name] ([user.ckey]) injected [M.name] ([M.key]) with [name]. Reagents: [contained] (INTENT: [uppertext(user.a_intent)]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
-
 		var/trans = reagents.trans_to_mob(M, amount_per_transfer_from_this, CHEM_BLOOD)
+		admin_inject_log(user, M, src, contained, trans)
 		user << "<span class='notice'>[trans] units injected. [reagents.total_volume] units remaining in \the [src].</span>"
 
 	return
