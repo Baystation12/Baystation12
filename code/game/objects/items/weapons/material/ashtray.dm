@@ -76,32 +76,27 @@ var/global/list/ashtray_cache = list()
 		health = max(0,health - W.force)
 		user << "You hit [src] with [W]."
 		if (health < 1)
-			die()
+			shatter()
 	return
 
 /obj/item/weapon/material/ashtray/throw_impact(atom/hit_atom)
 	if (health > 0)
 		health = max(0,health - 3)
-		if (health < 1)
-			die()
-			return
 		if (contents.len)
 			src.visible_message("<span class='danger'>\The [src] slams into [hit_atom], spilling its contents!</span>")
 		for (var/obj/item/clothing/mask/smokable/cigarette/O in contents)
 			O.loc = src.loc
+		if (health < 1)
+			shatter()
+			return
 		update_icon()
 	return ..()
-
-/obj/item/weapon/material/ashtray/proc/die()
-	material.place_shard(get_turf(src))
-	qdel(src)
-	return
 
 /obj/item/weapon/material/ashtray/plastic/New(var/newloc)
 	..(newloc, "plastic")
 
 /obj/item/weapon/material/ashtray/bronze/New(var/newloc)
-	..(newloc, "gold") //placeholder
+	..(newloc, "bronze")
 
 /obj/item/weapon/material/ashtray/glass/New(var/newloc)
 	..(newloc, "glass")
