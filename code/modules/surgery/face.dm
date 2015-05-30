@@ -10,15 +10,15 @@
 		if (!hasorgans(target))
 			return 0
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
-		if (!affected)
+		if (!affected || (affected.status & ORGAN_ROBOT))
 			return 0
 		return target_zone == "mouth"
 
 /datum/surgery_step/generic/cut_face
 	allowed_tools = list(
 	/obj/item/weapon/scalpel = 100,		\
-	/obj/item/weapon/kitchenknife = 75,	\
-	/obj/item/weapon/shard = 50, 		\
+	/obj/item/weapon/material/knife = 75,	\
+	/obj/item/weapon/material/shard = 50, 		\
 	)
 
 	min_duration = 90
@@ -76,7 +76,7 @@
 	allowed_tools = list(
 	/obj/item/weapon/retractor = 100, 	\
 	/obj/item/weapon/crowbar = 55,	\
-	/obj/item/weapon/kitchen/utensil/fork = 75)
+	/obj/item/weapon/material/kitchen/utensil/fork = 75)
 
 	min_duration = 80
 	max_duration = 100

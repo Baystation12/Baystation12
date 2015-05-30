@@ -57,6 +57,8 @@
 		M.adjustToxLoss(removed)
 
 /datum/reagent/blood/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
+	if(alien == IS_MACHINE)
+		return
 	if(data && data["viruses"])
 		for(var/datum/disease/D in data["viruses"])
 			if(D.spread_type == SPECIAL || D.spread_type == NON_CONTAGIOUS)
@@ -181,6 +183,7 @@
 	description = "Required for welders. Flamable."
 	reagent_state = LIQUID
 	color = "#660000"
+	touch_met = 5
 
 	glass_icon_state = "dr_gibb_glass"
 	glass_name = "glass of welder fuel"

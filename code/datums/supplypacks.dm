@@ -33,7 +33,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 					/obj/item/weapon/grenade/smokebomb,
 					/obj/item/weapon/grenade/smokebomb,
 					/obj/item/weapon/grenade/smokebomb,
-					/obj/item/weapon/pen/paralysis,
+					/obj/item/weapon/pen/reagent/paralysis,
 					/obj/item/weapon/grenade/chem_grenade/incendiary)
 	cost = 20
 	containertype = /obj/structure/closet/crate
@@ -271,12 +271,12 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 					/obj/item/weapon/reagent_containers/spray/plantbgone,
 					/obj/item/weapon/reagent_containers/glass/bottle/ammonia,
 					/obj/item/weapon/reagent_containers/glass/bottle/ammonia,
-					/obj/item/weapon/hatchet,
-					/obj/item/weapon/minihoe,
+					/obj/item/weapon/material/hatchet,
+					/obj/item/weapon/material/minihoe,
 					/obj/item/device/analyzer/plant_analyzer,
 					/obj/item/clothing/gloves/botanic_leather,
 					/obj/item/clothing/suit/apron,
-					/obj/item/weapon/minihoe,
+					/obj/item/weapon/material/minihoe,
 					/obj/item/weapon/storage/box/botanydisk
 					) // Updated with new things
 	cost = 15
@@ -337,8 +337,8 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 
 /datum/supply_packs/weedcontrol
 	name = "Weed control crate"
-	contains = list(/obj/item/weapon/hatchet,
-					/obj/item/weapon/hatchet,
+	contains = list(/obj/item/weapon/material/hatchet,
+					/obj/item/weapon/material/hatchet,
 					/obj/item/weapon/reagent_containers/spray/plantbgone,
 					/obj/item/weapon/reagent_containers/spray/plantbgone,
 					/obj/item/weapon/reagent_containers/spray/plantbgone,
@@ -348,7 +348,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 					/obj/item/weapon/grenade/chem_grenade/antiweed,
 					/obj/item/weapon/grenade/chem_grenade/antiweed)
 	cost = 25
-	containertype = /obj/structure/closet/crate/secure/hydrosec
+	containertype = /obj/structure/closet/crate/hydroponics
 	containername = "Weed control crate"
 	access = access_hydroponics
 	group = "Hydroponics"
@@ -445,7 +445,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 
 /datum/supply_packs/metal50
 	name = "50 metal sheets"
-	contains = list(/obj/item/stack/sheet/metal)
+	contains = list(/obj/item/stack/material/steel)
 	amount = 50
 	cost = 10
 	containertype = /obj/structure/closet/crate
@@ -454,7 +454,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 
 /datum/supply_packs/glass50
 	name = "50 glass sheets"
-	contains = list(/obj/item/stack/sheet/glass)
+	contains = list(/obj/item/stack/material/glass)
 	amount = 50
 	cost = 10
 	containertype = /obj/structure/closet/crate
@@ -463,7 +463,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 
 /datum/supply_packs/wood50
 	name = "50 wooden planks"
-	contains = list(/obj/item/stack/sheet/wood)
+	contains = list(/obj/item/stack/material/wood)
 	amount = 50
 	cost = 10
 	containertype = /obj/structure/closet/crate
@@ -472,7 +472,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 
 /datum/supply_packs/plastic50
 	name = "50 plastic sheets"
-	contains = list(/obj/item/stack/sheet/mineral/plastic)
+	contains = list(/obj/item/stack/material/plastic)
 	amount = 50
 	cost = 10
 	containertype = /obj/structure/closet/crate
@@ -1255,7 +1255,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	group = "Hydroponics"
 
 /datum/supply_packs/cardboard_sheets
-	contains = list(/obj/item/stack/sheet/cardboard)
+	contains = list(/obj/item/stack/material/cardboard)
 	name = "50 cardboard sheets"
 	amount = 50
 	cost = 10

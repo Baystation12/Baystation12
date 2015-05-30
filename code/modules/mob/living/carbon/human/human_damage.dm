@@ -142,12 +142,12 @@
 	..()
 
 /mob/living/carbon/human/getCloneLoss()
-	if(species.flags & (IS_SYNTHETIC | NO_SCAN))
+	if(species.flags & (NO_SCAN))
 		cloneloss = 0
 	return ..()
 
 /mob/living/carbon/human/setCloneLoss(var/amount)
-	if(species.flags & (IS_SYNTHETIC | NO_SCAN))
+	if(species.flags & (NO_SCAN))
 		cloneloss = 0
 	else
 		..()
@@ -155,7 +155,7 @@
 /mob/living/carbon/human/adjustCloneLoss(var/amount)
 	..()
 
-	if(species.flags & (IS_SYNTHETIC | NO_SCAN))
+	if(species.flags & (NO_SCAN))
 		cloneloss = 0
 		return
 
@@ -236,7 +236,7 @@
 /mob/living/carbon/human/proc/get_damageable_organs()
 	var/list/obj/item/organ/external/parts = list()
 	for(var/obj/item/organ/external/O in organs)
-		if(O.brute_dam + O.burn_dam < O.max_damage)
+		if(O.is_damageable())
 			parts += O
 	return parts
 

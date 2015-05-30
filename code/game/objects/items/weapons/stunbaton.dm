@@ -10,7 +10,7 @@
 	edge = 0
 	throwforce = 7
 	w_class = 3
-	origin_tech = "combat=2"
+	origin_tech = list(TECH_COMBAT = 2)
 	attack_verb = list("beaten")
 	var/stunforce = 0
 	var/agonyforce = 60
@@ -35,12 +35,13 @@
 
 /obj/item/weapon/melee/baton/proc/deductcharge(var/chrgdeductamt)
 	if(bcell)
-		if(bcell.use(chrgdeductamt))
+		if(bcell.checked_use(chrgdeductamt))
 			return 1
 		else
 			status = 0
 			update_icon()
 			return 0
+	return null
 
 /obj/item/weapon/melee/baton/update_icon()
 	if(status)
@@ -72,7 +73,7 @@
 
 	else if(istype(W, /obj/item/weapon/screwdriver))
 		if(bcell)
-			bcell.updateicon()
+			bcell.update_icon()
 			bcell.loc = get_turf(src.loc)
 			bcell = null
 			user << "<span class='notice'>You remove the cell from the [src].</span>"

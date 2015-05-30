@@ -5,7 +5,7 @@
 	item_state = "electronic"
 	w_class = 2.0
 	slot_flags = SLOT_BELT
-	origin_tech = "programming=2"
+	origin_tech = list(TECH_DATA = 2)
 	var/obj/item/device/radio/radio
 	var/looking_for_personality = 0
 	var/mob/living/silicon/pai/pai
@@ -323,4 +323,10 @@
 	if(pai && pai.client)
 		var/rendered = "<span class='message'>[text]</span>"
 		pai.show_message(rendered, 2)
+	..()
+
+/obj/item/device/paicard/show_message(msg, type, alt, alt_type)
+	if(pai && pai.client)
+		var/rendered = "<span class='message'>[msg]</span>"
+		pai.show_message(rendered, type)
 	..()

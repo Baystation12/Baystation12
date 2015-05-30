@@ -45,15 +45,14 @@
 		if(M == user)								//If you're eating it yourself
 			if(istype(M,/mob/living/carbon/human))
 				var/mob/living/carbon/human/H = M
-				if(H.species.flags & IS_SYNTHETIC)
-					H << "<span class='danger'>You have a monitor for a head, where do you think you're going to put that?</span>"
+				if(!H.check_has_mouth())
+					user << "Where do you intend to put \the [src]? You don't have a mouth!"
 					return
-			
 				var/obj/item/blocked = H.check_mouth_coverage()
 				if(blocked)
 					user << "<span class='warning'>\The [blocked] is in the way!</span>"
 					return
-			
+
 			if (fullness <= 50)
 				M << "<span class='danger'>You hungrily chew out a piece of [src] and gobble it!</span>"
 			if (fullness > 50 && fullness <= 150)
@@ -68,10 +67,9 @@
 		else
 			if(istype(M,/mob/living/carbon/human))
 				var/mob/living/carbon/human/H = M
-				if(H.species.flags & IS_SYNTHETIC)
-					user << "<span class='danger'>They have a monitor for a head, where do you think you're going to put that?</span>"
+				if(!H.check_has_mouth())
+					user << "Where do you intend to put \the [src]? \The [H] doesn't have a mouth!"
 					return
-				
 				var/obj/item/blocked = H.check_mouth_coverage()
 				if(blocked)
 					user << "<span class='warning'>\The [blocked] is in the way!</span>"
@@ -128,8 +126,8 @@
 		return
 
 	// Eating with forks
-	if(istype(W,/obj/item/weapon/kitchen/utensil))
-		var/obj/item/weapon/kitchen/utensil/U = W
+	if(istype(W,/obj/item/weapon/material/kitchen/utensil))
+		var/obj/item/weapon/material/kitchen/utensil/U = W
 
 		if(!U.reagents)
 			U.create_reagents(5)
@@ -2560,7 +2558,7 @@
 	slices_num = 6
 	New()
 		..()
-		reagents.add_reagent("protein", 50)
+		reagents.add_reagent("protein", 44)
 		reagents.add_reagent("tomatojuice", 6)
 		bitesize = 2
 
@@ -2598,7 +2596,7 @@
 	slices_num = 6
 	New()
 		..()
-		reagents.add_reagent("nutriment", 30)
+		reagents.add_reagent("nutriment", 25)
 		reagents.add_reagent("protein", 5)
 		reagents.add_reagent("tomatojuice", 6)
 		reagents.add_reagent("imidazoline", 12)
@@ -2819,7 +2817,7 @@
 
 // Dough + rolling pin = flat dough
 /obj/item/weapon/reagent_containers/food/snacks/dough/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W,/obj/item/weapon/kitchen/rollingpin))
+	if(istype(W,/obj/item/weapon/material/kitchen/rollingpin))
 		new /obj/item/weapon/reagent_containers/food/snacks/sliceable/flatdough(src)
 		user << "You flatten the dough."
 		qdel(src)
@@ -2964,7 +2962,7 @@
 
 // potato + knife = raw sticks
 /obj/item/weapon/reagent_containers/food/snacks/grown/potato/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W,/obj/item/weapon/kitchen/utensil/knife))
+	if(istype(W,/obj/item/weapon/material/kitchen/utensil/knife))
 		new /obj/item/weapon/reagent_containers/food/snacks/rawsticks(src)
 		user << "You cut the potato."
 		qdel(src)

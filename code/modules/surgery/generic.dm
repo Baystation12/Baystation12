@@ -17,8 +17,6 @@
 			return 0
 		if (affected.status & ORGAN_DESTROYED)
 			return 0
-		if (target_zone == "head" && target.species && (target.species.flags & IS_SYNTHETIC))
-			return 1
 		if (affected.status & ORGAN_ROBOT)
 			return 0
 		return 1
@@ -110,8 +108,8 @@
 /datum/surgery_step/generic/cut_open
 	allowed_tools = list(
 	/obj/item/weapon/scalpel = 100,		\
-	/obj/item/weapon/kitchenknife = 75,	\
-	/obj/item/weapon/shard = 50, 		\
+	/obj/item/weapon/material/knife = 75,	\
+	/obj/item/weapon/material/shard = 50, 		\
 	)
 
 	min_duration = 90
@@ -185,7 +183,7 @@
 	allowed_tools = list(
 	/obj/item/weapon/retractor = 100, 	\
 	/obj/item/weapon/crowbar = 75,	\
-	/obj/item/weapon/kitchen/utensil/fork = 50
+	/obj/item/weapon/material/kitchen/utensil/fork = 50
 	)
 
 	min_duration = 30
@@ -276,7 +274,7 @@
 /datum/surgery_step/generic/amputate
 	allowed_tools = list(
 	/obj/item/weapon/circular_saw = 100, \
-	/obj/item/weapon/hatchet = 75
+	/obj/item/weapon/material/hatchet = 75
 	)
 
 	min_duration = 110

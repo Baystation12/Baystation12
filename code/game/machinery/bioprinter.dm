@@ -73,8 +73,8 @@
 		qdel(W)
 		return
 	// Steel for matter.
-	else if(prints_prosthetics && istype(W, /obj/item/stack/sheet/metal))
-		var/obj/item/stack/sheet/metal/M = W
+	else if(prints_prosthetics && istype(W, /obj/item/stack/material/steel))
+		var/obj/item/stack/material/steel/M = W
 		stored_matter += M.amount * 10
 		user.drop_item()
 		user << "<span class='info'>\The [src] processes \the [W]. Levels of stored matter now: [stored_matter]</span>"

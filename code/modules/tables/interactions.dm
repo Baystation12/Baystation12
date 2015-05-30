@@ -3,15 +3,15 @@
 	if(air_group || (height==0)) return 1
 	if(istype(mover,/obj/item/projectile))
 		return (check_cover(mover,target))
-	if(istype(mover) && mover.checkpass(PASSTABLE))
-		return 1
-	if(locate(/obj/structure/table) in get_turf(mover))
-		return 1
 	if (flipped == 1)
 		if (get_dir(loc, target) == dir)
 			return !density
 		else
 			return 1
+	if(istype(mover) && mover.checkpass(PASSTABLE))
+		return 1
+	if(locate(/obj/structure/table) in get_turf(mover))
+		return 1
 	return 0
 
 //checks if projectile 'P' from turf 'from' can hit whatever is behind the table. Returns 1 if it can, 0 if bullet stops.
@@ -89,7 +89,7 @@
 						playsound(loc, 'sound/weapons/tablehit1.ogg', 50, 1)
 					var/list/L = take_damage(rand(1,5))
 					// Shards. Extra damage, plus potentially the fact YOU LITERALLY HAVE A PIECE OF GLASS/METAL/WHATEVER IN YOUR FACE
-					for(var/obj/item/weapon/shard/S in L)
+					for(var/obj/item/weapon/material/shard/S in L)
 						if(prob(50))
 							M.visible_message("<span class='danger'>\The [S] slices [M]'s face messily!</span>",
 							                   "<span class='danger'>\The [S] slices your face messily!</span>")

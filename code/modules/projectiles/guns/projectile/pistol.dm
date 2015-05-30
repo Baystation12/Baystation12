@@ -4,7 +4,7 @@
 	magazine_type = /obj/item/ammo_magazine/c45m
 	icon_state = "colt"
 	caliber = ".45"
-	origin_tech = "combat=2;materials=2"
+	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
 	load_method = MAGAZINE
 
 /obj/item/weapon/gun/projectile/colt/detective
@@ -35,7 +35,7 @@
 	icon_state = "secguncomp"
 	magazine_type = /obj/item/ammo_magazine/c45m/rubber
 	caliber = ".45"
-	origin_tech = "combat=2;materials=2"
+	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
 	load_method = MAGAZINE
 
 /obj/item/weapon/gun/projectile/sec/flash
@@ -54,7 +54,7 @@
 	w_class = 3
 	caliber = ".45"
 	silenced = 1
-	origin_tech = "combat=2;materials=2;syndicate=8"
+	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2, TECH_ILLEGAL = 8)
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/c45m
 
@@ -89,7 +89,7 @@
 	max_shells = 8
 	caliber = "75"
 	fire_sound = 'sound/effects/Explosion1.ogg'
-	origin_tech = "combat=3"
+	origin_tech = list(TECH_COMBAT = 3)
 	ammo_type = "/obj/item/ammo_casing/a75"
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/a75
@@ -111,7 +111,7 @@
 	w_class = 2
 	caliber = "9mm"
 	silenced = 0
-	origin_tech = "combat=2;materials=2;syndicate=2"
+	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2, TECH_ILLEGAL = 2)
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/mc9mm
 

@@ -18,7 +18,7 @@ REAGENT SCANNER
 
 	matter = list(DEFAULT_WALL_MATERIAL = 150)
 
-	origin_tech = "magnets=1;engineering=1"
+	origin_tech = list(TECH_MAGNET = 1, TECH_ENGINERING = 1)
 
 /obj/item/device/t_scanner/attack_self(mob/user)
 
@@ -74,7 +74,7 @@ REAGENT SCANNER
 	throw_speed = 5
 	throw_range = 10
 	matter = list(DEFAULT_WALL_MATERIAL = 200)
-	origin_tech = "magnets=1;biotech=1"
+	origin_tech = list(TECH_MAGNET = 1, TECH_BIO = 1)
 	var/mode = 1;
 
 
@@ -91,9 +91,9 @@ REAGENT SCANNER
 	if (!(istype(usr, /mob/living/carbon/human) || ticker) && ticker.mode.name != "monkey")
 		usr << "\red You don't have the dexterity to do this!"
 		return
-	user.visible_message("<span class='notice'> [user] has analyzed [M]'s vitals.","<span class='notice'> You have analyzed [M]'s vitals.")
+	user.visible_message("<span class='notice'> [user] has analyzed [M]'s vitals.</span>","<span class='notice'> You have analyzed [M]'s vitals.</span>")
 
-	if (!istype(M, /mob/living/carbon) || (ishuman(M) && (M:species.flags & IS_SYNTHETIC)))
+	if (!istype(M, /mob/living/carbon) || ishuman(M))
 		//these sensors are designed for organic life
 		user.show_message("\blue Analyzing Results for ERROR:\n\t Overall Status: ERROR")
 		user.show_message("\t Key: <font color='blue'>Suffocation</font>/<font color='green'>Toxin</font>/<font color='#FFA500'>Burns</font>/<font color='red'>Brute</font>", 1)
@@ -139,14 +139,15 @@ REAGENT SCANNER
 	if(M.status_flags & FAKEDEATH)
 		OX = fake_oxy > 50 ? 		"\red Severe oxygen deprivation detected\blue" 	: 	"Subject bloodstream oxygen level normal"
 	user.show_message("[OX] | [TX] | [BU] | [BR]")
-	if (istype(M, /mob/living/carbon))
-		if(M:reagents.total_volume > 0)
+	if(istype(M, /mob/living/carbon))
+		var/mob/living/carbon/C = M
+		if(C.reagents.total_volume)
 			var/unknown = 0
 			var/reagentdata[0]
-			for(var/A in M.reagents.reagent_list)
+			for(var/A in C.reagents.reagent_list)
 				var/datum/reagent/R = A
 				if(R.scannable)
-					reagentdata["[R.id]"] = "\t \blue [round(M.reagents.get_reagent_amount(R.id), 1)]u [R.name]"
+					reagentdata["[R.id]"] = "\t \blue [round(C.reagents.get_reagent_amount(R.id), 1)]u [R.name]"
 				else
 					unknown++
 			if(reagentdata.len)
@@ -155,8 +156,16 @@ REAGENT SCANNER
 					user.show_message(reagentdata[d])
 			if(unknown)
 				user.show_message(text("\red Warning: Unknown substance[(unknown>1)?"s":""] detected in subject's blood."))
-		if(M:virus2.len)
-			var/mob/living/carbon/C = M
+		if(C.ingested && C.ingested.total_volume)
+			var/unknown = 0
+			for(var/datum/reagent/R in C.ingested.reagent_list)
+				if(R.scannable)
+					user << "<span class='notice'>[R.name] found in subject's stomach.</span>"
+				else
+					++unknown
+			if(unknown)
+				user << "<span class='warning'>Non-medical reagent[(unknown > 1)?"s":""] found in subject's stomach.</span>"
+		if(C.virus2.len)
 			for (var/ID in C.virus2)
 				if (ID in virusDB)
 					var/datum/data/record/V = virusDB[ID]
@@ -242,7 +251,7 @@ REAGENT SCANNER
 
 	matter = list(DEFAULT_WALL_MATERIAL = 30,"glass" = 20)
 
-	origin_tech = "magnets=1;engineering=1"
+	origin_tech = list(TECH_MAGNET = 1, TECH_ENGINERING = 1)
 
 /obj/item/device/analyzer/attack_self(mob/user as mob)
 
@@ -289,7 +298,7 @@ REAGENT SCANNER
 
 	matter = list(DEFAULT_WALL_MATERIAL = 30,"glass" = 20)
 
-	origin_tech = "magnets=2;biotech=2"
+	origin_tech = list(TECH_MAGNET = 2, TECH_BIO = 2)
 	var/details = 0
 	var/recent_fail = 0
 
@@ -308,9 +317,6 @@ REAGENT SCANNER
 /obj/item/device/mass_spectrometer/attack_self(mob/user as mob)
 	if (user.stat)
 		return
-	if (crit_fail)
-		user << "\red This device has critically failed and is no longer functional!"
-		return
 	if (!(istype(user, /mob/living/carbon/human) || ticker) && ticker.mode.name != "monkey")
 		user << "\red You don't have the dexterity to do this!"
 		return
@@ -326,19 +332,10 @@ REAGENT SCANNER
 				break
 		var/dat = "Trace Chemicals Found: "
 		for(var/R in blood_traces)
-			if(prob(reliability))
-				if(details)
-					dat += "[R] ([blood_traces[R]] units) "
-				else
-					dat += "[R] "
-				recent_fail = 0
+			if(details)
+				dat += "[R] ([blood_traces[R]] units) "
 			else
-				if(recent_fail)
-					crit_fail = 1
-					reagents.clear_reagents()
-					return
-				else
-					recent_fail = 1
+				dat += "[R] "
 		user << "[dat]"
 		reagents.clear_reagents()
 	return
@@ -347,7 +344,7 @@ REAGENT SCANNER
 	name = "advanced mass spectrometer"
 	icon_state = "adv_spectrometer"
 	details = 1
-	origin_tech = "magnets=4;biotech=2"
+	origin_tech = list(TECH_MAGNET = 4, TECH_BIO = 2)
 
 /obj/item/device/reagent_scanner
 	name = "reagent scanner"
@@ -362,7 +359,7 @@ REAGENT SCANNER
 	throw_range = 20
 	matter = list(DEFAULT_WALL_MATERIAL = 30,"glass" = 20)
 
-	origin_tech = "magnets=2;biotech=2"
+	origin_tech = list(TECH_MAGNET = 2, TECH_BIO = 2)
 	var/details = 0
 	var/recent_fail = 0
 
@@ -376,24 +373,13 @@ REAGENT SCANNER
 		return
 	if(!istype(O))
 		return
-	if (crit_fail)
-		user << "\red This device has critically failed and is no longer functional!"
-		return
 
 	if(!isnull(O.reagents))
 		var/dat = ""
 		if(O.reagents.reagent_list.len > 0)
 			var/one_percent = O.reagents.total_volume / 100
 			for (var/datum/reagent/R in O.reagents.reagent_list)
-				if(prob(reliability))
-					dat += "\n \t \blue [R][details ? ": [R.volume / one_percent]%" : ""]"
-					recent_fail = 0
-				else if(recent_fail)
-					crit_fail = 1
-					dat = null
-					break
-				else
-					recent_fail = 1
+				dat += "\n \t \blue [R][details ? ": [R.volume / one_percent]%" : ""]"
 		if(dat)
 			user << "\blue Chemicals found: [dat]"
 		else
@@ -407,13 +393,13 @@ REAGENT SCANNER
 	name = "advanced reagent scanner"
 	icon_state = "adv_spectrometer"
 	details = 1
-	origin_tech = "magnets=4;biotech=2"
+	origin_tech = list(TECH_MAGNET = 4, TECH_BIO = 2)
 
 /obj/item/device/slime_scanner
 	name = "slime scanner"
 	icon_state = "adv_spectrometer"
 	item_state = "analyzer"
-	origin_tech = "biotech=1"
+	origin_tech = list(TECH_BIO = 1)
 	w_class = 2.0
 	flags = CONDUCT
 	throwforce = 0

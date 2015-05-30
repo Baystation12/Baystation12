@@ -1,7 +1,0 @@
-author: Ccomp5950
-delete-after: True
-
-changes:
-  - bugfix: "Beepsky no longer kills goats."
-  - tweak: "Goats will move towards vines that are 4 spaces away now instead of 1"
-  - bugfix: "Goats will eat the spawning plants for vines as well as the vines themselves."

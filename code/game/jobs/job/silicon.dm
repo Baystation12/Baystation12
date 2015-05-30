@@ -17,6 +17,9 @@
 /datum/job/ai/is_position_available()
 	return (empty_playable_ai_cores.len != 0)
 
+/datum/job/ai/equip_preview(mob/living/carbon/human/H)
+	H.equip_to_slot_or_del(new /obj/item/clothing/suit/straight_jacket(H), slot_wear_suit)
+	H.equip_to_slot_or_del(new /obj/item/clothing/head/cardborg(H), slot_head)
 
 /datum/job/cyborg
 	title = "Cyborg"
@@ -33,3 +36,7 @@
 	equip(var/mob/living/carbon/human/H)
 		if(!H)	return 0
 		return 1
+
+/datum/job/cyborg/equip_preview(mob/living/carbon/human/H)
+	H.equip_to_slot_or_del(new /obj/item/clothing/suit/cardborg(H), slot_wear_suit)
+	H.equip_to_slot_or_del(new /obj/item/clothing/head/cardborg(H), slot_head)

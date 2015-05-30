@@ -34,10 +34,6 @@
 	hold.emp_act(severity)
 	..()
 
-/obj/item/clothing/accessory/storage/hear_talk(mob/M, var/msg, verb, datum/language/speaking)
-	hold.hear_talk(M, msg, verb, speaking)
-	..()
-
 /obj/item/clothing/accessory/storage/attack_self(mob/user as mob)
 	user << "<span class='notice'>You empty [src].</span>"
 	var/turf/T = get_turf(src)
@@ -72,11 +68,11 @@
 /obj/item/clothing/accessory/storage/knifeharness/New()
 	..()
 	hold.max_storage_space = 4
-	hold.can_hold = list(/obj/item/weapon/hatchet/unathiknife,\
-	/obj/item/weapon/kitchen/utensil/knife,\
-	/obj/item/weapon/kitchen/utensil/pknife,\
-	/obj/item/weapon/kitchenknife,\
-	/obj/item/weapon/kitchenknife/ritual)
+	hold.can_hold = list(/obj/item/weapon/material/hatchet/unathiknife,\
+	/obj/item/weapon/material/kitchen/utensil/knife,\
+	/obj/item/weapon/material/kitchen/utensil/knife/plastic,\
+	/obj/item/weapon/material/knife,\
+	/obj/item/weapon/material/knife/ritual)
 
-	new /obj/item/weapon/hatchet/unathiknife(hold)
-	new /obj/item/weapon/hatchet/unathiknife(hold)
+	new /obj/item/weapon/material/hatchet/unathiknife(hold)
+	new /obj/item/weapon/material/hatchet/unathiknife(hold)

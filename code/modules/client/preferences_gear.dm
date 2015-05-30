@@ -897,6 +897,12 @@ var/global/list/gear_datums = list()
 	cost = 1
 	slot = slot_shoes
 
+/datum/gear/workboots
+	display_name = "workboots"
+	path = /obj/item/clothing/shoes/workboots
+	cost = 1
+	slot = slot_shoes
+
 /datum/gear/sandal
 	display_name = "sandals"
 	path = /obj/item/clothing/shoes/sandal
@@ -1035,7 +1041,7 @@ var/global/list/gear_datums = list()
 
 /datum/gear/ashtray
 	display_name = "ashtray, plastic"
-	path = /obj/item/ashtray/plastic
+	path = /obj/item/weapon/material/ashtray/plastic
 	sort_category = "misc"
 	cost = 1
 

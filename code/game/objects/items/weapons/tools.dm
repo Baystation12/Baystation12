@@ -24,8 +24,8 @@
 	force = 5.0
 	throwforce = 7.0
 	w_class = 2.0
+	origin_tech = list(TECH_MATERIAL = 1, TECH_ENGINERING = 1)
 	matter = list(DEFAULT_WALL_MATERIAL = 150)
-	origin_tech = "materials=1;engineering=1"
 	attack_verb = list("bashed", "battered", "bludgeoned", "whacked")
 
 
@@ -81,7 +81,8 @@
 	return
 
 /obj/item/weapon/screwdriver/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
-	if(!istype(M))	return ..()
+	if(!istype(M) || user.a_intent == "help")
+		return ..()
 	if(user.zone_sel.selecting != "eyes" && user.zone_sel.selecting != "head")
 		return ..()
 	if((CLUMSY in user.mutations) && prob(50))
@@ -102,8 +103,8 @@
 	throw_speed = 2
 	throw_range = 9
 	w_class = 2.0
+	origin_tech = list(TECH_MATERIAL = 1, TECH_ENGINERING = 1)
 	matter = list(DEFAULT_WALL_MATERIAL = 80)
-	origin_tech = "materials=1;engineering=1"
 	attack_verb = list("pinched", "nipped")
 	sharp = 1
 	edge = 1
@@ -147,7 +148,7 @@
 	matter = list(DEFAULT_WALL_MATERIAL = 70, "glass" = 30)
 
 	//R&D tech level
-	origin_tech = "engineering=1"
+	origin_tech = list(TECH_ENGINERING = 1)
 
 	//Welding tool specific stuff
 	var/welding = 0 	//Whether or not the welding tool is off(0), on(1) or currently welding(2)
@@ -329,8 +330,6 @@
 		var/obj/item/organ/eyes/E = H.internal_organs_by_name["eyes"]
 		if(!E)
 			return
-		if(H.species.flags & IS_SYNTHETIC)
-			return
 		switch(safety)
 			if(1)
 				usr << "\red Your eyes sting a little."
@@ -367,22 +366,22 @@
 /obj/item/weapon/weldingtool/largetank
 	name = "industrial welding tool"
 	max_fuel = 40
+	origin_tech = list(TECH_ENGINERING = 2)
 	matter = list(DEFAULT_WALL_MATERIAL = 70, "glass" = 60)
-	origin_tech = "engineering=2"
 
 /obj/item/weapon/weldingtool/hugetank
 	name = "upgraded welding tool"
 	max_fuel = 80
 	w_class = 3.0
+	origin_tech = list(TECH_ENGINERING = 3)
 	matter = list(DEFAULT_WALL_MATERIAL = 70, "glass" = 120)
-	origin_tech = "engineering=3"
 
 /obj/item/weapon/weldingtool/experimental
 	name = "experimental welding tool"
 	max_fuel = 40
 	w_class = 3.0
+	origin_tech = list(TECH_ENGINERING = 4, TECH_PHORON = 3)
 	matter = list(DEFAULT_WALL_MATERIAL = 70, "glass" = 120)
-	origin_tech = "engineering=4;phorontech=3"
 	var/last_gen = 0
 
 
@@ -408,8 +407,8 @@
 	throwforce = 7.0
 	item_state = "crowbar"
 	w_class = 2.0
+	origin_tech = list(TECH_ENGINERING = 1)
 	matter = list(DEFAULT_WALL_MATERIAL = 50)
-	origin_tech = "engineering=1"
 	attack_verb = list("attacked", "bashed", "battered", "bludgeoned", "whacked")
 
 /obj/item/weapon/crowbar/red
@@ -427,16 +426,12 @@
 		if(!(S.status & ORGAN_ROBOT) || user.a_intent != I_HELP)
 			return ..()
 
-		if(istype(M,/mob/living/carbon/human))
-			var/mob/living/carbon/human/H = M
-			if(H.species.flags & IS_SYNTHETIC)
-				if(M == user)
-					user << "\red You can't repair damage to your own body - it's against OH&S."
-					return
-
 		if(S.brute_dam)
-			S.heal_damage(15,0,0,1)
-			user.visible_message("\red \The [user] patches some dents on \the [M]'s [S.name] with \the [src].")
+			if(S.brute_dam < ROBOLIMB_SELF_REPAIR_CAP)
+				S.heal_damage(15,0,0,1)
+				user.visible_message("\red \The [user] patches some dents on \the [M]'s [S.name] with \the [src].")
+			else
+				user << "\red The damage is far too severe to patch over externally."
 			return
 		else
 			user << "Nothing to fix!"
@@ -455,9 +450,9 @@
 		/obj/item/weapon/screwdriver,
 		/obj/item/weapon/wrench,
 		/obj/item/weapon/wirecutters,
-		/obj/item/weapon/kitchen/utensil/knife,
-		/obj/item/weapon/kitchen/utensil/fork,
-		/obj/item/weapon/hatchet
+		/obj/item/weapon/material/kitchen/utensil/knife,
+		/obj/item/weapon/material/kitchen/utensil/fork,
+		/obj/item/weapon/material/hatchet
 		)
 	var/list/tools = list()
 	var/current_tool = 1

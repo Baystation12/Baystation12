@@ -69,19 +69,22 @@
 	set category = "OOC"
 
 	if(say_disabled)	//This is here to try to identify lag problems
-		usr << "\red Speech is currently admin-disabled."
+		usr << "<span class='danger'>Speech is currently admin-disabled.</span>"
 		return
 
-	if(!mob)	return
+	if(!mob)
+		return
+
 	if(IsGuestKey(key))
 		src << "Guests may not use OOC."
 		return
 
 	msg = sanitize(msg)
-	if(!msg)	return
+	if(!msg)
+		return
 
 	if(!(prefs.toggles & CHAT_LOOC))
-		src << "\red You have LOOC muted."
+		src << "<span class='danger'>You have LOOC muted.</span>"
 		return
 
 	if(!holder)
@@ -94,7 +97,7 @@
 		if(prefs.muted & MUTE_OOC)
 			src << "<span class='danger'>You cannot use OOC (muted).</span>"
 			return
-		if(handle_spam_prevention(msg,MUTE_OOC))
+		if(handle_spam_prevention(msg, MUTE_OOC))
 			return
 		if(findtext(msg, "byond://"))
 			src << "<B>Advertising other servers is not allowed.</B>"
@@ -104,26 +107,48 @@
 
 	log_ooc("(LOCAL) [mob.name]/[key] : [msg]")
 
-	var/mob/source = src.mob
-	var/list/heard = get_mobs_in_view(7, source)
+	var/mob/source = mob.get_looc_source()
+	var/list/heard = get_mobs_or_objects_in_view(7, source, 1, 0)
 
-	var/display_name = source.key
+	var/display_name = key
 	if(holder && holder.fakekey)
 		display_name = holder.fakekey
-	if(source.stat != DEAD)
-		display_name = source.name
+	if(mob.stat != DEAD)
+		display_name = mob.name
 
-	var/prefix
-	var/admin_stuff
 	for(var/client/target in clients)
 		if(target.prefs.toggles & CHAT_LOOC)
-			admin_stuff = ""
+			var/prefix = ""
+			var/admin_stuff = ""
+			var/send = 0
+
 			if(target in admins)
-				prefix = "(R)"
-				admin_stuff += "/([source.key])"
-				if(target != source.client)
+				admin_stuff += "/([key])"
+				if(target != src)
 					admin_stuff += "(<A HREF='?src=\ref[target.holder];adminplayerobservejump=\ref[mob]'>JMP</A>)"
+
 			if(target.mob in heard)
-				prefix = ""
-			if((target.mob in heard) || (target in admins))
+				send = 1
+				if(isAI(target.mob))
+					prefix = "(Core) "
+
+			else if(isAI(target.mob)) // Special case
+				var/mob/living/silicon/ai/A = target.mob
+				if(A.eyeobj in hearers(7, source))
+					send = 1
+					prefix = "(Eye) "
+
+			if(!send && (target in admins))
+				send = 1
+				prefix = "(R)"
+
+			if(send)
 				target << "<span class='ooc'><span class='looc'>" + create_text_tag("looc", "LOOC:", target) + " <span class='prefix'>[prefix]</span><EM>[display_name][admin_stuff]:</EM> <span class='message'>[msg]</span></span></span>"
+
+/mob/proc/get_looc_source()
+	return src
+
+/mob/living/silicon/ai/get_looc_source()
+	if(eyeobj)
+		return eyeobj
+	return src

@@ -62,7 +62,11 @@
 	if (istype(user, /obj/machinery/computer/shuttle_control/emergency))	//if we were given a command by an emergency shuttle console
 		if (emergency_shuttle.autopilot)
 			emergency_shuttle.autopilot = 0
-			world << "\blue <B>Alert: The shuttle autopilot has been overridden. Launch sequence initiated!</B>"
+			world << "<span class='notice'><b>Alert: The shuttle autopilot has been overridden. Launch sequence initiated!</b></span>"
+
+	if(usr)
+		log_admin("[key_name(usr)] has overridden the shuttle autopilot and activated launch sequence")
+		message_admins("[key_name_admin(usr)] has overridden the shuttle autopilot and activated launch sequence")
 
 	..(user)
 
@@ -72,7 +76,11 @@
 	if (istype(user, /obj/machinery/computer/shuttle_control/emergency))	//if we were given a command by an emergency shuttle console
 		if (emergency_shuttle.autopilot)
 			emergency_shuttle.autopilot = 0
-			world << "\blue <B>Alert: The shuttle autopilot has been overridden. Bluespace drive engaged!</B>"
+			world << "<span class='notice'><b>Alert: The shuttle autopilot has been overridden. Bluespace drive engaged!</b></span>"
+
+	if(usr)
+		log_admin("[key_name(usr)] has overridden the shuttle autopilot and forced immediate launch")
+		message_admins("[key_name_admin(usr)] has overridden the shuttle autopilot and forced immediate launch")
 
 	..(user)
 
@@ -82,7 +90,11 @@
 	if (istype(user, /obj/machinery/computer/shuttle_control/emergency))	//if we were given a command by an emergency shuttle console
 		if (emergency_shuttle.autopilot)
 			emergency_shuttle.autopilot = 0
-			world << "\blue <B>Alert: The shuttle autopilot has been overridden. Launch sequence aborted!</B>"
+			world << "<span class='notice'><b>Alert: The shuttle autopilot has been overridden. Launch sequence aborted!</b></span>"
+
+	if(usr)
+		log_admin("[key_name(usr)] has overridden the shuttle autopilot and cancelled launch sequence")
+		message_admins("[key_name_admin(usr)] has overridden the shuttle autopilot and cancelled launch sequence")
 
 	..(user)
 
@@ -102,8 +114,8 @@
 	authorized = initial(authorized)
 
 //returns 1 if the ID was accepted and a new authorization was added, 0 otherwise
-/obj/machinery/computer/shuttle_control/emergency/proc/read_authorization(var/ident)
-	if (!ident)
+/obj/machinery/computer/shuttle_control/emergency/proc/read_authorization(var/obj/item/ident)
+	if (!ident || !istype(ident))
 		return 0
 	if (authorized.len >= req_authorizations)
 		return 0	//don't need any more
@@ -112,33 +124,35 @@
 	var/auth_name
 	var/dna_hash
 
-	if(istype(ident, /obj/item/weapon/card/id))
-		var/obj/item/weapon/card/id/ID = ident
-		access = ID.access
-		auth_name = "[ID.registered_name] ([ID.assignment])"
-		dna_hash = ID.dna_hash
+	var/obj/item/weapon/card/id/ID = ident.GetID()
 
-	if(istype(ident, /obj/item/device/pda))
-		var/obj/item/device/pda/PDA = ident
-		access = PDA.id.access
-		auth_name = "[PDA.id.registered_name] ([PDA.id.assignment])"
-		dna_hash = PDA.id.dna_hash
+	if(!ID)
+		return
+
+	access = ID.access
+	auth_name = "[ID.registered_name] ([ID.assignment])"
+	dna_hash = ID.dna_hash
 
 	if (!access || !istype(access))
 		return 0	//not an ID
 
 	if (dna_hash in authorized)
-		src.visible_message("[src] buzzes. That ID has already been scanned.")
+		src.visible_message("\The [src] buzzes. That ID has already been scanned.")
 		return 0
 
 	if (!(access_heads in access))
-		src.visible_message("[src] buzzes, rejecting [ident].")
+		src.visible_message("\The [src] buzzes, rejecting [ident].")
 		return 0
 
-	src.visible_message("[src] beeps as it scans [ident].")
+	src.visible_message("\The [src] beeps as it scans [ident].")
 	authorized[dna_hash] = auth_name
 	if (req_authorizations - authorized.len)
-		world << "\blue <B>Alert: [req_authorizations - authorized.len] authorization\s needed to override the shuttle autopilot.</B>"
+		world << "<span class='notice'><b>Alert: [req_authorizations - authorized.len] authorization\s needed to override the shuttle autopilot.</b></span>"
+
+	if(usr)
+		log_admin("[key_name(usr)] has inserted [ID] into the shuttle control computer - [req_authorizations - authorized.len] authorisation\s needed")
+		message_admins("[key_name_admin(usr)] has inserted [ID] into the shuttle control computer - [req_authorizations - authorized.len] authorisation\s needed")
+
 	return 1
 
 
@@ -146,7 +160,7 @@
 
 /obj/machinery/computer/shuttle_control/emergency/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (istype(W, /obj/item/weapon/card/emag) && !emagged)
-		user << "\blue You short out the [src]'s authorization protocols."
+		user << "<span class='notice'>You short out \the [src]'s authorization protocols.</span>"
 		emagged = 1
 		return
 
