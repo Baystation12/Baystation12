@@ -1,3 +1,5 @@
+/var/global/list/event_viruses = list() // so that event viruses are kept around for admin logs, rather than being GCed
+
 datum/event/viral_infection
 	var/list/viruses = list()
 
@@ -40,10 +42,30 @@ datum/event/viral_infection/start()
 	if(!candidates.len)	return
 	candidates = shuffle(candidates)//Incorporating Donkie's list shuffle
 
+	var/list/used_viruses = list()
+	var/list/used_candidates = list()
 	severity = max(EVENT_LEVEL_MUNDANE, severity - 1)
 	var/actual_severity = severity * rand(1, 3)
 	while(actual_severity > 0 && candidates.len)
 		var/datum/disease2/disease/D = pick(viruses)
 		infect_mob(candidates[1], D.getcopy())
+		used_candidates += candidates[1]
 		candidates.Remove(candidates[1])
 		actual_severity--
+		used_viruses |= D
+
+	event_viruses |= used_viruses
+	var/list/used_viruses_links = list()
+	var/list/used_viruses_text = list()
+	for(var/datum/disease2/disease/D in used_viruses)
+		used_viruses_links += "<a href='?src=\ref[D];info=1'>[D.name()]</a>"
+		used_viruses_text += D.name()
+
+	var/list/used_candidates_links = list()
+	var/list/used_candidates_text = list()
+	for(var/mob/M in used_candidates)
+		used_candidates_links += key_name_admin(M)
+		used_candidates_text += key_name(M)
+
+	log_admin("Virus event affecting [english_list(used_candidates_text)] started; Viruses: [english_list(used_viruses_text)]")
+	message_admins("Virus event affecting [english_list(used_candidates_links)] started; Viruses: [english_list(used_viruses_links)]")
