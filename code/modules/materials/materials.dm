@@ -348,6 +348,18 @@ var/list/name_to_material
 	weight = 22
 	stack_per_sheet = 3750
 
+// Adminspawn only, do not let anyone get this.
+/material/voxalloy
+	name = "voxalloy"
+	display_name = "durable alloy"
+	stack_type = null
+	icon_colour = "#6C7364"
+	integrity = 1200
+	melting_point = 6000       // Hull plating.
+	explosion_resistance = 200 // Hull plating.
+	hardness = 500
+	weight = 500
+
 /material/wood
 	name = "wood"
 	stack_type = /obj/item/stack/material/wood
