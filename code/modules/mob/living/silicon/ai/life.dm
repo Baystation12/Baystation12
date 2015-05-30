@@ -12,90 +12,71 @@
 
 		src.updatehealth()
 
-		if (src.malfhack)
-			if (src.malfhack.aidisabled)
-				src << "\red ERROR: APC access disabled, hack attempt canceled."
-				src.malfhacking = 0
-				src.malfhack = null
-
-
-		if (src.health <= config.health_threshold_dead)
+		if (!hardware_integrity() || !backup_capacitor())
 			death()
 			return
+
+		// If our powersupply object was destroyed somehow, create new one.
+		if(!psupply)
+			create_powersupply()
 
 		if (src.machine)
 			if (!( src.machine.check_eye(src) ))
 				src.reset_view(null)
 
 		// Handle power damage (oxy)
-		if(src:aiRestorePowerRoutine != 0)
-			// Lost power
+		if(aiRestorePowerRoutine != 0 && !APU_power)
+			// Lose power
 			adjustOxyLoss(1)
 		else
 			// Gain Power
+			aiRestorePowerRoutine = 0 // Necessary if AI activated it's APU AFTER losing primary power.
 			adjustOxyLoss(-1)
 
 		// Handle EMP-stun
 		handle_stunned()
 
-		//stage = 1
-		//if (istype(src, /mob/living/silicon/ai)) // Are we not sure what we are?
+		malf_process()
+
+		if(APU_power && (hardware_integrity() < 50))
+			src << "<span class='notice'><b>APU GENERATOR FAILURE! (System Damaged)</b></span>"
+			stop_apu(1)
+
 		var/blind = 0
-		//stage = 2
 		var/area/loc = null
 		if (istype(T, /turf))
-			//stage = 3
 			loc = T.loc
 			if (istype(loc, /area))
-				//stage = 4
-				if (!loc.power_equip && !istype(src.loc,/obj/item))
-					//stage = 5
+				if (!loc.power_equip && !istype(src.loc,/obj/item) && !APU_power)
 					blind = 1
 
-		if (!blind)	//lol? if(!blind)	#if(src.blind.layer)    <--something here is clearly wrong :P
-					//I'll get back to this when I find out  how this is -supposed- to work ~Carn //removed this shit since it was confusing as all hell --39kk9t
-			//stage = 4.5
+		if (!blind)
 			src.sight |= SEE_TURFS
 			src.sight |= SEE_MOBS
 			src.sight |= SEE_OBJS
 			src.see_in_dark = 8
 			src.see_invisible = SEE_INVISIBLE_LIVING
 
-
-			//Congratulations!  You've found a way for AI's to run without using power!
-			//Todo:  Without snowflaking up master_controller procs find a way to make AI use_power but only when APC's clear the area usage the tick prior
-			//       since mobs are in master_controller before machinery.  We also have to do it in a manner where we don't reset the entire area's need to update
-			//	 the power usage.
-			//
-			//	 We can probably create a new machine that resides inside of the AI contents that uses power using the idle_usage of 1000 and nothing else and
-			//       be fine.
-/*
-			var/area/home = get_area(src)
-			if(!home)	return//something to do with malf fucking things up I guess. <-- aisat is gone. is this still necessary? ~Carn
-			if(home.powered(EQUIP))
-				home.use_power(1000, EQUIP)
-*/
-
-			if (src:aiRestorePowerRoutine==2)
+			if (aiRestorePowerRoutine==2)
 				src << "Alert cancelled. Power has been restored without our assistance."
-				src:aiRestorePowerRoutine = 0
+				aiRestorePowerRoutine = 0
 				src.blind.layer = 0
 				return
-			else if (src:aiRestorePowerRoutine==3)
+			else if (aiRestorePowerRoutine==3)
 				src << "Alert cancelled. Power has been restored."
-				src:aiRestorePowerRoutine = 0
+				aiRestorePowerRoutine = 0
+				src.blind.layer = 0
+				return
+			else if (APU_power)
+				aiRestorePowerRoutine = 0
 				src.blind.layer = 0
 				return
 		else
-
-			//stage = 6
-
 			var/area/current_area = get_area(src)
 
 			if (lacks_power())
-				//If our area lacks equipment power, and is not magically powered (i.e. centcom), or if we are in space and not carded, lose power.
-				if (src:aiRestorePowerRoutine==0)
-					src:aiRestorePowerRoutine = 1
+				if (aiRestorePowerRoutine==0)
+					aiRestorePowerRoutine = 1
 
 					//Blind the AI
 
@@ -118,7 +99,7 @@
 						if (loc.power_equip)
 							if (!istype(T, /turf/space))
 								src << "Alert cancelled. Power has been restored without our assistance."
-								src:aiRestorePowerRoutine = 0
+								aiRestorePowerRoutine = 0
 								src.blind.layer = 0
 								return
 						src << "Fault confirmed: missing external power. Shutting down main control system to save power."
@@ -127,7 +108,7 @@
 						sleep(50)
 						if (istype(T, /turf/space))
 							src << "Unable to verify! No power connection detected!"
-							src:aiRestorePowerRoutine = 2
+							aiRestorePowerRoutine = 2
 							return
 						src << "Connection verified. Searching for APC in power network."
 						sleep(50)
@@ -148,7 +129,7 @@
 							if (loc.power_equip)
 								if (!istype(T, /turf/space))
 									src << "Alert cancelled. Power has been restored without our assistance."
-									src:aiRestorePowerRoutine = 0
+									aiRestorePowerRoutine = 0
 									src.blind.layer = 0 //This, too, is a fix to issue 603
 									return
 							switch(PRP)
@@ -163,9 +144,9 @@
 									theAPC.operating = 1
 									theAPC.equipment = 3
 									theAPC.update()
-									src:aiRestorePowerRoutine = 3
+									aiRestorePowerRoutine = 3
 									src << "Here are your current laws:"
-									src.show_laws()
+									show_laws()
 							sleep(50)
 							theAPC = null
 
@@ -178,6 +159,8 @@
 			process_med_hud(src,0,src.eyeobj)
 
 /mob/living/silicon/ai/proc/lacks_power()
+	if(APU_power)
+		return 0
 	var/turf/T = get_turf(src)
 	var/area/A = get_area(src)
 	return ((!A.power_equip) && A.requires_power == 1 || istype(T, /turf/space)) && !istype(src.loc,/obj/item)
@@ -186,11 +169,9 @@
 	if(status_flags & GODMODE)
 		health = 100
 		stat = CONSCIOUS
+		setOxyLoss(0)
 	else
-		if(fire_res_on_core)
-			health = 100 - getOxyLoss() - getToxLoss() - getBruteLoss()
-		else
-			health = 100 - getOxyLoss() - getToxLoss() - getFireLoss() - getBruteLoss()
+		health = 100 - getFireLoss() - getBruteLoss() // Oxyloss is not part of health as it represents AIs backup power. AI is immune against ToxLoss as it is machine.
 
 /mob/living/silicon/ai/rejuvenate()
 	..()

@@ -89,6 +89,8 @@ The "dust" will damage the hull of the station causin minor hull breaches.
 			walk_towards(src, goal, 1)
 		return
 
+	touch_map_edge()
+		qdel(src)
 
 	Bump(atom/A)
 		spawn(0)
