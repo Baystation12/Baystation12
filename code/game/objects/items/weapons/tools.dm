@@ -416,7 +416,7 @@
 	icon_state = "red_crowbar"
 	item_state = "crowbar_red"
 
-/obj/item/weapon/weldingtool/afterattack(mob/M as mob, mob/user as mob)
+/obj/item/weapon/weldingtool/afterattack(var/mob/M, var/mob/user)
 
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
@@ -430,10 +430,10 @@
 			if(S.brute_dam < ROBOLIMB_SELF_REPAIR_CAP)
 				S.heal_damage(15,0,0,1)
 				user.visible_message("<span class='notice'>\The [user] patches some dents on \the [M]'s [S.name] with \the [src].</span>")
-			else if(!S.open)
+			else if(S.open != 2)
 				user << "<span class='danger'>The damage is far too severe to patch over externally.</span>"
 			return 1
-		else if(!S.open)
+		else if(S.open != 2)
 			user << "<span class='notice'>Nothing to fix!</span>"
 
 	else

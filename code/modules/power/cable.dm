@@ -512,7 +512,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 ///////////////////////////////////
 
 //you can use wires to heal robotics
-/obj/item/stack/cable_coil/attack(mob/M as mob, mob/user as mob)
+/obj/item/stack/cable_coil/afterattack(var/mob/M, var/mob/user)
 
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
@@ -526,10 +526,10 @@ obj/structure/cable/proc/cableColor(var/colorC)
 			if(S.burn_dam < ROBOLIMB_SELF_REPAIR_CAP)
 				S.heal_damage(0,15,0,1)
 				user.visible_message("<span class='danger'>\The [user] repairs some burn damage on \the [M]'s [S.name] with \the [src].</span>")
-			else if(!S.open)
+			else if(S.open != 2)
 				user << "<span class='danger'>The damage is far too severe to patch over externally.</span>"
 			return 1
-		else if(!S.open)
+		else if(S.open != 2)
 			user << "<span class='notice'>Nothing to fix!</span>"
 
 	else
