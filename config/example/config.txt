@@ -180,6 +180,9 @@ GUEST_BAN
 ## Wiki address
 # WIKIURL http://example.com
 
+## GitHub address
+# GITHUBURL https://github.com/example-user/example-repository
+
 ## Ban appeals URL - usually for a forum or wherever people should go to contact your admins.
 # BANAPPEALS http://example.com
 

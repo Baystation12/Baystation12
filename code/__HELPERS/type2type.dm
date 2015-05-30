@@ -70,19 +70,19 @@
 /proc/list2text(list/ls, sep)
 	if (ls.len <= 1) // Early-out code for empty or singleton lists.
 		return ls.len ? ls[1] : ""
-	
+
 	var/l = ls.len // Made local for sanic speed.
 	var/i = 0      // Incremented every time a list index is accessed.
-	
+
 	if (sep <> null)
 		// Macros expand to long argument lists like so: sep, ls[++i], sep, ls[++i], sep, ls[++i], etc...
 		#define S1  sep, ls[++i]
 		#define S4  S1,  S1,  S1,  S1
 		#define S16 S4,  S4,  S4,  S4
 		#define S64 S16, S16, S16, S16
-		
+
 		. = "[ls[++i]]" // Make sure the initial element is converted to text.
-		
+
 		// Having the small concatenations come before the large ones boosted speed by an average of at least 5%.
 		if (l-1 & 0x01) // 'i' will always be 1 here.
 			. = text("[][][]", ., S1) // Append 1 element if the remaining elements are not a multiple of 2.
@@ -111,7 +111,7 @@
 			          [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]\
 			          [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]\
 			          [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]", ., S64, S64)
-		
+
 		#undef S64
 		#undef S16
 		#undef S4
@@ -122,9 +122,9 @@
 		#define S4  S1,  S1,  S1,  S1
 		#define S16 S4,  S4,  S4,  S4
 		#define S64 S16, S16, S16, S16
-		
+
 		. = "[ls[++i]]" // Make sure the initial element is converted to text.
-		
+
 		if (l-1 & 0x01) // 'i' will always be 1 here.
 			. += S1 // Append 1 element if the remaining elements are not a multiple of 2.
 		if (l-i & 0x02)
@@ -145,7 +145,7 @@
 			          [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]\
 			          [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]\
 			          [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]", ., S64, S64)
-		
+
 		#undef S64
 		#undef S16
 		#undef S4
@@ -165,11 +165,11 @@ proc/tg_list2text(list/list, glue=",")
 	var/delim_len = length(delimiter)
 	if (delim_len < 1)
 		return list(text)
-	
+
 	. = list()
 	var/last_found = 1
 	var/found
-	
+
 	do
 		found       = findtext(text, delimiter, last_found, 0)
 		.          += copytext(text, last_found, found)
@@ -181,11 +181,11 @@ proc/tg_list2text(list/list, glue=",")
 	var/delim_len = length(delimiter)
 	if (delim_len < 1)
 		return list(text)
-	
+
 	. = list()
 	var/last_found = 1
 	var/found
-	
+
 	do
 		found       = findtextEx(text, delimiter, last_found, 0)
 		.          += copytext(text, last_found, found)
@@ -325,3 +325,47 @@ proc/tg_list2text(list/list, glue=",")
 			. = 0
 		else
 			. = max(0, min(255, 138.5177312231 * log(temp - 10) - 305.0447927307))
+
+// Very ugly, BYOND doesn't support unix time and rounding errors make it really hard to convert it to BYOND time.
+// returns "YYYY-MM-DD" by default
+/proc/unix2date(timestamp, seperator = "-")
+	if(timestamp < 0)
+		return 0 //Do not accept negative values
+
+	var/const/dayInSeconds = 86400 //60secs*60mins*24hours
+	var/const/daysInYear = 365 //Non Leap Year
+	var/const/daysInLYear = daysInYear + 1//Leap year
+	var/days = round(timestamp / dayInSeconds) //Days passed since UNIX Epoc
+	var/year = 1970 //Unix Epoc begins 1970-01-01
+	var/tmpDays = days + 1 //If passed (timestamp < dayInSeconds), it will return 0, so add 1
+	var/monthsInDays = list() //Months will be in here ***Taken from the PHP source code***
+	var/month = 1 //This will be the returned MONTH NUMBER.
+	var/day //This will be the returned day number.
+
+	while(tmpDays > daysInYear) //Start adding years to 1970
+		year++
+		if(isLeap(year))
+			tmpDays -= daysInLYear
+		else
+			tmpDays -= daysInYear
+
+	if(isLeap(year)) //The year is a leap year
+		monthsInDays = list(-1,30,59,90,120,151,181,212,243,273,304,334)
+	else
+		monthsInDays = list(0,31,59,90,120,151,181,212,243,273,304,334)
+
+	var/mDays = 0;
+	var/monthIndex = 0;
+
+	for(var/m in monthsInDays)
+		monthIndex++
+		if(tmpDays > m)
+			mDays = m
+			month = monthIndex
+
+	day = tmpDays - mDays //Setup the date
+
+	return "[year][seperator][((month < 10) ? "0[month]" : month)][seperator][((day < 10) ? "0[day]" : day)]"
+
+/proc/isLeap(y)
+	return ((y) % 4 == 0 && ((y) % 100 != 0 || (y) % 400 == 0))
