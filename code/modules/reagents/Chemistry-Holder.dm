@@ -183,6 +183,24 @@
 				return 0
 	return 0
 
+/datum/reagents/proc/has_any_reagent(var/list/check_reagents)
+	for(var/datum/reagent/current in reagent_list)
+		if(current.id in check_reagents)
+			if(current.volume >= check_reagents[current.id])
+				return 1
+			else
+				return 0
+	return 0
+
+/datum/reagents/proc/has_all_reagents(var/list/check_reagents)
+	//this only works if check_reagents has no duplicate entries... hopefully okay since it expects an associative list
+	var/missing = check_reagents.len
+	for(var/datum/reagent/current in reagent_list)
+		if(current.id in check_reagents)
+			if(current.volume >= check_reagents[current.id])
+				missing--
+	return !missing
+
 /datum/reagents/proc/clear_reagents()
 	for(var/datum/reagent/current in reagent_list)
 		del_reagent(current.id)

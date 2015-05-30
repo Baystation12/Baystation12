@@ -54,21 +54,16 @@
 
 /datum/chemical_reaction/proc/can_happen(var/datum/reagents/holder)
 	//check that all the required reagents are present
-	for(var/reagent in required_reagents)
-		if(!holder.has_reagent(reagent))
-			return 0
+	if(!holder.has_all_reagents(required_reagents))
+		return 0
 
 	//check that all the required catalysts are present in the required amount
-	for(var/reagent in catalysts)
-		var/min_req_amt = catalysts[reagent]
-		if(!holder.has_reagent(reagent, min_req_amt))
-			return 0
+	if(!holder.has_all_reagents(catalysts))
+		return 0
 
 	//check that none of the inhibitors are present in the required amount
-	for(var/reagent in inhibitors)
-		var/min_req_amt = inhibitors[reagent]
-		if(holder.has_reagent(reagent, min_req_amt))
-			return 0
+	if(holder.has_any_reagent(inhibitors))
+		return 0
 
 	return 1
 
