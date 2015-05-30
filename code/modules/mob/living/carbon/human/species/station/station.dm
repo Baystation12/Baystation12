@@ -146,6 +146,8 @@
 	hud_type = /datum/hud_data/diona
 	siemens_coefficient = 0.3
 	eyes = "blank_eyes"
+	show_ssd = "completely quiescent"
+
 
 	blurb = "Commonly referred to (erroneously) as 'plant people', the Dionaea are a strange space-dwelling collective \
 	species hailing from Epsilon Ursae Minoris. Each 'diona' is a cluster of numerous cat-sized organisms called nymphs; \
@@ -246,6 +248,7 @@
 	eyes = "blank_eyes"
 	brute_mod = 0.5
 	burn_mod = 1
+	show_ssd = "flashing a 'system offline' glyph on their monitor"
 
 	warning_low_pressure = 50
 	hazard_low_pressure = 0
