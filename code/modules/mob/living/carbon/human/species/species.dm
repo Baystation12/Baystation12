@@ -28,7 +28,7 @@
 	var/race_key = 0       	                             // Used for mob icon cache string.
 	var/icon/icon_template                               // Used for mob icon generation for non-32x32 species.
 	var/is_small
-	var/show_ssd = 1
+	var/show_ssd = "fast asleep"
 
 	// Language/culture vars.
 	var/default_language = "Galactic Common" // Default language is used when 'say' is used without modifiers.

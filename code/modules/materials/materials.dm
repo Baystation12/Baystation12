@@ -144,6 +144,9 @@ var/list/name_to_material
 /material/proc/is_brittle()
 	return !!(flags & MATERIAL_BRITTLE)
 
+/material/proc/combustion_effect(var/turf/T, var/temperature)
+	return
+
 // Datum definitions follow.
 /material/uranium
 	name = "uranium"
@@ -177,6 +180,10 @@ var/list/name_to_material
 	hardness = 40
 	stack_origin_tech = "materials=4"
 
+/material/gold/bronze //placeholder for ashtrays
+	name = "bronze"
+	icon_colour = "#EDD12F"
+
 /material/silver
 	name = "silver"
 	stack_type = /obj/item/stack/material/silver
@@ -195,6 +202,20 @@ var/list/name_to_material
 	hardness = 30
 	stack_origin_tech = "phorontech=2;materials=2"
 	door_icon_base = "stone"
+
+/material/phoron/combustion_effect(var/turf/T, var/temperature, var/effect_multiplier)
+	if(isnull(ignition_point))
+		return 0
+	if(temperature < ignition_point)
+		return 0
+	var/totalPhoron = 0
+	for(var/turf/simulated/floor/target_tile in range(2,T))
+		var/phoronToDeduce = (temperature/30) * effect_multiplier
+		totalPhoron += phoronToDeduce
+		target_tile.assume_gas("phoron", phoronToDeduce, 200+T0C)
+		spawn (0)
+			target_tile.hotspot_expose(temperature, 400)
+	return round(totalPhoron/100)
 
 /material/stone
 	name = "sandstone"
@@ -326,6 +347,18 @@ var/list/name_to_material
 	icon_colour = "#5C5454"
 	weight = 22
 	stack_per_sheet = 3750
+
+// Adminspawn only, do not let anyone get this.
+/material/voxalloy
+	name = "voxalloy"
+	display_name = "durable alloy"
+	stack_type = null
+	icon_colour = "#6C7364"
+	integrity = 1200
+	melting_point = 6000       // Hull plating.
+	explosion_resistance = 200 // Hull plating.
+	hardness = 500
+	weight = 500
 
 /material/wood
 	name = "wood"
