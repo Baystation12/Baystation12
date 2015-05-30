@@ -234,7 +234,7 @@
 						edge_eligible = 1
 
 				if(brute >= threshold || (edge_eligible && brute >= threshold/3))
-					if((sharp || edge))
+					if(edge)
 						droplimb(0,DROPLIMB_EDGE)
 					else
 						droplimb(0,DROPLIMB_BLUNT)
