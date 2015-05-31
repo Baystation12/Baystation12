@@ -117,6 +117,7 @@
 		"appendix" = /obj/item/organ/appendix,
 		"eyes" =     /obj/item/organ/eyes
 		)
+	var/vision_organ              // If set, this organ is required for vision. Defaults to "eyes" if the species has them.
 
 	var/list/has_limbs = list(
 		"chest" =  list("path" = /obj/item/organ/external/chest),
@@ -142,6 +143,10 @@
 		hud = new hud_type()
 	else
 		hud = new()
+
+	//If the species has eyes, they are the default vision organ
+	if(!vision_organ && has_organ["eyes"])
+		vision_organ = "eyes"
 
 	unarmed_attacks = list()
 	for(var/u_type in unarmed_types)

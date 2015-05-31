@@ -28,8 +28,9 @@
 	name = "core trunk"
 	limb_name = "chest"
 	icon_name = "torso"
-	health = 200
+	max_damage = 200
 	min_broken_damage = 50
+	w_class = 5
 	body_part = UPPER_TORSO
 	vital = 1
 	cannot_amputate = 1
@@ -39,8 +40,9 @@
 	name = "fork"
 	limb_name = "groin"
 	icon_name = "groin"
-	health = 100
+	max_damage = 100
 	min_broken_damage = 50
+	w_class = 4
 	body_part = LOWER_TORSO
 	parent_organ = "chest"
 
@@ -48,8 +50,9 @@
 	name = "left upper tendril"
 	limb_name = "l_arm"
 	icon_name = "l_arm"
-	health = 35
+	max_damage = 35
 	min_broken_damage = 20
+	w_class = 3
 	body_part = ARM_LEFT
 	parent_organ = "chest"
 	can_grasp = 1
@@ -64,8 +67,9 @@
 	name = "left lower tendril"
 	limb_name = "l_leg"
 	icon_name = "l_leg"
-	health = 35
+	max_damage = 35
 	min_broken_damage = 20
+	w_class = 3
 	body_part = LEG_LEFT
 	icon_position = LEFT
 	parent_organ = "groin"
@@ -82,8 +86,9 @@
 	name = "left foot"
 	limb_name = "l_foot"
 	icon_name = "l_foot"
-	health = 20
+	max_damage = 20
 	min_broken_damage = 10
+	w_class = 2
 	body_part = FOOT_LEFT
 	icon_position = LEFT
 	parent_organ = "l_leg"
@@ -103,8 +108,9 @@
 	name = "left grasper"
 	limb_name = "l_hand"
 	icon_name = "l_hand"
-	health = 30
+	max_damage = 30
 	min_broken_damage = 15
+	w_class = 2
 	body_part = HAND_LEFT
 	parent_organ = "l_arm"
 	can_grasp = 1
@@ -120,8 +126,9 @@
 	limb_name = "head"
 	icon_name = "head"
 	name = "head"
-	health = 50
+	max_damage = 50
 	min_broken_damage = 25
+	w_class = 3
 	body_part = HEAD
 	parent_organ = "chest"
 
