@@ -93,7 +93,7 @@ REAGENT SCANNER
 		return
 	user.visible_message("<span class='notice'> [user] has analyzed [M]'s vitals.</span>","<span class='notice'> You have analyzed [M]'s vitals.</span>")
 
-	if (!istype(M, /mob/living/carbon) || ishuman(M))
+	if (!istype(M,/mob/living/carbon/human) || M.isSynthetic())
 		//these sensors are designed for organic life
 		user.show_message("\blue Analyzing Results for ERROR:\n\t Overall Status: ERROR")
 		user.show_message("\t Key: <font color='blue'>Suffocation</font>/<font color='green'>Toxin</font>/<font color='#FFA500'>Burns</font>/<font color='red'>Brute</font>", 1)
