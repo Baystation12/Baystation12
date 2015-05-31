@@ -28,6 +28,7 @@
 		handle_environment(environment) // Handle temperature/pressure differences between body and environment
 
 	handle_regular_status_updates() // Status updates, death etc.
+	handle_actions()
 
 /mob/living/carbon/slime/proc/handle_environment(datum/gas_mixture/environment)
 	if(!environment)

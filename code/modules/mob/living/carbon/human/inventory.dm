@@ -315,7 +315,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 
 	W.layer = 20
 
-	if(W.icon_action_button)
+	if(W.action_button_name)
 		update_action_buttons()
 
 	return 1

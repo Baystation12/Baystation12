@@ -117,6 +117,7 @@
 
 	//Status updates, death etc.
 	handle_regular_status_updates()		//Optimized a bit
+	handle_actions()
 	update_canmove()
 
 	//Update our name based on whether our face is obscured/disfigured
@@ -242,7 +243,7 @@
 					src << "<span class='danger'>Your hand won't respond properly, you drop what you're holding!</span>"
 					drop_item()
 			if(getBrainLoss() >= 45)
-				if(10 <= rn && rn <= 12) 
+				if(10 <= rn && rn <= 12)
 					if(prob(50))
 						src << "<span class='danger'>You suddenly black out!</span>"
 						Paralyse(10)
@@ -1035,12 +1036,12 @@
 						blinded = 1
 
 			// Check everything else.
-			
+
 			//Vision
 			var/obj/item/organ/vision
 			if(species.vision_organ)
 				vision = internal_organs_by_name[species.vision_organ]
-			
+
 			if(!vision) // Presumably if a species has no vision organs, they see via some other means.
 				eye_blind =  0
 				blinded =    0
@@ -1049,7 +1050,7 @@
 				eye_blind =  1
 				blinded =    1
 				eye_blurry = 1
-			else 
+			else
 				//blindness
 				if(sdisabilities & BLIND) // Disabled-blind, doesn't get better on its own
 					blinded =    1
@@ -1059,7 +1060,7 @@
 				else if(istype(glasses, /obj/item/clothing/glasses/sunglasses/blindfold))	//resting your eyes with a blindfold heals blurry eyes faster
 					eye_blurry = max(eye_blurry-3, 0)
 					blinded =    1
-				
+
 				//blurry sight
 				if(vision.is_bruised())   // Vision organs impaired? Permablurry.
 					eye_blurry = 1
