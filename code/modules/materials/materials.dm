@@ -369,6 +369,7 @@ var/list/name_to_material
 	name = "cloth"
 	stack_origin_tech = "materials=2"
 	door_icon_base = "wood"
+	flags = MATERIAL_PADDING
 
 /material/cult
 	name = "cult"
@@ -408,56 +409,66 @@ var/list/name_to_material
 	name = "leather"
 	icon_colour = "#5C4831"
 	stack_origin_tech = "materials=2"
+	flags = MATERIAL_PADDING
 
 /material/carpet
 	name = "carpet"
 	display_name = "comfy"
 	use_name = "red upholstery"
 	icon_colour = "#DA020A"
+	flags = MATERIAL_PADDING
 
 /material/cotton
 	name = "cotton"
 	display_name ="cotton"
 	icon_colour = "#FFFFFF"
+	flags = MATERIAL_PADDING
 
 /material/cloth_teal
 	name = "teal"
 	display_name ="teal"
 	use_name = "teal cloth"
 	icon_colour = "#00EAFA"
+	flags = MATERIAL_PADDING
 
 /material/cloth_black
 	name = "black"
 	display_name = "black"
 	use_name = "black cloth"
 	icon_colour = "#505050"
+	flags = MATERIAL_PADDING
 
 /material/cloth_green
 	name = "green"
 	display_name = "green"
 	use_name = "green cloth"
 	icon_colour = "#01C608"
+	flags = MATERIAL_PADDING
 
 /material/cloth_puple
 	name = "purple"
 	display_name = "purple"
 	use_name = "purple cloth"
 	icon_colour = "#9C56C4"
+	flags = MATERIAL_PADDING
 
 /material/cloth_blue
 	name = "blue"
 	display_name = "blue"
 	use_name = "blue cloth"
 	icon_colour = "#6B6FE3"
+	flags = MATERIAL_PADDING
 
 /material/cloth_beige
 	name = "beige"
 	display_name = "beige"
 	use_name = "beige cloth"
 	icon_colour = "#E8E7C8"
+	flags = MATERIAL_PADDING
 
 /material/cloth_lime
 	name = "lime"
 	display_name = "lime"
 	use_name = "lime cloth"
 	icon_colour = "#62E36C"
+	flags = MATERIAL_PADDING

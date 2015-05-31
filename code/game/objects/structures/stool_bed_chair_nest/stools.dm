@@ -126,7 +126,7 @@ var/global/list/stool_cache = list() //haha stool
 			padding_type = "carpet"
 		else if(istype(W,/obj/item/stack/material))
 			var/obj/item/stack/material/M = W
-			if(M.material && (M.material.name in list("leather", "cloth")))
+			if(M.material && (M.material.flags & MATERIAL_PADDING))
 				padding_type = "[M.material.name]"
 		if(!padding_type)
 			user << "You cannot pad \the [src] with that."

@@ -981,6 +981,7 @@ var/list/be_special_flags = list(
 
 #define MATERIAL_UNMELTABLE 1
 #define MATERIAL_BRITTLE 2
+#define MATERIAL_PADDING 4
 
 #define TABLE_BRITTLE_MATERIAL_MULTIPLIER 4 // Amount table damage is multiplied by if it is made of a brittle material (e.g. glass)
 
