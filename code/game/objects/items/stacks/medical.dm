@@ -73,15 +73,15 @@
 					if (W.internal)
 						continue
 					if (W.current_stage <= W.max_bleeding_stage)
-						user.visible_message( 	"\blue [user] bandages [W.desc] on [M]'s [affecting.name].", \
-										"\blue You bandage [W.desc] on [M]'s [affecting.name]." )
+						user.visible_message("<span class='notice'>\The [user] bandages [W.desc] on [M]'s [affecting.name].</span>", \
+										"<span class='notice'>You bandage [W.desc] on [M]'s [affecting.name].</span>" )
 						//H.add_side_effect("Itch")
 					else if (istype(W,/datum/wound/bruise))
-						user.visible_message( 	"\blue [user] places a bruise patch over [W.desc] on [M]'s [affecting.name].", \
-										"\blue You place a bruise patch over [W.desc] on [M]'s [affecting.name]." )
+						user.visible_message("<span class='notice'>\The [user] places a bruise patch over [W.desc] on [M]'s [affecting.name].</span>", \
+										"<span class='notice'>You place a bruise patch over [W.desc] on [M]'s [affecting.name].</span>" )
 					else
-						user.visible_message( 	"\blue [user] places a bandaid over [W.desc] on [M]'s [affecting.name].", \
-										"\blue You place a bandaid over [W.desc] on [M]'s [affecting.name]." )
+						user.visible_message("<span class='notice'>\The [user] places a bandaid over [W.desc] on [M]'s [affecting.name].</span>", \
+										"<span class='notice'>You place a bandaid over [W.desc] on [M]'s [affecting.name].</span>" )
 				use(1)
 		else
 			if (can_operate(H))        //Checks if mob is lying down on table for surgery
