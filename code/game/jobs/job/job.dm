@@ -25,7 +25,7 @@
 
 /datum/job/proc/equip_survival(var/mob/living/carbon/human/H)
 	if(!H)	return 0
-	H.species.equip_survival_gear(H)
+	H.species.equip_survival_gear(H,0)
 	return 1
 
 /datum/job/proc/get_access()

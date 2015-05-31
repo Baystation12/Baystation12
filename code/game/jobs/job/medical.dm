@@ -224,3 +224,8 @@
 		H.equip_to_slot_or_del(new /obj/item/weapon/storage/belt/medical/emt(H), slot_belt)
 		H.equip_to_slot_or_del(new /obj/item/device/pda/medical(H), slot_l_store)
 		return 1
+
+	equip_survival(var/mob/living/carbon/human/H)
+		if(!H)	return 0
+		H.species.equip_survival_gear(H,1)
+		return 1

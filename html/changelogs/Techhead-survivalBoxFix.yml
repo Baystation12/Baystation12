@@ -1,0 +1,4 @@
+author: Techhead
+delete-after: True
+changes: 
+  - rscadd: "Re-adds extended capacity emergency oxygen tanks to relevant jobs."
