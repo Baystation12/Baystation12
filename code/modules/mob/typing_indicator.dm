@@ -5,14 +5,17 @@ mob/var/typing
 mob/var/last_typed
 mob/var/last_typed_time
 
-var/global/image/typing_indicator
+mob/var/obj/effect/decal/typing_indicator
 
 /mob/proc/set_typing_indicator(var/state)
 
 	if(!typing_indicator)
-		typing_indicator = image('icons/mob/talk.dmi',null,"typing")
+		typing_indicator = new
+		typing_indicator.icon = 'icons/mob/talk.dmi'
+		typing_indicator.icon_state = "typing"
 
-	if(client)
+	if(client && !stat)
+		typing_indicator.invisibility  = invisibility
 		if(client.prefs.toggles & SHOW_TYPING)
 			overlays -= typing_indicator
 		else

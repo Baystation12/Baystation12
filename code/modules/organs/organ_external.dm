@@ -192,7 +192,7 @@
 		burn *= bumod //~2/3 damage for ROBOLIMBS
 
 	// High brute damage or sharp objects may damage internal organs
-	if(internal_organs && ((brute_dam >= max_damage) || (sharp && brute >= 5) || brute >= 10) && prob(5))
+	if(internal_organs && (brute_dam >= max_damage || (((sharp && brute >= 5) || brute >= 10) && prob(5))))
 		// Damage an internal organ
 		if(internal_organs && internal_organs.len)
 			var/obj/item/organ/I = pick(internal_organs)
@@ -258,13 +258,16 @@
 				droplimb(0,DROPLIMB_BURN)
 			if(!dropped && prob(brute))
 				var/edge_eligible = 0
-				if(edge && istype(used_weapon,/obj/item))
-					var/obj/item/W = used_weapon
-					if(W.w_class >= 3)
+				if(edge)
+					if(istype(used_weapon,/obj/item))
+						var/obj/item/W = used_weapon
+						if(W.w_class >= w_class)
+							edge_eligible = 1
+					else
 						edge_eligible = 1
 
 				if(brute >= threshold || (edge_eligible && brute >= threshold/3))
-					if((sharp || edge))
+					if(edge)
 						droplimb(0,DROPLIMB_EDGE)
 					else
 						droplimb(0,DROPLIMB_BLUNT)
@@ -887,7 +890,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	owner.update_body()
 
 /obj/item/organ/external/proc/get_damage()	//returns total damage
-	return max(brute_dam + burn_dam - perma_injury, perma_injury)	//could use health?
+	return max(brute_dam + burn_dam - perma_injury, perma_injury)	//could use max_damage?
 
 /obj/item/organ/external/proc/has_infected_wound()
 	for(var/datum/wound/W in wounds)
@@ -1043,8 +1046,9 @@ Note that amputating the affected organ does in fact remove the infection from t
 	name = "upper body"
 	limb_name = "chest"
 	icon_name = "torso"
-	health = 100
+	max_damage = 100
 	min_broken_damage = 35
+	w_class = 5
 	body_part = UPPER_TORSO
 	vital = 1
 	amputation_point = "spine"
@@ -1059,8 +1063,9 @@ Note that amputating the affected organ does in fact remove the infection from t
 	name = "lower body"
 	limb_name = "groin"
 	icon_name = "groin"
-	health = 100
+	max_damage = 100
 	min_broken_damage = 35
+	w_class = 5
 	body_part = LOWER_TORSO
 	vital = 1
 	parent_organ = "chest"
@@ -1073,8 +1078,9 @@ Note that amputating the affected organ does in fact remove the infection from t
 	limb_name = "l_arm"
 	name = "left arm"
 	icon_name = "l_arm"
-	health = 50
+	max_damage = 50
 	min_broken_damage = 30
+	w_class = 3
 	body_part = ARM_LEFT
 	parent_organ = "chest"
 	joint = "left elbow"
@@ -1093,8 +1099,9 @@ Note that amputating the affected organ does in fact remove the infection from t
 	limb_name = "l_leg"
 	name = "left leg"
 	icon_name = "l_leg"
-	health = 50
+	max_damage = 50
 	min_broken_damage = 30
+	w_class = 3
 	body_part = LEG_LEFT
 	icon_position = LEFT
 	parent_organ = "groin"
@@ -1115,8 +1122,8 @@ Note that amputating the affected organ does in fact remove the infection from t
 	limb_name = "l_foot"
 	name = "left foot"
 	icon_name = "l_foot"
-	health = 30
 	min_broken_damage = 15
+	w_class = 2
 	body_part = FOOT_LEFT
 	icon_position = LEFT
 	parent_organ = "l_leg"
@@ -1142,8 +1149,8 @@ Note that amputating the affected organ does in fact remove the infection from t
 	limb_name = "l_hand"
 	name = "left hand"
 	icon_name = "l_hand"
-	health = 30
 	min_broken_damage = 15
+	w_class = 2
 	body_part = HAND_LEFT
 	parent_organ = "l_arm"
 	joint = "left wrist"
@@ -1167,8 +1174,9 @@ Note that amputating the affected organ does in fact remove the infection from t
 	limb_name = "head"
 	icon_name = "head"
 	name = "head"
-	health = 75
+	max_damage = 75
 	min_broken_damage = 35
+	w_class = 3
 	body_part = HEAD
 	vital = 1
 	parent_organ = "chest"
