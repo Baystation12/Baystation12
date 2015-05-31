@@ -393,8 +393,8 @@ var/global/datum/controller/occupations/job_master
 							spawn_in_storage += thing
 			//Equip job items.
 			job.equip(H)
+			job.equip_survival(H)
 			job.apply_fingerprints(H)
-			H.species.equip_survival_gear(H)
 
 			//If some custom items could not be equipped before, try again now.
 			for(var/thing in custom_equip_leftovers)

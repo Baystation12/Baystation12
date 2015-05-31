@@ -23,6 +23,11 @@
 /datum/job/proc/equip(var/mob/living/carbon/human/H)
 	return 1
 
+/datum/job/proc/equip_survival(var/mob/living/carbon/human/H)
+	if(!H)	return 0
+	H.species.equip_survival_gear(H)
+	return 1
+
 /datum/job/proc/get_access()
 	if(!config || config.jobs_have_minimal_access)
 		return src.minimal_access.Copy()
