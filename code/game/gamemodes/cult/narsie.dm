@@ -1,4 +1,5 @@
 var/global/narsie_behaviour = "CultStation13"
+var/global/narsie_cometh = 0
 var/global/list/narsie_list = list()
 /obj/singularity/narsie //Moving narsie to its own file for the sake of being clearer
 	name = "Nar-Sie"
@@ -37,7 +38,7 @@ var/global/list/narsie_list = list()
 	current_size = 12
 	consume_range = 12 // How many tiles out do we eat.
 	var/announce=1
-	var/narnar = 1
+	var/cause_hell = 1
 
 /obj/singularity/narsie/large/New()
 	..()
@@ -47,13 +48,15 @@ var/global/list/narsie_list = list()
 
 	narsie_spawn_animation()
 
-	if(narnar)
-		SetUniversalState(/datum/universal_state/hell)
+	if(!narsie_cometh)//so we don't initiate Hell more than one time.
+		if(cause_hell)
+			SetUniversalState(/datum/universal_state/hell)
+		narsie_cometh = 1
 
-	spawn(10 SECONDS)
-		if(emergency_shuttle && emergency_shuttle.can_call())
-			emergency_shuttle.call_evac()
-			emergency_shuttle.launch_time = 0	// Cannot recall
+		spawn(10 SECONDS)
+			if(emergency_shuttle)
+				emergency_shuttle.call_evac()
+				emergency_shuttle.launch_time = 0	// Cannot recall
 
 /obj/singularity/narsie/process()
 	eat()
@@ -83,14 +86,14 @@ var/global/list/narsie_list = list()
 
 
 /obj/singularity/narsie/large/Bump(atom/A)
-	if(!narnar) return
+	if(!cause_hell) return
 	if(isturf(A))
 		narsiewall(A)
 	else if(istype(A, /obj/structure/cult))
 		qdel(A)
 
 /obj/singularity/narsie/large/Bumped(atom/A)
-	if(!narnar) return
+	if(!cause_hell) return
 	if(isturf(A))
 		narsiewall(A)
 	else if(istype(A, /obj/structure/cult))

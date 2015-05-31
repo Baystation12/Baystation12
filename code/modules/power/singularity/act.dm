@@ -78,6 +78,9 @@
 	return 5000
 
 /obj/machinery/power/supermatter/singularity_act()
+	if(!src.loc)
+		return
+
 	var/prints = ""
 	if(src.fingerprintshidden)
 		prints = ", all touchers : " + src.fingerprintshidden
