@@ -126,6 +126,9 @@
 	updatehealth()
 	return 1*/
 
+/mob/living/silicon/attack_throat()
+	return
+
 /proc/islinked(var/mob/living/silicon/robot/bot, var/mob/living/silicon/ai/ai)
 	if(!istype(bot) || !istype(ai))
 		return 0
@@ -345,4 +348,3 @@
 
 /mob/living/silicon/proc/is_malf_or_traitor()
 	return is_traitor() || is_malf()
-
