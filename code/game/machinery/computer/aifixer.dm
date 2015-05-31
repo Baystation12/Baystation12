@@ -69,7 +69,7 @@
 
 	if (src.occupant)
 		var/laws
-		dat += "Stored AI: [src.occupant.name]<br>System integrity: [src.occupant.system_integrity()]%<br>"
+		dat += "Stored AI: [src.occupant.name]<br>System integrity: [src.occupant.hardware_integrity()]%<br>Backup Capacitor: [src.occupant.backup_capacitor()]%<br>"
 
 		for (var/datum/ai_law/law in occupant.laws.all_laws())
 			laws += "[law.get_index()]: [law.law]<BR>"

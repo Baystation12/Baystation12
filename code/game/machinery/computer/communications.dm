@@ -566,7 +566,7 @@
 		if(!shuttlecaller.stat && shuttlecaller.client && istype(shuttlecaller.loc,/turf))
 			return ..()
 
-	if(ticker.mode.name == "revolution" || ticker.mode.name == "AI malfunction" || deathsquad.deployed)
+	if(ticker.mode.name == "revolution" || deathsquad.deployed)
 		return ..()
 
 	emergency_shuttle.call_evac()
@@ -589,7 +589,7 @@
 		if(!shuttlecaller.stat && shuttlecaller.client && istype(shuttlecaller.loc,/turf))
 			return ..()
 
-	if(ticker.mode.name == "revolution" || ticker.mode.name == "AI malfunction" || deathsquad.deployed)
+	if(ticker.mode.name == "revolution" || deathsquad.deployed)
 		return ..()
 
 	emergency_shuttle.call_evac()

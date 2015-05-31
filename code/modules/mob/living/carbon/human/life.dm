@@ -942,7 +942,7 @@
 		if(status_flags & GODMODE)	return 0
 
 		//SSD check, if a logged player is awake put them back to sleep!
-		if(player_logged && sleeping < 2)
+		if(sleeping < 2 && species.show_ssd && (!client || !key || player_logged))
 			sleeping = 2
 
 		if(stat == DEAD)	//DEAD. BROWN BREAD. SWIMMING WITH THE SPESS CARP
@@ -1135,7 +1135,7 @@
 
 		if(damageoverlay.overlays)
 			damageoverlay.overlays = list()
-		
+
 		if(stat == UNCONSCIOUS)
 			//Critical damage passage overlay
 			if(health <= 0)
@@ -1365,11 +1365,11 @@
 					var/obj/item/clothing/glasses/welding/O = glasses
 					if(!O.up)
 						found_welder = 1
-				else if(istype(head, /obj/item/clothing/head/welding))
+				if(!found_welder && istype(head, /obj/item/clothing/head/welding))
 					var/obj/item/clothing/head/welding/O = head
 					if(!O.up)
 						found_welder = 1
-				else if(istype(back, /obj/item/weapon/rig))
+				if(!found_welder && istype(back, /obj/item/weapon/rig))
 					var/obj/item/weapon/rig/O = back
 					if(O.helmet && O.helmet == head && (O.helmet.body_parts_covered & EYES))
 						if((O.offline && O.offline_vision_restriction == 1) || (!O.offline && O.vision_restriction == 1))

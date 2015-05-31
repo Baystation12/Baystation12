@@ -91,7 +91,7 @@ REAGENT SCANNER
 	if (!(istype(usr, /mob/living/carbon/human) || ticker) && ticker.mode.name != "monkey")
 		usr << "\red You don't have the dexterity to do this!"
 		return
-	user.visible_message("<span class='notice'> [user] has analyzed [M]'s vitals.","<span class='notice'> You have analyzed [M]'s vitals.")
+	user.visible_message("<span class='notice'> [user] has analyzed [M]'s vitals.</span>","<span class='notice'> You have analyzed [M]'s vitals.</span>")
 
 	if (!istype(M, /mob/living/carbon) || (ishuman(M) && (M:species.flags & IS_SYNTHETIC)))
 		//these sensors are designed for organic life
@@ -139,14 +139,15 @@ REAGENT SCANNER
 	if(M.status_flags & FAKEDEATH)
 		OX = fake_oxy > 50 ? 		"\red Severe oxygen deprivation detected\blue" 	: 	"Subject bloodstream oxygen level normal"
 	user.show_message("[OX] | [TX] | [BU] | [BR]")
-	if (istype(M, /mob/living/carbon))
-		if(M:reagents.total_volume > 0)
+	if(istype(M, /mob/living/carbon))
+		var/mob/living/carbon/C = M
+		if(C.reagents.total_volume)
 			var/unknown = 0
 			var/reagentdata[0]
-			for(var/A in M.reagents.reagent_list)
+			for(var/A in C.reagents.reagent_list)
 				var/datum/reagent/R = A
 				if(R.scannable)
-					reagentdata["[R.id]"] = "\t \blue [round(M.reagents.get_reagent_amount(R.id), 1)]u [R.name]"
+					reagentdata["[R.id]"] = "\t \blue [round(C.reagents.get_reagent_amount(R.id), 1)]u [R.name]"
 				else
 					unknown++
 			if(reagentdata.len)
@@ -155,8 +156,16 @@ REAGENT SCANNER
 					user.show_message(reagentdata[d])
 			if(unknown)
 				user.show_message(text("\red Warning: Unknown substance[(unknown>1)?"s":""] detected in subject's blood."))
-		if(M:virus2.len)
-			var/mob/living/carbon/C = M
+		if(C.ingested && C.ingested.total_volume)
+			var/unknown = 0
+			for(var/datum/reagent/R in C.ingested.reagent_list)
+				if(R.scannable)
+					user << "<span class='notice'>[R.name] found in subject's stomach.</span>"
+				else
+					++unknown
+			if(unknown)
+				user << "<span class='warning'>Non-medical reagent[(unknown > 1)?"s":""] found in subject's stomach.</span>"
+		if(C.virus2.len)
 			for (var/ID in C.virus2)
 				if (ID in virusDB)
 					var/datum/data/record/V = virusDB[ID]
