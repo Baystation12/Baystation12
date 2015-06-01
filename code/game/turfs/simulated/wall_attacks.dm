@@ -96,7 +96,7 @@
 	if(W)
 		radiate()
 		if(is_hot(W))
-			ignite(is_hot(W))
+			burn(is_hot(W))
 
 	if(locate(/obj/effect/overlay/wallrot) in src)
 		if(istype(W, /obj/item/weapon/weldingtool) )

@@ -40,7 +40,12 @@
 		spawn( 0 )
 			src.Entered(AM)
 			return
+	turfs |= src
 	return
+
+/turf/Destroy()
+	turfs -= src
+	..()
 
 /turf/ex_act(severity)
 	return 0

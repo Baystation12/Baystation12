@@ -13,7 +13,8 @@
 	greater_form = "Human"
 	is_small = 1
 	has_fine_manipulation = 0
-	show_ssd = 0
+	show_ssd = null
+
 	eyes = "blank_eyes"
 
 	gibbed_anim = "gibbed-m"

@@ -249,7 +249,10 @@
 				var/mob/living/carbon/human/H = src
 				H.w_uniform.add_fingerprint(M)
 
-			if(!client || !key || player_logged)
+			var/show_ssd
+			var/mob/living/carbon/human/H = src
+			if(istype(H)) show_ssd = H.species.show_ssd
+			if(show_ssd && (!client || !key || player_logged))
 				M.visible_message("<span class='notice'>[M] shakes [src] trying to wake [t_him] up!</span>", \
 				"<span class='notice'>You shake [src], but they do not respond... Maybe they have S.S.D?</span>")
 			else if(lying || src.sleeping)
@@ -259,7 +262,6 @@
 				M.visible_message("<span class='notice'>[M] shakes [src] trying to wake [t_him] up!", \
 									"<span class='notice'>You shake [src] trying to wake [t_him] up!")
 			else
-				var/mob/living/carbon/human/H = M
 				if(istype(H))
 					H.species.hug(H,src)
 				else

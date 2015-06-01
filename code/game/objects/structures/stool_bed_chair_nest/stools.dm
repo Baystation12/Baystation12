@@ -4,7 +4,7 @@ var/global/list/stool_cache = list() //haha stool
 /obj/item/weapon/stool
 	name = "stool"
 	desc = "Apply butt."
-	icon = 'icons/obj/objects.dmi'
+	icon = 'icons/obj/furniture.dmi'
 	icon_state = "stool_preview" //set for the map
 	force = 10
 	throwforce = 10
@@ -30,17 +30,16 @@ var/global/list/stool_cache = list() //haha stool
 	update_icon()
 
 /obj/item/weapon/stool/padded/New(var/newloc, var/new_material)
-	..(newloc, "steel", "leather")
+	..(newloc, "steel", "carpet")
 
 /obj/item/weapon/stool/update_icon()
 	// Prep icon.
-	icon_state = "stool"
+	icon_state = ""
 	overlays.Cut()
 	// Base icon.
 	var/cache_key = "stool-[material.name]"
 	if(isnull(stool_cache[cache_key]))
-		var/image/I = image('icons/obj/objects.dmi', base_icon)
-		color = material.icon_colour
+		var/image/I = image(icon, base_icon)
 		I.color = material.icon_colour
 		stool_cache[cache_key] = I
 	overlays |= stool_cache[cache_key]
@@ -48,17 +47,17 @@ var/global/list/stool_cache = list() //haha stool
 	if(padding_material)
 		var/padding_cache_key = "stool-padding-[padding_material.name]"
 		if(isnull(stool_cache[padding_cache_key]))
-			var/image/I =  image('icons/obj/objects.dmi', "stool_padding")
+			var/image/I =  image(icon, "stool_padding")
 			I.color = padding_material.icon_colour
 			stool_cache[padding_cache_key] = I
 		overlays |= stool_cache[padding_cache_key]
 	// Strings.
 	if(padding_material)
 		name = "[padding_material.display_name] [initial(name)]" //this is not perfect but it will do for now.
-		desc = "A padded stool. Apply butt. It's made of [material.display_name] and covered with [padding_material.display_name]."
+		desc = "A padded stool. Apply butt. It's made of [material.use_name] and covered with [padding_material.use_name]."
 	else
 		name = "[material.display_name] [initial(name)]"
-		desc = "A stool. Apply butt with care. It's made of [material.display_name]."
+		desc = "A stool. Apply butt with care. It's made of [material.use_name]."
 
 /obj/item/weapon/stool/proc/add_padding(var/padding_type)
 	padding_material = get_material_by_name(padding_type)
@@ -127,7 +126,7 @@ var/global/list/stool_cache = list() //haha stool
 			padding_type = "carpet"
 		else if(istype(W,/obj/item/stack/material))
 			var/obj/item/stack/material/M = W
-			if(M.material && (M.material.name in list("leather", "cloth")))
+			if(M.material && (M.material.flags & MATERIAL_PADDING))
 				padding_type = "[M.material.name]"
 		if(!padding_type)
 			user << "You cannot pad \the [src] with that."
