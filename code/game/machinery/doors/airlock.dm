@@ -800,9 +800,9 @@ About the new airlock wires panel:
 				qdel(src)
 				return
 		else if(arePowerSystemsOn())
-			user << "\blue The airlock's motors resist your efforts to force it."
+			user << "<span class='notice'>The airlock's motors resist your efforts to force it.</span>"
 		else if(locked)
-			user << "\blue The airlock's bolts prevent it from being forced."
+			user << "<span class='notice'>The airlock's bolts prevent it from being forced.</span>"
 		else
 			if(density)
 				spawn(0)	open(1)
@@ -811,20 +811,20 @@ About the new airlock wires panel:
 
 	else if(istype(C, /obj/item/weapon/material/twohanded/fireaxe) && !arePowerSystemsOn())
 		if(locked)
-			user << "\blue The airlock's bolts prevent it from being forced."
+			user << "<span class='notice'>The airlock's bolts prevent it from being forced.</span>"
 		else if( !welded && !operating )
 			if(density)
 				var/obj/item/weapon/material/twohanded/fireaxe/F = C
 				if(F.wielded)
 					spawn(0)	open(1)
 				else
-					user << "\red You need to be wielding \the [C] to do that."
+					user << "<span class='warning'>You need to be wielding \the [C] to do that.</span>"
 			else
 				var/obj/item/weapon/material/twohanded/fireaxe/F = C
 				if(F.wielded)
 					spawn(0)	close(1)
 				else
-					user << "\red You need to be wielding \the [C] to do that."
+					user << "<span class='warning'>You need to be wielding \the [C] to do that.</span>"
 
 	else
 		..()
@@ -950,10 +950,10 @@ About the new airlock wires panel:
 				take_damage(DOOR_CRUSH_DAMAGE)
 
 	use_power(360)	//360 W seems much more appropriate for an actuator moving an industrial door capable of crushing people
-	if(istype(src, /obj/machinery/door/airlock/glass))
-		playsound(src.loc, 'sound/machines/windowdoor.ogg', 30, 1)
+	if(arePowerSystemsOn())
+		playsound(src.loc, open_sound_powered, 100, 1)
 	else
-		playsound(src.loc, 'sound/machines/airlock.ogg', 30, 1)
+		playsound(src.loc, open_sound_unpowered, 100, 1)
 	for(var/turf/turf in locs)
 		var/obj/structure/window/killthis = (locate(/obj/structure/window) in turf)
 		if(killthis)

@@ -16,6 +16,7 @@ var/list/accessible_z_levels = list("1" = 5, "3" = 10, "4" = 15, "5" = 10, "6" =
 	if(!istype(src, /turf/space/transit))
 		icon_state = "[((x + y) ^ ~(x * y) + z) % 25]"
 	update_starlight()
+	..()
 
 /turf/space/proc/update_starlight()
 	if(!config.starlight)
