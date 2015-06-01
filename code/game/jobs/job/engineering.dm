@@ -37,6 +37,10 @@
 		H.equip_to_slot_or_del(new /obj/item/clothing/gloves/black(H), slot_gloves)
 		return 1
 
+	equip_survival(var/mob/living/carbon/human/H)
+		if(!H)	return 0
+		H.species.equip_survival_gear(H,1)
+		return 1
 
 
 /datum/job/engineer
@@ -69,6 +73,10 @@
 		H.equip_to_slot_or_del(new /obj/item/device/pda/engineering(H), slot_l_store)
 		return 1
 
+	equip_survival(var/mob/living/carbon/human/H)
+		if(!H)	return 0
+		H.species.equip_survival_gear(H,1)
+		return 1
 
 
 /datum/job/atmos
@@ -96,4 +104,9 @@
 		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/workboots(H), slot_shoes)
 		H.equip_to_slot_or_del(new /obj/item/device/pda/atmos(H), slot_l_store)
 		H.equip_to_slot_or_del(new /obj/item/weapon/storage/belt/utility/atmostech/(H), slot_belt)
+		return 1
+
+	equip_survival(var/mob/living/carbon/human/H)
+		if(!H)	return 0
+		H.species.equip_survival_gear(H,1)
 		return 1

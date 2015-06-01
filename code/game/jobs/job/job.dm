@@ -23,6 +23,11 @@
 /datum/job/proc/equip(var/mob/living/carbon/human/H)
 	return 1
 
+/datum/job/proc/equip_survival(var/mob/living/carbon/human/H)
+	if(!H)	return 0
+	H.species.equip_survival_gear(H,0)
+	return 1
+
 // overrideable separately so AIs/borgs can have cardborg hats without unneccessary new()/del()
 /datum/job/proc/equip_preview(mob/living/carbon/human/H)
 	return equip(H)

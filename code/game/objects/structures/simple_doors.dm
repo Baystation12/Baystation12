@@ -13,17 +13,11 @@
 	var/oreAmount = 7
 
 /obj/structure/simple_door/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
-	if(exposed_temperature > material.ignition_point)
-		TemperatureAct(exposed_temperature)
+	TemperatureAct(exposed_temperature)
 
 /obj/structure/simple_door/proc/TemperatureAct(temperature)
-	if(temperature > material.ignition_point)
-		for(var/turf/simulated/floor/target_tile in range(2,loc))
-			var/phoronToDeduce = temperature/10
-			target_tile.assume_gas("phoron", phoronToDeduce, 200+T0C)
-			spawn (0) target_tile.hotspot_expose(temperature, 400)
-			hardness -= phoronToDeduce/100
-			CheckHardness()
+	hardness -= material.combustion_effect(get_turf(src),temperature, 0.3)
+	CheckHardness()
 
 /obj/structure/simple_door/New(var/newloc, var/material_name)
 	..()
