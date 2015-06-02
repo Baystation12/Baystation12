@@ -1,5 +1,3 @@
-#define QUANTIZE(variable)		(round(variable,0.0001))
-
 /datum/gas_mixture
 	//Associative list of gas moles.
 	//Gases with 0 moles are not tracked and are pruned by update_values()
