@@ -1,6 +1,6 @@
-/var/xgm_gas_data/gas_data
+/var/datum/xgm_gas_data/gas_data
 
-/xgm_gas_data
+/datum/xgm_gas_data
 	//Simple list of all the gas IDs.
 	var/list/gases = list()
 	//The friendly, human-readable name for the gas.
@@ -16,7 +16,7 @@
 	//Flags.
 	var/list/flags = list()
 
-/xgm_gas
+/decl/xgm_gas
 	var/id = ""
 	var/name = "Unnamed Gas"
 	var/specific_heat = 20	// J/(mol*K)
@@ -29,8 +29,8 @@
 
 /hook/startup/proc/generateGasData()
 	gas_data = new
-	for(var/p in (typesof(/xgm_gas) - /xgm_gas))
-		var/xgm_gas/gas = new p
+	for(var/p in (typesof(/decl/xgm_gas) - /decl/xgm_gas))
+		var/decl/xgm_gas/gas = new p //avoid initial() because of potential New() actions
 
 		if(gas.id in gas_data.gases)
 			error("Duplicate gas id `[gas.id]` in `[p]`")
