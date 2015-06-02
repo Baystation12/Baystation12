@@ -1485,6 +1485,7 @@
 #include "code\modules\reagents\dispenser\_defines.dm"
 #include "code\modules\reagents\dispenser\cartridge.dm"
 #include "code\modules\reagents\dispenser\cartridge_presets.dm"
+#include "code\modules\reagents\dispenser\cartridge_spawn.dm"
 #include "code\modules\reagents\dispenser\dispenser2.dm"
 #include "code\modules\reagents\dispenser\dispenser_presets.dm"
 #include "code\modules\reagents\dispenser\supply.dm"

@@ -123,7 +123,8 @@ var/list/admin_verbs_spawn = list(
 	/client/proc/FireLaser,
 	/client/proc/FireCannons,
 	/client/proc/ChangeIcarusPosition,
-	/client/proc/virus2_editor
+	/client/proc/virus2_editor,
+	/client/proc/spawn_chemdisp_cartridge
 	)
 var/list/admin_verbs_server = list(
 	/client/proc/Set_Holiday,
