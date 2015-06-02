@@ -1,0 +1,5 @@
+author: Yoshax
+delete-after: True
+
+changes: 
+  - tweak: "Makes hyposprays start empty instead of filled with Tricord."

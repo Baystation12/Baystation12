@@ -14,10 +14,10 @@
 	flags = OPENCONTAINER
 	slot_flags = SLOT_BELT
 
-/obj/item/weapon/reagent_containers/hypospray/New() //comment this to make hypos start off empty
-	..()
-	reagents.add_reagent("tricordrazine", 30)
-	return
+///obj/item/weapon/reagent_containers/hypospray/New() //comment this to make hypos start off empty
+//	..()
+//	reagents.add_reagent("tricordrazine", 30)
+//	return
 
 /obj/item/weapon/reagent_containers/hypospray/attack(mob/living/M as mob, mob/user as mob)
 	if(!reagents.total_volume)
@@ -49,7 +49,6 @@
 
 /obj/item/weapon/reagent_containers/hypospray/autoinjector/New()
 	..()
-	reagents.remove_reagent("tricordrazine", 30)
 	reagents.add_reagent("inaprovaline", 5)
 	update_icon()
 	return
