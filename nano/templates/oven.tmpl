@@ -1,0 +1,61 @@
+<div class="item">
+	<div class="itemLabel">
+		Power:
+	</div>
+	<div class="itemContent">		
+		{{:helper.link('On', 'power', {'togglePower' : 1}, data.on ? 'selected' : null)}}{{:helper.link('Off', 'close', {'togglePower' : 1}, data.on ? null : 'selected')}}
+	</div>
+</div>
+
+<div class="item">
+	<div class="itemLabel">
+		Status:
+	</div>
+	<div class="itemContent">		
+		{{:helper.link('Open', 'unlocked', {'toggleOpen' : 1}, data.open ? 'selected' : null)}}{{:helper.link('Close', 'locked', {'toggleOpen' : 1}, data.open ? null : 'selected')}}
+	</div>
+</div>
+
+<h3>Internal Temperature</h3>
+<div class="item">
+	<div class="itemLabel">
+		Current:
+	</div>
+	<div class="itemContent">		
+		{{:helper.displayBar(data.internalTemp, data.minTemp, data.maxTemp, data.tempClass)}}
+		<div class="statusValue">
+			<span class="{{:data.internalTemp}}">{{:data.internalTemp}} C</span>
+		</div>
+	</div>
+</div>
+
+<div class="item">
+	<div class="itemLabel">
+		Target:
+	</div>
+	<div class="itemContent">
+		{{:helper.displayBar(data.targetTemp, data.minTemp, data.maxTemp, data.tempTargetClass)}}			
+		<div style="clear: both; padding-top: 4px;">
+			{{:helper.link('-', null, {'temp' : -20}, (data.targetTemp > data.minTemp) ? null : 'disabled')}}
+			{{:helper.link('-', null, {'temp' : -10}, (data.targetTemp > data.minTemp) ? null : 'disabled')}}
+			{{:helper.link('-', null, {'temp' : -1}, (data.targetTemp > data.minTemp) ? null : 'disabled')}}				
+			<div style="float: left; width: 80px; text-align: center;">&nbsp;{{:data.targetTemp}} C&nbsp;</div>
+			{{:helper.link('+', null, {'temp' : 1}, (data.targetTemp < data.maxTemp) ? null : 'disabled')}}
+			{{:helper.link('+', null, {'temp' : 10}, (data.targetTemp < data.maxTemp) ? null : 'disabled')}}
+			{{:helper.link('+', null, {'temp' : 20}, (data.targetTemp < data.maxTemp) ? null : 'disabled')}}	
+		</div>
+	</div>
+</div>
+<h3>Contents</h3>
+<div class="item">
+	<div class="itemLabelNarrow">
+		Rack:
+	</div>
+	{{if data.contents}}
+		<div class="itemContent">
+			{{:helper.link(data.contents, 'search', {'inspect' : 1}, data.contents ? null : 'disabled', data.contents ? 'floatright' : 'fixedLeftWide')}}
+		</div>
+	{{/if}}
+</div>
+
+
