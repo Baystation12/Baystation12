@@ -65,21 +65,26 @@ var/list/organ_cache = list()
 	processing_objects -= src
 	if(dead_icon)
 		icon_state = dead_icon
+	if(owner && vital)
+		owner.death()
 
 /obj/item/organ/process()
 
+	if(loc != owner)
+		owner = null
+
+	//dead already, no need for more processing
+	if(status & ORGAN_DEAD)
+		return
 	// Don't process if we're in a freezer, an MMI or a stasis bag.or a freezer or something I dunno
 	if(istype(loc,/obj/item/device/mmi))
 		return
 	if(istype(loc,/obj/structure/closet/body_bag/cryobag) || istype(loc,/obj/structure/closet/crate/freezer) || istype(loc,/obj/item/weapon/storage/box/freezer))
 		return
 	//Process infections
-	if (robotic >= 2 || (owner && owner.species && (owner.species.flags & IS_PLANT)))
+	if ((status & ORGAN_ROBOT) || (owner && owner.species && (owner.species.flags & IS_PLANT)))
 		germ_level = 0
 		return
-
-	if(loc != owner)
-		owner = null
 
 	if(!owner)
 		var/datum/reagent/blood/B = locate(/datum/reagent/blood) in reagents.reagent_list
@@ -97,6 +102,10 @@ var/list/organ_cache = list()
 		handle_antibiotics()
 		handle_rejection()
 		handle_germ_effects()
+
+	//check if we've hit max_damage
+	if(damage >= max_damage)
+		die()
 
 /obj/item/organ/examine(mob/user)
 	..(user)

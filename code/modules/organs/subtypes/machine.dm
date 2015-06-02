@@ -2,7 +2,11 @@
 /obj/item/organ/external/head/ipc
 	dislocated = -1
 	can_intake_reagents = 0
+	vital = 0
+	max_damage = 50 //made same as arm, since it is not vital
+	min_broken_damage = 30
 	encased = null
+	
 /obj/item/organ/external/head/ipc/New()
 	robotize("Morpheus Cyberkinetics")
 	..()
@@ -88,11 +92,23 @@
 		owner.stat = 0
 		owner.visible_message("<span class='danger'>\The [owner] twitches visibly!</span>")
 
+/obj/item/organ/optical_sensor
+	name = "optical sensor"
+	organ_tag = "eyes"
+	parent_organ = "head"
+	icon = 'icons/obj/robot_component.dmi'
+	icon_state = "camera"
+	dead_icon = "camera_broken"
+
+/obj/item/organ/optical_sensor/New()
+	robotize()
+	..()
+
 // Used for an MMI or posibrain being installed into a human.
 /obj/item/organ/mmi_holder
 	name = "brain"
 	organ_tag = "brain"
-	parent_organ = "head"
+	parent_organ = "chest"
 	vital = 1
 	var/obj/item/device/mmi/stored_mmi
 

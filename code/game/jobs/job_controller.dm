@@ -393,8 +393,8 @@ var/global/datum/controller/occupations/job_master
 							spawn_in_storage += thing
 			//Equip job items.
 			job.equip(H)
+			job.equip_survival(H)
 			job.apply_fingerprints(H)
-			H.species.equip_survival_gear(H)
 
 			//If some custom items could not be equipped before, try again now.
 			for(var/thing in custom_equip_leftovers)
@@ -471,11 +471,6 @@ var/global/datum/controller/occupations/job_master
 				if("Captain")
 					var/sound/announce_sound = (ticker.current_state <= GAME_STATE_SETTING_UP)? null : sound('sound/misc/boatswain.ogg', volume=20)
 					captain_announcement.Announce("All hands, Captain [H.real_name] on deck!", new_sound=announce_sound)
-
-			if(istype(H.back, /obj/item/weapon/storage))
-				new /obj/item/weapon/storage/box/survival(H.back)
-			else
-				H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H), slot_r_hand)
 
 			//Deferred item spawning.
 			if(spawn_in_storage && spawn_in_storage.len)

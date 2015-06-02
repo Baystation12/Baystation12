@@ -865,6 +865,7 @@ var/list/be_special_flags = list(
 #define SLIME 16
 #define SIMPLE_ANIMAL 32
 
+
 #define ALLMOBS (HUMAN|MONKEY|ALIEN|ROBOT|SLIME|SIMPLE_ANIMAL)
 
 #define NEXT_MOVE_DELAY 8
@@ -876,6 +877,7 @@ var/list/be_special_flags = list(
 // Custom layer definitions, supplementing the default TURF_LAYER, MOB_LAYER, etc.
 #define DOOR_OPEN_LAYER 2.7		//Under all objects if opened. 2.7 due to tables being at 2.6
 #define DOOR_CLOSED_LAYER 3.1	//Above most items if closed
+#define LIGHTING_LAYER 11
 #define OBFUSCATION_LAYER 14	//Where images covering the view for eyes are put
 #define SCREEN_LAYER 17			//Mob HUD/effects layer
 
@@ -961,6 +963,7 @@ var/list/be_special_flags = list(
 #define WALL_OPENING 2
 
 #define CLAMP01(x) max(0, min(1, x))
+#define QUANTIZE(variable) (round(variable,0.0001))
 
 #define DEFAULT_WALL_MATERIAL "steel"
 
@@ -984,6 +987,7 @@ var/list/be_special_flags = list(
 
 #define MATERIAL_UNMELTABLE 1
 #define MATERIAL_BRITTLE 2
+#define MATERIAL_PADDING 4
 
 #define TABLE_BRITTLE_MATERIAL_MULTIPLIER 4 // Amount table damage is multiplied by if it is made of a brittle material (e.g. glass)
 

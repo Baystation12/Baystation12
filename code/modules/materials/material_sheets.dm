@@ -5,6 +5,8 @@
 	w_class = 3.0
 	throw_speed = 3
 	throw_range = 3
+	max_amount = 50
+
 	var/default_type = DEFAULT_WALL_MATERIAL
 	var/material/material
 	var/perunit
@@ -45,7 +47,13 @@
 		matter[material.name] = SHEET_MATERIAL_AMOUNT
 	return 1
 
-obj/item/stack/material/iron
+/obj/item/stack/material/transfer_to(obj/item/stack/S, var/tamount=null, var/type_verified)
+	var/obj/item/stack/material/M = S
+	if(!istype(M) || material.name != M.material.name)
+		return 0
+	..(S,tamount,1)
+
+/obj/item/stack/material/iron
 	name = "iron"
 	icon_state = "sheet-silver"
 	default_type = "iron"

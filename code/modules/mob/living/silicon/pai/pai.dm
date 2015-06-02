@@ -271,7 +271,7 @@
 			for(var/obj/item/organ/external/affecting in H.organs)
 				if(affecting.hidden == card)
 					affecting.take_damage(rand(30,50))
-					H.visible_message("<span class='danger'>\The [src] explodes out of \the [H]'s [affecting.name] in shower of gore!</span>")
+					H.visible_message("<span class='danger'>\The [src] explodes out of \the [H]'s [affecting.name][(affecting.status & ORGAN_ROBOT) ? " in a shower of gore" : ""]!</span>")
 					break
 		holder.drop_from_inventory(card)
 	else if(istype(card.loc,/obj/item/device/pda))

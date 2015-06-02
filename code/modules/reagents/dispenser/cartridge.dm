@@ -30,19 +30,23 @@
 	if(!is_open_container())
 		user << "The cap is sealed."
 
-/obj/item/weapon/reagent_containers/chem_disp_cartridge/verb/setLabel(L as text)
+/obj/item/weapon/reagent_containers/chem_disp_cartridge/verb/verb_set_label(L as text)
 	set name = "Set Cartridge Label"
 	set category = "Object"
 	set src in view(usr, 1)
+
+	setLabel(L, usr)
+
+/obj/item/weapon/reagent_containers/chem_disp_cartridge/proc/setLabel(L, mob/user = null)
 	if(L)
-		if(usr)
-			usr << "<span class='notice'>You set the label on \the [src] to '[L]'.</span>"
+		if(user)
+			user << "<span class='notice'>You set the label on \the [src] to '[L]'.</span>"
 
 		label = L
 		name = "[initial(name)] - '[L]'"
 	else
-		if(usr)
-			usr << "<span class='notice'>You clear the label on \the [src].</span>"
+		if(user)
+			user << "<span class='notice'>You clear the label on \the [src].</span>"
 		label = ""
 		name = initial(name)
 

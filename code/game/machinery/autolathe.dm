@@ -299,3 +299,4 @@
 		else
 			qdel(S)
 	..()
+	return 1

@@ -194,7 +194,7 @@
 				wrapped = A.cell
 
 				A.cell.add_fingerprint(user)
-				A.cell.updateicon()
+				A.cell.update_icon()
 				A.cell.loc = src
 				A.cell = null
 
@@ -211,7 +211,7 @@
 				wrapped = A.cell
 
 				A.cell.add_fingerprint(user)
-				A.cell.updateicon()
+				A.cell.update_icon()
 				A.updateicon()
 				A.cell.loc = src
 				A.cell = null

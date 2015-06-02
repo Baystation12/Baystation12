@@ -72,7 +72,7 @@
 		var/mob/living/M = loc
 		M.drop_from_inventory(src)
 	playsound(src, "shatter", 70, 1)
-	new material.shard_type(T)
+	material.place_shard(T)
 	qdel(src)
 
 /obj/item/weapon/material/process()
@@ -82,18 +82,12 @@
 		L.apply_effect(round(material.radioactivity/3),IRRADIATE,0)
 
 /obj/item/weapon/material/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
-	if(exposed_temperature > material.ignition_point)
-		TemperatureAct(exposed_temperature)
+	TemperatureAct(exposed_temperature)
 
 // This might need adjustment. Will work that out later.
 /obj/item/weapon/material/proc/TemperatureAct(temperature)
-	if(temperature > material.ignition_point)
-		for(var/turf/simulated/floor/target_tile in range(2,loc))
-			var/phoronToDeduce = temperature/30
-			target_tile.assume_gas("phoron", phoronToDeduce, 200+T0C)
-			spawn (0) target_tile.hotspot_expose(temperature, 400)
-			health -= phoronToDeduce/100
-			check_health()
+	health -= material.combustion_effect(get_turf(src), temperature, 0.1)
+	check_health()
 
 /obj/item/weapon/material/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/weapon/weldingtool))

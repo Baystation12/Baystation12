@@ -7,27 +7,70 @@
 	density = 1
 	var/on = 0
 	var/obj/item/weapon/cell/high/cell = null
-	var/use = 5
+	var/use = 200 // 200W light
 	var/unlocked = 0
 	var/open = 0
 	var/brightness_on = 8		//can't remember what the maxed out value is
 
 /obj/machinery/floodlight/New()
 	src.cell = new(src)
+	cell.maxcharge = 1000
+	cell.charge = 1000 // 41minutes @ 200W
 	..()
 
-/obj/machinery/floodlight/proc/updateicon()
+/obj/machinery/floodlight/update_icon()
+	overlays.Cut()
 	icon_state = "flood[open ? "o" : ""][open && cell ? "b" : ""]0[on]"
 
 /obj/machinery/floodlight/process()
-	if(on && cell && cell.charge >= use)
-		cell.use(use)
-	else
-		on = 0
-		updateicon()
-		set_light(0)
-		src.visible_message("<span class='warning'>[src] shuts down due to lack of power!</span>")
+	if(!on)
 		return
+
+	if(!cell || (cell.charge < (use * CELLRATE)))
+		turn_off(1)
+		return
+
+	// If the cell is almost empty rarely "flicker" the light. Aesthetic only.
+	if((cell.percent() < 10) && prob(5))
+		set_light(brightness_on/2, brightness_on/4)
+		spawn(20)
+			if(on)
+				set_light(brightness_on, brightness_on/2)
+
+	cell.use(use*CELLRATE)
+
+
+// Returns 0 on failure and 1 on success
+/obj/machinery/floodlight/proc/turn_on(var/loud = 0)
+	if(!cell)
+		return 0
+	if(cell.charge < (use * CELLRATE))
+		return 0
+
+	on = 1
+	set_light(brightness_on, brightness_on / 2)
+	update_icon()
+	if(loud)
+		visible_message("\The [src] turns on.")
+	return 1
+
+/obj/machinery/floodlight/proc/turn_off(var/loud = 0)
+	on = 0
+	set_light(0, 0)
+	update_icon()
+	if(loud)
+		visible_message("\The [src] shuts down.")
+
+/obj/machinery/floodlight/attack_ai(mob/user as mob)
+	if(istype(user, /mob/living/silicon/robot) && Adjacent(user))
+		return attack_hand(user)
+
+	if(on)
+		turn_off(1)
+	else
+		if(!turn_on(1))
+			user << "You try to turn on \the [src] but it does not work."
+
 
 /obj/machinery/floodlight/attack_hand(mob/user as mob)
 	if(open && cell)
@@ -39,29 +82,22 @@
 			cell.loc = loc
 
 		cell.add_fingerprint(user)
-		cell.updateicon()
+		cell.update_icon()
 
 		src.cell = null
 		on = 0
 		set_light(0)
 		user << "You remove the power cell"
-		updateicon()
+		update_icon()
 		return
 
 	if(on)
-		on = 0
-		user << "<span class='notice'>You turn off the light</span>"
-		set_light(0)
+		turn_off(1)
 	else
-		if(!cell)
-			return
-		if(cell.charge <= 0)
-			return
-		on = 1
-		user << "<span class='notice'>You turn on the light</span>"
-		set_light(brightness_on)
+		if(!turn_on(1))
+			user << "You try to turn on \the [src] but it does not work."
 
-	updateicon()
+	update_icon()
 
 
 /obj/machinery/floodlight/attackby(obj/item/weapon/W as obj, mob/user as mob)
@@ -94,4 +130,4 @@
 				W.loc = src
 				cell = W
 				user << "You insert the power cell."
-	updateicon()
+	update_icon()

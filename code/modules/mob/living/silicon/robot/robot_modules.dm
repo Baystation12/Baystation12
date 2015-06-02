@@ -425,6 +425,9 @@ var/global/list/robot_modules = list(
 		T.update_icon()
 	else
 		T.charge_tick = 0
+	var/obj/item/weapon/melee/baton/robot/B = locate() in src.modules
+	if(B && B.bcell)
+		B.bcell.give(amount)
 
 /obj/item/weapon/robot_module/janitor
 	name = "janitorial robot module"

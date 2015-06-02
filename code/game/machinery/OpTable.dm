@@ -47,8 +47,7 @@
 
 /obj/machinery/optable/attack_hand(mob/user as mob)
 	if (HULK in usr.mutations)
-		usr << text("<span class='notice'>You destroy the table.</span>")
-		visible_message("<span class='warning'>\The [usr] destroys the operating table!</span>")
+		visible_message("<span class='danger'>\The [usr] destroys \the [src]!</span>")
 		src.density = 0
 		qdel(src)
 	return
@@ -87,9 +86,13 @@
 
 /obj/machinery/optable/proc/take_victim(mob/living/carbon/C, mob/living/carbon/user as mob)
 	if (C == user)
-		user.visible_message("[user] climbs on the operating table.","You climb on the operating table.")
+		user.visible_message("[user] climbs on \the [src].","You climb on \the [src].")
 	else
+<<<<<<< HEAD
 		visible_message("<span class='warning'>[C] has been laid on the operating table by [user].</span>", 3)
+=======
+		visible_message("<span class='notice'>\The [C] has been laid on \the [src] by [user].</span>", 3)
+>>>>>>> upstream/dev
 	if (C.client)
 		C.client.perspective = EYE_PERSPECTIVE
 		C.client.eye = src
@@ -134,12 +137,20 @@
 			return
 
 /obj/machinery/optable/proc/check_table(mob/living/carbon/patient as mob)
+<<<<<<< HEAD
 	if(src.victim)
 		usr << "<span class='warning'>The table is already occupied!</span>"
+=======
+	check_victim()
+	if(src.victim && get_turf(victim) == get_turf(src) && victim.lying)
+		usr << "<span class='warning'>\the [src] is already occupied!</span>"
+>>>>>>> upstream/dev
 		return 0
-
 	if(patient.buckled)
+<<<<<<< HEAD
 		usr << "<span class='warning'>Unbuckle first!</span>"
+=======
+		usr << "<span class='notice'>Unbuckle \the [patient] first!</span>"
+>>>>>>> upstream/dev
 		return 0
-
 	return 1
