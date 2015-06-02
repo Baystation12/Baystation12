@@ -37,6 +37,7 @@
 	hud_list[SPECIALROLE_HUD] = image('icons/mob/hud.dmi', src, "hudblank")
 	hud_list[STATUS_HUD_OOC]  = image('icons/mob/hud.dmi', src, "hudhealthy")
 
+	human_mob_list |= src
 	..()
 
 	if(dna)
@@ -44,6 +45,7 @@
 	make_blood()
 
 /mob/living/carbon/human/Destroy()
+	human_mob_list -= src
 	for(var/organ in organs)
 		qdel(organ)
 	return ..()
