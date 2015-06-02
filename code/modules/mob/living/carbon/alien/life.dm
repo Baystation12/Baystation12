@@ -27,7 +27,6 @@
 
 	//Status updates, death etc.
 	handle_regular_status_updates()
-	handle_actions()
 	update_canmove()
 	update_icons()
 

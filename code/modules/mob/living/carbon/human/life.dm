@@ -117,7 +117,6 @@
 
 	//Status updates, death etc.
 	handle_regular_status_updates()		//Optimized a bit
-	handle_actions()
 	update_canmove()
 
 	//Update our name based on whether our face is obscured/disfigured
