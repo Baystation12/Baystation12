@@ -3429,7 +3429,6 @@ datum
 					M.adjust_fire_stacks(volume / 15)
 				return
 
-					return
 		ethanol/beer
 			name = "Beer"
 			id = "beer"

@@ -48,5 +48,5 @@
 				for(var/obj/machinery/door/airlock/glass_security/temp_glassairlock in A)
 					temp_glassairlock.prison_open()
 
-				for(var/obj/machinery/door_timer/temp_timer in A)
-					temp_timer.releasetime = 1
+				for(var/obj/machinery/door_timer/temporarytimer in A)
+					temporarytimer.releasetime = 1

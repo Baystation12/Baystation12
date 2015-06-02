@@ -50,7 +50,7 @@
 	icon_state = "Rbandana"
 
 
-	slot_ SLOT_NECK
+	//slot_ SLOT_NECK
 	siemens_coefficient = 0.5
 	var/hanging = 1
 

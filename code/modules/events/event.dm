@@ -51,7 +51,7 @@
 	var/startWhen		= 0	//When in the lifetime to call start().
 	var/announceWhen	= 0	//When in the lifetime to call announce().
 	var/endWhen			= 0	//When in the lifetime the event should end.
-
+	var/oneShot			= 0
 	var/severity		= 0 //Severity. Lower means less severe, higher means more severe. Does not have to be supported. Is set on New().
 	var/activeFor		= 0	//How long the event has existed. You don't need to change this.
 	var/isRunning		= 1 //If this event is currently running. You should not change this.

@@ -19,7 +19,17 @@
 	var/base_color                                       // Used by changelings. Should also be used for icon previes..
 	var/tail                                             // Name of tail image in species effects icon file.
 	var/race_key = 0       	                             // Used for mob icon cache string.
-	var/icon/icon_template                               // Used for mob icon generation for non-32x32 species.
+	var/icon/icon_template
+	var/hidetail = 0
+	var/dhts = 0
+	var/wingicon = 0
+	var/falldmg = 0
+
+	var/datum/unarmed_attack/unarmed           // For empty hand harm-intent attack
+	var/datum/unarmed_attack/secondary_unarmed // For empty hand harm-intent attack if the first fails.                         // Used for mob icon generation for non-32x32 species.
+
+	var/unarmed_type =           /datum/unarmed_attack
+	var/secondary_unarmed_type = /datum/unarmed_attack/bite
 
 	// Language/culture vars.
 	var/default_language = "Galactic Common" // Default language is used when 'say' is used without modifiers.
