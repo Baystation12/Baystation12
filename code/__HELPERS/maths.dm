@@ -101,18 +101,18 @@ var/list/sqrtTable = list(1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 
 // if they are imaginary.
 /proc/SolveQuadratic(a, b, c)
 	ASSERT(a)
-	
+
 	. = list()
 	var/discriminant = b*b - 4*a*c
 	var/bottom       = 2*a
-	
+
 	// Return if the roots are imaginary.
 	if(discriminant < 0)
 		return
-	
+
 	var/root = sqrt(discriminant)
 	. += (-b + root) / bottom
-	
+
 	// If discriminant == 0, there would be two roots at the same position.
 	if(discriminant != 0)
 		. += (-b - root) / bottom
@@ -131,3 +131,9 @@ var/list/sqrtTable = list(1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 
 
 /proc/norm(x, y)
 	return sqrt(squaredNorm(x, y))
+
+/proc/IsPowerOfTwo(var/val)
+    return (val & (val-1)) == 0
+
+/proc/RoundUpToPowerOfTwo(var/val)
+    return 2 ** -round(-log(2,val))
