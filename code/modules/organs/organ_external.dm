@@ -613,7 +613,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	//things tend to bleed if they are CUT OPEN
 	if (open && !clamped && (H && !(H.species.flags & NO_BLOOD)))
 		status |= ORGAN_BLEEDING
-		
+
 	//Bone fractures
 	if(config.bones_can_break && brute_dam > min_broken_damage * config.organ_health_multiplier && !(status & ORGAN_ROBOT))
 		src.fracture()
@@ -905,7 +905,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 /obj/item/organ/external/proc/is_usable()
 	if((status & ORGAN_ROBOT) && get_damage() >= max_damage) //robot limbs just become inoperable at max damage
-		return 
+		return
 	return !is_dislocated() && !(status & (ORGAN_DESTROYED|ORGAN_MUTATED|ORGAN_DEAD))
 
 /obj/item/organ/external/proc/is_malfunctioning()
@@ -988,7 +988,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 			"\red <b>Your [name] becomes a mangled mess!</b>",	\
 			"\red You hear a sickening crack.")
 		else
-			owner.visible_message("\red \The [owner]'s [name] melts away, turning into mangled mess!",	\
+			owner.visible_message("\red \The [owner]'s [name] melts away, turning into a mangled mess!",	\
 			"\red <b>Your [name] melts away!</b>",	\
 			"\red You hear a sickening sizzle.")
 	disfigured = 1

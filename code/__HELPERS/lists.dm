@@ -612,3 +612,12 @@ datum/proc/dd_SortValue()
 	for(var/path in (typesof(prototype) - prototype))
 		L += new path()
 	return L
+
+// Returns the index in an assoc list keyed to the largest value in that list.
+/proc/get_max_index(list/assoc)
+	var/max_val = 0
+	. = null
+	for(var/index in assoc)
+		if(assoc[index] > max_val)
+			max_val = assoc[index]
+			. = index

@@ -795,66 +795,6 @@
 
 		"}
 
-
-/obj/item/weapon/book/manual/chef_recipes
-	name = "Chef Recipes"
-	icon_state = "cooked_book"
-	author = "Victoria Ponsonby"
-	title = "Chef Recipes"
-
-	dat = {"<html>
-				<head>
-				<style>
-				h1 {font-size: 18px; margin: 15px 0px 5px;}
-				h2 {font-size: 15px; margin: 15px 0px 5px;}
-				h3 {font-size: 13px; margin: 15px 0px 5px;}
-				li {margin: 2px 0px 2px 15px;}
-				ul {margin: 5px; padding: 0px;}
-				ol {margin: 5px; padding: 0px 15px;}
-				body {font-size: 13px; font-family: Verdana;}
-				</style>
-				</head>
-				<body>
-
-				<h1>Food for Dummies</h1>
-				Here is a guide on basic food recipes and also how to not poison your customers accidentally.
-
-				<h3>Basics:</h3>
-				Knead an egg and some flour to make dough. Bake that to make a bun or flatten and cut it.
-
-				<h3>Burger:</h3>
-				Put a bun and some meat into the microwave and turn it on. Then wait.
-
-				<h3>Bread:</h3>
-				Put some dough and an egg into the microwave and then wait.
-
-				<h3>Waffles:</h3>
-				Add two lumps of dough and 10 units of sugar to the microwave and then wait.
-
-				<h3>Popcorn:</h3>
-				Add 1 corn to the microwave and wait.
-
-				<h3>Meat Steak:</h3>
-				Put a slice of meat, 1 unit of salt, and 1 unit of pepper into the microwave and wait.
-
-				<h3>Meat Pie:</h3>
-				Put a flattened piece of dough and some meat into the microwave and wait.
-
-				<h3>Boiled Spaghetti:</h3>
-				Put the spaghetti (processed flour) and 5 units of water into the microwave and wait.
-
-				<h3>Donuts:</h3>
-				Add some dough and 5 units of sugar to the microwave and wait.
-
-				<h3>Fries:</h3>
-				Add one potato to the processor, then bake them in the microwave.
-
-
-				</body>
-			</html>
-			"}
-
-
 /obj/item/weapon/book/manual/barman_recipes
 	name = "Barman Recipes"
 	icon_state = "barbook"

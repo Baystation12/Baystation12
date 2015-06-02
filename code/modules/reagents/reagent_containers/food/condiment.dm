@@ -6,9 +6,9 @@
 
 //Food items that aren't eaten normally and leave an empty container behind.
 /obj/item/weapon/reagent_containers/food/condiment
-	name = "Condiment Container"
+	name = "condiment container"
 	desc = "Just your average condiment container."
-	icon = 'icons/obj/food.dmi'
+	icon = 'icons/obj/kitchen/inedible/misc.dmi'
 	icon_state = "emptycondiment"
 	flags = OPENCONTAINER
 	possible_transfer_amounts = list(1,5,10)
@@ -151,7 +151,6 @@
 /obj/item/weapon/reagent_containers/food/condiment/flour
 	name = "flour sack"
 	desc = "A big bag of flour. Good for baking!"
-	icon = 'icons/obj/food.dmi'
 	icon_state = "flour"
 	item_state = "flour"
 	New()
@@ -159,3 +158,15 @@
 		reagents.add_reagent("flour", 30)
 		src.pixel_x = rand(-10.0, 10)
 		src.pixel_y = rand(-10.0, 10)
+
+/obj/item/weapon/reagent_containers/food/condiment/gelatine
+	name = "gelatine"
+	desc = "A box of Orwell-brand space gelatine. Don't ask where it comes from."
+	icon_state = "gelatine"
+
+/obj/item/weapon/reagent_containers/food/condiment/gelatine/New()
+	..()
+	reagents.add_reagent("gelatine", 50)
+	src.pixel_x = rand(-10.0, 10)
+	src.pixel_y = rand(-10.0, 10)
+

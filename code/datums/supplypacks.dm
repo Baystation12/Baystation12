@@ -47,13 +47,15 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 					/obj/item/weapon/reagent_containers/food/condiment/flour,
 					/obj/item/weapon/reagent_containers/food/condiment/flour,
 					/obj/item/weapon/reagent_containers/food/condiment/flour,
+					/obj/item/weapon/reagent_containers/food/condiment/gelatine,
+					/obj/item/weapon/reagent_containers/food/condiment/gelatine,
 					/obj/item/weapon/reagent_containers/food/drinks/milk,
 					/obj/item/weapon/reagent_containers/food/drinks/milk,
 					/obj/item/weapon/storage/fancy/egg_box,
 					/obj/item/weapon/reagent_containers/food/snacks/tofu,
 					/obj/item/weapon/reagent_containers/food/snacks/tofu,
-					/obj/item/weapon/reagent_containers/food/snacks/meat,
-					/obj/item/weapon/reagent_containers/food/snacks/meat
+					/obj/item/weapon/reagent_containers/food/snacks/meat/slab,
+					/obj/item/weapon/reagent_containers/food/snacks/meat/slab
 					)
 	cost = 10
 	containertype = /obj/structure/closet/crate/freezer
@@ -1045,18 +1047,6 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	containertype = "/obj/structure/closet/crate"
 	containername = "Sterile equipment crate"
 	group = "Medical"
-
-/datum/supply_packs/randomised/pizza
-	num_contained = 5
-	contains = list(/obj/item/pizzabox/margherita,
-					/obj/item/pizzabox/mushroom,
-					/obj/item/pizzabox/meat,
-					/obj/item/pizzabox/vegetable)
-	name = "Surprise pack of five pizzas"
-	cost = 15
-	containertype = /obj/structure/closet/crate/freezer
-	containername = "Pizza crate"
-	group = "Hospitality"
 
 /datum/supply_packs/randomised/costume
 	num_contained = 2

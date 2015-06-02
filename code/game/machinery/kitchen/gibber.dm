@@ -2,7 +2,7 @@
 /obj/machinery/gibber
 	name = "gibber"
 	desc = "The name isn't descriptive enough?"
-	icon = 'icons/obj/kitchen.dmi'
+	icon = 'icons/obj/kitchen/inedible/machines.dmi'
 	icon_state = "grinder"
 	density = 1
 	anchored = 1
@@ -52,20 +52,20 @@
 
 /obj/machinery/gibber/New()
 	..()
-	src.overlays += image('icons/obj/kitchen.dmi', "grjam")
+	src.overlays += image(icon, "grjam")
 
 /obj/machinery/gibber/update_icon()
 	overlays.Cut()
 	if (dirty)
-		src.overlays += image('icons/obj/kitchen.dmi', "grbloody")
+		src.overlays += image(icon, "grbloody")
 	if(stat & (NOPOWER|BROKEN))
 		return
 	if (!occupant)
-		src.overlays += image('icons/obj/kitchen.dmi', "grjam")
+		src.overlays += image(icon, "grjam")
 	else if (operating)
-		src.overlays += image('icons/obj/kitchen.dmi', "gruse")
+		src.overlays += image(icon, "gruse")
 	else
-		src.overlays += image('icons/obj/kitchen.dmi', "gridle")
+		src.overlays += image(icon, "gridle")
 
 /obj/machinery/gibber/relaymove(mob/user as mob)
 	src.go_out()
@@ -183,7 +183,7 @@
 
 	var/slab_name = occupant.name
 	var/slab_count = 3
-	var/slab_type = /obj/item/weapon/reagent_containers/food/snacks/meat
+	var/slab_type = /obj/item/weapon/reagent_containers/food/snacks/meat/slab
 	var/slab_nutrition = src.occupant.nutrition / 15
 
 	// Some mobs have specific meat item types.
@@ -204,7 +204,7 @@
 	slab_nutrition /= slab_count
 
 	for(var/i=1 to slab_count)
-		var/obj/item/weapon/reagent_containers/food/snacks/meat/new_meat = new slab_type(src)
+		var/obj/item/weapon/reagent_containers/food/snacks/meat/slab/new_meat = new slab_type(src)
 		new_meat.name = "[slab_name] [new_meat.name]"
 		new_meat.reagents.add_reagent("nutriment",slab_nutrition)
 

@@ -315,7 +315,7 @@ var/list/organ_cache = list()
 	blood_splatter(src,B,1)
 
 	user.drop_from_inventory(src)
-	var/obj/item/weapon/reagent_containers/food/snacks/organ/O = new(get_turf(src))
+	var/obj/item/weapon/reagent_containers/food/snacks/meat/organ/O = new(get_turf(src))
 	O.name = name
 	O.icon_state = icon_state
 

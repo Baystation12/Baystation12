@@ -342,10 +342,10 @@
 
 /obj/structure/closet/crate/freezer/rations/New()
 	..()
-	new /obj/item/weapon/reagent_containers/food/snacks/liquidfood(src)
-	new /obj/item/weapon/reagent_containers/food/snacks/liquidfood(src)
-	new /obj/item/weapon/reagent_containers/food/snacks/liquidfood(src)
-	new /obj/item/weapon/reagent_containers/food/snacks/liquidfood(src)
+	new /obj/item/weapon/reagent_containers/food/snacks/junk/liquidfood(src)
+	new /obj/item/weapon/reagent_containers/food/snacks/junk/liquidfood(src)
+	new /obj/item/weapon/reagent_containers/food/snacks/junk/liquidfood(src)
+	new /obj/item/weapon/reagent_containers/food/snacks/junk/liquidfood(src)
 
 /obj/structure/closet/crate/bin
 	name = "large bin"

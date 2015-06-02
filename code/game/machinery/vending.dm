@@ -730,13 +730,32 @@
 	product_slogans = "Try our new nougat bar!;Twice the calories for half the price!"
 	product_ads = "The healthiest!;Award-winning chocolate bars!;Mmm! So good!;Oh my god it's so juicy!;Have a snack.;Snacks are good for you!;Have some more Getmore!;Best quality snacks straight from mars.;We love chocolate!;Try our new jerky!"
 	icon_state = "snack"
-	products = list(/obj/item/weapon/reagent_containers/food/snacks/candy = 6,/obj/item/weapon/reagent_containers/food/drinks/dry_ramen = 6,/obj/item/weapon/reagent_containers/food/snacks/chips =6,
-					/obj/item/weapon/reagent_containers/food/snacks/sosjerky = 6,/obj/item/weapon/reagent_containers/food/snacks/no_raisin = 6,/obj/item/weapon/reagent_containers/food/snacks/spacetwinkie = 6,
-					/obj/item/weapon/reagent_containers/food/snacks/cheesiehonkers = 6, /obj/item/weapon/reagent_containers/food/snacks/tastybread = 6)
-	contraband = list(/obj/item/weapon/reagent_containers/food/snacks/syndicake = 6, /obj/item/weapon/reagent_containers/food/snacks/skrellsnacks = 3)
-	prices = list(/obj/item/weapon/reagent_containers/food/snacks/candy = 1,/obj/item/weapon/reagent_containers/food/drinks/dry_ramen = 5,/obj/item/weapon/reagent_containers/food/snacks/chips = 1,
-					/obj/item/weapon/reagent_containers/food/snacks/sosjerky = 2,/obj/item/weapon/reagent_containers/food/snacks/no_raisin = 1,/obj/item/weapon/reagent_containers/food/snacks/spacetwinkie = 1,
-					/obj/item/weapon/reagent_containers/food/snacks/cheesiehonkers = 1, /obj/item/weapon/reagent_containers/food/snacks/tastybread = 2)
+	products = list(
+		/obj/item/weapon/reagent_containers/food/snacks/junk/candy = 6,
+		/obj/item/weapon/reagent_containers/food/drinks/dry_ramen = 6,
+		/obj/item/weapon/reagent_containers/food/snacks/junk/chips =6,
+		/obj/item/weapon/reagent_containers/food/snacks/junk/sosjerky = 6,
+		/obj/item/weapon/reagent_containers/food/snacks/junk/no_raisin = 6,
+		/obj/item/weapon/reagent_containers/food/snacks/junk/spacetwinkie = 6,
+		/obj/item/weapon/reagent_containers/food/snacks/junk/cheesiehonkers = 6,
+		/obj/item/weapon/reagent_containers/food/snacks/junk/tastybread = 6
+		)
+
+	contraband = list(
+		/obj/item/weapon/reagent_containers/food/snacks/junk/syndicake = 6,
+		/obj/item/weapon/reagent_containers/food/snacks/junk/skrellsnacks = 3
+	)
+
+	prices = list(
+		/obj/item/weapon/reagent_containers/food/snacks/junk/candy = 1,
+		/obj/item/weapon/reagent_containers/food/drinks/dry_ramen = 5,
+		/obj/item/weapon/reagent_containers/food/snacks/junk/chips = 1,
+		/obj/item/weapon/reagent_containers/food/snacks/junk/sosjerky = 2,
+		/obj/item/weapon/reagent_containers/food/snacks/junk/no_raisin = 1,
+		/obj/item/weapon/reagent_containers/food/snacks/junk/spacetwinkie = 1,
+		/obj/item/weapon/reagent_containers/food/snacks/junk/cheesiehonkers = 1,
+		/obj/item/weapon/reagent_containers/food/snacks/junk/tastybread = 2
+		)
 
 
 
@@ -750,7 +769,7 @@
 					/obj/item/weapon/reagent_containers/food/drinks/cans/dr_gibb = 10,/obj/item/weapon/reagent_containers/food/drinks/cans/starkist = 10,
 					/obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle = 10,/obj/item/weapon/reagent_containers/food/drinks/cans/space_up = 10,
 					/obj/item/weapon/reagent_containers/food/drinks/cans/iced_tea = 10, /obj/item/weapon/reagent_containers/food/drinks/cans/grape_juice = 10)
-	contraband = list(/obj/item/weapon/reagent_containers/food/drinks/cans/thirteenloko = 5, /obj/item/weapon/reagent_containers/food/snacks/liquidfood = 6)
+	contraband = list(/obj/item/weapon/reagent_containers/food/drinks/cans/thirteenloko = 5, /obj/item/weapon/reagent_containers/food/snacks/junk/liquidfood = 6)
 	prices = list(/obj/item/weapon/reagent_containers/food/drinks/cans/cola = 1,/obj/item/weapon/reagent_containers/food/drinks/cans/space_mountain_wind = 1,
 					/obj/item/weapon/reagent_containers/food/drinks/cans/dr_gibb = 1,/obj/item/weapon/reagent_containers/food/drinks/cans/starkist = 1,
 					/obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle = 2,/obj/item/weapon/reagent_containers/food/drinks/cans/space_up = 1,
@@ -903,14 +922,14 @@
 	vend_reply = "Have an enchanted evening!"
 	product_ads = "FJKLFJSD;AJKFLBJAKL;1234 LOONIES LOL!;>MFW;Kill them fuckers!;GET DAT FUKKEN DISK;HONK!;EI NATH;Destroy the station!;Admin conspiracies since forever!;Space-time bending hardware!"
 	products = list(/obj/item/clothing/head/wizard = 1,/obj/item/clothing/suit/wizrobe = 1,/obj/item/clothing/head/wizard/red = 1,/obj/item/clothing/suit/wizrobe/red = 1,/obj/item/clothing/shoes/sandal = 1,/obj/item/weapon/staff = 2)
-	contraband = list(/obj/item/weapon/reagent_containers/glass/bottle/wizarditis = 1)	//No one can get to the machine to hack it anyways; for the lulz - Microwave
+	contraband = list(/obj/item/weapon/reagent_containers/glass/bottle/wizarditis = 1)
 
 /obj/machinery/vending/dinnerware
 	name = "Dinnerware"
 	desc = "A kitchen and restaurant equipment vendor."
 	product_ads = "Mm, food stuffs!;Food and food accessories.;Get your plates!;You like forks?;I like forks.;Woo, utensils.;You don't really need these..."
 	icon_state = "dinnerware"
-	products = list(/obj/item/weapon/tray = 8,/obj/item/weapon/material/kitchen/utensil/fork = 6,/obj/item/weapon/material/knife = 3,/obj/item/weapon/reagent_containers/food/drinks/drinkingglass = 8,/obj/item/clothing/suit/chef/classic = 2)
+	products = list(/obj/item/weapon/dish/tray = 8,/obj/item/weapon/material/kitchen/utensil/fork = 6,/obj/item/weapon/material/knife = 3,/obj/item/weapon/reagent_containers/food/drinks/drinkingglass = 8,/obj/item/clothing/suit/chef/classic = 2)
 	contraband = list(/obj/item/weapon/material/kitchen/utensil/spoon = 2,/obj/item/weapon/material/kitchen/utensil/knife = 2,/obj/item/weapon/material/kitchen/rollingpin = 2, /obj/item/weapon/material/knife/butch = 2)
 
 /obj/machinery/vending/sovietsoda

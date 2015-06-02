@@ -574,7 +574,7 @@
 /obj/machinery/reagentgrinder
 
 	name = "All-In-One Grinder"
-	icon = 'icons/obj/kitchen.dmi'
+	icon = 'icons/obj/kitchen/inedible/machines.dmi'
 	icon_state = "juicer1"
 	layer = 2.9
 	density = 0
@@ -668,7 +668,7 @@
 	user.set_machine(src)
 	interact(user)
 
-/obj/machinery/reagentgrinder/interact(mob/user as mob) // The microwave Menu
+/obj/machinery/reagentgrinder/interact(mob/user as mob)
 	var/is_chamber_empty = 0
 	var/is_beaker_ready = 0
 	var/processing_chamber = ""
