@@ -997,18 +997,18 @@ var/global/floorIsLava = 0
 
 	return 0
 
-/datum/admins/proc/spawn_fruit()
+/datum/admins/proc/spawn_fruit(seedtype in plant_controller.seeds)
 	set category = "Debug"
 	set desc = "Spawn the product of a seed."
 	set name = "Spawn Fruit"
 
 	if(!check_rights(R_SPAWN))	return
 
-	var/seedtype = input("Select a seed type", "Spawn Fruit") as null|anything in plant_controller.seeds
 	if(!seedtype || !plant_controller.seeds[seedtype])
 		return
 	var/datum/seed/S = plant_controller.seeds[seedtype]
 	S.harvest(usr,0,0,1)
+	log_admin("[key_name(usr)] spawned [seedtype] fruit at ([usr.x],[usr.y],[usr.z])")
 
 /datum/admins/proc/spawn_custom_item()
 	set category = "Debug"
@@ -1050,17 +1050,17 @@ var/global/floorIsLava = 0
 		for(var/datum/custom_item/item in current_items)
 			usr << "- name: [item.name] icon: [item.item_icon] path: [item.item_path] desc: [item.item_desc]"
 
-/datum/admins/proc/spawn_plant()
+/datum/admins/proc/spawn_plant(seedtype in plant_controller.seeds)
 	set category = "Debug"
 	set desc = "Spawn a spreading plant effect."
 	set name = "Spawn Plant"
 
 	if(!check_rights(R_SPAWN))	return
 
-	var/seedtype = input("Select a seed type", "Spawn Plant") as null|anything in plant_controller.seeds
 	if(!seedtype || !plant_controller.seeds[seedtype])
 		return
 	new /obj/effect/plant(get_turf(usr), plant_controller.seeds[seedtype])
+	log_admin("[key_name(usr)] spawned [seedtype] vines at ([usr.x],[usr.y],[usr.z])")
 
 /datum/admins/proc/spawn_atom(var/object as text)
 	set category = "Debug"
@@ -1236,7 +1236,7 @@ var/global/floorIsLava = 0
 	if(!ai_number)
 		usr << "<b>No AIs located</b>" //Just so you know the thing is actually working and not just ignoring you.
 
-/datum/admins/proc/show_skills(var/mob/living/carbon/human/M as mob in world)
+/datum/admins/proc/show_skills()
 	set category = "Admin"
 	set name = "Show Skills"
 
@@ -1245,6 +1245,9 @@ var/global/floorIsLava = 0
 	if (!istype(src,/datum/admins))
 		usr << "Error: you are not an admin!"
 		return
+
+	var/mob/living/carbon/human/M = input("Select mob.", "Select mob.") as null|anything in human_mob_list
+	if(!M) return
 
 	show_skill_window(usr, M)
 

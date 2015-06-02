@@ -236,8 +236,9 @@ datum/preferences
 /datum/preferences/proc/ShowChoices(mob/user)
 	if(!user || !user.client)	return
 	update_preview_icon()
-	user << browse_rsc(preview_icon_front, "previewicon.png")
-	user << browse_rsc(preview_icon_side, "previewicon2.png")
+	if(preview_icon_front && preview_icon_side)
+		user << browse_rsc(preview_icon_front, "previewicon.png")
+		user << browse_rsc(preview_icon_side, "previewicon2.png")
 	var/dat = "<html><body><center>"
 
 	if(path)
@@ -1671,6 +1672,7 @@ datum/preferences
 		var/status = organ_data[name]
 		var/obj/item/organ/external/O = character.organs_by_name[name]
 		if(O)
+			O.status = 0
 			if(status == "amputated")
 				character.organs_by_name[O.limb_name] = null
 				character.organs -= O

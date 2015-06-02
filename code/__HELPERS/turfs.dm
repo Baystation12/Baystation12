@@ -11,3 +11,9 @@
 
 /proc/isfloor(turf/T)
 	return (istype(T, /turf/simulated/floor) || istype(T, /turf/unsimulated/floor) || istype(T, /turf/simulated/shuttle/floor))
+
+/proc/turf_clear(turf/T)
+	for(var/atom/A in T)
+		if(A.simulated)
+			return 0
+	return 1
