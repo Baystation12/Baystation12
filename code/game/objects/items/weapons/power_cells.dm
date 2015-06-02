@@ -19,7 +19,7 @@
 	matter = list(DEFAULT_WALL_MATERIAL = 700, "glass" = 50)
 
 	suicide_act(mob/user)
-		viewers(user) << "\red <b>[user] is licking the electrodes of the [src.name]! It looks like \he's trying to commit suicide.</b>"
+		viewers(user) << "<span class='danger'>\The [user] is licking the electrodes of \the [src]! It looks like \he's trying to commit suicide.</span>"
 		return (FIRELOSS)
 
 //currently only used by energy-type guns, that may change in the future.

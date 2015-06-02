@@ -118,7 +118,7 @@
 	if(ai.client)
 		ai << "You have been downloaded to a mobile storage device. Remote access lost."
 	if(user.client)
-		user << "\blue <b>Transfer successful</b>: \black [ai.name] ([rand(1000,9999)].exe) removed from host terminal and stored within local memory."
+		user << "<span class='notice'><b>Transfer successful:</b></span> [ai.name] ([rand(1000,9999)].exe) removed from host terminal and stored within local memory."
 
 	update_icon()
 	return 1
