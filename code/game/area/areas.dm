@@ -293,3 +293,10 @@ var/list/mob/living/forced_ambiance_list = new
 			H.AdjustWeakened(1)
 		mob << "<span class='notice'>The sudden appearance of gravity makes you fall to the floor!</span>"
 
+/area/proc/prison_break()
+	for(var/obj/machinery/power/apc/temp_apc in src)
+		temp_apc.overload_lighting(70)
+	for(var/obj/machinery/door/airlock/temp_airlock in src)
+		temp_airlock.prison_open()
+	for(var/obj/machinery/door/window/temp_windoor in src)
+		temp_windoor.open()
