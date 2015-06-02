@@ -402,17 +402,17 @@ area/space/atmosalert()
 //EXTRA
 
 /area/asteroid					// -- TLE
-	name = "\improper Asteroid"
+	name = "\improper Moon"
 	icon_state = "asteroid"
 	requires_power = 0
 
 /area/asteroid/cave				// -- TLE
-	name = "\improper Asteroid - Underground"
+	name = "\improper Moon - Underground"
 	icon_state = "cave"
 	requires_power = 0
 
 /area/asteroid/artifactroom
-	name = "\improper Asteroid - Artifact"
+	name = "\improper Moon - Artifact"
 	icon_state = "cave"
 
 
@@ -498,7 +498,7 @@ area/space/atmosalert()
 	icon_state = "south"
 
 /area/syndicate_station/mining
-	name = "\improper north east of the mining asteroid"
+	name = "\improper northeast of the mining station"
 	icon_state = "north"
 
 /area/syndicate_station/arrivals_dock
@@ -540,7 +540,7 @@ area/space/atmosalert()
 	icon_state = "southeast"
 
 /area/skipjack_station/mining
-	name = "\improper nearby mining asteroid"
+	name = "\improper south of mining station"
 	icon_state = "north"
 
 //PRISON

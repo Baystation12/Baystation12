@@ -921,7 +921,7 @@ proc/anim(turf/location as turf,target as mob|obj,a_icon,a_icon_state as text,fl
 					if(turftoleave)
 						fromupdate += T.ChangeTurf(turftoleave)
 					else
-						T.ChangeTurf(/turf/space)
+						T.ChangeTurf(get_base_turf(T.z))
 
 					refined_src -= T
 					refined_trg -= B
@@ -1004,7 +1004,7 @@ proc/DuplicateObject(obj/original, var/perfectcopy = 0 , var/sameloc = 0)
 					var/old_icon1 = T.icon
 
 					if(platingRequired)
-						if(istype(B, /turf/space))
+						if(istype(B, get_base_turf(B.z)))
 							continue moving
 
 					var/turf/X = new T.type(B)

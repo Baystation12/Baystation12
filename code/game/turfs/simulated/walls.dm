@@ -179,7 +179,7 @@ var/list/global/wall_cache = list()
 /turf/simulated/wall/ex_act(severity)
 	switch(severity)
 		if(1.0)
-			src.ChangeTurf(/turf/space)
+			src.ChangeTurf(get_base_turf(src.z))
 			return
 		if(2.0)
 			if(prob(75))
