@@ -192,16 +192,16 @@
 	var/row = round((number-1)/AB_MAX_COLUMNS)
 	var/col = ((number - 1)%(AB_MAX_COLUMNS)) + 1
 	var/coord_col = "+[col-1]"
-	var/coord_col_offset = 4+2*col
+	var/coord_col_offset = AB_WEST_OFFSET+2*col
 	var/coord_row = "[-1 - row]"
-	var/coord_row_offset = 26
+	var/coord_row_offset = AB_NORTH_OFFSET
 	return "WEST[coord_col]:[coord_col_offset],NORTH[coord_row]:[coord_row_offset]"
 
 /datum/hud/proc/SetButtonCoords(var/obj/screen/button,var/number)
 	var/row = round((number-1)/AB_MAX_COLUMNS)
 	var/col = ((number - 1)%(AB_MAX_COLUMNS)) + 1
-	var/x_offset = 32*(col-1) + 4 + 2*col
-	var/y_offset = -32*(row+1) + 26
+	var/x_offset = 32*(col-1) + AB_WEST_OFFSET + 2*col
+	var/y_offset = -32*(row+1) + AB_NORTH_OFFSET
 
 	var/matrix/M = matrix()
 	M.Translate(x_offset,y_offset)
@@ -216,3 +216,7 @@
 
 /datum/action/item_action/hands_free
 	check_flags = AB_CHECK_ALIVE|AB_CHECK_INSIDE
+
+#undef AB_WEST_OFFSET
+#undef AB_NORTH_OFFSET
+#undef AB_MAX_COLUMNS
