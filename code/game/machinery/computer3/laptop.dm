@@ -74,12 +74,10 @@
 
 	if(stored_computer)
 		stored_computer.eject_id()
-
 /obj/machinery/computer3/laptop/verb/eject_id()
 	set category = "Object"
 	set name = "Eject ID Card"
 	set src in oview(1)
-
 	var/obj/item/part/computer/cardslot/C = locate() in src.contents
 
 	if(!C)
@@ -96,7 +94,7 @@
 		return
 
 	usr << "You remove [card] from the laptop."
-	C.remove(card)
+	C.remove(4)
 
 
 /obj/machinery/computer3/laptop
