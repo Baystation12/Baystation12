@@ -44,7 +44,7 @@ var/datum/antagonist/highlander/highlanders
 	var/obj/item/weapon/card/id/W = new(player)
 	W.name = "[player.real_name]'s ID Card"
 	W.icon_state = "centcom"
-	W.access = get_all_accesses()
+	W.access = get_all_station_access()
 	W.access += get_all_centcom_access()
 	W.assignment = "Highlander"
 	W.registered_name = player.real_name

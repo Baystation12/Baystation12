@@ -183,7 +183,7 @@
 				if(is_authenticated())
 					var/access_type = text2num(href_list["access_target"])
 					var/access_allowed = text2num(href_list["allowed"])
-					if(access_type in (is_centcom() ? get_all_centcom_access() : get_all_accesses()))
+					if(access_type in (is_centcom() ? get_all_centcom_access() : get_all_station_access()))
 						modify.access -= access_type
 						if(!access_allowed)
 							modify.access += access_type
