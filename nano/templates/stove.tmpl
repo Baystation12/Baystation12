@@ -1,0 +1,52 @@
+<div class="item">
+	<div class="itemLabel">
+		Power:
+	</div>
+	<div class="itemContent">		
+		{{:helper.link('On', 'power', {'togglePower' : 1}, data.on ? 'selected' : null)}}{{:helper.link('Off', 'close', {'togglePower' : 1}, data.on ? null : 'selected')}}
+	</div>
+</div>
+
+<h3>Internal Temperature</h3>
+{{for data.contents}}
+	<div class="item">
+		<div class="itemLabel">
+			{{:helper.capitalizeFirstLetter(value.name)}}:
+		</div>
+		<div class="itemContent">		
+			{{:helper.displayBar(value.actualTemp, data.minTemp, data.maxTemp, value.tempClass)}}
+			<div class="statusValue">
+				<span class="{{:value.tempClass}}">{{:value.actualTemp}} C</span>
+			</div>
+		</div>
+	</div>
+
+	<div class="item">
+		<div class="itemLabel">
+			Target:
+		</div>
+		<div class="itemContent">
+			{{:helper.displayBar(value.targetTemp, data.minTemp, data.maxTemp, value.tempTargetClass)}}			
+			<div style="clear: both; padding-top: 4px;">
+				{{:helper.link('-', null, {'temp' : -20,  'burnerName' : value.name}, (value.targetTemp > data.minTemp) ? null : 'disabled')}}
+				{{:helper.link('-', null, {'temp' : -10,  'burnerName' : value.name}, (value.targetTemp > data.minTemp) ? null : 'disabled')}}
+				{{:helper.link('-', null, {'temp' : -1,   'burnerName' : value.name}, (value.targetTemp > data.minTemp) ? null : 'disabled')}}				
+				<div style="float: left; width: 80px; text-align: center;">&nbsp;{{:value.targetTemp}} C&nbsp;</div>
+				{{:helper.link('+', null, {'temp' : 1,    'burnerName' : value.name}, (value.targetTemp < data.maxTemp) ? null : 'disabled')}}
+				{{:helper.link('+', null, {'temp' : 10,   'burnerName' : value.name}, (value.targetTemp < data.maxTemp) ? null : 'disabled')}}
+				{{:helper.link('+', null, {'temp' : 20,   'burnerName' : value.name}, (value.targetTemp < data.maxTemp) ? null : 'disabled')}}	
+			</div>
+		</div>
+	</div>
+
+	{{if value.burnerContents}}
+		<div class="item">
+			<div class="itemLabelNarrow">
+				{{:helper.capitalizeFirstLetter(value.burnerContents)}}:
+			</div>
+			<div class="itemContent">
+				{{:helper.link('Remove', null, {'burnerName' : value.name, 'removeItem' : 1}, null,null)}}
+			</div>
+		</div>
+	{{/if}}
+{{/for}}

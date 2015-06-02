@@ -66,7 +66,7 @@
 			user << "<span class='info'>You inject the blood sample into the bioprinter.</span>"
 		return
 	// Meat for biomass.
-	else if(!prints_prosthetics && istype(W, /obj/item/weapon/reagent_containers/food/snacks/meat))
+	else if(!prints_prosthetics && istype(W, /obj/item/weapon/reagent_containers/food/snacks/meat/slab))
 		stored_matter += 50
 		user.drop_item()
 		user << "<span class='info'>\The [src] processes \the [W]. Levels of stored biomass now: [stored_matter]</span>"

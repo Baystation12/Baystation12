@@ -12,7 +12,6 @@
 	speak_chance = 1
 	turns_per_move = 5
 	see_in_dark = 6
-	meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat
 	meat_amount = 4
 	response_help  = "pets"
 	response_disarm = "gently pushes aside"
@@ -55,9 +54,9 @@
 
 		if(!pulledby)
 			var/obj/effect/plant/food
-			food = locate(/obj/effect/plant) in oview(5,loc)	
+			food = locate(/obj/effect/plant) in oview(5,loc)
 			if(food)
-				var/step = get_step_to(src, food, 0) 	
+				var/step = get_step_to(src, food, 0)
 				Move(step)
 
 /mob/living/simple_animal/hostile/retaliate/goat/Retaliate()
@@ -96,7 +95,6 @@
 	speak_chance = 1
 	turns_per_move = 5
 	see_in_dark = 6
-	meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat
 	meat_amount = 6
 	response_help  = "pets"
 	response_disarm = "gently pushes aside"
@@ -157,7 +155,6 @@
 	emote_see = list("pecks at the ground","flaps its tiny wings")
 	speak_chance = 2
 	turns_per_move = 2
-	meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat
 	meat_amount = 1
 	response_help  = "pets"
 	response_disarm = "gently pushes aside"
@@ -198,7 +195,6 @@ var/global/chicken_count = 0
 	emote_see = list("pecks at the ground","flaps its wings viciously")
 	speak_chance = 2
 	turns_per_move = 3
-	meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat
 	meat_amount = 2
 	response_help  = "pets"
 	response_disarm = "gently pushes aside"

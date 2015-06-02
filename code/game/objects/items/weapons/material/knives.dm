@@ -45,14 +45,12 @@
 	update_force()
 	add_fingerprint(user)
 
-/*
- * Kitchen knives
- */
-/obj/item/weapon/material/knife
-	name = "kitchen knife"
-	icon = 'icons/obj/kitchen.dmi'
-	icon_state = "knife"
-	desc = "A general purpose Chef's Knife made by SpaceCook Incorporated. Guaranteed to stay sharp for years to come."
+/obj/item/weapon/material/hook
+	name = "meat hook"
+	desc = "A sharp, metal hook what sticks into things."
+	icon = 'icons/obj/weapons.dmi'
+	icon_state = "hook_knife"
+	item_state = "hook_knife"
 	flags = CONDUCT
 	sharp = 1
 	edge = 1
@@ -62,29 +60,17 @@
 	attack_verb = list("slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	unbreakable = 1
 
-/obj/item/weapon/material/knife/suicide_act(mob/user)
-	viewers(user) << pick("\red <b>[user] is slitting \his wrists with the [src.name]! It looks like \he's trying to commit suicide.</b>", \
-						"\red <b>[user] is slitting \his throat with the [src.name]! It looks like \he's trying to commit suicide.</b>", \
-						"\red <b>[user] is slitting \his stomach open with the [src.name]! It looks like \he's trying to commit seppuku.</b>")
-	return (BRUTELOSS)
-
-/obj/item/weapon/material/knife/hook
-	name = "meat hook"
-	desc = "A sharp, metal hook what sticks into things."
-	icon_state = "hook_knife"
-	item_state = "hook_knife"
-
-/obj/item/weapon/material/knife/ritual
+/obj/item/weapon/material/ritual
 	name = "ritual knife"
 	desc = "The unearthly energies that once powered this blade are now dormant."
 	icon = 'icons/obj/wizard.dmi'
 	icon_state = "render"
 	applies_material_colour = 0
-
-/obj/item/weapon/material/knife/butch
-	name = "butcher's cleaver"
-	icon = 'icons/obj/kitchen.dmi'
-	icon_state = "butch"
-	desc = "A huge thing used for chopping and chopping up meat. This includes clowns and clown-by-products."
-	force_divisor = 0.25 // 15 when wielded with hardness 60 (steel)
-	attack_verb = list("cleaved", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
+	flags = CONDUCT
+	sharp = 1
+	edge = 1
+	force_divisor = 0.15 // 9 when wielded with hardness 60 (steel)
+	matter = list(DEFAULT_WALL_MATERIAL = 12000)
+	origin_tech = "materials=1"
+	attack_verb = list("slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
+	unbreakable = 1

@@ -2,7 +2,7 @@
 
 /obj/structure/kitchenspike
 	name = "a meat spike"
-	icon = 'icons/obj/kitchen.dmi'
+	icon = 'icons/obj/kitchen/inedible/machines.dmi'
 	icon_state = "spike"
 	desc = "A spike for collecting meat from animals."
 	density = 1
@@ -37,7 +37,7 @@
 		meat_type = H.species.meat_type
 		icon_state = "spikebloody"
 	else if(istype(victim, /mob/living/carbon/alien))
-		meat_type = /obj/item/weapon/reagent_containers/food/snacks/xenomeat
+		meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat/slab/xeno
 		icon_state = "spikebloodygreen"
 	else
 		return 0

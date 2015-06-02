@@ -411,12 +411,12 @@
 
 	New()
 		..()
-		new /obj/item/weapon/reagent_containers/food/snacks/donkpocket(src)
-		new /obj/item/weapon/reagent_containers/food/snacks/donkpocket(src)
-		new /obj/item/weapon/reagent_containers/food/snacks/donkpocket(src)
-		new /obj/item/weapon/reagent_containers/food/snacks/donkpocket(src)
-		new /obj/item/weapon/reagent_containers/food/snacks/donkpocket(src)
-		new /obj/item/weapon/reagent_containers/food/snacks/donkpocket(src)
+		new /obj/item/weapon/reagent_containers/food/snacks/junk/donkpocket(src)
+		new /obj/item/weapon/reagent_containers/food/snacks/junk/donkpocket(src)
+		new /obj/item/weapon/reagent_containers/food/snacks/junk/donkpocket(src)
+		new /obj/item/weapon/reagent_containers/food/snacks/junk/donkpocket(src)
+		new /obj/item/weapon/reagent_containers/food/snacks/junk/donkpocket(src)
+		new /obj/item/weapon/reagent_containers/food/snacks/junk/donkpocket(src)
 
 /obj/item/weapon/storage/box/sinpockets
 	name = "box of sin-pockets"
@@ -425,17 +425,17 @@
 
 	New()
 		..()
-		new /obj/item/weapon/reagent_containers/food/snacks/donkpocket/sinpocket(src)
-		new /obj/item/weapon/reagent_containers/food/snacks/donkpocket/sinpocket(src)
-		new /obj/item/weapon/reagent_containers/food/snacks/donkpocket/sinpocket(src)
-		new /obj/item/weapon/reagent_containers/food/snacks/donkpocket/sinpocket(src)
-		new /obj/item/weapon/reagent_containers/food/snacks/donkpocket/sinpocket(src)
-		new /obj/item/weapon/reagent_containers/food/snacks/donkpocket/sinpocket(src)
+		new /obj/item/weapon/reagent_containers/food/snacks/junk/donkpocket/sinpocket(src)
+		new /obj/item/weapon/reagent_containers/food/snacks/junk/donkpocket/sinpocket(src)
+		new /obj/item/weapon/reagent_containers/food/snacks/junk/donkpocket/sinpocket(src)
+		new /obj/item/weapon/reagent_containers/food/snacks/junk/donkpocket/sinpocket(src)
+		new /obj/item/weapon/reagent_containers/food/snacks/junk/donkpocket/sinpocket(src)
+		new /obj/item/weapon/reagent_containers/food/snacks/junk/donkpocket/sinpocket(src)
 
 /obj/item/weapon/storage/box/monkeycubes
 	name = "monkey cube box"
 	desc = "Drymate brand monkey cubes. Just add water!"
-	icon = 'icons/obj/food.dmi'
+	icon = 'icons/obj/kitchen/packaging/monkeycube.dmi'
 	icon_state = "monkeycubebox"
 	storage_slots = 7
 	can_hold = list(/obj/item/weapon/reagent_containers/food/snacks/monkeycube)

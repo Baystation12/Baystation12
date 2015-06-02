@@ -179,7 +179,7 @@
 		if("milk")
 			beaker.reagents.add_reagent("milk", 10)
 		if("meat")
-			new/obj/item/weapon/reagent_containers/food/snacks/meat(loc)
+			new/obj/item/weapon/reagent_containers/food/snacks/meat/slab(loc)
 		if("ez")
 			new/obj/item/weapon/reagent_containers/glass/fertilizer/ez(loc)
 		if("l4z")

@@ -50,7 +50,7 @@
 	var/vision_flags = 0                     // Same flags as glasses.
 
 	// Death vars.
-	var/meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat/human
+	var/meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat/slab/human
 	var/gibber_type = /obj/effect/gibspawner/human
 	var/single_gib_type = /obj/effect/decal/cleanable/blood/gibs
 	var/remains_type = /obj/effect/decal/remains/xeno

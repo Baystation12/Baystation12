@@ -39,14 +39,6 @@
 	name = "waffles"
 	icon_state = "waffles"
 
-/obj/item/trash/plate
-	name = "plate"
-	icon_state = "plate"
-
-/obj/item/trash/snack_bowl
-	name = "snack bowl"
-	icon_state	= "snack_bowl"
-
 /obj/item/trash/pistachios
 	name = "pistachios pack"
 	icon_state = "pistachios_pack"
@@ -54,10 +46,6 @@
 /obj/item/trash/semki
 	name = "semki pack"
 	icon_state = "semki_pack"
-
-/obj/item/trash/tray
-	name = "tray"
-	icon_state = "tray"
 
 /obj/item/trash/candle
 	name = "candle"

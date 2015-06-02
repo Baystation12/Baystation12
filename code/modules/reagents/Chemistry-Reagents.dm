@@ -121,3 +121,10 @@
 	description = "A mass of wood fibers."
 	reagent_state = LIQUID
 	color = "#B97A57"
+
+/datum/reagent/gelatine
+	name = "Gelatine"
+	id = "gelatine"
+	description = "A coarse powder made from animal connective tissue and bones."
+	reagent_state = LIQUID
+	color = "#B97A57"

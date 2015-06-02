@@ -20,9 +20,11 @@
 		..()
 		for(var/i = 0, i < 6, i++)
 			new /obj/item/weapon/reagent_containers/food/condiment/flour(src)
-		new /obj/item/weapon/reagent_containers/food/condiment/sugar(src)
+		for(var/i = 0, i < 2, i++)
+			new /obj/item/weapon/reagent_containers/food/condiment/gelatine(src)
+			new /obj/item/weapon/reagent_containers/food/condiment/sugar(src)
 		for(var/i = 0, i < 3, i++)
-			new /obj/item/weapon/reagent_containers/food/snacks/meat/monkey(src)
+			new /obj/item/weapon/reagent_containers/food/snacks/meat/slab/monkey(src)
 		return
 
 
@@ -44,7 +46,7 @@
 	New()
 		..()
 		for(var/i = 0, i < 4, i++)
-			new /obj/item/weapon/reagent_containers/food/snacks/meat/monkey(src)
+			new /obj/item/weapon/reagent_containers/food/snacks/meat/slab/monkey(src)
 		return
 
 
