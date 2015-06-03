@@ -8,7 +8,7 @@
 	for(var/obj/machinery/light/emergency/EL in world)
 		EL.update()
 
-	var/list/skipped_areas = list(/area/engine/engine_room, /area/engine/generators, /area/turret_protected/ai)
+	var/list/skipped_areas = list(/area/engine/engine_room, /area/engine/smes, /area/turret_protected/ai)
 
 	for(var/obj/machinery/power/smes/S in world)
 		var/area/current_area = get_area(S)
@@ -33,7 +33,7 @@
 			C.update_icon()
 
 /proc/power_restore(var/announce = 1)
-	var/list/skipped_areas = list(/area/engine/engine_room, /area/engine/generators, /area/turret_protected/ai)
+	var/list/skipped_areas = list(/area/engine/engine_room, /area/engine/smes, /area/turret_protected/ai)
 
 	rad_storm = 0
 

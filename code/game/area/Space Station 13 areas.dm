@@ -1132,6 +1132,9 @@ var/list/ghostteleportlocs = list()
 /area/holodeck/source_desert
 	name = "Holodeck - Desert"
 
+/area/holodeck/source_courtroom
+	name = "Holodeck - Courtroom"
+
 /area/holodeck/source_space
 	name = "Holodeck - Space"
 

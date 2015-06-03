@@ -24,6 +24,7 @@
 	var/dhts = 0
 	var/wingicon = 0
 	var/falldmg = 0
+	var/sizechange = 1
 
 	var/datum/unarmed_attack/unarmed           // For empty hand harm-intent attack
 	var/datum/unarmed_attack/secondary_unarmed // For empty hand harm-intent attack if the first fails.                         // Used for mob icon generation for non-32x32 species.

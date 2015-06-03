@@ -462,8 +462,6 @@ var/list/admin_verbs_headadmin = list(
 	/client/proc/reload_mentors,
 	/client/proc/reload_vips,
 	/client/proc/restart_controller,
-	/client/proc/remake_distribution_map,
-	/client/proc/show_distribution_map,
 	/client/proc/SDQL_query,
 	/client/proc/SDQL2_query,
 	/client/proc/togglebuildmodeself

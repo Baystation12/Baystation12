@@ -238,4 +238,3 @@
 	icon_state = "Floor3"
 	name = "catwalk"
 	desc = "Cats really don't like these things."
-	return

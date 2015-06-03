@@ -171,8 +171,8 @@ datum/hud/New(mob/owner)
 						if(H.wear_suit) H.wear_suit.screen_loc = hud_data["loc"]
 					if(slot_wear_mask)
 						if(H.wear_mask) H.wear_mask.screen_loc = hud_data["loc"]
-					if(H.neck)		
-						H.neck.screen_loc = ui_neck
+					if(slot_neck)
+						if(H.neck)		H.neck.screen_loc = ui_neck
 			else
 				switch(hud_data["slot"])
 					if(slot_head)
@@ -193,8 +193,8 @@ datum/hud/New(mob/owner)
 						if(H.wear_suit) H.wear_suit.screen_loc = null
 					if(slot_wear_mask)
 						if(H.wear_mask) H.wear_mask.screen_loc = null
-					if(H.neck)		
-						H.neck.screen_loc = null
+					if(slot_neck)
+						if(H.neck) 		H.neck.screen_loc = null
 
 /datum/hud/proc/persistant_inventory_update()
 	if(!mymob)
@@ -335,7 +335,7 @@ datum/hud/New(mob/owner)
 		return
 	if(client.view != world.view)
 		return
-	
+
 
 	if(hud_used.hud_shown)
 		hud_used.hud_shown = 0

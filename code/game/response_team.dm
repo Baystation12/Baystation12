@@ -384,7 +384,7 @@ proc/trigger_armed_response_team(var/force = 0)
 	equip_to_slot_or_del(new /obj/item/weapon/storage/firstaid/regular(src), slot_in_backpack)
 */
 	var/obj/item/weapon/card/id/centcom/ERT/W = new(src)
-	var/ID_assignment
+	var/ID_assignment = ""
 	if(src.ert_role == 1)
 		W.assignment = "Emergency Response Team Security"
 		W.access = get_centcom_access("Security")
