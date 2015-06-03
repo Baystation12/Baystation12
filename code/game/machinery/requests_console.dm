@@ -1,6 +1,22 @@
 /******************** Requests Console ********************/
 /** Originally written by errorage, updated by: Carn, needs more work though. I just added some security fixes */
 
+//Request Console Department Types
+#define RC_ASSIST 1		//Request Assistance
+#define RC_SUPPLY 2		//Request Supplies
+#define RC_INFO   4		//Relay Info
+
+//Request Console Screens
+#define RCS_RQASSIST 1	// Request supplies
+#define RCS_RQSUPPLY 2	// Request assistance
+#define RCS_SENDINFO 3	// Relay information
+#define RCS_SENTPASS 4	// Message sent successfully
+#define RCS_SENTFAIL 5	// Message sent unsuccessfully
+#define RCS_VIEWMSGS 6	// View messages
+#define RCS_MESSAUTH 7	// Authentication before sending
+#define RCS_ANNOUNCE 8	// Send announcement
+#define RCS_MAINMENU 9	// Main menu
+
 var/req_console_assistance = list()
 var/req_console_supplies = list()
 var/req_console_information = list()
@@ -14,32 +30,13 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 	icon_state = "req_comp0"
 	var/department = "Unknown" //The list of all departments on the station (Determined from this variable on each unit) Set this to the same thing if you want several consoles in one department
 	var/list/messages = list() //List of all messages
-	var/departmentType = 0
-		// 0 = none (not listed, can only repeplied to)
-		// 1 = assistance
-		// 2 = supplies
-		// 3 = info
-		// 4 = ass + sup //Erro goddamn you just HAD to shorten "assistance" down to "ass"
-		// 5 = ass + info
-		// 6 = sup + info
-		// 7 = ass + sup + info
+	var/departmentType = 0 		//Bitflag. Zero is reply-only. Map currently uses raw numbers instead of defines.
 	var/newmessagepriority = 0
 		// 0 = no new message
 		// 1 = normal priority
 		// 2 = high priority
 		// 3 = extreme priority - not implemented, will probably require some hacking... everything needs to have a hidden feature in this game.
-	var/screen = 0
-		// 0 = main menu,
-		// 1 = req. assistance,
-		// 2 = req. supplies
-		// 3 = relay information
-		// 4 = write msg - not used
-		// 5 = choose priority - not used
-		// 6 = sent successfully
-		// 7 = sent unsuccessfully
-		// 8 = view messages
-		// 9 = authentication before sending
-		// 10 = send announcement
+	var/screen = RCS_MAINMENU
 	var/silent = 0 // set to 1 for it not to beep all the time
 //	var/hackState = 0
 		// 0 = not hacked
@@ -77,49 +74,26 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 
 	name = "[department] Requests Console"
 	allConsoles += src
-	//req_console_departments += department
-	switch(departmentType)
-		if(1)
-			req_console_assistance |= department
-		if(2)
-			req_console_supplies |= department
-		if(3)
-			req_console_information |= department
-		if(4)
-			req_console_assistance |= department
-			req_console_supplies |= department
-		if(5)
-			req_console_assistance |= department
-			req_console_information |= department
-		if(6)
-			req_console_supplies |= department
-			req_console_information |= department
-		if(7)
-			req_console_assistance |= department
-			req_console_supplies |= department
-			req_console_information |= department
+	if (departmentType & RC_ASSIST)
+		req_console_assistance |= department
+	if (departmentType & RC_SUPPLY)
+		req_console_supplies |= department
+	if (departmentType & RC_INFO)
+		req_console_information |= department
 
 /obj/machinery/requests_console/Destroy()
 	allConsoles -= src
-	switch(departmentType)
-		if(1)
+	var/lastDeptRC = 1
+	for (var/obj/machinery/requests_console/Console in allConsoles)
+		if (Console.department == department)
+			lastDeptRC = 0
+			break
+	if(lastDeptRC)
+		if (departmentType & RC_ASSIST)
 			req_console_assistance -= department
-		if(2)
+		if (departmentType & RC_SUPPLY)
 			req_console_supplies -= department
-		if(3)
-			req_console_information -= department
-		if(4)
-			req_console_assistance -= department
-			req_console_supplies -= department
-		if(5)
-			req_console_assistance -= department
-			req_console_information -= department
-		if(6)
-			req_console_supplies -= department
-			req_console_information -= department
-		if(7)
-			req_console_assistance -= department
-			req_console_supplies -= department
+		if (departmentType & RC_INFO)
 			req_console_information -= department
 	..()
 
@@ -130,7 +104,7 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 	dat = text("<HEAD><TITLE>Requests Console</TITLE></HEAD><H3>[department] Requests Console</H3>")
 	if(!open)
 		switch(screen)
-			if(1)	//req. assistance
+			if(RCS_RQASSIST)	//req. assistance
 				dat += text("Which department do you need assistance from?<BR><BR>")
 				for(var/dpt in req_console_assistance)
 					if (dpt != department)
@@ -139,9 +113,9 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 //						if (hackState == 1)
 //							dat += text(" or <A href='?src=\ref[src];write=[ckey(dpt)];priority=3'>EXTREME</A>)")
 						dat += text(")<BR>")
-				dat += text("<BR><A href='?src=\ref[src];setScreen=0'>Back</A><BR>")
+				dat += text("<BR><A href='?src=\ref[src];setScreen=[RCS_MAINMENU]'>Back</A><BR>")
 
-			if(2)	//req. supplies
+			if(RCS_RQSUPPLY)	//req. supplies
 				dat += text("Which department do you need supplies from?<BR><BR>")
 				for(var/dpt in req_console_supplies)
 					if (dpt != department)
@@ -150,9 +124,9 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 //						if (hackState == 1)
 //							dat += text(" or <A href='?src=\ref[src];write=[ckey(dpt)];priority=3'>EXTREME</A>)")
 						dat += text(")<BR>")
-				dat += text("<BR><A href='?src=\ref[src];setScreen=0'>Back</A><BR>")
+				dat += text("<BR><A href='?src=\ref[src];setScreen=[RCS_MAINMENU]'>Back</A><BR>")
 
-			if(3)	//relay information
+			if(RCS_SENDINFO)	//relay information
 				dat += text("Which department would you like to send information to?<BR><BR>")
 				for(var/dpt in req_console_information)
 					if (dpt != department)
@@ -161,17 +135,17 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 //						if (hackState == 1)
 //							dat += text(" or <A href='?src=\ref[src];write=[ckey(dpt)];priority=3'>EXTREME</A>)")
 						dat += text(")<BR>")
-				dat += text("<BR><A href='?src=\ref[src];setScreen=0'>Back</A><BR>")
+				dat += text("<BR><A href='?src=\ref[src];setScreen=[RCS_MAINMENU]'>Back</A><BR>")
 
-			if(6)	//sent successfully
+			if(RCS_SENTPASS)	//sent successfully
 				dat += text("<FONT COLOR='GREEN'>Message sent</FONT><BR><BR>")
-				dat += text("<A href='?src=\ref[src];setScreen=0'>Continue</A><BR>")
+				dat += text("<A href='?src=\ref[src];setScreen=[RCS_MAINMENU]'>Continue</A><BR>")
 
-			if(7)	//unsuccessful; not sent
+			if(RCS_SENTFAIL)	//unsuccessful; not sent
 				dat += text("<FONT COLOR='RED'>An error occurred. </FONT><BR><BR>")
-				dat += text("<A href='?src=\ref[src];setScreen=0'>Continue</A><BR>")
+				dat += text("<A href='?src=\ref[src];setScreen=[RCS_MAINMENU]'>Continue</A><BR>")
 
-			if(8)	//view messages
+			if(RCS_VIEWMSGS)	//view messages
 				for (var/obj/machinery/requests_console/Console in allConsoles)
 					if (Console.department == department)
 						Console.newmessagepriority = 0
@@ -181,18 +155,18 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 				icon_state = "req_comp0"
 				for(var/msg in messages)
 					dat += text("[msg]<BR>")
-				dat += text("<A href='?src=\ref[src];setScreen=0'>Back to main menu</A><BR>")
+				dat += text("<A href='?src=\ref[src];setScreen=[RCS_MAINMENU]'>Back to main menu</A><BR>")
 
-			if(9)	//authentication before sending
+			if(RCS_MESSAUTH)	//authentication before sending
 				dat += text("<B>Message Authentication</B><BR><BR>")
 				dat += text("<b>Message for [dpt]: </b>[message]<BR><BR>")
 				dat += text("You may authenticate your message now by scanning your ID or your stamp<BR><BR>")
 				dat += text("Validated by: [msgVerified]<br>");
 				dat += text("Stamped by: [msgStamped]<br>");
 				dat += text("<A href='?src=\ref[src];department=[dpt]'>Send</A><BR>");
-				dat += text("<BR><A href='?src=\ref[src];setScreen=0'>Back</A><BR>")
+				dat += text("<BR><A href='?src=\ref[src];setScreen=[RCS_MAINMENU]'>Back</A><BR>")
 
-			if(10)	//send announcement
+			if(RCS_ANNOUNCE)	//send announcement
 				dat += text("<B>Station wide announcement</B><BR><BR>")
 				if(announceAuth)
 					dat += text("<b>Authentication accepted</b><BR><BR>")
@@ -201,22 +175,22 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 				dat += text("<b>Message: </b>[message] <A href='?src=\ref[src];writeAnnouncement=1'>Write</A><BR><BR>")
 				if (announceAuth && message)
 					dat += text("<A href='?src=\ref[src];sendAnnouncement=1'>Announce</A><BR>");
-				dat += text("<BR><A href='?src=\ref[src];setScreen=0'>Back</A><BR>")
+				dat += text("<BR><A href='?src=\ref[src];setScreen=[RCS_MAINMENU]'>Back</A><BR>")
 
 			else	//main menu
-				screen = 0
+				screen = RCS_MAINMENU
 				reset_announce()
 				if (newmessagepriority == 1)
 					dat += text("<FONT COLOR='RED'>There are new messages</FONT><BR>")
 				if (newmessagepriority == 2)
 					dat += text("<FONT COLOR='RED'><B>NEW PRIORITY MESSAGES</B></FONT><BR>")
-				dat += text("<A href='?src=\ref[src];setScreen=8'>View Messages</A><BR><BR>")
+				dat += text("<A href='?src=\ref[src];setScreen=[RCS_VIEWMSGS]'>View Messages</A><BR><BR>")
 
-				dat += text("<A href='?src=\ref[src];setScreen=1'>Request Assistance</A><BR>")
-				dat += text("<A href='?src=\ref[src];setScreen=2'>Request Supplies</A><BR>")
-				dat += text("<A href='?src=\ref[src];setScreen=3'>Relay Anonymous Information</A><BR><BR>")
+				dat += text("<A href='?src=\ref[src];setScreen=[RCS_RQASSIST]'>Request Assistance</A><BR>")
+				dat += text("<A href='?src=\ref[src];setScreen=[RCS_RQSUPPLY]'>Request Supplies</A><BR>")
+				dat += text("<A href='?src=\ref[src];setScreen=[RCS_SENDINFO]'>Relay Anonymous Information</A><BR><BR>")
 				if(announcementConsole)
-					dat += text("<A href='?src=\ref[src];setScreen=10'>Send station-wide announcement</A><BR><BR>")
+					dat += text("<A href='?src=\ref[src];setScreen=[RCS_ANNOUNCE]'>Send station-wide announcement</A><BR><BR>")
 				if (silent)
 					dat += text("Speaker <A href='?src=\ref[src];setSilent=0'>OFF</A>")
 				else
@@ -237,7 +211,7 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 		var/new_message = sanitize(input("Write your message:", "Awaiting Input", ""))
 		if(new_message)
 			message = new_message
-			screen = 9
+			screen = RCS_MESSAUTH
 			switch(href_list["priority"])
 				if("2")	priority = 2
 				else	priority = -1
@@ -245,7 +219,7 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 			dpt = "";
 			msgVerified = ""
 			msgStamped = ""
-			screen = 0
+			screen = RCS_MAINMENU
 			priority = -1
 
 	if(href_list["writeAnnouncement"])
@@ -257,107 +231,41 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 				else	priority = -1
 		else
 			reset_announce()
-			screen = 0
+			screen = RCS_MAINMENU
 
 	if(href_list["sendAnnouncement"])
 		if(!announcementConsole)	return
 		announcement.Announce(message, msg_sanitized = 1)
 		reset_announce()
-		screen = 0
+		screen = RCS_MAINMENU
 
 	if( href_list["department"] && message )
 		var/log_msg = message
-		var/sending = message
-		sending += "<br>"
-		if (msgVerified)
-			sending += msgVerified
-			sending += "<br>"
-		if (msgStamped)
-			sending += msgStamped
-			sending += "<br>"
-		screen = 7 //if it's successful, this will get overrwritten (7 = unsufccessfull, 6 = successfull)
-		if (sending)
-			var/pass = 0
-			for (var/obj/machinery/message_server/MS in world)
-				if(!MS.active) continue
-				MS.send_rc_message(href_list["department"],department,log_msg,msgStamped,msgVerified,priority)
-				pass = 1
-
-			if(pass)
-
-				for (var/obj/machinery/requests_console/Console in allConsoles)
-					if (ckey(Console.department) == ckey(href_list["department"]))
-
-						switch(priority)
-							if("2")		//High priority
-								if(Console.newmessagepriority < 2)
-									Console.newmessagepriority = 2
-									Console.icon_state = "req_comp2"
-								if(!Console.silent)
-									playsound(Console.loc, 'sound/machines/twobeep.ogg', 50, 1)
-									for (var/mob/O in hearers(5, Console.loc))
-										O.show_message(text("\icon[Console] *The Requests Console beeps: 'PRIORITY Alert in [department]'"))
-								Console.messages += "<B><FONT color='red'>High Priority message from <A href='?src=\ref[Console];write=[ckey(department)]'>[department]</A></FONT></B><BR>[sending]"
-
-		//					if("3")		//Not implemanted, but will be 		//Removed as it doesn't look like anybody intends on implimenting it ~Carn
-		//						if(Console.newmessagepriority < 3)
-		//							Console.newmessagepriority = 3
-		//							Console.icon_state = "req_comp3"
-		//						if(!Console.silent)
-		//							playsound(Console.loc, 'sound/machines/twobeep.ogg', 50, 1)
-		//							for (var/mob/O in hearers(7, Console.loc))
-		//								O.show_message(text("\icon[Console] *The Requests Console yells: 'EXTREME PRIORITY alert in [department]'"))
-		//						Console.messages += "<B><FONT color='red'>Extreme Priority message from [ckey(department)]</FONT></B><BR>[message]"
-
-							else		// Normal priority
-								if(Console.newmessagepriority < 1)
-									Console.newmessagepriority = 1
-									Console.icon_state = "req_comp1"
-								if(!Console.silent)
-									playsound(Console.loc, 'sound/machines/twobeep.ogg', 50, 1)
-									for (var/mob/O in hearers(4, Console.loc))
-										O.show_message(text("\icon[Console] *The Requests Console beeps: 'Message from [department]'"))
-								Console.messages += "<B>Message from <A href='?src=\ref[Console];write=[ckey(department)]'>[department]</A></FONT></B><BR>[message]"
-
-						screen = 6
-						Console.set_light(2)
-				messages += "<B>Message sent to [dpt]</B><BR>[message]"
-			else
-				for (var/mob/O in hearers(4, src.loc))
-					O.show_message(text("\icon[src] *The Requests Console beeps: 'NOTICE: No server detected!'"))
+		var/pass = 0
+		screen = RCS_SENTFAIL
+		for (var/obj/machinery/message_server/MS in world)
+			if(!MS.active) continue
+			MS.send_rc_message(href_list["department"],department,log_msg,msgStamped,msgVerified,priority)
+			pass = 1
+		if(pass)
+			screen = RCS_SENTPASS
+			messages += "<B>Message sent to [dpt]</B><BR>[message]"
+		else
+			audible_message(text("\icon[src] *The Requests Console beeps: 'NOTICE: No server detected!'"),,4)
 
 
 	//Handle screen switching
-	switch(text2num(href_list["setScreen"]))
-		if(null)	//skip
-		if(1)		//req. assistance
-			screen = 1
-		if(2)		//req. supplies
-			screen = 2
-		if(3)		//relay information
-			screen = 3
-//		if(4)		//write message
-//			screen = 4
-		if(5)		//choose priority
-			screen = 5
-		if(6)		//sent successfully
-			screen = 6
-		if(7)		//unsuccessfull; not sent
-			screen = 7
-		if(8)		//view messages
-			screen = 8
-		if(9)		//authentication
-			screen = 9
-		if(10)		//send announcement
-			if(!announcementConsole)	return
-			screen = 10
-		else		//main menu
+	var/tempScreen = text2num(href_list["setScreen"])
+	if(tempScreen)
+		if(tempScreen == RCS_ANNOUNCE && !announcementConsole)
+			return
+		if(tempScreen == RCS_MAINMENU)
 			dpt = ""
 			msgVerified = ""
 			msgStamped = ""
 			message = ""
 			priority = -1
-			screen = 0
+		screen = tempScreen
 
 	//Handle silencing the console
 	switch( href_list["setSilent"] )
@@ -393,21 +301,21 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 			user << "You can't do much with that."*/
 
 	if (istype(O, /obj/item/weapon/card/id))
-		if(screen == 9)
+		if(screen == RCS_MESSAUTH)
 			var/obj/item/weapon/card/id/T = O
 			msgVerified = text("<font color='green'><b>Verified by [T.registered_name] ([T.assignment])</b></font>")
 			updateUsrDialog()
-		if(screen == 10)
+		if(screen == RCS_ANNOUNCE)
 			var/obj/item/weapon/card/id/ID = O
 			if (access_RC_announce in ID.GetAccess())
 				announceAuth = 1
 				announcement.announcer = ID.assignment ? "[ID.assignment] [ID.registered_name]" : ID.registered_name
 			else
 				reset_announce()
-				user << "\red You are not authorized to send announcements."
+				user << "<span class='warning'> You are not authorized to send announcements.</span>"
 			updateUsrDialog()
 	if (istype(O, /obj/item/weapon/stamp))
-		if(screen == 9)
+		if(screen == RCS_MESSAUTH)
 			var/obj/item/weapon/stamp/T = O
 			msgStamped = text("<font color='blue'><b>Stamped with the [T.name]</b></font>")
 			updateUsrDialog()
@@ -417,3 +325,13 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 	announceAuth = 0
 	message = ""
 	announcement.announcer = ""
+
+#undef RCS_RQASSIST
+#undef RCS_RQSUPPLY
+#undef RCS_SENDINFO
+#undef RCS_SENTPASS
+#undef RCS_SENTFAIL
+#undef RCS_VIEWMSGS
+#undef RCS_MESSAUTH
+#undef RCS_ANNOUNCE
+#undef RCS_MAINMENU
