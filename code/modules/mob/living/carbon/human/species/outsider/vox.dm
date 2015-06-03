@@ -58,3 +58,45 @@
 	if(!H.mind || !H.mind.special_role) // Pariah check.
 		return 0
 	return ..()
+
+/datum/species/vox/armalis
+	name = "Vox Armalis"
+	name_plural = "Vox"
+	icobase = 'icons/mob/human_races/r_armalis.dmi'
+	deform = 'icons/mob/human_races/r_armalis.dmi'
+	rarity_value = 10
+	sizechange = 1
+
+	warning_low_pressure = 50
+	hazard_low_pressure = 0
+
+	cold_level_1 = 80
+	cold_level_2 = 50
+	cold_level_3 = 0
+
+	heat_level_1 = 2000
+	heat_level_2 = 3000
+	heat_level_3 = 4000
+
+	brute_mod = 0.2
+	burn_mod = 0.2
+
+	eyes = "blank_eyes"
+	breath_type = "nitrogen"
+	poison_type = "oxygen"
+
+	flags = NO_SCAN | NO_BLOOD | NO_PAIN
+
+	blood_color = "#2299FC"
+	flesh_color = "#808D11"
+
+	tail = "armalis_tail"
+	icon_template = 'icons/mob/human_races/r_armalis.dmi'
+
+	reagent_tag = IS_VOX
+
+	inherent_verbs = list(
+		/mob/living/carbon/human/proc/leap,
+		/mob/living/carbon/human/proc/gut,
+		/mob/living/carbon/human/proc/commune
+		)

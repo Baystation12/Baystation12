@@ -69,3 +69,33 @@
 /datum/unarmed_attack/slime_glomp/apply_effects()
 	//Todo, maybe have a chance of causing an electrical shock?
 	return
+
+/datum/unarmed_attack/claws_J
+	attack_verb = list("scratch", "claw")
+	attack_sound = 'sound/weapons/slice.ogg'
+	miss_sound = 'sound/weapons/slashmiss.ogg'
+	damage = 6
+	sharp = 1
+	edge = 1
+	shredding = 1
+
+/datum/unarmed_attack/alien
+	attack_verb = list("slash", "maul")
+	attack_sound = 'sound/weapons/slice.ogg'
+	miss_sound = 'sound/weapons/slashmiss.ogg'
+	damage = 8
+	sharp = 1
+	edge = 1
+	shredding = 1
+
+/datum/unarmed_attack/alien/drone
+	damage = 8
+
+/datum/unarmed_attack/alien/sentinel
+	damage = 10
+
+/datum/unarmed_attack/alien/hunter
+	damage = 13
+
+/datum/unarmed_attack/alien/queen
+	damage = 23

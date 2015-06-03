@@ -238,3 +238,56 @@
 		H.h_style = ""
 		spawn(100)
 			if(H) H.update_hair()
+
+/datum/species/Aviskree
+	name = "Aviskree"
+	icobase = 'icons/mob/human_races/r_Aviskree.dmi'
+	deform = 'icons/mob/human_races/r_def_Aviskree.dmi'
+	language = "Aviachirp"
+	tail = "aviskreetail"
+	unarmed_types = list(/datum/unarmed_attack/claws, /datum/unarmed_attack/bite/strong)
+	primitive = /mob/living/carbon/monkey/aviskree
+	wingicon = 1
+	sizechange = 1
+	falldmg = 1
+
+	flags = CAN_JOIN | IS_WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR
+
+/datum/species/avisaran
+	name = "Avisaran"
+	icobase = 'icons/mob/human_races/r_Avisaran.dmi'
+	deform = 'icons/mob/human_races/r_def_Avisaran.dmi'
+	language = "Siik'tajr"
+	tail = "Avisaran"
+	unarmed_types = list(/datum/unarmed_attack/claws_J)
+	darksight = 25
+	dhts = 1
+	wingicon = 1
+	sizechange = 1
+	falldmg = 1
+
+	cold_level_1 = 200 //Default 260
+	cold_level_2 = 140 //Default 200
+	cold_level_3 = 80 //Default 120
+
+	heat_level_1 = 330 //Default 360
+	heat_level_2 = 380 //Default 400
+	heat_level_3 = 800 //Default 1000
+
+	flags = HAS_LIPS | HAS_UNDERWEAR | IS_STRONG
+
+	flesh_color = "#BCBCBC"
+
+/datum/species/kidan
+	name = "Kidan"
+	name_plural = "kidan"
+	icobase = 'icons/mob/human_races/r_kidan.dmi'
+	deform = 'icons/mob/human_races/r_def_kidan.dmi'
+	eyes = "kidan_eyes_s"
+	language = "Chittin"
+	unarmed_types = list(/datum/unarmed_attack/claws)
+
+	flags = CAN_JOIN | IS_WHITELISTED | HAS_UNDERWEAR | IS_STRONG
+
+	blood_color = "#328332"
+	flesh_color = "#8C4600"
