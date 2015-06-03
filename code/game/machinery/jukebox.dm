@@ -191,7 +191,6 @@ datum/track/New(var/title_name, var/audio)
 	for(var/mob/living/M in mobs_in_area(A))
 		M << sound(null, channel = 1)
 
-	A.forced_ambience = null
 	playing = 0
 	update_use_power(1)
 	update_icon()
@@ -203,7 +202,7 @@ datum/track/New(var/title_name, var/audio)
 		return
 
 	var/area/A = get_area(src)
-	A.forced_ambience = sound(current_track.sound, channel = 1, repeat = 1, volume = 25)
+	//A.forced_ambience = sound(current_track.sound, channel = 1, repeat = 1, volume = 25)
 
 	for(var/mob/living/M in mobs_in_area(A))
 		if(M.mind)

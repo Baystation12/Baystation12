@@ -61,8 +61,8 @@
 /datum/organ/external/proc/emp_act(severity)
 	if(!(status & ORGAN_ROBOT))	//meatbags do not care about EMP
 		return
-	if(istype(owner.wear_suit, /obj/item/clothing/suit/space/rig/machine) && body_part!=HEAD)
-		return
+//	if(istype(owner.wear_suit, /obj/item/clothing/suit/space/rig/machine) && body_part!=HEAD)
+//		return
 	else if (istype(owner.head, /obj/item/clothing/head/helmet/space/rig/machine) && body_part==HEAD)
 		return
 	var/probability = 30

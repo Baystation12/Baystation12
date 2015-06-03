@@ -307,6 +307,7 @@
 #include "code\game\gamemodes\events\dust.dm"
 #include "code\game\gamemodes\events\miniblob.dm"
 #include "code\game\gamemodes\events\power_failure.dm"
+#include "code\game\gamemodes\events\space_ninja.dm"
 #include "code\game\gamemodes\events\wormholes.dm"
 #include "code\game\gamemodes\events\holidays\Christmas.dm"
 #include "code\game\gamemodes\events\holidays\Holidays.dm"

@@ -102,9 +102,6 @@ var/list/ghostteleportlocs = list()
 	power_environ = 0
 	ambience = list('sound/ambience/ambispace.ogg','sound/music/title2.ogg','sound/music/space.ogg','sound/music/main.ogg','sound/music/traitor.ogg')
 
-/area/space/firealert()
-	return
-
 /area/space/readyalert()
 	return
 

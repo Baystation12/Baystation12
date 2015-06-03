@@ -555,7 +555,7 @@
 #define R_HOST			65536
 #define R_MAXPERMISSION 65536 //This holds the maximum value for a permission. It is used in iteration, so keep it updated.
 // Preference toggles.
-#define SOUND_ADMINHELP 1
+#define SOUND_ADMINHELP (1<<0)
 #define SOUND_MIDI      2
 #define SOUND_AMBIENCE  4
 #define SOUND_LOBBY     8
@@ -572,7 +572,7 @@
 #define SHOW_TYPING		16384
 #define CHAT_DEVSAY		32768
 #define SHOW_SHUTTERLOGS 65536
-//#define CHAT_NOICONS    32768
+#define CHAT_NOICONS    131072
 #define TOGGLES_DEFAULT (SOUND_ADMINHELP|SOUND_MIDI|SOUND_AMBIENCE|SOUND_LOBBY|CHAT_OOC|CHAT_DEAD|CHAT_GHOSTEARS|CHAT_GHOSTSIGHT|CHAT_PRAYER|CHAT_RADIO|CHAT_ATTACKLOGS|CHAT_LOOC|CHAT_DEVSAY)
 
 #define BE_TRAITOR    1
@@ -669,6 +669,8 @@ var/list/be_special_flags = list(
 #define HAS_EYE_COLOR  8192  // Eye colour selectable in chargen. (RGB)
 #define CAN_JOIN       16384 // Species is selectable in chargen.
 #define IS_RESTRICTED  32768 // Is not a core/normally playable species. (castes, mutantraces)
+#define GENDERLESS     65536
+#define IS_STRONG	   131072
 
 // Language flags.
 #define WHITELISTED 1   // Language is available if the speaker is whitelisted.

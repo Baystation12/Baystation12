@@ -92,8 +92,8 @@
 	else
 		user.visible_message("[user] begins to play a game")
 
-/obj/machinery/virtualgameboard/attack_paw(mob/user as mob)
-	return src.attack_hand(user)
+///obj/machinery/virtualgameboard/attack_paw(mob/user as mob)
+//	return src.attack_hand(user)
 
 /obj/machinery/virtualgameboard/attack_ghost(mob/dead/observer/user as mob)
 	return src.attack_hand(user)

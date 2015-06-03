@@ -855,8 +855,10 @@ var/global/floorIsLava = 0
 /datum/admins/proc/toggleoocdead()
 	set category = "Server"
 	set desc="Toggle Dead OOC."
-	log_admin_single("[key_name(usr)] toggled OOC.")
 	set name="Toggle Dead OOC"
+
+	log_admin_single("[key_name(usr)] toggled OOC.")
+
 	config.dooc_allowed = !( config.dooc_allowed )
 	log_admin("[key_name(usr)] toggled Dead OOC.")
 	message_admins("[key_name_admin(usr)] toggled Dead OOC.", 1)
@@ -943,17 +945,16 @@ var/global/floorIsLava = 0
 	log_admin_single("[key_name(usr)] toggled Aliens to [aliens_allowed].")
 	message_admins("[key_name_admin(usr)] toggled Aliens [config.aliens_allowed ? "on" : "off"].", 1)
 	feedback_add_details("admin_verb","TA") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-/*
+
 /datum/admins/proc/toggle_space_ninja()
 	set category = "Server"
 	set desc="Toggle space ninjas spawning."
 	set name="Toggle Space Ninjas"
 	config.ninjas_allowed = !config.ninjas_allowed
 	log_admin("[key_name(usr)] toggled Space Ninjas to [config.ninjas_allowed].")
-	log_admin_single("[key_name(usr)] toggled Space Ninjas to [toggle_space_ninja].")
 	message_admins("[key_name_admin(usr)] toggled Space Ninjas [config.ninjas_allowed ? "on" : "off"].", 1)
 	feedback_add_details("admin_verb","TSN") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-*/
+
 /datum/admins/proc/delay()
 	set category = "Server"
 	set desc="Delay the game start/end"
