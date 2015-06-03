@@ -389,7 +389,7 @@
 	if(!M) return
 
 	if(M.current.vampire_power(30, 0))
-		if(M.current.buckled) M.current.buckled.unbuckle()
+
 		spawn(0)
 			var/originalloc = get_turf(M.current.loc)
 			var/obj/effect/dummy/spell_jaunt/holder = new /obj/effect/dummy/spell_jaunt( originalloc )

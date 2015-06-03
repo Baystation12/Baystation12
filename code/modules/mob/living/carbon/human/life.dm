@@ -96,7 +96,7 @@
 
 		//Check if we're on fire
 		//handle_fire()
-		
+
 		//stuff in the stomach
 		handle_stomach()
 
@@ -795,7 +795,7 @@
 	*/
 
 	proc/stabilize_body_temperature()
-		if (species.flags & IS_SYNTHETIC && !istype(wear_suit, /obj/item/clothing/suit/space/rig/machine)) // Assuming they're not wearing my new sexy hardsuit.
+		if (species.flags & IS_SYNTHETIC && !istype(wear_suit, /obj/item/clothing/suit/space/void/machine)) // Assuming they're not wearing my new sexy hardsuit.
 			bodytemperature += species.synth_temp_gain		//just keep putting out heat.
 			if(nutrition>=0.05)
 				nutrition -= 0.05 // Mmm, Muh power.

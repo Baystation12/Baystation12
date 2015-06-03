@@ -976,6 +976,7 @@
 #include "code\modules\clothing\spacesuits\rig\suits\light.dm"
 #include "code\modules\clothing\spacesuits\rig\suits\merc.dm"
 #include "code\modules\clothing\spacesuits\rig\suits\station.dm"
+#include "code\modules\clothing\spacesuits\void\custom.dm"
 #include "code\modules\clothing\spacesuits\void\merc.dm"
 #include "code\modules\clothing\spacesuits\void\station.dm"
 #include "code\modules\clothing\spacesuits\void\void.dm"

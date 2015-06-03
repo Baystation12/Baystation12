@@ -66,8 +66,7 @@
 
 /obj/item/clothing/head/chameleon/New()
 	..()
-	var/blocked = list(/obj/item/clothing/head/chameleon,
-			/obj/item/clothing/head/space/golem, /obj/item/clothing/head/justice,/obj/item/clothing/head/helmet/space/rig/syndi/Jamie,)//Prevent infinite loops and bad hats.
+	var/blocked = list(/obj/item/clothing/head/chameleon,/obj/item/clothing/head/justice,/obj/item/clothing/head/helmet/space/void/merc/Jamie,)//Prevent infinite loops and bad hats.
 	for(var/U in typesof(/obj/item/clothing/head)-blocked)
 		var/obj/item/clothing/head/V = new U
 		src.clothing_choices[V.name] = U
@@ -119,7 +118,7 @@
 /obj/item/clothing/suit/chameleon/New()
 	..()
 	var/blocked = list(/obj/item/clothing/suit/chameleon, /obj/item/clothing/suit/space/space_ninja,
-			/obj/item/clothing/suit/greatcoat, /obj/item/clothing/suit/space/rig/syndi/Jamie)//Prevent infinite loops and bad suits.
+			/obj/item/clothing/suit/greatcoat, /obj/item/clothing/suit/space/void/merc/Jamie)//Prevent infinite loops and bad suits.
 	for(var/U in typesof(/obj/item/clothing/suit)-blocked)
 		var/obj/item/clothing/suit/V = new U
 		src.clothing_choices[V.name] = U

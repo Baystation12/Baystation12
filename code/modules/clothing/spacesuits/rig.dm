@@ -396,7 +396,7 @@
 	species_restricted = list("exclude","Unathi","Tajara","Skrell","Vox")
 
 //Custom Race Hardsuit
-/obj/item/clothing/head/helmet/space/rig/syndi/Jamie
+/obj/item/clothing/head/helmet/space/void/merc/Jamie
 	name = "Jamie's Helmet"
 	desc = "A special helmet that protects against hazardous, low pressure environments. Has radiation shielding. This one doesn't look like it was made for humans, it has the words Jamie scratched on the back."
 	icon_state = "rig0-jamie"
@@ -406,7 +406,7 @@
 	armor = list(melee = 40, bullet = 5, laser = 20,energy = 5, bomb = 35, bio = 100, rad = 80)
 	species_restricted = list("Avisaran")
 
-/obj/item/clothing/suit/space/rig/syndi/Jamie
+/obj/item/clothing/suit/space/void/merc/Jamie
 	name = "Jamie's Hardsuit"
 	desc = "A special suit that protects against hazardous, low pressure environments. Has radiation shielding. This one doesn't look like it was made for humans, it has the words Jamie scratched on the back. It has two large slits for wings to be put through."
 	icon_state = "rig-jamie"
@@ -506,17 +506,17 @@
 	species_restricted = list("Machine")
 	slowdown = 1
 
-/obj/item/clothing/head/helmet/space/rig/machine/blue
+/obj/item/clothing/head/helmet/space/void/machineblue
 	icon_state = "rig0-ipcblue"  //Sprites by Miss Teddybears
 	item_state = "rig0-ipcblue"
 	item_color = "ipcblue"
 
-/obj/item/clothing/head/helmet/space/rig/machine/syndie
+/obj/item/clothing/head/helmet/space/void/machinesyndie
 	icon_state = "rig0-ipcsyndie"  //Sprites by Miss Teddybears, Modified by 5crownix
 	item_state = "rig0-ipcsyndie"
 	item_color = "ipcsyndie"
 
-/obj/item/clothing/head/helmet/space/rig/machine/miner
+/obj/item/clothing/head/helmet/space/void/machineminer
 	icon_state = "rig0-ipcminer"  //Sprites by Miss Teddybears, Modified by 5crownix
 	item_state = "rig0-ipcminer"
 	item_color = "ipcminer"
@@ -531,14 +531,14 @@
 	species_restricted = list("Machine")
 	slowdown = 1
 
-/obj/item/clothing/suit/space/rig/machine/blue
+/obj/item/clothing/suit/space/void/machineblue
 	icon_state = "rig-ipcblue"  //Sprites by Miss Teddybears
 	item_state = "rig-ipcblue"
 
-/obj/item/clothing/suit/space/rig/machine/syndie
+/obj/item/clothing/suit/space/void/machinesyndie
 	icon_state = "rig-ipcsyndie"  //Sprites by Miss Teddybears, Modified by 5crownix
 	item_state = "rig-ipcsyndie"
 
-/obj/item/clothing/suit/space/rig/machine/miner
+/obj/item/clothing/suit/space/void/machineminer
 	icon_state = "rig-ipcminer"  //Sprites by Miss Teddybears, Modified by 5crownix
 	item_state = "rig-ipcminer"

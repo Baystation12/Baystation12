@@ -63,7 +63,7 @@
 		return
 //	if(istype(owner.wear_suit, /obj/item/clothing/suit/space/rig/machine) && body_part!=HEAD)
 //		return
-	else if (istype(owner.head, /obj/item/clothing/head/helmet/space/rig/machine) && body_part==HEAD)
+	else if (istype(owner.head, /obj/item/clothing/head/helmet/space/void/machine) && body_part==HEAD)
 		return
 	var/probability = 30
 	var/damage = 15
