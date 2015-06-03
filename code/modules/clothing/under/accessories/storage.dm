@@ -84,4 +84,4 @@
 	/obj/item/weapon/kitchenknife/ritual)
 
 	new /obj/item/weapon/hatchet/unathiknife(hold)
-	new /obj/item/weapon/hatchet/unathiknife(hold)
+

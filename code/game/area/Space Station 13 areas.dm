@@ -1191,6 +1191,10 @@ var/list/ghostteleportlocs = list()
 		name = "Engineering"
 		icon_state = "engine_smes"
 
+	generators
+		name = "Engineering Generators"
+		icon_state = "engine_smes"
+
 	engineering_foyer
 		name = "Engineering Foyer"
 		icon_state = "engine"
@@ -1222,8 +1226,15 @@ var/list/ghostteleportlocs = list()
 	locker_room
 		name = "Engineering Locker Room"
 		icon_state = "engine_storage"
-
-
+	guard
+		name = "Engineering Guard Outpost"
+		icon_state = "engine_storage"
+	storage
+		name = "Engineering Storage"
+		icon_state = "engine_storage"
+	storage_hard
+		name = "Engineering Hard Storage"
+		icon_state = "engine_storage"
 //Solars
 
 /area/solar
