@@ -186,7 +186,7 @@
 					if((head && (head.flags & HEADCOVERSMOUTH)) || (wear_mask && (wear_mask.flags & MASKCOVERSMOUTH)))
 						M << "\red Remove their mask!"
 						return 0
-					if((M.head && (M.head.flags & HEADCOVERSMOUTH)) || (M.wear_mask && (M.wear_mask.flags & MASKCOVERSMOUTH)))
+					if((H.head && (H.head.flags & HEADCOVERSMOUTH)) || (M.wear_mask && (M.wear_mask.flags & MASKCOVERSMOUTH)))
 						M << "\red Remove your mask!"
 						return 0
 					if(mind && mind.vampire && (mind in ticker.mode.vampires))

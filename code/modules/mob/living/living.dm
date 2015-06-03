@@ -324,7 +324,7 @@
 			human_mob.mutations.Remove(HUSK)
 			human_mob.status_flags |= DISFIGURED
 			human_mob.mutations.Remove(NOCLONE)
-			human_mob.update_mutantrace()
+			human_mob.regenerate_icons()
 			human_mob.UpdateAppearance()
 			human_mob.update_body(0)
 			human_mob.dna.ready_dna(human_mob)

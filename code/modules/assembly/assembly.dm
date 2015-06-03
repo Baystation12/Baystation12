@@ -64,18 +64,13 @@
 			activate()
 		return 1
 
-
 	pulse(var/radio = 0)
-		if(istype(src.loc, /obj/machinery/door/airlock) && src.airlock_wire && src.wires)
-			var/obj/machinery/door/airlock/A = src.loc
-			A.pulse(src.airlock_wire)
-		else
-			if(holder && (wires & WIRE_PULSE))
-				holder.process_activation(src, 1, 0)
-			if(holder && (wires & WIRE_PULSE_SPECIAL))
-				holder.process_activation(src, 0, 1)
-	//		if(radio && (wires & WIRE_RADIO_PULSE))
-				//Not sure what goes here quite yet send signal?
+		if(holder && (wires & WIRE_PULSE))
+			holder.process_activation(src, 1, 0)
+		if(holder && (wires & WIRE_PULSE_SPECIAL))
+			holder.process_activation(src, 0, 1)
+//		if(radio && (wires & WIRE_RADIO_PULSE))
+			//Not sure what goes here quite yet send signal?
 		return 1
 
 

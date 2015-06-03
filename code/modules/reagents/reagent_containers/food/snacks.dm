@@ -2926,7 +2926,7 @@
 		reagents.add_reagent("protein", 3)
 		reagents.add_reagent("nutriment", 4)
 
-	attackby(obj/item/weapon/reagent_containers/food/snacks/grown/chili/W as obj, mob/user as mob)
+	attackby(obj/item/weapon/reagent_containers/food/snacks/hotchili/W as obj, mob/user as mob)
 		if(istype(W))
 			new /obj/item/weapon/reagent_containers/food/snacks/flamintaco(src)
 			user << "You add chili to the Taco. It catches fire!"

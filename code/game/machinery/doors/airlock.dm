@@ -684,10 +684,10 @@ About the new airlock wires panel:
 		return 0
 	return 1
 
-/obj/machinery/door/airlock/hear_talk(mob/M, var/msg)
+/*/obj/machinery/door/airlock/hear_talk(mob/M, var/msg)
 	for (var/obj/item/device/assembly/R in src.signalers)
 		R.hear_talk(M, msg)
-	..()
+	..()*/
 
 /obj/machinery/door/airlock/Topic(href, href_list, var/nowindow = 0)
 	if(..())

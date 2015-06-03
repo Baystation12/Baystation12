@@ -214,7 +214,7 @@ emp_act
 				return 0
 			else
 				user << "That won't fit there!"
-		else if (istype(I, /obj/item/weapon/organ/head/posi) && species.flags & IS_SYNTHETIC)
+	/*	else if (istype(I, /obj/item/weapon/organ/head/posi) && species.flags & IS_SYNTHETIC)
 			var/datum/organ/external/affected = get_organ(target_zone)
 			user.visible_message("\blue [user] has attached a head to [src]'s body.",	\
 			"\blue You have attached a head to [src]'s body.")
@@ -233,7 +233,7 @@ emp_act
 			del(B)
 			UpdateAppearance()
 			handle_organs(1)
-			return
+			return*/
 		else
 			user << "What [affecting.display_name]?"
 			return 0
@@ -432,13 +432,13 @@ emp_act
 			var/obj/item/I = O
 			mass = I.w_class/THROWNOBJ_KNOCKBACK_DIVISOR
 		var/momentum = speed*mass
-		
+
 		if(O.throw_source && momentum >= THROWNOBJ_KNOCKBACK_SPEED)
 			var/dir = get_dir(O.throw_source, src)
 
 			visible_message("\red [src] staggers under the impact!","\red You stagger under the impact!")
 			src.throw_at(get_edge_target_turf(src,dir),1,momentum)
-			
+
 			if(!O || !src) return
 
 			if(O.loc == src && O.sharp) //Projectile is embedded and suitable for pinning.
@@ -452,7 +452,7 @@ emp_act
 
 /mob/living/carbon/human/embed(var/obj/O, var/def_zone=null)
 	if(!def_zone) ..()
-	
+
 	var/datum/organ/external/affecting = get_organ(def_zone)
 	if(affecting)
 		affecting.embed(O)

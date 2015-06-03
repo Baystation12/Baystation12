@@ -58,18 +58,3 @@
 
 /obj/structure/stool/bed/chair/bench/MouseDrop(atom/over_object)
 	return
-
-/obj/structure/stool/bed/chair/bench/handle_rotation()
-	if(src.dir == (NORTH))
-		src.layer = FLY_LAYER
-	else if(src.dir == (NORTHEAST))
-		src.layer = FLY_LAYER
-	else if(src.dir == (NORTHWEST))
-		src.layer = FLY_LAYER
-	else
-		src.layer = OBJ_LAYER
-	if(buckled_mob)
-		if(src.layer == FLY_LAYER)
-			buckled_mob.dir = NORTH
-		else
-			buckled_mob.dir = SOUTH
