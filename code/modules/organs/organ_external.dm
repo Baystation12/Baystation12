@@ -877,11 +877,14 @@ Note that amputating the affected organ does in fact remove the infection from t
 	dislocated = -1 //TODO, make robotic limbs a separate type, remove snowflake
 	cannot_break = 1
 	get_icon()
+	unmutate()
 	for (var/obj/item/organ/external/T in children)
 		if(T)
 			T.robotize()
 
 /obj/item/organ/external/proc/mutate()
+	if(src.status & ORGAN_ROBOT)
+		return
 	src.status |= ORGAN_MUTATED
 	owner.update_body()
 
