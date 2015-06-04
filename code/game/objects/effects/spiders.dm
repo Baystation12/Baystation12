@@ -80,6 +80,10 @@
 		pixel_y = rand(3,-3)
 		processing_objects |= src
 
+/obj/effect/spider/eggcluster/New(var/location, var/atom/parent)
+	get_light_and_color(parent)
+	..()
+
 /obj/effect/spider/eggcluster/Destroy()
 	processing_objects -= src
 	if(istype(loc, /obj/item/organ/external))
@@ -97,11 +101,9 @@
 			O = loc
 
 		for(var/i=0, i<num, i++)
-			var/obj/effect/spider/spiderling/spiderling = new(src.loc)
+			var/spiderling = PoolOrNew(/obj/effect/spider/spiderling, list(src.loc, src))
 			if(O)
 				O.implants += spiderling
-			spiderling.color = color
-			spiderling.set_light(light_range, light_power, light_color)
 		qdel(src)
 
 /obj/effect/spider/spiderling
@@ -115,13 +117,20 @@
 	var/amount_grown = -1
 	var/obj/machinery/atmospherics/unary/vent_pump/entry_vent
 	var/travelling_in_vent = 0
-	New()
-		pixel_x = rand(6,-6)
-		pixel_y = rand(6,-6)
-		processing_objects.Add(src)
-		//50% chance to grow up
-		if(prob(50))
-			amount_grown = 1
+
+/obj/effect/spider/spiderling/New(var/location, var/atom/parent)
+	pixel_x = rand(6,-6)
+	pixel_y = rand(6,-6)
+	processing_objects |= src
+	//50% chance to grow up
+	if(prob(50))
+		amount_grown = 1
+	get_light_and_color(parent)
+	..()
+
+/obj/effect/spider/spiderling/Destroy()
+	processing_objects -= src
+	..()
 
 /obj/effect/spider/spiderling/Bump(atom/user)
 	if(istype(user, /obj/structure/table))
@@ -182,7 +191,8 @@
 			else
 				entry_vent = null
 	//=================
-	else if(isturf(loc))
+
+	if(isturf(loc))
 		if(prob(25))
 			var/list/nearby = trange(5, src) - loc
 			if(nearby.len)
@@ -200,9 +210,7 @@
 
 		if(amount_grown >= 100)
 			var/spawn_type = pick(typesof(/mob/living/simple_animal/hostile/giant_spider))
-			var/mob/spiderspawn = new spawn_type(src.loc)
-			spiderspawn.color = color
-			spiderspawn.set_light(light_range, light_power, light_color)
+			new spawn_type(src.loc, src)
 			qdel(src)
 	else if(isorgan(loc))
 		if(!amount_grown) amount_grown = 1
