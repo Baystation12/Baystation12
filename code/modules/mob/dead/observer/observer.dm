@@ -670,6 +670,12 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 			client.images -= ghostimage //remove ourself
 
 mob/dead/observer/MayRespawn(var/feedback = 0)
+	if(!client || !mind)
+		return 0
+	if(mind.current && mind.current.stat != DEAD)
+		if(feedback)
+			src << "<span class='warning'>Your non-dead body prevent you from respawning.</span>"
+		return 0
 	if(config.antag_hud_restricted && has_enabled_antagHUD == 1)
 		if(feedback)
 			src << "<span class='warning'>antagHUD restrictions prevent you from respawning.</span>"

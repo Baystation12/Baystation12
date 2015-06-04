@@ -1,7 +1,0 @@
-author: Techhead
-delete-after: True
-
-changes:
-  - rscadd: "Prison break event has been expanded to include Virology or Xenobiology"
-  - rscadd: "Prison break event will warn Enginering and the AI beforehand so they can take preventive measures."
-  - bugfix: "Disabling area power will now prevent doors from opening during the event"

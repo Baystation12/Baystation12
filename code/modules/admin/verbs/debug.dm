@@ -516,12 +516,13 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	for(var/areatype in areas_without_camera)
 		world << "* [areatype]"
 
-/client/proc/cmd_admin_dress(var/mob/living/carbon/human/M in mob_list)
+/client/proc/cmd_admin_dress()
 	set category = "Fun"
 	set name = "Select equipment"
-	if(!ishuman(M))
-		alert("Invalid mob")
-		return
+
+	var/mob/living/carbon/human/M = input("Select mob.", "Select equipment.") as null|anything in human_mob_list
+	if(!M) return
+
 	//log_admin("[key_name(src)] has alienized [M.key].")
 	var/list/dresspacks = list(
 		"strip",
