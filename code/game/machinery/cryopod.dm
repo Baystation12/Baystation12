@@ -393,9 +393,9 @@
 	occupant.ckey = null
 
 	//Make an announcement and log the person entering storage.
-	control_computer.frozen_crew += "[occupant.real_name]"
+	control_computer.frozen_crew += "[occupant.real_name], [occupant.mind.assigned_role] - [worldtime2text()]"
 
-	announce.autosay("[occupant.real_name] [on_store_message]", "[on_store_name]")
+	announce.autosay("[occupant.real_name], [occupant.mind.assigned_role] [on_store_message]", "[on_store_name]")
 	visible_message("<span class='notice'>\The [initial(name)] hums and hisses as it moves [occupant.real_name] into storage.</span>", 3)
 
 	// Delete the mob.
