@@ -80,7 +80,10 @@
 		if(prob(poison_per_bite))
 			var/obj/item/organ/external/O = pick(H.organs)
 			if(!(O.status & ORGAN_ROBOT))
-				O.implants += new/obj/effect/spider/eggcluster(O)
+				var/obj/effect/spider/eggcluster/eggs = new(O)
+				eggs.color = color
+				eggs.set_light(light_range, light_power, light_color)
+				O.implants += eggs
 
 /mob/living/simple_animal/hostile/giant_spider/Life()
 	..()
@@ -144,7 +147,9 @@
 							if(busy == LAYING_EGGS)
 								E = locate() in get_turf(src)
 								if(!E)
-									new /obj/effect/spider/eggcluster(src.loc)
+									var/obj/effect/spider/eggcluster/eggs = new(src.loc)
+									eggs.color = color
+									eggs.set_light(light_range, light_power, light_color)
 									fed--
 								busy = 0
 								stop_automated_movement = 0
