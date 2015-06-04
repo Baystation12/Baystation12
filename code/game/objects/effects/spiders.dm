@@ -79,13 +79,19 @@
 		pixel_x = rand(3,-3)
 		pixel_y = rand(3,-3)
 		processing_objects.Add(src)
+		
+/obj/effect/spider/eggcluster/Destroy()
+	processing_objects.Remove(src)
+	..()
 
 /obj/effect/spider/eggcluster/process()
 	amount_grown += rand(0,2)
 	if(amount_grown >= 100)
 		var/num = rand(6,24)
 		for(var/i=0, i<num, i++)
-			new /obj/effect/spider/spiderling(src.loc)
+			var/obj/effect/spider/spiderling/spiderling = new(src.loc)
+			spiderling.color = color
+			spiderling.set_light(light_range, light_power, light_color)
 		qdel(src)
 
 /obj/effect/spider/spiderling
@@ -187,7 +193,9 @@
 		amount_grown += rand(0,2)
 		if(amount_grown >= 100)
 			var/spawn_type = pick(typesof(/mob/living/simple_animal/hostile/giant_spider))
-			new spawn_type(src.loc)
+			var/mob/spiderspawn = new spawn_type(src.loc)
+			spiderspawn.color = color
+			spiderspawn.set_light(light_range, light_power, light_color)
 			qdel(src)
 
 /obj/effect/decal/cleanable/spiderling_remains
