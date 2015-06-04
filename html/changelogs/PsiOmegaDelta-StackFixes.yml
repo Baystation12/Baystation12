@@ -1,0 +1,6 @@
+author: PsiOmegaDelta
+delete-after: True
+
+changes: 
+  - bugfix: "Split stacks no longer lose their coloring."
+  - tweak: "Can no longer merge cables of different colors."
