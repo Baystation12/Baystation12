@@ -31,8 +31,15 @@
 
 /atom/movable/Destroy()
 	. = ..()
-
+	if(reagents)
+		qdel(reagents)
+	for(var/atom/movable/AM in contents)
+		qdel(AM)
 	loc = null
+	if (pulledby)
+		if (pulledby.pulling == src)
+			pulledby.pulling = null
+		pulledby = null
 
 /atom/movable/proc/initialize()
 	return
