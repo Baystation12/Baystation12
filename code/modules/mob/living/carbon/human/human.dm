@@ -172,7 +172,7 @@
 /mob/living/carbon/human/blob_act()
 	if(stat == 2)	return
 	show_message("\red The blob attacks you!")
-	var/dam_zone = pick("chest", "l_hand", "r_hand", "l_leg", "r_leg")
+	var/dam_zone = pick(organs_by_name)
 	var/obj/item/organ/external/affecting = get_organ(ran_zone(dam_zone))
 	apply_damage(rand(30,40), BRUTE, affecting, run_armor_check(affecting, "melee"))
 	return
