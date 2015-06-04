@@ -1236,7 +1236,7 @@ var/global/floorIsLava = 0
 	if(!ai_number)
 		usr << "<b>No AIs located</b>" //Just so you know the thing is actually working and not just ignoring you.
 
-/datum/admins/proc/show_skills(var/mob/living/carbon/human/M as mob in world)
+/datum/admins/proc/show_skills()
 	set category = "Admin"
 	set name = "Show Skills"
 
@@ -1245,6 +1245,9 @@ var/global/floorIsLava = 0
 	if (!istype(src,/datum/admins))
 		usr << "Error: you are not an admin!"
 		return
+
+	var/mob/living/carbon/human/M = input("Select mob.", "Select mob.") as null|anything in human_mob_list
+	if(!M) return
 
 	show_skill_window(usr, M)
 
