@@ -132,11 +132,6 @@
 #define CUSTOM_ITEM_SYNTH 'icons/mob/custom_synthetic.dmi'
 #endif
 
-// Metal sheets, glass sheets, and rod stacks.
-#define MAX_STACK_AMOUNT_METAL 50
-#define MAX_STACK_AMOUNT_GLASS 50
-#define MAX_STACK_AMOUNT_RODS  60
-
 #define WALL_CAN_OPEN 1
 #define WALL_OPENING 2
 

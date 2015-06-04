@@ -472,16 +472,6 @@ Turf and target are seperate in case you want to teleport some distance from a t
 //		mob_list.Add(M)
 	return moblist
 
-//E = MC^2
-/proc/convert2energy(var/M)
-	var/E = M*(SPEED_OF_LIGHT_SQ)
-	return E
-
-//M = E/C^2
-/proc/convert2mass(var/E)
-	var/M = E/(SPEED_OF_LIGHT_SQ)
-	return M
-
 //Forces a variable to be posative
 /proc/modulus(var/M)
 	if(M >= 0)

@@ -1,7 +1,5 @@
 // Math constants.
-#define M_E     2.71828183
 #define M_PI    3.14159265
-#define M_SQRT2 1.41421356
 
 #define R_IDEAL_GAS_EQUATION       8.31    // kPa*L/(K*mol).
 #define ONE_ATMOSPHERE             101.325 // kPa.

@@ -27,7 +27,6 @@
 #include "code\__defines\misc.dm"
 #include "code\__defines\mobs.dm"
 #include "code\__defines\research.dm"
-#include "code\__defines\species.dm"
 #include "code\__defines\species_languages.dm"
 #include "code\_helpers\datum_pool.dm"
 #include "code\_helpers\files.dm"
@@ -1749,4 +1748,9 @@
 #include "interface\interface.dm"
 #include "interface\skin.dmf"
 #include "maps\exodus-1.dmm"
+#include "maps\exodus-2.dmm"
+#include "maps\exodus-3.dmm"
+#include "maps\exodus-4.dmm"
+#include "maps\exodus-5.dmm"
+#include "maps\exodus-6.dmm"
 // END_INCLUDE

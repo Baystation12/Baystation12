@@ -84,6 +84,3 @@
 //Flags for zone sleeping
 #define ZONE_ACTIVE   1
 #define ZONE_SLEEPING 0
-
-#define SPEED_OF_LIGHT       3e8    // Approximate.
-#define SPEED_OF_LIGHT_SQ    9e16
