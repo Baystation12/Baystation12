@@ -73,9 +73,7 @@
 #define COLOR_WHITE  "#FFFFFF"
 #define COLOR_BLACK  "#000000"
 
-/*
- *	Shuttles.
-*/
+//	Shuttles.
 
 // These define the time taken for the shuttle to get to the space station, and the time before it leaves again.
 #define SHUTTLE_PREPTIME                300 // 5 minutes = 300 seconds - after this time, the shuttle departs centcom and cannot be recalled.
@@ -94,11 +92,6 @@
 #define FORCE_LAUNCH 2
 #define WAIT_ARRIVE  3
 #define WAIT_FINISH  4
-
-
-#define BACKGROUND_ENABLED   0      // The default value for all uses of set background. Set background can
-                                    // cause gradual lag and is recommended you only turn this on if necessary.
-                                    // 1 will enable set background. 0 will disable set background.
 
 // Setting this much higher than 1024 could allow spammers to DOS the server easily.
 #define MAX_MESSAGE_LEN       1024

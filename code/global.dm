@@ -13,82 +13,16 @@ var/global/list/active_diseases          = list()
 var/global/list/med_hud_users            = list() // List of all entities using a medical HUD.
 var/global/list/sec_hud_users            = list() // List of all entities using a security HUD.
 
-// Those networks can only be accessed by pre-existing terminals. AIs and new terminals can't use them.
-var/list/restricted_camera_networks = list("thunder","ERT","NUKE","Secret")
 
 var/global/list/global_mutations  = list() // List of hidden mutation things.
-var/global/defer_powernet_rebuild = 0      // True if net rebuild will be called manually after an event.
-
-// The resulting sector map looks like:
-//  ___ ___
-// | 1 | 4 |
-//  ---+---
-// | 5 | 3 |
-//  --- ---
-//
-// 1: SS13.
-// 4: Derelict.
-// 3: AI satellite.
-// 5: Empty space.
 
 var/global/datum/universal_state/universe = new
 
 var/global/list/global_map = null
-//var/global/list/global_map = list(list(1,5),list(4,3))
 
 // Noises made when hit while typing.
 var/list/hit_appends = list("-OOF", "-ACK", "-UGH", "-HRNK", "-HURGH", "-GLORF")
 
-var/list/paper_tag_whitelist = list(
-	"center",  "p",     "div",   "span", "pre", "h1", "h2", "h3",  "h4",  "h5", "h6", "br", "hr",
-	"big",     "small", "font",  "i",    "u",   "b",  "s",  "sub", "sup", "tt", "ol", "ul", "li",
-	"caption", "col",   "table", "td",   "th",  "tr"
-)
-var/list/paper_blacklist = list(
-	"java",        "onblur",    "onchange",    "onclick",    "ondblclick",  "onselect", "onfocus",
-	"onsubmit",    "onreset",   "onload",      "onunload",   "onkeydown",   "onkeyup",  "onkeypress",
-	"onmousedown", "onmouseup", "onmousemove", "onmouseout", "onmouseover",
-)
-
-// The way blocks are handled badly needs a rewrite, this is horrible.
-// Too much of a project to handle at the moment, TODO for later.
-var/BLINDBLOCK    = 0
-var/DEAFBLOCK     = 0
-var/HULKBLOCK     = 0
-var/TELEBLOCK     = 0
-var/FIREBLOCK     = 0
-var/XRAYBLOCK     = 0
-var/CLUMSYBLOCK   = 0
-var/FAKEBLOCK     = 0
-var/COUGHBLOCK    = 0
-var/GLASSESBLOCK  = 0
-var/EPILEPSYBLOCK = 0
-var/TWITCHBLOCK   = 0
-var/NERVOUSBLOCK  = 0
-var/MONKEYBLOCK   = 27
-
-var/BLOCKADD = 0
-var/DIFFMUT  = 0
-
-var/HEADACHEBLOCK      = 0
-var/NOBREATHBLOCK      = 0
-var/REMOTEVIEWBLOCK    = 0
-var/REGENERATEBLOCK    = 0
-var/INCREASERUNBLOCK   = 0
-var/REMOTETALKBLOCK    = 0
-var/MORPHBLOCK         = 0
-var/BLENDBLOCK         = 0
-var/HALLUCINATIONBLOCK = 0
-var/NOPRINTSBLOCK      = 0
-var/SHOCKIMMUNITYBLOCK = 0
-var/SMALLSIZEBLOCK     = 0
-
-var/skipupdate = 0
-
-var/eventchance = 10 // Percent chance per 5 minutes.
-var/event       = 0
-var/hadevent    = 0
-var/blobevent   = 0
 
 var/diary          = null
 var/href_logfile   = null
@@ -97,14 +31,11 @@ var/game_version   = "Baystation12"
 var/changelog_hash = ""
 var/game_year      = (text2num(time2text(world.realtime, "YYYY")) + 544)
 
-var/going             = 1.0
+var/roundstart_nodelay = 1
 var/master_mode       = "extended" // "extended"
 var/secret_force_mode = "secret"   // if this is anything but "secret", the secret rotation will forceably choose this mode.
 
-var/host = null
-var/shuttle_frozen = 0
-var/shuttle_left   = 0
-var/shuttlecoming  = 0
+var/host = null //only here until check @ code\modules\ghosttrap\trap.dm:112 is fixed
 
 var/list/jobMax        = list()
 var/list/bombers       = list()
@@ -112,18 +43,8 @@ var/list/admin_log     = list()
 var/list/lastsignalers = list() // Keeps last 100 signals here in format: "[src] used \ref[src] @ location [src.loc]: [freq]/[code]"
 var/list/lawchanges    = list() // Stores who uploaded laws to which silicon-based lifeform, and what the law was.
 var/list/reg_dna       = list()
-//var/list/traitobj    = list()
 
 var/mouse_respawn_time = 5 // Amount of time that must pass between a player dying as a mouse and repawning as a mouse. In minutes.
-
-var/CELLRATE = 0.002 // Multiplier for watts per tick <> cell storage (e.g., 0.02 means if there is a load of 1000 watts, 20 units will be taken from a cell per second)
-                     // It's a conversion constant. power_used*CELLRATE = charge_provided, or charge_used/CELLRATE = power_provided
-var/CHARGELEVEL = 0.0005 // Cap for how fast cells charge, as a percentage-per-tick (0.01 means cellcharge is capped to 1% per second)
-
-var/shuttle_z        = 2  // Default.
-var/airtunnel_start  = 68 // Default.
-var/airtunnel_stop   = 68 // Default.
-var/airtunnel_bottom = 72 // Default.
 
 var/list/monkeystart     = list()
 var/list/wizardstart     = list()
@@ -138,7 +59,6 @@ var/list/latejoin_cyborg  = list()
 var/list/prisonwarp         = list() // Prisoners go to these
 var/list/holdingfacility    = list() // Captured people go here
 var/list/xeno_spawn         = list() // Aliens spawn at at these.
-//var/list/mazewarp         = list()
 var/list/tdome1             = list()
 var/list/tdome2             = list()
 var/list/tdomeobserve       = list()
@@ -147,7 +67,6 @@ var/list/prisonsecuritywarp = list() // Prison security goes to these.
 var/list/prisonwarped       = list() // List of players already warped.
 var/list/blobstart          = list()
 var/list/ninjastart         = list()
-//var/list/traitors         = list() // Traitor list.
 
 var/list/cardinal    = list(NORTH, SOUTH, EAST, WEST)
 var/list/alldirs     = list(NORTH, SOUTH, EAST, WEST, NORTHEAST, NORTHWEST, SOUTHEAST, SOUTHWEST)
@@ -168,17 +87,14 @@ var/list/adminlog  = list()
 
 var/list/powernets = list()
 
-var/Debug  = 0 // Global debug switch.
 var/Debug2 = 0
 var/datum/debug/debugobj
 
 var/datum/moduletypes/mods = new()
 
-var/wavesecret    = 0
 var/gravity_is_on = 1
 
 var/join_motd = null
-var/forceblob = 0
 
 var/datum/nanomanager/nanomanager		= new() // NanoManager, the manager for Nano UIs.
 var/datum/event_manager/event_manager	= new() // Event Manager, the manager for events.
@@ -225,11 +141,6 @@ var/DBConnection/dbcon_old = new() // /tg/station database (Old database) -- see
 // Added for Xenoarchaeology, might be useful for other stuff.
 var/global/list/alphabet_uppercase = list("A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z")
 
-// Chemistry lists.
-var/list/tachycardics  = list("coffee", "inaprovaline", "hyperzine", "nitroglycerin", "thirteenloko", "nicotine") // Increase heart rate.
-var/list/bradycardics  = list("neurotoxin", "cryoxadone", "clonexadone", "space_drugs", "stoxin")                 // Decrease heart rate.
-var/list/heartstopper  = list("potassium_phorochloride", "zombie_powder") // This stops the heart.
-var/list/cheartstopper = list("potassium_chloride")                       // This stops the heart when overdose is met. -- c = conditional
 
 // Used by robots and robot preferences.
 var/list/robot_module_types = list(
@@ -266,6 +177,3 @@ var/max_explosion_range = 14
 var/global/obj/item/device/radio/intercom/global_announcer = new(null)
 
 var/list/station_departments = list("Command", "Medical", "Engineering", "Science", "Security", "Cargo", "Civilian")
-
-var/global/const/TICKS_IN_DAY = 864000
-var/global/const/TICKS_IN_SECOND = 10

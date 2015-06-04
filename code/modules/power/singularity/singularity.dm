@@ -270,8 +270,6 @@
 	return 1
 
 /obj/singularity/proc/eat()
-	set background = BACKGROUND_ENABLED
-
 	for(var/atom/X in orange(grav_pull, src))
 		var/dist = get_dist(X, src)
 		var/obj/singularity/S = src

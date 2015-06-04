@@ -2,6 +2,8 @@
 
 #define SHOES_SLOWDOWN          -1.0  // How much shoes slow you down by default. Negative values speed you up.
 
+#define CANDLE_LUM 3 // For how bright candles are.
+
 // Item inventory slot bitmasks.
 #define SLOT_OCLOTHING  1
 #define SLOT_ICLOTHING  2
@@ -119,8 +121,6 @@
 #define HAND_RIGHT  4096
 #define HANDS       6144 // HAND_LEFT | HAND_RIGHT
 #define FULL_BODY   8191
-
-#define CANDLE_LUM 3 // For how bright candles are.
 
 // Bitflags for the percentual amount of protection a piece of clothing which covers the body part offers.
 // Used with human/proc/get_heat_protection() and human/proc/get_cold_protection().

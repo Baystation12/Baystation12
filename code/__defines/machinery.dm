@@ -1,3 +1,9 @@
+var/global/defer_powernet_rebuild = 0      // True if net rebuild will be called manually after an event.
+
+var/CELLRATE = 0.002 // Multiplier for watts per tick <> cell storage (e.g., 0.02 means if there is a load of 1000 watts, 20 units will be taken from a cell per second)
+                    // It's a conversion constant. power_used*CELLRATE = charge_provided, or charge_used/CELLRATE = power_provided
+var/CHARGELEVEL = 0.0005 // Cap for how fast cells charge, as a percentage-per-tick (0.01 means cellcharge is capped to 1% per second)
+
 // Doors!
 #define DOOR_CRUSH_DAMAGE 10
 #define ALIEN_SELECT_AFK_BUFFER  1    // How many minutes that a person can be AFK before not being allowed to be an alien.
@@ -24,6 +30,8 @@
 
 #define AI_CAMERA_LUMINOSITY 6
 
+// Those networks can only be accessed by pre-existing terminals. AIs and new terminals can't use them.
+var/list/restricted_camera_networks = list("thunder","ERT","NUKE","Secret")
 
 // Camera networks
 #define NETWORK_CRESCENT "Crescent"

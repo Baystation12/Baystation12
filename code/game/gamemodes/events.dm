@@ -102,6 +102,8 @@
 		if(15)
 			communications_blackout()
 */
+var/eventchance = 10 // Percent chance per 5 minutes.
+var/hadevent    = 0
 
 /proc/appendicitis()
 	for(var/mob/living/carbon/human/H in living_mob_list)

@@ -14,20 +14,16 @@
 #define RADIATOR_OPTIMUM_PRESSURE    3771      // kPa at 20 C. This should be higher as gases aren't great conductors until they are dense. Used the critical pressure for air.
 #define GAS_CRITICAL_TEMPERATURE     132.65    // K. The critical point temperature for air.
 
-/*
-	The pipe looks to be thin vertically and wide horizontally, so we'll assume that it's
-	three centimeters thick, one meter wide, and only explosed to the sun 3 degrees off of edge-on.
-	Since the radiatior is uniform along it's length, the ratio of surface area touched by sunlight
-	to the total surface area is the same as the ratio of the perimeter of the cross-section.
-*/
 #define RADIATOR_EXPOSED_SURFACE_AREA_RATIO 0.04 // (3 cm + 100 cm * sin(3deg))/(2*(3+100 cm)). Unitless ratio.
 
 #define T0C  273.15 //    0.0 degrees celcius
 #define T20C 293.15 //   20.0 degrees celcius
 #define TCMB 2.7    // -270.3 degrees celcius
 
-
 #define CLAMP01(x) max(0, min(1, x))
 #define QUANTIZE(variable) (round(variable,0.0001))
 
-#define INFINITY             1.#INF
+#define INFINITY	1.#INF
+
+#define TICKS_IN_DAY 		24*60*60*10
+#define TICKS_IN_SECOND 	10

@@ -1,7 +1,7 @@
 
 /*
 	The initialization of the game happens roughly like this:
-	
+
 	1. All global variables are initialized (including the global_init instance).
 	2. The map is initialized, and map objects are created.
 	3. world/New() runs, creating the process scheduler (and the old master controller) and spawning their setup.
@@ -18,7 +18,7 @@ var/global/datum/global_init/init = new ()
 
 	makeDatumRefLists()
 	load_configuration()
-	
+
 	initialize_chemical_reagents()
 	initialize_chemical_reactions()
 
@@ -342,13 +342,8 @@ var/world_topic_spam_protect_time = world.timeofday
 	else if (n > 0)
 		features += "~[n] player"
 
-	/*
-	is there a reason for this? the byond site shows 'hosted by X' when there is a proper host already.
-	if (host)
-		features += "hosted by <b>[host]</b>"
-	*/
 
-	if (!host && config && config.hostedby)
+	if (config && config.hostedby)
 		features += "hosted by <b>[config.hostedby]</b>"
 
 	if (features)

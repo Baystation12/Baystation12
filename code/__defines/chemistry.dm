@@ -31,3 +31,9 @@
 #define CE_ALCOHOL "alcohol" // Liver filtering
 #define CE_ALCOHOL_TOXIC "alcotoxic" // Liver damage
 #define CE_SPEEDBOOST "gofast" // Hyperzine
+
+// Chemistry lists.
+var/list/tachycardics  = list("coffee", "inaprovaline", "hyperzine", "nitroglycerin", "thirteenloko", "nicotine") // Increase heart rate.
+var/list/bradycardics  = list("neurotoxin", "cryoxadone", "clonexadone", "space_drugs", "stoxin")                 // Decrease heart rate.
+var/list/heartstopper  = list("potassium_phorochloride", "zombie_powder") // This stops the heart.
+var/list/cheartstopper = list("potassium_chloride")                       // This stops the heart when overdose is met. -- c = conditional
