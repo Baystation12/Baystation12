@@ -252,6 +252,7 @@
 	var/orig_amount = src.amount
 	if (transfer && src.use(transfer))
 		var/obj/item/stack/newstack = new src.type(loc, transfer)
+		newstack.color = color
 		if (prob(transfer/orig_amount * 100))
 			transfer_fingerprints_to(newstack)
 			if(blood_DNA)

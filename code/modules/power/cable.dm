@@ -613,6 +613,12 @@ obj/structure/cable/proc/cableColor(var/colorC)
 // Items usable on a cable coil :
 //   - Wirecutters : cut them duh !
 //   - Cable coil : merge cables
+/obj/item/stack/cable_coil/proc/can_merge(var/obj/item/stack/cable_coil/C)
+	return color == C.color
+
+/obj/item/stack/cable_coil/cyborg/can_merge()
+	return 1
+
 /obj/item/stack/cable_coil/attackby(obj/item/weapon/W, mob/user)
 	..()
 	if( istype(W, /obj/item/weapon/wirecutters) && src.get_amount() > 1)
@@ -623,6 +629,11 @@ obj/structure/cable/proc/cableColor(var/colorC)
 		return
 	else if(istype(W, /obj/item/stack/cable_coil))
 		var/obj/item/stack/cable_coil/C = W
+
+		if(!can_merge(C))
+			user << "These coils do not go together."
+			return
+
 		if(C.get_amount() >= get_max_amount())
 			user << "The coil is too long, you cannot add any more cable to it."
 			return
