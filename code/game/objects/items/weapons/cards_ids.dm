@@ -270,7 +270,7 @@
 	registered_name = "Captain"
 	assignment = "Captain"
 	New()
-		access = get_all_accesses()
+		access = get_all_station_access()
 		..()
 
 /obj/item/weapon/card/id/centcom
@@ -289,4 +289,4 @@
 
 /obj/item/weapon/card/id/centcom/ERT/New()
 	..()
-	access += get_all_accesses()
+	access += get_all_station_access()

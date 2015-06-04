@@ -3,6 +3,10 @@
 	var/wet = 0
 	var/image/wet_overlay = null
 
+	//Mining resources (for the large drills).
+	var/has_resources
+	var/list/resources
+
 	var/thermite = 0
 	oxygen = MOLES_O2STANDARD
 	nitrogen = MOLES_N2STANDARD

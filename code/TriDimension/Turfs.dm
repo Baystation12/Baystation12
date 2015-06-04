@@ -71,7 +71,7 @@
 	for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
 		// check if there is something to draw below
 		if(!controller.down)
-			src.ChangeTurf(/turf/space)
+			src.ChangeTurf(get_base_turf(src.z))
 			return 0
 		else
 			floorbelow = locate(src.x, src.y, controller.down_target)

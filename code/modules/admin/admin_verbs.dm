@@ -168,6 +168,9 @@ var/list/admin_verbs_debug = list(
 	/client/proc/restart_controller,
 	/client/proc/print_random_map,
 	/client/proc/create_random_map,
+	/client/proc/apply_random_map,
+	/client/proc/overlay_random_map,
+	/client/proc/delete_random_map,
 	/client/proc/show_plant_genes,
 	/client/proc/enable_debug_verbs,
 	/client/proc/callproc,
@@ -708,66 +711,70 @@ var/list/admin_verbs_mentor = list(
 	if(holder)
 		src.holder.output_ai_laws()
 
-/client/proc/rename_silicon(mob/living/silicon/S in mob_list)
+/client/proc/rename_silicon()
 	set name = "Rename Silicon"
 	set category = "Admin"
 
-	if(!istype(S))
-		return
+	if(!check_rights(R_ADMIN)) return
 
-	if(holder)
-		var/new_name = sanitizeSafe(input(src, "Enter new name. Leave blank or as is to cancel.", "Enter new silicon name", S.real_name))
-		if(new_name && new_name != S.real_name)
-			admin_log_and_message_admins("has renamed the silicon '[S.real_name]' to '[new_name]'")
-			S.SetName(new_name)
+	var/mob/living/silicon/S = input("Select silicon.", "Rename Silicon.") as null|anything in silicon_mob_list
+	if(!S) return
+
+	var/new_name = sanitizeSafe(input(src, "Enter new name. Leave blank or as is to cancel.", "[S.real_name] - Enter new silicon name", S.real_name))
+	if(new_name && new_name != S.real_name)
+		admin_log_and_message_admins("has renamed the silicon '[S.real_name]' to '[new_name]'")
+		S.SetName(new_name)
 	feedback_add_details("admin_verb","RAI") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
-/client/proc/manage_silicon_laws(mob/living/silicon/S in mob_list)
+/client/proc/manage_silicon_laws()
 	set name = "Manage Silicon Laws"
 	set category = "Admin"
 
-	if(!istype(S))
-		return
+	if(!check_rights(R_ADMIN)) return
 
-	if(holder)
-		var/obj/nano_module/law_manager/L = new(S)
-		L.ui_interact(usr, state = admin_state)
+	var/mob/living/silicon/S = input("Select silicon.", "Manage Silicon Laws") as null|anything in silicon_mob_list
+	if(!S) return
+
+	var/obj/nano_module/law_manager/L = new(S)
+	L.ui_interact(usr, state = admin_state)
 	admin_log_and_message_admins("has opened [S]'s law manager.")
 	feedback_add_details("admin_verb","MSL") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
-/client/proc/change_human_appearance_admin(mob/living/carbon/human/H in world)
+/client/proc/change_human_appearance_admin()
 	set name = "Change Mob Appearance - Admin"
 	set desc = "Allows you to change the mob appearance"
 	set category = "Admin"
 
-	if(!istype(H))
-		return
+	if(!check_rights(R_FUN)) return
 
-	if(holder)
-		admin_log_and_message_admins("is altering the appearance of [H].")
-		H.change_appearance(APPEARANCE_ALL, usr, usr, check_species_whitelist = 0, state = admin_state)
+	var/mob/living/carbon/human/H = input("Select mob.", "Change Mob Appearance - Admin") as null|anything in human_mob_list
+	if(!H) return
+
+	admin_log_and_message_admins("is altering the appearance of [H].")
+	H.change_appearance(APPEARANCE_ALL, usr, usr, check_species_whitelist = 0, state = admin_state)
 	feedback_add_details("admin_verb","CHAA") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
-/client/proc/change_human_appearance_self(mob/living/carbon/human/H in mob_list)
+/client/proc/change_human_appearance_self()
 	set name = "Change Mob Appearance - Self"
 	set desc = "Allows the mob to change its appearance"
 	set category = "Admin"
 
-	if(!istype(H))
-		return
+	if(!check_rights(R_FUN)) return
+
+	var/mob/living/carbon/human/H = input("Select mob.", "Change Mob Appearance - Self") as null|anything in human_mob_list
+	if(!H) return
 
 	if(!H.client)
 		usr << "Only mobs with clients can alter their own appearance."
 		return
 
-	if(holder)
-		switch(alert("Do you wish for [H] to be allowed to select non-whitelisted races?","Alter Mob Appearance","Yes","No","Cancel"))
-			if("Yes")
-				admin_log_and_message_admins("has allowed [H] to change \his appearance, without whitelisting of races.")
-				H.change_appearance(APPEARANCE_ALL, H.loc, check_species_whitelist = 0)
-			if("No")
-				admin_log_and_message_admins("has allowed [H] to change \his appearance, with whitelisting of races.")
-				H.change_appearance(APPEARANCE_ALL, H.loc, check_species_whitelist = 1)
+	switch(alert("Do you wish for [H] to be allowed to select non-whitelisted races?","Alter Mob Appearance","Yes","No","Cancel"))
+		if("Yes")
+			admin_log_and_message_admins("has allowed [H] to change \his appearance, without whitelisting of races.")
+			H.change_appearance(APPEARANCE_ALL, H.loc, check_species_whitelist = 0)
+		if("No")
+			admin_log_and_message_admins("has allowed [H] to change \his appearance, with whitelisting of races.")
+			H.change_appearance(APPEARANCE_ALL, H.loc, check_species_whitelist = 1)
 	feedback_add_details("admin_verb","CMAS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/change_security_level()
@@ -792,11 +799,13 @@ var/list/admin_verbs_mentor = list(
 //	feedback_add_details("admin_verb","MP") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	return
 
-/client/proc/editappear(mob/living/carbon/human/M as mob in mob_list)
+/client/proc/editappear()
 	set name = "Edit Appearance"
 	set category = "Fun"
 
 	if(!check_rights(R_FUN))	return
+
+	var/mob/living/carbon/human/M = input("Select mob.", "Edit Appearance") as null|anything in human_mob_list
 
 	if(!istype(M, /mob/living/carbon/human))
 		usr << "\red You can only do this to humans!"

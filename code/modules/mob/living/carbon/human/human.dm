@@ -37,6 +37,7 @@
 	hud_list[SPECIALROLE_HUD] = image('icons/mob/hud.dmi', src, "hudblank")
 	hud_list[STATUS_HUD_OOC]  = image('icons/mob/hud.dmi', src, "hudhealthy")
 
+	human_mob_list |= src
 	..()
 
 	if(dna)
@@ -44,6 +45,7 @@
 	make_blood()
 
 /mob/living/carbon/human/Destroy()
+	human_mob_list -= src
 	for(var/organ in organs)
 		qdel(organ)
 	return ..()
@@ -170,7 +172,7 @@
 /mob/living/carbon/human/blob_act()
 	if(stat == 2)	return
 	show_message("\red The blob attacks you!")
-	var/dam_zone = pick("chest", "l_hand", "r_hand", "l_leg", "r_leg")
+	var/dam_zone = pick(organs_by_name)
 	var/obj/item/organ/external/affecting = get_organ(ran_zone(dam_zone))
 	apply_damage(rand(30,40), BRUTE, affecting, run_armor_check(affecting, "melee"))
 	return

@@ -222,7 +222,7 @@
 			open()
 		else
 			src.req_access = list()
-			src.req_access += pick(get_all_accesses())
+			src.req_access += pick(get_all_station_access())
 	..()
 
 /obj/structure/closet/crate/plastic

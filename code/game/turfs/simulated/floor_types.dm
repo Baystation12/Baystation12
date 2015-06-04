@@ -9,6 +9,13 @@
 		..()
 		name = "floor"
 
+/turf/simulated/floor/airless/lava
+	name = "lava"
+	icon_state = "lava"
+	lava = 1
+	light_range = 2
+	light_color = "#CC0000"
+
 /turf/simulated/floor/airless/ceiling
 	icon_state = "rockvault"
 
@@ -151,6 +158,11 @@
 	oxygen = 0
 	nitrogen = MOLES_N2STANDARD + MOLES_O2STANDARD
 
+/turf/simulated/floor/snow
+	name = "Snow"
+	icon = 'icons/turf/snow.dmi'
+	icon_state = "snow"
+
 /turf/simulated/floor/beach
 	name = "Beach"
 	icon = 'icons/misc/beach.dmi'
@@ -158,6 +170,9 @@
 /turf/simulated/floor/beach/sand
 	name = "Sand"
 	icon_state = "sand"
+
+/turf/simulated/floor/beach/sand/desert
+	icon_state = "desert"
 
 /turf/simulated/floor/beach/coastline
 	name = "Coastline"
@@ -167,6 +182,9 @@
 /turf/simulated/floor/beach/water
 	name = "Water"
 	icon_state = "water"
+
+/turf/simulated/floor/beach/water/ocean
+	icon_state = "seadeep"
 
 /turf/simulated/floor/beach/water/New()
 	..()

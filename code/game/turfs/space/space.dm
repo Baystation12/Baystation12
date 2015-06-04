@@ -1,5 +1,3 @@
-
-
 /turf/space
 	icon = 'icons/turf/space.dmi'
 	name = "\proper space"

@@ -1,0 +1,5 @@
+author: Yoshax
+delete-after: True
+
+changes: 
+  - tweak: "Makes the special wizard projectile staffs, Animate, Change, Focus and any future ones only usable by wizards. Also makes it so only wizards can use spellbooks and teleportation scrolls."
