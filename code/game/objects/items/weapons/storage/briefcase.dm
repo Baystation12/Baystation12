@@ -31,10 +31,9 @@
 	if (M.stat < 2 && M.health < 50 && prob(90))
 		var/mob/H = M
 		// ******* Check
-// Commented this bit out simply because it doesn't make sense, I can't work out what it's supposed to do, and it doesn't do anything at all as it is ~GN
-//		if ((istype(H, /mob/living/carbon/human) && istype(H, /obj/item/clothing/head) && H.flags & 8 && prob(80)))
-//			M << "<span class='warning'>The helmet protects you from being hit hard in the head!</span>"
-//			return
+		if ((istype(H, /mob/living/carbon/human) && istype(H, /obj/item/clothing/head) && H.flags & 8 && prob(80)))
+			M << "<span class='warning'>The helmet protects you from being hit hard in the head!</span>"
+			return
 		var/time = rand(2, 6)
 		if (prob(75))
 			M.Paralyse(time)
