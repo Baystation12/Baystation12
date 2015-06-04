@@ -1,6 +1,0 @@
-author: PsiOmegaDelta
-delete-after: True
-
-changes: 
-  - rscadd: "Synths can now review all law modules that can be found on the station from their law manager."
-  - rscadd: "Synths can state these laws if desired, however this is strongly discouraged unless subverted/malfunctioning."
