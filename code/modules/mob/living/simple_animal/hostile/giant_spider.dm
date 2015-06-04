@@ -64,14 +64,23 @@
 	move_to_delay = 4
 
 /mob/living/simple_animal/hostile/giant_spider/AttackingTarget()
-	..()
-	if(isliving(target_mob))
-		var/mob/living/L = target_mob
+	var/target = ..()
+	if(isliving(target))
+		var/mob/living/L = target
 		if(L.reagents)
 			L.reagents.add_reagent("toxin", poison_per_bite)
 			if(prob(poison_per_bite))
 				L << "\red You feel a tiny prick."
 				L.reagents.add_reagent(poison_type, 5)
+
+/mob/living/simple_animal/hostile/giant_spider/nurse/AttackingTarget()
+	var/target = ..()
+	if(ishuman(target))
+		var/mob/living/carbon/human/H = target
+		if(prob(poison_per_bite))
+			var/obj/item/organ/external/O = pick(H.organs)
+			if(!(O.status & ORGAN_ROBOT))
+				O.implants += new/obj/effect/spider/eggcluster(O)
 
 /mob/living/simple_animal/hostile/giant_spider/Life()
 	..()
