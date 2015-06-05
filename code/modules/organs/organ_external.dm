@@ -392,7 +392,7 @@ This function completely restores a damaged organ to perfect condition.
 
 //Determines if we even need to process this organ.
 /obj/item/organ/external/proc/need_process()
-	if(status & (ORGAN_CUT_AWAY|ORGAN_GAUZED|ORGAN_BLEEDING|ORGAN_BROKEN|ORGAN_DESTROYED|ORGAN_SPLINTED|ORGAN_DEAD|ORGAN_MUTATED))
+	if(status & (ORGAN_CUT_AWAY|ORGAN_BLEEDING|ORGAN_BROKEN|ORGAN_DESTROYED|ORGAN_SPLINTED|ORGAN_DEAD|ORGAN_MUTATED))
 		return 1
 	if(brute_dam || burn_dam)
 		return 1
@@ -613,7 +613,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	//things tend to bleed if they are CUT OPEN
 	if (open && !clamped && (H && !(H.species.flags & NO_BLOOD)))
 		status |= ORGAN_BLEEDING
-		
+
 	//Bone fractures
 	if(config.bones_can_break && brute_dam > min_broken_damage * config.organ_health_multiplier && !(status & ORGAN_ROBOT))
 		src.fracture()
@@ -908,7 +908,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 /obj/item/organ/external/proc/is_usable()
 	if((status & ORGAN_ROBOT) && get_damage() >= max_damage) //robot limbs just become inoperable at max damage
-		return 
+		return
 	return !is_dislocated() && !(status & (ORGAN_DESTROYED|ORGAN_MUTATED|ORGAN_DEAD))
 
 /obj/item/organ/external/proc/is_malfunctioning()
