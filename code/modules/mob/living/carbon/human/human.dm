@@ -41,7 +41,7 @@
 	..()
 
 	if(dna)
-		dna.ready_dna(new_character)
+		dna.ready_dna(src)
 		dna.real_name = real_name
 		sync_organ_dna()
 	make_blood()
