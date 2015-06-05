@@ -495,10 +495,6 @@ default behaviour is:
 			if(!( isturf(pulling.loc) ))
 				stop_pulling()
 				return
-			else
-				if(Debug)
-					log_debug("pulling disappeared? at [__LINE__] in mob.dm - pulling = [pulling]")
-					log_debug("REPORT THIS")
 
 		/////
 		if(pulling && pulling.anchored)
