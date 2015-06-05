@@ -16,11 +16,11 @@
 
 //meteor showers are lighter and more common,
 /datum/event/meteor_wave/tick()
-	if(activeFor >= next_meteor)
+	if(waves && activeFor >= next_meteor)
 		spawn() spawn_meteors(severity * rand(1,2), get_meteors())
 		next_meteor += rand(15, 30) / severity
 		waves--
-		endWhen = (waves <= 0 ? activeFor + 15 : next_meteor + 1)
+		endWhen = (waves ? next_meteor + 1 : activeFor + 15)
 
 /datum/event/meteor_wave/end()
 	switch(severity)

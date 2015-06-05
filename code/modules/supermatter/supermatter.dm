@@ -157,15 +157,15 @@
 
 /obj/machinery/power/supermatter/get_transit_zlevel()
 	//don't send it back to the station -- most of the time
-	if(prob(99)) 
+	if(prob(99))
 		var/list/candidates = accessible_z_levels.Copy()
 		for(var/zlevel in config.station_levels)
 			candidates.Remove("[zlevel]")
 		candidates.Remove("[src.z]")
-		
+
 		if(candidates.len)
 			return text2num(pickweight(candidates))
-	
+
 	return ..()
 
 /obj/machinery/power/supermatter/process()
@@ -382,7 +382,7 @@
 		defer_powernet_rebuild = 1
 	// Let's just make this one loop.
 	for(var/atom/X in orange(pull_radius,src))
-		X.singularity_pull(src, STAGE_FIVE)
+		spawn()	X.singularity_pull(src, STAGE_FIVE)
 
 	if(defer_powernet_rebuild != 2)
 		defer_powernet_rebuild = 0

@@ -123,7 +123,7 @@
 
 /obj/effect/meteor/New()
 	..()
-	//SpinAnimation()
+	SpinAnimation()
 
 /obj/effect/meteor/Bump(atom/A)
 	if(A)
