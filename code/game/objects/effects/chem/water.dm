@@ -25,9 +25,9 @@
 			reagents.touch_turf(T)
 			var/mob/M
 			for(var/atom/A in T)
-				if(!ismob(A)) // Mobs are handled differently
+				if(!ismob(A) && A.simulated) // Mobs are handled differently
 					reagents.touch(A)
-				else if(!M)
+				else if(ismob(A) && !M)
 					M = A
 			if(M)
 				reagents.splash_mob(M, reagents.total_volume)
