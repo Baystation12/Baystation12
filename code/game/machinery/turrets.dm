@@ -80,7 +80,7 @@
 
 	if(user.species.can_shred(user) && !(stat & BROKEN))
 		playsound(src.loc, 'sound/weapons/slash.ogg', 25, 1, -1)
-		visible_message("\red <B>[user] has slashed at [src]!</B>")
+		visible_message("<span class='danger'>[user] has slashed at [src]!</span>")
 		src.take_damage(15)
 	return
 

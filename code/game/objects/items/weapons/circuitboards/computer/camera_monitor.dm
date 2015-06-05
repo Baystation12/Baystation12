@@ -42,21 +42,21 @@
 		if(emagged)
 			user << "Circuit lock is already removed."
 			return
-		user << "\blue You override the circuit lock and open controls."
+		user << "<span class='notice'>You override the circuit lock and open controls.</span>"
 		emagged = 1
 		locked = 0
 	else if(istype(I,/obj/item/weapon/card/id))
 		if(emagged)
-			user << "\red Circuit lock does not respond."
+			user << "<span class='warning'>Circuit lock does not respond.</span>"
 			return
 		if(check_access(I))
 			locked = !locked
-			user << "\blue You [locked ? "" : "un"]lock the circuit controls."
+			user << "<span class='notice'>You [locked ? "" : "un"]lock the circuit controls.</span>"
 		else
-			user << "\red Access denied."
+			user << "<span class='warning'>Access denied.</span>"
 	else if(istype(I,/obj/item/device/multitool))
 		if(locked)
-			user << "\red Circuit controls are locked."
+			user << "<span class='warning'>Circuit controls are locked.</span>"
 			return
 		var/existing_networks = list2text(network,",")
 		var/input = sanitize(input(usr, "Which networks would you like to connect this camera console circuit to? Seperate networks with a comma. No Spaces!\nFor example: SS13,Security,Secret ", "Multitool-Circuitboard interface", existing_networks))

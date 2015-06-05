@@ -23,7 +23,7 @@
 		return
 
 	if(air_contents.gas["oxygen"] < 10)
-		user << text("\red <B>The meter on the [src.name] indicates you are almost out of air!</B>")
+		user << text("<span class='danger'>The meter on \the [src] indicates you are almost out of air!</span>")
 		playsound(user, 'sound/effects/alert.ogg', 50, 1)
 
 /obj/item/weapon/tank/jetpack/verb/toggle_rockets()
@@ -113,7 +113,7 @@
 		return
 
 	if(air_contents.gas["carbon_dioxide"] < 10)
-		user << text("\red <B>The meter on the [src.name] indicates you are almost out of carbon dioxide!</B>")
+		user << text("<span class='danger'>The meter on \the [src] indicates you are almost out of carbon dioxide!</span>")
 		playsound(user, 'sound/effects/alert.ogg', 50, 1)
 	return
 
