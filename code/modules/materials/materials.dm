@@ -48,6 +48,7 @@ var/list/name_to_material
 /material
 	var/name	                          // Unique name for use in indexing the list.
 	var/display_name                      // Prettier name for display.
+	var/use_name
 	var/flags = 0                         // Various status modifiers.
 
 	// Shards/tables/structures
@@ -85,7 +86,7 @@ var/list/name_to_material
 	// Noise made when a simple door made of this material opens or closes.
 	var/dooropen_noise = 'sound/effects/stonedoor_openclose.ogg'
 	// Path to resulting stacktype. Todo remove need for this.
-	var/stack_type = /obj/item/stack/material/steel
+	var/stack_type
 	// Wallrot crumble message.
 	var/rotting_touch_message = "crumbles under your touch"
 
@@ -94,6 +95,8 @@ var/list/name_to_material
 	..()
 	if(!display_name)
 		display_name = name
+	if(!use_name)
+		use_name = display_name
 	if(!shard_icon)
 		shard_icon = shard_type
 
@@ -144,6 +147,9 @@ var/list/name_to_material
 /material/proc/is_brittle()
 	return !!(flags & MATERIAL_BRITTLE)
 
+/material/proc/combustion_effect(var/turf/T, var/temperature)
+	return
+
 // Datum definitions follow.
 /material/uranium
 	name = "uranium"
@@ -177,6 +183,10 @@ var/list/name_to_material
 	hardness = 40
 	stack_origin_tech = "materials=4"
 
+/material/gold/bronze //placeholder for ashtrays
+	name = "bronze"
+	icon_colour = "#EDD12F"
+
 /material/silver
 	name = "silver"
 	stack_type = /obj/item/stack/material/silver
@@ -195,6 +205,20 @@ var/list/name_to_material
 	hardness = 30
 	stack_origin_tech = "phorontech=2;materials=2"
 	door_icon_base = "stone"
+
+/material/phoron/combustion_effect(var/turf/T, var/temperature, var/effect_multiplier)
+	if(isnull(ignition_point))
+		return 0
+	if(temperature < ignition_point)
+		return 0
+	var/totalPhoron = 0
+	for(var/turf/simulated/floor/target_tile in range(2,T))
+		var/phoronToDeduce = (temperature/30) * effect_multiplier
+		totalPhoron += phoronToDeduce
+		target_tile.assume_gas("phoron", phoronToDeduce, 200+T0C)
+		spawn (0)
+			target_tile.hotspot_expose(temperature, 400)
+	return round(totalPhoron/100)
 
 /material/stone
 	name = "sandstone"
@@ -327,6 +351,18 @@ var/list/name_to_material
 	weight = 22
 	stack_per_sheet = 3750
 
+// Adminspawn only, do not let anyone get this.
+/material/voxalloy
+	name = "voxalloy"
+	display_name = "durable alloy"
+	stack_type = null
+	icon_colour = "#6C7364"
+	integrity = 1200
+	melting_point = 6000       // Hull plating.
+	explosion_resistance = 200 // Hull plating.
+	hardness = 500
+	weight = 500
+
 /material/wood
 	name = "wood"
 	stack_type = /obj/item/stack/material/wood
@@ -366,6 +402,7 @@ var/list/name_to_material
 	name = "cloth"
 	stack_origin_tech = "materials=2"
 	door_icon_base = "wood"
+	flags = MATERIAL_PADDING
 
 /material/cult
 	name = "cult"
@@ -400,12 +437,71 @@ var/list/name_to_material
 		return 1
 	return 0
 
-/material/leather //todo
+//TODO PLACEHOLDERS:
+/material/leather
 	name = "leather"
 	icon_colour = "#5C4831"
 	stack_origin_tech = "materials=2"
+	flags = MATERIAL_PADDING
 
 /material/carpet
 	name = "carpet"
-	display_name = "padding"
-	icon_colour = "#A83C1B"
+	display_name = "comfy"
+	use_name = "red upholstery"
+	icon_colour = "#DA020A"
+	flags = MATERIAL_PADDING
+
+/material/cotton
+	name = "cotton"
+	display_name ="cotton"
+	icon_colour = "#FFFFFF"
+	flags = MATERIAL_PADDING
+
+/material/cloth_teal
+	name = "teal"
+	display_name ="teal"
+	use_name = "teal cloth"
+	icon_colour = "#00EAFA"
+	flags = MATERIAL_PADDING
+
+/material/cloth_black
+	name = "black"
+	display_name = "black"
+	use_name = "black cloth"
+	icon_colour = "#505050"
+	flags = MATERIAL_PADDING
+
+/material/cloth_green
+	name = "green"
+	display_name = "green"
+	use_name = "green cloth"
+	icon_colour = "#01C608"
+	flags = MATERIAL_PADDING
+
+/material/cloth_puple
+	name = "purple"
+	display_name = "purple"
+	use_name = "purple cloth"
+	icon_colour = "#9C56C4"
+	flags = MATERIAL_PADDING
+
+/material/cloth_blue
+	name = "blue"
+	display_name = "blue"
+	use_name = "blue cloth"
+	icon_colour = "#6B6FE3"
+	flags = MATERIAL_PADDING
+
+/material/cloth_beige
+	name = "beige"
+	display_name = "beige"
+	use_name = "beige cloth"
+	icon_colour = "#E8E7C8"
+	flags = MATERIAL_PADDING
+
+/material/cloth_lime
+	name = "lime"
+	display_name = "lime"
+	use_name = "lime cloth"
+	icon_colour = "#62E36C"
+	flags = MATERIAL_PADDING

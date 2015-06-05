@@ -43,7 +43,8 @@
 /obj/item/clothing/accessory/badge/holo
 	name = "holobadge"
 	desc = "This glowing blue badge marks the holder as THE LAW."
-	var/emagged = 0 //Emagging removes Sec check.
+	icon_state = "holobadge"
+	var/emagged //Emagging removes Sec check.
 
 /obj/item/clothing/accessory/badge/holo/cord
 	icon_state = "holobadge-cord"

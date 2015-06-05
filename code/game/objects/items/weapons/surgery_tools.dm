@@ -61,7 +61,7 @@
 	matter = list(DEFAULT_WALL_MATERIAL = 15000, "glass" = 10000)
 	flags = CONDUCT
 	force = 15.0
-	w_class = 2.0
+	w_class = 3
 	origin_tech = "materials=1;biotech=1"
 	attack_verb = list("drilled")
 
@@ -82,7 +82,7 @@
 	force = 10.0
 	sharp = 1
 	edge = 1
-	w_class = 2.0
+	w_class = 1
 	throwforce = 5.0
 	throw_speed = 3
 	throw_range = 5
@@ -136,7 +136,7 @@
 	hitsound = 'sound/weapons/circsawhit.ogg'
 	flags = CONDUCT
 	force = 15.0
-	w_class = 2.0
+	w_class = 3
 	throwforce = 9.0
 	throw_speed = 3
 	throw_range = 5

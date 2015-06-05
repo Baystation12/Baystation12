@@ -33,17 +33,17 @@ var/global/list/additional_antag_types = list()
 	var/required_players_secret = 0          // Minimum number of players for that game mode to be chose in Secret
 	var/required_enemies = 0                 // Minimum antagonists for round to start.
 	var/newscaster_announcements = null
-	var/end_on_antag_death                   // Round will end when all antagonists are dead.
+	var/end_on_antag_death = 0               // Round will end when all antagonists are dead.
 	var/ert_disabled = 0                     // ERT cannot be called.
-	var/deny_respawn                         // Disable respawn during this round.
+	var/deny_respawn = 0	                 // Disable respawn during this round.
 
 	var/shuttle_delay = 1                    // Shuttle transit time is multiplied by this.
-	var/auto_recall_shuttle                  // Will the shuttle automatically be recalled?
+	var/auto_recall_shuttle = 0              // Will the shuttle automatically be recalled?
 
 	var/antag_tag                            // First (main) antag template to spawn.
 	var/list/antag_templates                 // Extra antagonist types to include.
 
-	var/round_autoantag                      // Will this round attempt to periodically spawn more antagonists?
+	var/round_autoantag = 0                  // Will this round attempt to periodically spawn more antagonists?
 	var/antag_prob = 0                       // Likelihood of a new antagonist spawning.
 	var/antag_count = 0                      // Current number of antagonists.
 	var/antag_scaling_coeff = 5              // Coefficient for scaling max antagonists to player count.
@@ -86,7 +86,7 @@ var/global/list/additional_antag_types = list()
 			new/datum/uplink_item(/obj/item/weapon/soap/syndie, 1, "Subversive Soap", "SP"),
 			new/datum/uplink_item(/obj/item/weapon/cane/concealed, 2, "Concealed Cane Sword", "CC"),
 			new/datum/uplink_item(/obj/item/weapon/cartridge/syndicate, 3, "Detomatix PDA Cartridge", "DC"),
-			new/datum/uplink_item(/obj/item/weapon/pen/paralysis, 3, "Paralysis Pen", "PP"),
+			new/datum/uplink_item(/obj/item/weapon/pen/reagent/paralysis, 3, "Paralysis Pen", "PP"),
 			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/cigarette, 4, "Cigarette Kit", "BH"),
 			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/toxin, 4, "Random Toxin - Beaker", "RT")
 			),

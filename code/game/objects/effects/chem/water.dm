@@ -17,20 +17,23 @@
 	if(!target)
 		return
 	for(var/i = 1 to step_count)
+		if(!loc)
+			return
 		step_towards(src, target)
 		var/turf/T = get_turf(src)
-		reagents.touch_turf(T)
-		var/mob/M
-		for(var/atom/A in T)
-			if(!ismob(A)) // Mobs are handled differently
-				reagents.touch(A)
-			else if(!M)
-				M = A
-		if(M)
-			reagents.splash_mob(M, reagents.total_volume)
-			break
-		if(T == get_turf(target))
-			break
+		if(T && reagents)
+			reagents.touch_turf(T)
+			var/mob/M
+			for(var/atom/A in T)
+				if(!ismob(A)) // Mobs are handled differently
+					reagents.touch(A)
+				else if(!M)
+					M = A
+			if(M)
+				reagents.splash_mob(M, reagents.total_volume)
+				break
+			if(T == get_turf(target))
+				break
 		sleep(delay)
 	sleep(10)
 	qdel(src)

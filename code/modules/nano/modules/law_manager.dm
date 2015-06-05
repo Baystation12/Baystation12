@@ -34,10 +34,7 @@
 		return 1
 
 	if(href_list["set_view"])
-		if(is_malf(usr) || owner.is_ai_malf())
-			current_view = text2num(href_list["set_view"])
-		else
-			current_view = 0
+		current_view = text2num(href_list["set_view"])
 		return 1
 
 	if(href_list["law_channel"])
@@ -170,12 +167,8 @@
 
 	data["isAI"] = owner.isAI()
 	data["isMalf"] = is_malf(user)
-	data["isAIMalf"] = owner.is_ai_malf()
 	data["isSlaved"] = owner.is_slaved()
 	data["isAdmin"] = is_admin(user)
-
-	if(!(data["isMalf"] || data["isAIMalf"]))
-		current_view = 0
 	data["view"] = current_view
 
 	var/channels[0]
@@ -183,9 +176,7 @@
 		channels[++channels.len] = list("channel" = ch_name)
 	data["channel"] = owner.lawchannel
 	data["channels"] = channels
-
-	if(data["isMalf"] || data["isAIMalf"])
-		data["law_sets"] = package_multiple_laws(data["isAdmin"] ? admin_laws : player_laws)
+	data["law_sets"] = package_multiple_laws(data["isAdmin"] ? admin_laws : player_laws)
 
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
@@ -215,15 +206,6 @@
 
 /obj/nano_module/law_manager/proc/is_malf(var/mob/user)
 	return (is_admin(user) && !owner.is_slaved()) || owner.is_malf_or_traitor()
-
-/mob/living/silicon/proc/is_ai_malf()
-	return 0
-
-/mob/living/silicon/robot/is_ai_malf()
-	return is_slaved() && connected_ai.is_malf_or_traitor()
-
-/mob/living/silicon/ai/is_ai_malf()
-	return 0
 
 /mob/living/silicon/proc/is_slaved()
 	return 0

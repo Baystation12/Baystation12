@@ -29,7 +29,7 @@ var/global/list/GlobalPool = list()
 	if(!D)
 		// So the GC knows we're pooling this type.
 		if(!GlobalPool[get_type])
-			GlobalPool[get_type] = list(new get_type)
+			GlobalPool[get_type] = list()
 		if(islist(second_arg))
 			return new get_type (arglist(second_arg))
 		else
@@ -58,7 +58,10 @@ var/global/list/GlobalPool = list()
 		#ifdef DEBUG_ATOM_POOL
 		world << text("DEBUG_DATUM_POOL: PlaceInPool([]) exceeds []. Discarding.", D.type, ATOM_POOL_COUNT)
 		#endif
-		del(D)
+		if(garbage_collector)
+			garbage_collector.AddTrash(D)
+		else
+			del(D)
 		return
 
 	if(D in GlobalPool[D.type])
