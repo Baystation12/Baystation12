@@ -41,7 +41,9 @@
 	..()
 
 	if(dna)
+		dna.ready_dna(new_character)
 		dna.real_name = real_name
+		sync_organ_dna()
 	make_blood()
 
 /mob/living/carbon/human/Destroy()
