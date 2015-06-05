@@ -289,6 +289,7 @@
 								SortP.sortType = sortType
 								SortP.updatedir()
 								SortP.updatedesc()
+								SortP.updatename()
 
 						else if(ptype==6) // Disposal bin
 							var/obj/machinery/disposal/P = new /obj/machinery/disposal(src.loc)
