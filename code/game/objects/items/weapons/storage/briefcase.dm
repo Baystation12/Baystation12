@@ -29,11 +29,14 @@
 	msg_admin_attack("[user.name] ([user.ckey]) attacked [M.name] ([M.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)]) (<A HREF='?_src_=holder;adminmoreinfo=\ref[user]'>?</A>)")
 
 	if (M.stat < 2 && M.health < 50 && prob(90))
-		var/mob/H = M
+		// I'm not entirely sure what this bit of code is trying to achieve, but it doesn't achieve anything due to requiring a single object to be both a human and a hat
+		// Commented out pending an implementation that doesn't require humans to be hats and doesn't use '8' instead of.... whatever the hell '8' is supposed to represent ~GN
+/*		var/mob/H = M
 		// ******* Check
 		if ((istype(H, /mob/living/carbon/human) && istype(H, /obj/item/clothing/head) && H.flags & 8 && prob(80)))
 			M << "\red The helmet protects you from being hit hard in the head!"
 			return
+*/
 		var/time = rand(2, 6)
 		if (prob(75))
 			M.Paralyse(time)
