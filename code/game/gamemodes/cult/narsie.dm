@@ -70,8 +70,6 @@ var/global/list/narsie_list = list()
 		mezzer()
 
 /obj/singularity/narsie/large/eat()
-	set background = BACKGROUND_ENABLED
-
 	for (var/turf/A in orange(consume_range, src))
 		consume(A)
 
@@ -355,8 +353,6 @@ var/global/list/narsie_list = list()
 	grav_pull = 0
 
 /obj/singularity/narsie/wizard/eat()
-	set background = BACKGROUND_ENABLED
-
 	for (var/turf/T in trange(consume_range, src))
 		consume(T)
 

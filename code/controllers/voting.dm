@@ -170,8 +170,8 @@ datum/controller/vote
 						additional_antag_types |= antag_names_to_ids[.]
 
 		if(mode == "gamemode") //fire this even if the vote fails.
-			if(!going)
-				going = 1
+			if(!round_progressing)
+				round_progressing = 1
 				world << "<font color='red'><b>The round will start soon.</b></font>"
 
 		if(restart)
@@ -265,8 +265,8 @@ datum/controller/vote
 					world << sound('sound/ambience/alarm4.ogg', repeat = 0, wait = 0, volume = 50, channel = 3)
 				if("custom")
 					world << sound('sound/ambience/alarm4.ogg', repeat = 0, wait = 0, volume = 50, channel = 3)
-			if(mode == "gamemode" && going)
-				going = 0
+			if(mode == "gamemode" && round_progressing)
+				round_progressing = 0
 				world << "<font color='red'><b>Round start has been delayed.</b></font>"
 
 			time_remaining = round(config.vote_period/10)
