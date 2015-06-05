@@ -210,13 +210,6 @@
 			A.loc = src.loc
 		qdel(src)
 
-/obj/structure/closet/meteorhit(obj/O as obj)
-	if(O.icon_state == "flaming")
-		for(var/mob/M in src)
-			M.meteorhit(O)
-		src.dump_contents()
-		qdel(src)
-
 /obj/structure/closet/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(src.opened)
 		if(istype(W, /obj/item/weapon/grab))

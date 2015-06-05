@@ -63,9 +63,6 @@
 /obj/structure/inflatable/blob_act()
 	deflate(1)
 
-/obj/structure/inflatable/meteorhit()
-	deflate(1)
-
 /obj/structure/inflatable/attack_hand(mob/user as mob)
 		add_fingerprint(user)
 		return

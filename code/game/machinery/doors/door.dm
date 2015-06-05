@@ -146,10 +146,6 @@
 		else				do_animate("deny")
 	return
 
-/obj/machinery/door/meteorhit(obj/M as obj)
-	src.open()
-	return
-
 /obj/machinery/door/bullet_act(var/obj/item/projectile/Proj)
 	..()
 
