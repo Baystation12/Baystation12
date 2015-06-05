@@ -1363,3 +1363,8 @@ var/list/WALLITEMS = list(
 				temp_col  = "0[temp_col]"
 			colour += temp_col
 	return colour
+
+/atom/proc/get_light_and_color(var/atom/origin)
+	if(origin)
+		color = origin.color
+		set_light(origin.light_range, origin.light_power, origin.light_color)

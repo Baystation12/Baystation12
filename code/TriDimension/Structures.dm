@@ -141,7 +141,7 @@
 			if(blocked || istype(T, /turf/simulated/wall))
 				M << "Something is blocking the ladder."
 			else
-				M.visible_message("\blue \The [M] climbs [src.icon_state == "ladderup" ? "up" : "down"] \the [src]!", "You climb [src.icon_state == "ladderup"  ? "up" : "down"] \the [src]!", "You hear some grunting, and clanging of a metal ladder being used.")
+				M.visible_message("<span class='notice'>\The [M] climbs [src.icon_state == "ladderup" ? "up" : "down"] \the [src]!</span>", "You climb [src.icon_state == "ladderup"  ? "up" : "down"] \the [src]!", "You hear some grunting, and clanging of a metal ladder being used.")
 				M.Move(target.loc)
 
 /*	hatch
@@ -188,7 +188,7 @@
 					qdel(src)
 				if(M.z == z && get_dist(src,M) <= 1)
 					var/list/adjacent_to_me = global_adjacent_z_levels["[z]"]
-					M.visible_message("\blue \The [M] scurries [target.z == adjacent_to_me["up"] ? "up" : "down"] \the [src]!", "You scramble [target.z == adjacent_to_me["up"] ? "up" : "down"] \the [src]!", "You hear some grunting, and a hatch sealing.")
+					M.visible_message("<span class='notice'>\The [M] scurries [target.z == adjacent_to_me["up"] ? "up" : "down"] \the [src]!</span>", "You scramble [target.z == adjacent_to_me["up"] ? "up" : "down"] \the [src]!", "You hear some grunting, and a hatch sealing.")
 					M.Move(target.loc)
 				flick(top_icon_state_close,top_hatch)
 				bottom_hatch.overlays -= green_overlay
