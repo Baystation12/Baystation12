@@ -14,10 +14,10 @@
 
 /obj/item/weapon/scrying/attack_self(mob/user as mob)
 	if((user.mind && !wizards.is_antagonist(user.mind)))
-		usr << "<span class='warning'>You stare into the orb and see nothing but your own reflection.</span>"
+		user << "<span class='warning'>You stare into the orb and see nothing but your own reflection.</span>"
 		return
 
 	user << "<span class='info'>You can see... everything!</span>"
-	visible_message("<span class='danger'>[usr] stares into [src], their eyes glazing over.</span>")
+	visible_message("<span class='danger'>[user] stares into [src], their eyes glazing over.</span>")
 	announce_ghost_joinleave(user.ghostize(1), 1, "You feel that they used a powerful artifact to [pick("invade","disturb","disrupt","infest","taint","spoil","blight")] this place with their presence.")
 	return
