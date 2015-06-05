@@ -1,5 +1,0 @@
-author: PsiOmegaDelta
-delete-after: True
-
-changes: 
-  - tweak: "Blobs and simple mobs now attack all external organs instead of a subset. The overall damage remains the same but the number of fractures caused will, in general, be fewer."
