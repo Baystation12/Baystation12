@@ -46,17 +46,17 @@
 				air_master.connect(sim, src)
 
 /*
-	Simple heuristic for determining if removing the turf from it's zone may possibly partition the zone (A very bad thing).
+	Simple heuristic for determining if removing the turf from it's zone will not partition the zone (A very bad thing).
 	Instead of analyzing the entire zone, we only check the nearest 3x3 turfs surrounding the src turf.
-	This implementation may produce false positives but it (hopefully) will not produce any false negatives.
+	This implementation may produce false negatives but it (hopefully) will not produce any false postiives.
 */
 
 /turf/simulated/proc/can_safely_remove_from_zone()
 	#ifdef ZLEVELS
-	return 1 //not sure how to generalize this to multiz at the moment.
+	return 0 //TODO generalize this to multiz.
 	#else
 	
-	if(!zone) return 0
+	if(!zone) return 1
 	
 	var/check_dirs = get_zone_neighbours(src)
 	var/unconnected_dirs = check_dirs

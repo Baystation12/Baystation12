@@ -85,14 +85,8 @@ var/list/delayed_garbage = list()
 /proc/qdel(var/datum/A)
 	if(!A)
 		return
-	if(istype(A, /list))
-		var/list/L = A
-		for(var/E in L)
-			qdel(E)
-		return
-
 	if(!istype(A))
-		//warning("qdel() passed object of type [A.type]. qdel() can only handle /datum types.")
+		warning("qdel() passed object of type [A.type]. qdel() can only handle /datum types.")
 		del(A)
 		if(garbage_collector)
 			garbage_collector.dels++
