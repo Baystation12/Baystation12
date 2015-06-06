@@ -75,6 +75,15 @@
 	charge = 0
 	should_be_mapped = 1
 
+/obj/machinery/power/smes/buildable/Destroy()
+	qdel(wires)
+	if(component_parts)
+		for(var/atom/A in component_parts)
+			qdel(A)
+
+	return ..()
+
+
 // Proc: process()
 // Parameters: None
 // Description: Uses parent process, but if grounding wire is cut causes sparks to fly around.
