@@ -389,6 +389,7 @@ var/list/name_to_material
 	name = "cardboard"
 	stack_type = /obj/item/stack/material/cardboard
 	flags = MATERIAL_BRITTLE
+	integrity = 10
 	icon_base = "solid"
 	icon_reinf = "reinf_over"
 	icon_colour = "#AAAAAA"
