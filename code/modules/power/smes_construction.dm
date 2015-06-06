@@ -76,12 +76,10 @@
 	should_be_mapped = 1
 
 /obj/machinery/power/smes/buildable/Destroy()
+	..()
 	qdel(wires)
-	if(component_parts)
-		for(var/atom/A in component_parts)
-			qdel(A)
-
-	return ..()
+	for(var/obj/nano_module/rcon/R in world)
+		R.FindDevices()
 
 
 // Proc: process()
@@ -354,6 +352,7 @@
 					if(I.reliability != 100 && crit_fail)
 						I.crit_fail = 1
 					I.loc = src.loc
+					component_parts -= I
 				qdel(src)
 				return
 
