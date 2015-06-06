@@ -42,7 +42,7 @@
 
 			t1 += "<br>"
 
-			var/list/accesses = get_all_accesses()
+			var/list/accesses = get_all_station_access()
 			for (var/acc in accesses)
 				var/aname = get_access_desc(acc)
 

@@ -282,7 +282,7 @@
 	attack_verb = list("whipped", "lashed", "disciplined", "tickled")
 
 	suicide_act(mob/user)
-		viewers(user) << "\red <b>[user] is strangling \himself with the [src.name]! It looks like \he's trying to commit suicide.</b>"
+		viewers(user) << "<span class='warning'><b>[user] is strangling \himself with \the [src]! It looks like \he's trying to commit suicide.</b></span>"
 		return (OXYLOSS)
 
 /obj/item/weapon/module
@@ -342,7 +342,7 @@
 		if (C.bugged && C.status)
 			cameras.Add(C)
 	if (length(cameras) == 0)
-		usr << "\red No bugged functioning cameras found."
+		usr << "<span class='warning'>No bugged functioning cameras found.</span>"
 		return
 
 	var/list/friendly_cameras = new/list()

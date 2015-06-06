@@ -46,9 +46,9 @@ var/list/global/wall_cache = list()
 
 /turf/simulated/wall/bullet_act(var/obj/item/projectile/Proj)
 	if(istype(Proj,/obj/item/projectile/beam))
-		ignite(2500)
+		burn(2500)
 	else if(istype(Proj,/obj/item/projectile/ion))
-		ignite(500)
+		burn(500)
 
 	// Tasers and stuff? No thanks. Also no clone or tox damage crap.
 	if(!(Proj.damage_type == BRUTE || Proj.damage_type == BURN))
@@ -143,10 +143,10 @@ var/list/global/wall_cache = list()
 	return
 
 /turf/simulated/wall/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)//Doesn't fucking work because walls don't interact with air :(
-	ignite(exposed_temperature)
+	burn(exposed_temperature)
 
 /turf/simulated/wall/adjacent_fire_act(turf/simulated/floor/adj_turf, datum/gas_mixture/adj_air, adj_temp, adj_volume)
-	ignite(adj_temp)
+	burn(adj_temp)
 	if(adj_temp > material.melting_point)
 		take_damage(log(RAND_F(0.9, 1.1) * (adj_temp - material.melting_point)))
 
@@ -179,7 +179,7 @@ var/list/global/wall_cache = list()
 /turf/simulated/wall/ex_act(severity)
 	switch(severity)
 		if(1.0)
-			src.ChangeTurf(/turf/space)
+			src.ChangeTurf(get_base_turf(src.z))
 			return
 		if(2.0)
 			if(prob(75))
@@ -253,22 +253,11 @@ var/list/global/wall_cache = list()
 	return total_radiation
 
 /turf/simulated/wall/proc/burn(temperature)
-	spawn(2)
-	new /obj/structure/girder(src)
-	src.ChangeTurf(/turf/simulated/floor)
-	for(var/turf/simulated/floor/target_tile in range(0,src))
-		if(material == "phoron") //ergh
-			target_tile.assume_gas("phoron", 20, 400+T0C)
-		spawn (0) target_tile.hotspot_expose(temperature, 400)
-	for(var/turf/simulated/wall/W in range(3,src))
-		W.ignite((temperature/4))
-	for(var/obj/machinery/door/airlock/phoron/D in range(3,src))
-		D.ignite(temperature/4)
-
-/turf/simulated/wall/proc/ignite(var/exposed_temperature)
-	if(isnull(material.ignition_point))
-		return
-	if(exposed_temperature > material.ignition_point)//If the temperature of the object is over 300, then ignite
-		burn(exposed_temperature)
-		return
-	..()
+	if(material.combustion_effect(src, temperature, 0.7))
+		spawn(2)
+			new /obj/structure/girder(src)
+			src.ChangeTurf(/turf/simulated/floor)
+			for(var/turf/simulated/wall/W in range(3,src))
+				W.burn((temperature/4))
+			for(var/obj/machinery/door/airlock/phoron/D in range(3,src))
+				D.ignite(temperature/4)

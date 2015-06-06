@@ -1,3 +1,8 @@
+/mob/living/Life()
+	..()
+	if(stat != DEAD)
+		handle_actions()
+
 //mob verbs are faster than object verbs. See mob/verb/examine.
 /mob/living/verb/pulled(atom/movable/AM as mob|obj in oview(1))
 	set name = "Pull"
@@ -490,10 +495,6 @@ default behaviour is:
 			if(!( isturf(pulling.loc) ))
 				stop_pulling()
 				return
-			else
-				if(Debug)
-					log_debug("pulling disappeared? at [__LINE__] in mob.dm - pulling = [pulling]")
-					log_debug("REPORT THIS")
 
 		/////
 		if(pulling && pulling.anchored)
@@ -609,7 +610,7 @@ default behaviour is:
 
 /mob/living/proc/escape_inventory(obj/item/weapon/holder/H)
 	if(H != src.loc) return
-	
+
 	var/mob/M = H.loc //Get our mob holder (if any).
 
 	if(istype(M))
@@ -794,5 +795,5 @@ default behaviour is:
 					inertia_dir = 2
 				src << "<span class='warning>Something you are carrying is preventing you from leaving.</span>"
 				return
-	
+
 	..()

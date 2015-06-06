@@ -9,6 +9,8 @@
 	var/mob/living/pulling = null
 	var/bloodiness
 
+/obj/structure/bed/chair/wheelchair/update_icon()
+	return
 
 /obj/structure/bed/chair/wheelchair/set_dir()
 	..()
@@ -18,13 +20,18 @@
 	if(buckled_mob)
 		buckled_mob.set_dir(dir)
 
+/obj/structure/bed/chair/wheelchair/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	if(istype(W, /obj/item/weapon/wrench) || istype(W,/obj/item/stack) || istype(W, /obj/item/weapon/wirecutters))
+		return
+	..()
+
 /obj/structure/bed/chair/wheelchair/relaymove(mob/user, direction)
 	// Redundant check?
 	if(user.stat || user.stunned || user.weakened || user.paralysis || user.lying || user.restrained())
 		if(user==pulling)
 			pulling = null
 			user.pulledby = null
-			user << "\red You lost your grip!"
+			user << "<span class='warning'>You lost your grip!</span>"
 		return
 	if(buckled_mob && pulling && user == buckled_mob)
 		if(pulling.stat || pulling.stunned || pulling.weakened || pulling.paralysis || pulling.lying || pulling.restrained())
@@ -42,10 +49,10 @@
 		if(user==pulling)
 			return
 	if(pulling && (get_dir(src.loc, pulling.loc) == direction))
-		user << "\red You cannot go there."
+		user << "<span class='warning'>You cannot go there.</span>"
 		return
 	if(pulling && buckled_mob && (buckled_mob == user))
-		user << "\red You cannot drive while being pushed."
+		user << "<span class='warning'>You cannot drive while being pushed.</span>"
 		return
 
 	// Let's roll
@@ -96,7 +103,7 @@
 					unbuckle_mob()
 			if (pulling && (get_dist(src, pulling) > 1))
 				pulling.pulledby = null
-				pulling << "\red You lost your grip!"
+				pulling << "<span class='warning'>You lost your grip!</span>"
 				pulling = null
 		else
 			if (occupant && (src.loc != occupant.loc))
@@ -114,7 +121,7 @@
 	if(over_object == usr && in_range(src, usr))
 		if(!ishuman(usr))	return
 		if(usr == buckled_mob)
-			usr << "\red You realize you are unable to push the wheelchair you sit in."
+			usr << "<span class='warning'>You realize you are unable to push the wheelchair you sit in.</span>"
 			return
 		if(!pulling)
 			pulling = usr
@@ -126,7 +133,7 @@
 		else
 			if(usr != pulling)
 				for(var/mob/O in viewers(pulling, null))
-					O.show_message("\red [usr] breaks [pulling]'s grip on the wheelchair.", 1)
+					O.show_message("<span class='warning'>[usr] breaks [pulling]'s grip on the wheelchair.</span>", 1)
 			else
 				usr << "You let go of \the [name]'s handles."
 			pulling.pulledby = null

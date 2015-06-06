@@ -8,7 +8,7 @@
 
 /obj/item/weapon/cell/initialize()
 	..()
-	updateicon()
+	update_icon()
 
 /obj/item/weapon/cell/drain_power(var/drain_check, var/surge, var/power = 0)
 
@@ -22,7 +22,7 @@
 
 	return use(cell_amt) / CELLRATE
 
-/obj/item/weapon/cell/proc/updateicon()
+/obj/item/weapon/cell/update_icon()
 	overlays.Cut()
 
 	if(charge < 0.01)

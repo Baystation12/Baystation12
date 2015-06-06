@@ -62,7 +62,7 @@
 
 /datum/species/unathi/equip_survival_gear(var/mob/living/carbon/human/H)
 	..()
-	H.equip_to_slot_or_del(new /obj/item/clothing/shoes/sandal(H),slot_shoes,1)
+	H.equip_to_slot_or_del(new /obj/item/clothing/shoes/sandal(H),slot_shoes)
 
 /datum/species/tajaran
 	name = "Tajara"
@@ -108,7 +108,7 @@
 
 /datum/species/tajaran/equip_survival_gear(var/mob/living/carbon/human/H)
 	..()
-	H.equip_to_slot_or_del(new /obj/item/clothing/shoes/sandal(H),slot_shoes,1)
+	H.equip_to_slot_or_del(new /obj/item/clothing/shoes/sandal(H),slot_shoes)
 
 /datum/species/skrell
 	name = "Skrell"
@@ -146,6 +146,8 @@
 	hud_type = /datum/hud_data/diona
 	siemens_coefficient = 0.3
 	eyes = "blank_eyes"
+	show_ssd = "completely quiescent"
+
 
 	blurb = "Commonly referred to (erroneously) as 'plant people', the Dionaea are a strange space-dwelling collective \
 	species hailing from Epsilon Ursae Minoris. Each 'diona' is a cluster of numerous cat-sized organisms called nymphs; \
@@ -251,8 +253,9 @@
 	rarity_value = 2
 
 	eyes = "blank_eyes"
-	brute_mod = 2.5 // 100% * 2.5 * 0.6 (robolimbs) ~= 150%
-	burn_mod = 2.5  // So they take 50% extra damage from brute/burn overall.
+	brute_mod = 1.875 // 100% * 1.875 * 0.8 (robolimbs) ~= 150%
+	burn_mod = 1.875  // So they take 50% extra damage from brute/burn overall.
+	show_ssd = "flashing a 'system offline' glyph on their monitor"
 
 	warning_low_pressure = 50
 	hazard_low_pressure = 0
@@ -266,7 +269,6 @@
 	heat_level_3 = 2000
 
 	passive_temp_gain = 10  // This should cause IPCs to stabilize at ~80 C in a 20 C environment.
-	siemens_coefficient = 0	// Insulated.
 
 	flags = CAN_JOIN | IS_WHITELISTED | NO_BREATHE | NO_SCAN | NO_BLOOD | NO_PAIN | NO_POISON
 
@@ -277,8 +279,11 @@
 
 	has_organ = list(
 		"brain" = /obj/item/organ/mmi_holder/posibrain,
-		"cell" = /obj/item/organ/cell
+		"cell" = /obj/item/organ/cell,
+		"optics" = /obj/item/organ/optical_sensor
 		)
+
+	vision_organ = "optics"
 
 	has_limbs = list(
 		"chest" =  list("path" = /obj/item/organ/external/chest/ipc),

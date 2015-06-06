@@ -8,6 +8,10 @@ env:
 before_install:
   - sudo apt-get update -qq
   - sudo apt-get install libc6:i386 libgcc1:i386 libstdc++6:i386 -qq
+  - sudo apt-get install python -qq
+  - sudo apt-get install python-pip -qq
+  - sudo pip install PyYaml -q
+  - sudo pip install beautifulsoup4 -q
 
 install:
   - curl "http://www.byond.com/download/build/${BYOND_MAJOR}/${BYOND_MAJOR}.${BYOND_MINOR}_byond_linux.zip" -o byond.zip
@@ -20,5 +24,7 @@ script:
   - shopt -s globstar
   - (! grep 'step_[xy]' maps/**/*.dmm)
   - (! find nano/templates/ -type f -exec md5sum {} + | sort | uniq -D -w 32 | grep nano)
+  - (num=`grep -E '\\\\(red|blue|green|black|b|i[^mc])' **/*.dm | wc -l`; [ $num -le 1355 ])
   - (  md5sum -c - <<< "0af969f671fba6cf9696c78cd175a14a *baystation12.int")
   - DreamMaker baystation12.dme
+  - python tools/GenerateChangelog/ss13_genchangelog.py html/changelog.html html/changelogs

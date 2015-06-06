@@ -20,6 +20,7 @@
 	var/obj/machinery/camera/camera
 	var/list/camera_networks
 
+	action_button_name = "Toggle Helmet Light"
 	light_overlay = "helmet_light"
 	brightness_on = 4
 	on = 0
@@ -27,9 +28,6 @@
 /obj/item/clothing/head/helmet/space/attack_self(mob/user)
 
 	if(!camera && camera_networks)
-
-		if(!icon_action_button)
-			icon_action_button = "[icon_state]"
 
 		camera = new /obj/machinery/camera(src)
 		camera.replace_networks(camera_networks)

@@ -20,20 +20,20 @@
 	attackby(obj/item/weapon/W as obj, mob/user as mob)
 		if (istype(W, /obj/item/weapon/card/id))
 			if(src.broken)
-				user << "\red It appears to be broken."
+				user << "<span class='warning'>It appears to be broken.</span>"
 				return
 			if(src.allowed(user))
 				src.locked = !( src.locked )
 				if(src.locked)
 					src.icon_state = src.icon_locked
-					user << "\red You lock the [src.name]!"
+					user << "<span class='notice'>You lock \the [src]!</span>"
 					return
 				else
 					src.icon_state = src.icon_closed
-					user << "\red You unlock the [src.name]!"
+					user << "<span class='notice'>You unlock \the [src]!</span>"
 					return
 			else
-				user << "\red Access Denied"
+				user << "<span class='warning'>Access Denied</span>"
 		else if((istype(W, /obj/item/weapon/card/emag)||istype(W, /obj/item/weapon/melee/energy/blade)) && !src.broken)
 			broken = 1
 			locked = 0
@@ -46,21 +46,21 @@
 				playsound(src.loc, 'sound/weapons/blade1.ogg', 50, 1)
 				playsound(src.loc, "sparks", 50, 1)
 				for(var/mob/O in viewers(user, 3))
-					O.show_message(text("\blue The locker has been sliced open by [] with an energy blade!", user), 1, text("\red You hear metal being sliced and sparks flying."), 2)
+					O.show_message(text("<span class='warning'>The locker has been sliced open by [] with an energy blade!</span>", user), 1, text("<span class='warning'>You hear metal being sliced and sparks flying.</span>"), 2)
 			else
 				for(var/mob/O in viewers(user, 3))
-					O.show_message(text("\blue The locker has been broken by [] with an electromagnetic card!", user), 1, text("You hear a faint electrical spark."), 2)
+					O.show_message(text("<span class='warning'>The locker has been broken by [] with an electromagnetic card!</span>", user), 1, text("You hear a faint electrical spark."), 2)
 
 		if(!locked)
 			..()
 		else
-			user << "\red Its locked!"
+			user << "<span class='warning'>It's locked!</span>"
 		return
 
 
 	show_to(mob/user as mob)
 		if(locked)
-			user << "\red Its locked!"
+			user << "<span class='warning'>It's locked!</span>"
 		else
 			..()
 		return

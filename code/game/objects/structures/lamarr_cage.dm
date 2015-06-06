@@ -76,10 +76,10 @@
 	if (src.destroyed)
 		return
 	else
-		usr << text("\blue You kick the lab cage.")
+		usr << "<span class='notice'>You kick the lab cage.</span>"
 		for(var/mob/O in oviewers())
 			if ((O.client && !( O.blinded )))
-				O << text("\red [] kicks the lab cage.", usr)
+				O << "<span class='warning'>[usr] kicks the lab cage.</span>"
 		src.health -= 2
 		healthcheck()
 		return

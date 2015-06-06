@@ -68,7 +68,7 @@
 		if (W) W.loc = src.loc
 	else if(istype(W, /obj/item/weapon/card/id))
 		if(src.broken)
-			user << "\red It appears to be broken."
+			user << "<span class='warning'>It appears to be broken.</span>"
 			return
 		var/obj/item/weapon/card/id/I = W
 		if(!I || !I.registered_name)	return
@@ -82,7 +82,7 @@
 				src.registered_name = I.registered_name
 				src.desc = "Owned by [I.registered_name]."
 		else
-			user << "\red Access Denied"
+			user << "<span class='warning'>Access Denied</span>"
 	else if( (istype(W, /obj/item/weapon/card/emag)||istype(W, /obj/item/weapon/melee/energy/blade)) && !src.broken)
 		broken = 1
 		locked = 0
@@ -95,9 +95,9 @@
 			playsound(src.loc, 'sound/weapons/blade1.ogg', 50, 1)
 			playsound(src.loc, "sparks", 50, 1)
 			for(var/mob/O in viewers(user, 3))
-				O.show_message("\blue The locker has been sliced open by [user] with an energy blade!", 1, "\red You hear metal being sliced and sparks flying.", 2)
+				O.show_message("<span class='warning'>The locker has been sliced open by [user] with an energy blade!</span>", 1, "<span class='warning'>You hear metal being sliced and sparks flying.</span>", 2)
 	else
-		user << "\red Access Denied"
+		user << "<span class='warning'>Access Denied</span>"
 	return
 
 /obj/structure/closet/secure_closet/personal/verb/reset()
@@ -109,9 +109,9 @@
 	if(ishuman(usr))
 		src.add_fingerprint(usr)
 		if (src.locked || !src.registered_name)
-			usr << "\red You need to unlock it first."
+			usr << "<span class='warning'>You need to unlock it first.</span>"
 		else if (src.broken)
-			usr << "\red It appears to be broken."
+			usr << "<span class='warning'>It appears to be broken.</span>"
 		else
 			if (src.opened)
 				if(!src.close())

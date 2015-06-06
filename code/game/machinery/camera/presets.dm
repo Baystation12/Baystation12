@@ -162,15 +162,23 @@ var/global/list/engineering_networks = list(
 /obj/machinery/camera/proc/upgradeEmpProof()
 	assembly.upgrades.Add(new /obj/item/stack/material/osmium(assembly))
 	setPowerUsage()
+	update_coverage()
 
 /obj/machinery/camera/proc/upgradeXRay()
 	assembly.upgrades.Add(new /obj/item/weapon/stock_parts/scanning_module/adv(assembly))
 	setPowerUsage()
+	update_coverage()
 
-// If you are upgrading Motion, and it isn't in the camera's New(), add it to the machines list.
 /obj/machinery/camera/proc/upgradeMotion()
 	assembly.upgrades.Add(new /obj/item/device/assembly/prox_sensor(assembly))
 	setPowerUsage()
+	if(!(src in machines))
+		if(!machinery_sort_required && ticker)
+			dd_insertObjectList(machines, src)
+		else
+			machines += src
+			machinery_sort_required = 1
+	update_coverage()
 
 /obj/machinery/camera/proc/setPowerUsage()
 	var/mult = 1

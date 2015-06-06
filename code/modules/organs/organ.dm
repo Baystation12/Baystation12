@@ -65,21 +65,26 @@ var/list/organ_cache = list()
 	processing_objects -= src
 	if(dead_icon)
 		icon_state = dead_icon
+	if(owner && vital)
+		owner.death()
 
 /obj/item/organ/process()
 
+	if(loc != owner)
+		owner = null
+
+	//dead already, no need for more processing
+	if(status & ORGAN_DEAD)
+		return
 	// Don't process if we're in a freezer, an MMI or a stasis bag.or a freezer or something I dunno
 	if(istype(loc,/obj/item/device/mmi))
 		return
 	if(istype(loc,/obj/structure/closet/body_bag/cryobag) || istype(loc,/obj/structure/closet/crate/freezer) || istype(loc,/obj/item/weapon/storage/box/freezer))
 		return
 	//Process infections
-	if (robotic >= 2 || (owner && owner.species && (owner.species.flags & IS_PLANT)))
+	if ((status & ORGAN_ROBOT) || (owner && owner.species && (owner.species.flags & IS_PLANT)))
 		germ_level = 0
 		return
-
-	if(loc != owner)
-		owner = null
 
 	if(!owner)
 		var/datum/reagent/blood/B = locate(/datum/reagent/blood) in reagents.reagent_list
@@ -97,6 +102,10 @@ var/list/organ_cache = list()
 		handle_antibiotics()
 		handle_rejection()
 		handle_germ_effects()
+
+	//check if we've hit max_damage
+	if(damage >= max_damage)
+		die()
 
 /obj/item/organ/examine(mob/user)
 	..(user)
@@ -191,15 +200,16 @@ var/list/organ_cache = list()
 	W.time_inflicted = world.time
 
 /obj/item/organ/proc/take_damage(amount, var/silent=0)
-	if(src.robotic == 2)
+	if(src.status & ORGAN_ROBOT)
 		src.damage += (amount * 0.8)
 	else
 		src.damage += amount
 
-	if(owner && parent_organ)
-		var/obj/item/organ/external/parent = owner.get_organ(parent_organ)
-		if(parent && !silent)
-			owner.custom_pain("Something inside your [parent.name] hurts a lot.", 1)
+		//only show this if the organ is not robotic
+		if(owner && parent_organ)
+			var/obj/item/organ/external/parent = owner.get_organ(parent_organ)
+			if(parent && !silent)
+				owner.custom_pain("Something inside your [parent.name] hurts a lot.", 1)
 
 /obj/item/organ/proc/robotize() //Being used to make robutt hearts, etc
 	robotic = 2
@@ -207,7 +217,6 @@ var/list/organ_cache = list()
 	src.status &= ~ORGAN_BLEEDING
 	src.status &= ~ORGAN_SPLINTED
 	src.status &= ~ORGAN_CUT_AWAY
-	src.status &= ~ORGAN_ATTACHABLE
 	src.status &= ~ORGAN_DESTROYED
 	src.status |= ORGAN_ROBOT
 	src.status |= ORGAN_ASSISTED

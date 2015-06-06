@@ -61,13 +61,13 @@
 	matter = list(DEFAULT_WALL_MATERIAL = 15000, "glass" = 10000)
 	flags = CONDUCT
 	force = 15.0
-	w_class = 2.0
+	w_class = 3
 	origin_tech = list(TECH_MATERIAL = 1, TECH_BIO = 1)
 	attack_verb = list("drilled")
 
 	suicide_act(mob/user)
-		viewers(user) << pick("\red <b>[user] is pressing the [src.name] to \his temple and activating it! It looks like \he's trying to commit suicide.</b>", \
-							"\red <b>[user] is pressing [src.name] to \his chest and activating it! It looks like \he's trying to commit suicide.</b>")
+		viewers(user) << pick("<span class='danger'>\The [user] is pressing \the [src] to \his temple and activating it! It looks like \he's trying to commit suicide.</span>",
+		                       "<span class='danger'>\The [user] is pressing \the [src] to \his chest and activating it! It looks like \he's trying to commit suicide.</span>")
 		return (BRUTELOSS)
 
 /*
@@ -82,7 +82,7 @@
 	force = 10.0
 	sharp = 1
 	edge = 1
-	w_class = 2.0
+	w_class = 1
 	throwforce = 5.0
 	throw_speed = 3
 	throw_range = 5
@@ -91,9 +91,9 @@
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 
 	suicide_act(mob/user)
-		viewers(user) << pick("\red <b>[user] is slitting \his wrists with the [src.name]! It looks like \he's trying to commit suicide.</b>", \
-							"\red <b>[user] is slitting \his throat with the [src.name]! It looks like \he's trying to commit suicide.</b>", \
-							"\red <b>[user] is slitting \his stomach open with the [src.name]! It looks like \he's trying to commit seppuku.</b>")
+		viewers(user) << pick("<span class='danger'>\The [user] is slitting \his wrists with the [src.name]! It looks like \he's trying to commit suicide.</span>", \
+		                      "<span class='danger'>\The [user] is slitting \his throat with the [src.name]! It looks like \he's trying to commit suicide.</span>", \
+		                      "<span class='danger'>\The [user] is slitting \his stomach open with the [src.name]! It looks like \he's trying to commit seppuku.</span>")
 		return (BRUTELOSS)
 
 /*
@@ -136,7 +136,7 @@
 	hitsound = 'sound/weapons/circsawhit.ogg'
 	flags = CONDUCT
 	force = 15.0
-	w_class = 2.0
+	w_class = 3
 	throwforce = 9.0
 	throw_speed = 3
 	throw_range = 5

@@ -23,18 +23,6 @@
 	//Detective Work, used for the duplicate data points kept in the scanners
 	var/list/original_atom
 
-/atom/Destroy()
-	. = ..()
-	density = 0
-	set_opacity(0)
-
-	if(reagents)
-		qdel(reagents)
-		reagents = null
-	for(var/atom/movable/AM in contents)
-		qdel(AM)
-	invisibility = 101
-
 /atom/proc/assume_air(datum/gas_mixture/giver)
 	return null
 
@@ -428,6 +416,8 @@ its easier to just keep the beam vertical.
 
 
 /atom/proc/clean_blood()
+	if(!simulated)
+		return
 	src.color = initial(src.color) //paint
 	src.germ_level = 0
 	if(istype(blood_DNA, /list))

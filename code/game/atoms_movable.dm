@@ -31,8 +31,15 @@
 
 /atom/movable/Destroy()
 	. = ..()
-
+	if(reagents)
+		qdel(reagents)
+	for(var/atom/movable/AM in contents)
+		qdel(AM)
 	loc = null
+	if (pulledby)
+		if (pulledby.pulling == src)
+			pulledby.pulling = null
+		pulledby = null
 
 /atom/movable/proc/initialize()
 	return
@@ -213,13 +220,13 @@
 	return
 
 /atom/movable/proc/touch_map_edge()
-	if(z in config.sealed_levels) 
+	if(z in config.sealed_levels)
 		return
-	
+
 	if(config.use_overmap)
 		overmap_spacetravel(get_turf(src), src)
 		return
-	
+
 	var/move_to_z = src.get_transit_zlevel()
 	if(move_to_z)
 		z = move_to_z
@@ -248,13 +255,13 @@
 			if(loc) loc.Entered(src)
 
 //This list contains the z-level numbers which can be accessed via space travel and the percentile chances to get there.
-var/list/accessible_z_levels = list("1" = 5, "3" = 10, "4" = 15, "5" = 10, "6" = 60)
+var/list/accessible_z_levels = list("1" = 5, "3" = 10, "4" = 15, "6" = 60)
 
 //by default, transition randomly to another zlevel
 /atom/movable/proc/get_transit_zlevel()
 	var/list/candidates = accessible_z_levels.Copy()
 	candidates.Remove("[src.z]")
-	
+
 	if(!candidates.len)
 		return null
 	return text2num(pickweight(candidates))
