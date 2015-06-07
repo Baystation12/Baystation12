@@ -103,6 +103,16 @@ var/list/name_to_material
 /material/proc/get_blunt_damage()
 	return weight //todo
 
+// Return the matter comprising this material.
+/material/proc/get_matter()
+	var/list/temp_matter = list()
+	if(islist(composite_material))
+		for(var/material_string in composite_material)
+			temp_matter[material_string] = composite_material[material_string]
+	else if(SHEET_MATERIAL_AMOUNT)
+		temp_matter[name] = SHEET_MATERIAL_AMOUNT
+	return temp_matter
+
 // As above.
 /material/proc/get_edge_damage()
 	return hardness //todo
@@ -192,7 +202,7 @@ var/list/name_to_material
 	weight = 22
 	hardness = 50
 	stack_origin_tech = list(TECH_MATERIAL = 3)
-				
+
 /material/phoron
 	name = "phoron"
 	stack_type = /obj/item/stack/material/phoron
@@ -386,6 +396,7 @@ var/list/name_to_material
 	name = "cardboard"
 	stack_type = /obj/item/stack/material/cardboard
 	flags = MATERIAL_BRITTLE
+	integrity = 10
 	icon_base = "solid"
 	icon_reinf = "reinf_over"
 	icon_colour = "#AAAAAA"

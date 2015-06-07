@@ -218,12 +218,10 @@
 	return 0
 
 /datum/reagents/proc/get_reagents()
-	var/res = ""
+	. = list()
 	for(var/datum/reagent/current in reagent_list)
-		if (res != "") res += ","
-		res += "[current.id]([current.volume])"
-
-	return res
+		. += "[current.id] ([current.volume])"
+	return english_list(., "EMPTY", "", ", ", ", ")
 
 /* Holder-to-holder and similar procs */
 
