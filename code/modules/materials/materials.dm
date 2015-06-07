@@ -104,6 +104,16 @@ var/list/name_to_material
 /material/proc/get_blunt_damage()
 	return weight //todo
 
+// Return the matter comprising this material.
+/material/proc/get_matter()
+	var/list/temp_matter = list()
+	if(islist(composite_material))
+		for(var/material_string in composite_material)
+			temp_matter[material_string] = composite_material[material_string]
+	else if(stack_per_sheet)
+		temp_matter[name] = stack_per_sheet
+	return temp_matter
+
 // As above.
 /material/proc/get_edge_damage()
 	return hardness //todo

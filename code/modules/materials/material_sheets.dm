@@ -38,13 +38,7 @@
 	if(material.conductive)
 		flags |= CONDUCT
 
-	if(!islist(matter))
-		matter = list()
-	if(material.composite_material)
-		for(var/material_string in material.composite_material)
-			matter[material_string] = material.composite_material[material_string]
-	else
-		matter[material.name] = material.stack_per_sheet
+	matter = material.get_matter()
 	return 1
 
 /obj/item/stack/material/transfer_to(obj/item/stack/S, var/tamount=null, var/type_verified)
