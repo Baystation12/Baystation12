@@ -109,8 +109,8 @@ var/list/name_to_material
 	if(islist(composite_material))
 		for(var/material_string in composite_material)
 			temp_matter[material_string] = composite_material[material_string]
-	else if(stack_per_sheet)
-		temp_matter[name] = stack_per_sheet
+	else if(SHEET_MATERIAL_AMOUNT)
+		temp_matter[name] = SHEET_MATERIAL_AMOUNT
 	return temp_matter
 
 // As above.
@@ -202,7 +202,7 @@ var/list/name_to_material
 	weight = 22
 	hardness = 50
 	stack_origin_tech = list(TECH_MATERIAL = 3)
-				
+
 /material/phoron
 	name = "phoron"
 	stack_type = /obj/item/stack/material/phoron

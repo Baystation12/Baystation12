@@ -148,3 +148,8 @@
 #define MATERIAL_PADDING 4
 
 #define TABLE_BRITTLE_MATERIAL_MULTIPLIER 4 // Amount table damage is multiplied by if it is made of a brittle material (e.g. glass)
+
+#define BOMBCAP_DVSTN_RADIUS (max_explosion_range/4)
+#define BOMBCAP_HEAVY_RADIUS (max_explosion_range/2)
+#define BOMBCAP_LIGHT_RADIUS max_explosion_range
+#define BOMBCAP_FLASH_RADIUS (max_explosion_range*1.5)
