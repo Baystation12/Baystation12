@@ -773,3 +773,8 @@ var/list/be_special_flags = list(
 #define ROBOT_NOTIFICATION_NEW_NAME 2
 #define ROBOT_NOTIFICATION_NEW_MODULE 3
 #define ROBOT_NOTIFICATION_MODULE_RESET 4
+
+#define BOMBCAP_DVSTN_RADIUS (max_explosion_range/4)
+#define BOMBCAP_HEAVY_RADIUS (max_explosion_range/2)
+#define BOMBCAP_LIGHT_RADIUS max_explosion_range
+#define BOMBCAP_FLASH_RADIUS (max_explosion_range*1.5)
