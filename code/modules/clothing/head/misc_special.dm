@@ -43,7 +43,7 @@
 			src.up = !src.up
 			src.flags |= (HEADCOVERSEYES | HEADCOVERSMOUTH)
 			flags_inv |= (HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE)
-			icon_state = "[base_state]"
+			icon_state = base_state
 			usr << "You flip the [src] down to protect your eyes."
 		else
 			src.up = !src.up
