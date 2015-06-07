@@ -40,13 +40,19 @@
 	var/zoomdevicename = null //name used for message when binoculars/scope is used
 	var/zoom = 0 //1 if item is actively being used to zoom. For scoped guns and binoculars.
 
+	var/icon_override = null  //Used to override hardcoded clothing dmis in human clothing proc.
 	var/item_state = null // Used to specify the item state for the on-mob overlays.
-	var/item_state_slots = null //overrides the default item_state for particular slots.
+
+	//** These specify item/icon overrides for _slots_
+
+	var/list/item_state_slots = list() //overrides the default item_state for particular slots.
 
 	// Used to specify the icon file to be used when the item is worn. If not set the default icon for that slot will be used.
 	// If icon_override or sprite_sheets are set they will take precendence over this, assuming they apply to the slot in question.
 	// Only slot_l_hand/slot_r_hand are implemented at the moment. Others to be implemented as needed.
-	var/list/item_icons = null
+	var/list/item_icons = list()
+
+	//** These specify item/icon overrides for _species_
 
 	/* Species-specific sprites, concept stolen from Paradise//vg/.
 	ex:
@@ -55,13 +61,11 @@
 		)
 	If index term exists and icon_override is not set, this sprite sheet will be used.
 	*/
-	var/list/sprite_sheets = null
-	var/icon_override = null  //Used to override hardcoded clothing dmis in human clothing proc.
+	var/list/sprite_sheets = list()
 
-	/* Species-specific sprite sheets for inventory sprites
-	Works similarly to worn sprite_sheets, except the alternate sprites are used when the clothing/refit_for_species() proc is called.
-	*/
-	var/list/sprite_sheets_obj = null
+	// Species-specific sprite sheets for inventory sprites
+	// Works similarly to worn sprite_sheets, except the alternate sprites are used when the clothing/refit_for_species() proc is called.
+	var/list/sprite_sheets_obj = list()
 
 /obj/item/Destroy()
 	if(ismob(loc))
