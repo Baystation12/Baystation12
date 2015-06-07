@@ -739,23 +739,23 @@ steam.start() -- spawns the effect
 			var/light = -1
 			var/flash = -1
 
-			// Clamp all values to max_explosion_range
+			// Clamp all values to fractions of max_explosion_range, following the same pattern as for tank transfer bombs
 			if (round(amount/12) > 0)
-				devastation = min (max_explosion_range, devastation + round(amount/12))
+				devastation = min (max_explosion_range*0.25, devastation + amount/12)
 
 			if (round(amount/6) > 0)
-				heavy = min (max_explosion_range, heavy + round(amount/6))
+				heavy = min (max_explosion_range*0.5, heavy + amount/6)
 
 			if (round(amount/3) > 0)
-				light = min (max_explosion_range, light + round(amount/3))
+				light = min (max_explosion_range, light + amount/3)
 
-			if (flash && flashing_factor)
-				flash += (round(amount/4) * flashing_factor)
+			if (flashing && flashing_factor)
+				flash = min (max_explosion_range*1.5, ((amount/4) * flashing_factor))
 
 			for(var/mob/M in viewers(8, location))
 				M << "\red The solution violently explodes."
 
-			explosion(location, devastation, heavy, light, flash)
+			explosion(location, round(devastation), round(heavy), round(light), round(flash))
 
 	proc/holder_damage(var/atom/holder)
 		if(holder)
