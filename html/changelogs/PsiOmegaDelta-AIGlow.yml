@@ -1,0 +1,4 @@
+author: PsiOmegaDelta
+delete-after: True
+changes: 
+  - rscadd: "The AI chassis now glows, with the color depending on the currently selected display."
