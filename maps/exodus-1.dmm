@@ -4249,7 +4249,7 @@
 "bDK" = (/obj/structure/disposalpipe/segment,/obj/machinery/door/airlock/glass_medical{id_tag = "GeneticsDoor"; name = "Genetics Laboratory"; req_access = list(9)},/turf/simulated/floor{icon_state = "white"},/area/medical/medbay2)
 "bDL" = (/turf/simulated/floor{icon_state = "white"},/area/medical/genetics_cloning)
 "bDM" = (/obj/machinery/disposal,/obj/structure/disposalpipe/trunk,/obj/item/device/radio/intercom{broadcasting = 0; name = "Station Intercom (General)"; pixel_y = 20},/turf/simulated/floor{icon_state = "white"},/area/medical/genetics_cloning)
-"bDN" = (/obj/item/apc_frame,/obj/effect/decal/cleanable/dirt,/obj/structure/cable/green{d2 = 2; icon_state = "0-2"},/turf/simulated/floor/plating,/area/medical/genetics)
+"bDN" = (/obj/item/frame/apc,/obj/effect/decal/cleanable/dirt,/obj/structure/cable/green{d2 = 2; icon_state = "0-2"},/turf/simulated/floor/plating,/area/medical/genetics)
 "bDO" = (/obj/structure/disposalpipe/segment,/turf/simulated/floor/plating,/area/medical/genetics)
 "bDP" = (/obj/machinery/door/firedoor,/obj/machinery/door/blast/shutters{density = 0; dir = 2; icon_state = "shutter0"; id = "acute1"; name = "EMT Storage Privacy Shutters"; opacity = 0},/obj/machinery/light_switch{pixel_x = 22; pixel_y = 0},/turf/simulated/floor{tag = "icon-whitebluefull"; icon_state = "whitebluefull"},/area/medical/sleeper)
 "bDQ" = (/obj/structure/table/standard,/obj/item/device/mmi,/obj/item/device/mmi,/obj/item/device/mmi,/turf/simulated/floor,/area/assembly/robotics)
