@@ -35,7 +35,7 @@ var/list/organ_cache = list()
 		owner.internal_organs_by_name -= src
 
 	if((owner.organs) && (src in owner.organs))
-		owner.internal_organs -= src
+		owner.organs -= src
 
 	if((owner.organs_by_name) && (src in owner.organs_by_name))
 		owner.organs_by_name -= src
