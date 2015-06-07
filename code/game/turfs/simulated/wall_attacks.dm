@@ -28,6 +28,7 @@
 
 /turf/simulated/wall/proc/success_smash(var/mob/user)
 	user << "<span class='danger'>You smash through the wall!</span>"
+	user.do_attack_animation(src)
 	spawn(1)
 		dismantle_wall(1)
 
@@ -98,7 +99,7 @@
 	if(W)
 		radiate()
 		if(is_hot(W))
-			ignite(is_hot(W))
+			burn(is_hot(W))
 
 	if(locate(/obj/effect/overlay/wallrot) in src)
 		if(istype(W, /obj/item/weapon/weldingtool) )

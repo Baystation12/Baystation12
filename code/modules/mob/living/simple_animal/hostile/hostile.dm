@@ -214,8 +214,8 @@
 /mob/living/simple_animal/hostile/proc/check_horde()
 	if(emergency_shuttle.shuttle.location)
 		if(!enroute && !target_mob)	//The shuttle docked, all monsters rush for the escape hallway
-			if(!shuttletarget || (get_dist(src, shuttletarget) >= 2))
-				shuttletarget = pick(escape_list)
+			if(!shuttletarget && escape_list.len) //Make sure we didn't already assign it a target, and that there are targets to pick
+				shuttletarget = pick(escape_list) //Pick a shuttle target
 			enroute = 1
 			stop_automated_movement = 1
 			spawn()
@@ -232,8 +232,8 @@
 		if(istype(A,/obj/machinery/door/airlock))
 			var/obj/machinery/door/airlock/D = A
 			D.open(1)
-		else if(istype(A,/obj/structure/mineral_door))
-			var/obj/structure/mineral_door/D = A
+		else if(istype(A,/obj/structure/simple_door))
+			var/obj/structure/simple_door/D = A
 			if(D.density)
 				D.Open()
 		else if(istype(A,/obj/structure/cult/pylon))

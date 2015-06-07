@@ -11,7 +11,7 @@
 
 /obj/item/stack
 	gender = PLURAL
-	origin_tech = "materials=1"
+	origin_tech = list(TECH_MATERIAL = 1)
 	var/list/datum/stack_recipe/recipes
 	var/singular_name
 	var/amount = 1
@@ -110,26 +110,30 @@
 
 	if (!can_use(required))
 		if (produced>1)
-			user << "\red You haven't got enough [src] to build \the [produced] [recipe.title]\s!"
+			user << "<span class='warning'>You haven't got enough [src] to build \the [produced] [recipe.title]\s!</span>"
 		else
-			user << "\red You haven't got enough [src] to build \the [recipe.title]!"
+			user << "<span class='warning'>You haven't got enough [src] to build \the [recipe.title]!</span>"
 		return
 
 	if (recipe.one_per_turf && (locate(recipe.result_type) in user.loc))
-		user << "\red There is another [recipe.title] here!"
+		user << "<span class='warning'>There is another [recipe.title] here!</span>"
 		return
 
 	if (recipe.on_floor && !isfloor(user.loc))
-		user << "\red \The [recipe.title] must be constructed on the floor!"
+		user << "<span class='warning'>\The [recipe.title] must be constructed on the floor!</span>"
 		return
 
 	if (recipe.time)
-		user << "\blue Building [recipe.title] ..."
+		user << "<span class='notice'>Building [recipe.title] ...</span>"
 		if (!do_after(user, recipe.time))
 			return
 
 	if (use(required))
-		var/atom/O = new recipe.result_type(user.loc)
+		var/atom/O
+		if(recipe.use_material)
+			O = new recipe.result_type(user.loc, recipe.use_material)
+		else
+			O = new recipe.result_type(user.loc)
 		O.set_dir(user.dir)
 		O.add_fingerprint(user)
 
@@ -219,10 +223,10 @@
 */
 
 //attempts to transfer amount to S, and returns the amount actually transferred
-/obj/item/stack/proc/transfer_to(obj/item/stack/S, var/tamount=null)
+/obj/item/stack/proc/transfer_to(obj/item/stack/S, var/tamount=null, var/type_verified)
 	if (!get_amount())
 		return 0
-	if (stacktype != S.stacktype)
+	if ((stacktype != S.stacktype) && !type_verified)
 		return 0
 	if (isnull(tamount))
 		tamount = src.get_amount()
@@ -236,7 +240,6 @@
 			transfer_fingerprints_to(S)
 			if(blood_DNA)
 				S.blood_DNA |= blood_DNA
-				//todo bloody overlay
 		return transfer
 	return 0
 
@@ -252,6 +255,7 @@
 	var/orig_amount = src.amount
 	if (transfer && src.use(transfer))
 		var/obj/item/stack/newstack = new src.type(loc, transfer)
+		newstack.color = color
 		if (prob(transfer/orig_amount * 100))
 			transfer_fingerprints_to(newstack)
 			if(blood_DNA)
@@ -310,10 +314,8 @@
 	return
 
 /obj/item/stack/attackby(obj/item/W as obj, mob/user as mob)
-	..()
 	if (istype(W, /obj/item/stack))
 		var/obj/item/stack/S = W
-
 		if (user.get_inactive_hand()==src)
 			src.transfer_to(S, 1)
 		else
@@ -324,7 +326,8 @@
 				S.interact(usr)
 			if (src && usr.machine==src)
 				src.interact(usr)
-	else return ..()
+	else
+		return ..()
 
 /*
  * Recipe datum
@@ -338,7 +341,9 @@
 	var/time = 0
 	var/one_per_turf = 0
 	var/on_floor = 0
-	New(title, result_type, req_amount = 1, res_amount = 1, max_res_amount = 1, time = 0, one_per_turf = 0, on_floor = 0)
+	var/use_material
+
+	New(title, result_type, req_amount = 1, res_amount = 1, max_res_amount = 1, time = 0, one_per_turf = 0, on_floor = 0, supplied_material = null)
 		src.title = title
 		src.result_type = result_type
 		src.req_amount = req_amount
@@ -347,6 +352,7 @@
 		src.time = time
 		src.one_per_turf = one_per_turf
 		src.on_floor = on_floor
+		src.use_material = supplied_material
 
 /*
  * Recipe list datum

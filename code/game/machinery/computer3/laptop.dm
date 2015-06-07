@@ -35,7 +35,7 @@
 		set src in view(1)
 
 		if(usr.stat || usr.restrained() || usr.lying || !istype(usr, /mob/living))
-			usr << "\red You can't do that."
+			usr << "<span class='warning'>You can't do that.</span>"
 			return
 
 		if(!Adjacent(usr))
@@ -55,19 +55,11 @@
 				qdel(src)
 			return
 
-		if(!stored_computer.manipulating)
-			stored_computer.manipulating = 1
-			stored_computer.loc = loc
-			stored_computer.stat &= ~MAINT
-			stored_computer.update_icon()
-			loc = null
-			usr << "You open \the [src]."
-
-			spawn(5)
-				stored_computer.manipulating = 0
-				qdel(src)
-		else
-			usr << "\red You are already opening the computer!"
+		stored_computer.loc = loc
+		stored_computer.stat &= ~MAINT
+		stored_computer.update_icon()
+		loc = stored_computer
+		usr << "You open \the [src]."
 
 
 	AltClick()
@@ -82,12 +74,10 @@
 
 	if(stored_computer)
 		stored_computer.eject_id()
-
 /obj/machinery/computer3/laptop/verb/eject_id()
 	set category = "Object"
 	set name = "Eject ID Card"
 	set src in oview(1)
-
 	var/obj/item/part/computer/cardslot/C = locate() in src.contents
 
 	if(!C)
@@ -104,7 +94,7 @@
 		return
 
 	usr << "You remove [card] from the laptop."
-	C.remove(card)
+	C.remove(4)
 
 
 /obj/machinery/computer3/laptop
@@ -117,7 +107,6 @@
 	pixel_y			= -3
 	show_keyboard	= 0
 
-	var/manipulating = 0 // To prevent disappearing bug
 	var/obj/item/device/laptop/portable = null
 
 	New(var/L, var/built = 0)
@@ -131,11 +120,11 @@
 		set src in view(1)
 
 		if(usr.stat || usr.restrained() || usr.lying || !istype(usr, /mob/living))
-			usr << "\red You can't do that."
+			usr << "<span class='warning'>You can't do that.</span>"
 			return
 
 		if(!Adjacent(usr))
-			usr << "You can't reach it."
+			usr << "You can't reach it.</span>"
 			return
 
 		close_laptop(usr)
@@ -157,12 +146,11 @@
 			portable=new
 			portable.stored_computer = src
 
-		if(!manipulating)
-			portable.loc = loc
-			loc = portable
-			stat |= MAINT
-			if(user)
-				user << "You close \the [src]."
+		portable.loc = loc
+		loc = portable
+		stat |= MAINT
+		if(user)
+			user << "You close \the [src]."
 
 	auto_use_power()
 		if(stat&MAINT)

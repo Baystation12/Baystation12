@@ -235,16 +235,21 @@
 					custom_pain("Your head feels numb and painful.")
 			if(getBrainLoss() >= 15)
 				if(4 <= rn && rn <= 6) if(eye_blurry <= 0)
-					src << "\red It becomes hard to see for some reason."
+					src << "<span class='warning'>It becomes hard to see for some reason.</span>"
 					eye_blurry = 10
 			if(getBrainLoss() >= 35)
 				if(7 <= rn && rn <= 9) if(get_active_hand())
-					src << "\red Your hand won't respond properly, you drop what you're holding."
+					src << "<span class='danger'>Your hand won't respond properly, you drop what you're holding!</span>"
 					drop_item()
-			if(getBrainLoss() >= 50)
-				if(10 <= rn && rn <= 12) if(!lying)
-					src << "\red Your legs won't respond properly, you fall down."
-					resting = 1
+			if(getBrainLoss() >= 45)
+				if(10 <= rn && rn <= 12)
+					if(prob(50))
+						src << "<span class='danger'>You suddenly black out!</span>"
+						Paralyse(10)
+					else if(!lying)
+						src << "<span class='danger'>Your legs won't respond properly, you fall down!</span>"
+						Weaken(10)
+
 
 	proc/handle_stasis_bag()
 		// Handle side effects from stasis bag
@@ -257,9 +262,6 @@
 			adjustCloneLoss(0.1)
 
 	proc/handle_mutations_and_radiation()
-
-		if(species.flags & IS_SYNTHETIC) //Robots don't suffer from mutations or radloss.
-			return
 
 		if(getFireLoss())
 			if((COLD_RESISTANCE in mutations) || (prob(1)))
@@ -709,9 +711,9 @@
 	*/
 
 	proc/stabilize_body_temperature()
-		if (species.flags & IS_SYNTHETIC)
-			bodytemperature += species.synth_temp_gain		//just keep putting out heat.
-			return
+
+		if (species.passive_temp_gain) // We produce heat naturally.
+			bodytemperature += species.passive_temp_gain
 
 		var/body_temperature_difference = species.body_temperature - bodytemperature
 
@@ -858,15 +860,16 @@
 
 	proc/handle_chemicals_in_body()
 
-		if(reagents && !(species.flags & IS_SYNTHETIC)) //Synths don't process reagents.
+		if(reagents)
 			chem_effects.Cut()
 			analgesic = 0
 			var/alien = 0
 			if(species && species.reagent_tag)
 				alien = species.reagent_tag
 			touching.metabolize(alien, CHEM_TOUCH)
-			ingested.metabolize(alien, CHEM_INGEST)
-			reagents.metabolize(alien, CHEM_BLOOD)
+			if(!(species.flags & NO_BLOOD))
+				ingested.metabolize(alien, CHEM_INGEST)
+				reagents.metabolize(alien, CHEM_BLOOD)
 			if(CE_PAINKILLER in chem_effects)
 				analgesic = chem_effects[CE_PAINKILLER]
 
@@ -931,7 +934,8 @@
 				take_overall_damage(2,0)
 				traumatic_shock++
 
-		if(!(species.flags & IS_SYNTHETIC)) handle_trace_chems()
+		// TODO: stomach and bloodstream organ.
+		handle_trace_chems()
 
 		updatehealth()
 
@@ -942,7 +946,7 @@
 		if(status_flags & GODMODE)	return 0
 
 		//SSD check, if a logged player is awake put them back to sleep!
-		if(player_logged && sleeping < 2)
+		if(sleeping < 2 && species.show_ssd && (!client || !key || player_logged))
 			sleeping = 2
 
 		if(stat == DEAD)	//DEAD. BROWN BREAD. SWIMMING WITH THE SPESS CARP
@@ -1031,24 +1035,36 @@
 						blinded = 1
 
 			// Check everything else.
-			if(!species.has_organ["eyes"]) // Presumably if a species has no eyes, they see via something else.
+
+			//Vision
+			var/obj/item/organ/vision
+			if(species.vision_organ)
+				vision = internal_organs_by_name[species.vision_organ]
+
+			if(!vision) // Presumably if a species has no vision organs, they see via some other means.
 				eye_blind =  0
 				blinded =    0
 				eye_blurry = 0
-			else if(!has_eyes())           // Eyes cut out? Permablind.
+			else if(vision.is_broken())   // Vision organs cut out or broken? Permablind.
 				eye_blind =  1
 				blinded =    1
 				eye_blurry = 1
-			else if(sdisabilities & BLIND) // Disabled-blind, doesn't get better on its own
-				blinded =    1
-			else if(eye_blind)		       // Blindness, heals slowly over time
-				eye_blind =  max(eye_blind-1,0)
-				blinded =    1
-			else if(istype(glasses, /obj/item/clothing/glasses/sunglasses/blindfold))	//resting your eyes with a blindfold heals blurry eyes faster
-				eye_blurry = max(eye_blurry-3, 0)
-				blinded =    1
-			else if(eye_blurry)	           // Blurry eyes heal slowly
-				eye_blurry = max(eye_blurry-1, 0)
+			else
+				//blindness
+				if(sdisabilities & BLIND) // Disabled-blind, doesn't get better on its own
+					blinded =    1
+				else if(eye_blind)		       // Blindness, heals slowly over time
+					eye_blind =  max(eye_blind-1,0)
+					blinded =    1
+				else if(istype(glasses, /obj/item/clothing/glasses/sunglasses/blindfold))	//resting your eyes with a blindfold heals blurry eyes faster
+					eye_blurry = max(eye_blurry-3, 0)
+					blinded =    1
+
+				//blurry sight
+				if(vision.is_bruised())   // Vision organs impaired? Permablurry.
+					eye_blurry = 1
+				if(eye_blurry)	           // Blurry eyes heal slowly
+					eye_blurry = max(eye_blurry-1, 0)
 
 			//Ears
 			if(sdisabilities & DEAF)	//disabled-deaf, doesn't get better on its own
@@ -1133,7 +1149,7 @@
 
 		if(damageoverlay.overlays)
 			damageoverlay.overlays = list()
-		
+
 		if(stat == UNCONSCIOUS)
 			//Critical damage passage overlay
 			if(health <= 0)
@@ -1268,7 +1284,7 @@
 						if(2)	healths.icon_state = "health7"
 						else
 							//switch(health - halloss)
-							switch(100 - ((species && species.flags & NO_PAIN & !IS_SYNTHETIC) ? 0 : traumatic_shock))
+							switch(100 - ((species.flags & NO_PAIN) ? 0 : traumatic_shock))
 								if(100 to INFINITY)		healths.icon_state = "health0"
 								if(80 to 100)			healths.icon_state = "health1"
 								if(60 to 80)			healths.icon_state = "health2"
@@ -1363,11 +1379,11 @@
 					var/obj/item/clothing/glasses/welding/O = glasses
 					if(!O.up)
 						found_welder = 1
-				else if(istype(head, /obj/item/clothing/head/welding))
+				if(!found_welder && istype(head, /obj/item/clothing/head/welding))
 					var/obj/item/clothing/head/welding/O = head
 					if(!O.up)
 						found_welder = 1
-				else if(istype(back, /obj/item/weapon/rig))
+				if(!found_welder && istype(back, /obj/item/weapon/rig))
 					var/obj/item/weapon/rig/O = back
 					if(O.helmet && O.helmet == head && (O.helmet.body_parts_covered & EYES))
 						if((O.offline && O.offline_vision_restriction == 1) || (!O.offline && O.vision_restriction == 1))
@@ -1467,7 +1483,7 @@
 			return
 
 		if(shock_stage == 10)
-			src << "<font color='red'><b>"+pick("It hurts so much!", "You really need some painkillers..", "Dear god, the pain!")
+			src << "<span class='danger'>[pick("It hurts so much", "You really need some painkillers", "Dear god, the pain")]!</span>"
 
 		if(shock_stage >= 30)
 			if(shock_stage == 30) emote("me",1,"is having trouble keeping their eyes open.")
@@ -1475,22 +1491,22 @@
 			stuttering = max(stuttering, 5)
 
 		if(shock_stage == 40)
-			src << "<font color='red'><b>"+pick("The pain is excrutiating!", "Please, just end the pain!", "Your whole body is going numb!")
+			src << "<span class='danger'>[pick("The pain is excruciating", "Please, just end the pain", "Your whole body is going numb")]!</span>"
 
 		if (shock_stage >= 60)
 			if(shock_stage == 60) emote("me",1,"'s body becomes limp.")
 			if (prob(2))
-				src << "<font color='red'><b>"+pick("The pain is excrutiating!", "Please, just end the pain!", "Your whole body is going numb!")
+				src << "<span class='danger'>[pick("The pain is excruciating", "Please, just end the pain", "Your whole body is going numb")]!</span>"
 				Weaken(20)
 
 		if(shock_stage >= 80)
 			if (prob(5))
-				src << "<font color='red'><b>"+pick("The pain is excrutiating!", "Please, just end the pain!", "Your whole body is going numb!")
+				src << "<span class='danger'>[pick("The pain is excruciating", "Please, just end the pain", "Your whole body is going numb")]!</span>"
 				Weaken(20)
 
 		if(shock_stage >= 120)
 			if (prob(2))
-				src << "<font color='red'><b>"+pick("You black out!", "You feel like you could die any moment now.", "You're about to lose consciousness.")
+				src << "<span class='danger'>[pick("You black out", "You feel like you could die any moment now", "You're about to lose consciousness")]!</span>"
 				Paralyse(5)
 
 		if(shock_stage == 150)
@@ -1504,7 +1520,8 @@
 
 		if(life_tick % 5) return pulse	//update pulse every 5 life ticks (~1 tick/sec, depending on server load)
 
-		if(species && species.flags & NO_BLOOD) return PULSE_NONE //No blood, no pulse.
+		if(species && species.flags & NO_BLOOD)
+			return PULSE_NONE //No blood, no pulse.
 
 		if(stat == DEAD)
 			return PULSE_NONE	//that's it, you're dead, nothing can influence your pulse

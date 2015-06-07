@@ -21,6 +21,8 @@
 	var/raised = 0			//if the turret cover is "open" and the turret is raised
 	var/raising= 0			//if the turret is currently opening or closing its cover
 	var/health = 80			//the turret's health
+	var/maxhealth = 80		//turrets maximal health.
+	var/auto_repair = 0		//if 1 the turret slowly repairs itself.
 	var/locked = 1			//if the turret's behaviour control access is locked
 	var/controllock = 0		//if the turret responds to control panels
 
@@ -267,7 +269,7 @@
 						Gun.power_supply.charge = gun_charge
 						Gun.update_icon()
 					if(prob(50))
-						new /obj/item/stack/sheet/metal(loc, rand(1,4))
+						new /obj/item/stack/material/steel(loc, rand(1,4))
 					if(prob(50))
 						new /obj/item/device/assembly/prox_sensor(loc)
 				else
@@ -415,8 +417,6 @@
 /obj/machinery/porta_turret/process()
 	//the main machinery process
 
-	set background = BACKGROUND_ENABLED
-
 	if(cover == null && anchored)	//if it has no cover and is anchored
 		if(stat & BROKEN)	//if the turret is borked
 			qdel(cover)	//delete its cover, assuming it has one. Workaround for a pesky little bug
@@ -449,6 +449,10 @@
 		if(!tryToShootAt(secondarytargets)) // if no valid targets, go for secondary targets
 			spawn()
 				popDown() // no valid targets, close the cover
+
+	if(auto_repair && (health < maxhealth))
+		use_power(20000)
+		health = min(health+1, maxhealth) // 1HP for 20kJ
 
 /obj/machinery/porta_turret/proc/assess_and_assign(var/mob/living/L, var/list/targets, var/list/secondarytargets)
 	switch(assess_living(L))
@@ -671,13 +675,13 @@
 			else if(istype(I, /obj/item/weapon/crowbar) && !anchored)
 				playsound(loc, 'sound/items/Crowbar.ogg', 75, 1)
 				user << "<span class='notice'>You dismantle the turret construction.</span>"
-				new /obj/item/stack/sheet/metal( loc, 5)
+				new /obj/item/stack/material/steel( loc, 5)
 				qdel(src) // qdel
 				return
 
 		if(1)
-			if(istype(I, /obj/item/stack/sheet/metal))
-				var/obj/item/stack/sheet/metal/M = I
+			if(istype(I, /obj/item/stack/material/steel))
+				var/obj/item/stack/material/steel/M = I
 				if(M.use(2))
 					user << "<span class='notice'>You add some metal armor to the interior frame.</span>"
 					build_step = 2
@@ -714,7 +718,7 @@
 					if(!src || !WT.remove_fuel(5, user)) return
 					build_step = 1
 					user << "You remove the turret's interior metal armor."
-					new /obj/item/stack/sheet/metal( loc, 2)
+					new /obj/item/stack/material/steel( loc, 2)
 					return
 
 
@@ -768,8 +772,8 @@
 			//attack_hand() removes the prox sensor
 
 		if(6)
-			if(istype(I, /obj/item/stack/sheet/metal))
-				var/obj/item/stack/sheet/metal/M = I
+			if(istype(I, /obj/item/stack/material/steel))
+				var/obj/item/stack/material/steel/M = I
 				if(M.use(2))
 					user << "<span class='notice'>You add some metal armor to the exterior frame.</span>"
 					build_step = 7
@@ -813,7 +817,7 @@
 			else if(istype(I, /obj/item/weapon/crowbar))
 				playsound(loc, 'sound/items/Crowbar.ogg', 75, 1)
 				user << "<span class='notice'>You pry off the turret's exterior armor.</span>"
-				new /obj/item/stack/sheet/metal(loc, 2)
+				new /obj/item/stack/material/steel(loc, 2)
 				build_step = 6
 				return
 

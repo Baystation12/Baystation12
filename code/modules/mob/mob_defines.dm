@@ -48,9 +48,6 @@
 	var/use_me = 1 //Allows all mobs to use the me verb by default, will have to manually specify they cannot
 	var/damageoverlaytemp = 0
 	var/computer_id = null
-	var/lastattacker = null
-	var/lastattacked = null
-	var/attack_log = list( )
 	var/already_placed = 0.0
 	var/obj/machinery/machine = null
 	var/other_mobs = null
@@ -108,12 +105,6 @@
 	var/old_x = 0
 	var/old_y = 0
 	var/drowsyness = 0.0//Carbon
-	var/dizziness = 0//Carbon
-	var/is_dizzy = 0
-	var/is_jittery = 0
-	var/jitteriness = 0//Carbon
-	var/is_floating = 0
-	var/floatiness = 0
 	var/charges = 0.0
 	var/nutrition = 400.0//Carbon
 

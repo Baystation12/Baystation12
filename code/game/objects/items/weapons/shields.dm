@@ -13,8 +13,8 @@
 	throw_speed = 1
 	throw_range = 4
 	w_class = 4.0
+	origin_tech = list(TECH_MATERIAL = 2)
 	matter = list("glass" = 7500, DEFAULT_WALL_MATERIAL = 1000)
-	origin_tech = "materials=2"
 	attack_verb = list("shoved", "bashed")
 	var/cooldown = 0 //shield bash cooldown. based on world.time
 
@@ -45,7 +45,7 @@
 	throw_speed = 1
 	throw_range = 4
 	w_class = 2
-	origin_tech = "materials=4;magnets=3;syndicate=4"
+	origin_tech = list(TECH_MATERIAL = 4, TECH_MAGNET = 3, TECH_ILLEGAL = 4)
 	attack_verb = list("shoved", "bashed")
 	var/active = 0
 
@@ -57,7 +57,7 @@
 
 /obj/item/weapon/shield/energy/attack_self(mob/living/user as mob)
 	if ((CLUMSY in user.mutations) && prob(50))
-		user << "\red You beat yourself in the head with [src]."
+		user << "<span class='warning'>You beat yourself in the head with [src].</span>"
 		user.take_organ_damage(5)
 	active = !active
 	if (active)
@@ -65,14 +65,14 @@
 		icon_state = "eshield[active]"
 		w_class = 4
 		playsound(user, 'sound/weapons/saberon.ogg', 50, 1)
-		user << "\blue [src] is now active."
+		user << "<span class='notice'>\The [src] is now active.</span>"
 
 	else
 		force = 3
 		icon_state = "eshield[active]"
 		w_class = 1
 		playsound(user, 'sound/weapons/saberoff.ogg', 50, 1)
-		user << "\blue [src] can now be concealed."
+		user << "<span class='notice'>\The [src] can now be concealed.</span>"
 
 	if(istype(user,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = user
@@ -94,16 +94,16 @@
 	throw_speed = 2
 	throw_range = 10
 	w_class = 2.0
-	origin_tech = "magnets=3;syndicate=4"
+	origin_tech = list(TECH_MAGNET = 3, TECH_ILLEGAL = 4)
 
 
 /obj/item/weapon/cloaking_device/attack_self(mob/user as mob)
 	src.active = !( src.active )
 	if (src.active)
-		user << "\blue The cloaking device is now active."
+		user << "<span class='notice'>\The [src] is now active.</span>"
 		src.icon_state = "shield1"
 	else
-		user << "\blue The cloaking device is now inactive."
+		user << "<span class='notice'>\The [src] is now inactive.</span>"
 		src.icon_state = "shield0"
 	src.add_fingerprint(user)
 	return

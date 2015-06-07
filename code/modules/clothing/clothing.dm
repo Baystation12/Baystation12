@@ -212,8 +212,6 @@ BLIND     // can't see anything
 		cell.charge -= 1000 / severity
 		if (cell.charge < 0)
 			cell.charge = 0
-		if(cell.reliability != 100 && prob(50/severity))
-			cell.reliability -= 10 / severity
 	..()
 
 // Called just before an attack_hand(), in mob/UnarmedAttack()
@@ -251,11 +249,6 @@ BLIND     // can't see anything
 	var/light_applied
 	var/brightness_on
 	var/on = 0
-
-/obj/item/clothing/head/New()
-	..()
-	if(!icon_action_button && brightness_on)
-		icon_action_button = "[icon_state]"
 
 /obj/item/clothing/head/attack_self(mob/user)
 	if(brightness_on)
@@ -384,19 +377,19 @@ BLIND     // can't see anything
 	var/displays_id = 1
 	var/rolled_down = -1 //0 = unrolled, 1 = rolled, -1 = cannot be toggled
 	sprite_sheets = list("Vox" = 'icons/mob/species/vox/uniform.dmi')
-	
+
 	//convenience var for defining the icon state for the overlay used when the clothing is worn.
 	//Also used by rolling/unrolling.
 	var/worn_state = null
 
 /obj/item/clothing/under/New()
 	if(worn_state)
-		if(!item_state_slots) 
+		if(!item_state_slots)
 			item_state_slots = list()
 		item_state_slots[slot_w_uniform_str] = worn_state
 	else
 		worn_state = icon_state
-		
+
 	//autodetect rollability
 	if(rolled_down < 0)
 		if((worn_state + "_d_s") in icon_states('icons/mob/uniform.dmi'))
@@ -460,10 +453,10 @@ BLIND     // can't see anything
 
 		if (( usr.restrained() ) || ( usr.stat ))
 			return
-		
+
 		if (!usr.unEquip(src))
 			return
-		
+
 		switch(over_object.name)
 			if("r_hand")
 				usr.put_in_r_hand(src)
@@ -546,7 +539,7 @@ BLIND     // can't see anything
 	if(rolled_down < 0)
 		usr << "<span class='notice'>You cannot roll down [src]!</span>"
 		return
-	
+
 	rolled_down = !rolled_down
 	if(rolled_down)
 		body_parts_covered &= LOWER_TORSO|LEGS|FEET

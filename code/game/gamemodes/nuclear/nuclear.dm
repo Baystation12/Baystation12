@@ -2,6 +2,8 @@
 	MERCENARY ROUNDTYPE
 */
 
+var/list/nuke_disks = list()
+
 /datum/game_mode/nuclear
 	name = "Mercenary"
 	round_description = "A mercenary strike force is approaching the station!"
@@ -16,6 +18,18 @@
 	uplink_uses = 40
 	var/nuke_off_station = 0 //Used for tracking if the syndies actually haul the nuke to the station
 	var/syndies_didnt_escape = 0 //Used for tracking if the syndies got the shuttle off of the z-level
+
+//delete all nuke disks not on a station zlevel
+/datum/game_mode/nuclear/proc/check_nuke_disks()
+	for(var/obj/item/weapon/disk/nuclear/N in nuke_disks)
+		if(isNotStationLevel(N.z)) qdel(N)
+
+//checks if L has a nuke disk on their person
+/datum/game_mode/nuclear/proc/check_mob(mob/living/L)
+	for(var/obj/item/weapon/disk/nuclear/N in nuke_disks)
+		if(N.storage_depth(L) >= 0)
+			return 1
+	return 0
 
 /datum/game_mode/nuclear/declare_completion()
 	if(config.objectives_disabled)

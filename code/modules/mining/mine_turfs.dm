@@ -1,5 +1,8 @@
 /**********************Mineral deposits**************************/
-
+/turf/unsimulated/mineral
+	name = "impassable rock"
+	icon = 'icons/turf/walls.dmi'
+	icon_state = "rock-dark"
 
 /turf/simulated/mineral //wall piece
 	name = "Rock"
@@ -11,6 +14,7 @@
 	density = 1
 	blocks_air = 1
 	temperature = T0C
+	var/mined_turf = /turf/simulated/floor/plating/airless/asteroid
 	var/ore/mineral
 	var/mined_ore = 0
 	var/last_act = 0
@@ -28,21 +32,20 @@
 	has_resources = 1
 
 /turf/simulated/mineral/New()
-
 	spawn(0)
 		MineralSpread()
-
 	spawn(2)
-		var/list/step_overlays = list("s" = NORTH, "n" = SOUTH, "w" = EAST, "e" = WEST)
-		for(var/direction in step_overlays)
-			var/turf/turf_to_check = get_step(src,step_overlays[direction])
+		updateMineralOverlays(1)
 
-			if(istype(turf_to_check,/turf/simulated/floor/plating/airless/asteroid))
-				var/turf/simulated/floor/plating/airless/asteroid/T = turf_to_check
-				T.updateMineralOverlays()
-
-			else if(istype(turf_to_check,/turf/space) || istype(turf_to_check,/turf/simulated/floor))
-				turf_to_check.overlays += image('icons/turf/walls.dmi', "rock_side_[direction]")
+/turf/simulated/mineral/proc/updateMineralOverlays(var/update_neighbors)
+	var/list/step_overlays = list("s" = NORTH, "n" = SOUTH, "w" = EAST, "e" = WEST)
+	for(var/direction in step_overlays)
+		var/turf/turf_to_check = get_step(src,step_overlays[direction])
+		if(update_neighbors && istype(turf_to_check,/turf/simulated/floor/plating/airless/asteroid))
+			var/turf/simulated/floor/plating/airless/asteroid/T = turf_to_check
+			T.updateMineralOverlays()
+		else if(istype(turf_to_check,/turf/space) || istype(turf_to_check,/turf/simulated/floor))
+			turf_to_check.overlays += image('icons/turf/walls.dmi', "rock_side_[direction]")
 
 /turf/simulated/mineral/ex_act(severity)
 	switch(severity)
@@ -280,8 +283,7 @@
 
 	//Add some rubble,  you did just clear out a big chunk of rock.
 
-	var/turf/simulated/floor/plating/airless/asteroid/N = ChangeTurf(/turf/simulated/floor/plating/airless/asteroid)
-	N.overlay_detail = "asteroid[rand(0,9)]"
+	var/turf/simulated/floor/plating/airless/asteroid/N = ChangeTurf(mined_turf)
 
 	// Kill and update the space overlays around us.
 	for(var/direction in step_overlays)
@@ -292,13 +294,9 @@
 				if(istype(get_step(T, step_overlays[next_direction]),/turf/simulated/mineral))
 					T.overlays += image('icons/turf/walls.dmi', "rock_side_[next_direction]")
 
-	// Update the
-	N.updateMineralOverlays(1)
-
-	if(rand(1,500) == 1)
-		visible_message("<span class='notice'>An old dusty crate was buried within!</span>")
-		new /obj/structure/closet/crate/secure/loot(src)
-
+	if(istype(N))
+		N.overlay_detail = "asteroid[rand(0,9)]"
+		N.updateMineralOverlays(1)
 
 /turf/simulated/mineral/proc/excavate_find(var/prob_clean = 0, var/datum/find/F)
 	//with skill and luck, players can cleanly extract finds
@@ -346,25 +344,25 @@
 				R.amount = rand(1,5)
 
 			if(3)
-				var/obj/item/stack/sheet/metal/R = new(src)
+				var/obj/item/stack/material/steel/R = new(src)
 				R.amount = rand(5,25)
 
 			if(4)
-				var/obj/item/stack/sheet/plasteel/R = new(src)
+				var/obj/item/stack/material/plasteel/R = new(src)
 				R.amount = rand(5,25)
 
 			if(5)
 				var/quantity = rand(1,3)
 				for(var/i=0, i<quantity, i++)
-					new /obj/item/weapon/shard(src)
+					new /obj/item/weapon/material/shard(src)
 
 			if(6)
 				var/quantity = rand(1,3)
 				for(var/i=0, i<quantity, i++)
-					new /obj/item/weapon/shard/phoron(src)
+					new /obj/item/weapon/material/shard/phoron(src)
 
 			if(7)
-				var/obj/item/stack/sheet/mineral/uranium/R = new(src)
+				var/obj/item/stack/material/uranium/R = new(src)
 				R.amount = rand(5,25)
 
 /turf/simulated/mineral/random
@@ -391,7 +389,7 @@
 
 
 /turf/simulated/floor/plating/airless/asteroid //floor piece
-	name = "asteroid"
+	name = "sand"
 	icon = 'icons/turf/floors.dmi'
 	icon_state = "asteroid"
 	oxygen = 0

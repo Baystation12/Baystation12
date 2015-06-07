@@ -61,7 +61,7 @@ obj/structure/firedoor_assembly/attackby(C as obj, mob/user as mob)
 				if(!src || !WT.isOn()) return
 				user.visible_message("<span class='warning'>[user] has dissassembled \the [src].</span>",
 									"You have dissassembled \the [src].")
-				new /obj/item/stack/sheet/metal(src.loc, 2)
+				new /obj/item/stack/material/steel(src.loc, 2)
 				qdel(src)
 		else
 			user << "<span class='notice'>You need more welding fuel.</span>"

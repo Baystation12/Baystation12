@@ -293,9 +293,10 @@
 		var/material/M = name_to_material[mat]
 		if(!istype(M))
 			continue
-		var/obj/item/stack/sheet/S = new M.stack_type(get_turf(src))
+		var/obj/item/stack/material/S = new M.stack_type(get_turf(src))
 		if(stored_material[mat] > S.perunit)
 			S.amount = round(stored_material[mat] / S.perunit)
 		else
 			qdel(S)
 	..()
+	return 1

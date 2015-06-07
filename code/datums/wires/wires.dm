@@ -292,6 +292,11 @@ var/const/POWER = 8
 		return 1
 	return 0
 
+/datum/wires/proc/MendAll()
+	for(var/i = 1; i < MAX_FLAG && i < (1 << wire_count); i += i)
+		if(IsIndexCut(i))
+			CutWireIndex(i)
+
 //
 //Shuffle and Mend
 //

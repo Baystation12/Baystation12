@@ -56,8 +56,8 @@
 	priority = 2
 	allowed_tools = list(
 		/obj/item/weapon/scalpel = 100,		\
-		/obj/item/weapon/kitchenknife = 75,	\
-		/obj/item/weapon/shard = 50, 		\
+		/obj/item/weapon/material/knife = 75,	\
+		/obj/item/weapon/material/shard = 50, 		\
 	)
 
 	can_infect = 1
@@ -186,7 +186,7 @@
 			return 0
 		if(istype(tool,/obj/item/weapon/weldingtool))
 			var/obj/item/weapon/weldingtool/welder = tool
-			if(!welder.isOn())
+			if(!welder.isOn() || !welder.remove_fuel(1,user))
 				return 0
 		return (target_zone == "chest") && istype(target.back, /obj/item/weapon/rig) && !(target.back.canremove)
 

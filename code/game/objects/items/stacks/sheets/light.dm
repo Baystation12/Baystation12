@@ -17,13 +17,13 @@
 		var/obj/item/stack/cable_coil/CC = new/obj/item/stack/cable_coil(user.loc)
 		CC.amount = 5
 		amount--
-		new/obj/item/stack/sheet/glass(user.loc)
+		new/obj/item/stack/material/glass(user.loc)
 		if(amount <= 0)
 			user.drop_from_inventory(src)
 			qdel(src)
 
-	if(istype(O,/obj/item/stack/sheet/metal))
-		var/obj/item/stack/sheet/metal/M = O
+	if(istype(O,/obj/item/stack/material/steel))
+		var/obj/item/stack/material/steel/M = O
 		if (M.use(1))
 			use(1)
 			new/obj/item/stack/tile/light(get_turf(user))

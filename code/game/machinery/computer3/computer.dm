@@ -77,7 +77,7 @@
 		set src in view(1)
 		
 		if(usr.stat || usr.restrained() || usr.lying || !istype(usr, /mob/living))
-			usr << "\red You can't do that."
+			usr << "<span class='warning'>You can't do that.</span>"
 			return
 		
 		if(!Adjacent(usr))
@@ -309,7 +309,6 @@
 	proc/set_broken()
 		icon_state = "computer_b"
 		stat |= BROKEN
-		crit_fail = 1
 		if(program)
 			program.error = BUSTED_ASS_COMPUTER
 		if(os)

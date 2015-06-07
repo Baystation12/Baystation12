@@ -1,6 +1,6 @@
 /var/const/meteor_wave_delay = 625 //minimum wait between waves in tenths of seconds
 //set to at least 100 unless you want evarr ruining every round
-
+/var/wavesecret    = 0
 /var/const/meteors_in_wave = 50
 /var/const/meteors_in_small_wave = 10
 
@@ -162,3 +162,6 @@
 		qdel(src)
 		return
 	..()
+
+/obj/effect/meteor/touch_map_edge()
+	qdel(src)

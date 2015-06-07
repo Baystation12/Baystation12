@@ -28,17 +28,16 @@
 				user << "You activate the analyzer's microlaser, analyzing \the [loaded_item] and breaking it down."
 				flick("portable_analyzer_scan", src)
 				playsound(src.loc, 'sound/items/Welder2.ogg', 50, 1)
-				if(loaded_item.reliability >= min_reliability)
-					var/list/temp_tech = ConvertReqString2List(loaded_item.origin_tech)
-					for(var/T in temp_tech)
-						files.UpdateTech(T, temp_tech[T])
-						user << "\The [loaded_item] had level [temp_tech[T]] in [T]."
-					loaded_item = null
+				var/list/temp_tech = ConvertReqString2List(loaded_item.origin_tech)
+				for(var/T in temp_tech)
+					files.UpdateTech(T, temp_tech[T])
+					user << "\The [loaded_item] had level [temp_tech[T]] in [T]."
+				loaded_item = null
 				for(var/obj/I in contents)
 					for(var/mob/M in I.contents)
 						M.death()
-					if(istype(I,/obj/item/stack/sheet))//Only deconsturcts one sheet at a time instead of the entire stack
-						var/obj/item/stack/sheet/S = I
+					if(istype(I,/obj/item/stack/material))//Only deconsturcts one sheet at a time instead of the entire stack
+						var/obj/item/stack/material/S = I
 						if(S.get_amount() > 1)
 							S.use(1)
 							loaded_item = S
@@ -57,8 +56,6 @@
 	if(response == "Sync")
 		var/success = 0
 		for(var/obj/machinery/r_n_d/server/S in machines)
-			if(S.disabled)
-				continue
 			for(var/datum/tech/T in files.known_tech) //Uploading
 				S.files.AddTech2Known(T)
 			for(var/datum/tech/T in S.files.known_tech) //Downloading

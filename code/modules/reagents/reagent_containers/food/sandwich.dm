@@ -1,6 +1,6 @@
 /obj/item/weapon/reagent_containers/food/snacks/breadslice/attackby(obj/item/W as obj, mob/user as mob)
 
-	if(istype(W,/obj/item/weapon/shard) || istype(W,/obj/item/weapon/reagent_containers/food/snacks))
+	if(istype(W,/obj/item/weapon/material/shard) || istype(W,/obj/item/weapon/reagent_containers/food/snacks))
 		var/obj/item/weapon/reagent_containers/food/snacks/csandwich/S = new(get_turf(src))
 		S.attackby(W,user)
 		qdel(src)
@@ -25,7 +25,7 @@
 	if(src.contents.len > sandwich_limit)
 		user << "\red If you put anything else on \the [src] it's going to collapse."
 		return
-	else if(istype(W,/obj/item/weapon/shard))
+	else if(istype(W,/obj/item/weapon/material/shard))
 		user << "\blue You hide [W] in \the [src]."
 		user.drop_item()
 		W.loc = src
@@ -87,7 +87,7 @@
 
 	var/obj/item/shard
 	for(var/obj/item/O in contents)
-		if(istype(O,/obj/item/weapon/shard))
+		if(istype(O,/obj/item/weapon/material/shard))
 			shard = O
 			break
 

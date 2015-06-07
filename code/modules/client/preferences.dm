@@ -236,8 +236,9 @@ datum/preferences
 /datum/preferences/proc/ShowChoices(mob/user)
 	if(!user || !user.client)	return
 	update_preview_icon()
-	user << browse_rsc(preview_icon_front, "previewicon.png")
-	user << browse_rsc(preview_icon_side, "previewicon2.png")
+	if(preview_icon_front && preview_icon_side)
+		user << browse_rsc(preview_icon_front, "previewicon.png")
+		user << browse_rsc(preview_icon_side, "previewicon2.png")
 	var/dat = "<html><body><center>"
 
 	if(path)
@@ -633,10 +634,6 @@ datum/preferences
 	if(current_species.flags & HAS_EYE_COLOR)
 		dat += "</br><b>Has a variety of eye colours.</b>"
 	if(current_species.flags & IS_PLANT)
-		dat += "</br><b>Has a plantlike physiology.</b>"
-	if(current_species.flags & IS_SYNTHETIC)
-		dat += "</br><b>Is machine-based.</b>"
-	if(current_species.flags & REGENERATES_LIMBS)
 		dat += "</br><b>Has a plantlike physiology.</b>"
 	dat += "</small></td>"
 	dat += "</tr>"
@@ -1671,6 +1668,7 @@ datum/preferences
 		var/status = organ_data[name]
 		var/obj/item/organ/external/O = character.organs_by_name[name]
 		if(O)
+			O.status = 0
 			if(status == "amputated")
 				character.organs_by_name[O.limb_name] = null
 				character.organs -= O

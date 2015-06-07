@@ -208,7 +208,7 @@ datum/preferences
 						if(!dummy.mind)
 							dummy.mind = new
 						dummy.mind.role_alt_title = alt
-					J.equip(dummy)
+					J.equip_preview(dummy)
 					break
 		dummy.update_eyes()
 		dummy.force_update_limbs()

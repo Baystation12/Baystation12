@@ -31,8 +31,15 @@
 
 /atom/movable/Destroy()
 	. = ..()
-
+	if(reagents)
+		qdel(reagents)
+	for(var/atom/movable/AM in contents)
+		qdel(AM)
 	loc = null
+	if (pulledby)
+		if (pulledby.pulling == src)
+			pulledby.pulling = null
+		pulledby = null
 
 /atom/movable/proc/initialize()
 	return
@@ -211,3 +218,51 @@
 	if (src.master)
 		return src.master.attack_hand(a, b, c)
 	return
+
+/atom/movable/proc/touch_map_edge()
+	if(z in config.sealed_levels)
+		return
+
+	if(config.use_overmap)
+		overmap_spacetravel(get_turf(src), src)
+		return
+
+	var/move_to_z = src.get_transit_zlevel()
+	if(move_to_z)
+		z = move_to_z
+
+		if(x <= TRANSITIONEDGE)
+			x = world.maxx - TRANSITIONEDGE - 2
+			y = rand(TRANSITIONEDGE + 2, world.maxy - TRANSITIONEDGE - 2)
+
+		else if (x >= (world.maxx - TRANSITIONEDGE - 1))
+			x = TRANSITIONEDGE + 1
+			y = rand(TRANSITIONEDGE + 2, world.maxy - TRANSITIONEDGE - 2)
+
+		else if (y <= TRANSITIONEDGE)
+			y = world.maxy - TRANSITIONEDGE -2
+			x = rand(TRANSITIONEDGE + 2, world.maxx - TRANSITIONEDGE - 2)
+
+		else if (y >= (world.maxy - TRANSITIONEDGE - 1))
+			y = TRANSITIONEDGE + 1
+			x = rand(TRANSITIONEDGE + 2, world.maxx - TRANSITIONEDGE - 2)
+
+		if(ticker && istype(ticker.mode, /datum/game_mode/nuclear)) //only really care if the game mode is nuclear
+			var/datum/game_mode/nuclear/G = ticker.mode
+			G.check_nuke_disks()
+
+		spawn(0)
+			if(loc) loc.Entered(src)
+
+//This list contains the z-level numbers which can be accessed via space travel and the percentile chances to get there.
+var/list/accessible_z_levels = list("1" = 5, "3" = 10, "4" = 15, "6" = 60)
+
+//by default, transition randomly to another zlevel
+/atom/movable/proc/get_transit_zlevel()
+	var/list/candidates = accessible_z_levels.Copy()
+	candidates.Remove("[src.z]")
+
+	if(!candidates.len)
+		return null
+	return text2num(pickweight(candidates))
+

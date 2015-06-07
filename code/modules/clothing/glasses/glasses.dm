@@ -37,8 +37,8 @@
 	desc = "Used for seeing walls, floors, and stuff through anything."
 	icon_state = "meson"
 	item_state = "glasses"
-	icon_action_button = "action_meson" //This doesn't actually matter, the action button is generated from the current icon_state. But, this is the only way to get it to show up.
-	origin_tech = "magnets=2;engineering=2"
+	action_button_name = "Toggle Goggles"
+	origin_tech = list(TECH_MAGNET = 2, TECH_ENGINERING = 2)
 	toggleable = 1
 	vision_flags = SEE_TURFS
 
@@ -57,7 +57,6 @@
 	icon_state = "purple"
 	item_state = "glasses"
 	toggleable = 1
-	icon_action_button = "action_science"
 
 /obj/item/clothing/glasses/science/New()
 	..()
@@ -73,10 +72,9 @@
 	desc = "You can totally see in the dark now!"
 	icon_state = "night"
 	item_state = "glasses"
-	origin_tech = "magnets=2"
+	origin_tech = list(TECH_MAGNET = 2)
 	darkness_view = 7
 	toggleable = 1
-	icon_action_button = "action_nvg"
 	off_state = "denight"
 
 /obj/item/clothing/glasses/night/New()
@@ -102,8 +100,7 @@
 	desc = "Very confusing glasses."
 	icon_state = "material"
 	item_state = "glasses"
-	icon_action_button = "action_material"
-	origin_tech = "magnets=3;engineering=3"
+	origin_tech = list(TECH_MAGNET = 3, TECH_ENGINERING = 3)
 	toggleable = 1
 	vision_flags = SEE_OBJS
 
@@ -147,7 +144,7 @@
 	desc = "Protects the eyes from welders, approved by the mad scientist association."
 	icon_state = "welding-g"
 	item_state = "welding-g"
-	icon_action_button = "action_welding_g"
+	action_button_name = "Flip Welding Goggles"
 	var/up = 0
 
 /obj/item/clothing/glasses/welding/attack_self()
@@ -182,7 +179,6 @@
 	desc = "Welding goggles made from more expensive materials, strangely smells like potatoes."
 	icon_state = "rwelding-g"
 	item_state = "rwelding-g"
-	icon_action_button = "action_welding_g"
 
 /obj/item/clothing/glasses/sunglasses/blindfold
 	name = "blindfold"
@@ -221,9 +217,8 @@
 	desc = "Thermals in the shape of glasses."
 	icon_state = "thermal"
 	item_state = "glasses"
-	origin_tech = "magnets=3"
+	origin_tech = list(TECH_MAGNET = 3)
 	toggleable = 1
-	icon_action_button = "action_thermal"
 	vision_flags = SEE_MOBS
 	invisa_view = 2
 
@@ -249,12 +244,12 @@
 	name = "Optical Meson Scanner"
 	desc = "Used for seeing walls, floors, and stuff through anything."
 	icon_state = "meson"
-	origin_tech = "magnets=3;syndicate=4"
+	origin_tech = list(TECH_MAGNET = 3, TECH_ILLEGAL = 4)
 
 /obj/item/clothing/glasses/thermal/plain
 	toggleable = 0
 	activation_sound = null
-	icon_action_button = ""
+	action_button_name = null
 
 /obj/item/clothing/glasses/thermal/plain/monocle
 	name = "Thermoncle"

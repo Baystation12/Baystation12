@@ -47,7 +47,7 @@
 	throw_speed = 4
 	throw_range = 5
 	force = 5
-	origin_tech = "combat=1"
+	origin_tech = list(TECH_COMBAT = 1)
 	attack_verb = list("struck", "hit", "bashed")
 	zoomdevicename = "scope"
 
@@ -206,6 +206,9 @@
 	if(user.client) user.client.move_delay = world.time + _move_delay
 	next_fire_time = world.time + _fire_delay
 
+	if(muzzle_flash)
+		set_light(0)
+
 //obtains the next projectile to fire
 /obj/item/weapon/gun/proc/consume_next_projectile()
 	return null
@@ -247,10 +250,7 @@
 				)
 
 		if(muzzle_flash)
-			var/turf/T_user = get_turf(user)
-			var/turf/T_target = get_turf(target)
-			var/obj/effect/effect/smoke/illumination/I = new /obj/effect/effect/smoke/illumination(get_step(T_user, get_dir(T_user,T_target)), brightness=muzzle_flash, lifetime=8)
-			I.alpha = 0
+			set_light(muzzle_flash)
 
 	if(recoil)
 		spawn()

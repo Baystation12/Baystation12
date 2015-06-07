@@ -51,6 +51,8 @@
 		// 5 = bluetag
 		// 6 = redtag
 	var/health = 80
+	var/maxhealth = 80
+	var/auto_repair = 0
 	var/obj/machinery/turretcover/cover = null
 	var/popping = 0
 	var/wasvalid = 0
@@ -78,7 +80,7 @@
 
 	if(user.species.can_shred(user) && !(stat & BROKEN))
 		playsound(src.loc, 'sound/weapons/slash.ogg', 25, 1, -1)
-		visible_message("\red <B>[user] has slashed at [src]!</B>")
+		visible_message("<span class='danger'>[user] has slashed at [src]!</span>")
 		src.take_damage(15)
 	return
 
@@ -90,6 +92,7 @@
 	return
 
 /obj/machinery/turret/New()
+	maxhealth = health
 	spark_system = new /datum/effect/effect/system/spark_spread
 	spark_system.set_up(5, 0, src)
 	spark_system.attach(src)
@@ -221,6 +224,13 @@
 		if(!isDown())
 			popDown()
 			use_power = 1
+
+	// Auto repair requires massive amount of power, but slowly regenerates the turret's health.
+	// Currently only used by malfunction hardware, but may be used as admin-settable option too.
+	if(auto_repair)
+		if(health < maxhealth)
+			use_power(20000)
+			health = min(health + 1, maxhealth)
 	return
 
 
@@ -341,6 +351,7 @@
 	if(stat & BROKEN)
 		user << "That object is useless to you."
 		return 0
+	user.do_attack_animation(src)
 	visible_message("<span class='danger'>[user] [attack_message] the [src]!</span>")
 	user.attack_log += text("\[[time_stamp()]\] <font color='red'>attacked [src.name]</font>")
 	src.health -= damage

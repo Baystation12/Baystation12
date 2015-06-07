@@ -88,8 +88,6 @@
 				if (powerlevel > 0 && !istype(A, /mob/living/carbon/slime))
 					if(ishuman(M))
 						var/mob/living/carbon/human/H = M
-						if(H.species.flags & IS_SYNTHETIC)
-							return
 						stunprob *= H.species.siemens_coefficient
 
 

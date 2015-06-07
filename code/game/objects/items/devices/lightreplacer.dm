@@ -49,7 +49,7 @@
 
 	flags = CONDUCT
 	slot_flags = SLOT_BELT
-	origin_tech = "magnets=3;materials=2"
+	origin_tech = list(TECH_MAGNET = 3, TECH_MATERIAL = 2)
 
 	var/max_uses = 20
 	var/uses = 0
@@ -71,8 +71,8 @@
 		Emag()
 		return
 
-	if(istype(W, /obj/item/stack/sheet/glass))
-		var/obj/item/stack/sheet/glass/G = W
+	if(istype(W, /obj/item/stack/material/glass))
+		var/obj/item/stack/material/glass/G = W
 		if(uses >= max_uses)
 			user << "<span class='warning'>[src.name] is full."
 			return

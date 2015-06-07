@@ -51,8 +51,8 @@
 
 /obj/item/weapon/melee/energy/suicide_act(mob/user)
 	if (active)
-		viewers(user) << pick("<span class='danger'>[user] is slitting \his stomach open with the [src.name]! It looks like \he's trying to commit seppuku.</span>", \
-							"<span class='danger'>[user] is falling on the [src.name]! It looks like \he's trying to commit suicide.</span>")
+		viewers(user) << pick("<span class='danger'>\The [user] is slitting \his stomach open with \the [src]! It looks like \he's trying to commit seppuku.</span>", \
+		                      "<span class='danger'>\The [user] is falling on \the [src]! It looks like \he's trying to commit suicide.</span>")
 		return (BRUTELOSS|FIRELOSS)
 
 /*
@@ -74,7 +74,7 @@
 	throw_range = 5
 	w_class = 3
 	flags = CONDUCT | NOSHIELD | NOBLOODY
-	origin_tech = "magnets=3;combat=4"
+	origin_tech = list(TECH_MAGNET = 3, TECH_COMBAT = 4)
 	attack_verb = list("attacked", "chopped", "cleaved", "torn", "cut")
 	sharp = 1
 	edge = 1
@@ -82,15 +82,15 @@
 /obj/item/weapon/melee/energy/axe/activate(mob/living/user)
 	..()
 	icon_state = "axe1"
-	user << "\blue \The [src] is now energised."
+	user << "<span class='notice'>\The [src] is now energised.</span>"
 
 /obj/item/weapon/melee/energy/axe/deactivate(mob/living/user)
 	..()
 	icon_state = initial(icon_state)
-	user << "\blue \The [src] is de-energised. It's just a regular axe now."
+	user << "<span class='notice'>\The [src] is de-energised. It's just a regular axe now.</span>"
 
 /obj/item/weapon/melee/energy/axe/suicide_act(mob/user)
-	viewers(user) << "\red <b>[user] swings the [src.name] towards /his head! It looks like \he's trying to commit suicide.</b>"
+	viewers(user) << "<span class='warning'>\The [user] swings \the [src] towards /his head! It looks like \he's trying to commit suicide.</span>"
 	return (BRUTELOSS|FIRELOSS)
 
 /*
@@ -110,7 +110,7 @@
 	throw_range = 5
 	w_class = 2
 	flags = NOSHIELD | NOBLOODY
-	origin_tech = "magnets=3;syndicate=4"
+	origin_tech = list(TECH_MAGNET = 3, TECH_ILLEGAL = 4)
 	sharp = 1
 	edge = 1
 	var/blade_color

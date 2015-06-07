@@ -53,9 +53,9 @@ validPrefixes = [
     'rscadd',
     'imageadd',
     'imagedel',
+    'maptweak',
     'spellcheck',
-    'experiment',
-    'tgs'
+    'experiment'
 ]
 
 def dictToTuples(inp):

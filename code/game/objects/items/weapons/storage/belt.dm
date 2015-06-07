@@ -33,8 +33,8 @@
 		/obj/item/device/analyzer,
 		/obj/item/taperoll/engineering,
 		/obj/item/device/robotanalyzer,
-		/obj/item/weapon/minihoe,
-		/obj/item/weapon/hatchet,
+		/obj/item/weapon/material/minihoe,
+		/obj/item/weapon/material/hatchet,
 		/obj/item/device/analyzer/plant_analyzer,
 		/obj/item/weapon/extinguisher/mini
 		)

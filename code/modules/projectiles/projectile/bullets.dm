@@ -182,10 +182,6 @@
 	damage = 1
 	embed = 0
 
-/obj/item/projectile/bullet/chameleon
-	damage = 1 // stop trying to murderbone with a fake gun dumbass!!!
-	embed = 0 // nope
-
 /* Practice */
 
 /obj/item/projectile/bullet/pistol/practice

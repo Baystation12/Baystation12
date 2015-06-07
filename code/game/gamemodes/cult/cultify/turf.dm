@@ -23,6 +23,9 @@
 /turf/simulated/wall/cult/cultify()
 	return
 
+/turf/unsimulated/wall/cult/cultify()
+	return
+
 /turf/unsimulated/beach/cultify()
 	return
 

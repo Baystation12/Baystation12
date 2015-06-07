@@ -209,17 +209,6 @@
 /mob/living/carbon/MiddleClickOn(var/atom/A)
 	swap_hand()
 
-/mob/living/carbon/human/MiddleClickOn(var/atom/A)
-
-	if(back)
-		var/obj/item/weapon/rig/rig = back
-		if(istype(rig) && rig.selected_module)
-			if(!canClick()) return
-			rig.selected_module.engage(A)
-			return
-
-	swap_hand()
-
 // In case of use break glass
 /*
 /atom/proc/MiddleClick(var/mob/M as mob)
@@ -319,7 +308,7 @@
 		nutrition = max(nutrition - rand(1,5),0)
 		handle_regular_hud_updates()
 	else
-		src << "\red You're out of energy!  You need food!"
+		src << "<span class='warning'>You're out of energy!  You need food!</span>"
 
 // Simple helper to face what you clicked on, in case it should be needed in more than one place
 /mob/proc/face_atom(var/atom/A)

@@ -51,7 +51,7 @@
 
 		if(locate(/obj/machinery/portable_atmospherics/hydroponics/soil/invisible) in loc)
 			var/obj/machinery/portable_atmospherics/hydroponics/soil/invisible/SP = locate() in loc
-			del(SP)
+			qdel(SP)
 
 		if(!pulledby)
 			var/obj/effect/plant/food
