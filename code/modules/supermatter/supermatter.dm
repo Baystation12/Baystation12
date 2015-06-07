@@ -103,7 +103,8 @@
 	grav_pulling = 1
 	exploded = 1
 	for(var/mob/living/mob in living_mob_list)
-		if(loc.z == mob.loc.z)
+		var/turf/T = get_turf(mob)
+		if(T && (loc.z == T.z))
 			if(istype(mob, /mob/living/carbon/human))
 				//Hilariously enough, running into a closet should make you get hit the hardest.
 				var/mob/living/carbon/human/H = mob
