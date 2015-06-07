@@ -596,14 +596,14 @@
 					"<span class='notice'>You disassembled the broken APC frame.</span>",\
 					"You hear welding.")
 			else
-				new /obj/item/apc_frame(loc)
+				new /obj/item/frame/apc(loc)
 				user.visible_message(\
 					"<span class='warning'>[src] has been cut from the wall by [user.name] with the weldingtool.</span>",\
 					"<span class='notice'>You cut the APC frame from the wall.</span>",\
 					"You hear welding.")
 			qdel(src)
 			return
-	else if (istype(W, /obj/item/apc_frame) && opened && emagged)
+	else if (istype(W, /obj/item/frame/apc) && opened && emagged)
 		emagged = 0
 		if (opened==2)
 			opened = 1
@@ -612,7 +612,7 @@
 			"<span class='notice'>You replace the damaged APC frontal panel with a new one.</span>")
 		qdel(W)
 		update_icon()
-	else if (istype(W, /obj/item/apc_frame) && opened && ((stat & BROKEN) || hacker))
+	else if (istype(W, /obj/item/frame/apc) && opened && ((stat & BROKEN) || hacker))
 		if (has_electronics)
 			user << "<span class='warning'>You cannot repair this APC until you remove the electronics still inside.</span>"
 			return
