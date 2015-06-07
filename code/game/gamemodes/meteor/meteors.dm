@@ -45,16 +45,16 @@
 	var/starty
 	var/startx
 	switch(startSide)
-		if(1) //NORTH
+		if(NORTH)
 			starty = world.maxy-(TRANSITIONEDGE+1)
 			startx = rand((TRANSITIONEDGE+1), world.maxx-(TRANSITIONEDGE+1))
-		if(2) //EAST
+		if(EAST)
 			starty = rand((TRANSITIONEDGE+1),world.maxy-(TRANSITIONEDGE+1))
 			startx = world.maxx-(TRANSITIONEDGE+1)
-		if(3) //SOUTH
+		if(SOUTH)
 			starty = (TRANSITIONEDGE+1)
 			startx = rand((TRANSITIONEDGE+1), world.maxx-(TRANSITIONEDGE+1))
-		if(4) //WEST
+		if(WEST)
 			starty = rand((TRANSITIONEDGE+1), world.maxy-(TRANSITIONEDGE+1))
 			startx = (TRANSITIONEDGE+1)
 	var/turf/T = locate(startx, starty, Z)
@@ -64,16 +64,16 @@
 	var/endy
 	var/endx
 	switch(startSide)
-		if(1) //NORTH
+		if(NORTH)
 			endy = TRANSITIONEDGE
 			endx = rand(TRANSITIONEDGE, world.maxx-TRANSITIONEDGE)
-		if(2) //EAST
+		if(EAST)
 			endy = rand(TRANSITIONEDGE, world.maxy-TRANSITIONEDGE)
 			endx = TRANSITIONEDGE
-		if(3) //SOUTH
+		if(SOUTH)
 			endy = world.maxy-TRANSITIONEDGE
 			endx = rand(TRANSITIONEDGE, world.maxx-TRANSITIONEDGE)
-		if(4) //WEST
+		if(WEST)
 			endy = rand(TRANSITIONEDGE,world.maxy-TRANSITIONEDGE)
 			endx = world.maxx-TRANSITIONEDGE
 	var/turf/T = locate(endx, endy, Z)
