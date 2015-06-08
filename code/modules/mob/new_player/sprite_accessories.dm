@@ -136,7 +136,6 @@
 		name = "Pompadour"
 		icon_state = "hair_pompadour"
 		gender = MALE
-		species_allowed = list("Human","Unathi")
 
 	quiff
 		name = "Quiff"
@@ -159,7 +158,6 @@
 		name = "Beehive"
 		icon_state = "hair_beehive"
 		gender = FEMALE
-		species_allowed = list("Human","Unathi")
 
 	beehive2
 		name = "Beehive 2"

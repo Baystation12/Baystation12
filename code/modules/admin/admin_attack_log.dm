@@ -1,7 +1,6 @@
-proc/admin_notice(var/message, var/rights)
-	for(var/mob/M in mob_list)
-		if(check_rights(rights, 0, M))
-			M << message
+/mob/var/lastattacker = null
+/mob/var/lastattacked = null
+/mob/var/attack_log = list( )
 
 proc/log_and_message_admins(var/message as text, var/mob/user = usr)
 	log_admin(user ? "[key_name(user)] [message]" : "EVENT [message]")
@@ -23,10 +22,12 @@ proc/admin_log_and_message_admins(var/message as text)
 	message_admins(usr ? "[key_name_admin(usr)] [message]" : "EVENT [message]", 1)
 
 proc/admin_attack_log(var/mob/attacker, var/mob/victim, var/attacker_message, var/victim_message, var/admin_message)
-	victim.attack_log += text("\[[time_stamp()]\] <font color='orange'>[key_name(attacker)] - [victim_message]</font>")
-	attacker.attack_log += text("\[[time_stamp()]\] <font color='red'>[key_name(victim)] - [attacker_message]</font>")
+	if(victim)
+		victim.attack_log += text("\[[time_stamp()]\] <font color='orange'>[key_name(attacker)] - [victim_message]</font>")
+	if(attacker)
+		attacker.attack_log += text("\[[time_stamp()]\] <font color='red'>[key_name(victim)] - [attacker_message]</font>")
 
-	msg_admin_attack("[key_name(attacker)] [admin_message] [key_name(victim)] (INTENT: [uppertext(attacker.a_intent)]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[attacker.x];Y=[attacker.y];Z=[attacker.z]'>JMP</a>)")
+	msg_admin_attack("[key_name(attacker)] [admin_message] [key_name(victim)] (INTENT: [attacker? uppertext(attacker.a_intent) : "N/A"]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[attacker.x];Y=[attacker.y];Z=[attacker.z]'>JMP</a>)")
 
 proc/admin_attacker_log_many_victims(var/mob/attacker, var/list/mob/victims, var/attacker_message, var/victim_message, var/admin_message)
 	if(!victims || !victims.len)
