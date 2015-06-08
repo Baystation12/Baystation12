@@ -20,10 +20,6 @@
 		if(!psupply)
 			create_powersupply()
 
-		if (src.machine)
-			if (!( src.machine.check_eye(src) ))
-				src.reset_view(null)
-
 		// Handle power damage (oxy)
 		if(aiRestorePowerRoutine != 0 && !APU_power)
 			// Lose power
