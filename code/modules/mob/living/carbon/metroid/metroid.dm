@@ -220,15 +220,6 @@
 /mob/living/carbon/slime/attack_ui(slot)
 	return
 
-/mob/living/carbon/slime/meteorhit(O as obj)
-	visible_message("<span class='warning'>[src] has been hit by [O]</span>")
-
-	adjustBruteLoss((istype(O, /obj/effect/meteor/small) ? 10 : 25))
-	adjustFireLoss(30)
-
-	updatehealth()
-	return
-
 /mob/living/carbon/slime/attack_hand(mob/living/carbon/human/M as mob)
 
 	..()

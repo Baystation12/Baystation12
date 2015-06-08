@@ -36,6 +36,7 @@
 #include "code\_helpers\lists.dm"
 #include "code\_helpers\logging.dm"
 #include "code\_helpers\maths.dm"
+#include "code\_helpers\matrices.dm"
 #include "code\_helpers\mobs.dm"
 #include "code\_helpers\names.dm"
 #include "code\_helpers\sanitize_values.dm"

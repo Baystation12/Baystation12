@@ -71,10 +71,6 @@
 		produce_heat()
 		delay = initial(delay)
 
-/obj/machinery/r_n_d/server/meteorhit(var/obj/O as obj)
-	griefProtection()
-	..()
-
 /obj/machinery/r_n_d/server/emp_act(severity)
 	griefProtection()
 	..()

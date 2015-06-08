@@ -127,11 +127,6 @@ for reference:
 				dismantle()
 			return
 
-/obj/structure/barricade/meteorhit()
-	visible_message("<span class='danger'>\The [src] is smashed apart!</span>")
-	dismantle()
-	return
-
 /obj/structure/barricade/blob_act()
 	src.health -= 25
 	if (src.health <= 0)
@@ -251,10 +246,6 @@ for reference:
 			locked = !locked
 			anchored = !anchored
 			icon_state = "barrier[src.locked]"
-
-	meteorhit()
-		src.explode()
-		return
 
 	blob_act()
 		src.health -= 25
