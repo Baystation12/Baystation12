@@ -31,10 +31,6 @@ Note: Must be placed within 3 tiles of the R&D Console
 		T += S.rating
 	decon_mod = T * 0.1
 
-/obj/machinery/r_n_d/destructive_analyzer/meteorhit()
-	qdel(src)
-	return
-
 /obj/machinery/r_n_d/destructive_analyzer/update_icon()
 	if(panel_open)
 		icon_state = "d_analyzer_t"

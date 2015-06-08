@@ -75,15 +75,15 @@
 		set name = "Reset Computer"
 		set category = "Object"
 		set src in view(1)
-		
+
 		if(usr.stat || usr.restrained() || usr.lying || !istype(usr, /mob/living))
 			usr << "<span class='warning'>You can't do that.</span>"
 			return
-		
+
 		if(!Adjacent(usr))
 			usr << "You can't reach it."
 			return
-		
+
 		Reset()
 
 	New(var/L, var/built = 0)
@@ -198,14 +198,6 @@
 		update_icon()
 
 		// todo does this do enough
-
-
-	meteorhit(var/obj/O as obj)
-		for(var/x in verbs)
-			verbs -= x
-		set_broken()
-		return
-
 
 	emp_act(severity)
 		if(prob(20/severity)) set_broken()

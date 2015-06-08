@@ -9,14 +9,16 @@
 	votable = 0
 	uplink_welcome = "EVIL METEOR Uplink Console:"
 	deny_respawn = 1
+	var/next_wave = METEOR_DELAY
 
 /datum/game_mode/meteor/post_setup()
 	defer_powernet_rebuild = 2//Might help with the lag
 	..()
 
 /datum/game_mode/meteor/process()
-	if(world.time >= METEOR_DELAY)
-		spawn() spawn_meteors(6)
+	if(world.time >= next_wave)
+		next_wave = world.time + meteor_wave_delay
+		spawn() spawn_meteors(6, meteors_normal)
 
 /datum/game_mode/meteor/declare_completion()
 	var/text
