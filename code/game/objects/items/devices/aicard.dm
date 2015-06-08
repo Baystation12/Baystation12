@@ -91,7 +91,7 @@
 
 /obj/item/device/aicard/proc/grab_ai(var/mob/living/silicon/ai/ai, var/mob/living/user)
 	if(!ai.client)
-		user << "<span class='danger'>ERROR:</span> [name] data core is offline. Unable to download."
+		user << "<span class='danger'>ERROR:</span> AI [ai.name] is offline. Unable to download."
 		return 0
 
 	if(carded_ai)
@@ -112,7 +112,6 @@
 	ai.cancel_camera()
 	ai.control_disabled = 1
 	ai.aiRestorePowerRoutine = 0
-	ai.aiRadio.disabledAi = 1
 	carded_ai = ai
 
 	if(ai.client)

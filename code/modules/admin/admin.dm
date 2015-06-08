@@ -20,6 +20,10 @@ var/global/floorIsLava = 0
 				var/msg = rendered
 				C << msg
 
+proc/admin_notice(var/message, var/rights)
+	for(var/mob/M in mob_list)
+		if(check_rights(rights, 0, M))
+			M << message
 
 ///////////////////////////////////////////////////////////////////////////////////////////////Panels
 

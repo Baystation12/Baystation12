@@ -25,8 +25,11 @@
 	icon_action_button = "action_welding"
 	siemens_coefficient = 0.9
 	w_class = 3
+	var/base_state
 
 /obj/item/clothing/head/welding/attack_self()
+	if(!base_state)
+		base_state = icon_state
 	toggle()
 
 
@@ -40,13 +43,13 @@
 			src.up = !src.up
 			src.flags |= (HEADCOVERSEYES | HEADCOVERSMOUTH)
 			flags_inv |= (HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE)
-			icon_state = initial(icon_state)
+			icon_state = base_state
 			usr << "You flip the [src] down to protect your eyes."
 		else
 			src.up = !src.up
 			src.flags &= ~(HEADCOVERSEYES | HEADCOVERSMOUTH)
 			flags_inv &= ~(HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE)
-			icon_state = "[initial(icon_state)]up"
+			icon_state = "[base_state]up"
 			usr << "You push the [src] up out of your face."
 		update_clothing_icon()	//so our mob-overlays update
 
