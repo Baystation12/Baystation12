@@ -103,7 +103,8 @@
 	grav_pulling = 1
 	exploded = 1
 	for(var/mob/living/mob in living_mob_list)
-		if(loc.z == mob.loc.z)
+		var/turf/T = get_turf(mob)
+		if(T && (loc.z == T.z))
 			if(istype(mob, /mob/living/carbon/human))
 				//Hilariously enough, running into a closet should make you get hit the hardest.
 				var/mob/living/carbon/human/H = mob
@@ -157,15 +158,15 @@
 
 /obj/machinery/power/supermatter/get_transit_zlevel()
 	//don't send it back to the station -- most of the time
-	if(prob(99)) 
+	if(prob(99))
 		var/list/candidates = accessible_z_levels.Copy()
 		for(var/zlevel in config.station_levels)
 			candidates.Remove("[zlevel]")
 		candidates.Remove("[src.z]")
-		
+
 		if(candidates.len)
 			return text2num(pickweight(candidates))
-	
+
 	return ..()
 
 /obj/machinery/power/supermatter/process()
@@ -382,7 +383,7 @@
 		defer_powernet_rebuild = 1
 	// Let's just make this one loop.
 	for(var/atom/X in orange(pull_radius,src))
-		X.singularity_pull(src, STAGE_FIVE)
+		spawn()	X.singularity_pull(src, STAGE_FIVE)
 
 	if(defer_powernet_rebuild != 2)
 		defer_powernet_rebuild = 0

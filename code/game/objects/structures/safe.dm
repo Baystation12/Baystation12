@@ -167,11 +167,6 @@ obj/structure/safe/blob_act()
 obj/structure/safe/ex_act(severity)
 	return
 
-
-obj/structure/safe/meteorhit(obj/O as obj)
-	return
-
-
 //FLOOR SAFES
 /obj/structure/safe/floor
 	name = "floor safe"

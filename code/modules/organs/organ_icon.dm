@@ -47,7 +47,9 @@ var/global/list/limb_icon_cache = list()
 
 	..()
 	overlays.Cut()
-	if(species.has_organ["eyes"])
+	if(!owner || !owner.species)
+		return
+	if(owner.species.has_organ["eyes"])
 		var/obj/item/organ/eyes/eyes = owner.internal_organs_by_name["eyes"]
 		if(species.eyes)
 			var/icon/eyes_icon = new/icon('icons/mob/human_face.dmi', species.eyes)

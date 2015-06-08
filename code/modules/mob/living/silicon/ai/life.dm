@@ -61,15 +61,18 @@
 				src << "Alert cancelled. Power has been restored without our assistance."
 				aiRestorePowerRoutine = 0
 				src.blind.layer = 0
+				updateicon()
 				return
 			else if (aiRestorePowerRoutine==3)
 				src << "Alert cancelled. Power has been restored."
 				aiRestorePowerRoutine = 0
 				src.blind.layer = 0
+				updateicon()
 				return
 			else if (APU_power)
 				aiRestorePowerRoutine = 0
 				src.blind.layer = 0
+				updateicon()
 				return
 		else
 			var/area/current_area = get_area(src)
@@ -79,7 +82,7 @@
 					aiRestorePowerRoutine = 1
 
 					//Blind the AI
-
+					updateicon()
 					src.blind.screen_loc = "1,1 to 15,15"
 					if (src.blind.layer!=18)
 						src.blind.layer = 18
@@ -147,6 +150,7 @@
 									aiRestorePowerRoutine = 3
 									src << "Here are your current laws:"
 									show_laws()
+									updateicon()
 							sleep(50)
 							theAPC = null
 

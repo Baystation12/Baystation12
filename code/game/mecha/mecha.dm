@@ -648,10 +648,6 @@
 	return
 */
 
-//TODO
-/obj/mecha/meteorhit()
-	return ex_act(rand(1,3))//should do for now
-
 /obj/mecha/emp_act(severity)
 	if(get_charge())
 		use_power((cell.charge/2)/severity)

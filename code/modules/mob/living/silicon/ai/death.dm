@@ -3,11 +3,6 @@
 	if(stat == DEAD)
 		return
 
-	if (src.custom_sprite == 1)//check for custom AI sprite, defaulting to blue screen if no.
-		icon_state = "[ckey]-ai-crash"
-	else
-		icon_state = "ai-crash"
-
 	if(src.eyeobj)
 		src.eyeobj.setLoc(get_turf(src))
 
@@ -20,4 +15,5 @@
 			var/obj/item/device/aicard/card = loc
 			card.update_icon()
 
-	return ..(gibbed,"gives one shrill beep before falling lifeless.")
+	. = ..(gibbed,"gives one shrill beep before falling lifeless.")
+	density = 1
