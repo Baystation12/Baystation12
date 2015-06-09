@@ -1,8 +1,8 @@
-/obj/nano_module/crew_monitor
+/datum/nano_module/crew_monitor
 	name = "Crew monitor"
 	var/list/tracked = new
 
-/obj/nano_module/crew_monitor/Topic(href, href_list)
+/datum/nano_module/crew_monitor/Topic(href, href_list)
 	if(..()) return
 	var/turf/T = get_turf(src)
 	if (!T || !(T.z in config.player_levels))
@@ -14,9 +14,6 @@
 		usr.unset_machine()
 		ui.close()
 		return 0
-	if(href_list["update"])
-		src.updateDialog()
-		return 1
 	if(href_list["track"])
 		if(usr.isAI())
 			var/mob/living/silicon/ai/AI = usr
@@ -25,7 +22,7 @@
 				AI.ai_actual_track(H)
 		return 1
 
-/obj/nano_module/crew_monitor/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
+/datum/nano_module/crew_monitor/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
 	user.set_machine(src)
 	src.scan()
 
@@ -87,7 +84,7 @@
 		// should make the UI auto-update; doesn't seem to?
 		ui.set_auto_update(1)
 
-/obj/nano_module/crew_monitor/proc/scan()
+/datum/nano_module/crew_monitor/proc/scan()
 	for(var/mob/living/carbon/human/H in mob_list)
 		if(istype(H.w_uniform, /obj/item/clothing/under))
 			var/obj/item/clothing/under/C = H.w_uniform

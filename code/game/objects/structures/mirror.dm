@@ -14,7 +14,7 @@
 	if(shattered)	return
 
 	if(ishuman(user))
-		var/obj/nano_module/appearance_changer/AC = ui_users[user]
+		var/datum/nano_module/appearance_changer/AC = ui_users[user]
 		if(!AC)
 			AC = new(src, user)
 			AC.name = "SalonPro Nano-Mirror(TM)"

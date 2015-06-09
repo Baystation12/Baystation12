@@ -12,7 +12,7 @@
 	circuit = "/obj/item/weapon/circuitboard/atmoscontrol"
 	req_access = list(access_ce)
 	var/list/monitored_alarm_ids = null
-	var/obj/nano_module/atmos_control/atmos_control
+	var/datum/nano_module/atmos_control/atmos_control
 
 /obj/machinery/computer/atmoscontrol/New()
 	..()
