@@ -681,3 +681,16 @@ mob/dead/observer/MayRespawn(var/feedback = 0)
 			src << "<span class='warning'>antagHUD restrictions prevent you from respawning.</span>"
 		return 0
 	return 1
+
+/proc/ghost_follow_link(var/atom/target, var/atom/ghost)
+	if((!target) || (!ghost)) return
+	. = "<a href='byond://?src=\ref[ghost];track=\ref[target]'>follow</a>"
+
+	if(istype(target, /mob/dead/observer))
+		var/mob/dead/observer/O = target
+		if(O.mind && O.mind.current)
+			. += "|<a href='byond://?src=\ref[ghost];track=\ref[O.mind.current]'>body</a>"
+	else if(istype(target, /mob)) // Eye follow links
+		var/mob/M = target
+		if(M.client && M.eyeobj) // No point following clientless eyes
+			. += "|<a href='byond://?src=\ref[ghost];track=\ref[M.eyeobj]'>eye</a>"
