@@ -273,7 +273,7 @@ var/list/name_to_material
 	hardness = 80
 	weight = 23
 	stack_origin_tech = "materials=2"
-	composite_material = list() //todo
+	composite_material = list(DEFAULT_WALL_MATERIAL = 3750, "platinum" = 3750) //todo
 
 /material/glass
 	name = "glass"
@@ -316,7 +316,7 @@ var/list/name_to_material
 	hardness = 40
 	weight = 30
 	stack_origin_tech = "materials=2"
-	composite_material = list() //todo
+	composite_material = list(DEFAULT_WALL_MATERIAL = 1875,"glass" = 3750)
 
 /material/plastic
 	name = "plastic"
