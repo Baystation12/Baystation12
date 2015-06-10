@@ -682,15 +682,18 @@ mob/dead/observer/MayRespawn(var/feedback = 0)
 		return 0
 	return 1
 
+/atom/proc/extra_ghost_link()
+	return
+
+/mob/extra_ghost_link(var/atom/ghost)
+	if(mind && eyeobj)
+		return "|<a href='byond://?src=\ref[ghost];track=\ref[eyeobj]'>eye</a>"
+
+/mob/dead/observer/extra_ghost_link(var/atom/ghost)
+	if(mind && mind.current)
+		return "|<a href='byond://?src=\ref[ghost];track=\ref[mind.current]'>body</a>"
+
 /proc/ghost_follow_link(var/atom/target, var/atom/ghost)
 	if((!target) || (!ghost)) return
 	. = "<a href='byond://?src=\ref[ghost];track=\ref[target]'>follow</a>"
-
-	if(istype(target, /mob/dead/observer))
-		var/mob/dead/observer/O = target
-		if(O.mind && O.mind.current)
-			. += "|<a href='byond://?src=\ref[ghost];track=\ref[O.mind.current]'>body</a>"
-	else if(istype(target, /mob)) // Eye follow links
-		var/mob/M = target
-		if(M.client && M.eyeobj) // No point following clientless eyes
-			. += "|<a href='byond://?src=\ref[ghost];track=\ref[M.eyeobj]'>eye</a>"
+	. += target.extra_ghost_link(ghost)
