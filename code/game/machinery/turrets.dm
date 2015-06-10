@@ -71,6 +71,8 @@
 	var/targeting_active = 0
 	var/area/turret_protected/protected_area
 
+
+
 /obj/machinery/turret/proc/take_damage(damage)
 	src.health -= damage
 	if(src.health<=0)

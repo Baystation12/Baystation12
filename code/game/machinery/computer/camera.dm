@@ -29,7 +29,7 @@
 		return 1
 
 	ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
-		if(src.z > 6) return
+		if(src.z > 8) return
 		if(stat & (NOPOWER|BROKEN)) return
 		if(user.stat) return
 
@@ -77,7 +77,7 @@
 
 	Topic(href, href_list)
 		if(href_list["switchTo"])
-			if(src.z>6 || stat&(NOPOWER|BROKEN)) return
+			if(src.z>8 || stat&(NOPOWER|BROKEN)) return
 			if(usr.stat || ((get_dist(usr, src) > 1 || !( usr.canmove ) || usr.blinded) && !istype(usr, /mob/living/silicon))) return
 			var/obj/machinery/camera/C = locate(href_list["switchTo"]) in cameranet.cameras
 			if(!C) return
@@ -85,7 +85,7 @@
 			switch_to_camera(usr, C)
 			return 1
 		else if(href_list["reset"])
-			if(src.z>6 || stat&(NOPOWER|BROKEN)) return
+			if(src.z>8 || stat&(NOPOWER|BROKEN)) return
 			if(usr.stat || ((get_dist(usr, src) > 1 || !( usr.canmove ) || usr.blinded) && !istype(usr, /mob/living/silicon))) return
 			reset_current()
 			usr.check_eye(current)

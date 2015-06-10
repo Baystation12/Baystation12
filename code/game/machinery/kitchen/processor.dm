@@ -32,7 +32,7 @@
 		input = /obj/item/weapon/reagent_containers/food/snacks/grown/potato
 		output = /obj/item/weapon/reagent_containers/food/snacks/rawsticks
 
-	carrot
+	/*carrot
 		input = /obj/item/weapon/reagent_containers/food/snacks/grown/carrot
 		output = /obj/item/weapon/reagent_containers/food/snacks/carrotfries
 
@@ -42,7 +42,7 @@
 
 	wheat
 		input = /obj/item/weapon/reagent_containers/food/snacks/grown/wheat
-		output = /obj/item/weapon/reagent_containers/food/snacks/flour
+		output = /obj/item/weapon/reagent_containers/food/snacks/flour */
 
 	spaghetti
 		input = /obj/item/weapon/reagent_containers/food/snacks/flour

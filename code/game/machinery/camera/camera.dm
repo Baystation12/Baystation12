@@ -370,7 +370,7 @@
 	return 0
 
 
-/*/obj/machinery/camera/proc/network_check(var/area/A)
+/obj/machinery/camera/proc/network_check(var/area/A)
 	if(overridenetwork == 1)
 		return
 	src.network = list("SS13")
@@ -418,7 +418,7 @@
 		src.network += "Interrogation"
 	if(istype(A,/area/mine))
 		src.network += "MINE"
-*/
+
 
 /obj/machinery/camera/interact(mob/living/user as mob)
 	if(!panel_open || istype(user, /mob/living/silicon/ai))
