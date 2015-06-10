@@ -41,18 +41,18 @@
 	colour = "tajaran"
 	key = "j"
 	flags = WHITELISTED
-	syllables = list("rr","rr","tajr","kir","raj","kii","mir","kra","ahk","nal","vah","khaz","jri","ran","darr", \
-	"mi","jri","dynh","manq","rhe","zar","rrhaz","kal","chur","eech","thaa","dra","jurl","mah","sanu","dra","ii'r", \
-	"ka","aasi","far","wa","baq","ara","qara","zir","sam","mak","hrar","nja","rir","khan","jun","dar","rik","kah", \
-	"hal","ket","jurl","mah","tul","cresh","azu","ragh", "mro", "mra")
+	syllables = list("mrr","rr","tajr","kir","raj","kii","mir","kra","ahk","nal","vah","khaz","jri","ran","darr",
+	"mi","jri","dynh","manq","rhe","zar","rrhaz","kal","chur","eech","thaa","dra","jurl","mah","sanu","dra","ii'r",
+	"ka","aasi","far","wa","baq","ara","qara","zir","sam","mak","hrar","nja","rir","khan","jun","dar","rik","kah",
+	"hal","ket","jurl","mah","tul","cresh","azu","ragh","mro","mra","mrro","mrra")
 
 /datum/language/tajaran/get_random_name(var/gender)
 
 	var/new_name = ..(gender,1)
-	if(prob(80))
-		new_name += " [pick(list("Hadii","Kaytam","Zhan-Khazan","Hharar","Njarir'Akhan"))]"
+	if(prob(50))
+		new_name += " [pick(list("Hadii","Kaytam","Nazkiin","Zhan-Khazan","Hharar","Njarir'Akhan","Faaira'Nrezi","Rhezar","Mi'dynh","Rrhazkal","Bayan","Al'Manq","Mi'jri","Chur'eech","Sanu'dra","Ii'rka"))]"
 	else
-		new_name += ..(gender,1)
+		new_name += " [..(gender,1)]"
 	return new_name
 
 /datum/language/skrell
