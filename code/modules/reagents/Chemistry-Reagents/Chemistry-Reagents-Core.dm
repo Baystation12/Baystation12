@@ -155,6 +155,17 @@
 		if(!cube.wrapped)
 			cube.Expand()
 
+/datum/reagent/water/touch_mob(var/mob/living/L, var/amount)
+	if(istype(L))
+		var/needed = L.fire_stacks * 10
+		if(amount > needed)
+			L.fire_stacks = 0
+			L.ExtinguishMob()
+			remove_self(needed)
+		else
+			L.adjust_fire_stacks(-(amount / 10))
+			remove_self(amount)
+
 /datum/reagent/water/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
 	if(istype(M, /mob/living/carbon/slime))
 		var/mob/living/carbon/slime/S = M
@@ -165,15 +176,6 @@
 				++S.Discipline
 		if(dose == removed)
 			S.visible_message("<span class='warning'>[S]'s flesh sizzles where the water touches it!</span>", "<span class='danger'>Your flesh burns in the water!</span>")
-	var/needed = M.fire_stacks * 10
-	if(volume > needed)
-		M.fire_stacks = 0
-		M.ExtinguishMob()
-		remove_self(needed)
-	else
-		M.adjust_fire_stacks(-(volume / 10))
-		remove_self(volume)
-	return
 
 /datum/reagent/fuel
 	name = "Welding fuel"
@@ -194,5 +196,7 @@
 /datum/reagent/fuel/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.adjustToxLoss(2 * removed)
 
-/datum/reagent/fuel/affect_touch(var/mob/living/carbon/M, var/alien, var/removed) // Splashing people with welding fuel to make them easy to ignite!
-	M.adjust_fire_stacks(0.1 * removed)
+/datum/reagent/fuel/touch_mob(var/mob/living/L, var/amount)
+	if(istype(L))
+		L.adjust_fire_stacks(amount / 10) // Splashing people with welding fuel to make them easy to ignite!
+

@@ -88,7 +88,12 @@ About the Holder:
 			Transfers [amount] reagents from [src] to [target], multiplying them by [multiplier]. Returns actual amount removed from [src] (not amount transferred to [target]). If [copy] is 1, copies reagents instead.
 
 		touch(var/atom/target)
-			Not recommended to use. Calls touch_mob(target), touch_turf(target), or touch_obj(target), depending on target's type.
+			When applying reagents to an atom externally, touch() is called to trigger any on-touch effects of the reagent.
+			This does not handle transferring reagents to things.
+			For example, splashing someone with water will get them wet and extinguish them if they are on fire,
+			even if they are wearing an impermeable suit that prevents the reagents from contacting the skin.
+			Basically just defers to touch_mob(target), touch_turf(target), or touch_obj(target), depending on target's type.
+			Not recommended to use this directly, since trans_to() calls it before attempting to transfer.
 
 		touch_mob(var/mob/target)
 			Calls each reagent's touch_mob(target).
@@ -100,7 +105,11 @@ About the Holder:
 			Calls each reagent's touch_obj(target).
 
 		trans_to(var/atom/target, var/amount = 1, var/multiplier = 1, var/copy = 0)
-			Checks the type of [target], calling splash_mob(target, amount), trans_to_turf(target, amount, multiplier, copy), or trans_to_obj(target, amount, multiplier, copy).
+			The general proc for applying reagents to things externally (as opposed to directly injected into the contents). 
+			It first calls touch, then the appropriate trans_to_*() or splash_mob().
+			If for some reason you want touch effects to be bypassed (e.g. injecting stuff directly into a reagent container or person), call the appropriate trans_to_*() proc.
+			
+			Calls touch() before checking the type of [target], calling splash_mob(target, amount), trans_to_turf(target, amount, multiplier, copy), or trans_to_obj(target, amount, multiplier, copy).
 
 		trans_id_to(var/atom/target, var/id, var/amount = 1)
 			Transfers [amount] of [id] to [target]. Returns amount transferred.

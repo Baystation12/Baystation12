@@ -288,43 +288,13 @@
 
 /* Holder-to-atom and similar procs */
 
-/datum/reagents/proc/touch(var/atom/target) // This picks the appropriate reaction. Reagents are not guaranteed to transfer to the target.
-	if(ismob(target))
-		touch_mob(target)
-	if(isturf(target))
-		touch_turf(target)
-	if(isobj(target))
-		touch_obj(target)
-	return
-
-/datum/reagents/proc/touch_mob(var/mob/target)
-	if(!target || !istype(target))
-		return
-
-	for(var/datum/reagent/current in reagent_list)
-		current.touch_mob(target)
-
-	update_total()
-
-/datum/reagents/proc/touch_turf(var/turf/target)
-	if(!target || !istype(target))
-		return
-
-	for(var/datum/reagent/current in reagent_list)
-		current.touch_turf(target)
-
-	update_total()
-
-/datum/reagents/proc/touch_obj(var/obj/target)
-	if(!target || !istype(target))
-		return
-
-	for(var/datum/reagent/current in reagent_list)
-		current.touch_obj(target)
-
-	update_total()
-
+//The general proc for applying reagents to things. This proc assumes the reagents are being applied externally, 
+//not directly injected into the contents. It first calls touch, then the appropriate trans_to_*() or splash_mob().
+//If for some reason touch effects are bypassed (e.g. injecting stuff directly into a reagent container or person), 
+//call the appropriate trans_to_*() proc.
 /datum/reagents/proc/trans_to(var/atom/target, var/amount = 1, var/multiplier = 1, var/copy = 0)
+	touch(target) //First, handle mere touch effects
+
 	if(ismob(target))
 		//warning("[my_atom] is trying to transfer reagents to [target], which is a mob, using trans_to()")
 		//return trans_to_mob(target, amount, multiplier, copy)
@@ -351,9 +321,62 @@
 
 	return F.trans_to(target, amount) // Let this proc check the atom's type
 
+// When applying reagents to an atom externally, touch() is called to trigger any on-touch effects of the reagent.
+// This does not handle transferring reagents to things.
+// For example, splashing someone with water will get them wet and extinguish them if they are on fire,
+// even if they are wearing an impermeable suit that prevents the reagents from contacting the skin.
+/datum/reagents/proc/touch(var/atom/target)
+	if(ismob(target))
+		touch_mob(target)
+	if(isturf(target))
+		touch_turf(target)
+	if(isobj(target))
+		touch_obj(target)
+	return
+
+/datum/reagents/proc/touch_mob(var/mob/target)
+	if(!target || !istype(target))
+		return
+
+	for(var/datum/reagent/current in reagent_list)
+		current.touch_mob(target, current.volume)
+
+	update_total()
+
+/datum/reagents/proc/touch_turf(var/turf/target)
+	if(!target || !istype(target))
+		return
+
+	for(var/datum/reagent/current in reagent_list)
+		current.touch_turf(target, current.volume)
+
+	update_total()
+
+/datum/reagents/proc/touch_obj(var/obj/target)
+	if(!target || !istype(target))
+		return
+
+	for(var/datum/reagent/current in reagent_list)
+		current.touch_obj(target, current.volume)
+
+	update_total()
+
+// Attempts to place a reagent on the mob's skin.
+// Reagents are not guaranteed to transfer to the target.
 /datum/reagents/proc/splash_mob(var/mob/target, var/amount = 1, var/clothes = 1)
 	var/perm = 0
-	var/list/L = list("head" = THERMAL_PROTECTION_HEAD, "upper_torso" = THERMAL_PROTECTION_UPPER_TORSO, "lower_torso" = THERMAL_PROTECTION_LOWER_TORSO, "legs" = THERMAL_PROTECTION_LEG_LEFT + THERMAL_PROTECTION_LEG_RIGHT, "feet" = THERMAL_PROTECTION_FOOT_LEFT + THERMAL_PROTECTION_FOOT_RIGHT, "arms" = THERMAL_PROTECTION_ARM_LEFT + THERMAL_PROTECTION_ARM_RIGHT, "hands" = THERMAL_PROTECTION_HAND_LEFT + THERMAL_PROTECTION_HAND_RIGHT)
+	
+	//this all seems very human-specific
+	var/list/L = list(
+		"head" = THERMAL_PROTECTION_HEAD, 
+		"upper_torso" = THERMAL_PROTECTION_UPPER_TORSO, 
+		"lower_torso" = THERMAL_PROTECTION_LOWER_TORSO, 
+		"legs" = THERMAL_PROTECTION_LEG_LEFT + THERMAL_PROTECTION_LEG_RIGHT, 
+		"feet" = THERMAL_PROTECTION_FOOT_LEFT + THERMAL_PROTECTION_FOOT_RIGHT, 
+		"arms" = THERMAL_PROTECTION_ARM_LEFT + THERMAL_PROTECTION_ARM_RIGHT, 
+		"hands" = THERMAL_PROTECTION_HAND_LEFT + THERMAL_PROTECTION_HAND_RIGHT
+		)
+	
 	if(clothes)
 		for(var/obj/item/clothing/C in target.get_equipped_items())
 			if(C.permeability_coefficient == 1 || C.body_parts_covered == 0)
