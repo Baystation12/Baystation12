@@ -305,6 +305,11 @@
 		return trans_to_obj(target, amount, multiplier, copy)
 	return 0
 
+//Using this in case we want to differentiate splashing an atom from transferring reagents to it later down the road.
+//For now it just calls trans_to.
+/datum/reagents/proc/splash(var/atom/target, var/amount = 1, var/multiplier = 1, var/copy = 0)
+	trans_to(target, amount, multiplier, copy)
+
 /datum/reagents/proc/trans_id_to(var/atom/target, var/id, var/amount = 1)
 	if (!target || !target.reagents)
 		return
@@ -363,6 +368,7 @@
 
 // Attempts to place a reagent on the mob's skin.
 // Reagents are not guaranteed to transfer to the target.
+// Do not call this directly, call trans_to() instead.
 /datum/reagents/proc/splash_mob(var/mob/target, var/amount = 1, var/clothes = 1)
 	var/perm = 0
 	

@@ -116,6 +116,7 @@ About the Holder:
 
 		splash_mob(var/mob/target, var/amount = 1, var/clothes = 1)
 			Checks mob's clothing if [clothes] is 1 and transfers [amount] reagents to mob's skin.
+			Don't call this directly. Call apply_to() instead.
 
 		trans_to_mob(var/mob/target, var/amount = 1, var/type = CHEM_BLOOD, var/multiplier = 1, var/copy = 0)
 			Transfers [amount] reagents to the mob's appropriate holder, depending on [type]. Ignores protection.
