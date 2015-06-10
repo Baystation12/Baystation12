@@ -36,7 +36,7 @@
 // Refreshes list of active sensors kept on this computer.
 /datum/nano_module/power_monitor/proc/refresh_sensors()
 	grid_sensors = list()
-	var/turf/T = get_turf(src)
+	var/turf/T = get_turf(nano_host())
 	for(var/obj/machinery/power/sensor/S in machines)
 		if((T && S.loc.z == T.z) || (S.long_range)) // Consoles have range on their Z-Level. Sensors with long_range var will work between Z levels.
 			if(S.name_tag == "#UNKN#") // Default name. Shouldn't happen!
