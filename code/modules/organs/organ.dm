@@ -57,6 +57,12 @@ var/list/organ_cache = list()
 		if(internal)
 			holder.internal_organs |= src
 
+/obj/item/organ/proc/set_dna(var/datum/dna/new_dna)
+	if(new_dna)
+		dna = new_dna.Clone()
+		blood_DNA.Cut()
+		blood_DNA[dna.unique_enzymes] = dna.b_type
+
 /obj/item/organ/proc/die()
 	if(status & ORGAN_ROBOT)
 		return

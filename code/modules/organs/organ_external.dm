@@ -1051,6 +1051,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 				if(6 to INFINITY)
 					flavor_text += "a ton of [wound]\s"
 		return english_list(flavor_text)
+
 /****************************************************
 			   ORGAN DEFINES
 ****************************************************/
