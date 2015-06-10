@@ -5,6 +5,7 @@
 	desc = "A hand made chemical grenade."
 	w_class = 2.0
 	force = 2.0
+	det_time = null
 	var/stage = 0
 	var/state = 0
 	var/path = 0
@@ -25,6 +26,7 @@
 				detonator.detached()
 				usr.put_in_hands(detonator)
 				detonator=null
+				det_time = null
 				stage=0
 				icon_state = initial(icon_state)
 			else if(beakers.len)
@@ -60,6 +62,12 @@
 			user.remove_from_mob(det)
 			det.loc = src
 			detonator = det
+			if(istimer(detonator.a_left))
+				var/obj/item/device/assembly/timer/T = detonator.a_left
+				det_time = 10*T.time
+			if(istimer(detonator.a_right))
+				var/obj/item/device/assembly/timer/T = detonator.a_right
+				det_time = 10*T.time
 			icon_state = initial(icon_state) +"_ass"
 			name = "unsecured grenade with [beakers.len] containers[detonator?" and detonator":""]"
 			stage = 1
@@ -143,6 +151,13 @@
 		if(!has_reagents)
 			icon_state = initial(icon_state) +"_locked"
 			playsound(src.loc, 'sound/items/Screwdriver2.ogg', 50, 1)
+			spawn(0) //Otherwise det_time is erroneously set to 0 after this
+				if(istimer(detonator.a_left)) //Make sure description reflects that the timer has been reset
+					var/obj/item/device/assembly/timer/T = detonator.a_left
+					det_time = 10*T.time
+				if(istimer(detonator.a_right))
+					var/obj/item/device/assembly/timer/T = detonator.a_right
+					det_time = 10*T.time
 			return
 
 		playsound(src.loc, 'sound/effects/bamf.ogg', 50, 1)
