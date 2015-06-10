@@ -686,7 +686,7 @@ mob/dead/observer/MayRespawn(var/feedback = 0)
 	return
 
 /mob/extra_ghost_link(var/atom/ghost)
-	if(mind && eyeobj)
+	if(client && eyeobj)
 		return "|<a href='byond://?src=\ref[ghost];track=\ref[eyeobj]'>eye</a>"
 
 /mob/dead/observer/extra_ghost_link(var/atom/ghost)
