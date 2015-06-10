@@ -152,12 +152,12 @@
 			icon_state = initial(icon_state) +"_locked"
 			playsound(src.loc, 'sound/items/Screwdriver2.ogg', 50, 1)
 			spawn(0.001) //Otherwise det_time is erroneously set to 0 after this
-			if(istimer(detonator.a_left)) //Make sure description reflects that the timer has been reset
-				var/obj/item/device/assembly/timer/T = detonator.a_left
-				det_time = 10*T.time
-			if(istimer(detonator.a_right))
-				var/obj/item/device/assembly/timer/T = detonator.a_right
-				det_time = 10*T.time
+				if(istimer(detonator.a_left)) //Make sure description reflects that the timer has been reset
+					var/obj/item/device/assembly/timer/T = detonator.a_left
+					det_time = 10*T.time
+				if(istimer(detonator.a_right))
+					var/obj/item/device/assembly/timer/T = detonator.a_right
+					det_time = 10*T.time
 			return
 
 		playsound(src.loc, 'sound/effects/bamf.ogg', 50, 1)
