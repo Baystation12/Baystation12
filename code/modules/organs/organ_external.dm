@@ -48,6 +48,20 @@
 	var/can_grasp
 	var/can_stand
 
+/obj/item/organ/external/Destroy()
+	if(parent && parent.children)
+		parent.children -= src
+
+	if(children)
+		for(var/obj/item/organ/external/C in children)
+			qdel(C)
+
+	if(internal_organs)
+		for(var/obj/item/organ/O in internal_organs)
+			qdel(O)
+
+	return ..()
+
 /obj/item/organ/external/attack_self(var/mob/user)
 	if(!contents.len)
 		return ..()

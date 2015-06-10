@@ -75,6 +75,13 @@
 	charge = 0
 	should_be_mapped = 1
 
+/obj/machinery/power/smes/buildable/Destroy()
+	..()
+	qdel(wires)
+	for(var/obj/nano_module/rcon/R in world)
+		R.FindDevices()
+
+
 // Proc: process()
 // Parameters: None
 // Description: Uses parent process, but if grounding wire is cut causes sparks to fly around.
@@ -345,6 +352,7 @@
 					if(I.reliability != 100 && crit_fail)
 						I.crit_fail = 1
 					I.loc = src.loc
+					component_parts -= I
 				qdel(src)
 				return
 
