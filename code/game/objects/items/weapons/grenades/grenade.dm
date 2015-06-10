@@ -47,6 +47,8 @@
 		if(det_time > 1)
 			user << "The timer is set to [det_time/10] seconds."
 			return
+		if(det_time == null)
+			return
 		user << "\The [src] is set for instant detonation."
 
 
@@ -89,16 +91,16 @@
 /obj/item/weapon/grenade/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(isscrewdriver(W))
 		switch(det_time)
-			if ("1")
+			if (1)
 				det_time = 10
 				user << "<span class='notice'>You set the [name] for 1 second detonation time.</span>"
-			if ("10")
+			if (10)
 				det_time = 30
 				user << "<span class='notice'>You set the [name] for 3 second detonation time.</span>"
-			if ("30")
+			if (30)
 				det_time = 50
 				user << "<span class='notice'>You set the [name] for 5 second detonation time.</span>"
-			if ("50")
+			if (50)
 				det_time = 1
 				user << "<span class='notice'>You set the [name] for instant detonation.</span>"
 		add_fingerprint(user)
