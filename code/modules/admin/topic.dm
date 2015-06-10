@@ -110,6 +110,7 @@
 		banreason = "(MANUAL BAN) "+banreason
 
 		DB_ban_record(bantype, playermob, banduration, banreason, banjob, null, banckey)
+		notes_add(playermob.ckey,banreason,usr)
 
 	else if(href_list["editrights"])
 		if(!check_rights(R_PERMISSIONS))
@@ -757,7 +758,7 @@
 							msg = job
 						else
 							msg += ", [job]"
-					notes_add(M.ckey, "Banned  from [msg] - [reason]")
+					notes_add(M.ckey, "Banned  from [msg] - [reason]", usr)
 					message_admins("\blue [key_name_admin(usr)] banned [key_name_admin(M)] from [msg] for [mins] minutes", 1)
 					M << "\red<BIG><B>You have been jobbanned by [usr.client.ckey] from: [msg].</B></BIG>"
 					M << "\red <B>The reason is: [reason]</B>"
@@ -778,7 +779,7 @@
 							jobban_fullban(M, job, "[reason]; By [usr.ckey] on [time2text(world.realtime)]")
 							if(!msg)	msg = job
 							else		msg += ", [job]"
-						notes_add(M.ckey, "Banned  from [msg] - [reason]")
+						notes_add(M.ckey, "Banned  from [msg] - [reason]", usr)
 						message_admins("\blue [key_name_admin(usr)] banned [key_name_admin(M)] from [msg]", 1)
 						M << "\red<BIG><B>You have been jobbanned by [usr.client.ckey] from: [msg].</B></BIG>"
 						M << "\red <B>The reason is: [reason]</B>"
@@ -832,25 +833,7 @@
 			message_admins("\blue [key_name_admin(usr)] booted [key_name_admin(M)].", 1)
 			//M.client = null
 			del(M.client)
-/*
-	//Player Notes
-	else if(href_list["notes"])
-		var/ckey = href_list["ckey"]
-		if(!ckey)
-			var/mob/M = locate(href_list["mob"])
-			if(ismob(M))
-				ckey = M.ckey
 
-		switch(href_list["notes"])
-			if("show")
-				notes_show(ckey)
-			if("add")
-				notes_add(ckey,href_list["text"])
-				notes_show(ckey)
-			if("remove")
-				notes_remove(ckey,text2num(href_list["from"]),text2num(href_list["to"]))
-				notes_show(ckey)
-*/
 	else if(href_list["removejobban"])
 		if(!check_rights(R_BAN))	return
 
@@ -885,6 +868,7 @@
 					return
 				AddBan(M.ckey, M.computer_id, reason, usr.ckey, 1, mins)
 				ban_unban_log_save("[usr.client.ckey] has banned [M.ckey]. - Reason: [reason] - This will be removed in [mins] minutes.")
+				notes_add(M.ckey,"[usr.client.ckey] has banned [M.ckey]. - Reason: [reason] - This will be removed in [mins] minutes.",usr)
 				M << "\red<BIG><B>You have been banned by [usr.client.ckey].\nReason: [reason].</B></BIG>"
 				M << "\red This is a temporary ban, it will be removed in [mins] minutes."
 				feedback_inc("ban_tmp",1)
@@ -917,6 +901,7 @@
 				else
 					M << "\red No ban appeals URL has been set."
 				ban_unban_log_save("[usr.client.ckey] has permabanned [M.ckey]. - Reason: [reason] - This is a permanent ban.")
+				notes_add(M.ckey,"[usr.client.ckey] has permabanned [M.ckey]. - Reason: [reason] - This is a permanent ban.",usr)
 				log_admin("[usr.client.ckey] has banned [M.ckey].\nReason: [reason]\nThis is a permanent ban.")
 				message_admins("\blue[usr.client.ckey] has banned [M.ckey].\nReason: [reason]\nThis is a permanent ban.")
 				feedback_inc("ban_perma",1)
