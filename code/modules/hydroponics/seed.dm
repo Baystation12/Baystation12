@@ -60,6 +60,7 @@
 	set_trait(TRAIT_IDEAL_HEAT,           293)          // Preferred temperature in Kelvin.
 	set_trait(TRAIT_NUTRIENT_CONSUMPTION, 0.25)         // Plant eats this much per tick.
 	set_trait(TRAIT_PLANT_COLOUR,         "#46B543")    // Colour of the plant icon.
+	set_trait(TRAIT_FLESH_COLOUR, "#46B543")
 
 	spawn(5)
 		sleep(-1)
@@ -169,8 +170,9 @@
 				if(get_trait(TRAIT_BIOLUM_COLOUR))
 					clr = get_trait(TRAIT_BIOLUM_COLOUR)
 				splat.set_light(get_trait(TRAIT_BIOLUM), l_color = clr)
-			if(get_trait(TRAIT_PRODUCT_COLOUR))
-				splat.color = get_trait(TRAIT_PRODUCT_COLOUR)
+			var/flesh_colour = get_trait(TRAIT_FLESH_COLOUR)
+			if(!flesh_colour) flesh_colour = get_trait(TRAIT_PRODUCT_COLOUR)
+			if(flesh_colour) splat.color = get_trait(TRAIT_PRODUCT_COLOUR)
 
 	if(chems)
 		for(var/mob/living/M in T.contents)

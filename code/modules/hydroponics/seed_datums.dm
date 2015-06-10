@@ -244,6 +244,7 @@
 	set_trait(TRAIT_PRODUCT_ICON,"apple")
 	set_trait(TRAIT_PRODUCT_COLOUR,"#FF540A")
 	set_trait(TRAIT_PLANT_ICON,"tree2")
+	set_trait(TRAIT_FLESH_COLOUR,"#E8E39B")
 
 /datum/seed/apple/poison
 	name = "poisonapple"
@@ -804,6 +805,7 @@
 	set_trait(TRAIT_PRODUCT_COLOUR,"#326B30")
 	set_trait(TRAIT_PLANT_COLOUR,"#257522")
 	set_trait(TRAIT_PLANT_ICON,"vine2")
+	set_trait(TRAIT_FLESH_COLOUR,"#F22C2C")
 
 /datum/seed/pumpkin
 	name = "pumpkin"
