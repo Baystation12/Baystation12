@@ -47,6 +47,19 @@
 		return 0
 	..(S,tamount,1)
 
+/obj/item/stack/material/attack_self(var/mob/user)
+	if(!material.build_windows(user, src))
+		..()
+
+/obj/item/stack/material/attackby(var/obj/item/W, var/mob/user)
+	if(istype(W,/obj/item/stack/cable_coil))
+		material.build_wired_product(user, W, src)
+		return
+	else if(istype(W, /obj/item/stack/rods))
+		material.build_rod_product(user, W, src)
+		return
+	return ..()
+
 /obj/item/stack/material/iron
 	name = "iron"
 	icon_state = "sheet-silver"
@@ -75,7 +88,7 @@
 	default_type = "phoron"
 
 /obj/item/stack/material/plastic
-	name = "Plastic"
+	name = "plastic"
 	icon_state = "sheet-plastic"
 	default_type = "plastic"
 
@@ -151,3 +164,27 @@
 	singular_name = "leather piece"
 	icon_state = "sheet-leather"
 	default_type = "leather"
+
+/obj/item/stack/material/glass
+	name = "glass"
+	singular_name = "glass sheet"
+	icon_state = "sheet-glass"
+	default_type = "glass"
+
+/obj/item/stack/material/glass/reinforced
+	name = "reinforced glass"
+	singular_name = "reinforced glass sheet"
+	icon_state = "sheet-rglass"
+	default_type = "reinforced glass"
+
+/obj/item/stack/material/glass/phoronglass
+	name = "phoron glass"
+	singular_name = "phoron glass sheet"
+	icon_state = "sheet-phoronglass"
+	default_type = "phoron glass"
+
+/obj/item/stack/material/glass/phoronrglass
+	name = "reinforced phoron glass"
+	singular_name = "reinforced phoron glass sheet"
+	icon_state = "sheet-phoronrglass"
+	default_type = "reinforced phoron glass"

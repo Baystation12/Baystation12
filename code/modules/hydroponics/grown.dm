@@ -223,7 +223,7 @@
 					new /obj/item/weapon/reagent_containers/food/snacks/soydope(get_turf(src))
 					qdel(src)
 					return
-				else //This may need to be made more specific, but at this point I am not sure what the criteria should be.
+				else if(seed.get_trait(TRAIT_FLESH_COLOUR))
 					user << "You slice up \the [src]."
 					var/slices = rand(3,5)
 					var/reagents_to_transfer = round(reagents.total_volume/slices)

@@ -77,6 +77,12 @@ var/list/name_to_material
 	var/conductive = 1           // Objects with this var add CONDUCTS to flags on spawn.
 	var/list/composite_material  // If set, object matter var will be a list containing these values.
 
+	// Placeholder vars for the time being, todo properly integrate windows/light tiles/rods.
+	var/created_window
+	var/rod_product
+	var/wire_product
+	var/list/window_options = list()
+
 	// Damage values.
 	var/hardness = 60            // Prob of wall destruction by hulk, used for edge damage in weapons.
 	var/weight = 20              // Determines blunt damage/throwforce for weapons.
@@ -90,6 +96,37 @@ var/list/name_to_material
 	// Wallrot crumble message.
 	var/rotting_touch_message = "crumbles under your touch"
 
+// Placeholders for light tiles and rglass.
+/material/proc/build_rod_product(var/mob/user, var/obj/item/stack/used_stack, var/obj/item/stack/target_stack)
+	if(!rod_product)
+		user << "<span class='warning'>You cannot make anything out of \the [target_stack]</span>"
+		return
+	if(used_stack.get_amount() < 1 || target_stack.get_amount() < 1)
+		user << "<span class='warning'>You need one rod and one sheet of [display_name] to make anything useful.</span>"
+		return
+	used_stack.use(1)
+	target_stack.use(1)
+	var/obj/item/stack/S = new rod_product(get_turf(user))
+	S.add_fingerprint(user)
+	S.add_to_stacks(user)
+	if(!(user.l_hand && user.r_hand))
+		user.put_in_hands(S)
+
+/material/proc/build_wired_product(var/mob/user, var/obj/item/stack/used_stack, var/obj/item/stack/target_stack)
+	if(!wire_product)
+		user << "<span class='warning'>You cannot make anything out of \the [target_stack]</span>"
+		return
+	if(used_stack.get_amount() < 5 || target_stack.get_amount() < 1)
+		user << "<span class='warning'>You need five wires and one sheet of [display_name] to make anything useful.</span>"
+		return
+
+	used_stack.use(5)
+	target_stack.use(1)
+	user << "<span class='notice'>You attach wire to the [name].</span>"
+	var/obj/item/product = new wire_product(get_turf(user))
+	if(!(user.l_hand && user.r_hand))
+		user.put_in_hands(product)
+
 // Make sure we have a display name and shard icon even if they aren't explicitly set.
 /material/New()
 	..()
@@ -99,6 +136,10 @@ var/list/name_to_material
 		use_name = display_name
 	if(!shard_icon)
 		shard_icon = shard_type
+
+// This is a placeholder for proper integration of windows/windoors into the system.
+/material/proc/build_windows(var/mob/living/user, var/obj/item/stack/used_stack)
+	return 0
 
 // Weapons handle applying a divisor for this value locally.
 /material/proc/get_blunt_damage()
@@ -288,21 +329,82 @@ var/list/name_to_material
 	weight = 15
 	door_icon_base = "stone"
 	destruction_desc = "shatters"
+	window_options = list("One Direction", "Full Window")
+	created_window = /obj/structure/window/basic
+	wire_product = /obj/item/stack/light_w
+	rod_product = /obj/item/stack/material/glass/reinforced
 
-/material/glass/phoron
-	name = "phoron glass"
-	stack_type = /obj/item/stack/material/glass/phoronglass
-	flags = MATERIAL_BRITTLE
-	ignition_point = 300
-	integrity = 200 // idk why but phoron windows are strong, so.
-	icon_colour = "#FC2BC5"
-	stack_origin_tech = "materials=3;phorontech=2"
+/material/glass/build_windows(var/mob/living/user, var/obj/item/stack/used_stack)
 
-/material/glass/phoron/reinforced
-	name = "reinforced phoron glass"
-	stack_type = /obj/item/stack/material/glass/phoronrglass
-	stack_origin_tech = "materials=4;phorontech=2"
-	composite_material = list() //todo
+	if(!user || !used_stack || !created_window || !window_options.len)
+		return 0
+
+	if(!user.IsAdvancedToolUser())
+		user << "<span class='warning'>This task is too complex for your clumsy hands.</span>"
+		return 1
+
+	var/turf/T = user.loc
+	if(!istype(T))
+		user << "<span class='warning'>You must be standing on open flooring to build a window.</span>"
+		return 1
+
+	var/title = "Sheet-[used_stack.name] ([used_stack.get_amount()] sheet\s left)"
+	var/choice = input(title, "What would you like to construct?") as null|anything in window_options
+
+	if(!choice || !used_stack || !user || used_stack.loc != user || user.stat || user.loc != T)
+		return 1
+
+	// Get data for building windows here.
+	var/list/possible_directions = cardinal.Copy()
+	var/window_count = 0
+	for (var/obj/structure/window/check_window in user.loc)
+		window_count++
+		possible_directions  -= check_window.dir
+
+	// Get the closest available dir to the user's current facing.
+	var/build_dir = SOUTHWEST //Default to southwest for fulltile windows.
+	var/failed_to_build
+
+	if(window_count >= 4)
+		failed_to_build = 1
+	else
+		if(choice in list("One Direction","Windoor"))
+			if(possible_directions.len)
+				for(var/direction in list(user.dir, turn(user.dir,90), turn(user.dir,180), turn(user.dir,270) ))
+					if(direction in possible_directions)
+						build_dir = direction
+						break
+			else
+				failed_to_build = 1
+			if(!failed_to_build && choice == "Windoor")
+				if(!is_reinforced())
+					user << "<span class='warning'>This material is not reinforced enough to use for a door.</span>"
+					return
+				if((locate(/obj/structure/windoor_assembly) in T.contents) || (locate(/obj/machinery/door/window) in T.contents))
+					failed_to_build = 1
+	if(failed_to_build)
+		user << "<span class='warning'>There is no room in this location.</span>"
+		return 1
+
+	var/build_path = /obj/structure/windoor_assembly
+	var/sheets_needed = 4
+	if(choice == "Windoor")
+		sheets_needed = 5
+		build_dir = user.dir
+	else
+		build_path = created_window
+
+	if(used_stack.get_amount() < sheets_needed)
+		user << "<span class='warning'>You need at least [sheets_needed] sheets to build this.</span>"
+		return 1
+
+	// Build the structure and update sheet count etc.
+	used_stack.use(sheets_needed)
+	new build_path(T, build_dir, 1)
+	return 1
+
+/material/glass/proc/is_reinforced()
+	return (hardness > 35) //todo
 
 /material/glass/reinforced
 	name = "reinforced glass"
@@ -317,6 +419,31 @@ var/list/name_to_material
 	weight = 30
 	stack_origin_tech = "materials=2"
 	composite_material = list(DEFAULT_WALL_MATERIAL = 1875,"glass" = 3750)
+	window_options = list("One Direction", "Full Window", "Windoor")
+	created_window = /obj/structure/window/reinforced
+	wire_product = null
+	rod_product = null
+
+/material/glass/phoron
+	name = "phoron glass"
+	stack_type = /obj/item/stack/material/glass/phoronglass
+	flags = MATERIAL_BRITTLE
+	ignition_point = 300
+	integrity = 200 // idk why but phoron windows are strong, so.
+	icon_colour = "#FC2BC5"
+	stack_origin_tech = "materials=3;phorontech=2"
+	created_window = /obj/structure/window/phoronbasic
+	wire_product = null
+	rod_product = /obj/item/stack/material/glass/phoronrglass
+
+/material/glass/phoron/reinforced
+	name = "reinforced phoron glass"
+	stack_type = /obj/item/stack/material/glass/phoronrglass
+	stack_origin_tech = "materials=4;phorontech=2"
+	composite_material = list() //todo
+	created_window = /obj/structure/window/phoronreinforced
+	hardness = 40
+	rod_product = null
 
 /material/plastic
 	name = "plastic"

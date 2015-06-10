@@ -844,6 +844,7 @@
 	set_trait(TRAIT_PRODUCT_ICON,"treefruit")
 	set_trait(TRAIT_PRODUCT_COLOUR,"#3AF026")
 	set_trait(TRAIT_PLANT_ICON,"tree")
+	set_trait(TRAIT_FLESH_COLOUR,"#3AF026")
 
 /datum/seed/citrus/lemon
 	name = "lemon"
@@ -856,6 +857,7 @@
 	..()
 	set_trait(TRAIT_PRODUCES_POWER,1)
 	set_trait(TRAIT_PRODUCT_COLOUR,"#F0E226")
+	set_trait(TRAIT_FLESH_COLOUR,"#F0E226")
 
 /datum/seed/citrus/orange
 	name = "orange"
@@ -867,6 +869,7 @@
 /datum/seed/citrus/orange/New()
 	..()
 	set_trait(TRAIT_PRODUCT_COLOUR,"#FFC20A")
+	set_trait(TRAIT_FLESH_COLOUR,"#FFC20A")
 
 /datum/seed/grass
 	name = "grass"
