@@ -169,8 +169,9 @@
 				if(get_trait(TRAIT_BIOLUM_COLOUR))
 					clr = get_trait(TRAIT_BIOLUM_COLOUR)
 				splat.set_light(get_trait(TRAIT_BIOLUM), l_color = clr)
-			if(get_trait(TRAIT_PRODUCT_COLOUR))
-				splat.color = get_trait(TRAIT_PRODUCT_COLOUR)
+			var/flesh_colour = get_trait(TRAIT_FLESH_COLOUR)
+			if(!flesh_colour) flesh_colour = get_trait(TRAIT_PRODUCT_COLOUR)
+			if(flesh_colour) splat.color = get_trait(TRAIT_PRODUCT_COLOUR)
 
 	if(chems)
 		for(var/mob/living/M in T.contents)
@@ -635,7 +636,7 @@
 		if(GENE_STRUCTURE)
 			traits_to_copy = list(TRAIT_PLANT_ICON,TRAIT_PRODUCT_ICON,TRAIT_HARVEST_REPEAT)
 		if(GENE_FRUIT)
-			traits_to_copy = list(TRAIT_STINGS,TRAIT_EXPLOSIVE,TRAIT_JUICY)
+			traits_to_copy = list(TRAIT_STINGS,TRAIT_EXPLOSIVE,TRAIT_FLESH_COLOUR,TRAIT_JUICY)
 		if(GENE_SPECIAL)
 			traits_to_copy = list(TRAIT_TELEPORTING)
 
