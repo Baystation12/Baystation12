@@ -22,29 +22,26 @@
 	worn_state = "engine"
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 10)
 
-/obj/item/clothing/under/rank/maintenance_tech
+/obj/item/clothing/under/rank/engineer/maintenance_tech
 	desc = "It's a blue high visibility jumpsuit worn by maintenance technicians. It has minor radiation shielding."
 	name = "maintenance technician's jumpsuit"
 	icon_state = "mainttech"
 	item_state = "mainttech"
 	worn_state = "mainttech"
-	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 10)
 
-/obj/item/clothing/under/rank/engine_tech
+/obj/item/clothing/under/rank/engineer/engine_tech
 	desc = "It's a yellow jumpsuit worn by engine technicians. It has minor radiation shielding."
 	name = "engine technician's jumpsuit"
 	icon_state = "engine_tech"
 	item_state = "engine_tech"
 	worn_state = "engine_tech"
-	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 10)
 
-/obj/item/clothing/under/rank/electrician
+/obj/item/clothing/under/rank/engineer/electrician
 	desc = "It's a yellow jumpsuit worn by electricians. It has minor radiation shielding."
 	name = "electrician's jumpsuit"
 	icon_state = "electrician"
 	item_state = "electrician"
 	worn_state = "electrician"
-	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 10)
 
 /obj/item/clothing/under/rank/roboticist
 	desc = "It's a slimming black with reinforced seams; great for industrial work."
