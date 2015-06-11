@@ -118,7 +118,7 @@
 			if("Chemist")
 				H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/chemist(H), slot_w_uniform)
 			if("Pharmacist")
-				H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/pharma(H), slot_w_uniform)
+				H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/chemist/pharma(H), slot_w_uniform)
 		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/white(H), slot_shoes)
 		H.equip_to_slot_or_del(new /obj/item/device/pda/chemist(H), slot_belt)
 		switch(H.backbag)
