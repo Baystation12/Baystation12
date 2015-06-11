@@ -44,7 +44,7 @@
 	worn_state = "chemistrywhite"
 	permeability_coefficient = 0.50
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 10, rad = 0)
-	
+
 /obj/item/clothing/under/rank/pharma
 	desc = "It's made of a special fiber that gives special protection against biohazards. It has a pharmacist rank stripe on it."
 	name = "pharmacist's jumpsuit"
@@ -53,7 +53,6 @@
 	worn_state = "pharma"
 	permeability_coefficient = 0.50
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 10, rad = 0)
-	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
 
 /obj/item/clothing/under/rank/xenoarch
 	desc = "It's made of a special fiber that provides minor protection against radiation. It has markings that denote the wearer as a xenoarcheologist."
@@ -63,7 +62,6 @@
 	worn_state = "xenoarch"
 	permeability_coefficient = 0.50
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 10)
-	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
 
 /obj/item/clothing/under/rank/plasmares
 	desc = "It's made of a special fiber that provides minor protection against debris. It has markings that denote the wearer as a plasma researcher."
@@ -73,7 +71,6 @@
 	worn_state = "plasmares"
 	permeability_coefficient = 0.50
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 10, bio = 0, rad = 0)
-	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
 
 /obj/item/clothing/under/rank/xenobio
 	desc = "It's made of a special fiber that provides minor protection against biohazards. It has markings that denote the wearer as a xenobiologist."
@@ -83,7 +80,6 @@
 	worn_state = "xenobio"
 	permeability_coefficient = 0.50
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 10, rad = 0)
-	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
 
 /obj/item/clothing/under/rank/anomalist
 	desc = "It's made of a special fiber that provides minor protection against radiation. It has markings that denote the wearer as an anomalist."
@@ -93,7 +89,6 @@
 	worn_state = "anomalist"
 	permeability_coefficient = 0.50
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 10)
-	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
 
 /*
  * Medical

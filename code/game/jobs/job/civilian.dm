@@ -76,7 +76,7 @@
 			if("Hydroponicist")
 				H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/hydroponics/botany(H), slot_w_uniform)
 			if("Gardener")
-				H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/hydroponics((H), slot_w_uniform)
+				H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/hydroponics(H), slot_w_uniform)
 		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/black(H), slot_shoes)
 		H.equip_to_slot_or_del(new /obj/item/clothing/gloves/botanic_leather(H), slot_gloves)
 		H.equip_to_slot_or_del(new /obj/item/clothing/suit/apron(H), slot_wear_suit)
