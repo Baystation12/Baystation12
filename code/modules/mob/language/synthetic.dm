@@ -22,7 +22,7 @@
 
 	for (var/mob/M in dead_mob_list)
 		if(!istype(M,/mob/new_player) && !istype(M,/mob/living/carbon/brain)) //No meta-evesdropping
-			M.show_message("[message_start] [message_body]", 2)
+			M.show_message("[message_start] ([ghost_follow_link(speaker, M)]) [message_body]", 2)
 
 	for (var/mob/living/S in living_mob_list)
 
