@@ -230,7 +230,8 @@
 			for(var/mob/living/M in T.contents)
 				apply_special_effect(M)
 			splatter(T,thrown)
-		origin_turf.visible_message("<span class='danger'>The [thrown.name] explodes!</span>")
+		if(origin_turf)
+			origin_turf.visible_message("<span class='danger'>The [thrown.name] explodes!</span>")
 		qdel(thrown)
 		return
 
@@ -243,7 +244,8 @@
 
 	if(get_trait(TRAIT_JUICY) && splatted)
 		splatter(origin_turf,thrown)
-		origin_turf.visible_message("<span class='danger'>The [thrown.name] splatters against [target]!</span>")
+		if(origin_turf)
+			origin_turf.visible_message("<span class='danger'>The [thrown.name] splatters against [target]!</span>")
 		qdel(thrown)
 
 /datum/seed/proc/handle_environment(var/turf/current_turf, var/datum/gas_mixture/environment, var/light_supplied, var/check_only)
