@@ -44,27 +44,12 @@
 	for(var/area/A in world)
 		if(is_type_in_list(A,areaType) && !is_type_in_list(A,areaNotType))
 			areas += A
+
 	if(areas && areas.len > 0)
-		var/pass = 0
 		var/my_department = "[station_name()] firewall subroutines"
 		var/rc_message = "An unknown malicious program has been detected in the [english_list(areaName)] lighting and airlock control systems at [worldtime2text()]. Systems will be fully compromised within approximately three minutes. Direct intervention is required immediately.<br>"
 		for(var/obj/machinery/message_server/MS in world)
 			MS.send_rc_message("Engineering", my_department, rc_message, "", "", 2)
-			pass = 1
-		if(pass)	//This entire block should be handled by send_rc_message(). I'm not rewriting it.
-			var/sending = rc_message + "<font color='blue'><b>Message dispatched by [my_department].</b></font>"
-			for (var/obj/machinery/requests_console/Console in allConsoles)
-				var/keyed_department = ckey(Console.department)
-				if(keyed_department == ckey("Engineering"))
-					if(Console.newmessagepriority < 2)
-						Console.newmessagepriority = 2
-						Console.icon_state = "req_comp2"
-					if(!Console.silent)
-						playsound(Console.loc, 'sound/machines/twobeep.ogg', 50, 1)
-						for (var/mob/O in hearers(5, Console.loc))
-							O.show_message(text("\icon[Console] *The Requests Console beeps: 'PRIORITY Alert in [my_department]'"))
-					Console.messages += "<B><FONT color='red'>High Priority message from [my_department]</FONT></B><BR>[sending]"
-
 		for(var/mob/living/silicon/ai/A in player_list)
 			A << "<span class='danger'>Malicious program detected in the [english_list(areaName)] lighting and airlock control systems by [my_department].</span>"
 
