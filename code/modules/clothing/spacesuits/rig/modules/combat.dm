@@ -1,11 +1,20 @@
-/*
+bureaucracybureaucracybureaucracy/*
  * Contains
  * /obj/item/rig_module/grenade_launcher
  * /obj/item/rig_module/mounted
  * /obj/item/rig_module/mounted/taser
  * /obj/item/rig_module/shield
  * /obj/item/rig_module/fabricator
+ * /obj/item/rig_module/device/flash
  */
+
+/obj/item/rig_module/device/flash
+	name = "mounted flash"
+	desc = "You are the law."
+	icon_state = "flash"
+	interface_name = "mounted flash"
+	interface_desc = "Stuns your target by blinding them with a bright light."
+	device_type = /obj/item/device/flash
 
 /obj/item/rig_module/grenade_launcher
 
