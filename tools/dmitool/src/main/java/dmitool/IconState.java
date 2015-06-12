@@ -175,7 +175,7 @@ public class IconState {
         }
         int pxW = in.imgInfo.cols;
         int pxH = in.imgInfo.rows;
-        int frames = pxW / w;
+        int frames = pxW / w; //frames are read along the X axis, dirs along the Y, much like export.
         int dirs = pxH / h;
         
         // make sure the size is an integer multiple
@@ -211,8 +211,13 @@ public class IconState {
         return new IconState(name, dirs, frames, images, delays, rewind, loop, hotspot, movement);
         
     }
+    
+    //Converts a desired dir and frame to an index into the images array.
+    public int getIndex(int dir, int frame) {
+        return dir + frame*dirs;
+    }
+    
 }
-
 
 
 

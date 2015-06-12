@@ -59,6 +59,7 @@ public class Main {
             "\t  movement | move | mov | m : [state] should be marked as a movement state\n" +
             "\t  delays L | delay L | del L | d L : use the list L as a comma-separated list of delays (e.g. '1,1,2,2,1')\n" +
             "\t  hotspot H | hs H | h H : use H as the hotspot for this state\n" +
+            "\t  direction D | dir D : replaces D with the image from [in], instead of the entire state. D can be 0-7 or S, N, E, etc. If the state does not already exist, this is ignored\n" + 
             "";
 
     public static void main(String[] args) throws FileNotFoundException, IOException, DMIException {
@@ -270,6 +271,7 @@ public class Main {
                 boolean movement = false;
                 String hotspot = null;
                 float[] delays = null;
+                String replaceDir = null;
                 while(!argq.isEmpty()) {
                     String s = argq.pollFirst();
                     switch(s.toLowerCase()) {
@@ -341,6 +343,15 @@ public class Main {
                                 return;
                             }
                             break;
+                        case "dir":
+                        case "direction":
+                            if(!argq.isEmpty()) {
+                                replaceDir = argq.pollFirst();
+                            } else {
+                                System.out.println("Argument '" + s + "' requires a direction argument following it!");
+                                return;
+                            }
+                            break;
                         default:
                             System.out.println("Unknown import argument '" + s + "', ignoring.");
                             break;
@@ -352,12 +363,33 @@ public class Main {
                 if(VERBOSITY >= 0) toImportTo.printInfo();
                 IconState is = IconState.importFromPNG(toImportTo, new FileInputStream(pngFile), stateName, delays, rewind, loop, hotspot, movement);
 
-                if(noDup) {
-                    if(!toImportTo.setIconState(is)) {
-                        toImportTo.addIconState(null, is);
+                //If replaceDir is set, attempt to find an IconState with the same name. 
+                //Then if nodup is set, replace the specified direction of that IconState with the (first direction) of the imported IconState.
+                //If nodup is not set, create a copy of the source IconState and apply the replace operation on that.
+                IconState targetIs;
+                if(replaceDir != null && (targetIs = toImportTo.getIconState(stateName)) != null) {
+                    int dirToReplace = parseDir(replaceDir, targetIs);
+                    int numFrames = is.frames < targetIs.frames? is.frames : targetIs.frames;
+                    
+                    if(noDup) {
+                        for(int frameIdx = 0; frameIdx < numFrames; frameIdx++) {
+                            targetIs.images[targetIs.getIndex(dirToReplace, frameIdx)] = is.images[is.getIndex(0, frameIdx)];
+                        }
+                    } else {
+                        targetIs = targetIs.clone();
+                        for(int frameIdx = 0; frameIdx < numFrames; frameIdx++) {
+                            targetIs.images[targetIs.getIndex(dirToReplace, frameIdx)] = is.images[is.getIndex(0, frameIdx)];
+                        }
+                        toImportTo.addIconState(null, targetIs);
                     }
                 } else {
-                    toImportTo.addIconState(null, is);
+                    if(noDup) {
+                        if(!toImportTo.setIconState(is)) {
+                            toImportTo.addIconState(null, is);
+                        }
+                    } else {
+                        toImportTo.addIconState(null, is);
+                    }
                 }
 
                 if(VERBOSITY >= 0) toImportTo.printInfo();
