@@ -1,0 +1,6 @@
+author: PsiOmegaDelta
+delete-after: True
+changes: 
+  - rscadd: "Observers can now follow both the AI and its eye upon speech."
+  - rscadd: "Observers can now follow both observers and their body, if they ever had one, upon speech."
+  - rscadd: "Observers can now follow hivemind speakers if the speaker is not using an alias or antagHUD is enabled."
