@@ -1,4 +1,4 @@
-bureaucracybureaucracybureaucracy/*
+/*
  * Contains
  * /obj/item/rig_module/grenade_launcher
  * /obj/item/rig_module/mounted
