@@ -311,7 +311,7 @@
 	heat_level_2 = 380 //Default 400
 	heat_level_3 = 800 //Default 1000
 
-	flags = HAS_LIPS | HAS_UNDERWEAR | HAS_TAIL | IS_STRONG
+	flags = HAS_LIPS | HAS_UNDERWEAR | HAS_TAIL | IS_STRONG | IS_RESTRICTED
 
 	flesh_color = "#BCBCBC"
 
@@ -358,7 +358,7 @@
 	poison_type = "oxygen"
 	insulated = 1
 
-	flags = NO_SCAN
+	flags = NO_SCAN | IS_RESTRICTED
 
 	blood_color = "#2299FC"
 	flesh_color = "#808D11"
@@ -405,7 +405,7 @@
 	breath_type = "nitrogen"
 	poison_type = "oxygen"
 
-	flags = NO_SCAN | NO_BLOOD | NO_PAIN
+	flags = NO_SCAN | NO_BLOOD | NO_PAIN | IS_RESTRICTED
 
 	blood_color = "#2299FC"
 	flesh_color = "#808D11"
