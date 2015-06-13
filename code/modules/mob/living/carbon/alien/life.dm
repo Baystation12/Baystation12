@@ -22,9 +22,6 @@
 
 	blinded = null
 
-	if(loc)
-		handle_environment(loc.return_air())
-
 	//Status updates, death etc.
 	handle_regular_status_updates()
 	update_canmove()
@@ -174,7 +171,7 @@
 
 	return 1
 
-/mob/living/carbon/alien/proc/handle_environment(var/datum/gas_mixture/environment)
+/mob/living/carbon/alien/handle_environment(var/datum/gas_mixture/environment)
 	// Both alien subtypes survive in vaccum and suffer in high temperatures,
 	// so I'll just define this once, for both (see radiation comment above)
 	if(!environment) return

@@ -51,7 +51,6 @@
 	//TODO: seperate this out
 	// update the current life tick, can be used to e.g. only do something every 4 ticks
 	life_tick++
-	var/datum/gas_mixture/environment = loc.return_air()
 
 	in_stasis = istype(loc, /obj/structure/closet/body_bag/cryobag) && loc:opened == 0
 	if(in_stasis) loc:used++
@@ -101,9 +100,6 @@
 
 	if(life_tick > 5 && timeofdeath && (timeofdeath < 5 || world.time - timeofdeath > 6000))	//We are long dead, or we're junk mobs spawned like the clowns on the clown shuttle
 		return											//We go ahead and process them 5 times for HUD images and other stuff though.
-
-	//Handle temperature/pressure differences between body and environment
-	handle_environment(environment)		//Optimized a good bit.
 
 	//Check if we're on fire
 	handle_fire()
@@ -577,7 +573,7 @@
 	breath.update_values()
 	return 1
 
-/mob/living/carbon/human/proc/handle_environment(datum/gas_mixture/environment)
+/mob/living/carbon/human/handle_environment(datum/gas_mixture/environment)
 	if(!environment)
 		return
 

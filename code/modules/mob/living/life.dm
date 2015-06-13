@@ -14,7 +14,14 @@
 
 		. = 1
 
+	//Handle temperature/pressure differences between body and environment
+	if(environment)
+		handle_environment(environment)
+
 	return .
 
 /mob/living/proc/handle_breathing()
+	return
+
+/mob/living/proc/handle_environment(var/datum/gas_mixture/environment)
 	return
