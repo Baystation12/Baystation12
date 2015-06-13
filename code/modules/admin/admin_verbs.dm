@@ -452,7 +452,7 @@ var/list/admin_verbs_headadmin = list(
 	/client/proc/edit_vip_permissions,
 	/client/proc/everyone_random,
 	/client/proc/cinematic,
-	/client/proc/set_ooc,
+	//client/proc/set_ooc,
 	/client/proc/artillery,
 	/client/proc/Set_Holiday,
 	/client/proc/ToRban,

@@ -50,7 +50,7 @@
 		D.open()
 
 /proc/opencoderedaccess()
-	for(var/obj/machinery/door/blast/reddoors/D in world)
+	for(var/obj/machinery/door/blast/regular/reddoors/D in world)
 		D.open()
 
 /proc/removesecaccess()
@@ -92,7 +92,7 @@
 		D.close()
 
 /proc/closecoderedaccess()
-	for(var/obj/machinery/door/blast/reddoors/D in world)
+	for(var/obj/machinery/door/blast/regular/reddoors/D in world)
 		D.close()
 
 /proc/set_security_level(var/level)
