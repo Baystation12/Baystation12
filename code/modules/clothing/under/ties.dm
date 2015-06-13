@@ -473,3 +473,15 @@
 
 	new /obj/item/weapon/hatchet/unathiknife(hold)
 	new /obj/item/weapon/hatchet/unathiknife(hold)
+
+/obj/item/clothing/tie/storage/knifeharness/yithani
+	desc = "A decorated knife harness of stitched leather. The blade slides home beneath the right shoulder."
+	slots = 1
+
+/obj/item/clothing/tie/storage/knifeharness/New()
+	..()
+
+	for(var/obj/item/K in hold.contents)
+		del(K)
+
+	new /obj/item/weapon/kitchenknife/ritual/yithani(hold)
