@@ -7,9 +7,6 @@
 	..()
 
 	if(stat != DEAD)
-		//Mutations and radiation
-		handle_mutations_and_radiation()
-
 		//Chemicals in the body
 		handle_chemicals_in_body()
 
@@ -26,7 +23,7 @@
 	if(client)
 		handle_regular_hud_updates()
 
-/mob/living/carbon/brain/proc/handle_mutations_and_radiation()
+/mob/living/carbon/brain/handle_mutations_and_radiation()
 	if (radiation)
 		if (radiation > 100)
 			radiation = 100

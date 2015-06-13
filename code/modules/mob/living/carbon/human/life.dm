@@ -47,6 +47,7 @@
 	//to find it.
 	blinded = null
 	fire_alert = 0 //Reset this here, because both breathe() and handle_environment() have a chance to set it.
+	..()
 
 	//TODO: seperate this out
 	// update the current life tick, can be used to e.g. only do something every 4 ticks
@@ -64,9 +65,6 @@
 	if(stat != DEAD && !in_stasis)
 		//Updates the number of stored chemicals for powers
 		handle_changeling()
-
-		//Mutations and radiation
-		handle_mutations_and_radiation()
 
 		//Chemicals in the body
 		handle_chemicals_in_body()
@@ -118,6 +116,10 @@
 	// Grabbing
 	for(var/obj/item/weapon/grab/G in src)
 		G.process()
+
+/mob/living/carbon/human/breathe()
+	if(!in_stasis)
+		..()
 
 // Calculate how vulnerable the human is to under- and overpressure.
 // Returns 0 (equals 0 %) if sealed in an undamaged suit, 1 if unprotected (equals 100%).
@@ -248,7 +250,10 @@
 		// as cloneloss
 		adjustCloneLoss(0.1)
 
-/mob/living/carbon/human/proc/handle_mutations_and_radiation()
+/mob/living/carbon/human/handle_mutations_and_radiation()
+	if(in_stasis)
+		return
+
 	if(getFireLoss())
 		if((COLD_RESISTANCE in mutations) || (prob(1)))
 			heal_organ_damage(0,1)
