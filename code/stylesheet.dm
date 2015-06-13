@@ -19,7 +19,7 @@ em						{font-style: normal;font-weight: bold;}
 .ooc img.text_tag		{width: 32px; height: 10px;}
 
 .ooc .everyone			{color: #506AB7;}
-.ooc .looc				{color: #3A9696;}
+.ooc .looc				{color: #6699CC;}
 .ooc .elevated			{color: #506AB7;}
 .ooc .moderator			{color: #184880;}
 .ooc .developer			{color: #1b521f;}
