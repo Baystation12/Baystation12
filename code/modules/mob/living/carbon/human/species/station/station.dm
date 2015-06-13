@@ -274,7 +274,7 @@
 	heat_level_2 = 380 //Default 400
 	heat_level_3 = 800 //Default 1000
 
-	flags = HAS_LIPS | HAS_UNDERWEAR | IS_STRONG
+	flags = HAS_LIPS | HAS_UNDERWEAR | IS_STRONG | IS_RESTRICTED
 
 	flesh_color = "#BCBCBC"
 

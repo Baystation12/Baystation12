@@ -164,9 +164,11 @@
 #define SLOT_BACK       1024
 #define SLOT_POCKET     2048  // This is to allow items with a w_class of 3 or 4 to fit in pockets.
 #define SLOT_DENYPOCKET 4096  // This is to  deny items with a w_class of 2 or 1 from fitting in pockets.
-#define SLOT_TWOEARS    8192
-#define SLOT_TIE        16384
-#define SLOT_HOLSTER	32768 //16th bit
+#define SLOT_NECK 		8192
+#define SLOT_TWOEARS 	16384
+#define SLOT_PDA 		32768
+#define SLOT_HOLSTER 	65536
+#define SLOT_TIE        131072
 
 // Flags bitmasks.
 #define STOPPRESSUREDAMAGE 1 // This flag is used on the flags variable for SUIT and HEAD items which stop pressure damage. Note that the flag 1 was previous used as ONBACK, so it is possible for some code to use (flags & 1) when checking if something can be put on your back. Replace this code with (inv_flags & SLOT_BACK) if you see it anywhere
@@ -219,10 +221,6 @@
 #define HIDEEYES 4 // Glasses.
 #define HIDEFACE 8 // Dictates whether we appear as "Unknown".
 
-#define SLOT_NECK 8192
-#define SLOT_TWOEARS 16384
-#define SLOT_PDA 32768
-#define SLOT_LEGS 65536
 // Slots.
 #define slot_back        1
 #define slot_wear_mask   2
@@ -245,8 +243,8 @@
 #define slot_legcuffed 19
 #define slot_neck 20
 #define slot_legs 21
-#define slot_wear_pda 22
-#define slot_r_ear 23
+#define slot_r_ear 22
+#define slot_wear_pda 23
 #define slot_tie   24
 
 // Mob sprite sheets. These need to be strings as numbers
