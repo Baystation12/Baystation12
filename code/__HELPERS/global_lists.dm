@@ -27,6 +27,7 @@ var/global/list/all_languages[0]
 var/global/list/language_keys[0]					// Table of say codes for all languages
 var/global/list/whitelisted_species = list("Human") // Species that require a whitelist check.
 var/global/list/playable_species = list("Human")    // A list of ALL playable species, whitelisted, latejoin or otherwise.
+var/global/list/custom_species = list("Vox")    // A list of ALL playable species, whitelisted, latejoin or otherwise.
 
 // Posters
 var/global/list/poster_designs = list()
@@ -116,6 +117,8 @@ var/global/list/backbaglist = list("Nothing", "Backpack", "Satchel", "Satchel Al
 		S.race_key = rkey //Used in mob icon caching.
 		all_species[S.name] = S
 
+		if(S.flags & IS_RESTRICTED)
+			custom_species += S.name
 		if(!(S.flags & IS_RESTRICTED))
 			playable_species += S.name
 		if(S.flags & IS_WHITELISTED)

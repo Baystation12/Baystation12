@@ -49,7 +49,7 @@
 	access_medical = 1
 
 /obj/item/weapon/cartridge/chemistry
-	name = "\improper ChemWhiz cartridge"
+	name = "ChemWhiz cartridge"
 	icon_state = "cart-chem"
 	access_reagent_scanner = 1
 

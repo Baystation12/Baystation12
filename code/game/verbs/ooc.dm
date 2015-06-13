@@ -1,4 +1,4 @@
-var/ooc_style = "everyone"
+
 
 /client/verb/ooc(msg as text)
 	set name = "OOC"
@@ -39,7 +39,7 @@ var/ooc_style = "everyone"
 			return
 
 	log_ooc("[mob.name]/[key] : [msg]")
-
+	var/ooc_style = "everyone"
 	if(vipholder)
 		if(vipholder.rights & V_EVENT)
 			ooc_style = "vipevent"	//dark green
@@ -71,12 +71,6 @@ var/ooc_style = "everyone"
 				target << "<font color='[src.prefs.ooccolor]'><span class='ooc'>" + create_text_tag("ooc", "OOC:", target) + " <EM>[display_name]:</EM> <span class='message'>[msg]</span></span></font>"
 			else
 				target << "<span class='ooc'><span class='[ooc_style]'>" + create_text_tag("ooc", "OOC:", target) + " <EM>[display_name]:</EM> <span class='message'>[msg]</span></span></span>"
-
-/client/proc/set_ooc(newColor as color)
-	set name = "Set Player OOC Colour"
-	set desc = "Set to yellow for eye burning goodness."
-	set category = "Fun"
-	ooc_style = newColor
 
 /client/verb/looc(msg as text)
 	set name = "LOOC"

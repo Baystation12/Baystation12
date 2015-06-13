@@ -183,14 +183,14 @@ obj/machinery/door/blast/regular
 
 
 
-/obj/machinery/door/blast/reddoors
+/obj/machinery/door/blast/regular/reddoors
 	name = "Code Red Blast Doors"
 	desc = "That looks like it doesn't open easily."
 	icon = 'icons/obj/doors/rapid_pdoor.dmi'
 	icon_state = "pdoor1"
 	explosion_resistance = 25
 
-/obj/machinery/door/blast/reddoors/New()
+/obj/machinery/door/blast/regular/reddoors/New()
 	. = ..()
 	if(density)
 		layer = 3.3		//to override door.New() proc
@@ -198,13 +198,13 @@ obj/machinery/door/blast/regular
 		layer = initial(layer)
 	return
 
-/obj/machinery/door/blast/reddoors/Bumped(atom/AM)
+/obj/machinery/door/blast/regular/reddoors/Bumped(atom/AM)
 	if(!density)
 		return ..()
 	else
 		return 0
 
-/obj/machinery/door/blast/reddoors/attackby(obj/item/weapon/C as obj, mob/user as mob)
+/obj/machinery/door/blast/regular/reddoors/attackby(obj/item/weapon/C as obj, mob/user as mob)
 	src.add_fingerprint(user)
 	if (!( istype(C, /obj/item/weapon/crowbar) || (istype(C, /obj/item/weapon/twohanded/fireaxe) && C:wielded == 1) ))
 		return
@@ -220,7 +220,7 @@ obj/machinery/door/blast/regular
 			return
 	return
 
-/obj/machinery/door/blast/reddoors/open()
+/obj/machinery/door/blast/regular/reddoors/open()
 	if (src.operating == 1) //doors can still open when emag-disabled
 		return
 	if (!ticker)
@@ -242,7 +242,7 @@ obj/machinery/door/blast/regular
 			autoclose()
 	return 1
 
-/obj/machinery/door/blast/reddoors/close()
+/obj/machinery/door/blast/regular/reddoors/close()
 	if (src.operating)
 		return
 	src.operating = 1
@@ -257,7 +257,7 @@ obj/machinery/door/blast/regular
 	src.operating = 0
 	return
 
-	/obj/machinery/door/blast/shutters/bluealert
+/obj/machinery/door/blast/shutters/bluealert
 	name = "Code Blue Armor Shutters"
 	icon = 'icons/obj/doors/rapid_pdoor.dmi'
 	icon_state = "shutter1"

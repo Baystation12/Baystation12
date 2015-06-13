@@ -15,7 +15,7 @@
 		color = "headminsay"
 
 	if(check_rights(R_ADMIN,0))
-		msg = "<span class='[color]'><span class='prefix'>ADMIN:</span> <EM>[key_name(usr, 1)]</EM> (<a href='?_src_=holder;adminplayerobservejump=\ref[mob]'>JMP</A>): <span class='message'><b>[msg]</b></span></span>"
+		msg = "<span class='[color]'><span class='prefix'>ADMIN:</span> <EM>[key_name(usr, 1)]</EM> (<b><a href='?_src_=holder;adminplayerobservejump=\ref[mob]'>JMP</A>): <span class='message'>[msg]</b></span></span>"
 		for(var/client/C in admins)
 			if(R_ADMIN & C.holder.rights)
 				C << msg
@@ -44,9 +44,9 @@
 	var/channel = "STAFF:"
 	for(var/client/C in admins)
 		if((R_ADMIN|R_MOD) & C.holder.rights)
-			C << "<span class='[color]'><span class='prefix'>[channel]</span> <EM>[key_name(src,1)]</EM> (<A HREF='?src=\ref[C.holder];adminplayerobservejump=\ref[mob]'>JMP</A>): <span class='message'><b>[msg]</b></span></span>"
+			C << "<span class='[color]'><span class='prefix'>[channel]</span> <EM>[key_name(src,1)]</EM> (<b><A HREF='?src=\ref[C.holder];adminplayerobservejump=\ref[mob]'>JMP</A>): <span class='message'>[msg]</b></span></span>"
 		if(R_MENTOR & C.holder.rights && !(R_MOD & C.holder.rights))		// Mentors get same message without fancy coloring of name if special_role.
-			C << "<span class='[color]'><span class='prefix'>[channel]</span> <EM>[key_name(src,1,1,0)]</EM> (<A HREF='?src=\ref[C.holder];adminplayerobservejump=\ref[mob]'>JMP</A>): <span class='message'><b>[msg]</b></span></span>"
+			C << "<span class='[color]'><span class='prefix'>[channel]</span> <EM>[key_name(src,1,1,0)]</EM> (<b><A HREF='?src=\ref[C.holder];adminplayerobservejump=\ref[mob]'>JMP</A>): <span class='message'>[msg]</b></span></span>"
 
 /client/proc/cmd_dev_say(msg as text)
 	set category = "OOC"
