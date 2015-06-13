@@ -88,8 +88,11 @@
 	name = "infinite-capacity power cell!"
 	icon_state = "icell"
 	origin_tech =  null
-	maxcharge = 30000
+	maxcharge = 30000 //determines how badly mobs get shocked
 	matter = list("metal" = 700, "glass" = 80)
+	
+	check_charge()
+		return 1
 	use()
 		return 1
 

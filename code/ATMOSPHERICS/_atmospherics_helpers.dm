@@ -130,7 +130,7 @@
 	var/total_specific_power = 0		//the power required to remove one mole of filterable gas
 	for (var/g in filtering)
 		var/ratio = source.gas[g]/total_filterable_moles //this converts the specific power per mole of pure gas to specific power per mole of scrubbed gas
-		total_specific_power = specific_power_gas[g]*ratio
+		total_specific_power += specific_power_gas[g]*ratio
 
 	//Figure out how much of each gas to filter
 	if (isnull(total_transfer_moles))

@@ -1,0 +1,5 @@
+author: PsiOmegaDelta
+delete-after: True
+
+changes: 
+  - tweak: "NVGs and meson overlays should now be less straining on the eyes."

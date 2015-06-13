@@ -261,19 +261,22 @@
 		if(!istype(src.loc,/obj/item/device/transfer_valve))
 			message_admins("Explosive tank rupture! last key to touch the tank was [src.fingerprintslast].")
 			log_game("Explosive tank rupture! last key to touch the tank was [src.fingerprintslast].")
-		//world << "\blue[x],[y] tank is exploding: [pressure] kPa"
+
 		//Give the gas a chance to build up more pressure through reacting
 		air_contents.react()
 		air_contents.react()
 		air_contents.react()
+
 		pressure = air_contents.return_pressure()
 		var/range = (pressure-TANK_FRAGMENT_PRESSURE)/TANK_FRAGMENT_SCALE
-		range = min(range, max_explosion_range)		// was 8 - - - Changed to a configurable define -- TLE
-		var/turf/epicenter = get_turf(loc)
 
-		//world << "\blue Exploding Pressure: [pressure] kPa, intensity: [range]"
-
-		explosion(epicenter, round(range*0.25), round(range*0.5), round(range), round(range*1.5))
+		explosion(
+			get_turf(loc), 
+			round(min(BOMBCAP_DVSTN_RADIUS, range*0.25)), 
+			round(min(BOMBCAP_HEAVY_RADIUS, range*0.50)), 
+			round(min(BOMBCAP_LIGHT_RADIUS, range*1.00)), 
+			round(min(BOMBCAP_FLASH_RADIUS, range*1.50)), 
+			)
 		del(src)
 
 	else if(pressure > TANK_RUPTURE_PRESSURE)
