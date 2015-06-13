@@ -296,9 +296,7 @@
 	touch(target) //First, handle mere touch effects
 
 	if(ismob(target))
-		//warning("[my_atom] is trying to transfer reagents to [target], which is a mob, using trans_to()")
-		//return trans_to_mob(target, amount, multiplier, copy)
-		return splash_mob(target, amount)
+		return splash_mob(target, amount, copy)
 	if(isturf(target))
 		return trans_to_turf(target, amount, multiplier, copy)
 	if(isobj(target))
@@ -369,41 +367,12 @@
 // Attempts to place a reagent on the mob's skin.
 // Reagents are not guaranteed to transfer to the target.
 // Do not call this directly, call trans_to() instead.
-/datum/reagents/proc/splash_mob(var/mob/target, var/amount = 1, var/clothes = 1)
-	var/perm = 0
-	
-	//this all seems very human-specific
-	var/list/L = list(
-		"head" = THERMAL_PROTECTION_HEAD, 
-		"upper_torso" = THERMAL_PROTECTION_UPPER_TORSO, 
-		"lower_torso" = THERMAL_PROTECTION_LOWER_TORSO, 
-		"legs" = THERMAL_PROTECTION_LEG_LEFT + THERMAL_PROTECTION_LEG_RIGHT, 
-		"feet" = THERMAL_PROTECTION_FOOT_LEFT + THERMAL_PROTECTION_FOOT_RIGHT, 
-		"arms" = THERMAL_PROTECTION_ARM_LEFT + THERMAL_PROTECTION_ARM_RIGHT, 
-		"hands" = THERMAL_PROTECTION_HAND_LEFT + THERMAL_PROTECTION_HAND_RIGHT
-		)
-	
-	if(clothes)
-		for(var/obj/item/clothing/C in target.get_equipped_items())
-			if(C.permeability_coefficient == 1 || C.body_parts_covered == 0)
-				continue
-			if(C.body_parts_covered & HEAD)
-				L["head"] *= C.permeability_coefficient
-			if(C.body_parts_covered & UPPER_TORSO)
-				L["upper_torso"] *= C.permeability_coefficient
-			if(C.body_parts_covered & LOWER_TORSO)
-				L["lower_torso"] *= C.permeability_coefficient
-			if(C.body_parts_covered & LEGS)
-				L["legs"] *= C.permeability_coefficient
-			if(C.body_parts_covered & FEET)
-				L["feet"] *= C.permeability_coefficient
-			if(C.body_parts_covered & ARMS)
-				L["arms"] *= C.permeability_coefficient
-			if(C.body_parts_covered & HANDS)
-				L["hands"] *= C.permeability_coefficient
-	for(var/t in L)
-		perm += L[t]
-	return trans_to_mob(target, amount, CHEM_TOUCH, perm)
+/datum/reagents/proc/splash_mob(var/mob/target, var/amount = 1, var/copy = 0)
+	var/perm = 1
+	if(isliving(target)) //will we ever even need to tranfer reagents to non-living mobs?
+		var/mob/living/L = target
+		perm = L.reagent_permeability()
+	return trans_to_mob(target, amount, CHEM_TOUCH, perm, copy)
 
 /datum/reagents/proc/trans_to_mob(var/mob/target, var/amount = 1, var/type = CHEM_BLOOD, var/multiplier = 1, var/copy = 0) // Transfer after checking into which holder...
 	if(!target || !istype(target))
