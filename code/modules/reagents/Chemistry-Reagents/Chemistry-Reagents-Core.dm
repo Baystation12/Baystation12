@@ -55,19 +55,34 @@
 		M.adjustToxLoss(removed)
 	if(dose > 15)
 		M.adjustToxLoss(removed)
+	if(data && data["viruses"])
+		for(var/datum/disease/D in data["viruses"])
+			if(D.spread_type == SPECIAL || D.spread_type == NON_CONTAGIOUS)
+				continue
+			if(D.spread_type in list(CONTACT_FEET, CONTACT_HANDS, CONTACT_GENERAL))
+				M.contract_disease(D)
+	if(data && data["virus2"])
+		var/list/vlist = data["virus2"]
+		if(vlist.len)
+			for(var/ID in vlist)
+				var/datum/disease2/disease/V = vlist[ID]
+				if(V.spreadtype == "Contact")
+					infect_virus2(M, V.getcopy())
 
 /datum/reagent/blood/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
 	if(data && data["viruses"])
 		for(var/datum/disease/D in data["viruses"])
 			if(D.spread_type == SPECIAL || D.spread_type == NON_CONTAGIOUS)
 				continue
-			M.contract_disease(D)
+			if(D.spread_type in list(CONTACT_FEET, CONTACT_HANDS, CONTACT_GENERAL))
+				M.contract_disease(D)
 	if(data && data["virus2"])
 		var/list/vlist = data["virus2"]
 		if(vlist.len)
 			for(var/ID in vlist)
 				var/datum/disease2/disease/V = vlist[ID]
-				infect_virus2(M, V.getcopy())
+				if(V.spreadtype == "Contact")
+					infect_virus2(M, V.getcopy())
 	if(data && data["antibodies"])
 		M.antibodies |= data["antibodies"]
 
