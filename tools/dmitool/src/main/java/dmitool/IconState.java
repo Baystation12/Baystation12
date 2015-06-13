@@ -203,7 +203,7 @@ public class IconState {
                                                           px[bY][bX + 3]);
                     }
                 }
-                images[imageY + imageX*dirs] = new NonPalettedImage(w, h, pixels);
+                images[_getIndex(imageY, imageX, dirs)] = new NonPalettedImage(w, h, pixels);
             }
         }
         
@@ -214,9 +214,35 @@ public class IconState {
     
     //Converts a desired dir and frame to an index into the images array.
     public int getIndex(int dir, int frame) {
-        return dir + frame*dirs;
+        return _getIndex(dir, frame, dirs);
     }
     
+    private static int _getIndex(int dir, int frame, int totalDirs) {
+        return dir + frame*totalDirs;
+    }
+    
+    public void insertDir(int dir, Image[] splice) {
+        int maxFrame = frames < splice.length? frames: splice.length;
+        for(int frameIdx = 0; frameIdx < maxFrame; frameIdx++) {
+            insertImage(dir, frameIdx, splice[frameIdx]);
+        }
+    }
+    
+    public void insertFrame(int frame, Image[] splice) {        
+        int maxDir = dirs < splice.length? dirs: splice.length;
+        for(int dirIdx = 0; dirIdx < maxDir; dirIdx++) {
+            insertImage(dirIdx, frame, splice[dirIdx]);
+        }
+    }
+    
+    public void insertImage(int dir, int frame, Image splice) {
+        if(frame < 0 || frame >= frames)
+            throw new IllegalArgumentException("Provided frame is out of range: " + frame);
+        if(dir < 0 || dir >= dirs)
+            throw new IllegalArgumentException("Provided dir is out of range: " + dir);
+        
+        images[getIndex(dir, frame)] = splice;
+    }
 }
 
 

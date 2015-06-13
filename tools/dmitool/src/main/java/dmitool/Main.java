@@ -272,6 +272,7 @@ public class Main {
                 String hotspot = null;
                 float[] delays = null;
                 String replaceDir = null;
+                String replaceFrame = null;
                 while(!argq.isEmpty()) {
                     String s = argq.pollFirst();
                     switch(s.toLowerCase()) {
@@ -352,6 +353,15 @@ public class Main {
                                 return;
                             }
                             break;
+                        case "f":
+                        case "frame":
+                            if(!argq.isEmpty()) {
+                                replaceFrame = argq.pollFirst();
+                            } else {
+                                System.out.println("Argument '" + s + "' requires a frame argument following it!");
+                                return;
+                            }
+                            break;
                         default:
                             System.out.println("Unknown import argument '" + s + "', ignoring.");
                             break;
@@ -363,26 +373,39 @@ public class Main {
                 if(VERBOSITY >= 0) toImportTo.printInfo();
                 IconState is = IconState.importFromPNG(toImportTo, new FileInputStream(pngFile), stateName, delays, rewind, loop, hotspot, movement);
 
-                //If replaceDir is set, attempt to find an IconState with the same name. 
-                //Then if nodup is set, replace the specified direction of that IconState with the (first direction) of the imported IconState.
-                //If nodup is not set, create a copy of the source IconState and apply the replace operation on that.
-                IconState targetIs;
-                if(replaceDir != null && (targetIs = toImportTo.getIconState(stateName)) != null) {
-                    int dirToReplace = parseDir(replaceDir, targetIs);
-                    int numFrames = is.frames < targetIs.frames? is.frames : targetIs.frames;
+                //image insertion
+                if(replaceDir != null || replaceFrame != null) {
                     
-                    if(noDup) {
-                        for(int frameIdx = 0; frameIdx < numFrames; frameIdx++) {
-                            targetIs.images[targetIs.getIndex(dirToReplace, frameIdx)] = is.images[is.getIndex(0, frameIdx)];
-                        }
-                    } else {
-                        targetIs = targetIs.clone();
-                        for(int frameIdx = 0; frameIdx < numFrames; frameIdx++) {
-                            targetIs.images[targetIs.getIndex(dirToReplace, frameIdx)] = is.images[is.getIndex(0, frameIdx)];
-                        }
-                        toImportTo.addIconState(null, targetIs);
+                    IconState targetIs = toImportTo.getIconState(stateName);
+                    if(targetIs == null) {
+                        System.out.println("'direction' or 'frame' specified and no icon state '" + stateName + "' found, aborting!");
+                        return;
                     }
-                } else {
+                    if(is.images.length == 0) {
+                        System.out.println("'direction' or 'frame' specified and imported is empty, aborting!");
+                        return;
+                    }
+                    
+                    if(!noDup) targetIs = targetIs.clone();
+                    
+                    int dirToReplace, frameToReplace;
+                    if(replaceDir != null && replaceFrame != null) {
+                        frameToReplace = parseFrame(replaceFrame, targetIs);
+                        dirToReplace = parseDir(replaceDir, targetIs);
+                        targetIs.insertImage(dirToReplace, frameToReplace, is.images[0]);
+                    }
+                    else if(replaceDir != null) {
+                        dirToReplace = parseDir(replaceDir, targetIs);
+                        targetIs.insertDir(dirToReplace, is.images);
+                    }
+                    else if(replaceFrame != null) {
+                        frameToReplace = parseFrame(replaceFrame, targetIs);
+                        targetIs.insertFrame(frameToReplace, is.images);
+                    }
+                    
+                    if(!noDup) toImportTo.addIconState(null, targetIs);
+                }
+                else {
                     if(noDup) {
                         if(!toImportTo.setIconState(is)) {
                             toImportTo.addIconState(null, is);
