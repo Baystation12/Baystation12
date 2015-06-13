@@ -409,7 +409,13 @@ var/list/admin_verbs_admin2 = list(
 	/client/proc/ZASSettings,
 	/client/proc/kill_airgroup,
 	/client/proc/toggledebuglogs,
-	/datum/admins/proc/endround
+	/datum/admins/proc/endround,
+	/client/proc/event_manager_panel,
+	/client/proc/empty_ai_core_toggle_latejoin,
+	/client/proc/FireLaser,
+	/client/proc/FireCannons,
+	/client/proc/ChangeIcarusPosition,
+	/client/proc/virus2_editor
 )
 
 var/list/admin_verbs_admin3 = list(

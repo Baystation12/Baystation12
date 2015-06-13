@@ -1,8 +1,7 @@
-
-var/global/normal_ooc_colour = "#506AB7"
+var/ooc_style = "everyone"
 
 /client/verb/ooc(msg as text)
-	set name = "OOC" //Gave this shit a shorter name so you only have to time out "ooc" rather than "ooc message" to use it --NeoFite
+	set name = "OOC"
 	set category = "OOC"
 
 	if(say_disabled)	//This is here to try to identify lag problems
@@ -14,7 +13,7 @@ var/global/normal_ooc_colour = "#506AB7"
 		src << "Guests may not use OOC."
 		return
 
-	msg = trim(copytext(sanitize(msg), 1, MAX_MESSAGE_LEN))
+	msg = trim(sanitize(copytext(msg, 1, MAX_MESSAGE_LEN)))
 	if(!msg)	return
 
 	if(!(prefs.toggles & CHAT_OOC))
@@ -22,14 +21,14 @@ var/global/normal_ooc_colour = "#506AB7"
 		return
 
 	if(!holder)
-		if(!ooc_allowed)
-			src << "\red OOC is globally muted"
+		if(!config.ooc_allowed)
+			src << "<span class='danger'>OOC is globally muted.</span>"
 			return
-		if(!dooc_allowed && (mob.stat == DEAD))
-			usr << "\red OOC for dead mobs has been turned off."
+		if(!config.dooc_allowed && (mob.stat == DEAD))
+			usr << "<span class='danger'>OOC for dead mobs has been turned off.</span>"
 			return
 		if(prefs.muted & MUTE_OOC)
-			src << "\red You cannot use OOC (muted)."
+			src << "<span class='danger'>You cannot use OOC (muted).</span>"
 			return
 		if(handle_spam_prevention(msg,MUTE_OOC))
 			return
@@ -41,61 +40,46 @@ var/global/normal_ooc_colour = "#506AB7"
 
 	log_ooc("[mob.name]/[key] : [msg]")
 
-	var/display_colour = normal_ooc_colour
 	if(vipholder)
 		if(vipholder.rights & V_EVENT)
-			display_colour = "#006e97"	//dark green
+			ooc_style = "vipevent"	//dark green
 		if(vipholder.rights & V_DONATE)
-			display_colour = "#005a31"	//dark green
+			ooc_style = "vipdonate"	//dark green
 
 	if(holder && !holder.fakekey)
-		display_colour = "#506AB7"	//light blue
-		if(holder.rights & R_MOD && !(holder.rights & R_ADMIN))
-			display_colour = "#184880"	//dark blue
-		//if(holder.rights & R_DEBUG && !(holder.rights & R_ADMIN))
-		//	display_colour = "#184880"	//dark green
-		else if(holder.rights & R_ADMIN)
+		ooc_style = "elevated"
+		if((holder.rights & R_MOD) && !(holder.rights & R_ADMIN))
+			ooc_style = "moderator"
+	//	if(holder.rights & R_DEBUG)
+	//		ooc_style = "developer"
+		if(holder.rights & R_ADMIN)
 			if(config.allow_admin_ooccolor)
-				display_colour = src.prefs.ooccolor
+				ooc_style = src.prefs.ooccolor
 			else
-				display_colour = "#184880"	//orange
+				ooc_style = "admin"
 
-	for(var/client/C in clients)
-		if(C.prefs.toggles & CHAT_OOC)
+	for(var/client/target in clients)
+		if(target.prefs.toggles & CHAT_OOC)
 			var/display_name = src.key
 			if(holder)
 				if(holder.fakekey)
-					if(C.holder)
+					if(target.holder)
 						display_name = "[holder.fakekey]/([src.key])"
 					else
 						display_name = holder.fakekey
-			C << "<font color='[display_colour]'><span class='ooc'><span class='prefix'>OOC:</span> <EM>[display_name]:</EM> <span class='message'>[msg]</span></span></font>"
-
-			/*
-			if(holder)
-				if(!holder.fakekey || C.holder)
-					if(holder.rights & R_ADMIN)
-						C << "<font color=[config.allow_admin_ooccolor ? src.prefs.ooccolor :"#b82e00" ]><b><span class='prefix'>OOC:</span> <EM>[key][holder.fakekey ? "/([holder.fakekey])" : ""]:</EM> <span class='message'>[msg]</span></b></font>"
-					else if(holder.rights & R_MOD)
-						C << "<font color=#184880><b><span class='prefix'>OOC:</span> <EM>[src.key][holder.fakekey ? "/([holder.fakekey])" : ""]:</EM> <span class='message'>[msg]</span></b></font>"
-					else
-						C << "<font color='[normal_ooc_colour]'><span class='ooc'><span class='prefix'>OOC:</span> <EM>[src.key]:</EM> <span class='message'>[msg]</span></span></font>"
-
-				else
-					C << "<font color='[normal_ooc_colour]'><span class='ooc'><span class='prefix'>OOC:</span> <EM>[holder.fakekey ? holder.fakekey : src.key]:</EM> <span class='message'>[msg]</span></span></font>"
+			if(holder && !holder.fakekey && (holder.rights & R_ADMIN) && config.allow_admin_ooccolor && (src.prefs.ooccolor != initial(src.prefs.ooccolor))) // keeping this for the badmins
+				target << "<font color='[src.prefs.ooccolor]'><span class='ooc'>" + create_text_tag("ooc", "OOC:", target) + " <EM>[display_name]:</EM> <span class='message'>[msg]</span></span></font>"
 			else
-				C << "<font color='[normal_ooc_colour]'><span class='ooc'><span class='prefix'>OOC:</span> <EM>[src.key]:</EM> <span class='message'>[msg]</span></span></font>"
-			*/
+				target << "<span class='ooc'><span class='[ooc_style]'>" + create_text_tag("ooc", "OOC:", target) + " <EM>[display_name]:</EM> <span class='message'>[msg]</span></span></span>"
 
 /client/proc/set_ooc(newColor as color)
 	set name = "Set Player OOC Colour"
 	set desc = "Set to yellow for eye burning goodness."
 	set category = "Fun"
-	normal_ooc_colour = newColor
-
+	ooc_style = newColor
 
 /client/verb/looc(msg as text)
-	set name = "LOOC" //Gave this shit a shorter name so you only have to time out "ooc" rather than "ooc message" to use it --NeoFite
+	set name = "LOOC"
 	set desc = "Local OOC, seen only by those in view."
 	set category = "OOC"
 
@@ -108,7 +92,7 @@ var/global/normal_ooc_colour = "#506AB7"
 		src << "Guests may not use OOC."
 		return
 
-	msg = trim(copytext(sanitize(msg), 1, MAX_MESSAGE_LEN))
+	msg = trim(sanitize(copytext(msg, 1, MAX_MESSAGE_LEN)))
 	if(!msg)	return
 
 	if(!(prefs.toggles & CHAT_LOOC))
@@ -116,16 +100,16 @@ var/global/normal_ooc_colour = "#506AB7"
 		return
 
 	if(!holder)
-		if(!looc_allowed)
-			src << "\red LOOC is globally muted"
+		if(!config.ooc_allowed)
+			src << "<span class='danger'>OOC is globally muted.</span>"
 			return
-		if(!dooc_allowed && (mob.stat == DEAD))
-			usr << "\red OOC for dead mobs has been turned off."
+		if(!config.dooc_allowed && (mob.stat == DEAD))
+			usr << "<span class='danger'>OOC for dead mobs has been turned off.</span>"
 			return
-		if(prefs.muted & MUTE_LOOC)
-			src << "\red You cannot use OOC (muted)."
+		if(prefs.muted & MUTE_OOC)
+			src << "<span class='danger'>You cannot use OOC (muted).</span>"
 			return
-		if(handle_spam_prevention(msg,MUTE_LOOC))
+		if(handle_spam_prevention(msg,MUTE_OOC))
 			return
 		if(findtext(msg, "byond://"))
 			src << "<B>Advertising other servers is not allowed.</B>"
@@ -135,39 +119,26 @@ var/global/normal_ooc_colour = "#506AB7"
 
 	log_ooc("(LOCAL) [mob.name]/[key] : [msg]")
 
-	var/list/heard = get_mobs_in_view(7, src.mob)
-	var/mob/S = src.mob
+	var/mob/source = src.mob
+	var/list/heard = get_mobs_in_view(7, source)
 
-	var/display_name = S.key
-	if(S.stat != DEAD)
-		display_name = S.name
+	var/display_name = source.key
+	if(holder && holder.fakekey)
+		display_name = holder.fakekey
+	if(source.stat != DEAD)
+		display_name = source.name
 
-	// Handle non-admins
-	for(var/mob/M in heard)
-		if(!M.client)
-			continue
-		var/client/C = M.client
-		if (C in admins)
-			continue //they are handled after that
-
-		if(C.prefs.toggles & CHAT_LOOC)
-			if(holder)
-				if(holder.fakekey)
-					if(C.holder)
-						display_name = "[holder.fakekey]/([src.key])"
-					else
-						display_name = holder.fakekey
-			C << "<font color='#6699CC'><span class='ooc'><span class='prefix'>LOOC:</span> <EM>[display_name]:</EM> <span class='message'>[msg]</span></span></font>"
-
-	// Now handle admins
-	display_name = S.key
-	if(S.stat != DEAD)
-		display_name = "[S.name]/([S.key])"
-
-	for(var/client/C in admins)
-		if((R_ADMIN|R_MOD|R_MENTOR|R_DEV) & C.holder.rights)
-			if(C.prefs.toggles & CHAT_LOOC)
-				var/prefix = "(R)LOOC"
-				if (C.mob in heard)
-					prefix = "LOOC"
-				C << "<font color='#6699CC'><span class='ooc'><span class='prefix'>[prefix]:</span> <EM>[display_name]:</EM> <span class='message'>[msg]</span></span></font>"
+	var/prefix
+	var/admin_stuff
+	for(var/client/target in clients)
+		if(target.prefs.toggles & CHAT_LOOC)
+			admin_stuff = ""
+			if(target in admins)
+				prefix = "(R)"
+				admin_stuff += "/([source.key])"
+				if(target != source.client)
+					admin_stuff += "(<A HREF='?src=\ref[target.holder];adminplayerobservejump=\ref[mob]'>JMP</A>)"
+			if(target.mob in heard)
+				prefix = ""
+			if((target.mob in heard) || (target in admins))
+				target << "<span class='ooc'><span class='looc'>" + create_text_tag("looc", "LOOC:", target) + " <span class='prefix'>[prefix]</span><EM>[display_name][admin_stuff]:</EM> <span class='message'>[msg]</span></span></span>"

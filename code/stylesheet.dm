@@ -18,12 +18,15 @@ em						{font-style: normal;font-weight: bold;}
 .ooc					{font-weight: bold;}
 .ooc img.text_tag		{width: 32px; height: 10px;}
 
-.ooc .everyone			{color: #002eb8;}
+.ooc .everyone			{color: #506AB7;}
 .ooc .looc				{color: #3A9696;}
-.ooc .elevated			{color: #2e78d9;}
+.ooc .elevated			{color: #506AB7;}
 .ooc .moderator			{color: #184880;}
 .ooc .developer			{color: #1b521f;}
-.ooc .admin				{color: #b82e00;}
+.ooc .admin				{color: #184880;}
+.ooc .vipevent			{color: #006e97;}
+.ooc .vipdonate			{color: #005a31;}
+
 
 .adminsay				{color: #9611D4;	font-weight: bold;}
 .headminsay				{color: #5A0A7F;	font-weight: bold;}

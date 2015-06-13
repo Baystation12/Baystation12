@@ -1,14 +1,14 @@
-/obj/machinery/door/poddoor/shutters
+/obj/machinery/door/blast/shutters
 	name = "Shutters"
 	icon = 'icons/obj/doors/rapid_pdoor.dmi'
 	icon_state = "shutter1"
 	power_channel = ENVIRON
 
-/obj/machinery/door/poddoor/shutters/New()
+/obj/machinery/door/blast/shutters/New()
 	..()
 	layer = 3.1
 
-/obj/machinery/door/poddoor/shutters/attackby(obj/item/weapon/C as obj, mob/user as mob)
+/obj/machinery/door/blast/shutters/attackby(obj/item/weapon/C as obj, mob/user as mob)
 	add_fingerprint(user)
 	if(!(istype(C, /obj/item/weapon/crowbar) || (istype(C, /obj/item/weapon/twohanded/fireaxe) && C:wielded == 1) ))
 		return
@@ -24,7 +24,7 @@
 			return
 	return
 
-/obj/machinery/door/poddoor/shutters/open()
+/obj/machinery/door/blast/shutters/open()
 	if(operating == 1) //doors can still open when emag-disabled
 		return
 	if(!ticker)
@@ -45,7 +45,7 @@
 			autoclose()		//TODO: note to self: look into this ~Carn
 	return 1
 
-/obj/machinery/door/poddoor/shutters/close()
+/obj/machinery/door/blast/shutters/close()
 	if(operating)
 		return
 	operating = 1
@@ -60,18 +60,18 @@
 	operating = 0
 	return
 
-/obj/machinery/door/poddoor/shutters/bluealert
+/obj/machinery/door/blast/shutters/bluealert
 	name = "Code Blue Armor Shutters"
 	icon = 'icons/obj/doors/rapid_pdoor.dmi'
 	icon_state = "shutter1"
 	power_channel = ENVIRON
 	dir = 2
 
-/obj/machinery/door/poddoor/shutters/bluealert/New()
+/obj/machinery/door/blast/shutters/bluealert/New()
 	..()
 	layer = 3.1
 
-/obj/machinery/door/poddoor/shutters/bluealert/attackby(obj/item/weapon/C as obj, mob/user as mob)
+/obj/machinery/door/blast/shutters/bluealert/attackby(obj/item/weapon/C as obj, mob/user as mob)
 	add_fingerprint(user)
 	if(!(istype(C, /obj/item/weapon/crowbar) || (istype(C, /obj/item/weapon/twohanded/fireaxe) && C:wielded == 1) ))
 		return
@@ -87,7 +87,7 @@
 			return
 	return
 
-/obj/machinery/door/poddoor/shutters/bluealert/open()
+/obj/machinery/door/blast/shutters/bluealert/open()
 	if(operating == 1) //doors can still open when emag-disabled
 		return
 	if(!ticker)
@@ -108,7 +108,7 @@
 			autoclose()		//TODO: note to self: look into this ~Carn
 	return 1
 
-/obj/machinery/door/poddoor/shutters/bluealert/close()
+/obj/machinery/door/blast/shutters/bluealert/close()
 	if(operating)
 		return
 	operating = 1
