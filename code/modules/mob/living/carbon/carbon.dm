@@ -1,11 +1,10 @@
 /mob/living/carbon/New()
-	create_reagents(1000)
-	var/datum/reagents/R1 = new/datum/reagents(1000)
-	var/datum/reagents/R2 = new/datum/reagents(1000)
-	ingested = R1
-	touching = R2
-	R1.my_atom = src
-	R2.my_atom = src
+	//setup reagent holders
+	bloodstr = new/datum/reagents/metabolism(1000, src, CHEM_BLOOD)
+	ingested = new/datum/reagents/metabolism(1000, src, CHEM_INGEST)
+	touching = new/datum/reagents/metabolism(1000, src, CHEM_TOUCH)
+	reagents = bloodstr
+
 	..()
 
 /mob/living/carbon/Life()

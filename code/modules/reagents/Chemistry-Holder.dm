@@ -4,8 +4,10 @@
 	var/maximum_volume = 100
 	var/atom/my_atom = null
 
-/datum/reagents/New(var/max = 100)
+/datum/reagents/New(var/max = 100, atom/A = null)
 	maximum_volume = max
+	my_atom = A
+	
 	//I dislike having these here but map-objects are initialised before world/New() is called. >_>
 	if(!chemical_reagents_list)
 		//Chemical Reagents - Initialises all /datum/reagent into a list indexed by reagent id
@@ -414,18 +416,7 @@
 
 	return trans_to_holder(target.reagents, amount, multiplier, copy)
 
-/datum/reagents/proc/metabolize(var/alien, var/location)
-	if(!iscarbon(my_atom))
-		return
-	var/mob/living/carbon/C = my_atom
-	if(!C || !istype(C))
-		return
-	for(var/datum/reagent/current in reagent_list)
-		current.on_mob_life(C, alien, location)
-	update_total()
-
 /* Atom reagent creation - use it all the time */
 
 /atom/proc/create_reagents(var/max_vol)
-	reagents = new/datum/reagents(max_vol)
-	reagents.my_atom = src
+	reagents = new/datum/reagents(max_vol, src)
