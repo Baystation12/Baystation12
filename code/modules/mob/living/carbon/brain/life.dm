@@ -1,3 +1,6 @@
+/mob/living/carbon/brain/handle_breathing()
+	return
+
 /mob/living/carbon/brain/Life()
 	set invisibility = 0
 	set background = 1
@@ -30,7 +33,6 @@
 
 	if(client)
 		handle_regular_hud_updates()
-
 
 /mob/living/carbon/brain/proc/handle_mutations_and_radiation()
 	if (radiation)

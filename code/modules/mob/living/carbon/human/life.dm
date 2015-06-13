@@ -36,12 +36,10 @@
 
 /mob/living/carbon/human/Life()
 	set invisibility = 0
-	set background = 1
+	set background = BACKGROUND_ENABLED
 
-	if (transforming)	return
-	if(!loc)			return	// Fixing a null error that occurs when the mob isn't found in the world -- TLE
-
-	..()
+	if (transforming)
+		return
 
 	//Apparently, the person who wrote this code designed it so that
 	//blinded get reset each cycle and then get activated later in the
@@ -65,9 +63,6 @@
 
 	//No need to update all of these procs if the guy is dead.
 	if(stat != DEAD && !in_stasis)
-		if(air_master.current_cycle%4==2 || failed_last_breath || (health < config.health_threshold_crit)) 	//First, resolve location and get a breath
-			breathe() 				//Only try to take a breath every 4 ticks, unless suffocating
-
 		//Updates the number of stored chemicals for powers
 		handle_changeling()
 

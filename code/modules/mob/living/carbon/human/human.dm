@@ -946,7 +946,6 @@
 		V.cure(src)
 
 	losebreath = 0
-	failed_last_breath = 0 //So mobs that died of oxyloss don't revive and have perpetual out of breath.
 
 	..()
 
