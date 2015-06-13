@@ -113,21 +113,21 @@ Please contact me on #coderbus IRC. ~Carn x
 #define SHOES_LAYER				6
 #define GLOVES_LAYER			7
 #define SUIT_LAYER				8
-#define TAIL_LAYER				9		//bs12 specific. this hack is probably gonna come back to haunt me
-#define GLASSES_LAYER			10
-#define BELT_LAYER				11		//Possible make this an overlay of somethign required to wear a belt?
-#define SUIT_STORE_LAYER		12
-#define BACK_LAYER				13
-#define HAIR_LAYER				14		//TODO: make part of head layer?
-#define EARS_LAYER				15
-#define FACEMASK_LAYER			16
-#define HEAD_LAYER				17
-#define NECK_LAYER				18
-#define COLLAR_LAYER			19
-#define HANDCUFF_LAYER			20
-#define LEGCUFF_LAYER			21
-#define L_HAND_LAYER			22
-#define R_HAND_LAYER			23
+#define GLASSES_LAYER			9
+#define BELT_LAYER				10		//Possible make this an overlay of somethign required to wear a belt?
+#define SUIT_STORE_LAYER		11
+#define BACK_LAYER				12
+#define HAIR_LAYER				13		//TODO: make part of head layer?
+#define EARS_LAYER				14
+#define FACEMASK_LAYER			15
+#define HEAD_LAYER				16
+#define NECK_LAYER				17
+#define COLLAR_LAYER			18
+#define HANDCUFF_LAYER			19
+#define LEGCUFF_LAYER			20
+#define L_HAND_LAYER			21
+#define R_HAND_LAYER			22
+#define TAIL_LAYER				23		//bs12 specific. this hack is probably gonna come back to haunt me
 #define FIRE_LAYER				24		//If you're on fire
 #define TARGETED_LAYER			25	//BS12: Layer for the target overlay from weapon targeting system
 #define TOTAL_LAYERS			25
@@ -905,11 +905,11 @@ proc/get_damage_icon_part(damage_state, body_part)
 /mob/living/carbon/human/update_inv_r_hand(var/update_icons=1)
 	if(r_hand)
 		r_hand.screen_loc = ui_rhand	//TODO
-		
+
 		var/t_icon = INV_R_HAND_DEF_ICON
 		if(r_hand.item_icons && (icon_r_hand in r_hand.item_icons))
 			t_icon = r_hand.item_icons[icon_r_hand]
-		
+
 		var/t_state = r_hand.item_state //useful for clothing that changes icon_state but retains the same sprite on the mob when held in hand
 		if(!t_state)	t_state = r_hand.icon_state
 		if(r_hand.icon_override)
@@ -921,18 +921,18 @@ proc/get_damage_icon_part(damage_state, body_part)
 		if (handcuffed) drop_r_hand()
 	else
 		overlays_standing[R_HAND_LAYER] = null
-	
+
 	if(update_icons) update_icons()
 
 
 /mob/living/carbon/human/update_inv_l_hand(var/update_icons=1)
 	if(l_hand)
 		l_hand.screen_loc = ui_lhand	//TODO
-		
+
 		var/t_icon = INV_L_HAND_DEF_ICON
 		if(l_hand.item_icons && (icon_l_hand in l_hand.item_icons))
 			t_icon = l_hand.item_icons[icon_l_hand]
-		
+
 		var/t_state = l_hand.item_state //useful for clothing that changes icon_state but retains the same sprite on the mob when held in hand
 		if(!t_state)	t_state = l_hand.icon_state
 		if(l_hand.icon_override)
@@ -944,7 +944,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 		if (handcuffed) drop_l_hand()
 	else
 		overlays_standing[L_HAND_LAYER] = null
-	
+
 	if(update_icons) update_icons()
 
 /mob/living/carbon/human/proc/update_tail_showing(var/update_icons=1)
@@ -1055,7 +1055,6 @@ proc/get_damage_icon_part(damage_state, body_part)
 #undef GLOVES_LAYER
 #undef EARS_LAYER
 #undef SUIT_LAYER
-#undef TAIL_LAYER
 #undef GLASSES_LAYER
 #undef FACEMASK_LAYER
 #undef BELT_LAYER
@@ -1069,6 +1068,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 #undef LEGCUFF_LAYER
 #undef L_HAND_LAYER
 #undef R_HAND_LAYER
+#undef TAIL_LAYER
 #undef TARGETED_LAYER
 #undef FIRE_LAYER
 #undef TOTAL_LAYERS

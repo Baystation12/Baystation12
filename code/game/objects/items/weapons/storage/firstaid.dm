@@ -110,26 +110,6 @@
 	new /obj/item/stack/medical/splint(src)
 	return
 
-/obj/item/weapon/storage/firstaid/surgery
-	name = "advanced surgery kit"
-	desc = "Contains advanced medical tools."
-	icon_state = "purplefirstaid"
-	item_state = "purplefirstaid"
-
-/obj/item/weapon/storage/firstaid/surgery/New()
-	..()
-	if (empty) return
-	new /obj/item/weapon/cautery( src )
-	new /obj/item/weapon/hemostat(src)
-	new /obj/item/weapon/FixOVein(src)
-	new /obj/item/weapon/retractor(src)
-	new /obj/item/weapon/bonegel(src)
-	new /obj/item/weapon/bonesetter(src)
-	new /obj/item/weapon/surgicaldrill(src)
-	return
-
-
-
 
 
 /obj/item/weapon/storage/firstaid/combat
@@ -153,7 +133,10 @@
 /obj/item/weapon/storage/firstaid/surgery
 	name = "surgery kit"
 	desc = "Contains tools for surgery."
+	icon_state = "purplefirstaid"
+	item_state = "purplefirstaid"
 	storage_slots = 10
+
 
 /obj/item/weapon/storage/firstaid/surgery/New()
 	..()
