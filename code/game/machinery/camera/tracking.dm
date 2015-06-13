@@ -132,11 +132,11 @@
 
 /mob/living/silicon/ai/proc/ai_camera_track(var/target_name in trackable_mobs())
 	set category = "AI Commands"
-	set name = "Track With Camera"
+	set name = "Follow With Camera"
 	set desc = "Select who you would like to track."
 
 	if(src.stat == 2)
-		src << "You can't track with camera because you are dead!"
+		src << "You can't follow [target_name] with cameras because you are dead!"
 		return
 	if(!target_name)
 		src.cameraFollow = null
