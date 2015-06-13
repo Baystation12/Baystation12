@@ -80,43 +80,12 @@ I said no!
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/donut/normal
 
-/* what is this
-/datum/recipe/human
-	//invalid recipe
-	make_food(var/obj/container as obj)
-		var/human_name
-		var/human_job
-		for (var/obj/item/weapon/reagent_containers/food/snacks/meat/human/HM in container)
-			if (!HM.subjectname)
-				continue
-			human_name = HM.subjectname
-			human_job = HM.subjectjob
-			break
-		var/lastname_index = findtext(human_name, " ")
-		if (lastname_index)
-			human_name = copytext(human_name,lastname_index+1)
-
-		var/obj/item/weapon/reagent_containers/food/snacks/human/HB = ..(container)
-		HB.name = human_name+HB.name
-		HB.job = human_job
-		return HB
-*/
-
 /datum/recipe/human/burger
 	items = list(
 		/obj/item/weapon/reagent_containers/food/snacks/meat/human,
 		/obj/item/weapon/reagent_containers/food/snacks/bun
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/human/burger
-
-/* Duplicated by plainburger
-/datum/recipe/monkeyburger
-	items = list(
-		/obj/item/weapon/reagent_containers/food/snacks/bun,
-		/obj/item/weapon/reagent_containers/food/snacks/meat/monkey
-	)
-	result = /obj/item/weapon/reagent_containers/food/snacks/monkeyburger
-*/
 
 /datum/recipe/plainburger
 	items = list(
@@ -878,7 +847,7 @@ I said no!
 
 /datum/recipe/poppypretzel
 	items = list(
-		/obj/item/seeds/poppyseed,
+		/obj/item/weapon/reagent_containers/food/snacks/grown/poppy,
 		/obj/item/weapon/reagent_containers/food/snacks/dough,
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/poppypretzel

@@ -1,11 +1,4 @@
-/mob/living/carbon/human/examine()
-	set src in view()
-
-	if(!usr || !src)	return
-	if( usr.sdisabilities & BLIND || usr.blinded || usr.stat==UNCONSCIOUS )
-		usr << "<span class='notice'>Something is there but you can't see it.</span>"
-		return
-
+/mob/living/carbon/human/examine(mob/user)
 	var/skipgloves = 0
 	var/skipsuitstorage = 0
 	var/skipjumpsuit = 0
@@ -59,7 +52,10 @@
 				t_his = "her"
 				t_him = "her"
 
-	msg += "<EM>[src.name]</EM>!\n"
+	msg += "<EM>[src.name]</EM>"
+	if(species.name != "Human")
+		msg += ", a <b><font color='[species.flesh_color]'>[species.name]</font></b>"
+	msg += "!\n"
 
 	//uniform
 	if(w_uniform && !skipjumpsuit)
@@ -124,7 +120,7 @@
 		else
 			msg += "[t_He] [t_has] \icon[gloves] \a [gloves] on [t_his] hands.\n"
 	else if(blood_DNA)
-		msg += "<span class='warning'>[t_He] [t_has] blood-stained hands!</span>\n"
+		msg += "<span class='warning'>[t_He] [t_has] [(hand_blood_color != "#030303") ? "blood" : "oil"]-stained hands!</span>\n"
 
 	//handcuffed?
 
@@ -149,7 +145,7 @@
 		else
 			msg += "[t_He] [t_is] wearing \icon[shoes] \a [shoes] on [t_his] feet.\n"
 	else if(feet_blood_DNA)
-		msg += "<span class='warning'>[t_He] [t_has] blood-stained feet!</span>\n"
+		msg += "<span class='warning'>[t_He] [t_has] [(feet_blood_color != "#030303") ? "blood" : "oil"]-stained feet!</span>\n"
 
 	//mask
 	if(wear_mask && !skipmask)
@@ -447,7 +443,7 @@
 			pose = addtext(pose,".") //Makes sure all emotes end with a period.
 		msg += "\n[t_He] is [pose]"
 
-	usr << msg
+	user << msg
 
 //Helper procedure. Called by /mob/living/carbon/human/examine() and /mob/living/carbon/human/Topic() to determine HUD access to security and medical records.
 /proc/hasHUD(mob/M as mob, hudtype)

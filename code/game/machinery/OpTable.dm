@@ -45,19 +45,6 @@
 	if(prob(75))
 		del(src)
 
-/obj/machinery/optable/attack_paw(mob/user as mob)
-	if ((HULK in usr.mutations))
-		usr << text("\blue You destroy the operating table.")
-		visible_message("\red [usr] destroys the operating table!")
-		src.density = 0
-		del(src)
-	if (!( locate(/obj/machinery/optable, user.loc) ))
-		step(user, get_dir(user, src))
-		if (user.loc == src.loc)
-			user.layer = TURF_LAYER
-			visible_message("The monkey hides under the table!")
-	return
-
 /obj/machinery/optable/attack_hand(mob/user as mob)
 	if (HULK in usr.mutations)
 		usr << text("\blue You destroy the table.")

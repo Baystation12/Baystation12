@@ -1,6 +1,6 @@
 /obj/structure/lattice
-	desc = "A lightweight support lattice."
 	name = "lattice"
+	desc = "A lightweight support lattice."
 	icon = 'icons/obj/structures.dmi'
 	icon_state = "latticefull"
 	density = 0

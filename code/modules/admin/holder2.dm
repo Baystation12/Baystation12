@@ -34,8 +34,16 @@ var/list/admin_datums = list()
 	if(owner)
 		admins -= owner
 		owner.remove_admin_verbs()
+		owner.deadmin_holder = owner.holder
 		owner.holder = null
-		owner = null
+
+/datum/admins/proc/reassociate()
+	if(owner)
+		admins += owner
+		owner.holder = src
+		owner.deadmin_holder = null
+		owner.add_admin_verbs()
+		
 
 /*
 checks if usr is an admin with at least ONE of the flags in rights_required. (Note, they don't need all the flags)
@@ -50,6 +58,7 @@ proc/admin_proc()
 NOTE: it checks usr! not src! So if you're checking somebody's rank in a proc which they did not call
 you will have to do something like if(client.holder.rights & R_ADMIN) yourself.
 */
+
 /proc/check_rights(rights_required, show_msg=1)
 	if(usr && usr.client)
 		if(rights_required)
@@ -82,8 +91,7 @@ you will have to do something like if(client.holder.rights & R_ADMIN) yourself.
 
 
 /client/proc/deadmin()
-	admin_datums -= ckey
 	if(holder)
 		holder.disassociate()
-		del(holder)
+		//del(holder)
 	return 1

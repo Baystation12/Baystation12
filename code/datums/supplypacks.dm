@@ -390,6 +390,16 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	containername = "Medical crate"
 	group = "Medical"
 
+/datum/supply_packs/bloodpack
+	name = "BloodPack crate"
+	contains = list(/obj/item/weapon/storage/box/bloodpacks,
+                    /obj/item/weapon/storage/box/bloodpacks,
+                    /obj/item/weapon/storage/box/bloodpacks)
+	cost = 10
+	containertype = /obj/structure/closet/crate/medical
+	containername = "BloodPack crate"
+	group = "Medical"
+
 /datum/supply_packs/bodybag
 	name = "Body bag crate"
 	contains = list(/obj/item/weapon/storage/box/bodybags,
@@ -461,10 +471,19 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	containername = "Wooden planks crate"
 	group = "Engineering"
 
+/datum/supply_packs/plastic50
+	name = "50 plastic sheets"
+	contains = list(/obj/item/stack/sheet/mineral/plastic)
+	amount = 50
+	cost = 10
+	containertype = /obj/structure/closet/crate
+	containername = "Plastic sheets crate"
+	group = "Engineering"
+
 /datum/supply_packs/smescoil
 	name = "Superconducting Magnetic Coil"
 	contains = list(/obj/item/weapon/smes_coil)
-	cost = 150
+	cost = 75
 	containertype = /obj/structure/closet/crate
 	containername = "Superconducting Magnetic Coil crate"
 	group = "Engineering"
@@ -629,7 +648,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 /datum/supply_packs/hoverpod
 	name = "Hoverpod Shipment"
 	contains = list()
-	cost = 75
+	cost = 80
 	containertype = /obj/structure/largecrate/hoverpod
 	containername = "Hoverpod Crate"
 	group = "Operations"
@@ -981,7 +1000,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 					/obj/item/clothing/under/rank/mailman,
 					/obj/item/clothing/under/dress/dress_saloon,
 					/obj/item/clothing/suit/suspenders,
-					/obj/item/clothing/suit/storage/labcoat/mad,
+					/obj/item/clothing/suit/storage/toggle/labcoat/mad,
 					/obj/item/clothing/suit/bio_suit/plaguedoctorsuit,
 					/obj/item/clothing/under/schoolgirl,
 					/obj/item/clothing/under/owl,
@@ -1004,7 +1023,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 /datum/supply_packs/formal_wear
 	contains = list(/obj/item/clothing/head/bowler,
 					/obj/item/clothing/head/that,
-					/obj/item/clothing/suit/storage/lawyer/bluejacket,
+					/obj/item/clothing/suit/storage/toggle/lawyer/bluejacket,
 					/obj/item/clothing/suit/storage/lawyer/purpjacket,
 					/obj/item/clothing/under/suit_jacket,
 					/obj/item/clothing/under/suit_jacket/female,
@@ -1088,7 +1107,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 /datum/supply_packs/smbig
 	name = "Supermatter Core"
 	contains = list(/obj/machinery/power/supermatter)
-	cost = 50
+	cost = 150
 	containertype = /obj/structure/closet/crate/secure/phoron
 	containername = "Supermatter crate (CAUTION)"
 	group = "Engineering"
@@ -1184,6 +1203,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 					 /obj/item/weapon/folder/red,
 					 /obj/item/weapon/folder/yellow,
 					 /obj/item/weapon/hand_labeler,
+					 /obj/item/weapon/tape_roll,
 					 /obj/structure/filingcabinet/chestdrawer{anchored = 0},
 					 /obj/item/weapon/paper_bin)
 	name = "Office supplies"
@@ -1412,3 +1432,16 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 
 
 
+/datum/supply_packs/firefighting
+	name = "Firefighting equipment"
+	containername = "Firefighting crate"
+	cost = 30
+	group = "Operations"
+	contains = list(/obj/item/clothing/head/hardhat/red,
+					/obj/item/clothing/head/hardhat/red,
+					/obj/item/clothing/suit/fire/firefighter,
+					/obj/item/clothing/suit/fire/firefighter,
+					/obj/item/clothing/mask/gas,
+					/obj/item/clothing/mask/gas,
+					/obj/item/weapon/extinguisher,
+					/obj/item/weapon/extinguisher)

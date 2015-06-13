@@ -17,7 +17,7 @@
 	name = "captain's parade tunic"
 	desc = "Worn by a Captain to show their class."
 	icon_state = "captunic"
-	item_state = "bio_suit"
+	item_state = "captunic"
 	body_parts_covered = UPPER_TORSO|ARMS
 	flags_inv = HIDEJUMPSUIT
 	sprite_sheets = list("Vox" = 'icons/mob/species/vox/suit.dmi')
@@ -26,7 +26,7 @@
 	name = "captain's uniform jacket"
 	desc = "A less formal jacket for everyday captain use."
 	icon_state = "capjacket"
-	item_state = "bio_suit"
+	item_state = "capjacket"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 	flags_inv = HIDEJUMPSUIT
 
@@ -141,11 +141,13 @@
 	sprite_sheets = list("Vox" = 'icons/mob/species/vox/suit.dmi')
 
 //Lawyer
-/obj/item/clothing/suit/storage/lawyer/bluejacket
+/obj/item/clothing/suit/storage/toggle/lawyer/bluejacket
 	name = "Blue Suit Jacket"
 	desc = "A snappy dress jacket."
 	icon_state = "suitjacket_blue_open"
 	item_state = "suitjacket_blue_open"
+	icon_open = "suitjacket_blue_open"
+	icon_closed = "suitjacket_blue"
 	blood_overlay_type = "coat"
 	body_parts_covered = UPPER_TORSO|ARMS
 
@@ -158,61 +160,30 @@
 	body_parts_covered = UPPER_TORSO|ARMS
 
 //Internal Affairs
-/obj/item/clothing/suit/storage/internalaffairs
+/obj/item/clothing/suit/storage/toggle/internalaffairs
 	name = "Internal Affairs Jacket"
 	desc = "A smooth black jacket."
 	icon_state = "ia_jacket_open"
 	item_state = "ia_jacket"
+	icon_open = "ia_jacket_open"
+	icon_closed = "ia_jacket"
 	blood_overlay_type = "coat"
 	body_parts_covered = UPPER_TORSO|ARMS
 
-	verb/toggle()
-		set name = "Toggle Coat Buttons"
-		set category = "Object"
-		set src in usr
 
-		if(!usr.canmove || usr.stat || usr.restrained())
-			return 0
-
-		switch(icon_state)
-			if("ia_jacket_open")
-				src.icon_state = "ia_jacket"
-				usr << "You button up the jacket."
-			if("ia_jacket")
-				src.icon_state = "ia_jacket_open"
-				usr << "You unbutton the jacket."
-			else
-				usr << "You attempt to button-up the velcro on your [src], before promptly realising how retarded you are."
-				return
-		update_clothing_icon()	//so our overlays update
 
 //Medical
-/obj/item/clothing/suit/storage/fr_jacket
+/obj/item/clothing/suit/storage/toggle/fr_jacket
 	name = "first responder jacket"
 	desc = "A high-visibility jacket worn by medical first responders."
 	icon_state = "fr_jacket_open"
 	item_state = "fr_jacket"
+	icon_open = "fr_jacket_open"
+	icon_closed = "fr_jacket"
 	blood_overlay_type = "armor"
 	allowed = list(/obj/item/stack/medical, /obj/item/weapon/reagent_containers/dropper, /obj/item/weapon/reagent_containers/hypospray, /obj/item/weapon/reagent_containers/syringe, \
 	/obj/item/device/healthanalyzer, /obj/item/device/flashlight, /obj/item/device/radio, /obj/item/weapon/tank/emergency_oxygen)
 	body_parts_covered = UPPER_TORSO|ARMS
-
-	verb/toggle()
-		set name = "Toggle Jacket Buttons"
-		set category = "Object"
-		set src in usr
-
-		if(!usr.canmove || usr.stat || usr.restrained())
-			return 0
-
-		switch(icon_state)
-			if("fr_jacket_open")
-				src.icon_state = "fr_jacket"
-				usr << "You button up the jacket."
-			if("fr_jacket")
-				src.icon_state = "fr_jacket_open"
-				usr << "You unbutton the jacket."
-		update_clothing_icon()	//so our overlays update
 
 //Mime
 /obj/item/clothing/suit/suspenders

@@ -141,12 +141,12 @@
 	icon_state = "goldenplaque"
 
 /obj/structure/sign/kiddieplaque
-	name = "AI developers plaque"
+	name = "\improper AI developers plaque"
 	desc = "Next to the extremely long list of names and job titles, there is a drawing of a little child. The child appears to be retarded. Beneath the image, someone has scratched the word \"PACKETS\""
 	icon_state = "kiddieplaque"
 
 /obj/structure/sign/atmosplaque
-	name = "\improper FEA Atmospherics Division plaque"
+	name = "\improper FEA atmospherics division plaque"
 	desc = "This plaque commemorates the fall of the Atmos FEA division. For all the charred, dizzy, and brittle men who have died in its hands."
 	icon_state = "atmosplaque"
 

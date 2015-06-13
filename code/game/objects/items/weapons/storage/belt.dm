@@ -4,7 +4,6 @@
 	icon = 'icons/obj/clothing/belts.dmi'
 	icon_state = "utilitybelt"
 	item_state = "utility"
-	flags = FPRINT | TABLEPASS
 	slot_flags = SLOT_BELT
 	attack_verb = list("whipped", "lashed", "disciplined")
 
@@ -14,6 +13,7 @@
 	icon_state = "utilitybelt"
 	item_state = "utility"
 	can_hold = list(
+		//"/obj/item/weapon/combitool",
 		"/obj/item/weapon/crowbar",
 		"/obj/item/weapon/screwdriver",
 		"/obj/item/weapon/weldingtool",
@@ -24,7 +24,8 @@
 		"/obj/item/stack/cable_coil",
 		"/obj/item/device/t_scanner",
 		"/obj/item/device/analyzer",
-		"/obj/item/taperoll/engineering")
+		"/obj/item/taperoll/engineering",
+		"/obj/item/device/robotanalyzer")
 
 
 /obj/item/weapon/storage/belt/utility/full/New()
@@ -82,7 +83,7 @@
 	max_w_class = 3
 	max_combined_w_class = 21
 	can_hold = list(
-		"/obj/item/weapon/grenade/flashbang",
+		"/obj/item/weapon/grenade",
 		"/obj/item/weapon/reagent_containers/spray/pepper",
 		"/obj/item/weapon/handcuffs",
 		"/obj/item/device/flash",
@@ -141,3 +142,68 @@
 	storage_slots = 9
 	max_w_class = 3
 	max_combined_w_class = 21
+
+/obj/item/weapon/storage/belt/security/ert
+	name = "ERT tactical belt"
+	desc = "Can hold security gear like handcuffs and flashes, with more pouches for more storage and a holster for your e-gun. For engineers, it can hold a variety of tools. Also comes equipped with many medical pouches."
+	icon_state = "swatbelt"
+	item_state = "swatbelt"
+	storage_slots = 9
+	max_w_class = 3
+	max_combined_w_class = 21
+	can_hold = list(
+		"/obj/item/weapon/grenade/flashbang",
+		"/obj/item/weapon/reagent_containers/spray/pepper",
+		"/obj/item/weapon/handcuffs",
+		"/obj/item/device/flash",
+		"/obj/item/clothing/glasses",
+		"/obj/item/ammo_casing/shotgun",
+		"/obj/item/ammo_magazine",
+		"/obj/item/weapon/reagent_containers/food/snacks/donut/normal",
+		"/obj/item/weapon/reagent_containers/food/snacks/donut/jelly",
+		"/obj/item/weapon/melee/baton",
+		"/obj/item/weapon/gun/energy/taser",
+		"/obj/item/weapon/flame/lighter/zippo",
+		"/obj/item/weapon/cigpacket",
+		"/obj/item/clothing/glasses/hud/security",
+		"/obj/item/device/flashlight",
+		"/obj/item/device/pda",
+		"/obj/item/device/radio/headset",
+		"/obj/item/weapon/melee",
+		"/obj/item/taperoll/police",
+		"/obj/item/weapon/gun/energy/gun",
+		"/obj/item/weapon/gun/energy/stunrevolver",
+		"/obj/item/weapon/gun/energy/taser",
+		"/obj/item/weapon/gun/projectile/colt",
+		"/obj/item/weapon/gun/projectile/detective/semiauto",
+		"/obj/item/weapon/gun/energy/gun/nuclear",
+		"/obj/item/weapon/gun/syringe",
+		"/obj/item/weapon/gun/syringe/rapidsyringe",
+		"/obj/item/weapon/crowbar",
+		"/obj/item/weapon/screwdriver",
+		"/obj/item/weapon/weldingtool",
+		"/obj/item/weapon/wirecutters",
+		"/obj/item/weapon/wrench",
+		"/obj/item/device/multitool",
+		"/obj/item/device/flashlight",
+		"/obj/item/stack/cable_coil",
+		"/obj/item/device/t_scanner",
+		"/obj/item/device/analyzer",
+		"/obj/item/taperoll/engineering",
+		"/obj/item/device/healthanalyzer",
+		"/obj/item/weapon/dnainjector",
+		"/obj/item/weapon/reagent_containers/dropper",
+		"/obj/item/weapon/reagent_containers/glass/beaker",
+		"/obj/item/weapon/reagent_containers/glass/bottle",
+		"/obj/item/weapon/reagent_containers/pill",
+		"/obj/item/weapon/reagent_containers/syringe",
+		"/obj/item/weapon/reagent_containers/glass/dispenser",
+		"/obj/item/weapon/flame/lighter/zippo",
+		"/obj/item/weapon/storage/fancy/cigarettes",
+		"/obj/item/weapon/storage/pill_bottle",
+		"/obj/item/stack/medical",
+		"/obj/item/device/flashlight/pen",
+		"/obj/item/clothing/mask/surgical",
+		"/obj/item/clothing/gloves/latex",
+	    "/obj/item/weapon/reagent_containers/hypospray"
+	    )

@@ -89,9 +89,9 @@ var/list/event_last_fired = list()
 	if(active_with_role["Security"] > 0)
 		if(!sent_spiders_to_station)
 			possibleEvents[/datum/event/spider_infestation] = max(active_with_role["Security"], 5) + 5
-		if(aliens_allowed && !sent_aliens_to_station)
+		if(config.aliens_allowed && !sent_aliens_to_station)
 			possibleEvents[/datum/event/alien_infestation] = max(active_with_role["Security"], 5) + 2.5
-		if(!sent_ninja_to_station && toggle_space_ninja)
+		if(!sent_ninja_to_station && config.ninjas_allowed)
 			possibleEvents[/datum/event/space_ninja] = max(active_with_role["Security"], 5)
 
 	for(var/event_type in event_last_fired) if(possibleEvents[event_type])
@@ -187,7 +187,7 @@ var/list/event_last_fired = list()
 // Returns how many characters are currently active(not logged out, not AFK for more than 10 minutes)
 // with a specific role.
 // Note that this isn't sorted by department, because e.g. having a roboticist shouldn't make meteors spawn.
-/proc/number_active_with_role(role)
+/proc/number_active_with_role()
 	var/list/active_with_role = list()
 	active_with_role["Engineer"] = 0
 	active_with_role["Medical"] = 0
@@ -197,6 +197,7 @@ var/list/event_last_fired = list()
 	active_with_role["Cyborg"] = 0
 	active_with_role["Janitor"] = 0
 	active_with_role["Gardener"] = 0
+	active_with_role["Any"] = player_list.len
 
 	for(var/mob/M in player_list)
 		if(!M.mind || !M.client || M.client.inactivity > 10 * 10 * 60) // longer than 10 minutes AFK counts them as inactive

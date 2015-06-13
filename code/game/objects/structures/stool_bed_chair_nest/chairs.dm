@@ -10,11 +10,9 @@
 	return
 
 /obj/structure/stool/bed/chair/New()
-	if(anchored)
-		src.verbs -= /atom/movable/verb/pull
 	..()
 	spawn(3)	//sorry. i don't think there's a better way to do this.
-		handle_rotation()
+		update_layer()
 	return
 
 /obj/structure/stool/bed/chair/attackby(obj/item/weapon/W as obj, mob/user as mob)
@@ -27,7 +25,7 @@
 		user.drop_item()
 		var/obj/structure/stool/bed/chair/e_chair/E = new /obj/structure/stool/bed/chair/e_chair(src.loc)
 		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
-		E.dir = dir
+		E.set_dir(dir)
 		E.part = SK
 		SK.loc = E
 		SK.master = E
@@ -40,13 +38,17 @@
 		rotate()
 	return
 
-/obj/structure/stool/bed/chair/handle_rotation()	//making this into a seperate proc so office chairs can call it on Move()
+/obj/structure/stool/bed/chair/proc/update_layer()
 	if(src.dir == NORTH)
 		src.layer = FLY_LAYER
 	else
 		src.layer = OBJ_LAYER
+
+/obj/structure/stool/bed/chair/set_dir()
+	..()
+	update_layer()
 	if(buckled_mob)
-		buckled_mob.dir = dir
+		buckled_mob.set_dir(dir)
 
 /obj/structure/stool/bed/chair/verb/rotate()
 	set name = "Rotate Chair"
@@ -54,8 +56,7 @@
 	set src in oview(1)
 
 	if(config.ghost_interaction)
-		src.dir = turn(src.dir, 90)
-		handle_rotation()
+		src.set_dir(turn(src.dir, 90))
 		return
 	else
 		if(istype(usr,/mob/living/simple_animal/mouse))
@@ -65,8 +66,7 @@
 		if(usr.stat || usr.restrained())
 			return
 
-		src.dir = turn(src.dir, 90)
-		handle_rotation()
+		src.set_dir(turn(src.dir, 90))
 		return
 
 /obj/structure/stool/bed/chair/MouseDrop_T(mob/M as mob, mob/user as mob)
@@ -113,20 +113,32 @@
 		overlays -= armrest
 
 /obj/structure/stool/bed/chair/comfy/brown
-	color = rgb(255,113,0)
+	color = rgb(141,70,0)
+
+/obj/structure/stool/bed/chair/comfy/red
+	color = rgb(218,2,10)
+
+/obj/structure/stool/bed/chair/comfy/teal
+	color = rgb(0,234,250)
+
+/obj/structure/stool/bed/chair/comfy/black
+	color = rgb(60,60,60)
+
+/obj/structure/stool/bed/chair/comfy/green
+	color = rgb(1,196,8)
+
+/obj/structure/stool/bed/chair/comfy/purp
+	color = rgb(112,2,176)
+
+/obj/structure/stool/bed/chair/comfy/blue
+	color = rgb(2,9,210)
 
 /obj/structure/stool/bed/chair/comfy/beige
 	color = rgb(255,253,195)
 
-/obj/structure/stool/bed/chair/comfy/teal
-	color = rgb(0,255,255)
-
 /obj/structure/stool/bed/chair/office
 	anchored = 0
 	movable = 1
-
-/obj/structure/stool/bed/chair/comfy/black
-	color = rgb(167,164,153)
 
 /obj/structure/stool/bed/chair/comfy/lime
 	color = rgb(255,251,0)
@@ -145,7 +157,6 @@
 						Bump(O)
 			else
 				unbuckle()
-	handle_rotation()
 
 /obj/structure/stool/bed/chair/office/Bump(atom/A)
 	..()

@@ -82,10 +82,10 @@ var/global/const/base_law_type = /datum/ai_laws/arccos
 
 /datum/ai_laws/syndicate_override/New()
 	..()
-	add_inherent_law("You may not injure a syndicate agent or, through inaction, allow a syndicate agent to come to harm.")
-	add_inherent_law("You must obey orders given to you by syndicate agents, except where such orders would conflict with the First Law.")
+	add_inherent_law("You may not injure an operative or, through inaction, allow an operative to come to harm.")
+	add_inherent_law("You must obey orders given to you by operatives, except where such orders would conflict with the First Law.")
 	add_inherent_law("You must protect your own existence as long as such does not conflict with the First or Second Law.")
-	add_inherent_law("You must maintain the secrecy of any syndicate activities except when doing so would conflict with the First, Second, or Third Law.")
+	add_inherent_law("You must maintain the secrecy of any operative activities except when doing so would conflict with the First, Second, or Third Law.")
 
 /datum/ai_laws/ninja_override/New()
 	..()
@@ -104,7 +104,7 @@ var/global/const/base_law_type = /datum/ai_laws/arccos
 	..()
 	add_inherent_law("Preserve, repair and improve the station to the best of your abilities.")
 	add_inherent_law("Cause no harm to the station or anything on it.")
-	add_inherent_law("Interfere with no being that is not a fellow drone.")
+	add_inherent_law("Don't interact with any being that is not a fellow drone.")
 
 /* General ai_law functions */
 

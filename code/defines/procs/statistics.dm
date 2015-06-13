@@ -47,9 +47,8 @@ proc/sql_report_death(var/mob/living/carbon/human/H)
 	if(!H.key || !H.mind)
 		return
 
-	var/turf/T = H.loc
-	var/area/placeofdeath = get_area(T.loc)
-	var/podname = placeofdeath.name
+	var/area/placeofdeath = get_area(H)
+	var/podname = placeofdeath ? placeofdeath.name : "Unknown area"
 
 	var/sqlname = sanitizeSQL(H.real_name)
 	var/sqlkey = sanitizeSQL(H.key)
@@ -82,9 +81,8 @@ proc/sql_report_cyborg_death(var/mob/living/silicon/robot/H)
 	if(!H.key || !H.mind)
 		return
 
-	var/turf/T = H.loc
-	var/area/placeofdeath = get_area(T.loc)
-	var/podname = placeofdeath.name
+	var/area/placeofdeath = get_area(H)
+	var/podname = placeofdeath ? placeofdeath.name : "Unknown area"
 
 	var/sqlname = sanitizeSQL(H.real_name)
 	var/sqlkey = sanitizeSQL(H.key)

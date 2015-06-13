@@ -314,30 +314,12 @@
 
 		// Extract the organ!
 		if(target.op_stage.current_organ)
-
-			var/datum/organ/external/affected = target.get_organ(target_zone)
 			var/datum/organ/internal/I = target.internal_organs_by_name[target.op_stage.current_organ]
-
 			var/obj/item/organ/O
 			if(I && istype(I))
 				O = I.remove(user)
 				if(O && istype(O))
-
-					// Stop the organ from continuing to reject.
-					O.organ_data.rejecting = null
-
-					// Transfer over some blood data, if the organ doesn't have data.
-					var/datum/reagent/blood/organ_blood = locate(/datum/reagent/blood) in O.reagents.reagent_list
-					if(!organ_blood || !organ_blood.data["blood_DNA"])
-						target.vessel.trans_to(O, 5, 1, 1)
-
-					// Kinda redundant, but I'm getting some buggy behavior.
-					target.internal_organs_by_name[target.op_stage.current_organ] = null
-					target.internal_organs_by_name -= target.op_stage.current_organ
-					target.internal_organs -= O.organ_data
-					affected.internal_organs -= O.organ_data
 					O.removed(target,user)
-
 			target.op_stage.current_organ = null
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -409,30 +391,8 @@
 		"\blue You have transplanted \the [tool] into [target]'s [affected.display_name].")
 		user.drop_item(tool)
 		var/obj/item/organ/O = tool
-
 		if(istype(O))
-
-			var/datum/reagent/blood/transplant_blood = locate(/datum/reagent/blood) in O.reagents.reagent_list
-			if(!transplant_blood)
-				O.organ_data.transplant_data = list()
-				O.organ_data.transplant_data["species"] =    target.species.name
-				O.organ_data.transplant_data["blood_type"] = target.dna.b_type
-				O.organ_data.transplant_data["blood_DNA"] =  target.dna.unique_enzymes
-			else
-				O.organ_data.transplant_data = list()
-				O.organ_data.transplant_data["species"] =    transplant_blood.data["species"]
-				O.organ_data.transplant_data["blood_type"] = transplant_blood.data["blood_type"]
-				O.organ_data.transplant_data["blood_DNA"] =  transplant_blood.data["blood_DNA"]
-
-			O.organ_data.organ_holder = null
-			O.organ_data.owner = target
-			target.internal_organs |= O.organ_data
-			affected.internal_organs |= O.organ_data
-			target.internal_organs_by_name[O.organ_tag] = O.organ_data
-			O.organ_data.status |= ORGAN_CUT_AWAY
-			O.replaced(target)
-
-		del(O)
+			O.replaced(target,affected)
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		user.visible_message("\red [user]'s hand slips, damaging \the [tool]!", \

@@ -9,6 +9,7 @@ datum/controller/vote
 	var/mode = null
 	var/question = null
 	var/list/choices = list()
+	var/list/gamemode_names = list()
 	var/list/voted = list()
 	var/list/voting = list()
 	var/list/current_votes = list()
@@ -48,11 +49,11 @@ datum/controller/vote
 				voting.Cut()
 
 	proc/autotransfer()
-		initiate_vote("crew_transfer","the server")
+		initiate_vote("crew_transfer","the server", 1)
 		log_debug("The server has called a crew transfer vote")
 
 /*	proc/autogamemode()
-		initiate_vote("gamemode","the server")
+		initiate_vote("gamemode","the server", 1)
 		log_debug("The server has called a gamemode vote")*/
 
 	proc/reset()
@@ -65,14 +66,6 @@ datum/controller/vote
 		voting.Cut()
 		current_votes.Cut()
 		additional_text.Cut()
-
-	/*	if(auto_muted && !ooc_allowed)
-			auto_muted = 0
-			ooc_allowed = !( ooc_allowed )
-			world << "<b>The OOC channel has been automatically enabled due to vote end.</b>"
-			log_admin("OOC was toggled automatically due to vote end.")
-			message_admins("OOC has been toggled on automatically.")
-	*/
 
 	proc/get_result()
 		//get the highest number of votes
@@ -197,9 +190,9 @@ datum/controller/vote
 				return vote
 		return 0
 
-	proc/initiate_vote(var/vote_type, var/initiator_key)
+	proc/initiate_vote(var/vote_type, var/initiator_key, var/automatic = 0)
 		if(!mode)
-			if(started_time != null && !check_rights(R_ADMIN))
+			if(started_time != null && !(check_rights(R_ADMIN) || automatic))
 				var/next_allowed_time = (started_time + config.vote_delay)
 				if(next_allowed_time > world.time)
 					return 0
@@ -217,8 +210,10 @@ datum/controller/vote
 						for (var/T in L)
 							var/datum/game_mode/M = new T()
 							if (M.config_tag == F)
+								gamemode_names[M.config_tag] = capitalize(M.name) //It's ugly to put this here but it works
 								additional_text.Add("<td align = 'center'>[M.required_players]</td>")
 								break
+					gamemode_names["secret"] = "Secret"
 				if("crew_transfer")
 					if(check_rights(R_ADMIN|R_MOD, 0))
 						question = "End the shift?"
@@ -251,35 +246,14 @@ datum/controller/vote
 			world << "<font color='purple'><b>[text]</b>\nType vote to place your votes.\nYou have [config.vote_period/10] seconds to vote.</font>"
 			switch(vote_type)
 				if("crew_transfer")
-					world << sound('sound/ambience/alarm4.ogg', repeat = 0, wait = 0, volume = 50, channel = 1)
+					world << sound('sound/ambience/alarm4.ogg', repeat = 0, wait = 0, volume = 50, channel = 3)
 				if("gamemode")
-					world << sound('sound/ambience/alarm4.ogg', repeat = 0, wait = 0, volume = 50, channel = 1)
+					world << sound('sound/ambience/alarm4.ogg', repeat = 0, wait = 0, volume = 50, channel = 3)
 				if("custom")
-					world << sound('sound/ambience/alarm4.ogg', repeat = 0, wait = 0, volume = 50, channel = 1)
+					world << sound('sound/ambience/alarm4.ogg', repeat = 0, wait = 0, volume = 50, channel = 3)
 			if(mode == "gamemode" && going)
 				going = 0
 				world << "<font color='red'><b>Round start has been delayed.</b></font>"
-		/*	if(mode == "crew_transfer" && ooc_allowed)
-				auto_muted = 1
-				ooc_allowed = !( ooc_allowed )
-				world << "<b>The OOC channel has been automatically disabled due to a crew transfer vote.</b>"
-				log_admin("OOC was toggled automatically due to crew_transfer vote.")
-				message_admins("OOC has been toggled off automatically.")
-			if(mode == "gamemode" && ooc_allowed)
-				auto_muted = 1
-				ooc_allowed = !( ooc_allowed )
-				world << "<b>The OOC channel has been automatically disabled due to the gamemode vote.</b>"
-				log_admin("OOC was toggled automatically due to gamemode vote.")
-				message_admins("OOC has been toggled off automatically.")
-			if(mode == "custom" && ooc_allowed)
-				auto_muted = 1
-				ooc_allowed = !( ooc_allowed )
-				world << "<b>The OOC channel has been automatically disabled due to a custom vote.</b>"
-				log_admin("OOC was toggled automatically due to custom vote.")
-				message_admins("OOC has been toggled off automatically.")
-		*/
-
-
 
 			time_remaining = round(config.vote_period/10)
 			return 1
@@ -307,11 +281,16 @@ datum/controller/vote
 				var/votes = choices[choices[i]]
 				if(!votes)	votes = 0
 				. += "<tr>"
-				if(current_votes[C.ckey] == i)
-					. += "<td><b><a href='?src=\ref[src];vote=[i]'>[choices[i]]</a></b></td><td align = 'center'>[votes]</td>"
+				if(mode == "gamemode")
+					if(current_votes[C.ckey] == i)
+						. += "<td><b><a href='?src=\ref[src];vote=[i]'>[gamemode_names[choices[i]]]</a></b></td><td align = 'center'>[votes]</td>"
+					else
+						. += "<td><a href='?src=\ref[src];vote=[i]'>[gamemode_names[choices[i]]]</a></b></td><td align = 'center'>[votes]</td>"
 				else
-					. += "<td><a href='?src=\ref[src];vote=[i]'>[choices[i]]</a></b></td><td align = 'center'>[votes]</td>"
-
+					if(current_votes[C.ckey] == i)
+						. += "<td><b><a href='?src=\ref[src];vote=[i]'>[choices[i]]</a></b></td><td align = 'center'>[votes]</td>"
+					else
+						. += "<td><a href='?src=\ref[src];vote=[i]'>[choices[i]]</a></b></td><td align = 'center'>[votes]</td>"
 				if (additional_text.len >= i)
 					. += additional_text[i]
 				. += "</tr>"

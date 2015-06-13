@@ -10,13 +10,19 @@
 	var/target_pressure = 100
 
 	volume = 1000
-	
+
 	power_rating = 7500 //7500 W ~ 10 HP
 	power_losses = 150
+
+/obj/machinery/portable_atmospherics/powered/pump/filled
+	start_pressure = 90 * ONE_ATMOSPHERE
 
 /obj/machinery/portable_atmospherics/powered/pump/New()
 	..()
 	cell = new/obj/item/weapon/cell(src)
+
+	var/list/air_mix = StandardAirMix()
+	src.air_contents.adjust_multi("oxygen", air_mix["oxygen"], "nitrogen", air_mix["nitrogen"])
 
 /obj/machinery/portable_atmospherics/powered/pump/update_icon()
 	src.overlays = 0
@@ -53,16 +59,16 @@
 /obj/machinery/portable_atmospherics/powered/pump/process()
 	..()
 	var/power_draw = -1
-	
+
 	if(on && cell && cell.charge)
 		var/datum/gas_mixture/environment
 		if(holding)
 			environment = holding.air_contents
 		else
 			environment = loc.return_air()
-		
+
 		var/pressure_delta
-		var/output_volume 
+		var/output_volume
 		var/air_temperature
 		if(direction_out)
 			pressure_delta = target_pressure - environment.return_pressure()
@@ -72,15 +78,15 @@
 			pressure_delta = target_pressure - air_contents.return_pressure()
 			output_volume = air_contents.volume * air_contents.group_multiplier
 			air_temperature = air_contents.temperature? air_contents.temperature : environment.temperature
-		
+
 		var/transfer_moles = pressure_delta*output_volume/(air_temperature * R_IDEAL_GAS_EQUATION)
-		
+
 		if (pressure_delta > 0.01)
 			if (direction_out)
 				power_draw = pump_gas(src, air_contents, environment, transfer_moles, power_rating)
 			else
 				power_draw = pump_gas(src, environment, air_contents, transfer_moles, power_rating)
-	
+
 	if (power_draw < 0)
 		last_flow_rate = 0
 		last_power_draw = 0
@@ -88,22 +94,19 @@
 		power_draw = max(power_draw, power_losses)
 		cell.use(power_draw * CELLRATE)
 		last_power_draw = power_draw
-		
+
 		update_connected_network()
-		
+
 		//ran out of charge
 		if (!cell.charge)
 			update_icon()
-	
+
 	src.updateDialog()
 
 /obj/machinery/portable_atmospherics/powered/pump/return_air()
 	return air_contents
 
 /obj/machinery/portable_atmospherics/powered/pump/attack_ai(var/mob/user as mob)
-	return src.attack_hand(user)
-
-/obj/machinery/portable_atmospherics/powered/pump/attack_paw(var/mob/user as mob)
 	return src.attack_hand(user)
 
 /obj/machinery/portable_atmospherics/powered/pump/attack_hand(var/mob/user as mob)

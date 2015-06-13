@@ -46,9 +46,9 @@
 	return
 
 // temporary fix for broken icon until somebody gets around to make these player-buildable
-/turf/simulated/floor/mech_bay_recharge_floor/attackby(obj/item/C as obj, mob/user as mob)	
-	..()	
-	if(floor_tile)
+/turf/simulated/floor/mech_bay_recharge_floor/attackby(obj/item/C as obj, mob/user as mob)
+	..()
+	if(floor_type)
 		icon_state = "recharge_floor"
 	else
 		icon_state = "support_lattice"
@@ -190,45 +190,28 @@
 		var/turf/simulated/floor/mech_bay_recharge_floor/F = locate() in range(1,src)
 		if(F)
 			F.init_devices()
-	
-	var/output = "<html><head><title>[src.name]</title></head><body>"
-	if(!recharge_floor)
-		output += "<font color='red'>Mech Bay Recharge Station not initialized.</font><br>"
+	ui_interact(user)
+
+/obj/machinery/computer/mech_bay_power_console/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+	var/list/data = list()
+	data["has_floor"] = recharge_floor
+	data["has_port"] = recharge_port
+	if(recharge_floor && recharge_floor.recharging_mecha && recharge_floor.recharging_mecha.cell)
+		data["has_mech"] = 1
+		data["mecha_name"] = recharge_floor.recharging_mecha || "None"
+		data["mecha_charge"] = isnull(recharge_floor.recharging_mecha) ? 0 : recharge_floor.recharging_mecha.cell.charge
+		data["mecha_maxcharge"] = isnull(recharge_floor.recharging_mecha) ? 0 : recharge_floor.recharging_mecha.cell.maxcharge
+		data["mecha_charge_percentage"] = isnull(recharge_floor.recharging_mecha) ? 0 : round(recharge_floor.recharging_mecha.cell.percent())
 	else
-		output += {"<b>Mech Bay Recharge Station Data:</b><div style='margin-left: 15px;'>
-						<b>Mecha: </b>[recharge_floor.recharging_mecha||"None"]<br>"}
-		if(recharge_floor.recharging_mecha)
-			var/cell_charge = recharge_floor.recharging_mecha.get_charge()
-			output += "<b>Cell charge: </b>[isnull(cell_charge)?"No powercell found":"[recharge_floor.recharging_mecha.cell.charge]/[recharge_floor.recharging_mecha.cell.maxcharge]"]<br>"
-		output += "</div>"
-	if(!recharge_port)
-		output += "<font color='red'>Mech Bay Power Port not initialized.</font><br>"
-	else
-		output += "<b>Mech Bay Power Port Status: </b>[recharge_port.active()?"Now charging":"On hold"]<br>"
-
-	/*
-	output += {"<hr>
-					<b>Settings:</b>
-					<div style='margin-left: 15px;'>
-					<b>Start sequence on succesful init: </b><a href='?src=\ref[src];autostart=1'>[autostart?"On":"Off"]</a><br>
-					<b>Recharge Port Voltage: </b><a href='?src=\ref[src];voltage=30'>Low</a> - <a href='?src=\ref[src];voltage=45'>Medium</a> - <a href='?src=\ref[src];voltage=60'>High</a><br>
-					</div>"}
-	*/
-
-	output += "</ body></html>"
-	user << browse(output, "window=mech_bay_console")
-	onclose(user, "mech_bay_console")
-	return
-
-// unused at the moment, also lacks any kind of exploit prevention
-/* 
-/obj/machinery/computer/mech_bay_power_console/Topic(href, href_list)
-	if(href_list["autostart"])
-		autostart = !autostart
-	if(href_list["voltage"])
-		voltage = text2num(href_list["voltage"])
-		if(recharge_port)
-			recharge_port.set_voltage(voltage)
-	updateUsrDialog()
-	return
-*/
+		data["has_mech"] = 0
+	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	if (!ui)
+		// the ui does not exist, so we'll create a new() one
+        // for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
+		ui = new(user, src, ui_key, "mech_bay_console.tmpl", "Mech Bay Control Console", 500, 325)
+		// when the ui is first opened this is the data it will use
+		ui.set_initial_data(data)
+		// open the new ui window
+		ui.open()
+		// auto update every Master Controller tick
+		ui.set_auto_update(1)

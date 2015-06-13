@@ -28,6 +28,8 @@
 
 /obj/item/projectile/bullet/weakbullet/rubber
 	name = "rubber bullet"
+	damage = 5
+	agony = 60
 
 /obj/item/projectile/bullet/midbullet
 	damage = 20

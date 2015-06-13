@@ -52,6 +52,10 @@
 	icon_state = "purple"
 	item_state = "glasses"
 
+/obj/item/clothing/glasses/science/New()
+	..()
+	overlay = global_hud.science
+
 /obj/item/clothing/glasses/night
 	name = "Night Vision Goggles"
 	desc = "You can totally see in the dark now!"
@@ -194,6 +198,11 @@
 
 /obj/item/clothing/glasses/sunglasses/sechud/tactical
 	name = "tactical HUD"
+	desc = "Flash-resistant goggles with inbuilt combat and security information."
+	icon_state = "swatgoggles"
+
+/obj/item/clothing/glasses/sunglasses/sechud/ert
+	name = "ERT tactical HUD"
 	desc = "Flash-resistant goggles with inbuilt combat and security information."
 	icon_state = "swatgoggles"
 

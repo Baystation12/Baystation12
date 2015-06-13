@@ -4,53 +4,68 @@
 	icon_state = "yellow"
 	density = 1
 	var/health = 100.0
-	flags = FPRINT | CONDUCT
+	flags = CONDUCT
 
 	var/valve_open = 0
 	var/release_pressure = ONE_ATMOSPHERE
+	var/release_flow_rate = ATMOS_DEFAULT_VOLUME_PUMP //in L/s
 
 	var/canister_color = "yellow"
 	var/can_label = 1
-	var/filled = 0.5
-	pressure_resistance = 7*ONE_ATMOSPHERE
+	start_pressure = 45 * ONE_ATMOSPHERE
+	pressure_resistance = 7 * ONE_ATMOSPHERE
 	var/temperature_resistance = 1000 + T0C
 	volume = 1000
 	use_power = 0
 	var/release_log = ""
 	var/update_flag = 0
 
+/obj/machinery/portable_atmospherics/canister/drain_power()
+	return -1
+
 /obj/machinery/portable_atmospherics/canister/sleeping_agent
 	name = "Canister: \[N2O\]"
 	icon_state = "redws"
 	canister_color = "redws"
 	can_label = 0
+
 /obj/machinery/portable_atmospherics/canister/nitrogen
 	name = "Canister: \[N2\]"
 	icon_state = "red"
 	canister_color = "red"
 	can_label = 0
+
 /obj/machinery/portable_atmospherics/canister/oxygen
 	name = "Canister: \[O2\]"
 	icon_state = "blue"
 	canister_color = "blue"
 	can_label = 0
+
 /obj/machinery/portable_atmospherics/canister/phoron
 	name = "Canister \[Phoron\]"
 	icon_state = "orange"
 	canister_color = "orange"
 	can_label = 0
+
 /obj/machinery/portable_atmospherics/canister/carbon_dioxide
 	name = "Canister \[CO2\]"
 	icon_state = "black"
 	canister_color = "black"
 	can_label = 0
+
 /obj/machinery/portable_atmospherics/canister/air
 	name = "Canister \[Air\]"
 	icon_state = "grey"
 	canister_color = "grey"
 	can_label = 0
+
 /obj/machinery/portable_atmospherics/canister/air/airlock
-	filled = 0.05
+	start_pressure = 3 * ONE_ATMOSPHERE
+
+/obj/machinery/portable_atmospherics/canister/empty/
+	start_pressure = 0
+	can_label = 1
+
 /obj/machinery/portable_atmospherics/canister/empty/oxygen
 	name = "Canister: \[O2\]"
 	icon_state = "blue"
@@ -161,21 +176,15 @@ update_flag
 			environment = loc.return_air()
 
 		var/env_pressure = environment.return_pressure()
-		var/pressure_delta = min(release_pressure - env_pressure, (air_contents.return_pressure() - env_pressure)/2)
-		//Can not have a pressure delta that would cause environment pressure > tank pressure
+		var/pressure_delta = release_pressure - env_pressure
 
-		var/transfer_moles = 0
 		if((air_contents.temperature > 0) && (pressure_delta > 0))
-			transfer_moles = pressure_delta*environment.volume/(air_contents.temperature * R_IDEAL_GAS_EQUATION)
+			var/transfer_moles = calculate_transfer_moles(air_contents, environment, pressure_delta)
+			transfer_moles = min(transfer_moles, (release_flow_rate/air_contents.volume)*air_contents.total_moles) //flow rate limit
 
-			//Actually transfer the gas
-			var/datum/gas_mixture/removed = air_contents.remove(transfer_moles)
-
-			if(holding)
-				environment.merge(removed)
-			else
-				loc.assume_air(removed)
-			src.update_icon()
+			var/returnval = pump_gas_passive(src, air_contents, environment, transfer_moles)
+			if(returnval >= 0)
+				src.update_icon()
 
 	if(air_contents.return_pressure() < 1)
 		can_label = 1
@@ -242,9 +251,6 @@ update_flag
 	nanomanager.update_uis(src) // Update all NanoUIs attached to src
 
 /obj/machinery/portable_atmospherics/canister/attack_ai(var/mob/user as mob)
-	return src.attack_hand(user)
-
-/obj/machinery/portable_atmospherics/canister/attack_paw(var/mob/user as mob)
 	return src.attack_hand(user)
 
 /obj/machinery/portable_atmospherics/canister/attack_hand(var/mob/user as mob)
@@ -347,28 +353,23 @@ update_flag
 	return 1
 
 /obj/machinery/portable_atmospherics/canister/phoron/New()
-
 	..()
 
-	src.air_contents.adjust_gas("phoron", (src.maximum_pressure*filled)*air_contents.volume/(R_IDEAL_GAS_EQUATION*air_contents.temperature))
-
+	src.air_contents.adjust_gas("phoron", MolesForPressure())
 	src.update_icon()
 	return 1
 
 /obj/machinery/portable_atmospherics/canister/oxygen/New()
-
 	..()
 
-	src.air_contents.adjust_gas("oxygen", (src.maximum_pressure*filled)*air_contents.volume/(R_IDEAL_GAS_EQUATION*air_contents.temperature))
+	src.air_contents.adjust_gas("oxygen", MolesForPressure())
 	src.update_icon()
 	return 1
 
 /obj/machinery/portable_atmospherics/canister/sleeping_agent/New()
-
 	..()
 
-	air_contents.adjust_gas("sleeping_agent", (src.maximum_pressure*filled)*air_contents.volume/(R_IDEAL_GAS_EQUATION*air_contents.temperature))
-
+	air_contents.adjust_gas("sleeping_agent", MolesForPressure())
 	src.update_icon()
 	return 1
 
@@ -389,22 +390,21 @@ update_flag
 
 	..()
 
-	src.air_contents.adjust_gas("nitrogen", (src.maximum_pressure*filled)*air_contents.volume/(R_IDEAL_GAS_EQUATION*air_contents.temperature))
-
+	src.air_contents.adjust_gas("nitrogen", MolesForPressure())
 	src.update_icon()
 	return 1
 
 /obj/machinery/portable_atmospherics/canister/carbon_dioxide/New()
-
 	..()
-	src.air_contents.adjust_gas("carbon_dioxide", (src.maximum_pressure*filled)*air_contents.volume/(R_IDEAL_GAS_EQUATION*air_contents.temperature))
+	src.air_contents.adjust_gas("carbon_dioxide", MolesForPressure())
+	src.update_icon()
 	return 1
 
 
 /obj/machinery/portable_atmospherics/canister/air/New()
-
 	..()
-	src.air_contents.adjust_multi("oxygen", (O2STANDARD*src.maximum_pressure*filled)*air_contents.volume/(R_IDEAL_GAS_EQUATION*air_contents.temperature), "nitrogen", (N2STANDARD*src.maximum_pressure*filled)*air_contents.volume/(R_IDEAL_GAS_EQUATION*air_contents.temperature))
+	var/list/air_mix = StandardAirMix()
+	src.air_contents.adjust_multi("oxygen", air_mix["oxygen"], "nitrogen", air_mix["nitrogen"])
 
 	src.update_icon()
 	return 1

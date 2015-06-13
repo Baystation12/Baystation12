@@ -13,12 +13,9 @@
 	var/max_grenades = 3
 	matter = list("metal" = 2000)
 
-	examine()
-		set src in view()
-		..()
-		if (!(usr in view(2)) && usr!=src.loc) return
-		usr << "\icon [src] Grenade launcher:"
-		usr << "\blue [grenades] / [max_grenades] Grenades."
+	examine(mob/user)
+		if(..(user, 2))
+			user << "\blue [grenades] / [max_grenades] Grenades."
 
 	attackby(obj/item/I as obj, mob/user as mob)
 

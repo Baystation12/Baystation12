@@ -30,7 +30,7 @@
 		if(!IsValidBiomassLoc(T))
 			continue
 		var/obj/effect/biomass/starting = new /obj/effect/biomass(T)
-		starting.dir = get_dir(src,starting)
+		starting.set_dir(get_dir(src,starting))
 		starting.originalRift = src
 		linkedBiomass += starting
 		spawn(1) //DEBUG
@@ -53,13 +53,13 @@
 			return
 		switch(dir)
 			if(NORTHWEST)
-				dir = NORTH
+				set_dir(NORTH)
 			if(NORTHEAST)
-				dir = EAST
+				set_dir(EAST)
 			if(SOUTHWEST)
-				dir = WEST
+				set_dir(WEST)
 			if(SOUTHEAST)
-				dir = SOUTH
+				set_dir(SOUTH)
 		sleep(spreadDelay)
 		Spread()
 
@@ -93,7 +93,7 @@
 	var/obj/effect/biomass/newBiomass = new /obj/effect/biomass(get_step(src,direction))
 	newBiomass.curDistance = curDistance + 1
 	newBiomass.maxDistance = maxDistance
-	newBiomass.dir = direction
+	newBiomass.set_dir(direction)
 	newBiomass.originalRift = originalRift
 	newBiomass.icon_state = "[originalRift.newicon]" //DEBUG
 	originalRift.linkedBiomass += newBiomass
@@ -110,7 +110,7 @@
 		if(!IsValidBiomassLoc(T,src))
 			continue
 		var/obj/effect/biomass/starting = new /obj/effect/biomass(T)
-		starting.dir = get_dir(src,starting)
+		starting.set_dir(get_dir(src,starting))
 		starting.maxDistance = maxDistance
 
 /proc/IsValidBiomassLoc(turf/location,obj/effect/biomass/source = null)

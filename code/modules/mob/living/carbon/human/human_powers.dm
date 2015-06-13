@@ -98,14 +98,14 @@
 	T.Weaken(5)
 
 	//Only official cool kids get the grab and no self-prone.
-	if(src.mind && src.mind.special_role)
+	if(!(src.mind && src.mind.special_role))
 		src.Weaken(5)
 		return
 
 	var/use_hand = "left"
 	if(l_hand)
 		if(r_hand)
-			src << "\red You need to have one hand free to grab someone."
+			src << "<span class='danger'>You need to have one hand free to grab someone.</span>"
 			return
 		else
 			use_hand = "right"
@@ -175,7 +175,7 @@
 
 	text = input("What would you like to say?", "Speak to creature", null, null)
 
-	text = trim(copytext(sanitize(text), 1, MAX_MESSAGE_LEN))
+	text = trim(sanitize(copytext(text, 1, MAX_MESSAGE_LEN)))
 
 	if(!text) return
 
@@ -213,7 +213,7 @@
 	set desc = "Whisper silently to someone over a distance."
 	set category = "Abilities"
 
-	var/msg = sanitize(input("Message:", "Psychic Whisper") as text|null)
+	var/msg = sanitize(copytext(input("Message:", "Psychic Whisper") as text|null, 1, MAX_MESSAGE_LEN))
 	if(msg)
 		log_say("PsychicWhisper: [key_name(src)]->[M.key] : [msg]")
 		M << "\green You hear a strange, alien voice in your head... \italic [msg]"

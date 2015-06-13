@@ -59,7 +59,8 @@
 
 				//Do 175 damage divided by the number of damage types applied.
 				if(damagetype & BRUTELOSS)
-					adjustBruteLoss(175/damage_mod)
+					adjustBruteLoss(30/damage_mod)	//hack to prevent gibbing
+					adjustOxyLoss(145/damage_mod)
 
 				if(damagetype & FIRELOSS)
 					adjustFireLoss(175/damage_mod)

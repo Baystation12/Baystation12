@@ -5,10 +5,10 @@
 	level = 1
 
 	name = "Gas filter"
-	
+
 	use_power = 1
 	idle_power_usage = 150		//internal circuitry, friction losses and stuff
-	active_power_usage = 7500	//This also doubles as a measure of how powerful the filter is, in Watts. 7500 W ~ 10 HP
+	power_rating = 7500	//This also doubles as a measure of how powerful the filter is, in Watts. 7500 W ~ 10 HP
 
 	var/temp = null // -- TLE
 
@@ -49,11 +49,11 @@
 			filtered_out = list("carbon_dioxide")
 		if(4)//removing N2O
 			filtered_out = list("sleeping_agent")
-	
+
 	air1.volume = ATMOS_DEFAULT_VOLUME_FILTER
 	air2.volume = ATMOS_DEFAULT_VOLUME_FILTER
 	air3.volume = ATMOS_DEFAULT_VOLUME_FILTER
-	
+
 	if(radio_controller)
 		initialize()
 
@@ -66,10 +66,10 @@
 	if(!powered())
 		icon_state += "off"
 	else if(node2 && node3 && node1)
-		icon_state += on ? "on" : "off"
+		icon_state += use_power ? "on" : "off"
 	else
 		icon_state += "off"
-		on = 0
+		use_power = 0
 
 /obj/machinery/atmospherics/trinary/filter/update_underlays()
 	if(..())
@@ -98,18 +98,20 @@
 
 /obj/machinery/atmospherics/trinary/filter/process()
 	..()
-	if((stat & (NOPOWER|BROKEN)) || !on)
-		update_use_power(0)	//usually we get here because a player turned a pump off - definitely want to update.
-		last_flow_rate = 0
-		return
 	
+	last_power_draw = 0
+	last_flow_rate = 0
+	
+	if((stat & (NOPOWER|BROKEN)) || !use_power)
+		return
+
 	//Figure out the amount of moles to transfer
 	var/transfer_moles = (set_flow_rate/air1.volume)*air1.total_moles
-	
+
 	var/power_draw = -1
 	if (transfer_moles > MINUMUM_MOLES_TO_FILTER)
-		power_draw = filter_gas(src, filtered_out, air1, air2, air3, transfer_moles, active_power_usage)
-		
+		power_draw = filter_gas(src, filtered_out, air1, air2, air3, transfer_moles, power_rating)
+
 		if(network2)
 			network2.update = 1
 
@@ -119,13 +121,10 @@
 		if(network1)
 			network1.update = 1
 
-	if (power_draw < 0)
-		//update_use_power(0)
-		use_power = 0	//don't force update - easier on CPU
-		last_flow_rate = 0
-	else
-		handle_power_draw(power_draw)
-	
+	if (power_draw >= 0)
+		last_power_draw = power_draw
+		use_power(power_draw)
+
 	return 1
 
 /obj/machinery/atmospherics/trinary/filter/initialize()
@@ -179,7 +178,7 @@
 			current_filter_type = "ERROR - Report this bug to the admin, please!"
 
 	dat += {"
-			<b>Power: </b><a href='?src=\ref[src];power=1'>[on?"On":"Off"]</a><br>
+			<b>Power: </b><a href='?src=\ref[src];power=1'>[use_power?"On":"Off"]</a><br>
 			<b>Filtering: </b>[current_filter_type]<br><HR>
 			<h4>Set Filter Type:</h4>
 			<A href='?src=\ref[src];filterset=0'>Phoron</A><BR>
@@ -193,16 +192,7 @@
 			[src.set_flow_rate]L/s | <a href='?src=\ref[src];set_flow_rate=1'>Change</a><BR>
 			<B>Flow rate: </B>[round(last_flow_rate, 0.1)]L/s
 			"}
-/*
-		user << browse("<HEAD><TITLE>[src.name] control</TITLE></HEAD>[dat]","window=atmo_filter")
-		onclose(user, "atmo_filter")
-		return
 
-	if (src.temp)
-		dat = text("<TT>[]</TT><BR><BR><A href='?src=\ref[];temp=1'>Clear Screen</A>", src.temp, src)
-	//else
-	//	src.on != src.on
-*/
 	user << browse("<HEAD><TITLE>[src.name] control</TITLE></HEAD><TT>[dat]</TT>", "window=atmo_filter")
 	onclose(user, "atmo_filter")
 	return
@@ -214,7 +204,7 @@
 	src.add_fingerprint(usr)
 	if(href_list["filterset"])
 		filter_type = text2num(href_list["filterset"])
-		
+
 		filtered_out.Cut()	//no need to create new lists unnecessarily
 		switch(filter_type)
 			if(0) //removing hydrocarbons
@@ -228,14 +218,14 @@
 				filtered_out += "carbon_dioxide"
 			if(4)//removing N2O
 				filtered_out += "sleeping_agent"
-		
+
 	if (href_list["temp"])
 		src.temp = null
 	if(href_list["set_flow_rate"])
 		var/new_flow_rate = input(usr,"Enter new flow rate (0-[air1.volume]L/s)","Flow Rate Control",src.set_flow_rate) as num
 		src.set_flow_rate = max(0, min(air1.volume, new_flow_rate))
 	if(href_list["power"])
-		on=!on
+		use_power=!use_power
 	src.update_icon()
 	src.updateUsrDialog()
 /*

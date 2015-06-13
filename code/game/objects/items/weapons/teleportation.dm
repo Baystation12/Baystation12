@@ -16,7 +16,7 @@
 	var/frequency = 1451
 	var/broadcasting = null
 	var/listening = 1.0
-	flags = FPRINT | TABLEPASS| CONDUCT
+	flags = CONDUCT
 	w_class = 2.0
 	item_state = "electronic"
 	throw_speed = 4
@@ -172,5 +172,3 @@ Frequency:
 	P.creator = src
 	src.add_fingerprint(user)
 	return
-
-

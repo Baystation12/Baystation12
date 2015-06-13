@@ -2,7 +2,7 @@
 /mob/living/carbon/human/updatehealth()
 
 	if(status_flags & GODMODE)
-		health = species.total_health
+		health = maxHealth
 		stat = CONSCIOUS
 		return
 	var/total_burn	= 0
@@ -15,10 +15,10 @@
 	var/tox_l = ((species.flags & NO_POISON) ? 0 : getToxLoss())
 	var/clone_l = getCloneLoss()
 
-	health = species.total_health - oxy_l - tox_l - clone_l - total_burn - total_brute
+	health = maxHealth - oxy_l - tox_l - clone_l - total_burn - total_brute
 
 	//TODO: fix husking
-	if( ((species.total_health - total_burn) < config.health_threshold_dead) && stat == DEAD)
+	if( ((maxHealth - total_burn) < config.health_threshold_dead) && stat == DEAD)
 		ChangeToHusk()
 	return
 
@@ -57,7 +57,10 @@
 
 	if(species && species.has_organ["brain"])
 		var/datum/organ/internal/brain/sponge = internal_organs_by_name["brain"]
-		brainloss = min(sponge.damage,maxHealth*2)
+		if(sponge)
+			brainloss = min(sponge.damage,maxHealth*2)
+		else
+			brainloss = 200
 	else
 		brainloss = 0
 	return brainloss
@@ -355,12 +358,11 @@ This function restores all organs.
 			if ((damage > 25 && prob(20)) || (damage > 50 && prob(60)))
 				emote("scream")
 
-
 		..(damage, damagetype, def_zone, blocked)
 		return 1
 
 	//Handle BRUTE and BURN damage
-	handle_suit_punctures(damagetype, damage)
+	handle_suit_punctures(damagetype, damage, def_zone)
 
 	if(blocked >= 2)	return 0
 

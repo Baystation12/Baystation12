@@ -110,8 +110,8 @@
 	*/
 	return
 
-
-/atom/movable/Move(NewLoc, direct)
+//This proc should never be overridden elsewhere at /atom/movable to keep directions sane.
+/atom/movable/Move(newloc, direct)
 	if (direct & (direct - 1))
 		if (direct & 1)
 			if (direct & 4)
@@ -143,9 +143,20 @@
 							if (step(src, WEST))
 								step(src, SOUTH)
 	else
-		. = ..()
-	return
+		var/atom/A = src.loc
 
+		var/olddir = dir //we can't override this without sacrificing the rest of movable/New()
+		. = ..()
+		if(direct != olddir)
+			dir = olddir
+			set_dir(direct)
+
+		src.move_speed = world.time - src.l_move_time
+		src.l_move_time = world.time
+		src.m_flag = 1
+		if ((A != src.loc && A && A.z == src.z))
+			src.last_move = get_dir(A, src.loc)
+	return
 
 /client/proc/Move_object(direct)
 	if(mob && mob.control_object)
@@ -251,12 +262,19 @@
 				move_delay += 7+config.walk_speed
 		move_delay += mob.movement_delay()
 
+		var/tickcomp = 0 //moved this out here so we can use it for vehicles
 		if(config.Tickcomp)
-			move_delay -= 1.3
-			var/tickcomp = ((1/(world.tick_lag))*1.3)
+			// move_delay -= 1.3 //~added to the tickcomp calculation below
+			tickcomp = ((1/(world.tick_lag))*1.3) - 1.3
 			move_delay = move_delay + tickcomp
 
 		if(istype(mob.buckled, /obj/vehicle))
+			//manually set move_delay for vehicles so we don't inherit any mob movement penalties
+			//specific vehicle move delays are set in code\modules\vehicles\vehicle.dm
+			move_delay = world.time + tickcomp
+			//drunk driving
+			if(mob.confused)
+				direct = pick(cardinal)
 			return mob.buckled.relaymove(mob,direct)
 
 		if(istype(mob.machine, /obj/machinery))
@@ -275,6 +293,9 @@
 					var/datum/organ/external/r_hand = driver.get_organ("r_hand")
 					if((!l_hand || (l_hand.status & ORGAN_DESTROYED)) && (!r_hand || (r_hand.status & ORGAN_DESTROYED)))
 						return // No hands to drive your chair? Tough luck!
+				//drunk wheelchair driving
+				if(mob.confused)
+					direct = pick(cardinal)
 				move_delay += 2
 				return mob.buckled.relaymove(mob,direct)
 

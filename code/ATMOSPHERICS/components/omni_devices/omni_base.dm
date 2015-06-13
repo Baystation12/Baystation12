@@ -9,7 +9,6 @@
 	initialize_directions = 0
 	level = 1
 
-	var/on = 0
 	var/configuring = 0
 	//var/target_pressure = ONE_ATMOSPHERE	//a base type as abstract as this should NOT be making these kinds of assumptions
 
@@ -53,7 +52,7 @@
 	else if(error_check())
 		overlays = overlays_error
 	else
-		overlays = on ? (overlays_on) : (overlays_off)
+		overlays = use_power ? (overlays_on) : (overlays_off)
 
 	underlays = underlays_current
 
@@ -63,12 +62,13 @@
 	return
 
 /obj/machinery/atmospherics/omni/process()
-	if(error_check())
-		on = 0
+	last_power_draw = 0
+	last_flow_rate = 0
 
-	if((stat & (NOPOWER|BROKEN)) || !on)
-		update_use_power(0)	//usually we get here because a player turned a pump off - definitely want to update.
-		last_flow_rate = 0
+	if(error_check())
+		use_power = 0
+
+	if((stat & (NOPOWER|BROKEN)) || !use_power)
 		return 0
 	return 1
 
@@ -248,10 +248,7 @@
 			continue
 		for(var/obj/machinery/atmospherics/target in get_step(src, P.dir))
 			if(target.initialize_directions & get_dir(target,src))
-				var/c = check_connect_types(target,src)
-				if (c)
-					target.connected_to = c
-					src.connected_to = c
+				if (check_connect_types(target,src))
 					P.node = target
 					break
 

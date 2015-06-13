@@ -11,7 +11,7 @@ var/prison_shuttle_time = 0
 var/prison_shuttle_timeleft = 0
 
 /obj/machinery/computer/prison_shuttle
-	name = "Prison Shuttle Console"
+	name = "prison shuttle control console"
 	icon = 'icons/obj/computer.dmi'
 	icon_state = "shuttle"
 	req_access = list(access_security)
@@ -21,18 +21,8 @@ var/prison_shuttle_timeleft = 0
 	var/allowedtocall = 0
 	var/prison_break = 0
 
-
-	attackby(I as obj, user as mob)
-		return src.attack_hand(user)
-
-
 	attack_ai(var/mob/user as mob)
 		return src.attack_hand(user)
-
-
-	attack_paw(var/mob/user as mob)
-		return src.attack_hand(user)
-
 
 	attackby(I as obj, user as mob)
 		if(istype(I, /obj/item/weapon/screwdriver))

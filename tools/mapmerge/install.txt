@@ -14,4 +14,6 @@ The easiest way to do merging is to install the merge driver. For this, open `Ba
 	name = mapmerge driver
 	driver = ./tools/mapmerge/mapmerge.sh %O %A %B
 
+You may optionally instead run git_merge_installer.bat or git_merge_installer.sh which should automatically insert these lines for you at the appropriate location.
+    
 After this, merging maps should happen automagically unless there are conflicts(a tile that both you and someone else changed). If there are conflicts, you will unfortunately still be stuck with opening both versions in a map editor, and manually resolving the issues.

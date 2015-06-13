@@ -59,7 +59,7 @@
 			src.sight |= SEE_MOBS
 			src.sight |= SEE_OBJS
 			src.see_in_dark = 8
-			src.see_invisible = SEE_INVISIBLE_LEVEL_TWO
+			src.see_invisible = SEE_INVISIBLE_LIVING
 
 
 			//Congratulations!  You've found a way for AI's to run without using power!
@@ -166,7 +166,9 @@
 									src << "Receiving control information from APC."
 									sleep(2)
 									//bring up APC dialog
+									apc_override = 1
 									theAPC.attack_ai(src)
+									apc_override = 0
 									src:aiRestorePowerRoutine = 3
 									src << "Here are your current laws:"
 									src.show_laws()

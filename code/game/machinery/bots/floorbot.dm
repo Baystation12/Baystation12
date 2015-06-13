@@ -9,7 +9,6 @@
 	throw_speed = 2
 	throw_range = 5
 	w_class = 3.0
-	flags = TABLEPASS
 	var/created_name = "Floorbot"
 
 /obj/item/weapon/toolbox_tiles_sensor
@@ -22,7 +21,6 @@
 	throw_speed = 2
 	throw_range = 5
 	w_class = 3.0
-	flags = TABLEPASS
 	var/created_name = "Floorbot"
 
 //Floorbot
@@ -228,7 +226,7 @@
 	if((!src.target || src.target == null) && emagged == 2)
 		if(!src.target || src.target == null)
 			for (var/turf/simulated/floor/D in view(7,src))
-				if(!(D in floorbottargets) && D != src.oldtarget && D.floor_tile)
+				if(!(D in floorbottargets) && D != src.oldtarget && D.floor_type)
 					src.oldtarget = D
 					src.target = D
 					break

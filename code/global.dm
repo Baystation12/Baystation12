@@ -1,18 +1,19 @@
 //#define TESTING
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:31
 
+//items that ask to be called every cycle
 var/global/obj/effect/datacore/data_core = null
-
-
-var/global/list/active_areas = list()
 var/global/list/all_areas = list()
 var/global/list/machines = list()
 var/global/list/processing_objects = list()
 var/global/list/active_diseases = list()
-var/global/list/events = list()
 var/global/list/med_hud_users = list() //list of all entities using a medical HUD.
 var/global/list/sec_hud_users = list() //list of all entities using a security HUD.
-		//items that ask to be called every cycle
+
+//Those networks can only be accessed by preexisting terminals. AIs and new terminals can't use them.
+var/list/restricted_camera_networks = list("thunder","ERT","NUKE")
+
+var/global/list/global_mutations = list() // list of hidden mutation things
 
 var/global/defer_powernet_rebuild = 0		// true if net rebuild will be called manually after an event
 
@@ -26,9 +27,11 @@ var/global/list/global_map = null
 	//4 - Derelict
 	//3 - AI satellite
 	//5 - empty space
-
-
 	//////////////
+
+//Noises made when hit while typing.
+var/list/hit_appends = list("-OOF", "-ACK", "-UGH", "-HRNK", "-HURGH", "-GLORF")
+
 var/list/paper_tag_whitelist = list("center","p","div","span","h1","h2","h3","h4","h5","h6","hr","pre",	\
 	"big","small","font","i","u","b","s","sub","sup","tt","br","hr","ol","ul","li","caption","col",	\
 	"table","td","th","tr")
@@ -36,6 +39,8 @@ var/list/paper_blacklist = list("java","onblur","onchange","onclick","ondblclick
 	"onkeypress","onkeyup","onload","onmousedown","onmousemove","onmouseout","onmouseover",	\
 	"onmouseup","onreset","onselect","onsubmit","onunload")
 
+// The way blocks are handled badly needs a rewrite, this is horrible.
+// Too much of a project to handle at the moment, TODO for later.
 var/BLINDBLOCK = 0
 var/DEAFBLOCK = 0
 var/HULKBLOCK = 0
@@ -76,33 +81,19 @@ var/blobevent = 0
 	///////////////
 
 var/diary = null
-var/diaryofmeanpeople = null
 var/href_logfile = null
 var/station_name = "Hypatia Station"
 var/game_version = "Hypatia"
 var/changelog_hash = ""
 var/game_year = (text2num(time2text(world.realtime, "YYYY")) + 544)
 
-var/datum/air_tunnel/air_tunnel1/SS13_airtunnel = null
 var/going = 1.0
 var/master_mode = "extended"//"extended"
 var/secret_force_mode = "secret" // if this is anything but "secret", the secret rotation will forceably choose this mode
 
-var/datum/engine_eject/engine_eject_control = null
 var/host = null
-var/aliens_allowed = 0
-var/ooc_allowed = 1
-var/dsay_allowed = 1
-var/dooc_allowed = 1
-var/traitor_scaling = 1
-//var/goonsay_allowed = 0
-var/dna_ident = 1
-var/abandon_allowed = 1
-var/enter_allowed = 1
-var/guests_allowed = 1
 var/shuttle_frozen = 0
 var/shuttle_left = 0
-var/tinted_weldhelh = 1
 
 var/list/jobMax = list()
 var/list/bombers = list(  )
@@ -130,10 +121,11 @@ var/list/newplayer_start = list()
 var/list/latejoin = list()
 var/list/latejoin_gateway = list()
 var/list/latejoin_cryo = list()
+var/list/latejoin_cyborg = list()
 
 var/list/prisonwarp = list()	//prisoners go to these
 var/list/holdingfacility = list()	//captured people go here
-var/list/xeno_spawn = list()//Aliens spawn at these.
+var/list/xeno_spawn = list()//Aliens spawn at ahahthese.
 //	list/mazewarp = list()
 var/list/tdome1 = list()
 var/list/tdome2 = list()
@@ -179,66 +171,28 @@ var/forceblob = 0
 // nanomanager, the manager for Nano UIs
 var/datum/nanomanager/nanomanager = new()
 
-	//airlockWireColorToIndex takes a number representing the wire color, e.g. the orange wire is always 1, the dark red wire is always 2, etc. It returns the index for whatever that wire does.
-	//airlockIndexToWireColor does the opposite thing - it takes the index for what the wire does, for example AIRLOCK_WIRE_IDSCAN is 1, AIRLOCK_WIRE_POWER1 is 2, etc. It returns the wire color number.
-	//airlockWireColorToFlag takes the wire color number and returns the flag for it (1, 2, 4, 8, 16, etc)
-var/list/globalAirlockWireColorToFlag = RandomAirlockWires()
-var/list/globalAirlockIndexToFlag
-var/list/globalAirlockIndexToWireColor
-var/list/globalAirlockWireColorToIndex
-var/list/APCWireColorToFlag = RandomAPCWires()
-var/list/APCIndexToFlag
-var/list/APCIndexToWireColor
-var/list/APCWireColorToIndex
-var/list/BorgWireColorToFlag = RandomBorgWires()
-var/list/BorgIndexToFlag
-var/list/BorgIndexToWireColor
-var/list/BorgWireColorToIndex
-var/list/AAlarmWireColorToFlag = RandomAAlarmWires()
-var/list/AAlarmIndexToFlag
-var/list/AAlarmIndexToWireColor
-var/list/AAlarmWireColorToIndex
+// event manager, the manager for events
+var/datum/event_manager/event_manager = new()
 
-#define SPEED_OF_LIGHT 3e8 //not exact but hey!
-#define SPEED_OF_LIGHT_SQ 9e+16
-#define FIRE_DAMAGE_MODIFIER 0.0215 //Higher values result in more external fire damage to the skin (default 0.0215)
-#define AIR_DAMAGE_MODIFIER 2.025 //More means less damage from hot air scalding lungs, less = more damage. (default 2.025)
-#define INFINITY 1.#INF
-
-	//Don't set this very much higher then 1024 unless you like inviting people in to dos your server with message spam
-#define MAX_MESSAGE_LEN 1024
-#define MAX_PAPER_MESSAGE_LEN 3072
-#define MAX_BOOK_MESSAGE_LEN 9216
-#define MAX_NAME_LEN 26
-
-#define shuttle_time_in_station 1800 // 3 minutes in the station
-#define shuttle_time_to_arrive 6000 // 10 minutes to arrive
-
-	//away missions
+//away missions
 var/list/awaydestinations = list()	//a list of landmarks that the warpgate can take you to
 
-	// MySQL configuration
-
+// MySQL configuration
 var/sqladdress = "localhost"
 var/sqlport = "3306"
 var/sqldb = "tgstation"
 var/sqllogin = "root"
 var/sqlpass = ""
 
-	// Feedback gathering sql connection
-
+// Feedback gathering sql connection
 var/sqlfdbkdb = "test"
 var/sqlfdbklogin = "root"
 var/sqlfdbkpass = ""
-
 var/sqllogging = 0 // Should we log deaths, population stats, etc?
 
-
-
-	// Forum MySQL configuration (for use with forum account/key authentication)
-	// These are all default values that will load should the forumdbconfig.txt
-	// file fail to read for whatever reason.
-
+// Forum MySQL configuration (for use with forum account/key authentication)
+// These are all default values that will load should the forumdbconfig.txt
+// file fail to read for whatever reason.
 var/forumsqladdress = "localhost"
 var/forumsqlport = "3306"
 var/forumsqldb = "tgstation"
@@ -247,8 +201,8 @@ var/forumsqlpass = ""
 var/forum_activated_group = "2"
 var/forum_authenticated_group = "10"
 
-	// For FTP requests. (i.e. downloading runtime logs.)
-	// However it'd be ok to use for accessing attack logs and such too, which are even laggier.
+// For FTP requests. (i.e. downloading runtime logs.)
+// However it'd be ok to use for accessing attack logs and such too, which are even laggier.
 var/fileaccess_timer = 0
 var/custom_event_msg = null
 
@@ -262,3 +216,18 @@ var/DBConnection/dbcon_old = new()	//Tgstation database (Old database) - See the
 
 //added for Xenoarchaeology, might be useful for other stuff
 var/global/list/alphabet_uppercase = list("A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z")
+
+// Chemistry lists.
+var/list/tachycardics = list("coffee", "inaprovaline", "hyperzine", "nitroglycerin", "thirteenloko", "nicotine")	//increase heart rate
+var/list/bradycardics = list("neurotoxin", "cryoxadone", "clonexadone", "space_drugs", "stoxin")					//decrease heart rate
+var/list/heartstopper = list("potassium_phorochloride", "zombie_powder") //this stops the heart
+var/list/cheartstopper = list("potassium_chloride") //this stops the heart when overdose is met -- c = conditional
+
+//Used by robots and robot preferences.
+var/list/robot_module_types = list("Standard", "Engineering", "Construction", "Surgeon", "Crisis", "Miner", "Janitor", "Service", "Clerical", "Security")
+
+// Some scary sounds.
+var/static/list/scarySounds = list('sound/weapons/thudswoosh.ogg','sound/weapons/Taser.ogg','sound/weapons/armbomb.ogg','sound/voice/hiss1.ogg','sound/voice/hiss2.ogg','sound/voice/hiss3.ogg','sound/voice/hiss4.ogg','sound/voice/hiss5.ogg','sound/voice/hiss6.ogg','sound/effects/Glassbr1.ogg','sound/effects/Glassbr2.ogg','sound/effects/Glassbr3.ogg','sound/items/Welder.ogg','sound/items/Welder2.ogg','sound/machines/airlock.ogg','sound/effects/clownstep1.ogg','sound/effects/clownstep2.ogg')
+
+// Bomb cap!
+var/max_explosion_range = 14

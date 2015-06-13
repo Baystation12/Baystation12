@@ -1,8 +1,11 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:31
 
+/proc/invalidateCameraCache()
+	for(var/obj/machinery/computer/security/s in world)
+		s.camera_cache = null
 
 /obj/machinery/computer/security
-	name = "Security Cameras"
+	name = "security camera monitor"
 	desc = "Used to access the various cameras on the station."
 	icon_state = "cameras"
 	var/obj/machinery/camera/current = null
@@ -10,15 +13,11 @@
 	var/list/network = list("SS13")
 	var/mapping = 0//For the overview file, interesting bit of code.
 	circuit = /obj/item/weapon/circuitboard/security
+	var/camera_cache = null
 
 
 	attack_ai(var/mob/user as mob)
 		return attack_hand(user)
-
-
-	attack_paw(var/mob/user as mob)
-		return attack_hand(user)
-
 
 	check_eye(var/mob/user as mob)
 		if (user.stat || ((get_dist(user, src) > 1 || !( user.canmove ) || user.blinded) && !istype(user, /mob/living/silicon))) //user can't see - not sure why canmove is here.
@@ -28,6 +27,86 @@
 		user.reset_view(current)
 		return 1
 
+	ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
+		if(src.z > 6) return
+		if(stat & (NOPOWER|BROKEN)) return
+		if(user.stat) return
+
+		var/data[0]
+
+		data["current"] = null
+
+		if(isnull(camera_cache))
+			cameranet.process_sort()
+
+			var/cameras[0]
+			for(var/obj/machinery/camera/C in cameranet.cameras)
+				if(!can_access_camera(C))
+					continue
+
+				var/cam[0]
+				cam["name"] = sanitize(C.c_tag)
+				cam["deact"] = !C.can_use()
+				cam["camera"] = "\ref[C]"
+				cam["x"] = C.x
+				cam["y"] = C.y
+				cam["z"] = C.z
+
+				cameras[++cameras.len] = cam
+
+				if(C == current)
+					data["current"] = cam
+
+				var/list/camera_list = list("cameras" = cameras)
+				camera_cache=list2json(camera_list)
+
+		else
+			if(current)
+				var/cam[0]
+				cam["name"] = current.c_tag
+				cam["deact"] = !current.can_use()
+				cam["camera"] = "\ref[current]"
+				cam["x"] = current.x
+				cam["y"] = current.y
+				cam["z"] = current.z
+
+				data["current"] = cam
+
+
+		if(ui)
+			ui.load_cached_data(camera_cache)
+
+		ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+		if (!ui)
+			ui = new(user, src, ui_key, "sec_camera.tmpl", "Camera Console", 900, 800)
+
+			// adding a template with the key "mapContent" enables the map ui functionality
+			ui.add_template("mapContent", "sec_camera_map_content.tmpl")
+			// adding a template with the key "mapHeader" replaces the map header content
+			ui.add_template("mapHeader", "sec_camera_map_header.tmpl")
+
+			ui.load_cached_data(camera_cache)
+			ui.set_initial_data(data)
+			ui.open()
+			ui.set_auto_update(1)
+
+	Topic(href, href_list)
+		if(href_list["switchTo"])
+			if(src.z>6 || stat&(NOPOWER|BROKEN)) return
+			if(usr.stat || ((get_dist(usr, src) > 1 || !( usr.canmove ) || usr.blinded) && !istype(usr, /mob/living/silicon))) return
+			var/obj/machinery/camera/C = locate(href_list["switchTo"]) in cameranet.cameras
+			if(!C) return
+
+			switch_to_camera(usr, C)
+			return 1
+		else if(href_list["reset"])
+			if(src.z>6 || stat&(NOPOWER|BROKEN)) return
+			if(usr.stat || ((get_dist(usr, src) > 1 || !( usr.canmove ) || usr.blinded) && !istype(usr, /mob/living/silicon))) return
+			current = null
+			usr.check_eye(current)
+			return 1
+		else
+			. = ..()
 
 	attack_hand(var/mob/user as mob)
 		if (src.z > 6)
@@ -37,35 +116,7 @@
 
 		if(!isAI(user))
 			user.set_machine(src)
-
-		var/list/L = list()
-		for (var/obj/machinery/camera/C in cameranet.cameras)
-			L.Add(C)
-
-		camera_sort(L)
-
-		var/list/D = list()
-		D["Cancel"] = "Cancel"
-		for(var/obj/machinery/camera/C in L)
-			if(can_access_camera(C))
-				D[text("[][]", C.c_tag, (C.can_use() ? null : " (Deactivated)"))] = C
-
-		var/t = input(user, "Which camera should you change to?") as null|anything in D
-		if(!t)
-			user.unset_machine()
-			return 0
-
-		var/obj/machinery/camera/C = D[t]
-
-		if(t == "Cancel")
-			user.unset_machine()
-			return 0
-
-		if(C)
-			switch_to_camera(user, C)
-			spawn(5)
-				attack_hand(user)
-		return
+		ui_interact(user)
 
 	proc/can_access_camera(var/obj/machinery/camera/C)
 		var/list/shared_networks = src.network & C.network
@@ -84,6 +135,7 @@
 		if (!C.can_use() || user.stat || (get_dist(user, src) > 1 || user.machine != src || user.blinded || !( user.canmove ) && !istype(user, /mob/living/silicon)))
 			return 0
 		src.current = C
+		check_eye(user)
 		use_power(50)
 		return 1
 
@@ -156,28 +208,28 @@
 	circuit = null
 
 /obj/machinery/computer/security/wooden_tv
-	name = "Security Cameras"
+	name = "security camera monitor"
 	desc = "An old TV hooked into the stations camera network."
 	icon_state = "security_det"
 	circuit = null
 
 
 /obj/machinery/computer/security/mining
-	name = "Outpost Cameras"
+	name = "outpost camera monitor"
 	desc = "Used to access the various cameras on the outpost."
 	icon_state = "miningcameras"
 	network = list("MINE")
 	circuit = /obj/item/weapon/circuitboard/security/mining
 
 /obj/machinery/computer/security/engineering
-	name = "Engineering Cameras"
+	name = "engineering camera monitor"
 	desc = "Used to monitor fires and breaches."
 	icon_state = "engineeringcameras"
 	network = list("Engineering","Power Alarms","Atmosphere Alarms","Fire Alarms")
 	circuit = /obj/item/weapon/circuitboard/security/engineering
 
 /obj/machinery/computer/security/nuclear
-	name = "Mission Monitor"
+	name = "head mounted camera monitor"
 	desc = "Used to access the built-in cameras in helmets."
 	icon_state = "syndicam"
 	network = list("NUKE")

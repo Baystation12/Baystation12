@@ -19,16 +19,12 @@
 	var/all_brigged = 0
 	var/brigged_time = 0
 
-	uplink_welcome = "Syndicate Uplink Console:"
-	uplink_uses = 10
-
-
 /datum/game_mode/rp_revolution/announce()
 	world << "<B>The current game mode is - Revolution RP!</B>"
 
 /datum/game_mode/rp_revolution/send_intercept()
 	var/intercepttext = "<FONT size = 3><B>Cent. Com. Update</B> Requested staus information:</FONT><HR>"
-	intercepttext += "<B> Cent. Com has recently been contacted by the following syndicate affiliated organisations in your area, please investigate any information you may have:</B>"
+	intercepttext += "<B> Cent. Com has recently been contacted by the following subervsive or criminal-affiliated organisations in your area, please investigate any information you may have:</B>"
 
 	var/list/possible_modes = list()
 	possible_modes.Add("revolution", "wizard", "traitor", "malf")
@@ -95,7 +91,7 @@
 
 /datum/game_mode/rp_revolution/send_intercept()
 	var/intercepttext = "<FONT size = 3><B>Cent. Com. Update</B> Requested staus information:</FONT><HR>"
-	intercepttext += "<B> Cent. Com has recently been contacted by the following syndicate affiliated organisations in your area, please investigate any information you may have:</B>"
+	intercepttext += "<B> Cent. Com has recently been contacted by the following subversive or criminal-affiliated organisations in your area, please investigate any information you may have:</B>"
 
 	var/list/possible_modes = list()
 	possible_modes.Add("revolution", "wizard", "nuke", "traitor", "malf")

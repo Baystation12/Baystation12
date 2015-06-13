@@ -3,7 +3,7 @@
 	desc = "A small electronic device that should never exist."
 	icon = 'icons/obj/assemblies/new_assemblies.dmi'
 	icon_state = ""
-	flags = FPRINT | TABLEPASS| CONDUCT
+	flags = CONDUCT
 	w_class = 2.0
 	matter = list("metal" = 100)
 	throwforce = 2
@@ -117,14 +117,13 @@
 		return
 
 
-	examine()
-		set src in view()
-		..()
-		if((in_range(src, usr) || loc == usr))
+	examine(mob/user)
+		..(user)
+		if((in_range(src, user) || loc == user))
 			if(secured)
-				usr << "\The [src] is ready!"
+				user << "\The [src] is ready!"
 			else
-				usr << "\The [src] can be attached!"
+				user << "\The [src] can be attached!"
 		return
 
 

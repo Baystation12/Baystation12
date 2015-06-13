@@ -19,10 +19,9 @@
 	create_reagents(100)
 
 
-/obj/structure/janitorialcart/examine()
-	set src in usr
-	usr << "[src] \icon[src] contains [reagents.total_volume] unit\s of liquid!"
-	..()
+/obj/structure/janitorialcart/examine(mob/user)
+	if(..(user, 1))
+		user << "[src] \icon[src] contains [reagents.total_volume] unit\s of liquid!"
 	//everything else is visible, so doesn't need to be mentioned
 
 
@@ -171,15 +170,17 @@
 
 
 /obj/structure/stool/bed/chair/janicart/New()
-	handle_rotation()
 	create_reagents(100)
+	update_layer()
 
 
-/obj/structure/stool/bed/chair/janicart/examine()
-	set src in usr
-	usr << "\icon[src] This [callme] contains [reagents.total_volume] unit\s of water!"
+/obj/structure/stool/bed/chair/janicart/examine(mob/user)
+	if(!..(user, 1))
+		return
+
+	user << "\icon[src] This [callme] contains [reagents.total_volume] unit\s of water!"
 	if(mybag)
-		usr << "\A [mybag] is hanging on the [callme]."
+		user << "\A [mybag] is hanging on the [callme]."
 
 
 /obj/structure/stool/bed/chair/janicart/attackby(obj/item/I, mob/user)
@@ -214,7 +215,6 @@
 	if(istype(user.l_hand, /obj/item/key) || istype(user.r_hand, /obj/item/key))
 		step(src, direction)
 		update_mob()
-		handle_rotation()
 	else
 		user << "<span class='notice'>You'll need the keys in one of your hands to drive this [callme].</span>"
 
@@ -237,11 +237,18 @@
 		"<span class='notice'>You climb onto the [callme]!</span>")
 	M.buckled = src
 	M.loc = loc
-	M.dir = dir
+	M.set_dir(dir)
 	M.update_canmove()
 	buckled_mob = M
 	update_mob()
 	add_fingerprint(user)
+
+
+/obj/structure/stool/bed/chair/janicart/update_layer()
+	if(dir == SOUTH)
+		layer = FLY_LAYER
+	else
+		layer = OBJ_LAYER
 
 
 /obj/structure/stool/bed/chair/janicart/unbuckle()
@@ -251,12 +258,9 @@
 	..()
 
 
-/obj/structure/stool/bed/chair/janicart/handle_rotation()
-	if(dir == SOUTH)
-		layer = FLY_LAYER
-	else
-		layer = OBJ_LAYER
-
+/obj/structure/stool/bed/chair/janicart/set_dir()
+	..()
+	update_layer()
 	if(buckled_mob)
 		if(buckled_mob.loc != loc)
 			buckled_mob.buckled = null //Temporary, so Move() succeeds.
@@ -267,7 +271,7 @@
 
 /obj/structure/stool/bed/chair/janicart/proc/update_mob()
 	if(buckled_mob)
-		buckled_mob.dir = dir
+		buckled_mob.set_dir(dir)
 		switch(dir)
 			if(SOUTH)
 				buckled_mob.pixel_x = 0

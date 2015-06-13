@@ -1,10 +1,9 @@
 /obj/item/weapon/gun/launcher
-
 	name = "launcher"
 	desc = "A device that launches things."
 	icon = 'icons/obj/weapons.dmi'
 	w_class = 5.0
-	flags =  FPRINT | TABLEPASS | CONDUCT
+	flags =  CONDUCT
 	slot_flags = SLOT_BACK
 
 	var/release_force = 0
@@ -39,7 +38,6 @@
 /obj/item/weapon/gun/launcher/Fire(atom/target as mob|obj|turf|area, mob/living/user as mob|obj, params, reflex = 0)
 
 	if (!user.IsAdvancedToolUser())
-		user << "\red You don't have the dexterity to do this!"
 		return 0
 
 	add_fingerprint(user)

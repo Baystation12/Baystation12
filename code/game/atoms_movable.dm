@@ -14,16 +14,6 @@
 	var/moved_recently = 0
 	var/mob/pulledby = null
 
-/atom/movable/Move()
-	var/atom/A = src.loc
-	. = ..()
-	src.move_speed = world.time - src.l_move_time
-	src.l_move_time = world.time
-	src.m_flag = 1
-	if ((A != src.loc && A && A.z == src.z))
-		src.last_move = get_dir(A, src.loc)
-	return
-
 /atom/movable/Bump(var/atom/A as mob|obj|turf|area, yes)
 	if(src.throwing)
 		src.throw_impact(A)
@@ -191,11 +181,6 @@
 /atom/movable/overlay/attackby(a, b)
 	if (src.master)
 		return src.master.attackby(a, b)
-	return
-
-/atom/movable/overlay/attack_paw(a, b, c)
-	if (src.master)
-		return src.master.attack_paw(a, b, c)
 	return
 
 /atom/movable/overlay/attack_hand(a, b, c)

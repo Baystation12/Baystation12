@@ -367,9 +367,9 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	set category = "Server"
 	set name = "Toggle Aliens"
 
-	aliens_allowed = !aliens_allowed
-	log_admin("[key_name(src)] has turned aliens [aliens_allowed ? "on" : "off"].")
-	message_admins("[key_name_admin(src)] has turned aliens [aliens_allowed ? "on" : "off"].", 0)
+	config.aliens_allowed = !config.aliens_allowed
+	log_admin("[key_name(src)] has turned aliens [config.aliens_allowed ? "on" : "off"].")
+	message_admins("[key_name_admin(src)] has turned aliens [config.aliens_allowed ? "on" : "off"].", 0)
 	feedback_add_details("admin_verb","TAL") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/cmd_admin_grantfullaccess(var/mob/M in mob_list)
@@ -737,8 +737,8 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 			M.equip_syndicate_commando()
 
 		if("nanotrasen representative")
-			M.equip_if_possible(new /obj/item/clothing/under/rank/centcom/representative(M), slot_w_uniform)
-			M.equip_if_possible(new /obj/item/clothing/shoes/centcom(M), slot_shoes)
+			M.equip_if_possible(new /obj/item/clothing/under/rank/centcom(M), slot_w_uniform)
+			M.equip_if_possible(new /obj/item/clothing/shoes/laceup(M), slot_shoes)
 			M.equip_if_possible(new /obj/item/clothing/gloves/white(M), slot_gloves)
 			M.equip_if_possible(new /obj/item/device/radio/headset/heads/hop(M), slot_l_ear)
 
@@ -762,8 +762,8 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 			M.equip_if_possible(W, slot_wear_id)
 
 		if("nanotrasen officer")
-			M.equip_if_possible(new /obj/item/clothing/under/rank/centcom/officer(M), slot_w_uniform)
-			M.equip_if_possible(new /obj/item/clothing/shoes/centcom(M), slot_shoes)
+			M.equip_if_possible(new /obj/item/clothing/under/rank/centcom_officer(M), slot_w_uniform)
+			M.equip_if_possible(new /obj/item/clothing/shoes/laceup(M), slot_shoes)
 			M.equip_if_possible(new /obj/item/clothing/gloves/white(M), slot_gloves)
 			M.equip_if_possible(new /obj/item/device/radio/headset/heads/captain(M), slot_l_ear)
 			M.equip_if_possible(new /obj/item/clothing/head/beret/centcom/officer(M), slot_head)
@@ -787,8 +787,8 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 
 
 		if("nanotrasen captain")
-			M.equip_if_possible(new /obj/item/clothing/under/rank/centcom/captain(M), slot_w_uniform)
-			M.equip_if_possible(new /obj/item/clothing/shoes/centcom(M), slot_shoes)
+			M.equip_if_possible(new /obj/item/clothing/under/rank/centcom_captain(M), slot_w_uniform)
+			M.equip_if_possible(new /obj/item/clothing/shoes/laceup(M), slot_shoes)
 			M.equip_if_possible(new /obj/item/clothing/gloves/white(M), slot_gloves)
 			M.equip_if_possible(new /obj/item/device/radio/headset/heads/captain(M), slot_l_ear)
 			M.equip_if_possible(new /obj/item/clothing/head/beret/centcom/captain(M), slot_head)
@@ -909,6 +909,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/combat(M), slot_shoes)
 			M.equip_to_slot_or_del(new /obj/item/clothing/gloves/combat(M), slot_gloves)
 			M.equip_to_slot_or_del(new /obj/item/device/radio/headset/ert(M), slot_l_ear)
+			M.equip_to_slot_or_del(new /obj/item/clothing/head/helmet/tactical/marine(M), slot_head)
 			M.equip_to_slot_or_del(new /obj/item/weapon/storage/belt/security/marine(M), slot_belt)
 			M.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/marine(M), slot_back)
 
@@ -982,7 +983,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 
 	for(var/obj/machinery/power/smes/SMES in world)
 		if(SMES.anchored)
-			SMES.chargemode = 1
+			SMES.input_attempt = 1
 
 /client/proc/setup_supermatter_engine()
 	set category = "Debug"
@@ -1031,7 +1032,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 					Pump.air2.gas["nitrogen"] = 3750	//The contents of 2 canisters.
 					Pump.air2.temperature = 50
 					Pump.air2.update_values()
-				Pump.on=1
+				Pump.use_power=1
 				Pump.target_pressure = 4500
 				Pump.update_icon()
 
@@ -1042,16 +1043,16 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 
 			else if(istype(M,/obj/machinery/power/smes))	//This is the SMES inside the engine room.  We don't need much power.
 				var/obj/machinery/power/smes/SMES = M
-				SMES.chargemode = 1
-				SMES.chargelevel = 200000
-				SMES.output = 75000
+				SMES.input_attempt = 1
+				SMES.input_level = 200000
+				SMES.output_level = 75000
 
 		else if(istype(M.loc.loc,/area/engine/engine_smes))	//Set every SMES to charge and spit out 300,000 power between the 4 of them.
 			if(istype(M,/obj/machinery/power/smes))
 				var/obj/machinery/power/smes/SMES = M
-				SMES.chargemode = 1
-				SMES.chargelevel = 200000
-				SMES.output = 75000
+				SMES.input_attempt = 1
+				SMES.input_level = 200000
+				SMES.output_level = 75000
 
 	if(!found_the_pump && response == "Setup Completely")
 		src << "\red Unable to locate air supply to fill up with coolant, adding some coolant around the supermatter"

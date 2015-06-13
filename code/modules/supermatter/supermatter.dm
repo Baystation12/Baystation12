@@ -1,26 +1,26 @@
 
-#define NITROGEN_RETARDATION_FACTOR 0.15        //Higher == N2 slows reaction more
-#define THERMAL_RELEASE_MODIFIER 750               //Higher == more heat released during reaction
-#define PHORON_RELEASE_MODIFIER 1500                //Higher == less phoron released by reaction
-#define OXYGEN_RELEASE_MODIFIER 1500        //Higher == less oxygen released at high temperature/power
-#define REACTION_POWER_MODIFIER 1.1                //Higher == more overall power
+#define NITROGEN_RETARDATION_FACTOR 0.15	//Higher == N2 slows reaction more
+#define THERMAL_RELEASE_MODIFIER 750		//Higher == more heat released during reaction
+#define PHORON_RELEASE_MODIFIER 1500		//Higher == less phoron released by reaction
+#define OXYGEN_RELEASE_MODIFIER 1500		//Higher == less oxygen released at high temperature/power
+#define REACTION_POWER_MODIFIER 1.1			//Higher == more overall power
 
 /*
 	How to tweak the SM
-	
+
 	POWER_FACTOR		directly controls how much power the SM puts out at a given level of excitation (power var). Making this lower means you have to work the SM harder to get the same amount of power.
 	CRITICAL_TEMPERATURE	The temperature at which the SM starts taking damage.
-	
+
 	CHARGING_FACTOR		Controls how much emitter shots excite the SM.
 	DAMAGE_RATE_LIMIT	Controls the maximum rate at which the SM will take damage due to high temperatures.
 */
 
 //Controls how much power is produced by each collector in range - this is the main parameter for tweaking SM balance, as it basically controls how the power variable relates to the rest of the game.
 #define POWER_FACTOR 1.0
-#define DECAY_FACTOR 700             //Affects how fast the supermatter power decays
-#define CRITICAL_TEMPERATURE 800     //K
+#define DECAY_FACTOR 700			//Affects how fast the supermatter power decays
+#define CRITICAL_TEMPERATURE 800	//K
 #define CHARGING_FACTOR 0.05
-#define DAMAGE_RATE_LIMIT 3                 //damage rate cap at power = 300, scales linearly with power
+#define DAMAGE_RATE_LIMIT 3			//damage rate cap at power = 300, scales linearly with power
 
 
 //These would be what you would get at point blank, decreases with distance
@@ -28,7 +28,7 @@
 #define DETONATION_HALLUCINATION 600
 
 
-#define WARNING_DELAY 30 		//seconds between warnings.
+#define WARNING_DELAY 20			//seconds between warnings.
 
 /obj/machinery/power/supermatter
 	name = "Supermatter"
@@ -46,6 +46,7 @@
 	var/damage = 0
 	var/damage_archived = 0
 	var/safe_alert = "Crystaline hyperstructure returning to safe operating levels."
+	var/safe_warned = 0
 	var/warning_point = 100
 	var/warning_alert = "Danger! Crystal hyperstructure instability!"
 	var/emergency_point = 700
@@ -58,15 +59,20 @@
 
 	var/grav_pulling = 0
 	var/pull_radius = 14
+	// Time in ticks between delamination ('exploding') and exploding (as in the actual boom)
+	var/pull_time = 100
+	var/explosion_power = 8
 
 	var/emergency_issued = 0
 
-	var/explosion_power = 8
+	// Time in 1/10th of seconds since the last sent warning
+	var/lastwarning = 0
 
-	var/lastwarning = 0                        // Time in 1/10th of seconds since the last sent warning
+	// This stops spawning redundand explosions. Also incidentally makes supermatter unexplodable if set to 1.
+	var/exploded = 0
+
 	var/power = 0
-
-	var/oxygen = 0				  // Moving this up here for easier debugging.
+	var/oxygen = 0
 
 	//Temporary values so that we can optimize this
 	//How much the bullets damage should be multiplied by when it is added to the internal variables
@@ -77,24 +83,8 @@
 	var/config_hallucination_power = 0.1
 
 	var/obj/item/device/radio/radio
-	
+
 	var/debug = 0
-
-	shard //Small subtype, less efficient and more sensitive, but less boom.
-		name = "Supermatter Shard"
-		desc = "A strangely translucent and iridescent crystal that looks like it used to be part of a larger structure. \red You get headaches just from looking at it."
-		icon_state = "darkmatter_shard"
-		base_icon_state = "darkmatter_shard"
-
-		warning_point = 50
-		emergency_point = 500
-		explosion_point = 900
-
-		gasefficency = 0.125
-
-		pull_radius = 5
-		explosion_power = 3 //3,6,9,12? Or is that too small?
-
 
 /obj/machinery/power/supermatter/New()
 	. = ..()
@@ -106,9 +96,20 @@
 	. = ..()
 
 /obj/machinery/power/supermatter/proc/explode()
+	message_admins("Supermatter exploded at ([x],[y],[z] - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</a>)",0,1)
+	log_game("Supermatter exploded at ([x],[y],[z])")
 	anchored = 1
 	grav_pulling = 1
-	spawn(100)
+	exploded = 1
+	for(var/mob/living/mob in living_mob_list)
+		if(loc.z == mob.loc.z)
+			if(istype(mob, /mob/living/carbon/human))
+				//Hilariously enough, running into a closet should make you get hit the hardest.
+				var/mob/living/carbon/human/H = mob
+				H.hallucination += max(50, min(300, DETONATION_HALLUCINATION * sqrt(1 / (get_dist(mob, src) + 1)) ) )
+			var/rads = DETONATION_RADS * sqrt( 1 / (get_dist(mob, src) + 1) )
+			mob.apply_effect(rads, IRRADIATE)
+	spawn(pull_time)
 		explosion(get_turf(src), explosion_power, explosion_power * 2, explosion_power * 3, explosion_power * 4, 1)
 		del src
 		return
@@ -120,6 +121,28 @@
 	if(luminosity != lum)
 		SetLuminosity(lum)
 
+/obj/machinery/power/supermatter/proc/announce_warning()
+	var/integrity = damage / explosion_point
+	integrity = round(100 - integrity * 100)
+	integrity = integrity < 0 ? 0 : integrity
+	var/alert_msg = " Integrity at [integrity]%"
+
+	if(damage > emergency_point)
+		alert_msg = emergency_alert + alert_msg
+		lastwarning = world.timeofday - WARNING_DELAY * 4
+	else if(damage >= damage_archived) // The damage is still going up
+		safe_warned = 0
+		alert_msg = warning_alert + alert_msg
+		lastwarning = world.timeofday
+	else if(!safe_warned)
+		safe_warned = 1 // We are safe, warn only once
+		alert_msg = safe_alert
+		lastwarning = world.timeofday
+	else
+		alert_msg = null
+	if(alert_msg)
+		radio.autosay(alert_msg, "Supermatter Monitor")
+
 /obj/machinery/power/supermatter/process()
 
 	var/turf/L = loc
@@ -130,39 +153,17 @@
 	if(!istype(L)) 	//We are in a crate or somewhere that isn't turf, if we return to turf resume processing but for now.
 		return  //Yeah just stop.
 
-
-	if(damage > warning_point) // while the core is still damaged and it's still worth noting its status
-
-		shift_light(5, warning_color)
-		if((world.timeofday - lastwarning) / 10 >= WARNING_DELAY)
-			var/stability = num2text(round((damage / explosion_point) * 100))
-			var/alert_msg
-
-			if(damage > emergency_point)
-				shift_light(7, emergency_color)
-				alert_msg = addtext(emergency_alert, " Instability: ",stability,"%")
-				lastwarning = world.timeofday
-			else if(damage >= damage_archived) // The damage is still going up
-				alert_msg = addtext(warning_alert," Instability: ",stability,"%")
-				lastwarning = world.timeofday - 150
-			else // Phew, we're safe
-				alert_msg = safe_alert
-				lastwarning = world.timeofday
-
-			if(!istype(L, /turf/space) && alert_msg)
-				radio.autosay(alert_msg, "Supermatter Monitor")
-
-		if(damage > explosion_point)
-			for(var/mob/living/mob in living_mob_list)
-				if(loc.z == mob.loc.z)
-					if(istype(mob, /mob/living/carbon/human))
-						//Hilariously enough, running into a closet should make you get hit the hardest.
-						var/mob/living/carbon/human/H = mob
-						H.hallucination += max(50, min(300, DETONATION_HALLUCINATION * sqrt(1 / (get_dist(mob, src) + 1)) ) )
-					var/rads = DETONATION_RADS * sqrt( 1 / (get_dist(mob, src) + 1) )
-					mob.apply_effect(rads, IRRADIATE)
-
+	if(damage > explosion_point)
+		if(!exploded)
+			if(!istype(L, /turf/space))
+				announce_warning()
 			explode()
+	else if(damage > warning_point) // while the core is still damaged and it's still worth noting its status
+		shift_light(5, warning_color)
+		if(damage > emergency_point)
+			shift_light(7, emergency_color)
+		if(!istype(L, /turf/space) && (world.timeofday - lastwarning) >= WARNING_DELAY * 10)
+			announce_warning()
 	else
 		shift_light(4,initial(l_color))
 	if(grav_pulling)
@@ -203,7 +204,7 @@
 			//If chain reacting at oxygen == 1, we want the power at 800 K to stabilize at a power level of 250
 			equilibrium_power = 250
 			icon_state = base_icon_state
-		
+
 		temp_factor = ( (equilibrium_power/DECAY_FACTOR)**3 )/800
 		power = max( (removed.temperature * temp_factor) * oxygen + power, 0)
 
@@ -216,13 +217,13 @@
 		var/heat_capacity = removed.heat_capacity()
 		removed.adjust_multi("phoron", max(device_energy / PHORON_RELEASE_MODIFIER, 0), \
 		                     "oxygen", max((device_energy + removed.temperature - T0C) / OXYGEN_RELEASE_MODIFIER, 0))
-		
+
 		var/thermal_power = THERMAL_RELEASE_MODIFIER * device_energy
 		if (debug)
 			var/heat_capacity_new = removed.heat_capacity()
 			visible_message("[src]: Releasing [round(thermal_power)] W.")
 			visible_message("[src]: Releasing additional [round((heat_capacity_new - heat_capacity)*removed.temperature)] W with exhaust gasses.")
-		
+
 		removed.add_thermal_energy(thermal_power)
 		removed.temperature = between(0, removed.temperature, 10000)
 
@@ -255,11 +256,6 @@
 		damage += Proj.damage * config_bullet_energy
 	return 0
 
-
-/obj/machinery/power/supermatter/attack_paw(mob/user as mob)
-	return attack_hand(user)
-
-
 /obj/machinery/power/supermatter/attack_robot(mob/user as mob)
 	if(Adjacent(user))
 		return attack_hand(user)
@@ -277,12 +273,12 @@
 
 	Consume(user)
 
-/obj/machinery/power/supermatter/proc/transfer_energy()
-	for(var/obj/machinery/power/rad_collector/R in rad_collectors)
-		var/distance = get_dist(R, src)
+/obj/machinery/power/supermatter/proc/transfer_energy() //Bay will comment this out in a later commit. Uncomment it and all instances of transfer_energy() - T
+	for(var/obj/machinery/power/rad_collector/C in rad_collectors)
+		var/distance = get_dist(C, src)
 		if(distance <= 15)
 			//for collectors using standard phoron tanks at 1013 kPa, the actual power generated will be this power*POWER_FACTOR*20*29 = power*POWER_FACTOR*580
-			R.receive_pulse(power * POWER_FACTOR * (min(3/distance, 1))**2) 
+			C.receive_pulse(power * POWER_FACTOR * (min(3/distance, 1))**2)
 	return
 
 /obj/machinery/power/supermatter/attackby(obj/item/weapon/W as obj, mob/living/user as mob)
@@ -329,7 +325,6 @@
 
 
 /obj/machinery/power/supermatter/proc/supermatter_pull()
-
 	//following is adapted from singulo code
 	if(defer_powernet_rebuild != 2)
 		defer_powernet_rebuild = 1
@@ -368,4 +363,23 @@
 	return
 
 /obj/machinery/power/supermatter/RepelAirflowDest(n)
+	return
+
+/obj/machinery/power/supermatter/shard //Small subtype, less efficient and more sensitive, but less boom.
+	name = "Supermatter Shard"
+	desc = "A strangely translucent and iridescent crystal that looks like it used to be part of a larger structure. \red You get headaches just from looking at it."
+	icon_state = "darkmatter_shard"
+	base_icon_state = "darkmatter_shard"
+
+	warning_point = 50
+	emergency_point = 400
+	explosion_point = 600
+
+	gasefficency = 0.125
+
+	pull_radius = 5
+	pull_time = 45
+	explosion_power = 3
+
+/obj/machinery/power/supermatter/shard/announce_warning() //Shards don't get announcements
 	return

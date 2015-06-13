@@ -217,8 +217,8 @@ proc/populate_seed_list()
 			"water",
 			"potassium",
 			"plasticide",
-			"slimetoxin",
-			"aslimetoxin",
+			"mutationtoxin",
+			"amutationtoxin",
 			"inaprovaline",
 			"space_drugs",
 			"paroxetine",
@@ -255,7 +255,7 @@ proc/populate_seed_list()
 
 	if(prob(90))
 		requires_nutrients = 1
-		nutrient_consumption = rand(100)*0.1
+		nutrient_consumption = rand(25)/100
 	else
 		requires_nutrients = 0
 
@@ -643,8 +643,13 @@ proc/populate_seed_list()
 	if(consume_gasses) new_seed.consume_gasses = consume_gasses.Copy()
 	if(exude_gasses)   new_seed.exude_gasses = exude_gasses.Copy()
 
-	new_seed.seed_name =            "[(roundstart ? "[(modified ? "modified" : "mutant")] " : "")][seed_name]"
-	new_seed.display_name =         "[(roundstart ? "[(modified ? "modified" : "mutant")] " : "")][display_name]"
+	if(modified != -1)
+		new_seed.seed_name =            "[(roundstart ? "[(modified ? "modified" : "mutant")] " : "")][seed_name]"
+		new_seed.display_name =         "[(roundstart ? "[(modified ? "modified" : "mutant")] " : "")][display_name]"
+	else
+		new_seed.seed_name =            "[seed_name]"
+		new_seed.display_name =         "[display_name]"
+
 	new_seed.seed_noun =            seed_noun
 
 	new_seed.requires_nutrients =   requires_nutrients
@@ -1238,6 +1243,40 @@ proc/populate_seed_list()
 	yield = 4
 	potency = 10
 	growth_stages = 1
+
+/datum/seed/ginger
+	name = "ginger"
+	seed_name = "ginger"
+	display_name = "ginger roots"
+	packet_icon = "seed-ginger"
+	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/ginger)
+	plant_icon = "ginger"
+	harvest_repeat = 1
+	chems = list("nutriment" = list(1,10))
+
+	lifespan = 55
+	maturation = 6
+	production = 6
+	yield = 2
+	potency = 10
+	growth_stages = 3
+
+/datum/seed/strawberry
+	name = "strawberry"
+	seed_name = "strawberry"
+	display_name = "strawberries"
+	packet_icon = "seed-strawberry"
+	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/strawberry)
+	plant_icon = "strawberry"
+	harvest_repeat = 1
+	chems = list("nutriment" = list(1,10))
+
+	lifespan = 20
+	maturation = 5
+	production = 5
+	yield = 4
+	potency = 10
+	growth_stages = 6
 
 /datum/seed/shand
 	name = "shand"

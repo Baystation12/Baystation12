@@ -11,8 +11,6 @@
 	var/set_temperature = T0C + 50	//K
 	var/heating_power = 40000
 
-	flags = FPRINT
-
 
 /obj/machinery/space_heater/New()
 	..()
@@ -25,18 +23,14 @@
 	if(open)
 		overlays  += "sheater-open"
 
-/obj/machinery/space_heater/examine()
-	set src in oview(12)
-	if (!( usr ))
-		return
-	usr << "This is \icon[src] \an [src.name]."
-	usr << src.desc
+/obj/machinery/space_heater/examine(mob/user)
+	..(user)
 
-	usr << "The heater is [on ? "on" : "off"] and the hatch is [open ? "open" : "closed"]."
+	user << "The heater is [on ? "on" : "off"] and the hatch is [open ? "open" : "closed"]."
 	if(open)
-		usr << "The power cell is [cell ? "installed" : "missing"]."
+		user << "The power cell is [cell ? "installed" : "missing"]."
 	else
-		usr << "The charge meter reads [cell ? round(cell.percent(),1) : 0]%"
+		user << "The charge meter reads [cell ? round(cell.percent(),1) : 0]%"
 	return
 
 /obj/machinery/space_heater/emp_act(severity)

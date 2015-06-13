@@ -1,6 +1,5 @@
 /*********************MANUALS (BOOKS)***********************/
 
-//Oh god what the fuck I am not good at computer
 /obj/item/weapon/book/manual
 	icon = 'icons/obj/library.dmi'
 	due_date = 0 // Game time in 1/10th seconds
@@ -13,19 +12,20 @@
 	author = "Engineering Encyclopedia"		 // Who wrote the thing, can be changed by pen or PC. It is not automatically assigned
 	title = "Station Repairs and Construction"
 
+/obj/item/weapon/book/manual/engineering_construction/New()
+	..()
 	dat = {"
 
 		<html><head>
 		</head>
 
 		<body>
-		<iframe width='100%' height='97%' src="http://baystation12.net/wiki/index.php?title=Guide_to_construction&printable=yes&remove_links=1" frameborder="0" id="main_frame"></iframe>
+		<iframe width='100%' height='97%' src="[config.wikiurl]Guide_to_construction&printable=yes&remove_links=1" frameborder="0" id="main_frame"></iframe>
 		</body>
 
 		</html>
 
 		"}
-
 
 /obj/item/weapon/book/manual/engineering_particle_accelerator
 	name = "Particle Accelerator User's Guide"
@@ -33,6 +33,8 @@
 	author = "Engineering Encyclopedia"		 // Who wrote the thing, can be changed by pen or PC. It is not automatically assigned
 	title = "Particle Accelerator User's Guide"
 
+/obj/item/weapon/book/manual/engineering_particle_accelerator/New()
+	..()
 	dat = {"<html>
 				<head>
 				<style>
@@ -78,6 +80,8 @@
 	author = "Waleed Asad"
 	title = "Supermatter Engine User's Guide"
 
+/obj/item/weapon/book/manual/supermatter_engine/New()
+	..()
 	dat = {"<html>
 				<head>
 				<style>
@@ -188,13 +192,15 @@
 	author = "Engineering Encyclopedia"		 // Who wrote the thing, can be changed by pen or PC. It is not automatically assigned
 	title = "Hacking"
 
+/obj/item/weapon/book/manual/engineering_hacking/New()
+	..()
 	dat = {"
 
 		<html><head>
 		</head>
 
 		<body>
-		<iframe width='100%' height='97%' src="http://baystation12.net/wiki/index.php?title=Hacking&printable=yes&remove_links=1" frameborder="0" id="main_frame"></iframe>
+		<iframe width='100%' height='97%' src="[config.wikiurl]Hacking&printable=yes&remove_links=1" frameborder="0" id="main_frame"></iframe>
 		</body>
 
 		</html>
@@ -743,6 +749,8 @@
 	author = "NanoTrasen"
 	title = "Corporate Regulations"
 
+/obj/item/weapon/book/manual/security_space_law/New()
+	..()
 	dat = {"
 
 		<html><head>
@@ -765,6 +773,8 @@
 	author = "NanoTrasen Medicine Department"
 	title = "NT Medical Diagnostics Manual"
 
+/obj/item/weapon/book/manual/medical_diagnostics_manual/New()
+	..()
 	dat = {"<html>
 				<head>
 				<style>
@@ -797,7 +807,7 @@
 
 				<HR COLOR="steelblue" WIDTH="60%" ALIGN="LEFT">
 
-				<iframe width='100%' height='100%' src="http://baystation12.net/wiki/index.php?title=Guide_to_Medicine&printable=yes&removelinks=1" frameborder="0" id="main_frame"></iframe>
+				<iframe width='100%' height='100%' src="[config.wikiurl]Guide_to_Medicine&printable=yes&removelinks=1" frameborder="0" id="main_frame"></iframe>
 				</body>
 			</html>
 
@@ -810,13 +820,15 @@
 	author = "Engineering Encyclopedia"
 	title = "Engineering Textbook"
 
+/obj/item/weapon/book/manual/engineering_guide/New()
+	..()
 	dat = {"
 
 		<html><head>
 		</head>
 
 		<body>
-		<iframe width='100%' height='100%' src="http://baystation12.net/wiki/index.php?title=Guide_to_Engineering&printable=yes&remove_links=1" frameborder="0" id="main_frame"></iframe>		</body>
+		<iframe width='100%' height='100%' src="[config.wikiurl]Guide_to_Engineering&printable=yes&remove_links=1" frameborder="0" id="main_frame"></iframe>		</body>
 
 		</html>
 
@@ -1060,7 +1072,7 @@
 				</ol><br>
 
 				<h1><a name="Foreword"><U><B>HOW TO NOT SUCK QUITE SO HARD AT ATMOSPHERICS</B></U></a></h1><BR>
-				<I>Or: What the fuck does a "passive gate" do?</I><BR><BR>
+				<I>Or: What the fuck does a "pressure regulator" do?</I><BR><BR>
 
 				Alright. It has come to my attention that a variety of people are unsure of what a "pipe" is and what it does.
 				Apparently, there is an unnatural fear of these arcane devices and their "gases." Spooky, spooky. So,
@@ -1085,6 +1097,9 @@
 				<li><b>Manual T-valve:</b> Like a manual valve, but at the center of a manifold instead of a straight pipe.</li><BR><BR>
 				</ul>
 
+				An important note here is that pipes are now done in three distinct lines - general, supply, and scrubber. You can move gases between these with a universal adapter. Use the correct position for the correct location.
+				Connecting scrubbers to a supply position pipe makes you an idiot who gives everyone a difficult job. Insulated and HE pipes don't go through these positions.
+
 				<h1><a name="Insulated"><B>Insulated Pipes</B></a></h1>
 				<li><I>Bent pipes:</I> Pipes with a 90 degree bend at the half-meter mark. My goodness.</li>
 				<li><I>Pipe manifolds:</I> Pipes that are essentially a "T" shape, allowing you to connect three things at one point.</li>
@@ -1103,22 +1118,19 @@
 				Stop it. It's unbecoming. Most of these are fairly straightforward.<BR>
 
 				<ul>
-				<li><b>Gas pump:</b> Take a wild guess. It moves gas in the direction it's pointing (marked by the red line on one end). It moves it based on pressure, the maximum output being 4500 kPa (kilopascals).
+				<li><b>Gas pump:</b> Take a wild guess. It moves gas in the direction it's pointing (marked by the red line on one end). It moves it based on pressure, the maximum output being 15000 kPa (kilopascals).
 				Ordinary atmospheric pressure, for comparison, is 101.3 kPa, and the minimum pressure of room-temperature pure oxygen needed to not suffocate in a matter of minutes is 16 kPa
-				(though 18 kPa is preferred using internals, for various reasons).</li>
-				<li><b>Volume pump:</b> This pump goes based on volume, instead of pressure, and the possible maximum pressure it can create in the pipe on the receiving end is double the gas pump because of this,
-				clocking in at an incredible 9000 kPa. If a pipe with this is destroyed or damaged, and this pressure of gas escapes, it can be incredibly dangerous depending on the size of the pipe filled.
-				Don't hook this to the distribution loop, or you will make babies cry and the Chief Engineer brutally beat you.</li>
-				<li><b>Passive gate:</b> This is essentially a cap on the pressure of gas allowed to flow in a specific direction.
-				When turned on, instead of actively pumping gas, it measures the pressure flowing through it, and whatever pressure you set is the maximum: it'll cap after that.
-				In addition, it only lets gas flow one way. The direction the gas flows is opposite the red handle on it, which is confusing to people used to the red stripe on pumps pointing the way.</li>
+				(though 18 kPa is preferred when using internals with pure oxygen, for various reasons). A high-powered variant will move gas more quickly at the expense of consuming more power. Do not turn the distribution loop up to 15000 kPa.
+				You will make engiborgs cry and the Chief Engineer will beat you.</li>
+				<li><b>Pressure regulator:</b> These replaced the old passive gates. You can choose to regulate pressure by input or output, and regulate flow rate. Regulating by input means that when input pressure is above the limit, gas will flow.
+				Regulating by output means that when pressure is below the limit, gas will flow. Flow rate can be controlled.</li>
 				<li><b>Unary vent:</b> The basic vent used in rooms. It pumps gas into the room, but can't suck it back out. Controlled by the room's air alarm system.</li>
 				<li><b>Scrubber:</b> The other half of room equipment. Filters air, and can suck it in entirely in what's called a "panic siphon." Activating a panic siphon without very good reason will kill someone. Don't do it.</li>
 				<li><b>Meter:</b> A little box with some gauges and numbers. Fasten it to any pipe or manifold and it'll read you the pressure in it. Very useful.</li>
-				<li><b>Gas mixer:</b> Two sides are input, one side is output. Mixes the gases pumped into it at the ratio defined. The side perpendicular to the other two is "node 2," for reference.
-				Can output this gas at pressures from 0-4500 kPa.</li>
+				<li><b>Gas mixer:</b> Two sides are input, one side is output. Mixes the gases pumped into it at the ratio defined. The side perpendicular to the other two is "node 2," for reference, on non-mirrored mixers..
+				Output is controlled by flow rate. There is also an "omni" variant that allows you to set input and output sections freely..</li>
 				<li><b>Gas filter:</b> Essentially the opposite of a gas mixer. One side is input. The other two sides are output. One gas type will be filtered into the perpendicular output pipe,
-				the rest will continue out the other side. Can also output from 0-4500 kPa.</li>
+				the rest will continue out the other side. Can also output from 0-4500 kPa. The "omni" vairant allows you to set input and output sections freely.</li>
 				</ul>
 
 				<h1><a name="HES"><B>Heat Exchange Systems</B></a></h1>
@@ -1130,9 +1142,10 @@
 				<li><I>Bent pipe:</I> Take a wild guess.</li>
 				<li><I>Junction:</I> The point where you connect your normal pipes to heat exchange pipes. Not necessary for heat exchangers, but necessary for H/E pipes/bent pipes.</li>
 				<li><I>Heat exchanger:</I> These funky-looking bits attach to an open pipe end. Put another heat exchanger directly across from it, and you can transfer heat across two pipes without having to have the gases touch.
-				This normally shouldn't exchange with the ambient air, despite being totally exposed. Just don't ask questions...</li><BR>
+				This normally shouldn't exchange with the ambient air, despite being totally exposed. Just don't ask questions.</li><BR>
 
 				That's about it for pipes. Go forth, armed with this knowledge, and try not to break, burn down, or kill anything. Please.
+
 
 				</body>
 			</html>
@@ -1164,6 +1177,7 @@
 					<li><a href="#Foreword">A foreword on using EVA gear</a></li>
 					<li><a href="#Civilian">Donning a Civilian Suit</a></li>
 					<li><a href="#Hardsuit">Putting on a Hardsuit</a></li>
+					<li><a href="#Equipment">Cyclers and Other Modification Equipment</a></li>
 					<li><a href="#Final">Final Checks</a></li>
 				</ol>
 				<br>
@@ -1185,6 +1199,8 @@
 				There is a small slot on the side of the suit where an emergency oxygen tank or extended emergency oxygen tank will fit,
 				but it is recommended to have a full-sized tank on your back for EVA.<BR><BR>
 
+				These suits tend to be wearable by most species. They're large and flexible. They might be pretty uncomfortable for some, though, so keep that in mind.<BR><BR>
+
 				<h2><a name="Hardsuit">Hardsuits</a></h2>
 				<I>Heavy, uncomfortable, still the best option.</I><BR>
 				These suits come in Engineering, Mining, and the Armory. There's also a couple Medical Hardsuits in EVA. These provide a lot more protection than the standard suits.<BR><BR>
@@ -1194,9 +1210,22 @@
 				and then is screwed in for one and a quarter full rotations clockwise, leaving the faceplate directly in front of you. There is a small button on the right side of the helmet that activates the helmet light.
 				The tanks that fasten onto the side slot are emergency tanks, as well as full-sized oxygen tanks, leaving your back free for a backpack or satchel.<BR><BR>
 
+				These suits generally only fit one species. Nanotrasen's are usually human-fitting by default, but there's equipment that can make modifications to the hardsuits to fit them to other species.<BR><BR>
+
+				<h2><a name="Equipment">Modification Equipment</a></h2>
+				<I>How to actually make hardsuits fit you.</I><BR>
+				There's a variety of equipment that can modify hardsuits to fit species that can't fit into them, making life quite a bit easier.<BR><BR>
+
+				The first piece of equipment is a suit cycler. This is a large machine resembling the storage pods that are in place in some places. These are machines that will automatically tailor a suit to certain specifications.
+				The largest uses of them are for their cleaning functions and their ability to tailor suits for a species. Do not enter them physically. You will die from any of the functions being activated, and it will be painful.
+				These machines can both tailor a suit between species, and between types. This means you can convert engineering hardsuits to atmospherics, or the other way. This is useful. Use it if you can.<BR><BR>
+
+				There's also modification kits that let you modify suits yourself. These are extremely difficult to use unless you understand the actual construction of the suit. I do not reccomend using them unless no other option is available.
+
 				<h2><a name="Final">Final Checks</a></h2>
 				<ul>
 					<li>Are all seals fastened correctly?</li>
+					<li>If you have modified it manually, is absolutely everything sealed perfectly?</li>
 					<li>Do you either have shoes on under the suit, or magnetic boots on over it?</li>
 					<li>Do you have a mask on and internals on the suit or your back?</li>
 					<li>Do you have a way to communicate with the station in case something goes wrong?</li>

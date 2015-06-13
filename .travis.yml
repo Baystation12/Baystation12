@@ -17,5 +17,6 @@ install:
   - cd ..
 
 script:
-  - (! grep -q 'step_[xy]' maps/tgstation2.dmm)
+  - shopt -s globstar
+  - (! grep 'step_[xy]' maps/**/*.dmm)
   - DreamMaker baystation12.dme

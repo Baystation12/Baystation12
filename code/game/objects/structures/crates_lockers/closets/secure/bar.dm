@@ -1,5 +1,5 @@
 /obj/structure/closet/secure_closet/bar
-	name = "Booze"
+	name = "booze closet"
 	req_access = list(access_bar)
 	icon_state = "cabinetdetective_locked"
 	icon_closed = "cabinetdetective"
@@ -11,7 +11,6 @@
 
 	New()
 		..()
-		sleep(2)
 		new /obj/item/weapon/reagent_containers/food/drinks/cans/beer( src )
 		new /obj/item/weapon/reagent_containers/food/drinks/cans/beer( src )
 		new /obj/item/weapon/reagent_containers/food/drinks/cans/beer( src )

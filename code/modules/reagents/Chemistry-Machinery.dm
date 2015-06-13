@@ -2,6 +2,8 @@
 #define LIQUID 2
 #define GAS 3
 
+#define CHEM_DISPENSER_ENERGY_COST	0.1	//How many energy points do we use per unit of chemical?
+
 /obj/machinery/chem_dispenser
 	name = "chem dispenser"
 	density = 1
@@ -28,7 +30,7 @@
 	var/oldenergy = energy
 	energy = min(energy + addenergy, max_energy)
 	if(energy != oldenergy)
-		use_power(1500) // This thing uses up alot of power (this is still low as shit for creating reagents from thin air)
+		use_power(CHEM_SYNTH_ENERGY / CHEM_DISPENSER_ENERGY_COST) // This thing uses up "alot" of power (this is still low as shit for creating reagents from thin air)
 		nanomanager.update_uis(src) // update all UIs attached to src
 
 /obj/machinery/chem_dispenser/power_change()
@@ -137,8 +139,10 @@
 			var/datum/reagents/R = B.reagents
 			var/space = R.maximum_volume - R.total_volume
 
-			R.add_reagent(href_list["dispense"], min(amount, energy * 10, space))
-			energy = max(energy - min(amount, energy * 10, space) / 10, 0)
+			//uses 1 energy per 10 units.
+			var/added_amount = min(amount, energy / CHEM_DISPENSER_ENERGY_COST, space)
+			R.add_reagent(href_list["dispense"], added_amount)
+			energy = max(energy - added_amount * CHEM_DISPENSER_ENERGY_COST, 0)
 
 	if(href_list["ejectBeaker"])
 		if(beaker)
@@ -168,9 +172,6 @@
 /obj/machinery/chem_dispenser/attack_ai(mob/user as mob)
 	return src.attack_hand(user)
 
-/obj/machinery/chem_dispenser/attack_paw(mob/user as mob)
-	return src.attack_hand(user)
-
 /obj/machinery/chem_dispenser/attack_hand(mob/user as mob)
 	if(stat & BROKEN)
 		return
@@ -184,22 +185,22 @@
 	energy = 100
 	accept_glass = 1
 	max_energy = 100
-	dispensable_reagents = list("water","ice","coffee","cream","tea","icetea","cola","spacemountainwind","dr_gibb","space_up","tonic","sodawater","lemon_lime","sugar","orangejuice","limejuice","watermelonjuice")
+	dispensable_reagents = list("water","ice","coffee","milk","tea","icetea","cola","spacemountainwind","dr_gibb","space_up","mangojuice","sodawater","lemon_lime","sugar","orangejuice","limejuice","watermelonjuice")
 
-	/obj/machinery/chem_dispenser/soda/attackby(var/obj/item/weapon/B as obj, var/mob/user as mob)
-		..()
-		if(istype(B, /obj/item/device/multitool))
-			if(hackedcheck == 0)
-				user << "You change the mode from 'McNano' to 'Pizza King'."
-				dispensable_reagents += list("thirteenloko","grapesoda")
-				hackedcheck = 1
-				return
+/obj/machinery/chem_dispenser/soda/attackby(var/obj/item/weapon/B as obj, var/mob/user as mob)
+	..()
+	if(istype(B, /obj/item/device/multitool))
+		if(hackedcheck == 0)
+			user << "You change the mode from 'McNano' to 'Pizza King'."
+			dispensable_reagents += list("thirteenloko","grapesoda")
+			hackedcheck = 1
+			return
 
-			else
-				user << "You change the mode from 'Pizza King' to 'McNano'."
-				dispensable_reagents -= list("thirteenloko")
-				hackedcheck = 0
-				return
+		else
+			user << "You change the mode from 'Pizza King' to 'McNano'."
+			dispensable_reagents -= list("thirteenloko","grapesoda")
+			hackedcheck = 0
+			return
 
 /obj/machinery/chem_dispenser/beer
 	icon_state = "booze_dispenser"
@@ -209,23 +210,41 @@
 	accept_glass = 1
 	max_energy = 100
 	desc = "A technological marvel, supposedly able to mix just the mixture you'd like to drink the moment you ask for one."
-	dispensable_reagents = list("lemon_lime","sugar","orangejuice","limejuice","sodawater","tonic","beer","kahlua","whiskey","wine","vodka","gin","rum","tequilla","vermouth","cognac","ale","mead")
+	dispensable_reagents = list("sodiumchloride","sugar","orangejuice","limejuice","sodawater","tonic","beer","kahlua","whiskey","wine","vodka","gin","rum","tequilla","vermouth","cognac","ale","mead")
 
-	/obj/machinery/chem_dispenser/beer/attackby(var/obj/item/weapon/B as obj, var/mob/user as mob)
-		..()
+/obj/machinery/chem_dispenser/beer/attackby(var/obj/item/weapon/B as obj, var/mob/user as mob)
+	..()
 
-		if(istype(B, /obj/item/device/multitool))
-			if(hackedcheck == 0)
-				user << "You disable the 'nanotrasen-are-cheap-bastards' lock, enabling hidden and very expensive boozes."
-				dispensable_reagents += list("goldschlager","patron","watermelonjuice","berryjuice")
-				hackedcheck = 1
-				return
+	if(istype(B, /obj/item/device/multitool))
+		if(hackedcheck == 0)
+			user << "You disable the 'nanotrasen-are-cheap-bastards' lock, enabling hidden and very expensive boozes."
+			dispensable_reagents += list("goldschlager","patron","watermelonjuice","berryjuice")
+			hackedcheck = 1
+			return
 
-			else
-				user << "You re-enable the 'nanotrasen-are-cheap-bastards' lock, disabling hidden and very expensive boozes."
-				dispensable_reagents -= list("goldschlager","patron","watermelonjuice","berryjuice")
-				hackedcheck = 0
-				return
+		else
+			user << "You re-enable the 'nanotrasen-are-cheap-bastards' lock, disabling hidden and very expensive boozes."
+			dispensable_reagents -= list("goldschlager","patron","watermelonjuice","berryjuice")
+			hackedcheck = 0
+			return
+
+/obj/machinery/chem_dispenser/meds
+	name = "chem dispenser magic"
+	density = 1
+	anchored = 1
+	icon = 'icons/obj/chemical.dmi'
+	icon_state = "dispenser"
+	use_power = 0
+	idle_power_usage = 40
+	ui_title = "Chem Dispenser 9000"
+	energy = 100
+	max_energy = 100
+	amount = 30
+	accept_glass = 0 //At 0 ONLY accepts glass containers. Kinda misleading varname.
+	beaker = null
+	recharged = 0
+	hackedcheck = 0
+	dispensable_reagents = list("inaprovaline","ryetalyn","paracetamol","tramadol","oxycodone","sterilizine","leporazine","kelotane","dermaline","dexalin","dexalinp","tricordrazine","anti_toxin","synaptizine","hyronalin","arithrazine","alkysine","imidazoline","peridaxon","bicaridine","hyperzine","rezadone","spaceacillin","ethylredoxrazine","stoxin","chloralhydrate","cryoxadone","clonexadone")
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -456,9 +475,6 @@
 /obj/machinery/chem_master/attack_ai(mob/user as mob)
 	return src.attack_hand(user)
 
-/obj/machinery/chem_master/attack_paw(mob/user as mob)
-	return src.attack_hand(user)
-
 /obj/machinery/chem_master/attack_hand(mob/user as mob)
 	if(stat & BROKEN)
 		return
@@ -630,7 +646,7 @@
 				if(type in diseases) // Make sure this is a disease
 					D = new type(0, null)
 			var/list/data = list("viruses"=list(D))
-			var/name = sanitize(input(usr,"Name:","Name the culture",D.name))
+			var/name = sanitize(copytext(input(usr,"Name:","Name the culture",D.name), 1, MAX_NAME_LEN))
 			if(!name || name == " ") name = D.name
 			B.name = "[name] culture bottle"
 			B.desc = "A small bottle. Contains [D.agent] culture in synthblood medium."
@@ -680,9 +696,6 @@
 	return
 
 /obj/machinery/computer/pandemic/attack_ai(mob/user as mob)
-	return src.attack_hand(user)
-
-/obj/machinery/computer/pandemic/attack_paw(mob/user as mob)
 	return src.attack_hand(user)
 
 /obj/machinery/computer/pandemic/attack_hand(mob/user as mob)
@@ -850,10 +863,14 @@
 		/obj/item/weapon/reagent_containers/food/snacks/grown/banana = list("banana" = 0),
 		/obj/item/weapon/reagent_containers/food/snacks/grown/potato = list("potato" = 0),
 		/obj/item/weapon/reagent_containers/food/snacks/grown/lemon = list("lemonjuice" = 0),
+		/obj/item/weapon/reagent_containers/food/snacks/grown/apple = list("applejuice" = 0),
 		/obj/item/weapon/reagent_containers/food/snacks/grown/orange = list("orangejuice" = 0),
+		/obj/item/weapon/reagent_containers/food/snacks/grown/strawberry = list("strawberryjuice" = 0),
+		/obj/item/weapon/reagent_containers/food/snacks/grown/ginger = list("gingerjuice" = 0),
 		/obj/item/weapon/reagent_containers/food/snacks/grown/lime = list("limejuice" = 0),
 		/obj/item/weapon/reagent_containers/food/snacks/watermelonslice = list("watermelonjuice" = 0),
 		/obj/item/weapon/reagent_containers/food/snacks/grown/grapes = list("grapejuice" = 0),
+		/obj/item/weapon/reagent_containers/food/snacks/grown/greengrapes = list("greengrapejuice" = 0),
 		/obj/item/weapon/reagent_containers/food/snacks/grown/poisonberries = list("poisonberryjuice" = 0),
 	)
 
@@ -917,9 +934,6 @@
 	holdingitems += O
 	src.updateUsrDialog()
 	return 0
-
-/obj/machinery/reagentgrinder/attack_paw(mob/user as mob)
-	return src.attack_hand(user)
 
 /obj/machinery/reagentgrinder/attack_ai(mob/user as mob)
 	return 0

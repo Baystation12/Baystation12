@@ -3,8 +3,8 @@
 #define MAGAZINE 2
 
 /obj/item/weapon/gun/projectile
-	desc = "A classic revolver. Uses 357 ammo"
 	name = "revolver"
+	desc = "A classic revolver. Uses 357 ammo"
 	icon_state = "revolver"
 	caliber = "357"
 	origin_tech = "combat=2;materials=2"
@@ -38,7 +38,6 @@
 		return 0
 	AC.loc = get_turf(src) //Eject casing onto ground.
 	if(AC.BB)
-		AC.desc += " This one is spent."	//descriptions are magic - only when there's a projectile in the casing
 		in_chamber = AC.BB //Load projectile into chamber.
 		AC.BB.loc = src //Set projectile loc to gun.
 		return 1
@@ -103,13 +102,13 @@
 
 
 
-/obj/item/weapon/gun/projectile/examine()
-	..()
-	usr << "Has [getAmmo()] round\s remaining."
+/obj/item/weapon/gun/projectile/examine(mob/user)
+	..(user)
+	user << "Has [getAmmo()] round\s remaining."
 //		if(in_chamber && !loaded.len)
-//			usr << "However, it has a chambered round."
+//			user << "However, it has a chambered round."
 //		if(in_chamber && loaded.len)
-//			usr << "It also has a chambered round." {R}
+//			user << "It also has a chambered round." {R}
 	return
 
 /obj/item/weapon/gun/projectile/proc/getAmmo()
@@ -118,4 +117,3 @@
 		if(istype(AC))
 			bullets += 1
 	return bullets
-

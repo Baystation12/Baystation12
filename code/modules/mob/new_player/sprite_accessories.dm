@@ -51,7 +51,7 @@
 		name = "Bald"
 		icon_state = "bald"
 		gender = MALE
-		species_allowed = list("Human","Soghun")
+		species_allowed = list("Human","Soghun","Obsedai")
 
 	short
 		name = "Short Hair"	  // try to capatilize the names please~
@@ -400,6 +400,11 @@
 		icon_state = "hair_joestar"
 		gender = MALE
 
+	pixiecut
+		name = "Pixie Cut"
+		icon_state = "hair_pixie"
+		gender = FEMALE
+
 	bald
 		name = "Bald"
 		icon_state = "bald"
@@ -609,30 +614,6 @@
 		species_allowed = list("Skrell")
 		gender = FEMALE
 
-	skr_gold_m
-		name = "Gold plated Skrell Male Tentacles"
-		icon_state = "skrell_goldhair_m"
-		species_allowed = list("Skrell")
-		gender = MALE
-
-	skr_gold_f
-		name = "Gold chained Skrell Female Tentacles"
-		icon_state = "skrell_goldhair_f"
-		species_allowed = list("Skrell")
-		gender = FEMALE
-
-	skr_clothtentacle_m
-		name = "Cloth draped Skrell Male Tentacles"
-		icon_state = "skrell_clothhair_m"
-		species_allowed = list("Skrell")
-		gender = MALE
-
-	skr_clothtentacle_f
-		name = "Cloth draped Skrell Female Tentacles"
-		icon_state = "skrell_clothhair_f"
-		species_allowed = list("Skrell")
-		gender = FEMALE
-
 	taj_ears
 		name = "Tajaran Ears"
 		icon_state = "ears_plain"
@@ -702,7 +683,7 @@
 
 	taj_sideburns
 		name = "Tajara Sideburns"
-		icon_state = "facial_mutton"
+		icon_state = "facial_sideburns"
 		species_allowed = list("Tajara")
 
 	taj_mutton

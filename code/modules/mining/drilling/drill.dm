@@ -388,5 +388,5 @@
 		usr << "It is anchored in place!"
 		return 0
 
-	src.dir = turn(src.dir, 90)
+	src.set_dir(turn(src.dir, 90))
 	return 1

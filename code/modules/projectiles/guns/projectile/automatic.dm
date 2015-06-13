@@ -16,7 +16,7 @@
 
 
 /obj/item/weapon/gun/projectile/automatic/mini_uzi
-	name = "Uzi"
+	name = "\improper Uzi"
 	desc = "A lightweight, fast firing gun, for when you want someone dead. Uses .45 rounds."
 	icon_state = "mini-uzi"
 	w_class = 3.0
@@ -144,3 +144,4 @@
    around simulating a removable magazine by adding the casings into the loaded list and spawning an empty magazine
    when the gun is out of rounds. Which means you can't eject magazines with rounds in them. The below is a very
    rough and poor attempt at making that happen. -Ausops */
+  

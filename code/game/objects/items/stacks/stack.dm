@@ -16,9 +16,12 @@
 	var/singular_name
 	var/amount = 1
 	var/max_amount //also see stack recipes initialisation, param "max_res_amount" must be equal to this max_amount
+	var/stacktype //determines whether different stack types can merge
 
 /obj/item/stack/New(var/loc, var/amount=null)
 	..()
+	if (!stacktype)
+		stacktype = type
 	if (amount)
 		src.amount = amount
 	return
@@ -28,11 +31,9 @@
 		usr << browse(null, "window=stack")
 	..()
 
-/obj/item/stack/examine()
-	set src in view(1)
-	..()
-	usr << "There are [src.amount] [src.singular_name]\s in the stack."
-	return
+/obj/item/stack/examine(mob/user)
+	if(..(user, 1))
+		user << "There are [src.amount] [src.singular_name]\s in the stack."
 
 /obj/item/stack/attack_self(mob/user as mob)
 	list_recipes(user)
@@ -95,6 +96,43 @@
 	onclose(user, "stack")
 	return
 
+/obj/item/stack/proc/produce_recipe(datum/stack_recipe/recipe, var/quantity, mob/user)
+	var/required = quantity*recipe.req_amount
+	var/produced = min(quantity*recipe.res_amount, recipe.max_res_amount)
+
+	if (!can_use(required))
+		if (produced>1)
+			user << "\red You haven't got enough [src] to build \the [produced] [recipe.title]\s!"
+		else
+			user << "\red You haven't got enough [src] to build \the [recipe.title]!"
+		return
+
+	if (recipe.one_per_turf && (locate(recipe.result_type) in user.loc))
+		user << "\red There is another [recipe.title] here!"
+		return
+
+	if (recipe.on_floor && !isfloor(user.loc))
+		user << "\red \The [recipe.title] must be constructed on the floor!"
+		return
+
+	if (recipe.time)
+		user << "\blue Building [recipe.title] ..."
+		if (!do_after(user, recipe.time))
+			return
+
+	if (use(required))
+		var/atom/O = new recipe.result_type(user.loc)
+		O.set_dir(user.dir)
+		O.add_fingerprint(user)
+
+		if (istype(O, /obj/item/stack))
+			var/obj/item/stack/S = O
+			S.amount = produced
+
+		if (istype(O, /obj/item/weapon/storage)) //BubbleWrap - so newly formed boxes are empty
+			for (var/obj/item/I in O)
+				del(I)
+
 /obj/item/stack/Topic(href, href_list)
 	..()
 	if ((usr.restrained() || usr.stat || usr.get_active_hand() != src))
@@ -110,64 +148,37 @@
 		if (href_list["sublist"])
 			var/datum/stack_recipe_list/srl = recipes_list[text2num(href_list["sublist"])]
 			recipes_list = srl.recipes
+
 		var/datum/stack_recipe/R = recipes_list[text2num(href_list["make"])]
 		var/multiplier = text2num(href_list["multiplier"])
 		if (!multiplier || (multiplier <= 0)) //href exploit protection
 			return
-		if (src.amount < R.req_amount*multiplier)
-			if (R.req_amount*multiplier>1)
-				usr << "\red You haven't got enough [src] to build \the [R.req_amount*multiplier] [R.title]\s!"
-			else
-				usr << "\red You haven't got enough [src] to build \the [R.title]!"
-			return
-		if (R.one_per_turf && (locate(R.result_type) in usr.loc))
-			usr << "\red There is another [R.title] here!"
-			return
-		if (R.on_floor && !istype(usr.loc, /turf/simulated/floor))
-			usr << "\red \The [R.title] must be constructed on the floor!"
-			return
-		if (R.time)
-			usr << "\blue Building [R.title] ..."
-			if (!do_after(usr, R.time))
-				return
-		if (src.amount < R.req_amount*multiplier)
-			return
-		var/atom/O = new R.result_type( usr.loc )
-		O.dir = usr.dir
-		if (R.max_res_amount>1)
-			var/obj/item/stack/new_item = O
-			new_item.amount = R.res_amount*multiplier
-			//new_item.add_to_stacks(usr)
-		src.amount-=R.req_amount*multiplier
-		if (src.amount<=0)
-			var/oldsrc = src
-			src = null //dont kill proc after del()
-			usr.before_take_item(oldsrc)
-			del(oldsrc)
-			if (istype(O,/obj/item) && istype(usr,/mob/living/carbon))
-				usr.put_in_hands(O)
-		O.add_fingerprint(usr)
-		//BubbleWrap - so newly formed boxes are empty
-		if ( istype(O, /obj/item/weapon/storage) )
-			for (var/obj/item/I in O)
-				del(I)
-		//BubbleWrap END
+
+		src.produce_recipe(R, multiplier, usr)
+
 	if (src && usr.machine==src) //do not reopen closed window
 		spawn( 0 )
 			src.interact(usr)
 			return
 	return
 
-/obj/item/stack/proc/use(var/used)
+//Return 1 if an immediate subsequent call to use() would succeed.
+//Ensures that code dealing with stacks uses the same logic
+/obj/item/stack/proc/can_use(var/used)
 	if (amount < used)
+		return 0
+	return 1
+
+/obj/item/stack/proc/use(var/used)
+	if (!can_use(used))
 		return 0
 	amount -= used
 	if (amount <= 0)
-		var/oldsrc = src
-		src = null //dont kill proc after del()
-		if(usr)
-			usr.before_take_item(oldsrc)
-		del(oldsrc)
+		spawn(0) //delete the empty stack once the current context yields
+			if (amount <= 0) //check again in case someone transferred stuff to us
+				if(usr)
+					usr.before_take_item(src)
+				del(src)
 	return 1
 
 /obj/item/stack/proc/add(var/extra)
@@ -177,63 +188,94 @@
 		amount += extra
 	return 1
 
+/*
+	The transfer and split procs work differently than use() and add().
+	Whereas those procs take no action if the desired amount cannot be added or removed these procs will try to transfer whatever they can.
+	They also remove an equal amount from the source stack.
+*/
+
+//attempts to transfer amount to S, and returns the amount actually transferred
+/obj/item/stack/proc/transfer_to(obj/item/stack/S, var/tamount=null)
+	if (!amount)
+		return 0
+	if (stacktype != S.stacktype)
+		return 0
+	if (isnull(tamount))
+		tamount = src.amount
+
+	var/transfer = max(min(tamount, src.amount, (S.max_amount - S.amount)), 0)
+
+	var/orig_amount = src.amount
+	if (transfer && src.use(transfer))
+		S.add(transfer)
+		if (prob(transfer/orig_amount * 100))
+			transfer_fingerprints_to(S)
+			if(blood_DNA)
+				S.blood_DNA |= blood_DNA
+				//todo bloody overlay
+		return transfer
+	return 0
+
+//creates a new stack with the specified amount
+/obj/item/stack/proc/split(var/tamount)
+	if (!amount)
+		return null
+
+	var/transfer = max(min(tamount, src.amount, initial(max_amount)), 0)
+
+	var/orig_amount = src.amount
+	if (transfer && src.use(transfer))
+		var/obj/item/stack/newstack = new src.type(loc, transfer)
+		if (prob(transfer/orig_amount * 100))
+			transfer_fingerprints_to(newstack)
+			if(blood_DNA)
+				newstack.blood_DNA |= blood_DNA
+		return newstack
+	return null
+
 /obj/item/stack/proc/get_amount()
 	return amount
 
 /obj/item/stack/proc/add_to_stacks(mob/usr as mob)
-	var/obj/item/stack/oldsrc = src
-	src = null
 	for (var/obj/item/stack/item in usr.loc)
-		if (item==oldsrc)
+		if (item==src)
 			continue
-		if (!istype(item, oldsrc.type))
-			continue
-		if (item.amount>=item.max_amount)
-			continue
-		oldsrc.attackby(item, usr)
-		usr << "You add new [item.singular_name] to the stack. It now contains [item.amount] [item.singular_name]\s."
-		if(!oldsrc)
+		var/transfer = src.transfer_to(item)
+		if (transfer)
+			usr << "You add a new [item.singular_name] to the stack. It now contains [item.amount] [item.singular_name]\s."
+		if(!amount)
 			break
 
 /obj/item/stack/attack_hand(mob/user as mob)
 	if (user.get_inactive_hand() == src)
-		var/obj/item/stack/F = new src.type(user, 1)
-		F.copy_evidences(src)
-		user.put_in_hands(F)
-		src.add_fingerprint(user)
-		F.add_fingerprint(user)
-		use(1)
-		if (src && usr.machine==src)
-			spawn(0) src.interact(usr)
+		var/obj/item/stack/F = src.split(1)
+		if (F)
+			user.put_in_hands(F)
+			src.add_fingerprint(user)
+			F.add_fingerprint(user)
+			spawn(0)
+				if (src && usr.machine==src)
+					src.interact(usr)
 	else
 		..()
 	return
 
 /obj/item/stack/attackby(obj/item/W as obj, mob/user as mob)
 	..()
-	if (istype(W, src.type))
+	if (istype(W, /obj/item/stack))
 		var/obj/item/stack/S = W
-		if (S.amount >= max_amount)
-			return 1
-		var/to_transfer as num
-		if (user.get_inactive_hand()==src)
-			to_transfer = 1
-		else
-			to_transfer = min(src.amount, S.max_amount-S.amount)
-		S.add(to_transfer)
-		if (S && usr.machine==S)
-			spawn(0) S.interact(usr)
-		src.use(to_transfer)
-		if (src && usr.machine==src)
-			spawn(0) src.interact(usr)
-	else return ..()
 
-/obj/item/stack/proc/copy_evidences(obj/item/stack/from as obj)
-	src.blood_DNA = from.blood_DNA
-	src.fingerprints  = from.fingerprints
-	src.fingerprintshidden  = from.fingerprintshidden
-	src.fingerprintslast  = from.fingerprintslast
-	//TODO bloody overlay
+		if (user.get_inactive_hand()==src)
+			src.transfer_to(S, 1)
+		else
+			src.transfer_to(S)
+
+		spawn(0) //give the stacks a chance to delete themselves if necessary
+			if (S && usr.machine==S)
+				S.interact(usr)
+			if (src && usr.machine==src)
+				src.interact(usr)
+	else return ..()
 
 /*
  * Recipe datum
@@ -241,8 +283,8 @@
 /datum/stack_recipe
 	var/title = "ERROR"
 	var/result_type
-	var/req_amount = 1
-	var/res_amount = 1
+	var/req_amount = 1 //amount of material needed for this recipe
+	var/res_amount = 1 //amount of stuff that is produced in one batch (e.g. 4 for floor tiles)
 	var/max_res_amount = 1
 	var/time = 0
 	var/one_per_turf = 0

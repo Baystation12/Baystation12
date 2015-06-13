@@ -18,6 +18,11 @@
 	anchored = 1
 
 
+/obj/structure/filingcabinet/chestdrawerviro
+	name = "virology filing cabinet"
+	icon_state = "tallcabinet"
+
+
 /obj/structure/filingcabinet/chestdrawer
 	name = "chest drawer"
 	icon_state = "chestdrawer"

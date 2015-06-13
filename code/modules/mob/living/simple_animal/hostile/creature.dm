@@ -10,7 +10,7 @@
 	maxHealth = 80
 	melee_damage_lower = 25
 	melee_damage_upper = 50
-	attacktext = "chomps"
+	attacktext = "chomped"
 	attack_sound = 'sound/weapons/bite.ogg'
 	faction = "creature"
 	speed = 4

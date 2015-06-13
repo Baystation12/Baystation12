@@ -34,7 +34,9 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 			H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/ids(H), slot_r_hand)
 		else
 			H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/ids(H.back), slot_in_backpack)
-		captain_announcement.Announce("All hands, captain [H.real_name] on deck!")
+
+		var/sound/announce_sound = (ticker.current_state <= GAME_STATE_SETTING_UP)? null : sound('sound/misc/newcaptain.ogg', volume=20)
+		captain_announcement.Announce("All hands, Captain [H.real_name] on deck!", new_sound=announce_sound)
 
 		H.implant_loyalty(src)
 

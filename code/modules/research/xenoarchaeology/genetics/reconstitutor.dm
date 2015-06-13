@@ -76,6 +76,10 @@ datum/genesequence
 					full = 1
 				if(SCANFOSSIL_RETVAL_SUCCESS)
 					numaccepted += 1
+					if(prob(50))
+						numaccepted += 1
+						if(prob(50))
+							numaccepted += 1
 					S.remove_from_storage(F, src) //This will move the item to this item's contents
 					del(F)
 					updateDialog()

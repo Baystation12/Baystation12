@@ -1,7 +1,7 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:31
 
 /obj/machinery/computer/prisoner
-	name = "Prisoner Management"
+	name = "prisoner management console"
 	icon = 'icons/obj/computer.dmi'
 	icon_state = "explosive"
 	req_access = list(access_armory)
@@ -16,11 +16,6 @@
 
 	attack_ai(var/mob/user as mob)
 		return src.attack_hand(user)
-
-
-	attack_paw(var/mob/user as mob)
-		return
-
 
 	attack_hand(var/mob/user as mob)
 		if(..())
@@ -49,7 +44,7 @@
 				if(!T.implanted) continue
 				var/loc_display = "Unknown"
 				var/mob/living/carbon/M = T.imp_in
-				if(M.z == 1 && !istype(M.loc, /turf/space))
+				if(M.z in config.station_levels && !istype(M.loc, /turf/space))
 					var/turf/mob_loc = get_turf(M)
 					loc_display = mob_loc.loc
 				if(T.malfunction)
@@ -95,7 +90,7 @@
 					usr << "Unauthorized Access."
 
 			else if(href_list["warn"])
-				var/warning = copytext(sanitize(input(usr,"Message:","Enter your message here!","")),1,MAX_MESSAGE_LEN)
+				var/warning = sanitize(copytext(input(usr,"Message:","Enter your message here!",""),1,MAX_MESSAGE_LEN))
 				if(!warning) return
 				var/obj/item/weapon/implant/I = locate(href_list["warn"])
 				if((I)&&(I.imp_in))
@@ -105,5 +100,3 @@
 			src.add_fingerprint(usr)
 		src.updateUsrDialog()
 		return
-
-

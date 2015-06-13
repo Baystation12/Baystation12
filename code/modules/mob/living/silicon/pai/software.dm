@@ -223,7 +223,7 @@
 				if(href_list["toggler"])
 					pda.toff = !pda.toff
 				else if(href_list["ringer"])
-					pda.silent = !pda.silent
+					pda.message_silent = !pda.message_silent
 				else if(href_list["target"])
 					if(silence_time)
 						return alert("Communications circuits remain uninitialized.")
@@ -668,7 +668,7 @@
 	dat += {"<b>Signal/Receiver Status:</b> <A href='byond://?src=\ref[src];software=pdamessage;toggler=1'>
 	[(pda.toff) ? "<font color='red'> \[Off\]</font>" : "<font color='green'> \[On\]</font>"]</a><br>
 	<b>Ringer Status:</b> <A href='byond://?src=\ref[src];software=pdamessage;ringer=1'>
-	[(pda.silent) ? "<font color='red'> \[Off\]</font>" : "<font color='green'> \[On\]</font>"]</a><br><br>"}
+	[(pda.message_silent) ? "<font color='red'> \[Off\]</font>" : "<font color='green'> \[On\]</font>"]</a><br><br>"}
 	dat += "<ul>"
 	if(!pda.toff)
 		for (var/obj/item/device/pda/P in sortAtom(PDAs))

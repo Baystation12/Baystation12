@@ -3,7 +3,7 @@
 	desc = "Should anything ever go wrong..."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "red_phone"
-	flags = FPRINT | TABLEPASS | CONDUCT
+	flags = CONDUCT
 	force = 3.0
 	throwforce = 2.0
 	throw_speed = 1
@@ -22,7 +22,6 @@
 	anchored = 0.0
 	var/stored_matter = 0
 	var/mode = 1
-	flags = TABLEPASS
 	w_class = 3.0
 
 /obj/item/weapon/bananapeel
@@ -92,7 +91,7 @@
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "cane"
 	item_state = "stick"
-	flags = FPRINT | TABLEPASS| CONDUCT
+	flags = CONDUCT
 	force = 5.0
 	throwforce = 7.0
 	w_class = 2.0
@@ -139,7 +138,7 @@
 	gender = PLURAL
 	icon = 'icons/obj/items.dmi'
 	icon_state = "handcuff"
-	flags = FPRINT | TABLEPASS | CONDUCT
+	flags = CONDUCT
 	throwforce = 0
 	w_class = 3.0
 	origin_tech = "materials=1"
@@ -198,21 +197,12 @@
 	throw_speed = 1
 	throw_range = 5
 	w_class = 2.0
-	flags = FPRINT | TABLEPASS
 	attack_verb = list("warned", "cautioned", "smashed")
 
 /obj/item/weapon/caution/cone
 	desc = "This cone is trying to warn you of something!"
 	name = "warning cone"
 	icon_state = "cone"
-
-/obj/item/weapon/rack_parts
-	name = "rack parts"
-	desc = "Parts of a rack."
-	icon = 'icons/obj/items.dmi'
-	icon_state = "rack_parts"
-	flags = FPRINT | TABLEPASS| CONDUCT
-	matter = list("metal" = 3750)
 
 /*/obj/item/weapon/syndicate_uplink
 	name = "station bounced radio"
@@ -225,7 +215,7 @@
 	var/traitor_frequency = 0.0
 	var/mob/currentUser = null
 	var/obj/item/device/radio/origradio = null
-	flags = FPRINT | TABLEPASS | CONDUCT | ONBELT
+	flags = CONDUCT | ONBELT
 	w_class = 2.0
 	item_state = "radio"
 	throw_speed = 4
@@ -243,7 +233,7 @@
 	var/selfdestruct = 0.0
 	var/traitor_frequency = 0.0
 	var/obj/item/device/radio/origradio = null
-	flags = FPRINT | TABLEPASS| CONDUCT
+	flags = CONDUCT
 	slot_flags = SLOT_BELT
 	item_state = "radio"
 	throwforce = 5
@@ -263,7 +253,7 @@
 	throw_speed = 1
 	throw_range = 5
 	w_class = 2.0
-	flags = FPRINT | TABLEPASS | NOSHIELD
+	flags = NOSHIELD
 	attack_verb = list("bludgeoned", "whacked", "disciplined")
 
 /obj/item/weapon/staff/broom
@@ -290,37 +280,7 @@
 	throw_speed = 1
 	throw_range = 5
 	w_class = 2.0
-	flags = FPRINT | TABLEPASS | NOSHIELD
-
-/obj/item/weapon/table_parts
-	name = "table parts"
-	desc = "Parts of a table. Poor table."
-	gender = PLURAL
-	icon = 'icons/obj/items.dmi'
-	icon_state = "table_parts"
-	matter = list("metal" = 3750)
-	flags = FPRINT | TABLEPASS| CONDUCT
-	attack_verb = list("slammed", "bashed", "battered", "bludgeoned", "thrashed", "whacked")
-
-/obj/item/weapon/table_parts/reinforced
-	name = "reinforced table parts"
-	desc = "Hard table parts. Well...harder..."
-	icon = 'icons/obj/items.dmi'
-	icon_state = "reinf_tableparts"
-	matter = list("metal" = 7500)
-	flags = FPRINT | TABLEPASS| CONDUCT
-
-/obj/item/weapon/table_parts/wood
-	name = "wooden table parts"
-	desc = "Keep away from fire."
-	icon_state = "wood_tableparts"
-	flags = null
-
-/obj/item/weapon/table_parts/gambling
-	name = "gamble table parts"
-	desc = "Keep away from security."
-	icon_state = "gamble_tableparts"
-	flags = null
+	flags = NOSHIELD
 
 /obj/item/weapon/wire
 	desc = "This is just a simple piece of regular insulated wire."
@@ -342,7 +302,7 @@
 	icon_state = "std_module"
 	w_class = 2.0
 	item_state = "electronic"
-	flags = FPRINT|TABLEPASS|CONDUCT
+	flags = CONDUCT
 	var/mtype = 1						// 1=electronic 2=hardware
 
 /obj/item/weapon/module/card_reader
@@ -423,7 +383,7 @@
 	w_class = 1
 	throwforce = 2
 	var/cigarcount = 6
-	flags = ONBELT | TABLEPASS */
+	flags = ONBELT */
 
 /obj/item/weapon/pai_cable
 	desc = "A flexible coated cable with a universal jack on one end."
@@ -432,19 +392,6 @@
 	icon_state = "wire1"
 
 	var/obj/machinery/machine
-
-/obj/item/weapon/plastique
-	name = "plastic explosives"
-	desc = "Used to put holes in specific areas without too much extra hole."
-	gender = PLURAL
-	icon = 'icons/obj/assemblies.dmi'
-	icon_state = "plastic-explosive0"
-	item_state = "plasticx"
-	flags = FPRINT | TABLEPASS | NOBLUDGEON
-	w_class = 2.0
-	origin_tech = "syndicate=2"
-	var/timer = 10
-	var/atom/target = null
 
 ///////////////////////////////////////Stock Parts /////////////////////////////////
 
@@ -642,9 +589,9 @@
 	icon = 'icons/obj/wizard.dmi'
 	icon_state = "ectoplasm"
 
-/obj/item/weapon/research//Makes testing much less of a pain -Sieve
-	name = "research"
+/obj/item/weapon/research
+	name = "research debugging device"
+	desc = "Instant research tool. For testing purposes only."
 	icon = 'icons/obj/stock_parts.dmi'
-	icon_state = "capacitor"
-	desc = "A debug item for research."
-	origin_tech = "materials=8;programming=8;magnets=8;powerstorage=8;bluespace=8;combat=8;biotech=8;syndicate=8;phorontech=8;engineering=8"
+	icon_state = "smes_coil"
+	origin_tech = "materials=19;programming=19;magnets=19;powerstorage=19;bluespace=19;combat=19;biotech=19;syndicate=19;phorontech=19;engineering=19"

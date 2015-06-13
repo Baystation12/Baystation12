@@ -4,7 +4,7 @@
 	icon = 'icons/obj/items.dmi'
 	name = "Coin"
 	icon_state = "coin"
-	flags = FPRINT | TABLEPASS| CONDUCT
+	flags = CONDUCT
 	force = 0.0
 	throwforce = 0.0
 	w_class = 1.0
@@ -63,7 +63,7 @@
 
 		var/obj/item/stack/cable_coil/CC = new/obj/item/stack/cable_coil(user.loc)
 		CC.amount = 1
-		CC.updateicon()
+		CC.update_icon()
 		overlays = list()
 		string_attached = null
 		user << "\blue You detach the string from the coin."

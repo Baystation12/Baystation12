@@ -24,7 +24,7 @@
 /obj/machinery/conveyor/New(loc, newdir, on = 0)
 	..(loc)
 	if(newdir)
-		dir = newdir
+		set_dir(newdir)
 	switch(dir)
 		if(NORTH)
 			forwards = NORTH

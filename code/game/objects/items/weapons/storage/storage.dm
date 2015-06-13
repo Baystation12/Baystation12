@@ -25,6 +25,10 @@
 	var/use_sound = "rustle"	//sound played when used. null for no sound.
 
 /obj/item/weapon/storage/MouseDrop(obj/over_object as obj)
+
+	if(!canremove)
+		return
+
 	if (ishuman(usr) || ismonkey(usr)) //so monkeys can take off their backpacks -- Urist
 
 		if (istype(usr.loc,/obj/mecha)) // stops inventory actions in a mech
@@ -36,12 +40,12 @@
 
 		if (!( istype(over_object, /obj/screen) ))
 			return ..()
-		
+
 		//makes sure that the storage is equipped, so that we can't drag it into our hand from miles away.
 		//there's got to be a better way of doing this.
 		if (!(src.loc == usr) || (src.loc && src.loc.loc == usr))
 			return
-		
+
 		if (!( usr.restrained() ) && !( usr.stat ))
 			switch(over_object.name)
 				if("r_hand")
@@ -99,7 +103,7 @@
 /obj/item/weapon/storage/proc/open(mob/user as mob)
 	if (src.use_sound)
 		playsound(src.loc, src.use_sound, 50, 1, -5)
-	
+
 	orient2hud(user)
 	if (user.s_active)
 		user.s_active.close(user)
@@ -352,7 +356,7 @@
 			H.put_in_hands(src)
 			H.r_store = null
 			return
-	
+
 	if (src.loc == user)
 		src.open(user)
 	else
@@ -448,44 +452,44 @@
 	del(src)
 //BubbleWrap END
 
-/obj/item/weapon/storage/hear_talk(mob/M as mob, text)
+/obj/item/weapon/storage/hear_talk(mob/M as mob, text, verb, datum/language/speaking)
 	for (var/atom/A in src)
 		if(istype(A,/obj/))
 			var/obj/O = A
-			O.hear_talk(M, text)
+			O.hear_talk(M, text, verb, speaking)
 
 //Returns the storage depth of an atom. This is the number of storage items the atom is contained in before reaching toplevel (the area).
 //Returns -1 if the atom was not found on container.
 /atom/proc/storage_depth(atom/container)
 	var/depth = 0
 	var/atom/cur_atom = src
-	
+
 	while (cur_atom && !(cur_atom in container.contents))
 		if (isarea(cur_atom))
 			return -1
 		if (istype(cur_atom.loc, /obj/item/weapon/storage))
 			depth++
 		cur_atom = cur_atom.loc
-	
+
 	if (!cur_atom)
 		return -1	//inside something with a null loc.
-	
+
 	return depth
-	
+
 //Like storage depth, but returns the depth to the nearest turf
 //Returns -1 if no top level turf (a loc was null somewhere, or a non-turf atom's loc was an area somehow).
 /atom/proc/storage_depth_turf()
 	var/depth = 0
 	var/atom/cur_atom = src
-	
+
 	while (cur_atom && !isturf(cur_atom))
 		if (isarea(cur_atom))
 			return -1
 		if (istype(cur_atom.loc, /obj/item/weapon/storage))
 			depth++
 		cur_atom = cur_atom.loc
-	
+
 	if (!cur_atom)
 		return -1	//inside something with a null loc.
-	
+
 	return depth

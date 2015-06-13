@@ -42,7 +42,6 @@
 	multiple_sprites = 1
 
 
-
 /obj/item/ammo_magazine/a666
 	name = "ammo box (.666)"
 	icon_state = "666"

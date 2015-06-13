@@ -78,29 +78,32 @@
 /obj/item/clothing/under/mil/navy/
 	name = "Navy Rating's uniform"
 	desc = "It's the standard enlisted uniform of the Nanotrasen Navy."
-	icon_state = "marineuniform"
+	icon_state = "navyofficer1"
 	item_state = "bl_suit"
 	item_color = "navyenlisted"
 
 /obj/item/clothing/under/mil/navy/jofficer
 	name = "Navy Junior Officer's uniform"
 	desc = "It's a long sleeved Nanotrasen Navy uniform, worn by junior officers."
+	icon_state = "navyofficer1"
 	item_color = "navyjofficer"
 
 /obj/item/clothing/under/mil/navy/sofficer
 	name = "NT Navy Senior Officer's uniform"
 	desc = "A long sleeved Nanotrasen Navy uniform for senior officers."
+	icon_state = "navyofficer2"
 	item_color = "navysofficer"
 
 /obj/item/clothing/under/mil/navy/fofficer
 	name = "NT Navy Flag Officer uniform"
 	desc = "A long sleeved Nanotrasen Navy uniform, with the rank insignia of a Flag Officer."
+	icon_state =  "navyofficer2"
 	item_color = "navyfofficer"
 
 /obj/item/weapon/storage/belt/security/marine
 	name = "Marine combat belt"
 	desc = "Can hold gear like grenades and ammunition."
-	icon_state = "swatbelt"
+	icon_state = "marinebelt"
 	item_state = "marinebelt"
 	storage_slots = 9
 	max_w_class = 3
@@ -113,6 +116,12 @@
 	item_state = "marine"
 
 //Marine Armour
+
+/obj/item/clothing/head/helmet/tactical/marine
+	name = "Marine helmet"
+	desc = "A combat helmet used by NT Marines."
+	icon_state = "marine-helmet"
+	item_state = "marine-helmet"
 
 /obj/item/clothing/suit/armor/tactical/marineheavy
 	name = "Marine heavy armor"
@@ -133,5 +142,14 @@
 	desc = "NT Marine light armor, generally worn in non-combat zones."
 	icon_state = "marine-armor-light"
 	item_state = "marine-armor-light"
+
+//Obsedai
+/obj/item/clothing/under/obsedai
+	name = "Obsedai webbing"
+	desc = "A webbing harness used by Obsedai to store things. It is far too large to be worn by other species."
+	species_restricted = list("Obsedai")
+	icon_state = "obsedai"
+	item_state = "obsedai"
+	item_color = "obsedai"
 
 //Made this a seperate file for ease of updating.

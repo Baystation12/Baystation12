@@ -29,7 +29,7 @@
 
 				switch(tile_dir_mode)
 					if(1) // All directions accepted
-						F.dir = D
+						F.set_dir(D)
 						F.icon_state = mode
 					if(2) // Corner mode - diagonal directions converted CW around.
 						switch(D)
@@ -41,7 +41,7 @@
 								D = WEST
 							if(NORTHWEST)
 								D = NORTH
-						F.dir = D
+						F.set_dir(D)
 						F.icon_state = mode
 					if(3) // cardinal directions only. I've adjusted diagonals the same way the facing code does.
 						switch(D)
@@ -53,7 +53,7 @@
 								D = WEST
 							if(NORTHWEST)
 								D = WEST
-						F.dir = D
+						F.set_dir(D)
 						F.icon_state = mode
 					if(4) // floors.dmi icon_states "warningcorner" and "warnwhitecorner" are incorrect, this fixes it
 						var/D2
@@ -66,16 +66,16 @@
 								D2 = NORTH
 							if(NORTHWEST)
 								D2 = EAST
-						F.dir = D2
+						F.set_dir(D2)
 						F.icon_state = mode
 					if(5)
-						F.dir = 0
+						F.set_dir(0)
 						if(D == NORTH || D == SOUTH || D == NORTHEAST || D == SOUTHWEST)
 							F.icon_state = mode
 						else
 							F.icon_state = "[mode]_inv"
 			else
-				F.dir = 0
+				F.set_dir(0)
 				F.icon_state = mode
 		else
 			usr << "You can't paint that!"
@@ -204,6 +204,6 @@
 				if("P (OP)")
 					mode = "white_halfp"
 
-/obj/item/device/floor_painter/examine()
-	..()
-	usr << "It is in [mode_nice] mode."
+/obj/item/device/floor_painter/examine(mob/user)
+	..(user)
+	user << "It is in [mode_nice] mode."

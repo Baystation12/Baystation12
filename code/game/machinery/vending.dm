@@ -26,7 +26,6 @@
 	var/vend_power_usage = 150 //actuators and stuff
 
 	var/active = 1 //No sales pitches if off!
-	var/delay_product_spawn // If set, uses sleep() in product spawn proc (mostly for seeds to retrieve correct names).
 	var/vend_ready = 1 //Are we ready to vend?? Is it time??
 	var/vend_delay = 10 //How long does it take to vend?
 	var/datum/data/vending_product/currently_vending = null // A /datum/data/vending_product instance of what we're paying for right now.
@@ -56,12 +55,9 @@
 	var/shut_up = 1 //Stop spouting those godawful pitches!
 	var/extended_inventory = 0 //can we access the hidden inventory?
 	var/panel_open = 0 //Hacking that vending machine. Gonna get a free candy bar.
-	var/wires = 15
+	var/scan_id = 1
 	var/obj/item/weapon/coin/coin
-	var/const/WIRE_EXTEND = 1
-	var/const/WIRE_SCANID = 2
-	var/const/WIRE_SHOCK = 3
-	var/const/WIRE_SHOOTINV = 4
+	var/datum/wires/vending/wires = null
 
 	var/check_accounts = 0		// 1 = requires PIN and checks accounts.  0 = You slide an ID, it vends, SPACE COMMUNISM!
 	var/obj/item/weapon/spacecash/ewallet/ewallet
@@ -69,6 +65,7 @@
 
 /obj/machinery/vending/New()
 	..()
+	wires = new(src)
 	spawn(4)
 		src.slogan_list = text2list(src.product_slogans, ";")
 
@@ -86,6 +83,14 @@
 		return
 
 	return
+
+/obj/machinery/vending/Del()
+	del(wires) // qdel
+	wires = null
+	if(coin)
+		del(coin) // qdel
+		coin = null
+	..()
 
 /obj/machinery/vending/ex_act(severity)
 	switch(severity)
@@ -116,15 +121,11 @@
 
 /obj/machinery/vending/proc/build_inventory(var/list/productlist,hidden=0,req_coin=0)
 
-	if(delay_product_spawn)
-		sleep(15) //Make ABSOLUTELY SURE the seed datum is properly populated.
-
 	for(var/typepath in productlist)
 		var/amount = productlist[typepath]
 		var/price = prices[typepath]
 		if(isnull(amount)) amount = 1
 
-		var/atom/temp = new typepath(null)
 		var/datum/data/vending_product/R = new /datum/data/vending_product()
 
 		R.product_path = typepath
@@ -142,10 +143,8 @@
 			R.category=CAT_NORMAL
 			product_records += R
 
-		if(delay_product_spawn)
-			sleep(5) //sleep(1) did not seem to cut it, so here we are.
-
-		R.product_name = temp.name
+		var/atom/temp = typepath
+		R.product_name = initial(temp.name)
 
 //		world << "Added: [R.product_name]] - [R.amount] - [R.product_path]"
 	return
@@ -268,10 +267,6 @@
 	else
 		usr << "\icon[src]<span class='warning'>Error: Unable to access your account. Please contact technical support if problem persists.</span>"
 
-
-/obj/machinery/vending/attack_paw(mob/user as mob)
-	return attack_hand(user)
-
 /obj/machinery/vending/attack_ai(mob/user as mob)
 	return attack_hand(user)
 
@@ -354,35 +349,18 @@
 		dat += "</TT>"
 
 	if(panel_open)
-		var/list/vendwires = list(
-			"Violet" = 1,
-			"Orange" = 2,
-			"Goldenrod" = 3,
-			"Green" = 4,
-		)
-		dat += "<br><hr><br><B>Access Panel</B><br>"
-		for(var/wiredesc in vendwires)
-			var/is_uncut = src.wires & APCWireColorToFlag[vendwires[wiredesc]]
-			dat += "[wiredesc] wire: "
-			if(!is_uncut)
-				dat += "<a href='?src=\ref[src];cutwire=[vendwires[wiredesc]]'>Mend</a>"
-			else
-				dat += "<a href='?src=\ref[src];cutwire=[vendwires[wiredesc]]'>Cut</a> "
-				dat += "<a href='?src=\ref[src];pulsewire=[vendwires[wiredesc]]'>Pulse</a> "
-			dat += "<br>"
+		dat += wires()
 
-		dat += "<br>"
-		dat += "The orange light is [(src.seconds_electrified == 0) ? "off" : "on"].<BR>"
-		dat += "The red light is [src.shoot_inventory ? "off" : "blinking"].<BR>"
-		dat += "The green light is [src.extended_inventory ? "on" : "off"].<BR>"
-		dat += "The [(src.wires & WIRE_SCANID) ? "purple" : "yellow"] light is on.<BR>"
-
-		if (product_slogans != "")
-			dat += "The speaker switch is [src.shut_up ? "off" : "on"]. <a href='?src=\ref[src];togglevoice=[1]'>Toggle</a>"
+		if(product_slogans != "")
+			dat += "The speaker switch is [shut_up ? "off" : "on"]. <a href='?src=\ref[src];togglevoice=[1]'>Toggle</a>"
 
 	user << browse(dat, "window=vending")
 	onclose(user, "")
 	return
+
+// returns the wire panel text
+/obj/machinery/vending/proc/wires()
+	return wires.GetInteractWindow()
 
 /obj/machinery/vending/Topic(href, href_list)
 	if(stat & (BROKEN|NOPOWER))
@@ -425,9 +403,9 @@
 					usr << "\red The vending machine refuses to interface with you, as you are not in its target demographic!"
 					return
 
-			if ((!src.allowed(usr)) && (!src.emagged) && (src.wires & WIRE_SCANID)) //For SECURE VENDING MACHINES YEAH
-				usr << "\red Access denied." //Unless emagged of course
-				flick(src.icon_deny,src)
+			if((!allowed(usr)) && !emagged && scan_id)	//For SECURE VENDING MACHINES YEAH
+				usr << "<span class='warning'>Access denied.</span>"	//Unless emagged of course
+				flick(icon_deny,src)
 				return
 
 			var/idx=text2num(href_list["vend"])
@@ -458,27 +436,6 @@
 			src.updateUsrDialog()
 			return
 
-		else if ((href_list["cutwire"]) && (src.panel_open))
-			var/twire = text2num(href_list["cutwire"])
-			if (!( istype(usr.get_active_hand(), /obj/item/weapon/wirecutters) ))
-				usr << "You need wirecutters!"
-				return
-			if (src.isWireColorCut(twire))
-				src.mend(twire)
-			else
-				src.cut(twire)
-
-		else if ((href_list["pulsewire"]) && (src.panel_open))
-			var/twire = text2num(href_list["pulsewire"])
-			if (!istype(usr.get_active_hand(), /obj/item/device/multitool))
-				usr << "You need a multitool!"
-				return
-			if (src.isWireColorCut(twire))
-				usr << "You can't pulse a cut wire."
-				return
-			else
-				src.pulse(twire)
-
 		else if ((href_list["togglevoice"]) && (src.panel_open))
 			src.shut_up = !src.shut_up
 
@@ -490,8 +447,8 @@
 	return
 
 /obj/machinery/vending/proc/vend(datum/data/vending_product/R, mob/user)
-	if ((!src.allowed(user)) && (!src.emagged) && (src.wires & WIRE_SCANID)) //For SECURE VENDING MACHINES YEAH
-		user << "\red Access denied." //Unless emagged of course
+	if((!allowed(usr)) && !emagged && scan_id)	//For SECURE VENDING MACHINES YEAH
+		usr << "<span class='warning'>Access denied.</span>"	//Unless emagged of course
 		flick(src.icon_deny,src)
 		return
 	src.vend_ready = 0 //One thing at a time!!
@@ -618,51 +575,6 @@
 	src.visible_message("\red <b>[src] launches [throw_item.name] at [target.name]!</b>")
 	return 1
 
-/obj/machinery/vending/proc/isWireColorCut(var/wireColor)
-	var/wireFlag = APCWireColorToFlag[wireColor]
-	return ((src.wires & wireFlag) == 0)
-
-/obj/machinery/vending/proc/isWireCut(var/wireIndex)
-	var/wireFlag = APCIndexToFlag[wireIndex]
-	return ((src.wires & wireFlag) == 0)
-
-/obj/machinery/vending/proc/cut(var/wireColor)
-	var/wireFlag = APCWireColorToFlag[wireColor]
-	var/wireIndex = APCWireColorToIndex[wireColor]
-	src.wires &= ~wireFlag
-	switch(wireIndex)
-		if(WIRE_EXTEND)
-			src.extended_inventory = 0
-		if(WIRE_SHOCK)
-			src.seconds_electrified = -1
-		if (WIRE_SHOOTINV)
-			if(!src.shoot_inventory)
-				src.shoot_inventory = 1
-
-
-/obj/machinery/vending/proc/mend(var/wireColor)
-	var/wireFlag = APCWireColorToFlag[wireColor]
-	var/wireIndex = APCWireColorToIndex[wireColor] //not used in this function
-	src.wires |= wireFlag
-	switch(wireIndex)
-//		if(WIRE_SCANID)
-		if(WIRE_SHOCK)
-			src.seconds_electrified = 0
-		if (WIRE_SHOOTINV)
-			src.shoot_inventory = 0
-
-/obj/machinery/vending/proc/pulse(var/wireColor)
-	var/wireIndex = APCWireColorToIndex[wireColor]
-	switch(wireIndex)
-		if(WIRE_EXTEND)
-			src.extended_inventory = !src.extended_inventory
-//		if (WIRE_SCANID)
-		if (WIRE_SHOCK)
-			src.seconds_electrified = 30
-		if (WIRE_SHOOTINV)
-			src.shoot_inventory = !src.shoot_inventory
-
-
 /*
  * Vending machine types
  */
@@ -700,16 +612,18 @@
 	products = list(/obj/item/weapon/reagent_containers/food/drinks/bottle/gin = 5,/obj/item/weapon/reagent_containers/food/drinks/bottle/whiskey = 5,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/tequilla = 5,/obj/item/weapon/reagent_containers/food/drinks/bottle/vodka = 5,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/vermouth = 5,/obj/item/weapon/reagent_containers/food/drinks/bottle/rum = 5,
-					/obj/item/weapon/reagent_containers/food/drinks/bottle/wine = 5,/obj/item/weapon/reagent_containers/food/drinks/bottle/cognac = 5,
+					/obj/item/weapon/reagent_containers/food/drinks/bottle/wine = 5,/obj/item/weapon/reagent_containers/food/drinks/bottle/whitewine = 5,
+					/obj/item/weapon/reagent_containers/food/drinks/bottle/cognac = 5,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/kahlua = 5,/obj/item/weapon/reagent_containers/food/drinks/cans/beer = 6,
 					/obj/item/weapon/reagent_containers/food/drinks/cans/ale = 6,/obj/item/weapon/reagent_containers/food/drinks/bottle/orangejuice = 4,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/tomatojuice = 4,/obj/item/weapon/reagent_containers/food/drinks/bottle/limejuice = 4,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/cream = 4,/obj/item/weapon/reagent_containers/food/drinks/cans/tonic = 8,
 					/obj/item/weapon/reagent_containers/food/drinks/cans/cola = 8, /obj/item/weapon/reagent_containers/food/drinks/cans/sodawater = 15,
 					/obj/item/weapon/reagent_containers/food/drinks/flask/barflask = 2, /obj/item/weapon/reagent_containers/food/drinks/flask/vacuumflask = 2,
-					/obj/item/weapon/reagent_containers/food/drinks/drinkingglass = 30,/obj/item/weapon/reagent_containers/food/drinks/ice = 9,
+					/obj/item/weapon/reagent_containers/food/drinks/drinkingglass = 20,/obj/item/weapon/reagent_containers/food/drinks/ice = 9,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/melonliquor = 2,/obj/item/weapon/reagent_containers/food/drinks/bottle/bluecuracao = 2,
-					/obj/item/weapon/reagent_containers/food/drinks/bottle/absinthe = 2,/obj/item/weapon/reagent_containers/food/drinks/bottle/grenadine = 5)
+					/obj/item/weapon/reagent_containers/food/drinks/bottle/absinthe = 2,/obj/item/weapon/reagent_containers/food/drinks/bottle/grenadine = 5,
+					/obj/item/weapon/reagent_containers/food/drinks/bottle/mangojuice = 5,/obj/item/weapon/reagent_containers/food/drinks/drinkingglass/shot = 10)
 	contraband = list(/obj/item/weapon/reagent_containers/food/drinks/tea = 10)
 	vend_delay = 15
 	idle_power_usage = 211 //refrigerator - believe it or not, this is actually the average power consumption of a refrigerated vending machine according to NRCan.
@@ -734,7 +648,7 @@
 	vend_power_usage = 85000 //85 kJ to heat a 250 mL cup of coffee
 	products = list(/obj/item/weapon/reagent_containers/food/drinks/coffee = 25,/obj/item/weapon/reagent_containers/food/drinks/tea = 25,/obj/item/weapon/reagent_containers/food/drinks/h_chocolate = 25)
 	contraband = list(/obj/item/weapon/reagent_containers/food/drinks/ice = 10)
-	prices = list(/obj/item/weapon/reagent_containers/food/drinks/coffee = 25, /obj/item/weapon/reagent_containers/food/drinks/tea = 25, /obj/item/weapon/reagent_containers/food/drinks/h_chocolate = 25)
+	prices = list(/obj/item/weapon/reagent_containers/food/drinks/coffee = 3, /obj/item/weapon/reagent_containers/food/drinks/tea = 3, /obj/item/weapon/reagent_containers/food/drinks/h_chocolate = 3)
 
 
 
@@ -850,7 +764,7 @@
 	icon_state = "sec"
 	icon_deny = "sec-deny"
 	req_access_txt = "1"
-	products = list(/obj/item/weapon/handcuffs = 8,/obj/item/weapon/grenade/flashbang = 4,/obj/item/device/flash = 5,
+	products = list(/obj/item/weapon/handcuffs = 16,/obj/item/weapon/grenade/flashbang = 4,/obj/item/device/flash = 6,
 					/obj/item/weapon/reagent_containers/food/snacks/donut/normal = 12,/obj/item/weapon/storage/box/evidence = 6)
 	contraband = list(/obj/item/clothing/glasses/sunglasses = 2,/obj/item/weapon/storage/donut_box = 2)
 
@@ -866,24 +780,143 @@
 	premium = list(/obj/item/weapon/reagent_containers/glass/bottle/ammonia = 10,/obj/item/weapon/reagent_containers/glass/bottle/diethylamine = 5)
 	idle_power_usage = 211 //refrigerator - believe it or not, this is actually the average power consumption of a refrigerated vending machine according to NRCan.
 
+/obj/machinery/vending/maleclothes
+	name = "Male Clothes Vendor"
+	desc = "If the clothes make the man these'll make you."
+	product_slogans = "Cover yourself... in style"
+	product_ads = "This will make you a manly princess!"
+	icon_state = "male"
+	products = list(/obj/item/clothing/under/suit_jacket = 10, /obj/item/clothing/under/gentlesuit = 10,
+	 /obj/item/clothing/under/rank/magistrate = 10, /obj/item/clothing/under/scratch = 10, /obj/item/clothing/under/waiter = 10,
+	 /obj/item/clothing/under/suit_jacket/really_black = 10, /obj/item/clothing/under/suit_jacket/red = 10, /obj/item/clothing/under/pirate = 1,
+	 /obj/item/clothing/under/overalls = 10, /obj/item/clothing/under/soviet = 10, /obj/item/clothing/under/kilt = 10, /obj/item/clothing/under/suit_jacket/charcoal = 10,
+	 /obj/item/clothing/under/assistantformal = 10, /obj/item/clothing/under/suit_jacket/burgundy = 10, /obj/item/clothing/under/suit_jacket/checkered = 10,
+	 /obj/item/clothing/under/suit_jacket/tan = 10)
+	contraband = list(/obj/item/clothing/under/owl = 1, /obj/item/clothing/mask/gas/owl_mask = 1)
+	prices = list(/obj/item/clothing/under/suit_jacket = 50, /obj/item/clothing/under/gentlesuit = 50,
+	 /obj/item/clothing/under/rank/magistrate = 50, /obj/item/clothing/under/scratch = 50, /obj/item/clothing/under/waiter = 25,
+	 /obj/item/clothing/under/suit_jacket/really_black = 50, /obj/item/clothing/under/suit_jacket/red = 50, /obj/item/clothing/under/pirate = 200,
+	 /obj/item/clothing/under/overalls = 50, /obj/item/clothing/under/soviet = 50, /obj/item/clothing/under/kilt = 50, /obj/item/clothing/under/suit_jacket/charcoal = 50,
+	 /obj/item/clothing/under/assistantformal = 50, /obj/item/clothing/under/suit_jacket/burgundy = 50, /obj/item/clothing/under/suit_jacket/checkered = 50,
+	 /obj/item/clothing/under/suit_jacket/tan = 50)
+
+/obj/machinery/vending/femaleclothes
+	name = "Female Clothes Vendor"
+	desc = "Dresses and Suits and Skirts Oh My."
+	product_slogans = "Cover yourself... in style"
+	product_ads = "This will make you a princess!"
+	icon_state = "female"
+	products = list(/obj/item/clothing/under/sundress = 10, /obj/item/clothing/under/sundress_white = 10,
+	 /obj/item/clothing/under/dress/plaid_purple = 10, /obj/item/clothing/under/dress/plaid_red = 10, /obj/item/clothing/under/dress/plaid_blue = 10,
+	 /obj/item/clothing/under/dress/dress_saloon = 10, /obj/item/clothing/under/dress/dress_yellow = 10, /obj/item/clothing/under/dress/dress_fire = 10,
+	 /obj/item/clothing/under/dress/dress_green = 10, /obj/item/clothing/under/dress/dress_orange = 10, /obj/item/clothing/under/dress/dress_pink = 10, /obj/item/clothing/under/schoolgirl = 10,
+	 /obj/item/clothing/under/blackskirt = 10, /obj/item/clothing/under/suit_jacket/female = 10, /obj/item/clothing/under/wedding/bride_white = 1,
+	 /obj/item/clothing/under/wedding/bride_blue = 1)
+	contraband = list(/obj/item/clothing/under/sexymime = 1, /obj/item/clothing/under/sexyclown = 1)
+	prices = list(/obj/item/clothing/under/sundress = 50, /obj/item/clothing/under/sundress_white = 50,
+	 /obj/item/clothing/under/dress/plaid_purple = 50, /obj/item/clothing/under/dress/plaid_red = 50, /obj/item/clothing/under/dress/plaid_blue = 50,
+	 /obj/item/clothing/under/dress/dress_saloon = 50, /obj/item/clothing/under/dress/dress_yellow = 50, /obj/item/clothing/under/dress/dress_fire = 50,
+	 /obj/item/clothing/under/dress/dress_green = 50, /obj/item/clothing/under/dress/dress_orange = 50, /obj/item/clothing/under/dress/dress_pink = 50, /obj/item/clothing/under/schoolgirl = 75,
+	 /obj/item/clothing/under/blackskirt = 25, /obj/item/clothing/under/suit_jacket/female = 50, /obj/item/clothing/under/wedding/bride_white = 200,
+	 /obj/item/clothing/under/wedding/bride_blue = 200)
+
+/obj/machinery/vending/hatclothes
+	name = "Hat Vendor"
+	desc = "Dapper and warm."
+	product_slogans = "Cover yourself... in style"
+	product_ads = "This will make you a hatted princess!"
+	icon_state = "hat"
+	products = list(/obj/item/clothing/head/that = 10, /obj/item/clothing/head/hairflower = 10,
+	 /obj/item/clothing/head/greenbandana = 10, /obj/item/clothing/head/pirate = 10, /obj/item/clothing/head/bandana = 10,
+	 /obj/item/clothing/head/bowler = 10, /obj/item/clothing/head/beaverhat = 10, /obj/item/clothing/head/fedora = 10,
+	 /obj/item/clothing/head/fez = 10, /obj/item/clothing/head/flatcap = 10, /obj/item/clothing/head/ushanka = 10)
+	contraband = list ( /obj/item/clothing/head/bearpelt = 1 )
+	prices = list (/obj/item/clothing/head/that = 20, /obj/item/clothing/head/hairflower = 5,
+	 /obj/item/clothing/head/greenbandana = 10, /obj/item/clothing/head/pirate = 10, /obj/item/clothing/head/bandana = 10,
+	 /obj/item/clothing/head/bowler = 25, /obj/item/clothing/head/beaverhat = 10, /obj/item/clothing/head/fedora = 10,
+	 /obj/item/clothing/head/fez = 25, /obj/item/clothing/head/flatcap = 20, /obj/item/clothing/head/ushanka = 50)
+
+/obj/machinery/vending/jumpsuitclothes
+	name = "Jumpsuit Vendor"
+	desc = "All the colours of the rainbow."
+	product_slogans = "Cover yourself... in style"
+	product_ads = "This will make you a  basic princess!"
+	icon_state = "jumpsuit"
+	products = list(/obj/item/clothing/under/color/black = 10, /obj/item/clothing/under/color/blackf = 10,
+     /obj/item/clothing/under/color/blue = 10, /obj/item/clothing/under/color/green = 10, /obj/item/clothing/under/color/grey = 10,
+     /obj/item/clothing/under/color/orange = 10, /obj/item/clothing/under/color/pink = 10, /obj/item/clothing/under/color/red = 10,
+     /obj/item/clothing/under/color/white = 10, /obj/item/clothing/under/color/yellow = 10, /obj/item/clothing/under/purple = 10,
+     /obj/item/clothing/under/aqua = 10, /obj/item/clothing/under/lightblue = 10, /obj/item/clothing/under/lightpurple = 10,
+     /obj/item/clothing/under/lightgreen = 10, /obj/item/clothing/under/lightblue = 10, /obj/item/clothing/under/brown = 10)
+	contraband = list(/obj/item/clothing/under/psyche = 1)
+	prices = list(/obj/item/clothing/under/color/black = 10, /obj/item/clothing/under/color/blackf = 10,
+     /obj/item/clothing/under/color/blue = 10, /obj/item/clothing/under/color/green = 10, /obj/item/clothing/under/color/grey = 10,
+     /obj/item/clothing/under/color/orange = 10, /obj/item/clothing/under/color/pink = 10, /obj/item/clothing/under/color/red = 10,
+     /obj/item/clothing/under/color/white = 10, /obj/item/clothing/under/color/yellow = 10, /obj/item/clothing/under/purple = 10,
+     /obj/item/clothing/under/aqua = 10, /obj/item/clothing/under/lightblue = 10, /obj/item/clothing/under/lightpurple = 10,
+     /obj/item/clothing/under/lightgreen = 10, /obj/item/clothing/under/lightblue = 10, /obj/item/clothing/under/brown = 10)
+
+/obj/machinery/vending/shoeclothes
+	name = "Shoe Vendor"
+	desc = "Walk with pride."
+	product_slogans = "Cover yourself... in style"
+	product_ads = "This will make you a... person with shoes!"
+	icon_state = "shoe"
+	products = list(/obj/item/clothing/shoes/blue = 10, /obj/item/clothing/shoes/red = 10,
+	 /obj/item/clothing/shoes/yellow = 10, /obj/item/clothing/shoes/green = 10, /obj/item/clothing/shoes/orange = 10,
+	 /obj/item/clothing/shoes/purple = 10, /obj/item/clothing/shoes/red = 10, /obj/item/clothing/shoes/leather = 10,
+	 /obj/item/clothing/shoes/jackboots = 10)
+	contraband = list (/obj/item/clothing/shoes/clown_shoes = 1)
+	prices = list (/obj/item/clothing/shoes/blue = 10, /obj/item/clothing/shoes/red = 10,
+	 /obj/item/clothing/shoes/yellow = 10, /obj/item/clothing/shoes/green = 10, /obj/item/clothing/shoes/orange = 10,
+	 /obj/item/clothing/shoes/purple = 10, /obj/item/clothing/shoes/red = 10, /obj/item/clothing/shoes/leather = 10,
+	 /obj/item/clothing/shoes/jackboots = 25)
+
 /obj/machinery/vending/hydroseeds
 	name = "MegaSeed Servitor"
 	desc = "When you need seeds fast!"
 	product_slogans = "THIS'S WHERE TH' SEEDS LIVE! GIT YOU SOME!;Hands down the best seed selection on the station!;Also certain mushroom varieties available, more for experts! Get certified today!"
 	product_ads = "We like plants!;Grow some crops!;Grow, baby, growww!;Aw h'yeah son!"
 	icon_state = "seeds"
-	delay_product_spawn = 1
 
 	products = list(/obj/item/seeds/bananaseed = 3,/obj/item/seeds/berryseed = 3,/obj/item/seeds/carrotseed = 3,/obj/item/seeds/chantermycelium = 3,/obj/item/seeds/chiliseed = 3,
 					/obj/item/seeds/cornseed = 3, /obj/item/seeds/eggplantseed = 3, /obj/item/seeds/potatoseed = 3, /obj/item/seeds/replicapod = 3,/obj/item/seeds/soyaseed = 3,
 					/obj/item/seeds/sunflowerseed = 3,/obj/item/seeds/tomatoseed = 3,/obj/item/seeds/towermycelium = 3,/obj/item/seeds/wheatseed = 3,/obj/item/seeds/appleseed = 3,
 					/obj/item/seeds/poppyseed = 3,/obj/item/seeds/sugarcaneseed = 3,/obj/item/seeds/ambrosiavulgarisseed = 3,/obj/item/seeds/peanutseed = 3,/obj/item/seeds/whitebeetseed = 3,/obj/item/seeds/watermelonseed = 3,/obj/item/seeds/limeseed = 3,
 					/obj/item/seeds/lemonseed = 3,/obj/item/seeds/orangeseed = 3,/obj/item/seeds/grassseed = 3,/obj/item/seeds/cocoapodseed = 3,/obj/item/seeds/plumpmycelium = 2,
-					/obj/item/seeds/cabbageseed = 3,/obj/item/seeds/grapeseed = 3,/obj/item/seeds/pumpkinseed = 3,/obj/item/seeds/cherryseed = 3,/obj/item/seeds/plastiseed = 3,/obj/item/seeds/riceseed = 3)
+					/obj/item/seeds/cabbageseed = 3,/obj/item/seeds/strawberryseed = 3,/obj/item/seeds/greengrapeseed = 3,/obj/item/seeds/gingerseed = 3,/obj/item/seeds/grapeseed = 3,/obj/item/seeds/pumpkinseed = 3,/obj/item/seeds/cherryseed = 3,/obj/item/seeds/plastiseed = 3,/obj/item/seeds/riceseed = 3)
 	contraband = list(/obj/item/seeds/amanitamycelium = 2,/obj/item/seeds/glowshroom = 2,/obj/item/seeds/libertymycelium = 2,/obj/item/seeds/mtearseed = 2,
 					  /obj/item/seeds/nettleseed = 2,/obj/item/seeds/reishimycelium = 2,/obj/item/seeds/reishimycelium = 2,/obj/item/seeds/shandseed = 2,)
 	premium = list(/obj/item/toy/waterflower = 1)
 
+/obj/machinery/vending/hydroseeds/build_inventory(var/list/productlist,hidden=0,req_coin=0)
+
+	for(var/typepath in productlist)
+		var/amount = productlist[typepath]
+		var/price = prices[typepath]
+		if(isnull(amount)) amount = 1
+
+		var/datum/data/vending_product/R = new /datum/data/vending_product()
+
+		R.product_path = typepath
+		R.amount = amount
+		R.price = price
+		R.display_color = pick("red","blue","green")
+
+		if(hidden)
+			R.category=CAT_HIDDEN
+			hidden_records += R
+		else if(req_coin)
+			R.category=CAT_COIN
+			coin_records += R
+		else
+			R.category=CAT_NORMAL
+			product_records += R
+
+		var/obj/item/seeds/S = new typepath(src)
+		R.product_name = S.name
+		del(S)
+	return
 
 /obj/machinery/vending/magivend
 	name = "MagiVend"
@@ -958,9 +991,23 @@
 	icon_state = "robotics"
 	icon_deny = "robotics-deny"
 	req_access_txt = "29"
-	products = list(/obj/item/clothing/suit/storage/labcoat = 4,/obj/item/clothing/under/rank/roboticist = 4,/obj/item/stack/cable_coil = 4,/obj/item/device/flash = 4,
+	products = list(/obj/item/clothing/suit/storage/toggle/labcoat = 4,/obj/item/clothing/under/rank/roboticist = 4,/obj/item/stack/cable_coil = 4,/obj/item/device/flash = 4,
 					/obj/item/weapon/cell/high = 12, /obj/item/device/assembly/prox_sensor = 3,/obj/item/device/assembly/signaler = 3,/obj/item/device/healthanalyzer = 3,
 					/obj/item/weapon/scalpel = 2,/obj/item/weapon/circular_saw = 2,/obj/item/weapon/tank/anesthetic = 2,/obj/item/clothing/mask/breath/medical = 5,
 					/obj/item/weapon/screwdriver = 5,/obj/item/weapon/crowbar = 5)
 	//everything after the power cell had no amounts, I improvised.  -Sayu
 
+//Clothing vendor
+/obj/machinery/vending/clothing
+	name = "Auto Tailor"
+	desc = "For all your fashion needs at the lowest imaginable prices."
+	icon = 'icons/obj/clothingmachine.dmi'
+	icon_state = "tailor"
+	product_slogans = "Dress to impress!"
+	product_ads = "Putting sweatshop workers out of work for over three hundred years!;Made in Andromeda!;Support your local inanimate machinery against competition!"
+	products = list(/obj/item/clothing/under/color/blackf = 4,/obj/item/clothing/under/lightpurple = 4,/obj/item/clothing/under/lightgreen = 4,/obj/item/clothing/under/lightblue = 4,
+					/obj/item/clothing/under/purple = 4,/obj/item/clothing/under/sapphiredress = 4,/obj/item/clothing/under/pencilskirt = 4,/obj/item/clothing/head/ushanka = 4,
+					/obj/item/clothing/head/greenbandana = 4, /obj/item/clothing/suit/apron/overalls=4, /obj/item/clothing/suit/wcoat)
+	contraband = list(/obj/item/clothing/under/rainbow = 1, /obj/item/clothing/gloves/rainbow = 1, /obj/item/clothing/shoes/rainbow = 1,/obj/item/clothing/under/owl = 1,/obj/item/clothing/suit/ianshirt = 1,)
+	premium = list(/obj/item/clothing/under/sexyclown = 1, /obj/item/clothing/under/rank/clown = 1)
+	prices = list()

@@ -25,7 +25,7 @@
 /datum/seed/proc/request_player(var/mob/living/host)
 	if(!host) return
 	for(var/mob/dead/observer/O in player_list)
-		if(jobban_isbanned(O, "Dionaea") || (!is_alien_whitelisted(O, "Diona") && config.usealienwhitelist))
+		if(jobban_isbanned(O, "Dionaea"))
 			continue
 		if(O.client)
 			if(O.client.prefs.be_special & BE_PLANT && !(O.client in currently_querying))

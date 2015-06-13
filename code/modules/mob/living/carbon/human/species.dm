@@ -219,7 +219,7 @@
 	name_plural = "Soghuns"
 	icobase = 'icons/mob/human_races/r_lizard.dmi'
 	deform = 'icons/mob/human_races/r_def_lizard.dmi'
-	language = "Sinta'Soghun"
+	language = "Sinta'soghun"
 	tail = "sogtail"
 	unarmed_type = /datum/unarmed_attack/claws
 	secondary_unarmed_type = /datum/unarmed_attack/bite/strong

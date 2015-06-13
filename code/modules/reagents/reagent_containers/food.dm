@@ -1,3 +1,6 @@
+#define CELLS 4
+#define CELLSIZE (32/CELLS)
+
 ////////////////////////////////////////////////////////////////////////////////
 /// Food.
 ////////////////////////////////////////////////////////////////////////////////
@@ -6,7 +9,7 @@
 	volume = 50 //Sets the default container amount for all food items.
 	var/filling_color = "#FFFFFF" //Used by sandwiches.
 
-	var/list/center_of_mass = newlist() //Center of mass
+	var/list/center_of_mass = list() // Used for table placement
 
 /obj/item/weapon/reagent_containers/food/New()
 	..()
@@ -18,17 +21,18 @@
 	if(proximity && params && istype(A, /obj/structure/table) && center_of_mass.len)
 		//Places the item on a grid
 		var/list/mouse_control = params2list(params)
-		var/cellnumber = 4
 
 		var/mouse_x = text2num(mouse_control["icon-x"])
 		var/mouse_y = text2num(mouse_control["icon-y"])
 
-		var/grid_x = round(mouse_x, 32/cellnumber)
-		var/grid_y = round(mouse_y, 32/cellnumber)
+		if(!isnum(mouse_x) || !isnum(mouse_y))
+			return
 
-		if(mouse_control["icon-x"])
-			var/sign = mouse_x - grid_x != 0 ? sign(mouse_x - grid_x) : -1 //positive if rounded down, else negative
-			pixel_x = grid_x - center_of_mass["x"] + sign*16/cellnumber //center of the cell
-		if(mouse_control["icon-y"])
-			var/sign = mouse_y - grid_y != 0 ? sign(mouse_y - grid_y) : -1
-			pixel_y = grid_y - center_of_mass["y"] + sign*16/cellnumber
+		var/cell_x = max(0, min(CELLS-1, round(mouse_x/CELLSIZE)))
+		var/cell_y = max(0, min(CELLS-1, round(mouse_y/CELLSIZE)))
+
+		pixel_x = (CELLSIZE * (0.5 + cell_x)) - center_of_mass["x"]
+		pixel_y = (CELLSIZE * (0.5 + cell_y)) - center_of_mass["y"]
+
+#undef CELLS
+#undef CELLSIZE

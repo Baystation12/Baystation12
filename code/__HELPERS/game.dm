@@ -10,16 +10,10 @@
 	return null
 
 /proc/get_area(O)
-	var/atom/location = O
-	var/i
-	for(i=1, i<=20, i++)
-		if(isarea(location))
-			return location
-		else if (istype(location))
-			location = location.loc
-		else
-			return null
-	return 0
+	var/turf/loc = get_turf(O)
+	if(!loc)
+		return null
+	return loc.loc
 
 /proc/get_area_name(N) //get area by its name
 	for(var/area/A in world)
@@ -45,8 +39,20 @@
 
 	return heard
 
+/proc/isStationLevel(var/level)
+	return level in config.station_levels
 
+/proc/isNotStationLevel(var/level)
+	return !isStationLevel(level)
 
+/proc/isPlayerLevel(var/level)
+	return level in config.player_levels
+
+/proc/isAdminLevel(var/level)
+	return level in config.admin_levels
+
+/proc/isNotAdminLevel(var/level)
+	return !isAdminLevel(level)
 
 //Magic constants obtained by using linear regression on right-angled triangles of sides 0<x<1, 0<y<1
 //They should approximate pythagoras theorem well enough for our needs.
@@ -477,3 +483,6 @@ datum/projectile_data
 					rstats[i] = environment.vars[stats[i]]
 		temps[direction] = rstats
 	return temps
+
+/proc/MinutesToTicks(var/minutes as num)
+	return minutes * 60 * 10

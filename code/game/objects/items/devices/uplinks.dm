@@ -31,7 +31,12 @@ datum/nano_item_lists
 	var/nanoui_menu = 0		// The current menu we are in
 	var/list/nanoui_data = new // Additional data for NanoUI use
 
+	var/list/purchase_log = new
+	var/uplink_owner = null//text-only
+	var/used_TC = 0
+
 /obj/item/device/uplink/New()
+	..()
 	welcome = ticker.mode.uplink_welcome
 	uses = ticker.mode.uplink_uses
 	ItemsCategory = ticker.mode.uplink_items
@@ -39,6 +44,12 @@ datum/nano_item_lists
 	var/datum/nano_item_lists/IL = generate_item_lists()
 	nanoui_items = IL.items_nano
 	ItemsReference = IL.items_reference
+
+	world_uplinks += src
+
+/obj/item/device/uplink/Del()
+	world_uplinks -= src
+	..()
 
 // BS12 no longer use this menu but there are forks that do, hency why we keep it
 /obj/item/device/uplink/proc/generate_menu()
@@ -98,18 +109,28 @@ datum/nano_item_lists
 
 /obj/item/device/uplink/Topic(href, href_list)
 	if(href_list["buy_item"] == "random")
-		var/datum/uplink_item/boughtItem = chooseRandomItem()
-		if(boughtItem && boughtItem.cost <= uses)
-			uses -= boughtItem.cost
-			href_list["buy_item"] = boughtItem.reference
-			feedback_add_details("traitor_uplink_items_bought","RN")
-			return 1
+		var/datum/uplink_item/UI = chooseRandomItem()
+		href_list["buy_item"] = UI.reference
+		return buy(UI, "RN")
 	else
 		var/datum/uplink_item/UI = ItemsReference[href_list["buy_item"]]
-		if(UI && UI.cost <= uses)
-			uses -= UI.cost
-			feedback_add_details("traitor_uplink_items_bought", UI.reference)
-			return 1
+		return buy(UI, UI ? UI.reference : "")
+	return 0
+
+/obj/item/device/uplink/proc/buy(var/datum/uplink_item/UI, var/reference)
+	if(UI && UI.cost <= uses)
+		uses -= UI.cost
+		used_TC += UI.cost
+		feedback_add_details("traitor_uplink_items_bought", reference)
+
+		var/obj/I = new UI.path(get_turf(usr))
+		if(ishuman(usr))
+			var/mob/living/carbon/human/A = usr
+			A.put_in_any_hand_if_possible(I)
+
+		purchase_log[UI] = purchase_log[UI] + 1
+
+		return 1
 	return 0
 
 // HIDDEN UPLINK - Can be stored in anything but the host item has to have a trigger for it.
@@ -125,10 +146,9 @@ datum/nano_item_lists
 */
 
 /obj/item/device/uplink/hidden
-	name = "Hidden Uplink."
+	name = "hidden uplink"
 	desc = "There is something wrong if you're examining this."
 	var/active = 0
-	var/list/purchase_log = list()
 
 // The hidden uplink MUST be inside an obj/item's contents.
 /obj/item/device/uplink/hidden/New()
@@ -160,7 +180,7 @@ datum/nano_item_lists
 	NANO UI FOR UPLINK WOOP WOOP
 */
 /obj/item/device/uplink/hidden/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
-	var/title = "Syndicate Uplink"
+	var/title = "Remote Uplink"
 	var/data[0]
 
 	data["welcome"] = welcome
@@ -168,7 +188,7 @@ datum/nano_item_lists
 	data["menu"] = nanoui_menu
 	data["nano_items"] = nanoui_items
 	data += nanoui_data
-	
+
 	// update the ui if it exists, returns null if no ui is passed/found
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
@@ -196,7 +216,9 @@ datum/nano_item_lists
 	var/datum/nanoui/ui = nanomanager.get_open_ui(user, src, "main")
 	if ((usr.contents.Find(src.loc) || (in_range(src.loc, usr) && istype(src.loc.loc, /turf))))
 		usr.set_machine(src)
-		if(href_list["lock"])
+		if(..(href, href_list))
+			return 1
+		else if(href_list["lock"])
 			toggle()
 			ui.close()
 			return 1
@@ -206,16 +228,7 @@ datum/nano_item_lists
 		if(href_list["menu"])
 			nanoui_menu = text2num(href_list["menu"])
 			update_nano_data(href_list["id"])
-		else if(..(href, href_list) == 1)
-			var/datum/uplink_item/UI = ItemsReference[href_list["buy_item"]]
-			if(!UI)
-				return
 
-			var/obj/I = new UI.path(get_turf(usr))
-			if(ishuman(usr))
-				var/mob/living/carbon/human/A = usr
-				A.put_in_any_hand_if_possible(I)
-			purchase_log += "[usr] ([usr.ckey]) bought [I]."
 	interact(usr)
 	return 1
 

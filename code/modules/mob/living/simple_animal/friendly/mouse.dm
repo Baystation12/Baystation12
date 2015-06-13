@@ -1,7 +1,7 @@
 /mob/living/simple_animal/mouse
 	name = "mouse"
 	real_name = "mouse"
-	desc = "It's a small, disease-ridden rodent."
+	desc = "It's a small rodent."
 	icon_state = "mouse_gray"
 	icon_living = "mouse_gray"
 	icon_dead = "mouse_gray_dead"
@@ -17,9 +17,9 @@
 	maxHealth = 5
 	health = 5
 	meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat
-	response_help  = "pets the"
-	response_disarm = "gently pushes aside the"
-	response_harm   = "stamps on the"
+	response_help  = "pets"
+	response_disarm = "gently pushes aside"
+	response_harm   = "stamps on"
 	density = 0
 	var/body_color //brown, gray and white, leave blank for random
 	layer = MOB_LAYER
@@ -28,6 +28,7 @@
 	maxbodytemp = 323	//Above 50 Degrees Celcius
 	universal_speak = 0
 	universal_understand = 1
+	mob_size = 1
 
 /mob/living/simple_animal/mouse/Life()
 	..()
@@ -47,7 +48,7 @@
 			icon_state = "mouse_[body_color]"
 			wander = 1
 		else if(prob(5))
-			emote("snuffles")
+			audible_emote("snuffles.")
 
 /mob/living/simple_animal/mouse/New()
 	..()
@@ -110,9 +111,6 @@
 /mob/living/simple_animal/mouse/brown/Tom
 	name = "Tom"
 	desc = "Jerry the cat is not amused."
-	response_help  = "pets"
-	response_disarm = "gently pushes aside"
-	response_harm   = "splats"
 
 /mob/living/simple_animal/mouse/can_use_vents()
 	return

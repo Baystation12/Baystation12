@@ -47,6 +47,8 @@
 
 /mob/visible_message(var/message, var/self_message, var/blind_message)
 	for(var/mob/M in viewers(src))
+		if(M.see_invisible < invisibility)
+			continue // Cannot view the invisible
 		var/msg = message
 		if(self_message && M==src)
 			msg = self_message
@@ -59,6 +61,41 @@
 /atom/proc/visible_message(var/message, var/blind_message)
 	for(var/mob/M in viewers(src))
 		M.show_message( message, 1, blind_message, 2)
+
+// Returns an amount of power drawn from the object (-1 if it's not viable).
+// If drain_check is set it will not actually drain power, just return a value.
+// If surge is set, it will destroy/damage the recipient and not return any power.
+// Not sure where to define this, so it can sit here for the rest of time.
+/atom/proc/drain_power(var/drain_check,var/surge, var/amount = 0)
+	return -1
+
+// Show a message to all mobs in earshot of this one
+// This would be for audible actions by the src mob
+// message is the message output to anyone who can hear.
+// self_message (optional) is what the src mob hears.
+// deaf_message (optional) is what deaf people will see.
+// hearing_distance (optional) is the range, how many tiles away the message can be heard.
+/mob/audible_message(var/message, var/deaf_message, var/hearing_distance, var/self_message)
+	var/range = 7
+	if(hearing_distance)
+		range = hearing_distance
+	var/msg = message
+	for(var/mob/M in get_mobs_in_view(range, src))
+		if(self_message && M==src)
+			msg = self_message
+		M.show_message( msg, 2, deaf_message, 1)
+
+// Show a message to all mobs in earshot of this atom
+// Use for objects performing audible actions
+// message is the message output to anyone who can hear.
+// deaf_message (optional) is what deaf people will see.
+// hearing_distance (optional) is the range, how many tiles away the message can be heard.
+/atom/proc/audible_message(var/message, var/deaf_message, var/hearing_distance)
+	var/range = 7
+	if(hearing_distance)
+		range = hearing_distance
+	for(var/mob/M in get_mobs_in_view(range, src))
+		M.show_message( message, 2, deaf_message, 1)
 
 
 /mob/proc/findname(msg)
@@ -93,14 +130,14 @@
 		return 1
 	return 0
 
-//This is a SAFE proc. Use this instead of equip_to_splot()!
+//This is a SAFE proc. Use this instead of equip_to_slot()!
 //set del_on_fail to have it delete W if it fails to equip
 //set disable_warning to disable the 'you are unable to equip that' warning.
 //unset redraw_mob to prevent the mob from being redrawn at the end.
 /mob/proc/equip_to_slot_if_possible(obj/item/W as obj, slot, del_on_fail = 0, disable_warning = 0, redraw_mob = 1)
 	if(!istype(W)) return 0
 
-	if(!W.mob_can_equip(src, slot, disable_warning))
+	if(!W.mob_can_equip(src, slot))
 		if(del_on_fail)
 			del(W)
 		else
@@ -135,6 +172,7 @@ var/list/slot_equipment_priority = list( \
 		slot_glasses,\
 		slot_belt,\
 		slot_s_store,\
+		slot_tie,\
 		slot_l_store,\
 		slot_r_store\
 	)
@@ -145,7 +183,7 @@ var/list/slot_equipment_priority = list( \
 	if(!istype(W)) return 0
 
 	for(var/slot in slot_equipment_priority)
-		if(equip_to_slot_if_possible(W, slot, 0, 1, 1)) //del_on_fail = 0; disable_warning = 0; redraw_mob = 1
+		if(equip_to_slot_if_possible(W, slot, del_on_fail=0, disable_warning=1, redraw_mob=1))
 			return 1
 
 	return 0
@@ -182,6 +220,41 @@ var/list/slot_equipment_priority = list( \
 	user << browse(dat, text("window=mob[];size=325x500", name))
 	onclose(user, "mob[name]")
 	return
+
+//mob verbs are faster than object verbs. See http://www.byond.com/forum/?post=1326139&page=2#comment8198716 for why this isn't atom/verb/examine()
+/mob/verb/examinate(atom/A as mob|obj|turf in view())
+	set name = "Examine"
+	set category = "IC"
+
+	if((is_blind(src) || usr.stat) && !isobserver(src))
+		src << "<span class='notice'>Something is there but you can't see it.</span>"
+		return 1
+
+	face_atom(A)
+	A.examine(src)
+
+/mob/verb/pointed(atom/A as mob|obj|turf in view())
+	set name = "Point To"
+	set category = "Object"
+
+	if(!src || !isturf(src.loc) || !(A in view(src.loc)))
+		return 0
+	if(istype(A, /obj/effect/decal/point))
+		return 0
+
+	var/tile = get_turf(A)
+	if (!tile)
+		return 0
+
+	var/obj/P = new /obj/effect/decal/point(tile)
+	P.invisibility = invisibility
+	spawn (20)
+		if(P)
+			del(P)	// qdel
+
+	face_atom(A)
+	return 1
+
 
 /mob/proc/ret_grab(obj/effect/list_container/mobl/L as obj, flag)
 	if ((!( istype(l_hand, /obj/item/weapon/grab) ) && !( istype(r_hand, /obj/item/weapon/grab) )))
@@ -319,14 +392,14 @@ var/list/slot_equipment_priority = list( \
 	set name = "Respawn"
 	set category = "OOC"
 
-	if (!( abandon_allowed ))
-		usr << "\blue Respawn is disabled."
+	if (!( config.abandon_allowed ))
+		usr << "<span class='notice'>Respawn is disabled.</span>"
 		return
 	if ((stat != 2 || !( ticker )))
-		usr << "\blue <B>You must be dead to use this!</B>"
+		usr << "<span class='notice'><B>You must be dead to use this!</B></span>"
 		return
 	if (ticker.mode.name == "meteor" || ticker.mode.name == "epidemic") //BS12 EDIT
-		usr << "\blue Respawn is disabled for this roundtype."
+		usr << "<span class='notice'>Respawn is disabled for this roundtype.</span>"
 		return
 	else
 		var/deathtime = world.time - src.timeofdeath
@@ -363,6 +436,8 @@ var/list/slot_equipment_priority = list( \
 	if(!client)
 		log_game("[usr.key] AM failed due to disconnect.")
 		return
+
+	announce_ghost_joinleave(client, 0)
 
 	var/mob/new_player/M = new /mob/new_player()
 	if(!client)
@@ -541,13 +616,15 @@ var/list/slot_equipment_priority = list( \
 	if(pulling)
 		pulling.pulledby = null
 		pulling = null
+		if(pullin)
+			pullin.icon_state = "pull0"
 
 /mob/proc/start_pulling(var/atom/movable/AM)
-
 	if ( !AM || !usr || src==AM || !isturf(src.loc) )	//if there's no person pulling OR the person is pulling themself OR the object being pulled is inside something: abort!
 		return
 
 	if (AM.anchored)
+		usr << "<span class='notice'>It won't budge!</span>"
 		return
 
 	var/mob/M = AM
@@ -566,6 +643,9 @@ var/list/slot_equipment_priority = list( \
 
 	src.pulling = AM
 	AM.pulledby = src
+
+	if(pullin)
+		pullin.icon_state = "pull1"
 
 	if(ishuman(AM))
 		var/mob/living/carbon/human/H = AM
@@ -745,6 +825,8 @@ note dizziness decrements automatically in the mob's Life() proc.
 			for(var/atom/A in listed_turf)
 				if(A.invisibility > see_invisible)
 					continue
+				if(is_type_in_list(A, shouldnt_see))
+					continue
 				statpanel(listed_turf.name, null, A)
 
 	if(spell_list && spell_list.len)
@@ -767,7 +849,6 @@ note dizziness decrements automatically in the mob's Life() proc.
 	if(stat==2)							return 0
 	if(anchored)						return 0
 	if(monkeyizing)						return 0
-	if(restrained())					return 0
 	return 1
 
 //Updates canmove, lying and icons. Could perhaps do with a rename but I can't think of anything to describe it.
@@ -782,17 +863,20 @@ note dizziness decrements automatically in the mob's Life() proc.
 			lying = 0
 			canmove = 1
 			pixel_y = V.mob_offset_y
-	else if(buckled && (!buckled.movable))
-		anchored = 1
-		canmove = 0
-		if(istype(buckled,/obj/structure/stool/bed/chair) )
-			lying = 0
+	else if(buckled)
+		// var/movable is defined at /obj/structure/stool/bed level
+		// If we're buckled to something else, such as vines, assume it's stationary.
+		if (!istype(buckled) || !buckled.movable)
+			anchored = 1
+			canmove = 0
+			if(istype(buckled,/obj/structure/stool/bed/chair) )
+				lying = 0
+			else
+				lying = 1
 		else
-			lying = 1
-	else if (buckled && (buckled.movable))
-		anchored = 0
-		canmove = 1
-		lying = 0
+			anchored = 0
+			canmove = 1
+			lying = 0
 	else if( stat || weakened || paralysis || resting || sleeping || (status_flags & FAKEDEATH))
 		lying = 1
 		canmove = 0
@@ -802,9 +886,9 @@ note dizziness decrements automatically in the mob's Life() proc.
 		anchored = 1
 		canmove = 0
 		lying = 0
-	else if (!buckled)
-		lying = !can_stand
-		canmove = has_limbs
+	else
+		lying = 0
+		canmove = 1
 
 	if(lying)
 		density = 0
@@ -827,10 +911,9 @@ note dizziness decrements automatically in the mob's Life() proc.
 
 /mob/proc/facedir(var/ndir)
 	if(!canface())	return 0
-	dir = ndir
+	set_dir(ndir)
 	if(buckled && buckled.movable)
-		buckled.dir = ndir
-		buckled.handle_rotation()
+		buckled.set_dir(ndir)
 	client.move_delay += movement_delay()
 	return 1
 
@@ -855,9 +938,9 @@ note dizziness decrements automatically in the mob's Life() proc.
 	return facedir(SOUTH)
 
 
-/mob/proc/IsAdvancedToolUser()//This might need a rename but it should replace the can this mob use things check
+//This might need a rename but it should replace the can this mob use things check
+/mob/proc/IsAdvancedToolUser()
 	return 0
-
 
 /mob/proc/Stun(amount)
 	if(status_flags & CANSTUN)
@@ -1003,7 +1086,7 @@ mob/proc/yank_out_object()
 		var/datum/organ/external/affected
 
 		for(var/datum/organ/external/organ in H.organs) //Grab the organ holding the implant.
-			for(var/obj/item/weapon/O in organ.implants)
+			for(var/obj/item/O in organ.implants)
 				if(O == selection)
 					affected = organ
 

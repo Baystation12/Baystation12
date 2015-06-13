@@ -10,7 +10,6 @@
 	desc = "A remote control-switch for a door."
 	power_channel = ENVIRON
 	var/id = null
-	var/range = 10
 	var/normaldoorcontrol = CONTROL_POD_DOORS
 	var/desiredstate = 0 // Zero is closed, 1 is open.
 	var/specialfunctions = 1
@@ -41,9 +40,6 @@
 	else
 		user << "Error, no route to host."
 
-/obj/machinery/door_control/attack_paw(mob/user as mob)
-	return src.attack_hand(user)
-
 /obj/machinery/door_control/attackby(obj/item/weapon/W, mob/user as mob)
 	/* For later implementation
 	if (istype(W, /obj/item/weapon/screwdriver))
@@ -68,7 +64,7 @@
 	return src.attack_hand(user)
 
 /obj/machinery/door_control/proc/handle_door()
-	for(var/obj/machinery/door/airlock/D in range(range))
+	for(var/obj/machinery/door/airlock/D in world)
 		if(D.id_tag == src.id)
 			if(specialfunctions & OPEN)
 				if (D.density)
@@ -100,7 +96,7 @@
 					D.safe = 1
 
 /obj/machinery/door_control/proc/handle_pod()
-	for(var/obj/machinery/door/poddoor/M in world)
+	for(var/obj/machinery/door/blast/M in world)
 		if(M.id == src.id)
 			if(M.density)
 				spawn(0)
@@ -112,7 +108,7 @@
 					return
 
 /obj/machinery/door_control/proc/handle_emitters(mob/user as mob)
-	for(var/obj/machinery/power/emitter/E in range(range))
+	for(var/obj/machinery/power/emitter/E in world)
 		if(E.id == src.id)
 			spawn(0)
 				E.activate(user)
@@ -155,9 +151,6 @@
 /obj/machinery/driver_button/attack_ai(mob/user as mob)
 	return src.attack_hand(user)
 
-/obj/machinery/driver_button/attack_paw(mob/user as mob)
-	return src.attack_hand(user)
-
 /obj/machinery/driver_button/attackby(obj/item/weapon/W, mob/user as mob)
 
 	if(istype(W, /obj/item/device/detective_scanner))
@@ -178,7 +171,7 @@
 	active = 1
 	icon_state = "launcheract"
 
-	for(var/obj/machinery/door/poddoor/M in world)
+	for(var/obj/machinery/door/blast/M in world)
 		if (M.id == src.id)
 			spawn( 0 )
 				M.open()
@@ -192,7 +185,7 @@
 
 	sleep(50)
 
-	for(var/obj/machinery/door/poddoor/M in world)
+	for(var/obj/machinery/door/blast/M in world)
 		if (M.id == src.id)
 			spawn( 0 )
 				M.close()

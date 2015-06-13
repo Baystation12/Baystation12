@@ -89,7 +89,7 @@ obj/item/check_airflow_movable(n)
 					if(src:shoes:magpulse)
 						return
 		src << "\red You are sucked away by airflow!"
-	var/airflow_falloff = 9 - ul_FalloffAmount(airflow_dest) //It's a fast falloff calc.  Very useful.
+	var/airflow_falloff = 9 - sqrt((x - airflow_dest.x) ** 2 + (y - airflow_dest.y) ** 2)
 	if(airflow_falloff < 1)
 		airflow_dest = null
 		return
@@ -154,7 +154,7 @@ obj/item/check_airflow_movable(n)
 						return
 		src << "\red You are pushed away by airflow!"
 		last_airflow = world.time
-	var/airflow_falloff = 9 - ul_FalloffAmount(airflow_dest) //It's a fast falloff calc.  Very useful.
+	var/airflow_falloff = 9 - sqrt((x - airflow_dest.x) ** 2 + (y - airflow_dest.y) ** 2)
 	if(airflow_falloff < 1)
 		airflow_dest = null
 		return

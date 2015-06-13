@@ -17,10 +17,14 @@
 		/obj/item/weapon/reagent_containers/food/snacks/grown/banana  = "banana",
 		/obj/item/weapon/reagent_containers/food/snacks/grown/potato = "potato",
 		/obj/item/weapon/reagent_containers/food/snacks/grown/lemon = "lemonjuice",
+		/obj/item/weapon/reagent_containers/food/snacks/grown/apple = "applejuice",
 		/obj/item/weapon/reagent_containers/food/snacks/grown/orange = "orangejuice",
 		/obj/item/weapon/reagent_containers/food/snacks/grown/lime = "limejuice",
 		/obj/item/weapon/reagent_containers/food/snacks/watermelonslice = "watermelonjuice",
 		/obj/item/weapon/reagent_containers/food/snacks/grown/grapes = "grapejuice",
+		/obj/item/weapon/reagent_containers/food/snacks/grown/ginger = "gingerjuice",
+		/obj/item/weapon/reagent_containers/food/snacks/grown/greengrapes = "greengrapejuice",
+		/obj/item/weapon/reagent_containers/food/snacks/grown/strawberry = "strawberryjuice",
 		/obj/item/weapon/reagent_containers/food/snacks/grown/poisonberries = "poisonberryjuice",
 	)
 
@@ -52,9 +56,6 @@
 	O.loc = src
 	src.updateUsrDialog()
 	return 0
-
-/obj/machinery/juicer/attack_paw(mob/user as mob)
-	return src.attack_hand(user)
 
 /obj/machinery/juicer/attack_ai(mob/user as mob)
 	return 0

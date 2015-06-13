@@ -126,10 +126,11 @@
 	attack_ai(var/mob/user)
 		interact(user, 1)
 
-	attack_paw()
-		return
-
 	attack_hand(var/mob/user)
+
+		if(!user.IsAdvancedToolUser())
+			return 0
+
 		interact(user, 0)
 
 	interact(var/mob/user, var/ai = 0)
@@ -193,7 +194,7 @@ Transponder Codes:<UL>"}
 					updateDialog()
 
 				else if(href_list["locedit"])
-					var/newloc = copytext(sanitize(input("Enter New Location", "Navigation Beacon", location) as text|null),1,MAX_MESSAGE_LEN)
+					var/newloc = sanitize(copytext(input("Enter New Location", "Navigation Beacon", location) as text|null,1,MAX_MESSAGE_LEN))
 					if(newloc)
 						location = newloc
 						updateDialog()

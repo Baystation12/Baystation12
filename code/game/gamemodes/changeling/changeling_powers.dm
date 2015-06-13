@@ -149,7 +149,7 @@
 		src << "<span class='warning'>We do not know how to parse this creature's DNA!</span>"
 		return
 
-	if(NOCLONE in T.mutations)
+	if(HUSK in T.mutations)
 		src << "<span class='warning'>This creature's DNA is ruined beyond useability!</span>"
 		return
 
@@ -176,7 +176,6 @@
 				var/datum/organ/external/affecting = T.get_organ(src.zone_sel.selecting)
 				if(affecting.take_damage(39,0,1,0,"large organic needle"))
 					T:UpdateDamageIcon()
-					continue
 
 		feedback_add_details("changeling_powers","A[stage]")
 		if(!do_mob(src, T, 150))
@@ -658,7 +657,7 @@ var/list/datum/dna/hivemind_bank = list()
 		src << "<span class='notice'>We return our vocal glands to their original location.</span>"
 		return
 
-	var/mimic_voice = input("Enter a name to mimic.", "Mimic Voice", null) as text
+	var/mimic_voice = stripped_input(usr, "Enter a name to mimic.", "Mimic Voice", null, MAX_NAME_LEN)
 	if(!mimic_voice)
 		return
 
@@ -680,11 +679,16 @@ var/list/datum/dna/hivemind_bank = list()
 	//////////
 
 /mob/proc/sting_can_reach(mob/M as mob, sting_range = 1)
-	if(M.loc == src.loc) return 1 //target and source are in the same thing
-	if(!isturf(src.loc) || !isturf(M.loc)) return 0 //One is inside, the other is outside something.
-	if(AStar(src.loc, M.loc, /turf/proc/AdjacentTurfs, /turf/proc/Distance, sting_range)) //If a path exists, good!
-		return 1
-	return 0
+	if(M.loc == src.loc)
+		return 1 //target and source are in the same thing
+	if(!isturf(src.loc) || !isturf(M.loc))
+		src << "<span class='warning'>We cannot reach \the [M] with a sting!</span>"
+		return 0 //One is inside, the other is outside something.
+	// Maximum queued turfs set to 25; I don't *think* anything raises sting_range above 2, but if it does the 25 may need raising
+	if(!AStar(src.loc, M.loc, /turf/proc/AdjacentTurfs, /turf/proc/Distance, max_nodes=25, max_node_depth=sting_range)) //If we can't find a path, fail
+		src << "<span class='warning'>We cannot find a path to sting \the [M] by!</span>"
+		return 0
+	return 1
 
 //Handles the general sting code to reduce on copypasta (seeming as somebody decided to make SO MANY dumb abilities)
 /mob/proc/changeling_sting(var/required_chems=0, var/verb_path)

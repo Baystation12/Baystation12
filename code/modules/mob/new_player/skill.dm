@@ -168,30 +168,7 @@ proc/setup_skills()
 
 
 mob/living/carbon/human/proc/GetSkillClass(points)
-	// skill classes describe how your character compares in total points
-	var/original_points = points
-	points -= min(round((age - 20) / 2.5), 4) // every 2.5 years after 20, one extra skillpoint
-	if(age > 30)
-		points -= round((age - 30) / 5) // every 5 years after 30, one extra skillpoint
-	if(original_points > 0 && points <= 0) points = 1
-	switch(points)
-		if(0)
-			return "Unconfigured"
-		if(1 to 3)
-			return "Terrifying"
-		if(4 to 6)
-			return "Below Average"
-		if(7 to 10)
-			return "Average"
-		if(11 to 14)
-			return "Above Average"
-		if(15 to 18)
-			return "Exceptional"
-		if(19 to 24)
-			return "Genius"
-		if(24 to 1000)
-			return "God"
-
+	return CalculateSkillClass(points, age)
 
 proc/show_skill_window(var/mob/user, var/mob/living/carbon/human/M)
 	if(!istype(M)) return

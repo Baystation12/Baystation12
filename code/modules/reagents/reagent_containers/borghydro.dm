@@ -8,7 +8,6 @@
 	amount_per_transfer_from_this = 5
 	volume = 30
 	possible_transfer_amounts = null
-	flags = FPRINT
 	var/mode = 1
 	var/charge_cost = 50
 	var/charge_tick = 0
@@ -97,18 +96,17 @@
 	user << "\blue Synthesizer is now producing '[R.name]'."
 	return
 
-/obj/item/weapon/reagent_containers/borghypo/examine()
-	set src in view()
-	..()
-	if (!(usr in view(2)) && usr!=src.loc) return
+/obj/item/weapon/reagent_containers/borghypo/examine(mob/user)
+	if(!..(user, 2))
+		return
 
 	var/empty = 1
 
 	for(var/datum/reagents/RS in reagent_list)
 		var/datum/reagent/R = locate() in RS.reagent_list
 		if(R)
-			usr << "\blue It currently has [R.volume] units of [R.name] stored."
+			user << "\blue It currently has [R.volume] units of [R.name] stored."
 			empty = 0
 
 	if(empty)
-		usr << "\blue It is currently empty. Allow some time for the internal syntheszier to produce more."
+		user << "\blue It is currently empty. Allow some time for the internal syntheszier to produce more."

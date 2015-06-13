@@ -1,13 +1,11 @@
 //AMMUNITION
 
 /obj/item/weapon/arrow
-
 	name = "bolt"
 	desc = "It's got a tip for you - get the point?"
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "bolt"
 	item_state = "bolt"
-	flags =  FPRINT | TABLEPASS
 	throwforce = 8
 	w_class = 3.0
 	sharp = 1
@@ -28,7 +26,6 @@
 	item_state = "bolt"
 
 /obj/item/weapon/arrow/quill
-
 	name = "vox quill"
 	desc = "A wickedly barbed quill from some bizarre animal."
 	icon = 'icons/obj/weapons.dmi'
@@ -37,7 +34,6 @@
 	throwforce = 5
 
 /obj/item/weapon/arrow/rod
-
 	name = "metal rod"
 	desc = "Don't cry for me, Orithena."
 	icon_state = "metal-rod"
@@ -50,7 +46,6 @@
 		src.Del()
 
 /obj/item/weapon/gun/launcher/crossbow
-
 	name = "powered crossbow"
 	desc = "A 2557AD twist on an old classic. Pick up that can."
 	icon_state = "crossbow"
@@ -173,7 +168,6 @@
 		..()
 
 /obj/item/weapon/gun/launcher/crossbow/proc/superheat_rod(var/mob/user)
-
 	if(!user || !cell || !in_chamber) return
 	if(cell.charge < 500) return
 	if(in_chamber.throwforce >= 15) return
@@ -197,14 +191,14 @@
 /obj/item/weapon/crossbowframe/update_icon()
 	icon_state = "crossbowframe[buildstate]"
 
-/obj/item/weapon/crossbowframe/examine()
-	..()
+/obj/item/weapon/crossbowframe/examine(mob/user)
+	..(user)
 	switch(buildstate)
-		if(1) usr << "It has a loose rod frame in place."
-		if(2) usr << "It has a steel backbone welded in place."
-		if(3) usr << "It has a steel backbone and a cell mount installed."
-		if(4) usr << "It has a steel backbone, plastic lath and a cell mount installed."
-		if(5) usr << "It has a steel cable loosely strung across the lath."
+		if(1) user << "It has a loose rod frame in place."
+		if(2) user << "It has a steel backbone welded in place."
+		if(3) user << "It has a steel backbone and a cell mount installed."
+		if(4) user << "It has a steel backbone, plastic lath and a cell mount installed."
+		if(5) user << "It has a steel cable loosely strung across the lath."
 
 /obj/item/weapon/crossbowframe/attackby(obj/item/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/stack/rods))

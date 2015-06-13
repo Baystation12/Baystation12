@@ -52,6 +52,7 @@
 	name = "pulse destroyer"
 	desc = "A heavy-duty, pulse-based energy weapon."
 	cell_type = "/obj/item/weapon/cell/infinite"
+	fire_delay = 10
 
 	attack_self(mob/living/user as mob)
 		user << "\red [src.name] has three settings, and they are all DESTROY."
@@ -59,10 +60,11 @@
 
 
 /obj/item/weapon/gun/energy/pulse_rifle/M1911
-	name = "m1911-P"
+	name = "\improper M1911-P"
 	desc = "It's not the size of the gun, it's the size of the hole it puts through people."
 	icon_state = "m1911-p"
 	cell_type = "/obj/item/weapon/cell/infinite"
+	fire_delay = 10
 
 	isHandgun()
 		return 1

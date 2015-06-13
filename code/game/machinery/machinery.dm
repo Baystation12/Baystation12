@@ -109,12 +109,18 @@ Class Procs:
 	var/list/component_parts = list() //list of all the parts used to build it, if made from certain kinds of frames.
 	var/uid
 	var/manual = 0
+	var/interact_offline = 0 // Can the machine be interacted with while de-powered.
 	var/global/gl_uid = 1
 
-/obj/machinery/New()
-	..()
-	machines += src
-	machinery_sort_required = 1
+/obj/machinery/New(l, d=0)
+	..(l)
+	if(d)
+		set_dir(d)
+	if(!machinery_sort_required && ticker)
+		dd_insertObjectList(machines, src)
+	else
+		machines += src
+		machinery_sort_required = 1
 
 /obj/machinery/Del()
 	machines -= src
@@ -132,7 +138,7 @@ Class Procs:
 		pulse2.icon_state = "empdisable"
 		pulse2.name = "emp sparks"
 		pulse2.anchored = 1
-		pulse2.dir = pick(cardinal)
+		pulse2.set_dir(pick(cardinal))
 
 		spawn(10)
 			pulse2.delete()
@@ -160,18 +166,7 @@ Class Procs:
 
 //sets the use_power var and then forces an area power update
 /obj/machinery/proc/update_use_power(var/new_use_power, var/force_update = 0)
-	if ((new_use_power == use_power) && !force_update)
-		return	//don't need to do anything
-
 	use_power = new_use_power
-
-	//force area power update
-	force_power_update()
-
-/obj/machinery/proc/force_power_update()
-	var/area/A = get_area(src)
-	if(A && A.master)
-		A.master.powerupdate = 1
 
 /obj/machinery/proc/auto_use_power()
 	if(!powered(power_channel))
@@ -188,36 +183,69 @@ Class Procs:
 /obj/machinery/proc/inoperable(var/additional_flags = 0)
 	return (stat & (NOPOWER|BROKEN|additional_flags))
 
-/obj/machinery/Topic(href, href_list)
-	..()
-	if(inoperable())
+
+/obj/machinery/Topic(href, href_list, var/nowindow = 0, var/checkrange = 1)
+	if(..())
 		return 1
-	if(usr.restrained() || usr.lying || usr.stat)
+	if(!can_be_used_by(usr, be_close = checkrange))
 		return 1
-	if ( ! (istype(usr, /mob/living/carbon/human) || \
-			istype(usr, /mob/living/silicon) || \
-			istype(usr, /mob/living/carbon/monkey)) )
-		usr << "\red You don't have the dexterity to do this!"
-		return 1
-
-	var/norange = 0
-	if(istype(usr, /mob/living/carbon/human))
-		var/mob/living/carbon/human/H = usr
-		if(istype(H.l_hand, /obj/item/tk_grab))
-			norange = 1
-		else if(istype(H.r_hand, /obj/item/tk_grab))
-			norange = 1
-
-	if(!norange)
-		if ((!in_range(src, usr) || !istype(src.loc, /turf)) && !istype(usr, /mob/living/silicon))
-			return 1
-
-	src.add_fingerprint(usr)
-
-	var/area/A = get_area(src)
-	A.master.powerupdate = 1
-
+	add_fingerprint(usr)
 	return 0
+
+/obj/machinery/proc/can_be_used_by(mob/user, be_close = 1)
+	if(!interact_offline && stat & (NOPOWER|BROKEN))
+		return 0
+	if(!user.canUseTopic(src, be_close))
+		return 0
+	return 1
+
+////////////////////////////////////////////////////////////////////////////////////////////
+
+/mob/proc/canUseTopic(atom/movable/M, be_close = 1)
+	return
+
+/mob/dead/observer/canUseTopic(atom/movable/M, be_close = 1)
+	if(check_rights(R_ADMIN, 0))
+		return
+
+/mob/living/canUseTopic(atom/movable/M, be_close = 1, no_dextery = 0)
+	if(no_dextery)
+		src << "<span class='notice'>You don't have the dexterity to do this!</span>"
+		return 0
+	return be_close && !in_range(M, src)
+
+/mob/living/carbon/human/canUseTopic(atom/movable/M, be_close = 1)
+	if(restrained() || lying || stat || stunned || weakened)
+		return
+	if(be_close && !in_range(M, src))
+		if(TK in mutations)
+			var/mob/living/carbon/human/H = M
+			if(istype(H.l_hand, /obj/item/tk_grab) || istype(H.r_hand, /obj/item/tk_grab))
+				return 1
+		return
+	if(!isturf(M.loc) && M.loc != src)
+		return
+	return 1
+
+/mob/living/silicon/ai/canUseTopic(atom/movable/M)
+	if(stat)
+		return
+	// Prevents the AI from using Topic on admin levels (by for example viewing through the court/thunderdome cameras)
+	// unless it's on the same level as the object it's interacting with.
+	if(!(z == M.z || M.z in config.player_levels))
+		return
+	//stop AIs from leaving windows open and using then after they lose vision
+	//apc_override is needed here because AIs use their own APC when powerless
+	if(cameranet && !cameranet.checkTurfVis(get_turf(M)) && !apc_override)
+		return
+	return 1
+
+/mob/living/silicon/robot/canUseTopic(atom/movable/M)
+	if(stat || lockcharge || stunned || weakened)
+		return
+	return 1
+
+////////////////////////////////////////////////////////////////////////////////////////////
 
 /obj/machinery/attack_ai(mob/user as mob)
 	if(isrobot(user))
@@ -227,9 +255,6 @@ Class Procs:
 			return src.attack_hand(user)
 	else
 		return src.attack_hand(user)
-
-/obj/machinery/attack_paw(mob/user as mob)
-	return src.attack_hand(user)
 
 /obj/machinery/attack_hand(mob/user as mob)
 	if(inoperable(MAINT))
@@ -257,14 +282,10 @@ Class Procs:
 
 	src.add_fingerprint(user)
 
-	var/area/A = get_area(src)
-	A.master.powerupdate = 1
-
 	return 0
 
 /obj/machinery/proc/RefreshParts() //Placeholder proc for machines that are built using frames.
 	return
-	return 0
 
 /obj/machinery/proc/assign_uid()
 	uid = gl_uid
@@ -290,6 +311,12 @@ Class Procs:
 	s.set_up(5, 1, src)
 	s.start()
 	if (electrocute_mob(user, get_area(src), src, 0.7))
+		var/area/temp_area = get_area(src)
+		if(temp_area && temp_area.master)
+			var/obj/machinery/power/apc/temp_apc = temp_area.master.get_apc()
+
+			if(temp_apc && temp_apc.terminal && temp_apc.terminal.powernet)
+				temp_apc.terminal.powernet.trigger_warning()
 		return 1
 	else
 		return 0
@@ -297,6 +324,7 @@ Class Procs:
 /obj/machinery/proc/dismantle()
 	playsound(loc, 'sound/items/Crowbar.ogg', 50, 1)
 	var/obj/machinery/constructable_frame/machine_frame/M = new /obj/machinery/constructable_frame/machine_frame(loc)
+	M.set_dir(src.dir)
 	M.state = 2
 	M.icon_state = "box_1"
 	for(var/obj/I in component_parts)
@@ -305,6 +333,7 @@ Class Procs:
 		I.loc = loc
 	del(src)
 	return 1
+
 
 // Hook for html_interface module to prevent updates to clients who don't have this as their active machine.
 /obj/machinery/proc/hiIsValidClient(datum/html_interface_client/hclient)
@@ -317,3 +346,51 @@ Class Procs:
 // Hook for html_interface module to unset the active machine when the window is closed by the player.
 /obj/machinery/proc/hiOnHide(datum/html_interface_client/hclient)
 	if (hclient.client.mob && hclient.client.mob.machine == src) hclient.client.mob.unset_machine()
+
+/obj/machinery/proc/on_assess_perp(mob/living/carbon/human/perp)
+	return 0
+
+/obj/machinery/proc/is_assess_emagged()
+	return emagged
+
+/obj/machinery/proc/assess_perp(mob/living/carbon/human/perp, var/auth_weapons, var/check_records, var/check_arrest)
+	var/threatcount = 0	//the integer returned
+
+	if(is_assess_emagged())
+		return 10	//if emagged, always return 10.
+
+	threatcount += on_assess_perp(perp)
+	if(threatcount >= 10)
+		return threatcount
+
+	//Agent cards lower threatlevel.
+	var/obj/item/weapon/card/id/id = GetIdCard(perp)
+	if(id && (istype(id, /obj/item/weapon/card/id/syndicate) || istype(id, /obj/item/weapon/card/id/centcom)))
+		threatcount -= 2
+
+	if(auth_weapons && !src.allowed(perp))
+		if(istype(perp.l_hand, /obj/item/weapon/gun) || istype(perp.l_hand, /obj/item/weapon/melee))
+			threatcount += 4
+
+		if(istype(perp.r_hand, /obj/item/weapon/gun) || istype(perp.r_hand, /obj/item/weapon/melee))
+			threatcount += 4
+
+		if(istype(perp.belt, /obj/item/weapon/gun) || istype(perp.belt, /obj/item/weapon/melee))
+			threatcount += 2
+
+		if(perp.species.name != "Human") //beepsky so racist.
+			threatcount += 2
+
+	if(check_records || check_arrest)
+		var/perpname = perp.name
+		if(id)
+			perpname = id.registered_name
+
+		var/datum/data/record/R = find_security_record("name", perpname)
+		if(check_records && !R)
+			threatcount += 4
+
+		if(check_arrest && R && (R.fields["criminal"] == "*Arrest*"))
+			threatcount += 4
+
+	return threatcount

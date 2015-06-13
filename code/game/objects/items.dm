@@ -10,7 +10,6 @@
 	var/burning = null
 	var/hitsound = null
 	var/w_class = 3.0
-	flags = FPRINT | TABLEPASS
 	var/slot_flags = 0		//This is used to determine on which slots an item can fit.
 	pass_flags = PASSTABLE
 	pressure_resistance = 5
@@ -35,7 +34,7 @@
 	var/siemens_coefficient = 1 // for electrical admittance/conductance (electrocution checks and shit)
 	var/slowdown = 0 // How much clothing is slowing you down. Negative values speeds you up
 	var/canremove = 1 //Mostly for Ninja code at this point but basically will not allow the item to be removed if set to 0. /N
-	var/armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
+	var/list/armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	var/list/allowed = null //suit storage stuff.
 	var/obj/item/device/uplink/hidden/hidden_uplink = null // All items can have an uplink hidden inside, just remember to add the triggers.
 	var/zoomdevicename = null //name used for message when binoculars/scope is used
@@ -102,9 +101,7 @@
 
 	src.loc = T
 
-/obj/item/examine()
-	set src in view()
-
+/obj/item/examine(mob/user, var/distance = -1)
 	var/size
 	switch(src.w_class)
 		if(1.0)
@@ -117,12 +114,8 @@
 			size = "bulky"
 		if(5.0)
 			size = "huge"
-		else
-	//if ((CLUMSY in usr.mutations) && prob(50)) t = "funny-looking"
-	usr << "This is a [src.blood_DNA ? "bloody " : ""]\icon[src][src.name]. It is a [size] item."
-	if(src.desc)
-		usr << src.desc
-	return
+	return ..(user, distance, "", "It is a [size] item.")
+
 
 /obj/item/attack_hand(mob/user as mob)
 	if (!user) return
@@ -149,34 +142,21 @@
 		if(isliving(src.loc))
 			return
 		user.next_move = max(user.next_move+2,world.time + 2)
-	src.pickup(user)
 	add_fingerprint(user)
 	user.put_in_active_hand(src)
-	return
-
-
-/obj/item/attack_paw(mob/user as mob)
-
-	if (istype(src.loc, /obj/item/weapon/storage))
-		for(var/mob/M in range(1, src.loc))
-			if (M.s_active == src.loc)
-				if (M.client)
-					M.client.screen -= src
-	src.throwing = 0
-	if (src.loc == user)
-		//canremove==0 means that object may not be removed. You can still wear it. This only applies to clothing. /N
-		if(istype(src, /obj/item/clothing) && !src:canremove)
-			return
-		else
-			user.u_equip(src)
-	else
-		if(istype(src.loc, /mob/living))
-			return
+	if(src.loc == user)
 		src.pickup(user)
-		user.next_move = max(user.next_move+2,world.time + 2)
-
-	user.put_in_active_hand(src)
 	return
+
+
+/obj/item/attack_ai(mob/user as mob)
+	if (istype(src.loc, /obj/item/weapon/robot_module))
+		//If the item is part of a cyborg module, equip it
+		if(!isrobot(user))
+			return
+		var/mob/living/silicon/robot/R = user
+		R.activate_module(src)
+		R.hud_used.update_robot_modules_display()
 
 // Due to storage type consolidation this should get used more now.
 // I have cleaned it up a little, but it could probably use more.  -Sayu
@@ -279,6 +259,10 @@
 			if(slot_wear_mask)
 				if(H.wear_mask)
 					return 0
+				if(H.head && !(H.head.canremove) && (H.head.flags & HEADCOVERSMOUTH))
+					if(!disable_warning)
+						H << "<span class='warning'>\The [H.head] is in the way.</span>"
+					return 0
 				if( !(slot_flags & SLOT_MASK) )
 					return 0
 				return 1
@@ -311,13 +295,17 @@
 					return 0
 				if(!H.w_uniform && (slot_w_uniform in mob_equip))
 					if(!disable_warning)
-						H << "\red You need a jumpsuit before you can attach this [name]."
+						H << "<span class='warning'>You need a jumpsuit before you can attach this [name].</span>"
 					return 0
 				if( !(slot_flags & SLOT_BELT) )
 					return
 				return 1
 			if(slot_glasses)
 				if(H.glasses)
+					return 0
+				if(H.head && !(H.head.canremove) && (H.head.flags & HEADCOVERSEYES))
+					if(!disable_warning)
+						H << "<span class='warning'>\The [H.head] is in the way.</span>"
 					return 0
 				if( !(slot_flags & SLOT_EYES) )
 					return 0
@@ -347,6 +335,10 @@
 			if(slot_w_uniform)
 				if(H.w_uniform)
 					return 0
+				if(H.wear_suit && (H.wear_suit.body_parts_covered & src.body_parts_covered))
+					if(!disable_warning)
+						H << "<span class='warning'>\The [H.wear_suit] is in the way.</span>"
+					return 0
 				if( !(slot_flags & SLOT_ICLOTHING) )
 					return 0
 				return 1
@@ -355,7 +347,7 @@
 					return 0
 				if(!H.w_uniform && (slot_w_uniform in mob_equip))
 					if(!disable_warning)
-						H << "\red You need a jumpsuit before you can attach this [name]."
+						H << "<span class='warning'>You need a jumpsuit before you can attach this [name].</span>"
 					return 0
 				if( !(slot_flags & SLOT_ID) )
 					return 0
@@ -365,7 +357,7 @@
 					return 0
 				if(!H.w_uniform && (slot_w_uniform in mob_equip))
 					if(!disable_warning)
-						H << "\red You need a jumpsuit before you can attach this [name]."
+						H << "<span class='warning'>You need a jumpsuit before you can attach this [name].</span>"
 					return 0
 				if(slot_flags & SLOT_DENYPOCKET)
 					return 0
@@ -376,7 +368,7 @@
 					return 0
 				if(!H.w_uniform && (slot_w_uniform in mob_equip))
 					if(!disable_warning)
-						H << "\red You need a jumpsuit before you can attach this [name]."
+						H << "<span class='warning'>You need a jumpsuit before you can attach this [name].</span>"
 					return 0
 				if(slot_flags & SLOT_DENYPOCKET)
 					return 0
@@ -388,11 +380,11 @@
 					return 0
 				if(!H.wear_suit && (slot_wear_suit in mob_equip))
 					if(!disable_warning)
-						H << "\red You need a suit before you can attach this [name]."
+						H << "<span class='warning'>You need a suit before you can attach this [name].</span>"
 					return 0
 				if(!H.wear_suit.allowed)
 					if(!disable_warning)
-						usr << "You somehow have a suit with no defined allowed items for suit storage, stop that."
+						usr << "<span class='warning'>You somehow have a suit with no defined allowed items for suit storage, stop that.</span>"
 					return 0
 				if( istype(src, /obj/item/device/pda) || istype(src, /obj/item/weapon/pen) || is_type_in_list(src, H.wear_suit.allowed) )
 					return 1
@@ -415,6 +407,19 @@
 					if(B.contents.len < B.storage_slots && w_class <= B.max_w_class)
 						return 1
 				return 0
+			if(slot_tie)
+				if(!H.w_uniform && (slot_w_uniform in mob_equip))
+					if(!disable_warning)
+						H << "<span class='warning'>You need a jumpsuit before you can attach this [name].</span>"
+					return 0
+				var/obj/item/clothing/under/uniform = H.w_uniform
+				if(uniform.hastie)
+					if (!disable_warning)
+						H << "<span class='warning'>You already have [uniform.hastie] attached to your [uniform].</span>"
+					return 0
+				if( !(slot_flags & SLOT_TIE) )
+					return 0
+				return 1
 		return 0 //Unsupported slot
 		//END HUMAN
 
@@ -598,10 +603,10 @@
 		overlays += blood_overlay
 
 	//if this blood isn't already in the list, add it
-
-	if(blood_DNA[M.dna.unique_enzymes])
-		return 0 //already bloodied with this blood. Cannot add more.
-	blood_DNA[M.dna.unique_enzymes] = M.dna.b_type
+	if(istype(M))
+		if(blood_DNA[M.dna.unique_enzymes])
+			return 0 //already bloodied with this blood. Cannot add more.
+		blood_DNA[M.dna.unique_enzymes] = M.dna.b_type
 	return 1 //we applied blood to the item
 
 /obj/item/proc/generate_blood_overlay()
@@ -650,7 +655,7 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 		usr << "You are unable to focus through the [devicename]"
 		cannotzoom = 1
 	else if(!zoom && global_hud.darkMask[1] in usr.client.screen)
-		usr << "Your welding equipment gets in the way of you looking through the [devicename]"
+		usr << "Your visor gets in the way of looking through the [devicename]"
 		cannotzoom = 1
 	else if(!zoom && usr.get_active_hand() != src)
 		usr << "You are too distracted to look through the [devicename], perhaps if it was in your active hand this might work better"

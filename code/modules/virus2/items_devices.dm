@@ -6,7 +6,7 @@
 	icon_state = "health"
 	w_class = 2.0
 	item_state = "electronic"
-	flags = FPRINT | TABLEPASS | CONDUCT
+	flags = CONDUCT
 
 /obj/item/device/antibody_scanner/attack(mob/M as mob, mob/user as mob)
 	if(!istype(M,/mob/living/carbon/))
@@ -65,11 +65,11 @@
 					infect_virus2(target, src.virus2)
 		del src
 
-/obj/item/weapon/virusdish/examine()
-	usr << "This is a virus containment dish."
+/obj/item/weapon/virusdish/examine(mob/user)
+	user << "This is a virus containment dish."
 	if(src.info)
-		usr << "It has the following information about its contents:"
-		usr << src.info
+		user << "It has the following information about its contents:"
+		user << src.info
 
 /obj/item/weapon/ruinedvirusdish
 	name = "ruined virus sample"

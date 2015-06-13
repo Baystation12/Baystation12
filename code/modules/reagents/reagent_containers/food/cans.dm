@@ -84,20 +84,19 @@
 
 		return ..()
 
-/*	examine()
-		set src in view()
-		..()
-		if (!(usr in range(0)) && usr!=src.loc) return
+/*	examine(mob/user)
+		if(!..(user, 1))
+			return
 		if(!reagents || reagents.total_volume==0)
-			usr << "\blue \The [src] is empty!"
+			user << "\blue \The [src] is empty!"
 		else if (reagents.total_volume<=src.volume/4)
-			usr << "\blue \The [src] is almost empty!"
+			user << "\blue \The [src] is almost empty!"
 		else if (reagents.total_volume<=src.volume*0.66)
-			usr << "\blue \The [src] is half full!"
+			user << "\blue \The [src] is half full!"
 		else if (reagents.total_volume<=src.volume*0.90)
-			usr << "\blue \The [src] is almost full!"
+			user << "\blue \The [src] is almost full!"
 		else
-			usr << "\blue \The [src] is full!"*/
+			user << "\blue \The [src] is full!"*/
 
 
 //DRINKS
@@ -205,13 +204,13 @@
 		reagents.add_reagent("icetea", 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/grape_juice
-	name = "Grapel Juice"
+	name = "Grapel Soda"
 	desc = "500 pages of rules of how to appropriately enter into a combat with this juice!"
 	icon_state = "purple_can"
 	center_of_mass = list("x"=16, "y"=10)
 	New()
 		..()
-		reagents.add_reagent("grapejuice", 30)
+		reagents.add_reagent("grapesoda", 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/tonic
 	name = "T-Borg's Tonic Water"

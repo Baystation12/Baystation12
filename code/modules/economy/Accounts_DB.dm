@@ -11,6 +11,7 @@
 	var/obj/item/weapon/card/id/held_card
 	var/datum/money_account/detailed_account_view
 	var/creating_new_account = 0
+	var/const/fund_cap = 1000000
 
 	proc/get_access_level()
 		if (!held_card)
@@ -125,12 +126,12 @@
 			if("add_funds")
 				var/amount = input("Enter the amount you wish to add", "Silently add funds") as num
 				if(detailed_account_view)
-					detailed_account_view.money += amount
+					detailed_account_view.money = min(detailed_account_view.money + amount, fund_cap)
 
 			if("remove_funds")
 				var/amount = input("Enter the amount you wish to remove", "Silently remove funds") as num
 				if(detailed_account_view)
-					detailed_account_view.money -= amount
+					detailed_account_view.money = max(detailed_account_view.money - amount, -fund_cap)
 
 			if("toggle_suspension")
 				if(detailed_account_view)
@@ -141,6 +142,9 @@
 				var/account_name = href_list["holder_name"]
 				var/starting_funds = max(text2num(href_list["starting_funds"]), 0)
 				create_account(account_name, starting_funds, src)
+
+				starting_funds = Clamp(starting_funds, 0, station_account.money)	// Not authorized to put the station in debt.
+				starting_funds = min(starting_funds, fund_cap)						// Not authrorized to give more than the fund cap.
 				if(starting_funds > 0)
 					//subtract the money
 					station_account.money -= starting_funds

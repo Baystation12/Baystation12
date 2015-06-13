@@ -77,8 +77,8 @@ emp_act
 				if (affected.status & ORGAN_ROBOT)
 					emote("me", 1, "drops what they were holding, their [affected.display_name] malfunctioning!")
 				else
-					var/emote_scream = pick("screams in pain and", "lets out a sharp cry and", "cries out and")
-					emote("me", 1, "[(species && species.flags & NO_PAIN) ? "" : emote_scream ] drops what they were holding in their [affected.display_name]!")
+					var/emote_scream = pick("screams in pain and ", "lets out a sharp cry and ", "cries out and ")
+					emote("me", 1, "[(species && species.flags & NO_PAIN) ? "" : emote_scream ]drops what they were holding in their [affected.display_name]!")
 
 	..(stun_amount, agony_amount, def_zone)
 
@@ -107,7 +107,7 @@ emp_act
 	if (!def_zone)
 		return 1.0
 
-	var/siemens_coefficient = 1.0
+	var/siemens_coefficient = species.siemens_coefficient
 
 	var/list/clothing_items = list(head, wear_mask, wear_suit, w_uniform, gloves, shoes) // What all are we checking?
 	for(var/obj/item/clothing/C in clothing_items)
@@ -120,7 +120,7 @@ emp_act
 /mob/living/carbon/human/proc/getarmor_organ(var/datum/organ/external/def_zone, var/type)
 	if(!type)	return 0
 	var/protection = 0
-	var/list/protective_gear = list(head, wear_mask, wear_suit, w_uniform)
+	var/list/protective_gear = list(head, wear_mask, wear_suit, w_uniform, gloves, shoes)
 	for(var/gear in protective_gear)
 		if(gear && istype(gear ,/obj/item/clothing))
 			var/obj/item/clothing/C = gear
@@ -282,7 +282,7 @@ emp_act
 		forcesay(hit_appends)	//forcesay checks stat already
 
 	//Melee weapon embedded object code.
-	if (I.damtype == BRUTE && !I.is_robot_module())
+	if (I && I.damtype == BRUTE && !I.anchored && !I.is_robot_module())
 		var/damage = I.force
 		if (armor)
 			damage /= armor+1
@@ -414,13 +414,19 @@ emp_act
 		w_uniform.add_blood(source)
 		update_inv_w_uniform(0)
 
-/mob/living/carbon/human/proc/handle_suit_punctures(var/damtype, var/damage)
+/mob/living/carbon/human/proc/handle_suit_punctures(var/damtype, var/damage, var/def_zone)
 
-	if(!wear_suit) return
-	if(!istype(wear_suit,/obj/item/clothing/suit/space)) return
+	// Tox and oxy don't matter to suits.
 	if(damtype != BURN && damtype != BRUTE) return
 
-	var/obj/item/clothing/suit/space/SS = wear_suit
-	var/penetrated_dam = max(0,(damage - SS.breach_threshold)) // - SS.damage)) - Consider uncommenting this if suits seem too hardy on dev.
+	// The rig might soak this hit, if we're wearing one.
+	if(back && istype(back,/obj/item/weapon/rig))
+		var/obj/item/weapon/rig/rig = back
+		rig.take_hit(damage)
 
+	// We may also be taking a suit breach.
+	if(!wear_suit) return
+	if(!istype(wear_suit,/obj/item/clothing/suit/space)) return
+	var/obj/item/clothing/suit/space/SS = wear_suit
+	var/penetrated_dam = max(0,(damage - SS.breach_threshold))
 	if(penetrated_dam) SS.create_breaches(damtype, penetrated_dam)

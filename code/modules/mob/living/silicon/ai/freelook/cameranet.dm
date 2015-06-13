@@ -7,9 +7,15 @@ var/datum/cameranet/cameranet = new()
 /datum/cameranet
 	// The cameras on the map, no matter if they work or not. Updated in obj/machinery/camera.dm by New() and Del().
 	var/list/cameras = list()
+	var/cameras_unsorted = 1
 	// The chunks of the map, mapping the areas that the cameras can see.
 	var/list/chunks = list()
 	var/ready = 0
+
+/datum/cameranet/proc/process_sort()
+	if(cameras_unsorted)
+		cameras = dd_sortedObjectList(cameras)
+		cameras_unsorted = 0
 
 // Checks if a chunk has been Generated in x, y, z.
 /datum/cameranet/proc/chunkGenerated(x, y, z)

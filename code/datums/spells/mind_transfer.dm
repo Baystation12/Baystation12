@@ -57,6 +57,8 @@ Also, you never added distance checking after target is selected. I've went ahea
 	var/mob/caster = user//The wizard/whomever doing the body transferring.
 
 	//SPELL LOSS BEGIN
+	admin_attack_log(caster, victim, "Used mind transfer on", "Had mind transfer used on him by", "used mind transfer on")
+
 	//NOTE: The caster must ALWAYS keep mind transfer, even when other spells are lost.
 	var/obj/effect/proc_holder/spell/targeted/mind_transfer/m_transfer = locate() in user.spell_list//Find mind transfer directly.
 	var/list/checked_spells = user.spell_list

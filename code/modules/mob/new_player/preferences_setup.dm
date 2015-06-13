@@ -224,7 +224,8 @@ datum/preferences
 				preview_icon.Blend(rgb(-s_tone,  -s_tone,  -s_tone), ICON_SUBTRACT)
 
 		var/icon/eyes_s = new/icon("icon" = 'icons/mob/human_face.dmi', "icon_state" = current_species ? current_species.eyes : "eyes_s")
-		eyes_s.Blend(rgb(r_eyes, g_eyes, b_eyes), ICON_ADD)
+		if ((current_species && (current_species.flags & HAS_EYE_COLOR)))
+			eyes_s.Blend(rgb(r_eyes, g_eyes, b_eyes), ICON_ADD)
 
 		var/datum/sprite_accessory/hair_style = hair_styles_list[h_style]
 		if(hair_style)

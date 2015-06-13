@@ -6,7 +6,6 @@
 	throw_speed = 1
 	throw_range = 5
 	w_class = 2.0
-	flags = FPRINT | TABLEPASS
 	var/uses = 5
 	var/temp = null
 	var/max_uses = 5
@@ -181,8 +180,8 @@
 							feedback_add_details("wizard_spell_learned","HS") //please do not change the abbreviation to keep data processing consistent. Add a unique id to any new spells
 							new /obj/item/clothing/shoes/sandal(get_turf(H)) //In case they've lost them.
 							new /obj/item/clothing/gloves/purple(get_turf(H))//To complete the outfit
-							new /obj/item/clothing/suit/space/rig/wizard(get_turf(H))
-							new /obj/item/clothing/head/helmet/space/rig/wizard(get_turf(H))
+							new /obj/item/clothing/suit/space/void/wizard(get_turf(H))
+							new /obj/item/clothing/head/helmet/space/void/wizard(get_turf(H))
 							temp = "An artefact suit of armor that allows you to cast spells while providing more protection against attacks and the void of space."
 							max_uses--
 						if("staffanimation")

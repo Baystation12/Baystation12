@@ -75,6 +75,7 @@ Radio:
 1341 - death squad
 1443 - Confession Intercom
 1347 - Cargo techs
+1349 - Service people
 
 Devices:
 1451 - tracking implant
@@ -109,6 +110,7 @@ var/const/ENG_FREQ = 1357
 var/const/SCI_FREQ = 1351
 var/const/MED_FREQ = 1355
 var/const/SUP_FREQ = 1347
+var/const/SRV_FREQ = 1349
 
 var/list/radiochannels = list(
 	"Common"		= PUB_FREQ,
@@ -119,8 +121,10 @@ var/list/radiochannels = list(
 	"Security" 		= SEC_FREQ,
 	"Response Team" = ERT_FREQ,
 	"Special Ops" 	= DTH_FREQ,
-	"Syndicate" 	= SYND_FREQ,
-	"Supply" 		= SUP_FREQ
+	"Mercenary" 	= SYND_FREQ,
+	"Supply" 		= SUP_FREQ,
+	"Service" 		= SRV_FREQ,
+	"AI Private"	= AI_FREQ
 )
 
 // central command channels, i.e deathsquid & response teams
@@ -130,10 +134,42 @@ var/list/CENT_FREQS = list(ERT_FREQ, DTH_FREQ)
 var/list/ANTAG_FREQS = list(SYND_FREQ)
 
 //depenging helpers
-var/list/DEPT_FREQS = list(SCI_FREQ, MED_FREQ, ENG_FREQ, SEC_FREQ, SUP_FREQ, ERT_FREQ, SYND_FREQ, DTH_FREQ)
+var/list/DEPT_FREQS = list(SCI_FREQ, MED_FREQ, ENG_FREQ, SEC_FREQ, SUP_FREQ, SRV_FREQ, ERT_FREQ, SYND_FREQ, DTH_FREQ)
 
 #define TRANSMISSION_WIRE	0
 #define TRANSMISSION_RADIO	1
+
+/proc/frequency_span_class(var/frequency)
+	// Antags!
+	if (frequency in ANTAG_FREQS)
+		return "syndradio"
+	// centcomm channels (deathsquid and ert)
+	else if(frequency in CENT_FREQS)
+		return "centradio"
+	// command channel
+	else if(frequency == COMM_FREQ)
+		return "comradio"
+	// AI private channel
+	else if(frequency == AI_FREQ)
+		return "airadio"
+	// department radio formatting (poorly optimized, ugh)
+	else if(frequency == SEC_FREQ)
+		return "secradio"
+	else if (frequency == ENG_FREQ)
+		return "engradio"
+	else if(frequency == SCI_FREQ)
+		return "sciradio"
+	else if(frequency == MED_FREQ)
+		return "medradio"
+	else if(frequency == SUP_FREQ) // cargo
+		return "supradio"
+	else if(frequency == SRV_FREQ) // service
+		return "srvradio"
+	// If all else fails and it's a dept_freq, color me purple!
+	else if(frequency in DEPT_FREQS)
+		return "deptradio"
+
+	return "radio"
 
 /* filters */
 //When devices register with the radio controller, they might register under a certain filter.
@@ -271,7 +307,7 @@ var/global/datum/controller/radio/radio_controller
 	//1 = radio transmission
 	//2 = subspace transmission
 
-	var/data = list()
+	var/list/data = list()
 	var/encryption
 
 	var/frequency = 0

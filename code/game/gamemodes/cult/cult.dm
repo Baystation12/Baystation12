@@ -334,7 +334,7 @@
 	if( cult.len || (ticker && istype(ticker.mode,/datum/game_mode/cult)) )
 		var/text = "<FONT size = 2><B>The cultists were:</B></FONT>"
 		for(var/datum/mind/cultist in cult)
-			text += printplayer(cultist)
+			text += print_player_full(cultist)
 		text += "<br>"
 
 		world << text

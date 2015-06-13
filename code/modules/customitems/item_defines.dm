@@ -301,19 +301,9 @@
 	icon_on = "engravedzippoon"
 	icon_off = "engravedzippo"
 
-/obj/item/weapon/fluff/cado_keppel_1 //sparklysheep: Cado Keppel
+/obj/item/weapon/haircomb/fluff/cado_keppel_1 //sparklysheep: Cado Keppel
 	name = "purple comb"
 	desc = "A pristine purple comb made from flexible plastic. It has a small K etched into its side."
-	w_class = 1.0
-	icon = 'icons/obj/custom_items.dmi'
-	icon_state = "purplecomb"
-	item_state = "purplecomb"
-
-	attack_self(mob/user)
-		if(user.r_hand == src || user.l_hand == src)
-			for(var/mob/O in viewers(user, null))
-				O.show_message(text("\red [] uses [] to comb their hair with incredible style and sophistication. What a [].", user, src, user.gender == FEMALE ? "lady" : "guy"), 1)
-		return
 
 /obj/item/weapon/fluff/hugo_cinderbacth_1 //thatoneguy: Hugo Cinderbatch
 	name = "Old Cane"
@@ -368,7 +358,7 @@
 
 /obj/item/weapon/reagent_containers/glass/beaker/large/fluff/nashida_bishara_1 //rukral:Nashida Bisha'ra
 	name = "Nashida's Etched Beaker"
-	desc = "The message: 'Please do not be removing this beaker from the chemistry lab. If lost, return to Nashida Bisha'ra' can be seen etched into the side of this 100 unit beaker."
+	desc = "The message: 'Please do not be removing this beaker from the chemistry lab. If lost, return to Nashida Bisha'ra' can be seen etched into the side of this large beaker."
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "beakerlarge"
 	matter = list("glass" = 5000)
@@ -417,7 +407,6 @@
 	item_state = "ciglit"
 	w_class = 1
 	body_parts_covered = null
-	flags = FPRINT|TABLEPASS
 
 //Strange penlight, Nerezza: Asher Spock
 
@@ -543,18 +532,22 @@
 	var/suit_icon       // Sets suit icon_state and item_state.
 	var/helmet_color    // Sets item_color.
 	var/uses = 2        // Uses before the kit deletes itself.
+	var/new_light_overlay
 
-/obj/item/clothing/head/helmet/space/rig/attackby(var/obj/item/O as obj, mob/user as mob)
+/obj/item/clothing/head/helmet/space/void/attackby(var/obj/item/O as obj, mob/user as mob)
 	..()
 
 	if(istype(O,/obj/item/device/kit/suit/fluff))
 
 		var/obj/item/device/kit/suit/fluff/kit = O
-		name = "[kit.new_name] hardsuit helmet"
+		name = "[kit.new_name] suit helmet"
 		desc = kit.new_helmet_desc
 		icon_state = kit.helmet_icon
 		item_state = kit.helmet_icon
 		item_color = kit.helmet_color
+
+		if(kit.new_light_overlay)
+			light_overlay = kit.new_light_overlay
 
 		user << "You set about modifying the helmet into [src]."
 		playsound(user.loc, 'sound/items/Screwdriver.ogg', 50, 1)
@@ -564,13 +557,13 @@
 			user.drop_item()
 			del(O)
 
-/obj/item/clothing/suit/space/rig/attackby(var/obj/item/O as obj, mob/user as mob)
+/obj/item/clothing/suit/space/void/attackby(var/obj/item/O as obj, mob/user as mob)
 	..()
 
 	if(istype(O,/obj/item/device/kit/suit/fluff))
 
 		var/obj/item/device/kit/suit/fluff/kit = O
-		name = "[kit.new_name] hardsuit"
+		name = "[kit.new_name] voidsuit"
 		desc = kit.new_suit_desc
 		icon_state = kit.suit_icon
 		item_state = kit.suit_icon
@@ -618,6 +611,7 @@
 	helmet_icon = "rig0-hazardhardsuit"
 	suit_icon = "rig-hazardhardsuit"
 	helmet_color = "hazardhardsuit"
+	new_light_overlay = "helmet_light_dual"
 
 //////// Meat Hook - Korom Bhararaya - Matthew951 ////////////////////////
 
@@ -770,12 +764,9 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "paintedwelding"
 
-/obj/item/clothing/head/helmet/greenbandana/fluff/taryn_kifer_1 //themij: Taryn Kifer
+/obj/item/clothing/head/orangebandana/fluff/taryn_kifer_1 //themij: Taryn Kifer
 	name = "orange bandana"
 	desc = "Hey, I think we're missing a hazard vest..."
-	icon = 'icons/obj/custom_items.dmi'
-	icon_state = "taryn_kifer_1"
-	body_parts_covered = 0
 
 /obj/item/clothing/head/fluff
 	body_parts_covered = 0
@@ -809,7 +800,6 @@
 	name = "colonial marine beret"
 	desc = "A well-worn navy blue beret. The insignia of the Martian Colonial Marine Corps is affixed to the front."
 	icon_state = "officerberet"
-	flags = FPRINT | TABLEPASS
 
 ////////////////////////////// Serithi - Adapted Security Helmet //////////////////////////////
 
@@ -863,7 +853,6 @@
 
 /obj/item/weapon/reagent_containers/glass/bottle/fluff/nashi_bottle
 	icon = 'icons/obj/chemical.dmi'
-	flags = FPRINT | TABLEPASS //Starting them with lids on them.  Safety first!
 	New(loc, var/color, var/labeled)
 		..()
 		name = "[labeled] bottle"
@@ -871,13 +860,17 @@
 		icon_state = "bottle[color]"
 
 //////////// Suits ////////////
+/obj/item/clothing/suit/storage/labcoat
+	name = "labcoat"
+	desc = "A plain labcoat."
+	icon_state = "labcoat"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|LEGS
 
 /obj/item/clothing/suit/storage/labcoat/fluff/aeneas_rinil //Robotics Labcoat - Aeneas Rinil [APPR]
 	name = "Robotics labcoat"
 	desc = "A labcoat with a few markings denoting it as the labcoat of roboticist."
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "aeneasrinil"
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|LEGS
 
 /obj/item/clothing/suit/storage/labcoat/fluff/pink //spaceman96: Trenna Seber
 	name = "pink labcoat"
@@ -891,6 +884,15 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "mitlabcoat"
 	item_state = "mitlabcoat"
+
+/obj/item/clothing/suit/storage/toggle/labcoat/fluff/epsilon //Devildabeast: Looping Song
+	name = "e UMi labcoat"
+	desc = "A suit that protects against minor chemical spills. Has a black stripe on the shoulder. The abbreviation \"e UMi\" is written on the back in bold text."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "labcoat_black_open"
+	icon_open = "labcoat_black_open"
+	icon_closed = "labcoat_black"
+	item_state = "labcoat_black"
 
 /obj/item/clothing/suit/storage/det_suit/fluff/leatherjack //atomicdog92: Seth Sealis
 	name = "leather jacket"
@@ -963,6 +965,15 @@
 	item_color = "milohachert"
 
 
+/obj/item/clothing/under/fluff/ert
+	name = "ERT dress uniform"
+	desc = "A uniform jacket, its buttons polished to a shine, coupled with a dark pair of trousers. The ERT insignia is embroidered upon the jacket's shoulder bar."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "milohachert"
+	item_state = "milohachert"
+	item_color = "milohachert"
+
+
 /obj/item/clothing/under/fluff/kaine_kalim_2
     name = "Formal Medical Uniform"
     desc = "An unusually sterile and pressed uniform. It seems to have a string of vials crossing the chest."
@@ -1023,16 +1034,6 @@
 	item_color = "harper_uniform"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS
 
-//////////////////// Layla's Dress - Layla Davies-Halabi - sabirm ///////////////
-
-/obj/item/clothing/under/fluff/layla_davieshalabi
-	name = "White floral sundress"
-	desc = "A loose, white sundress decorated with purple lilies. It looks well looked-after."
-	icon = 'icons/obj/custom_items.dmi'
-	icon_state = "layladress"
-	item_state = "layladress"
-	item_color = "layladress"
-
 //////////////////// Corporate Cap - Robert Mason - Masterrbc ////////////////////
 
 /obj/item/clothing/head/soft/sec/corp/fluff/robert_mason
@@ -1092,7 +1093,6 @@
 	item_color = "jane_sid_suit"
 	has_sensor = 2
 	sensor_mode = 3
-	flags = FPRINT | TABLEPASS
 
 //Suit roll-down toggle.
 /obj/item/clothing/under/fluff/jane_sidsuit/verb/toggle_zipper()
@@ -1156,9 +1156,7 @@
 	icon_state = "radi_pendant"
 	item_state = "radi_pendant"
 	item_color = "radi_pendant"
-	flags = FPRINT|TABLEPASS
 	w_class = 2.0
-	slot_flags = 0
 
 //////////// Masks ////////////
 
@@ -1169,7 +1167,7 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "flagmask"
 	item_state = "flagmask"
-	flags = FPRINT|TABLEPASS|MASKCOVERSMOUTH
+	flags = MASKCOVERSMOUTH
 	w_class = 2
 	gas_transfer_coefficient = 0.90
 */
@@ -1179,7 +1177,6 @@
 	desc = "A silver and emerald shamrock pendant. It has the initials \"M.K.\" engraved on the back."
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "mara_kilpatrick_1"
-	flags = FPRINT|TABLEPASS
 	w_class = 2
 
 /////////////// Oen'g Issek Medical Mask //////////////////////////
@@ -1202,9 +1199,8 @@
 	item_state = "altair_locket"
 	item_color = "altair_locket"
 	slot_flags = 0
-	flags = FPRINT|TABLEPASS
 	w_class = 2
-	slot_flags = SLOT_MASK
+	slot_flags = SLOT_MASK | SLOT_TIE
 
 ////// Silver locket - Konaa Hirano - Konaa_Hirano
 
@@ -1216,9 +1212,8 @@
 	item_state = "konaahirano"
 	item_color = "konaahirano"
 	slot_flags = 0
-	flags = FPRINT|TABLEPASS
 	w_class = 2
-	slot_flags = SLOT_MASK
+	slot_flags = SLOT_MASK | SLOT_TIE
 	var/obj/item/held //Item inside locket.
 
 /obj/item/clothing/tie/fluff/konaa_hirano/attack_self(mob/user as mob)
@@ -1246,9 +1241,8 @@
 	desc = "This silvered medallion bears the symbol of the Hadii Clan of the Tajaran."
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "nasir_khayyam_1"
-	flags = FPRINT|TABLEPASS
 	w_class = 2
-	slot_flags = SLOT_MASK
+	slot_flags = SLOT_MASK | SLOT_TIE
 
 ////// Emerald necklace - Ty Foster - Nega
 
@@ -1257,7 +1251,6 @@
 	desc = "A brass necklace with a green emerald placed at the end. It has a small inscription on the top of the chain, saying \'Foster\'"
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "ty_foster"
-	flags = FPRINT|TABLEPASS
 	w_class = 2
 
 ////// Apollon Pendant - Michael Guess - Dragor23
@@ -1266,7 +1259,6 @@
 	desc = "A pendant with the form of a sacrificial tripod, used in acient greece. It's a symbol of the Olympian Apollon, a god associated with oracles, poetry, the sun and healing."
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "michael_guess_1"
-	flags = FPRINT|TABLEPASS
 	w_class = 2
 	slot_flags = SLOT_MASK
 	body_parts_covered = 0
@@ -1293,6 +1285,14 @@
 	icon_state = "digiboots"
 	species_restricted = null
 
+/obj/item/clothing/shoes/jackboots/fluff/harmony_singh_1 //Bromuzl: Harmony Singh
+	name = "Springjacks"
+	desc = "A pair of highly modified jackboots in medical white, with some type of spring assembly on the ankle and heels, painted orange."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "springjacks"
+	item_state = "springjacks"
+	slowdown = SHOES_SLOWDOWN+1 //Slowing down because of her injured foot, these are for ease of pain so she can get off painkillers.
+	siemens_coefficient = 0.7 //copied from Jackboots under code/modules/clothing/shoes/miscellaneous.dm
 
 //////////// Sets ////////////
 
@@ -1330,6 +1330,14 @@
 	item_state = "retpolcoat"
 	item_color = "retpolcoat"
 
+/obj/item/clothing/suit/storage/det_suit/fluff/retdetcoat
+	name = "retired metropolitian detective's coat"
+	desc = "A clean, black nylon windbreaker with the words \"Metropolitian Detective Bureau\" embroidered in gold-dyed thread on the back. \"RETIRED\" is tastefully embroidered below in a smaller font."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "retpolcoat"
+	item_state = "retpolcoat"
+	item_color = "retpolcoat"
+
 /obj/item/clothing/head/det_hat/fluff/retpolcap
 	name = "retired colony patrolman's cap"
 	desc = "A clean and properly creased colony police cap. The badge is shined and polished, the word \"RETIRED\" engraved professionally under the words \"OUTER LIGHT POLICE.\""
@@ -1339,6 +1347,13 @@
 /obj/item/clothing/under/det/fluff/retpoluniform
 	name = "retired colony patrolman's uniform"
 	desc = "A meticulously clean police uniform belonging to Precinct 31, Outer Light Colony. The word \"RETIRED\" is engraved tastefully and professionally in the badge below the number, 501."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "retpoluniform"
+	item_color = "retpoluniform"
+
+/obj/item/clothing/under/det/fluff/retdetuniform
+	name = "retired metropolitian detective's uniform"
+	desc = "A meticulously clean police uniform belonging to Precinct 52, Metropolitian Detective Bureau. The word \"RETIRED\" is engraved tastefully and professionally under the Detective Sergeant badge below the number, 28."
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "retpoluniform"
 	item_color = "retpoluniform"
@@ -1378,14 +1393,9 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "yuri_kornienkovich_flask"
 
-/obj/item/clothing/under/fluff/mai_yang_dress // Mai Yang's pretty pretty dress.
+/obj/item/clothing/under/cheongsam/fluff/mai_yang_dress // Mai Yang's pretty pretty dress.
 	name = "White Cheongsam"
 	desc = "It is a white cheongsam dress."
-	icon = 'icons/obj/custom_items.dmi'
-	icon_state = "mai_yang"
-	item_state = "mai_yang"
-	item_color = "mai_yang"
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO
 
 /obj/item/clothing/under/fluff/sakura_hokkaido_kimono
 	name = "Sakura Kimono"
@@ -1572,3 +1582,96 @@ obj/item/clothing/head/ushanka/fluff/rufaro_nia
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "nirukacap"
 	item_state = "nirukacap"
+
+/////////////////////////////// Acera ///////////////////////////////////////////////////////
+
+
+/obj/item/clothing/under/rank/medical/fluff/valeera
+	name = "Black scrubs"
+	desc = "It's made of a special fiber that provides minor protection against biohazards. This one is in black."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "scrubsblack"
+	item_state = "scrubsblack"
+
+////////////////////////////// Foxler - Erstatz Vryroxes /////////////////////////////////////////////////
+
+/obj/item/weapon/holder/cat/fluff/bones
+	name = "Bones"
+	desc = "It's Bones! Meow."
+	gender = MALE
+	icon_state = "cat3"
+
+//Use this subtype for spawning in the custom item.
+/obj/item/weapon/holder/cat/fluff/bones/custom_item
+
+/obj/item/weapon/holder/cat/fluff/bones/custom_item/New()
+	if (!contents.len)
+		new/mob/living/simple_animal/cat/fluff/bones (src)
+	..()
+
+/mob/living/simple_animal/cat/fluff/bones
+	name = "Bones"
+	desc = "That's Bones the cat. He's a laid back, black cat. Meow."
+	gender = MALE
+	icon_state = "cat3"
+	icon_living = "cat3"
+	icon_dead = "cat3_dead"
+	holder_type = /obj/item/weapon/holder/cat/fluff/bones
+	bff_name = "Erstatz Vryroxes"
+
+/mob/living/simple_animal/cat/fluff
+	var/bff_name
+	var/mob/living/carbon/human/bff
+
+/mob/living/simple_animal/cat/fluff/handle_movement_target()
+	if (!bff)
+		for (var/mob/living/carbon/human/M in player_list)
+			if (M.real_name == bff_name)
+				bff = M
+				break
+
+	if (bff)
+		var/follow_dist = 5
+		if (bff.stat >= DEAD || bff.health <= config.health_threshold_softcrit) //danger
+			follow_dist = 1
+		else if (bff.stat || bff.health <= 50) //danger or just sleeping
+			follow_dist = 2
+		var/near_dist = max(follow_dist - 3, 1)
+		var/current_dist = get_dist(src, bff)
+
+		if (movement_target != bff)
+			if (current_dist > follow_dist && !istype(movement_target, /mob/living/simple_animal/mouse) && (bff in oview(src)))
+				//stop existing movement
+				walk_to(src,0)
+				turns_since_scan = 0
+
+				//walk to bff
+				stop_automated_movement = 1
+				movement_target = bff
+				walk_to(src, movement_target, near_dist, 4)
+
+		//already following and close enough, stop
+		else if (current_dist <= near_dist)
+			walk_to(src,0)
+			movement_target = null
+			stop_automated_movement = 0
+
+	if (!(bff && movement_target == bff))
+		..()
+
+/mob/living/simple_animal/cat/fluff/Life()
+	..()
+	if (stat || !bff)
+		return
+	if (get_dist(src, bff) <= 1)
+		if (bff.stat >= DEAD || bff.health <= config.health_threshold_softcrit)
+			if (prob((bff.stat < DEAD)? 50 : 15))
+				audible_emote(pick("meows in distress.", "meows anxiously."))
+		else
+			if (prob(5))
+				visible_emote(pick("nuzzles [bff].",
+								   "brushes against [bff].",
+								   "rubs against [bff].",
+								   "purrs."))
+	else if (bff.health <= 50)
+		if (prob(10)) audible_emote("meows anxiously.")

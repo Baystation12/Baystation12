@@ -91,7 +91,7 @@
 	//REMOTEVIEWBLOCK    = getAssignedBlock("REMOTEVIEW",    numsToAssign, DNA_HARDER_BOUNDS)
 	//REGENERATEBLOCK    = getAssignedBlock("REGENERATE",    numsToAssign, DNA_HARDER_BOUNDS)
 	//INCREASERUNBLOCK   = getAssignedBlock("INCREASERUN",   numsToAssign, DNA_HARDER_BOUNDS)
-	//REMOTETALKBLOCK    = getAssignedBlock("REMOTETALK",    numsToAssign, DNA_HARDER_BOUNDS)
+	REMOTETALKBLOCK    = getAssignedBlock("REMOTETALK",    numsToAssign, DNA_HARDER_BOUNDS)
 	//MORPHBLOCK         = getAssignedBlock("MORPH",         numsToAssign, DNA_HARDER_BOUNDS)
 	//COLDBLOCK          = getAssignedBlock("COLD",          numsToAssign)
 	//HALLUCINATIONBLOCK = getAssignedBlock("HALLUCINATION", numsToAssign)
@@ -121,7 +121,7 @@
 			blocks_assigned[G.block]=assignedToBlock
 			//testing("DNA2: Gene [G.name] assigned to block [G.block].")
 
-	testing("DNA2: [numsToAssign.len] blocks are unused: [english_list(numsToAssign)]")
+	//testing("DNA2: [numsToAssign.len] blocks are unused: [english_list(numsToAssign)]")
 
 	// HIDDEN MUTATIONS / SUPERPOWERS INITIALIZTION
 

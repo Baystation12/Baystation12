@@ -1,6 +1,6 @@
 /obj/structure/curtain
-	icon = 'icons/obj/curtain.dmi'
 	name = "curtain"
+	icon = 'icons/obj/curtain.dmi'
 	icon_state = "closed"
 	layer = MOB_LAYER + 0.1
 	opacity = 1
