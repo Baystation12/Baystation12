@@ -60,6 +60,7 @@
 	src.searching = 0
 	src.brainmob.mind = candidate.mind
 	src.brainmob.ckey = candidate.ckey
+	src.brainmob.mind.reset()
 	src.name = "positronic brain ([src.brainmob.name])"
 	src.brainmob << "<b>You are a positronic brain, brought into existence on [station_name()].</b>"
 	src.brainmob << "<b>As a synthetic intelligence, you answer to all crewmembers, as well as the AI.</b>"
