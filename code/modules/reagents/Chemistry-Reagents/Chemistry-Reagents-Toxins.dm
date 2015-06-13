@@ -467,10 +467,10 @@
 	color = "#13BC5E"
 
 /datum/reagent/aslimetoxin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed) // TODO: check if there's similar code anywhere else
-	if(M.monkeyizing)
+	if(M.transforming)
 		return
 	M << "<span class='danger'>Your flesh rapidly mutates!</span>"
-	M.monkeyizing = 1
+	M.transforming = 1
 	M.canmove = 0
 	M.icon = null
 	M.overlays.Cut()

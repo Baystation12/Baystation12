@@ -4,7 +4,7 @@
 	set invisibility = 0
 	set background = 1
 
-	if (monkeyizing)	return
+	if (transforming)	return
 	if(!loc)			return
 
 	..()

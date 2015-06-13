@@ -323,7 +323,7 @@ datum/mind
 		/*
 		else if (href_list["monkey"])
 			var/mob/living/L = current
-			if (L.monkeyizing)
+			if (L.transforming)
 				return
 			switch(href_list["monkey"])
 				if("healthy")
