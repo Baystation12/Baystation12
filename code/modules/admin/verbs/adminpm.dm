@@ -197,7 +197,8 @@
 
 	send2adminirc("PlayerPM from [key_name(src)]: [html_decode(msg)]")
 
-	src << "<font color='blue'>IRC PM to-<b>IRC-Admins</b>: [msg]</font>"
+	//src << "<font color='blue'>IRC PM to-<b>IRC-Admins</b>: [msg]</font>"
+	src << "<span class='pm'><span class='out'>" + create_text_tag("pm_out_alt", "", src) + " to <span class='name'>Admin IRC</span>: <span class='message'>[msg]</span></span></span>"
 
 	log_admin("PM: [key_name(src)]->IRC: [msg]")
 	log_admin_single("PM: [key_name(src)]->IRC: [msg]")

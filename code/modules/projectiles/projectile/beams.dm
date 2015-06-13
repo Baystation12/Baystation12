@@ -120,6 +120,7 @@ var/list/beam_master = list()
 	icon_state = "bluelaser"
 	pass_flags = PASSTABLE | PASSGLASS | PASSGRILLE
 	damage = 0
+	no_attack_log = 1
 	damage_type = BURN
 	check_armour = "laser"
 
@@ -135,6 +136,7 @@ var/list/beam_master = list()
 	icon_state = "laser"
 	pass_flags = PASSTABLE | PASSGLASS | PASSGRILLE
 	damage = 0
+	no_attack_log = 1
 	damage_type = BURN
 	check_armour = "laser"
 
