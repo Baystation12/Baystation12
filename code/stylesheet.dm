@@ -25,6 +25,8 @@ em						{font-style: normal;font-weight: bold;}
 .ooc .developer			{color: #1b521f;}
 .ooc .admin				{color: #b82e00;}
 
+.adminsay				{color: #9611D4;	font-weight: bold;}
+.headminsay				{color: #5A0A7F;	font-weight: bold;}
 .DEV					{color: #FF7F00;	font-weight: bold;}
 .DEVADMINMOD			{color: #FF6100;	font-weight: bold;}
 .VIP					{color: #ab4679;	font-weight: bold;}
