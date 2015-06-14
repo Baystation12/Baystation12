@@ -282,7 +282,7 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 	var/space = !istype(B)
 
 	if(direct && !space)
-		if(equivalent_pressure(A.zone,B.zone) || current_cycle == 0)
+		if(min(A.zone.contents.len, B.zone.contents.len) <= 10 || equivalent_pressure(A.zone,B.zone) || current_cycle == 0)
 			merge(A.zone,B.zone)
 			return
 
