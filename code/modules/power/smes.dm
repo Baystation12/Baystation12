@@ -244,7 +244,7 @@
 			return 0
 
 	if (!open_hatch)
-		user << "<span class='warning'>You need to open access hatch on [src] first!</spann>"
+		user << "<span class='warning'>You need to open access hatch on [src] first!</span>"
 		return 0
 
 	if(istype(W, /obj/item/stack/cable_coil) && !terminal && !building_terminal)

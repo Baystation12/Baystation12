@@ -120,7 +120,7 @@
 			code_owner.current << "The nuclear authorization code is: <B>[code]</B>"
 
 	else
-		world << "<spam class='danger'>Could not spawn nuclear bomb. Contact a developer.</span>"
+		world << "<span class='danger'>Could not spawn nuclear bomb. Contact a developer.</span>"
 		return
 
 	spawned_nuke = code

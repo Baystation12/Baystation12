@@ -685,7 +685,7 @@ proc/display_roundstart_logout_report()
 						msg += "<b>[L.name]</b> ([ckey(D.mind.key)]), the [L.job] (<font color='red'><b>Ghosted</b></font>)\n"
 						continue //Ghosted while alive
 
-	msg += "</span>" // close the <span class='notice'> from right at the top
+	msg += "</span>" // close the span from right at the top
 
 	for(var/mob/M in mob_list)
 		if(M.client && M.client.holder)

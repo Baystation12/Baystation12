@@ -85,12 +85,12 @@
 	switch(stage)
 		if(0)
 			if(istype(W,/obj/item/weapon/scalpel))
-				user.visible_message("<span class='danger'><b>[user]</b> cuts [src] open with [W]!")
+				user.visible_message("<span class='danger'><b>[user]</b> cuts [src] open with [W]!</span>")
 				stage++
 				return
 		if(1)
 			if(istype(W,/obj/item/weapon/retractor))
-				user.visible_message("<span class='danger'><b>[user]</b> cracks [src] open like an egg with [W]!")
+				user.visible_message("<span class='danger'><b>[user]</b> cracks [src] open like an egg with [W]!</span>")
 				stage++
 				return
 		if(2)
@@ -100,9 +100,9 @@
 					removing.loc = get_turf(user.loc)
 					if(!(user.l_hand && user.r_hand))
 						user.put_in_hands(removing)
-					user.visible_message("<span class='danger'><b>[user]</b> extracts [removing] from [src] with [W]!")
+					user.visible_message("<span class='danger'><b>[user]</b> extracts [removing] from [src] with [W]!</span>")
 				else
-					user.visible_message("<span class='danger'><b>[user]</b> fishes around fruitlessly in [src] with [W].")
+					user.visible_message("<span class='danger'><b>[user]</b> fishes around fruitlessly in [src] with [W].</span>")
 				return
 	..()
 

@@ -197,18 +197,18 @@
 	return "<span class='say_quote'>\[[worldtime2text()]\]</span>"
 
 /mob/proc/on_hear_radio(part_a, speaker_name, track, part_b, formatted)
-	src << "[part_a][speaker_name][part_b][formatted]</span></span>"
+	src << "[part_a][speaker_name][part_b][formatted]"
 
 /mob/dead/observer/on_hear_radio(part_a, speaker_name, track, part_b, formatted)
-	src << "[part_a][track][part_b][formatted]</span></span>"
+	src << "[part_a][track][part_b][formatted]"
 
 /mob/living/silicon/on_hear_radio(part_a, speaker_name, track, part_b, formatted)
 	var/time = say_timestamp()
-	src << "[time][part_a][speaker_name][part_b][formatted]</span></span>"
+	src << "[time][part_a][speaker_name][part_b][formatted]"
 
 /mob/living/silicon/ai/on_hear_radio(part_a, speaker_name, track, part_b, formatted)
 	var/time = say_timestamp()
-	src << "[time][part_a][track][part_b][formatted]</span></span>"
+	src << "[time][part_a][track][part_b][formatted]"
 
 /mob/proc/hear_signlang(var/message, var/verb = "gestures", var/datum/language/language, var/mob/speaker = null)
 	if(!client)

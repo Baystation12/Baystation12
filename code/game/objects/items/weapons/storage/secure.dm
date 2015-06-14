@@ -157,7 +157,7 @@
 
 	attack_hand(mob/user as mob)
 		if ((src.loc == user) && (src.locked == 1))
-			usr << "<span class='warning'>[src] is locked and cannot be opened!"
+			usr << "<span class='warning'>[src] is locked and cannot be opened!</span>"
 		else if ((src.loc == user) && (!src.locked))
 			src.open(usr)
 		else
