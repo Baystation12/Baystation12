@@ -18,6 +18,9 @@
 		//Chemicals in the body
 		handle_chemicals_in_body()
 
+		//Blood
+		handle_blood()
+
 		. = 1
 
 	//Handle temperature/pressure differences between body and environment
@@ -31,6 +34,9 @@
 	return
 
 /mob/living/proc/handle_chemicals_in_body()
+	return
+
+/mob/living/proc/handle_blood()
 	return
 
 /mob/living/proc/handle_environment(var/datum/gas_mixture/environment)

@@ -47,7 +47,6 @@
 	//to find it.
 	blinded = null
 	fire_alert = 0 //Reset this here, because both breathe() and handle_environment() have a chance to set it.
-	..()
 
 	//TODO: seperate this out
 	// update the current life tick, can be used to e.g. only do something every 4 ticks
@@ -55,6 +54,8 @@
 
 	in_stasis = istype(loc, /obj/structure/closet/body_bag/cryobag) && loc:opened == 0
 	if(in_stasis) loc:used++
+
+	..()
 
 	if(life_tick%30==15)
 		hud_updateflag = 1022
@@ -71,7 +72,6 @@
 
 		//Organs and blood
 		handle_organs()
-		handle_blood()
 		stabilize_body_temperature() //Body temperature adjusts itself (self-regulation)
 
 		//Random events (vomiting etc)
