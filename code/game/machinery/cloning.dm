@@ -306,7 +306,7 @@
 		occupant.client.perspective = MOB_PERSPECTIVE
 	occupant.loc = loc
 	eject_wait = 0 //If it's still set somehow.
-	domutcheck(occupant) //Waiting until they're out before possible monkeyizing.
+	domutcheck(occupant) //Waiting until they're out before possible transforming.
 	occupant = null
 
 	biomass -= CLONE_BIOMASS

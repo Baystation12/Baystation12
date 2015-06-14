@@ -36,12 +36,10 @@
 
 /mob/living/carbon/human/Life()
 	set invisibility = 0
-	set background = 1
+	set background = BACKGROUND_ENABLED
 
-	if (monkeyizing)	return
-	if(!loc)			return	// Fixing a null error that occurs when the mob isn't found in the world -- TLE
-
-	..()
+	if (transforming)
+		return
 
 	//Apparently, the person who wrote this code designed it so that
 	//blinded get reset each cycle and then get activated later in the
@@ -49,11 +47,11 @@
 	//to find it.
 	blinded = null
 	fire_alert = 0 //Reset this here, because both breathe() and handle_environment() have a chance to set it.
+	..()
 
 	//TODO: seperate this out
 	// update the current life tick, can be used to e.g. only do something every 4 ticks
 	life_tick++
-	var/datum/gas_mixture/environment = loc.return_air()
 
 	in_stasis = istype(loc, /obj/structure/closet/body_bag/cryobag) && loc:opened == 0
 	if(in_stasis) loc:used++
@@ -65,14 +63,8 @@
 
 	//No need to update all of these procs if the guy is dead.
 	if(stat != DEAD && !in_stasis)
-		if(air_master.current_cycle%4==2 || failed_last_breath || (health < config.health_threshold_crit)) 	//First, resolve location and get a breath
-			breathe() 				//Only try to take a breath every 4 ticks, unless suffocating
-
 		//Updates the number of stored chemicals for powers
 		handle_changeling()
-
-		//Mutations and radiation
-		handle_mutations_and_radiation()
 
 		//Chemicals in the body
 		handle_chemicals_in_body()
@@ -107,9 +99,6 @@
 	if(life_tick > 5 && timeofdeath && (timeofdeath < 5 || world.time - timeofdeath > 6000))	//We are long dead, or we're junk mobs spawned like the clowns on the clown shuttle
 		return											//We go ahead and process them 5 times for HUD images and other stuff though.
 
-	//Handle temperature/pressure differences between body and environment
-	handle_environment(environment)		//Optimized a good bit.
-
 	//Check if we're on fire
 	handle_fire()
 
@@ -127,6 +116,10 @@
 	// Grabbing
 	for(var/obj/item/weapon/grab/G in src)
 		G.process()
+
+/mob/living/carbon/human/breathe()
+	if(!in_stasis)
+		..()
 
 // Calculate how vulnerable the human is to under- and overpressure.
 // Returns 0 (equals 0 %) if sealed in an undamaged suit, 1 if unprotected (equals 100%).
@@ -257,7 +250,10 @@
 		// as cloneloss
 		adjustCloneLoss(0.1)
 
-/mob/living/carbon/human/proc/handle_mutations_and_radiation()
+/mob/living/carbon/human/handle_mutations_and_radiation()
+	if(in_stasis)
+		return
+
 	if(getFireLoss())
 		if((COLD_RESISTANCE in mutations) || (prob(1)))
 			heal_organ_damage(0,1)
@@ -582,7 +578,7 @@
 	breath.update_values()
 	return 1
 
-/mob/living/carbon/human/proc/handle_environment(datum/gas_mixture/environment)
+/mob/living/carbon/human/handle_environment(datum/gas_mixture/environment)
 	if(!environment)
 		return
 
