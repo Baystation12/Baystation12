@@ -6,10 +6,6 @@
 	set background = 1
 	..()
 
-	if(stat != DEAD)
-		//Chemicals in the body
-		handle_chemicals_in_body()
-
 	//Apparently, the person who wrote this code designed it so that
 	//blinded get reset each cycle and then get activated later in the
 	//code. Very ugly. I dont care. Moving this stuff here so its easy
@@ -91,7 +87,7 @@
 		adjustFireLoss(5.0*discomfort)
 
 
-/mob/living/carbon/brain/proc/handle_chemicals_in_body()
+/mob/living/carbon/brain/handle_chemicals_in_body()
 	chem_effects.Cut()
 	analgesic = 0
 

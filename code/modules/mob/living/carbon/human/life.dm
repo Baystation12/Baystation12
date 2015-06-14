@@ -66,9 +66,6 @@
 		//Updates the number of stored chemicals for powers
 		handle_changeling()
 
-		//Chemicals in the body
-		handle_chemicals_in_body()
-
 		//Disabilities
 		handle_disabilities()
 
@@ -845,7 +842,10 @@
 
 	return min(1,thermal_protection)
 
-/mob/living/carbon/human/proc/handle_chemicals_in_body()
+/mob/living/carbon/human/handle_chemicals_in_body()
+	if(in_stasis)
+		return
+
 	if(reagents)
 		chem_effects.Cut()
 		analgesic = 0

@@ -15,6 +15,9 @@
 		//Mutations and radiation
 		handle_mutations_and_radiation()
 
+		//Chemicals in the body
+		handle_chemicals_in_body()
+
 		. = 1
 
 	//Handle temperature/pressure differences between body and environment
@@ -25,6 +28,9 @@
 	return
 
 /mob/living/proc/handle_mutations_and_radiation()
+	return
+
+/mob/living/proc/handle_chemicals_in_body()
 	return
 
 /mob/living/proc/handle_environment(var/datum/gas_mixture/environment)

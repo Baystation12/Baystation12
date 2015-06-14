@@ -10,12 +10,8 @@
 	..()
 
 	if (stat != DEAD) //still breathing
-
 		// GROW!
 		update_progression()
-
-		// Chemicals in the body
-		handle_chemicals_in_body()
 
 	blinded = null
 
@@ -26,9 +22,6 @@
 
 	if(client)
 		handle_regular_hud_updates()
-
-/mob/living/carbon/alien/proc/handle_chemicals_in_body()
-	return // Nothing yet. Maybe check it out at a later date.
 
 /mob/living/carbon/alien/handle_mutations_and_radiation()
 
