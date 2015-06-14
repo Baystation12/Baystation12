@@ -173,3 +173,9 @@
 			src << "\red You feel a searing heat!"
 	else
 		if (fire) fire.icon_state = "fire0"
+
+/mob/living/carbon/alien/handle_fire()
+	if(..())
+		return
+	bodytemperature += BODYTEMP_HEATING_MAX //If you're on fire, you heat up!
+	return

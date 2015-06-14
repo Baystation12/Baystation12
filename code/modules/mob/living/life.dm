@@ -26,6 +26,9 @@
 
 		. = 1
 
+	//Check if we're on fire
+	handle_fire()
+
 	//Handle temperature/pressure differences between body and environment
 	if(environment)
 		handle_environment(environment)

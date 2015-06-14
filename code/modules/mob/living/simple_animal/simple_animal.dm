@@ -295,7 +295,7 @@
 	if(!O.force)
 		visible_message("<span class='notice'>[user] gently taps [src] with \the [O].</span>")
 		return
-	
+
 	if(O.force > resistance)
 		var/damage = O.force
 		if (O.damtype == HALLOSS)
@@ -306,7 +306,7 @@
 		adjustBruteLoss(damage)
 	else
 		usr << "<span class='danger>This weapon is ineffective, it does no damage.</span>"
-	
+
 	visible_message("<span class='danger>[src] has been attacked with the [O] by [user].</span>")
 	user.do_attack_animation(src)
 
@@ -404,3 +404,13 @@
 		else
 			user.visible_message("<span class='danger'>[user] butchers \the [src] messily!</span>")
 			gib()
+
+/mob/living/simple_animal/handle_fire()
+	return
+
+/mob/living/simple_animal/update_fire()
+	return
+/mob/living/simple_animal/IgniteMob()
+	return
+/mob/living/simple_animal/ExtinguishMob()
+	return
