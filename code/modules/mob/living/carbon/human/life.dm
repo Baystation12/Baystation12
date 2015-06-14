@@ -74,9 +74,6 @@
 		handle_organs()
 		stabilize_body_temperature() //Body temperature adjusts itself (self-regulation)
 
-		//Random events (vomiting etc)
-		handle_random_events()
-
 		//stuff in the stomach
 		handle_stomach()
 
@@ -1416,7 +1413,10 @@
 			O.process_hud(src)
 			if(!druggy && !seer)	see_invisible = SEE_INVISIBLE_LIVING
 
-/mob/living/carbon/human/proc/handle_random_events()
+/mob/living/carbon/human/handle_random_events()
+	if(in_stasis)
+		return
+
 	// Puke if toxloss is too high
 	if(!stat)
 		if (getToxLoss() >= 45 && nutrition > 20)

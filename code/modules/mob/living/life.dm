@@ -21,6 +21,9 @@
 		//Blood
 		handle_blood()
 
+		//Random events (vomiting etc)
+		handle_random_events()
+
 		. = 1
 
 	//Handle temperature/pressure differences between body and environment
@@ -37,6 +40,9 @@
 	return
 
 /mob/living/proc/handle_blood()
+	return
+
+/mob/living/proc/handle_random_events()
 	return
 
 /mob/living/proc/handle_environment(var/datum/gas_mixture/environment)
