@@ -207,7 +207,7 @@
 				if(src.sleeping == 0)
 					src.resting = 0
 				M.visible_message("<span class='notice'>[M] shakes [src] trying to wake [t_him] up!</span>", \
-									"<span class='notice'>You shake [src] trying to wake [t_him] up!")
+									"<span class='notice'>You shake [src] trying to wake [t_him] up!</span>")
 			else
 				var/mob/living/carbon/human/H = M
 				if(istype(H))
