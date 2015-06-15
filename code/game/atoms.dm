@@ -220,6 +220,9 @@ its easier to just keep the beam vertical.
 
 /atom/proc/ex_act()
 	return
+	
+/atom/proc/emag_act(var/remaining_uses, var/mob/user)
+	return -1
 
 /atom/proc/blob_act()
 	return

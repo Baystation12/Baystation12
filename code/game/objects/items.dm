@@ -608,3 +608,6 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 
 /obj/item/proc/pwr_drain()
 	return 0 // Process Kill
+
+/obj/item/proc/resolve_attackby(atom/A, mob/source)
+	return A.attackby(src,source)
