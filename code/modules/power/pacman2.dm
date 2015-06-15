@@ -76,14 +76,6 @@
 			user.drop_item()
 			O.loc = src
 			user << "\blue You add the phoron tank to the generator."
-		else if (istype(O, /obj/item/weapon/card/emag))
-			var/obj/item/weapon/card/emag/E = O
-			if(E.uses)
-				E.uses--
-			else
-				return
-			emagged = 1
-			emp_act(1)
 		else if(!active)
 			if(istype(O, /obj/item/weapon/wrench))
 				anchored = !anchored
@@ -172,3 +164,8 @@
 			if (href_list["action"] == "close")
 				usr << browse(null, "window=port_gen")
 				usr.machine = null
+
+/obj/machinery/power/port_gen/pacman2/emag_act(var/remaining_uses, var/mob/user)				
+	emagged = 1
+	emp_act(1)
+	return 1

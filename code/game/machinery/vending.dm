@@ -176,6 +176,12 @@
 		return
 
 	return
+	
+/obj/machinery/vending/emag_act(var/remaining_charges, var/mob/user)
+	if (!emagged)
+		src.emagged = 1
+		user << "You short out the product lock on \the [src]"
+		return 1
 
 /obj/machinery/vending/attackby(obj/item/weapon/W as obj, mob/user as mob)
 
@@ -206,10 +212,6 @@
 
 	if (I || istype(W, /obj/item/weapon/spacecash))
 		attack_hand(user)
-		return
-	else if (istype(W, /obj/item/weapon/card/emag))
-		src.emagged = 1
-		user << "You short out the product lock on \the [src]"
 		return
 	else if(istype(W, /obj/item/weapon/screwdriver))
 		src.panel_open = !src.panel_open

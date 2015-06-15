@@ -48,16 +48,15 @@
 		timestamp += timerecorded
 		storedinfo += "*\[[time2text(timerecorded*10,"mm:ss")]\] *[strip_html_properly(recordedtext)]*" //"*" at front as a marker
 
-/obj/item/device/taperecorder/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	..()
-	if(istype(W, /obj/item/weapon/card/emag))
-		if(emagged == 0)
-			emagged = 1
-			recording = 0
-			user << "<span class='warning'>PZZTTPFFFT</span>"
-			icon_state = "taperecorderidle"
-		else
-			user << "<span class='warning'>It is already emagged!</span>"
+/obj/item/device/taperecorder/emag_act(var/remaining_charges, var/mob/user)
+	if(emagged == 0)
+		emagged = 1
+		recording = 0
+		user << "<span class='warning'>PZZTTPFFFT</span>"
+		icon_state = "taperecorderidle"
+		return 1
+	else
+		user << "<span class='warning'>It is already emagged!</span>"
 
 /obj/item/device/taperecorder/proc/explode()
 	var/turf/T = get_turf(loc)
