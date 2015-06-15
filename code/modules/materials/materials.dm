@@ -457,6 +457,12 @@ var/list/name_to_material
 	weight = 12
 	stack_origin_tech = "materials=3"
 
+/material/plastic/holographic
+	name = "holographic plastic"
+	display_name = "plastic"
+	stack_type = null
+	shard_type = SHARD_NONE
+
 /material/osmium
 	name = "osmium"
 	stack_type = /obj/item/stack/material/osmium
