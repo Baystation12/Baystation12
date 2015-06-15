@@ -1393,6 +1393,7 @@
 			if(!isRemoteObserve && client && !client.adminobs)
 				remoteview_target = null
 				reset_view(null)
+		handle_cursor()
 	return 1
 
 /mob/living/carbon/human/proc/process_glasses(var/obj/item/clothing/glasses/G)
@@ -1748,5 +1749,12 @@
 	if (thermal_protection < 1 && bodytemperature < burn_temperature)
 		bodytemperature += round(BODYTEMP_HEATING_MAX*(1-thermal_protection), 1)
 
+/mob/living/carbon/human/proc/handle_cursor()
+	if(!client)
+		return
+	if(a_intent != "help" && istype(get_active_hand(), /obj/item/weapon/gun))
+		client.mouse_pointer_icon = 'icons/mob/reticle.dmi'
+	else
+		client.mouse_pointer_icon = null
 #undef HUMAN_MAX_OXYLOSS
 #undef HUMAN_CRIT_MAX_OXYLOSS
