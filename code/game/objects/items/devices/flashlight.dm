@@ -61,29 +61,29 @@
 			if(!vision)
 				user << "<span class='warning'>You can't find any [H.species.vision_organ ? H.species.vision_organ : "eyes"] on [H]!</span>"
 
-			user.visible_message("<span class='notice'>[user] directs [src] to [M]'s eyes.</span>", \
+			user.visible_message("<span class='notice'>\The [user] directs [src] to [M]'s eyes.</span>", \
 							 	 "<span class='notice'>You direct [src] to [M]'s eyes.</span>")
-			if(H != user)	//can't look into your own eyes buster
+			if(H == user)	//can't look into your own eyes buster
 				if(M.stat == DEAD || M.blinded)	//mob is dead or fully blind
-					user << "<span class='warning'>[M]'s pupils do not react to the light!</span>"
+					user << "<span class='warning'>\The [M]'s pupils do not react to the light!</span>"
 					return
 				if(XRAY in M.mutations)
-					user << "<span class='notice'>[M] pupils give an eerie glow!</span>"
+					user << "<span class='notice'>\The [M] pupils give an eerie glow!</span>"
 				if(vision.is_bruised())
 					user << "<span class='warning'>There's visible damage to [M]'s [vision.name]!</span>"
 				else if(M.eye_blurry)
-					user << "<span class='notice'>[M]'s pupils react slower than normally.</span>"
+					user << "<span class='notice'>\The [M]'s pupils react slower than normally.</span>"
 				if(M.getBrainLoss() > 15)
 					user << "<span class='notice'>There's visible lag between left and right pupils' reactions.</span>"
 
 				var/list/pinpoint = list("oxycodone"=1,"tramadol"=5)
 				var/list/dilating = list("space_drugs"=5,"mindbreaker"=1)
 				if(M.reagents.has_any_reagent(pinpoint) || H.ingested.has_any_reagent(pinpoint))
-					user << "<span class='notice'>[M]'s pupils are already pinpoint and cannot narrow any more.</span>"
+					user << "<span class='notice'>\The [M]'s pupils are already pinpoint and cannot narrow any more.</span>"
 				else if(M.reagents.has_any_reagent(dilating) || H.ingested.has_any_reagent(dilating))
-					user << "<span class='notice'>[M]'s pupils narrow slightly, but are still very dilated.</span>"
+					user << "<span class='notice'>\The [M]'s pupils narrow slightly, but are still very dilated.</span>"
 				else
-					user << "<span class='notice'>[M]'s pupils narrow.</span>"
+					user << "<span class='notice'>\The [M]'s pupils narrow.</span>"
 			flick("flash", M.flash)
 	else
 		return ..()
