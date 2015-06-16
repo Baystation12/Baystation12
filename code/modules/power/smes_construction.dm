@@ -78,7 +78,7 @@
 /obj/machinery/power/smes/buildable/Destroy()
 	..()
 	qdel(wires)
-	for(var/obj/nano_module/rcon/R in world)
+	for(var/datum/nano_module/rcon/R in world)
 		R.FindDevices()
 
 
