@@ -192,14 +192,12 @@
 	var/uplink_true = 0
 	var/purchases = ""
 	for(var/obj/item/device/uplink/H in world_uplinks)
-		if(H && H.uplink_owner && H.uplink_owner == ply)
+		if(H && H.owner && H.owner == ply)
 			TC_uses += H.used_TC
 			uplink_true = 1
 			var/list/refined_log = new()
 			for(var/datum/uplink_item/UI in H.purchase_log)
-				var/obj/I = new UI.path
-				refined_log.Add("[H.purchase_log[UI]]x\icon[I][UI.name]")
-				qdel(I)
+				refined_log.Add("[H.purchase_log[UI]]x[UI.log_icon()][UI.name]")
 			purchases = english_list(refined_log, nothing_text = "")
 	if(uplink_true)
 		text += " (used [TC_uses] TC)"
