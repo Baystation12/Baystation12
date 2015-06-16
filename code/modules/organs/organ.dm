@@ -26,6 +26,27 @@ var/list/organ_cache = list()
 	var/datum/dna/dna
 	var/datum/species/species
 
+/obj/item/organ/Destroy()
+	if(!owner)
+		return ..()
+
+	if((owner.internal_organs) && (src in owner.internal_organs))
+		owner.internal_organs -= src
+
+	if((owner.internal_organs_by_name) && (src in owner.internal_organs_by_name))
+		owner.internal_organs_by_name -= src
+
+	if((owner.organs) && (src in owner.organs))
+		owner.organs -= src
+
+	if((owner.organs_by_name) && (src in owner.organs_by_name))
+		owner.organs_by_name -= src
+
+	if(src in owner.contents)
+		owner.contents -= src
+
+	return ..()
+
 /obj/item/organ/proc/update_health()
 	return
 

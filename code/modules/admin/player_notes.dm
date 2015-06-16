@@ -27,26 +27,6 @@ datum/admins/proc/notes_gethtml(var/ckey)
 			. += "<a href='?src=\ref[src];notes=show;ckey=[dir]'>[dir]</a><br>"
 	return
 
-
-//handles adding notes to the end of a ckey's buffer
-//originally had seperate entries such as var/by to record who left the note and when
-//but the current bansystem is a heap of dung.
-/proc/notes_add(var/ckey, var/note)
-	if(!ckey)
-		ckey = ckey(input(usr,"Who would you like to add notes for?","Enter a ckey",null) as text|null)
-		if(!ckey)	return
-
-	if(!note)
-		note = html_encode(input(usr,"Enter your note:","Enter some text",null) as message|null)
-		if(!note)	return
-
-	var/savefile/notesfile = new(NOTESFILE)
-	if(!notesfile)	return
-	notesfile.cd = "/[ckey]"
-	notesfile.eof = 1		//move to the end of the buffer
-	notesfile << "[time2text(world.realtime,"DD-MMM-YYYY")] | [note][(usr && usr.ckey)?" ~[usr.ckey]":""]"
-	return
-
 //handles removing entries from the buffer, or removing the entire directory if no start_index is given
 /proc/notes_remove(var/ckey, var/start_index, var/end_index)
 	var/savefile/notesfile = new(NOTESFILE)
@@ -85,7 +65,7 @@ datum/admins/proc/notes_gethtml(var/ckey)
 
 //Hijacking this file for BS12 playernotes functions. I like this ^ one systemm alright, but converting sounds too bothersome~ Chinsky.
 
-/proc/notes_add(var/key, var/note, var/mob/usr)
+/proc/notes_add(var/key, var/note, var/mob/user)
 	if (!key || !note)
 		return
 
@@ -111,9 +91,9 @@ datum/admins/proc/notes_gethtml(var/ckey)
 	var/day_loc = findtext(full_date, time2text(world.timeofday, "DD"))
 
 	var/datum/player_info/P = new
-	if (usr)
-		P.author = usr.key
-		P.rank = usr.client.holder.rank
+	if (user)
+		P.author = user.key
+		P.rank = user.client.holder.rank
 	else
 		P.author = "Adminbot"
 		P.rank = "Friendly Robot"
@@ -123,8 +103,8 @@ datum/admins/proc/notes_gethtml(var/ckey)
 	infos += P
 	info << infos
 
-	message_admins("\blue [key_name_admin(usr)] has edited [key]'s notes.")
-	log_admin("[key_name(usr)] has edited [key]'s notes.")
+	message_admins("\blue [key_name_admin(user)] has edited [key]'s notes.")
+	log_admin("[key_name(user)] has edited [key]'s notes.")
 
 	qdel(info)
 
