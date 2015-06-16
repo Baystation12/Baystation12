@@ -53,6 +53,29 @@
 	if(!searching || (src.brainmob && src.brainmob.key))
 		return
 	searching = 0
+/obj/item/device/mmi/digital/posibrain/proc/transfer_personality(var/mob/candidate)
+	announce_ghost_joinleave(candidate, 0, "They are occupying a positronic brain now.")
+	src.searching = 0
+	src.brainmob.mind = candidate.mind
+	src.brainmob.ckey = candidate.ckey
+	src.brainmob.mind.reset()
+	src.name = "positronic brain ([src.brainmob.name])"
+	src.brainmob << "<b>You are a positronic brain, brought into existence on [station_name()].</b>"
+	src.brainmob << "<b>As a synthetic intelligence, you answer to all crewmembers, as well as the AI.</b>"
+	src.brainmob << "<b>Remember, the purpose of your existence is to serve the crew and the station. Above all else, do no harm.</b>"
+	src.brainmob << "<b>Use say :b to speak to other artificial intelligences.</b>"
+	src.brainmob.mind.assigned_role = "Positronic Brain"
+
+	var/turf/T = get_turf_or_move(src.loc)
+	for (var/mob/M in viewers(T))
+		M.show_message("\blue The positronic brain chimes quietly.")
+	icon_state = "posibrain-occupied"
+
+/obj/item/device/mmi/digital/posibrain/proc/reset_search() //We give the players sixty seconds to decide, then reset the timer.
+
+	if(src.brainmob && src.brainmob.key) return
+
+	src.searching = 0
 	icon_state = "posibrain"
 	var/turf/T = get_turf(src)
 	T.visible_message("<span class='notice'>\The [src] brain buzzes quietly, and the golden lights fade away. Perhaps you could try again?</span>")
