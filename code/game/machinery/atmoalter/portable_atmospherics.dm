@@ -175,15 +175,15 @@
 		C.add_fingerprint(user)
 		cell = C
 		C.loc = src
-		user.visible_message("<span class='notice'>[user] opens the panel on [src] and inserts [C].<span class='notice'>", "<span class='notice'>You open the panel on [src] and insert [C].<span class='notice'>")
+		user.visible_message("<span class='notice'>[user] opens the panel on [src] and inserts [C].</span>", "<span class='notice'>You open the panel on [src] and insert [C].</span>")
 		return
 
 	if(istype(I, /obj/item/weapon/screwdriver))
 		if(!cell)
-			user << "<span class='warning'>There is no power cell installed.<span class='notice'>"
+			user << "<span class='warning'>There is no power cell installed.</span>"
 			return
 
-		user.visible_message("<span class='notice'>[user] opens the panel on [src] and removes [cell].<span class='notice'>", "<span class='notice'>You open the panel on [src] and remove [cell].<span class='notice'>")
+		user.visible_message("<span class='notice'>[user] opens the panel on [src] and removes [cell].</span>", "<span class='notice'>You open the panel on [src] and remove [cell].</span>")
 		cell.add_fingerprint(user)
 		cell.loc = src.loc
 		cell = null

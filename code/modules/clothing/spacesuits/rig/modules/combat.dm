@@ -76,7 +76,7 @@
 
 	charge.charges--
 	var/obj/item/weapon/grenade/new_grenade = new charge.product_type(get_turf(H))
-	H.visible_message("<span class='danger'>[H] launches \a [new_grenade]!")
+	H.visible_message("<span class='danger'>[H] launches \a [new_grenade]!</span>")
 	new_grenade.activate(H)
 	new_grenade.throw_at(target,fire_force,fire_distance)
 
@@ -230,7 +230,7 @@
 		firing.throw_at(target,fire_force,fire_distance)
 	else
 		if(H.l_hand && H.r_hand)
-			H << "<span class='danger'>Your hands are full."
+			H << "<span class='danger'>Your hands are full.</span>"
 		else
 			var/obj/item/new_weapon = new fabrication_type()
 			new_weapon.loc = H

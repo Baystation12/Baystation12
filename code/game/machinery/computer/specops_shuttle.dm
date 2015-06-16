@@ -291,8 +291,8 @@ var/specops_shuttle_timeleft = 0
 			usr << "<span class='notice'>Central Command will not allow the Special Operations shuttle to return yet.</span>"
 			if(world.timeofday <= specops_shuttle_timereset)
 				if (((world.timeofday - specops_shuttle_timereset)/10) > 60)
-					usr << "<span class='notice'>[-((world.timeofday - specops_shuttle_timereset)/10)/60] minutes remain!"
-				usr << "<span class='notice'>[-(world.timeofday - specops_shuttle_timereset)/10] seconds remain!"
+					usr << "<span class='notice'>[-((world.timeofday - specops_shuttle_timereset)/10)/60] minutes remain!</span>"
+				usr << "<span class='notice'>[-(world.timeofday - specops_shuttle_timereset)/10] seconds remain!</span>"
 			return
 
 		usr << "<span class='notice'>The Special Operations shuttle will arrive at Central Command in [(SPECOPS_MOVETIME/10)] seconds.</span>"

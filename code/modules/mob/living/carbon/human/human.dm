@@ -699,7 +699,7 @@
 	if(species.has_fine_manipulation)
 		return 1
 	if(!silent)
-		src << "<span class='warning'>You don't have the dexterity to use that!<span>"
+		src << "<span class='warning'>You don't have the dexterity to use that!</span>"
 	return 0
 
 /mob/living/carbon/human/abiotic(var/full_body = 0)

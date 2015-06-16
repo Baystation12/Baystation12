@@ -1200,7 +1200,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 
 				user.show_message("<span class='notice'>Analyzing Results for [C]:</span>")
 				user.show_message("<span class='notice'>    Overall Status: [C.stat > 1 ? "dead" : "[C.health - C.halloss]% healthy"]</span>", 1)
-				user.show_message(text("<span class='notice'>    Damage Specifics: <span class='[]'>[]</span>-<span class='[]'>[]</span>-<span class='[]'>[]</span>-<span class='[]'>[]</span>",
+				user.show_message(text("<span class='notice'>    Damage Specifics:</span> <span class='[]'>[]</span>-<span class='[]'>[]</span>-<span class='[]'>[]</span>-<span class='[]'>[]</span>",
 						(C.getOxyLoss() > 50) ? "warning" : "", C.getOxyLoss(),
 						(C.getToxLoss() > 50) ? "warning" : "", C.getToxLoss(),
 						(C.getFireLoss() > 50) ? "warning" : "", C.getFireLoss(),
@@ -1216,7 +1216,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 					user.show_message("<span class='notice'>Localized Damage, Brute/Burn:</span>",1)
 					if(length(damaged)>0)
 						for(var/obj/item/organ/external/org in damaged)
-							user.show_message(text("<span class='notice'>     []: <span class='[]'>[]</span>-<span class='[]'>[]</span>",
+							user.show_message(text("<span class='notice'>     []: <span class='[]'>[]</span>-<span class='[]'>[]</span></span>",
 									capitalize(org.name), (org.brute_dam > 0) ? "warning" : "notice", org.brute_dam, (org.burn_dam > 0) ? "warning" : "notice", org.burn_dam),1)
 					else
 						user.show_message("<span class='notice'>    Limbs are OK.</span>",1)
