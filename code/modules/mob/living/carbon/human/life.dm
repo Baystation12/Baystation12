@@ -87,16 +87,18 @@
 
 	handle_stasis_bag()
 
-	if(life_tick > 5 && timeofdeath && (timeofdeath < 5 || world.time - timeofdeath > 6000))	//We are long dead, or we're junk mobs spawned like the clowns on the clown shuttle
+	if(!handle_some_updates())
 		return											//We go ahead and process them 5 times for HUD images and other stuff though.
-
-	//Status updates, death etc.
-	handle_regular_status_updates()		//Optimized a bit
 
 	//Update our name based on whether our face is obscured/disfigured
 	name = get_visible_name()
 
 	pulse = handle_pulse()
+
+/mob/living/carbon/human/proc/handle_some_updates()
+	if(life_tick > 5 && timeofdeath && (timeofdeath < 5 || world.time - timeofdeath > 6000))	//We are long dead, or we're junk mobs spawned like the clowns on the clown shuttle
+		return 0
+	return 1
 
 /mob/living/carbon/human/breathe()
 	if(!in_stasis)
@@ -149,7 +151,7 @@
 	else
 		return ONE_ATMOSPHERE + pressure_difference
 
-/mob/living/carbon/human/proc/handle_disabilities()
+/mob/living/carbon/human/handle_disabilities()
 	if (disabilities & EPILEPSY)
 		if ((prob(1) && paralysis < 1))
 			src << "\red You have a seizure!"
@@ -911,7 +913,10 @@
 
 	return //TODO: DEFERRED
 
-/mob/living/carbon/human/proc/handle_regular_status_updates()
+/mob/living/carbon/human/handle_regular_status_updates()
+	if(!handle_some_updates())
+		return 0
+
 	if(status_flags & GODMODE)	return 0
 
 	//SSD check, if a logged player is awake put them back to sleep!

@@ -1,20 +1,6 @@
 /mob/living/carbon/brain/handle_breathing()
 	return
 
-/mob/living/carbon/brain/Life()
-	set invisibility = 0
-	set background = 1
-	..()
-
-	//Apparently, the person who wrote this code designed it so that
-	//blinded get reset each cycle and then get activated later in the
-	//code. Very ugly. I dont care. Moving this stuff here so its easy
-	//to find it.
-	blinded = null
-
-	//Status updates, death etc.
-	handle_regular_status_updates()
-
 /mob/living/carbon/brain/handle_mutations_and_radiation()
 	if (radiation)
 		if (radiation > 100)
@@ -108,7 +94,7 @@
 
 	return //TODO: DEFERRED
 
-/mob/living/carbon/brain/proc/handle_regular_status_updates()	//TODO: comment out the unused bits >_>
+/mob/living/carbon/brain/handle_regular_status_updates()	//TODO: comment out the unused bits >_>
 	updatehealth()
 
 	if(stat == DEAD)	//DEAD. BROWN BREAD. SWIMMING WITH THE SPESS CARP

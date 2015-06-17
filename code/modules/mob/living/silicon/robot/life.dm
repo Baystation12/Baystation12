@@ -61,7 +61,7 @@
 			lights_on = 0
 			set_light(0)
 
-/mob/living/silicon/robot/proc/handle_regular_status_updates()
+/mob/living/silicon/robot/handle_regular_status_updates()
 
 	if(src.camera && !scrambledcodes)
 		if(src.stat == 2 || wires.IsIndexCut(BORG_WIRE_CAMERA))

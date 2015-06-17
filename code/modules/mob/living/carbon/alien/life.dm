@@ -16,7 +16,6 @@
 	blinded = null
 
 	//Status updates, death etc.
-	handle_regular_status_updates()
 	update_icons()
 
 /mob/living/carbon/alien/handle_mutations_and_radiation()
@@ -35,7 +34,7 @@
 	adjustToxLoss(-(rads))
 	return
 
-/mob/living/carbon/alien/proc/handle_regular_status_updates()
+/mob/living/carbon/alien/handle_regular_status_updates()
 
 	if(status_flags & GODMODE)	return 0
 

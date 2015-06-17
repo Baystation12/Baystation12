@@ -17,10 +17,6 @@
 					handle_AI()
 			handle_speech_and_mood()
 
-	regular_hud_updates()
-
-	handle_regular_status_updates() // Status updates, death etc.
-
 /mob/living/carbon/slime/handle_environment(datum/gas_mixture/environment)
 	if(!environment)
 		adjustToxLoss(rand(10,20))
@@ -91,7 +87,7 @@
 
 	return //TODO: DEFERRED
 
-/mob/living/carbon/slime/proc/handle_regular_status_updates()
+/mob/living/carbon/slime/handle_regular_status_updates()
 
 	src.blinded = null
 
