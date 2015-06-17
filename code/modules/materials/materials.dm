@@ -290,6 +290,7 @@ var/list/name_to_material
 /material/steel
 	name = DEFAULT_WALL_MATERIAL
 	stack_type = /obj/item/stack/material/steel
+	integrity = 150
 	icon_base = "solid"
 	icon_reinf = "reinf_over"
 	icon_colour = "#666666"
@@ -303,7 +304,7 @@ var/list/name_to_material
 /material/plasteel
 	name = "plasteel"
 	stack_type = /obj/item/stack/material/plasteel
-	integrity = 800
+	integrity = 400
 	melting_point = 6000
 	icon_base = "solid"
 	icon_reinf = "reinf_over"
@@ -456,6 +457,12 @@ var/list/name_to_material
 	hardness = 10
 	weight = 12
 	stack_origin_tech = list(TECH_MATERIAL = 3)
+
+/material/plastic/holographic
+	name = "holographic plastic"
+	display_name = "plastic"
+	stack_type = null
+	shard_type = SHARD_NONE
 
 /material/osmium
 	name = "osmium"
