@@ -247,10 +247,6 @@
 	//Scale quadratically so that single digit numbers of fire stacks don't burn ridiculously hot.
 	return round(FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE*(fire_stacks/FIRE_MAX_FIRESUIT_STACKS)**2)
 
-/mob/living/regular_hud_updates()
-	..()
-	update_action_buttons()
-
 /mob/living/proc/handle_actions()
 	//Pretty bad, i'd use picked/dropped instead but the parent calls in these are nonexistent
 	for(var/datum/action/A in actions)

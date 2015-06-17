@@ -47,6 +47,8 @@
 		handle_disabilities() // eye, ear, brain damages
 		handle_status_effects() //all special effects, stunned, weakened, jitteryness, hallucination, sleeping, etc
 
+	handle_actions()
+
 	update_canmove()
 
 	if(client)
@@ -122,8 +124,9 @@
 			adjustEarDamage(-0.05,-1)
 
 //this handles hud updates. Calls update_vision() and handle_hud_icons()
-/mob/living/proc/handle_regular_hud_updates()
+/mob/living/handle_regular_hud_updates()
 	if(!client)	return 0
+	..()
 
 	handle_vision()
 	handle_hud_icons()

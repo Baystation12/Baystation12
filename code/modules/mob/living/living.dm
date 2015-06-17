@@ -1,8 +1,3 @@
-/mob/living/Life()
-	..()
-	if(stat != DEAD)
-		handle_actions()
-
 //mob verbs are faster than object verbs. See mob/verb/examine.
 /mob/living/verb/pulled(atom/movable/AM as mob|obj in oview(1))
 	set name = "Pull"
