@@ -100,10 +100,6 @@
 
 	pulse = handle_pulse()
 
-	// Grabbing
-	for(var/obj/item/weapon/grab/G in src)
-		G.process()
-
 /mob/living/carbon/human/breathe()
 	if(!in_stasis)
 		..()

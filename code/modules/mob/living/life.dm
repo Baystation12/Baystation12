@@ -40,6 +40,9 @@
 
 	update_pulling()
 
+	for(var/obj/item/weapon/grab/G in src)
+		G.process()
+
 	update_canmove()
 
 /mob/living/proc/handle_breathing()
