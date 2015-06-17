@@ -520,3 +520,9 @@
 
 	prob_slip = round(prob_slip)
 	return(prob_slip)
+
+/mob/proc/mob_has_gravity(turf/T)
+	return has_gravity(src, T)
+
+/mob/proc/update_gravity()
+	return

@@ -36,6 +36,8 @@
 	//stuff in the stomach
 	handle_stomach()
 
+	update_gravity(mob_has_gravity())
+
 /mob/living/proc/handle_breathing()
 	return
 
