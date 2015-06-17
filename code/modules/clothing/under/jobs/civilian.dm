@@ -73,12 +73,19 @@
 
 
 /obj/item/clothing/under/rank/hydroponics
-	desc = "It's a jumpsuit designed to protect against minor plant-related hazards."
+	desc = "It's a jumpsuit designed to protect against minor plant-related hazards. For the more garden-minded botanist."
 	name = "botanist's jumpsuit"
 	icon_state = "hydroponics"
 	item_state = "g_suit"
 	worn_state = "hydroponics"
 	permeability_coefficient = 0.50
+	
+/obj/item/clothing/under/rank/hydroponics/botany
+	desc = "It's a jumpsuit designed to protect against minor plant-related hazards."
+	name = "hydroponicist's jumpsuit"
+	icon_state = "botany"
+	item_state = "botany"
+	worn_state = "botany"
 
 
 /obj/item/clothing/under/rank/internalaffairs
