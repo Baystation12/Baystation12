@@ -96,8 +96,6 @@
 	//Update our name based on whether our face is obscured/disfigured
 	name = get_visible_name()
 
-	handle_regular_hud_updates()
-
 	pulse = handle_pulse()
 
 /mob/living/carbon/human/breathe()
@@ -1076,7 +1074,7 @@
 
 	return 1
 
-/mob/living/carbon/human/proc/handle_regular_hud_updates()
+/mob/living/carbon/human/handle_regular_hud_updates()
 	if(!overlays_cache)
 		overlays_cache = list()
 		overlays_cache.len = 23

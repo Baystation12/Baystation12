@@ -19,9 +19,6 @@
 	handle_regular_status_updates()
 	update_icons()
 
-	if(client)
-		handle_regular_hud_updates()
-
 /mob/living/carbon/alien/handle_mutations_and_radiation()
 
 	// Currently both Dionaea and larvae like to eat radiation, so I'm defining the
@@ -100,7 +97,7 @@
 
 	return 1
 
-/mob/living/carbon/alien/proc/handle_regular_hud_updates()
+/mob/living/carbon/alien/handle_regular_hud_updates()
 
 	if (stat == 2 || (XRAY in src.mutations))
 		sight |= SEE_TURFS

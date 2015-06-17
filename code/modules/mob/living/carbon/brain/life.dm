@@ -15,9 +15,6 @@
 	//Status updates, death etc.
 	handle_regular_status_updates()
 
-	if(client)
-		handle_regular_hud_updates()
-
 /mob/living/carbon/brain/handle_mutations_and_radiation()
 	if (radiation)
 		if (radiation > 100)
@@ -181,7 +178,7 @@
 		handle_statuses()
 	return 1
 
-/mob/living/carbon/brain/proc/handle_regular_hud_updates()
+/mob/living/carbon/brain/handle_regular_hud_updates()
 	if (stat == 2 || (XRAY in src.mutations))
 		sight |= SEE_TURFS
 		sight |= SEE_MOBS
