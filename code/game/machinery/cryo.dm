@@ -6,7 +6,7 @@
 	icon_state = "pod0"
 	density = 1
 	anchored = 1.0
-	layer = 2.8
+	layer = TABLE_LAYER
 	interact_offline = 1
 
 	var/on = 0
