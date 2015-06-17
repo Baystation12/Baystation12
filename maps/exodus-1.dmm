@@ -1525,7 +1525,7 @@
 "aDq" = (/obj/structure/disposalpipe/segment,/obj/effect/decal/cleanable/dirt,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/structure/cable/green{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/plating,/area/maintenance/bar)
 "aDr" = (/obj/item/weapon/stool{pixel_y = 8},/obj/effect/landmark/start{name = "Assistant"},/turf/simulated/floor,/area/storage/primary)
 "aDs" = (/turf/simulated/wall,/area/maintenance/bar)
-"aDt" = (/obj/structure/closet/crate,/obj/item/stack/material/gold,/obj/item/weapon/storage/belt/champion,/turf/simulated/floor{icon_state = "vault"; dir = 1},/area/security/nuke_storage)
+"aDt" = (/obj/structure/closet/crate,/obj/item/stack/material/gold,/obj/item/weapon/storage/belt/champion,/obj/machinery/camera/network/command{c_tag = "Vault"; dir = 4},/turf/simulated/floor{icon_state = "vault"; dir = 1},/area/security/nuke_storage)
 "aDu" = (/obj/structure/cable/green{d2 = 8; icon_state = "0-8"},/obj/structure/cable/green{d2 = 4; icon_state = "0-4"},/obj/machinery/power/smes/buildable{charge = 0; RCon_tag = "Substation - Civilian East"},/obj/machinery/light/small{dir = 1},/turf/simulated/floor/plating,/area/maintenance/substation/civilian_east)
 "aDv" = (/obj/machinery/power/breakerbox/activated{RCon_tag = "Civilian East Substation Bypass"},/turf/simulated/floor/plating,/area/maintenance/substation/civilian_east)
 "aDw" = (/obj/structure/cable/green,/obj/structure/cable/green{d2 = 4; icon_state = "0-4"},/obj/machinery/power/apc{dir = 2; name = "south bump"; pixel_y = -24},/turf/simulated/floor/plating,/area/maintenance/substation/civilian_east)
