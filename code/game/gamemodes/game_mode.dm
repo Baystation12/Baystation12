@@ -112,7 +112,8 @@ var/global/list/additional_antag_types = list()
 			new/datum/uplink_item(/obj/item/weapon/aiModule/syndicate, 7, "Hacked AI Upload Module", "AI"),
 			new/datum/uplink_item(/obj/item/device/powersink, 5, "Powersink (DANGER!)", "PS",),
 			new/datum/uplink_item(/obj/item/device/radio/beacon/syndicate, 7, "Singularity Beacon (DANGER!)", "SB"),
-			new/datum/uplink_item(/obj/item/weapon/circuitboard/teleporter, 20, "Teleporter Circuit Board", "TP")
+			new/datum/uplink_item(/obj/item/weapon/circuitboard/teleporter, 20, "Teleporter Circuit Board", "TP"),
+			new/datum/uplink_item(/obj/item/weapon/storage/secure/briefcase/money, 3, "Money Briefcase", "MB", "A briefcase with 10,000 untraceable thalers in it, for funding your secret operations." )
 			),
 		"Implants" = list(
 			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/imp_freedom, 3, "Freedom Implant", "FI"),
