@@ -17,7 +17,6 @@
 
 	//Status updates, death etc.
 	handle_regular_status_updates()
-	update_canmove()
 	update_icons()
 
 	if(client)

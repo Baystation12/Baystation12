@@ -40,6 +40,8 @@
 
 	update_pulling()
 
+	update_canmove()
+
 /mob/living/proc/handle_breathing()
 	return
 

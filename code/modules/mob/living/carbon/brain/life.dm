@@ -14,7 +14,6 @@
 
 	//Status updates, death etc.
 	handle_regular_status_updates()
-	update_canmove()
 
 	if(client)
 		handle_regular_hud_updates()
