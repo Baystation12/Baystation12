@@ -26,12 +26,15 @@
 
 		. = 1
 
-	//Check if we're on fire
-	handle_fire()
-
 	//Handle temperature/pressure differences between body and environment
 	if(environment)
 		handle_environment(environment)
+
+	//Check if we're on fire
+	handle_fire()
+
+	//stuff in the stomach
+	handle_stomach()
 
 /mob/living/proc/handle_breathing()
 	return
@@ -49,4 +52,7 @@
 	return
 
 /mob/living/proc/handle_environment(var/datum/gas_mixture/environment)
+	return
+
+/mob/living/proc/handle_stomach()
 	return

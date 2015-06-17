@@ -74,9 +74,6 @@
 		handle_organs()
 		stabilize_body_temperature() //Body temperature adjusts itself (self-regulation)
 
-		//stuff in the stomach
-		handle_stomach()
-
 		handle_shock()
 
 		handle_pain()
@@ -1426,7 +1423,7 @@
 		if(L && L.lum_r + L.lum_g + L.lum_b == 0)
 			playsound_local(src,pick(scarySounds),50, 1, -1)
 
-/mob/living/carbon/human/proc/handle_stomach()
+/mob/living/carbon/human/handle_stomach()
 	spawn(0)
 		for(var/mob/living/M in stomach_contents)
 			if(M.loc != src)
