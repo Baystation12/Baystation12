@@ -1,16 +1,33 @@
-/atom/proc/water_act(var/depth)
+/atom/proc/water_act(var/depth, var/flowdir)
 	return
 
-/mob/living/water_act(var/depth)
+/obj/item/water_act(var/depth, var/flowdir)
+	if(!isnull(flowdir))
+		if(anchored || depth <= w_class*10)
+			return
+		step_towards(src, get_step(get_turf(src),flowdir))
+
+/mob/living/water_act(var/depth, var/flowdir)
 	if(on_fire)
-		visible_message("<span class='danger'>A cloud of steam rises up as \the [src] plunges into the water!")
+		visible_message("<span class='danger'>A cloud of steam rises up as the water hits \the [src]!</span>")
 		ExtinguishMob()
 	if(fire_stacks > 0)
 		adjust_fire_stacks(-round(depth/2))
+	if(anchored || buckled)
+		return
+	if(!isnull(flowdir))
+		if(depth >= FLUID_DROWN_LEVEL_RESTING)
+			var/flow_msg = "pushed away"
+			if(!lying && depth >= FLUID_DROWN_LEVEL_STANDING && prob(depth))
+				Weaken(rand(2,4))
+				flow_msg = "knocked down"
+			src << "<span class='danger'>You are [flow_msg] by the rush of water!</span>"
+			step_towards(src, get_step(get_turf(src),flowdir))
 
-/mob/living/carbon/human/water_act(var/depth)
-	..()
+/mob/living/carbon/human/water_act(var/depth, var/flowdir)
 	species.water_act(src, depth)
+	if(!((species.flags & NO_SLIP) || (shoes && (shoes.flags & NOSLIP))))
+		..(depth, flowdir)
 
 /datum/species/proc/water_act(var/mob/living/carbon/human/H, var/depth)
 	return
@@ -25,3 +42,12 @@
 			H.adjustFireLoss(-(rand(1,3)))
 		if(prob(5)) // Might be too spammy.
 			H << "<span class='notice'>The water ripples gently over your skin in a soothing balm.</span>"
+
+/obj/effect/decal/cleanable/water_act()
+	qdel(src)
+
+/obj/effect/decal/cleanable/blood/water_act()
+	..()
+	var/obj/effect/fluid/F = locate() in loc
+	if(!F) return
+	F.add_contaminant("blood", amount, basecolor)
