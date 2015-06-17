@@ -38,6 +38,8 @@
 
 	update_gravity(mob_has_gravity())
 
+	update_pulling()
+
 /mob/living/proc/handle_breathing()
 	return
 
@@ -58,3 +60,8 @@
 
 /mob/living/proc/handle_stomach()
 	return
+
+/mob/living/proc/update_pulling()
+	if(pulling)
+		if(incapacitated())
+			stop_pulling()
