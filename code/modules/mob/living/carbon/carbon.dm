@@ -210,9 +210,9 @@
 				if(!org.is_usable())
 					status += "dangling uselessly"
 				if(status.len)
-					src.show_message("My [org.name] is <span class='warning'> [english_list(status)].",1)
+					src.show_message("My [org.name] is <span class='warning'> [english_list(status)].</span>",1)
 				else
-					src.show_message("My [org.name] is <span class='notice'> OK.",1)
+					src.show_message("My [org.name] is <span class='notice'> OK.</span>",1)
 
 			if((SKELETON in H.mutations) && (!H.w_uniform) && (!H.wear_suit))
 				H.play_xylophone()
@@ -259,8 +259,8 @@
 				src.sleeping = max(0,src.sleeping-5)
 				if(src.sleeping == 0)
 					src.resting = 0
-				M.visible_message("<span class='notice'>[M] shakes [src] trying to wake [t_him] up!", \
-									"<span class='notice'>You shake [src] trying to wake [t_him] up!")
+				M.visible_message("<span class='notice'>[M] shakes [src] trying to wake [t_him] up!</span>", \
+									"<span class='notice'>You shake [src] trying to wake [t_him] up!</span>")
 			else
 				if(istype(H))
 					H.species.hug(H,src)

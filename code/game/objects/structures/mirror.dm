@@ -60,7 +60,7 @@
 		return 0
 
 	if(damage)
-		user.visible_message("<span class='danger'>[user] smashes [src]!")
+		user.visible_message("<span class='danger'>[user] smashes [src]!</span>")
 		shatter()
 	else
 		user.visible_message("<span class='danger'>[user] hits [src] and bounces off!</span>")

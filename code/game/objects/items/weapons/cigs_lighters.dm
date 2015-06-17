@@ -457,9 +457,9 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 			icon_state = "[base_state]"
 			item_state = "[base_state]"
 			if(istype(src, /obj/item/weapon/flame/lighter/zippo) )
-				user.visible_message("<span class='rose'>You hear a quiet click, as [user] shuts off [src] without even looking at what they're doing.")
+				user.visible_message("<span class='rose'>You hear a quiet click, as [user] shuts off [src] without even looking at what they're doing.</span>")
 			else
-				user.visible_message("<span class='notice'>[user] quietly shuts off the [src].")
+				user.visible_message("<span class='notice'>[user] quietly shuts off the [src].</span>")
 
 			set_light(0)
 			processing_objects.Remove(src)

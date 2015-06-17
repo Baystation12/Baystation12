@@ -684,7 +684,7 @@
 			user << "<span class='danger'>There is no room inside the cycler for [G.affecting.name].</span>"
 			return
 
-		visible_message("[user] starts putting [G.affecting.name] into the suit cycler.</span>", 3)
+		visible_message("<span class='notice'>[user] starts putting [G.affecting.name] into the suit cycler.</span>", 3)
 
 		if(do_after(user, 20))
 			if(!G || !G.affecting) return

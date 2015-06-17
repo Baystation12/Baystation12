@@ -307,7 +307,7 @@
 	else
 		usr << "<span class='danger>This weapon is ineffective, it does no damage.</span>"
 
-	visible_message("<span class='danger>[src] has been attacked with the [O] by [user].</span>")
+	visible_message("<span class='danger'>\The [src] has been attacked with \the [O] by [user].</span>")
 	user.do_attack_animation(src)
 
 /mob/living/simple_animal/movement_delay()
@@ -327,10 +327,10 @@
 	if(statpanel("Status") && show_stat_health)
 		stat(null, "Health: [round((health / maxHealth) * 100)]%")
 
-/mob/living/simple_animal/death(gibbed, deathmessage="")
+/mob/living/simple_animal/death(gibbed, deathmessage = "dies!")
 	icon_state = icon_dead
 	density = 0
-	return ..()
+	return ..(gibbed,deathmessage)
 
 /mob/living/simple_animal/ex_act(severity)
 	if(!blinded)

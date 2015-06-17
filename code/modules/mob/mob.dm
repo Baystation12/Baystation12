@@ -378,7 +378,8 @@
 		return
 
 	M.key = key
-//	M.Login()	//wat
+	if(M.mind)
+		M.mind.reset()
 	return
 
 /client/verb/changes()

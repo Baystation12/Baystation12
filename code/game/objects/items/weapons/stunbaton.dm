@@ -100,7 +100,7 @@
 
 /obj/item/weapon/melee/baton/attack(mob/M, mob/user)
 	if(status && (CLUMSY in user.mutations) && prob(50))
-		user << "span class='danger'>You accidentally hit yourself with the [src]!</span>"
+		user << "<span class='danger'>You accidentally hit yourself with the [src]!</span>"
 		user.Weaken(30)
 		deductcharge(hitcost)
 		return
@@ -130,7 +130,7 @@
 				target_zone = get_zone_with_miss_chance(user.zone_sel.selecting, L)
 
 			if(!target_zone)
-				L.visible_message(">span class='danger'>\The [user] misses [L] with \the [src]!</span>")
+				L.visible_message("<span class='danger'>\The [user] misses [L] with \the [src]!</span>")
 				return 0
 
 			var/mob/living/carbon/human/H = L
