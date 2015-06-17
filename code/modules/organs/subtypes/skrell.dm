@@ -1,5 +1,6 @@
-/obj/item/organ/lungs/skrell
-	name = "Skrellian lungs"
-
-/obj/item/organ/lungs/skrell/breathes_water()
-	return !is_broken()
+/obj/item/organ/gills
+	name = "gills"
+	icon_state = "lungs"
+	gender = PLURAL
+	organ_tag = "gills"
+	parent_organ = "head"

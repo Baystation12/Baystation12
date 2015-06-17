@@ -1041,6 +1041,7 @@
 #include "code\modules\fluids\fluid_objects.dm"
 #include "code\modules\fluids\fluid_procs.dm"
 #include "code\modules\fluids\fluid_spread.dm"
+#include "code\modules\fluids\fluid_verbs.dm"
 #include "code\modules\fluids\fluid_water_act.dm"
 #include "code\modules\fluids\xfluid_undef.dm"
 #include "code\modules\food\recipes_microwave.dm"

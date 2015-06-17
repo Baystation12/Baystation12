@@ -31,3 +31,9 @@
 /obj/update_nearby_tiles(need_rebuild)
 	. = ..(need_rebuild)
 	update_fluids(get_turf(src))
+
+// Fluid icon cache retriever
+/proc/get_fluid_icon(var/img_state)
+	if(!fluid_images[img_state])
+		fluid_images[img_state] = image('icons/effects/liquid.dmi',img_state)
+	return fluid_images[img_state]

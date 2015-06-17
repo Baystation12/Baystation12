@@ -21,7 +21,7 @@
 	icon = 'icons/effects/liquid.dmi'
 	icon_state = "water"
 	invisibility = INVISIBILITY_MAXIMUM
-	var/fluid_spawn_amt = 100
+	var/fluid_spawn_amt = 10000
 
 /obj/item/fluid_spawn/New()
 	..()
@@ -34,12 +34,3 @@
 	if(!F) F = PoolOrNew(/obj/effect/fluid, loc)
 	F.recieve_fluid(fluid_spawn_amt)
 	qdel(src)
-
-/obj/item/fluid_spawn/pool
-	name = "pool water placeholder"
-	fluid_spawn_amt = 65 // Let's not instantly drown anyone who uses the pool.
-
-/turf/simulated/floor/pool
-	name = "pool floor"
-	desc = "Watch your step."
-	icon_state = "poolfloor"

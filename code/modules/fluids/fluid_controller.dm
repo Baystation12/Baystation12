@@ -3,7 +3,6 @@
 	name = "fluids"
 	schedule_interval = FLUID_SCHEDULE_INTERVAL
 	fluid_controller_exists = 1
-	fluid_image = image('icons/effects/liquid.dmi',"water")
 
 /datum/controller/process/fluid/started()
 	..()
@@ -13,23 +12,29 @@
 /datum/controller/process/fluid/doWork()
 
 	// Handle spread of existing fluids.
-	// TODO randomize like new_fluids when update handling is fixed
-	if(processing_fluids.len)
-		for(var/obj/effect/fluid/F in processing_fluids)
-			F.equalize(1)
-		//processing_fluids.Cut()
-
+	var/i = 0
+	while(processing_fluids.len && i <= FLUID_PROCESSING_CUTOFF)
+		i++
+		var/obj/effect/fluid/F = pick(processing_fluids)
+		processing_fluids -= F
+		F.equalize(1)
+		scheck()
 	// Equalize fluid tiles spawned this cycle.
-	while(new_fluids.len)
+	i = 0
+	while(new_fluids.len && i <= FLUID_PROCESSING_CUTOFF)
+		i++
 		var/obj/effect/fluid/F = pick(new_fluids)
 		new_fluids -= F
 		F.equalize()
-
+		scheck()
 	// Update all appropriate icons.
-	if(updating_fluids.len)
-		for(var/obj/effect/fluid/F in updating_fluids)
-			F.update_icon()
-		updating_fluids.Cut()
+	i = 0
+	while(updating_fluids.len && i <= FLUID_PROCESSING_CUTOFF)
+		i++
+		var/obj/effect/fluid/F = pick(updating_fluids)
+		updating_fluids -= F
+		F.update_icon()
+		scheck()
 
 /datum/controller/process/fluid/getStatName()
 	return ..()+"(P[processing_fluids.len] N[new_fluids.len] U[updating_fluids.len])"
