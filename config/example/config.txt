@@ -171,6 +171,10 @@ GUEST_BAN
 ## set a server location for world reboot. Don't include the byond://, just give the address and port.
 #SERVER server.net:port
 
+## set a server URL for the IRC bot to use; like SERVER, don't include the byond://
+## Unlike SERVER, this one shouldn't break auto-reconnect
+#SERVERURL server.net:port
+
 ## forum address
 # FORUMURL http://example.com
 
