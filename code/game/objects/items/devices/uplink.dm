@@ -7,8 +7,8 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 */
 
 /obj/item/device/uplink
-	var/welcome 			// Welcoming menu message
-	var/uses 				// Numbers of crystals
+	var/welcome =	"Illegal Uplink Console"	// Welcoming menu message
+	var/uses = DEFAULT_TELECRYSTAL_AMOUNT		// Numbers of crystals
 	var/list/purchase_log
 	var/datum/mind/owner = null
 	var/used_TC = 0
@@ -18,8 +18,6 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 
 /obj/item/device/uplink/New(var/location, var/datum/mind/owner)
 	..()
-	welcome = ticker.mode.uplink_welcome
-	uses = ticker.mode.uplink_uses
 	src.owner = owner
 	purchase_log = list()
 	world_uplinks += src

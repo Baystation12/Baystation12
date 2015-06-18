@@ -176,10 +176,8 @@ datum/uplink_item/dd_SortValue()
 
 /datum/uplink_item/item/visible_weapons/heavysniper
 	name = "Anti-materiel Rifle"
+	item_cost = DEFAULT_TELECRYSTAL_AMOUNT
 	path = /obj/item/weapon/gun/projectile/heavysniper
-
-/datum/uplink_item/item/visible_weapons/heavysniper/cost()
-	return (ticker && ticker.mode && ticker.mode.uplink_uses) ? ticker.mode.uplink_uses : INFINITY
 
 /*************************************
 * Stealthy and Inconspicuous Weapons *
@@ -434,14 +432,12 @@ datum/uplink_item/dd_SortValue()
 
 /datum/uplink_item/item/badassery/balloon
 	name = "For showing that You Are The BOSS (Useless Balloon)"
+	item_cost = DEFAULT_TELECRYSTAL_AMOUNT
 	path = /obj/item/toy/syndicateballoon
 
 /datum/uplink_item/item/badassery/balloon/NT
 	name = "For showing that you love NT SOO much (Useless Balloon)"
 	path = /obj/item/toy/nanotrasenballoon
-
-/datum/uplink_item/item/badassery/balloon/cost()
-	return (ticker && ticker.mode && ticker.mode.uplink_uses) ? ticker.mode.uplink_uses : 10
 
 /**************
 * Random Item *
@@ -476,8 +472,6 @@ datum/uplink_item/dd_SortValue()
 	var/obj/structure/largecrate/C = new(get_turf(user))
 	var/list/bought_items = list()
 	var/remaining_TC = item_worth
-	U.uses += (item_worth - item_cost)
-	U.used_TC -= (item_worth - item_cost)
 
 	while(remaining_TC)
 		var/datum/uplink_item/I = default_uplink_selection.get_random_item(telecrystals = remaining_TC, bought_items = bought_items)
