@@ -39,19 +39,13 @@ var/datum/uplink/uplink = new()
 	antag_roles = list()
 
 /datum/uplink_item/proc/buy(var/obj/item/device/uplink/U, var/mob/user)
-	var/cost = max(0, cost(U.uses))
-	var/obj/item/I = get_goods(get_turf(user))
-	if(istype(I) && ishuman(user))
-		var/mob/living/carbon/human/A = user
-		A.put_in_any_hand_if_possible(I)
+	purchase_log(U)
+	var/cost = cost(U.uses)
+	var/goods = get_goods(U, get_turf(user))
+
 	U.uses -= cost
 	U.used_TC += cost
-	purchase_log(U)
-
-	return cost
-
-/datum/uplink_item/proc/get_goods(var/loc)
-	return 0
+	return goods
 
 /datum/uplink_item/proc/can_buy(obj/item/device/uplink/U)
 	if(cost(U.uses) > U.uses)
@@ -74,11 +68,15 @@ var/datum/uplink/uplink = new()
 			return 1
 	return 0
 
-/datum/uplink_item/proc/cost()
+/datum/uplink_item/proc/cost(var/telecrystals)
 	return item_cost
 
 /datum/uplink_item/proc/description()
 	return desc
+
+// get_goods does not necessarily return physical objects, it is simply a way to acquire the uplink item without paying
+/datum/uplink_item/proc/get_goods(var/obj/item/device/uplink/U, var/loc)
+	return 0
 
 /datum/uplink_item/proc/log_icon()
 	return
@@ -95,7 +93,18 @@ datum/uplink_item/dd_SortValue()
 *	Physical Uplink Entires		*
 *                           	*
 ********************************/
-/datum/uplink_item/item/get_goods(var/loc)
+/datum/uplink_item/item/buy(var/obj/item/device/uplink/U, var/mob/user)
+	var/obj/item/I = ..()
+	if(istype(I, /list))
+		var/list/L = I
+		if(L.len) I = L[1]
+
+	if(istype(I) && ishuman(user))
+		var/mob/living/carbon/human/A = user
+		A.put_in_any_hand_if_possible(I)
+	return I
+
+/datum/uplink_item/item/get_goods(var/obj/item/device/uplink/U, var/loc)
 	var/obj/item/I = new path(loc)
 	return I
 
@@ -442,17 +451,36 @@ datum/uplink_item/dd_SortValue()
 /**************
 * Random Item *
 **************/
-/datum/uplink_item/item/badassery/random
+/datum/uplink_item/item/badassery/random_one
 	name = "Random Item"
 	desc = "Buys you one random item."
 
-/datum/uplink_item/item/badassery/random/buy(var/obj/item/device/uplink/U, var/mob/user)
-	var/datum/uplink_item/item = default_uplink_selection.get_random_item(U)
-	item.buy(U, user)
-	return 1
+/datum/uplink_item/item/badassery/random_one/buy(var/obj/item/device/uplink/U, var/mob/user)
+	var/datum/uplink_item/item = default_uplink_selection.get_random_item(U.uses)
+	return item.buy(U, user)
 
-/datum/uplink_item/item/badassery/random/can_buy(obj/item/device/uplink/U)
-	return default_uplink_selection.get_random_item(U) != null
+/datum/uplink_item/item/badassery/random_one/can_buy(obj/item/device/uplink/U)
+	return default_uplink_selection.get_random_item(U.uses, U) != null
+
+/datum/uplink_item/item/badassery/random_many
+	name = "Random Items"
+	desc = "Buys you as many random items you can afford. Convenient packaging NOT included."
+
+/datum/uplink_item/item/badassery/random_many/cost(var/telecrystals)
+	return max(1, telecrystals)
+
+/datum/uplink_item/item/badassery/random_many/get_goods(var/obj/item/device/uplink/U, var/loc)
+	var/list/bought_items = list()
+	for(var/datum/uplink_item/UI in get_random_uplink_items(U, U.uses, loc))
+		UI.purchase_log(U)
+		var/obj/item/I = UI.get_goods(U, loc)
+		if(istype(I))
+			bought_items += I
+
+	return bought_items
+
+/datum/uplink_item/item/badassery/random_many/purchase_log(obj/item/device/uplink/U)
+	feedback_add_details("traitor_uplink_items_bought", "[src]")
 
 /****************
 * Surplus Crate *
@@ -468,27 +496,14 @@ datum/uplink_item/dd_SortValue()
 	antag_roles = list(MODE_MERCENARY)
 	desc = "A crate containing [item_worth] telecrystal\s worth of surplus leftovers."
 
-/datum/uplink_item/item/badassery/surplus/buy(var/obj/item/device/uplink/U, var/mob/user)
-	var/obj/structure/largecrate/C = new(get_turf(user))
-	var/list/bought_items = list()
-	var/remaining_TC = item_worth
+/datum/uplink_item/item/badassery/surplus/get_goods(var/obj/item/device/uplink/U, var/loc)
+	var/obj/structure/largecrate/C = new(loc)
+	var/random_items = get_random_uplink_items(null, item_worth, C)
+	for(var/datum/uplink_item/I in random_items)
+		I.purchase_log(U)
+		I.get_goods(U, C)
 
-	while(remaining_TC)
-		var/datum/uplink_item/I = default_uplink_selection.get_random_item(telecrystals = remaining_TC, bought_items = bought_items)
-		if(!I)
-			break
-		bought_items += I
-		remaining_TC -= I.cost()
-
-	purchase_log(U)
-	for(var/datum/uplink_item/item in bought_items)
-		item.purchase_log(U)
-		item.get_goods(C)
-
-	U.uses -= item_worth
-	U.used_TC += item_worth
-
-	return 1
+	return C
 
 /datum/uplink_item/item/badassery/surplus/log_icon()
 	if(!icon)
@@ -496,3 +511,17 @@ datum/uplink_item/dd_SortValue()
 		icon = image(initial(C.icon), initial(C.icon_state))
 
 	return "\icon[icon]"
+
+/****************
+* Support procs *
+****************/
+/proc/get_random_uplink_items(var/obj/item/device/uplink/U, var/remaining_TC, var/loc)
+	var/list/bought_items = list()
+	while(remaining_TC)
+		var/datum/uplink_item/I = default_uplink_selection.get_random_item(remaining_TC, U, bought_items)
+		if(!I)
+			break
+		bought_items += I
+		remaining_TC -= I.cost(remaining_TC)
+
+	return bought_items

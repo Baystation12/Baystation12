@@ -136,7 +136,7 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 		var/items[0]
 		for(var/datum/uplink_item/item in category.items)
 			if(item.can_view(src))
-				var/cost = item.cost()
+				var/cost = item.cost(uses)
 				if(!cost) cost = "???"
 				items[++items.len] = list("name" = item.name, "description" = replacetext(item.description(), "\n", "<br>"), "can_buy" = item.can_buy(src), "cost" = cost, "ref" = "\ref[item]")
 		nanoui_data["items"] = items

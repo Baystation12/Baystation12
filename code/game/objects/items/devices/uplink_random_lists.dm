@@ -19,16 +19,15 @@ var/datum/uplink_random_selection/default_uplink_selection = new/datum/uplink_ra
 	..()
 	items = list()
 
-/datum/uplink_random_selection/proc/get_random_item(obj/item/device/uplink/U, var/telecrystals, var/list/bought_items)
+/datum/uplink_random_selection/proc/get_random_item(var/telecrystals, obj/item/device/uplink/U, var/list/bought_items)
 	var/const/attempts = 50
-	var/remainingTC = telecrystals ? telecrystals : U.uses
 
 	for(var/i = 0; i < attempts; i++)
 		var/datum/uplink_random_item/RI = pick(items)
 		if(!prob(RI.keep_probability))
 			continue
 		var/datum/uplink_item/I = uplink.items_assoc[RI.uplink_item]
-		if(I.cost() > remainingTC)
+		if(I.cost(telecrystals) > telecrystals)
 			continue
 		if(bought_items && (I in bought_items) && !prob(RI.reselect_probability))
 			continue
