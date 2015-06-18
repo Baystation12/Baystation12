@@ -26,9 +26,9 @@
 	new /obj/item/clothing/head/beret/sec(src)
 	new /obj/item/clothing/head/beret/sec(src)
 	new /obj/item/clothing/head/beret/sec(src)
-	new /obj/item/clothing/head/beret/sec/alt(src)
-	new /obj/item/clothing/head/beret/sec/alt(src)
-	new /obj/item/clothing/head/beret/sec/alt(src)
+	new /obj/item/clothing/head/beret/sec/corporate/officer(src)
+	new /obj/item/clothing/head/beret/sec/corporate/officer(src)
+	new /obj/item/clothing/head/beret/sec/corporate/officer(src)
 	return
 
 
@@ -167,9 +167,9 @@
 	new /obj/item/clothing/head/hardhat/red(src)
 	new /obj/item/clothing/head/hardhat/red(src)
 	new /obj/item/clothing/head/hardhat/red(src)
-	new /obj/item/clothing/head/beret/eng(src)
-	new /obj/item/clothing/head/beret/eng(src)
-	new /obj/item/clothing/head/beret/eng(src)
+	new /obj/item/clothing/head/beret/engineering(src)
+	new /obj/item/clothing/head/beret/engineering(src)
+	new /obj/item/clothing/head/beret/engineering(src)
 	return
 
 
@@ -190,9 +190,9 @@
 	new /obj/item/clothing/head/hardhat(src)
 	new /obj/item/clothing/head/hardhat(src)
 	new /obj/item/clothing/head/hardhat(src)
-	new /obj/item/clothing/head/beret/eng(src)
-	new /obj/item/clothing/head/beret/eng(src)
-	new /obj/item/clothing/head/beret/eng(src)
+	new /obj/item/clothing/head/beret/engineering(src)
+	new /obj/item/clothing/head/beret/engineering(src)
+	new /obj/item/clothing/head/beret/engineering(src)
 	return
 
 
