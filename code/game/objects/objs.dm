@@ -13,6 +13,7 @@
 
 	var/damtype = "brute"
 	var/force = 0
+	var/armorpen = 0
 
 /obj/Destroy()
 	processing_objects -= src
