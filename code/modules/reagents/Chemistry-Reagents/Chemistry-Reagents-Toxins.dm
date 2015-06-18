@@ -45,9 +45,12 @@
 	color = "#9D14DB"
 	strength = 30
 
+/datum/reagent/toxin/phoron/touch_mob(var/mob/living/L, var/amount)
+	if(istype(L))
+		L.adjust_fire_stacks(amount / 5)
+
 /datum/reagent/toxin/phoron/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
-	..()
-	M.adjust_fire_stacks(removed / 5)
+	M.take_organ_damage(0, removed * 0.1) //being splashed directly with phoron causes minor chemical burns
 
 /datum/reagent/toxin/phoron/touch_turf(var/turf/simulated/T)
 	if(!istype(T))
@@ -494,7 +497,7 @@
 
 /datum/reagent/nanites/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
 	if(prob(10))
-		M.contract_disease(new /datum/disease/robotic_transformation(0), 1)
+		M.contract_disease(new /datum/disease/robotic_transformation(0), 1) //What
 
 /datum/reagent/nanites/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.contract_disease(new /datum/disease/robotic_transformation(0), 1)

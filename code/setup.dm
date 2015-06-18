@@ -970,6 +970,7 @@ var/list/be_special_flags = list(
 #define CLAMP01(x) max(0, min(1, x))
 
 #define DEFAULT_WALL_MATERIAL "steel"
+#define DEFAULT_TABLE_MATERIAL "plastic"
 
 // Convoluted setup so defines can be supplied by Bay12 main server compile script.
 // Should still work fine for people jamming the icons into their repo.

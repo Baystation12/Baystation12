@@ -55,8 +55,14 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		return
 
 /obj/item/weapon/flame/match/dropped(mob/user as mob)
+	//If dropped, put ourselves out
+	//not before lighting up the turf we land on, though.
 	if(lit)
-		burn_out()
+		spawn(0)
+			var/turf/location = src.loc
+			if(istype(location))
+				location.hotspot_expose(700, 5)
+			burn_out()
 	return ..()
 
 /obj/item/weapon/flame/match/proc/burn_out()
