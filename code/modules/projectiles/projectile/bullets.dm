@@ -120,7 +120,7 @@
 /obj/item/projectile/bullet/shotgun
 	name = "slug"
 	damage = 50
-	armorpen = 15
+	armor_penetration = 15
 
 /obj/item/projectile/bullet/shotgun/beanbag		//because beanbags are not bullets
 	name = "beanbag"
@@ -141,7 +141,7 @@
 /* "Rifle" rounds */
 
 /obj/item/projectile/bullet/rifle
-	armorpen = 20
+	armor_penetration = 20
 	penetrating = 1
 
 /obj/item/projectile/bullet/rifle/a762
@@ -155,7 +155,7 @@
 	stun = 3
 	weaken = 3
 	penetrating = 5
-	armorpen = 50
+	armor_penetration = 50
 	hitscan = 1 //so the PTR isn't useless as a sniper weapon
 
 /* Miscellaneous */
