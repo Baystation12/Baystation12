@@ -238,6 +238,9 @@ USEALIENWHITELIST
 ## Uncomment to enable sending data to the IRC bot.
 #USE_IRC_BOT
 
+## Uncomment if the IRC bot requires using world.Export() instead of nudge.py/libnudge
+#IRC_BOT_EXPORT
+
 ## Host where the IRC bot is hosted.  Port 45678 needs to be open.
 #IRC_BOT_HOST localhost
 
