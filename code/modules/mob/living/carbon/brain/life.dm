@@ -102,6 +102,9 @@
 	if(reagents)
 		reagents.metabolize(0, CHEM_BLOOD)
 
+		if(touching) touching.metabolize()
+		if(ingested) ingested.metabolize()
+		if(bloodstr) bloodstr.metabolize()
 	if(CE_PAINKILLER in chem_effects)
 		analgesic = chem_effects[CE_PAINKILLER]
 

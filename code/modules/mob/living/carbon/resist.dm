@@ -3,14 +3,14 @@
 
 	//drop && roll
 	if(on_fire)
-		fire_stacks -= 2 //reduced
-		Weaken(3)
-		spin(32,2)
+		fire_stacks -= 2
+		Weaken(5)
+		spin(52,2)
 		visible_message(
 			"<span class='danger'>[src] rolls on the floor, trying to put themselves out!</span>",
 			"<span class='notice'>You stop, drop, and roll!</span>"
 			)
-		sleep(30)
+		sleep(50)
 		if(fire_stacks <= 0)
 			visible_message(
 				"<span class='danger'>[src] has successfully extinguished themselves!</span>",

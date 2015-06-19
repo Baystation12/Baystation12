@@ -845,17 +845,17 @@
 
 	return min(1,thermal_protection)
 
+		return min(1,thermal_protection)
+
 /mob/living/carbon/human/proc/handle_chemicals_in_body()
-	if(reagents)
+	if(!(species.flags & IS_SYNTHETIC)) //Synths don't process reagents.
 		chem_effects.Cut()
 		analgesic = 0
-		var/alien = 0
-		if(species && species.reagent_tag)
-			alien = species.reagent_tag
-		touching.metabolize(alien, CHEM_TOUCH)
-		if(!(species.flags & NO_BLOOD))
-			ingested.metabolize(alien, CHEM_INGEST)
-			reagents.metabolize(alien, CHEM_BLOOD)
+
+		if(touching) touching.metabolize()
+		if(ingested) ingested.metabolize()
+		if(bloodstr) bloodstr.metabolize()
+
 		if(CE_PAINKILLER in chem_effects)
 			analgesic = chem_effects[CE_PAINKILLER]
 
