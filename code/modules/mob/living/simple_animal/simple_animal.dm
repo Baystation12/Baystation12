@@ -166,30 +166,33 @@
 			if( abs(Environment.temperature - bodytemperature) > 40 )
 				bodytemperature += ((Environment.temperature - bodytemperature) / 5)
 
-			if(min_oxy)
-				if(Environment.gas["oxygen"] < min_oxy)
-					atmos_suitable = 0
-			if(max_oxy)
-				if(Environment.gas["oxygen"] > max_oxy)
-					atmos_suitable = 0
-			if(min_tox)
-				if(Environment.gas["phoron"] < min_tox)
-					atmos_suitable = 0
-			if(max_tox)
-				if(Environment.gas["phoron"] > max_tox)
-					atmos_suitable = 0
-			if(min_n2)
-				if(Environment.gas["nitrogen"] < min_n2)
-					atmos_suitable = 0
-			if(max_n2)
-				if(Environment.gas["nitrogen"] > max_n2)
-					atmos_suitable = 0
-			if(min_co2)
-				if(Environment.gas["carbon_dioxide"] < min_co2)
-					atmos_suitable = 0
-			if(max_co2)
-				if(Environment.gas["carbon_dioxide"] > max_co2)
-					atmos_suitable = 0
+			if(handle_drowning())
+				atmos_suitable = 0
+			else
+				if(min_oxy)
+					if(Environment.gas["oxygen"] < min_oxy)
+						atmos_suitable = 0
+				if(max_oxy)
+					if(Environment.gas["oxygen"] > max_oxy)
+						atmos_suitable = 0
+				if(min_tox)
+					if(Environment.gas["phoron"] < min_tox)
+						atmos_suitable = 0
+				if(max_tox)
+					if(Environment.gas["phoron"] > max_tox)
+						atmos_suitable = 0
+				if(min_n2)
+					if(Environment.gas["nitrogen"] < min_n2)
+						atmos_suitable = 0
+				if(max_n2)
+					if(Environment.gas["nitrogen"] > max_n2)
+						atmos_suitable = 0
+				if(min_co2)
+					if(Environment.gas["carbon_dioxide"] < min_co2)
+						atmos_suitable = 0
+				if(max_co2)
+					if(Environment.gas["carbon_dioxide"] > max_co2)
+						atmos_suitable = 0
 
 	//Atmos effect
 	if(bodytemperature < minbodytemp)
