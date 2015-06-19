@@ -14,7 +14,7 @@
 	region = ACCESS_REGION_SECURITY
 
 /var/const/access_brig = 2 // Brig timers and permabrig
-/datum/access/security
+/datum/access/holding
 	id = access_brig
 	desc = "Holding Cells"
 	region = ACCESS_REGION_SECURITY
