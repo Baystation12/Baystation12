@@ -78,12 +78,9 @@
 	chem_effects.Cut()
 	analgesic = 0
 
-	if(touching)
-		touching.metabolize(0, CHEM_TOUCH)
-	if(ingested)
-		ingested.metabolize(0, CHEM_INGEST)
-	if(reagents)
-		reagents.metabolize(0, CHEM_BLOOD)
+	if(touching) touching.metabolize()
+	if(ingested) ingested.metabolize()
+	if(bloodstr) bloodstr.metabolize()
 
 	if(CE_PAINKILLER in chem_effects)
 		analgesic = chem_effects[CE_PAINKILLER]

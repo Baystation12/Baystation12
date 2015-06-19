@@ -61,7 +61,7 @@
 			else if(O.reagents.total_volume >= 1)
 				if(O.reagents.has_reagent("pacid", 1))
 					user << "The acid chews through the balloon!"
-					O.reagents.splash_mob(user, reagents.total_volume)
+					O.reagents.splash(user, reagents.total_volume)
 					qdel(src)
 				else
 					src.desc = "A translucent balloon with some form of liquid sloshing around in it."
