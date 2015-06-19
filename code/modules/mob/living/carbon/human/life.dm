@@ -845,10 +845,8 @@
 
 	return min(1,thermal_protection)
 
-		return min(1,thermal_protection)
-
 /mob/living/carbon/human/proc/handle_chemicals_in_body()
-	if(!(species.flags & IS_SYNTHETIC)) //Synths don't process reagents.
+	if(reagents)
 		chem_effects.Cut()
 		analgesic = 0
 
