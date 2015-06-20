@@ -269,11 +269,11 @@
 
 	src.updateUsrDialog()
 
-/obj/machinery/computer/communications/attackby(var/obj/I as obj, var/mob/user as mob)
-	if(istype(I,/obj/item/weapon/card/emag/))
+/obj/machinery/computer/communications/emag_act(var/remaining_charges, var/mob/user)
+	if(!emagged)
 		src.emagged = 1
 		user << "You scramble the communication routing circuits!"
-	..()
+		return 1
 
 /obj/machinery/computer/communications/attack_ai(var/mob/user as mob)
 	return src.attack_hand(user)

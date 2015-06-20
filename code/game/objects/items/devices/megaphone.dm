@@ -46,10 +46,9 @@
 			spamcheck = 0
 		return
 
-/obj/item/device/megaphone/attackby(obj/item/I, mob/user)
-	if(istype(I, /obj/item/weapon/card/emag) && !emagged)
+/obj/item/device/megaphone/emag_act(var/remaining_charges, var/mob/user)
+	if(!emagged)
 		user << "<span class='warning'>You overload \the [src]'s voice synthesizer.</span>"
 		emagged = 1
 		insults = rand(1, 3)//to prevent dickflooding
-		return
-	return
+		return 1

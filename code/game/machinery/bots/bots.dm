@@ -32,15 +32,18 @@
 	if (src.health <= 0)
 		src.explode()
 
-/obj/machinery/bot/proc/Emag(mob/user as mob)
-	if(locked)
+/obj/machinery/bot/emag_act(var/remaining_charges, var/user)
+	if(locked && !emagged)
 		locked = 0
 		emagged = 1
 		user << "<span class='warning'>You short out [src]'s maintenance hatch lock.</span>"
 		log_and_message_admins("emagged [src]'s maintenance hatch lock")
-	if(!locked && open)
+		return 1
+
+	if(!locked && open && emagged == 1)
 		emagged = 2
 		log_and_message_admins("emagged [src]'s inner circuits")
+		return 1
 
 /obj/machinery/bot/examine(mob/user)
 	..(user)
@@ -65,8 +68,6 @@
 				user << "<span class='notice'>Unable to repair with the maintenance panel closed.</span>"
 		else
 			user << "<span class='notice'>[src] does not need a repair.</span>"
-	else if (istype(W, /obj/item/weapon/card/emag) && emagged < 2)
-		Emag(user)
 	else
 		if(hasvar(W,"force") && hasvar(W,"damtype"))
 			switch(W.damtype)

@@ -708,24 +708,6 @@
 		src.updateUsrDialog()
 		return
 
-	else if(istype(I,/obj/item/weapon/card/emag))
-
-		if(emagged)
-			user << "<span class='danger'>The cycler has already been subverted.</span>"
-			return
-
-		var/obj/item/weapon/card/emag/E = I
-		src.updateUsrDialog()
-		E.uses--
-
-		//Clear the access reqs, disable the safeties, and open up all paintjobs.
-		user << "<span class='danger'>You run the sequencer across the interface, corrupting the operating protocols.</span>"
-		departments = list("Engineering","Mining","Medical","Security","Atmos","^%###^%$")
-		emagged = 1
-		safeties = 0
-		req_access = list()
-		return
-
 	else if(istype(I,/obj/item/clothing/head/helmet/space) && !istype(I, /obj/item/clothing/head/helmet/space/rig))
 
 		if(locked)
@@ -773,6 +755,20 @@
 		return
 
 	..()
+	
+/obj/machinery/suit_cycler/emag_act(var/remaining_charges, var/mob/user)
+	if(emagged)
+		user << "<span class='danger'>The cycler has already been subverted.</span>"
+		return
+
+	//Clear the access reqs, disable the safeties, and open up all paintjobs.
+	user << "<span class='danger'>You run the sequencer across the interface, corrupting the operating protocols.</span>"
+	departments = list("Engineering","Mining","Medical","Security","Atmos","^%###^%$")
+	emagged = 1
+	safeties = 0
+	req_access = list()
+	src.updateUsrDialog()
+	return 1
 
 /obj/machinery/suit_cycler/attack_hand(mob/user as mob)
 
