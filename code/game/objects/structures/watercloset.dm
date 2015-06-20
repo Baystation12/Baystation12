@@ -225,6 +225,12 @@
 		if(M.back)
 			if(M.back.clean_blood())
 				M.update_inv_back(0)
+		
+		//flush away reagents on the skin
+		if(M.touching)
+			var/remove_amount = M.touching.maximum_volume * M.reagent_permeability() //take off your suit first
+			M.touching.remove_any(remove_amount)
+		
 		if(ishuman(M))
 			var/mob/living/carbon/human/H = M
 			var/washgloves = 1
@@ -352,7 +358,7 @@
 		if (user.hand)
 			temp = H.organs_by_name["l_hand"]
 		if(temp && !temp.is_usable())
-			user << "<span class='notice'>You try to move your [temp.name], but cannot!"
+			user << "<span class='notice'>You try to move your [temp.name], but cannot!</span>"
 			return
 
 	if(isrobot(user) || isAI(user))
@@ -377,12 +383,12 @@
 	if(ishuman(user))
 		user:update_inv_gloves()
 	for(var/mob/V in viewers(src, null))
-		V.show_message("<span class='notice'>[user] washes their hands using \the [src].")
+		V.show_message("<span class='notice'>[user] washes their hands using \the [src].</span>")
 
 
 /obj/structure/sink/attackby(obj/item/O as obj, mob/user as mob)
 	if(busy)
-		user << "<span class='warning'>Someone's already washing here."
+		user << "<span class='warning'>Someone's already washing here.</span>"
 		return
 
 	var/obj/item/weapon/reagent_containers/RG = O

@@ -61,7 +61,7 @@
 			else if(O.reagents.total_volume >= 1)
 				if(O.reagents.has_reagent("pacid", 1))
 					user << "The acid chews through the balloon!"
-					O.reagents.splash_mob(user, reagents.total_volume)
+					O.reagents.splash(user, reagents.total_volume)
 					qdel(src)
 				else
 					src.desc = "A translucent balloon with some form of liquid sloshing around in it."
@@ -398,7 +398,7 @@
 	if((ishuman(H))) //i guess carp and shit shouldn't set them off
 		var/mob/living/carbon/M = H
 		if(M.m_intent == "run")
-			M << "<span class='warning'>You step on the snap pop!"
+			M << "<span class='warning'>You step on the snap pop!</span>"
 
 			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 			s.set_up(2, 0, src)

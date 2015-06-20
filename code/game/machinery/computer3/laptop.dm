@@ -124,7 +124,7 @@
 			return
 
 		if(!Adjacent(usr))
-			usr << "You can't reach it.</span>"
+			usr << "<span class='warning'>You can't reach it.</span>"
 			return
 
 		close_laptop(usr)

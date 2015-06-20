@@ -295,13 +295,13 @@
 	onclose(user, "server_control")
 	return
 
-/obj/machinery/computer/rdservercontrol/attackby(var/obj/item/weapon/D as obj, var/mob/user as mob)
-	if(istype(D, /obj/item/weapon/card/emag) && !emagged)
+/obj/machinery/computer/rdservercontrol/emag_act(var/remaining_charges, var/mob/user)
+	if(!emagged)
 		playsound(src.loc, 'sound/effects/sparks4.ogg', 75, 1)
 		emagged = 1
-		user << "\blue You you disable the security protocols"
-	src.updateUsrDialog()
-	return ..()
+		user << "<span class='notice'>You you disable the security protocols.</span>"
+		src.updateUsrDialog()
+		return 1
 
 /obj/machinery/r_n_d/server/robotics
 	name = "Robotics R&D Server"

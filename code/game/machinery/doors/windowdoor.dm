@@ -163,6 +163,14 @@
 			return
 	return src.attackby(user, user)
 
+/obj/machinery/door/window/emag_act(var/remaining_charges, var/mob/user)
+	if (density && operable())
+		operating = -1
+		flick("[src.base_state]spark", src)
+		sleep(6)
+		open()
+		return 1
+
 /obj/machinery/door/window/attackby(obj/item/weapon/I as obj, mob/user as mob)
 
 	//If it's in the process of opening/closing, ignore the click
@@ -170,18 +178,14 @@
 		return
 
 	//Emags and ninja swords? You may pass.
-	if (src.density && (istype(I, /obj/item/weapon/card/emag)||istype(I, /obj/item/weapon/melee/energy/blade)))
-		src.operating = -1
-		if(istype(I, /obj/item/weapon/melee/energy/blade))
+	if (istype(I, /obj/item/weapon/melee/energy/blade))
+		if(emag_act(10, user))
 			var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
 			spark_system.set_up(5, 0, src.loc)
 			spark_system.start()
 			playsound(src.loc, "sparks", 50, 1)
 			playsound(src.loc, 'sound/weapons/blade1.ogg', 50, 1)
 			visible_message("<span class='warning'>The glass door was sliced open by [user]!</span>")
-		flick("[src.base_state]spark", src)
-		sleep(6)
-		open()
 		return 1
 
 	//If it's emagged, crowbar can pry electronics out.

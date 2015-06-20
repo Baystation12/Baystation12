@@ -6,7 +6,7 @@
 	if(..()) return
 	var/turf/T = get_turf(src)
 	if (!T || !(T.z in config.player_levels))
-		usr << "<span class='warning'>Unable to establish a connection<span>: You're too far away from the station!"
+		usr << "<span class='warning'>Unable to establish a connection</span>: You're too far away from the station!"
 		return 0
 	if(href_list["close"] )
 		var/mob/user = usr

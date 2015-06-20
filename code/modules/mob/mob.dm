@@ -376,7 +376,8 @@
 		return
 
 	M.key = key
-//	M.Login()	//wat
+	if(M.mind)
+		M.mind.reset()
 	return
 
 /client/verb/changes()
@@ -648,7 +649,7 @@
 	if(!canmove)						return 0
 	if(stat)							return 0
 	if(anchored)						return 0
-	if(monkeyizing)						return 0
+	if(transforming)						return 0
 	return 1
 
 //Updates canmove, lying and icons. Could perhaps do with a rename but I can't think of anything to describe it.

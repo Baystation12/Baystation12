@@ -28,7 +28,7 @@
 		if (H.hand)
 			temp = H.organs_by_name["l_hand"]
 		if(temp && !temp.is_usable())
-			user << "<span class='notice'>You try to move your [temp.name], but cannot!"
+			user << "<span class='notice'>You try to move your [temp.name], but cannot!</span>"
 			return
 	var/response = ""
 	if(!papers.len > 0)

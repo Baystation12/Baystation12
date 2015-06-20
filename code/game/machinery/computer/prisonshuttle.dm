@@ -47,9 +47,6 @@ var/prison_shuttle_timeleft = 0
 					A.icon_state = "4"
 
 				qdel(src)
-		else if(istype(I,/obj/item/weapon/card/emag) && (!hacked))
-			hacked = 1
-			user << "<span class='notice'>You disable the lock.</span>"
 		else
 			return src.attack_hand(user)
 
@@ -235,3 +232,9 @@ var/prison_shuttle_timeleft = 0
 
 				start_location.move_contents_to(end_location)
 		return
+
+/obj/machinery/computer/prison_shuttle/emag_act(var/charges, var/mob/user)
+	if(!hacked)
+		hacked = 1
+		user << "<span class='notice'>You disable the lock.</span>"
+		return 1

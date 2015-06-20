@@ -272,13 +272,6 @@
 
 	if(src.operating) return
 
-	if(src.density && (operable() && istype(I, /obj/item/weapon/card/emag)))
-		do_animate("spark")
-		sleep(6)
-		open()
-		operating = -1
-		return 1
-
 	if(src.allowed(user) && operable())
 		if(src.density)
 			open()
@@ -289,6 +282,14 @@
 	if(src.density)
 		do_animate("deny")
 	return
+
+/obj/machinery/door/emag_act(var/remaining_charges)
+	if(density && operable())
+		do_animate("spark")
+		sleep(6)
+		open()
+		operating = -1
+		return 1
 
 /obj/machinery/door/proc/take_damage(var/damage)
 	var/initialhealth = src.health

@@ -111,9 +111,12 @@
 								 "<span class='notice'>You have [anchored ? "fastened the grille to" : "unfastened the grill from"] the floor.</span>")
 			return
 
-//window placing begin
-	else if(istype(W,/obj/item/stack/material/glass))
-		var/obj/item/stack/material/glass/ST = W
+//window placing begin //TODO CONVERT PROPERLY TO MATERIAL DATUM
+	else if(istype(W,/obj/item/stack/material))
+		var/obj/item/stack/material/ST = W
+		if(!ST.material.created_window)
+			return 0
+
 		var/dir_to_set = 1
 		if(loc == user.loc)
 			dir_to_set = user.dir
@@ -143,7 +146,7 @@
 					user << "<span class='notice'>There is already a window facing this way there.</span>"
 					return
 
-			var/wtype = ST.created_window
+			var/wtype = ST.material.created_window
 			if (ST.use(1))
 				var/obj/structure/window/WD = new wtype(loc, dir_to_set, 1)
 				user << "<span class='notice'>You place the [WD] on [src].</span>"

@@ -699,7 +699,7 @@
 	if(species.has_fine_manipulation)
 		return 1
 	if(!silent)
-		src << "<span class='warning'>You don't have the dexterity to use that!<span>"
+		src << "<span class='warning'>You don't have the dexterity to use that!</span>"
 	return 0
 
 /mob/living/carbon/human/abiotic(var/full_body = 0)
@@ -946,7 +946,6 @@
 		V.cure(src)
 
 	losebreath = 0
-	failed_last_breath = 0 //So mobs that died of oxyloss don't revive and have perpetual out of breath.
 
 	..()
 

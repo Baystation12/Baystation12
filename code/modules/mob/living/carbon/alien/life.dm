@@ -4,7 +4,7 @@
 	set invisibility = 0
 	set background = 1
 
-	if (monkeyizing)	return
+	if (transforming)	return
 	if(!loc)			return
 
 	..()
@@ -14,16 +14,10 @@
 		// GROW!
 		update_progression()
 
-		// Radiation.
-		handle_mutations_and_radiation()
-
 		// Chemicals in the body
 		handle_chemicals_in_body()
 
 	blinded = null
-
-	if(loc)
-		handle_environment(loc.return_air())
 
 	//Status updates, death etc.
 	handle_regular_status_updates()
@@ -36,7 +30,7 @@
 /mob/living/carbon/alien/proc/handle_chemicals_in_body()
 	return // Nothing yet. Maybe check it out at a later date.
 
-/mob/living/carbon/alien/proc/handle_mutations_and_radiation()
+/mob/living/carbon/alien/handle_mutations_and_radiation()
 
 	// Currently both Dionaea and larvae like to eat radiation, so I'm defining the
 	// rad absorbtion here. This will need to be changed if other baby aliens are added.
@@ -174,7 +168,7 @@
 
 	return 1
 
-/mob/living/carbon/alien/proc/handle_environment(var/datum/gas_mixture/environment)
+/mob/living/carbon/alien/handle_environment(var/datum/gas_mixture/environment)
 	// Both alien subtypes survive in vaccum and suffer in high temperatures,
 	// so I'll just define this once, for both (see radiation comment above)
 	if(!environment) return

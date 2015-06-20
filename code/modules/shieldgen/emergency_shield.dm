@@ -267,13 +267,15 @@
 		else
 			user << "The device must first be secured to the floor."
 	return
-
-/obj/machinery/shieldgen/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/weapon/card/emag))
+	
+/obj/machinery/shieldgen/emag_act(var/remaining_charges, var/mob/user)
+	if(!malfunction)
 		malfunction = 1
 		update_icon()
+		return 1
 
-	else if(istype(W, /obj/item/weapon/screwdriver))
+/obj/machinery/shieldgen/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	if(istype(W, /obj/item/weapon/screwdriver))
 		playsound(src.loc, 'sound/items/Screwdriver.ogg', 100, 1)
 		if(is_open)
 			user << "\blue You close the panel."

@@ -36,7 +36,7 @@
 		user << "\red You can't analyze non-robotic things!"
 		return
 
-	user.visible_message("<span class='notice'>\The [user] has analyzed [M]'s components.","<span class='notice'>You have analyzed [M]'s components.")
+	user.visible_message("<span class='notice'>\The [user] has analyzed [M]'s components.</span>","<span class='notice'>You have analyzed [M]'s components.</span>")
 	switch(scan_type)
 		if("robot")
 			var/BU = M.getFireLoss() > 50 	? 	"<b>[M.getFireLoss()]</b>" 		: M.getFireLoss()
