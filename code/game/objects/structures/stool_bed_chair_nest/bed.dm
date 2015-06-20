@@ -22,6 +22,7 @@
 
 /obj/structure/bed/New(var/newloc, var/new_material, var/new_padding_material)
 	..(newloc)
+	color = null
 	if(!new_material)
 		new_material = DEFAULT_WALL_MATERIAL
 	material = get_material_by_name(new_material)
