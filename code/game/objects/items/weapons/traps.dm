@@ -20,20 +20,20 @@
 
 /obj/item/weapon/beartrap/attack_self(mob/user as mob)
 	..()
-	if(deployed && can_use(user))
+	if(!deployed && can_use(user))
 		user.visible_message(
-			"<span class='danger'>[user] starts to deploy \the [src].</span>", 
-			"<span class='danger'>You begin deploying \the [src]!</span>", 
+			"<span class='danger'>[user] starts to deploy \the [src].</span>",
+			"<span class='danger'>You begin deploying \the [src]!</span>",
 			"You hear the slow creaking of a spring."
 			)
-		
+
 		if (do_after(user, 60))
 			user.visible_message(
-				"<span class='danger'>[user] has deployed \the [src].</span>", 
+				"<span class='danger'>[user] has deployed \the [src].</span>",
 				"<span class='danger'>You have deployed \the [src]!</span>",
 				"You hear a latch click loudly."
 				)
-			
+
 			deployed = 1
 			user.drop_from_inventory(src)
 			update_icon()
@@ -42,7 +42,7 @@
 /obj/item/weapon/beartrap/attack_hand(mob/user as mob)
 	if(buckled_mob && can_use(user))
 		user.visible_message(
-			"<span class='notice'>[user] begins freeing [buckled_mob] from \the [src].</span>", 
+			"<span class='notice'>[user] begins freeing [buckled_mob] from \the [src].</span>",
 			"<span class='notice'>You carefully begin to free [buckled_mob] from \the [src].</span>",
 			)
 		if(do_after(user, 60))
@@ -51,13 +51,13 @@
 			anchored = 0
 	else if(deployed && can_use(user))
 		user.visible_message(
-			"<span class='danger'>[user] starts to disarm \the [src].</span>", 
+			"<span class='danger'>[user] starts to disarm \the [src].</span>",
 			"<span class='notice'>You begin disarming \the [src]!</span>",
 			"You hear a latch click followed by the slow creaking of a spring."
 			)
 		if(do_after(user, 60))
 			user.visible_message(
-				"<span class='danger'>[user] has disarmed \the [src].</span>", 
+				"<span class='danger'>[user] has disarmed \the [src].</span>",
 				"<span class='notice'>You have disarmed \the [src]!</span>"
 				)
 			deployed = 0
@@ -86,15 +86,18 @@
 	//trap the victim in place
 	if(!blocked)
 		set_dir(L.dir)
+		can_buckle = 1
 		buckle_mob(L)
 		L << "<span class='danger'>The steel jaws of \the [src] bite into you, trapping you in place!</span>"
+		deployed = 0
+		can_buckle = initial(can_buckle)
 
 /obj/item/weapon/beartrap/Crossed(AM as mob|obj)
-	if(isliving(AM))
+	if(deployed && isliving(AM))
 		var/mob/living/L = AM
 		if(L.m_intent == "run")
 			L.visible_message(
-				"<span class='danger'>[L] steps on \the [src].</span>", 
+				"<span class='danger'>[L] steps on \the [src].</span>",
 				"<span class='danger'>You step on \the [src]!</span>",
 				"<b>You hear a loud metallic snap!</b>"
 				)

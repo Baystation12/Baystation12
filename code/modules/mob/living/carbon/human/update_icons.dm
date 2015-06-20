@@ -929,7 +929,7 @@ var/global/list/damage_icon_parts = list()
 
 	tail_overlay = set_tail_state(t_state)
 	if(tail_overlay)
-		spawn(15)
+		spawn(20)
 			//check that the animation hasn't changed in the meantime
 			if(overlays_standing[TAIL_LAYER] == tail_overlay && tail_overlay.icon_state == t_state)
 				animate_tail_stop()
