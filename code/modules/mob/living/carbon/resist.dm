@@ -19,12 +19,12 @@
 			ExtinguishMob()
 		return
 
+	..()
+	
 	if(handcuffed)
 		spawn() escape_handcuffs()
 	else if(legcuffed)
 		spawn() escape_legcuffs()
-
-	..()
 
 /mob/living/carbon/proc/escape_handcuffs()
 	if(!(last_special <= world.time)) return
