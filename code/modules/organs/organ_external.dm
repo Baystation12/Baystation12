@@ -838,13 +838,13 @@ Note that amputating the affected organ does in fact remove the infection from t
 	if((status & ORGAN_BROKEN) || cannot_break)
 		return
 
-	owner.visible_message(\
-		"\red You hear a loud cracking sound coming from \the [owner].",\
-		"\red <b>Something feels like it shattered in your [name]!</b>",\
-		"You hear a sickening crack.")
-
-	if(owner.species && !(owner.species.flags & NO_PAIN))
-		owner.emote("scream")
+	if(owner)
+		owner.visible_message(\
+			"\red You hear a loud cracking sound coming from \the [owner].",\
+			"\red <b>Something feels like it shattered in your [name]!</b>",\
+			"You hear a sickening crack.")
+		if(owner.species && !(owner.species.flags & NO_PAIN))
+			owner.emote("scream")
 
 	status |= ORGAN_BROKEN
 	broken_description = pick("broken","fracture","hairline fracture")
@@ -857,7 +857,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	// This is mostly for the ninja suit to stop ninja being so crippled by breaks.
 	// TODO: consider moving this to a suit proc or process() or something during
 	// hardsuit rewrite.
-	if(!(status & ORGAN_SPLINTED) && istype(owner,/mob/living/carbon/human))
+	if(owner && !(status & ORGAN_SPLINTED) && istype(owner,/mob/living/carbon/human))
 
 		var/mob/living/carbon/human/H = owner
 
@@ -905,11 +905,11 @@ Note that amputating the affected organ does in fact remove the infection from t
 	if(src.status & ORGAN_ROBOT)
 		return
 	src.status |= ORGAN_MUTATED
-	owner.update_body()
+	if(owner) owner.update_body()
 
 /obj/item/organ/external/proc/unmutate()
 	src.status &= ~ORGAN_MUTATED
-	owner.update_body()
+	if(owner) owner.update_body()
 
 /obj/item/organ/external/proc/get_damage()	//returns total damage
 	return max(brute_dam + burn_dam - perma_injury, perma_injury)	//could use max_damage?
@@ -929,7 +929,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	return ((status & ORGAN_ROBOT) && (brute_dam + burn_dam) >= 10 && prob(brute_dam + burn_dam))
 
 /obj/item/organ/external/proc/embed(var/obj/item/weapon/W, var/silent = 0)
-	if(loc != owner)
+	if(!owner || loc != owner)
 		return
 	if(!silent)
 		owner.visible_message("<span class='danger'>\The [W] sticks in the wound!</span>")
@@ -1013,7 +1013,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 /obj/item/organ/external/proc/get_wounds_desc()
 	. = ""
 	if(status & ORGAN_DESTROYED && !is_stump())
-		. += "tear at [amputation_point] so bad it barely hangs on few tendons"
+		. += "tear at [amputation_point] so severe that it hangs by a scrap of flesh"
 
 	if(status & ORGAN_ROBOT)
 		if(brute_dam)

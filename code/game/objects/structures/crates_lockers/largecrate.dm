@@ -13,8 +13,8 @@
 	if(istype(W, /obj/item/weapon/crowbar))
 		new /obj/item/stack/material/wood(src)
 		var/turf/T = get_turf(src)
-		for(var/obj/O in contents)
-			O.loc = T
+		for(var/atom/movable/AM in contents)
+			if(AM.simulated) AM.loc = T
 		user.visible_message("<span class='notice'>[user] pries \the [src] open.</span>", \
 							 "<span class='notice'>You pry open \the [src].</span>", \
 							 "<span class='notice'>You hear splitting wood.</span>")
