@@ -276,6 +276,11 @@ var/list/admin_verbs_dev = list(
 */
 
 //New Ranks
+var/list/admin_verbs_sounds = list(
+	/client/proc/play_local_sound,
+	/client/proc/play_sound
+)
+
 var/list/admin_verbs_dev = list(
 	/client/proc/debug_variables,		/*allows us to -see- the variables of any instance in the game.*/
 	/client/proc/cmd_admin_pm_panel,	/*admin-pm list*/
@@ -585,6 +590,7 @@ var/list/admin_verbs_hideable = list(
 		if(holder.rights & R_DEV)			verbs += admin_verbs_dev
 		*/
 		//New Ranks
+		if(holder.rights & R_SOUNDS)		verbs += admin_verbs_sounds
 		if(holder.rights & R_DEV)			verbs += admin_verbs_dev
 		if(holder.rights & R_MENTOR)		verbs += admin_verbs_mentor
 		if(holder.rights & R_MOD)			verbs += admin_verbs_mod
@@ -594,7 +600,7 @@ var/list/admin_verbs_hideable = list(
 		if(holder.rights & R_SERVER)		verbs += admin_verbs_admin2
 		if(holder.rights & R_FUN)			verbs += admin_verbs_admin3
 		if(holder.rights & R_DEBUG)			verbs += admin_verbs_headadmin
-		if(holder.rights & R_SOUNDS)		verbs += admin_verbs_gamemaster
+		if(holder.rights & R_PERMISSIONS)	verbs += admin_verbs_gamemaster
 
 /client/proc/remove_admin_verbs()
 	verbs.Remove(
@@ -631,6 +637,7 @@ var/list/admin_verbs_hideable = list(
 		/client/proc/splash,
 		/client/proc/cmd_admin_areatest
 		*/
+		admin_verbs_sounds,
 		admin_verbs_dev,
 		admin_verbs_mentor,
 		admin_verbs_mod,

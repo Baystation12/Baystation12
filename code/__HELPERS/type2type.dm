@@ -296,6 +296,7 @@ proc/tg_list2text(list/list, glue=",")
 
 // New Ranks
 /proc/rights2text(rights,seperator="")
+	if(rights & R_SOUNDS)		. += "[seperator]+SOUND"
 	if(rights & R_DEV)			. += "[seperator]+DEV"
 	if(rights & R_MENTOR)		. += "[seperator]+MENTOR"
 	if(rights & R_MOD)			. += "[seperator]+MOD"
@@ -305,7 +306,7 @@ proc/tg_list2text(list/list, glue=",")
 	if(rights & R_SERVER)		. += "[seperator]+ADMIN2"
 	if(rights & R_FUN)			. += "[seperator]+ADMIN3"
 	if(rights & R_DEBUG)		. += "[seperator]+HEADADMIN"
-	if(rights & R_SOUNDS)		. += "[seperator]+GAMEMASTER"
+	if(rights & R_PERMISSIONS)		. += "[seperator]+GAMEMASTER"
 
 	return .
 
