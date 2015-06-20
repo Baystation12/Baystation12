@@ -3,14 +3,14 @@
 
 	//drop && roll
 	if(on_fire)
-		fire_stacks -= 2
-		Weaken(5)
-		spin(52,2)
+		fire_stacks -= 1.2
+		Weaken(3)
+		spin(32,2)
 		visible_message(
 			"<span class='danger'>[src] rolls on the floor, trying to put themselves out!</span>",
 			"<span class='notice'>You stop, drop, and roll!</span>"
 			)
-		sleep(50)
+		sleep(30)
 		if(fire_stacks <= 0)
 			visible_message(
 				"<span class='danger'>[src] has successfully extinguished themselves!</span>",
@@ -19,12 +19,12 @@
 			ExtinguishMob()
 		return
 
+	..()
+	
 	if(handcuffed)
 		spawn() escape_handcuffs()
 	else if(legcuffed)
 		spawn() escape_legcuffs()
-
-	..()
 
 /mob/living/carbon/proc/escape_handcuffs()
 	if(!(last_special <= world.time)) return

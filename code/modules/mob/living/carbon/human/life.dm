@@ -948,6 +948,9 @@
 		if( (getOxyLoss() > 50) || (config.health_threshold_crit > health) )
 			Paralyse(3)
 
+		//UNCONSCIOUS. NO-ONE IS HOME
+		if((getOxyLoss() > 50) || (health <= config.health_threshold_crit))
+			Paralyse(3)
 		if(hallucination)
 			if(hallucination >= 20)
 				if(prob(3))

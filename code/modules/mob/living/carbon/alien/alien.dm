@@ -15,6 +15,7 @@
 	var/max_grown = 200
 	var/time_of_birth
 	var/language
+	var/death_msg = "lets out a waning guttural screech, green blood bubbling from its maw."
 
 /mob/living/carbon/alien/New()
 

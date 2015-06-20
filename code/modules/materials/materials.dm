@@ -255,6 +255,8 @@ var/list/name_to_material
 	stack_origin_tech = list(TECH_MATERIAL = 2, TECH_PHORON = 2)
 	door_icon_base = "stone"
 
+/*
+// Commenting this out while fires are so spectacularly lethal, as I can't seem to get this balanced appropriately.
 /material/phoron/combustion_effect(var/turf/T, var/temperature, var/effect_multiplier)
 	if(isnull(ignition_point))
 		return 0
@@ -268,6 +270,7 @@ var/list/name_to_material
 		spawn (0)
 			target_tile.hotspot_expose(temperature, 400)
 	return round(totalPhoron/100)
+*/
 
 /material/stone
 	name = "sandstone"
