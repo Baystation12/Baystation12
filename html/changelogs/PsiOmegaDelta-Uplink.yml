@@ -1,0 +1,4 @@
+author: PsiOmegaDelta
+delete-after: True
+changes: 
+  - tweak: "The traitor uplink no longer displays all items in a long list, instead has categories which when accessed shows the relevant items."
