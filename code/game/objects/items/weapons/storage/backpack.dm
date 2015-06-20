@@ -241,8 +241,10 @@
 	name = "captain's satchel"
 	desc = "An exclusive satchel for Nanotrasen officers."
 	icon_state = "satchel-cap"
-	item_state = "captainpack"
-	item_state_slots = null
+	item_state_slots = list(
+		slot_l_hand_str = "satchel-cap",
+		slot_r_hand_str = "satchel-cap",
+		)
 
 //ERT backpacks.
 /obj/item/weapon/storage/backpack/ert
