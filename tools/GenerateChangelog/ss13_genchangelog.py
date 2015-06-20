@@ -126,6 +126,7 @@ if failed_cache_read and os.path.isfile(args.targetFile):
                 all_changelog_entries[date] = entry
         
 del_after = []
+errors = False
 print('Reading changelogs...')
 for fileName in glob.glob(os.path.join(args.ymlDir, "*.yml")):
     name, ext = os.path.splitext(os.path.basename(fileName))
@@ -146,6 +147,7 @@ for fileName in glob.glob(os.path.join(args.ymlDir, "*.yml")):
             if change not in author_entries:
                 (change_type, _) = dictToTuples(change)[0]
                 if change_type not in validPrefixes:
+                    errors = True
                     print('  {0}: Invalid prefix {1}'.format(fileName, change_type), file=sys.stderr)
                 author_entries += [change]
                 new += 1
@@ -208,3 +210,6 @@ if len(del_after):
         if os.path.isfile(fileName):
             print(' Deleting {0} (delete-after set)...'.format(fileName))
             os.remove(fileName)
+
+if errors:
+    sys.exit(1)

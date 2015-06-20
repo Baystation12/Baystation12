@@ -91,6 +91,7 @@ var/list/gamemode_cache = list()
 	var/guests_allowed = 1
 	var/debugparanoid = 0
 
+	var/serverurl
 	var/server
 	var/banappeals
 	var/wikiurl
@@ -163,6 +164,7 @@ var/list/gamemode_cache = list()
 
 	var/use_irc_bot = 0
 	var/irc_bot_host = ""
+	var/irc_bot_export = 0 // whether the IRC bot in use is a Bot32 (or similar) instance; Bot32 uses world.Export() instead of nudge.py/libnudge
 	var/main_irc = ""
 	var/admin_irc = ""
 	var/python_path = "" //Path to the python executable.  Defaults to "python" on windows and "/usr/bin/env python2" on unix
@@ -384,6 +386,9 @@ var/list/gamemode_cache = list()
 				if ("hostedby")
 					config.hostedby = value
 
+				if ("serverurl")
+					config.serverurl = value
+
 				if ("server")
 					config.server = value
 
@@ -498,6 +503,9 @@ var/list/gamemode_cache = list()
 
 				if("use_irc_bot")
 					use_irc_bot = 1
+
+				if("irc_bot_export")
+					irc_bot_export = 1
 
 				if("ticklag")
 					Ticklag = text2num(value)

@@ -76,12 +76,12 @@
 
 		if(icon_state == icon_badge)
 			icon_state = icon_nobadge
-			usr << "You unclip the badge from the vest."
+			usr << "You conceal \the [src]'s badge."
 		else if(icon_state == icon_nobadge)
 			icon_state = icon_badge
-			usr << "You clip the badge to the vest."
+			usr << "You reveal \the [src]'s badge."
 		else
-			usr << "You can't find a badge for [src]."
+			usr << "\The [src] does not have a vest badge."
 			return
 		update_clothing_icon()
 
