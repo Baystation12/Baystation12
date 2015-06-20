@@ -1,11 +1,10 @@
 /mob/living/carbon/New()
-	create_reagents(1000)
-	var/datum/reagents/R1 = new/datum/reagents(1000)
-	var/datum/reagents/R2 = new/datum/reagents(1000)
-	ingested = R1
-	touching = R2
-	R1.my_atom = src
-	R2.my_atom = src
+	//setup reagent holders
+	bloodstr = new/datum/reagents/metabolism(1000, src, CHEM_BLOOD)
+	ingested = new/datum/reagents/metabolism(1000, src, CHEM_INGEST)
+	touching = new/datum/reagents/metabolism(1000, src, CHEM_TOUCH)
+	reagents = bloodstr
+
 	..()
 
 /mob/living/carbon/Life()
@@ -259,8 +258,8 @@
 				src.sleeping = max(0,src.sleeping-5)
 				if(src.sleeping == 0)
 					src.resting = 0
-				M.visible_message("<span class='notice'>[M] shakes [src] trying to wake [t_him] up!", \
-									"<span class='notice'>You shake [src] trying to wake [t_him] up!")
+				M.visible_message("<span class='notice'>[M] shakes [src] trying to wake [t_him] up!</span>", \
+									"<span class='notice'>You shake [src] trying to wake [t_him] up!</span>")
 			else
 				if(istype(H))
 					H.species.hug(H,src)

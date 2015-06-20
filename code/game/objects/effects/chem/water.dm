@@ -30,7 +30,7 @@
 				else if(ismob(A) && !M)
 					M = A
 			if(M)
-				reagents.splash_mob(M, reagents.total_volume)
+				reagents.trans_to(M, reagents.total_volume)
 				break
 			if(T == get_turf(target))
 				break

@@ -257,6 +257,8 @@ var/list/name_to_material
 	stack_origin_tech = "phorontech=2;materials=2"
 	door_icon_base = "stone"
 
+/*
+// Commenting this out while fires are so spectacularly lethal, as I can't seem to get this balanced appropriately.
 /material/phoron/combustion_effect(var/turf/T, var/temperature, var/effect_multiplier)
 	if(isnull(ignition_point))
 		return 0
@@ -270,6 +272,7 @@ var/list/name_to_material
 		spawn (0)
 			target_tile.hotspot_expose(temperature, 400)
 	return round(totalPhoron/100)
+*/
 
 /material/stone
 	name = "sandstone"
@@ -292,6 +295,7 @@ var/list/name_to_material
 /material/steel
 	name = DEFAULT_WALL_MATERIAL
 	stack_type = /obj/item/stack/material/steel
+	integrity = 150
 	icon_base = "solid"
 	icon_reinf = "reinf_over"
 	icon_colour = "#666666"
@@ -305,7 +309,7 @@ var/list/name_to_material
 /material/plasteel
 	name = "plasteel"
 	stack_type = /obj/item/stack/material/plasteel
-	integrity = 800
+	integrity = 400
 	melting_point = 6000
 	icon_base = "solid"
 	icon_reinf = "reinf_over"
@@ -455,6 +459,12 @@ var/list/name_to_material
 	hardness = 10
 	weight = 12
 	stack_origin_tech = "materials=3"
+
+/material/plastic/holographic
+	name = "holographic plastic"
+	display_name = "plastic"
+	stack_type = null
+	shard_type = SHARD_NONE
 
 /material/osmium
 	name = "osmium"

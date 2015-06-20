@@ -70,9 +70,9 @@
 	glass_name = "glass of ethanol"
 	glass_desc = "A well-known alcohol with a variety of applications."
 
-/datum/reagent/ethanol/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
-	M.adjust_fire_stacks(removed / 15)
-	return
+/datum/reagent/ethanol/touch_mob(var/mob/living/L, var/amount)
+	if(istype(L))
+		L.adjust_fire_stacks(amount / 15)
 
 /datum/reagent/ethanol/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.adjustToxLoss(removed * 2 * toxicity)
@@ -318,7 +318,7 @@
 			return
 
 	if(volume < meltdose) // Not enough to melt anything
-		M.take_organ_damage(removed * power * 0.2)
+		M.take_organ_damage(0, removed * power * 0.2) //burn damage, since it causes chemical burns. Acid doesn't make bones shatter, like brute trauma would.
 		return
 	if(!M.unacidable && removed > 0)
 		if(istype(M, /mob/living/carbon/human) && volume >= meltdose)
