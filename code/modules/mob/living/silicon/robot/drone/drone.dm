@@ -257,12 +257,13 @@
 	lawupdate = 0
 	src << "<b>Systems rebooted</b>. Loading base pattern maintenance protocol... <b>loaded</b>."
 	full_law_reset()
-	src << "<br><b>You are a maintenance drone, a tiny-brained robotic repair machine</b>."
+	welcome_drone()
+
+/mob/living/silicon/robot/drone/proc/welcome_drone()
+	src << "<b>You are a maintenance drone, a tiny-brained robotic repair machine</b>."
 	src << "You have no individual will, no personality, and no drives or urges other than your laws."
-	src << "Use <b>:d</b> to talk to other drones and <b>say</b> to speak silently to your nearby fellows."
 	src << "Remember,  you are <b>lawed against interference with the crew</b>. Also remember, <b>you DO NOT take orders from the AI.</b>"
-	src << "<b>Don't invade their worksites, don't steal their resources, don't tell them about the changeling in the toilets.</b>"
-	src << "<b>If a crewmember has noticed you, <i>you are probably breaking your third law</i></b>."
+	src << "Use <b>:d</b> to talk to other drones and <b>say</b> to speak silently to your nearby fellows."
 
 /mob/living/silicon/robot/drone/start_pulling(var/atom/movable/AM)
 
@@ -292,6 +293,12 @@
 	module_type = /obj/item/weapon/robot_module/drone/construction
 	can_pull_size = 5
 	can_pull_mobs = 1
+
+/mob/living/silicon/robot/drone/construction/welcome_drone()
+	src << "<b>You are a construction drone, an autonomous engineering and fabrication system.</b>."
+	src << "You are assigned to a Sol Central construction project. The name is irrelevant. Your task is to complete construction and subsystem integration as soon as possible."
+	src << "Use <b>:d</b> to talk to other drones and <b>say</b> to speak silently to your nearby fellows."
+	src << "<b>You do not follow orders from anyone; not the AI, not humans, and not other synthetics.</b>."
 
 /mob/living/silicon/robot/drone/construction/init()
 	..()
