@@ -302,22 +302,30 @@
 /obj/machinery/alarm/update_icon()
 	if(wiresexposed)
 		icon_state = "alarmx"
+		set_light(0)
 		return
 	if((stat & (NOPOWER|BROKEN)) || shorted)
 		icon_state = "alarmp"
+		set_light(0)
 		return
 
 	var/icon_level = danger_level
 	if (alarm_area.atmosalm)
 		icon_level = max(icon_level, 1)	//if there's an atmos alarm but everything is okay locally, no need to go past yellow
 
+	var/new_color = null
 	switch(icon_level)
 		if (0)
 			icon_state = "alarm0"
+			new_color = "#03A728"
 		if (1)
 			icon_state = "alarm2" //yes, alarm2 is yellow alarm
+			new_color = "#EC8B2F"
 		if (2)
 			icon_state = "alarm1"
+			new_color = "#DA0205"
+	
+	set_light(l_range = 2, l_power = 0.5, l_color = new_color)
 
 /obj/machinery/alarm/receive_signal(datum/signal/signal)
 	if(stat & (NOPOWER|BROKEN))
@@ -888,8 +896,11 @@ FIRE ALARM
 	var/last_process = 0
 	var/wiresexposed = 0
 	var/buildstage = 2 // 2 = complete, 1 = no wires,  0 = circuit gone
+	var/seclevel
 
 /obj/machinery/firealarm/update_icon()
+	overlays.Cut()
+
 	if(wiresexposed)
 		switch(buildstage)
 			if(2)
@@ -898,17 +909,28 @@ FIRE ALARM
 				icon_state="fire_b1"
 			if(0)
 				icon_state="fire_b0"
-
+		set_light(0)
 		return
 
 	if(stat & BROKEN)
 		icon_state = "firex"
+		set_light(0)
 	else if(stat & NOPOWER)
 		icon_state = "firep"
-	else if(!src.detecting)
-		icon_state = "fire1"
+		set_light(0)
 	else
-		icon_state = "fire0"
+		if(!src.detecting)
+			icon_state = "fire1"
+			set_light(l_range = 4, l_power = 2, l_color = "#ff0000")
+		else
+			icon_state = "fire0"
+			switch(seclevel)
+				if("green")	set_light(l_range = 2, l_power = 0.5, l_color = "#00ff00")
+				if("blue")	set_light(l_range = 2, l_power = 0.5, l_color = "#1024A9")
+				if("red")	set_light(l_range = 4, l_power = 2, l_color = "#ff0000")
+				if("delta")	set_light(l_range = 4, l_power = 2, l_color = "#FF6633")
+		
+		src.overlays += image('icons/obj/monitors.dmi', "overlay_[seclevel]")
 
 /obj/machinery/firealarm/fire_act(datum/gas_mixture/air, temperature, volume)
 	if(src.detecting)
@@ -1120,14 +1142,14 @@ FIRE ALARM
 		pixel_x = (dir & 3)? 0 : (dir == 4 ? -24 : 24)
 		pixel_y = (dir & 3)? (dir ==1 ? -24 : 24) : 0
 
+/obj/machinery/firealarm/proc/set_security_level(var/newlevel)
+	if(seclevel != newlevel)
+		seclevel = newlevel
+		update_icon()
+
 /obj/machinery/firealarm/initialize()
 	if(z in config.contact_levels)
-		if(security_level)
-			src.overlays += image('icons/obj/monitors.dmi', "overlay_[get_security_level()]")
-		else
-			src.overlays += image('icons/obj/monitors.dmi', "overlay_green")
-
-	update_icon()
+		set_security_level(security_level? get_security_level() : "green")
 
 /*
 FIRE ALARM CIRCUIT
