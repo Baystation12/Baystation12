@@ -249,11 +249,8 @@ var/specops_shuttle_timeleft = 0
 /obj/machinery/computer/specops_shuttle/attack_ai(var/mob/user as mob)
 	return attack_hand(user)
 
-/obj/machinery/computer/specops_shuttle/attackby(I as obj, user as mob)
-	if(istype(I,/obj/item/weapon/card/emag))
-		user << "<span class='notice'>The electronic systems in this console are far too advanced for your primitive hacking peripherals.</span>"
-	else
-		return attack_hand(user)
+/obj/machinery/computer/specops_shuttle/emag_act(var/remaining_charges, var/mob/user)
+	user << "<span class='notice'>The electronic systems in this console are far too advanced for your primitive hacking peripherals.</span>"
 
 /obj/machinery/computer/specops_shuttle/attack_hand(var/mob/user as mob)
 	if(!allowed(user))
@@ -291,8 +288,8 @@ var/specops_shuttle_timeleft = 0
 			usr << "<span class='notice'>Central Command will not allow the Special Operations shuttle to return yet.</span>"
 			if(world.timeofday <= specops_shuttle_timereset)
 				if (((world.timeofday - specops_shuttle_timereset)/10) > 60)
-					usr << "<span class='notice'>[-((world.timeofday - specops_shuttle_timereset)/10)/60] minutes remain!"
-				usr << "<span class='notice'>[-(world.timeofday - specops_shuttle_timereset)/10] seconds remain!"
+					usr << "<span class='notice'>[-((world.timeofday - specops_shuttle_timereset)/10)/60] minutes remain!</span>"
+				usr << "<span class='notice'>[-(world.timeofday - specops_shuttle_timereset)/10] seconds remain!</span>"
 			return
 
 		usr << "<span class='notice'>The Special Operations shuttle will arrive at Central Command in [(SPECOPS_MOVETIME/10)] seconds.</span>"

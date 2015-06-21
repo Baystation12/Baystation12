@@ -159,7 +159,7 @@
 	if (user != O)
 		for(var/mob/B in viewers(user, 3))
 			if ((B.client && !( B.blinded )))
-				B << "<span class='warning'>\The [user] stuffs [O] into [src]!"
+				B << "<span class='warning'>\The [user] stuffs [O] into [src]!</span>"
 	return
 
 

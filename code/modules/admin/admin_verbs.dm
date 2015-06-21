@@ -177,6 +177,10 @@ var/list/admin_verbs_debug = list(
 	/client/proc/toggledebuglogs,
 	/client/proc/SDQL_query,
 	/client/proc/SDQL2_query,
+	/client/proc/Jump,
+	/client/proc/jumptomob,
+	/client/proc/jumptocoord,
+	/client/proc/dsay
 	)
 
 var/list/admin_verbs_paranoid_debug = list(
@@ -735,7 +739,7 @@ var/list/admin_verbs_mentor = list(
 	var/mob/living/silicon/S = input("Select silicon.", "Manage Silicon Laws") as null|anything in silicon_mob_list
 	if(!S) return
 
-	var/obj/nano_module/law_manager/L = new(S)
+	var/datum/nano_module/law_manager/L = new(S)
 	L.ui_interact(usr, state = admin_state)
 	admin_log_and_message_admins("has opened [S]'s law manager.")
 	feedback_add_details("admin_verb","MSL") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!

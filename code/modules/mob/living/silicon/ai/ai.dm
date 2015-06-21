@@ -430,17 +430,6 @@ var/list/ai_verbs_default = list(
 
 	return
 
-/mob/living/silicon/ai/meteorhit(obj/O as obj)
-	for(var/mob/M in viewers(src, null))
-		M.show_message(text("\red [] has been hit by []", src, O), 1)
-		//Foreach goto(19)
-	if (health > 0)
-		adjustBruteLoss(30)
-		if ((O.icon_state == "flaming"))
-			adjustFireLoss(40)
-		updatehealth()
-	return
-
 /mob/living/silicon/ai/reset_view(atom/A)
 	if(camera)
 		camera.set_light(0)
@@ -656,16 +645,20 @@ var/list/ai_verbs_default = list(
 	set desc = "Augment visual feed with internal sensor overlays"
 	toggle_sensor_mode()
 
-/mob/living/silicon/ai/proc/check_unable(var/flags = 0)
+/mob/living/silicon/ai/proc/check_unable(var/flags = 0, var/feedback = 1)
 	if(stat == DEAD)
-		src << "<span class='warning'>You are dead!</span>"
+		if(feedback) src << "<span class='warning'>You are dead!</span>"
+		return 1
+
+	if(aiRestorePowerRoutine)
+		if(feedback) src << "<span class='warning'>You lack power!</span>"
 		return 1
 
 	if((flags & AI_CHECK_WIRELESS) && src.control_disabled)
-		src << "<span class='warning'>Wireless control is disabled!</span>"
+		if(feedback) src << "<span class='warning'>Wireless control is disabled!</span>"
 		return 1
 	if((flags & AI_CHECK_RADIO) && src.aiRadio.disabledAi)
-		src << "<span class='warning'>System Error - Transceiver Disabled!</span>"
+		if(feedback) src << "<span class='warning'>System Error - Transceiver Disabled!</span>"
 		return 1
 	return 0
 

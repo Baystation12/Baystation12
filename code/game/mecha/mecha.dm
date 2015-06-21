@@ -648,10 +648,6 @@
 	return
 */
 
-//TODO
-/obj/mecha/meteorhit()
-	return ex_act(rand(1,3))//should do for now
-
 /obj/mecha/emp_act(severity)
 	if(get_charge())
 		use_power((cell.charge/2)/severity)
@@ -690,13 +686,14 @@
 
 /obj/mecha/attackby(obj/item/weapon/W as obj, mob/user as mob)
 
-
+	/*
 	if(istype(W, /obj/item/device/mmi))
 		if(mmi_move_inside(W,user))
 			user << "[src]-MMI interface initialized successfuly"
 		else
 			user << "[src]-MMI interface initialization failed."
 		return
+	*/
 
 	if(istype(W, /obj/item/mecha_parts/mecha_equipment))
 		var/obj/item/mecha_parts/mecha_equipment/E = W

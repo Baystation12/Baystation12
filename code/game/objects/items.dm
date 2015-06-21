@@ -151,7 +151,7 @@
 		if (user.hand)
 			temp = H.organs_by_name["l_hand"]
 		if(temp && !temp.is_usable())
-			user << "<span class='notice'>You try to move your [temp.name], but cannot!"
+			user << "<span class='notice'>You try to move your [temp.name], but cannot!</span>"
 			return
 
 	if (istype(src.loc, /obj/item/weapon/storage))
@@ -608,3 +608,6 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 
 /obj/item/proc/pwr_drain()
 	return 0 // Process Kill
+
+/obj/item/proc/resolve_attackby(atom/A, mob/source)
+	return A.attackby(src,source)

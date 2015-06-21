@@ -425,7 +425,7 @@ Would like to add a law like "Law x is _______" where x = a number, and _____ is
 	if(botEmagChance)
 		for(var/obj/machinery/bot/bot in machines)
 			if(prob(botEmagChance))
-				bot.Emag()
+				bot.emag_act(1)
 
 	/*
 

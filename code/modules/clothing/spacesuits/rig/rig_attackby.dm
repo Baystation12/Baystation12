@@ -11,19 +11,10 @@
 		return chest.attackby(W,user)
 
 	// Lock or unlock the access panel.
-	if(istype(W, /obj/item/weapon/card) || istype(W, /obj/item/device/pda))
-
+	if(W.GetID())
 		if(subverted)
 			locked = 0
 			user << "<span class='danger'>It looks like the locking system has been shorted out.</span>"
-			return
-		else if(istype(W, /obj/item/weapon/card/emag))
-			locked_dna = null
-			req_access.Cut()
-			req_one_access.Cut()
-			locked = 0
-			subverted = 1
-			user << "<span class='danger'>You short out the access protocol for the suit.</span>"
 			return
 
 		if((!req_access || !req_access.len) && (!req_one_access || !req_one_access.len))
@@ -194,3 +185,13 @@
 		if(shock(user)) //Handles removing charge from the cell, as well. No need to do that here.
 			return
 	..()
+
+/obj/item/weapon/rig/emag_act(var/remaining_charges, var/mob/user)
+	if(!subverted)
+		locked_dna = null
+		req_access.Cut()
+		req_one_access.Cut()
+		locked = 0
+		subverted = 1
+		user << "<span class='danger'>You short out the access protocol for the suit.</span>"
+		return 1

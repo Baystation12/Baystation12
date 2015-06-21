@@ -504,23 +504,6 @@
 				update_icon()
 			else
 				user << "<span class='warning'>Access denied.</span>"
-	else if (istype(W, /obj/item/weapon/card/emag) && !(emagged || hacker))		// trying to unlock with an emag card
-		if(opened)
-			user << "You must close the cover to swipe an ID card."
-		else if(wiresexposed)
-			user << "You must close the panel first"
-		else if(stat & (BROKEN|MAINT))
-			user << "Nothing happens."
-		else
-			flick("apc-spark", src)
-			if (do_after(user,6))
-				if(prob(50))
-					emagged = 1
-					locked = 0
-					user << "<span class='notice'>You emag the APC interface.</span>"
-					update_icon()
-				else
-					user << "<span class='warning'>You fail to [ locked ? "unlock" : "lock"] the APC interface.</span>"
 	else if (istype(W, /obj/item/stack/cable_coil) && !terminal && opened && has_electronics!=2)
 		if (src.loc:intact)
 			user << "<span class='warning'>You must remove the floor plating in front of the APC first.</span>"
@@ -596,14 +579,14 @@
 					"<span class='notice'>You disassembled the broken APC frame.</span>",\
 					"You hear welding.")
 			else
-				new /obj/item/apc_frame(loc)
+				new /obj/item/frame/apc(loc)
 				user.visible_message(\
 					"<span class='warning'>[src] has been cut from the wall by [user.name] with the weldingtool.</span>",\
 					"<span class='notice'>You cut the APC frame from the wall.</span>",\
 					"You hear welding.")
 			qdel(src)
 			return
-	else if (istype(W, /obj/item/apc_frame) && opened && emagged)
+	else if (istype(W, /obj/item/frame/apc) && opened && emagged)
 		emagged = 0
 		if (opened==2)
 			opened = 1
@@ -612,7 +595,7 @@
 			"<span class='notice'>You replace the damaged APC frontal panel with a new one.</span>")
 		qdel(W)
 		update_icon()
-	else if (istype(W, /obj/item/apc_frame) && opened && ((stat & BROKEN) || hacker))
+	else if (istype(W, /obj/item/frame/apc) && opened && ((stat & BROKEN) || hacker))
 		if (has_electronics)
 			user << "<span class='warning'>You cannot repair this APC until you remove the electronics still inside.</span>"
 			return
@@ -653,6 +636,26 @@
 				"You hear bang")
 
 // attack with hand - remove cell (if cover open) or interact with the APC
+
+/obj/machinery/power/apc/emag_act(var/remaining_charges, var/mob/user)
+	if (!(emagged || hacker))		// trying to unlock with an emag card
+		if(opened)
+			user << "You must close the cover to swipe an ID card."
+		else if(wiresexposed)
+			user << "You must close the panel first"
+		else if(stat & (BROKEN|MAINT))
+			user << "Nothing happens."
+		else
+			flick("apc-spark", src)
+			if (do_after(user,6))
+				if(prob(50))
+					emagged = 1
+					locked = 0
+					user << "<span class='notice'>You emag the APC interface.</span>"
+					update_icon()
+				else
+					user << "<span class='warning'>You fail to [ locked ? "unlock" : "lock"] the APC interface.</span>"
+				return 1
 
 /obj/machinery/power/apc/attack_hand(mob/user)
 //	if (!can_use(user)) This already gets called in interact() and in topic()

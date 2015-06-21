@@ -488,7 +488,7 @@ turf/simulated/floor/proc/update_icon()
 			return
 		else
 			if(is_wood_floor())
-				user << "<span class='notice'>You unscrew the planks.<span>"
+				user << "<span class='notice'>You unscrew the planks.</span>"
 				new floor_type(src)
 
 		make_plating()

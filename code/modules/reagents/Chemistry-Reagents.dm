@@ -36,13 +36,14 @@
 /datum/reagent/proc/remove_self(var/amount) // Shortcut
 	holder.remove_reagent(id, amount)
 
-/datum/reagent/proc/touch_mob(var/mob/M) // This doesn't apply to being splashed - this is for, e.g. extinguishers and sprays. The difference is that reagent is not on the mob - it's in another object.
+// This doesn't apply to skin contact - this is for, e.g. extinguishers and sprays. The difference is that reagent is not directly on the mob's skin - it might just be on their clothing.
+/datum/reagent/proc/touch_mob(var/mob/M, var/amount)
 	return
 
-/datum/reagent/proc/touch_obj(var/obj/O) // Acid melting, cleaner cleaning, etc
+/datum/reagent/proc/touch_obj(var/obj/O, var/amount) // Acid melting, cleaner cleaning, etc
 	return
 
-/datum/reagent/proc/touch_turf(var/turf/T) // Cleaner cleaning, lube lubbing, etc, all go here
+/datum/reagent/proc/touch_turf(var/turf/T, var/amount) // Cleaner cleaning, lube lubbing, etc, all go here
 	return
 
 /datum/reagent/proc/on_mob_life(var/mob/living/carbon/M, var/alien, var/location) // Currently, on_mob_life is called on carbons. Any interaction with non-carbon mobs (lube) will need to be done in touch_mob.
@@ -50,7 +51,7 @@
 		return
 	if(!affects_dead && M.stat == DEAD)
 		return
-	if(overdose && (location == CHEM_BLOOD))
+	if(overdose && (dose > overdose) && (location == CHEM_BLOOD))
 		overdose(M, alien)
 	var/removed = metabolism
 	if(ingest_met && (location == CHEM_INGEST))

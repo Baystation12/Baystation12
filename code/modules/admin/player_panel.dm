@@ -410,43 +410,11 @@
 				dat += "Launching now..."
 
 		dat += "<a href='?src=\ref[src];delay_round_end=1'>[ticker.delay_end ? "End Round Normally" : "Delay Round End"]</a><br>"
-
-		//todo
-
+		dat += "<hr>"
+		for(var/antag_type in all_antag_types)
+			var/datum/antagonist/A = all_antag_types[antag_type]
+			dat += A.get_check_antag_output(src)
 		dat += "</body></html>"
 		usr << browse(dat, "window=roundstatus;size=400x500")
 	else
 		alert("The game hasn't started yet!")
-
-/proc/check_role_table(name, list/members, admins, show_objectives=1)
-	var/txt = "<br><table cellspacing=5><tr><td><b>[name]</b></td><td></td></tr>"
-	for(var/datum/mind/M in members)
-		txt += check_role_table_row(M.current, admins, show_objectives)
-	txt += "</table>"
-	return txt
-
-/proc/check_role_table_row(mob/M, admins=src, show_objectives)
-	if (!istype(M))
-		return "<tr><td><i>Not found!</i></td></tr>"
-
-	var/txt = {"
-		<tr>
-			<td>
-				<a href='?src=\ref[admins];adminplayeropts=\ref[M]'>[M.real_name]</a>
-				[M.client ? "" : " <i>(logged out)</i>"]
-				[M.is_dead() ? " <b><font color='red'>(DEAD)</font></b>" : ""]
-			</td>
-			<td>
-				<a href='?src=\ref[usr];priv_msg=\ref[M]'>PM</a>
-			</td>
-	"}
-
-	if (show_objectives)
-		txt += {"
-			<td>
-				<a href='?src=\ref[admins];traitor=\ref[M]'>Show Objective</a>
-			</td>
-		"}
-
-	txt += "</tr>"
-	return txt

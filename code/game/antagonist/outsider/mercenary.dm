@@ -7,8 +7,9 @@ var/datum/antagonist/mercenary/mercs
 	bantype = "operative"
 	role_text_plural = "Mercenaries"
 	landmark_id = "Syndicate-Spawn"
+	leader_welcome_text = "You are the leader of the mercenary strikeforce; hail to the chief. Use :t to speak to your underlings."
 	welcome_text = "To speak on the strike team's private channel use :t."
-	flags = ANTAG_OVERRIDE_JOB | ANTAG_CLEAR_EQUIPMENT | ANTAG_CHOOSE_NAME | ANTAG_HAS_NUKE | ANTAG_SET_APPEARANCE
+	flags = ANTAG_OVERRIDE_JOB | ANTAG_CLEAR_EQUIPMENT | ANTAG_CHOOSE_NAME | ANTAG_HAS_NUKE | ANTAG_SET_APPEARANCE | ANTAG_HAS_LEADER
 	max_antags = 4
 	max_antags_round = 6
 	id_type = /obj/item/weapon/card/id/syndicate
@@ -19,9 +20,10 @@ var/datum/antagonist/mercenary/mercs
 
 /datum/antagonist/mercenary/create_global_objectives()
 	if(!..())
-		return
+		return 0
 	global_objectives = list()
 	global_objectives |= new /datum/objective/nuclear
+	return 1
 
 /datum/antagonist/mercenary/equip(var/mob/living/carbon/human/player)
 
@@ -50,7 +52,7 @@ var/datum/antagonist/mercenary/mercs
 		if(spawnpos > starting_locations.len)
 			spawnpos = 1
 
-/datum/antagonist/mercenary/make_nuke()
+/datum/antagonist/mercenary/create_nuke()
 	..()
 	// Create the radio.
 	var/obj/effect/landmark/uplinkdevice = locate("landmark*Syndicate-Uplink")

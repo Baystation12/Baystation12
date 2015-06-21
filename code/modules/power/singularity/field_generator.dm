@@ -166,9 +166,6 @@ field_generator power level display
 	else
 		..()
 
-/obj/machinery/containment_field/meteorhit()
-	return 0
-
 /obj/machinery/field_generator/bullet_act(var/obj/item/projectile/Proj)
 	if(istype(Proj, /obj/item/projectile/beam))
 		power += Proj.damage * EMITTER_DAMAGE_POWER_TRANSFER

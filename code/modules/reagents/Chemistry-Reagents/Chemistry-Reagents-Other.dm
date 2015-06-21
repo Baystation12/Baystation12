@@ -67,10 +67,7 @@
 
 /datum/reagent/paint/touch_mob(var/mob/M)
 	if(istype(M) && !istype(M, /mob/dead)) //painting ghosts: not allowed
-		M.color = color
-
-/datum/reagent/paint/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
-	M.color = color
+		M.color = color //maybe someday change this to paint only clothes and exposed body parts for human mobs.
 
 /datum/reagent/paint/get_data()
 	return color
@@ -258,9 +255,9 @@
 			remove_self(5)
 	return
 
-/datum/reagent/thermite/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
-	M.adjust_fire_stacks(removed * 0.2)
-	return
+/datum/reagent/thermite/touch_mob(var/mob/living/L, var/amount)
+	if(istype(L))
+		L.adjust_fire_stacks(amount / 5)
 
 /datum/reagent/thermite/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.adjustFireLoss(3 * removed)
