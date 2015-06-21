@@ -237,7 +237,7 @@
 
 
 /obj/item/weapon/storage/secure/briefcase/money
-	name = "Suspicious Briefcase"
+	name = "suspicious briefcase"
 	desc = "An ominous briefcase that has the unmistakeable smell of old, stale, cigarette smoke, and gives those who look at it a bad feeling."
 
 
