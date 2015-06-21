@@ -314,6 +314,7 @@
 	icon = 'icons/obj/toy.dmi'
 	icon_state = "foamdart"
 	w_class = 1.0
+	slot_flags = SLOT_EARS
 
 /obj/effect/foam_dart_dummy
 	name = ""
@@ -486,6 +487,8 @@
  	icon = 'icons/obj/toy.dmi'
  	icon_state = "bosunwhistle"
  	var/cooldown = 0
+	w_class = 1
+	slot_flags = SLOT_EARS
 
 /obj/item/toy/bosunwhistle/attack_self(mob/user as mob)
 	if(cooldown < world.time - 35)
