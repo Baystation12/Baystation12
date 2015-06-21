@@ -234,3 +234,25 @@
 	..()
 	new /obj/item/rig_module/electrowarfare_suite(src)
 	new /obj/item/rig_module/voice(src)
+
+
+
+/obj/item/weapon/storage/secure/briefcase/money
+	name = "Suspicious Briefcase"
+	desc = "An ominuous looking briefcase which reeks of old cigarette smoke and gives an unnerving feeling to those who look at it."
+
+
+
+
+/obj/item/weapon/storage/secure/briefcase/money/New()
+	..()
+	new /obj/item/weapon/spacecash/c1000(src)
+	new /obj/item/weapon/spacecash/c1000(src)
+	new /obj/item/weapon/spacecash/c1000(src)
+	new /obj/item/weapon/spacecash/c1000(src)
+	new /obj/item/weapon/spacecash/c1000(src)
+	new /obj/item/weapon/spacecash/c1000(src)
+	new /obj/item/weapon/spacecash/c1000(src)
+	new /obj/item/weapon/spacecash/c1000(src)
+	new /obj/item/weapon/spacecash/c1000(src)
+	new /obj/item/weapon/spacecash/c1000(src)
