@@ -23,6 +23,10 @@
 		docking_controller_offsite = locate(docking_controller_tag_offsite)
 		if(!istype(docking_controller_offsite))
 			world << "<span class='danger'>warning: shuttle with docking tag [docking_controller_offsite] could not find it's controller!</span>"
+	if (!location)
+		docking_controller = docking_controller_station
+	else
+		docking_controller = docking_controller_offsite
 
 /datum/shuttle/ferry/multidock/move(var/area/origin,var/area/destination)
 	..(origin, destination)
