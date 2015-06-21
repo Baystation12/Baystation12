@@ -1,5 +1,16 @@
 /datum/antagonist/proc/create_global_objectives()
-	return 	!((global_objectives && global_objectives.len) || config.objectives_disabled)
+	if(config.objectives_disabled)
+		return 0
+	if(global_objectives && global_objectives.len)
+		return 0
+	return 1
+
+/datum/antagonist/proc/create_objectives(var/datum/mind/player)
+	if(config.objectives_disabled)
+		return 0
+	if(create_global_objectives())
+		player.objectives |= global_objectives
+	return 1
 
 /datum/antagonist/proc/get_special_objective_text()
 	return ""
@@ -12,8 +23,6 @@
 		for(var/datum/objective/O in global_objectives)
 			if(!O.completed && !O.check_completion())
 				result = 0
-			else
-				O.completed = 1 //Will this break anything?
 		if(result && victory_text)
 			world << "<span class='danger'><font size = 3>[victory_text]</span>"
 			if(victory_feedback_tag) feedback_set_details("round_end_result","[victory_feedback_tag]")

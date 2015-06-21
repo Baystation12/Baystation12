@@ -575,7 +575,7 @@
 		usr << "[src] is empty."
 		return
 
-	usr << "<span class='notice'>[seed.display_name]</span> are growing here.</span>"
+	usr << "<span class='notice'>[seed.display_name] are growing here.</span>"
 
 	if(!Adjacent(usr))
 		return

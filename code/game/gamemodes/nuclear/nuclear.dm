@@ -14,8 +14,6 @@ var/list/nuke_disks = list()
 	end_on_antag_death = 1
 	antag_tag = MODE_MERCENARY
 
-	uplink_welcome = "Corporate Backed Uplink Console:"
-	uplink_uses = 40
 	var/nuke_off_station = 0 //Used for tracking if the syndies actually haul the nuke to the station
 	var/syndies_didnt_escape = 0 //Used for tracking if the syndies got the shuttle off of the z-level
 

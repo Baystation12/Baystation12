@@ -217,10 +217,6 @@
 	health = 0
 	healthcheck()
 
-/obj/effect/energy_net/meteorhit()
-	health = 0
-	healthcheck()
-
 /obj/effect/energy_net/attack_hand(var/mob/user)
 
 	var/mob/living/carbon/human/H = user

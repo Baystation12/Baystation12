@@ -399,10 +399,6 @@
 		qdel(src)
 		return
 
-	meteorhit()
-		qdel(src)
-		return
-
 	attack_hand(mob/user as mob)
 		user.set_machine(src)
 		var/dat = {"<html>

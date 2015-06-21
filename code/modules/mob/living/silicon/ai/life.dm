@@ -1,5 +1,5 @@
 /mob/living/silicon/ai/Life()
-	if (src.stat == 2)
+	if (src.stat == DEAD)
 		return
 	else //I'm not removing that shitton of tabs, unneeded as they are. -- Urist
 		//Being dead doesn't mean your temperature never changes
@@ -20,10 +20,6 @@
 		if(!psupply)
 			create_powersupply()
 
-		if (src.machine)
-			if (!( src.machine.check_eye(src) ))
-				src.reset_view(null)
-
 		// Handle power damage (oxy)
 		if(aiRestorePowerRoutine != 0 && !APU_power)
 			// Lose power
@@ -33,8 +29,8 @@
 			aiRestorePowerRoutine = 0 // Necessary if AI activated it's APU AFTER losing primary power.
 			adjustOxyLoss(-1)
 
-		// Handle EMP-stun
-		handle_stunned()
+		handle_stunned()	// Handle EMP-stun
+		lying = 0			// Handle lying down
 
 		malf_process()
 
@@ -180,3 +176,4 @@
 /mob/living/silicon/ai/rejuvenate()
 	..()
 	add_ai_verbs(src)
+

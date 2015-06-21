@@ -38,7 +38,7 @@
 	icon = 'icons/obj/items.dmi'
 	icon_state = "screwdriver"
 	flags = CONDUCT
-	slot_flags = SLOT_BELT
+	slot_flags = SLOT_BELT | SLOT_EARS
 	force = 5.0
 	w_class = 1.0
 	throwforce = 5.0
@@ -262,6 +262,8 @@
 
 //Removes fuel from the welding tool. If a mob is passed, it will perform an eyecheck on the mob. This should probably be renamed to use()
 /obj/item/weapon/weldingtool/proc/remove_fuel(var/amount = 1, var/mob/M = null)
+	if(!welding)
+		return 0
 	if(get_fuel() >= amount)
 		reagents.remove_reagent("fuel", amount)
 		if(M)
@@ -292,7 +294,7 @@
 	var/turf/T = get_turf(src)
 	//If we're turning it on
 	if(set_welding && !welding)
-		if (remove_fuel(1))
+		if (get_fuel() > 0)
 			if(M)
 				M << "<span class='notice'>You switch the [src] on.</span>"
 			else if(T)

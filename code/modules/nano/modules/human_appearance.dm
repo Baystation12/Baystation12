@@ -1,6 +1,6 @@
-/obj/nano_module/appearance_changer
+/datum/nano_module/appearance_changer
 	name = "Appearance Editor"
-	flags = APPEARANCE_ALL_HAIR
+	var/flags = APPEARANCE_ALL_HAIR
 	var/mob/living/carbon/human/owner = null
 	var/list/valid_species = list()
 	var/list/valid_hairstyles = list()
@@ -10,15 +10,14 @@
 	var/list/whitelist
 	var/list/blacklist
 
-/obj/nano_module/appearance_changer/New(var/location, var/mob/living/carbon/human/H, var/check_species_whitelist = 1, var/list/species_whitelist = list(), var/list/species_blacklist = list())
+/datum/nano_module/appearance_changer/New(var/location, var/mob/living/carbon/human/H, var/check_species_whitelist = 1, var/list/species_whitelist = list(), var/list/species_blacklist = list())
 	..()
-	loc = location
 	owner = H
 	src.check_whitelist = check_species_whitelist
 	src.whitelist = species_whitelist
 	src.blacklist = species_blacklist
 
-/obj/nano_module/appearance_changer/Topic(ref, href_list, var/nowindow, var/datum/topic_state/state = default_state)
+/datum/nano_module/appearance_changer/Topic(ref, href_list, var/nowindow, var/datum/topic_state/state = default_state)
 	if(..())
 		return 1
 
@@ -91,7 +90,7 @@
 
 	return 0
 
-/obj/nano_module/appearance_changer/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
+/datum/nano_module/appearance_changer/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
 	generate_data(check_whitelist, whitelist, blacklist)
 	var/data[0]
 
@@ -128,31 +127,31 @@
 	data["change_facial_hair_color"] = can_change(APPEARANCE_FACIAL_HAIR_COLOR)
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
-		ui = new(user, src, ui_key, "appearance_changer.tmpl", "[src.name]", 800, 450, state = state)
+		ui = new(user, src, ui_key, "appearance_changer.tmpl", "[src]", 800, 450, state = state)
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)
 
-/obj/nano_module/appearance_changer/proc/update_dna()
+/datum/nano_module/appearance_changer/proc/update_dna()
 	if(owner && (flags & APPEARANCE_UPDATE_DNA))
 		owner.update_dna()
 
-/obj/nano_module/appearance_changer/proc/can_change(var/flag)
+/datum/nano_module/appearance_changer/proc/can_change(var/flag)
 	return owner && (flags & flag)
 
-/obj/nano_module/appearance_changer/proc/can_change_skin_tone()
+/datum/nano_module/appearance_changer/proc/can_change_skin_tone()
 	return owner && (flags & APPEARANCE_SKIN) && owner.species.flags & HAS_SKIN_TONE
 
-/obj/nano_module/appearance_changer/proc/can_change_skin_color()
+/datum/nano_module/appearance_changer/proc/can_change_skin_color()
 	return owner && (flags & APPEARANCE_SKIN) && owner.species.flags & HAS_SKIN_COLOR
 
-/obj/nano_module/appearance_changer/proc/cut_and_generate_data()
+/datum/nano_module/appearance_changer/proc/cut_and_generate_data()
 	// Making the assumption that the available species remain constant
 	valid_facial_hairstyles.Cut()
 	valid_facial_hairstyles.Cut()
 	generate_data()
 
-/obj/nano_module/appearance_changer/proc/generate_data()
+/datum/nano_module/appearance_changer/proc/generate_data()
 	if(!valid_species.len)
 		valid_species = owner.generate_valid_species(check_whitelist, whitelist, blacklist)
 	if(!valid_hairstyles.len || !valid_facial_hairstyles.len)

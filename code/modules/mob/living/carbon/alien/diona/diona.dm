@@ -5,7 +5,7 @@
 	speak_emote = list("chirrups")
 	icon_state = "nymph"
 	language = "Rootspeak"
-
+	death_msg = "expires with a pitiful chirrup..."
 	universal_understand = 1
 	universal_speak = 0      // Dionaea do not need to speak to people other than other dionaea.
 	holder_type = /obj/item/weapon/holder/diona

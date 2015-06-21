@@ -75,6 +75,13 @@
 	charge = 0
 	should_be_mapped = 1
 
+/obj/machinery/power/smes/buildable/Destroy()
+	..()
+	qdel(wires)
+	for(var/datum/nano_module/rcon/R in world)
+		R.FindDevices()
+
+
 // Proc: process()
 // Parameters: None
 // Description: Uses parent process, but if grounding wire is cut causes sparks to fly around.
@@ -343,6 +350,7 @@
 				M.icon_state = "box_1"
 				for(var/obj/I in component_parts)
 					I.loc = src.loc
+					component_parts -= I
 				qdel(src)
 				return
 

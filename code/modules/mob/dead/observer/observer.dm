@@ -672,7 +672,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 mob/dead/observer/MayRespawn(var/feedback = 0)
 	if(!client)
 		return 0
-	if(mind && mind.current && mind.current.stat != DEAD)
+	if(mind && mind.current && mind.current.stat != DEAD && can_reenter_corpse)
 		if(feedback)
 			src << "<span class='warning'>Your non-dead body prevent you from respawning.</span>"
 		return 0
@@ -681,3 +681,19 @@ mob/dead/observer/MayRespawn(var/feedback = 0)
 			src << "<span class='warning'>antagHUD restrictions prevent you from respawning.</span>"
 		return 0
 	return 1
+
+/atom/proc/extra_ghost_link()
+	return
+
+/mob/extra_ghost_link(var/atom/ghost)
+	if(client && eyeobj)
+		return "|<a href='byond://?src=\ref[ghost];track=\ref[eyeobj]'>eye</a>"
+
+/mob/dead/observer/extra_ghost_link(var/atom/ghost)
+	if(mind && mind.current)
+		return "|<a href='byond://?src=\ref[ghost];track=\ref[mind.current]'>body</a>"
+
+/proc/ghost_follow_link(var/atom/target, var/atom/ghost)
+	if((!target) || (!ghost)) return
+	. = "<a href='byond://?src=\ref[ghost];track=\ref[target]'>follow</a>"
+	. += target.extra_ghost_link(ghost)

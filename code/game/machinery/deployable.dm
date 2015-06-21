@@ -127,11 +127,6 @@ for reference:
 				dismantle()
 			return
 
-/obj/structure/barricade/meteorhit()
-	visible_message("<span class='danger'>\The [src] is smashed apart!</span>")
-	dismantle()
-	return
-
 /obj/structure/barricade/blob_act()
 	src.health -= 25
 	if (src.health <= 0)
@@ -191,25 +186,6 @@ for reference:
 					visible_message("<span class='warning'>BZZzZZzZZzZT</span>")
 					return
 			return
-		else if (istype(W, /obj/item/weapon/card/emag))
-			if (src.emagged == 0)
-				src.emagged = 1
-				src.req_access.Cut()
-				src.req_one_access.Cut()
-				user << "You break the ID authentication lock on \the [src]."
-				var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
-				s.set_up(2, 1, src)
-				s.start()
-				visible_message("<span class='warning'>BZZzZZzZZzZT</span>")
-				return
-			else if (src.emagged == 1)
-				src.emagged = 2
-				user << "You short out the anchoring mechanism on \the [src]."
-				var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
-				s.set_up(2, 1, src)
-				s.start()
-				visible_message("<span class='warning'>BZZzZZzZZzZT</span>")
-				return
 		else if (istype(W, /obj/item/weapon/wrench))
 			if (src.health < src.maxhealth)
 				src.health = src.maxhealth
@@ -252,10 +228,6 @@ for reference:
 			anchored = !anchored
 			icon_state = "barrier[src.locked]"
 
-	meteorhit()
-		src.explode()
-		return
-
 	blob_act()
 		src.health -= 25
 		if (src.health <= 0)
@@ -285,3 +257,24 @@ for reference:
 		explosion(src.loc,-1,-1,0)
 		if(src)
 			qdel(src)
+
+		
+/obj/machinery/deployable/barrier/emag_act(var/remaining_charges, var/mob/user)
+	if (src.emagged == 0)
+		src.emagged = 1
+		src.req_access.Cut()
+		src.req_one_access.Cut()
+		user << "You break the ID authentication lock on \the [src]."
+		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+		s.set_up(2, 1, src)
+		s.start()
+		visible_message("<span class='warning'>BZZzZZzZZzZT</span>")
+		return 1
+	else if (src.emagged == 1)
+		src.emagged = 2
+		user << "You short out the anchoring mechanism on \the [src]."
+		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+		s.set_up(2, 1, src)
+		s.start()
+		visible_message("<span class='warning'>BZZzZZzZZzZT</span>")
+		return 1
