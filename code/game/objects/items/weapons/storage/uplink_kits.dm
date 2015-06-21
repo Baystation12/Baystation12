@@ -234,3 +234,26 @@
 	..()
 	new /obj/item/rig_module/electrowarfare_suite(src)
 	new /obj/item/rig_module/voice(src)
+
+
+/obj/item/weapon/storage/secure/briefcase/money
+	name = "Suspicious Briefcase"
+	desc = "An imposing briefcase that has an old reeking smell to it, and gives off an ominous aurora."
+
+
+
+
+/obj/item/weapon/storage/secure/briefcase/money/New()
+	..()
+	new /obj/item/weapon/spacecash/c1000(src)
+	new /obj/item/weapon/spacecash/c1000(src)
+	new /obj/item/weapon/spacecash/c1000(src)
+	new /obj/item/weapon/spacecash/c1000(src)
+	new /obj/item/weapon/spacecash/c1000(src)
+	new /obj/item/weapon/spacecash/c1000(src)
+	new /obj/item/weapon/spacecash/c1000(src)
+	new /obj/item/weapon/spacecash/c1000(src)
+	new /obj/item/weapon/spacecash/c1000(src)
+	new /obj/item/weapon/spacecash/c1000(src)
+
+
