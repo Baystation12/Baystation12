@@ -13,7 +13,7 @@
 /datum/antagonist/changeling/get_special_objective_text(var/datum/mind/player)
 	return "<br><b>Changeling ID:</b> [player.changeling.changelingID].<br><b>Genomes Absorbed:</b> [player.changeling.absorbedcount]"
 
-/datum/antagonist/changeling/apply(var/datum/mind/player)
+/datum/antagonist/changeling/update_antag_mob(var/datum/mind/player)
 	..()
 	player.current.make_changeling()
 

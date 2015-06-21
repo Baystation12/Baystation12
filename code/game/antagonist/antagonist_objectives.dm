@@ -1,5 +1,16 @@
 /datum/antagonist/proc/create_global_objectives()
-	return 	!((global_objectives && global_objectives.len) || config.objectives_disabled)
+	if(config.objectives_disabled)
+		return 0
+	if(global_objectives && global_objectives.len)
+		return 0
+	return 1
+
+/datum/antagonist/proc/create_objectives(var/datum/mind/player)
+	if(config.objectives_disabled)
+		return 0
+	if(create_global_objectives())
+		player.objectives |= global_objectives
+	return 1
 
 /datum/antagonist/proc/get_special_objective_text()
 	return ""

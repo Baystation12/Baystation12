@@ -50,12 +50,42 @@ var/datum/antagonist/revolutionary/revs
 	)
 	mob.equip_in_one_of_slots(T, slots)
 
-/datum/antagonist/revolutionary/finalize(var/datum/mind/target)
+/*
+datum/antagonist/revolutionary/finalize(var/datum/mind/target)
 	if(target)
 		return ..(target)
 	current_antagonists |= head_revolutionaries
 	create_global_objectives()
 	..()
+
+/datum/antagonist/revolutionary/get_additional_check_antag_output(var/datum/admins/caller)
+	return ..() //Todo
+
+	Rev extras:
+				dat += "<br><table cellspacing=5><tr><td><B>Revolutionaries</B></td><td></td></tr>"
+			for(var/datum/mind/N in ticker.mode.head_revolutionaries)
+				var/mob/M = N.current
+				if(!M)
+					dat += "<tr><td><i>Head Revolutionary not found!</i></td></tr>"
+				else
+					dat += "<tr><td><a href='?src=\ref[src];adminplayeropts=\ref[M]'>[M.real_name]</a> <b>(Leader)</b>[M.client ? "" : " <i>(logged out)</i>"][M.stat == 2 ? " <b><font color=red>(DEAD)</font></b>" : ""]</td>"
+					dat += "<td><A href='?src=\ref[usr];priv_msg=\ref[M]'>PM</A></td></tr>"
+			for(var/datum/mind/N in ticker.mode.revolutionaries)
+				var/mob/M = N.current
+				if(M)
+					dat += "<tr><td><a href='?src=\ref[src];adminplayeropts=\ref[M]'>[M.real_name]</a>[M.client ? "" : " <i>(logged out)</i>"][M.stat == 2 ? " <b><font color=red>(DEAD)</font></b>" : ""]</td>"
+					dat += "<td><A href='?src=\ref[usr];priv_msg=\ref[M]'>PM</A></td></tr>"
+			dat += "</table><table cellspacing=5><tr><td><B>Target(s)</B></td><td></td><td><B>Location</B></td></tr>"
+			for(var/datum/mind/N in ticker.mode.get_living_heads())
+				var/mob/M = N.current
+				if(M)
+					dat += "<tr><td><a href='?src=\ref[src];adminplayeropts=\ref[M]'>[M.real_name]</a>[M.client ? "" : " <i>(logged out)</i>"][M.stat == 2 ? " <b><font color=red>(DEAD)</font></b>" : ""]</td>"
+					dat += "<td><A href='?src=\ref[usr];priv_msg=\ref[M]'>PM</A></td>"
+					var/turf/mob_loc = get_turf(M)
+					dat += "<td>[mob_loc.loc]</td></tr>"
+				else
+					dat += "<tr><td><i>Head not found!</i></td></tr>"
+*/
 
 /datum/antagonist/revolutionary/create_global_objectives()
 	if(!..())
@@ -166,7 +196,7 @@ var/datum/antagonist/revolutionary/revs
 	if(choice == "Yes!")
 		M << "<span class='notice'>You join the revolution!</span>"
 		src << "<span class='notice'>[M] joins the revolution!</span>"
-		revs.add_antagonist(M.mind)
+		revs.add_antagonist(M.mind, 0, 0, 1)
 	else if(choice == "No!")
 		M << "<span class='danger'>You reject this traitorous cause!</span>"
 		src << "<span class='danger'>\The [M] does not support the revolution!</span>"

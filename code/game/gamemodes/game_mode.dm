@@ -285,9 +285,9 @@ var/global/list/additional_antag_types = list()
 		spawn(rand(100,150))
 			announce_ert_disabled()
 
-	if(antag_templates && antag_templates.len)
-		for(var/datum/antagonist/antag in antag_templates)
-			antag.finalize()
+	//if(antag_templates && antag_templates.len)
+	//	for(var/datum/antagonist/antag in antag_templates)
+	//		antag.finalize()
 
 	if(emergency_shuttle && auto_recall_shuttle)
 		emergency_shuttle.auto_recall = 1

@@ -111,8 +111,6 @@ var/datum/antagonist/cultist/cult
 /datum/antagonist/cultist/can_become_antag(var/datum/mind/player)
 	if(!..())
 		return 0
-	if(!istype(player.current, /mob/living/carbon/human))
-		return 0
 	for(var/obj/item/weapon/implant/loyalty/L in player.current)
 		if(L && (L.imp_in == player.current))
 			return 0

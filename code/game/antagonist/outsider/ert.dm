@@ -10,8 +10,13 @@ var/datum/antagonist/ert/ert
 	leader_welcome_text = "As leader of the Emergency Response Team, you answer only to CentComm, and have authority to override the Captain where it is necessary to achieve your mission goals. It is recommended that you attempt to cooperate with the captain where possible, however."
 	max_antags = 5
 	max_antags_round = 5 // ERT mode?
+	landmark_id = "Response Team"
 
-	flags = ANTAG_OVERRIDE_JOB | ANTAG_SET_APPEARANCE
+	flags = ANTAG_OVERRIDE_JOB | ANTAG_SET_APPEARANCE | ANTAG_HAS_LEADER
+
+/datum/antagonist/ert/create_default(var/mob/source)
+	var/mob/living/carbon/human/M = ..()
+	if(istype(M)) M.age = rand(25,45)
 
 /datum/antagonist/ert/New()
 	..()
