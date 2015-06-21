@@ -329,3 +329,6 @@
 
 /turf/proc/process()
 	return PROCESS_KILL
+
+/turf/proc/is_ocean()
+	return 0

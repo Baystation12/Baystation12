@@ -13,12 +13,15 @@
 
 	// Handle spread of existing fluids.
 	var/i = 0
-	while(processing_fluids.len && i <= FLUID_PROCESSING_CUTOFF)
+	var/list/tmp_processing_fluids = processing_fluids.Copy()
+	while(tmp_processing_fluids.len && i <= FLUID_PROCESSING_CUTOFF)
 		i++
-		var/obj/effect/fluid/F = pick(processing_fluids)
-		processing_fluids -= F
+		var/obj/effect/fluid/F = pick(tmp_processing_fluids)
+		tmp_processing_fluids -= F
 		F.equalize(1)
 		scheck()
+	processing_fluids |= tmp_processing_fluids
+
 	// Equalize fluid tiles spawned this cycle.
 	i = 0
 	while(new_fluids.len && i <= FLUID_PROCESSING_CUTOFF)
@@ -28,6 +31,7 @@
 		F.equalize()
 		scheck()
 	// Update all appropriate icons.
+
 	i = 0
 	while(updating_fluids.len && i <= FLUID_PROCESSING_CUTOFF)
 		i++

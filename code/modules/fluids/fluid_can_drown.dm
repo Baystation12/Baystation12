@@ -19,8 +19,17 @@
 /mob/living/proc/handle_drowning()
 	if(!can_drown())
 		return 0
-	var/obj/effect/fluid/F = locate() in loc
-	if(!F || !F.can_drown_mob(src))
+	var/turf/T = get_turf(src)
+	if(!istype(T))
+		return
+	var/drowning = 0
+	if(T.is_ocean())
+		drowning = 1
+	else
+		var/obj/effect/fluid/F = locate() in loc
+		if(F && F.can_drown_mob(src))
+			drowning = 1
+	if(!drowning)
 		return 0
 	if(prob(5))
 		src << "<span class='danger'>You choke and splutter as you inhale water!</span>"

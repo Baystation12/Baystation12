@@ -90,5 +90,8 @@
 	if(!base_turf)
 		evaporate()
 		return
-	for(var/atom/movable/AM in base_turf)
-		AM.water_act(depth)
+	if(fluid_flows.len)
+		apply_flow()
+	else
+		for(var/atom/movable/AM in base_turf)
+			AM.water_act(depth)

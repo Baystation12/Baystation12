@@ -2,6 +2,8 @@
 /proc/update_fluids(var/atom/A)
 	for(var/obj/effect/fluid/F in range(1,A))
 		F.refresh()
+	for(var/turf/unsimulated/ocean/O in range(1,A))
+		O.refresh()
 
 // Checking if a given object blocks flow (shield walls, windows, etc). flow_from is a dir.
 /obj/proc/can_liquid_pass(var/flow_from)
@@ -37,3 +39,6 @@
 	if(!fluid_images[img_state])
 		fluid_images[img_state] = image('icons/effects/liquid.dmi',img_state)
 	return fluid_images[img_state]
+
+/obj/structure/inflatable/can_liquid_pass()
+	return !density

@@ -20,7 +20,7 @@
 		return 0
 	set_depth(depth - amt)
 	if(depth <= 0)
-		//evaporate()
+		evaporate()
 	else
 		schedule_icon_update()
 	return 1
@@ -42,8 +42,6 @@
 		depth = FLUID_DELETING
 		qdel(src)
 		return
-
-	//debug color = "#66D1FF"
 
 	// Handle spreading.
 	if(depth > FLUID_EVAPORATION_POINT)
@@ -108,7 +106,6 @@
 		if(prob(50))
 			lose_fluid(rand(1,5))
 		refresh()
-		//debug color = "#FF0000"
 
 /obj/effect/fluid/proc/apply_flow()
 	if(!islist(fluid_flows)) fluid_flows = list()
@@ -121,8 +118,9 @@
 
 /obj/effect/fluid/proc/evaporate()
 
-	if(depth == FLUID_DELETING)
+	if(depth == FLUID_DELETING || (src in new_fluids))
 		return
+
 	depth = FLUID_DELETING
 	processing_fluids -= src
 	processing_objects -= src
