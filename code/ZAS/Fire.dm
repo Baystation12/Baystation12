@@ -234,7 +234,7 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 		log_debug("Burning [zone? zone.name : "zoneless gas_mixture"]!")
 		#endif
 	
-		var/gas_fuel = 0 //in the case of mixed gas/liquid fires, the gas burns first.
+		var/gas_fuel = 0
 		var/liquid_fuel = 0
 		var/total_fuel = 0
 		var/total_oxidizers = 0
@@ -270,12 +270,14 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 
 		//calculate the firelevel.
 		var/firelevel = calculate_firelevel(total_fuel, total_oxidizers, reaction_limit)
+		var/firelevel_ratio = firelevel / vsc.fire_firelevel_multiplier
 		
-		//vapour fuels are extremely volatile! The reaction progress is a percentage of the total fuel (similar to old zburn).
-		var/gas_reaction_progress = (firelevel/vsc.fire_firelevel_multiplier)*gas_fuel*FIRE_GAS_BURNRATE_MULT
+		//vapour fuels are extremely volatile! The reaction progress is a percentage of the total fuel (similar to old zburn).)
+		var/min_burn = 0.30*volume*group_multiplier/CELL_VOLUME //in moles - so that fires with very small gas concentrations burn out fast
+		var/gas_reaction_progress = max(min_burn, firelevel_ratio*gas_fuel)*FIRE_GAS_BURNRATE_MULT
 
 		//liquid fuels are not as volatile, and the reaction progress depends on the size of the area that is burning. Limit the burn rate to a certain amount per area.
-		var/liquid_reaction_progress = ((firelevel/vsc.fire_firelevel_multiplier)*0.2 + 0.05)*fuel_area*FIRE_LIQUID_BURNRATE_MULT
+		var/liquid_reaction_progress = (firelevel_ratio*0.2 + 0.05)*fuel_area*FIRE_LIQUID_BURNRATE_MULT
 
 		var/total_reaction_progress = gas_reaction_progress + liquid_reaction_progress
 		var/used_fuel = min(total_reaction_progress, reaction_limit)
@@ -356,7 +358,7 @@ datum/gas_mixture/proc/check_recombustability(list/fuel_objs)
 
 	. = 0
 	for(var/g in gas)
-		if(gas_data.flags[g] & XGM_GAS_FUEL && QUANTIZE(gas[g] * vsc.fire_consuption_rate) >= 0.1)
+		if(gas_data.flags[g] & XGM_GAS_FUEL && QUANTIZE(gas[g] * vsc.fire_consuption_rate) >= 0.005)
 			. = 1
 			break
 
