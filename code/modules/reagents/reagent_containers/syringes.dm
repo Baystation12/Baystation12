@@ -16,6 +16,7 @@
 	possible_transfer_amounts = null
 	volume = 15
 	w_class = 1
+	slot_flags = SLOT_EARS
 	sharp = 1
 	var/mode = SYRINGE_DRAW
 	var/image/filling //holds a reference to the current filling overlay
