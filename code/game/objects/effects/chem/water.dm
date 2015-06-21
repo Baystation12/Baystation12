@@ -3,6 +3,7 @@
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "extinguish"
 	mouse_opacity = 0
+	pass_flags = PASSTABLE | PASSGRILLE
 
 /obj/effect/effect/water/New(loc)
 	..()
@@ -53,4 +54,3 @@
 	name = "chemicals"
 	icon = 'icons/obj/chempuff.dmi'
 	icon_state = ""
-	pass_flags = PASSTABLE | PASSGRILLE
