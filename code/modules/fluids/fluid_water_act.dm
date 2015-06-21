@@ -45,9 +45,3 @@
 
 /obj/effect/decal/cleanable/water_act()
 	qdel(src)
-
-/obj/effect/decal/cleanable/blood/water_act()
-	..()
-	var/obj/effect/fluid/F = locate() in loc
-	if(!F) return
-	F.add_contaminant("blood", amount, basecolor)

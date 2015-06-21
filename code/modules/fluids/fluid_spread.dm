@@ -86,20 +86,19 @@
 			for(var/obj/effect/fluid/F in equalize_fluids)
 				// Determine rate of flow.
 				var/depth_change = avg_depth - F.depth
-				if(abs(depth_change) >= FLUID_EVAPORATION_POINT)
-					var/dir_key
-					if(depth_change > 0)
-						dir = get_dir(src,F)
-						dir_key = "[dir]"
-					else if(depth_change < 0)
-						dir = get_dir(F,src)
-						depth_change = abs(depth_change)
-						dir_key = "[dir]"
-					// Keep the largest flow (todo revisit)
-					if(dir_key)
-						if(!islist(fluid_flows)) fluid_flows = list()
-						if(isnull(fluid_flows[dir_key]) || depth_change > fluid_flows[dir_key])
-							fluid_flows[dir_key] = depth_change
+				var/dir_key
+				if(depth_change > 0)
+					dir = get_dir(src,F)
+					dir_key = "[dir]"
+				else if(depth_change < 0)
+					dir = get_dir(F,src)
+					depth_change = abs(depth_change)
+					dir_key = "[dir]"
+				// Keep the largest flow (todo revisit)
+				if(dir_key)
+					if(!islist(fluid_flows)) fluid_flows = list()
+					if(isnull(fluid_flows[dir_key]) || depth_change > fluid_flows[dir_key])
+						fluid_flows[dir_key] = depth_change
 				// Apply new depth.
 				F.set_depth(avg_depth)
 		set_depth(avg_depth)

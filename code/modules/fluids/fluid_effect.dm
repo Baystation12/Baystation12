@@ -37,14 +37,6 @@
 	// Update appearance to base values.
 	update_icon()
 
-/obj/effect/fluid/proc/add_contaminant(var/ctype, var/camount, var/ccolour)
-	if(!reagents) create_reagents(500)
-	reagents.add_reagent(ctype,camount)
-	for(var/datum/reagent/R in reagents.reagent_list)
-		if(R.id == ctype)
-			R.color = ccolour
-			need_colour_update = 1
-
 /obj/effect/fluid/Destroy()
 	if(base_turf && base_turf.wet == 1)
 		base_turf.wet = 0
@@ -75,11 +67,11 @@
 		fluid_flows = list()
 	switch(depth)
 		if(FLUID_DELETING to FLUID_SHALLOW)
-			overlays |= get_fluid_icon(fluid_flows.len ? "shallow" : "shallow_still")
+			overlays |= get_fluid_icon("shallow_still")
 		if(FLUID_SHALLOW to FLUID_DEEP)
-			overlays |= get_fluid_icon(fluid_flows.len ? "mid" : "mid_still")
+			overlays |= get_fluid_icon("mid_still")
 		if(FLUID_DEEP to INFINITY)
-			overlays |= get_fluid_icon(fluid_flows.len ? "deep" : "deep_still")
+			overlays |= get_fluid_icon("deep_still")
 
 /obj/effect/fluid/proc/schedule_icon_update()
 	if(depth == FLUID_DELETING)

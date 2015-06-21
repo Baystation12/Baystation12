@@ -85,11 +85,12 @@
 
 	has_organ = list(
 		"heart" =    /obj/item/organ/heart,
-		"lungs" =    /obj/item/organ/lungs/skrell,
+		"lungs" =    /obj/item/organ/lungs,
 		"liver" =    /obj/item/organ/liver,
 		"kidneys" =  /obj/item/organ/kidneys,
 		"brain" =    /obj/item/organ/brain,
-		"eyes" =     /obj/item/organ/eyes
+		"eyes" =     /obj/item/organ/eyes,
+		"gills" =    /obj/item/organ/gills
 		)
 
 /datum/species/monkey/unathi
