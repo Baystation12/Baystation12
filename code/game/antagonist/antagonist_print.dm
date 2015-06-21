@@ -12,7 +12,7 @@
 			var/num = 1
 			for(var/datum/objective/O in P.objectives)
 				text += print_objective(O, num)
-				if(O.completed) // This is set actively in check_victory()
+				if(O.check_completion())
 					text += "<font color='green'><B>Success!</B></font>"
 					feedback_add_details(feedback_tag,"[O.type]|SUCCESS")
 				else
@@ -21,11 +21,11 @@
 					failed = 1
 				num++
 
-		if(!config.objectives_disabled)
-			if(failed)
-				text += "<br><font color='red'><B>The [role_text] has failed.</B></font>"
-			else
-				text += "<br><font color='green'><B>The [role_text] was successful!</B></font>"
+			if(!config.objectives_disabled)
+				if(failed)
+					text += "<br><font color='red'><B>The [role_text] has failed.</B></font>"
+				else
+					text += "<br><font color='green'><B>The [role_text] was successful!</B></font>"
 
 	if(global_objectives && global_objectives.len)
 		text += "<BR/><FONT size = 2>Their objectives were:<FONT>"

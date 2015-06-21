@@ -62,15 +62,10 @@
 					qdel(I)
 
 /datum/antagonist/proc/update_current_antag_max()
-
-	candidates = list()
 	var/main_type
 	if(ticker && ticker.mode)
 		if(ticker.mode.antag_tag && ticker.mode.antag_tag == id)
 			main_type = 1
-	else
-		return list()
-
 	cur_max = (main_type ? max_antags_round : max_antags)
 	if(ticker.mode.antag_scaling_coeff)
 		cur_max = Clamp((ticker.mode.num_players()/ticker.mode.antag_scaling_coeff), 1, cur_max)

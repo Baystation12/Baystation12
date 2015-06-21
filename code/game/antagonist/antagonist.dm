@@ -33,8 +33,9 @@
 	var/nuke_spawn_loc
 
 	var/list/valid_species = list("Unathi","Tajara","Skrell","Human") // Used for setting appearance.
-	var/list/starting_locations = list()
 	var/list/current_antagonists = list()
+	var/list/pending_antagonists = list()
+	var/list/starting_locations = list()
 	var/list/global_objectives = list()
 	var/list/restricted_jobs = list()
 	var/list/protected_jobs = list()
@@ -57,29 +58,32 @@
 	return 1
 
 /datum/antagonist/proc/get_candidates(var/ghosts_only)
-
 	candidates = list() // Clear.
 	candidates = ticker.mode.get_players_for_role(role_type, id)
-	// Prune restricted jobs and status.
+	// Prune restricted jobs and status. Broke it up for readability.
 	for(var/datum/mind/player in candidates)
-		if((ghosts_only && !istype(player.current, /mob/dead)) || player.special_role || (player.assigned_role in restricted_jobs))
+		if(ghosts_only && !istype(player.current, /mob/dead))
+			candidates -= player
+		else if(player.special_role)
+			candidates -= player
+		else if (player in pending_antagonists)
+			candidates -= player
+		else if(!can_become_antag(player))
 			candidates -= player
 	return candidates
 
 /datum/antagonist/proc/attempt_random_spawn()
 	attempt_spawn(flags & (ANTAG_OVERRIDE_MOB|ANTAG_OVERRIDE_JOB))
 
-/datum/antagonist/proc/attempt_late_spawn(var/datum/mind/player, var/move_to_spawn)
-
-	update_current_antag_max()
-	if(get_antag_count() >= cur_max)
-		return 0
-
+/datum/antagonist/proc/attempt_late_spawn(var/datum/mind/player)
+	if(!can_late_spawn())
+		return
+	if(!istype(player)) player = get_candidates(is_latejoin_template())
 	player.current << "<span class='danger'><i>You have been selected this round as an antagonist!</i></span>"
-	if(move_to_spawn)
-		place_mob(player.current)
-	add_antagonist(player)
-	equip(player.current)
+	if(istype(player.current, /mob/dead))
+		create_default(player.current)
+	else
+		add_antagonist(player,0,1,0,1,1)
 	return
 
 /datum/antagonist/proc/attempt_spawn(var/ghosts_only)
@@ -95,11 +99,14 @@
 	//Grab candidates randomly until we have enough.
 	while(candidates.len)
 		var/datum/mind/player = pick(candidates)
-		current_antagonists |= player
-		// Update job and role.
-		player.special_role = role_text
-		if(flags & ANTAG_OVERRIDE_JOB)
-			player.assigned_role = "MODE"
+		pending_antagonists |= player
 		candidates -= player
 	return 1
 
+/datum/antagonist/proc/finalize_spawn()
+	if(!pending_antagonists || !pending_antagonists.len)
+		return
+	for(var/datum/mind/player in pending_antagonists)
+		if(can_become_antag(player) && !player.special_role)
+			add_antagonist(player,0,0,1)
+	pending_antagonists.Cut()

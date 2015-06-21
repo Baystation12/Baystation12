@@ -42,16 +42,9 @@ var/global/list/additional_antag_types = list()
 
 	var/antag_tag                            // First (main) antag template to spawn.
 	var/list/antag_templates                 // Extra antagonist types to include.
-
+	var/list/latejoin_templates = list()
 	var/round_autoantag = 0                  // Will this round attempt to periodically spawn more antagonists?
-	var/antag_prob = 0                       // Likelihood of a new antagonist spawning.
-	var/antag_count = 0                      // Current number of antagonists.
 	var/antag_scaling_coeff = 5              // Coefficient for scaling max antagonists to player count.
-
-	var/list/living_antag_templates = list() // Currently selected antag types that do not require a ghosted player.
-	var/list/ghost_antag_templates  = list() // Inverse of above.
-	var/list/antag_candidates = list()       // Living antag candidates.
-	var/list/ghost_candidates = list()       // Observing antag candidates.
 
 	var/station_was_nuked = 0                // See nuclearbomb.dm and malfunction.dm.
 	var/explosion_in_progress = 0            // Sit back and relax
@@ -272,7 +265,6 @@ var/global/list/additional_antag_types = list()
 			EMajor.delay_modifier = event_delay_mod_major
 
 ///post_setup()
-///Everyone should now be on the station and have their normal gear.  This is the place to give the special roles extra things
 /datum/game_mode/proc/post_setup()
 
 	refresh_event_modifiers()
@@ -285,9 +277,11 @@ var/global/list/additional_antag_types = list()
 		spawn(rand(100,150))
 			announce_ert_disabled()
 
-	//if(antag_templates && antag_templates.len)
-	//	for(var/datum/antagonist/antag in antag_templates)
-	//		antag.finalize()
+	if(antag_templates && antag_templates.len)
+		for(var/datum/antagonist/antag in antag_templates)
+			antag.finalize_spawn()
+			if(antag.is_latejoin_template())
+				latejoin_templates |= antag
 
 	if(emergency_shuttle && auto_recall_shuttle)
 		emergency_shuttle.auto_recall = 1
@@ -335,67 +329,6 @@ var/global/list/additional_antag_types = list()
 		"classified security operations"
 		)
 	command_announcement.Announce("The presence of [pick(reasons)] in the region is tying up all available local emergency resources; emergency response teams cannot be called at this time, and post-evacuation recovery efforts will be substantially delayed.","Emergency Transmission")
-
-///process()
-///Called by the gameticker
-/datum/game_mode/proc/process()
-
-	if(emergency_shuttle.departed)
-		return
-
-	if(!round_autoantag || !antag_templates || !antag_templates.len)
-		return
-
-	var/player_count = 0
-	antag_count = 0
-	antag_candidates = list()
-
-	for(var/mob/living/player in mob_list)
-		if(player.client)
-			player_count += 1
-			if(player.mind)
-				if(player.stat == 2) // observing
-					ghost_candidates |= player
-				else
-					if(player.mind.special_role)
-						antag_count += 1
-					else
-						antag_candidates |= player
-
-	antag_prob = min(100,max(0,(player_count - 5 * 10) * 5)) // This is arbitrary, probably needs adjusting.
-
-	var/datum/antagonist/spawn_antag
-	var/datum/mind/candidate
-
-	var/from_ghosts
-	if(prob(antag_prob))
-		if(ghost_candidates.len && ghost_antag_templates.len && prob(50))
-			spawn_antag = pick(ghost_antag_templates)
-			candidate = pick(ghost_candidates)
-			from_ghosts = 1
-		else if(antag_candidates.len && living_antag_templates.len)
-			spawn_antag = pick(living_antag_templates)
-			candidate = pick(antag_candidates)
-		else
-			return // Failed :(
-	else
-		return
-
-	if(spawn_antag.can_become_antag(candidate))
-		spawn_antag.attempt_late_spawn(candidate, from_ghosts)
-
-/datum/game_mode/proc/latespawn(mob/living/carbon/human/character)
-
-	if(emergency_shuttle.departed || !character.mind)
-		return
-
-	var/datum/antagonist/spawn_antag
-	if(prob(antag_prob) && round_autoantag && living_antag_templates.len)
-		spawn_antag = pick(living_antag_templates)
-	if(spawn_antag && spawn_antag.can_become_antag(character.mind))
-		spawn_antag.attempt_late_spawn(character.mind)
-
-	return 0
 
 /datum/game_mode/proc/check_finished()
 	if(emergency_shuttle.returned() || station_was_nuked)
@@ -623,13 +556,10 @@ var/global/list/additional_antag_types = list()
 
 	if(antag_templates && antag_templates.len)
 		for(var/datum/antagonist/antag in antag_templates)
-			if(antag.flags & ANTAG_OVERRIDE_JOB)
-				ghost_antag_templates |= antag
-			else if(antag.flags & ANTAG_RANDSPAWN)
-				living_antag_templates |= antag
-			else
-				antag_templates -= antag
-				world << "<span class='danger'>[antag.role_text_plural] are invalid for additional roundtype antags!</span>"
+			if(antag.flags & (ANTAG_OVERRIDE_JOB|ANTAG_RANDSPAWN))
+				continue
+			antag_templates -= antag
+			world << "<span class='danger'>[antag.role_text_plural] are invalid for additional roundtype antags!</span>"
 
 	newscaster_announcements = pick(newscaster_standard_feeds)
 

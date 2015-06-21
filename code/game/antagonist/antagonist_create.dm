@@ -21,9 +21,9 @@
 /datum/antagonist/proc/create_default(var/mob/source)
 	var/mob/living/M
 	if(mob_path)
-		M = new mob_path()
+		M = new mob_path(get_turf(source))
 	else
-		M = new /mob/living/carbon/human
+		M = new /mob/living/carbon/human(get_turf(source))
 	M.real_name = source.real_name
 	M.name = M.real_name
 	M.ckey = source.ckey
