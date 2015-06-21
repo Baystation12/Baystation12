@@ -33,6 +33,7 @@
 	var/holy = 0
 
 	var/dynamic_lighting = 1
+	luminosity = 0
 
 /turf/New()
 	..()
@@ -41,7 +42,10 @@
 			src.Entered(AM)
 			return
 	turfs |= src
-	return
+
+	var/area/A = loc
+	if(!dynamic_lighting || !A.lighting_use_dynamic)
+		luminosity = 1
 
 /turf/Destroy()
 	turfs -= src
@@ -229,6 +233,7 @@
 	var/old_opacity = opacity
 	var/old_dynamic_lighting = dynamic_lighting
 	var/list/old_affecting_lights = affecting_lights
+	var/old_lighting_overlay = lighting_overlay
 
 	//world << "Replacing [src.type] with [N]"
 
@@ -280,6 +285,7 @@
 		W.levelupdate()
 		. =  W
 
+	lighting_overlay = old_lighting_overlay
 	affecting_lights = old_affecting_lights
 	if((old_opacity != opacity) || (dynamic_lighting != old_dynamic_lighting) || force_lighting_update)
 		reconsider_lights()
