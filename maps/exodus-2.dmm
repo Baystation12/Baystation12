@@ -1247,7 +1247,7 @@
 "xY" = (/obj/structure/sign/nosmoking_2,/turf/unsimulated/wall,/area/centcom/control)
 "xZ" = (/obj/machinery/vending/cigarette,/turf/unsimulated/floor{icon_state = "dark"},/area/centcom/control)
 "ya" = (/obj/structure/bed/chair,/turf/unsimulated/floor{icon_state = "dark"},/area/centcom/specops)
-"yb" = (/obj/structure/table/standard,/obj/machinery/recharger{pixel_y = 4},/obj/item/weapon/handcuffs,/obj/item/weapon/storage/pill_bottle/dice,/obj/item/weapon/deck,/turf/unsimulated/floor{icon_state = "dark"},/area/centcom/specops)
+"yb" = (/obj/structure/table/standard,/obj/machinery/recharger{pixel_y = 4},/obj/item/weapon/handcuffs,/obj/item/weapon/storage/pill_bottle/dice,/obj/item/weapon/deck,/obj/item/weapon/rig/internalaffairs/equipped,/turf/unsimulated/floor{icon_state = "dark"},/area/centcom/specops)
 "yc" = (/obj/structure/grille,/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced,/obj/structure/window/reinforced{dir = 1},/turf/unsimulated/floor{name = "plating"},/area/centcom/specops)
 "yd" = (/obj/structure/bed/chair/office/light,/turf/unsimulated/floor{icon_state = "dark"},/area/centcom/specops)
 "ye" = (/obj/structure/undies_wardrobe,/turf/unsimulated/floor{icon_state = "dark"},/area/centcom/specops)
