@@ -9,8 +9,8 @@ var/datum/antagonist/ninja/ninjas
 	landmark_id = "ninjastart"
 	welcome_text = "You are an elite mercenary assassin of the Spider Clan. You have a variety of abilities at your disposal, thanks to your nano-enhanced cyber armor.</span>"
 	flags = ANTAG_OVERRIDE_JOB | ANTAG_CLEAR_EQUIPMENT | ANTAG_CHOOSE_NAME | ANTAG_RANDSPAWN | ANTAG_VOTABLE | ANTAG_SET_APPEARANCE
-	max_antags = 1//3
-	max_antags_round = 1//3
+	max_antags = 3
+	max_antags_round = 3
 
 /datum/antagonist/ninja/New()
 	..()
@@ -164,7 +164,7 @@ var/datum/antagonist/ninja/ninjas
 		if(17)
 			directive += "The Spider Clan has recently begun recruiting outsiders. Consider suitable candidates and assess their behavior amongst the crew."
 		if(18)
-			directive += "A cyborg liberation group has expressed interest in our services. Prove the Spider Clan merciful towards law-bound synthetics."
+			directive += "A cyborg liberation group has expressed interest in our serves. Prove the Spider Clan merciful towards law-bound synthetics."
 		else
 			directive += "There are no special supplemental instructions at this time."
 	return directive
