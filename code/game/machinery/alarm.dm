@@ -518,8 +518,8 @@
 		data["total_danger"] = max(oxygen_danger, data["total_danger"])
 
 		current_settings = TLV["carbon dioxide"]
-		var/carbon_dioxide_danger = get_danger_level(environment.gas["carbon dioxide"]*partial_pressure, current_settings)
-		environment_data[++environment_data.len] = list("name" = "Carbon dioxide", "value" = environment.gas["carbon dioxide"] / total * 100, "unit" = "%", "danger_level" = carbon_dioxide_danger)
+		var/carbon_dioxide_danger = get_danger_level(environment.gas["carbon_dioxide"]*partial_pressure, current_settings)
+		environment_data[++environment_data.len] = list("name" = "Carbon dioxide", "value" = environment.gas["carbon_dioxide"] / total * 100, "unit" = "%", "danger_level" = carbon_dioxide_danger)
 		data["total_danger"] = max(carbon_dioxide_danger, data["total_danger"])
 
 		current_settings = TLV["phoron"]

@@ -16,7 +16,7 @@ var/datum/antagonist/ninja/ninjas
 	..()
 	ninjas = src
 
-/datum/antagonist/ninja/random_spawn()
+/datum/antagonist/ninja/attempt_random_spawn()
 	if(config.ninjas_allowed) ..()
 
 /datum/antagonist/ninja/create_objectives(var/datum/mind/ninja)
@@ -82,7 +82,7 @@ var/datum/antagonist/ninja/ninjas
 	player.store_memory("<B>Directive:</B> <span class='danger'>[directive]</span><br>")
 	player << "<b>Remember your directive:</b> [directive]."
 
-/datum/antagonist/ninja/apply(var/datum/mind/player)
+/datum/antagonist/ninja/update_antag_mob(var/datum/mind/player)
 	..()
 	var/ninja_title = pick(ninja_titles)
 	var/ninja_name = pick(ninja_names)

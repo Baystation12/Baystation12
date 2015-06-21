@@ -10,4 +10,4 @@
 			valid_types |= antag
 	if(valid_types.len)
 		var/datum/antagonist/antag = pick(valid_types)
-		antag.random_spawn()
+		antag.attempt_random_spawn()
