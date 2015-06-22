@@ -357,6 +357,7 @@ proc/trigger_armed_response_team(var/force = 0)
 	equip_to_slot_or_del(new /obj/item/clothing/shoes/swat(src), slot_shoes)
 	equip_to_slot_or_del(new /obj/item/clothing/gloves/swat(src), slot_gloves)
 	equip_to_slot_or_del(new /obj/item/clothing/glasses/sunglasses(src), slot_glasses)
+	equip_to_slot_or_del(new /obj/item/weapon/comknife(src), slot_l_hand)
 /*
 
 	//Old ERT Uniform
