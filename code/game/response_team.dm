@@ -387,17 +387,14 @@ proc/trigger_armed_response_team(var/force = 0)
 	var/obj/item/weapon/card/id/centcom/ERT/W = new(src)
 	if(src.ert_role == 1)
 		W.assignment = "Emergency Response Team Security"
-		W.access = get_centcom_access("Security")
+		W.access = get_centcom_access("Security"), get_all_accesses()
 	if(src.ert_role == 2)
 		W.assignment = "Emergency Response Team Medic"
-		W.access = get_centcom_access("Medic")
-	if(src.ert_role == 3)
+		W.access = get_centcom_access("Medic"), get_all_accesses()	if(src.ert_role == 3)
 		W.assignment = "Emergency Response Team Engineer"
-		W.access = get_centcom_access("Engineer")
-	if(src.ert_role == 4)
+		W.access = get_centcom_access("Engineer"), get_all_accesses()	if(src.ert_role == 4)
 		W.assignment = "Emergency Response Team Commander"
-		W.access = get_centcom_access("Commander")
-	W.registered_name = real_name
+		W.access = get_centcom_access("Commander"), get_all_accesses()	W.registered_name = real_name
 	W.name = "[real_name]'s ID Card ([W.assignment])"
 	equip_to_slot_or_del(W, slot_wear_id)
 
