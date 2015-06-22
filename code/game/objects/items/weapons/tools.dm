@@ -38,7 +38,7 @@
 	icon = 'icons/obj/items.dmi'
 	icon_state = "screwdriver"
 	flags = CONDUCT
-	slot_flags = SLOT_BELT
+	slot_flags = SLOT_BELT | SLOT_EARS
 	force = 5.0
 	w_class = 1.0
 	throwforce = 5.0

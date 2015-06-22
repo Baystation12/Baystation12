@@ -67,7 +67,7 @@
 
 	//No need to update all of these procs if the guy is dead.
 	if(stat != DEAD && !in_stasis)
-		if(air_master.current_cycle%4==2 || failed_last_breath || (health < config.health_threshold_crit)) 	//First, resolve location and get a breath
+		if(air_master.current_cycle%4==2 || failed_last_breath || (health <= config.health_threshold_crit)) 	//First, resolve location and get a breath
 			breathe() 				//Only try to take a breath every 4 ticks, unless suffocating
 
 		//Updates the number of stored chemicals for powers
@@ -865,7 +865,7 @@
 			if(touching) touching.metabolize()
 			if(ingested) ingested.metabolize()
 			if(bloodstr) bloodstr.metabolize()
-			
+
 			if(CE_PAINKILLER in chem_effects)
 				analgesic = chem_effects[CE_PAINKILLER]
 
@@ -957,7 +957,7 @@
 				return 1
 
 			//UNCONSCIOUS. NO-ONE IS HOME
-			if( (getOxyLoss() > 50) || (config.health_threshold_crit > health) )
+			if((getOxyLoss() > 50) || (health <= config.health_threshold_crit))
 				Paralyse(3)
 
 			if(hallucination)

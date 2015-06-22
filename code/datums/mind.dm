@@ -143,7 +143,7 @@
 
 	if(href_list["add_antagonist"])
 		var/datum/antagonist/antag = all_antag_types[href_list["add_antagonist"]]
-		if(antag) antag.add_antagonist(src)
+		if(antag) antag.add_antagonist(src, 1, 1, 0, 1, 1) // Ignore equipment and role type for this.
 
 	else if(href_list["remove_antagonist"])
 		var/datum/antagonist/antag = all_antag_types[href_list["remove_antagonist"]]

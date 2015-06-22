@@ -18,7 +18,7 @@ var/datum/antagonist/traitor/traitors
 /datum/antagonist/traitor/Topic(href, href_list)
 	if (..())
 		return
-	if(href_list["spawn_uplink"]) spawn_uplink(href_list["spawn_uplink"])
+	if(href_list["spawn_uplink"]) spawn_uplink(locate(href_list["spawn_uplink"]))
 
 /datum/antagonist/traitor/create_objectives(var/datum/mind/traitor)
 	if(!..())
