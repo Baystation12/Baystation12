@@ -243,7 +243,7 @@
 		spawn(100)
 			if(H) H.update_hair()
 
-/datum/species/Aviskree
+/datum/species/Aviskree //I'm not finished with the aviskree, yet. I'll update them further, in time.
 	name = "Aviskree"
 	icobase = 'icons/mob/human_races/r_Aviskree.dmi'
 	deform = 'icons/mob/human_races/r_def_Aviskree.dmi'
@@ -258,8 +258,8 @@
 	wingicon = 1
 	sizechange = 1
 	falldmg = 1
-	slowdown = -0.5
-	burn_mod = 1.2
+	darksight = 6
+	burn_mod = 1.1
 
 	flags = CAN_JOIN | IS_WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR
 	
@@ -298,9 +298,9 @@
 	eyes = "kidan_eyes_s"
 	language = "Chittin"
 	unarmed_types = list(/datum/unarmed_attack/claws)
-	brute_mod = 0.5
+	brute_mod = 0.6
 	burn_mod = 1.4
-	darksight = 15
+	darksight = 10
 
 	flags = CAN_JOIN | IS_WHITELISTED | HAS_UNDERWEAR | IS_STRONG
 	
