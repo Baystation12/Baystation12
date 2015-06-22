@@ -77,6 +77,13 @@ datum
 			result = "sterilizine"
 			required_reagents = list("ethanol" = 1, "anti_toxin" = 1, "chlorine" = 1)
 			result_amount = 3
+			
+		cervaline
+			name = "Cervaline"
+			id = "cervaline"
+			result = "cervaline"
+			required_reagents = list("bicaridine" = 1, "oxygen" = 1, "water" = 1)
+			result_amount = 3
 
 		inaprovaline
 			name = "Inaprovaline"
