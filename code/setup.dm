@@ -815,18 +815,6 @@ var/list/be_special_flags = list(
 #define APPEARANCE_ALL_HAIR (APPEARANCE_HAIR|APPEARANCE_HAIR_COLOR|APPEARANCE_FACIAL_HAIR|APPEARANCE_FACIAL_HAIR_COLOR)
 #define APPEARANCE_ALL 511
 
-// Antagonist datum flags.
-#define ANTAG_OVERRIDE_JOB        1 // Assigned job is set to MODE when spawning.
-#define ANTAG_OVERRIDE_MOB        2 // Mob is recreated from datum mob_type var when spawning.
-#define ANTAG_CLEAR_EQUIPMENT     4 // All preexisting equipment is purged.
-#define ANTAG_CHOOSE_NAME         8 // Antagonists are prompted to enter a name.
-#define ANTAG_IMPLANT_IMMUNE     16 // Cannot be loyalty implanted.
-#define ANTAG_SUSPICIOUS         32 // Shows up on roundstart report.
-#define ANTAG_HAS_LEADER         64 // Generates a leader antagonist.
-#define ANTAG_HAS_NUKE          128 // Will spawn a nuke at supplied location.
-#define ANTAG_RANDSPAWN         256 // Potentially randomly spawns due to events.
-#define ANTAG_VOTABLE           512 // Can be voted as an additional antagonist before roundstart.
-#define ANTAG_SET_APPEARANCE   1024 // Causes antagonists to use an appearance modifier on spawn.
 // Mode/antag template macros.
 #define MODE_BORER "borer"
 #define MODE_XENOMORPH "xeno"

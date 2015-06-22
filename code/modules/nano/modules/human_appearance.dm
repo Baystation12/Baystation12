@@ -1,6 +1,7 @@
 /obj/nano_module/appearance_changer
 	name = "Appearance Editor"
 	flags = APPEARANCE_ALL_HAIR
+	invisibility = INVISIBILITY_MAXIMUM
 	var/mob/living/carbon/human/owner = null
 	var/list/valid_species = list()
 	var/list/valid_hairstyles = list()

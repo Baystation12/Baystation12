@@ -87,6 +87,7 @@
 	icon_state = "penlight"
 	item_state = ""
 	flags = CONDUCT
+	slot_flags = SLOT_EARS
 	brightness_on = 2
 	w_class = 1
 

@@ -44,11 +44,6 @@
 	name = "electrode"
 	icon_state = "spark"
 	nodamage = 1
-	/*
-	stun = 10
-	weaken = 10
-	stutter = 10
-	*/
 	taser_effect = 1
 	agony = 40
 	damage_type = HALLOSS

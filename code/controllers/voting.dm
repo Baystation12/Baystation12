@@ -237,7 +237,7 @@ datum/controller/vote
 						return 0
 					for(var/antag_type in all_antag_types)
 						var/datum/antagonist/antag = all_antag_types[antag_type]
-						if(!(antag.id in additional_antag_types) && (antag.flags & ANTAG_VOTABLE))
+						if(!(antag.id in additional_antag_types) && antag.is_votable())
 							choices.Add(antag.role_text)
 					choices.Add("None")
 				if("custom")
