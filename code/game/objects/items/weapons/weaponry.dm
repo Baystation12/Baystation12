@@ -13,6 +13,19 @@
 	suicide_act(mob/user)
 		viewers(user) << "\red <b>[user] is hitting \himself with the [src.name]! It looks like \he's trying to ban \himself from life.</b>"
 		return (BRUTELOSS|FIRELOSS|TOXLOSS|OXYLOSS)
+		
+/obj/item/weapon/comknife
+	name = "combat knife"
+	desc = "A tactical knife widely used by military forces"
+	icon_state = "tacknife"
+	item_state = "tacknife"
+	flags = CONDUCT
+	force = 10
+	throwforce = 12
+	sharp = 1
+	edge = 1
+	w_class = 2
+	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 
 /obj/item/weapon/nullrod
 	name = "null rod"
