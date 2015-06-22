@@ -23,6 +23,9 @@
 	primitive = /mob/living/carbon/monkey/unathi
 	darksight = 3
 	gluttonous = 1
+	brute_mod = 0.8
+	burn_mod = 0.9
+	slowdown = 1
 
 	blurb = "A heavily reptillian species, Unathi (or 'Sinta as they call themselves) hail from the \
 	Uuosa-Eso system, which roughly translates to 'burning mother'.<br/><br/>Coming from a harsh, radioactive \
@@ -133,6 +136,7 @@
 	primitive = /mob/living/carbon/alien/diona
 	slowdown = 7
 	rarity_value = 3
+	gluttonous = 1
 	hud_type = /datum/hud_data/diona
 	siemens_coefficient = 0.3
 
@@ -254,8 +258,12 @@
 	wingicon = 1
 	sizechange = 1
 	falldmg = 1
+	slowdown = -0.5
+	burn_mod = 1.2
 
 	flags = CAN_JOIN | IS_WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR
+	
+	reagent_tag = IS_AVISKREE
 
 /datum/species/avisaran
 	name = "Avisaran"
@@ -290,8 +298,13 @@
 	eyes = "kidan_eyes_s"
 	language = "Chittin"
 	unarmed_types = list(/datum/unarmed_attack/claws)
+	brute_mod = 0.5
+	burn_mod = 1.4
+	darksight = 15
 
 	flags = CAN_JOIN | IS_WHITELISTED | HAS_UNDERWEAR | IS_STRONG
+	
+	reagent_tag = IS_KIDAN
 
 	blood_color = "#328332"
 	flesh_color = "#8C4600"
