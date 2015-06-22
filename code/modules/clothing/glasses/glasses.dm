@@ -221,7 +221,6 @@
 	desc = "Prescription Sunglasses with a HUD."
 	icon_state = "sunhud"
 	prescription = 1
-	var/obj/item/clothing/glasses/hud/security/hud = null
 
 	New()
 		..()
