@@ -3,7 +3,7 @@
 	if(!current_antagonists.len)
 		return 0
 
-	var/text = "<br><font size = 2><b>The [current_antagonists.len == 1 ? "[role_text] was" : "[role_text_plural] were"]:</b></font>"
+	var/text = "<br><br><font size = 2><b>The [current_antagonists.len == 1 ? "[role_text] was" : "[role_text_plural] were"]:</b></font>"
 	for(var/datum/mind/P in current_antagonists)
 		text += print_player_full(P)
 		text += get_special_objective_text(P)
@@ -28,7 +28,7 @@
 					text += "<br><font color='green'><B>The [role_text] was successful!</B></font>"
 
 	if(global_objectives && global_objectives.len)
-		text += "<BR/><FONT size = 2>Their objectives were:<FONT>"
+		text += "<BR><FONT size = 2>Their objectives were:<FONT>"
 		var/num = 1
 		for(var/datum/objective/O in global_objectives)
 			text += print_objective(O, num, 1)
