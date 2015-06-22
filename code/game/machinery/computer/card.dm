@@ -2,7 +2,7 @@
 
 /obj/machinery/computer/card
 	name = "\improper ID card modification console"
-	desc = "Terminal for programming NanoTrasen employee ID cards to access parts of the station."
+	desc = "Terminal for programming employee ID cards to access parts of the station."
 	icon_keyboard = "id_key"
 	icon_screen = "id"
 	light_color = "#0099ff"

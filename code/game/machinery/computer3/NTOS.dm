@@ -3,7 +3,7 @@
 */
 
 /datum/file/program/ntos
-	name = "Nanotrasen Operating System"
+	name = "NanoTrasen Operating System"
 	extension = "prog"
 	active_state = "ntos"
 	var/obj/item/part/computer/storage/current // the drive being viewed, null for desktop/computer
@@ -89,7 +89,7 @@
 	var/dat = {"
 	<html>
 	<head>
-	<title>Nanotrasen Operating System</title>
+	<title>Operating System</title>
 	<style>
 		div.filewin {
 			position:absolute;
@@ -212,7 +212,7 @@
 		var/obj/item/part/computer/C = locate(href_list["viewperipheral"])
 		if(!istype(C) || (C.loc != src.computer))
 			return
-		
+
 		if(istype(C,/obj/item/part/computer/storage))
 			current = C
 			interact()

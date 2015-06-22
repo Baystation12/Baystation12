@@ -5,7 +5,7 @@ var/datum/antagonist/deathsquad/deathsquad
 	role_type = BE_OPERATIVE
 	role_text = "Death Commando"
 	role_text_plural = "Death Commandos"
-	welcome_text = "You work in the service of Central Command Asset Protection, answering directly to the Board of Directors."
+	welcome_text = "You work in the service of corporate Asset Protection, answering directly to the Board of Directors."
 	landmark_id = "Commando"
 	flags = ANTAG_OVERRIDE_JOB | ANTAG_OVERRIDE_MOB | ANTAG_HAS_NUKE | ANTAG_HAS_LEADER
 	max_antags = 4

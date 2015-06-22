@@ -1328,15 +1328,15 @@
 			return
 
 		if(L.can_centcom_reply())
-			var/input = sanitize(input(src.owner, "Please enter a message to reply to [key_name(L)] via their headset.","Outgoing message from Centcomm", ""))
+			var/input = sanitize(input(src.owner, "Please enter a message to reply to [key_name(L)] via their headset.","Outgoing message from [boss_short]", ""))
 			if(!input)		return
 
 			src.owner << "You sent [input] to [L] via a secure channel."
-			log_admin("[src.owner] replied to [key_name(L)]'s Centcomm message with the message [input].")
-			message_admins("[src.owner] replied to [key_name(L)]'s Centcom message with: \"[input]\"")
+			log_admin("[src.owner] replied to [key_name(L)]'s [boss_short] message with the message [input].")
+			message_admins("[src.owner] replied to [key_name(L)]'s [boss_short] message with: \"[input]\"")
 			if(!L.isMobAI())
 				L << "<span class='info'>You hear something crackle in your headset for a moment before a voice speaks.</span>"
-			L << "<span class='info'>Please stand by for a message from Central Command.</span>"
+			L << "<span class='info'>Please stand by for a message from [boss_name].</span>"
 			L << "<span class='info'>Message as follows.</span>"
 			L << "<span class='notice'>[input]</span>"
 			L << "<span class='info'>Message ends.</span>"
@@ -1401,7 +1401,7 @@
 		var/obj/machinery/photocopier/faxmachine/fax = locate(href_list["originfax"])
 
 		//todo: sanitize
-		var/input = input(src.owner, "Please enter a message to reply to [key_name(sender)] via secure connection. NOTE: BBCode does not work, but HTML tags do! Use <br> for line breaks.", "Outgoing message from Centcomm", "") as message|null
+		var/input = input(src.owner, "Please enter a message to reply to [key_name(sender)] via secure connection. NOTE: BBCode does not work, but HTML tags do! Use <br> for line breaks.", "Outgoing message from [boss_short]", "") as message|null
 		if(!input)	return
 
 		var/customname = input(src.owner, "Pick a title for the report", "Title") as text|null
@@ -1419,7 +1419,7 @@
 			P.stamped = new
 		P.stamped += /obj/item/weapon/stamp
 		P.overlays += stampoverlay
-		P.stamps += "<HR><i>This paper has been stamped by the Central Command Quantum Relay.</i>"
+		P.stamps += "<HR><i>This paper has been stamped by the [boss_name] Quantum Relay.</i>"
 
 		if(fax.recievefax(P))
 			src.owner << "\blue Message reply to transmitted successfully."
@@ -2229,7 +2229,7 @@
 					if(W.z in config.station_levels && !istype(get_area(W), /area/bridge) && !istype(get_area(W), /area/crew_quarters) && !istype(get_area(W), /area/security/prison))
 						W.req_access = list()
 				message_admins("[key_name_admin(usr)] activated Egalitarian Station mode")
-				command_announcement.Announce("Centcomm airlock control override activated. Please take this time to get acquainted with your coworkers.", new_sound = 'sound/AI/commandreport.ogg')
+				command_announcement.Announce("[boss_short] airlock control override activated. Please take this time to get acquainted with your coworkers.", new_sound = 'sound/AI/commandreport.ogg')
 			if("dorf")
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","DF")

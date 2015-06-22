@@ -6,12 +6,12 @@
 
 /obj/item/clothing/accessory/badge
 	name = "detective's badge"
-	desc = "NanoTrasen Security Department detective's badge, made from gold."
+	desc = "Security Department detective's badge, made from gold."
 	icon_state = "badge"
 	slot_flags = SLOT_BELT | SLOT_TIE
 
 	var/stored_name
-	var/badge_string = "NanoTrasen Security Department"
+	var/badge_string = "Corporate Security"
 
 /obj/item/clothing/accessory/badge/old
 	name = "faded badge"
@@ -55,7 +55,7 @@
 		user << "Waving around a holobadge before swiping an ID would be pretty pointless."
 		return
 	return ..()
-	
+
 /obj/item/clothing/accessory/badge/holo/emag_act(var/remaining_charges, var/mob/user)
 	if (emagged)
 		user << "<span class='danger'>\The [src] is already cracked.</span>"

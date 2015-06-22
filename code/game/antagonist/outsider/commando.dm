@@ -5,7 +5,7 @@ var/datum/antagonist/deathsquad/mercenary/commandos
 	landmark_id = "Syndicate-Commando"
 	role_text = "Syndicate Commando"
 	role_text_plural = "Commandos"
-	welcome_text = "You are in the employ of a criminal syndicate hostile to NanoTrasen."
+	welcome_text = "You are in the employ of a criminal syndicate hostile to corporate interests."
 	id_type = /obj/item/weapon/card/id/centcom/ERT
 
 /datum/antagonist/deathsquad/mercenary/New()
