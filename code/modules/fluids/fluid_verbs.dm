@@ -21,12 +21,12 @@
 	set desc = "Destroy all fluid tiles."
 	set name = "Nuke Fluid"
 
-	if(alert(usr, "Delete all fluids?","No","Yes") == "Yes")
+	if(alert(usr, "Delete all fluids?","Fluid deletion","No","Yes") == "Yes")
 		log_admin("[key_name(usr)] nuked all fluids.")
 		for(var/obj/effect/fluid/F in world)
 			F.evaporate()
 			qdel(F)
-			return
+		return
 
 /datum/admins/proc/debug_fluid()
 	set category = "Debug"
