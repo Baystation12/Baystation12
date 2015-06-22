@@ -1140,9 +1140,8 @@ datum
 				if(!M) M = holder.my_atom
 				if(ishuman(M))
 					var/mob/living/carbon/human/H = M
-					//Peridaxon heals only non-robotic organs
 					for(var/datum/organ/internal/I in H.internal_organs)
-						if(I.rejecting >= 1) && (I.robotic != 2))
+						if(I.rejecting >= 1)
 							I.rejecting = 0
 				..()
 
