@@ -24,6 +24,7 @@
 		/obj/item/weapon/tank,
 		/obj/item/weapon/circuitboard,
 		/obj/item/weapon/smes_coil
+		/obj/item/device/t_scanner
 		)
 
 	var/obj/item/wrapped = null // Item currently being held.
