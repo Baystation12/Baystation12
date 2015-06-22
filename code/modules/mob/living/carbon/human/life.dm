@@ -284,6 +284,8 @@
 		radiation = Clamp(radiation,0,100)
 
 		if (radiation)
+			if (src.species.name == "Kidan")
+				return
 			var/datum/organ/internal/diona/nutrients/rad_organ = locate() in internal_organs
 			if(rad_organ && !rad_organ.is_broken())
 				var/rads = radiation/25
