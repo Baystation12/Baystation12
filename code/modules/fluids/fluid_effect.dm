@@ -53,7 +53,7 @@
 /obj/effect/fluid/update_icon()
 	if(depth == FLUID_DELETING)
 		return
-	var/tmp_alpha = min(220,max(70, 2.55 * depth))
+	var/tmp_alpha = min(FLUID_MAX_ALPHA,max(70, 2.55 * depth))
 	var/tmp_layer = (depth >= FLUID_DROWN_LEVEL_RESTING) ? ((depth >= FLUID_DROWN_LEVEL_STANDING) ? (MOB_LAYER+0.1) : (TABLE_LAYER+0.1)) : 2
 	if(need_colour_update)
 		var/tmp_colour = reagents ? reagents.get_color() : null

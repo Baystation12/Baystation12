@@ -17,7 +17,7 @@ var/image/ocean_overlay
 	if(!ocean_overlay)
 		ocean_overlay = image('icons/effects/liquid.dmi', "deep_still")
 		ocean_overlay.color = "#66D1FF"
-		ocean_overlay.alpha = 170
+		ocean_overlay.alpha = FLUID_MAX_ALPHA
 		ocean_overlay.layer = 5.1
 	overlays |= ocean_overlay
 
