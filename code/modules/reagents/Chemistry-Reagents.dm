@@ -439,7 +439,7 @@ datum
 					M.adjustToxLoss(REAGENTS_METABOLISM)
 					
 				if(alien && alien == IS_KIDAN)
-				M.hallucination = max(M.hallucination, 2)
+					M.hallucination = max(M.hallucination, 2)
 				
 				else
 					if(M.losebreath >= 10)
