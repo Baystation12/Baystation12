@@ -52,7 +52,7 @@
 	icon_state = "purple"
 	item_state = "glasses"
 	
-/obj/item/clothing/glasses/pscience
+/obj/item/clothing/glasses/science/prescription
 	name = "Prescription Science Goggles"
 	desc = "The goggles do nothing! (Except helping you see)"
 	icon_state = "purple"
@@ -216,7 +216,7 @@
 		src.hud = new/obj/item/clothing/glasses/hud/security(src)
 		return
 
-/obj/item/clothing/glasses/sunglasses/psechud
+/obj/item/clothing/glasses/sunglasses/sechud/prescription
 	name = "Prescription HUDSunglasses"
 	desc = "Prescription Sunglasses with a HUD."
 	icon_state = "sunhud"
