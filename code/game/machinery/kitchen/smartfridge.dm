@@ -136,6 +136,7 @@
 
 /obj/machinery/smartfridge/drying_rack/proc/dry()
 	for(var/obj/item/weapon/reagent_containers/food/snacks/S in contents)
+		if(S.dry) continue
 		if(S.dried_type == S.type)
 			S.dry = 1
 			item_quants[S.name]--
