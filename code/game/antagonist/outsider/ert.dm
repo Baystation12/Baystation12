@@ -12,7 +12,7 @@ var/datum/antagonist/ert/ert
 	max_antags_round = 5 // ERT mode?
 	landmark_id = "Response Team"
 
-	flags = ANTAG_OVERRIDE_JOB | ANTAG_SET_APPEARANCE | ANTAG_HAS_LEADER
+	flags = ANTAG_OVERRIDE_JOB | ANTAG_SET_APPEARANCE | ANTAG_HAS_LEADER | ANTAG_CHOOSE_NAME
 
 /datum/antagonist/ert/create_default(var/mob/source)
 	var/mob/living/carbon/human/M = ..()
