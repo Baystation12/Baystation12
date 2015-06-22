@@ -38,7 +38,6 @@
 	desc = "A prescription heads-up display that scans the humans in view and provides accurate data about their ID status and security records."
 	icon_state = "securityhud"
 	body_parts_covered = 0
-	var/global/list/jobs[0]
 	prescription = 1
 
 /obj/item/clothing/glasses/hud/security/jensenshades
