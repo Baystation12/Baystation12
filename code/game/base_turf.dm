@@ -5,7 +5,7 @@ var/global/list/base_turf_by_z = list(
 
 proc/get_base_turf(var/z)
 	if(!base_turf_by_z["[z]"])
-		base_turf_by_z["[z]"] = /turf/space
+		base_turf_by_z["[z]"] = world.turf
 	return base_turf_by_z["[z]"]
 
 /client/proc/set_base_turf()
