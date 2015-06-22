@@ -437,6 +437,10 @@ datum
 
 				if(alien && alien == IS_VOX)
 					M.adjustToxLoss(REAGENTS_METABOLISM)
+					
+				if(alien && alien == IS_KIDAN)
+				M.hallucination = max(M.hallucination, 2)
+				
 				else
 					if(M.losebreath >= 10)
 						M.losebreath = max(10, M.losebreath-5)
@@ -1122,6 +1126,25 @@ datum
 				holder.remove_reagent("lexorin", 2*REM)
 				..()
 				return
+				
+		cervaline
+			name = "Cervaline"
+			id = "cervaline"
+			description = "An long-lasting immunosuppressant used to prevent organ rejection. Dose carefully."
+			reagent_state = LIQUID
+			color = "#DFB1DA" // rgb: 223, 177, 218
+			overdose = 30
+			scannable = 1
+			custom_metabolism = 0.005 
+			on_mob_life(var/mob/living/M as mob)
+				if(!M) M = holder.my_atom
+				if(ishuman(M))
+					var/mob/living/carbon/human/H = M
+					//Peridaxon heals only non-robotic organs
+					for(var/datum/organ/internal/I in H.internal_organs)
+						if(I.rejecting >= 1) && (I.robotic != 2))
+							I.rejecting = 0
+				..()
 
 		dexalinp
 			name = "Dexalin Plus"
