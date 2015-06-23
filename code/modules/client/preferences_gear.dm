@@ -378,6 +378,13 @@ var/global/list/gear_datums = list()
 	slot = slot_w_uniform
 	cost = 1
 
+/datum/gear/roboticist_skirt
+	display_name = "skirt, roboticist"
+	path = /obj/item/clothing/under/rank/roboticist/skirt
+	slot = slot_w_uniform
+	cost = 1
+	allowed_roles = list("Roboticist")
+
 /datum/gear/amishsuit
 	display_name = "suit, amish"
 	path = /obj/item/clothing/under/sl_suit
