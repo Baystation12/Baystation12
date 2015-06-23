@@ -707,15 +707,15 @@ proc/anim(turf/location as turf,target as mob|obj,a_icon,a_icon_state as text,fl
 /proc/get_area_turfs(var/areatype)
 	if(!areatype) return null
 	if(istext(areatype)) areatype = text2path(areatype)
+	var/area/A
 	if(isarea(areatype))
-		var/area/areatemp = areatype
-		areatype = areatemp.type
-
-	var/list/turfs = new/list()
-	for(var/area/N in world)
-		if(istype(N, areatype))
-			for(var/turf/T in N) turfs += T
-	return turfs
+		A = areatype
+	else
+		A = locate(areatype) in world
+	if(!A)	return
+	.= list()
+	for(var/turf/T in A)
+		. += T
 
 //Takes: Area type as text string or as typepath OR an instance of the area.
 //Returns: A list of all atoms	(objs, turfs, mobs) in areas of that type of that type in the world.
@@ -723,15 +723,11 @@ proc/anim(turf/location as turf,target as mob|obj,a_icon,a_icon_state as text,fl
 	if(!areatype) return null
 	if(istext(areatype)) areatype = text2path(areatype)
 	if(isarea(areatype))
-		var/area/areatemp = areatype
-		areatype = areatemp.type
-
-	var/list/atoms = new/list()
-	for(var/area/N in world)
-		if(istype(N, areatype))
-			for(var/atom/A in N)
-				atoms += A
-	return atoms
+		A = areatype
+	else
+		A = locate(areatype) in world
+	if(!A)	return
+	return A.contents
 
 /datum/coords //Simple datum for storing coordinates.
 	var/x_pos = null
@@ -806,49 +802,16 @@ proc/anim(turf/location as turf,target as mob|obj,a_icon,a_icon_state as text,fl
 						ST.zone.remove(ST)
 
 					/* Quick visual fix for some weird shuttle corner artefacts when on transit space tiles */
-					if(direction && findtext(X.icon_state, "swall_s"))
-
-						// Spawn a new shuttle corner object
-						var/obj/corner = new()
-						corner.loc = X
-						corner.density = 1
-						corner.anchored = 1
-						corner.icon = X.icon
-						corner.icon_state = replacetext(X.icon_state, "_s", "_f")
-						corner.tag = "delete me"
-						corner.name = "wall"
-
-						// Find a new turf to take on the property of
-						var/turf/nextturf = get_step(corner, direction)
-						if(!nextturf || !istype(nextturf, /turf/space))
-							nextturf = get_step(corner, turn(direction, 180))
-
-
-						// Take on the icon of a neighboring scrolling space icon
-						X.icon = nextturf.icon
-						X.icon_state = nextturf.icon_state
+					if(istype(X,/turf/simulated/shuttle/wall))
+						X.underlays.Cut()
+						X.underlays += image(old_icon1,old_icon_state1)
 
 
 					for(var/obj/O in T)
-
-						// Reset the shuttle corners
-						if(O.tag == "delete me")
-							X.icon = 'icons/turf/shuttle.dmi'
-							X.icon_state = replacetext(O.icon_state, "_f", "_s") // revert the turf to the old icon_state
-							X.name = "wall"
-							qdel(O) // prevents multiple shuttle corners from stacking
-							continue
-						if(!istype(O,/obj)) continue
 						O.loc = X
 					for(var/mob/M in T)
 						if(!istype(M,/mob) || istype(M, /mob/aiEye)) continue // If we need to check for more mobs, I'll add a variable
 						M.loc = X
-
-//					var/area/AR = X.loc
-
-//					if(AR.lighting_use_dynamic)							//TODO: rewrite this code so it's not messed by lighting ~Carn
-//						X.opacity = !X.opacity
-//						X.SetOpacity(!X.opacity)
 
 					toupdate += X
 
