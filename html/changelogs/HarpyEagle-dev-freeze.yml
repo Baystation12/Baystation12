@@ -1,3 +1,23 @@
 author: HarpyEagle
-changes: []
 delete-after: false
+changes: 
+  - bugfix: "Fixed Tajaran name generation producing names without a space between first and last."
+  - wip: "Adds docking to the mercenary shuttle. Works similarly to other shuttles, except docking and undocking is manually initiated and not automatic. A system to approve or deny dock requests still to be implemented."
+  - rscadd: "Toolboxes can now hold larger items, such as stacks of metal or power cells, at the cost of having less space for other things."
+  - tweak: "Gloves/shoes can now be worn even if you have one hand/foot missing. The other one still has to be present, of course. The items still drop when you first lose the hand/foot."
+  - tweak: "Budget insulated gloves are somewhat less useless. On average, they will stop half the damage from getting shocked, and the worst case insulation is not as bad as it used to be. Budget gloves that are as good as regular insulated gloves are still as rare as they were before though."
+  - tweak: "PTR bullets are now hitscan, to make them somewhat better for actual sniping."
+  - maptweak: "The telecoms server room now has an actual cycling airlock into it."
+  - tweak: "Non-vital body parts will no longer take further damage above a certain amount, and will inflict paincrit effects instead. On most humaniods the head, chest, and groin are vital."
+  - rscadd: "Engineers now spawn with industrial workboots (credit: ChessPiece/Bishop)."
+  - bugfix: "Damaged robotic legs now more likely to have an effect."
+  - bugfix: "Fixed bug preventing internal organs from taking damage in some cases."
+  - maptweak: "New flavours of tables around the station. Engineering starts with more plastic."
+  - bugfix: "Fixed worn items not appearing in some cases. Most notably crossbows and certain guns when worn on the back. As a side effect, laundry machines no longer transform items."
+  - bugfix: "Crit oxyloss now runs in game time instead of real time. So if lag is slowing your movement the same slowdown applies to the dying person you're trying to reach."
+  - rscadd: "Breathmasks can now be adjusted by clicking on them in your hand, in addition to the verb."
+  - rscadd: "Wearing a space helmet or similar face-covering gear now prevents eating and force-feeding food, drink, and pills."
+  - rscadd: "Phoron in air ignites above it's flashpoint temperature and a certain (very small) minimum concentration. Environments that have oxygen and are hot enough, and have phoron but not enough concentration to burn will produce flareouts, which are mostly a visual effect."
+  - rscadd: "Adds animation when making unarmed attacks or attacking with melee weapons, to help make it clearer who is attacking."
+  - soundadd: "Opening an unpowered door now has an appropriate sound."
+  - rscadd: "Ingesting diseased blood may contract the disease."
