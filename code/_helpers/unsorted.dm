@@ -750,16 +750,16 @@ proc/anim(turf/location as turf,target as mob|obj,a_icon,a_icon_state as text,fl
 	var/src_min_x = world.maxx
 	var/src_min_y = world.maxy
 	for (var/turf/T in src_turfs)
-		if(T.x < src_min_x) src_min_x	= T.x
-		if(T.y < src_min_y) src_min_y	= T.y
+		if(T.x < src_min_x) src_min_x = T.x
+		if(T.y < src_min_y) src_min_y = T.y
 
 	var/trg_min_x = world.maxx
 	var/trg_min_y = world.maxy
 	for (var/turf/T in trg_turfs)
-		if(T.x < trg_min_x) trg_min_x	= T.x
-		if(T.y < trg_min_y) trg_min_y	= T.y
+		if(T.x < trg_min_x) trg_min_x = T.x
+		if(T.y < trg_min_y) trg_min_y = T.y
 
-	var/list/trg_grid = new/list()
+	var/list/trg_grid = list()
 	for(var/turf/T in trg_turfs)
 		var/l_x = T.x - trg_min_x
 		var/l_y = T.y - trg_min_y
@@ -768,19 +768,13 @@ proc/anim(turf/location as turf,target as mob|obj,a_icon,a_icon_state as text,fl
 		trg_grid["[l_x]"]["[l_y]"] = T
 
 	for (var/turf/T in src_turfs)
-		var/l_x = T.x - src_min_x
-		var/l_y = T.y - src_min_y
-		var/turf/B  = trg_grid["[l_x]"]["[l_y]"]
+		var/turf/B  = trg_grid["[T.x - src_min_x]"]["[T.y - src_min_y]"]
 		if(!B) continue
 
-		var/old_dir = T.dir
-		var/old_icon_state = T.icon_state
-		var/old_icon = T.icon
-
 		var/turf/X = B.ChangeTurf(T.type)
-		X.set_dir(old_dir)
-		X.icon_state = old_icon_state
-		X.icon = old_icon //Shuttle floors are in shuttle.dmi while the defaults are floors.dmi
+		X.set_dir(T.dir)
+		X.icon_state = T.icon_state
+		X.icon = T.icon //Shuttle floors are in shuttle.dmi while the defaults are floors.dmi
 
 		var/turf/simulated/ST = T
 		if(istype(ST) && ST.zone)
@@ -793,7 +787,7 @@ proc/anim(turf/location as turf,target as mob|obj,a_icon,a_icon_state as text,fl
 		/* Quick visual fix for some weird shuttle corner artefacts when on transit space tiles */
 		if(istype(X,/turf/simulated/shuttle/wall))
 			X.underlays.Cut()
-			X.underlays += image(old_icon,old_icon_state)
+			X.underlays += image(T.icon,T.icon_state)
 
 		for(var/atom/movable/AM in T)
 			if(istype(AM, /mob/aiEye)) continue
@@ -805,162 +799,76 @@ proc/anim(turf/location as turf,target as mob|obj,a_icon,a_icon_state as text,fl
 			T.ChangeTurf(get_base_turf(T.z))
 
 
-proc/DuplicateObject(obj/original, var/perfectcopy = 0 , var/sameloc = 0)
+proc/CarbonCopy(atom/original)
 	if(!original)
 		return null
 
-	var/obj/O = null
+	var/atom/O = new original.type(locate(0,0,0))
 
-	if(sameloc)
-		O=new original.type(original.loc)
-	else
-		O=new original.type(locate(0,0,0))
-
-	if(perfectcopy)
-		if((O) && (original))
-			for(var/V in original.vars)
-				if(!(V in list("type","loc","locs","vars", "parent", "parent_type","verbs","ckey","key")))
-					O.vars[V] = original.vars[V]
+	for(var/V in original.vars)
+		if(!(V in list("type","loc","locs","vars", "parent", "verbs", "parent_type","ckey","key","x","y","z","contents", "luminosity")))
+			O.vars[V] = original.vars[V]
 	return O
-
 
 /area/proc/copy_contents_to(var/area/A , var/platingRequired = 0 )
 	//Takes: Area. Optional: If it should copy to areas that don't have plating
-	//Returns: Nothing.
-	//Notes: Attempts to move the contents of one area to another area.
-	//       Movement based on lower left corner. Tiles that do not fit
-	//		 into the new area will not be moved.
+	//Returns: All copied atoms.
 
 	if(!A || !src) return 0
 
-	var/list/turfs_src = get_area_turfs(src.type)
-	var/list/turfs_trg = get_area_turfs(A.type)
+	var/list/src_turfs = get_area_turfs(src.type)
+	var/list/trg_turfs = get_area_turfs(A.type)
 
-	var/src_min_x = 0
-	var/src_min_y = 0
-	for (var/turf/T in turfs_src)
-		if(T.x < src_min_x || !src_min_x) src_min_x	= T.x
-		if(T.y < src_min_y || !src_min_y) src_min_y	= T.y
+	var/src_min_x = world.maxx
+	var/src_min_y = world.maxy
+	for (var/turf/T in src_turfs)
+		if(T.x < src_min_x) src_min_x = T.x
+		if(T.y < src_min_y) src_min_y = T.y
 
-	var/trg_min_x = 0
-	var/trg_min_y = 0
-	for (var/turf/T in turfs_trg)
-		if(T.x < trg_min_x || !trg_min_x) trg_min_x	= T.x
-		if(T.y < trg_min_y || !trg_min_y) trg_min_y	= T.y
+	var/trg_min_x = world.maxx
+	var/trg_min_y = world.maxy
+	for (var/turf/T in trg_turfs)
+		if(T.x < trg_min_x) trg_min_x = T.x
+		if(T.y < trg_min_y) trg_min_y = T.y
 
-	var/list/refined_src = new/list()
-	for(var/turf/T in turfs_src)
-		refined_src += T
-		refined_src[T] = new/datum/coords
-		var/datum/coords/C = refined_src[T]
-		C.x_pos = (T.x - src_min_x)
-		C.y_pos = (T.y - src_min_y)
-
-	var/list/refined_trg = new/list()
-	for(var/turf/T in turfs_trg)
-		refined_trg += T
-		refined_trg[T] = new/datum/coords
-		var/datum/coords/C = refined_trg[T]
-		C.x_pos = (T.x - trg_min_x)
-		C.y_pos = (T.y - trg_min_y)
+	var/list/trg_grid = list()
+	for(var/turf/T in trg_turfs)
+		var/l_x = T.x - trg_min_x
+		var/l_y = T.y - trg_min_y
+		if(!trg_grid["[l_x]"])
+			trg_grid["[l_x]"] = list()
+		trg_grid["[l_x]"]["[l_y]"] = T
 
 	var/list/toupdate = new/list()
 
 	var/copiedobjs = list()
 
+	for (var/turf/T in src_turfs)
+		var/turf/B  = trg_grid["[T.x - src_min_x]"]["[T.y - src_min_y]"]
+		if(!B) continue
 
-	moving:
-		for (var/turf/T in refined_src)
-			var/datum/coords/C_src = refined_src[T]
-			for (var/turf/B in refined_trg)
-				var/datum/coords/C_trg = refined_trg[B]
-				if(C_src.x_pos == C_trg.x_pos && C_src.y_pos == C_trg.y_pos)
+		if(platingRequired)
+			if(istype(B, get_base_turf(B.z)))
+				continue
 
-					var/old_dir1 = T.dir
-					var/old_icon_state1 = T.icon_state
-					var/old_icon1 = T.icon
+		var/turf/X = new T.type(B)
+		X.set_dir(T.dir)
+		X.icon_state = T.icon_state
+		X.icon = T.icon //Shuttle floors are in shuttle.dmi while the defaults are floors.dmi
 
-					if(platingRequired)
-						if(istype(B, get_base_turf(B.z)))
-							continue moving
+		for(var/atom/movable/AM in T)
+			if(istype(AM, /mob/aiEye)) continue
+			var/atom/movable/CC = CarbonCopy(AM)
+			CC.loc = X
+			copiedobjs += CC
 
-					var/turf/X = new T.type(B)
-					X.set_dir(old_dir1)
-					X.icon_state = old_icon_state1
-					X.icon = old_icon1 //Shuttle floors are in shuttle.dmi while the defaults are floors.dmi
+		toupdate += X
 
-
-					var/list/objs = new/list()
-					var/list/newobjs = new/list()
-					var/list/mobs = new/list()
-					var/list/newmobs = new/list()
-
-					for(var/obj/O in T)
-
-						if(!istype(O,/obj))
-							continue
-
-						objs += O
-
-
-					for(var/obj/O in objs)
-						newobjs += DuplicateObject(O , 1)
-
-
-					for(var/obj/O in newobjs)
-						O.loc = X
-
-					for(var/mob/M in T)
-
-						if(!istype(M,/mob) || istype(M, /mob/aiEye)) continue // If we need to check for more mobs, I'll add a variable
-						mobs += M
-
-					for(var/mob/M in mobs)
-						newmobs += DuplicateObject(M , 1)
-
-					for(var/mob/M in newmobs)
-						M.loc = X
-
-					copiedobjs += newobjs
-					copiedobjs += newmobs
-
-
-
-					for(var/V in T.vars)
-						if(!(V in list("type","loc","locs","vars", "parent", "parent_type","verbs","ckey","key","x","y","z","contents", "luminosity")))
-							X.vars[V] = T.vars[V]
-
-//					var/area/AR = X.loc
-
-//					if(AR.lighting_use_dynamic)
-//						X.opacity = !X.opacity
-//						X.sd_SetOpacity(!X.opacity)			//TODO: rewrite this code so it's not messed by lighting ~Carn
-
-					toupdate += X
-
-					refined_src -= T
-					refined_trg -= B
-					continue moving
-
-
-
-
-	var/list/doors = new/list()
 
 	if(toupdate.len)
-		for(var/turf/simulated/T1 in toupdate)
-			for(var/obj/machinery/door/D2 in T1)
-				doors += D2
-			/*if(T1.parent)
-				air_master.groups_to_rebuild += T1.parent
-			else
-				air_master.tiles_to_update += T1*/
-
-	for(var/obj/O in doors)
-		O:update_nearby_tiles(1)
-
-
-
+		for(var/turf/simulated/T in toupdate)
+			for(var/obj/machinery/door/D in T)
+				D.update_nearby_tiles(1)
 
 	return copiedobjs
 
