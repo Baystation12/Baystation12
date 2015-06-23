@@ -722,6 +722,7 @@ proc/anim(turf/location as turf,target as mob|obj,a_icon,a_icon_state as text,fl
 /proc/get_area_all_atoms(var/areatype)
 	if(!areatype) return null
 	if(istext(areatype)) areatype = text2path(areatype)
+	var/area/A
 	if(isarea(areatype))
 		A = areatype
 	else
@@ -743,86 +744,65 @@ proc/anim(turf/location as turf,target as mob|obj,a_icon,a_icon_state as text,fl
 
 	if(!A || !src) return 0
 
-	var/list/turfs_src = get_area_turfs(src.type)
-	var/list/turfs_trg = get_area_turfs(A.type)
+	var/list/src_turfs = get_area_turfs(src.type)
+	var/list/trg_turfs = get_area_turfs(A.type)
 
-	var/src_min_x = 0
-	var/src_min_y = 0
-	for (var/turf/T in turfs_src)
-		if(T.x < src_min_x || !src_min_x) src_min_x	= T.x
-		if(T.y < src_min_y || !src_min_y) src_min_y	= T.y
+	var/src_min_x = world.maxx
+	var/src_min_y = world.maxy
+	for (var/turf/T in src_turfs)
+		if(T.x < src_min_x) src_min_x	= T.x
+		if(T.y < src_min_y) src_min_y	= T.y
 
-	var/trg_min_x = 0
-	var/trg_min_y = 0
-	for (var/turf/T in turfs_trg)
-		if(T.x < trg_min_x || !trg_min_x) trg_min_x	= T.x
-		if(T.y < trg_min_y || !trg_min_y) trg_min_y	= T.y
+	var/trg_min_x = world.maxx
+	var/trg_min_y = world.maxy
+	for (var/turf/T in trg_turfs)
+		if(T.x < trg_min_x) trg_min_x	= T.x
+		if(T.y < trg_min_y) trg_min_y	= T.y
 
-	var/list/refined_src = new/list()
-	for(var/turf/T in turfs_src)
-		refined_src += T
-		refined_src[T] = new/datum/coords
-		var/datum/coords/C = refined_src[T]
-		C.x_pos = (T.x - src_min_x)
-		C.y_pos = (T.y - src_min_y)
+	var/list/trg_grid = new/list()
+	for(var/turf/T in trg_turfs)
+		var/l_x = T.x - trg_min_x
+		var/l_y = T.y - trg_min_y
+		if(!trg_grid["[l_x]"])
+			trg_grid["[l_x]"] = list()
+		trg_grid["[l_x]"]["[l_y]"] = T
 
-	var/list/refined_trg = new/list()
-	for(var/turf/T in turfs_trg)
-		refined_trg += T
-		refined_trg[T] = new/datum/coords
-		var/datum/coords/C = refined_trg[T]
-		C.x_pos = (T.x - trg_min_x)
-		C.y_pos = (T.y - trg_min_y)
+	for (var/turf/T in src_turfs)
+		var/l_x = T.x - src_min_x
+		var/l_y = T.y - src_min_y
+		var/turf/B  = trg_grid["[l_x]"]["[l_y]"]
+		if(!B) continue
 
-	var/list/fromupdate = new/list()
-	var/list/toupdate = new/list()
+		var/old_dir = T.dir
+		var/old_icon_state = T.icon_state
+		var/old_icon = T.icon
 
-	moving:
-		for (var/turf/T in refined_src)
-			var/datum/coords/C_src = refined_src[T]
-			for (var/turf/B in refined_trg)
-				var/datum/coords/C_trg = refined_trg[B]
-				if(C_src.x_pos == C_trg.x_pos && C_src.y_pos == C_trg.y_pos)
+		var/turf/X = B.ChangeTurf(T.type)
+		X.set_dir(old_dir)
+		X.icon_state = old_icon_state
+		X.icon = old_icon //Shuttle floors are in shuttle.dmi while the defaults are floors.dmi
 
-					var/old_dir1 = T.dir
-					var/old_icon_state1 = T.icon_state
-					var/old_icon1 = T.icon
+		var/turf/simulated/ST = T
+		if(istype(ST) && ST.zone)
+			var/turf/simulated/SX = X
+			if(!SX.air)
+				SX.make_air()
+			SX.air.copy_from(ST.zone.air)
+			ST.zone.remove(ST)
 
-					var/turf/X = B.ChangeTurf(T.type)
-					X.set_dir(old_dir1)
-					X.icon_state = old_icon_state1
-					X.icon = old_icon1 //Shuttle floors are in shuttle.dmi while the defaults are floors.dmi
+		/* Quick visual fix for some weird shuttle corner artefacts when on transit space tiles */
+		if(istype(X,/turf/simulated/shuttle/wall))
+			X.underlays.Cut()
+			X.underlays += image(old_icon,old_icon_state)
 
-					var/turf/simulated/ST = T
-					if(istype(ST) && ST.zone)
-						var/turf/simulated/SX = X
-						if(!SX.air)
-							SX.make_air()
-						SX.air.copy_from(ST.zone.air)
-						ST.zone.remove(ST)
+		for(var/atom/movable/AM in T)
+			if(istype(AM, /mob/aiEye)) continue
+			AM.loc = X
 
-					/* Quick visual fix for some weird shuttle corner artefacts when on transit space tiles */
-					if(istype(X,/turf/simulated/shuttle/wall))
-						X.underlays.Cut()
-						X.underlays += image(old_icon1,old_icon_state1)
-
-
-					for(var/obj/O in T)
-						O.loc = X
-					for(var/mob/M in T)
-						if(!istype(M,/mob) || istype(M, /mob/aiEye)) continue // If we need to check for more mobs, I'll add a variable
-						M.loc = X
-
-					toupdate += X
-
-					if(turftoleave)
-						fromupdate += T.ChangeTurf(turftoleave)
-					else
-						T.ChangeTurf(get_base_turf(T.z))
-
-					refined_src -= T
-					refined_trg -= B
-					continue moving
+		if(turftoleave)
+			T.ChangeTurf(turftoleave)
+		else
+			T.ChangeTurf(get_base_turf(T.z))
 
 
 proc/DuplicateObject(obj/original, var/perfectcopy = 0 , var/sameloc = 0)
