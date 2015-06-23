@@ -90,7 +90,7 @@
 	if(!base_turf)
 		evaporate()
 		return
-	if(fluid_flows && fluid_flows.len)
+	if(fluid_flows)
 		apply_flow()
 	else
 		for(var/atom/movable/AM in base_turf)
