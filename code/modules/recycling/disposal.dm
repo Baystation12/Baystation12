@@ -39,8 +39,7 @@
 		else
 			trunk.linked = src	// link the pipe trunk to self
 
-		air_contents = new/datum/gas_mixture()
-		air_contents.volume = PRESSURE_TANK_VOLUME
+		air_contents = new/datum/gas_mixture(PRESSURE_TANK_VOLUME)
 		update()
 
 /obj/machinery/disposal/Destroy()
@@ -411,8 +410,6 @@
 		H.tomail = 1
 
 
-	air_contents = new()		// new empty gas resv.
-
 	sleep(10)
 	if(last_sound < world.time + 1)
 		playsound(src, 'sound/machines/disposalflush.ogg', 50, 0, 0)
@@ -420,7 +417,8 @@
 	sleep(5) // wait for animation to finish
 
 
-	H.init(src)	// copy the contents of disposer to holder
+	H.init(src, air_contents)	// copy the contents of disposer to holder
+	air_contents = new(PRESSURE_TANK_VOLUME)	// new empty gas resv.
 
 	H.start(src) // start the holder processing movement
 	flushing = 0
@@ -495,8 +493,8 @@
 
 
 	// initialize a holder from the contents of a disposal unit
-	proc/init(var/obj/machinery/disposal/D)
-		gas = D.air_contents// transfer gas resv. into holder object
+	proc/init(var/obj/machinery/disposal/D, var/datum/gas_mixture/flush_gas)
+		gas = flush_gas// transfer gas resv. into holder object -- let's be explicit about the data this proc consumes, please.
 
 		//Check for any living mobs trigger hasmob.
 		//hasmob effects whether the package goes to cargo or its tagged destination.
