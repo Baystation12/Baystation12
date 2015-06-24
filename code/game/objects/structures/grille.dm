@@ -157,9 +157,7 @@
 		return
 //window placing end
 
-	else if(istype(W, /obj/item/weapon/material/shard))
-		health -= W.force * 0.1
-	else if(!shock(user, 70))
+	else if(!(W.flags & CONDUCT) || !shock(user, 70))
 		user.do_attack_animation(src)
 		playsound(loc, 'sound/effects/grillehit.ogg', 80, 1)
 		switch(W.damtype)
