@@ -1263,11 +1263,9 @@ var/global/list/gear_datums = list()
 	path = /obj/item/clothing/glasses/sunglasses/sechud/prescription
 	cost = 1
 	allowed_roles = list("Security Officer","Head of Security","Warden")
-	slot = slot_eyes
 	
-/datum/gear/pres_sechud
+/datum/gear/pres_medhud
 	display_name = "Prescription Medical HUD"
 	path = /obj/item/clothing/glasses/hud/health/prescription
 	cost = 1
 	allowed_roles = list("Medical Doctor","Chief Medical Officer","Paramedic")
-	slot = slot_eyes
