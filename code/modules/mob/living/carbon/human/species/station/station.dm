@@ -70,7 +70,7 @@
 	language = "Siik'tajr"
 	tail = "tajtail"
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/claws, /datum/unarmed_attack/bite/sharp)
-	darksight = 8
+	darksight = 6
 	slowdown = -1
 	brute_mod = 1.2
 
@@ -258,8 +258,8 @@
 	wingicon = 1
 	sizechange = 1
 	falldmg = 1
-	darksight = 6
-	burn_mod = 1.1
+	darksight = 10
+	brute_mod = 1.1
 
 	flags = CAN_JOIN | IS_WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR
 	
@@ -300,7 +300,7 @@
 	unarmed_types = list(/datum/unarmed_attack/claws)
 	brute_mod = 0.6
 	burn_mod = 1.4
-	darksight = 10
+	darksight = 8
 
 	flags = CAN_JOIN | IS_WHITELISTED | HAS_UNDERWEAR | IS_STRONG
 	
