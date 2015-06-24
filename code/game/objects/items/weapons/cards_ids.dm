@@ -222,8 +222,8 @@
 	item_state = "silver_id"
 
 /obj/item/weapon/card/id/detective
-	name = "Dectective card"
-	desc = "A Dectective card which shows authority."
+	name = "Detective card"
+	desc = "A Detective card which shows authority."
 	icon_state = "detective"
 	item_state = "silver_id"
 
