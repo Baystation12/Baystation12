@@ -16,6 +16,7 @@
 	var/shardtype = /obj/item/weapon/material/shard
 	var/glasstype = null // Set this in subtypes. Null is assumed strange or otherwise impossible to dismantle, such as for shuttle glass.
 	var/silicate = 0 // number of units of silicate
+	var/heat_resistance = 500 // Celsius. Fires above this temperature will damage the window.
 
 /obj/structure/window/examine(mob/user)
 	. = ..(user)
@@ -392,8 +393,8 @@
 		return
 
 /obj/structure/window/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
-	if(exposed_temperature > T0C + 800)
-		hit(round(exposed_volume / 100), 0)
+	if(exposed_temperature > T0C + heat_resistance)
+		hit(round(exposed_volume / heat_resistance), 0)
 	..()
 
 
@@ -403,34 +404,27 @@
 	icon_state = "window"
 	basestate = "window"
 	glasstype = /obj/item/stack/material/glass
+	heat_resistance = 500
 
 
-/obj/structure/window/phoronbasic
-	name = "phoron window"
-	desc = "A phoron-glass alloy window. It looks insanely tough to break. It appears it's also insanely tough to burn through."
+/obj/structure/window/borosilicate
+	name = "borosilicate window"
+	desc = "A platinum-glass alloy window designed to whistand high temperatures. It looks rather fragile."
 	basestate = "phoronwindow"
 	icon_state = "phoronwindow"
-	shardtype = /obj/item/weapon/material/shard/phoron
-	glasstype = /obj/item/stack/material/glass/phoronglass
-	maxhealth = 120
+	glasstype = /obj/item/stack/material/glass/borosilicateglass
+	heat_resistance = 5000
+	maxhealth = 28 // Double of regular glass
 
-/obj/structure/window/phoronbasic/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
-	if(exposed_temperature > T0C + 32000)
-		hit(round(exposed_volume / 1000), 0)
-	..()
-
-/obj/structure/window/phoronreinforced
-	name = "reinforced phoron window"
-	desc = "A phoron-glass alloy window, with rods supporting it. It looks hopelessly tough to break. It also looks completely fireproof, considering how basic phoron windows are insanely fireproof."
+/obj/structure/window/borosilicatereinforced
+	name = "reinforced borosilicate window"
+	desc = "A platinum-glass alloy window, with rods supporting it. It is specifically designed to whistand immense temperatures."
 	basestate = "phoronrwindow"
 	icon_state = "phoronrwindow"
-	shardtype = /obj/item/weapon/material/shard/phoron
-	glasstype = /obj/item/stack/material/glass/phoronrglass
+	glasstype = /obj/item/stack/material/glass/borosilicateglass/reinforced
 	reinf = 1
-	maxhealth = 160
-
-/obj/structure/window/phoronreinforced/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
-	return
+	maxhealth = 80 // Double resistance of regular rglass
+	heat_resistance = 10000 // Anything above this would melt through walls rapidly anyway.
 
 /obj/structure/window/reinforced
 	name = "reinforced window"
@@ -439,6 +433,7 @@
 	basestate = "rwindow"
 	maxhealth = 40
 	reinf = 1
+	heat_resistance = 2000
 	glasstype = /obj/item/stack/material/glass/reinforced
 
 /obj/structure/window/New(Loc, constructed=0)

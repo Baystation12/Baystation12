@@ -177,14 +177,14 @@
 	icon_state = "sheet-rglass"
 	default_type = "reinforced glass"
 
-/obj/item/stack/material/glass/phoronglass
-	name = "phoron glass"
-	singular_name = "phoron glass sheet"
+/obj/item/stack/material/glass/borosilicateglass
+	name = "borosilicate glass"
+	singular_name = "borosilicate glass sheet"
 	icon_state = "sheet-phoronglass"
 	default_type = "phoron glass"
 
-/obj/item/stack/material/glass/phoronrglass
-	name = "reinforced phoron glass"
-	singular_name = "reinforced phoron glass sheet"
+/obj/item/stack/material/glass/borosilicateglass/reinforced
+	name = "reinforced borosilicate glass"
+	singular_name = "reinforced borosilicate glass sheet"
 	icon_state = "sheet-phoronrglass"
-	default_type = "reinforced phoron glass"
+	default_type = "reinforced borosilicate glass"
