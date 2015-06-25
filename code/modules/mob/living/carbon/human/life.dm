@@ -968,8 +968,10 @@
 						spawn handle_hallucinations() //The not boring kind!
 					if(client && prob(5))
 						client.dir = pick(2,4,8)
+						var/client/C = client
 						spawn(rand(20,50))
-							client.dir = 1
+							if(C)
+								C.dir = 1
 
 				if(hallucination<=2)
 					hallucination = 0
