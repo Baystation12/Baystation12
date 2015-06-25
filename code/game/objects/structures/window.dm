@@ -418,7 +418,7 @@
 
 /obj/structure/window/borosilicatereinforced
 	name = "reinforced borosilicate window"
-	desc = "A platinum-glass alloy window, with rods supporting it. It is specifically designed to whistand immense temperatures."
+	desc = "A platinum-glass alloy window, with rods supporting it. It is specifically designed to withstand immense temperatures."
 	basestate = "phoronrwindow"
 	icon_state = "phoronrwindow"
 	glasstype = /obj/item/stack/material/glass/borosilicateglass/reinforced

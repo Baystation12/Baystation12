@@ -438,7 +438,7 @@ var/list/name_to_material
 	stack_origin_tech = "materials=3"
 	created_window = /obj/structure/window/borosilicate
 	wire_product = null
-	rod_product = /material/glass/borosilicate/reinforced
+	rod_product = /obj/item/stack/borosilicate/reinforced
 
 /material/glass/borosilicate/reinforced
 	name = "reinforced borosilicate glass"
