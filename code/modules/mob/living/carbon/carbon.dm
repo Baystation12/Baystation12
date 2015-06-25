@@ -225,14 +225,14 @@
 				"<span class='warning'>You try to pat out [src]'s flames! Hot!</span>")
 				if(do_mob(M, src, 15))
 					if (prob(10) && (M.fire_stacks <= 0))
-						M.fire_stacks -= 0.5
+						src.fire_stacks -= 0.5
 						M.fire_stacks += 1
 					M.IgniteMob()
 					if (M.on_fire)
 						M.visible_message("<span class='danger'>The fire spreads from [src] to [M]!</span>",
 						"<span class='danger'>The fire spreads to you as well!</span>")
 					else
-						src.fire_stacks -= 1 //Less effective than stop, drop, and roll
+						src.fire_stacks -= 0.5 //Less effective than stop, drop, and roll - also accounting for the fact that it takes half as long.
 						if (src.fire_stacks <= 0)
 							M.visible_message("<span class='warning'>[M] successfully pats out [src]'s flames.</span>",
 							"<span class='warning'>You successfully pat out [src]'s flames.</span>")
