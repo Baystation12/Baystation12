@@ -394,7 +394,7 @@
 
 /obj/structure/window/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	if(exposed_temperature > T0C + heat_resistance)
-		hit(round(exposed_volume / heat_resistance), 0)
+		hit(round(heat_resistance - (exposed_temperature / 200)), 0) // 1 damage / tick / 200C above heat tolerance
 	..()
 
 
@@ -404,16 +404,16 @@
 	icon_state = "window"
 	basestate = "window"
 	glasstype = /obj/item/stack/material/glass
-	heat_resistance = 500
+	heat_resistance = 250
 
 
 /obj/structure/window/borosilicate
 	name = "borosilicate window"
-	desc = "A platinum-glass alloy window designed to whistand high temperatures. It looks rather fragile."
+	desc = "A platinum-glass alloy window designed to withstand high temperatures. It looks rather fragile."
 	basestate = "phoronwindow"
 	icon_state = "phoronwindow"
 	glasstype = /obj/item/stack/material/glass/borosilicateglass
-	heat_resistance = 5000
+	heat_resistance = 3250
 	maxhealth = 28 // Double of regular glass
 
 /obj/structure/window/borosilicatereinforced
@@ -424,7 +424,7 @@
 	glasstype = /obj/item/stack/material/glass/borosilicateglass/reinforced
 	reinf = 1
 	maxhealth = 80 // Double resistance of regular rglass
-	heat_resistance = 10000 // Anything above this would melt through walls rapidly anyway.
+	heat_resistance = 7500 // Anything above this would melt through walls rapidly anyway.
 
 /obj/structure/window/reinforced
 	name = "reinforced window"
@@ -433,7 +433,7 @@
 	basestate = "rwindow"
 	maxhealth = 40
 	reinf = 1
-	heat_resistance = 2000
+	heat_resistance = 1500
 	glasstype = /obj/item/stack/material/glass/reinforced
 
 /obj/structure/window/New(Loc, constructed=0)
