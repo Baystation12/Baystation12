@@ -86,7 +86,7 @@
 	selectable = 1
 	usable = 1
 	module_cooldown = 0
-	use_power_cost = 30
+	use_power_cost = 50
 
 	engage_string = "Configure"
 
@@ -116,7 +116,7 @@
 
 	name = "mounted energy gun"
 	desc = "A forearm-mounted energy projector."
-	use_power_cost = 10
+	use_power_cost = 30
 
 	interface_name = "mounted energy gun"
 	interface_desc = "A forearm-mounted suit-powered energy gun."
