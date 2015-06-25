@@ -281,8 +281,9 @@
 		if(ishuman(holder))
 			var/mob/living/carbon/human/H = holder
 			for(var/obj/item/organ/external/affecting in H.organs)
-				if(affecting.hidden == card)
+				if(card in affecting.implants)
 					affecting.take_damage(rand(30,50))
+					affecting.implants -= card
 					H.visible_message("<span class='danger'>\The [src] explodes out of \the [H]'s [affecting.name] in shower of gore!</span>")
 					break
 		holder.drop_from_inventory(card)
