@@ -47,6 +47,8 @@
 	var/datum/gas_mixture/breath = null
 
 	var/datum/gas_mixture/environment
+	if(handle_drowning())
+		return null
 	if(loc)
 		environment = loc.return_air_for_internal_lifeform()
 

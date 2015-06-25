@@ -133,6 +133,16 @@
 
 	reagent_tag = IS_SKRELL
 
+	has_organ = list(
+		"heart" =    /obj/item/organ/heart,
+		"lungs" =    /obj/item/organ/lungs,
+		"gills" =    /obj/item/organ/gills,
+		"liver" =    /obj/item/organ/liver,
+		"kidneys" =  /obj/item/organ/kidneys,
+		"brain" =    /obj/item/organ/brain,
+		"eyes" =     /obj/item/organ/eyes
+		)
+
 /datum/species/diona
 	name = "Diona"
 	name_plural = "Dionaea"

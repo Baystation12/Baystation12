@@ -445,7 +445,8 @@
 	return ..(M)
 
 /obj/machinery/door/update_nearby_tiles(need_rebuild)
-	if(!air_master)
+	. = ..(need_rebuild)
+	if(!.)
 		return 0
 
 	for(var/turf/simulated/turf in locs)

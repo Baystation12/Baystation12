@@ -1,3 +1,10 @@
+var/list/mining_overlays = list()
+
+proc/get_mining_overlay(var/overlay_key)
+	if(!mining_overlays[overlay_key])
+		mining_overlays[overlay_key] = image('icons/turf/floors.dmi',overlay_key)
+	return mining_overlays[overlay_key]
+
 /**********************Mineral deposits**************************/
 /turf/unsimulated/mineral
 	name = "impassable rock"
@@ -403,7 +410,7 @@
 /turf/simulated/floor/plating/airless/asteroid/New()
 
 	if(prob(20))
-		overlay_detail = "asteroid[rand(0,9)]"
+		overlays |= get_mining_overlay("asteroid[rand(0,9)]")
 
 /turf/simulated/floor/plating/airless/asteroid/ex_act(severity)
 	switch(severity)
@@ -494,7 +501,7 @@
 		if(istype(get_step(src, step_overlays[direction]), /turf/simulated/mineral))
 			overlays += image('icons/turf/walls.dmi', "rock_side_[direction]")
 
-	if(overlay_detail) overlays += overlay_detail
+	if(overlay_detail) overlays |= get_mining_overlay(overlay_detail)
 
 	if(update_neighbors)
 		var/list/all_step_directions = list(NORTH,NORTHEAST,EAST,SOUTHEAST,SOUTH,SOUTHWEST,WEST,NORTHWEST)

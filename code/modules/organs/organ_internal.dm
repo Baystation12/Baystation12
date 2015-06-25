@@ -20,6 +20,9 @@
 	organ_tag = "lungs"
 	parent_organ = "chest"
 
+/obj/item/organ/lungs/proc/breathes_water()
+	return 0
+
 /obj/item/organ/lungs/process()
 	..()
 
