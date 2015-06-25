@@ -85,13 +85,6 @@
 		else if(eye_blurry)
 			eye_blurry = max(eye_blurry-1, 0)
 
-		//Ears
-		if(sdisabilities & DEAF)	//disabled-deaf, doesn't get better on its own
-			ear_deaf = max(ear_deaf, 1)
-		else if(ear_deaf)			//deafness, heals slowly over time
-			ear_deaf = max(ear_deaf-1, 0)
-			ear_damage = max(ear_damage-0.05, 0)
-
 		update_icons()
 
 	return 1

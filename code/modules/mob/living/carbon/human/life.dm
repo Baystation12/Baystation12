@@ -67,9 +67,6 @@
 		//Updates the number of stored chemicals for powers
 		handle_changeling()
 
-		//Disabilities
-		handle_disabilities()
-
 		//Organs and blood
 		handle_organs()
 		stabilize_body_temperature() //Body temperature adjusts itself (self-regulation)
