@@ -3235,8 +3235,6 @@ datum
 			glass_center_of_mass = list("x"=15, "y"=7)
 
 			on_mob_life(var/mob/living/M as mob)
-				if(alien && alien == IS_KIDAN)
-					return 1
 				M.druggy = max(M.druggy, 50)
 				M.confused = max(M.confused+2,0)
 				M.make_dizzy(10)
@@ -3266,8 +3264,6 @@ datum
 			glass_center_of_mass = list("x"=17, "y"=6)
 
 			on_mob_life(var/mob/living/M as mob)
-				if(alien && alien == IS_KIDAN)
-					return 1
 				if(!data) data = 1
 				data++
 				M.dizziness +=6
@@ -3296,8 +3292,6 @@ datum
 			glass_center_of_mass = list("x"=16, "y"=8)
 
 			on_mob_life(var/mob/living/carbon/M as mob)
-				if(alien && alien == IS_KIDAN)
-					return 1
 				if(!M) M = holder.my_atom
 				M.weakened = max(M.weakened, 3)
 				if(!data) data = 1
@@ -3328,8 +3322,6 @@ datum
 			glass_center_of_mass = list("x"=16, "y"=8)
 
 			on_mob_life(var/mob/living/M as mob)
-				if(alien && alien == IS_KIDAN)
-					return 1
 				if(!M) M = holder.my_atom
 				M.druggy = max(M.druggy, 50)
 				if(!data) data = 1
@@ -3393,8 +3385,6 @@ datum
 			glass_desc = "A well-known alcohol with a variety of applications."
 
 			on_mob_life(var/mob/living/M as mob, var/alien)
-				if(alien && alien == IS_KIDAN)
-					return 1
 				M:nutrition += nutriment_factor
 				holder.remove_reagent(src.id, (alien ? FOOD_METABOLISM : ALCOHOL_METABOLISM)) // Catch-all for creatures without livers.
 
