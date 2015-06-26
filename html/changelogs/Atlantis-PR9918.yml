@@ -1,0 +1,6 @@
+author: Atlantis
+delete-after: True
+
+changes:
+  - bugfix: "Supermatter Core no longer breaches if shutters under windows are left open for few minutes during operation."
+  - tweak: "Phoron Glass renamed to Borosilicate Glass. Small amount of said glass is available, more can be smelted by alloying 2sand + 1platinum. This glass is highly fire resistant when compared to regular windows."
