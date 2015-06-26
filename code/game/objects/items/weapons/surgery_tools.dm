@@ -147,10 +147,10 @@
 	edge = 1
 
 //misc, formerly from code/defines/weapons.dm
-/obj/item/weapon/bonegel
-	name = "bone gel"
+/obj/item/weapon/ostreg
+	name = "osteo-regenerator"
 	icon = 'icons/obj/surgery.dmi'
-	icon_state = "bone-gel"
+	icon_state = "ost-reg"
 	force = 0
 	w_class = 2.0
 	throwforce = 1.0
