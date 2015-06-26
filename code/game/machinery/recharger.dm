@@ -13,6 +13,7 @@ obj/machinery/recharger
 	var/icon_state_charged = "recharger2"
 	var/icon_state_charging = "recharger1"
 	var/icon_state_idle = "recharger0" //also when unpowered
+	var/portable = 1
 
 obj/machinery/recharger/attackby(obj/item/weapon/G as obj, mob/user as mob)
 	if(istype(user,/mob/living/silicon))
@@ -45,7 +46,7 @@ obj/machinery/recharger/attackby(obj/item/weapon/G as obj, mob/user as mob)
 		G.loc = src
 		charging = G
 		update_icon()
-	else if(istype(G, /obj/item/weapon/wrench))
+	else if(portable && istype(G, /obj/item/weapon/wrench))
 		if(charging)
 			user << "\red Remove [charging] first!"
 			return
@@ -155,3 +156,4 @@ obj/machinery/recharger/wallcharger
 	icon_state_charged = "wrecharger2"
 	icon_state_charging = "wrecharger1"
 	icon_state_idle = "wrecharger0"
+	portable = 0
