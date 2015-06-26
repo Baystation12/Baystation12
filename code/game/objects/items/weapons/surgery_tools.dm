@@ -151,6 +151,7 @@
 	name = "osteo-regenerator"
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "ost-reg"
+	desc = "An advanced medical tool used to regenerate bone-matter."
 	force = 0
 	w_class = 2.0
 	throwforce = 1.0
