@@ -45,7 +45,7 @@
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		if(..())
 			var/obj/item/organ/external/affected = target.get_organ(target_zone)
-			return affected && !affected.cavity && !affected.hidden
+			return affected && !affected.cavity
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
@@ -112,7 +112,15 @@
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		if(..())
 			var/obj/item/organ/external/affected = target.get_organ(target_zone)
-			return affected && !istype(user,/mob/living/silicon/robot) && !affected.hidden && affected.cavity && tool.w_class <= get_max_wclass(affected)
+			if(istype(user,/mob/living/silicon/robot))
+				return
+			if(affected && affected.cavity)
+				var/total_volume = tool.w_class
+				for(var/obj/item/I in affected.implants)
+					if(istype(I,/obj/item/weapon/implant))
+						continue
+					total_volume += I.w_class
+				return total_volume <= get_max_wclass(affected)
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
@@ -132,8 +140,8 @@
 			affected.wounds += I
 			affected.owner.custom_pain("You feel something rip in your [affected.name]!", 1)
 		user.drop_item()
-		affected.hidden = tool
-		tool.loc = target
+		affected.implants += tool
+		tool.loc = affected
 		affected.cavity = 0
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -174,7 +182,7 @@
 
 		if (affected.implants.len)
 
-			var/obj/item/obj = affected.implants[1]
+			var/obj/item/obj = pick(affected.implants)
 
 			if(istype(obj,/obj/item/weapon/implant))
 				var/obj/item/weapon/implant/imp = obj
@@ -201,6 +209,8 @@
 					worm.leave_host()
 				else
 					obj.loc = get_turf(target)
+					obj.add_blood(target)
+					obj.update_icon()
 					if(istype(obj,/obj/item/weapon/implant))
 						var/obj/item/weapon/implant/imp = obj
 						imp.imp_in = null
@@ -208,16 +218,6 @@
 			else
 				user.visible_message("\blue [user] removes \the [tool] from [target]'s [affected.name].", \
 				"\blue There's something inside [target]'s [affected.name], but you just missed it this time." )
-		else if (affected.hidden)
-			user.visible_message("\blue [user] takes something out of incision on [target]'s [affected.name] with \the [tool].", \
-			"\blue You take something out of incision on [target]'s [affected.name]s with \the [tool]." )
-			affected.hidden.loc = get_turf(target)
-			if(!affected.hidden.blood_DNA)
-				affected.hidden.blood_DNA = list()
-			affected.hidden.blood_DNA[target.dna.unique_enzymes] = target.dna.b_type
-			affected.hidden.update_icon()
-			affected.hidden = null
-
 		else
 			user.visible_message("\blue [user] could not find anything inside [target]'s [affected.name], and pulls \the [tool] out.", \
 			"\blue You could not find anything inside [target]'s [affected.name]." )
