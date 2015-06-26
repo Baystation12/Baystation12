@@ -86,6 +86,7 @@
 	selectable = 1
 	usable = 1
 	module_cooldown = 0
+	use_power_cost = 30
 
 	engage_string = "Configure"
 
@@ -115,6 +116,7 @@
 
 	name = "mounted energy gun"
 	desc = "A forearm-mounted energy projector."
+	use_power_cost = 10
 
 	interface_name = "mounted energy gun"
 	interface_desc = "A forearm-mounted suit-powered energy gun."
@@ -125,6 +127,7 @@
 
 	name = "mounted taser"
 	desc = "A shoulder-mounted energy projector."
+	use_power_cost = 5
 
 	usable = 0
 
@@ -140,6 +143,7 @@
 
 	name = "energy blade projector"
 	desc = "A powerful cutting beam projector."
+	active_power_cost = 2
 
 	activate_string = "Project Blade"
 	deactivate_string = "Cancel Blade"
