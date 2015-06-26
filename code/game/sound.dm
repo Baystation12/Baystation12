@@ -50,6 +50,9 @@ var/const/FALLOFF_SOUNDS = 0.5
 		else
 			S.frequency = get_rand_frequency()
 
+	//sound volume falloff with pressure
+	var/pressure_factor = 1.0
+
 	if(isturf(turf_source))
 		// 3D sounds, the technology is here!
 		var/turf/T = get_turf(src)
@@ -58,9 +61,6 @@ var/const/FALLOFF_SOUNDS = 0.5
 		var/distance = get_dist(T, turf_source)
 
 		S.volume -= max(distance - world.view, 0) * 2 //multiplicative falloff to add on top of natural audio falloff.
-
-		//sound volume falloff with pressure
-		var/pressure_factor = 1.0
 
 		var/datum/gas_mixture/hearer_env = T.return_air()
 		var/datum/gas_mixture/source_env = turf_source.return_air()
@@ -90,8 +90,11 @@ var/const/FALLOFF_SOUNDS = 0.5
 		S.falloff = (falloff ? falloff : FALLOFF_SOUNDS)
 
 	if(!is_global)
-		var/area/A = get_area(src)
-		S.environment = A.sound_env
+		if (pressure_factor < 0.5)
+			S.environment = 22 //underwater
+		else
+			var/area/A = get_area(src)
+			S.environment = A.sound_env
 
 	src << S
 
