@@ -627,6 +627,28 @@ obj/structure/cable/proc/cableColor(var/colorC)
 		user << "You cut a piece off the cable coil."
 		src.update_icon()
 		return
+	if( istype(W, /obj/item/toy/crayon))
+		var/crayon = W.type
+		switch(crayon)
+			if(/obj/item/toy/crayon/red)
+				color = COLOR_RED
+			if(/obj/item/toy/crayon/orange)
+				color = COLOR_ORANGE
+			if(/obj/item/toy/crayon/yellow)
+				color = COLOR_YELLOW
+			if(/obj/item/toy/crayon/green)
+				color = COLOR_GREEN
+			if(/obj/item/toy/crayon/blue)
+				color = COLOR_BLUE
+			if(/obj/item/toy/crayon/purple)
+				color = COLOR_PURPLE
+			if(/obj/item/toy/crayon/mime)
+				color = COLOR_WHITE
+			else
+				color = COLOR_RED
+		user << "<span class='notice'>You draw over the cable changing its colour.</span>"
+		src.color = color
+		return
 	else if(istype(W, /obj/item/stack/cable_coil))
 		var/obj/item/stack/cable_coil/C = W
 
@@ -938,3 +960,47 @@ obj/structure/cable/proc/cableColor(var/colorC)
 /obj/item/stack/cable_coil/random/New()
 	color = pick(COLOR_RED, COLOR_BLUE, COLOR_GREEN, COLOR_WHITE, COLOR_PINK, COLOR_YELLOW, COLOR_CYAN)
 	..()
+/*
+/obj/item/stack/cable_coil/attack(mob/M as mob, mob/user as mob)
+	if(hasorgans(M))
+
+		var/datum/organ/external/S = M:get_organ(user.zone_sel.selecting)
+		if(!(S.status & ORGAN_ROBOT) || user.a_intent != "help")
+			return ..()
+
+
+		/*if(istype(M,/mob/living/carbon/human))
+			var/mob/living/carbon/human/H = M
+			if(H.species.flags & IS_SYNTHETIC)
+				if(M == user)
+					user << "\red You can't repair damage to your own body - it's against OH&S."
+					return*/ // Fuck OH&S, IPCs aren't forced by laws to do that.
+
+		if(S.burn_dam > 0 && use(1))
+			S.heal_damage(0,15,0,1)
+			user.visible_message("\red \The [user] repairs some burn damage on \the [M]'s [S.display_name] with \the [src].")
+			return
+		else
+			user << "Nothing to fix!"
+
+	else
+		return ..()
+
+// Bay Shit
+		if(istype(M,/mob/living/carbon/human))
+			var/mob/living/carbon/human/H = M
+			if(H.species.flags & IS_SYNTHETIC)
+				if(M == user)
+					user << "\red You can't repair damage to your own body - it's against OH&S."
+					return
+
+		if(S.burn_dam > 0 && use(1))
+			S.heal_damage(0,15,0,1)
+			user.visible_message("\red \The [user] repairs some burn damage on \the [M]'s [S.display_name] with \the [src].")
+			return
+		else
+			user << "Nothing to fix!"
+
+	else
+		return ..()
+*/
