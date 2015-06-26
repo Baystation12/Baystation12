@@ -1,0 +1,6 @@
+author: RavingManiac
+delete-after: True
+changes: 
+  - tweak: "Sound environments tweaked to feel more claustrophobic"
+  - rscadd: "Being in low-pressure or vacuum will alter sounds you hear" 
+  - rscadd: "Sound environment in holodeck will change to reflect the loaded program"
