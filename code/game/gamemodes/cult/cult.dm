@@ -280,6 +280,7 @@
 
 /datum/game_mode/cult/declare_completion()
 	if(config.objectives_disabled)
+		..()
 		return 1
 	if(!check_cult_victory())
 		feedback_set_details("round_end_result","win - cult win")
