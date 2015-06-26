@@ -239,6 +239,12 @@
 	adjust_fire_stacks(2)
 	IgniteMob()
 
+/mob/living/proc/get_cold_protection()
+	return 0
+
+/mob/living/proc/get_heat_protection()
+	return 0
+
 //Finds the effective temperature that the mob is burning at.
 /mob/living/proc/fire_burn_temperature()
 	if (fire_stacks <= 0)
