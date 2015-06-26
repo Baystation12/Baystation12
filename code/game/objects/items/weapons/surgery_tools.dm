@@ -159,7 +159,7 @@
 /obj/item/weapon/bonegel
 	name = "bone gel"
 	icon = 'icons/obj/surgery.dmi'
-	icon_state = "bone-gel
+	icon_state = "bone-gel"
 	force = 0
 	w_class = 2.0
 	throwforce = 1.0
