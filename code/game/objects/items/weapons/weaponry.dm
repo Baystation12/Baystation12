@@ -15,8 +15,8 @@
 		return (BRUTELOSS|FIRELOSS|TOXLOSS|OXYLOSS)
 		
 /obj/item/weapon/comknife
-	name = "combat knife"
-	desc = "A tactical knife widely used by military forces"
+	name = "NTC8 tactical knife"
+	desc = "A tactical knife widely used by modern military forces."
 	icon_state = "tacknife"
 	item_state = "tacknife"
 	flags = CONDUCT

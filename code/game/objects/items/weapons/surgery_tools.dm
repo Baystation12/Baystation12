@@ -147,6 +147,7 @@
 	edge = 1
 
 //misc, formerly from code/defines/weapons.dm
+
 /obj/item/weapon/bonegel
 	name = "bone gel"
 	icon = 'icons/obj/surgery.dmi'
