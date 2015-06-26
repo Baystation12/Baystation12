@@ -270,6 +270,8 @@
 			text += "[head_mind.key] (character destroyed)"
 
 		world << text
+
+	..()
 	return 1
 
 

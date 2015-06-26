@@ -191,6 +191,7 @@
 					feedback_add_details("head_objective","[objective.type]|FAIL")
 				count++
 		break // just print once
+	..()
 	return 1
 
 
