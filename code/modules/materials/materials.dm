@@ -69,7 +69,7 @@ var/list/name_to_material
 	// Attributes
 	var/cut_delay = 0            // Delay in ticks when cutting through this wall.
 	var/radioactivity            // Radiation var. Used in wall and object processing to irradiate surroundings.
-	var/ignition_point           // Point at which the material catches on fire.
+	var/ignition_point           // K, point at which the material catches on fire.
 	var/melting_point = 1800     // K, walls will take damage if they're next to a fire hotter than this
 	var/integrity = 150          // General-use HP value for products.
 	var/opacity = 1              // Is the material transparent? 0.5< makes transparent walls/doors.
@@ -249,7 +249,7 @@ var/list/name_to_material
 /material/phoron
 	name = "phoron"
 	stack_type = /obj/item/stack/material/phoron
-	ignition_point = 100
+	ignition_point = PHORON_MINIMUM_BURN_TEMPERATURE
 	icon_base = "stone"
 	icon_colour = "#FC2BC5"
 	shard_type = SHARD_SHARD
@@ -432,7 +432,7 @@ var/list/name_to_material
 	name = "phoron glass"
 	stack_type = /obj/item/stack/material/glass/phoronglass
 	flags = MATERIAL_BRITTLE
-	ignition_point = 300
+	ignition_point = PHORON_MINIMUM_BURN_TEMPERATURE+300
 	integrity = 200 // idk why but phoron windows are strong, so.
 	icon_colour = "#FC2BC5"
 	stack_origin_tech = "materials=3;phorontech=2"
@@ -458,6 +458,7 @@ var/list/name_to_material
 	icon_colour = "#CCCCCC"
 	hardness = 10
 	weight = 12
+	melting_point = T0C+371 //assuming heat resistant plastic
 	stack_origin_tech = "materials=3"
 
 /material/plastic/holographic
@@ -521,6 +522,8 @@ var/list/name_to_material
 	shard_can_repair = 0 // you can't weld splinters back into planks
 	hardness = 15
 	weight = 18
+	melting_point = T0C+300 //okay, not melting in this case, but hot enough to destroy wood
+	ignition_point = T0C+288
 	stack_origin_tech = "materials=1;biotech=1"
 	dooropen_noise = 'sound/effects/doorcreaky.ogg'
 	door_icon_base = "wood"
@@ -542,6 +545,8 @@ var/list/name_to_material
 	icon_colour = "#AAAAAA"
 	hardness = 1
 	weight = 1
+	ignition_point = T0C+232 //"the temperature at which book-paper catches fire, and burns." close enough
+	melting_point = T0C+232 //temperature at which cardboard walls would be destroyed
 	stack_origin_tech = "materials=1"
 	door_icon_base = "wood"
 	destruction_desc = "crumples"
@@ -550,6 +555,8 @@ var/list/name_to_material
 	name = "cloth"
 	stack_origin_tech = "materials=2"
 	door_icon_base = "wood"
+	ignition_point = T0C+232
+	melting_point = T0C+300
 	flags = MATERIAL_PADDING
 
 /material/cult
@@ -578,6 +585,7 @@ var/list/name_to_material
 	icon_colour = "#E85DD8"
 	dooropen_noise = 'sound/effects/attackblob.ogg'
 	door_icon_base = "resin"
+	melting_point = T0C+300
 
 /material/resin/can_open_material_door(var/mob/living/user)
 	var/mob/living/carbon/M = user
@@ -591,6 +599,8 @@ var/list/name_to_material
 	icon_colour = "#5C4831"
 	stack_origin_tech = "materials=2"
 	flags = MATERIAL_PADDING
+	ignition_point = T0C+300
+	melting_point = T0C+300
 
 /material/carpet
 	name = "carpet"
@@ -598,12 +608,16 @@ var/list/name_to_material
 	use_name = "red upholstery"
 	icon_colour = "#DA020A"
 	flags = MATERIAL_PADDING
+	ignition_point = T0C+232
+	melting_point = T0C+300
 
 /material/cotton
 	name = "cotton"
 	display_name ="cotton"
 	icon_colour = "#FFFFFF"
 	flags = MATERIAL_PADDING
+	ignition_point = T0C+232
+	melting_point = T0C+300
 
 /material/cloth_teal
 	name = "teal"
@@ -611,6 +625,8 @@ var/list/name_to_material
 	use_name = "teal cloth"
 	icon_colour = "#00EAFA"
 	flags = MATERIAL_PADDING
+	ignition_point = T0C+232
+	melting_point = T0C+300
 
 /material/cloth_black
 	name = "black"
@@ -618,6 +634,8 @@ var/list/name_to_material
 	use_name = "black cloth"
 	icon_colour = "#505050"
 	flags = MATERIAL_PADDING
+	ignition_point = T0C+232
+	melting_point = T0C+300
 
 /material/cloth_green
 	name = "green"
@@ -625,6 +643,8 @@ var/list/name_to_material
 	use_name = "green cloth"
 	icon_colour = "#01C608"
 	flags = MATERIAL_PADDING
+	ignition_point = T0C+232
+	melting_point = T0C+300
 
 /material/cloth_puple
 	name = "purple"
@@ -632,6 +652,8 @@ var/list/name_to_material
 	use_name = "purple cloth"
 	icon_colour = "#9C56C4"
 	flags = MATERIAL_PADDING
+	ignition_point = T0C+232
+	melting_point = T0C+300
 
 /material/cloth_blue
 	name = "blue"
@@ -639,6 +661,8 @@ var/list/name_to_material
 	use_name = "blue cloth"
 	icon_colour = "#6B6FE3"
 	flags = MATERIAL_PADDING
+	ignition_point = T0C+232
+	melting_point = T0C+300
 
 /material/cloth_beige
 	name = "beige"
@@ -646,6 +670,8 @@ var/list/name_to_material
 	use_name = "beige cloth"
 	icon_colour = "#E8E7C8"
 	flags = MATERIAL_PADDING
+	ignition_point = T0C+232
+	melting_point = T0C+300
 
 /material/cloth_lime
 	name = "lime"
@@ -653,3 +679,5 @@ var/list/name_to_material
 	use_name = "lime cloth"
 	icon_colour = "#62E36C"
 	flags = MATERIAL_PADDING
+	ignition_point = T0C+232
+	melting_point = T0C+300
