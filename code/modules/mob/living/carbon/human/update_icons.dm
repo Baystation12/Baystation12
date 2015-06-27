@@ -698,8 +698,10 @@ proc/get_damage_icon_part(damage_state, body_part)
 		
 		//Determine the state to use
 		var/t_state = head.icon_state
-		if(head.item_state)
-			t_state = head.item_state
+		if(istype(head, /obj/item/weapon/paper))
+			/* I don't like this, but bandaid to fix half the hats in the game
+			   being completely broken without re-breaking paper hats */
+			t_state = "paper"
 		
 		//Create the image
 		var/image/standing = image(icon = t_icon, icon_state = t_state)
