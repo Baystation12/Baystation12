@@ -11,6 +11,9 @@
 	2 - fullblock
 */
 /mob/living/proc/run_armor_check(var/def_zone = null, var/attack_flag = "melee", var/armour_pen = 0, var/absorb_text = null, var/soften_text = null)
+	if(armour_pen >= 100)
+		return 0 //might as well just skip the processing
+
 	var/armor = getarmor(def_zone, attack_flag)
 	var/absorb = 0
 	
