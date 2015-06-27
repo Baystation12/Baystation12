@@ -13,24 +13,6 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 
 */
 
-//Sound environment defines. Reverb preset for sounds played in this area, see sound datum reference for more.
-//Note that the environment of a sound is automatically set to 22 (underwater) for low-pressure in sound.dm
-#define STANDARD_STATION 5 //stoneroom
-#define LARGE_ENCLOSED 10 //hangar
-#define SMALL_ENCLOSED 3 //bathroom
-#define TUNNEL_ENCLOSED 8 //cave
-#define LARGE_SOFTFLOOR 11 //carpetted hallway
-#define MEDIUM_SOFTFLOOR 4 //livingroom
-#define SMALL_SOFTFLOOR 2 //room
-#define ASTEROID 8 //cave
-
-//for holodeck
-#define SPACE 22 //underwater
-#define ARENA 9 //arena
-#define PLAIN 19 //plain
-#define FOREST 15 //forest
-#define AUDITORIUM 6 //auditorium
-#define CONCERT_HALL 7 //concert hall
 
 
 /area
@@ -1015,6 +997,7 @@ area/space/atmosalert()
 /area/library
  	name = "\improper Library"
  	icon_state = "library"
+ 	sound_env = LARGE_SOFTFLOOR
 
 /area/chapel/main
 	name = "\improper Chapel"
