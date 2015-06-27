@@ -154,9 +154,9 @@
 	sharp = 1
 	edge = 1
 	w_class = 4.0
-	force_wielded = 30
+	force_wielded = 35
 	attack_verb = list("shredded", "torn", "ripped", "slashed", "carved", "eviscerated", "scratched", "sliced", "gashed")
-	
+
 /*
  * Double-Bladed Energy Swords - Cheridan
  */
