@@ -9,6 +9,10 @@
 	offline_slowdown = 10
 	vision_restriction = 1
 	offline_vision_restriction = 2
+	
+	chest_type = /obj/item/clothing/suit/space/rig
+	helm_type = /obj/item/clothing/head/helmet/space/rig/unathi
+	boot_type = /obj/item/clothing/shoes/magboots/rig/unathi
 
 /obj/item/weapon/rig/unathi/fancy
 	name = "breacher chassis control module"
@@ -17,4 +21,13 @@
 	icon_state = "breacher_rig"
 	armor = list(melee = 90, bullet = 90, laser = 90, energy = 90, bomb = 90, bio = 100, rad = 80)
 	vision_restriction = 0
-	slowdown = 4
+	//slowdown = 4 - retain old slowdown, armor 90 means you can take 10x the damage 
+
+/obj/item/clothing/head/helmet/space/rig/unathi
+	species_restricted = list("Unathi")
+
+/obj/item/clothing/suit/space/rig/unathi
+	species_restricted = list("Unathi")
+	
+/obj/item/clothing/shoes/magboots/rig/unathi
+	species_restricted = list("Unathi")
