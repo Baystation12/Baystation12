@@ -1,3 +1,34 @@
+{{if data.PC_hasheader}}
+	<div style="float: left">
+		<div class='item'>
+			<table><tr>
+			{{if data.PC_batteryicon}}
+				<td><img src='{{:data.PC_batteryicon}}'>
+			{{/if}}
+			{{if data.PC_batterypercent}}
+				<td><b>{{:data.PC_batterypercent}}</b>
+			{{/if}}
+			{{if data.PC_ntneticon}}
+				<td><img src='{{:data.PC_ntneticon}}'>
+			{{/if}}
+			{{if data.PC_apclinkicon}}
+				<td><img src='{{:data.PC_apclinkicon}}'>
+			{{/if}}
+			{{if data.PC_stationtime}}
+				<td><b>{{:data.PC_stationtime}}<b>
+			{{/if}}
+			</table>
+		</div>
+	</div>
+	<div style="float: right">
+		<table><tr>
+			<td>{{:helper.link('Shutdown', 'icon-power', {'PC_shutdown' : 1})}}
+			<td>{{:helper.link('Exit Program', 'icon-close', {'PC_exit' : 1})}}
+		</table>
+	</div>
+	<div style="clear: both">
+<hr>
+{{/if}}
 {{if data.focus}}
 	<div class="notice" style="height: 22px">
 		{{:helper.link('Show List', 'cancel', { 'clear' : 1})}}   Sensor selected: {{:data.focus.name}} 

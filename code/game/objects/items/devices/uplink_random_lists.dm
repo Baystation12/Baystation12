@@ -59,7 +59,6 @@ var/datum/uplink_random_selection/default_uplink_selection = new/datum/uplink_ra
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/stealth_items/chameleon_kit)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/stealth_items/chameleon_projector)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/stealth_items/voice)
-	items += new/datum/uplink_random_item(/datum/uplink_item/item/stealth_items/camera_floppy, 10, 0)
 
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/tools/toolbox, reselect_propbability = 10)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/tools/plastique)

@@ -188,15 +188,15 @@
 	// Battery level icon
 	switch(computer.check_battery_status())
 		if(-1)
-			dat += "<img src=\ref['icons/ntos/battery_icons/batt_none.gif']>"
+			dat += "<img src=\ref['icons/ntos/status_icons/batt_none.gif']>"
 		if(0 to 5)
-			dat += "<img src=\ref['icons/ntos/battery_icons/batt_5.gif']>"
+			dat += "<img src=\ref['icons/ntos/status_icons/batt_5.gif']>"
 		if(6 to 20)
-			dat += "<img src=\ref['icons/ntos/battery_icons/batt_20.gif']>"
+			dat += "<img src=\ref['icons/ntos/status_icons/batt_20.gif']>"
 		if(21 to 40)
-			dat += "<img src=\ref['icons/ntos/battery_icons/batt_40.gif']>"
+			dat += "<img src=\ref['icons/ntos/status_icons/batt_40.gif']>"
 		if(41 to 60)
-			dat += "<img src=\ref['icons/ntos/battery_icons/batt_60.gif']>"
+			dat += "<img src=\ref['icons/ntos/status_icons/batt_60.gif']>"
 		if(61 to 80)
 			dat += "<img src=\ref['icons/ntos/battery_icons/batt_80.gif']>"
 		if(81 to 100)
@@ -212,7 +212,7 @@
 		var/obj/item/part/computer/C = locate(href_list["viewperipheral"])
 		if(!istype(C) || (C.loc != src.computer))
 			return
-		
+
 		if(istype(C,/obj/item/part/computer/storage))
 			current = C
 			interact()

@@ -265,11 +265,6 @@ datum/uplink_item/dd_SortValue()
 	item_cost = 4
 	path = /obj/item/clothing/mask/gas/voice
 
-/datum/uplink_item/item/stealth_items/camera_floppy
-	name = "Camera Network Access - Floppy"
-	item_cost = 6
-	path = /obj/item/weapon/disk/file/cameras/syndicate
-
 /********************
 * Devices and Tools *
 ********************/
