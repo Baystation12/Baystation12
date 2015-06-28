@@ -105,6 +105,7 @@
 	name = "phoron pistol"
 	desc = "A specialized firearm designed to fire lethal bolts of phoron."
 	icon_state = "toxgun"
+	slot_flags = SLOT_BELT|SLOT_HOLSTER
 	fire_sound = 'sound/effects/stealthoff.ogg'
 	w_class = 3.0
 	origin_tech = "combat=5;phorontech=4"

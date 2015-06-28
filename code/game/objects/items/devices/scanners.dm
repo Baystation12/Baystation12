@@ -99,7 +99,7 @@ REAGENT SCANNER
 		user.show_message("\t Key: <font color='blue'>Suffocation</font>/<font color='green'>Toxin</font>/<font color='#FFA500'>Burns</font>/<font color='red'>Brute</font>", 1)
 		user.show_message("\t Damage Specifics: <font color='blue'>?</font> - <font color='green'>?</font> - <font color='#FFA500'>?</font> - <font color='red'>?</font>")
 		user.show_message("\blue Body Temperature: [M.bodytemperature-T0C]&deg;C ([M.bodytemperature*1.8-459.67]&deg;F)", 1)
-		user.show_message("\red <b>Warning: Blood Level ERROR: --% --cl.\blue Type: ERROR")
+		user.show_message("\red <b>Warning: Blood Level ERROR: --% --cl.\blue Type: ERROR</b>")
 		user.show_message("\blue Subject's pulse: <font color='red'>-- bpm.</font>")
 		return
 
@@ -203,9 +203,9 @@ REAGENT SCANNER
 			var/blood_type = M.dna.b_type
 			blood_percent *= 100
 			if(blood_volume <= 500 && blood_volume > 336)
-				user.show_message("\red <b>Warning: Blood Level LOW: [blood_percent]% [blood_volume]cl.\blue Type: [blood_type]")
+				user.show_message("\red <b>Warning: Blood Level LOW: [blood_percent]% [blood_volume]cl.</b>\blue Type: [blood_type]")
 			else if(blood_volume <= 336)
-				user.show_message("\red <b>Warning: Blood Level CRITICAL: [blood_percent]% [blood_volume]cl.\blue Type: [blood_type]")
+				user.show_message("\red <b>Warning: Blood Level CRITICAL: [blood_percent]% [blood_volume]cl.</b>\blue Type: [blood_type]")
 			else
 				user.show_message("\blue Blood Level Normal: [blood_percent]% [blood_volume]cl. Type: [blood_type]")
 		user.show_message("\blue Subject's pulse: <font color='[H.pulse == PULSE_THREADY || H.pulse == PULSE_NONE ? "red" : "blue"]'>[H.get_pulse(GETPULSE_TOOL)] bpm.</font>")

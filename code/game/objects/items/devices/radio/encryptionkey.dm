@@ -100,6 +100,11 @@
 	name = "head of security's encryption key"
 	icon_state = "hos_cypherkey"
 	channels = list("Security" = 1, "Command" = 1)
+	
+/obj/item/device/encryptionkey/heads/bs
+	name = "blueshield's encryption key"
+	icon_state = "hos_cypherkey"
+	channels = list("Security" = 1, "Command" = 1)
 
 /obj/item/device/encryptionkey/heads/ce
 	name = "chief engineer's encryption key"

@@ -1257,3 +1257,15 @@ var/global/list/gear_datums = list()
 	cost = 1
 	sort_category = "ears"
 	whitelisted = "Skrell"
+	
+/datum/gear/pres_sechud
+	display_name = "Prescription HUDSunglasses"
+	path = /obj/item/clothing/glasses/sunglasses/sechud/prescription
+	cost = 1
+	allowed_roles = list("Security Officer","Head of Security","Warden")
+	
+/datum/gear/pres_medhud
+	display_name = "Prescription Medical HUD"
+	path = /obj/item/clothing/glasses/hud/health/prescription
+	cost = 1
+	allowed_roles = list("Medical Doctor","Chief Medical Officer","Paramedic")

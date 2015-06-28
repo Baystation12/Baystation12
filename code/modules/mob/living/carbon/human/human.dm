@@ -1409,3 +1409,8 @@
 	if((species.flags & NO_SLIP) || (shoes && (shoes.flags & NOSLIP)))
 		return 0
 	..(slipped_on,stun_duration)
+
+/mob/living/carbon/human/reset_view(atom/A, update_hud = 1)
+	..()
+	if(update_hud)
+		handle_regular_hud_updates()

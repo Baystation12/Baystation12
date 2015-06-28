@@ -2,6 +2,7 @@
 //Having them here also makes for a nice reference list of the various overlay-updating procs available
 
 //default item on-mob icons
+#define INV_HEAD_DEF_ICON 'icons/mob/head.dmi'
 #define INV_L_HAND_DEF_ICON 'icons/mob/items/lefthand.dmi'
 #define INV_R_HAND_DEF_ICON 'icons/mob/items/righthand.dmi'
 

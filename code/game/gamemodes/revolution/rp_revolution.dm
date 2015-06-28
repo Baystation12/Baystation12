@@ -146,7 +146,7 @@
 		else if(finished == 2)
 			feedback_set_details("round_end_result","loss - revolution stopped")
 			world << "\red <FONT size = 3><B> The heads of staff managed to stop the revolution!</B></FONT>"
-		..()
+	..()
 	return 1
 
 /datum/game_mode/revolution/proc/is_convertible(mob/M)
