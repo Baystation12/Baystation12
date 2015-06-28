@@ -46,11 +46,11 @@
 			M.access += access_mining
 
 /proc/opencodeblueaccess()
-	for(var/obj/machinery/door/poddoor/shutters/bluealert/D in world)
+	for(var/obj/machinery/door/blast/shutters/bluealert/D in world)
 		D.open()
 
 /proc/opencoderedaccess()
-	for(var/obj/machinery/door/poddoor/reddoors/D in world)
+	for(var/obj/machinery/door/blast/regular/reddoors/D in world)
 		D.open()
 
 /proc/removesecaccess()
@@ -88,11 +88,11 @@
 			M.access -= access_mining
 
 /proc/closecodeblueaccess()
-	for(var/obj/machinery/door/poddoor/shutters/bluealert/D in world)
+	for(var/obj/machinery/door/blast/shutters/bluealert/D in world)
 		D.close()
 
 /proc/closecoderedaccess()
-	for(var/obj/machinery/door/poddoor/reddoors/D in world)
+	for(var/obj/machinery/door/blast/regular/reddoors/D in world)
 		D.close()
 
 /proc/set_security_level(var/level)

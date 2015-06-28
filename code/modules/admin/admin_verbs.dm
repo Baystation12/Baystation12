@@ -189,6 +189,10 @@ var/list/admin_verbs_debug = list(
 	/client/proc/toggledebuglogs,
 	/client/proc/SDQL_query,
 	/client/proc/SDQL2_query,
+	/client/proc/Jump,
+	/client/proc/jumptomob,
+	/client/proc/jumptocoord,
+	/client/proc/dsay
 	)
 
 var/list/admin_verbs_paranoid_debug = list(
@@ -276,6 +280,11 @@ var/list/admin_verbs_dev = list(
 */
 
 //New Ranks
+var/list/admin_verbs_sounds = list(
+	/client/proc/play_local_sound,
+	/client/proc/play_sound
+)
+
 var/list/admin_verbs_dev = list(
 	/client/proc/debug_variables,		/*allows us to -see- the variables of any instance in the game.*/
 	/client/proc/cmd_admin_pm_panel,	/*admin-pm list*/
@@ -409,7 +418,13 @@ var/list/admin_verbs_admin2 = list(
 	/client/proc/ZASSettings,
 	/client/proc/kill_airgroup,
 	/client/proc/toggledebuglogs,
-	/datum/admins/proc/endround
+	/datum/admins/proc/endround,
+	/client/proc/event_manager_panel,
+	/client/proc/empty_ai_core_toggle_latejoin,
+	/client/proc/FireLaser,
+	/client/proc/FireCannons,
+	/client/proc/ChangeIcarusPosition,
+	/client/proc/virus2_editor
 )
 
 var/list/admin_verbs_admin3 = list(
@@ -446,7 +461,7 @@ var/list/admin_verbs_headadmin = list(
 	/client/proc/edit_vip_permissions,
 	/client/proc/everyone_random,
 	/client/proc/cinematic,
-	/client/proc/set_ooc,
+	//client/proc/set_ooc,
 	/client/proc/artillery,
 	/client/proc/Set_Holiday,
 	/client/proc/ToRban,
@@ -470,9 +485,56 @@ var/list/admin_verbs_headadmin = list(
 var/list/admin_verbs_gamemaster = list(
 	/client/proc/play_local_sound,
 	/client/proc/play_sound,
-	/client/proc/edit_admin_permissions
+	/client/proc/edit_admin_permissions,
+	/client/proc/stealth
 )
 
+//Auditor
+var/list/admin_verbs_auditor = list(
+	/client/proc/toggleadminhelpsound,	/*toggles whether we hear a sound when adminhelps/PMs are used*/
+	/client/proc/deadmin_self,			/*destroys our own admin datum so we can play as a regular player*/
+	/client/proc/hide_verbs,			/*hides all our adminverbs*/
+	/client/proc/hide_most_verbs,		/*hides all our hideable adminverbs*/
+	/client/proc/debug_variables,		/*allows us to -see- the variables of any instance in the game. +VAREDIT needed to modify*/
+	/client/proc/check_antagonists,		/*shows all antags*/
+	/client/proc/cmd_mentor_check_new_players,
+//	/client/proc/deadchat,				/*toggles deadchat on/off*/
+	/client/proc/cmd_vip_say,
+	/client/proc/player_panel_new,
+	/client/proc/admin_ghost,
+	/client/proc/cmd_admin_pm_context,	/*right-click adminPM interface*/
+	/client/proc/cmd_admin_pm_panel,
+	/client/proc/cmd_admin_check_contents,
+	/client/proc/jumptocoord,
+	/client/proc/Jump,
+	/client/proc/jumptokey,				/*allows us to jump to the location of a mob with a certain ckey*/
+	/client/proc/jumptomob,				/*allows us to jump to a specific mob*/
+	/client/proc/jumptoturf,
+	/client/proc/check_antagonists,
+	/datum/admins/proc/PlayerNotes,
+	/client/proc/cmd_mod_say,
+	/datum/admins/proc/show_player_info,
+	/datum/admins/proc/show_skills,
+    /client/proc/cmd_dev_say,
+    /client/proc/cmd_mod_say,
+    /client/proc/cmd_admin_say,
+    /client/proc/dsay,
+    /client/proc/cleartox,
+	/client/proc/clean,
+	/client/proc/check_ai_laws,
+	/client/proc/dsay,
+	/client/proc/investigate_show,
+	/client/proc/FRules,
+	/client/proc/freeze,
+	/client/proc/freezemecha,
+	/client/proc/air_report,
+	/datum/admins/proc/show_player_panel,
+	/client/proc/cmd_admin_say,			/*admin-only ooc chat*/
+	/datum/admins/proc/adrev,
+	/datum/admins/proc/adspawn,
+	/datum/admins/proc/adjump,
+	/client/proc/getserverlog
+)
 /*
 verbs += admin_verbs_dev
 R_MENTOR admin_verbs_mentor
@@ -579,6 +641,7 @@ var/list/admin_verbs_hideable = list(
 		if(holder.rights & R_DEV)			verbs += admin_verbs_dev
 		*/
 		//New Ranks
+		if(holder.rights & R_SOUNDS)		verbs += admin_verbs_sounds
 		if(holder.rights & R_DEV)			verbs += admin_verbs_dev
 		if(holder.rights & R_MENTOR)		verbs += admin_verbs_mentor
 		if(holder.rights & R_MOD)			verbs += admin_verbs_mod
@@ -588,7 +651,8 @@ var/list/admin_verbs_hideable = list(
 		if(holder.rights & R_SERVER)		verbs += admin_verbs_admin2
 		if(holder.rights & R_FUN)			verbs += admin_verbs_admin3
 		if(holder.rights & R_DEBUG)			verbs += admin_verbs_headadmin
-		if(holder.rights & R_SOUNDS)		verbs += admin_verbs_gamemaster
+		if(holder.rights & R_PERMISSIONS)	verbs += admin_verbs_gamemaster
+		if(holder.rights & R_AUDITOR)		verbs += admin_verbs_auditor
 
 /client/proc/remove_admin_verbs()
 	verbs.Remove(
@@ -625,6 +689,7 @@ var/list/admin_verbs_hideable = list(
 		/client/proc/splash,
 		/client/proc/cmd_admin_areatest
 		*/
+		admin_verbs_sounds,
 		admin_verbs_dev,
 		admin_verbs_mentor,
 		admin_verbs_mod,

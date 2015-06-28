@@ -99,3 +99,14 @@
 /proc/log_vsay(text)
 	if (config.log_vsay)
 		diary << "\[[time_stamp()]]EventSAY: [text][log_end]"
+//pretty print a direction bitflag, can be useful for debugging.
+/proc/print_dir(var/dir)
+	var/list/comps = list()
+	if(dir & NORTH) comps += "NORTH"
+	if(dir & SOUTH) comps += "SOUTH"
+	if(dir & EAST) comps += "EAST"
+	if(dir & WEST) comps += "WEST"
+	if(dir & UP) comps += "UP"
+	if(dir & DOWN) comps += "DOWN"
+	
+	return english_list(comps, nothing_text="0", and_text="|", comma_text="|")

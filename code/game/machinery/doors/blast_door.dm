@@ -22,9 +22,10 @@
 	closed_layer = 3.3 // Above airlocks when closed
 	var/id = 1.0
 	dir = 1
+	var/brigdoors = 0
 	explosion_resistance = 25
-	
-	//Most blast doors are infrequently toggled and sometimes used with regular doors anyways, 
+
+	//Most blast doors are infrequently toggled and sometimes used with regular doors anyways,
 	//turning this off prevents awkward zone geometry in places like medbay lobby, for example.
 	block_air_zones = 0
 
@@ -179,3 +180,142 @@ obj/machinery/door/blast/regular
 	icon_state_closed = "shutter1"
 	icon_state_closing = "shutterc1"
 	icon_state = "shutter1"
+
+
+
+/obj/machinery/door/blast/regular/reddoors
+	name = "Code Red Blast Doors"
+	desc = "That looks like it doesn't open easily."
+	icon = 'icons/obj/doors/rapid_pdoor.dmi'
+	icon_state = "pdoor1"
+	explosion_resistance = 25
+
+/obj/machinery/door/blast/regular/reddoors/New()
+	. = ..()
+	if(density)
+		layer = 3.3		//to override door.New() proc
+	else
+		layer = initial(layer)
+	return
+
+/obj/machinery/door/blast/regular/reddoors/Bumped(atom/AM)
+	if(!density)
+		return ..()
+	else
+		return 0
+
+/obj/machinery/door/blast/regular/reddoors/attackby(obj/item/weapon/C as obj, mob/user as mob)
+	src.add_fingerprint(user)
+	if (!( istype(C, /obj/item/weapon/crowbar) || (istype(C, /obj/item/weapon/twohanded/fireaxe) && C:wielded == 1) ))
+		return
+	if ((src.density && (stat & NOPOWER) && !( src.operating )))
+		spawn( 0 )
+			src.operating = 1
+			flick("pdoorc0", src)
+			src.icon_state = "pdoor0"
+			src.SetOpacity(0)
+			sleep(15)
+			src.density = 0
+			src.operating = 0
+			return
+	return
+
+/obj/machinery/door/blast/regular/reddoors/open()
+	if (src.operating == 1) //doors can still open when emag-disabled
+		return
+	if (!ticker)
+		return 0
+	if(!src.operating) //in case of emag
+		src.operating = 1
+	flick("pdoorc0", src)
+	src.icon_state = "pdoor0"
+	src.SetOpacity(0)
+	sleep(10)
+	layer = initial(layer)
+	src.density = 0
+	update_nearby_tiles()
+
+	if(operating == 1) //emag again
+		src.operating = 0
+	if(autoclose)
+		spawn(150)
+			autoclose()
+	return 1
+
+/obj/machinery/door/blast/regular/reddoors/close()
+	if (src.operating)
+		return
+	src.operating = 1
+	layer = 3.3
+	flick("pdoorc1", src)
+	src.icon_state = "pdoor1"
+	src.density = 1
+	src.SetOpacity(initial(opacity))
+	update_nearby_tiles()
+
+	sleep(10)
+	src.operating = 0
+	return
+
+/obj/machinery/door/blast/shutters/bluealert
+	name = "Code Blue Armor Shutters"
+	icon = 'icons/obj/doors/rapid_pdoor.dmi'
+	icon_state = "shutter1"
+	power_channel = ENVIRON
+	dir = 2
+
+/obj/machinery/door/blast/shutters/bluealert/New()
+	..()
+	layer = 3.1
+
+/obj/machinery/door/blast/shutters/bluealert/attackby(obj/item/weapon/C as obj, mob/user as mob)
+	add_fingerprint(user)
+	if(!(istype(C, /obj/item/weapon/crowbar) || (istype(C, /obj/item/weapon/twohanded/fireaxe) && C:wielded == 1) ))
+		return
+	if(density && (stat & NOPOWER) && !operating)
+		operating = 1
+		spawn(-1)
+			flick("shutterc0", src)
+			icon_state = "shutter0"
+			sleep(15)
+			density = 0
+			SetOpacity(0)
+			operating = 0
+			return
+	return
+
+/obj/machinery/door/blast/shutters/bluealert/open()
+	if(operating == 1) //doors can still open when emag-disabled
+		return
+	if(!ticker)
+		return 0
+	if(!operating) //in case of emag
+		operating = 1
+	flick("shutterc0", src)
+	icon_state = "shutter0"
+	sleep(10)
+	density = 0
+	SetOpacity(0)
+	update_nearby_tiles()
+
+	if(operating == 1) //emag again
+		operating = 0
+	if(autoclose)
+		spawn(150)
+			autoclose()		//TODO: note to self: look into this ~Carn
+	return 1
+
+/obj/machinery/door/blast/shutters/bluealert/close()
+	if(operating)
+		return
+	operating = 1
+	flick("shutterc1", src)
+	icon_state = "shutter1"
+	density = 1
+	if(visible)
+		SetOpacity(1)
+	update_nearby_tiles()
+
+	sleep(10)
+	operating = 0
+	return

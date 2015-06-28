@@ -191,7 +191,7 @@
 	real_name		= reject_bad_name(real_name)
 
 	//if(isnull(species))
-	if(isnull(species) || !(species in playable_species))
+	if(isnull(species))
 		species = "Human"
 
 	if(isnum(underwear))

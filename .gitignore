@@ -1,4 +1,5 @@
 #ignore misc BYOND files
+Thumbs.db
 *.log
 *.int
 *.rsc
@@ -11,6 +12,6 @@ baystation12.int
 maps/Phoenix.dmm.backup
 *.db
 *.int
-*.int
-*.int
 baystation12.int
+cfg/
+

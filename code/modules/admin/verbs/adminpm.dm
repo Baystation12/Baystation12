@@ -80,7 +80,7 @@
 			send_pm_type = holder.rank + " "
 			if(!C.holder && holder && holder.fakekey)
 				recieve_pm_type = "Admin"
-			else if(holder.rank == "PrimaryAdmin" || holder.rank == "SecondaryAdmin" || holder.rank == "TertiaryAdmin") //If you're a Primary or Secondary admin, there's no reason for players to discriminate, so just show as an admin
+			else if(holder.rank == "Administrator3" || holder.rank == "Administrator2" || holder.rank == "Administrator") //If you're a Primary or Secondary admin, there's no reason for players to discriminate, so just show as an admin
 				recieve_pm_type = "Admin"
 				send_pm_type = "Admin" + " "
 			else
@@ -128,7 +128,7 @@
 		//check client/X is an admin and isn't the sender or recipient
 		if(X == C || X == src)
 			continue
-		if(X.key!=key && X.key!=C.key && (X.holder.rights & R_ADMIN) || (X.holder.rights & (R_MOD|R_MENTOR|R_DEV)) )
+		if(X.key!=key && X.key!=C.key && (X.holder.rights & R_ADMIN|R_AUDITOR) || (X.holder.rights & (R_MOD|R_MENTOR|R_DEV)) )
 			X << "<B><font color='blue'>PM: [key_name(src, X, 0)]-&gt;[key_name(C, X, 0)] (<A HREF='?_src_=holder;takeadminhelp=\ref[C]'>TAKE</A>):</B> \blue [msg]</font>" //inform X
 
 /client/proc/cmd_admin_pm_antag(var/msg)
@@ -197,7 +197,8 @@
 
 	send2adminirc("PlayerPM from [key_name(src)]: [html_decode(msg)]")
 
-	src << "<font color='blue'>IRC PM to-<b>IRC-Admins</b>: [msg]</font>"
+	//src << "<font color='blue'>IRC PM to-<b>IRC-Admins</b>: [msg]</font>"
+	src << "<span class='pm'><span class='out'>" + create_text_tag("pm_out_alt", "", src) + " to <span class='name'>Admin IRC</span>: <span class='message'>[msg]</span></span></span>"
 
 	log_admin("PM: [key_name(src)]->IRC: [msg]")
 	log_admin_single("PM: [key_name(src)]->IRC: [msg]")

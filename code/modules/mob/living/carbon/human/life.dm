@@ -284,6 +284,8 @@
 		radiation = Clamp(radiation,0,100)
 
 		if (radiation)
+			if (src.species.name == "Kidan")
+				return
 			var/datum/organ/internal/diona/nutrients/rad_organ = locate() in internal_organs
 			if(rad_organ && !rad_organ.is_broken())
 				var/rads = radiation/25
@@ -1451,11 +1453,11 @@
 					var/obj/item/clothing/glasses/welding/O = glasses
 					if(!O.up)
 						found_welder = 1
-				else if(istype(head, /obj/item/clothing/head/welding))
+				if(!found_welder && istype(head, /obj/item/clothing/head/welding))
 					var/obj/item/clothing/head/welding/O = head
 					if(!O.up)
 						found_welder = 1
-				else if(istype(back, /obj/item/weapon/rig))
+				if(!found_welder && istype(back, /obj/item/weapon/rig))
 					var/obj/item/weapon/rig/O = back
 					if(O.helmet && O.helmet == head && (O.helmet.body_parts_covered & EYES))
 						if((O.offline && O.offline_vision_restriction == 1) || (!O.offline && O.vision_restriction == 1))
@@ -1464,8 +1466,11 @@
 					client.screen |= global_hud.darkMask
 
 			if(machine)
-				if(!machine.check_eye(src))
-					reset_view(null)
+				var/viewflags = machine.check_eye(src)
+				if(viewflags < 0)
+					reset_view(null, 0)
+				else if(viewflags)
+					sight |= viewflags
 			else
 				var/isRemoteObserve = 0
 				if((mRemote in mutations) && remoteview_target)
@@ -1473,7 +1478,7 @@
 						isRemoteObserve = 1
 				if(!isRemoteObserve && client && !client.adminobs)
 					remoteview_target = null
-					reset_view(null)
+					reset_view(null, 0)
 		return 1
 
 	proc/process_glasses(var/obj/item/clothing/glasses/G)
@@ -1562,7 +1567,7 @@
 			return
 
 		if(shock_stage == 10)
-			src << "<font color='red'><b>"+pick("It hurts so much!", "You really need some painkillers..", "Dear god, the pain!")
+			src << "<span class='danger'>[pick("It hurts so much", "You really need some painkillers", "Dear god, the pain")]!</span>"
 
 		if(shock_stage >= 30)
 			if(shock_stage == 30) emote("me",1,"is having trouble keeping their eyes open.")
@@ -1570,22 +1575,22 @@
 			stuttering = max(stuttering, 5)
 
 		if(shock_stage == 40)
-			src << "<font color='red'><b>"+pick("The pain is excrutiating!", "Please, just end the pain!", "Your whole body is going numb!")
+			src << "<span class='danger'>[pick("The pain is excruciating", "Please, just end the pain", "Your whole body is going numb")]!</span>"
 
 		if (shock_stage >= 60)
 			if(shock_stage == 60) emote("me",1,"'s body becomes limp.")
 			if (prob(2))
-				src << "<font color='red'><b>"+pick("The pain is excrutiating!", "Please, just end the pain!", "Your whole body is going numb!")
+				src << "<span class='danger'>[pick("The pain is excruciating", "Please, just end the pain", "Your whole body is going numb")]!</span>"
 				Weaken(20)
 
 		if(shock_stage >= 80)
 			if (prob(5))
-				src << "<font color='red'><b>"+pick("The pain is excrutiating!", "Please, just end the pain!", "Your whole body is going numb!")
+				src << "<span class='danger'>[pick("The pain is excruciating", "Please, just end the pain", "Your whole body is going numb")]!</span>"
 				Weaken(20)
 
 		if(shock_stage >= 120)
 			if (prob(2))
-				src << "<font color='red'><b>"+pick("You black out!", "You feel like you could die any moment now.", "You're about to lose consciousness.")
+				src << "<span class='danger'>[pick("You black out", "You feel like you could die any moment now", "You're about to lose consciousness")]!</span>"
 				Paralyse(5)
 
 		if(shock_stage == 150)

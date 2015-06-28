@@ -65,7 +65,7 @@ var/syndicate_elite_shuttle_timeleft = 0
 /*
 	//Begin Marauder launchpad.
 	spawn(0)//So it parallel processes it.
-		for(var/obj/machinery/door/poddoor/M in elite_squad)
+		for(var/obj/machinery/door/blast/M in elite_squad)
 			switch(M.id)
 				if("ASSAULT0")
 					spawn(10)//1 second delay between each.
@@ -113,7 +113,7 @@ var/syndicate_elite_shuttle_timeleft = 0
 
 		sleep(50)//Doors remain open for 5 seconds.
 
-		for(var/obj/machinery/door/poddoor/M in elite_squad)
+		for(var/obj/machinery/door/blast/M in elite_squad)
 			switch(M.id)//Doors close at the same time.
 				if("ASSAULT0")
 					spawn(0)

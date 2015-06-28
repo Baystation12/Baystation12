@@ -51,6 +51,13 @@
 	desc = "The goggles do nothing!"
 	icon_state = "purple"
 	item_state = "glasses"
+	
+/obj/item/clothing/glasses/science/prescription
+	name = "Prescription Science Goggles"
+	desc = "The goggles do nothing! (Except helping you see)"
+	icon_state = "purple"
+	item_state = "glasses"
+	prescription = 1
 
 /obj/item/clothing/glasses/science/New()
 	..()
@@ -203,6 +210,17 @@
 	desc = "Sunglasses with a HUD."
 	icon_state = "sunhud"
 	var/obj/item/clothing/glasses/hud/security/hud = null
+
+	New()
+		..()
+		src.hud = new/obj/item/clothing/glasses/hud/security(src)
+		return
+
+/obj/item/clothing/glasses/sunglasses/sechud/prescription
+	name = "Prescription HUDSunglasses"
+	desc = "Prescription Sunglasses with a HUD."
+	icon_state = "sunhud"
+	prescription = 1
 
 	New()
 		..()

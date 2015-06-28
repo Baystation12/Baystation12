@@ -3,6 +3,7 @@
 	desc = "A classic revolver. Uses .357 ammo"
 	icon_state = "revolver"
 	item_state = "revolver"
+	slot_flags = SLOT_BELT|SLOT_HOLSTER
 	caliber = "357"
 	origin_tech = "combat=2;materials=2"
 	handle_casings = CYCLE_CASINGS

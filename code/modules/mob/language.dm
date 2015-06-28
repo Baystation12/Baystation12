@@ -218,7 +218,7 @@
 	exclaim_verb = "SHRIEKS"
 	colour = "vox"
 	key = "5"
-	flags = WHITELISTED
+	flags = RESTRICTED
 	syllables = list("ti","ti","ti","hi","hi","ki","ki","ki","ki","ya","ta","ha","ka","ya","chi","cha","kah", \
 	"SKRE","AHK","EHK","RAWK","KRA","AAA","EEE","KI","II","KRI","KA")
 

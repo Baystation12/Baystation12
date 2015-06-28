@@ -31,7 +31,9 @@
 		"id" =           list("loc" = ui_id,        "slot" = slot_wear_id,   "state" = "id",     "dir" = NORTH),
 		"storage1" =     list("loc" = ui_storage1,  "slot" = slot_l_store,   "state" = "pocket"),
 		"storage2" =     list("loc" = ui_storage2,  "slot" = slot_r_store,   "state" = "pocket"),
-		"belt" =         list("loc" = ui_belt,      "slot" = slot_belt,      "state" = "belt")
+		"belt" =         list("loc" = ui_belt,      "slot" = slot_belt,      "state" = "belt"),
+		"pda" =          list("loc" = ui_pda,       "slot" = slot_wear_pda,  "state" = "pda"),
+		"neck" =         list("loc" = ui_neck,      "slot" = slot_neck,  	 "state" = "neck", "toggle" =1)
 		)
 
 /datum/hud_data/New()
@@ -64,5 +66,7 @@
 		"id" =           list("loc" = ui_id,        "slot" = slot_wear_id,   "state" = "id",     "dir" = NORTH),
 		"storage1" =     list("loc" = ui_storage1,  "slot" = slot_l_store,   "state" = "pocket"),
 		"storage2" =     list("loc" = ui_storage2,  "slot" = slot_r_store,   "state" = "pocket"),
-		"belt" =         list("loc" = ui_belt,      "slot" = slot_belt,      "state" = "belt")
+		"belt" =         list("loc" = ui_belt,      "slot" = slot_belt,      "state" = "belt"),
+		"pda" =          list("loc" = ui_pda,       "slot" = slot_wear_pda,  "state" = "pda"),
+		"neck" =         list("loc" = ui_neck,      "slot" = slot_neck,  	 "state" = "neck", "toggle" =1)
 		)

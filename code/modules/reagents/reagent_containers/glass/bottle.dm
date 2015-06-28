@@ -110,6 +110,17 @@
 		reagents.add_reagent("chloralhydrate", 30)		//Intentionally low since it is so strong. Still enough to knock someone out.
 		update_icon()
 
+/obj/item/weapon/reagent_containers/glass/bottle/cervaline
+	name = "Cervaline Bottle"
+	desc = "A small bottle of Cervaline. Dose carefully."
+	icon = 'icons/obj/chemical.dmi'
+	icon_state = "bottle-3"
+
+	New()
+		..()
+		reagents.add_reagent("cervaline", 60)
+		update_icon()
+
 /obj/item/weapon/reagent_containers/glass/bottle/antitoxin
 	name = "dylovene bottle"
 	desc = "A small bottle of dylovene. Counters poisons, and repairs damage. A wonder drug."

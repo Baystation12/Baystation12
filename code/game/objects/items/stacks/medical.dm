@@ -1,3 +1,12 @@
+/* TO-DO LIST
+Dermal Regenerator - Heals minor cuts and burns
+Osteogenic Stimulator - Stimulates the regrowth of bone tissue (bgel replacement?)
+Neural Stimulator - Stimulates the brain (Wakes them/removes dizziness?)
+Cardiostimulator - Restarts a stopped heart
+Neural Caliper - Causes the patient to fall unconscious (Anaesthetic replacement)
+Cortical Inhibitor - Suppresses some brain activity (stops hallucinations, etc)
+*/
+
 /obj/item/stack/medical
 	name = "medical pack"
 	singular_name = "medical pack"

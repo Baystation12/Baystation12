@@ -4,6 +4,7 @@
 	magazine_type = /obj/item/ammo_magazine/c45m
 	icon_state = "colt"
 	caliber = ".45"
+	slot_flags = SLOT_BELT|SLOT_HOLSTER
 	origin_tech = "combat=2;materials=2"
 	load_method = MAGAZINE
 
@@ -33,6 +34,7 @@
 	desc = "A NanoTrasen designed sidearm, found pretty much everywhere humans are. Uses .45 rounds."
 	name = "\improper NT Mk58"
 	icon_state = "secguncomp"
+	slot_flags = SLOT_BELT|SLOT_HOLSTER
 	magazine_type = /obj/item/ammo_magazine/c45m/rubber
 	caliber = ".45"
 	origin_tech = "combat=2;materials=2"
@@ -63,6 +65,7 @@
 	desc = "A robust handgun that uses .50 AE ammo"
 	icon_state = "deagle"
 	item_state = "deagle"
+	slot_flags = SLOT_BELT|SLOT_HOLSTER
 	force = 14.0
 	caliber = ".50"
 	load_method = MAGAZINE
@@ -109,6 +112,7 @@
 	icon_state = "pistol"
 	item_state = null
 	w_class = 2
+	slot_flags = SLOT_BELT|SLOT_HOLSTER
 	caliber = "9mm"
 	silenced = 0
 	origin_tech = "combat=2;materials=2;syndicate=2"

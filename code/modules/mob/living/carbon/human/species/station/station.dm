@@ -23,6 +23,9 @@
 	primitive = /mob/living/carbon/monkey/unathi
 	darksight = 3
 	gluttonous = 1
+	brute_mod = 0.8
+	burn_mod = 0.9
+	slowdown = 1
 
 	blurb = "A heavily reptillian species, Unathi (or 'Sinta as they call themselves) hail from the \
 	Uuosa-Eso system, which roughly translates to 'burning mother'.<br/><br/>Coming from a harsh, radioactive \
@@ -67,7 +70,7 @@
 	language = "Siik'tajr"
 	tail = "tajtail"
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/claws, /datum/unarmed_attack/bite/sharp)
-	darksight = 8
+	darksight = 6
 	slowdown = -1
 	brute_mod = 1.2
 
@@ -133,6 +136,7 @@
 	primitive = /mob/living/carbon/alien/diona
 	slowdown = 7
 	rarity_value = 3
+	gluttonous = 1
 	hud_type = /datum/hud_data/diona
 	siemens_coefficient = 0.3
 
@@ -239,19 +243,27 @@
 		spawn(100)
 			if(H) H.update_hair()
 
-/datum/species/Aviskree
+/datum/species/Aviskree //I'm not finished with the aviskree, yet. I'll update them further, in time.
 	name = "Aviskree"
 	icobase = 'icons/mob/human_races/r_Aviskree.dmi'
 	deform = 'icons/mob/human_races/r_def_Aviskree.dmi'
 	language = "Aviachirp"
 	tail = "aviskreetail"
+	blurb = "A tall avian species, Aviskree originally hail from S'ranjir, The Tajara moon, known to them as Avis, \
+ 	hidden deep below the surface of the planet, and discovered by a mining team. <br/> <br/> Being trapped below the surface of a mostly \
+ 	inhospitable planet, technology was very limited for the species, resulting in a tribal society. \
+ 	They are still acclimating to human society, and their native language is Aviachirp, a language made mostly of high pitched chirps."
 	unarmed_types = list(/datum/unarmed_attack/claws, /datum/unarmed_attack/bite/strong)
 	primitive = /mob/living/carbon/monkey/aviskree
 	wingicon = 1
 	sizechange = 1
 	falldmg = 1
+	darksight = 10
+	brute_mod = 1.1
 
 	flags = CAN_JOIN | IS_WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR
+	
+	reagent_tag = IS_AVISKREE
 
 /datum/species/avisaran
 	name = "Avisaran"
@@ -274,7 +286,7 @@
 	heat_level_2 = 380 //Default 400
 	heat_level_3 = 800 //Default 1000
 
-	flags = HAS_LIPS | HAS_UNDERWEAR | IS_STRONG
+	flags = HAS_LIPS | HAS_UNDERWEAR | IS_STRONG | IS_RESTRICTED
 
 	flesh_color = "#BCBCBC"
 
@@ -286,8 +298,13 @@
 	eyes = "kidan_eyes_s"
 	language = "Chittin"
 	unarmed_types = list(/datum/unarmed_attack/claws)
+	brute_mod = 0.6
+	burn_mod = 1.4
+	darksight = 8
 
 	flags = CAN_JOIN | IS_WHITELISTED | HAS_UNDERWEAR | IS_STRONG
+	
+	reagent_tag = IS_KIDAN
 
 	blood_color = "#328332"
 	flesh_color = "#8C4600"

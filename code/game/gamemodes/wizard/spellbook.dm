@@ -179,9 +179,13 @@
 						if("armor")
 							feedback_add_details("wizard_spell_learned","HS") //please do not change the abbreviation to keep data processing consistent. Add a unique id to any new spells
 							new /obj/item/clothing/shoes/sandal(get_turf(H)) //In case they've lost them.
-							new /obj/item/clothing/gloves/purple(get_turf(H))//To complete the outfit
-							new /obj/item/clothing/suit/space/void/wizard(get_turf(H))
-							new /obj/item/clothing/head/helmet/space/void/wizard(get_turf(H))
+							var/obj/item/clothing/gloves = new /obj/item/clothing/gloves/purple(get_turf(H))//To complete the outfit
+							var/obj/item/clothing/suit = new /obj/item/clothing/suit/space/void/wizard(get_turf(H))
+							var/obj/item/clothing/helmet = new /obj/item/clothing/head/helmet/space/void/wizard(get_turf(H))
+							if(H.species.name != "Human") // if they're non-human, refit their suit so they can actually wear it
+								for(var/obj/item/clothing/C in list(gloves, suit, helmet))
+									C.refit_for_species(H.species.name)
+									C.desc += "\nIt appears to be fitted for [H.species.name]."
 							temp = "An artefact suit of armor that allows you to cast spells while providing more protection against attacks and the void of space."
 							max_uses--
 						if("staffanimation")

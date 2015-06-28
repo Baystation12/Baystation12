@@ -88,10 +88,12 @@
 	var/guests_allowed = 1
 	var/debugparanoid = 0
 
+	var/serverurl
 	var/server
 	var/banappeals
 	var/wikiurl
 	var/forumurl
+	var/githuburl
 
 	//Alert level description
 	var/alert_desc_green = "All threats to the station have passed. Security may not have weapons visible, privacy laws are once again fully enforced."
@@ -155,6 +157,7 @@
 
 	var/use_irc_bot = 0
 	var/irc_bot_host = ""
+	var/irc_bot_export = 0 // whether the IRC bot in use is a Bot32 (or similar) instance; Bot32 uses world.Export() instead of nudge.py/libnudge
 	var/main_irc = ""
 	var/admin_irc = ""
 	var/python_path = "" //Path to the python executable.  Defaults to "python" on windows and "/usr/bin/env python2" on unix
@@ -376,6 +379,9 @@
 				if ("hostedby")
 					config.hostedby = value
 
+				if ("serverurl")
+					config.serverurl = value
+
 				if ("server")
 					config.server = value
 
@@ -387,6 +393,9 @@
 
 				if ("forumurl")
 					config.forumurl = value
+
+				if ("githuburl")
+					config.githuburl = value
 
 				if ("guest_jobban")
 					config.guest_jobban = 1
@@ -486,6 +495,9 @@
 
 				if("use_irc_bot")
 					use_irc_bot = 1
+
+				if("irc_bot_export")
+					irc_bot_export = 1
 
 				if("ticklag")
 					Ticklag = text2num(value)

@@ -1,4 +1,4 @@
-/obj/machinery/door/poddoor
+/obj/machinery/door/blast
 	name = "Blast Door"
 	desc = "That looks like it doesn't open easily."
 	icon = 'icons/obj/doors/rapid_pdoor.dmi'
@@ -8,7 +8,7 @@
 	dir = 1
 	explosion_resistance = 25
 
-/obj/machinery/door/poddoor/New()
+/obj/machinery/door/blast/New()
 	. = ..()
 	if(density)
 		layer = 3.3		//to override door.New() proc
@@ -16,13 +16,13 @@
 		layer = initial(layer)
 	return
 
-/obj/machinery/door/poddoor/Bumped(atom/AM)
+/obj/machinery/door/blast/Bumped(atom/AM)
 	if(!density)
 		return ..()
 	else
 		return 0
 
-/obj/machinery/door/poddoor/attackby(obj/item/weapon/C as obj, mob/user as mob)
+/obj/machinery/door/blast/attackby(obj/item/weapon/C as obj, mob/user as mob)
 	src.add_fingerprint(user)
 	if (!( istype(C, /obj/item/weapon/crowbar) || (istype(C, /obj/item/weapon/twohanded/fireaxe) && C:wielded == 1) ))
 		return
@@ -38,7 +38,7 @@
 			return
 	return
 
-/obj/machinery/door/poddoor/open()
+/obj/machinery/door/blast/open()
 	if (src.operating == 1) //doors can still open when emag-disabled
 		return
 	if (!ticker)
@@ -60,7 +60,7 @@
 			autoclose()
 	return 1
 
-/obj/machinery/door/poddoor/close()
+/obj/machinery/door/blast/close()
 	if (src.operating)
 		return
 	src.operating = 1
@@ -75,14 +75,14 @@
 	src.operating = 0
 	return
 
-/obj/machinery/door/poddoor/reddoors
+/obj/machinery/door/blast/reddoors
 	name = "Code Red Blast Doors"
 	desc = "That looks like it doesn't open easily."
 	icon = 'icons/obj/doors/rapid_pdoor.dmi'
 	icon_state = "pdoor1"
 	explosion_resistance = 25
 
-/obj/machinery/door/poddoor/reddoors/New()
+/obj/machinery/door/blast/reddoors/New()
 	. = ..()
 	if(density)
 		layer = 3.3		//to override door.New() proc
@@ -90,13 +90,13 @@
 		layer = initial(layer)
 	return
 
-/obj/machinery/door/poddoor/reddoors/Bumped(atom/AM)
+/obj/machinery/door/blast/reddoors/Bumped(atom/AM)
 	if(!density)
 		return ..()
 	else
 		return 0
 
-/obj/machinery/door/poddoor/reddoors/attackby(obj/item/weapon/C as obj, mob/user as mob)
+/obj/machinery/door/blast/reddoors/attackby(obj/item/weapon/C as obj, mob/user as mob)
 	src.add_fingerprint(user)
 	if (!( istype(C, /obj/item/weapon/crowbar) || (istype(C, /obj/item/weapon/twohanded/fireaxe) && C:wielded == 1) ))
 		return
@@ -112,7 +112,7 @@
 			return
 	return
 
-/obj/machinery/door/poddoor/reddoors/open()
+/obj/machinery/door/blast/reddoors/open()
 	if (src.operating == 1) //doors can still open when emag-disabled
 		return
 	if (!ticker)
@@ -134,7 +134,7 @@
 			autoclose()
 	return 1
 
-/obj/machinery/door/poddoor/reddoors/close()
+/obj/machinery/door/blast/reddoors/close()
 	if (src.operating)
 		return
 	src.operating = 1
@@ -150,7 +150,7 @@
 	return
 
 /*
-/obj/machinery/door/poddoor/two_tile_hor/open()
+/obj/machinery/door/blast/two_tile_hor/open()
 	if (src.operating == 1) //doors can still open when emag-disabled
 		return
 	if (!ticker)
@@ -177,7 +177,7 @@
 			autoclose()
 	return 1
 
-/obj/machinery/door/poddoor/two_tile_hor/close()
+/obj/machinery/door/blast/two_tile_hor/close()
 	if (src.operating)
 		return
 	src.operating = 1
@@ -198,7 +198,7 @@
 	src.operating = 0
 	return
 
-/obj/machinery/door/poddoor/four_tile_hor/open()
+/obj/machinery/door/blast/four_tile_hor/open()
 	if (src.operating == 1) //doors can still open when emag-disabled
 		return
 	if (!ticker)
@@ -229,7 +229,7 @@
 			autoclose()
 	return 1
 
-/obj/machinery/door/poddoor/four_tile_hor/close()
+/obj/machinery/door/blast/four_tile_hor/close()
 	if (src.operating)
 		return
 	src.operating = 1
@@ -254,7 +254,7 @@
 	src.operating = 0
 	return
 
-/obj/machinery/door/poddoor/two_tile_ver/open()
+/obj/machinery/door/blast/two_tile_ver/open()
 	if (src.operating == 1) //doors can still open when emag-disabled
 		return
 	if (!ticker)
@@ -281,7 +281,7 @@
 			autoclose()
 	return 1
 
-/obj/machinery/door/poddoor/two_tile_ver/close()
+/obj/machinery/door/blast/two_tile_ver/close()
 	if (src.operating)
 		return
 	src.operating = 1
@@ -302,7 +302,7 @@
 	src.operating = 0
 	return
 
-/obj/machinery/door/poddoor/four_tile_ver/open()
+/obj/machinery/door/blast/four_tile_ver/open()
 	if (src.operating == 1) //doors can still open when emag-disabled
 		return
 	if (!ticker)
@@ -333,7 +333,7 @@
 			autoclose()
 	return 1
 
-/obj/machinery/door/poddoor/four_tile_ver/close()
+/obj/machinery/door/blast/four_tile_ver/close()
 	if (src.operating)
 		return
 	src.operating = 1
@@ -361,15 +361,15 @@
 
 
 
-/obj/machinery/door/poddoor/two_tile_hor
-	var/obj/machinery/door/poddoor/filler_object/f1
-	var/obj/machinery/door/poddoor/filler_object/f2
+/obj/machinery/door/blast/two_tile_hor
+	var/obj/machinery/door/blast/filler_object/f1
+	var/obj/machinery/door/blast/filler_object/f2
 	icon = 'icons/obj/doors/1x2blast_hor.dmi'
 
 	New()
 		..()
-		f1 = new/obj/machinery/door/poddoor/filler_object (src.loc)
-		f2 = new/obj/machinery/door/poddoor/filler_object (get_step(src,EAST))
+		f1 = new/obj/machinery/door/blast/filler_object (src.loc)
+		f2 = new/obj/machinery/door/blast/filler_object (get_step(src,EAST))
 		f1.density = density
 		f2.density = density
 		f1.sd_SetOpacity(opacity)
@@ -380,15 +380,15 @@
 		del f2
 		..()
 
-/obj/machinery/door/poddoor/two_tile_ver
-	var/obj/machinery/door/poddoor/filler_object/f1
-	var/obj/machinery/door/poddoor/filler_object/f2
+/obj/machinery/door/blast/two_tile_ver
+	var/obj/machinery/door/blast/filler_object/f1
+	var/obj/machinery/door/blast/filler_object/f2
 	icon = 'icons/obj/doors/1x2blast_vert.dmi'
 
 	New()
 		..()
-		f1 = new/obj/machinery/door/poddoor/filler_object (src.loc)
-		f2 = new/obj/machinery/door/poddoor/filler_object (get_step(src,NORTH))
+		f1 = new/obj/machinery/door/blast/filler_object (src.loc)
+		f2 = new/obj/machinery/door/blast/filler_object (get_step(src,NORTH))
 		f1.density = density
 		f2.density = density
 		f1.sd_SetOpacity(opacity)
@@ -399,19 +399,19 @@
 		del f2
 		..()
 
-/obj/machinery/door/poddoor/four_tile_hor
-	var/obj/machinery/door/poddoor/filler_object/f1
-	var/obj/machinery/door/poddoor/filler_object/f2
-	var/obj/machinery/door/poddoor/filler_object/f3
-	var/obj/machinery/door/poddoor/filler_object/f4
+/obj/machinery/door/blast/four_tile_hor
+	var/obj/machinery/door/blast/filler_object/f1
+	var/obj/machinery/door/blast/filler_object/f2
+	var/obj/machinery/door/blast/filler_object/f3
+	var/obj/machinery/door/blast/filler_object/f4
 	icon = 'icons/obj/doors/1x4blast_hor.dmi'
 
 	New()
 		..()
-		f1 = new/obj/machinery/door/poddoor/filler_object (src.loc)
-		f2 = new/obj/machinery/door/poddoor/filler_object (get_step(f1,EAST))
-		f3 = new/obj/machinery/door/poddoor/filler_object (get_step(f2,EAST))
-		f4 = new/obj/machinery/door/poddoor/filler_object (get_step(f3,EAST))
+		f1 = new/obj/machinery/door/blast/filler_object (src.loc)
+		f2 = new/obj/machinery/door/blast/filler_object (get_step(f1,EAST))
+		f3 = new/obj/machinery/door/blast/filler_object (get_step(f2,EAST))
+		f4 = new/obj/machinery/door/blast/filler_object (get_step(f3,EAST))
 		f1.density = density
 		f2.density = density
 		f3.density = density
@@ -428,19 +428,19 @@
 		del f4
 		..()
 
-/obj/machinery/door/poddoor/four_tile_ver
-	var/obj/machinery/door/poddoor/filler_object/f1
-	var/obj/machinery/door/poddoor/filler_object/f2
-	var/obj/machinery/door/poddoor/filler_object/f3
-	var/obj/machinery/door/poddoor/filler_object/f4
+/obj/machinery/door/blast/four_tile_ver
+	var/obj/machinery/door/blast/filler_object/f1
+	var/obj/machinery/door/blast/filler_object/f2
+	var/obj/machinery/door/blast/filler_object/f3
+	var/obj/machinery/door/blast/filler_object/f4
 	icon = 'icons/obj/doors/1x4blast_vert.dmi'
 
 	New()
 		..()
-		f1 = new/obj/machinery/door/poddoor/filler_object (src.loc)
-		f2 = new/obj/machinery/door/poddoor/filler_object (get_step(f1,NORTH))
-		f3 = new/obj/machinery/door/poddoor/filler_object (get_step(f2,NORTH))
-		f4 = new/obj/machinery/door/poddoor/filler_object (get_step(f3,NORTH))
+		f1 = new/obj/machinery/door/blast/filler_object (src.loc)
+		f2 = new/obj/machinery/door/blast/filler_object (get_step(f1,NORTH))
+		f3 = new/obj/machinery/door/blast/filler_object (get_step(f2,NORTH))
+		f4 = new/obj/machinery/door/blast/filler_object (get_step(f3,NORTH))
 		f1.density = density
 		f2.density = density
 		f3.density = density
@@ -457,6 +457,6 @@
 		del f4
 		..()
 */
-/obj/machinery/door/poddoor/filler_object
+/obj/machinery/door/blast/filler_object
 	name = ""
 	icon_state = ""

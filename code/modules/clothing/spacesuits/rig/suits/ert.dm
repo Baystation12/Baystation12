@@ -22,6 +22,8 @@
 		/obj/item/rig_module/ai_container,
 		/obj/item/rig_module/maneuvering_jets,
 		/obj/item/rig_module/datajack,
+		/obj/item/rig_module/grenade_launcher,
+		/obj/item/rig_module/mounted/egun,
 		)
 
 /obj/item/weapon/rig/ert/engineer
@@ -30,8 +32,7 @@
 	suit_type = "ERT engineer"
 	icon_state = "ert_engineer_rig"
 	armor = list(melee = 60, bullet = 50, laser = 30,energy = 15, bomb = 30, bio = 100, rad = 100)
-
-	glove_type = /obj/item/clothing/gloves/rig/ert_engineer
+	siemens_coefficient = 0
 
 	initial_modules = list(
 		/obj/item/rig_module/ai_container,
@@ -39,10 +40,6 @@
 		/obj/item/rig_module/device/plasmacutter,
 		/obj/item/rig_module/device/rcd
 		)
-
-/obj/item/clothing/gloves/rig/ert_engineer
-	name = "insulated gauntlets"
-	siemens_coefficient = 0
 
 /obj/item/weapon/rig/ert/medical
 	name = "ERT-M suit control module"

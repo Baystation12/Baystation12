@@ -54,7 +54,7 @@
 			for(var/item in L)
 				L.Remove(item)
 		//
-		for(var/obj/machinery/door/poddoor/D in world)
+		for(var/obj/machinery/door/blast/D in world)
 			if(D.network in connected_doors)
 				var/list/L = connected_doors[D.network]
 				L.Add(D)
@@ -89,11 +89,11 @@
 				t += "<td colspan=\"2\"><b><a href='?src=\ref[src];open_net=[curNetId]'>Open all</a> / <a href='?src=\ref[src];close_net=[curNetId]'>Close all</a></b></td>"
 				t += "</tr>"
 
-				for(var/obj/machinery/door/poddoor/D in connected_doors[curNetId])
+				for(var/obj/machinery/door/blast/D in connected_doors[curNetId])
 					t += "<tr>"
 					t += "<td>[D.id]</td>"
 
-					if(istype(D,/obj/machinery/door/poddoor/shutters))
+					if(istype(D,/obj/machinery/door/blast/shutters))
 						t += "<td>Shutter ([D.density ? "Closed" : "Open"])</td>"
 					else
 						t += "<td>Blast door ([D.density ? "Closed" : "Open"])</td>"
@@ -128,7 +128,7 @@
 		if( href_list["toggle_id"] )
 			var/idTag = href_list["toggle_id"]
 			for(var/net in connected_doors)
-				for(var/obj/machinery/door/poddoor/D in connected_doors[net])
+				for(var/obj/machinery/door/blast/D in connected_doors[net])
 					if(D.id == idTag)
 						if(D.density)
 							D.open()
@@ -138,14 +138,14 @@
 
 		if( href_list["open_net"] )
 			var/netTag = href_list["open_net"]
-			for(var/obj/machinery/door/poddoor/D in connected_doors[netTag])
+			for(var/obj/machinery/door/blast/D in connected_doors[netTag])
 				if(D.density)	//for some reason, there's no var saying whether the door is open or not >.>
 					spawn(0)
 						D.open()
 
 		if( href_list["close_net"] )
 			var/netTag = href_list["close_net"]
-			for(var/obj/machinery/door/poddoor/D in connected_doors[netTag])
+			for(var/obj/machinery/door/blast/D in connected_doors[netTag])
 				if(!D.density)
 					spawn(0)
 						D.close()

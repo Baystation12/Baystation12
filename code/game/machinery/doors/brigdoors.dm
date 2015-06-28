@@ -47,7 +47,7 @@
 			if(C.id == src.id)
 				targets += C
 
-		for(var/obj/machinery/door/poddoor/D in world)
+		for(var/obj/machinery/door/blast/D in world)
 			if (D.id == src.id)
 				targets += D
 
@@ -58,13 +58,13 @@
 	return
 
 /obj/machinery/door_timer/proc/openblastdoor()
-	for(var/obj/machinery/door/poddoor/D in targets)
+	for(var/obj/machinery/door/blast/regular/D in targets)
 		if (D.brigdoors == 0)
 			D.open()
 			D.brigdoors = 1
 
 /obj/machinery/door_timer/proc/closeblastdoor()
-	for(var/obj/machinery/door/poddoor/D in targets)
+	for(var/obj/machinery/door/blast/regular/D in targets)
 		if (D.brigdoors == 1)
 			D.close()
 			D.brigdoors = 0
