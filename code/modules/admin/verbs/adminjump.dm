@@ -15,7 +15,6 @@
 	if(config.allow_admin_jump)
 		usr.on_mob_jump()
 		usr.loc = pick(get_area_turfs(A))
-
 		log_admin("[key_name(usr)] jumped to [A]")
 		log_admin_single("[key_name(usr)] jumped to [A]")
 		message_admins("[key_name_admin(usr)] jumped to [A]", 1)
@@ -26,8 +25,10 @@
 /client/proc/jumptoturf(var/turf/T in world)
 	set name = "Jump to Turf"
 	set category = "Admin"
+
 	if(!check_rights(R_MENTOR|R_AUDITOR))
 		usr << "Only administrators may use this command."
+	if(!check_rights(R_MENTOR))
 		return
 	if(config.allow_admin_jump)
 		log_admin("[key_name(usr)] jumped to [T.x],[T.y],[T.z] in [T.loc]")
@@ -44,8 +45,11 @@
 	set category = "Admin"
 	set name = "Jump to Mob"
 
+
 	if(!check_rights(R_MENTOR|R_AUDITOR))
 		usr << "Only administrators may use this command."
+
+	if(!check_rights(R_MENTOR))
 		return
 
 	if(config.allow_admin_jump)
@@ -68,10 +72,12 @@
 	set category = "Admin"
 	set name = "Jump to Coordinate"
 
+
 	if(!check_rights(R_MENTOR|R_AUDITOR))
 		usr << "Only administrators may use this command."
-		return
 
+	if(!check_rights(R_MENTOR))
+		return
 	if (config.allow_admin_jump)
 		if(src.mob)
 			var/mob/A = src.mob
@@ -89,8 +95,10 @@
 	set category = "Admin"
 	set name = "Jump to Key"
 
+
 	if(!check_rights(R_MENTOR|R_AUDITOR))
 		usr << "Only administrators may use this command."
+	if(!check_rights(R_MENTOR))
 		return
 
 	if(config.allow_admin_jump)
@@ -115,8 +123,11 @@
 	set category = "Admin"
 	set name = "Get Mob"
 	set desc = "Mob to teleport"
+
 	if(!check_rights(R_MOD|R_AUDITOR))
 		usr << "Only administrators may use this command."
+
+	if(!check_rights(R_MOD|R_AUDITOR))
 		return
 	if(config.allow_admin_jump)
 		log_admin("[key_name(usr)] teleported [key_name(M)]")
@@ -135,8 +146,8 @@
 
 	if(!check_rights(R_MOD|R_AUDITOR))
 		usr << "Only administrators may use this command."
+	if(!check_rights(R_MOD))
 		return
-
 	if(config.allow_admin_jump)
 		var/list/keys = list()
 		for(var/mob/M in player_list)
@@ -163,6 +174,7 @@
 	set name = "Send Mob"
 	if(!check_rights(R_MOD|R_AUDITOR))
 		usr << "Only administrators may use this command."
+	if(!check_rights(R_MOD))
 		return
 	var/area/A = input(usr, "Pick an area.", "Pick an area") in return_sorted_areas()
 	if(A)
