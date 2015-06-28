@@ -2,7 +2,7 @@
 	icon = 'icons/turf/floors.dmi'
 	level = 1.0
 
-	//for floors, use is_plating(), is_plasteel_floor() and is_light_floor()
+	//for floors, use is_plating(), is_steel_floor() and is_light_floor()
 	var/intact = 1
 
 	//Properties for open tiles (/floor)
@@ -160,7 +160,7 @@
 	return 0
 /turf/proc/is_asteroid_floor()
 	return 0
-/turf/proc/is_plasteel_floor()
+/turf/proc/is_steel_floor()
 	return 0
 /turf/proc/is_light_floor()
 	return 0

@@ -398,7 +398,7 @@
 					imp += "[I] implanted:"
 				else
 					unknown_body++
-			if(unknown_body || e.hidden)
+			if(unknown_body)
 				imp += "Unknown body present:"
 
 		if(!AN && !open && !infected & !imp)

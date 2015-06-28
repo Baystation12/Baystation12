@@ -39,10 +39,10 @@ var/list/accessible_z_levels = list("1" = 5, "3" = 10, "4" = 15, "5" = 10, "6" =
 			ReplaceWithLattice()
 		return
 
-	if (istype(C, /obj/item/stack/tile/plasteel))
+	if (istype(C, /obj/item/stack/tile/steel))
 		var/obj/structure/lattice/L = locate(/obj/structure/lattice, src)
 		if(L)
-			var/obj/item/stack/tile/plasteel/S = C
+			var/obj/item/stack/tile/steel/S = C
 			if (S.get_amount() < 1)
 				return
 			qdel(L)

@@ -273,6 +273,7 @@
 #define slot_l_hand_str		"slot_l_hand"
 #define slot_r_hand_str		"slot_r_hand"
 #define slot_w_uniform_str	"w_uniform"
+#define icon_head		"slot_head"
 
 // Bitflags for clothing parts.
 #define HEAD        1

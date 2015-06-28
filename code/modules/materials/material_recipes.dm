@@ -46,7 +46,7 @@
 	recipes += new/datum/stack_recipe("closet", /obj/structure/closet, 2, time = 15, one_per_turf = 1, on_floor = 1)
 	recipes += new/datum/stack_recipe("canister", /obj/machinery/portable_atmospherics/canister, 10, time = 15, one_per_turf = 1, on_floor = 1)
 	recipes += new/datum/stack_recipe("cannon frame", /obj/item/weapon/cannonframe, 10, time = 15, one_per_turf = 0, on_floor = 0)
-	recipes += new/datum/stack_recipe("floor tile", /obj/item/stack/tile/plasteel, 1, 4, 20)
+	recipes += new/datum/stack_recipe("floor tile", /obj/item/stack/tile/steel, 1, 4, 20)
 	recipes += new/datum/stack_recipe("metal rod", /obj/item/stack/rods, 1, 2, 60)
 	recipes += new/datum/stack_recipe("computer frame", /obj/structure/computerframe, 5, time = 25, one_per_turf = 1, on_floor = 1)
 	recipes += new/datum/stack_recipe("wall girders", /obj/structure/girder, 2, time = 50, one_per_turf = 1, on_floor = 1)
