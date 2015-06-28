@@ -57,6 +57,8 @@
 				ooc_style = src.prefs.ooccolor
 			else
 				ooc_style = "admin"
+		if(holder.rights & R_AUDITOR)
+			ooc_style = "auditor"
 
 	for(var/client/target in clients)
 		if(target.prefs.toggles & CHAT_OOC)

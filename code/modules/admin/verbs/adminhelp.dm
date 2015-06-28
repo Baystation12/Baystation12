@@ -121,7 +121,7 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 			if(!(R_ADMIN & X.holder.rights))
 				if(X.is_afk())
 					admin_number_afk++
-		if(R_ADMIN & X.holder.rights) // just admins here please
+		if(R_ADMIN & X.holder.rights || R_AUDITOR & X.holder.rights) // just admins here please
 			adminholders += X
 			if(X.is_afk())
 				admin_number_afk++

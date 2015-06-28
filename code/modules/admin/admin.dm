@@ -984,6 +984,7 @@ var/global/floorIsLava = 0
 	set name="Toggle Jump"
 	config.allow_admin_jump = !(config.allow_admin_jump)
 	message_admins("\blue Toggled admin jumping to [config.allow_admin_jump].")
+	src << "\blue Toggled admin jumping to [config.allow_admin_jump]."
 	feedback_add_details("admin_verb","TJ") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /datum/admins/proc/adspawn()
@@ -992,6 +993,7 @@ var/global/floorIsLava = 0
 	set name="Toggle Spawn"
 	config.allow_admin_spawning = !(config.allow_admin_spawning)
 	message_admins("\blue Toggled admin item spawning to [config.allow_admin_spawning].")
+	src << "\blue Toggled admin item spawning to [config.allow_admin_spawning]."
 	feedback_add_details("admin_verb","TAS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /datum/admins/proc/adrev()
@@ -1000,6 +1002,7 @@ var/global/floorIsLava = 0
 	set name="Toggle Revive"
 	config.allow_admin_rev = !(config.allow_admin_rev)
 	message_admins("\blue Toggled reviving to [config.allow_admin_rev].")
+	src << "\blue Toggled reviving to [config.allow_admin_rev]."
 	feedback_add_details("admin_verb","TAR") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /datum/admins/proc/immreboot()
@@ -1106,7 +1109,7 @@ var/global/floorIsLava = 0
 	set desc = "Spawn the product of a seed."
 	set name = "Spawn Fruit"
 
-	if(!check_rights(R_SPAWN))	return
+	if(!check_rights(R_SERVER))	return
 
 	var/seedtype = input("Select a seed type", "Spawn Fruit") as null|anything in plant_controller.seeds
 	if(!seedtype || !plant_controller.seeds[seedtype])
@@ -1119,7 +1122,7 @@ var/global/floorIsLava = 0
 	set desc = "Spawn a spreading plant effect."
 	set name = "Spawn Plant"
 
-	if(!check_rights(R_SPAWN))	return
+	if(!check_rights(R_SERVER))	return
 
 	var/seedtype = input("Select a seed type", "Spawn Plant") as null|anything in plant_controller.seeds
 	if(!seedtype || !plant_controller.seeds[seedtype])

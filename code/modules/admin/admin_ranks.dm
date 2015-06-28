@@ -59,8 +59,9 @@ var/list/admin_ranks = list()								//list of all ranks with associated rights
 				if("admin3")					rights |= R_FUN
 				if("headadmin")					rights |= R_DEBUG
 				if("gamemaster")				rights |= R_PERMISSIONS
+				if("auditor")					rights |= R_AUDITOR
 				if("@","prev")					rights |= previous_rights
-				if("everything","host","all")	rights |= (R_HOST | R_PERMISSIONS | R_BUILDMODE | R_ADMIN | R_BAN | R_FUN | R_SERVER | R_DEBUG | R_PERMISSIONS | R_POSSESS | R_STEALTH | R_REJUVINATE | R_VAREDIT | R_SOUNDS | R_SPAWN | R_MOD| R_MENTOR | R_DEV)
+				if("everything","host","all")	rights |= (R_HOST | R_PERMISSIONS | R_BUILDMODE | R_ADMIN | R_BAN | R_FUN | R_SERVER | R_DEBUG | R_PERMISSIONS | R_POSSESS | R_STEALTH | R_REJUVINATE | R_VAREDIT | R_SOUNDS |/* R_SPAWN |*/ R_MOD| R_MENTOR | R_DEV)
 /*
 R_MENTOR = +MENTOR
 R_MOD = +MOD

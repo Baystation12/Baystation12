@@ -533,7 +533,7 @@
 #define R_REJUVINATE    512
 #define R_VAREDIT       1024
 #define R_SOUNDS        2048
-#define R_SPAWN         4096
+#define R_AUDITOR       4096 //#define R_SPAWN         4096
 #define R_MOD           8192
 #define R_MENTOR        16384
 #define R_HOST          32768

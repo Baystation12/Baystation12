@@ -306,7 +306,8 @@ proc/tg_list2text(list/list, glue=",")
 	if(rights & R_SERVER)		. += "[seperator]+ADMIN2"
 	if(rights & R_FUN)			. += "[seperator]+ADMIN3"
 	if(rights & R_DEBUG)		. += "[seperator]+HEADADMIN"
-	if(rights & R_PERMISSIONS)		. += "[seperator]+GAMEMASTER"
+	if(rights & R_PERMISSIONS)	. += "[seperator]+GAMEMASTER"
+	if(rights & R_AUDITOR)		. += "[seperator]+AUDITOR"
 
 	return .
 

@@ -3061,7 +3061,7 @@
 			show_player_panel(M)
 
 	else if(href_list["toglang"])
-		if(check_rights(R_SPAWN))
+		if(check_rights(R_SERVER))
 			var/mob/M = locate(href_list["toglang"])
 			if(!istype(M))
 				usr << "[M] is illegal type, must be /mob!"
