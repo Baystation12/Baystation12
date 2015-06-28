@@ -97,6 +97,7 @@
 
 // Inventory slot strings.
 // since numbers cannot be used as associative list keys.
+//icon_back, icon_l_hand, etc would be much better names for these...
 #define slot_back_str		"slot_back"
 #define slot_l_hand_str		"slot_l_hand"
 #define slot_r_hand_str		"slot_r_hand"
