@@ -185,15 +185,6 @@ By design, d1 is the smallest direction and d2 is the highest
 
 	src.add_fingerprint(user)
 
-
-/obj/structure/cable/attack_ghost(mob/dead/observer/user as mob)
-
-	var/datum/powernet/PN = get_powernet()		// find the powernet
-	if(PN && (PN.avail > 0))		// is it powered?
-		user << "<span class='warning'>[PN.avail]W in power network.</span>"
-	else
-		user << "<span class='warning'>The cable is not powered.</span>"
-
 // shock the user with probability prb
 /obj/structure/cable/proc/shock(mob/user, prb, var/siemens_coeff = 1.0)
 	if(!prob(prb))

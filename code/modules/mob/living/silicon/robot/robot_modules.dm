@@ -180,6 +180,7 @@
 	src.modules += new /obj/item/weapon/rcd/borg(src)
 	src.modules += new /obj/item/weapon/screwdriver(src)
 	src.modules += new /obj/item/weapon/wrench(src)
+	src.modules += new /obj/item/device/t_scanner(src)
 	src.modules += new /obj/item/weapon/crowbar(src)
 	src.modules += new /obj/item/weapon/pickaxe/plasmacutter(src)
 	src.modules += new /obj/item/device/pipe_painter(src)
@@ -219,6 +220,7 @@
 	src.modules += new /obj/item/weapon/weldingtool/largetank(src)
 	src.modules += new /obj/item/weapon/screwdriver(src)
 	src.modules += new /obj/item/weapon/wrench(src)
+	src.modules += new /obj/item/device/t_scanner(src)
 	src.modules += new /obj/item/weapon/crowbar(src)
 	src.modules += new /obj/item/weapon/wirecutters(src)
 	src.modules += new /obj/item/device/multitool(src)
@@ -480,6 +482,7 @@
 	src.modules += new /obj/item/device/lightreplacer(src)
 	src.modules += new /obj/item/weapon/gripper(src)
 	src.modules += new /obj/item/weapon/reagent_containers/spray/cleaner/drone(src)
+	src.modules += new /obj/item/device/t_scanner(src)
 	src.emag = new /obj/item/weapon/pickaxe/plasmacutter(src)
 	src.emag.name = "Plasma Cutter"
 

@@ -144,6 +144,19 @@
 			var/obj/effect/plant/P = A
 			P.die_off()
 
+//Power Claws - Cirra//
+/obj/item/weapon/twohanded/pclaws
+	icon_state = "pclaws0"
+	base_icon = "pclaws"
+	name = "Power Claws"
+	desc = "For when you absolutely need to tear your enemies to shreds - Now with added ZZZZZAP!"
+	force = 5
+	sharp = 1
+	edge = 1
+	w_class = 4.0
+	force_wielded = 30
+	attack_verb = list("shredded", "torn", "ripped", "slashed", "carved", "eviscerated", "scratched", "sliced", "gashed")
+	
 /*
  * Double-Bladed Energy Swords - Cheridan
  */

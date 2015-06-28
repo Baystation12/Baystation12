@@ -32,6 +32,7 @@
 	interface_desc = "A self-sustaining plasma arc capable of cutting through walls."
 	suit_overlay_active = "plasmacutter"
 	suit_overlay_inactive = "plasmacutter"
+	use_power_cost = 5
 
 	device_type = /obj/item/weapon/pickaxe/plasmacutter
 
@@ -40,6 +41,7 @@
 	desc = "A hardsuit-mounted health scanner."
 	interface_name = "health scanner"
 	interface_desc = "Shows an informative health readout when used on a subject."
+	use_power_cost = 1
 
 	device_type = /obj/item/device/healthanalyzer
 
@@ -50,6 +52,7 @@
 	interface_desc = "A diamond-tipped industrial drill."
 	suit_overlay_active = "mounted-drill"
 	suit_overlay_inactive = "mounted-drill"
+	use_power_cost = 2.5    
 
 	device_type = /obj/item/weapon/pickaxe/diamonddrill
 
@@ -72,6 +75,7 @@
 	usable = 1
 	selectable = 0
 	device_type = /obj/item/weapon/mining_scanner
+	use_power_cost = 1    
 
 /obj/item/rig_module/device/rcd
 	name = "RCD mount"
@@ -80,6 +84,7 @@
 	interface_desc = "A device for building or removing walls. Cell-powered."
 	usable = 1
 	engage_string = "Configure RCD"
+	use_power_cost = 10    
 
 	device_type = /obj/item/weapon/rcd/mounted
 
@@ -112,6 +117,7 @@
 	selectable = 0
 	toggleable = 0
 	disruptive = 0
+	use_power_cost = 5    
 
 	engage_string = "Inject"
 

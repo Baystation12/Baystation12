@@ -625,7 +625,7 @@ mob/dead/observer/MayRespawn(var/feedback = 0)
 		return 0
 	if(mind && mind.current && mind.current.stat != DEAD && can_reenter_corpse)
 		if(feedback)
-			src << "<span class='warning'>Your non-dead body prevent you from respawning.</span>"
+			src << "<span class='warning'>Your non-dead body prevents you from respawning.</span>"
 		return 0
 	if(config.antag_hud_restricted && has_enabled_antagHUD == 1)
 		if(feedback)
