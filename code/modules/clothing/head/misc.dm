@@ -3,6 +3,10 @@
 /obj/item/clothing/head/centhat
 	name = "\improper CentComm. hat"
 	icon_state = "centcom"
+	item_state_slots = list(
+		slot_l_hand_str = "centhat",
+		slot_r_hand_str = "centhat",
+		)
 	desc = "It's good to be emperor."
 	siemens_coefficient = 0.9
 	body_parts_covered = 0
@@ -18,15 +22,13 @@
 	name = "powdered wig"
 	desc = "A powdered wig."
 	icon_state = "pwig"
+	item_state = "pwig"
 
 /obj/item/clothing/head/that
 	name = "top-hat"
 	desc = "It's an amish looking hat."
 	icon_state = "tophat"
-	item_state_slots = list(
-		slot_l_hand_str = "that",
-		slot_r_hand_str = "that",
-		)
+	item_state = "tophat"
 	siemens_coefficient = 0.9
 	body_parts_covered = 0
 
@@ -66,6 +68,10 @@
 
 /obj/item/clothing/head/syndicatefake
 	name = "red space-helmet replica"
+	item_state_slots = list(
+		slot_l_hand_str = "syndicate-helm-black-red",
+		slot_r_hand_str = "syndicate-helm-black-red",
+		)
 	icon_state = "syndicate"
 	desc = "A plastic replica of a bloodthirsty mercenary's space helmet, you'll look just like a real murderous criminal operative in this! This is a toy, it is not made for use in space!"
 	flags = BLOCKHAIR
@@ -77,6 +83,7 @@
 	name = "cueball helmet"
 	desc = "A large, featureless white orb mean to be worn on your head. How do you even see out of this thing?"
 	icon_state = "cueball"
+	item_state = "cueball"
 	flags = HEADCOVERSEYES|HEADCOVERSMOUTH|BLOCKHAIR
 	flags_inv = 0
 	body_parts_covered = HEAD|FACE|EYES
@@ -85,6 +92,7 @@
 	name = "green bandana"
 	desc = "It's a green bandana with some fine nanotech lining."
 	icon_state = "greenbandana"
+	item_state = "greenbandana"
 	flags_inv = 0
 	body_parts_covered = 0
 
@@ -92,6 +100,7 @@
 	name = "cardborg helmet"
 	desc = "A helmet made out of a box."
 	icon_state = "cardborg_h"
+	item_state = "cardborg_h"
 	flags = HEADCOVERSEYES | HEADCOVERSMOUTH
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE
 	body_parts_covered = HEAD|FACE|EYES
@@ -125,8 +134,8 @@
 	desc = "A working man's cap."
 	icon_state = "flat_cap"
 	item_state_slots = list(
-		slot_l_hand_str = "detective",
-		slot_r_hand_str = "detective",
+		slot_l_hand_str = "det_hat",
+		slot_r_hand_str = "det_hat",
 		)
 	siemens_coefficient = 0.9
 
@@ -231,6 +240,10 @@
 	name = "natural philosopher's wig"
 	desc = "A stylish monstrosity unearthed from Earth's Renaissance period. With this most distinguish'd wig, you'll be ready for your next soiree!"
 	icon_state = "philosopher_wig"
+	item_state_slots = list(
+		slot_l_hand_str = "pwig",
+		slot_r_hand_str = "pwig",
+		)
 	flags = BLOCKHAIR
 	siemens_coefficient = 2.0 //why is it so conductive?!
 	body_parts_covered = 0

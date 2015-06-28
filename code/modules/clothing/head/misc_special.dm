@@ -22,7 +22,7 @@
 	flags = HEADCOVERSEYES | HEADCOVERSMOUTH
 	matter = list(DEFAULT_WALL_MATERIAL = 3000, "glass" = 1000)
 	var/up = 0
-	armor = list(melee = 30, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
+	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	flags_inv = (HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE)
 	body_parts_covered = HEAD|FACE|EYES
 	action_button_name = "Flip Welding Mask"
@@ -65,10 +65,7 @@
 	name = "cake-hat"
 	desc = "It's tasty looking!"
 	icon_state = "cake0"
-	item_state_slots = list(
-		slot_l_hand_str = "cakehat0",
-		slot_r_hand_str = "cakehat0",
-		)
+	item_state = "cake0"
 	flags = HEADCOVERSEYES
 	var/onfire = 0
 	body_parts_covered = HEAD|EYES
@@ -93,15 +90,13 @@
 		src.force = 3
 		src.damtype = "fire"
 		src.icon_state = "cake1"
-		src.item_state_slots[slot_l_hand_str] = "cakehat1"
-		src.item_state_slots[slot_r_hand_str] = "cakehat1"
+		src.item_state = "cake1"
 		processing_objects.Add(src)
 	else
 		src.force = null
 		src.damtype = "brute"
 		src.icon_state = "cake0"
-		src.item_state_slots[slot_l_hand_str] = "cakehat0"
-		src.item_state_slots[slot_r_hand_str] = "cakehat0"
+		src.item_state = "cake0"
 	return
 
 

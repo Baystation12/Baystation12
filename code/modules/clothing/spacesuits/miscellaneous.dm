@@ -2,7 +2,7 @@
 /obj/item/clothing/head/helmet/space/capspace
 	name = "space helmet"
 	icon_state = "capspace"
-	item_state = "capspacehelmet"
+	item_state = "capspace"
 	desc = "A special helmet designed for work in a hazardous, low-pressure environment. Only for the most fashionable of military figureheads."
 	flags_inv = HIDEFACE
 	permeability_coefficient = 0.01
@@ -32,11 +32,15 @@
 	name = "deathsquad helmet"
 	desc = "That's not red paint. That's real blood."
 	icon_state = "deathsquad"
-	item_state = "deathsquad"
+	item_state_slots = list(
+		slot_l_hand_str = "syndicate-helm-black-red",
+		slot_r_hand_str = "syndicate-helm-black-red",
+		)
 	armor = list(melee = 65, bullet = 55, laser = 35,energy = 20, bomb = 30, bio = 100, rad = 60)
 	flags = HEADCOVERSEYES | BLOCKHAIR | HEADCOVERSMOUTH | STOPPRESSUREDAMAGE | THICKMATERIAL
 	siemens_coefficient = 0.6
 
+//how is this a space helmet?
 /obj/item/clothing/head/helmet/space/deathsquad/beret
 	name = "officer's beret"
 	desc = "An armored beret commonly used by special operations officers."
@@ -50,6 +54,7 @@
 	name = "Santa's hat"
 	desc = "Ho ho ho. Merrry X-mas!"
 	icon_state = "santahat"
+	item_state = "santahat"
 	flags = HEADCOVERSEYES | BLOCKHAIR | STOPPRESSUREDAMAGE
 	body_parts_covered = HEAD
 

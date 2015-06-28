@@ -21,27 +21,30 @@
 	name = "collectable xenomorph helmet!"
 	desc = "Hiss hiss hiss!"
 	icon_state = "xenom"
+	item_state_slots = list(
+		slot_l_hand_str = "xenos_helm",
+		slot_r_hand_str = "xenos_helm",
+		)
 	body_parts_covered = HEAD|FACE|EYES
 
 /obj/item/clothing/head/collectable/chef
 	name = "collectable chef's hat"
 	desc = "A rare Chef's Hat meant for hat collectors!"
 	icon_state = "chefhat"
+	item_state = "chefhat"
 
 /obj/item/clothing/head/collectable/paper
 	name = "collectable paper hat"
 	desc = "What looks like an ordinary paper hat, is actually a rare and valuable collector's edition paper hat. Keep away from water, fire and Librarians."
 	icon_state = "paper"
+	item_state = "paper"
 	body_parts_covered = 0
 
 /obj/item/clothing/head/collectable/tophat
 	name = "collectable top hat"
 	desc = "A top hat worn by only the most prestigious hat collectors."
 	icon_state = "tophat"
-	item_state_slots = list(
-		slot_l_hand_str = "that",
-		slot_r_hand_str = "that",
-		)
+	item_state = "tophat"
 	body_parts_covered = 0
 
 /obj/item/clothing/head/collectable/captain
@@ -70,6 +73,7 @@
 	name = "collectable welding helmet"
 	desc = "A Collectable Welding Helmet. Now with 80% less lead! Not for actual welding. Any welding done while wearing this Helmet is done so at the owner's own risk!"
 	icon_state = "welding"
+	item_state = "welding"
 	body_parts_covered = HEAD|FACE|EYES
 
 /obj/item/clothing/head/collectable/slime

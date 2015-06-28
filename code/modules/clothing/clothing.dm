@@ -241,6 +241,10 @@ BLIND     // can't see anything
 /obj/item/clothing/head
 	name = "head"
 	icon = 'icons/obj/clothing/hats.dmi'
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/items/lefthand_hats.dmi',
+		slot_r_hand_str = 'icons/mob/items/righthand_hats.dmi',
+		)
 	body_parts_covered = HEAD
 	slot_flags = SLOT_HEAD
 	w_class = 2.0

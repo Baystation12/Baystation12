@@ -4,6 +4,7 @@
 	name = "chef's hat"
 	desc = "It's a hat used by chefs to keep hair out of your food. Judging by the food in the mess, they don't work."
 	icon_state = "chefhat"
+	item_state = "chefhat"
 
 //Captain
 /obj/item/clothing/head/caphat
@@ -56,25 +57,6 @@
 	body_parts_covered = 0
 
 //Security
-/obj/item/clothing/head/HoS
-	name = "Head of Security Hat"
-	desc = "The hat of the Head of Security. For showing the officers who's in charge."
-	icon_state = "hoscap"
-	body_parts_covered = 0
-	siemens_coefficient = 0.8
-
-/obj/item/clothing/head/HoS/dermal
-	name = "Dermal Armour Patch"
-	desc = "You're not quite sure how you manage to take it on and off, but it implants nicely in your head."
-	icon_state = "dermal"
-	siemens_coefficient = 0.6
-
-/obj/item/clothing/head/warden
-	name = "warden's hat"
-	desc = "It's a special helmet issued to the Warden of a securiy force."
-	icon_state = "policehelm"
-	body_parts_covered = 0
-
 /obj/item/clothing/head/beret/sec
 	name = "security beret"
 	desc = "A beret with the security insignia emblazoned on it. For officers that are more inclined towards style than safety."
