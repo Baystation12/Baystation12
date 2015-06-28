@@ -938,6 +938,7 @@ var/list/be_special_flags = list(
 #define NETWORK_MINE "MINE"
 #define NETWORK_RESEARCH "Research"
 #define NETWORK_RESEARCH_OUTPOST "Research Outpost"
+#define NETWORK_ROBOTS "Robots"
 #define NETWORK_PRISON "Prison"
 #define NETWORK_SECURITY "Security"
 #define NETWORK_TELECOM "Tcomsat"
