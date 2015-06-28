@@ -48,7 +48,7 @@
 	toxicity = 8
 	pest_kill_str = 7
 
-/obj/item/weapon/minihoe // -- Numbers
+/obj/item/weapon/material/minihoe // -- Numbers
 	name = "mini hoe"
 	desc = "It's used for removing weeds or scratching your back."
 	icon = 'icons/obj/weapons.dmi'
@@ -58,7 +58,7 @@
 	force = 5.0
 	throwforce = 7.0
 	w_class = 2.0
-	matter = list("metal" = 50)
+	matter = list(DEFAULT_WALL_MATERIAL = 50)
 	attack_verb = list("slashed", "sliced", "cut", "clawed")
 
 

@@ -60,7 +60,7 @@
 		if(!interactable() || !computer.radio || ..(href,href_list) )
 			return
 		if (computer.z > 1)
-			usr << "\red <b>Unable to establish a connection</b>: \black You're too far away from the station!"
+			usr << "<span class='danger'>Unable to establish a connection:</span> You're too far away from the station!"
 			return
 
 		if("main" in href_list)

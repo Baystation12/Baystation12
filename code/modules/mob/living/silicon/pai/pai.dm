@@ -6,6 +6,7 @@
 	emote_type = 2		// pAIs emotes are heard, not seen, so they can be seen through a container (eg. person)
 	small = 1
 	pass_flags = 1
+	holder_type = /obj/item/weapon/holder/pai
 
 	var/network = "SS13"
 	var/obj/machinery/camera/current = null
@@ -168,17 +169,6 @@
 		if(3)
 			src << "<font color=green>You feel an electric surge run through your circuitry and become acutely aware at how lucky you are that you can still feel at all.</font>"
 
-// See software.dm for Topic()
-/mob/living/silicon/pai/meteorhit(obj/O as obj)
-	for(var/mob/M in viewers(src, null))
-		M.show_message(text("\red [] has been hit by []", src, O), 1)
-	if (src.health > 0)
-		src.adjustBruteLoss(30)
-		if ((O.icon_state == "flaming"))
-			src.adjustFireLoss(40)
-		src.updatehealth()
-	return
-
 /mob/living/silicon/pai/proc/switchCamera(var/obj/machinery/camera/C)
 	if(istype(usr, /mob/living))
 		var/mob/living/U = usr
@@ -195,6 +185,19 @@
 	src.current = C
 	src.reset_view(C)
 	return 1
+
+/mob/living/silicon/pai/verb/reset_record_view()
+	set category = "pAI Commands"
+	set name = "Reset Records Software"
+
+	securityActive1 = null
+	securityActive2 = null
+	security_cannotfind = 0
+	medicalActive1 = null
+	medicalActive2 = null
+	medical_cannotfind = 0
+	nanomanager.update_uis(src)
+	usr << "<span class='notice'>You reset your record-viewing software.</span>"
 
 /mob/living/silicon/pai/cancel_camera()
 	set category = "pAI Commands"
@@ -265,6 +268,14 @@
 		return 0
 	else if(istype(card.loc,/mob))
 		var/mob/holder = card.loc
+		if(ishuman(holder))
+			var/mob/living/carbon/human/H = holder
+			for(var/obj/item/organ/external/affecting in H.organs)
+				if(card in affecting.implants)
+					affecting.take_damage(rand(30,50))
+					affecting.implants -= card
+					H.visible_message("<span class='danger'>\The [src] explodes out of \the [H]'s [affecting.name] in shower of gore!</span>")
+					break
 		holder.drop_from_inventory(card)
 	else if(istype(card.loc,/obj/item/device/pda))
 		var/obj/item/device/pda/holder = card.loc
@@ -373,7 +384,16 @@
 	src.client.perspective = EYE_PERSPECTIVE
 	src.client.eye = card
 
-	//This seems redundant but not including the forced loc setting messes the behavior up.
+	// If we are being held, handle removing our holder from their inv.
+	var/obj/item/weapon/holder/H = loc
+	if(istype(H))
+		var/mob/living/M = H.loc
+		if(istype(M))
+			M.drop_from_inventory(H)
+		H.loc = get_turf(src)
+		src.loc = get_turf(H)
+
+	// Move us into the card and move the card to the ground.
 	src.loc = card
 	card.loc = get_turf(card)
 	src.forceMove(card)
@@ -396,3 +416,22 @@
 // No binary for pAIs.
 /mob/living/silicon/pai/binarycheck()
 	return 0
+
+// Handle being picked up.
+/mob/living/silicon/pai/get_scooped(var/mob/living/carbon/grabber)
+	var/obj/item/weapon/holder/H = ..()
+	if(!istype(H))
+		return
+	H.icon_state = "pai-[icon_state]"
+	grabber.update_inv_l_hand()
+	grabber.update_inv_r_hand()
+	return H
+
+/mob/living/silicon/pai/MouseDrop(atom/over_object)
+	var/mob/living/carbon/H = over_object
+	if(!istype(H) || !Adjacent(H)) return ..()
+	if(H.a_intent == "help")
+		get_scooped(H)
+		return
+	else
+		return ..()

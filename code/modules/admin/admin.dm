@@ -20,6 +20,10 @@ var/global/floorIsLava = 0
 				var/msg = rendered
 				C << msg
 
+proc/admin_notice(var/message, var/rights)
+	for(var/mob/M in mob_list)
+		if(check_rights(rights, 0, M))
+			M << message
 
 ///////////////////////////////////////////////////////////////////////////////////////////////Panels
 
@@ -54,7 +58,7 @@ var/global/floorIsLava = 0
 		<a href='?src=\ref[src];traitor=\ref[M]'>TP</a> -
 		<a href='?src=\ref[usr];priv_msg=\ref[M]'>PM</a> -
 		<a href='?src=\ref[src];subtlemessage=\ref[M]'>SM</a> -
-		<a href='?src=\ref[src];adminplayerobservejump=\ref[M]'>JMP</a>\] </b><br>
+		[admin_jump_link(M, src)]\] </b><br>
 		<b>Mob type</b> = [M.type]<br><br>
 		<A href='?src=\ref[src];boot2=\ref[M]'>Kick</A> |
 		<A href='?_src_=holder;warn=[M.ckey]'>Warn</A> |
@@ -909,8 +913,8 @@ var/global/floorIsLava = 0
 		log_admin("[key_name(usr)] [ticker.delay_end ? "delayed the round end" : "has made the round end normally"].")
 		message_admins("\blue [key_name(usr)] [ticker.delay_end ? "delayed the round end" : "has made the round end normally"].", 1)
 		return //alert("Round end delayed", null, null, null, null, null)
-	going = !( going )
-	if (!( going ))
+	round_progressing = !round_progressing
+	if (!round_progressing)
 		world << "<b>The game start has been delayed.</b>"
 		log_admin("[key_name(usr)] delayed the game.")
 	else
@@ -997,30 +1001,70 @@ var/global/floorIsLava = 0
 
 	return 0
 
-/datum/admins/proc/spawn_fruit()
+/datum/admins/proc/spawn_fruit(seedtype in plant_controller.seeds)
 	set category = "Debug"
 	set desc = "Spawn the product of a seed."
 	set name = "Spawn Fruit"
 
 	if(!check_rights(R_SPAWN))	return
 
-	var/seedtype = input("Select a seed type", "Spawn Fruit") as null|anything in plant_controller.seeds
 	if(!seedtype || !plant_controller.seeds[seedtype])
 		return
 	var/datum/seed/S = plant_controller.seeds[seedtype]
 	S.harvest(usr,0,0,1)
+	log_admin("[key_name(usr)] spawned [seedtype] fruit at ([usr.x],[usr.y],[usr.z])")
 
-/datum/admins/proc/spawn_plant()
+/datum/admins/proc/spawn_custom_item()
+	set category = "Debug"
+	set desc = "Spawn a custom item."
+	set name = "Spawn Custom Item"
+
+	if(!check_rights(R_SPAWN))	return
+
+	var/owner = input("Select a ckey.", "Spawn Custom Item") as null|anything in custom_items
+	if(!owner|| !custom_items[owner])
+		return
+
+	var/list/possible_items = custom_items[owner]
+	var/datum/custom_item/item_to_spawn = input("Select an item to spawn.", "Spawn Custom Item") as null|anything in possible_items
+	if(!item_to_spawn)
+		return
+
+	item_to_spawn.spawn_item(get_turf(usr))
+
+/datum/admins/proc/check_custom_items()
+
+	set category = "Debug"
+	set desc = "Check the custom item list."
+	set name = "Check Custom Items"
+
+	if(!check_rights(R_SPAWN))	return
+
+	if(!custom_items)
+		usr << "Custom item list is null."
+		return
+
+	if(!custom_items.len)
+		usr << "Custom item list not populated."
+		return
+
+	for(var/assoc_key in custom_items)
+		usr << "[assoc_key] has:"
+		var/list/current_items = custom_items[assoc_key]
+		for(var/datum/custom_item/item in current_items)
+			usr << "- name: [item.name] icon: [item.item_icon] path: [item.item_path] desc: [item.item_desc]"
+
+/datum/admins/proc/spawn_plant(seedtype in plant_controller.seeds)
 	set category = "Debug"
 	set desc = "Spawn a spreading plant effect."
 	set name = "Spawn Plant"
 
 	if(!check_rights(R_SPAWN))	return
 
-	var/seedtype = input("Select a seed type", "Spawn Plant") as null|anything in plant_controller.seeds
 	if(!seedtype || !plant_controller.seeds[seedtype])
 		return
 	new /obj/effect/plant(get_turf(usr), plant_controller.seeds[seedtype])
+	log_admin("[key_name(usr)] spawned [seedtype] vines at ([usr.x],[usr.y],[usr.z])")
 
 /datum/admins/proc/spawn_atom(var/object as text)
 	set category = "Debug"
@@ -1120,7 +1164,7 @@ var/global/floorIsLava = 0
 		out += "<b>Core antag id:</b>  <a href='?src=\ref[ticker.mode];debug_antag=[ticker.mode.antag_tag]'>[ticker.mode.antag_tag]</a>.</br>"
 
 	if(ticker.mode.round_autoantag)
-		out += "<b>Autotraitor <a href='?src=\ref[ticker.mode];toggle=autotraitor'>enabled</a></b> ([ticker.mode.antag_prob]% spawn chance)"
+		out += "<b>Autotraitor <a href='?src=\ref[ticker.mode];toggle=autotraitor'>enabled</a></b> ([ticker.mode.get_antag_prob()]% spawn chance)"
 		if(ticker.mode.antag_scaling_coeff)
 			out += " (scaling with <a href='?src=\ref[ticker.mode];set=antag_scaling'>[ticker.mode.antag_scaling_coeff]</a>)"
 		out += "<br/>"
@@ -1196,7 +1240,7 @@ var/global/floorIsLava = 0
 	if(!ai_number)
 		usr << "<b>No AIs located</b>" //Just so you know the thing is actually working and not just ignoring you.
 
-/datum/admins/proc/show_skills(var/mob/living/carbon/human/M as mob in world)
+/datum/admins/proc/show_skills()
 	set category = "Admin"
 	set name = "Show Skills"
 
@@ -1205,6 +1249,9 @@ var/global/floorIsLava = 0
 	if (!istype(src,/datum/admins))
 		usr << "Error: you are not an admin!"
 		return
+
+	var/mob/living/carbon/human/M = input("Select mob.", "Select mob.") as null|anything in human_mob_list
+	if(!M) return
 
 	show_skill_window(usr, M)
 
@@ -1259,15 +1306,15 @@ var/global/floorIsLava = 0
 
 		if(2)	//Admins
 			var/ref_mob = "\ref[M]"
-			return "<b>[key_name(C, link, name, highlight_special)](<A HREF='?_src_=holder;adminmoreinfo=[ref_mob]'>?</A>) (<A HREF='?_src_=holder;adminplayeropts=[ref_mob]'>PP</A>) (<A HREF='?_src_=vars;Vars=[ref_mob]'>VV</A>) (<A HREF='?_src_=holder;subtlemessage=[ref_mob]'>SM</A>) (<A HREF='?_src_=holder;adminplayerobservejump=[ref_mob]'>JMP</A>) (<A HREF='?_src_=holder;check_antagonist=1'>CA</A>)</b>"
+			return "<b>[key_name(C, link, name, highlight_special)](<A HREF='?_src_=holder;adminmoreinfo=[ref_mob]'>?</A>) (<A HREF='?_src_=holder;adminplayeropts=[ref_mob]'>PP</A>) (<A HREF='?_src_=vars;Vars=[ref_mob]'>VV</A>) (<A HREF='?_src_=holder;subtlemessage=[ref_mob]'>SM</A>) ([admin_jump_link(M, src)]) (<A HREF='?_src_=holder;check_antagonist=1'>CA</A>)</b>"
 
 		if(3)	//Devs
 			var/ref_mob = "\ref[M]"
-			return "<b>[key_name(C, link, name, highlight_special)](<A HREF='?_src_=vars;Vars=[ref_mob]'>VV</A>)(<A HREF='?_src_=holder;adminplayerobservejump=[ref_mob]'>JMP</A>)</b>"
+			return "<b>[key_name(C, link, name, highlight_special)](<A HREF='?_src_=vars;Vars=[ref_mob]'>VV</A>)([admin_jump_link(M, src)])</b>"
 
 		if(4)	//Mentors
 			var/ref_mob = "\ref[M]"
-			return "<b>[key_name(C, link, name, highlight_special)] (<A HREF='?_src_=holder;adminmoreinfo=\ref[M]'>?</A>) (<A HREF='?_src_=holder;adminplayeropts=[ref_mob]'>PP</A>) (<A HREF='?_src_=vars;Vars=[ref_mob]'>VV</A>) (<A HREF='?_src_=holder;subtlemessage=[ref_mob]'>SM</A>) (<A HREF='?_src_=holder;adminplayerobservejump=[ref_mob]'>JMP</A>)</b>"
+			return "<b>[key_name(C, link, name, highlight_special)] (<A HREF='?_src_=holder;adminmoreinfo=\ref[M]'>?</A>) (<A HREF='?_src_=holder;adminplayeropts=[ref_mob]'>PP</A>) (<A HREF='?_src_=vars;Vars=[ref_mob]'>VV</A>) (<A HREF='?_src_=holder;subtlemessage=[ref_mob]'>SM</A>) ([admin_jump_link(M, src)])</b>"
 
 
 /proc/ishost(whom)

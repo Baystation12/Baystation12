@@ -444,7 +444,7 @@
 "iB" = (/obj/machinery/computer/aifixer,/turf/simulated/floor/bluegrid,/area/space)
 "iC" = (/obj/structure/bed/chair{dir = 1},/turf/simulated/floor{dir = 8; icon_state = "bluecorner"},/area/space)
 "iD" = (/obj/structure/grille,/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced{dir = 8},/obj/machinery/door/firedoor/border_only{dir = 2},/turf/simulated/floor/plating,/area/space)
-"iE" = (/obj/item/weapon/table_parts/gambling,/turf/simulated/floor/plating,/area/space)
+"iE" = (/turf/simulated/floor/wood{icon_state = "wood-broken6"},/area/space)
 "iF" = (/obj/machinery/light/small{dir = 8},/turf/simulated/floor{icon_state = "dark"},/area/space)
 "iG" = (/obj/machinery/door/airlock/glass_medical{id_tag = null; name = "Medical Hardsuits"; req_access = list(5)},/turf/simulated/floor{icon_state = "white"},/area/space)
 "iH" = (/turf/simulated/floor{icon_state = "whitehall"; dir = 8},/area/space)
@@ -457,7 +457,7 @@
 "iO" = (/obj/structure/flora/pottedplant,/turf/simulated/floor{dir = 9; icon_state = "blue"},/area/space)
 "iP" = (/obj/structure/sign/securearea{pixel_y = 0},/turf/simulated/wall/r_wall,/area/space)
 "iQ" = (/obj/machinery/door/firedoor/border_only{dir = 2},/obj/structure/grille,/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced{dir = 4},/turf/simulated/floor/plating,/area/space)
-"iR" = (/obj/item/weapon/table_parts/gambling,/turf/simulated/floor/wood,/area/space)
+"iR" = (/obj/structure/table/reinforced,/obj/item/stack/rods{amount = 50},/obj/machinery/light{dir = 1},/turf/simulated/floor{dir = 1; icon_state = "warning"},/area/space)
 "iS" = (/turf/simulated/floor/wood{icon_state = "wood-broken"},/area/space)
 "iT" = (/obj/item/stack/tile/wood,/turf/simulated/floor/plating,/area/space)
 "iU" = (/obj/machinery/requests_console{department = "EVA"; pixel_x = -32; pixel_y = 0},/obj/machinery/light{icon_state = "tube1"; dir = 8},/obj/machinery/camera/motion{c_tag = "EVA Motion Sensor"; dir = 4},/obj/structure/table/reinforced,/obj/item/weapon/storage/briefcase/inflatable,/turf/simulated/floor{icon_state = "whitehall"; dir = 8},/area/space)
@@ -501,7 +501,7 @@
 "jG" = (/obj/machinery/sleep_console,/turf/simulated/shuttle/floor{icon_state = "floor3"},/area/space)
 "jH" = (/turf/simulated/shuttle/floor{icon_state = "floor3"},/area/space)
 "jI" = (/obj/structure/table,/obj/item/weapon/storage/firstaid/regular{pixel_x = 2; pixel_y = 6},/obj/item/weapon/storage/firstaid/regular{pixel_x = -2; pixel_y = 4},/obj/item/bodybag/cryobag{pixel_x = 5},/obj/item/device/radio/intercom{dir = 4; name = "Station Intercom (General)"; pixel_x = 30},/obj/item/weapon/storage/firstaid/o2{layer = 2.8; pixel_x = 4; pixel_y = 6},/obj/item/weapon/storage/firstaid/fire,/turf/simulated/shuttle/floor{icon_state = "floor3"},/area/space)
-"jJ" = (/obj/structure/falsewall,/turf/simulated/floor/plating,/area/space)
+"jJ" = (/obj/structure/table/reinforced,/turf/simulated/floor{dir = 1; icon_state = "warning"},/area/space)
 "jK" = (/obj/structure/grille,/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced{dir = 8},/obj/machinery/door/firedoor/border_only{dir = 2},/obj/structure/window/reinforced,/turf/simulated/floor/plating,/area/space)
 "jL" = (/obj/machinery/door/firedoor,/obj/machinery/door/airlock/security{name = "Security Checkpoint"; req_access = list(1)},/turf/simulated/floor,/area/space)
 "jM" = (/turf/simulated/floor{dir = 10; icon_state = "yellow"},/area/space)
@@ -515,9 +515,9 @@
 "jU" = (/obj/structure/table/gamblingtable,/turf/simulated/floor/wood,/area/space)
 "jV" = (/obj/structure/bed/chair/wood{tag = "icon-wooden_chair (WEST)"; icon_state = "wooden_chair"; dir = 8},/turf/simulated/floor/plating,/area/space)
 "jW" = (/obj/item/device/radio/intercom{freerange = 1; frequency = 1459; name = "Station Intercom (General)"; pixel_x = -30},/obj/machinery/light{icon_state = "tube1"; dir = 8},/obj/structure/table/reinforced,/obj/item/device/radio/off,/obj/item/device/radio/off,/obj/item/device/radio/off,/turf/simulated/floor{dir = 8; icon_state = "yellow"},/area/space)
-"jX" = (/obj/structure/table/reinforced,/obj/item/stack/sheet/glass{amount = 50},/obj/item/stack/sheet/glass{amount = 50},/obj/item/stack/sheet/glass{amount = 50},/turf/simulated/floor{dir = 1; icon_state = "warning"},/area/space)
-"jY" = (/obj/structure/table/reinforced,/obj/item/stack/sheet/glass/reinforced{amount = 50},/obj/item/stack/rods{amount = 50},/obj/machinery/light{dir = 1},/turf/simulated/floor{dir = 1; icon_state = "warning"},/area/space)
-"jZ" = (/obj/structure/table/reinforced,/obj/item/stack/sheet/metal{amount = 50},/obj/item/stack/sheet/metal{amount = 50},/obj/item/stack/sheet/metal{amount = 50},/turf/simulated/floor{dir = 5; icon_state = "warning"},/area/space)
+"jX" = (/obj/structure/table/reinforced,/turf/simulated/floor{dir = 5; icon_state = "warning"},/area/space)
+"jY" = (/obj/machinery/camera{c_tag = "Vault"; dir = 4; network = list("SS13")},/obj/structure/closet/crate{name = "Gold Crate"},/obj/item/device/radio/intercom{freerange = 0; frequency = 1459; name = "Station Intercom (General)"; pixel_x = -30},/obj/item/weapon/storage/belt/champion,/turf/simulated/floor{icon_state = "vault"; dir = 1},/area/space)
+"jZ" = (/obj/structure/safe,/turf/simulated/floor{icon_state = "vault"; dir = 1},/area/space)
 "ka" = (/obj/machinery/door/firedoor/border_only{dir = 2},/obj/structure/grille,/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced{dir = 8},/turf/simulated/floor/plating,/area/space)
 "kb" = (/turf/simulated/floor{dir = 8; icon_state = "warning"},/area/space)
 "kc" = (/obj/structure/bed/chair{dir = 4},/obj/machinery/power/apc{dir = 1; name = "north bump"; pixel_x = 0; pixel_y = 24},/turf/simulated/floor,/area/space)
@@ -541,7 +541,6 @@
 "ku" = (/obj/structure/bed/chair/office/dark,/turf/simulated/floor,/area/space)
 "kv" = (/obj/item/device/radio/intercom{dir = 4; name = "Station Intercom (General)"; pixel_x = 27},/turf/simulated/floor,/area/space)
 "kw" = (/obj/machinery/door/firedoor/border_only{dir = 2},/obj/structure/grille,/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced,/obj/structure/window/reinforced{dir = 4},/turf/simulated/floor/plating,/area/space)
-"kx" = (/obj/item/weapon/table_parts/wood,/turf/simulated/floor/wood{icon_state = "wood-broken6"},/area/space)
 "ky" = (/obj/machinery/suit_cycler/security,/turf/simulated/floor{icon_state = "vault"; dir = 8},/area/space)
 "kz" = (/obj/structure/table/rack,/obj/item/clothing/mask/breath,/obj/item/clothing/shoes/magboots,/obj/item/clothing/suit/space/void/security,/obj/item/clothing/head/helmet/space/void/security,/turf/simulated/floor{icon_state = "vault"; dir = 8},/area/space)
 "kA" = (/obj/structure/table/reinforced,/obj/machinery/cell_charger,/obj/item/weapon/cell/high{charge = 100; maxcharge = 15000},/obj/item/weapon/cell/high{charge = 100; maxcharge = 15000},/turf/simulated/floor{icon_state = "red"; dir = 8},/area/space)
@@ -773,7 +772,6 @@
 "oS" = (/obj/machinery/door/firedoor/border_only{dir = 2},/obj/structure/grille,/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced{dir = 1},/turf/simulated/floor/plating,/area/space)
 "oT" = (/obj/machinery/door/firedoor/border_only{dir = 2},/obj/structure/grille,/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced,/turf/simulated/floor/plating,/area/space)
 "oU" = (/obj/structure/bed/chair{dir = 4},/turf/simulated/floor{icon_state = "dark"},/area/space)
-"oV" = (/obj/structure/table,/obj/item/ashtray/bronze,/turf/simulated/floor{icon_state = "dark"},/area/space)
 "oW" = (/obj/structure/bed/chair{dir = 8},/turf/simulated/floor{icon_state = "dark"},/area/space)
 "oX" = (/obj/machinery/door/firedoor/border_only{dir = 2},/obj/structure/grille,/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced,/obj/structure/window/reinforced{dir = 8},/turf/simulated/floor/plating,/area/space)
 "oY" = (/obj/structure/bed/chair{dir = 1},/turf/simulated/floor{icon_state = "dark"},/area/space)
@@ -784,10 +782,8 @@
 "pd" = (/turf/simulated/floor{icon_state = "vault"; dir = 6},/area/space)
 "pe" = (/turf/simulated/floor{icon_state = "vault"},/area/space)
 "pf" = (/turf/simulated/floor{icon_state = "vault"; dir = 10},/area/space)
-"pg" = (/obj/structure/safe,/obj/item/stack/sheet/mineral/platinum{amount = 50},/obj/item/stack/sheet/mineral/phoron{amount = 50},/obj/item/stack/sheet/mineral/diamond{amount = 50},/turf/simulated/floor{icon_state = "vault"; dir = 1},/area/space)
 "ph" = (/obj/structure/closet/emcloset,/turf/simulated/floor{icon_state = "dark"},/area/space)
 "pi" = (/obj/structure/table,/obj/item/weapon/reagent_containers/food/drinks/bottle/cognac,/turf/simulated/floor{icon_state = "dark"},/area/space)
-"pj" = (/obj/machinery/camera{c_tag = "Vault"; dir = 4; network = list("SS13")},/obj/structure/closet/crate{name = "Gold Crate"},/obj/item/stack/sheet/mineral/gold{pixel_x = -1; pixel_y = 5},/obj/item/stack/sheet/mineral/gold{pixel_y = 2},/obj/item/stack/sheet/mineral/gold{pixel_x = 1; pixel_y = -2},/obj/item/device/radio/intercom{freerange = 0; frequency = 1459; name = "Station Intercom (General)"; pixel_x = -30},/obj/item/weapon/storage/belt/champion,/turf/simulated/floor{icon_state = "vault"; dir = 1},/area/space)
 "pk" = (/obj/item/weapon/coin/silver{pixel_x = 7; pixel_y = 12},/obj/item/weapon/coin/silver{pixel_x = 12; pixel_y = 7},/obj/item/weapon/coin/silver{pixel_x = 4; pixel_y = 8},/obj/item/weapon/coin/silver{pixel_x = -6; pixel_y = 5},/obj/item/weapon/coin/silver{pixel_x = 5; pixel_y = -8},/obj/structure/closet/crate{name = "Silver Crate"},/turf/simulated/floor{icon_state = "vault"; dir = 4},/area/space)
 "pl" = (/obj/machinery/nuclearbomb{r_code = "LOLNO"},/turf/simulated/floor{icon_state = "vault"; dir = 8},/area/space)
 "pm" = (/turf/simulated/floor{icon_state = "vault"; dir = 4},/area/space)
@@ -878,12 +874,12 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabhqhqhrhshthuhvfdeZduac
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababhqhIhrhJhKhuhLduaVduacajajajajachMdudududugzacacacacacacacacacacababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadadadadadhNduhOadhPaVhQadadhRhShDhTadadadadhUadadadadhVduhkadhWemhXhYhZiaadadadabeVaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacacadadadadadibaVduadadadadadadiciddQdQicidacaVifieigifaVadadabababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadfYfZgaadcwduihadhPaViiadadadadadadadajajadadadeTadadijduhOadadfkadadhnikfnabababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaXilimadinioioipiqaViripaVisitaddudududududuiuaciviwiwiwiwaVixaaabiyiyizaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadgvgwgxfJcwduhkadhPiAiBadajajajeTajajajajajajeTeTadadiCduhkeHeUeUeUadadadadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaiDajaXiEadiFaVaViGiHaViriIaVaVitipdudududududuiJacaViKiwiwiwaViLaaabiyiyiyiyizaaaaaaaaaaaaaaaaaaaaaaaaaaaaadgUgVgWadiMdQiNadadadadadaddHadadadadadadadadadadadiOduduhkiPeHeIeHacacabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabiQiRiSiTadacacacaciUaViriVaVaVitaddudududududuacacaViWiWiWiWaViXaaaaiyiyiyiyiyizaaaaaaaaaaaaaaaaaaaaaaaaaaadadadadadiYdududDiZdDdDdDjadDdDiZdDdDjbdDjcjaiZjddDdUdudududDdDdDdDjeacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaiDajaXajadiFaVaViGiHaViriIaVaVitipdudududududuiJacaViKiwiwiwaViLaaabiyiyiyiyizaaaaaaaaaaaaaaaaaaaaaaaaaaaaadgUgVgWadiMdQiNadadadadadaddHadadadadadadadadadadadiOduduhkiPeHeIeHacacabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabiQaXiSiTadacacacaciUaViriVaVaVitaddudududududuacacaViWiWiWiWaViXaaaaiyiyiyiyiyizaaaaaaaaaaaaaaaaaaaaaaaaaaadadadadadiYdududDiZdDdDdDjadDdDiZdDdDjbdDjcjaiZjddDdUdudududDdDdDdDjeacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababiQajiTjfadjgjhjiiVjjaVjkadjljladadgNdududududuacjmaVaVaVaVaVjnadabjoiyananjpananananjqaaaaaaaaaaaaaaaaaaaaaaaaacajacjrjsdududududududududududududujtdudududQdudududuejekdududujuacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaiQiSaXajadiFaVaVjveFaVduiVadiVadjwdudududujxacacacjyjzjAicidadadabjBjCjDjDjEjFjGjHjIjEaaaaaaaaaaaaaaaaaaaaaaaaacjJacjKjLacjMejjNadadadadadjOjPjQadadadadadadjrjsjRacjSeFacjTeHacacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaiQjUjVaXadacacacacjWaVdujXjYjZkakbdududududuipkceZkddududukeixkfabjBjCjDjDkgjHjHjHkhkijqaaaaaaaaaaaaaaaaaaaaaaiDkekjduduadkkklkkadkmknkoadkpkqkpadadbScKcPadkrkskradkteFacdudukukukudukvacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaakwjUajkxadkykzkziVkAaVdudududvkBkbdudududufPackCdududududukDiXkfabjBjCkEkFkGkHjHjHkIkikJkKkLanjpjqaaaaaaaaaacmkMkNkOdukPadkQaXaXkRaXbjkSadkTaXkUkVadkWcKcKadaXaXkXadadduacdugohehehekYdukZaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaiQiSaXajadiFaVaVjveFaVduiVadiVadjwdudududujxacacacjyjzjAicidadadabjBjCjDjDjEjFjGjHjIjEaaaaaaaaaaaaaaaaaaaaaaaaacajacjKjLacjMejjNadadadadadjOjPjQadadadadadadjrjsjRacjSeFacjTeHacacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaiQjUjVaXadacacacacjWaVdujJiRjXkakbdududududuipkceZkddududukeixkfabjBjCjDjDkgjHjHjHkhkijqaaaaaaaaaaaaaaaaaaaaaaiDkekjduduadkkklkkadkmknkoadkpkqkpadadbScKcPadkrkskradkteFacdudukukukudukvacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaakwjUajiEadkykzkziVkAaVdudududvkBkbdudududufPackCdududududukDiXkfabjBjCkEkFkGkHjHjHkIkikJkKkLanjpjqaaaaaaaaaacmkMkNkOdukPadkQaXaXkRaXbjkSadkTaXkUkVadkWcKcKadaXaXkXadadduacdugohehehekYdukZaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaclaiTajadiFaVaVlbiYgGaVaVaVaVlckbdudududuacldduleleleledulfadablglhjpananlijpaCljaClklllllllmaClnanaCjqabababacacgnduloadlplqaXaXcaaXlradlsaXltluadlvlwadadlxaXcEadadadaddugohedMhekYdulyaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacaclzadadadadadlAfdfddududvlBkbdududugeaclCdudududududulDlElFlFlGaClHlIlJlKlLlLlLlMlLlLlLlLlMlLlNlOlnanjqababacacaracadadadaWaXaXaXlPadlQcalRaXlSeabxaclTaXaXbUlUlVlWaddugohehehekYdulXaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaclYajajajajlZadmambmcmdmemfkwkbdudufdmgmhfdduleleleledumimjmkmliXmmmnmompmqlLlLmrjElllllljHaClLmqmsmsmtmuaaaaabacajacbSmvcpaWaWaWaWmwadmxaWaWaWaWaWmyacmzaWaWbwaWbXmAaddudumBmBmBdujtacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -899,11 +895,11 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababakajajdxacot
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababacajajajacozfddulCkMdudududududQeZduoAoBadoCoDoEoFoGadiyiyiyiyoxaaaaaaaaaaababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacabababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabacgcajajacdudududuojdudududududQdududuoHadoIaVoJadadadiyiyoxaaaaaaaaabababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacdHacacoKoLoMoLiVdududududuacduduoNduoOaVaVaVoFoGadabababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacajajacacadadadadoPoQoRoSoTadadadaddHadoUoVoWadadadabababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacajajacacadadadadoPoQoRoSoTadadadaddHadoUiwoWadadadabababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaakajajajajadaaaaaaaaoXoRoXaaabaaaaadajadaVoYaVadabababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacajajajadadabadadoZpaoZadadaaaaadajadiFaVpbadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacajajajajadabadpcpdpepfpgadaaaaadajadphoUpiadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacajajadaaadpjpdpepfpkadababadajadadadadadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacajajajajadabadpcpdpepfjZadaaaaadajadphoUpiadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacajajadaaadjYpdpepfpkadababadajadadadadadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacajnIadaaadpcpdplpfpmadaaaaadajeTpnajajacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacajpoadaaadpppdpqpfpradaaadadajacajajgZacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacajacadabadadadadadadadabadajajacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa

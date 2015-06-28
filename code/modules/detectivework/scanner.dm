@@ -23,8 +23,8 @@
 		F.add_fingerprint(M)
 		F.icon_state = "fingerprint1"
 		F.name = text("FPrintC- '[M.name]'")
-		user << "<span class='notice'>Done printing."
-		user << "<span class='notice'>[M]'s Fingerprints: [md5(M.dna.uni_identity)]"
+		user << "<span class='notice'>Done printing.</span>"
+		user << "<span class='notice'>[M]'s Fingerprints: [md5(M.dna.uni_identity)]</span>"
 	if ( M.blood_DNA && M.blood_DNA.len )
 		user << "<span class='notice'>Blood found on [M]. Analysing...</span>"
 		spawn(15)

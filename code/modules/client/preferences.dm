@@ -84,6 +84,7 @@ datum/preferences
 	var/religion = "None"               //Religious association.
 
 		//Mob preview
+	var/mob/living/carbon/human/dummy //the mannequin
 	var/icon/preview_icon = null
 	var/icon/preview_icon_front = null
 	var/icon/preview_icon_side = null
@@ -235,8 +236,9 @@ datum/preferences
 /datum/preferences/proc/ShowChoices(mob/user)
 	if(!user || !user.client)	return
 	update_preview_icon()
-	user << browse_rsc(preview_icon_front, "previewicon.png")
-	user << browse_rsc(preview_icon_side, "previewicon2.png")
+	if(preview_icon_front && preview_icon_side)
+		user << browse_rsc(preview_icon_front, "previewicon.png")
+		user << browse_rsc(preview_icon_side, "previewicon2.png")
 	var/dat = "<html><body><center>"
 
 	if(path)
@@ -632,10 +634,6 @@ datum/preferences
 	if(current_species.flags & HAS_EYE_COLOR)
 		dat += "</br><b>Has a variety of eye colours.</b>"
 	if(current_species.flags & IS_PLANT)
-		dat += "</br><b>Has a plantlike physiology.</b>"
-	if(current_species.flags & IS_SYNTHETIC)
-		dat += "</br><b>Is machine-based.</b>"
-	if(current_species.flags & REGENERATES_LIMBS)
 		dat += "</br><b>Has a plantlike physiology.</b>"
 	dat += "</small></td>"
 	dat += "</tr>"
@@ -1642,30 +1640,18 @@ datum/preferences
 	character.gen_record = gen_record
 	character.exploit_record = exploit_record
 
-	character.gender = gender
+	character.change_gender(gender)
 	character.age = age
 	character.b_type = b_type
 
-	character.r_eyes = r_eyes
-	character.g_eyes = g_eyes
-	character.b_eyes = b_eyes
+	character.change_eye_color(r_eyes,g_eyes,b_eyes)
+	character.change_hair_color(r_hair,g_hair,b_hair)
+	character.change_facial_hair_color(r_facial,g_facial,b_facial)
+	character.change_skin_color(r_skin,g_skin,b_skin)
+	character.change_skin_tone(s_tone)
 
-	character.r_hair = r_hair
-	character.g_hair = g_hair
-	character.b_hair = b_hair
-
-	character.r_facial = r_facial
-	character.g_facial = g_facial
-	character.b_facial = b_facial
-
-	character.r_skin = r_skin
-	character.g_skin = g_skin
-	character.b_skin = b_skin
-
-	character.s_tone = s_tone
-
-	character.h_style = h_style
-	character.f_style = f_style
+	character.change_hair(h_style)
+	character.change_facial_hair(f_style)
 
 	character.home_system = home_system
 	character.citizenship = citizenship
@@ -1682,6 +1668,7 @@ datum/preferences
 		var/status = organ_data[name]
 		var/obj/item/organ/external/O = character.organs_by_name[name]
 		if(O)
+			O.status = 0
 			if(status == "amputated")
 				character.organs_by_name[O.limb_name] = null
 				character.organs -= O

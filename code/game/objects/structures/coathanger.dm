@@ -4,7 +4,7 @@
 	icon = 'icons/obj/coatrack.dmi'
 	icon_state = "coatrack0"
 	var/obj/item/clothing/suit/coat
-	var/list/allowed = list(/obj/item/clothing/suit/storage/labcoat, /obj/item/clothing/suit/storage/toggle/labcoat, /obj/item/clothing/suit/storage/det_suit)
+	var/list/allowed = list(/obj/item/clothing/suit/storage/toggle/labcoat, /obj/item/clothing/suit/storage/det_suit)
 
 /obj/structure/coatrack/attack_hand(mob/user as mob)
 	user.visible_message("[user] takes [coat] off \the [src].", "You take [coat] off the \the [src]")

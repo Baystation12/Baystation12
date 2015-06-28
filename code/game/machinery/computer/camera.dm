@@ -55,18 +55,11 @@
 				var/cam = C.nano_structure()
 				cameras[++cameras.len] = cam
 
-				if(C == current)
-					data["current"] = cam
+			camera_cache=list2json(cameras)
 
-			var/list/camera_list = list("cameras" = cameras)
-			camera_cache=list2json(camera_list)
-		else
-			if(current)
-				data["current"] = current.nano_structure()
-
-
-		if(ui)
-			ui.load_cached_data(camera_cache)
+		if(current)
+			data["current"] = current.nano_structure()
+		data["cameras"] = list("__json_cache" = camera_cache)
 
 		ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 		if (!ui)
@@ -76,8 +69,7 @@
 			ui.add_template("mapContent", "sec_camera_map_content.tmpl")
 			// adding a template with the key "mapHeader" replaces the map header content
 			ui.add_template("mapHeader", "sec_camera_map_header.tmpl")
-
-			ui.load_cached_data(camera_cache)
+			
 			ui.set_initial_data(data)
 			ui.open()
 			ui.set_auto_update(1)
@@ -102,7 +94,7 @@
 
 	attack_hand(var/mob/user as mob)
 		if (src.z > 6)
-			user << "\red <b>Unable to establish a connection</b>: \black You're too far away from the station!"
+			user << "<span class='danger'>Unable to establish a connection:</span> You're too far away from the station!"
 			return
 		if(stat & (NOPOWER|BROKEN))	return
 
@@ -222,6 +214,8 @@
 	desc = "Damn, why do they never have anything interesting on these things?"
 	icon = 'icons/obj/status_display.dmi'
 	icon_state = "entertainment"
+	light_color = "#FFEEDB"
+	light_range_on = 2
 	circuit = null
 
 /obj/machinery/computer/security/wooden_tv
@@ -229,7 +223,8 @@
 	desc = "An old TV hooked into the stations camera network."
 	icon_state = "security_det"
 	circuit = null
-
+	light_color = "#3848B3"
+	light_power_on = 0.5
 
 /obj/machinery/computer/security/mining
 	name = "outpost camera monitor"
@@ -237,12 +232,14 @@
 	icon_state = "miningcameras"
 	network = list("MINE")
 	circuit = /obj/item/weapon/circuitboard/security/mining
+	light_color = "#F9BBFC"
 
 /obj/machinery/computer/security/engineering
 	name = "engineering camera monitor"
 	desc = "Used to monitor fires and breaches."
 	icon_state = "engineeringcameras"
 	circuit = /obj/item/weapon/circuitboard/security/engineering
+	light_color = "#FAC54B"
 
 /obj/machinery/computer/security/engineering/New()
 	if(!network)

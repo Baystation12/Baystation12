@@ -202,13 +202,6 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	statpanel("Status")
 	if (client.statpanel == "Status")
 		stat(null, "Station Time: [worldtime2text()]")
-		if(ticker)
-			if(ticker.mode)
-				//world << "DEBUG: ticker not null"
-				if(ticker.mode.name == "AI malfunction")
-					//world << "DEBUG: malf mode ticker test"
-					if(malf.revealed)
-						stat(null, "Time left: [max(malf.hack_time/(malf.hacked_apcs.len/3), 0)]")
 		if(emergency_shuttle)
 			var/eta_status = emergency_shuttle.get_status_panel_eta()
 			if(eta_status)
@@ -677,8 +670,30 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 			client.images -= ghostimage //remove ourself
 
 mob/dead/observer/MayRespawn(var/feedback = 0)
+	if(!client)
+		return 0
+	if(mind && mind.current && mind.current.stat != DEAD && can_reenter_corpse)
+		if(feedback)
+			src << "<span class='warning'>Your non-dead body prevent you from respawning.</span>"
+		return 0
 	if(config.antag_hud_restricted && has_enabled_antagHUD == 1)
 		if(feedback)
 			src << "<span class='warning'>antagHUD restrictions prevent you from respawning.</span>"
 		return 0
 	return 1
+
+/atom/proc/extra_ghost_link()
+	return
+
+/mob/extra_ghost_link(var/atom/ghost)
+	if(client && eyeobj)
+		return "|<a href='byond://?src=\ref[ghost];track=\ref[eyeobj]'>eye</a>"
+
+/mob/dead/observer/extra_ghost_link(var/atom/ghost)
+	if(mind && mind.current)
+		return "|<a href='byond://?src=\ref[ghost];track=\ref[mind.current]'>body</a>"
+
+/proc/ghost_follow_link(var/atom/target, var/atom/ghost)
+	if((!target) || (!ghost)) return
+	. = "<a href='byond://?src=\ref[ghost];track=\ref[target]'>follow</a>"
+	. += target.extra_ghost_link(ghost)

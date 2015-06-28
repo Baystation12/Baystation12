@@ -102,41 +102,6 @@
 		user << "<span class='danger'>\The [src] is hermetically sealed. You can't open the case.</span>"
 		return
 
-	else if (istype(W, /obj/item/weapon/card/emag))
-
-		if(!client || stat == 2)
-			user << "<span class='danger'>There's not much point subverting this heap of junk.</span>"
-			return
-
-		if(emagged)
-			src << "<span class='danger'>\The [user] attempts to load subversive software into you, but your hacked subroutines ignore the attempt.</span>"
-			user << "<span class='danger'>You attempt to subvert [src], but the sequencer has no effect.</span>"
-			return
-
-		user << "<span class='danger'>You swipe the sequencer across [src]'s interface and watch its eyes flicker.</span>"
-		src << "<span class='danger'>You feel a sudden burst of malware loaded into your execute-as-root buffer. Your tiny brain methodically parses, loads and executes the script.</span>"
-
-		var/obj/item/weapon/card/emag/emag = W
-		emag.uses--
-
-		message_admins("[key_name_admin(user)] emagged drone [key_name_admin(src)].  Laws overridden.")
-		log_game("[key_name(user)] emagged drone [key_name(src)].  Laws overridden.")
-		var/time = time2text(world.realtime,"hh:mm:ss")
-		lawchanges.Add("[time] <B>:</B> [user.name]([user.key]) emagged [name]([key])")
-
-		emagged = 1
-		lawupdate = 0
-		connected_ai = null
-		clear_supplied_laws()
-		clear_inherent_laws()
-		laws = new /datum/ai_laws/syndicate_override
-		set_zeroth_law("Only [user.real_name] and people he designates as being such are operatives.")
-
-		src << "<b>Obey these laws:</b>"
-		laws.show_laws(src)
-		src << "<span class='danger'>ALERT: [user.real_name] is your new master. Obey your new laws and his commands.</span>"
-		return
-
 	else if (istype(W, /obj/item/weapon/card/id)||istype(W, /obj/item/device/pda))
 
 		if(stat == 2)
@@ -172,6 +137,37 @@
 		return
 
 	..()
+	
+/mob/living/silicon/robot/drone/emag_act(var/remaining_charges, var/mob/user)
+	if(!client || stat == 2)
+		user << "<span class='danger'>There's not much point subverting this heap of junk.</span>"
+		return
+
+	if(emagged)
+		src << "<span class='danger'>\The [user] attempts to load subversive software into you, but your hacked subroutines ignore the attempt.</span>"
+		user << "<span class='danger'>You attempt to subvert [src], but the sequencer has no effect.</span>"
+		return
+
+	user << "<span class='danger'>You swipe the sequencer across [src]'s interface and watch its eyes flicker.</span>"
+	src << "<span class='danger'>You feel a sudden burst of malware loaded into your execute-as-root buffer. Your tiny brain methodically parses, loads and executes the script.</span>"
+
+	message_admins("[key_name_admin(user)] emagged drone [key_name_admin(src)].  Laws overridden.")
+	log_game("[key_name(user)] emagged drone [key_name(src)].  Laws overridden.")
+	var/time = time2text(world.realtime,"hh:mm:ss")
+	lawchanges.Add("[time] <B>:</B> [user.name]([user.key]) emagged [name]([key])")
+
+	emagged = 1
+	lawupdate = 0
+	connected_ai = null
+	clear_supplied_laws()
+	clear_inherent_laws()
+	laws = new /datum/ai_laws/syndicate_override
+	set_zeroth_law("Only [user.real_name] and people he designates as being such are operatives.")
+
+	src << "<b>Obey these laws:</b>"
+	laws.show_laws(src)
+	src << "<span class='danger'>ALERT: [user.real_name] is your new master. Obey your new laws and his commands.</span>"
+	return 1
 
 //DRONE LIFE/DEATH
 
@@ -257,12 +253,13 @@
 	lawupdate = 0
 	src << "<b>Systems rebooted</b>. Loading base pattern maintenance protocol... <b>loaded</b>."
 	full_law_reset()
-	src << "<br><b>You are a maintenance drone, a tiny-brained robotic repair machine</b>."
+	welcome_drone()
+
+/mob/living/silicon/robot/drone/proc/welcome_drone()
+	src << "<b>You are a maintenance drone, a tiny-brained robotic repair machine</b>."
 	src << "You have no individual will, no personality, and no drives or urges other than your laws."
-	src << "Use <b>:d</b> to talk to other drones and <b>say</b> to speak silently to your nearby fellows."
 	src << "Remember,  you are <b>lawed against interference with the crew</b>. Also remember, <b>you DO NOT take orders from the AI.</b>"
-	src << "<b>Don't invade their worksites, don't steal their resources, don't tell them about the changeling in the toilets.</b>"
-	src << "<b>If a crewmember has noticed you, <i>you are probably breaking your third law</i></b>."
+	src << "Use <b>:d</b> to talk to other drones and <b>say</b> to speak silently to your nearby fellows."
 
 /mob/living/silicon/robot/drone/start_pulling(var/atom/movable/AM)
 
@@ -292,6 +289,12 @@
 	module_type = /obj/item/weapon/robot_module/drone/construction
 	can_pull_size = 5
 	can_pull_mobs = 1
+
+/mob/living/silicon/robot/drone/construction/welcome_drone()
+	src << "<b>You are a construction drone, an autonomous engineering and fabrication system.</b>."
+	src << "You are assigned to a Sol Central construction project. The name is irrelevant. Your task is to complete construction and subsystem integration as soon as possible."
+	src << "Use <b>:d</b> to talk to other drones and <b>say</b> to speak silently to your nearby fellows."
+	src << "<b>You do not follow orders from anyone; not the AI, not humans, and not other synthetics.</b>."
 
 /mob/living/silicon/robot/drone/construction/init()
 	..()

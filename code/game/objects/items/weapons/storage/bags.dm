@@ -119,36 +119,36 @@
 		//verbs += /obj/item/weapon/storage/bag/sheetsnatcher/quick_empty
 
 	can_be_inserted(obj/item/W as obj, stop_messages = 0)
-		if(!istype(W,/obj/item/stack/sheet) || istype(W,/obj/item/stack/sheet/mineral/sandstone) || istype(W,/obj/item/stack/sheet/wood))
+		if(!istype(W,/obj/item/stack/material) || istype(W,/obj/item/stack/material/sandstone) || istype(W,/obj/item/stack/material/wood))
 			if(!stop_messages)
 				usr << "The snatcher does not accept [W]."
 			return 0 //I don't care, but the existing code rejects them for not being "sheets" *shrug* -Sayu
 		var/current = 0
-		for(var/obj/item/stack/sheet/S in contents)
+		for(var/obj/item/stack/material/S in contents)
 			current += S.amount
 		if(capacity == current)//If it's full, you're done
 			if(!stop_messages)
-				usr << "\red The snatcher is full."
+				usr << "<span class='warning'>The snatcher is full.</span>"
 			return 0
 		return 1
 
 
 // Modified handle_item_insertion.  Would prefer not to, but...
 	handle_item_insertion(obj/item/W as obj, prevent_warning = 0)
-		var/obj/item/stack/sheet/S = W
+		var/obj/item/stack/material/S = W
 		if(!istype(S)) return 0
 
 		var/amount
 		var/inserted = 0
 		var/current = 0
-		for(var/obj/item/stack/sheet/S2 in contents)
+		for(var/obj/item/stack/material/S2 in contents)
 			current += S2.amount
 		if(capacity < current + S.amount)//If the stack will fill it up
 			amount = capacity - current
 		else
 			amount = S.amount
 
-		for(var/obj/item/stack/sheet/sheet in contents)
+		for(var/obj/item/stack/material/sheet in contents)
 			if(S.type == sheet.type) // we are violating the amount limitation because these are not sane objects
 				sheet.amount += amount	// they should only be removed through procs in this file, which split them up.
 				S.amount -= amount
@@ -183,7 +183,7 @@
 		if(display_contents_with_number)
 			numbered_contents = list()
 			adjusted_contents = 0
-			for(var/obj/item/stack/sheet/I in contents)
+			for(var/obj/item/stack/material/I in contents)
 				adjusted_contents++
 				var/datum/numbered_display/D = new/datum/numbered_display(I)
 				D.number = I.amount
@@ -200,9 +200,9 @@
 // Modified quick_empty verb drops appropriate sized stacks
 	quick_empty()
 		var/location = get_turf(src)
-		for(var/obj/item/stack/sheet/S in contents)
+		for(var/obj/item/stack/material/S in contents)
 			while(S.amount)
-				var/obj/item/stack/sheet/N = new S.type(location)
+				var/obj/item/stack/material/N = new S.type(location)
 				var/stacksize = min(S.amount,N.max_amount)
 				N.amount = stacksize
 				S.amount -= stacksize
@@ -215,7 +215,7 @@
 
 // Instead of removing
 	remove_from_storage(obj/item/W as obj, atom/new_location)
-		var/obj/item/stack/sheet/S = W
+		var/obj/item/stack/material/S = W
 		if(!istype(S)) return 0
 
 		//I would prefer to drop a new stack, but the item/attack_hand code
@@ -224,7 +224,7 @@
 		// -Sayu
 
 		if(S.amount > S.max_amount)
-			var/obj/item/stack/sheet/temp = new S.type(src)
+			var/obj/item/stack/material/temp = new S.type(src)
 			temp.amount = S.amount - S.max_amount
 			S.amount = S.max_amount
 

@@ -46,7 +46,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	var/used_environ = 0
 
 	var/has_gravity = 1
-	var/list/apc = list()
+	var/obj/machinery/power/apc/apc = null
 	var/no_air = null
 //	var/list/lights				// list of all lights on this area
 	var/list/all_doors = list()		//Added by Strumpetplaya - Alarm Change - Contains a list of doors adjacent to this area
@@ -402,17 +402,17 @@ area/space/atmosalert()
 //EXTRA
 
 /area/asteroid					// -- TLE
-	name = "\improper Asteroid"
+	name = "\improper Moon"
 	icon_state = "asteroid"
 	requires_power = 0
 
 /area/asteroid/cave				// -- TLE
-	name = "\improper Asteroid - Underground"
+	name = "\improper Moon - Underground"
 	icon_state = "cave"
 	requires_power = 0
 
 /area/asteroid/artifactroom
-	name = "\improper Asteroid - Artifact"
+	name = "\improper Moon - Artifact"
 	icon_state = "cave"
 
 
@@ -498,7 +498,7 @@ area/space/atmosalert()
 	icon_state = "south"
 
 /area/syndicate_station/mining
-	name = "\improper north east of the mining asteroid"
+	name = "\improper northeast of the mining station"
 	icon_state = "north"
 
 /area/syndicate_station/arrivals_dock
@@ -540,7 +540,7 @@ area/space/atmosalert()
 	icon_state = "southeast"
 
 /area/skipjack_station/mining
-	name = "\improper nearby mining asteroid"
+	name = "\improper south of mining station"
 	icon_state = "north"
 
 //PRISON
@@ -1354,9 +1354,25 @@ area/space/atmosalert()
 	name = "\improper Security - Brig"
 	icon_state = "brig"
 
+/area/security/brig/prison_break()
+	for(var/obj/structure/closet/secure_closet/brig/temp_closet in src)
+		temp_closet.locked = 0
+		temp_closet.icon_state = temp_closet.icon_closed
+	for(var/obj/machinery/door_timer/temp_timer in src)
+		temp_timer.releasetime = 1
+	..()
+
 /area/security/prison
 	name = "\improper Security - Prison Wing"
 	icon_state = "sec_prison"
+
+/area/security/prison/prison_break()
+	for(var/obj/structure/closet/secure_closet/brig/temp_closet in src)
+		temp_closet.locked = 0
+		temp_closet.icon_state = temp_closet.icon_closed
+	for(var/obj/machinery/door_timer/temp_timer in src)
+		temp_timer.releasetime = 1
+	..()
 
 /area/security/warden
 	name = "\improper Security - Warden's Office"
@@ -1911,6 +1927,9 @@ area/space/atmosalert()
 	name = "\improper Telecommunications Satellite Lounge"
 	icon_state = "tcomsatlounge"
 
+/area/tcommsat/powercontrol
+	name = "\improper Telecommunications Power Control"
+	icon_state = "tcomsatwest"
 
 
 // Away Missions

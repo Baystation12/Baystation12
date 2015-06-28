@@ -38,11 +38,12 @@
 /obj/structure/cult/pylon/proc/attackpylon(mob/user as mob, var/damage)
 	if(!isbroken)
 		if(prob(1+ damage * 5))
-			user << "You hit the pylon, and its crystal breaks apart!"
-			for(var/mob/M in viewers(src))
-				if(M == user)
-					continue
-				M.show_message("[user.name] smashed the pylon!", 3, "You hear a tinkle of crystal shards", 2)
+			user.visible_message(
+				"<span class='danger'>[user] smashed the pylon!</span>", 
+				"<span class='warning'>You hit the pylon, and its crystal breaks apart!</span>",
+				"You hear a tinkle of crystal shards"
+				)
+			user.do_attack_animation(src)
 			playsound(get_turf(src), 'sound/effects/Glassbr3.ogg', 75, 1)
 			isbroken = 1
 			density = 0
@@ -137,7 +138,7 @@
 	var/mob/living/M = A
 
 	if(M.stat != DEAD)
-		if(M.monkeyizing)
+		if(M.transforming)
 			return
 		if(M.has_brain_worms())
 			return //Borer stuff - RR
@@ -145,7 +146,7 @@
 		if(iscultist(M)) return
 		if(!ishuman(M) && !isrobot(M)) return
 
-		M.monkeyizing = 1
+		M.transforming = 1
 		M.canmove = 0
 		M.icon = null
 		M.overlays.len = 0

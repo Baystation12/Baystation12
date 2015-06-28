@@ -6,7 +6,7 @@
 	icon_state = "door_electronics"
 	w_class = 2.0 //It should be tiny! -Agouri
 
-	matter = list("metal" = 50,"glass" = 50)
+	matter = list(DEFAULT_WALL_MATERIAL = 50,"glass" = 50)
 
 	req_access = list(access_engine)
 
@@ -42,7 +42,7 @@
 
 			t1 += "<br>"
 
-			var/list/accesses = get_all_accesses()
+			var/list/accesses = get_all_station_access()
 			for (var/acc in accesses)
 				var/aname = get_access_desc(acc)
 
@@ -114,5 +114,5 @@
 /obj/item/weapon/airlock_electronics/secure
 	name = "secure airlock electronics"
 	desc = "designed to be somewhat more resistant to hacking than standard electronics."
-	origin_tech = "programming=2"
+	origin_tech = list(TECH_DATA = 2)
 	secure = 1

@@ -26,7 +26,7 @@
 	var/destroy_hits = 10 //How many strong hits it takes to destroy the door
 	var/min_force = 10 //minimum amount of force needed to damage the door with a melee weapon
 	var/hitsound = 'sound/weapons/smash.ogg' //sound door makes when hit with a weapon
-	var/obj/item/stack/sheet/metal/repairing
+	var/obj/item/stack/material/steel/repairing
 	var/block_air_zones = 1 //If set, air zones cannot merge across the door even when it is opened.
 	var/close_door_at = 0 //When to automatically close the door, if possible
 
@@ -43,6 +43,7 @@
 		take_damage(damage)
 	else
 		visible_message("<span class='notice'>\The [user] bonks \the [src] harmlessly.</span>")
+	user.do_attack_animation(src)
 
 /obj/machinery/door/New()
 	. = ..()
@@ -145,10 +146,6 @@
 		else				do_animate("deny")
 	return
 
-/obj/machinery/door/meteorhit(obj/M as obj)
-	src.open()
-	return
-
 /obj/machinery/door/bullet_act(var/obj/item/projectile/Proj)
 	..()
 
@@ -160,10 +157,10 @@
 	if (Proj.damage > 90)
 		destroy_hits--
 		if (destroy_hits <= 0)
-			visible_message("\red <B>\The [src.name] disintegrates!</B>")
+			visible_message("<span class='danger'>\The [src.name] disintegrates!</span>")
 			switch (Proj.damage_type)
 				if(BRUTE)
-					new /obj/item/stack/sheet/metal(src.loc, 2)
+					new /obj/item/stack/material/steel(src.loc, 2)
 					PoolOrNew(/obj/item/stack/rods, list(src.loc, 3))
 				if(BURN)
 					new /obj/effect/decal/cleanable/ash(src.loc) // Turn it to ashes!
@@ -178,7 +175,7 @@
 /obj/machinery/door/hitby(AM as mob|obj, var/speed=5)
 
 	..()
-	visible_message("\red <B>[src.name] was hit by [AM].</B>")
+	visible_message("<span class='danger'>[src.name] was hit by [AM].</span>")
 	var/tforce = 0
 	if(ismob(AM))
 		tforce = 15 * (speed/5)
@@ -205,7 +202,7 @@
 	if(src.operating > 0 || isrobot(user))	return //borgs can't attack doors open because it conflicts with their AI-like interaction with them.
 	src.add_fingerprint(user)
 
-	if(istype(I, /obj/item/stack/sheet/metal))
+	if(istype(I, /obj/item/stack/material/steel))
 		if(stat & BROKEN)
 			user << "<span class='notice'>It looks like \the [src] is pretty busted. It's going to need more than just patching up now.</span>"
 			return
@@ -220,7 +217,7 @@
 		var/amount_needed = (maxhealth - health) / DOOR_REPAIR_AMOUNT
 		amount_needed = (round(amount_needed) == amount_needed)? amount_needed : round(amount_needed) + 1 //Why does BYOND not have a ceiling proc?
 
-		var/obj/item/stack/sheet/metal/metalstack = I
+		var/obj/item/stack/material/steel/metalstack = I
 		var/transfer
 		if (repairing)
 			transfer = metalstack.transfer_to(repairing, amount_needed - repairing.amount)
@@ -264,22 +261,16 @@
 	if(src.density && istype(I, /obj/item/weapon) && user.a_intent == I_HURT && !istype(I, /obj/item/weapon/card))
 		var/obj/item/weapon/W = I
 		if(W.damtype == BRUTE || W.damtype == BURN)
+			user.do_attack_animation(src)
 			if(W.force < min_force)
-				user.visible_message("\red <B>\The [user] hits \the [src] with \the [W] with no visible effect.</B>" )
+				user.visible_message("<span class='danger'>\The [user] hits \the [src] with \the [W] with no visible effect.</span>")
 			else
-				user.visible_message("\red <B>\The [user] forcefully strikes \the [src] with \the [W]!</B>" )
+				user.visible_message("<span class='danger'>\The [user] forcefully strikes \the [src] with \the [W]!</span>")
 				playsound(src.loc, hitsound, 100, 1)
 				take_damage(W.force)
 		return
 
 	if(src.operating) return
-
-	if(src.density && (operable() && istype(I, /obj/item/weapon/card/emag)))
-		do_animate("spark")
-		sleep(6)
-		open()
-		operating = -1
-		return 1
 
 	if(src.allowed(user) && operable())
 		if(src.density)
@@ -291,6 +282,14 @@
 	if(src.density)
 		do_animate("deny")
 	return
+
+/obj/machinery/door/emag_act(var/remaining_charges)
+	if(density && operable())
+		do_animate("spark")
+		sleep(6)
+		open()
+		operating = -1
+		return 1
 
 /obj/machinery/door/proc/take_damage(var/damage)
 	var/initialhealth = src.health

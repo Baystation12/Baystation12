@@ -6,10 +6,11 @@
 	..()
 	charge = maxcharge
 
-	spawn(5)
-		updateicon()
+/obj/item/weapon/cell/initialize()
+	..()
+	update_icon()
 
-/obj/item/weapon/cell/drain_power(var/drain_check, var/surge, var/amount = 0)
+/obj/item/weapon/cell/drain_power(var/drain_check, var/surge, var/power = 0)
 
 	if(drain_check)
 		return 1
@@ -17,11 +18,11 @@
 	if(charge <= 0)
 		return 0
 
-	var/cell_amt = min((amount * CELLRATE), charge)
-	use(cell_amt)
-	return cell_amt / CELLRATE
+	var/cell_amt = power * CELLRATE
 
-/obj/item/weapon/cell/proc/updateicon()
+	return use(cell_amt) / CELLRATE
+
+/obj/item/weapon/cell/update_icon()
 	overlays.Cut()
 
 	if(charge < 0.01)
@@ -37,14 +38,25 @@
 /obj/item/weapon/cell/proc/fully_charged()
 	return (charge == maxcharge)
 
-// use power from a cell
+// checks if the power cell is able to provide the specified amount of charge
+/obj/item/weapon/cell/proc/check_charge(var/amount)
+	return (charge >= amount)
+
+// use power from a cell, returns the amount actually used
 /obj/item/weapon/cell/proc/use(var/amount)
 	if(rigged && amount > 0)
 		explode()
 		return 0
+	var/used = min(charge, amount)
+	charge -= used
+	return used
 
-	if(charge < amount)	return 0
-	charge = (charge - amount)
+// Checks if the specified amount can be provided. If it can, it removes the amount
+// from the cell and returns 1. Otherwise does nothing and returns 0.
+/obj/item/weapon/cell/proc/checked_use(var/amount)
+	if(!check_charge(amount))
+		return 0
+	use(amount)
 	return 1
 
 // recharge the cell
@@ -55,12 +67,6 @@
 
 	if(maxcharge < amount)	return 0
 	var/amount_used = min(maxcharge-charge,amount)
-	if(crit_fail)	return 0
-	if(!prob(reliability))
-		minor_fault++
-		if(prob(minor_fault))
-			crit_fail = 1
-			return 0
 	charge += amount_used
 	return amount_used
 
@@ -73,8 +79,6 @@
 		user << "[desc]\nThe manufacturer's label states this cell has a power rating of [maxcharge], and that you should not swallow it.\nThe charge meter reads [round(src.percent() )]%."
 	else
 		user << "This power cell has an exciting chrome finish, as it is an uber-capacity cell type! It has a power rating of [maxcharge]!\nThe charge meter reads [round(src.percent() )]%."
-	if(crit_fail)
-		user << "\red This power cell seems to be faulty."
 
 /obj/item/weapon/cell/attackby(obj/item/W, mob/user)
 	..()
@@ -135,8 +139,6 @@
 	charge -= maxcharge / severity
 	if (charge < 0)
 		charge = 0
-	if(reliability != 100 && prob(50/severity))
-		reliability -= 10 / severity
 	..()
 
 /obj/item/weapon/cell/ex_act(severity)

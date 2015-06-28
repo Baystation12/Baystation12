@@ -1,4 +1,3 @@
-
 /obj/item/weapon/reagent_containers/borghypo
 	name = "Cyborg Hypospray"
 	desc = "An advanced chemical synthesizer and injection system, designed for heavy-duty medical equipment."
@@ -15,7 +14,6 @@
 
 	var/list/datum/reagents/reagent_list = list()
 	var/list/reagent_ids = list("tricordrazine", "inaprovaline", "spaceacillin")
-	//var/list/reagent_ids = list("dexalin", "kelotane", "bicaridine", "anti_toxin", "inaprovaline", "spaceacillin")
 
 /obj/item/weapon/reagent_containers/borghypo/surgeon
 	reagent_ids = list("bicaridine", "inaprovaline", "dexalin")
@@ -40,22 +38,14 @@
 	if(charge_tick < recharge_time) return 0
 	charge_tick = 0
 
-	if(isrobot(src.loc))
-		var/mob/living/silicon/robot/R = src.loc
+	if(isrobot(loc))
+		var/mob/living/silicon/robot/R = loc
 		if(R && R.cell)
 			var/datum/reagents/RG = reagent_list[mode]
 			if(RG.total_volume < RG.maximum_volume) 	//Don't recharge reagents and drain power if the storage is full.
 				R.cell.use(charge_cost) 					//Take power from borg...
 				RG.add_reagent(reagent_ids[mode], 5)		//And fill hypo with reagent.
-	//update_icon()
 	return 1
-
-// Purely for testing purposes I swear~
-/*
-/obj/item/weapon/reagent_containers/borghypo/verb/add_cyanide()
-	set src in world
-	add_reagent("cyanide")
-*/
 
 // Use this to add more chemicals for the borghypo to produce.
 /obj/item/weapon/reagent_containers/borghypo/proc/add_reagent(var/reagent)
@@ -70,19 +60,28 @@
 /obj/item/weapon/reagent_containers/borghypo/attack(mob/living/M as mob, mob/user as mob)
 	var/datum/reagents/R = reagent_list[mode]
 	if(!R.total_volume)
-		user << "\red The injector is empty."
+		user << "<span class='warning'>The injector is empty.</span>"
 		return
-	if (!(istype(M)))
+	if (!istype(M))
 		return
 
-	if (R.total_volume && M.can_inject(user,1))
-		user << "\blue You inject [M] with the injector."
-		M << "\red You feel a tiny prick!"
+	var/mob/living/carbon/human/H = M
+	if(istype(H))
+		var/obj/item/organ/external/affected = H.get_organ(user.zone_sel.selecting)
+		if(!affected)
+			user << "<span class='danger'>\The [H] is missing that limb!</span>"
+			return
+		else if(affected.status & ORGAN_ROBOT)
+			user << "<span class='danger'>You cannot inject a robotic limb.</span>"
+			return
 
-		R.reaction(M, INGEST)
+	if (R.total_volume && M.can_inject(user, 1))
+		user << "<span class='notice'>You inject [M] with the injector.</span>"
+		M << "<span class='notice'>You feel a tiny prick!</span>"
+
 		if(M.reagents)
-			var/trans = R.trans_to(M, amount_per_transfer_from_this)
-			user << "\blue [trans] units injected. [R.total_volume] units remaining."
+			var/trans = R.trans_to_mob(M, amount_per_transfer_from_this, CHEM_BLOOD)
+			user << "<span class='notice'>[trans] units injected. [R.total_volume] units remaining.</span>"
 	return
 
 /obj/item/weapon/reagent_containers/borghypo/attack_self(mob/user as mob)
@@ -93,7 +92,7 @@
 
 	charge_tick = 0 //Prevents wasted chems/cell charge if you're cycling through modes.
 	var/datum/reagent/R = chemical_reagents_list[reagent_ids[mode]]
-	user << "\blue Synthesizer is now producing '[R.name]'."
+	user << "<span class='notice'>Synthesizer is now producing '[R.name]'.</span>"
 	return
 
 /obj/item/weapon/reagent_containers/borghypo/examine(mob/user)
@@ -105,8 +104,8 @@
 	for(var/datum/reagents/RS in reagent_list)
 		var/datum/reagent/R = locate() in RS.reagent_list
 		if(R)
-			user << "\blue It currently has [R.volume] units of [R.name] stored."
+			user << "<span class='notice'>It currently has [R.volume] units of [R.name] stored.</span>"
 			empty = 0
 
 	if(empty)
-		user << "\blue It is currently empty. Allow some time for the internal syntheszier to produce more."
+		user << "<span class='notice'>It is currently empty. Allow some time for the internal syntheszier to produce more.</span>"

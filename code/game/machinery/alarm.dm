@@ -99,8 +99,10 @@
 	target_temperature = 90
 
 /obj/machinery/alarm/Destroy()
-	if(radio_controller)
-		radio_controller.remove_object(src, frequency)
+	unregister_radio(src, frequency)
+	if(wires)
+		qdel(wires)
+		wires = null
 	..()
 
 /obj/machinery/alarm/New(var/loc, var/dir, var/building = 0)
@@ -516,8 +518,8 @@
 		data["total_danger"] = max(oxygen_danger, data["total_danger"])
 
 		current_settings = TLV["carbon dioxide"]
-		var/carbon_dioxide_danger = get_danger_level(environment.gas["carbon dioxide"]*partial_pressure, current_settings)
-		environment_data[++environment_data.len] = list("name" = "Carbon dioxide", "value" = environment.gas["carbon dioxide"] / total * 100, "unit" = "%", "danger_level" = carbon_dioxide_danger)
+		var/carbon_dioxide_danger = get_danger_level(environment.gas["carbon_dioxide"]*partial_pressure, current_settings)
+		environment_data[++environment_data.len] = list("name" = "Carbon dioxide", "value" = environment.gas["carbon_dioxide"] / total * 100, "unit" = "%", "danger_level" = carbon_dioxide_danger)
 		data["total_danger"] = max(carbon_dioxide_danger, data["total_danger"])
 
 		current_settings = TLV["phoron"]
@@ -798,9 +800,9 @@
 				else
 					if(allowed(usr) && !wires.IsIndexCut(AALARM_WIRE_IDSCAN))
 						locked = !locked
-						user << "\blue You [ locked ? "lock" : "unlock"] the Air Alarm interface."
+						user << "<span class='notice'>You [ locked ? "lock" : "unlock"] the Air Alarm interface.</span>"
 					else
-						user << "\red Access denied."
+						user << "<span class='warning'>Access denied.</span>"
 			return
 
 		if(1)
@@ -836,8 +838,7 @@
 
 			else if(istype(W, /obj/item/weapon/wrench))
 				user << "You remove the fire alarm assembly from the wall!"
-				var/obj/item/alarm_frame/frame = new /obj/item/alarm_frame()
-				frame.loc = user.loc
+				new /obj/item/frame/air_alarm(get_turf(user))
 				playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 				qdel(src)
 
@@ -864,51 +865,7 @@ Just a object used in constructing air alarms
 	icon_state = "door_electronics"
 	desc = "Looks like a circuit. Probably is."
 	w_class = 2.0
-	matter = list("metal" = 50, "glass" = 50)
-
-
-/*
-AIR ALARM ITEM
-Handheld air alarm frame, for placing on walls
-Code shamelessly copied from apc_frame
-*/
-/obj/item/alarm_frame
-	name = "air alarm frame"
-	desc = "Used for building Air Alarms"
-	icon = 'icons/obj/monitors.dmi'
-	icon_state = "alarm_bitem"
-	flags = CONDUCT
-
-/obj/item/alarm_frame/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if (istype(W, /obj/item/weapon/wrench))
-		new /obj/item/stack/sheet/metal( get_turf(src.loc), 2 )
-		qdel(src)
-		return
-	..()
-
-/obj/item/alarm_frame/proc/try_build(turf/on_wall)
-	if (get_dist(on_wall,usr)>1)
-		return
-
-	var/ndir = get_dir(on_wall,usr)
-	if (!(ndir in cardinal))
-		return
-
-	var/turf/loc = get_turf(usr)
-	var/area/A = loc.loc
-	if (!istype(loc, /turf/simulated/floor))
-		usr << "\red Air Alarm cannot be placed on this spot."
-		return
-	if (A.requires_power == 0 || A.name == "Space")
-		usr << "\red Air Alarm cannot be placed in this area."
-		return
-
-	if(gotwallitem(loc, ndir))
-		usr << "\red There's already an item on this wall!"
-		return
-
-	new /obj/machinery/alarm(loc, ndir, 1)
-	qdel(src)
+	matter = list(DEFAULT_WALL_MATERIAL = 50, "glass" = 50)
 
 /*
 FIRE ALARM
@@ -984,11 +941,12 @@ FIRE ALARM
 				if (istype(W, /obj/item/device/multitool))
 					src.detecting = !( src.detecting )
 					if (src.detecting)
-						user.visible_message("\red [user] has reconnected [src]'s detecting unit!", "You have reconnected [src]'s detecting unit.")
+						user.visible_message("<span class='notice'>\The [user] has reconnected [src]'s detecting unit!</span>", "<span class='notice'>You have reconnected [src]'s detecting unit.</span>")
 					else
-						user.visible_message("\red [user] has disconnected [src]'s detecting unit!", "You have disconnected [src]'s detecting unit.")
+						user.visible_message("<span class='notice'>\The [user] has disconnected [src]'s detecting unit!</span>", "<span class='notice'>You have disconnected [src]'s detecting unit.</span>")
 				else if (istype(W, /obj/item/weapon/wirecutters))
-					user.visible_message("\red [user] has cut the wires inside \the [src]!", "You have cut the wires inside \the [src].")
+					user.visible_message("<span class='notice'>\The [user] has cut the wires inside \the [src]!</span>", "<span class='notice'>You have cut the wires inside \the [src].</span>")
+					new/obj/item/stack/cable_coil(get_turf(src), 5)
 					playsound(src.loc, 'sound/items/Wirecutter.ogg', 50, 1)
 					buildstage = 1
 					update_icon()
@@ -1000,7 +958,7 @@ FIRE ALARM
 						buildstage = 2
 						return
 					else
-						user << "<span class='warning'>You need 5 pieces of cable to do wire \the [src].</span>"
+						user << "<span class='warning'>You need 5 pieces of cable to wire \the [src].</span>"
 						return
 				else if(istype(W, /obj/item/weapon/crowbar))
 					user << "You pry out the circuit!"
@@ -1019,8 +977,7 @@ FIRE ALARM
 
 				else if(istype(W, /obj/item/weapon/wrench))
 					user << "You remove the fire alarm assembly from the wall!"
-					var/obj/item/firealarm_frame/frame = new /obj/item/firealarm_frame()
-					frame.loc = user.loc
+					new /obj/item/frame/fire_alarm(get_turf(user))
 					playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 					qdel(src)
 		return
@@ -1183,53 +1140,7 @@ Just a object used in constructing fire alarms
 	icon_state = "door_electronics"
 	desc = "A circuit. It has a label on it, it says \"Can handle heat levels up to 40 degrees celsius!\""
 	w_class = 2.0
-	matter = list("metal" = 50, "glass" = 50)
-
-
-/*
-FIRE ALARM ITEM
-Handheld fire alarm frame, for placing on walls
-Code shamelessly copied from apc_frame
-*/
-/obj/item/firealarm_frame
-	name = "fire alarm frame"
-	desc = "Used for building Fire Alarms"
-	icon = 'icons/obj/monitors.dmi'
-	icon_state = "fire_bitem"
-	flags = CONDUCT
-
-/obj/item/firealarm_frame/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if (istype(W, /obj/item/weapon/wrench))
-		new /obj/item/stack/sheet/metal( get_turf(src.loc), 2 )
-		qdel(src)
-		return
-	..()
-
-/obj/item/firealarm_frame/proc/try_build(turf/on_wall)
-	if (get_dist(on_wall,usr)>1)
-		return
-
-	var/ndir = get_dir(on_wall,usr)
-	if (!(ndir in cardinal))
-		return
-
-	var/turf/loc = get_turf(usr)
-	var/area/A = loc.loc
-	if (!istype(loc, /turf/simulated/floor))
-		usr << "\red Fire Alarm cannot be placed on this spot."
-		return
-	if (A.requires_power == 0 || A.name == "Space")
-		usr << "\red Fire Alarm cannot be placed in this area."
-		return
-
-	if(gotwallitem(loc, ndir))
-		usr << "\red There's already an item on this wall!"
-		return
-
-	new /obj/machinery/firealarm(loc, ndir, 1)
-
-	qdel(src)
-
+	matter = list(DEFAULT_WALL_MATERIAL = 50, "glass" = 50)
 
 /obj/machinery/partyalarm
 	name = "\improper PARTY BUTTON"

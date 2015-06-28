@@ -170,8 +170,8 @@ datum/controller/vote
 						additional_antag_types |= antag_names_to_ids[.]
 
 		if(mode == "gamemode") //fire this even if the vote fails.
-			if(!going)
-				going = 1
+			if(!round_progressing)
+				round_progressing = 1
 				world << "<font color='red'><b>The round will start soon.</b></font>"
 
 		if(restart)
@@ -237,7 +237,7 @@ datum/controller/vote
 						return 0
 					for(var/antag_type in all_antag_types)
 						var/datum/antagonist/antag = all_antag_types[antag_type]
-						if(!(antag.id in additional_antag_types) && (antag.flags & ANTAG_VOTABLE))
+						if(!(antag.id in additional_antag_types) && antag.is_votable())
 							choices.Add(antag.role_text)
 					choices.Add("None")
 				if("custom")
@@ -257,7 +257,7 @@ datum/controller/vote
 				text += "\n[question]"
 
 			log_vote(text)
-			world << "<font color='purple'><b>[text]</b>\nType vote to place your votes.\nYou have [config.vote_period/10] seconds to vote.</font>"
+			world << "<font color='purple'><b>[text]</b>\nType <b>vote</b> or click <a href='?src=\ref[src]'>here</a> to place your votes.\nYou have [config.vote_period/10] seconds to vote.</font>"
 			switch(vote_type)
 				if("crew_transfer")
 					world << sound('sound/ambience/alarm4.ogg', repeat = 0, wait = 0, volume = 50, channel = 3)
@@ -265,8 +265,8 @@ datum/controller/vote
 					world << sound('sound/ambience/alarm4.ogg', repeat = 0, wait = 0, volume = 50, channel = 3)
 				if("custom")
 					world << sound('sound/ambience/alarm4.ogg', repeat = 0, wait = 0, volume = 50, channel = 3)
-			if(mode == "gamemode" && going)
-				going = 0
+			if(mode == "gamemode" && round_progressing)
+				round_progressing = 0
 				world << "<font color='red'><b>Round start has been delayed.</b></font>"
 
 			time_remaining = round(config.vote_period/10)
@@ -336,7 +336,7 @@ datum/controller/vote
 				. += "\t(<a href='?src=\ref[src];vote=toggle_gamemode'>[config.allow_vote_mode?"Allowed":"Disallowed"]</a>)"
 			. += "</li><li>"
 			//extra antagonists
-			if(trialmin || (!antag_add_failed && config.allow_extra_antags))
+			if(!antag_add_failed && config.allow_extra_antags)
 				. += "<a href='?src=\ref[src];vote=add_antagonist'>Add Antagonist Type</a>"
 			else
 				. += "<font color='grey'>Restart (Disallowed)</font>"
@@ -375,7 +375,7 @@ datum/controller/vote
 				if(config.allow_vote_restart || usr.client.holder)
 					initiate_vote("crew_transfer",usr.key)
 			if("add_antagonist")
-				if(config.allow_extra_antags || usr.client.holder)
+				if(config.allow_extra_antags)
 					initiate_vote("add_antagonist",usr.key)
 			if("custom")
 				if(usr.client.holder)

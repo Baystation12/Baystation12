@@ -59,6 +59,7 @@ public class Main {
             "\t  movement | move | mov | m : [state] should be marked as a movement state\n" +
             "\t  delays L | delay L | del L | d L : use the list L as a comma-separated list of delays (e.g. '1,1,2,2,1')\n" +
             "\t  hotspot H | hs H | h H : use H as the hotspot for this state\n" +
+            "\t  direction D | dir D : replaces D with the image from [in], instead of the entire state. D can be 0-7 or S, N, E, etc. If the state does not already exist, this is ignored\n" + 
             "";
 
     public static void main(String[] args) throws FileNotFoundException, IOException, DMIException {
@@ -270,6 +271,8 @@ public class Main {
                 boolean movement = false;
                 String hotspot = null;
                 float[] delays = null;
+                String replaceDir = null;
+                String replaceFrame = null;
                 while(!argq.isEmpty()) {
                     String s = argq.pollFirst();
                     switch(s.toLowerCase()) {
@@ -341,6 +344,24 @@ public class Main {
                                 return;
                             }
                             break;
+                        case "dir":
+                        case "direction":
+                            if(!argq.isEmpty()) {
+                                replaceDir = argq.pollFirst();
+                            } else {
+                                System.out.println("Argument '" + s + "' requires a direction argument following it!");
+                                return;
+                            }
+                            break;
+                        case "f":
+                        case "frame":
+                            if(!argq.isEmpty()) {
+                                replaceFrame = argq.pollFirst();
+                            } else {
+                                System.out.println("Argument '" + s + "' requires a frame argument following it!");
+                                return;
+                            }
+                            break;
                         default:
                             System.out.println("Unknown import argument '" + s + "', ignoring.");
                             break;
@@ -352,12 +373,46 @@ public class Main {
                 if(VERBOSITY >= 0) toImportTo.printInfo();
                 IconState is = IconState.importFromPNG(toImportTo, new FileInputStream(pngFile), stateName, delays, rewind, loop, hotspot, movement);
 
-                if(noDup) {
-                    if(!toImportTo.setIconState(is)) {
+                //image insertion
+                if(replaceDir != null || replaceFrame != null) {
+                    
+                    IconState targetIs = toImportTo.getIconState(stateName);
+                    if(targetIs == null) {
+                        System.out.println("'direction' or 'frame' specified and no icon state '" + stateName + "' found, aborting!");
+                        return;
+                    }
+                    if(is.images.length == 0) {
+                        System.out.println("'direction' or 'frame' specified and imported is empty, aborting!");
+                        return;
+                    }
+                    
+                    if(!noDup) targetIs = targetIs.clone();
+                    
+                    int dirToReplace, frameToReplace;
+                    if(replaceDir != null && replaceFrame != null) {
+                        frameToReplace = parseFrame(replaceFrame, targetIs);
+                        dirToReplace = parseDir(replaceDir, targetIs);
+                        targetIs.insertImage(dirToReplace, frameToReplace, is.images[0]);
+                    }
+                    else if(replaceDir != null) {
+                        dirToReplace = parseDir(replaceDir, targetIs);
+                        targetIs.insertDir(dirToReplace, is.images);
+                    }
+                    else if(replaceFrame != null) {
+                        frameToReplace = parseFrame(replaceFrame, targetIs);
+                        targetIs.insertFrame(frameToReplace, is.images);
+                    }
+                    
+                    if(!noDup) toImportTo.addIconState(null, targetIs);
+                }
+                else {
+                    if(noDup) {
+                        if(!toImportTo.setIconState(is)) {
+                            toImportTo.addIconState(null, is);
+                        }
+                    } else {
                         toImportTo.addIconState(null, is);
                     }
-                } else {
-                    toImportTo.addIconState(null, is);
                 }
 
                 if(VERBOSITY >= 0) toImportTo.printInfo();

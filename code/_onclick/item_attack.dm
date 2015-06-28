@@ -20,6 +20,15 @@
 /obj/item/proc/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
 	return
 
+//TODO: refactor mob attack code.
+/*
+Busy writing something else that I don't want to get mixed up in a general attack code, and I don't want to forget this so leaving a note here.
+leave attackby() as handling the general case of "using an item on a mob"
+attackby() will decide to call attacked_by() or not.
+attacked_by() will be made a living level proc and handle the specific case of "attacking with an item to cause harm"
+attacked_by() will then call attack() so that stunbatons and other weapons that have special attack effects can do their thing.
+attacked_by() will handle hitting/missing/logging as it does now, and will call attack() to apply the attack effects (damage) instead of the other way around (as it is now).
+*/
 
 /obj/item/proc/attack(mob/living/M as mob, mob/living/user as mob, def_zone)
 
@@ -29,22 +38,30 @@
 	user.lastattacked = M
 	M.lastattacker = user
 
-	user.attack_log += "\[[time_stamp()]\]<font color='red'> Attacked [M.name] ([M.ckey]) with [name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(damtype)])</font>"
-	M.attack_log += "\[[time_stamp()]\]<font color='orange'> Attacked by [user.name] ([user.ckey]) with [name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(damtype)])</font>"
-	msg_admin_attack("[key_name(user)] attacked [key_name(M)] with [name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(damtype)])" )
+	if(!no_attack_log)
+		user.attack_log += "\[[time_stamp()]\]<font color='red'> Attacked [M.name] ([M.ckey]) with [name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(damtype)])</font>"
+		M.attack_log += "\[[time_stamp()]\]<font color='orange'> Attacked by [user.name] ([user.ckey]) with [name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(damtype)])</font>"
+		msg_admin_attack("[key_name(user)] attacked [key_name(M)] with [name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(damtype)])" )
 	/////////////////////////
+
+	// Attacking someone with a weapon while they are neck-grabbed
+	if(user.a_intent == I_HURT)
+		for(var/obj/item/weapon/grab/G in M.grabbed_by)
+			if(G.assailant == user && G.state >= GRAB_NECK)
+				M.attack_throat(src, G, user)
 
 	var/power = force
 	if(HULK in user.mutations)
 		power *= 2
 
 	// TODO: needs to be refactored into a mob/living level attacked_by() proc. ~Z
+	user.do_attack_animation(M)
 	if(istype(M, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = M
 
 		// Handle striking to cripple.
 		var/dislocation_str
-		if(user.a_intent == "disarm")
+		if(user.a_intent == I_DISARM)
 			dislocation_str = H.attack_joint(src, user, def_zone)
 		if(H.attacked_by(src, user, def_zone) && hitsound)
 			playsound(loc, hitsound, 50, 1, -1)

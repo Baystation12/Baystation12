@@ -17,7 +17,7 @@ var/global/datum/controller/occupations/job_master
 		occupations = list()
 		var/list/all_jobs = typesof(/datum/job)
 		if(!all_jobs.len)
-			world << "\red \b Error setting up jobs, no job datums found"
+			world << "<span class='warning'>Error setting up jobs, no job datums found!</span>"
 			return 0
 		for(var/J in all_jobs)
 			var/datum/job/job = new J()
@@ -376,7 +376,7 @@ var/global/datum/controller/occupations/job_master
 							permitted = 0
 
 						if(!permitted)
-							H << "\red Your current job or whitelist status does not permit you to spawn with [thing]!"
+							H << "<span class='warning'>Your current job or whitelist status does not permit you to spawn with [thing]!</span>"
 							continue
 
 						if(G.slot && !(G.slot in custom_equip_slots))
@@ -385,7 +385,7 @@ var/global/datum/controller/occupations/job_master
 							if(G.slot == slot_wear_mask || G.slot == slot_wear_suit || G.slot == slot_head)
 								custom_equip_leftovers += thing
 							else if(H.equip_to_slot_or_del(new G.path(H), G.slot))
-								H << "\blue Equipping you with [thing]!"
+								H << "<span class='notice'>Equipping you with [thing]!</span>"
 								custom_equip_slots.Add(G.slot)
 							else
 								custom_equip_leftovers.Add(thing)
@@ -393,7 +393,9 @@ var/global/datum/controller/occupations/job_master
 							spawn_in_storage += thing
 			//Equip job items.
 			job.equip(H)
+			job.equip_survival(H)
 			job.apply_fingerprints(H)
+
 			//If some custom items could not be equipped before, try again now.
 			for(var/thing in custom_equip_leftovers)
 				var/datum/gear/G = gear_datums[thing]
@@ -401,7 +403,7 @@ var/global/datum/controller/occupations/job_master
 					spawn_in_storage += thing
 				else
 					if(H.equip_to_slot_or_del(new G.path(H), G.slot))
-						H << "\blue Equipping you with [thing]!"
+						H << "<span class='notice'>Equipping you with [thing]!</span>"
 						custom_equip_slots.Add(G.slot)
 					else
 						spawn_in_storage += thing
@@ -454,7 +456,7 @@ var/global/datum/controller/occupations/job_master
 			H.mind.store_memory(remembered_info)
 
 		spawn(0)
-			H << "\blue<b>Your account number is: [M.account_number], your account pin is: [M.remote_access_pin]</b>"
+			H << "<span class='notice'><b>Your account number is: [M.account_number], your account pin is: [M.remote_access_pin]</b></span>"
 
 		var/alt_title = null
 		if(H.mind)
@@ -466,52 +468,24 @@ var/global/datum/controller/occupations/job_master
 					return H.Robotize()
 				if("AI")
 					return H
-				if("Clown")	//don't need bag preference stuff!
+				if("Captain")
+					var/sound/announce_sound = (ticker.current_state <= GAME_STATE_SETTING_UP)? null : sound('sound/misc/boatswain.ogg', volume=20)
+					captain_announcement.Announce("All hands, Captain [H.real_name] on deck!", new_sound=announce_sound)
+
+			//Deferred item spawning.
+			if(spawn_in_storage && spawn_in_storage.len)
+				var/obj/item/weapon/storage/B
+				for(var/obj/item/weapon/storage/S in H.contents)
+					B = S
+					break
+
+				if(!isnull(B))
+					for(var/thing in spawn_in_storage)
+						H << "<span class='notice'>Placing [thing] in your [B]!</span>"
+						var/datum/gear/G = gear_datums[thing]
+						new G.path(B)
 				else
-					switch(H.backbag) //BS12 EDIT
-						if(1)
-							H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H), slot_r_hand)
-						if(2)
-							var/obj/item/weapon/storage/backpack/BPK = new/obj/item/weapon/storage/backpack(H)
-							new /obj/item/weapon/storage/box/survival(BPK)
-							H.equip_to_slot_or_del(BPK, slot_back,1)
-						if(3)
-							var/obj/item/weapon/storage/backpack/BPK = new/obj/item/weapon/storage/backpack/satchel_norm(H)
-							new /obj/item/weapon/storage/box/survival(BPK)
-							H.equip_to_slot_or_del(BPK, slot_back,1)
-						if(4)
-							var/obj/item/weapon/storage/backpack/BPK = new/obj/item/weapon/storage/backpack/satchel(H)
-							new /obj/item/weapon/storage/box/survival(BPK)
-							H.equip_to_slot_or_del(BPK, slot_back,1)
-
-					//Deferred item spawning.
-					if(spawn_in_storage && spawn_in_storage.len)
-						var/obj/item/weapon/storage/B
-						for(var/obj/item/weapon/storage/S in H.contents)
-							B = S
-							break
-
-						if(!isnull(B))
-							for(var/thing in spawn_in_storage)
-								H << "\blue Placing [thing] in your [B]!"
-								var/datum/gear/G = gear_datums[thing]
-								new G.path(B)
-						else
-							H << "\red Failed to locate a storage object on your mob, either you spawned with no arms and no backpack or this is a bug."
-
-		//TODO: Generalize this by-species
-		if(H.species)
-			if(H.species.name == "Tajara" || H.species.name == "Unathi")
-				H.equip_to_slot_or_del(new /obj/item/clothing/shoes/sandal(H),slot_shoes,1)
-			else if(H.species.name == "Vox")
-				H.equip_to_slot_or_del(new /obj/item/clothing/mask/breath(H), slot_wear_mask)
-				if(!H.r_hand)
-					H.equip_to_slot_or_del(new /obj/item/weapon/tank/nitrogen(H), slot_r_hand)
-					H.internal = H.r_hand
-				else if (!H.l_hand)
-					H.equip_to_slot_or_del(new /obj/item/weapon/tank/nitrogen(H), slot_l_hand)
-					H.internal = H.l_hand
-				H.internals.icon_state = "internal1"
+					H << "<span class='danger'>Failed to locate a storage object on your mob, either you spawned with no arms and no backpack or this is a bug.</span>"
 
 		if(istype(H)) //give humans wheelchairs, if they need them.
 			var/obj/item/organ/external/l_foot = H.get_organ("l_foot")

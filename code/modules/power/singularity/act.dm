@@ -78,6 +78,9 @@
 	return 5000
 
 /obj/machinery/power/supermatter/singularity_act()
+	if(!src.loc)
+		return
+
 	var/prints = ""
 	if(src.fingerprintshidden)
 		prints = ", all touchers : " + src.fingerprintshidden
@@ -104,22 +107,23 @@
 				continue
 			if(O.invisibility == 101)
 				O.singularity_act(src, current_size)
-	ChangeTurf(/turf/space)
+	ChangeTurf(get_base_turf(src.z))
 	return 2
 
 /turf/simulated/wall/singularity_pull(S, current_size)
-	if(current_size >= STAGE_FIVE)
-		if(prob(75))
-			dismantle_wall()
-		return
-	if(current_size == STAGE_FOUR)
-		if(prob(30))
-			dismantle_wall()
 
-/turf/simulated/wall/r_wall/singularity_pull(S, current_size)
-	if(current_size >= STAGE_FIVE)
-		if(prob(30))
-			dismantle_wall()
+	if(!reinf_material)
+		if(current_size >= STAGE_FIVE)
+			if(prob(75))
+				dismantle_wall()
+			return
+		if(current_size == STAGE_FOUR)
+			if(prob(30))
+				dismantle_wall()
+	else
+		if(current_size >= STAGE_FIVE)
+			if(prob(30))
+				dismantle_wall()
 
 /turf/space/singularity_act()
 	return

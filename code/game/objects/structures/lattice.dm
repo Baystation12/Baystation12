@@ -53,14 +53,14 @@
 
 /obj/structure/lattice/attackby(obj/item/C as obj, mob/user as mob)
 
-	if (istype(C, /obj/item/stack/tile/plasteel))
+	if (istype(C, /obj/item/stack/tile/steel))
 		var/turf/T = get_turf(src)
 		T.attackby(C, user) //BubbleWrap - hand this off to the underlying turf instead
 		return
 	if (istype(C, /obj/item/weapon/weldingtool))
 		var/obj/item/weapon/weldingtool/WT = C
 		if(WT.remove_fuel(0, user))
-			user << "\blue Slicing lattice joints ..."
+			user << "<span class='notice'>Slicing lattice joints ...</span>"
 		PoolOrNew(/obj/item/stack/rods, src.loc)
 		qdel(src)
 

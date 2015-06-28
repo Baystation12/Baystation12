@@ -17,7 +17,7 @@
 	var/amt_uranium = 0
 	var/newCoins = 0   //how many coins the machine made in it's last load
 	var/processing = 0
-	var/chosen = "metal" //which material will be used to make coins
+	var/chosen = DEFAULT_WALL_MATERIAL //which material will be used to make coins
 	var/coinsToProduce = 10
 
 
@@ -37,25 +37,25 @@
 
 /obj/machinery/mineral/mint/process()
 	if ( src.input)
-		var/obj/item/stack/sheet/O
-		O = locate(/obj/item/stack/sheet, input.loc)
+		var/obj/item/stack/material/O
+		O = locate(/obj/item/stack/material, input.loc)
 		if(O)
-			if (istype(O,/obj/item/stack/sheet/mineral/gold))
+			if (istype(O,/obj/item/stack/material/gold))
 				amt_gold += 100 * O.get_amount()
 				qdel(O)
-			if (istype(O,/obj/item/stack/sheet/mineral/silver))
+			if (istype(O,/obj/item/stack/material/silver))
 				amt_silver += 100 * O.get_amount()
 				qdel(O)
-			if (istype(O,/obj/item/stack/sheet/mineral/diamond))
+			if (istype(O,/obj/item/stack/material/diamond))
 				amt_diamond += 100 * O.get_amount()
 				qdel(O)
-			if (istype(O,/obj/item/stack/sheet/mineral/phoron))
+			if (istype(O,/obj/item/stack/material/phoron))
 				amt_phoron += 100 * O.get_amount()
 				qdel(O)
-			if (istype(O,/obj/item/stack/sheet/mineral/uranium))
+			if (istype(O,/obj/item/stack/material/uranium))
 				amt_uranium += 100 * O.get_amount()
 				qdel(O)
-			if (istype(O,/obj/item/stack/sheet/metal))
+			if (istype(O,/obj/item/stack/material/steel))
 				amt_iron += 100 * O.get_amount()
 				qdel(O)
 
@@ -81,7 +81,7 @@
 	else
 		dat += text("<A href='?src=\ref[src];choose=silver'>Choose</A>")
 	dat += text("<br><font color='#555555'><b>Iron inserted: </b>[amt_iron]</font> ")
-	if (chosen == "metal")
+	if (chosen == DEFAULT_WALL_MATERIAL)
 		dat += text("chosen")
 	else
 		dat += text("<A href='?src=\ref[src];choose=metal'>Choose</A>")
@@ -133,7 +133,7 @@
 			icon_state = "coinpress1"
 			var/obj/item/weapon/moneybag/M
 			switch(chosen)
-				if("metal")
+				if(DEFAULT_WALL_MATERIAL)
 					while(amt_iron > 0 && coinsToProduce > 0)
 						if (locate(/obj/item/weapon/moneybag,output.loc))
 							M = locate(/obj/item/weapon/moneybag,output.loc)

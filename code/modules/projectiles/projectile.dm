@@ -180,16 +180,17 @@
 		visible_message("<span class='danger'>\The [target_mob] is hit by \the [src] in the [parse_zone(def_zone)]!</span>")//X has fired Y is now given by the guns so you cant tell who shot you if you could not see the shooter
 
 	//admin logs
-	if(istype(firer, /mob))
-		target_mob.attack_log += "\[[time_stamp()]\] <b>[firer]/[firer.ckey]</b> shot <b>[target_mob]/[target_mob.ckey]</b> with a <b>[src.type]</b>"
-		firer.attack_log += "\[[time_stamp()]\] <b>[firer]/[firer.ckey]</b> shot <b>[target_mob]/[target_mob.ckey]</b> with a <b>[src.type]</b>"
-		msg_admin_attack("[firer] ([firer.ckey]) shot [target_mob] ([target_mob.ckey]) with a [src] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[firer.x];Y=[firer.y];Z=[firer.z]'>JMP</a>)") //BS12 EDIT ALG
-	else if(firer)
-		target_mob.attack_log += "\[[time_stamp()]\] <b>UNKNOWN SUBJECT (No longer exists)</b> shot <b>[target_mob]/[target_mob.ckey]</b> with a <b>[src]</b>"
-		msg_admin_attack("UNKNOWN shot [target_mob] ([target_mob.ckey]) with a [src] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[firer.x];Y=[firer.y];Z=[firer.z]'>JMP</a>)") //BS12 EDIT ALG
-	else
-		target_mob.attack_log += "\[[time_stamp()]\] <b>UNKNOWN SUBJECT (No longer exists)</b> shot <b>[target_mob]/[target_mob.ckey]</b> with a <b>[src]</b>"
-		msg_admin_attack("UNKNOWN shot [target_mob] ([target_mob.ckey]) with a [src] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[target_mob.x];Y=[target_mob.y];Z=[target_mob.z]'>JMP</a>)") //BS12 EDIT ALG
+	if(!no_attack_log)
+		if(istype(firer, /mob))
+
+			var/attacker_message = "shot with \a [src.type]"
+			var/victim_message = "shot with \a [src.type]"
+			var/admin_message = "shot (\a [src.type])"
+
+			admin_attack_log(firer, target_mob, attacker_message, victim_message, admin_message)
+		else
+			target_mob.attack_log += "\[[time_stamp()]\] <b>UNKNOWN SUBJECT (No longer exists)</b> shot <b>[target_mob]/[target_mob.ckey]</b> with <b>\a [src]</b>"
+			msg_admin_attack("UNKNOWN shot [target_mob] ([target_mob.ckey]) with \a [src] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[target_mob.x];Y=[target_mob.y];Z=[target_mob.z]'>JMP</a>)")
 
 	//sometimes bullet_act() will want the projectile to continue flying
 	if (target_mob.bullet_act(src, def_zone) == -1)

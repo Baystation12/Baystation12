@@ -14,7 +14,7 @@ var/const/MAX_ACTIVE_TIME = 400
 	icon = 'icons/mob/alien.dmi'
 	icon_state = "facehugger"
 	item_state = "facehugger"
-	w_class = 1 //note: can be picked up by aliens unlike most other items of w_class below 4
+	w_class = 3 //note: can be picked up by aliens unlike most other items of w_class below 4
 	flags = MASKCOVERSMOUTH | MASKCOVERSEYES | AIRTIGHT
 	body_parts_covered = FACE|EYES
 	throw_range = 5
@@ -54,8 +54,10 @@ var/const/MAX_ACTIVE_TIME = 400
 		user << "\red \b It looks like the proboscis has been removed."
 	return
 
-/obj/item/clothing/mask/facehugger/attackby()
-	Die()
+/obj/item/clothing/mask/facehugger/attackby(obj/item/I, mob/user)
+	if(I.force)
+		user.do_attack_animation(src)
+		Die()
 	return
 
 /obj/item/clothing/mask/facehugger/bullet_act()
@@ -63,7 +65,7 @@ var/const/MAX_ACTIVE_TIME = 400
 	return
 
 /obj/item/clothing/mask/facehugger/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
-	if(exposed_temperature > 300)
+	if(exposed_temperature > T0C+80)
 		Die()
 	return
 

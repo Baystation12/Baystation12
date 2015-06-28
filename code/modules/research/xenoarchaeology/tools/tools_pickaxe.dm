@@ -107,7 +107,7 @@
 	icon_state = "excavation"
 	desc = "A set of picks for excavation."
 	item_state = "syringe_kit"
-	foldable = /obj/item/stack/sheet/cardboard //BubbleWrap
+	foldable = /obj/item/stack/material/cardboard //BubbleWrap
 	storage_slots = 7
 	w_class = 2
 	can_hold = list(/obj/item/weapon/pickaxe/brush,\

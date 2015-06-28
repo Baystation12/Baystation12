@@ -11,16 +11,6 @@
 	invisibility = 101
 
 	switch(name)			//some of these are probably obsolete
-		if("shuttle")
-			shuttle_z = z
-			qdel(src)
-			return
-		if("airtunnel_stop")
-			airtunnel_stop = x
-		if("airtunnel_start")
-			airtunnel_start = x
-		if("airtunnel_bottom")
-			airtunnel_bottom = y
 		if("monkey")
 			monkeystart += loc
 			qdel(src)
@@ -98,16 +88,7 @@
 
 	return 1
 
-/obj/effect/landmark/start/ninja
-	name = "ninja"
-
-/obj/effect/landmark/start/ninja/New()
-	..()
-	ninjastart += loc
-	qdel(src)
-
 //Costume spawner landmarks
-
 /obj/effect/landmark/costume/New() //costume spawner, selects a random subclass and disappears
 
 	var/list/options = typesof(/obj/effect/landmark/costume)

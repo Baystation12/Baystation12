@@ -81,15 +81,15 @@
 	name = "wrench"
 	path = /obj/item/weapon/wrench
 	category = "Tools"
-	
+
 /datum/autolathe/recipe/hatchet
 	name = "hatchet"
-	path = /obj/item/weapon/hatchet
+	path = /obj/item/weapon/material/hatchet
 	category = "Tools"
-	
+
 /datum/autolathe/recipe/minihoe
 	name = "mini hoe"
-	path = /obj/item/weapon/minihoe
+	path = /obj/item/weapon/material/minihoe
 	category = "Tools"
 
 /datum/autolathe/recipe/radio_headset
@@ -109,19 +109,19 @@
 
 /datum/autolathe/recipe/metal
 	name = "steel sheets"
-	path = /obj/item/stack/sheet/metal
+	path = /obj/item/stack/material/steel
 	category = "General"
 	is_stack = 1
 
 /datum/autolathe/recipe/glass
 	name = "glass sheets"
-	path = /obj/item/stack/sheet/glass
+	path = /obj/item/stack/material/glass
 	category = "General"
 	is_stack = 1
 
 /datum/autolathe/recipe/rglass
 	name = "reinforced glass sheets"
-	path = /obj/item/stack/sheet/glass/reinforced
+	path = /obj/item/stack/material/glass/reinforced
 	category = "General"
 	is_stack = 1
 
@@ -133,7 +133,7 @@
 
 /datum/autolathe/recipe/knife
 	name = "kitchen knife"
-	path = /obj/item/weapon/kitchenknife
+	path = /obj/item/weapon/material/knife
 	category = "General"
 
 /datum/autolathe/recipe/taperecorder
@@ -217,7 +217,7 @@
 	category = "Medical"
 
 /datum/autolathe/recipe/syringegun_ammo
-	name = "syringe"
+	name = "syringe gun cartridge"
 	path = /obj/item/weapon/syringe_cartridge
 	category = "Arms and Ammunition"
 
@@ -293,7 +293,7 @@
 
 /datum/autolathe/recipe/ashtray_glass
 	name = "glass ashtray"
-	path = /obj/item/ashtray/glass
+	path = /obj/item/weapon/material/ashtray/glass
 	category = "General"
 
 /datum/autolathe/recipe/camera_assembly
@@ -369,7 +369,7 @@
 
 /datum/autolathe/recipe/tacknife
 	name = "tactical knife"
-	path = /obj/item/weapon/hatchet/tacknife
+	path = /obj/item/weapon/material/hatchet/tacknife
 	hidden = 1
 	category = "Arms and Ammunition"
 

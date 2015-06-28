@@ -12,8 +12,8 @@
 	active_power_usage = 10000
 
 /obj/machinery/robotic_fabricator/attackby(var/obj/item/O as obj, var/mob/user as mob)
-	if (istype(O, /obj/item/stack/sheet/metal))
-		var/obj/item/stack/sheet/metal/M = O
+	if (istype(O, /obj/item/stack/material/steel))
+		var/obj/item/stack/material/steel/M = O
 		if (src.metal_amount < 150000.0)
 			var/count = 0
 			src.overlays += "fab-load-metal"
@@ -22,7 +22,7 @@
 					if(!M.get_amount())
 						return
 					while(metal_amount < 150000 && M.amount)
-						src.metal_amount += O.matter["metal"] /*O:height * O:width * O:length * 100000.0*/
+						src.metal_amount += O.matter[DEFAULT_WALL_MATERIAL] /*O:height * O:width * O:length * 100000.0*/
 						M.use(1)
 						count++
 

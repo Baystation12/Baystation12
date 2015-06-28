@@ -45,12 +45,12 @@
 	var/chance = 0
 	if(istype(A, /turf/simulated/wall))
 		var/turf/simulated/wall/W = A
-		chance = round(damage/W.damage_cap*180)
+		chance = round(damage/W.material.integrity*180)
 	else if(istype(A, /obj/machinery/door))
 		var/obj/machinery/door/D = A
 		chance = round(damage/D.maxhealth*180)
 		if(D.glass) chance *= 2
-	else if(istype(A, /obj/structure/girder) || istype(A, /obj/structure/cultgirder))
+	else if(istype(A, /obj/structure/girder))
 		chance = 100
 	else if(istype(A, /obj/machinery) || istype(A, /obj/structure))
 		chance = 25
@@ -58,7 +58,7 @@
 	if(prob(chance))
 		if(A.opacity)
 			//display a message so that people on the other side aren't so confused
-			A.visible_message("<span class='warning'>\The [src] pierces through \the [A]!")
+			A.visible_message("<span class='warning'>\The [src] pierces through \the [A]!</span>")
 		return 1
 
 	return 0
@@ -181,10 +181,6 @@
 	invisibility = 101
 	damage = 1
 	embed = 0
-
-/obj/item/projectile/bullet/chameleon
-	damage = 1 // stop trying to murderbone with a fake gun dumbass!!!
-	embed = 0 // nope
 
 /* Practice */
 

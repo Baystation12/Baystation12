@@ -317,7 +317,7 @@
 
 			if(Entry[1] == src.ckey && Entry[2] == src.real_name) //They're in the list? Custom sprite time, var and icon change required
 				custom_sprite = 1
-				icon = 'icons/mob/custom-synthetic.dmi'
+				icon = CUSTOM_ITEM_SYNTH
 				if(icon_state == "robot")
 					icon_state = "[src.ckey]-Standard"
 
@@ -409,19 +409,6 @@
 		C.toggled = 1
 		src << "\red You enable [C.name]."
 
-// this function shows information about the malf_ai gameplay type in the status screen
-/mob/living/silicon/robot/show_malf_ai()
-	..()
-	for (var/datum/mind/malfai in malf.current_antagonists)
-		if(connected_ai)
-			if(connected_ai.mind == malfai)
-				if(malf.hacked_apcs >= 3)
-					stat(null, "Time until station control secured: [max(malf.hack_time/(malf.hacked_apcs/3), 0)] seconds")
-		else if(malf.revealed)
-			stat(null, "Time left: [max(malf.hack_time/(malf.hacked_apcs.len/3), 0)]")
-	return 0
-
-
 // this function displays jetpack pressure in the stat panel
 /mob/living/silicon/robot/proc/show_jetpack_pressure()
 	// if you have a jetpack, show the internal tank pressure
@@ -462,17 +449,6 @@
 
 /mob/living/silicon/robot/restrained()
 	return 0
-
-/mob/living/silicon/robot/meteorhit(obj/O as obj)
-	for(var/mob/M in viewers(src, null))
-		M.show_message(text("\red [src] has been hit by [O]"), 1)
-		//Foreach goto(19)
-	if (health > 0)
-		adjustBruteLoss(30)
-		if ((O.icon_state == "flaming"))
-			adjustFireLoss(40)
-		updatehealth()
-	return
 
 /mob/living/silicon/robot/bullet_act(var/obj/item/projectile/Proj)
 	..(Proj)
@@ -594,6 +570,8 @@
 			user << "Close the panel first."
 		else if(cell)
 			user << "There is a power cell already installed."
+		else if(W.w_class != 3)
+			user << "\The [W] is too [W.w_class < 3? "small" : "large"] to fit here."
 		else
 			user.drop_item()
 			W.loc = src
@@ -644,71 +622,6 @@
 			else
 				user << "\red Access denied."
 
-	else if(istype(W, /obj/item/weapon/card/emag))		// trying to unlock with an emag card
-		if(!opened)//Cover is closed
-			if(locked)
-				if(prob(90))
-					var/obj/item/weapon/card/emag/emag = W
-					emag.uses--
-					user << "You emag the cover lock."
-					locked = 0
-				else
-					user << "You fail to emag the cover lock."
-					src << "Hack attempt detected."
-			else
-				user << "The cover is already unlocked."
-			return
-
-		if(opened)//Cover is open
-			if(emagged)	return//Prevents the X has hit Y with Z message also you cant emag them twice
-			if(wiresexposed)
-				user << "You must close the panel first"
-				return
-			else
-				sleep(6)
-				if(prob(50))
-					emagged = 1
-					lawupdate = 0
-					disconnect_from_ai()
-					user << "You emag [src]'s interface."
-					message_admins("[key_name_admin(user)] emagged cyborg [key_name_admin(src)].  Laws overridden.")
-					log_game("[key_name(user)] emagged cyborg [key_name(src)].  Laws overridden.")
-					clear_supplied_laws()
-					clear_inherent_laws()
-					laws = new /datum/ai_laws/syndicate_override
-					var/time = time2text(world.realtime,"hh:mm:ss")
-					lawchanges.Add("[time] <B>:</B> [user.name]([user.key]) emagged [name]([key])")
-					set_zeroth_law("Only [user.real_name] and people he designates as being such are operatives.")
-					src << "\red ALERT: Foreign software detected."
-					sleep(5)
-					src << "\red Initiating diagnostics..."
-					sleep(20)
-					src << "\red SynBorg v1.7.1 loaded."
-					sleep(5)
-					src << "\red LAW SYNCHRONISATION ERROR"
-					sleep(5)
-					src << "\red Would you like to send a report to NanoTraSoft? Y/N"
-					sleep(10)
-					src << "\red > N"
-					sleep(20)
-					src << "\red ERRORERRORERROR"
-					src << "<b>Obey these laws:</b>"
-					laws.show_laws(src)
-					src << "\red \b ALERT: [user.real_name] is your new master. Obey your new laws and his commands."
-					if(src.module)
-						var/rebuild = 0
-						for(var/obj/item/weapon/pickaxe/borgdrill/D in src.module.modules)
-							qdel(D)
-							rebuild = 1
-						if(rebuild)
-							src.module.modules += new /obj/item/weapon/pickaxe/diamonddrill(src.module)
-							src.module.rebuild()
-					updateicon()
-				else
-					user << "You fail to hack [src]'s interface."
-					src << "Hack attempt detected."
-			return
-
 	else if(istype(W, /obj/item/borg/upgrade/))
 		var/obj/item/borg/upgrade/U = W
 		if(!opened)
@@ -744,7 +657,7 @@
 	if(opened && !wiresexposed && (!istype(user, /mob/living/silicon)))
 		var/datum/robot_component/cell_component = components["power cell"]
 		if(cell)
-			cell.updateicon()
+			cell.update_icon()
 			cell.add_fingerprint(user)
 			user.put_in_active_hand(cell)
 			user << "You remove \the [cell]."
@@ -1079,8 +992,9 @@
 	if(cell.charge == 0)
 		return 0
 
-	if(cell.use(amount * CELLRATE * CYBORG_POWER_USAGE_MULTIPLIER))
-		used_power_this_tick += amount * CYBORG_POWER_USAGE_MULTIPLIER
+	var/power_use = amount * CYBORG_POWER_USAGE_MULTIPLIER
+	if(cell.checked_use(CELLRATE * power_use))
+		used_power_this_tick += power_use
 		return 1
 	return 0
 
@@ -1118,3 +1032,70 @@
 		connected_ai.connected_robots |= src
 		notify_ai(ROBOT_NOTIFICATION_NEW_UNIT)
 		sync()
+
+/mob/living/silicon/robot/emag_act(var/remaining_charges, var/mob/user)
+	if(!opened)//Cover is closed
+		if(locked)
+			if(prob(90))
+				user << "You emag the cover lock."
+				locked = 0
+			else
+				user << "You fail to emag the cover lock."
+				src << "Hack attempt detected."
+			return 1
+		else
+			user << "The cover is already unlocked."
+		return
+
+	if(opened)//Cover is open
+		if(emagged)	return//Prevents the X has hit Y with Z message also you cant emag them twice
+		if(wiresexposed)
+			user << "You must close the panel first"
+			return
+		else
+			sleep(6)
+			if(prob(50))
+				emagged = 1
+				lawupdate = 0
+				disconnect_from_ai()
+				user << "You emag [src]'s interface."
+				message_admins("[key_name_admin(user)] emagged cyborg [key_name_admin(src)].  Laws overridden.")
+				log_game("[key_name(user)] emagged cyborg [key_name(src)].  Laws overridden.")
+				clear_supplied_laws()
+				clear_inherent_laws()
+				laws = new /datum/ai_laws/syndicate_override
+				var/time = time2text(world.realtime,"hh:mm:ss")
+				lawchanges.Add("[time] <B>:</B> [user.name]([user.key]) emagged [name]([key])")
+				set_zeroth_law("Only [user.real_name] and people he designates as being such are operatives.")
+				. = 1
+				spawn()
+					src << "\red ALERT: Foreign software detected."
+					sleep(5)
+					src << "\red Initiating diagnostics..."
+					sleep(20)
+					src << "\red SynBorg v1.7.1 loaded."
+					sleep(5)
+					src << "\red LAW SYNCHRONISATION ERROR"
+					sleep(5)
+					src << "\red Would you like to send a report to NanoTraSoft? Y/N"
+					sleep(10)
+					src << "\red > N"
+					sleep(20)
+					src << "\red ERRORERRORERROR"
+					src << "<b>Obey these laws:</b>"
+					laws.show_laws(src)
+					src << "\red \b ALERT: [user.real_name] is your new master. Obey your new laws and his commands."
+					if(src.module)
+						var/rebuild = 0
+						for(var/obj/item/weapon/pickaxe/borgdrill/D in src.module.modules)
+							qdel(D)
+							rebuild = 1
+						if(rebuild)
+							src.module.modules += new /obj/item/weapon/pickaxe/diamonddrill(src.module)
+							src.module.rebuild()
+					updateicon()
+			else
+				user << "You fail to hack [src]'s interface."
+				src << "Hack attempt detected."
+			return 1
+		return

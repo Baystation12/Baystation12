@@ -5,7 +5,7 @@
 	icon_state ="spellbook"
 	throw_speed = 1
 	throw_range = 5
-	w_class = 1.0
+	w_class = 2
 	var/uses = 5
 	var/temp = null
 	var/max_uses = 5
@@ -14,6 +14,10 @@
 /obj/item/weapon/spellbook/attack_self(mob/user = usr)
 	if(!user)
 		return
+	if((user.mind && !wizards.is_antagonist(user.mind)))
+		usr << "<span class='warning'>You stare at the book but cannot make sense of the markings!</span>"
+		return
+
 	user.set_machine(src)
 	var/dat
 	if(temp)

@@ -44,26 +44,33 @@
 	if (istype(src.loc, /obj/item/assembly))
 		icon = src.loc
 	if (!in_range(src, user))
-		if (icon == src) user << "\blue It's \a \icon[icon][src]! If you want any more information you'll need to get closer."
+		if (icon == src) user << "<span class='notice'>It's \a \icon[icon][src]! If you want any more information you'll need to get closer.</span>"
 		return
 
 	var/celsius_temperature = src.air_contents.temperature-T0C
 	var/descriptive
+	var/status
 
 	if (celsius_temperature < 20)
 		descriptive = "cold"
+		status = "warning"
 	else if (celsius_temperature < 40)
 		descriptive = "room temperature"
+		status = "notice"
 	else if (celsius_temperature < 80)
 		descriptive = "lukewarm"
+		status = "warning"
 	else if (celsius_temperature < 100)
 		descriptive = "warm"
+		status = "warning"
 	else if (celsius_temperature < 300)
 		descriptive = "hot"
+		status = "danger"
 	else
 		descriptive = "furiously hot"
+		status = "danger"
 
-	user << "\blue \The \icon[icon][src] feels [descriptive]"
+	user << "<span class='[status]'>\The \icon[icon][src] feels [descriptive]</span>"
 
 	return
 
@@ -87,20 +94,20 @@
 
 	if ((istype(W, /obj/item/device/analyzer)) && get_dist(user, src) <= 1)
 		for (var/mob/O in viewers(user, null))
-			O << "\red [user] has used [W] on \icon[icon] [src]"
+			O << "<span class='notice'>\The [user] has used [W] on \icon[icon] [src]</span>"
 
 		var/pressure = air_contents.return_pressure()
 		manipulated_by = user.real_name			//This person is aware of the contents of the tank.
 		var/total_moles = air_contents.total_moles
 
-		user << "\blue Results of analysis of \icon[icon]"
+		user << "<span class='notice'>Results of analysis of \icon[icon]</span>"
 		if (total_moles>0)
-			user << "\blue Pressure: [round(pressure,0.1)] kPa"
+			user << "<span class='notice'>Pressure: [round(pressure,0.1)] kPa</span>"
 			for(var/g in air_contents.gas)
-				user << "\blue [gas_data.name[g]]: [(round(air_contents.gas[g] / total_moles) * 100)]%"
-			user << "\blue Temperature: [round(air_contents.temperature-T0C)]&deg;C"
+				user << "<span class='notice'>[gas_data.name[g]]: [(round(air_contents.gas[g] / total_moles) * 100)]%</span>"
+			user << "<span class='notice'>Temperature: [round(air_contents.temperature-T0C)]&deg;C</span>"
 		else
-			user << "\blue Tank is empty!"
+			user << "<span class='notice'>Tank is empty!</span>"
 		src.add_fingerprint(user)
 	else if (istype(W,/obj/item/latexballon))
 		var/obj/item/latexballon/LB = W
@@ -195,7 +202,7 @@
 			if(location.internal == src)
 				location.internal = null
 				location.internals.icon_state = "internal0"
-				usr << "\blue You close the tank release valve."
+				usr << "<span class='notice'>You close the tank release valve.</span>"
 				if (location.internals)
 					location.internals.icon_state = "internal0"
 			else
@@ -210,11 +217,11 @@
 
 				if(can_open_valve)
 					location.internal = src
-					usr << "\blue You open \the [src] valve."
+					usr << "<span class='notice'>You open \the [src] valve.</span>"
 					if (location.internals)
 						location.internals.icon_state = "internal1"
 				else
-					usr << "\blue You need something to connect to \the [src]."
+					usr << "<span class='warning'>You need something to connect to \the [src].</span>"
 
 	src.add_fingerprint(usr)
 	return 1
@@ -261,23 +268,26 @@
 		if(!istype(src.loc,/obj/item/device/transfer_valve))
 			message_admins("Explosive tank rupture! last key to touch the tank was [src.fingerprintslast].")
 			log_game("Explosive tank rupture! last key to touch the tank was [src.fingerprintslast].")
-		//world << "\blue[x],[y] tank is exploding: [pressure] kPa"
+
 		//Give the gas a chance to build up more pressure through reacting
 		air_contents.react()
 		air_contents.react()
 		air_contents.react()
+
 		pressure = air_contents.return_pressure()
 		var/range = (pressure-TANK_FRAGMENT_PRESSURE)/TANK_FRAGMENT_SCALE
-		range = min(range, max_explosion_range)		// was 8 - - - Changed to a configurable define -- TLE
-		var/turf/epicenter = get_turf(loc)
 
-		//world << "\blue Exploding Pressure: [pressure] kPa, intensity: [range]"
-
-		explosion(epicenter, round(range*0.25), round(range*0.5), round(range), round(range*1.5))
+		explosion(
+			get_turf(loc), 
+			round(min(BOMBCAP_DVSTN_RADIUS, range*0.25)), 
+			round(min(BOMBCAP_HEAVY_RADIUS, range*0.50)), 
+			round(min(BOMBCAP_LIGHT_RADIUS, range*1.00)), 
+			round(min(BOMBCAP_FLASH_RADIUS, range*1.50)), 
+			)
 		qdel(src)
 
 	else if(pressure > TANK_RUPTURE_PRESSURE)
-		//world << "\blue[x],[y] tank is rupturing: [pressure] kPa, integrity [integrity]"
+		//world << "<span class='notice'>[x],[y] tank is rupturing: [pressure] kPa, integrity [integrity]</span>"
 		if(integrity <= 0)
 			var/turf/simulated/T = get_turf(src)
 			if(!T)
@@ -289,7 +299,7 @@
 			integrity--
 
 	else if(pressure > TANK_LEAK_PRESSURE)
-		//world << "\blue[x],[y] tank is leaking: [pressure] kPa, integrity [integrity]"
+		//world << "<span class='notice'>[x],[y] tank is leaking: [pressure] kPa, integrity [integrity]</span>"
 		if(integrity <= 0)
 			var/turf/simulated/T = get_turf(src)
 			if(!T)

@@ -16,15 +16,15 @@ proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impa
 			explosion_rec(epicenter, power)
 			return
 
+		var/start = world.timeofday
+		epicenter = get_turf(epicenter)
+		if(!epicenter) return
+
 ///// Z-Level Stuff
 		if(z_transfer && (devastation_range > 0 || heavy_impact_range > 0))
 			//transfer the explosion in both directions
 			explosion_z_transfer(epicenter, devastation_range, heavy_impact_range, light_impact_range, flash_range)
 ///// Z-Level Stuff
-
-		var/start = world.timeofday
-		epicenter = get_turf(epicenter)
-		if(!epicenter) return
 
 		var/max_range = max(devastation_range, heavy_impact_range, light_impact_range, flash_range)
 		//playsound(epicenter, 'sound/effects/explosionfar.ogg', 100, 1, round(devastation_range*2,1) )

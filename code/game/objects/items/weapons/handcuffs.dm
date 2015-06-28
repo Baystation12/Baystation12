@@ -10,62 +10,80 @@
 	w_class = 2.0
 	throw_speed = 2
 	throw_range = 5
-	matter = list("metal" = 500)
-	origin_tech = "materials=1"
+	origin_tech = list(TECH_MATERIAL = 1)
+	matter = list(DEFAULT_WALL_MATERIAL = 500)
 	var/dispenser = 0
 	var/breakouttime = 1200 //Deciseconds = 120s = 2 minutes
 	var/cuff_sound = 'sound/weapons/handcuffs.ogg'
+	var/cuff_type = "handcuffs"
 
-/obj/item/weapon/handcuffs/attack(mob/living/carbon/C as mob, mob/user as mob)
-	if (!istype(user, /mob/living/carbon/human))
-		user << "\red You don't have the dexterity to do this!"
+/obj/item/weapon/handcuffs/attack(var/mob/living/carbon/C, var/mob/living/user)
+
+	if(!user.IsAdvancedToolUser())
 		return
-	if ((CLUMSY in usr.mutations) && prob(50))
-		user << "\red Uh ... how do those things work?!"
+
+	if ((CLUMSY in user.mutations) && prob(50))
+		user << "<span class='warning'>Uh ... how do those things work?!</span>"
 		place_handcuffs(user, user)
 		return
+
 	if(!C.handcuffed)
 		if (C == user)
 			place_handcuffs(user, user)
 			return
 
-		//check for an aggressive grab
-		for (var/obj/item/weapon/grab/G in C.grabbed_by)
-			if (G.loc == user && G.state >= GRAB_AGGRESSIVE)
-				place_handcuffs(C, user)
-				return
-		user << "\red You need to have a firm grip on [C] before you can put \the [src] on!"
+		//check for an aggressive grab (or robutts)
+		var/can_place
+		if(istype(user, /mob/living/silicon/robot))
+			can_place = 1
+		else
+			for (var/obj/item/weapon/grab/G in C.grabbed_by)
+				if (G.loc == user && G.state >= GRAB_AGGRESSIVE)
+					can_place = 1
+					break
+
+		if(can_place)
+			place_handcuffs(C, user)
+		else
+			user << "<span class='danger'>You need to have a firm grip on [C] before you can put \the [src] on!</span>"
 
 /obj/item/weapon/handcuffs/proc/place_handcuffs(var/mob/living/carbon/target, var/mob/user)
 	playsound(src.loc, cuff_sound, 30, 1, -2)
 
-	if (ishuman(target))
-		var/mob/living/carbon/human/H = target
-
-		if (!H.has_organ_for_slot(slot_handcuffed))
-			user << "<span class='danger'>\The [H] needs at least two wrists before you can cuff them together!</span>"
-			return
-
-		if(istype(H.gloves,/obj/item/clothing/gloves/rig)) // Can't cuff someone who's in a deployed hardsuit.
-			user << "<span class='danger'>The cuffs won't fit around \the [H.gloves]!</span>"
-			return
-
-		H.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been handcuffed (attempt) by [user.name] ([user.ckey])</font>")
-		user.attack_log += text("\[[time_stamp()]\] <font color='red'>Attempted to handcuff [H.name] ([H.ckey])</font>")
-		msg_admin_attack("[key_name(user)] attempted to handcuff [key_name(H)]")
-
-		var/obj/effect/equip_e/human/O = new /obj/effect/equip_e/human(  )
-		O.source = user
-		O.target = H
-		O.item = user.get_active_hand()
-		O.s_loc = user.loc
-		O.t_loc = H.loc
-		O.place = "handcuff"
-		H.requests += O
-		spawn( 0 )
-			feedback_add_details("handcuffs","H")
-			O.process()
+	var/mob/living/carbon/human/H = target
+	if(!istype(H))
 		return
+
+	if (!H.has_organ_for_slot(slot_handcuffed))
+		user << "<span class='danger'>\The [H] needs at least two wrists before you can cuff them together!</span>"
+		return
+
+	if(istype(H.gloves,/obj/item/clothing/gloves/rig)) // Can't cuff someone who's in a deployed hardsuit.
+		user << "<span class='danger'>The cuffs won't fit around \the [H.gloves]!</span>"
+		return
+
+	user.visible_message("<span class='danger'>\The [user] is attempting to put [cuff_type] on \the [H]!</span>")
+
+	if(!do_after(user,30))
+		return
+
+	H.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been handcuffed (attempt) by [user.name] ([user.ckey])</font>")
+	user.attack_log += text("\[[time_stamp()]\] <font color='red'>Attempted to handcuff [H.name] ([H.ckey])</font>")
+	msg_admin_attack("[key_name(user)] attempted to handcuff [key_name(H)]")
+	feedback_add_details("handcuffs","H")
+
+	user.visible_message("<span class='danger'>\The [user] has put [cuff_type] on \the [H]!</span>")
+
+	// Apply cuffs.
+	var/obj/item/weapon/handcuffs/cuffs = src
+	if(dispenser)
+		cuffs = new(get_turf(user))
+	else
+		user.drop_from_inventory(cuffs)
+	cuffs.loc = target
+	target.handcuffed = cuffs
+	target.update_inv_handcuffed()
+	return
 
 var/last_chew = 0
 /mob/living/carbon/human/RestrainedClickOn(var/atom/A)
@@ -82,8 +100,8 @@ var/last_chew = 0
 	var/obj/item/organ/external/O = H.organs_by_name[H.hand?"l_hand":"r_hand"]
 	if (!O) return
 
-	var/s = "\red [H.name] chews on \his [O.name]!"
-	H.visible_message(s, "\red You chew on your [O.name]!")
+	var/s = "<span class='warning'>[H.name] chews on \his [O.name]!</span>"
+	H.visible_message(s, "<span class='warning'>You chew on your [O.name]!</span>")
 	H.attack_log += text("\[[time_stamp()]\] <font color='red'>[s] ([H.ckey])</font>")
 	log_attack("[s] ([H.ckey])")
 
@@ -98,6 +116,7 @@ var/last_chew = 0
 	icon_state = "cuff_white"
 	breakouttime = 300 //Deciseconds = 30s
 	cuff_sound = 'sound/weapons/cablecuff.ogg'
+	cuff_type = "cable restraints"
 
 /obj/item/weapon/handcuffs/cable/red
 	color = "#DD0000"
@@ -128,32 +147,11 @@ var/last_chew = 0
 	if(istype(I, /obj/item/stack/rods))
 		var/obj/item/stack/rods/R = I
 		if (R.use(1))
-			var/obj/item/weapon/wirerod/W = new /obj/item/weapon/wirerod
-
+			var/obj/item/weapon/material/wirerod/W = new(get_turf(user))
 			user.put_in_hands(W)
 			user << "<span class='notice'>You wrap the cable restraint around the top of the rod.</span>"
 			qdel(src)
 			update_icon(user)
 
-
 /obj/item/weapon/handcuffs/cyborg
 	dispenser = 1
-
-/obj/item/weapon/handcuffs/cyborg/attack(mob/living/carbon/C as mob, mob/user as mob)
-	if(!C.handcuffed)
-		var/turf/p_loc = user.loc
-		var/turf/p_loc_m = C.loc
-		playsound(src.loc, cuff_sound, 30, 1, -2)
-		user.visible_message("\red <B>[user] is trying to put handcuffs on [C]!</B>")
-
-		if (ishuman(C))
-			var/mob/living/carbon/human/H = C
-			if (!H.has_organ_for_slot(slot_handcuffed))
-				user << "\red \The [H] needs at least two wrists before you can cuff them together!"
-				return
-
-		spawn(30)
-			if(!C)	return
-			if(p_loc == user.loc && p_loc_m == C.loc)
-				C.handcuffed = new /obj/item/weapon/handcuffs(C)
-				C.update_inv_handcuffed()

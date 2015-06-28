@@ -33,8 +33,8 @@
 		/obj/item/device/analyzer,
 		/obj/item/taperoll/engineering,
 		/obj/item/device/robotanalyzer,
-		/obj/item/weapon/minihoe,
-		/obj/item/weapon/hatchet,
+		/obj/item/weapon/material/minihoe,
+		/obj/item/weapon/material/hatchet,
 		/obj/item/device/analyzer/plant_analyzer,
 		/obj/item/weapon/extinguisher/mini
 		)
@@ -92,11 +92,8 @@
 /obj/item/weapon/storage/belt/medical/emt
 	name = "EMT utility belt"
 	desc = "A sturdy black webbing belt with attached pouches."
-	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "emsbelt"
 	item_state = "emsbelt"
-
-
 
 /obj/item/weapon/storage/belt/security
 	name = "security belt"

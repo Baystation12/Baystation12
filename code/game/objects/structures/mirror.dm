@@ -14,7 +14,7 @@
 	if(shattered)	return
 
 	if(ishuman(user))
-		var/obj/nano_module/appearance_changer/AC = ui_users[user]
+		var/datum/nano_module/appearance_changer/AC = ui_users[user]
 		if(!AC)
 			AC = new(src, user)
 			AC.name = "SalonPro Nano-Mirror(TM)"
@@ -54,12 +54,13 @@
 
 /obj/structure/mirror/attack_generic(var/mob/user, var/damage)
 
+	user.do_attack_animation(src)
 	if(shattered)
 		playsound(src.loc, 'sound/effects/hit_on_shattered_glass.ogg', 70, 1)
 		return 0
 
 	if(damage)
-		user.visible_message("<span class='danger'>[user] smashes [src]!")
+		user.visible_message("<span class='danger'>[user] smashes [src]!</span>")
 		shatter()
 	else
 		user.visible_message("<span class='danger'>[user] hits [src] and bounces off!</span>")

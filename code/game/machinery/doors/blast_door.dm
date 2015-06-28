@@ -90,18 +90,18 @@
 // This only works on broken doors or doors without power. Also allows repair with Plasteel.
 /obj/machinery/door/blast/attackby(obj/item/weapon/C as obj, mob/user as mob)
 	src.add_fingerprint(user)
-	if(istype(C, /obj/item/weapon/crowbar) || (istype(C, /obj/item/weapon/twohanded/fireaxe) && C:wielded == 1))
+	if(istype(C, /obj/item/weapon/crowbar) || (istype(C, /obj/item/weapon/material/twohanded/fireaxe) && C:wielded == 1))
 		if(((stat & NOPOWER) || (stat & BROKEN)) && !( src.operating ))
 			force_toggle()
 		else
 			usr << "<span class='notice'>[src]'s motors resist your effort.</span>"
 		return
-	if(istype(C, /obj/item/stack/sheet/plasteel))
+	if(istype(C, /obj/item/stack/material/plasteel))
 		var/amt = repair_price()
 		if(!amt)
 			usr << "<span class='notice'>\The [src] is already fully repaired.</span>"
 			return
-		var/obj/item/stack/sheet/plasteel/P = C
+		var/obj/item/stack/material/plasteel/P = C
 		if(P.amount < amt)
 			usr << "<span class='warning'>You don't have enough sheets to repair this! You need at least [amt] sheets.</span>"
 			return
@@ -170,6 +170,11 @@ obj/machinery/door/blast/regular
 	icon_state_closing = "pdoorc1"
 	icon_state = "pdoor1"
 	maxhealth = 600
+
+obj/machinery/door/blast/regular/open
+	icon_state = "pdoor0"
+	density = 0
+	opacity = 0
 
 // SUBTYPE: Shutters
 // Nicer looking, and also weaker, shutters. Found in kitchen and similar areas.
