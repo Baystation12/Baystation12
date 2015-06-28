@@ -13,7 +13,6 @@ var/const/AI				=(1<<8)
 var/const/CYBORG			=(1<<9)
 var/const/BLUESHIELD		=(1<<10)
 var/const/DEPTGUARD			=(1<<11)
-var/const/COMMSOFFICER			=(1<<12)
 
 var/const/MEDSCI			=(1<<1)
 
@@ -113,7 +112,6 @@ var/list/security_positions = list(
 	"Security Officer",
 	"Blueshield Guard",
 	"Department Guard",
-	"Communications Officer"
 )
 
 
