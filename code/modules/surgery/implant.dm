@@ -16,9 +16,9 @@
 		switch (affected.name)
 			if ("head")
 				return 1
-			if ("chest")
+			if ("upper body")
 				return 3
-			if ("groin")
+			if ("lower body")
 				return 2
 		return 0
 
@@ -26,11 +26,17 @@
 		switch (affected.name)
 			if ("head")
 				return "cranial"
-			if ("chest")
+			if ("upper body")
 				return "thoracic"
-			if ("groin")
+			if ("lower body")
 				return "abdominal"
 		return ""
+
+	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+		var/obj/item/organ/external/chest/affected = target.get_organ(target_zone)
+		user.visible_message("\red [user]'s hand slips, scraping around inside [target]'s [affected.name] with \the [tool]!", \
+		"\red Your hand slips, scraping around inside [target]'s [affected.name] with \the [tool]!")
+		affected.createwound(CUT, 20)
 
 /datum/surgery_step/cavity/make_space
 	allowed_tools = list(
@@ -45,7 +51,7 @@
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		if(..())
 			var/obj/item/organ/external/affected = target.get_organ(target_zone)
-			return affected && !affected.cavity && !affected.hidden
+			return affected && !affected.cavity
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
@@ -59,12 +65,6 @@
 		var/obj/item/organ/external/chest/affected = target.get_organ(target_zone)
 		user.visible_message("\blue [user] makes some space inside [target]'s [get_cavity(affected)] cavity with \the [tool].", \
 		"\blue You make some space inside [target]'s [get_cavity(affected)] cavity with \the [tool]." )
-
-	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		var/obj/item/organ/external/chest/affected = target.get_organ(target_zone)
-		user.visible_message("\red [user]'s hand slips, scraping tissue inside [target]'s [affected.name] with \the [tool]!", \
-		"\red Your hand slips, scraping tissue inside [target]'s [affected.name] with \the [tool]!")
-		affected.createwound(CUT, 20)
 
 /datum/surgery_step/cavity/close_space
 	priority = 2
@@ -96,12 +96,6 @@
 		user.visible_message("\blue [user] mends [target]'s [get_cavity(affected)] cavity walls with \the [tool].", \
 		"\blue You mend [target]'s [get_cavity(affected)] cavity walls with \the [tool]." )
 
-	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		var/obj/item/organ/external/chest/affected = target.get_organ(target_zone)
-		user.visible_message("\red [user]'s hand slips, scraping tissue inside [target]'s [affected.name] with \the [tool]!", \
-		"\red Your hand slips, scraping tissue inside [target]'s [affected.name] with \the [tool]!")
-		affected.createwound(CUT, 20)
-
 /datum/surgery_step/cavity/place_item
 	priority = 0
 	allowed_tools = list(/obj/item = 100)
@@ -112,7 +106,15 @@
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		if(..())
 			var/obj/item/organ/external/affected = target.get_organ(target_zone)
-			return affected && !istype(user,/mob/living/silicon/robot) && !affected.hidden && affected.cavity && tool.w_class <= get_max_wclass(affected)
+			if(istype(user,/mob/living/silicon/robot))
+				return
+			if(affected && affected.cavity)
+				var/total_volume = tool.w_class
+				for(var/obj/item/I in affected.implants)
+					if(istype(I,/obj/item/weapon/implant))
+						continue
+					total_volume += I.w_class
+				return total_volume <= get_max_wclass(affected)
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
@@ -126,21 +128,15 @@
 
 		user.visible_message("\blue [user] puts \the [tool] inside [target]'s [get_cavity(affected)] cavity.", \
 		"\blue You put \the [tool] inside [target]'s [get_cavity(affected)] cavity." )
-		if (tool.w_class > get_max_wclass(affected)/2 && prob(50))
+		if (tool.w_class > get_max_wclass(affected)/2 && prob(50) && !(affected.status & ORGAN_ROBOT))
 			user << "\red You tear some blood vessels trying to fit such a big object in this cavity."
 			var/datum/wound/internal_bleeding/I = new (10)
 			affected.wounds += I
 			affected.owner.custom_pain("You feel something rip in your [affected.name]!", 1)
 		user.drop_item()
-		affected.hidden = tool
-		tool.loc = target
+		affected.implants += tool
+		tool.loc = affected
 		affected.cavity = 0
-
-	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		var/obj/item/organ/external/chest/affected = target.get_organ(target_zone)
-		user.visible_message("\red [user]'s hand slips, scraping tissue inside [target]'s [affected.name] with \the [tool]!", \
-		"\red Your hand slips, scraping tissue inside [target]'s [affected.name] with \the [tool]!")
-		affected.createwound(CUT, 20)
 
 //////////////////////////////////////////////////////////////////
 //					IMPLANT/ITEM REMOVAL SURGERY						//
@@ -150,7 +146,7 @@
 	allowed_tools = list(
 	/obj/item/weapon/hemostat = 100,	\
 	/obj/item/weapon/wirecutters = 75,	\
-	/obj/item/weapon/kitchen/utensil/fork = 20
+	/obj/item/weapon/material/kitchen/utensil/fork = 20
 	)
 
 	min_duration = 80
@@ -162,9 +158,9 @@
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
-		user.visible_message("[user] starts poking around inside the incision on [target]'s [affected.name] with \the [tool].", \
-		"You start poking around inside the incision on [target]'s [affected.name] with \the [tool]" )
-		target.custom_pain("The pain in your chest is living hell!",1)
+		user.visible_message("[user] starts poking around inside [target]'s [affected.name] with \the [tool].", \
+		"You start poking around inside [target]'s [affected.name] with \the [tool]" )
+		target.custom_pain("The pain in your [affected.name] is living hell!",1)
 		..()
 
 	end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -174,7 +170,7 @@
 
 		if (affected.implants.len)
 
-			var/obj/item/obj = affected.implants[1]
+			var/obj/item/obj = pick(affected.implants)
 
 			if(istype(obj,/obj/item/weapon/implant))
 				var/obj/item/weapon/implant/imp = obj
@@ -201,6 +197,8 @@
 					worm.leave_host()
 				else
 					obj.loc = get_turf(target)
+					obj.add_blood(target)
+					obj.update_icon()
 					if(istype(obj,/obj/item/weapon/implant))
 						var/obj/item/weapon/implant/imp = obj
 						imp.imp_in = null
@@ -208,25 +206,13 @@
 			else
 				user.visible_message("\blue [user] removes \the [tool] from [target]'s [affected.name].", \
 				"\blue There's something inside [target]'s [affected.name], but you just missed it this time." )
-		else if (affected.hidden)
-			user.visible_message("\blue [user] takes something out of incision on [target]'s [affected.name] with \the [tool].", \
-			"\blue You take something out of incision on [target]'s [affected.name]s with \the [tool]." )
-			affected.hidden.loc = get_turf(target)
-			if(!affected.hidden.blood_DNA)
-				affected.hidden.blood_DNA = list()
-			affected.hidden.blood_DNA[target.dna.unique_enzymes] = target.dna.b_type
-			affected.hidden.update_icon()
-			affected.hidden = null
-
 		else
 			user.visible_message("\blue [user] could not find anything inside [target]'s [affected.name], and pulls \the [tool] out.", \
 			"\blue You could not find anything inside [target]'s [affected.name]." )
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+		..()
 		var/obj/item/organ/external/chest/affected = target.get_organ(target_zone)
-		user.visible_message("\red [user]'s hand slips, scraping tissue inside [target]'s [affected.name] with \the [tool]!", \
-		"\red Your hand slips, scraping tissue inside [target]'s [affected.name] with \the [tool]!")
-		affected.createwound(CUT, 20)
 		if (affected.implants.len)
 			var/fail_prob = 10
 			fail_prob += 100 - tool_quality(tool)

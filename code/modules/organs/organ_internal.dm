@@ -79,15 +79,6 @@
 		owner.b_eyes ? owner.b_eyes : 0
 		)
 
-/obj/item/organ/eyes/process() //Eye damage replaces the old eye_stat var.
-	..()
-	if(!owner)
-		return
-	if(is_bruised())
-		owner.eye_blurry = 20
-	if(is_broken())
-		owner.eye_blind = 20
-
 /obj/item/organ/liver
 	name = "liver"
 	icon_state = "liver"
@@ -135,20 +126,12 @@
 		if(is_broken())
 			filter_effect -= 2
 
-		// Do some reagent filtering/processing.
-		for(var/datum/reagent/R in owner.reagents.reagent_list)
-			// Damaged liver means some chemicals are very dangerous
-			// The liver is also responsible for clearing out alcohol and toxins.
-			// Ethanol and all drinks are bad.K
-			if(istype(R, /datum/reagent/ethanol))
-				if(filter_effect < 3)
-					owner.adjustToxLoss(0.1 * PROCESS_ACCURACY)
-				owner.reagents.remove_reagent(R.id, R.custom_metabolism*filter_effect)
-			// Can't cope with toxins at all
-			else if(istype(R, /datum/reagent/toxin))
-				if(filter_effect < 3)
-					owner.adjustToxLoss(0.3 * PROCESS_ACCURACY)
-				owner.reagents.remove_reagent(R.id, ALCOHOL_METABOLISM*filter_effect)
+		// Do some reagent processing.
+		if(owner.chem_effects[CE_ALCOHOL_TOXIC])
+			if(filter_effect < 3)
+				owner.adjustToxLoss(owner.chem_effects[CE_ALCOHOL_TOXIC] * 0.1 * PROCESS_ACCURACY)
+			else
+				take_damage(owner.chem_effects[CE_ALCOHOL_TOXIC] * 0.1 * PROCESS_ACCURACY, prob(1)) // Chance to warn them
 
 /obj/item/organ/appendix
 	name = "appendix"
@@ -157,7 +140,6 @@
 	organ_tag = "appendix"
 
 /obj/item/organ/appendix/removed()
-
 	if(owner)
 		var/inflamed = 0
 		for(var/datum/disease/appendicitis/appendicitis in owner.viruses)

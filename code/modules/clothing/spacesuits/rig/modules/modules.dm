@@ -13,7 +13,7 @@
 	desc = "It looks pretty sciency."
 	icon = 'icons/obj/rig_modules.dmi'
 	icon_state = "module"
-	matter = list("metal" = 20000, "plastic" = 30000, "glass" = 5000)
+	matter = list(DEFAULT_WALL_MATERIAL = 20000, "plastic" = 30000, "glass" = 5000)
 
 	var/damage = 0
 	var/obj/item/weapon/rig/holder
@@ -234,7 +234,7 @@
 		SetupStat(R)
 
 /mob/proc/SetupStat(var/obj/item/weapon/rig/R)
-	if(R && !R.canremove && R.installed_modules.len && statpanel("Hardsuit Modules"))
+	if(src == usr && R && !R.canremove && R.installed_modules.len && statpanel("Hardsuit Modules"))
 		var/cell_status = R.cell ? "[R.cell.charge]/[R.cell.maxcharge]" : "ERROR"
 		statpanel("Hardsuit Modules", "Suit charge", cell_status)
 		for(var/obj/item/rig_module/module in R.installed_modules)

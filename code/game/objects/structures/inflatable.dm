@@ -7,7 +7,7 @@
 
 	attack_self(mob/user)
 		playsound(loc, 'sound/items/zip.ogg', 75, 1)
-		user << "\blue You inflate [src]."
+		user << "<span class='notice'>You inflate [src].</span>"
 		var/obj/structure/inflatable/R = new /obj/structure/inflatable(user.loc)
 		src.transfer_fingerprints_to(R)
 		R.add_fingerprint(user)
@@ -63,9 +63,6 @@
 /obj/structure/inflatable/blob_act()
 	deflate(1)
 
-/obj/structure/inflatable/meteorhit()
-	deflate(1)
-
 /obj/structure/inflatable/attack_hand(mob/user as mob)
 		add_fingerprint(user)
 		return
@@ -74,7 +71,7 @@
 	if(!istype(W)) return
 
 	if (can_puncture(W))
-		visible_message("\red <b>[user] pierces [src] with [W]!</b>")
+		visible_message("<span class='danger'>[user] pierces [src] with [W]!</span>")
 		deflate(1)
 	if(W.damtype == BRUTE || W.damtype == BURN)
 		hit(W.force)
@@ -96,7 +93,7 @@
 		src.transfer_fingerprints_to(R)
 		qdel(src)
 	else
-		//user << "\blue You slowly deflate the inflatable wall."
+		//user << "<span class='notice'>You slowly deflate the inflatable wall.</span>"
 		visible_message("[src] slowly deflates.")
 		spawn(50)
 			var/obj/item/inflatable/R = new /obj/item/inflatable(loc)
@@ -111,10 +108,12 @@
 	if(isobserver(usr)) //to stop ghosts from deflating
 		return
 
+	verbs -= /obj/structure/inflatable/verb/hand_deflate
 	deflate()
 
 /obj/structure/inflatable/attack_generic(var/mob/user, var/damage, var/attack_verb)
 	health -= damage
+	user.do_attack_animation(src)
 	if(health <= 0)
 		user.visible_message("<span class='danger'>[user] [attack_verb] open the [src]!</span>")
 		spawn(1) deflate(1)
@@ -130,7 +129,7 @@
 
 	attack_self(mob/user)
 		playsound(loc, 'sound/items/zip.ogg', 75, 1)
-		user << "\blue You inflate [src]."
+		user << "<span class='notice'>You inflate [src].</span>"
 		var/obj/structure/inflatable/door/R = new /obj/structure/inflatable/door(user.loc)
 		src.transfer_fingerprints_to(R)
 		R.add_fingerprint(user)
@@ -234,7 +233,7 @@
 	icon_state = "folded_wall_torn"
 
 	attack_self(mob/user)
-		user << "\blue The inflatable wall is too torn to be inflated!"
+		user << "<span class='notice'>The inflatable wall is too torn to be inflated!</span>"
 		add_fingerprint(user)
 
 /obj/item/inflatable/door/torn
@@ -244,7 +243,7 @@
 	icon_state = "folded_door_torn"
 
 	attack_self(mob/user)
-		user << "\blue The inflatable door is too torn to be inflated!"
+		user << "<span class='notice'>The inflatable door is too torn to be inflated!</span>"
 		add_fingerprint(user)
 
 /obj/item/weapon/storage/briefcase/inflatable

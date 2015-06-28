@@ -55,27 +55,33 @@ var/list/ai_verbs_default = list(
 	var/obj/item/device/pda/ai/aiPDA = null
 	var/obj/item/device/multitool/aiMulti = null
 	var/obj/item/device/radio/headset/heads/ai_integrated/aiRadio = null
-	var/custom_sprite = 0 //For our custom sprites
-//Hud stuff
-
-	//MALFUNCTION
-	var/datum/AI_Module/module_picker/malf_picker
-	var/processing_time = 100
-	var/list/datum/AI_Module/current_modules = list()
-	var/fire_res_on_core = 0
-
-	var/control_disabled = 0 // Set to 1 to stop AI from interacting via Click() -- TLE
-	var/malfhacking = 0 // More or less a copy of the above var, so that malf AIs can hack and still get new cyborgs -- NeoFite
-
-	var/obj/machinery/power/apc/malfhack = null
-	var/explosive = 0 //does the AI explode when it dies?
-
-	var/mob/living/silicon/ai/parent = null
-
 	var/camera_light_on = 0	//Defines if the AI toggled the light on the camera it's looking through.
 	var/datum/trackable/track = null
 	var/last_announcement = ""
+	var/control_disabled = 0
 	var/datum/announcement/priority/announcement
+	var/obj/machinery/ai_powersupply/psupply = null // Backwards reference to AI's powersupply object.
+
+	//NEWMALF VARIABLES
+	var/malfunctioning = 0						// Master var that determines if AI is malfunctioning.
+	var/datum/malf_hardware/hardware = null		// Installed piece of hardware.
+	var/datum/malf_research/research = null		// Malfunction research datum.
+	var/obj/machinery/power/apc/hack = null		// APC that is currently being hacked.
+	var/list/hacked_apcs = null					// List of all hacked APCs
+	var/APU_power = 0							// If set to 1 AI runs on APU power
+	var/hacking = 0								// Set to 1 if AI is hacking APC, cyborg, other AI, or running system override.
+	var/system_override = 0						// Set to 1 if system override is initiated, 2 if succeeded.
+	var/hack_can_fail = 1						// If 0, all abilities have zero chance of failing.
+	var/hack_fails = 0							// This increments with each failed hack, and determines the warning message text.
+	var/errored = 0								// Set to 1 if runtime error occurs. Only way of this happening i can think of is admin fucking up with varedit.
+	var/bombing_core = 0						// Set to 1 if core auto-destruct is activated
+	var/bombing_station = 0						// Set to 1 if station nuke auto-destruct is activated
+	var/override_CPUStorage = 0					// Bonus/Penalty CPU Storage. For use by admins/testers.
+	var/override_CPURate = 0					// Bonus/Penalty CPU generation rate. For use by admins/testers.
+
+	var/datum/ai_icon/selected_sprite			// The selected icon set
+	var/custom_sprite 	= 0 					// Whether the selected icon is custom
+
 
 /mob/living/silicon/ai/proc/add_ai_verbs()
 	src.verbs |= ai_verbs_default
@@ -192,27 +198,38 @@ var/list/ai_verbs_default = list(
 		src << "<b>These laws may be changed by other players, or by you being the traitor.</b>"
 
 	job = "AI"
+	setup_icon()
 
 /mob/living/silicon/ai/Destroy()
 	ai_list -= src
 	qdel(eyeobj)
 	..()
 
+/mob/living/silicon/ai/proc/setup_icon()
+	var/file = file2text("config/custom_sprites.txt")
+	var/lines = text2list(file, "\n")
+
+	for(var/line in lines)
+	// split & clean up
+		var/list/Entry = text2list(line, ":")
+		for(var/i = 1 to Entry.len)
+			Entry[i] = trim(Entry[i])
+
+		if(Entry.len < 2)
+			continue;
+
+		if(Entry[1] == src.ckey && Entry[2] == src.real_name)
+			icon = CUSTOM_ITEM_SYNTH
+			custom_sprite = 1
+			selected_sprite = new/datum/ai_icon("Custom", "[src.ckey]-ai", "4", "[ckey]-ai-crash", "#FFFFFF", "#FFFFFF", "#FFFFFF")
+		else
+			selected_sprite = default_ai_icon
+	updateicon()
+
 /mob/living/silicon/ai/pointed(atom/A as mob|obj|turf in view())
 	set popup_menu = 0
 	set src = usr.contents
 	return 0
-
-/mob/living/silicon/ai/proc/system_integrity()
-	return (health-config.health_threshold_dead)/2
-
-// this function shows the health of the pAI in the Status panel
-/mob/living/silicon/ai/show_system_integrity()
-	// An AI doesn't become inoperable until -100% (or whatever config.health_threshold_dead is set to)
-	if(!src.stat)
-		stat(null, text("System integrity: [system_integrity()]%"))
-	else
-		stat(null, text("Systems nonfunctional"))
 
 /mob/living/silicon/ai/SetName(pickedName as text)
 	..()
@@ -240,6 +257,7 @@ var/list/ai_verbs_default = list(
 
 /obj/machinery/ai_powersupply/New(var/mob/living/silicon/ai/ai=null)
 	powered_ai = ai
+	powered_ai.psupply = src
 	if(isnull(powered_ai))
 		qdel(src)
 
@@ -250,10 +268,17 @@ var/list/ai_verbs_default = list(
 
 /obj/machinery/ai_powersupply/process()
 	if(!powered_ai || powered_ai.stat & DEAD)
+		qdel()
+		return
+	if(powered_ai.psupply != src) // For some reason, the AI has different powersupply object. Delete this one, it's no longer needed.
 		qdel(src)
+	if(powered_ai.APU_power)
+		use_power = 0
+		return
 	if(!powered_ai.anchored)
 		loc = powered_ai.loc
 		use_power = 0
+		use_power(50000) // Less optimalised but only called if AI is unwrenched. This prevents usage of wrenching as method to keep AI operational without power. Intellicard is for that.
 	if(powered_ai.anchored)
 		use_power = 2
 
@@ -262,57 +287,11 @@ var/list/ai_verbs_default = list(
 	set name = "Set AI Core Display"
 	if(stat || aiRestorePowerRoutine)
 		return
-	if(!custom_sprite) //Check to see if custom sprite time, checking the appopriate file to change a var
-		var/file = file2text("config/custom_sprites.txt")
-		var/lines = text2list(file, "\n")
 
-		for(var/line in lines)
-		// split & clean up
-			var/list/Entry = text2list(line, ":")
-			for(var/i = 1 to Entry.len)
-				Entry[i] = trim(Entry[i])
-
-			if(Entry.len < 2)
-				continue;
-
-			if(Entry[1] == src.ckey && Entry[2] == src.real_name)
-				custom_sprite = 1 //They're in the list? Custom sprite time
-				icon = 'icons/mob/custom-synthetic.dmi'
-
-		//if(icon_state == initial(icon_state))
-	var/icontype = ""
-	if (custom_sprite == 1) icontype = ("Custom")//automagically selects custom sprite if one is available
-	else icontype = input("Select an icon!", "AI", null, null) in list("Monochrome", "Rainbow", "Blue", "Inverted", "Text", "Smiley", "Angry", "Dorf", "Matrix", "Bliss", "Firewall", "Green", "Red", "Static", "Triumvirate", "Triumvirate Static", "Soviet", "Trapped", "Heartline", "Chatterbox")
-	switch(icontype)
-		if("Custom") icon_state = "[src.ckey]-ai"
-		if("Rainbow") icon_state = "ai-clown"
-		if("Monochrome") icon_state = "ai-mono"
-		if("Inverted") icon_state = "ai-u"
-		if("Firewall") icon_state = "ai-magma"
-		if("Green") icon_state = "ai-wierd"
-		if("Red") icon_state = "ai-red"
-		if("Static") icon_state = "ai-static"
-		if("Text") icon_state = "ai-text"
-		if("Smiley") icon_state = "ai-smiley"
-		if("Matrix") icon_state = "ai-matrix"
-		if("Angry") icon_state = "ai-angryface"
-		if("Dorf") icon_state = "ai-dorf"
-		if("Bliss") icon_state = "ai-bliss"
-		if("Triumvirate") icon_state = "ai-triumvirate"
-		if("Triumvirate Static") icon_state = "ai-triumvirate-malf"
-		if("Soviet") icon_state = "ai-redoctober"
-		if("Trapped") icon_state = "ai-hades"
-		if("Heartline") icon_state = "ai-heartline"
-		if("Chatterbox") icon_state = "ai-president"
-		else icon_state = "ai"
-	//else
-			//usr <<"You can only change your display once!"
-			//return
-
-// displays the malf_ai information if the AI is the malf
-/mob/living/silicon/ai/show_malf_ai()
-	if(malf && malf.hacked_apcs.len >= 3)
-		stat(null, "Time until station control secured: [max(malf.hack_time/(malf.hacked_apcs/3), 0)] seconds")
+	if (!custom_sprite)
+		var/new_sprite = input("Select an icon!", "AI", selected_sprite) as null|anything in ai_icons
+		if(new_sprite) selected_sprite = new_sprite
+	updateicon()
 
 // this verb lets the ai see the stations manifest
 /mob/living/silicon/ai/proc/ai_roster()
@@ -413,11 +392,7 @@ var/list/ai_verbs_default = list(
 
 /mob/living/silicon/ai/emp_act(severity)
 	if (prob(30))
-		switch(pick(1,2))
-			if(1)
-				view_core()
-			if(2)
-				ai_call_shuttle()
+		view_core()
 	..()
 
 /mob/living/silicon/ai/Topic(href, href_list)
@@ -453,17 +428,6 @@ var/list/ai_verbs_default = list(
 			src << "\red System error. Cannot locate [html_decode(href_list["trackname"])]."
 		return
 
-	return
-
-/mob/living/silicon/ai/meteorhit(obj/O as obj)
-	for(var/mob/M in viewers(src, null))
-		M.show_message(text("\red [] has been hit by []", src, O), 1)
-		//Foreach goto(19)
-	if (health > 0)
-		adjustBruteLoss(30)
-		if ((O.icon_state == "flaming"))
-			adjustFireLoss(40)
-		updatehealth()
 	return
 
 /mob/living/silicon/ai/reset_view(atom/A)
@@ -537,13 +501,6 @@ var/list/ai_verbs_default = list(
 			break
 	src << "\blue Switched to [network] camera network."
 //End of code by Mord_Sith
-
-
-/mob/living/silicon/ai/proc/choose_modules()
-	set category = "Malfunction"
-	set name = "Choose Module"
-
-	malf_picker.use(src)
 
 /mob/living/silicon/ai/proc/ai_statuschange()
 	set category = "AI Commands"
@@ -688,21 +645,45 @@ var/list/ai_verbs_default = list(
 	set desc = "Augment visual feed with internal sensor overlays"
 	toggle_sensor_mode()
 
-/mob/living/silicon/ai/proc/check_unable(var/flags = 0)
+/mob/living/silicon/ai/proc/check_unable(var/flags = 0, var/feedback = 1)
 	if(stat == DEAD)
-		src << "<span class='warning'>You are dead!</span>"
+		if(feedback) src << "<span class='warning'>You are dead!</span>"
+		return 1
+
+	if(aiRestorePowerRoutine)
+		if(feedback) src << "<span class='warning'>You lack power!</span>"
 		return 1
 
 	if((flags & AI_CHECK_WIRELESS) && src.control_disabled)
-		src << "<span class='warning'>Wireless control is disabled!</span>"
+		if(feedback) src << "<span class='warning'>Wireless control is disabled!</span>"
 		return 1
 	if((flags & AI_CHECK_RADIO) && src.aiRadio.disabledAi)
-		src << "<span class='warning'>System Error - Transceiver Disabled!</span>"
+		if(feedback) src << "<span class='warning'>System Error - Transceiver Disabled!</span>"
 		return 1
 	return 0
 
 /mob/living/silicon/ai/proc/is_in_chassis()
 	return istype(loc, /turf)
+
+
+/mob/living/silicon/ai/ex_act(var/severity)
+	if(severity == 1.0)
+		qdel(src)
+		return
+	..()
+
+/mob/living/silicon/ai/updateicon()
+	if(!selected_sprite) selected_sprite = default_ai_icon
+
+	if(stat == DEAD)
+		icon_state = selected_sprite.dead_icon
+		set_light(3, 1, selected_sprite.dead_light)
+	else if(aiRestorePowerRoutine)
+		icon_state = selected_sprite.nopower_icon
+		set_light(1, 1, selected_sprite.nopower_light)
+	else
+		icon_state = selected_sprite.alive_icon
+		set_light(1, 1, selected_sprite.alive_light)
 
 #undef AI_CHECK_WIRELESS
 #undef AI_CHECK_RADIO

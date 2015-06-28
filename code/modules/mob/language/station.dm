@@ -41,18 +41,18 @@
 	colour = "tajaran"
 	key = "j"
 	flags = WHITELISTED
-	syllables = list("rr","rr","tajr","kir","raj","kii","mir","kra","ahk","nal","vah","khaz","jri","ran","darr", \
-	"mi","jri","dynh","manq","rhe","zar","rrhaz","kal","chur","eech","thaa","dra","jurl","mah","sanu","dra","ii'r", \
-	"ka","aasi","far","wa","baq","ara","qara","zir","sam","mak","hrar","nja","rir","khan","jun","dar","rik","kah", \
-	"hal","ket","jurl","mah","tul","cresh","azu","ragh", "mro", "mra")
+	syllables = list("mrr","rr","tajr","kir","raj","kii","mir","kra","ahk","nal","vah","khaz","jri","ran","darr",
+	"mi","jri","dynh","manq","rhe","zar","rrhaz","kal","chur","eech","thaa","dra","jurl","mah","sanu","dra","ii'r",
+	"ka","aasi","far","wa","baq","ara","qara","zir","sam","mak","hrar","nja","rir","khan","jun","dar","rik","kah",
+	"hal","ket","jurl","mah","tul","cresh","azu","ragh","mro","mra","mrro","mrra")
 
 /datum/language/tajaran/get_random_name(var/gender)
 
 	var/new_name = ..(gender,1)
-	if(prob(80))
-		new_name += " [pick(list("Hadii","Kaytam","Zhan-Khazan","Hharar","Njarir'Akhan"))]"
+	if(prob(50))
+		new_name += " [pick(list("Hadii","Kaytam","Nazkiin","Zhan-Khazan","Hharar","Njarir'Akhan","Faaira'Nrezi","Rhezar","Mi'dynh","Rrhazkal","Bayan","Al'Manq","Mi'jri","Chur'eech","Sanu'dra","Ii'rka"))]"
 	else
-		new_name += ..(gender,1)
+		new_name += " [..(gender,1)]"
 	return new_name
 
 /datum/language/skrell
@@ -93,6 +93,25 @@
 			return capitalize(pick(first_names_male)) + " " + capitalize(pick(last_names))
 	else
 		return ..()
+
+/datum/language/machine
+	name = "Encoded Audio Language"
+	desc = "A language of encoded tones that allow for IPCs to communicate auditorily between each other in a manner that allows for easier transfer of information."
+	speech_verb = "beeps"
+	ask_verb = "beeps"
+	exclaim_verb = "loudly beeps"
+	colour = "changeling"
+	key = "6"
+	flags = RESTRICTED | NO_STUTTER
+	syllables = list("beep","beep","beep","beep","beep","boop","boop","boop","bop","bop","dee","dee","doo","doo","hiss","hss","buzz","buzz","bzz","ksssh","keey","wurr","wahh","tzzz")
+	space_chance = 10
+
+/datum/language/machine/get_random_name()
+	if(prob(70))
+		name = "[pick(list("PBU","HIU","SINA","ARMA","OSI"))]-[rand(100, 999)]"
+	else
+		name = pick(ai_names)
+	return name
 
 //Syllable Lists
 /*

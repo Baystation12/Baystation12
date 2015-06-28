@@ -23,9 +23,9 @@
 	icon = 'icons/obj/assemblies.dmi'
 	icon_state = "mmi_empty"
 	w_class = 3
-	origin_tech = "biotech=3"
+	origin_tech = list(TECH_BIO = 3)
 
-	var/list/construction_cost = list("metal"=1000,"glass"=500)
+	var/list/construction_cost = list(DEFAULT_WALL_MATERIAL=1000,"glass"=500)
 	var/construction_time = 75
 	//these vars are so the mecha fabricator doesn't shit itself anymore. --NEO
 
@@ -35,6 +35,7 @@
 
 	var/locked = 0
 	var/mob/living/carbon/brain/brainmob = null//The current occupant.
+	var/obj/item/organ/brain/brainobj = null	//The current brain organ.
 	var/obj/mecha = null//This does not appear to be used outside of reference in mecha.dm.
 
 	attackby(var/obj/item/O as obj, var/mob/user as mob)
@@ -60,7 +61,8 @@
 			living_mob_list += brainmob
 
 			user.drop_item()
-			qdel(O)
+			brainobj = O
+			brainobj.loc = src
 
 			name = "Man-Machine Interface: [brainmob.real_name]"
 			icon_state = "mmi_full"
@@ -91,7 +93,13 @@
 			user << "\red You upend the MMI, but the brain is clamped into place."
 		else
 			user << "\blue You upend the MMI, spilling the brain onto the floor."
-			var/obj/item/organ/brain/brain = new(user.loc)
+			var/obj/item/organ/brain/brain
+			if (brainobj)	//Pull brain organ out of MMI.
+				brainobj.loc = user.loc
+				brain = brainobj
+				brainobj = null
+			else	//Or make a new one if empty.
+				brain = new(user.loc)
 			brainmob.container = null//Reset brainmob mmi var.
 			brainmob.loc = brain//Throw mob into brain.
 			living_mob_list -= brainmob//Get outta here
@@ -126,7 +134,7 @@
 /obj/item/device/mmi/radio_enabled
 	name = "radio-enabled man-machine interface"
 	desc = "The Warrior's bland acronym, MMI, obscures the true horror of this monstrosity. This one comes with a built-in radio."
-	origin_tech = "biotech=4"
+	origin_tech = list(TECH_BIO = 4)
 
 	var/obj/item/device/radio/radio = null//Let's give it a radio.
 

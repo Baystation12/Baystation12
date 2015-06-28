@@ -37,9 +37,9 @@
 	else if(istype(I, /obj/item/weapon/mop))
 		if(I.reagents.total_volume < I.reagents.maximum_volume)	//if it's not completely soaked we assume they want to wet it, otherwise store it
 			if(reagents.total_volume < 1)
-				user << "[src] is out of water!</span>"
+				user << "<span class='warning'>[src] is out of water!</span>"
 			else
-				reagents.trans_to(I, 5)	//
+				reagents.trans_to_obj(I, 5)	//
 				user << "<span class='notice'>You wet [I] in [src].</span>"
 				playsound(loc, 'sound/effects/slosh.ogg', 25, 1)
 				return
@@ -186,7 +186,7 @@
 /obj/structure/bed/chair/janicart/attackby(obj/item/I, mob/user)
 	if(istype(I, /obj/item/weapon/mop))
 		if(reagents.total_volume > 1)
-			reagents.trans_to(I, 2)
+			reagents.trans_to_obj(I, 2)
 			user << "<span class='notice'>You wet [I] in the [callme].</span>"
 			playsound(loc, 'sound/effects/slosh.ogg', 25, 1)
 		else

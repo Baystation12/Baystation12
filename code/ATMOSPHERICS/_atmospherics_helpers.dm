@@ -130,7 +130,7 @@
 	var/total_specific_power = 0		//the power required to remove one mole of filterable gas
 	for (var/g in filtering)
 		var/ratio = source.gas[g]/total_filterable_moles //this converts the specific power per mole of pure gas to specific power per mole of scrubbed gas
-		total_specific_power = specific_power_gas[g]*ratio
+		total_specific_power += specific_power_gas[g]*ratio
 
 	//Figure out how much of each gas to filter
 	if (isnull(total_transfer_moles))
@@ -427,10 +427,19 @@
 //If set, sink_volume_mod adjusts the effective output volume used in the calculation. This is useful when the output gas_mixture is
 //part of a pipenetwork, and so it's volume isn't representative of the actual volume since the gas will be shared across the pipenetwork when it processes.
 /proc/calculate_transfer_moles(datum/gas_mixture/source, datum/gas_mixture/sink, var/pressure_delta, var/sink_volume_mod=0)
-	//Make the approximation that the sink temperature is unchanged after transferring gas
-	var/air_temperature = (sink.temperature > 0)? sink.temperature : source.temperature
-	var/output_volume = (sink.volume * sink.group_multiplier) + sink_volume_mod
+	if(source.temperature == 0 || source.total_moles == 0) return 0
 
+	var/output_volume = (sink.volume * sink.group_multiplier) + sink_volume_mod
+	var/source_total_moles = source.total_moles * source.group_multiplier
+
+	var/air_temperature = source.temperature
+	if(sink.total_moles > 0 && sink.temperature > 0)
+		//estimate the final temperature of the sink after transfer
+		var/estimate_moles = pressure_delta*output_volume/(sink.temperature * R_IDEAL_GAS_EQUATION)
+		var/sink_heat_capacity = sink.heat_capacity()
+		var/transfer_heat_capacity = source.heat_capacity()*estimate_moles/source_total_moles
+		air_temperature = (sink.temperature*sink_heat_capacity  + source.temperature*transfer_heat_capacity) / (sink_heat_capacity + transfer_heat_capacity)
+	
 	//get the number of moles that would have to be transfered to bring sink to the target pressure
 	return pressure_delta*output_volume/(air_temperature * R_IDEAL_GAS_EQUATION)
 

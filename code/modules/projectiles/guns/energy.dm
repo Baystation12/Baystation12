@@ -13,8 +13,9 @@
 	firemode_type = /datum/firemode/energy
 
 	var/obj/item/weapon/cell/power_supply //What type of power cell this uses
-	var/charge_cost = 100 //How much energy is needed to fire.
-	var/cell_type = /obj/item/weapon/cell
+	var/charge_cost = 200 //How much energy is needed to fire.
+	var/max_shots = 10 //Determines the capacity of the weapon's power cell. Specifying a cell_type overrides this value.
+	var/cell_type = null
 	var/projectile_type = /obj/item/projectile/beam/practice
 	var/modifystate
 	var/charge_meter = 1	//if set, the icon state will be chosen based on the current charge
@@ -35,7 +36,6 @@
 		fire_sound = isnull(current_mode.fire_sound)? initial(fire_sound) : current_mode.fire_sound
 
 		update_icon()
-		update_held_icon()
 
 /obj/item/weapon/gun/energy/emp_act(severity)
 	..()
@@ -45,7 +45,8 @@
 	..()
 	if(cell_type)
 		power_supply = new cell_type(src)
-		power_supply.give(power_supply.maxcharge)
+	else
+		power_supply = new /obj/item/weapon/cell/device/variable(src, max_shots*charge_cost)
 	if(self_recharge)
 		processing_objects.Add(src)
 	update_icon()
@@ -76,7 +77,7 @@
 /obj/item/weapon/gun/energy/consume_next_projectile()
 	if(!power_supply) return null
 	if(!ispath(projectile_type)) return null
-	if(!power_supply.use(charge_cost)) return null
+	if(!power_supply.checked_use(charge_cost)) return null
 	return new projectile_type(src)
 
 /obj/item/weapon/gun/energy/proc/get_external_power_supply()
@@ -113,4 +114,4 @@
 			icon_state = "[modifystate][ratio]"
 		else
 			icon_state = "[initial(icon_state)][ratio]"
-
+	update_held_icon()

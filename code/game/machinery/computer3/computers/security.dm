@@ -58,7 +58,7 @@
 			return
 
 		if (computer.z > 6)
-			usr << "\red <b>Unable to establish a connection</b>: \black You're too far away from the station!"
+			usr << "<span class='danger'>Unable to establish a connection:</span> You're too far away from the station!"
 			return
 		var/dat
 

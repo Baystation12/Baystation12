@@ -59,7 +59,7 @@
 		if(src)//Do not add to this if() statement, otherwise the meteor won't delete them
 			if(A)
 
-				A.meteorhit(src)
+				A.ex_act(2)
 				playsound(src.loc, 'sound/effects/meteorimpact.ogg', 40, 1)
 
 				for(var/mob/M in range(10, src))
@@ -150,3 +150,12 @@
 	spawn
 		qdel(src)
 	return
+
+/obj/item/projectile/chameleon
+	name = "bullet"
+	icon_state = "bullet"
+	damage = 1 // stop trying to murderbone with a fake gun dumbass!!!
+	embed = 0 // nope
+	nodamage = 1
+	damage_type = HALLOSS
+	muzzle_type = /obj/effect/projectile/bullet/muzzle

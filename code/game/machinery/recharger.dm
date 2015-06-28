@@ -13,6 +13,7 @@ obj/machinery/recharger
 	var/icon_state_charged = "recharger2"
 	var/icon_state_charging = "recharger1"
 	var/icon_state_idle = "recharger0" //also when unpowered
+	var/portable = 1
 
 obj/machinery/recharger/attackby(obj/item/weapon/G as obj, mob/user as mob)
 	if(istype(user,/mob/living/silicon))
@@ -24,12 +25,12 @@ obj/machinery/recharger/attackby(obj/item/weapon/G as obj, mob/user as mob)
 
 	if(allowed)
 		if(charging)
-			user << "\red \A [charging] is already charging here."
+			user << "<span class='warning'>\A [charging] is already charging here.</span>"
 			return
 		// Checks to make sure he's not in space doing it, and that the area got proper power.
 		var/area/a = get_area(src)
 		if(!isarea(a) || (a.power_equip == 0 && !a.unlimited_power))
-			user << "\red The [name] blinks red as you try to insert the item!"
+			user << "<span class='warning'>The [name] blinks red as you try to insert the item!</span>"
 			return
 		if (istype(G, /obj/item/weapon/gun/energy/gun/nuclear) || istype(G, /obj/item/weapon/gun/energy/crossbow))
 			user << "<span class='notice'>Your gun's recharge port was removed to make room for a miniaturized reactor.</span>"
@@ -45,9 +46,9 @@ obj/machinery/recharger/attackby(obj/item/weapon/G as obj, mob/user as mob)
 		G.loc = src
 		charging = G
 		update_icon()
-	else if(istype(G, /obj/item/weapon/wrench))
+	else if(portable && istype(G, /obj/item/weapon/wrench))
 		if(charging)
-			user << "\red Remove [charging] first!"
+			user << "<span class='warning'>Remove [charging] first!</span>"
 			return
 		anchored = !anchored
 		user << "You [anchored ? "attached" : "detached"] the recharger."
@@ -155,3 +156,4 @@ obj/machinery/recharger/wallcharger
 	icon_state_charged = "wrecharger2"
 	icon_state_charging = "wrecharger1"
 	icon_state_idle = "wrecharger0"
+	portable = 0

@@ -475,7 +475,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 	w_class = 2.0
 	throw_speed = 2
 	throw_range = 5
-	matter = list("metal" = 50, "glass" = 20)
+	matter = list(DEFAULT_WALL_MATERIAL = 50, "glass" = 20)
 	flags = CONDUCT
 	slot_flags = SLOT_BELT
 	item_state = "coil"
@@ -512,24 +512,25 @@ obj/structure/cable/proc/cableColor(var/colorC)
 ///////////////////////////////////
 
 //you can use wires to heal robotics
-/obj/item/stack/cable_coil/attack(mob/M as mob, mob/user as mob)
-	if(istype(M,/mob/living/carbon/human))
+/obj/item/stack/cable_coil/afterattack(var/mob/M, var/mob/user)
+
+	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
-		var/obj/item/organ/external/S = H.get_organ(user.zone_sel.selecting)
-		if(!(S.status & ORGAN_ROBOT) || user.a_intent != "help")
+		var/obj/item/organ/external/S = H.organs_by_name[user.zone_sel.selecting]
+
+		if (!S) return
+		if(!(S.status & ORGAN_ROBOT) || user.a_intent != I_HELP)
 			return ..()
 
-		if(H.species.flags & IS_SYNTHETIC)
-			if(M == user)
-				user << "\red You can't repair damage to your own body - it's against OH&S."
-				return
-
-		if(S.burn_dam > 0 && use(1))
-			S.heal_damage(0,15,0,1)
-			user.visible_message("\red \The [user] repairs some burn damage on \the [M]'s [S.name] with \the [src].")
-			return
-		else
-			user << "Nothing to fix!"
+		if(S.burn_dam)
+			if(S.burn_dam < ROBOLIMB_SELF_REPAIR_CAP)
+				S.heal_damage(0,15,0,1)
+				user.visible_message("<span class='danger'>\The [user] repairs some burn damage on \the [M]'s [S.name] with \the [src].</span>")
+			else if(S.open != 2)
+				user << "<span class='danger'>The damage is far too severe to patch over externally.</span>"
+			return 1
+		else if(S.open != 2)
+			user << "<span class='notice'>Nothing to fix!</span>"
 
 	else
 		return ..()
@@ -612,6 +613,12 @@ obj/structure/cable/proc/cableColor(var/colorC)
 // Items usable on a cable coil :
 //   - Wirecutters : cut them duh !
 //   - Cable coil : merge cables
+/obj/item/stack/cable_coil/proc/can_merge(var/obj/item/stack/cable_coil/C)
+	return color == C.color
+
+/obj/item/stack/cable_coil/cyborg/can_merge()
+	return 1
+
 /obj/item/stack/cable_coil/attackby(obj/item/weapon/W, mob/user)
 	..()
 	if( istype(W, /obj/item/weapon/wirecutters) && src.get_amount() > 1)
@@ -622,6 +629,11 @@ obj/structure/cable/proc/cableColor(var/colorC)
 		return
 	else if(istype(W, /obj/item/stack/cable_coil))
 		var/obj/item/stack/cable_coil/C = W
+
+		if(!can_merge(C))
+			user << "These coils do not go together."
+			return
+
 		if(C.get_amount() >= get_max_amount())
 			user << "The coil is too long, you cannot add any more cable to it."
 			return

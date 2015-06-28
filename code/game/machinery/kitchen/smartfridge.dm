@@ -136,6 +136,7 @@
 
 /obj/machinery/smartfridge/drying_rack/proc/dry()
 	for(var/obj/item/weapon/reagent_containers/food/snacks/S in contents)
+		if(S.dry) continue
 		if(S.dried_type == S.type)
 			S.dry = 1
 			item_quants[S.name]--
@@ -204,7 +205,7 @@
 				item_quants[O.name]++
 			else
 				item_quants[O.name] = 1
-			user.visible_message("<span class='notice'>[user] has added \the [O] to \the [src].", "<span class='notice'>You add \the [O] to \the [src].")
+			user.visible_message("<span class='notice'>[user] has added \the [O] to \the [src].</span>", "<span class='notice'>You add \the [O] to \the [src].</span>")
 
 			nanomanager.update_uis(src)
 
@@ -235,14 +236,12 @@
 		user << "<span class='notice'>\The [src] smartly refuses [O].</span>"
 		return 1
 
-/obj/machinery/smartfridge/secure/attackby(var/obj/item/O as obj, var/mob/user as mob)
-	if(istype(O, /obj/item/weapon/card/emag))
+/obj/machinery/smartfridge/secure/emag_act(var/remaining_charges, var/mob/user)
+	if(!emagged)
 		emagged = 1
 		locked = -1
 		user << "You short out the product lock on [src]."
-		return
-
-	..()
+		return 1
 
 /obj/machinery/smartfridge/attack_ai(mob/user as mob)
 	attack_hand(user)
@@ -338,7 +337,7 @@
 		return 0
 	spawn(0)
 		throw_item.throw_at(target,16,3,src)
-	src.visible_message("\red <b>[src] launches [throw_item.name] at [target.name]!</b>")
+	src.visible_message("<span class='warning'>[src] launches [throw_item.name] at [target.name]!</span>")
 	return 1
 
 /************************

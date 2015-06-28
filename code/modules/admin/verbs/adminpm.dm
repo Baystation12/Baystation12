@@ -108,6 +108,7 @@
 		C << 'sound/effects/adminhelp.ogg'
 
 	log_admin("PM: [key_name(src)]->[key_name(C)]: [msg]")
+	send2adminirc("Reply: [key_name(src)]->[key_name(C)]: [html_decode(msg)]")
 
 	//we don't use message_admins here because the sender/receiver might get it too
 	for(var/client/X in admins)
@@ -136,7 +137,7 @@
 
 	send2adminirc("PlayerPM from [key_name(src)]: [html_decode(msg)]")
 
-	src << "<span class='pm'><span class='out'>" + create_text_tag("pm_out_alt", "", src) + " to <span class='name'Admin IRC</span>: <span class='message'>[msg]</span></span></span>"
+	src << "<span class='pm'><span class='out'>" + create_text_tag("pm_out_alt", "", src) + " to <span class='name'>Admin IRC</span>: <span class='message'>[msg]</span></span></span>"
 
 	log_admin("PM: [key_name(src)]->IRC: [msg]")
 	for(var/client/X in admins)

@@ -70,8 +70,8 @@ LOG_PDA
 ## sql switching
 # SQL_ENABLED
 
-## disconnect players who did nothing during 10 minutes
-# KICK_INACTIVE
+## disconnect players who did nothing during the set amount of minutes
+# KICK_INACTIVE 10
 
 ## Use Mentors instead of Moderators.  Mentors are designed with the idea that
 ###they help in pushing new people to be better at roleplay.  If you uncomment
@@ -102,6 +102,9 @@ TRAITOR_SCALING
 
 ## make ERT's be only called by admins
 #ERT_ADMIN_ONLY
+
+## If uncommented, votes can be called to add extra antags to the round.
+#ALLOW_EXTRA_ANTAGS
 
 ## If security is prohibited from being most antagonists
 #PROTECT_ROLES_FROM_ANTAGONIST
@@ -171,11 +174,18 @@ GUEST_BAN
 ## set a server location for world reboot. Don't include the byond://, just give the address and port.
 #SERVER server.net:port
 
+## set a server URL for the IRC bot to use; like SERVER, don't include the byond://
+## Unlike SERVER, this one shouldn't break auto-reconnect
+#SERVERURL server.net:port
+
 ## forum address
 # FORUMURL http://example.com
 
 ## Wiki address
 # WIKIURL http://example.com
+
+## GitHub address
+# GITHUBURL https://github.com/example-user/example-repository
 
 ## Ban appeals URL - usually for a forum or wherever people should go to contact your admins.
 # BANAPPEALS http://example.com
@@ -234,6 +244,9 @@ USEALIENWHITELIST
 
 ## Uncomment to enable sending data to the IRC bot.
 #USE_IRC_BOT
+
+## Uncomment if the IRC bot requires using world.Export() instead of nudge.py/libnudge
+#IRC_BOT_EXPORT
 
 ## Host where the IRC bot is hosted.  Port 45678 needs to be open.
 #IRC_BOT_HOST localhost

@@ -1,16 +1,10 @@
-/mob/living/carbon/alien/diona/attack_hand(mob/living/carbon/human/M as mob)
-
-	if(istype(M))
-		//Let people pick the little buggers up.
-		if(M.a_intent == I_HELP)
-			if(M.species && M.species.name == "Diona")
-				M << "You feel your being twine with that of [src] as it merges with your biomass."
-				src << "You feel your being twine with that of [M] as you merge with its biomass."
-				src.verbs += /mob/living/carbon/alien/diona/proc/split
-				src.verbs -= /mob/living/carbon/alien/diona/proc/merge
-				src.loc = M
-			else
-				get_scooped(M)
+/mob/living/carbon/alien/diona/MouseDrop(atom/over_object)
+	var/mob/living/carbon/H = over_object
+	if(!istype(H) || !Adjacent(H)) return ..()
+	if(H.a_intent == "help")
+		if(H.species && H.species.name == "Diona" && do_merge(H))
 			return
-
-	..()
+		get_scooped(H)
+		return
+	else
+		return ..()

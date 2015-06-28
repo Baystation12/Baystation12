@@ -68,6 +68,7 @@
 			visible_message("\red \b [src] has been attacked with the [O] by [user]. ")
 		else
 			visible_message("\red \b [src] blocks the [O] with its shield! ")
+		//user.do_attack_animation(src)
 	else
 		usr << "\red This weapon is ineffective, it does no damage."
 		visible_message("\red [user] gently taps [src] with the [O]. ")
@@ -107,7 +108,7 @@
 	icon_state = "syndicateranged"
 	icon_living = "syndicateranged"
 	casingtype = /obj/item/ammo_casing/a12mm
-	projectilesound = 'sound/weapons/Gunshot_smg.ogg'
+	projectilesound = 'sound/weapons/Gunshot_light.ogg'
 	projectiletype = /obj/item/projectile/bullet/pistol/medium
 
 	weapon1 = /obj/item/weapon/gun/projectile/automatic/c20r

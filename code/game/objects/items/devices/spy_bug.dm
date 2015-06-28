@@ -9,11 +9,12 @@
 	flags = CONDUCT
 	force = 5.0
 	w_class = 1.0
+	slot_flags = SLOT_EARS
 	throwforce = 5.0
 	throw_range = 15
 	throw_speed = 3
 
-	origin_tech = "programming=1;engineering=1;syndicate=3"
+	origin_tech = list(TECH_DATA = 1, TECH_ENGINERING = 1, TECH_ILLEGAL = 3)
 
 	var/obj/item/device/radio/spy/radio
 	var/obj/machinery/camera/spy/camera
@@ -52,7 +53,7 @@
 
 	w_class = 2.0
 
-	origin_tech = "programming=1;engineering=1;syndicate=3"
+	origin_tech = list(TECH_DATA = 1, TECH_ENGINERING = 1, TECH_ILLEGAL = 3)
 
 	var/operating = 0
 	var/obj/item/device/radio/spy/radio

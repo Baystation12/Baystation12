@@ -17,7 +17,7 @@
 	if(blocked < 2 && isliving(target))
 		var/mob/living/L = target
 		if(L.can_inject(target_zone=def_zone))
-			reagents.trans_to(L, reagent_amount)
+			reagents.trans_to_mob(L, reagent_amount, CHEM_BLOOD)
 
 /obj/item/ammo_casing/chemdart
 	name = "chemical dart"
@@ -34,7 +34,7 @@
 	desc = "A rack of hollow darts."
 	icon_state = "darts"
 	item_state = "rcdammo"
-	origin_tech = "materials=2"
+	origin_tech = list(TECH_MATERIAL = 2)
 	mag_type = MAGAZINE
 	caliber = "dart"
 	ammo_type = /obj/item/ammo_casing/chemdart
@@ -125,7 +125,7 @@
 	if(mixing.len)
 		var/mix_amount = dart.reagent_amount/mixing.len
 		for(var/obj/item/weapon/reagent_containers/glass/beaker/B in mixing)
-			B.reagents.trans_to(dart, mix_amount)
+			B.reagents.trans_to_obj(dart, mix_amount)
 
 /obj/item/weapon/gun/projectile/dartgun/attack_self(mob/user)
 	user.set_machine(src)

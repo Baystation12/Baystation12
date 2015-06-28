@@ -102,10 +102,7 @@
 			continue
 		var/celsius = convert_k2c(tile_info[index][1])
 		var/pressure = tile_info[index][2]
-		if(dir_alerts[index] & (FIREDOOR_ALERT_HOT|FIREDOOR_ALERT_COLD))
-			o += "<span class='warning'>"
-		else
-			o += "<span style='color:blue'>"
+		o += "<span class='[(dir_alerts[index] & (FIREDOOR_ALERT_HOT|FIREDOOR_ALERT_COLD)) ? "warning" : "color:blue"]'>"
 		o += "[celsius]&deg;C</span> "
 		o += "<span style='color:blue'>"
 		o += "[pressure]kPa</span></li>"
@@ -238,7 +235,7 @@
 		user << "<span class='danger'>\The [src] is welded shut!</span>"
 		return
 
-	if(istype(C, /obj/item/weapon/crowbar) || istype(C,/obj/item/weapon/twohanded/fireaxe))
+	if(istype(C, /obj/item/weapon/crowbar) || istype(C,/obj/item/weapon/material/twohanded/fireaxe))
 		if(operating)
 			return
 
@@ -248,8 +245,8 @@
 			"You hear someone struggle and metal straining.")
 			return
 
-		if(istype(C,/obj/item/weapon/twohanded/fireaxe))
-			var/obj/item/weapon/twohanded/fireaxe/F = C
+		if(istype(C,/obj/item/weapon/material/twohanded/fireaxe))
+			var/obj/item/weapon/material/twohanded/fireaxe/F = C
 			if(!F.wielded)
 				return
 

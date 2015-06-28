@@ -20,7 +20,7 @@
 	attacktext = "punched"
 	a_intent = I_HURT
 	var/corpse = /obj/effect/landmark/mobcorpse/russian
-	var/weapon1 = /obj/item/weapon/kitchenknife
+	var/weapon1 = /obj/item/weapon/material/knife
 	min_oxy = 5
 	max_oxy = 0
 	min_tox = 0

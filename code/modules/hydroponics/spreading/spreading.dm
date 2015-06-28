@@ -7,7 +7,7 @@
 		for(var/areapath in typesof(/area/hallway))
 			var/area/A = locate(areapath)
 			for(var/turf/simulated/floor/F in A.contents)
-				if(!F.contents.len)
+				if(turf_clear(F))
 					turfs += F
 
 		if(turfs.len) //Pick a turf to spawn at if we can
@@ -16,14 +16,16 @@
 			seed.set_trait(TRAIT_SPREAD,2)             // So it will function properly as vines.
 			seed.set_trait(TRAIT_POTENCY,rand(potency_min, potency_max)) // 70-100 potency will help guarantee a wide spread and powerful effects.
 			seed.set_trait(TRAIT_MATURATION,rand(maturation_min, maturation_max))
-			
+
 			//make vine zero start off fully matured
 			var/obj/effect/plant/vine = new(T,seed)
 			vine.health = vine.max_health
 			vine.mature_time = 0
 			vine.process()
-			
+
 			message_admins("<span class='notice'>Event: Spacevines spawned at [T.loc] ([T.x],[T.y],[T.z])</span>")
+			return
+		message_admins("<span class='notice'>Event: Spacevines failed to find a viable turf.</span>")
 
 /obj/effect/dead_plant
 	anchored = 1
@@ -49,13 +51,14 @@
 	icon_state = "bush4-1"
 	layer = 3
 	pass_flags = PASSTABLE
+	mouse_opacity = 2
 
 	var/health = 10
 	var/max_health = 100
 	var/growth_threshold = 0
 	var/growth_type = 0
 	var/max_growth = 0
-
+	var/sampled
 	var/list/neighbors = list()
 	var/obj/effect/plant/parent
 	var/datum/seed/seed
@@ -193,16 +196,19 @@
 		layer = 3
 		density = 0
 
-/obj/effect/plant/proc/calc_dir(turf/location = loc)
+/obj/effect/plant/proc/calc_dir()
 	set background = 1
+	var/turf/T = get_turf(src)
+	if(!istype(T)) return
+
 	var/direction = 16
 
 	for(var/wallDir in cardinal)
-		var/turf/newTurf = get_step(location,wallDir)
+		var/turf/newTurf = get_step(T,wallDir)
 		if(newTurf.density)
 			direction |= wallDir
 
-	for(var/obj/effect/plant/shroom in location)
+	for(var/obj/effect/plant/shroom in T.contents)
 		if(shroom == src)
 			continue
 		if(shroom.floor) //special
@@ -232,8 +238,13 @@
 
 	if(istype(W, /obj/item/weapon/wirecutters) || istype(W, /obj/item/weapon/scalpel))
 		if(!seed)
-			user << "There is nothing to take a sample from."
+			user << "<span class='danger'>There is nothing to take a sample from.</span>"
 			return
+		if(sampled)
+			user << "<span class='danger'>You cannot take another sample from \the [src].</span>"
+			return
+		if(prob(70))
+			sampled = 1
 		seed.harvest(user,0,1)
 		health -= (rand(3,5)*10)
 	else

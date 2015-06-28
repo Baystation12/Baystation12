@@ -513,9 +513,9 @@ datum/objective/steal
 		"diamond drill" = /obj/item/weapon/pickaxe/diamonddrill,
 		"bag of holding" = /obj/item/weapon/storage/backpack/holding,
 		"hyper-capacity cell" = /obj/item/weapon/cell/hyper,
-		"10 diamonds" = /obj/item/stack/sheet/mineral/diamond,
-		"50 gold bars" = /obj/item/stack/sheet/mineral/gold,
-		"25 refined uranium bars" = /obj/item/stack/sheet/mineral/uranium,
+		"10 diamonds" = /obj/item/stack/material/diamond,
+		"50 gold bars" = /obj/item/stack/material/gold,
+		"25 refined uranium bars" = /obj/item/stack/material/uranium,
 	)
 
 
@@ -798,7 +798,7 @@ datum/objective/heist/salvage
 	choose_target()
 		switch(rand(1,8))
 			if(1)
-				target = "metal"
+				target = DEFAULT_WALL_MATERIAL
 				target_amount = 300
 			if(2)
 				target = "glass"
@@ -830,13 +830,13 @@ datum/objective/heist/salvage
 
 		for(var/obj/item/O in locate(/area/shuttle/skipjack/station))
 
-			var/obj/item/stack/sheet/S
-			if(istype(O,/obj/item/stack/sheet))
+			var/obj/item/stack/material/S
+			if(istype(O,/obj/item/stack/material))
 				if(O.name == target)
 					S = O
 					total_amount += S.get_amount()
 			for(var/obj/I in O.contents)
-				if(istype(I,/obj/item/stack/sheet))
+				if(istype(I,/obj/item/stack/material))
 					if(I.name == target)
 						S = I
 						total_amount += S.get_amount()
@@ -844,9 +844,9 @@ datum/objective/heist/salvage
 		for(var/datum/mind/raider in raiders.current_antagonists)
 			if(raider.current)
 				for(var/obj/item/O in raider.current.get_contents())
-					if(istype(O,/obj/item/stack/sheet))
+					if(istype(O,/obj/item/stack/material))
 						if(O.name == target)
-							var/obj/item/stack/sheet/S = O
+							var/obj/item/stack/material/S = O
 							total_amount += S.get_amount()
 
 		if(total_amount >= target_amount) return 1

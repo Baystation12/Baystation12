@@ -103,8 +103,7 @@
 	update_icons()
 	if(do_mob(src, H, 30))
 		if(t == 1)
-			reagent_glass.reagents.trans_to(H, injection_amount)
-			reagent_glass.reagents.reaction(H, 2)
+			reagent_glass.reagents.trans_to_mob(H, injection_amount, CHEM_BLOOD)
 		else
 			H.reagents.add_reagent(t, injection_amount)
 		visible_message("<span class='warning'>[src] injects [H] with the syringe!</span>")
@@ -220,8 +219,8 @@
 	attack_hand(usr)
 	return
 
-/mob/living/bot/medbot/Emag(var/mob/user)
-	..()
+/mob/living/bot/medbot/emag_act(var/remaining_uses, var/mob/user)
+	. = ..()
 	if(!emagged)
 		if(user)
 			user << "<span class='warning'>You short out [src]'s reagent synthesis circuits.</span>"
@@ -232,6 +231,7 @@
 		emagged = 1
 		on = 1
 		update_icons()
+		. = 1
 	ignored |= user
 
 /mob/living/bot/medbot/explode()

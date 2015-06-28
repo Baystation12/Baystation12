@@ -137,10 +137,9 @@
 
 	proc/AttemptToEat(var/atom/target)
 		if(istype(target,/turf/simulated/wall))
-			if((!istype(target,/turf/simulated/wall/r_wall) && eatingDuration >= 100) || eatingDuration >= 200) //need 20 ticks to eat an rwall, 10 for a regular one
-				var/turf/simulated/wall/wall = target
-				wall.ChangeTurf(/turf/simulated/floor)
-				new /obj/item/stack/sheet/metal(src, flatPlasmaValue)
+			var/turf/simulated/wall/W = target
+			if((!W.reinf_material && eatingDuration >= 100) || eatingDuration >= 200) //need 20 ticks to eat an rwall, 10 for a regular one
+				W.dismantle_wall()
 				return 1
 		else if(istype(target,/atom/movable))
 			if(istype(target,/mob) || eatingDuration >= 50) //5 ticks to eat stuff like airlocks
@@ -176,18 +175,18 @@
 		for(var/atom/movable/stomachContent in contents)
 			if(prob(digestionProbability))
 				if(istype(stomachContent,/obj/item/stack)) //converts to plasma, keeping the stack value
-					if(!istype(stomachContent,/obj/item/stack/sheet/mineral/phoron))
+					if(!istype(stomachContent,/obj/item/stack/material/phoron))
 						var/obj/item/stack/oldStack = stomachContent
-						new /obj/item/stack/sheet/mineral/phoron(src, oldStack.get_amount())
+						new /obj/item/stack/material/phoron(src, oldStack.get_amount())
 						qdel(oldStack)
 						continue
 				else if(istype(stomachContent,/obj/item)) //converts to plasma, keeping the w_class
 					var/obj/item/oldItem = stomachContent
-					new /obj/item/stack/sheet/mineral/phoron(src, oldItem.w_class)
+					new /obj/item/stack/material/phoron(src, oldItem.w_class)
 					qdel(oldItem)
 					continue
 				else
-					new /obj/item/stack/sheet/mineral/phoron(src, flatPlasmaValue) //just flat amount
+					new /obj/item/stack/material/phoron(src, flatPlasmaValue) //just flat amount
 					qdel(stomachContent)
 					continue
 

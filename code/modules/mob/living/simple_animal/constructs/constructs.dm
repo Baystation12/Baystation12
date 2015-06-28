@@ -240,11 +240,12 @@
 ////////////////Glow//////////////////
 /mob/living/simple_animal/construct/proc/add_glow()
 	overlays = 0
-	var/overlay_layer = 11
+	var/overlay_layer = LIGHTING_LAYER+0.1
 	if(layer != MOB_LAYER)
 		overlay_layer=TURF_LAYER+0.2
 
 	overlays += image(icon,"glow-[icon_state]",overlay_layer)
+	set_light(2, -2, l_color = "#FFFFFF")
 
 ////////////////HUD//////////////////////
 

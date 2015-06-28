@@ -61,6 +61,16 @@
 	use_power = 1
 	icon_state = "map_vent_in"
 
+/obj/machinery/atmospherics/unary/vent_pump/siphon/on/atmos
+	use_power = 1
+	icon_state = "map_vent_in"
+	external_pressure_bound = 0
+	external_pressure_bound_default = 0
+	internal_pressure_bound = 2000
+	internal_pressure_bound_default = 2000
+	pressure_checks = 2
+	pressure_checks_default = 2
+
 /obj/machinery/atmospherics/unary/vent_pump/New()
 	..()
 	air_contents.volume = ATMOS_DEFAULT_VOLUME_PUMP
@@ -71,6 +81,10 @@
 	if (!id_tag)
 		assign_uid()
 		id_tag = num2text(uid)
+
+/obj/machinery/atmospherics/unary/vent_pump/Destroy()
+	unregister_radio(src, frequency)
+	..()
 
 /obj/machinery/atmospherics/unary/vent_pump/high_volume
 	name = "Large Air Vent"
@@ -209,14 +223,6 @@
 
 	return pressure_delta
 
-//Radio remote control
-
-/obj/machinery/atmospherics/unary/vent_pump/proc/set_frequency(new_frequency)
-	radio_controller.remove_object(src, frequency)
-	frequency = new_frequency
-	if(frequency)
-		radio_connection = radio_controller.add_object(src, frequency,radio_filter_in)
-
 /obj/machinery/atmospherics/unary/vent_pump/proc/broadcast_status()
 	if(!radio_connection)
 		return 0
@@ -258,7 +264,7 @@
 	radio_filter_in = frequency==1439?(RADIO_FROM_AIRALARM):null
 	radio_filter_out = frequency==1439?(RADIO_TO_AIRALARM):null
 	if(frequency)
-		set_frequency(frequency)
+		radio_connection = register_radio(src, frequency, frequency, radio_filter_in)
 		src.broadcast_status()
 
 /obj/machinery/atmospherics/unary/vent_pump/receive_signal(datum/signal/signal)
@@ -352,22 +358,22 @@
 	if(istype(W, /obj/item/weapon/weldingtool))
 		var/obj/item/weapon/weldingtool/WT = W
 		if (WT.remove_fuel(0,user))
-			user << "\blue Now welding the vent."
+			user << "<span class='notice'>Now welding the vent.</span>"
 			if(do_after(user, 20))
 				if(!src || !WT.isOn()) return
 				playsound(src.loc, 'sound/items/Welder2.ogg', 50, 1)
 				if(!welded)
-					user.visible_message("[user] welds the vent shut.", "You weld the vent shut.", "You hear welding.")
+					user.visible_message("<span class='notice'>\The [user] welds the vent shut.</span>", "<span class='notice'>You weld the vent shut.</span>", "You hear welding.")
 					welded = 1
 					update_icon()
 				else
-					user.visible_message("[user] unwelds the vent.", "You unweld the vent.", "You hear welding.")
+					user.visible_message("<span class='notice'>[user] unwelds the vent.</span>", "<span class='notice'>You unweld the vent.</span>", "You hear welding.")
 					welded = 0
 					update_icon()
 			else
-				user << "\blue The welding tool needs to be on to start this task."
+				user << "<span class='notice'>The welding tool needs to be on to start this task.</span>"
 		else
-			user << "\blue You need more welding fuel to complete this task."
+			user << "<span class='warning'>You need more welding fuel to complete this task.</span>"
 			return 1
 	else
 		..()
@@ -390,25 +396,25 @@
 	if (!istype(W, /obj/item/weapon/wrench))
 		return ..()
 	if (!(stat & NOPOWER) && use_power)
-		user << "\red You cannot unwrench this [src], turn it off first."
+		user << "<span class='warning'>You cannot unwrench \the [src], turn it off first.</span>"
 		return 1
 	var/turf/T = src.loc
 	if (node && node.level==1 && isturf(T) && T.intact)
-		user << "\red You must remove the plating first."
+		user << "<span class='warning'>You must remove the plating first.</span>"
 		return 1
 	var/datum/gas_mixture/int_air = return_air()
 	var/datum/gas_mixture/env_air = loc.return_air()
 	if ((int_air.return_pressure()-env_air.return_pressure()) > 2*ONE_ATMOSPHERE)
-		user << "\red You cannot unwrench this [src], it too exerted due to internal pressure."
+		user << "<span class='warning'>You cannot unwrench \the [src], it is too exerted due to internal pressure.</span>"
 		add_fingerprint(user)
 		return 1
 	playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-	user << "\blue You begin to unfasten \the [src]..."
+	user << "<span class='notice'>You begin to unfasten \the [src]...</span>"
 	if (do_after(user, 40))
 		user.visible_message( \
-			"[user] unfastens \the [src].", \
-			"\blue You have unfastened \the [src].", \
-			"You hear ratchet.")
+			"<span class='notice'>\The [user] unfastens \the [src].</span>", \
+			"<span class='notice'>You have unfastened \the [src].</span>", \
+			"You hear a ratchet.")
 		new /obj/item/pipe(loc, make_from=src)
 		qdel(src)
 

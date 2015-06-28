@@ -124,7 +124,7 @@ var/global/photo_count = 0
 	w_class = 2.0
 	flags = CONDUCT
 	slot_flags = SLOT_BELT
-	matter = list("metal" = 2000)
+	matter = list(DEFAULT_WALL_MATERIAL = 2000)
 	var/pictures_max = 10
 	var/pictures_left = 10
 	var/on = 1

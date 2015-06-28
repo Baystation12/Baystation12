@@ -8,7 +8,7 @@
 
 	//luminosity = 5
 	//l_color="#0066FF"
-	layer = 11
+	layer = LIGHTING_LAYER+1
 
 	var/spawned=0 // DIR mask
 	var/next_check=0
@@ -23,7 +23,7 @@
 	processing_turfs.Remove(src)
 	..()
 
-/turf/unsimulated/wall/supermatter/proc/process()
+/turf/unsimulated/wall/supermatter/process()
 	// Only check infrequently.
 	if(next_check>world.time) return
 
@@ -50,10 +50,10 @@
 				if(A)
 					if(istype(A,/mob/living))
 						qdel(A)
-						continue
 					else if(istype(A,/mob)) // Observers, AI cameras.
 						continue
-					qdel(A)
+					else
+						qdel(A)
 			T.ChangeTurf(type)
 
 	if((spawned & (NORTH|SOUTH|EAST|WEST)) == (NORTH|SOUTH|EAST|WEST))

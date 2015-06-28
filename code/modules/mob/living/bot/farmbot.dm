@@ -64,13 +64,15 @@
 	onclose(user, "autofarm")
 	return
 
-/mob/living/bot/farmbot/Emag(var/mob/user)
-	..()
-	if(user)
-		user << "<span class='notice'>You short out [src]'s plant identifier circuits.</span>"
-	spawn(rand(30, 50))
-		visible_message("<span class='warning'>[src] buzzes oddly.</span>")
-		emagged = 1
+/mob/living/bot/farmbot/emag_act(var/remaining_charges, var/mob/user)
+	. = ..()
+	if(!emagged)
+		if(user)
+			user << "<span class='notice'>You short out [src]'s plant identifier circuits.</span>"
+		spawn(rand(30, 50))
+			visible_message("<span class='warning'>[src] buzzes oddly.</span>")
+			emagged = 1
+		return 1
 
 /mob/living/bot/farmbot/Topic(href, href_list)
 	if(..())
@@ -228,6 +230,7 @@
 		switch(action)
 			if("weed")
 				flick("farmbot_hoe", src)
+				do_attack_animation(A)
 				if(prob(50))
 					visible_message("<span class='danger'>[src] swings wildly at [A] with a minihoe, missing completely!</span>")
 					return
@@ -241,7 +244,7 @@
 	visible_message("<span class='danger'>[src] blows apart!</span>")
 	var/turf/Tsec = get_turf(src)
 
-	new /obj/item/weapon/minihoe(Tsec)
+	new /obj/item/weapon/material/minihoe(Tsec)
 	new /obj/item/weapon/reagent_containers/glass/bucket(Tsec)
 	new /obj/item/device/assembly/prox_sensor(Tsec)
 	new /obj/item/device/analyzer/plant_analyzer(Tsec)
@@ -326,7 +329,7 @@
 		user.remove_from_mob(W)
 		qdel(W)
 
-	else if((istype(W, /obj/item/weapon/minihoe)) && (build_step == 2))
+	else if((istype(W, /obj/item/weapon/material/minihoe)) && (build_step == 2))
 		build_step++
 		user << "You add a minihoe to [src]."
 		name = "farmbot assembly with bucket and minihoe"

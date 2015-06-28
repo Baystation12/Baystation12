@@ -264,6 +264,7 @@
 		if(!cuff)
 			C.stun_effect_act(0, 60, null)
 			playsound(loc, 'sound/weapons/Egloves.ogg', 50, 1, -1)
+			do_attack_animation(C)
 			is_attacking = 1
 			update_icons()
 			spawn(2)
@@ -283,6 +284,7 @@
 		var/mob/living/simple_animal/S = M
 		S.AdjustStunned(10)
 		S.adjustBruteLoss(15)
+		do_attack_animation(M)
 		playsound(loc, "swing_hit", 50, 1, -1)
 		is_attacking = 1
 		update_icons()

@@ -196,7 +196,7 @@
 	if(mob.eyeobj)
 		return mob.EyeMove(n,direct)
 
-	if(mob.monkeyizing)	return//This is sota the goto stop mobs from moving var
+	if(mob.transforming)	return//This is sota the goto stop mobs from moving var
 
 	if(isliving(mob))
 		var/mob/living/L = mob
@@ -343,6 +343,13 @@
 		else
 			. = mob.SelfMove(n, direct)
 
+		for (var/obj/item/weapon/grab/G in mob)
+			if (G.state == GRAB_NECK)
+				mob.set_dir(reverse_dir[direct])
+			G.adjust_position()
+		for (var/obj/item/weapon/grab/G in mob.grabbed_by)
+			G.adjust_position()
+
 		moving = 0
 
 		return .
@@ -360,7 +367,7 @@
 	for(var/obj/item/weapon/grab/G in list(mob.l_hand, mob.r_hand))
 		if(G.state == GRAB_KILL) //no wandering across the station/asteroid while choking someone
 			mob.visible_message("<span class='warning'>[mob] lost \his tight grip on [G.affecting]'s neck!</span>")
-			G.hud.icon_state = "disarm/kill"
+			G.hud.icon_state = "kill"
 			G.state = GRAB_NECK
 
 ///Process_Incorpmove
@@ -513,3 +520,9 @@
 
 	prob_slip = round(prob_slip)
 	return(prob_slip)
+
+/mob/proc/mob_has_gravity(turf/T)
+	return has_gravity(src, T)
+
+/mob/proc/update_gravity()
+	return

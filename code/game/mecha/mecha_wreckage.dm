@@ -10,7 +10,7 @@
 	density = 1
 	anchored = 0
 	opacity = 0
-	var/list/welder_salvage = list(/obj/item/stack/sheet/plasteel,/obj/item/stack/sheet/metal,/obj/item/stack/rods)
+	var/list/welder_salvage = list(/obj/item/stack/material/plasteel,/obj/item/stack/material/steel,/obj/item/stack/rods)
 	var/list/wirecutters_salvage = list(/obj/item/stack/cable_coil)
 	var/list/crowbar_salvage
 	var/salvage_num = 5
@@ -47,7 +47,7 @@
 			else
 				user << "You failed to salvage anything valuable from [src]."
 		else
-			user << "\blue You need more welding fuel to complete this task."
+			user << "<span class='notice'>You need more welding fuel to complete this task.</span>"
 			return
 	if(istype(W, /obj/item/weapon/wirecutters))
 		if(salvage_num <= 0)

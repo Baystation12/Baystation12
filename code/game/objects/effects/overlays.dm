@@ -38,3 +38,17 @@
 	icon = 'icons/turf/space.dmi'
 	icon_state = "bluespacify"
 	layer = 10
+
+/obj/effect/overlay/wallrot
+	name = "wallrot"
+	desc = "Ick..."
+	icon = 'icons/effects/wallrot.dmi'
+	anchored = 1
+	density = 1
+	layer = 5
+	mouse_opacity = 0
+
+/obj/effect/overlay/wallrot/New()
+	..()
+	pixel_x += rand(-10, 10)
+	pixel_y += rand(-10, 10)

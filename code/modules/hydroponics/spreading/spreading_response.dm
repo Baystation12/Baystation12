@@ -13,8 +13,10 @@
 		spawn(1)
 			entangle(M)
 
-/obj/effect/plant/attack_hand(mob/user as mob)
-	// Todo, cause damage.
+/obj/effect/plant/attack_hand(var/mob/user)
+	manual_unbuckle(user)
+
+/obj/effect/plant/attack_generic(var/mob/user)
 	manual_unbuckle(user)
 
 /obj/effect/plant/proc/trodden_on(var/mob/living/victim)
@@ -76,7 +78,7 @@
 		if(can_grab)
 			src.visible_message("<span class='danger'>Tendrils lash out from \the [src] and drag \the [victim] in!</span>")
 			victim.loc = src.loc
-	
+
 	//entangling people
 	if(victim.loc == src.loc)
 		buckle_mob(victim)

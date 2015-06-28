@@ -51,7 +51,7 @@ var/global/datum/controller/gameticker/ticker
 			for(var/i=0, i<10, i++)
 				sleep(1)
 				vote.process()
-			if(going)
+			if(round_progressing)
 				pregame_timeleft--
 			if(pregame_timeleft == config.vote_autogamemode_timeleft)
 				if(!vote.time_remaining)
@@ -90,15 +90,15 @@ var/global/datum/controller/gameticker/ticker
 			src.mode = new mtype
 	else
 		src.mode = config.pick_mode(master_mode)
+
+	job_master.DivideOccupations() // Apparently important for new antagonist system to register specific job antags properly.
+
 	if(!mode_started && !src.mode.can_start())
 		world << "<B>Unable to start [mode.name].</B> Not enough players, [mode.required_players] players needed. Reverting to pre-game lobby."
 		current_state = GAME_STATE_PREGAME
 		mode = null
 		job_master.ResetOccupations()
 		return 0
-
-	//Configure mode and assign player to special mode stuff
-	job_master.DivideOccupations() //Distribute jobs
 
 	if(hide_mode)
 		var/list/modes = new
@@ -110,11 +110,11 @@ var/global/datum/controller/gameticker/ticker
 	else
 		src.mode.announce()
 
+	current_state = GAME_STATE_PLAYING
 	create_characters() //Create player characters and transfer them
 	collect_minds()
 	equip_characters()
 	data_core.manifest()
-	current_state = GAME_STATE_PLAYING
 
 	callHook("roundstart")
 
@@ -155,7 +155,6 @@ var/global/datum/controller/gameticker/ticker
 	for(var/obj/multiz/ladder/L in world) L.connect() //Lazy hackfix for ladders. TODO: move this to an actual controller. ~ Z
 
 	if(config.sql_enabled)
-		spawn(3000)
 		statistic_cycle() // Polls population totals regularly and stores them in an SQL DB -- TLE
 
 	return 1
@@ -292,7 +291,7 @@ var/global/datum/controller/gameticker/ticker
 				if(player.mind.assigned_role != "MODE")
 					job_master.EquipRank(player, player.mind.assigned_role, 0)
 					UpdateFactionList(player)
-					EquipCustomItems(player)
+					equip_custom_items(player)
 		if(captainless)
 			for(var/mob/M in player_list)
 				if(!istype(M,/mob/new_player))
@@ -313,7 +312,7 @@ var/global/datum/controller/gameticker/ticker
 			game_finished = (emergency_shuttle.returned() || mode.station_was_nuked)
 			mode_finished = (!post_game && mode.check_finished())
 		else
-			game_finished = (mode.check_finished() || (emergency_shuttle.returned() && emergency_shuttle.evac == 1))
+			game_finished = (mode.check_finished() || (emergency_shuttle.returned() && emergency_shuttle.evac == 1)) || universe_has_ended
 			mode_finished = game_finished
 
 		if(!mode.explosion_in_progress && game_finished && (mode_finished || post_game))
@@ -328,11 +327,11 @@ var/global/datum/controller/gameticker/ticker
 				if (mode.station_was_nuked)
 					feedback_set_details("end_proper","nuke")
 					if(!delay_end)
-						world << "\blue <B>Rebooting due to destruction of station in [restart_timeout/10] seconds</B>"
+						world << "<span class='notice'><b>Rebooting due to destruction of station in [restart_timeout/10] seconds</b></span>"
 				else
 					feedback_set_details("end_proper","proper completion")
 					if(!delay_end)
-						world << "\blue <B>Restarting in [restart_timeout/10] seconds</B>"
+						world << "<span class='notice'><b>Restarting in [restart_timeout/10] seconds</b></span>"
 
 
 				if(blackbox)
@@ -343,9 +342,9 @@ var/global/datum/controller/gameticker/ticker
 					if(!delay_end)
 						world.Reboot()
 					else
-						world << "\blue <B>An admin has delayed the round end</B>"
+						world << "<span class='notice><b>An admin has delayed the round end</b></span>"
 				else
-					world << "\blue <B>An admin has delayed the round end</B>"
+					world << "<span class='notice'><b>An admin has delayed the round end</b></span>"
 
 		else if (mode_finished)
 			post_game = 1
@@ -355,7 +354,7 @@ var/global/datum/controller/gameticker/ticker
 			//call a transfer shuttle vote
 			spawn(50)
 				if(!round_end_announced) // Spam Prevention. Now it should announce only once.
-					world << "\red The round has ended!"
+					world << "<span class='danger'>The round has ended!</span>"
 					round_end_announced = 1
 				vote.autotransfer()
 

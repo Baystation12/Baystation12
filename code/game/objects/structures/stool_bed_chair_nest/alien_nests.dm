@@ -8,6 +8,9 @@
 	icon_state = "nest"
 	var/health = 100
 
+/obj/structure/bed/nest/update_icon()
+	return
+
 /obj/structure/bed/nest/user_unbuckle_mob(mob/user as mob)
 	if(buckled_mob)
 		if(buckled_mob.buckled == src)

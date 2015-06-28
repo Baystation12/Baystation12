@@ -106,12 +106,6 @@
 			user << "\red Access denied."
 		return
 
-	if(istype(W, /obj/item/weapon/card/emag) && !emagged)
-		locked = 0
-		emagged = 1
-		user.visible_message("[user.name] emags the [src.name].","\red You short out the lock.")
-		return
-
 	if(istype(W, /obj/item/weapon/fuel_assembly) && !cur_assembly)
 		if(emergency_insert_ready)
 			cur_assembly = W
@@ -122,6 +116,13 @@
 
 	..()
 	return
+	
+/obj/machinery/power/rust_fuel_injector/emag_act(var/remaining_charges, var/mob/user)
+	if(!emagged)
+		locked = 0
+		emagged = 1
+		user.visible_message("[user.name] emags the [src.name].","\red You short out the lock.")
+		return 1
 
 /obj/machinery/power/rust_fuel_injector/attack_ai(mob/user)
 	attack_hand(user)

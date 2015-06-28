@@ -7,7 +7,7 @@
 	var/authorised = 0
 	var/possibleNets[0]
 	var/network = ""
-	build_path = 0
+	build_path = null
 
 //when adding a new camera network, you should only need to update these two procs
 	New()
@@ -19,39 +19,27 @@
 		possibleNets["Medbay"] = access_cmo
 
 	proc/updateBuildPath()
-		build_path = ""
+		build_path = null
 		if(authorised && secured)
 			switch(network)
 				if("SS13")
-					build_path = "/obj/machinery/computer/security"
+					build_path = /obj/machinery/computer/security
 				if("Engineering")
-					build_path = "/obj/machinery/computer/security/engineering"
+					build_path = /obj/machinery/computer/security/engineering
 				if("Mining")
-					build_path = "/obj/machinery/computer/security/mining"
+					build_path = /obj/machinery/computer/security/mining
 				if("Research")
-					build_path = "/obj/machinery/computer/security/research"
+					build_path = /obj/machinery/computer/security/research
 				if("Medbay")
-					build_path = "/obj/machinery/computer/security/medbay"
+					build_path = /obj/machinery/computer/security/medbay
 				if("Cargo")
-					build_path = "/obj/machinery/computer/security/cargo"
+					build_path = /obj/machinery/computer/security/cargo
 
 	attackby(var/obj/item/I, var/mob/user)//if(health > 50)
 		..()
-		if(istype(I,/obj/item/weapon/card/emag))
-			if(network)
-				var/obj/item/weapon/card/emag/E = I
-				if(E.uses)
-					E.uses--
-				else
-					return
-				authorised = 1
-				user << "\blue You authorised the circuit network!"
-				updateDialog()
-			else
-				user << "\blue You must select a camera network circuit!"
 		else if(istype(I,/obj/item/weapon/screwdriver))
 			secured = !secured
-			user.visible_message("\blue The [src] can [secured ? "no longer" : "now"] be modified.")
+			user.visible_message("<span class='notice'>The [src] can [secured ? "no longer" : "now"] be modified.</span>")
 			updateBuildPath()
 		return
 
@@ -107,17 +95,7 @@
 				else if (possibleNets[network] in I.access)
 					authorised = 1
 			if(istype(I,/obj/item/weapon/card/emag))
-				if(network)
-					var/obj/item/weapon/card/emag/E = I
-					if(E.uses)
-						E.uses--
-					else
-						return
-					authorised = 1
-					usr << "\blue You authorised the circuit network!"
-					updateDialog()
-				else
-					usr << "\blue You must select a camera network circuit!"
+				I.resolve_attackby(src, usr)
 		else if( href_list["removeauth"] )
 			authorised = 0
 		updateDialog()
@@ -125,3 +103,12 @@
 	updateDialog()
 		if(istype(src.loc,/mob))
 			attack_self(src.loc)
+
+/obj/item/weapon/circuitboard/camera/emag_act(var/remaining_charges, var/mob/user)
+	if(network)
+		authorised = 1
+		user << "<span class='notice'>You authorised the circuit network!</span>"
+		updateDialog()
+		return 1
+	else
+		user << "<span class='warning'>You must select a camera network circuit!</span>"
