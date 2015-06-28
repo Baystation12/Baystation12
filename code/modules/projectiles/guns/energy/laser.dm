@@ -40,6 +40,7 @@ obj/item/weapon/gun/energy/retro
 	force = 5
 	fire_sound = 'sound/weapons/Laser.ogg'
 	slot_flags = SLOT_BELT
+	slot_flags = SLOT_BELT|SLOT_HOLSTER
 	w_class = 3
 	projectile_type = /obj/item/projectile/beam
 	origin_tech = null
