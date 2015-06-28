@@ -26,6 +26,7 @@ em						{font-style: normal;font-weight: bold;}
 .ooc .admin				{color: #184880;}
 .ooc .vipevent			{color: #006e97;}
 .ooc .vipdonate			{color: #005a31;}
+.ooc .auditor			{color: #7F0000;}
 
 
 .adminsay				{color: #9611D4;	font-weight: bold;}

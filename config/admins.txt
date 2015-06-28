@@ -1,0 +1,86 @@
+######################################################################
+# Basically, ckey goes first. Rank goes after the "-"                #
+# Case is not important for ckey.                                    #
+# Case IS important for the rank. However punctuation/spaces are not #
+# Ranks can be anything defined in admin_ranks.txt           ~Carn   #
+######################################################################
+#Auditors
+jtdrow - Auditor
+
+#Management
+Jamiedigweed - GMHost
+Hlaskey - Game Master
+Linth - Game Master
+Sydney95 - Game Master
+Tysonix1 - Head of Staff
+Satin181 - Game Master
+
+#Admins
+StaticCharged - HeadAdmin
+Codingale - HeadAdmin
+Isratosh - HeadAdmin
+filthyfrankster - Administrator3
+Mewth - Administrator3
+Avisionofsound - Administrator2
+Mitchs98 - Administrator2
+Bobbob212 - Administrator
+w3bster - Administrator
+Sshado - Administrator
+Kaedwuff - Administrator
+Nightspark43 - TrialAdmin
+
+#Moderators
+Seth12786 - Moderator3
+#Nightspark43 - Moderator3
+OliverCarswell - Moderator3
+Dragon2323 - Moderator2
+Sovieteer - Moderator2
+JackSquire - Moderator2
+Nakhi - Moderator2
+Maveriknight - Moderator2 
+Sigmasquad - Moderator2
+TheMuncorn - Moderator2
+RocketRaccooon - Moderator
+
+
+Cirra - TrialModerator
+
+#Mentors
+zachariach - Mentor
+LatiosandLatias - Mentor
+Apex G - Mentor
+#Jtdrow - Mentor
+Bran232 - Mentor
+
+
+#Developers
+ishap - Senior Developer
+Yashaldie -  Senior Developer
+Whitey789 - Senior Developer
+#aztectornado - Developer
+TehFlaminTaco - Developer
+Pantheris - Assistant Developer
+OneWingedMajora - Assistant Developer
+wer6 - Assistant Developer
+
+#EVENT TEAM
+SophiaMiller - Event Master
+Yithani - Event Master
+
+
+
+#Inactive
+#Ryan784 - Game Master
+#Jtdrow - Game Master
+#EmmanuelBassil - Head of Staff
+#Sandcom - Administrator3
+#AmbassadorMagikarp - Administrator
+#Regtaf - Administrator
+#Biolock - Administrator
+#brynkline - Moderator2
+#Rayhawk11 - Moderator
+#Scorch289 - Moderator
+#Appleteeth - Mentor
+#DickFlannel - Mentor
+#DrunkArcher - Mentor
+#BDpuffy420 - Moderator
