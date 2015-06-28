@@ -267,7 +267,7 @@ You are weak to holy things and starlight. Don't go into space and avoid the Cha
 			verbs -= handler
 
 /mob/proc/handle_bloodsucking(mob/living/carbon/human/H)
-	if(T.species.name = "Machine") Return
+	if(H.species.name = "Machine") Return
 	src.mind.vampire.draining = H
 	var/blood = 0
 	var/bloodtotal = 0 //used to see if we increased our blood total
