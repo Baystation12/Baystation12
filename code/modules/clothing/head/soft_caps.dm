@@ -3,7 +3,10 @@
 	desc = "It's a peaked cap in a tasteless yellow color."
 	icon_state = "cargosoft"
 	flags = HEADCOVERSEYES
-	item_state = "helmet"
+	item_state_slots = list(
+		slot_l_hand_str = "helmet", //probably a placeholder
+		slot_r_hand_str = "helmet",
+		)
 	var/flipped = 0
 	siemens_coefficient = 0.9
 	body_parts_covered = 0

@@ -2,8 +2,8 @@
 	name = "helmet"
 	desc = "Standard Security gear. Protects the head from impacts."
 	icon_state = "helmet"
-	flags = HEADCOVERSEYES | THICKMATERIAL
 	item_state = "helmet"
+	flags = HEADCOVERSEYES | THICKMATERIAL
 	armor = list(melee = 50, bullet = 15, laser = 50,energy = 10, bomb = 25, bio = 0, rad = 0)
 	flags_inv = HIDEEARS|HIDEEYES
 	cold_protection = HEAD
@@ -13,32 +13,11 @@
 	siemens_coefficient = 0.7
 	w_class = 3
 
-/obj/item/clothing/head/helmet/warden
-	name = "warden's hat"
-	desc = "It's a special helmet issued to the Warden of a securiy force. Protects the head from impacts."
-	icon_state = "policehelm"
-	flags_inv = 0
-	body_parts_covered = 0
-
-/obj/item/clothing/head/helmet/hop
-	name = "crew resource's hat"
-	desc = "A stylish hat that both protects you from enraged former-crewmembers and gives you a false sense of authority."
-	icon_state = "hopcap"
-	flags_inv = 0
-	body_parts_covered = 0
-
-/obj/item/clothing/head/helmet/formalcaptain
-	name = "parade hat"
-	desc = "No one in a commanding position should be without a perfect, white hat of ultimate authority."
-	icon_state = "officercap"
-	flags_inv = 0
-	body_parts_covered = 0
-
 /obj/item/clothing/head/helmet/riot
 	name = "riot helmet"
 	desc = "It's a helmet specifically designed to protect against close range attacks."
 	icon_state = "riot"
-	item_state = "helmet"
+	item_state_slots = list(slot_head_str = "riot")
 	flags = HEADCOVERSEYES
 	armor = list(melee = 82, bullet = 15, laser = 5,energy = 5, bomb = 5, bio = 2, rad = 0)
 	flags_inv = HIDEEARS
@@ -80,7 +59,7 @@
 	name = "tactical helmet"
 	desc = "An armored helmet capable of being fitted with a multitude of attachments."
 	icon_state = "swathelm"
-	item_state = "helmet"
+	item_state_slots = list(slot_head_str = "swathelm")
 	flags = HEADCOVERSEYES
 	sprite_sheets = list(
 		"Tajara" = 'icons/mob/species/tajaran/helmet.dmi',
@@ -108,6 +87,7 @@
 	name = "emergency response team helmet"
 	desc = "An in-atmosphere helmet worn by members of the NanoTrasen Emergency Response Team. Protects the head from impacts."
 	icon_state = "erthelmet_cmd"
+	item_state_slots = list(slot_head_str = "erthelmet_cmd")
 	item_state = "syndicate-helm-green"
 	armor = list(melee = 62, bullet = 50, laser = 50,energy = 35, bomb = 10, bio = 2, rad = 0)
 
@@ -121,15 +101,18 @@
 	name = "emergency response team security helmet"
 	desc = "An in-atmosphere helmet worn by security members of the NanoTrasen Emergency Response Team. Has red highlights."
 	icon_state = "erthelmet_sec"
+	item_state_slots = list(slot_head_str = "erthelmet_sec")
 
 //Engineer
 /obj/item/clothing/head/helmet/ert/engineer
 	name = "emergency response team engineer helmet"
 	desc = "An in-atmosphere helmet worn by engineering members of the NanoTrasen Emergency Response Team. Has orange highlights."
 	icon_state = "erthelmet_eng"
+	item_state_slots = list(slot_head_str = "erthelmet_eng")
 
 //Medical
 /obj/item/clothing/head/helmet/ert/medical
 	name = "emergency response team medical helmet"
 	desc = "A set of armor worn by medical members of the NanoTrasen Emergency Response Team. Has red and white highlights."
 	icon_state = "erthelmet_med"
+	item_state_slots = list(slot_head_str = "erthelmet_med")

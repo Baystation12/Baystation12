@@ -638,19 +638,25 @@ var/global/list/damage_icon_parts = list()
 		head.screen_loc = ui_head		//TODO
 
 		//Determine the icon to use
-		var/t_icon = INV_HEAD_DEF_ICON
+		var/t_icon
 		if(head.icon_override)
 			t_icon = head.icon_override
 		else if(head.sprite_sheets && head.sprite_sheets[species.name])
 			t_icon = head.sprite_sheets[species.name]
-
+		else if(head.item_icons && (slot_head_str in head.item_icons))
+			t_icon = head.item_icons[slot_head_str]
+		else
+			t_icon = INV_HEAD_DEF_ICON
+		
 		//Determine the state to use
-		var/t_state = head.icon_state
-		if(istype(head, /obj/item/weapon/paper))
-			/* I don't like this, but bandaid to fix half the hats in the game
-			   being completely broken without re-breaking paper hats */
-			t_state = "paper"
-
+		var/t_state
+		if(head.item_state_slots && head.item_state_slots[slot_head_str])
+			t_state = head.item_state_slots[slot_head_str]
+		else if(head.item_state)
+			t_state = head.item_state
+		else
+			t_state = head.icon_state
+		
 		//Create the image
 		var/image/standing = image(icon = t_icon, icon_state = t_state)
 
