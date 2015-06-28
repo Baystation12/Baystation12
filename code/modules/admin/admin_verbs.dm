@@ -533,7 +533,9 @@ var/list/admin_verbs_auditor = list(
 	/datum/admins/proc/adrev,
 	/datum/admins/proc/adspawn,
 	/datum/admins/proc/adjump,
-	/client/proc/getserverlog
+	/client/proc/getserverlog,
+	/datum/admins/proc/view_txt_log,	/*shows the server log (diary) for today*/
+	/datum/admins/proc/view_atk_log
 )
 /*
 verbs += admin_verbs_dev
