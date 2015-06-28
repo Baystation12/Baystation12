@@ -251,6 +251,7 @@
 // cannot be used as associative list keys.
 #define icon_l_hand		"slot_l_hand"
 #define icon_r_hand		"slot_r_hand"
+#define icon_head		"slot_head"
 
 // bitflags for clothing parts
 #define HEAD			1

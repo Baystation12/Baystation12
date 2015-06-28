@@ -18,7 +18,7 @@
 	if (src.handle_spam_prevention(msg,MUTE_DEADCHAT))
 		return
 
-	var/stafftype = null
+/*	var/stafftype = null
 
 	if (src.holder.rights & R_MOD)
 		stafftype = "MOD"
@@ -27,7 +27,8 @@
 		stafftype = "MENTOR"
 
 	if (src.holder.rights & R_ADMIN)
-		stafftype = "ADMIN"
+		stafftype = "ADMIN"*/
+	var/stafftype = uppertext(holder.rank)
 
 	msg = sanitize(copytext(msg, 1, MAX_MESSAGE_LEN))
 	log_admin("DSAY: [key_name(src)] : [msg]")

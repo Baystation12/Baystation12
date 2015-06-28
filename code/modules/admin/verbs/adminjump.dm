@@ -27,7 +27,6 @@
 	set name = "Jump to Turf"
 	set category = "Admin"
 	if(!check_rights(R_MENTOR))
-		usr << "Only administrators may use this command."
 		return
 	if(config.allow_admin_jump)
 		log_admin("[key_name(usr)] jumped to [T.x],[T.y],[T.z] in [T.loc]")
@@ -45,7 +44,6 @@
 	set name = "Jump to Mob"
 
 	if(!check_rights(R_MENTOR))
-		usr << "Only administrators may use this command."
 		return
 
 	if(config.allow_admin_jump)
@@ -69,7 +67,6 @@
 	set name = "Jump to Coordinate"
 
 	if(!check_rights(R_MENTOR))
-		usr << "Only administrators may use this command."
 		return
 
 	if (config.allow_admin_jump)
@@ -90,7 +87,6 @@
 	set name = "Jump to Key"
 
 	if(!check_rights(R_MENTOR))
-		usr << "Only administrators may use this command."
 		return
 
 	if(config.allow_admin_jump)
@@ -116,7 +112,6 @@
 	set name = "Get Mob"
 	set desc = "Mob to teleport"
 	if(!check_rights(R_MOD))
-		usr << "Only administrators may use this command."
 		return
 	if(config.allow_admin_jump)
 		log_admin("[key_name(usr)] teleported [key_name(M)]")
@@ -134,7 +129,6 @@
 	set desc = "Key to teleport"
 
 	if(!check_rights(R_MOD))
-		usr << "Only administrators may use this command."
 		return
 
 	if(config.allow_admin_jump)
@@ -162,7 +156,6 @@
 	set category = "Admin"
 	set name = "Send Mob"
 	if(!check_rights(R_MOD))
-		usr << "Only administrators may use this command."
 		return
 	var/area/A = input(usr, "Pick an area.", "Pick an area") in return_sorted_areas()
 	if(A)
