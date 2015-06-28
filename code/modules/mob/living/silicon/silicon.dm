@@ -26,6 +26,7 @@
 	var/obj/nano_module/alarm_monitor = null
 
 	var/sensor_mode = 0 //Determines the current HUD.
+	var/mob/living/cameraFollow = null
 
 	var/next_alarm_notice
 	var/list/datum/alarm/queued_alarms = new()
@@ -360,3 +361,8 @@
 	for(var/obj/machinery/camera/C in A.cameras())
 		cameratext += "[(cameratext == "")? "" : "|"]<A HREF=?src=\ref[src];switchcamera=\ref[C]>[C.c_tag]</A>"
 	src << "[A.alarm_name()]! ([(cameratext)? cameratext : "No Camera"])"
+
+/mob/living/silicon/reset_view()
+	..()
+	if(cameraFollow)
+		cameraFollow = null
