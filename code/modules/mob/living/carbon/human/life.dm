@@ -764,7 +764,7 @@
 
 		return thermal_protection_flags
 
-	proc/get_heat_protection(temperature) //Temperature is the temperature you're being exposed to.
+	get_heat_protection(temperature) //Temperature is the temperature you're being exposed to.
 		var/thermal_protection_flags = get_heat_protection_flags(temperature)
 
 		var/thermal_protection = 0.0
@@ -821,7 +821,7 @@
 
 		return thermal_protection_flags
 
-	proc/get_cold_protection(temperature)
+	get_cold_protection(temperature)
 
 		if(COLD_RESISTANCE in mutations)
 			return 1 //Fully protected from the cold.
@@ -968,8 +968,10 @@
 						spawn handle_hallucinations() //The not boring kind!
 					if(client && prob(5))
 						client.dir = pick(2,4,8)
+						var/client/C = client
 						spawn(rand(20,50))
-							client.dir = 1
+							if(C)
+								C.dir = 1
 
 				if(hallucination<=2)
 					hallucination = 0
