@@ -47,7 +47,6 @@
 	//to find it.
 	blinded = null
 	fire_alert = 0 //Reset this here, because both breathe() and handle_environment() have a chance to set it.
-	..()
 
 	//TODO: seperate this out
 	// update the current life tick, can be used to e.g. only do something every 4 ticks
@@ -55,6 +54,8 @@
 
 	in_stasis = istype(loc, /obj/structure/closet/body_bag/cryobag) && loc:opened == 0
 	if(in_stasis) loc:used++
+
+	..()
 
 	if(life_tick%30==15)
 		hud_updateflag = 1022
@@ -66,22 +67,9 @@
 		//Updates the number of stored chemicals for powers
 		handle_changeling()
 
-		//Chemicals in the body
-		handle_chemicals_in_body()
-
-		//Disabilities
-		handle_disabilities()
-
 		//Organs and blood
 		handle_organs()
-		handle_blood()
 		stabilize_body_temperature() //Body temperature adjusts itself (self-regulation)
-
-		//Random events (vomiting etc)
-		handle_random_events()
-
-		//stuff in the stomach
-		handle_stomach()
 
 		handle_shock()
 
@@ -96,26 +84,18 @@
 
 	handle_stasis_bag()
 
-	if(life_tick > 5 && timeofdeath && (timeofdeath < 5 || world.time - timeofdeath > 6000))	//We are long dead, or we're junk mobs spawned like the clowns on the clown shuttle
+	if(!handle_some_updates())
 		return											//We go ahead and process them 5 times for HUD images and other stuff though.
-
-	//Check if we're on fire
-	handle_fire()
-
-	//Status updates, death etc.
-	handle_regular_status_updates()		//Optimized a bit
-	update_canmove()
 
 	//Update our name based on whether our face is obscured/disfigured
 	name = get_visible_name()
 
-	handle_regular_hud_updates()
-
 	pulse = handle_pulse()
 
-	// Grabbing
-	for(var/obj/item/weapon/grab/G in src)
-		G.process()
+/mob/living/carbon/human/proc/handle_some_updates()
+	if(life_tick > 5 && timeofdeath && (timeofdeath < 5 || world.time - timeofdeath > 6000))	//We are long dead, or we're junk mobs spawned like the clowns on the clown shuttle
+		return 0
+	return 1
 
 /mob/living/carbon/human/breathe()
 	if(!in_stasis)
@@ -168,7 +148,7 @@
 	else
 		return ONE_ATMOSPHERE + pressure_difference
 
-/mob/living/carbon/human/proc/handle_disabilities()
+/mob/living/carbon/human/handle_disabilities()
 	if (disabilities & EPILEPSY)
 		if ((prob(1) && paralysis < 1))
 			src << "\red You have a seizure!"
@@ -845,7 +825,10 @@
 
 	return min(1,thermal_protection)
 
-/mob/living/carbon/human/proc/handle_chemicals_in_body()
+/mob/living/carbon/human/handle_chemicals_in_body()
+	if(in_stasis)
+		return
+
 	if(reagents)
 		chem_effects.Cut()
 		analgesic = 0
@@ -925,7 +908,10 @@
 
 	return //TODO: DEFERRED
 
-/mob/living/carbon/human/proc/handle_regular_status_updates()
+/mob/living/carbon/human/handle_regular_status_updates()
+	if(!handle_some_updates())
+		return 0
+
 	if(status_flags & GODMODE)	return 0
 
 	//SSD check, if a logged player is awake put them back to sleep!
@@ -1098,7 +1084,7 @@
 
 	return 1
 
-/mob/living/carbon/human/proc/handle_regular_hud_updates()
+/mob/living/carbon/human/handle_regular_hud_updates()
 	if(!overlays_cache)
 		overlays_cache = list()
 		overlays_cache.len = 23
@@ -1424,7 +1410,10 @@
 			O.process_hud(src)
 			if(!druggy && !seer)	see_invisible = SEE_INVISIBLE_LIVING
 
-/mob/living/carbon/human/proc/handle_random_events()
+/mob/living/carbon/human/handle_random_events()
+	if(in_stasis)
+		return
+
 	// Puke if toxloss is too high
 	if(!stat)
 		if (getToxLoss() >= 45 && nutrition > 20)
@@ -1437,7 +1426,7 @@
 		if(L && L.lum_r + L.lum_g + L.lum_b == 0)
 			playsound_local(src,pick(scarySounds),50, 1, -1)
 
-/mob/living/carbon/human/proc/handle_stomach()
+/mob/living/carbon/human/handle_stomach()
 	spawn(0)
 		for(var/mob/living/M in stomach_contents)
 			if(M.loc != src)

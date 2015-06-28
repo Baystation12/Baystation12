@@ -35,7 +35,9 @@ var/const/BLOOD_VOLUME_SURVIVE = 122
 			B.color = B.data["blood_colour"]
 
 // Takes care blood loss and regeneration
-/mob/living/carbon/human/proc/handle_blood()
+/mob/living/carbon/human/handle_blood()
+	if(in_stasis)
+		return
 
 	if(species && species.flags & NO_BLOOD)
 		return
