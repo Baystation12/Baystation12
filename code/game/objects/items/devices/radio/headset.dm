@@ -11,6 +11,12 @@
 	slot_flags = SLOT_EARS
 	var/translate_binary = 0
 	var/translate_hive = 0
+	var/translate_taj = 0
+	var/translate_unathi = 0
+	var/translate_sol = 0
+	var/translate_kidan = 0
+	var/translate_aviskree = 0
+	var/translate_skrell = 0
 	var/obj/item/device/encryptionkey/keyslot1 = null
 	var/obj/item/device/encryptionkey/keyslot2 = null
 	maxf = 1489
