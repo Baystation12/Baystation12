@@ -7,6 +7,11 @@
 	item_state = ""
 	w_class = 1
 	var/translate_binary = 0
+	var/translate_taj = 0
+	var/translate_unathi = 0
+	var/translate_skrell = 0
+	var/translate_kidan = 0
+	var/translate_aviskree = 0
 	var/translate_hive = 0
 	var/syndie = 0
 	var/list/channels = list()
@@ -27,6 +32,16 @@
 	translate_binary = 1
 	origin_tech = "syndicate=3"
 
+/obj/item/device/encryptionkey/transall
+	icon_state = "cypherkey"
+	translate_taj = 1
+	translate_unathi = 1
+	translate_skrell = 1
+	translate_kidan = 1
+	translate_aviskree = 1
+	translate_hive = 1
+	origin_tech = "syndicate=5"
+	
 /obj/item/device/encryptionkey/headset_sec
 	name = "security radio encryption key"
 	icon_state = "sec_cypherkey"
