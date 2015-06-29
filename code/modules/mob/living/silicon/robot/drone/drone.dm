@@ -57,15 +57,13 @@
 	updateicon()
 
 /mob/living/silicon/robot/drone/init()
+	aiCamera = new/obj/item/device/camera/siliconcam/drone_camera(src)
+
 	if(!laws) laws = new law_type
 	if(!module) module = new module_type(src)
 
-	aiCamera = new/obj/item/device/camera/siliconcam/drone_camera(src)
 	flavor_text = "It's a tiny little repair drone. The casing is stamped with an NT logo and the subscript: 'NanoTrasen Recursive Repair Systems: Fixing Tomorrow's Problem, Today!'"
 	playsound(src.loc, 'sound/machines/twobeep.ogg', 50, 0)
-	spawn(1)
-		if(camera && ("Robots" in camera.network))
-			camera.add_network("Engineering")
 
 //Redefining some robot procs...
 /mob/living/silicon/robot/drone/SetName(pickedName as text)
