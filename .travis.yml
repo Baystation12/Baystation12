@@ -20,5 +20,6 @@ script:
   - shopt -s globstar
   - (! grep 'step_[xy]' maps/**/*.dmm)
   - (! find nano/templates/ -type f -exec md5sum {} + | sort | uniq -D -w 32 | grep nano)
-  - (  md5sum -c - <<< "0af969f671fba6cf9696c78cd175a14a *baystation12.int")
+  - md5sum -c - <<< "0af969f671fba6cf9696c78cd175a14a *baystation12.int"
+  - md5sum -c - <<< "88490b460c26947f5ec1ab1bb9fa9f17 *html/changelogs/example.yml"
   - DreamMaker baystation12.dme
