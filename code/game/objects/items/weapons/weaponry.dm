@@ -21,7 +21,7 @@
 	item_state = "tacknife"
 	flags = CONDUCT
 	force = 15
-	throwforce = 12
+	throwforce = 17
 	sharp = 1
 	edge = 1
 	w_class = 2
