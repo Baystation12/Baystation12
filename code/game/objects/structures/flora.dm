@@ -78,7 +78,7 @@
 	icon = 'icons/obj/plants.dmi'
 	icon_state = "plant-26"
 
-/obj/structure/flora/pottedplant/attack_hand(mob/user as mob)
+/obj/structure/flora/pottedplant/MouseDrop(atom/over_object)
 	if (istype(over_object, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = over_object
 		if (H==usr && !H.restrained() && !H.stat && in_range(src, over_object) && !src.anchored)
