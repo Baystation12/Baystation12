@@ -22,6 +22,7 @@
 
 /obj/structure/bed/New(var/newloc, var/new_material, var/new_padding_material)
 	..(newloc)
+	color = null
 	if(!new_material)
 		new_material = DEFAULT_WALL_MATERIAL
 	material = get_material_by_name(new_material)
@@ -60,6 +61,12 @@
 	else
 		name = "[material.display_name] [initial(name)]"
 		desc += " It's made of [material.use_name]."
+
+/obj/structure/bed/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
+	if(istype(mover) && mover.checkpass(PASSTABLE))
+		return 1
+	else
+		return ..()
 
 /obj/structure/bed/ex_act(severity)
 	switch(severity)

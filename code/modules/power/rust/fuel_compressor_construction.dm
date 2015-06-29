@@ -14,6 +14,21 @@
 	//20% easier to read than apc code
 	pixel_x = (dir & 3)? 0 : (dir == 4 ? 32 : -32)
 	pixel_y = (dir & 3)? (dir ==1 ? 32 : -32) : 0
+	
+/obj/machinery/rust_fuel_compressor/emag_act(var/remaining_charges, var/mob/user)
+	if (!emagged)
+		if(opened)
+			user << "You must close the cover to swipe an ID card."
+		else
+			flick("apc-spark", src)
+			if (do_after(user,6))
+				if(prob(50))
+					emagged = 1
+					locked = 0
+					user << "You emag the port interface."
+				else
+					user << "You fail to [ locked ? "unlock" : "lock"] the compressor interface."
+				return 1
 
 /obj/machinery/rust_fuel_compressor/attackby(obj/item/W, mob/user)
 
@@ -55,21 +70,6 @@
 			else
 				user << "\red Access denied."
 		return
-
-	else if (istype(W, /obj/item/weapon/card/emag) && !emagged)		// trying to unlock with an emag card
-		if(opened)
-			user << "You must close the cover to swipe an ID card."
-		else
-			flick("apc-spark", src)
-			if (do_after(user,6))
-				if(prob(50))
-					emagged = 1
-					locked = 0
-					user << "You emag the port interface."
-				else
-					user << "You fail to [ locked ? "unlock" : "lock"] the compressor interface."
-		return
-
 	else if (istype(W, /obj/item/stack/cable_coil) && opened && !(has_electronics & 2))
 		var/obj/item/stack/cable_coil/C = W
 		if(C.amount < 10)

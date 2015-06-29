@@ -6,9 +6,21 @@
 	var/maximum_volume = 100
 	var/atom/my_atom = null
 
-/datum/reagents/New(var/max = 100)
+/datum/reagents/New(var/max = 100, atom/A = null)
 	..()
 	maximum_volume = max
+	my_atom = A
+	
+	//I dislike having these here but map-objects are initialised before world/New() is called. >_>
+	if(!chemical_reagents_list)
+		//Chemical Reagents - Initialises all /datum/reagent into a list indexed by reagent id
+		var/paths = typesof(/datum/reagent) - /datum/reagent
+		chemical_reagents_list = list()
+		for(var/path in paths)
+			var/datum/reagent/D = new path()
+			if(!D.name)
+				continue
+			chemical_reagents_list[D.id] = D
 
 /datum/reagents/Destroy()
 	..()
@@ -265,52 +277,25 @@
 
 /* Holder-to-atom and similar procs */
 
-/datum/reagents/proc/touch(var/atom/target) // This picks the appropriate reaction. Reagents are not guaranteed to transfer to the target.
-	if(ismob(target))
-		touch_mob(target)
-	if(isturf(target))
-		touch_turf(target)
-	if(isobj(target))
-		touch_obj(target)
-	return
-
-/datum/reagents/proc/touch_mob(var/mob/target)
-	if(!target || !istype(target))
-		return
-
-	for(var/datum/reagent/current in reagent_list)
-		current.touch_mob(target)
-
-	update_total()
-
-/datum/reagents/proc/touch_turf(var/turf/target)
-	if(!target || !istype(target))
-		return
-
-	for(var/datum/reagent/current in reagent_list)
-		current.touch_turf(target)
-
-	update_total()
-
-/datum/reagents/proc/touch_obj(var/obj/target)
-	if(!target || !istype(target))
-		return
-
-	for(var/datum/reagent/current in reagent_list)
-		current.touch_obj(target)
-
-	update_total()
-
+//The general proc for applying reagents to things. This proc assumes the reagents are being applied externally, 
+//not directly injected into the contents. It first calls touch, then the appropriate trans_to_*() or splash_mob().
+//If for some reason touch effects are bypassed (e.g. injecting stuff directly into a reagent container or person), 
+//call the appropriate trans_to_*() proc.
 /datum/reagents/proc/trans_to(var/atom/target, var/amount = 1, var/multiplier = 1, var/copy = 0)
+	touch(target) //First, handle mere touch effects
+
 	if(ismob(target))
-		//warning("[my_atom] is trying to transfer reagents to [target], which is a mob, using trans_to()")
-		//return trans_to_mob(target, amount, multiplier, copy)
-		return splash_mob(target, amount)
+		return splash_mob(target, amount, copy)
 	if(isturf(target))
 		return trans_to_turf(target, amount, multiplier, copy)
 	if(isobj(target))
 		return trans_to_obj(target, amount, multiplier, copy)
 	return 0
+
+//Using this in case we want to differentiate splashing an atom from transferring reagents to it later down the road.
+//For now it just calls trans_to.
+/datum/reagents/proc/splash(var/atom/target, var/amount = 1, var/multiplier = 1, var/copy = 0)
+	trans_to(target, amount, multiplier, copy)
 
 /datum/reagents/proc/trans_id_to(var/atom/target, var/id, var/amount = 1)
 	if (!target || !target.reagents)
@@ -328,30 +313,55 @@
 
 	return F.trans_to(target, amount) // Let this proc check the atom's type
 
-/datum/reagents/proc/splash_mob(var/mob/target, var/amount = 1, var/clothes = 1)
-	var/perm = 0
-	var/list/L = list("head" = THERMAL_PROTECTION_HEAD, "upper_torso" = THERMAL_PROTECTION_UPPER_TORSO, "lower_torso" = THERMAL_PROTECTION_LOWER_TORSO, "legs" = THERMAL_PROTECTION_LEG_LEFT + THERMAL_PROTECTION_LEG_RIGHT, "feet" = THERMAL_PROTECTION_FOOT_LEFT + THERMAL_PROTECTION_FOOT_RIGHT, "arms" = THERMAL_PROTECTION_ARM_LEFT + THERMAL_PROTECTION_ARM_RIGHT, "hands" = THERMAL_PROTECTION_HAND_LEFT + THERMAL_PROTECTION_HAND_RIGHT)
-	if(clothes)
-		for(var/obj/item/clothing/C in target.get_equipped_items())
-			if(C.permeability_coefficient == 1 || C.body_parts_covered == 0)
-				continue
-			if(C.body_parts_covered & HEAD)
-				L["head"] *= C.permeability_coefficient
-			if(C.body_parts_covered & UPPER_TORSO)
-				L["upper_torso"] *= C.permeability_coefficient
-			if(C.body_parts_covered & LOWER_TORSO)
-				L["lower_torso"] *= C.permeability_coefficient
-			if(C.body_parts_covered & LEGS)
-				L["legs"] *= C.permeability_coefficient
-			if(C.body_parts_covered & FEET)
-				L["feet"] *= C.permeability_coefficient
-			if(C.body_parts_covered & ARMS)
-				L["arms"] *= C.permeability_coefficient
-			if(C.body_parts_covered & HANDS)
-				L["hands"] *= C.permeability_coefficient
-	for(var/t in L)
-		perm += L[t]
-	return trans_to_mob(target, amount, CHEM_TOUCH, perm)
+// When applying reagents to an atom externally, touch() is called to trigger any on-touch effects of the reagent.
+// This does not handle transferring reagents to things.
+// For example, splashing someone with water will get them wet and extinguish them if they are on fire,
+// even if they are wearing an impermeable suit that prevents the reagents from contacting the skin.
+/datum/reagents/proc/touch(var/atom/target)
+	if(ismob(target))
+		touch_mob(target)
+	if(isturf(target))
+		touch_turf(target)
+	if(isobj(target))
+		touch_obj(target)
+	return
+
+/datum/reagents/proc/touch_mob(var/mob/target)
+	if(!target || !istype(target))
+		return
+
+	for(var/datum/reagent/current in reagent_list)
+		current.touch_mob(target, current.volume)
+
+	update_total()
+
+/datum/reagents/proc/touch_turf(var/turf/target)
+	if(!target || !istype(target))
+		return
+
+	for(var/datum/reagent/current in reagent_list)
+		current.touch_turf(target, current.volume)
+
+	update_total()
+
+/datum/reagents/proc/touch_obj(var/obj/target)
+	if(!target || !istype(target))
+		return
+
+	for(var/datum/reagent/current in reagent_list)
+		current.touch_obj(target, current.volume)
+
+	update_total()
+
+// Attempts to place a reagent on the mob's skin.
+// Reagents are not guaranteed to transfer to the target.
+// Do not call this directly, call trans_to() instead.
+/datum/reagents/proc/splash_mob(var/mob/target, var/amount = 1, var/copy = 0)
+	var/perm = 1
+	if(isliving(target)) //will we ever even need to tranfer reagents to non-living mobs?
+		var/mob/living/L = target
+		perm = L.reagent_permeability()
+	return trans_to_mob(target, amount, CHEM_TOUCH, perm, copy)
 
 /datum/reagents/proc/trans_to_mob(var/mob/target, var/amount = 1, var/type = CHEM_BLOOD, var/multiplier = 1, var/copy = 0) // Transfer after checking into which holder...
 	if(!target || !istype(target))
@@ -393,18 +403,7 @@
 
 	return trans_to_holder(target.reagents, amount, multiplier, copy)
 
-/datum/reagents/proc/metabolize(var/alien, var/location)
-	if(!iscarbon(my_atom))
-		return
-	var/mob/living/carbon/C = my_atom
-	if(!C || !istype(C))
-		return
-	for(var/datum/reagent/current in reagent_list)
-		current.on_mob_life(C, alien, location)
-	update_total()
-
 /* Atom reagent creation - use it all the time */
 
 /atom/proc/create_reagents(var/max_vol)
-	reagents = new/datum/reagents(max_vol)
-	reagents.my_atom = src
+	reagents = new/datum/reagents(max_vol, src)

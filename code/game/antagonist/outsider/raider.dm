@@ -8,7 +8,7 @@ var/datum/antagonist/raider/raiders
 	bantype = "raider"
 	landmark_id = "voxstart"
 	welcome_text = "Use :H to talk on your encrypted channel."
-	flags = ANTAG_OVERRIDE_JOB | ANTAG_CLEAR_EQUIPMENT | ANTAG_CHOOSE_NAME | ANTAG_VOTABLE | ANTAG_SET_APPEARANCE
+	flags = ANTAG_OVERRIDE_JOB | ANTAG_CLEAR_EQUIPMENT | ANTAG_CHOOSE_NAME | ANTAG_VOTABLE | ANTAG_SET_APPEARANCE | ANTAG_HAS_LEADER
 	max_antags = 6
 	max_antags_round = 10
 	id_type = /obj/item/weapon/card/id/syndicate
@@ -83,8 +83,8 @@ var/datum/antagonist/raider/raiders
 
 /datum/antagonist/raider/create_global_objectives()
 
-	if(global_objectives.len)
-		return
+	if(!..())
+		return 0
 
 	var/i = 1
 	var/max_objectives = pick(2,2,2,2,3,3,3,4)
@@ -107,6 +107,7 @@ var/datum/antagonist/raider/raiders
 		i++
 
 	global_objectives |= new /datum/objective/heist/preserve_crew
+	return 1
 
 /datum/antagonist/raider/check_victory()
 	// Totally overrides the base proc.
@@ -150,7 +151,7 @@ var/datum/antagonist/raider/raiders
 		else
 			win_msg += "<B>The Raiders were repelled!</B>"
 
-	world << "<span class='danger'><font size = 3>[win_type] [win_group] victory!</font>"
+	world << "<span class='danger'><font size = 3>[win_type] [win_group] victory!</font></span>"
 	world << "[win_msg]"
 	feedback_set_details("round_end_result","heist - [win_type] [win_group]")
 

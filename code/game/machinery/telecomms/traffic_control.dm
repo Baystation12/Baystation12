@@ -233,9 +233,13 @@
 					A.icon_state = "4"
 					A.anchored = 1
 					qdel(src)
-		else if(istype(D, /obj/item/weapon/card/emag) && !emagged)
-			playsound(src.loc, 'sound/effects/sparks4.ogg', 75, 1)
-			emagged = 1
-			user << "<span class='notice'>You you disable the security protocols</span>"
 		src.updateUsrDialog()
 		return
+
+/obj/machinery/computer/telecomms/traffic/emag_act(var/remaining_charges, var/mob/user)
+	if(!emagged)
+		playsound(src.loc, 'sound/effects/sparks4.ogg', 75, 1)
+		emagged = 1
+		user << "<span class='notice'>You you disable the security protocols</span>"
+		src.updateUsrDialog()
+		return 1

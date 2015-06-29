@@ -25,8 +25,11 @@
 	action_button_name = "Flip Welding Mask"
 	siemens_coefficient = 0.9
 	w_class = 3
+	var/base_state
 
 /obj/item/clothing/head/welding/attack_self()
+	if(!base_state)
+		base_state = icon_state
 	toggle()
 
 
@@ -40,13 +43,13 @@
 			src.up = !src.up
 			src.flags |= (HEADCOVERSEYES | HEADCOVERSMOUTH)
 			flags_inv |= (HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE)
-			icon_state = initial(icon_state)
+			icon_state = base_state
 			usr << "You flip the [src] down to protect your eyes."
 		else
 			src.up = !src.up
 			src.flags &= ~(HEADCOVERSEYES | HEADCOVERSMOUTH)
 			flags_inv &= ~(HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE)
-			icon_state = "[initial(icon_state)]up"
+			icon_state = "[base_state]up"
 			usr << "You push the [src] up out of your face."
 		update_clothing_icon()	//so our mob-overlays
 		usr.update_action_buttons()
@@ -138,21 +141,17 @@
 	desc = "A pair of kitty ears. Meow!"
 	icon_state = "kitty"
 	body_parts_covered = 0
-	var/icon/mob
-	var/icon/mob2
 	siemens_coefficient = 1.5
+	item_icons = list()
 
 	update_icon(var/mob/living/carbon/human/user)
 		if(!istype(user)) return
-		mob = new/icon("icon" = 'icons/mob/head.dmi', "icon_state" = "kitty")
-		mob2 = new/icon("icon" = 'icons/mob/head.dmi', "icon_state" = "kitty2")
-		mob.Blend(rgb(user.r_hair, user.g_hair, user.b_hair), ICON_ADD)
-		mob2.Blend(rgb(user.r_hair, user.g_hair, user.b_hair), ICON_ADD)
+		var/icon/ears = new/icon("icon" = 'icons/mob/head.dmi', "icon_state" = "kitty")
+		ears.Blend(rgb(user.r_hair, user.g_hair, user.b_hair), ICON_ADD)
 
 		var/icon/earbit = new/icon("icon" = 'icons/mob/head.dmi', "icon_state" = "kittyinner")
-		var/icon/earbit2 = new/icon("icon" = 'icons/mob/head.dmi', "icon_state" = "kittyinner2")
-		mob.Blend(earbit, ICON_OVERLAY)
-		mob2.Blend(earbit2, ICON_OVERLAY)
+		ears.Blend(earbit, ICON_OVERLAY)
+
 
 /obj/item/clothing/head/richard
 	name = "chicken mask"

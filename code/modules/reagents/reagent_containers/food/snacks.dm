@@ -481,7 +481,7 @@
 /obj/item/weapon/reagent_containers/food/snacks/egg/throw_impact(atom/hit_atom)
 	..()
 	new/obj/effect/decal/cleanable/egg_smudge(src.loc)
-	src.reagents.trans_to(hit_atom, reagents.total_volume)
+	src.reagents.splash(hit_atom, reagents.total_volume)
 	src.visible_message("\red [src.name] has been squashed.","\red You hear a smack.")
 	qdel(src)
 

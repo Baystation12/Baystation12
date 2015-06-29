@@ -1,5 +1,5 @@
 /mob/living/silicon/ai/Life()
-	if (src.stat == 2)
+	if (src.stat == DEAD)
 		return
 	else //I'm not removing that shitton of tabs, unneeded as they are. -- Urist
 		//Being dead doesn't mean your temperature never changes
@@ -20,10 +20,6 @@
 		if(!psupply)
 			create_powersupply()
 
-		if (src.machine)
-			if (!( src.machine.check_eye(src) ))
-				src.reset_view(null)
-
 		// Handle power damage (oxy)
 		if(aiRestorePowerRoutine != 0 && !APU_power)
 			// Lose power
@@ -33,8 +29,8 @@
 			aiRestorePowerRoutine = 0 // Necessary if AI activated it's APU AFTER losing primary power.
 			adjustOxyLoss(-1)
 
-		// Handle EMP-stun
-		handle_stunned()
+		handle_stunned()	// Handle EMP-stun
+		lying = 0			// Handle lying down
 
 		malf_process()
 
@@ -61,15 +57,18 @@
 				src << "Alert cancelled. Power has been restored without our assistance."
 				aiRestorePowerRoutine = 0
 				src.blind.layer = 0
+				updateicon()
 				return
 			else if (aiRestorePowerRoutine==3)
 				src << "Alert cancelled. Power has been restored."
 				aiRestorePowerRoutine = 0
 				src.blind.layer = 0
+				updateicon()
 				return
 			else if (APU_power)
 				aiRestorePowerRoutine = 0
 				src.blind.layer = 0
+				updateicon()
 				return
 		else
 			var/area/current_area = get_area(src)
@@ -79,7 +78,7 @@
 					aiRestorePowerRoutine = 1
 
 					//Blind the AI
-
+					updateicon()
 					src.blind.screen_loc = "1,1 to 15,15"
 					if (src.blind.layer!=18)
 						src.blind.layer = 18
@@ -147,11 +146,12 @@
 									aiRestorePowerRoutine = 3
 									src << "Here are your current laws:"
 									show_laws()
+									updateicon()
 							sleep(50)
 							theAPC = null
 
 	process_queued_alarms()
-	regular_hud_updates()
+	handle_regular_hud_updates()
 	switch(src.sensor_mode)
 		if (SEC_HUD)
 			process_sec_hud(src,0,src.eyeobj)
@@ -176,3 +176,4 @@
 /mob/living/silicon/ai/rejuvenate()
 	..()
 	add_ai_verbs(src)
+

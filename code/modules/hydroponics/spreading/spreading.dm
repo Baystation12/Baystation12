@@ -196,16 +196,19 @@
 		layer = 3
 		density = 0
 
-/obj/effect/plant/proc/calc_dir(turf/location = loc)
+/obj/effect/plant/proc/calc_dir()
 	set background = 1
+	var/turf/T = get_turf(src)
+	if(!istype(T)) return
+
 	var/direction = 16
 
 	for(var/wallDir in cardinal)
-		var/turf/newTurf = get_step(location,wallDir)
+		var/turf/newTurf = get_step(T,wallDir)
 		if(newTurf.density)
 			direction |= wallDir
 
-	for(var/obj/effect/plant/shroom in location)
+	for(var/obj/effect/plant/shroom in T.contents)
 		if(shroom == src)
 			continue
 		if(shroom.floor) //special

@@ -2,7 +2,7 @@
 	set invisibility = 0
 	set background = 1
 
-	if (src.monkeyizing)
+	if (src.transforming)
 		return
 
 	src.blinded = null
@@ -61,7 +61,7 @@
 			lights_on = 0
 			set_light(0)
 
-/mob/living/silicon/robot/proc/handle_regular_status_updates()
+/mob/living/silicon/robot/handle_regular_status_updates()
 
 	if(src.camera && !scrambledcodes)
 		if(src.stat == 2 || wires.IsIndexCut(BORG_WIRE_CAMERA))
@@ -144,7 +144,7 @@
 
 	return 1
 
-/mob/living/silicon/robot/proc/handle_regular_hud_updates()
+/mob/living/silicon/robot/handle_regular_hud_updates()
 
 	if (src.stat == 2 || XRAY in mutations || src.sight_mode & BORGXRAY)
 		src.sight |= SEE_TURFS
@@ -173,7 +173,7 @@
 		src.see_invisible = SEE_INVISIBLE_LIVING // This is normal vision (25), setting it lower for normal vision means you don't "see" things like darkness since darkness
 							 // has a "invisible" value of 15
 
-	regular_hud_updates()
+	handle_regular_hud_updates()
 
 	var/obj/item/borg/sight/hud/hud = (locate(/obj/item/borg/sight/hud) in src)
 	if(hud && hud.hud)
@@ -331,3 +331,12 @@
 	if(paralysis || stunned || weakened || buckled || lockcharge || !is_component_functioning("actuator")) canmove = 0
 	else canmove = 1
 	return canmove
+
+/mob/living/silicon/robot/update_fire()
+	overlays -= image("icon"='icons/mob/OnFire.dmi', "icon_state"="Standing")
+	if(on_fire)
+		overlays += image("icon"='icons/mob/OnFire.dmi', "icon_state"="Standing")
+
+/mob/living/silicon/robot/fire_act()
+	if(!on_fire) //Silicons don't gain stacks from hotspots, but hotspots can ignite them
+		IgniteMob()

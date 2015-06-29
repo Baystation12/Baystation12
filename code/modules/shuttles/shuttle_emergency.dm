@@ -155,15 +155,13 @@
 
 	return 1
 
-
-
-
-/obj/machinery/computer/shuttle_control/emergency/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if (istype(W, /obj/item/weapon/card/emag) && !emagged)
+/obj/machinery/computer/shuttle_control/emergency/emag_act(var/remaining_charges, var/mob/user)
+	if (!emagged)
 		user << "<span class='notice'>You short out \the [src]'s authorization protocols.</span>"
 		emagged = 1
-		return
+		return 1
 
+/obj/machinery/computer/shuttle_control/emergency/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	read_authorization(W)
 	..()
 

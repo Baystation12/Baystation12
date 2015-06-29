@@ -22,6 +22,7 @@
 	max_shells = 6
 	caliber = "38"
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
+	fire_sound = 'sound/weapons/Gunshot_light.ogg'
 	ammo_type = /obj/item/ammo_casing/c38
 
 /obj/item/weapon/gun/projectile/revolver/detective/verb/rename_gun()

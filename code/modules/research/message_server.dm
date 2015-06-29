@@ -115,6 +115,9 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 		authmsg += "[stamp]<br>"
 	for (var/obj/machinery/requests_console/Console in allConsoles)
 		if (ckey(Console.department) == ckey(recipient))
+			if(Console.inoperable())
+				Console.message_log += "<B>Message lost due to console failure.</B><BR>Please contact [station_name()] system adminsitrator or AI for technical assistance.<BR>"
+				continue
 			if(Console.newmessagepriority < priority)
 				Console.newmessagepriority = priority
 				Console.icon_state = "req_comp[priority]"
@@ -123,17 +126,12 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 					if(!Console.silent)
 						playsound(Console.loc, 'sound/machines/twobeep.ogg', 50, 1)
 						Console.audible_message(text("\icon[Console] *The Requests Console beeps: 'PRIORITY Alert in [sender]'"),,5)
-					Console.messages += "<B><FONT color='red'>High Priority message from <A href='?src=\ref[Console];write=[ckey(sender)]'>[sender]</A></FONT></B><BR>[authmsg]"
-				if(3)
-					if(!Console.silent)
-						playsound(Console.loc, 'sound/machines/twobeep.ogg', 70, 1)
-						Console.audible_message(text("\icon[Console] *The Requests Console yells: 'EXTREME PRIORITY alert in [sender]'"),,7)
-					Console.messages += "<B><FONT color='red'>Extreme Priority message from <A href='?src=\ref[Console];write=[ckey(sender)]'>[sender]</A></FONT></B><BR>[authmsg]"
+					Console.message_log += "<B><FONT color='red'>High Priority message from <A href='?src=\ref[Console];write=[sender]'>[sender]</A></FONT></B><BR>[authmsg]"
 				else
 					if(!Console.silent)
 						playsound(Console.loc, 'sound/machines/twobeep.ogg', 50, 1)
 						Console.audible_message(text("\icon[Console] *The Requests Console beeps: 'Message from [sender]'"),,4)
-					Console.messages += "<B>Message from <A href='?src=\ref[Console];write=[ckey(sender)]'>[sender]</A></B><BR>[authmsg]"
+					Console.message_log += "<B>Message from <A href='?src=\ref[Console];write=[sender]'>[sender]</A></B><BR>[authmsg]"
 			Console.set_light(2)
 
 

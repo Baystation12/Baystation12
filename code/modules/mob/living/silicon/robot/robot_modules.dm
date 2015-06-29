@@ -372,7 +372,7 @@ var/global/list/robot_modules = list(
 	C.synths = list(wire)
 	src.modules += C
 
-	var/obj/item/stack/tile/plasteel/cyborg/S = new /obj/item/stack/tile/plasteel/cyborg(src)
+	var/obj/item/stack/tile/steel/cyborg/S = new /obj/item/stack/tile/steel/cyborg(src)
 	S.synths = list(metal)
 	src.modules += S
 
@@ -695,7 +695,7 @@ var/global/list/robot_modules = list(
 	C.synths = list(wire)
 	src.modules += C
 
-	var/obj/item/stack/tile/plasteel/cyborg/S = new /obj/item/stack/tile/plasteel/cyborg(src)
+	var/obj/item/stack/tile/steel/cyborg/S = new /obj/item/stack/tile/steel/cyborg(src)
 	S.synths = list(metal)
 	src.modules += S
 

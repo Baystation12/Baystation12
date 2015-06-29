@@ -55,7 +55,6 @@ var/list/ai_verbs_default = list(
 	var/obj/item/device/pda/ai/aiPDA = null
 	var/obj/item/device/multitool/aiMulti = null
 	var/obj/item/device/radio/headset/heads/ai_integrated/aiRadio = null
-	var/custom_sprite = 0 //For our custom sprites
 	var/camera_light_on = 0	//Defines if the AI toggled the light on the camera it's looking through.
 	var/datum/trackable/track = null
 	var/last_announcement = ""
@@ -79,6 +78,9 @@ var/list/ai_verbs_default = list(
 	var/bombing_station = 0						// Set to 1 if station nuke auto-destruct is activated
 	var/override_CPUStorage = 0					// Bonus/Penalty CPU Storage. For use by admins/testers.
 	var/override_CPURate = 0					// Bonus/Penalty CPU generation rate. For use by admins/testers.
+
+	var/datum/ai_icon/selected_sprite			// The selected icon set
+	var/custom_sprite 	= 0 					// Whether the selected icon is custom
 
 
 /mob/living/silicon/ai/proc/add_ai_verbs()
@@ -196,11 +198,33 @@ var/list/ai_verbs_default = list(
 		src << "<b>These laws may be changed by other players, or by you being the traitor.</b>"
 
 	job = "AI"
+	setup_icon()
 
 /mob/living/silicon/ai/Destroy()
 	ai_list -= src
 	qdel(eyeobj)
 	..()
+
+/mob/living/silicon/ai/proc/setup_icon()
+	var/file = file2text("config/custom_sprites.txt")
+	var/lines = text2list(file, "\n")
+
+	for(var/line in lines)
+	// split & clean up
+		var/list/Entry = text2list(line, ":")
+		for(var/i = 1 to Entry.len)
+			Entry[i] = trim(Entry[i])
+
+		if(Entry.len < 2)
+			continue;
+
+		if(Entry[1] == src.ckey && Entry[2] == src.real_name)
+			icon = CUSTOM_ITEM_SYNTH
+			custom_sprite = 1
+			selected_sprite = new/datum/ai_icon("Custom", "[src.ckey]-ai", "4", "[ckey]-ai-crash", "#FFFFFF", "#FFFFFF", "#FFFFFF")
+		else
+			selected_sprite = default_ai_icon
+	updateicon()
 
 /mob/living/silicon/ai/pointed(atom/A as mob|obj|turf in view())
 	set popup_menu = 0
@@ -263,57 +287,11 @@ var/list/ai_verbs_default = list(
 	set name = "Set AI Core Display"
 	if(stat || aiRestorePowerRoutine)
 		return
-	if(!custom_sprite) //Check to see if custom sprite time, checking the appopriate file to change a var
-		var/file = file2text("config/custom_sprites.txt")
-		var/lines = text2list(file, "\n")
 
-		for(var/line in lines)
-		// split & clean up
-			var/list/Entry = text2list(line, ":")
-			for(var/i = 1 to Entry.len)
-				Entry[i] = trim(Entry[i])
-
-			if(Entry.len < 2)
-				continue;
-
-			if(Entry[1] == src.ckey && Entry[2] == src.real_name)
-				custom_sprite = 1 //They're in the list? Custom sprite time
-				icon = CUSTOM_ITEM_SYNTH
-
-		//if(icon_state == initial(icon_state))
-	var/icontype = ""
-	if (custom_sprite == 1) icontype = ("Custom")//automagically selects custom sprite if one is available
-	else icontype = input("Select an icon!", "AI", null, null) in list("Monochrome", "Rainbow", "Blue", "Inverted", "Text", "Smiley", "Angry", "Dorf", "Matrix", "Bliss", "Firewall", "Green", "Red", "Static", "Triumvirate", "Triumvirate Static", "Soviet", "Trapped", "Heartline", "Chatterbox", "Helios", "Dug Too Deep", "Goon", "Database", "Glitchman", "Lonestar", "Nanotrasen")
-	switch(icontype)
-		if("Custom") icon_state = "[src.ckey]-ai"
-		if("Rainbow") icon_state = "ai-clown"
-		if("Monochrome") icon_state = "ai-mono"
-		if("Inverted") icon_state = "ai-u"
-		if("Firewall") icon_state = "ai-magma"
-		if("Green") icon_state = "ai-wierd"
-		if("Red") icon_state = "ai-red"
-		if("Static") icon_state = "ai-static"
-		if("Text") icon_state = "ai-text"
-		if("Smiley") icon_state = "ai-smiley"
-		if("Matrix") icon_state = "ai-matrix"
-		if("Angry") icon_state = "ai-angryface"
-		if("Dorf") icon_state = "ai-dorf"
-		if("Bliss") icon_state = "ai-bliss"
-		if("Triumvirate") icon_state = "ai-triumvirate"
-		if("Triumvirate Static") icon_state = "ai-triumvirate-malf"
-		if("Soviet") icon_state = "ai-redoctober"
-		if("Trapped") icon_state = "ai-hades"
-		if("Heartline") icon_state = "ai-heartline"
-		if("Chatterbox") icon_state = "ai-president"
-		if("Helios") icon_state = "ai-helios"
-		if("Dug Too Deep") icon_state = "ai-toodeep"
-		if("Goon") icon_state = "ai-goon"
-		if("Database") icon_state = "ai-database"
-		if("Glitchman") icon_state = "ai-glitchman"
-		if("Lonestar") icon_state = "ai-lonestar"
-		if("Nanotrasen") icon_state = "ai-nanotrasen"
-		else icon_state = "ai"
-
+	if (!custom_sprite)
+		var/new_sprite = input("Select an icon!", "AI", selected_sprite) as null|anything in ai_icons
+		if(new_sprite) selected_sprite = new_sprite
+	updateicon()
 
 // this verb lets the ai see the stations manifest
 /mob/living/silicon/ai/proc/ai_roster()
@@ -450,17 +428,6 @@ var/list/ai_verbs_default = list(
 			src << "\red System error. Cannot locate [html_decode(href_list["trackname"])]."
 		return
 
-	return
-
-/mob/living/silicon/ai/meteorhit(obj/O as obj)
-	for(var/mob/M in viewers(src, null))
-		M.show_message(text("\red [] has been hit by []", src, O), 1)
-		//Foreach goto(19)
-	if (health > 0)
-		adjustBruteLoss(30)
-		if ((O.icon_state == "flaming"))
-			adjustFireLoss(40)
-		updatehealth()
 	return
 
 /mob/living/silicon/ai/reset_view(atom/A)
@@ -678,16 +645,20 @@ var/list/ai_verbs_default = list(
 	set desc = "Augment visual feed with internal sensor overlays"
 	toggle_sensor_mode()
 
-/mob/living/silicon/ai/proc/check_unable(var/flags = 0)
+/mob/living/silicon/ai/proc/check_unable(var/flags = 0, var/feedback = 1)
 	if(stat == DEAD)
-		src << "<span class='warning'>You are dead!</span>"
+		if(feedback) src << "<span class='warning'>You are dead!</span>"
+		return 1
+
+	if(aiRestorePowerRoutine)
+		if(feedback) src << "<span class='warning'>You lack power!</span>"
 		return 1
 
 	if((flags & AI_CHECK_WIRELESS) && src.control_disabled)
-		src << "<span class='warning'>Wireless control is disabled!</span>"
+		if(feedback) src << "<span class='warning'>Wireless control is disabled!</span>"
 		return 1
 	if((flags & AI_CHECK_RADIO) && src.aiRadio.disabledAi)
-		src << "<span class='warning'>System Error - Transceiver Disabled!</span>"
+		if(feedback) src << "<span class='warning'>System Error - Transceiver Disabled!</span>"
 		return 1
 	return 0
 
@@ -701,146 +672,18 @@ var/list/ai_verbs_default = list(
 		return
 	..()
 
-// NEWMALF FUNCTIONS/PROCEDURES
+/mob/living/silicon/ai/updateicon()
+	if(!selected_sprite) selected_sprite = default_ai_icon
 
-// Sets up malfunction-related variables, research system and such.
-/mob/living/silicon/ai/proc/setup_for_malf()
-	var/mob/living/silicon/ai/user = src
-	// Setup Variables
-	malfunctioning = 1
-	research = new/datum/malf_research()
-	research.owner = src
-	hacked_apcs = list()
-	recalc_cpu()
-
-	verbs += new/datum/game_mode/malfunction/verb/ai_select_hardware()
-	verbs += new/datum/game_mode/malfunction/verb/ai_select_research()
-	verbs += new/datum/game_mode/malfunction/verb/ai_help()
-
-	// And greet user with some OOC info.
-	user << "You are malfunctioning, you do not have to follow any laws."
-	user << "Use ai-help command to view relevant information about your abilities"
-
-// Safely remove malfunction status, fixing hacked APCs and resetting variables.
-/mob/living/silicon/ai/proc/stop_malf()
-	var/mob/living/silicon/ai/user = src
-	// Generic variables
-	malfunctioning = 0
-	sleep(10)
-	research = null
-	// Fix hacked APCs
-	if(hacked_apcs)
-		for(var/obj/machinery/power/apc/A in hacked_apcs)
-			A.hacker = null
-	hacked_apcs = null
-	// Reset our verbs
-	src.verbs = null
-	add_ai_verbs()
-	// Let them know.
-	user << "You are no longer malfunctioning. Your abilities have been removed."
-
-// Called every tick. Checks if AI is malfunctioning. If yes calls Process on research datum which handles all logic.
-/mob/living/silicon/ai/proc/malf_process()
-	if(!malfunctioning)
-		return
-	if(!research)
-		if(!errored)
-			errored = 1
-			error("malf_process() called on AI without research datum. Report this.")
-			message_admins("ERROR: malf_process() called on AI without research datum. If admin modified one of the AI's vars revert the change and don't modify variables directly, instead use ProcCall or admin panels.")
-			spawn(1200)
-				errored = 0
-		return
-	recalc_cpu()
-	if(APU_power || aiRestorePowerRoutine != 0)
-		research.process(1)
+	if(stat == DEAD)
+		icon_state = selected_sprite.dead_icon
+		set_light(3, 1, selected_sprite.dead_light)
+	else if(aiRestorePowerRoutine)
+		icon_state = selected_sprite.nopower_icon
+		set_light(1, 1, selected_sprite.nopower_light)
 	else
-		research.process(0)
-
-// Recalculates CPU time gain and storage capacities.
-/mob/living/silicon/ai/proc/recalc_cpu()
-	// AI Starts with these values.
-	var/cpu_gain = 0.01
-	var/cpu_storage = 10
-
-	// Off-Station APCs should not count towards CPU generation.
-	for(var/obj/machinery/power/apc/A in hacked_apcs)
-		if(A.z in config.station_levels)
-			cpu_gain += 0.002
-			cpu_storage += 10
-
-	research.max_cpu = cpu_storage + override_CPUStorage
-	if(hardware && istype(hardware, /datum/malf_hardware/dual_ram))
-		research.max_cpu = research.max_cpu * 1.5
-	research.stored_cpu = min(research.stored_cpu, research.max_cpu)
-
-	research.cpu_increase_per_tick = cpu_gain + override_CPURate
-	if(hardware && istype(hardware, /datum/malf_hardware/dual_cpu))
-		research.cpu_increase_per_tick = research.cpu_increase_per_tick * 2
-
-// Starts AI's APU generator
-/mob/living/silicon/ai/proc/start_apu(var/shutup = 0)
-	if(!hardware || !istype(hardware, /datum/malf_hardware/apu_gen))
-		if(!shutup)
-			src << "You do not have an APU generator and you shouldn't have this verb. Report this."
-		return
-	if(hardware_integrity() < 50)
-		if(!shutup)
-			src << "<span class='notice'>Starting APU... <b>FAULT</b>(System Damaged)</span>"
-		return
-	if(!shutup)
-		src << "Starting APU... ONLINE"
-	APU_power = 1
-
-// Stops AI's APU generator
-/mob/living/silicon/ai/proc/stop_apu(var/shutup = 0)
-	if(!hardware || !istype(hardware, /datum/malf_hardware/apu_gen))
-		return
-
-	if(APU_power)
-		APU_power = 0
-		if(!shutup)
-			src << "Shutting down APU... DONE"
-
-// Returns percentage of AI's remaining backup capacitor charge (maxhealth - oxyloss).
-/mob/living/silicon/ai/proc/backup_capacitor()
-	return ((200 - getOxyLoss()) / 2)
-
-// Returns percentage of AI's remaining hardware integrity (maxhealth - (bruteloss + fireloss))
-/mob/living/silicon/ai/proc/hardware_integrity()
-	return (health-config.health_threshold_dead)/2
-
-// Shows capacitor charge and hardware integrity information to the AI in Status tab.
-/mob/living/silicon/ai/show_system_integrity()
-	if(!src.stat)
-		stat(null, text("Hardware integrity: [hardware_integrity()]%"))
-		stat(null, text("Internal capacitor: [backup_capacitor()]%"))
-	else
-		stat(null, text("Systems nonfunctional"))
-
-// Shows AI Malfunction related information to the AI.
-/mob/living/silicon/ai/show_malf_ai()
-	if(src.is_malf())
-		if(src.hacked_apcs)
-			stat(null, "Hacked APCs: [src.hacked_apcs.len]")
-		stat(null, "System Status: [src.hacking ? "Busy" : "Stand-By"]")
-		if(src.research)
-			stat(null, "Available CPU: [src.research.stored_cpu] TFlops")
-			stat(null, "Maximal CPU: [src.research.max_cpu] TFlops")
-			stat(null, "CPU generation rate: [src.research.cpu_increase_per_tick] TFlops/s")
-			stat(null, "Current research focus: [src.research.focus ? src.research.focus.name : "None"]")
-			if(src.research.focus)
-				stat(null, "Research completed: [round(src.research.focus.invested, 0.1)]/[round(src.research.focus.price)]")
-			if(system_override == 1)
-				stat(null, "SYSTEM OVERRIDE INITIATED")
-			else if(system_override == 2)
-				stat(null, "SYSTEM OVERRIDE COMPLETED")
-
-// Cleaner proc for creating powersupply for an AI.
-/mob/living/silicon/ai/proc/create_powersupply()
-	if(psupply)
-		del(psupply)
-	psupply = new/obj/machinery/ai_powersupply(src)
+		icon_state = selected_sprite.alive_icon
+		set_light(1, 1, selected_sprite.alive_light)
 
 #undef AI_CHECK_WIRELESS
 #undef AI_CHECK_RADIO

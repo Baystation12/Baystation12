@@ -125,7 +125,7 @@
 			if(target in admins)
 				admin_stuff += "/([key])"
 				if(target != src)
-					admin_stuff += "(<A HREF='?src=\ref[target.holder];adminplayerobservejump=\ref[mob]'>JMP</A>)"
+					admin_stuff += "([admin_jump_link(mob, target.holder)])"
 
 			if(target.mob in heard)
 				send = 1

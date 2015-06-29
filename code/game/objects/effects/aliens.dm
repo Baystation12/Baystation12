@@ -82,11 +82,6 @@
 	healthcheck()
 	return
 
-/obj/effect/alien/resin/meteorhit()
-	health-=50
-	healthcheck()
-	return
-
 /obj/effect/alien/resin/hitby(AM as mob|obj)
 	..()
 	for(var/mob/O in viewers(src, null))
@@ -262,7 +257,7 @@ Alien plants should do something if theres a lot of poison
 
 
 /obj/effect/alien/weeds/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
-	if(exposed_temperature > 300)
+	if(exposed_temperature > 300 + T0C)
 		health -= 5
 		healthcheck()
 
@@ -433,7 +428,7 @@ Alien plants should do something if theres a lot of poison
 		Burst()
 
 /obj/effect/alien/egg/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
-	if(exposed_temperature > 500)
+	if(exposed_temperature > 500 + T0C)
 		health -= 5
 		healthcheck()
 

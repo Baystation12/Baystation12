@@ -160,7 +160,7 @@
 
 	if(prefs.lastchangelog != changelog_hash) //bolds the changelog button on the interface so we know there are updates.
 		src << "<span class='info'>You have unread updates in the changelog.</span>"
-		winset(src, "rpane.changelogb", "background-color=#eaeaea;font-style=bold")
+		winset(src, "rpane.changelog", "background-color=#eaeaea;font-style=bold")
 		if(config.aggressive_changelog)
 			src.changes()
 
@@ -177,6 +177,25 @@
 	clients -= src
 	return ..()
 
+
+// here because it's similar to below
+
+// Returns null if no DB connection can be established, or -1 if the requested key was not found in the database
+
+/proc/get_player_age(key)
+	establish_db_connection()
+	if(!dbcon.IsConnected())
+		return null
+
+	var/sql_ckey = sql_sanitize_text(ckey(key))
+
+	var/DBQuery/query = dbcon.NewQuery("SELECT datediff(Now(),firstseen) as age FROM erro_player WHERE ckey = '[sql_ckey]'")
+	query.Execute()
+
+	if(query.NextRow())
+		return text2num(query.item[1])
+	else
+		return -1
 
 
 /client/proc/log_client_to_db()

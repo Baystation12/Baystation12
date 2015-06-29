@@ -294,7 +294,7 @@
 	if(!O.force)
 		visible_message("<span class='notice'>[user] gently taps [src] with \the [O].</span>")
 		return
-	
+
 	if(O.force > resistance)
 		var/damage = O.force
 		if (O.damtype == HALLOSS)
@@ -305,8 +305,8 @@
 		adjustBruteLoss(damage)
 	else
 		usr << "<span class='danger>This weapon is ineffective, it does no damage.</span>"
-	
-	visible_message("<span class='danger>[src] has been attacked with the [O] by [user].</span>")
+
+	visible_message("<span class='danger'>\The [src] has been attacked with \the [O] by [user].</span>")
 	user.do_attack_animation(src)
 
 /mob/living/simple_animal/movement_delay()
@@ -326,10 +326,10 @@
 	if(statpanel("Status") && show_stat_health)
 		stat(null, "Health: [round((health / maxHealth) * 100)]%")
 
-/mob/living/simple_animal/death(gibbed, deathmessage="")
+/mob/living/simple_animal/death(gibbed, deathmessage = "dies!")
 	icon_state = icon_dead
 	density = 0
-	return ..()
+	return ..(gibbed,deathmessage)
 
 /mob/living/simple_animal/ex_act(severity)
 	if(!blinded)
@@ -403,3 +403,13 @@
 		else
 			user.visible_message("<span class='danger'>[user] butchers \the [src] messily!</span>")
 			gib()
+
+/mob/living/simple_animal/handle_fire()
+	return
+
+/mob/living/simple_animal/update_fire()
+	return
+/mob/living/simple_animal/IgniteMob()
+	return
+/mob/living/simple_animal/ExtinguishMob()
+	return

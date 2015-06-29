@@ -15,8 +15,8 @@
 	attack_verb = list("slammed", "whacked", "bashed", "thunked", "battered", "bludgeoned", "thrashed")
 
 	var/spray_particles = 6
-	var/spray_amount = 2	//units of liquid per particle
-	var/max_water = 120
+	var/spray_amount = 8	//units of liquid per particle
+	var/max_water = 240
 	var/last_use = 1.0
 	var/safety = 1
 	var/sprite_name = "fire_extinguisher"
@@ -30,7 +30,8 @@
 	throwforce = 2
 	w_class = 2.0
 	force = 3.0
-	max_water = 60
+	max_water = 120
+	spray_particles = 5
 	sprite_name = "miniFE"
 
 /obj/item/weapon/extinguisher/New()
@@ -48,6 +49,24 @@
 	src.desc = "The safety is [safety ? "on" : "off"]."
 	user << "The safety is [safety ? "on" : "off"]."
 	return
+
+/obj/item/weapon/extinguisher/proc/propel_object(var/obj/O, mob/user, movementdirection)
+	if(O.anchored) return
+
+	var/obj/structure/bed/chair/C
+	if(istype(O, /obj/structure/bed/chair))
+		C = O
+
+	var/list/move_speed = list(1, 1, 1, 2, 2, 3)
+	for(var/i in 1 to 6)
+		if(C) C.propelled = (6-i)
+		O.Move(get_step(user,movementdirection), movementdirection)
+		sleep(move_speed[i])
+	
+	//additional movement
+	for(var/i in 1 to 3)
+		O.Move(get_step(user,movementdirection), movementdirection)
+		sleep(3)
 
 /obj/item/weapon/extinguisher/afterattack(var/atom/target, var/mob/user, var/flag)
 	//TODO; Add support for reagents in water.
@@ -73,35 +92,9 @@
 
 		var/direction = get_dir(src,target)
 
-		if(user.buckled && isobj(user.buckled) && !user.buckled.anchored )
+		if(user.buckled && isobj(user.buckled))
 			spawn(0)
-				var/obj/structure/bed/chair/C = null
-				if(istype(user.buckled, /obj/structure/bed/chair))
-					C = user.buckled
-				var/obj/B = user.buckled
-				var/movementdirection = turn(direction,180)
-				if(C)	C.propelled = 4
-				B.Move(get_step(user,movementdirection), movementdirection)
-				sleep(1)
-				B.Move(get_step(user,movementdirection), movementdirection)
-				if(C)	C.propelled = 3
-				sleep(1)
-				B.Move(get_step(user,movementdirection), movementdirection)
-				sleep(1)
-				B.Move(get_step(user,movementdirection), movementdirection)
-				if(C)	C.propelled = 2
-				sleep(2)
-				B.Move(get_step(user,movementdirection), movementdirection)
-				if(C)	C.propelled = 1
-				sleep(2)
-				B.Move(get_step(user,movementdirection), movementdirection)
-				if(C)	C.propelled = 0
-				sleep(3)
-				B.Move(get_step(user,movementdirection), movementdirection)
-				sleep(3)
-				B.Move(get_step(user,movementdirection), movementdirection)
-				sleep(3)
-				B.Move(get_step(user,movementdirection), movementdirection)
+				propel_object(user.buckled, user, turn(direction,180))
 
 		var/turf/T = get_turf(target)
 		var/turf/T1 = get_step(T,turn(direction, 90))
@@ -111,19 +104,15 @@
 
 		for(var/a = 1 to spray_particles)
 			spawn(0)
+				if(!src || !reagents.total_volume) return
+			
 				var/obj/effect/effect/water/W = PoolOrNew(/obj/effect/effect/water, get_turf(src))
 				var/turf/my_target
-				if(a == 1)
-					my_target = T
-				else if(a == 2)
-					my_target = T1
-				else if(a == 3)
-					my_target = T2
+				if(a <= the_targets.len)
+					my_target = the_targets[a]
 				else
 					my_target = pick(the_targets)
 				W.create_reagents(spray_amount)
-				if(!src)
-					return
 				reagents.trans_to_obj(W, spray_amount)
 				W.set_color()
 				W.set_up(my_target)
