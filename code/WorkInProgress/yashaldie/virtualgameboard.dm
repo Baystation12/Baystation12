@@ -44,8 +44,6 @@
 				ui = new(user, src, ui_key, "flappy.tmpl", "Virtual Game Board", 815, 775)
 			if("Mahj")
 				ui = new(user, src, ui_key, "mahjong.tmpl", "Virtual Game Board", 815, 775)
-			if("OMG")
-				ui = new(user, src, ui_key, "omg.tmpl", "Virtual Game Board", 815, 775)
 			if("Soli")
 				ui = new(user, src, ui_key, "soli.tmpl", "Virtual Game Board", 815, 775)
 			if("Sudo")
@@ -63,11 +61,11 @@
 		nanomanager.close_user_uis(usr, src)
 
 /obj/machinery/virtualgameboard/proc/checkgame()
-	var/list/buttons = list("Flappy Beak","OMGPOP","Mahjong","Multiplayer Chess","Solitaire Suite","Sudoku")
+	var/list/buttons = list("Flappy Beak","Mahjong","Chess","Solitaire Suite","Sudoku")
 	var/style = "<style>BODY {margin:0;font:verdana;background:#464646;color:#e9c179;}</style>"
-	var/game = sd_Alert(usr, "<center><b><font face=verdana size=5>Which game would you like to play?</font></b></center>","Virtual Gameboard", buttons,,0,,"400x150",,style)
+	var/game = sd_Alert(usr, "<center><b><font face=verdana size=5>Would you like to play a game?</font></b></center>","Virtual Gameboard", buttons,,0,,"400x150",,style)
 	switch(game)
-		if("Multiplayer Chess")
+		if("Chess")
 			return "Chess"
 		if("Solitaire Suite")
 			return "Soli"
@@ -77,8 +75,6 @@
 			return "Flap"
 		if("Sudoku")
 			return "Sudo"
-		if("OMGPOP")
-			return "OMG"
 
 /obj/machinery/virtualgameboard/attack_hand(mob/user)
 	if(!user)
