@@ -267,18 +267,15 @@ You are weak to holy things and starlight. Don't go into space and avoid the Cha
 			verbs -= handler
 
 /mob/proc/handle_bloodsucking(mob/living/carbon/human/H)
-		src.mind.vampire.draining = H
-		var/blood = 0
-		var/bloodtotal = 0 //used to see if we increased our blood total
-		var/bloodusable = 0 //used to see if we increased our blood usable
-		if(!(H.species.flags & IS_SYNTHETIC))
-			src.attack_log += text("\[[time_stamp()]\] <font color='red'>Bit [src.name] ([src.ckey]) in the neck and draining their blood</font>")
-			H.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been bit in the neck by [src.name] ([src.ckey])</font>")
-			log_attack("[src.name] ([src.ckey]) bit [H.name] ([H.ckey]) in the neck")
-			msg_admin_attack("[src.name] ([src.ckey]) bit [H.name] ([H.ckey]) in the neck")
-			src.visible_message("\red <b>[src.name] bites [H.name]'s neck!<b>", "\red <b>You bite [H.name]'s neck and begin to drain their blood.", "\blue You hear a soft puncture and a wet sucking noise")
-		else
-			src.visible_message("\red <b>[src.name] tries to bite [H.name]'s neck, but fails!<b>")
+	src.mind.vampire.draining = H
+	var/blood = 0
+	var/bloodtotal = 0 //used to see if we increased our blood total
+	var/bloodusable = 0 //used to see if we increased our blood usable
+	src.attack_log += text("\[[time_stamp()]\] <font color='red'>Bit [src.name] ([src.ckey]) in the neck and draining their blood</font>")
+	H.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been bit in the neck by [src.name] ([src.ckey])</font>")
+	log_attack("[src.name] ([src.ckey]) bit [H.name] ([H.ckey]) in the neck")
+	msg_admin_attack("[src.name] ([src.ckey]) bit [H.name] ([H.ckey]) in the neck")
+	src.visible_message("\red <b>[src.name] bites [H.name]'s neck!<b>", "\red <b>You bite [H.name]'s neck and begin to drain their blood.", "\blue You hear a soft puncture and a wet sucking noise")
 	if(!iscarbon(src))
 		H.LAssailant = null
 	else
