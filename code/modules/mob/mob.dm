@@ -843,7 +843,7 @@ mob/proc/yank_out_object()
 
 	if(!isliving(usr) || !usr.canClick())
 		return
-	usr.changeNextMove(20)
+	usr.setClickCooldown(20)
 
 	if(usr.stat == 1)
 		usr << "You are unconcious and cannot do that!"

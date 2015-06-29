@@ -98,7 +98,7 @@
 	return
 
 /obj/effect/alien/resin/attack_hand()
-	usr.changeNextMove(8)
+	usr.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	if (HULK in usr.mutations)
 		usr << "<span class='notice'>You easily destroy the [name].</span>"
 		for(var/mob/O in oviewers(src))
@@ -125,7 +125,7 @@
 
 /obj/effect/alien/resin/attackby(obj/item/weapon/W as obj, mob/user as mob)
 
-	user.changeNextMove(8)
+	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	var/aforce = W.force
 	health = max(0, health - aforce)
 	playsound(loc, 'sound/effects/attackblob.ogg', 100, 1)
@@ -233,7 +233,7 @@ Alien plants should do something if theres a lot of poison
 	return
 
 /obj/effect/alien/weeds/attackby(var/obj/item/weapon/W, var/mob/user)
-	user.changeNextMove(8)
+	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	if(W.attack_verb.len)
 		visible_message("<span class='danger'>\The [src] have been [pick(W.attack_verb)] with \the [W][(user ? " by [user]." : ".")]</span>")
 	else

@@ -31,7 +31,7 @@
 
 	//These two lines represent a significant buff to grabs...
 	if(!canClick()) return
-	changeNextMove(100)
+	setClickCooldown(100)
 
 	if(can_break_cuffs()) //Don't want to do a lot of logic gating here.
 		break_handcuffs()
@@ -65,7 +65,7 @@
 	if(!canClick())
 		return
 
-	changeNextMove(100)
+	setClickCooldown(100)
 
 	if(can_break_cuffs()) //Don't want to do a lot of logic gating here.
 		break_legcuffs()
@@ -153,7 +153,7 @@
 	if(!canClick())
 		return
 
-	changeNextMove(100)
+	setClickCooldown(100)
 	if(!buckled) return
 
 	if(!restrained())

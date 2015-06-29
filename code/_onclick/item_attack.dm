@@ -12,7 +12,7 @@
 		visible_message("<span class='danger'>[src] has been hit by [user] with [W].</span>")
 
 /mob/living/attackby(obj/item/I, mob/user)
-	user.changeNextMove(8)
+	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	if(istype(I) && ismob(user))
 		I.attack(src, user)
 

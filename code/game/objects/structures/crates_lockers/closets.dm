@@ -349,7 +349,7 @@
 	if(!escapee.canClick())
 		return
 
-	escapee.changeNextMove(100)
+	escapee.setClickCooldown(100)
 
 	//okay, so the closet is either welded or locked... resist!!!
 	escapee << "<span class='warning'>You lean on the back of \the [src] and start pushing the door open. (this will take about [breakout_time] minutes)</span>"

@@ -78,7 +78,7 @@
 		return M.click_action(A, src)
 
 	if(restrained())
-		changeNextMove(10)
+		setClickCooldown(10)
 		RestrainedClickOn(A)
 		return
 
@@ -108,7 +108,7 @@
 				W.afterattack(A, src, 1, params) // 1 indicates adjacency
 		else
 			if(ismob(A)) // No instant mob attacking
-				changeNextMove(8)
+				setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 			UnarmedAttack(A, 1)
 		return
 
@@ -126,7 +126,7 @@
 					W.afterattack(A, src, 1, params) // 1: clicking something Adjacent
 			else
 				if(ismob(A)) // No instant mob attacking
-					changeNextMove(8)
+					setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 				UnarmedAttack(A, 1)
 			return
 		else // non-adjacent click
@@ -137,8 +137,8 @@
 
 	return
 
-/mob/proc/changeNextMove(var/num)
-	next_move = world.time + num
+/mob/proc/setClickCooldown(var/timeout)
+	next_move = max(world.time + timeout, next_move)
 
 /mob/proc/canClick()
 	if(config.no_click_cooldown || next_move <= world.time)
@@ -285,7 +285,7 @@
 	return
 
 /mob/living/LaserEyes(atom/A)
-	changeNextMove(4)
+	setClickCooldown(4)
 	var/turf/T = get_turf(src)
 	var/turf/U = get_turf(A)
 

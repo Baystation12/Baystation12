@@ -33,7 +33,7 @@
 		build_click(src, client.buildmode, params, A)
 		return
 	if(!canClick()) return
-	changeNextMove(4)
+	setClickCooldown(4)
 	// You are responsible for checking config.ghost_interaction when you override this function
 	// Not all of them require checking, see below
 	A.attack_ghost(src)

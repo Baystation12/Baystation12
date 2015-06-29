@@ -39,7 +39,7 @@
 
 	playsound(src.loc, 'sound/effects/spray2.ogg', 50, 1, -6)
 
-	user.changeNextMove(4)
+	user.setClickCooldown(4)
 
 	if(reagents.has_reagent("sacid"))
 		message_admins("[key_name_admin(user)] fired sulphuric acid from \a [src].")
