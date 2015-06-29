@@ -151,6 +151,7 @@
 	name = "Power Claws"
 	desc = "For when you absolutely need to tear your enemies to shreds - Now with added ZZZZZAP!"
 	force = 5
+	flags = NODELAY
 	sharp = 1
 	edge = 1
 	w_class = 4.0
