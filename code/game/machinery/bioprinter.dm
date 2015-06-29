@@ -9,7 +9,7 @@
 	anchored = 1
 	density = 1
 	use_power = 1
-	idle_power_usage = 500 //This is a machine that creates organs. Seriously.
+	idle_power_usage = 250 //This is a machine that creates organs. Seriously.
 
 	icon_state = "bioprinter"
 
