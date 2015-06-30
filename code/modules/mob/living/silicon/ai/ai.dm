@@ -385,7 +385,7 @@ var/list/ai_verbs_default = list(
 	if (!camera)
 		return null
 	user.reset_view(camera)
-	return 1
+	return 0
 
 /mob/living/silicon/ai/restrained()
 	return 0

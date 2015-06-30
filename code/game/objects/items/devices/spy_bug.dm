@@ -143,7 +143,7 @@
 	c_tag = name
 
 /obj/machinery/camera/spy/check_eye(var/mob/user as mob)
-	return 1
+	return 0
 
 /obj/item/device/radio/spy
 	listening = 0

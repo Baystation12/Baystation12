@@ -1356,3 +1356,8 @@
 	if(W in organs)
 		return
 	..()
+
+/mob/living/carbon/human/reset_view(atom/A, update_hud = 1)
+	..()
+	if(update_hud)
+		handle_regular_hud_updates()
