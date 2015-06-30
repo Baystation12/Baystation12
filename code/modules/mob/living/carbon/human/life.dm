@@ -1379,8 +1379,11 @@
 					client.screen |= global_hud.darkMask
 
 			if(machine)
-				if(!machine.check_eye(src))
-					reset_view(null)
+				var/viewflags = machine.check_eye(src)
+				if(viewflags < 0)
+					reset_view(null, 0)
+				else if(viewflags)
+					sight |= viewflags
 			else if(eyeobj)
 				if(eyeobj.owner != src)
 
@@ -1394,7 +1397,7 @@
 						isRemoteObserve = 1
 				if(!isRemoteObserve && client && !client.adminobs)
 					remoteview_target = null
-					reset_view(null)
+					reset_view(null, 0)
 		return 1
 
 	proc/process_glasses(var/obj/item/clothing/glasses/G)
