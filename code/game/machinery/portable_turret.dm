@@ -347,9 +347,9 @@ var/list/turret_icons
 
 /obj/machinery/porta_turret/proc/take_damage(var/force)
 	if(!raised && !raising)
-		if(force < 10)
-			return
 		force = force / 8
+		if(force < 5)
+			return
 
 	health -= force
 	if (force > 5 && prob(45))
@@ -359,9 +359,6 @@ var/list/turret_icons
 
 /obj/machinery/porta_turret/bullet_act(obj/item/projectile/Proj)
 	if(Proj.damage_type == HALLOSS)
-		return
-
-	if(!raised && !raising)
 		return
 
 	if(enabled)
