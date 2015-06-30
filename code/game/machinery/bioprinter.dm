@@ -1,8 +1,9 @@
 //These machines are mostly just here for debugging/spawning. Skeletons of the feature to come.
+//Hahahahah. No. I've nerfed it to the ground, should be ready for use.
 
 /obj/machinery/bioprinter
 	name = "organ bioprinter"
-	desc = "It's a machine that grows replacement organs."
+	desc = "It's a machine that grows replacement organs. Don't forget the DNA!" //inb4 people forget to set the DNA and cause organ rejection. yay for cervaline!
 	icon = 'icons/obj/surgery.dmi'
 
 	anchored = 1
@@ -38,7 +39,7 @@
 
 		stored_matter -= products[choice][2]
 		var/new_organ = products[choice][1]
-		src.visible_message("\blue The printer begins fabricating the organ..."")
+		visible_message("\blue The printer begins fabricating the organ..."")
 		sleep(10)
 		var/obj/item/organ/O = new new_organ(get_turf(src))
 
