@@ -503,7 +503,7 @@ var/list/turret_icons
 	if(emagged)
 		return 10
 
-	return H.assess_perp(src, check_weapons, check_records, check_arrest)
+	return H.assess_perp(src, check_access, check_weapons, check_records, check_arrest)
 
 /obj/machinery/porta_turret/proc/tryToShootAt(var/list/mob/living/targets)
 	if(targets.len && last_target && (last_target in targets) && target(last_target))
