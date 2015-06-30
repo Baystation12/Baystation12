@@ -38,6 +38,8 @@
 
 		stored_matter -= products[choice][2]
 		var/new_organ = products[choice][1]
+		src.visible_message("\blue The printer begins fabricating the organ...)
+		sleep(10)
 		var/obj/item/organ/O = new new_organ(get_turf(src))
 
 		if(prints_prosthetics)
