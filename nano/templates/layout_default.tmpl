@@ -1,3 +1,34 @@
+{{if data.PC_hasheader}}
+	<div style="float: left">
+		<div class='item'>
+			<table><tr>
+			{{if data.PC_batteryicon}}
+				<td><img src='{{:data.PC_batteryicon}}'>
+			{{/if}}
+			{{if data.PC_batterypercent}}
+				<td><b>{{:data.PC_batterypercent}}</b>
+			{{/if}}
+			{{if data.PC_ntneticon}}
+				<td><img src='{{:data.PC_ntneticon}}'>
+			{{/if}}
+			{{if data.PC_apclinkicon}}
+				<td><img src='{{:data.PC_apclinkicon}}'>
+			{{/if}}
+			{{if data.PC_stationtime}}
+				<td><b>{{:data.PC_stationtime}}<b>
+			{{/if}}
+			</table>
+		</div>
+	</div>
+	<div style="float: right">
+		<table><tr>
+			<td>{{:helper.link('Shutdown', 'icon-power', {'PC_shutdown' : 1})}}
+			<td>{{:helper.link('Exit Program', 'icon-close', {'PC_exit' : 1})}}
+		</table>
+	</div>
+	<div style="clear: both">
+{{/if}}
+
 <div id='uiTitleWrapper' unselectable="on"><div id='uiStatusIcon' class='icon24 uiStatusGood' unselectable="on"></div><div id='uiTitleText' unselectable="on">{{:config.title}}</div><div id='uiTitleFluff' unselectable="on"></div></div>
 <div id='uiMapWrapper' class="hidden" unselectable="on">
     <div id='uiMapHeader' unselectable="on">

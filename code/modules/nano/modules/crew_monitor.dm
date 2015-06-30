@@ -4,7 +4,7 @@
 
 /datum/nano_module/crew_monitor/Topic(href, href_list)
 	if(..()) return
-	var/turf/T = get_turf(src)
+	var/turf/T = get_turf(nano_host())
 	if (!T || !(T.z in config.player_levels))
 		usr << "<span class='warning'>Unable to establish a connection</span>: You're too far away from the station!"
 		return 0
@@ -27,7 +27,9 @@
 	src.scan()
 
 	var/data[0]
-	var/turf/T = get_turf(src)
+	if(program)
+		data = program.get_header_data()
+	var/turf/T = get_turf(nano_host())
 	var/list/crewmembers = list()
 	for(var/obj/item/clothing/under/C in src.tracked)
 

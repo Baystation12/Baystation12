@@ -23,7 +23,7 @@
 	..()
 
 // 0 - No signal, 1 - Low signal, 2 - High signal. 3 - Wired Connection
-/datum/computer_hardware/network_card/proc/get_signal()
+/datum/computer_hardware/network_card/proc/get_signal(var/specific_action = 0)
 	if(!holder) // Hardware is not installed in anything. No signal. How did this even get called?
 		return 0
 
@@ -33,7 +33,8 @@
 	if(ethernet) // Computer is connected via wired connection.
 		return 3
 
-	// TODO: Add checks for NTNet Relays here!
+	if(!ntnet_global || !ntnet_global.check_function(specific_action)) // NTNet is down and we are not connected via wired connection. No signal.
+		return 0
 
 	if(holder.z in config.station_levels) // Computer is on station, High signal
 		return 2

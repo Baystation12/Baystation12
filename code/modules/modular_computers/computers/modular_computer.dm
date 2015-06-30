@@ -163,7 +163,11 @@
 	battery.maxcharge = 500
 	battery.charge = 500
 
+	hard_drive.stored_files.Add(new/datum/computer_file/program/alarm_monitor(src))
 	hard_drive.stored_files.Add(new/datum/computer_file/program/power_monitor(src))
+	hard_drive.stored_files.Add(new/datum/computer_file/program/atmos_control(src))
+	hard_drive.stored_files.Add(new/datum/computer_file/program/rcon_console(src))
+	hard_drive.stored_files.Add(new/datum/computer_file/program/suit_sensors(src))
 	update_icon()
 	..()
 
@@ -205,6 +209,7 @@
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "laptop_mainscreen.tmpl", "NTOS Main Menu", 400, 500)
+		ui.auto_update_layout = 1
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)
@@ -224,7 +229,11 @@
 		use_power = 0
 		return 0
 
-	handle_power() // Handles all laptop power interaction
+	if(active_program && active_program.requires_ntnet && !get_ntnet_status(active_program.requires_ntnet_feature)) // Active program requires NTNet to run but we've just lost connection. Crash.
+		kill_program(1)
+		visible_message("<span class='danger'>\The [src]'s screen briefly freezes and then shows \"NETWORK ERROR - NTNet connection lost. Please retry. If problem persists contact your system administrator.\" error.</span>")
+
+	handle_power() // Handles all computer power interaction
 
 // Function used by NanoUI's to obtain data for header. All relevant entries begin with "PC_"
 /obj/machinery/modular_computer/proc/get_header_data()
@@ -276,9 +285,9 @@
 	update_icon()
 
 // Returns 0 for No Signal, 1 for Low Signal and 2 for Good Signal. 3 is for wired connection (always-on)
-/obj/machinery/modular_computer/proc/get_ntnet_status()
+/obj/machinery/modular_computer/proc/get_ntnet_status(var/specific_action = 0)
 	if(network_card)
-		return network_card.get_signal()
+		return network_card.get_signal(specific_action)
 	else
 		return 0
 
@@ -291,6 +300,7 @@
 		kill_program(1)
 		visible_message("\The [src] shuts down.")
 		enabled = 0
+		update_icon()
 		return
 	if( href_list["PC_runprogram"] )
 		var/prog = href_list["PC_runprogram"]
@@ -300,8 +310,12 @@
 			P = hard_drive.find_file_by_name(prog)
 
 		if(!P || !istype(P)) // Program not found or it's not executable program.
+			user << "<span class='danger'>\The [src]'s screen shows \"I/O ERROR - Unable to run program\" warning.</span>"
 			return
 
+		if(P.requires_ntnet && !get_ntnet_status(P.requires_ntnet_feature)) // The program requires NTNet connection, but we are not connected to NTNet.
+			user << "<span class='danger'>\The [src]'s screen shows \"NETWORK ERROR - Unable to connect to NTNet. Please retry. If problem persists contact your system administrator.\" warning.</span>"
+			return
 		if(P.run_program(user))
 			active_program = P
 			update_icon()
@@ -310,7 +324,7 @@
 // Used in following function to reduce copypaste
 /obj/machinery/modular_computer/proc/power_failure()
 	if(enabled) // Shut down the computer)
-		visible_message("\The [src]'s screen flickers \"BATTERY CRITICAL\" warning as it shuts down unexpectedly.")
+		visible_message("<span class='danger'>\The [src]'s screen flickers \"BATTERY CRITICAL\" warning as it shuts down unexpectedly.</span>")
 		kill_program(1)
 		enabled = 0
 		update_icon()

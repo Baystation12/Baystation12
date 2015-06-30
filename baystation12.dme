@@ -1332,6 +1332,8 @@
 #include "code\modules\modular_computers\hardware\hardware.dm"
 #include "code\modules\modular_computers\hardware\network_card.dm"
 #include "code\modules\modular_computers\hardware\tesla_link.dm"
+#include "code\modules\modular_computers\NTNet\NTNet.dm"
+#include "code\modules\modular_computers\NTNet\NTNet_relay.dm"
 #include "code\modules\nano\_JSON.dm"
 #include "code\modules\nano\JSON Reader.dm"
 #include "code\modules\nano\JSON Writer.dm"

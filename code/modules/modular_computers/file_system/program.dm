@@ -10,6 +10,8 @@
 	var/filedesc = "Unknown Program"		// User-friendly name of this program.
 	var/fileicon = "unknwn"					// Name of relevant icon that is displayed with the program
 	var/laptop_icon_state = null			// Program-specific icon state (stored in /icons/obj/computer3.dmi)
+	var/requires_ntnet = 0					// Set to 1 for program to require nonstop NTNet connection to run. If NTNet connection is lost program crashes.
+	var/requires_ntnet_feature = 0			// Optional, if above is set to 1 checks for specific function of NTNet (currently NTNET_SOFTWAREDOWNLOAD, NTNET_PEERTOPEER, NTNET_SYSTEMCONTROL and NTNET_COMMUNICATION)
 
 /datum/computer_file/program/New(var/atom/movable/comp = null)
 	..()
@@ -18,19 +20,29 @@
 
 // Check if the user can run program. Only humans can operate computer. Automatically called in run_program()
 // User has to wear their ID or have it inhand for ID Scan to work.
-/datum/computer_file/program/proc/can_run(var/mob/living/user)
+/datum/computer_file/program/proc/can_run(var/mob/living/user, var/loud = 0)
 	if(!required_access) // No required_access, allow it.
 		return 1
 	if(istype(user, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = user
 		var/obj/item/weapon/card/id/I = H.wear_id
-		if(!H) // No equipped ID, let's try checking active hand too
+		var/obj/item/device/pda/P = H.wear_id
+		if(P && istype(P)) // PDA. Try to grab the ID from it then.
+			I = P.id
+		if(!I) // No equipped ID, let's try checking active hand too
 			I = H.get_active_hand()
-		if(!H || !istype(I)) // Still no ID.
+			P = H.get_active_hand()
+			if(P && istype(P))
+				I = P.id
+		if(!I || !istype(I)) // Still no ID.
+			if(loud && computer)
+				user << "<span class='danger'>\The [computer] flashes an \"RFID Error - Unable to scan ID\" warning.</span>"
 			return 0
 
 		if(required_access in I.access)
 			return 1
+	if(loud && computer)
+		user << "<span class='danger'>\The [computer] flashes an \"Access Denied\" warning.</span>"
 	return 0
 
 // This attempts to retrieve header data for NanoUIs. If implementing completely new device of different type than existing ones
@@ -43,7 +55,7 @@
 // This is performed on program startup. May be overriden to add extra logic. Remember to include ..() call. Return 1 on success, 0 on failure.
 // When implementing new program based device, use this to run the program.
 /datum/computer_file/program/proc/run_program(var/mob/living/user)
-	if(can_run(user))
+	if(can_run(user, 1))
 		if(nanomodule_path)
 			NM = new nanomodule_path(computer)	// Computer is passed here as it's (probably!) physical object. Some UI's perform get_turf() and passing program datum wouldn't go well with this.
 			NM.program = src					// Set the program reference to separate variable, instead.
