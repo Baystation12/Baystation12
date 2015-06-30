@@ -274,7 +274,7 @@
 			C.drop_from_inventory(C.handcuffed)
 		C.handcuffed = initial(C.handcuffed)
 		
-		C.heart_attack = 0
+	//	C.heart_attack = 0
 		
 		if (C.legcuffed && !initial(C.legcuffed))
 			C.drop_from_inventory(C.legcuffed)
