@@ -15,7 +15,7 @@
 /*
  * Classic Baton
  */
-/obj/item/weapon/melee/classic_baton
+/obj/item/weapon/melee/classic_baton //This /NEEDED/ a nerf
 	name = "police baton"
 	desc = "A wooden truncheon for beating criminal scum."
 	icon = 'icons/obj/weapons.dmi'
@@ -46,14 +46,12 @@
 		//playsound(src.loc, "swing_hit", 50, 1, -1)
 		if (M.stuttering < 8 && (!(HULK in M.mutations))  /*&& (!istype(H:wear_suit, /obj/item/clothing/suit/judgerobe))*/)
 			M.stuttering = 8
-		M.Stun(8)
-		M.Weaken(8)
+		M.Weaken(15)
 		for(var/mob/O in viewers(M))
 			if (O.client)	O.show_message("\red <B>[M] has been beaten with \the [src] by [user]!</B>", 1, "\red You hear someone fall", 2)
 	else
 		playsound(src.loc, 'sound/weapons/Genhit.ogg', 50, 1, -1)
-		M.Stun(5)
-		M.Weaken(5)
+		M.Weaken(10)
 		M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been attacked with [src.name] by [user.name] ([user.ckey])</font>")
 		user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [src.name] to attack [M.name] ([M.ckey])</font>")
 		msg_admin_attack("[key_name(user)] attacked [key_name(user)] with [src.name] (INTENT: [uppertext(user.a_intent)])")
