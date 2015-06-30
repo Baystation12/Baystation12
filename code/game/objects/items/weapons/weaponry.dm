@@ -119,7 +119,7 @@
 	flags = CONDUCT
 	slot_flags = SLOT_BELT
 	force = 40
-	throwforce = 10
+	throwforce = 15
 	sharp = 1
 	edge = 1
 	w_class = 3
@@ -144,7 +144,7 @@
 	flags = CONDUCT
 	slot_flags = SLOT_BELT | SLOT_BACK
 	force = 40
-	throwforce = 10
+	throwforce = 15
 	sharp = 1
 	edge = 1
 	w_class = 3
@@ -169,7 +169,7 @@
 	icon_state = "harpoon"
 	item_state = "harpoon"
 	force = 20
-	throwforce = 15
+	throwforce = 35 //It's a harpoon for goodness sake
 	w_class = 3
 	attack_verb = list("jabbed","stabbed","ripped")
 
@@ -235,8 +235,8 @@
 	if(active)
 		user << "<span class='notice'>You flip out your [src].</span>"
 		playsound(user, 'sound/weapons/flipblade.ogg', 15, 1)
-		force = 15 //bay adjustments
-		throwforce = 12
+		force = 12 //bay adjustments //Hahahaha no. Nerfed - Cirra
+		throwforce = 10
 		edge = 1
 		sharp = 1
 		hitsound = 'sound/weapons/bladeslice.ogg'
