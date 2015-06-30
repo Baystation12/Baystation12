@@ -9,12 +9,10 @@
 	icon_state = "turretCover"
 	anchored = 1
 
-	density = 1
+	density = 0
 	use_power = 1				//this turret uses and requires power
 	idle_power_usage = 50		//when inactive, this turret takes up constant 50 Equipment power
 	active_power_usage = 300	//when active, this turret takes up constant 300 Equipment power
-	req_access = null
-	req_one_access = list(access_security, access_heads)
 	power_channel = EQUIP	//drains power from the EQUIPMENT channel
 
 	var/raised = 0			//if the turret cover is "open" and the turret is raised
@@ -59,9 +57,14 @@
 	var/last_target			//last target fired at, prevents turrets from erratically firing at all valid targets in range
 
 /obj/machinery/porta_turret/crescent
+	enabled = 0
 	ailock = 1
-	check_access = 0
-	check_records = 0
+	check_synth	 = 0
+	check_access = 1
+	check_arrest = 1
+	check_records = 1
+	check_weapons = 1
+	check_anomalies = 1
 
 /obj/machinery/porta_turret/stationary
 	ailock = 1
@@ -70,12 +73,20 @@
 
 /obj/machinery/porta_turret/New()
 	..()
+	req_access.Cut()
+	req_one_access = list(access_security, access_heads)
+
 	//Sets up a spark system
 	spark_system = new /datum/effect/effect/system/spark_spread
 	spark_system.set_up(5, 0, src)
 	spark_system.attach(src)
 
 	setup()
+
+/obj/machinery/porta_turret/crescent/New()
+	..()
+	req_one_access.Cut()
+	req_access = list(access_cent_specops)
 
 /obj/machinery/porta_turret/Destroy()
 	qdel(spark_system)
@@ -406,10 +417,8 @@ var/list/turret_icons
 
 /obj/machinery/porta_turret/proc/die()	//called when the turret dies, ie, health <= 0
 	health = 0
-	density = 0
 	stat |= BROKEN	//enables the BROKEN bit
 	spark_system.start()	//creates some sparks because they look cool
-	density = 1
 	update_icon()
 
 /obj/machinery/porta_turret/process()
@@ -528,7 +537,7 @@ var/list/turret_icons
 		return
 	if(stat & BROKEN)
 		return
-	raising = 1
+	set_raised_raising(raised, 1)
 	update_icon()
 
 	var/atom/flick_holder = PoolOrNew(/atom/movable/porta_turret_cover, loc)
@@ -537,8 +546,7 @@ var/list/turret_icons
 	sleep(10)
 	qdel(flick_holder)
 
-	raising = 0
-	raised = 1
+	set_raised_raising(1, 0)
 	update_icon()
 
 /obj/machinery/porta_turret/proc/popDown()	//pops the turret down
@@ -549,7 +557,7 @@ var/list/turret_icons
 		return
 	if(stat & BROKEN)
 		return
-	raising = 1
+	set_raised_raising(raised, 1)
 	update_icon()
 
 	var/atom/flick_holder = PoolOrNew(/atom/movable/porta_turret_cover, loc)
@@ -558,9 +566,13 @@ var/list/turret_icons
 	sleep(10)
 	qdel(flick_holder)
 
-	raising = 0
-	raised = 0
+	set_raised_raising(0, 0)
 	update_icon()
+
+/obj/machinery/porta_turret/proc/set_raised_raising(var/raised, var/raising)
+	src.raised = raised
+	src.raising = raising
+	density = raised || raising
 
 /obj/machinery/porta_turret/proc/target(var/mob/living/target)
 	if(disabled)
