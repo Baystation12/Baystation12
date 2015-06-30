@@ -19,7 +19,6 @@
 	var/local_transmit //If set, can only speak to others of the same type within a short range.
 
 	var/sensor_mode = 0 //Determines the current HUD.
-	var/mob/living/cameraFollow = null
 
 	var/next_alarm_notice
 	var/list/datum/alarm/queued_alarms = new()

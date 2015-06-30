@@ -1380,7 +1380,7 @@
 			if(eyeobj.owner != src)
 
 				reset_view(null)
-			else
+		else
 			var/isRemoteObserve = 0
 			if((mRemote in mutations) && remoteview_target)
 				if(remoteview_target.stat==CONSCIOUS)
