@@ -1,19 +1,20 @@
 //These machines are mostly just here for debugging/spawning. Skeletons of the feature to come.
+//Hahahahah. No. I've nerfed it to the ground, should be ready for use.
 
 /obj/machinery/bioprinter
 	name = "organ bioprinter"
-	desc = "It's a machine that grows replacement organs."
+	desc = "It's a machine that grows replacement organs. Don't forget the DNA!" //inb4 people forget to set the DNA and cause organ rejection. yay for cervaline!
 	icon = 'icons/obj/surgery.dmi'
 
 	anchored = 1
 	density = 1
 	use_power = 1
-	idle_power_usage = 40
+	idle_power_usage = 250 //This is a machine that creates organs. Seriously.
 
 	icon_state = "bioprinter"
 
 	var/prints_prosthetics
-	var/stored_matter = 200
+	var/stored_matter = 50
 	var/loaded_dna //Blood sample for DNA hashing.
 	var/list/products = list(
 		"heart" =   list(/obj/item/organ/heart,  50),

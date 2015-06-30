@@ -702,6 +702,7 @@ var/list/datum/dna/hivemind_bank = list()
 
 	if(!T) return
 	if(!(T in view(changeling.sting_range))) return
+	if(T.species.flags & IS_SYNTHETIC) return
 	if(!sting_can_reach(T, changeling.sting_range)) return
 	if(!changeling_power(required_chems)) return
 

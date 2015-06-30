@@ -65,7 +65,7 @@
 
 /obj/item/device/radio/headset/headset_sec
 	name = "security radio headset"
-	desc = "This is used by your elite security force."
+	desc = "This is used by your 'elite' security force."
 	icon_state = "sec_headset"
 	item_state = "headset"
 	ks2type = /obj/item/device/encryptionkey/headset_sec

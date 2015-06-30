@@ -437,10 +437,10 @@ datum
 
 				if(alien && alien == IS_VOX)
 					M.adjustToxLoss(REAGENTS_METABOLISM)
-					
+
 				if(alien && alien == IS_KIDAN)
 					M.hallucination = max(M.hallucination, 2)
-				
+
 				else
 					if(M.losebreath >= 10)
 						M.losebreath = max(10, M.losebreath-5)
@@ -1126,7 +1126,7 @@ datum
 				holder.remove_reagent("lexorin", 2*REM)
 				..()
 				return
-				
+
 		cervaline
 			name = "Cervaline"
 			id = "cervaline"
@@ -1135,7 +1135,7 @@ datum
 			color = "#DFB1DA" // rgb: 223, 177, 218
 			overdose = 30
 			scannable = 1
-			custom_metabolism = 0.005 
+			custom_metabolism = 0.005
 			on_mob_life(var/mob/living/M as mob)
 				if(!M) M = holder.my_atom
 				if(ishuman(M))

@@ -26,7 +26,7 @@
 	icon_state = "cypherkey"
 	translate_binary = 1
 	origin_tech = "syndicate=3"
-
+	
 /obj/item/device/encryptionkey/headset_sec
 	name = "security radio encryption key"
 	icon_state = "sec_cypherkey"

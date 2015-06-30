@@ -146,15 +146,31 @@
 
 //Power Claws - Cirra//
 /obj/item/weapon/twohanded/pclaws
-	icon_state = "pclaws0"
-	base_icon = "pclaws"
+	icon_state = "pgloves"
+	base_icon = "pgloves"
 	name = "Power Claws"
 	desc = "For when you absolutely need to tear your enemies to shreds - Now with added ZZZZZAP!"
 	force = 5
+	flags = NODELAY
 	sharp = 1
 	edge = 1
 	w_class = 4.0
-	force_wielded = 35
+	force_wielded = 15
+	attack_verb = list("shredded", "torn", "ripped", "slashed", "carved", "eviscerated", "scratched", "sliced", "gashed")
+
+/obj/item/weapon/twohanded/eclaws //This will be a syndie rigsuit module, soon enough. WIP
+	icon_state = "egloves"
+	base_icon = "egloves"
+	name = "Energy Claws"
+	desc = "For when you absolutely need to tear your enemies to shreds - Now with EVEN MORE added ZZZZZAP!"
+	force = 10
+	sharp = 1
+	flags = NODELAY
+	edge = 1
+	w_class = 4.0
+	wieldsound = 'sound/weapons/saberon.ogg'
+	unwieldsound = 'sound/weapons/saberoff.ogg'
+	force_wielded = 25
 	attack_verb = list("shredded", "torn", "ripped", "slashed", "carved", "eviscerated", "scratched", "sliced", "gashed")
 
 /*

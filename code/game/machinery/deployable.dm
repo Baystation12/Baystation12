@@ -55,6 +55,7 @@ for reference:
 
 
 //Barricades, maybe there will be a metal one later...
+//Do we really need one? Metal Grilles and walls work well enough, for that - Cirra
 /obj/structure/barricade/wooden
 	name = "wooden barricade"
 	desc = "This space is blocked off by a wooden barricade."
