@@ -413,7 +413,7 @@ var/list/turret_icons
 			else
 				take_damage(initial(health) * 8) //should instakill most turrets
 		if (3)
-			take_damage(400)
+			take_damage(initial(health) * 8 / 3)
 
 /obj/machinery/porta_turret/proc/die()	//called when the turret dies, ie, health <= 0
 	health = 0
