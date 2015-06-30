@@ -284,7 +284,7 @@
 
 	if (src.stat != 2)
 		if (src.machine)
-			if (!( src.machine.check_eye(src) ))
+			if (src.machine.check_eye(src) < 0)
 				src.reset_view(null)
 		else
 			if(client && !client.adminobs)

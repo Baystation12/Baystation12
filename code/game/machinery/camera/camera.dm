@@ -260,6 +260,11 @@
 		//I guess that doesn't matter since they couldn't use it anyway?
 		kick_viewers()
 
+/obj/machinery/camera/check_eye(mob/user)
+	if(!can_use()) return -1
+	if(isXRay()) return SEE_TURFS|SEE_MOBS|SEE_OBJS
+	return 0
+
 //This might be redundant, because of check_eye()
 /obj/machinery/camera/proc/kick_viewers()
 	for(var/mob/O in player_list)
