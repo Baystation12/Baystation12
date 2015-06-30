@@ -57,7 +57,6 @@
 			src.destroyed = 1
 			new /obj/item/weapon/shard( src.loc )
 			playsound(src, "shatter", 70, 1)
-			viewers(user) << pick("\red <b>An alarm sounds from the case!</b>")
 			update_icon()
 	else
 		playsound(src.loc, 'sound/effects/Glasshit.ogg', 75, 1)
