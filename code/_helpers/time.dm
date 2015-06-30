@@ -7,7 +7,7 @@
 var/roundstart_hour = 0
 //Returns the world time in english
 proc/worldtime2text(time = world.time)
-	if(!roundstart_hour) roundstart_hour = pick(2,7,12,17)
+	if(!roundstart_hour) roundstart_hour = pick(9)
 
 	var/hour = (round(time / 36000)+roundstart_hour) % 24
 	if(hour < 10) hour = add_zero(hour, 1)
