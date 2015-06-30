@@ -77,7 +77,7 @@
 				user.unset_machine()
 			return -1
 
-		user.reset_view(S.current)
+		user.reset_view(S.current, 0)
 		return 0
 
 	/*
