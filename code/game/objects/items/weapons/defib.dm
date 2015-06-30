@@ -519,4 +519,4 @@
 		else
 			user << "<span class='notice'>You need to target your patient's chest with [src].</span>"
 			return
-			*\
+			*/
