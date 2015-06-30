@@ -223,6 +223,13 @@
 
 	return 1
 
+	if (stat != 2)
+		if (machine)
+			if (machine.check_eye(src) < 0)
+				reset_view(null)
+		else
+			if(client && !client.adminobs)
+				reset_view(null)
 
 /*/mob/living/carbon/brain/emp_act(severity)
 	if(!(container && istype(container, /obj/item/device/mmi)))

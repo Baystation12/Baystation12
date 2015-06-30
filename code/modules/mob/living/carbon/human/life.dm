@@ -1371,22 +1371,23 @@
 				client.screen |= global_hud.darkMask
 
 		if(machine)
-			if(!machine.check_eye(src))
-				reset_view(null)
+			var/viewflags = machine.check_eye(src)
+			if(viewflags < 0)
+				reset_view(null, 0)
+			else if(viewflags)
+				sight |= viewflags
 		else if(eyeobj)
 			if(eyeobj.owner != src)
 
 				reset_view(null)
 			else
-				src.sight |= SEE_TURFS|SEE_MOBS|SEE_OBJS
-		else
 			var/isRemoteObserve = 0
 			if((mRemote in mutations) && remoteview_target)
 				if(remoteview_target.stat==CONSCIOUS)
 					isRemoteObserve = 1
 			if(!isRemoteObserve && client && !client.adminobs)
 				remoteview_target = null
-				reset_view(null)
+				reset_view(null, 0)
 	return 1
 
 /mob/living/carbon/human/proc/process_glasses(var/obj/item/clothing/glasses/G)
