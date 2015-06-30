@@ -58,7 +58,13 @@
 	var/wrenching = 0
 	var/last_target			//last target fired at, prevents turrets from erratically firing at all valid targets in range
 
+/obj/machinery/porta_turret/crescent
+	ailock = 1
+	check_access = 0
+	check_records = 0
+
 /obj/machinery/porta_turret/stationary
+	ailock = 1
 	lethal = 1
 	installation = /obj/item/weapon/gun/energy/laser
 
@@ -341,6 +347,8 @@ var/list/turret_icons
 
 /obj/machinery/porta_turret/proc/take_damage(var/force)
 	if(!raised && !raising)
+		if(force < 10)
+			return
 		force = force / 8
 
 	health -= force
@@ -395,9 +403,9 @@ var/list/turret_icons
 			if (prob(25))
 				qdel(src)
 			else
-				take_damage(150) //should instakill most turrets
+				take_damage(initial(health) * 8) //should instakill most turrets
 		if (3)
-			take_damage(50)
+			take_damage(400)
 
 /obj/machinery/porta_turret/proc/die()	//called when the turret dies, ie, health <= 0
 	health = 0
