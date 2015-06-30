@@ -6,10 +6,9 @@
 /obj/machinery/porta_turret
 	name = "turret"
 	icon = 'icons/obj/turrets.dmi'
-	icon_state = "grey_target_prism"
+	icon_state = "turretCover"
 	anchored = 1
-	layer = 3
-	invisibility = INVISIBILITY_LEVEL_TWO	//the turret is invisible if it's inside its cover
+
 	density = 1
 	use_power = 1				//this turret uses and requires power
 	idle_power_usage = 50		//when inactive, this turret takes up constant 50 Equipment power
@@ -34,7 +33,6 @@
 	var/iconholder = null	//holder for the icon_state. 1 for orange sprite, null for blue.
 	var/egun = null			//holder to handle certain guns switching bullettypes
 
-	var/obj/machinery/porta_turret_cover/cover = null	//the cover that is covering this turret
 	var/last_fired = 0		//1: if the turret is cooling down from a shot, 0: turret is ready to fire
 	var/shot_delay = 15		//1.5 seconds between each shot
 
@@ -66,15 +64,17 @@
 
 /obj/machinery/porta_turret/New()
 	..()
-	icon_state = "grey_target_prism"
 	//Sets up a spark system
 	spark_system = new /datum/effect/effect/system/spark_spread
 	spark_system.set_up(5, 0, src)
 	spark_system.attach(src)
 
-	cover = new /obj/machinery/porta_turret_cover(loc)
-	cover.Parent_Turret = src
 	setup()
+
+/obj/machinery/porta_turret/Destroy()
+	qdel(spark_system)
+	spark_system = null
+	. = ..()
 
 /obj/machinery/porta_turret/proc/setup()
 	var/obj/item/weapon/gun/energy/E = installation	//All energy-based weapons are applicable
@@ -127,31 +127,30 @@
 			eshot_sound = 'sound/weapons/Laser.ogg'
 			egun = 1
 
+var/list/turret_icons
+
 /obj/machinery/porta_turret/update_icon()
-	if(!anchored)
-		icon_state = "turretCover"
-		return
+	if(!turret_icons)
+		turret_icons = list()
+		turret_icons["open"] = image(icon, "openTurretCover")
+
+	underlays.Cut()
+	underlays += turret_icons["open"]
+
 	if(stat & BROKEN)
 		icon_state = "destroyed_target_prism"
-	else
-		if(powered())
-			if(enabled)
-				if(iconholder)
-					//lasers have a orange icon
-					icon_state = "orange_target_prism"
-				else
-					//almost everything has a blue icon
-					icon_state = "target_prism"
+	else if(raised || raising)
+		if(powered() && enabled)
+			if(iconholder)
+				//lasers have a orange icon
+				icon_state = "orange_target_prism"
 			else
-				icon_state = "grey_target_prism"
+				//almost everything has a blue icon
+				icon_state = "target_prism"
 		else
 			icon_state = "grey_target_prism"
-
-/obj/machinery/porta_turret/Destroy()
-	//deletes its own cover with it
-	qdel(cover)
-	cover = null
-	..()
+	else
+		icon_state = "turretCover"
 
 /obj/machinery/porta_turret/proc/isLocked(mob/user)
 	if(ailock && user.isSilicon())
@@ -310,17 +309,13 @@
 			if(!anchored)
 				playsound(loc, 'sound/items/Ratchet.ogg', 100, 1)
 				anchored = 1
-				invisibility = INVISIBILITY_LEVEL_TWO
 				update_icon()
 				user << "<span class='notice'>You secure the exterior bolts on the turret.</span>"
-				create_cover()
 			else if(anchored)
 				playsound(loc, 'sound/items/Ratchet.ogg', 100, 1)
 				anchored = 0
 				user << "<span class='notice'>You unsecure the exterior bolts on the turret.</span>"
-				invisibility = 0
 				update_icon()
-				qdel(cover) //deletes the cover, and the turret instance itself becomes its own cover.
 		wrenching = 0
 
 	else if(istype(I, /obj/item/weapon/card/id)||istype(I, /obj/item/device/pda))
@@ -345,6 +340,9 @@
 		..()
 
 /obj/machinery/porta_turret/proc/take_damage(var/force)
+	if(!raised && !raising)
+		force = force / 8
+
 	health -= force
 	if (force > 5 && prob(45))
 		spark_system.start()
@@ -352,8 +350,10 @@
 		die()	//the death process :(
 
 /obj/machinery/porta_turret/bullet_act(obj/item/projectile/Proj)
-
 	if(Proj.damage_type == HALLOSS)
+		return
+
+	if(!raised && !raising)
 		return
 
 	if(enabled)
@@ -403,27 +403,14 @@
 	health = 0
 	density = 0
 	stat |= BROKEN	//enables the BROKEN bit
-	invisibility = 0
 	spark_system.start()	//creates some sparks because they look cool
 	density = 1
 	update_icon()
-	qdel(cover)	//deletes the cover - no need on keeping it there!
-
-/obj/machinery/porta_turret/proc/create_cover()
-	if(cover == null && anchored)
-		cover = new /obj/machinery/porta_turret_cover(loc)	//if the turret has no cover and is anchored, give it a cover
-		cover.Parent_Turret = src	//assign the cover its Parent_Turret, which would be this (src)
 
 /obj/machinery/porta_turret/process()
 	//the main machinery process
 
 	set background = BACKGROUND_ENABLED
-
-	if(cover == null && anchored)	//if it has no cover and is anchored
-		if(stat & BROKEN)	//if the turret is borked
-			qdel(cover)	//delete its cover, assuming it has one. Workaround for a pesky little bug
-		else
-			create_cover()
 
 	if(stat & (NOPOWER|BROKEN))
 		//if the turret has no power or is broken, make the turret pop down if it hasn't already
@@ -536,14 +523,17 @@
 		return
 	if(stat & BROKEN)
 		return
-	invisibility = 0
 	raising = 1
-	flick("popup", cover)
+	update_icon()
+
+	var/atom/flick_holder = PoolOrNew(/atom/movable/porta_turret_cover, loc)
+	flick_holder.layer = layer + 0.1
+	flick("popup", flick_holder)
 	sleep(10)
+	qdel(flick_holder)
+
 	raising = 0
-	cover.icon_state = "openTurretCover"
 	raised = 1
-	layer = 4
 	update_icon()
 
 /obj/machinery/porta_turret/proc/popDown()	//pops the turret down
@@ -554,14 +544,17 @@
 		return
 	if(stat & BROKEN)
 		return
-	layer = 3
 	raising = 1
-	flick("popdown", cover)
+	update_icon()
+
+	var/atom/flick_holder = PoolOrNew(/atom/movable/porta_turret_cover, loc)
+	flick_holder.layer = layer + 0.1
+	flick("popdown", flick_holder)
 	sleep(10)
+	qdel(flick_holder)
+
 	raising = 0
-	cover.icon_state = "turretCover"
 	raised = 0
-	invisibility = INVISIBILITY_LEVEL_TWO
 	update_icon()
 
 /obj/machinery/porta_turret/proc/target(var/mob/living/target)
@@ -811,9 +804,6 @@
 					Turret.enabled = 0
 					Turret.setup()
 
-//					Turret.cover=new/obj/machinery/porta_turret_cover(loc)
-//					Turret.cover.Parent_Turret=Turret
-//					Turret.cover.name = finish_name
 					qdel(src) // qdel
 
 			else if(istype(I, /obj/item/weapon/crowbar))
@@ -832,6 +822,7 @@
 
 		finish_name = t
 		return
+
 	..()
 
 
@@ -857,32 +848,5 @@
 /obj/machinery/porta_turret_construct/attack_ai()
 	return
 
-
-/************************
-* PORTABLE TURRET COVER *
-************************/
-
-/obj/machinery/porta_turret_cover
-	name = "turret"
+/atom/movable/porta_turret_cover
 	icon = 'icons/obj/turrets.dmi'
-	icon_state = "turretCover"
-	anchored = 1
-	layer = 3.5
-	density = 0
-	var/obj/machinery/porta_turret/Parent_Turret = null
-
-/obj/machinery/porta_turret_cover/Destroy()
-	Parent_Turret = null
-	..()
-
-/obj/machinery/porta_turret_cover/attack_ai(mob/user)
-	return attack_hand(user)
-
-/obj/machinery/porta_turret_cover/attack_hand(mob/user)
-	return Parent_Turret.attack_hand(user)
-
-/obj/machinery/porta_turret_cover/Topic(href, href_list)
-	Parent_Turret.Topic(href, href_list, 1)	// Calling another object's Topic requires that we claim to not have a window, otherwise BYOND's base proc will runtime.
-
-/obj/machinery/porta_turret_cover/attackby(obj/item/I, mob/user)
-	Parent_Turret.attackby(I, user)
