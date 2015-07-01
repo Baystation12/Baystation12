@@ -20,7 +20,7 @@
 	var/safety = 1 //if you can zap people with the defibs on harm mode
 	var/powered = 0 //if there's a cell in the defib with enough power for a revive, blocks paddles from reviving otherwise
 	var/obj/item/weapon/twohanded/shockpaddles/paddles
-	var/obj/item/weapon/stock_parts/cell/high/bcell = null
+	var/obj/item/weapon/cell/high/bcell = null
 	var/combat = 0 //can we revive through space suits?
 
 /obj/item/weapon/defibrillator/New() //starts without a cell for rnd
@@ -69,7 +69,7 @@
 			overlays += "[icon_state]-charge[ratio]"
 
 /obj/item/weapon/defibrillator/CheckParts()
-	bcell = locate(/obj/item/weapon/stock_parts/cell) in contents
+	bcell = new/obj/item/weapon/cell/high(src) in contents
 	update_icon()
 
 /obj/item/weapon/defibrillator/ui_action_click()
@@ -80,8 +80,8 @@
 	return
 
 /obj/item/weapon/defibrillator/attackby(obj/item/weapon/W, mob/user, params)
-	if(istype(W, /obj/item/weapon/stock_parts/cell))
-		var/obj/item/weapon/stock_parts/cell/C = W
+	if(istype(W, /obj/item/weapon/cell/high))
+		var/obj/item/weapon/cell/high/C = W
 		if(bcell)
 			user << "<span class='notice'>[src] already has a cell.</span>"
 		else
@@ -227,7 +227,7 @@
 /obj/item/weapon/defibrillator/compact/combat/loaded/New()
 	..()
 	paddles = make_paddles()
-	bcell = new /obj/item/weapon/stock_parts/cell/infinite(src)
+	bcell = new /obj/item/weapon/cell/high/infinite(src)
 	update_icon()
 	return
 
@@ -355,7 +355,7 @@
 								busy = 0
 								update_icon()
 								return
-					if(H.'icons/mob/items/tools.dmi')
+					if(H.heart_attack)
 						H.heart_attack = 0
 					if(H.stat == 2)
 						var/health = H.health
