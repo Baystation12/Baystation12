@@ -1115,42 +1115,6 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	containername = "Formalwear for the best occasions."
 	group = "Miscellaneous"
 
-/datum/supply_packs/rust_injector
-	contains = list(/obj/machinery/power/rust_fuel_injector)
-	name = "RUST fuel injector"
-	cost = 50
-	containertype = /obj/structure/closet/crate/secure/large
-	containername = "RUST injector crate"
-	group = "Engineering"
-	access = access_engine
-
-/datum/supply_packs/rust_compressor
-	contains = list(/obj/item/weapon/module/rust_fuel_compressor)
-	name = "RUST fuel compressor circuitry"
-	cost = 60
-	containertype = /obj/structure/closet/crate/secure
-	containername = "RUST fuel compressor circuitry"
-	group = "Engineering"
-	access = access_engine
-
-/datum/supply_packs/rust_assembly_port
-	contains = list(/obj/item/weapon/module/rust_fuel_port)
-	name = "RUST fuel assembly port circuitry"
-	cost = 40
-	containertype = /obj/structure/closet/crate/secure
-	containername = "RUST fuel assembly port circuitry"
-	group = "Engineering"
-	access = access_engine
-
-/datum/supply_packs/rust_core
-	contains = list(/obj/machinery/power/rust_core)
-	name = "RUST Tokamak Core"
-	cost = 75
-	containertype = /obj/structure/closet/crate/secure/large
-	containername = "RUST tokamak crate"
-	group = "Engineering"
-	access = access_engine
-
 /datum/supply_packs/shield_gen
 	contains = list(/obj/item/weapon/circuitboard/shield_gen)
 	name = "Bubble shield generator circuitry"
