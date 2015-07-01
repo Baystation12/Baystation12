@@ -69,7 +69,7 @@
 			overlays += "[icon_state]-charge[ratio]"
 
 /obj/item/weapon/defibrillator/CheckParts()
-	bcell = locate(/obj/item/weapon/cell/high(src)) in contents
+	bcell = new/obj/item/weapon/cell/high(src)
 	update_icon()
 
 /obj/item/weapon/defibrillator/ui_action_click()
@@ -227,7 +227,7 @@
 /obj/item/weapon/defibrillator/compact/combat/loaded/New()
 	..()
 	paddles = make_paddles()
-	bcell = new /obj/item/weapon/cell/high/infinite(src)
+ 	bcell = new/obj/item/weapon/cell/infinite(src)
 	update_icon()
 	return
 
