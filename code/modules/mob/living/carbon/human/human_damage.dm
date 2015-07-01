@@ -21,6 +21,13 @@
 	//TODO: fix husking
 	if( ((maxHealth - total_burn) < config.health_threshold_dead) && stat == DEAD)
 		ChangeToHusk()
+	if (species.flags & IS_SYNTHETIC)
+		var/datum/organ/external/H = organs_by_name["head"]
+		if (!H.amputated)
+			if ((health >= (config.health_threshold_dead/100*75)) && stat == DEAD)  //need to get them 25% away from death point before reviving synthetics
+				update_revive()
+	if (stat == CONSCIOUS && (src in dead_mob_list)) //Defib fix
+		update_revive()
 	return
 
 /mob/living/carbon/human/adjustBrainLoss(var/amount)

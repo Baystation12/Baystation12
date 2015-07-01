@@ -72,6 +72,7 @@
 /obj/item/weapon/robot_module/surgeon/New()
 	..()
 	src.modules += new /obj/item/device/flash(src)
+	src.modules += new /obj/item/weapon/borg_defib(src)
 	src.modules += new /obj/item/device/healthanalyzer(src)
 	src.modules += new /obj/item/weapon/reagent_containers/borghypo/surgeon(src)
 	src.modules += new /obj/item/weapon/scalpel(src)

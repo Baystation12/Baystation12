@@ -1,5 +1,5 @@
 //all code from Paradise Station. This is heavily WIP at the moment
-/*
+
 //backpack item
 
 /obj/item/weapon/defibrillator
@@ -8,7 +8,7 @@
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "defibunit"
 	item_state = "defibunit"
-	icon_override = 'icons/mob/in-hand/tools.dmi'
+	icon_override = 'icons/mob/items/tools.dmi'
 	slot_flags = SLOT_BACK
 	force = 5
 	throwforce = 6
@@ -519,4 +519,4 @@
 		else
 			user << "<span class='notice'>You need to target your patient's chest with [src].</span>"
 			return
-			*/
+

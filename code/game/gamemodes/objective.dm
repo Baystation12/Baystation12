@@ -509,6 +509,7 @@ datum/objective/steal
 		"the captain's pinpointer" = /obj/item/weapon/pinpointer,
 		"an ablative armor vest" = /obj/item/clothing/suit/armor/laserproof,
 		"the captain's bar of soap" = /obj/item/weapon/soap/cap,
+		"a compact defibrillator" = /obj/item/weapon/defibrillator/compact
 	)
 
 	var/global/possible_items_special[] = list(
