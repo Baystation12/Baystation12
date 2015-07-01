@@ -1233,7 +1233,7 @@
 				damageoverlay.overlays += I
 
 		if( stat == DEAD )
-			sight |= (SEE_TURFS|SEE_MOBS|SEE_OBJS)
+			sight = SEE_TURFS|SEE_MOBS|SEE_OBJS|SEE_SELF
 			see_in_dark = 8
 			if(!druggy)		see_invisible = SEE_INVISIBLE_LEVEL_TWO
 			if(healths)		healths.icon_state = "health7"	//DEAD healthmeter
@@ -1256,7 +1256,7 @@
 					*/
 
 		else
-			sight &= ~(SEE_TURFS|SEE_MOBS|SEE_OBJS)
+			sight = SEE_SELF
 			see_in_dark = species.darksight
 			see_invisible = see_in_dark>2 ? SEE_INVISIBLE_LEVEL_ONE : SEE_INVISIBLE_LIVING
 
@@ -1411,7 +1411,7 @@
 				if(viewflags < 0)
 					reset_view(null, 0)
 				else if(viewflags)
-					sight |= viewflags
+					sight = viewflags //when viewing from a machine, use only the sight flags that the machine provides
 			else
 				var/isRemoteObserve = 0
 				if((mRemote in mutations) && remoteview_target)
