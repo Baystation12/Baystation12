@@ -5,10 +5,9 @@
 		//Being dead doesn't mean your temperature never changes
 		var/turf/T = get_turf(src)
 
-		if (src.stat!=0)
+		if (src.stat!=CONSCIOUS)
 			src.cameraFollow = null
 			src.reset_view(null)
-			src.unset_machine()
 
 		src.updatehealth()
 
@@ -20,9 +19,6 @@
 		if(!psupply)
 			create_powersupply()
 
-		if (src.machine)
-			if (!( src.machine.check_eye(src) ))
-				src.reset_view(null)
 
 		// Handle power damage (oxy)
 		if(aiRestorePowerRoutine != 0 && !APU_power)
