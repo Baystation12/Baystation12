@@ -28,8 +28,11 @@
 
 	if (src.holder.rights & R_ADMIN)
 		stafftype = "ADMIN"*/
-	var/stafftype = uppertext(holder.rank)
-
+	var/stafftype = holder.rank
+	if(stafftype == "Administrator3" || stafftype == "Administrator2" || stafftype == "Administrator") //If you're a Primary or Secondary admin, there's no reason for players to discriminate, so just show as an admin
+		stafftype = "Administrator"
+	if(stafftype == "Moderator3" || stafftype == "Moderator2" || stafftype == "Moderator") //If you're a Primary or Secondary admin, there's no reason for players to discriminate, so just show as an admin
+		stafftype = "Moderator"
 	msg = sanitize(copytext(msg, 1, MAX_MESSAGE_LEN))
 	log_admin("DSAY: [key_name(src)] : [msg]")
 	log_admin_single("DSAY: [key_name(src)] : [msg]")
