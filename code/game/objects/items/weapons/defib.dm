@@ -69,7 +69,7 @@
 			overlays += "[icon_state]-charge[ratio]"
 
 /obj/item/weapon/defibrillator/CheckParts()
-	bcell = new/obj/item/weapon/cell/high(src) in contents
+	bcell = locate(/obj/item/weapon/cell/high(src)) in contents
 	update_icon()
 
 /obj/item/weapon/defibrillator/ui_action_click()
@@ -362,7 +362,7 @@
 						M.visible_message("<span class='warning'>[M]'s body convulses a bit.")
 						playsound(get_turf(src), "bodyfall", 50, 1)
 						playsound(get_turf(src), 'sound/machines/defib_zap.ogg', 50, 1, -1)
-						for(var/obj/item/organ/external/O in H.organs)
+						for(var/datum/organ/external/O in H.organs)
 							total_brute	+= O.brute_dam
 							total_burn	+= O.burn_dam
 						if(H.health <= config.health_threshold_dead && total_burn <= 180 && total_brute <= 180 && !H.suiciding && !ghost && tplus < tlimit && !(NOCLONE in H.mutations))
@@ -471,7 +471,7 @@
 						M.visible_message("<span class='warning'>[M]'s body convulses a bit.")
 						playsound(get_turf(src), "bodyfall", 50, 1)
 						playsound(get_turf(src), 'sound/machines/defib_zap.ogg', 50, 1, -1)
-						for(var/obj/item/organ/external/O in H.organs)
+						for(var/datum/organ/external/O in H.organs)
 							total_brute	+= O.brute_dam
 							total_burn	+= O.burn_dam
 						if(H.health <= config.health_threshold_dead && total_burn <= 180 && total_brute <= 180 && !H.suiciding && !ghost && tplus < tlimit && !(NOCLONE in H.mutations))
