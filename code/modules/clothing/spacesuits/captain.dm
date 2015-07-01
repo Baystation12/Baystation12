@@ -2,7 +2,7 @@
 /obj/item/clothing/head/helmet/space/capspace
 	name = "space helmet"
 	icon_state = "capspace"
-	item_state = "capspacehelmet"
+	item_state = "capspace"
 	desc = "A special helmet designed for work in a hazardous, low-pressure environment. Only for the most fashionable of military figureheads."
 	flags = HEADCOVERSEYES | BLOCKHAIR | STOPPRESSUREDAMAGE
 	flags_inv = HIDEFACE

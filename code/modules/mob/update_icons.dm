@@ -8,7 +8,7 @@
 #define INV_R_HAND_DEF_ICON 'icons/mob/items/righthand.dmi'
 #define INV_W_UNIFORM_DEF_ICON 'icons/mob/uniform.dmi'
 #define INV_ACCESSORIES_DEF_ICON 'icons/mob/ties.dmi'
-
+#define INV_SUIT_DEF_ICON 'icons/mob/suit.dmi'
 
 /mob/proc/regenerate_icons()		//TODO: phase this out completely if possible
 	return
