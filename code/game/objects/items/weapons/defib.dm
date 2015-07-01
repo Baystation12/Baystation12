@@ -246,7 +246,7 @@
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "defibpaddles"
 	item_state = "defibpaddles"
-	icon_override = 'icons/mob/in-hand/tools.dmi'
+	icon_override = 'icons/mob/items/tools.dmi'
 	force = 0
 	throwforce = 6
 	w_class = 4
@@ -355,7 +355,7 @@
 								busy = 0
 								update_icon()
 								return
-					if(H.heart_attack)
+					if(H.'icons/mob/items/tools.dmi')
 						H.heart_attack = 0
 					if(H.stat == 2)
 						var/health = H.health

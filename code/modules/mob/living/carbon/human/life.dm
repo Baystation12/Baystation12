@@ -29,7 +29,7 @@
 	var/co2_alert = 0
 	var/fire_alert = 0
 	var/pressure_alert = 0
-//	var/heartbeat = 0
+	var/heartbeat = 0
 	var/temperature_alert = 0
 	var/in_stasis = 0
 
@@ -109,9 +109,9 @@
 
 		handle_gender_updates()
 
-//		handle_heartbeat()
+		handle_heartbeat()
 
-//		handle_heartattack()
+		handle_heartattack()
 
 	handle_stasis_bag()
 
@@ -1613,8 +1613,8 @@
 
 		if(stat == DEAD)
 			return PULSE_NONE	//that's it, you're dead, nothing can influence your pulse
-			
-//		if(heart_attack)
+
+		if(heart_attack)
 			return PULSE_NONE
 
 		var/temp = PULSE_NORM
@@ -1641,7 +1641,7 @@
 
 		return temp
 
-/*	proc/handle_heartbeat()
+	proc/handle_heartbeat()
 		var/client/C = src.client
 		if(C && C.prefs.sound & SOUND_HEARTBEAT) //disable heartbeat by pref
 			var/obj/item/organ/heart/H = internal_organs_by_name["heart"]
@@ -1681,7 +1681,7 @@
 						src << sound('sound/effects/singlebeat.ogg',0,0,0,50)
 				else
 					heartbeat++
-*/
+
 /*
 	Called by life(), instead of having the individual hud items update icons each tick and check for status changes
 	we only set those statuses and icons upon changes.  Then those HUD items will simply add those pre-made images.
@@ -1856,8 +1856,8 @@
 	if(..())
 		speech_problem_flag = 1
 	return stunned
-	
-/* /mob/living/carbon/human/proc/handle_heartattack()
+
+/mob/living/carbon/human/proc/handle_heartattack()
 	if(!heart_attack)
 		return
 	else
@@ -1866,7 +1866,6 @@
 		adjustBrainLoss(rand(4,10))
 		Paralyse(2)
 	return
-	*/
 
 /mob/living/carbon/human/handle_stuttering()
 	if(..())
