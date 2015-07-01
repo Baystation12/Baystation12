@@ -28,11 +28,13 @@
 
 	check_eye(var/mob/user as mob)
 		if (user.stat || ((get_dist(user, src) > 1 || !( user.canmove ) || user.blinded) && !istype(user, /mob/living/silicon))) //user can't see - not sure why canmove is here.
-			return null
-		if ( !current || !current.can_use() ) //camera doesn't work
+			return -1
+		if(!current)
+			return 0
+		var/viewflag = current.check_eye(user)
+		if ( viewflag < 0 ) //camera doesn't work
 			reset_current()
-		user.reset_view(current)
-		return 1
+		return viewflag
 
 	ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
 		if(src.z > 6) return
@@ -87,7 +89,7 @@
 			if(src.z>6 || stat&(NOPOWER|BROKEN)) return
 			if(usr.stat || ((get_dist(usr, src) > 1 || !( usr.canmove ) || usr.blinded) && !istype(usr, /mob/living/silicon))) return
 			reset_current()
-			usr.check_eye(current)
+			usr.reset_view(current)
 			return 1
 		else
 			. = ..()
@@ -123,8 +125,8 @@
 		if (!C.can_use() || user.stat || (get_dist(user, src) > 1 || user.machine != src || user.blinded || !( user.canmove ) && !istype(user, /mob/living/silicon)))
 			return 0
 		set_current(C)
+		user.reset_view(current)
 		check_eye(user)
-		use_power(50)
 		return 1
 
 //Camera control: moving.
@@ -166,6 +168,7 @@
 
 	src.current = C
 	if(current)
+		use_power = 2
 		var/mob/living/L = current.loc
 		if(istype(L))
 			L.tracking_initiated()
@@ -176,6 +179,7 @@
 		if(istype(L))
 			L.tracking_cancelled()
 	current = null
+	use_power = 1
 
 //Camera control: mouse.
 /atom/DblClick()

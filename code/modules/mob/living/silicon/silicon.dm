@@ -19,6 +19,7 @@
 	var/local_transmit //If set, can only speak to others of the same type within a short range.
 
 	var/sensor_mode = 0 //Determines the current HUD.
+	var/mob/living/cameraFollow = null
 
 	var/next_alarm_notice
 	var/list/datum/alarm/queued_alarms = new()
@@ -348,3 +349,8 @@
 /mob/living/silicon/proc/is_malf_or_traitor()
 	return is_traitor() || is_malf()
 
+
+/mob/living/silicon/reset_view()
+	..()
+	if(cameraFollow)
+		cameraFollow = null

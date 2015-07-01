@@ -69,16 +69,16 @@
 		if(!interactable(user) || user.machine != src)
 			if(user.machine == src)
 				user.unset_machine()
-			return null
+			return -1
 
 		var/datum/file/program/security/S = program
 		if( !istype(S) || !S.current || !S.current.status || !camnet )
 			if( user.machine == src )
 				user.unset_machine()
-			return null
+			return -1
 
-		user.reset_view(S.current)
-		return 1
+		user.reset_view(S.current, 0)
+		return 0
 
 	/*
 		List all files, including removable disks and data cards
