@@ -1,0 +1,7 @@
+author: PsiOmegaDelta
+delete-after: True
+
+changes: 
+  - tweak: "Portable turrets now only blocks movement while deployed."
+  - tweak: "Portable turrets are no longer invincible while undeployed, however they have increased damage resistance in this state."
+  - bugfix: "Crescent portable turrets should no longer act up during attempts to (un)wrench and alter their settings."
