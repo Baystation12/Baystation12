@@ -227,7 +227,7 @@
 /obj/item/weapon/defibrillator/compact/combat/loaded/New()
 	..()
 	paddles = make_paddles()
- 	bcell = new/obj/item/weapon/cell/infinite(src)
+	bcell = new(src)
 	update_icon()
 	return
 
@@ -342,8 +342,8 @@
 				playsound(get_turf(src), 'sound/machines/defib_charge.ogg', 50, 0)
 				var/mob/dead/observer/ghost = H.get_ghost()
 				var/tplus = world.time - H.timeofdeath
-				var/tlimit = 6000 //past this much time the patient is unrecoverable (in deciseconds)
-				var/tloss = 3000 //brain damage starts setting in on the patient after some time left rotting
+				var/tlimit = 3600 //past this much time the patient is unrecoverable (in deciseconds)
+				var/tloss = 1800 //brain damage starts setting in on the patient after some time left rotting
 				var/total_burn	= 0
 				var/total_brute	= 0
 				if(do_after(user, 20)) //placed on chest and short delay to shock for dramatic effect, revive time is 5sec total
@@ -461,8 +461,8 @@
 				playsound(get_turf(src), 'sound/machines/defib_charge.ogg', 50, 0)
 				var/mob/dead/observer/ghost = H.get_ghost()
 				var/tplus = world.time - H.timeofdeath
-				var/tlimit = 6000 //past this much time the patient is unrecoverable (in deciseconds)
-				var/tloss = 3000 //brain damage starts setting in on the patient after some time left rotting
+				var/tlimit = 3600 //past this much time the patient is unrecoverable (in deciseconds)
+				var/tloss = 1800 //brain damage starts setting in on the patient after some time left rotting
 				var/total_burn	= 0
 				var/total_brute	= 0
 				if(do_after(user, 20)) //placed on chest and short delay to shock for dramatic effect, revive time is 5sec total

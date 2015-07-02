@@ -48,6 +48,29 @@
 		new /obj/item/clothing/mask/breath/medical(src)
 		return
 
+/obj/structure/closet/secure_closet/paramedic
+	name = "paramedic's closet"
+	desc = "Get dat fukken rig."
+	icon_state = "securepara1"
+	icon_closed = "securepara"
+	icon_locked = "securepara1"
+	icon_opened = "secureparaopen"
+	icon_broken = "secureparabroken"
+	icon_off = "secureparaoff"
+	req_access = list(access_paramedic)
+
+
+	New()
+		..()
+		new /obj/item/weapon/storage/backpack/satchel_med(src)
+		new /obj/item/clothing/under/rank/medical(src)
+		new /obj/item/clothing/shoes/white(src)
+		new /obj/item/device/radio/headset/headset_med(src)
+		new /obj/item/clothing/suit/storage/toggle/fr_jacket(src)
+		new /obj/item/weapon/rig/medical
+		new /obj/item/weapon/defibrillator
+		return
+
 
 
 /obj/structure/closet/secure_closet/medical3
@@ -133,9 +156,7 @@
 		new /obj/item/clothing/suit/storage/toggle/labcoat/cmo(src)
 		new /obj/item/clothing/suit/storage/toggle/labcoat/cmoalt(src)
 		new /obj/item/weapon/cartridge/cmo(src)
-		new /obj/item/weapon/rig/medical
 		new /obj/item/clothing/gloves/latex(src)
-		new /obj/item/weapon/defibrillator/compact/loaded(src)
 		new /obj/item/clothing/shoes/brown	(src)
 		new /obj/item/device/radio/headset/heads/cmo(src)
 		new /obj/item/device/flash(src)
