@@ -6,9 +6,6 @@
 	message = sanitize(message)
 	..(message, alt_name = alt_name)
 
-/mob/living/carbon/human/is_muzzled()
-	return istype(src.wear_mask, /obj/item/clothing/mask/muzzle)
-
 /mob/living/carbon/human/proc/forcesay(list/append)
 	if(stat == CONSCIOUS)
 		if(client)
