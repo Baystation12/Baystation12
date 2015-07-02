@@ -9,10 +9,10 @@
 	selection_color = "#ffddf0"
 	idtype = /obj/item/weapon/card/id/head
 	req_admin_notify = 1
-	access = list(access_medical, access_morgue, access_genetics, access_heads,
+	access = list(access_medical, access_paramedic, access_morgue, access_genetics, access_heads,
 			access_chemistry, access_virology, access_cmo, access_surgery, access_RC_announce,
 			access_keycard_auth, access_sec_doors, access_psychiatrist, access_eva)
-	minimal_access = list(access_medical, access_morgue, access_genetics, access_heads,
+	minimal_access = list(access_medical, access_paramedic, access_morgue, access_genetics, access_heads,
 			access_chemistry, access_virology, access_cmo, access_surgery, access_RC_announce,
 			access_keycard_auth, access_sec_doors, access_psychiatrist, access_eva)
 	minimal_player_age = 10
@@ -256,11 +256,11 @@
 	department_flag = MEDSCI
 	faction = "Station"
 	total_positions = 2
-	spawn_positions = 2
+	spawn_positions = 1
 	supervisors = "the chief medical officer"
 	selection_color = "#ffeef0"
-	access = list(access_medical, access_morgue, access_surgery, access_chemistry, access_virology, access_eva, access_maint_tunnels, access_external_airlocks, access_psychiatrist)
-	minimal_access = list(access_medical, access_morgue, access_eva, access_maint_tunnels, access_external_airlocks)
+	access = list(access_medical, access_paramedic, access_morgue, access_surgery, access_chemistry, access_virology, access_eva, access_maint_tunnels, access_external_airlocks, access_psychiatrist)
+	minimal_access = list(access_medical, access_paramedic, access_morgue, access_eva, access_maint_tunnels, access_external_airlocks)
 	alt_titles = list("Emergency Medical Technician")
 
 	equip(var/mob/living/carbon/human/H)

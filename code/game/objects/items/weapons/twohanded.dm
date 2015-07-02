@@ -146,7 +146,7 @@
 
 //Power Claws - Cirra//
 /obj/item/weapon/twohanded/pclaws
-	icon_state = "pgloves"
+	icon_state = "pgloves0"
 	base_icon = "pgloves"
 	name = "Power Claws"
 	desc = "For when you absolutely need to tear your enemies to shreds - Now with added ZZZZZAP!"

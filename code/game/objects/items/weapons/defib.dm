@@ -1,5 +1,5 @@
 //all code from Paradise Station. This is heavily WIP at the moment
-/*
+
 //backpack item
 
 /obj/item/weapon/defibrillator
@@ -8,7 +8,7 @@
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "defibunit"
 	item_state = "defibunit"
-	icon_override = 'icons/mob/in-hand/tools.dmi'
+	icon_override = 'icons/mob/items/tools.dmi'
 	slot_flags = SLOT_BACK
 	force = 5
 	throwforce = 6
@@ -20,7 +20,7 @@
 	var/safety = 1 //if you can zap people with the defibs on harm mode
 	var/powered = 0 //if there's a cell in the defib with enough power for a revive, blocks paddles from reviving otherwise
 	var/obj/item/weapon/twohanded/shockpaddles/paddles
-	var/obj/item/weapon/stock_parts/cell/high/bcell = null
+	var/obj/item/weapon/cell/high/bcell = null
 	var/combat = 0 //can we revive through space suits?
 
 /obj/item/weapon/defibrillator/New() //starts without a cell for rnd
@@ -69,7 +69,7 @@
 			overlays += "[icon_state]-charge[ratio]"
 
 /obj/item/weapon/defibrillator/CheckParts()
-	bcell = locate(/obj/item/weapon/stock_parts/cell) in contents
+	bcell = new/obj/item/weapon/cell/high(src)
 	update_icon()
 
 /obj/item/weapon/defibrillator/ui_action_click()
@@ -80,8 +80,8 @@
 	return
 
 /obj/item/weapon/defibrillator/attackby(obj/item/weapon/W, mob/user, params)
-	if(istype(W, /obj/item/weapon/stock_parts/cell))
-		var/obj/item/weapon/stock_parts/cell/C = W
+	if(istype(W, /obj/item/weapon/cell/high))
+		var/obj/item/weapon/cell/high/C = W
 		if(bcell)
 			user << "<span class='notice'>[src] already has a cell.</span>"
 		else
@@ -227,7 +227,7 @@
 /obj/item/weapon/defibrillator/compact/combat/loaded/New()
 	..()
 	paddles = make_paddles()
-	bcell = new /obj/item/weapon/stock_parts/cell/infinite(src)
+	bcell = new(src)
 	update_icon()
 	return
 
@@ -246,7 +246,7 @@
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "defibpaddles"
 	item_state = "defibpaddles"
-	icon_override = 'icons/mob/in-hand/tools.dmi'
+	icon_override = 'icons/mob/items/tools.dmi'
 	force = 0
 	throwforce = 6
 	w_class = 4
@@ -321,7 +321,7 @@
 			busy = 1
 			H.visible_message("<span class='danger'>[user] has touched [H.name] with [src]!</span>", \
 					"<span class='userdanger'>[user] has touched [H.name] with [src]!</span>")
-			H.adjustStaminaLoss(50)
+			H.adjustHalLoss(50)
 			H.Weaken(5)
 			H.updatehealth() //forces health update before next life tick
 			playsound(get_turf(src), 'sound/machines/defib_zap.ogg', 50, 1, -1)
@@ -342,8 +342,8 @@
 				playsound(get_turf(src), 'sound/machines/defib_charge.ogg', 50, 0)
 				var/mob/dead/observer/ghost = H.get_ghost()
 				var/tplus = world.time - H.timeofdeath
-				var/tlimit = 6000 //past this much time the patient is unrecoverable (in deciseconds)
-				var/tloss = 3000 //brain damage starts setting in on the patient after some time left rotting
+				var/tlimit = 3600 //past this much time the patient is unrecoverable (in deciseconds)
+				var/tloss = 1800 //brain damage starts setting in on the patient after some time left rotting
 				var/total_burn	= 0
 				var/total_brute	= 0
 				if(do_after(user, 20)) //placed on chest and short delay to shock for dramatic effect, revive time is 5sec total
@@ -362,7 +362,7 @@
 						M.visible_message("<span class='warning'>[M]'s body convulses a bit.")
 						playsound(get_turf(src), "bodyfall", 50, 1)
 						playsound(get_turf(src), 'sound/machines/defib_zap.ogg', 50, 1, -1)
-						for(var/obj/item/organ/external/O in H.organs)
+						for(var/datum/organ/external/O in H.organs)
 							total_brute	+= O.brute_dam
 							total_burn	+= O.burn_dam
 						if(H.health <= config.health_threshold_dead && total_burn <= 180 && total_brute <= 180 && !H.suiciding && !ghost && tplus < tlimit && !(NOCLONE in H.mutations))
@@ -436,7 +436,7 @@
 			busy = 1
 			H.visible_message("<span class='danger'>[user] has touched [H.name] with [src]!</span>", \
 					"<span class='userdanger'>[user] has touched [H.name] with [src]!</span>")
-			H.adjustStaminaLoss(50)
+			H.adjustHalLoss(50)
 			H.Weaken(5)
 			H.updatehealth() //forces health update before next life tick
 			playsound(get_turf(src), 'sound/machines/defib_zap.ogg', 50, 1, -1)
@@ -461,8 +461,8 @@
 				playsound(get_turf(src), 'sound/machines/defib_charge.ogg', 50, 0)
 				var/mob/dead/observer/ghost = H.get_ghost()
 				var/tplus = world.time - H.timeofdeath
-				var/tlimit = 6000 //past this much time the patient is unrecoverable (in deciseconds)
-				var/tloss = 3000 //brain damage starts setting in on the patient after some time left rotting
+				var/tlimit = 3600 //past this much time the patient is unrecoverable (in deciseconds)
+				var/tloss = 1800 //brain damage starts setting in on the patient after some time left rotting
 				var/total_burn	= 0
 				var/total_brute	= 0
 				if(do_after(user, 20)) //placed on chest and short delay to shock for dramatic effect, revive time is 5sec total
@@ -471,7 +471,7 @@
 						M.visible_message("<span class='warning'>[M]'s body convulses a bit.")
 						playsound(get_turf(src), "bodyfall", 50, 1)
 						playsound(get_turf(src), 'sound/machines/defib_zap.ogg', 50, 1, -1)
-						for(var/obj/item/organ/external/O in H.organs)
+						for(var/datum/organ/external/O in H.organs)
 							total_brute	+= O.brute_dam
 							total_burn	+= O.burn_dam
 						if(H.health <= config.health_threshold_dead && total_burn <= 180 && total_brute <= 180 && !H.suiciding && !ghost && tplus < tlimit && !(NOCLONE in H.mutations))
@@ -519,4 +519,4 @@
 		else
 			user << "<span class='notice'>You need to target your patient's chest with [src].</span>"
 			return
-			*/
+

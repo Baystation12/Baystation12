@@ -172,14 +172,14 @@
 
 // Flags bitmasks.
 #define STOPPRESSUREDAMAGE 1 // This flag is used on the flags variable for SUIT and HEAD items which stop pressure damage. Note that the flag 1 was previous used as ONBACK, so it is possible for some code to use (flags & 1) when checking if something can be put on your back. Replace this code with (inv_flags & SLOT_BACK) if you see it anywhere
-                             // To successfully stop you taking all pressure damage you must have both a suit and head item with this flag.
-#define NOBLUDGEON         2    // When an item has this it produces no "X has been hit by Y with Z" message with the default handler.
-#define AIRTIGHT           4    // Functions with internals.
-#define USEDELAY           8    // 1 second extra delay on use. (Can be used once every 2s)
-#define NOSHIELD           16   // Weapon not affected by shield.
-#define CONDUCT            32   // Conducts electricity. (metal etc.)
-#define ON_BORDER          64   // Item has priority to check when entering or leaving.
-#define NOBLOODY           512  // Used for items if they don't want to get a blood overlay.
+#define NODROP         	   2                // To successfully stop you taking all pressure damage you must have both a suit and head item with this flag.
+#define NOBLUDGEON         4    // When an item has this it produces no "X has been hit by Y with Z" message with the default handler.
+#define AIRTIGHT           8    // Functions with internals.
+#define USEDELAY           16    // 1 second extra delay on use. (Can be used once every 2s)
+#define NOSHIELD           32   // Weapon not affected by shield.
+#define CONDUCT            64   // Conducts electricity. (metal etc.)
+#define ON_BORDER          512   // Item has priority to check when entering or leaving.
+#define NOBLOODY           1024  // Used for items if they don't want to get a blood overlay.
 #define NODELAY            8192 // 1 second attack-by delay skipped (Can be used once every 0.2s). Most objects have a 1s attack-by delay, which doesn't require a flag.
 
 #define GLASSESCOVERSEYES 256

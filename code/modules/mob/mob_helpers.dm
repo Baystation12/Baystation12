@@ -397,6 +397,9 @@ It's fairly easy to fix if dealing with single letters but not so much with comp
 		p=p+n_mod
 	return sanitize(copytext(t,1,MAX_MESSAGE_LEN))
 
+/proc/get_both_hands(mob/living/carbon/M)
+	var/list/hands = list(M.l_hand, M.r_hand)
+	return hands
 
 /proc/shake_camera(mob/M, duration, strength=1)
 	if(!M || !M.client || M.shakecamera)

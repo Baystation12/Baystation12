@@ -1128,6 +1128,14 @@ datum/design/item/medical/robot_scanner
 	materials = list("$metal" = 500, "$glass" = 200)
 	build_path = /obj/item/device/robotanalyzer
 
+/datum/design/item/medical/defib
+	desc = "A device that delivers powerful shocks to detachable paddles that resuscitate incapacitated patients."
+	id = "defib"
+	req_tech = list("materials" = 7, "biotech" = 5, "powerstorage" = 5)
+	materials = list("$metal" = 5000, "$glass" = 2000, "$silver" = 1000)
+	reliability = 76
+	build_path = /obj/item/weapon/defibrillator
+
 datum/design/item/medical/mass_spectrometer
 	desc = "A device for analyzing chemicals in blood."
 	id = "mass_spectrometer"

@@ -29,7 +29,7 @@
 	var/co2_alert = 0
 	var/fire_alert = 0
 	var/pressure_alert = 0
-//	var/heartbeat = 0
+	var/heartbeat = 0
 	var/temperature_alert = 0
 	var/in_stasis = 0
 
@@ -109,9 +109,7 @@
 
 		handle_gender_updates()
 
-//		handle_heartbeat()
-
-//		handle_heartattack()
+		handle_heartattack()
 
 	handle_stasis_bag()
 
@@ -1613,8 +1611,8 @@
 
 		if(stat == DEAD)
 			return PULSE_NONE	//that's it, you're dead, nothing can influence your pulse
-			
-//		if(heart_attack)
+
+		if(heart_attack)
 			return PULSE_NONE
 
 		var/temp = PULSE_NORM
@@ -1640,48 +1638,6 @@
 					temp = PULSE_NONE
 
 		return temp
-
-/*	proc/handle_heartbeat()
-		var/client/C = src.client
-		if(C && C.prefs.sound & SOUND_HEARTBEAT) //disable heartbeat by pref
-			var/obj/item/organ/heart/H = internal_organs_by_name["heart"]
-
-			if(!H) //H.status will runtime if there is no H (obviously)
-				return
-
-			if(H.status & ORGAN_ROBOT) //Handle robotic hearts specially with a wuuuubb. This also applies to machine-people.
-				if(shock_stage >= 10 || istype(get_turf(src), /turf/space))
-					//PULSE_THREADY - maximum value for pulse, currently it 5.
-					//High pulse value corresponds to a fast rate of heartbeat.
-					//Divided by 2, otherwise it is too slow.
-					var/rate = (PULSE_THREADY - 2)/2 //machine people (main target) have no pulse, manually subtract standard human pulse (2). Mechanic-heart humans probably have a pulse, but 'advanced neural systems' keep the heart rate steady, or something
-
-					if(heartbeat >= rate)
-						heartbeat = 0
-						src << sound('sound/effects/electheart.ogg',0,0,0,30) //Credit to GhostHack (www.ghosthack.de) for sound.
-					else
-						heartbeat++
-					return
-				return
-
-			if(pulse == PULSE_NONE)
-				return
-
-			if(pulse >= PULSE_2FAST || shock_stage >= 10 || istype(get_turf(src), /turf/space))
-				//PULSE_THREADY - maximum value for pulse, currently it 5.
-				//High pulse value corresponds to a fast rate of heartbeat.
-				//Divided by 2, otherwise it is too slow.
-				var/rate = (PULSE_THREADY - pulse)/2
-
-				if(heartbeat >= rate)
-					heartbeat = 0
-					if(H.status & ORGAN_ASSISTED)
-						src << sound('sound/effects/pacemakebeat.ogg',0,0,0,50)
-					else
-						src << sound('sound/effects/singlebeat.ogg',0,0,0,50)
-				else
-					heartbeat++
-*/
 /*
 	Called by life(), instead of having the individual hud items update icons each tick and check for status changes
 	we only set those statuses and icons upon changes.  Then those HUD items will simply add those pre-made images.
@@ -1856,8 +1812,8 @@
 	if(..())
 		speech_problem_flag = 1
 	return stunned
-	
-/* /mob/living/carbon/human/proc/handle_heartattack()
+
+/mob/living/carbon/human/proc/handle_heartattack()
 	if(!heart_attack)
 		return
 	else
@@ -1866,7 +1822,6 @@
 		adjustBrainLoss(rand(4,10))
 		Paralyse(2)
 	return
-	*/
 
 /mob/living/carbon/human/handle_stuttering()
 	if(..())

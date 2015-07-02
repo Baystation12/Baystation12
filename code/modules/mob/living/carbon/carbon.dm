@@ -87,11 +87,11 @@
 	shock_damage *= siemens_coeff
 	if (shock_damage<1)
 		return 0
-		
+
 	src.apply_damage(shock_damage, BURN, def_zone, used_weapon="Electrocution")
-	/*
-	if(heart_attack && prob(25)
-		heart_attack = 0 */
+
+	if(heart_attack && prob(25))
+		heart_attack = 0
 	playsound(loc, "sparks", 50, 1, -1)
 	if (shock_damage > 15)
 		src.visible_message(
