@@ -342,7 +342,7 @@
 	if(emagged)
 		return 10
 
-	return M.assess_perp(access_scanner, idcheck, check_records, check_arrest)
+	return M.assess_perp(access_scanner, 0, idcheck, check_records, check_arrest)
 
 /mob/living/bot/secbot/proc/patrol_step()
 	if(loc == patrol_target)
