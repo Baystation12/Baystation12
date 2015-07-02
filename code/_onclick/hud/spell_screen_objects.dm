@@ -12,6 +12,18 @@
 
 	var/mob/spell_holder
 
+/obj/screen/movable/spell_master/Destroy()
+	..()
+	for(var/obj/screen/spell/spells in spell_objects)
+		spells.spellmaster = null
+	spell_objects = null
+	if(spell_holder)
+		spell_holder.spell_masters -= src
+
+/obj/screen/movable/spell_master/ResetVars()
+	..("spell_objects")
+	spell_objects = list()
+
 /obj/screen/movable/spell_master/MouseDrop()
 	if(showing)
 		return
@@ -57,16 +69,23 @@
 /obj/screen/movable/spell_master/proc/add_spell(var/spell/spell)
 	if(!spell) return
 
-	for(var/obj/screen/spell/spellscreen in spell_objects)
-		if(spellscreen.spell == spell)
+	if(spell.connected_button) //we have one already, for some reason
+		if(spell.connected_button in spell_objects)
+			return
+		else
+			spell_objects.Add(spell.connected_button)
+			toggle_open(2)
 			return
 
 	if(spell.spell_flags & NO_BUTTON) //no button to add if we don't get one
 		return
 
-	var/obj/screen/spell/newscreen = new
-
+	var/obj/screen/spell/newscreen = PoolOrNew(/obj/screen/spell)
+	newscreen.spellmaster = src
 	newscreen.spell = spell
+
+	spell.connected_button = newscreen
+
 	if(!spell.override_base) //if it's not set, we do basic checks
 		if(spell.spell_flags & CONSTRUCT_CHECK)
 			newscreen.spell_base = "const" //construct spells
@@ -80,16 +99,13 @@
 	toggle_open(2) //forces the icons to refresh on screen
 
 /obj/screen/movable/spell_master/proc/remove_spell(var/spell/spell)
-	for(var/obj/screen/spell/s_object in spell_objects)
-		if(s_object.spell == spell)
-			spell_objects.Remove(s_object)
-			qdel(s_object)
-			break
+	qdel(spell.connected_button)
+
+	spell.connected_button = null
 
 	if(spell_objects.len)
 		toggle_open(showing + 1)
 	else
-		spell_holder.spell_masters.Remove(src)
 		qdel(src)
 
 /obj/screen/movable/spell_master/proc/silence_spells(var/amount)
@@ -125,8 +141,17 @@
 
 	var/spell/spell = null
 	var/handle_icon_updates = 0
+	var/obj/screen/movable/spell_master/spellmaster
 
 	var/icon/last_charged_icon
+
+/obj/screen/spell/Destroy()
+	..()
+	if(spellmaster)
+		spellmaster.spell_objects -= src
+	if(spellmaster && !spellmaster.spell_objects.len)
+		qdel(spellmaster)
+	spellmaster = null
 
 /obj/screen/spell/proc/update_charge(var/forced_update = 0)
 	if(!spell)

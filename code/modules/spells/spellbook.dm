@@ -211,7 +211,7 @@
 							temp = "You have learned knock."
 						if("horseman")
 							feedback_add_details("wizard_spell_learned","HH") //please do not change the abbreviation to keep data processing consistent. Add a unique id to any new spells
-							H.add_spell(new/spell/targeted/horsemask)
+							H.add_spell(new/spell/targeted/equip_item/horsemask)
 							temp = "You have learned curse of the horseman."
 						if("fleshtostone")
 							feedback_add_details("wizard_spell_learned","FS") //please do not change the abbreviation to keep data processing consistent. Add a unique id to any new spells
@@ -424,7 +424,7 @@
 	user.Weaken(20)
 
 /obj/item/weapon/spellbook/oneuse/horsemask
-	spell = /spell/targeted/horsemask
+	spell = /spell/targeted/equip_item/horsemask
 	spellname = "horses"
 	icon_state ="bookhorses"
 	desc = "This book is more horse than your mind has room for."

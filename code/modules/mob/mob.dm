@@ -601,31 +601,35 @@
 
 /mob/Stat()
 	..()
+	. = (client && client.inactivity < 1200)
 
-	if(client && client.holder)
-		if(statpanel("Status"))
-			statpanel("Status","Location:","([x], [y], [z])")
-			statpanel("Status","CPU:","[world.cpu]")
-			statpanel("Status","Instances:","[world.contents.len]")
-		if(statpanel("Status") && processScheduler && processScheduler.getIsRunning())
-			for(var/datum/controller/process/P in processScheduler.processes)
-				statpanel("Status",P.getStatName(), P.getTickTime())
-		else
-			statpanel("Status","processScheduler is not running.")
+	if(.)
+		if(client.holder)
+			if(statpanel("Status"))
+				statpanel("Status","Location:","([x], [y], [z])")
+				statpanel("Status","CPU:","[world.cpu]")
+				statpanel("Status","Instances:","[world.contents.len]")
+			if(statpanel("Status") && processScheduler && processScheduler.getIsRunning())
+				for(var/datum/controller/process/P in processScheduler.processes)
+					statpanel("Status",P.getStatName(), P.getTickTime())
+			else
+				statpanel("Status","processScheduler is not running.")
 
-	if(listed_turf && client)
-		if(!TurfAdjacent(listed_turf))
-			listed_turf = null
-		else
-			statpanel(listed_turf.name, null, listed_turf)
-			for(var/atom/A in listed_turf)
-				if(!A.mouse_opacity)
-					continue
-				if(A.invisibility > see_invisible)
-					continue
-				if(is_type_in_list(A, shouldnt_see))
-					continue
-				statpanel(listed_turf.name, null, A)
+		if(listed_turf && client)
+			if(!TurfAdjacent(listed_turf))
+				listed_turf = null
+			else
+				statpanel(listed_turf.name, null, listed_turf)
+				for(var/atom/A in listed_turf)
+					if(!A.mouse_opacity)
+						continue
+					if(A.invisibility > see_invisible)
+						continue
+					if(is_type_in_list(A, shouldnt_see))
+						continue
+					statpanel(listed_turf.name, null, A)
+
+	sleep(4) //Prevent updating the stat panel for the next .4 seconds, prevents clientside latency from updates
 
 // facing verbs
 /mob/proc/canface()
