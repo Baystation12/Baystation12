@@ -66,6 +66,14 @@
 			new /obj/item/clothing/gloves/yellow(src)
 		else
 			new /obj/item/stack/cable_coil(src,30,color)
+			
+/obj/item/weapon/storage/toolbox/lunch
+	name = "lunchbox"
+	desc = "Lunch in a box, Duh."
+	icon_state = "lunch"
+	item_state = "toolbox_lunch"
+	force = 2.0
+	throwforce = 1
 
 /obj/item/weapon/storage/toolbox/syndicate
 	name = "suspicious looking toolbox"
