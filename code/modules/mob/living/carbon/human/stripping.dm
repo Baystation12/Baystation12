@@ -59,6 +59,7 @@
 			return
 		if(!target_slot.canremove)
 			user << "<span class='warning'>You cannot remove \the [src]'s [target_slot.name].</span>"
+			return
 		stripping = 1
 
 	if(stripping)
@@ -73,11 +74,9 @@
 		return
 
 	if(stripping)
-		attack_log += "\[[time_stamp()]\] <font color='orange'>Has had \the [target_slot] removed by [user.name] ([user.ckey])</font>"
-		user.attack_log += "\[[time_stamp()]\] <font color='red'>Attempted to remove [name]'s ([ckey]) [target_slot.name]</font>"
-		drop_from_inventory(target_slot)
-	else
-		user.drop_from_inventory(held)
+		admin_attack_log(user, src, "Attempted to remove \a [target_slot]", "Target of an attempt to remove \a [target_slot].", "attempted to remove \a [target_slot] from")
+		unEquip(target_slot)
+	else if(user.unEquip(held))
 		equip_to_slot_if_possible(held, text2num(slot_to_strip), 0, 1, 1)
 		if(held.loc != src)
 			user.put_in_hands(held)
@@ -88,9 +87,9 @@
 		user << "<span class='warning'>\The [src] has nothing in their pockets.</span>"
 		return
 	if(r_store)
-		drop_from_inventory(r_store)
+		unEquip(r_store)
 	if(l_store)
-		drop_from_inventory(l_store)
+		unEquip(l_store)
 	visible_message("<span class='danger'>\The [user] empties \the [src]'s pockets!</span>")
 
 // Modify the current target sensor level.
