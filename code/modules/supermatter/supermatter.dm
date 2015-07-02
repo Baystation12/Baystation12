@@ -241,9 +241,11 @@
 		if(!istype(l.glasses, /obj/item/clothing/glasses/meson))
 			l.hallucination = max(0, min(200, l.hallucination + power * config_hallucination_power * sqrt( 1 / max(1,get_dist(l, src)) ) ) )
 
-	//adjusted range so that a power of 300 (pretty high) results in 8 tiles, roughly the distance from the core to the engine monitoring room.
-	for(var/mob/living/l in range(src, round(sqrt(power / 5))))
-		var/rads = (power / 10) * sqrt( 1 / get_dist(l, src) )
+	//adjusted range so that a power of 170 (pretty high) results in 9 tiles, roughly the distance from the core to the engine monitoring room.
+	//note that the rads given at the maximum range is a constant 0.2 - as power increases the maximum range merely increases.
+	for(var/mob/living/l in range(src, round(sqrt(power / 2))))
+		var/radius = max(get_dist(l, src), 1)
+		var/rads = (power / 10) * ( 1 / (radius**2) )
 		l.apply_effect(rads, IRRADIATE)
 
 	power -= (power/DECAY_FACTOR)**3		//energy losses due to radiation
