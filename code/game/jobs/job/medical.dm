@@ -29,7 +29,6 @@
 		H.equip_to_slot_or_del(new /obj/item/device/pda/heads/cmo(H), slot_wear_pda)
 		H.equip_to_slot_or_del(new /obj/item/clothing/suit/storage/toggle/labcoat/cmo(H), slot_wear_suit)
 		H.equip_to_slot_or_del(new /obj/item/weapon/storage/firstaid/adv(H), slot_l_hand)
-		H.equip_to_slot_or_del(new /obj/item/weapon/defibrillator/compact/loaded(H), slot_belt)
 		if(H.backbag == 1)
 			H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H), slot_r_hand)
 		else
