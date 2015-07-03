@@ -1,0 +1,5 @@
+author: PsiOmegaDelta
+delete-after: True
+
+changes: 
+  - tweak: "Active AI cores now provides coverage on the AI camera network. Does not utilize actual cameras, thus will not show up on security consoles."
