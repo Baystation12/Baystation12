@@ -8,6 +8,8 @@
 	icon_state_unpowered = "console"
 	icon_state_menu = "menu"
 	battery_powered = 0
+	anchored = 1
+	density = 1
 
 /obj/machinery/modular_computer/console/New()
 	..()
