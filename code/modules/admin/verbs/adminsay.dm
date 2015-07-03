@@ -17,7 +17,7 @@
 	if(check_rights(R_ADMIN,0))
 		msg = "<span class='[color]'><span class='prefix'>ADMIN:</span> <EM>[key_name(usr, 1)]</EM> (<b><a href='?_src_=holder;adminplayerobservejump=\ref[mob]'>JMP</A>): <span class='message'>[msg]</b></span></span>"
 		for(var/client/C in admins)
-			if(R_ADMIN & C.holder.rights)
+			if(R_AUDITOR|R_ADMIN & C.holder.rights)
 				C << msg
 
 	if(check_rights(R_AUDITOR,0))
