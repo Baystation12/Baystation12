@@ -12,6 +12,9 @@ client
 			usr << "\red You need to be an administrator to access this."
 			return
 
+		if(!check_rights(R_MENTOR|R_AUDITOR))
+			message_admins("\blue [key_name_admin(usr)] tried to use some debug variables.", 1)
+			return
 
 		var/title = ""
 		var/body = ""
@@ -548,7 +551,7 @@ client
 		if(!istype(M))
 			usr << "This can only be used on instances of type /mob"
 			return
-
+		message_admins("\blue [key_name(usr)] has toggled buildmode")
 		togglebuildmode(M)
 		href_list["datumrefresh"] = href_list["build_mode"]
 
@@ -895,6 +898,7 @@ client
 			return
 		else
 			H.verbs += verb
+			message_admins("\blue [key_name(usr)] has added [verb] to themselves")
 
 	else if(href_list["remverb"])
 		if(!check_rights(R_DEBUG))      return

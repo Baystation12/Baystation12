@@ -731,6 +731,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 					else
 						t = sanitize(copytext(t, 1, 20))
 						ttone = t
+						message_admins("\blue [key_name_admin(usr)] set their ringtone to [t].", 1)
 			else
 				ui.close()
 				return 0
