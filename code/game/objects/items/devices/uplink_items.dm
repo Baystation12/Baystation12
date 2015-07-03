@@ -38,14 +38,30 @@ var/datum/uplink/uplink = new()
 	..()
 	antag_roles = list()
 
-/datum/uplink_item/proc/buy(var/obj/item/device/uplink/U, var/mob/user)
-	purchase_log(U)
-	var/cost = cost(U.uses)
-	var/goods = get_goods(U, get_turf(user))
 
+
+/datum/uplink_item/proc/buy(var/obj/item/device/uplink/U, var/mob/user)
+	var/extra_args = extra_args(user)
+	if(!extra_args)
+		return
+
+	if(!can_buy(U))
+		return
+
+	var/cost = cost(U.uses)
+
+	var/goods = get_goods(U, get_turf(user), user, extra_args)
+	if(!goods)
+		return
+
+	purchase_log(U)
 	U.uses -= cost
 	U.used_TC += cost
 	return goods
+
+// Any additional arguments you wish to send to the get_goods
+/datum/uplink_item/proc/extra_args(var/mob/user)
+	return 1
 
 /datum/uplink_item/proc/can_buy(obj/item/device/uplink/U)
 	if(cost(U.uses) > U.uses)
@@ -90,11 +106,14 @@ datum/uplink_item/dd_SortValue()
 
 /********************************
 *                           	*
-*	Physical Uplink Entires		*
+*	Physical Uplink Entries		*
 *                           	*
 ********************************/
 /datum/uplink_item/item/buy(var/obj/item/device/uplink/U, var/mob/user)
 	var/obj/item/I = ..()
+	if(!I)
+		return
+
 	if(istype(I, /list))
 		var/list/L = I
 		if(L.len) I = L[1]
@@ -511,6 +530,104 @@ datum/uplink_item/dd_SortValue()
 		icon = image(initial(C.icon), initial(C.icon_state))
 
 	return "\icon[icon]"
+
+/********************************
+*                           	*
+*	Abstract Uplink Entries		*
+*                           	*
+********************************/
+var/image/default_abstract_uplink_icon
+/datum/uplink_item/abstract/log_icon()
+	if(!default_abstract_uplink_icon)
+		default_abstract_uplink_icon = image('icons/obj/pda.dmi', "pda-syn")
+
+	return "\icon[default_abstract_uplink_icon]"
+
+/****************
+* Announcements *
+*****************/
+/datum/uplink_item/abstract/announcements
+	category = /datum/uplink_category/announcements
+
+/datum/uplink_item/abstract/announcements/buy(var/obj/item/device/uplink/U, var/mob/user)
+	. = ..()
+	if(.)
+		log_and_message_admins("has triggered a falsified [src] announcement", user)
+
+/datum/uplink_item/abstract/announcements/fake_centcom
+	item_cost = DEFAULT_TELECRYSTAL_AMOUNT / 2
+
+/datum/uplink_item/abstract/announcements/fake_centcom/New()
+	..()
+	name = "[command_name()] Update"
+	desc = "Causes a falsified [command_name()] Update. Triggers immediately after supplying additional data."
+	antag_roles = list(MODE_MERCENARY)
+
+/datum/uplink_item/abstract/announcements/fake_centcom/extra_args(var/mob/user)
+	if(!user)
+		return 0
+
+	var/subtitle = input(user, "Enter the annoncement Title.", "Annoncement Title", "Attention") as text|null
+	if(!subtitle)
+		return 0
+
+	var/message = input(user, "Enter the annoncement message.", "Annoncement Message") as text|null
+	if(!message)
+		return 0
+
+	return list("title" = subtitle, "message" = message)
+
+/datum/uplink_item/abstract/announcements/fake_centcom/get_goods(var/obj/item/device/uplink/U, var/loc, var/mob/user, var/list/args)
+	command_announcement.Announce(args.["message"], args.["title"])
+	return 1
+
+/datum/uplink_item/abstract/announcements/fake_cryo
+	name = "Cryogenic Oversight Announcement"
+	desc = "Causes a falsified cryogenic message. Triggers immediately after supplying additional data."
+	item_cost = 1
+
+/datum/uplink_item/abstract/announcements/fake_cryo/extra_args(var/mob/user)
+	if(!user)
+		return 0
+
+	var/real_name = input(user, "Enter the name of the occupant.", "Occupant Name.", user.name) as text|null
+	if(!real_name)
+		return 0
+
+	var/title = input(user, "Enter the title of the occupant.", "Occupant Title.", "Assistant") as text|null
+	if(!title)
+		return 0
+
+	return list("name" = real_name, "title" = title)
+
+/datum/uplink_item/abstract/announcements/fake_cryo/get_goods(var/obj/item/device/uplink/U, var/loc, var/mob/user, var/list/args)
+	if(!args)
+		return 0
+
+	var/obj/item/device/radio/intercom/announce = new /obj/item/device/radio/intercom(user)
+	announce.autosay("[args["name"]], [args["title"]], has entered long-term storage.", "Cryogenic Oversight")
+	qdel(announce)
+	return 1
+
+/datum/uplink_item/abstract/announcements/fake_ion_storm
+	name = "Ion Storm Announcement"
+	desc = "Interferes with the station's ion sensors. Triggers immediately upon investment."
+	item_cost = 1
+
+/datum/uplink_item/abstract/announcements/fake_ion_storm/get_goods(var/obj/item/device/uplink/U, var/loc)
+	ion_storm_announcement()
+	return 1
+
+/datum/uplink_item/abstract/announcements/fake_radiation
+	name = "Radiation Storm Announcement"
+	desc = "Interferes with the station's radiation sensors. Triggers immediately upon investment."
+	item_cost = 3
+
+/datum/uplink_item/abstract/announcements/fake_radiation/get_goods(var/obj/item/device/uplink/U, var/loc)
+	var/datum/event_meta/EM = new(EVENT_LEVEL_MUNDANE, "Fake Radiation Storm", add_to_queue = 0)
+	new/datum/event/radiation_storm/syndicate(EM)
+	return 1
+
 
 /****************
 * Support procs *

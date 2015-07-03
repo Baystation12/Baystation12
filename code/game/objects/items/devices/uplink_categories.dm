@@ -36,5 +36,8 @@
 /datum/uplink_category/hardsuit_modules
 	name = "Hardsuit Modules"
 
+/datum/uplink_category/announcements
+	name = "Announcements"
+
 /datum/uplink_category/badassery
 	name = "Badassery"

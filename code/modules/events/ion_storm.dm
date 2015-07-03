@@ -95,7 +95,7 @@
 /datum/event/ionstorm/end()
 	spawn(rand(5000,8000))
 		if(prob(50))
-			command_announcement.Announce("It has come to our attention that the station passed through an ion storm.  Please monitor all electronic equipment for malfunctions.", "Anomaly Alert")
+			ion_storm_announcement()
 
 /*
 /proc/IonStorm(botEmagChance = 10)
