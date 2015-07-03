@@ -8,10 +8,11 @@
 	var/running = 1							// Set to 1 when the program is run and back to 0 when it's stopped.
 	var/atom/movable/computer = null		// Device that runs this program.
 	var/filedesc = "Unknown Program"		// User-friendly name of this program.
-	var/fileicon = "unknwn"					// Name of relevant icon that is displayed with the program
+	var/fileicon = "unknwn"					// Name of relevant icon that is displayed with the program. Currently unused.
 	var/laptop_icon_state = null			// Program-specific icon state (stored in /icons/obj/computer3.dmi)
 	var/requires_ntnet = 0					// Set to 1 for program to require nonstop NTNet connection to run. If NTNet connection is lost program crashes.
 	var/requires_ntnet_feature = 0			// Optional, if above is set to 1 checks for specific function of NTNet (currently NTNET_SOFTWAREDOWNLOAD, NTNET_PEERTOPEER, NTNET_SYSTEMCONTROL and NTNET_COMMUNICATION)
+	var/ntnet_status = 1					// NTNet status, updated every tick by computer running this program. Don't use this for checks if NTNet works, computers do that. Use this for calculations, etc.
 
 /datum/computer_file/program/New(var/atom/movable/comp = null)
 	..()
@@ -93,3 +94,4 @@
 	if(computer)
 		computer.Topic(href, href_list)
 	..()
+

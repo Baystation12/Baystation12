@@ -5,6 +5,9 @@
 	use_power = 1
 	idle_power_usage = 20000 //20kW, apropriate for machine that keeps massive cross-Zlevel wireless network operational.
 	icon_state = "bus"
+	anchored = 1
+	density = 1
+	var/NTNet = null // This is mostly for backwards reference and to allow varedit modifications from ingame.
 
 // TODO: Implement more logic here. For now it's only a placeholder.
 /obj/machinery/ntnet_relay/proc/is_operational()
@@ -15,7 +18,11 @@
 /obj/machinery/ntnet_relay/New()
 	if(ntnet_global)
 		ntnet_global.relays.Add(src)
+		NTNet = ntnet_global
+	..()
 
 /obj/machinery/ntnet_relay/Destroy()
 	if(ntnet_global)
 		ntnet_global.relays.Remove(src)
+		NTNet = null
+	..()

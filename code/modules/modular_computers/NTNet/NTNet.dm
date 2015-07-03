@@ -16,6 +16,7 @@ var/global/datum/ntnet/ntnet_global = new()
 		ntnet_global = src // There can be only one.
 	for(var/obj/machinery/ntnet_relay/R in machines)
 		relays.Add(R)
+		R.NTNet = src
 
 /datum/ntnet/proc/check_function(var/specific_action = 0)
 	if(!relays || !relays.len) // No relays found. NTNet is down

@@ -3,6 +3,7 @@
 	desc = "A basic network card for usage with standard NTNet frequencies."
 	power_usage = 50
 	critical = 0
+	var/identification_string = "" // Identification string, technically nickname seen in the network. Can be set by user.
 	var/long_range = 0
 	var/ethernet = 0 // Hard-wired, therefore always on, ignores NTNet wireless checks.
 
