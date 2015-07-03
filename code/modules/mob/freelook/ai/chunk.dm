@@ -24,6 +24,10 @@
 		for(var/turf/t in c.can_see())
 			visible[t] = t
 
+	for(var/mob/living/silicon/ai/AI in living_mob_list)
+		for(var/turf/t in AI.seen_camera_turfs())
+			visible[t] = t
+
 // Create a new camera chunk, since the chunks are made as they are needed.
 
 /datum/chunk/camera/New(loc, x, y, z)
@@ -31,3 +35,15 @@
 		if(c.can_use())
 			cameras += c
 	..()
+
+/mob/living/silicon/proc/provides_camera_vision()
+	return 0
+
+/mob/living/silicon/ai/provides_camera_vision()
+	return stat != DEAD
+
+/mob/living/silicon/robot/provides_camera_vision()
+	return src.camera && src.camera.network.len
+
+/mob/living/silicon/ai/proc/seen_camera_turfs()
+	return seen_turfs_in_range(src, world.view)
