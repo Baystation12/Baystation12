@@ -19,7 +19,9 @@ var/datum/antagonist/raider/raiders
 		/obj/item/clothing/under/pirate,
 		/obj/item/clothing/under/redcoat,
 		/obj/item/clothing/under/serviceoveralls,
-		/obj/item/clothing/under/captain_fly
+		/obj/item/clothing/under/captain_fly,
+		/obj/item/clothing/under/det,
+		/obj/item/clothing/under/brown,
 		)
 
 	var/list/raider_shoes = list(
@@ -50,7 +52,9 @@ var/datum/antagonist/raider/raiders
 		/obj/item/clothing/suit/storage/leather_jacket,
 		/obj/item/clothing/suit/storage/toggle/brown_jacket,
 		/obj/item/clothing/suit/storage/toggle/hoodie,
-		/obj/item/clothing/suit/storage/toggle/hoodie/black
+		/obj/item/clothing/suit/storage/toggle/hoodie/black,
+		/obj/item/clothing/suit/unathi/mantle,
+		/obj/item/clothing/suit/poncho,
 		)
 
 	var/list/raider_guns = list(
@@ -60,14 +64,27 @@ var/datum/antagonist/raider/raiders
 		/obj/item/weapon/gun/energy/mindflayer,
 		/obj/item/weapon/gun/energy/toxgun,
 		/obj/item/weapon/gun/energy/stunrevolver,
+		/obj/item/weapon/gun/energy/ionrifle,
+		/obj/item/weapon/gun/energy/taser,
 		/obj/item/weapon/gun/energy/crossbow/largecrossbow,
+		/obj/item/weapon/gun/launcher/crossbow,
+		/obj/item/weapon/gun/launcher/grenade,
+		/obj/item/weapon/gun/launcher/pneumatic,
 		/obj/item/weapon/gun/projectile/automatic/mini_uzi,
 		/obj/item/weapon/gun/projectile/automatic/c20r,
+		/obj/item/weapon/gun/projectile/automatic/wt550,
+		/obj/item/weapon/gun/projectile/automatic/sts35,
 		/obj/item/weapon/gun/projectile/silenced,
 		/obj/item/weapon/gun/projectile/shotgun/pump,
 		/obj/item/weapon/gun/projectile/shotgun/pump/combat,
+		/obj/item/weapon/gun/projectile/shotgun/doublebarrel,
+		/obj/item/weapon/gun/projectile/shotgun/doublebarrel/pellet,
+		/obj/item/weapon/gun/projectile/shotgun/doublebarrel/sawn,
 		/obj/item/weapon/gun/projectile/colt,
-		/obj/item/weapon/gun/projectile/pistol
+		/obj/item/weapon/gun/projectile/sec,
+		/obj/item/weapon/gun/projectile/pistol,
+		/obj/item/weapon/gun/projectile/revolver,
+		/obj/item/weapon/gun/projectile/pirate
 		)
 
 /datum/antagonist/raider/New()
