@@ -33,7 +33,7 @@
 	var/holy = 0
 
 	var/dynamic_lighting = 1
-	luminosity = 0
+	luminosity = 1
 
 /turf/New()
 	..()
@@ -42,10 +42,6 @@
 			src.Entered(AM)
 			return
 	turfs |= src
-
-	var/area/A = loc
-	if(!dynamic_lighting || !A.lighting_use_dynamic)
-		luminosity = 1
 
 /turf/Destroy()
 	turfs -= src

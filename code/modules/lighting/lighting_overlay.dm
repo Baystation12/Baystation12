@@ -21,6 +21,9 @@
 	. = ..()
 	verbs.Cut()
 
+	var/turf/T = loc //If this runtimes atleast we'll know what's creating overlays in things that aren't turfs.
+	T.luminosity = 0
+
 /atom/movable/lighting_overlay/proc/update_lumcount(delta_r, delta_g, delta_b)
 	if(!delta_r && !delta_g && !delta_b) //Nothing is being changed all together.
 		return
