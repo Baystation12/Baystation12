@@ -47,7 +47,6 @@
 	max_shells = 7 //match the ammo box capacity, also it can hold a round in the chamber anyways, for a total of 8.
 	ammo_type = /obj/item/ammo_casing/shotgun
 
-
 /obj/item/weapon/gun/projectile/shotgun/doublebarrel
 	name = "double-barreled shotgun"
 	desc = "A true classic."
@@ -95,8 +94,9 @@
 			return
 		if(do_after(user, 30))	//SHIT IS STEALTHY EYYYYY
 			icon_state = "sawnshotgun"
+			item_state = "sawnshotgun"
 			w_class = 3
-			item_state = "gun"
+			force = 5
 			slot_flags &= ~SLOT_BACK	//you can't sling it on your back
 			slot_flags |= (SLOT_BELT|SLOT_HOLSTER) //but you can wear it on your belt (poorly concealed under a trenchcoat, ideally) - or in a holster, why not.
 			name = "sawn-off shotgun"
@@ -104,3 +104,12 @@
 			user << "<span class='warning'>You shorten the barrel of \the [src]!</span>"
 	else
 		..()
+
+/obj/item/weapon/gun/projectile/shotgun/doublebarrel/sawn
+	name = "sawn-off shotgun"
+	desc = "Omar's coming!"
+	icon_state = "sawnshotgun"
+	item_state = "sawnshotgun"
+	slot_flags = SLOT_BELT|SLOT_HOLSTER
+	w_class = 3
+	force = 5
