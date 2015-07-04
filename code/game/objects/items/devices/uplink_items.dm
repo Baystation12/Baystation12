@@ -9,6 +9,7 @@ var/datum/uplink/uplink = new()
 	items_assoc = list()
 	items = init_subtypes(/datum/uplink_item)
 	categories = init_subtypes(/datum/uplink_category)
+	categories = dd_sortedObjectList(categories)
 
 	for(var/datum/uplink_item/item in items)
 		if(!item.name)
@@ -166,11 +167,6 @@ datum/uplink_item/dd_SortValue()
 ***************************************/
 /datum/uplink_item/item/visible_weapons
 	category = /datum/uplink_category/visible_weapons
-
-/datum/uplink_item/item/visible_weapons/emp
-	name = "5xEMP Grenades"
-	item_cost = 3
-	path = /obj/item/weapon/storage/box/emps
 
 /datum/uplink_item/item/visible_weapons/energy_sword
 	name = "Energy Sword"
@@ -452,6 +448,27 @@ datum/uplink_item/dd_SortValue()
 	item_cost = 8
 	path = /obj/item/rig_module/mounted
 
+/***********
+* Grenades *
+************/
+/datum/uplink_item/item/grenades
+	category = /datum/uplink_category/grenades
+
+/datum/uplink_item/item/grenades/anti_photon
+	name = "5xAnti-Photon Grenades"
+	item_cost = 2
+	path = /obj/item/weapon/storage/box/anti_photons
+
+/datum/uplink_item/item/grenades/emp
+	name = "5xEMP Grenades"
+	item_cost = 3
+	path = /obj/item/weapon/storage/box/emps
+
+/datum/uplink_item/item/grenades/smoke
+	name = "5xSmoke Grenades"
+	item_cost = 2
+	path = /obj/item/weapon/storage/box/smokes
+
 /************
 * Badassery *
 ************/
@@ -547,19 +564,19 @@ var/image/default_abstract_uplink_icon
 * Announcements *
 *****************/
 /datum/uplink_item/abstract/announcements
-	category = /datum/uplink_category/announcements
+	category = /datum/uplink_category/services
 
 /datum/uplink_item/abstract/announcements/buy(var/obj/item/device/uplink/U, var/mob/user)
 	. = ..()
 	if(.)
-		log_and_message_admins("has triggered a falsified [src] announcement", user)
+		log_and_message_admins("has triggered a falsified [src]", user)
 
 /datum/uplink_item/abstract/announcements/fake_centcom
 	item_cost = DEFAULT_TELECRYSTAL_AMOUNT / 2
 
 /datum/uplink_item/abstract/announcements/fake_centcom/New()
 	..()
-	name = "[command_name()] Update"
+	name = "[command_name()] Update Announcement"
 	desc = "Causes a falsified [command_name()] Update. Triggers immediately after supplying additional data."
 	antag_roles = list(MODE_MERCENARY)
 
@@ -579,34 +596,6 @@ var/image/default_abstract_uplink_icon
 
 /datum/uplink_item/abstract/announcements/fake_centcom/get_goods(var/obj/item/device/uplink/U, var/loc, var/mob/user, var/list/args)
 	command_announcement.Announce(args.["message"], args.["title"])
-	return 1
-
-/datum/uplink_item/abstract/announcements/fake_cryo
-	name = "Cryogenic Oversight Announcement"
-	desc = "Causes a falsified cryogenic message. Triggers immediately after supplying additional data."
-	item_cost = 1
-
-/datum/uplink_item/abstract/announcements/fake_cryo/extra_args(var/mob/user)
-	if(!user)
-		return 0
-
-	var/real_name = input(user, "Enter the name of the occupant.", "Occupant Name.", user.name) as text|null
-	if(!real_name)
-		return 0
-
-	var/title = input(user, "Enter the title of the occupant.", "Occupant Title.", "Assistant") as text|null
-	if(!title)
-		return 0
-
-	return list("name" = real_name, "title" = title)
-
-/datum/uplink_item/abstract/announcements/fake_cryo/get_goods(var/obj/item/device/uplink/U, var/loc, var/mob/user, var/list/args)
-	if(!args)
-		return 0
-
-	var/obj/item/device/radio/intercom/announce = new /obj/item/device/radio/intercom(user)
-	announce.autosay("[args["name"]], [args["title"]], has entered long-term storage.", "Cryogenic Oversight")
-	qdel(announce)
 	return 1
 
 /datum/uplink_item/abstract/announcements/fake_ion_storm

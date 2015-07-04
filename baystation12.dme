@@ -694,6 +694,7 @@
 #include "code\game\objects\items\weapons\circuitboards\machinery\shieldgen.dm"
 #include "code\game\objects\items\weapons\circuitboards\machinery\telecomms.dm"
 #include "code\game\objects\items\weapons\circuitboards\machinery\unary_atmos.dm"
+#include "code\game\objects\items\weapons\grenades\anti_photon_grenade.dm"
 #include "code\game\objects\items\weapons\grenades\chem_grenade.dm"
 #include "code\game\objects\items\weapons\grenades\emgrenade.dm"
 #include "code\game\objects\items\weapons\grenades\flashbang.dm"
