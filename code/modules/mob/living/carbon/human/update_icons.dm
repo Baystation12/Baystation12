@@ -842,11 +842,11 @@ var/global/list/damage_icon_parts = list()
 
 		//determine icon to use
 		var/icon/t_icon
-		if(r_hand.icon_override)
+		if(r_hand.item_icons && (slot_r_hand_str in r_hand.item_icons))
+			t_icon = r_hand.item_icons[slot_r_hand_str]
+		else if(r_hand.icon_override)
 			t_state += "_r"
 			t_icon = r_hand.icon_override
-		else if(r_hand.item_icons && (slot_r_hand_str in r_hand.item_icons))
-			t_icon = r_hand.item_icons[slot_r_hand_str]
 		else
 			t_icon = INV_R_HAND_DEF_ICON
 
@@ -874,11 +874,11 @@ var/global/list/damage_icon_parts = list()
 
 		//determine icon to use
 		var/icon/t_icon
-		if(l_hand.icon_override)
+		if(l_hand.item_icons && (slot_l_hand_str in l_hand.item_icons))
+			t_icon = l_hand.item_icons[slot_l_hand_str]
+		else if(l_hand.icon_override)
 			t_state += "_l"
 			t_icon = l_hand.icon_override
-		else if(l_hand.item_icons && (slot_l_hand_str in l_hand.item_icons))
-			t_icon = l_hand.item_icons[slot_l_hand_str]
 		else
 			t_icon = INV_L_HAND_DEF_ICON
 
