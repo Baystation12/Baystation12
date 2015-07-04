@@ -20,6 +20,7 @@
 /datum/custom_item
 	var/assoc_key
 	var/character_name
+	var/inherit_inhands = 1 //if unset, and inhands are not provided, then the inhand overlays will be invisible.
 	var/item_icon
 	var/item_desc
 	var/name
@@ -44,10 +45,19 @@
 	if(item_desc)
 		item.desc = item_desc
 	if(item_icon)
-		item.icon = CUSTOM_ITEM_OBJ
-		item.icon_state = item_icon
-		if(istype(item, /obj/item))
+		if(!istype(item))
+			item.icon = CUSTOM_ITEM_OBJ
+			item.icon_state = item_icon
+			return
+		else if(!inherit_inhands)
+			item.icon = CUSTOM_ITEM_OBJ
+			item.icon_state = item_icon
+			item.item_state = null
+			item.item_state_slots = null
+			item.item_icons = null
 			item.icon_override = CUSTOM_ITEM_MOB
+		else
+			apply_icons(item)
 
 	// Kits are dumb so this is going to have to be hardcoded/snowflake.
 	if(istype(item, /obj/item/device/kit))
@@ -66,6 +76,52 @@
 
 	return item
 
+/datum/custom_item/proc/apply_icons(var/obj/item/item)
+	var/list/new_item_icons = list()
+	var/list/new_item_state_slots = list()
+	
+	var/list/available_states = icon_states(CUSTOM_ITEM_MOB)
+	
+	//If l_hand or r_hand are not present, preserve them using item_icons/item_state_slots
+	//Then use icon_override to make every other slot use the custom sprites by default.
+	//This has to be done before we touch any of item's vars
+	if(!("[item_icon]_l" in available_states))
+		new_item_state_slots[slot_l_hand_str] = get_state(item, slot_l_hand_str, "_l")
+		new_item_icons[slot_l_hand_str] = get_icon(item, slot_l_hand_str, 'icons/mob/items/lefthand.dmi')
+	if(!("[item_icon]_r" in available_states))
+		new_item_state_slots[slot_r_hand_str] = get_state(item, slot_r_hand_str, "_r")
+		new_item_icons[slot_r_hand_str] = get_icon(item, slot_r_hand_str, 'icons/mob/items/righthand.dmi')
+	
+	item.icon = CUSTOM_ITEM_OBJ
+	item.icon_state = item_icon
+	item.item_state = null
+	item.item_state_slots = new_item_state_slots
+	item.item_icons = new_item_icons
+	item.icon_override = CUSTOM_ITEM_MOB
+
+//this has to mirror the way update_inv_*_hand() selects the state
+/datum/custom_item/proc/get_state(var/obj/item/item, var/slot_str, var/hand_str)
+	var/t_state
+	if(item.item_state_slots && item.item_state_slots[slot_str])
+		t_state = item.item_state_slots[slot_str]
+	else if(item.item_state)
+		t_state = item.item_state
+	else
+		t_state = item.icon_state
+	if(item.icon_override)
+		t_state += hand_str
+	return t_state
+
+//this has to mirror the way update_inv_*_hand() selects the icon
+/datum/custom_item/proc/get_icon(var/obj/item/item, var/slot_str, var/icon/hand_icon)
+	var/icon/t_icon
+	if(item.icon_override)
+		t_icon = item.icon_override
+	else if(item.item_icons && (slot_str in item.item_icons))
+		t_icon = item.item_icons[slot_str]
+	else
+		t_icon = hand_icon
+	return t_icon
 
 // Parses the config file into the custom_items list.
 /hook/startup/proc/load_custom_items()
@@ -107,6 +163,8 @@
 				current_data.name = field_data
 			if("item_icon")
 				current_data.item_icon = field_data
+			if("inherit_inhands")
+				current_data.inherit_inhands = text2num(field_data)
 			if("item_desc")
 				current_data.item_desc = field_data
 			if("req_access")
