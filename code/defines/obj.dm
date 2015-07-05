@@ -166,7 +166,7 @@
 	return dat
 
 
-/var/list/acting_rank_prefixes = list("acting", "temporary", "interim")
+/var/list/acting_rank_prefixes = list("acting", "temporary", "interim", "provisional")
 
 /proc/make_list_rank(rank)
 	for(var/prefix in acting_rank_prefixes)
