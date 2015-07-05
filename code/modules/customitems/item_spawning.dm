@@ -174,16 +174,8 @@
 	if(M.equip_to_appropriate_slot(newitem))
 		return newitem
 
-	if(istype(M.back,/obj/item/weapon/storage))
-		var/obj/item/weapon/storage/backpack = M.back
-		if(backpack.contents.len < backpack.storage_slots)
-			newitem.loc = M.back
-			return newitem
+	if(M.equip_to_storage(newitem))
+		return newitem
 
-	// Try to place it in any item that can store stuff, on the mob.
-	for(var/obj/item/weapon/storage/S in M.contents)
-		if (S.contents.len < S.storage_slots)
-			newitem.loc = S
-			return newitem
 	newitem.loc = get_turf(M.loc)
 	return newitem
