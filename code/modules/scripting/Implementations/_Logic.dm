@@ -221,14 +221,14 @@ proc/n_floor(var/num)
 // Round up
 proc/n_ceil(var/num)
 	if(isnum(num))
-		return round(num)+1
+		return ceil(num)
 
 // Round to nearest integer
 proc/n_round(var/num)
 	if(isnum(num))
 		if(num-round(num)<0.5)
 			return round(num)
-		return n_ceil(num)
+		return ceil(num)
 
 // Clamps N between min and max
 proc/n_clamp(var/num, var/min=-1, var/max=1)

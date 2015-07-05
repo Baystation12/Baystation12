@@ -20,6 +20,7 @@
 
 #define CLAMP01(x) max(0, min(1, x))
 #define QUANTIZE(variable) (round(variable,0.0001))
+#define ceil(x) (-round(-(x)))
 
 #define INFINITY	1.#INF
 
