@@ -243,6 +243,7 @@ var/global/list/turf/synd_spawn = list()
 
 /datum/game_mode/nuclear/declare_completion()
 	if(config.objectives_disabled)
+		..()
 		return
 	var/disk_rescued = 1
 	for(var/obj/item/weapon/disk/nuclear/D in world)

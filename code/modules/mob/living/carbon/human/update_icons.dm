@@ -686,17 +686,26 @@ proc/get_damage_icon_part(damage_state, body_part)
 /mob/living/carbon/human/update_inv_head(var/update_icons=1)
 	if(head)
 		head.screen_loc = ui_head		//TODO
-		var/image/standing
-		if(istype(head,/obj/item/clothing/head/kitty))
-			standing = image("icon" = head:mob)
-		else
-			if(head.icon_override)
-				standing = image("icon" = head.icon_override, "icon_state" = "[head.icon_state]")
-			else if(head.sprite_sheets && head.sprite_sheets[species.name])
-				standing = image("icon" = head.sprite_sheets[species.name], "icon_state" = "[head.icon_state]")
-			else
-				standing = image("icon" = 'icons/mob/head.dmi', "icon_state" = "[head.icon_state]")
-
+		
+		//Determine the icon to use
+		var/t_icon = INV_HEAD_DEF_ICON
+		if(head.icon_override)
+			t_icon = head.icon_override
+		else if(head.sprite_sheets && head.sprite_sheets[species.name])
+			t_icon = head.sprite_sheets[species.name]
+		else if(head.item_icons && (icon_head in head.item_icons))
+			t_icon = head.item_icons[icon_head]
+		
+		//Determine the state to use
+		var/t_state = head.icon_state
+		if(istype(head, /obj/item/weapon/paper))
+			/* I don't like this, but bandaid to fix half the hats in the game
+			   being completely broken without re-breaking paper hats */
+			t_state = "paper"
+		
+		//Create the image
+		var/image/standing = image(icon = t_icon, icon_state = t_state)
+		
 		if(head.blood_DNA)
 			var/image/bloodsies = image("icon" = 'icons/effects/blood.dmi', "icon_state" = "helmetblood")
 			bloodsies.color = head.blood_color

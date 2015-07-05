@@ -123,9 +123,9 @@
 
 /mob/living/silicon/pai/check_eye(var/mob/user as mob)
 	if (!src.current)
-		return null
+		return -1
 	user.reset_view(src.current)
-	return 1
+	return 0
 
 /mob/living/silicon/pai/blob_act()
 	if (src.stat != 2)
@@ -185,9 +185,6 @@
 	return
 
 /mob/living/silicon/pai/proc/switchCamera(var/obj/machinery/camera/C)
-	if(istype(usr, /mob/living))
-		var/mob/living/U = usr
-		U.cameraFollow = null
 	if (!C)
 		src.unset_machine()
 		src.reset_view(null)

@@ -33,8 +33,6 @@
 
 	var/now_pushing = null
 
-	var/mob/living/cameraFollow = null
-
 	var/tod = null // Time of death
 	var/update_slimes = 1
 	var/silent = null 		// Can't talk. Value goes down every life proc.

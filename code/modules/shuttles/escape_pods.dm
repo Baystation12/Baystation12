@@ -111,8 +111,9 @@
 	var/closing = 0
 
 /datum/computer/file/embedded_program/docking/simple/escape_pod/proc/arm()
-	armed = 1
-	open_door()
+	if(!armed)
+		armed = 1
+		open_door()
 
 
 /datum/computer/file/embedded_program/docking/simple/escape_pod/receive_user_command(command)
