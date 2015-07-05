@@ -1,3 +1,5 @@
+var/list/drone_hat_cache = list()
+
 /mob/living/silicon/robot/drone
 	name = "drone"
 	real_name = "drone"
@@ -29,8 +31,25 @@
 	var/module_type = /obj/item/weapon/robot_module/drone
 	var/can_pull_size = 2
 	var/can_pull_mobs
+	var/obj/item/hat
+	var/hat_x_offset = 0
+	var/hat_y_offset = -13
 
 	holder_type = /obj/item/weapon/holder/drone
+
+/mob/living/silicon/robot/drone/Destroy()
+	if(hat)
+		hat.loc = get_turf(src)
+	..()
+
+/mob/living/silicon/robot/drone/construction
+	icon_state = "constructiondrone"
+	law_type = /datum/ai_laws/construction_drone
+	module_type = /obj/item/weapon/robot_module/drone/construction
+	can_pull_size = 5
+	can_pull_mobs = 1
+	hat_x_offset = 1
+	hat_y_offset = -12
 
 /mob/living/silicon/robot/drone/New()
 
@@ -83,16 +102,51 @@
 	else
 		overlays -= "eyes"
 
+	if(hat)
+		// Copied from human inventory.
+		// Let the drones wear hats.
+		var/t_state = hat.icon_state
+		if(hat.item_state_slots && hat.item_state_slots[slot_head_str])
+			t_state = hat.item_state_slots[slot_head_str]
+		else if(hat.item_state)
+			t_state = hat.item_state
+		if(!drone_hat_cache["[t_state]-[icon_state]"]) // Not ideal as there's no guarantee all hat icon_states
+			var/t_icon = INV_HEAD_DEF_ICON             // are unique across multiple dmis, but whatever.
+			if(hat.icon_override)
+				t_icon = hat.icon_override
+			else if(hat.item_icons && (slot_head_str in hat.item_icons))
+				t_icon = hat.item_icons[slot_head_str]
+			var/image/I = image(icon = t_icon, icon_state = t_state)
+			I.pixel_x = hat_x_offset
+			I.pixel_y = hat_y_offset
+			drone_hat_cache[t_state] = I
+		overlays |= drone_hat_cache[t_state]
+
 /mob/living/silicon/robot/drone/choose_icon()
 	return
 
 /mob/living/silicon/robot/drone/pick_module()
 	return
 
-//Drones cannot be upgraded with borg modules so we need to catch some items before they get used in ..().
-/mob/living/silicon/robot/drone/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/mob/living/silicon/robot/drone/proc/wear_hat(var/obj/item/new_hat)
+	if(hat)
+		return
+	hat = new_hat
+	new_hat.loc = src
+	updateicon()
 
-	if(istype(W, /obj/item/borg/upgrade/))
+//Drones cannot be upgraded with borg modules so we need to catch some items before they get used in ..().
+/mob/living/silicon/robot/drone/attackby(var/obj/item/weapon/W, var/mob/user)
+
+	if(user.a_intent == "help" && istype(W, /obj/item/clothing/head))
+		if(hat)
+			user << "<span class='warning'>\The [src] is already wearing \the [hat].</span>"
+			return
+		user.unEquip(W)
+		wear_hat(W)
+		user.visible_message("<span class='notice'>\The [user] puts \the [W] on \the [src].</span>")
+		return
+	else if(istype(W, /obj/item/borg/upgrade/))
 		user << "<span class='danger'>\The [src] is not compatible with \the [W].</span>"
 		return
 
@@ -135,7 +189,7 @@
 		return
 
 	..()
-	
+
 /mob/living/silicon/robot/drone/emag_act(var/remaining_charges, var/mob/user)
 	if(!client || stat == 2)
 		user << "<span class='danger'>There's not much point subverting this heap of junk.</span>"
@@ -278,13 +332,6 @@
 
 /mob/living/silicon/robot/drone/remove_robot_verbs()
 	src.verbs -= silicon_subsystems
-
-/mob/living/silicon/robot/drone/construction
-	icon_state = "constructiondrone"
-	law_type = /datum/ai_laws/construction_drone
-	module_type = /obj/item/weapon/robot_module/drone/construction
-	can_pull_size = 5
-	can_pull_mobs = 1
 
 /mob/living/silicon/robot/drone/construction/welcome_drone()
 	src << "<b>You are a construction drone, an autonomous engineering and fabrication system.</b>."

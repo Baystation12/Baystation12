@@ -125,7 +125,8 @@
 
 //this handles hud updates. Calls update_vision() and handle_hud_icons()
 /mob/living/handle_regular_hud_updates()
-	if(!client)	return 0
+	if(!client)
+		return 0
 	..()
 
 	handle_vision()

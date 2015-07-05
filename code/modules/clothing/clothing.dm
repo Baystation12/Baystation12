@@ -275,6 +275,17 @@ BLIND     // can't see anything
 	update_icon(user)
 	user.update_action_buttons()
 
+/obj/item/clothing/head/attack_ai(var/mob/user)
+	if(Adjacent(user) && istype(user, /mob/living/silicon/robot/drone))
+		var/mob/living/silicon/robot/drone/D = user
+		if(!D.hat)
+			D.wear_hat(src)
+			D << "<span class='notice'>You crawl under \the [src].</span>"
+		else
+			D << "<span class='warning'>You are already wearing \the [D.hat].</span>"
+		return
+	return ..()
+
 /obj/item/clothing/head/update_icon(var/mob/user)
 
 	overlays.Cut()
