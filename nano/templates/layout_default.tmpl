@@ -2,10 +2,10 @@
 	<div style="float: left">
 		<div class='item'>
 			<table><tr>
-			{{if data.PC_batteryicon}}
+			{{if data.PC_batteryicon && data.PC_showbatteryicon}}
 				<td><img src='{{:data.PC_batteryicon}}'>
 			{{/if}}
-			{{if data.PC_batterypercent}}
+			{{if data.PC_batterypercent && data.PC_showbatteryicon}}
 				<td><b>{{:data.PC_batterypercent}}</b>
 			{{/if}}
 			{{if data.PC_ntneticon}}

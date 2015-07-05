@@ -1323,6 +1323,7 @@
 #include "code\modules\mob\new_player\skill.dm"
 #include "code\modules\mob\new_player\sprite_accessories.dm"
 #include "code\modules\modular_computers\computers\modular_computer.dm"
+#include "code\modules\modular_computers\computers\modular_console.dm"
 #include "code\modules\modular_computers\file_system\computer_file.dm"
 #include "code\modules\modular_computers\file_system\data.dm"
 #include "code\modules\modular_computers\file_system\program.dm"

@@ -54,10 +54,12 @@
 /obj/machinery/modular_computer/
 	name = "laptop computer"
 	desc = "A portable computer."
+
 	var/open = 1											// Whether the laptop is open.
 	var/enabled = 1											// Whether the laptop is turned on.
 	var/datum/computer_file/program/active_program = null	// A currently active program running on the computer.
 	var/obj/item/laptop/portable = null						// Portable version of this computer, dropped on alt-click to allow transport. Used by laptops.
+	var/battery_powered = 1									// Whether computer shuold be battery powered.
 	use_power = 0
 
 	icon = 'icons/obj/computer3.dmi'
@@ -254,9 +256,11 @@
 			else
 				data["PC_batteryicon"] = "batt_5.gif"
 		data["PC_batterypercent"] = "[round(battery.percent())] %"
+		data["PC_showbatteryicon"] = 1
 	else // Computer without battery shouldn't work at all, but in case we implement computers without batteries in future that run solely on APC network, it's here.
 		data["PC_batteryicon"] = "batt_5.gif"
 		data["PC_batterypercent"] = "N/C"
+		data["PC_showbatteryicon"] = battery_powered
 
 	switch(get_ntnet_status())
 		if(0)
