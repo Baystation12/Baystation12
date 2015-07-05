@@ -10,7 +10,7 @@
 		return (!mover.density || !density || lying)
 	return
 
-/mob/setMoveCooldown(var/timeout)
+/mob/proc/setMoveCooldown(var/timeout)
 	if(client) 
 		client.move_delay = max(world.time + timeout, client.move_delay)
 
