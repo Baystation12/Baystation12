@@ -140,7 +140,7 @@
 		if(temp && !temp.is_usable())
 			user << "<span class='notice'>You try to move your [temp.display_name], but cannot!"
 			return
-
+	src.pickup(user)
 	if (istype(src.loc, /obj/item/weapon/storage))
 		var/obj/item/weapon/storage/S = src.loc
 		S.remove_from_storage(src)
@@ -157,8 +157,6 @@
 			return
 		user.next_move = max(user.next_move+2,world.time + 2)
 	user.put_in_active_hand(src)
-	if(src.loc == user)
-		src.pickup(user)
 	return
 
 
