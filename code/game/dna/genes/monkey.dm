@@ -12,7 +12,7 @@
 		//testing("Cannot monkey-ify [M], type is [M.type].")
 		return
 	var/mob/living/carbon/human/H = M
-	H.monkeyizing = 1
+	H.transforming = 1
 	var/list/implants = list() //Try to preserve implants.
 	for(var/obj/item/weapon/implant/W in H)
 		implants += W
@@ -23,7 +23,7 @@
 			if (W==H.w_uniform) // will be teared
 				continue
 			H.drop_from_inventory(W)
-		M.monkeyizing = 1
+		M.transforming = 1
 		M.canmove = 0
 		M.icon = null
 		M.invisibility = 101
@@ -90,7 +90,7 @@
 		//testing("Cannot humanize [M], type is [M.type].")
 		return
 	var/mob/living/carbon/monkey/Mo = M
-	Mo.monkeyizing = 1
+	Mo.transforming = 1
 	var/list/implants = list() //Still preserving implants
 	for(var/obj/item/weapon/implant/W in Mo)
 		implants += W
@@ -98,7 +98,7 @@
 	if(!connected)
 		for(var/obj/item/W in (Mo.contents-implants))
 			Mo.drop_from_inventory(W)
-		M.monkeyizing = 1
+		M.transforming = 1
 		M.canmove = 0
 		M.icon = null
 		M.invisibility = 101

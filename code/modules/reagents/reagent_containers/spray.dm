@@ -39,7 +39,7 @@
 
 	playsound(src.loc, 'sound/effects/spray2.ogg', 50, 1, -6)
 
-	user.changeNextMove(4)
+	user.setClickCooldown(4)
 
 	if(reagents.has_reagent("sacid"))
 		message_admins("[key_name_admin(user)] fired sulphuric acid from \a [src].")
@@ -55,7 +55,7 @@
 /obj/item/weapon/reagent_containers/spray/proc/Spray_at(atom/A as mob|obj, mob/user as mob, proximity)
 	if (A.density && proximity)
 		A.visible_message("[usr] sprays [A] with [src].")
-		reagents.trans_to(A, amount_per_transfer_from_this)
+		reagents.splash(A, amount_per_transfer_from_this)
 	else
 		spawn(0)
 			var/obj/effect/effect/water/chempuff/D = new/obj/effect/effect/water/chempuff(get_turf(src))
@@ -90,7 +90,7 @@
 		return
 	if(isturf(usr.loc))
 		usr << "<span class='notice'>You empty \the [src] onto the floor.</span>"
-		reagents.trans_to(usr.loc, reagents.total_volume)
+		reagents.splash(usr.loc, reagents.total_volume)
 
 //space cleaner
 /obj/item/weapon/reagent_containers/spray/cleaner

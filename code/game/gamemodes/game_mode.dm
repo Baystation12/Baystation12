@@ -42,16 +42,9 @@ var/global/list/additional_antag_types = list()
 
 	var/antag_tag                            // First (main) antag template to spawn.
 	var/list/antag_templates                 // Extra antagonist types to include.
-
+	var/list/latejoin_templates = list()
 	var/round_autoantag = 0                  // Will this round attempt to periodically spawn more antagonists?
-	var/antag_prob = 0                       // Likelihood of a new antagonist spawning.
-	var/antag_count = 0                      // Current number of antagonists.
 	var/antag_scaling_coeff = 5              // Coefficient for scaling max antagonists to player count.
-
-	var/list/living_antag_templates = list() // Currently selected antag types that do not require a ghosted player.
-	var/list/ghost_antag_templates  = list() // Inverse of above.
-	var/list/antag_candidates = list()       // Living antag candidates.
-	var/list/ghost_candidates = list()       // Observing antag candidates.
 
 	var/station_was_nuked = 0                // See nuclearbomb.dm and malfunction.dm.
 	var/explosion_in_progress = 0            // Sit back and relax
@@ -60,85 +53,6 @@ var/global/list/additional_antag_types = list()
 
 	var/event_delay_mod_moderate             // Modifies the timing of random events.
 	var/event_delay_mod_major                // As above.
-
-	var/uplink_welcome = "Illegal Uplink Console:"
-	var/uplink_uses = 12
-
-	var/list/datum/uplink_item/uplink_items = list(
-		"Ammunition" = list(
-			new/datum/uplink_item(/obj/item/ammo_magazine/a357, 2, ".357", "RA"),
-			new/datum/uplink_item(/obj/item/ammo_magazine/mc9mm, 2, "9mm", "R9"),
-			new/datum/uplink_item(/obj/item/ammo_magazine/chemdart, 2, "Darts", "AD"),
-			new/datum/uplink_item(/obj/item/weapon/storage/box/sniperammo, 2, "14.5mm", "SA")
-			),
-		"Highly Visible and Dangerous Weapons" = list(
-			 new/datum/uplink_item(/obj/item/weapon/storage/box/emps, 3, "5 EMP Grenades", "EM"),
-			 new/datum/uplink_item(/obj/item/weapon/melee/energy/sword, 4, "Energy Sword", "ES"),
-			 new/datum/uplink_item(/obj/item/weapon/gun/projectile/dartgun, 5, "Dart Gun", "DG"),
-			 new/datum/uplink_item(/obj/item/weapon/gun/energy/crossbow, 5, "Energy Crossbow", "XB"),
-			 new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/g9mm, 5, "Silenced 9mm", "S9"),
-			 new/datum/uplink_item(/obj/item/mecha_parts/mecha_equipment/weapon/energy/riggedlaser, 6, "Exosuit Rigged Laser", "RL"),
-			 new/datum/uplink_item(/obj/item/weapon/gun/projectile/revolver, 6, "Revolver", "RE"),
-			 new/datum/uplink_item(/obj/item/weapon/storage/box/syndicate, 10, "Mercenary Bundle", "BU"),
-			 new/datum/uplink_item(/obj/item/weapon/gun/projectile/heavysniper, 12, "Anti-materiel Rifle", "AMR")
-			),
-		"Stealthy and Inconspicuous Weapons" = list(
-			new/datum/uplink_item(/obj/item/weapon/soap/syndie, 1, "Subversive Soap", "SP"),
-			new/datum/uplink_item(/obj/item/weapon/cane/concealed, 2, "Concealed Cane Sword", "CC"),
-			new/datum/uplink_item(/obj/item/weapon/cartridge/syndicate, 3, "Detomatix PDA Cartridge", "DC"),
-			new/datum/uplink_item(/obj/item/weapon/pen/reagent/paralysis, 3, "Paralysis Pen", "PP"),
-			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/cigarette, 4, "Cigarette Kit", "BH"),
-			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/toxin, 4, "Random Toxin - Beaker", "RT")
-			),
-		"Stealth and Camouflage Items" = list(
-			new/datum/uplink_item(/obj/item/weapon/card/id/syndicate, 2, "Agent ID card", "AC"),
-			new/datum/uplink_item(/obj/item/clothing/shoes/syndigaloshes, 2, "No-Slip Shoes", "SH"),
-			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/spy, 2, "Bug Kit", "BK"),
-			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/chameleon, 3, "Chameleon Kit", "CB"),
-			new/datum/uplink_item(/obj/item/device/chameleon, 4, "Chameleon-Projector", "CP"),
-			new/datum/uplink_item(/obj/item/clothing/mask/gas/voice, 4, "Voice Changer", "VC"),
-			new/datum/uplink_item(/obj/item/weapon/disk/file/cameras/syndicate, 6, "Camera Network Access - Floppy", "SF")
-			),
-		"Devices and Tools" = list(
-			new/datum/uplink_item(/obj/item/weapon/storage/toolbox/syndicate, 1, "Fully Loaded Toolbox", "ST"),
-			new/datum/uplink_item(/obj/item/weapon/plastique, 2, "C-4 (Destroys walls)", "C4"),
-			new/datum/uplink_item(/obj/item/device/encryptionkey/syndicate, 2, "Encrypted Radio Channel Key", "ER"),
-			new/datum/uplink_item(/obj/item/device/encryptionkey/binary, 3, "Binary Translator Key", "BT"),
-			new/datum/uplink_item(/obj/item/weapon/card/emag, 3, "Cryptographic Sequencer", "EC"),
-			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/clerical, 3, "Morphic Clerical Kit", "CK"),
-			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/space, 3, "Space Suit", "SS"),
-			new/datum/uplink_item(/obj/item/clothing/glasses/thermal/syndi, 3, "Thermal Imaging Glasses", "TM"),
-			new/datum/uplink_item(/obj/item/clothing/suit/storage/vest/heavy/merc, 4, "Heavy Armor Vest", "HAV"),
-			new/datum/uplink_item(/obj/item/weapon/aiModule/syndicate, 7, "Hacked AI Upload Module", "AI"),
-			new/datum/uplink_item(/obj/item/device/powersink, 5, "Powersink (DANGER!)", "PS",),
-			new/datum/uplink_item(/obj/item/device/radio/beacon/syndicate, 7, "Singularity Beacon (DANGER!)", "SB"),
-			new/datum/uplink_item(/obj/item/weapon/circuitboard/teleporter, 20, "Teleporter Circuit Board", "TP")
-			),
-		"Implants" = list(
-			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/imp_freedom, 3, "Freedom Implant", "FI"),
-			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/imp_compress, 4, "Compressed Matter Implant", "CI"),
-			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/imp_explosive, 6, "Explosive Implant (DANGER!)", "EI"),
-			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/imp_uplink, 10, "Uplink Implant (Contains 5 Telecrystals)", "UI")
-			),
-		"Medical" = list(
-			new/datum/uplink_item(/obj/item/weapon/storage/box/sinpockets, 1, "Box of Sin-Pockets", "DP"),
-			new/datum/uplink_item(/obj/item/weapon/storage/firstaid/surgery, 5, "Surgery kit", "SK"),
-			new/datum/uplink_item(/obj/item/weapon/storage/firstaid/combat, 5, "Combat medical kit", "CM")
-		),
-		"Hardsuit Modules" = list(
-			new/datum/uplink_item(/obj/item/rig_module/vision/thermal, 2, "Thermal Scanner", "RTS"),
-			new/datum/uplink_item(/obj/item/rig_module/fabricator/energy_net, 3, "Net Projector", "REN"),
-			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/ewar_voice, 4, "Electrowarfare Suite and Voice Synthesiser", "REV"),
-			new/datum/uplink_item(/obj/item/rig_module/maneuvering_jets, 4, "Maneuvering Jets", "RMJ"),
-			new/datum/uplink_item(/obj/item/rig_module/mounted/egun, 6, "Mounted Energy Gun", "REG"),
-			new/datum/uplink_item(/obj/item/rig_module/power_sink, 6, "Power Sink", "RPS"),
-			new/datum/uplink_item(/obj/item/rig_module/mounted, 8, "Mounted Laser Cannon", "RLC")
-		),
-		"(Pointless) Badassery" = list(
-			new/datum/uplink_item(/obj/item/toy/syndicateballoon, 10, "For showing that You Are The BOSS (Useless Balloon)", "BS"),
-			new/datum/uplink_item(/obj/item/toy/nanotrasenballoon, 10, "For showing that you love NT SOO much (Useless Balloon)", "NT")
-			)
-		)
 
 /datum/game_mode/Topic(href, href_list[])
 	if(..())
@@ -272,7 +186,6 @@ var/global/list/additional_antag_types = list()
 			EMajor.delay_modifier = event_delay_mod_major
 
 ///post_setup()
-///Everyone should now be on the station and have their normal gear.  This is the place to give the special roles extra things
 /datum/game_mode/proc/post_setup()
 
 	refresh_event_modifiers()
@@ -287,7 +200,9 @@ var/global/list/additional_antag_types = list()
 
 	if(antag_templates && antag_templates.len)
 		for(var/datum/antagonist/antag in antag_templates)
-			antag.finalize()
+			antag.finalize_spawn()
+			if(antag.is_latejoin_template())
+				latejoin_templates |= antag
 
 	if(emergency_shuttle && auto_recall_shuttle)
 		emergency_shuttle.auto_recall = 1
@@ -335,67 +250,6 @@ var/global/list/additional_antag_types = list()
 		"classified security operations"
 		)
 	command_announcement.Announce("The presence of [pick(reasons)] in the region is tying up all available local emergency resources; emergency response teams cannot be called at this time, and post-evacuation recovery efforts will be substantially delayed.","Emergency Transmission")
-
-///process()
-///Called by the gameticker
-/datum/game_mode/proc/process()
-
-	if(emergency_shuttle.departed)
-		return
-
-	if(!round_autoantag || !antag_templates || !antag_templates.len)
-		return
-
-	var/player_count = 0
-	antag_count = 0
-	antag_candidates = list()
-
-	for(var/mob/living/player in mob_list)
-		if(player.client)
-			player_count += 1
-			if(player.mind)
-				if(player.stat == 2) // observing
-					ghost_candidates |= player
-				else
-					if(player.mind.special_role)
-						antag_count += 1
-					else
-						antag_candidates |= player
-
-	antag_prob = min(100,max(0,(player_count - 5 * 10) * 5)) // This is arbitrary, probably needs adjusting.
-
-	var/datum/antagonist/spawn_antag
-	var/datum/mind/candidate
-
-	var/from_ghosts
-	if(prob(antag_prob))
-		if(ghost_candidates.len && ghost_antag_templates.len && prob(50))
-			spawn_antag = pick(ghost_antag_templates)
-			candidate = pick(ghost_candidates)
-			from_ghosts = 1
-		else if(antag_candidates.len && living_antag_templates.len)
-			spawn_antag = pick(living_antag_templates)
-			candidate = pick(antag_candidates)
-		else
-			return // Failed :(
-	else
-		return
-
-	if(spawn_antag.can_become_antag(candidate))
-		spawn_antag.attempt_late_spawn(candidate, from_ghosts)
-
-/datum/game_mode/proc/latespawn(mob/living/carbon/human/character)
-
-	if(emergency_shuttle.departed || !character.mind)
-		return
-
-	var/datum/antagonist/spawn_antag
-	if(prob(antag_prob) && round_autoantag && living_antag_templates.len)
-		spawn_antag = pick(living_antag_templates)
-	if(spawn_antag && spawn_antag.can_become_antag(character.mind))
-		spawn_antag.attempt_late_spawn(character.mind)
-
-	return 0
 
 /datum/game_mode/proc/check_finished()
 	if(emergency_shuttle.returned() || station_was_nuked)
@@ -623,13 +477,10 @@ var/global/list/additional_antag_types = list()
 
 	if(antag_templates && antag_templates.len)
 		for(var/datum/antagonist/antag in antag_templates)
-			if(antag.flags & ANTAG_OVERRIDE_JOB)
-				ghost_antag_templates |= antag
-			else if(antag.flags & ANTAG_RANDSPAWN)
-				living_antag_templates |= antag
-			else
-				antag_templates -= antag
-				world << "<span class='danger'>[antag.role_text_plural] are invalid for additional roundtype antags!</span>"
+			if(antag.flags & (ANTAG_OVERRIDE_JOB|ANTAG_RANDSPAWN))
+				continue
+			antag_templates -= antag
+			world << "<span class='danger'>[antag.role_text_plural] are invalid for additional roundtype antags!</span>"
 
 	newscaster_announcements = pick(newscaster_standard_feeds)
 
@@ -685,7 +536,7 @@ proc/display_roundstart_logout_report()
 						msg += "<b>[L.name]</b> ([ckey(D.mind.key)]), the [L.job] (<font color='red'><b>Ghosted</b></font>)\n"
 						continue //Ghosted while alive
 
-	msg += "</span>" // close the <span class='notice'> from right at the top
+	msg += "</span>" // close the span from right at the top
 
 	for(var/mob/M in mob_list)
 		if(M.client && M.client.holder)

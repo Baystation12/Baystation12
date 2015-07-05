@@ -169,8 +169,8 @@
 	var/_move_delay = firemode.move_delay
 
 	var/shoot_time = (_burst - 1)*_burst_delay
-	user.changeNextMove(shoot_time)
-	if(user.client) user.client.move_delay = world.time + shoot_time //no moving while shooting either
+	user.setClickCooldown(shoot_time)
+	user.setMoveCooldown(shoot_time) //no moving while shooting either
 	next_fire_time = world.time + shoot_time
 
 	//actually attempt to shoot
@@ -202,8 +202,8 @@
 	update_held_icon()
 
 	//update timing
-	user.changeNextMove(4)
-	if(user.client) user.client.move_delay = world.time + _move_delay
+	user.setClickCooldown(4)
+	user.setMoveCooldown(_move_delay)
 	next_fire_time = world.time + _fire_delay
 
 	if(muzzle_flash)

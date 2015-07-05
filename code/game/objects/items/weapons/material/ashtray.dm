@@ -62,8 +62,8 @@ var/global/list/ashtray_cache = list()
 				cig.transfer_fingerprints_to(butt)
 				qdel(cig)
 				W = butt
-				spawn(1)
-					TemperatureAct(150)
+				//spawn(1)
+				//	TemperatureAct(150)
 			else if (cig.lit == 0)
 				user << "You place [cig] in [src] without even smoking it. Why would you do that?"
 

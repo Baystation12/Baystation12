@@ -83,10 +83,6 @@ using metal and glass, it uses glass and reagents (usually sulphuric acid).
 	if(prob(50))
 		qdel(src)
 
-/obj/machinery/r_n_d/circuit_imprinter/meteorhit()
-	qdel(src)
-	return
-
 /obj/machinery/r_n_d/circuit_imprinter/proc/TotalMaterials()
 	var/t = 0
 	for(var/f in materials)

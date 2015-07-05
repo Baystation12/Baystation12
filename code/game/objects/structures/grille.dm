@@ -19,9 +19,6 @@
 /obj/structure/grille/blob_act()
 	qdel(src)
 
-/obj/structure/grille/meteorhit(var/obj/M)
-	qdel(src)
-
 /obj/structure/grille/update_icon()
 	if(destroyed)
 		icon_state = "[initial(icon_state)]-b"
@@ -33,7 +30,7 @@
 
 /obj/structure/grille/attack_hand(mob/user as mob)
 
-	user.changeNextMove(8)
+	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	playsound(loc, 'sound/effects/grillehit.ogg', 80, 1)
 	user.do_attack_animation(src)
 
@@ -115,9 +112,12 @@
 								 "<span class='notice'>You have [anchored ? "fastened the grille to" : "unfastened the grill from"] the floor.</span>")
 			return
 
-//window placing begin
-	else if(istype(W,/obj/item/stack/material/glass))
-		var/obj/item/stack/material/glass/ST = W
+//window placing begin //TODO CONVERT PROPERLY TO MATERIAL DATUM
+	else if(istype(W,/obj/item/stack/material))
+		var/obj/item/stack/material/ST = W
+		if(!ST.material.created_window)
+			return 0
+
 		var/dir_to_set = 1
 		if(loc == user.loc)
 			dir_to_set = user.dir
@@ -147,7 +147,7 @@
 					user << "<span class='notice'>There is already a window facing this way there.</span>"
 					return
 
-			var/wtype = ST.created_window
+			var/wtype = ST.material.created_window
 			if (ST.use(1))
 				var/obj/structure/window/WD = new wtype(loc, dir_to_set, 1)
 				user << "<span class='notice'>You place the [WD] on [src].</span>"
@@ -155,11 +155,8 @@
 		return
 //window placing end
 
-	else if(istype(W, /obj/item/weapon/material/shard))
-		user.changeNextMove(8)
-		health -= W.force * 0.1
-	else if(!shock(user, 70))
-		user.changeNextMove(8)
+	else if(!(W.flags & CONDUCT) || !shock(user, 70))
+		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		user.do_attack_animation(src)
 		playsound(loc, 'sound/effects/grillehit.ogg', 80, 1)
 		switch(W.damtype)

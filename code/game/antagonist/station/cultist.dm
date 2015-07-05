@@ -98,7 +98,7 @@ var/datum/antagonist/cultist/cult
 /datum/antagonist/cultist/remove_antagonist(var/datum/mind/player, var/show_message, var/implanted)
 	if(!..())
 		return 0
-	player.current << "<span class='danger'>An unfamiliar white light flashes through your mind, cleansing the taint of the dark-one and the memories of your time as his servant with it."
+	player.current << "<span class='danger'>An unfamiliar white light flashes through your mind, cleansing the taint of the dark-one and the memories of your time as his servant with it.</span>"
 	player.memory = ""
 	if(show_message)
 		player.current.visible_message("<FONT size = 3>[player.current] looks like they just reverted to their old faith!</FONT>")
@@ -110,8 +110,6 @@ var/datum/antagonist/cultist/cult
 
 /datum/antagonist/cultist/can_become_antag(var/datum/mind/player)
 	if(!..())
-		return 0
-	if(!istype(player.current, /mob/living/carbon/human))
 		return 0
 	for(var/obj/item/weapon/implant/loyalty/L in player.current)
 		if(L && (L.imp_in == player.current))

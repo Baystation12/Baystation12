@@ -78,7 +78,7 @@
 		return M.click_action(A, src)
 
 	if(restrained())
-		changeNextMove(10)
+		setClickCooldown(10)
 		RestrainedClickOn(A)
 		return
 
@@ -99,33 +99,44 @@
 			update_inv_r_hand(0)
 		return
 
-	// A is your location but is not a turf; or is on you (backpack); or is on something on you (box in backpack); sdepth is needed here because webbings and coat pockets are hacky
+	//Atoms on your person
+	// A is your location but is not a turf; or is on you (backpack); or is on something on you (box in backpack); sdepth is needed here because contents depth does not equate inventory storage depth.
 	var/sdepth = A.storage_depth(src)
-	if(!isturf(A) && A == loc || (sdepth != -1 && sdepth <= 1))
+	if((!isturf(A) && A == loc) || (sdepth != -1 && sdepth <= 1))
+		// faster access to objects already on you
+		if(A in contents)
+			setMoveCooldown(5) //taking an item off of an inventory slot
+		else
+			setMoveCooldown(10) //getting something out of a backpack
+		
 		if(W)
-			var/resolved = A.attackby(W, src)
+			var/resolved = W.resolve_attackby(A, src)
 			if(!resolved && A && W)
 				W.afterattack(A, src, 1, params) // 1 indicates adjacency
 		else
 			if(ismob(A)) // No instant mob attacking
-				changeNextMove(8)
+				setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 			UnarmedAttack(A, 1)
 		return
 
 	if(!isturf(loc)) // This is going to stop you from telekinesing from inside a closet, but I don't shed many tears for that
 		return
 
+	//Atoms on turfs (not on your person)
 	// A is a turf or is on a turf, or in something on a turf (pen in a box); but not something in something on a turf (pen in a box in a backpack)
 	sdepth = A.storage_depth_turf()
 	if(isturf(A) || isturf(A.loc) || (sdepth != -1 && sdepth <= 1))
 		if(A.Adjacent(src)) // see adjacent.dm
+			setMoveCooldown(10)
+			
 			if(W)
-				var/resolved = A.attackby(W, src) // Return 1 in attackby() to prevent afterattack() effects (when safely moving items for example)
+				// Return 1 in attackby() to prevent afterattack() effects (when safely moving items for example)
+				var/resolved = W.resolve_attackby(A,src)
 				if(!resolved && A && W)
 					W.afterattack(A, src, 1, params) // 1: clicking something Adjacent
 			else
 				if(ismob(A)) // No instant mob attacking
-					changeNextMove(8)
+					setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 				UnarmedAttack(A, 1)
 			return
 		else // non-adjacent click
@@ -136,8 +147,8 @@
 
 	return
 
-/mob/proc/changeNextMove(var/num)
-	next_move = world.time + num
+/mob/proc/setClickCooldown(var/timeout)
+	next_move = max(world.time + timeout, next_move)
 
 /mob/proc/canClick()
 	if(config.no_click_cooldown || next_move <= world.time)
@@ -189,6 +200,15 @@
 	if((LASER in mutations) && a_intent == I_HURT)
 		LaserEyes(A) // moved into a proc below
 	else if(TK in mutations)
+		switch(get_dist(src,A))
+			if(1 to 5) // not adjacent may mean blocked by window
+				setMoveCooldown(2)
+			if(5 to 7)
+				setMoveCooldown(5)
+			if(8 to tk_maxrange)
+				setMoveCooldown(10)
+			else
+				return
 		A.attack_tk(src)
 /*
 	Restrained ClickOn
@@ -284,7 +304,7 @@
 	return
 
 /mob/living/LaserEyes(atom/A)
-	changeNextMove(4)
+	setClickCooldown(4)
 	var/turf/T = get_turf(src)
 	var/turf/U = get_turf(A)
 

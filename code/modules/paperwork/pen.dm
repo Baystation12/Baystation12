@@ -35,6 +35,24 @@
 	icon_state = "pen_red"
 	colour = "red"
 
+/obj/item/weapon/pen/multi
+	desc = "It's a pen with multiple colors of ink!"
+	var/selectedColor = 1
+	var/colors = list("black","blue","red")
+
+/obj/item/weapon/pen/multi/attack_self(mob/user)
+	if(++selectedColor > 3)
+		selectedColor = 1
+
+	colour = colors[selectedColor]
+
+	if(colour == "black")
+		icon_state = "pen"
+	else
+		icon_state = "pen_[colour]"
+
+	user << "<span class='notice'>Changed color to '[colour].'</span>"
+
 /obj/item/weapon/pen/invisible
 	desc = "It's an invisble pen marker."
 	icon_state = "pen"

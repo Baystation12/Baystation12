@@ -84,10 +84,12 @@
 	return
 
 
-/obj/machinery/power/smes/Destroy()
+/obj/machinery/power/smes/disconnect_terminal()
 	if(terminal)
-		disconnect_terminal()
-	..()
+		terminal.master = null
+		terminal = null
+		return 1
+	return 0
 
 /obj/machinery/power/smes/update_icon()
 	overlays.Cut()
@@ -244,7 +246,7 @@
 			return 0
 
 	if (!open_hatch)
-		user << "<span class='warning'>You need to open access hatch on [src] first!</spann>"
+		user << "<span class='warning'>You need to open access hatch on [src] first!</span>"
 		return 0
 
 	if(istype(W, /obj/item/stack/cable_coil) && !terminal && !building_terminal)

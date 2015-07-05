@@ -149,7 +149,7 @@
 		if (P.pipe_type in list(0, 1, 5))	//simple pipes, simple bends, and simple manifolds.
 			user.drop_item()
 			P.loc = src.loc
-			user << "<span class='notice'>You fit the pipe into the [src]!"
+			user << "<span class='notice'>You fit the pipe into the [src]!</span>"
 	else
 		..()
 
@@ -248,7 +248,7 @@
 			dismantle()
 
 	else if(istype(W, /obj/item/weapon/pickaxe/plasmacutter))
-		user << "<span class='notice'>Now slicing apart the girder..."
+		user << "<span class='notice'>Now slicing apart the girder...</span>"
 		if(do_after(user,30))
 			user << "<span class='notice'>You slice apart the girder!</span>"
 		dismantle()

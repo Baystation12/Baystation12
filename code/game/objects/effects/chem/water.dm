@@ -3,6 +3,7 @@
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "extinguish"
 	mouse_opacity = 0
+	pass_flags = PASSTABLE | PASSGRILLE
 
 /obj/effect/effect/water/New(loc)
 	..()
@@ -30,7 +31,7 @@
 				else if(ismob(A) && !M)
 					M = A
 			if(M)
-				reagents.splash_mob(M, reagents.total_volume)
+				reagents.splash(M, reagents.total_volume)
 				break
 			if(T == get_turf(target))
 				break
@@ -53,4 +54,3 @@
 	name = "chemicals"
 	icon = 'icons/obj/chempuff.dmi'
 	icon_state = ""
-	pass_flags = PASSTABLE | PASSGRILLE

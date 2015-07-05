@@ -111,11 +111,10 @@ proc/Icarus_FireCannon(var/turf/target)
 	target = locate(x, y, target.z)
 
 	// Finally fire the fucker.
-	var/obj/effect/meteor/small/projectile = new (start)
+	var/obj/effect/meteor/projectile = new (start)
 	projectile.dest = target
 	projectile.name = "main gun projectile" // stealthy
 	projectile.hits = 6
-	projectile.detonation_chance = 99 // it's a missile/cannon round thing!
 
 	// Make sure it travels
 	spawn(0)

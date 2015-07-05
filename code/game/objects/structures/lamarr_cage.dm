@@ -39,13 +39,6 @@
 		Break()
 		qdel(src)
 
-
-/obj/structure/lamarr/meteorhit(obj/O as obj)
-		new /obj/item/weapon/material/shard( src.loc )
-		Break()
-		qdel(src)
-
-
 /obj/structure/lamarr/proc/healthcheck()
 	if (src.health <= 0)
 		if (!( src.destroyed ))

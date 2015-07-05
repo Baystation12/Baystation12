@@ -136,6 +136,7 @@
 
 /obj/machinery/smartfridge/drying_rack/proc/dry()
 	for(var/obj/item/weapon/reagent_containers/food/snacks/S in contents)
+		if(S.dry) continue
 		if(S.dried_type == S.type)
 			S.dry = 1
 			item_quants[S.name]--
@@ -235,14 +236,12 @@
 		user << "<span class='notice'>\The [src] smartly refuses [O].</span>"
 		return 1
 
-/obj/machinery/smartfridge/secure/attackby(var/obj/item/O as obj, var/mob/user as mob)
-	if(istype(O, /obj/item/weapon/card/emag))
+/obj/machinery/smartfridge/secure/emag_act(var/remaining_charges, var/mob/user)
+	if(!emagged)
 		emagged = 1
 		locked = -1
 		user << "You short out the product lock on [src]."
-		return
-
-	..()
+		return 1
 
 /obj/machinery/smartfridge/attack_ai(mob/user as mob)
 	attack_hand(user)

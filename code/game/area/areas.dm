@@ -300,3 +300,17 @@ var/list/mob/living/forced_ambiance_list = new
 		temp_airlock.prison_open()
 	for(var/obj/machinery/door/window/temp_windoor in src)
 		temp_windoor.open()
+
+/area/proc/has_gravity()
+	return has_gravity
+
+/area/space/has_gravity()
+	return 0
+
+/proc/has_gravity(atom/AT, turf/T)
+	if(!T)
+		T = get_turf(AT)
+	var/area/A = get_area(T)
+	if(A && A.has_gravity())
+		return 1
+	return 0

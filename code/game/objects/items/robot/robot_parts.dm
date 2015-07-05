@@ -326,12 +326,10 @@
 		user << "<span class='notice'>You insert the flash into the eye socket!</span>"
 
 
-/obj/item/robot_parts/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(W,/obj/item/weapon/card/emag))
-		if(sabotaged)
-			user << "<span class='warning'>[src] is already sabotaged!</span>"
-		else
-			user << "<span class='warning'>You slide [W] into the dataport on [src] and short out the safeties.</span>"
-			sabotaged = 1
-		return
-	..()
+/obj/item/robot_parts/emag_act(var/remaining_charges, var/mob/user)
+	if(sabotaged)
+		user << "<span class='warning'>[src] is already sabotaged!</span>"
+	else
+		user << "<span class='warning'>You short out the safeties.</span>"
+		sabotaged = 1
+		return 1

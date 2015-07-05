@@ -210,13 +210,6 @@
 			A.loc = src.loc
 		qdel(src)
 
-/obj/structure/closet/meteorhit(obj/O as obj)
-	if(O.icon_state == "flaming")
-		for(var/mob/M in src)
-			M.meteorhit(O)
-		src.dump_contents()
-		qdel(src)
-
 /obj/structure/closet/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(src.opened)
 		if(istype(W, /obj/item/weapon/grab))
@@ -227,8 +220,11 @@
 		if(istype(W, /obj/item/weapon/weldingtool))
 			var/obj/item/weapon/weldingtool/WT = W
 			if(!WT.remove_fuel(0,user))
-				user << "<span class='notice'>You need more welding fuel to complete this task.</span>"
-				return
+				if(!WT.isOn())
+					return
+				else
+					user << "<span class='notice'>You need more welding fuel to complete this task.</span>"
+					return
 			new /obj/item/stack/material/steel(src.loc)
 			for(var/mob/M in viewers(src))
 				M.show_message("<span class='notice'>\The [src] has been cut apart by [user] with \the [WT].</span>", 3, "You hear welding.", 2)
@@ -246,8 +242,11 @@
 	else if(istype(W, /obj/item/weapon/weldingtool))
 		var/obj/item/weapon/weldingtool/WT = W
 		if(!WT.remove_fuel(0,user))
-			user << "<span class='notice'>You need more welding fuel to complete this task.</span>"
-			return
+			if(!WT.isOn())
+				return
+			else
+				user << "<span class='notice'>You need more welding fuel to complete this task.</span>"
+				return
 		src.welded = !src.welded
 		src.update_icon()
 		for(var/mob/M in viewers(src))
@@ -350,7 +349,7 @@
 	if(!escapee.canClick())
 		return
 
-	escapee.changeNextMove(100)
+	escapee.setClickCooldown(100)
 
 	//okay, so the closet is either welded or locked... resist!!!
 	escapee << "<span class='warning'>You lean on the back of \the [src] and start pushing the door open. (this will take about [breakout_time] minutes)</span>"

@@ -192,27 +192,6 @@
 	M << "<font color='red'>You don't have required permissions to use [src]</font>"
 	return 0
 
-
-/obj/machinery/mecha_part_fabricator/proc/emag()
-	sleep()
-	switch(emagged)
-		if(0)
-			emagged = 0.5
-			src.visible_message("\icon[src] <b>[src]</b> beeps: \"DB error \[Code 0x00F1\]\"")
-			sleep(10)
-			src.visible_message("\icon[src] <b>[src]</b> beeps: \"Attempting auto-repair\"")
-			sleep(15)
-			src.visible_message("\icon[src] <b>[src]</b> beeps: \"User DB corrupted \[Code 0x00FA\]. Truncating data structure...\"")
-			sleep(30)
-			src.visible_message("\icon[src] <b>[src]</b> beeps: \"User DB truncated. Please contact your Nanotrasen system operator for future assistance.\"")
-			req_access = null
-			emagged = 1
-		if(0.5)
-			src.visible_message("\icon[src] <b>[src]</b> beeps: \"DB not responding \[Code 0x0003\]...\"")
-		if(1)
-			src.visible_message("\icon[src] <b>[src]</b> beeps: \"No records in User DB\"")
-	return
-
 /obj/machinery/mecha_part_fabricator/proc/convert_part_set(set_name as text)
 	var/list/parts = part_sets[set_name]
 	if(istype(parts, /list))
@@ -724,7 +703,26 @@
 		qdel(res)
 	return result
 
-
+/obj/machinery/mecha_part_fabricator/emag_act(var/remaining_charges, var/mob/user)
+	sleep()
+	switch(emagged)
+		if(0)
+			emagged = 0.5
+			src.visible_message("\icon[src] <b>[src]</b> beeps: \"DB error \[Code 0x00F1\]\"")
+			sleep(10)
+			src.visible_message("\icon[src] <b>[src]</b> beeps: \"Attempting auto-repair\"")
+			sleep(15)
+			src.visible_message("\icon[src] <b>[src]</b> beeps: \"User DB corrupted \[Code 0x00FA\]. Truncating data structure...\"")
+			sleep(30)
+			src.visible_message("\icon[src] <b>[src]</b> beeps: \"User DB truncated. Please contact your Nanotrasen system operator for future assistance.\"")
+			req_access = null
+			emagged = 1
+			return 1
+		if(0.5)
+			src.visible_message("\icon[src] <b>[src]</b> beeps: \"DB not responding \[Code 0x0003\]...\"")
+		if(1)
+			src.visible_message("\icon[src] <b>[src]</b> beeps: \"No records in User DB\"")
+	
 /obj/machinery/mecha_part_fabricator/attackby(obj/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/weapon/screwdriver))
 		if (!opened)
@@ -770,10 +768,6 @@
 		else
 			user << "<span class='warning'>You can't load the [src.name] while it's opened.</span>"
 			return 1
-
-	if(istype(W, /obj/item/weapon/card/emag))
-		emag()
-		return
 
 	var/material
 	switch(W.type)

@@ -145,16 +145,19 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 		user.drop_item()
 		D.loc = src
 		user << "<span class='notice'>You add \the [D] to the machine.</span>"
-	else if(istype(D, /obj/item/weapon/card/emag) && !emagged)
-		playsound(src.loc, 'sound/effects/sparks4.ogg', 75, 1)
-		emagged = 1
-		user << "<span class='notice'>You you disable the security protocols.</span>"
 	else
 		//The construction/deconstruction of the console code.
 		..()
 
 	src.updateUsrDialog()
 	return
+	
+/obj/machinery/computer/rdconsole/emp_act(var/remaining_charges, var/mob/user)
+	if(!emagged)
+		playsound(src.loc, 'sound/effects/sparks4.ogg', 75, 1)
+		emagged = 1
+		user << "<span class='notice'>You you disable the security protocols.</span>"
+		return 1
 
 /obj/machinery/computer/rdconsole/Topic(href, href_list)
 	if(..())

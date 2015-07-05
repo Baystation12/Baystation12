@@ -38,9 +38,12 @@ var/can_call_ert
 	trigger_armed_response_team(1)
 
 client/verb/JoinResponseTeam()
+
+	set name = "Join Response Team"
 	set category = "IC"
 
 	if(!MayRespawn(1))
+		usr << "<span class='warning'>You cannot join the response team at this time.</span>"
 		return
 
 	if(istype(usr,/mob/dead/observer) || istype(usr,/mob/new_player))
@@ -50,18 +53,9 @@ client/verb/JoinResponseTeam()
 		if(jobban_isbanned(usr, "Syndicate") || jobban_isbanned(usr, "Emergency Response Team") || jobban_isbanned(usr, "Security Officer"))
 			usr << "<font color=red><b>You are jobbanned from the emergency reponse team!"
 			return
-
-		if(ert.current_antagonists.len > 5) usr << "The emergency response team is already full!"
-
-		for (var/obj/effect/landmark/L in landmarks_list) if (L.name == "Commando")
-			L.name = null//Reserving the place.
-			var/new_name = sanitizeSafe(input(usr, "Pick a name","Name") as null|text, MAX_NAME_LEN)
-			if(!new_name)//Somebody changed his mind, place is available again.
-				L.name = "Commando"
-				return
-			create_response_team(L.loc, new_name)
-			qdel(L)
-
+		if(ert.current_antagonists.len > 5)
+			usr << "The emergency response team is already full!"
+		ert.create_default(usr)
 	else
 		usr << "You need to be an observer or new player to use this."
 
@@ -130,25 +124,3 @@ proc/trigger_armed_response_team(var/force = 0)
 
 	sleep(600 * 5)
 	send_emergency_team = 0 // Can no longer join the ERT.
-
-/client/proc/create_response_team(obj/spawn_location, commando_name)
-
-	var/mob/living/carbon/human/M = new(null)
-
-
-	M.real_name = commando_name
-	M.name = commando_name
-	M.age = rand(25,45)
-
-	M.check_dna(M)
-	M.dna.ready_dna(M)//Creates DNA.
-
-	M.mind = new
-	M.mind.current = M
-	M.mind.original = M
-	if(!(M.mind in ticker.minds))
-		ticker.minds += M.mind//Adds them to regular mind list.
-	M.loc = spawn_location
-	ert.add_antagonist(M.mind)
-
-	return M

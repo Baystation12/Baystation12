@@ -125,10 +125,6 @@
 /obj/structure/window/blob_act()
 	shatter()
 
-
-/obj/structure/window/meteorhit()
-	shatter()
-
 //TODO: Make full windows a separate type of window.
 //Once a full window, it will always be a full window, so there's no point
 //having the same type for both.
@@ -175,7 +171,7 @@
 	playsound(loc, 'sound/effects/Glasshit.ogg', 50, 1)
 
 /obj/structure/window/attack_hand(mob/user as mob)
-	user.changeNextMove(8)
+	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	if(HULK in user.mutations)
 		user.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!"))
 		user.visible_message("<span class='danger'>[user] smashes through [src]!</span>")
@@ -203,7 +199,7 @@
 	return
 
 /obj/structure/window/attack_generic(var/mob/user, var/damage)
-	user.changeNextMove(8)
+	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	if(!damage)
 		return
 	if(damage >= 10)
@@ -273,7 +269,7 @@
 				new glasstype(loc)
 			qdel(src)
 	else
-		user.changeNextMove(8)
+		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		if(W.damtype == BRUTE || W.damtype == BURN)
 			user.do_attack_animation(src)
 			hit(W.force)

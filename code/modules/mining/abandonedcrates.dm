@@ -171,12 +171,14 @@
 			return
 	else
 		return ..()
+	
+/obj/structure/closet/crate/secure/loot/emag_act(var/remaining_charges, var/mob/user)	
+	if (locked)
+		user << "<span class='notice'>The crate unlocks!</span>"
+		locked = 0
 
 /obj/structure/closet/crate/secure/loot/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(locked)
-		if (istype(W, /obj/item/weapon/card/emag))
-			user << "<span class='notice'>The crate unlocks!</span>"
-			locked = 0
 		if (istype(W, /obj/item/device/multitool)) // Greetings Urist McProfessor, how about a nice game of cows and bulls?
 			user << "<span class='notice'>DECA-CODE LOCK REPORT:</span>"
 			if (attempts == 1)
