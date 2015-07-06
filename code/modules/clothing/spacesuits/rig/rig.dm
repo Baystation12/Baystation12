@@ -411,7 +411,7 @@
 
 	data["charge"] =       cell ? round(cell.charge,1) : 0
 	data["maxcharge"] =    cell ? cell.maxcharge : 0
-	data["chargestatus"] = cell ? Floor((cell.charge/cell.maxcharge)*50) : 0
+	data["chargestatus"] = cell ? round((cell.charge/cell.maxcharge)*50) : 0
 
 	data["emagged"] =       subverted
 	data["coverlock"] =     locked

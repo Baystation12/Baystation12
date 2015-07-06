@@ -100,7 +100,7 @@
 			o += "<span class='warning'>DATA UNAVAILABLE</span>"
 			user << o
 			continue
-		var/celsius = convert_k2c(tile_info[index][1])
+		var/celsius = tile_info[index][1] - T0C
 		var/pressure = tile_info[index][2]
 		o += "<span class='[(dir_alerts[index] & (FIREDOOR_ALERT_HOT|FIREDOOR_ALERT_COLD)) ? "warning" : "color:blue"]'>"
 		o += "[celsius]&deg;C</span> "
@@ -299,7 +299,7 @@
 			var/list/tileinfo=tile_info[index]
 			if(tileinfo==null)
 				continue // Bad data.
-			var/celsius = convert_k2c(tileinfo[1])
+			var/celsius = tileinfo[1] - T0C
 
 			var/alerts=0
 
