@@ -1061,6 +1061,7 @@
 #include "code\modules\hydroponics\seed_mobs.dm"
 #include "code\modules\hydroponics\seed_packets.dm"
 #include "code\modules\hydroponics\seed_storage.dm"
+#include "code\modules\hydroponics\beekeeping\beehive.dm"
 #include "code\modules\hydroponics\spreading\spreading.dm"
 #include "code\modules\hydroponics\spreading\spreading_growth.dm"
 #include "code\modules\hydroponics\spreading\spreading_response.dm"
