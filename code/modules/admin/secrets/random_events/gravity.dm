@@ -4,13 +4,15 @@
 /datum/admin_secret_item/random_event/gravity
 	name = "Toggle station artificial gravity"
 
+/datum/admin_secret_item/random_event/gravity/can_execute(var/mob/user)
+	if(!(ticker && ticker.mode))
+		return 0
+
+	return ..()
+
 /datum/admin_secret_item/random_event/gravity/execute(var/mob/user)
 	. = ..()
 	if(!.)
-		return
-
-	if(!(ticker && ticker.mode))
-		user << "Please wait until the game starts!  Not sure how it will work otherwise."
 		return
 
 	gravity_is_on = !gravity_is_on

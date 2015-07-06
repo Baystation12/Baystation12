@@ -40,7 +40,11 @@ var/datum/admin_secrets/admin_secrets = new()
 /datum/admin_secret_item
 	var/name = ""
 	var/category = null
+	var/log = 1
 	var/permissions = R_HOST
+
+/datum/admin_secret_item/proc/name()
+	return name
 
 /datum/admin_secret_item/proc/can_execute(var/mob/user)
 	return check_rights(permissions, 0, user)
@@ -49,18 +53,28 @@ var/datum/admin_secrets/admin_secrets = new()
 	if(!can_execute(user))
 		return 0
 
-	log_admin("[key_name(user)] used secret [name]")
+	if(log)
+		log_admin("[key_name(user)] used secret '[name()]'")
 	return 1
 
 /*************************
 * Pre-defined categories *
 *************************/
+/datum/admin_secret_category/admin_secrets
+	name = "Admin Secrets"
+
 /datum/admin_secret_category/random_events
 	name = "'Random' Events"
 
 /*************************
 * Pre-defined base items *
 *************************/
+/datum/admin_secret_item/admin_secret
+	category = /datum/admin_secret_category/admin_secrets
+	log = 0
+	permissions = R_ADMIN
+
+
 /datum/admin_secret_item/random_event
 	category = /datum/admin_secret_category/random_events
 	permissions = R_FUN

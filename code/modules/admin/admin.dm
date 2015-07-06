@@ -610,12 +610,11 @@ proc/admin_notice(var/message, var/rights)
 		dat += "<B>[category.name]</B><br>"
 		if(category.desc)
 			dat += "<I>[category.desc]</I><BR>"
-		dat += "<BR>"
 		for(var/datum/admin_secret_item/item in category.items)
 			if(!item.can_execute(usr))
 				continue
-			dat += "<A href='?src=\ref[src];admin_secrets=\ref[item]'>[item.name]</A><BR>"
-
+			dat += "<A href='?src=\ref[src];admin_secrets=\ref[item]'>[item.name()]</A><BR>"
+		dat += "<BR>"
 	usr << browse(dat, "window=secrets")
 	return
 
