@@ -1,8 +1,8 @@
 /datum/admin_secret_item/admin_secret/show_signalers
-	name = "Show last signalers"
+	name = "Show Last Signalers"
 
 /datum/admin_secret_item/admin_secret/show_signalers/name()
-	return "Show last [length(lastsignalers)] signalers"
+	return "Show Last [length(lastsignalers)] Signaler\s"
 
 /datum/admin_secret_item/admin_secret/show_signalers/execute(var/mob/user)
 	. = ..()
