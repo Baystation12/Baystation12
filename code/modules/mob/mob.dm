@@ -64,7 +64,7 @@
 			var/mob/M = I
 			if(self_message && M==src)
 				M.show_message( self_message, 1, blind_message, 2)
-			if(M.see_invisible >= invisibility) // Cannot view the invisible
+			else if(M.see_invisible >= invisibility) // Cannot view the invisible
 				M.show_message( message, 1, blind_message, 2)
 			else if (blind_message)
 				M.show_message(blind_message, 2)
