@@ -1,5 +1,0 @@
-author: GinjaNinja32
-
-delete-after: True
-changes: 
-  - rscadd: "'Provisional' is now also a valid temporary position prefix for manifest sorting."
