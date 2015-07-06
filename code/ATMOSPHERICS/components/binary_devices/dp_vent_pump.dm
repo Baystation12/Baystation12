@@ -120,14 +120,14 @@
 	if(pressure_delta > 0.5)
 		if(pump_direction) //internal -> external
 			if (node1 && (environment.temperature || air1.temperature))
-				var/transfer_moles = calculate_transfer_moles(air1, environment)
+				var/transfer_moles = calculate_transfer_moles(air1, environment, pressure_delta)
 				power_draw = pump_gas(src, air1, environment, transfer_moles, power_rating)
 
 				if(power_draw >= 0 && network1)
 					network1.update = 1
 		else //external -> internal
 			if (node2 && (environment.temperature || air2.temperature))
-				var/transfer_moles = calculate_transfer_moles(environment, air2, (network2)? network2.volume : 0)
+				var/transfer_moles = calculate_transfer_moles(environment, air2, pressure_delta, (network2)? network2.volume : 0)
 
 				//limit flow rate from turfs
 				transfer_moles = min(transfer_moles, environment.total_moles*air2.volume/environment.volume)	//group_multiplier gets divided out here
