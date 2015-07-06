@@ -1,4 +1,22 @@
-var/list/drone_hat_cache = list()
+var/list/mob_hat_cache = list()
+/proc/get_hat_icon(var/obj/item/hat, var/offset_x = 0, var/offset_y = 0)
+	var/t_state = hat.icon_state
+	if(hat.item_state_slots && hat.item_state_slots[slot_head_str])
+		t_state = hat.item_state_slots[slot_head_str]
+	else if(hat.item_state)
+		t_state = hat.item_state
+	var/key = "[t_state]_[offset_x]_[offset_y]"
+	if(!mob_hat_cache[key])            // Not ideal as there's no guarantee all hat icon_states
+		var/t_icon = INV_HEAD_DEF_ICON // are unique across multiple dmis, but whatever.
+		if(hat.icon_override)
+			t_icon = hat.icon_override
+		else if(hat.item_icons && (slot_head_str in hat.item_icons))
+			t_icon = hat.item_icons[slot_head_str]
+		var/image/I = image(icon = t_icon, icon_state = t_state)
+		I.pixel_x = offset_x
+		I.pixel_y = offset_y
+		mob_hat_cache[key] = I
+	return mob_hat_cache[key]
 
 /mob/living/silicon/robot/drone
 	name = "drone"
@@ -101,26 +119,8 @@ var/list/drone_hat_cache = list()
 		overlays += "eyes-[icon_state]"
 	else
 		overlays -= "eyes"
-
-	if(hat)
-		// Copied from human inventory.
-		// Let the drones wear hats.
-		var/t_state = hat.icon_state
-		if(hat.item_state_slots && hat.item_state_slots[slot_head_str])
-			t_state = hat.item_state_slots[slot_head_str]
-		else if(hat.item_state)
-			t_state = hat.item_state
-		if(!drone_hat_cache["[t_state]-[icon_state]"]) // Not ideal as there's no guarantee all hat icon_states
-			var/t_icon = INV_HEAD_DEF_ICON             // are unique across multiple dmis, but whatever.
-			if(hat.icon_override)
-				t_icon = hat.icon_override
-			else if(hat.item_icons && (slot_head_str in hat.item_icons))
-				t_icon = hat.item_icons[slot_head_str]
-			var/image/I = image(icon = t_icon, icon_state = t_state)
-			I.pixel_x = hat_x_offset
-			I.pixel_y = hat_y_offset
-			drone_hat_cache[t_state] = I
-		overlays |= drone_hat_cache[t_state]
+	if(hat) // Let the drones wear hats.
+		overlays |= get_hat_icon(hat, hat_x_offset, hat_y_offset)
 
 /mob/living/silicon/robot/drone/choose_icon()
 	return
