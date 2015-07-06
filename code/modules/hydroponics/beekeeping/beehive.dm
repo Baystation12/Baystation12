@@ -15,10 +15,10 @@
 /obj/machinery/beehive/update_icon()
 	overlays.Cut()
 	icon_state = "beehive"
-	if(honeycombs >= 1)
-		overlays += "filled[round(honeycombs)]"
 	if(frames)
 		overlays += "empty[frames]"
+	if(honeycombs >= 1)
+		overlays += "filled[round(honeycombs)]"
 
 /obj/machinery/beehive/examine(var/mob/user)
 	..()
@@ -183,6 +183,7 @@
 
 /obj/item/stack/wax
 	name = "wax"
+	singular_name = "wax piece"
 	desc = "Soft substance produced by bees. Used to make candles."
 	icon_state = "sheet-metal"
 
