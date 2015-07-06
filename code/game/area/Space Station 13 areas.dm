@@ -442,6 +442,7 @@ area/space/atmosalert()
 	name = "\improper Thunderdome"
 	icon_state = "thunder"
 	requires_power = 0
+	lighting_use_dynamic = 0
 	sound_env = ARENA
 
 /area/tdome/tdome1

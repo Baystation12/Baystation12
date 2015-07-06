@@ -108,7 +108,7 @@ var/global/list/robot_modules = list(
 	added_languages.Cut()
 
 /obj/item/weapon/robot_module/proc/add_camera_networks(var/mob/living/silicon/robot/R)
-	if(R.camera && "Robots" in R.camera.network)
+	if(R.camera && (NETWORK_ROBOTS in R.camera.network))
 		for(var/network in networks)
 			if(!(network in R.camera.network))
 				R.camera.add_network(network)
@@ -372,7 +372,7 @@ var/global/list/robot_modules = list(
 	C.synths = list(wire)
 	src.modules += C
 
-	var/obj/item/stack/tile/plasteel/cyborg/S = new /obj/item/stack/tile/plasteel/cyborg(src)
+	var/obj/item/stack/tile/steel/cyborg/S = new /obj/item/stack/tile/steel/cyborg(src)
 	S.synths = list(metal)
 	src.modules += S
 
@@ -646,6 +646,7 @@ var/global/list/robot_modules = list(
 /obj/item/weapon/robot_module/drone
 	name = "drone module"
 	no_slip = 1
+	networks = list(NETWORK_ENGINEERING)
 
 /obj/item/weapon/robot_module/drone/New()
 	..()
@@ -695,7 +696,7 @@ var/global/list/robot_modules = list(
 	C.synths = list(wire)
 	src.modules += C
 
-	var/obj/item/stack/tile/plasteel/cyborg/S = new /obj/item/stack/tile/plasteel/cyborg(src)
+	var/obj/item/stack/tile/steel/cyborg/S = new /obj/item/stack/tile/steel/cyborg(src)
 	S.synths = list(metal)
 	src.modules += S
 

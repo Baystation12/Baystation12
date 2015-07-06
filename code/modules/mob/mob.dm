@@ -64,7 +64,7 @@
 			var/mob/M = I
 			if(self_message && M==src)
 				M.show_message( self_message, 1, blind_message, 2)
-			if(M.see_invisible >= invisibility) // Cannot view the invisible
+			else if(M.see_invisible >= invisibility) // Cannot view the invisible
 				M.show_message( message, 1, blind_message, 2)
 			else if (blind_message)
 				M.show_message(blind_message, 2)
@@ -118,6 +118,8 @@
 	//handle_typing_indicator() //You said the typing indicator would be fine. The test determined that was a lie.
 	return
 
+/mob/proc/incapacitated()
+	return
 
 /mob/proc/restrained()
 	return
@@ -390,6 +392,7 @@
 		'html/hard-hat-exclamation.png',
 		'html/image-minus.png',
 		'html/image-plus.png',
+		'html/map-pencil.png',
 		'html/music-minus.png',
 		'html/music-plus.png',
 		'html/tick-circle.png',
@@ -494,12 +497,8 @@
 /mob/verb/cancel_camera()
 	set name = "Cancel Camera View"
 	set category = "OOC"
-	reset_view(null)
 	unset_machine()
-	if(istype(src, /mob/living))
-		var/mob/living/M = src
-		if(M.cameraFollow)
-			M.cameraFollow = null
+	reset_view(null)
 
 /mob/Topic(href, href_list)
 	if(href_list["mach_close"])
@@ -1026,3 +1025,9 @@ mob/proc/yank_out_object()
 /mob/verb/westfaceperm()
 	set hidden = 1
 	set_face_dir(WEST)
+
+/mob/proc/adjustEarDamage()
+	return
+
+/mob/proc/setEarDamage()
+	return

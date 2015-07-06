@@ -33,10 +33,10 @@
 				var/datum/effect/effect/system/spark_spread/sparks = new /datum/effect/effect/system/spark_spread()
 				sparks.set_up(3, 0, get_turf(M))
 				sparks.start()
-				//
-				M.Move(pick(trange(50, get_turf(holder))))
+
+				M.Move(pick(trange(50, T)))
 				sparks = new /datum/effect/effect/system/spark_spread()
-				sparks.set_up(3, 0, get_turf(M))
+				sparks.set_up(3, 0, M.loc)
 				sparks.start()
 
 /datum/artifact_effect/teleport/DoEffectPulse()
@@ -52,8 +52,8 @@
 				var/datum/effect/effect/system/spark_spread/sparks = new /datum/effect/effect/system/spark_spread()
 				sparks.set_up(3, 0, get_turf(M))
 				sparks.start()
-				//
-				M.loc = pick(orange(get_turf(T), 50))
+
+				M.Move(pick(trange(50, T)))
 				sparks = new /datum/effect/effect/system/spark_spread()
-				sparks.set_up(3, 0, get_turf(M))
+				sparks.set_up(3, 0, M.loc)
 				sparks.start()

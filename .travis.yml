@@ -24,8 +24,9 @@ script:
   - shopt -s globstar
   - (! grep 'step_[xy]' maps/**/*.dmm)
   - (! find nano/templates/ -type f -exec md5sum {} + | sort | uniq -D -w 32 | grep nano)
-  - (num=`grep -E '\\\\(red|blue|green|black|b|i[^mc])' **/*.dm | wc -l`; [ $num -le 1355 ])
-  - (  md5sum -c - <<< "0af969f671fba6cf9696c78cd175a14a *baystation12.int")
+  - (num=`grep -E '\\\\(red|blue|green|black|b|i[^mc])' **/*.dm | wc -l`; echo "$num escapes (expecting 1277 or less)"; [ $num -le 1277 ])
+  - md5sum -c - <<< "0af969f671fba6cf9696c78cd175a14a *baystation12.int"
+  - md5sum -c - <<< "88490b460c26947f5ec1ab1bb9fa9f17 *html/changelogs/example.yml"
   - python tools/TagMatcher/tag-matcher.py ../..
   - python tools/GenerateChangelog/ss13_genchangelog.py html/changelog.html html/changelogs
   - DreamMaker baystation12.dme

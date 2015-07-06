@@ -636,16 +636,29 @@ var/global/list/damage_icon_parts = list()
 /mob/living/carbon/human/update_inv_head(var/update_icons=1)
 	if(head)
 		head.screen_loc = ui_head		//TODO
-		var/image/standing
-		if(istype(head,/obj/item/clothing/head/kitty))
-			standing = image("icon" = head:mob)
+
+		//Determine the icon to use
+		var/t_icon
+		if(head.icon_override)
+			t_icon = head.icon_override
+		else if(head.sprite_sheets && head.sprite_sheets[species.name])
+			t_icon = head.sprite_sheets[species.name]
+		else if(head.item_icons && (slot_head_str in head.item_icons))
+			t_icon = head.item_icons[slot_head_str]
 		else
-			if(head.icon_override)
-				standing = image("icon" = head.icon_override, "icon_state" = "[head.icon_state]")
-			else if(head.sprite_sheets && head.sprite_sheets[species.name])
-				standing = image("icon" = head.sprite_sheets[species.name], "icon_state" = "[head.icon_state]")
-			else
-				standing = image("icon" = 'icons/mob/head.dmi', "icon_state" = "[head.icon_state]")
+			t_icon = INV_HEAD_DEF_ICON
+
+		//Determine the state to use
+		var/t_state
+		if(head.item_state_slots && head.item_state_slots[slot_head_str])
+			t_state = head.item_state_slots[slot_head_str]
+		else if(head.item_state)
+			t_state = head.item_state
+		else
+			t_state = head.icon_state
+
+		//Create the image
+		var/image/standing = image(icon = t_icon, icon_state = t_state)
 
 		if(head.blood_DNA)
 			var/image/bloodsies = image("icon" = species.blood_mask, "icon_state" = "helmetblood")
@@ -696,12 +709,15 @@ var/global/list/damage_icon_parts = list()
 
 		var/image/standing
 
+		var/t_icon = INV_SUIT_DEF_ICON
 		if(wear_suit.icon_override)
-			standing = image("icon" = wear_suit.icon_override, "icon_state" = "[wear_suit.icon_state]")
+			t_icon = wear_suit.icon_override
 		else if(wear_suit.sprite_sheets && wear_suit.sprite_sheets[species.name])
-			standing = image("icon" = wear_suit.sprite_sheets[species.name], "icon_state" = "[wear_suit.icon_state]")
-		else
-			standing = image("icon" = 'icons/mob/suit.dmi', "icon_state" = "[wear_suit.icon_state]")
+			t_icon = wear_suit.sprite_sheets[species.name]
+		else if(wear_suit.item_icons && wear_suit.item_icons[slot_wear_suit_str])
+			t_icon = wear_suit.item_icons[slot_wear_suit_str]
+
+		standing = image("icon" = t_icon, "icon_state" = "[wear_suit.icon_state]")
 
 		if( istype(wear_suit, /obj/item/clothing/suit/straight_jacket) )
 			drop_from_inventory(handcuffed)
