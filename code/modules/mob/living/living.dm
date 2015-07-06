@@ -399,6 +399,7 @@ default behaviour is:
 	fire_stacks = 0
 
 /mob/living/proc/rejuvenate()
+	reagents.clear_reagents()
 
 	// shut down various types of badness
 	setToxLoss(0)
@@ -424,16 +425,11 @@ default behaviour is:
 	ear_damage = 0
 	heal_overall_damage(getBruteLoss(), getFireLoss())
 
-	// restore all of a human's blood
-	if(ishuman(src))
-		var/mob/living/carbon/human/human_mob = src
-		human_mob.restore_blood()
-
 	// fix all of our organs
 	restore_all_organs()
 
 	// remove the character from the list of the dead
-	if(stat == 2)
+	if(stat == DEAD)
 		dead_mob_list -= src
 		living_mob_list += src
 		tod = null
