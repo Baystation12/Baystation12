@@ -63,19 +63,10 @@
 	..()
 
 /obj/machinery/door/cultify()
-	icon_state = "null"
-	density = 0
-	c_animation = new /atom/movable/overlay(src.loc)
-	c_animation.name = "cultification"
-	c_animation.density = 0
-	c_animation.anchored = 1
-	c_animation.icon = 'icons/effects/effects.dmi'
-	c_animation.layer = 5
-	c_animation.master = src.loc
-	c_animation.icon_state = "breakdoor"
-	flick("cultification",c_animation)
-	spawn(10)
-		qdel(c_animation)
+	if(invisibility != INVISIBILITY_MAXIMUM)
+		invisibility = INVISIBILITY_MAXIMUM
+		density = 0
+		anim(target = src, a_icon = 'icons/effects/effects.dmi', a_icon_state = "breakdoor", sleeptime = 10)
 		qdel(src)
 
 /obj/machinery/door/firedoor/cultify()
