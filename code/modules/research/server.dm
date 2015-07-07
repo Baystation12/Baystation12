@@ -155,7 +155,8 @@
 
 /obj/machinery/computer/rdservercontrol
 	name = "R&D Server Controller"
-	icon_state = "rdcomp"
+	icon_keyboard = "rd_key"
+	icon_screen = "rdcomp"
 	light_color = "#a97faa"
 	circuit = /obj/item/weapon/circuitboard/rdservercontrol
 	var/screen = 0

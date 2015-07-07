@@ -5,7 +5,6 @@
 	desc = "Used to view, edit and maintain employment records."
 	icon_keyboard = "laptop_key"
 	icon_screen = "medlaptop"
-	icon_state = "laptop"
 	light_color = "#00b000"
 	req_one_access = list(access_heads)
 	circuit = /obj/item/weapon/circuitboard/skills
@@ -24,6 +23,9 @@
 	var/sortBy = "name"
 	var/order = 1 // -1 = Descending - 1 = Ascending
 
+/obj/machinery/computer/skills/New()
+	..()
+	icon_state = "laptop"
 
 /obj/machinery/computer/skills/attackby(obj/item/O as obj, user as mob)
 	if(istype(O, /obj/item/weapon/card/id) && !scan)

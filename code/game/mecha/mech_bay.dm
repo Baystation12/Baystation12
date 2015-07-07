@@ -83,7 +83,7 @@
 
 /obj/machinery/mech_bay_recharge_port/proc/stop_charge()
 	if(recharge_console && !recharge_console.stat)
-		recharge_console.icon_state = initial(recharge_console.icon_state)
+		recharge_console.icon_screen = initial(recharge_console.icon_screen)
 	pr_recharger.stop()
 	return
 
@@ -137,8 +137,8 @@
 	name = "Mech Bay Power Control Console"
 	density = 1
 	anchored = 1
-	icon = 'icons/obj/computer.dmi'
-	icon_state = "recharge_comp"
+	icon_keyboard = "tech_key"
+	icon_screen = "recharge_comp"
 	light_color = "#a97faa"
 	circuit = /obj/item/weapon/circuitboard/mech_bay_power_console
 	var/autostart = 1
@@ -154,35 +154,13 @@
 		var/answer = recharge_port.start_charge(mecha)
 		if(answer)
 			recharge_port.set_voltage(voltage)
-			src.icon_state = initial(src.icon_state)+"_on"
+			src.icon_screen = initial(src.icon_screen)+"_on"
 	return
 
 /obj/machinery/computer/mech_bay_power_console/proc/mecha_out()
 	if(recharge_port)
 		recharge_port.stop_charge()
 	return
-
-
-/obj/machinery/computer/mech_bay_power_console/power_change()
-	if(stat & BROKEN)
-		icon_state = initial(icon_state)+"_broken"
-		if(recharge_port)
-			recharge_port.stop_charge()
-	else if(powered())
-		icon_state = initial(icon_state)
-		stat &= ~NOPOWER
-	else
-		spawn(rand(0, 15))
-			icon_state = initial(icon_state)+"_nopower"
-			stat |= NOPOWER
-			if(recharge_port)
-				recharge_port.stop_charge()
-
-/obj/machinery/computer/mech_bay_power_console/set_broken()
-	icon_state = initial(icon_state)+"_broken"
-	stat |= BROKEN
-	if(recharge_port)
-		recharge_port.stop_charge()
 
 /obj/machinery/computer/mech_bay_power_console/attack_hand(mob/user as mob)
 	if(..())
