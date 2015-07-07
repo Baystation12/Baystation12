@@ -73,7 +73,7 @@
 	name = "knife"
 	desc = "Can cut through any food."
 	icon_state = "knife"
-	force_divisor = 0.15 // 9 when wielded with hardness 60 (steel)
+	force_divisor = 0.2 // 12 when wielded with hardness 60 (steel)
 
 /obj/item/weapon/material/kitchen/utensil/knife/attack(target as mob, mob/living/user as mob)
 	if ((CLUMSY in user.mutations) && prob(50))
