@@ -44,6 +44,9 @@ var/datum/admin_secrets/admin_secrets = new()
 	var/feedback = 1
 	var/permissions = R_HOST
 
+/datum/admin_secret_item/dd_SortValue()
+	return "[name]"
+
 /datum/admin_secret_item/proc/name()
 	return name
 
@@ -75,6 +78,7 @@ var/datum/admin_secrets/admin_secrets = new()
 
 /datum/admin_secret_category/final_solutions
 	name = "Final Solutions"
+	desc = "(Warning, these will end the round!)"
 
 /*************************
 * Pre-defined base items *

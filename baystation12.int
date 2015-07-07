@@ -1,9 +1,6 @@
 // BEGIN_INTERNALS
 /*
-DIR: code code\modules code\modules\mob code\modules\mob\freelook code\modules\mob\living code\modules\mob\living\carbon code\modules\mob\living\carbon\alien code\modules\mob\living\carbon\alien\diona code\modules\mob\living\carbon\alien\larva code\modules\mob\living\carbon\human 
-AUTO_FILE_DIR: OFF
 MAP_ICON_TYPE: 0
-WINDOW: code\modules\mob\living\carbon\human\life.dm
-FILE: code\modules\mob\living\carbon\human\life.dm
+AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS

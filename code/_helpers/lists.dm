@@ -592,7 +592,7 @@ proc/dd_sortedTextList(list/incoming)
 	return dd_sortedtextlist(incoming, case_sensitive)
 
 
-datum/proc/dd_SortValue()
+/datum/proc/dd_SortValue()
 	return "[src]"
 
 /obj/machinery/dd_SortValue()
