@@ -140,7 +140,7 @@
 	icon = 'icons/obj/computer.dmi'
 	icon_state = "recharge_comp"
 	light_color = "#a97faa"
-	circuit = "/obj/item/weapon/circuitboard/mech_bay_power_console"
+	circuit = /obj/item/weapon/circuitboard/mech_bay_power_console
 	var/autostart = 1
 	var/voltage = 45
 	var/turf/simulated/floor/mech_bay_recharge_floor/recharge_floor

@@ -3,10 +3,11 @@
 /obj/machinery/computer/card
 	name = "\improper ID card modification console"
 	desc = "Terminal for programming NanoTrasen employee ID cards to access parts of the station."
-	icon_state = "id"
+	icon_keyboard = "id_key"
+	icon_screen = "id"
 	light_color = "#0099ff"
 	req_access = list(access_change_ids)
-	circuit = "/obj/item/weapon/circuitboard/card"
+	circuit = /obj/item/weapon/circuitboard/card
 	var/obj/item/weapon/card/id/scan = null
 	var/obj/item/weapon/card/id/modify = null
 	var/mode = 0.0
@@ -284,7 +285,7 @@
 
 /obj/machinery/computer/card/centcom
 	name = "\improper CentCom ID card modification console"
-	circuit = "/obj/item/weapon/circuitboard/card/centcom"
+	circuit = /obj/item/weapon/circuitboard/card/centcom
 	req_access = list(access_cent_captain)
 
 
