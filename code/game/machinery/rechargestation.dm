@@ -1,22 +1,25 @@
 /obj/machinery/recharge_station
 	name = "cyborg recharging station"
+	desc = "A heavy duty rapid charging system, designed to quickly recharge cyborg power supplies. Uses a dedicated internal power cell to deliver large amounts of power."
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "borgcharger0"
 	density = 1
 	anchored = 1
 	use_power = 1
 	idle_power_usage = 50
-	active_power_usage = 50
 	var/mob/occupant = null
 	var/obj/item/weapon/cell/cell = null
-	//var/max_internal_charge = 15000 		// Two charged borgs in a row with default cell
-	//var/current_internal_charge = 15000 	// Starts charged, to prevent power surges on round start
-	var/charging_cap_active = 1000			// Active Cap - When cyborg is inside
-	var/charging_cap_passive = 250			// Passive Cap - Recharging internal capacitor when no cyborg is inside
-	var/icon_update_tick = 0				// Used to update icon only once every 10 ticks
-	var/charge_rate = 250					// How much charge is restored per tick
-	var/weld_rate = 0						// How much brute damage is repaired per tick
-	var/wire_rate = 0						// How much burn damage is repaired per tick
+	var/icon_update_tick = 0	// Used to rebuild the overlay only once every 10 ticks
+	var/charging = 0
+	
+	var/charging_power			// W. Power rating used for charging the cyborg. 120 kW if un-upgraded
+	var/restore_power_active	// W. Power drawn from APC when an occupant is charging. 40 kW if un-upgraded
+	var/restore_power_passive	// W. Power drawn from APC when idle. 7 kW if un-upgraded
+	var/weld_rate = 0			// How much brute damage is repaired per tick
+	var/wire_rate = 0			// How much burn damage is repaired per tick
+	
+	var/weld_power_use = 2300	// power used per point of brute damage repaired. 2.3 kW ~ about the same power usage of a handheld arc welder
+	var/wire_power_use = 500	// power used per point of burn damage repaired.
 
 /obj/machinery/recharge_station/New()
 	..()
@@ -30,48 +33,76 @@
 	component_parts += new /obj/item/weapon/cell/high(src)
 	component_parts += new /obj/item/stack/cable_coil(src, 5)
 
-	build_icon()
+	RefreshParts()
+
 	update_icon()
 
-	RefreshParts()
+/obj/machinery/recharge_station/proc/has_cell_power()
+	return cell && cell.percent() > 0
 
 /obj/machinery/recharge_station/process()
 	if(stat & (BROKEN))
 		return
-
-	if((stat & (NOPOWER)) && (!cell || cell.percent() <= 0)) // No Power.
-		return
-
-	var/chargemode = 0
-	if(occupant)
-		process_occupant()
-		chargemode = 1
-	// Power Stuff
-
 	if(!cell) // Shouldn't be possible, but sanity check
 		return
 
-	if(stat & NOPOWER)
-		cell.use(50 * CELLRATE) // Internal Circuitry, 50W load. No power - Runs from internal cell
-		return // No external power = No charging
+	if((stat & NOPOWER) && !has_cell_power()) // No power and cell is dead.
+		if(icon_update_tick)
+			icon_update_tick = 0 //just rebuild the overlay once more only
+			update_icon()
+		return
 
-	// Calculating amount of power to draw
-	var/charge_diff = (chargemode ? charging_cap_active : charging_cap_passive) + 50 // 50W for circuitry
+	//First, draw from the internal power cell to recharge/repair/etc the occupant
+	if(occupant)
+		process_occupant()
 
-	charge_diff = cell.give(charge_diff)
-
-	if(idle_power_usage != charge_diff) // Force update, but only when our power usage changed this tick.
-		idle_power_usage = charge_diff
-		update_use_power(1, 1)
-
+	//Then, if external power is available, recharge the internal cell
+	var/recharge_amount = 0
+	if(!(stat & NOPOWER))
+		// Calculating amount of power to draw
+		recharge_amount = (occupant ? restore_power_active : restore_power_passive) * CELLRATE
+		
+		recharge_amount = cell.give(recharge_amount)
+		use_power(recharge_amount / CELLRATE)
+	
 	if(icon_update_tick >= 10)
-		update_icon()
 		icon_update_tick = 0
 	else
 		icon_update_tick++
+	
+	if(occupant || recharge_amount)
+		update_icon()
 
+//since the recharge station can still be on even with NOPOWER. Instead it draws from the internal cell.
+/obj/machinery/recharge_station/auto_use_power()
+	if(!(stat & NOPOWER))
+		return ..()
+	
+	if(!has_cell_power())
+		return 0
+	if(src.use_power == 1)
+		cell.use(idle_power_usage * CELLRATE)
+	else if(src.use_power >= 2)
+		cell.use(active_power_usage * CELLRATE)
 	return 1
 
+//Processes the occupant, drawing from the internal power cell if needed.
+/obj/machinery/recharge_station/proc/process_occupant()
+	if(istype(occupant, /mob/living/silicon/robot))
+		var/mob/living/silicon/robot/R = occupant
+
+		if(R.module)
+			R.module.respawn_consumable(R, charging_power * CELLRATE / 250) //consumables are magical, apparently
+		if(R.cell && !R.cell.fully_charged())
+			var/diff = min(R.cell.maxcharge - R.cell.charge, charging_power * CELLRATE) // Capped by charging_power / tick
+			var/charge_used = cell.use(diff)
+			R.cell.give(charge_used)
+
+		//Lastly, attempt to repair the cyborg if enabled
+		if(weld_rate && R.getBruteLoss() && cell.checked_use(weld_power_use * weld_rate * CELLRATE))
+			R.adjustBruteLoss(-weld_rate)
+		if(wire_rate && R.getFireLoss() && cell.checked_use(wire_power_use * wire_rate * CELLRATE))
+			R.adjustFireLoss(-wire_rate)
 
 /obj/machinery/recharge_station/allow_drop()
 	return 0
@@ -92,9 +123,6 @@
 	return
 
 /obj/machinery/recharge_station/emp_act(severity)
-	if(stat & (BROKEN|NOPOWER))
-		..(severity)
-		return
 	if(occupant)
 		occupant.emp_act(severity)
 		go_out()
@@ -125,13 +153,13 @@
 			man_rating += P.rating
 	cell = locate(/obj/item/weapon/cell) in component_parts
 
-	charge_rate = 125 * cap_rating
-	charging_cap_passive = charge_rate
+	charging_power = 40000 + 40000 * cap_rating
+	restore_power_active = 10000 + 15000 * cap_rating
+	restore_power_passive = 5000 + 1000 * cap_rating
 	weld_rate = max(0, man_rating - 3)
 	wire_rate = max(0, man_rating - 5)
 
-/obj/machinery/recharge_station/update_icon()
-	..()
+/obj/machinery/recharge_station/proc/build_overlays()
 	overlays.Cut()
 	switch(round(chargepercentage()))
 		if(1 to 20)
@@ -147,48 +175,30 @@
 		if(99 to 110)
 			overlays += image('icons/obj/objects.dmi', "statn_c100")
 
-
-/obj/machinery/recharge_station/proc/build_icon()
-	if(NOPOWER|BROKEN)
-		if(occupant)
-			icon_state = "borgcharger1"
+/obj/machinery/recharge_station/update_icon()
+	..()
+	if(stat & BROKEN)
+		icon_state = "borgcharger0"
+		return
+	
+	if(occupant)
+		if((stat & NOPOWER) && !has_cell_power())
+			icon_state = "borgcharger2"
 		else
-			icon_state = "borgcharger0"
+			icon_state = "borgcharger1"
 	else
 		icon_state = "borgcharger0"
-
-/obj/machinery/recharge_station/proc/process_occupant()
-	if(occupant)
-		if(istype(occupant, /mob/living/silicon/robot))
-			var/mob/living/silicon/robot/R = occupant
-			if(R.module)
-				R.module.respawn_consumable(R, charge_rate / 250)
-			if(!R.cell)
-				return
-			if(!R.cell.fully_charged())
-				var/diff = min(R.cell.maxcharge - R.cell.charge, charge_rate) 	// Capped at charge_rate charge / tick
-				if (cell.charge >= diff)
-					cell.use(diff)
-					R.cell.give(diff)
-			if(weld_rate && R.getBruteLoss())
-				R.adjustBruteLoss(-1)
-			if(wire_rate && R.getFireLoss())
-				R.adjustFireLoss(-1)
-			else
-				update_use_power(1)
+	
+	if(icon_update_tick == 0)
+		build_overlays()
 
 /obj/machinery/recharge_station/proc/go_out()
 	if(!(occupant))
 		return
-	//for(var/obj/O in src)
-	//	O.loc = loc
-	if(occupant.client)
-		occupant.client.eye = occupant.client.mob
-		occupant.client.perspective = MOB_PERSPECTIVE
 	occupant.loc = loc
+	occupant.reset_view()
 	occupant = null
-	build_icon()
-	update_use_power(1)
+	update_icon()
 	return
 
 /obj/machinery/recharge_station/verb/move_eject()
@@ -207,24 +217,21 @@
 		//Whoever had it so that a borg with a dead cell can't enter this thing should be shot. --NEO
 		return
 	if(!(istype(usr, /mob/living/silicon/)))
-		usr << "<span class='notice'>Only non-organics may enter the recharger!</span>"
+		usr << "<span class='notice'>Only synthetics may enter the recharger!</span>"
 		return
 	if(occupant)
-		usr << "<span class='notice'>The cell is already occupied!</span>"
+		usr << "<span class='notice'>\The [src] is already occupied!</span>"
 		return
 	if(!usr:cell)
 		usr << "<span class='notice'>Without a powercell, you can't be recharged.</span>"
 		//Make sure they actually HAVE a cell, now that they can get in while powerless. --NEO
 		return
 	usr.stop_pulling()
-	if(usr && usr.client)
-		usr.client.perspective = EYE_PERSPECTIVE
-		usr.client.eye = src
+	usr.reset_view(src)
 	usr.loc = src
 	occupant = usr
 	/*for(var/obj/O in src)
 		O.loc = loc*/
 	add_fingerprint(usr)
-	build_icon()
-	update_use_power(1)
+	update_icon()
 	return
