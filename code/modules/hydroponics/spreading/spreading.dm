@@ -58,7 +58,6 @@
 	var/growth_threshold = 0
 	var/growth_type = 0
 	var/max_growth = 0
-	var/sampled
 	var/list/neighbors = list()
 	var/obj/effect/plant/parent
 	var/datum/seed/seed
