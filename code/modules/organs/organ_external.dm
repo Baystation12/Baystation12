@@ -707,11 +707,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 	wounds.Cut()
 	if(parent)
-		var/datum/wound/W
-		if(clean || max_damage < 50)
-			W = new/datum/wound/lost_limb/small(max_damage/2)
-		else
-			W = new/datum/wound/lost_limb(max_damage)
+		var/datum/wound/lost_limb/W = new (src, disintegrate, clean)
 		parent.children -= src
 		if(clean)
 			parent.wounds |= W
