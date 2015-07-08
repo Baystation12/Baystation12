@@ -1,5 +1,6 @@
 /mob/living/simple_animal/hostile
 	faction = "hostile"
+	a_intent = I_HURT
 	default_mob_ai = /datum/mob_ai/simple_animal/hostile
 
 /mob/living/simple_animal

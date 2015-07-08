@@ -1,5 +1,6 @@
 /datum/mob_ai
 	var/was_alive
+	var/had_client
 	var/mob/living/host
 
 	var/list/last_damage
@@ -36,7 +37,13 @@
 	return ..()
 
 /datum/mob_ai/proc/Process()
-	if(!host.client)
+	// If we suddenly have a client, walk() to ensure the client can move in case of a prior move_to.
+	var/has_client = host.client
+	if(has_client && !had_client)
+		walk(host, 0)
+	had_client = has_client
+
+	if(!has_client)
 		UpdateDamage()
 		var/is_alive = host.stat != DEAD
 		if(is_alive)

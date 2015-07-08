@@ -53,8 +53,8 @@
 
 	if(client)
 		handle_regular_hud_updates()
-	else
-		handle_ai()
+
+	handle_ai()
 
 /mob/living/proc/handle_breathing()
 	return

@@ -152,10 +152,10 @@
 	if(!T || !U)
 		return
 
-	var/obj/item/projectile/A = PoolOrNew(projectiletype)
+	var/obj/item/projectile/A = new projectiletype(loc)
 	playsound(loc, projectilesound, 75, 1)
 
-	//Shooting Code:
+	A.original = target
 	A.current = T
 	A.starting = T
 	A.yo = U.y - T.y

@@ -711,12 +711,13 @@
 
 
 /mob/proc/facedir(var/ndir)
-	if(!canface() || client.moving || world.time < client.move_delay)
+	if(!canface() || (client && (client.moving || world.time < client.move_delay)))
 		return 0
 	set_dir(ndir)
 	if(buckled && buckled.buckle_movable)
 		buckled.set_dir(ndir)
-	client.move_delay += movement_delay()
+	if(client)
+		client.move_delay += movement_delay()
 	return 1
 
 
