@@ -115,7 +115,7 @@
 		if(!smoked && bee_count)
 			user << "<span class='notice'>The bees won't let you take the honeycombs out like this, smoke them first.</span>"
 			return
-		user.visible_message("<span class='notice'>[user] starts taking the honeycombs out of \the [src].", "<span class='notice'>You start taking the honeycombs out of \the [src]...</span>")
+		user.visible_message("<span class='notice'>[user] starts taking the honeycombs out of \the [src].</span>", "<span class='notice'>You start taking the honeycombs out of \the [src]...</span>")
 		while(honeycombs >= 100 && do_after(user, 30))
 			new /obj/item/honey_frame/filled(loc)
 			honeycombs -= 100
@@ -192,8 +192,8 @@
 /obj/item/honey_frame
 	name = "beehive frame"
 	desc = "A frame for the beehive that the bees will fill with honeycombs."
-	icon = 'icons/obj/apiary_bees_etc.dmi'
-	icon_state = "apiary"
+	icon = 'icons/obj/beekeeping.dmi'
+	icon_state = "honeyframe"
 	w_class = 2
 
 	var/honey = 0
@@ -202,6 +202,10 @@
 	name = "filled beehive frame"
 	desc = "A frame for the beehive that the bees have filled with honeycombs."
 	honey = 20
+
+/obj/item/honey_frame/filled/New()
+	..()
+	overlays += "honeycomb"
 
 /obj/item/beehive_assembly
 	name = "beehive assembly"
@@ -219,7 +223,8 @@
 	name = "wax"
 	singular_name = "wax piece"
 	desc = "Soft substance produced by bees. Used to make candles."
-	icon_state = "sheet-metal"
+	icon = 'icons/obj/beekeeping.dmi'
+	icon_state = "wax"
 
 /obj/item/stack/wax/New()
 	..()
