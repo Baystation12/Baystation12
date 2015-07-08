@@ -60,6 +60,8 @@
 	if(!istype(M) || material.name != M.material.name)
 		return 0
 	..(S,tamount,1)
+	if(src) update_strings()
+	if(M) M.update_strings()
 
 /obj/item/stack/material/attack_self(var/mob/user)
 	if(!material.build_windows(user, src))
