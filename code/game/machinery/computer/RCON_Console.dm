@@ -8,7 +8,7 @@
 	name = "\improper RCON console"
 	desc = "Console used to remotely control machinery on the station."
 	icon_keyboard = "power_key"
-	icon_screen = "ai-fixer"
+	icon_screen = "power_screen"
 	light_color = "#a97faa"
 	circuit = /obj/item/weapon/circuitboard/rcon_console
 	req_one_access = list(access_engine)
