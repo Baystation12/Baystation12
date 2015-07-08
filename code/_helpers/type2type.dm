@@ -49,7 +49,7 @@
 	var/n     = 1
 
 	// Figure out power. (power of 2)
-	while (n < num)
+	while (n <= num)
 		power += 4
 		n     *= 16
 
@@ -60,7 +60,7 @@
 		power -= 4
 
 	// Append zeroes to make sure that hex is atleast digits long.
-	var/left = length(hex) - digits
+	var/left = digits - length(hex)
 	while (left-- > 0)
 		hex = text("0[]", hex)
 
