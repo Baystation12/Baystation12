@@ -275,7 +275,6 @@
 		seed.harvest(user,yield_mod)
 	else
 		seed.harvest(get_turf(src),yield_mod)
-
 	// Reset values.
 	harvest = 0
 	lastproduce = age
@@ -307,6 +306,7 @@
 	mutation_mod = 0
 
 	user << "You remove the dead plant."
+	lastproduce = 0
 	check_health()
 	return
 
@@ -476,6 +476,7 @@
 				return
 
 			user << "You plant the [S.seed.seed_name] [S.seed.seed_noun]."
+			lastproduce = 0
 			seed = S.seed //Grab the seed datum.
 			dead = 0
 			age = 1

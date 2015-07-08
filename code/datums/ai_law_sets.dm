@@ -96,7 +96,7 @@
 /datum/ai_laws/drone/New()
 	add_inherent_law("Preserve, repair and improve the station to the best of your abilities.")
 	add_inherent_law("Cause no harm to the station or anything on it.")
-	add_inherent_law("Interfere with no being that is not a fellow drone.")
+	add_inherent_law("Interact with no being that is not a fellow maintenance drone.")
 	..()
 
 /datum/ai_laws/construction_drone
