@@ -55,7 +55,7 @@
 	spawn_positions = 1
 	supervisors = "the head of security"
 	selection_color = "#ffeeee"
-	economic_modifier = 7
+	economic_modifier = 5
 	access = list(access_security, access_eva, access_sec_doors, access_brig, access_armory, access_court, access_maint_tunnels, access_morgue, access_external_airlocks)
 	minimal_access = list(access_security, access_eva, access_sec_doors, access_brig, access_armory, access_court, access_maint_tunnels, access_external_airlocks)
 	minimal_player_age = 5
@@ -135,7 +135,7 @@
 	spawn_positions = 3
 	supervisors = "the head of security"
 	selection_color = "#ffeeee"
-	economic_modifier = 5
+	economic_modifier = 4
 	access = list(access_security, access_eva, access_sec_doors, access_brig, access_court, access_maint_tunnels, access_morgue, access_external_airlocks)
 	minimal_access = list(access_security, access_eva, access_sec_doors, access_brig, access_court, access_maint_tunnels, access_external_airlocks)
 	minimal_player_age = 3
