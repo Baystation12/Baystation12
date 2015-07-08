@@ -21,6 +21,7 @@
 	health = 40
 	melee_damage_lower = 1
 	melee_damage_upper = 5
+	default_mob_ai = /datum/mob_ai/simple_animal/hostile/retaliate
 	var/datum/reagents/udder = null
 
 /mob/living/simple_animal/hostile/retaliate/goat/New()
@@ -28,40 +29,16 @@
 	udder.my_atom = src
 	..()
 
+/mob/living/simple_animal/hostile/retaliate/goat/Destroy()
+	qdel(udder)
+	udder = null
+	..()
+
 /mob/living/simple_animal/hostile/retaliate/goat/Life()
 	. = ..()
-	if(.)
-		//chance to go crazy and start wacking stuff
-		if(!enemies.len && prob(1))
-			Retaliate()
-
-		if(enemies.len && prob(10))
-			enemies = list()
-			LoseTarget()
-			src.visible_message("\blue [src] calms down.")
-
-		if(stat == CONSCIOUS)
-			if(udder && prob(5))
-				udder.add_reagent("milk", rand(5, 10))
-
-		if(locate(/obj/effect/plant) in loc)
-			var/obj/effect/plant/SV = locate() in loc
-			SV.die_off(1)
-
-		if(locate(/obj/machinery/portable_atmospherics/hydroponics/soil/invisible) in loc)
-			var/obj/machinery/portable_atmospherics/hydroponics/soil/invisible/SP = locate() in loc
-			qdel(SP)
-
-		if(!pulledby)
-			var/obj/effect/plant/food
-			food = locate(/obj/effect/plant) in oview(5,loc)	
-			if(food)
-				var/step = get_step_to(src, food, 0) 	
-				Move(step)
-
-/mob/living/simple_animal/hostile/retaliate/goat/Retaliate()
-	..()
-	src.visible_message("\red [src] gets an evil-looking gleam in their eye.")
+	if(. && stat == CONSCIOUS)
+		if(udder && prob(5))
+			udder.add_reagent("milk", rand(5, 10))
 
 /mob/living/simple_animal/hostile/retaliate/goat/Move()
 	..()

@@ -22,8 +22,6 @@
 	icon_living = "spiderbot-chassis"
 	icon_dead = "spiderbot-smashed"
 
-	wander = 0
-
 	health = 10
 	maxHealth = 10
 
@@ -37,7 +35,7 @@
 
 	var/emagged = 0
 	var/obj/item/held_item = null //Storage for single item they can hold.
-	speed = -1                    //Spiderbots gotta go fast.
+	move_delay = -1                    //Spiderbots gotta go fast.
 	pass_flags = PASSTABLE
 	small = 1
 	speak_emote = list("beeps","clicks","chirps")
@@ -132,7 +130,7 @@
 
 	else
 		attacked_with_item(O, user)
-	
+
 /mob/living/simple_animal/spiderbot/emag_act(var/remaining_charges, var/mob/user)
 	if (emagged)
 		user << "<span class='warning'>[src] is already overloaded - better run.</span>"

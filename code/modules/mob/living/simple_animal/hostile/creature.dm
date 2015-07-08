@@ -13,7 +13,7 @@
 	attacktext = "chomped"
 	attack_sound = 'sound/weapons/bite.ogg'
 	faction = "creature"
-	speed = 4
+	move_delay = 4
 
 /mob/living/simple_animal/hostile/creature/cult
 	faction = "cult"
@@ -32,7 +32,3 @@
 
 /mob/living/simple_animal/hostile/creature/cult/cultify()
 	return
-
-/mob/living/simple_animal/hostile/creature/cult/Life()
-	..()
-	check_horde()

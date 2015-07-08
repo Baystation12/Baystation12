@@ -95,6 +95,7 @@
 	if(damage && environment_smash)
 		for(var/mob/M in src)
 			shatter(M)
+		return 1
 
 /obj/structure/closet/statue/blob_act()
 	for(var/mob/M in src)

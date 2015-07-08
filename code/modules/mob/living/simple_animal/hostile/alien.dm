@@ -9,7 +9,7 @@
 	response_help = "pokes"
 	response_disarm = "shoves"
 	response_harm = "hits"
-	speed = -1
+	move_delay = -1
 	meat_type = /obj/item/weapon/reagent_containers/food/snacks/xenomeat
 	maxHealth = 100
 	health = 100
@@ -67,7 +67,7 @@
 	melee_damage_lower = 15
 	melee_damage_upper = 15
 	ranged = 1
-	move_to_delay = 3
+	move_delay = 3
 	projectiletype = /obj/item/projectile/neurotox
 	projectilesound = 'sound/weapons/pierce.ogg'
 	rapid = 1
@@ -79,7 +79,7 @@
 	icon_state = "queen_s"
 	icon_living = "queen_s"
 	icon_dead = "queen_dead"
-	move_to_delay = 4
+	move_delay = 4
 	maxHealth = 400
 	health = 400
 
@@ -101,10 +101,10 @@
 	icon_living = "samak"
 	icon_dead = "samak_dead"
 	icon = 'icons/jungle.dmi'
-	move_to_delay = 2
+	move_delay = 2
 	maxHealth = 125
 	health = 125
-	speed = 2
+	move_delay = 2
 	melee_damage_lower = 5
 	melee_damage_upper = 15
 	attacktext = "mauled"
@@ -122,10 +122,10 @@
 	icon_living = "diyaab"
 	icon_dead = "diyaab_dead"
 	icon = 'icons/jungle.dmi'
-	move_to_delay = 1
+	move_delay = 1
 	maxHealth = 25
 	health = 25
-	speed = 1
+	move_delay = 1
 	melee_damage_lower = 1
 	melee_damage_upper = 8
 	attacktext = "gouged"
@@ -143,10 +143,10 @@
 	icon_living = "shantak"
 	icon_dead = "shantak_dead"
 	icon = 'icons/jungle.dmi'
-	move_to_delay = 1
+	move_delay = 1
 	maxHealth = 75
 	health = 75
-	speed = 1
+	move_delay = 1
 	melee_damage_lower = 3
 	melee_damage_upper = 12
 	attacktext = "gouged"

@@ -26,7 +26,7 @@
 	min_n2 = 0
 	max_n2 = 0
 	minbodytemp = 0
-	speed = 4
+	move_delay = 4
 
 /mob/living/simple_animal/hostile/hivebot/range
 	name = "Hivebot"
@@ -64,7 +64,6 @@
 	maxHealth = 200
 	status_flags = 0
 	anchored = 1
-	stop_automated_movement = 1
 	var/bot_type = "norm"
 	var/bot_amt = 10
 	var/spawn_delay = 600

@@ -27,13 +27,13 @@
 	var/obj/item/wepon = null
 
 /obj/structure/cult/pylon/attack_hand(mob/M as mob)
-	attackpylon(M, 5)
+	return attackpylon(M, 5)
 
 /obj/structure/cult/pylon/attack_generic(var/mob/user, var/damage)
-	attackpylon(user, damage)
+	return attackpylon(user, damage)
 
 /obj/structure/cult/pylon/attackby(obj/item/W as obj, mob/user as mob)
-	attackpylon(user, W.force)
+	return attackpylon(user, W.force)
 
 /obj/structure/cult/pylon/proc/attackpylon(mob/user as mob, var/damage)
 	if(!isbroken)
@@ -59,7 +59,7 @@
 		else
 			user << "You hit the pylon!"
 		playsound(get_turf(src), 'sound/effects/Glasshit.ogg', 75, 1)
-
+	return 1
 
 /obj/structure/cult/pylon/proc/repair(mob/user as mob)
 	if(isbroken)

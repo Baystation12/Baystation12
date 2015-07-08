@@ -1,3 +1,5 @@
+#define DRONE_ABILITY_CLOAK "cloak"
+#define DRONE_ABILITY_REPAIR "repair"
 
 //malfunctioning combat drones
 /mob/living/simple_animal/hostile/retaliate/malf_drone
@@ -16,13 +18,11 @@
 	speak = list("ALERT.","Hostile-ile-ile entities dee-twhoooo-wected.","Threat parameterszzzz- szzet.","Bring sub-sub-sub-systems uuuup to combat alert alpha-a-a.")
 	emote_see = list("beeps menacingly","whirrs threateningly","scans its immediate vicinity")
 	a_intent = I_HURT
-	stop_automated_movement_when_pulled = 0
 	health = 300
 	maxHealth = 300
-	speed = 8
+	move_delay = 8
 	projectiletype = /obj/item/projectile/beam/drone
 	projectilesound = 'sound/weapons/laser3.ogg'
-	destroy_surroundings = 0
 	var/datum/effect/effect/system/ion_trail_follow/ion_trail
 
 	//the drone randomly switches between these states because it's malfunctioning
@@ -48,120 +48,26 @@
 
 	var/has_loot = 1
 	faction = "malf_drone"
+	default_mob_ai = /mob/living/simple_animal/hostile/retaliate/malf_drone
+
+	var/list/ability_delays
 
 /mob/living/simple_animal/hostile/retaliate/malf_drone/New()
 	..()
 	if(prob(5))
 		projectiletype = /obj/item/projectile/beam/pulse/drone
 		projectilesound = 'sound/weapons/pulse2.ogg'
+	ability_delays = list()
 	ion_trail = new
 	ion_trail.set_up(src)
 	ion_trail.start()
 
-/mob/living/simple_animal/hostile/retaliate/malf_drone/Process_Spacemove(var/check_drift = 0)
-	return 1
-
-/mob/living/simple_animal/hostile/retaliate/malf_drone/ListTargets()
-	if(hostile_drone)
-		return view(src, 10)
-	else
-		return ..()
-
-//self repair systems have a chance to bring the drone back to life
-/mob/living/simple_animal/hostile/retaliate/malf_drone/Life()
-
-	//emps and lots of damage can temporarily shut us down
-	if(disabled > 0)
-		stat = UNCONSCIOUS
-		icon_state = "drone_dead"
-		disabled--
-		wander = 0
-		speak_chance = 0
-		if(disabled <= 0)
-			stat = CONSCIOUS
-			icon_state = "drone0"
-			wander = 1
-			speak_chance = 5
-
-	//repair a bit of damage
-	if(prob(1))
-		src.visible_message("\red \icon[src] [src] shudders and shakes as some of it's damaged systems come back online.")
-		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
-		s.set_up(3, 1, src)
-		s.start()
-		health += rand(25,100)
-
-	//spark for no reason
-	if(prob(5))
-		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
-		s.set_up(3, 1, src)
-		s.start()
-
-	//sometimes our targetting sensors malfunction, and we attack anyone nearby
-	if(prob(disabled ? 0 : 1))
-		if(hostile_drone)
-			src.visible_message("\blue \icon[src] [src] retracts several targetting vanes, and dulls it's running lights.")
-			hostile_drone = 0
-		else
-			src.visible_message("\red \icon[src] [src] suddenly lights up, and additional targetting vanes slide into place.")
-			hostile_drone = 1
-
-	if(health / maxHealth > 0.9)
-		icon_state = "drone3"
-		explode_chance = 0
-	else if(health / maxHealth > 0.7)
-		icon_state = "drone2"
-		explode_chance = 0
-	else if(health / maxHealth > 0.5)
-		icon_state = "drone1"
-		explode_chance = 0.5
-	else if(health / maxHealth > 0.3)
-		icon_state = "drone0"
-		explode_chance = 5
-	else if(health > 0)
-		//if health gets too low, shut down
-		icon_state = "drone_dead"
-		exploding = 0
-		if(!disabled)
-			if(prob(50))
-				src.visible_message("\blue \icon[src] [src] suddenly shuts down!")
-			else
-				src.visible_message("\blue \icon[src] [src] suddenly lies still and quiet.")
-			disabled = rand(150, 600)
-			walk(src,0)
-
-	if(exploding && prob(20))
-		if(prob(50))
-			src.visible_message("\red \icon[src] [src] begins to spark and shake violenty!")
-		else
-			src.visible_message("\red \icon[src] [src] sparks and shakes like it's about to explode!")
-		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
-		s.set_up(3, 1, src)
-		s.start()
-
-	if(!exploding && !disabled && prob(explode_chance))
-		exploding = 1
-		stat = UNCONSCIOUS
-		wander = 1
-		walk(src,0)
-		spawn(rand(50,150))
-			if(!disabled && exploding)
-				explosion(get_turf(src), 0, 1, 4, 7)
-				//proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impact_range, flash_range, adminlog = 1)
-	..()
-
-//ion rifle!
-/mob/living/simple_animal/hostile/retaliate/malf_drone/emp_act(severity)
-	health -= rand(3,15) * (severity + 1)
-	disabled = rand(150, 600)
-	hostile_drone = 0
-	walk(src,0)
-
-/mob/living/simple_animal/hostile/retaliate/malf_drone/death()
-	..(null,"suddenly breaks apart.")
-	qdel(src)
+	mob_ai.destroy_probability = 0
 
 /mob/living/simple_animal/hostile/retaliate/malf_drone/Destroy()
+	qdel(ion_trail)
+	ion_trail = null
+
 	//some random debris left behind
 	if(has_loot)
 		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
@@ -272,8 +178,140 @@
 
 	..()
 
+/mob/living/simple_animal/hostile/retaliate/malf_drone/Process_Spacemove(var/check_drift = 0)
+	return 1
+
+/mob/living/simple_animal/hostile/retaliate/malf_drone/proc/CanUseAbility(var/ability, var/mob/user = usr)
+	if(stat != CONSCIOUS)
+		user << "<span class='warning'>You are currently disabled!</span>"
+		return 0
+
+	if(world.time < ability_delays[ability])
+		user << "<span class='notice'>This ability is not yet ready.</span>"
+		return 0
+
+	return 1
+
+/mob/living/simple_animal/hostile/retaliate/malf_drone/verb/RepairDamage()
+	set name = "Repair Damage"
+	set desc = "Heals a random amount of damage, up until max HP."
+	set category = "Abilities"
+
+	if(!CanUseAbility(DRONE_ABILITY_REPAIR))
+		return
+	ability_delays[DRONE_ABILITY_REPAIR] = world.time + 1 MINUTES
+
+	src.visible_message("<span class='danger'>\The [src] shudders and shakes as some of it's damaged systems come back online.</span>")
+	var/datum/effect/effect/system/spark_spread/s = PoolOrNew(/datum/effect/effect/system/spark_spread)
+	s.set_up(3, 1, src)
+	s.start()
+	health = max(maxHealth, health + rand(25,100))
+	update_icons()
+
+//self repair systems have a chance to bring the drone back to life
+/mob/living/simple_animal/hostile/retaliate/malf_drone/Life()
+	handle_disabled()
+
+	//repair a bit of damage
+	if(prob(1))
+		RepairDamage()
+
+	if(health < maxHealth && prob(5))
+		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+		s.set_up(3, 1, src)
+		s.start()
+
+	//sometimes our targetting sensors malfunction, and we attack anyone nearby
+	if(prob(disabled ? 0 : 1))
+		if(hostile_drone)
+			src.visible_message("<span class='notice'>\The [src] retracts several targetting vanes, and dulls it's running lights.</span>")
+			hostile_drone = 0
+		else
+			src.visible_message("<span class='danger'>\The [src] suddenly lights up, and additional targetting vanes slide into place.</span>")
+			hostile_drone = 1
+
+	if(health / maxHealth > 0.9)
+		explode_chance = 0
+	else if(health / maxHealth > 0.7)
+		explode_chance = 0
+	else if(health / maxHealth > 0.5)
+		explode_chance = 0.5
+	else if(health / maxHealth > 0.3)
+		explode_chance = 5
+	else if(health > 0)
+		//if health gets too low, shut down
+		exploding = 0
+		if(!disabled)
+			if(prob(50))
+				src.visible_message("<span class='danger'>\The [src] suddenly shuts down!</span>")
+			else
+				src.visible_message("<span class='danger'>\The [src] suddenly lies still and quiet.</span>")
+			disabled = rand(150, 600)
+			walk(src,0)
+
+	if(exploding && prob(20))
+		if(prob(50))
+			src.visible_message("<span class='danger'>\The [src] begins to spark and shake violenty!</span>")
+		else
+			src.visible_message("<span class='danger'>\The [src] sparks and shakes like it's about to explode!</span>")
+		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+		s.set_up(3, 1, src)
+		s.start()
+
+	if(!exploding && !disabled && prob(explode_chance))
+		exploding = 1
+		stat = UNCONSCIOUS
+		walk(src,0)
+		spawn(rand(50,150))
+			if(!disabled && exploding)
+				explosion(get_turf(src), 0, 1, 4, 7)
+				//proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impact_range, flash_range, adminlog = 1)
+		update_icons()
+	..()
+
+/mob/living/simple_animal/hostile/retaliate/malf_drone/update_icons()
+	if(disabled)
+		icon_state = "drone_dead"
+		return
+	if(health / maxHealth > 0.9)
+		icon_state = "drone3"
+	else if(health / maxHealth > 0.7)
+		icon_state = "drone2"
+	else if(health / maxHealth > 0.5)
+		icon_state = "drone1"
+	else if(health / maxHealth > 0.3)
+		icon_state = "drone0"
+	else if(health > 0)
+		icon_state = "drone_dead"
+
+/mob/living/simple_animal/hostile/retaliate/malf_drone/proc/handle_disabled()
+//emps and lots of damage can temporarily shut us down
+	if(disabled > 0)
+		if(stat != UNCONSCIOUS)
+			stat = UNCONSCIOUS
+			update_icons()
+		disabled--
+		if(disabled <= 0)
+			stat = CONSCIOUS
+			update_icons()
+
+//ion rifle!
+/mob/living/simple_animal/hostile/retaliate/malf_drone/emp_act(severity)
+	health -= rand(3,15) * (severity + 1)
+	disabled = rand(150, 600)
+	hostile_drone = 0
+	walk(src,0)
+	update_icons()
+
+/mob/living/simple_animal/hostile/retaliate/malf_drone/death()
+	..(null,"suddenly breaks apart.")
+	qdel(src)
+
 /obj/item/projectile/beam/drone
 	damage = 15
 
 /obj/item/projectile/beam/pulse/drone
 	damage = 10
+
+#undef DRONE_ABILITY_CLOAK
+#undef DRONE_ABILITY_REPAIR

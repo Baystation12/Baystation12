@@ -10,13 +10,11 @@
 	icon_state = "brainslug"
 	icon_living = "brainslug"
 	icon_dead = "brainslug_dead"
-	speed = 5
+	move_delay = 5
 	a_intent = I_HURT
-	stop_automated_movement = 1
 	status_flags = CANPUSH
 	attacktext = "nipped"
 	friendly = "prods"
-	wander = 0
 	pass_flags = PASSTABLE
 	universal_understand = 1
 	holder_type = /obj/item/weapon/holder/borer

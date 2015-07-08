@@ -147,7 +147,7 @@
 	for(var/mob/living/simple_animal/hostile/carp/holodeck/C in holographic_mobs)
 		C.set_safety(!safety_disabled)
 		if (last_to_emag)
-			C.friends = list(last_to_emag)
+			C.mob_ai.friends = list(last_to_emag)
 
 /obj/machinery/computer/HolodeckControl/New()
 	..()

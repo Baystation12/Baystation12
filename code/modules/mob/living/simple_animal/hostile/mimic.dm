@@ -13,7 +13,7 @@
 	response_help = "touches"
 	response_disarm = "pushes"
 	response_harm = "hits"
-	speed = 4
+	move_delay = 4
 	maxHealth = 250
 	health = 250
 
@@ -34,12 +34,6 @@
 	minbodytemp = 0
 
 	faction = "mimic"
-	move_to_delay = 8
-
-/mob/living/simple_animal/hostile/mimic/FindTarget()
-	. = ..()
-	if(.)
-		audible_emote("growls at [.]")
 
 /mob/living/simple_animal/hostile/mimic/death()
 	..()
@@ -52,11 +46,8 @@
 
 // Aggro when you try to open them. Will also pickup loot when spawns and drop it when dies.
 /mob/living/simple_animal/hostile/mimic/crate
-
 	attacktext = "bitten"
-
-	stop_automated_movement = 1
-	wander = 0
+	knockdown_chance = 15
 	var/attempt_open = 0
 
 // Pickup loot
@@ -64,28 +55,6 @@
 	..()
 	for(var/obj/item/I in loc)
 		I.loc = src
-
-/mob/living/simple_animal/hostile/mimic/crate/DestroySurroundings()
-	..()
-	if(prob(90))
-		icon_state = "[initial(icon_state)]open"
-	else
-		icon_state = initial(icon_state)
-
-/mob/living/simple_animal/hostile/mimic/crate/ListTargets()
-	if(attempt_open)
-		return ..()
-	return view(src, 1)
-
-/mob/living/simple_animal/hostile/mimic/crate/FindTarget()
-	. = ..()
-	if(.)
-		trigger()
-
-/mob/living/simple_animal/hostile/mimic/crate/AttackingTarget()
-	. = ..()
-	if(.)
-		icon_state = initial(icon_state)
 
 /mob/living/simple_animal/hostile/mimic/crate/proc/trigger()
 	if(!attempt_open)
@@ -96,14 +65,6 @@
 	trigger()
 	..(damage)
 
-/mob/living/simple_animal/hostile/mimic/crate/LoseTarget()
-	..()
-	icon_state = initial(icon_state)
-
-/mob/living/simple_animal/hostile/mimic/crate/LostTarget()
-	..()
-	icon_state = initial(icon_state)
-
 /mob/living/simple_animal/hostile/mimic/crate/death()
 
 	var/obj/structure/closet/crate/C = new(get_turf(src))
@@ -111,14 +72,6 @@
 	for(var/obj/O in src)
 		O.loc = C
 	..()
-
-/mob/living/simple_animal/hostile/mimic/crate/AttackingTarget()
-	. =..()
-	var/mob/living/L = .
-	if(istype(L))
-		if(prob(15))
-			L.Weaken(2)
-			L.visible_message("<span class='danger'>\the [src] knocks down \the [L]!</span>")
 
 //
 // Copy Mimic
@@ -130,9 +83,9 @@ var/global/list/protected_objects = list(/obj/structure/table, /obj/structure/ca
 
 	health = 100
 	maxHealth = 100
+	knockdown_chance = 0
 	var/mob/living/creator = null // the creator
 	var/destroy_objects = 0
-	var/knockdown_people = 0
 
 /mob/living/simple_animal/hostile/mimic/copy/New(loc, var/obj/copy, var/mob/living/creator)
 	..(loc)
@@ -144,15 +97,18 @@ var/global/list/protected_objects = list(/obj/structure/table, /obj/structure/ca
 		M.loc = get_turf(src)
 	..()
 
+/*
+TODO - AI
 /mob/living/simple_animal/hostile/mimic/copy/ListTargets()
 	// Return a list of targets that isn't the creator
 	. = ..()
 	return . - creator
+*/
 
 /mob/living/simple_animal/hostile/mimic/copy/proc/CopyObject(var/obj/O, var/mob/living/creator)
 
 	if((istype(O, /obj/item) || istype(O, /obj/structure)) && !is_type_in_list(O, protected_objects))
-
+		// TODO: appearance = O
 		O.loc = src
 		name = O.name
 		desc = O.desc
@@ -162,9 +118,9 @@ var/global/list/protected_objects = list(/obj/structure/table, /obj/structure/ca
 
 		if(istype(O, /obj/structure))
 			health = (anchored * 50) + 50
-			destroy_objects = 1
+			// TODO - AI - destroy_objects = 1 -> destroy_probability > 0
 			if(O.density && O.anchored)
-				knockdown_people = 1
+				knockdown_chance = 15
 				melee_damage_lower *= 2
 				melee_damage_upper *= 2
 		else if(istype(O, /obj/item))
@@ -172,7 +128,7 @@ var/global/list/protected_objects = list(/obj/structure/table, /obj/structure/ca
 			health = 15 * I.w_class
 			melee_damage_lower = 2 + I.force
 			melee_damage_upper = 2 + I.force
-			move_to_delay = 2 * I.w_class
+			move_delay = 2 * I.w_class
 
 		maxHealth = health
 		if(creator)
@@ -180,16 +136,3 @@ var/global/list/protected_objects = list(/obj/structure/table, /obj/structure/ca
 			faction = "\ref[creator]" // very unique
 		return 1
 	return
-
-/mob/living/simple_animal/hostile/mimic/copy/DestroySurroundings()
-	if(destroy_objects)
-		..()
-
-/mob/living/simple_animal/hostile/mimic/copy/AttackingTarget()
-	. =..()
-	if(knockdown_people)
-		var/mob/living/L = .
-		if(istype(L))
-			if(prob(15))
-				L.Weaken(1)
-				L.visible_message("<span class='danger'>\the [src] knocks down \the [L]!</span>")
