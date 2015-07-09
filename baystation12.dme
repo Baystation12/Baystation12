@@ -1354,6 +1354,7 @@
 #include "code\modules\mob\new_player\skill.dm"
 #include "code\modules\mob\new_player\sprite_accessories.dm"
 #include "code\modules\mob_ai\mob_ai.dm"
+#include "code\modules\mob_ai\mob_ai_reactions.dm"
 #include "code\modules\mob_ai\simple_animal.dm"
 #include "code\modules\mob_ai\simple_animal_hostile.dm"
 #include "code\modules\mob_ai\simple_animal_hostile_retaliate.dm"

@@ -213,6 +213,7 @@ default behaviour is:
 /mob/living/proc/adjustBruteLoss(var/amount)
 	if(status_flags & GODMODE)	return 0	//godmode
 	bruteloss = min(max(bruteloss + amount, 0),(maxHealth*2))
+	return bruteloss
 
 /mob/living/proc/getOxyLoss()
 	return oxyloss
@@ -220,6 +221,7 @@ default behaviour is:
 /mob/living/proc/adjustOxyLoss(var/amount)
 	if(status_flags & GODMODE)	return 0	//godmode
 	oxyloss = min(max(oxyloss + amount, 0),(maxHealth*2))
+	return oxyloss
 
 /mob/living/proc/setOxyLoss(var/amount)
 	if(status_flags & GODMODE)	return 0	//godmode
@@ -231,6 +233,7 @@ default behaviour is:
 /mob/living/proc/adjustToxLoss(var/amount)
 	if(status_flags & GODMODE)	return 0	//godmode
 	toxloss = min(max(toxloss + amount, 0),(maxHealth*2))
+	return toxloss
 
 /mob/living/proc/setToxLoss(var/amount)
 	if(status_flags & GODMODE)	return 0	//godmode
@@ -242,6 +245,7 @@ default behaviour is:
 /mob/living/proc/adjustFireLoss(var/amount)
 	if(status_flags & GODMODE)	return 0	//godmode
 	fireloss = min(max(fireloss + amount, 0),(maxHealth*2))
+	return fireloss
 
 /mob/living/proc/getCloneLoss()
 	return cloneloss
