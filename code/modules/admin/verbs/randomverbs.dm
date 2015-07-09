@@ -468,7 +468,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	for(var/mob/living/silicon/ai/M in mob_list)
 		if (M.stat == 2)
 			usr << "Upload failed. No signal is being detected from the AI."
-		else if (M.see_in_dark == 0)
+		else if (!M.has_power)
 			usr << "Upload failed. Only a faint signal is being detected from the AI, and it is not responding to our requests. It may be low on power."
 		else
 			M.add_ion_law(input)
