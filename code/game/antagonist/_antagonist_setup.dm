@@ -70,3 +70,10 @@ var/global/list/antag_names_to_ids = list()
 	if(antag && islist(antag.current_antagonists))
 		return antag.current_antagonists
 	return list()
+
+/proc/player_is_antag(var/datum/mind/player)
+	for(var/antag_type in all_antag_types)
+		var/datum/antagonist/antag = all_antag_types[antag_type]
+		if(player in antag.current_antagonists)
+			return 1
+	return 0
