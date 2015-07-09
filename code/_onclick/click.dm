@@ -44,21 +44,21 @@
 		build_click(src, client.buildmode, params, A)
 		return
 
+	var/expand_tool = 0
 	var/list/modifiers = params2list(params)
-	if(modifiers["shift"] && modifiers["ctrl"])
-		CtrlShiftClickOn(A)
-		return
 	if(modifiers["middle"])
 		MiddleClickOn(A)
 		return
-	if(modifiers["shift"])
+	if(modifiers["shift"] && modifiers["ctrl"])
+		expand_tool = 1
+	else if(modifiers["shift"])
 		ShiftClickOn(A)
+		return
+	else if(modifiers["ctrl"])
+		CtrlClickOn(A)
 		return
 	if(modifiers["alt"]) // alt and alt-gr (rightalt)
 		AltClickOn(A)
-		return
-	if(modifiers["ctrl"])
-		CtrlClickOn(A)
 		return
 
 	if(stat || paralysis || stunned || weakened)
@@ -115,7 +115,7 @@
 			if(W.flags&USEDELAY)
 				next_move += 5
 
-			var/resolved = W.resolve_attackby(A, src)
+			var/resolved = W.resolve_attackby(A, src, expand_tool)
 			if(!resolved && A && W)
 				W.afterattack(A,src,1,params) // 1 indicates adjacency
 		else
@@ -136,7 +136,7 @@
 					next_move += 5
 
 				// Return 1 in attackby() to prevent afterattack() effects (when safely moving items for example)
-				var/resolved = W.resolve_attackby(A,src)
+				var/resolved = W.resolve_attackby(A,src, expand_tool)
 				if(!resolved && A && W)
 					W.afterattack(A,src,1,params) // 1: clicking something Adjacent
 			else
