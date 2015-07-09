@@ -106,6 +106,17 @@
 		if(smoked)
 			user << "The hive is smoked."
 		return 1
+	else if(istype(I, /obj/item/weapon/screwdriver))
+		if(bee_count)
+			user << "<span class='notice'>You can't dismantle \the [src] with these bees inside.</span>"
+			return
+		user << "<span class='notice'>You start dismantling \the [src]...</span>"
+		playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)
+		if(do_after(user, 30))
+			user.visible_message("<span class='notice'>[user] dismantles \the [src].</span>", "<span class='notice'>You dismantle \the [src].</span>")
+			new /obj/item/beehive_assembly(loc)
+			qdel(src)
+		return
 
 /obj/machinery/beehive/attack_hand(var/mob/user)
 	if(!closed)
@@ -185,8 +196,8 @@
 /obj/item/bee_smoker
 	name = "bee smoker"
 	desc = "A device used to calm down bees before harvesting honey."
-	icon = 'icons/obj/apiary_bees_etc.dmi'
-	icon_state = "apiary"
+	icon = 'icons/obj/device.dmi'
+	icon_state = "battererburnt"
 	w_class = 2
 
 /obj/item/honey_frame
@@ -209,15 +220,18 @@
 
 /obj/item/beehive_assembly
 	name = "beehive assembly"
-	desc = "Contains everything you need to build a beehive. Cannot be disassembled once deployed."
+	desc = "Contains everything you need to build a beehive."
 	icon = 'icons/obj/apiary_bees_etc.dmi'
 	icon_state = "apiary"
 
 /obj/item/beehive_assembly/attack_self(var/mob/user)
-	user.visible_message("<span class='notice'>[user] constructs a beehive.</span>", "<span class='notice'>You construct a beehive.</span>")
-	new /obj/machinery/beehive(get_turf(user))
-	user.drop_from_inventory(src)
-	qdel(src)
+	user << "<span class='notice'>You start assembling \the [src]...</span>"
+	if(do_after(user, 30))
+		user.visible_message("<span class='notice'>[user] constructs a beehive.</span>", "<span class='notice'>You construct a beehive.</span>")
+		new /obj/machinery/beehive(get_turf(user))
+		user.drop_from_inventory(src)
+		qdel(src)
+	return
 
 /obj/item/stack/wax
 	name = "wax"
