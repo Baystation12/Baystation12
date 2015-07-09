@@ -663,7 +663,7 @@
 		if(!check_rights(R_MOD,0) && !check_rights(R_ADMIN))  return
 
 		if(check_rights(R_MOD,0) && !check_rights(R_ADMIN) && !config.mods_can_job_tempban) // If mod and tempban disabled
-			usr << "\red mod jobbanning is disabled!"
+			usr << "<span class='warning'>Mod jobbanning is disabled!</span>"
 			return
 
 		var/mob/M = locate(href_list["jobban4"])
@@ -747,7 +747,7 @@
 					if(!mins)
 						return
 					if(check_rights(R_MOD, 0) && !check_rights(R_BAN) && mins > config.mod_job_tempban_max)
-						usr << "\red Moderators can only job tempban up to [config.mod_job_tempban_max] minutes!"
+						usr << "<span class='warning'> Moderators can only job tempban up to [config.mod_job_tempban_max] minutes!</span>"
 					var/reason = input(usr,"Reason?","Please State Reason","") as text|null
 					if(!reason)
 						return
@@ -858,6 +858,10 @@
 	else if(href_list["newban"])
 		if(!check_rights(R_MOD,0) && !check_rights(R_BAN))  return
 
+		if(check_rights(R_MOD,0) && !check_rights(R_ADMIN) && !config.mods_can_job_tempban) // If mod and tempban disabled
+			usr << "<span class='warning'>Mod jobbanning is disabled!</span>"
+			return
+
 		var/mob/M = locate(href_list["newban"])
 		if(!ismob(M)) return
 
@@ -869,7 +873,7 @@
 				if(!mins)
 					return
 				if(check_rights(R_MOD, 0) && !check_rights(R_BAN) && mins > config.mod_tempban_max)
-					usr << "\red Moderators can only job tempban up to [config.mod_tempban_max] minutes!"
+					usr << "<span class='warning'>Moderators can only job tempban up to [config.mod_tempban_max] minutes!</span>"
 					return
 				if(mins >= 525600) mins = 525599
 				var/reason = input(usr,"Reason?","reason","Griefer") as text|null
