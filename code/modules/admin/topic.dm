@@ -748,6 +748,7 @@
 						return
 					if(check_rights(R_MOD, 0) && !check_rights(R_BAN) && mins > config.mod_job_tempban_max)
 						usr << "<span class='warning'> Moderators can only job tempban up to [config.mod_job_tempban_max] minutes!</span>"
+						return
 					var/reason = input(usr,"Reason?","Please State Reason","") as text|null
 					if(!reason)
 						return
