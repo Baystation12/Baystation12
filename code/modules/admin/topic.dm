@@ -662,6 +662,10 @@
 	else if(href_list["jobban3"])
 		if(!check_rights(R_MOD,0) && !check_rights(R_ADMIN))  return
 
+		if(check_rights(R_MOD,0) && !check_rights(R_ADMIN) && !config.mods_can_job_tempban) // If mod and tempban disabled
+			usr << "\red mod jobbanning is disabled!"
+			return
+
 		var/mob/M = locate(href_list["jobban4"])
 		if(!ismob(M))
 			usr << "This can only be used on instances of type /mob"
@@ -742,6 +746,8 @@
 					var/mins = input(usr,"How long (in minutes)?","Ban time",1440) as num|null
 					if(!mins)
 						return
+					if(check_rights(R_MOD, 0) && !check_rights(R_BAN) && mins > config.mod_job_tempban_max)
+						usr << "\red Moderators can only job tempban up to [config.mod_job_tempban_max] minutes!"
 					var/reason = input(usr,"Reason?","Please State Reason","") as text|null
 					if(!reason)
 						return
@@ -861,6 +867,9 @@
 			if("Yes")
 				var/mins = input(usr,"How long (in minutes)?","Ban time",1440) as num|null
 				if(!mins)
+					return
+				if(check_rights(R_MOD, 0) && !check_rights(R_BAN) && mins > config.mod_tempban_max)
+					usr << "\red Moderators can only job tempban up to [config.mod_tempban_max] minutes!"
 					return
 				if(mins >= 525600) mins = 525599
 				var/reason = input(usr,"Reason?","reason","Griefer") as text|null
