@@ -213,9 +213,9 @@
 	else if(charge.charges < chems_to_use)
 		chems_to_use = charge.charges
 
-	var/mob/living/target_mob
+	var/mob/living/carbon/target_mob
 	if(target)
-		if(istype(target,/mob/living))
+		if(istype(target,/mob/living/carbon))
 			target_mob = target
 		else
 			return 0
