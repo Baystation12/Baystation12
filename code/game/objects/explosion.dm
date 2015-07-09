@@ -1,11 +1,5 @@
 //TODO: Flash range does nothing currently
 
-//A very crude linear approximatiaon of pythagoras theorem.
-/proc/cheap_pythag(var/dx, var/dy)
-	dx = abs(dx); dy = abs(dy);
-	if(dx>=dy)	return dx + (0.5*dy)	//The longest side add half the shortest side approximates the hypotenuse
-	else		return dy + (0.5*dx)
-
 ///// Z-Level Stuff
 proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impact_range, flash_range, adminlog = 1, z_transfer = 1)
 ///// Z-Level Stuff
@@ -88,7 +82,7 @@ proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impa
 		var/z0 = epicenter.z
 
 		for(var/turf/T in range(epicenter, max_range))
-			var/dist = cheap_pythag(T.x - x0,T.y - y0)
+			var/dist = sqrt((T.x - x0)**2 + (T.y - y0)**2)
 
 			if(dist < devastation_range)		dist = 1
 			else if(dist < heavy_impact_range)	dist = 2
