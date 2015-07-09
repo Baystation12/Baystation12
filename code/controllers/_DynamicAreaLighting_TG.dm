@@ -115,7 +115,7 @@ datum/light_source
 			dist = 0
 		else
 #ifdef LIGHTING_CIRCULAR
-			dist = cheap_hypotenuse(A.x, A.y, __x, __y)
+			dist = sqrt((A.x - __x)**2 + (A.y - __y)**2)
 #else
 			dist = max(abs(A.x - __x), abs(A.y - __y))
 #endif
