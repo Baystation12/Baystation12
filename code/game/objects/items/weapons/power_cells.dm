@@ -73,6 +73,13 @@
 	maxcharge = 10000
 	matter = list(DEFAULT_WALL_MATERIAL = 700, "glass" = 60)
 
+/obj/item/weapon/cell/mecha
+	name = "exosuit-grade power cell"
+	origin_tech = list(TECH_POWER = 3)
+	icon_state = "hcell"
+	maxcharge = 15000
+	matter = list(DEFAULT_WALL_MATERIAL = 700, "glass" = 70)
+
 /obj/item/weapon/cell/high/empty/New()
 	..()
 	charge = 0
@@ -107,7 +114,7 @@
 	origin_tech =  null
 	maxcharge = 30000 //determines how badly mobs get shocked
 	matter = list(DEFAULT_WALL_MATERIAL = 700, "glass" = 80)
-	
+
 	check_charge()
 		return 1
 	use()
