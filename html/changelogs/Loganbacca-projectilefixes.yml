@@ -1,0 +1,4 @@
+author: Loganbacca
+delete-after: True
+changes: 
+  - bugfix: "Fixed visual bugs with projectile effects."
