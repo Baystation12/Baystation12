@@ -61,10 +61,10 @@
 	var/guest_jobban = 1
 	var/usewhitelist = 0
 	var/kick_inactive = 0				//force disconnect for inactive players
-	var/show_mods
-	var/show_mentors
-	var/mods_can_tempban
-	var/mods_can_job_tempban
+	var/show_mods = 0
+	var/show_mentors = 0
+	var/mods_can_tempban = 0
+	var/mods_can_job_tempban = 0
 	var/mod_tempban_max = 1440
 	var/mod_job_tempban_max = 1440
 	var/load_jobs_from_txt = 0
