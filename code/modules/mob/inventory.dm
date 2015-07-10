@@ -77,13 +77,13 @@ var/list/slot_equipment_priority = list( \
 	// Try put it in their backpack
 	if(istype(src.back,/obj/item/weapon/storage))
 		var/obj/item/weapon/storage/backpack = src.back
-		if(backpack.contents.len < backpack.storage_slots)
-			newitem.loc = src.back
+		if(backpack.can_be_inserted(newitem, 1))
+			newitem.loc = backpack
 			return 1
 
 	// Try to place it in any item that can store stuff, on the mob.
 	for(var/obj/item/weapon/storage/S in src.contents)
-		if (S.contents.len < S.storage_slots)
+		if(S.can_be_inserted(newitem, 1))
 			newitem.loc = S
 			return 1
 	return 0

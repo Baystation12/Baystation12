@@ -46,7 +46,6 @@
 	icon_state = "eggbox"
 	icon_type = "egg"
 	name = "egg box"
-	storage_slots = 12
 	can_hold = list(
 		/obj/item/weapon/reagent_containers/food/snacks/egg,
 		/obj/item/weapon/reagent_containers/food/snacks/boiledegg
@@ -54,7 +53,7 @@
 
 /obj/item/weapon/storage/fancy/egg_box/New()
 	..()
-	for(var/i=1; i <= storage_slots; i++)
+	for(var/i=1; i <= 12; i++)
 		new /obj/item/weapon/reagent_containers/food/snacks/egg(src)
 	return
 
@@ -69,14 +68,13 @@
 	icon_state = "candlebox5"
 	icon_type = "candle"
 	item_state = "candlebox5"
-	storage_slots = 5
 	throwforce = 2
 	slot_flags = SLOT_BELT
 
 
 /obj/item/weapon/storage/fancy/candle_box/New()
 	..()
-	for(var/i=1; i <= storage_slots; i++)
+	for(var/i=1; i <= 5; i++)
 		new /obj/item/weapon/flame/candle(src)
 	return
 
@@ -90,7 +88,6 @@
 	icon = 'icons/obj/crayons.dmi'
 	icon_state = "crayonbox"
 	w_class = 2.0
-	storage_slots = 6
 	icon_type = "crayon"
 	can_hold = list(
 		/obj/item/weapon/pen/crayon

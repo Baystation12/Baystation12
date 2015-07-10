@@ -9,6 +9,7 @@
 	var/burning = null
 	var/hitsound = null
 	var/w_class = 3.0
+	var/storage_cost = null
 	var/slot_flags = 0		//This is used to determine on which slots an item can fit.
 	var/no_attack_log = 0			//If it's an item we don't want to log attack_logs with, set this to 1
 	pass_flags = PASSTABLE
@@ -339,7 +340,7 @@ var/list/global/slot_flags_enumeration = list(
 			var/allow = 0
 			if(H.back && istype(H.back, /obj/item/weapon/storage/backpack))
 				var/obj/item/weapon/storage/backpack/B = H.back
-				if(B.contents.len < B.storage_slots && w_class <= B.max_w_class)
+				if(B.can_be_inserted(src,1))
 					allow = 1
 			if(!allow)
 				return 0
