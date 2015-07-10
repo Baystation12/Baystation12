@@ -27,7 +27,7 @@
 	main_prop = TOOL_WRENCH
 
 /obj/item/weapon/screwdriver
-	properties = list(TOOL_SCREWDRIVER = 1, TOOL_CROWBAR = 0.1)
+	properties = list(TOOL_SCREWDRIVER = 1)
 	main_prop = TOOL_SCREWDRIVER
 
 /obj/item/weapon/wirecutters
@@ -63,6 +63,14 @@
 	attack_verb = list("constructed")
 
 	properties = list(TOOL_WRENCH = 2, TOOL_SCREWDRIVER = 2, TOOL_WIRECUTTERS = 2, TOOL_WELDER = 2, TOOL_CROWBAR = 2)
+
+// Ghetto
+
+/obj/item/stack/rods
+	properties = list(TOOL_CROWBAR = 0.3)
+
+/obj/item/weapon/coin
+	properties = list(TOOL_SCREWDRIVER = 0.2)
 
 /obj/proc/handle_tool(var/obj/item/I, var/mob/user, var/expand = 0)
 	var/list/actions = gather_actions()
