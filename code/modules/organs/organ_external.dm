@@ -744,7 +744,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 					I.loc = get_turf(src)
 			qdel(src)
 		if(DROPLIMB_BLUNT)
-			var/obj/effect/decal/cleanable/blood/gibs/gore = new owner.species.single_gib_type(get_turf(victim))
+			var/obj/effect/decal/cleanable/blood/gibs/gore = new victim.species.single_gib_type(get_turf(victim))
 			if(victim.species.flesh_color)
 				gore.fleshcolor = victim.species.flesh_color
 			if(victim.species.blood_color)
