@@ -296,25 +296,26 @@
 		before_move()
 		Move(location.return_turf())
 
-		if(first_step)
-			muzzle_effect(effect_transform)
-			first_step = 0
-		else
-			tracer_effect(effect_transform)
-
 		if(!bumped && !isturf(original))
 			if(loc == get_turf(original))
 				if(!(original in permutated))
 					if(Bump(original))
 						return
 
+		if(first_step)
+			muzzle_effect(effect_transform)
+			first_step = 0
+		else if(!bumped)
+			tracer_effect(effect_transform)
+
 		if(!hitscan)
 			sleep(step_delay)	//add delay between movement iterations if it's not a hitscan weapon
 
 /obj/item/projectile/proc/process_step(first_step = 0)
-
+	return
 
 /obj/item/projectile/proc/before_move()
+	return
 
 /obj/item/projectile/proc/setup_trajectory()
 	// trajectory dispersion
@@ -355,7 +356,10 @@
 			P.set_transform(M)
 			P.pixel_x = location.pixel_x
 			P.pixel_y = location.pixel_y
-			P.activate()
+			if(!hitscan)
+				P.activate(step_delay)	//if not a hitscan projectile, remove after a single delay
+			else
+				P.activate()
 
 /obj/item/projectile/proc/impact_effect(var/matrix/M)
 	if(ispath(tracer_type))
