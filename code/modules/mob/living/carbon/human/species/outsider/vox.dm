@@ -31,7 +31,8 @@
 	poison_type = "oxygen"
 	siemens_coefficient = 0.2
 
-	flags = CAN_JOIN | IS_WHITELISTED | NO_SCAN | HAS_EYE_COLOR
+	flags = CAN_JOIN | IS_WHITELISTED | NO_SCAN
+	appearance_flags = HAS_EYE_COLOR
 
 	blood_color = "#2299FC"
 	flesh_color = "#808D11"

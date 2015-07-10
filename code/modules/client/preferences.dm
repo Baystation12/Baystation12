@@ -649,11 +649,11 @@ datum/preferences
 		dat += "</br><b>Has excellent traction.</b>"
 	if(current_species.flags & NO_POISON)
 		dat += "</br><b>Immune to most poisons.</b>"
-	if(current_species.flags & HAS_SKIN_TONE)
+	if(current_species.appearance_flags & HAS_SKIN_TONE)
 		dat += "</br><b>Has a variety of skin tones.</b>"
-	if(current_species.flags & HAS_SKIN_COLOR)
+	if(current_species.appearance_flags & HAS_SKIN_COLOR)
 		dat += "</br><b>Has a variety of skin colours.</b>"
-	if(current_species.flags & HAS_EYE_COLOR)
+	if(current_species.appearance_flags & HAS_EYE_COLOR)
 		dat += "</br><b>Has a variety of eye colours.</b>"
 	if(current_species.flags & IS_PLANT)
 		dat += "</br><b>Has a plantlike physiology.</b>"

@@ -19,9 +19,9 @@ var/global/list/limb_icon_cache = list()
 		return
 	if(species && human.species && species.name != human.species.name)
 		return
-	if(!isnull(human.s_tone) && (human.species.flags & HAS_SKIN_TONE))
+	if(!isnull(human.s_tone) && (human.species.appearance_flags & HAS_SKIN_TONE))
 		s_tone = human.s_tone
-	if(human.species.flags & HAS_SKIN_COLOR)
+	if(human.species.appearance_flags & HAS_SKIN_COLOR)
 		s_col = list(human.r_skin, human.g_skin, human.b_skin)
 
 /obj/item/organ/external/proc/sync_colour_to_dna()
@@ -29,9 +29,9 @@ var/global/list/limb_icon_cache = list()
 	s_col = null
 	if(status & ORGAN_ROBOT)
 		return
-	if(!isnull(dna.GetUIValue(DNA_UI_SKIN_TONE)) && (species.flags & HAS_SKIN_TONE))
+	if(!isnull(dna.GetUIValue(DNA_UI_SKIN_TONE)) && (species.appearance_flags & HAS_SKIN_TONE))
 		s_tone = dna.GetUIValue(DNA_UI_SKIN_TONE)
-	if(species.flags & HAS_SKIN_COLOR)
+	if(species.appearance_flags & HAS_SKIN_COLOR)
 		s_col = list(dna.GetUIValue(DNA_UI_SKIN_R), dna.GetUIValue(DNA_UI_SKIN_G), dna.GetUIValue(DNA_UI_SKIN_B))
 
 /obj/item/organ/external/head/sync_colour_to_human(var/mob/living/carbon/human/human)
@@ -60,7 +60,7 @@ var/global/list/limb_icon_cache = list()
 			mob_icon.Blend(eyes_icon, ICON_OVERLAY)
 			overlays |= eyes_icon
 
-	if(owner.lip_style && (species && (species.flags & HAS_LIPS)))
+	if(owner.lip_style && (species && (species.appearance_flags & HAS_LIPS)))
 		var/icon/lip_icon = new/icon('icons/mob/human_face.dmi', "lips_[owner.lip_style]_s")
 		overlays |= lip_icon
 		mob_icon.Blend(lip_icon, ICON_OVERLAY)
