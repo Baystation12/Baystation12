@@ -21,7 +21,7 @@
 	health = 40
 	melee_damage_lower = 1
 	melee_damage_upper = 5
-	default_mob_ai = /datum/mob_ai/simple_animal/hostile/retaliate
+	default_mob_ai = /datum/mob_ai/friendly_retaliator
 	var/datum/reagents/udder = null
 
 /mob/living/simple_animal/hostile/retaliate/goat/New()

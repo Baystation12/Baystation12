@@ -14,11 +14,6 @@
 	var/icon_dead = ""
 	var/icon_gib = null	//We only try to show a gibbing animation if this exists.
 
-	var/list/speak = list()
-	var/speak_chance = 0
-	var/list/emote_hear = list()	//Hearable emotes
-	var/list/emote_see = list()		//Unlike speak_emote, the list of things in this variable only show by themselves with no spoken text. IE: Ian barks, Ian yaps
-
 	var/turns_per_move = 1
 	var/turns_since_move = 0
 	universal_speak = 0		//No, just no.
@@ -62,11 +57,16 @@
 	//Null rod stuff
 	var/supernatural = 0
 	var/purge = 0
-	var/default_mob_ai = /datum/mob_ai/simple_animal
+	var/default_mob_ai = /datum/mob_ai/friendly
 
 	// Attack stuff
 	var/projectiletype
 	var/projectilesound
+
+	var/rapid = 0
+	var/ranged = 0
+	var/casingtype
+	var/knockdown_chance = 0
 
 /mob/living/simple_animal/New()
 	..()
@@ -178,12 +178,6 @@
 	if(act)
 		..(act, type, desc)
 
-/mob/living/simple_animal/proc/visible_emote(var/act_desc)
-	custom_emote(1, act_desc)
-
-/mob/living/simple_animal/proc/audible_emote(var/act_desc)
-	custom_emote(2, act_desc)
-
 /mob/living/simple_animal/bullet_act(var/obj/item/projectile/Proj)
 	if(!Proj || Proj.nodamage)
 		return
@@ -198,10 +192,10 @@
 
 		if(I_HELP)
 			if (health > 0)
-				M.visible_message("\blue [M] [response_help] \the [src]")
+				M.visible_message("<span class='notice'>[M] [response_help] \the [src]</span>")
 
 		if(I_DISARM)
-			M.visible_message("\blue [M] [response_disarm] \the [src]")
+			M.visible_message("<span class='notice'>[M] [response_disarm] \the [src]</span>")
 			M.do_attack_animation(src)
 			//TODO: Push the mob away or something
 
@@ -219,12 +213,12 @@
 			G.affecting = src
 			LAssailant = M
 
-			M.visible_message("\red [M] has grabbed [src] passively!")
+			M.visible_message("<span class='danger'>[M] has grabbed [src] passively!</span>")
 			M.do_attack_animation(src)
 
 		if(I_HURT)
 			adjustBruteLoss(harm_intent_damage)
-			M.visible_message("\red [M] [response_harm] \the [src]")
+			M.visible_message("<span class='danger'>[M] [response_harm] \the [src]!</span>")
 			M.do_attack_animation(src)
 
 	return

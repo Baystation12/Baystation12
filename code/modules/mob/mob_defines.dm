@@ -93,7 +93,13 @@
 	var/list/pinned = list()            // List of things pinning this creature to walls (see living_defense.dm)
 	var/list/embedded = list()          // Embedded items, since simple mobs don't have organs.
 	var/list/languages = list()         // For speaking/listening.
+
+	var/speak_chance = 0
 	var/list/speak_emote = list("says") // Verbs used when speaking. Defaults to 'say' if speak_emote is null.
+	var/list/speak = list()         //Things said when speaking.
+	var/list/emote_hear = list()	//Hearable emotes
+	var/list/emote_see = list()		//Unlike speak_emote, the list of things in this variable only show by themselves with no spoken text. IE: Ian barks, Ian yaps
+
 	var/emote_type = 1		// Define emote default type, 1 for seen emotes, 2 for heard emotes
 	var/facing_dir = null   // Used for the ancient art of moonwalking.
 
@@ -223,4 +229,4 @@
 
 	var/list/active_genes=list()
 
-
+	var/datum/mob_ai/mob_ai		// Mob AI, if any

@@ -152,16 +152,20 @@
 	if(!T || !U)
 		return
 
-	var/obj/item/projectile/A = new projectiletype(loc)
-	playsound(loc, projectilesound, 75, 1)
+	spawn(0)
+		for(var/i = 0; i < (rapid ? 3 : 1); i++)
+			var/obj/item/projectile/A = new projectiletype(loc)
+			playsound(loc, projectilesound, 75, 1)
 
-	A.original = target
-	A.current = T
-	A.starting = T
-	A.yo = U.y - T.y
-	A.xo = U.x - T.x
-	spawn(1)
-		A.process()
+			A.firer = src
+			A.original = target
+			A.current = T
+			A.starting = T
+			A.yo = U.y - T.y
+			A.xo = U.x - T.x
+			spawn(1)
+				A.process()
+			sleep(2)
 
 /mob/living/simple_animal/UnarmedAttack(var/atom/A)
 	if(!..())

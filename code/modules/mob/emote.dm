@@ -86,3 +86,9 @@
 	if(input)
 		log_emote("Ghost/[src.key] : [input]")
 		say_dead_direct(input, src)
+
+/mob/proc/visible_emote(var/act_desc)
+	custom_emote(1, act_desc)
+
+/mob/proc/audible_emote(var/act_desc)
+	custom_emote(2, act_desc)
