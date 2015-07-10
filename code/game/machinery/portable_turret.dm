@@ -605,8 +605,12 @@ var/list/turret_icons
 	if(!raised) //the turret has to be raised in order to fire - makes sense, right?
 		return
 
-
 	update_icon()
+
+	//targeting check, can we hit them?
+	if(!check_trajectory(target, src))
+		return
+
 	var/obj/item/projectile/A
 	if(emagged || lethal)
 		A = new eprojectile(loc)
