@@ -1537,13 +1537,13 @@ MECHAS BELOW
 	desc = "Exosuit close-combat armor booster."
 	id = "mech_ccw_armor"
 	req_tech = list(TECH_MATERIAL = 5, TECH_COMBAT = 4)
-	build_path = /obj/item/mecha_parts/mecha_equipment/anticcw_armor_booster
+	build_path = /obj/item/mecha_parts/mecha_equipment/armor_booster/anticcw_armor_booster
 
 /datum/design/item/mecha/proj_armor
 	desc = "Exosuit projectile armor booster."
 	id = "mech_proj_armor"
 	req_tech = list(TECH_MATERIAL = 5, TECH_COMBAT = 5, TECH_ENGINERING=3)
-	build_path = /obj/item/mecha_parts/mecha_equipment/antiproj_armor_booster
+	build_path = /obj/item/mecha_parts/mecha_equipment/armor_booster/antiproj_armor_booster
 
 /datum/design/item/mecha/syringe_gun
 	desc = "Exosuit-mounted syringe gun and chemical synthesizer."

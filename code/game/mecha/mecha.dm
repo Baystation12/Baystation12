@@ -25,7 +25,15 @@
 	var/dir_in = 2//What direction will the mech face when entered/powered on? Defaults to South.
 	var/step_energy_drain = 10
 	var/health = 300 //health is health
-	var/deflect_chance = 10 //chance to deflect the incoming projectiles, hits, or lesser the effect of ex_act.
+	var/deflect_chance = 10 //chance to deflect incoming projectiles, hits, or lesser the effect of ex_act.
+	var/r_deflect_coeff = 1
+	var/m_deflect_coeff = 1
+	//ranged and melee damage multipliers
+	var/r_damage_coeff = 1
+	var/m_damage_coeff = 1
+	var/rhit_power_use = null
+	var/mhit_power_use = null
+
 	//the values in this list show how much damage will pass through, not how much will be absorbed.
 	var/list/damage_absorption = list("brute"=0.8,"fire"=1.2,"bullet"=0.9,"laser"=1,"energy"=1,"bomb"=1)
 	var/obj/item/weapon/cell/cell
@@ -35,7 +43,6 @@
 	var/add_req_access = 1
 	var/maint_access = 1
 	var/dna	//dna-locking the mech
-	var/list/proc_res = list() //stores proc owners, like proc_res["functionname"] = owner reference
 	var/datum/effect/effect/system/spark_spread/spark_system = new
 	var/lights = 0
 	var/lights_power = 6
@@ -86,9 +93,7 @@
 	icon_state += "-open"
 	add_radio()
 	add_cabin()
-	if(!add_airtank()) //we check this here in case mecha does not have an internal tank available by default - WIP
-		removeVerb(/obj/mecha/verb/connect_to_port)
-		removeVerb(/obj/mecha/verb/toggle_internal_tank)
+	add_airtank() //All mecha currently have airtanks. No need to check unless changes are made.
 	spark_system.set_up(2, 0, src)
 	spark_system.attach(src)
 	add_cell()
@@ -166,15 +171,8 @@
 	internal_tank = new /obj/machinery/portable_atmospherics/canister/air(src)
 	return internal_tank
 
-/obj/mecha/proc/add_cell(var/obj/item/weapon/cell/C=null)
-	if(C)
-		C.forceMove(src)
-		cell = C
-		return
-	cell = new(src)
-	cell.name = "high-capacity power cell"
-	cell.charge = 15000
-	cell.maxcharge = 15000
+/obj/mecha/proc/add_cell()
+	cell = new /obj/item/weapon/cell/mecha(src)
 
 /obj/mecha/proc/add_cabin()
 	cabin_air = new
@@ -192,7 +190,7 @@
 
 /obj/mecha/proc/add_iterators()
 	pr_int_temp_processor = new /datum/global_iterator/mecha_preserve_temp(list(src))
-	pr_inertial_movement = new /datum/global_iterator/mecha_intertial_movement(null,0)
+	pr_inertial_movement = new /datum/global_iterator/mecha_inertial_movement(null,0)
 	pr_give_air = new /datum/global_iterator/mecha_tank_give_air(list(src))
 	pr_internal_damage = new /datum/global_iterator/mecha_internal_damage(list(src),0)
 
@@ -281,12 +279,12 @@
 	if(!src.occupant || src.occupant != user ) return
 	if(user.stat) return
 	if(state)
-		occupant_message("<font color='red'>Maintenance protocols in effect</font>")
+		occupant_message("<font color='red'>Maintenance protocols in effect.</font>")
 		return
 	if(!get_charge()) return
 	if(src == target) return
 	var/dir_to_target = get_dir(src,target)
-	if(dir_to_target && !(dir_to_target & src.dir))//wrong direction
+	if(dir_to_target && !(dir_to_target & src.dir))
 		return
 	if(hasInternalDamage(MECHA_INT_CONTROL_LOST))
 		target = safepick(view(3,target))
@@ -352,18 +350,15 @@
 		return 0
 	if(connected_port)
 		if(world.time - last_message > 20)
-			src.occupant_message("Unable to move while connected to the air system port")
+			src.occupant_message("Unable to move while connected to the air system port.")
 			last_message = world.time
 		return 0
 	if(state)
-		occupant_message("<font color='red'>Maintenance protocols in effect</font>")
+		occupant_message("<font color='red'>Maintenance protocols in effect.</font>")
 		return
-	return domove(direction)
+	return do_move(direction)
 
-/obj/mecha/proc/domove(direction)
-	return call((proc_res["dyndomove"]||src), "dyndomove")(direction)
-
-/obj/mecha/proc/dyndomove(direction)
+/obj/mecha/proc/do_move(direction)
 	if(!can_move)
 		return 0
 	if(src.pr_inertial_movement.active())
@@ -479,21 +474,18 @@
 
 /obj/mecha/proc/take_damage(amount, type="brute")
 	if(amount)
-		var/damage = absorbDamage(amount,type)
+		var/damage = absorb_damage(amount,type)
 		health -= damage
 		update_health()
 		log_append_to_last("Took [damage] points of damage. Damage type: \"[type]\".",1)
 	return
 
-/obj/mecha/proc/absorbDamage(damage,damage_type)
-	return call((proc_res["dynabsorbdamage"]||src), "dynabsorbdamage")(damage,damage_type)
-
-/obj/mecha/proc/dynabsorbdamage(damage,damage_type)
+/obj/mecha/proc/absorb_damage(damage,damage_type)
 	return damage*(listgetindex(damage_absorption,damage_type) || 1)
 
 /obj/mecha/airlock_crush(var/crush_damage)
 	..()
-	take_damage(crush_damage)
+	take_damage(crush_damage*m_damage_coeff)
 	check_for_internal_damage(list(MECHA_INT_TEMP_CONTROL,MECHA_INT_TANK_BREACH,MECHA_INT_CONTROL_LOST))
 	return 1
 
@@ -510,8 +502,8 @@
 	if(istype(user,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = user
 		if(H.species.can_shred(user))
-			if(!prob(src.deflect_chance))
-				src.take_damage(15)
+			if(!prob(src.deflect_chance*m_deflect_coeff))
+				src.take_damage(15*m_damage_coeff)
 				src.check_for_internal_damage(list(MECHA_INT_TEMP_CONTROL,MECHA_INT_TANK_BREACH,MECHA_INT_CONTROL_LOST))
 				playsound(src.loc, 'sound/weapons/slash.ogg', 50, 1, -1)
 				user << "<span class='danger'>You slash at the armored suit!</span>"
@@ -526,8 +518,8 @@
 			user.visible_message("<span class='danger'>\The [user] hits \the [src]. Nothing happensm</span>","<span class='danger'>You hit \the [src] with no visible effect.</span>")
 			src.log_append_to_last("Armor saved.")
 		return
-	else if ((HULK in user.mutations) && !prob(src.deflect_chance))
-		src.take_damage(15)
+	else if ((HULK in user.mutations) && !prob(src.deflect_chance*m_deflect_coeff))
+		src.take_damage(15*m_damage_coeff)
 		src.check_for_internal_damage(list(MECHA_INT_TEMP_CONTROL,MECHA_INT_TANK_BREACH,MECHA_INT_CONTROL_LOST))
 		user.visible_message("<font color='red'><b>[user] hits [src.name], doing some damage.</b></font>", "<font color='red'><b>You hit [src.name] with all your might. The metal creaks and bends.</b></font>")
 	else
@@ -535,53 +527,43 @@
 		src.log_append_to_last("Armor saved.")
 	return
 
-/obj/mecha/hitby(atom/movable/A as mob|obj) //wrapper
+/obj/mecha/hitby(atom/movable/A as mob|obj)
 	..()
 	src.log_message("Hit by [A].",1)
-	call((proc_res["dynhitby"]||src), "dynhitby")(A)
-	return
-
-/obj/mecha/proc/dynhitby(atom/movable/A)
 	if(istype(A, /obj/item/mecha_parts/mecha_tracking))
 		A.forceMove(src)
 		src.visible_message("The [A] fastens firmly to [src].")
 		return
-	if(prob(src.deflect_chance) || istype(A, /mob))
+	if(prob(src.deflect_chance*r_deflect_coeff) || istype(A, /mob))
 		src.occupant_message("<span class='notice'>\The [A] bounces off the armor.</span>")
-		src.visible_message("\The [A] bounces off \the [src] armor")
+		src.visible_message("\The [A] bounces off \the [src] armor.")
 		src.log_append_to_last("Armor saved.")
 		if(istype(A, /mob/living))
 			var/mob/living/M = A
 			M.take_organ_damage(10)
 	else if(istype(A, /obj))
 		var/obj/O = A
-		if(O.throwforce)
-			src.take_damage(O.throwforce)
+		if(O.throwforce*r_damage_coeff)
+			src.take_damage(O.throwforce*r_damage_coeff)
 			src.check_for_internal_damage(list(MECHA_INT_TEMP_CONTROL,MECHA_INT_TANK_BREACH,MECHA_INT_CONTROL_LOST))
 	return
 
-
-/obj/mecha/bullet_act(var/obj/item/projectile/Proj) //wrapper
+/obj/mecha/bullet_act(var/obj/item/projectile/Proj)
 	src.log_message("Hit by projectile. Type: [Proj.name]([Proj.check_armour]).",1)
-	call((proc_res["dynbulletdamage"]||src), "dynbulletdamage")(Proj) //calls equipment
-	..()
-	return
-
-/obj/mecha/proc/dynbulletdamage(var/obj/item/projectile/Proj)
-	if(prob(src.deflect_chance))
+	if(prob(src.deflect_chance*r_deflect_coeff))
 		src.occupant_message("<span class='notice'>The armor deflects incoming projectile.</span>")
-		src.visible_message("The [src.name] armor deflects the projectile")
+		src.visible_message("The [src.name] armor deflects the projectile.")
 		src.log_append_to_last("Armor saved.")
 		return
 
-	if(Proj.damage_type == HALLOSS)
+	if(Proj.damage_type == HALLOSS && !(src.r_deflect_coeff > 1))
 		use_power(Proj.agony * 5)
 
 	if(!(Proj.nodamage))
 		var/ignore_threshold
 		if(istype(Proj, /obj/item/projectile/beam/pulse))
 			ignore_threshold = 1
-		src.take_damage(Proj.damage, Proj.check_armour)
+		src.take_damage(Proj.damage*r_damage_coeff, Proj.check_armour)
 		if(prob(25)) spark_system.start()
 		src.check_for_internal_damage(list(MECHA_INT_FIRE,MECHA_INT_TEMP_CONTROL,MECHA_INT_TANK_BREACH,MECHA_INT_CONTROL_LOST,MECHA_INT_SHORT_CIRCUIT),ignore_threshold)
 
@@ -602,6 +584,7 @@
 					break //give a chance to exit early
 
 	Proj.on_hit(src)
+	..()
 	return
 
 /obj/mecha/ex_act(severity)
@@ -663,22 +646,6 @@
 		src.check_for_internal_damage(list(MECHA_INT_FIRE, MECHA_INT_TEMP_CONTROL))
 	return
 
-/obj/mecha/proc/dynattackby(obj/item/weapon/W as obj, mob/user as mob)
-	src.log_message("Attacked by [W]. Attacker - [user]")
-	if(prob(src.deflect_chance))
-		user << "<span class='danger'>\The [W] bounces off [src.name].</span>"
-		src.log_append_to_last("Armor saved.")
-/*
-		for (var/mob/V in viewers(src))
-			if(V.client && !(V.blinded))
-				V.show_message("The [W] bounces off [src.name] armor.", 1)
-*/
-	else
-		src.occupant_message("<font color='red'><b>[user] hits [src] with [W].</b></font>")
-		user.visible_message("<font color='red'><b>[user] hits [src] with [W].</b></font>", "<font color='red'><b>You hit [src] with [W].</b></font>")
-		src.take_damage(W.force,W.damtype)
-		src.check_for_internal_damage(list(MECHA_INT_TEMP_CONTROL,MECHA_INT_TANK_BREACH,MECHA_INT_CONTROL_LOST))
-	return
 
 //////////////////////
 ////// AttackBy //////
@@ -745,10 +712,10 @@
 			src.cell = null
 			state = 4
 			user << "You unscrew and pry out the powercell."
-			src.log_message("Powercell removed")
+			src.log_message("Powercell removed.")
 		else if(state==4 && src.cell)
 			state=3
-			user << "You screw the cell in place"
+			user << "You screw the cell in place."
 		return
 
 	else if(istype(W, /obj/item/device/multitool))
@@ -797,7 +764,21 @@
 		return
 
 	else
-		call((proc_res["dynattackby"]||src), "dynattackby")(W,user)
+		src.log_message("Attacked by [W]. Attacker - [user]")
+		if(prob(src.deflect_chance*m_deflect_coeff))
+			user << "<span class='danger'>\The [W] bounces off [src.name].</span>"
+			src.log_append_to_last("Armor saved.")
+/*
+		for (var/mob/V in viewers(src))
+			if(V.client && !(V.blinded))
+				V.show_message("The [W] bounces off [src.name] armor.", 1)
+*/
+		else
+			src.occupant_message("<font color='red'><b>[user] hits [src] with [W].</b></font>")
+			user.visible_message("<font color='red'><b>[user] hits [src] with [W].</b></font>", "<font color='red'><b>You hit [src] with [W].</b></font>")
+			src.take_damage(W.force*m_damage_coeff,W.damtype)
+			src.check_for_internal_damage(list(MECHA_INT_TEMP_CONTROL,MECHA_INT_TANK_BREACH,MECHA_INT_CONTROL_LOST))
+	return
 /*
 		src.log_message("Attacked by [W]. Attacker - [user]")
 		if(prob(src.deflect_chance))
@@ -1245,7 +1226,7 @@
 	var/integrity = health/initial(health)*100
 	var/cell_charge = get_charge()
 	var/tank_pressure = internal_tank ? round(internal_tank.return_pressure(),0.01) : "None"
-	var/tank_temperature = internal_tank ? internal_tank.return_temperature() : "Unknown"
+	var/tank_temperature = internal_tank ? internal_tank.return_temperature() : "Unknown" //Results in type mismatch if there is no tank.
 	var/cabin_pressure = round(return_pressure(),0.01)
 	var/output = {"[report_internal_damage()]
 						[integrity<30?"<font color='red'><b>DAMAGE LEVEL CRITICAL</b></font><br>":null]
@@ -1653,16 +1634,11 @@
 	return (get_charge()>=amount)
 
 /obj/mecha/proc/get_charge()
-	return call((proc_res["dyngetcharge"]||src), "dyngetcharge")()
-
-/obj/mecha/proc/dyngetcharge()//returns null if no powercell, else returns cell.charge
-	if(!src.cell) return
+	if(!src.cell)
+		return
 	return max(0, src.cell.charge)
 
 /obj/mecha/proc/use_power(amount)
-	return call((proc_res["dynusepower"]||src), "dynusepower")(amount)
-
-/obj/mecha/proc/dynusepower(amount)
 	if(get_charge())
 		cell.use(amount)
 		return 1
@@ -1689,8 +1665,8 @@
 	src.log_message("Attacked. Attacker - [user].",1)
 
 	user.do_attack_animation(src)
-	if(!prob(src.deflect_chance))
-		src.take_damage(damage)
+	if(!prob(src.deflect_chance*m_deflect_coeff))
+		src.take_damage(damage*m_damage_coeff)
 		src.check_for_internal_damage(list(MECHA_INT_TEMP_CONTROL,MECHA_INT_TANK_BREACH,MECHA_INT_CONTROL_LOST))
 		visible_message("<span class='danger'>[user] [attack_message] [src]!</span>")
 		user.attack_log += text("\[[time_stamp()]\] <font color='red'>attacked [src.name]</font>")
@@ -1708,7 +1684,7 @@
 //////////////////////////////////////////
 
 
-/datum/global_iterator/mecha_preserve_temp  //normalizing cabin air temperature to 20 degrees celsium
+/datum/global_iterator/mecha_preserve_temp  //normalizing cabin air temperature to 20 degrees celsius
 	delay = 20
 
 	process(var/obj/mecha/mecha)
@@ -1750,7 +1726,7 @@
 			return stop()
 		return
 
-/datum/global_iterator/mecha_intertial_movement //inertial movement in space
+/datum/global_iterator/mecha_inertial_movement //inertial movement in space
 	delay = 7
 
 	process(var/obj/mecha/mecha as obj,direction)

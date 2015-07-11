@@ -498,19 +498,91 @@
 		return
 
 
-/obj/item/mecha_parts/mecha_equipment/anticcw_armor_booster //what is that noise? A BAWWW from TK mutants.
+/obj/item/mecha_parts/mecha_equipment/armor_booster
+	name = "armor booster"
+	desc = "Powered armor-enhancing mech equipment."
+	icon_state = "mecha_abooster_proj"
+	equip_cooldown = 10
+	energy_drain = 50
+	range = 0
+	var/datum/global_iterator/pr_armor_booster
+	var/deflect_coeff = 1
+	var/damage_coeff = 1
+	var/active
+
+	can_attach(obj/mecha/M as obj)
+		if(..())
+			return 1
+		return 0
+
+	attach(obj/mecha/M as obj)
+		..()
+		activate_boost()
+		pr_armor_booster = new /datum/global_iterator/active_armor_booster(list(src),0)
+		pr_armor_booster.set_delay(equip_cooldown)
+		pr_armor_booster.start()
+		return
+
+	detach()
+		if(active)
+			deactivate_boost()
+		pr_armor_booster.stop()
+		..()
+		return
+
+	get_equip_info()
+		if(!chassis) return
+		return "<span style=\"color:[equip_ready?"#0f0":"#f00"];\">*</span>&nbsp;[src.name]"
+
+	proc/activate_boost()
+		active = 1
+		return
+
+	proc/deactivate_boost()
+		active = 0
+		return
+
+	/datum/global_iterator/active_armor_booster
+
+		process(var/obj/item/mecha_parts/mecha_equipment/armor_booster/B)
+
+			if(!B.chassis)
+				B.set_ready_state(1)
+				stop()
+
+			if(!B.action_checks(1) && B.active)
+				B.deactivate_boost()
+				return
+			else if(B.action_checks(1) && !B.active)
+				B.activate_boost()
+				return
+
+			return
+
+/obj/item/mecha_parts/mecha_equipment/armor_booster/anticcw_armor_booster //what is that noise? A BAWWW from TK mutants.
 	name = "\improper CCW armor booster"
 	desc = "Close-combat armor booster. Boosts exosuit armor against armed melee attacks. Requires energy to operate."
 	icon_state = "mecha_abooster_ccw"
 	origin_tech = list(TECH_MATERIAL = 3)
-	equip_cooldown = 10
-	energy_drain = 50
-	range = 0
 	construction_cost = list(DEFAULT_WALL_MATERIAL=20000,"silver"=5000)
-	var/deflect_coeff = 1.15
-	var/damage_coeff = 0.8
+	deflect_coeff = 1.15
+	damage_coeff = 0.8
 
-	can_attach(obj/mecha/M as obj)
+	activate_boost()
+		chassis.m_deflect_coeff *= deflect_coeff
+		chassis.m_damage_coeff *= damage_coeff
+		chassis.mhit_power_use += energy_drain
+		..()
+		return
+
+	deactivate_boost()
+		chassis.m_deflect_coeff /= deflect_coeff
+		chassis.m_damage_coeff /= damage_coeff
+		chassis.mhit_power_use -= energy_drain
+		..()
+		return
+
+/*	can_attach(obj/mecha/M as obj)
 		if(..())
 			if(!M.proc_res["dynattackby"])
 				return 1
@@ -530,7 +602,7 @@
 		if(!chassis) return
 		return "<span style=\"color:[equip_ready?"#0f0":"#f00"];\">*</span>&nbsp;[src.name]"
 
-	proc/dynattackby(obj/item/weapon/W as obj, mob/user as mob)
+	/*proc/dynattackby(obj/item/weapon/W as obj, mob/user as mob)
 		if(!action_checks(user))
 			return chassis.dynattackby(W,user)
 		chassis.log_message("Attacked by [W]. Attacker - [user]")
@@ -545,44 +617,33 @@
 		set_ready_state(0)
 		chassis.use_power(energy_drain)
 		do_after_cooldown()
-		return
+		return*/*/
 
 
-/obj/item/mecha_parts/mecha_equipment/antiproj_armor_booster
+/obj/item/mecha_parts/mecha_equipment/armor_booster/antiproj_armor_booster
 	name = "\improper RW armor booster"
 	desc = "Ranged-weaponry armor booster. Boosts exosuit armor against ranged attacks. Completely blocks taser shots, but requires energy to operate."
 	icon_state = "mecha_abooster_proj"
 	origin_tech = list(TECH_MATERIAL = 4)
-	equip_cooldown = 10
-	energy_drain = 50
-	range = 0
 	construction_cost = list(DEFAULT_WALL_MATERIAL=20000,"gold"=5000)
-	var/deflect_coeff = 1.15
-	var/damage_coeff = 0.8
+	deflect_coeff = 1.15
+	damage_coeff = 0.8
 
-	can_attach(obj/mecha/M as obj)
-		if(..())
-			if(!M.proc_res["dynbulletdamage"] && !M.proc_res["dynhitby"])
-				return 1
-		return 0
-
-	attach(obj/mecha/M as obj)
-		..()
-		chassis.proc_res["dynbulletdamage"] = src
-		chassis.proc_res["dynhitby"] = src
-		return
-
-	detach()
-		chassis.proc_res["dynbulletdamage"] = null
-		chassis.proc_res["dynhitby"] = null
+	activate_boost()
+		chassis.r_deflect_coeff *= deflect_coeff
+		chassis.r_damage_coeff *= damage_coeff
+		chassis.rhit_power_use += energy_drain
 		..()
 		return
 
-	get_equip_info()
-		if(!chassis) return
-		return "<span style=\"color:[equip_ready?"#0f0":"#f00"];\">*</span>&nbsp;[src.name]"
+	deactivate_boost()
+		chassis.r_deflect_coeff /= deflect_coeff
+		chassis.r_damage_coeff /= damage_coeff
+		chassis.rhit_power_use -= energy_drain
+		..()
+		return
 
-	proc/dynbulletdamage(var/obj/item/projectile/Proj)
+/*	proc/dynbulletdamage(var/obj/item/projectile/Proj)
 		if(!action_checks(src))
 			return chassis.dynbulletdamage(Proj)
 		if(prob(chassis.deflect_chance*deflect_coeff))
@@ -616,7 +677,7 @@
 		set_ready_state(0)
 		chassis.use_power(energy_drain)
 		do_after_cooldown()
-		return
+		return */
 
 
 /obj/item/mecha_parts/mecha_equipment/repair_droid
@@ -740,24 +801,22 @@
 
 	detach()
 		pr_energy_relay.stop()
-//		chassis.proc_res["dynusepower"] = null
-		chassis.proc_res["dyngetcharge"] = null
+//		chassis.proc_res["dyngetcharge"] = null
 		..()
 		return
 
 	attach(obj/mecha/M)
 		..()
-		chassis.proc_res["dyngetcharge"] = src
-//		chassis.proc_res["dynusepower"] = src
+//		chassis.proc_res["dyngetcharge"] = src
 		return
 
 	can_attach(obj/mecha/M)
 		if(..())
-			if(!M.proc_res["dyngetcharge"])// && !M.proc_res["dynusepower"])
-				return 1
+		//	if(!M.proc_res["dyngetcharge"])// && !M.proc_res["dynusepower"])
+			return 1
 		return 0
 
-	proc/dyngetcharge()
+	/*proc/dyngetcharge()
 		if(equip_ready) //disabled
 			return chassis.dyngetcharge()
 		var/area/A = get_area(chassis)
@@ -767,7 +826,7 @@
 			charge = 1000 //making magic
 		else
 			return chassis.dyngetcharge()
-		return charge
+		return charge*/
 
 	proc/get_power_channel(var/area/A)
 		var/pow_chan
