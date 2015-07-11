@@ -141,13 +141,18 @@ obj/var/contaminated = 0
 
 /mob/living/carbon/human/proc/pl_suit_protected()
 	//Checks if the suit is adequately sealed.
-	if(wear_suit)
-		if(vsc.plc.PHORONGUARD_ONLY)
-			if(wear_suit.flags & PHORONGUARD) return 1
-		else
-			if(wear_suit.flags_inv & HIDEJUMPSUIT) return 1
-		//should check HIDETAIL as well, but for the moment tails are not a part that can be damaged separately
-	return 0
+	var/coverage = 0
+	for(var/obj/item/protection in list(wear_suit, gloves, shoes))
+		if(!protection) 
+			continue
+		if(vsc.plc.PHORONGUARD_ONLY && !(protection.flags & PHORONGUARD))
+			return 0
+		coverage |= protection.body_parts_covered
+	
+	if(vsc.plc.PHORONGUARD_ONLY)
+		return 1
+	
+	return BIT_TEST_ALL(coverage, UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS)
 
 /mob/living/carbon/human/proc/suit_contamination()
 	//Runs over the things that can be contaminated and does so.
