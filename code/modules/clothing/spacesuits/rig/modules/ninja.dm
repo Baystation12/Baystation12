@@ -120,7 +120,7 @@
 		return 0
 
 	for(var/atom/A in T)
-		if(A.density)
+		if(A.density && !(A.flags & ON_BORDER))
 			H << "<span class='warning'>You cannot teleport to a location with solid objects.</span>"
 			return 0
 
