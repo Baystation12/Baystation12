@@ -119,6 +119,11 @@
 		H << "<span class='warning'>You cannot use your teleporter on this Z-level.</span>"
 		return 0
 
+	for(var/atom/A in T)
+		if(A.density)
+			H << "<span class='warning'>You cannot teleport to a location with solid objects.</span>"
+			return 0
+
 	phase_out(H,get_turf(H))
 	H.loc = T
 	phase_in(H,get_turf(H))
