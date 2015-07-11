@@ -19,8 +19,7 @@
 
 	// Should this all be in Touch()?
 	if(istype(H))
-		if((H != src) && check_shields(0, H.name))
-			visible_message("\red <B>[H] attempted to touch [src]!</B>")
+		if(H != src && check_shields(0, null, H, H.name))
 			H.do_attack_animation(src)
 			return 0
 

@@ -17,7 +17,7 @@ emp_act
 	var/obj/item/organ/external/organ = get_organ()
 
 	//Shields
-	if(check_shields(P.damage, "the [P.name]"))
+	if(check_shields(P.damage, P, null, "the [P.name]"))
 		P.on_hit(src, 2, def_zone)
 		return 2
 
@@ -148,32 +148,9 @@ emp_act
 			return gear
 	return null
 
-/mob/living/carbon/human/proc/check_shields(var/damage = 0, var/attack_text = "the attack")
-	if(l_hand && istype(l_hand, /obj/item/weapon))//Current base is the prob(50-d/3)
-		var/obj/item/weapon/I = l_hand
-		if(I.IsShield() && (prob(50 - round(damage / 3))))
-			visible_message("\red <B>[src] blocks [attack_text] with the [l_hand.name]!</B>")
-			return 1
-	if(r_hand && istype(r_hand, /obj/item/weapon))
-		var/obj/item/weapon/I = r_hand
-		if(I.IsShield() && (prob(50 - round(damage / 3))))
-			visible_message("\red <B>[src] blocks [attack_text] with the [r_hand.name]!</B>")
-			return 1
-	if(wear_suit && istype(wear_suit, /obj/item/))
-		var/obj/item/I = wear_suit
-		if(I.IsShield() && (prob(35)))
-			visible_message("\red <B>The reactive teleport system flings [src] clear of [attack_text]!</B>")
-			var/list/turfs = new/list()
-			for(var/turf/T in orange(6))
-				if(istype(T,/turf/space)) continue
-				if(T.density) continue
-				if(T.x>world.maxx-6 || T.x<6)	continue
-				if(T.y>world.maxy-6 || T.y<6)	continue
-				turfs += T
-			if(!turfs.len) turfs += pick(/turf in orange(6))
-			var/turf/picked = pick(turfs)
-			if(!isturf(picked)) return
-			src.loc = picked
+/mob/living/carbon/human/proc/check_shields(var/damage = 0, var/atom/damage_source = null, var/mob/attacker = null, var/attack_text = "the attack")
+	for(var/obj/item/shield in list(l_hand, r_hand, wear_suit))
+		if(shield && shield.handle_shield(src, damage, damage_source, attacker, attack_text))
 			return 1
 	return 0
 
@@ -206,7 +183,7 @@ emp_act
 	if(user.a_intent == "disarm") effective_force = round(I.force/2)
 	var/hit_area = affecting.name
 
-	if((user != src) && check_shields(effective_force, "the [I.name]"))
+	if((user != src) && check_shields(effective_force, I, user, "the [I.name]"))
 		return 0
 
 	if(istype(I,/obj/item/weapon/card/emag))
@@ -335,7 +312,7 @@ emp_act
 
 		O.throwing = 0		//it hit, so stop moving
 
-		if ((O.thrower != src) && check_shields(throw_damage, "[O]"))
+		if ((O.thrower != src) && check_shields(throw_damage, O, thrower, "[O]"))
 			return
 
 		var/obj/item/organ/external/affecting = get_organ(zone)

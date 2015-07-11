@@ -113,8 +113,26 @@
 	slowdown = 1
 	armor = list(melee = 0, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 0, rad = 0)
 
-/obj/item/clothing/suit/armor/reactive/IsShield()
-	if(active)
+/obj/item/clothing/suit/armor/reactive/handle_shield(mob/user, var/damage, atom/damage_source = null, mob/attacker = null, var/attack_text = "the attack")
+	if(prob(50))
+		user.visible_message("<span class='danger'>The reactive teleport system flings [user] clear of the attack!</span>")
+		var/list/turfs = new/list()
+		for(var/turf/T in orange(6, user))
+			if(istype(T,/turf/space)) continue
+			if(T.density) continue
+			if(T.x>world.maxx-6 || T.x<6)	continue
+			if(T.y>world.maxy-6 || T.y<6)	continue
+			turfs += T
+		if(!turfs.len) turfs += pick(/turf in orange(6))
+		var/turf/picked = pick(turfs)
+		if(!isturf(picked)) return
+		
+		var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
+		spark_system.set_up(5, 0, user.loc)
+		spark_system.start()
+		playsound(user.loc, "sparks", 50, 1)
+		
+		user.loc = picked
 		return 1
 	return 0
 
