@@ -741,7 +741,9 @@
 		if(notbannedlist.len) //at least 1 unbanned job exists in joblist so we have stuff to ban.
 			switch(alert("Temporary Ban?",,"Yes","No", "Cancel"))
 				if("Yes")
-					if(!check_rights(R_MOD,0) && !check_rights(R_BAN, 0))  return
+					if(!check_rights(R_MOD,0) && !check_rights(R_BAN, 0))
+						usr << "<span class='warning'> You Cannot issue temporary job-bans!</span>"
+						return
 					if(config.ban_legacy_system)
 						usr << "\red Your server is using the legacy banning system, which does not support temporary job bans. Consider upgrading. Aborting ban."
 						return
@@ -861,7 +863,7 @@
 	else if(href_list["newban"])
 		if(!check_rights(R_MOD,0) && !check_rights(R_BAN, 0))
 			usr << "<span class='warning'>You do not have the appropriate permissions to add bans!</span>"
-		return
+			return
 
 		if(check_rights(R_MOD,0) && !check_rights(R_ADMIN, 0) && !config.mods_can_job_tempban) // If mod and tempban disabled
 			usr << "<span class='warning'>Mod jobbanning is disabled!</span>"
