@@ -37,7 +37,7 @@
 	var/dispersion = 0.0
 
 	var/damage = 10
-	var/damage_type = BRUTE //BRUTE, BURN, TOX, OXY, CLONE are the only things that should be in here
+	var/damage_type = BRUTE //BRUTE, BURN, TOX, OXY, CLONE, HALLOSS are the only things that should be in here
 	var/nodamage = 0 //Determines if the projectile will skip any damage inflictions
 	var/taser_effect = 0 //If set then the projectile will apply it's agony damage using stun_effect_act() to mobs it hits, and other damage will be ignored
 	var/check_armour = "bullet" //Defines what armor to use when it hits things.  Must be set to bullet, laser, energy,or bomb	//Cael - bio and rad are also valid
@@ -296,25 +296,26 @@
 		before_move()
 		Move(location.return_turf())
 
-		if(first_step)
-			muzzle_effect(effect_transform)
-			first_step = 0
-		else
-			tracer_effect(effect_transform)
-
 		if(!bumped && !isturf(original))
 			if(loc == get_turf(original))
 				if(!(original in permutated))
 					if(Bump(original))
 						return
 
+		if(first_step)
+			muzzle_effect(effect_transform)
+			first_step = 0
+		else if(!bumped)
+			tracer_effect(effect_transform)
+
 		if(!hitscan)
 			sleep(step_delay)	//add delay between movement iterations if it's not a hitscan weapon
 
 /obj/item/projectile/proc/process_step(first_step = 0)
-
+	return
 
 /obj/item/projectile/proc/before_move()
+	return
 
 /obj/item/projectile/proc/setup_trajectory()
 	// trajectory dispersion
@@ -331,6 +332,8 @@
 	effect_transform = new()
 	effect_transform.Scale(trajectory.return_hypotenuse(), 1)
 	effect_transform.Turn(-trajectory.return_angle())		//no idea why this has to be inverted, but it works
+
+	transform = turn(transform, -(trajectory.return_angle() + 90)) //no idea why 90 needs to be added, but it works
 
 /obj/item/projectile/proc/muzzle_effect(var/matrix/T)
 	if(silenced)
@@ -353,7 +356,10 @@
 			P.set_transform(M)
 			P.pixel_x = location.pixel_x
 			P.pixel_y = location.pixel_y
-			P.activate()
+			if(!hitscan)
+				P.activate(step_delay)	//if not a hitscan projectile, remove after a single delay
+			else
+				P.activate()
 
 /obj/item/projectile/proc/impact_effect(var/matrix/M)
 	if(ispath(tracer_type))
@@ -379,7 +385,7 @@
 		return //cannot shoot yourself
 	if(istype(A, /obj/item/projectile))
 		return
-	if(istype(A, /mob/living))
+	if(istype(A, /mob/living) || istype(A, /obj/mecha) || istype(A, /obj/vehicle))
 		result = 2 //We hit someone, return 1!
 		return
 	result = 1
@@ -418,15 +424,14 @@
 			if(istype(M))
 				return 1
 
-/proc/check_trajectory(atom/target as mob, var/mob/living/user as mob, var/pass_flags=PASSTABLE|PASSGLASS|PASSGRILLE, flags=null)  //Checks if you can hit them or not.
-	if(!istype(target) || !istype(user))
+/proc/check_trajectory(atom/target as mob|obj, atom/firer as mob|obj, var/pass_flags=PASSTABLE|PASSGLASS|PASSGRILLE, flags=null)  //Checks if you can hit them or not.
+	if(!istype(target) || !istype(firer))
 		return 0
-	var/obj/item/projectile/test/trace = new /obj/item/projectile/test(get_step_to(user,target)) //Making the test....
+	var/obj/item/projectile/test/trace = new /obj/item/projectile/test(get_turf(firer)) //Making the test....
 	trace.target = target
 	if(!isnull(flags))
 		trace.flags = flags //Set the flags...
 	trace.pass_flags = pass_flags //And the pass flags to that of the real projectile...
-	trace.firer = user
 	var/output = trace.process() //Test it!
 	qdel(trace) //No need for it anymore
 	return output //Send it back to the gun!

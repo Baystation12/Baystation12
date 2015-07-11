@@ -37,7 +37,7 @@
 
 		if(!C || !host || !(C.mob && istype(C.mob,/mob/dead))) return // We don't want to spam them repeatedly if they're already in a mob.
 
-		var/response = alert(C, "Someone is harvesting [display_name]. Would you like to play as one?", "Sentient plant harvest", "Yes", "No", "Never for this round.")
+		var/response = alert(C, "Someone is harvesting [display_name]. Would you like to play as one?", "Sentient plant harvest", "Yes", "No", "Never for this round")
 
 		if(!C || !host || !(C.mob && istype(C.mob,/mob/dead))) return // ...or accidentally accept an invalid argument for transfer.
 

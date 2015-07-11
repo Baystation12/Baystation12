@@ -176,6 +176,10 @@
 		user << "<span class='warning'>Plate \the [src] before reinforcing it!</span>"
 		return
 
+	if(flipped)
+		user << "<span class='warning'>Put \the [src] back in place before reinforcing it!</span>"
+		return
+
 	reinforced = common_material_add(S, user, "reinforc")
 	if(reinforced)
 		update_desc()
