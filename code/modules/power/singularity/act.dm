@@ -34,7 +34,7 @@
 				src << "<span class = 'warning'>The [S] pulls \the [hand] from your grip!</span>"
 	apply_effect(current_size * 3, IRRADIATE)
 	if(shoes)
-		if(shoes.flags & NOSLIP) return 0
+		if(shoes.item_flags & NOSLIP) return 0
 	..()
 
 /obj/singularity_act()
