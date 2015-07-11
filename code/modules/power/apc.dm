@@ -63,6 +63,7 @@
 	var/area/area
 	var/areastring = null
 	var/obj/item/weapon/cell/cell
+	var/chargelevel = 0.0005  // Cap for how fast APC cells charge, as a percentage-per-tick (0.01 means cellcharge is capped to 1% per second)
 	var/start_charge = 90				// initial cell charge %
 	var/cell_type = /obj/item/weapon/cell/apc
 	var/opened = 0 //0=closed, 1=opened, 2=cover removed
@@ -104,7 +105,6 @@
 	var/global/list/status_overlays_equipment
 	var/global/list/status_overlays_lighting
 	var/global/list/status_overlays_environ
-	var/chargelevel = CHARGELEVEL_DEFAULT // Cap for how fast APC cells charge, as a percentage-per-tick (0.01 means cellcharge is capped to 1% per second)
 
 /obj/machinery/power/apc/updateDialog()
 	if (stat & (BROKEN|MAINT))
