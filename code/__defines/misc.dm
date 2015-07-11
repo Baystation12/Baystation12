@@ -31,22 +31,22 @@
 #define MAX_GEAR_COST 5 // Used in chargen for accessory loadout limit.
 
 // Preference toggles.
-#define SOUND_ADMINHELP 1
-#define SOUND_MIDI      2
-#define SOUND_AMBIENCE  4
-#define SOUND_LOBBY     8
-#define CHAT_OOC        16
-#define CHAT_DEAD       32
-#define CHAT_GHOSTEARS  64
-#define CHAT_GHOSTSIGHT 128
-#define CHAT_PRAYER     256
-#define CHAT_RADIO      512
-#define CHAT_ATTACKLOGS 1024
-#define CHAT_DEBUGLOGS  2048
-#define CHAT_LOOC       4096
-#define CHAT_GHOSTRADIO 8192
-#define SHOW_TYPING     16384
-#define CHAT_NOICONS    32768
+#define SOUND_ADMINHELP 0x1
+#define SOUND_MIDI      0x2
+#define SOUND_AMBIENCE  0x4
+#define SOUND_LOBBY     0x8
+#define CHAT_OOC        0x10
+#define CHAT_DEAD       0x20
+#define CHAT_GHOSTEARS  0x40
+#define CHAT_GHOSTSIGHT 0x80
+#define CHAT_PRAYER     0x100
+#define CHAT_RADIO      0x200
+#define CHAT_ATTACKLOGS 0x400
+#define CHAT_DEBUGLOGS  0x800
+#define CHAT_LOOC       0x1000
+#define CHAT_GHOSTRADIO 0x2000
+#define SHOW_TYPING     0x4000
+#define CHAT_NOICONS    0x8000
 
 #define TOGGLES_DEFAULT (SOUND_ADMINHELP|SOUND_MIDI|SOUND_AMBIENCE|SOUND_LOBBY|CHAT_OOC|CHAT_DEAD|CHAT_GHOSTEARS|CHAT_GHOSTSIGHT|CHAT_PRAYER|CHAT_RADIO|CHAT_ATTACKLOGS|CHAT_LOOC)
 
@@ -153,9 +153,9 @@
 #define SHARD_SPLINTER "splinters"
 #define SHARD_NONE ""
 
-#define MATERIAL_UNMELTABLE 1
-#define MATERIAL_BRITTLE 2
-#define MATERIAL_PADDING 4
+#define MATERIAL_UNMELTABLE 0x1
+#define MATERIAL_BRITTLE    0x2
+#define MATERIAL_PADDING    0x4
 
 #define TABLE_BRITTLE_MATERIAL_MULTIPLIER 4 // Amount table damage is multiplied by if it is made of a brittle material (e.g. glass)
 

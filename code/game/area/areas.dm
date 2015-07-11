@@ -67,7 +67,7 @@
 		for(var/obj/machinery/door/firedoor/E in all_doors)
 			if(!E.blocked)
 				if(E.operating)
-					E.nextstate = CLOSED
+					E.nextstate = FIREDOOR_CLOSED
 				else if(!E.density)
 					spawn(0)
 						E.close()
@@ -78,7 +78,7 @@
 		for(var/obj/machinery/door/firedoor/E in all_doors)
 			if(!E.blocked)
 				if(E.operating)
-					E.nextstate = OPEN
+					E.nextstate = FIREDOOR_OPEN
 				else if(E.density)
 					spawn(0)
 						E.open()
@@ -92,7 +92,7 @@
 		for(var/obj/machinery/door/firedoor/D in all_doors)
 			if(!D.blocked)
 				if(D.operating)
-					D.nextstate = CLOSED
+					D.nextstate = FIREDOOR_CLOSED
 				else if(!D.density)
 					spawn()
 						D.close()
@@ -105,7 +105,7 @@
 		for(var/obj/machinery/door/firedoor/D in all_doors)
 			if(!D.blocked)
 				if(D.operating)
-					D.nextstate = OPEN
+					D.nextstate = FIREDOOR_OPEN
 				else if(D.density)
 					spawn(0)
 					D.open()
@@ -137,7 +137,7 @@
 		for(var/obj/machinery/door/firedoor/D in src)
 			if(!D.blocked)
 				if(D.operating)
-					D.nextstate = OPEN
+					D.nextstate = FIREDOOR_OPEN
 				else if(D.density)
 					spawn(0)
 					D.open()

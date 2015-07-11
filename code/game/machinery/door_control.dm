@@ -85,6 +85,15 @@
 /*
 	Airlock remote control
 */
+
+// Bitmasks for door switches.
+#define OPEN   0x1
+#define IDSCAN 0x2
+#define BOLTS  0x4
+#define SHOCK  0x8
+#define SAFE   0x10
+#undefine
+
 /obj/machinery/button/remote/airlock
 	name = "remote door-control"
 	desc = "It controls doors, remotely."
