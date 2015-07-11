@@ -8,6 +8,8 @@
 	var/obj/item/weapon/circuitboard/circuit = null
 
 /obj/structure/computerframe/attackby(var/obj/item/I, var/mob/user, var/expand_tool)
+	add_fingerprint(user)
+
 	if(handle_tool(I, user, expand_tool))
 		return
 
@@ -76,14 +78,14 @@
 		if(TOOL_WRENCH)
 			if(state == 0)
 				user << "<span class='notice'>You start wrenching \the [src] into place...</span>"
-				if(do_after(user, 20 / efficiency))
+				if(do_after(user, 20 / efficiency) && state == 0)
 					user << "<span class='notice'>You wrench \the [src] into place.</span>"
 					anchored = 1
 					state = 1
 				return 1
 			if(state == 1)
 				user << "<span class='notice'>You start unfastening \the [src]...</span>"
-				if(do_after(user, 20 / efficiency))
+				if(do_after(user, 20 / efficiency) && state == 1)
 					user << "<span class='notice'>You unfasten the frame.</span>"
 					anchored = 0
 					state = 0
@@ -91,21 +93,21 @@
 		if(TOOL_SCREWDRIVER)
 			if(state == 1 && circuit)
 				user << "<span class='notice'>You start screwing the circuit board into place...</span>"
-				if(do_after(user, 10 / efficiency))
+				if(do_after(user, 10 / efficiency) && state == 1 && circuit)
 					user << "<span class='notice'>You screw the circuit board into place.</span>"
 					state = 2
 					icon_state = "2"
 				return 1
 			if(state == 2 && circuit)
 				user << "<span class='notice'>You start unfastening the circuit board...</span>"
-				if(do_after(user, 10 / efficiency))
+				if(do_after(user, 10 / efficiency) && state == 2 && circuit)
 					user << "<span class='notice'>You unfasten the circuit board.</span>"
 					state = 1
 					icon_state = "1"
 				return 1
 			if(state == 4)
 				user << "<span class='notice'>You start connecting the monitor...</span>"
-				if(do_after(user, 10 / efficiency))
+				if(do_after(user, 10 / efficiency) && state == 4)
 					user << "<span class='notice'>You connect the monitor.</span>"
 					var/B = new circuit.build_path(loc)
 					circuit.construct(B)
@@ -113,7 +115,7 @@
 		if(TOOL_WIRECUTTERS)
 			if(state == 3)
 				user << "<span class='notice'>You start to remove the cables...</span>"
-				if(do_after(user, 10 / efficiency))
+				if(do_after(user, 10 / efficiency) && state == 3)
 					user << "<span class='notice'>You remove the cables.</span>"
 					state = 2
 					icon_state = "2"
@@ -123,14 +125,14 @@
 			if(state == 0)
 				user << "<span class='notice'>You start deconstructing the frame...</span>"
 				I.use_tool(TOOL_WELDER, user, 1)
-				if(do_after(user, 20 / efficiency))
+				if(do_after(user, 20 / efficiency) && state == 0)
 					user << "<span class='notice'>You deconstruct the frame.</span>"
 					new /obj/item/stack/material/steel(loc, 5)
 					qdel(src)
 		if(TOOL_CROWBAR)
 			if(state == 1 && circuit)
 				user << "<span class='notice'>You start removing the circuit board...</span>"
-				if(do_after(user, 10 / efficiency))
+				if(do_after(user, 10 / efficiency) && state == 1 && circuit)
 					user << "<span class='notice'>You remove the circuit board.</span>"
 					state = 1
 					icon_state = "0"
@@ -139,7 +141,7 @@
 				return 1
 			if(state == 4)
 				user << "<span class='notice'>You start removing the glass panel...</span>"
-				if(do_after(user, 10 / efficiency))
+				if(do_after(user, 10 / efficiency) && state == 4)
 					user << "<span class='notice'>You remove the glass panel.</span>"
 					state = 3
 					icon_state = "3"

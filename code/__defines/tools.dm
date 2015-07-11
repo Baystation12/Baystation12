@@ -4,6 +4,6 @@
 #define TOOL_WELDER "Welder"
 #define TOOL_CROWBAR "Crowbar"
 #define TOOL_KNIFE "Knife"
-#define TOOL_HATCHET "Hatchet"
+#define TOOL_AXE "Axe"
 #define TOOL_FORK "Fork"
 #define TOOL_SPOON "Spoon"
