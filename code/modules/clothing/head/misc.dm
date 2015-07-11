@@ -83,7 +83,6 @@
 	desc = "A large, featureless white orb mean to be worn on your head. How do you even see out of this thing?"
 	icon_state = "cueball"
 	item_state = "cueball"
-	flags = HEADCOVERSMOUTH
 	flags_inv = BLOCKHAIR
 	body_parts_covered = HEAD|FACE|EYES
 
@@ -100,7 +99,6 @@
 	desc = "A helmet made out of a box."
 	icon_state = "cardborg_h"
 	item_state = "cardborg_h"
-	flags = HEADCOVERSMOUTH
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE
 	body_parts_covered = HEAD|FACE|EYES
 
@@ -108,7 +106,6 @@
 	name = "justice hat"
 	desc = "fight for what's righteous!"
 	icon_state = "justicered"
-	flags = HEADCOVERSMOUTH
 	flags_inv = BLOCKHAIR
 	body_parts_covered = HEAD|EYES
 

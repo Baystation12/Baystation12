@@ -4,7 +4,6 @@
 
 /obj/item/clothing/head/helmet/space/rig
 	name = "helmet"
-	flags = HEADCOVERSMOUTH
 	item_flags = THICKMATERIAL
 	flags_inv = 		 HIDEEARS|HIDEEYES|HIDEFACE|BLOCKHAIR
 	body_parts_covered = HEAD|FACE|EYES

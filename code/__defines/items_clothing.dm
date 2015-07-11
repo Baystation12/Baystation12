@@ -29,15 +29,10 @@
 #define ON_BORDER          0x8   // Item has priority to check when entering or leaving.
 #define NOBLOODY           0x10   // Used for items if they don't want to get a blood overlay.
 #define NODELAY            0x20   // 1 second attack-by delay skipped (Can be used once every 0.2s). Most objects have a 1s attack-by delay, which doesn't require a flag.
+#define OPENCONTAINER      0x40 // Is an open container for chemistry purposes.
+#define PHORONGUARD        0x80 // Does not get contaminated by phoron.
+#define	NOREACT            0x100 // Reagents don't react inside this container.
 #define PROXMOVE           0x200  // Does this object require proximity checking in Enter()?
-
-//Use these flags to indicate if an item obscures the specified slots from view, whereas body_parts_covered seems to be used to indicate what body parts the item protects.
-#define   MASKCOVERSMOUTH 0x100 // On other items, these are just for mask/head.
-#define   HEADCOVERSMOUTH 0x100
-
-#define OPENCONTAINER          0x800 // Is an open container for chemistry purposes.
-#define PHORONGUARD            0x2000 // Does not get contaminated by phoron.
-#define	NOREACT                0x4000 // Reagents don't react inside this container.
 
 //Flags for items (equipment)
 #define THICKMATERIAL          0x1  // Prevents syringes, parapens and hyposprays if equiped to slot_suit or slot_head.
@@ -45,6 +40,7 @@
 #define AIRTIGHT               0x4  // Functions with internals.
 #define NOSLIP                 0x8  // Prevents from slipping on wet floors, in space, etc.
 #define BLOCK_GAS_SMOKE_EFFECT 0x10 // Blocks the effect that chemical clouds would have on a mob -- glasses, mask and helmets ONLY! (NOTE: flag shared with ONESIZEFITSALL)
+#define FLEXIBLEMATERIAL       0x20 // At the moment, masks with this flag will not prevent eating even if they are covering your face.
 
 // Flags for pass_flags.
 #define PASSTABLE  0x1
