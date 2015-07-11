@@ -70,6 +70,8 @@
 			candidates -= player
 		else if(!can_become_antag(player))
 			candidates -= player
+		else if(player_is_antag(player))
+			candidates -= player
 	return candidates
 
 /datum/antagonist/proc/attempt_random_spawn()

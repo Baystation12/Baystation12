@@ -71,6 +71,8 @@
 	if(ismob(loc))
 		var/mob/m = loc
 		m.unEquip(src, 1)
+		m.update_inv_r_hand()
+		m.update_inv_l_hand()
 	return ..()
 
 /obj/item/device
