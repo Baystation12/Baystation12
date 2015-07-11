@@ -4,7 +4,7 @@
 
 /obj/item/clothing/head/helmet/space/rig
 	name = "helmet"
-	flags = HEADCOVERSEYES | BLOCKHAIR | HEADCOVERSMOUTH | THICKMATERIAL
+	flags = BLOCKHAIR | HEADCOVERSMOUTH | THICKMATERIAL
 	flags_inv = 		 HIDEEARS|HIDEEYES|HIDEFACE
 	body_parts_covered = HEAD|FACE|EYES
 	heat_protection =    HEAD|FACE|EYES

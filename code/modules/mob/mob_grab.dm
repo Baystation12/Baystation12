@@ -359,11 +359,11 @@
 						if(state < GRAB_NECK)
 							assailant << "<span class='warning'>You require a better grab to do this.</span>"
 							return
-						if((affecting:head && affecting:head.flags & HEADCOVERSEYES) || \
-							(affecting:wear_mask && affecting:wear_mask.flags & MASKCOVERSEYES) || \
-							(affecting:glasses && affecting:glasses.flags & GLASSESCOVERSEYES))
-							assailant << "<span class='danger'>You're going to need to remove the eye covering first.</span>"
-							return
+						for(var/slot in list(slot_wear_mask, slot_head, slot_glasses))
+							var/obj/item/protection = affecting.get_equipped_item(slot)
+							if(istype(protection) && (protection.body_parts_covered & EYES))
+								assailant << "<span class='danger'>You're going to need to remove the eye covering first.</span>"
+								return
 						if(!affecting.has_eyes())
 							assailant << "<span class='danger'>You cannot locate any eyes on [affecting]!</span>"
 							return

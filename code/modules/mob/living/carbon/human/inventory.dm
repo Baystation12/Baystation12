@@ -328,17 +328,16 @@ This saves us from having to call add_fingerprint() any time something is put in
 	switch(slot)
 		if(slot_wear_mask)
 			covering = src.head
-			check_flags = HEADCOVERSMOUTH
+			check_flags = FACE
 		if(slot_glasses)
 			covering = src.head
-			check_flags = HEADCOVERSEYES
+			check_flags = EYES
 		if(slot_gloves, slot_w_uniform)
 			covering = src.wear_suit
 
-	if(covering)
-		if((covering.body_parts_covered & I.body_parts_covered) || (covering.flags & check_flags))
-			user << "<span class='warning'>\The [covering] is in the way.</span>"
-			return 0
+	if(covering && (covering.body_parts_covered & (I.body_parts_covered|check_flags)))
+		user << "<span class='warning'>\The [covering] is in the way.</span>"
+		return 0
 	return 1
 
 /mob/living/carbon/human/get_equipped_item(var/slot)

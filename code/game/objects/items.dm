@@ -418,14 +418,12 @@ var/list/global/slot_flags_enumeration = list(
 /obj/item/proc/eyestab(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
 
 	var/mob/living/carbon/human/H = M
-	if(istype(H) && ( \
-			(H.head && H.head.flags & HEADCOVERSEYES) || \
-			(H.wear_mask && H.wear_mask.flags & MASKCOVERSEYES) || \
-			(H.glasses && H.glasses.flags & GLASSESCOVERSEYES) \
-		))
-		// you can't stab someone in the eyes wearing a mask!
-		user << "<span class='warning'>You're going to need to remove the eye covering first.</span>"
-		return
+	if(istype(H))
+		for(var/obj/item/protection in list(H.head, H.wear_mask, H.glasses))
+			if(protection && (protection.body_parts_covered & EYES))
+				// you can't stab someone in the eyes wearing a mask!
+				user << "<span class='warning'>You're going to need to remove the eye covering first.</span>"
+				return
 
 	if(!M.has_eyes())
 		user << "<span class='warning'>You cannot locate any eyes on [M]!</span>"

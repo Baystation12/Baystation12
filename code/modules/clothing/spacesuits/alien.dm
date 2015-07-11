@@ -45,7 +45,7 @@
 /obj/item/clothing/head/helmet/space/vox
 	armor = list(melee = 60, bullet = 50, laser = 30, energy = 15, bomb = 30, bio = 30, rad = 30)
 	siemens_coefficient = 0.6
-	flags = HEADCOVERSEYES|STOPPRESSUREDAMAGE
+	flags = STOPPRESSUREDAMAGE
 	species_restricted = list("Vox")
 	sprite_sheets = list("Vox" = 'icons/mob/species/vox/head.dmi')
 

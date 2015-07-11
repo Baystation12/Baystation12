@@ -36,9 +36,6 @@
 #define PROXMOVE           0x200  // Does this object require proximity checking in Enter()?
 
 //Use these flags to indicate if an item obscures the specified slots from view, whereas body_parts_covered seems to be used to indicate what body parts the item protects.
-#define GLASSESCOVERSEYES 0x200
-#define    MASKCOVERSEYES 0x200 // Get rid of some of the other retardation in these flags.
-#define    HEADCOVERSEYES 0x200 // Feel free to reallocate these numbers for other purposes.
 #define   MASKCOVERSMOUTH 0x400 // On other items, these are just for mask/head.
 #define   HEADCOVERSMOUTH 0x400
 

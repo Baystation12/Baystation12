@@ -97,14 +97,14 @@ obj/var/contaminated = 0
 			if(!wear_mask)
 				burn_eyes()
 			else
-				if(!(wear_mask.flags & MASKCOVERSEYES))
+				if(!(wear_mask.body_parts_covered & EYES))
 					burn_eyes()
 		else
-			if(!(head.flags & HEADCOVERSEYES))
+			if(!(head.body_parts_covered & EYES))
 				if(!wear_mask)
 					burn_eyes()
 				else
-					if(!(wear_mask.flags & MASKCOVERSEYES))
+					if(!(wear_mask.body_parts_covered & EYES))
 						burn_eyes()
 
 	//Genetic Corruption
@@ -135,7 +135,7 @@ obj/var/contaminated = 0
 		if(vsc.plc.PHORONGUARD_ONLY)
 			if(head.flags & PHORONGUARD)
 				return 1
-		else if(head.flags & HEADCOVERSEYES)
+		else if(head.body_parts_covered & EYES)
 			return 1
 	return 0
 
