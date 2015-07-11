@@ -28,23 +28,21 @@
 #define NOBLUDGEON         0x2    // When an item has this it produces no "X has been hit by Y with Z" message with the default handler.
 #define AIRTIGHT           0x4    // Functions with internals.
 #define USEDELAY           0x8    // 1 second extra delay on use. (Can be used once every 2s)
-#define NOSHIELD           0x10   // Weapon not affected by shield.
-#define CONDUCT            0x20   // Conducts electricity. (metal etc.)
-#define ON_BORDER          0x40   // Item has priority to check when entering or leaving.
-#define NOBLOODY           0x80   // Used for items if they don't want to get a blood overlay.
-#define NODELAY            0x100  // 1 second attack-by delay skipped (Can be used once every 0.2s). Most objects have a 1s attack-by delay, which doesn't require a flag.
-#define PROXMOVE           0x200  // Does this object require proximity checking in Enter()?
+#define CONDUCT            0x10   // Conducts electricity. (metal etc.)
+#define ON_BORDER          0x20   // Item has priority to check when entering or leaving.
+#define NOBLOODY           0x40   // Used for items if they don't want to get a blood overlay.
+#define NODELAY            0x80   // 1 second attack-by delay skipped (Can be used once every 0.2s). Most objects have a 1s attack-by delay, which doesn't require a flag.
+#define PROXMOVE           0x8000  // Does this object require proximity checking in Enter()?
 
 //Use these flags to indicate if an item obscures the specified slots from view, whereas body_parts_covered seems to be used to indicate what body parts the item protects.
-#define   MASKCOVERSMOUTH 0x400 // On other items, these are just for mask/head.
-#define   HEADCOVERSMOUTH 0x400
+#define   MASKCOVERSMOUTH 0x100 // On other items, these are just for mask/head.
+#define   HEADCOVERSMOUTH 0x100
 
-#define THICKMATERIAL          0x800  // From /tg/station: prevents syringes, parapens and hyposprays if the external suit or helmet (if targeting head) has this flag. Example: space suits, biosuit, bombsuits, thick suits that cover your body. (NOTE: flag shared with NOSLIP for shoes)
-#define NOSLIP                 0x800  // Prevents from slipping on wet floors, in space, etc.
-#define OPENCONTAINER          0x1000 // Is an open container for chemistry purposes.
-#define BLOCK_GAS_SMOKE_EFFECT 0x2000 // Blocks the effect that chemical clouds would have on a mob -- glasses, mask and helmets ONLY! (NOTE: flag shared with ONESIZEFITSALL)
-#define ONESIZEFITSALL         0x2000
-#define PHORONGUARD            0x4000 // Does not get contaminated by phoron.
+#define THICKMATERIAL          0x200  // From /tg/station: prevents syringes, parapens and hyposprays if the external suit or helmet (if targeting head) has this flag. Example: space suits, biosuit, bombsuits, thick suits that cover your body. (NOTE: flag shared with NOSLIP for shoes)
+#define NOSLIP                 0x400  // Prevents from slipping on wet floors, in space, etc.
+#define OPENCONTAINER          0x800 // Is an open container for chemistry purposes.
+#define BLOCK_GAS_SMOKE_EFFECT 0x1000 // Blocks the effect that chemical clouds would have on a mob -- glasses, mask and helmets ONLY! (NOTE: flag shared with ONESIZEFITSALL)
+#define PHORONGUARD            0x2000 // Does not get contaminated by phoron.
 #define	NOREACT                0x4000 // Reagents don't react inside this container.
 
 // Flags for pass_flags.

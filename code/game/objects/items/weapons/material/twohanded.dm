@@ -187,7 +187,6 @@
 	force_wielded = 30
 	wieldsound = 'sound/weapons/saberon.ogg'
 	unwieldsound = 'sound/weapons/saberoff.ogg'
-	flags = NOSHIELD
 	origin_tech = list(TECH_MAGNET = 3, TECH_ILLEGAL = 4)
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	sharp = 1
@@ -228,7 +227,6 @@
 	throw_speed = 3
 	edge = 1
 	sharp = 1
-	flags = NOSHIELD
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	attack_verb = list("attacked", "poked", "jabbed", "torn", "gored")
 	default_material = "glass"

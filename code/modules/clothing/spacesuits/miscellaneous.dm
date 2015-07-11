@@ -67,7 +67,7 @@
 	icon_state = "santa"
 	item_state = "santa"
 	slowdown = 0
-	flags = ONESIZEFITSALL | STOPPRESSUREDAMAGE
+	flags = STOPPRESSUREDAMAGE
 	allowed = list(/obj/item) //for stuffing exta special presents
 
 //Space pirate outfit

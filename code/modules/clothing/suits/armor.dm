@@ -17,7 +17,6 @@
 	icon_state = "armor"
 	item_state = "armor"
 	blood_overlay_type = "armor"
-	flags = ONESIZEFITSALL
 	armor = list(melee = 50, bullet = 15, laser = 50, energy = 10, bomb = 25, bio = 0, rad = 0)
 
 /obj/item/clothing/suit/armor/vest/security
@@ -98,7 +97,6 @@
 	icon_state = "detective-armor"
 	item_state = "armor"
 	blood_overlay_type = "armor"
-	flags = ONESIZEFITSALL
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
 	armor = list(melee = 50, bullet = 15, laser = 50, energy = 10, bomb = 25, bio = 0, rad = 0)
 
