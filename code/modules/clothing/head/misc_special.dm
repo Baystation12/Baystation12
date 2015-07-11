@@ -125,8 +125,8 @@
 	name = "carved pumpkin"
 	desc = "A jack o' lantern! Believed to ward off evil spirits."
 	icon_state = "hardhat0_pumpkin"//Could stand to be renamed
-	flags = HEADCOVERSMOUTH | BLOCKHAIR
-	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE
+	flags = HEADCOVERSMOUTH
+	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCKHAIR
 	body_parts_covered = HEAD|FACE|EYES
 	brightness_on = 2
 	light_overlay = "helmet_light"
@@ -156,4 +156,5 @@
 	desc = "You can hear the distant sounds of rhythmic electronica."
 	icon_state = "richard"
 	body_parts_covered = HEAD|FACE
-	flags = HEADCOVERSMOUTH|BLOCKHAIR
+	flags = HEADCOVERSMOUTH
+	flags_inv = BLOCKHAIR

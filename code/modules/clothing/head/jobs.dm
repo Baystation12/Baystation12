@@ -38,7 +38,7 @@
 	name = "chaplain's hood"
 	desc = "It's hood that covers the head. It keeps you warm during the space winters."
 	icon_state = "chaplain_hood"
-	flags = BLOCKHAIR
+	flags_inv = BLOCKHAIR
 	body_parts_covered = HEAD
 
 //Chaplain
@@ -46,7 +46,7 @@
 	name = "nun hood"
 	desc = "Maximum piety in this star system."
 	icon_state = "nun_hood"
-	flags = BLOCKHAIR
+	flags_inv = BLOCKHAIR
 	body_parts_covered = HEAD
 
 //Mime
@@ -95,7 +95,7 @@
 	name = "surgical cap"
 	desc = "A cap surgeons wear during operations. Keeps their hair from tickling your internal organs."
 	icon_state = "surgcap_blue"
-	flags = BLOCKHEADHAIR
+	flags_inv = BLOCKHEADHAIR
 
 /obj/item/clothing/head/surgery/purple
 	desc = "A cap surgeons wear during operations. Keeps their hair from tickling your internal organs. This one is deep purple."

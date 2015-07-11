@@ -46,8 +46,6 @@
 #define ONESIZEFITSALL         0x2000
 #define PHORONGUARD            0x4000 // Does not get contaminated by phoron.
 #define	NOREACT                0x4000 // Reagents don't react inside this container.
-#define BLOCKHEADHAIR          0x4    // Temporarily removes the user's hair overlay. Leaves facial hair.
-#define BLOCKHAIR              0x8000 // Temporarily removes the user's hair, facial and otherwise.
 
 // Flags for pass_flags.
 #define PASSTABLE  0x1
@@ -68,6 +66,9 @@
 #define HIDEEARS 0x2 // Headsets and such.
 #define HIDEEYES 0x4 // Glasses.
 #define HIDEFACE 0x8 // Dictates whether we appear as "Unknown".
+
+#define BLOCKHEADHAIR   0x20    // Hides the user's hair overlay. Leaves facial hair.
+#define BLOCKHAIR       0x40    // Hides the user's hair, facial and otherwise.
 
 // Slots.
 #define slot_back        1

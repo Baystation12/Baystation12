@@ -48,8 +48,8 @@
 	name = "magus helm"
 	icon_state = "magus"
 	desc = "A helm worn by the followers of Nar-Sie."
-	flags_inv = HIDEFACE
-	flags = HEADCOVERSMOUTH | BLOCKHAIR
+	flags_inv = HIDEFACE | BLOCKHAIR
+	flags = HEADCOVERSMOUTH
 	body_parts_covered = HEAD|FACE|EYES
 
 /obj/item/clothing/head/culthood/alt

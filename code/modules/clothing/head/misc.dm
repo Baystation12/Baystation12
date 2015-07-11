@@ -56,7 +56,7 @@
 	name = "hastur's hood"
 	desc = "It's unspeakably stylish"
 	icon_state = "hasturhood"
-	flags = BLOCKHAIR
+	flags_inv = BLOCKHAIR
 	body_parts_covered = HEAD|FACE|EYES
 
 /obj/item/clothing/head/nursehat
@@ -74,8 +74,7 @@
 		)
 	icon_state = "syndicate"
 	desc = "A plastic replica of a bloodthirsty mercenary's space helmet, you'll look just like a real murderous criminal operative in this! This is a toy, it is not made for use in space!"
-	flags = BLOCKHAIR
-	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE
+	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCKHAIR
 	siemens_coefficient = 2.0
 	body_parts_covered = HEAD|FACE|EYES
 
@@ -84,8 +83,8 @@
 	desc = "A large, featureless white orb mean to be worn on your head. How do you even see out of this thing?"
 	icon_state = "cueball"
 	item_state = "cueball"
-	flags = HEADCOVERSMOUTH|BLOCKHAIR
-	flags_inv = 0
+	flags = HEADCOVERSMOUTH
+	flags_inv = BLOCKHAIR
 	body_parts_covered = HEAD|FACE|EYES
 
 /obj/item/clothing/head/greenbandana
@@ -109,7 +108,8 @@
 	name = "justice hat"
 	desc = "fight for what's righteous!"
 	icon_state = "justicered"
-	flags = HEADCOVERSMOUTH|BLOCKHAIR
+	flags = HEADCOVERSMOUTH
+	flags_inv = BLOCKHAIR
 	body_parts_covered = HEAD|EYES
 
 /obj/item/clothing/head/justice/blue
@@ -202,7 +202,7 @@
 	name = "witch costume wig"
 	desc = "Eeeee~heheheheheheh!"
 	icon_state = "witch"
-	flags = BLOCKHAIR
+	flags_inv = BLOCKHAIR
 	siemens_coefficient = 2.0
 
 /obj/item/clothing/head/chicken
@@ -213,7 +213,7 @@
 		slot_l_hand_str = "chickensuit",
 		slot_r_hand_str = "chickensuit",
 		)
-	flags = BLOCKHAIR
+	flags_inv = BLOCKHAIR
 	siemens_coefficient = 0.7
 	body_parts_covered = HEAD|FACE|EYES
 
@@ -221,7 +221,7 @@
 	name = "bear pelt hat"
 	desc = "Fuzzy."
 	icon_state = "bearpelt"
-	flags = BLOCKHAIR
+	flags_inv = BLOCKHAIR
 	siemens_coefficient = 0.7
 
 /obj/item/clothing/head/xenos
@@ -232,8 +232,7 @@
 		slot_r_hand_str = "xenos_helm",
 		)
 	desc = "A helmet made out of chitinous alien hide."
-	flags = BLOCKHAIR
-	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE
+	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCKHAIR
 	siemens_coefficient = 2.0
 	body_parts_covered = HEAD|FACE|EYES
 
@@ -245,7 +244,7 @@
 		slot_l_hand_str = "pwig",
 		slot_r_hand_str = "pwig",
 		)
-	flags = BLOCKHAIR
+	flags_inv = BLOCKHAIR
 	siemens_coefficient = 2.0 //why is it so conductive?!
 	body_parts_covered = 0
 
