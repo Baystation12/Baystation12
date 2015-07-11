@@ -37,7 +37,7 @@
 	var/dispersion = 0.0
 
 	var/damage = 10
-	var/damage_type = BRUTE //BRUTE, BURN, TOX, OXY, CLONE are the only things that should be in here
+	var/damage_type = BRUTE //BRUTE, BURN, TOX, OXY, CLONE, HALLOSS are the only things that should be in here
 	var/nodamage = 0 //Determines if the projectile will skip any damage inflictions
 	var/taser_effect = 0 //If set then the projectile will apply it's agony damage using stun_effect_act() to mobs it hits, and other damage will be ignored
 	var/check_armour = "bullet" //Defines what armor to use when it hits things.  Must be set to bullet, laser, energy,or bomb	//Cael - bio and rad are also valid
@@ -385,7 +385,7 @@
 		return //cannot shoot yourself
 	if(istype(A, /obj/item/projectile))
 		return
-	if(istype(A, /mob/living))
+	if(istype(A, /mob/living) || istype(A, /obj/mecha) || istype(A, /obj/vehicle))
 		result = 2 //We hit someone, return 1!
 		return
 	result = 1
@@ -424,15 +424,14 @@
 			if(istype(M))
 				return 1
 
-/proc/check_trajectory(atom/target as mob, var/mob/living/user as mob, var/pass_flags=PASSTABLE|PASSGLASS|PASSGRILLE, flags=null)  //Checks if you can hit them or not.
-	if(!istype(target) || !istype(user))
+/proc/check_trajectory(atom/target as mob|obj, atom/firer as mob|obj, var/pass_flags=PASSTABLE|PASSGLASS|PASSGRILLE, flags=null)  //Checks if you can hit them or not.
+	if(!istype(target) || !istype(firer))
 		return 0
-	var/obj/item/projectile/test/trace = new /obj/item/projectile/test(get_step_to(user,target)) //Making the test....
+	var/obj/item/projectile/test/trace = new /obj/item/projectile/test(get_turf(firer)) //Making the test....
 	trace.target = target
 	if(!isnull(flags))
 		trace.flags = flags //Set the flags...
 	trace.pass_flags = pass_flags //And the pass flags to that of the real projectile...
-	trace.firer = user
 	var/output = trace.process() //Test it!
 	qdel(trace) //No need for it anymore
 	return output //Send it back to the gun!

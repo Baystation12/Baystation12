@@ -474,19 +474,23 @@ var/list/turret_icons
 	if(!L)
 		return TURRET_NOT_TARGET
 
-	// If emagged not even the dead get a rest
-	if(emagged)
-		return L.stat ? TURRET_SECONDARY_TARGET : TURRET_PRIORITY_TARGET
-
-	if(issilicon(L))	// Don't target silica
+	if(!emagged && issilicon(L))	// Don't target silica
 		return TURRET_NOT_TARGET
 
-	if(L.stat)		//if the perp is dead/dying, no need to bother really
+	if(L.stat && !emagged)		//if the perp is dead/dying, no need to bother really
 		return TURRET_NOT_TARGET	//move onto next potential victim!
 
-	var/dst = get_dist(src, L)	//if it's too far away, why bother?
-	if(dst > 7)
-		return 0
+	if(get_dist(src, L) > 7)	//if it's too far away, why bother?
+		return TURRET_NOT_TARGET
+
+	if(!check_trajectory(L, src))	//check if we have true line of sight
+		return TURRET_NOT_TARGET
+
+	if(emagged)		// If emagged not even the dead get a rest
+		return L.stat ? TURRET_SECONDARY_TARGET : TURRET_PRIORITY_TARGET
+
+	if(lethal && locate(/mob/living/silicon/ai) in get_turf(L))		//don't accidentally kill the AI!
+		return TURRET_NOT_TARGET
 
 	if(check_synth)	//If it's set to attack all non-silicons, target them!
 		if(L.lying)
@@ -498,6 +502,7 @@ var/list/turret_icons
 
 	if(isanimal(L) || issmall(L)) // Animals are not so dangerous
 		return check_anomalies ? TURRET_SECONDARY_TARGET : TURRET_NOT_TARGET
+	
 	if(isxenomorph(L) || isalien(L)) // Xenos are dangerous
 		return check_anomalies ? TURRET_PRIORITY_TARGET	: TURRET_NOT_TARGET
 
@@ -604,7 +609,6 @@ var/list/turret_icons
 
 	if(!raised) //the turret has to be raised in order to fire - makes sense, right?
 		return
-
 
 	update_icon()
 	var/obj/item/projectile/A
