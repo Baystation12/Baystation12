@@ -1,0 +1,5 @@
+author: Loganbacca
+delete-after: True
+changes: 
+  - bugfix: "Turrets no longer burn holes through the AI."
+  - tweak: "Projectiles now have a chance of hitting mobs riding cargo trains."

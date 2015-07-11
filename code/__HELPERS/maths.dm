@@ -1,15 +1,6 @@
 // Macro functions.
 #define RAND_F(LOW, HIGH) (rand()*(HIGH-LOW) + LOW)
 
-// List of square roots for the numbers 1-100.
-var/list/sqrtTable = list(1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5,
-                          5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 7, 7,
-                          7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8,
-                          8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 10)
-
-/proc/Clamp(val, min, max)
-	return max(min, min(val, max))
-
 // min is inclusive, max is exclusive
 /proc/Wrap(val, min, max)
 	var/d = max - min
@@ -101,18 +92,18 @@ var/list/sqrtTable = list(1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 
 // if they are imaginary.
 /proc/SolveQuadratic(a, b, c)
 	ASSERT(a)
-	
+
 	. = list()
 	var/discriminant = b*b - 4*a*c
 	var/bottom       = 2*a
-	
+
 	// Return if the roots are imaginary.
 	if(discriminant < 0)
 		return
-	
+
 	var/root = sqrt(discriminant)
 	. += (-b + root) / bottom
-	
+
 	// If discriminant == 0, there would be two roots at the same position.
 	if(discriminant != 0)
 		. += (-b - root) / bottom

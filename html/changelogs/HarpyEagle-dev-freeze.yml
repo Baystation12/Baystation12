@@ -1,3 +1,4 @@
 author: HarpyEagle
-changes: []
+changes:
+  - imageadd: "Added inhand sprites for flashes, flashbangs, emp and other grenades."
 delete-after: false
