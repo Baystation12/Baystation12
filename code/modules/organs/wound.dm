@@ -315,12 +315,32 @@ datum/wound/cut/massive
 
 /** EXTERNAL ORGAN LOSS **/
 /datum/wound/lost_limb
-    damage_type = CUT
-    stages = list("ripped stump" = 65, "bloody stump" = 50, "clotted stump" = 25, "scarred stump" = 0)
-    max_bleeding_stage = 3
 
-    can_merge(var/datum/wound/other)
-        return 0 //cannot be merged
+/datum/wound/lost_limb/New(var/obj/item/organ/external/lost_limb, var/losstype, var/clean)
+	var/damage_amt = lost_limb.max_damage
+	if(clean) damage_amt /= 2
+	
+	switch(losstype)
+		if(DROPLIMB_EDGE, DROPLIMB_BLUNT)
+			damage_type = CUT
+			max_bleeding_stage = 3
+			stages = list(
+				"ripped stump" = damage_amt*1.3,
+				"bloody stump" = damage_amt, 
+				"clotted stump" = damage_amt*0.5, 
+				"scarred stump" = 0
+				)
+		if(DROPLIMB_BURN)
+			damage_type = BURN
+			max_bleeding_stage = 1
+			stages = list(
+				"ripped charred stump" = damage_amt*1.3,
+				"charred stump" = damage_amt,
+				"scarred stump" = damage_amt*0.5,
+				"scarred stump" = 0
+				)
+	
+	..(damage_amt)
 
-/datum/wound/lost_limb/small
-    stages = list("ripped hole" = 40, "bloody hole" = 30, "clotted hole" = 15, "scarred hole" = 0)
+/datum/wound/lost_limb/can_merge(var/datum/wound/other)
+	return 0 //cannot be merged

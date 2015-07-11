@@ -381,7 +381,9 @@ datum/controller/vote
 				if(usr.client.holder)
 					initiate_vote("custom",usr.key)
 			else
-				submit_vote(usr.ckey, round(text2num(href_list["vote"])))
+				var/t = round(text2num(href_list["vote"]))
+				if(t) // It starts from 1, so there's no problem
+					submit_vote(usr.ckey, t)
 		usr.vote()
 
 
