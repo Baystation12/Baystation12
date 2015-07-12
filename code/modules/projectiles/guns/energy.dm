@@ -1,6 +1,6 @@
 /obj/item/weapon/gun/energy
-	name = "energy gun"
-	desc = "A basic energy-based gun."
+	name = "LAEP90 Perun"
+	desc = "Another bestseller of Lawson Arms and the FTU, the 'Perun' is a versatile energy based sidearm, capable of switching between low and high capacity projectile settings. In other words : Stun or Kill."
 	icon_state = "energy"
 	fire_sound = 'sound/weapons/Taser.ogg'
 	fire_sound_text = "laser blast"
@@ -11,7 +11,7 @@
 	var/projectile_type = /obj/item/projectile/beam/practice
 	var/modifystate
 	var/charge_meter = 1	//if set, the icon state will be chosen based on the current charge
-	
+
 	//self-recharging
 	var/self_recharge = 0	//if set, the weapon will recharge itself
 	var/use_external_power = 0 //if set, the weapon will look for an external power source to draw from, otherwise it recharges magically
@@ -41,15 +41,15 @@
 		charge_tick++
 		if(charge_tick < recharge_time) return 0
 		charge_tick = 0
-		
+
 		if(!power_supply || power_supply.charge >= power_supply.maxcharge)
 			return 0 // check if we actually need to recharge
-		
+
 		if(use_external_power)
 			var/obj/item/weapon/cell/external = get_external_power_supply()
 			if(!external || !external.use(charge_cost)) //Take power from the borg...
 				return 0
-		
+
 		power_supply.give(charge_cost) //... to recharge the shot
 		update_icon()
 	return 1
@@ -77,13 +77,13 @@
 /obj/item/weapon/gun/energy/update_icon()
 	if(charge_meter)
 		var/ratio = power_supply.charge / power_supply.maxcharge
-		
+
 		//make sure that rounding down will not give us the empty state even if we have charge for a shot left.
 		if(power_supply.charge < charge_cost)
 			ratio = 0
 		else
 			ratio = max(round(ratio, 0.25) * 100, 25)
-		
+
 		if(modifystate)
 			icon_state = "[modifystate][ratio]"
 		else

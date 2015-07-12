@@ -98,8 +98,8 @@
  */
 /obj/item/weapon/melee/energy/sword
 	color
-	name = "energy sword"
-	desc = "May the force be within you."
+	name = "GM Ltd Directed Energy Tool"
+	desc = "Originally created by Grayson Manufactories Ltd, this 'energy sword' was intended to be used as a mining cutter. As soon as the underworld got the specs of this device, they repurposed it to an effective, deadly CQC weapon."
 	icon_state = "sword0"
 	active_force = 30
 	active_throwforce = 20

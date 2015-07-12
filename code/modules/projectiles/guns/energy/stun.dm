@@ -1,6 +1,6 @@
 /obj/item/weapon/gun/energy/taser
-	name = "taser gun"
-	desc = "A small, low capacity gun used for non-lethal takedowns."
+	name = "NT Mk30 NL"
+	desc = "A small, low capacity gun used for non-lethal takedown. This is NT's personal design. There are many like it, but this one is NT's."
 	icon_state = "taser"
 	item_state = null	//so the human update icon uses the icon_state instead.
 	fire_sound = 'sound/weapons/Taser.ogg'
@@ -20,8 +20,8 @@
 
 
 /obj/item/weapon/gun/energy/stunrevolver
-	name = "stun revolver"
-	desc = "A high-tech revolver that fires stun cartridges. The stun cartridges can be recharged using a conventional energy weapon recharger."
+	name = "LAEP20 Zeus"
+	desc = "A high-tech revolver that fires stun cartridges,designed by Lawson Arms and produced under the wing of the FTU. The stun cartridges can be recharged using a conventional energy weapon recharger."
 	icon_state = "stunrevolver"
 	item_state = "stunrevolver"
 	fire_sound = 'sound/weapons/Gunshot.ogg'
