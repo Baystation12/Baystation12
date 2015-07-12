@@ -62,8 +62,13 @@ var/list/gamemode_cache = list()
 	var/respawn = 1
 	var/guest_jobban = 1
 	var/usewhitelist = 0
-	var/mods_are_mentors = 0
 	var/kick_inactive = 0				//force disconnect for inactive players after this many minutes, if non-0
+	var/show_mods = 0
+	var/show_mentors = 0
+	var/mods_can_tempban = 0
+	var/mods_can_job_tempban = 0
+	var/mod_tempban_max = 1440
+	var/mod_job_tempban_max = 1440
 	var/load_jobs_from_txt = 0
 	var/ToRban = 0
 	var/automute_on = 0					//enables automuting/spam prevention
@@ -317,9 +322,6 @@ var/list/gamemode_cache = list()
 				if ("log_runtime")
 					config.log_runtime = 1
 
-				if ("mentors")
-					config.mods_are_mentors = 1
-
 				if ("generate_asteroid")
 					config.generate_asteroid = 1
 
@@ -470,6 +472,24 @@ var/list/gamemode_cache = list()
 
 				if("kick_inactive")
 					config.kick_inactive = text2num(value)
+
+				if("show_mods")
+					config.show_mods = 1
+
+				if("show_mentors")
+					config.show_mentors = 1
+
+				if("mods_can_tempban")
+					config.mods_can_tempban = 1
+
+				if("mods_can_job_tempban")
+					config.mods_can_job_tempban = 1
+
+				if("mod_tempban_max")
+					config.mod_tempban_max = text2num(value)
+
+				if("mod_job_tempban_max")
+					config.mod_job_tempban_max = text2num(value)
 
 				if("load_jobs_from_txt")
 					load_jobs_from_txt = 1
