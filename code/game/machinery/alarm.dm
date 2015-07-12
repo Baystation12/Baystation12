@@ -780,7 +780,7 @@
 		return
 
 	if(buildstage == 0 && istype(I, /obj/item/weapon/airalarm_electronics))
-		user << "You insert the circuit."
+		user << "<span class='notice'>You insert the circuit.</span>"
 		buildstage = 1
 		update_icon()
 		qdel(I)
@@ -799,7 +799,7 @@
 		var/obj/item/weapon/card/id/C = I.GetID()
 		if(C)
 			if(stat & (NOPOWER|BROKEN))
-				user << "It does nothing"
+				user << "<span class='notice'>It does nothing.</span>"
 				return
 			if(allowed(usr) && !wires.IsIndexCut(AALARM_WIRE_IDSCAN))
 				locked = !locked
@@ -826,7 +826,7 @@
 		if(TOOL_WRENCH)
 			if(buildstage == 0)
 				user << "You start removing \the [src] from the wall..."
-				if(do_after(user, 20 / efficiency))
+				if(do_after(user, 20 / efficiency) && buildstage == 0)
 					user << "You remove \the [src] assembly from the wall."
 					new /obj/item/frame/air_alarm(get_turf(user))
 					qdel(src)
@@ -834,7 +834,7 @@
 		if(TOOL_CROWBAR)
 			if(buildstage == 1)
 				user << "You start prying out the circuit..."
-				if(do_after(user, 20 / efficiency))
+				if(do_after(user, 20 / efficiency) && buildstage == 1)
 					user << "You pry out the circuit."
 					new /obj/item/weapon/airalarm_electronics(get_turf(user))
 					buildstage = 0
@@ -844,7 +844,7 @@
 			if(buildstage == 2)
 				if(efficiency < 1)
 					user << "You start [wiresexposed ? "closing" : "opening"] the wire panel..."
-					if(!do_after(user, 10 / efficiency))
+					if(!do_after(user, 10 / efficiency) || buildstage != 2)
 						return
 				wiresexposed = !wiresexposed
 				user << "The wires have been [wiresexposed ? "exposed" : "unexposed"]."
@@ -853,7 +853,7 @@
 		if(TOOL_WIRECUTTERS)
 			if(buildstage == 2 && wiresexposed)
 				user << "You start cutting the wires..."
-				if(do_after(user, 20 / efficiency))
+				if(do_after(user, 20 / efficiency) && buildstage == 2 && wiresexposed)
 					user.visible_message("<span class='notice'>[user] has cut the wires inside \the [src].</span>", "You have cut the wires inside \the [src].")
 					new /obj/item/stack/cable_coil(get_turf(user), 5)
 					buildstage = 1
@@ -943,63 +943,91 @@ FIRE ALARM
 		alarm(rand(30/severity, 60/severity))
 	..()
 
-/obj/machinery/firealarm/attackby(obj/item/W as obj, mob/user as mob)
-	src.add_fingerprint(user)
+/obj/machinery/firealarm/attackby(var/obj/item/I, var/mob/user, var/expand_tool)
+	add_fingerprint(user)
 
-	if (istype(W, /obj/item/weapon/screwdriver) && buildstage == 2)
-		wiresexposed = !wiresexposed
-		update_icon()
+	if(handle_tool(I, user, expand_tool))
 		return
 
 	if(wiresexposed)
-		switch(buildstage)
-			if(2)
-				if (istype(W, /obj/item/device/multitool))
-					src.detecting = !( src.detecting )
-					if (src.detecting)
-						user.visible_message("<span class='notice'>\The [user] has reconnected [src]'s detecting unit!</span>", "<span class='notice'>You have reconnected [src]'s detecting unit.</span>")
-					else
-						user.visible_message("<span class='notice'>\The [user] has disconnected [src]'s detecting unit!</span>", "<span class='notice'>You have disconnected [src]'s detecting unit.</span>")
-				else if (istype(W, /obj/item/weapon/wirecutters))
-					user.visible_message("<span class='notice'>\The [user] has cut the wires inside \the [src]!</span>", "<span class='notice'>You have cut the wires inside \the [src].</span>")
-					new/obj/item/stack/cable_coil(get_turf(src), 5)
-					playsound(src.loc, 'sound/items/Wirecutter.ogg', 50, 1)
-					buildstage = 1
-					update_icon()
-			if(1)
-				if(istype(W, /obj/item/stack/cable_coil))
-					var/obj/item/stack/cable_coil/C = W
-					if (C.use(5))
-						user << "<span class='notice'>You wire \the [src].</span>"
-						buildstage = 2
-						return
-					else
-						user << "<span class='warning'>You need 5 pieces of cable to wire \the [src].</span>"
-						return
-				else if(istype(W, /obj/item/weapon/crowbar))
-					user << "You pry out the circuit!"
-					playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)
-					spawn(20)
-						var/obj/item/weapon/firealarm_electronics/circuit = new /obj/item/weapon/firealarm_electronics()
-						circuit.loc = user.loc
-						buildstage = 0
-						update_icon()
-			if(0)
-				if(istype(W, /obj/item/weapon/firealarm_electronics))
-					user << "You insert the circuit!"
-					qdel(W)
-					buildstage = 1
-					update_icon()
+		if(buildstage == 2 && istype(I, /obj/item/device/multitool))
+			detecting = !detecting
+			if(detecting)
+				user.visible_message("<span class='notice'>\The [user] has reconnected [src]'s detecting unit.</span>", "<span class='notice'>You have reconnected [src]'s detecting unit.</span>")
+			else
+				user.visible_message("<span class='notice'>\The [user] has disconnected [src]'s detecting unit.</span>", "<span class='notice'>You have disconnected [src]'s detecting unit.</span>")
+			return
+		else if(buildstage == 1 && istype(I, /obj/item/stack/cable_coil))
+			var/obj/item/stack/cable_coil/C = I
+			if(C.use(5))
+				user << "<span class='notice'>You wire \the [src].</span>"
+				buildstage = 2
+			else
+				user << "<span class='warning'>You need 5 pieces of cable to wire \the [src].</span>"
+			return
+		else if(buildstage == 0 && istype(I, /obj/item/weapon/firealarm_electronics))
+			user << "You insert the circuit!"
+			buildstage = 1
+			update_icon()
+			user.drop_from_inventory(I)
+			qdel(I)
+			return
 
-				else if(istype(W, /obj/item/weapon/wrench))
-					user << "You remove the fire alarm assembly from the wall!"
-					new /obj/item/frame/fire_alarm(get_turf(user))
-					playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-					qdel(src)
-		return
-
-	src.alarm()
+	alarm()
 	return
+
+/obj/machinery/firealarm/gather_actions()
+	var/list/actions = list()
+	if(buildstage == 2)
+		actions += TOOL_SCREWDRIVER
+	if(wiresexposed)
+		switch(buildstage)
+			if(0)
+				actions += TOOL_WRENCH
+			if(1)
+				actions += TOOL_CROWBAR
+			if(2)
+				actions += TOOL_WIRECUTTERS
+	return actions
+
+/obj/machinery/firealarm/tool_act(var/action, var/efficiency, var/obj/item/I, var/mob/user)
+	switch(action)
+		if(TOOL_SCREWDRIVER)
+			if(buildstage == 2)
+				if(efficiency < 1)
+					user << "You stat [wiresexposed ? "closing" : "opening"] the panel of \the [src]..."
+					if(!do_after(user, 20 / efficiency) || buildstage != 2)
+						return
+				user << "You [wiresexposed ? "close" : "open"] the panel of \the [src]."
+				wiresexposed = !wiresexposed
+				update_icon()
+				return 1
+		if(TOOL_WIRECUTTERS)
+			if(buildstage == 2 && wiresexposed)
+				user << "You start cutting wires inside \the [src]..."
+				if(do_after(user, 20 / efficiency) && buildstage == 2 && wiresexposed)
+					user.visible_message("<span class='notice'>\The [user] has cut the wires inside \the [src].</span>", "<span class='notice'>You have cut the wires inside \the [src].</span>")
+					new /obj/item/stack/cable_coil(get_turf(src), 5)
+					buildstage = 1
+					update_icon()
+				return 1
+		if(TOOL_CROWBAR)
+			if(buildstage == 1 && wiresexposed)
+				user << "You start prying out the circuit..."
+				if(do_after(user, 20 / efficiency))
+					user << "You pry out the circuit."
+					new /obj/item/weapon/firealarm_electronics(get_turf(user))
+					buildstage = 0
+					update_icon()
+				return 1
+		if(TOOL_WRENCH)
+			if(buildstage == 0 && wiresexposed)
+				user << "You start removing the fire alarm assembly from the wall..."
+				if(do_after(user, 10 / efficiency))
+					user << "You remove the fire alarm assembly from the wall."
+					new /obj/item/frame/fire_alarm(get_turf(user))
+					qdel(src)
+				return 1
 
 /obj/machinery/firealarm/process()//Note: this processing was mostly phased out due to other code, and only runs when needed
 	if(stat & (NOPOWER|BROKEN))
