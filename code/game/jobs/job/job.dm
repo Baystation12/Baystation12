@@ -23,6 +23,12 @@
 /datum/job/proc/equip(var/mob/living/carbon/human/H)
 	return 1
 
+/datum/job/proc/equip_backpack(var/mob/living/carbon/human/H)
+	switch(H.backbag)
+		if(2) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack(H), slot_back)
+		if(3) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel_norm(H), slot_back)
+		if(4) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel(H), slot_back)
+
 /datum/job/proc/equip_survival(var/mob/living/carbon/human/H)
 	if(!H)	return 0
 	H.species.equip_survival_gear(H,0)

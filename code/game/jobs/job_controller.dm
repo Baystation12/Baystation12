@@ -393,6 +393,7 @@ var/global/datum/controller/occupations/job_master
 							spawn_in_storage += thing
 			//Equip job items.
 			job.equip(H)
+			job.equip_backpack(H)
 			job.equip_survival(H)
 			job.apply_fingerprints(H)
 
