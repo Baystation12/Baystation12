@@ -267,8 +267,9 @@
 				M.visible_message("<span class='notice'>[M] shakes [src] trying to wake [t_him] up!</span>", \
 									"<span class='notice'>You shake [src] trying to wake [t_him] up!</span>")
 			else
-				if(istype(H))
-					H.species.hug(H,src)
+				var/mob/living/carbon/human/hugger = M
+				if(istype(hugger))
+					hugger.species.hug(hugger,src)
 				else
 					M.visible_message("<span class='notice'>[M] hugs [src] to make [t_him] feel better!</span>", \
 								"<span class='notice'>You hug [src] to make [t_him] feel better!</span>")
