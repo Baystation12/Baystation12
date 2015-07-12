@@ -1,4 +1,5 @@
 author: PsiOmegaDelta
 changes:
   - tweak: "Ninjas can no longer teleport unto turfs that contain solid objects."
+  - tweak: "Wizards can no longer etheral jaunt unto turfs that contain solid objects."
 delete-after: true
