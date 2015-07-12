@@ -52,7 +52,7 @@
 	properties = list(TOOL_CROWBAR = 1)
 	main_prop = TOOL_CROWBAR
 
-/obj/item/weapon/combitool
+/obj/item/weapon/supertool
 	name = "supertool"
 	desc = "A magical tool that can be used in place of any common tool."
 	icon = 'icons/obj/items.dmi'

@@ -24,7 +24,6 @@
 	if(prob(20/severity)) set_broken()
 	..()
 
-
 /obj/machinery/computer/ex_act(severity)
 	switch(severity)
 		if(1.0)
@@ -54,7 +53,6 @@
 		set_broken()
 	..()
 
-
 /obj/machinery/computer/blob_act()
 	if (prob(75))
 		for(var/x in verbs)
@@ -74,8 +72,6 @@
 		icon_state = initial(icon_state)
 		icon_state += "0"
 
-
-
 /obj/machinery/computer/power_change()
 	..()
 	update_icon()
@@ -83,7 +79,6 @@
 		set_light(0)
 	else
 		set_light(light_range_on, light_power_on)
-
 
 /obj/machinery/computer/proc/set_broken()
 	stat |= BROKEN
@@ -94,7 +89,6 @@
 	text = replacetext(text, "\n", "<BR>")
 	return text
 
-
 /obj/machinery/computer/attack_ghost(user as mob)
 	return src.attack_hand(user)
 
@@ -103,19 +97,32 @@
 	if(istype(user, /mob/dead/observer)) return 0
 	return ..()
 
-/obj/machinery/computer/attackby(I as obj, user as mob)
-	if(istype(I, /obj/item/weapon/screwdriver) && circuit)
-		playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
-		if(do_after(user, 20))
-			var/obj/structure/computerframe/A = new /obj/structure/computerframe( src.loc )
-			var/obj/item/weapon/circuitboard/M = new circuit( A )
+/obj/machinery/computer/attackby(var/obj/item/I, var/mob/user, var/expand_tool)
+	add_fingerprint(user)
+
+	if(handle_tool(I, user, expand_tool))
+		return
+
+	attack_hand(user)
+
+/obj/machinery/computer/gather_actions()
+	if(circuit)
+		return list(TOOL_SCREWDRIVER)
+	return null
+
+/obj/machinery/computer/tool_act(var/action, var/efficiency, var/obj/item/I, var/mob/user)
+	if(action == TOOL_SCREWDRIVER)
+		user << "You start [stat & BROKEN ? "removing the broken glass" : "disconnecting the monitor"]..."
+		if(do_after(user, 20 / efficiency))
+			var/obj/structure/computerframe/A = new /obj/structure/computerframe(get_turf(src))
+			var/obj/item/weapon/circuitboard/M = new circuit(A)
 			A.circuit = M
 			A.anchored = 1
-			for (var/obj/C in src)
-				C.loc = src.loc
-			if (src.stat & BROKEN)
+			for(var/obj/C in src)
+				C.loc = get_turf(src)
+			if(stat & BROKEN)
 				user << "<span class='notice'>The broken glass falls out.</span>"
-				new /obj/item/weapon/material/shard( src.loc )
+				new /obj/item/weapon/material/shard(get_turf(src))
 				A.state = 3
 				A.icon_state = "3"
 			else
@@ -124,12 +131,4 @@
 				A.icon_state = "4"
 			M.deconstruct(src)
 			qdel(src)
-	else
-		src.attack_hand(user)
-	return
-
-
-
-
-
-
+		return 1

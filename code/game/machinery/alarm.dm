@@ -995,7 +995,7 @@ FIRE ALARM
 		if(TOOL_SCREWDRIVER)
 			if(buildstage == 2)
 				if(efficiency < 1)
-					user << "You stat [wiresexposed ? "closing" : "opening"] the panel of \the [src]..."
+					user << "You start [wiresexposed ? "closing" : "opening"] the panel of \the [src]..."
 					if(!do_after(user, 20 / efficiency) || buildstage != 2)
 						return
 				user << "You [wiresexposed ? "close" : "open"] the panel of \the [src]."
