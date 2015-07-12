@@ -31,7 +31,7 @@
 		return 1
 
 /obj/item/weapon/gun/projectile/sec
-	desc = "A NanoTrasen designed sidearm, found pretty much everywhere humans are. Uses .45 rounds."
+	desc = "A cheap, ubiquitous sidearm, produced by a Nanotrasen subsidiary. Found pretty much everywhere humans are. Uses .45 rounds."
 	name = "\improper NT Mk58"
 	icon_state = "secguncomp"
 	magazine_type = /obj/item/ammo_magazine/c45m/rubber
