@@ -14,7 +14,6 @@
 	update_icon = 0
 	nutrition = 700
 
-	see_in_dark = 8
 	update_slimes = 0
 
 	// canstun and canweaken don't affect slimes because they ignore stun and weakened variables
