@@ -17,29 +17,13 @@ emp_act
 	var/obj/item/organ/external/organ = get_organ()
 
 	//Shields
-	if(check_shields(P.damage, P, null, "the [P.name]"))
-		P.on_hit(src, 2, def_zone)
-		return 2
-
-	//Laserproof armour
-	if(wear_suit && istype(wear_suit, /obj/item/clothing/suit/armor/laserproof))
-		if(istype(P, /obj/item/projectile/energy) || istype(P, /obj/item/projectile/beam))
-			var/reflectchance = 40 - round(P.damage/3)
-			if(!(def_zone in list("chest", "groin")))
-				reflectchance /= 2
-			if(prob(reflectchance))
-				visible_message("\red <B>\The [P] gets reflected by \the [src]'s [wear_suit.name]!</B>")
-
-				// Find a turf near or on the original location to bounce to
-				if(P.starting)
-					var/new_x = P.starting.x + pick(0, 0, 0, 0, 0, -1, 1, -2, 2)
-					var/new_y = P.starting.y + pick(0, 0, 0, 0, 0, -1, 1, -2, 2)
-					var/turf/curloc = get_turf(src)
-
-					// redirect the projectile
-					P.redirect(new_x, new_y, curloc, src)
-
-				return PROJECTILE_CONTINUE // complete projectile permutation
+	var/shield_check = check_shields(P.damage, P, null, def_zone, "the [P.name]")
+	if(shield_check)
+		if(shield_check < 0)
+			return shield_check
+		else
+			P.on_hit(src, 2, def_zone)
+			return 2
 
 	//Shrapnel
 	if(P.can_embed())
@@ -148,10 +132,13 @@ emp_act
 			return gear
 	return null
 
-/mob/living/carbon/human/proc/check_shields(var/damage = 0, var/atom/damage_source = null, var/mob/attacker = null, var/attack_text = "the attack")
+/mob/living/carbon/human/proc/check_shields(var/damage = 0, var/atom/damage_source = null, var/mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
 	for(var/obj/item/shield in list(l_hand, r_hand, wear_suit))
-		if(shield && shield.handle_shield(src, damage, damage_source, attacker, attack_text))
-			return 1
+		if(!shield) 
+			continue
+		var/result = shield.handle_shield(src, damage, damage_source, attacker, def_zone, attack_text)
+		if(result)
+			return result
 	return 0
 
 /mob/living/carbon/human/emp_act(severity)
@@ -183,7 +170,7 @@ emp_act
 	if(user.a_intent == "disarm") effective_force = round(I.force/2)
 	var/hit_area = affecting.name
 
-	if((user != src) && check_shields(effective_force, I, user, "the [I.name]"))
+	if((user != src) && check_shields(effective_force, I, user, target_zone, "the [I.name]"))
 		return 0
 
 	if(istype(I,/obj/item/weapon/card/emag))
@@ -312,7 +299,7 @@ emp_act
 
 		O.throwing = 0		//it hit, so stop moving
 
-		if ((O.thrower != src) && check_shields(throw_damage, O, thrower, "[O]"))
+		if ((O.thrower != src) && check_shields(throw_damage, O, thrower, zone, "[O]"))
 			return
 
 		var/obj/item/organ/external/affecting = get_organ(zone)
