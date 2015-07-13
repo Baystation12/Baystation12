@@ -9,8 +9,8 @@ var/datum/antagonist/raider/raiders
 	landmark_id = "voxstart"
 	welcome_text = "Use :H to talk on your encrypted channel."
 	flags = ANTAG_OVERRIDE_JOB | ANTAG_CLEAR_EQUIPMENT | ANTAG_CHOOSE_NAME | ANTAG_VOTABLE | ANTAG_SET_APPEARANCE | ANTAG_HAS_LEADER
-	max_antags = 1
-	max_antags_round = 1
+	max_antags = 6
+	max_antags_round = 10
 	id_type = /obj/item/weapon/card/id/syndicate
 
 	// Heist overrides check_victory() and doesn't need victory or loss strings/tags.
