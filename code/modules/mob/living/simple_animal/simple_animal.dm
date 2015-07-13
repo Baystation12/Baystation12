@@ -89,6 +89,7 @@
 	handle_stunned()
 	handle_weakened()
 	handle_paralysed()
+	update_canmove()
 
 	//Movement
 	if(!client && !stop_automated_movement && wander && !anchored)
