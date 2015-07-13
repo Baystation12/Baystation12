@@ -65,9 +65,10 @@
 /obj/item/Destroy()
 	if(ismob(loc))
 		var/mob/m = loc
-		m.unEquip(src, 1)
+		m.drop_from_inventory(src)
 		m.update_inv_r_hand()
 		m.update_inv_l_hand()
+		src.loc = null
 	return ..()
 
 /obj/item/device
