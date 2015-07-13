@@ -214,7 +214,7 @@ var/datum/antagonist/raider/raiders
 		player.equip_to_slot_or_del(new new_suit(player),slot_wear_suit)
 		equip_weapons(player)
 
-	var/obj/item/weapon/card/id/id = create_id("Visitor", player)
+	var/obj/item/weapon/card/id/id = create_id("Visitor", player, equip = 0)
 	id.name = "[player.real_name]'s Passport"
 	id.assignment = "Visitor"
 	var/obj/item/weapon/storage/wallet/W = new(player)
