@@ -288,7 +288,7 @@ var/global/datum/controller/gameticker/ticker
 			if(player && player.mind && player.mind.assigned_role)
 				if(player.mind.assigned_role == "Captain")
 					captainless=0
-				if(!player_is_antag(player.mind))
+				if(!player_is_antag(player.mind, only_offstation_roles = 1))
 					job_master.EquipRank(player, player.mind.assigned_role, 0)
 					UpdateFactionList(player)
 					equip_custom_items(player)

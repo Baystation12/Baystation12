@@ -213,7 +213,8 @@
 				if (!new_target) return
 
 				var/objective_path = text2path("/datum/objective/[new_obj_type]")
-				if (new_target == "Free objective")
+				var/mob/living/M = new_target
+				if (!istype(M) || !M.mind || new_target == "Free objective")
 					new_objective = new objective_path
 					new_objective.owner = src
 					new_objective:target = null
@@ -221,9 +222,8 @@
 				else
 					new_objective = new objective_path
 					new_objective.owner = src
-					new_objective:target = new_target:mind
-					//Will display as special role if the target is set as MODE. Ninjas/commandos/nuke ops.
-					new_objective.explanation_text = "[objective_type] [new_target:real_name], the [player_is_antag(new_target:mind) ? (new_target:mind:special_role) : (new_target:mind:assigned_role)]."
+					new_objective:target = M.mind
+					new_objective.explanation_text = "[objective_type] [M.real_name], the [M.mind.special_role ? M.mind:special_role : M.mind:assigned_role]."
 
 			if ("prevent")
 				new_objective = new /datum/objective/block

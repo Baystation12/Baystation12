@@ -37,7 +37,7 @@
 	if(PDA_Manifest.len)
 		PDA_Manifest.Cut()
 
-	if(H.mind && !player_is_antag(H.mind))
+	if(H.mind && !player_is_antag(H.mind, only_offstation_roles = 1))
 		var/assignment
 		if(H.mind.role_alt_title)
 			assignment = H.mind.role_alt_title
