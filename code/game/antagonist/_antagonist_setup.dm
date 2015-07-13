@@ -76,4 +76,6 @@ var/global/list/antag_names_to_ids = list()
 		var/datum/antagonist/antag = all_antag_types[antag_type]
 		if(player in antag.current_antagonists)
 			return 1
+		if(player in antag.pending_antagonists)
+			return 1
 	return 0

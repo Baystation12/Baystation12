@@ -9,8 +9,8 @@ var/datum/antagonist/raider/raiders
 	landmark_id = "voxstart"
 	welcome_text = "Use :H to talk on your encrypted channel."
 	flags = ANTAG_OVERRIDE_JOB | ANTAG_CLEAR_EQUIPMENT | ANTAG_CHOOSE_NAME | ANTAG_VOTABLE | ANTAG_SET_APPEARANCE | ANTAG_HAS_LEADER
-	max_antags = 6
-	max_antags_round = 10
+	max_antags = 1
+	max_antags_round = 1
 	id_type = /obj/item/weapon/card/id/syndicate
 
 	// Heist overrides check_victory() and doesn't need victory or loss strings/tags.
@@ -86,7 +86,7 @@ var/datum/antagonist/raider/raiders
 		/obj/item/weapon/gun/projectile/revolver,
 		/obj/item/weapon/gun/projectile/pirate
 		)
-	
+
 	var/list/raider_holster = list(
 		/obj/item/clothing/accessory/holster/armpit,
 		/obj/item/clothing/accessory/holster/waist,
@@ -207,7 +207,7 @@ var/datum/antagonist/raider/raiders
 			//If equipping shoes failed, fall back to equipping sandals
 			var/fallback_type = pick(/obj/item/clothing/shoes/sandal, /obj/item/clothing/shoes/jackboots/unathi)
 			player.equip_to_slot_or_del(new fallback_type(player), slot_shoes)
-		
+
 		player.equip_to_slot_or_del(new new_uniform(player),slot_w_uniform)
 		player.equip_to_slot_or_del(new new_glasses(player),slot_glasses)
 		player.equip_to_slot_or_del(new new_helmet(player),slot_head)
@@ -229,10 +229,10 @@ var/datum/antagonist/raider/raiders
 	var/new_gun = pick(raider_guns)
 	var/new_holster = pick(raider_holster) //raiders don't start with any backpacks, so let's be nice and give them a holster if they can use it.
 	var/turf/T = get_turf(player)
-	
+
 	var/obj/item/primary = new new_gun(T)
 	var/obj/item/clothing/accessory/holster/holster = null
-	
+
 	//Give some of the raiders a pirate gun as a secondary
 	if(prob(60))
 		var/obj/item/secondary = new /obj/item/weapon/gun/projectile/pirate(T)
@@ -242,7 +242,7 @@ var/datum/antagonist/raider/raiders
 			secondary.loc = holster
 		else
 			player.equip_to_slot_or_del(secondary, slot_belt)
-	
+
 	if(primary.slot_flags & SLOT_HOLSTER)
 		holster = new new_holster(T)
 		holster.holstered = primary
@@ -253,10 +253,10 @@ var/datum/antagonist/raider/raiders
 		player.equip_to_slot_or_del(primary, slot_back)
 	else
 		player.put_in_any_hand_if_possible(primary)
-	
+
 	//If they got a projectile gun, give them a little bit of spare ammo
 	equip_ammo(player, primary)
-	
+
 	if(holster)
 		var/obj/item/clothing/under/uniform = player.w_uniform
 		if(istype(uniform) && uniform.can_attach_accessory(holster))

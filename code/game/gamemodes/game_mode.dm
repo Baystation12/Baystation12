@@ -470,7 +470,7 @@ var/global/list/additional_antag_types = list()
 			suspects += man
 
 	for(var/mob/M in suspects)
-		if(M.mind.assigned_role == "MODE")
+		if(player_is_antag(M.mind))
 			continue
 		switch(rand(1, 100))
 			if(1 to 50)

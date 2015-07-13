@@ -223,7 +223,7 @@
 					new_objective.owner = src
 					new_objective:target = new_target:mind
 					//Will display as special role if the target is set as MODE. Ninjas/commandos/nuke ops.
-					new_objective.explanation_text = "[objective_type] [new_target:real_name], the [new_target:mind:assigned_role=="MODE" ? (new_target:mind:special_role) : (new_target:mind:assigned_role)]."
+					new_objective.explanation_text = "[objective_type] [new_target:real_name], the [player_is_antag(new_target:mind) ? (new_target:mind:special_role) : (new_target:mind:assigned_role)]."
 
 			if ("prevent")
 				new_objective = new /datum/objective/block
