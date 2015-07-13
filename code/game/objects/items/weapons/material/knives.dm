@@ -16,7 +16,7 @@
 		sharp = 1
 		..() //Updates force.
 		throwforce = max(3,force-3)
-		hitsound = initial(hitsound)
+		hitsound = 'sound/weapons/bladeslice.ogg'
 		icon_state += "_open"
 		w_class = 3
 		attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
@@ -24,7 +24,7 @@
 		force = 3
 		edge = 0
 		sharp = 0
-		hitsound = null
+		hitsound = initial(hitsound)
 		icon_state = initial(icon_state)
 		w_class = initial(w_class)
 		attack_verb = initial(attack_verb)
