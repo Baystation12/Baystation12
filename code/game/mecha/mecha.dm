@@ -24,6 +24,7 @@
 	var/step_in = 10 //make a step in step_in/10 sec.
 	var/dir_in = 2//What direction will the mech face when entered/powered on? Defaults to South.
 	var/step_energy_drain = 10
+	var/power_source = "cell"
 	var/health = 300 //health is health
 	var/deflect_chance = 10 //chance to deflect incoming projectiles, hits, or lesser the effect of ex_act.
 	var/r_deflect_coeff = 1
@@ -31,8 +32,8 @@
 	//ranged and melee damage multipliers
 	var/r_damage_coeff = 1
 	var/m_damage_coeff = 1
-	var/rhit_power_use = null
-	var/mhit_power_use = null
+	var/rhit_power_use = 0
+	var/mhit_power_use = 0
 
 	//the values in this list show how much damage will pass through, not how much will be absorbed.
 	var/list/damage_absorption = list("brute"=0.8,"fire"=1.2,"bullet"=0.9,"laser"=1,"energy"=1,"bomb"=1)
@@ -483,9 +484,65 @@
 /obj/mecha/proc/absorb_damage(damage,damage_type)
 	return damage*(listgetindex(damage_absorption,damage_type) || 1)
 
+/obj/mecha/proc/hit_damage(damage, type="brute", is_melee=0)
+
+	var/power_to_use
+	var/damage_coeff_to_use
+
+	if(is_melee)
+		power_to_use = mhit_power_use
+		damage_coeff_to_use = m_damage_coeff
+	else
+		power_to_use = rhit_power_use
+		damage_coeff_to_use = r_damage_coeff
+
+	if(power_to_use && use_power(power_to_use))
+		take_damage(round(damage*damage_coeff_to_use), type)
+		start_booster_cooldown(is_melee)
+		return
+	else
+		start_booster_cooldown(is_melee)
+		take_damage(round(damage*damage_coeff_to_use), type)
+
+	return
+
+/obj/mecha/proc/deflect_hit(is_melee=0)
+
+	var/power_to_use
+	var/deflect_coeff_to_use
+
+	if(is_melee)
+		power_to_use = mhit_power_use
+		deflect_coeff_to_use = m_damage_coeff
+	else
+		power_to_use = rhit_power_use
+		deflect_coeff_to_use = r_damage_coeff
+
+	if(power_to_use)
+		if(prob(src.deflect_chance*deflect_coeff_to_use))
+			use_power(power_to_use)
+			start_booster_cooldown(is_melee)
+			return 1
+		else
+			return 0
+
+	else
+		start_booster_cooldown(is_melee)
+		if(prob(src.deflect_chance*deflect_coeff_to_use))
+			return 1
+
+	return 0
+
+/obj/mecha/proc/start_booster_cooldown(is_melee)
+
+	for(var/obj/item/mecha_parts/mecha_equipment/armor_booster/B in equipment) //Ideally this would be done by the armor booster itself; attempts weren't great for performance.
+		if(B.melee == is_melee && B.equip_ready)
+			B.set_ready_state(0)
+			B.do_after_cooldown()
+
 /obj/mecha/airlock_crush(var/crush_damage)
 	..()
-	take_damage(crush_damage*m_damage_coeff)
+	hit_damage(crush_damage, is_melee=1)
 	check_for_internal_damage(list(MECHA_INT_TEMP_CONTROL,MECHA_INT_TANK_BREACH,MECHA_INT_CONTROL_LOST))
 	return 1
 
@@ -502,8 +559,8 @@
 	if(istype(user,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = user
 		if(H.species.can_shred(user))
-			if(!prob(src.deflect_chance*m_deflect_coeff))
-				src.take_damage(15*m_damage_coeff)
+			if(!deflect_hit(is_melee=1))
+				src.hit_damage(damage=15, is_melee=1)
 				src.check_for_internal_damage(list(MECHA_INT_TEMP_CONTROL,MECHA_INT_TANK_BREACH,MECHA_INT_CONTROL_LOST))
 				playsound(src.loc, 'sound/weapons/slash.ogg', 50, 1, -1)
 				user << "<span class='danger'>You slash at the armored suit!</span>"
@@ -518,8 +575,8 @@
 			user.visible_message("<span class='danger'>\The [user] hits \the [src]. Nothing happensm</span>","<span class='danger'>You hit \the [src] with no visible effect.</span>")
 			src.log_append_to_last("Armor saved.")
 		return
-	else if ((HULK in user.mutations) && !prob(src.deflect_chance*m_deflect_coeff))
-		src.take_damage(15*m_damage_coeff)
+	else if ((HULK in user.mutations) && !deflect_hit(is_melee=1))
+		src.hit_damage(damage=15, is_melee=1)
 		src.check_for_internal_damage(list(MECHA_INT_TEMP_CONTROL,MECHA_INT_TANK_BREACH,MECHA_INT_CONTROL_LOST))
 		user.visible_message("<font color='red'><b>[user] hits [src.name], doing some damage.</b></font>", "<font color='red'><b>You hit [src.name] with all your might. The metal creaks and bends.</b></font>")
 	else
@@ -534,7 +591,7 @@
 		A.forceMove(src)
 		src.visible_message("The [A] fastens firmly to [src].")
 		return
-	if(prob(src.deflect_chance*r_deflect_coeff) || istype(A, /mob))
+	if(deflect_hit(is_melee=0) || istype(A, /mob))
 		src.occupant_message("<span class='notice'>\The [A] bounces off the armor.</span>")
 		src.visible_message("\The [A] bounces off \the [src] armor.")
 		src.log_append_to_last("Armor saved.")
@@ -543,27 +600,27 @@
 			M.take_organ_damage(10)
 	else if(istype(A, /obj))
 		var/obj/O = A
-		if(O.throwforce*r_damage_coeff)
-			src.take_damage(O.throwforce*r_damage_coeff)
+		if(O.throwforce)
+			src.hit_damage(O.throwforce, is_melee=0)
 			src.check_for_internal_damage(list(MECHA_INT_TEMP_CONTROL,MECHA_INT_TANK_BREACH,MECHA_INT_CONTROL_LOST))
 	return
 
 /obj/mecha/bullet_act(var/obj/item/projectile/Proj)
+	if(Proj.damage_type == HALLOSS && !(src.r_deflect_coeff > 1))
+		use_power(Proj.agony * 5)
+
 	src.log_message("Hit by projectile. Type: [Proj.name]([Proj.check_armour]).",1)
-	if(prob(src.deflect_chance*r_deflect_coeff))
+	if(deflect_hit(is_melee=0))
 		src.occupant_message("<span class='notice'>The armor deflects incoming projectile.</span>")
 		src.visible_message("The [src.name] armor deflects the projectile.")
 		src.log_append_to_last("Armor saved.")
 		return
 
-	if(Proj.damage_type == HALLOSS && !(src.r_deflect_coeff > 1))
-		use_power(Proj.agony * 5)
-
 	if(!(Proj.nodamage))
 		var/ignore_threshold
 		if(istype(Proj, /obj/item/projectile/beam/pulse))
 			ignore_threshold = 1
-		src.take_damage(Proj.damage*r_damage_coeff, Proj.check_armour)
+		src.hit_damage(Proj.damage, Proj.check_armour, is_melee=0)
 		if(prob(25)) spark_system.start()
 		src.check_for_internal_damage(list(MECHA_INT_FIRE,MECHA_INT_TEMP_CONTROL,MECHA_INT_TANK_BREACH,MECHA_INT_CONTROL_LOST,MECHA_INT_SHORT_CIRCUIT),ignore_threshold)
 
@@ -632,8 +689,7 @@
 */
 
 /obj/mecha/emp_act(severity)
-	if(get_charge())
-		use_power((cell.charge/2)/severity)
+	if(use_power((cell.charge/2)/severity))
 		take_damage(50 / severity,"energy")
 	src.log_message("EMP detected",1)
 	check_for_internal_damage(list(MECHA_INT_FIRE,MECHA_INT_TEMP_CONTROL,MECHA_INT_CONTROL_LOST,MECHA_INT_SHORT_CIRCUIT),1)
@@ -765,39 +821,17 @@
 
 	else
 		src.log_message("Attacked by [W]. Attacker - [user]")
-		if(prob(src.deflect_chance*m_deflect_coeff))
+
+		if(deflect_hit(is_melee=1))
 			user << "<span class='danger'>\The [W] bounces off [src.name].</span>"
 			src.log_append_to_last("Armor saved.")
-/*
-		for (var/mob/V in viewers(src))
-			if(V.client && !(V.blinded))
-				V.show_message("The [W] bounces off [src.name] armor.", 1)
-*/
 		else
 			src.occupant_message("<font color='red'><b>[user] hits [src] with [W].</b></font>")
 			user.visible_message("<font color='red'><b>[user] hits [src] with [W].</b></font>", "<font color='red'><b>You hit [src] with [W].</b></font>")
-			src.take_damage(W.force*m_damage_coeff,W.damtype)
+			src.hit_damage(W.force, W.damtype, is_melee=1)
 			src.check_for_internal_damage(list(MECHA_INT_TEMP_CONTROL,MECHA_INT_TANK_BREACH,MECHA_INT_CONTROL_LOST))
-	return
-/*
-		src.log_message("Attacked by [W]. Attacker - [user]")
-		if(prob(src.deflect_chance))
-			user << "<span class='warning'>\The [W] bounces off [src.name] armor.</span>"
-			src.log_append_to_last("Armor saved.")
-/*
-			for (var/mob/V in viewers(src))
-				if(V.client && !(V.blinded))
-					V.show_message("The [W] bounces off [src.name] armor.", 1)
-*/
-		else
-			src.occupant_message("<font color='red'><b>[user] hits [src] with [W].</b></font>")
-			user.visible_message("<font color='red'><b>[user] hits [src] with [W].</b></font>", "<font color='red'><b>You hit [src] with [W].</b></font>")
-			src.take_damage(W.force,W.damtype)
-			src.check_for_internal_damage(list(MECHA_INT_TEMP_CONTROL,MECHA_INT_TANK_BREACH,MECHA_INT_CONTROL_LOST))
-*/
-	return
 
-
+	return
 
 /*
 /obj/mecha/attack_ai(var/mob/living/silicon/ai/user as mob)
@@ -1665,8 +1699,8 @@
 	src.log_message("Attacked. Attacker - [user].",1)
 
 	user.do_attack_animation(src)
-	if(!prob(src.deflect_chance*m_deflect_coeff))
-		src.take_damage(damage*m_damage_coeff)
+	if(!deflect_hit(is_melee=1))
+		src.hit_damage(damage, is_melee=1)
 		src.check_for_internal_damage(list(MECHA_INT_TEMP_CONTROL,MECHA_INT_TANK_BREACH,MECHA_INT_CONTROL_LOST))
 		visible_message("<span class='danger'>[user] [attack_message] [src]!</span>")
 		user.attack_log += text("\[[time_stamp()]\] <font color='red'>attacked [src.name]</font>")
