@@ -15,6 +15,7 @@
 
 	var/list/reagent_ids = list("tricordrazine", "inaprovaline", "spaceacillin")
 	var/list/reagent_volumes = list()
+	var/list/reagent_names = list()
 
 /obj/item/weapon/reagent_containers/borghypo/surgeon
 	reagent_ids = list("bicaridine", "inaprovaline", "dexalin")
@@ -25,8 +26,10 @@
 /obj/item/weapon/reagent_containers/borghypo/New()
 	..()
 
-	for(var/R in reagent_ids)
-		reagent_volumes[R] = volume
+	for(var/T in reagent_ids)
+		reagent_volumes[T] = volume
+		var/datum/reagent/R = chemical_reagents_list[T]
+		reagent_names += R.name
 
 	processing_objects.Add(src)
 
@@ -68,14 +71,27 @@
 	return
 
 /obj/item/weapon/reagent_containers/borghypo/attack_self(mob/user as mob) //Change the mode
-	playsound(loc, 'sound/effects/pop.ogg', 50, 0)
-	mode++
-	if(mode > reagent_ids.len)
-		mode = 1
+	var/t = ""
+	for(var/i = 1 to reagent_ids.len)
+		if(t)
+			t += ", "
+		if(mode == i)
+			t += "<b>[reagent_names[i]]</b>"
+		else
+			t += "<a href='?src=\ref[src];reagent=[reagent_ids[i]]'>[reagent_names[i]]</a>"
+	t = "Available reagents: [t]."
+	user << t
 
-	var/datum/reagent/R = chemical_reagents_list[reagent_ids[mode]]
-	user << "<span class='notice'>Synthesizer is now producing '[R.name]'.</span>"
 	return
+
+/obj/item/weapon/reagent_containers/borghypo/Topic(var/href, var/list/href_list)
+	if(href_list["reagent"])
+		var/t = reagent_ids.Find(href_list["reagent"])
+		if(t)
+			playsound(loc, 'sound/effects/pop.ogg', 50, 0)
+			mode = t
+			var/datum/reagent/R = chemical_reagents_list[reagent_ids[mode]]
+			usr << "<span class='notice'>Synthesizer is now producing '[R.name]'.</span>"
 
 /obj/item/weapon/reagent_containers/borghypo/examine(mob/user)
 	if(!..(user, 2))
@@ -95,22 +111,6 @@
 	volume = 60
 	possible_transfer_amounts = list(5, 10, 20, 30)
 	reagent_ids = list("beer", "kahlua", "whiskey", "wine", "vodka", "gin", "rum", "tequilla", "vermouth", "cognac", "ale", "mead", "water", "sugar", "ice", "tea", "icetea", "cola", "spacemountainwind", "dr_gibb", "space_up", "tonic", "sodawater", "lemon_lime", "orangejuice", "limejuice", "watermelonjuice")
-	var/list/reagent_names = list()
-
-/obj/item/weapon/reagent_containers/borghypo/service/New()
-	..()
-	for(var/T in reagent_ids)
-		var/datum/reagent/R = chemical_reagents_list[T]
-		reagent_names += R.name
-
-/obj/item/weapon/reagent_containers/borghypo/service/attack_self(var/mob/user)
-	var/t = input(user, "Choose a reagent to dispence", "Reagent", reagent_names[mode]) in reagent_names
-
-	playsound(loc, 'sound/effects/pop.ogg', 50, 0)
-
-	mode = reagent_names.Find(t)
-	user << "<span class='notice'>Synthesizer is now producing '[t]'.</span>"
-	return
 
 /obj/item/weapon/reagent_containers/borghypo/service/attack(var/mob/M, var/mob/user)
 	return
