@@ -459,7 +459,7 @@
 	if(istype(AM, /mob/living/carbon) && prob(10))
 		src.spread_disease_to(AM, "Contact")
 
-/mob/living/carbon/can_use_vents()
+/mob/living/carbon/cannot_use_vents()
 	return
 
 /mob/living/carbon/slip(var/slipped_on,stun_duration=8)
