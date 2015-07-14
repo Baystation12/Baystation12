@@ -26,7 +26,7 @@
 	var/xo = null
 	var/current = null
 	var/obj/shot_from = null // the object which shot us
-	var/atom/original = null // the original target clicked
+	var/atom/original = null // the target clicked (not necessarily where the projectile is headed). Should probably be renamed to 'target' or something.
 	var/turf/starting = null // the projectile's starting turf
 	var/list/permutated = list() // we've passed through these atoms, don't try to hit them again
 
@@ -133,30 +133,25 @@
 
 	original = target
 	loc = curloc
-	starting = curloc
-	current = curloc
-	yo = targloc.y - curloc.y + y_offset
-	xo = targloc.x - curloc.x + x_offset
 
 	shot_from = launcher
 	silenced = launcher.silenced
 
 	spawn()
+		setup_trajectory(curloc, targloc, x_offset, y_offset) //plot the initial trajectory
 		process()
 
 	return 0
 
 //Used to change the direction of the projectile in flight.
 /obj/item/projectile/proc/redirect(var/new_x, var/new_y, var/atom/starting_loc, var/mob/new_firer=null)
-	original = locate(new_x, new_y, src.z)
-	starting = starting_loc
-	current = starting_loc
+	var/turf/new_target = locate(new_x, new_y, src.z)
+	
+	original = new_target
 	if(new_firer)
 		firer = src
 
-	yo = new_y - starting_loc.y
-	xo = new_x - starting_loc.x
-	setup_trajectory()
+	setup_trajectory(starting_loc, new_target)
 
 //Called when the projectile intercepts a mob. Returns 1 if the projectile hit the mob, 0 if it missed and should keep flying.
 /obj/item/projectile/proc/attack_mob(var/mob/living/target_mob, var/distance, var/miss_modifier=0)
@@ -275,9 +270,6 @@
 /obj/item/projectile/process()
 	var/first_step = 1
 
-	//plot the initial trajectory
-	setup_trajectory()
-
 	spawn while(src && src.loc)
 		if(kill_count-- < 1)
 			on_impact(src.loc) //for any final impact behaviours
@@ -320,7 +312,13 @@
 /obj/item/projectile/proc/before_move()
 	return
 
-/obj/item/projectile/proc/setup_trajectory()
+/obj/item/projectile/proc/setup_trajectory(turf/startloc, turf/targloc, var/x_offset = 0, var/y_offset = 0)
+	// setup projectile state
+	starting = startloc
+	current = startloc
+	yo = targloc.y - curloc.y + y_offset
+	xo = targloc.x - curloc.x + x_offset
+
 	// trajectory dispersion
 	var/offset = 0
 	if(dispersion)
@@ -379,8 +377,11 @@
 	invisibility = 101 //Nope!  Can't see me!
 	yo = null
 	xo = null
-	var/target = null
 	var/result = 0 //To pass the message back to the gun.
+
+/obj/item/projectile/test/New(var/newloc, atom/target)
+	..(newloc)
+	original = target
 
 /obj/item/projectile/test/Bump(atom/A as mob|obj|turf|area)
 	if(A == firer)
@@ -396,23 +397,18 @@
 
 /obj/item/projectile/test/process()
 	var/turf/curloc = get_turf(src)
-	var/turf/targloc = get_turf(target)
+	var/turf/targloc = get_turf(original)
 	if(!curloc || !targloc)
 		return 0
-	yo = targloc.y - curloc.y
-	xo = targloc.x - curloc.x
-	target = targloc
-	original = target
-	starting = curloc
 
 	//plot the initial trajectory
-	setup_trajectory()
+	setup_trajectory(curloc, targloc)
 
 	while(src) //Loop on through!
 		if(result)
 			return (result - 1)
-		if((!( target ) || loc == target))
-			target = locate(min(max(x + xo, 1), world.maxx), min(max(y + yo, 1), world.maxy), z) //Finding the target turf at map edge
+		if((!( targloc ) || loc == targloc))
+			targloc = locate(min(max(x + xo, 1), world.maxx), min(max(y + yo, 1), world.maxy), z) //Finding the target turf at map edge
 
 		trajectory.increment()	// increment the current location
 		location = trajectory.return_location(location)		// update the locally stored location data
@@ -423,18 +419,21 @@
 		if(istype(M)) //If there is someting living...
 			return 1 //Return 1
 		else
-			M = locate() in get_step(src,target)
+			M = locate() in get_step(src,targloc)
 			if(istype(M))
 				return 1
 
 /proc/check_trajectory(atom/target as mob|obj, atom/firer as mob|obj, var/pass_flags=PASSTABLE|PASSGLASS|PASSGRILLE, flags=null)  //Checks if you can hit them or not.
 	if(!istype(target) || !istype(firer))
 		return 0
-	var/obj/item/projectile/test/trace = new /obj/item/projectile/test(get_turf(firer)) //Making the test....
-	trace.target = target
+
+	var/obj/item/projectile/test/trace = new /obj/item/projectile/test(get_turf(firer), target) //Making the test....
+
+	//Set the flags and pass flags to that of the real projectile...
 	if(!isnull(flags))
-		trace.flags = flags //Set the flags...
-	trace.pass_flags = pass_flags //And the pass flags to that of the real projectile...
+		trace.flags = flags 
+	trace.pass_flags = pass_flags
+
 	var/output = trace.process() //Test it!
 	qdel(trace) //No need for it anymore
 	return output //Send it back to the gun!
