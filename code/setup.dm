@@ -576,6 +576,7 @@
 #define BE_MUTINEER   8192
 #define BE_PAI        16384
 
+// TODO: Update to new antagonist system.
 var/list/be_special_flags = list(
 	"Traitor"          = BE_TRAITOR,
 	"Operative"        = BE_OPERATIVE,
