@@ -95,7 +95,7 @@
 		return 1
 
 	firer = user
-	def_zone = user.zone_sel.selecting
+	def_zone = target_zone
 
 	if(user == target) //Shooting yourself
 		user.bullet_act(src, target_zone)
