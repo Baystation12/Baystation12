@@ -1,6 +1,6 @@
 /obj/item/weapon/gun/energy/laser
 	name = "laser carbine"
-	desc = "A common laser weapon, designed to kill with concentrated energy blasts."
+        desc = "A HI G40 E, produced by Hesphaistos Industries, designed to kill with concentrated energy blasts."
 	icon_state = "laser"
 	item_state = "laser"
 	fire_sound = 'sound/weapons/Laser.ogg'
@@ -17,9 +17,9 @@
 	use_external_power = 1
 
 /obj/item/weapon/gun/energy/laser/practice
-	name = "practice laser gun"
-	desc = "A modified version of the basic laser gun, this one fires less concentrated energy bolts designed for target practice."
-	projectile_type = /obj/item/projectile/beam/practice
+	name = "practice laser carbine"
+	desc = "A modified version of the HI G40 E, this one fires less concentrated energy bolts designed for target practice."
+ 	projectile_type = /obj/item/projectile/beam/practice
 
 obj/item/weapon/gun/energy/retro
 	name = "retro laser"
@@ -33,10 +33,11 @@ obj/item/weapon/gun/energy/retro
 	fire_delay = 10 //old technology
 
 /obj/item/weapon/gun/energy/captain
-	name = "antique laser gun"
+	name = "expensive laser gun"
 	icon_state = "caplaser"
 	item_state = "caplaser"
-	desc = "This is an antique laser gun. All craftsmanship is of the highest quality. It is decorated with assistant leather and chrome. The object menaces with spikes of energy. On the item is an image of Space Station 13. The station is exploding."
+	desc = "An excellently crafted piece of weapon, produced by Gilthari Exports. Handcrafted only on demand for a specific wielder, this handy energy-based pistol is truly only worn by some sort of Elite. Why buy a gun for the price of a small space station? Because you are worth it."
+ 	force = 5
 	force = 5
 	fire_sound = 'sound/weapons/Laser.ogg'
 	slot_flags = SLOT_BELT
@@ -78,8 +79,9 @@ obj/item/weapon/gun/energy/retro
 	fire_delay = 1
 
 /obj/item/weapon/gun/energy/sniperrifle
-	name = "\improper L.W.A.P. sniper rifle"
-	desc = "A high-power laser rifle fitted with a SMART aiming-system scope."
+	name = "\improper scoped laser carbine"
+	desc = "The HI DMR 9 E is an older design of Hesphaistos Industries, a designated marksman rifle fitted with a smart AI guidance system. Shooting powerful ionized gas shots, this is a weapon to kill from a distance."
+ 	icon_state = "sniper"
 	icon_state = "sniper"
 	item_state = "laser"
 	fire_sound = 'sound/weapons/marauder.ogg'

@@ -1,6 +1,6 @@
 /obj/item/weapon/gun/projectile/revolver
 	name = "revolver"
-	desc = "A classic revolver. Uses .357 ammo"
+	desc = "The Lumoco Arms HE Colt, a classic revolver if you want to put holes in the other guy. Uses .357 ammo"
 	icon_state = "revolver"
 	item_state = "revolver"
 	caliber = "357"

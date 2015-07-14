@@ -1,5 +1,5 @@
 /obj/item/weapon/gun/projectile/colt
-	name = "\improper Colt M1911"
+	name = "\improper cheap .45 Pistol"
 	desc = "A cheap Martian knock-off of a Colt M1911."
 	magazine_type = /obj/item/ammo_magazine/c45m
 	icon_state = "colt"
@@ -31,8 +31,8 @@
 		return 1
 
 /obj/item/weapon/gun/projectile/sec
-	desc = "A NanoTrasen designed sidearm, found pretty much everywhere humans are. Uses .45 rounds."
-	name = "\improper NT Mk58"
+	desc = "The NT Mk58, a NanoTrasen designed sidearm, found pretty much everywhere humans are. Uses .45 rounds."
+	name = "\improper .45 Pistol"
 	icon_state = "secguncomp"
 	magazine_type = /obj/item/ammo_magazine/c45m/rubber
 	caliber = ".45"
@@ -41,12 +41,12 @@
 	load_method = MAGAZINE
 
 /obj/item/weapon/gun/projectile/sec/flash
-	name = "\improper NT Mk58 signal pistol"
+	name = "\improper .45 signal pistol"
 	magazine_type = /obj/item/ammo_magazine/c45m/flash
 
 /obj/item/weapon/gun/projectile/sec/wood
-	desc = "A Nanotrasen designed sidearm, this one has a sweet wooden grip. Uses .45 rounds."
-	name = "\improper Custom NT Mk58"
+	desc = "The NT Mk58, a Nanotrasen designed sidearm, this one has a sweet wooden grip. Uses .45 rounds."
+	name = "\improper custom .45 Pistol"
 	icon_state = "secgundark"
 
 /obj/item/weapon/gun/projectile/silenced
@@ -106,8 +106,8 @@
 		icon_state = "gyropistol"
 
 /obj/item/weapon/gun/projectile/pistol
-	name = "\improper Stechtkin pistol"
-	desc = "A small, easily concealable gun. Uses 9mm rounds."
+	name = "\improper holdout pistol"
+	desc = "Lumoco Arms P3 Whisper. A small, easily concealable gun. Uses 9mm rounds."
 	icon_state = "pistol"
 	item_state = null
 	w_class = 2
@@ -119,8 +119,8 @@
 	magazine_type = /obj/item/ammo_magazine/mc9mm
 
 /obj/item/weapon/gun/projectile/pistol/flash
-	name = "\improper Stechtkin signal pistol"
-	desc = "A small, easily concealable gun. Uses 9mm rounds."
+        name = "\improper holdout signal pistol"
+	desc = "Lumoco Arms P3 Whisper.A small, easily concealable gun. Uses 9mm rounds."
 	magazine_type = /obj/item/ammo_magazine/mc9mm/flash
 
 /obj/item/weapon/gun/projectile/pistol/attack_hand(mob/user as mob)
