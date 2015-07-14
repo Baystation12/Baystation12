@@ -102,6 +102,7 @@
 	handle_stunned()
 	handle_weakened()
 	handle_paralysed()
+	update_canmove()
 	handle_supernatural()
 
 	//Movement

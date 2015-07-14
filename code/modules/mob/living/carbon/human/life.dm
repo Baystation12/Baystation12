@@ -1687,6 +1687,7 @@
 		holder.icon_state = "hudblank"
 		if(mind)
 
+			// TODO: Update to new antagonist system.
 			switch(mind.special_role)
 				if("traitor","Mercenary")
 					holder.icon_state = "hudsyndicate"
