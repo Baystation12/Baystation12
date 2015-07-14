@@ -74,7 +74,7 @@
 	icon_state = "satchel"
 	slot_flags = SLOT_BELT | SLOT_POCKET
 	w_class = 3
-	max_storage_space = 200
+	max_storage_space = 100
 	max_w_class = 3
 	can_hold = list(/obj/item/weapon/ore)
 
@@ -87,7 +87,7 @@
 	name = "plant bag"
 	icon = 'icons/obj/hydroponics_machines.dmi'
 	icon_state = "plantbag"
-	max_storage_space = 200
+	max_storage_space = 100
 	max_w_class = 3
 	w_class = 2
 	can_hold = list(/obj/item/weapon/reagent_containers/food/snacks/grown,/obj/item/seeds,/obj/item/weapon/grown)
@@ -245,7 +245,7 @@
 	icon = 'icons/obj/storage.dmi'
 	icon_state = "cashbag"
 	desc = "A bag for carrying lots of cash. It's got a big dollar sign printed on the front."
-	max_storage_space = 200
+	max_storage_space = 100
 	max_w_class = 3
 	w_class = 2
 	can_hold = list(/obj/item/weapon/coin,/obj/item/weapon/spacecash)
