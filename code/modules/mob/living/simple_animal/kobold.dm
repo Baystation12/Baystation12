@@ -12,7 +12,6 @@
 	emote_see = list("looks around suspiciously.", "scratches it's arm.","putters around a bit.")
 	speak_chance = 15
 	turns_per_move = 5
-	see_in_dark = 6
 	meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat/monkey
 	response_help  = "pets"
 	response_disarm = "gently pushes aside"

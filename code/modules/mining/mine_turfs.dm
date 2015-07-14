@@ -342,8 +342,8 @@
 				R.amount = rand(5,25)
 
 			if(2)
-				var/obj/item/stack/tile/R = new(src)
-				R.amount = rand(1,5)
+				var/obj/item/stack/material/plasteel/R = new(src)
+				R.amount = rand(5,25)
 
 			if(3)
 				var/obj/item/stack/material/steel/R = new(src)

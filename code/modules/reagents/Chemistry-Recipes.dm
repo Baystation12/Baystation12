@@ -1459,10 +1459,10 @@
 	required_reagents = list("rum" = 2, "cola" = 1)
 	result_amount = 3
 
-/datum/chemical_reaction/classicmartini
+/datum/chemical_reaction/martini
 	name = "Classic Martini"
-	id = "classicmartini"
-	result = "classicmartini"
+	id = "martini"
+	result = "martini"
 	required_reagents = list("gin" = 2, "vermouth" = 1)
 	result_amount = 3
 

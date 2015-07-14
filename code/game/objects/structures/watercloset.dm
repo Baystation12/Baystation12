@@ -225,12 +225,12 @@
 		if(M.back)
 			if(M.back.clean_blood())
 				M.update_inv_back(0)
-		
+
 		//flush away reagents on the skin
 		if(M.touching)
 			var/remove_amount = M.touching.maximum_volume * M.reagent_permeability() //take off your suit first
 			M.touching.remove_any(remove_amount)
-		
+
 		if(ishuman(M))
 			var/mob/living/carbon/human/H = M
 			var/washgloves = 1
@@ -414,6 +414,9 @@
 					"<span class='danger'>[user] was stunned by \his wet [O]!</span>", \
 					"<span class='userdanger'>[user] was stunned by \his wet [O]!</span>")
 				return
+	// Short of a rewrite, this is necessary to stop monkeycubes being washed.
+	else if(istype(O, /obj/item/weapon/reagent_containers/food/snacks/monkeycube))
+		return
 
 	var/turf/location = user.loc
 	if(!isturf(location)) return

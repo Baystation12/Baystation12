@@ -399,7 +399,7 @@
 
 	var/list/connection_dirs = list()
 
-	for(var/obj/structure/table/T in oview(src, 1))
+	for(var/obj/structure/table/T in orange(src, 1))
 		var/T_dir = get_dir(src, T)
 		if(T_dir in blocked_dirs) continue
 		if(material && T.material && material.name == T.material.name && flipped == T.flipped)
