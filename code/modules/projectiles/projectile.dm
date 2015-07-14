@@ -110,21 +110,13 @@
 		p_x = between(0, p_x + rand(-radius, radius), world.icon_size)
 		p_y = between(0, p_y + rand(-radius, radius), world.icon_size)
 
-//called to launch a projectile from a gun
-/obj/item/projectile/proc/launch(atom/target, mob/user, obj/item/weapon/gun/launcher, var/target_zone, var/x_offset=0, var/y_offset=0)
-	var/turf/curloc = get_turf(user)
+//called to launch a projectile
+/obj/item/projectile/proc/launch(atom/target, var/target_zone, var/x_offset=0, var/y_offset=0)
+	var/turf/curloc = get_turf(src)
 	var/turf/targloc = get_turf(target)
 	if (!istype(targloc) || !istype(curloc))
 		return 1
 
-	firer = user
-	def_zone = target_zone
-
-	if(user == target) //Shooting yourself
-		user.bullet_act(src, target_zone)
-		on_impact(user)
-		qdel(src)
-		return 0
 	if(targloc == curloc) //Shooting something in the same turf
 		target.bullet_act(src, target_zone)
 		on_impact(target)
@@ -132,16 +124,29 @@
 		return 0
 
 	original = target
-	loc = curloc
-
-	shot_from = launcher
-	silenced = launcher.silenced
+	def_zone = target_zone
 
 	spawn()
 		setup_trajectory(curloc, targloc, x_offset, y_offset) //plot the initial trajectory
 		process()
 
 	return 0
+
+//called to launch a projectile from a gun
+/obj/item/projectile/proc/launch_from_gun(atom/target, mob/user, obj/item/weapon/gun/launcher, var/target_zone, var/x_offset=0, var/y_offset=0)
+	if(user == target) //Shooting yourself
+		user.bullet_act(src, target_zone)
+		on_impact(user)
+		qdel(src)
+		return 0
+	
+	loc = get_turf(user) //move the projectile out into the world
+	
+	firer = user
+	shot_from = launcher
+	silenced = launcher.silenced
+	
+	return launch(target, target_zone, x_offset, y_offset)
 
 //Used to change the direction of the projectile in flight.
 /obj/item/projectile/proc/redirect(var/new_x, var/new_y, var/atom/starting_loc, var/mob/new_firer=null)
@@ -316,8 +321,8 @@
 	// setup projectile state
 	starting = startloc
 	current = startloc
-	yo = targloc.y - curloc.y + y_offset
-	xo = targloc.x - curloc.x + x_offset
+	yo = targloc.y - startloc.y + y_offset
+	xo = targloc.x - startloc.x + x_offset
 
 	// trajectory dispersion
 	var/offset = 0
@@ -379,10 +384,6 @@
 	xo = null
 	var/result = 0 //To pass the message back to the gun.
 
-/obj/item/projectile/test/New(var/newloc, atom/target)
-	..(newloc)
-	original = target
-
 /obj/item/projectile/test/Bump(atom/A as mob|obj|turf|area)
 	if(A == firer)
 		loc = A.loc
@@ -395,15 +396,19 @@
 	result = 1
 	return
 
-/obj/item/projectile/test/process()
+/obj/item/projectile/test/launch(atom/target)
 	var/turf/curloc = get_turf(src)
-	var/turf/targloc = get_turf(original)
+	var/turf/targloc = get_turf(target)
 	if(!curloc || !targloc)
 		return 0
-
+	
+	original = target
+	
 	//plot the initial trajectory
 	setup_trajectory(curloc, targloc)
+	return process(targloc)
 
+/obj/item/projectile/test/process(var/turf/targloc)
 	while(src) //Loop on through!
 		if(result)
 			return (result - 1)
@@ -423,17 +428,18 @@
 			if(istype(M))
 				return 1
 
-/proc/check_trajectory(atom/target as mob|obj, atom/firer as mob|obj, var/pass_flags=PASSTABLE|PASSGLASS|PASSGRILLE, flags=null)  //Checks if you can hit them or not.
+//Helper proc to check if you can hit them or not.
+/proc/check_trajectory(atom/target as mob|obj, atom/firer as mob|obj, var/pass_flags=PASSTABLE|PASSGLASS|PASSGRILLE, flags=null)
 	if(!istype(target) || !istype(firer))
 		return 0
 
-	var/obj/item/projectile/test/trace = new /obj/item/projectile/test(get_turf(firer), target) //Making the test....
+	var/obj/item/projectile/test/trace = new /obj/item/projectile/test(get_turf(firer)) //Making the test....
 
 	//Set the flags and pass flags to that of the real projectile...
 	if(!isnull(flags))
 		trace.flags = flags 
 	trace.pass_flags = pass_flags
 
-	var/output = trace.process() //Test it!
+	var/output = trace.launch(target) //Test it!
 	qdel(trace) //No need for it anymore
 	return output //Send it back to the gun!
