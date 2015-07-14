@@ -331,3 +331,11 @@
 
 /turf/proc/process()
 	return PROCESS_KILL
+
+/turf/proc/contains_dense_objects()
+	if(density)
+		return 1
+	for(var/atom/A in src)
+		if(A.density && !(A.flags & ON_BORDER))
+			return 1
+	return 0

@@ -8,7 +8,7 @@
 	endWhen = rand(500, 1500)
 //		command_alert("The station has entered an ion storm.  Monitor all electronic equipment for malfunctions", "Anomaly Alert")
 	for (var/mob/living/carbon/human/player in player_list)
-		if(	!player.mind || player.mind.assigned_role == "MODE" || player.client.inactivity > MinutesToTicks(10))
+		if(	!player.mind || player_is_antag(player.mind, only_offstation_roles = 1) || player.client.inactivity > MinutesToTicks(10))
 			continue
 		players += player.real_name
 

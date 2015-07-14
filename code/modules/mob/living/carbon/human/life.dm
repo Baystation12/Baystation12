@@ -1226,7 +1226,6 @@
 
 		if(XRAY in mutations)
 			sight |= SEE_TURFS|SEE_MOBS|SEE_OBJS
-			see_in_dark = 8
 			if(!druggy)		see_invisible = SEE_INVISIBLE_LEVEL_TWO
 
 		if(seer==1)
@@ -1237,6 +1236,8 @@
 				see_invisible = SEE_INVISIBLE_LIVING
 				seer = 0
 
+		else
+			sight &= ~(SEE_TURFS|SEE_MOBS|SEE_OBJS)
 		var/tmp/glasses_processed = 0
 		var/obj/item/weapon/rig/rig = back
 		if(istype(rig) && rig.visor)
@@ -1248,6 +1249,9 @@
 		if(glasses && !glasses_processed)
 			glasses_processed = 1
 			process_glasses(glasses)
+		if(XRAY in mutations)
+			sight |= SEE_TURFS|SEE_MOBS|SEE_OBJS
+			if(!druggy)		see_invisible = SEE_INVISIBLE_LEVEL_TWO
 
 		if(!glasses_processed && (species.vision_flags > 0))
 			sight |= species.vision_flags
@@ -1684,6 +1688,7 @@
 		holder.icon_state = "hudblank"
 		if(mind)
 
+			// TODO: Update to new antagonist system.
 			switch(mind.special_role)
 				if("traitor","Mercenary")
 					holder.icon_state = "hudsyndicate"

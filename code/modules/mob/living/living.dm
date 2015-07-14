@@ -664,9 +664,9 @@ default behaviour is:
 		src << "You can't vent crawl while you're stunned!"
 		return
 
-	var/special_fail_msg = can_use_vents()
+	var/special_fail_msg = cannot_use_vents()
 	if(special_fail_msg)
-		src << "\red [special_fail_msg]"
+		src << "<span class='warning'>[special_fail_msg]</span>"
 		return
 
 	if(vent_found) // one was passed in, probably from vent/AltClick()
@@ -755,7 +755,7 @@ default behaviour is:
 		if(new_area)
 			new_area.Entered(src)
 
-/mob/living/proc/can_use_vents()
+/mob/living/proc/cannot_use_vents()
 	return "You can't fit into that vent."
 
 /mob/living/proc/has_brain()
