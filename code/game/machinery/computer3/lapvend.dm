@@ -46,8 +46,8 @@
 	if(vendmode == 3)
 		if(istype(W,/obj/item/weapon/card))
 			var/obj/item/weapon/card/I = W
-			reimburse(I)
-			vendmode = 0
+			if(reimburse(I))
+				vendmode = 0
 	if(vendmode == 0)
 		if(istype(W, /obj/item/device/laptop))
 			var/obj/item/device/laptop/L = W
@@ -368,19 +368,23 @@
 		var/datum/money_account/CH = get_account(C.associated_account_number)
 		if(!CH)
 			usr << "\icon[src]<span class='warning'>No valid account number is associated with this card.</span>"
-			return
+			return 0
 		if(CH.security_level != 0) //If card requires pin authentication (ie seclevel 1 or 2)
 			if(vendor_account)
 				var/attempt_pin = input("Enter pin code", "Vendor transaction") as num
 				var/datum/money_account/D = attempt_account_access(C.associated_account_number, attempt_pin, 2)
 				if(D)
 					transfer_and_reimburse(D)
+					return 1
 				else
 					usr << "\icon[src]<span class='warning'>Unable to access account. Check security settings and try again.</span>"
+					return 0
 			else
 				usr << "\icon[src]<span class='warning'>Unable to access vendor account. Please record the machine ID and call CentComm Support.</span>"
+				return 0
 		else
 			transfer_and_reimburse(CH)
+			return 1
 
 /obj/machinery/lapvend/proc/transfer_and_reimburse(var/datum/money_account/D)
 	var/transaction_amount = total()
