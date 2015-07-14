@@ -30,7 +30,7 @@
 	add_antagonist(M.mind, 1, 0, 1) // Equip them and move them to spawn.
 	return M
 
-/datum/antagonist/proc/create_id(var/assignment, var/mob/living/carbon/human/player)
+/datum/antagonist/proc/create_id(var/assignment, var/mob/living/carbon/human/player, var/equip = 1)
 
 	var/obj/item/weapon/card/id/W = new id_type(player)
 	if(!W) return
@@ -38,7 +38,7 @@
 	W.access |= default_access
 	W.assignment = "[assignment]"
 	W.registered_name = player.real_name
-	player.equip_to_slot_or_del(W, slot_wear_id)
+	if(equip) player.equip_to_slot_or_del(W, slot_wear_id)
 	return W
 
 /datum/antagonist/proc/create_radio(var/freq, var/mob/living/carbon/human/player)

@@ -150,7 +150,6 @@
 	attacktext = "slashed"
 	speed = -1
 	environment_smash = 1
-	see_in_dark = 7
 	attack_sound = 'sound/weapons/rapidslice.ogg'
 	construct_spells = list(/spell/targeted/ethereal_jaunt/shift)
 
@@ -228,7 +227,6 @@
 	attacktext = "violently stabbed"
 	speed = -1
 	environment_smash = 1
-	see_in_dark = 7
 	attack_sound = 'sound/weapons/pierce.ogg'
 
 	construct_spells = list(

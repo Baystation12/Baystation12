@@ -14,7 +14,6 @@
 	update_icon = 0
 	nutrition = 700
 
-	see_in_dark = 8
 	update_slimes = 0
 
 	// canstun and canweaken don't affect slimes because they ignore stun and weakened variables
@@ -399,7 +398,7 @@
 			adjustToxLoss(-10)
 	nutrition = max(nutrition, get_max_nutrition())
 
-/mob/living/carbon/slime/can_use_vents()
+/mob/living/carbon/slime/cannot_use_vents()
 	if(Victim)
 		return "You cannot ventcrawl while feeding."
 	..()

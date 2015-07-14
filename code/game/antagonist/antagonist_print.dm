@@ -47,7 +47,7 @@
 	return text
 
 /datum/antagonist/proc/print_player_lite(var/datum/mind/ply)
-	var/role = ply.assigned_role == "MODE" ? "\improper[ply.special_role]" : "\improper[ply.assigned_role]"
+	var/role = ply.special_role ? "\improper[ply.special_role]" : "\improper[ply.assigned_role]"
 	var/text = "<br><b>[ply.name]</b> (<b>[ply.key]</b>) as \a <b>[role]</b> ("
 	if(ply.current)
 		if(ply.current.stat == DEAD)

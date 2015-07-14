@@ -10,7 +10,6 @@
 	unarmed_types = list(/datum/unarmed_attack/slime_glomp)
 	flags = IS_RESTRICTED | NO_SCAN | NO_SLIP | NO_BREATHE
 	siemens_coefficient = 3
-	darksight = 3
 
 	blood_color = "#05FF9B"
 	flesh_color = "#05FFFB"
