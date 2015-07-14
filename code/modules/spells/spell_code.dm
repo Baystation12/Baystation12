@@ -189,7 +189,11 @@ var/list/spells = typesof(/spell) //needed for the badmin verb for now
 	if(silenced > 0)
 		return
 
-	if(user.z == 2 && spell_flags & Z2NOCAST) //Certain spells are not allowed on the centcomm zlevel
+	var/turf/Turf = get_turf(user)
+	if(!Turf)
+		user << "<span class='warning'>You cannot cast spells in null space!</span>"
+
+	if(spell_flags & Z2NOCAST && (Turf.z in config.admin_levels)) //Certain spells are not allowed on the centcomm zlevel
 		return 0
 
 	if(spell_flags & CONSTRUCT_CHECK)

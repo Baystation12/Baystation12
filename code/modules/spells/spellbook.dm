@@ -256,7 +256,6 @@
 							if (!(XRAY in H.mutations))
 								H.mutations.Add(XRAY)
 								H.sight |= (SEE_MOBS|SEE_OBJS|SEE_TURFS)
-								H.see_in_dark = 8
 								H.see_invisible = SEE_INVISIBLE_LEVEL_TWO
 								H << "\blue The walls suddenly disappear."
 							temp = "You have purchased a scrying orb, and gained x-ray vision."
@@ -288,6 +287,7 @@
 	for(var/spell/knownspell in user.spell_list)
 		if(knownspell.type == S.type)
 			if(user.mind)
+				// TODO: Update to new antagonist system.
 				if(user.mind.special_role == "apprentice" || user.mind.special_role == "Wizard")
 					user <<"<span class='notice'>You're already far more versed in this spell than this flimsy how-to book can provide.</span>"
 				else

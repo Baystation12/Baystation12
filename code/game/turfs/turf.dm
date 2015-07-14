@@ -29,6 +29,7 @@
 	var/holy = 0
 
 	var/dynamic_lighting = 1
+	luminosity = 1
 
 /turf/New()
 	..()
@@ -37,7 +38,6 @@
 			src.Entered(AM)
 			return
 	turfs |= src
-	return
 
 /turf/Destroy()
 	turfs -= src
@@ -225,6 +225,7 @@
 	var/old_opacity = opacity
 	var/old_dynamic_lighting = dynamic_lighting
 	var/list/old_affecting_lights = affecting_lights
+	var/old_lighting_overlay = lighting_overlay
 
 	//world << "Replacing [src.type] with [N]"
 
@@ -276,6 +277,7 @@
 		W.levelupdate()
 		. =  W
 
+	lighting_overlay = old_lighting_overlay
 	affecting_lights = old_affecting_lights
 	if((old_opacity != opacity) || (dynamic_lighting != old_dynamic_lighting) || force_lighting_update)
 		reconsider_lights()
@@ -329,3 +331,11 @@
 
 /turf/proc/process()
 	return PROCESS_KILL
+
+/turf/proc/contains_dense_objects()
+	if(density)
+		return 1
+	for(var/atom/A in src)
+		if(A.density && !(A.flags & ON_BORDER))
+			return 1
+	return 0

@@ -16,6 +16,7 @@
 #include "code\stylesheet.dm"
 #include "code\world.dm"
 #include "code\__defines\_compile_options.dm"
+#include "code\__defines\_macros.dm"
 #include "code\__defines\admin.dm"
 #include "code\__defines\atmos.dm"
 #include "code\__defines\chemistry.dm"

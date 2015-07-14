@@ -188,7 +188,6 @@
 
 /obj/item/weapon/rig/emag_act(var/remaining_charges, var/mob/user)
 	if(!subverted)
-		locked_dna = null
 		req_access.Cut()
 		req_one_access.Cut()
 		locked = 0

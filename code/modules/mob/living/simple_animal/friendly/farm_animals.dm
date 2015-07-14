@@ -11,7 +11,6 @@
 	emote_see = list("shakes its head", "stamps a foot", "glares around")
 	speak_chance = 1
 	turns_per_move = 5
-	see_in_dark = 6
 	meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat
 	meat_amount = 4
 	response_help  = "pets"
@@ -95,7 +94,6 @@
 	emote_see = list("shakes its head")
 	speak_chance = 1
 	turns_per_move = 5
-	see_in_dark = 6
 	meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat
 	meat_amount = 6
 	response_help  = "pets"

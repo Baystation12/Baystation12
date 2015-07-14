@@ -7,6 +7,7 @@
 	var/build_machine_type
 	var/refund_amt = 2
 	var/refund_type = /obj/item/stack/material/steel
+	var/reverse = 0 //if resulting object faces opposite its dir (like light fixtures)
 
 /obj/item/frame/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (istype(W, /obj/item/weapon/wrench))
@@ -22,7 +23,12 @@
 	if (get_dist(on_wall,usr)>1)
 		return
 
-	var/ndir = get_dir(on_wall,usr)
+	var/ndir
+	if(reverse)
+		ndir = get_dir(usr,on_wall)
+	else
+		ndir = get_dir(on_wall,usr)
+
 	if (!(ndir in cardinal))
 		return
 
@@ -61,6 +67,7 @@
 	icon = 'icons/obj/lighting.dmi'
 	icon_state = "tube-construct-item"
 	build_machine_type = /obj/machinery/light_construct
+	reverse = 1
 
 /obj/item/frame/light/small
 	name = "small light fixture frame"

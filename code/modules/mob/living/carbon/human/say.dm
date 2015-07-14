@@ -129,21 +129,15 @@
 	return verb
 
 /mob/living/carbon/human/handle_speech_problems(var/message, var/verb)
-	if(!speech_problem_flag)
-		return ..()
-
-	var/list/returns[3]
-	speech_problem_flag = 0
 	if(silent || (sdisabilities & MUTE))
 		message = ""
 		speech_problem_flag = 1
-	if(istype(wear_mask, /obj/item/clothing/mask/horsehead))
+	else if(istype(wear_mask, /obj/item/clothing/mask/horsehead))
 		var/obj/item/clothing/mask/horsehead/hoers = wear_mask
 		if(hoers.voicechange)
-			if(mind && mind.changeling && department_radio_keys[copytext(message, 1, 3)] != "changeling")
-				message = pick("NEEIIGGGHHHH!", "NEEEIIIIGHH!", "NEIIIGGHH!", "HAAWWWWW!", "HAAAWWW!")
-				verb = pick("whinnies","neighs", "says")
-				speech_problem_flag = 1
+			message = pick("NEEIIGGGHHHH!", "NEEEIIIIGHH!", "NEIIIGGHH!", "HAAWWWWW!", "HAAAWWW!")
+			verb = pick("whinnies","neighs", "says")
+			speech_problem_flag = 1
 
 	if(message != "")
 		var/list/parent = ..()
@@ -162,6 +156,7 @@
 				message = uppertext(message)
 				verb = "yells loudly"
 
+	var/list/returns[3]
 	returns[1] = message
 	returns[2] = verb
 	returns[3] = speech_problem_flag

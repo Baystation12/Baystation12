@@ -195,6 +195,16 @@
 		else
 			healths.icon_state = "health7"
 
+		if (stat == 2 || (XRAY in src.mutations))
+			sight |= SEE_TURFS
+			sight |= SEE_MOBS
+			sight |= SEE_OBJS
+			see_invisible = SEE_INVISIBLE_LEVEL_TWO
+		else if (stat != 2)
+			sight &= ~SEE_TURFS
+			sight &= ~SEE_MOBS
+			sight &= ~SEE_OBJS
+			see_invisible = SEE_INVISIBLE_LIVING
 	if (client)
 		client.screen.Remove(global_hud.blurry,global_hud.druggy,global_hud.vimpaired)
 
