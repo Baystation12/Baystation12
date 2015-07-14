@@ -12,6 +12,7 @@
 	cooldown_min = 200 //100 deciseconds reduction per rank
 	compatible_mobs = list(/mob/living/carbon/human) //which types of mobs are affected by the spell. NOTE: change at your own risk
 
+	// TODO: Update to new antagonist system.
 	var/list/protected_roles = list("Wizard","Changeling","Cultist") //which roles are immune to the spell
 	var/msg_wait = 500 //how long in deciseconds it waits before telling that body doesn't feel right or mind swap robbed of a spell
 	amt_paralysis = 20 //how much the victim is paralysed for after the spell
