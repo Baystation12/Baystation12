@@ -18,7 +18,7 @@
 		src.updateDialog()
 		return 1
 	if(href_list["track"])
-		if(usr.isAI())
+		if(usr.isMobAI())
 			var/mob/living/silicon/ai/AI = usr
 			var/mob/living/carbon/human/H = locate(href_list["track"]) in mob_list
 			if(hassensorlevel(H, SUIT_SENSOR_TRACKING))
@@ -69,7 +69,7 @@
 
 	crewmembers = sortByKey(crewmembers, "name")
 
-	data["isAI"] = user.isAI()
+	data["isAI"] = user.isMobAI()
 	data["crewmembers"] = crewmembers
 
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
