@@ -1,5 +1,5 @@
 /obj/item/weapon/gun/projectile/colt
-	name = "\improper cheap .45 Pistol"
+	name = "\improper cheap .45 pistol"
 	desc = "A cheap Martian knock-off of a Colt M1911."
 	magazine_type = /obj/item/ammo_magazine/c45m
 	icon_state = "colt"
@@ -32,7 +32,7 @@
 
 /obj/item/weapon/gun/projectile/sec
 	desc = "The NT Mk58, a NanoTrasen designed sidearm, found pretty much everywhere humans are. Uses .45 rounds."
-	name = "\improper .45 Pistol"
+	name = "\improper .45 pistol"
 	icon_state = "secguncomp"
 	magazine_type = /obj/item/ammo_magazine/c45m/rubber
 	caliber = ".45"
