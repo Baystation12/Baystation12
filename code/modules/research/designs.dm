@@ -314,7 +314,7 @@ datum/design/circuit/aifixer
 ///////////////////////////////////
 datum/design/circuit/shield
 	req_tech = list("bluespace" = 4, "phorontech" = 3)
-	materials = list("$glass" = 2000, "sacid" = 20, "$phoron" = 10000, "$diamond" = 5000, "$gold" = 10000)
+	materials = list("$glass" = 2000, "sacid" = 20, "$diamond" = 5000, "$gold" = 10000)
 
 datum/design/circuit/shield/AssembleDesignName()
 	name = "Shield generator circuit design ([name])"

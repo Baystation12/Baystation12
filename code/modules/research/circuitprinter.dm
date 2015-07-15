@@ -147,6 +147,7 @@ using metal and glass, it uses glass and reagents (usually sulfuric acis).
 			new stacktype(loc, amount)
 		busy = 0
 		updateUsrDialog()
+		return
 
 	..()
 
