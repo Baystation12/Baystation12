@@ -120,7 +120,7 @@
 
 /obj/item/weapon/gun/projectile/pistol/flash
 	name = "\improper holdout signal pistol"
-	desc = "Lumoco Arms P3 Whisper.A small, easily concealable gun. Uses 9mm rounds."
+	desc = "Lumoco Arms P3 Whisper. A small, easily concealable gun. Uses 9mm rounds."
 	magazine_type = /obj/item/ammo_magazine/mc9mm/flash
 
 /obj/item/weapon/gun/projectile/pistol/attack_hand(mob/user as mob)
