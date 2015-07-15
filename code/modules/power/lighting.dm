@@ -195,14 +195,9 @@
 
 		switch(fitting)
 			if("tube")
-				brightness_range = 8
-				brightness_power = 3
 				if(prob(2))
 					broken(1)
 			if("bulb")
-				brightness_range = 4
-				brightness_power = 2
-				brightness_color = "#a0a080"
 				if(prob(5))
 					broken(1)
 		spawn(1)
