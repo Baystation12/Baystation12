@@ -170,7 +170,7 @@
 		user << "\The [launcher] is empty."
 
 /obj/item/weapon/gun/projectile/automatic/l6_saw
-	name = "\improper vintage LMG"
+	name = "\improper LMG"
 	desc = "A rather traditionally made L6 SAW with a pleasantly lacquered wooden pistol grip. Has 'Aussec Armoury- 2531' engraved on the reciever"
 	icon_state = "l6closed100"
 	item_state = "l6closedmag"
