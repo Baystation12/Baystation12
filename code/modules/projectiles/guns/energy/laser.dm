@@ -33,10 +33,10 @@ obj/item/weapon/gun/energy/retro
 	fire_delay = 10 //old technology
 
 /obj/item/weapon/gun/energy/captain
-	name = "expensive laser gun"
+	name = "antique laser gun"
 	icon_state = "caplaser"
 	item_state = "caplaser"
-	desc = "An excellently crafted piece of weapon, produced by Gilthari Exports. Handcrafted only on demand for a specific wielder, this handy energy-based pistol is truly only worn by some sort of Elite. Why buy a gun for the price of a small space station? Because you are worth it."
+	desc = "A rare weapon, handcrafted by a now defunct specialty manufacturer on Luna for a small fortune. It's certainly aged well"
 	force = 5
 	fire_sound = 'sound/weapons/Laser.ogg'
 	slot_flags = SLOT_BELT
