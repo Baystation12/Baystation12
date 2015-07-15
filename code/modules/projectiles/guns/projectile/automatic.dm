@@ -18,7 +18,7 @@
 		)
 
 /obj/item/weapon/gun/projectile/automatic/mini_uzi
-	name = "\improper machinepistol"
+	name = "\improper Uzi"
 	desc = "The UZI is a lightweight, fast firing gun. For when you want someone dead. Uses .45 rounds."
 	icon_state = "mini-uzi"
 	w_class = 3
@@ -29,13 +29,13 @@
 	ammo_type = /obj/item/ammo_casing/c45
 
 /obj/item/weapon/gun/projectile/automatic/c20r
-	name = "\improper submachine gun"
-	desc = "The C-20r is a lightweight and rapid firing SMG. For when you REALLY need someone dead. Uses 12mm pistol rounds. Has a 'Scarborough Arms - Per falcis, per pravitas' buttstamp"
+	name = "submachine gun"
+	desc = "The C-20r is a lightweight and rapid firing SMG, for when you REALLY need someone dead. Uses 11mm rounds. Has a 'Scarborough Arms - Per falcis, per pravitas' buttstamp."
 	icon_state = "c20r"
 	item_state = "c20r"
 	w_class = 3
 	force = 10
-	caliber = "12mm"
+	caliber = "11mm"
 	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 2, TECH_ILLEGAL = 8)
 	slot_flags = SLOT_BELT|SLOT_BACK
 	fire_sound = 'sound/weapons/Gunshot_light.ogg'
@@ -53,8 +53,8 @@
 	return
 
 /obj/item/weapon/gun/projectile/automatic/sts35
-	name = "\improper assault rifle"
-	desc = "The durable STS-35, a rugged looking automatic weapon of a make popular on the frontier worlds. Uses 7.62mm rounds. It is unmarked."
+	name = "assault rifle"
+	desc = "The rugged looking STS-35 is a durable automatic weapon of a make popular on the frontier worlds. Uses 7.62mm rounds. This one is unmarked."
 	icon_state = "arifle"
 	item_state = null
 	w_class = 4
@@ -77,8 +77,8 @@
 	update_held_icon()
 
 /obj/item/weapon/gun/projectile/automatic/wt550
-	name = "\improper 9mm PDW"
-	desc = "W-T 550 Saber. Cheap, mass produced Ward-Takahashi personal defense weapon. Uses 9mm rounds."
+	name = "machinepistol"
+	desc = "The W-T 550 Saber is a cheap self-defense weapon mass-produced by Ward-Takahashi for paramilitary and private use. Uses 9mm rounds."
 	icon_state = "wt550"
 	item_state = "wt550"
 	w_class = 3
@@ -102,8 +102,8 @@
 	var/use_launcher = 0
 
 /obj/item/weapon/gun/projectile/automatic/z8
-	name = "\improper bullpup assault rifle"
-	desc = "An older model bullpup carbine, made by the now defunct Zendai Foundries, dubbed Z8 Bulldog Uses armor piercing 5.56mm rounds. Makes you feel like a space marine when you hold it."
+	name = "bullpup assault rifle"
+	desc = "The Z8 Bulldog is an older model bullpup carbine, made by the now defunct Zendai Foundries. Uses armor piercing 5.56mm rounds. Makes you feel like a space marine when you hold it."
 	icon_state = "carbine"
 	item_state = "z8carbine"
 	w_class = 4
@@ -170,7 +170,7 @@
 		user << "\The [launcher] is empty."
 
 /obj/item/weapon/gun/projectile/automatic/l6_saw
-	name = "\improper LMG"
+	name = "light machine gun"
 	desc = "A rather traditionally made L6 SAW with a pleasantly lacquered wooden pistol grip. Has 'Aussec Armoury- 2531' engraved on the reciever"
 	icon_state = "l6closed100"
 	item_state = "l6closedmag"

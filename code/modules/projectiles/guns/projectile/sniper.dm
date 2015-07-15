@@ -1,6 +1,6 @@
 /obj/item/weapon/gun/projectile/heavysniper
-	name = "\improper anti-materiel rifle"
-	desc = "A portable anti-armour rifle fitted with a scope and an old classic design of Hesphaistos Industries, bearing the name HI PTR-7 Rifle. Originally designed to used against armoured exosuits, it is capable of punching through windows and non-reinforced walls with ease. Fires armor piercing 14.5mm shells."
+	name = "anti-materiel rifle"
+	desc = "A portable anti-armour rifle fitted with a scope, the HI PTR-7 Rifle was originally designed to used against armoured exosuits. It is capable of punching through windows and non-reinforced walls with ease. Fires armor piercing 14.5mm shells."
 	icon_state = "heavysniper"
 	item_state = "l6closednomag" //placeholder
 	w_class = 4

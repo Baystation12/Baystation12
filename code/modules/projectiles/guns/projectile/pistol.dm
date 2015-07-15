@@ -1,6 +1,6 @@
 /obj/item/weapon/gun/projectile/colt
-	name = "\improper cheap .45 pistol"
-	desc = "A cheap Martian knock-off of a Colt M1911."
+	name = "vintage .45 pistol"
+	desc = "A cheap Martian knock-off of a Colt M1911. Uses .45 rounds."
 	magazine_type = /obj/item/ammo_magazine/c45m
 	icon_state = "colt"
 	caliber = ".45"
@@ -9,7 +9,6 @@
 	load_method = MAGAZINE
 
 /obj/item/weapon/gun/projectile/colt/detective
-	desc = "A cheap Martian knock-off of a Colt M1911. Uses .45 rounds."
 	magazine_type = /obj/item/ammo_magazine/c45m/rubber
 
 /obj/item/weapon/gun/projectile/colt/detective/verb/rename_gun()
@@ -31,8 +30,8 @@
 		return 1
 
 /obj/item/weapon/gun/projectile/sec
-	desc = "The NT Mk58, a NanoTrasen designed sidearm, found pretty much everywhere humans are. Uses .45 rounds."
-	name = "\improper .45 pistol"
+	name = ".45 pistol"
+	desc = "The NT Mk58 is a cheap, ubiquitous sidearm, produced by a Nanotrasen subsidiary. Found pretty much everywhere humans are. Uses .45 rounds."
 	icon_state = "secguncomp"
 	magazine_type = /obj/item/ammo_magazine/c45m/rubber
 	caliber = ".45"
@@ -41,12 +40,12 @@
 	load_method = MAGAZINE
 
 /obj/item/weapon/gun/projectile/sec/flash
-	name = "\improper .45 signal pistol"
+	name = ".45 signal pistol"
 	magazine_type = /obj/item/ammo_magazine/c45m/flash
 
 /obj/item/weapon/gun/projectile/sec/wood
-	desc = "The NT Mk58, a Nanotrasen designed sidearm, this one has a sweet wooden grip. Uses .45 rounds."
-	name = "\improper custom .45 Pistol"
+	desc = "The NT Mk58 is a cheap, ubiquitous sidearm, produced by a Nanotrasen subsidiary. This one has a sweet wooden grip. Uses .45 rounds."
+	name = "custom .45 Pistol"
 	icon_state = "secgundark"
 
 /obj/item/weapon/gun/projectile/silenced
@@ -106,7 +105,7 @@
 		icon_state = "gyropistol"
 
 /obj/item/weapon/gun/projectile/pistol
-	name = "\improper holdout pistol"
+	name = "holdout pistol"
 	desc = "Lumoco Arms P3 Whisper. A small, easily concealable gun. Uses 9mm rounds."
 	icon_state = "pistol"
 	item_state = null
@@ -119,7 +118,7 @@
 	magazine_type = /obj/item/ammo_magazine/mc9mm
 
 /obj/item/weapon/gun/projectile/pistol/flash
-	name = "\improper holdout signal pistol"
+	name = "holdout signal pistol"
 	desc = "Lumoco Arms P3 Whisper. A small, easily concealable gun. Uses 9mm rounds."
 	magazine_type = /obj/item/ammo_magazine/mc9mm/flash
 
@@ -178,7 +177,7 @@
 		/obj/item/ammo_casing/a357              = ".357",
 		/obj/item/ammo_casing/c9mmf             = "9mm",
 		/obj/item/ammo_casing/c45f              = ".45",
-		/obj/item/ammo_casing/a12mm             = "12mm",
+		/obj/item/ammo_casing/a12mm             = "11mm",
 		/obj/item/ammo_casing/shotgun           = "12 gauge",
 		/obj/item/ammo_casing/shotgun           = "12 gauge",
 		/obj/item/ammo_casing/shotgun/pellet    = "12 gauge",
