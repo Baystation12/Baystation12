@@ -139,11 +139,6 @@
 	build_path = /obj/machinery/computer/crew
 	origin_tech = list(TECH_DATA = 3, TECH_BIO = 2, TECH_MAGNET = 2)
 
-/obj/item/weapon/circuitboard/mech_bay_power_console
-	name = T_BOARD("mech bay power control console")
-	build_path = /obj/machinery/computer/mech_bay_power_console
-	origin_tech = list(TECH_DATA = 2, TECH_POWER = 3)
-
 /obj/item/weapon/circuitboard/operating
 	name = T_BOARD("patient monitoring console")
 	build_path = /obj/machinery/computer/operating
@@ -195,4 +190,4 @@
 /obj/item/weapon/circuitboard/rcon_console
 	name = T_BOARD("RCON remote control console")
 	build_path = /obj/machinery/computer/rcon
-	origin_tech = list(TECH_DATA = 4, TECH_ENGINERING = 3, TECH_POWER = 5)
+	origin_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 3, TECH_POWER = 5)

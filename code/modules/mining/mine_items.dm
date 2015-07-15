@@ -51,7 +51,7 @@
 	w_class = 4.0
 	matter = list(DEFAULT_WALL_MATERIAL = 3750)
 	var/digspeed = 40 //moving the delay to an item var so R&D can make improved picks. --NEO
-	origin_tech = list(TECH_MATERIAL = 1, TECH_ENGINERING = 1)
+	origin_tech = list(TECH_MATERIAL = 1, TECH_ENGINEERING = 1)
 	attack_verb = list("hit", "pierced", "sliced", "attacked")
 	var/drill_sound = 'sound/weapons/Genhit.ogg'
 	var/drill_verb = "drilling"
@@ -77,7 +77,7 @@
 	icon_state = "handdrill"
 	item_state = "jackhammer"
 	digspeed = 30
-	origin_tech = list(TECH_MATERIAL = 2, TECH_POWER = 3, TECH_ENGINERING = 2)
+	origin_tech = list(TECH_MATERIAL = 2, TECH_POWER = 3, TECH_ENGINEERING = 2)
 	desc = "Yours is the drill that will pierce through the rock walls."
 	drill_verb = "drilling"
 
@@ -86,7 +86,7 @@
 	icon_state = "jackhammer"
 	item_state = "jackhammer"
 	digspeed = 20 //faster than drill, but cannot dig
-	origin_tech = list(TECH_MATERIAL = 3, TECH_POWER = 2, TECH_ENGINERING = 2)
+	origin_tech = list(TECH_MATERIAL = 3, TECH_POWER = 2, TECH_ENGINEERING = 2)
 	desc = "Cracks rocks with sonic blasts, perfect for killing cave lizards."
 	drill_verb = "hammering"
 
@@ -106,7 +106,7 @@
 	w_class = 3.0 //it is smaller than the pickaxe
 	damtype = "fire"
 	digspeed = 20 //Can slice though normal walls, all girders, or be used in reinforced wall deconstruction/ light thermite on fire
-	origin_tech = list(TECH_MATERIAL = 4, TECH_PHORON = 3, TECH_ENGINERING = 3)
+	origin_tech = list(TECH_MATERIAL = 4, TECH_PHORON = 3, TECH_ENGINEERING = 3)
 	desc = "A rock cutter that uses bursts of hot plasma. You could use it to cut limbs off of xenos! Or, you know, mine stuff."
 	drill_verb = "cutting"
 	drill_sound = 'sound/items/Welder.ogg'
@@ -118,7 +118,7 @@
 	icon_state = "dpickaxe"
 	item_state = "dpickaxe"
 	digspeed = 10
-	origin_tech = list(TECH_MATERIAL = 6, TECH_ENGINERING = 4)
+	origin_tech = list(TECH_MATERIAL = 6, TECH_ENGINEERING = 4)
 	desc = "A pickaxe with a diamond pick head."
 	drill_verb = "picking"
 
@@ -127,7 +127,7 @@
 	icon_state = "diamonddrill"
 	item_state = "jackhammer"
 	digspeed = 5 //Digs through walls, girders, and can dig up sand
-	origin_tech = list(TECH_MATERIAL = 6, TECH_POWER = 4, TECH_ENGINERING = 5)
+	origin_tech = list(TECH_MATERIAL = 6, TECH_POWER = 4, TECH_ENGINEERING = 5)
 	desc = "Yours is the drill that will pierce the heavens!"
 	drill_verb = "drilling"
 
@@ -152,7 +152,7 @@
 	throwforce = 4.0
 	item_state = "shovel"
 	w_class = 3.0
-	origin_tech = list(TECH_MATERIAL = 1, TECH_ENGINERING = 1)
+	origin_tech = list(TECH_MATERIAL = 1, TECH_ENGINEERING = 1)
 	matter = list(DEFAULT_WALL_MATERIAL = 50)
 	attack_verb = list("bashed", "bludgeoned", "thrashed", "whacked")
 	sharp = 0

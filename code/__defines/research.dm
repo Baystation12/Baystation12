@@ -1,7 +1,7 @@
 #define SHEET_MATERIAL_AMOUNT 2000
 
 #define TECH_MATERIAL "materials"
-#define TECH_ENGINERING "engineering"
+#define TECH_ENGINEERING "engineering"
 #define TECH_PHORON "phorontech"
 #define TECH_POWER "powerstorage"
 #define TECH_BLUESPACE "bluespace"

@@ -18,7 +18,7 @@ REAGENT SCANNER
 
 	matter = list(DEFAULT_WALL_MATERIAL = 150)
 
-	origin_tech = list(TECH_MAGNET = 1, TECH_ENGINERING = 1)
+	origin_tech = list(TECH_MAGNET = 1, TECH_ENGINEERING = 1)
 
 /obj/item/device/t_scanner/attack_self(mob/user)
 
@@ -254,7 +254,7 @@ REAGENT SCANNER
 
 	matter = list(DEFAULT_WALL_MATERIAL = 30,"glass" = 20)
 
-	origin_tech = list(TECH_MAGNET = 1, TECH_ENGINERING = 1)
+	origin_tech = list(TECH_MAGNET = 1, TECH_ENGINEERING = 1)
 
 /obj/item/device/analyzer/attack_self(mob/user as mob)
 

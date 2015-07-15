@@ -13,7 +13,7 @@
 	throw_speed = 1
 	throw_range = 5
 	w_class = 3.0
-	origin_tech = list(TECH_ENGINERING = 4, TECH_MATERIAL = 2)
+	origin_tech = list(TECH_ENGINEERING = 4, TECH_MATERIAL = 2)
 	matter = list(DEFAULT_WALL_MATERIAL = 50000)
 	var/datum/effect/effect/system/spark_spread/spark_system
 	var/stored_matter = 0

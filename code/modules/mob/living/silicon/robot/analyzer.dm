@@ -12,7 +12,7 @@
 	w_class = 2.0
 	throw_speed = 5
 	throw_range = 10
-	origin_tech = list(TECH_MAGNET = 2, TECH_BIO = 1, TECH_ENGINERING = 2)
+	origin_tech = list(TECH_MAGNET = 2, TECH_BIO = 1, TECH_ENGINEERING = 2)
 	matter = list(DEFAULT_WALL_MATERIAL = 500, "glass" = 200)
 	var/mode = 1;
 
