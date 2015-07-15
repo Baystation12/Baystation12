@@ -119,7 +119,7 @@
 	magazine_type = /obj/item/ammo_magazine/mc9mm
 
 /obj/item/weapon/gun/projectile/pistol/flash
-        name = "\improper holdout signal pistol"
+	name = "\improper holdout signal pistol"
 	desc = "Lumoco Arms P3 Whisper.A small, easily concealable gun. Uses 9mm rounds."
 	magazine_type = /obj/item/ammo_magazine/mc9mm/flash
 
@@ -173,7 +173,7 @@
 	handle_casings = CYCLE_CASINGS //player has to take the old casing out manually before reloading
 	load_method = SINGLE_CASING
 	max_shells = 1 //literally just a barrel
-	
+
 	var/global/list/ammo_types = list(
 		/obj/item/ammo_casing/a357              = ".357",
 		/obj/item/ammo_casing/c9mmf             = "9mm",
@@ -194,7 +194,7 @@
 /obj/item/weapon/gun/projectile/pirate/New()
 	ammo_type = pick(ammo_types)
 	desc += " Uses [ammo_types[ammo_type]] rounds."
-	
+
 	var/obj/item/ammo_casing/ammo = ammo_type
 	caliber = initial(ammo.caliber)
 	..()
