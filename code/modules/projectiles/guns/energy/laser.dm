@@ -78,7 +78,7 @@ obj/item/weapon/gun/energy/retro
 	fire_delay = 1
 
 /obj/item/weapon/gun/energy/sniperrifle
-	name = "\improper scoped laser carbine"
+	name = "\improper marksman energy rifle"
 	desc = "The HI DMR 9 E is an older design of Hesphaistos Industries, a designated marksman rifle fitted with a smart AI guidance system. Shooting powerful ionized gas shots, this is a weapon to kill from a distance."
 	icon_state = "sniper"
 	item_state = "laser"
