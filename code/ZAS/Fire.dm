@@ -69,12 +69,12 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 /zone/proc/remove_liquidfuel(var/used_liquid_fuel, var/remove_fire=0)
 	if(!fuel_objs.len)
 		return
-	
-	//As a simplification, we remove fuel equally from all fuel sources. It might be that some fuel sources have more fuel, 
+
+	//As a simplification, we remove fuel equally from all fuel sources. It might be that some fuel sources have more fuel,
 	//some have less, but whatever. It will mean that sometimes we will remove a tiny bit less fuel then we intended to.
-	
+
 	var/fuel_to_remove = used_liquid_fuel/(fuel_objs.len*LIQUIDFUEL_AMOUNT_TO_MOL) //convert back to liquid volume units
-	
+
 	for(var/O in fuel_objs)
 		var/obj/effect/decal/cleanable/liquid_fuel/fuel = O
 		if(!istype(fuel))
@@ -192,7 +192,7 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 		return
 
 	set_dir(pick(cardinal))
-	
+
 	var/datum/gas_mixture/air_contents = loc.return_air()
 	color = fire_color(air_contents.temperature)
 	set_light(3, 1, color)
@@ -213,7 +213,7 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 	var/turf/T = loc
 	if (istype(T))
 		set_light(0)
-		
+
 		T.fire = null
 		loc = null
 	air_master.active_hotspots.Remove(src)
@@ -227,13 +227,13 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 //Returns the firelevel
 /datum/gas_mixture/proc/zburn(zone/zone, force_burn, no_check = 0)
 	. = 0
-	if((temperature > PHORON_MINIMUM_BURN_TEMPERATURE || force_burn) && (no_check ||check_recombustability(zone? zone.fuel_objs : null)))
-	
+	if((temperature > PHORON_FLASHPOINT || force_burn) && (no_check ||check_recombustability(zone? zone.fuel_objs : null)))
+
 		#ifdef FIREDBG
 		log_debug("***************** FIREDBG *****************")
 		log_debug("Burning [zone? zone.name : "zoneless gas_mixture"]!")
 		#endif
-	
+
 		var/gas_fuel = 0
 		var/liquid_fuel = 0
 		var/total_fuel = 0
@@ -271,7 +271,7 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 		//calculate the firelevel.
 		var/firelevel = calculate_firelevel(total_fuel, total_oxidizers, reaction_limit)
 		var/firelevel_ratio = firelevel / vsc.fire_firelevel_multiplier
-		
+
 		//vapour fuels are extremely volatile! The reaction progress is a percentage of the total fuel (similar to old zburn).)
 		var/min_burn = 0.30*volume*group_multiplier/CELL_VOLUME //in moles - so that fires with very small gas concentrations burn out fast
 		var/gas_reaction_progress = max(min_burn, firelevel_ratio*gas_fuel)*FIRE_GAS_BURNRATE_MULT
@@ -282,7 +282,7 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 		var/total_reaction_progress = gas_reaction_progress + liquid_reaction_progress
 		var/used_fuel = min(total_reaction_progress, reaction_limit)
 		var/used_oxidizers = used_fuel*(FIRE_REACTION_OXIDIZER_AMOUNT/FIRE_REACTION_FUEL_AMOUNT)
-		
+
 		#ifdef FIREDBG
 		log_debug("gas_fuel = [gas_fuel], liquid_fuel = [liquid_fuel], total_oxidizers = [total_oxidizers]")
 		log_debug("fuel_area = [fuel_area], total_fuel = [total_fuel], reaction_limit = [reaction_limit]")
@@ -315,7 +315,7 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 
 		//calculate the energy produced by the reaction and then set the new temperature of the mix
 		temperature = (starting_energy + vsc.fire_fuel_energy_release * (used_gas_fuel + used_liquid_fuel)) / heat_capacity()
-		
+
 		#ifdef FIREDBG
 		log_debug("used_gas_fuel = [used_gas_fuel]; used_liquid_fuel = [used_liquid_fuel]; total = [used_fuel]")
 		log_debug("new temperature = [temperature]")
@@ -372,16 +372,16 @@ datum/gas_mixture/proc/check_recombustability(list/fuel_objs)
 	if(total_combustables > 0)
 		//slows down the burning when the concentration of the reactants is low
 		var/dampening_multiplier = min(1, reaction_limit / (total_moles/group_multiplier))
-		
+
 		//calculates how close the mixture of the reactants is to the optimum
 		//fires burn better when there is more oxidizer -- too much fuel will choke them out a bit, reducing firelevel.
 		var/mix_multiplier = 1 / (1 + (5 * ((total_fuel / total_combustables) ** 2)))
-		
+
 		#ifdef FIREDBG
 		ASSERT(dampening_multiplier <= 1)
 		ASSERT(mix_multiplier <= 1)
 		#endif
-		
+
 		//toss everything together -- should produce a value between 0 and fire_firelevel_multiplier
 		firelevel = vsc.fire_firelevel_multiplier * mix_multiplier * dampening_multiplier
 
