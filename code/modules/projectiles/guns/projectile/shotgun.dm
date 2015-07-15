@@ -1,6 +1,6 @@
 /obj/item/weapon/gun/projectile/shotgun/pump
 	name = "shotgun"
-	desc = "A W-T Remmington 29x, cheap and produced in masses by Ward-Takahashi. Seen mostly in the hands of police and security forces. Sweep alleys with this."
+	desc = "The mass-produced W-T Remmington 29x shotgun is a favourite of police and security forces on many worlds. Useful for sweeping alleys."
 	icon_state = "shotgun"
 	item_state = "shotgun"
 	max_shells = 4
@@ -41,7 +41,7 @@
 
 /obj/item/weapon/gun/projectile/shotgun/pump/combat
 	name = "combat shotgun"
-	desc = "Based on a russian design, this combat shotgun called KS-40 is manufactured by Hesphaistos Industries and is distributed as close quarter weaponry."
+	desc = "The Hesphaistos Industries KS-40 is distributed as close quarter weaponry."
 	icon_state = "cshotgun"
 	item_state = "cshotgun"
 	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 2)

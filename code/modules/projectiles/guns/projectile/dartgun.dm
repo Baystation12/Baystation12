@@ -43,7 +43,7 @@
 
 /obj/item/weapon/gun/projectile/dartgun
 	name = "dart gun"
-	desc = "A dip of Zeng-Hu Pharmaceuticals into the arts of shooting each other with the name of Z-H P Artemis. A gas-powered dart gun capable of delivering chemical cocktails swiftly across short distances. Favoured by assassins and slave traders."
+	desc = "Zeng-Hu Pharmaceutical's entry into the arms market, the Z-H P Artemis is a gas-powered dart gun capable of delivering chemical cocktails swiftly across short distances."
 	icon_state = "dartgun-empty"
 	item_state = null
 
