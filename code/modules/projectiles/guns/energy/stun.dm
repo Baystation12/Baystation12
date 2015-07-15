@@ -1,6 +1,6 @@
 /obj/item/weapon/gun/energy/taser
 	name = "taser gun"
-	desc = "A small, low capacity gun used for non-lethal takedowns.NT Mk30 NL model, one of NT's personal designs."
+	desc = "A small, low capacity gun used for non-lethal takedowns. NT Mk30 NL model, one of NT's personal designs."
 	icon_state = "taser"
 	item_state = null	//so the human update icon uses the icon_state instead.
 	fire_sound = 'sound/weapons/Taser.ogg'
