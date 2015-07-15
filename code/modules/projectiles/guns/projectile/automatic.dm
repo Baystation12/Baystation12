@@ -77,8 +77,8 @@
 	update_held_icon()
 
 /obj/item/weapon/gun/projectile/automatic/wt550
-	name = "\improper 9mm SMG"
-	desc = "W-T 550 Saber. Cheap, mass produced Ward-Takahashi PDW. Uses 9mm rounds."
+	name = "\improper 9mm PDW"
+	desc = "W-T 550 Saber. Cheap, mass produced Ward-Takahashi personal defense weapon. Uses 9mm rounds."
 	icon_state = "wt550"
 	item_state = "wt550"
 	w_class = 3
