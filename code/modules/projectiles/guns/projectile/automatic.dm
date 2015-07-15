@@ -29,7 +29,7 @@
 	ammo_type = /obj/item/ammo_casing/c45
 
 /obj/item/weapon/gun/projectile/automatic/c20r
-	name = "\improper SMG"
+	name = "\improper submachine gun"
 	desc = "A lightweight, fast firing gun, named C-20r. For when you REALLY need someone dead. Uses 12mm pistol rounds. Has a 'Scarborough Arms - Per falcis, per pravitas' buttstamp"
 	icon_state = "c20r"
 	item_state = "c20r"
