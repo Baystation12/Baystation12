@@ -49,6 +49,7 @@ Hotkey-Mode: (hotkey-mode must be on)
 \t5 = emote
 \tx = swap-hand
 \tz = activate held object (or y)
+\tj = toggle-aiming-mode
 \tf = cycle-intents-left
 \tg = cycle-intents-right
 \t1 = help-intent
