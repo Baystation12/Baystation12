@@ -772,7 +772,7 @@ It can still be worn/put on as normal.
 	if(slot_to_process)
 		if(strip_item) //Stripping an item from the mob
 			var/obj/item/W = strip_item
-			target.remove_from_mob(W)
+			target.unEquip(W)
 			W.add_fingerprint(source)
 			if(slot_to_process == slot_l_store) //pockets! Needs to process the other one too. Snowflake code, wooo! It's not like anyone will rewrite this anytime soon. If I'm wrong then... CONGRATULATIONS! ;)
 				if(target.r_store)
