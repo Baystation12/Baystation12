@@ -25,32 +25,45 @@
 		skipface |= wear_mask.flags_inv & HIDEFACE
 
 	// crappy hacks because you can't do \his[src] etc. I'm sorry this proc is so unreadable, blame the text macros :<
-	var/t_He = "It" //capitalised for use at the start of each line.
-	var/t_his = "its"
-	var/t_him = "it"
-	var/t_has = "has"
-	var/t_is = "is"
+	var/t_He = "They" //capitalised for use at the start of each line.
+	var/t_he = "they"
+	var/t_his = "their"
+	var/t_him = "them"
+	var/t_has = "have"
+	var/t_is = "are"
+	var/t_does = "do"
 
 	var/msg = "<span class='info'>*---------*\nThis is "
 
-	if( skipjumpsuit && skipface ) //big suits/masks/helmets make it hard to tell their gender
-		t_He = "They"
-		t_his = "their"
-		t_him = "them"
-		t_has = "have"
-		t_is = "are"
-	else
+	//big suits/masks/helmets make it hard to tell their gender
+	if(!skipjumpsuit || !skipface)
 		if(icon)
 			msg += "\icon[icon] " //fucking BYOND: this should stop dreamseeker crashing if we -somehow- examine somebody before their icon is generated
 		switch(gender)
 			if(MALE)
 				t_He = "He"
+				t_he = "he"
 				t_his = "his"
 				t_him = "him"
+				t_has = "has"
+				t_is = "is"
+				t_does = "does"
 			if(FEMALE)
 				t_He = "She"
+				t_he = "she"
 				t_his = "her"
 				t_him = "her"
+				t_has = "has"
+				t_is = "is"
+				t_does = "does"
+			if(NEUTER)
+				t_He = "It"
+				t_he = "it"
+				t_his = "its"
+				t_him = "it"
+				t_has = "has"
+				t_is = "is"
+				t_does = "does"
 
 	msg += "<EM>[src.name]</EM>"
 	if(species.name != "Human")
@@ -214,15 +227,15 @@
 	if (src.stat)
 		msg += "<span class='warning'>[t_He] [t_is]n't responding to anything around [t_him] and seems to be asleep.</span>\n"
 		if((stat == 2 || src.losebreath) && distance <= 3)
-			msg += "<span class='warning'>[t_He] does not appear to be breathing.</span>\n"
+			msg += "<span class='warning'>[t_He] [t_does] not appear to be breathing.</span>\n"
 		if(istype(usr, /mob/living/carbon/human) && !usr.stat && Adjacent(usr))
 			usr.visible_message("<b>[usr]</b> checks [src]'s pulse.", "You check [src]'s pulse.")
 		spawn(15)
 			if(distance <= 1 && usr.stat != 1)
 				if(pulse == PULSE_NONE)
-					usr << "<span class='deadsay'>[t_He] has no pulse[src.client ? "" : " and [t_his] soul has departed"]...</span>"
+					usr << "<span class='deadsay'>[t_He] [t_has] no pulse[src.client ? "" : " and [t_his] soul has departed"]...</span>"
 				else
-					usr << "<span class='deadsay'>[t_He] has a pulse!</span>"
+					usr << "<span class='deadsay'>[t_He] [t_has] a pulse!</span>"
 	if(fire_stacks)
 		msg += "[t_He] [t_is] covered in some liquid.\n"
 	if(on_fire)
@@ -244,7 +257,7 @@
 
 	if((!species.has_organ["brain"] || has_brain()) && stat != DEAD)
 		if(!key)
-			msg += "<span class='deadsay'>[t_He] [t_is] fast asleep. It doesn't look like they are waking up anytime soon.</span>\n"
+			msg += "<span class='deadsay'>[t_He] [t_is] fast asleep. It doesn't look like [t_he] [t_is] waking up anytime soon.</span>\n"
 		else if(!client)
 			msg += "[t_He] [t_has] suddenly fallen asleep.\n"
 
@@ -255,15 +268,15 @@
 		if(temp)
 			if(temp.status & ORGAN_DESTROYED)
 				is_destroyed["[temp.display_name]"] = 1
-				wound_flavor_text["[temp.display_name]"] = "<span class='warning'><b>[t_He] is missing [t_his] [temp.display_name].</b></span>\n"
+				wound_flavor_text["[temp.display_name]"] = "<span class='warning'><b>[t_He] [t_is] missing [t_his] [temp.display_name].</b></span>\n"
 				continue
 			if(temp.status & ORGAN_ROBOT)
 				if(!(temp.brute_dam + temp.burn_dam))
 					if(!species.flags & IS_SYNTHETIC)
-						wound_flavor_text["[temp.display_name]"] = "<span class='warning'>[t_He] has a robot [temp.display_name]!</span>\n"
+						wound_flavor_text["[temp.display_name]"] = "<span class='warning'>[t_He] [t_has] a robot [temp.display_name]!</span>\n"
 						continue
 				else
-					wound_flavor_text["[temp.display_name]"] = "<span class='warning'>[t_He] has a robot [temp.display_name]. It has"
+					wound_flavor_text["[temp.display_name]"] = "<span class='warning'>[t_He] [t_has] a robot [temp.display_name]. It has"
 				if(temp.brute_dam) switch(temp.brute_dam)
 					if(0 to 20)
 						wound_flavor_text["[temp.display_name]"] += " some dents"
@@ -300,22 +313,22 @@
 						switch(wound_descriptors[wound])
 							if(1)
 								if(!flavor_text.len)
-									flavor_text += "<span class='warning'>[t_He] has[prob(10) && !(wound in no_exclude)  ? " what might be" : ""] a [wound]"
+									flavor_text += "<span class='warning'>[t_He] [t_has][prob(10) && !(wound in no_exclude)  ? " what might be" : ""] a [wound]"
 								else
 									flavor_text += "[prob(10) && !(wound in no_exclude) ? " what might be" : ""] a [wound]"
 							if(2)
 								if(!flavor_text.len)
-									flavor_text += "<span class='warning'>[t_He] has[prob(10) && !(wound in no_exclude) ? " what might be" : ""] a pair of [wound]s"
+									flavor_text += "<span class='warning'>[t_He] [t_has][prob(10) && !(wound in no_exclude) ? " what might be" : ""] a pair of [wound]s"
 								else
 									flavor_text += "[prob(10) && !(wound in no_exclude) ? " what might be" : ""] a pair of [wound]s"
 							if(3 to 5)
 								if(!flavor_text.len)
-									flavor_text += "<span class='warning'>[t_He] has several [wound]s"
+									flavor_text += "<span class='warning'>[t_He] [t_has] several [wound]s"
 								else
 									flavor_text += " several [wound]s"
 							if(6 to INFINITY)
 								if(!flavor_text.len)
-									flavor_text += "<span class='warning'>[t_He] has a bunch of [wound]s"
+									flavor_text += "<span class='warning'>[t_He] [t_has] a bunch of [wound]s"
 								else
 									flavor_text += " a ton of [wound]\s"
 					var/flavor_text_string = ""
@@ -342,7 +355,7 @@
 	if(wound_flavor_text["head"] && (is_destroyed["head"] || (!skipmask && !(wear_mask && istype(wear_mask, /obj/item/clothing/mask/gas)))))
 		msg += wound_flavor_text["head"]
 	else if(is_bleeding["head"])
-		msg += "<span class='warning'>[src] has blood running down [t_his] face!</span>\n"
+		msg += "<span class='warning'>[src] [t_has] blood running down [t_his] face!</span>\n"
 	if(wound_flavor_text["chest"] && !w_uniform && !skipjumpsuit) //No need.  A missing chest gibs you.
 		msg += wound_flavor_text["chest"]
 	else if(is_bleeding["chest"])
@@ -384,14 +397,14 @@
 	else if(is_bleeding["right foot"])
 		display_shoes = 1
 	if(display_chest)
-		msg += "<span class='danger'>[src] has blood soaking through from under [t_his] clothing!</span>\n"
+		msg += "<span class='danger'>[src] [t_has] blood soaking through from under [t_his] clothing!</span>\n"
 	if(display_shoes)
-		msg += "<span class='danger'>[src] has blood running from [t_his] shoes!</span>\n"
+		msg += "<span class='danger'>[src] [t_has] blood running from [t_his] shoes!</span>\n"
 	if(display_gloves)
-		msg += "<span class='danger'>[src] has blood running from under [t_his] gloves!</span>\n"
+		msg += "<span class='danger'>[src] [t_has] blood running from under [t_his] gloves!</span>\n"
 
 	for(var/implant in get_visible_implants(0))
-		msg += "<span class='danger'>[src] has \a [implant] sticking out of [t_his] flesh!</span>\n"
+		msg += "<span class='danger'>[src] [t_has] \a [implant] sticking out of [t_his] flesh!</span>\n"
 	if(digitalcamo)
 		msg += "[t_He] [t_is] repulsively uncanny!\n"
 
@@ -448,7 +461,7 @@
 	if (pose)
 		if( findtext(pose,".",lentext(pose)) == 0 && findtext(pose,"!",lentext(pose)) == 0 && findtext(pose,"?",lentext(pose)) == 0 )
 			pose = addtext(pose,".") //Makes sure all emotes end with a period.
-		msg += "\n[t_He] is [pose]"
+		msg += "\n[t_He] [t_is] [pose]"
 
 	user << msg
 
