@@ -165,7 +165,7 @@
 	w_class = 2
 
 /obj/item/weapon/gun/projectile/pirate
-	name = "zipgun"
+	name = "zip gun"
 	desc = "Little more than a barrel, handle, and firing mechanism, cheap makeshift firearms like this one are not uncommon in frontier systems."
 	icon_state = "sawnshotgun"
 	item_state = "sawnshotgun"
@@ -177,7 +177,7 @@
 		/obj/item/ammo_casing/a357              = ".357",
 		/obj/item/ammo_casing/c9mmf             = "9mm",
 		/obj/item/ammo_casing/c45f              = ".45",
-		/obj/item/ammo_casing/a12mm             = "11mm",
+		/obj/item/ammo_casing/a10mm             = "10mm",
 		/obj/item/ammo_casing/shotgun           = "12 gauge",
 		/obj/item/ammo_casing/shotgun           = "12 gauge",
 		/obj/item/ammo_casing/shotgun/pellet    = "12 gauge",

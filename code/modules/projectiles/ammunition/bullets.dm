@@ -64,9 +64,9 @@
 	caliber = ".45"
 	projectile_type = /obj/item/projectile/energy/flash
 
-/obj/item/ammo_casing/a12mm
-	desc = "An 11mm bullet casing."
-	caliber = "11mm"
+/obj/item/ammo_casing/a10mm
+	desc = "An 10mm bullet casing."
+	caliber = "10mm"
 	projectile_type = /obj/item/projectile/bullet/pistol/medium
 
 
