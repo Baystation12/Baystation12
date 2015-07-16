@@ -4,19 +4,33 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle
 	amount_per_transfer_from_this = 10
-	volume = 120
+	volume = 100
 	item_state = "broken_beer" //Generic held-item sprite until unique ones are made.
 	var/const/duration = 13 //Directly relates to the 'weaken' duration. Lowered by armor (i.e. helmets)
 	var/isGlass = 1 //Whether the 'bottle' is made of glass or not so that milk cartons dont shatter when someone gets hit by it
 
-/obj/item/weapon/reagent_containers/food/drinks/bottle/proc/smash(mob/living/target as mob, mob/living/user as mob)
+//when thrown on impact, bottles smash and spill their contents
+/obj/item/weapon/reagent_containers/food/drinks/bottle/throw_impact(atom/hit_atom, var/speed)
+	..()
+	
+	var/mob/M = thrower
+	if(!isGlass && istype(M) && M.a_intent == I_HURT)
+		var/throw_dist = get_dist(throw_source, loc)
+		if(throw_dist <= 3 && speed >= throw_speed && prob(85)) //not as reliable as smashing directly
+			if(reagents)
+				hit_atom.visible_message("<span class='notice'>The contents of the [src] splash all over [hit_atom]!</span>")
+				reagents.splash(hit_atom, reagents.total_volume)
+			src.smash(loc)
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/proc/smash(var/newloc)
+	if(ismob(loc))
+		var/mob/M = loc
+		M.drop_from_inventory(src)
 
 	//Creates a shattering noise and replaces the bottle with a broken_bottle
-	user.drop_item()
-	var/obj/item/weapon/broken_bottle/B = new /obj/item/weapon/broken_bottle(user.loc)
-	user.put_in_active_hand(B)
+	var/obj/item/weapon/broken_bottle/B = new /obj/item/weapon/broken_bottle(newloc)
 	if(prob(33))
-		new/obj/item/weapon/material/shard(target.loc) // Create a glass shard at the target's location!
+		new/obj/item/weapon/material/shard(newloc) // Create a glass shard at the target's location!
 	B.icon_state = src.icon_state
 
 	var/icon/I = new('icons/obj/drinks.dmi', src.icon_state)
@@ -25,10 +39,10 @@
 	B.icon = I
 
 	playsound(src, "shatter", 70, 1)
-	user.put_in_active_hand(B)
 	src.transfer_fingerprints_to(B)
 
 	qdel(src)
+	return B
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/attack(mob/living/target as mob, mob/living/user as mob)
 
@@ -81,7 +95,8 @@
 		reagents.splash(target, reagents.total_volume)
 
 	//Finally, smash the bottle. This kills (qdel) the bottle.
-	src.smash(target, user)
+	var/obj/item/weapon/broken_bottle/B = src.smash(target.loc)
+	user.put_in_active_hand(B)
 
 	return
 
