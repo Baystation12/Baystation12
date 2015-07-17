@@ -509,11 +509,6 @@
 	var/damage_coeff = 1
 	var/melee
 
-	can_attach(obj/mecha/M as obj)
-		if(..())
-			return 1
-		return 0
-
 	attach(obj/mecha/M as obj)
 		..()
 		activate_boost()
@@ -530,15 +525,19 @@
 		return "<span style=\"color:[equip_ready?"#0f0":"#f00"];\">*</span>&nbsp;[src.name]"
 
 	proc/activate_boost()
-		return
+		if(!src.chassis)
+			return 0
+		return 1
 
 	proc/deactivate_boost()
-		return
+		if(!src.chassis)
+			return 0
+		return 1
 
 	set_ready_state(state)
 		if(state && !equip_ready)
 			activate_boost()
-		else if(src.chassis && equip_ready)  //check that the booster is still attached to something.
+		else if(equip_ready)
 			deactivate_boost()
 		..()
 
@@ -554,17 +553,17 @@
 	melee = 1
 
 	activate_boost()
-		chassis.m_deflect_coeff *= deflect_coeff
-		chassis.m_damage_coeff *= damage_coeff
-		chassis.mhit_power_use += energy_drain
-		..()
+		if(..())
+			chassis.m_deflect_coeff *= deflect_coeff
+			chassis.m_damage_coeff *= damage_coeff
+			chassis.mhit_power_use += energy_drain
 
 
 	deactivate_boost()
-		chassis.m_deflect_coeff /= deflect_coeff
-		chassis.m_damage_coeff /= damage_coeff
-		chassis.mhit_power_use -= energy_drain
-		..()
+		if(..())
+			chassis.m_deflect_coeff /= deflect_coeff
+			chassis.m_damage_coeff /= damage_coeff
+			chassis.mhit_power_use -= energy_drain
 
 
 /obj/item/mecha_parts/mecha_equipment/armor_booster/antiproj_armor_booster
@@ -578,17 +577,16 @@
 	melee = 0
 
 	activate_boost()
-		chassis.r_deflect_coeff *= deflect_coeff
-		chassis.r_damage_coeff *= damage_coeff
-		chassis.rhit_power_use += energy_drain
-		..()
-
+		if(..())
+			chassis.r_deflect_coeff *= deflect_coeff
+			chassis.r_damage_coeff *= damage_coeff
+			chassis.rhit_power_use += energy_drain
 
 	deactivate_boost()
-		chassis.r_deflect_coeff /= deflect_coeff
-		chassis.r_damage_coeff /= damage_coeff
-		chassis.rhit_power_use -= energy_drain
-		..()
+		if(..())
+			chassis.r_deflect_coeff /= deflect_coeff
+			chassis.r_damage_coeff /= damage_coeff
+			chassis.rhit_power_use -= energy_drain
 
 
 /obj/item/mecha_parts/mecha_equipment/repair_droid
