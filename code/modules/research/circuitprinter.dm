@@ -155,6 +155,7 @@ using metal and glass, it uses glass and reagents (usually sulphuric acid).
 				materials[t] += amount * SHEET_MATERIAL_AMOUNT
 	busy = 0
 	updateUsrDialog()
+		return
 
 /obj/machinery/r_n_d/circuit_imprinter/proc/addToQueue(var/datum/design/D)
 	queue += D
