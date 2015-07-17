@@ -283,13 +283,13 @@
 	for(var/obj/item/organ/external/temp in organs)
 		if(temp)
 			if(temp.status & ORGAN_DESTROYED)
-				is_destroyed["[temp.display_name]"] = 1
-				wound_flavor_text["[temp.display_name]"] = "<span class='warning'><b>[t_He] [t_is] missing [t_his] [temp.display_name].</b></span>\n"
+				is_destroyed["[temp.name]"] = 1
+				wound_flavor_text["[temp.name]"] = "<span class='warning'><b>[t_He] [t_is] missing [t_his] [temp.name].</b></span>\n"
 				continue
 			if(temp.status & ORGAN_ROBOT)
 				if(!(temp.brute_dam + temp.burn_dam))
 					if(!species.flags & IS_SYNTHETIC)
-						wound_flavor_text["[temp.display_name]"] = "<span class='warning'>[t_He] [t_has] a robot [temp.display_name]!</span>\n"
+						wound_flavor_text["[temp.name]"] = "<span class='warning'>[t_He] [t_has] a robot [temp.name]!</span>\n"
 						continue
 				else
 					wound_flavor_text["[temp.name]"] = "<span class='warning'>[t_He] has a robot [temp.name]. It has[temp.get_wounds_desc()]!</span>\n"
