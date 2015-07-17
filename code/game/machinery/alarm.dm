@@ -845,7 +845,7 @@
 				if(efficiency < 1)
 					user << "You start [wiresexposed ? "closing" : "opening"] the wire panel..."
 					if(!do_after(user, 10 / efficiency) || buildstage != 2)
-						return
+						return 1
 				wiresexposed = !wiresexposed
 				user << "The wires have been [wiresexposed ? "exposed" : "unexposed"]."
 				update_icon()
@@ -997,7 +997,7 @@ FIRE ALARM
 				if(efficiency < 1)
 					user << "You start [wiresexposed ? "closing" : "opening"] the panel of \the [src]..."
 					if(!do_after(user, 20 / efficiency) || buildstage != 2)
-						return
+						return 1
 				user << "You [wiresexposed ? "close" : "open"] the panel of \the [src]."
 				wiresexposed = !wiresexposed
 				update_icon()

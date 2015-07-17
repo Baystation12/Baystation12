@@ -12,7 +12,7 @@
 	var/backup_power_lost_until = -1	//World time when backup power is restored.
 	var/next_beep_at = 0				//World time when we may next beep due to doors being blocked by mobs
 	var/spawnPowerRestoreRunning = 0
-	var/welded = null
+	var/welded = 0
 	var/locked = 0
 	var/lights = 1 // bolt lights show by default
 	var/aiDisabledIdScanner = 0
@@ -727,37 +727,19 @@ About the new airlock wires panel:
 	update_icon()
 	return 1
 
-/obj/machinery/door/airlock/attackby(C as obj, mob/user as mob)
-	//world << text("airlock attackby src [] obj [] mob []", src, C, user)
-	if(!istype(usr, /mob/living/silicon))
-		if(src.isElectrified())
-			if(src.shock(user, 75))
+/obj/machinery/door/airlock/attackby(var/obj/item/I, var/mob/user, var/expand_tool)
+	add_fingerprint(user)
+
+	if(!istype(user, /mob/living/silicon))
+		if(isElectrified())
+			if(shock(user, 75))
 				return
-	if(istype(C, /obj/item/device/detective_scanner) || istype(C, /obj/item/taperoll))
+
+	if(handle_tool(I, user, expand_tool))
 		return
 
-	src.add_fingerprint(user)
-	if(!repairing && (istype(C, /obj/item/weapon/weldingtool) && !( src.operating > 0 ) && src.density))
-		var/obj/item/weapon/weldingtool/W = C
-		if(W.remove_fuel(0,user))
-			if(!src.welded)
-				src.welded = 1
-			else
-				src.welded = null
-			playsound(src, 'sound/items/Welder.ogg', 100, 1)
-			src.update_icon()
-			return
-		else
-			return
-	else if(istype(C, /obj/item/weapon/screwdriver))
-		if (src.p_open)
-			if (stat & BROKEN)
-				usr << "<span class='warning'>The panel is broken and cannot be closed.</span>"
-			else
-				src.p_open = 0
-		else
-			src.p_open = 1
-		src.update_icon()
+	if(istype(I, /obj/item/device/detective_scanner) || istype(I, /obj/item/taperoll))
+		return
 	else if(istype(C, /obj/item/weapon/wirecutters))
 		return src.attack_hand(user)
 	else if(istype(C, /obj/item/device/multitool))
@@ -767,68 +749,85 @@ About the new airlock wires panel:
 	else if(istype(C, /obj/item/weapon/pai_cable))	// -- TLE
 		var/obj/item/weapon/pai_cable/cable = C
 		cable.plugin(src, user)
-	else if(!repairing && istype(C, /obj/item/weapon/crowbar))
-		if(src.p_open && (operating < 0 || (!operating && welded && !src.arePowerSystemsOn() && density && (!src.locked || (stat & BROKEN)))) )
-			playsound(src.loc, 'sound/items/Crowbar.ogg', 100, 1)
-			user.visible_message("[user] removes the electronics from the airlock assembly.", "You start to remove electronics from the airlock assembly.")
-			if(do_after(user,40))
-				user << "<span class='notice'>You removed the airlock electronics!</span>"
-
-				var/obj/structure/door_assembly/da = new assembly_type(src.loc)
-				if (istype(da, /obj/structure/door_assembly/multi_tile))
-					da.set_dir(src.dir)
-
- 				da.anchored = 1
-				if(mineral)
-					da.glass = mineral
-				//else if(glass)
-				else if(glass && !da.glass)
-					da.glass = 1
-				da.state = 1
-				da.created_name = src.name
-				da.update_state()
-
-				if(operating == -1 || (stat & BROKEN))
-					new /obj/item/weapon/circuitboard/broken(src.loc)
-					operating = 0
-				else
-					if (!electronics) create_electronics()
-
-					electronics.loc = src.loc
-					electronics = null
-
-				qdel(src)
-				return
-		else if(arePowerSystemsOn())
-			user << "<span class='notice'>The airlock's motors resist your efforts to force it.</span>"
-		else if(locked)
-			user << "<span class='notice'>The airlock's bolts prevent it from being forced.</span>"
-		else
-			if(density)
-				spawn(0)	open(1)
-			else
-				spawn(0)	close(1)
-
-	else if(istype(C, /obj/item/weapon/material/twohanded/fireaxe) && !arePowerSystemsOn())
-		if(locked)
-			user << "<span class='notice'>The airlock's bolts prevent it from being forced.</span>"
-		else if( !welded && !operating )
-			if(density)
-				var/obj/item/weapon/material/twohanded/fireaxe/F = C
-				if(F.wielded)
-					spawn(0)	open(1)
-				else
-					user << "<span class='warning'>You need to be wielding \the [C] to do that.</span>"
-			else
-				var/obj/item/weapon/material/twohanded/fireaxe/F = C
-				if(F.wielded)
-					spawn(0)	close(1)
-				else
-					user << "<span class='warning'>You need to be wielding \the [C] to do that.</span>"
 
 	else
 		..()
 	return
+
+/obj/structure/computerframe/tool_act(var/action, var/efficiency, var/obj/item/I, var/mob/user)
+	switch(action)
+		if(TOOL_SCREWDRIVER)
+			if(p_open && (stat & BROKEN))
+				user << "<span class='warning'>The panel is broken and cannot be closed.</span>"
+				return 1
+			if(efficiency < 1)
+				user << "You start [p_open ? "closing" : "opening"] the panel..."
+				if(!do_after(user, 10 / efficiency) || buildstage != 2)
+					return 1
+			user << "<span class='notice'>You [p_open ? "close" : "open"] the panel.</span>"
+			p_open = !p_open
+			update_icon()
+			return 1
+		if(TOOL_WELDER)
+			if(!repairing && !operating && density)
+				user << "<span class='notice'>You start welding \the [src] [welded ? "open" : "shut"]...</span>"
+				I.use_tool(TOOL_WELDER, user, 1)
+				if(do_after(user, 20 / efficiency) && !repairing && !operating && density)
+					user.visible_message("<span class='notice'>[user] welds \the [src] [welded ? "open" : "shut"].</span>", "<span class='notice'>You weld \the [src] [welded ? "open" : "shut"].</span>")
+					update_icon()
+					welded = !welded
+				return 1
+		if(TOOL_CROWBAR)
+			if(!repairing)
+				if(p_open && (operating < 0 || (!operating && welded && !arePowerSystemsOn() && density && (!locked || (stat & BROKEN)))))
+					user << "You start removing the electronics from \the [src]..."
+					if(do_after(user, 40 / efficiency))
+						user.visible_message("<span class='notice'>[user] removes the electronics from \the [src].</span>", "<span class='notice'>You remove the electronics from \the [src].</span>")
+
+						var/obj/structure/door_assembly/da = new assembly_type(loc)
+						if(istype(da, /obj/structure/door_assembly/multi_tile))
+							da.set_dir(dir)
+						da.anchored = 1
+						if(mineral)
+							da.glass = mineral
+						else if(glass && !da.glass)
+							da.glass = 1
+						da.state = 1
+						da.created_name = name
+						da.update_state()
+
+						if(operating == -1 || (stat & BROKEN))
+							new /obj/item/weapon/circuitboard/broken(loc)
+						else
+							if(!electronics)
+								create_electronics()
+							electronics.loc = loc
+							electronics = null
+						qdel(src)
+					return 1
+				else if(arePowerSystemsOn())
+					user << "<span class='warning'>The airlock's motors resist your efforts to force it.</span>"
+					return 1
+				else if(locked)
+					user << "<span class='warning'>The airlock's bolts prevent it from being forced.</span>"
+					return 1
+				else
+					if(efficiency < 0.5)
+						user << "You struggle to [density ? "open" : "close"] \the [src]..."
+					else
+						user << "You start forcing \the [src] [density ? "open" : "close"]..."
+					if(do_after(user, 20 / efficiency / efficiency)) // Squared
+						if(arePowerSystemsOn() || locked)
+							user << "<span class='warning'>You struggle to [density ? "open" : "close"] \the [src], but you can't.</span>"
+							return 1
+						user.visible_message("<span class='notice'>[user] forces \the [src] [density ? "open" : "close"].", "<span class='notice'>You force \the [src] [density ? "open" : "close"].")
+						if(density)
+							spawn(0)
+								open(1)
+						else
+							spawn(0)
+								close(1)
+					return 1
 
 /obj/machinery/door/airlock/phoron/attackby(C as obj, mob/user as mob)
 	if(C)
