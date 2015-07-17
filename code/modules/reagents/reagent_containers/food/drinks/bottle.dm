@@ -6,21 +6,32 @@
 	amount_per_transfer_from_this = 10
 	volume = 100
 	item_state = "broken_beer" //Generic held-item sprite until unique ones are made.
-	var/const/duration = 13 //Directly relates to the 'weaken' duration. Lowered by armor (i.e. helmets)
+	force = 5
+	var/smash_duration = 5 //Directly relates to the 'weaken' duration. Lowered by armor (i.e. helmets)
 	var/isGlass = 1 //Whether the 'bottle' is made of glass or not so that milk cartons dont shatter when someone gets hit by it
 
 //when thrown on impact, bottles smash and spill their contents
 /obj/item/weapon/reagent_containers/food/drinks/bottle/throw_impact(atom/hit_atom, var/speed)
 	..()
-	
+
 	var/mob/M = thrower
 	if(!isGlass && istype(M) && M.a_intent == I_HURT)
 		var/throw_dist = get_dist(throw_source, loc)
-		if(throw_dist <= 3 && speed >= throw_speed && prob(85)) //not as reliable as smashing directly
+		if(speed >= throw_speed && smash_check(throw_dist)) //not as reliable as smashing directly
 			if(reagents)
 				hit_atom.visible_message("<span class='notice'>The contents of the [src] splash all over [hit_atom]!</span>")
 				reagents.splash(hit_atom, reagents.total_volume)
 			src.smash(loc)
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/proc/smash_check(var/distance)
+	if(!isGlass || !smash_duration)
+		return 0
+
+	var/list/chance_table = list(90, 85, 85, 85, 65, 25) //starting from distance 0
+	var/idx = max(distance + 1, 1) //since list indices start at 1
+	if(idx > chance_table.len)
+		return 0
+	return prob(chance_table[idx])
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/proc/smash(var/newloc)
 	if(ismob(loc))
@@ -45,15 +56,11 @@
 	return B
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/attack(mob/living/target as mob, mob/living/user as mob)
-
 	if(!target)
 		return
 
 	if(user.a_intent != I_HURT || !isGlass)
 		return ..()
-
-
-	force = 15 //Smashing bottles over someoen's head hurts.
 
 	var/obj/item/organ/external/affecting = user.zone_sel.selecting //Find what the player is aiming at
 
@@ -62,13 +69,16 @@
 
 	//Calculating duration and calculating damage.
 	armor_block = target.run_armor_check(affecting, "melee")
-	armor_duration = duration + force - target.getarmor(affecting, "melee")
+	
+	//force will counteract armour, but will never increase duration
+	armor_duration = smash_duration + min(0, force - target.getarmor(affecting, "melee") + 10)
 
 	//Apply the damage!
 	target.apply_damage(force, BRUTE, affecting, armor_block, sharp=0)
 
 	// You are going to knock someone out for longer if they are not wearing a helmet.
-	if(affecting == "head" && istype(target, /mob/living/carbon/))
+	var/do_smash = smash_check(1) //won't always break on the first hit
+	if(affecting == "head" && istype(target, /mob/living/carbon/) && do_smash)
 
 		//Display an attack message.
 		for(var/mob/O in viewers(user, null))
@@ -76,8 +86,7 @@
 			else O.show_message(text("\red <B>[target] hit \himself with a bottle of [src.name] on the head!</B>"), 1)
 		//Weaken the target for the duration that we calculated and divide it by 5.
 		if(armor_duration)
-			target.apply_effect(min(armor_duration, 10) , WEAKEN, armor_block) // Never weaken more than a flash!
-
+			target.apply_effect(min(armor_duration, 5) , WEAKEN, armor_block) // Never weaken more than a flash!
 	else
 		//Default attack message and don't weaken the target.
 		for(var/mob/O in viewers(user, null))
@@ -89,14 +98,15 @@
 	target.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been smashed with a bottle by [user.name] ([user.ckey])</font>")
 	msg_admin_attack("[user.name] ([user.ckey]) attacked [target.name] ([target.ckey]) with a bottle. (INTENT: [uppertext(user.a_intent)]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
 
-	//The reagents in the bottle splash all over the target, thanks for the idea Nodrak
-	if(reagents)
-		user.visible_message("<span class='notice'>The contents of the [src] splash all over [target]!</span>")
-		reagents.splash(target, reagents.total_volume)
+	if(do_smash)
+		//The reagents in the bottle splash all over the target, thanks for the idea Nodrak
+		if(reagents)
+			user.visible_message("<span class='notice'>The contents of the [src] splash all over [target]!</span>")
+			reagents.splash(target, reagents.total_volume)
 
-	//Finally, smash the bottle. This kills (qdel) the bottle.
-	var/obj/item/weapon/broken_bottle/B = src.smash(target.loc)
-	user.put_in_active_hand(B)
+		//Finally, smash the bottle. This kills (qdel) the bottle.
+		var/obj/item/weapon/broken_bottle/B = src.smash(target.loc)
+		user.put_in_active_hand(B)
 
 	return
 
@@ -107,8 +117,8 @@
 	desc = "A bottle with a sharp broken bottom."
 	icon = 'icons/obj/drinks.dmi'
 	icon_state = "broken_bottle"
-	force = 9.0
-	throwforce = 5.0
+	force = 9
+	throwforce = 5
 	throw_speed = 3
 	throw_range = 5
 	item_state = "beer"
@@ -329,3 +339,30 @@
 	New()
 		..()
 		reagents.add_reagent("limejuice", 100)
+
+//Small bottles
+/obj/item/weapon/reagent_containers/food/drinks/bottle/small
+	volume = 50
+	smash_duration = 1
+	flags = 0 //starts closed
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/small/beer
+	name = "space beer"
+	desc = "Contains only water, malt and hops."
+	icon_state = "beer"
+	center_of_mass = list("x"=16, "y"=12)
+	New()
+		..()
+		reagents.add_reagent("beer", 30)
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/small/ale
+	name = "\improper Magm-Ale"
+	desc = "A true dorf's drink of choice."
+	icon_state = "alebottle"
+	item_state = "beer"
+	center_of_mass = list("x"=16, "y"=10)
+	New()
+		..()
+		reagents.add_reagent("ale", 30)
+
+
