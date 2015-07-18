@@ -342,7 +342,7 @@ var/global/datum/controller/gameticker/ticker
 					if(!delay_end)
 						world.Reboot()
 					else
-						world << "<span class='notice><b>An admin has delayed the round end</b></span>"
+						world << "<span class='notice'><b>An admin has delayed the round end</b></span>"
 				else
 					world << "<span class='notice'><b>An admin has delayed the round end</b></span>"
 
