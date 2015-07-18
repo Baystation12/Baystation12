@@ -24,6 +24,9 @@
 					try_heating()
 	else
 		user << "\red You can't put the [W] onto the [src]."
+        
+/obj/machinery/bunsen_burner/attack_ai()
+    return
 
 /obj/machinery/bunsen_burner/attack_hand(mob/user as mob)
 	if(held_container)
