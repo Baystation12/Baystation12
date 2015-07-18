@@ -787,7 +787,7 @@ default behaviour is:
 					inertia_dir = 1
 				else if(y >= world.maxy -TRANSITIONEDGE)
 					inertia_dir = 2
-				src << "<span class='warning>Something you are carrying is preventing you from leaving.</span>"
+				src << "<span class='warning'>Something you are carrying is preventing you from leaving.</span>"
 				return
 
 	..()
