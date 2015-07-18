@@ -141,7 +141,7 @@
 "cK" = (/obj/machinery/door/firedoor/border_only,/obj/machinery/door/airlock{id_tag = "rbath"; name = "Kitchen"},/obj/structure/cable/blue{d1 = 4; d2 = 8; icon_state = "4-8"},/turf/simulated/floor{icon_state = "cafeteria"; dir = 2},/area/outpost/research/hallway)
 "cL" = (/obj/machinery/atmospherics/pipe/manifold/hidden/supply{dir = 1},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/structure/cable/blue{d1 = 4; d2 = 8; icon_state = "4-8"},/turf/simulated/floor{dir = 1; icon_state = "whitepurple"},/area/outpost/research/lab)
 "cM" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/structure/cable/blue{d1 = 4; d2 = 8; icon_state = "4-8"},/turf/simulated/floor{dir = 1; icon_state = "whitepurple"},/area/outpost/research/lab)
-"cN" = (/obj/machinery/bunsen_burner,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/structure/table/glass,/turf/simulated/floor{icon_state = "white"},/area/outpost/research/chemistry)
+"cN" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/structure/table/glass,/turf/simulated/floor{icon_state = "white"},/area/outpost/research/chemistry)
 "cO" = (/obj/machinery/vending/snack,/turf/simulated/floor/wood,/area/outpost/research/kitchen)
 "cP" = (/obj/item/weapon/material/shard,/turf/simulated/floor/airless{icon_state = "floorscorched1"},/area/outpost/abandoned)
 "cQ" = (/obj/machinery/alarm{dir = 2; pixel_y = 25},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/turf/simulated/floor{icon_state = "white"},/area/outpost/research/hallway)
