@@ -45,13 +45,14 @@
 		remove_contents(user)
 
 /obj/item/weapon/reagent_containers/glass/rag/attackby(obj/item/W, mob/user)
-	var/obj/item/weapon/flame/F = W
-	if(!on_fire && istype(F) && F.lit)
-		ignite()
-		if(on_fire)
-			visible_message("<span class='warning'>\The [user] lights [src] with [W].</span>")
-		else
-			user << "<span class='warning'>You manage to singe [src], but fail to light it.</span>"
+	if(!on_fire && istype(W, /obj/item/weapon/flame))
+		var/obj/item/weapon/flame/F = W
+		if(F.lit)
+			ignite()
+			if(on_fire)
+				visible_message("<span class='warning'>\The [user] lights [src] with [W].</span>")
+			else
+				user << "<span class='warning'>You manage to singe [src], but fail to light it.</span>"
 
 	. = ..()
 	update_name()
@@ -69,6 +70,10 @@
 		icon_state = "raglit"
 	else
 		icon_state = "rag"
+	
+	var/obj/item/weapon/reagent_containers/food/drinks/bottle/B = loc
+	if(istype(B))
+		B.update_icon()
 
 /obj/item/weapon/reagent_containers/glass/rag/proc/remove_contents(mob/user, atom/trans_dest = null)
 	if(!trans_dest && !user.loc)
@@ -146,6 +151,9 @@
 /obj/item/weapon/reagent_containers/glass/rag/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	if(exposed_temperature >= 50 + T0C)
 		ignite()
+	if(exposed_temperature >= 900 + T0C)
+		new /obj/effect/decal/cleanable/ash(get_turf(src))
+		qdel(src)
 
 //rag must have a minimum of 2 units welder fuel and at least 80% of the reagents must be welder fuel.
 //maybe generalize flammable reagents someday

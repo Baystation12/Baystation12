@@ -9,31 +9,38 @@
 	force = 5
 	var/smash_duration = 5 //Directly relates to the 'weaken' duration. Lowered by armor (i.e. helmets)
 	var/isGlass = 1 //Whether the 'bottle' is made of glass or not so that milk cartons dont shatter when someone gets hit by it
+	
+	var/obj/item/weapon/reagent_containers/glass/rag/rag = null
+	var/rag_underlay = "rag"
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/Destroy()
+	rag = null
+	..()
 
 //when thrown on impact, bottles smash and spill their contents
 /obj/item/weapon/reagent_containers/food/drinks/bottle/throw_impact(atom/hit_atom, var/speed)
 	..()
 
 	var/mob/M = thrower
-	if(!isGlass && istype(M) && M.a_intent == I_HURT)
+	if(isGlass && istype(M) && M.a_intent == I_HURT)
 		var/throw_dist = get_dist(throw_source, loc)
 		if(speed >= throw_speed && smash_check(throw_dist)) //not as reliable as smashing directly
 			if(reagents)
 				hit_atom.visible_message("<span class='notice'>The contents of the [src] splash all over [hit_atom]!</span>")
 				reagents.splash(hit_atom, reagents.total_volume)
-			src.smash(loc)
+			src.smash(loc, hit_atom)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/proc/smash_check(var/distance)
 	if(!isGlass || !smash_duration)
 		return 0
 
-	var/list/chance_table = list(90, 85, 85, 85, 65, 25) //starting from distance 0
+	var/list/chance_table = list(90, 90, 85, 85, 60, 35, 15) //starting from distance 0
 	var/idx = max(distance + 1, 1) //since list indices start at 1
 	if(idx > chance_table.len)
 		return 0
 	return prob(chance_table[idx])
 
-/obj/item/weapon/reagent_containers/food/drinks/bottle/proc/smash(var/newloc)
+/obj/item/weapon/reagent_containers/food/drinks/bottle/proc/smash(var/newloc, atom/against = null)
 	if(ismob(loc))
 		var/mob/M = loc
 		M.drop_from_inventory(src)
@@ -49,11 +56,60 @@
 	I.SwapColor(rgb(255, 0, 220, 255), rgb(0, 0, 0, 0))
 	B.icon = I
 
+	if(rag && rag.on_fire && isliving(against))
+		rag.forceMove(loc)
+		var/mob/living/L = against
+		L.IgniteMob()
+
 	playsound(src, "shatter", 70, 1)
 	src.transfer_fingerprints_to(B)
 
 	qdel(src)
 	return B
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/attackby(obj/item/W, mob/user)
+	if(!rag && istype(W, /obj/item/weapon/reagent_containers/glass/rag))
+		insert_rag(W, user)
+		return
+	if(rag && istype(W, /obj/item/weapon/flame))
+		rag.attackby(W, user)
+		return
+	..()
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/attack_self(mob/user)
+	if(rag)
+		remove_rag(user)
+	else
+		..()
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/proc/insert_rag(obj/item/weapon/reagent_containers/glass/rag/R, mob/user)
+	if(!isGlass || rag) return
+	if(user.unEquip(R))
+		user << "<span class='notice'>You stuff [R] into [src].</span>"
+		rag = R
+		rag.forceMove(src)
+		flags &= ~OPENCONTAINER
+		update_icon()
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/proc/remove_rag(mob/user)
+	if(!rag) return
+	user.put_in_hands(rag)
+	rag = null
+	flags |= (initial(flags) & OPENCONTAINER)
+	update_icon()
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/open(mob/user)
+	if(rag) return
+	..()
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/update_icon()
+	underlays.Cut()
+	if(rag)
+		var/underlay_image = image(icon='icons/obj/drinks.dmi', icon_state=rag.on_fire? "[rag_underlay]_lit" : rag_underlay)
+		underlays += underlay_image
+		copy_light(rag)
+	else
+		set_light(0)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/attack(mob/living/target as mob, mob/living/user as mob)
 	if(!target)
@@ -105,7 +161,7 @@
 			reagents.splash(target, reagents.total_volume)
 
 		//Finally, smash the bottle. This kills (qdel) the bottle.
-		var/obj/item/weapon/broken_bottle/B = src.smash(target.loc)
+		var/obj/item/weapon/broken_bottle/B = src.smash(target.loc, target)
 		user.put_in_active_hand(B)
 
 	return
@@ -345,6 +401,7 @@
 	volume = 50
 	smash_duration = 1
 	flags = 0 //starts closed
+	rag_underlay = "rag_small"
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/small/beer
 	name = "space beer"
