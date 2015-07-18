@@ -89,7 +89,7 @@
 "bK" = (/obj/structure/table/standard,/obj/item/weapon/storage/box/beakers{pixel_x = 2; pixel_y = 2},/turf/simulated/floor{icon_state = "white"},/area/outpost/research/chemistry)
 "bL" = (/obj/item/weapon/stool/padded,/turf/simulated/floor{icon_state = "white"},/area/outpost/research/chemistry)
 "bM" = (/turf/simulated/floor{icon_state = "white"},/area/outpost/research/chemistry)
-"bN" = (/obj/machinery/bunsen_burner,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/structure/table/glass,/turf/simulated/floor{icon_state = "white"},/area/outpost/research/chemistry)
+"bN" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/structure/table/glass,/turf/simulated/floor{icon_state = "white"},/area/outpost/research/chemistry)
 "bO" = (/obj/structure/disposaloutlet{dir = 8},/obj/structure/disposalpipe/trunk{dir = 2},/turf/simulated/wall/r_wall,/area/outpost/research/chemistry)
 "bP" = (/turf/simulated/floor{icon_state = "bot"; dir = 1},/area/outpost/research/chemistry)
 "bQ" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/turf/simulated/floor{dir = 8; icon_state = "warning"},/area/outpost/research/chemistry)
