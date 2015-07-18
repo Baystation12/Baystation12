@@ -131,60 +131,22 @@
 			bound_width = world.icon_size
 			bound_height = width * world.icon_size
 
+/obj/structure/door_assembly/attackby(var/obj/item/I, var/mob/user, var/expand_tool)
+	add_fingerprint(user)
 
+	if(handle_tool(I, user, expand_tool))
+		update_state()
+		return
 
-/obj/structure/door_assembly/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/weapon/pen))
+	if(istype(I, /obj/item/weapon/pen))
 		var/t = sanitizeSafe(input(user, "Enter the name for the door.", src.name, src.created_name), MAX_NAME_LEN)
 		if(!t)	return
 		if(!in_range(src, usr) && src.loc != usr)	return
 		created_name = t
 		return
 
-	if(istype(W, /obj/item/weapon/weldingtool) && ( (istext(glass)) || (glass == 1) || (!anchored) ))
-		var/obj/item/weapon/weldingtool/WT = W
-		if (WT.remove_fuel(0, user))
-			playsound(src.loc, 'sound/items/Welder2.ogg', 50, 1)
-			if(istext(glass))
-				user.visible_message("[user] welds the [glass] plating off the airlock assembly.", "You start to weld the [glass] plating off the airlock assembly.")
-				if(do_after(user, 40))
-					if(!src || !WT.isOn()) return
-					user << "<span class='notice>You welded the [glass] plating off!</span>"
-					var/M = text2path("/obj/item/stack/material/[glass]")
-					new M(src.loc, 2)
-					glass = 0
-			else if(glass == 1)
-				user.visible_message("[user] welds the glass panel out of the airlock assembly.", "You start to weld the glass panel out of the airlock assembly.")
-				if(do_after(user, 40))
-					if(!src || !WT.isOn()) return
-					user << "<span class='notice>You welded the glass panel out!</span>"
-					new /obj/item/stack/material/glass/reinforced(src.loc)
-					glass = 0
-			else if(!anchored)
-				user.visible_message("[user] dissassembles the airlock assembly.", "You start to dissassemble the airlock assembly.")
-				if(do_after(user, 40))
-					if(!src || !WT.isOn()) return
-					user << "<span class='notice>You dissasembled the airlock assembly!</span>"
-					new /obj/item/stack/material/steel(src.loc, 4)
-					qdel (src)
-		else
-			user << "<span class='notice>You need more welding fuel.</span>"
-			return
-
-	else if(istype(W, /obj/item/weapon/wrench) && state == 0)
-		playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
-		if(anchored)
-			user.visible_message("[user] begins unsecuring the airlock assembly from the floor.", "You starts unsecuring the airlock assembly from the floor.")
-		else
-			user.visible_message("[user] begins securing the airlock assembly to the floor.", "You starts securing the airlock assembly to the floor.")
-
-		if(do_after(user, 40))
-			if(!src) return
-			user << "<span class='notice>You [anchored? "un" : ""]secured the airlock assembly!</span>"
-			anchored = !anchored
-
-	else if(istype(W, /obj/item/stack/cable_coil) && state == 0 && anchored)
-		var/obj/item/stack/cable_coil/C = W
+	else if(istype(I, /obj/item/stack/cable_coil) && state == 0 && anchored)
+		var/obj/item/stack/cable_coil/C = I
 		if (C.get_amount() < 1)
 			user << "<span class='warning'>You need one length of coil to wire the airlock assembly.</span>"
 			return
@@ -194,49 +156,21 @@
 				src.state = 1
 				user << "<span class='notice'>You wire the airlock.</span>"
 
-	else if(istype(W, /obj/item/weapon/wirecutters) && state == 1 )
-		playsound(src.loc, 'sound/items/Wirecutter.ogg', 100, 1)
-		user.visible_message("[user] cuts the wires from the airlock assembly.", "You start to cut the wires from airlock assembly.")
-
-		if(do_after(user, 40))
-			if(!src) return
-			user << "<span class='notice>You cut the airlock wires.!</span>"
-			new/obj/item/stack/cable_coil(src.loc, 1)
-			src.state = 0
-
-	else if(istype(W, /obj/item/weapon/airlock_electronics) && state == 1)
+	else if(istype(I, /obj/item/weapon/airlock_electronics) && state == 1)
 		playsound(src.loc, 'sound/items/Screwdriver.ogg', 100, 1)
 		user.visible_message("[user] installs the electronics into the airlock assembly.", "You start to install electronics into the airlock assembly.")
 
 		if(do_after(user, 40))
 			if(!src) return
 			user.drop_item()
-			W.loc = src
+			I.loc = src
 			user << "<span class='notice>You installed the airlock electronics!</span>"
 			src.state = 2
 			src.name = "Near finished Airlock Assembly"
-			src.electronics = W
+			src.electronics = I
 
-	else if(istype(W, /obj/item/weapon/crowbar) && state == 2 )
-		//This should never happen, but just in case I guess
-		if (!electronics)
-			user << "<span class='notice'>There was nothing to remove.</span>"
-			src.state = 1
-			return
-
-		playsound(src.loc, 'sound/items/Crowbar.ogg', 100, 1)
-		user.visible_message("\The [user] starts removing the electronics from the airlock assembly.", "You start removing the electronics from the airlock assembly.")
-
-		if(do_after(user, 40))
-			if(!src) return
-			user << "<span class='notice>You removed the airlock electronics!</span>"
-			src.state = 1
-			src.name = "Wired Airlock Assembly"
-			electronics.loc = src.loc
-			electronics = null
-
-	else if(istype(W, /obj/item/stack/material) && !glass)
-		var/obj/item/stack/material/S = W
+	else if(istype(I, /obj/item/stack/material) && !glass)
+		var/obj/item/stack/material/S = I
 		if (S)
 			if (S.get_amount() >= 1)
 				if(istype(S, /obj/item/stack/material/glass/reinforced))
@@ -260,27 +194,91 @@
 								user << "<span class='notice'>You installed [M] plating into the airlock assembly.</span>"
 								glass = "[M]"
 
-	else if(istype(W, /obj/item/weapon/screwdriver) && state == 2 )
-		playsound(src.loc, 'sound/items/Screwdriver.ogg', 100, 1)
-		user << "<span class='notice>Now finishing the airlock.</span>"
-
-		if(do_after(user, 40))
-			if(!src) return
-			user << "<span class='notice>You finish the airlock!</span>"
-			var/path
-			if(istext(glass))
-				path = text2path("/obj/machinery/door/airlock/[glass]")
-			else if (glass == 1)
-				path = text2path("/obj/machinery/door/airlock[glass_type]")
-			else
-				path = text2path("/obj/machinery/door/airlock[airlock_type]")
-
-			var/obj/machinery/door/new_airlock = new path(src.loc, src)
-			new_airlock.dir = src.dir
-			qdel(src)
 	else
 		..()
 	update_state()
+
+/obj/structure/door_assembly/gather_actions()
+	. = list()
+	switch(state)
+		if(2)
+			. += TOOL_SCREWDRIVER
+			. += TOOL_CROWBAR
+		if(1)
+			. += TOOL_WIRECUTTERS
+		if(0)
+			. += TOOL_WRENCH
+	if(glass || !anchored)
+		. += TOOL_WELDER
+
+/obj/structure/door_assembly/tool_act(var/action, var/efficiency, var/obj/item/I, var/mob/user)
+	switch(action)
+		if(TOOL_SCREWDRIVER)
+			if(state == 2)
+				user << "Now finishing the airlock..."
+				if(do_after(user, 40 / efficiency) && state == 2)
+					user.visible_message("<span class='notice>[user] finishes the airlock.</span>", "<span class='notice>You finish the airlock.</span>")
+					var/path
+					if(istext(glass))
+						path = text2path("/obj/machinery/door/airlock/[glass]")
+					else if(glass == 1)
+						path = text2path("/obj/machinery/door/airlock[glass_type]")
+					else
+						path = text2path("/obj/machinery/door/airlock[airlock_type]")
+					var/obj/machinery/door/new_airlock = new path(loc, src)
+					new_airlock.dir = dir
+					qdel(src)
+				return 1
+		if(TOOL_CROWBAR)
+			if(state == 2 && electronics)
+				user << "You start removing the electronics from \the [src]..."
+				if(do_after(user, 40 / efficiency) && state == 2 && electronics)
+					user.visible_message("<span class='notice>[user] removes the airlock electronics.</span", "<span class='notice>You remove the airlock electronics.</span>")
+					state = 1
+					name = "Wired Airlock Assembly"
+					electronics.loc = loc
+					electronics = null
+				return 1
+		if(TOOL_WIRECUTTERS)
+			if(state == 1)
+				user << "You start cutting the wires from \the [src]..."
+				if(do_after(user, 40 / efficiency) && state == 1)
+					user.visible_message("<span class='notice>[user] cuts the airlock wires.</span>", "<span class='notice>You cut the airlock wires.</span>")
+					new /obj/item/stack/cable_coil(loc, 1)
+					state = 0
+				return 1
+		if(TOOL_WRENCH)
+			if(state == 0)
+				user << "You start [anchored ? "unsecuring" : "securing"] \the [src] [anchored ? "from" : "to"] the floor..."
+				if(do_after(user, 40 / efficiency) && state == 0)
+					user.visible_message("<span class='notice'>[user] [anchored ? "unsecured" : "secured"] \the [src].</span>", "<span class='notice'>You [anchored ? "unsecured" : "secured"] \the [src].</span>")
+					anchored = !anchored
+				return 1
+		if(TOOL_WELDER)
+			if(istext(glass))
+				user << "You start welding the [glass] plating off \the [src]..."
+				I.use_tool(TOOL_WELDER, user, 1)
+				if(do_after(user, 40 / efficiency) && istext(glass))
+					user.visible_message("<span class='notice'>[user] welds the [glass] plating off \the [src].</span>", "<span class='notice'>You weld the [glass] plating off \the [src].</span>")
+					var/M = text2path("/obj/item/stack/material/[glass]")
+					new M(loc, 2)
+					glass = 0
+				return 1
+			else if(glass == 1)
+				user << "You start welding the glass panel off \the [src]..."
+				I.use_tool(TOOL_WELDER, user, 1)
+				if(do_after(user, 40 / efficiency) && glass == 1)
+					user.visible_message("<span class='notice'>[user] welds the glass panel off \the [src].</span>", "<span class='notice'>You weld the glass panel off \the [src].</span>")
+					new /obj/item/stack/material/glass/reinforced(loc)
+					glass = 0
+				return 1
+			else if(!anchored)
+				user << "You start disassembling \the [src]..."
+				if(do_after(user, 40 / efficiency) && !anchored)
+					user.visible_message("<span class='notice>[user] dissasembled the airlock assembly.</span>", "<span class='notice>You dissasembled the airlock assembly.</span>")
+					new /obj/item/stack/material/steel(loc, 4)
+					qdel(src)
+				return 1
 
 /obj/structure/door_assembly/proc/update_state()
 	icon_state = "door_as_[glass == 1 ? "g" : ""][istext(glass) ? glass : base_icon_state][state]"

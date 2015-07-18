@@ -740,21 +740,28 @@ About the new airlock wires panel:
 
 	if(istype(I, /obj/item/device/detective_scanner) || istype(I, /obj/item/taperoll))
 		return
-	else if(istype(C, /obj/item/weapon/wirecutters))
+	else if(istype(I, /obj/item/weapon/wirecutters))
 		return src.attack_hand(user)
-	else if(istype(C, /obj/item/device/multitool))
+	else if(istype(I, /obj/item/device/multitool))
 		return src.attack_hand(user)
-	else if(istype(C, /obj/item/device/assembly/signaler))
+	else if(istype(I, /obj/item/device/assembly/signaler))
 		return src.attack_hand(user)
-	else if(istype(C, /obj/item/weapon/pai_cable))	// -- TLE
-		var/obj/item/weapon/pai_cable/cable = C
+	else if(istype(I, /obj/item/weapon/pai_cable))	// -- TLE
+		var/obj/item/weapon/pai_cable/cable = I
 		cable.plugin(src, user)
 
 	else
 		..()
 	return
 
-/obj/structure/computerframe/tool_act(var/action, var/efficiency, var/obj/item/I, var/mob/user)
+/obj/machinery/door/airlock/gather_actions()
+	. = list(TOOL_SCREWDRIVER)
+	if(!repairing)
+		. += TOOL_CROWBAR
+		if(!operating && density)
+			. += TOOL_WELDER
+
+/obj/machinery/door/airlock/tool_act(var/action, var/efficiency, var/obj/item/I, var/mob/user)
 	switch(action)
 		if(TOOL_SCREWDRIVER)
 			if(p_open && (stat & BROKEN))
@@ -762,7 +769,7 @@ About the new airlock wires panel:
 				return 1
 			if(efficiency < 1)
 				user << "You start [p_open ? "closing" : "opening"] the panel..."
-				if(!do_after(user, 10 / efficiency) || buildstage != 2)
+				if(!do_after(user, 10 / efficiency))
 					return 1
 			user << "<span class='notice'>You [p_open ? "close" : "open"] the panel.</span>"
 			p_open = !p_open
@@ -774,8 +781,8 @@ About the new airlock wires panel:
 				I.use_tool(TOOL_WELDER, user, 1)
 				if(do_after(user, 20 / efficiency) && !repairing && !operating && density)
 					user.visible_message("<span class='notice'>[user] welds \the [src] [welded ? "open" : "shut"].</span>", "<span class='notice'>You weld \the [src] [welded ? "open" : "shut"].</span>")
-					update_icon()
 					welded = !welded
+					update_icon()
 				return 1
 		if(TOOL_CROWBAR)
 			if(!repairing)
@@ -820,7 +827,7 @@ About the new airlock wires panel:
 						if(arePowerSystemsOn() || locked)
 							user << "<span class='warning'>You struggle to [density ? "open" : "close"] \the [src], but you can't.</span>"
 							return 1
-						user.visible_message("<span class='notice'>[user] forces \the [src] [density ? "open" : "close"].", "<span class='notice'>You force \the [src] [density ? "open" : "close"].")
+						user.visible_message("<span class='notice'>[user] forces \the [src] [density ? "open" : "close"].</span>", "<span class='notice'>You force \the [src] [density ? "open" : "closed"].</span>")
 						if(density)
 							spawn(0)
 								open(1)
