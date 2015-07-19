@@ -302,23 +302,7 @@
 		camera.c_tag = changed_name
 
 	if(!custom_sprite) //Check for custom sprite
-		var/file = file2text("config/custom_sprites.txt")
-		var/lines = text2list(file, "\n")
-
-		for(var/line in lines)
-		// split & clean up
-			var/list/Entry = text2list(line, "-")
-			for(var/i = 1 to Entry.len)
-				Entry[i] = trim(Entry[i])
-
-			if(Entry.len < 2)
-				continue;
-
-			if(Entry[1] == src.ckey && Entry[2] == src.real_name) //They're in the list? Custom sprite time, var and icon change required
-				custom_sprite = 1
-				icon = 'icons/mob/custom-synthetic.dmi'
-				if(icon_state == "robot")
-					icon_state = "[src.ckey]-Standard"
+		set_custom_sprite()
 
 	//Flavour text.
 	if(client)
