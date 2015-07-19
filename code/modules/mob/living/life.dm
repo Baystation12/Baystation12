@@ -54,6 +54,8 @@
 	if(client)
 		handle_regular_hud_updates()
 
+	handle_ai()
+
 /mob/living/proc/handle_breathing()
 	return
 
@@ -145,3 +147,7 @@
 
 /mob/living/proc/handle_hud_icons_health()
 	return
+
+/mob/living/proc/handle_ai()
+	if(mob_ai)
+		mob_ai.Process()

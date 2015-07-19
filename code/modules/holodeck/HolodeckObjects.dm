@@ -366,13 +366,13 @@
 		melee_damage_lower = 0
 		melee_damage_upper = 0
 		environment_smash = 0
-		destroy_surroundings = 0
+		if(mob_ai) mob_ai.destroy_probability = 0
 	else
 		faction = "carp"
 		melee_damage_lower = initial(melee_damage_lower)
 		melee_damage_upper = initial(melee_damage_upper)
 		environment_smash = initial(environment_smash)
-		destroy_surroundings = initial(destroy_surroundings)
+		if(mob_ai) mob_ai.destroy_probability = initial(mob_ai.destroy_probability)
 
 /mob/living/simple_animal/hostile/carp/holodeck/gib()
 	derez() //holograms can't gib

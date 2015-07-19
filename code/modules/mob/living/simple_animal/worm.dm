@@ -20,8 +20,6 @@
 	health = 30
 
 	universal_speak =1
-
-	stop_automated_movement = 1
 	animate_movement = SYNC_STEPS
 
 	minbodytemp = 0
@@ -34,7 +32,8 @@
 
 	environment_smash = 2
 
-	speed = -1
+	move_delay = -1
+	default_mob_ai = null
 
 	var/mob/living/simple_animal/space_worm/previous //next/previous segments, correspondingly
 	var/mob/living/simple_animal/space_worm/next     //head is the nextest segment

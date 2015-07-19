@@ -144,8 +144,30 @@
 /*
 	Animals
 */
-/mob/living/simple_animal/UnarmedAttack(var/atom/A, var/proximity)
+/mob/living/simple_animal/RangedAttack(atom/target)
+	if(!ranged)
+		return
+	var/turf/T = get_turf(src)
+	var/turf/U = get_turf(target)
+	if(!T || !U)
+		return
 
+	spawn(0)
+		for(var/i = 0; i < (rapid ? 3 : 1); i++)
+			var/obj/item/projectile/A = new projectiletype(loc)
+			playsound(loc, projectilesound, 75, 1)
+
+			A.firer = src
+			A.original = target
+			A.current = T
+			A.starting = T
+			A.yo = U.y - T.y
+			A.xo = U.x - T.x
+			spawn(1)
+				A.process()
+			sleep(2)
+
+/mob/living/simple_animal/UnarmedAttack(var/atom/A)
 	if(!..())
 		return
 
@@ -154,5 +176,11 @@
 		return
 
 	var/damage = rand(melee_damage_lower, melee_damage_upper)
-	if(A.attack_generic(src,damage,attacktext,environment_smash) && loc && attack_sound)
-		playsound(loc, attack_sound, 50, 1, 1)
+	if(A.attack_generic(src,damage,attacktext,environment_smash))
+		if(loc && attack_sound)
+			playsound(loc, attack_sound, 50, 1, 1)
+		if(prob(knockdown_chance) && istype(A,/mob/living))
+			var/mob/living/L = A
+			L.Weaken(3)
+			L.visible_message("<span class='danger'>\The [src] knocks down \the [L]!</span>")
+		return 1

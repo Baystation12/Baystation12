@@ -14,19 +14,11 @@
 	var/icon_dead = ""
 	var/icon_gib = null	//We only try to show a gibbing animation if this exists.
 
-	var/list/speak = list()
-	var/speak_chance = 0
-	var/list/emote_hear = list()	//Hearable emotes
-	var/list/emote_see = list()		//Unlike speak_emote, the list of things in this variable only show by themselves with no spoken text. IE: Ian barks, Ian yaps
-
 	var/turns_per_move = 1
 	var/turns_since_move = 0
 	universal_speak = 0		//No, just no.
 	var/meat_amount = 0
 	var/meat_type
-	var/stop_automated_movement = 0 //Use this to temporarely stop random movement or to if you write special movement code for animals.
-	var/wander = 1	// Does the mob wander around when idle?
-	var/stop_automated_movement_when_pulled = 1 //When set to 1 this stops the animal from moving when someone is pulling it.
 
 	//Interaction
 	var/response_help   = "tries to help"
@@ -51,7 +43,7 @@
 	var/min_n2 = 0
 	var/max_n2 = 0
 	var/unsuitable_atoms_damage = 2	//This damage is taken when atmos doesn't fit all the requirements above
-	var/speed = 0 //LETS SEE IF I CAN SET SPEEDS FOR SIMPLE MOBS WITHOUT DESTROYING EVERYTHING. Higher speed is slower, negative speed is faster
+	var/move_delay = 0 //LETS SEE IF I CAN SET SPEEDS FOR SIMPLE MOBS WITHOUT DESTROYING EVERYTHING.
 
 	//LETTING SIMPLE ANIMALS ATTACK? WHAT COULD GO WRONG. Defaults to zero so Ian can still be cuddly
 	var/melee_damage_lower = 0
@@ -65,10 +57,27 @@
 	//Null rod stuff
 	var/supernatural = 0
 	var/purge = 0
+	var/default_mob_ai = /datum/mob_ai/friendly
+
+	// Attack stuff
+	var/projectiletype
+	var/projectilesound
+
+	var/rapid = 0
+	var/ranged = 0
+	var/casingtype
+	var/knockdown_chance = 0
 
 /mob/living/simple_animal/New()
 	..()
 	verbs -= /mob/verb/observe
+	if(default_mob_ai)
+		mob_ai = new default_mob_ai(src)
+
+/mob/living/simple_animal/Destroy()
+	qdel(mob_ai)
+	mob_ai = null
+	..()
 
 /mob/living/simple_animal/Login()
 	if(src && src.client)
@@ -103,53 +112,6 @@
 	handle_weakened()
 	handle_paralysed()
 	handle_supernatural()
-
-	//Movement
-	if(!client && !stop_automated_movement && wander && !anchored)
-		if(isturf(src.loc) && !resting && !buckled && canmove)		//This is so it only moves if it's not inside a closet, gentics machine, etc.
-			turns_since_move++
-			if(turns_since_move >= turns_per_move)
-				if(!(stop_automated_movement_when_pulled && pulledby)) //Soma animals don't move when pulled
-					/var/moving_to = 0 // otherwise it always picks 4, fuck if I know.   Did I mention fuck BYOND
-					moving_to = pick(cardinal)
-					dir = moving_to			//How about we turn them the direction they are moving, yay.
-					Move(get_step(src,moving_to))
-					turns_since_move = 0
-
-	//Speaking
-	if(!client && speak_chance)
-		if(rand(0,200) < speak_chance)
-			if(speak && speak.len)
-				if((emote_hear && emote_hear.len) || (emote_see && emote_see.len))
-					var/length = speak.len
-					if(emote_hear && emote_hear.len)
-						length += emote_hear.len
-					if(emote_see && emote_see.len)
-						length += emote_see.len
-					var/randomValue = rand(1,length)
-					if(randomValue <= speak.len)
-						say(pick(speak))
-					else
-						randomValue -= speak.len
-						if(emote_see && randomValue <= emote_see.len)
-							visible_emote("[pick(emote_see)].")
-						else
-							audible_emote("[pick(emote_hear)].")
-				else
-					say(pick(speak))
-			else
-				if(!(emote_hear && emote_hear.len) && (emote_see && emote_see.len))
-					visible_emote("[pick(emote_see)].")
-				if((emote_hear && emote_hear.len) && !(emote_see && emote_see.len))
-					audible_emote("[pick(emote_hear)].")
-				if((emote_hear && emote_hear.len) && (emote_see && emote_see.len))
-					var/length = emote_hear.len + emote_see.len
-					var/pick = rand(1,length)
-					if(pick <= emote_see.len)
-						visible_emote("[pick(emote_see)].")
-					else
-						audible_emote("[pick(emote_hear)].")
-
 
 	//Atmos
 	var/atmos_suitable = 1
@@ -216,12 +178,6 @@
 	if(act)
 		..(act, type, desc)
 
-/mob/living/simple_animal/proc/visible_emote(var/act_desc)
-	custom_emote(1, act_desc)
-
-/mob/living/simple_animal/proc/audible_emote(var/act_desc)
-	custom_emote(2, act_desc)
-
 /mob/living/simple_animal/bullet_act(var/obj/item/projectile/Proj)
 	if(!Proj || Proj.nodamage)
 		return
@@ -236,10 +192,10 @@
 
 		if(I_HELP)
 			if (health > 0)
-				M.visible_message("\blue [M] [response_help] \the [src]")
+				M.visible_message("<span class='notice'>[M] [response_help] \the [src]</span>")
 
 		if(I_DISARM)
-			M.visible_message("\blue [M] [response_disarm] \the [src]")
+			M.visible_message("<span class='notice'>[M] [response_disarm] \the [src]</span>")
 			M.do_attack_animation(src)
 			//TODO: Push the mob away or something
 
@@ -257,12 +213,12 @@
 			G.affecting = src
 			LAssailant = M
 
-			M.visible_message("\red [M] has grabbed [src] passively!")
+			M.visible_message("<span class='danger'>[M] has grabbed [src] passively!</span>")
 			M.do_attack_animation(src)
 
 		if(I_HURT)
 			adjustBruteLoss(harm_intent_damage)
-			M.visible_message("\red [M] [response_harm] \the [src]")
+			M.visible_message("<span class='danger'>[M] [response_harm] \the [src]!</span>")
 			M.do_attack_animation(src)
 
 	return
@@ -311,9 +267,8 @@
 	user.do_attack_animation(src)
 
 /mob/living/simple_animal/movement_delay()
-	var/tally = 0 //Incase I need to add stuff other than "speed" later
-
-	tally = speed
+	var/tally = 0
+	tally = move_delay
 	if(purge)//Purged creatures will move more slowly. The more time before their purge stops, the slower they'll move.
 		if(tally <= 0)
 			tally = 1
@@ -350,21 +305,6 @@
 
 /mob/living/simple_animal/adjustBruteLoss(damage)
 	health = Clamp(health - damage, 0, maxHealth)
-
-/mob/living/simple_animal/proc/SA_attackable(target_mob)
-	if (isliving(target_mob))
-		var/mob/living/L = target_mob
-		if(!L.stat && L.health >= 0)
-			return (0)
-	if (istype(target_mob,/obj/mecha))
-		var/obj/mecha/M = target_mob
-		if (M.occupant)
-			return (0)
-	if (istype(target_mob,/obj/machinery/bot))
-		var/obj/machinery/bot/B = target_mob
-		if(B.health > 0)
-			return (0)
-	return 1
 
 //Call when target overlay should be added/removed
 /mob/living/simple_animal/update_targeted()

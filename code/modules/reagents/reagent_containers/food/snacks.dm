@@ -213,6 +213,7 @@
 			user.custom_emote(1,"[pick("burps", "cries for more", "burps twice", "looks at the area where the food was")]")
 			qdel(src)
 	On_Consume(user)
+	return 1
 
 //////////////////////////////////////////////////
 ////////////////////////////////////////////Snacks

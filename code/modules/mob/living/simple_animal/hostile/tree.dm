@@ -12,7 +12,7 @@
 	response_help = "brushes"
 	response_disarm = "pushes"
 	response_harm = "hits"
-	speed = -1
+	move_delay = -1
 	maxHealth = 250
 	health = 250
 
@@ -21,6 +21,7 @@
 	harm_intent_damage = 5
 	melee_damage_lower = 8
 	melee_damage_upper = 12
+	knockdown_chance = 15
 	attacktext = "bitten"
 	attack_sound = 'sound/weapons/bite.ogg'
 
@@ -36,19 +37,6 @@
 	minbodytemp = 0
 
 	faction = "carp"
-
-/mob/living/simple_animal/hostile/tree/FindTarget()
-	. = ..()
-	if(.)
-		audible_emote("growls at [.]")
-
-/mob/living/simple_animal/hostile/tree/AttackingTarget()
-	. =..()
-	var/mob/living/L = .
-	if(istype(L))
-		if(prob(15))
-			L.Weaken(3)
-			L.visible_message("<span class='danger'>\the [src] knocks down \the [L]!</span>")
 
 /mob/living/simple_animal/hostile/tree/death()
 	..(null,"is hacked into pieces!")

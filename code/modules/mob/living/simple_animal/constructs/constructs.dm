@@ -8,9 +8,8 @@
 	response_disarm = "flailed at"
 	response_harm   = "punched"
 	icon_dead = "shade_dead"
-	speed = -1
+	move_delay = -1
 	a_intent = I_HURT
-	stop_automated_movement = 1
 	status_flags = CANPUSH
 	universal_speak = 0
 	universal_understand = 1
@@ -98,7 +97,7 @@
 	melee_damage_upper = 30
 	attacktext = "smashed their armoured gauntlet into"
 	mob_size = 20
-	speed = 3
+	move_delay = 3
 	environment_smash = 2
 	attack_sound = 'sound/weapons/heavysmash.ogg'
 	status_flags = 0
@@ -148,7 +147,7 @@
 	melee_damage_lower = 25
 	melee_damage_upper = 25
 	attacktext = "slashed"
-	speed = -1
+	move_delay = -1
 	environment_smash = 1
 	attack_sound = 'sound/weapons/rapidslice.ogg'
 	construct_spells = list(/spell/targeted/ethereal_jaunt/shift)
@@ -172,7 +171,7 @@
 	melee_damage_lower = 5
 	melee_damage_upper = 5
 	attacktext = "rammed"
-	speed = 0
+	move_delay = 0
 	environment_smash = 1
 	attack_sound = 'sound/weapons/rapidslice.ogg'
 	construct_spells = list(/spell/aoe_turf/conjure/construct/lesser,
@@ -201,7 +200,7 @@
 	melee_damage_lower = 50
 	melee_damage_upper = 50
 	attacktext = "brutally crushed"
-	speed = 5
+	move_delay = 5
 	environment_smash = 2
 	attack_sound = 'sound/weapons/heavysmash.ogg'
 	resistance = 10
@@ -225,7 +224,7 @@
 	melee_damage_lower = 25
 	melee_damage_upper = 25
 	attacktext = "violently stabbed"
-	speed = -1
+	move_delay = -1
 	environment_smash = 1
 	attack_sound = 'sound/weapons/pierce.ogg'
 
