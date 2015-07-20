@@ -189,9 +189,7 @@
 	..()
 
 	spawn(2)
-		var/area/A = get_area(src)
-		if(A && !A.requires_power)
-			on = 1
+		on = has_power()
 
 		switch(fitting)
 			if("tube")
@@ -393,7 +391,7 @@
 // true if area has power and lightswitch is on
 /obj/machinery/light/proc/has_power()
 	var/area/A = src.loc.loc
-	return A.lightswitch && A.power_light
+	return A.lightswitch && (!A.requires_power || A.power_light)
 
 /obj/machinery/light/proc/flicker(var/amount = rand(10, 20))
 	if(flickering) return
@@ -565,8 +563,7 @@
 // called when area power state changes
 /obj/machinery/light/power_change()
 	spawn(10)
-		var/area/A = src.loc.loc
-		seton(A.lightswitch && A.power_light)
+		seton(has_power())
 
 // called when on fire
 
