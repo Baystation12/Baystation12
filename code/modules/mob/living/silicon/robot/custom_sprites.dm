@@ -19,6 +19,7 @@ var/list/robot_custom_icons
 		var/real_name = copytext(line, split_idx+1)
 		
 		robot_custom_icons[ckey] = real_name
+	return 1
 
 /mob/living/silicon/robot/proc/set_custom_sprite()
 	var/rname = robot_custom_icons[ckey]
