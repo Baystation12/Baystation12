@@ -1,5 +1,5 @@
 
-//list(ckey = real_name,) 
+//list(ckey = real_name,)
 //Since the ckey is used as the icon_state, the current system will only permit a single custom robot sprite per ckey.
 //While it might be possible for a ckey to use that custom sprite for several real_names, it seems rather pointless to support it.
 var/list/robot_custom_icons
@@ -14,16 +14,16 @@ var/list/robot_custom_icons
 		var/split_idx = findtext(line, "-") //this works if ckey cannot contain dashes, and findtext starts from the beginning
 		if(!split_idx || split_idx == length(line))
 			continue //bad entry
-		
+
 		var/ckey = copytext(line, 1, split_idx)
 		var/real_name = copytext(line, split_idx+1)
-		
+
 		robot_custom_icons[ckey] = real_name
 
 /mob/living/silicon/robot/proc/set_custom_sprite()
 	var/rname = robot_custom_icons[ckey]
 	if(rname && rname == real_name)
 		custom_sprite = 1
-		icon = 'icons/mob/custom-synthetic.dmi'
+		icon = 'icons/mob/custom_synthetic.dmi'
 		if(icon_state == "robot")
 			icon_state = "[ckey]-Standard"
