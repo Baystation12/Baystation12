@@ -238,13 +238,18 @@ var/global/list/damage_icon_parts = list()
 
 	//CACHING: Generate an index key from visible bodyparts.
 	//0 = destroyed, 1 = normal, 2 = robotic, 3 = necrotic.
+
 	//Create a new, blank icon for our mob to use.
 	if(stand_icon)
 		qdel(stand_icon)
 	stand_icon = new(species.icon_template ? species.icon_template : 'icons/mob/human.dmi',"blank")
-	var/icon_key = "[species.race_key][g][s_tone][r_skin][g_skin][b_skin]"
-	var/obj/item/organ/eyes/eyes = internal_organs_by_name["eyes"]
 
+	var/icon_key = "[species.race_key][g][s_tone][r_skin][g_skin][b_skin]"
+	if(lip_style)
+		icon_key += "[lip_style]"
+	else
+		icon_key += "nolips"
+	var/obj/item/organ/eyes/eyes = internal_organs_by_name["eyes"]
 	if(eyes)
 		icon_key += "[rgb(eyes.eye_colour[1], eyes.eye_colour[2], eyes.eye_colour[3])]"
 	else
@@ -633,7 +638,7 @@ var/global/list/damage_icon_parts = list()
 /mob/living/carbon/human/update_inv_head(var/update_icons=1)
 	if(head)
 		head.screen_loc = ui_head		//TODO
-		
+
 		//Determine the icon to use
 		var/t_icon = INV_HEAD_DEF_ICON
 		if(head.icon_override)
@@ -642,17 +647,17 @@ var/global/list/damage_icon_parts = list()
 			t_icon = head.sprite_sheets[species.name]
 		else if(head.item_icons && (icon_head in head.item_icons))
 			t_icon = head.item_icons[icon_head]
-		
+
 		//Determine the state to use
 		var/t_state = head.icon_state
 		if(istype(head, /obj/item/weapon/paper))
 			/* I don't like this, but bandaid to fix half the hats in the game
 			   being completely broken without re-breaking paper hats */
 			t_state = "paper"
-		
+
 		//Create the image
 		var/image/standing = image(icon = t_icon, icon_state = t_state)
-		
+
 		if(head.blood_DNA)
 			var/image/bloodsies = image("icon" = species.blood_mask, "icon_state" = "helmetblood")
 			bloodsies.color = head.blood_color
@@ -903,22 +908,22 @@ var/global/list/damage_icon_parts = list()
 
 /mob/living/carbon/human/proc/get_tail_icon()
 	var/icon_key = "[species.race_key][r_skin][g_skin][b_skin]"
-	
+
 	var/icon/tail_icon = tail_icon_cache[icon_key]
-	if(!tail_icon) 
-		
+	if(!tail_icon)
+
 		//generate a new one
 		tail_icon = new/icon(icon = (species.tail_animation? species.tail_animation : 'icons/effects/species.dmi'))
 		tail_icon.Blend(rgb(r_skin, g_skin, b_skin), ICON_ADD)
-		
+
 		tail_icon_cache[icon_key] = tail_icon
-	
+
 	return tail_icon
 
 
 /mob/living/carbon/human/proc/set_tail_state(var/t_state)
 	var/image/tail_overlay = overlays_standing[TAIL_LAYER]
-	
+
 	if(tail_overlay && species.tail_animation)
 		tail_overlay.icon_state = t_state
 		return tail_overlay
@@ -928,30 +933,30 @@ var/global/list/damage_icon_parts = list()
 //Update this if the ability to flick() images or make looping animation start at the first frame is ever added.
 /mob/living/carbon/human/proc/animate_tail_once(var/update_icons=1)
 	var/t_state = "[species.tail]_once"
-	
+
 	var/image/tail_overlay = overlays_standing[TAIL_LAYER]
 	if(tail_overlay && tail_overlay.icon_state == t_state)
 		return //let the existing animation finish
-	
+
 	tail_overlay = set_tail_state(t_state)
 	if(tail_overlay)
 		spawn(20)
 			//check that the animation hasn't changed in the meantime
 			if(overlays_standing[TAIL_LAYER] == tail_overlay && tail_overlay.icon_state == t_state)
 				animate_tail_stop()
-	
+
 	if(update_icons)
 		update_icons()
 
 /mob/living/carbon/human/proc/animate_tail_start(var/update_icons=1)
 	set_tail_state("[species.tail]_slow[rand(0,9)]")
-	
+
 	if(update_icons)
 		update_icons()
 
 /mob/living/carbon/human/proc/animate_tail_fast(var/update_icons=1)
 	set_tail_state("[species.tail]_loop[rand(0,9)]")
-	
+
 	if(update_icons)
 		update_icons()
 
@@ -960,14 +965,14 @@ var/global/list/damage_icon_parts = list()
 		set_tail_state("[species.tail]_idle[rand(0,9)]")
 	else
 		set_tail_state("[species.tail]_static")
-		
-	
+
+
 	if(update_icons)
 		update_icons()
 
 /mob/living/carbon/human/proc/animate_tail_stop(var/update_icons=1)
 	set_tail_state("[species.tail]_static")
-	
+
 	if(update_icons)
 		update_icons()
 

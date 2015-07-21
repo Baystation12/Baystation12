@@ -71,4 +71,4 @@
 	return extra_href
 
 /datum/topic_state/air_alarm/proc/has_access(var/mob/user)
-	return user && (user.isAI() || atmos_control.allowed(user) || atmos_control.emagged || air_alarm.rcon_setting == RCON_YES || (air_alarm.alarm_area.atmosalm && air_alarm.rcon_setting == RCON_AUTO))
+	return user && (user.isMobAI() || atmos_control.allowed(user) || atmos_control.emagged || air_alarm.rcon_setting == RCON_YES || (air_alarm.alarm_area.atmosalm && air_alarm.rcon_setting == RCON_AUTO))
