@@ -88,11 +88,11 @@
 
 /obj/structure/janitorialcart/ui_interact(var/mob/user, var/ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	var/data[0]
-	data["name"] = uppertext(copytext(name, 1, 2)) + copytext(name, 2)
-	data["bag"] = mybag ? uppertext(copytext(mybag.name, 1, 2)) + copytext(mybag.name, 2) : null
-	data["mop"] = mymop ? uppertext(copytext(mymop.name, 1, 2)) + copytext(mymop.name, 2) : null
-	data["spray"] = myspray ? uppertext(copytext(myspray.name, 1, 2)) + copytext(myspray.name, 2) : null
-	data["replacer"] = myreplacer ? uppertext(copytext(myreplacer.name, 1, 2)) + copytext(myreplacer.name, 2) : null
+	data["name"] = capitalize(name)
+	data["bag"] = mybag ? capitalize(mybag.name) : null
+	data["mop"] = mymop ? capitalize(mymop.name) : null
+	data["spray"] = myspray ? capitalize(myspray.name) : null
+	data["replacer"] = myreplacer ? capitalize(myreplacer.name) : null
 	data["signs"] = signs ? "[signs] sign\s" : null
 
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
