@@ -22,9 +22,11 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 
 /datum/supply_packs/New()
 	manifest += "<ul>"
-	for(var/atom/movable/path in contains)
-		if(!path)	continue
-		manifest += "<li>[initial(path.name)]</li>"
+	for(var/path in contains)
+		if(!path || !ispath(path, /obj/item))
+			continue
+		var/obj/item/O = path
+		manifest += "<li>[initial(O.name)]</li>"
 	manifest += "</ul>"
 
 /datum/supply_packs/specialops
