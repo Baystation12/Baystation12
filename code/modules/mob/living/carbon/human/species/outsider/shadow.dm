@@ -8,6 +8,7 @@
 	language = "Sol Common" //todo?
 	unarmed_types = list(/datum/unarmed_attack/claws/strong, /datum/unarmed_attack/bite/sharp)
 	light_dam = 2
+	darksight = 8
 	has_organ = list()
 	siemens_coefficient = 0
 
