@@ -23,9 +23,9 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 /datum/supply_packs/New()
 	manifest += "<ul>"
 	for(var/path in contains)
-		if(!path || !ispath(path, /obj/item))
+		if(!path || !ispath(path, /atom))
 			continue
-		var/obj/item/O = path
+		var/atom/O = path
 		manifest += "<li>[initial(O.name)]</li>"
 	manifest += "</ul>"
 
