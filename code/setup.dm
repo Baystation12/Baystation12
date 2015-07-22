@@ -986,3 +986,7 @@ var/list/be_special_flags = list(
 
 #define TABLE_BRITTLE_MATERIAL_MULTIPLIER 4 // Amount table damage is multiplied by if it is made of a brittle material (e.g. glass)
 
+#define FOR_DVIEW(type, range, center, invis_flags) \
+	dview_mob.loc = center; \
+	dview_mob.see_invisible = invis_flags; \
+	for(type in view(range, dview_mob))
