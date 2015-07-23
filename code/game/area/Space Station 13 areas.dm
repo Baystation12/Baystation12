@@ -208,9 +208,49 @@ area/space/atmosalert()
 /area/shuttle/escape_pod3/transit
 	icon_state = "shuttle"
 
+/area/shuttle/escape_pod4
+	name = "\improper Escape Pod Four"
+	music = "music/escape.ogg"
+
+/area/shuttle/escape_pod4/station
+	icon_state = "shuttle2"
+
+/area/shuttle/escape_pod4/centcom
+	icon_state = "shuttle"
+
+/area/shuttle/escape_pod4/transit
+	icon_state = "shuttle"
+
 /area/shuttle/escape_pod5 //Pod 4 was lost to meteors
 	name = "\improper Escape Pod Five"
 	music = "music/escape.ogg"
+
+
+/area/shuttle/elevator1
+	name = "Elevator Shaft 1"
+
+/area/shuttle/elevator1/deck1
+
+/area/shuttle/elevator1/deck2
+
+/area/shuttle/elevator1/deck3
+
+/area/shuttle/elevator1/deck4
+
+/area/shuttle/elevator2
+	name = "Elevator Shaft 1"
+
+/area/shuttle/elevator2/deck1
+
+/area/shuttle/elevator2/deck2
+
+/area/shuttle/elevator2/deck3
+
+/area/shuttle/elevator2/deck4
+
+/area/shuttle/elevator2/deck5
+
+
 
 /area/shuttle/escape_pod5/station
 	icon_state = "shuttle2"
@@ -676,6 +716,52 @@ area/space/atmosalert()
 	name = "Port Maintenance Storage"
 	icon_state = "maint1store"
 
+//DECK 2 MAINT
+/area/maintenance/d2/auxtool
+	name = "Auxiliary Tool Storage Maintenance"
+	icon_state = "maint2"
+
+/area/maintenance/d2/port_aft
+	name = "Port Aft Maintenance"
+	icon_state = "maint2port"
+
+/area/maintenance/d2/port_fore
+	name = "Port Fore Maintenance"
+	icon_state = "maint2port"
+
+/area/maintenance/d2/skyway
+	name = "Fore Skyway Maintenance"
+	icon_state = "maint2sky"
+
+/area/maintenance/d2/starboard_fore
+	name = "Fore Starboard Maintenance"
+	icon_state = "maint2stbd"
+
+/area/maintenance/d2/starboard_aft
+	name = "Aft Starboard Maintenance"
+	icon_state = "maint2stbd"
+
+/area/maintenance/d2/maint_storage
+	name = "Aft Storboard Maintenance Storage"
+	icon_state = "maint2"
+
+/area/maintenance/d2/shelter
+	name = "Emergency Shelter"
+	icon_state = "maint2"
+
+/area/maintenance/d2/fore_ai
+	name = "Fore AI Maintenance"
+	icon_state = "maint2"
+
+/area/maintenance/d2/aft_ai
+	name = "Aft AI Maintenance"
+	icon_state = "maint2"
+
+/area/maintenance/d2/escape_shuttles
+	name = "Escape Shuttle Access"
+	icon_state = "maint2"
+
+
 // SUBSTATIONS (Subtype of maint, that should let them serve as shielded area during radstorm)
 
 /area/maintenance/substation
@@ -707,6 +793,8 @@ area/space/atmosalert()
 /area/maintenance/substation/security // Security, Brig, Permabrig, etc.
 	name = "Security Substation"
 
+/area/maintenance/substation/deck2
+	name = "Deck Substation"
 
 
 
@@ -715,16 +803,16 @@ area/space/atmosalert()
 /area/hallway/primary/
 	sound_env = 12 //hallway
 
-/area/hallway/primary/d1
-	name = "\improper Deck One Hallway"
-	icon_state = "halldeck1"
-
 /area/hallway/secondary/exit
 	name = "\improper Escape Shuttle Hallway"
 	icon_state = "escape"
 
 /area/hallway/secondary/construction
 	name = "\improper Construction Area"
+	icon_state = "construction"
+
+/area/hallway/secondary/construction2
+	name = "\improper Deck 2 Construction Area"
 	icon_state = "construction"
 
 /area/hallway/secondary/entry/fore
@@ -743,6 +831,26 @@ area/space/atmosalert()
 	name = "\improper Arrival Shuttle Hallway - Aft"
 	icon_state = "entry_4"
 
+//DECK ONE
+
+/area/hallway/primary/d1
+	name = "\improper Deck One Hallway"
+	icon_state = "halldeck1"
+
+//DECK TWO
+
+/area/hallway/primary/d2/port
+	name = "\improper Deck Two Port Hallway"
+	icon_state = "halldeck2port"
+
+/area/hallway/primary/d2/fore_skyway
+	name = "\improper Deck Two Fore Skyway"
+	icon_state = "halldeck2sky"
+
+/area/hallway/primary/d2/starboard
+	name = "\improper Deck Two Starboard Hallway"
+	icon_state = "halldeck2stbd"
+
 //Command
 
 /area/bridge
@@ -751,16 +859,21 @@ area/space/atmosalert()
 	music = "signal"
 
 /area/bridge/meeting_room
-	name = "\improper Heads of Staff Meeting Room"
+	name = "\improper Meeting Room"
+	icon_state = "bridge"
+	music = null
+
+/area/bridge/conference_room
+	name = "\improper Heads of Staff Conference Room"
 	icon_state = "bridge"
 	music = null
 
 /area/crew_quarters/captain
-	name = "\improper Command - Captain's Office"
+	name = "\improper Captain's Office & Quarters"
 	icon_state = "captain"
 
-/area/crew_quarters/heads/hop
-	name = "\improper Command - HoP's Office"
+/area/crew_quarters/heads/xo
+	name = "\improper XO's Office & Quarters"
 	icon_state = "head_quarters"
 
 /area/crew_quarters/heads/hor
@@ -771,13 +884,22 @@ area/space/atmosalert()
 	name = "\improper Engineering - CE's Office"
 	icon_state = "head_quarters"
 
+/area/crew_quarters/heads/quarters/chief
+	name = "\improper CE's Quarters"
+
 /area/crew_quarters/heads/hos
 	name = "\improper Security - HoS' Office"
 	icon_state = "head_quarters"
 
+/area/crew_quarters/heads/quarters/hos
+	name = "\improper HoS' Quarters"
+
 /area/crew_quarters/heads/cmo
 	name = "\improper Medbay - CMO's Office"
 	icon_state = "head_quarters"
+
+/area/crew_quarters/heads/quarters/cmo
+	name = "\improper CMO's Quarters"
 
 /area/crew_quarters/courtroom
 	name = "\improper Courtroom"
@@ -1071,6 +1193,10 @@ area/space/atmosalert()
 	icon_state = "teleporter"
 	music = "signal"
 
+/area/gateway/missionroom
+	name = "\improper Away Mission Briefing Room"
+	icon_state = "teleporter"
+
 /area/AIsattele
 	name = "\improper AI Satellite Teleporter Room"
 	icon_state = "teleporter"
@@ -1305,6 +1431,10 @@ area/space/atmosalert()
 	name = "Security Post - Science"
 	icon_state = "checkpoint1"
 
+/area/security/checkpoint/command
+	name = "Security Post - Command"
+	icon_state = "checkpoint1"
+
 /area/security/vacantoffice
 	name = "\improper Vacant Office"
 	icon_state = "security"
@@ -1327,6 +1457,10 @@ area/space/atmosalert()
 
 /area/quartermaster/qm
 	name = "\improper Cargo - Quartermaster's Office"
+	icon_state = "quart"
+
+/area/quartermaster/quarters
+	name = "\improper Quartermaster's Quarters"
 	icon_state = "quart"
 
 /area/quartermaster/miningdock
@@ -1429,7 +1563,7 @@ area/space/atmosalert()
 	icon_state = "storage"
 
 /area/storage/emergency
-	name = "Starboard Emergency Storage"
+	name = "Deck Two Emergency Storage"
 	icon_state = "emergencystorage"
 
 /area/storage/emergency2
