@@ -103,7 +103,7 @@
 	else if(!deconstruct && (istype(T,/turf/space) || istype(T,get_base_turf(T.z))))
 		build_cost =  1
 		build_type =  "floor"
-		build_turf =  /turf/simulated/floor/plating/airless
+		build_turf =  /turf/simulated/floor/airless
 	else if(deconstruct && istype(T,/turf/simulated/wall))
 		var/turf/simulated/wall/W = T
 		build_delay = deconstruct ? 50 : 40

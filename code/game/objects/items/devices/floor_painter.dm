@@ -21,7 +21,10 @@
 	if(istype(A, /turf/simulated/floor))
 		var/turf/simulated/floor/F = A
 
-		if(F.is_steel_floor()) // only tiled floors
+		if(F.flooring && F.flooring.name == "floor") // only tiled floors
+			if(F.broken || F.burnt)
+				usr << "<span class='warning'>\The [F] is too damaged to repaint.</span>"
+				return
 			if(tile_dir_mode)
 				var/D = get_dir(usr, F)
 				if(usr.loc == F)
@@ -78,7 +81,7 @@
 				F.set_dir(0)
 				F.icon_state = mode
 		else
-			usr << "You can't paint that!"
+			usr << "<span class='warning'>You can't paint that!</span>"
 
 /obj/item/device/floor_painter/attack_self(mob/user as mob)
 	var/type = input("What type of floor?", "Floor painter", "solid") in list("solid", "corner", "opposite corners", "side/three corners", "special", "letters")

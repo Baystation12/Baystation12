@@ -27,12 +27,11 @@
 	return ..()
 
 /obj/machinery/power/terminal/hide(var/i)
-	if(i)
-		invisibility = 101
-		icon_state = "term-f"
-	else
-		invisibility = 0
-		icon_state = "term"
+	invisibility = i ? 101 : 0
+	icon_state = i ? "term-f" : "term"
+
+/obj/structure/power/terminal/hides_under_flooring()
+	return 1
 
 // Needed so terminals are not removed from machines list.
 // Powernet rebuilds need this to work properly.

@@ -80,7 +80,6 @@ By design, d1 is the smallest direction and d2 is the highest
 	d2 = text2num( copytext( icon_state, dash+1 ) )
 
 	var/turf/T = src.loc			// hide if turf is not intact
-
 	if(level==1) hide(T.intact)
 	cable_list += src //add it to the global cable list
 
@@ -97,10 +96,12 @@ By design, d1 is the smallest direction and d2 is the highest
 
 //If underfloor, hide the cable
 /obj/structure/cable/hide(var/i)
-
-	if(level == 1 && istype(loc, /turf))
+	if(istype(loc, /turf))
 		invisibility = i ? 101 : 0
 	updateicon()
+
+/obj/structure/cable/hides_under_flooring()
+	return 1
 
 /obj/structure/cable/proc/updateicon()
 	icon_state = "[d1]-[d2]"

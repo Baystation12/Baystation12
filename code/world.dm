@@ -84,7 +84,7 @@ var/global/datum/global_init/init = new ()
 		// it's brute-forcey, but frankly the alternative is a mine turf rewrite.
 		for(var/turf/simulated/mineral/M in world) // Ugh.
 			M.updateMineralOverlays()
-		for(var/turf/simulated/floor/plating/airless/asteroid/M in world) // Uuuuuugh.
+		for(var/turf/simulated/floor/asteroid/M in world) // Uuuuuugh.
 			M.updateMineralOverlays()
 
 	// Create autolathe recipes, as above.

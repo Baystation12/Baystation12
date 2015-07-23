@@ -10,7 +10,7 @@
 	var/list/mode = list("dismantle"=0,"laying"=0,"collect"=0)
 
 /obj/machinery/floorlayer/New()
-	T = new/obj/item/stack/tile/steel(src)
+	T = new/obj/item/stack/tile/floor(src)
 	..()
 
 /obj/machinery/floorlayer/Move(new_turf,M_Dir)
@@ -80,9 +80,7 @@
 	if(istype(new_turf, /turf/simulated/floor))
 		var/turf/simulated/floor/T = new_turf
 		if(!T.is_plating())
-			if(!T.broken && !T.burnt)
-				new T.floor_type(T)
-			T.make_plating()
+			T.make_plating(!(T.broken || T.burnt))
 	return !new_turf.intact
 
 /obj/machinery/floorlayer/proc/TakeNewStack()
