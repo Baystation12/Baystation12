@@ -1,6 +1,6 @@
 /obj/machinery/recharge_station
 	name = "cyborg recharging station"
-	desc = "A heavy duty rapid charging system, designed to quickly recharge cyborg power supplies. Uses a dedicated internal power cell to deliver large amounts of power."
+	desc = "A heavy duty rapid charging system, designed to quickly recharge cyborg power reserves."
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "borgcharger0"
 	density = 1
@@ -158,6 +158,13 @@
 	restore_power_passive = 5000 + 1000 * cap_rating
 	weld_rate = max(0, man_rating - 3)
 	wire_rate = max(0, man_rating - 5)
+	
+	desc = initial(desc)
+	desc += " Uses a dedicated internal power cell to deliver [charging_power]W when in use."
+	if(weld_rate)
+		desc += "<br>It is capable of repairing structural damage."
+	if(wire_rate)
+		desc += "<br>It is capable of repairing burn damage."
 
 /obj/machinery/recharge_station/proc/build_overlays()
 	overlays.Cut()
