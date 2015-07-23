@@ -104,9 +104,6 @@
 		if(wire_rate && R.getFireLoss() && cell.checked_use(wire_power_use * wire_rate * CELLRATE))
 			R.adjustFireLoss(-wire_rate)
 
-/obj/machinery/recharge_station/allow_drop()
-	return 0
-
 /obj/machinery/recharge_station/examine(mob/user)
 	..(user)
 	user << "The charge meter reads: [round(chargepercentage())]%"
@@ -220,25 +217,23 @@
 /obj/machinery/recharge_station/verb/move_inside()
 	set category = "Object"
 	set src in oview(1)
-	if(usr.stat == 2)
-		//Whoever had it so that a borg with a dead cell can't enter this thing should be shot. --NEO
-		return
-	if(!(istype(usr, /mob/living/silicon/)))
-		usr << "<span class='notice'>Only synthetics may enter the recharger!</span>"
+
+	if(usr.stat == DEAD)
 		return
 	if(occupant)
 		usr << "<span class='notice'>\The [src] is already occupied!</span>"
 		return
-	if(!usr:cell)
-		usr << "<span class='notice'>Without a powercell, you can't be recharged.</span>"
-		//Make sure they actually HAVE a cell, now that they can get in while powerless. --NEO
+
+	var/mob/living/silicon/robot/R = usr
+	if(!istype(R))
+		usr << "<span class='notice'>Only synthetics may enter the recharger!</span>"
 		return
-	usr.stop_pulling()
+	if(!R.cell)
+		usr << "<span class='notice'>Without a powercell, you can't be recharged.</span>"
+		return
+
 	usr.reset_view(src)
 	usr.loc = src
 	occupant = usr
-	/*for(var/obj/O in src)
-		O.loc = loc*/
 	add_fingerprint(usr)
 	update_icon()
-	return
