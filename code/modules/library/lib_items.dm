@@ -46,8 +46,7 @@
 		if(do_after(user,25))
 			if(!src) return
 			user << "<span class='notice'>You dismantle the [src.name].</span>"
-			var/obj/item/stack/w = new /obj/item/stack/material/wood(get_turf(src))
-			w.amount = 3
+			new /obj/item/stack/material/wood(get_turf(src), amount = 3)
 			for(var/obj/item/weapon/book/b in contents)
 				b.loc = (get_turf(src))
 			qdel(src)
