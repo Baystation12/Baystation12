@@ -34,7 +34,6 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 
 	var/debug = 0
 	var/requires_power = 1
-	var/unlimited_power = 0
 	var/always_unpowered = 0	//this gets overriden to 1 for space in area/New()
 
 	var/power_equip = 1
@@ -349,7 +348,6 @@ area/space/atmosalert()
 	name = "\improper Centcom"
 	icon_state = "centcom"
 	requires_power = 0
-	unlimited_power = 1
 	lighting_use_dynamic = 0
 
 /area/centcom/control
@@ -388,7 +386,6 @@ area/space/atmosalert()
 	name = "\improper Mercenary Base"
 	icon_state = "syndie-ship"
 	requires_power = 0
-	unlimited_power = 1
 	lighting_use_dynamic = 0
 
 /area/syndicate_mothership/control
@@ -463,7 +460,6 @@ area/space/atmosalert()
 	name = "\improper Independant Station"
 	icon_state = "yellow"
 	requires_power = 0
-	unlimited_power = 1
 	flags = RAD_SHIELDED
 
 /area/syndicate_station/start

@@ -445,7 +445,7 @@
 		else if(exhaled_pp > safe_exhaled_max * 0.7)
 			if (!co2_alert || prob(1))
 				var/word = pick("dizzy","short of breath","faint","momentarily confused")
-				src << "<span class='warning>You feel [word].</span>"
+				src << "<span class='warning'>You feel [word].</span>"
 
 			//scale linearly from 0 to 1 between safe_exhaled_max and safe_exhaled_max*0.7
 			var/ratio = 1.0 - (safe_exhaled_max - exhaled_pp)/(safe_exhaled_max*0.3)
@@ -459,7 +459,7 @@
 		else if(exhaled_pp > safe_exhaled_max * 0.6)
 			if (prob(0.3))
 				var/word = pick("a little dizzy","short of breath")
-				src << "<span class='warning>You feel [word].</span>"
+				src << "<span class='warning'>You feel [word].</span>"
 
 		else
 			co2_alert = 0
@@ -486,7 +486,7 @@
 
 			// Enough to make us sleep as well
 			if(SA_pp > SA_sleep_min)
-				sleeping = min(sleeping+2, 10)
+				Sleeping(5)
 
 		// There is sleeping gas in their lungs, but only a little, so give them a bit of a warning
 		else if(SA_pp > 0.15)

@@ -88,12 +88,6 @@
 		return 1
 	return 0
 
-/mob/proc/isAI()
-	return 0
-
-/mob/living/silicon/ai/isAI()
-	return 1
-
 /mob/proc/isMobAI()
 	return 0
 
