@@ -190,7 +190,10 @@ emp_act
 
 //Returns 1 if the attack hit, 0 if it missed.
 /mob/living/carbon/human/proc/attacked_by(var/obj/item/I, var/mob/living/user, var/def_zone)
-	if(!I || !user)	return 0
+	if(!I || !user)
+		return 0
+	if(user == src && user.a_intent != I_HURT)
+		return 0
 
 	var/target_zone = def_zone? check_zone(def_zone) : get_zone_with_miss_chance(user.zone_sel.selecting, src)
 
