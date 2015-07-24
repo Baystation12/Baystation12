@@ -208,9 +208,49 @@ area/space/atmosalert()
 /area/shuttle/escape_pod3/transit
 	icon_state = "shuttle"
 
+/area/shuttle/escape_pod4
+	name = "\improper Escape Pod Four"
+	music = "music/escape.ogg"
+
+/area/shuttle/escape_pod4/station
+	icon_state = "shuttle2"
+
+/area/shuttle/escape_pod4/centcom
+	icon_state = "shuttle"
+
+/area/shuttle/escape_pod4/transit
+	icon_state = "shuttle"
+
 /area/shuttle/escape_pod5 //Pod 4 was lost to meteors
 	name = "\improper Escape Pod Five"
 	music = "music/escape.ogg"
+
+
+/area/shuttle/elevator1
+	name = "Elevator Shaft 1"
+
+/area/shuttle/elevator1/deck1
+
+/area/shuttle/elevator1/deck2
+
+/area/shuttle/elevator1/deck3
+
+/area/shuttle/elevator1/deck4
+
+/area/shuttle/elevator2
+	name = "Elevator Shaft 1"
+
+/area/shuttle/elevator2/deck1
+
+/area/shuttle/elevator2/deck2
+
+/area/shuttle/elevator2/deck3
+
+/area/shuttle/elevator2/deck4
+
+/area/shuttle/elevator2/deck5
+
+
 
 /area/shuttle/escape_pod5/station
 	icon_state = "shuttle2"
@@ -635,133 +675,92 @@ area/space/atmosalert()
 /area/maintenance
 	flags = RAD_SHIELDED
 
-/area/maintenance/aft
-	name = "Aft Maintenance"
-	icon_state = "amaint"
-
-/area/maintenance/fore
-	name = "Fore Maintenance"
-	icon_state = "fmaint"
-
-/area/maintenance/starboard
-	name = "Starboard Maintenance"
-	icon_state = "smaint"
-
-/area/maintenance/port
-	name = "Port Maintenance"
-	icon_state = "pmaint"
-
-/area/maintenance/atmos_control
-	name = "Atmospherics Maintenance"
-	icon_state = "fpmaint"
-
-/area/maintenance/fpmaint
-	name = "Fore Port Maintenance - 1"
-	icon_state = "fpmaint"
-
-/area/maintenance/fpmaint2
-	name = "Fore Port Maintenance - 2"
-	icon_state = "fpmaint"
-
-/area/maintenance/fsmaint
-	name = "Fore Starboard Maintenance - 1"
-	icon_state = "fsmaint"
-
-/area/maintenance/fsmaint2
-	name = "Fore Starboard Maintenance - 2"
-	icon_state = "fsmaint"
-
-/area/maintenance/asmaint
-	name = "Aft Starboard Maintenance"
-	icon_state = "asmaint"
-
-/area/maintenance/engi_shuttle
+/area/maintenance/d1/engi_shuttle
 	name = "Engineering Shuttle Access"
-	icon_state = "maint_e_shuttle"
-
-/area/maintenance/engi_engine
-	name = "Engine Maintenance"
-	icon_state = "maint_engine"
-
-/area/maintenance/asmaint2
-	name = "Science Maintenance"
-	icon_state = "asmaint"
-
-/area/maintenance/apmaint
-	name = "Cargo Maintenance"
-	icon_state = "apmaint"
-
-/area/maintenance/maintcentral
-	name = "Bridge Maintenance"
-	icon_state = "maintcentral"
-
-/area/maintenance/arrivals
-	name = "Arrivals Maintenance"
-	icon_state = "maint_arrivals"
-
-/area/maintenance/bar
-	name = "Bar Maintenance"
-	icon_state = "maint_bar"
-
-/area/maintenance/cargo
-	name = "Cargo Maintenance"
-	icon_state = "maint_cargo"
+	icon_state = "maintengishuttle"
 
 /area/maintenance/disposal
 	name = "Waste Disposal"
 	icon_state = "disposal"
 
-/area/maintenance/engineering
-	name = "Engineering Maintenance"
-	icon_state = "maint_engineering"
-
-/area/maintenance/evahallway
-	name = "\improper EVA Maintenance"
-	icon_state = "maint_eva"
-
-/area/maintenance/dormitory
-	name = "Dormitory Maintenance"
-	icon_state = "maint_dormitory"
-
 /area/maintenance/incinerator
 	name = "\improper Incinerator"
 	icon_state = "disposal"
 
-/area/maintenance/library
-	name = "Library Maintenance"
-	icon_state = "maint_library"
-
-/area/maintenance/locker
-	name = "Locker Room Maintenance"
-	icon_state = "maint_locker"
-
-/area/maintenance/medbay
-	name = "Medbay Maintenance"
-	icon_state = "maint_medbay"
-
-/area/maintenance/research_port
-	name = "Research Maintenance - Port"
-	icon_state = "maint_research_port"
-
-/area/maintenance/research_starboard
-	name = "Research Maintenance - Starboard"
-	icon_state = "maint_research_starboard"
-
-/area/maintenance/research_shuttle
-	name = "Research Shuttle Dock Maintenance"
-	icon_state = "maint_research_shuttle"
-
-/area/maintenance/security_port
-	name = "Security Maintenance - Port"
-	icon_state = "maint_security_port"
-
-/area/maintenance/security_starboard
-	name = "Security Maintenance - Starboard"
-	icon_state = "maint_security_starboard"
-
 /area/maintenance/storage
 	name = "Atmospherics"
 	icon_state = "green"
+
+//DECK 1 MAINT
+/area/maintenance/d1/port
+	name = "Port Maintenance"
+	icon_state = "maint1port"
+
+/area/maintenance/d1/fore_starboard
+	name = "Fore Starboard Maintenance"
+	icon_state = "maint1stbd"
+
+/area/maintenance/d1/aft_starboard
+	name = "Aft Starboard Maintenance"
+	icon_state = "maint1stbd"
+
+/area/maintenance/d1/atmos
+	name = "Atmospherics Maintenance"
+	icon_state = "maint1atmos"
+
+/area/maintenance/d1/tech
+	name = "Technical Storage Maintenance"
+	icon_state = "maint1tech"
+
+/area/maintenance/d1/port/storage
+	name = "Port Maintenance Storage"
+	icon_state = "maint1store"
+
+//DECK 2 MAINT
+/area/maintenance/d2/auxtool
+	name = "Auxiliary Tool Storage Maintenance"
+	icon_state = "maint2"
+
+/area/maintenance/d2/port_aft
+	name = "Port Aft Maintenance"
+	icon_state = "maint2port"
+
+/area/maintenance/d2/port_fore
+	name = "Port Fore Maintenance"
+	icon_state = "maint2port"
+
+/area/maintenance/d2/skyway
+	name = "Fore Skyway Maintenance"
+	icon_state = "maint2sky"
+
+/area/maintenance/d2/starboard_fore
+	name = "Fore Starboard Maintenance"
+	icon_state = "maint2stbd"
+
+/area/maintenance/d2/starboard_aft
+	name = "Aft Starboard Maintenance"
+	icon_state = "maint2stbd"
+
+/area/maintenance/d2/maint_storage
+	name = "Aft Storboard Maintenance Storage"
+	icon_state = "maint2"
+
+/area/maintenance/d2/shelter
+	name = "Emergency Shelter"
+	icon_state = "maint2"
+
+/area/maintenance/d2/fore_ai
+	name = "Fore AI Maintenance"
+	icon_state = "maint2"
+
+/area/maintenance/d2/aft_ai
+	name = "Aft AI Maintenance"
+	icon_state = "maint2"
+
+/area/maintenance/d2/escape_shuttles
+	name = "Escape Shuttle Access"
+	icon_state = "maint2"
+
 
 // SUBSTATIONS (Subtype of maint, that should let them serve as shielded area during radstorm)
 
@@ -794,6 +793,8 @@ area/space/atmosalert()
 /area/maintenance/substation/security // Security, Brig, Permabrig, etc.
 	name = "Security Substation"
 
+/area/maintenance/substation/deck2
+	name = "Deck Substation"
 
 
 
@@ -802,40 +803,16 @@ area/space/atmosalert()
 /area/hallway/primary/
 	sound_env = 12 //hallway
 
-/area/hallway/primary/fore
-	name = "\improper Fore Primary Hallway"
-	icon_state = "hallF"
-
-/area/hallway/primary/starboard
-	name = "\improper Starboard Primary Hallway"
-	icon_state = "hallS"
-
-/area/hallway/primary/aft
-	name = "\improper Aft Primary Hallway"
-	icon_state = "hallA"
-
-/area/hallway/primary/port
-	name = "\improper Port Primary Hallway"
-	icon_state = "hallP"
-
-/area/hallway/primary/central_one
-	name = "\improper Central Primary Hallway"
-	icon_state = "hallC1"
-
-/area/hallway/primary/central_two
-	name = "\improper Central Primary Hallway"
-	icon_state = "hallC2"
-
-/area/hallway/primary/central_three
-	name = "\improper Central Primary Hallway"
-	icon_state = "hallC3"
-
 /area/hallway/secondary/exit
 	name = "\improper Escape Shuttle Hallway"
 	icon_state = "escape"
 
 /area/hallway/secondary/construction
 	name = "\improper Construction Area"
+	icon_state = "construction"
+
+/area/hallway/secondary/construction2
+	name = "\improper Deck 2 Construction Area"
 	icon_state = "construction"
 
 /area/hallway/secondary/entry/fore
@@ -854,6 +831,26 @@ area/space/atmosalert()
 	name = "\improper Arrival Shuttle Hallway - Aft"
 	icon_state = "entry_4"
 
+//DECK ONE
+
+/area/hallway/primary/d1
+	name = "\improper Deck One Hallway"
+	icon_state = "halldeck1"
+
+//DECK TWO
+
+/area/hallway/primary/d2/port
+	name = "\improper Deck Two Port Hallway"
+	icon_state = "halldeck2port"
+
+/area/hallway/primary/d2/fore_skyway
+	name = "\improper Deck Two Fore Skyway"
+	icon_state = "halldeck2sky"
+
+/area/hallway/primary/d2/starboard
+	name = "\improper Deck Two Starboard Hallway"
+	icon_state = "halldeck2stbd"
+
 //Command
 
 /area/bridge
@@ -862,16 +859,21 @@ area/space/atmosalert()
 	music = "signal"
 
 /area/bridge/meeting_room
-	name = "\improper Heads of Staff Meeting Room"
+	name = "\improper Meeting Room"
+	icon_state = "bridge"
+	music = null
+
+/area/bridge/conference_room
+	name = "\improper Heads of Staff Conference Room"
 	icon_state = "bridge"
 	music = null
 
 /area/crew_quarters/captain
-	name = "\improper Command - Captain's Office"
+	name = "\improper Captain's Office & Quarters"
 	icon_state = "captain"
 
-/area/crew_quarters/heads/hop
-	name = "\improper Command - HoP's Office"
+/area/crew_quarters/heads/xo
+	name = "\improper XO's Office & Quarters"
 	icon_state = "head_quarters"
 
 /area/crew_quarters/heads/hor
@@ -882,13 +884,22 @@ area/space/atmosalert()
 	name = "\improper Engineering - CE's Office"
 	icon_state = "head_quarters"
 
+/area/crew_quarters/heads/quarters/chief
+	name = "\improper CE's Quarters"
+
 /area/crew_quarters/heads/hos
 	name = "\improper Security - HoS' Office"
 	icon_state = "head_quarters"
 
+/area/crew_quarters/heads/quarters/hos
+	name = "\improper HoS' Quarters"
+
 /area/crew_quarters/heads/cmo
 	name = "\improper Medbay - CMO's Office"
 	icon_state = "head_quarters"
+
+/area/crew_quarters/heads/quarters/cmo
+	name = "\improper CMO's Quarters"
 
 /area/crew_quarters/courtroom
 	name = "\improper Courtroom"
@@ -1122,6 +1133,10 @@ area/space/atmosalert()
 	name = "\improper Engineering Workshop"
 	icon_state = "engineering_workshop"
 
+/area/engineering/suit_storage
+	name = "\improper Engineering Suit Storage"
+	icon_state = "engine_eva"
+
 
 
 //Solars
@@ -1131,49 +1146,21 @@ area/space/atmosalert()
 	always_unpowered = 1
 	lighting_use_dynamic = 0
 
-	auxport
-		name = "\improper Fore Port Solar Array"
-		icon_state = "panelsA"
-
-	auxstarboard
-		name = "\improper Fore Starboard Solar Array"
-		icon_state = "panelsA"
-
 	fore
 		name = "\improper Fore Solar Array"
-		icon_state = "yellow"
+		icon_state = "panelsF"
 
 	aft
 		name = "\improper Aft Solar Array"
-		icon_state = "aft"
+		icon_state = "panelsA"
 
-	starboard
-		name = "\improper Aft Starboard Solar Array"
-		icon_state = "panelsS"
-
-	port
-		name = "\improper Aft Port Solar Array"
-		icon_state = "panelsP"
-
-/area/maintenance/auxsolarport
-	name = "Solar Maintenance - Fore Port"
-	icon_state = "SolarcontrolP"
-
-/area/maintenance/starboardsolar
-	name = "Solar Maintenance - Aft Starboard"
-	icon_state = "SolarcontrolS"
-
-/area/maintenance/portsolar
-	name = "Solar Maintenance - Aft Port"
-	icon_state = "SolarcontrolP"
-
-/area/maintenance/auxsolarstarboard
-	name = "Solar Maintenance - Fore Starboard"
-	icon_state = "SolarcontrolS"
-
-/area/maintenance/foresolar
-	name = "Solar Maintenance - Fore"
+/area/maintenance/d1/aftsolar
+	name = "Solar Maintenance - Aft"
 	icon_state = "SolarcontrolA"
+
+/area/maintenance/d1/foresolar
+	name = "Solar Maintenance - Fore"
+	icon_state = "SolarcontrolF"
 
 /area/assembly/chargebay
 	name = "\improper Mech Bay"
@@ -1205,6 +1192,10 @@ area/space/atmosalert()
 	name = "\improper Gateway"
 	icon_state = "teleporter"
 	music = "signal"
+
+/area/gateway/missionroom
+	name = "\improper Away Mission Briefing Room"
+	icon_state = "teleporter"
 
 /area/AIsattele
 	name = "\improper AI Satellite Teleporter Room"
@@ -1440,6 +1431,10 @@ area/space/atmosalert()
 	name = "Security Post - Science"
 	icon_state = "checkpoint1"
 
+/area/security/checkpoint/command
+	name = "Security Post - Command"
+	icon_state = "checkpoint1"
+
 /area/security/vacantoffice
 	name = "\improper Vacant Office"
 	icon_state = "security"
@@ -1462,6 +1457,10 @@ area/space/atmosalert()
 
 /area/quartermaster/qm
 	name = "\improper Cargo - Quartermaster's Office"
+	icon_state = "quart"
+
+/area/quartermaster/quarters
+	name = "\improper Quartermaster's Quarters"
 	icon_state = "quart"
 
 /area/quartermaster/miningdock
@@ -1564,7 +1563,7 @@ area/space/atmosalert()
 	icon_state = "storage"
 
 /area/storage/emergency
-	name = "Starboard Emergency Storage"
+	name = "Deck Two Emergency Storage"
 	icon_state = "emergencystorage"
 
 /area/storage/emergency2
