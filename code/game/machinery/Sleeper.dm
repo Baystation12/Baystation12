@@ -177,11 +177,6 @@
 			return
 		return
 
-
-	allow_drop()
-		return 0
-
-
 	process()
 		if (stat & (NOPOWER|BROKEN))
 			return

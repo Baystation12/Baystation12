@@ -21,9 +21,6 @@
 		pr_mech_sleeper.set_delay(equip_cooldown)
 		return
 
-	allow_drop()
-		return 0
-
 	destroy()
 		for(var/atom/movable/AM in src)
 			AM.forceMove(get_turf(src))
