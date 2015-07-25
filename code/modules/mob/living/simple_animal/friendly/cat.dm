@@ -247,3 +247,14 @@
 /mob/living/simple_animal/cat/kitten/New()
 	gender = pick(MALE, FEMALE)
 	..()
+//The following code makes kittens grow into cats, changing the number 100 will adjust the growth rate, higher number means faster growing vice-versa.\\
+
+/mob/living/simple_animal/cat/kitten/Life()
+	..()
+	if(!stat)
+		amount_grown += rand(1,2)
+		if(amount_grown >= 100)
+			new /mob/living/simple_animal/cat(src.loc)
+			del(src)
+
+//End of kitten growing code\\
