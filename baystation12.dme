@@ -1237,6 +1237,7 @@
 #include "code\modules\mob\living\bot\secbot.dm"
 #include "code\modules\mob\living\carbon\breathe.dm"
 #include "code\modules\mob\living\carbon\carbon.dm"
+#include "code\modules\mob\living\carbon\carbon_defense.dm"
 #include "code\modules\mob\living\carbon\carbon_defines.dm"
 #include "code\modules\mob\living\carbon\carbon_powers.dm"
 #include "code\modules\mob\living\carbon\give.dm"

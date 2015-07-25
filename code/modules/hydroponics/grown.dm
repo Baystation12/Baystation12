@@ -240,40 +240,23 @@
 
 	if(user.a_intent == I_HURT)
 
-		// This is being copypasted here because reagent_containers (WHY DOES FOOD DESCEND FROM THAT) overrides it completely.
-		// TODO: refactor all food paths to be less horrible and difficult to work with in this respect. ~Z
-		if(!istype(M) || (can_operate(M) && do_surgery(M,user,src))) return 0
+		if(!istype(M))
+			return 0
+		if(!force || (flags & NOBLUDGEON))
+			return 0
 
+		/////////////////////////
 		user.lastattacked = M
 		M.lastattacker = user
-		user.attack_log += "\[[time_stamp()]\]<font color='red'> Attacked [M.name] ([M.ckey]) with [name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(damtype)])</font>"
-		M.attack_log += "\[[time_stamp()]\]<font color='orange'> Attacked by [user.name] ([user.ckey]) with [name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(damtype)])</font>"
-		msg_admin_attack("[key_name(user)] attacked [key_name(M)] with [name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(damtype)])" )
 
-		if(istype(M, /mob/living/carbon/human))
-			var/mob/living/carbon/human/H = M
-			var/hit = H.attacked_by(src, user, def_zone)
-			if(hit && hitsound)
-				playsound(loc, hitsound, 50, 1, -1)
-			return hit
-		else
-			if(attack_verb.len)
-				user.visible_message("<span class='danger'>[M] has been [pick(attack_verb)] with [src] by [user]!</span>")
-			else
-				user.visible_message("<span class='danger'>[M] has been attacked with [src] by [user]!</span>")
+		if(!no_attack_log)
+			user.attack_log += "\[[time_stamp()]\]<font color='red'> Attacked [M.name] ([M.ckey]) with [name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(damtype)])</font>"
+			M.attack_log += "\[[time_stamp()]\]<font color='orange'> Attacked by [user.name] ([user.ckey]) with [name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(damtype)])</font>"
+			msg_admin_attack("[key_name(user)] attacked [key_name(M)] with [name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(damtype)])" )
+		/////////////////////////
 
-			if (hitsound)
-				playsound(loc, hitsound, 50, 1, -1)
-			switch(damtype)
-				if("brute")
-					M.take_organ_damage(force)
-					if(prob(33))
-						var/turf/simulated/location = get_turf(M)
-						if(istype(location)) location.add_blood_floor(M)
-				if("fire")
-					if (!(COLD_RESISTANCE in M.mutations))
-						M.take_organ_damage(0, force)
-			M.updatehealth()
+		user.do_attack_animation(M)
+		M.attacked_with_item(src, user, def_zone)
 
 		if(seed && seed.get_trait(TRAIT_STINGS))
 			if(!reagents || reagents.total_volume <= 0)

@@ -3,6 +3,10 @@
 /obj/item/proc/attack_self(mob/user)
 	return
 
+/obj/item/proc/resolve_attackby(atom/A, mob/source)
+	add_fingerprint(source)
+	return A.attackby(src,source)
+
 // No comment
 /atom/proc/attackby(obj/item/W, mob/user)
 	return
@@ -12,29 +16,23 @@
 		visible_message("<span class='danger'>[src] has been hit by [user] with [W].</span>")
 
 /mob/living/attackby(obj/item/I, mob/user)
-	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-	if(istype(I) && ismob(user))
-		I.attack(src, user)
-
+	if(!ismob(user))
+		return 0
+	if(can_operate(src) && do_surgery(src,user,I)) //Surgery
+		return 1
+	if(istype(I))
+		return I.attack(src, user, user.zone_sel.selecting)
 
 // Proximity_flag is 1 if this afterattack was called on something adjacent, in your square, or on your person.
 // Click parameters is the params string from byond Click() code, see that documentation.
 /obj/item/proc/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
 	return
 
-//TODO: refactor mob attack code.
-/*
-Busy writing something else that I don't want to get mixed up in a general attack code, and I don't want to forget this so leaving a note here.
-leave attackby() as handling the general case of "using an item on a mob"
-attackby() will decide to call attacked_by() or not.
-attacked_by() will be made a living level proc and handle the specific case of "attacking with an item to cause harm"
-attacked_by() will then call attack() so that stunbatons and other weapons that have special attack effects can do their thing.
-attacked_by() will handle hitting/missing/logging as it does now, and will call attack() to apply the attack effects (damage) instead of the other way around (as it is now).
-*/
-
-/obj/item/proc/attack(mob/living/M as mob, mob/living/user as mob, def_zone)
-
-	if(!istype(M) || (can_operate(M) && do_surgery(M,user,src))) return 0
+/obj/item/proc/attack(mob/living/M, mob/living/user, def_zone)
+	if(!istype(M))
+		return 0
+	if(!force || (flags & NOBLUDGEON))
+		return 0
 
 	/////////////////////////
 	user.lastattacked = M
@@ -46,49 +44,19 @@ attacked_by() will handle hitting/missing/logging as it does now, and will call 
 		msg_admin_attack("[key_name(user)] attacked [key_name(M)] with [name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(damtype)])" )
 	/////////////////////////
 
-	// Attacking someone with a weapon while they are neck-grabbed
-	if(user.a_intent == I_HURT)
-		for(var/obj/item/weapon/grab/G in M.grabbed_by)
-			if(G.assailant == user && G.state >= GRAB_NECK)
-				M.attack_throat(src, G, user)
+	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+	user.do_attack_animation(M)
+	M.attacked_with_item(src, user, def_zone)
 
+	return 1
+
+//Called when a weapon is used to make a successful melee attack on a mob.
+/obj/item/proc/apply_hit_effect(mob/living/target, mob/living/user, var/hit_zone)
+	if(hitsound)
+		playsound(loc, hitsound, 50, 1, -1)
+	
 	var/power = force
 	if(HULK in user.mutations)
 		power *= 2
+	return target.hit_with_weapon(src, user, power, hit_zone)
 
-	// TODO: needs to be refactored into a mob/living level attacked_by() proc. ~Z
-	user.do_attack_animation(M)
-	if(istype(M, /mob/living/carbon/human))
-		var/mob/living/carbon/human/H = M
-
-		// Handle striking to cripple.
-		var/dislocation_str
-		if(user.a_intent == I_DISARM)
-			dislocation_str = H.attack_joint(src, user, def_zone)
-		if(H.attacked_by(src, user, def_zone) && hitsound)
-			playsound(loc, hitsound, 50, 1, -1)
-			spawn(1) //ugh I hate this but I don't want to root through human attack procs to print it after this call resolves.
-				if(dislocation_str) user.visible_message("<span class='danger'>[dislocation_str]</span>")
-			return 1
-		return 0
-	else
-		if(attack_verb.len)
-			user.visible_message("<span class='danger'>[M] has been [pick(attack_verb)] with [src] by [user]!</span>")
-		else
-			user.visible_message("<span class='danger'>[M] has been attacked with [src] by [user]!</span>")
-
-		if (hitsound)
-			playsound(loc, hitsound, 50, 1, -1)
-		switch(damtype)
-			if("brute")
-				M.take_organ_damage(power)
-				if(prob(33)) // Added blood for whacking non-humans too
-					var/turf/simulated/location = get_turf(M)
-					if(istype(location)) location.add_blood_floor(M)
-			if("fire")
-				if (!(COLD_RESISTANCE in M.mutations))
-					M.take_organ_damage(0, power)
-					M << "Aargh it burns!"
-		M.updatehealth()
-	add_fingerprint(user)
-	return 1
