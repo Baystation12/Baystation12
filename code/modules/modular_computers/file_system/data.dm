@@ -3,3 +3,8 @@
 /datum/computer_file/data
 	var/stored_data = "" 			// Stored data in string format.
 	filetype = "DAT"
+
+/datum/computer_file/data/clone()
+	var/datum/computer_file/data/temp = ..()
+	temp.stored_data = stored_data
+	return temp

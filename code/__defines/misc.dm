@@ -160,3 +160,9 @@
 #define NTNET_PEERTOPEER 2			// P2P transfers of files between devices
 #define NTNET_COMMUNICATION 3		// Communication (messaging)
 #define NTNET_SYSTEMCONTROL 4		// Control of various systems, RCon, air alarm control, etc.
+
+// Program bitflags
+#define PROGRAM_ALL 7
+#define PROGRAM_CONSOLE 1
+#define PROGRAM_LAPTOP 2
+#define PROGRAM_TABLET 4

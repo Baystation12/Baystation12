@@ -5,3 +5,11 @@
 	critical = 0
 
 	var/obj/item/weapon/card/id/stored_card = null
+
+/datum/computer_hardware/card_slot/Destroy()
+	if(holder && (holder.card_slot == src))
+		holder.card_slot = null
+	if(holder2 && (holder2.card_slot == src))
+		holder2.card_slot = null
+	stored_card.loc = holder ? holder.loc : holder2.loc
+	..()

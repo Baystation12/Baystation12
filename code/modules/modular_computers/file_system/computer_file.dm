@@ -1,9 +1,8 @@
 /datum/computer_file/
 	var/filename = "NewFile" 						// Placeholder. No spacebars
 	var/filetype = "XXX" 							// File full names are [filename].[filetype] so like NewFile.XXX in this case
-	var/size = 1									// File size in GQ (default 1, do not change unless you really have to). Non-1 values are currently unused but they should be supported.
+	var/size = 1									// File size in GQ. Integers only!
 	var/datum/computer_hardware/hard_drive/holder	// Holder that contains this file.
-	var/icon_path = null							// !!32x32!! icon of this program
 	var/unsendable = 0								// Whether the file may be sent to someone via NTNet transfer or other means.
 	var/undeletable = 0								// Whether the file may be deleted. Setting to 1 prevents deletion/renaming/etc.
 
@@ -17,3 +16,13 @@
 		holder.holder.kill_program(1)
 	holder = null
 	..()
+
+// Returns independent copy of this file.
+/datum/computer_file/proc/clone()
+	var/datum/computer_file/temp
+	temp.unsendable = unsendable
+	temp.undeletable = undeletable
+	temp.size = size
+	temp.filename = filename + "(Copy)"
+	temp.filetype = filetype
+	return temp

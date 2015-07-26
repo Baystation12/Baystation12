@@ -20,6 +20,8 @@
 /datum/computer_hardware/network_card/Destroy()
 	if(holder && (holder.network_card == src))
 		holder.network_card = null
+	if(holder2 && (holder2.network_card == src))
+		holder2.network_card = null
 	holder = null
 	..()
 
@@ -44,3 +46,8 @@
 		return 1
 
 	return 0 // Computer is not on station and does not have upgraded network card. No signal.
+
+/datum/computer_hardware/network_card/Destroy()
+	if(holder && (holder.network_card == src))
+		holder.network_card = null
+	..()
