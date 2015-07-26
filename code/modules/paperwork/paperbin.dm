@@ -17,7 +17,17 @@
 	if((user == usr && (!( usr.restrained() ) && (!( usr.stat ) && (usr.contents.Find(src) || in_range(src, usr))))))
 		if(!istype(usr, /mob/living/carbon/slime) && !istype(usr, /mob/living/simple_animal))
 			if( !usr.get_active_hand() )		//if active hand is empty
-				attack_hand(usr, 1, 1)
+				var/mob/living/carbon/human/H = user
+				var/obj/item/organ/external/temp = H.organs_by_name["r_hand"]
+
+				if (H.hand)
+					temp = H.organs_by_name["l_hand"]
+				if(temp && !temp.is_usable())
+					user << "<span class='notice'>You try to move your [temp.name], but cannot!</span>"
+					return
+
+				user << "<span class='notice'>You pick up the [src].</span>"
+				user.put_in_hands(src)
 
 	return
 
