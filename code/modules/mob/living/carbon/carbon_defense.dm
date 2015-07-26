@@ -1,8 +1,8 @@
 
 //Called when the mob is hit with an item in combat.
-/mob/living/carbon/hit_with_weapon(obj/item/I, mob/living/user, var/effective_force, var/hit_zone)
+/mob/living/carbon/resolve_item_attack(obj/item/I, mob/living/user, var/effective_force, var/hit_zone)
 	if(check_attack_throat(I, user))
-		return
+		return null
 	..()
 
 /mob/living/carbon/standard_weapon_hit_effects(obj/item/I, mob/living/user, var/effective_force, var/blocked, var/hit_zone)

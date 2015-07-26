@@ -3,16 +3,17 @@
 /obj/item/proc/attack_self(mob/user)
 	return
 
-/obj/item/proc/resolve_attackby(atom/A, mob/source)
-	add_fingerprint(source)
-	return A.attackby(src,source)
+//I would prefer to rename this to attack(), but that would involve touching hundreds of files.
+/obj/item/proc/resolve_attackby(atom/A, mob/user)
+	add_fingerprint(user)
+	return A.attackby(src, user)
 
 // No comment
 /atom/proc/attackby(obj/item/W, mob/user)
 	return
 
 /atom/movable/attackby(obj/item/W, mob/user)
-	if(!(W.flags&NOBLUDGEON))
+	if(!(W.flags & NOBLUDGEON))
 		visible_message("<span class='danger'>[src] has been hit by [user] with [W].</span>")
 
 /mob/living/attackby(obj/item/I, mob/user)
@@ -20,17 +21,15 @@
 		return 0
 	if(can_operate(src) && do_surgery(src,user,I)) //Surgery
 		return 1
-	if(istype(I))
-		return I.attack(src, user, user.zone_sel.selecting)
+	return I.attack(src, user, user.zone_sel.selecting)
 
 // Proximity_flag is 1 if this afterattack was called on something adjacent, in your square, or on your person.
 // Click parameters is the params string from byond Click() code, see that documentation.
 /obj/item/proc/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
 	return
 
-/obj/item/proc/attack(mob/living/M, mob/living/user, def_zone)
-	if(!istype(M))
-		return 0
+//I would prefer to rename this attack_as_weapon(), but that would involve touching hundreds of files.
+/obj/item/proc/attack(mob/living/M, mob/living/user, var/target_zone)
 	if(!force || (flags & NOBLUDGEON))
 		return 0
 
@@ -46,7 +45,10 @@
 
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	user.do_attack_animation(M)
-	M.attacked_with_item(src, user, def_zone)
+
+	var/hit_zone = M.resolve_item_attack(src, user, target_zone)
+	if(hit_zone)
+		apply_hit_effect(M, user, hit_zone)
 
 	return 1
 

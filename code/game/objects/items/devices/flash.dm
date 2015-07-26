@@ -31,8 +31,8 @@
 	last_used = world.time
 	times_used = max(0,round(times_used)) //sanity
 
-
-/obj/item/device/flash/attack(mob/living/M as mob, mob/user as mob)
+//attack_as_weapon
+/obj/item/device/flash/attack(mob/living/M, mob/living/user, var/target_zone)
 	if(!user || !M)	return	//sanity
 
 	M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been flashed (attempt) with [src.name]  by [user.name] ([user.ckey])</font>")
@@ -183,7 +183,8 @@
 	icon_state = "sflash"
 	origin_tech = list(TECH_MAGNET = 2, TECH_COMBAT = 1)
 
-/obj/item/device/flash/synthetic/attack(mob/living/M as mob, mob/user as mob)
+//attack_as_weapon
+/obj/item/device/flash/synthetic/attack(mob/living/M, mob/living/user, var/target_zone)
 	..()
 	if(!broken)
 		broken = 1

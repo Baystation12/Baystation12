@@ -145,20 +145,18 @@ emp_act
 		O.emp_act(severity)
 	..()
 
-/mob/living/carbon/human/attacked_with_item(obj/item/I, mob/living/user, var/target_zone)
-	if(!I || !user)
-		return
-
+/mob/living/carbon/human/resolve_item_attack(obj/item/I, mob/living/user, var/target_zone)
 	if(check_attack_throat(I, user))
-		return
+		return null
 
-	var/hit_zone = target_zone
-	if(user != src) // Attacking yourself can't miss
-		hit_zone = get_zone_with_miss_chance(target_zone, src)
+	if(user == src) // Attacking yourself can't miss
+		return target_zone
+
+	var/hit_zone = get_zone_with_miss_chance(target_zone, src)
 
 	if(!hit_zone)
 		visible_message("<span class='danger'>\The [user] misses [src] with \the [I]!</span>")
-		return
+		return null
 
 	if(check_shields(I.force, I, user, target_zone, "the [I.name]"))
 		return
@@ -166,9 +164,9 @@ emp_act
 	var/obj/item/organ/external/affecting = get_organ(hit_zone)
 	if (!affecting || (affecting.status & ORGAN_DESTROYED) || affecting.is_stump())
 		user << "<span class='danger'>They are missing that limb!</span>"
-		return
+		return null
 
-	I.apply_hit_effect(src, user, target_zone)
+	return hit_zone
 
 /mob/living/carbon/human/hit_with_weapon(obj/item/I, mob/living/user, var/effective_force, var/hit_zone)
 	var/obj/item/organ/external/affecting = get_organ(hit_zone)

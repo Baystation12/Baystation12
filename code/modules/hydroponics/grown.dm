@@ -234,49 +234,22 @@
 					return
 	..()
 
-/obj/item/weapon/reagent_containers/food/snacks/grown/attack(var/mob/living/carbon/M, var/mob/user, var/def_zone)
-	if(user == M)
-		return ..()
-
-	if(user.a_intent == I_HURT)
-
-		if(!istype(M))
-			return 0
-		if(!force || (flags & NOBLUDGEON))
-			return 0
-
-		/////////////////////////
-		user.lastattacked = M
-		M.lastattacker = user
-
-		if(!no_attack_log)
-			user.attack_log += "\[[time_stamp()]\]<font color='red'> Attacked [M.name] ([M.ckey]) with [name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(damtype)])</font>"
-			M.attack_log += "\[[time_stamp()]\]<font color='orange'> Attacked by [user.name] ([user.ckey]) with [name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(damtype)])</font>"
-			msg_admin_attack("[key_name(user)] attacked [key_name(M)] with [name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(damtype)])" )
-		/////////////////////////
-
-		user.do_attack_animation(M)
-		M.attacked_with_item(src, user, def_zone)
-
-		if(seed && seed.get_trait(TRAIT_STINGS))
-			if(!reagents || reagents.total_volume <= 0)
-				return
-			reagents.remove_any(rand(1,3))
-			seed.thrown_at(src,M)
-			sleep(-1)
-			if(!src)
-				return
-			if(prob(35))
-				if(user)
-					user << "<span class='danger'>\The [src] has fallen to bits.</span>"
-					user.drop_from_inventory(src)
-				qdel(src)
-
-		add_fingerprint(user)
-		return 1
-
-	else
-		..()
+/obj/item/weapon/reagent_containers/food/snacks/grown/apply_hit_effect(mob/living/target, mob/living/user, var/hit_zone)	
+	..()
+	
+	if(seed && seed.get_trait(TRAIT_STINGS))
+		if(!reagents || reagents.total_volume <= 0)
+			return
+		reagents.remove_any(rand(1,3))
+		seed.thrown_at(src, target)
+		sleep(-1)
+		if(!src)
+			return
+		if(prob(35))
+			if(user)
+				user << "<span class='danger'>\The [src] has fallen to bits.</span>"
+				user.drop_from_inventory(src)
+			qdel(src)
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/attack_self(mob/user as mob)
 

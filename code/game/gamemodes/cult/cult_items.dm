@@ -6,23 +6,31 @@
 	w_class = 4
 	force = 30
 	throwforce = 10
+	hitsound = 'sound/weapons/bladeslice.ogg'
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 
 /obj/item/weapon/melee/cultblade/cultify()
 	return
 
-/obj/item/weapon/melee/cultblade/attack(mob/living/target as mob, mob/living/carbon/human/user as mob)
+/obj/item/weapon/melee/cultblade/attack(mob/living/M, mob/living/user, var/target_zone)
 	if(iscultist(user))
-		playsound(loc, 'sound/weapons/bladeslice.ogg', 50, 1, -1)
 		return ..()
+
+	var/zone = (user.hand ? "l_arm":"r_arm")
+	if(ishuman(user))
+		var/mob/living/carbon/human/H = user
+		var/obj/item/organ/external/affecting = H.get_organ(zone)
+		user << "<span class='warning'>An unexplicable force rips through your [affecting.name], tearing the sword from your grasp!</span>"
 	else
-		user.Paralyse(5)
-		user << "<span class='warning'>An unexplicable force powerfully repels the sword from [target]!</span>"
-		var/organ = ((user.hand ? "l_":"r_") + "arm")
-		var/obj/item/organ/external/affecting = user.get_organ(organ)
-		if(affecting.take_damage(rand(force/2, force))) //random amount of damage between half of the blade's force and the full force of the blade.
-			user.UpdateDamageIcon()
-	return
+		user << "<span class='warning'>An unexplicable force rips through you, tearing the sword from your grasp!</span>"
+
+	//random amount of damage between half of the blade's force and the full force of the blade.
+	user.apply_damage(rand(force/2, force), BRUTE, zone, 0)
+	user.Weaken(5)
+
+	user.drop_from_inventory(src)
+	throw_at(get_edge_target_turf(src, pick(alldirs)), rand(1,3), throw_speed)
+	return 1
 
 /obj/item/weapon/melee/cultblade/pickup(mob/living/user as mob)
 	if(!iscultist(user))

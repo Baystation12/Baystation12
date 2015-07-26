@@ -32,10 +32,11 @@ var/const/MAX_ACTIVE_TIME = 400
 
 	..()
 
-/obj/item/clothing/mask/facehugger/attack(mob/living/M as mob, mob/user as mob)
+/obj/item/clothing/mask/facehugger/apply_hit_effect(mob/living/target, mob/living/user, var/hit_zone)
 	..()
 	user.drop_from_inventory(src)
-	Attach(M)
+	if(hit_zone == "head")
+		Attach(target)
 
 /obj/item/clothing/mask/facehugger/New()
 	if(config.aliens_allowed)

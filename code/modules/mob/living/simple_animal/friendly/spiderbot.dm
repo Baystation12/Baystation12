@@ -131,8 +131,8 @@
 			return 0
 
 	else
-		attacked_with_item(O, user)
-	
+		O.attack(src, user, user.zone_sel.selecting)
+
 /mob/living/simple_animal/spiderbot/emag_act(var/remaining_charges, var/mob/user)
 	if (emagged)
 		user << "<span class='warning'>[src] is already overloaded - better run.</span>"
