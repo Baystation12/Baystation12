@@ -1085,9 +1085,6 @@
 	var/door_locked = 1
 	salvageable = 0
 
-/obj/item/mecha_parts/mecha_equipment/tool/passenger/allow_drop()
-	return 0
-
 /obj/item/mecha_parts/mecha_equipment/tool/passenger/destroy()
 	for(var/atom/movable/AM in src)
 		AM.forceMove(get_turf(src))
