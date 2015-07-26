@@ -110,6 +110,7 @@ var/global/datum/controller/gameticker/ticker
 	else
 		src.mode.announce()
 
+	setup_economy()
 	current_state = GAME_STATE_PLAYING
 	create_characters() //Create player characters and transfer them
 	collect_minds()
@@ -117,9 +118,6 @@ var/global/datum/controller/gameticker/ticker
 	data_core.manifest()
 
 	callHook("roundstart")
-
-	//here to initialize the random events nicely at round start
-	setup_economy()
 
 	shuttle_controller.setup_shuttle_docks()
 
