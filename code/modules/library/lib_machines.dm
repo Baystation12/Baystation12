@@ -196,7 +196,7 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
 			else
 				dat += {"<A href='?src=\ref[src];orderbyid=1'>(Order book by SS<sup>13</sup>BN)</A><BR><BR>
 				<table>
-				<tr><td><A href='?src=\ref[src];sort=0>AUTHOR</A></td><td><A href='?src=\ref[src];sort=1>TITLE</A></td><td><A href='?src=\ref[src];sort=2>CATEGORY</A></td><td></td></tr>"}
+				<tr><td><A href='?src=\ref[src];sort=author>AUTHOR</A></td><td><A href='?src=\ref[src];sort=title>TITLE</A></td><td><A href='?src=\ref[src];sort=category>CATEGORY</A></td><td></td></tr>"}
 				var/DBQuery/query = dbcon_old.NewQuery("SELECT id, author, title, category FROM library ORDER BY [sortby]")
 				query.Execute()
 
@@ -390,13 +390,9 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
 				var/nhref = "src=\ref[src];targetid=[orderid]"
 				spawn() src.Topic(nhref, params2list(nhref), src)
 	if(href_list["sort"])
-		switch(href_list["sort"])
-			if("0")
-				sortby = "author"
-			if("1")
-				sortby = "title"
-			if("2")
-				sortby = "category"
+		if(href_list["sort"] != "author" && href_list["sort"] != "title" && href_list["sort"] != "category")
+			return
+		sortby = href_list["sort"]
 	src.add_fingerprint(usr)
 	src.updateUsrDialog()
 	return
