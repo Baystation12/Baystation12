@@ -45,6 +45,7 @@
 		if (!(XRAY in user.mutations))
 			user.mutations.Add(XRAY)
 			user.sight |= (SEE_MOBS|SEE_OBJS|SEE_TURFS)
+			user.see_in_dark = 8
 			user.see_invisible = SEE_INVISIBLE_LEVEL_TWO
 
 		if (!(COLD_RESISTANCE in user.mutations))
