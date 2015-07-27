@@ -95,7 +95,7 @@ var/list/organ_cache = list()
 		if(B && prob(40))
 			reagents.remove_reagent("blood",0.1)
 			blood_splatter(src,B,1)
-		damage += rand(1,3)
+		if(config.organs_decay) damage += rand(1,3)
 		if(damage >= max_damage)
 			die()
 
