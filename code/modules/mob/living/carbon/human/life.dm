@@ -1233,7 +1233,7 @@
 				damageoverlay.overlays += I
 
 		if( stat == DEAD )
-			sight |= (SEE_TURFS|SEE_MOBS|SEE_OBJS)
+			sight = SEE_TURFS|SEE_MOBS|SEE_OBJS|SEE_SELF
 			see_in_dark = 8
 			if(!druggy)		see_invisible = SEE_INVISIBLE_LEVEL_TWO
 			if(healths)		healths.icon_state = "health7"	//DEAD healthmeter
@@ -1256,7 +1256,7 @@
 					*/
 
 		else
-			sight &= ~(SEE_TURFS|SEE_MOBS|SEE_OBJS)
+			sight = species.vision_flags
 			see_in_dark = species.darksight
 			see_invisible = see_in_dark>2 ? SEE_INVISIBLE_LEVEL_ONE : SEE_INVISIBLE_LIVING
 
@@ -1265,29 +1265,23 @@
 				see_in_dark = 8
 				if(!druggy)		see_invisible = SEE_INVISIBLE_LEVEL_TWO
 
-			if(seer==1)
+			if(seer)
 				var/obj/effect/rune/R = locate() in loc
 				if(R && R.word1 == cultwords["see"] && R.word2 == cultwords["hell"] && R.word3 == cultwords["join"])
 					see_invisible = SEE_INVISIBLE_OBSERVER
 				else
-					see_invisible = SEE_INVISIBLE_LIVING
 					seer = 0
 
-			var/tmp/glasses_processed = 0
+			var/equipped_glasses = glasses
 			var/obj/item/weapon/rig/rig = back
 			if(istype(rig) && rig.visor)
 				if(!rig.helmet || (head && rig.helmet == head))
 					if(rig.visor && rig.visor.vision && rig.visor.active && rig.visor.vision.glasses)
-						glasses_processed = 1
-						process_glasses(rig.visor.vision.glasses)
+						equipped_glasses = rig.visor.vision.glasses
+			if(equipped_glasses)
+				process_glasses(equipped_glasses)
 
-			if(glasses && !glasses_processed)
-				glasses_processed = 1
-				process_glasses(glasses)
-
-			if(!glasses_processed && (species.vision_flags > 0))
-				sight |= species.vision_flags
-			if(!seer && !glasses_processed)
+			if(!seer)
 				see_invisible = SEE_INVISIBLE_LIVING
 
 			if(healths)
@@ -1411,7 +1405,7 @@
 				if(viewflags < 0)
 					reset_view(null, 0)
 				else if(viewflags)
-					sight |= viewflags
+					sight = viewflags //when viewing from a machine, use only the sight flags that the machine provides
 			else
 				var/isRemoteObserve = 0
 				if((mRemote in mutations) && remoteview_target)
