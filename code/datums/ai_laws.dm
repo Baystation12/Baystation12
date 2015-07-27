@@ -198,9 +198,7 @@ var/global/const/base_law_type = /datum/ai_laws/nanotrasen
 	var/index = laws.Find(law)
 	if(index)
 		laws -= law
-		world << state.len
 		for(index, index < state.len, index++)
-			world << index
 			state[index] = state[index+1]
 	sorted_laws.Cut()
 

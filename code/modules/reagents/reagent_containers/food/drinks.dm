@@ -18,7 +18,6 @@
 
 	attack(mob/M as mob, mob/user as mob, def_zone)
 		if(standard_feed_mob(user, M))
-			robot_refill(user)
 			return
 
 		return 0
@@ -29,21 +28,9 @@
 		if(standard_dispenser_refill(user, target))
 			return
 		if(standard_pour_into(user, target))
-			robot_refill(user)
 			return
 
 		return ..()
-
-	proc/robot_refill(var/mob/living/silicon/robot/user)
-		if(!istype(user))
-			return 0
-
-		user.cell.use(30)
-		var/refill = reagents.get_master_reagent_id()
-		user << "Now synthesizing [amount_per_transfer_from_this] units of [refill]..."
-		spawn(300)
-			reagents.add_reagent(refill, amount_per_transfer_from_this)
-			user << "Cyborg [src] refilled."
 
 	self_feed_message(var/mob/user)
 		user << "<span class='notice'>You swallow a gulp from \the [src].</span>"
