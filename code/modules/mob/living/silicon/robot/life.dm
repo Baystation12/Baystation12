@@ -312,7 +312,7 @@
 		killswitch_time --
 		if(killswitch_time <= 0)
 			if(src.client)
-				src << "\red <B>Killswitch Activated"
+				src << "<span class='danger'>Killswitch Activated</span>"
 			killswitch = 0
 			spawn(5)
 				gib()
@@ -323,7 +323,7 @@
 		weaponlock_time --
 		if(weaponlock_time <= 0)
 			if(src.client)
-				src << "\red <B>Weapon Lock Timed Out!"
+				src << "<span class='danger'>Weapon Lock Timed Out!</span>"
 			weapon_lock = 0
 			weaponlock_time = 120
 

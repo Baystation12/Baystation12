@@ -373,7 +373,7 @@
 				<body>
 				<center>
 				<br>
-				<b style='font-size: 12px;'>Weyland-Yutani - Building Better Worlds</b>
+				<span style='font-size: 12px;'><b>Weyland-Yutani - Building Better Worlds</b></span>
 				<h1>Autonomous Power Loader Unit \"Ripley\"</h1>
 				</center>
 				<h2>Specifications:</h2>
@@ -384,7 +384,7 @@
 				<li><b>Height:</b> 2.5m</li>
 				<li><b>Width:</b> 1.8m</li>
 				<li><b>Top speed:</b> 5km/hour</li>
-				<li><b>Operation in vacuum/hostile environment:</b> Possible</b>
+				<li><b>Operation in vacuum/hostile environment: Possible</b>
 				<li><b>Airtank volume:</b> 500 liters</li>
 				<li><b>Devices:</b>
 					<ul class="a">

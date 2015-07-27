@@ -28,7 +28,7 @@
 					text += "<br><font color='green'><B>The [role_text] was successful!</B></font>"
 
 	if(global_objectives && global_objectives.len)
-		text += "<BR><FONT size = 2>Their objectives were:<FONT>"
+		text += "<BR><FONT size = 2>Their objectives were:</FONT>"
 		var/num = 1
 		for(var/datum/objective/O in global_objectives)
 			text += print_objective(O, num, 1)

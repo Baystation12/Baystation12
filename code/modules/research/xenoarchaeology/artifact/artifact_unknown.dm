@@ -235,7 +235,7 @@ var/list/valid_secondary_effect_types = list(\
 	src.add_fingerprint(user)
 
 	if(my_effect.trigger == TRIGGER_TOUCH)
-		user << "<b>You touch [src].<b>"
+		user << "<b>You touch [src].</b>"
 		my_effect.ToggleActivate()
 	else
 		user << "<b>You touch [src],</b> [pick("but nothing of note happens","but nothing happens","but nothing interesting happens","but you notice nothing different","but nothing seems to have happened")]."
@@ -321,7 +321,7 @@ var/list/valid_secondary_effect_types = list(\
 			warn = 1
 
 		if(warn)
-			M << "<b>You accidentally touch [src].<b>"
+			M << "<b>You accidentally touch [src].</b>"
 	..()
 
 /obj/machinery/artifact/bullet_act(var/obj/item/projectile/P)

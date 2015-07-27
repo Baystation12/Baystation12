@@ -289,7 +289,7 @@ datum/controller/vote
 			else			. += "<h2>Vote: [capitalize(mode)]</h2>"
 			. += "Time Left: [time_remaining] s<hr>"
 			. += "<table width = '100%'><tr><td align = 'center'><b>Choices</b></td><td align = 'center'><b>Votes</b></td>"
-			if(capitalize(mode) == "Gamemode") .+= "<td align = 'center'><b>Minimum Players</b></td></b></tr>"
+			if(capitalize(mode) == "Gamemode") .+= "<td align = 'center'><b>Minimum Players</b></td></tr>"
 
 			for(var/i = 1, i <= choices.len, i++)
 				var/votes = choices[choices[i]]
@@ -299,12 +299,12 @@ datum/controller/vote
 					if(current_votes[C.ckey] == i)
 						. += "<td><b><a href='?src=\ref[src];vote=[i]'>[gamemode_names[choices[i]]]</a></b></td><td align = 'center'>[votes]</td>"
 					else
-						. += "<td><a href='?src=\ref[src];vote=[i]'>[gamemode_names[choices[i]]]</a></b></td><td align = 'center'>[votes]</td>"
+						. += "<td><a href='?src=\ref[src];vote=[i]'>[gamemode_names[choices[i]]]</a></td><td align = 'center'>[votes]</td>"
 				else
 					if(current_votes[C.ckey] == i)
 						. += "<td><b><a href='?src=\ref[src];vote=[i]'>[choices[i]]</a></b></td><td align = 'center'>[votes]</td>"
 					else
-						. += "<td><a href='?src=\ref[src];vote=[i]'>[choices[i]]</a></b></td><td align = 'center'>[votes]</td>"
+						. += "<td><a href='?src=\ref[src];vote=[i]'>[choices[i]]</a></td><td align = 'center'>[votes]</td>"
 				if (additional_text.len >= i)
 					. += additional_text[i]
 				. += "</tr>"

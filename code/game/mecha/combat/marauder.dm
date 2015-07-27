@@ -136,7 +136,7 @@
 		if(get_charge() > 0)
 			thrusters = !thrusters
 			src.log_message("Toggled thrusters.")
-			src.occupant_message("<font color='[src.thrusters?"blue":"red"]'>Thrusters [thrusters?"en":"dis"]abled.")
+			src.occupant_message("<font color='[src.thrusters?"blue":"red"]'>Thrusters [thrusters?"en":"dis"]abled.</font>")
 	return
 
 

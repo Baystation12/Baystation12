@@ -22,7 +22,7 @@
 				src << "<b>Laws synced with AI, be sure to note any changes.</b>"
 				// TODO: Update to new antagonist system.
 				if(mind && mind.special_role == "traitor" && mind.original == src)
-					src << "<b>Remember, your AI does NOT share or know about your law 0."
+					src << "<b>Remember, your AI does NOT share or know about your law 0.</b>"
 		else
 			src << "<b>No AI selected to sync laws with, disabling lawsync protocol.</b>"
 			lawupdate = 0

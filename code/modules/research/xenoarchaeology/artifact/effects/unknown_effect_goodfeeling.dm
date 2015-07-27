@@ -30,7 +30,7 @@
 			var/mob/living/carbon/human/H = user
 			if(prob(50))
 				if(prob(75))
-					H << "<b><font color='blue' size='[num2text(rand(1,5))]'><b>[pick(drastic_messages)]</b></font>"
+					H << "<b><font color='blue' size='[num2text(rand(1,5))]'>[pick(drastic_messages)]</b></font>"
 				else
 					H << "<font color='blue'>[pick(messages)]</font>"
 

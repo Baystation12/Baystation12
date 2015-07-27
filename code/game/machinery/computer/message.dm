@@ -213,7 +213,7 @@
 			<td width='20%'>[customjob]</td>
 			<td width='20%'>[customrecepient ? customrecepient.owner : "NONE"]</td>
 			<td width='300px'>[custommessage]</td></tr>"}
-			dat += "</table><br><center><A href='?src=\ref[src];select=Send'>Send</a>"
+			dat += "</table><br><center><A href='?src=\ref[src];select=Send'>Send</a></center>"
 
 		//Request Console Logs
 		if(4)

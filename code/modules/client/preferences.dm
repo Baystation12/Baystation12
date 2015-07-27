@@ -441,7 +441,7 @@ datum/preferences
 		for (var/i in special_roles)
 			if(special_roles[i]) //if mode is available on the server
 				if(jobban_isbanned(user, i) || (i == "positronic brain" && jobban_isbanned(user, "AI") && jobban_isbanned(user, "Cyborg")) || (i == "pAI candidate" && jobban_isbanned(user, "pAI")))
-					dat += "<b>Be [i]:<b> <font color=red><b> \[BANNED]</b></font><br>"
+					dat += "<b>Be [i]:</b> <font color=red><b> \[BANNED]</b></font><br>"
 				else
 					dat += "<b>Be [i]:</b> <a href='?_src_=prefs;preference=be_special;num=[n]'><b>[src.be_special&(1<<n) ? "Yes" : "No"]</b></a><br>"
 			n++

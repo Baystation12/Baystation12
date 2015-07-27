@@ -155,7 +155,7 @@
 			for(var/mob/O in viewers(src, null))
 				if(O == src)
 					continue
-				O.show_message(text("\red <B>[src] starts having a seizure!"), 1)
+				O.show_message(text("<span class='danger'>[src] starts having a seizure!</span>"), 1)
 			Paralyse(10)
 			make_jittery(1000)
 	if (disabilities & COUGHING)

@@ -50,7 +50,7 @@
 		for(var/log in logs)
 			t += log
 		t += "</table>"
-		t += "</FONT></PRE></TT>"
+		t += "</TT>"
 
 		popup.set_content(t)
 		popup.open()

@@ -2301,7 +2301,7 @@
 			if("clear_bombs")
 				//I do nothing
 			if("list_bombers")
-				var/dat = "<B>Bombing List<HR>"
+				var/dat = "<B>Bombing List</B><HR>"
 				for(var/l in bombers)
 					dat += text("[l]<BR>")
 				usr << browse(dat, "window=bombers")

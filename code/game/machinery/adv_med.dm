@@ -236,7 +236,7 @@
 			dat = format_occupant_data(src.connected.get_occupant_data())
 			dat += "<HR><A href='?src=\ref[src];print=1'>Print</A><BR>"
 		else
-			dat = "<font color='red'> Error: No Body Scanner connected.</font>"
+			dat = "<span class='warning'>Error: No Body Scanner connected.</span>"
 
 	dat += text("<BR><A href='?src=\ref[];mach_close=scanconsole'>Close</A>", user)
 	user << browse(dat, "window=scanconsole;size=430x600")
@@ -309,30 +309,30 @@
 			aux = "Unconscious"
 		else
 			aux = "Dead"
-	dat += text("[]\tHealth %: [] ([])</font><br>", (occ["health"] > 50 ? "<font color='blue'>" : "<font color='red'>"), occ["health"], aux)
+	dat += text("[]\tHealth %: [] ([])</font><br>", ("<font color='[occ["health"] > 50 ? "blue" : "red"]>"), occ["health"], aux)
 	if (occ["virus_present"])
 		dat += "<font color='red'>Viral pathogen detected in blood stream.</font><br>"
-	dat += text("[]\t-Brute Damage %: []</font><br>", (occ["bruteloss"] < 60 ? "<font color='blue'>" : "<font color='red'>"), occ["bruteloss"])
-	dat += text("[]\t-Respiratory Damage %: []</font><br>", (occ["oxyloss"] < 60 ? "<font color='blue'>" : "<font color='red'>"), occ["oxyloss"])
-	dat += text("[]\t-Toxin Content %: []</font><br>", (occ["toxloss"] < 60 ? "<font color='blue'>" : "<font color='red'>"), occ["toxloss"])
-	dat += text("[]\t-Burn Severity %: []</font><br><br>", (occ["fireloss"] < 60 ? "<font color='blue'>" : "<font color='red'>"), occ["fireloss"])
+	dat += text("[]\t-Brute Damage %: []</font><br>", ("<font color='[occ["bruteloss"] < 60  ? "blue" : "red"]'>"), occ["bruteloss"])
+	dat += text("[]\t-Respiratory Damage %: []</font><br>", ("<font color='[occ["oxyloss"] < 60  ? "blue'" : "red"]'>"), occ["oxyloss"])
+	dat += text("[]\t-Toxin Content %: []</font><br>", ("<font color='[occ["toxloss"] < 60  ? "blue" : "red"]'>"), occ["toxloss"])
+	dat += text("[]\t-Burn Severity %: []</font><br><br>", ("<font color='[occ["fireloss"] < 60  ? "blue" : "red"]'>"), occ["fireloss"])
 
-	dat += text("[]\tRadiation Level %: []</font><br>", (occ["rads"] < 10 ?"<font color='blue'>" : "<font color='red'>"), occ["rads"])
-	dat += text("[]\tGenetic Tissue Damage %: []</font><br>", (occ["cloneloss"] < 1 ?"<font color='blue'>" : "<font color='red'>"), occ["cloneloss"])
-	dat += text("[]\tApprox. Brain Damage %: []</font><br>", (occ["brainloss"] < 1 ?"<font color='blue'>" : "<font color='red'>"), occ["brainloss"])
+	dat += text("[]\tRadiation Level %: []</font><br>", ("<font color='[occ["rads"] < 10  ? "blue" : "red"]'>"), occ["rads"])
+	dat += text("[]\tGenetic Tissue Damage %: []</font><br>", ("<font color='[occ["cloneloss"] < 1  ? "blue" : "red"]'>"), occ["cloneloss"])
+	dat += text("[]\tApprox. Brain Damage %: []</font><br>", ("<font color='[occ["brainloss"] < 1  ? "blue" : "red"]'>"), occ["brainloss"])
 	dat += text("Paralysis Summary %: [] ([] seconds left!)<br>", occ["paralysis"], round(occ["paralysis"] / 4))
 	dat += text("Body Temperature: [occ["bodytemp"]-T0C]&deg;C ([occ["bodytemp"]*1.8-459.67]&deg;F)<br><HR>")
 
 	if(occ["borer_present"])
 		dat += "Large growth detected in frontal lobe, possibly cancerous. Surgical removal is recommended.<br>"
 
-	dat += text("[]\tBlood Level %: [] ([] units)</FONT><BR>", (occ["blood_amount"] > 448 ?"<font color='blue'>" : "<font color='red'>"), occ["blood_amount"]*100 / 560, occ["blood_amount"])
+	dat += text("[]\tBlood Level %: [] ([] units)</FONT><BR>", ("<font color='[occ["blood_amount"] > 448  ? "blue" : "red"]'>"), occ["blood_amount"]*100 / 560, occ["blood_amount"])
 
 	dat += text("Inaprovaline: [] units<BR>", occ["inaprovaline_amount"])
 	dat += text("Soporific: [] units<BR>", occ["stoxin_amount"])
-	dat += text("[]\tDermaline: [] units</FONT><BR>", (occ["dermaline_amount"] < 30 ? "<font color='black'>" : "<font color='red'>"), occ["dermaline_amount"])
-	dat += text("[]\tBicaridine: [] units<BR>", (occ["bicaridine_amount"] < 30 ? "<font color='black'>" : "<font color='red'>"), occ["bicaridine_amount"])
-	dat += text("[]\tDexalin: [] units<BR>", (occ["dexalin_amount"] < 30 ? "<font color='black'>" : "<font color='red'>"), occ["dexalin_amount"])
+	dat += text("[]\tDermaline: [] units</FONT><BR>", ("<font color='[occ["dermaline_amount"] < 30  ? "black" : "red"]'>"), occ["dermaline_amount"])
+	dat += text("[]\tBicaridine: [] units</font><BR>", ("<font color='[occ["bicaridine_amount"] < 30  ? "black" : "red"]'>"), occ["bicaridine_amount"])
+	dat += text("[]\tDexalin: [] units</font><BR>", ("<font color='[occ["dexalin_amount"] < 30  ? "black" : "red"]'>"), occ["dexalin_amount"])
 
 	for(var/datum/disease/D in occ["tg_diseases_list"])
 		if(!D.hidden[SCANNER])

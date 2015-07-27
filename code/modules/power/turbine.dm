@@ -277,7 +277,7 @@
 		\n<BR>
 		\n"}
 	else
-		dat += "\red<B>No compatible attached compressor found."
+		dat += "<span class='danger'>No compatible attached compressor found.</span>"
 
 	user << browse(dat, "window=computer;size=400x500")
 	onclose(user, "computer")

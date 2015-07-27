@@ -51,7 +51,7 @@ client/verb/JoinResponseTeam()
 			usr << "No emergency response team is currently being sent."
 			return
 		if(jobban_isbanned(usr, "Syndicate") || jobban_isbanned(usr, "Emergency Response Team") || jobban_isbanned(usr, "Security Officer"))
-			usr << "<font color=red><b>You are jobbanned from the emergency reponse team!"
+			usr << "<span class='danger'>You are jobbanned from the emergency reponse team!</span>"
 			return
 		if(ert.current_antagonists.len > 5)
 			usr << "The emergency response team is already full!"

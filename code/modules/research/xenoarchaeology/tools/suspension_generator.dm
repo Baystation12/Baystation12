@@ -132,9 +132,9 @@
 			I.loc = src
 			auth_card = I
 			if(attempt_unlock(I, usr))
-				usr << "<span class='info'>You insert [I], the console flashes \'<i>Access granted.</a>\'</span>"
+				usr << "<span class='info'>You insert [I], the console flashes \'<i>Access granted.</i>\'</span>"
 			else
-				usr << "<span class='warning'>You insert [I], the console flashes \'<i>Access denied.</a>\'</span>"
+				usr << "<span class='warning'>You insert [I], the console flashes \'<i>Access denied.</i>\'</span>"
 	else if(href_list["ejectcard"])
 		if(auth_card)
 			if(ishuman(usr))
