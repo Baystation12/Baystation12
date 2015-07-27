@@ -1,0 +1,7 @@
+author: Atlantis
+
+delete-after: True
+
+changes: 
+  - rscadd: "Converted phoron glass to borosilicate glass, adjusted heat resistances accordingly, got rid of copypaste fire code. Fire resistance is now handled by variables so completely fireproof windows are possible with varedit."
+  - rscadd: "Windows take fire damage when heat exceeds 100C regular windows, 750C reinforced regular, 2000C borosilicate and 4000C reinforced borosilicate. For comparsions, reinforced walls begin taking damage around 6000."

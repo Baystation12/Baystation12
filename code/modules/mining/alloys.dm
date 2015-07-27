@@ -25,3 +25,11 @@
 		"hematite" = 1
 		)
 	product = /obj/item/stack/material/steel
+
+/datum/alloy/borosilicate
+	metaltag = "borosilicate glass"
+	requires = list(
+		"platinum" = 1,
+		"sand" = 2
+		)
+	product = /obj/item/stack/material/glass/phoronglass
