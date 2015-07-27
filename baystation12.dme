@@ -24,6 +24,7 @@
 #include "code\__defines\dna.dm"
 #include "code\__defines\gamemode.dm"
 #include "code\__defines\items_clothing.dm"
+#include "code\__defines\lighting.dm"
 #include "code\__defines\machinery.dm"
 #include "code\__defines\math_physics.dm"
 #include "code\__defines\misc.dm"

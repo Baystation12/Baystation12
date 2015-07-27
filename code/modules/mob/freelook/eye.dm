@@ -15,6 +15,7 @@
 	var/acceleration = 1
 	var/owner_follows_eye = 0
 
+	see_in_dark = 7
 	status_flags = GODMODE
 	invisibility = INVISIBILITY_EYE
 

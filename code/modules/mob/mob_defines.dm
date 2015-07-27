@@ -2,7 +2,6 @@
 	density = 1
 	layer = 4.0
 	animate_movement = 2
-	see_in_dark = 0
 //	flags = NOREACT
 	var/datum/mind/mind
 
