@@ -166,12 +166,15 @@
 	//roll to-hit
 	miss_modifier = max(15*(distance-2) - round(15*accuracy) + miss_modifier, 0)
 	var/hit_zone = get_zone_with_miss_chance(def_zone, target_mob, miss_modifier, ranged_attack=(distance > 1 || original != target_mob)) //if the projectile hits a target we weren't originally aiming at then retain the chance to miss
-	if(!hit_zone)
+	
+	var/result = PROJECTILE_FORCE_MISS
+	if(hit_zone)
+		def_zone = hit_zone //set def_zone, so if the projectile ends up hitting someone else later (to be implemented), it is more likely to hit the same part
+		result = target_mob.bullet_act(src, def_zone)
+	
+	if(result == PROJECTILE_FORCE_MISS)
 		visible_message("<span class='notice'>\The [src] misses [target_mob] narrowly!</span>")
 		return 0
-
-	//set def_zone, so if the projectile ends up hitting someone else later (to be implemented), it is more likely to hit the same part
-	def_zone = hit_zone
 
 	//hit messages
 	if(silenced)
@@ -193,7 +196,7 @@
 			msg_admin_attack("UNKNOWN shot [target_mob] ([target_mob.ckey]) with \a [src] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[target_mob.x];Y=[target_mob.y];Z=[target_mob.z]'>JMP</a>)")
 
 	//sometimes bullet_act() will want the projectile to continue flying
-	if (target_mob.bullet_act(src, def_zone) == -1)
+	if (result == PROJECTILE_CONTINUE)
 		return 0
 
 	return 1
@@ -227,7 +230,7 @@
 		else
 			passthrough = 1 //so ghosts don't stop bullets
 	else
-		passthrough = (A.bullet_act(src, def_zone) == -1) //backwards compatibility
+		passthrough = (A.bullet_act(src, def_zone) == PROJECTILE_CONTINUE) //backwards compatibility
 		if(isturf(A))
 			for(var/obj/O in A)
 				O.bullet_act(src)
