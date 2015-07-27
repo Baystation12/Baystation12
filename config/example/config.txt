@@ -367,3 +367,6 @@ STARLIGHT 0
 
 ## Uncomment to have the changelog file automatically open when a user connects and hasn't seen the latest changelog
 #AGGRESSIVE_CHANGELOG
+
+## Uncomment to override default brain health.
+#DEFAULT_BRAIN_HEALTH 400
