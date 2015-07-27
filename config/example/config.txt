@@ -362,7 +362,8 @@ STARLIGHT 0
 ## Enable asteroid tunnel/cave generation. Will behave strangely if turned off with a map that expects it on.
 # GENERATE_ASTEROID
 
-
+## Uncomment to enable organ decay outside of a body or storage item.
+#ORGANS_CAN_DECAY
 
 ## Uncomment to have the changelog file automatically open when a user connects and hasn't seen the latest changelog
 #AGGRESSIVE_CHANGELOG
