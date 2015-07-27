@@ -50,8 +50,6 @@
 /var/const/access_mining = 48
 /var/const/access_mining_office = 49 //not in use
 /var/const/access_mailsorting = 50
-/var/const/access_mint = 51
-/var/const/access_mint_vault = 52
 /var/const/access_heads_vault = 53
 /var/const/access_mining_station = 54
 /var/const/access_xenobiology = 55
@@ -354,10 +352,6 @@
 			return "Mining Office"
 		if(access_mailsorting)
 			return "Cargo Office"
-		if(access_mint)
-			return "Mint"
-		if(access_mint_vault)
-			return "Mint Vault"
 		if(access_heads_vault)
 			return "Main Vault"
 		if(access_mining_station)
