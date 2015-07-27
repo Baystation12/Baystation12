@@ -1,6 +1,0 @@
-author: Kelenius
-
-delete-after: True
-changes: 
-  - tweak: "Borg shaker now works similarly to hypospray. It generates reagents that can be poured into glasses."
-  - bugfix: "Therefore, they can no longer duplicate rare reagents such as phoron."

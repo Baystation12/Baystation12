@@ -4,6 +4,7 @@
 	icon = 'icons/mob/blob.dmi'
 	icon_state = "blob_spore_temp"
 	pass_flags = PASSBLOB
+	see_in_dark = 8
 	see_invisible = SEE_INVISIBLE_LEVEL_TWO
 	var/ghost_name = "Unknown"
 	var/creating_blob = 0
