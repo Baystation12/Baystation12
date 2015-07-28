@@ -302,7 +302,7 @@ What a mess.*/
 			if ("New Record (General)")
 				if(PDA_Manifest.len)
 					PDA_Manifest.Cut()
-				active1 = CreateGeneralRecord()
+				active1 = data_core.CreateGeneralRecord()
 
 //FIELD FUNCTIONS
 			if ("Edit Field")

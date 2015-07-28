@@ -4,7 +4,7 @@
 #endif
 
 // Items that ask to be called every cycle.
-var/global/obj/effect/datacore/data_core = null
+var/global/datum/datacore/data_core = null
 var/global/list/all_areas                = list()
 var/global/list/machines                 = list()
 var/global/list/processing_objects       = list()

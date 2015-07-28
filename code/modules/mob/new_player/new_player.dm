@@ -373,12 +373,6 @@
 
 		qdel(src)
 
-	proc/AnnounceArrival(var/mob/living/carbon/human/character, var/rank, var/join_message)
-		if (ticker.current_state == GAME_STATE_PLAYING)
-			if(character.mind.role_alt_title)
-				rank = character.mind.role_alt_title
-			global_announcer.autosay("[character.real_name],[rank ? " [rank]," : " visitor," ] [join_message ? join_message : "has arrived on the station"].", "Arrivals Announcement Computer")
-
 	proc/AnnounceCyborg(var/mob/living/character, var/rank, var/join_message)
 		if (ticker.current_state == GAME_STATE_PLAYING)
 			if(character.mind.role_alt_title)
