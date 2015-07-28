@@ -176,6 +176,10 @@
 		user << "<span class='warning'>Plate \the [src] before reinforcing it!</span>"
 		return
 
+	if(flipped)
+		user << "<span class='warning'>Put \the [src] back in place before reinforcing it!</span>"
+		return
+
 	reinforced = common_material_add(S, user, "reinforc")
 	if(reinforced)
 		update_desc()
@@ -395,7 +399,7 @@
 
 	var/list/connection_dirs = list()
 
-	for(var/obj/structure/table/T in oview(src, 1))
+	for(var/obj/structure/table/T in orange(src, 1))
 		var/T_dir = get_dir(src, T)
 		if(T_dir in blocked_dirs) continue
 		if(material && T.material && material.name == T.material.name && flipped == T.flipped)

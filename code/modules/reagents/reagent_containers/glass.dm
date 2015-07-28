@@ -42,7 +42,6 @@
 		/obj/machinery/smartfridge/,
 		/obj/machinery/biogenerator,
 		/obj/machinery/constructable_frame,
-		/obj/machinery/bunsen_burner,
 		/obj/machinery/radiocarbon_spectrometer
 		)
 

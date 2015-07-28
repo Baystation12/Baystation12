@@ -267,8 +267,9 @@
 				M.visible_message("<span class='notice'>[M] shakes [src] trying to wake [t_him] up!</span>", \
 									"<span class='notice'>You shake [src] trying to wake [t_him] up!</span>")
 			else
-				if(istype(H))
-					H.species.hug(H,src)
+				var/mob/living/carbon/human/hugger = M
+				if(istype(hugger))
+					hugger.species.hug(hugger,src)
 				else
 					M.visible_message("<span class='notice'>[M] hugs [src] to make [t_him] feel better!</span>", \
 								"<span class='notice'>You hug [src] to make [t_him] feel better!</span>")
@@ -314,22 +315,6 @@
 
 
 //Throwing stuff
-
-/mob/living/carbon/proc/toggle_throw_mode()
-	if (src.in_throw_mode)
-		throw_mode_off()
-	else
-		throw_mode_on()
-
-/mob/living/carbon/proc/throw_mode_off()
-	src.in_throw_mode = 0
-	if(src.throw_icon) //in case we don't have the HUD and we use the hotkey
-		src.throw_icon.icon_state = "act_throw_off"
-
-/mob/living/carbon/proc/throw_mode_on()
-	src.in_throw_mode = 1
-	if(src.throw_icon)
-		src.throw_icon.icon_state = "act_throw_on"
 
 /mob/proc/throw_item(atom/target)
 	return
@@ -458,7 +443,7 @@
 	if(istype(AM, /mob/living/carbon) && prob(10))
 		src.spread_disease_to(AM, "Contact")
 
-/mob/living/carbon/can_use_vents()
+/mob/living/carbon/cannot_use_vents()
 	return
 
 /mob/living/carbon/slip(var/slipped_on,stun_duration=8)

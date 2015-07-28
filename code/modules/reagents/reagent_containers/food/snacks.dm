@@ -1525,11 +1525,13 @@
 		..()
 		reagents.add_reagent("protein", 10)
 
-	afterattack(obj/O as obj, mob/user as mob, proximity)
+	afterattack(obj/O as obj, var/mob/living/carbon/human/user as mob, proximity)
 		if(!proximity) return
 		if(istype(O,/obj/structure/sink) && !wrapped)
 			user << "You place \the [name] under a stream of water..."
-			loc = get_turf(O)
+			if(istype(user))
+				user.unEquip(src)
+			src.loc = get_turf(src)
 			return Expand()
 		..()
 
@@ -1574,11 +1576,14 @@
 	*/
 
 	proc/Expand()
-		for(var/mob/M in viewers(src,7))
-			M << "\red \The [src] expands!"
-		var/mob/living/carbon/human/H = new (src)
+		src.visible_message("<span class='notice'>\The [src] expands!</span>")
+		var/mob/living/carbon/human/H = new(src.loc)
 		H.set_species(monkey_type)
+		H.real_name = H.species.get_random_name()
+		H.name = H.real_name
+		src.loc = null
 		qdel(src)
+		return 1
 
 	proc/Unwrap(mob/user as mob)
 		icon_state = "monkeycube"

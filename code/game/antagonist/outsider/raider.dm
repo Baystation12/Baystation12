@@ -86,7 +86,7 @@ var/datum/antagonist/raider/raiders
 		/obj/item/weapon/gun/projectile/revolver,
 		/obj/item/weapon/gun/projectile/pirate
 		)
-	
+
 	var/list/raider_holster = list(
 		/obj/item/clothing/accessory/holster/armpit,
 		/obj/item/clothing/accessory/holster/waist,
@@ -207,14 +207,14 @@ var/datum/antagonist/raider/raiders
 			//If equipping shoes failed, fall back to equipping sandals
 			var/fallback_type = pick(/obj/item/clothing/shoes/sandal, /obj/item/clothing/shoes/jackboots/unathi)
 			player.equip_to_slot_or_del(new fallback_type(player), slot_shoes)
-		
+
 		player.equip_to_slot_or_del(new new_uniform(player),slot_w_uniform)
 		player.equip_to_slot_or_del(new new_glasses(player),slot_glasses)
 		player.equip_to_slot_or_del(new new_helmet(player),slot_head)
 		player.equip_to_slot_or_del(new new_suit(player),slot_wear_suit)
 		equip_weapons(player)
 
-	var/obj/item/weapon/card/id/id = create_id("Visitor", player)
+	var/obj/item/weapon/card/id/id = create_id("Visitor", player, equip = 0)
 	id.name = "[player.real_name]'s Passport"
 	id.assignment = "Visitor"
 	var/obj/item/weapon/storage/wallet/W = new(player)
@@ -229,10 +229,10 @@ var/datum/antagonist/raider/raiders
 	var/new_gun = pick(raider_guns)
 	var/new_holster = pick(raider_holster) //raiders don't start with any backpacks, so let's be nice and give them a holster if they can use it.
 	var/turf/T = get_turf(player)
-	
+
 	var/obj/item/primary = new new_gun(T)
 	var/obj/item/clothing/accessory/holster/holster = null
-	
+
 	//Give some of the raiders a pirate gun as a secondary
 	if(prob(60))
 		var/obj/item/secondary = new /obj/item/weapon/gun/projectile/pirate(T)
@@ -242,7 +242,7 @@ var/datum/antagonist/raider/raiders
 			secondary.loc = holster
 		else
 			player.equip_to_slot_or_del(secondary, slot_belt)
-	
+
 	if(primary.slot_flags & SLOT_HOLSTER)
 		holster = new new_holster(T)
 		holster.holstered = primary
@@ -253,10 +253,10 @@ var/datum/antagonist/raider/raiders
 		player.equip_to_slot_or_del(primary, slot_back)
 	else
 		player.put_in_any_hand_if_possible(primary)
-	
+
 	//If they got a projectile gun, give them a little bit of spare ammo
 	equip_ammo(player, primary)
-	
+
 	if(holster)
 		var/obj/item/clothing/under/uniform = player.w_uniform
 		if(istype(uniform) && uniform.can_attach_accessory(holster))

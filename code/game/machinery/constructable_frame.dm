@@ -106,18 +106,26 @@
 						if(component_check)
 							playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 							var/obj/machinery/new_machine = new src.circuit.build_path(src.loc, src.dir)
-							new_machine.component_parts.Cut()
+							
+							if(new_machine.component_parts)
+								new_machine.component_parts.Cut()
+							else
+								new_machine.component_parts = list()
+							
 							src.circuit.construct(new_machine)
+							
 							for(var/obj/O in src)
 								if(circuit.contain_parts) // things like disposal don't want their parts in them
 									O.loc = new_machine
 								else
 									O.loc = null
 								new_machine.component_parts += O
+							
 							if(circuit.contain_parts)
 								circuit.loc = new_machine
 							else
 								circuit.loc = null
+							
 							new_machine.RefreshParts()
 							qdel(src)
 					else

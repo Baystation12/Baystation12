@@ -110,6 +110,7 @@ var/global/datum/controller/gameticker/ticker
 	else
 		src.mode.announce()
 
+	setup_economy()
 	current_state = GAME_STATE_PLAYING
 	create_characters() //Create player characters and transfer them
 	collect_minds()
@@ -117,9 +118,6 @@ var/global/datum/controller/gameticker/ticker
 	data_core.manifest()
 
 	callHook("roundstart")
-
-	//here to initialize the random events nicely at round start
-	setup_economy()
 
 	shuttle_controller.setup_shuttle_docks()
 
@@ -288,7 +286,7 @@ var/global/datum/controller/gameticker/ticker
 			if(player && player.mind && player.mind.assigned_role)
 				if(player.mind.assigned_role == "Captain")
 					captainless=0
-				if(player.mind.assigned_role != "MODE")
+				if(!player_is_antag(player.mind, only_offstation_roles = 1))
 					job_master.EquipRank(player, player.mind.assigned_role, 0)
 					UpdateFactionList(player)
 					equip_custom_items(player)
@@ -342,7 +340,7 @@ var/global/datum/controller/gameticker/ticker
 					if(!delay_end)
 						world.Reboot()
 					else
-						world << "<span class='notice><b>An admin has delayed the round end</b></span>"
+						world << "<span class='notice'><b>An admin has delayed the round end</b></span>"
 				else
 					world << "<span class='notice'><b>An admin has delayed the round end</b></span>"
 

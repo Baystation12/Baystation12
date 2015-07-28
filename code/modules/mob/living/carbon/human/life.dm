@@ -445,7 +445,7 @@
 		else if(exhaled_pp > safe_exhaled_max * 0.7)
 			if (!co2_alert || prob(1))
 				var/word = pick("dizzy","short of breath","faint","momentarily confused")
-				src << "<span class='warning>You feel [word].</span>"
+				src << "<span class='warning'>You feel [word].</span>"
 
 			//scale linearly from 0 to 1 between safe_exhaled_max and safe_exhaled_max*0.7
 			var/ratio = 1.0 - (safe_exhaled_max - exhaled_pp)/(safe_exhaled_max*0.3)
@@ -459,7 +459,7 @@
 		else if(exhaled_pp > safe_exhaled_max * 0.6)
 			if (prob(0.3))
 				var/word = pick("a little dizzy","short of breath")
-				src << "<span class='warning>You feel [word].</span>"
+				src << "<span class='warning'>You feel [word].</span>"
 
 		else
 			co2_alert = 0
@@ -486,7 +486,7 @@
 
 			// Enough to make us sleep as well
 			if(SA_pp > SA_sleep_min)
-				sleeping = min(sleeping+2, 10)
+				Sleeping(5)
 
 		// There is sleeping gas in their lungs, but only a little, so give them a bit of a warning
 		else if(SA_pp > 0.15)
@@ -1221,7 +1221,6 @@
 
 	else
 		sight &= ~(SEE_TURFS|SEE_MOBS|SEE_OBJS)
-		see_in_dark = species.darksight
 		see_invisible = see_in_dark>2 ? SEE_INVISIBLE_LEVEL_ONE : SEE_INVISIBLE_LIVING
 
 		if(XRAY in mutations)
@@ -1237,6 +1236,10 @@
 				see_invisible = SEE_INVISIBLE_LIVING
 				seer = 0
 
+		else
+			sight &= ~(SEE_TURFS|SEE_MOBS|SEE_OBJS)
+			see_in_dark = species.darksight
+			see_invisible = see_in_dark>2 ? SEE_INVISIBLE_LEVEL_ONE : SEE_INVISIBLE_LIVING
 		var/tmp/glasses_processed = 0
 		var/obj/item/weapon/rig/rig = back
 		if(istype(rig) && rig.visor)
@@ -1248,6 +1251,10 @@
 		if(glasses && !glasses_processed)
 			glasses_processed = 1
 			process_glasses(glasses)
+		if(XRAY in mutations)
+			sight |= SEE_TURFS|SEE_MOBS|SEE_OBJS
+			see_in_dark = 8
+			if(!druggy)		see_invisible = SEE_INVISIBLE_LEVEL_TWO
 
 		if(!glasses_processed && (species.vision_flags > 0))
 			sight |= species.vision_flags
@@ -1684,6 +1691,7 @@
 		holder.icon_state = "hudblank"
 		if(mind)
 
+			// TODO: Update to new antagonist system.
 			switch(mind.special_role)
 				if("traitor","Mercenary")
 					holder.icon_state = "hudsyndicate"

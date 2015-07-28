@@ -4,6 +4,7 @@ var/list/preferences_datums = list()
 
 var/global/list/special_roles = list( //keep synced with the defines BE_* in setup.dm --rastaf
 //some autodetection here.
+// TODO: Update to new antagonist system.
 	"traitor" = IS_MODE_COMPILED("traitor"),             // 0
 	"operative" = IS_MODE_COMPILED("nuclear"),           // 1
 	"changeling" = IS_MODE_COMPILED("changeling"),       // 2

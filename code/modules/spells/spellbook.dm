@@ -288,6 +288,7 @@
 	for(var/spell/knownspell in user.spell_list)
 		if(knownspell.type == S.type)
 			if(user.mind)
+				// TODO: Update to new antagonist system.
 				if(user.mind.special_role == "apprentice" || user.mind.special_role == "Wizard")
 					user <<"<span class='notice'>You're already far more versed in this spell than this flimsy how-to book can provide.</span>"
 				else
