@@ -30,3 +30,4 @@
 		overlays.Add(active_program.keyboard_icon_state ? active_program.keyboard_icon_state : keyboard_icon_state_menu)
 	else
 		overlays.Add(icon_state_menu)
+		overlays.Add(keyboard_icon_state_menu)

@@ -31,7 +31,7 @@
 	filename = "rconconsole"
 	filedesc = "RCON Remote Control"
 	nanomodule_path = /datum/nano_module/rcon
-	program_icon_state = "rcon_console"
+	program_icon_state = "generic"
 	keyboard_icon_state = "keyboard1"
 	required_access = access_engine
 	requires_ntnet = 1
@@ -42,6 +42,6 @@
 	filename = "sensormonitor"
 	filedesc = "Suit Sensors Monitoring"
 	nanomodule_path = /datum/nano_module/crew_monitor
-	program_icon_state = "suit_sensors"
+	program_icon_state = "crew"
 	keyboard_icon_state = "keyboard7"
 	requires_ntnet = 1
