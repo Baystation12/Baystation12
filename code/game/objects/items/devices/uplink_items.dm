@@ -580,22 +580,26 @@ var/image/default_abstract_uplink_icon
 	desc = "Causes a falsified [command_name()] Update. Triggers immediately after supplying additional data."
 	antag_roles = list(MODE_MERCENARY)
 
-/datum/uplink_item/abstract/announcements/fake_centcom/extra_args(var/mob/user)
+/datum/uplink_item/abstract/announcements/fake_centcom/get_goods(var/obj/item/device/uplink/U, var/loc, var/mob/user, var/list/args)
+	command_announcement.Announce(args.["message"], args.["title"])
+	return 1
+
+/datum/uplink_item/abstract/announcements/fake_crew_arrival
+	name = "Crew Arrival Announcement"
+	desc = "Creates a fake crew arrival annoucement as well as fake crew records, using your current appearance and worn id card."
+	item_cost = 4
+
+/datum/uplink_item/abstract/announcements/fake_crew_arrival/New()
+	..()
+	antag_roles = list(MODE_MERCENARY)
+
+/datum/uplink_item/abstract/announcements/fake_crew_arrival/get_goods(var/obj/item/device/uplink/U, var/loc, var/mob/user, var/list/args)
 	if(!user)
 		return 0
 
-	var/subtitle = input(user, "Enter the annoncement Title.", "Annoncement Title", "Attention") as text|null
-	if(!subtitle)
-		return 0
-
-	var/message = input(user, "Enter the annoncement message.", "Annoncement Message") as text|null
-	if(!message)
-		return 0
-
-	return list("title" = subtitle, "message" = message)
-
-/datum/uplink_item/abstract/announcements/fake_centcom/get_goods(var/obj/item/device/uplink/U, var/loc, var/mob/user, var/list/args)
-	command_announcement.Announce(args.["message"], args.["title"])
+	var/datum/data/record/general = data_core.CreateGeneralRecord(user)
+	var/datum/data/record/medical = data_core.CreateMedicalRecord(general.fields["name"], general.fields["id"])
+	var/datum/data/record/security = data_core.CreateSecurityRecord(general.fields["name"], general.fields["id"])
 	return 1
 
 /datum/uplink_item/abstract/announcements/fake_ion_storm
