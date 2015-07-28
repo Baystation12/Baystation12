@@ -1250,14 +1250,6 @@
 		if(!seer && !glasses_processed)
 			see_invisible = SEE_INVISIBLE_LIVING
 
-			var/equipped_glasses = glasses
-			var/obj/item/weapon/rig/rig = back
-			if(istype(rig) && rig.visor)
-				if(!rig.helmet || (head && rig.helmet == head))
-					if(rig.visor && rig.visor.vision && rig.visor.active && rig.visor.vision.glasses)
-						equipped_glasses = rig.visor.vision.glasses
-			if(equipped_glasses)
-				process_glasses(equipped_glasses)
 		if(healths)
 			if (analgesic > 100)
 				healths.icon_state = "health_health_numb"
