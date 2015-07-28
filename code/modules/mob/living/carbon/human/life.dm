@@ -1197,7 +1197,7 @@
 			damageoverlay.overlays += I
 
 	if( stat == DEAD )
-		sight |= (SEE_TURFS|SEE_MOBS|SEE_OBJS)
+		sight |= SEE_TURFS|SEE_MOBS|SEE_OBJS|SEE_SELF
 		see_in_dark = 8
 		if(!druggy)		see_invisible = SEE_INVISIBLE_LEVEL_TWO
 		if(healths)		healths.icon_state = "health7"	//DEAD healthmeter
@@ -1207,17 +1207,6 @@
 					if(item.zoom)
 						item.zoom()
 						break
-
-				/*
-				if(locate(/obj/item/weapon/gun/energy/sniperrifle, contents))
-					var/obj/item/weapon/gun/energy/sniperrifle/s = locate() in src
-					if(s.zoom)
-						s.zoom()
-				if(locate(/obj/item/device/binoculars, contents))
-					var/obj/item/device/binoculars/b = locate() in src
-					if(b.zoom)
-						b.zoom()
-				*/
 
 	else
 		sight &= ~(SEE_TURFS|SEE_MOBS|SEE_OBJS)
@@ -1237,7 +1226,7 @@
 				seer = 0
 
 		else
-			sight &= ~(SEE_TURFS|SEE_MOBS|SEE_OBJS)
+			sight = species.vision_flags
 			see_in_dark = species.darksight
 			see_invisible = see_in_dark>2 ? SEE_INVISIBLE_LEVEL_ONE : SEE_INVISIBLE_LIVING
 		var/tmp/glasses_processed = 0
@@ -1279,6 +1268,8 @@
 							if(0 to 20)				healths.icon_state = "health5"
 							else					healths.icon_state = "health6"
 
+			if(!seer)
+				see_invisible = SEE_INVISIBLE_LIVING
 		if(nutrition_icon)
 			switch(nutrition)
 				if(450 to INFINITY)				nutrition_icon.icon_state = "nutrition0"
