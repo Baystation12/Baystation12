@@ -6,6 +6,7 @@
 	icon_state = "console"
 	icon_state_unpowered = "console"
 	icon_state_menu = "menu"
+	var/keyboard_icon_state_menu = "keyboard13"
 	battery_powered = 0
 	anchored = 1
 	density = 1
@@ -26,5 +27,7 @@
 		return
 	if(active_program)
 		overlays.Add(active_program.program_icon_state ? active_program.program_icon_state : icon_state_menu)
+		overlays.Add(active_program.keyboard_icon_state ? active_program.keyboard_icon_state : keyboard_icon_state_menu)
 	else
 		overlays.Add(icon_state_menu)
+		overlays.Add(keyboard_icon_state_menu)
