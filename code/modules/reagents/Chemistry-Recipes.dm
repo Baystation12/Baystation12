@@ -31,6 +31,8 @@ datum
 			result = null
 			required_reagents = list("water" = 1, "potassium" = 1)
 			result_amount = 2
+			log_is_important = 1
+
 			on_reaction(var/datum/reagents/holder, var/created_volume)
 				var/datum/effect/effect/system/reagents_explosion/e = new()
 				e.set_up(round (created_volume/10, 1), holder.my_atom, 0, 0)
@@ -344,6 +346,8 @@ datum
 			result = "nitroglycerin"
 			required_reagents = list("glycerol" = 1, "pacid" = 1, "sacid" = 1)
 			result_amount = 2
+			log_is_important = 1
+
 			on_reaction(var/datum/reagents/holder, var/created_volume)
 				var/datum/effect/effect/system/reagents_explosion/e = new()
 				e.set_up(round (created_volume/2, 1), holder.my_atom, 0, 0)
