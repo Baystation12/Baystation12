@@ -49,7 +49,7 @@
 			{{:helper.displayBar(data.tox, 0, 100, (data.tox <= 25) ? 'good' : (data.tox <= 50) ? 'average' : 'bad')}}{{:helper.round(data.tox)}}
 			</div>
 			<div class="itemContent">
-			{{:helper.link(data.filtering ? "Dialysis active" : "Dialysis inactive", null, {'filter' : 0})}}
+			{{:helper.link(data.filtering ? "Dialysis active" : "Dialysis inactive", null, {'filter' : !data.filtering})}}
 			</div>
 			<div class="itemContent">
 				{{:helper.link("Eject occupant", null, {'eject' : 0})}}
