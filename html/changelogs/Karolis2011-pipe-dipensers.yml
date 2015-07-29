@@ -1,0 +1,5 @@
+author: Karolis2011
+delete-after: True
+changes: 
+  - rscadd: "Made tagger and sorting pipes dispensible."
+  - bugfix: "Unwelding and welding sorting/tagger pipes, no longer delete data about them."
