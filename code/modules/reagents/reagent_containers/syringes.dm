@@ -170,10 +170,7 @@
 
 					if(istype(target,/mob/living))
 						var/mob/living/M = target
-						var/list/injected = list()
-						for(var/datum/reagent/R in src.reagents.reagent_list)
-							injected += R.name
-						var/contained = english_list(injected)
+						var/contained = reagents.get_reagents()
 						M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been injected with [src.name] by [user.name] ([user.ckey]). Reagents: [contained]</font>")
 						user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [src.name] to inject [M.name] ([M.key]). Reagents: [contained]</font>")
 						msg_admin_attack("[user.name] ([user.ckey]) injected [M.name] ([M.key]) with [src.name]. Reagents: [contained] (INTENT: [uppertext(user.a_intent)]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
@@ -181,6 +178,13 @@
 					src.reagents.reaction(target, INGEST)
 				if(ismob(target) && target == user)
 					src.reagents.reaction(target, INGEST)
+
+				if(!ismob(target) && !istype(target, /obj/item/weapon/reagent_containers/glass)) // It's not a mob (which is logged above) and it's not a beaker or similar (which is a fairly normal thing to inject into)
+					usr = user
+					var/contained = reagents.get_reagents()
+					user.attack_log += "\[[time_stamp()]\] <font color='red'>Injected \the [target] with \the [src]. Reagents: [contained]</font>"
+					log_and_message_admins("injected \the [target] with \the [src]. Reagents: [contained]")
+
 				spawn(5)
 					var/datum/reagent/blood/B
 					for(var/datum/reagent/blood/d in src.reagents.reagent_list)
