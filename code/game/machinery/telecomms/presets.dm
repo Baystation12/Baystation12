@@ -86,6 +86,13 @@
 	freq_listening = list(SUP_FREQ, SRV_FREQ)
 	autolinkers = list("processor2", "supply", "service", "unused")
 
+/obj/machinery/telecomms/bus/preset_two/New()
+	for(var/i = 1441, i < 1489, i += 2)
+		if(i == AI_FREQ || i == PUB_FREQ)
+			continue
+		freq_listening |= i
+	..()
+
 /obj/machinery/telecomms/bus/preset_three
 	id = "Bus 3"
 	network = "tcommsat"
@@ -95,13 +102,8 @@
 /obj/machinery/telecomms/bus/preset_four
 	id = "Bus 4"
 	network = "tcommsat"
-	freq_listening = list(ENG_FREQ)
+	freq_listening = list(ENG_FREQ, AI_FREQ, PUB_FREQ)
 	autolinkers = list("processor4", "engineering", "common")
-
-/obj/machinery/telecomms/bus/preset_four/New()
-	for(var/i = 1441, i < 1489, i += 2)
-		freq_listening |= i
-	..()
 
 /obj/machinery/telecomms/bus/preset_cent
 	id = "CentComm Bus"
@@ -166,7 +168,7 @@
 
 /obj/machinery/telecomms/server/presets/common
 	id = "Common Server"
-	freq_listening = list(1447, 1459) // AI Private and Common
+	freq_listening = list(PUB_FREQ, AI_FREQ) // AI Private and Common
 	autolinkers = list("common")
 
 // "Unused" channels, AKA all others.
@@ -177,8 +179,9 @@
 
 /obj/machinery/telecomms/server/presets/unused/New()
 	for(var/i = 1441, i < 1489, i += 2)
+		if(i == AI_FREQ || i == PUB_FREQ)
+			continue
 		freq_listening |= i
-	freq_listening -= list(1447, 1459)
 	..()
 
 /obj/machinery/telecomms/server/presets/command
