@@ -720,6 +720,10 @@ var/list/be_special_flags = list(
 #define FILE_DRM            16 // Some files want to not be copied/moved. This is them complaining that you tried.
 #define NETWORK_FAILURE     32
 
+// Special return values from bullet_act(). Positive return values are already used to indicate the blocked level of the projectile.
+#define PROJECTILE_CONTINUE   -1 //if the projectile should continue flying after calling bullet_act()
+#define PROJECTILE_FORCE_MISS -2 //if the projectile should treat the attack as a miss (suppresses attack and admin logs) - only applies to mobs.
+
 // Some on_mob_life() procs check for alien races.
 #define IS_DIONA  1
 #define IS_VOX    2
