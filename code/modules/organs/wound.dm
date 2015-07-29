@@ -248,6 +248,7 @@
 /** CUTS **/
 /datum/wound/cut/small
 	// link wound descriptions to amounts of damage
+	// All cuts have max_bleeding_stage set to the stage that bears the wound type's name.
 	max_bleeding_stage = 2
 	stages = list("ugly ripped cut" = 20, "ripped cut" = 10, "cut" = 5, "healing cut" = 2, "small scab" = 0)
 	damage_type = CUT
@@ -258,7 +259,7 @@
 	damage_type = CUT
 
 /datum/wound/cut/flesh
-	max_bleeding_stage = 4
+	max_bleeding_stage = 3
 	stages = list("ugly ripped flesh wound" = 35, "ugly flesh wound" = 30, "flesh wound" = 25, "blood soaked clot" = 15, "large scab" = 5, "fresh skin" = 0)
 	damage_type = CUT
 
@@ -279,7 +280,7 @@ datum/wound/cut/massive
 
 /** BRUISES **/
 /datum/wound/bruise
-	stages = list("monumental bruise" = 80, "huge bruise" = 50, "large bruise" = 30,\
+	stages = list("monumental bruise" = 80, "huge bruise" = 50, "large bruise" = 30,
 				  "moderate bruise" = 20, "small bruise" = 10, "tiny bruise" = 5)
 	max_bleeding_stage = 3
 	autoheal_cutoff = 30
@@ -323,7 +324,7 @@ datum/wound/cut/massive
 	switch(losstype)
 		if(DROPLIMB_EDGE, DROPLIMB_BLUNT)
 			damage_type = CUT
-			max_bleeding_stage = 3
+			max_bleeding_stage = 2
 			stages = list(
 				"ripped stump" = damage_amt*1.3,
 				"bloody stump" = damage_amt, 
@@ -332,7 +333,6 @@ datum/wound/cut/massive
 				)
 		if(DROPLIMB_BURN)
 			damage_type = BURN
-			max_bleeding_stage = 1
 			stages = list(
 				"ripped charred stump" = damage_amt*1.3,
 				"charred stump" = damage_amt,
