@@ -17,6 +17,8 @@ datum
 		var/list/secondary_results = list()		//additional reagents produced by the reaction
 		var/requires_heating = 0
 
+		var/log_is_important = 0 // If this reaction should be considered important for logging. Important recipes message admins when mixed, non-important ones just log to file.
+
 		proc
 			on_reaction(var/datum/reagents/holder, var/created_volume)
 				return
@@ -169,6 +171,7 @@ datum
 			result = "pacid"
 			required_reagents = list("sacid" = 1, "chlorine" = 1, "potassium" = 1)
 			result_amount = 3
+			log_is_important = 1
 
 		synaptizine
 			name = "Synaptizine"
@@ -456,6 +459,7 @@ datum
 			result = "chloralhydrate"
 			required_reagents = list("ethanol" = 1, "chlorine" = 3, "water" = 1)
 			result_amount = 1
+			log_is_important = 1
 
 		potassium_chloride
 			name = "Potassium Chloride"

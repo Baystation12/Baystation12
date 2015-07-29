@@ -363,6 +363,7 @@ datum
 									for(var/S in C.secondary_results)
 										add_reagent(S, C.result_amount * C.secondary_results[S] * multiplier)
 
+								log_chemical_reaction(my_atom, C, multiplier)
 								var/list/seen = viewers(4, get_turf(my_atom))
 								for(var/mob/M in seen)
 									M << "\blue \icon[my_atom] The solution begins to bubble."
