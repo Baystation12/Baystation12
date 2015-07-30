@@ -16,3 +16,13 @@
 		if(A.lighting_use_dynamic)
 			var/atom/movable/lighting_overlay/O = PoolOrNew(/atom/movable/lighting_overlay, src)
 			lighting_overlay = O
+
+/turf/Entered(atom/movable/obj)
+	. = ..()
+	if(obj && obj.opacity)
+		reconsider_lights()
+
+/turf/Exited(atom/movable/obj)
+	. = ..()
+	if(obj && obj.opacity)
+		reconsider_lights()

@@ -112,16 +112,17 @@
 	var/sheets_per_tick = 10
 	var/list/ores_processing[0]
 	var/list/ores_stored[0]
-	var/list/alloy_data[0]
+	var/static/list/alloy_data
 	var/active = 0
 
 /obj/machinery/mineral/processing_unit/New()
-
 	..()
 
-	//TODO: Ore and alloy global storage datum.
-	for(var/alloytype in typesof(/datum/alloy)-/datum/alloy)
-		alloy_data += new alloytype()
+	// initialize static alloy_data list
+	if(!alloy_data)
+		alloy_data = list()
+		for(var/alloytype in typesof(/datum/alloy)-/datum/alloy)
+			alloy_data += new alloytype()
 
 	if(!ore_data || !ore_data.len)
 		for(var/oretype in typesof(/ore)-/ore)

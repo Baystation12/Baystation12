@@ -211,8 +211,12 @@
 
 
 /obj/item/weapon/weldingtool/process()
-	if(welding && prob(5) && !remove_fuel(1))
-		setWelding(0)
+	if(welding)
+		if(prob(5))
+			remove_fuel(1)
+
+		if(get_fuel() == 0)
+			setWelding(0)
 
 	//I'm not sure what this does. I assume it has to do with starting fires...
 	//...but it doesnt check to see if the welder is on or not.
