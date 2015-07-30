@@ -30,14 +30,14 @@
 	R.uneq_all()
 	R.hands.icon_state = "nomod"
 	R.icon_state = "robot"
+	R.icontype = "Basic"
 	//world << R.custom_sprite
 	if(R.custom_sprite == 1)
 		//world << R.icon_state
 		icon = 'icons/mob/custom-synthetic.dmi'
 		R.icon_state = "[R.ckey]-Standard"
-	del(R.module)
 	R.notify_ai(ROBOT_NOTIFICATION_MODULE_RESET, R.module.name)
-	R.module = null
+	del(R.module)
 	R.camera.remove_networks(list("Engineering","Medical","MINE"))
 	R.updatename("Default")
 	R.status_flags |= CANPUSH
