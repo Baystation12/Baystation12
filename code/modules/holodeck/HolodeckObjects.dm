@@ -13,11 +13,31 @@
 /turf/simulated/floor/holofloor/set_flooring()
 	return
 
+/turf/simulated/floor/holofloor/tiled
+	name = "floor"
+	icon = 'icons/turf/flooring/tiles.dmi'
+	icon_state = "steel"
+	initial_flooring = /decl/flooring/tiling
+
+/turf/simulated/floor/holofloor/wood
+	name = "wooden floor"
+	icon = 'icons/turf/flooring/wood.dmi'
+	icon_state = "wood"
+	initial_flooring = /decl/flooring/wood
+
 /turf/simulated/floor/holofloor/grass
 	name = "lush grass"
 	icon = 'icons/turf/flooring/grass.dmi'
 	icon_state = "grass0"
 	initial_flooring = /decl/flooring/grass
+
+/turf/simulated/floor/holofloor/snow
+	name = "snow"
+	base_name = "snow"
+	icon = 'icons/turf/floors.dmi'
+	base_icon = 'icons/turf/floors.dmi'
+	icon_state = "snow"
+	base_icon_state = "snow"
 
 /turf/simulated/floor/holofloor/space
 	icon = 'icons/turf/space.dmi'
@@ -32,6 +52,17 @@
 
 /turf/simulated/floor/holofloor/space/New()
 	icon_state = "[((x + y) ^ ~(x * y) + z) % 25]"
+
+/turf/simulated/floor/holofloor/beach
+	name = "sand"
+	base_name = "sand"
+	desc = "Uncomfortably gritty for a hologram."
+	base_desc = "Uncomfortably gritty for a hologram."
+	icon_state = "asteroid"
+	base_icon_state = "asteroid"
+	icon = 'icons/turf/flooring/asteroid.dmi'
+	base_icon = 'icons/turf/flooring/asteroid.dmi'
+	initial_flooring = null
 
 /turf/simulated/floor/holofloor/desert
 	name = "desert sand"
