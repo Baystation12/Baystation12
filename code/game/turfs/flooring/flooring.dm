@@ -1,15 +1,11 @@
 var/list/flooring_types
 
-/proc/get_flooring_by_name(var/flooring_name)
+/proc/get_flooring_by_name(var/flooring_path)
 	if(!flooring_types)
 		flooring_types = list()
-		for(var/floortype in typesof(/flooring)-/flooring)
-			var/flooring/F = new floortype
-			if(!F.name)
-				del(F)
-				continue
-			flooring_types[F.name] = F
-	return flooring_types[flooring_name]
+	if(!flooring_types["[flooring_path]"])
+		flooring_types["[flooring_path]"] = new flooring_path
+	return flooring_types["[flooring_path]"]
 
 // State values:
 // [icon_base]: initial base icon_state without edges or corners.
@@ -21,7 +17,7 @@ var/list/flooring_types
 // [icon_base]_edges: directional overlays for edges.
 // [icon_base]_corners: directional overlays for non-edge corners.
 
-/flooring
+/decl/flooring
 	var/name
 	var/desc
 	var/icon
@@ -41,7 +37,7 @@ var/list/flooring_types
 	var/descriptor = "tiles"
 	var/flags
 
-/flooring/grass
+/decl/flooring/grass
 	name = "grass"
 	desc = "Do they smoke grass out in space, Bowie? Or do they smoke AstroTurf?"
 	icon = 'icons/turf/flooring/grass.dmi'
@@ -51,7 +47,7 @@ var/list/flooring_types
 	flags = TURF_HAS_EDGES | TURF_REMOVE_SHOVEL
 	build_type = /obj/item/stack/tile/grass
 
-/flooring/asteroid
+/decl/flooring/asteroid
 	name = "coarse sand"
 	desc = "Gritty and unpleasant."
 	icon = 'icons/turf/flooring/asteroid.dmi'
@@ -59,7 +55,7 @@ var/list/flooring_types
 	flags = TURF_HAS_EDGES | TURF_REMOVE_SHOVEL
 	build_type = null
 
-/flooring/carpet
+/decl/flooring/carpet
 	name = "carpet"
 	desc = "Imported and comfy."
 	icon = 'icons/turf/flooring/carpet.dmi'
@@ -68,13 +64,13 @@ var/list/flooring_types
 	damage_temperature = T0C+200
 	flags = TURF_HAS_EDGES | TURF_HAS_CORNERS | TURF_REMOVE_CROWBAR | TURF_CAN_BURN
 
-/flooring/carpet/blue
+/decl/flooring/carpet/blue
 	name = "blue carpet"
 	icon_base = "bcarpet"
 	build_type = null
 	flags = TURF_HAS_EDGES
 
-/flooring/tiling
+/decl/flooring/tiling
 	name = "floor"
 	desc = "Scuffed from the passage of countless greyshirts."
 	icon = 'icons/turf/flooring/tiles.dmi'
@@ -84,13 +80,13 @@ var/list/flooring_types
 	flags = TURF_REMOVE_CROWBAR | TURF_CAN_BREAK | TURF_CAN_BURN
 	build_type = /obj/item/stack/tile/floor
 
-/flooring/linoleum
+/decl/flooring/linoleum
 	name = "linoleum"
 	desc = "It's like the 2390's all over again."
 	icon = 'icons/turf/flooring/linoleum.dmi'
 	icon_base = "lino"
 
-/flooring/tiling/white
+/decl/flooring/tiling/white
 	name = "white floor"
 	desc = "How sterile."
 	icon_base = "white"
@@ -98,7 +94,7 @@ var/list/flooring_types
 	flags = TURF_REMOVE_CROWBAR
 	build_type = /obj/item/stack/tile/floor_white
 
-/flooring/tiling/dark
+/decl/flooring/tiling/dark
 	name = "dark floor"
 	desc = "How ominous."
 	icon_base = "dark"
@@ -106,7 +102,7 @@ var/list/flooring_types
 	flags = TURF_REMOVE_CROWBAR
 	build_type = /obj/item/stack/tile/floor_dark
 
-/flooring/tiling/freezer
+/decl/flooring/tiling/freezer
 	name = "tiled floor"
 	desc = "Don't slip."
 	icon_base = "freezer"
@@ -114,7 +110,7 @@ var/list/flooring_types
 	flags = TURF_REMOVE_CROWBAR
 	build_type = /obj/item/stack/tile/floor_freezer
 
-/flooring/wood
+/decl/flooring/wood
 	name = "wooden floor"
 	desc = "Polished redwood planks."
 	icon = 'icons/turf/flooring/wood.dmi'
@@ -125,7 +121,7 @@ var/list/flooring_types
 	build_type = /obj/item/stack/tile/wood
 	flags = TURF_CAN_BREAK | TURF_IS_FRAGILE | TURF_REMOVE_SCREWDRIVER
 
-/flooring/reinforced
+/decl/flooring/reinforced
 	name = "reinforced floor"
 	desc = "Heavily reinforced with steel rods."
 	icon = 'icons/turf/flooring/tiles.dmi'
@@ -137,18 +133,18 @@ var/list/flooring_types
 	apply_thermal_conductivity = 0.025
 	apply_heat_capacity = 325000
 
-/flooring/reinforced/circuit
+/decl/flooring/reinforced/circuit
 	name = "blue processing strata"
 	icon = 'icons/turf/flooring/circuit.dmi'
 	icon_base = "bcircuit"
 	build_type = null
 	flags = TURF_ACID_IMMUNE | TURF_CAN_BREAK
 
-/flooring/reinforced/circuit/green
+/decl/flooring/reinforced/circuit/green
 	name = "green processing strata"
 	icon_base = "gcircuit"
 
-/flooring/reinforced/cult
+/decl/flooring/reinforced/cult
 	name = "engraved floor"
 	desc = "Unsettling whispers waver from the surface..."
 	icon = 'icons/turf/flooring/cult.dmi'

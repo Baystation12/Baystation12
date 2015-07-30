@@ -52,9 +52,9 @@
 				user << "<span class='warning'>This section is too damaged to support anything. Use a welder to fix the damage.</span>"
 				return
 			var/obj/item/stack/S = C
-			var/flooring/use_flooring
+			var/decl/flooring/use_flooring
 			for(var/flooring_type in flooring_types)
-				var/flooring/F = flooring_types[flooring_type]
+				var/decl/flooring/F = flooring_types[flooring_type]
 				if(!F.build_type)
 					continue
 				if(C.type == F.build_type)
