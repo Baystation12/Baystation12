@@ -120,10 +120,13 @@
 	if(user.client)
 		user << "<span class='notice'><b>Transfer successful:</b></span> [ai.name] ([rand(1000,9999)].exe) removed from host terminal and stored within local memory."
 
+	ai.canmove = 1
 	update_icon()
 	return 1
 
 /obj/item/device/aicard/proc/clear()
+	if(carded_ai && istype(carded_ai.loc, /turf))
+		carded_ai.canmove = 0
 	name = initial(name)
 	carded_ai = null
 	update_icon()
@@ -140,10 +143,9 @@
 		carded_ai.show_message(rendered, type)
 	..()
 
-/*
 /obj/item/device/aicard/relaymove(var/mob/user, var/direction)
-	if(src.loc && istype(src.loc.loc, /obj/item/rig_module))
-		var/obj/item/rig_module/module = src.loc.loc
-		if(!module.holder || !direction)
-			return
-		module.holder.forced_move(direction)*/
+	if(user.stat || user.stunned)
+		return
+	var/obj/item/weapon/rig/rig = src.get_rig()
+	if(istype(rig))
+		rig.forced_move(direction, user)

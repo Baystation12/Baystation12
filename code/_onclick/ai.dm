@@ -100,6 +100,14 @@
     A.AIMiddleClick(src)
 
 /*
+	Sticking a minor pAI override into this because I can.
+*/
+/mob/living/silicon/pai/MiddleClickOn(var/atom/A)
+	if(src.loc == src.card)
+		return A.AIMiddleClick(src)
+	return ..()
+
+/*
 	The following criminally helpful code is just the previous code cleaned up;
 	I have no idea why it was in atoms.dm instead of respective files.
 */
@@ -152,10 +160,18 @@
 /obj/machinery/turretid/AIAltClick() //toggles lethal on turrets
 	Topic(src, list("src"= "\ref[src]", "command"="lethal", "value"="[!lethal]"), 1) // 1 meaning no window (consistency!)
 
-/atom/proc/AIMiddleClick()
-	return
+/atom/proc/AIMiddleClick(var/mob/living/silicon/user)
+	var/obj/item/weapon/rig/rig = user.get_rig()
+	if(rig && rig.wearer && rig.ai_can_move_suit(user, check_user_module = 1))
+		if(rig.wearer.HardsuitClickOn(src, alert_ai = 1))
+			return 1
+	return 0
 
 /obj/machinery/door/airlock/AIMiddleClick() // Toggles door bolt lights.
+
+	if(..())
+		return
+
 	if(!src.lights)
 		Topic(src, list("src"= "\ref[src]", "command"="lights", "activate" = "1"), 1) // 1 meaning no window (consistency!)
 	else

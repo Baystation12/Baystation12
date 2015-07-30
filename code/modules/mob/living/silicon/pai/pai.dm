@@ -73,8 +73,6 @@
 	var/current_pda_messaging = null
 
 /mob/living/silicon/pai/New(var/obj/item/device/paicard)
-
-	canmove = 0
 	src.loc = paicard
 	card = paicard
 	sradio = new(src)
@@ -277,8 +275,6 @@
 		var/obj/item/device/pda/holder = card.loc
 		holder.pai = null
 
-	canmove = 1
-
 	src.client.perspective = EYE_PERSPECTIVE
 	src.client.eye = src
 	src.forceMove(get_turf(card))
@@ -340,12 +336,16 @@
 	set name = "Rest"
 	set category = "IC"
 
+	// Pass lying down or getting up to our pet human, if we're in a rig.
 	if(istype(src.loc,/obj/item/device/paicard))
 		resting = 0
+		var/obj/item/weapon/rig/rig = src.get_rig()
+		if(istype(rig))
+			rig.force_rest(src)
 	else
 		resting = !resting
 		icon_state = resting ? "[chassis]_rest" : "[chassis]"
-		src << "\blue You are now [resting ? "resting" : "getting up"]"
+		src << "<span class='notice'>You are now [resting ? "resting" : "getting up"]</span>"
 
 	canmove = !resting
 
@@ -394,7 +394,8 @@
 	card.loc = get_turf(card)
 	src.forceMove(card)
 	card.forceMove(card.loc)
-	canmove = 0
+	canmove = 1
+	resting = 0
 	icon_state = "[chassis]"
 
 /mob/living/silicon/pai/start_pulling(var/atom/movable/AM)

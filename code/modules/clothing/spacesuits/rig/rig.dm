@@ -27,6 +27,8 @@
 	var/interface_path = "hardsuit.tmpl"
 	var/ai_interface_path = "hardsuit.tmpl"
 	var/interface_title = "Hardsuit Controller"
+	var/wearer_move_delay //Used for AI moving.
+	var/ai_controlled_move_delay = 10
 
 	// Keeps track of what this rig should spawn with.
 	var/suit_type = "hardsuit"
@@ -326,6 +328,8 @@
 	else
 		if(offline)
 			offline = 0
+			if(istype(wearer) && !wearer.wearing_rig)
+				wearer.wearing_rig = src
 			chest.slowdown = initial(slowdown)
 
 	if(offline)
@@ -544,11 +548,13 @@
 
 /obj/item/weapon/rig/proc/notify_ai(var/message)
 	if(!message || !installed_modules || !installed_modules.len)
-		return
+		return 0
+	. = 0
 	for(var/obj/item/rig_module/module in installed_modules)
 		for(var/mob/living/silicon/ai/ai in module.contents)
 			if(ai && ai.client && !ai.stat)
 				ai << "[message]"
+				. = 1
 
 /obj/item/weapon/rig/equipped(mob/living/carbon/human/M)
 	..()
@@ -565,6 +571,7 @@
 	if(istype(M) && M.back == src)
 		M.visible_message("<font color='blue'><b>[M] struggles into \the [src].</b></font>", "<font color='blue'><b>You struggle into \the [src].</b></font>")
 		wearer = M
+		wearer.wearing_rig = src
 		update_icon()
 
 /obj/item/weapon/rig/proc/toggle_piece(var/piece, var/mob/living/carbon/human/H, var/deploy_mode)
@@ -676,6 +683,7 @@
 	..()
 	for(var/piece in list("helmet","gauntlets","chest","boots"))
 		toggle_piece(piece, user, ONLY_RETRACT)
+	wearer.wearing_rig = null
 	wearer = null
 
 //Todo
@@ -757,14 +765,133 @@
 		return 1
 	return 0
 
-/*/obj/item/weapon/rig/proc/forced_move(dir)
-	if(locked_down)
+/obj/item/weapon/rig/proc/ai_can_move_suit(var/mob/user, var/check_user_module = 0, var/check_for_ai = 0)
+
+	if(check_for_ai)
+		if(!(locate(/obj/item/rig_module/ai_container) in contents))
+			return 0
+		var/found_ai
+		for(var/obj/item/rig_module/ai_container/module in contents)
+			if(module.damage >= 2)
+				continue
+			if(module.integrated_ai && module.integrated_ai.client && !module.integrated_ai.stat)
+				found_ai = 1
+				break
+		if(!found_ai)
+			return 0
+
+	if(check_user_module)
+		world << "Checking user module"
+		if(!user)
+			world << "No user"
+			return 0
+		if(!user.loc || !user.loc.loc)
+			world << "No user loc"
+			return 0
+		var/obj/item/rig_module/ai_container/module = user.loc.loc
+		if(!istype(module) || module.damage >= 2)
+			user << "<span class='warning'>Your host module is unable to interface with the suit.</span>"
+			return 0
+
+	if(offline || !cell || !cell.charge || locked_down)
+		if(user) user << "<span class='warning'>Your host rig is unpowered and unresponsive.</span>"
 		return 0
-	if(!control_overridden)
-		return
 	if(!wearer || wearer.back != src)
+		if(user) user << "<span class='warning'>Your host rig is not being worn.</span>"
 		return 0
-	wearer.Move(null,dir)*/
+	if(!wearer.stat && !control_overridden && !ai_override_enabled)
+		if(user) user << "<span class='warning'>You are locked out of the suit servo controller.</span>"
+		return 0
+	return 1
+
+/obj/item/weapon/rig/proc/force_rest(var/mob/user)
+	if(!ai_can_move_suit(user, check_user_module = 1))
+		return
+	wearer.lay_down()
+	user << "<span class='notice'>\The [wearer] is now [wearer.resting ? "resting" : "getting up"].</span>"
+
+/obj/item/weapon/rig/proc/forced_move(var/direction, var/mob/user)
+
+	// Why is all this shit in client/Move()? Who knows?
+	if(world.time < wearer_move_delay)
+		return
+
+	if(!wearer.loc || !ai_can_move_suit(user, check_user_module = 1))
+		return
+
+	//This is sota the goto stop mobs from moving var
+	if(wearer.transforming || !wearer.canmove)
+		return
+
+	if(locate(/obj/effect/stop/, wearer.loc))
+		for(var/obj/effect/stop/S in wearer.loc)
+			if(S.victim == wearer)
+				return
+
+	if(!wearer.lastarea)
+		wearer.lastarea = get_area(wearer.loc)
+
+	if((istype(wearer.loc, /turf/space)) || (wearer.lastarea.has_gravity == 0))
+		if(!wearer.Process_Spacemove(0))
+			return 0
+
+	if(malfunctioning)
+		direction = pick(cardinal)
+
+	// Inside an object, tell it we moved.
+	if(isobj(wearer.loc) || ismob(wearer.loc))
+		var/atom/O = wearer.loc
+		return O.relaymove(wearer, direction)
+
+	if(isturf(wearer.loc))
+		if(wearer.restrained())//Why being pulled while cuffed prevents you from moving
+			for(var/mob/M in range(wearer, 1))
+				if(M.pulling == wearer)
+					if(!M.restrained() && M.stat == 0 && M.canmove && wearer.Adjacent(M))
+						user << "<span class='notice'>Your host is restrained! They can't move!</span>"
+						return 0
+					else
+						M.stop_pulling()
+
+	if(wearer.pinned.len)
+		src << "<span class='notice'>Your host is pinned to a wall by [wearer.pinned[1]]</span>!"
+		return 0
+
+	// AIs are a bit slower than regular and ignore move intent.
+	wearer.last_move_intent = world.time + ai_controlled_move_delay
+	wearer_move_delay = world.time + ai_controlled_move_delay
+
+	var/tickcomp = 0
+	if(config.Tickcomp)
+		tickcomp = ((1/(world.tick_lag))*1.3) - 1.3
+		wearer_move_delay += tickcomp
+
+	if(istype(wearer.buckled, /obj/vehicle))
+		//manually set move_delay for vehicles so we don't inherit any mob movement penalties
+		//specific vehicle move delays are set in code\modules\vehicles\vehicle.dm
+		wearer_move_delay = world.time + tickcomp
+		return wearer.buckled.relaymove(wearer, direction)
+
+	if(istype(wearer.machine, /obj/machinery))
+		if(wearer.machine.relaymove(wearer, direction))
+			return
+
+	if(wearer.pulledby || wearer.buckled) // Wheelchair driving!
+		if(istype(wearer.loc, /turf/space))
+			return // No wheelchair driving in space
+		if(istype(wearer.pulledby, /obj/structure/bed/chair/wheelchair))
+			return wearer.pulledby.relaymove(wearer, direction)
+		else if(istype(wearer.buckled, /obj/structure/bed/chair/wheelchair))
+			if(ishuman(wearer.buckled))
+				var/obj/item/organ/external/l_hand = wearer.get_organ("l_hand")
+				var/obj/item/organ/external/r_hand = wearer.get_organ("r_hand")
+				if((!l_hand || (l_hand.status & ORGAN_DESTROYED)) && (!r_hand || (r_hand.status & ORGAN_DESTROYED)))
+					return // No hands to drive your chair? Tough luck!
+			wearer_move_delay += 2
+			return wearer.buckled.relaymove(wearer,direction)
+
+	cell.use(200) //Arbitrary, TODO
+	wearer.Move(get_step(get_turf(wearer),direction),direction)
 
 /atom/proc/get_rig()
 	if(loc)

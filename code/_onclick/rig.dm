@@ -47,13 +47,13 @@
 			return
 	..()
 
-/mob/living/carbon/human/proc/HardsuitClickOn(atom/A)
+/mob/living/carbon/human/proc/HardsuitClickOn(var/atom/A, var/alert_ai = 0)
 	if(back)
 		var/obj/item/weapon/rig/rig = back
 		if(istype(rig) && rig.selected_module)
 			if(world.time <= next_move) return 1
 			next_move = world.time + 8
-			rig.selected_module.engage(A)
+			rig.selected_module.engage(A, alert_ai)
 			return 1
 	return 0
 

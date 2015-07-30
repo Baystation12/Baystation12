@@ -689,40 +689,52 @@
 	if(transforming)						return 0
 	return 1
 
+// Not sure what to call this. Used to check if humans are wearing an AI-controlled exosuit and hence don't need to fall over yet.
+/mob/proc/can_stand_overridden()
+	return 0
+
+/mob/proc/cannot_stand()
+	return stat || weakened || paralysis || resting || sleeping || (status_flags & FAKEDEATH)
+
 //Updates canmove, lying and icons. Could perhaps do with a rename but I can't think of anything to describe it.
 /mob/proc/update_canmove()
-	if(istype(buckled, /obj/vehicle))
-		var/obj/vehicle/V = buckled
-		if(stat || weakened || paralysis || resting || sleeping || (status_flags & FAKEDEATH))
-			lying = 1
-			canmove = 0
-			pixel_y = V.mob_offset_y - 5
-		else
-			if(buckled.buckle_lying != -1) lying = buckled.buckle_lying
-			canmove = 1
-			pixel_y = V.mob_offset_y
-	else if(buckled)
-		anchored = 1
-		canmove = 0
-		if(istype(buckled))
-			if(buckled.buckle_lying != -1)
-				lying = buckled.buckle_lying
-			if(buckled.buckle_movable)
-				anchored = 0
-				canmove = 1
 
-	else if( stat || weakened || paralysis || resting || sleeping || (status_flags & FAKEDEATH))
-		lying = 1
-		canmove = 0
-	else if(stunned)
-		canmove = 0
-	else if(captured)
-		anchored = 1
-		canmove = 0
-		lying = 0
-	else
+	if(!resting && cannot_stand() && can_stand_overridden())
 		lying = 0
 		canmove = 1
+	else
+		if(istype(buckled, /obj/vehicle))
+			var/obj/vehicle/V = buckled
+			if(cannot_stand())
+				lying = 1
+				canmove = 0
+				pixel_y = V.mob_offset_y - 5
+			else
+				if(buckled.buckle_lying != -1) lying = buckled.buckle_lying
+				canmove = 1
+				pixel_y = V.mob_offset_y
+		else if(buckled)
+			anchored = 1
+			canmove = 0
+			if(istype(buckled))
+				if(buckled.buckle_lying != -1)
+					lying = buckled.buckle_lying
+				if(buckled.buckle_movable)
+					anchored = 0
+					canmove = 1
+
+		else if(cannot_stand())
+			lying = 1
+			canmove = 0
+		else if(stunned)
+			canmove = 0
+		else if(captured)
+			anchored = 1
+			canmove = 0
+			lying = 0
+		else
+			lying = 0
+			canmove = 1
 
 	if(lying)
 		density = 0
