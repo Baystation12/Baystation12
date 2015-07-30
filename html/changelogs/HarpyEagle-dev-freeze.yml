@@ -1,3 +1,4 @@
 author: HarpyEagle
-changes: []
 delete-after: false
+changes:
+  - bugfix: "Fixed projectiles being able to hit people in body parts that they don't have. This will also mean that the less limbs someone has the less effective they will be as a body shield."

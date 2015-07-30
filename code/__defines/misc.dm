@@ -117,8 +117,8 @@
 #define DOOR_OPEN_LAYER 2.7		//Under all objects if opened. 2.7 due to tables being at 2.6
 #define DOOR_CLOSED_LAYER 3.1	//Above most items if closed
 #define LIGHTING_LAYER 11
-#define OBFUSCATION_LAYER 14	//Where images covering the view for eyes are put
-#define SCREEN_LAYER 17			//Mob HUD/effects layer
+#define OBFUSCATION_LAYER 21	//Where images covering the view for eyes are put
+#define SCREEN_LAYER 22			//Mob HUD/effects layer
 
 // Convoluted setup so defines can be supplied by Bay12 main server compile script.
 // Should still work fine for people jamming the icons into their repo.
@@ -154,3 +154,7 @@
 #define BOMBCAP_HEAVY_RADIUS (max_explosion_range/2)
 #define BOMBCAP_LIGHT_RADIUS max_explosion_range
 #define BOMBCAP_FLASH_RADIUS (max_explosion_range*1.5)
+
+// Special return values from bullet_act(). Positive return values are already used to indicate the blocked level of the projectile.
+#define PROJECTILE_CONTINUE   -1 //if the projectile should continue flying after calling bullet_act()
+#define PROJECTILE_FORCE_MISS -2 //if the projectile should treat the attack as a miss (suppresses attack and admin logs) - only applies to mobs.
