@@ -100,10 +100,15 @@
     A.AIMiddleClick(src)
 
 /*
-	Sticking a minor pAI override into this because I can.
+	Sticking minor pAI and brain overrides into this because I can.
 */
 /mob/living/silicon/pai/MiddleClickOn(var/atom/A)
 	if(src.loc == src.card)
+		return A.AIMiddleClick(src)
+	return ..()
+
+/mob/living/cabon/bran/MiddleClickOn(var/atom/A)
+	if(istype(src.loc, /obj/item/device/mmi))
 		return A.AIMiddleClick(src)
 	return ..()
 
