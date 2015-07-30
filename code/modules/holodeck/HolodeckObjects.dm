@@ -3,34 +3,51 @@
 // Holographic tables are in code/modules/tables/presets.dm
 // Holographic racks are in code/modules/tables/rack.dm
 
-/turf/simulated/floor/holofloor/
+/turf/simulated/floor/holofloor
 	thermal_conductivity = 0
 
+/turf/simulated/floor/holofloor/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	return
+	// HOLOFLOOR DOES NOT GIVE A FUCK
+
+/turf/simulated/floor/holofloor/set_flooring()
+	return
+
 /turf/simulated/floor/holofloor/grass
-	name = "Lush Grass"
-	icon_state = "grass1"
+	name = "lush grass"
+	icon = 'icons/turf/flooring/grass.dmi'
+	icon_state = "grass0"
+	initial_flooring = /decl/flooring/grass
 
 /turf/simulated/floor/holofloor/space
 	icon = 'icons/turf/space.dmi'
 	name = "\proper space"
 	icon_state = "0"
 
+/turf/simulated/floor/holofloor/reinforced
+	icon = 'icons/turf/flooring/tiles.dmi'
+	initial_flooring = /decl/flooring/reinforced
+	name = "reinforced holofloor"
+	icon_state = "reinforced"
+
 /turf/simulated/floor/holofloor/space/New()
 	icon_state = "[((x + y) ^ ~(x * y) + z) % 25]"
 
 /turf/simulated/floor/holofloor/desert
 	name = "desert sand"
+	base_name = "desert sand"
 	desc = "Uncomfortably gritty for a hologram."
+	base_desc = "Uncomfortably gritty for a hologram."
 	icon_state = "asteroid"
+	base_icon_state = "asteroid"
+	icon = 'icons/turf/flooring/asteroid.dmi'
+	base_icon = 'icons/turf/flooring/asteroid.dmi'
+	initial_flooring = null
 
 /turf/simulated/floor/holofloor/desert/New()
 	..()
 	if(prob(10))
 		overlays += "asteroid[rand(0,9)]"
-
-/turf/simulated/floor/holofloor/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	return
-	// HOLOFLOOR DOES NOT GIVE A FUCK
 
 /obj/structure/holostool
 	name = "stool"
@@ -39,7 +56,6 @@
 	icon_state = "stool_padded_preview"
 	anchored = 1.0
 	pressure_resistance = 15
-
 
 /obj/item/clothing/gloves/boxing/hologlove
 	name = "boxing gloves"
