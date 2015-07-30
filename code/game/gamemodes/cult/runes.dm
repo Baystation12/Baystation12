@@ -598,6 +598,7 @@ var/list/sacrificed = list()
 				usr.say("[input]")
 			else
 				usr.whisper("[input]")
+			log_and_message_admins("used a communicate rune to say '[input]'")
 			for(var/datum/mind/H in ticker.mode.cult)
 				if (H.current)
 					H.current << "\red \b [input]"
