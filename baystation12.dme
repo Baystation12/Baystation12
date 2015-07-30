@@ -1460,6 +1460,7 @@
 #include "code\modules\random_map\random_map.dm"
 #include "code\modules\reagents\Chemistry-Colours.dm"
 #include "code\modules\reagents\Chemistry-Holder.dm"
+#include "code\modules\reagents\Chemistry-Logging.dm"
 #include "code\modules\reagents\Chemistry-Machinery.dm"
 #include "code\modules\reagents\Chemistry-Metabolism.dm"
 #include "code\modules\reagents\Chemistry-Readme.dm"
