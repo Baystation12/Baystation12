@@ -268,11 +268,11 @@ var/list/global/organ_rel_size = list(
 /proc/get_zone_with_miss_chance(zone, var/mob/target, var/miss_chance_mod = 0, var/ranged_attack=0)
 	zone = check_zone(zone)
 
-	// you cannot miss if your target is prone or restrained
-	if(target.buckled || target.lying)
-		return zone
-	// if your target is being grabbed aggressively by someone you cannot miss either
 	if(!ranged_attack)
+		// you cannot miss if your target is prone or restrained
+		if(target.buckled || target.lying)
+			return zone
+		// if your target is being grabbed aggressively by someone you cannot miss either
 		for(var/obj/item/weapon/grab/G in target.grabbed_by)
 			if(G.state >= GRAB_AGGRESSIVE)
 				return zone
