@@ -9,6 +9,7 @@
 	var/result_amount = 0
 	var/mix_message = "The solution begins to bubble."
 
+	var/log_is_important = 0 // If this reaction should be considered important for logging. Important recipes message admins when mixed, non-important ones just log to file.
 /datum/chemical_reaction/proc/can_happen(var/datum/reagents/holder)
 	return 1
 
@@ -146,6 +147,7 @@
 	result = "kelotane"
 	required_reagents = list("silicon" = 1, "carbon" = 1)
 	result_amount = 2
+			log_is_important = 1
 
 /datum/chemical_reaction/peridaxon
 	name = "Peridaxon"
@@ -392,6 +394,7 @@
 	result = "coolant"
 	required_reagents = list("tungsten" = 1, "oxygen" = 1, "water" = 1)
 	result_amount = 3
+			log_is_important = 1
 
 /datum/chemical_reaction/rezadone
 	name = "Rezadone"
