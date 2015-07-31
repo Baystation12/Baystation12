@@ -91,6 +91,8 @@ var/global/datum/controller/gameticker/ticker
 	else
 		src.mode = config.pick_mode(master_mode)
 
+	src.mode.pre_setup()
+
 	job_master.DivideOccupations() // Apparently important for new antagonist system to register specific job antags properly.
 
 	if(!mode_started && !src.mode.can_start())
