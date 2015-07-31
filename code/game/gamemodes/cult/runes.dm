@@ -592,6 +592,7 @@ var/list/sacrificed = list()
 				usr.whisper("[input]")
 
 			input = sanitize(input)
+			log_and_message_admins("used a communicate rune to say '[input]'")
 			for(var/datum/mind/H in cult.current_antagonists)
 				if (H.current)
 					H.current << "<span class='danger'>[input]</span>"

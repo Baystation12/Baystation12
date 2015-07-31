@@ -7,7 +7,6 @@
 	//slot_flags = SLOT_EYES
 	//var/vision_flags = 0
 	//var/darkness_view = 0//Base human is 2
-	//var/invisa_view = 0
 	var/prescription = 0
 	var/toggleable = 0
 	var/off_state = "degoggles"
@@ -75,6 +74,8 @@
 	origin_tech = list(TECH_MAGNET = 2)
 	darkness_view = 7
 	toggleable = 1
+	see_invisible = SEE_INVISIBLE_OBSERVER_NOLIGHTING
+	icon_action_button = "action_nvg"
 	off_state = "denight"
 
 /obj/item/clothing/glasses/night/New()
@@ -220,7 +221,6 @@
 	origin_tech = list(TECH_MAGNET = 3)
 	toggleable = 1
 	vision_flags = SEE_MOBS
-	invisa_view = 2
 
 	emp_act(severity)
 		if(istype(src.loc, /mob/living/carbon/human))
