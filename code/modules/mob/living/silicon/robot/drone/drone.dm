@@ -213,9 +213,9 @@
 			death()
 
 /mob/living/silicon/robot/drone/proc/full_law_reset()
-	clear_supplied_laws()
-	clear_inherent_laws()
-	clear_ion_laws()
+	clear_supplied_laws(1)
+	clear_inherent_laws(1)
+	clear_ion_laws(1)
 	laws = new law_type
 
 //Reboot procs.

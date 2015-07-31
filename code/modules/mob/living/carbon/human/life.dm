@@ -1397,6 +1397,8 @@
 			sight |= G.vision_flags
 			if(!druggy && !seer)
 				see_invisible = SEE_INVISIBLE_MINIMUM
+		if(G.see_invisible >= 0)
+			see_invisible = G.see_invisible
 		if(istype(G,/obj/item/clothing/glasses/night) && !seer)
 			see_invisible = SEE_INVISIBLE_MINIMUM
 /* HUD shit goes here, as long as it doesn't modify sight flags */
