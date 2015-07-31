@@ -74,8 +74,7 @@
 	origin_tech = list(TECH_MAGNET = 2)
 	darkness_view = 7
 	toggleable = 1
-	see_invisible = SEE_INVISIBLE_OBSERVER_NOLIGHTING
-	icon_action_button = "action_nvg"
+	see_invisible = SEE_INVISIBLE_NOLIGHTING
 	off_state = "denight"
 
 /obj/item/clothing/glasses/night/New()

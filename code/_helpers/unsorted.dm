@@ -1318,6 +1318,10 @@ var/mob/dview/dview_mob = new
 		set_light(origin.light_range, origin.light_power, origin.light_color)
 
 /mob/dview/New()
-	// Do nothing except call parent. We don't want to be in any mob lists; we're a dummy not a mob.
 	..()
-
+	// We don't want to be in any mob lists; we're a dummy not a mob.
+	mob_list -= src
+	if(stat == DEAD)
+		dead_mob_list -= src
+	else
+		living_mob_list -= src
