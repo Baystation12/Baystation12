@@ -71,6 +71,7 @@
 	var/offline_slowdown = 3                                  // If the suit is deployed and unpowered, it sets slowdown to this.
 	var/vision_restriction
 	var/offline_vision_restriction = 1                        // 0 - none, 1 - welder vision, 2 - blind. Maybe move this to helmets.
+	var/airtight = 1 //If set, will adjust AIRTIGHT and STOPPRESSUREDAMAGE flags on components. Otherwise it should leave them untouched.
 
 	var/emp_protection = 0
 
@@ -178,8 +179,9 @@
 	for(var/obj/item/piece in list(helmet,boots,gloves,chest))
 		if(!piece) continue
 		piece.icon_state = "[initial(icon_state)]"
-		piece.flags &= ~STOPPRESSUREDAMAGE
-		piece.flags &= ~AIRTIGHT
+		if(airtight)
+			piece.flags &= ~STOPPRESSUREDAMAGE
+			piece.flags &= ~AIRTIGHT
 	update_icon(1)
 
 /obj/item/weapon/rig/proc/toggle_seals(var/mob/living/carbon/human/M,var/instant)
@@ -247,11 +249,6 @@
 							M << "<font color='blue'>\The [piece] hisses [!seal_target ? "closed" : "open"].</font>"
 							M.update_inv_head()
 							if(helmet)
-								if(!seal_target)
-									if(flags & AIRTIGHT)
-										helmet.flags |= AIRTIGHT
-								else
-									helmet.flags &= ~AIRTIGHT
 								helmet.update_light(wearer)
 
 					//sealed pieces become airtight, protecting against diseases
@@ -273,13 +270,8 @@
 			if(!piece) continue
 			piece.icon_state = "[initial(icon_state)][!seal_target ? "" : "_sealed"]"
 		canremove = !seal_target
-		if(helmet)
-			if(canremove)
-				if(flags & AIRTIGHT)
-					helmet.flags |= AIRTIGHT
-			else
-				if(flags & AIRTIGHT)
-					helmet.flags &= ~AIRTIGHT
+		if(airtight)
+			update_component_sealed()
 		update_icon(1)
 		return 0
 
@@ -290,15 +282,18 @@
 	if(canremove)
 		for(var/obj/item/rig_module/module in installed_modules)
 			module.deactivate()
+	if(airtight)
+		update_component_sealed()
+	update_icon(1)
+
+/obj/item/weapon/rig/proc/update_component_sealed()
 	for(var/obj/item/piece in list(helmet,boots,gloves,chest))
-		if(!piece) continue
 		if(canremove)
 			piece.flags &= ~STOPPRESSUREDAMAGE
 			piece.flags &= ~AIRTIGHT
 		else
 			piece.flags |=  STOPPRESSUREDAMAGE
 			piece.flags |=  AIRTIGHT
-	update_icon(1)
 
 /obj/item/weapon/rig/process()
 
