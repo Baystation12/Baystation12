@@ -1244,6 +1244,9 @@
 				else
 					seer = 0
 
+			if(!seer)
+				see_invisible = SEE_INVISIBLE_LIVING
+
 			var/equipped_glasses = glasses
 			var/obj/item/weapon/rig/rig = back
 			if(istype(rig) && rig.visor)
@@ -1252,9 +1255,6 @@
 						equipped_glasses = rig.visor.vision.glasses
 			if(equipped_glasses)
 				process_glasses(equipped_glasses)
-
-			if(!seer)
-				see_invisible = SEE_INVISIBLE_LIVING
 
 			if(healths)
 				if (analgesic > 100)
@@ -1403,8 +1403,8 @@
 				sight |= G.vision_flags
 				if(!druggy && !seer)
 					see_invisible = SEE_INVISIBLE_MINIMUM
-			if(istype(G,/obj/item/clothing/glasses/night) && !seer)
-				see_invisible = SEE_INVISIBLE_MINIMUM
+			if(G.see_invisible >= 0)
+				see_invisible = G.see_invisible
 	/* HUD shit goes here, as long as it doesn't modify sight flags */
 	// The purpose of this is to stop xray and w/e from preventing you from using huds -- Love, Doohl
 			var/obj/item/clothing/glasses/hud/O = G
