@@ -201,6 +201,7 @@
 	transfer.control_disabled = 0
 	transfer.aiRadio.disabledAi = 0
 	transfer.loc = get_turf(src)
+	transfer.create_eyeobj()
 	transfer.cancel_camera()
 	user << "\blue <b>Transfer successful</b>: \black [transfer.name] ([rand(1000,9999)].exe) downloaded to host terminal. Local copy wiped."
 	transfer << "You have been uploaded to a stationary terminal. Remote device connection restored."
