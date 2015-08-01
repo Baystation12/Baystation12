@@ -6,6 +6,7 @@ var/list/floor_decals = list()
 /obj/effect/floor_decal
 	name = "floor decal"
 	icon = 'icons/turf/flooring/decals.dmi'
+	layer = TURF_LAYER + 0.1
 
 /obj/effect/floor_decal/initialize()
 	var/turf/simulated/floor/F = get_turf(src)
@@ -23,13 +24,19 @@ var/list/floor_decals = list()
 	qdel(src)
 	return
 
-/obj/effect/floor_decal/corner
+/obj/effect/floor_decal/corner/blue
 	name = "blue corner"
 	icon_state = "corner_blue"
+
+/obj/effect/floor_decal/corner/blue/full
+	icon_state = "corner_blue_full"
 
 /obj/effect/floor_decal/corner/green
 	name = "green corner"
 	icon_state = "corner_green"
+
+/obj/effect/floor_decal/corner/green/full
+	icon_state = "corner_green_full"
 
 /obj/effect/floor_decal/corner/yellow
 	name = "yellow corner"
@@ -42,6 +49,9 @@ var/list/floor_decals = list()
 /obj/effect/floor_decal/corner/pink
 	name = "pink corner"
 	icon_state = "corner_pink"
+
+/obj/effect/floor_decal/corner/pink/full
+	icon_state = "corner_pink_full"
 
 /obj/effect/floor_decal/corner/purple
 	name = "purple corner"
@@ -58,3 +68,49 @@ var/list/floor_decals = list()
 /obj/effect/floor_decal/corner/white
 	name = "white corner"
 	icon_state = "corner_white"
+
+/obj/effect/floor_decal/industrial/warning
+	name = "hazard stripes"
+	icon_state = "warning"
+
+/obj/effect/floor_decal/industrial/warning/corner
+	icon_state = "warningcorner"
+
+/obj/effect/floor_decal/industrial/warning/full
+	icon_state = "warningfull"
+
+/obj/effect/floor_decal/industrial/warning/cee
+	icon_state = "warningcee"
+
+/obj/effect/floor_decal/industrial/hatch
+	name = "hatched marking"
+	icon_state = "delivery"
+
+/obj/effect/floor_decal/industrial/outline/yellow
+	name = "yellow outline"
+	icon_state = "bot"
+
+/obj/effect/floor_decal/industrial/outline/blue
+	name = "blue outline"
+	icon_state = "platebotc"
+
+/obj/effect/floor_decal/industrial/loading
+	name = "loading area"
+	icon_state = "loadingarea"
+
+/obj/effect/floor_decal/plaque
+	name = "plaque"
+	icon_state = "plaque"
+
+/obj/effect/floor_decal/asteroid
+	name = "random asteroid rubble"
+	icon_state = "asteroid0"
+
+/obj/effect/floor_decal/asteroid/New()
+	icon_state = "asteroid[rand(0,9)]"
+	..()
+
+/obj/effect/floor_decal/chapel
+	name = "chapel"
+	icon_state = "chapel"
+

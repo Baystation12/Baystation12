@@ -113,6 +113,9 @@
 	nitrogen = 0
 	temperature = TCMB
 
+/turf/simulated/floor/greengrid/nitrogen
+	oxygen = 0
+
 /turf/simulated/floor/tiled/white/airless
 	name = "airless floor"
 	oxygen = 0
