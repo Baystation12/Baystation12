@@ -86,6 +86,13 @@ var/list/flooring_types
 	icon = 'icons/turf/flooring/linoleum.dmi'
 	icon_base = "lino"
 
+/decl/flooring/tiling/red
+	name = "red floor"
+	icon_base = "red"
+	has_damage_range = null
+	flags = TURF_REMOVE_CROWBAR
+	build_type = /obj/item/stack/tile/floor_red
+
 /decl/flooring/tiling/white
 	name = "white floor"
 	desc = "How sterile."
@@ -93,6 +100,13 @@ var/list/flooring_types
 	has_damage_range = null
 	flags = TURF_REMOVE_CROWBAR
 	build_type = /obj/item/stack/tile/floor_white
+
+/decl/flooring/tiling/yellow
+	name = "yellow floor"
+	icon_base = "yellow"
+	has_damage_range = null
+	flags = TURF_REMOVE_CROWBAR
+	build_type = /obj/item/stack/tile/floor_yellow
 
 /decl/flooring/tiling/dark
 	name = "dark floor"

@@ -28,6 +28,9 @@ var/list/floor_decals = list()
 	name = "blue corner"
 	icon_state = "corner_blue"
 
+/obj/effect/floor_decal/corner/blue/diagonal
+	icon_state = "corner_blue_diagonal"
+
 /obj/effect/floor_decal/corner/blue/full
 	icon_state = "corner_blue_full"
 
@@ -57,6 +60,10 @@ var/list/floor_decals = list()
 	name = "purple corner"
 	icon_state = "corner_purple"
 
+/obj/effect/floor_decal/corner/purple/full
+	name = "purple corner"
+	icon_state = "corner_purple_full"
+
 /obj/effect/floor_decal/corner/orange
 	name = "orange corner"
 	icon_state = "corner_orange"
@@ -68,6 +75,20 @@ var/list/floor_decals = list()
 /obj/effect/floor_decal/corner/white
 	name = "white corner"
 	icon_state = "corner_white"
+
+/obj/effect/floor_decal/corner/white/diagonal
+	icon_state = "corner_white_diagonal"
+
+/obj/effect/floor_decal/corner/white/full
+	icon_state = "corner_white_full"
+
+/obj/effect/floor_decal/corner/grey
+	name = "grey corner"
+	icon_state = "corner_grey"
+
+/obj/effect/floor_decal/corner/grey/full
+	name = "grey corner"
+	icon_state = "corner_grey_full"
 
 /obj/effect/floor_decal/industrial/warning
 	name = "hazard stripes"
