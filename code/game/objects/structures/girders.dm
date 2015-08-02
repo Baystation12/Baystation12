@@ -25,7 +25,7 @@
 /obj/structure/girder/bullet_act(var/obj/item/projectile/Proj)
 	//Girders only provide partial cover. There's a chance that the projectiles will just pass through. (unless you are trying to shoot the girder)
 	if(Proj.original != src && !prob(cover))
-		return -1 //pass through
+		return PROJECTILE_CONTINUE //pass through
 
 	//Tasers and the like should not damage girders.
 	if(!(Proj.damage_type == BRUTE || Proj.damage_type == BURN))
