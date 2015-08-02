@@ -37,7 +37,7 @@
 
 	var/dat = "<h1>Ore processor console</h1>"
 
-	dat += "<hr><table>"
+	dat += "<hr><h2>Ore Processing</h2><br><table>"
 
 	for(var/ore in machine.ores_processing)
 
@@ -45,21 +45,34 @@
 		var/ore/O = ore_data[ore]
 		if(!O) continue
 		dat += "<tr><td width = 40><b>[capitalize(O.display_name)]</b></td><td width = 30>[machine.ores_stored[ore]]</td><td width = 100><font color='"
-		if(machine.ores_processing[ore])
-			switch(machine.ores_processing[ore])
-				if(0)
-					dat += "red'>not processing"
-				if(1)
-					dat += "orange'>smelting"
-				if(2)
-					dat += "blue'>compressing"
-				if(3)
-					dat += "gray'>alloying"
-		else
-			dat += "red'>not processing"
+		switch(machine.ores_processing[ore])
+			if(0)
+				dat += "red'>not processing"
+			if(1)
+				dat += "orange'>smelting"
+			if(2)
+				dat += "blue'>compressing"
+			if(3)
+				dat += "gray'>alloying"
 		dat += "</font>.</td><td width = 30><a href='?src=\ref[src];toggle_smelting=[ore]'>\[change\]</a></td></tr>"
 
 	dat += "</table><hr>"
+	
+	dat += "<h2>Material Recycling</h2><table>"
+	
+	for(var/recycling in machine.shards_processing)
+		if(!machine.shards_stored[recycling] && !show_all_ores) continue
+		var/material/M = get_material_by_name(recycling)
+		if(!M) continue
+		dat += "<tr><td width = 40><b>[capitalize(M.display_name)]</b></td><td width = 30>[machine.shards_stored[recycling]]</td><td width = 100><font color='"
+		if(machine.shards_processing[recycling])
+			dat += "green'>recycling"
+		else
+			dat += "red'>not processing"
+		dat += "</font>.</td><td width = 30><a href='?src=\ref[src];toggle_recycling=[recycling]'>\[change\]</a></td></tr>"
+	
+	dat += "</table><hr>"
+	
 	dat += "Currently displaying [show_all_ores ? "all ore types" : "only available ore types"]. <A href='?src=\ref[src];toggle_ores=1'>\[[show_all_ores ? "show less" : "show more"]\]</a></br>"
 	dat += "The ore processor is currently <A href='?src=\ref[src];toggle_power=1'>[(machine.active ? "<font color='green'>processing</font>" : "<font color='red'>disabled</font>")]</a>."
 	user << browse(dat, "window=processor_console;size=400x500")
@@ -85,6 +98,10 @@
 
 		machine.ores_processing[href_list["toggle_smelting"]] = choice
 
+	if(href_list["toggle_recycling"])
+		var/item = href_list["toggle_recycling"]
+		machine.shards_processing[item] = !machine.shards_processing[item]
+	
 	if(href_list["toggle_power"])
 
 		machine.active = !machine.active
@@ -111,7 +128,9 @@
 	var/obj/machinery/mineral/console = null
 	var/sheets_per_tick = 10
 	var/list/ores_processing[0]
-	var/list/ores_stored[0]
+	var/list/ores_stored[0]		//also indicates what kinds of ores this machine will accept
+	var/list/shards_stored[0]	//same for shards.
+	var/list/shards_processing[0]
 	var/static/list/alloy_data
 	var/active = 0
 
@@ -125,11 +144,20 @@
 			alloy_data += new alloytype()
 
 	if(!ore_data || !ore_data.len)
+		//the machine can process all ore types
 		for(var/oretype in typesof(/ore)-/ore)
 			var/ore/OD = new oretype()
 			ore_data[OD.name] = OD
 			ores_processing[OD.name] = 0
 			ores_stored[OD.name] = 0
+		
+		//as well as all recyclable materials that are not ore materials
+		for(var/material/material in get_all_materials())
+			if(material.shard_type && material.shard_can_repair && !ore_data[material.name])
+				//could just index by the material instance itself, but that might cause problems if populate_material_list() is called with force_remake = 1
+				//then again, lots of other stuff would break if that happened too, not just processing_units.
+				shards_stored[material.name] = 0
+				shards_processing[material.name] = 0
 
 	//Locate our output and input machinery.
 	spawn(5)
@@ -142,6 +170,30 @@
 		return
 	return
 
+/obj/machinery/mineral/processing_unit/proc/try_ingest(atom/movable/feed)
+	if(istype(feed, /obj/item/weapon/ore))
+		var/obj/item/weapon/ore/O = feed
+		if(!isnull(ores_stored[O.material]))
+			ores_stored[O.material]++
+			qdel(O)
+			return 1
+	if(istype(feed, /obj/item/weapon/material/shard))
+		var/obj/item/weapon/material/shard/S = feed
+		var/material/M = S.material
+		
+		//if it's a smeltable material treat it as an ore so that people can do alloying and stuff
+		if(!isnull(ores_stored[M.name]))
+			ores_stored[M.name]++
+			qdel(S)
+			return 1
+		
+		//otherwise treat it as a non-smeltable recyclable material (probably just glass for now)
+		if(!isnull(shards_stored[M.name]))
+			shards_stored[M.name]++
+			qdel(S)
+			return 1
+	return 0
+
 /obj/machinery/mineral/processing_unit/process()
 
 	if (!src.output || !src.input) return
@@ -149,13 +201,12 @@
 	var/list/tick_alloys = list()
 
 	//Grab some more ore to process this tick.
-	for(var/i = 0,i<sheets_per_tick,i++)
-		var/obj/item/weapon/ore/O = locate() in input.loc
-		if(!O) break
-		if(!isnull(ores_stored[O.material]))
-			ores_stored[O.material]++
-
-		qdel(O)
+	var/ingested = 0
+	for(var/atom/movable/A in input.loc)
+		if(try_ingest(A))
+			ingested++
+		if(ingested >= sheets_per_tick)
+			break
 
 	if(!active)
 		return
@@ -239,4 +290,17 @@
 		else
 			continue
 
+	//handle non-smeltable recyclable materials
+	for(var/recycling in shards_stored)
+		if(sheets >= sheets_per_tick) break
+		
+		if(!shards_stored[recycling] || !shards_processing[recycling]) continue
+		
+		var/material/M = get_material_by_name(recycling)
+		if(!M) continue
+		
+		shards_stored[recycling]--
+		sheets++
+		M.place_sheet(output.loc)
+	
 	console.updateUsrDialog()
