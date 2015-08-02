@@ -49,6 +49,13 @@ var/list/floor_decals = list()
 	name = "red corner"
 	icon_state = "corner_red"
 
+/obj/effect/floor_decal/corner/red/diagonal
+	name = "red corner"
+	icon_state = "corner_red_diagonal"
+
+/obj/effect/floor_decal/corner/red/full
+	icon_state = "corner_red_full"
+
 /obj/effect/floor_decal/corner/pink
 	name = "pink corner"
 	icon_state = "corner_pink"
@@ -107,13 +114,17 @@ var/list/floor_decals = list()
 	name = "hatched marking"
 	icon_state = "delivery"
 
-/obj/effect/floor_decal/industrial/outline/yellow
-	name = "yellow outline"
-	icon_state = "bot"
-
 /obj/effect/floor_decal/industrial/outline/blue
 	name = "blue outline"
-	icon_state = "platebotc"
+	icon_state = "outline_blue"
+
+/obj/effect/floor_decal/industrial/outline/yellow
+	name = "yellow outline"
+	icon_state = "outline_yellow"
+
+/obj/effect/floor_decal/industrial/outline/grey
+	name = "grey outline"
+	icon_state = "outline_grey"
 
 /obj/effect/floor_decal/industrial/loading
 	name = "loading area"
