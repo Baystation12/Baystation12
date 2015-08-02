@@ -249,15 +249,16 @@
 		target = null
 		repairing = 0
 		update_icons()
-	else if(istype(A, /obj/item/stack/material/steel) && amount + 3 < maxAmount)
-		var/obj/item/stack/material/steel/M = A
-		visible_message("<span class='notice'>[src] begins to make tiles.</span>")
-		repairing = 1
-		update_icons()
-		if(do_after(50))
-			if(M)
-				M.use(1)
-				addTiles(4)
+	else if(istype(A, /obj/item/stack/material) && amount + 4 <= maxAmount)
+		var/obj/item/stack/material/M = A
+		if(M.get_material_name() == DEFAULT_WALL_MATERIAL)
+			visible_message("<span class='notice'>[src] begins to make tiles.</span>")
+			repairing = 1
+			update_icons()
+			if(do_after(50))
+				if(M)
+					M.use(1)
+					addTiles(4)
 
 /mob/living/bot/floorbot/explode()
 	turn_off()

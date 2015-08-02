@@ -125,7 +125,7 @@
 
 /obj/item/robot_parts/robot_suit/attackby(obj/item/W as obj, mob/user as mob)
 	..()
-	if(istype(W, /obj/item/stack/material/steel) && !l_arm && !r_arm && !l_leg && !r_leg && !chest && !head)
+	if(istype(W, /obj/item/stack/material) && W.get_material_name() == DEFAULT_WALL_MATERIAL && !l_arm && !r_arm && !l_leg && !r_leg && !chest && !head)
 		var/obj/item/stack/material/steel/M = W
 		if (M.use(1))
 			var/obj/item/weapon/secbot_assembly/ed209_assembly/B = new /obj/item/weapon/secbot_assembly/ed209_assembly

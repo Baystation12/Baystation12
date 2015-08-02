@@ -44,6 +44,8 @@
 
 /obj/item/stack/material/proc/update_strings()
 	// Update from material datum.
+	singular_name = material.sheet_singular_name
+	
 	if(amount>1)
 		name = "[material.use_name] [material.sheet_plural_name]"
 		desc = "A stack of [material.use_name] [material.sheet_plural_name]."

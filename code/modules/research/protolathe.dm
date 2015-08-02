@@ -144,28 +144,29 @@ Note: Must be placed west/left of and R&D console to function.
 		icon_state = "protolathe"
 		busy = 1
 		use_power(max(1000, (3750 * amount / 10)))
-		var/stacktype = stack.type
-		stack.use(amount)
-		if(do_after(user, 16))
+		var/material/material = stack.get_material()
+		if(istype(material) && stack.use(amount) && do_after(user, 16))
 			user << "<span class='notice'>You add [amount] sheets to \the [src].</span>"
 			icon_state = "protolathe"
-			switch(stacktype)
-				if(/obj/item/stack/material/steel)
-					m_amount += amount * 3750
-				if(/obj/item/stack/material/glass)
-					g_amount += amount * 3750
-				if(/obj/item/stack/material/gold)
-					gold_amount += amount * 2000
-				if(/obj/item/stack/material/silver)
-					silver_amount += amount * 2000
-				if(/obj/item/stack/material/phoron)
-					phoron_amount += amount * 2000
-				if(/obj/item/stack/material/uranium)
-					uranium_amount += amount * 2000
-				if(/obj/item/stack/material/diamond)
-					diamond_amount += amount * 2000
-		else
-			new stacktype(loc, amount)
+			
+			var/amount_to_add = amount * material.stack_per_sheet
+			switch(material.name)
+				if(DEFAULT_WALL_MATERIAL)
+					m_amount += amount_to_add
+				if("glass")
+					g_amount += amount_to_add
+				if("gold")
+					gold_amount += amount_to_add
+				if("silver")
+					silver_amount += amount_to_add
+				if("phoron")
+					phoron_amount += amount_to_add
+				if("uranium")
+					uranium_amount += amount_to_add
+				if("diamond")
+					diamond_amount += amount_to_add
+		else if(ispath(material.stack_type))
+			new material.stack_type(loc, amount) //failed, so spit the material back out
 		busy = 0
 		updateUsrDialog()
 		return
