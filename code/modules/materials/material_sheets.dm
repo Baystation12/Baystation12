@@ -39,6 +39,9 @@
 	update_strings()
 	return 1
 
+/obj/item/stack/material/get_material()
+	return material
+
 /obj/item/stack/material/proc/update_strings()
 	// Update from material datum.
 	if(amount>1)

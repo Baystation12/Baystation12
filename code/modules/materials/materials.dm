@@ -27,6 +27,11 @@
 // Assoc list containing all material datums indexed by name.
 var/list/name_to_material
 
+//Returns the material the object is made of, if applicable.
+//Will we ever need to return more than one value here?
+/obj/proc/get_material()
+	return null
+
 // Builds the datum list above.
 /proc/populate_material_list(force_remake=0)
 	if(name_to_material && !force_remake) return // Already set up!
