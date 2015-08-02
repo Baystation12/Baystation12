@@ -145,7 +145,7 @@ Note: Must be placed west/left of and R&D console to function.
 		busy = 1
 		use_power(max(1000, (3750 * amount / 10)))
 		var/material/material = stack.get_material()
-		if(istype(material) && stack.use(amount) && do_after(user, 16))
+		if(istype(material) && do_after(user, 16) && stack.use(amount))
 			user << "<span class='notice'>You add [amount] sheets to \the [src].</span>"
 			icon_state = "protolathe"
 			
@@ -165,8 +165,6 @@ Note: Must be placed west/left of and R&D console to function.
 					uranium_amount += amount_to_add
 				if("diamond")
 					diamond_amount += amount_to_add
-		else if(ispath(material.stack_type))
-			new material.stack_type(loc, amount) //failed, so spit the material back out
 		busy = 0
 		updateUsrDialog()
 		return
