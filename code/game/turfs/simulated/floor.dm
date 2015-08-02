@@ -32,16 +32,15 @@
 	if(!floortype && initial_flooring)
 		floortype = initial_flooring
 	if(floortype)
-		set_flooring(floortype)
+		get_flooring_by_name(floortype)
 
 	//TEMPORARY DEBUGGING LINES, REMOVE LATER
 	if(!flooring && icon_state != "plating")
 		name = "OLDCODE FLOORING WOOP WOOP"
 
-/turf/simulated/floor/proc/set_flooring(var/flooring_type)
+/turf/simulated/floor/proc/set_flooring(var/decl/flooring/newflooring)
 	make_plating(defer_icon_update = 1)
-	if(flooring_type)
-		flooring = get_flooring_data(flooring_type)
+	flooring = newflooring
 	intact = 1
 	update_icon(1)
 	levelupdate()

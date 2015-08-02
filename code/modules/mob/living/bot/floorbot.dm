@@ -15,7 +15,7 @@
 	var/list/path = list()
 	var/list/ignorelist = list()
 	var/turf/target
-	var/floor_build_type = "floor" // Basic steel floor.
+	var/floor_build_type = /decl/flooring/tiling // Basic steel floor.
 
 /mob/living/bot/floorbot/update_icons()
 	if(repairing)
@@ -233,7 +233,7 @@
 			visible_message("<span class='notice'>[src] begins to improve the floor.</span>")
 			if(do_after(src, 50))
 				if(!F.flooring)
-					F.set_flooring(floor_build_type)
+					F.set_flooring(get_flooring_by_name(floor_build_type))
 					addTiles(-1)
 			target = null
 			repairing = 0

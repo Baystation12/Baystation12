@@ -65,7 +65,7 @@ var/list/flooring_types
 	flags = TURF_HAS_EDGES | TURF_HAS_CORNERS | TURF_REMOVE_CROWBAR | TURF_CAN_BURN
 
 /decl/flooring/carpet/blue
-	name = "blue carpet"
+	name = "carpet"
 	icon_base = "bcarpet"
 	build_type = null
 	flags = TURF_HAS_EDGES
@@ -87,21 +87,21 @@ var/list/flooring_types
 	icon_base = "lino"
 
 /decl/flooring/tiling/red
-	name = "red floor"
+	name = "floor"
 	icon_base = "red"
 	has_damage_range = null
 	flags = TURF_REMOVE_CROWBAR
 	build_type = /obj/item/stack/tile/floor_red
 
 /decl/flooring/tiling/steel
-	name = "steel floor"
+	name = "floor"
 	icon_base = "steel"
 	has_damage_range = null
 	flags = TURF_REMOVE_CROWBAR
 	build_type = /obj/item/stack/tile/floor_steel
 
 /decl/flooring/tiling/white
-	name = "white floor"
+	name = "floor"
 	desc = "How sterile."
 	icon_base = "white"
 	has_damage_range = null
@@ -109,14 +109,14 @@ var/list/flooring_types
 	build_type = /obj/item/stack/tile/floor_white
 
 /decl/flooring/tiling/yellow
-	name = "yellow floor"
+	name = "floor"
 	icon_base = "yellow"
 	has_damage_range = null
 	flags = TURF_REMOVE_CROWBAR
 	build_type = /obj/item/stack/tile/floor_yellow
 
 /decl/flooring/tiling/dark
-	name = "dark floor"
+	name = "floor"
 	desc = "How ominous."
 	icon_base = "dark"
 	has_damage_range = null
@@ -124,7 +124,7 @@ var/list/flooring_types
 	build_type = /obj/item/stack/tile/floor_dark
 
 /decl/flooring/tiling/freezer
-	name = "tiled floor"
+	name = "floor"
 	desc = "Don't slip."
 	icon_base = "freezer"
 	has_damage_range = null
@@ -162,6 +162,7 @@ var/list/flooring_types
 	flags = TURF_ACID_IMMUNE | TURF_CAN_BREAK
 
 /decl/flooring/reinforced/circuit/green
+	name = "processing strata"
 	icon_base = "gcircuit"
 
 /decl/flooring/reinforced/cult
