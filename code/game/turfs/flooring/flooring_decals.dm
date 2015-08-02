@@ -6,7 +6,7 @@ var/list/floor_decals = list()
 /obj/effect/floor_decal
 	name = "floor decal"
 	icon = 'icons/turf/flooring/decals.dmi'
-	layer = TURF_LAYER + 0.1
+	layer = TURF_LAYER
 
 /obj/effect/floor_decal/initialize()
 	var/turf/simulated/floor/F = get_turf(src)
@@ -34,6 +34,13 @@ var/list/floor_decals = list()
 /obj/effect/floor_decal/corner/blue/full
 	icon_state = "corner_blue_full"
 
+/obj/effect/floor_decal/corner/paleblue
+	name = "pale blue corner"
+	icon_state = "corner_paleblue"
+
+/obj/effect/floor_decal/corner/paleblue/full
+	icon_state = "corner_paleblue_full"
+
 /obj/effect/floor_decal/corner/green
 	name = "green corner"
 	icon_state = "corner_green"
@@ -55,6 +62,13 @@ var/list/floor_decals = list()
 /obj/effect/floor_decal/corner/yellow/full
 	name = "yellow corner"
 	icon_state = "corner_yellow_full"
+
+/obj/effect/floor_decal/corner/beige
+	name = "beige corner"
+	icon_state = "corner_beige"
+
+/obj/effect/floor_decal/corner/beige/full
+	icon_state = "corner_beige_full"
 
 /obj/effect/floor_decal/corner/red
 	name = "red corner"
@@ -81,6 +95,13 @@ var/list/floor_decals = list()
 /obj/effect/floor_decal/corner/purple/full
 	name = "purple corner"
 	icon_state = "corner_purple_full"
+
+/obj/effect/floor_decal/corner/mauve
+	name = "mauve corner"
+	icon_state = "corner_mauve"
+
+/obj/effect/floor_decal/corner/mauve/full
+	icon_state = "corner_mauve_full"
 
 /obj/effect/floor_decal/corner/orange
 	name = "orange corner"
