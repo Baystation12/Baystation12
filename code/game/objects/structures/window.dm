@@ -467,10 +467,8 @@
 	basestate = "window"
 	maxhealth = 40
 	reinf = 1
+	basestate = "w"
 	dir = 5
-
-	update_icon() //icon_state has to be set manually
-		return
 
 /obj/structure/window/reinforced/polarized
 	name = "electrochromic window"

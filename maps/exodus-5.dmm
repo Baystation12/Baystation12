@@ -196,7 +196,7 @@
 "dN" = (/obj/structure/cable/blue{d1 = 4; d2 = 8; icon_state = "4-8"},/turf/simulated/floor{icon_state = "white"},/area/outpost/research/hallway)
 "dO" = (/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 1},/obj/structure/cable/blue{d1 = 4; d2 = 8; icon_state = "4-8"},/turf/simulated/floor{icon_state = "white"},/area/outpost/research/hallway)
 "dP" = (/obj/machinery/atmospherics/unary/vent_pump/on{dir = 1},/obj/structure/cable/blue{d1 = 4; d2 = 8; icon_state = "4-8"},/obj/structure/cable/blue{d1 = 1; d2 = 4; icon_state = "1-4"},/turf/simulated/floor{icon_state = "white"},/area/outpost/research/hallway)
-"dQ" = (/obj/structure/shuttle/engine/propulsion{icon_state = "propulsion"; dir = 4},/obj/structure/window/reinforced/tinted{dir = 4; icon_state = "twindow"},/turf/simulated/floor/plating/airless,/area/shuttle/alien/mine)
+"dQ" = (/obj/structure/window/reinforced/tinted{dir = 4; icon_state = "twindow"},/obj/structure/shuttle/engine/propulsion{icon_state = "propulsion"; dir = 8},/turf/simulated/floor/plating/airless,/area/shuttle/alien/mine)
 "dR" = (/obj/effect/alien/weeds{icon_state = "weeds2"},/turf/simulated/shuttle/floor{icon_state = "floor2"},/area/shuttle/alien/mine)
 "dS" = (/obj/effect/alien/weeds{icon_state = "weeds"},/turf/simulated/shuttle/floor{icon_state = "floor2"},/area/shuttle/alien/mine)
 "dT" = (/obj/machinery/door/airlock/hatch,/turf/simulated/shuttle/floor{icon_state = "floor2"},/area/shuttle/alien/mine)
