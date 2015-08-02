@@ -203,7 +203,6 @@
 /obj/machinery/door/attackby(obj/item/I as obj, mob/user as mob)
 	if(istype(I, /obj/item/device/detective_scanner))
 		return
-	if(src.operating > 0 || isrobot(user))	return //borgs can't attack doors open because it conflicts with their AI-like interaction with them.
 	src.add_fingerprint(user)
 
 	if(istype(I, /obj/item/stack/material) && I.get_material_name() == src.get_material_name())
@@ -273,6 +272,8 @@
 				playsound(src.loc, hitsound, 100, 1)
 				take_damage(W.force)
 		return
+
+	if(src.operating > 0 || isrobot(user))	return //borgs can't attack doors open because it conflicts with their AI-like interaction with them.
 
 	if(src.operating) return
 
