@@ -17,6 +17,7 @@ var/global/list/map_count = list()
 	var/limit_x = 128               // Default x size.
 	var/limit_y = 128               // Default y size.
 	var/auto_apply = 1
+	var/preserve_map = 1
 
 	// Turf paths.
 	var/wall_type =  /turf/simulated/wall
@@ -38,7 +39,7 @@ var/global/list/map_count = list()
 	else
 		map_count[descriptor]++
 	name = "[descriptor] #[map_count[descriptor]]"
-	random_maps[name] = src
+	if(preserve_map) random_maps[name] = src
 
 	// Get origins for applying the map later.
 	set_origins(tx, ty, tz)
@@ -168,8 +169,11 @@ var/global/list/map_count = list()
 	var/newpath = get_appropriate_path(map[current_cell])
 	if(newpath)
 		T.ChangeTurf(newpath)
-	get_additional_spawns(map[current_cell],T)
+	get_additional_spawns(map[current_cell],T,get_spawn_dir(x, y))
 	return T
+
+/datum/random_map/proc/get_spawn_dir()
+	return 0
 
 /datum/random_map/proc/get_appropriate_path(var/value)
 	switch(value)

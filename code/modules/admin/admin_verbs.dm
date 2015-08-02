@@ -115,8 +115,10 @@ var/list/admin_verbs_fun = list(
 	/client/proc/toggle_random_events,
 	/client/proc/editappear,
 	/client/proc/roll_dices,
-	/datum/admins/proc/call_supply_drop
+	/datum/admins/proc/call_supply_drop,
+	/datum/admins/proc/call_drop_pod
 	)
+
 var/list/admin_verbs_spawn = list(
 	/datum/admins/proc/spawn_fruit,
 	/datum/admins/proc/spawn_custom_item,

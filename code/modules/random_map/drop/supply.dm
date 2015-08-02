@@ -1,134 +1,33 @@
-#define SD_FLOOR_TILE 0
-#define SD_WALL_TILE 1
-#define SD_DOOR_TILE 2
-#define SD_EMPTY_TILE 3
-#define SD_SUPPLY_TILE 7
-var/global/list/supply_drop_random_loot_types = list(
-	"guns",
-	"seeds",
-	"materials",
-	"food",
-	"armour",
-	"medical",
-	"power",
-	"hydroponics",
-	"lasers",
-	"ballistics"
-	)
-
-/datum/random_map/supplydrop
-	descriptor = "small supply drop"
-	initial_wall_cell = 0
+/datum/random_map/droppod/supply
+	descriptor = "supply drop"
 	limit_x = 5
 	limit_y = 5
 
-	var/list/custom_loot_types = list()
-	var/loot_type
-	var/placement_explosion_dev =   3
-	var/placement_explosion_heavy = 5
-	var/placement_explosion_light = 7
-	var/placement_explosion_flash = 5
+	placement_explosion_dev =   3
+	placement_explosion_heavy = 5
+	placement_explosion_light = 7
+	placement_explosion_flash = 5
 
-/datum/random_map/supplydrop/New(var/seed, var/tx, var/ty, var/tz, var/tlx, var/tly, var/do_not_apply, var/do_not_announce, var/list/supplied_drops, var/supplied_loot_type)
-	if(islist(supplied_drops) && supplied_drops.len)
-		custom_loot_types = supplied_drops
-		loot_type = "custom"
-	else if(supplied_loot_type)
-		loot_type = supplied_loot_type
-	..(seed, tx, ty, tz, tlx, tly, do_not_apply, do_not_announce)
+// UNLIKE THE DROP POD, this map deals ENTIRELY with strings and types.
+// Drop type is a string representing a mode rather than an atom or path.
+// supplied_drop_types is a list of types to spawn in the pod.
+/datum/random_map/droppod/supply/get_spawned_drop(var/turf/T)
 
-/datum/random_map/supplydrop/generate_map()
+	if(!drop_type) drop_type = pick(supply_drop_random_loot_types)
 
-	// No point calculating these 200 times.
-	var/x_midpoint = n_ceil(limit_x / 2)
-	var/y_midpoint = n_ceil(limit_y / 2)
-
-	// Draw walls/floors/doors.
-	for(var/x = 1, x <= limit_x, x++)
-		for(var/y = 1, y <= limit_y, y++)
-			var/current_cell = get_map_cell(x,y)
-			if(!current_cell)
-				continue
-
-			var/on_x_bound = (x == 1 || x == limit_x)
-			var/on_y_bound = (y == 1 || y == limit_x)
-
-			if(on_x_bound || on_y_bound)
-				// Draw access points in midpoint of each wall.
-				if(x == x_midpoint || y == y_midpoint)
-					map[current_cell] = SD_DOOR_TILE
-				// Draw the actual walls.
-				else if(!on_x_bound || !on_y_bound)
-					map[current_cell] = SD_WALL_TILE
-				//Don't draw the far corners.
-				else
-					map[current_cell] = SD_EMPTY_TILE
-			else
-				// Fill in the corners.
-				if((x == 2 || x == (limit_x-1)) && (y == 2 || y == (limit_y-1)))
-					map[current_cell] = SD_WALL_TILE
-				// Fill in EVERYTHING ELSE.
-				else
-					map[current_cell] = SD_FLOOR_TILE
-
-	// Draw the drop contents.
-	var/current_cell = get_map_cell(x_midpoint,y_midpoint)
-	if(current_cell)
-		map[current_cell] = SD_SUPPLY_TILE
-	return 1
-
-/datum/random_map/supplydrop/apply_to_map()
-	if(placement_explosion_dev || placement_explosion_heavy || placement_explosion_light || placement_explosion_flash)
-		var/turf/T = locate((origin_x + n_ceil(limit_x / 2)-1), (origin_y + n_ceil(limit_y / 2)-1), origin_z)
-		if(istype(T))
-			explosion(T, placement_explosion_dev, placement_explosion_heavy, placement_explosion_light, placement_explosion_flash)
-			sleep(15) // Let the explosion finish proccing before we ChangeTurf(), otherwise it might destroy our spawned objects.
-	return ..()
-
-/datum/random_map/supplydrop/get_appropriate_path(var/value)
-	if(value == SD_FLOOR_TILE || value == SD_SUPPLY_TILE|| value == SD_DOOR_TILE)
-		return floor_type
-	else if(value == SD_WALL_TILE)
-		return wall_type
-	return null
-
-/datum/random_map/supplydrop/get_additional_spawns(var/value, var/turf/T)
-
-	// Splatter anything under us that survived the explosion.
-	if(value != SD_EMPTY_TILE && T.contents.len)
-		for(var/atom/A in T)
-			if(!A.simulated || istype(A, /mob/dead))
-				continue
-			if(istype(A, /mob/living))
-				var/mob/living/M = A
-				M.gib()
-			else
-				qdel(A)
-
-	// Also spawn doors and loot.
-	if(value == SD_DOOR_TILE)
-		var/obj/machinery/door/airlock/A = new(T)
-		A.id_tag = name
-	else if(value == SD_SUPPLY_TILE)
-		get_spawned_loot(T)
-
-/datum/random_map/supplydrop/proc/get_spawned_loot(var/turf/T)
-
-	if(!loot_type) loot_type = pick(supply_drop_random_loot_types)
-
-	if(loot_type == "custom")
-		if(custom_loot_types.len)
+	if(drop_type == "custom")
+		if(supplied_drop_types.len)
 			var/obj/structure/largecrate/C = locate() in T
-			for(var/drop_type in custom_loot_types)
+			for(var/drop_type in supplied_drop_types)
 				var/atom/movable/A = new drop_type(T)
 				if(!istype(A, /mob))
 					if(!C) C = new(T)
 					C.contents |= A
 			return
 		else
-			loot_type = pick(supply_drop_random_loot_types)
+			drop_type = pick(supply_drop_random_loot_types)
 
-	switch(loot_type)
+	switch(drop_type)
 		if("lasers")
 			var/obj/structure/largecrate/C = new(T)
 			new /obj/item/weapon/gun/energy/laser(C)
@@ -285,4 +184,4 @@ var/global/list/supply_drop_random_loot_types = list(
 	if(choice == "No")
 		return
 	log_admin("[key_name(usr)] dropped supplies at ([usr.x],[usr.y],[usr.z])")
-	new /datum/random_map/supplydrop(null, usr.x-2, usr.y-2, usr.z, supplied_drops = chosen_loot_types, supplied_loot_type = chosen_loot_type)
+	new /datum/random_map/droppod/supply(null, usr.x-2, usr.y-2, usr.z, supplied_drops = chosen_loot_types, supplied_drop = chosen_loot_type)
