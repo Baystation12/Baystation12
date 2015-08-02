@@ -1,6 +1,6 @@
 var/list/flooring_types
 
-/proc/get_flooring_by_name(var/flooring_path)
+/proc/get_flooring_data(var/flooring_path)
 	if(!flooring_types)
 		flooring_types = list()
 	if(!flooring_types["[flooring_path]"])
@@ -92,7 +92,7 @@ var/list/flooring_types
 	has_damage_range = null
 	flags = TURF_REMOVE_CROWBAR
 	build_type = /obj/item/stack/tile/floor_red
-    
+
 /decl/flooring/tiling/steel
 	name = "steel floor"
 	icon_base = "steel"
@@ -155,14 +155,13 @@ var/list/flooring_types
 	apply_heat_capacity = 325000
 
 /decl/flooring/reinforced/circuit
-	name = "blue processing strata"
+	name = "processing strata"
 	icon = 'icons/turf/flooring/circuit.dmi'
 	icon_base = "bcircuit"
 	build_type = null
 	flags = TURF_ACID_IMMUNE | TURF_CAN_BREAK
 
 /decl/flooring/reinforced/circuit/green
-	name = "green processing strata"
 	icon_base = "gcircuit"
 
 /decl/flooring/reinforced/cult

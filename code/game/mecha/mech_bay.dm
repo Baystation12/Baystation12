@@ -4,6 +4,7 @@
 	icon = 'icons/mecha/mech_bay.dmi'
 	icon_state = "recharge_floor"
 	density = 0
+	layer = TURF_LAYER + 0.1
 
 	var/obj/mecha/charging = null
 	var/charge = 45

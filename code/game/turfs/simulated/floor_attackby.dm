@@ -72,7 +72,7 @@
 			if(flooring || !S || !user || !use_flooring)
 				return
 			if(S.use(use_flooring.build_cost))
-				set_flooring(use_flooring.name)
+				set_flooring(use_flooring.type)
 				playsound(src, 'sound/items/Deconstruct.ogg', 80, 1)
 				return
 		// Repairs.
