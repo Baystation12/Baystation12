@@ -85,7 +85,6 @@ datum/preferences
 	var/religion = "None"               //Religious association.
 
 		//Mob preview
-	var/mob/living/carbon/human/dummy //the mannequin
 	var/icon/preview_icon = null
 	var/icon/preview_icon_front = null
 	var/icon/preview_icon_side = null
@@ -1645,18 +1644,30 @@ datum/preferences
 	character.gen_record = gen_record
 	character.exploit_record = exploit_record
 
-	character.change_gender(gender)
+	character.gender = gender
 	character.age = age
 	character.b_type = b_type
 
-	character.change_eye_color(r_eyes,g_eyes,b_eyes)
-	character.change_hair_color(r_hair,g_hair,b_hair)
-	character.change_facial_hair_color(r_facial,g_facial,b_facial)
-	character.change_skin_color(r_skin,g_skin,b_skin)
-	character.change_skin_tone(s_tone)
+	character.r_eyes = r_eyes
+	character.g_eyes = g_eyes
+	character.b_eyes = b_eyes
 
-	character.change_hair(h_style)
-	character.change_facial_hair(f_style)
+	character.r_hair = r_hair
+	character.g_hair = g_hair
+	character.b_hair = b_hair
+
+	character.r_facial = r_facial
+	character.g_facial = g_facial
+	character.b_facial = b_facial
+
+	character.r_skin = r_skin
+	character.g_skin = g_skin
+	character.b_skin = b_skin
+
+	character.s_tone = s_tone
+
+	character.h_style = h_style
+	character.f_style = f_style
 
 	character.home_system = home_system
 	character.citizenship = citizenship

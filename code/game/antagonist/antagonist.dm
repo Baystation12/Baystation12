@@ -60,7 +60,8 @@
 /datum/antagonist/proc/get_candidates(var/ghosts_only)
 	candidates = list() // Clear.
 	candidates = ticker.mode.get_players_for_role(role_type, id)
-	// Prune restricted jobs and status. Broke it up for readability.
+	// Prune restricted status. Broke it up for readability.
+	// Note that this is done before jobs are handed out.
 	for(var/datum/mind/player in candidates)
 		if(ghosts_only && !istype(player.current, /mob/dead))
 			candidates -= player
@@ -98,17 +99,29 @@
 	if(!candidates.len)
 		return 0
 
+	// Not sure if this is necessary, just in case.
+	pending_antagonists = candidates
+	candidates = list()
+	
 	//Grab candidates randomly until we have enough.
-	while(candidates.len)
+	while(candidates.len && pending_antagonists.len < cur_max)
 		var/datum/mind/player = pick(candidates)
 		pending_antagonists |= player
 		candidates -= player
 	return 1
 
+//Drafting players into the antagonist role must be done when antagonists are finalized.
+//This ensures that if a player is a candidate for multiple antag roles, they do not prevent other
+//players from being selected for all of the other antag roles that the player was not selected for.
 /datum/antagonist/proc/finalize_spawn()
-	if(!pending_antagonists || !pending_antagonists.len)
+	if(!pending_antagonists)
 		return
-	for(var/datum/mind/player in pending_antagonists)
+
+	while(pending_antagonists.len && current_antagonists.len < cur_max)
+		var/datum/mind/player = pick(pending_antagonists)
+		pending_antagonists -= player
+		
+		//Check for restricted job status since players will have been assigned jobs by this point.
+		//Or if the player has already been given an antag role.
 		if(can_become_antag(player) && !player.special_role)
 			add_antagonist(player,0,0,1)
-	pending_antagonists.Cut()

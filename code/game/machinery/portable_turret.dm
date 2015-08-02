@@ -624,6 +624,14 @@ var/list/turret_icons
 	// Emagged turrets again use twice as much power due to higher firing rates
 	use_power(reqpower * (2 * (emagged || lethal)) * (2 * emagged))
 
+	//Turrets aim for the center of mass by default.
+	//If the target is grabbing someone then the turret smartly aims for extremities
+	var/obj/item/weapon/grab/G = locate() in target
+	if(G && G.state >= GRAB_NECK) //works because mobs are currently not allowed to upgrade to NECK if they are grabbing two people.
+		A.def_zone = pick("head", "l_hand", "r_hand", "l_foot", "r_foot", "l_arm", "r_arm", "l_leg", "r_leg")
+	else
+		A.def_zone = pick("chest", "groin")
+
 	//Shooting Code:
 	A.current = T
 	A.starting = T
