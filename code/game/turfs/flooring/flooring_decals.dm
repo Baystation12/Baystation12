@@ -79,6 +79,9 @@ var/list/floor_decals = list()
 	name = "brown corner"
 	icon_state = "corner_brown"
 
+/obj/effect/floor_decal/corner/brown/full
+	icon_state = "corner_brown_full"
+
 /obj/effect/floor_decal/corner/white
 	name = "white corner"
 	icon_state = "corner_white"

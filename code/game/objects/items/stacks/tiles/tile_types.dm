@@ -87,6 +87,12 @@
 	singular_name = "red floor tile"
 	icon_state = "tile_red"
 
+/obj/item/stack/tile/floor_steel
+	name = "steel floor tile"
+	singular_name = "steel floor tile"
+	icon_state = "tile_steel"
+	matter = list("plasteel" = 937.5)
+
 /obj/item/stack/tile/floor_white
 	name = "white floor tile"
 	singular_name = "white floor tile"

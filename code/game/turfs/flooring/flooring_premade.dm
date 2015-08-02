@@ -64,6 +64,11 @@
 	icon_state = "red"
 	initial_flooring = /decl/flooring/tiling/red
 
+/turf/simulated/floor/tiled/steel
+	name = "steel floor"
+	icon_state = "steel_dirty"
+	initial_flooring = /decl/flooring/tiling/steel
+
 /turf/simulated/floor/tiled/white
 	name = "white floor"
 	icon_state = "white"

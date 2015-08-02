@@ -92,6 +92,13 @@ var/list/flooring_types
 	has_damage_range = null
 	flags = TURF_REMOVE_CROWBAR
 	build_type = /obj/item/stack/tile/floor_red
+    
+/decl/flooring/tiling/steel
+	name = "steel floor"
+	icon_base = "steel"
+	has_damage_range = null
+	flags = TURF_REMOVE_CROWBAR
+	build_type = /obj/item/stack/tile/floor_steel
 
 /decl/flooring/tiling/white
 	name = "white floor"
