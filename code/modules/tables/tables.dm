@@ -296,29 +296,33 @@
 		icon_state = "blank"
 		overlays.Cut()
 
+		var/image/I
+
 		// Base frame shape. Mostly done for glass/diamond tables, where this is visible.
-		for(var/n in connections)
-			overlays += n
+		for(var/i = 1 to 4)
+			I = image(icon, dir = 1<<(i-1), icon_state = connections[i])
+			overlays += I
 
 		// Standard table image
 		if(material)
-			for(var/n in connections)
-				var/image/I = image(icon, "[material.icon_base]_[n]")
+			for(var/i = 1 to 4)
+				I = image(icon, "[material.icon_base]_[connections[i]]", dir = 1<<(i-1))
 				I.color = material.icon_colour
 				I.alpha = 255 * material.opacity
 				overlays += I
 
 		// Reinforcements
 		if(reinforced)
-			for(var/n in connections)
-				var/image/I = image(icon, "[reinforced.icon_reinf]_[n]")
+			for(var/i = 1 to 4)
+				I = image(icon, "[reinforced.icon_reinf]_[connections[i]]", dir = 1<<(i-1))
 				I.color = reinforced.icon_colour
 				I.alpha = 255 * reinforced.opacity
 				overlays += I
 
 		if(carpeted)
-			for(var/n in connections)
-				overlays += "carpet_[n]"
+			for(var/i = 1 to 4)
+				I = image(icon, "carpet_[connections[i]]", dir = 1<<(i-1))
+				overlays += I
 	else
 		overlays.Cut()
 		var/type = 0
@@ -353,13 +357,12 @@
 			overlays += I
 
 		if(carpeted)
-			for(var/n in connections)
-				overlays += "carpet_flip[type]"
+			overlays += "carpet_flip[type]"
 
 // set propagate if you're updating a table that should update tables around it too, for example if it's a new table or something important has changed (like material).
 /obj/structure/table/proc/update_connections(propagate=0)
 	if(!material)
-		connections = list("nw0", "ne0", "sw0", "se0")
+		connections = list("0", "0", "0", "0")
 
 		if(propagate)
 			for(var/obj/structure/table/T in oview(src, 1))
@@ -369,7 +372,7 @@
 	var/list/blocked_dirs = list()
 	for(var/obj/structure/window/W in get_turf(src))
 		if(W.is_fulltile())
-			connections = list("nw0", "ne0", "sw0", "se0")
+			connections = list("0", "0", "0", "0")
 			return
 		blocked_dirs |= W.dir
 
@@ -412,40 +415,27 @@
 	connections = dirs_to_corner_states(connection_dirs)
 
 #define CORNER_NONE 0
-#define CORNER_EASTWEST 1
+#define CORNER_CLOCKWISE 1
 #define CORNER_DIAGONAL 2
-#define CORNER_NORTHSOUTH 4
+#define CORNER_COUNTERCLOCKWISE 4
 
 /proc/dirs_to_corner_states(list/dirs)
 	if(!istype(dirs)) return
 
-	var/NE = CORNER_NONE
-	var/NW = CORNER_NONE
-	var/SE = CORNER_NONE
-	var/SW = CORNER_NONE
+	var/list/ret = list(NORTHWEST, SOUTHEAST, NORTHEAST, SOUTHWEST)
 
-	if(NORTH in dirs)
-		NE |= CORNER_NORTHSOUTH
-		NW |= CORNER_NORTHSOUTH
-	if(SOUTH in dirs)
-		SW |= CORNER_NORTHSOUTH
-		SE |= CORNER_NORTHSOUTH
-	if(EAST in dirs)
-		SE |= CORNER_EASTWEST
-		NE |= CORNER_EASTWEST
-	if(WEST in dirs)
-		NW |= CORNER_EASTWEST
-		SW |= CORNER_EASTWEST
-	if(NORTHWEST in dirs)
-		NW |= CORNER_DIAGONAL
-	if(NORTHEAST in dirs)
-		NE |= CORNER_DIAGONAL
-	if(SOUTHEAST in dirs)
-		SE |= CORNER_DIAGONAL
-	if(SOUTHWEST in dirs)
-		SW |= CORNER_DIAGONAL
+	for(var/i = 1 to ret.len)
+		var/dir = ret[i]
+		. = CORNER_NONE
+		if(dir in dirs)
+			. |= CORNER_DIAGONAL
+		if(turn(dir,45) in dirs)
+			. |= CORNER_CLOCKWISE
+		if(turn(dir,-45) in dirs)
+			. |= CORNER_COUNTERCLOCKWISE
+		ret[i] = "[.]"
 
-	return list("ne[NE]", "se[SE]", "sw[SW]", "nw[NW]")
+	return ret
 
 #undef CORNER_NONE
 #undef CORNER_EASTWEST
