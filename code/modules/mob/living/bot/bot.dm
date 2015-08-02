@@ -16,6 +16,7 @@
 
 	var/obj/access_scanner = null
 	var/list/req_access = list()
+	var/list/req_one_access = list()
 
 /mob/living/bot/New()
 	..()
@@ -25,7 +26,8 @@
 	botcard.access = botcard_access.Copy()
 
 	access_scanner = new /obj(src)
-	access_scanner.req_one_access = req_access.Copy()
+	access_scanner.req_access = req_access.Copy()
+	access_scanner.req_one_access = req_one_access.Copy()
 
 /mob/living/bot/Life()
 	..()
