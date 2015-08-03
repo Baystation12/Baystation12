@@ -44,6 +44,7 @@
 		return
 
 	overlays.Cut()
+	damage_overlay = 0
 
 	if(!wall_cache["[new_state]-[material.icon_colour]"])
 		var/image/I = image(icon='icons/turf/wall_masks.dmi',icon_state="[new_state]")
@@ -74,7 +75,6 @@
 	check_relatives(1)
 
 /turf/simulated/wall/proc/update_icon()
-
 	if(!material)
 		return
 
@@ -86,15 +86,23 @@
 	else
 		set_wall_state("[material.icon_base]fwall_open")
 
-	var/dmg_amt = material.integrity
-	if(reinf_material)
-		dmg_amt += reinf_material.integrity
-	var/overlay = round(damage / dmg_amt * damage_overlays.len) + 1
-	if(overlay > damage_overlays.len)
-		overlay = damage_overlays.len
-	if(density)
+	if(damage == 0)
+		if(damage_overlay != 0)
+			overlays -= damage_overlays[damage_overlay]
+		damage_overlay = 0
+	else if(density)
+		var/integrity = material.integrity
+		if(reinf_material)
+			integrity += reinf_material.integrity
+
+		var/overlay = round(damage / integrity * damage_overlays.len) + 1
+		if(overlay > damage_overlays.len)
+			overlay = damage_overlays.len
+
 		if(damage_overlay && overlay == damage_overlay) //No need to update.
 			return
+
+		if(damage_overlay) overlays -= damage_overlays[damage_overlay]
 		overlays += damage_overlays[overlay]
 		damage_overlay = overlay
 	return

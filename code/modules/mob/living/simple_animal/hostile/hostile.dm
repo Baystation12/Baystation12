@@ -212,6 +212,7 @@
 
 
 /mob/living/simple_animal/hostile/proc/check_horde()
+	return 0
 	if(emergency_shuttle.shuttle.location)
 		if(!enroute && !target_mob)	//The shuttle docked, all monsters rush for the escape hallway
 			if(!shuttletarget && escape_list.len) //Make sure we didn't already assign it a target, and that there are targets to pick

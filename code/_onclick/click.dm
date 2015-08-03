@@ -80,8 +80,10 @@
 		return
 
 	if(in_throw_mode)
-		throw_item(A)
-		return
+		if(isturf(A) || isturf(A.loc))
+			throw_item(A)
+			return
+		throw_mode_off()
 
 	if(!istype(A,/obj/item/weapon/gun) && !isturf(A) && !istype(A,/obj/screen))
 		last_target_click = world.time

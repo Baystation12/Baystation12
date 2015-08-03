@@ -124,7 +124,7 @@
 	//uniqueID = rand(0,10000)
 	var/datum/disease2/effectholder/holder = pick(effects)
 	holder.minormutate()
-	infectionchance = min(50,infectionchance + rand(0,10))
+	//infectionchance = min(50,infectionchance + rand(0,10))
 
 /datum/disease2/disease/proc/majormutate()
 	uniqueID = rand(0,10000)

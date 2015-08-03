@@ -141,17 +141,6 @@ Works together with spawning an observer, noted above.
 	var/client/C = U.client
 	for(var/mob/living/carbon/human/target in target_list)
 		C.images += target.hud_list[SPECIALROLE_HUD]
-
-
-/*
-		else//If the silicon mob has no law datum, no inherent laws, or a law zero, add them to the hud.
-			var/mob/living/silicon/silicon_target = target
-			if(!silicon_target.laws||(silicon_target.laws&&(silicon_target.laws.zeroth||!silicon_target.laws.inherent.len))||silicon_target.mind.special_role=="traitor")
-				if(isrobot(silicon_target))//Different icons for robutts and AI.
-					U.client.images += image(tempHud,silicon_target,"hudmalborg")
-				else
-					U.client.images += image(tempHud,silicon_target,"hudmalai")
-*/
 	return 1
 
 /mob/proc/ghostize(var/can_reenter_corpse = 1)
@@ -577,7 +566,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		toggle_visibility(1)
 	else
 		user.visible_message ( \
-			"<span class='warning'>[user] just tried to smash his book into that ghost!  It's not very effective.</span>", \
+			"<span class='warning'>[user] just tried to smash \his book into that ghost!  It's not very effective.</span>", \
 			"<span class='warning'>You get the feeling that the ghost can't become any more visible.</span>" \
 		)
 
@@ -645,7 +634,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 /mob/dead/observer/proc/updateghostsight()
 	if (!seedarkness)
-		see_invisible = SEE_INVISIBLE_OBSERVER_NOLIGHTING
+		see_invisible = SEE_INVISIBLE_NOLIGHTING
 	else
 		see_invisible = SEE_INVISIBLE_OBSERVER
 		if (!ghostvision)

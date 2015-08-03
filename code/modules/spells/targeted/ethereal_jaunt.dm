@@ -36,7 +36,7 @@
 			target.transforming=0 //mob is safely inside holder now, no need for protection.
 			jaunt_steam(mobloc)
 			sleep(duration)
-			mobloc = get_turf(target.loc)
+			mobloc = holder.last_valid_turf
 			animation.loc = mobloc
 			jaunt_steam(mobloc)
 			target.canmove = 0
@@ -75,6 +75,11 @@
 	var/reappearing = 0
 	density = 0
 	anchored = 1
+	var/turf/last_valid_turf
+
+/obj/effect/dummy/spell_jaunt/New(var/location)
+	..()
+	last_valid_turf = get_turf(location)
 
 /obj/effect/dummy/spell_jaunt/Destroy()
 	// Eject contents if deleted somehow
@@ -87,6 +92,9 @@
 	var/turf/newLoc = get_step(src,direction)
 	if(!(newLoc.flags & NOJAUNT))
 		loc = newLoc
+		var/turf/T = get_turf(loc)
+		if(!T.contains_dense_objects())
+			last_valid_turf = T
 	else
 		user << "<span class='warning'>Some strange aura is blocking the way!</span>"
 	src.canmove = 0

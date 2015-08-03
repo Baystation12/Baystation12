@@ -3,19 +3,13 @@
 	var/list/tracked = new
 
 /datum/nano_module/crew_monitor/Topic(href, href_list)
-	if(..()) return
-	var/turf/T = get_turf(src)
+	if(..()) return 1
+	var/turf/T = get_turf(nano_host())	// TODO: Allow setting any config.contact_levels from the interface.
 	if (!T || !(T.z in config.player_levels))
 		usr << "<span class='warning'>Unable to establish a connection</span>: You're too far away from the station!"
 		return 0
-	if(href_list["close"] )
-		var/mob/user = usr
-		var/datum/nanoui/ui = nanomanager.get_open_ui(user, src, "main")
-		usr.unset_machine()
-		ui.close()
-		return 0
 	if(href_list["track"])
-		if(usr.isAI())
+		if(usr.isMobAI())
 			var/mob/living/silicon/ai/AI = usr
 			var/mob/living/carbon/human/H = locate(href_list["track"]) in mob_list
 			if(hassensorlevel(H, SUIT_SENSOR_TRACKING))
@@ -23,11 +17,11 @@
 		return 1
 
 /datum/nano_module/crew_monitor/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
-	user.set_machine(src)
+	// TODO: Move this to a singleton instance that does the scan every X seconds (if the info is being requested), to offer some antag balance and to reduce load in the case of multiple viewers.
 	src.scan()
 
 	var/data[0]
-	var/turf/T = get_turf(src)
+	var/turf/T = get_turf(nano_host())
 	var/list/crewmembers = list()
 	for(var/obj/item/clothing/under/C in src.tracked)
 
@@ -66,7 +60,7 @@
 
 	crewmembers = sortByKey(crewmembers, "name")
 
-	data["isAI"] = user.isAI()
+	data["isAI"] = user.isMobAI()
 	data["crewmembers"] = crewmembers
 
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)

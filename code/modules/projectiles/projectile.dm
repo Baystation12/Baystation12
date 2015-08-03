@@ -37,7 +37,7 @@
 	var/dispersion = 0.0
 
 	var/damage = 10
-	var/damage_type = BRUTE //BRUTE, BURN, TOX, OXY, CLONE are the only things that should be in here
+	var/damage_type = BRUTE //BRUTE, BURN, TOX, OXY, CLONE, HALLOSS are the only things that should be in here
 	var/nodamage = 0 //Determines if the projectile will skip any damage inflictions
 	var/taser_effect = 0 //If set then the projectile will apply it's agony damage using stun_effect_act() to mobs it hits, and other damage will be ignored
 	var/check_armour = "bullet" //Defines what armor to use when it hits things.  Must be set to bullet, laser, energy,or bomb	//Cael - bio and rad are also valid
@@ -118,7 +118,7 @@
 		return 1
 
 	firer = user
-	def_zone = user.zone_sel.selecting
+	def_zone = target_zone
 
 	if(user == target) //Shooting yourself
 		user.bullet_act(src, target_zone)
@@ -165,13 +165,16 @@
 
 	//roll to-hit
 	miss_modifier = max(15*(distance-2) - round(15*accuracy) + miss_modifier, 0)
-	var/hit_zone = get_zone_with_miss_chance(def_zone, target_mob, miss_modifier, ranged_attack=(distance > 1))
-	if(!hit_zone)
+	var/hit_zone = get_zone_with_miss_chance(def_zone, target_mob, miss_modifier, ranged_attack=(distance > 1 || original != target_mob)) //if the projectile hits a target we weren't originally aiming at then retain the chance to miss
+	
+	var/result = PROJECTILE_FORCE_MISS
+	if(hit_zone)
+		def_zone = hit_zone //set def_zone, so if the projectile ends up hitting someone else later (to be implemented), it is more likely to hit the same part
+		result = target_mob.bullet_act(src, def_zone)
+	
+	if(result == PROJECTILE_FORCE_MISS)
 		visible_message("<span class='notice'>\The [src] misses [target_mob] narrowly!</span>")
 		return 0
-
-	//set def_zone, so if the projectile ends up hitting someone else later (to be implemented), it is more likely to hit the same part
-	def_zone = hit_zone
 
 	//hit messages
 	if(silenced)
@@ -193,7 +196,7 @@
 			msg_admin_attack("UNKNOWN shot [target_mob] ([target_mob.ckey]) with \a [src] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[target_mob.x];Y=[target_mob.y];Z=[target_mob.z]'>JMP</a>)")
 
 	//sometimes bullet_act() will want the projectile to continue flying
-	if (target_mob.bullet_act(src, def_zone) == -1)
+	if (result == PROJECTILE_CONTINUE)
 		return 0
 
 	return 1
@@ -227,7 +230,7 @@
 		else
 			passthrough = 1 //so ghosts don't stop bullets
 	else
-		passthrough = (A.bullet_act(src, def_zone) == -1) //backwards compatibility
+		passthrough = (A.bullet_act(src, def_zone) == PROJECTILE_CONTINUE) //backwards compatibility
 		if(isturf(A))
 			for(var/obj/O in A)
 				O.bullet_act(src)
@@ -296,25 +299,26 @@
 		before_move()
 		Move(location.return_turf())
 
-		if(first_step)
-			muzzle_effect(effect_transform)
-			first_step = 0
-		else
-			tracer_effect(effect_transform)
-
 		if(!bumped && !isturf(original))
 			if(loc == get_turf(original))
 				if(!(original in permutated))
 					if(Bump(original))
 						return
 
+		if(first_step)
+			muzzle_effect(effect_transform)
+			first_step = 0
+		else if(!bumped)
+			tracer_effect(effect_transform)
+
 		if(!hitscan)
 			sleep(step_delay)	//add delay between movement iterations if it's not a hitscan weapon
 
 /obj/item/projectile/proc/process_step(first_step = 0)
-
+	return
 
 /obj/item/projectile/proc/before_move()
+	return
 
 /obj/item/projectile/proc/setup_trajectory()
 	// trajectory dispersion
@@ -331,6 +335,8 @@
 	effect_transform = new()
 	effect_transform.Scale(trajectory.return_hypotenuse(), 1)
 	effect_transform.Turn(-trajectory.return_angle())		//no idea why this has to be inverted, but it works
+
+	transform = turn(transform, -(trajectory.return_angle() + 90)) //no idea why 90 needs to be added, but it works
 
 /obj/item/projectile/proc/muzzle_effect(var/matrix/T)
 	if(silenced)
@@ -353,7 +359,10 @@
 			P.set_transform(M)
 			P.pixel_x = location.pixel_x
 			P.pixel_y = location.pixel_y
-			P.activate()
+			if(!hitscan)
+				P.activate(step_delay)	//if not a hitscan projectile, remove after a single delay
+			else
+				P.activate()
 
 /obj/item/projectile/proc/impact_effect(var/matrix/M)
 	if(ispath(tracer_type))
@@ -379,7 +388,7 @@
 		return //cannot shoot yourself
 	if(istype(A, /obj/item/projectile))
 		return
-	if(istype(A, /mob/living))
+	if(istype(A, /mob/living) || istype(A, /obj/mecha) || istype(A, /obj/vehicle))
 		result = 2 //We hit someone, return 1!
 		return
 	result = 1
@@ -418,15 +427,14 @@
 			if(istype(M))
 				return 1
 
-/proc/check_trajectory(atom/target as mob, var/mob/living/user as mob, var/pass_flags=PASSTABLE|PASSGLASS|PASSGRILLE, flags=null)  //Checks if you can hit them or not.
-	if(!istype(target) || !istype(user))
+/proc/check_trajectory(atom/target as mob|obj, atom/firer as mob|obj, var/pass_flags=PASSTABLE|PASSGLASS|PASSGRILLE, flags=null)  //Checks if you can hit them or not.
+	if(!istype(target) || !istype(firer))
 		return 0
-	var/obj/item/projectile/test/trace = new /obj/item/projectile/test(get_step_to(user,target)) //Making the test....
+	var/obj/item/projectile/test/trace = new /obj/item/projectile/test(get_turf(firer)) //Making the test....
 	trace.target = target
 	if(!isnull(flags))
 		trace.flags = flags //Set the flags...
 	trace.pass_flags = pass_flags //And the pass flags to that of the real projectile...
-	trace.firer = user
 	var/output = trace.process() //Test it!
 	qdel(trace) //No need for it anymore
 	return output //Send it back to the gun!

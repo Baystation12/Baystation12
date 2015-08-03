@@ -225,10 +225,12 @@
 	if (src.syndicate && src.client)
 		for(var/datum/mind/tra in traitors.current_antagonists)
 			if(tra.current)
+				// TODO: Update to new antagonist system.
 				var/I = image('icons/mob/mob.dmi', loc = tra.current, icon_state = "traitor")
 				src.client.images += I
 		src.disconnect_from_ai()
 		if(src.mind)
+			// TODO: Update to new antagonist system.
 			if(!src.mind.special_role)
 				src.mind.special_role = "traitor"
 				traitors.current_antagonists |= src.mind
