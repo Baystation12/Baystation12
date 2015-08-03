@@ -29,8 +29,6 @@ var/global/list/supply_drop_random_loot_types = list(
 	var/list/supplied_drop_types = list()
 	var/door_type = /obj/structure/droppod_door
 	var/drop_type = /mob/living/simple_animal/parrot
-
-	var/has_pod_doors
 	var/auto_open_doors
 
 	var/placement_explosion_dev =   1
@@ -106,7 +104,7 @@ var/global/list/supply_drop_random_loot_types = list(
 		return floor_type
 	else if(value == SD_WALL_TILE)
 		return wall_type
-	else if(value == SD_DOOR_TILE && !has_pod_doors)
+	else if(value == SD_DOOR_TILE )
 		return wall_type
 	return null
 
@@ -136,7 +134,7 @@ var/global/list/supply_drop_random_loot_types = list(
 				qdel(A)
 
 	// Also spawn doors and loot.
-	if(value == SD_DOOR_TILE && has_pod_doors)
+	if(value == SD_DOOR_TILE)
 		var/obj/structure/S = new door_type(T, auto_open_doors)
 		S.set_dir(spawn_dir)
 

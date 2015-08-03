@@ -2,6 +2,7 @@
 /obj/item/supply_beacon
 	name = "inactive supply beacon"
 	icon = 'icons/obj/supplybeacon.dmi'
+	desc = "An inactive, hacked supply beacon stamped with the Nyx Rapid Fabrication logo. Good for one (1) ballistic supply pod shipment."
 	icon_state = "beacon"
 	var/deploy_path = /obj/machinery/power/supply_beacon
 	var/deploy_time = 30
