@@ -3,8 +3,6 @@
 	limit_x = 5
 	limit_y = 5
 
-	placement_explosion_dev =   3
-	placement_explosion_heavy = 5
 	placement_explosion_light = 7
 	placement_explosion_flash = 5
 
@@ -28,6 +26,10 @@
 			drop_type = pick(supply_drop_random_loot_types)
 
 	switch(drop_type)
+
+		if("supermatter")
+			new /obj/machinery/power/supermatter(T)
+
 		if("lasers")
 			var/obj/structure/largecrate/C = new(T)
 			new /obj/item/weapon/gun/energy/laser(C)

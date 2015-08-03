@@ -3,6 +3,7 @@
 #define SD_DOOR_TILE 2
 #define SD_EMPTY_TILE 3
 #define SD_SUPPLY_TILE 7
+
 var/global/list/supply_drop_random_loot_types = list(
 	"guns",
 	"seeds",
@@ -23,15 +24,17 @@ var/global/list/supply_drop_random_loot_types = list(
 	limit_y = 3
 	preserve_map = 0
 
-	wall_type = /turf/simulated/wall/voxshuttle
+	wall_type = /turf/simulated/wall/titanium
 	floor_type = /turf/simulated/floor/engine
 	var/list/supplied_drop_types = list()
 	var/door_type = /obj/structure/droppod_door
 	var/drop_type = /mob/living/simple_animal/parrot
+
+	var/has_pod_doors
 	var/auto_open_doors
 
-	var/placement_explosion_dev =   2
-	var/placement_explosion_heavy = 4
+	var/placement_explosion_dev =   1
+	var/placement_explosion_heavy = 2
 	var/placement_explosion_light = 6
 	var/placement_explosion_flash = 4
 
@@ -96,13 +99,14 @@ var/global/list/supply_drop_random_loot_types = list(
 		if(istype(T))
 			explosion(T, placement_explosion_dev, placement_explosion_heavy, placement_explosion_light, placement_explosion_flash)
 			sleep(5) // Let the explosion finish proccing before we ChangeTurf(), otherwise it might destroy our spawned objects.
-	sleep(-1)
 	return ..()
 
 /datum/random_map/droppod/get_appropriate_path(var/value)
 	if(value == SD_FLOOR_TILE || value == SD_SUPPLY_TILE)
 		return floor_type
 	else if(value == SD_WALL_TILE)
+		return wall_type
+	else if(value == SD_DOOR_TILE && !has_pod_doors)
 		return wall_type
 	return null
 
@@ -132,7 +136,7 @@ var/global/list/supply_drop_random_loot_types = list(
 				qdel(A)
 
 	// Also spawn doors and loot.
-	if(value == SD_DOOR_TILE)
+	if(value == SD_DOOR_TILE && has_pod_doors)
 		var/obj/structure/S = new door_type(T, auto_open_doors)
 		S.set_dir(spawn_dir)
 
@@ -242,4 +246,4 @@ var/global/list/supply_drop_random_loot_types = list(
 	else
 		return
 
-	new /datum/random_map/droppod(null, usr.x-2, usr.y-2, usr.z, supplied_drops = spawned_mobs, automated = automatic_pod)
+	new /datum/random_map/droppod(null, usr.x-1, usr.y-1, usr.z, supplied_drops = spawned_mobs, automated = automatic_pod)

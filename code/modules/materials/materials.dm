@@ -346,6 +346,14 @@ var/list/name_to_material
 	stack_origin_tech = list(TECH_MATERIAL = 2)
 	composite_material = list(DEFAULT_WALL_MATERIAL = 3750, "platinum" = 3750) //todo
 
+/material/plasteel/titanium
+	name = "titanium"
+	stack_type = null
+	icon_base = "metal"
+	door_icon_base = "metal"
+	icon_colour = "#D1E6E3"
+	icon_reinf = "reinf_metal"
+
 /material/glass
 	name = "glass"
 	stack_type = /obj/item/stack/material/glass
