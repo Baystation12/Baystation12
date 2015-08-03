@@ -164,7 +164,7 @@
 			if(!src) return
 			user.drop_item()
 			I.loc = src
-			user << "<span class='notice>You installed the airlock electronics!</span>"
+			user << "<span class='notice'>You installed the airlock electronics!</span>"
 			src.state = 2
 			src.name = "Near finished Airlock Assembly"
 			src.electronics = I
@@ -217,7 +217,7 @@
 			if(state == 2)
 				user << "Now finishing the airlock..."
 				if(do_after(user, 40 / efficiency) && state == 2)
-					user.visible_message("<span class='notice>[user] finishes the airlock.</span>", "<span class='notice>You finish the airlock.</span>")
+					user.visible_message("<span class='notice'>[user] finishes the airlock.</span>", "<span class='notice'>You finish the airlock.</span>")
 					var/path
 					if(istext(glass))
 						path = text2path("/obj/machinery/door/airlock/[glass]")
@@ -233,7 +233,7 @@
 			if(state == 2 && electronics)
 				user << "You start removing the electronics from \the [src]..."
 				if(do_after(user, 40 / efficiency) && state == 2 && electronics)
-					user.visible_message("<span class='notice>[user] removes the airlock electronics.</span", "<span class='notice>You remove the airlock electronics.</span>")
+					user.visible_message("<span class='notice'>[user] removes the airlock electronics.</span>", "<span class='notice'>You remove the airlock electronics.</span>")
 					state = 1
 					name = "Wired Airlock Assembly"
 					electronics.loc = loc
@@ -243,7 +243,7 @@
 			if(state == 1)
 				user << "You start cutting the wires from \the [src]..."
 				if(do_after(user, 40 / efficiency) && state == 1)
-					user.visible_message("<span class='notice>[user] cuts the airlock wires.</span>", "<span class='notice>You cut the airlock wires.</span>")
+					user.visible_message("<span class='notice'>[user] cuts the airlock wires.</span>", "<span class='notice'>You cut the airlock wires.</span>")
 					new /obj/item/stack/cable_coil(loc, 1)
 					state = 0
 				return 1
@@ -275,7 +275,7 @@
 			else if(!anchored)
 				user << "You start disassembling \the [src]..."
 				if(do_after(user, 40 / efficiency) && !anchored)
-					user.visible_message("<span class='notice>[user] dissasembled the airlock assembly.</span>", "<span class='notice>You dissasembled the airlock assembly.</span>")
+					user.visible_message("<span class='notice'>[user] dissasembled the airlock assembly.</span>", "<span class='notice'>You dissasembled the airlock assembly.</span>")
 					new /obj/item/stack/material/steel(loc, 4)
 					qdel(src)
 				return 1
