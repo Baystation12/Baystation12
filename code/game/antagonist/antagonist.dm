@@ -77,6 +77,7 @@
 
 /datum/antagonist/proc/attempt_random_spawn()
 	attempt_spawn(flags & (ANTAG_OVERRIDE_MOB|ANTAG_OVERRIDE_JOB))
+	finalize_spawn()
 
 /datum/antagonist/proc/attempt_late_spawn(var/datum/mind/player)
 	if(!can_late_spawn())
