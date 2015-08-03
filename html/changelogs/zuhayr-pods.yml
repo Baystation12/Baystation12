@@ -1,0 +1,5 @@
+author: Zuhayr
+delete-after: True
+changes: 
+  - rscadd: "Added ballistic supply drop pods."
+  - tweak: "Swapped the singularity beacon out for a hacked supply beacon."
