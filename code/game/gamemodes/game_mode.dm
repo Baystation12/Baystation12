@@ -245,10 +245,8 @@ var/global/list/additional_antag_types = list()
 	if(!(antag_templates && antag_templates.len))
 		return 1
 
-	// Attempt to mark folks down as ready to go. Don't finalize until post setup.
 	var/datum/antagonist/main_antags = antag_templates[1]
-	var/list/candidates = main_antags.get_candidates()
-	if(candidates.len >= required_enemies)
+	if(main_antags.candidates.len >= required_enemies)
 		return 1
 	return 0
 
@@ -263,10 +261,12 @@ var/global/list/additional_antag_types = list()
 			EMajor.delay_modifier = event_delay_mod_major
 
 /datum/game_mode/proc/pre_setup()
-	//antag roles that replace jobs need to be assigned before the job controller hands out jobs.
 	for(var/datum/antagonist/antag in antag_templates)
+		antag.build_candidate_list() //compile a list of all eligible candidates
+		
+		//antag roles that replace jobs need to be assigned before the job controller hands out jobs.
 		if(antag.flags & ANTAG_OVERRIDE_JOB)
-			antag.attempt_spawn()
+			antag.attempt_spawn() //select antags to be spawned
 
 ///post_setup()
 /datum/game_mode/proc/post_setup()
@@ -284,8 +284,8 @@ var/global/list/additional_antag_types = list()
 	//Assign all antag types for this game mode. Any players spawned as antags earlier should have been removed from the pending list, so no need to worry about those.
 	for(var/datum/antagonist/antag in antag_templates)
 		if(!(antag.flags & ANTAG_OVERRIDE_JOB))
-			antag.attempt_spawn()
-		antag.finalize_spawn()
+			antag.attempt_spawn() //select antags to be spawned
+		antag.finalize_spawn() //actually spawn antags
 		if(antag.is_latejoin_template())
 			latejoin_templates |= antag
 
