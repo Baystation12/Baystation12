@@ -24,95 +24,128 @@ var/list/floor_decals = list()
 	qdel(src)
 	return
 
+/obj/effect/floor_decal/corner
+	icon_state = "corner_white"
+
 /obj/effect/floor_decal/corner/blue
 	name = "blue corner"
-	icon_state = "corner_blue"
+	color = "#6A97B0"
 
 /obj/effect/floor_decal/corner/blue/diagonal
-	icon_state = "corner_blue_diagonal"
+	icon_state = "corner_white_diagonal"
 
 /obj/effect/floor_decal/corner/blue/full
-	icon_state = "corner_blue_full"
+	icon_state = "corner_white_full"
 
 /obj/effect/floor_decal/corner/paleblue
 	name = "pale blue corner"
-	icon_state = "corner_paleblue"
+	color = "#8BBBD5"
+
+/obj/effect/floor_decal/corner/paleblue/diagonal
+	icon_state = "corner_white_diagonal"
 
 /obj/effect/floor_decal/corner/paleblue/full
-	icon_state = "corner_paleblue_full"
+	icon_state = "corner_white_full"
 
 /obj/effect/floor_decal/corner/green
 	name = "green corner"
-	icon_state = "corner_green"
+	color = "#8DAF6A"
+
+/obj/effect/floor_decal/corner/green/diagonal
+	icon_state = "corner_white_diagonal"
 
 /obj/effect/floor_decal/corner/green/full
-	icon_state = "corner_green_full"
+	icon_state = "corner_white_full"
 
 /obj/effect/floor_decal/corner/lime
 	name = "lime corner"
-	icon_state = "corner_lime"
+	color = "#AED18B"
+
+/obj/effect/floor_decal/corner/lime/diagonal
+	icon_state = "corner_white_diagonal"
 
 /obj/effect/floor_decal/corner/lime/full
-	icon_state = "corner_lime_full"
+	icon_state = "corner_white_full"
 
 /obj/effect/floor_decal/corner/yellow
 	name = "yellow corner"
-	icon_state = "corner_yellow"
+	color = "#B19664"
+
+/obj/effect/floor_decal/corner/yellow/diagonal
+	icon_state = "corner_white_diagonal"
 
 /obj/effect/floor_decal/corner/yellow/full
-	name = "yellow corner"
-	icon_state = "corner_yellow_full"
+	icon_state = "corner_white_full"
 
 /obj/effect/floor_decal/corner/beige
 	name = "beige corner"
-	icon_state = "corner_beige"
+	color = "#CEB689"
+
+/obj/effect/floor_decal/corner/beige/diagonal
+	icon_state = "corner_white_diagonal"
 
 /obj/effect/floor_decal/corner/beige/full
-	icon_state = "corner_beige_full"
+	icon_state = "corner_white_full"
 
 /obj/effect/floor_decal/corner/red
 	name = "red corner"
-	icon_state = "corner_red"
+	color = "#AA5F61"
 
 /obj/effect/floor_decal/corner/red/diagonal
-	name = "red corner"
-	icon_state = "corner_red_diagonal"
+	icon_state = "corner_white_diagonal"
 
 /obj/effect/floor_decal/corner/red/full
-	icon_state = "corner_red_full"
+	icon_state = "corner_white_full"
 
 /obj/effect/floor_decal/corner/pink
 	name = "pink corner"
-	icon_state = "corner_pink"
+	color = "#CC9090"
+
+/obj/effect/floor_decal/corner/pink/diagonal
+	icon_state = "corner_white_diagonal"
 
 /obj/effect/floor_decal/corner/pink/full
-	icon_state = "corner_pink_full"
+	icon_state = "corner_white_full"
 
 /obj/effect/floor_decal/corner/purple
 	name = "purple corner"
-	icon_state = "corner_purple"
+	color = "#A2819E"
+
+/obj/effect/floor_decal/corner/purple/diagonal
+	icon_state = "corner_white_diagonal"
 
 /obj/effect/floor_decal/corner/purple/full
-	name = "purple corner"
-	icon_state = "corner_purple_full"
+	icon_state = "corner_white_full"
 
 /obj/effect/floor_decal/corner/mauve
 	name = "mauve corner"
-	icon_state = "corner_mauve"
+	color = "#BDA2BA"
+
+/obj/effect/floor_decal/corner/mauve/diagonal
+	icon_state = "corner_white_diagonal"
 
 /obj/effect/floor_decal/corner/mauve/full
-	icon_state = "corner_mauve_full"
+	icon_state = "corner_white_full"
 
 /obj/effect/floor_decal/corner/orange
 	name = "orange corner"
-	icon_state = "corner_orange"
+	color = "#B95A00"
+
+/obj/effect/floor_decal/corner/orange/diagonal
+	icon_state = "corner_white_diagonal"
+
+/obj/effect/floor_decal/corner/orange/full
+	icon_state = "corner_white_full"
 
 /obj/effect/floor_decal/corner/brown
 	name = "brown corner"
-	icon_state = "corner_brown"
+	color = "#917448"
+
+/obj/effect/floor_decal/corner/brown/diagonal
+	icon_state = "corner_white_diagonal"
 
 /obj/effect/floor_decal/corner/brown/full
-	icon_state = "corner_brown_full"
+	icon_state = "corner_white_full"
 
 /obj/effect/floor_decal/corner/white
 	name = "white corner"
@@ -126,15 +159,13 @@ var/list/floor_decals = list()
 
 /obj/effect/floor_decal/corner/grey
 	name = "grey corner"
-	icon_state = "corner_grey"
+	color = "#8D8C8C"
 
 /obj/effect/floor_decal/corner/grey/diagonal
-	name = "grey corner"
-	icon_state = "corner_grey_diagonal"
+	icon_state = "corner_white_diagonal"
 
 /obj/effect/floor_decal/corner/grey/full
-	name = "grey corner"
-	icon_state = "corner_grey_full"
+	icon_state = "corner_white_full"
 
 /obj/effect/floor_decal/industrial/warning
 	name = "hazard stripes"
@@ -160,18 +191,23 @@ var/list/floor_decals = list()
 /obj/effect/floor_decal/industrial/hatch
 	name = "hatched marking"
 	icon_state = "delivery"
+	color = "#CFCF55"
+
+/obj/effect/floor_decal/industrial/outline
+	name = "white outline"
+	icon_state = "outline"
 
 /obj/effect/floor_decal/industrial/outline/blue
 	name = "blue outline"
-	icon_state = "outline_blue"
+	color = "#00B8B2"
 
 /obj/effect/floor_decal/industrial/outline/yellow
 	name = "yellow outline"
-	icon_state = "outline_yellow"
+	color = "#CFCF55"
 
 /obj/effect/floor_decal/industrial/outline/grey
 	name = "grey outline"
-	icon_state = "outline_grey"
+	color = "#808080"
 
 /obj/effect/floor_decal/industrial/loading
 	name = "loading area"
