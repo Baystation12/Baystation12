@@ -29,11 +29,13 @@
 
 /mob/living/bot/Life()
 	..()
+	if(health <= 0)
+		death()
+		return
 	weakened = 0
 	stunned = 0
 	paralysis = 0
-	if(health <= 0)
-		death()
+	update_canmove()
 
 /mob/living/bot/updatehealth()
 	if(status_flags & GODMODE)
