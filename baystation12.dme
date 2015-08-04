@@ -1502,6 +1502,7 @@
 #include "code\modules\random_map\random_map_verbs.dm"
 #include "code\modules\random_map\automata\automata.dm"
 #include "code\modules\random_map\automata\caves.dm"
+#include "code\modules\random_map\automata\diona.dm"
 #include "code\modules\random_map\building\building.dm"
 #include "code\modules\random_map\drop\droppod.dm"
 #include "code\modules\random_map\drop\droppod_doors.dm"

@@ -1,3 +1,10 @@
+/turf/simulated/floor/diona
+	name = "biomass flooring"
+	icon_state = "diona"
+
+/turf/simulated/floor/diona/attackby()
+	return
+
 /turf/simulated/floor/airless
 	icon_state = "floor"
 	name = "airless floor"

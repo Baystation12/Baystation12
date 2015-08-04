@@ -307,7 +307,7 @@
 		if(material)
 			for(var/i = 1 to 4)
 				I = image(icon, "[material.icon_base]_[connections[i]]", dir = 1<<(i-1))
-				I.color = material.icon_colour
+				if(material.icon_colour) I.color = material.icon_colour
 				I.alpha = 255 * material.opacity
 				overlays += I
 
