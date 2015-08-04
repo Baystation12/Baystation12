@@ -439,7 +439,8 @@ var/list/name_to_material
 	return (hardness > 35) //todo
 
 /material/glass/reinforced
-	name = "reinforced glass"
+	name = "rglass"
+	display_name = "reinforced glass"
 	stack_type = /obj/item/stack/material/glass/reinforced
 	flags = MATERIAL_BRITTLE
 	icon_colour = "#00E1FF"

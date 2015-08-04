@@ -192,7 +192,7 @@
 /obj/item/stack/material/glass/reinforced
 	name = "reinforced glass"
 	icon_state = "sheet-rglass"
-	default_type = "reinforced glass"
+	default_type = "rglass"
 
 /obj/item/stack/material/glass/phoronglass
 	name = "phoron glass"

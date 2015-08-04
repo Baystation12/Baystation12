@@ -240,7 +240,7 @@
 		var/material_name = S.get_material_name()
 		if (S)
 			if (S.get_amount() >= 1)
-				if(material_name == "reinforced glass")
+				if(material_name == "rglass")
 					playsound(src.loc, 'sound/items/Crowbar.ogg', 100, 1)
 					user.visible_message("[user] adds [S.name] to the airlock assembly.", "You start to install [S.name] into the airlock assembly.")
 					if(do_after(user, 40) && !glass)
