@@ -18,7 +18,7 @@
 	return STATUS_UPDATE						// Ghosts can view updates
 
 /mob/living/silicon/pai/can_use_topic(var/src_object)
-	if(src_object == src && !stat)
+	if((src_object == src || src_object == radio) && !stat)
 		return STATUS_INTERACTIVE
 	else
 		return ..()
