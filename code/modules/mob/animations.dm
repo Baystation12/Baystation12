@@ -82,7 +82,10 @@ note dizziness decrements automatically in the mob's Life() proc.
 /mob/var/floatiness = 0
 
 /mob/proc/make_floating(var/n)
-
+	if(buckled)
+		if(is_floating)
+			stop_floating()
+		return
 	floatiness = n
 
 	if(floatiness && !is_floating)

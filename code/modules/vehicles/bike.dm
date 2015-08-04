@@ -29,27 +29,27 @@
 	set category = "Vehicle"
 	set src in view(0)
 
-	if(usr.stat != 0) return
+	if(usr.incapacitated()) return
 
 	if(!on)
 		turn_on()
-		src.visible_message("\the [src] rumbles to life.", "You hear something rumble deeply.")
+		src.visible_message("\The [src] rumbles to life.", "You hear something rumble deeply.")
 	else
 		turn_off()
-		src.visible_message("\the [src] putters before turning off.", "You hear something putter slowly.")
+		src.visible_message("\The [src] putters before turning off.", "You hear something putter slowly.")
 
 /obj/vehicle/bike/verb/kickstand()
 	set name = "Toggle Kickstand"
 	set category = "Vehicle"
 	set src in view(0)
 
-	if(usr.stat != 0) return
+	if(usr.incapacitated()) return
 
 	if(kickstand)
 		src.visible_message("You put up \the [src]'s kickstand.")
 	else
 		if(istype(src.loc,/turf/space))
-			usr << "\red You don't think kickstands work in space..."
+			usr << "<span class='warning'> You don't think kickstands work in space...</span>"
 			return
 		src.visible_message("You put down \the [src]'s kickstand.")
 		if(pulledby)
@@ -67,7 +67,7 @@
 
 /obj/vehicle/bike/MouseDrop_T(var/atom/movable/C, mob/user as mob)
 	if(!load(C))
-		user << "\red You were unable to load [C] on [src]."
+		user << "<span class='warning'> You were unable to load \the [C] onto \the [src].</span>"
 		return
 
 /obj/vehicle/bike/attack_hand(var/mob/user as mob)
@@ -75,6 +75,9 @@
 		unload(load)
 		user << "You unbuckle yourself from \the [src]"
 
+
+/obj/vehicle/bike/attackby(var/obj/item/weapon/W, var/mob/M)
+	//we want people to be able to place other people on the bikes. For now.
 /obj/vehicle/bike/relaymove(mob/user, direction)
 	if(user != load || !on)
 		return
@@ -89,18 +92,13 @@
 		move_delay = 1
 	else
 		move_delay = 10
-	var ret = ..()
-	//overlay.dir = dir
-	//update_icon()
-	return ret
+	return ..()
 
 /obj/vehicle/bike/turn_on()
 	ion.start()
 	anchored = 1
-	overlays.Cut()
-	overlays += image('icons/obj/bike.dmi', "bike_front_on", MOB_LAYER + 1)
 
-	icon_state = "bike_back_on"
+	update_icon()
 
 	if(pulledby)
 		pulledby.stop_pulling()
@@ -109,14 +107,30 @@
 	ion.stop()
 	anchored = kickstand
 
-	overlays.Cut()
-	overlays += image('icons/obj/bike.dmi', "bike_front_off", MOB_LAYER + 1)
+	update_icon()
 
-	icon_state = "bike_back_off"
 	..()
 
 /obj/vehicle/bike/bullet_act(var/obj/item/projectile/Proj)
 	if(buckled_mob && prob(40))
 		buckled_mob.bullet_act(Proj)
 		return
+	..()
+
+/obj/vehicle/bike/update_icon()
+	overlays.Cut()
+
+	if(on)
+		overlays += image('icons/obj/bike.dmi', "bike_front_on", MOB_LAYER + 1)
+		icon_state = "bike_back_on"
+	else
+		overlays += image('icons/obj/bike.dmi', "bike_front_off", MOB_LAYER + 1)
+		icon_state = "bike_back_off"
+
+	..()
+
+
+/obj/vehicle/bike/Destroy()
+	qdel(ion)
+
 	..()
