@@ -13,11 +13,28 @@
 /turf/simulated/floor/holofloor/set_flooring()
 	return
 
+/turf/simulated/floor/holofloor/carpet
+	name = "carpet"
+	icon = 'icons/turf/flooring/carpet.dmi'
+	icon_state = "carpet"
+	initial_flooring = /decl/flooring/carpet
+
 /turf/simulated/floor/holofloor/tiled
 	name = "floor"
 	icon = 'icons/turf/flooring/tiles.dmi'
 	icon_state = "steel"
 	initial_flooring = /decl/flooring/tiling
+
+/turf/simulated/floor/holofloor/tiled/dark
+	name = "dark floor"
+	icon_state = "dark"
+	initial_flooring = /decl/flooring/tiling/dark
+
+/turf/simulated/floor/holofloor/lino
+	name = "lino"
+	icon = 'icons/turf/flooring/linoleum.dmi'
+	icon_state = "lino"
+	initial_flooring = /decl/flooring/linoleum
 
 /turf/simulated/floor/holofloor/wood
 	name = "wooden floor"
@@ -54,15 +71,27 @@
 	icon_state = "[((x + y) ^ ~(x * y) + z) % 25]"
 
 /turf/simulated/floor/holofloor/beach
-	name = "sand"
-	base_name = "sand"
 	desc = "Uncomfortably gritty for a hologram."
 	base_desc = "Uncomfortably gritty for a hologram."
-	icon_state = "asteroid"
-	base_icon_state = "asteroid"
-	icon = 'icons/turf/flooring/asteroid.dmi'
-	base_icon = 'icons/turf/flooring/asteroid.dmi'
+	icon = 'icons/misc/beach.dmi'
+	base_icon = 'icons/misc/beach.dmi'
 	initial_flooring = null
+
+/turf/simulated/floor/holofloor/beach/sand
+	name = "sand"
+	icon_state = "desert"
+	base_icon_state = "desert"
+
+/turf/simulated/floor/holofloor/beach/coastline
+	name = "coastline"
+	icon = 'icons/misc/beach2.dmi'
+	icon_state = "sandwater"
+	base_icon_state = "sandwater"
+
+/turf/simulated/floor/holofloor/beach/water
+	name = "water"
+	icon_state = "seashallow"
+	base_icon_state = "seashallow"
 
 /turf/simulated/floor/holofloor/desert
 	name = "desert sand"

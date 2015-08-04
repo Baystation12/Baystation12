@@ -17,7 +17,6 @@
 	var/flooring_override
 	var/initial_flooring
 	var/decl/flooring/flooring
-	var/list/decals
 	var/mineral = DEFAULT_WALL_MATERIAL
 
 	thermal_conductivity = 0.040
