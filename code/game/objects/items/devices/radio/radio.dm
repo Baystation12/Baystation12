@@ -149,6 +149,9 @@
 			else
 				channels[chan_name] |= FREQ_LISTENING
 
+	if(href_list["nowindow"]) // here for pAIs, maybe others will want it, idk
+		return
+
 	interact(usr)
 
 /obj/item/device/radio/proc/autosay(var/message, var/from, var/channel) //BS12 EDIT
