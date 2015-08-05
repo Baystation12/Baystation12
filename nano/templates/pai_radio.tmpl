@@ -8,11 +8,11 @@ code/modules/mob/living/silicon/pai/software_modules.dm
 	</div>
 	<div class="itemContent">
 		{{if data.listening}}
-			{{:helper.link("On", '', {"stopic":"radio", "talk":1}, 'selected')}}
-			{{:helper.link("Off", '', {"stopic":"radio", "talk":1})}}
+			{{:helper.link("On", '', {"stopic":"radio", "talk":1, "nowindow":1}, 'selected')}}
+			{{:helper.link("Off", '', {"stopic":"radio", "talk":1, "nowindow":1})}}
 		{{else}}
-			{{:helper.link("On", '', {"stopic":"radio", "talk":1})}}
-			{{:helper.link("Off", '', {"stopic":"radio", "talk":1}, 'selected')}}
+			{{:helper.link("On", '', {"stopic":"radio", "talk":1, "nowindow":1})}}
+			{{:helper.link("Off", '', {"stopic":"radio", "talk":1, "nowindow":1}, 'selected')}}
 		{{/if}}
 	</div>
 </div>
@@ -22,11 +22,11 @@ code/modules/mob/living/silicon/pai/software_modules.dm
 		Frequency:
 	</div>
 	<div class="itemContent">
-		{{:helper.link("--", '', {"stopic":"radio", "freq":-10})}}
-		{{:helper.link("-",  '', {"stopic":"radio", "freq": -2})}}
+		{{:helper.link("--", '', {"stopic":"radio", "freq":-10, "nowindow":1})}}
+		{{:helper.link("-",  '', {"stopic":"radio", "freq": -2, "nowindow":1})}}
 		<div style="float: left; width: 80px; text-align: center;">{{:data.frequency}}</div>
-		{{:helper.link("+",  '', {"stopic":"radio", "freq":  2})}}
-		{{:helper.link("++", '', {"stopic":"radio", "freq": 10})}}
+		{{:helper.link("+",  '', {"stopic":"radio", "freq":  2, "nowindow":1})}}
+		{{:helper.link("++", '', {"stopic":"radio", "freq": 10, "nowindow":1})}}
 	</div>
 </div>
 
@@ -37,11 +37,11 @@ code/modules/mob/living/silicon/pai/software_modules.dm
 	</div>
 	<div class="itemContent">
 		{{if value.listening}}
-			{{:helper.link("On", '', {"stopic":"radio", "channel":value.name, "listen":1}, 'selected')}}
-			{{:helper.link("Off", '', {"stopic":"radio", "channel":value.name, "listen":1})}}
+			{{:helper.link("On", '', {"stopic":"radio", "channel":value.name, "listen":1, "nowindow":1}, 'selected')}}
+			{{:helper.link("Off", '', {"stopic":"radio", "channel":value.name, "listen":1, "nowindow":1})}}
 		{{else}}
-			{{:helper.link("On", '', {"stopic":"radio", "channel":value.name, "listen":1})}}
-			{{:helper.link("Off", '', {"stopic":"radio", "channel":value.name, "listen":1}, 'selected')}}
+			{{:helper.link("On", '', {"stopic":"radio", "channel":value.name, "listen":1, "nowindow":1})}}
+			{{:helper.link("Off", '', {"stopic":"radio", "channel":value.name, "listen":1, "nowindow":1}, 'selected')}}
 		{{/if}}
 	</div>
 </div>
