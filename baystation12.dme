@@ -1278,6 +1278,7 @@
 #include "code\modules\mob\living\silicon\decoy\death.dm"
 #include "code\modules\mob\living\silicon\decoy\decoy.dm"
 #include "code\modules\mob\living\silicon\decoy\life.dm"
+#include "code\modules\mob\living\silicon\pai\admin.dm"
 #include "code\modules\mob\living\silicon\pai\death.dm"
 #include "code\modules\mob\living\silicon\pai\examine.dm"
 #include "code\modules\mob\living\silicon\pai\life.dm"

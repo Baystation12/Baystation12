@@ -76,7 +76,8 @@
 	return candidates
 
 /datum/antagonist/proc/attempt_random_spawn()
-	attempt_spawn(flags & (ANTAG_OVERRIDE_MOB|ANTAG_OVERRIDE_JOB))
+	build_candidate_list(flags & (ANTAG_OVERRIDE_MOB|ANTAG_OVERRIDE_JOB))
+	attempt_spawn()
 	finalize_spawn()
 
 /datum/antagonist/proc/attempt_late_spawn(var/datum/mind/player)
@@ -90,16 +91,17 @@
 		add_antagonist(player,0,1,0,1,1)
 	return
 
+/datum/antagonist/proc/build_candidate_list(var/ghosts_only)
+	// Get the raw list of potential players.
+	update_current_antag_max()
+	candidates = get_candidates(ghosts_only)
+
 //Selects players that will be spawned in the antagonist role from the potential candidates
 //Selected players are added to the pending_antagonists lists.
 //Attempting to spawn an antag role with ANTAG_OVERRIDE_JOB should be done before jobs are assigned,
 //so that they do not occupy regular job slots. All other antag roles should be spawned after jobs are
 //assigned, so that job restrictions can be respected.
-/datum/antagonist/proc/attempt_spawn(var/ghosts_only)
-
-	// Get the raw list of potential players.
-	update_current_antag_max()
-	candidates = get_candidates(ghosts_only)
+/datum/antagonist/proc/attempt_spawn(var/rebuild_candidates = 1)
 
 	// Update our boundaries.
 	if(!candidates.len)
@@ -115,7 +117,7 @@
 
 /datum/antagonist/proc/draft_antagonist(var/datum/mind/player)
 	//Check if the player can join in this antag role, or if the player has already been given an antag role.
-	if(can_become_antag(player) && !player.special_role)
+	if(!can_become_antag(player) || player.special_role)
 		return 0
 
 	pending_antagonists |= player
