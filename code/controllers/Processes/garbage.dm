@@ -28,6 +28,10 @@ var/list/delayed_garbage = list()
 	delayed_garbage.Cut()
 	delayed_garbage = null
 
+#ifdef GC_FINDREF
+world/loop_checks = 0
+#endif
+
 /datum/controller/process/garbage_collector/doWork()
 	if(!garbage_collect)
 		return
@@ -57,6 +61,22 @@ var/list/delayed_garbage = list()
 		if(A && A.gcDestroyed == GCd_at_time) // So if something else coincidently gets the same ref, it's not deleted by mistake
 			// Something's still referring to the qdel'd object.  Kill it.
 			testing("GC: -- \ref[A] | [A.type] was unable to be GC'd and was deleted --")
+			#ifdef GC_FINDREF
+			var/found = 0
+			if(A.loc != null)
+				testing("GC: [A] | [A.type] is located in [A.loc] instead of null")
+			var/searched = "/atom"
+			for(var/atom/D in world)
+				found += LookForRef(D, A)
+			if(!found)
+				searched = "/datum and /atom"
+				for(var/datum/D)
+					found += LookForRef(D, A)
+			if(!found)
+				testing("GC: Referencs to [A] | [A.type] not found, possibly in a global list, an object of an unsupported type, or an object that was deleted this gc cycle")
+			else
+				testing("GC: Found [found] reference\s to [A] | [A.type] in [searched] types")
+			#endif
 			logging["[A.type]"]++
 			del(A)
 			++dels
@@ -66,6 +86,28 @@ var/list/delayed_garbage = list()
 			testing("GC: [refID] properly GC'd at [world.time] with timeout [GCd_at_time]")
 		#endif
 		destroyed.Cut(1, 2)
+
+#ifdef GC_FINDREF
+/datum/controller/process/garbage_collector/proc/LookForRef(var/datum/D, var/atom/targ)
+	. = 0
+	for(var/V in D.vars)
+		if(V == "contents")
+			continue
+		if(D.vars[V] == targ)
+			testing("GC: [targ] | [targ.type] referenced by [D] | [D.type], var [V]")
+			. += 1
+		else if(islist(D.vars[V]))
+			. += LookForListRef(D.vars[V], targ, D, V)
+
+/datum/controller/process/garbage_collector/proc/LookForListRef(var/list/L, var/atom/targ, var/datum/D, var/V)
+	. = 0
+	for(var/F in L)
+		if(F == targ)
+			testing("GC: [targ] | [targ.type] referenced by [D] | [D.type], list [V]")
+			. += 1
+		if(islist(F))
+			. += LookForListRef(F, targ, D, "[F] in list [V]")
+#endif
 
 /datum/controller/process/garbage_collector/proc/AddTrash(datum/A)
 	if(!istype(A) || !isnull(A.gcDestroyed))
@@ -198,4 +240,8 @@ var/list/delayed_garbage = list()
 
 #ifdef GC_DEBUG
 #undef GC_DEBUG
+#endif
+
+#ifdef GC_FINDREF
+#undef GC_FINDREF
 #endif
