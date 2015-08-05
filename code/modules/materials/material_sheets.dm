@@ -198,9 +198,9 @@
 	name = "phoron glass"
 	singular_name = "phoron glass sheet"
 	icon_state = "sheet-phoronglass"
-	default_type = "phoron glass"
+	default_type = "phglass"
 
 /obj/item/stack/material/glass/phoronrglass
 	name = "reinforced phoron glass"
 	icon_state = "sheet-phoronrglass"
-	default_type = "reinforced phoron glass"
+	default_type = "rphglass"

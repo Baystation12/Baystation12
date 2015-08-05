@@ -329,7 +329,7 @@ var/list/name_to_material
 	icon_colour = "#666666"
 
 /material/steel/holographic
-	name = "holographic " + DEFAULT_WALL_MATERIAL
+	name = "holo" + DEFAULT_WALL_MATERIAL
 	display_name = DEFAULT_WALL_MATERIAL
 	stack_type = null
 	shard_type = SHARD_NONE
@@ -458,7 +458,8 @@ var/list/name_to_material
 	rod_product = null
 
 /material/glass/phoron
-	name = "phoron glass"
+	name = "phglass"
+	display_name = "phoron glass"
 	stack_type = /obj/item/stack/material/glass/phoronglass
 	flags = MATERIAL_BRITTLE
 	ignition_point = PHORON_MINIMUM_BURN_TEMPERATURE+300
@@ -470,7 +471,8 @@ var/list/name_to_material
 	rod_product = /obj/item/stack/material/glass/phoronrglass
 
 /material/glass/phoron/reinforced
-	name = "reinforced phoron glass"
+	name = "rphglass"
+	display_name = "reinforced phoron glass"
 	stack_type = /obj/item/stack/material/glass/phoronrglass
 	stack_origin_tech = "materials=4;phorontech=2"
 	composite_material = list() //todo
@@ -491,7 +493,7 @@ var/list/name_to_material
 	stack_origin_tech = "materials=3"
 
 /material/plastic/holographic
-	name = "holographic plastic"
+	name = "holoplastic"
 	display_name = "plastic"
 	stack_type = null
 	shard_type = SHARD_NONE
@@ -569,7 +571,7 @@ var/list/name_to_material
 	sheet_plural_name = "planks"
 
 /material/wood/holographic
-	name = "holographic wood"
+	name = "holowood"
 	display_name = "wood"
 	stack_type = null
 	shard_type = SHARD_NONE
