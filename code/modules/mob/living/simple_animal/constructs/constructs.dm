@@ -27,6 +27,7 @@
 	show_stat_health = 1
 	faction = "cult"
 	supernatural = 1
+	see_invisible = SEE_INVISIBLE_OBSERVER_NOLIGHTING
 	var/nullblock = 0
 
 	mob_swap_flags = HUMAN|SIMPLE_ANIMAL|SLIME|MONKEY

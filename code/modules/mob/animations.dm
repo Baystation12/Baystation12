@@ -77,9 +77,35 @@ note dizziness decrements automatically in the mob's Life() proc.
 	pixel_y = old_y
 
 
-//handles up-down floaty effect in space
+//handles up-down floaty effect in space and zero-gravity
 /mob/var/is_floating = 0
 /mob/var/floatiness = 0
+
+/mob/proc/update_floating(var/dense_object=0)
+
+	if(anchored||buckled)
+		make_floating(0)
+		return
+
+	var/turf/turf = get_turf(src)
+	if(!istype(turf,/turf/space))
+		var/area/A = turf.loc
+		if(istype(A) && A.has_gravity)
+			make_floating(0)
+			return
+		else if (Check_Shoegrip())
+			make_floating(0)
+			return
+		else
+			make_floating(1)
+			return
+
+	if(dense_object && Check_Shoegrip())
+		make_floating(0)
+		return
+
+	make_floating(1)
+	return
 
 /mob/proc/make_floating(var/n)
 
