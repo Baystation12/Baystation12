@@ -41,6 +41,31 @@ world/loop_checks = 0
 	var/checkRemain = max_checks_multiplier * schedule_interval
 	var/maxDels = max_forcedel_multiplier * schedule_interval
 
+	#ifdef GC_FINDREF
+	var/list/searching = list()
+	for(var/refID in destroyed) // Reference search - before all deletions and for all at once
+		var/GCd_at_time = destroyed[refID]
+		if(GCd_at_time > time_to_kill)
+			break
+		var/atom/A = locate(refID)
+		if(A && A.gcDestroyed == GCd_at_time)
+			searching += A
+		if(searching.len >= checkRemain)
+			break
+
+	for(var/atom/A in searching)
+		testing("GC: Searching references for [A] | [A.type]")
+		if(A.loc != null)
+			testing("GC: [A] | [A.type] is located in [A.loc] instead of null")
+		if(A.contents.len)
+			testing("GC: [A] | [A.type] has contents: [list2text(A.contents)]")
+	if(searching.len)
+		for(var/atom/D in world)
+			LookForRefs(D, searching)
+		for(var/datum/D)
+			LookForRefs(D, searching)
+	#endif
+
 	while(destroyed.len && --checkRemain >= 0)
 		if(dels >= maxDels)
 			#ifdef GC_DEBUG
@@ -61,22 +86,6 @@ world/loop_checks = 0
 		if(A && A.gcDestroyed == GCd_at_time) // So if something else coincidently gets the same ref, it's not deleted by mistake
 			// Something's still referring to the qdel'd object.  Kill it.
 			testing("GC: -- \ref[A] | [A.type] was unable to be GC'd and was deleted --")
-			#ifdef GC_FINDREF
-			var/found = 0
-			if(A.loc != null)
-				testing("GC: [A] | [A.type] is located in [A.loc] instead of null")
-			var/searched = "/atom"
-			for(var/atom/D in world)
-				found += LookForRef(D, A)
-			if(!found)
-				searched = "/datum and /atom"
-				for(var/datum/D)
-					found += LookForRef(D, A)
-			if(!found)
-				testing("GC: Referencs to [A] | [A.type] not found, possibly in a global list, an object of an unsupported type, or an object that was deleted this gc cycle")
-			else
-				testing("GC: Found [found] reference\s to [A] | [A.type] in [searched] types")
-			#endif
 			logging["[A.type]"]++
 			del(A)
 			++dels
@@ -88,25 +97,29 @@ world/loop_checks = 0
 		destroyed.Cut(1, 2)
 
 #ifdef GC_FINDREF
-/datum/controller/process/garbage_collector/proc/LookForRef(var/datum/D, var/atom/targ)
+/datum/controller/process/garbage_collector/proc/LookForRefs(var/datum/D, var/list/targ)
 	. = 0
 	for(var/V in D.vars)
 		if(V == "contents")
 			continue
-		if(D.vars[V] == targ)
-			testing("GC: [targ] | [targ.type] referenced by [D] | [D.type], var [V]")
-			. += 1
+		if(istype(D.vars[V], /atom))
+			for(var/atom/A in targ)
+				if(D.vars[V] == A)
+					testing("GC: [A] | [A.type] referenced by [D] | [D.type], var [V]")
+					. += 1
 		else if(islist(D.vars[V]))
-			. += LookForListRef(D.vars[V], targ, D, V)
+			. += LookForListRefs(D.vars[V], targ, D, V)
 
-/datum/controller/process/garbage_collector/proc/LookForListRef(var/list/L, var/atom/targ, var/datum/D, var/V)
+/datum/controller/process/garbage_collector/proc/LookForListRefs(var/list/L, var/list/targ, var/datum/D, var/V)
 	. = 0
 	for(var/F in L)
-		if(F == targ)
-			testing("GC: [targ] | [targ.type] referenced by [D] | [D.type], list [V]")
-			. += 1
+		if(istype(F, /atom))
+			for(var/atom/A in targ)
+				if(F == A)
+					testing("GC: [A] | [A.type] referenced by [D] | [D.type], list [V]")
+					. += 1
 		if(islist(F))
-			. += LookForListRef(F, targ, D, "[F] in list [V]")
+			. += LookForListRefs(F, targ, D, "[F] in list [V]")
 #endif
 
 /datum/controller/process/garbage_collector/proc/AddTrash(datum/A)
