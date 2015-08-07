@@ -25,17 +25,20 @@
 */
 
 // Assoc list containing all material datums indexed by name.
+var/list/all_materials
 var/list/name_to_material
 
 // Builds the datum list above.
 /proc/populate_material_list(force_remake=0)
 	if(name_to_material && !force_remake) return // Already set up!
 	name_to_material = list()
+	all_materials = list()
 	for(var/type in typesof(/material) - /material)
 		var/material/new_mineral = new type
 		if(!new_mineral.name)
 			continue
 		name_to_material[lowertext(new_mineral.name)] = new_mineral
+		all_materials += new_mineral
 	return 1
 
 // Safety proc to make sure the material list exists before trying to grab from it.
@@ -43,6 +46,11 @@ var/list/name_to_material
 	if(!name_to_material)
 		populate_material_list()
 	return name_to_material[name]
+
+/proc/get_all_materials()
+	if(!all_materials)
+		populate_material_list()
+	return all_materials
 
 // Material definition and procs follow.
 /material
@@ -287,6 +295,7 @@ var/list/name_to_material
 	icon_reinf = "reinf_stone"
 	icon_colour = "#D9C179"
 	shard_type = SHARD_STONE_PIECE
+	shard_can_repair = 0
 	weight = 22
 	hardness = 55
 	door_icon_base = "stone"
@@ -561,6 +570,7 @@ var/list/name_to_material
 	stack_type = /obj/item/stack/material/cardboard
 	flags = MATERIAL_BRITTLE
 	integrity = 10
+	shard_can_repair = 0
 	icon_base = "solid"
 	icon_reinf = "reinf_over"
 	icon_colour = "#AAAAAA"
@@ -575,6 +585,8 @@ var/list/name_to_material
 /material/cloth //todo
 	name = "cloth"
 	stack_origin_tech = list(TECH_MATERIAL = 2)
+	shard_can_repair = 0
+	shard_type = SHARD_NONE
 	door_icon_base = "wood"
 	ignition_point = T0C+232
 	melting_point = T0C+300
@@ -587,6 +599,7 @@ var/list/name_to_material
 	icon_colour = "#402821"
 	icon_reinf = "reinf_cult"
 	shard_type = SHARD_STONE_PIECE
+	shard_can_repair = 0
 	sheet_singular_name = "brick"
 	sheet_plural_name = "bricks"
 
@@ -608,6 +621,7 @@ var/list/name_to_material
 	icon_colour = "#E85DD8"
 	dooropen_noise = 'sound/effects/attackblob.ogg'
 	door_icon_base = "resin"
+	shard_can_repair = 0
 	melting_point = T0C+300
 	sheet_singular_name = "blob"
 	sheet_plural_name = "blobs"
@@ -619,6 +633,7 @@ var/list/name_to_material
 	return 0
 
 //TODO PLACEHOLDERS:
+//Possibly put these under the cloth type?
 /material/leather
 	name = "leather"
 	icon_colour = "#5C4831"
