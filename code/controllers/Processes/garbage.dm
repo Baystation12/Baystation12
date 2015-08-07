@@ -103,10 +103,10 @@ world/loop_checks = 0
 		if(V == "contents")
 			continue
 		if(istype(D.vars[V], /atom))
-			for(var/atom/A in targ)
-				if(D.vars[V] == A)
-					testing("GC: [A] | [A.type] referenced by [D] | [D.type], var [V]")
-					. += 1
+			var/atom/A = D.vars[V]
+			if(A in targ)
+				testing("GC: [A] | [A.type] referenced by [D] | [D.type], var [V]")
+				. += 1
 		else if(islist(D.vars[V]))
 			. += LookForListRefs(D.vars[V], targ, D, V)
 
@@ -114,10 +114,10 @@ world/loop_checks = 0
 	. = 0
 	for(var/F in L)
 		if(istype(F, /atom))
-			for(var/atom/A in targ)
-				if(F == A)
-					testing("GC: [A] | [A.type] referenced by [D] | [D.type], list [V]")
-					. += 1
+			var/atom/A = F
+			if(A in targ)
+				testing("GC: [A] | [A.type] referenced by [D] | [D.type], list [V]")
+				. += 1
 		if(islist(F))
 			. += LookForListRefs(F, targ, D, "[F] in list [V]")
 #endif
