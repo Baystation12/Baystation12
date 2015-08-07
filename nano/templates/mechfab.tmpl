@@ -1,0 +1,51 @@
+<h3>Exosuit Fabricator</h3>
+<div style="float: left; width: 50%;">
+	<div class="item">
+		{{for data.categories}}
+			{{:helper.link(value, null, {'category' : value}, value == data.category ? 'selected' : null)}}
+		{{empty}}
+			There are no known designs
+		{{/for}}
+	</div>
+	<div class="item">
+		{{for data.buildable}}
+			{{if value.category == data.category}}
+				<div class="line">
+					{{:helper.link(value.name, null, {'build' : value.id})}} - {{:value.resourses}}, {{:value.time}}
+				</div>
+			{{/if}}
+		{{/for}}
+	</div>
+</div>
+<div style="float: right; width: 50%">
+	<div class="item">
+		<div class="line">
+			<b>Queue contains:</b>
+		</div>
+		{{if data.current}}
+			<div class="line">
+				<b>Now: {{:data.current}}</b> ({{:data.builtperc}}% ready) - {{:helper.link('Cancel', null, {'remove' : 1})}}
+			</div>
+			{{for data.queue}}
+				<div class="line">
+					{{:index + 2}}: {{:value}} - {{:helper.link('Remove', null, {'remove' : index + 2})}}
+				</div>
+			{{empty}}
+				<div class="line">
+					The queue is empty
+				</div>
+			{{/for}}
+		{{else}}
+			Nothing
+		{{/if}}
+	</div>
+	<div class="item">
+		<b>Materials:</b>
+		{{for data.materials}}
+			<div class="line">
+				{{:value.mat}}: {{:value.amt}}/{{:data.maxres}}
+			</div>
+		{{/for}}
+	</div>
+</div>
+

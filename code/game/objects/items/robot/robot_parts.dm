@@ -69,8 +69,6 @@
 	desc = "A heavily reinforced case containing cyborg logic boards, with space for a standard power cell."
 	icon_state = "chest"
 	part = list("groin","chest")
-	construction_time = 350
-	construction_cost = list(DEFAULT_WALL_MATERIAL=40000)
 	var/wires = 0.0
 	var/obj/item/weapon/cell/cell = null
 
@@ -79,8 +77,6 @@
 	desc = "A standard reinforced braincase, with spine-plugged neural socket and sensor gimbals."
 	icon_state = "head"
 	part = list("head")
-	construction_time = 350
-	construction_cost = list(DEFAULT_WALL_MATERIAL=25000)
 	var/obj/item/device/flash/flash1 = null
 	var/obj/item/device/flash/flash2 = null
 
@@ -88,8 +84,6 @@
 	name = "endoskeleton"
 	desc = "A complex metal backbone with standard limb sockets and pseudomuscle anchors."
 	icon_state = "robo_suit"
-	construction_time = 500
-	construction_cost = list(DEFAULT_WALL_MATERIAL=50000)
 	var/obj/item/robot_parts/l_arm/l_arm = null
 	var/obj/item/robot_parts/r_arm/r_arm = null
 	var/obj/item/robot_parts/l_leg/l_leg = null
