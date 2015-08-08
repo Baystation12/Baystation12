@@ -704,8 +704,8 @@ var/list/turret_icons
 				return
 
 		if(1)
-			if(istype(I, /obj/item/stack/material/steel))
-				var/obj/item/stack/material/steel/M = I
+			if(istype(I, /obj/item/stack/material) && I.get_material_name() == DEFAULT_WALL_MATERIAL)
+				var/obj/item/stack/M = I
 				if(M.use(2))
 					user << "<span class='notice'>You add some metal armor to the interior frame.</span>"
 					build_step = 2
@@ -796,8 +796,8 @@ var/list/turret_icons
 			//attack_hand() removes the prox sensor
 
 		if(6)
-			if(istype(I, /obj/item/stack/material/steel))
-				var/obj/item/stack/material/steel/M = I
+			if(istype(I, /obj/item/stack/material) && I.get_material_name() == DEFAULT_WALL_MATERIAL)
+				var/obj/item/stack/M = I
 				if(M.use(2))
 					user << "<span class='notice'>You add some metal armor to the exterior frame.</span>"
 					build_step = 7

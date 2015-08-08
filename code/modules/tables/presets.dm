@@ -63,11 +63,11 @@
 		icon_state = "holo_preview"
 		color = "#EEEEEE"
 		New()
-			material = get_material_by_name("holographic [DEFAULT_TABLE_MATERIAL]")
+			material = get_material_by_name("holo[DEFAULT_TABLE_MATERIAL]")
 			..()
 
 	woodentable/holotable
 		icon_state = "holo_preview"
 		New()
-			material = get_material_by_name("holographic wood")
+			material = get_material_by_name("holowood")
 			..()
