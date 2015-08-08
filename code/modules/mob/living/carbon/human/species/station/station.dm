@@ -304,3 +304,34 @@
 	H.h_style = ""
 	spawn(100)
 		if(H) H.update_hair()
+
+
+/datum/species/quorum
+	name = "Quora"
+	name_plural = "quorum"
+	language = "Short Ranged Telepathy"
+	brute_mod = 1.3
+	unarmed_types = list(/datum/unarmed_attack/stomp/weak, /datum/unarmed_attack/kick/weak, /datum/unarmed_attack/punch/weak)
+	blurb = "A gray, psionic species, Quorum hail from a ruined homeworld. Their species is gifted with psychokinetic powers of varying degrees.\
+	 Their native language is entirely telepathic."
+
+
+	icobase = 'icons/mob/human_races/r_quorum.dmi'
+	deform = 'icons/mob/human_races/r_quorum.dmi'
+
+
+	flags = CAN_JOIN | HAS_EYE_COLOR
+
+	siemens_coefficient = 0.4
+	blood_color = "#33CC33"
+
+	inherent_verbs = list(
+		/mob/living/carbon/human/proc/quorum_whisper
+		)
+
+	has_organ = list(
+		"brain" = /obj/item/organ/brain,
+		"eyes" = /obj/item/organ/eyes,
+		"heart" = /obj/item/organ/heart/quorum,
+		"liver" = /obj/item/organ/liver/quorum
+		)

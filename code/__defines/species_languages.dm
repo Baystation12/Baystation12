@@ -34,6 +34,7 @@
 #define LANGUAGE_ROOTSPEAK "Rootspeak"
 #define LANGUAGE_TRADEBAND "Tradeband"
 #define LANGUAGE_GUTTER "Gutter"
+#define LANGUAGE_quorum "Quorom"
 
 // Language flags.
 #define WHITELISTED 1   // Language is available if the speaker is whitelisted.

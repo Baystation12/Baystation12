@@ -256,3 +256,31 @@
 	qdel(src)
 
 
+
+/mob/living/carbon/human/proc/quorum_whisper()
+	set name = "Communicate Telepathically"
+	set desc = "Communicate over a distance with your mind."
+	set category = "Abilities"
+
+	//pretty much C&P from remoteSay
+
+	var/list/creatures = list()
+	for(var/mob/living/carbon/h in world)
+		creatures += h
+	var/mob/target = input("Who do you want to communicate with ?") as null|anything in creatures
+	if (isnull(target))
+		return
+	//probability (of correct letter) is:
+	//(100-halloss)/100 = X
+	//health/MaxHealth = Y
+	//100 * X * Y
+	var/msg = sanitize(input("Message:", "Telepathic message") as text|null)
+	if(msg)
+		msg = stars(msg,max(1,100-halloss) * max(1,health)/maxHealth)
+		log_say("Quorum telepathy: [key_name(src)]-> [target.key] : [msg]")
+		target.show_message("You hear something whisper into your ear: <i>[msg]</i>")
+		usr.show_message("You say: <i>[msg]</i> to [target]")
+		for(var/mob/dead/observer/G in world)
+			G.show_message("<i>Telepathic message from <b>[src]</b> to <b>[target]</b>: [msg]</i>")
+
+	return

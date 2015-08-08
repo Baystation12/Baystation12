@@ -69,3 +69,13 @@
 /datum/unarmed_attack/slime_glomp/apply_effects()
 	//Todo, maybe have a chance of causing an electrical shock?
 	return
+
+
+/datum/unarmed_attack/stomp/weak
+	damage = -1
+
+/datum/unarmed_attack/punch/weak
+	damage = -1
+
+/datum/unarmed_attack/kick/weak
+	damage = -1

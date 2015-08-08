@@ -113,6 +113,23 @@
 		name = pick(ai_names)
 	return name
 
+/datum/language/quorum
+	name = "Short Ranged Telepathy"
+	desc = "Quorum speak in telepathy, barely perceptible by the ears it comes across as a murmor or a hum to those not privy."
+	speech_verb = "hums"
+	ask_verb = "hums"
+	exclaim_verb = "hums"
+	colour = "say_quote"
+	key = "z"
+	flags = RESTRICTED | NO_STUTTER
+	syllables = list("*")
+	space_chance = 25
+
+/datum/language/quorum/get_random_name()
+
+	name = "[pick(list("Shaper","Dreamer","Mender","Thinker","Leader"))] [pick(first_names_male)] [rand(100, 999)]"
+
+	return name
 //Syllable Lists
 /*
 	This list really long, mainly because I can't make up my mind about which mandarin syllables should be removed,
