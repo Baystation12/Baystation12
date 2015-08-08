@@ -7,60 +7,6 @@ GAS ANALYZER
 MASS SPECTROMETER
 REAGENT SCANNER
 */
-/obj/item/device/t_scanner
-	name = "\improper T-ray scanner"
-	desc = "A terahertz-ray emitter and scanner used to detect underfloor objects such as cables and pipes."
-	icon_state = "t-ray0"
-	var/on = 0
-	slot_flags = SLOT_BELT
-	w_class = 2
-	item_state = "electronic"
-
-	matter = list(DEFAULT_WALL_MATERIAL = 150)
-
-	origin_tech = list(TECH_MAGNET = 1, TECH_ENGINERING = 1)
-
-/obj/item/device/t_scanner/attack_self(mob/user)
-
-	on = !on
-	icon_state = "t-ray[on]"
-
-	if(on)
-		processing_objects.Add(src)
-
-
-/obj/item/device/t_scanner/process()
-	if(!on)
-		processing_objects.Remove(src)
-		return null
-
-	for(var/turf/T in range(1, src.loc) )
-
-		if(!T.intact)
-			continue
-
-		for(var/obj/O in T.contents)
-
-			if(O.level != 1)
-				continue
-
-			if(O.invisibility == 101)
-				O.invisibility = 0
-				O.alpha = 128
-				spawn(10)
-					if(O)
-						var/turf/U = O.loc
-						if(U.intact)
-							O.invisibility = 101
-							O.alpha = 255
-
-		var/mob/living/M = locate() in T
-		if(M && M.invisibility == 2)
-			M.invisibility = 0
-			spawn(2)
-				if(M)
-					M.invisibility = INVISIBILITY_LEVEL_TWO
-
 
 /obj/item/device/healthanalyzer
 	name = "health analyzer"
