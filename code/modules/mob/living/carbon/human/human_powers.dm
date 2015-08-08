@@ -263,6 +263,8 @@
 	set category = "Abilities"
 
 	//pretty much C&P from remoteSay
+	if(usr.incapacitated())
+		return
 
 	var/list/creatures = list()
 	for(var/mob/living/carbon/h in world)
