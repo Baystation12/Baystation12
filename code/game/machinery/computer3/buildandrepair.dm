@@ -178,13 +178,14 @@
 			if(istype(P, /obj/item/weapon/crowbar)) // complicated check
 				remove_peripheral()
 
-			if(istype(P, /obj/item/stack/material/glass))
-				if(P:amount >= 2)
+			if(istype(P, /obj/item/stack/material) && P.get_material_name() == "glass")
+				var/obj/item/stack/S = P
+				if(S.amount >= 2)
 					playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 					if(do_after(user, 20))
-						if(P)
-							P:use(2)
-							user << "\blue You put in the glass panel."
+						if(S)
+							S.use(2)
+							user << "<span class='notice'>You put in the glass panel.</span>"
 							src.state = 4
 							src.icon_state = "4"
 		if(4)

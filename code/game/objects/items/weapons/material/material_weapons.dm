@@ -34,6 +34,9 @@
 			if(!isnull(matter[material_type]))
 				matter[material_type] *= force_divisor // May require a new var instead.
 
+/obj/item/weapon/material/get_material()
+	return material
+
 /obj/item/weapon/material/proc/update_force()
 	if(edge || sharp)
 		force = material.get_edge_damage()

@@ -33,6 +33,9 @@
 		padding_material = get_material_by_name(new_padding_material)
 	update_icon()
 
+/obj/structure/bed/get_material()
+	return material
+
 // Reuse the cache/code from stools, todo maybe unify.
 /obj/structure/bed/update_icon()
 	// Prep icon.
