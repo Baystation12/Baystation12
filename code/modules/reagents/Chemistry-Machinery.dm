@@ -157,13 +157,14 @@
 
 /obj/machinery/chem_dispenser/attackby(var/obj/item/weapon/reagent_containers/B as obj, var/mob/user as mob)
 	if(isrobot(user))
-		return
+		return 1
 	if(src.beaker)
 		user << "Something is already loaded into the machine."
 		return
 	if(istype(B, /obj/item/weapon/reagent_containers/glass) || istype(B, /obj/item/weapon/reagent_containers/food))
 		if(!accept_glass && istype(B,/obj/item/weapon/reagent_containers/food))
 			user << "<span class='notice'>This machine only accepts beakers</span>"
+			return
 		src.beaker =  B
 		user.drop_item()
 		B.loc = src
