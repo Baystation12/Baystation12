@@ -347,7 +347,7 @@ var/list/sacrificed = list()
 			corpse_to_raise.visible_message("<span class='warning'>[corpse_to_raise]'s eyes glow with a faint red as he stands up, slowly starting to breathe again.</span>", \
 			"<span class='warning'>Life... I'm alive again...</span>", \
 			"<span class='warning'>You hear a faint, slightly familiar whisper.</span>")
-			body_to_sacrifice.visible_message("<span class='danger'>[body_to_sacrifice] is torn apart, a black smoke swiftly dissipating from his remains!</span>", \
+			body_to_sacrifice.visible_message("<span class='danger'>[body_to_sacrifice] is torn apart, a black smoke swiftly dissipating from \his remains!</span>", \
 			"<span class='danger'>You feel as your blood boils, tearing you apart.</span>", \
 			"<span class='danger'>You hear a thousand voices, all crying in pain.</span>")
 			body_to_sacrifice.gib()
@@ -568,7 +568,7 @@ var/list/sacrificed = list()
 			user.say("Uhrast ka'hfa heldsagen ver[pick("'","`")]lot!")
 			user.take_overall_damage(200, 0)
 			runedec+=10
-			user.visible_message("<span class='danger'>[user] keels over dead, his blood glowing blue as it escapes his body and dissipates into thin air.</span>", \
+			user.visible_message("<span class='danger'>\The [user] keels over dead, \his blood glowing blue as it escapes \his body and dissipates into thin air.</span>", \
 			"<span class='danger'>In the last moment of your humble life, you feel an immense pain as fabric of reality mends... with your blood.</span>", \
 			"<span class='warning'>You hear faint rustle.</span>")
 			for(,user.stat==2)
@@ -851,7 +851,7 @@ var/list/sacrificed = list()
 				if (cultist == user) //just to be sure.
 					return
 				if(cultist.buckled || cultist.handcuffed || (!isturf(cultist.loc) && !istype(cultist.loc, /obj/structure/closet)))
-					user << "<span class='warning'>You cannot summon \the [cultist], for his shackles of blood are strong.</span>"
+					user << "<span class='warning'>You cannot summon \the [cultist], for \his shackles of blood are strong.</span>"
 					return fizzle()
 				cultist.loc = src.loc
 				cultist.lying = 1
