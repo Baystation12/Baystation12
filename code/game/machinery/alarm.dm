@@ -506,34 +506,12 @@
 	var/list/environment_data = new
 	data["has_environment"] = total
 	if(total)
-
 		var/pressure = environment.return_pressure()
 		environment_data[++environment_data.len] = list("name" = "Pressure", "value" = pressure, "unit" = "kPa", "danger_level" = pressure_dangerlevel)
 		environment_data[++environment_data.len] = list("name" = "Oxygen", "value" = environment.gas["oxygen"] / total * 100, "unit" = "%", "danger_level" = oxygen_dangerlevel)
 		environment_data[++environment_data.len] = list("name" = "Carbon dioxide", "value" = environment.gas["carbon_dioxide"] / total * 100, "unit" = "%", "danger_level" = co2_dangerlevel)
 		environment_data[++environment_data.len] = list("name" = "Toxins", "value" = environment.gas["phoron"] / total * 100, "unit" = "%", "danger_level" = phoron_dangerlevel)
 		environment_data[++environment_data.len] = list("name" = "Temperature", "value" = environment.temperature, "unit" = "K ([round(environment.temperature - T0C, 0.1)]C)", "danger_level" = temperature_dangerlevel)
-
-		current_settings = TLV["oxygen"]
-		var/oxygen_danger = get_danger_level(environment.gas["oxygen"]*partial_pressure, current_settings)
-		environment_data[++environment_data.len] = list("name" = "Oxygen", "value" = environment.gas["oxygen"] / total * 100, "unit" = "%", "danger_level" = oxygen_danger)
-		data["total_danger"] = max(oxygen_danger, data["total_danger"])
-
-		current_settings = TLV["carbon dioxide"]
-		var/carbon_dioxide_danger = get_danger_level(environment.gas["carbon_dioxide"]*partial_pressure, current_settings)
-		environment_data[++environment_data.len] = list("name" = "Carbon dioxide", "value" = environment.gas["carbon_dioxide"] / total * 100, "unit" = "%", "danger_level" = carbon_dioxide_danger)
-		data["total_danger"] = max(carbon_dioxide_danger, data["total_danger"])
-
-		current_settings = TLV["phoron"]
-		var/phoron_danger = get_danger_level(environment.gas["phoron"]*partial_pressure, current_settings)
-		environment_data[++environment_data.len] = list("name" = "Toxins", "value" = environment.gas["phoron"] / total * 100, "unit" = "%", "danger_level" = phoron_danger)
-		data["total_danger"] = max(phoron_danger, data["total_danger"])
-
-		current_settings = TLV["temperature"]
-		var/temperature_danger = get_danger_level(environment.temperature, current_settings)
-		environment_data[++environment_data.len] = list("name" = "Temperature", "value" = environment.temperature, "unit" = "K ([round(environment.temperature - T0C, 0.1)]C)", "danger_level" = temperature_danger)
-		data["total_danger"] = max(temperature_danger, data["total_danger"])
-
 	data["total_danger"] = danger_level
 	data["environment"] = environment_data
 	data["atmos_alarm"] = alarm_area.atmosalm
