@@ -88,7 +88,8 @@ var/list/admin_verbs_admin = list(
 	/client/proc/change_human_appearance_admin,	/* Allows an admin to change the basic appearance of human-based mobs */
 	/client/proc/change_human_appearance_self,	/* Allows the human-based mob itself change its basic appearance */
 	/client/proc/change_security_level,
-	/client/proc/view_chemical_reaction_logs
+	/client/proc/view_chemical_reaction_logs,
+	/client/proc/makePAI
 )
 var/list/admin_verbs_ban = list(
 	/client/proc/unban_panel,

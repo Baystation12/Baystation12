@@ -30,9 +30,9 @@ Used In File(s): \code\game\machinery\alarm.dm
 		{{:helper.fixed(value.value, 1)}}
 		</span>{{:value.unit}}<br>
 	{{/for}}
-	Local Status: {{if value.danger_level == 2}}
+	Local Status: {{if data.total_danger == 2}}
 			<span class='bad'>DANGER: Internals Required
-		{{else value.danger_level == 1}}
+		{{else data.total_danger == 1}}
 			<span class='average'>Caution
 		{{else}}
 			<span class='good'>Optimal

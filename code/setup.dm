@@ -977,6 +977,9 @@ var/list/be_special_flags = list(
 #ifndef CUSTOM_ITEM_MOB
 #define CUSTOM_ITEM_MOB 'icons/mob/custom_items_mob.dmi'
 #endif
+#ifndef CUSTOM_ITEM_ROBOT
+#define CUSTOM_ITEM_ROBOT 'icons/mob/custom_synthetic.dmi'
+#endif
 
 //default item on-mob icons
 #define INV_HEAD_DEF_ICON 'icons/mob/head.dmi'
