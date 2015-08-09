@@ -104,16 +104,13 @@ using metal and glass, it uses glass and reagents (usually sulfuric acis).
 		return 1
 	if(O.is_open_container())
 		return 0
-//	if(!istype(O, /obj/item/stack/material/glass) && !istype(O, /obj/item/stack/material/gold) && !istype(O, /obj/item/stack/material/diamond) && !istype(O, /obj/item/stack/material/uranium))
-//		user << "<span class='notice'>You cannot insert this item into \the [src]!</span>"
-//		return 1
 	if(stat)
 		return 1
 	if(busy)
 		user << "<span class='notice'>\The [src] is busy. Please wait for completion of previous operation.</span>"
 		return 1
 
-	if(istype(O, /obj/item/stack/material/glass) || istype(O, /obj/item/stack/material/gold) || istype(O, /obj/item/stack/material/diamond) || istype(O, /obj/item/stack/material/uranium))
+	if(istype(O, /obj/item/stack/material) && O.get_material_name() in list("glass", "gold", "diamond", "uranium"))
 
 		var/obj/item/stack/material/stack = O
 		if((TotalMaterials() + stack.perunit) > max_material_amount)

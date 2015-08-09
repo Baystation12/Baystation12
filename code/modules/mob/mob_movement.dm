@@ -449,17 +449,10 @@
 /mob/proc/Process_Spacemove(var/check_drift = 0)
 
 	if(!Check_Dense_Object()) //Nothing to push off of so end here
-		make_floating(1)
+		update_floating(0)
 		return 0
 
-	if(istype(src,/mob/living/carbon/human/))
-		var/mob/living/carbon/human/H = src
-		if(istype(H.shoes, /obj/item/clothing/shoes/magboots) && (H.shoes.flags & NOSLIP))  //magboots + dense_object = no floaty effect
-			make_floating(0)
-		else
-			make_floating(1)
-	else
-		make_floating(1)
+	update_floating(1)
 
 	if(restrained()) //Check to see if we can do things
 		return 0
@@ -477,6 +470,8 @@
 /mob/proc/Check_Dense_Object() //checks for anything to push off in the vicinity. also handles magboots on gravity-less floors tiles
 
 	var/dense_object = 0
+	var/shoegrip
+
 	for(var/turf/turf in oview(1,src))
 		if(istype(turf,/turf/space))
 			continue
@@ -484,14 +479,9 @@
 		if(istype(turf,/turf/simulated/floor)) // Floors don't count if they don't have gravity
 			var/area/A = turf.loc
 			if(istype(A) && A.has_gravity == 0)
-				var/can_walk = 0
-
-				if(ishuman(src))  // Only humans can wear magboots, so we give them a chance to.
-					var/mob/living/carbon/human/H = src
-					if(istype(H.shoes, /obj/item/clothing/shoes/magboots) && (H.shoes.flags & NOSLIP))
-						can_walk = 1
-
-				if(!can_walk)
+				if(shoegrip == null)
+					shoegrip = Check_Shoegrip() //Shoegrip is only ever checked when a zero-gravity floor is encountered to reduce load
+				if(!shoegrip)
 					continue
 
 		dense_object++
@@ -511,6 +501,8 @@
 
 	return dense_object
 
+/mob/proc/Check_Shoegrip()
+	return 0
 
 /mob/proc/Process_Spaceslipping(var/prob_slip = 5)
 	//Setup slipage

@@ -51,8 +51,8 @@
 /datum/light_source/proc/destroy()
 	destroyed = 1
 	force_update()
-	if(source_atom) source_atom.light_sources -= src
-	if(top_atom) top_atom.light_sources -= src
+	if(source_atom && source_atom.light_sources) source_atom.light_sources -= src
+	if(top_atom && top_atom.light_sources) top_atom.light_sources -= src
 
 /datum/light_source/proc/update(atom/new_top_atom)
 	if(new_top_atom && new_top_atom != top_atom)
@@ -62,7 +62,7 @@
 			if(!top_atom.light_sources) top_atom.light_sources = list()
 			top_atom.light_sources += src
 
-	if(!needs_update)
+	if(!needs_update) //Incase we're already updating either way.
 		lighting_update_lights += src
 		needs_update = 1
 
@@ -130,16 +130,16 @@
 #if LIGHTING_FALLOFF == 1 //circular
   #define LUM_DISTANCE(swapvar, O, T) swapvar = (O.x - T.x)**2 + (O.y - T.y)**2 + LIGHTING_HEIGHT
   #if LIGHTING_LAMBERTIAN == 1
-    #define LUM_ATTENUATION(swapvar) swapvar = CLAMP01((1 - CLAMP01(sqrt(swapvar) / light_range)) * (1 / sqrt(swapvar + 1)))
+    #define LUM_ATTENUATION(swapvar) swapvar = CLAMP01((1 - CLAMP01(sqrt(swapvar) / max(1,light_range))) * (1 / sqrt(swapvar + 1)))
   #else
-    #define LUM_ATTENUATION(swapvar) swapvar = 1 - CLAMP01(sqrt(swapvar) / light_range)
+    #define LUM_ATTENUATION(swapvar) swapvar = 1 - CLAMP01(sqrt(swapvar) / max(1,light_range))
   #endif
 #elif LIGHTING_FALLOFF == 2 //square
   #define LUM_DISTANCE(swapvar, O, T) swapvar = abs(O.x - T.x) + abs(O.y - T.y) + LIGHTING_HEIGHT
   #if LIGHTING_LAMBERTIAN == 1
-    #define LUM_ATTENUATION(swapvar) swapvar = CLAMP01((1 - CLAMP01(swapvar / light_range)) * (1 / sqrt(swapvar**2 + 1)))
+    #define LUM_ATTENUATION(swapvar) swapvar = CLAMP01((1 - CLAMP01(swapvar / max(1,light_range))) * (1 / sqrt(swapvar**2 + 1)))
   #else
-    #define LUM_ATTENUATION(swapvar) swapvar = CLAMP01(swapvar / light_range)
+    #define LUM_ATTENUATION(swapvar) swapvar = CLAMP01(swapvar / max(1,light_range))
   #endif
 #endif
 
@@ -203,7 +203,6 @@
 	FOR_DVIEW(var/turf/T, light_range, source_turf, INVISIBILITY_LIGHTING)
 		view += T	//Filter out turfs.
 	END_FOR_DVIEW
-
 	//This is the part where we calculate new turfs (if any)
 	var/list/new_turfs = view - effect_turf //This will result with all the tiles that are added.
 	for(var/turf/T in new_turfs)

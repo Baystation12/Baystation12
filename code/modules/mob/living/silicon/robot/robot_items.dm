@@ -37,7 +37,7 @@
 				for(var/obj/I in contents)
 					for(var/mob/M in I.contents)
 						M.death()
-					if(istype(I,/obj/item/stack/material))//Only deconsturcts one sheet at a time instead of the entire stack
+					if(istype(I,/obj/item/stack/material))//Only deconstructs one sheet at a time instead of the entire stack
 						var/obj/item/stack/material/S = I
 						if(S.get_amount() > 1)
 							S.use(1)
