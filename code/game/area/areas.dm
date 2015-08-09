@@ -14,9 +14,11 @@
 	all_areas += src
 
 	if(!requires_power)
-		power_light = 0			//rastaf0
-		power_equip = 0			//rastaf0
-		power_environ = 0		//rastaf0
+
+	//If an APC is present it will set these, otherwise they stay off.
+	power_light = 0
+	power_equip = 0
+	power_environ = 0
 
 	..()
 
