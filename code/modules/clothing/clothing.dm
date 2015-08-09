@@ -412,7 +412,8 @@ BLIND     // can't see anything
 	else
 		under_icon = INV_W_UNIFORM_DEF_ICON
 
-	if((worn_state + "_d_s") in icon_states(under_icon))
+	// The _s is because the icon update procs append it.
+	if(("[worn_state]_d_s") in icon_states(under_icon))
 		if(rolled_down != 1)
 			rolled_down = 0
 	else
