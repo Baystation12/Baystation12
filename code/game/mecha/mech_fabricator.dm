@@ -2,7 +2,7 @@
 	icon = 'icons/obj/robotics.dmi'
 	icon_state = "fab-idle"
 	name = "Exosuit Fabricator"
-	//desc = "Nothing is being built."
+	desc = "A machine used for construction of robotcs and mechas."
 	density = 1
 	anchored = 1
 	use_power = 1
@@ -48,8 +48,11 @@
 	if(stat)
 		return
 	if(busy)
+		use_power = 2
 		progress += speed
 		finalize()
+	else
+		use_power = 1
 	update_icon()
 
 /obj/machinery/mecha_part_fabricator/update_icon()
@@ -64,21 +67,20 @@
 /obj/machinery/mecha_part_fabricator/RefreshParts()
 	res_max_amount = 0
 	for(var/obj/item/weapon/stock_parts/matter_bin/M in component_parts)
-		res_max_amount += M.rating * 100000
+		res_max_amount += M.rating * 100000 // 200k -> 600k
 	var/T = 0
 	for(var/obj/item/weapon/stock_parts/manipulator/M in component_parts)
 		T += M.rating
-	mat_efficiency = 1 - (T - 1) / 4
+	mat_efficiency = 1 - (T - 1) / 4 // 1 -> 0.5
 	for(var/obj/item/weapon/stock_parts/micro_laser/M in component_parts) // Not resetting T is intended; speed is affected by both
 		T += M.rating
-	speed = T / 2
+	speed = T / 2 // 1 -> 3
 
 /obj/machinery/mecha_part_fabricator/attack_hand(var/mob/user)
 	if(..())
 		return
 	if(!allowed(user))
 		return
-
 	ui_interact(user)
 
 /obj/machinery/mecha_part_fabricator/ui_interact(var/mob/user, var/ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1) 
@@ -116,7 +118,10 @@
 	if(href_list["category"])
 		if(href_list["category"] in categories)
 			category = href_list["category"]
-//TODO: eject and sync
+
+	if(href_list["eject"])
+		eject_materials(href_list["eject"], text2num(href_list["amount"]))
+//TODO: sync
 	return 1
 
 /obj/machinery/mecha_part_fabricator/attackby(var/obj/item/I, var/mob/user)
@@ -264,3 +269,34 @@
 	. = list()
 	for(var/T in materials)
 		. += list(list("mat" = capitalize(T), "amt" = materials[T]))
+
+/obj/machinery/mecha_part_fabricator/proc/eject_materials(var/material, var/amount)
+	material = lowertext(material)
+	var/mattype
+	switch(material)
+		if(DEFAULT_WALL_MATERIAL)
+			mattype = /obj/item/stack/material/steel
+		if("glass")
+			mattype = /obj/item/stack/material/glass
+		if("gold")
+			mattype = /obj/item/stack/material/gold
+		if("silver")
+			mattype = /obj/item/stack/material/silver
+		if("diamond")
+			mattype = /obj/item/stack/material/diamond
+		if("phoron")
+			mattype = /obj/item/stack/material/phoron
+		if("uranium")
+			mattype = /obj/item/stack/material/uranium
+		else
+			return
+	var/obj/item/stack/material/S = new mattype(loc)
+	if(amount == 0)
+		amount = S.max_amount
+	world << "[materials[material]] | [S.perunit]"
+	var/ejected = min(round(materials[material] / S.perunit), amount)
+	S.amount = min(ejected, amount)
+	if(S.amount <= 0)
+		qdel(S)
+		return
+	materials[material] -= ejected * S.perunit
