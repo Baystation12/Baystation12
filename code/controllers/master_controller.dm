@@ -49,7 +49,7 @@ datum/controller/game_controller/proc/setup_objects()
 	for(var/atom/movable/object in world)
 		object.initialize()
 
-	admin_notice("<span class='danger>Initializing areas</span>", R_DEBUG)
+	admin_notice("<span class='danger'>Initializing areas</span>", R_DEBUG)
 	sleep(-1)
 	for(var/area/area in all_areas)
 		area.initialize()
