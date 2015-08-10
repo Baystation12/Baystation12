@@ -1,16 +1,9 @@
-/datum/firemode/energy
-	var/projectile_type = null
-	var/modifystate = null
-	var/charge_cost = null
-	var/fire_sound = null
-
 /obj/item/weapon/gun/energy
 	name = "energy gun"
 	desc = "A basic energy-based gun."
 	icon_state = "energy"
 	fire_sound = 'sound/weapons/Taser.ogg'
 	fire_sound_text = "laser blast"
-	firemode_type = /datum/firemode/energy
 
 	var/obj/item/weapon/cell/power_supply //What type of power cell this uses
 	var/charge_cost = 200 //How much energy is needed to fire.
@@ -26,15 +19,8 @@
 	var/recharge_time = 4
 	var/charge_tick = 0
 
-/obj/item/weapon/gun/energy/switch_firemodes(mob/user=null)
-	..()
-	var/datum/firemode/energy/current_mode = firemodes[sel_mode]
-	if(istype(current_mode))
-		projectile_type = isnull(current_mode.projectile_type)? initial(projectile_type) : current_mode.projectile_type
-		modifystate = isnull(current_mode.modifystate)? initial(modifystate) : current_mode.modifystate
-		charge_cost = isnull(current_mode.charge_cost)? initial(charge_cost) : current_mode.charge_cost
-		fire_sound = isnull(current_mode.fire_sound)? initial(fire_sound) : current_mode.fire_sound
-
+/obj/item/weapon/gun/energy/switch_firemodes()
+	if(..())
 		update_icon()
 
 /obj/item/weapon/gun/energy/emp_act(severity)
