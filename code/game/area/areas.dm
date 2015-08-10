@@ -14,13 +14,17 @@
 	all_areas += src
 
 	if(!requires_power)
-		power_light = 0			//rastaf0
-		power_equip = 0			//rastaf0
-		power_environ = 0		//rastaf0
+		power_light = 0
+		power_equip = 0
+		power_environ = 0
 
 	..()
 
-//	spawn(15)
+/area/proc/initialize()
+	if(!requires_power || !apc)
+		power_light = 0
+		power_equip = 0
+		power_environ = 0
 	power_change()		// all machines set to current power level, also updates lighting icon
 
 /area/proc/get_contents()
