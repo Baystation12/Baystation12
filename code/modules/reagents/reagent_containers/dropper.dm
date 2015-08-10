@@ -9,6 +9,7 @@
 	amount_per_transfer_from_this = 5
 	possible_transfer_amounts = list(1,2,3,4,5)
 	w_class = 1
+	slot_flags = SLOT_EARS
 	volume = 5
 
 	afterattack(var/obj/target, var/mob/user, var/flag)
@@ -64,7 +65,7 @@
 				return
 
 			else
-				trans = reagents.trans_to(target, amount_per_transfer_from_this)
+				trans = reagents.splash(target, amount_per_transfer_from_this) //sprinkling reagents on generic non-mobs
 				user << "<span class='notice'>You transfer [trans] units of the solution.</span>"
 
 		else // Taking from something

@@ -1,11 +1,10 @@
 /mob/living/carbon/New()
-	create_reagents(1000)
-	var/datum/reagents/R1 = new/datum/reagents(1000)
-	var/datum/reagents/R2 = new/datum/reagents(1000)
-	ingested = R1
-	touching = R2
-	R1.my_atom = src
-	R2.my_atom = src
+	//setup reagent holders
+	bloodstr = new/datum/reagents/metabolism(1000, src, CHEM_BLOOD)
+	ingested = new/datum/reagents/metabolism(1000, src, CHEM_INGEST)
+	touching = new/datum/reagents/metabolism(1000, src, CHEM_TOUCH)
+	reagents = bloodstr
+
 	..()
 
 /mob/living/carbon/Life()
@@ -23,6 +22,12 @@
 	for(var/food in stomach_contents)
 		qdel(food)
 	return ..()
+
+/mob/living/carbon/rejuvenate()
+	bloodstr.clear_reagents()
+	ingested.clear_reagents()
+	touching.clear_reagents()
+	..()
 
 /mob/living/carbon/Move(NewLoc, direct)
 	. = ..()
@@ -219,23 +224,23 @@
 		else if (on_fire)
 			playsound(src.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 			if (M.on_fire)
-				M.visible_message("<span class='warning'>[M] tries to pat out [src]'s flames, but to no avail!</span>", \
+				M.visible_message("<span class='warning'>[M] tries to pat out [src]'s flames, but to no avail!</span>",
 				"<span class='warning'>You try to pat out [src]'s flames, but to no avail! Put yourself out first!</span>")
 			else
-				M.visible_message("<span class='warning'>[M] tries to pat out [src]'s flames!</span>", \
+				M.visible_message("<span class='warning'>[M] tries to pat out [src]'s flames!</span>",
 				"<span class='warning'>You try to pat out [src]'s flames! Hot!</span>")
 				if(do_mob(M, src, 15))
 					if (prob(10) && (M.fire_stacks <= 0))
-						src.fire_stacks -= 2
+						src.fire_stacks -= 0.5
 						M.fire_stacks += 1
 					M.IgniteMob()
 					if (M.on_fire)
-						M.visible_message("<span class='danger'>The fire spreads from [src] to [M]!</span>", \
+						M.visible_message("<span class='danger'>The fire spreads from [src] to [M]!</span>",
 						"<span class='danger'>The fire spreads to you as well!</span>")
 					else
-						src.fire_stacks -= 3 //Less effective than stop, drop, and roll
+						src.fire_stacks -= 0.5 //Less effective than stop, drop, and roll - also accounting for the fact that it takes half as long.
 						if (src.fire_stacks <= 0)
-							M.visible_message("<span class='warning'>[M] successfully pats out [src]'s flames.</span>", \
+							M.visible_message("<span class='warning'>[M] successfully pats out [src]'s flames.</span>",
 							"<span class='warning'>You successfully pat out [src]'s flames.</span>")
 							src.ExtinguishMob()
 							src.fire_stacks = 0
@@ -262,8 +267,9 @@
 				M.visible_message("<span class='notice'>[M] shakes [src] trying to wake [t_him] up!</span>", \
 									"<span class='notice'>You shake [src] trying to wake [t_him] up!</span>")
 			else
-				if(istype(H))
-					H.species.hug(H,src)
+				var/mob/living/carbon/human/hugger = M
+				if(istype(hugger))
+					hugger.species.hug(hugger,src)
 				else
 					M.visible_message("<span class='notice'>[M] hugs [src] to make [t_him] feel better!</span>", \
 								"<span class='notice'>You hug [src] to make [t_him] feel better!</span>")
@@ -309,22 +315,6 @@
 
 
 //Throwing stuff
-
-/mob/living/carbon/proc/toggle_throw_mode()
-	if (src.in_throw_mode)
-		throw_mode_off()
-	else
-		throw_mode_on()
-
-/mob/living/carbon/proc/throw_mode_off()
-	src.in_throw_mode = 0
-	if(src.throw_icon) //in case we don't have the HUD and we use the hotkey
-		src.throw_icon.icon_state = "act_throw_off"
-
-/mob/living/carbon/proc/throw_mode_on()
-	src.in_throw_mode = 1
-	if(src.throw_icon)
-		src.throw_icon.icon_state = "act_throw_on"
 
 /mob/proc/throw_item(atom/target)
 	return
@@ -382,7 +372,8 @@
 
 /mob/living/carbon/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	..()
-	bodytemperature = max(bodytemperature, BODYTEMP_HEAT_DAMAGE_LIMIT+10)
+	var/temp_inc = max(BODYTEMP_HEATING_MAX*(1-get_heat_protection()), 0)
+	bodytemperature = min(bodytemperature + temp_inc, exposed_temperature)
 
 /mob/living/carbon/can_use_hands()
 	if(handcuffed)
@@ -452,7 +443,7 @@
 	if(istype(AM, /mob/living/carbon) && prob(10))
 		src.spread_disease_to(AM, "Contact")
 
-/mob/living/carbon/can_use_vents()
+/mob/living/carbon/cannot_use_vents()
 	return
 
 /mob/living/carbon/slip(var/slipped_on,stun_duration=8)

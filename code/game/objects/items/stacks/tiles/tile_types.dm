@@ -26,7 +26,7 @@
 	throwforce = 1.0
 	throw_speed = 5
 	throw_range = 20
-	flags = CONDUCT
+	flags = 0
 	origin_tech = list(TECH_BIO = 1)
 
 /*
@@ -41,7 +41,7 @@
 	throwforce = 1.0
 	throw_speed = 5
 	throw_range = 20
-	flags = CONDUCT
+	flags = 0
 
 /obj/item/stack/tile/wood/cyborg
 	name = "wood floor tile synthesizer"
@@ -63,4 +63,4 @@
 	throwforce = 1.0
 	throw_speed = 5
 	throw_range = 20
-	flags = CONDUCT
+	flags = 0

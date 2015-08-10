@@ -42,7 +42,6 @@
 		/obj/machinery/smartfridge/,
 		/obj/machinery/biogenerator,
 		/obj/machinery/constructable_frame,
-		/obj/machinery/bunsen_burner,
 		/obj/machinery/radiocarbon_spectrometer
 		)
 
@@ -88,7 +87,7 @@
 
 		if(reagents.total_volume)
 			user << "<span class='notice'>You splash the solution onto [target].</span>"
-			reagents.trans_to(target, reagents.total_volume)
+			reagents.splash(target, reagents.total_volume)
 			return
 
 	attackby(obj/item/weapon/W as obj, mob/user as mob)

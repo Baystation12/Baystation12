@@ -4,7 +4,7 @@
 	icon_state = "secbot0"
 	maxHealth = 50
 	health = 50
-	req_access = list(access_security, access_forensics_lockers)
+	req_one_access = list(access_security, access_forensics_lockers)
 	botcard_access = list(access_security, access_sec_doors, access_forensics_lockers, access_morgue, access_maint_tunnels, access_court)
 
 	var/mob/target
@@ -342,7 +342,7 @@
 	if(emagged)
 		return 10
 
-	return M.assess_perp(access_scanner, idcheck, check_records, check_arrest)
+	return M.assess_perp(access_scanner, 0, idcheck, check_records, check_arrest)
 
 /mob/living/bot/secbot/proc/patrol_step()
 	if(loc == patrol_target)

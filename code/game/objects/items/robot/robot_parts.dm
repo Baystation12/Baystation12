@@ -127,8 +127,8 @@
 
 /obj/item/robot_parts/robot_suit/attackby(obj/item/W as obj, mob/user as mob)
 	..()
-	if(istype(W, /obj/item/stack/material/steel) && !l_arm && !r_arm && !l_leg && !r_leg && !chest && !head)
-		var/obj/item/stack/material/steel/M = W
+	if(istype(W, /obj/item/stack/material) && W.get_material_name() == DEFAULT_WALL_MATERIAL && !l_arm && !r_arm && !l_leg && !r_leg && !chest && !head)
+		var/obj/item/stack/material/M = W
 		if (M.use(1))
 			var/obj/item/weapon/secbot_assembly/ed209_assembly/B = new /obj/item/weapon/secbot_assembly/ed209_assembly
 			B.loc = get_turf(src)
@@ -326,12 +326,10 @@
 		user << "<span class='notice'>You insert the flash into the eye socket!</span>"
 
 
-/obj/item/robot_parts/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(W,/obj/item/weapon/card/emag))
-		if(sabotaged)
-			user << "<span class='warning'>[src] is already sabotaged!</span>"
-		else
-			user << "<span class='warning'>You slide [W] into the dataport on [src] and short out the safeties.</span>"
-			sabotaged = 1
-		return
-	..()
+/obj/item/robot_parts/emag_act(var/remaining_charges, var/mob/user)
+	if(sabotaged)
+		user << "<span class='warning'>[src] is already sabotaged!</span>"
+	else
+		user << "<span class='warning'>You short out the safeties.</span>"
+		sabotaged = 1
+		return 1

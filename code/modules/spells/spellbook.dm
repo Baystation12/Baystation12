@@ -5,7 +5,7 @@
 	icon_state ="spellbook"
 	throw_speed = 1
 	throw_range = 5
-	w_class = 1.0
+	w_class = 2
 	var/uses = 5
 	var/temp = null
 	var/max_uses = 5
@@ -288,6 +288,7 @@
 	for(var/spell/knownspell in user.spell_list)
 		if(knownspell.type == S.type)
 			if(user.mind)
+				// TODO: Update to new antagonist system.
 				if(user.mind.special_role == "apprentice" || user.mind.special_role == "Wizard")
 					user <<"<span class='notice'>You're already far more versed in this spell than this flimsy how-to book can provide.</span>"
 				else

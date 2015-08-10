@@ -14,6 +14,7 @@
 	attack_verb = list("stabbed", "slashed", "sliced", "cut")
 	default_material = "glass"
 	unbreakable = 1 //It's already broken.
+	drops_debris = 0
 
 /obj/item/weapon/material/shard/suicide_act(mob/user)
 	viewers(user) << pick("<span class='danger'>\The [user] is slitting \his wrists with \the [src]! It looks like \he's trying to commit suicide.</span>",
@@ -72,6 +73,8 @@
 
 			if( !H.shoes && ( !H.wear_suit || !(H.wear_suit.body_parts_covered & FEET) ) )
 				var/obj/item/organ/external/affecting = H.get_organ(pick("l_foot", "r_foot"))
+				if(!affecting)
+					return
 				if(affecting.status & ORGAN_ROBOT)
 					return
 				if(affecting.take_damage(5, 0))
@@ -86,4 +89,4 @@
 	..(loc, "steel")
 
 /obj/item/weapon/material/shard/phoron/New(loc)
-	..(loc, "phoron glass")
+	..(loc, "phglass")

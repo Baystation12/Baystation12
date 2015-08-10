@@ -518,8 +518,8 @@
 		data["total_danger"] = max(oxygen_danger, data["total_danger"])
 
 		current_settings = TLV["carbon dioxide"]
-		var/carbon_dioxide_danger = get_danger_level(environment.gas["carbon dioxide"]*partial_pressure, current_settings)
-		environment_data[++environment_data.len] = list("name" = "Carbon dioxide", "value" = environment.gas["carbon dioxide"] / total * 100, "unit" = "%", "danger_level" = carbon_dioxide_danger)
+		var/carbon_dioxide_danger = get_danger_level(environment.gas["carbon_dioxide"]*partial_pressure, current_settings)
+		environment_data[++environment_data.len] = list("name" = "Carbon dioxide", "value" = environment.gas["carbon_dioxide"] / total * 100, "unit" = "%", "danger_level" = carbon_dioxide_danger)
 		data["total_danger"] = max(carbon_dioxide_danger, data["total_danger"])
 
 		current_settings = TLV["phoron"]
@@ -919,7 +919,7 @@ FIRE ALARM
 /obj/machinery/firealarm/attack_ai(mob/user as mob)
 	return src.attack_hand(user)
 
-/obj/machinery/firealarm/bullet_act(BLAH)
+/obj/machinery/firealarm/bullet_act()
 	return src.alarm()
 
 /obj/machinery/firealarm/emp_act(severity)
@@ -946,6 +946,7 @@ FIRE ALARM
 						user.visible_message("<span class='notice'>\The [user] has disconnected [src]'s detecting unit!</span>", "<span class='notice'>You have disconnected [src]'s detecting unit.</span>")
 				else if (istype(W, /obj/item/weapon/wirecutters))
 					user.visible_message("<span class='notice'>\The [user] has cut the wires inside \the [src]!</span>", "<span class='notice'>You have cut the wires inside \the [src].</span>")
+					new/obj/item/stack/cable_coil(get_turf(src), 5)
 					playsound(src.loc, 'sound/items/Wirecutter.ogg', 50, 1)
 					buildstage = 1
 					update_icon()

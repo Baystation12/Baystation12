@@ -6,6 +6,7 @@
 	icon_state = "aiupload"
 	density = 1
 	req_one_access = list(access_hop, access_captain, access_cent_captain)
+	anchored = 1
 	var/receipt_num
 	var/machine_id = ""
 	var/obj/item/weapon/card/id/held_card

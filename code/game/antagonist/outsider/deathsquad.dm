@@ -7,7 +7,7 @@ var/datum/antagonist/deathsquad/deathsquad
 	role_text_plural = "Death Commandos"
 	welcome_text = "You work in the service of Central Command Asset Protection, answering directly to the Board of Directors."
 	landmark_id = "Commando"
-	flags = ANTAG_OVERRIDE_JOB | ANTAG_OVERRIDE_MOB | ANTAG_HAS_NUKE
+	flags = ANTAG_OVERRIDE_JOB | ANTAG_OVERRIDE_MOB | ANTAG_HAS_NUKE | ANTAG_HAS_LEADER
 	max_antags = 4
 	max_antags_round = 6
 	default_access = list(access_cent_general, access_cent_specops, access_cent_living, access_cent_storage)
@@ -23,6 +23,9 @@ var/datum/antagonist/deathsquad/deathsquad
 		deployed = 1
 
 /datum/antagonist/deathsquad/equip(var/mob/living/carbon/human/player)
+	if(!..())
+		return
+
 	if (player.mind == leader)
 		player.equip_to_slot_or_del(new /obj/item/clothing/under/rank/centcom_officer(player), slot_w_uniform)
 	else
@@ -49,7 +52,7 @@ var/datum/antagonist/deathsquad/deathsquad
 		id.icon_state = "centcom"
 	create_radio(DTH_FREQ, player)
 
-/datum/antagonist/deathsquad/apply(var/datum/mind/player)
+/datum/antagonist/deathsquad/update_antag_mob(var/datum/mind/player)
 
 	..()
 
@@ -76,9 +79,6 @@ var/datum/antagonist/deathsquad/deathsquad
 
 	return
 
-/datum/antagonist/deathsquad/finalize(var/datum/mind/target)
-
-	..()
-
-	if(!deployed)
+/datum/antagonist/deathsquad/create_antagonist()
+	if(..() && !deployed)
 		deployed = 1

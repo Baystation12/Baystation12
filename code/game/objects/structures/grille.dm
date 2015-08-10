@@ -91,7 +91,7 @@
 				passthrough = 1
 
 	if(passthrough)
-		. = -1
+		. = PROJECTILE_CONTINUE
 		damage = between(0, (damage - Proj.damage)*(Proj.damage_type == BRUTE? 0.4 : 1), 10) //if the bullet passes through then the grille avoids most of the damage
 
 	src.health -= damage*0.2
@@ -154,9 +154,7 @@
 		return
 //window placing end
 
-	else if(istype(W, /obj/item/weapon/material/shard))
-		health -= W.force * 0.1
-	else if(!shock(user, 70))
+	else if(!(W.flags & CONDUCT) || !shock(user, 70))
 		user.do_attack_animation(src)
 		playsound(loc, 'sound/effects/grillehit.ogg', 80, 1)
 		switch(W.damtype)

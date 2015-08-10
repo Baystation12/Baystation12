@@ -126,12 +126,7 @@
 	//decide whether to aim or shoot normally
 	var/aiming = 0
 	if(user && user.client && !(A in aim_targets))
-		var/client/C = user.client
-		//If help intent is on and we have clicked on an eligible target, switch to aim mode automatically
-		if(user.a_intent == I_HELP && isliving(A) && !C.gun_mode)
-			C.ToggleGunMode()
-
-		if(C.gun_mode)
+		if(user.client.gun_mode)
 			aiming = PreFire(A,user,params) //They're using the new gun system, locate what they're aiming at.
 
 	if (!aiming)

@@ -7,7 +7,6 @@
 	config_tag = "meteor"
 	required_players = 0
 	votable = 0
-	uplink_welcome = "EVIL METEOR Uplink Console:"
 	deny_respawn = 1
 	var/next_wave = METEOR_DELAY
 

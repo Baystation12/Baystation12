@@ -20,7 +20,7 @@
 
 
 	for(var/obj/machinery/power/apc/C in world)
-		if(C.cell && C.z in config.station_levels)
+		if(!C.is_critical && C.cell && (C.z in config.station_levels))
 			C.cell.charge = 0
 
 /proc/power_restore(var/announce = 1)
@@ -29,7 +29,7 @@
 	if(announce)
 		command_announcement.Announce("Power has been restored to [station_name()]. We apologize for the inconvenience.", "Power Systems Nominal", new_sound = 'sound/AI/poweron.ogg')
 	for(var/obj/machinery/power/apc/C in world)
-		if(C.cell && C.z in config.station_levels)
+		if(C.cell && (C.z in config.station_levels))
 			C.cell.charge = C.cell.maxcharge
 	for(var/obj/machinery/power/smes/S in world)
 		var/area/current_area = get_area(S)

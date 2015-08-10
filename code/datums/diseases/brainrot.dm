@@ -49,7 +49,7 @@
 				affected_mob.adjustToxLoss(4)
 				affected_mob.updatehealth()
 				if(prob(2))
-					affected_mob << "<span class='notice>Your head hurts.</span>" */
+					affected_mob << "<span class='notice'>Your head hurts.</span>" */
 			if(prob(15) && affected_mob.getBrainLoss()<=98) //shouldn't retard you to death now
 				affected_mob.adjustBrainLoss(3)
 				affected_mob.updatehealth()
