@@ -21,7 +21,7 @@
 	..()
 
 /area/proc/initialize()
-	if(!requires_power || !apc))
+	if(!requires_power || !apc)
 		power_light = 0
 		power_equip = 0
 		power_environ = 0

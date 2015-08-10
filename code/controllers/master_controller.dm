@@ -49,8 +49,8 @@ datum/controller/game_controller/proc/setup_objects()
 	sleep(-1)
 	for(var/atom/movable/object in world)
 		object.initialize()
-	
-	world << "<span class='danger>Initializing areas</span>"
+
+	admin_notice("<span class='danger>Initializing areas</span>", R_DEBUG)
 	sleep(-1)
 	for(var/area/area in all_areas)
 		area.initialize()
