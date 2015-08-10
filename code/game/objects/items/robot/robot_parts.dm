@@ -32,8 +32,6 @@
 	name = "left arm"
 	desc = "A skeletal limb wrapped in pseudomuscles, with a low-conductivity case."
 	icon_state = "l_arm"
-	construction_time = 200
-	construction_cost = list(DEFAULT_WALL_MATERIAL=18000)
 	part = list("l_arm","l_hand")
 	model_info = 1
 
@@ -41,8 +39,6 @@
 	name = "right arm"
 	desc = "A skeletal limb wrapped in pseudomuscles, with a low-conductivity case."
 	icon_state = "r_arm"
-	construction_time = 200
-	construction_cost = list(DEFAULT_WALL_MATERIAL=18000)
 	part = list("r_arm","r_hand")
 	model_info = 1
 
@@ -50,8 +46,6 @@
 	name = "left leg"
 	desc = "A skeletal limb wrapped in pseudomuscles, with a low-conductivity case."
 	icon_state = "l_leg"
-	construction_time = 200
-	construction_cost = list(DEFAULT_WALL_MATERIAL=15000)
 	part = list("l_leg","l_foot")
 	model_info = 1
 
@@ -59,8 +53,6 @@
 	name = "right leg"
 	desc = "A skeletal limb wrapped in pseudomuscles, with a low-conductivity case."
 	icon_state = "r_leg"
-	construction_time = 200
-	construction_cost = list(DEFAULT_WALL_MATERIAL=15000)
 	part = list("r_leg","r_foot")
 	model_info = 1
 

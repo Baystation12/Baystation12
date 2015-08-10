@@ -8,7 +8,7 @@
 	active_power_usage = 5000
 
 	var/max_material_storage = 100000
-	var/list/materials = list("metal" = 0, "glass" = 0, "gold" = 0, "silver" = 0, "phoron" = 0, "uranium" = 0, "diamond" = 0)
+	var/list/materials = list(DEFAULT_WALL_MATERIAL = 0, "glass" = 0, "gold" = 0, "silver" = 0, "phoron" = 0, "uranium" = 0, "diamond" = 0)
 
 	var/list/datum/design/queue = list()
 	var/progress = 0

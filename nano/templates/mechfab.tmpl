@@ -1,14 +1,23 @@
 <h3>Exosuit Fabricator</h3>
-<div style="float: left; width: 50%;">
-	{{for data.categories}}
+<div style="float: left; width: 60%;">
+	<div class="item">
+		{{:helper.link("Sync", null, {'sync' : 1})}}
+		{{:data.sync}}
+	</div>
+	{{if data.manufacturers}}
 		<div class="item">
+			{{for data.manufacturers}}
+				{{:helper.link(value, null, {'manufacturer' : value}, value == data.manufacturer ? 'selected' : null)}}
+			{{/for}}
+		</div>
+	{{/if}}
+	<div class="item">
+		{{for data.categories}}
 			{{:helper.link(value, null, {'category' : value}, value == data.category ? 'selected' : null)}}
-		</div>
-	{{empty}}
-		<div class="item">
-			There are no known designs
-		</div>
-	{{/for}}
+		{{empty}}
+		There are no known designs
+		{{/for}}
+	</div>
 	{{for data.buildable}}
 		{{if value.category == data.category}}
 			<div class="item">
@@ -17,17 +26,26 @@
 		{{/if}}
 	{{/for}}
 </div>
-<div style="float: right; width: 50%">
+<div style="float: right; width: 40%">
 	<div class="item">
 		<b>Queue contains:</b>
 	</div>
 	{{if data.current}}
 		<div class="item">
-			<b>Now: {{:data.current}}</b> ({{:data.builtperc}}% ready) - {{:helper.link('Cancel', null, {'remove' : 1})}}
+			<div class="itemLabelWide">
+				<b>Now: {{:data.current}}</b> ({{:data.builtperc}}% ready)
+			</div>
+			<div class="itemContentMedium">
+				{{:helper.link('Cancel', null, {'remove' : 1})}}
+			</div>
 		</div>
 		{{for data.queue}}
 			<div class="item">
-				{{:index + 2}}: {{:value}} - {{:helper.link('Remove', null, {'remove' : index + 2})}}
+			<div class="itemLabelWide">
+				{{:index + 2}}: {{:value}}
+			</div>
+			<div class="itemContentMedium">
+				{{:helper.link('Remove', null, {'remove' : index + 2})}}
 			</div>
 		{{empty}}
 			<div class="item">
@@ -46,16 +64,11 @@
 				{{:value.mat}}: {{:value.amt}}/{{:data.maxres}}
 			</div>
 			<div class="itemContentMedium">
-				{{if value.amt > 2000}}
-					{{:helper.link('x1', null, {'eject' : value.mat, 'amount' : 1})}}
-					{{if value.amt > 10000}}
-						{{:helper.link('x5', null, {'eject' : value.mat, 'amount' : 5})}}
-						{{if value.amt > 20000}}
-							{{:helper.link('x10', null, {'eject' : value.mat, 'amount' : 10})}}
-						{{/if}}
-					{{/if}}
-				{{/if}}
-				{{:helper.link('All', null, {'eject' : value.mat, 'amount' : 0})}}
+				{{:helper.link('x1', null, {'eject' : value.mat, 'amount' : 1}, value.amt > 2000 ? null : 'disabled')}}
+				{{:helper.link('x5', null, {'eject' : value.mat, 'amount' : 5}, value.amt > 10000 ? null : 'disabled')}}
+				{{:helper.link('x10', null, {'eject' : value.mat, 'amount' : 10}, value.amt > 20000 ? null : 'disabled')}}
+				{{:helper.link('Stack', null, {'eject' : value.mat, 'amount' : 0})}}
+				{{:helper.link('All', null, {'eject' : value.mat, 'amount' : -1})}}
 			</div>
 		</div>
 	{{/for}}

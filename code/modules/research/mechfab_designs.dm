@@ -1,10 +1,10 @@
 /datum/design/item/mechfab
 	build_type = MECHFAB
 	category = "Misc"
+	req_tech = list(TECH_MATERIAL = 1)
 
 /datum/design/item/mechfab/robot
 	category = "Robot"
-	req_tech = list(TECH_MATERIAL = 1)
 
 /datum/design/item/mechfab/robot/exoskeleton
 	name = "Robot Exoskeleton"
@@ -27,61 +27,289 @@
 	time = 35
 	materials = list(DEFAULT_WALL_MATERIAL = 25000)
 
-/*
-	var/list/part_sets = list( //set names must be unique
-	"Robot"=list(
-						/obj/item/robot_parts/robot_suit,
-						/obj/item/robot_parts/chest,
-						/obj/item/robot_parts/head,
-						/obj/item/robot_parts/l_arm,
-						/obj/item/robot_parts/r_arm,
-						/obj/item/robot_parts/l_leg,
-						/obj/item/robot_parts/r_leg,
-						/obj/item/robot_parts/robot_component/binary_communication_device,
-						/obj/item/robot_parts/robot_component/radio,
-						/obj/item/robot_parts/robot_component/actuator,
-						/obj/item/robot_parts/robot_component/diagnosis_unit,
-						/obj/item/robot_parts/robot_component/camera,
-						/obj/item/robot_parts/robot_component/armour
-					),
-	"Ripley"=list(
-						/obj/item/mecha_parts/chassis/ripley,
-						/obj/item/mecha_parts/part/ripley_torso,
-						/obj/item/mecha_parts/part/ripley_left_arm,
-						/obj/item/mecha_parts/part/ripley_right_arm,
-						/obj/item/mecha_parts/part/ripley_left_leg,
-						/obj/item/mecha_parts/part/ripley_right_leg
-					),
-	"Odysseus"=list(
-						/obj/item/mecha_parts/chassis/odysseus,
-						/obj/item/mecha_parts/part/odysseus_torso,
-						/obj/item/mecha_parts/part/odysseus_head,
-						/obj/item/mecha_parts/part/odysseus_left_arm,
-						/obj/item/mecha_parts/part/odysseus_right_arm,
-						/obj/item/mecha_parts/part/odysseus_left_leg,
-						/obj/item/mecha_parts/part/odysseus_right_leg
-					),
+/datum/design/item/mechfab/robot/l_arm
+	name = "Robot Left Arm"
+	id = "robot_l_arm"
+	build_path = /obj/item/robot_parts/l_arm
+	time = 20
+	materials = list(DEFAULT_WALL_MATERIAL = 18000)
 
-	"Gygax"=list(
-						/obj/item/mecha_parts/chassis/gygax,
-						/obj/item/mecha_parts/part/gygax_torso,
-						/obj/item/mecha_parts/part/gygax_head,
-						/obj/item/mecha_parts/part/gygax_left_arm,
-						/obj/item/mecha_parts/part/gygax_right_arm,
-						/obj/item/mecha_parts/part/gygax_left_leg,
-						/obj/item/mecha_parts/part/gygax_right_leg,
-						/obj/item/mecha_parts/part/gygax_armour
-					),
-	"Durand"=list(
-						/obj/item/mecha_parts/chassis/durand,
-						/obj/item/mecha_parts/part/durand_torso,
-						/obj/item/mecha_parts/part/durand_head,
-						/obj/item/mecha_parts/part/durand_left_arm,
-						/obj/item/mecha_parts/part/durand_right_arm,
-						/obj/item/mecha_parts/part/durand_left_leg,
-						/obj/item/mecha_parts/part/durand_right_leg,
-						/obj/item/mecha_parts/part/durand_armour
-					),
+/datum/design/item/mechfab/robot/r_arm
+	name = "Robot Right Arm"
+	id = "robot_r_arm"
+	build_path = /obj/item/robot_parts/r_arm
+	time = 20
+	materials = list(DEFAULT_WALL_MATERIAL = 18000)
+
+/datum/design/item/mechfab/robot/l_leg
+	name = "Robot Left LeG"
+	id = "robot_l_leg"
+	build_path = /obj/item/robot_parts/l_leg
+	time = 20
+	materials = list(DEFAULT_WALL_MATERIAL = 15000)
+
+/datum/design/item/mechfab/robot/r_leg
+	name = "Robot Right Leg"
+	id = "robot_r_leg"
+	build_path = /obj/item/robot_parts/r_leg
+	time = 20
+	materials = list(DEFAULT_WALL_MATERIAL = 15000)
+
+/datum/design/item/mechfab/robot/component
+	time = 20
+	materials = list(DEFAULT_WALL_MATERIAL = 5000)
+
+/datum/design/item/mechfab/robot/component/binary_communication_device
+	name = "Binary Communication Device"
+	id = "binary_communication_device"
+	build_path = /obj/item/robot_parts/robot_component/binary_communication_device
+
+/datum/design/item/mechfab/robot/component/radio
+	name = "Radio"
+	id = "radio"
+	build_path = /obj/item/robot_parts/robot_component/radio
+
+/datum/design/item/mechfab/robot/component/actuator
+	name = "Actuator"
+	id = "actuator"
+	build_path = /obj/item/robot_parts/robot_component/actuator
+
+/datum/design/item/mechfab/robot/component/diagnosis_unit
+	name = "Diagnosis Unit"
+	id = "diagnosis_unit"
+	build_path = /obj/item/robot_parts/robot_component/diagnosis_unit
+
+/datum/design/item/mechfab/robot/component/camera
+	name = "Camera"
+	id = "camera"
+	build_path = /obj/item/robot_parts/robot_component/camera
+
+/datum/design/item/mechfab/robot/component/armour
+	name = "Armour Plating"
+	id = "armour"
+	build_path = /obj/item/robot_parts/robot_component/armour
+
+/datum/design/item/mechfab/ripley
+	category = "Ripley"
+
+/datum/design/item/mechfab/ripley/chassis
+	name = "Ripley Chassis"
+	id = "ripley_chassis"
+	build_path = /obj/item/mecha_parts/chassis/ripley
+	time = 10
+	materials = list(DEFAULT_WALL_MATERIAL = 20000)
+
+/datum/design/item/mechfab/ripley/chassis/firefighter
+	name = "Firefigher Chassis"
+	id = "firefighter_chassis"
+	build_path = /obj/item/mecha_parts/chassis/firefighter
+
+/datum/design/item/mechfab/ripley/torso
+	name = "Ripley Torso"
+	id = "ripley_torso"
+	build_path = /obj/item/mecha_parts/part/ripley_torso
+	time = 20
+	materials = list(DEFAULT_WALL_MATERIAL = 40000, "glass" = 15000)
+
+/datum/design/item/mechfab/ripley/left_arm
+	name = "Ripley Left Arm"
+	id = "ripley_left_arm"
+	build_path = /obj/item/mecha_parts/part/ripley_left_arm
+	time = 15
+	materials = list(DEFAULT_WALL_MATERIAL = 25000)
+
+/datum/design/item/mechfab/ripley/right_arm
+	name = "Ripley Right Arm"
+	id = "ripley_right_arm"
+	build_path = /obj/item/mecha_parts/part/ripley_right_arm
+	time = 15
+	materials = list(DEFAULT_WALL_MATERIAL = 25000)
+
+/datum/design/item/mechfab/ripley/left_leg
+	name = "Ripley Left Leg"
+	id = "ripley_left_leg"
+	build_path = /obj/item/mecha_parts/part/ripley_left_leg
+	time = 15
+	materials = list(DEFAULT_WALL_MATERIAL = 30000)
+
+/datum/design/item/mechfab/ripley/right_leg
+	name = "Ripley Right Leg"
+	id = "ripley_right_leg"
+	build_path = /obj/item/mecha_parts/part/ripley_right_leg
+	time = 15
+	materials = list(DEFAULT_WALL_MATERIAL = 30000)
+
+/datum/design/item/mechfab/odysseus
+	category = "Odysseus"
+
+/datum/design/item/mechfab/odysseus/chassis
+	name = "Odysseus Chassis"
+	id = "odysseus_chassis"
+	build_path = /obj/item/mecha_parts/chassis/odysseus
+	time = 10
+	materials = list(DEFAULT_WALL_MATERIAL = 20000)
+
+/datum/design/item/mechfab/odysseus/torso
+	name = "Odysseus Torso"
+	id = "odysseus_torso"
+	build_path = /obj/item/mecha_parts/part/odysseus_torso
+	time = 18
+	materials = list(DEFAULT_WALL_MATERIAL = 25000)
+
+/datum/design/item/mechfab/odysseus/head
+	name = "Odysseus Head"
+	id = "odysseus_head"
+	build_path = /obj/item/mecha_parts/part/odysseus_head
+	time = 10
+	materials = list(DEFAULT_WALL_MATERIAL = 2000, "glass" = 10000)
+
+/datum/design/item/mechfab/odysseus/left_arm
+	name = "Odysseus Left Arm"
+	id = "odysseus_left_arm"
+	build_path = /obj/item/mecha_parts/part/odysseus_left_arm
+	time = 12
+	materials = list(DEFAULT_WALL_MATERIAL = 10000)
+
+/datum/design/item/mechfab/odysseus/right_arm
+	name = "Odysseus Right Arm"
+	id = "odysseus_right_arm"
+	build_path = /obj/item/mecha_parts/part/odysseus_right_arm
+	time = 12
+	materials = list(DEFAULT_WALL_MATERIAL = 10000)
+
+/datum/design/item/mechfab/odysseus/left_leg
+	name = "Odysseus Left Leg"
+	id = "odysseus_left_leg"
+	build_path = /obj/item/mecha_parts/part/odysseus_left_leg
+	time = 13
+	materials = list(DEFAULT_WALL_MATERIAL = 15000)
+
+/datum/design/item/mechfab/odysseus/right_leg
+	name = "Odysseus Right Leg"
+	id = "odysseus_right_leg"
+	build_path = /obj/item/mecha_parts/part/odysseus_right_leg
+	time = 13
+	materials = list(DEFAULT_WALL_MATERIAL = 15000)
+
+/datum/design/item/mechfab/gygax
+	category = "Gygax"
+
+/datum/design/item/mechfab/gygax/chassis
+	name = "Gygax Chassis"
+	id = "gygax_chassis"
+	build_path = /obj/item/mecha_parts/chassis/gygax
+	time = 10
+	materials = list(DEFAULT_WALL_MATERIAL = 25000)
+
+/datum/design/item/mechfab/gygax/torso
+	name = "Gygax Torso"
+	id = "gygax_torso"
+	build_path = /obj/item/mecha_parts/part/gygax_torso
+	time = 30
+	materials = list(DEFAULT_WALL_MATERIAL = 50000, "glass" = 20000)
+
+/datum/design/item/mechfab/gygax/head
+	name = "Gygax Head"
+	id = "gygax_head"
+	build_path = /obj/item/mecha_parts/part/gygax_head
+	time = 20
+	materials = list(DEFAULT_WALL_MATERIAL = 20000, "glass" = 10000)
+
+/datum/design/item/mechfab/gygax/left_arm
+	name = "Gygax Left Arm"
+	id = "gygax_left_arm"
+	build_path = /obj/item/mecha_parts/part/gygax_left_arm
+	time = 20
+	materials = list(DEFAULT_WALL_MATERIAL = 30000)
+
+/datum/design/item/mechfab/gygax/right_arm
+	name = "Gygax Right Arm"
+	id = "gygax_right_arm"
+	build_path = /obj/item/mecha_parts/part/gygax_right_arm
+	time = 20
+	materials = list(DEFAULT_WALL_MATERIAL = 30000)
+
+/datum/design/item/mechfab/gygax/left_leg
+	name = "Gygax Left Leg"
+	id = "gygax_left_leg"
+	build_path = /obj/item/mecha_parts/part/gygax_left_leg
+	time = 20
+	materials = list(DEFAULT_WALL_MATERIAL = 35000)
+
+/datum/design/item/mechfab/gygax/right_leg
+	name = "Gygax Right Leg"
+	id = "gygax_right_leg"
+	build_path = /obj/item/mecha_parts/part/gygax_right_leg
+	time = 20
+	materials = list(DEFAULT_WALL_MATERIAL = 35000)
+
+/datum/design/item/mechfab/gygax/armour
+	name = "Gygax Armour Plates"
+	id = "gygax_armour"
+	build_path = /obj/item/mecha_parts/part/gygax_armour
+	time = 60
+	materials = list(DEFAULT_WALL_MATERIAL = 50000, "diamond" = 10000)
+
+/datum/design/item/mechfab/durand
+	category = "Durand"
+
+/datum/design/item/mechfab/durand/chassis
+	name = "Durand Chassis"
+	id = "durand_chassis"
+	build_path = /obj/item/mecha_parts/chassis/durand
+	time = 10
+	materials = list(DEFAULT_WALL_MATERIAL = 25000)
+
+/datum/design/item/mechfab/durand/torso
+	name = "Durand Torso"
+	id = "durand_torso"
+	build_path = /obj/item/mecha_parts/part/durand_torso
+	time = 30
+	materials = list(DEFAULT_WALL_MATERIAL = 55000, "glass" = 20000, "silver" = 10000)
+
+/datum/design/item/mechfab/durand/head
+	name = "Durand Head"
+	id = "durand_head"
+	build_path = /obj/item/mecha_parts/part/durand_head
+	time = 20
+	materials = list(DEFAULT_WALL_MATERIAL = 25000, "glass" = 10000, "silver" = 3000)
+
+/datum/design/item/mechfab/durand/left_arm
+	name = "Durand Left Arm"
+	id = "durand_left_arm"
+	build_path = /obj/item/mecha_parts/part/durand_left_arm
+	time = 20
+	materials = list(DEFAULT_WALL_MATERIAL = 35000, "silver" = 3000)
+
+/datum/design/item/mechfab/durand/right_arm
+	name = "Durand Right Arm"
+	id = "durand_right_arm"
+	build_path = /obj/item/mecha_parts/part/durand_right_arm
+	time = 20
+	materials = list(DEFAULT_WALL_MATERIAL = 35000, "silver" = 3000)
+
+/datum/design/item/mechfab/durand/left_leg
+	name = "Durand Left Leg"
+	id = "durand_left_leg"
+	build_path = /obj/item/mecha_parts/part/durand_left_leg
+	time = 20
+	materials = list(DEFAULT_WALL_MATERIAL = 40000, "silver" = 3000)
+
+/datum/design/item/mechfab/durand/right_leg
+	name = "Durand Right Leg"
+	id = "durand_right_leg"
+	build_path = /obj/item/mecha_parts/part/durand_right_leg
+	time = 20
+	materials = list(DEFAULT_WALL_MATERIAL = 40000, "silver" = 3000)
+
+/datum/design/item/mechfab/durand/armour
+	//name = "Durand Armour Plates"
+	id = "durand_armour"
+	build_path = /obj/item/mecha_parts/part/durand_armour
+	time = 60
+	materials = list(DEFAULT_WALL_MATERIAL = 50000, "uranium" = 10000)
+
+/*
 	"Exosuit Equipment"=list(
 						/obj/item/mecha_parts/mecha_equipment/tool/hydraulic_clamp,
 						/obj/item/mecha_parts/mecha_equipment/tool/drill,
@@ -90,7 +318,6 @@
 						/obj/item/mecha_parts/mecha_equipment/tool/sleeper,
 						/obj/item/mecha_parts/mecha_equipment/tool/syringe_gun,
 						/obj/item/mecha_parts/mecha_equipment/tool/passenger,
-						/obj/item/mecha_parts/chassis/firefighter,
 						///obj/item/mecha_parts/mecha_equipment/repair_droid,
 						/obj/item/mecha_parts/mecha_equipment/generator,
 						///obj/item/mecha_parts/mecha_equipment/jetpack, //TODO MECHA JETPACK SPRITE MISSING
@@ -114,7 +341,6 @@
 
 /datum/design/item/mecha
 	build_type = MECHFAB
-	req_tech = list(TECH_COMBAT = 3)
 	category = "Exosuit Equipment"
 
 /datum/design/item/mecha/AssembleDesignName()
@@ -128,6 +354,9 @@
 /datum/design/item/mecha/AssembleDesignDesc()
 	if(!desc)
 		desc = "Allows for the construction of \a '[item_name]' exosuit module."
+
+/datum/design/item/mecha/weapon
+	req_tech = list(TECH_COMBAT = 3)
 
 // *** Weapon modules
 /datum/design/item/mecha/weapon/scattershot

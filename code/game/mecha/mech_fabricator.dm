@@ -10,7 +10,6 @@
 	active_power_usage = 5000
 	req_access = list(access_robotics)
 
-	var/current_manufacturer
 	var/speed = 1
 	var/mat_efficiency = 1
 	var/list/materials = list(DEFAULT_WALL_MATERIAL = 0, "glass" = 0, "gold" = 0, "silver" = 0, "diamond" = 0, "phoron" = 0, "uranium" = 0)
@@ -23,6 +22,8 @@
 
 	var/list/categories = list()
 	var/category = null
+	var/manufacturer = null
+	var/sync_message = ""
 
 /obj/machinery/mecha_part_fabricator/New()
 	..()
@@ -40,7 +41,7 @@
 	return
 
 /obj/machinery/mecha_part_fabricator/initialize()
-	current_manufacturer = basic_robolimb.company
+	manufacturer = basic_robolimb.company
 	update_categories()
 
 /obj/machinery/mecha_part_fabricator/process()
@@ -50,7 +51,7 @@
 	if(busy)
 		use_power = 2
 		progress += speed
-		finalize()
+		check_build()
 	else
 		use_power = 1
 	update_icon()
@@ -63,6 +64,11 @@
 		icon_state = "fab-idle"
 	if(busy)
 		overlays += "fab-active"
+
+/obj/machinery/mecha_part_fabricator/dismantle()
+	for(var/f in materials)
+		eject_materials(f, -1)
+	..()
 
 /obj/machinery/mecha_part_fabricator/RefreshParts()
 	res_max_amount = 0
@@ -93,8 +99,12 @@
 	data["buildable"] = get_build_options()
 	data["category"] = category
 	data["categories"] = categories
+	if(all_robolimbs)
+		data["manufacturers"] = all_robolimbs
+		data["manufacturer"] = manufacturer
 	data["materials"] = get_materials()
 	data["maxres"] = res_max_amount
+	data["sync"] = sync_message
 	if(current)
 		data["builtperc"] = round((progress / current.time) * 100)
 
@@ -119,9 +129,18 @@
 		if(href_list["category"] in categories)
 			category = href_list["category"]
 
+	if(href_list["manufacturer"])
+		if(href_list["manufacturer"] in all_robolimbs)
+			manufacturer = href_list["manufacturer"]
+
 	if(href_list["eject"])
 		eject_materials(href_list["eject"], text2num(href_list["amount"]))
-//TODO: sync
+
+	if(href_list["sync"])
+		sync()
+	else
+		sync_message = ""
+
 	return 1
 
 /obj/machinery/mecha_part_fabricator/attackby(var/obj/item/I, var/mob/user)
@@ -218,20 +237,26 @@
 			return 0
 	return 1
 
-/obj/machinery/mecha_part_fabricator/proc/finalize()
+/obj/machinery/mecha_part_fabricator/proc/check_build()
 	if(!queue.len)
+		progress = 0
 		return
 	var/datum/design/D = queue[1]
-	if(D.time > progress)
-		return
 	if(!can_build(D))
+		progress = 0
+		return
+	if(D.time > progress)
 		return
 	for(var/M in D.materials)
 		materials[M] = max(0, materials[M] - D.materials[M] * mat_efficiency)
 	if(D.build_path)
-		new D.build_path(loc)//var/obj/new_item = //TODO
-	queue.Cut(1, 2)
-	update_busy()
+		var/obj/new_item = new D.build_path(loc, manufacturer)
+		visible_message("\The [src] pings, indicating that \the [D] is complete.", "You hear a ping.")
+		if(mat_efficiency != 1)
+			if(new_item.matter && new_item.matter.len > 0)
+				for(var/i in new_item.matter)
+					new_item.matter[i] = new_item.matter[i] * mat_efficiency
+	remove_from_queue(1)
 
 /obj/machinery/mecha_part_fabricator/proc/get_queue_names()
 	. = list()
@@ -270,7 +295,8 @@
 	for(var/T in materials)
 		. += list(list("mat" = capitalize(T), "amt" = materials[T]))
 
-/obj/machinery/mecha_part_fabricator/proc/eject_materials(var/material, var/amount)
+/obj/machinery/mecha_part_fabricator/proc/eject_materials(var/material, var/amount) // 0 amount = 0 means ejecting a full stack; -1 means eject everything
+	var/recursive = amount == -1 ? 1 : 0
 	material = lowertext(material)
 	var/mattype
 	switch(material)
@@ -291,12 +317,27 @@
 		else
 			return
 	var/obj/item/stack/material/S = new mattype(loc)
-	if(amount == 0)
+	if(amount <= 0)
 		amount = S.max_amount
-	world << "[materials[material]] | [S.perunit]"
 	var/ejected = min(round(materials[material] / S.perunit), amount)
 	S.amount = min(ejected, amount)
 	if(S.amount <= 0)
 		qdel(S)
 		return
 	materials[material] -= ejected * S.perunit
+	if(recursive && materials[material] >= S.perunit)
+		eject_materials(material, -1)
+	update_busy()
+
+/obj/machinery/mecha_part_fabricator/proc/sync()
+	sync_message = "Error: no console found."
+	for(var/obj/machinery/computer/rdconsole/RDC in get_area_all_atoms(get_area(src)))
+		if(!RDC.sync)
+			continue
+		for(var/datum/tech/T in RDC.files.known_tech)
+			files.AddTech2Known(T)
+		for(var/datum/design/D in RDC.files.known_designs)
+			files.AddDesign2Known(D)
+		files.RefreshResearch()
+		sync_message = "Sync complete."
+	update_categories()

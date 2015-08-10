@@ -6,7 +6,7 @@
 	origin_tech = list(TECH_DATA = 2, TECH_BIO = 3)
 	energy_drain = 20
 	range = MELEE
-	construction_cost = list(DEFAULT_WALL_MATERIAL=5000,"glass"=10000)
+	//construction_cost = list(DEFAULT_WALL_MATERIAL=5000,"glass"=10000)
 	equip_cooldown = 20
 	var/mob/living/carbon/occupant = null
 	var/datum/global_iterator/pr_mech_sleeper
@@ -386,8 +386,8 @@
 	range = MELEE|RANGED
 	equip_cooldown = 10
 	origin_tech = list(TECH_MATERIAL = 3, TECH_BIO = 4, TECH_MAGNET = 4, TECH_DATA = 3)
-	construction_time = 200
-	construction_cost = list(DEFAULT_WALL_MATERIAL=3000,"glass"=2000)
+	//construction_time = 200
+	//construction_cost = list(DEFAULT_WALL_MATERIAL=3000,"glass"=2000)
 	required_type = /obj/mecha/medical
 
 	New()
