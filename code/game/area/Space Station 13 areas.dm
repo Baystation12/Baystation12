@@ -914,7 +914,7 @@ area/space/atmosalert()
 	icon_state = "tcomsatcham"
 
 /area/server
-	name = "\improper Messaging Server Room"
+	name = "\improper Research Server Room"
 	icon_state = "server"
 
 //Crew
@@ -1826,7 +1826,7 @@ area/space/atmosalert()
 	ambience = list('sound/ambience/ambimalf.ogg')
 
 /area/turret_protected/ai_server_room
-	name = "AI Server Room"
+	name = "Messaging Server Room"
 	icon_state = "ai_server"
 
 /area/turret_protected/ai
