@@ -387,6 +387,7 @@ BLIND     // can't see anything
 	var/worn_state = null
 
 /obj/item/clothing/under/New()
+	..()
 	if(worn_state)
 		if(!item_state_slots)
 			item_state_slots = list()
@@ -397,9 +398,9 @@ BLIND     // can't see anything
 	//autodetect rollability
 	if(rolled_down < 0)
 		if((worn_state + "_d_s") in icon_states('icons/mob/uniform.dmi'))
+			rolled_down = 0
 
 /obj/item/clothing/under/proc/update_rolldown_status()
-
 	var/mob/living/carbon/human/H
 	if(istype(src.loc, /mob/living/carbon/human))
 		H = src.loc
