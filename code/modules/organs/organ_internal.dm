@@ -79,6 +79,12 @@
 		owner.b_eyes ? owner.b_eyes : 0
 		)
 
+/obj/item/organ/eyes/take_damage()
+	var/oldbroken = is_broken()
+	..()
+	if(is_broken() && !oldbroken && owner && !owner.stat)
+		owner << "<span class='danger'>You go blind!</span>"
+
 /obj/item/organ/eyes/process() //Eye damage replaces the old eye_stat var.
 	..()
 	if(!owner)
