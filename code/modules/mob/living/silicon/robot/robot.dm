@@ -1049,25 +1049,25 @@
 				laws = new /datum/ai_laws/syndicate_override
 				var/time = time2text(world.realtime,"hh:mm:ss")
 				lawchanges.Add("[time] <B>:</B> [user.name]([user.key]) emagged [name]([key])")
-				set_zeroth_law("Only [user.real_name] and people he designates as being such are operatives.")
+				set_zeroth_law("Only [user.real_name] and people \he designates as being such are operatives.")
 				. = 1
 				spawn()
-					src << "\red ALERT: Foreign software detected."
+					src << "<span class='danger'>ALERT: Foreign software detected.</span>"
 					sleep(5)
-					src << "\red Initiating diagnostics..."
+					src << "<span class='danger'>Initiating diagnostics...</span>"
 					sleep(20)
-					src << "\red SynBorg v1.7.1 loaded."
+					src << "<span class='danger'>SynBorg v1.7.1 loaded.</span>"
 					sleep(5)
-					src << "\red LAW SYNCHRONISATION ERROR"
+					src << "<span class='danger'>LAW SYNCHRONISATION ERROR</span>"
 					sleep(5)
-					src << "\red Would you like to send a report to NanoTraSoft? Y/N"
+					src << "<span class='danger'>Would you like to send a report to NanoTraSoft? Y/N</span>"
 					sleep(10)
-					src << "\red > N"
+					src << "<span class='danger'>> N</span>"
 					sleep(20)
-					src << "\red ERRORERRORERROR"
+					src << "<span class='danger'>ERRORERRORERROR</span>"
 					src << "<b>Obey these laws:</b>"
 					laws.show_laws(src)
-					src << "\red \b ALERT: [user.real_name] is your new master. Obey your new laws and his commands."
+					src << "<span class='danger'>ALERT: [user.real_name] is your new master. Obey your new laws and his commands.</span>"
 					if(src.module)
 						var/rebuild = 0
 						for(var/obj/item/weapon/pickaxe/borgdrill/D in src.module.modules)

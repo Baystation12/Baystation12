@@ -65,12 +65,12 @@
 				m_type = 2
 		if ("flap")
 			if (!src.restrained())
-				message = "flaps his wings."
+				message = "flaps [get_visible_gender() == MALE ? "his" : get_visible_gender() == FEMALE ? "her" : "their"] wings."
 				m_type = 2
 
 		if ("aflap")
 			if (!src.restrained())
-				message = "flaps his wings ANGRILY!"
+				message = "flaps [get_visible_gender() == MALE ? "his" : get_visible_gender() == FEMALE ? "her" : "their"] wings ANGRILY!"
 				m_type = 2
 
 		if ("twitch")
