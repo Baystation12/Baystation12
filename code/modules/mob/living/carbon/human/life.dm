@@ -1205,7 +1205,8 @@
 				damageoverlay.overlays += I
 
 		if( stat == DEAD )
-			sight |= (SEE_TURFS|SEE_MOBS|SEE_OBJS)
+			sight = SEE_TURFS|SEE_MOBS|SEE_OBJS|SEE_SELF
+			see_in_dark = 8
 			if(!druggy)		see_invisible = SEE_INVISIBLE_LEVEL_TWO
 			if(healths)		healths.icon_state = "health7"	//DEAD healthmeter
 			if(client)
@@ -1227,36 +1228,33 @@
 					*/
 
 		else
-			sight &= ~(SEE_TURFS|SEE_MOBS|SEE_OBJS)
+			sight = species.vision_flags
+			see_in_dark = species.darksight
+			see_invisible = see_in_dark>2 ? SEE_INVISIBLE_LEVEL_ONE : SEE_INVISIBLE_LIVING
 
 			if(XRAY in mutations)
 				sight |= SEE_TURFS|SEE_MOBS|SEE_OBJS
+				see_in_dark = 8
 				if(!druggy)		see_invisible = SEE_INVISIBLE_LEVEL_TWO
 
-			if(seer==1)
+			if(seer)
 				var/obj/effect/rune/R = locate() in loc
 				if(R && R.word1 == cultwords["see"] && R.word2 == cultwords["hell"] && R.word3 == cultwords["join"])
 					see_invisible = SEE_INVISIBLE_CULT
 				else
-					see_invisible = SEE_INVISIBLE_LIVING
 					seer = 0
 
-			var/tmp/glasses_processed = 0
+			if(!seer)
+				see_invisible = SEE_INVISIBLE_LIVING
+
+			var/equipped_glasses = glasses
 			var/obj/item/weapon/rig/rig = back
 			if(istype(rig) && rig.visor)
 				if(!rig.helmet || (head && rig.helmet == head))
 					if(rig.visor && rig.visor.vision && rig.visor.active && rig.visor.vision.glasses)
-						glasses_processed = 1
-						process_glasses(rig.visor.vision.glasses)
-
-			if(glasses && !glasses_processed)
-				glasses_processed = 1
-				process_glasses(glasses)
-
-			if(!glasses_processed && (species.vision_flags > 0))
-				sight |= species.vision_flags
-			if(!seer && !glasses_processed)
-				see_invisible = SEE_INVISIBLE_LIVING
+						equipped_glasses = rig.visor.vision.glasses
+			if(equipped_glasses)
+				process_glasses(equipped_glasses)
 
 			if(healths)
 				if (analgesic > 100)
@@ -1379,7 +1377,7 @@
 				if(viewflags < 0)
 					reset_view(null, 0)
 				else if(viewflags)
-					sight |= viewflags
+					sight = viewflags //when viewing from a machine, use only the sight flags that the machine provides
 			else if(eyeobj)
 				if(eyeobj.owner != src)
 
@@ -1405,8 +1403,8 @@
 				sight |= G.vision_flags
 				if(!druggy && !seer)
 					see_invisible = SEE_INVISIBLE_MINIMUM
-			if(istype(G,/obj/item/clothing/glasses/night) && !seer)
-				see_invisible = SEE_INVISIBLE_MINIMUM
+			if(G.see_invisible >= 0)
+				see_invisible = G.see_invisible
 	/* HUD shit goes here, as long as it doesn't modify sight flags */
 	// The purpose of this is to stop xray and w/e from preventing you from using huds -- Love, Doohl
 			var/obj/item/clothing/glasses/hud/O = G

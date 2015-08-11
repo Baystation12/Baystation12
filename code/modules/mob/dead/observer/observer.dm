@@ -34,6 +34,7 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 /mob/dead/observer/New(mob/body)
 	sight |= SEE_TURFS | SEE_MOBS | SEE_OBJS | SEE_SELF
 	see_invisible = SEE_INVISIBLE_OBSERVER
+	see_in_dark = 100
 	verbs += /mob/dead/observer/proc/dead_tele
 
 	stat = DEAD
@@ -565,7 +566,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		toggle_visibility(1)
 	else
 		user.visible_message ( \
-			"<span class='warning'>[user] just tried to smash his book into that ghost!  It's not very effective.</span>", \
+			"<span class='warning'>[user] just tried to smash \his book into that ghost!  It's not very effective.</span>", \
 			"<span class='warning'>You get the feeling that the ghost can't become any more visible.</span>" \
 		)
 
@@ -634,12 +635,10 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 /mob/dead/observer/proc/updateghostsight()
 	if (!seedarkness)
 		see_invisible = SEE_INVISIBLE_OBSERVER_NOLIGHTING
-		see_in_dark = 100
 	else
 		see_invisible = SEE_INVISIBLE_OBSERVER
 		if (!ghostvision)
 			see_invisible = SEE_INVISIBLE_LIVING;
-		see_in_dark = 0
 	updateghostimages()
 
 /proc/updateallghostimages()

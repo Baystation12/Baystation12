@@ -662,8 +662,8 @@ var/list/be_special_flags = list(
 #define NONGLOBAL   32  // Do not add to general languages list.
 #define INNATE      64  // All mobs can be assumed to speak and understand this language. (audible emotes)
 #define NO_TALK_MSG 128 // Do not show the "\The [speaker] talks into \the [radio]" message
-#define NO_STUTTER 256	// No stuttering, slurring, or other speech problems
-
+#define NO_STUTTER  256 // No stuttering, slurring, or other speech problems
+#define COMMON_VERBS 512 // Robots will apply regular verbs to this.
 //Flags for zone sleeping
 #define ZONE_ACTIVE   1
 #define ZONE_SLEEPING 0
@@ -719,6 +719,10 @@ var/list/be_special_flags = list(
 #define MISSING_PROGRAM     8  // Some files try to automatically launch a program. This is that failing.
 #define FILE_DRM            16 // Some files want to not be copied/moved. This is them complaining that you tried.
 #define NETWORK_FAILURE     32
+
+// Special return values from bullet_act(). Positive return values are already used to indicate the blocked level of the projectile.
+#define PROJECTILE_CONTINUE   -1 //if the projectile should continue flying after calling bullet_act()
+#define PROJECTILE_FORCE_MISS -2 //if the projectile should treat the attack as a miss (suppresses attack and admin logs) - only applies to mobs.
 
 // Some on_mob_life() procs check for alien races.
 #define IS_DIONA  1
@@ -873,8 +877,8 @@ var/list/be_special_flags = list(
 #define DOOR_OPEN_LAYER 2.7		//Under all objects if opened. 2.7 due to tables being at 2.6
 #define DOOR_CLOSED_LAYER 3.1	//Above most items if closed
 #define LIGHTING_LAYER 11
-#define OBFUSCATION_LAYER 14	//Where images covering the view for eyes are put
-#define SCREEN_LAYER 17			//Mob HUD/effects layer
+#define OBFUSCATION_LAYER 21	//Where images covering the view for eyes are put
+#define SCREEN_LAYER 22			//Mob HUD/effects layer
 
 
 /////////////////
@@ -973,6 +977,17 @@ var/list/be_special_flags = list(
 #ifndef CUSTOM_ITEM_MOB
 #define CUSTOM_ITEM_MOB 'icons/mob/custom_items_mob.dmi'
 #endif
+#ifndef CUSTOM_ITEM_ROBOT
+#define CUSTOM_ITEM_ROBOT 'icons/mob/custom_synthetic.dmi'
+#endif
+
+//default item on-mob icons
+#define INV_HEAD_DEF_ICON 'icons/mob/head.dmi'
+#define INV_BACK_DEF_ICON 'icons/mob/back.dmi'
+#define INV_L_HAND_DEF_ICON 'icons/mob/items/lefthand.dmi'
+#define INV_R_HAND_DEF_ICON 'icons/mob/items/righthand.dmi'
+#define INV_W_UNIFORM_DEF_ICON 'icons/mob/uniform.dmi'
+#define INV_ACCESSORIES_DEF_ICON 'icons/mob/ties.dmi'
 
 #define SHARD_SHARD "shard"
 #define SHARD_SHRAPNEL "shrapnel"
@@ -986,3 +1001,8 @@ var/list/be_special_flags = list(
 
 #define TABLE_BRITTLE_MATERIAL_MULTIPLIER 4 // Amount table damage is multiplied by if it is made of a brittle material (e.g. glass)
 
+#define FOR_DVIEW(type, range, center, invis_flags) \
+	dview_mob.loc = center; \
+	dview_mob.see_invisible = invis_flags; \
+	for(type in view(range, dview_mob))
+#define END_FOR_DVIEW dview_mob.loc = null

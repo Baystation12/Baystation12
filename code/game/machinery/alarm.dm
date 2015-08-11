@@ -69,6 +69,7 @@
 	var/datum/radio_frequency/radio_connection
 
 	var/list/TLV = list()
+	var/list/trace_gas = list("sleeping_agent", "volatile_fuel") //list of other gases that this air alarm is able to detect
 
 	var/danger_level = 0
 	var/pressure_dangerlevel = 0
@@ -240,23 +241,24 @@
 /obj/machinery/alarm/proc/overall_danger_level(var/datum/gas_mixture/environment)
 	var/partial_pressure = R_IDEAL_GAS_EQUATION*environment.temperature/environment.volume
 	var/environment_pressure = environment.return_pressure()
-	//var/other_moles = 0.0
-	////for(var/datum/gas/G in environment.trace_gases)
-	//	other_moles+=G.moles
+
+	var/other_moles = 0
+	for(var/g in trace_gas)
+		other_moles += environment.gas[g] //this is only going to be used in a partial pressure calc, so we don't need to worry about group_multiplier here.
 
 	pressure_dangerlevel = get_danger_level(environment_pressure, TLV["pressure"])
 	oxygen_dangerlevel = get_danger_level(environment.gas["oxygen"]*partial_pressure, TLV["oxygen"])
 	co2_dangerlevel = get_danger_level(environment.gas["carbon_dioxide"]*partial_pressure, TLV["carbon dioxide"])
 	phoron_dangerlevel = get_danger_level(environment.gas["phoron"]*partial_pressure, TLV["phoron"])
 	temperature_dangerlevel = get_danger_level(environment.temperature, TLV["temperature"])
-	//other_dangerlevel = get_danger_level(other_moles*partial_pressure, TLV["other"])
+	other_dangerlevel = get_danger_level(other_moles*partial_pressure, TLV["other"])
 
 	return max(
 		pressure_dangerlevel,
 		oxygen_dangerlevel,
 		co2_dangerlevel,
 		phoron_dangerlevel,
-		//other_dangerlevel,
+		other_dangerlevel,
 		temperature_dangerlevel
 		)
 
@@ -504,34 +506,13 @@
 	var/list/environment_data = new
 	data["has_environment"] = total
 	if(total)
-		var/partial_pressure = R_IDEAL_GAS_EQUATION*environment.temperature/environment.volume
-
-		var/list/current_settings = TLV["pressure"]
 		var/pressure = environment.return_pressure()
-		var/pressure_danger = get_danger_level(pressure, current_settings)
-		environment_data[++environment_data.len] = list("name" = "Pressure", "value" = pressure, "unit" = "kPa", "danger_level" = pressure_danger)
-		data["total_danger"] = pressure_danger
-
-		current_settings = TLV["oxygen"]
-		var/oxygen_danger = get_danger_level(environment.gas["oxygen"]*partial_pressure, current_settings)
-		environment_data[++environment_data.len] = list("name" = "Oxygen", "value" = environment.gas["oxygen"] / total * 100, "unit" = "%", "danger_level" = oxygen_danger)
-		data["total_danger"] = max(oxygen_danger, data["total_danger"])
-
-		current_settings = TLV["carbon dioxide"]
-		var/carbon_dioxide_danger = get_danger_level(environment.gas["carbon_dioxide"]*partial_pressure, current_settings)
-		environment_data[++environment_data.len] = list("name" = "Carbon dioxide", "value" = environment.gas["carbon_dioxide"] / total * 100, "unit" = "%", "danger_level" = carbon_dioxide_danger)
-		data["total_danger"] = max(carbon_dioxide_danger, data["total_danger"])
-
-		current_settings = TLV["phoron"]
-		var/phoron_danger = get_danger_level(environment.gas["phoron"]*partial_pressure, current_settings)
-		environment_data[++environment_data.len] = list("name" = "Toxins", "value" = environment.gas["phoron"] / total * 100, "unit" = "%", "danger_level" = phoron_danger)
-		data["total_danger"] = max(phoron_danger, data["total_danger"])
-
-		current_settings = TLV["temperature"]
-		var/temperature_danger = get_danger_level(environment.temperature, current_settings)
-		environment_data[++environment_data.len] = list("name" = "Temperature", "value" = environment.temperature, "unit" = "K ([round(environment.temperature - T0C, 0.1)]C)", "danger_level" = temperature_danger)
-		data["total_danger"] = max(temperature_danger, data["total_danger"])
-
+		environment_data[++environment_data.len] = list("name" = "Pressure", "value" = pressure, "unit" = "kPa", "danger_level" = pressure_dangerlevel)
+		environment_data[++environment_data.len] = list("name" = "Oxygen", "value" = environment.gas["oxygen"] / total * 100, "unit" = "%", "danger_level" = oxygen_dangerlevel)
+		environment_data[++environment_data.len] = list("name" = "Carbon dioxide", "value" = environment.gas["carbon_dioxide"] / total * 100, "unit" = "%", "danger_level" = co2_dangerlevel)
+		environment_data[++environment_data.len] = list("name" = "Toxins", "value" = environment.gas["phoron"] / total * 100, "unit" = "%", "danger_level" = phoron_dangerlevel)
+		environment_data[++environment_data.len] = list("name" = "Temperature", "value" = environment.temperature, "unit" = "K ([round(environment.temperature - T0C, 0.1)]C)", "danger_level" = temperature_dangerlevel)
+	data["total_danger"] = danger_level
 	data["environment"] = environment_data
 	data["atmos_alarm"] = alarm_area.atmosalm
 	data["fire_alarm"] = alarm_area.fire != null
@@ -919,7 +900,7 @@ FIRE ALARM
 /obj/machinery/firealarm/attack_ai(mob/user as mob)
 	return src.attack_hand(user)
 
-/obj/machinery/firealarm/bullet_act(BLAH)
+/obj/machinery/firealarm/bullet_act()
 	return src.alarm()
 
 /obj/machinery/firealarm/emp_act(severity)

@@ -64,6 +64,28 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 
 		var/procname = input("Proc path, eg: /proc/fake_blood","Path:", null) as text|null
 		if(!procname)	return
+	
+		if(targetselected)
+			if(!target)
+				usr << "<span class='danger'>Your target no longer exists.</span>"
+				return
+			if(!hascall(target,procname))
+				usr << "<font color='red'>Error: callproc(): target has no such call [procname].</font>"
+				return
+		else
+			if(copytext(procname, 1, 7) == "/proc/")
+				// nothing
+			else if(copytext(procname, 1, 6) == "proc/")
+				procname = "/[procname]"
+			else if(copytext(procname, 1, 2) == "/")
+				procname = "/proc[procname]"
+			else
+				procname = "/proc/[procname]"
+			// Procs have the strange property that text2path will return non-null, but ispath() will return false.
+			var/path = text2path(procname)
+			if(!path || ispath(path))
+				usr << "<span class='danger'>Invalid proc [procname]</span>"
+				return
 
 		var/argnum = input("Number of arguments","Number:",0) as num|null
 		if(!argnum && (argnum!=0))	return
@@ -117,13 +139,9 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 			if(!target)
 				usr << "<font color='red'>Error: callproc(): owner of proc no longer exists.</font>"
 				return
-			if(!hascall(target,procname))
-				usr << "<font color='red'>Error: callproc(): target has no such call [procname].</font>"
-				return
 			log_admin("[key_name(src)] called [target]'s [procname]() with [lst.len ? "the arguments [list2params(lst)]":"no arguments"].")
 			returnval = call(target,procname)(arglist(lst)) // Pass the lst as an argument list to the proc
 		else
-			//this currently has no hascall protection. wasn't able to get it working.
 			log_admin("[key_name(src)] called [procname]() with [lst.len ? "the arguments [list2params(lst)]":"no arguments"].")
 			returnval = call(procname)(arglist(lst)) // Pass the lst as an argument list to the proc
 

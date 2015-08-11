@@ -49,7 +49,6 @@ var/list/ai_verbs_default = list(
 	var/list/network = list("Exodus")
 	var/obj/machinery/camera/camera = null
 	var/list/connected_robots = list()
-	var/has_power = 0
 	var/aiRestorePowerRoutine = 0
 	var/viewalerts = 0
 	var/icon/holo_icon//Default is assigned when AI is created.
@@ -279,7 +278,7 @@ var/list/ai_verbs_default = list(
 
 			if(Entry[1] == src.ckey && Entry[2] == src.real_name)
 				custom_sprite = 1 //They're in the list? Custom sprite time
-				icon = 'icons/mob/custom-synthetic.dmi'
+				icon = CUSTOM_ITEM_ROBOT
 
 		//if(icon_state == initial(icon_state))
 	var/icontype = ""
@@ -406,8 +405,7 @@ var/list/ai_verbs_default = list(
 
 /mob/living/silicon/ai/check_eye(var/mob/user as mob)
 	if (!camera)
-		return null
-	user.reset_view(camera)
+		return -1
 	return 0
 
 /mob/living/silicon/ai/restrained()

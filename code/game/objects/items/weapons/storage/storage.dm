@@ -335,7 +335,6 @@
 	..()
 
 	if(isrobot(user))
-		user << "\blue You're a robot. No."
 		return //Robots can't interact with storage items.
 
 	if(!can_be_inserted(W))

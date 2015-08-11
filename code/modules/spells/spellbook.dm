@@ -242,6 +242,7 @@
 							if (!(XRAY in H.mutations))
 								H.mutations.Add(XRAY)
 								H.sight |= (SEE_MOBS|SEE_OBJS|SEE_TURFS)
+								H.see_in_dark = 8
 								H.see_invisible = SEE_INVISIBLE_LEVEL_TWO
 								H << "span class='notice'>The walls suddenly disappear.</span>"
 							temp = "You have purchased a scrying orb, and gained x-ray vision."
