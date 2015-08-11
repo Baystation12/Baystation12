@@ -39,10 +39,10 @@
 	if (usr.stat != 0)
 		return
 	if (src.occupant)
-		usr << "\blue <B>The scanner is already occupied!</B>"
+		usr << "<span class='warning'>The scanner is already occupied!</span>"
 		return
 	if (usr.abiotic())
-		usr << "\blue <B>Subject cannot have abiotic items on.</B>"
+		usr << "<span class='warning'>The subject cannot have abiotic items on.</span>"
 		return
 	usr.pulling = null
 	usr.client.perspective = EYE_PERSPECTIVE
@@ -77,10 +77,10 @@
 	if ((!( istype(G, /obj/item/weapon/grab) ) || !( ismob(G.affecting) )))
 		return
 	if (src.occupant)
-		user << "\blue <B>The scanner is already occupied!</B>"
+		user << "<span class='warning'>The scanner is already occupied!</span>"
 		return
 	if (G.affecting.abiotic())
-		user << "\blue <B>Subject cannot have abiotic items on.</B>"
+		user << "<span class='warning'>Subject cannot have abiotic items on.</span>"
 		return
 	var/mob/M = G.affecting
 	if (M.client)
@@ -217,10 +217,10 @@
 	if(stat & (NOPOWER|BROKEN))
 		return
 	if(!connected || (connected.stat & (NOPOWER|BROKEN)))
-		user << "\red This console is not connected to a functioning body scanner."
+		user << "<span class='warning'>This console is not connected to a functioning body scanner.</span>"
 		return
 	if(!ishuman(connected.occupant))
-		user << "\red This device can only scan compatible lifeforms."
+		user << "<span class='warning'>This device can only scan compatible lifeforms.</span>"
 		return
 
 	var/dat
@@ -387,7 +387,8 @@
 				infected = "Acute Infection++:"
 			if (INFECTION_LEVEL_THREE to INFINITY)
 				infected = "Septic:"
-
+		if(e.rejecting)
+			infected += "(being rejected)"
 		if (e.implants.len)
 			var/unknown_body = 0
 			for(var/I in e.implants)
@@ -403,7 +404,7 @@
 		if(!(e.status & ORGAN_DESTROYED))
 			dat += "<td>[e.name]</td><td>[e.burn_dam]</td><td>[e.brute_dam]</td><td>[robot][bled][AN][splint][open][infected][imp][internal_bleeding][lung_ruptured]</td>"
 		else
-			dat += "<td>[e.name]</td><td>-</td><td>-</td><td>Not Found</td>"
+			dat += "<td>[e.name]</td><td>-</td><td>-</td><td>Not [e.is_stump() ? "Found" : "Attached Completely"]</td>"
 		dat += "</tr>"
 
 	for(var/obj/item/organ/i in occ["internal_organs"])
@@ -428,6 +429,8 @@
 				infection = "Acute Infection+:"
 			if (INFECTION_LEVEL_TWO + 300 to INFINITY)
 				infection = "Acute Infection++:"
+		if(i.rejecting)
+			infection += "(being rejected)"
 
 		dat += "<tr>"
 		dat += "<td>[i.name]</td><td>N/A</td><td>[i.damage]</td><td>[infection]:[mech]</td><td></td>"

@@ -60,68 +60,33 @@
 	name = "broken cryptographic sequencer"
 	icon_state = "emag"
 	item_state = "card-id"
-	origin_tech = "magnets=2;syndicate=2"
+	origin_tech = list(TECH_MAGNET = 2, TECH_ILLEGAL = 2)
 
 /obj/item/weapon/card/emag
 	desc = "It's a card with a magnetic strip attached to some circuitry."
 	name = "cryptographic sequencer"
 	icon_state = "emag"
 	item_state = "card-id"
-	origin_tech = "magnets=2;syndicate=2"
+	origin_tech = list(TECH_MAGNET = 2, TECH_ILLEGAL = 2)
 	var/uses = 10
-	// List of devices that cost a use to emag.
-	var/list/devices = list(
-		/obj/item/robot_parts,
-		/obj/item/weapon/storage/lockbox,
-		/obj/item/weapon/storage/secure,
-		/obj/item/weapon/circuitboard,
-		/obj/item/weapon/rig,
-		/obj/item/device/eftpos,
-		/obj/item/device/lightreplacer,
-		/obj/item/device/taperecorder,
-		/obj/item/device/hailer,
-		/obj/item/device/megaphone,
-		/obj/item/clothing/accessory/badge/holo,
-		/obj/structure/closet/crate/secure,
-		/obj/structure/closet/secure_closet,
-		/obj/machinery/librarycomp,
-		/obj/machinery/computer,
-		/obj/machinery/power,
-		/obj/machinery/suspension_gen,
-		/obj/machinery/shield_capacitor,
-		/obj/machinery/shield_gen,
-		/obj/machinery/clonepod,
-		/obj/machinery/deployable,
-		/obj/machinery/button/remote,
-		/obj/machinery/porta_turret,
-		/obj/machinery/shieldgen,
-		/obj/machinery/turretid,
-		/obj/machinery/vending,
-		/mob/living/bot,
-		/obj/machinery/door,
-		/obj/machinery/telecomms,
-		/obj/machinery/mecha_part_fabricator,
-		/obj/machinery/gibber,
-		/obj/vehicle
-		)
 
+/obj/item/weapon/card/emag/resolve_attackby(atom/A, mob/user)
+	var/used_uses = A.emag_act(uses, user)
+	if(used_uses < 0)
+		return ..(A, user)
 
-/obj/item/weapon/card/emag/afterattack(var/obj/item/weapon/O as obj, mob/user as mob)
-
-	for(var/type in devices)
-		if(istype(O,type))
-			uses--
-			break
+	uses -= used_uses
+	A.add_fingerprint(user)
+	log_and_message_admins("emagged \an [A].")
 
 	if(uses<1)
-		user.visible_message("[src] fizzles and sparks - it seems it's been used once too often, and is now broken.")
+		user.visible_message("<span class='warning'>\The [src] fizzles and sparks - it seems it's been used once too often, and is now spent.</span>")
 		user.drop_item()
 		var/obj/item/weapon/card/emag_broken/junk = new(user.loc)
 		junk.add_fingerprint(user)
 		qdel(src)
-		return
 
-	..()
+	return 1
 
 /obj/item/weapon/card/id
 	name = "identification card"
@@ -190,7 +155,7 @@
 /obj/item/weapon/card/id/syndicate
 	name = "agent card"
 	access = list(access_maint_tunnels, access_syndicate, access_external_airlocks)
-	origin_tech = "syndicate=3"
+	origin_tech = list(TECH_ILLEGAL = 3)
 	var/registered_user=null
 
 /obj/item/weapon/card/id/syndicate/New(mob/user as mob)
@@ -209,7 +174,7 @@
 		src.access |= I.access
 		if(istype(user, /mob/living) && user.mind)
 			if(user.mind.special_role)
-				usr << "\blue The card's microscanners activate as you pass it over the ID, copying its access."
+				usr << "<span class='notice'>The card's microscanners activate as you pass it over the ID, copying its access.</span>"
 
 /obj/item/weapon/card/id/syndicate/attack_self(mob/user as mob)
 	if(!src.registered_name)
@@ -227,7 +192,7 @@
 			return
 		src.assignment = u
 		src.name = "[src.registered_name]'s ID Card ([src.assignment])"
-		user << "\blue You successfully forge the ID card."
+		user << "<span class='notice'>You successfully forge the ID card.</span>"
 		registered_user = user
 	else if(!registered_user || registered_user == user)
 
@@ -247,7 +212,7 @@
 					return
 				src.assignment = u
 				src.name = "[src.registered_name]'s ID Card ([src.assignment])"
-				user << "\blue You successfully forge the ID card."
+				user << "<span class='notice'>You successfully forge the ID card.</span>"
 				return
 			if("Show")
 				..()
@@ -271,7 +236,7 @@
 	registered_name = "Captain"
 	assignment = "Captain"
 	New()
-		access = get_all_accesses()
+		access = get_all_station_access()
 		..()
 
 /obj/item/weapon/card/id/centcom
@@ -290,4 +255,4 @@
 
 /obj/item/weapon/card/id/centcom/ERT/New()
 	..()
-	access += get_all_accesses()
+	access += get_all_station_access()

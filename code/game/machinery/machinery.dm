@@ -225,7 +225,7 @@ Class Procs:
 		return 1
 	if ( ! (istype(usr, /mob/living/carbon/human) || \
 			istype(usr, /mob/living/silicon)))
-		usr << "\red You don't have the dexterity to do this!"
+		usr << "<span class='warning'>You don't have the dexterity to do this!</span>"
 		return 1
 /*
 	//distance checks are made by atom/proc/DblClick
@@ -235,10 +235,10 @@ Class Procs:
 	if (ishuman(user))
 		var/mob/living/carbon/human/H = user
 		if(H.getBrainLoss() >= 60)
-			visible_message("\red [H] stares cluelessly at [src] and drools.")
+			visible_message("<span class='warning'>[H] stares cluelessly at [src] and drools.</span>")
 			return 1
 		else if(prob(H.getBrainLoss()))
-			user << "\red You momentarily forget how to use [src]."
+			user << "<span class='warning'>You momentarily forget how to use [src].</span>"
 			return 1
 
 	src.add_fingerprint(user)
@@ -337,8 +337,6 @@ Class Procs:
 	M.state = 2
 	M.icon_state = "box_1"
 	for(var/obj/I in component_parts)
-		if(I.reliability != 100 && crit_fail)
-			I.crit_fail = 1
 		I.loc = loc
 	qdel(src)
 	return 1

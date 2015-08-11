@@ -29,10 +29,6 @@
 	pockets.emp_act(severity)
 	..()
 
-/obj/item/clothing/suit/storage/hear_talk(mob/M, var/msg, verb, datum/language/speaking)
-	pockets.hear_talk(M, msg, verb, speaking)
-	..()
-
 //Jackets with buttons, used for labcoats, IA jackets, First Responder jackets, and brown jackets.
 /obj/item/clothing/suit/storage/toggle
 	var/icon_open

@@ -364,7 +364,7 @@
 	if(sealing)
 		fail_msg = "<span class='warning'>The hardsuit is in the process of adjusting seals and cannot be activated.</span>"
 	else if(!fail_msg && ((use_unconcious && user.stat > 1) || (!use_unconcious && user.stat)))
-		fail_msg = "<span class='warning'>You are in no fit state to do that."
+		fail_msg = "<span class='warning'>You are in no fit state to do that.</span>"
 	else if(!cell)
 		fail_msg = "<span class='warning'>There is no cell installed in the suit.</span>"
 	else if(cost && cell.charge < cost * 10) //TODO: Cellrate?
@@ -743,7 +743,7 @@
 
 	if(wearer)
 		if(dam_module.damage >= 2)
-			wearer << "<span class='danger'>The [source] has disabled your [dam_module.interface_name]!"
+			wearer << "<span class='danger'>The [source] has disabled your [dam_module.interface_name]!</span>"
 		else
 			wearer << "<span class='warning'>The [source] has damaged your [dam_module.interface_name]!"
 	dam_module.deactivate()

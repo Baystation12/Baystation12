@@ -143,13 +143,21 @@
 					user << "<span class='notice'>[target] is full.</span>"
 					return
 
+				var/mob/living/carbon/human/H = target
+				if(istype(H))
+					var/obj/item/organ/external/affected = H.get_organ(user.zone_sel.selecting)
+					if(!affected)
+						user << "<span class='danger'>\The [H] is missing that limb!</span>"
+						return
+					else if(affected.status & ORGAN_ROBOT)
+						user << "<span class='danger'>You cannot inject a robotic limb.</span>"
+						return
+
 				if(ismob(target) && target != user)
 
 					var/injtime = time //Injecting through a hardsuit takes longer due to needing to find a port.
 
-					if(istype(target, /mob/living/carbon/human))
-
-						var/mob/living/carbon/human/H = target
+					if(istype(H))
 						if(H.wear_suit)
 							if(istype(H.wear_suit, /obj/item/clothing/suit/space))
 								injtime = injtime * 2

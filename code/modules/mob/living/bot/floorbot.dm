@@ -47,11 +47,13 @@
 	onclose(user, "autorepair")
 	return
 
-/mob/living/bot/floorbot/Emag(var/mob/user)
-	..()
-	emagged = 1
-	if(user)
-		user << "<span class='notice'>The [src] buzzes and beeps.</span>"
+/mob/living/bot/floorbot/emag_act(var/remaining_charges, var/mob/user)
+	. = ..()
+	if(!emagged)
+		emagged = 1
+		if(user)
+			user << "<span class='notice'>The [src] buzzes and beeps.</span>"
+		return 1
 
 /mob/living/bot/floorbot/Topic(href, href_list)
 	if(..())

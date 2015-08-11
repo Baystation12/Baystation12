@@ -10,7 +10,7 @@ nanoui is used to open and update nano browser uis
 	// the user who opened this ui
 	var/mob/user
 	// the object this ui "belongs" to
-	var/atom/movable/src_object
+	var/datum/src_object
 	// the title of this ui
 	var/title
 	// the key of this ui, this is to allow multiple (different) uis for each src_object
@@ -176,7 +176,7 @@ nanoui is used to open and update nano browser uis
 /datum/nanoui/proc/get_config_data()
 	var/list/config_data = list(
 			"title" = title,
-			"srcObject" = list("name" = src_object.name),
+			"srcObject" = list("name" = "[src_object]"),
 			"stateKey" = state_key,
 			"status" = status,
 			"autoUpdateLayout" = auto_update_layout,

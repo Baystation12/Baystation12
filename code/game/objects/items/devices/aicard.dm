@@ -6,7 +6,7 @@
 	w_class = 2.0
 	slot_flags = SLOT_BELT
 	var/flush = null
-	origin_tech = "programming=4;materials=4"
+	origin_tech = list(TECH_DATA = 4, TECH_MATERIAL = 4)
 
 	var/mob/living/silicon/ai/carded_ai
 
@@ -118,7 +118,7 @@
 	if(ai.client)
 		ai << "You have been downloaded to a mobile storage device. Remote access lost."
 	if(user.client)
-		user << "\blue <b>Transfer successful</b>: \black [ai.name] ([rand(1000,9999)].exe) removed from host terminal and stored within local memory."
+		user << "<span class='notice'><b>Transfer successful:</b></span> [ai.name] ([rand(1000,9999)].exe) removed from host terminal and stored within local memory."
 
 	update_icon()
 	return 1
@@ -133,6 +133,13 @@
 		var/rendered = "<span class='message'>[text]</span>"
 		carded_ai.show_message(rendered, 2)
 	..()
+
+/obj/item/device/aicard/show_message(msg, type, alt, alt_type)
+	if(carded_ai && carded_ai.client)
+		var/rendered = "<span class='message'>[msg]</span>"
+		carded_ai.show_message(rendered, type)
+	..()
+
 /*
 /obj/item/device/aicard/relaymove(var/mob/user, var/direction)
 	if(src.loc && istype(src.loc.loc, /obj/item/rig_module))

@@ -80,7 +80,7 @@
 					stat("Game Mode:", "[master_mode]") // Old setting for showing the game mode
 
 			if(ticker.current_state == GAME_STATE_PREGAME)
-				stat("Time To Start:", "[ticker.pregame_timeleft][going ? "" : " (DELAYED)"]")
+				stat("Time To Start:", "[ticker.pregame_timeleft][round_progressing ? "" : " (DELAYED)"]")
 				stat("Players: [totalPlayers]", "Players Ready: [totalPlayersReady]")
 				totalPlayers = 0
 				totalPlayersReady = 0
@@ -466,7 +466,7 @@
 		new_character.name = real_name
 		new_character.dna.ready_dna(new_character)
 		new_character.dna.b_type = client.prefs.b_type
-
+		new_character.sync_organ_dna()
 		if(client.prefs.disabilities)
 			// Set defer to 1 if you add more crap here so it only recalculates struc_enzymes once. - N3X
 			new_character.dna.SetSEState(GLASSESBLOCK,1,0)

@@ -316,7 +316,7 @@
 About the new airlock wires panel:
 *	An airlock wire dialog can be accessed by the normal way or by using wirecutters or a multitool on the door while the wire-panel is open. This would show the following wires, which you can either wirecut/mend or send a multitool pulse through. There are 9 wires.
 *		one wire from the ID scanner. Sending a pulse through this flashes the red light on the door (if the door has power). If you cut this wire, the door will stop recognizing valid IDs. (If the door has 0000 access, it still opens and closes, though)
-*		two wires for power. Sending a pulse through either one causes a breaker to trip, disabling the door for 10 seconds if backup power is connected, or 1 minute if not (or until backup power comes back on, whichever is shorter). Cutting either one disables the main door power, but unless backup power is also cut, the backup power re-powers the door in 10 seconds. While unpowered, the door may be \red open, but bolts-raising will not work. Cutting these wires may electrocute the user.
+*		two wires for power. Sending a pulse through either one causes a breaker to trip, disabling the door for 10 seconds if backup power is connected, or 1 minute if not (or until backup power comes back on, whichever is shorter). Cutting either one disables the main door power, but unless backup power is also cut, the backup power re-powers the door in 10 seconds. While unpowered, the door may be open, but bolts-raising will not work. Cutting these wires may electrocute the user.
 *		one wire for door bolts. Sending a pulse through this drops door bolts (whether the door is powered or not) or raises them (if it is). Cutting this wire also drops the door bolts, and mending it does not raise them. If the wire is cut, trying to raise the door bolts will not work.
 *		two wires for backup power. Sending a pulse through either one causes a breaker to trip, but this does not disable it unless main power is down too (in which case it is disabled for 1 minute or however long it takes main power to come back, whichever is shorter). Cutting either one disables the backup door power (allowing it to be crowbarred open, but disabling bolts-raising), but may electocute the user.
 *		one wire for opening the door. Sending a pulse through this while the door has power makes it open the door if no access is required.
@@ -340,7 +340,7 @@ About the new airlock wires panel:
 			else /*if(src.justzap)*/
 				return
 		else if(user.hallucination > 50 && prob(10) && src.operating == 0)
-			user << "\red <B>You feel a powerful shock course through your body!</B>"
+			user << "<span class='danger'>You feel a powerful shock course through your body!</span>"
 			user.halloss += 10
 			user.stunned += 10
 			return
@@ -637,14 +637,14 @@ About the new airlock wires panel:
 		if(H.getBrainLoss() >= 60)
 			playsound(src.loc, 'sound/effects/bang.ogg', 25, 1)
 			if(!istype(H.head, /obj/item/clothing/head/helmet))
-				visible_message("\red [user] headbutts the airlock.")
+				visible_message("<span class='warning'>[user] headbutts the airlock.</span>")
 				var/obj/item/organ/external/affecting = H.get_organ("head")
 				H.Stun(8)
 				H.Weaken(5)
 				if(affecting.take_damage(10, 0))
 					H.UpdateDamageIcon()
 			else
-				visible_message("\red [user] headbutts the airlock. Good thing they're wearing a helmet.")
+				visible_message("<span class='warning'>[user] headbutts the airlock. Good thing they're wearing a helmet.</span>")
 			return
 	**/
 
@@ -777,7 +777,7 @@ About the new airlock wires panel:
 			playsound(src.loc, 'sound/items/Crowbar.ogg', 100, 1)
 			user.visible_message("[user] removes the electronics from the airlock assembly.", "You start to remove electronics from the airlock assembly.")
 			if(do_after(user,40))
-				user << "\blue You removed the airlock electronics!"
+				user << "<span class='notice'>You removed the airlock electronics!</span>"
 
 				var/obj/structure/door_assembly/da = new assembly_type(src.loc)
 				if (istype(da, /obj/structure/door_assembly/multi_tile))
@@ -1075,7 +1075,8 @@ About the new airlock wires panel:
 	update_icon()
 
 /obj/machinery/door/airlock/proc/prison_open()
-	src.unlock()
-	src.open()
-	src.lock()
+	if(arePowerSystemsOn())
+		src.unlock()
+		src.open()
+		src.lock()
 	return

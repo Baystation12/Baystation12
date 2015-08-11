@@ -71,7 +71,6 @@ var/list/event_last_fired = list()
 		possibleEvents[/datum/event/spacevine] = 10 + 5 * active_with_role["Engineer"]
 	if(minutes_passed >= 30) // Give engineers time to set up engine
 		possibleEvents[/datum/event/meteor_wave] = 10 * active_with_role["Engineer"]
-		possibleEvents[/datum/event/meteor_shower] = 20 * active_with_role["Engineer"]
 		possibleEvents[/datum/event/blob] = 10 * active_with_role["Engineer"]
 
 	if(active_with_role["Medical"] > 0)

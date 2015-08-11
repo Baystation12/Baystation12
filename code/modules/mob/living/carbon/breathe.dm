@@ -1,15 +1,20 @@
 //Common breathing procs
 
+//Start of a breath chain, calls breathe()
+/mob/living/carbon/handle_breathing()
+	if(air_master.current_cycle%4==2 || failed_last_breath || (health < config.health_threshold_crit)) 	//First, resolve location and get a breath
+		breathe()
+
 /mob/living/carbon/proc/breathe()
 	//if(istype(loc, /obj/machinery/atmospherics/unary/cryo_cell)) return
-	if(species && (species.flags & NO_BREATHE || species.flags & IS_SYNTHETIC)) return
-	
+	if(species && (species.flags & NO_BREATHE)) return
+
 	var/datum/gas_mixture/breath = null
-	
+
 	//First, check if we can breathe at all
 	if(health < config.health_threshold_crit && !(CE_STABLE in chem_effects)) //crit aka circulatory shock
 		losebreath++
-	
+
 	if(losebreath>0) //Suffocating so do not take a breath
 		losebreath--
 		if (prob(10)) //Gasp per 10 ticks? Sounds about right.
@@ -17,9 +22,9 @@
 	else
 		//Okay, we can breathe, now check if we can get air
 		breath = get_breath_from_internal() //First, check for air from internals
-		if(!breath) 
+		if(!breath)
 			breath = get_breath_from_environment() //No breath from internals so let's try to get air from our location
-	
+
 	handle_breath(breath)
 	handle_post_breath(breath)
 
@@ -40,15 +45,15 @@
 
 /mob/living/carbon/proc/get_breath_from_environment(var/volume_needed=BREATH_VOLUME)
 	var/datum/gas_mixture/breath = null
-	
+
 	var/datum/gas_mixture/environment
 	if(loc)
 		environment = loc.return_air_for_internal_lifeform()
-	
+
 	if(environment)
 		breath = environment.remove_volume(volume_needed)
 		handle_chemical_smoke(environment) //handle chemical smoke while we're at it
-	
+
 	if(breath)
 		//handle mask filtering
 		if(istype(wear_mask, /obj/item/clothing/mask) && breath)

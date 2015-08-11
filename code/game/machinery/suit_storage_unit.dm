@@ -100,7 +100,7 @@
 		dat+= "<HEAD><TITLE>Suit storage unit: Maintenance panel</TITLE></HEAD>"
 		dat+= "<Font color ='black'><B>Maintenance panel controls</B></font><HR>"
 		dat+= "<font color ='grey'>The panel is ridden with controls, button and meters, labeled in strange signs and symbols that <BR>you cannot understand. Probably the manufactoring world's language.<BR> Among other things, a few controls catch your eye.<BR><BR>"
-		dat+= text("<font color ='black'>A small dial with a \"ë\" symbol embroidded on it. It's pointing towards a gauge that reads []</font>.<BR> <font color='blue'><A href='?src=\ref[];toggleUV=1'> Turn towards []</A><BR>",(src.issuperUV ? "15nm" : "185nm"),src,(src.issuperUV ? "185nm" : "15nm") )
+		dat+= text("<font color ='black'>A small dial with a small lambda symbol on it. It's pointing towards a gauge that reads []</font>.<BR> <font color='blue'><A href='?src=\ref[];toggleUV=1'> Turn towards []</A><BR>",(src.issuperUV ? "15nm" : "185nm"),src,(src.issuperUV ? "185nm" : "15nm") )
 		dat+= text("<font color ='black'>A thick old-style button, with 2 grimy LED lights next to it. The [] LED is on.</font><BR><font color ='blue'><A href='?src=\ref[];togglesafeties=1'>Press button</a></font>",(src.safetieson? "<font color='green'><B>GREEN</B></font>" : "<font color='red'><B>RED</B></font>"),src)
 		dat+= text("<HR><BR><A href='?src=\ref[];mach_close=suit_storage_unit'>Close panel</A>", user)
 		//user << browse(dat, "window=ssu_m_panel;size=400x500")
@@ -684,7 +684,7 @@
 			user << "<span class='danger'>There is no room inside the cycler for [G.affecting.name].</span>"
 			return
 
-		visible_message("[user] starts putting [G.affecting.name] into the suit cycler.</span>", 3)
+		visible_message("<span class='notice'>[user] starts putting [G.affecting.name] into the suit cycler.</span>", 3)
 
 		if(do_after(user, 20))
 			if(!G || !G.affecting) return
@@ -706,24 +706,6 @@
 		panel_open = !panel_open
 		user << "You [panel_open ?  "open" : "close"] the maintenance panel."
 		src.updateUsrDialog()
-		return
-
-	else if(istype(I,/obj/item/weapon/card/emag))
-
-		if(emagged)
-			user << "<span class='danger'>The cycler has already been subverted.</span>"
-			return
-
-		var/obj/item/weapon/card/emag/E = I
-		src.updateUsrDialog()
-		E.uses--
-
-		//Clear the access reqs, disable the safeties, and open up all paintjobs.
-		user << "<span class='danger'>You run the sequencer across the interface, corrupting the operating protocols.</span>"
-		departments = list("Engineering","Mining","Medical","Security","Atmos","^%###^%$")
-		emagged = 1
-		safeties = 0
-		req_access = list()
 		return
 
 	else if(istype(I,/obj/item/clothing/head/helmet/space) && !istype(I, /obj/item/clothing/head/helmet/space/rig))
@@ -773,6 +755,20 @@
 		return
 
 	..()
+	
+/obj/machinery/suit_cycler/emag_act(var/remaining_charges, var/mob/user)
+	if(emagged)
+		user << "<span class='danger'>The cycler has already been subverted.</span>"
+		return
+
+	//Clear the access reqs, disable the safeties, and open up all paintjobs.
+	user << "<span class='danger'>You run the sequencer across the interface, corrupting the operating protocols.</span>"
+	departments = list("Engineering","Mining","Medical","Security","Atmos","^%###^%$")
+	emagged = 1
+	safeties = 0
+	req_access = list()
+	src.updateUsrDialog()
+	return 1
 
 /obj/machinery/suit_cycler/attack_hand(mob/user as mob)
 
@@ -933,7 +929,7 @@
 
 /obj/machinery/suit_cycler/proc/finished_job()
 	var/turf/T = get_turf(src)
-	T.visible_message("\icon[src] \blue The [src] pings loudly.")
+	T.visible_message("\icon[src]<span class='notice'>The [src] pings loudly.</span>")
 	icon_state = initial(icon_state)
 	active = 0
 	src.updateUsrDialog()
@@ -960,7 +956,7 @@
 /obj/machinery/suit_cycler/proc/eject_occupant(mob/user as mob)
 
 	if(locked || active)
-		user << "\red The cycler is locked."
+		user << "<span class='warning'>The cycler is locked.</span>"
 		return
 
 	if (!occupant)

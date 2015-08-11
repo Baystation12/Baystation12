@@ -51,10 +51,10 @@
 		//there's got to be a better way of doing this.
 		if (!(src.loc == usr) || (src.loc && src.loc.loc == usr))
 			return
-		
+
 		if (( usr.restrained() ) || ( usr.stat ))
 			return
-		
+
 		if ((src.loc == usr) && !usr.unEquip(src))
 			return
 
@@ -286,9 +286,9 @@
 				if (M == usr)
 					usr << "<span class='notice'>You put \the [W] into [src].</span>"
 				else if (M in range(1)) //If someone is standing close enough, they can tell what it is...
-					M.show_message("<span class='notice'>[usr] puts [W] into [src].</span>")
+					M.show_message("<span class='notice'>\The [usr] puts [W] into [src].</span>")
 				else if (W && W.w_class >= 3) //Otherwise they can only see large or normal items from a distance...
-					M.show_message("<span class='notice'>[usr] puts [W] into [src].</span>")
+					M.show_message("<span class='notice'>\The [usr] puts [W] into [src].</span>")
 
 		src.orient2hud(usr)
 		if(usr.s_active)
@@ -344,14 +344,14 @@
 		var/obj/item/weapon/tray/T = W
 		if(T.calc_carry() > 0)
 			if(prob(85))
-				user << "\red The tray won't fit in [src]."
+				user << "<span class='warning'>The tray won't fit in [src].</span>"
 				return
 			else
 				W.loc = user.loc
 				if ((user.client && user.s_active != src))
 					user.client.screen -= W
 				W.dropped(user)
-				user << "\red God damnit!"
+				user << "<span class='warning'>God damnit!</span>"
 
 	W.add_fingerprint(user)
 	return handle_item_insertion(W)
@@ -442,12 +442,6 @@
 		if(src.verbs.Find(/obj/item/weapon/storage/verb/quick_empty))
 			src.quick_empty()
 			return 1
-
-/obj/item/weapon/storage/hear_talk(mob/M as mob, text, verb, datum/language/speaking)
-	for (var/atom/A in src)
-		if(istype(A,/obj/))
-			var/obj/O = A
-			O.hear_talk(M, text, verb, speaking)
 
 //Returns the storage depth of an atom. This is the number of storage items the atom is contained in before reaching toplevel (the area).
 //Returns -1 if the atom was not found on container.

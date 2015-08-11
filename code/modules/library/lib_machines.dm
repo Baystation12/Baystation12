@@ -236,10 +236,13 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
 	//dat += "<A HREF='?src=\ref[user];mach_close=library'>Close</A><br><br>"
 	user << browse(dat, "window=library")
 	onclose(user, "library")
+	
+/obj/machinery/librarycomp/emag_act(var/remaining_charges, var/mob/user)
+	if (src.density && !src.emagged)
+		src.emagged = 1
+		return 1
 
 /obj/machinery/librarycomp/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if (src.density && istype(W, /obj/item/weapon/card/emag))
-		src.emagged = 1
 	if(istype(W, /obj/item/weapon/barcodescanner))
 		var/obj/item/weapon/barcodescanner/scanner = W
 		scanner.computer = src

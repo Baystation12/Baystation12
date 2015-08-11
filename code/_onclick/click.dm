@@ -117,7 +117,7 @@
 			if(W.flags&USEDELAY)
 				next_move += 5
 
-			var/resolved = A.attackby(W,src)
+			var/resolved = W.resolve_attackby(A, src)
 			if(!resolved && A && W)
 				W.afterattack(A,src,1,params) // 1 indicates adjacency
 		else
@@ -138,7 +138,7 @@
 					next_move += 5
 
 				// Return 1 in attackby() to prevent afterattack() effects (when safely moving items for example)
-				var/resolved = A.attackby(W,src)
+				var/resolved = W.resolve_attackby(A,src)
 				if(!resolved && A && W)
 					W.afterattack(A,src,1,params) // 1: clicking something Adjacent
 			else
@@ -231,17 +231,6 @@
 /mob/living/carbon/MiddleClickOn(var/atom/A)
 	swap_hand()
 
-/mob/living/carbon/human/MiddleClickOn(var/atom/A)
-
-	if(back)
-		var/obj/item/weapon/rig/rig = back
-		if(istype(rig) && rig.selected_module)
-			if(world.time <= next_move) return
-			next_move = world.time + 8
-			rig.selected_module.engage(A)
-			return
-
-	swap_hand()
 
 // In case of use break glass
 /*
@@ -342,7 +331,7 @@
 		nutrition = max(nutrition - rand(1,5),0)
 		handle_regular_hud_updates()
 	else
-		src << "\red You're out of energy!  You need food!"
+		src << "<span class='warning'>You're out of energy!  You need food!</span>"
 
 // Simple helper to face what you clicked on, in case it should be needed in more than one place
 /mob/proc/face_atom(var/atom/A)

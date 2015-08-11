@@ -63,9 +63,9 @@
 	unbreakable = 1
 
 /obj/item/weapon/material/knife/suicide_act(mob/user)
-	viewers(user) << pick("\red <b>[user] is slitting \his wrists with the [src.name]! It looks like \he's trying to commit suicide.</b>", \
-						"\red <b>[user] is slitting \his throat with the [src.name]! It looks like \he's trying to commit suicide.</b>", \
-						"\red <b>[user] is slitting \his stomach open with the [src.name]! It looks like \he's trying to commit seppuku.</b>")
+	viewers(user) << pick("<span class='danger'>\The [user] is slitting \his wrists with \the [src]! It looks like \he's trying to commit suicide.</span>", \
+	                      "<span class='danger'>\The [user] is slitting \his throat with \the [src]! It looks like \he's trying to commit suicide.</span>", \
+	                      "<span class='danger'>\The [user] is slitting \his stomach open with \the [src]! It looks like \he's trying to commit seppuku.</span>")
 	return (BRUTELOSS)
 
 /obj/item/weapon/material/knife/hook

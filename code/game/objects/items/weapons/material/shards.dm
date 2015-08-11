@@ -17,8 +17,8 @@
 	drops_debris = 0
 
 /obj/item/weapon/material/shard/suicide_act(mob/user)
-	viewers(user) << pick("\red <b>[user] is slitting \his wrists with \the [src]! It looks like \he's trying to commit suicide.</b>", \
-						"\red <b>[user] is slitting \his throat with \the [src]! It looks like \he's trying to commit suicide.</b>")
+	viewers(user) << pick("<span class='danger'>\The [user] is slitting \his wrists with \the [src]! It looks like \he's trying to commit suicide.</span>",
+	                      "<span class='danger'>\The [user] is slitting \his throat with \the [src]! It looks like \he's trying to commit suicide.</span>")
 	return (BRUTELOSS)
 
 /obj/item/weapon/material/shard/set_material(var/new_material)
@@ -63,16 +63,18 @@
 /obj/item/weapon/material/shard/Crossed(AM as mob|obj)
 	if(ismob(AM))
 		var/mob/M = AM
-		M << "\red <B>You step on \the [src]!</B>"
+		M << "<span class='danger'>You step on \the [src]!</span>"
 		playsound(src.loc, 'sound/effects/glass_step.ogg', 50, 1) // not sure how to handle metal shards with sounds
 		if(ishuman(M))
 			var/mob/living/carbon/human/H = M
 
-			if(H.species.flags & IS_SYNTHETIC || (H.species.siemens_coefficient<0.5)) //Thick skin.
+			if(H.species.siemens_coefficient<0.5) //Thick skin.
 				return
 
 			if( !H.shoes && ( !H.wear_suit || !(H.wear_suit.body_parts_covered & FEET) ) )
 				var/obj/item/organ/external/affecting = H.get_organ(pick("l_foot", "r_foot"))
+				if(!affecting)
+					return
 				if(affecting.status & ORGAN_ROBOT)
 					return
 				if(affecting.take_damage(5, 0))

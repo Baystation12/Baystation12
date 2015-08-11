@@ -269,11 +269,11 @@
 
 	src.updateUsrDialog()
 
-/obj/machinery/computer/communications/attackby(var/obj/I as obj, var/mob/user as mob)
-	if(istype(I,/obj/item/weapon/card/emag/))
+/obj/machinery/computer/communications/emag_act(var/remaining_charges, var/mob/user)
+	if(!emagged)
 		src.emagged = 1
 		user << "You scramble the communication routing circuits!"
-	..()
+		return 1
 
 /obj/machinery/computer/communications/attack_ai(var/mob/user as mob)
 	return src.attack_hand(user)
@@ -550,50 +550,3 @@
 			status_signal.data["picture_state"] = data1
 
 	frequency.post_signal(src, status_signal)
-
-
-/obj/machinery/computer/communications/Destroy()
-
-	for(var/obj/machinery/computer/communications/commconsole in world)
-		if(istype(commconsole.loc,/turf) && commconsole != src)
-			return ..()
-
-	for(var/obj/item/weapon/circuitboard/communications/commboard in world)
-		if(istype(commboard.loc,/turf) || istype(commboard.loc,/obj/item/weapon/storage))
-			return ..()
-
-	for(var/mob/living/silicon/ai/shuttlecaller in player_list)
-		if(!shuttlecaller.stat && shuttlecaller.client && istype(shuttlecaller.loc,/turf))
-			return ..()
-
-	if(ticker.mode.name == "revolution" || deathsquad.deployed)
-		return ..()
-
-	emergency_shuttle.call_evac()
-	log_game("All the AIs, comm consoles and boards are destroyed. Shuttle called.")
-	message_admins("All the AIs, comm consoles and boards are destroyed. Shuttle called.", 1)
-
-	..()
-
-/obj/item/weapon/circuitboard/communications/Destroy()
-
-	for(var/obj/machinery/computer/communications/commconsole in world)
-		if(istype(commconsole.loc,/turf))
-			return ..()
-
-	for(var/obj/item/weapon/circuitboard/communications/commboard in world)
-		if((istype(commboard.loc,/turf) || istype(commboard.loc,/obj/item/weapon/storage)) && commboard != src)
-			return ..()
-
-	for(var/mob/living/silicon/ai/shuttlecaller in player_list)
-		if(!shuttlecaller.stat && shuttlecaller.client && istype(shuttlecaller.loc,/turf))
-			return ..()
-
-	if(ticker.mode.name == "revolution" || deathsquad.deployed)
-		return ..()
-
-	emergency_shuttle.call_evac()
-	log_game("All the AIs, comm consoles and boards are destroyed. Shuttle called.")
-	message_admins("All the AIs, comm consoles and boards are destroyed. Shuttle called.", 1)
-
-	..()

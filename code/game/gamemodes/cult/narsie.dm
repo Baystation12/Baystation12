@@ -70,8 +70,6 @@ var/global/list/narsie_list = list()
 		mezzer()
 
 /obj/singularity/narsie/large/eat()
-	set background = BACKGROUND_ENABLED
-
 	for (var/turf/A in orange(consume_range, src))
 		consume(A)
 
@@ -224,9 +222,9 @@ var/global/list/narsie_list = list()
 				consume(AM2)
 				continue
 
-		if (dist <= consume_range && !istype(A, /turf/space))
+		if (dist <= consume_range && !istype(A, get_base_turf(A.z)))
 			var/turf/T2 = A
-			T2.ChangeTurf(/turf/space)
+			T2.ChangeTurf(get_base_turf(A.z))
 
 /obj/singularity/narsie/consume(const/atom/A) //This one is for the small ones.
 	if(!(A.singuloCanEat()))
@@ -266,9 +264,9 @@ var/global/list/narsie_list = list()
 				spawn (0)
 					AM2.singularity_pull(src, src.current_size)
 
-		if (dist <= consume_range && !istype(A, /turf/space))
+		if (dist <= consume_range && !istype(A, get_base_turf(A.z)))
 			var/turf/T2 = A
-			T2.ChangeTurf(/turf/space)
+			T2.ChangeTurf(get_base_turf(A.z))
 
 /obj/singularity/narsie/ex_act(severity) //No throwing bombs at it either. --NEO
 	return
@@ -355,8 +353,6 @@ var/global/list/narsie_list = list()
 	grav_pull = 0
 
 /obj/singularity/narsie/wizard/eat()
-	set background = BACKGROUND_ENABLED
-
 	for (var/turf/T in trange(consume_range, src))
 		consume(T)
 

@@ -125,10 +125,6 @@
 /obj/structure/window/blob_act()
 	shatter()
 
-
-/obj/structure/window/meteorhit()
-	shatter()
-
 //TODO: Make full windows a separate type of window.
 //Once a full window, it will always be a full window, so there's no point
 //having the same type for both.
@@ -191,8 +187,8 @@
 
 		playsound(src.loc, 'sound/effects/glassknock.ogg', 80, 1)
 		user.do_attack_animation(src)
-		usr.visible_message("\red [usr.name] bangs against the [src.name]!",
-							"\red You bang against the [src.name]!",
+		usr.visible_message("<span class='danger'>[usr.name] bangs against the [src.name]!</span>",
+							"<<span class='danger'>You bang against the [src.name]!</span>",
 							"You hear a banging sound.")
 	else
 		playsound(src.loc, 'sound/effects/glassknock.ogg', 80, 1)

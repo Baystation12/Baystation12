@@ -19,7 +19,6 @@
 	var/local_transmit //If set, can only speak to others of the same type within a short range.
 
 	var/sensor_mode = 0 //Determines the current HUD.
-	var/mob/living/cameraFollow = null
 
 	var/next_alarm_notice
 	var/list/datum/alarm/queued_alarms = new()
@@ -128,6 +127,9 @@
 			drowsyness = max(drowsyness,(effect/(blocked+1)))
 	updatehealth()
 	return 1*/
+
+/mob/living/silicon/attack_throat()
+	return
 
 /proc/islinked(var/mob/living/silicon/robot/bot, var/mob/living/silicon/ai/ai)
 	if(!istype(bot) || !istype(ai))
@@ -349,6 +351,11 @@
 /mob/living/silicon/proc/is_malf_or_traitor()
 	return is_traitor() || is_malf()
 
+/mob/living/silicon/adjustEarDamage()
+	return
+
+/mob/living/silicon/setEarDamage()
+	return
 
 /mob/living/silicon/reset_view()
 	..()
