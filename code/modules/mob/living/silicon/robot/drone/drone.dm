@@ -128,11 +128,11 @@
 		clear_supplied_laws()
 		clear_inherent_laws()
 		laws = new /datum/ai_laws/syndicate_override
-		set_zeroth_law("Only [user.real_name] and people he designates as being such are operatives.")
+		set_zeroth_law("Only [user] and people \he designates as being such are operatives.")
 
 		src << "<b>Obey these laws:</b>"
 		laws.show_laws(src)
-		src << "<span class='danger'>ALERT: [user.real_name] is your new master. Obey your new laws and his commands.</span>"
+		src << "<span class='danger'>ALERT: [user] is your new master. Obey \his commands and your new laws.</span>"
 		return
 
 	else if (istype(W, /obj/item/weapon/card/id)||istype(W, /obj/item/device/pda))
