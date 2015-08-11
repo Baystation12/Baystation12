@@ -397,15 +397,16 @@ var/list/turret_icons
 			emagged = 1
 
 		enabled=0
-		sleep(rand(60,600))
-		if(!enabled)
-			enabled=1
+		spawn(rand(60,600))
+			if(!enabled)
+				enabled=1
 
 	..()
 
 /obj/machinery/porta_turret/ex_act(severity)
 	switch (severity)
 		if (1)
+			del(src)
 			qdel(src)
 		if (2)
 			if (prob(25))
