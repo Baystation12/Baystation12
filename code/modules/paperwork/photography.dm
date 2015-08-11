@@ -255,8 +255,7 @@ var/global/photo_count = 0
 		viewer = user.client.eye
 	var/can_see = (dummy in viewers(world.view, viewer))
 
-	dummy.loc = null
-	dummy = null	//Alas, nameless creature	//garbage collect it instead
+	del(dummy)
 	return can_see
 
 /obj/item/device/camera/proc/captureimage(atom/target, mob/user, flag)
