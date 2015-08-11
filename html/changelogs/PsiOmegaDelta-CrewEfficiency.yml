@@ -1,0 +1,4 @@
+author: PsiOmegaDelta
+delete-after: True
+changes: 
+  - tweak: "Crew monitors now update every 5th second instead of every other. Reduces lag and gives antags a larger window of opportunity to disable suit sensors if they have to harm someone."
