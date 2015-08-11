@@ -303,7 +303,6 @@
 			if(loc == get_turf(original))
 				if(!(original in permutated))
 					if(Bump(original))
-						qdel(src)
 						return
 
 		if(first_step)

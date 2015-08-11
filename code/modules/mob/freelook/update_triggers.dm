@@ -14,8 +14,7 @@
 	return -1
 
 /turf/simulated/Destroy()
-	if(ticker)
-		updateVisibility(src)
+	updateVisibility(src)
 	..()
 
 /turf/simulated/New()
@@ -26,19 +25,16 @@
 // STRUCTURES
 
 /obj/structure/Destroy()
-	if(ticker)
-		updateVisibility(src)
+	updateVisibility(src)
 	..()
 
 /obj/structure/New()
-	..()
 	updateVisibility(src)
 
 // EFFECTS
 
 /obj/effect/Destroy()
-	if(ticker)
-		updateVisibility(src)
+	updateVisibility(src)
 	return ..()
 
 /obj/effect/New()
