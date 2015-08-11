@@ -3,7 +3,7 @@
 	desc = "Used to remotely activate devices."
 	icon_state = "signaller"
 	item_state = "signaler"
-	matter = list("metal" = 1000, "glass" = 200, "waste" = 100)
+	matter = list(DEFAULT_WALL_MATERIAL = 1000, "glass" = 200, "waste" = 100)
 	origin_tech = "magnets=1"
 	wires = WIRE_RECEIVE | WIRE_PULSE | WIRE_RADIO_PULSE | WIRE_RADIO_RECEIVE
 
@@ -141,6 +141,8 @@
 
 
 	proc/set_frequency(new_frequency)
+		if(!frequency)
+			return
 		if(!radio_controller)
 			sleep(20)
 		if(!radio_controller)
@@ -171,3 +173,9 @@
 		processing_objects.Add(src)
 		log_and_message_admins("is threatening to trigger a signaler deadman's switch")
 		usr.visible_message("\red [usr] moves their finger over [src]'s signal button...")
+
+/obj/item/device/assembly/signaler/Destroy()
+	if(radio_controller)
+		radio_controller.remove_object(src,frequency)
+	frequency = 0
+	..()

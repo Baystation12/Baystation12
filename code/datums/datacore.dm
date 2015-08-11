@@ -2,10 +2,8 @@
 	data_core = new /obj/effect/datacore()
 	return 1
 
-/obj/effect/datacore/proc/manifest(var/nosleep = 0)
+/obj/effect/datacore/proc/manifest()
 	spawn()
-		if(!nosleep)
-			sleep(40)
 		for(var/mob/living/carbon/human/H in player_list)
 			manifest_inject(H)
 		return
@@ -39,7 +37,7 @@
 	if(PDA_Manifest.len)
 		PDA_Manifest.Cut()
 
-	if(H.mind && (H.mind.assigned_role != "MODE"))
+	if(H.mind && !player_is_antag(H.mind, only_offstation_roles = 1))
 		var/assignment
 		if(H.mind.role_alt_title)
 			assignment = H.mind.role_alt_title
@@ -155,12 +153,8 @@ proc/get_id_photo(var/mob/living/carbon/human/H)
 	temp = new /icon(icobase, "head_[g]")
 	preview_icon.Blend(temp, ICON_OVERLAY)
 
-	for(var/datum/organ/external/E in H.organs)
-		if(E.status & ORGAN_CUT_AWAY || E.status & ORGAN_DESTROYED) continue
-		temp = new /icon(icobase, "[E.name]")
-		if(E.status & ORGAN_ROBOT)
-			temp.MapColors(rgb(77,77,77), rgb(150,150,150), rgb(28,28,28), rgb(0,0,0))
-		preview_icon.Blend(temp, ICON_OVERLAY)
+	for(var/obj/item/organ/external/E in H.organs)
+		preview_icon.Blend(E.get_icon(), ICON_OVERLAY)
 
 	//Tail
 	if(H.species.tail)
@@ -297,7 +291,7 @@ proc/get_id_photo(var/mob/living/carbon/human/H)
 	preview_icon.Blend(eyes_s, ICON_OVERLAY)
 	if(clothes_s)
 		preview_icon.Blend(clothes_s, ICON_OVERLAY)
-	del(eyes_s)
-	del(clothes_s)
+	qdel(eyes_s)
+	qdel(clothes_s)
 
 	return preview_icon

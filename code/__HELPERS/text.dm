@@ -22,46 +22,103 @@
  * Text sanitization
  */
 
-//Simply removes < and > and limits the length of the message
-/proc/strip_html_simple(var/t,var/limit=MAX_MESSAGE_LEN)
-	var/list/strip_chars = list("<",">")
-	t = copytext(t,1,limit)
-	for(var/char in strip_chars)
-		var/index = findtext(t, char)
-		while(index)
-			t = copytext(t, 1, index) + copytext(t, index+1)
-			index = findtext(t, char)
-	return t
+//Used for preprocessing entered text
+/proc/sanitize(var/input, var/max_length = MAX_MESSAGE_LEN, var/encode = 1, var/trim = 1, var/extra = 1)
+	if(!input)
+		return
 
-//Removes a few problematic characters
-/proc/sanitize_simple(var/t,var/list/repl_chars = list("\n"="#","\t"="#"))
-	for(var/char in repl_chars)
-		t = replacetext(t, char, repl_chars[char])
-	return t
+	if(max_length)
+		input = copytext(input,1,max_length)
 
-/proc/readd_quotes(var/t)
-	var/list/repl_chars = list("&#34;" = "\"")
-	for(var/char in repl_chars)
-		var/index = findtext(t, char)
-		while(index)
-			t = copytext(t, 1, index) + repl_chars[char] + copytext(t, index+5)
-			index = findtext(t, char)
-	return t
+	if(extra)
+		input = replace_characters(input, list("\n"=" ","\t"=" "))
 
-//Runs byond's sanitization proc along-side sanitize_simple
-/proc/sanitize(var/t,var/list/repl_chars = null)
-	return html_encode(sanitize_simple(t,repl_chars))
+	if(encode)
+		//In addition to processing html, html_encode removes byond formatting codes like "\red", "\i" and other.
+		//It is important to avoid double-encode text, it can "break" quotes and some other characters.
+		//Also, keep in mind that escaped characters don't work in the interface (window titles, lower left corner of the main window, etc.)
+		input = html_encode(input)
+	else
+		//If not need encode text, simply remove < and >
+		//note: we can also remove here byond formatting codes: 0xFF + next byte
+		input = replace_characters(input, list("<"=" ", ">"=" "))
 
-//Runs sanitize and strip_html_simple
-//I believe strip_html_simple() is required to run first to prevent '<' from displaying as '&lt;' after sanitize() calls byond's html_encode()
-/proc/strip_html(var/t,var/limit=MAX_MESSAGE_LEN)
-	return copytext((sanitize(strip_html_simple(t))),1,limit)
+	if(trim)
+		//Maybe, we need trim text twice? Here and before copytext?
+		input = trim(input)
 
-//Runs byond's sanitization proc along-side strip_html_simple
-//I believe strip_html_simple() is required to run first to prevent '<' from displaying as '&lt;' that html_encode() would cause
-/proc/adminscrub(var/t,var/limit=MAX_MESSAGE_LEN)
-	return copytext((html_encode(strip_html_simple(t))),1,limit)
+	return input
 
+//Run sanitize(), but remove <, >, " first to prevent displaying them as &gt; &lt; &34; in some places, after html_encode().
+//Best used for sanitize object names, window titles.
+//If you have a problem with sanitize() in chat, when quotes and >, < are displayed as html entites -
+//this is a problem of double-encode(when & becomes &amp;), use sanitize() with encode=0, but not the sanitizeSafe()!
+/proc/sanitizeSafe(var/input, var/max_length = MAX_MESSAGE_LEN, var/encode = 1, var/trim = 1, var/extra = 1)
+	return sanitize(replace_characters(input, list(">"=" ","<"=" ", "\""="'"), max_length, encode, trim, extra))
+
+//Filters out undesirable characters from names
+/proc/sanitizeName(var/input, var/max_length = MAX_NAME_LEN, var/allow_numbers = 0)
+	if(!input || length(input) > max_length)
+		return //Rejects the input if it is null or if it is longer then the max length allowed
+
+	var/number_of_alphanumeric	= 0
+	var/last_char_group			= 0
+	var/output = ""
+
+	for(var/i=1, i<=length(input), i++)
+		var/ascii_char = text2ascii(input,i)
+		switch(ascii_char)
+			// A  .. Z
+			if(65 to 90)			//Uppercase Letters
+				output += ascii2text(ascii_char)
+				number_of_alphanumeric++
+				last_char_group = 4
+
+			// a  .. z
+			if(97 to 122)			//Lowercase Letters
+				if(last_char_group<2)		output += ascii2text(ascii_char-32)	//Force uppercase first character
+				else						output += ascii2text(ascii_char)
+				number_of_alphanumeric++
+				last_char_group = 4
+
+			// 0  .. 9
+			if(48 to 57)			//Numbers
+				if(!last_char_group)		continue	//suppress at start of string
+				if(!allow_numbers)			continue
+				output += ascii2text(ascii_char)
+				number_of_alphanumeric++
+				last_char_group = 3
+
+			// '  -  .
+			if(39,45,46)			//Common name punctuation
+				if(!last_char_group) continue
+				output += ascii2text(ascii_char)
+				last_char_group = 2
+
+			// ~   |   @  :  #  $  %  &  *  +
+			if(126,124,64,58,35,36,37,38,42,43)			//Other symbols that we'll allow (mainly for AI)
+				if(!last_char_group)		continue	//suppress at start of string
+				if(!allow_numbers)			continue
+				output += ascii2text(ascii_char)
+				last_char_group = 2
+
+			//Space
+			if(32)
+				if(last_char_group <= 1)	continue	//suppress double-spaces and spaces at start of string
+				output += ascii2text(ascii_char)
+				last_char_group = 1
+			else
+				return
+
+	if(number_of_alphanumeric < 2)	return		//protects against tiny names like "A" and also names like "' ' ' ' ' ' ' '"
+
+	if(last_char_group == 1)
+		output = copytext(output,1,length(output))	//removes the last character (in this case a space)
+
+	for(var/bad_name in list("space","floor","wall","r-wall","monkey","unknown","inactive ai"))	//prevents these common metagamey names
+		if(cmptext(output,bad_name))	return	//(not case sensitive)
+
+	return output
 
 //Returns null if there is any bad text in the string
 /proc/reject_bad_text(var/text, var/max_length=512)
@@ -76,97 +133,11 @@
 			else			non_whitespace = 1
 	if(non_whitespace)		return text		//only accepts the text if it has some non-spaces
 
-// Used to get a properly sanitized input, of max_length
-/proc/stripped_input(var/mob/user, var/message = "", var/title = "", var/default = "", var/max_length=MAX_MESSAGE_LEN)
-	var/name = input(user, message, title, default)
-	return strip_html_properly(name, max_length)
 
-// Used to get a trimmed, properly sanitized input, of max_length
-/proc/trim_strip_input(var/mob/user, var/message = "", var/title = "", var/default = "", var/max_length=MAX_MESSAGE_LEN)
-	return trim(stripped_input(user, message, title, default, max_length))
+//Old variant. Haven't dared to replace in some places.
+/proc/sanitize_old(var/t,var/list/repl_chars = list("\n"="#","\t"="#"))
+	return html_encode(replace_characters(t,repl_chars))
 
-//Filters out undesirable characters from names
-/proc/reject_bad_name(var/t_in, var/allow_numbers=0, var/max_length=MAX_NAME_LEN)
-	if(!t_in || length(t_in) > max_length)
-		return //Rejects the input if it is null or if it is longer then the max length allowed
-
-	var/number_of_alphanumeric	= 0
-	var/last_char_group			= 0
-	var/t_out = ""
-
-	for(var/i=1, i<=length(t_in), i++)
-		var/ascii_char = text2ascii(t_in,i)
-		switch(ascii_char)
-			// A  .. Z
-			if(65 to 90)			//Uppercase Letters
-				t_out += ascii2text(ascii_char)
-				number_of_alphanumeric++
-				last_char_group = 4
-
-			// a  .. z
-			if(97 to 122)			//Lowercase Letters
-				if(last_char_group<2)		t_out += ascii2text(ascii_char-32)	//Force uppercase first character
-				else						t_out += ascii2text(ascii_char)
-				number_of_alphanumeric++
-				last_char_group = 4
-
-			// 0  .. 9
-			if(48 to 57)			//Numbers
-				if(!last_char_group)		continue	//suppress at start of string
-				if(!allow_numbers)			continue
-				t_out += ascii2text(ascii_char)
-				number_of_alphanumeric++
-				last_char_group = 3
-
-			// '  -  .
-			if(39,45,46)			//Common name punctuation
-				if(!last_char_group) continue
-				t_out += ascii2text(ascii_char)
-				last_char_group = 2
-
-			// ~   |   @  :  #  $  %  &  *  +
-			if(126,124,64,58,35,36,37,38,42,43)			//Other symbols that we'll allow (mainly for AI)
-				if(!last_char_group)		continue	//suppress at start of string
-				if(!allow_numbers)			continue
-				t_out += ascii2text(ascii_char)
-				last_char_group = 2
-
-			//Space
-			if(32)
-				if(last_char_group <= 1)	continue	//suppress double-spaces and spaces at start of string
-				t_out += ascii2text(ascii_char)
-				last_char_group = 1
-			else
-				return
-
-	if(number_of_alphanumeric < 2)	return		//protects against tiny names like "A" and also names like "' ' ' ' ' ' ' '"
-
-	if(last_char_group == 1)
-		t_out = copytext(t_out,1,length(t_out))	//removes the last character (in this case a space)
-
-	for(var/bad_name in list("space","floor","wall","r-wall","monkey","unknown","inactive ai"))	//prevents these common metagamey names
-		if(cmptext(t_out,bad_name))	return	//(not case sensitive)
-
-	return t_out
-
-//checks text for html tags
-//if tag is not in whitelist (var/list/paper_tag_whitelist in global.dm)
-//relpaces < with &lt;
-proc/checkhtml(var/t)
-	t = sanitize_simple(t, list("&#"="."))
-	var/p = findtext(t,"<",1)
-	while (p)	//going through all the tags
-		var/start = p++
-		var/tag = copytext(t,p, p+1)
-		if (tag != "/")
-			while (reject_bad_text(copytext(t, p, p+1), 1))
-				tag = copytext(t,start, p)
-				p++
-			tag = copytext(t,start+1, p)
-			if (!(tag in paper_tag_whitelist))	//if it's unkown tag, disarming it
-				t = copytext(t,1,start-1) + "&lt;" + copytext(t,start+1)
-		p = findtext(t,"<",p)
-	return t
 /*
  * Text searches
  */
@@ -203,11 +174,17 @@ proc/checkhtml(var/t)
 /*
  * Text modification
  */
+
 /proc/replacetext(text, find, replacement)
 	return list2text(text2list(text, find), replacement)
 
 /proc/replacetextEx(text, find, replacement)
 	return list2text(text2listEx(text, find), replacement)
+
+/proc/replace_characters(var/t,var/list/repl_chars)
+	for(var/char in repl_chars)
+		t = replacetext(t, char, repl_chars[char])
+	return t
 
 //Adds 'u' number of zeros ahead of the text 't'
 /proc/add_zero(t, u)
@@ -239,7 +216,6 @@ proc/checkhtml(var/t)
 	for (var/i = length(text), i > 0, i--)
 		if (text2ascii(text, i) > 32)
 			return copytext(text, 1, i + 1)
-
 	return ""
 
 //Returns a string with reserved characters and spaces before the first word and after the last word removed.
@@ -250,43 +226,43 @@ proc/checkhtml(var/t)
 /proc/capitalize(var/t as text)
 	return uppertext(copytext(t, 1, 2)) + copytext(t, 2)
 
-//Centers text by adding spaces to either side of the string.
-/proc/dd_centertext(message, length)
-	var/new_message = message
-	var/size = length(message)
-	var/delta = length - size
-	if(size == length)
-		return new_message
-	if(size > length)
-		return copytext(new_message, 1, length + 1)
-	if(delta == 1)
-		return new_message + " "
-	if(delta % 2)
-		new_message = " " + new_message
-		delta--
-	var/spaces = add_lspace("",delta/2-1)
-	return spaces + new_message + spaces
+//This proc strips html properly, remove < > and all text between
+//for complete text sanitizing should be used sanitize()
+/proc/strip_html_properly(var/input)
+	if(!input)
+		return
+	var/opentag = 1 //These store the position of < and > respectively.
+	var/closetag = 1
+	while(1)
+		opentag = findtext(input, "<")
+		closetag = findtext(input, ">")
+		if(closetag && opentag)
+			if(closetag < opentag)
+				input = copytext(input, (closetag + 1))
+			else
+				input = copytext(input, 1, opentag) + copytext(input, (closetag + 1))
+		else if(closetag || opentag)
+			if(opentag)
+				input = copytext(input, 1, opentag)
+			else
+				input = copytext(input, (closetag + 1))
+		else
+			break
 
-//Limits the length of the text. Note: MAX_MESSAGE_LEN and MAX_NAME_LEN are widely used for this purpose
-/proc/dd_limittext(message, length)
-	var/size = length(message)
-	if(size <= length)
-		return message
-	return copytext(message, 1, length + 1)
+	return input
 
-
-/proc/stringmerge(var/text,var/compare,replace = "*")
 //This proc fills in all spaces with the "replace" var (* by default) with whatever
 //is in the other string at the same spot (assuming it is not a replace char).
 //This is used for fingerprints
+/proc/stringmerge(var/text,var/compare,replace = "*")
 	var/newtext = text
 	if(lentext(text) != lentext(compare))
 		return 0
 	for(var/i = 1, i < lentext(text), i++)
 		var/a = copytext(text,i,i+1)
 		var/b = copytext(compare,i,i+1)
-//if it isn't both the same letter, or if they are both the replacement character
-//(no way to know what it was supposed to be)
+		//if it isn't both the same letter, or if they are both the replacement character
+		//(no way to know what it was supposed to be)
 		if(a != b)
 			if(a == replace) //if A is the replacement char
 				newtext = copytext(newtext,1,i) + b + copytext(newtext, i+1)
@@ -296,9 +272,9 @@ proc/checkhtml(var/t)
 				return 0
 	return newtext
 
-/proc/stringpercent(var/text,character = "*")
 //This proc returns the number of chars of the string that is the character
 //This is used for detective work to determine fingerprint completion.
+/proc/stringpercent(var/text,character = "*")
 	if(!text || !character)
 		return 0
 	var/count = 0
@@ -323,37 +299,11 @@ proc/TextPreview(var/string,var/len=40)
 		else
 			return string
 	else
-		return "[copytext(string, 1, 37)]..."
+		return "[copytext_preserve_html(string, 1, 37)]..."
 
-//This proc strips html properly, but it's not lazy like the other procs.
-//This means that it doesn't just remove < and > and call it a day.
-//Also limit the size of the input, if specified.
-/proc/strip_html_properly(var/input, var/max_length = MAX_MESSAGE_LEN)
-	if(!input)
-		return
-	var/opentag = 1 //These store the position of < and > respectively.
-	var/closetag = 1
-	while(1)
-		opentag = findtext(input, "<")
-		closetag = findtext(input, ">")
-		if(closetag && opentag)
-			if(closetag < opentag)
-				input = copytext(input, (closetag + 1))
-			else
-				input = copytext(input, 1, opentag) + copytext(input, (closetag + 1))
-		else if(closetag || opentag)
-			if(opentag)
-				input = copytext(input, 1, opentag)
-			else
-				input = copytext(input, (closetag + 1))
-		else
-			break
-	if(max_length)
-		input = copytext(input,1,max_length)
-	return sanitize(input)
-
-/proc/trim_strip_html_properly(var/input, var/max_length = MAX_MESSAGE_LEN)
-    return trim(strip_html_properly(input, max_length))
+//alternative copytext() for encoded text, doesn't break html entities (&#34; and other)
+/proc/copytext_preserve_html(var/text, var/first, var/last)
+	return html_encode(copytext(html_decode(text), first, last))
 
 //For generating neat chat tag-images
 //The icon var could be local in the proc, but it's a waste of resources

@@ -1,158 +1,13 @@
 /mob/living/carbon/human/say(var/message)
-
-	var/verb = "says"
 	var/alt_name = ""
-	var/message_range = world.view
-	var/italics = 0
-
-	if(client)
-		if(client.prefs.muted & MUTE_IC)
-			src << "\red You cannot speak in IC (Muted)."
-			return
-
-	message = trim_strip_html_properly(message)
-
-	if(stat)
-		if(stat == 2)
-			return say_dead(message)
-		return
-
-	if (istype(src.wear_mask, /obj/item/clothing/mask/muzzle))
-		src << "<span class='danger'>You're muzzled and cannot speak!</span>"
-		return
-
-	var/message_mode = parse_message_mode(message, "headset")
-
-	switch(copytext(message,1,2))
-		if("*") return emote(copytext(message,2))
-		if("^") return custom_emote(1, copytext(message,2))
-
 	if(name != GetVoice())
 		alt_name = "(as [get_id_name("Unknown")])"
 
-	//parse the radio code and consume it
-	if (message_mode)
-		if (message_mode == "headset")
-			message = copytext(message,2)	//it would be really nice if the parse procs could do this for us.
-		else
-			message = copytext(message,3)
+	message = sanitize(message)
+	..(message, alt_name = alt_name)
 
-	message = trim_left(message)
-
-	//parse the language code and consume it
-	var/datum/language/speaking = parse_language(message)
-	if(speaking)
-		message = copytext(message,2+length(speaking.key))
-	else if(species.default_language)
-		speaking = all_languages[species.default_language]
-
-	var/ending = copytext(message, length(message))
-	if (speaking)
-		// This is broadcast to all mobs with the language,
-		// irrespective of distance or anything else.
-		if(speaking.flags & HIVEMIND)
-			speaking.broadcast(src,trim(message))
-			return
-		//If we've gotten this far, keep going!
-		verb = speaking.get_spoken_verb(ending)
-	else
-		if(ending=="!")
-			verb=pick("exclaims","shouts","yells")
-		if(ending=="?")
-			verb="asks"
-
-	message = trim(message)
-
-	if(speech_problem_flag)
-		if(!speaking || !(speaking.flags & NO_STUTTER))
-			var/list/handle_r = handle_speech_problems(message, verb)
-			message = handle_r[1]
-			verb = handle_r[2]
-			speech_problem_flag = handle_r[3]
-
-	if(!message || message == "")
-		return
-
-	var/list/obj/item/used_radios = new
-
-	switch (message_mode)
-		if("headset")
-			if(l_ear && istype(l_ear,/obj/item/device/radio))
-				var/obj/item/device/radio/R = l_ear
-				R.talk_into(src,message,null,verb,speaking)
-				used_radios += l_ear
-			else if(r_ear && istype(r_ear,/obj/item/device/radio))
-				var/obj/item/device/radio/R = r_ear
-				R.talk_into(src,message,null,verb,speaking)
-				used_radios += r_ear
-
-		if("right ear")
-			var/obj/item/device/radio/R
-			var/has_radio = 0
-			if(r_ear && istype(r_ear,/obj/item/device/radio))
-				R = r_ear
-				has_radio = 1
-			if(r_hand && istype(r_hand, /obj/item/device/radio))
-				R = r_hand
-				has_radio = 1
-			if(has_radio)
-				R.talk_into(src,message,null,verb,speaking)
-				used_radios += R
-
-
-		if("left ear")
-			var/obj/item/device/radio/R
-			var/has_radio = 0
-			if(l_ear && istype(l_ear,/obj/item/device/radio))
-				R = l_ear
-				has_radio = 1
-			if(l_hand && istype(l_hand,/obj/item/device/radio))
-				R = l_hand
-				has_radio = 1
-			if(has_radio)
-				R.talk_into(src,message,null,verb,speaking)
-				used_radios += R
-
-		if("intercom")
-			if(!src.restrained())
-				for(var/obj/item/device/radio/intercom/I in view(1))
-					I.talk_into(src, message, null, verb, speaking)
-					I.add_fingerprint(src)
-					used_radios += I
-		if("whisper")
-			whisper_say(message, speaking, alt_name)
-			return
-		else
-			if(message_mode)
-				if(l_ear && istype(l_ear,/obj/item/device/radio))
-					l_ear.talk_into(src,message, message_mode, verb, speaking)
-					used_radios += l_ear
-				else if(r_ear && istype(r_ear,/obj/item/device/radio))
-					r_ear.talk_into(src,message, message_mode, verb, speaking)
-					used_radios += r_ear
-
-	var/sound/speech_sound
-	var/sound_vol
-	if(species.speech_sounds && prob(species.speech_chance))
-		speech_sound = sound(pick(species.speech_sounds))
-		sound_vol = 50
-
-	//speaking into radios
-	if(used_radios.len)
-		italics = 1
-		message_range = 1
-		if(speaking)
-			message_range = speaking.get_talkinto_msg_range(message)
-		var/msg
-		if(!speaking || !(speaking.flags & NO_TALK_MSG))
-			msg = "<span class='notice'>\The [src] talks into \the [used_radios[1]]</span>"
-		for(var/mob/living/M in hearers(5, src))
-			if((M != src) && msg)
-				M.show_message(msg)
-			if (speech_sound)
-				sound_vol *= 0.5
-
-	..(message, speaking, verb, alt_name, italics, message_range, speech_sound, sound_vol)	//ohgod we should really be passing a datum here.
+/mob/living/carbon/human/is_muzzled()
+	return istype(src.wear_mask, /obj/item/clothing/mask/muzzle)
 
 /mob/living/carbon/human/proc/forcesay(list/append)
 	if(stat == CONSCIOUS)
@@ -273,38 +128,27 @@
 
 	return verb
 
-/mob/living/carbon/human/proc/handle_speech_problems(var/message, var/verb = "says")
-
-	var/list/returns[3]
-	var/handled = 0
+/mob/living/carbon/human/handle_speech_problems(var/message, var/verb)
 	if(silent || (sdisabilities & MUTE))
 		message = ""
-		handled = 1
-	if(istype(wear_mask, /obj/item/clothing/mask/horsehead))
+		speech_problem_flag = 1
+	else if(istype(wear_mask, /obj/item/clothing/mask/horsehead))
 		var/obj/item/clothing/mask/horsehead/hoers = wear_mask
 		if(hoers.voicechange)
-			if(mind && mind.changeling && department_radio_keys[copytext(message, 1, 3)] != "changeling")
-				message = pick("NEEIIGGGHHHH!", "NEEEIIIIGHH!", "NEIIIGGHH!", "HAAWWWWW!", "HAAAWWW!")
-				verb = pick("whinnies","neighs", "says")
-				handled = 1
+			message = pick("NEEIIGGGHHHH!", "NEEEIIIIGHH!", "NEIIIGGHH!", "HAAWWWWW!", "HAAAWWW!")
+			verb = pick("whinnies","neighs", "says")
+			speech_problem_flag = 1
 
 	if(message != "")
-		if((HULK in mutations) && health >= 25 && length(message))
-			message = "[uppertext(message)]!!!"
-			verb = pick("yells","roars","hollers")
-			handled = 1
-		if(slurring)
-			message = slur(message)
-			verb = pick("slobbers","slurs")
-			handled = 1
-		if(stuttering)
-			message = stutter(message)
-			verb = pick("stammers","stutters")
-			handled = 1
+		var/list/parent = ..()
+		message = parent[1]
+		verb = parent[2]
+		if(parent[3])
+			speech_problem_flag = 1
 
 		var/braindam = getBrainLoss()
 		if(braindam >= 60)
-			handled = 1
+			speech_problem_flag = 1
 			if(prob(braindam/4))
 				message = stutter(message)
 				verb = pick("stammers", "stutters")
@@ -312,7 +156,67 @@
 				message = uppertext(message)
 				verb = "yells loudly"
 
+	var/list/returns[3]
 	returns[1] = message
 	returns[2] = verb
-	returns[3] = handled
+	returns[3] = speech_problem_flag
 	return returns
+
+/mob/living/carbon/human/handle_message_mode(message_mode, message, verb, speaking, used_radios, alt_name)
+	switch(message_mode)
+		if("intercom")
+			for(var/obj/item/device/radio/intercom/I in view(1))
+				I.talk_into(src, message, verb, speaking)
+				I.add_fingerprint(src)
+				used_radios += I
+		if("headset")
+			if(l_ear && istype(l_ear,/obj/item/device/radio))
+				var/obj/item/device/radio/R = l_ear
+				R.talk_into(src,message,null,verb,speaking)
+				used_radios += l_ear
+			else if(r_ear && istype(r_ear,/obj/item/device/radio))
+				var/obj/item/device/radio/R = r_ear
+				R.talk_into(src,message,null,verb,speaking)
+				used_radios += r_ear
+		if("right ear")
+			var/obj/item/device/radio/R
+			var/has_radio = 0
+			if(r_ear && istype(r_ear,/obj/item/device/radio))
+				R = r_ear
+				has_radio = 1
+			if(r_hand && istype(r_hand, /obj/item/device/radio))
+				R = r_hand
+				has_radio = 1
+			if(has_radio)
+				R.talk_into(src,message,null,verb,speaking)
+				used_radios += R
+		if("left ear")
+			var/obj/item/device/radio/R
+			var/has_radio = 0
+			if(l_ear && istype(l_ear,/obj/item/device/radio))
+				R = l_ear
+				has_radio = 1
+			if(l_hand && istype(l_hand,/obj/item/device/radio))
+				R = l_hand
+				has_radio = 1
+			if(has_radio)
+				R.talk_into(src,message,null,verb,speaking)
+				used_radios += R
+		if("whisper")
+			whisper_say(message, speaking, alt_name)
+			return 1
+		else
+			if(message_mode)
+				if(l_ear && istype(l_ear,/obj/item/device/radio))
+					l_ear.talk_into(src,message, message_mode, verb, speaking)
+					used_radios += l_ear
+				else if(r_ear && istype(r_ear,/obj/item/device/radio))
+					r_ear.talk_into(src,message, message_mode, verb, speaking)
+					used_radios += r_ear
+
+/mob/living/carbon/human/handle_speech_sound()
+	if(species.speech_sounds && prob(species.speech_chance))
+		var/list/returns[2]
+		returns[1] = sound(pick(species.speech_sounds))
+		returns[2] = 50
+	return ..()

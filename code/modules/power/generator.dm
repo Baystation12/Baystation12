@@ -134,8 +134,7 @@
 	add_avail(effective_gen)
 
 /obj/machinery/power/generator/attack_ai(mob/user)
-	if(stat & (BROKEN|NOPOWER)) return
-	interact(user)
+	attack_hand(user)
 
 /obj/machinery/power/generator/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/weapon/wrench))
@@ -156,70 +155,60 @@
 /obj/machinery/power/generator/attack_hand(mob/user)
 	add_fingerprint(user)
 	if(stat & (BROKEN|NOPOWER) || !anchored) return
-	interact(user)
+	if(!circ1 || !circ2) //Just incase the middle part of the TEG was not wrenched last.
+		reconnect()
+	ui_interact(user)
 
-
-/obj/machinery/power/generator/interact(mob/user)
-	if ( (get_dist(src, user) > 1 ) && (!istype(user, /mob/living/silicon/ai)))
-		user.unset_machine()
-		user << browse(null, "window=teg")
-		return
-
-	user.set_machine(src)
-
-	var/t = "<PRE><B>Thermoelectric Generator</B><HR>"
-	t += "Total Output: [round(effective_gen/1000)] kW<HR>"
-	t += "Thermal Output: [round(last_thermal_gen/1000)] kW<BR>"
-	t += " <BR>"
-
+/obj/machinery/power/generator/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+	// this is the data which will be sent to the ui
 	var/vertical = 0
 	if (dir == NORTH || dir == SOUTH)
 		vertical = 1
 
+	var/data[0]
+	data["totalOutput"] = effective_gen/1000
+	data["maxTotalOutput"] = max_power/1000
+	data["thermalOutput"] = last_thermal_gen/1000
+	data["circConnected"] = 0
+
+	if(circ1)
+		//The one on the left (or top)
+		data["primaryDir"] = vertical ? "top" : "left"
+		data["primaryOutput"] = last_circ1_gen/1000
+		data["primaryFlowCapacity"] = circ1.volume_capacity_used*100
+		data["primaryInletPressure"] = circ1.air1.return_pressure()
+		data["primaryInletTemperature"] = circ1.air1.temperature
+		data["primaryOutletPressure"] = circ1.air2.return_pressure()
+		data["primaryOutletTemperature"] = circ1.air2.temperature
+
+	if(circ2)
+		//Now for the one on the right (or bottom)
+		data["secondaryDir"] = vertical ? "bottom" : "right"
+		data["secondaryOutput"] = last_circ2_gen/1000
+		data["secondaryFlowCapacity"] = circ2.volume_capacity_used*100
+		data["secondaryInletPressure"] = circ2.air1.return_pressure()
+		data["secondaryInletTemperature"] = circ2.air1.temperature
+		data["secondaryOutletPressure"] = circ2.air2.return_pressure()
+		data["secondaryOutletTemperature"] = circ2.air2.temperature
+
 	if(circ1 && circ2)
-		t += "<B>Primary Circulator ([vertical ? "top" : "left"])</B><BR>"
-		t += "Turbine Output: [round(last_circ1_gen/1000)] kW<BR>"
-		t += "Flow Capacity: [round(circ1.volume_capacity_used*100)]%<BR>"
-		t += " <BR>"
-		t += "Inlet Pressure: [round(circ1.air1.return_pressure(), 0.1)] kPa<BR>"
-		t += "Inlet Temperature: [round(circ1.air1.temperature, 0.1)] K<BR>"
-		t += " <BR>"
-		t += "Outlet Pressure: [round(circ1.air2.return_pressure(), 0.1)] kPa<BR>"
-		t += "Outlet Temperature: [round(circ1.air2.temperature, 0.1)] K<BR>"
-		t += " <BR>"
-		t += "<B>Secondary Circulator ([vertical ? "bottom" : "right"])</B><BR>"
-		t += "Turbine Output: [round(last_circ2_gen/1000)] kW<BR>"
-		t += "Flow Capacity: [round(circ2.volume_capacity_used*100)]%<BR>"
-		t += " <BR>"
-		t += "Inlet Pressure: [round(circ2.air1.return_pressure(), 0.1)] kPa<BR>"
-		t += "Inlet Temperature: [round(circ2.air1.temperature, 0.1)] K<BR>"
-		t += " <BR>"
-		t += "Outlet Pressure: [round(circ2.air2.return_pressure(), 0.1)] kPa<BR>"
-		t += "Outlet Temperature: [round(circ2.air2.temperature, 0.1)] K<BR>"
-
+		data["circConnected"] = 1
 	else
-		t += "Unable to connect to circulators.<br>"
-		t += "Ensure both are in position and wrenched into place."
-
-	t += " <BR>"
-	t += "<HR>"
-	t += "<A href='?src=\ref[src]'>Refresh</A> <A href='?src=\ref[src];close=1'>Close</A>"
-
-	user << browse(t, "window=teg;size=400x500")
-	onclose(user, "teg")
-	return 1
+		data["circConnected"] = 0
 
 
-/obj/machinery/power/generator/Topic(href, href_list)
-	..()
-	if( href_list["close"] )
-		usr << browse(null, "window=teg")
-		usr.unset_machine()
-		return 0
-
-	updateDialog()
-	return 1
-
+	// update the ui if it exists, returns null if no ui is passed/found
+	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	if(!ui)
+		// the ui does not exist, so we'll create a new() one
+        // for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
+		ui = new(user, src, ui_key, "generator.tmpl", "Thermoelectric Generator", 450, 500)
+		// when the ui is first opened this is the data it will use
+		ui.set_initial_data(data)
+		// open the new ui window
+		ui.open()
+		// auto update every Master Controller tick
+		ui.set_auto_update(1)
 
 /obj/machinery/power/generator/power_change()
 	..()

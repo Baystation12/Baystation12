@@ -30,6 +30,13 @@
 
 		return "[output][and_text][input[index]]"
 
+
+/proc/ConvertReqString2List(var/list/source_list)
+	var/list/temp_list = params2list(source_list)
+	for(var/O in temp_list)
+		temp_list[O] = text2num(temp_list[O])
+	return temp_list
+
 //Returns list element or null. Should prevent "index out of bounds" error.
 proc/listgetindex(var/list/list,index)
 	if(istype(list) && list.len)
@@ -175,11 +182,9 @@ proc/listclearnulls(list/list)
 
 //Return a list with no duplicate entries
 /proc/uniquelist(var/list/L)
-	var/list/K = list()
-	for(var/item in L)
-		if(!(item in K))
-			K += item
-	return K
+	. = list()
+	for(var/i in L)
+		. |= i
 
 //Mergesort: divides up the list into halves to begin the sort
 /proc/sortKey(var/list/client/L, var/order = 1)
@@ -592,11 +597,18 @@ datum/proc/dd_SortValue()
 	return "[src]"
 
 /obj/machinery/dd_SortValue()
-	return "[sanitize(name)]"
+	return "[sanitize_old(name)]"
 
 /obj/machinery/camera/dd_SortValue()
 	return "[c_tag]"
 
 /datum/alarm/dd_SortValue()
-	return "[sanitize(last_name)]"
+	return "[sanitize_old(last_name)]"
 
+//creates every subtype of prototype (excluding prototype) and adds it to list L.
+//if no list/L is provided, one is created.
+/proc/init_subtypes(prototype, list/L)
+	if(!istype(L))	L = list()
+	for(var/path in (typesof(prototype) - prototype))
+		L += new path()
+	return L

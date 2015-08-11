@@ -16,7 +16,7 @@
 	var/enabled = 0
 	var/lethal = 0
 	var/locked = 1
-	var/control_area //can be area name, path or nothing.
+	var/area/control_area //can be area name, path or nothing.
 
 	var/check_arrest = 1	//checks if the perp is set to arrest
 	var/check_records = 1	//checks if a security record exists at all
@@ -24,7 +24,7 @@
 	var/check_access = 1	//if this is active, the turret shoots everything that does not meet the access requirements
 	var/check_anomalies = 1	//checks if it can shoot at unidentified lifeforms (ie xenos)
 	var/check_synth = 0 	//if active, will shoot at anything not an AI or cyborg
-	var/ailock = 0 			// AI cannot use this
+	var/ailock = 0 	//Silicons cannot use this
 
 	req_access = list(access_ai_upload)
 
@@ -37,7 +37,7 @@
 	lethal = 1
 	icon_state = "control_kill"
 
-/obj/machinery/turretid/Del()
+/obj/machinery/turretid/Destroy()
 	if(control_area)
 		var/area/A = control_area
 		if(A && istype(A))
@@ -46,160 +46,127 @@
 
 /obj/machinery/turretid/initialize()
 	if(!control_area)
-		var/area/CA = get_area(src)
-		if(CA.master && CA.master != CA)
-			control_area = CA.master
-		else
-			control_area = CA
+		control_area = get_area(src)
 	else if(istext(control_area))
 		for(var/area/A in world)
 			if(A.name && A.name==control_area)
 				control_area = A
 				break
-	power_change() //Checks power and initial settings
-	//don't have to check if control_area is path, since get_area_all_atoms can take path.
 
 	if(control_area)
 		var/area/A = control_area
-		if(A && istype(A))
+		if(istype(A))
 			A.turret_controls += src
+		else
+			control_area = null
+
+	power_change() //Checks power and initial settings
 	return
 
-/obj/machinery/turretid/proc/can_use(mob/user)
-	if(ailock && issilicon(user))
+/obj/machinery/turretid/proc/isLocked(mob/user)
+	if(ailock && user.isSilicon())
 		user << "<span class='notice'>There seems to be a firewall preventing you from accessing this device.</span>"
-		return 0
+		return 1
 
-	if (get_dist(src, user) > 0 && !issilicon(user))
-		user << "<span class='notice'>You are too far away.</span>"
-		user.unset_machine()
-		user << browse(null, "window=turretid")
-		return 0
-
-	if(locked && !issilicon(user))
+	if(locked && !user.isSilicon())
 		user << "<span class='notice'>Access denied.</span>"
-		return 0
+		return 1
 
-	return 1
+	return 0
+
+/obj/machinery/turretid/CanUseTopic(mob/user)
+	if(isLocked(user))
+		return STATUS_CLOSE
+
+	return ..()
 
 /obj/machinery/turretid/attackby(obj/item/weapon/W, mob/user)
-	if(stat & BROKEN) return
-	if (istype(user, /mob/living/silicon))
-		return src.attack_hand(user)
+	if(stat & BROKEN)
+		return
 
-	if (istype(W, /obj/item/weapon/card/emag) && !emagged)
+	if(!emagged && istype(W, /obj/item/weapon/card/emag))
 		user << "<span class='danger'>You short out the turret controls' access analysis module.</span>"
 		emagged = 1
 		locked = 0
-		if(user.machine==src)
-			src.attack_hand(user)
-
+		ailock = 0
 		return
 
-	else if( get_dist(src, user) == 0 )		// trying to unlock the interface
-		if (src.allowed(usr))
+	if(istype(W, /obj/item/weapon/card/id)||istype(W, /obj/item/device/pda))
+		if(src.allowed(usr))
 			if(emagged)
 				user << "<span class='notice'>The turret control is unresponsive.</span>"
-				return
-
-			locked = !locked
-			user << "<span class='notice'>You [ locked ? "lock" : "unlock"] the panel.</span>"
-			if (locked)
-				if (user.machine==src)
-					user.unset_machine()
-					user << browse(null, "window=turretid")
 			else
-				if (user.machine==src)
-					src.attack_hand(user)
-		else
-			user << "<span class='warning'>Access denied.</span>"
+				locked = !locked
+				user << "<span class='notice'>You [ locked ? "lock" : "unlock"] the panel.</span>"
+		return
+	return ..()
 
 /obj/machinery/turretid/attack_ai(mob/user as mob)
-	return attack_hand(user)
+	if(isLocked(user))
+		return
+
+	ui_interact(user)
 
 /obj/machinery/turretid/attack_hand(mob/user as mob)
-	if(!can_use(user))
+	if(isLocked(user))
 		return
 
-	user.set_machine(src)
-	var/loc = src.loc
-	if (istype(loc, /turf))
-		var/turf/T = loc
-		loc = T.loc
-	if (!istype(loc, /area))
-		return
-	var/area/area = loc
-	var/dat = text({"Status: []<BR>
-				Behaviour controls are [locked ? "locked" : "unlocked"]"},
-				"<A href='?src=\ref[src];operation=toggleon'>[enabled ? "On" : "Off"]</A>" )
+	ui_interact(user)
 
-	if(!locked || issilicon(user))
-		dat += text({"<BR><BR>
-					Lethal Mode: []<BR>
-					Neutralize All Non-Synthetics: []<BR>"},
+/obj/machinery/turretid/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+	var/data[0]
+	data["access"] = !isLocked(user)
+	data["locked"] = locked
+	data["enabled"] = enabled
+	data["is_lethal"] = 1
+	data["lethal"] = lethal
 
-					"<A href='?src=\ref[src];operation=togglelethal'>[lethal ? "Enabled" : "Disabled"]</A>",
-					"<A href='?src=\ref[src];operation=toggleai'>[check_synth ? "Yes" : "No"]</A>")
-		if(!check_synth)
-			dat += text({"Check for Weapon Authorization: []<BR>
-					Check Security Records: []<BR>
-					Check Arrest Status: []<BR>
-					Neutralize All Non-Authorized Personnel: []<BR>
-					Neutralize All Unidentified Life Signs: []<BR>"},
+	if(data["access"])
+		var/settings[0]
+		settings[++settings.len] = list("category" = "Neutralize All Non-Synthetics", "setting" = "check_synth", "value" = check_synth)
+		settings[++settings.len] = list("category" = "Check Weapon Authorization", "setting" = "check_weapons", "value" = check_weapons)
+		settings[++settings.len] = list("category" = "Check Security Records", "setting" = "check_records", "value" = check_records)
+		settings[++settings.len] = list("category" = "Check Arrest Status", "setting" = "check_arrest", "value" = check_arrest)
+		settings[++settings.len] = list("category" = "Check Access Authorization", "setting" = "check_access", "value" = check_access)
+		settings[++settings.len] = list("category" = "Check misc. Lifeforms", "setting" = "check_anomalies", "value" = check_anomalies)
+		data["settings"] = settings
 
-					"<A href='?src=\ref[src];operation=authweapon'>[check_weapons ? "Yes" : "No"]</A>",
-					"<A href='?src=\ref[src];operation=checkrecords'>[check_records ? "Yes" : "No"]</A>",
-					"<A href='?src=\ref[src];operation=checkarrest'>[check_arrest ? "Yes" : "No"]</A>",
-					"<A href='?src=\ref[src];operation=checkaccess'>[check_access ? "Yes" : "No"]</A>",
-					"<A href='?src=\ref[src];operation=checkxenos'>[check_anomalies ? "Yes" : "No"]</A>" )
-	else
-		dat += "<div class='notice icon'>Swipe ID card to unlock interface</div>"
-
-	//user << browse(t, "window=turretid")
-	//onclose(user, "turretid")
-	var/datum/browser/popup = new(user, "turretid", "Turret Control Panel ([area.name])", 500, 500)
-	popup.set_content(dat)
-	popup.set_title_image(user.browse_rsc_icon(src.icon, src.icon_state))
-	popup.open()
+	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	if (!ui)
+		ui = new(user, src, ui_key, "turret_control.tmpl", "Turret Controls", 500, 300)
+		ui.set_initial_data(data)
+		ui.open()
+		ui.set_auto_update(1)
 
 /obj/machinery/turretid/Topic(href, href_list, var/nowindow = 0)
 	if(..())
 		return 1
 
-	if(!can_use(usr))
+	if(href_list["command"] && href_list["value"])
+		var/value = text2num(href_list["value"])
+		if(href_list["command"] == "enable")
+			enabled = value
+		else if(href_list["command"] == "lethal")
+			lethal = value
+		else if(href_list["command"] == "check_synth")
+			check_synth = value
+		else if(href_list["command"] == "check_weapons")
+			check_weapons = value
+		else if(href_list["command"] == "check_records")
+			check_records = value
+		else if(href_list["command"] == "check_arrest")
+			check_arrest = value
+		else if(href_list["command"] == "check_access")
+			check_access = value
+		else if(href_list["command"] == "check_anomalies")
+			check_anomalies = value
+
+		updateTurrets()
 		return 1
-
-	switch(href_list["operation"])	//toggles customizable behavioural protocols
-		if("toggleon")
-			enabled = !enabled
-		if("togglelethal")
-			lethal = !lethal
-		if("toggleai")
-			check_synth = !check_synth
-		if("authweapon")
-			check_weapons = !check_weapons
-		if("checkrecords")
-			check_records = !check_records
-		if("checkarrest")
-			check_arrest = !check_arrest
-		if("checkaccess")
-			check_access = !check_access
-		if("checkxenos")
-			check_anomalies = !check_anomalies
-
-	src.updateTurrets()
-
-	if(!nowindow)
-		attack_hand(usr)
-
-/obj/machinery/turretid/updateDialog()
-	if (stat & (BROKEN|MAINT))
-		return
-	..()
 
 /obj/machinery/turretid/proc/updateTurrets()
 	var/datum/turret_checks/TC = new
-	TC.on = enabled
+	TC.enabled = enabled
 	TC.lethal = lethal
 	TC.check_synth = check_synth
 	TC.check_access = check_access
@@ -209,10 +176,11 @@
 	TC.check_anomalies = check_anomalies
 	TC.ailock = ailock
 
-	if(control_area)
-		for (var/obj/machinery/porta_turret/aTurret in get_area_all_atoms(control_area))
+	if(istype(control_area))
+		for (var/obj/machinery/porta_turret/aTurret in control_area)
 			aTurret.setState(TC)
-	src.update_icon()
+
+	update_icon()
 
 /obj/machinery/turretid/power_change()
 	..()

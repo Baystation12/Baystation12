@@ -9,6 +9,7 @@
 	flags = CONDUCT
 	force = 5.0
 	w_class = 1.0
+	slot_flags = SLOT_EARS
 	throwforce = 5.0
 	throw_range = 15
 	throw_speed = 3

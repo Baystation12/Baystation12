@@ -117,7 +117,7 @@
 		O = (H.l_ear == src ? H.r_ear : H.l_ear)
 		user.u_equip(O)
 		if(!istype(src,/obj/item/clothing/ears/offear))
-			del(O)
+			qdel(O)
 			O = src
 	else
 		O = src
@@ -129,7 +129,7 @@
 		O.add_fingerprint(user)
 
 	if(istype(src,/obj/item/clothing/ears/offear))
-		del(src)
+		qdel(src)
 
 /obj/item/clothing/ears/update_clothing_icon()
 	if (ismob(src.loc))
@@ -176,7 +176,7 @@ BLIND     // can't see anything
 	slot_flags = SLOT_EYES
 	var/vision_flags = 0
 	var/darkness_view = 0//Base human is 2
-	var/invisa_view = 0
+	var/see_invisible = -1
 	sprite_sheets = list("Vox" = 'icons/mob/species/vox/eyes.dmi')
 
 /obj/item/clothing/glasses/update_clothing_icon()
@@ -191,7 +191,7 @@ BLIND     // can't see anything
 	gender = PLURAL //Carn: for grammarically correct text-parsing
 	w_class = 2.0
 	icon = 'icons/obj/clothing/gloves.dmi'
-	siemens_coefficient = 0.50
+	siemens_coefficient = 0.75
 	var/wired = 0
 	var/obj/item/weapon/cell/cell = 0
 	var/clipped = 0
@@ -264,36 +264,18 @@ BLIND     // can't see anything
 			return
 		on = !on
 		user << "You [on ? "enable" : "disable"] the helmet light."
-		update_light(user)
+		update_flashlight(user)
 	else
 		return ..(user)
 
-/obj/item/clothing/head/proc/update_light(var/mob/user = null)
+/obj/item/clothing/head/proc/update_flashlight(var/mob/user = null)
 	if(on && !light_applied)
-		if(loc == user)
-			user.SetLuminosity(user.luminosity + brightness_on)
-		SetLuminosity(brightness_on)
+		set_light(brightness_on)
 		light_applied = 1
 	else if(!on && light_applied)
-		if(loc == user)
-			user.SetLuminosity(user.luminosity - brightness_on)
-		SetLuminosity(0)
+		set_light(0)
 		light_applied = 0
 	update_icon(user)
-
-/obj/item/clothing/head/equipped(mob/user)
-	..()
-	spawn(1)
-		if(on && loc == user && !light_applied)
-			user.SetLuminosity(user.luminosity + brightness_on)
-			light_applied = 1
-
-/obj/item/clothing/head/dropped(mob/user)
-	..()
-	spawn(1)
-		if(on && loc != user && light_applied)
-			user.SetLuminosity(user.luminosity - brightness_on)
-			light_applied = 0
 
 /obj/item/clothing/head/update_icon(var/mob/user)
 
@@ -307,18 +289,6 @@ BLIND     // can't see anything
 	if(istype(user,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = user
 		H.update_inv_head()
-
-/obj/item/clothing/head/equipped(mob/user)
-	..()
-	update_light(user)
-
-/obj/item/clothing/head/pickup(mob/user)
-	..()
-	update_light(user)
-
-/obj/item/clothing/head/dropped(mob/user)
-	..()
-	update_light(user)
 
 /obj/item/clothing/head/update_clothing_icon()
 	if (ismob(src.loc))
@@ -357,6 +327,7 @@ BLIND     // can't see anything
 	permeability_coefficient = 0.50
 	slowdown = SHOES_SLOWDOWN
 	force = 2
+	var/overshoes = 0
 	species_restricted = list("exclude","Unathi","Tajara")
 	sprite_sheets = list("Vox" = 'icons/mob/species/vox/shoes.dmi')
 
@@ -391,13 +362,17 @@ BLIND     // can't see anything
 //Under clothing
 /obj/item/clothing/under
 	icon = 'icons/obj/clothing/uniforms.dmi'
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/items/lefthand_uniforms.dmi',
+		slot_r_hand_str = 'icons/mob/items/righthand_uniforms.dmi',
+		)
 	name = "under"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 	permeability_coefficient = 0.90
 	slot_flags = SLOT_ICLOTHING
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	w_class = 3
-	var/has_sensor = 1//For the crew computer 2 = unable to change mode
+	var/has_sensor = 1 //For the crew computer 2 = unable to change mode
 	var/sensor_mode = 0
 		/*
 		1 = Report living/dead
@@ -406,7 +381,44 @@ BLIND     // can't see anything
 		*/
 	var/list/accessories = list()
 	var/displays_id = 1
+	var/rolled_down = -1 //0 = unrolled, 1 = rolled, -1 = cannot be toggled
 	sprite_sheets = list("Vox" = 'icons/mob/species/vox/uniform.dmi')
+
+	//convenience var for defining the icon state for the overlay used when the clothing is worn.
+	//Also used by rolling/unrolling.
+	var/worn_state = null
+
+/obj/item/clothing/under/New()
+	if(worn_state)
+		if(!item_state_slots)
+			item_state_slots = list()
+		item_state_slots[slot_w_uniform_str] = worn_state
+	else
+		worn_state = icon_state
+
+/obj/item/clothing/under/proc/update_rolldown_status()
+
+	var/mob/living/carbon/human/H
+	if(istype(src.loc, /mob/living/carbon/human))
+		H = src.loc
+
+	var/icon/under_icon
+	if(icon_override)
+		under_icon = icon_override
+	else if(H && sprite_sheets && sprite_sheets[H.species.name])
+		under_icon = sprite_sheets[H.species.name]
+	else if(item_icons && item_icons[slot_w_uniform_str])
+		under_icon = item_icons[slot_w_uniform_str]
+	else
+		under_icon = INV_W_UNIFORM_DEF_ICON
+
+	// The _s is because the icon update procs append it.
+	if(("[worn_state]_d_s") in icon_states(under_icon))
+		if(rolled_down != 1)
+			rolled_down = 0
+	else
+		rolled_down = -1
+	if(H) update_clothing_icon()
 
 /obj/item/clothing/under/update_clothing_icon()
 	if (ismob(src.loc))
@@ -453,28 +465,29 @@ BLIND     // can't see anything
 			A.attack_hand(user)
 		return
 
-	if ((ishuman(usr) || ismonkey(usr)) && src.loc == user)	//make it harder to accidentally undress yourself
+	if ((ishuman(usr) || issmall(usr)) && src.loc == user)	//make it harder to accidentally undress yourself
 		return
 
 	..()
 
 /obj/item/clothing/under/MouseDrop(obj/over_object as obj)
-	if (ishuman(usr) || ismonkey(usr))
+	if (ishuman(usr) || issmall(usr))
 		//makes sure that the clothing is equipped so that we can't drag it into our hand from miles away.
 		if (!(src.loc == usr))
 			return
 
-		if (!( usr.restrained() ) && !( usr.stat ))
-			switch(over_object.name)
-				if("r_hand")
-					usr.u_equip(src)
-					usr.put_in_r_hand(src)
-				if("l_hand")
-					usr.u_equip(src)
-					usr.put_in_l_hand(src)
-			src.add_fingerprint(usr)
+		if (( usr.restrained() ) || ( usr.stat ))
 			return
-	return
+
+		if (!usr.unEquip(src))
+			return
+
+		switch(over_object.name)
+			if("r_hand")
+				usr.put_in_r_hand(src)
+			if("l_hand")
+				usr.put_in_l_hand(src)
+		src.add_fingerprint(usr)
 
 /obj/item/clothing/under/examine(mob/user)
 	..(user)
@@ -548,17 +561,19 @@ BLIND     // can't see anything
 	if(!istype(usr, /mob/living)) return
 	if(usr.stat) return
 
-	if(initial(item_color) + "_d_s" in icon_states('icons/mob/uniform.dmi'))
-		if (item_color == initial(item_color))
-			body_parts_covered &= LOWER_TORSO|LEGS|FEET
-			item_color = "[initial(item_color)]_d"
-		else
-			body_parts_covered = initial(body_parts_covered)
-			item_color = initial(item_color)
+	update_rolldown_status()
+	if(rolled_down == -1)
+		usr << "<span class='notice'>You cannot roll down [src]!</span>"
+		return
 
-		update_clothing_icon()
+	rolled_down = !rolled_down
+	if(rolled_down)
+		body_parts_covered &= LOWER_TORSO|LEGS|FEET
+		item_state_slots[slot_w_uniform_str] = "[worn_state]_d"
 	else
-		usr << "<span class='notice'>You cannot roll down the uniform!</span>"
+		body_parts_covered = initial(body_parts_covered)
+		item_state_slots[slot_w_uniform_str] = "[worn_state]"
+	update_clothing_icon()
 
 /obj/item/clothing/under/proc/remove_accessory(mob/user, obj/item/clothing/accessory/A)
 	if(!(A in accessories))

@@ -179,9 +179,9 @@ datum/preferences
 
 
 	proc/update_preview_icon()		//seriously. This is horrendous.
-		del(preview_icon_front)
-		del(preview_icon_side)
-		del(preview_icon)
+		qdel(preview_icon_front)
+		qdel(preview_icon_side)
+		qdel(preview_icon)
 
 		var/g = "m"
 		if(gender == FEMALE)	g = "f"
@@ -200,12 +200,13 @@ datum/preferences
 
 		for(var/name in list("r_arm","r_hand","r_leg","r_foot","l_leg","l_foot","l_arm","l_hand"))
 			if(organ_data[name] == "amputated") continue
-
-			var/icon/temp = new /icon(icobase, "[name]")
 			if(organ_data[name] == "cyborg")
-				temp.MapColors(rgb(77,77,77), rgb(150,150,150), rgb(28,28,28), rgb(0,0,0))
-
-			preview_icon.Blend(temp, ICON_OVERLAY)
+				var/datum/robolimb/R
+				if(rlimb_data[name]) R = all_robolimbs[rlimb_data[name]]
+				if(!R) R = basic_robolimb
+				preview_icon.Blend(icon(R.icon, "[name]"), ICON_OVERLAY) // This doesn't check gendered_icon. Not an issue while only limbs can be robotic.
+				continue
+			preview_icon.Blend(new /icon(icobase, "[name]"), ICON_OVERLAY)
 
 		//Tail
 		if(current_species && (current_species.tail))
@@ -689,7 +690,7 @@ datum/preferences
 		preview_icon_front = new(preview_icon, dir = SOUTH)
 		preview_icon_side = new(preview_icon, dir = WEST)
 
-		del(eyes_s)
-		del(underwear_s)
-		del(undershirt_s)
-		del(clothes_s)
+		qdel(eyes_s)
+		qdel(underwear_s)
+		qdel(undershirt_s)
+		qdel(clothes_s)

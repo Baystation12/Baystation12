@@ -6,7 +6,7 @@
 		usr << "\red Speech is currently admin-disabled."
 		return
 
-	message = trim_strip_html_properly(message)
+	message = sanitize(message)
 	log_whisper("[src.name]/[src.key] : [message]")
 
 	if (src.client)
@@ -143,7 +143,7 @@
 	//now mobs
 	var/speech_bubble_test = say_test(message)
 	var/image/speech_bubble = image('icons/mob/talk.dmi',src,"h[speech_bubble_test]")
-	spawn(30) del(speech_bubble)
+	spawn(30) qdel(speech_bubble)
 
 	for(var/mob/M in listening)
 		M << speech_bubble

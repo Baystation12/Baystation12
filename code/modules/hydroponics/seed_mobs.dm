@@ -37,7 +37,7 @@
 
 		if(!C || !host || !(C.mob && istype(C.mob,/mob/dead))) return // We don't want to spam them repeatedly if they're already in a mob.
 
-		var/response = alert(C, "Someone is harvesting [display_name]. Would you like to play as one?", "Sentient plant harvest", "Yes", "No", "Never for this round.")
+		var/response = alert(C, "Someone is harvesting [display_name]. Would you like to play as one?", "Sentient plant harvest", "Yes", "No", "Never for this round")
 
 		if(!C || !host || !(C.mob && istype(C.mob,/mob/dead))) return // ...or accidentally accept an invalid argument for transfer.
 
@@ -73,8 +73,7 @@
 		host << "<B>You are [host], one of a race of drifting interstellar plantlike creatures that sometimes share their seeds with human traders.</B>"
 		host << "<B>Too much darkness will send you into shock and starve you, but light will help you heal.</B>"
 
-	var/newname = input(host,"Enter a name, or leave blank for the default name.", "Name change","") as text
-	newname = sanitize(newname)
+	var/newname = sanitizeSafe(input(host,"Enter a name, or leave blank for the default name.", "Name change","") as text, MAX_NAME_LEN)
 	if (newname != "")
 		host.real_name = newname
 		host.name = host.real_name

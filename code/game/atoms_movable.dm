@@ -14,11 +14,43 @@
 	var/moved_recently = 0
 	var/mob/pulledby = null
 
-/atom/movable/Bump(var/atom/A as mob|obj|turf|area, yes)
+	var/auto_init = 1
+
+/atom/movable/New()
+	..()
+	if(auto_init && ticker && ticker.current_state == GAME_STATE_PLAYING)
+		initialize()
+
+/atom/movable/Del()
+	if(isnull(gcDestroyed) && loc)
+		testing("GC: -- [type] was deleted via del() rather than qdel() --")
+//	else if(isnull(gcDestroyed))
+//		testing("GC: [type] was deleted via GC without qdel()") //Not really a huge issue but from now on, please qdel()
+//	else
+//		testing("GC: [type] was deleted via GC with qdel()")
+	..()
+
+/atom/movable/Destroy()
+	. = ..()
+	if(reagents)
+		qdel(reagents)
+	for(var/atom/movable/AM in contents)
+		qdel(AM)
+	loc = null
+	if (pulledby)
+		if (pulledby.pulling == src)
+			pulledby.pulling = null
+		pulledby = null
+
+/atom/movable/proc/initialize()
+	return
+
+/atom/movable/Bump(var/atom/A, yes)
 	if(src.throwing)
 		src.throw_impact(A)
+		src.throwing = 0
 
-	spawn( 0 )
+	spawn(0)
 		if ((A && yes))
 			A.last_bumped = world.time
 			A.Bumped(src)

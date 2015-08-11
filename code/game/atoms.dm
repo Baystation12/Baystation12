@@ -11,6 +11,7 @@
 	var/pass_flags = 0
 	var/throwpass = 0
 	var/germ_level = GERM_LEVEL_AMBIENT // The higher the germ level, the more germ on the atom.
+	var/simulated = 1 //filter for actions - used by lighting overlays
 
 	///Chemistry.
 	var/datum/reagents/reagents = null
@@ -61,7 +62,6 @@
 	proc/can_add_container()
 		return flags & INSERT_CONTAINER
 */
-
 
 /atom/proc/meteorhit(obj/meteor as obj)
 	return
@@ -141,7 +141,7 @@ its easier to just keep the beam vertical.
 
 		for(var/obj/effect/overlay/beam/O in orange(10,src))	//This section erases the previously drawn beam because I found it was easier to
 			if(O.BeamSource==src)				//just draw another instance of the beam instead of trying to manipulate all the
-				del O							//pieces to a new orientation.
+				qdel(O)							//pieces to a new orientation.
 		var/Angle=round(Get_Angle(src,BeamTarget))
 		var/icon/I=new(icon,icon_state)
 		I.Turn(Angle)
@@ -182,7 +182,7 @@ its easier to just keep the beam vertical.
 			X.pixel_y=Pixel_y
 		sleep(3)	//Changing this to a lower value will cause the beam to follow more smoothly with movement, but it will also be more laggy.
 					//I've found that 3 ticks provided a nice balance for my use.
-	for(var/obj/effect/overlay/beam/O in orange(10,src)) if(O.BeamSource==src) del O
+	for(var/obj/effect/overlay/beam/O in orange(10,src)) if(O.BeamSource==src) qdel(O)
 
 
 //All atoms
@@ -221,6 +221,9 @@ its easier to just keep the beam vertical.
 	return
 
 /atom/proc/fire_act()
+	return
+
+/atom/proc/melt()
 	return
 
 /atom/proc/hitby(atom/movable/AM as mob|obj)
@@ -352,7 +355,7 @@ its easier to just keep the beam vertical.
 
 	//Cleaning up shit.
 	if(fingerprints && !fingerprints.len)
-		del(fingerprints)
+		qdel(fingerprints)
 	return
 
 
@@ -406,6 +409,8 @@ its easier to just keep the beam vertical.
 
 
 /atom/proc/clean_blood()
+	if(!simulated)
+		return
 	src.color = initial(src.color) //paint
 	src.germ_level = 0
 	if(istype(blood_DNA, /list))

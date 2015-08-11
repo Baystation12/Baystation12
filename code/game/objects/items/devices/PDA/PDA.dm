@@ -308,15 +308,6 @@ var/global/list/obj/item/device/pda/PDAs = list()
 /*
  *	The Actual PDA
  */
-/obj/item/device/pda/pickup(mob/user)
-	if(fon)
-		SetLuminosity(0)
-		user.SetLuminosity(user.luminosity + f_lum)
-
-/obj/item/device/pda/dropped(mob/user)
-	if(fon)
-		user.SetLuminosity(user.luminosity - f_lum)
-		SetLuminosity(f_lum)
 
 /obj/item/device/pda/New()
 	..()
@@ -532,20 +523,18 @@ var/global/list/obj/item/device/pda/PDAs = list()
 
 		data["feed"] = feed
 
+	data["manifest"] = list("__json_cache" = ManifestJSON)
+
 	nanoUI = data
 	// update the ui if it exists, returns null if no ui is passed/found
-	if(ui)
-		ui.load_cached_data(ManifestJSON)
 
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 
 	if (!ui)
 		// the ui does not exist, so we'll create a new() one
 	        // for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
-		ui = new(user, src, ui_key, "pda.tmpl", title, 520, 400)
+		ui = new(user, src, ui_key, "pda.tmpl", title, 520, 400, state = inventory_state)
 		// when the ui is first opened this is the data it will use
-
-		ui.load_cached_data(ManifestJSON)
 
 		ui.set_initial_data(data)
 		// open the new ui window
@@ -617,16 +606,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			ownrank = id.rank
 			name = "PDA-[owner] ([ownjob])"
 		if("Eject")//Ejects the cart, only done from hub.
-			if (!isnull(cartridge))
-				var/turf/T = loc
-				if(ismob(T))
-					T = T.loc
-				cartridge.loc = T
-				mode = 0
-				scanmode = 0
-				if (cartridge.radio)
-					cartridge.radio.hostpda = null
-				cartridge = null
+			verb_remove_cartridge()
 
 //MENU FUNCTIONS===================================
 
@@ -653,12 +633,10 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		if("Light")
 			if(fon)
 				fon = 0
-				if(src in U.contents)	U.SetLuminosity(U.luminosity - f_lum)
-				else					SetLuminosity(0)
+				set_light(0)
 			else
 				fon = 1
-				if(src in U.contents)	U.SetLuminosity(U.luminosity + f_lum)
-				else					SetLuminosity(f_lum)
+				set_light(f_lum)
 		if("Medical Scan")
 			if(scanmode == 1)
 				scanmode = 0
@@ -689,7 +667,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		if ("Edit")
 			var/n = input(U, "Please enter message", name, notehtml) as message
 			if (in_range(src, U) && loc == U)
-				n = copytext(adminscrub(n), 1, MAX_MESSAGE_LEN)
+				n = sanitizeSafe(n, extra = 0)
 				if (mode == 1)
 					note = html_decode(n)
 					notehtml = note
@@ -726,7 +704,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 						U << "The PDA softly beeps."
 						ui.close()
 					else
-						t = sanitize(copytext(t, 1, 20))
+						t = sanitize(t, 20)
 						ttone = t
 			else
 				ui.close()
@@ -735,7 +713,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			var/t = input(U, "Please enter new news tone", name, newstone) as text
 			if (in_range(src, U) && loc == U)
 				if (t)
-					t = sanitize(copytext(t, 1, 20))
+					t = sanitize(t, 20)
 					newstone = t
 			else
 				ui.close()
@@ -947,7 +925,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		j = prob(10)
 
 	if(j) //This kills the PDA
-		P.Del()
+		qdel(P)
 		if(message)
 			message += "It melts in a puddle of plastic."
 		else
@@ -972,8 +950,9 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		U.visible_message("<span class='notice'>[U] taps on \his PDA's screen.</span>")
 	U.last_target_click = world.time
 	var/t = input(U, "Please enter message", P.name, null) as text
-	t = sanitize(copytext(t, 1, MAX_MESSAGE_LEN))
-	t = readd_quotes(t)
+	t = sanitize(t)
+	//t = readd_quotes(t)
+	t = replace_characters(t, list("&#34;" = "\""))
 	if (!t || !istype(P))
 		return
 	if (!in_range(src, U) && loc != U)
@@ -1068,6 +1047,17 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	new_message = 1
 	update_icon()
 
+/obj/item/device/pda/ai/new_message(var/atom/movable/sending_unit, var/sender, var/sender_job, var/message)
+	var/track = ""
+	if(ismob(sending_unit.loc) && isAI(loc))
+		track = "(<a href='byond://?src=\ref[loc];track=\ref[sending_unit.loc];trackname=[html_encode(sender)]'>Follow</a>)"
+
+	var/reception_message = "\icon[src] <b>Message from [sender] ([sender_job]), </b>\"[message]\" (<a href='byond://?src=\ref[src];choice=Message;notap=1;skiprefresh=1;target=\ref[sending_unit]'>Reply</a>) [track]"
+	new_info(message_silent, newstone, reception_message)
+
+	log_pda("[usr] (PDA: [sending_unit]) sent \"[message]\" to [name]")
+	new_message = 1
+
 /obj/item/device/pda/verb/verb_reset_pda()
 	set category = "Object"
 	set name = "Reset PDA"
@@ -1123,6 +1113,30 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	else
 		usr << "<span class='notice'>You cannot do this while restrained.</span>"
 
+/obj/item/device/pda/verb/verb_remove_cartridge()
+	set category = "Object"
+	set name = "Remove cartridge"
+	set src in usr
+
+	if(issilicon(usr))
+		return
+
+	if (can_use(usr) && !isnull(cartridge))
+		var/turf/T = get_turf(src)
+		cartridge.loc = T
+		if (ismob(loc))
+			var/mob/M = loc
+			M.put_in_hands(cartridge)
+		else
+			cartridge.loc = get_turf(src)
+		mode = 0
+		scanmode = 0
+		if (cartridge.radio)
+			cartridge.radio.hostpda = null
+		cartridge = null
+		usr << "<span class='notice'>You remove \the [cartridge] from the [name].</span>"
+	else
+		usr << "<span class='notice'>You cannot do this while restrained.</span>"
 
 /obj/item/device/pda/proc/id_check(mob/user as mob, choice as num)//To check for IDs; 1 for in-pda use, 2 for out of pda use.
 	if(choice == 1)
@@ -1211,8 +1225,8 @@ var/global/list/obj/item/device/pda/PDAs = list()
 					var/list/damaged = H.get_damaged_organs(1,1)
 					user.show_message("\blue Localized Damage, Brute/Burn:",1)
 					if(length(damaged)>0)
-						for(var/datum/organ/external/org in damaged)
-							user.show_message(text("\blue \t []: []\blue-[]",capitalize(org.display_name),(org.brute_dam > 0)?"\red [org.brute_dam]":0,(org.burn_dam > 0)?"\red [org.burn_dam]":0),1)
+						for(var/obj/item/organ/external/org in damaged)
+							user.show_message(text("\blue \t []: []\blue-[]",capitalize(org.name),(org.brute_dam > 0)?"\red [org.brute_dam]":0,(org.burn_dam > 0)?"\red [org.burn_dam]":0),1)
 					else
 						user.show_message("\blue \t Limbs are OK.",1)
 
@@ -1223,15 +1237,12 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			if(2)
 				if (!istype(C:dna, /datum/dna))
 					user << "\blue No fingerprints found on [C]"
-				else if(!istype(C, /mob/living/carbon/monkey))
-					if(!isnull(C:gloves))
-						user << "\blue No fingerprints found on [C]"
 				else
 					user << text("\blue [C]'s Fingerprints: [md5(C:dna.uni_identity)]")
 				if ( !(C:blood_DNA) )
 					user << "\blue No blood found on [C]"
 					if(C:blood_DNA)
-						del(C:blood_DNA)
+						qdel(C:blood_DNA)
 				else
 					user << "\blue Blood found on [C]. Analysing..."
 					spawn(15)
@@ -1361,7 +1372,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		explosion(T, 0, 0, 1, rand(1,2))
 	return
 
-/obj/item/device/pda/Del()
+/obj/item/device/pda/Destroy()
 	PDAs -= src
 	if (src.id && prob(90)) //IDs are kept in 90% of the cases
 		src.id.loc = get_turf(src.loc)

@@ -11,56 +11,19 @@
 
 /obj/structure/largecrate/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/weapon/crowbar))
-		new /obj/item/stack/sheet/wood(src)
+		new /obj/item/stack/material/wood(src)
 		var/turf/T = get_turf(src)
 		for(var/obj/O in contents)
 			O.loc = T
 		user.visible_message("<span class='notice'>[user] pries \the [src] open.</span>", \
 							 "<span class='notice'>You pry open \the [src].</span>", \
 							 "<span class='notice'>You hear splitting wood.</span>")
-		del(src)
+		qdel(src)
 	else
 		return attack_hand(user)
 
 /obj/structure/largecrate/mule
-	icon_state = "mulecrate"
-
-/obj/structure/largecrate/lisa
-	icon_state = "lisacrate"
-
-/obj/structure/largecrate/lisa/attackby(obj/item/weapon/W as obj, mob/user as mob)	//ugly but oh well
-	if(istype(W, /obj/item/weapon/crowbar))
-		new /mob/living/simple_animal/corgi/Lisa(loc)
-	..()
-
-/obj/structure/largecrate/cow
-	name = "cow crate"
-	icon_state = "lisacrate"
-
-/obj/structure/largecrate/cow/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/weapon/crowbar))
-		new /mob/living/simple_animal/cow(loc)
-	..()
-
-/obj/structure/largecrate/goat
-	name = "goat crate"
-	icon_state = "lisacrate"
-
-/obj/structure/largecrate/goat/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/weapon/crowbar))
-		new /mob/living/simple_animal/hostile/retaliate/goat(loc)
-	..()
-
-/obj/structure/largecrate/chick
-	name = "chicken crate"
-	icon_state = "lisacrate"
-
-/obj/structure/largecrate/chick/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/weapon/crowbar))
-		var/num = rand(4, 6)
-		for(var/i = 0, i < num, i++)
-			new /mob/living/simple_animal/chick(loc)
-	..()
+	name = "MULE crate"
 
 /obj/structure/largecrate/hoverpod
 	name = "\improper Hoverpod assembly crate"
@@ -71,9 +34,43 @@
 	if(istype(W, /obj/item/weapon/crowbar))
 		var/obj/item/mecha_parts/mecha_equipment/ME
 		var/obj/mecha/working/hoverpod/H = new (loc)
-		
+
 		ME = new /obj/item/mecha_parts/mecha_equipment/tool/hydraulic_clamp
 		ME.attach(H)
 		ME = new /obj/item/mecha_parts/mecha_equipment/tool/passenger
 		ME.attach(H)
 	..()
+
+/obj/structure/largecrate/animal
+	icon_state = "mulecrate"
+	var/held_count = 1
+	var/held_type
+
+/obj/structure/largecrate/animal/New()
+	..()
+	for(var/i = 1;i<=held_count;i++)
+		new held_type(src)
+
+/obj/structure/largecrate/animal/corgi
+	name = "corgi carrier"
+	held_type = /mob/living/simple_animal/corgi
+
+/obj/structure/largecrate/animal/cow
+	name = "cow crate"
+	held_type = /mob/living/simple_animal/cow
+
+/obj/structure/largecrate/animal/goat
+	name = "goat crate"
+	held_type = /mob/living/simple_animal/hostile/retaliate/goat
+
+/obj/structure/largecrate/animal/cat
+	name = "cat carrier"
+	held_type = /mob/living/simple_animal/cat
+
+/obj/structure/largecrate/animal/cat/bones
+	held_type = /mob/living/simple_animal/cat/fluff/bones
+
+/obj/structure/largecrate/animal/chick
+	name = "chicken crate"
+	held_count = 5
+	held_type = /mob/living/simple_animal/chick

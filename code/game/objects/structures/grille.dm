@@ -8,20 +8,25 @@
 	flags = CONDUCT
 	pressure_resistance = 5*ONE_ATMOSPHERE
 	layer = 2.9
-	explosion_resistance = 5
+	explosion_resistance = 1
 	var/health = 10
 	var/destroyed = 0
 
 
 /obj/structure/grille/ex_act(severity)
-	del(src)
+	qdel(src)
 
 /obj/structure/grille/blob_act()
-	del(src)
+	qdel(src)
 
 /obj/structure/grille/meteorhit(var/obj/M)
-	del(src)
+	qdel(src)
 
+/obj/structure/grille/update_icon()
+	if(destroyed)
+		icon_state = "[initial(icon_state)]-b"
+	else
+		icon_state = initial(icon_state)
 
 /obj/structure/grille/Bumped(atom/user)
 	if(ismob(user)) shock(user, 70)
@@ -29,6 +34,7 @@
 /obj/structure/grille/attack_hand(mob/user as mob)
 
 	playsound(loc, 'sound/effects/grillehit.ogg', 80, 1)
+	user.do_attack_animation(src)
 
 	var/damage_dealt = 1
 	var/attack_message = "kicks"
@@ -88,7 +94,7 @@
 				passthrough = 1
 
 	if(passthrough)
-		. = -1
+		. = PROJECTILE_CONTINUE
 		damage = between(0, (damage - Proj.damage)*(Proj.damage_type == BRUTE? 0.4 : 1), 10) //if the bullet passes through then the grille avoids most of the damage
 
 	src.health -= damage*0.2
@@ -98,8 +104,8 @@
 	if(iswirecutter(W))
 		if(!shock(user, 100))
 			playsound(loc, 'sound/items/Wirecutter.ogg', 100, 1)
-			new /obj/item/stack/rods(loc, 2)
-			del(src)
+			PoolOrNew(/obj/item/stack/rods, list(get_turf(src), destroyed ? 1 : 2))
+			qdel(src)
 	else if((isscrewdriver(W)) && (istype(loc, /turf/simulated) || anchored))
 		if(!shock(user, 90))
 			playsound(loc, 'sound/items/Screwdriver.ogg', 100, 1)
@@ -108,9 +114,12 @@
 								 "<span class='notice'>You have [anchored ? "fastened the grille to" : "unfastened the grill from"] the floor.</span>")
 			return
 
-//window placing begin
-	else if(istype(W,/obj/item/stack/sheet/glass))
-		var/obj/item/stack/sheet/glass/ST = W
+//window placing begin //TODO CONVERT PROPERLY TO MATERIAL DATUM
+	else if(istype(W,/obj/item/stack/material))
+		var/obj/item/stack/material/ST = W
+		if(!ST.material.created_window)
+			return 0
+
 		var/dir_to_set = 1
 		if(loc == user.loc)
 			dir_to_set = user.dir
@@ -140,7 +149,7 @@
 					user << "<span class='notice'>There is already a window facing this way there.</span>"
 					return
 
-			var/wtype = ST.created_window
+			var/wtype = ST.material.created_window
 			if (ST.use(1))
 				var/obj/structure/window/WD = new wtype(loc, dir_to_set, 1)
 				user << "<span class='notice'>You place the [WD] on [src].</span>"
@@ -148,9 +157,8 @@
 		return
 //window placing end
 
-	else if(istype(W, /obj/item/weapon/shard))
-		health -= W.force * 0.1
-	else if(!shock(user, 70))
+	else if(!(W.flags & CONDUCT) || !shock(user, 70))
+		user.do_attack_animation(src)
 		playsound(loc, 'sound/effects/grillehit.ogg', 80, 1)
 		switch(W.damtype)
 			if("fire")
@@ -165,15 +173,15 @@
 /obj/structure/grille/proc/healthcheck()
 	if(health <= 0)
 		if(!destroyed)
-			icon_state = "brokengrille"
 			density = 0
 			destroyed = 1
-			new /obj/item/stack/rods(loc)
+			update_icon()
+			PoolOrNew(/obj/item/stack/rods, get_turf(src))
 
 		else
 			if(health <= -6)
-				new /obj/item/stack/rods(loc)
-				del(src)
+				PoolOrNew(/obj/item/stack/rods, get_turf(src))
+				qdel(src)
 				return
 	return
 
@@ -212,6 +220,28 @@
 
 /obj/structure/grille/attack_generic(var/mob/user, var/damage, var/attack_verb)
 	visible_message("<span class='danger'>[user] [attack_verb] the [src]!</span>")
+	user.do_attack_animation(src)
 	health -= damage
 	spawn(1) healthcheck()
 	return 1
+
+// Used in mapping to avoid
+/obj/structure/grille/broken
+	destroyed = 1
+	icon_state = "grille-b"
+	density = 0
+	New()
+		..()
+		health = rand(-5, -1) //In the destroyed but not utterly threshold.
+		healthcheck() //Send this to healthcheck just in case we want to do something else with it.
+
+/obj/structure/grille/cult
+	name = "cult grille"
+	desc = "A matrice built out of an unknown material, with some sort of force field blocking air around it"
+	icon_state = "grillecult"
+	health = 40 //Make it strong enough to avoid people breaking in too easily
+
+/obj/structure/grille/cult/CanPass(atom/movable/mover, turf/target, height = 1.5, air_group = 0)
+	if(air_group)
+		return 0 //Make sure air doesn't drain
+	..()

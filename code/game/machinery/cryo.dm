@@ -3,7 +3,7 @@
 /obj/machinery/atmospherics/unary/cryo_cell
 	name = "cryo cell"
 	icon = 'icons/obj/cryogenics.dmi'
-	icon_state = "cell-off"
+	icon_state = "pod0"
 	density = 1
 	anchored = 1.0
 	layer = 2.8
@@ -24,9 +24,11 @@
 	..()
 	initialize_directions = dir
 
-/obj/machinery/atmospherics/unary/cryo_cell/Del()
-	if(occupant)
-		occupant.loc = loc
+/obj/machinery/atmospherics/unary/cryo_cell/Destroy()
+	var/turf/T = loc
+	T.contents += contents
+	if(beaker)
+		beaker.loc = get_step(loc, SOUTH) //Beaker is carefully ejected from the wreckage of the cryotube
 	..()
 
 /obj/machinery/atmospherics/unary/cryo_cell/initialize()
@@ -185,17 +187,18 @@
 				return
 		var/mob/M = G:affecting
 		if(put_mob(M))
-			del(G)
+			qdel(G)
 	return
 
 /obj/machinery/atmospherics/unary/cryo_cell/update_icon()
-	if(on)
-		if(occupant)
-			icon_state = "cell-occupied"
-			return
-		icon_state = "cell-on"
-		return
-	icon_state = "cell-off"
+	overlays.Cut()
+	icon_state = "pod[on]"
+	if(occupant)
+		var/image/pickle = image(occupant.icon, occupant.icon_state)
+		pickle.overlays = occupant.overlays
+		pickle.pixel_y = 20
+		overlays += pickle
+	overlays += "lid[on]"
 
 /obj/machinery/atmospherics/unary/cryo_cell/proc/process_occupant()
 	if(air_contents.total_moles < 10)
@@ -224,8 +227,7 @@
 		var/has_clonexa = occupant.reagents.get_reagent_amount("clonexadone") >= 1
 		var/has_cryo_medicine = has_cryo || has_clonexa
 		if(beaker && !has_cryo_medicine)
-			beaker.reagents.trans_to(occupant, 1, 10)
-			beaker.reagents.reaction(occupant)
+			beaker.reagents.trans_to_mob(occupant, 1, CHEM_BLOOD, 10)
 
 /obj/machinery/atmospherics/unary/cryo_cell/proc/heat_gas_contents()
 	if(air_contents.total_moles < 1)
@@ -328,7 +330,16 @@
 	put_mob(usr)
 	return
 
+/atom/proc/return_air_for_internal_lifeform()
+	return return_air()
 
+/obj/machinery/atmospherics/unary/cryo_cell/return_air_for_internal_lifeform()
+	//assume that the cryo cell has some kind of breath mask or something that
+	//draws from the cryo tube's environment, instead of the cold internal air.
+	if(loc)
+		return loc.return_air()
+	else
+		return null
 
 /datum/data/function/proc/reset()
 	return

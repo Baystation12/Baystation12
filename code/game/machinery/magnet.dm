@@ -164,7 +164,7 @@
 				if(prob(electricity_level))
 					explosion(loc, 0, 1, 2, 3) // ooo dat shit EXPLODES son
 					spawn(2)
-						del(src)
+						qdel(src)
 		*/
 
 		updateicon()
@@ -190,8 +190,10 @@
 
 		pulling = 0
 
-
-
+/obj/machinery/magnetic_module/Destroy()
+	if(radio_controller)
+		radio_controller.remove_object(src, freq)
+	..()
 
 /obj/machinery/magnetic_controller
 	name = "Magnetic Control Console"
@@ -323,7 +325,7 @@
 					if(speed <= 0)
 						speed = 1
 				if("setpath")
-					var/newpath = sanitize(copytext(input(usr, "Please define a new path!",,path) as text|null,1,MAX_MESSAGE_LEN))
+					var/newpath = sanitize(input(usr, "Please define a new path!",,path) as text|null)
 					if(newpath && newpath != "")
 						moving = 0 // stop moving
 						path = newpath
@@ -364,7 +366,7 @@
 				// N, S, E, W are directional
 				// C is center
 				// R is random (in magnetic field's bounds)
-				del(signal)
+				qdel(signal)
 				break // break the loop if the character located is invalid
 
 			signal.data["command"] = nextmove
@@ -399,25 +401,7 @@
 
 			// there doesn't HAVE to be separators but it makes paths syntatically visible
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/obj/machinery/magnetic_controller/Destroy()
+	if(radio_controller)
+		radio_controller.remove_object(src, frequency)
+	..()

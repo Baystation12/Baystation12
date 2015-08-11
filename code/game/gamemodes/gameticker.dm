@@ -1,11 +1,5 @@
 var/global/datum/controller/gameticker/ticker
 
-#define GAME_STATE_PREGAME		1
-#define GAME_STATE_SETTING_UP	2
-#define GAME_STATE_PLAYING		3
-#define GAME_STATE_FINISHED		4
-
-
 /datum/controller/gameticker
 	var/const/restart_timeout = 600
 	var/current_state = GAME_STATE_PREGAME
@@ -76,6 +70,7 @@ var/global/datum/controller/gameticker/ticker
 	if(master_mode=="secret")
 		src.hide_mode = 1
 	var/list/datum/game_mode/runnable_modes
+	var/mode_started
 	if((master_mode=="random") || (master_mode=="secret"))
 		runnable_modes = config.get_runnable_modes()
 		if (runnable_modes.len==0)
@@ -85,6 +80,7 @@ var/global/datum/controller/gameticker/ticker
 		if(secret_force_mode != "secret")
 			var/datum/game_mode/M = config.pick_mode(secret_force_mode)
 			if(M.can_start())
+				mode_started = 1
 				src.mode = config.pick_mode(secret_force_mode)
 		job_master.ResetOccupations()
 		if(!src.mode)
@@ -94,20 +90,16 @@ var/global/datum/controller/gameticker/ticker
 			src.mode = new mtype
 	else
 		src.mode = config.pick_mode(master_mode)
-	if (!src.mode.can_start())
-		world << "<B>Unable to start [mode.name].</B> Not enough players, [mode.required_players] players needed. Reverting to pre-game lobby."
-		del(mode)
-		current_state = GAME_STATE_PREGAME
-		job_master.ResetOccupations()
-		return 0
 
-	//Configure mode and assign player to special mode stuff
-	job_master.DivideOccupations() //Distribute jobs
-	var/can_continue = src.mode.pre_setup()//Setup special modes
-	if(!can_continue)
-		del(mode)
+	src.mode.pre_setup()
+
+	job_master.DivideOccupations() // Apparently important for new antagonist system to register specific job antags properly.
+
+	if(!mode_started && !src.mode.can_start())
+		world << "<B>Unable to start [mode.name].</B> Not enough players, [mode.required_players] players needed. Reverting to pre-game lobby."
 		current_state = GAME_STATE_PREGAME
-		world << "<B>Error setting up [master_mode].</B> Reverting to pre-game lobby."
+		mode.fail_setup()
+		mode = null
 		job_master.ResetOccupations()
 		return 0
 
@@ -121,16 +113,14 @@ var/global/datum/controller/gameticker/ticker
 	else
 		src.mode.announce()
 
+	setup_economy()
+	current_state = GAME_STATE_PLAYING
 	create_characters() //Create player characters and transfer them
 	collect_minds()
 	equip_characters()
 	data_core.manifest()
-	current_state = GAME_STATE_PLAYING
 
 	callHook("roundstart")
-
-	//here to initialize the random events nicely at round start
-	setup_economy()
 
 	shuttle_controller.setup_shuttle_docks()
 
@@ -140,7 +130,7 @@ var/global/datum/controller/gameticker/ticker
 		for(var/obj/effect/landmark/start/S in landmarks_list)
 			//Deleting Startpoints but we need the ai point to AI-ize people later
 			if (S.name != "AI")
-				del(S)
+				qdel(S)
 		world << "<FONT color='blue'><B>Enjoy the game!</B></FONT>"
 		world << sound('sound/AI/welcome.ogg') // Skie
 		//Holiday Round-start stuff	~Carn
@@ -156,14 +146,16 @@ var/global/datum/controller/gameticker/ticker
 	if(admins_number == 0)
 		send2adminirc("Round has started with no admins online.")
 
-	supply_controller.process() 		//Start the supply shuttle regenerating points -- TLE
+/*	supply_controller.process() 		//Start the supply shuttle regenerating points -- TLE // handled in scheduler
 	master_controller.process()		//Start master_controller.process()
 	lighting_controller.process()	//Start processing DynamicAreaLighting updates
+	*/
+
+	processScheduler.start()
 
 	for(var/obj/multiz/ladder/L in world) L.connect() //Lazy hackfix for ladders. TODO: move this to an actual controller. ~ Z
 
 	if(config.sql_enabled)
-		spawn(3000)
 		statistic_cycle() // Polls population totals regularly and stores them in an SQL DB -- TLE
 
 	return 1
@@ -267,8 +259,8 @@ var/global/datum/controller/gameticker/ticker
 		//Otherwise if its a verb it will continue on afterwards.
 		sleep(300)
 
-		if(cinematic)	del(cinematic)		//end the cinematic
-		if(temp_buckle)	del(temp_buckle)	//release everybody
+		if(cinematic)	qdel(cinematic)		//end the cinematic
+		if(temp_buckle)	qdel(temp_buckle)	//release everybody
 		return
 
 
@@ -282,7 +274,7 @@ var/global/datum/controller/gameticker/ticker
 					continue
 				else
 					player.create_character()
-					del(player)
+					qdel(player)
 
 
 	proc/collect_minds()
@@ -297,10 +289,10 @@ var/global/datum/controller/gameticker/ticker
 			if(player && player.mind && player.mind.assigned_role)
 				if(player.mind.assigned_role == "Captain")
 					captainless=0
-				if(player.mind.assigned_role != "MODE")
+				if(!player_is_antag(player.mind, only_offstation_roles = 1))
 					job_master.EquipRank(player, player.mind.assigned_role, 0)
 					UpdateFactionList(player)
-					EquipCustomItems(player)
+					equip_custom_items(player)
 		if(captainless)
 			for(var/mob/M in player_list)
 				if(!istype(M,/mob/new_player))
@@ -313,7 +305,7 @@ var/global/datum/controller/gameticker/ticker
 
 		mode.process()
 
-		emergency_shuttle.process()
+//		emergency_shuttle.process() //handled in scheduler
 
 		var/game_finished = 0
 		var/mode_finished = 0
@@ -321,7 +313,7 @@ var/global/datum/controller/gameticker/ticker
 			game_finished = (emergency_shuttle.returned() || mode.station_was_nuked)
 			mode_finished = (!post_game && mode.check_finished())
 		else
-			game_finished = (mode.check_finished() || (emergency_shuttle.returned() && emergency_shuttle.evac == 1))
+			game_finished = (mode.check_finished() || (emergency_shuttle.returned() && emergency_shuttle.evac == 1)) || universe_has_ended
 			mode_finished = game_finished
 
 		if(!mode.explosion_in_progress && game_finished && (mode_finished || post_game))
@@ -368,12 +360,6 @@ var/global/datum/controller/gameticker/ticker
 				vote.autotransfer()
 
 		return 1
-
-	proc/getfactionbyname(var/name)
-		for(var/datum/faction/F in factions)
-			if(F.name == name)
-				return F
-
 
 /datum/controller/gameticker/proc/declare_completion()
 	world << "<br><br><br><H1>A round of [mode.name] has ended!</H1>"
@@ -435,11 +421,6 @@ var/global/datum/controller/gameticker/ticker
 		world << "<b>There [dronecount>1 ? "were" : "was"] [dronecount] industrious maintenance [dronecount>1 ? "drones" : "drone"] at the end of this round.</b>"
 
 	mode.declare_completion()//To declare normal completion.
-
-	//calls auto_declare_completion_* for all modes
-	for(var/handler in typesof(/datum/game_mode/proc))
-		if (findtext("[handler]","auto_declare_completion_"))
-			call(mode, handler)()
 
 	//Ask the event manager to print round end information
 	event_manager.RoundEnd()

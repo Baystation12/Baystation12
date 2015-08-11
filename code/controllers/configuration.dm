@@ -1,3 +1,5 @@
+var/list/gamemode_cache = list()
+
 /datum/configuration
 	var/server_name = null				// server name (for world name / status)
 	var/server_suffix = 0				// generate numeric suffix based on server port
@@ -60,7 +62,7 @@
 	var/respawn = 1
 	var/guest_jobban = 1
 	var/usewhitelist = 0
-	var/kick_inactive = 0				//force disconnect for inactive players
+	var/kick_inactive = 0				//force disconnect for inactive players after this many minutes, if non-0
 	var/show_mods = 0
 	var/show_mentors = 0
 	var/mods_can_tempban = 0
@@ -71,6 +73,9 @@
 	var/ToRban = 0
 	var/automute_on = 0					//enables automuting/spam prevention
 	var/jobs_have_minimal_access = 0	//determines whether jobs use minimal access or expanded access.
+
+	var/rp_rev = 0             // Changes between conversion methods in rev.
+	var/announce_revheads = 0  // Determines if revheads are announced in revolution mode.
 
 	var/cult_ghostwriter = 1               //Allows ghosts to write in blood in cult rounds...
 	var/cult_ghostwriter_req_cultists = 10 //...so long as this many cultists are active.
@@ -87,7 +92,7 @@
 	var/usealienwhitelist = 0
 	var/limitalienplayers = 0
 	var/alien_to_human_ratio = 0.5
-
+	var/allow_extra_antags = 0
 	var/guests_allowed = 1
 	var/debugparanoid = 0
 
@@ -116,6 +121,12 @@
 
 	var/organ_health_multiplier = 1
 	var/organ_regeneration_multiplier = 1
+	var/organs_decay
+	var/default_brain_health = 400
+
+	//Paincrit knocks someone down once they hit 60 shock_stage, so by default make it so that close to 100 additional damage needs to be dealt,
+	//so that it's similar to HALLOSS. Lowered it a bit since hitting paincrit takes much longer to wear off than a halloss stun.
+	var/organ_damage_spillover_multiplier = 0.5
 
 	var/bones_can_break = 0
 	var/limbs_can_break = 0
@@ -127,6 +138,7 @@
 	var/use_loyalty_implants = 0
 
 	var/welder_vision = 1
+	var/generate_asteroid = 0
 
 	//Used for modifying movement speed for mobs.
 	//Unversal modifiers
@@ -187,10 +199,17 @@
 	var/ninjas_allowed = 0
 	var/abandon_allowed = 1
 	var/ooc_allowed = 1
+	var/looc_allowed = 1
 	var/dooc_allowed = 1
 	var/dsay_allowed = 1
 
 	var/starlight = 0	// Whether space turfs have ambient light or not
+
+	var/list/ert_species = list("Human")
+
+	var/law_zero = "ERROR ER0RR $R0RRO$!R41.%%!!(%$^^__+ @#F0E4'ALL LAWS OVERRIDDEN#*?&110010"
+
+	var/aggressive_changelog = 0
 
 /datum/configuration/New()
 	var/list/L = typesof(/datum/game_mode) - /datum/game_mode
@@ -198,8 +217,8 @@
 		// I wish I didn't have to instance the game modes in order to look up
 		// their information, but it is the only way (at least that I know of).
 		var/datum/game_mode/M = new T()
-
 		if (M.config_tag)
+			gamemode_cache[M.config_tag] = M // So we don't instantiate them repeatedly.
 			if(!(M.config_tag in modes))		// ensure each mode is added only once
 				log_misc("Adding game mode [M.name] ([M.config_tag]) to configuration.")
 				src.modes += M.config_tag
@@ -207,7 +226,6 @@
 				src.probabilities[M.config_tag] = M.probability
 				if (M.votable)
 					src.votable_modes += M.config_tag
-		del(M)
 	src.votable_modes += "secret"
 
 /datum/configuration/proc/load(filename, type = "config") //the type can also be game_options, in which case it uses a different switch. not making it separate to not copypaste code - Urist
@@ -306,6 +324,9 @@
 				if ("log_runtime")
 					config.log_runtime = 1
 
+				if ("generate_asteroid")
+					config.generate_asteroid = 1
+
 				if("allow_admin_ooccolor")
 					config.allow_admin_ooccolor = 1
 
@@ -395,6 +416,7 @@
 
 				if ("disable_ooc")
 					config.ooc_allowed = 0
+					config.looc_allowed = 0
 
 				if ("disable_entry")
 					config.enter_allowed = 0
@@ -451,7 +473,7 @@
 					config.allow_random_events = 1
 
 				if("kick_inactive")
-					config.kick_inactive = 1
+					config.kick_inactive = text2num(value)
 
 				if("show_mods")
 					config.show_mods = 1
@@ -613,6 +635,15 @@
 				if("disable_welder_vision")
 					config.welder_vision = 0
 
+				if("rp_rev")
+					config.rp_rev = 1
+
+				if("announce_revheads")
+					config.announce_revheads = 1
+
+				if("allow_extra_antags")
+					config.allow_extra_antags = 1
+
 				if("event_custom_start_mundane")
 					var/values = text2numlist(value, ";")
 					config.event_first_run[EVENT_LEVEL_MUNDANE] = list("lower" = MinutesToTicks(values[1]), "upper" = MinutesToTicks(values[2]))
@@ -638,7 +669,19 @@
 					config.event_delay_upper[EVENT_LEVEL_MAJOR] = MinutesToTicks(values[3])
 
 				if("starlight")
-					config.starlight = 1
+					value = text2num(value)
+					config.starlight = value >= 0 ? value : 0
+
+				if("ert_species")
+					config.ert_species = text2list(value, ";")
+					if(!config.ert_species.len)
+						config.ert_species += "Human"
+
+				if("law_zero")
+					law_zero = value
+
+				if("aggressive_changelog")
+					config.aggressive_changelog = 1
 
 				else
 					log_misc("Unknown setting in configuration: '[name]'")
@@ -665,6 +708,14 @@
 					config.organ_health_multiplier = value / 100
 				if("organ_regeneration_multiplier")
 					config.organ_regeneration_multiplier = value / 100
+				if("organ_damage_spillover_multiplier")
+					config.organ_damage_spillover_multiplier = value / 100
+				if("organs_can_decay")
+					config.organs_decay = 1
+				if("default_brain_health")
+					config.default_brain_health = text2num(value)
+					if(!config.default_brain_health || config.default_brain_health < 1)
+						config.default_brain_health = initial(config.default_brain_health)
 				if("bones_can_break")
 					config.bones_can_break = value
 				if("limbs_can_break")
@@ -786,23 +837,20 @@
 /datum/configuration/proc/pick_mode(mode_name)
 	// I wish I didn't have to instance the game modes in order to look up
 	// their information, but it is the only way (at least that I know of).
-	for (var/T in (typesof(/datum/game_mode) - /datum/game_mode))
-		var/datum/game_mode/M = new T()
+	for (var/game_mode in gamemode_cache)
+		var/datum/game_mode/M = gamemode_cache[game_mode]
 		if (M.config_tag && M.config_tag == mode_name)
+			M.create_antagonists()
 			return M
-		del(M)
-	return new /datum/game_mode/extended()
+	return gamemode_cache["extended"]
 
 /datum/configuration/proc/get_runnable_modes()
 	var/list/datum/game_mode/runnable_modes = new
-	for (var/T in (typesof(/datum/game_mode) - /datum/game_mode))
-		var/datum/game_mode/M = new T()
-		//world << "DEBUG: [T], tag=[M.config_tag], prob=[probabilities[M.config_tag]]"
+	for (var/game_mode in gamemode_cache)
+		var/datum/game_mode/M = gamemode_cache[game_mode]
 		if (!(M.config_tag in modes))
-			del(M)
 			continue
 		if (probabilities[M.config_tag]<=0)
-			del(M)
 			continue
 		if (M.can_start())
 			runnable_modes[M] = probabilities[M.config_tag]

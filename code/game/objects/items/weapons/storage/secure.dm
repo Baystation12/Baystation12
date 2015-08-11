@@ -23,9 +23,9 @@
 	var/l_hacking = 0
 	var/emagged = 0
 	var/open = 0
-	w_class = 3.0
+	w_class = 3
 	max_w_class = 2
-	max_combined_w_class = 14
+	max_storage_space = 14
 
 	examine(mob/user)
 		if(..(user, 1))

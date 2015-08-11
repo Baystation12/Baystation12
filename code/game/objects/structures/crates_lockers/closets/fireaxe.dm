@@ -2,7 +2,7 @@
 /obj/structure/closet/fireaxecabinet
 	name = "fire axe cabinet"
 	desc = "There is small label that reads \"For Emergency use only\" along with details for safe use of the axe. As if."
-	var/obj/item/weapon/twohanded/fireaxe/fireaxe
+	var/obj/item/weapon/material/twohanded/fireaxe/fireaxe
 	icon_state = "fireaxe1000"
 	icon_closed = "fireaxe1000"
 	icon_opened = "fireaxe1100"
@@ -16,7 +16,7 @@
 
 	New()
 		..()
-		fireaxe = new /obj/item/weapon/twohanded/fireaxe(src)
+		fireaxe = new /obj/item/weapon/material/twohanded/fireaxe(src)
 
 	attackby(var/obj/item/O as obj, var/mob/user as mob)  //Marker -Agouri
 		//..() //That's very useful, Erro
@@ -55,13 +55,13 @@
 						src.localopened = 1
 				update_icon()
 			return
-		if (istype(O, /obj/item/weapon/twohanded/fireaxe) && src.localopened)
+		if (istype(O, /obj/item/weapon/material/twohanded/fireaxe) && src.localopened)
 			if(!fireaxe)
 				if(O:wielded)
 					user << "\red Unwield the axe first."
 					return
 				fireaxe = O
-				user.drop_item(O)
+				user.remove_from_mob(O)
 				src.contents += O
 				user << "\blue You place the fire axe back in the [src.name]."
 				update_icon()

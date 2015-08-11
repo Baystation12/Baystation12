@@ -6,10 +6,10 @@
 	w_class = 2
 	anchored = 0
 
-	matter = list("metal" = 700,"glass" = 300)
+	matter = list(DEFAULT_WALL_MATERIAL = 700,"glass" = 300)
 
 	//	Motion, EMP-Proof, X-Ray
-	var/list/obj/item/possible_upgrades = list(/obj/item/device/assembly/prox_sensor, /obj/item/stack/sheet/mineral/osmium, /obj/item/weapon/stock_parts/scanning_module)
+	var/list/obj/item/possible_upgrades = list(/obj/item/device/assembly/prox_sensor, /obj/item/stack/material/osmium, /obj/item/weapon/stock_parts/scanning_module)
 	var/list/upgrades = list()
 	var/state = 0
 	var/busy = 0
@@ -78,7 +78,7 @@
 			if(isscrewdriver(W))
 				playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 
-				var/input = strip_html(input(usr, "Which networks would you like to connect this camera to? Separate networks with a comma. No Spaces!\nFor example: SS13,Security,Secret ", "Set Network", "SS13"))
+				var/input = sanitize(input(usr, "Which networks would you like to connect this camera to? Separate networks with a comma. No Spaces!\nFor example: Exodus,Security,Secret ", "Set Network", "Exodus"))
 				if(!input)
 					usr << "No input found please hang up and try your call again."
 					return
@@ -90,7 +90,7 @@
 
 				var/area/camera_area = get_area(src)
 				var/temptag = "[sanitize(camera_area.name)] ([rand(1, 999)])"
-				input = strip_html(input(usr, "How would you like to name the camera?", "Set Camera Name", temptag))
+				input = sanitizeSafe(input(usr, "How would you like to name the camera?", "Set Camera Name", temptag), MAX_NAME_LEN)
 
 				state = 4
 				var/obj/machinery/camera/C = new(src.loc)
@@ -125,7 +125,7 @@
 	if(is_type_in_list(W, possible_upgrades) && !is_type_in_list(W, upgrades)) // Is a possible upgrade and isn't in the camera already.
 		user << "You attach \the [W] into the assembly inner circuits."
 		upgrades += W
-		user.drop_item(W)
+		user.remove_from_mob(W)
 		W.loc = src
 		return
 

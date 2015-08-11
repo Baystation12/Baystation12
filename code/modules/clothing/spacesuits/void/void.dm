@@ -55,6 +55,16 @@
 	//Inbuilt devices.
 	var/obj/item/clothing/shoes/magboots/boots = null // Deployable boots, if any.
 	var/obj/item/clothing/head/helmet/helmet = null   // Deployable helmet, if any.
+	var/obj/item/weapon/tank/tank = null              // Deployable tank, if any.
+
+/obj/item/clothing/suit/space/void/examine(user)
+	..(user)
+	var/list/part_list = new
+	for(var/obj/item/I in list(helmet,boots,tank))
+		part_list += "\a [I]"
+	user << "\The [src] has [english_list(part_list)] installed."
+	if(tank && in_range(src,user))
+		user << "<span class='notice'>The wrist-mounted pressure gauge reads [max(round(tank.air_contents.return_pressure()),0)] kPa remaining in \the [tank].</span>"
 
 /obj/item/clothing/suit/space/void/refit_for_species(var/target_species)
 	..()
@@ -73,6 +83,10 @@
 	if(H.wear_suit != src)
 		return
 
+	if(boots)
+		if (H.equip_to_slot_if_possible(boots, slot_shoes))
+			boots.canremove = 0
+
 	if(helmet)
 		if(H.head)
 			M << "You are unable to deploy your suit's helmet as \the [H.head] is in the way."
@@ -80,12 +94,13 @@
 			M << "Your suit's helmet deploys with a hiss."
 			helmet.canremove = 0
 
-	if(boots)
-		if(H.shoes)
-			M << "You are unable to deploy your suit's magboots as \the [H.shoes] are in the way."
-		else if (H.equip_to_slot_if_possible(boots, slot_shoes))
-			M << "Your suit's boots deploy with a hiss."
-			boots.canremove = 0
+	if(tank)
+		if(H.s_store) //In case someone finds a way.
+			M << "Alarmingly, the valve on your suit's installed tank fails to engage."
+		else if (H.equip_to_slot_if_possible(tank, slot_s_store))
+			M << "The valve on your suit's installed tank safely engages."
+			tank.canremove = 0
+
 
 /obj/item/clothing/suit/space/void/dropped()
 	..()
@@ -93,20 +108,24 @@
 	var/mob/living/carbon/human/H
 
 	if(helmet)
+		helmet.canremove = 1
 		H = helmet.loc
 		if(istype(H))
 			if(helmet && H.head == helmet)
-				helmet.canremove = 1
 				H.drop_from_inventory(helmet)
 				helmet.loc = src
 
 	if(boots)
+		boots.canremove = 1
 		H = boots.loc
 		if(istype(H))
 			if(boots && H.shoes == boots)
-				boots.canremove = 1
 				H.drop_from_inventory(boots)
 				boots.loc = src
+
+	if(tank)
+		tank.canremove = 1
+		tank.loc = src
 
 /obj/item/clothing/suit/space/void/verb/toggle_helmet()
 
@@ -127,37 +146,68 @@
 	if(H.wear_suit != src) return
 
 	if(H.head == helmet)
-		H << "\blue You retract your suit helmet."
+		H << "<span class='notice'>You retract your suit helmet.</span>"
 		helmet.canremove = 1
 		H.drop_from_inventory(helmet)
 		helmet.loc = src
 	else
 		if(H.head)
-			H << "<span class='danger'>You cannot deploy your helmet while wearing another helmet.</span>"
+			H << "<span class='danger'>You cannot deploy your helmet while wearing \the [H.head].</span>"
 			return
 		if(H.equip_to_slot_if_possible(helmet, slot_head))
 			helmet.pickup(H)
 			helmet.canremove = 0
-			H << "<font color='blue'><b>You deploy your suit helmet, sealing you off from the world.</b></font>"
+			H << "<span class='info'>You deploy your suit helmet, sealing you off from the world.</span>"
 	helmet.update_light(H)
+
+/obj/item/clothing/suit/space/void/verb/eject_tank()
+
+	set name = "Eject Voidsuit Tank"
+	set category = "Object"
+	set src in usr
+
+	if(!istype(src.loc,/mob/living)) return
+
+	if(!tank)
+		usr << "There is no tank inserted."
+		return
+
+	var/mob/living/carbon/human/H = usr
+
+	if(!istype(H)) return
+	if(H.stat) return
+	if(H.wear_suit != src) return
+
+	H << "<span class='info'>You press the emergency release, ejecting \the [tank] from your suit.</span>"
+	tank.canremove = 1
+	H.drop_from_inventory(tank)
+	src.tank = null
 
 /obj/item/clothing/suit/space/void/attackby(obj/item/W as obj, mob/user as mob)
 
 	if(!istype(user,/mob/living)) return
 
 	if(istype(src.loc,/mob/living))
-		user << "<span class='danger'>How do you propose to modify a hardsuit while it is being worn?</span>"
+		user << "<span class='danger'>How do you propose to modify a voidsuit while it is being worn?</span>"
 		return
 
 	if(istype(W,/obj/item/weapon/screwdriver))
-		if(helmet)
-			user << "You detatch \the [helmet] from \the [src]'s helmet mount."
-			helmet.loc = get_turf(src)
-			src.helmet = null
-		else if (boots)
-			user << "You detatch \the [boots] from \the [src]'s boot mounts."
-			boots.loc = get_turf(src)
-			src.boots = null
+		if(helmet || boots || tank)
+			var/choice = input("What component would you like to remove?") as null|anything in list(helmet,boots,tank)
+			if(!choice) return
+
+			if(choice == tank)	//No, a switch doesn't work here. Sorry. ~Techhead
+				user << "You pop \the [tank] out of \the [src]'s storage compartment."
+				tank.loc = get_turf(src)
+				src.tank = null
+			else if(choice == helmet)
+				user << "You detatch \the [helmet] from \the [src]'s helmet mount."
+				helmet.loc = get_turf(src)
+				src.helmet = null
+			else if(choice == boots)
+				user << "You detatch \the [boots] from \the [src]'s boot mounts."
+				boots.loc = get_turf(src)
+				src.boots = null
 		else
 			user << "\The [src] does not have anything installed."
 		return
@@ -178,6 +228,17 @@
 			user.drop_item()
 			W.loc = src
 			boots = W
+		return
+	else if(istype(W,/obj/item/weapon/tank))
+		if(tank)
+			user << "\The [src] already has an airtank installed."
+		else if(istype(W,/obj/item/weapon/tank/phoron))
+			user << "\The [W] cannot be inserted into \the [src]'s storage compartment."
+		else
+			user << "You insert \the [W] into \the [src]'s storage compartment."
+			user.drop_item()
+			W.loc = src
+			tank = W
 		return
 
 	..()

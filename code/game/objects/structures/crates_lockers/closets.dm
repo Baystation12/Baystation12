@@ -24,9 +24,36 @@
 
 /obj/structure/closet/initialize()
 	if(!opened)		// if closed, any item at the crate's loc is put in the contents
-		for(var/obj/item/I in src.loc)
+		var/obj/item/I
+		for(I in src.loc)
 			if(I.density || I.anchored || I == src) continue
 			I.loc = src
+		// adjust locker size to hold all items with 5 units of free store room
+		var/content_size = 0
+		for(I in src.contents)
+			content_size += Ceiling(I.w_class/2)
+		if(content_size > storage_capacity-5)
+			storage_capacity = content_size + 5
+
+
+/obj/structure/closet/examine(mob/user)
+	if(..(user, 1) && !opened)
+		var/content_size = 0
+		for(var/obj/item/I in src.contents)
+			if(!I.anchored)
+				content_size += Ceiling(I.w_class/2)
+		if(!content_size)
+			user << "It is empty."
+		else if(storage_capacity > content_size*4)
+			user << "It is barely filled."
+		else if(storage_capacity > content_size*2)
+			user << "It is less than half full."
+		else if(storage_capacity > content_size)
+			user << "There is still some free space."
+		else
+			user << "It is full."
+
+
 
 /obj/structure/closet/alter_health()
 	return get_turf(src)
@@ -146,30 +173,33 @@
 			for(var/atom/movable/A as mob|obj in src)//pulls everything out of the locker and hits it with an explosion
 				A.loc = src.loc
 				A.ex_act(severity++)
-			del(src)
+			qdel(src)
 		if(2)
 			if(prob(50))
 				for (var/atom/movable/A as mob|obj in src)
 					A.loc = src.loc
 					A.ex_act(severity++)
-				del(src)
+				qdel(src)
 		if(3)
 			if(prob(5))
 				for(var/atom/movable/A as mob|obj in src)
 					A.loc = src.loc
 					A.ex_act(severity++)
-				del(src)
+				qdel(src)
+
+/obj/structure/closet/proc/damage(var/damage)
+	health -= damage
+	if(health <= 0)
+		for(var/atom/movable/A in src)
+			A.loc = src.loc
+		qdel(src)
 
 /obj/structure/closet/bullet_act(var/obj/item/projectile/Proj)
 	if(!(Proj.damage_type == BRUTE || Proj.damage_type == BURN))
 		return
 
-	health -= Proj.damage
 	..()
-	if(health <= 0)
-		for(var/atom/movable/A as mob|obj in src)
-			A.loc = src.loc
-		del(src)
+	damage(Proj.damage)
 
 	return
 
@@ -178,14 +208,14 @@
 	if(prob(75))
 		for(var/atom/movable/A as mob|obj in src)
 			A.loc = src.loc
-		del(src)
+		qdel(src)
 
 /obj/structure/closet/meteorhit(obj/O as obj)
 	if(O.icon_state == "flaming")
 		for(var/mob/M in src)
 			M.meteorhit(O)
 		src.dump_contents()
-		del(src)
+		qdel(src)
 
 /obj/structure/closet/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(src.opened)
@@ -197,12 +227,15 @@
 		if(istype(W, /obj/item/weapon/weldingtool))
 			var/obj/item/weapon/weldingtool/WT = W
 			if(!WT.remove_fuel(0,user))
-				user << "<span class='notice'>You need more welding fuel to complete this task.</span>"
-				return
-			new /obj/item/stack/sheet/metal(src.loc)
+				if(!WT.isOn())
+					return
+				else
+					user << "<span class='notice'>You need more welding fuel to complete this task.</span>"
+					return
+			new /obj/item/stack/material/steel(src.loc)
 			for(var/mob/M in viewers(src))
 				M.show_message("<span class='notice'>\The [src] has been cut apart by [user] with \the [WT].</span>", 3, "You hear welding.", 2)
-			del(src)
+			qdel(src)
 			return
 		if(isrobot(user))
 			return
@@ -216,8 +249,11 @@
 	else if(istype(W, /obj/item/weapon/weldingtool))
 		var/obj/item/weapon/weldingtool/WT = W
 		if(!WT.remove_fuel(0,user))
-			user << "<span class='notice'>You need more welding fuel to complete this task.</span>"
-			return
+			if(!WT.isOn())
+				return
+			else
+				user << "<span class='notice'>You need more welding fuel to complete this task.</span>"
+				return
 		src.welded = !src.welded
 		src.update_icon()
 		for(var/mob/M in viewers(src))
@@ -248,6 +284,10 @@
 		user.show_viewers("<span class='danger'>[user] stuffs [O] into [src]!</span>")
 	src.add_fingerprint(user)
 	return
+
+/obj/structure/closet/attack_ai(mob/user)
+	if(istype(user, /mob/living/silicon/robot) && Adjacent(user)) // Robots can open/close it, but not the AI.
+		attack_hand(user)
 
 /obj/structure/closet/relaymove(mob/user as mob)
 	if(user.stat || !isturf(src.loc))
@@ -298,9 +338,10 @@
 /obj/structure/closet/attack_generic(var/mob/user, var/damage, var/attack_message = "destroys", var/wallbreaker)
 	if(!damage || !wallbreaker)
 		return
+	user.do_attack_animation(src)
 	visible_message("<span class='danger'>[user] [attack_message] the [src]!</span>")
 	dump_contents()
-	spawn(1) del(src)
+	spawn(1) qdel(src)
 	return 1
 
 /obj/structure/closet/proc/req_breakout()
@@ -322,25 +363,25 @@
 	escapee.next_move = world.time + 100
 	escapee.last_special = world.time + 100
 	escapee << "<span class='warning'>You lean on the back of \the [src] and start pushing the door open. (this will take about [breakout_time] minutes)</span>"
-	
+
 	visible_message("<span class='danger'>The [src] begins to shake violently!</span>")
 
 	breakout = 1 //can't think of a better way to do this right now.
 	for(var/i in 1 to (6*breakout_time * 2)) //minutes * 6 * 5seconds * 2
 		playsound(src.loc, 'sound/effects/grillehit.ogg', 100, 1)
 		animate_shake()
-		
+
 		if(!do_after(escapee, 50)) //5 seconds
 			breakout = 0
 			return
-		if(!escapee || escapee.stat || escapee.loc != src) 
+		if(!escapee || escapee.stat || escapee.loc != src)
 			breakout = 0
 			return //closet/user destroyed OR user dead/unconcious OR user no longer in closet OR closet opened
 		//Perform the same set of checks as above for weld and lock status to determine if there is even still a point in 'resisting'...
 		if(!req_breakout())
 			breakout = 0
 			return
-	
+
 	//Well then break it!
 	breakout = 0
 	escapee << "<span class='warning'>You successfully break out!</span>"

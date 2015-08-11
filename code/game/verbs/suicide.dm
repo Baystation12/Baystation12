@@ -11,15 +11,7 @@
 		src << "You can't commit suicide before the game starts!"
 		return
 
-
-	var/permitted = 0
-	var/list/allowed = list("Syndicate","traitor","Wizard","Head Revolutionary","Cultist","Changeling")
-	for(var/T in allowed)
-		if(mind.special_role == T)
-			permitted = 1
-			break
-
-	if(!permitted)
+	if(!player_is_antag(mind))
 		message_admins("[ckey] has tried to suicide, but they were not permitted due to not being antagonist as human.", 1)
 		src << "No. Adminhelp if there is a legitimate reason."
 		return
@@ -109,33 +101,6 @@
 		spawn(50)
 			death(0)
 			suiciding = 0
-
-/mob/living/carbon/monkey/verb/suicide()
-	set hidden = 1
-
-	if (stat == 2)
-		src << "You're already dead!"
-		return
-
-	if (!ticker)
-		src << "You can't commit suicide before the game starts!"
-		return
-
-	if (suiciding)
-		src << "You're already committing suicide! Be patient!"
-		return
-
-	var/confirm = alert("Are you sure you want to commit suicide?", "Confirm Suicide", "Yes", "No")
-
-	if(confirm == "Yes")
-		if(!canmove || restrained())
-			src << "You can't commit suicide whilst restrained! ((You can type Ghost instead however.))"
-			return
-		suiciding = 1
-		//instead of killing them instantly, just put them at -175 health and let 'em gasp for a while
-		viewers(src) << "\red <b>[src] is attempting to bite \his tongue. It looks like \he's trying to commit suicide.</b>"
-		adjustOxyLoss(max(175- getToxLoss() - getFireLoss() - getBruteLoss() - getOxyLoss(), 0))
-		updatehealth()
 
 /mob/living/silicon/ai/verb/suicide()
 	set hidden = 1

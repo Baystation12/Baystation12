@@ -41,9 +41,9 @@
 /obj/item/weapon/arrow/rod/removed(mob/user)
 	if(throwforce == 15) // The rod has been superheated - we don't want it to be useable when removed from the bow.
 		user  << "[src] shatters into a scattering of overstressed metal shards as it leaves the crossbow."
-		var/obj/item/weapon/shard/shrapnel/S = new()
+		var/obj/item/weapon/material/shard/shrapnel/S = new()
 		S.loc = get_turf(src)
-		src.Del()
+		qdel(src)
 
 /obj/item/weapon/gun/launcher/crossbow
 	name = "powered crossbow"
@@ -105,14 +105,14 @@
 	current_user = user
 	user.visible_message("[user] begins to draw back the string of [src].","<span class='notice'>You begin to draw back the string of [src].</span>")
 	tension = 1
-	
+
 	while(bolt && tension && loc == current_user)
 		if(!do_after(user, 25)) //crossbow strings don't just magically pull back on their own.
 			user.visible_message("[usr] stops drawing and relaxes the string of [src].","<span class='warning'>You stop drawing back and relax the string of [src].</span>")
 			tension = 0
 			update_icon()
 			return
-		
+
 		//double check that the user hasn't removed the bolt in the meantime
 		if(!(bolt && tension && loc == current_user))
 			return
@@ -124,7 +124,7 @@
 			tension = max_tension
 			usr << "[src] clunks as you draw the string to its maximum tension!"
 			return
-		
+
 		user.visible_message("[usr] draws back the string of [src]!","<span class='notice'>You continue drawing back the string of [src]!</span>")
 
 /obj/item/weapon/gun/launcher/crossbow/proc/increase_tension(var/mob/user as mob)
@@ -254,9 +254,9 @@
 			else
 				user << "<span class='notice'>You need at least five segments of cable coil to complete this task.</span>"
 			return
-	else if(istype(W,/obj/item/stack/sheet/mineral/plastic))
+	else if(istype(W,/obj/item/stack/material) && W.get_material_name() == "plastic")
 		if(buildstate == 3)
-			var/obj/item/stack/sheet/mineral/plastic/P = W
+			var/obj/item/stack/material/P = W
 			if(P.use(3))
 				user << "<span class='notice'>You assemble and install a heavy plastic lath onto the crossbow.</span>"
 				buildstate++
@@ -268,7 +268,7 @@
 		if(buildstate == 5)
 			user << "<span class='notice'>You secure the crossbow's various parts.</span>"
 			new /obj/item/weapon/gun/launcher/crossbow(get_turf(src))
-			del(src)
+			qdel(src)
 		return
 	else
 		..()

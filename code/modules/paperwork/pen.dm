@@ -20,7 +20,7 @@
 	w_class = 1.0
 	throw_speed = 7
 	throw_range = 15
-	matter = list("metal" = 10)
+	matter = list(DEFAULT_WALL_MATERIAL = 10)
 	var/colour = "black"	//what colour the ink is!
 	pressure_resistance = 2
 
@@ -51,66 +51,54 @@
 	msg_admin_attack("[user.name] ([user.ckey]) Used the [name] to stab [M.name] ([M.ckey]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
 	return
 
+/*
+ * Reagent pens
+ */
+
+/obj/item/weapon/pen/reagent
+	flags = OPENCONTAINER
+	slot_flags = SLOT_BELT
+
+/obj/item/weapon/pen/reagent/New()
+	..()
+	create_reagents(30)
+
+/obj/item/weapon/pen/reagent/attack(mob/living/M as mob, mob/user as mob)
+
+	if(!istype(M))
+		return
+
+	. = ..()
+
+	if(M.can_inject(user,1))
+		if(reagents.total_volume)
+			if(M.reagents)
+				var/contained_reagents = reagents.get_reagents()
+				var/trans = reagents.trans_to_mob(M, 30, CHEM_BLOOD)
+				admin_inject_log(user, M, src, contained_reagents, trans)
 
 /*
  * Sleepy Pens
  */
-/obj/item/weapon/pen/sleepypen
+/obj/item/weapon/pen/reagent/sleepy
 	desc = "It's a black ink pen with a sharp point and a carefully engraved \"Waffle Co.\""
-	flags = OPENCONTAINER
-	slot_flags = SLOT_BELT
 	origin_tech = "materials=2;syndicate=5"
 
-
-/obj/item/weapon/pen/sleepypen/New()
-	var/datum/reagents/R = new/datum/reagents(30) //Used to be 300
-	reagents = R
-	R.my_atom = src
-	R.add_reagent("chloralhydrate", 22)	//Used to be 100 sleep toxin//30 Chloral seems to be fatal, reducing it to 22./N
+/obj/item/weapon/pen/reagent/sleepy/New()
 	..()
-	return
-
-
-/obj/item/weapon/pen/sleepypen/attack(mob/M as mob, mob/user as mob)
-	if(!(istype(M,/mob)))
-		return
-	..()
-	if(reagents.total_volume)
-		if(M.reagents) reagents.trans_to(M, 50) //used to be 150
-	return
+	reagents.add_reagent("chloralhydrate", 22)	//Used to be 100 sleep toxin//30 Chloral seems to be fatal, reducing it to 22./N
 
 
 /*
  * Parapens
  */
- /obj/item/weapon/pen/paralysis
-	flags = OPENCONTAINER
-	slot_flags = SLOT_BELT
+ /obj/item/weapon/pen/reagent/paralysis
 	origin_tech = "materials=2;syndicate=5"
 
-
-/obj/item/weapon/pen/paralysis/attack(mob/living/M as mob, mob/user as mob)
-
-	if(!(istype(M,/mob)))
-		return
-
+/obj/item/weapon/pen/reagent/paralysis/New()
 	..()
-
-
-	if(M.can_inject(user,1))
-		if(reagents.total_volume)
-			if(M.reagents) reagents.trans_to(M, 50)
-	return
-
-
-/obj/item/weapon/pen/paralysis/New()
-	var/datum/reagents/R = new/datum/reagents(50)
-	reagents = R
-	R.my_atom = src
-	R.add_reagent("zombiepowder", 10)
-	R.add_reagent("cryptobiolin", 15)
-	..()
-	return
+	reagents.add_reagent("zombiepowder", 10)
+	reagents.add_reagent("cryptobiolin", 15)
 
 /*
  * Chameleon pen
@@ -130,7 +118,7 @@
 	if(new_signature)
 		signature = new_signature
 	*/
-	signature = trim_strip_html_properly(input("Enter new signature. Leave blank for 'Anonymous'", "New Signature", signature))
+	signature = sanitize(input("Enter new signature. Leave blank for 'Anonymous'", "New Signature", signature))
 
 /obj/item/weapon/pen/proc/get_signature(var/mob/user)
 	return (user && user.real_name) ? user.real_name : "Anonymous"
@@ -167,3 +155,28 @@
 				colour = COLOR_BLACK
 		usr << "<span class='info'>You select the [lowertext(selected_type)] ink container.</span>"
 
+
+/*
+ * Crayons
+ */
+
+/obj/item/weapon/pen/crayon
+	name = "crayon"
+	desc = "A colourful crayon. Please refrain from eating it or putting it in your nose."
+	icon = 'icons/obj/crayons.dmi'
+	icon_state = "crayonred"
+	w_class = 1.0
+	attack_verb = list("attacked", "coloured")
+	colour = "#FF0000" //RGB
+	var/shadeColour = "#220000" //RGB
+	var/uses = 30 //0 for unlimited uses
+	var/instant = 0
+	var/colourName = "red" //for updateIcon purposes
+
+	suicide_act(mob/user)
+		viewers(user) << "\red <b>[user] is jamming the [src.name] up \his nose and into \his brain. It looks like \he's trying to commit suicide.</b>"
+		return (BRUTELOSS|OXYLOSS)
+
+	New()
+		name = "[colourName] crayon"
+		..()

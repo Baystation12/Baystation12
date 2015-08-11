@@ -28,9 +28,9 @@
 	initialized = 1
 	return 1
 
-/obj/effect/landmark/zcontroller/Del()
+/obj/effect/landmark/zcontroller/Destroy()
 	processing_objects.Remove(src)
-	return
+	return ..()
 
 /obj/effect/landmark/zcontroller/process()
 	if (world.time > fast_time)
@@ -83,16 +83,6 @@
 	var/list/z_overlays = list()
 
 /turf/New()
-	..()
-
-	var/turf/controller = locate(1, 1, z)
-	for(var/obj/effect/landmark/zcontroller/c in controller)
-		if(c.initialized)
-			var/list/turf = list()
-			turf += src
-			c.add(turf,3,1)
-
-/turf/space/New()
 	..()
 
 	var/turf/controller = locate(1, 1, z)

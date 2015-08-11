@@ -6,10 +6,9 @@
 		var/list/turf/simulated/floor/turfs = list() //list of all the empty floor turfs in the hallway areas
 		for(var/areapath in typesof(/area/hallway))
 			var/area/A = locate(areapath)
-			for(var/area/B in A.related)
-				for(var/turf/simulated/floor/F in B.contents)
-					if(!F.contents.len)
-						turfs += F
+			for(var/turf/simulated/floor/F in A.contents)
+				if(turf_clear(F))
+					turfs += F
 
 		if(turfs.len) //Pick a turf to spawn at if we can
 			var/turf/simulated/floor/T = pick(turfs)
@@ -25,6 +24,8 @@
 			vine.process()
 
 			message_admins("<span class='notice'>Event: Spacevines spawned at [T.loc] ([T.x],[T.y],[T.z])</span>")
+			return
+		message_admins("<span class='notice'>Event: Spacevines failed to find a viable turf.</span>")
 
 /obj/effect/dead_plant
 	anchored = 1
@@ -33,13 +34,13 @@
 	color = DEAD_PLANT_COLOUR
 
 /obj/effect/dead_plant/attack_hand()
-	del(src)
+	qdel(src)
 
 /obj/effect/dead_plant/attackby()
 	..()
 	for(var/obj/effect/plant/neighbor in range(1))
 		neighbor.update_neighbors()
-	del(src)
+	qdel(src)
 
 /obj/effect/plant
 	name = "plant"
@@ -57,7 +58,6 @@
 	var/growth_threshold = 0
 	var/growth_type = 0
 	var/max_growth = 0
-
 	var/list/neighbors = list()
 	var/obj/effect/plant/parent
 	var/datum/seed/seed
@@ -70,7 +70,7 @@
 	var/last_tick = 0
 	var/obj/machinery/portable_atmospherics/hydroponics/soil/invisible/plant
 
-/obj/effect/plant/Del()
+/obj/effect/plant/Destroy()
 	if(plant_controller)
 		plant_controller.remove_plant(src)
 	for(var/obj/effect/plant/neighbor in range(1,src))
@@ -91,14 +91,14 @@
 		sleep(250) // ugly hack, should mean roundstart plants are fine.
 	if(!plant_controller)
 		world << "<span class='danger'>Plant controller does not exist and [src] requires it. Aborting.</span>"
-		del(src)
+		qdel(src)
 		return
 
 	if(!istype(newseed))
 		newseed = plant_controller.seeds[DEFAULT_SEED]
 	seed = newseed
 	if(!seed)
-		del(src)
+		qdel(src)
 		return
 
 	name = seed.display_name
@@ -157,14 +157,13 @@
 		color = icon_colour
 	// Apply colour and light from seed datum.
 	if(seed.get_trait(TRAIT_BIOLUM))
-		SetLuminosity(1+round(seed.get_trait(TRAIT_POTENCY)/20))
+		var/clr
 		if(seed.get_trait(TRAIT_BIOLUM_COLOUR))
-			l_color = seed.get_trait(TRAIT_BIOLUM_COLOUR)
-		else
-			l_color = null
+			clr = seed.get_trait(TRAIT_BIOLUM_COLOUR)
+		set_light(1+round(seed.get_trait(TRAIT_POTENCY)/20), l_color = clr)
 		return
 	else
-		SetLuminosity(0)
+		set_light(0)
 
 /obj/effect/plant/proc/refresh_icon()
 	var/growth = min(max_growth,round(health/growth_threshold))
@@ -197,16 +196,19 @@
 		layer = 3
 		density = 0
 
-/obj/effect/plant/proc/calc_dir(turf/location = loc)
+/obj/effect/plant/proc/calc_dir()
 	set background = 1
+	var/turf/T = get_turf(src)
+	if(!istype(T)) return
+
 	var/direction = 16
 
 	for(var/wallDir in cardinal)
-		var/turf/newTurf = get_step(location,wallDir)
+		var/turf/newTurf = get_step(T,wallDir)
 		if(newTurf.density)
 			direction |= wallDir
 
-	for(var/obj/effect/plant/shroom in location)
+	for(var/obj/effect/plant/shroom in T.contents)
 		if(shroom == src)
 			continue
 		if(shroom.floor) //special
@@ -244,6 +246,11 @@
 		if(!seed)
 			user << "<span class='warning'>There is nothing to take a sample from.</span>"
 			return
+		if(sampled)
+			user << "<span class='danger'>You cannot take another sample from \the [src].</span>"
+			return
+		if(prob(70))
+			sampled = 1
 		seed.harvest(user,0,1)
 		health -= (rand(3,5)*5)
 		sampled = 1

@@ -19,29 +19,23 @@
 //	reagents.add_reagent("tricordrazine", 30)
 //	return
 
-/obj/item/weapon/reagent_containers/hypospray/attack(mob/M as mob, mob/user as mob)
+/obj/item/weapon/reagent_containers/hypospray/attack(mob/living/M as mob, mob/user as mob)
 	if(!reagents.total_volume)
-		user << "\red [src] is empty."
+		user << "<span class='warning'>[src] is empty.</span>"
 		return
-	if (!( istype(M, /mob) ))
+	if (!istype(M))
 		return
-	if (reagents.total_volume)
-		user << "\blue You inject [M] with [src]."
-		M << "\red You feel a tiny prick!"
+	if(!M.can_inject(user, 1))
+		return
 
-		src.reagents.reaction(M, INGEST)
-		if(M.reagents)
+	user << "<span class='notice'>You inject [M] with [src].</span>"
+	M << "<span class='notice'>You feel a tiny prick!</span>"
 
-			var/list/injected = list()
-			for(var/datum/reagent/R in src.reagents.reagent_list)
-				injected += R.name
-			var/contained = english_list(injected)
-			M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been injected with [src.name] by [user.name] ([user.ckey]). Reagents: [contained]</font>")
-			user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [src.name] to inject [M.name] ([M.key]). Reagents: [contained]</font>")
-			msg_admin_attack("[user.name] ([user.ckey]) injected [M.name] ([M.key]) with [src.name]. Reagents: [contained] (INTENT: [uppertext(user.a_intent)]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
-
-			var/trans = reagents.trans_to(M, amount_per_transfer_from_this)
-			user << "\blue [trans] units injected. [reagents.total_volume] units remaining in [src]."
+	if(M.reagents)
+		var/contained = reagentlist()
+		var/trans = reagents.trans_to_mob(M, amount_per_transfer_from_this, CHEM_BLOOD)
+		admin_inject_log(user, M, src, contained, trans)
+		user << "<span class='notice'>[trans] units injected. [reagents.total_volume] units remaining in \the [src].</span>"
 
 	return
 
@@ -75,6 +69,6 @@
 /obj/item/weapon/reagent_containers/hypospray/autoinjector/examine(mob/user)
 	..(user)
 	if(reagents && reagents.reagent_list.len)
-		user << "\blue It is currently loaded."
+		user << "<span class='notice'>It is currently loaded.</span>"
 	else
-		user << "\blue It is spent."
+		user << "<span class='notice'>It is spent.</span>"

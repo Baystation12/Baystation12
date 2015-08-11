@@ -9,7 +9,8 @@
 	force = 10
 	flags =  CONDUCT
 	slot_flags = SLOT_BACK
-	charge_cost = 100
+	charge_cost = 300
+	max_shots = 10
 	projectile_type = /obj/item/projectile/ion
 
 /obj/item/weapon/gun/energy/ionrifle/emp_act(severity)
@@ -29,7 +30,7 @@
 	item_state = "decloner"
 	fire_sound = 'sound/weapons/pulse3.ogg'
 	origin_tech = "combat=5;materials=4;powerstorage=3"
-	charge_cost = 100
+	max_shots = 10
 	projectile_type = /obj/item/projectile/energy/declone
 
 /obj/item/weapon/gun/energy/floragun
@@ -39,28 +40,16 @@
 	item_state = "floramut"
 	fire_sound = 'sound/effects/stealthoff.ogg'
 	charge_cost = 100
+	max_shots = 10
 	projectile_type = /obj/item/projectile/energy/floramut
 	origin_tech = "materials=2;biotech=3;powerstorage=3"
 	modifystate = "floramut"
 	self_recharge = 1
-	var/mode = 0 //0 = mutate, 1 = yield boost
 
-/obj/item/weapon/gun/energy/floragun/attack_self(mob/living/user as mob)
-	switch(mode)
-		if(0)
-			mode = 1
-			charge_cost = 100
-			user << "<span class='warning'>The [src.name] is now set to increase yield.</span>"
-			projectile_type = /obj/item/projectile/energy/florayield
-			modifystate = "florayield"
-		if(1)
-			mode = 0
-			charge_cost = 100
-			user << "<span class='warning'>The [src.name] is now set to induce mutations.</span>"
-			projectile_type = /obj/item/projectile/energy/floramut
-			modifystate = "floramut"
-	update_icon()
-	update_held_icon()
+	firemodes = list(
+		list(name="induce mutations", projectile_type=/obj/item/projectile/energy/floramut, modifystate="floramut"),
+		list(name="increase yield", projectile_type=/obj/item/projectile/energy/florayield, modifystate="florayield"),
+		)
 
 /obj/item/weapon/gun/energy/floragun/afterattack(obj/target, mob/user, adjacent_flag)
 	//allow shooting into adjacent hydrotrays regardless of intent
@@ -78,7 +67,6 @@
 	slot_flags = SLOT_BELT|SLOT_BACK
 	w_class = 4
 	projectile_type = /obj/item/projectile/meteor
-	charge_cost = 100
 	cell_type = /obj/item/weapon/cell/potato
 	self_recharge = 1
 	recharge_time = 5 //Time it takes for shots to recharge (in ticks)
@@ -96,7 +84,7 @@
 
 /obj/item/weapon/gun/energy/mindflayer
 	name = "mind flayer"
-	desc = "A prototype weapon recovered from the ruins of Research-Station Epsilon."
+	desc = "A custom-built weapon of some kind."
 	icon_state = "xray"
 	projectile_type = /obj/item/projectile/beam/mindflayer
 	fire_sound = 'sound/weapons/Laser.ogg'
@@ -123,7 +111,7 @@
 	flags =  CONDUCT
 	slot_flags = SLOT_BACK
 	w_class = 4.0
-	charge_cost = 200
+	max_shots = 5
 	projectile_type = /obj/item/projectile/change
 	origin_tech = null
 	self_recharge = 1
@@ -140,7 +128,7 @@
 	name = "staff of animation"
 	desc = "An artefact that spits bolts of life-force which causes objects which are hit by it to animate and come to life! This magic doesn't affect machines."
 	projectile_type = /obj/item/projectile/animate
-	charge_cost = 100
+	max_shots = 10
 
 obj/item/weapon/gun/energy/staff/focus
 	name = "mental focus"
@@ -153,11 +141,11 @@ obj/item/weapon/gun/energy/staff/focus
 	/*
 	attack_self(mob/living/user as mob)
 		if(projectile_type == "/obj/item/projectile/forcebolt")
-			charge_cost = 200
+			charge_cost = 400
 			user << "<span class='warning'>The [src.name] will now strike a small area.</span>"
 			projectile_type = "/obj/item/projectile/forcebolt/strong"
 		else
-			charge_cost = 100
+			charge_cost = 200
 			user << "<span class='warning'>The [src.name] will now strike only a single person.</span>"
 			projectile_type = "/obj/item/projectile/forcebolt"
 	*/

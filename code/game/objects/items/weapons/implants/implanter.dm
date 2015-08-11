@@ -41,7 +41,7 @@
 					src.imp.implanted = 1
 					if (ishuman(M))
 						var/mob/living/carbon/human/H = M
-						var/datum/organ/external/affected = H.get_organ(user.zone_sel.selecting)
+						var/obj/item/organ/external/affected = H.get_organ(user.zone_sel.selecting)
 						affected.implants += src.imp
 						imp.part = affected
 
@@ -121,7 +121,7 @@
 		c.scanned = A
 		if(istype(A.loc,/mob/living/carbon/human))
 			var/mob/living/carbon/human/H = A.loc
-			H.u_equip(A)
+			H.remove_from_mob(A)
 		else if(istype(A.loc,/obj/item/weapon/storage))
 			var/obj/item/weapon/storage/S = A.loc
 			S.remove_from_storage(A)

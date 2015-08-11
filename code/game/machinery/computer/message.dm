@@ -4,6 +4,7 @@
 	name = "messaging monitor console"
 	desc = "Used to access and maintain data on messaging servers. Allows you to view PDA and request console messages."
 	icon_state = "comm_logs"
+	light_color = "#00b000"
 	var/hack_icon = "comm_logsc"
 	var/normal_icon = "comm_logs"
 	circuit = "/obj/item/weapon/circuitboard/message_monitor"
@@ -409,7 +410,7 @@
 
 					//Select Your Name
 					if("Sender")
-						customsender 	= input(usr, "Please enter the sender's name.") as text|null
+						customsender 	= sanitize(input(usr, "Please enter the sender's name.") as text|null)
 
 					//Select Receiver
 					if("Recepient")
@@ -425,12 +426,12 @@
 
 					//Enter custom job
 					if("RecJob")
-						customjob	 	= input(usr, "Please enter the sender's job.") as text|null
+						customjob	 	= sanitize(input(usr, "Please enter the sender's job.") as text|null)
 
 					//Enter message
 					if("Message")
 						custommessage	= input(usr, "Please enter your message.") as text|null
-						custommessage	= sanitize(copytext(custommessage, 1, MAX_MESSAGE_LEN))
+						custommessage	= sanitize(custommessage)
 
 					//Send message
 					if("Send")

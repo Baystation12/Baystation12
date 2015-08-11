@@ -7,10 +7,11 @@
 	//slot_flags = SLOT_EYES
 	//var/vision_flags = 0
 	//var/darkness_view = 0//Base human is 2
-	//var/invisa_view = 0
 	var/prescription = 0
 	var/toggleable = 0
+	var/off_state = "degoggles"
 	var/active = 1
+	var/activation_sound = 'sound/items/goggles_charge.ogg'
 	var/obj/screen/overlay = null
 	body_parts_covered = EYES
 
@@ -18,13 +19,15 @@
 	if(toggleable)
 		if(active)
 			active = 0
-			icon_state = "degoggles"
+			icon_state = off_state
 			user.update_inv_glasses()
 			usr << "You deactivate the optical matrix on the [src]."
 		else
 			active = 1
 			icon_state = initial(icon_state)
 			user.update_inv_glasses()
+			if(activation_sound)
+				usr << activation_sound
 			usr << "You activate the optical matrix on the [src]."
 
 /obj/item/clothing/glasses/meson
@@ -51,10 +54,17 @@
 	desc = "The goggles do nothing!"
 	icon_state = "purple"
 	item_state = "glasses"
+	toggleable = 1
+	icon_action_button = "action_science"
 
 /obj/item/clothing/glasses/science/New()
 	..()
 	overlay = global_hud.science
+
+/obj/item/clothing/glasses/science/scanners
+	name = "Scanning Goggles"
+	desc = "A very oddly shaped pair of goggles with bits of wire poking out the sides. A soft humming sound emanates from it."
+	icon_state = "uzenwa_sissra_1"
 
 /obj/item/clothing/glasses/night
 	name = "Night Vision Goggles"
@@ -63,6 +73,10 @@
 	item_state = "glasses"
 	origin_tech = "magnets=2"
 	darkness_view = 7
+	toggleable = 1
+	see_invisible = SEE_INVISIBLE_OBSERVER_NOLIGHTING
+	icon_action_button = "action_nvg"
+	off_state = "denight"
 
 /obj/item/clothing/glasses/night/New()
 	..()
@@ -208,8 +222,8 @@
 	item_state = "glasses"
 	origin_tech = "magnets=3"
 	toggleable = 1
+	icon_action_button = "action_thermal"
 	vision_flags = SEE_MOBS
-	invisa_view = 2
 
 	emp_act(severity)
 		if(istype(src.loc, /mob/living/carbon/human))
@@ -218,9 +232,11 @@
 			if(M.glasses == src)
 				M.eye_blind = 3
 				M.eye_blurry = 5
-				M.disabilities |= NEARSIGHTED
-				spawn(100)
-					M.disabilities &= ~NEARSIGHTED
+				// Don't cure being nearsighted
+				if(!(M.disabilities & NEARSIGHTED))
+					M.disabilities |= NEARSIGHTED
+					spawn(100)
+						M.disabilities &= ~NEARSIGHTED
 		..()
 
 /obj/item/clothing/glasses/thermal/New()
@@ -231,28 +247,30 @@
 	name = "Optical Meson Scanner"
 	desc = "Used for seeing walls, floors, and stuff through anything."
 	icon_state = "meson"
-	icon_action_button = "action_meson"
 	origin_tech = "magnets=3;syndicate=4"
 
-/obj/item/clothing/glasses/thermal/monocle
+/obj/item/clothing/glasses/thermal/plain
+	toggleable = 0
+	activation_sound = null
+	icon_action_button = ""
+
+/obj/item/clothing/glasses/thermal/plain/monocle
 	name = "Thermoncle"
 	desc = "A monocle thermal."
 	icon_state = "thermoncle"
 	flags = null //doesn't protect eyes because it's a monocle, duh
-	toggleable = 0
+
 	body_parts_covered = 0
 
-/obj/item/clothing/glasses/thermal/eyepatch
+/obj/item/clothing/glasses/thermal/plain/eyepatch
 	name = "Optical Thermal Eyepatch"
 	desc = "An eyepatch with built-in thermal optics"
 	icon_state = "eyepatch"
 	item_state = "eyepatch"
-	toggleable = 0
 	body_parts_covered = 0
 
-/obj/item/clothing/glasses/thermal/jensen
+/obj/item/clothing/glasses/thermal/plain/jensen
 	name = "Optical Thermal Implants"
 	desc = "A set of implantable lenses designed to augment your vision"
 	icon_state = "thermalimplants"
 	item_state = "syringe_kit"
-	toggleable = 0

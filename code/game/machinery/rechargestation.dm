@@ -11,13 +11,13 @@
 	var/obj/item/weapon/cell/cell = null
 	var/icon_update_tick = 0	// Used to rebuild the overlay only once every 10 ticks
 	var/charging = 0
-	
+
 	var/charging_power			// W. Power rating used for charging the cyborg. 120 kW if un-upgraded
 	var/restore_power_active	// W. Power drawn from APC when an occupant is charging. 40 kW if un-upgraded
 	var/restore_power_passive	// W. Power drawn from APC when idle. 7 kW if un-upgraded
 	var/weld_rate = 0			// How much brute damage is repaired per tick
 	var/wire_rate = 0			// How much burn damage is repaired per tick
-	
+
 	var/weld_power_use = 2300	// power used per point of brute damage repaired. 2.3 kW ~ about the same power usage of a handheld arc welder
 	var/wire_power_use = 500	// power used per point of burn damage repaired.
 
@@ -61,15 +61,15 @@
 	if(!(stat & NOPOWER))
 		// Calculating amount of power to draw
 		recharge_amount = (occupant ? restore_power_active : restore_power_passive) * CELLRATE
-		
+
 		recharge_amount = cell.give(recharge_amount)
 		use_power(recharge_amount / CELLRATE)
-	
+
 	if(icon_update_tick >= 10)
 		icon_update_tick = 0
 	else
 		icon_update_tick++
-	
+
 	if(occupant || recharge_amount)
 		update_icon()
 
@@ -77,7 +77,7 @@
 /obj/machinery/recharge_station/auto_use_power()
 	if(!(stat & NOPOWER))
 		return ..()
-	
+
 	if(!has_cell_power())
 		return 0
 	if(src.use_power == 1)
@@ -155,7 +155,7 @@
 	restore_power_passive = 5000 + 1000 * cap_rating
 	weld_rate = max(0, man_rating - 3)
 	wire_rate = max(0, man_rating - 5)
-	
+
 	desc = initial(desc)
 	desc += " Uses a dedicated internal power cell to deliver [charging_power]W when in use."
 	if(weld_rate)
@@ -184,7 +184,7 @@
 	if(stat & BROKEN)
 		icon_state = "borgcharger0"
 		return
-	
+
 	if(occupant)
 		if((stat & NOPOWER) && !has_cell_power())
 			icon_state = "borgcharger2"
@@ -192,9 +192,12 @@
 			icon_state = "borgcharger1"
 	else
 		icon_state = "borgcharger0"
-	
+
 	if(icon_update_tick == 0)
 		build_overlays()
+
+/obj/machinery/recharge_station/Bumped(var/mob/AM)
+	move_inside(AM)
 
 /obj/machinery/recharge_station/proc/go_out()
 	if(!(occupant))

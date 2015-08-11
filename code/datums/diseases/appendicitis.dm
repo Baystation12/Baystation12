@@ -46,7 +46,7 @@
 			H << "\red Your abdomen is a world of pain!"
 			H.Weaken(10)
 
-			var/datum/organ/external/groin = H.get_organ("groin")
+			var/obj/item/organ/external/groin = H.get_organ("groin")
 			var/datum/wound/W = new /datum/wound/internal_bleeding(20)
 			H.adjustToxLoss(25)
 			groin.wounds += W

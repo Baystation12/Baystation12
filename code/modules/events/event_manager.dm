@@ -165,14 +165,14 @@
 
 		html += "<div class='block'>"
 		html += "<h2>Running Events</h2>"
-		html += "Estimated times, affected by master controller delays."
+		html += "Estimated times, affected by process scheduler delays."
 		html += "<table[table_options]>"
 		html += "<tr><td[row_options1]>Severity</td><td[row_options2]>Name</td><td[row_options1]>Ends At</td><td[row_options1]>Ends In</td><td[row_options3]>Stop</td></tr>"
 		for(var/datum/event/E in active_events)
 			if(!E.event_meta)
 				continue
 			var/datum/event_meta/EM = E.event_meta
-			var/ends_at = E.startedAt + (E.lastProcessAt() * master_controller.minimum_ticks)	// A best estimate
+			var/ends_at = E.startedAt + (E.lastProcessAt() * 20)	// A best estimate, based on how often the alarm manager processes
 			var/ends_in = max(0, round((ends_at - world.time) / 600, 0.1))
 			html += "<tr>"
 			html += "<td>[severity_to_string[EM.severity]]</td>"
@@ -234,7 +234,7 @@
 	else if(href_list["back"])
 		selected_event_container = null
 	else if(href_list["set_name"])
-		var/name = input("Enter event name.", "Set Name") as text|null
+		var/name = sanitize(input("Enter event name.", "Set Name") as text|null)
 		if(name)
 			var/datum/event_meta/EM = locate(href_list["set_name"])
 			EM.name = name

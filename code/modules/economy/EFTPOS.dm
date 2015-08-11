@@ -169,7 +169,7 @@
 			if("change_id")
 				var/attempt_code = text2num(input("Re-enter the current EFTPOS access code", "Confirm EFTPOS code"))
 				if(attempt_code == access_code)
-					eftpos_name = input("Enter a new terminal ID for this device", "Enter new EFTPOS ID") + " EFTPOS scanner"
+					eftpos_name = sanitize(input("Enter a new terminal ID for this device", "Enter new EFTPOS ID"), MAX_NAME_LEN) + " EFTPOS scanner"
 					print_reference()
 				else
 					usr << "\icon[src]<span class='warning'>Incorrect code entered.</span>"
@@ -184,7 +184,7 @@
 				else
 					usr << "\icon[src]<span class='warning'>Account not found.</span>"
 			if("trans_purpose")
-				var/choice = input("Enter reason for EFTPOS transaction", "Transaction purpose")
+				var/choice = sanitize(input("Enter reason for EFTPOS transaction", "Transaction purpose"))
 				if(choice) transaction_purpose = choice
 			if("trans_value")
 				var/try_num = input("Enter amount for EFTPOS transaction", "Transaction amount") as num

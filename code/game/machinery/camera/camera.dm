@@ -8,7 +8,7 @@
 	active_power_usage = 10
 	layer = 5
 
-	var/list/network = list("SS13")
+	var/list/network = list("Exodus")
 	var/c_tag = null
 	var/c_tag_order = 999
 	var/status = 1
@@ -53,11 +53,19 @@
 		ASSERT(src.network.len > 0)
 	..()
 
+/obj/machinery/camera/Destroy()
+	deactivate(null, 0) //kick anyone viewing out
+	if(assembly)
+		qdel(assembly)
+		assembly = null
+	qdel(wires)
+	..()
+
 /obj/machinery/camera/emp_act(severity)
 	if(!isEmpProof())
 		if(prob(100/severity))
 			stat |= EMPED
-			SetLuminosity(0)
+			set_light(0)
 			kick_viewers()
 			triggerCameraAlarm(30 / severity)
 			update_icon()
@@ -107,6 +115,7 @@
 
 	if(user.species.can_shred(user))
 		set_status(0)
+		user.do_attack_animation(src)
 		visible_message("<span class='warning'>\The [user] slashes at [src]!</span>")
 		playsound(src.loc, 'sound/weapons/slash.ogg', 100, 1)
 		icon_state = "[initial(icon_state)]1"
@@ -129,14 +138,12 @@
 
 	else if(iswelder(W) && (wires.CanDeconstruct() || (stat & BROKEN)))
 		if(weld(W, user))
-			if (stat & BROKEN)
-				new /obj/item/weapon/circuitboard/broken(src.loc)
-				new /obj/item/stack/cable_coil(src.loc, length=2)
-			else if(assembly)
+			if(assembly)
 				assembly.loc = src.loc
 				assembly.state = 1
+				assembly = null //so qdel doesn't eat it.
 				new /obj/item/stack/cable_coil(src.loc, length=2)
-			del(src)
+			qdel(src)
 
 	// OTHER
 	else if (can_use() && (istype(W, /obj/item/weapon/paper) || istype(W, /obj/item/device/pda)) && isliving(user))
@@ -180,6 +187,7 @@
 
 	else if(W.damtype == BRUTE || W.damtype == BURN) //bashing cameras
 		if (W.force >= src.toughness)
+			user.do_attack_animation(src)
 			visible_message("<span class='warning'><b>[src] has been [pick(W.attack_verb)] with [W] by [user]!</b></span>")
 			if (istype(W, /obj/item)) //is it even possible to get into attackby() with non-items?
 				var/obj/item/I = W
@@ -191,6 +199,10 @@
 		..()
 
 /obj/machinery/camera/proc/deactivate(user as mob, var/choice = 1)
+	// The only way for AI to reactivate cameras are malf abilities, this gives them different messages.
+	if(istype(user, /mob/living/silicon/ai))
+		user = null
+
 	if(choice != 1)
 		//legacy support, if choice is != 1 then just kick viewers without changing status
 		kick_viewers()
@@ -198,12 +210,18 @@
 		update_coverage()
 		set_status( !src.status )
 		if (!(src.status))
-			visible_message("\red [user] has deactivated [src]!")
+			if(user)
+				visible_message("<span class='notice'> [user] has deactivated [src]!</span>")
+			else
+				visible_message("<span class='notice'> [src] clicks and shuts down. </span>")
 			playsound(src.loc, 'sound/items/Wirecutter.ogg', 100, 1)
 			icon_state = "[initial(icon_state)]1"
 			add_hiddenprint(user)
 		else
-			visible_message("\red [user] has reactivated [src]!")
+			if(user)
+				visible_message("<span class='notice'> [user] has reactivated [src]!</span>")
+			else
+				visible_message("<span class='notice'> [src] clicks and reactivates itself. </span>")
 			playsound(src.loc, 'sound/items/Wirecutter.ogg', 100, 1)
 			icon_state = initial(icon_state)
 			add_hiddenprint(user)
@@ -216,6 +234,8 @@
 //Used when someone breaks a camera
 /obj/machinery/camera/proc/destroy()
 	stat |= BROKEN
+	wires.RandomCutAll()
+
 	kick_viewers()
 	triggerCameraAlarm()
 	update_icon()
@@ -422,3 +442,14 @@
 		cameranet.updateVisibility(src, 0)
 
 	invalidateCameraCache()
+
+// Resets the camera's wires to fully operational state. Used by one of Malfunction abilities.
+/obj/machinery/camera/proc/reset_wires()
+	if(!wires)
+		return
+	if (stat & BROKEN) // Fix the camera
+		stat &= ~BROKEN
+	wires.CutAll()
+	wires.MendAll()
+	update_icon()
+	update_coverage()

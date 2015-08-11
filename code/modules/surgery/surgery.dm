@@ -49,7 +49,7 @@
 
 	// does stuff to begin the step, usually just printing messages. Moved germs transfering and bloodying here too
 	proc/begin_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		var/datum/organ/external/affected = target.get_organ(target_zone)
+		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 		if (can_infect && affected)
 			spread_germs_to_organ(affected, user)
 		if (ishuman(user) && prob(60))
@@ -68,7 +68,7 @@
 	proc/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		return null
 
-proc/spread_germs_to_organ(datum/organ/external/E, mob/living/carbon/human/user)
+proc/spread_germs_to_organ(var/obj/item/organ/external/E, var/mob/living/carbon/human/user)
 	if(!istype(user) || !istype(E)) return
 
 	var/germ_level = user.germ_level
@@ -80,7 +80,7 @@ proc/spread_germs_to_organ(datum/organ/external/E, mob/living/carbon/human/user)
 proc/do_surgery(mob/living/carbon/M, mob/living/user, obj/item/tool)
 	if(!istype(M))
 		return 0
-	if (user.a_intent == "harm")	//check for Hippocratic Oath
+	if (user.a_intent == I_HURT)	//check for Hippocratic Oath
 		return 0
 	var/zone = user.zone_sel.selecting
 	if(zone in M.op_stage.in_progress) //Can't operate on someone repeatedly.
@@ -108,7 +108,7 @@ proc/do_surgery(mob/living/carbon/M, mob/living/user, obj/item/tool)
 					H.update_surgery()
 				return	1	  												//don't want to do weapony things after surgery
 
-	if (user.a_intent == "help")
+	if (user.a_intent == I_HELP)
 		user << "\red You can't see any useful way to use [tool] on [M]."
 		return 1
 	return 0

@@ -5,15 +5,62 @@
 // This is subtype of SMES that should be normally used. It can be constructed, deconstructed and hacked.
 // It also supports RCON System which allows you to operate it remotely, if properly set.
 
-//Construction Item
+//MAGNETIC COILS - These things actually store and transmit power within the SMES. Different types have different
 /obj/item/weapon/smes_coil
 	name = "superconductive magnetic coil"
-	desc = "Heavy duty superconductive magnetic coil, mainly used in construction of SMES units."
+	desc = "Standard superconductive magnetic coil with average capacity and I/O rating."
 	icon = 'icons/obj/stock_parts.dmi'
 	icon_state = "smes_coil"			// Just few icons patched together. If someone wants to make better icon, feel free to do so!
 	w_class = 4.0 						// It's LARGE (backpack size)
 	var/ChargeCapacity = 5000000
 	var/IOCapacity = 250000
+
+// 20% Charge Capacity, 60% I/O Capacity. Used for substation/outpost SMESs.
+/obj/item/weapon/smes_coil/weak
+	name = "basic superconductive magnetic coil"
+	desc = "Cheaper model of standard superconductive magnetic coil. It's capacity and I/O rating are considerably lower."
+	ChargeCapacity = 1000000
+	IOCapacity = 150000
+
+// 1000% Charge Capacity, 20% I/O Capacity
+/obj/item/weapon/smes_coil/super_capacity
+	name = "superconductive capacitance coil"
+	desc = "Specialised version of standard superconductive magnetic coil. This one has significantly stronger containment field, allowing for significantly larger power storage. It's IO rating is much lower, however."
+	ChargeCapacity = 50000000
+	IOCapacity = 50000
+
+// 10% Charge Capacity, 400% I/O Capacity. Technically turns SMES into large super capacitor.Ideal for shields.
+/obj/item/weapon/smes_coil/super_io
+	name = "superconductive transmission coil"
+	desc = "Specialised version of standard superconductive magnetic coil. While this one won't store almost any power, it rapidly transfers power, making it useful in systems which require large throughput."
+	ChargeCapacity = 500000
+	IOCapacity = 1000000
+
+
+// SMES SUBTYPES - THESE ARE MAPPED IN AND CONTAIN DIFFERENT TYPES OF COILS
+
+// These are used on individual outposts as backup should power line be cut, or engineering outpost lost power.
+// 1M Charge, 150K I/O
+/obj/machinery/power/smes/buildable/outpost_substation/New()
+	..(0)
+	component_parts += new /obj/item/weapon/smes_coil/weak(src)
+	recalc_coils()
+
+// This one is pre-installed on engineering shuttle. Allows rapid charging/discharging for easier transport of power to outpost
+// 11M Charge, 2.5M I/O
+/obj/machinery/power/smes/buildable/power_shuttle/New()
+	..(0)
+	component_parts += new /obj/item/weapon/smes_coil/super_io(src)
+	component_parts += new /obj/item/weapon/smes_coil/super_io(src)
+	component_parts += new /obj/item/weapon/smes_coil(src)
+	recalc_coils()
+
+
+
+
+
+
+// END SMES SUBTYPES
 
 // SMES itself
 /obj/machinery/power/smes/buildable
@@ -27,6 +74,13 @@
 	var/RCon_tag = "NO_TAG"		// RCON tag, change to show it on SMES Remote control console.
 	charge = 0
 	should_be_mapped = 1
+
+/obj/machinery/power/smes/buildable/Destroy()
+	..()
+	qdel(wires)
+	for(var/obj/nano_module/rcon/R in world)
+		R.FindDevices()
+
 
 // Proc: process()
 // Parameters: None
@@ -52,20 +106,24 @@
 	else // RCON wire cut
 		usr << "<span class='warning'>Connection error: Destination Unreachable.</span>"
 
+	// Cyborgs standing next to the SMES can play with the wiring.
+	if(istype(usr, /mob/living/silicon/robot) && Adjacent(usr) && open_hatch)
+		wires.Interact(usr)
+
 // Proc: New()
 // Parameters: None
 // Description: Adds standard components for this SMES, and forces recalculation of properties.
-/obj/machinery/power/smes/buildable/New()
+/obj/machinery/power/smes/buildable/New(var/install_coils = 1)
 	component_parts = list()
 	component_parts += new /obj/item/stack/cable_coil(src,30)
 	component_parts += new /obj/item/weapon/circuitboard/smes(src)
 	src.wires = new /datum/wires/smes(src)
 
 	// Allows for mapped-in SMESs with larger capacity/IO
-	for(var/i = 1, i <= cur_coils, i++)
-		component_parts += new /obj/item/weapon/smes_coil(src)
-
-	recalc_coils()
+	if(install_coils)
+		for(var/i = 1, i <= cur_coils, i++)
+			component_parts += new /obj/item/weapon/smes_coil(src)
+		recalc_coils()
 	..()
 
 // Proc: attack_hand()
@@ -207,7 +265,7 @@
 					src.ping("DANGER! Magnetic containment field failure in 3 ... 2 ... 1 ...")
 					explosion(src.loc,1,2,4,8)
 					// Not sure if this is necessary, but just in case the SMES *somehow* survived..
-					del(src)
+					qdel(src)
 
 
 
@@ -294,7 +352,8 @@
 					if(I.reliability != 100 && crit_fail)
 						I.crit_fail = 1
 					I.loc = src.loc
-				del(src)
+					component_parts -= I
+				qdel(src)
 				return
 
 		// Superconducting Magnetic Coil - Upgrade the SMES

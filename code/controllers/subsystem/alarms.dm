@@ -13,9 +13,6 @@
 /datum/subsystem/alarm/New()
 	all_handlers = list(atmosphere_alarm, camera_alarm, fire_alarm, motion_alarm, power_alarm)
 
-/datum/subsystem/alarm/stat_entry()
-	stat(null,"Alarm-[master_controller.alarms_cost]\t#[number_of_active_alarms()]")
-
 /datum/subsystem/alarm/fire()
 	for(var/datum/alarm_handler/AH in all_handlers)
 		AH.process()

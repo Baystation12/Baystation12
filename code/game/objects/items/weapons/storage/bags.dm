@@ -77,7 +77,7 @@
 	slot_flags = SLOT_BELT | SLOT_POCKET
 	w_class = 3
 	storage_slots = 50
-	max_combined_w_class = 200 //Doesn't matter what this is, so long as it's more or equal to storage_slots * ore.w_class
+	max_storage_space = 200 //Doesn't matter what this is, so long as it's more or equal to storage_slots * ore.w_class
 	max_w_class = 3
 	can_hold = list(/obj/item/weapon/ore)
 
@@ -91,7 +91,7 @@
 	icon = 'icons/obj/hydroponics_machines.dmi'
 	icon_state = "plantbag"
 	storage_slots = 50; //the number of plant pieces it can carry.
-	max_combined_w_class = 200 //Doesn't matter what this is, so long as it's more or equal to storage_slots * plants.w_class
+	max_storage_space = 200 //Doesn't matter what this is, so long as it's more or equal to storage_slots * plants.w_class
 	max_w_class = 3
 	w_class = 2
 	can_hold = list(/obj/item/weapon/reagent_containers/food/snacks/grown,/obj/item/seeds,/obj/item/weapon/grown)
@@ -119,12 +119,12 @@
 		//verbs += /obj/item/weapon/storage/bag/sheetsnatcher/quick_empty
 
 	can_be_inserted(obj/item/W as obj, stop_messages = 0)
-		if(!istype(W,/obj/item/stack/sheet) || istype(W,/obj/item/stack/sheet/mineral/sandstone) || istype(W,/obj/item/stack/sheet/wood))
+		if(!istype(W,/obj/item/stack/material))
 			if(!stop_messages)
 				usr << "The snatcher does not accept [W]."
-			return 0 //I don't care, but the existing code rejects them for not being "sheets" *shrug* -Sayu
+			return 0
 		var/current = 0
-		for(var/obj/item/stack/sheet/S in contents)
+		for(var/obj/item/stack/material/S in contents)
 			current += S.amount
 		if(capacity == current)//If it's full, you're done
 			if(!stop_messages)
@@ -135,20 +135,20 @@
 
 // Modified handle_item_insertion.  Would prefer not to, but...
 	handle_item_insertion(obj/item/W as obj, prevent_warning = 0)
-		var/obj/item/stack/sheet/S = W
+		var/obj/item/stack/material/S = W
 		if(!istype(S)) return 0
 
 		var/amount
 		var/inserted = 0
 		var/current = 0
-		for(var/obj/item/stack/sheet/S2 in contents)
+		for(var/obj/item/stack/material/S2 in contents)
 			current += S2.amount
 		if(capacity < current + S.amount)//If the stack will fill it up
 			amount = capacity - current
 		else
 			amount = S.amount
 
-		for(var/obj/item/stack/sheet/sheet in contents)
+		for(var/obj/item/stack/material/sheet in contents)
 			if(S.type == sheet.type) // we are violating the amount limitation because these are not sane objects
 				sheet.amount += amount	// they should only be removed through procs in this file, which split them up.
 				S.amount -= amount
@@ -156,13 +156,13 @@
 				break
 
 		if(!inserted || !S.amount)
-			usr.u_equip(S)
+			usr.remove_from_mob(S)
 			usr.update_icons()	//update our overlays
 			if (usr.client && usr.s_active != src)
 				usr.client.screen -= S
 			S.dropped(usr)
 			if(!S.amount)
-				del S
+				qdel(S)
 			else
 				S.loc = src
 
@@ -183,7 +183,7 @@
 		if(display_contents_with_number)
 			numbered_contents = list()
 			adjusted_contents = 0
-			for(var/obj/item/stack/sheet/I in contents)
+			for(var/obj/item/stack/material/I in contents)
 				adjusted_contents++
 				var/datum/numbered_display/D = new/datum/numbered_display(I)
 				D.number = I.amount
@@ -200,14 +200,14 @@
 // Modified quick_empty verb drops appropriate sized stacks
 	quick_empty()
 		var/location = get_turf(src)
-		for(var/obj/item/stack/sheet/S in contents)
+		for(var/obj/item/stack/material/S in contents)
 			while(S.amount)
-				var/obj/item/stack/sheet/N = new S.type(location)
+				var/obj/item/stack/material/N = new S.type(location)
 				var/stacksize = min(S.amount,N.max_amount)
 				N.amount = stacksize
 				S.amount -= stacksize
 			if(!S.amount)
-				del S // todo: there's probably something missing here
+				qdel(S) // todo: there's probably something missing here
 		orient2hud(usr)
 		if(usr.s_active)
 			usr.s_active.show_to(usr)
@@ -215,7 +215,7 @@
 
 // Instead of removing
 	remove_from_storage(obj/item/W as obj, atom/new_location)
-		var/obj/item/stack/sheet/S = W
+		var/obj/item/stack/material/S = W
 		if(!istype(S)) return 0
 
 		//I would prefer to drop a new stack, but the item/attack_hand code
@@ -224,7 +224,7 @@
 		// -Sayu
 
 		if(S.amount > S.max_amount)
-			var/obj/item/stack/sheet/temp = new S.type(src)
+			var/obj/item/stack/material/temp = new S.type(src)
 			temp.amount = S.amount - S.max_amount
 			S.amount = S.max_amount
 
@@ -249,7 +249,7 @@
 	icon_state = "cashbag"
 	desc = "A bag for carrying lots of cash. It's got a big dollar sign printed on the front."
 	storage_slots = 50; //the number of cash pieces it can carry.
-	max_combined_w_class = 200 //Doesn't matter what this is, so long as it's more or equal to storage_slots * cash.w_class
+	max_storage_space = 200 //Doesn't matter what this is, so long as it's more or equal to storage_slots * cash.w_class
 	max_w_class = 3
 	w_class = 2
 	can_hold = list(/obj/item/weapon/coin,/obj/item/weapon/spacecash)

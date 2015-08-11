@@ -21,7 +21,7 @@
 	Make(S)
 	connect_to_network()
 
-/obj/machinery/power/tracker/Del()
+/obj/machinery/power/tracker/Destroy()
 	unset_control() //remove from control computer
 	..()
 
@@ -41,7 +41,7 @@
 /obj/machinery/power/tracker/proc/Make(var/obj/item/solar_assembly/S)
 	if(!S)
 		S = new /obj/item/solar_assembly(src)
-		S.glass_type = /obj/item/stack/sheet/glass
+		S.glass_type = /obj/item/stack/material/glass
 		S.tracker = 1
 		S.anchored = 1
 	S.loc = src
@@ -69,7 +69,7 @@
 				S.give_glass()
 			playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 			user.visible_message("<span class='notice'>[user] takes the glass off the tracker.</span>")
-			del(src) // qdel
+			qdel(src)
 		return
 	..()
 

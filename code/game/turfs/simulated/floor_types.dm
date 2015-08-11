@@ -14,7 +14,7 @@
 
 /turf/simulated/floor/light
 	name = "Light floor"
-	luminosity = 5
+	light_range = 5
 	icon_state = "light_on"
 	floor_type = /obj/item/stack/tile/light
 
@@ -64,7 +64,7 @@
 		user << "\blue Removing rods..."
 		playsound(src, 'sound/items/Ratchet.ogg', 80, 1)
 		if(do_after(user, 30))
-			new /obj/item/stack/rods(src, 2)
+			PoolOrNew(/obj/item/stack/rods, list(loc, 2))
 			ChangeTurf(/turf/simulated/floor)
 			var/turf/simulated/floor/F = src
 			F.make_plating()
@@ -74,6 +74,8 @@
 	name = "engraved floor"
 	icon_state = "cult"
 
+/turf/simulated/floor/engine/cult/cultify()
+	return
 
 /turf/simulated/floor/engine/n20
 	New()
@@ -136,7 +138,7 @@
 	icon = 'icons/turf/floors.dmi'
 	icon_state = "plating"
 
-/turf/simulated/shuttle/plating/vox	//Vox skipjack plating
+/turf/simulated/shuttle/plating/vox	//Skipjack plating
 	oxygen = 0
 	nitrogen = MOLES_N2STANDARD + MOLES_O2STANDARD
 
@@ -144,7 +146,7 @@
 	name = "Brig floor"        // Also added it into the 2x3 brig area of the shuttle.
 	icon_state = "floor4"
 
-/turf/simulated/shuttle/floor4/vox	//Vox skipjack floors
+/turf/simulated/shuttle/floor4/vox	//skipjack floors
 	name = "skipjack floor"
 	oxygen = 0
 	nitrogen = MOLES_N2STANDARD + MOLES_O2STANDARD

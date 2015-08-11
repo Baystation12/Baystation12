@@ -7,7 +7,7 @@
 	min_force = 4
 	hitsound = 'sound/effects/Glasshit.ogg'
 	maxhealth = 150 //If you change this, consiter changing ../door/window/brigdoor/ health at the bottom of this .dm file
-	health
+	health = 150
 	visible = 0.0
 	use_power = 0
 	flags = ON_BORDER
@@ -25,7 +25,7 @@
 	return
 
 /obj/machinery/door/window/proc/shatter(var/display_message = 1)
-	new /obj/item/weapon/shard(src.loc)
+	new /obj/item/weapon/material/shard(src.loc)
 	var/obj/item/stack/cable_coil/CC = new /obj/item/stack/cable_coil(src.loc)
 	CC.amount = 2
 	var/obj/item/weapon/airlock_electronics/ae
@@ -49,16 +49,16 @@
 	playsound(src, "shatter", 70, 1)
 	if(display_message)
 		visible_message("[src] shatters!")
-	del(src)
+	qdel(src)
 
-/obj/machinery/door/window/Del()
+/obj/machinery/door/window/Destroy()
 	density = 0
 	update_nearby_tiles()
 	..()
 
 /obj/machinery/door/window/Bumped(atom/movable/AM as mob|obj)
 	if (!( ismob(AM) ))
-		var/obj/machinery/bot/bot = AM
+		var/mob/living/bot/bot = AM
 		if(istype(bot))
 			if(density && src.check_access(bot.botcard))
 				open()
@@ -249,13 +249,14 @@
 
 
 /obj/machinery/door/window/brigdoor
-	name = "Secure Door"
+	name = "secure door"
 	icon = 'icons/obj/doors/windoor.dmi'
 	icon_state = "leftsecure"
 	base_state = "leftsecure"
 	req_access = list(access_security)
 	var/id = null
-	health = 300.0 //Stronger doors for prison (regular window door health is 200)
+	maxhealth = 300
+	health = 300.0 //Stronger doors for prison (regular window door health is 150)
 
 
 /obj/machinery/door/window/northleft

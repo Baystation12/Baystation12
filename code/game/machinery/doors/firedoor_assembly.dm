@@ -42,8 +42,8 @@ obj/structure/firedoor_assembly/attackby(C as obj, mob/user as mob)
 			user.visible_message("<span class='warning'>[user] has inserted a circuit into \the [src]!</span>",
 								  "You have inserted the circuit into \the [src]!")
 			new /obj/machinery/door/firedoor(src.loc)
-			del(C)
-			del(src)
+			qdel(C)
+			qdel(src)
 		else
 			user << "<span class='warning'>You must secure \the [src] first!</span>"
 	else if(istype(C, /obj/item/weapon/wrench))
@@ -61,8 +61,8 @@ obj/structure/firedoor_assembly/attackby(C as obj, mob/user as mob)
 				if(!src || !WT.isOn()) return
 				user.visible_message("<span class='warning'>[user] has dissassembled \the [src].</span>",
 									"You have dissassembled \the [src].")
-				new /obj/item/stack/sheet/metal(src.loc, 2)
-				del (src)
+				new /obj/item/stack/material/steel(src.loc, 2)
+				qdel(src)
 		else
 			user << "<span class='notice'>You need more welding fuel.</span>"
 	else

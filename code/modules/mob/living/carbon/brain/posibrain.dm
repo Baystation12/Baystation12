@@ -6,7 +6,7 @@
 	w_class = 3
 	origin_tech = "engineering=4;materials=4;bluespace=2;programming=4"
 
-	construction_cost = list("metal"=500,"glass"=500,"silver"=200,"gold"=200,"phoron"=100,"diamond"=10)
+	construction_cost = list(DEFAULT_WALL_MATERIAL=500,"glass"=500,"silver"=200,"gold"=200,"phoron"=100,"diamond"=10)
 	construction_time = 75
 	var/searching = 0
 	var/askDelay = 10 * 60 * 1
@@ -60,6 +60,7 @@
 	src.searching = 0
 	src.brainmob.mind = candidate.mind
 	src.brainmob.ckey = candidate.ckey
+	src.brainmob.mind.reset()
 	src.name = "positronic brain ([src.brainmob.name])"
 	src.brainmob << "<b>You are a positronic brain, brought into existence on [station_name()].</b>"
 	src.brainmob << "<b>As a synthetic intelligence, you answer to all crewmembers, as well as the AI.</b>"

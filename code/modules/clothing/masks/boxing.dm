@@ -5,7 +5,7 @@
 	item_state = "balaclava"
 	flags = BLOCKHAIR
 	flags_inv = HIDEFACE
-	body_parts_covered = FACE
+	body_parts_covered = FACE|HEAD
 	w_class = 2
 	sprite_sheets = list(
 		"Tajara" = 'icons/mob/species/tajaran/mask.dmi',

@@ -59,34 +59,9 @@
 				return
 		if(istype(M, /mob/living/carbon/human))
 			var/mob/living/carbon/human/N = M
-			ticker.mode.equip_traitor(N)
-			ticker.mode.traitors += N.mind
-			N.mind.special_role = "traitor"
-			if(!config.objectives_disabled)
-				var/objective = "Free Objective"
-				switch(rand(1,100))
-					if(1 to 50)
-						objective = "Steal [pick("a hand teleporter", "the Captain's antique laser gun", "a jetpack", "the Captain's ID", "the Captain's jumpsuit")]."
-					if(51 to 60)
-						objective = "Destroy 70% or more of the station's phoron tanks."
-					if(61 to 70)
-						objective = "Cut power to 80% or more of the station's tiles."
-					if(71 to 80)
-						objective = "Destroy the AI."
-					if(81 to 90)
-						objective = "Kill all monkeys aboard the station."
-					else
-						objective = "Make certain at least 80% of the station evacuates on the shuttle."
-				var/datum/objective/custom_objective = new(objective)
-				custom_objective.owner = N.mind
-				N.mind.objectives += custom_objective
-
-				var/datum/objective/escape/escape_objective = new
-				escape_objective.owner = N.mind
-				N.mind.objectives += escape_objective
-
 			M << "<B>You have joined the ranks of the Syndicate and become a traitor to the station!</B>"
-			show_objectives(M.mind)
+			traitors.add_antagonist(N.mind)
+			traitors.equip(N)
 			message_admins("[N]/([N.ckey]) has accepted a traitor objective from a syndicate beacon.")
 
 
@@ -120,7 +95,7 @@
 	if(surplus() < 1500)
 		if(user) user << "<span class='notice'>The connected wire doesn't have enough current.</span>"
 		return
-	for(var/obj/machinery/singularity/singulo in world)
+	for(var/obj/singularity/singulo in world)
 		if(singulo.z == z)
 			singulo.target = src
 	icon_state = "[icontype]1"
@@ -131,7 +106,7 @@
 
 
 /obj/machinery/power/singularity_beacon/proc/Deactivate(mob/user = null)
-	for(var/obj/machinery/singularity/singulo in world)
+	for(var/obj/singularity/singulo in world)
 		if(singulo.target == src)
 			singulo.target = null
 	icon_state = "[icontype]0"
@@ -174,7 +149,7 @@
 	return
 
 
-/obj/machinery/power/singularity_beacon/Del()
+/obj/machinery/power/singularity_beacon/Destroy()
 	if(active)
 		Deactivate()
 	..()

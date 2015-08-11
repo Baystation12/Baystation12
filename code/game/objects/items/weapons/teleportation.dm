@@ -21,7 +21,7 @@
 	item_state = "electronic"
 	throw_speed = 4
 	throw_range = 20
-	matter = list("metal" = 400)
+	matter = list(DEFAULT_WALL_MATERIAL = 400)
 	origin_tech = "magnets=1"
 
 /obj/item/weapon/locator/attack_self(mob/user as mob)
@@ -79,7 +79,7 @@ Frequency:
 
 				src.temp += "<B>Extranneous Signals:</B><BR>"
 				for (var/obj/item/weapon/implant/tracking/W in world)
-					if (!W.implanted || !(istype(W.loc,/datum/organ/external) || ismob(W.loc)))
+					if (!W.implanted || !(istype(W.loc,/obj/item/organ/external) || ismob(W.loc)))
 						continue
 					else
 						var/mob/M = W.loc
@@ -132,7 +132,7 @@ Frequency:
 	w_class = 2.0
 	throw_speed = 3
 	throw_range = 5
-	matter = list("metal" = 10000)
+	matter = list(DEFAULT_WALL_MATERIAL = 10000)
 	origin_tech = "magnets=1;bluespace=3"
 
 /obj/item/weapon/hand_tele/attack_self(mob/user as mob)

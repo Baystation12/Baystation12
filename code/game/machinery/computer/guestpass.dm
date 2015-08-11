@@ -5,6 +5,7 @@
 	name = "guest pass"
 	desc = "Allows temporary access to station areas."
 	icon_state = "guest"
+	light_color = "#0099ff"
 
 	var/temp_access = list() //to prevent agent cards stealing access as permanent
 	var/expiration_time = 0
@@ -114,11 +115,11 @@
 	if (href_list["choice"])
 		switch(href_list["choice"])
 			if ("giv_name")
-				var/nam = strip_html_simple(input("Person pass is issued to", "Name", giv_name) as text|null)
+				var/nam = sanitize(input("Person pass is issued to", "Name", giv_name) as text|null)
 				if (nam)
 					giv_name = nam
 			if ("reason")
-				var/reas = strip_html_simple(input("Reason why pass is issued", "Reason", reason) as text|null)
+				var/reas = sanitize(input("Reason why pass is issued", "Reason", reason) as text|null)
 				if(reas)
 					reason = reas
 			if ("duration")

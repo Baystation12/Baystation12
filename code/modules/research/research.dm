@@ -59,6 +59,12 @@ research holder datum.
 		possible_designs += new D(src)
 	RefreshResearch()
 
+/datum/research/techonly
+
+/datum/research/techonly/New()
+	for(var/T in typesof(/datum/tech) - /datum/tech)
+		possible_tech += new T(src)
+	RefreshResearch()
 
 
 //Checks to see if tech has all the required pre-reqs.
@@ -263,7 +269,7 @@ datum/tech/robotics
 	icon_state = "datadisk2"
 	item_state = "card-id"
 	w_class = 2.0
-	matter = list("metal" = 30, "glass" = 10)
+	matter = list(DEFAULT_WALL_MATERIAL = 30, "glass" = 10)
 	var/datum/tech/stored
 
 /obj/item/weapon/disk/tech_disk/New()
@@ -277,7 +283,7 @@ datum/tech/robotics
 	icon_state = "datadisk2"
 	item_state = "card-id"
 	w_class = 2.0
-	matter = list("metal" = 30,"glass" = 10)
+	matter = list(DEFAULT_WALL_MATERIAL = 30,"glass" = 10)
 	var/datum/design/blueprint
 
 /obj/item/weapon/disk/design_disk/New()

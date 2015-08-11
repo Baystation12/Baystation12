@@ -1,5 +1,10 @@
 #define DEBUG
 
+#define GAME_STATE_PREGAME		1
+#define GAME_STATE_SETTING_UP	2
+#define GAME_STATE_PLAYING		3
+#define GAME_STATE_FINISHED		4
+
 // Math constants.
 #define M_E     2.71828183
 #define M_PI    3.14159265
@@ -94,9 +99,15 @@
 #define DOOR_CRUSH_DAMAGE 10
 
 #define HUNGER_FACTOR              0.05 // Factor of how fast mob nutrition decreases
-#define REAGENTS_METABOLISM        0.2  // How many units of reagent are consumed per tick, by default.
-#define REAGENTS_EFFECT_MULTIPLIER (REAGENTS_METABOLISM / 0.4) // By defining the effect multiplier this way, it'll exactly adjust
-                                                               // all effects according to how they originally were with the 0.4 metabolism
+#define REM 0.2 // Means 'Reagent Effect Multiplier'. This is how many units of reagent are consumed per tick
+#define CHEM_TOUCH 1
+#define CHEM_INGEST 2
+#define CHEM_BLOOD 3
+#define MINIMUM_CHEMICAL_VOLUME 0.01
+#define SOLID 1
+#define LIQUID 2
+#define GAS 3
+#define REAGENTS_OVERDOSE 30
 
 #define MINIMUM_AIR_RATIO_TO_SUSPEND 0.05 // Minimum ratio of air that must move to/from a tile to suspend group processing
 #define MINIMUM_AIR_TO_SUSPEND       (MOLES_CELLSTANDARD * MINIMUM_AIR_RATIO_TO_SUSPEND) // Minimum amount of air that has to move before a group processing can be suspended
@@ -122,12 +133,24 @@
 #define CARBON_LIFEFORM_FIRE_DAMAGE     4
 
 // Phoron fire properties.
-#define PHORON_MINIMUM_BURN_TEMPERATURE    (T0C +  100)
-#define PHORON_FLASHPOINT                  (T0C +  246)
-#define PHORON_UPPER_TEMPERATURE           (T0C + 1370)
-#define PHORON_MINIMUM_OXYGEN_NEEDED       2
-#define PHORON_MINIMUM_OXYGEN_PHORON_RATIO 20
-#define PHORON_OXYGEN_FULLBURN             10
+#define PHORON_MINIMUM_BURN_TEMPERATURE    (T0C +  126) //400 K - autoignite temperature in tanks and canisters - enclosed environments I guess
+#define PHORON_FLASHPOINT                  (T0C +  246) //519 K - autoignite temperature in air if that ever gets implemented.
+
+//These control the mole ratio of oxidizer and fuel used in the combustion reaction
+#define FIRE_REACTION_OXIDIZER_AMOUNT	3 //should be greater than the fuel amount if fires are going to spread much
+#define FIRE_REACTION_FUEL_AMOUNT		2
+
+//These control the speed at which fire burns
+#define FIRE_GAS_BURNRATE_MULT			1
+#define FIRE_LIQUID_BURNRATE_MULT		1
+
+//If the fire is burning slower than this rate then the reaction is going too slow to be self sustaining and the fire burns itself out.
+//This ensures that fires don't grind to a near-halt while still remaining active forever.
+#define FIRE_GAS_MIN_BURNRATE			0.01
+#define FIRE_LIQUD_MIN_BURNRATE			0.01
+
+//How many moles of fuel are contained within one solid/liquid fuel volume unit
+#define LIQUIDFUEL_AMOUNT_TO_MOL		1  //mol/volume unit
 
 #define T0C  273.15 //    0.0 degrees celcius
 #define T20C 293.15 //   20.0 degrees celcius
@@ -180,6 +203,7 @@
 #define NOBLOODY           512  // Used for items if they don't want to get a blood overlay.
 #define NODELAY            8192 // 1 second attack-by delay skipped (Can be used once every 0.2s). Most objects have a 1s attack-by delay, which doesn't require a flag.
 
+//Use these flags to indicate if an item obscures the specified slots from view, whereas body_parts_covered seems to be used to indicate what body parts the item protects.
 #define GLASSESCOVERSEYES 256
 #define    MASKCOVERSEYES 256 // Get rid of some of the other retardation in these flags.
 #define    HEADCOVERSEYES 256 // Feel free to reallocate these numbers for other purposes.
@@ -243,10 +267,12 @@
 #define slot_legs        21
 #define slot_tie         22
 
-// Mob sprite sheets. These need to be strings as numbers 
-// cannot be used as associative list keys.
-#define icon_l_hand		"slot_l_hand"
-#define icon_r_hand		"slot_r_hand"
+// Inventory slot strings.
+// since numbers cannot be used as associative list keys.
+#define slot_back_str		"back"
+#define slot_l_hand_str		"slot_l_hand"
+#define slot_r_hand_str		"slot_r_hand"
+#define slot_w_uniform_str	"w_uniform"
 #define icon_head		"slot_head"
 
 // Bitflags for clothing parts.
@@ -419,10 +445,6 @@
 #define SEC_LEVEL_RED   2
 #define SEC_LEVEL_DELTA 3
 
-// Click cooldowns, in tenths of a second.
-#define CLICK_CD_MELEE 8
-#define CLICK_CD_RANGE 4
-
 #define TRANSITIONEDGE 7 // Distance from edge to move to another z-level.
 
 // A set of constants used to determine which type of mute an admin wishes to apply.
@@ -451,18 +473,17 @@
 #define INVISIBILITY_LEVEL_ONE            35
 #define INVISIBILITY_LEVEL_TWO            45
 #define INVISIBILITY_OBSERVER             60
-#define INVISIBILITY_AI_EYE               61
+#define INVISIBILITY_EYE		          61
 
 #define SEE_INVISIBLE_LIVING              25
 #define SEE_INVISIBLE_OBSERVER_NOLIGHTING 15
 #define SEE_INVISIBLE_LEVEL_ONE           35
 #define SEE_INVISIBLE_LEVEL_TWO           45
-#define SEE_INVISIBLE_OBSERVER_NOOBSERVERS 59
-#define SEE_INVISIBLE_OBSERVER            60
-#define SEE_INVISIBLE_OBSERVER_AI_EYE     61
+#define SEE_INVISIBLE_CULT		          60
+#define SEE_INVISIBLE_OBSERVER            61
 
 #define SEE_INVISIBLE_MINIMUM 5
-#define  INVISIBILITY_MAXIMUM 100
+#define INVISIBILITY_MAXIMUM 100
 
 // Object specific defines.
 #define CANDLE_LUM 3 // For how bright candles are.
@@ -497,6 +518,7 @@
 #define SALVED           512
 #define ORGAN_DEAD       1024
 #define ORGAN_MUTATED    2048
+#define ORGAN_ASSISTED   4096
 
 // Admin permissions. Please don't edit these values without speaking to Errorage first. ~Carn
 #define R_BUILDMODE     1
@@ -554,6 +576,7 @@
 #define BE_MUTINEER   8192
 #define BE_PAI        16384
 
+// TODO: Update to new antagonist system.
 var/list/be_special_flags = list(
 	"Traitor"          = BE_TRAITOR,
 	"Operative"        = BE_OPERATIVE,
@@ -599,6 +622,7 @@ var/list/be_special_flags = list(
 #define    IMPTRACK_HUD 7 // Tracking implant.
 #define SPECIALROLE_HUD 8 // AntagHUD image.
 #define  STATUS_HUD_OOC 9 // STATUS_HUD without virus DB check for someone being ill.
+#define 	  LIFE_HUD 10 // STATUS_HUD that only reports dead or alive
 
 // Pulse levels, very simplified.
 #define PULSE_NONE    0 // So !M.pulse checks would be possible.
@@ -611,22 +635,23 @@ var/list/be_special_flags = list(
 #define GETPULSE_TOOL 1 // More accurate. (med scanner, sleeper, etc.)
 
 // Species flags.
-#define NO_BLOOD       1     // Vessel var is not filled with blood, cannot bleed out.
-#define NO_BREATHE     2     // Cannot suffocate or take oxygen loss.
-#define NO_SCAN        4     // Cannot be scanned in a DNA machine/genome-stolen.
-#define NO_PAIN        8     // Cannot suffer halloss/recieves deceptive health indicator.
-#define NO_SLIP        16    // Cannot fall over.
-#define NO_POISON      32    // Cannot not suffer toxloss.
-#define HAS_SKIN_TONE  64    // Skin tone selectable in chargen. (0-255)
-#define HAS_SKIN_COLOR 128   // Skin colour selectable in chargen. (RGB)
-#define HAS_LIPS       256   // Lips are drawn onto the mob icon. (lipstick)
-#define HAS_UNDERWEAR  512   // Underwear is drawn onto the mob icon.
-#define IS_PLANT       1024  // Is a treeperson.
-#define IS_WHITELISTED 2048  // Must be whitelisted to play.
-#define IS_SYNTHETIC   4096  // Is a machine race.
-#define HAS_EYE_COLOR  8192  // Eye colour selectable in chargen. (RGB)
-#define CAN_JOIN       16384 // Species is selectable in chargen.
-#define IS_RESTRICTED  32768 // Is not a core/normally playable species. (castes, mutantraces)
+#define NO_BLOOD          1     // Vessel var is not filled with blood, cannot bleed out.
+#define NO_BREATHE        2     // Cannot suffocate or take oxygen loss.
+#define NO_SCAN           4     // Cannot be scanned in a DNA machine/genome-stolen.
+#define NO_PAIN           8     // Cannot suffer halloss/recieves deceptive health indicator.
+#define NO_SLIP           16    // Cannot fall over.
+#define NO_POISON         32    // Cannot not suffer toxloss.
+#define HAS_SKIN_TONE     64    // Skin tone selectable in chargen. (0-255)
+#define HAS_SKIN_COLOR    128   // Skin colour selectable in chargen. (RGB)
+#define HAS_LIPS          256   // Lips are drawn onto the mob icon. (lipstick)
+#define HAS_UNDERWEAR     512   // Underwear is drawn onto the mob icon.
+#define IS_PLANT          1024  // Is a treeperson.
+#define IS_WHITELISTED    2048  // Must be whitelisted to play.
+#define IS_SYNTHETIC      4096  // Is a machine race.
+#define HAS_EYE_COLOR     8192  // Eye colour selectable in chargen. (RGB)
+#define CAN_JOIN          16384 // Species is selectable in chargen.
+#define IS_RESTRICTED     32768 // Is not a core/normally playable species. (castes, mutantraces)
+#define REGENERATES_LIMBS 65536 // Attempts to regenerate unamputated limbs.
 
 // Language flags.
 #define WHITELISTED 1   // Language is available if the speaker is whitelisted.
@@ -637,8 +662,8 @@ var/list/be_special_flags = list(
 #define NONGLOBAL   32  // Do not add to general languages list.
 #define INNATE      64  // All mobs can be assumed to speak and understand this language. (audible emotes)
 #define NO_TALK_MSG 128 // Do not show the "\The [speaker] talks into \the [radio]" message
-#define NO_STUTTER 256		// No stuttering, slurring, or other speech problems
-
+#define NO_STUTTER  256 // No stuttering, slurring, or other speech problems
+#define COMMON_VERBS 512 // Robots will apply regular verbs to this.
 //Flags for zone sleeping
 #define ZONE_ACTIVE   1
 #define ZONE_SLEEPING 0
@@ -695,6 +720,10 @@ var/list/be_special_flags = list(
 #define FILE_DRM            16 // Some files want to not be copied/moved. This is them complaining that you tried.
 #define NETWORK_FAILURE     32
 
+// Special return values from bullet_act(). Positive return values are already used to indicate the blocked level of the projectile.
+#define PROJECTILE_CONTINUE   -1 //if the projectile should continue flying after calling bullet_act()
+#define PROJECTILE_FORCE_MISS -2 //if the projectile should treat the attack as a miss (suppresses attack and admin logs) - only applies to mobs.
+
 // Some on_mob_life() procs check for alien races.
 #define IS_DIONA  1
 #define IS_VOX    2
@@ -727,10 +756,6 @@ var/list/be_special_flags = list(
 #define ATMOS_DEFAULT_VOLUME_MIXER  200 // L.
 #define ATMOS_DEFAULT_VOLUME_PIPE   70  // L.
 
-// Reagent metabolism defines.
-#define FOOD_METABOLISM    0.4
-#define ALCOHOL_METABOLISM 0.1
-
 // Chemistry.
 #define CHEM_SYNTH_ENERGY 500 // How much energy does it take to synthesize 1 unit of chemical, in Joules.
 
@@ -747,6 +772,7 @@ var/list/be_special_flags = list(
 #define MAX_MESSAGE_LEN       1024
 #define MAX_PAPER_MESSAGE_LEN 3072
 #define MAX_BOOK_MESSAGE_LEN  9216
+#define MAX_LNAME_LEN         64
 #define MAX_NAME_LEN          26
 
 // Event defines.
@@ -765,9 +791,9 @@ var/list/be_special_flags = list(
 #define STATUS_UPDATE 1 // ORANGE Visability
 #define STATUS_DISABLED 0 // RED Visability
 #define STATUS_CLOSE -1 // Close the interface
+
 //General-purpose life speed define for plants.
 #define HYDRO_SPEED_MULTIPLIER 1
-#define NANO_IGNORE_DISTANCE 1
 
 // Robot AI notifications
 #define ROBOT_NOTIFICATION_NEW_UNIT 1
@@ -779,3 +805,204 @@ var/list/be_special_flags = list(
 #define BOMBCAP_HEAVY_RADIUS (max_explosion_range/2)
 #define BOMBCAP_LIGHT_RADIUS max_explosion_range
 #define BOMBCAP_FLASH_RADIUS (max_explosion_range*1.5)
+
+#define DEFAULT_JOB_TYPE /datum/job/assistant
+
+// Appearance change flags
+#define APPEARANCE_UPDATE_DNA 1
+#define APPEARANCE_RACE	(2|APPEARANCE_UPDATE_DNA)
+#define APPEARANCE_GENDER (4|APPEARANCE_UPDATE_DNA)
+#define APPEARANCE_SKIN 8
+#define APPEARANCE_HAIR 16
+#define APPEARANCE_HAIR_COLOR 32
+#define APPEARANCE_FACIAL_HAIR 64
+#define APPEARANCE_FACIAL_HAIR_COLOR 128
+#define APPEARANCE_EYE_COLOR 256
+#define APPEARANCE_ALL_HAIR (APPEARANCE_HAIR|APPEARANCE_HAIR_COLOR|APPEARANCE_FACIAL_HAIR|APPEARANCE_FACIAL_HAIR_COLOR)
+#define APPEARANCE_ALL 511
+
+// Mode/antag template macros.
+#define MODE_BORER "borer"
+#define MODE_XENOMORPH "xeno"
+#define MODE_LOYALIST "loyalist"
+#define MODE_MUTINEER "mutineer"
+#define MODE_COMMANDO "commando"
+#define MODE_DEATHSQUAD "deathsquad"
+#define MODE_ERT "ert"
+#define MODE_MERCENARY "mercenary"
+#define MODE_NINJA "ninja"
+#define MODE_RAIDER "raider"
+#define MODE_WIZARD "wizard"
+#define MODE_CHANGELING "changeling"
+#define MODE_CULTIST "cultist"
+#define MODE_HIGHLANDER "highlander"
+#define MODE_MONKEY "monkey"
+#define MODE_RENEGADE "renegade"
+#define MODE_REVOLUTIONARY "revolutionary"
+#define MODE_MALFUNCTION "malf"
+#define MODE_TRAITOR "traitor"
+
+#define MIN_SUPPLIED_LAW_NUMBER 15
+#define MAX_SUPPLIED_LAW_NUMBER 50
+
+//Area flags, possibly more to come
+#define RAD_SHIELDED 1 //shielded from radiation, clearly
+
+//intent flags, why wasn't this done the first time?
+#define I_HELP		"help"
+#define I_DISARM	"disarm"
+#define I_GRAB		"grab"
+#define I_HURT		"hurt"
+
+/*
+	These are used Bump() code for living mobs, in the mob_bump_flag, mob_swap_flags, and mob_push_flags vars to determine whom can bump/swap with whom.
+*/
+#define HUMAN 1
+#define MONKEY 2
+#define ALIEN 4
+#define ROBOT 8
+#define SLIME 16
+#define SIMPLE_ANIMAL 32
+
+
+#define ALLMOBS (HUMAN|MONKEY|ALIEN|ROBOT|SLIME|SIMPLE_ANIMAL)
+
+#define NEXT_MOVE_DELAY 8
+
+#define DROPLIMB_EDGE 0
+#define DROPLIMB_BLUNT 1
+#define DROPLIMB_BURN 2
+
+// Custom layer definitions, supplementing the default TURF_LAYER, MOB_LAYER, etc.
+#define DOOR_OPEN_LAYER 2.7		//Under all objects if opened. 2.7 due to tables being at 2.6
+#define DOOR_CLOSED_LAYER 3.1	//Above most items if closed
+#define LIGHTING_LAYER 11
+#define OBFUSCATION_LAYER 21	//Where images covering the view for eyes are put
+#define SCREEN_LAYER 22			//Mob HUD/effects layer
+
+
+/////////////////
+////WIZARD //////
+/////////////////
+
+/*		WIZARD SPELL FLAGS		*/
+#define GHOSTCAST		1	//can a ghost cast it?
+#define NEEDSCLOTHES	2	//does it need the wizard garb to cast? Nonwizard spells should not have this
+#define NEEDSHUMAN		4	//does it require the caster to be human?
+#define Z2NOCAST		8	//if this is added, the spell can't be cast at centcomm
+#define STATALLOWED		16	//if set, the user doesn't have to be conscious to cast. Required for ghost spells
+#define IGNOREPREV		32	//if set, each new target does not overlap with the previous one
+//The following flags only affect different types of spell, and therefore overlap
+//Targeted spells
+#define INCLUDEUSER		64	//does the spell include the caster in its target selection?
+#define SELECTABLE		128	//can you select each target for the spell?
+//AOE spells
+#define IGNOREDENSE		64	//are dense turfs ignored in selection?
+#define IGNORESPACE		128	//are space turfs ignored in selection?
+//End split flags
+#define CONSTRUCT_CHECK	256	//used by construct spells - checks for nullrods
+#define NO_BUTTON		512	//spell won't show up in the HUD with this
+
+//invocation
+#define SpI_SHOUT	"shout"
+#define SpI_WHISPER	"whisper"
+#define SpI_EMOTE	"emote"
+#define SpI_NONE	"none"
+
+//upgrading
+#define Sp_SPEED	"speed"
+#define Sp_POWER	"power"
+#define Sp_TOTAL	"total"
+
+//casting costs
+#define Sp_RECHARGE	"recharge"
+#define Sp_CHARGES	"charges"
+#define Sp_HOLDVAR	"holdervar"
+
+///////WIZ END/////////
+
+//singularity defines
+#define STAGE_ONE 	1
+#define STAGE_TWO 	3
+#define STAGE_THREE	5
+#define STAGE_FOUR	7
+#define STAGE_FIVE	9
+#define STAGE_SUPER	11
+
+// Camera networks
+#define NETWORK_CRESCENT "Crescent"
+#define NETWORK_CIVILIAN_EAST "Civilian East"
+#define NETWORK_CIVILIAN_WEST "Civilian West"
+#define NETWORK_COMMAND "Command"
+#define NETWORK_ENGINE "Engine"
+#define NETWORK_ENGINEERING "Engineering"
+#define NETWORK_ENGINEERING_OUTPOST "Engineering Outpost"
+#define NETWORK_ERT "ERT"
+#define NETWORK_EXODUS "Exodus"
+#define NETWORK_MEDICAL "Medical"
+#define NETWORK_MINE "MINE"
+#define NETWORK_RESEARCH "Research"
+#define NETWORK_RESEARCH_OUTPOST "Research Outpost"
+#define NETWORK_ROBOTS "Robots"
+#define NETWORK_PRISON "Prison"
+#define NETWORK_SECURITY "Security"
+#define NETWORK_TELECOM "Tcomsat"
+#define NETWORK_THUNDER "thunder"
+
+// Languages
+#define LANGUAGE_SOL_COMMON "Sol Common"
+#define LANGUAGE_UNATHI "Sinta'unathi"
+#define LANGUAGE_SIIK_MAAS "Siik'maas"
+#define LANGUAGE_SIIK_TAJR "Siik'tajr"
+#define LANGUAGE_SKRELLIAN "Skrellian"
+#define LANGUAGE_ROOTSPEAK "Rootspeak"
+#define LANGUAGE_TRADEBAND "Tradeband"
+#define LANGUAGE_GUTTER "Gutter"
+
+#define WALL_CAN_OPEN 1
+#define WALL_OPENING 2
+
+#define Clamp(x, y, z) 	(x <= y ? y : (x >= z ? z : x))
+
+#define CLAMP01(x) 		(Clamp(x, 0, 1))
+
+#define DEFAULT_WALL_MATERIAL "steel"
+#define DEFAULT_TABLE_MATERIAL "plastic"
+
+// Convoluted setup so defines can be supplied by Bay12 main server compile script.
+// Should still work fine for people jamming the icons into their repo.
+#ifndef CUSTOM_ITEM_OBJ
+#define CUSTOM_ITEM_OBJ 'icons/obj/custom_items_obj.dmi'
+#endif
+#ifndef CUSTOM_ITEM_MOB
+#define CUSTOM_ITEM_MOB 'icons/mob/custom_items_mob.dmi'
+#endif
+#ifndef CUSTOM_ITEM_ROBOT
+#define CUSTOM_ITEM_ROBOT 'icons/mob/custom_synthetic.dmi'
+#endif
+
+//default item on-mob icons
+#define INV_HEAD_DEF_ICON 'icons/mob/head.dmi'
+#define INV_BACK_DEF_ICON 'icons/mob/back.dmi'
+#define INV_L_HAND_DEF_ICON 'icons/mob/items/lefthand.dmi'
+#define INV_R_HAND_DEF_ICON 'icons/mob/items/righthand.dmi'
+#define INV_W_UNIFORM_DEF_ICON 'icons/mob/uniform.dmi'
+#define INV_ACCESSORIES_DEF_ICON 'icons/mob/ties.dmi'
+
+#define SHARD_SHARD "shard"
+#define SHARD_SHRAPNEL "shrapnel"
+#define SHARD_STONE_PIECE "piece"
+#define SHARD_SPLINTER "splinters"
+#define SHARD_NONE ""
+
+#define MATERIAL_UNMELTABLE 1
+#define MATERIAL_BRITTLE 2
+#define MATERIAL_PADDING 4
+
+#define TABLE_BRITTLE_MATERIAL_MULTIPLIER 4 // Amount table damage is multiplied by if it is made of a brittle material (e.g. glass)
+
+#define FOR_DVIEW(type, range, center, invis_flags) \
+	dview_mob.loc = center; \
+	dview_mob.see_invisible = invis_flags; \
+	for(type in view(range, dview_mob))
+#define END_FOR_DVIEW dview_mob.loc = null

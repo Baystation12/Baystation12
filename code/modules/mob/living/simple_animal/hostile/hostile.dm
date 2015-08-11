@@ -14,6 +14,9 @@
 	stop_automated_movement_when_pulled = 0
 	var/destroy_surroundings = 1
 
+	var/shuttletarget = null
+	var/enroute = 0
+
 /mob/living/simple_animal/hostile/proc/FindTarget()
 
 	var/atom/T = null
@@ -113,11 +116,11 @@
 
 /mob/living/simple_animal/hostile/proc/ListTargets(var/dist = 7)
 	var/list/L = hearers(src, dist)
-	
+
 	for (var/obj/mecha/M in mechas_list)
 		if (M.z == src.z && get_dist(src, M) <= dist)
 			L += M
-	
+
 	return L
 
 /mob/living/simple_animal/hostile/death()
@@ -185,9 +188,11 @@
 	if(!A)	return
 
 	if (!istype(target, /turf))
-		del(A)
+		qdel(A)
 		return
 	A.current = target
+	A.starting = get_turf(src)
+	A.original = get_turf(target)
 	A.yo = target:y - start:y
 	A.xo = target:x - start:x
 	spawn( 0 )
@@ -204,3 +209,41 @@
 			var/obj/structure/obstacle = locate(/obj/structure, get_step(src, dir))
 			if(istype(obstacle, /obj/structure/window) || istype(obstacle, /obj/structure/closet) || istype(obstacle, /obj/structure/table) || istype(obstacle, /obj/structure/grille))
 				obstacle.attack_generic(src,rand(melee_damage_lower,melee_damage_upper),attacktext)
+
+
+/mob/living/simple_animal/hostile/proc/check_horde()
+	return 0
+	if(emergency_shuttle.shuttle.location)
+		if(!enroute && !target_mob)	//The shuttle docked, all monsters rush for the escape hallway
+			if(!shuttletarget && escape_list.len) //Make sure we didn't already assign it a target, and that there are targets to pick
+				shuttletarget = pick(escape_list) //Pick a shuttle target
+			enroute = 1
+			stop_automated_movement = 1
+			spawn()
+				if(!src.stat)
+					horde()
+
+		if(get_dist(src, shuttletarget) <= 2)		//The monster reached the escape hallway
+			enroute = 0
+			stop_automated_movement = 0
+
+/mob/living/simple_animal/hostile/proc/horde()
+	var/turf/T = get_step_to(src, shuttletarget)
+	for(var/atom/A in T)
+		if(istype(A,/obj/machinery/door/airlock))
+			var/obj/machinery/door/airlock/D = A
+			D.open(1)
+		else if(istype(A,/obj/structure/simple_door))
+			var/obj/structure/simple_door/D = A
+			if(D.density)
+				D.Open()
+		else if(istype(A,/obj/structure/cult/pylon))
+			A.attack_generic(src, rand(melee_damage_lower, melee_damage_upper))
+		else if(istype(A, /obj/structure/window) || istype(A, /obj/structure/closet) || istype(A, /obj/structure/table) || istype(A, /obj/structure/grille))
+			A.attack_generic(src, rand(melee_damage_lower, melee_damage_upper))
+	Move(T)
+	FindTarget()
+	if(!target_mob || enroute)
+		spawn(10)
+			if(!src.stat)
+				horde()

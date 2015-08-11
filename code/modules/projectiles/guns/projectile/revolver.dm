@@ -22,6 +22,7 @@
 	max_shells = 6
 	caliber = "38"
 	origin_tech = "combat=2;materials=2"
+	fire_sound = 'sound/weapons/Gunshot_light.ogg'
 	ammo_type = /obj/item/ammo_casing/c38
 
 /obj/item/weapon/gun/projectile/revolver/detective/verb/rename_gun()
@@ -35,9 +36,30 @@
 		M << "<span class='notice'>You don't feel cool enough to name this gun, chump.</span>"
 		return 0
 
-	var/input = stripped_input(usr,"What do you want to name the gun?", ,"", MAX_NAME_LEN)
+	var/input = sanitizeSafe(input("What do you want to name the gun?", ,""), MAX_NAME_LEN)
 
 	if(src && input && !M.stat && in_range(M,src))
 		name = input
 		M << "You name the gun [input]. Say hello to your new friend."
 		return 1
+
+// Blade Runner pistol.
+/obj/item/weapon/gun/projectile/revolver/deckard
+	name = "Deckard .44"
+	desc = "A custom-built revolver, based off the semi-popular Detective Special model."
+	icon_state = "deckard-empty"
+	ammo_type = /obj/item/ammo_magazine/c38/rubber
+
+/obj/item/weapon/gun/projectile/revolver/deckard/update_icon()
+	..()
+	if(loaded.len)
+		icon_state = "deckard-loaded"
+	else
+		icon_state = "deckard-empty"
+
+/obj/item/weapon/gun/projectile/revolver/deckard/load_ammo(var/obj/item/A, mob/user)
+	if(istype(A, /obj/item/ammo_magazine))
+		flick("deckard-reload",src)
+	..()
+
+

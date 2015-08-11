@@ -1,5 +1,0 @@
-author: PsiOmegaDelta
-delete-after: True
-
-changes: 
-  - bugfix: "Teleporter artifacts should no longer teleport mobs inside objects."

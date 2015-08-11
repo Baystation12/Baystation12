@@ -42,25 +42,19 @@
 			shot_delay = 30
 			iconholder = 1
 
-/obj/machinery/porta_turret/tag/interact(mob/user)
-	var/dat
+/obj/machinery/porta_turret/tag/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+	var/data[0]
+	data["access"] = !isLocked(user)
+	data["locked"] = locked
+	data["enabled"] = enabled
+	data["is_lethal"] = 0
 
-	if(istype(user,/mob/living/carbon/human))
-		var/mob/living/carbon/human/H = user
-		if(lasercolor == "b" && istype(H.wear_suit, /obj/item/clothing/suit/redtag))
-			return
-		if(lasercolor == "r" && istype(H.wear_suit, /obj/item/clothing/suit/bluetag))
-			return
-	dat += text({"
-				<TT><B>Automatic Portable Turret Installation</B></TT><BR><BR>
-				Status: []<BR>"},
-
-				"<A href='?src=\ref[src];power=1'>[on ? "On" : "Off"]</A>" )
-
-
-	user << browse("<HEAD><TITLE>Automatic Portable Turret Installation</TITLE></HEAD>[dat]", "window=autosec")
-	onclose(user, "autosec")
-	return
+	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	if (!ui)
+		ui = new(user, src, ui_key, "turret_control.tmpl", "Turret Controls", 500, 300)
+		ui.set_initial_data(data)
+		ui.open()
+		ui.set_auto_update(1)
 
 /obj/machinery/porta_turret/tag/update_icon()
 	if(!anchored)
@@ -70,7 +64,7 @@
 		icon_state = "[lasercolor]destroyed_target_prism"
 	else
 		if(powered())
-			if(on)
+			if(enabled)
 				if(iconholder)
 					//lasers have a orange icon
 					icon_state = "[lasercolor]orange_target_prism"
@@ -88,13 +82,13 @@
 	if(lasercolor == "b" && disabled == 0)
 		if(istype(Proj, /obj/item/weapon/gun/energy/lasertag/red))
 			disabled = 1
-			del(Proj) // qdel
+			qdel(Proj)
 			sleep(100)
 			disabled = 0
 	if(lasercolor == "r" && disabled == 0)
 		if(istype(Proj, /obj/item/weapon/gun/energy/lasertag/blue))
 			disabled = 1
-			del(Proj) // qdel
+			qdel(Proj)
 			sleep(100)
 			disabled = 0
 

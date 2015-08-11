@@ -7,59 +7,19 @@
 	density = 0
 	anchored = 1
 	var/shattered = 0
+	var/list/ui_users = list()
 
 /obj/structure/mirror/attack_hand(mob/user as mob)
 
 	if(shattered)	return
 
 	if(ishuman(user))
-		var/mob/living/carbon/human/H = user
-
-		if(H.a_intent == "hurt")
-			if(prob(30) || H.species.can_shred(H))
-				attack_generic(user,1)
-			else
-				attack_generic(user)
-			return
-
-		var/userloc = H.loc
-
-		//see code/modules/mob/new_player/preferences.dm at approx line 545 for comments!
-		//this is largely copypasted from there.
-
-		//handle facial hair (if necessary)
-		if(H.gender == MALE)
-			var/list/species_facial_hair = list()
-			if(H.species)
-				for(var/i in facial_hair_styles_list)
-					var/datum/sprite_accessory/facial_hair/tmp_facial = facial_hair_styles_list[i]
-					if(H.species.name in tmp_facial.species_allowed)
-						species_facial_hair += i
-			else
-				species_facial_hair = facial_hair_styles_list
-
-			var/new_style = input(user, "Select a facial hair style", "Grooming")  as null|anything in species_facial_hair
-			if(userloc != H.loc) return	//no tele-grooming
-			if(new_style)
-				H.f_style = new_style
-
-		//handle normal hair
-		var/list/species_hair = list()
-		if(H.species)
-			for(var/i in hair_styles_list)
-				var/datum/sprite_accessory/hair/tmp_hair = hair_styles_list[i]
-				if(H.species.name in tmp_hair.species_allowed)
-					species_hair += i
-		else
-			species_hair = hair_styles_list
-
-		var/new_style = input(user, "Select a hair style", "Grooming")  as null|anything in species_hair
-		if(userloc != H.loc) return	//no tele-grooming
-		if(new_style)
-			H.h_style = new_style
-
-		H.update_hair()
-
+		var/obj/nano_module/appearance_changer/AC = ui_users[user]
+		if(!AC)
+			AC = new(src, user)
+			AC.name = "SalonPro Nano-Mirror(TM)"
+			ui_users[user] = AC
+		AC.ui_interact(user)
 
 /obj/structure/mirror/proc/shatter()
 	if(shattered)	return
@@ -94,6 +54,7 @@
 
 /obj/structure/mirror/attack_generic(var/mob/user, var/damage)
 
+	user.do_attack_animation(src)
 	if(shattered)
 		playsound(src.loc, 'sound/effects/hit_on_shattered_glass.ogg', 70, 1)
 		return 0
@@ -104,3 +65,32 @@
 	else
 		user.visible_message("<span class='danger'>[user] hits [src] and bounces off!</span>")
 	return 1
+
+// The following mirror is ~special~.
+/obj/structure/mirror/raider
+	name = "cracked mirror"
+	desc = "Something seems strange about this old, dirty mirror. Your reflection doesn't look like you remember it."
+	icon_state = "mirror_broke"
+	shattered = 1
+
+/obj/structure/mirror/raider/attack_hand(var/mob/living/carbon/human/user)
+	if(istype(get_area(src),/area/syndicate_mothership))
+		if(istype(user) && user.mind && user.mind.special_role == "Raider" && user.species != "Vox" && is_alien_whitelisted(user, "Vox"))
+			var/choice = input("Do you wish to become a Vox? This is not reversible.") as null|anything in list("No","Yes")
+			if(choice && choice == "Yes")
+				var/mob/living/carbon/human/vox/vox = new(get_turf(src),"Vox")
+				vox.gender = user.gender
+				raiders.equip(vox)
+				new /obj/item/organ/stack/vox(vox)
+				if(user.mind)
+					user.mind.transfer_to(vox)
+				spawn(1)
+					var/newname = sanitizeSafe(input(vox,"Enter a name, or leave blank for the default name.", "Name change","") as text, MAX_NAME_LEN)
+					if(!newname || newname == "")
+						var/datum/language/L = all_languages[vox.species.default_language]
+						newname = L.get_random_name()
+					vox.real_name = newname
+					vox.name = vox.real_name
+					raiders.update_access(vox)
+				qdel(user)
+	..()

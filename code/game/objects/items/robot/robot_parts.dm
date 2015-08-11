@@ -6,66 +6,88 @@
 	flags = CONDUCT
 	slot_flags = SLOT_BELT
 	var/construction_time = 100
-	var/list/construction_cost = list("metal"=20000,"glass"=5000)
-	var/list/part = null
+	var/list/construction_cost = list(DEFAULT_WALL_MATERIAL=20000,"glass"=5000)
+	var/list/part = null // Order of args is important for installing robolimbs.
 	var/sabotaged = 0 //Emagging limbs can have repercussions when installed as prosthetics.
+	var/model_info
+	dir = SOUTH
+
+/obj/item/robot_parts/set_dir()
+	return
+
+/obj/item/robot_parts/New(var/newloc, var/model)
+	..(newloc)
+	if(model_info && model)
+		model_info = model
+		var/datum/robolimb/R = all_robolimbs[model]
+		if(R)
+			name = "[R.company] [initial(name)]"
+			desc = "[R.desc]"
+			if(icon_state in icon_states(R.icon))
+				icon = R.icon
+	else
+		name = "robot [initial(name)]"
 
 /obj/item/robot_parts/l_arm
-	name = "robot left arm"
+	name = "left arm"
 	desc = "A skeletal limb wrapped in pseudomuscles, with a low-conductivity case."
 	icon_state = "l_arm"
 	construction_time = 200
-	construction_cost = list("metal"=18000)
+	construction_cost = list(DEFAULT_WALL_MATERIAL=18000)
 	part = list("l_arm","l_hand")
+	model_info = 1
 
 /obj/item/robot_parts/r_arm
-	name = "robot right arm"
+	name = "right arm"
 	desc = "A skeletal limb wrapped in pseudomuscles, with a low-conductivity case."
 	icon_state = "r_arm"
 	construction_time = 200
-	construction_cost = list("metal"=18000)
+	construction_cost = list(DEFAULT_WALL_MATERIAL=18000)
 	part = list("r_arm","r_hand")
+	model_info = 1
 
 /obj/item/robot_parts/l_leg
-	name = "robot left leg"
+	name = "left leg"
 	desc = "A skeletal limb wrapped in pseudomuscles, with a low-conductivity case."
 	icon_state = "l_leg"
 	construction_time = 200
-	construction_cost = list("metal"=15000)
+	construction_cost = list(DEFAULT_WALL_MATERIAL=15000)
 	part = list("l_leg","l_foot")
+	model_info = 1
 
 /obj/item/robot_parts/r_leg
-	name = "robot right leg"
+	name = "right leg"
 	desc = "A skeletal limb wrapped in pseudomuscles, with a low-conductivity case."
 	icon_state = "r_leg"
 	construction_time = 200
-	construction_cost = list("metal"=15000)
+	construction_cost = list(DEFAULT_WALL_MATERIAL=15000)
 	part = list("r_leg","r_foot")
+	model_info = 1
 
 /obj/item/robot_parts/chest
-	name = "robot torso"
+	name = "torso"
 	desc = "A heavily reinforced case containing cyborg logic boards, with space for a standard power cell."
 	icon_state = "chest"
 	construction_time = 350
-	construction_cost = list("metal"=40000)
+	construction_cost = list(DEFAULT_WALL_MATERIAL=40000)
 	var/wires = 0.0
 	var/obj/item/weapon/cell/cell = null
 
 /obj/item/robot_parts/head
-	name = "robot head"
+	name = "head"
 	desc = "A standard reinforced braincase, with spine-plugged neural socket and sensor gimbals."
 	icon_state = "head"
 	construction_time = 350
-	construction_cost = list("metal"=25000)
+	construction_cost = list(DEFAULT_WALL_MATERIAL=25000)
 	var/obj/item/device/flash/flash1 = null
 	var/obj/item/device/flash/flash2 = null
 
 /obj/item/robot_parts/robot_suit
-	name = "robot endoskeleton"
+	name = "endoskeleton"
 	desc = "A complex metal backbone with standard limb sockets and pseudomuscle anchors."
 	icon_state = "robo_suit"
 	construction_time = 500
-	construction_cost = list("metal"=50000)
+	construction_cost = list(DEFAULT_WALL_MATERIAL=50000)
 	var/obj/item/robot_parts/l_arm/l_arm = null
 	var/obj/item/robot_parts/r_arm/r_arm = null
 	var/obj/item/robot_parts/l_leg/l_leg = null
@@ -103,16 +125,16 @@
 
 /obj/item/robot_parts/robot_suit/attackby(obj/item/W as obj, mob/user as mob)
 	..()
-	if(istype(W, /obj/item/stack/sheet/metal) && !l_arm && !r_arm && !l_leg && !r_leg && !chest && !head)
-		var/obj/item/stack/sheet/metal/M = W
+	if(istype(W, /obj/item/stack/material) && W.get_material_name() == DEFAULT_WALL_MATERIAL && !l_arm && !r_arm && !l_leg && !r_leg && !chest && !head)
+		var/obj/item/stack/material/M = W
 		if (M.use(1))
 			var/obj/item/weapon/secbot_assembly/ed209_assembly/B = new /obj/item/weapon/secbot_assembly/ed209_assembly
 			B.loc = get_turf(src)
 			user << "<span class='notice'>You armed the robot frame.</span>"
 			if (user.get_inactive_hand()==src)
-				user.before_take_item(src)
+				user.remove_from_mob(src)
 				user.put_in_inactive_hand(B)
-			del(src)
+			qdel(src)
 		else
 			user << "<span class='warning'>You need one sheet of metal to arm the robot frame.</span>"
 	if(istype(W, /obj/item/robot_parts/l_leg))
@@ -189,7 +211,7 @@
 				user << "\red Sticking a dead [W] into the frame would sort of defeat the purpose."
 				return
 
-			if(M.brainmob.mind in ticker.mode.head_revolutionaries)
+			if(M.brainmob.mind in revs.head_revolutionaries)
 				user << "\red The frame's firmware lets out a shrill sound, and flashes 'Abnormal Memory Engram'. It refuses to accept the [W]."
 				return
 
@@ -228,12 +250,12 @@
 			callHook("borgify", list(O))
 			O.Namepick()
 
-			del(src)
+			qdel(src)
 		else
 			user << "\blue The MMI must go in after everything else!"
 
 	if (istype(W, /obj/item/weapon/pen))
-		var/t = stripped_input(user, "Enter new robot name", src.name, src.created_name, MAX_NAME_LEN)
+		var/t = sanitizeSafe(input(user, "Enter new robot name", src.name, src.created_name), MAX_NAME_LEN)
 		if (!t)
 			return
 		if (!in_range(src, usr) && src.loc != usr)
@@ -269,29 +291,38 @@
 	..()
 	if(istype(W, /obj/item/device/flash))
 		if(istype(user,/mob/living/silicon/robot))
-			user << "\red How do you propose to do that?"
-			return
-		else if(src.flash1 && src.flash2)
-			user << "\blue You have already inserted the eyes!"
-			return
-		else if(src.flash1)
-			user.drop_item()
-			W.loc = src
-			src.flash2 = W
-			user << "\blue You insert the flash into the eye socket!"
+			var/current_module = user.get_active_hand()
+			if(current_module == W)
+				user << "<span class='warning'>How do you propose to do that?</span>"
+				return
+			else
+				add_flashes(W,user)
 		else
-			user.drop_item()
-			W.loc = src
-			src.flash1 = W
-			user << "\blue You insert the flash into the eye socket!"
+			add_flashes(W,user)
 	else if(istype(W, /obj/item/weapon/stock_parts/manipulator))
 		user << "\blue You install some manipulators and modify the head, creating a functional spider-bot!"
 		new /mob/living/simple_animal/spiderbot(get_turf(loc))
 		user.drop_item()
-		del(W)
-		del(src)
+		qdel(W)
+		qdel(src)
 		return
 	return
+
+/obj/item/robot_parts/head/proc/add_flashes(obj/item/W as obj, mob/user as mob) //Made into a seperate proc to avoid copypasta
+	if(src.flash1 && src.flash2)
+		user << "<span class='notice'>You have already inserted the eyes!</span>"
+		return
+	else if(src.flash1)
+		user.drop_item()
+		W.loc = src
+		src.flash2 = W
+		user << "<span class='notice'>You insert the flash into the eye socket!</span>"
+	else
+		user.drop_item()
+		W.loc = src
+		src.flash1 = W
+		user << "<span class='notice'>You insert the flash into the eye socket!</span>"
+
 
 /obj/item/robot_parts/attackby(obj/item/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/weapon/card/emag))

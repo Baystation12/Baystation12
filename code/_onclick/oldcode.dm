@@ -122,7 +122,7 @@
 	if ((!( src in usr.contents ) && (((!( isturf(src) ) && (!( isturf(src.loc) ) && (src.loc && !( isturf(src.loc.loc) )))) || !( isturf(usr.loc) )) && (src.loc != usr.loc && (!( istype(src, /obj/screen) ) && !( usr.contents.Find(src.loc) ))))))
 		if (istype(usr, /mob/living/silicon/ai))
 			var/mob/living/silicon/ai/ai = usr
-			if (ai.control_disabled || ai.malfhacking)
+			if (ai.control_disabled)
 				return
 		else
 			return
@@ -253,7 +253,7 @@
 					See the previous More info, for... more info...
 				*/
 
-			//del(D)
+			//qdel(D)
 			// Garbage Collect Dummy
 			D.loc = null
 			D = null
@@ -347,7 +347,7 @@
 					src.hand_al(usr, usr.hand)
 		else
 			// ------- YOU ARE CLICKING ON AN OBJECT THAT'S INACCESSIBLE TO YOU AND IS NOT YOUR HUD -------
-			if((LASER in usr:mutations) && usr:a_intent == "harm" && world.time >= usr.next_move)
+			if((LASER in usr:mutations) && usr:a_intent == I_HURT && world.time >= usr.next_move)
 				// ------- YOU HAVE THE LASER MUTATION, YOUR INTENT SET TO HURT AND IT'S BEEN MORE THAN A DECISECOND SINCE YOU LAS TATTACKED -------
 
 				var/turf/T = get_turf(usr)

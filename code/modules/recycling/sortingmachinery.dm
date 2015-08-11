@@ -23,7 +23,7 @@
 			if(istype(wrapped, /obj/structure/closet))
 				var/obj/structure/closet/O = wrapped
 				O.welded = 0
-		del(src)
+		qdel(src)
 
 	attackby(obj/item/W as obj, mob/user as mob)
 		if(istype(W, /obj/item/device/destTagger))
@@ -45,7 +45,7 @@
 		else if(istype(W, /obj/item/weapon/pen))
 			switch(alert("What would you like to alter?",,"Title","Description", "Cancel"))
 				if("Title")
-					var/str = trim(sanitize(copytext(input(usr,"Label text?","Set label",""),1,MAX_NAME_LEN)))
+					var/str = sanitizeSafe(input(usr,"Label text?","Set label",""), MAX_NAME_LEN)
 					if(!str || !length(str))
 						usr << "<span class='warning'> Invalid text.</span>"
 						return
@@ -59,7 +59,7 @@
 					else
 						nameset = 1
 				if("Description")
-					var/str = trim(sanitize(copytext(input(usr,"Label text?","Set label",""),1,MAX_MESSAGE_LEN)))
+					var/str = sanitize(input(usr,"Label text?","Set label",""))
 					if(!str || !length(str))
 						usr << "\red Invalid text."
 						return
@@ -129,7 +129,7 @@
 			else
 				wrapped.loc = get_turf(src)
 
-		del(src)
+		qdel(src)
 		return
 
 	attackby(obj/item/W as obj, mob/user as mob)
@@ -152,7 +152,7 @@
 		else if(istype(W, /obj/item/weapon/pen))
 			switch(alert("What would you like to alter?",,"Title","Description", "Cancel"))
 				if("Title")
-					var/str = trim(sanitize(copytext(input(usr,"Label text?","Set label",""),1,MAX_NAME_LEN)))
+					var/str = sanitizeSafe(input(usr,"Label text?","Set label",""), MAX_NAME_LEN)
 					if(!str || !length(str))
 						usr << "<span class='warning'> Invalid text.</span>"
 						return
@@ -167,7 +167,7 @@
 						nameset = 1
 
 				if("Description")
-					var/str = trim(sanitize(copytext(input(usr,"Label text?","Set label",""),1,MAX_MESSAGE_LEN)))
+					var/str = sanitize(input(usr,"Label text?","Set label",""))
 					if(!str || !length(str))
 						usr << "\red Invalid text."
 						return
@@ -299,7 +299,7 @@
 			user << "\blue The object you are trying to wrap is unsuitable for the sorting machinery!"
 		if (src.amount <= 0)
 			new /obj/item/weapon/c_tube( src.loc )
-			del(src)
+			qdel(src)
 			return
 		return
 
@@ -309,6 +309,16 @@
 
 		return
 
+/obj/structure/bigDelivery/Destroy()
+	if(wrapped) //sometimes items can disappear. For example, bombs. --rastaf0
+		wrapped.loc = (get_turf(loc))
+		if(istype(wrapped, /obj/structure/closet))
+			var/obj/structure/closet/O = wrapped
+			O.welded = 0
+	var/turf/T = get_turf(src)
+	for(var/atom/movable/AM in contents)
+		AM.loc = T
+	..()
 
 /obj/item/device/destTagger
 	name = "destination tagger"
@@ -437,8 +447,13 @@
 					C.update()
 					C.anchored = 1
 					C.density = 1
-					del(src)
+					qdel(src)
 				return
 			else
 				user << "You need more welding fuel to complete this task."
 				return
+
+/obj/machinery/disposal/deliveryChute/Destroy()
+	if(trunk)
+		trunk.linked = null
+	..()

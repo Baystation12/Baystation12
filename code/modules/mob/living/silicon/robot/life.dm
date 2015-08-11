@@ -58,7 +58,7 @@
 		src.has_power = 0
 		if(lights_on) // Light is on but there is no power!
 			lights_on = 0
-			SetLuminosity(0)
+			set_light(0)
 
 /mob/living/silicon/robot/proc/handle_regular_status_updates()
 
@@ -222,16 +222,17 @@
 			src.healths.icon_state = "health7"
 
 	if (src.syndicate && src.client)
-		if(ticker.mode.name == "traitor")
-			for(var/datum/mind/tra in ticker.mode.traitors)
-				if(tra.current)
-					var/I = image('icons/mob/mob.dmi', loc = tra.current, icon_state = "traitor")
-					src.client.images += I
+		for(var/datum/mind/tra in traitors.current_antagonists)
+			if(tra.current)
+				// TODO: Update to new antagonist system.
+				var/I = image('icons/mob/mob.dmi', loc = tra.current, icon_state = "traitor")
+				src.client.images += I
 		src.disconnect_from_ai()
 		if(src.mind)
+			// TODO: Update to new antagonist system.
 			if(!src.mind.special_role)
 				src.mind.special_role = "traitor"
-				ticker.mode.traitors += src.mind
+				traitors.current_antagonists |= src.mind
 
 	if (src.cells)
 		if (src.cell)

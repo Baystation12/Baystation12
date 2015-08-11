@@ -2,16 +2,12 @@
 	gender = NEUTER
 	voice_name = "synthesized voice"
 	var/syndicate = 0
-	var/datum/ai_laws/laws = null//Now... THEY ALL CAN ALL HAVE LAWS
-	var/list/additional_law_channels = list("State")
 	var/const/MAIN_CHANNEL = "Main Frequency"
 	var/lawchannel = MAIN_CHANNEL // Default channel on which to state laws
 	var/list/stating_laws = list()// Channels laws are currently being stated on
-	var/lawcheck[1]
-	var/ioncheck[1]
 	var/obj/item/device/radio/common_radio
 
-	var/list/hud_list[9]
+	var/list/hud_list[10]
 	var/list/speech_synthesizer_langs = list()	//which languages can be vocalized by the speech synthesizer
 
 	//Used in say.dm.
@@ -21,9 +17,6 @@
 	var/pose //Yes, now AIs can pose too.
 	var/obj/item/device/camera/siliconcam/aiCamera = null //photography
 	var/local_transmit //If set, can only speak to others of the same type within a short range.
-
-	// Subsystems
-	var/obj/nano_module/alarm_monitor = null
 
 	var/sensor_mode = 0 //Determines the current HUD.
 	var/mob/living/cameraFollow = null
@@ -35,11 +28,13 @@
 	#define MED_HUD 2 //Medical HUD mode
 
 /mob/living/silicon/New()
+	silicon_mob_list |= src
 	..()
 	add_language("Galactic Common")
 	init_subsystems()
 
-/mob/living/silicon/Del()
+/mob/living/silicon/Destroy()
+	silicon_mob_list -= src
 	for(var/datum/alarm_handler/AH in alarm_manager.all_handlers)
 		AH.unregister(src)
 	..()
@@ -170,13 +165,12 @@
 
 // This adds the basic clock, shuttle recall timer, and malf_ai info to all silicon lifeforms
 /mob/living/silicon/Stat()
-	..()
-	statpanel("Status")
-	if (src.client.statpanel == "Status")
+	if(statpanel("Status"))
 		show_station_time()
 		show_emergency_shuttle_eta()
 		show_system_integrity()
 		show_malf_ai()
+	..()
 
 // this function displays the stations manifest in a separate window
 /mob/living/silicon/proc/show_station_manifest()
@@ -219,9 +213,19 @@
 
 	var/dat = "<b><font size = 5>Known Languages</font></b><br/><br/>"
 
+	if(default_language)
+		dat += "Current default language: [default_language] - <a href='byond://?src=\ref[src];default_lang=reset'>reset</a><br/><br/>"
+
 	for(var/datum/language/L in languages)
 		if(!(L.flags & NONGLOBAL))
-			dat += "<b>[L.name] (:[L.key])</b><br/>Speech Synthesizer: <i>[(L in speech_synthesizer_langs)? "YES":"NOT SUPPORTED"]</i><br/>[L.desc]<br/><br/>"
+			var/default_str
+			if(L == default_language)
+				default_str = " - default - <a href='byond://?src=\ref[src];default_lang=reset'>reset</a>"
+			else
+				default_str = " - <a href='byond://?src=\ref[src];default_lang=[L]'>set default</a>"
+
+			var/synth = (L in speech_synthesizer_langs)
+			dat += "<b>[L.name] (:[L.key])</b>[synth ? default_str : null]<br/>Speech Synthesizer: <i>[synth ? "YES" : "NOT SUPPORTED"]</i><br/>[L.desc]<br/><br/>"
 
 	src << browse(dat, "window=checklanguage")
 	return
@@ -244,38 +248,17 @@
 	set desc = "Sets a description which will be shown when someone examines you."
 	set category = "IC"
 
-	pose =  sanitize(copytext(input(usr, "This is [src]. It is...", "Pose", null)  as text, 1, MAX_MESSAGE_LEN))
+	pose =  sanitize(input(usr, "This is [src]. It is...", "Pose", null)  as text)
 
 /mob/living/silicon/verb/set_flavor()
 	set name = "Set Flavour Text"
 	set desc = "Sets an extended description of your character's features."
 	set category = "IC"
 
-	flavor_text =  sanitize(copytext(input(usr, "Please enter your new flavour text.", "Flavour text", null)  as text, 1))
+	flavor_text =  sanitize(input(usr, "Please enter your new flavour text.", "Flavour text", null)  as text)
 
 /mob/living/silicon/binarycheck()
 	return 1
-
-/mob/living/silicon/Topic(href, href_list)
-	if(..())
-		return 1
-
-	if (href_list["lawr"]) // Selects on which channel to state laws
-		var/list/channels = list(MAIN_CHANNEL)
-		if(common_radio)
-			for (var/ch_name in common_radio.channels)
-				channels += ch_name
-
-		channels += additional_law_channels
-		channels += "Cancel"
-
-		var/setchannel = input(usr, "Specify channel.", "Channel selection") in channels
-		if(setchannel != "Cancel")
-			lawchannel = setchannel
-			checklaws()
-		return 1
-
-	return 0
 
 /mob/living/silicon/ex_act(severity)
 	if(!blinded)
@@ -297,12 +280,6 @@
 				adjustBruteLoss(30)
 
 	updatehealth()
-
-/mob/living/silicon/proc/init_subsystems()
-	alarm_monitor = new/obj/nano_module/alarm_monitor/borg(src)
-	for(var/datum/alarm_handler/AH in alarm_manager.all_handlers)
-		AH.register(src, /mob/living/silicon/proc/receive_alarm)
-		queued_alarms[AH] = list()	// Makes sure alarms remain listed in consistent order
 
 /mob/living/silicon/proc/receive_alarm(var/datum/alarm_handler/alarm_handler, var/datum/alarm/alarm, was_raised)
 	if(!next_alarm_notice)
@@ -361,6 +338,17 @@
 	for(var/obj/machinery/camera/C in A.cameras())
 		cameratext += "[(cameratext == "")? "" : "|"]<A HREF=?src=\ref[src];switchcamera=\ref[C]>[C.c_tag]</A>"
 	src << "[A.alarm_name()]! ([(cameratext)? cameratext : "No Camera"])"
+
+
+/mob/living/silicon/proc/is_traitor()
+	return mind && (mind in traitors.current_antagonists)
+
+/mob/living/silicon/proc/is_malf()
+	return mind && (mind in malf.current_antagonists)
+
+/mob/living/silicon/proc/is_malf_or_traitor()
+	return is_traitor() || is_malf()
+
 
 /mob/living/silicon/reset_view()
 	..()

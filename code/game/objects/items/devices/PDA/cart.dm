@@ -58,10 +58,9 @@
 	icon_state = "cart-s"
 	access_security = 1
 
-/obj/item/weapon/cartridge/security/New()
+/obj/item/weapon/cartridge/security/initialize()
+	radio = new /obj/item/radio/integrated/beepsky(src)
 	..()
-	spawn(5)
-		radio = new /obj/item/radio/integrated/beepsky(src)
 
 /obj/item/weapon/cartridge/detective
 	name = "\improper D.E.T.E.C.T. cartridge"
@@ -102,6 +101,7 @@
 /obj/item/weapon/cartridge/signal
 	name = "generic signaler cartridge"
 	desc = "A data cartridge with an integrated radio signaler module."
+	var/qdeled = 0
 
 /obj/item/weapon/cartridge/signal/science
 	name = "\improper Signal Ace 2 cartridge"
@@ -110,12 +110,13 @@
 	access_reagent_scanner = 1
 	access_atmos = 1
 
-/obj/item/weapon/cartridge/signal/New()
+/obj/item/weapon/cartridge/signal/initialize()
+    radio = new /obj/item/radio/integrated/signal(src)
+    ..()
+
+/obj/item/weapon/cartridge/signal/Destroy()
+	qdel(radio)
 	..()
-	spawn(5)
-		radio = new /obj/item/radio/integrated/signal(src)
-
-
 
 /obj/item/weapon/cartridge/quartermaster
 	name = "\improper Space Parts & Space Vendors cartridge"
@@ -123,10 +124,9 @@
 	icon_state = "cart-q"
 	access_quartermaster = 1
 
-/obj/item/weapon/cartridge/quartermaster/New()
+/obj/item/weapon/cartridge/quartermaster/initialize()
+	radio = new /obj/item/radio/integrated/mule(src)
 	..()
-	spawn(5)
-		radio = new /obj/item/radio/integrated/mule(src)
 
 /obj/item/weapon/cartridge/head
 	name = "\improper Easy-Record DELUXE"
@@ -141,10 +141,8 @@
 	access_janitor = 1
 	access_security = 1
 
-/obj/item/weapon/cartridge/hop/New()
-	..()
-	spawn(5)
-		radio = new /obj/item/radio/integrated/mule(src)
+/obj/item/weapon/cartridge/hop/initialize()
+	radio = new /obj/item/radio/integrated/mule(src)
 
 /obj/item/weapon/cartridge/hos
 	name = "\improper R.O.B.U.S.T. DELUXE"
@@ -152,10 +150,9 @@
 	access_status_display = 1
 	access_security = 1
 
-/obj/item/weapon/cartridge/hos/New()
+/obj/item/weapon/cartridge/hos/initialize()
+	radio = new /obj/item/radio/integrated/beepsky(src)
 	..()
-	spawn(5)
-		radio = new /obj/item/radio/integrated/beepsky(src)
 
 /obj/item/weapon/cartridge/ce
 	name = "\improper Power-On DELUXE"
@@ -178,10 +175,9 @@
 	access_reagent_scanner = 1
 	access_atmos = 1
 
-/obj/item/weapon/cartridge/rd/New()
+/obj/item/weapon/cartridge/rd/initialize()
+	radio = new /obj/item/radio/integrated/signal(src)
 	..()
-	spawn(5)
-		radio = new /obj/item/radio/integrated/signal(src)
 
 /obj/item/weapon/cartridge/captain
 	name = "\improper Value-PAK cartridge"
@@ -331,7 +327,7 @@
 				beepskyData["botstatus"] = list("loca" = null, "mode" = -1)
 			var/botsCount=0
 			if(SC.botlist && SC.botlist.len)
-				for(var/obj/machinery/bot/B in SC.botlist)
+				for(var/mob/living/bot/B in SC.botlist)
 					botsCount++
 					if(B.loc)
 						botsData[++botsData.len] = list("Name" = sanitize(B.name), "Location" = sanitize(B.loc.loc.name), "ref" = "\ref[B]")
@@ -465,7 +461,7 @@
 			BucketData[++BucketData.len] = list("x" = 0, "y" = 0, dir=null, status = null)
 
 		var/CbotData[0]
-		for(var/obj/machinery/bot/cleanbot/B in world)
+		for(var/mob/living/bot/cleanbot/B in world)
 			var/turf/bl = get_turf(B)
 			if(bl)
 				if(bl.z != cl.z)
@@ -562,10 +558,10 @@
 				if("alert")
 					post_status("alert", href_list["alert"])
 				if("setmsg1")
-					message1 = reject_bad_text(trim(sanitize(copytext(input("Line 1", "Enter Message Text", message1) as text|null, 1, 40))), 40)
+					message1 = reject_bad_text(sanitize(input("Line 1", "Enter Message Text", message1) as text|null, 40), 40)
 					updateSelfDialog()
 				if("setmsg2")
-					message2 = reject_bad_text(trim(sanitize(copytext(input("Line 2", "Enter Message Text", message2) as text|null, 1, 40))), 40)
+					message2 = reject_bad_text(sanitize(input("Line 2", "Enter Message Text", message2) as text|null, 40), 40)
 					updateSelfDialog()
 				else
 					post_status(href_list["statdisp"])

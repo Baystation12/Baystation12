@@ -1,9 +1,9 @@
 
 /mob/living/carbon/process_resist()
-	
+
 	//drop && roll
 	if(on_fire)
-		fire_stacks -= 2 //reduced
+		fire_stacks -= 1.2
 		Weaken(3)
 		spin(32,2)
 		visible_message(
@@ -18,7 +18,7 @@
 				)
 			ExtinguishMob()
 		return
-	
+
 	..()
 	
 	if(handcuffed)
@@ -28,24 +28,24 @@
 
 /mob/living/carbon/proc/escape_handcuffs()
 	if(!(last_special <= world.time)) return
-	
+
 	next_move = world.time + 100
 	last_special = world.time + 100
 
 	if(can_break_cuffs()) //Don't want to do a lot of logic gating here.
 		break_handcuffs()
 		return
-	
+
 	var/obj/item/weapon/handcuffs/HC = handcuffed
-	
+
 	//A default in case you are somehow handcuffed with something that isn't an obj/item/weapon/handcuffs type
-	var/breakouttime = 1200 
+	var/breakouttime = 1200
 	var/displaytime = 2 //Minutes to display in the "this will take X minutes."
 	//If you are handcuffed with actual handcuffs... Well what do I know, maybe someone will want to handcuff you with toilet paper in the future...
 	if(istype(HC))
 		breakouttime = HC.breakouttime
 		displaytime = breakouttime / 600 //Minutes
-	
+
 	visible_message(
 		"<span class='danger'>[src] attempts to remove \the [HC]!</span>",
 		"<span class='warning'>You attempt to remove \the [HC]. (This will take around [displaytime] minutes and you need to stand still)</span>"
@@ -62,7 +62,7 @@
 
 /mob/living/carbon/proc/escape_legcuffs()
 	if(!(last_special <= world.time)) return
-	
+
 	next_move = world.time + 100
 	last_special = world.time + 100
 
@@ -71,7 +71,7 @@
 		return
 
 	var/obj/item/weapon/legcuffs/HC = legcuffed
-	
+
 	//A default in case you are somehow legcuffed with something that isn't an obj/item/weapon/legcuffs type
 	var/breakouttime = 1200
 	var/displaytime = 2 //Minutes to display in the "this will take X minutes."
@@ -79,20 +79,20 @@
 	if(istype(HC))
 		breakouttime = HC.breakouttime
 		displaytime = breakouttime / 600 //Minutes
-	
-	visible_message( 
-		"<span class='danger'>[usr] attempts to remove \the [HC]!</span>", 
+
+	visible_message(
+		"<span class='danger'>[usr] attempts to remove \the [HC]!</span>",
 		"<span class='warning'>You attempt to remove \the [HC]. (This will take around [displaytime] minutes and you need to stand still)</span>"
 		)
 
 	if(do_after(src, breakouttime))
 		if(!legcuffed || buckled)
-			return 
+			return
 		visible_message(
-			"<span class='danger'>[src] manages to remove \the [legcuffed]!</span>", 
+			"<span class='danger'>[src] manages to remove \the [legcuffed]!</span>",
 			"<span class='notice'>You successfully remove \the [legcuffed].</span>"
 			)
-		
+
 		drop_from_inventory(legcuffed)
 		legcuffed = null
 		update_inv_legcuffed()
@@ -106,19 +106,19 @@
 		"<span class='danger'>[src] is trying to break \the [handcuffed]!</span>",
 		"<span class='warning'>You attempt to break your [handcuffed.name]. (This will take around 5 seconds and you need to stand still)</span>"
 		)
-	
+
 	if(do_after(src, 50))
 		if(!handcuffed || buckled)
 			return
-		
+
 		visible_message(
-			"<span class='danger'>[src] manages to break \the [handcuffed]!</span>", 
+			"<span class='danger'>[src] manages to break \the [handcuffed]!</span>",
 			"<span class='warning'>You successfully break your [handcuffed.name].</span>"
 			)
-		
+
 		say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!" ))
-		
-		del(handcuffed)
+
+		qdel(handcuffed)
 		handcuffed = null
 		if(buckled && buckled.buckle_require_restraints)
 			buckled.unbuckle_mob()
@@ -131,15 +131,15 @@
 	if(do_after(src, 50))
 		if(!legcuffed || buckled)
 			return
-		
+
 		visible_message(
 			"<span class='danger'>[src] manages to break the legcuffs!</span>",
 			"<span class='warning'>You successfully break your legcuffs.</span>"
 			)
-		
+
 		say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!" ))
-		
-		del(legcuffed)
+
+		qdel(legcuffed)
 		legcuffed = null
 		update_inv_legcuffed()
 

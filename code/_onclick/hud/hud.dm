@@ -33,7 +33,7 @@ var/list/global_huds = list(
 	screen.screen_loc = "1,1"
 	screen.icon = 'icons/obj/hud_full.dmi'
 	screen.icon_state = icon_state
-	screen.layer = 17
+	screen.layer = SCREEN_LAYER
 	screen.mouse_opacity = 0
 
 	return screen
@@ -140,6 +140,25 @@ datum/hud/New(mob/owner)
 	instantiate()
 	..()
 
+/datum/hud/Destroy()
+	..()
+	grab_intent = null
+	hurt_intent = null
+	disarm_intent = null
+	help_intent = null
+	lingchemdisplay = null
+	blobpwrdisplay = null
+	blobhealthdisplay = null
+	r_hand_hud_object = null
+	l_hand_hud_object = null
+	action_intent = null
+	move_intent = null
+	adding = null
+	other = null
+	hotkeybuttons = null
+	item_action_list = null
+	mymob = null
+
 /datum/hud/proc/hidden_inventory_update()
 	if(!mymob) return
 	if(ishuman(mymob))
@@ -235,7 +254,7 @@ datum/hud/New(mob/owner)
 
 	if(ishuman(mymob))
 		human_hud(ui_style, ui_color, ui_alpha, mymob) // Pass the player the UI style chosen in preferences
-	else if(ismonkey(mymob))
+	else if(issmall(mymob))
 		monkey_hud(ui_style)
 	else if(isbrain(mymob))
 		brain_hud(ui_style)
@@ -249,7 +268,11 @@ datum/hud/New(mob/owner)
 		robot_hud()
 	else if(isobserver(mymob))
 		ghost_hud()
+	else
+		mymob.instantiate_hud(src)
 
+/mob/proc/instantiate_hud(var/datum/hud/HUD)
+	return
 
 //Triggered when F12 is pressed (Unless someone changed something in the DMF)
 /mob/verb/button_pressed_F12(var/full = 0 as null)

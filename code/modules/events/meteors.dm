@@ -1,12 +1,10 @@
-//cael - two events here
-
 //meteor storms are much heavier
 /datum/event/meteor_wave
 	startWhen		= 6
 	endWhen			= 33
 
 /datum/event/meteor_wave/setup()
-	endWhen = rand(10,25) * 3
+	endWhen = rand(15,30) * 3
 
 /datum/event/meteor_wave/announce()
 	command_announcement.Announce("Meteors have been detected on collision course with the station.", "Meteor Alert", new_sound = 'sound/AI/meteors.ogg')
@@ -26,7 +24,7 @@
 	var/waves = 1
 
 /datum/event/meteor_shower/setup()
-	waves = rand(1,4)
+	waves = rand(2,5)
 
 /datum/event/meteor_shower/announce()
 	command_announcement.Announce("The station is now in a meteor shower.", "Meteor Alert")

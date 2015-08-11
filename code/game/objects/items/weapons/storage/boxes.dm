@@ -24,26 +24,49 @@
 	desc = "It's just an ordinary box."
 	icon_state = "box"
 	item_state = "syringe_kit"
-	foldable = /obj/item/stack/sheet/cardboard	//BubbleWrap
+	var/foldable = /obj/item/stack/material/cardboard	// BubbleWrap - if set, can be folded (when empty) into a sheet of cardboard
+
+// BubbleWrap - A box can be folded up to make card
+/obj/item/weapon/storage/box/attack_self(mob/user as mob)
+	if(..()) return
+
+	//try to fold it.
+	if ( contents.len )
+		return
+
+	if ( !ispath(src.foldable) )
+		return
+	var/found = 0
+	// Close any open UI windows first
+	for(var/mob/M in range(1))
+		if (M.s_active == src)
+			src.close(M)
+		if ( M == user )
+			found = 1
+	if ( !found )	// User is too far away
+		return
+	// Now make the cardboard
+	user << "<span class='notice'>You fold [src] flat.</span>"
+	new src.foldable(get_turf(src))
+	qdel(src)
 
 /obj/item/weapon/storage/box/survival/
 	New()
 		..()
-		contents = list()
-		sleep(1)
 		new /obj/item/clothing/mask/breath( src )
 		new /obj/item/weapon/tank/emergency_oxygen( src )
-		return
+
+/obj/item/weapon/storage/box/vox/
+	New()
+		..()
+		new /obj/item/clothing/mask/breath( src )
+		new /obj/item/weapon/tank/emergency_nitrogen( src )
 
 /obj/item/weapon/storage/box/engineer/
 	New()
 		..()
-		contents = list()
-		sleep(1)
 		new /obj/item/clothing/mask/breath( src )
 		new /obj/item/weapon/tank/emergency_oxygen/engi( src )
-		return
-
 
 /obj/item/weapon/storage/box/gloves
 	name = "box of latex gloves"
@@ -218,6 +241,20 @@
 		new /obj/item/ammo_casing/shotgun/stunshell(src)
 		new /obj/item/ammo_casing/shotgun/stunshell(src)
 		new /obj/item/ammo_casing/shotgun/stunshell(src)
+
+/obj/item/weapon/storage/box/practiceshells
+	name = "box of practice shells"
+	desc = "It has a picture of a gun and several warning symbols on the front.<br>WARNING: Live ammunition. Misuse may result in serious injury or death."
+
+	New()
+		..()
+		new /obj/item/ammo_casing/shotgun/practice(src)
+		new /obj/item/ammo_casing/shotgun/practice(src)
+		new /obj/item/ammo_casing/shotgun/practice(src)
+		new /obj/item/ammo_casing/shotgun/practice(src)
+		new /obj/item/ammo_casing/shotgun/practice(src)
+		new /obj/item/ammo_casing/shotgun/practice(src)
+		new /obj/item/ammo_casing/shotgun/practice(src)
 
 /obj/item/weapon/storage/box/sniperammo
 	name = "box of 14.5mm shells"
@@ -561,10 +598,9 @@
 	icon_state = "light"
 	desc = "This box is shaped on the inside so that only light tubes and bulbs fit."
 	item_state = "syringe_kit"
-	foldable = /obj/item/stack/sheet/cardboard //BubbleWrap
 	storage_slots=21
 	can_hold = list(/obj/item/weapon/light/tube, /obj/item/weapon/light/bulb)
-	max_combined_w_class = 42	//holds 21 items of w_class 2
+	max_storage_space = 42	//holds 21 items of w_class 2
 	use_to_pickup = 1 // for picking up broken bulbs, not that most people will try
 
 /obj/item/weapon/storage/box/lights/bulbs/New()

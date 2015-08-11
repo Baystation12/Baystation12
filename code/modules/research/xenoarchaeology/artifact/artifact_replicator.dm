@@ -43,23 +43,22 @@
 	/obj/item/weapon/autopsy_scanner,\
 	/obj/item/weapon/bikehorn,\
 	/obj/item/weapon/bonesetter,\
-	/obj/item/weapon/butch,\
+	/obj/item/weapon/material/knife/butch,\
 	/obj/item/weapon/caution,\
 	/obj/item/weapon/caution/cone,\
 	/obj/item/weapon/crowbar,\
 	/obj/item/weapon/clipboard,\
 	/obj/item/weapon/cell,\
 	/obj/item/weapon/circular_saw,\
-	/obj/item/weapon/hatchet,\
+	/obj/item/weapon/material/hatchet,\
 	/obj/item/weapon/handcuffs,\
 	/obj/item/weapon/hemostat,\
-	/obj/item/weapon/kitchenknife,\
+	/obj/item/weapon/material/knife,\
 	/obj/item/weapon/flame/lighter,\
 	/obj/item/weapon/light/bulb,\
 	/obj/item/weapon/light/tube,\
 	/obj/item/weapon/pickaxe,\
 	/obj/item/weapon/shovel,\
-	/obj/item/weapon/table_parts,\
 	/obj/item/weapon/weldingtool,\
 	/obj/item/weapon/wirecutters,\
 	/obj/item/weapon/wrench,\
@@ -102,7 +101,7 @@
 						spawned_obj.desc += " It is made of [source_material]."
 					else
 						spawned_obj.desc = "It is made of [source_material]."
-				del(source_material)
+				qdel(source_material)
 
 			spawn_progress_time = 0
 			max_spawn_time = rand(30,100)

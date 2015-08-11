@@ -6,11 +6,17 @@
 /datum/shuttle
 	var/warmup_time = 0
 	var/moving_status = SHUTTLE_IDLE
-	
+
 	var/docking_controller_tag	//tag of the controller used to coordinate docking
 	var/datum/computer/file/embedded_program/docking/docking_controller	//the controller itself. (micro-controller, not game controller)
-	
+
 	var/arrive_time = 0	//the time at which the shuttle arrives when long jumping
+
+/datum/shuttle/proc/init_docking_controllers()
+	if(docking_controller_tag)
+		docking_controller = locate(docking_controller_tag)
+		if(!istype(docking_controller))
+			world << "<span class='danger'>warning: shuttle with docking tag [docking_controller_tag] could not find it's controller!</span>"
 
 /datum/shuttle/proc/short_jump(var/area/origin,var/area/destination)
 	if(moving_status != SHUTTLE_IDLE) return
@@ -18,9 +24,9 @@
 	//it would be cool to play a sound here
 	moving_status = SHUTTLE_WARMUP
 	spawn(warmup_time*10)
-		if (moving_status == SHUTTLE_IDLE) 
+		if (moving_status == SHUTTLE_IDLE)
 			return	//someone cancelled the launch
-		
+
 		moving_status = SHUTTLE_INTRANSIT //shouldn't matter but just to be safe
 		move(origin, destination)
 		moving_status = SHUTTLE_IDLE
@@ -32,14 +38,14 @@
 	//it would be cool to play a sound here
 	moving_status = SHUTTLE_WARMUP
 	spawn(warmup_time*10)
-		if (moving_status == SHUTTLE_IDLE) 
+		if (moving_status == SHUTTLE_IDLE)
 			return	//someone cancelled the launch
-		
+
 		arrive_time = world.time + travel_time*10
 		moving_status = SHUTTLE_INTRANSIT
 		move(departing, interim, direction)
-		
-		
+
+
 		while (world.time < arrive_time)
 			sleep(5)
 
@@ -82,10 +88,10 @@
 	if(origin == destination)
 		//world << "cancelling move, shuttle will overlap."
 		return
-	
+
 	if (docking_controller && !docking_controller.undocked())
 		docking_controller.force_undock()
-	
+
 	var/list/dstturfs = list()
 	var/throwy = world.maxy
 
@@ -99,7 +105,7 @@
 		for(var/atom/movable/AM as mob|obj in T)
 			AM.Move(D)
 		if(istype(T, /turf/simulated))
-			del(T)
+			qdel(T)
 
 	for(var/mob/living/carbon/bug in destination)
 		bug.gib()
@@ -122,6 +128,18 @@
 			if(!M.buckled)
 				M.Weaken(3)
 
+	// Power-related checks. If shuttle contains power related machinery, update powernets.
+	var/update_power = 0
+	for(var/obj/machinery/power/P in destination)
+		update_power = 1
+		break
+
+	for(var/obj/structure/cable/C in destination)
+		update_power = 1
+		break
+
+	if(update_power)
+		makepowernets()
 	return
 
 //returns 1 if the shuttle has a valid arrive time

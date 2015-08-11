@@ -82,8 +82,15 @@
 	return temp_change
 
 /mob/living/carbon/slime/proc/handle_chemicals_in_body()
+	chem_effects.Cut()
+	analgesic = 0
 
-	if(reagents) reagents.metabolize(src)
+	if(touching) touching.metabolize()
+	if(ingested) ingested.metabolize()
+	if(bloodstr) bloodstr.metabolize()
+
+	if(CE_PAINKILLER in chem_effects)
+		analgesic = chem_effects[CE_PAINKILLER]
 
 	src.updatehealth()
 
@@ -205,9 +212,12 @@
 	if(hungry == 2 && !client) // if a slime is starving, it starts losing its friends
 		if(Friends.len > 0 && prob(1))
 			var/mob/nofriend = pick(Friends)
-			--Friends[nofriend]
-			if (Friends[nofriend] <= 0)
-				Friends -= nofriend
+			if(nofriend && Friends[nofriend])
+				Friends[nofriend] -= 1
+				if (Friends[nofriend] <= 0)
+					Friends[nofriend] = null
+					Friends -= nofriend
+					Friends -= null
 
 	if(!Target)
 		if(will_hunt(hungry) || attacked || rabid) // Only add to the list if we need to
@@ -248,7 +258,7 @@
 							Target = C
 							break
 
-						if(isalien(C) || ismonkey(C) || isanimal(C))
+						if(isalien(C) || issmall(C) || isanimal(C))
 							Target = C
 							break
 
@@ -304,7 +314,7 @@
 		if(Target.Adjacent(src))
 			if(istype(Target, /mob/living/silicon)) // Glomp the silicons
 				if(!Atkcool)
-					a_intent = "hurt"
+					a_intent = I_HURT
 					UnarmedAttack(Target)
 					Atkcool = 1
 					spawn(45)
@@ -318,12 +328,12 @@
 					spawn(45)
 						Atkcool = 0
 
-					a_intent = "disarm"
+					a_intent = I_DISARM
 					UnarmedAttack(Target)
 
 			else
 				if(!Atkcool)
-					a_intent = "grab"
+					a_intent = I_GRAB
 					UnarmedAttack(Target)
 
 		else if(Target in view(7, src))
@@ -341,9 +351,9 @@
 				frenemy = S
 		if (frenemy && prob(1))
 			if (frenemy.colour == colour)
-				a_intent = "help"
+				a_intent = I_HELP
 			else
-				a_intent = "hurt"
+				a_intent = I_HURT
 			UnarmedAttack(frenemy)
 
 	var/sleeptime = movement_delay()
@@ -355,10 +365,10 @@
 /mob/living/carbon/slime/proc/handle_speech_and_mood()
 	//Mood starts here
 	var/newmood = ""
-	a_intent = "help"
+	a_intent = I_HELP
 	if (rabid || attacked)
 		newmood = "angry"
-		a_intent = "hurt"
+		a_intent = I_HURT
 	else if (Target) newmood = "mischevous"
 
 	if (!newmood)

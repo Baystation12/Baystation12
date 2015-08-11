@@ -29,8 +29,8 @@
 				if(do_after(user, 20))
 					if(!src || !WT.remove_fuel(0, user)) return
 					user << "\blue You deconstruct the frame."
-					new /obj/item/stack/sheet/plasteel( loc, 4)
-					del(src)
+					new /obj/item/stack/material/plasteel( loc, 4)
+					qdel(src)
 		if(1)
 			if(istype(P, /obj/item/weapon/wrench))
 				playsound(loc, 'sound/items/Ratchet.ogg', 50, 1)
@@ -88,8 +88,8 @@
 					var/obj/item/stack/cable_coil/A = new /obj/item/stack/cable_coil( loc )
 					A.amount = 5
 
-			if(istype(P, /obj/item/stack/sheet/glass/reinforced))
-				var/obj/item/stack/sheet/glass/reinforced/RG = P
+			if(istype(P, /obj/item/stack/material) && P.get_material_name() == "rglass")
+				var/obj/item/stack/RG = P
 				if (RG.get_amount() < 2)
 					user << "<span class='warning'>You need two sheets of glass to put in the glass panel.</span>"
 					return
@@ -137,8 +137,8 @@
 					return
 
 				if(M.brainmob.mind)
-					ticker.mode.remove_cultist(M.brainmob.mind, 1)
-					ticker.mode.remove_revolutionary(M.brainmob.mind, 1)
+					cult.remove_antagonist(M.brainmob.mind, 1)
+					revs.remove_antagonist(M.brainmob.mind, 1)
 
 				user.drop_item()
 				P.loc = src
@@ -162,7 +162,7 @@
 					icon_state = "3b"
 				else
 					icon_state = "3"
-				new /obj/item/stack/sheet/glass/reinforced( loc, 2 )
+				new /obj/item/stack/material/glass/reinforced( loc, 2 )
 				return
 
 			if(istype(P, /obj/item/weapon/screwdriver))
@@ -178,7 +178,7 @@
 					if(A) //if there's no brain, the mob is deleted and a structure/AIcore is created
 						A.rename_self("ai", 1)
 				feedback_inc("cyborg_ais_created",1)
-				del(src)
+				qdel(src)
 
 /obj/structure/AIcore/deactivated
 	name = "inactive AI"
@@ -187,7 +187,7 @@
 	anchored = 1
 	state = 20//So it doesn't interact based on the above. Not really necessary.
 
-/obj/structure/AIcore/deactivated/Del()
+/obj/structure/AIcore/deactivated/Destroy()
 	if(src in empty_playable_ai_cores)
 		empty_playable_ai_cores -= src
 	..()
@@ -201,6 +201,7 @@
 	transfer.control_disabled = 0
 	transfer.aiRadio.disabledAi = 0
 	transfer.loc = get_turf(src)
+	transfer.create_eyeobj()
 	transfer.cancel_camera()
 	user << "\blue <b>Transfer successful</b>: \black [transfer.name] ([rand(1000,9999)].exe) downloaded to host terminal. Local copy wiped."
 	transfer << "You have been uploaded to a stationary terminal. Remote device connection restored."
@@ -208,15 +209,13 @@
 	if(card)
 		card.clear()
 
-	del(src)
+	qdel(src)
 
 /obj/structure/AIcore/deactivated/proc/check_malf(var/mob/living/silicon/ai/ai)
 	if(!ai) return
-	if (ticker.mode.name == "AI malfunction")
-		var/datum/game_mode/malfunction/malf = ticker.mode
-		for (var/datum/mind/malfai in malf.malf_ai)
-			if (ai.mind == malfai)
-				return 1
+	for (var/datum/mind/malfai in malf.current_antagonists)
+		if (ai.mind == malfai)
+			return 1
 
 /obj/structure/AIcore/deactivated/attackby(var/obj/item/weapon/W, var/mob/user)
 

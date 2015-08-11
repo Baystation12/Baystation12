@@ -13,10 +13,11 @@
 	idle_power_usage = 20
 	active_power_usage = 5000
 	req_access = list(access_robotics)
+	var/current_manufacturer
 	var/time_coeff = 1.5 //can be upgraded with research
 	var/resource_coeff = 1.5 //can be upgraded with research
 	var/list/resources = list(
-										"metal"=0,
+										DEFAULT_WALL_MATERIAL=0,
 										"glass"=0,
 										"gold"=0,
 										"silver"=0,
@@ -143,6 +144,7 @@
 
 /obj/machinery/mecha_part_fabricator/New()
 	..()
+
 	component_parts = list()
 	component_parts += new /obj/item/weapon/circuitboard/mechfab(src)
 	component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)
@@ -164,6 +166,9 @@
 			break
 	*/
 	return
+
+/obj/machinery/mecha_part_fabricator/initialize()
+	current_manufacturer = basic_robolimb.company
 
 /obj/machinery/mecha_part_fabricator/RefreshParts()
 	var/T = 0
@@ -188,9 +193,9 @@
 	if(time_coeff!=diff)
 		time_coeff = diff
 
-/obj/machinery/mecha_part_fabricator/Del()
+/obj/machinery/mecha_part_fabricator/Destroy()
 	for(var/atom/A in src)
-		del A
+		qdel(A)
 	..()
 	return
 
@@ -263,7 +268,7 @@
 	if(!istype(apart)) return 0
 	for(var/obj/O in part_set)
 		if(O.type == apart.type)
-			del apart
+			qdel(apart)
 			return 0
 	part_set[++part_set.len] = apart
 	return 1
@@ -361,7 +366,11 @@
 	if( !(locate(part, src.contents)) || !(part.vars.Find("construction_time")) || !(part.vars.Find("construction_cost")) ) // these 3 are the current requirements for an object being buildable by the mech_fabricator
 		return
 
-	src.being_built = new part.type(src)
+	if(current_manufacturer)
+		src.being_built = new part.type(src, current_manufacturer)
+	else
+		src.being_built = new part.type(src, basic_robolimb.company)
+
 	src.desc = "It's building [src.being_built]."
 	src.remove_resources(part)
 	src.overlays += "fab-active"
@@ -562,7 +571,7 @@
 		switch(screen)
 			if("main")
 				left_part = output_available_resources()+"<hr>"
-				left_part += "<a href='?src=\ref[src];sync=1'>Sync with R&D servers</a><hr>"
+				left_part += "<a href='?src=\ref[src];sync=1'>Sync with R&D servers</a> | <a href='?src=\ref[src];set_manufacturer=1'>Set manufacturer</a> ([current_manufacturer])<hr>"
 				for(var/part_set in part_sets)
 					left_part += "<a href='?src=\ref[src];part_set=[part_set]'>[part_set]</a> - \[<a href='?src=\ref[src];partset_to_queue=[part_set]'>Add all parts to queue\]<br>"
 			if("parts")
@@ -623,6 +632,9 @@
 		return
 
 	var/datum/topic_input/filter = new /datum/topic_input(href,href_list)
+	if(href_list["set_manufacturer"])
+		var/choice = input(usr, "Which manufacturer do you wish to use for this fabricator?") as null|anything in all_robolimbs
+		if(choice) current_manufacturer = choice
 	if(href_list["part_set"])
 		var/tpart_set = filter.getStr("part_set")
 		if(tpart_set)
@@ -707,24 +719,24 @@
 /obj/machinery/mecha_part_fabricator/proc/remove_material(var/mat_string, var/amount)
 	var/type
 	switch(mat_string)
-		if("metal")
-			type = /obj/item/stack/sheet/metal
+		if(DEFAULT_WALL_MATERIAL)
+			type = /obj/item/stack/material/steel
 		if("glass")
-			type = /obj/item/stack/sheet/glass
+			type = /obj/item/stack/material/glass
 		if("gold")
-			type = /obj/item/stack/sheet/mineral/gold
+			type = /obj/item/stack/material/gold
 		if("silver")
-			type = /obj/item/stack/sheet/mineral/silver
+			type = /obj/item/stack/material/silver
 		if("diamond")
-			type = /obj/item/stack/sheet/mineral/diamond
+			type = /obj/item/stack/material/diamond
 		if("phoron")
-			type = /obj/item/stack/sheet/mineral/phoron
+			type = /obj/item/stack/material/phoron
 		if("uranium")
-			type = /obj/item/stack/sheet/mineral/uranium
+			type = /obj/item/stack/material/uranium
 		else
 			return 0
 	var/result = 0
-	var/obj/item/stack/sheet/res = new type(src)
+	var/obj/item/stack/material/res = new type(src)
 
 	// amount available to take out
 	var/total_amount = round(resources[mat_string]/res.perunit)
@@ -737,7 +749,7 @@
 		res.Move(src.loc)
 		result = res.amount
 	else
-		del res
+		qdel(res)
 	return result
 
 
@@ -762,28 +774,28 @@
 				if(I.reliability != 100 && crit_fail)
 					I.crit_fail = 1
 				I.loc = src.loc
-			if(src.resources["metal"] >= 3750)
-				var/obj/item/stack/sheet/metal/G = new /obj/item/stack/sheet/metal(src.loc)
-				G.amount = round(src.resources["metal"] / G.perunit)
+			if(src.resources[DEFAULT_WALL_MATERIAL] >= 3750)
+				var/obj/item/stack/material/steel/G = new /obj/item/stack/material/steel(src.loc)
+				G.amount = round(src.resources[DEFAULT_WALL_MATERIAL] / G.perunit)
 			if(src.resources["glass"] >= 3750)
-				var/obj/item/stack/sheet/glass/G = new /obj/item/stack/sheet/glass(src.loc)
+				var/obj/item/stack/material/glass/G = new /obj/item/stack/material/glass(src.loc)
 				G.amount = round(src.resources["glass"] / G.perunit)
 			if(src.resources["phoron"] >= 2000)
-				var/obj/item/stack/sheet/mineral/phoron/G = new /obj/item/stack/sheet/mineral/phoron(src.loc)
+				var/obj/item/stack/material/phoron/G = new /obj/item/stack/material/phoron(src.loc)
 				G.amount = round(src.resources["phoron"] / G.perunit)
 			if(src.resources["silver"] >= 2000)
-				var/obj/item/stack/sheet/mineral/silver/G = new /obj/item/stack/sheet/mineral/silver(src.loc)
+				var/obj/item/stack/material/silver/G = new /obj/item/stack/material/silver(src.loc)
 				G.amount = round(src.resources["silver"] / G.perunit)
 			if(src.resources["gold"] >= 2000)
-				var/obj/item/stack/sheet/mineral/gold/G = new /obj/item/stack/sheet/mineral/gold(src.loc)
+				var/obj/item/stack/material/gold/G = new /obj/item/stack/material/gold(src.loc)
 				G.amount = round(src.resources["gold"] / G.perunit)
 			if(src.resources["uranium"] >= 2000)
-				var/obj/item/stack/sheet/mineral/uranium/G = new /obj/item/stack/sheet/mineral/uranium(src.loc)
+				var/obj/item/stack/material/uranium/G = new /obj/item/stack/material/uranium(src.loc)
 				G.amount = round(src.resources["uranium"] / G.perunit)
 			if(src.resources["diamond"] >= 2000)
-				var/obj/item/stack/sheet/mineral/diamond/G = new /obj/item/stack/sheet/mineral/diamond(src.loc)
+				var/obj/item/stack/material/diamond/G = new /obj/item/stack/material/diamond(src.loc)
 				G.amount = round(src.resources["diamond"] / G.perunit)
-			del(src)
+			qdel(src)
 			return 1
 		else
 			user << "\red You can't load the [src.name] while it's opened."
@@ -795,19 +807,19 @@
 
 	var/material
 	switch(W.type)
-		if(/obj/item/stack/sheet/mineral/gold)
+		if(/obj/item/stack/material/gold)
 			material = "gold"
-		if(/obj/item/stack/sheet/mineral/silver)
+		if(/obj/item/stack/material/silver)
 			material = "silver"
-		if(/obj/item/stack/sheet/mineral/diamond)
+		if(/obj/item/stack/material/diamond)
 			material = "diamond"
-		if(/obj/item/stack/sheet/mineral/phoron)
+		if(/obj/item/stack/material/phoron)
 			material = "phoron"
-		if(/obj/item/stack/sheet/metal)
-			material = "metal"
-		if(/obj/item/stack/sheet/glass)
+		if(/obj/item/stack/material/steel)
+			material = DEFAULT_WALL_MATERIAL
+		if(/obj/item/stack/material/glass)
 			material = "glass"
-		if(/obj/item/stack/sheet/mineral/uranium)
+		if(/obj/item/stack/material/uranium)
 			material = "uranium"
 		else
 			return ..()
@@ -816,7 +828,7 @@
 		user << "The fabricator is currently processing. Please wait until completion."
 		return
 
-	var/obj/item/stack/sheet/stack = W
+	var/obj/item/stack/material/stack = W
 
 	var/sname = "[stack.name]"
 	var/amnt = stack.perunit

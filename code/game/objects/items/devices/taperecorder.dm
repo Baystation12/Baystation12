@@ -5,7 +5,7 @@
 	item_state = "analyzer"
 	w_class = 2.0
 
-	matter = list("metal" = 60,"glass" = 30)
+	matter = list(DEFAULT_WALL_MATERIAL = 60,"glass" = 30)
 
 	var/emagged = 0.0
 	var/recording = 0.0
@@ -48,7 +48,7 @@
 	if(T)
 		T.hotspot_expose(700,125)
 		explosion(T, -1, -1, 0, 4)
-	del(src)
+	qdel(src)
 	return
 
 /obj/item/device/taperecorder/verb/record()

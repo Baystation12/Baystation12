@@ -4,32 +4,16 @@
 	icon_state = "energystun100"
 	item_state = null	//so the human update icon uses the icon_state instead.
 	fire_sound = 'sound/weapons/Taser.ogg'
+	max_shots = 10
 
-	charge_cost = 100 //How much energy is needed to fire.
 	projectile_type = /obj/item/projectile/beam/stun
 	origin_tech = "combat=3;magnets=2"
 	modifystate = "energystun"
 
-	var/mode = 0 //0 = stun, 1 = kill
-
-/obj/item/weapon/gun/energy/gun/attack_self(mob/living/user as mob)
-	switch(mode)
-		if(0)
-			mode = 1
-			charge_cost = 100
-			fire_sound = 'sound/weapons/Laser.ogg'
-			user << "<span class='warning'>[src.name] is now set to kill.</span>"
-			projectile_type = /obj/item/projectile/beam
-			modifystate = "energykill"
-		if(1)
-			mode = 0
-			charge_cost = 100
-			fire_sound = 'sound/weapons/Taser.ogg'
-			user << "<span class='warning'>[src.name] is now set to stun.</span>"
-			projectile_type = /obj/item/projectile/beam/stun
-			modifystate = "energystun"
-	update_icon()
-	update_held_icon()
+	firemodes = list(
+		list(name="stun", projectile_type=/obj/item/projectile/beam/stun, modifystate="energystun", fire_sound='sound/weapons/Taser.ogg'),
+		list(name="lethal", projectile_type=/obj/item/projectile/beam, modifystate="energykill", fire_sound='sound/weapons/Laser.ogg'),
+		)
 
 /obj/item/weapon/gun/energy/gun/mounted
 	name = "mounted energy gun"
@@ -44,6 +28,13 @@
 	slot_flags = SLOT_BELT
 	force = 8 //looks heavier than a pistol
 	self_recharge = 1
+	modifystate = null
+	
+	firemodes = list(
+		list(name="stun", projectile_type=/obj/item/projectile/beam/stun, fire_sound='sound/weapons/Taser.ogg'),
+		list(name="lethal", projectile_type=/obj/item/projectile/beam, fire_sound='sound/weapons/Laser.ogg'),
+		)
+	
 	var/lightfail = 0
 
 //override for failcheck behaviour
@@ -101,10 +92,10 @@
 		overlays += "nucgun-clean"
 
 /obj/item/weapon/gun/energy/gun/nuclear/proc/update_mode()
-	if (mode == 0)
-		overlays += "nucgun-stun"
-	else if (mode == 1)
-		overlays += "nucgun-kill"
+	var/datum/firemode/current_mode = firemodes[sel_mode]
+	switch(current_mode.name)
+		if("stun") overlays += "nucgun-stun"
+		if("lethal") overlays += "nucgun-kill"
 
 /obj/item/weapon/gun/energy/gun/nuclear/emp_act(severity)
 	..()

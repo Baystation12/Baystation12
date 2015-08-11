@@ -247,4 +247,44 @@
 /datum/poster/bay_50
 	icon_state="bsposter50"
 	name = "Pinup Girl Cindy Kate"
-	desc = "This particular one is of Cindy Kate, a seductive performer well known among less savoury circles." //idk
+	desc = "This particular one is of Cindy Kate, a seductive performer well known among less savoury circles."
+
+/datum/poster/bay_51
+	icon_state="bsposter51"
+	name = "space appreciation poster"
+	desc = "This is a poster produced by the Generic Space Company, as a part of a series of commemorative posters on the wonders of space. One of three."
+
+/datum/poster/bay_52
+	icon_state="bsposter52"
+	name = "fire safety poster"
+	desc = "This is a poster reminding you of what you should do if you are on fire, or if you are at a dance party."
+
+/datum/poster/bay_53
+	icon_state="bsposter53"
+	name = "fire extinguisher poster"
+	desc = "This is a poster reminding you of what you should use to put out a fire."
+
+/datum/poster/bay_54
+	icon_state="bsposter54"
+	name = "firefighter poster"
+	desc = "This is a poster of a particularly stern looking firefighter. The caption reads, \"Only you can prevent space fires.\""
+
+/datum/poster/bay_55
+	icon_state="bsposter55"
+	name = "Earth appreciation poster"
+	desc = "This is a poster produced by the Generic Space Company, as a part of a series of commemorative posters on the wonders of space. Two of three."
+
+/datum/poster/bay_56
+	icon_state="bsposter56"
+	name = "Mars appreciation poster"
+	desc = "This is a poster produced by the Generic Space Company, as a part of a series of commemorative posters on the wonders of space. Three of three."
+
+/datum/poster/bay_57
+	icon_state="bsposter57"
+	name = "space carp warning poster"
+	desc = "This poster tells of the dangers of space carp infestations."
+
+/datum/poster/bay_58
+	icon_state="bsposter58"
+	name = "space carp information poster"
+	desc = "This poster showcases an old spacer saying on the dangers of migrant space carp."

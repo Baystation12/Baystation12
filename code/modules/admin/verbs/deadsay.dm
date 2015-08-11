@@ -20,7 +20,7 @@
 
 	var/stafftype = uppertext(holder.rank)
 
-	msg = sanitize(copytext(msg, 1, MAX_MESSAGE_LEN))
+	msg = sanitize(msg)
 	log_admin("DSAY: [key_name(src)] : [msg]")
 
 	if (!msg)

@@ -15,21 +15,22 @@
 	action(atom/target)
 		if(!action_checks(target)) return
 		if(!cargo_holder) return
-		
+
 		//loading
 		if(istype(target,/obj))
 			var/obj/O = target
 			if(O.buckled_mob)
 				return
 			if(locate(/mob/living) in O)
+				occupant_message("<span class='warning'>You can't load living things into the cargo compartment.</span>")
 				return
 			if(O.anchored)
-				occupant_message("<font color='red'>[target] is firmly secured.</font>")
+				occupant_message("<span class='warning'>[target] is firmly secured.</span>")
 				return
 			if(cargo_holder.cargo.len >= cargo_holder.cargo_capacity)
-				occupant_message("<font color='red'>Not enough room in cargo compartment.</font>")
+				occupant_message("<span class='warning'>Not enough room in cargo compartment.</span>")
 				return
-			
+
 			occupant_message("You lift [target] and start to load it into cargo compartment.")
 			chassis.visible_message("[chassis] lifts [target] and starts to load it into cargo compartment.")
 			set_ready_state(0)
@@ -41,22 +42,22 @@
 					cargo_holder.cargo += O
 					O.loc = chassis
 					O.anchored = 0
-					occupant_message("<font color='blue'>[target] succesfully loaded.</font>")
+					occupant_message("<span class='notice'>[target] succesfully loaded.</span>")
 					log_message("Loaded [O]. Cargo compartment capacity: [cargo_holder.cargo_capacity - cargo_holder.cargo.len]")
 				else
-					occupant_message("<font color='red'>You must hold still while handling objects.</font>")
+					occupant_message("<span class='warning'>You must hold still while handling objects.</span>")
 					O.anchored = initial(O.anchored)
 
 		//attacking
 		else if(istype(target,/mob/living))
 			var/mob/living/M = target
 			if(M.stat>1) return
-			if(chassis.occupant.a_intent == "hurt")
+			if(chassis.occupant.a_intent == I_HURT)
 				M.take_overall_damage(dam_force)
 				M.adjustOxyLoss(round(dam_force/2))
 				M.updatehealth()
-				occupant_message("\red You squeeze [target] with [src.name]. Something cracks.")
-				chassis.visible_message("\red [chassis] squeezes [target].")
+				occupant_message("<span class='warning'>You squeeze [target] with [src.name]. Something cracks.</span>")
+				chassis.visible_message("<span class='warning'>[chassis] squeezes [target].</span>")
 			else
 				step_away(M,chassis)
 				occupant_message("You push [target] out of the way.")
@@ -82,14 +83,19 @@
 			if(!target_obj.vars.Find("unacidable") || target_obj.unacidable)	return
 		set_ready_state(0)
 		chassis.use_power(energy_drain)
-		chassis.visible_message("<font color='red'><b>[chassis] starts to drill [target]</b></font>", "You hear the drill.")
-		occupant_message("<font color='red'><b>You start to drill [target]</b></font>")
+		chassis.visible_message("<span class='danger'>[chassis] starts to drill [target]</span>", "<span class='warning'>You hear the drill.</span>")
+		occupant_message("<span class='danger'>You start to drill [target]</span>")
 		var/T = chassis.loc
 		var/C = target.loc	//why are these backwards? we may never know -Pete
 		if(do_after_cooldown(target))
 			if(T == chassis.loc && src == chassis.selected)
-				if(istype(target, /turf/simulated/wall/r_wall))
-					occupant_message("<font color='red'>[target] is too durable to drill through.</font>")
+				if(istype(target, /turf/simulated/wall))
+					var/turf/simulated/wall/W = target
+					if(W.reinf_material)
+						occupant_message("<span class='warning'>[target] is too durable to drill through.</span>")
+					else
+						log_message("Drilled through [target]")
+						target.ex_act(2)
 				else if(istype(target, /turf/simulated/mineral))
 					for(var/turf/simulated/mineral/M in range(chassis,1))
 						if(get_dir(chassis,M)&chassis.dir)
@@ -122,7 +128,7 @@
 	desc = "This is an upgraded version of the drill that'll pierce the heavens! (Can be attached to: Combat and Engineering Exosuits)"
 	icon_state = "mecha_diamond_drill"
 	origin_tech = "materials=4;engineering=3"
-	construction_cost = list("metal"=10000,"diamond"=6500)
+	construction_cost = list(DEFAULT_WALL_MATERIAL=10000,"diamond"=6500)
 	equip_cooldown = 20
 	force = 15
 
@@ -133,14 +139,15 @@
 			if(target_obj.unacidable)	return
 		set_ready_state(0)
 		chassis.use_power(energy_drain)
-		chassis.visible_message("<font color='red'><b>[chassis] starts to drill [target]</b></font>", "You hear the drill.")
-		occupant_message("<font color='red'><b>You start to drill [target]</b></font>")
+		chassis.visible_message("<span class='danger'>[chassis] starts to drill [target]</span>", "<span class='warning'>You hear the drill.</span>")
+		occupant_message("<span class='danger'>You start to drill [target]</span>")
 		var/T = chassis.loc
 		var/C = target.loc	//why are these backwards? we may never know -Pete
 		if(do_after_cooldown(target))
 			if(T == chassis.loc && src == chassis.selected)
-				if(istype(target, /turf/simulated/wall/r_wall))
-					if(do_after_cooldown(target))//To slow down how fast mechs can drill through the station
+				if(istype(target, /turf/simulated/wall))
+					var/turf/simulated/wall/W = target
+					if(!W.reinf_material || do_after_cooldown(target))//To slow down how fast mechs can drill through the station
 						log_message("Drilled through [target]")
 						target.ex_act(3)
 				else if(istype(target, /turf/simulated/mineral))
@@ -194,13 +201,13 @@
 		if(do_after_cooldown(target))
 			if( istype(target, /obj/structure/reagent_dispensers/watertank) && get_dist(chassis,target) <= 1)
 				var/obj/o = target
-				var/amount = o.reagents.trans_to(src, 200)
-				occupant_message("\blue [amount] units transferred into internal tank.")
+				var/amount = o.reagents.trans_to_obj(src, 200)
+				occupant_message("<span class='notice'>[amount] units transferred into internal tank.</span>")
 				playsound(chassis, 'sound/effects/refill.ogg', 50, 1, -6)
 				return
 
 			if (src.reagents.total_volume < 1)
-				occupant_message("\red \The [src] is empty.")
+				occupant_message("<span class='warning'>\The [src] is empty.</span>")
 				return
 
 			playsound(chassis, 'sound/effects/extinguish.ogg', 75, 1, -3)
@@ -213,29 +220,24 @@
 
 			var/list/the_targets = list(T,T1,T2)
 
-			for(var/a=0, a<5, a++)
+			for(var/a = 1 to 5)
 				spawn(0)
-					var/obj/effect/effect/water/W = new /obj/effect/effect/water( get_turf(chassis) )
-					var/turf/my_target = pick(the_targets)
-					var/datum/reagents/R = new/datum/reagents(5)
-					if(!W) return
-					W.reagents = R
-					R.my_atom = W
-					if(!W || !src) return
-					src.reagents.trans_to(W,1)
-					for(var/b=0, b<5, b++)
-						step_towards(W,my_target)
-						if(!W || !W.reagents) return
-						W.reagents.reaction(get_turf(W))
-						for(var/atom/atm in get_turf(W))
-							if(!W)
-								return
-							if(!W.reagents)
-								break
-							W.reagents.reaction(atm)
-						if(W.loc == my_target) break
-						sleep(2)
-					W.delete()
+					var/obj/effect/effect/water/W = PoolOrNew(/obj/effect/effect/water, get_turf(chassis))
+					var/turf/my_target
+					if(a == 1)
+						my_target = T
+					else if(a == 2)
+						my_target = T1
+					else if(a == 3)
+						my_target = T2
+					else
+						my_target = pick(the_targets)
+					W.create_reagents(5)
+					if(!W || !src)
+						return
+					reagents.trans_to_obj(W, spray_amount)
+					W.set_color()
+					W.set_up(my_target)
 			return 1
 
 	get_equip_info()
@@ -254,7 +256,7 @@
 	energy_drain = 250
 	range = MELEE|RANGED
 	construction_time = 1200
-	construction_cost = list("metal"=30000,"phoron"=25000,"silver"=20000,"gold"=20000)
+	construction_cost = list(DEFAULT_WALL_MATERIAL=30000,"phoron"=25000,"silver"=20000,"gold"=20000)
 	var/mode = 0 //0 - deconstruct, 1 - wall or floor, 2 - airlock.
 	var/disabled = 0 //malf
 
@@ -294,7 +296,7 @@
 					if(do_after_cooldown(target))
 						if(disabled) return
 						chassis.spark_system.start()
-						del(target)
+						qdel(target)
 						playsound(target, 'sound/items/Deconstruct.ogg', 50, 1)
 						chassis.use_power(energy_drain)
 			if(1)
@@ -417,7 +419,7 @@
 		do_after_cooldown()
 		src = null
 		spawn(rand(150,300))
-			del(P)
+			qdel(P)
 		return
 
 /obj/item/mecha_parts/mecha_equipment/gravcatapult
@@ -504,7 +506,7 @@
 	equip_cooldown = 10
 	energy_drain = 50
 	range = 0
-	construction_cost = list("metal"=20000,"silver"=5000)
+	construction_cost = list(DEFAULT_WALL_MATERIAL=20000,"silver"=5000)
 	var/deflect_coeff = 1.15
 	var/damage_coeff = 0.8
 
@@ -536,8 +538,8 @@
 			user << "\red The [W] bounces off [chassis] armor."
 			chassis.log_append_to_last("Armor saved.")
 		else
-			chassis.occupant_message("<font color='red'><b>[user] hits [chassis] with [W].</b></font>")
-			user.visible_message("<font color='red'><b>[user] hits [chassis] with [W].</b></font>", "<font color='red'><b>You hit [src] with [W].</b></font>")
+			chassis.occupant_message("<span class='danger'>[user] hits [chassis] with [W].</span>")
+			user.visible_message("<span class='danger'><b>[user] hits [chassis] with [W].</span>", "<span class='danger'>You hit [src] with [W].</span>")
 			chassis.take_damage(round(W.force*damage_coeff),W.damtype)
 			chassis.check_for_internal_damage(list(MECHA_INT_TEMP_CONTROL,MECHA_INT_TANK_BREACH,MECHA_INT_CONTROL_LOST))
 		set_ready_state(0)
@@ -554,7 +556,7 @@
 	equip_cooldown = 10
 	energy_drain = 50
 	range = 0
-	construction_cost = list("metal"=20000,"gold"=5000)
+	construction_cost = list(DEFAULT_WALL_MATERIAL=20000,"gold"=5000)
 	var/deflect_coeff = 1.15
 	var/damage_coeff = 0.8
 
@@ -584,7 +586,7 @@
 		if(!action_checks(src))
 			return chassis.dynbulletdamage(Proj)
 		if(prob(chassis.deflect_chance*deflect_coeff))
-			chassis.occupant_message("\blue The armor deflects incoming projectile.")
+			chassis.occupant_message("<span class='notice'>The armor deflects incoming projectile.</span>")
 			chassis.visible_message("The [chassis.name] armor deflects the projectile")
 			chassis.log_append_to_last("Armor saved.")
 		else
@@ -600,7 +602,7 @@
 		if(!action_checks(A))
 			return chassis.dynhitby(A)
 		if(prob(chassis.deflect_chance*deflect_coeff) || istype(A, /mob/living) || istype(A, /obj/item/mecha_parts/mecha_tracking))
-			chassis.occupant_message("\blue The [A] bounces off the armor.")
+			chassis.occupant_message("<span class='notice'>The [A] bounces off the armor.</span>")
 			chassis.visible_message("The [A] bounces off the [chassis] armor")
 			chassis.log_append_to_last("Armor saved.")
 			if(istype(A, /mob/living))
@@ -625,7 +627,7 @@
 	equip_cooldown = 20
 	energy_drain = 100
 	range = 0
-	construction_cost = list("metal"=10000,"gold"=1000,"silver"=2000,"glass"=5000)
+	construction_cost = list(DEFAULT_WALL_MATERIAL=10000,"gold"=1000,"silver"=2000,"glass"=5000)
 	var/health_boost = 2
 	var/datum/global_iterator/pr_repair_droid
 	var/icon/droid_overlay
@@ -636,6 +638,11 @@
 		pr_repair_droid = new /datum/global_iterator/mecha_repair_droid(list(src),0)
 		pr_repair_droid.set_delay(equip_cooldown)
 		return
+
+	Destroy()
+		qdel(pr_repair_droid)
+		pr_repair_droid = null
+		..()
 
 	attach(obj/mecha/M as obj)
 		..()
@@ -715,7 +722,7 @@
 	equip_cooldown = 10
 	energy_drain = 0
 	range = 0
-	construction_cost = list("metal"=10000,"gold"=2000,"silver"=3000,"glass"=2000)
+	construction_cost = list(DEFAULT_WALL_MATERIAL=10000,"gold"=2000,"silver"=3000,"glass"=2000)
 	var/datum/global_iterator/pr_energy_relay
 	var/coeff = 100
 	var/list/use_channels = list(EQUIP,ENVIRON,LIGHT)
@@ -725,6 +732,11 @@
 		pr_energy_relay = new /datum/global_iterator/mecha_energy_relay(list(src),0)
 		pr_energy_relay.set_delay(equip_cooldown)
 		return
+
+	Destroy()
+		qdel(pr_energy_relay)
+		pr_energy_relay = null
+		..()
 
 	detach()
 		pr_energy_relay.stop()
@@ -761,7 +773,7 @@
 		var/pow_chan
 		if(A)
 			for(var/c in use_channels)
-				if(A.master && A.master.powered(c))
+				if(A.powered(c))
 					pow_chan = c
 					break
 		return pow_chan
@@ -808,13 +820,13 @@
 			if(A)
 				var/pow_chan
 				for(var/c in list(EQUIP,ENVIRON,LIGHT))
-					if(A.master.powered(c))
+					if(A.powered(c))
 						pow_chan = c
 						break
 				if(pow_chan)
 					var/delta = min(12, ER.chassis.cell.maxcharge-cur_charge)
 					ER.chassis.give_power(delta)
-					A.master.use_power(delta*ER.coeff, pow_chan)
+					A.use_power(delta*ER.coeff, pow_chan)
 		return
 
 
@@ -827,10 +839,10 @@
 	equip_cooldown = 10
 	energy_drain = 0
 	range = MELEE
-	construction_cost = list("metal"=10000,"silver"=500,"glass"=1000)
+	construction_cost = list(DEFAULT_WALL_MATERIAL=10000,"silver"=500,"glass"=1000)
 	var/datum/global_iterator/pr_mech_generator
 	var/coeff = 100
-	var/obj/item/stack/sheet/fuel
+	var/obj/item/stack/material/fuel
 	var/max_fuel = 150000
 	var/fuel_per_cycle_idle = 100
 	var/fuel_per_cycle_active = 500
@@ -842,8 +854,13 @@
 		init()
 		return
 
+	Destroy()
+		qdel(pr_mech_generator)
+		pr_mech_generator = null
+		..()
+
 	proc/init()
-		fuel = new /obj/item/stack/sheet/mineral/phoron(src)
+		fuel = new /obj/item/stack/material/phoron(src)
 		fuel.amount = 0
 		pr_mech_generator = new /datum/global_iterator/mecha_generator(list(src),0)
 		pr_mech_generator.set_delay(equip_cooldown)
@@ -877,7 +894,7 @@
 			var/result = load_fuel(target)
 			var/message
 			if(isnull(result))
-				message = "<font color='red'>[fuel] traces in target minimal. [target] cannot be used as fuel.</font>"
+				message = "<span class='warning'>[fuel] traces in target minimal. [target] cannot be used as fuel.</span>"
 			else if(!result)
 				message = "Unit is full."
 			else
@@ -886,7 +903,7 @@
 			occupant_message(message)
 		return
 
-	proc/load_fuel(var/obj/item/stack/sheet/P)
+	proc/load_fuel(var/obj/item/stack/material/P)
 		if(P.type == fuel.type && P.amount)
 			var/to_load = max(max_fuel - fuel.amount*fuel.perunit,0)
 			if(to_load)
@@ -902,7 +919,7 @@
 	attackby(weapon,mob/user)
 		var/result = load_fuel(weapon)
 		if(isnull(result))
-			user.visible_message("[user] tries to shove [weapon] into [src]. What a dumb-ass.","<font color='red'>[fuel] traces minimal. [weapon] cannot be used as fuel.</font>")
+			user.visible_message("[user] tries to shove [weapon] into [src]. What a dumb-ass.","<span class='warning'>[fuel] traces minimal. [weapon] cannot be used as fuel.</span>")
 		else if(!result)
 			user << "Unit is full."
 		else
@@ -962,7 +979,7 @@
 	desc = "Generates power using uranium. Pollutes the environment."
 	icon_state = "tesla"
 	origin_tech = "powerstorage=3;engineering=3"
-	construction_cost = list("metal"=10000,"silver"=500,"glass"=1000)
+	construction_cost = list(DEFAULT_WALL_MATERIAL=10000,"silver"=500,"glass"=1000)
 	max_fuel = 50000
 	fuel_per_cycle_idle = 10
 	fuel_per_cycle_active = 30
@@ -971,7 +988,7 @@
 	reliability = 1000
 
 	init()
-		fuel = new /obj/item/stack/sheet/mineral/uranium(src)
+		fuel = new /obj/item/stack/material/uranium(src)
 		fuel.amount = 0
 		pr_mech_generator = new /datum/global_iterator/mecha_generator/nuclear(list(src),0)
 		pr_mech_generator.set_delay(equip_cooldown)
@@ -1026,25 +1043,25 @@
 							cargo_holder.cargo += O
 							O.loc = chassis
 							O.anchored = 0
-							chassis.occupant_message("<font color='blue'>[target] succesfully loaded.</font>")
+							chassis.occupant_message("<span class='notice'>[target] succesfully loaded.</span>")
 							chassis.log_message("Loaded [O]. Cargo compartment capacity: [cargo_holder.cargo_capacity - cargo_holder.cargo.len]")
 						else
-							chassis.occupant_message("<font color='red'>You must hold still while handling objects.</font>")
+							chassis.occupant_message("<span class='warning'>You must hold still while handling objects.</span>")
 							O.anchored = initial(O.anchored)
 				else
-					chassis.occupant_message("<font color='red'>Not enough room in cargo compartment.</font>")
+					chassis.occupant_message("<span class='warning'>Not enough room in cargo compartment.</span>")
 			else
-				chassis.occupant_message("<font color='red'>[target] is firmly secured.</font>")
+				chassis.occupant_message("<span class='warning'>[target] is firmly secured.</span>")
 
 		else if(istype(target,/mob/living))
 			var/mob/living/M = target
 			if(M.stat>1) return
-			if(chassis.occupant.a_intent == "hurt")
-				chassis.occupant_message("\red You obliterate [target] with [src.name], leaving blood and guts everywhere.")
-				chassis.visible_message("\red [chassis] destroys [target] in an unholy fury.")
-			if(chassis.occupant.a_intent == "disarm")
-				chassis.occupant_message("\red You tear [target]'s limbs off with [src.name].")
-				chassis.visible_message("\red [chassis] rips [target]'s arms off.")
+			if(chassis.occupant.a_intent == I_HURT)
+				chassis.occupant_message("<span class='danger'>You obliterate [target] with [src.name], leaving blood and guts everywhere.</span>")
+				chassis.visible_message("<span class='danger'>[chassis] destroys [target] in an unholy fury.<span>")
+			if(chassis.occupant.a_intent == I_DISARM)
+				chassis.occupant_message("<span class='danger'>You tear [target]'s limbs off with [src.name].</span>")
+				chassis.visible_message("<span class='danger'>[chassis] rips [target]'s arms off.</span>")
 			else
 				step_away(M,chassis)
 				chassis.occupant_message("You smash into [target], sending them flying.")
@@ -1054,18 +1071,6 @@
 			do_after_cooldown()
 		return 1
 
-/obj/item/weapon/paintkit //Please don't use this for anything, it's a base type for custom mech paintjobs.
-	name = "mecha customisation kit"
-	desc = "A generic kit containing all the needed tools and parts to turn a mech into another mech."
-	icon = 'icons/obj/custom_items.dmi'
-	icon_state = "royce_kit"
-
-	var/new_name = "mech"    //What is the variant called?
-	var/new_desc = "A mech." //How is the new mech described?
-	var/new_icon = "ripley"  //What base icon will the new mech use?
-	var/removable = null     //Can the kit be removed?
-	var/list/allowed_types = list() //Types of mech that the kit will work on.
-
 /obj/item/mecha_parts/mecha_equipment/tool/passenger
 	name = "passenger compartment"
 	desc = "A mountable passenger compartment for exo-suits. Rather cramped."
@@ -1073,7 +1078,7 @@
 	origin_tech = "engineering=1;biotech=1"
 	energy_drain = 10
 	range = MELEE
-	construction_cost = list("metal"=5000,"glass"=5000)
+	construction_cost = list(DEFAULT_WALL_MATERIAL=5000,"glass"=5000)
 	reliability = 1000
 	equip_cooldown = 20
 	var/mob/living/carbon/occupant = null
@@ -1083,7 +1088,7 @@
 /obj/item/mecha_parts/mecha_equipment/tool/passenger/destroy()
 	for(var/atom/movable/AM in src)
 		AM.forceMove(get_turf(src))
-		AM << "<span class='danger'>You tumble out of the destroyed [src.name]!"
+		AM << "<span class='danger'>You tumble out of the destroyed [src.name]!</span>"
 	return ..()
 
 /obj/item/mecha_parts/mecha_equipment/tool/passenger/Exit(atom/movable/O)
@@ -1091,7 +1096,7 @@
 
 /obj/item/mecha_parts/mecha_equipment/tool/passenger/proc/move_inside(var/mob/user)
 	if (chassis)
-		chassis.visible_message("\blue [user] starts to climb into [chassis].")
+		chassis.visible_message("<span class='notice'>[user] starts to climb into [chassis].</span>")
 
 	if(do_after(user, 40, needhand=0))
 		if(!src.occupant)
@@ -1100,7 +1105,7 @@
 			log_message("[user] boarded.")
 			occupant_message("[user] boarded.")
 		else if(src.occupant != user)
-			user << "\red [src.occupant] was faster. Try better next time, loser."
+			user << "<span class='warning'>[src.occupant] was faster. Try better next time, loser.</span>"
 	else
 		user << "You stop entering the exosuit."
 
@@ -1175,18 +1180,18 @@
 		return
 
 	if (!isturf(usr.loc))
-		usr << "\red You can't reach the passenger compartment from here."
+		usr << "<span class='danger'>You can't reach the passenger compartment from here.</span>"
 		return
 
 	if(iscarbon(usr))
 		var/mob/living/carbon/C = usr
 		if(C.handcuffed)
-			usr << "\red Kinda hard to climb in while handcuffed don't you think?"
+			usr << "<span class='danger'>Kinda hard to climb in while handcuffed don't you think?</span>"
 			return
 
 	for(var/mob/living/carbon/slime/M in range(1,usr))
 		if(M.Victim == usr)
-			usr << "\red You're too busy getting your life sucked out of you."
+			usr << "<span class='danger'>You're too busy getting your life sucked out of you.</span>"
 			return
 
 	//search for a valid passenger compartment
@@ -1206,10 +1211,10 @@
 	//didn't find anything
 	switch (feedback)
 		if (OCCUPIED)
-			usr << "\red The passenger compartment is already occupied!"
+			usr << "<span class='danger'>The passenger compartment is already occupied!</span>"
 		if (LOCKED)
-			usr << "\red The passenger compartment hatch is locked!"
+			usr << "<span class='warning'>The passenger compartment hatch is locked!</span>"
 		if (OCCUPIED|LOCKED)
-			usr << "\red All of the passenger compartments are already occupied or locked!"
+			usr << "<span class='danger'>All of the passenger compartments are already occupied or locked!</span>"
 		if (0)
-			usr << "\red \The [src] doesn't have a passenger compartment."
+			usr << "<span class='warning'>\The [src] doesn't have a passenger compartment.</span>"

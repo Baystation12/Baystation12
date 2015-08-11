@@ -61,27 +61,27 @@ Note: Must be placed west/left of and R&D console to function.
 /obj/machinery/r_n_d/protolathe/dismantle()
 	for(var/obj/I in component_parts)
 		if(istype(I, /obj/item/weapon/reagent_containers/glass/beaker))
-			reagents.trans_to(I, reagents.total_volume)
+			reagents.trans_to_obj(I, reagents.total_volume)
 	if(m_amount >= 3750)
-		var/obj/item/stack/sheet/metal/G = new /obj/item/stack/sheet/metal(loc)
+		var/obj/item/stack/material/steel/G = new /obj/item/stack/material/steel(loc)
 		G.amount = round(m_amount / G.perunit)
 	if(g_amount >= 3750)
-		var/obj/item/stack/sheet/glass/G = new /obj/item/stack/sheet/glass(loc)
+		var/obj/item/stack/material/glass/G = new /obj/item/stack/material/glass(loc)
 		G.amount = round(g_amount / G.perunit)
 	if(phoron_amount >= 2000)
-		var/obj/item/stack/sheet/mineral/phoron/G = new /obj/item/stack/sheet/mineral/phoron(loc)
+		var/obj/item/stack/material/phoron/G = new /obj/item/stack/material/phoron(loc)
 		G.amount = round(phoron_amount / G.perunit)
 	if(silver_amount >= 2000)
-		var/obj/item/stack/sheet/mineral/silver/G = new /obj/item/stack/sheet/mineral/silver(loc)
+		var/obj/item/stack/material/silver/G = new /obj/item/stack/material/silver(loc)
 		G.amount = round(silver_amount / G.perunit)
 	if(gold_amount >= 2000)
-		var/obj/item/stack/sheet/mineral/gold/G = new /obj/item/stack/sheet/mineral/gold(loc)
+		var/obj/item/stack/material/gold/G = new /obj/item/stack/material/gold(loc)
 		G.amount = round(gold_amount / G.perunit)
 	if(uranium_amount >= 2000)
-		var/obj/item/stack/sheet/mineral/uranium/G = new /obj/item/stack/sheet/mineral/uranium(loc)
+		var/obj/item/stack/material/uranium/G = new /obj/item/stack/material/uranium(loc)
 		G.amount = round(uranium_amount / G.perunit)
 	if(diamond_amount >= 2000)
-		var/obj/item/stack/sheet/mineral/diamond/G = new /obj/item/stack/sheet/mineral/diamond(loc)
+		var/obj/item/stack/material/diamond/G = new /obj/item/stack/material/diamond(loc)
 		G.amount = round(diamond_amount / G.perunit)
 	..()
 
@@ -116,62 +116,59 @@ Note: Must be placed west/left of and R&D console to function.
 	if(busy)
 		user << "<span class='notice'>\The [src] is busy. Please wait for completion of previous operation.</span>"
 		return 1
-	if(!istype(O, /obj/item/stack/sheet))
-		user << "<span class='notice'>You cannot insert this item into \the [src]!</span>"
-		return 1
 	if(stat)
 		return 1
-	if(istype(O,/obj/item/stack/sheet))
-		var/obj/item/stack/sheet/S = O
+	if(istype(O,/obj/item/stack/material))
+		var/obj/item/stack/material/S = O
 		if(TotalMaterials() + S.perunit > max_material_storage)
 			user << "<span class='notice'>\The [src]'s material bin is full. Please remove material before adding more.</span>"
 			return 1
 
-	var/obj/item/stack/sheet/stack = O
-	var/amount = round(input("How many sheets do you want to add?") as num)//No decimals
-	if(!O)
-		return
-	if(amount < 0)//No negative numbers
-		amount = 0
-	if(amount == 0)
-		return
-	if(amount > stack.get_amount())
-		amount = stack.get_amount()
-	if(max_material_storage - TotalMaterials() < (amount * stack.perunit))//Can't overfill
-		amount = min(stack.amount, round((max_material_storage - TotalMaterials()) / stack.perunit))
+		var/obj/item/stack/material/stack = O
+		var/amount = round(input("How many sheets do you want to add?") as num)//No decimals
+		if(!O)
+			return
+		if(amount < 0)//No negative numbers
+			amount = 0
+		if(amount == 0)
+			return
+		if(amount > stack.get_amount())
+			amount = stack.get_amount()
+		if(max_material_storage - TotalMaterials() < (amount * stack.perunit))//Can't overfill
+			amount = min(stack.amount, round((max_material_storage - TotalMaterials()) / stack.perunit))
 
-	overlays += "protolathe_[stack.name]"
-	sleep(10)
-	overlays -= "protolathe_[stack.name]"
+		overlays += "protolathe_[stack.name]"
+		sleep(10)
+		overlays -= "protolathe_[stack.name]"
 
-	icon_state = "protolathe"
-	busy = 1
-	use_power(max(1000, (3750 * amount / 10)))
-	var/stacktype = stack.type
-	stack.use(amount)
-	if(do_after(user, 16))
-		user << "<span class='notice'>You add [amount] sheets to \the [src].</span>"
 		icon_state = "protolathe"
-		switch(stacktype)
-			if(/obj/item/stack/sheet/metal)
-				m_amount += amount * 3750
-			if(/obj/item/stack/sheet/glass)
-				g_amount += amount * 3750
-			if(/obj/item/stack/sheet/mineral/gold)
-				gold_amount += amount * 2000
-			if(/obj/item/stack/sheet/mineral/silver)
-				silver_amount += amount * 2000
-			if(/obj/item/stack/sheet/mineral/phoron)
-				phoron_amount += amount * 2000
-			if(/obj/item/stack/sheet/mineral/uranium)
-				uranium_amount += amount * 2000
-			if(/obj/item/stack/sheet/mineral/diamond)
-				diamond_amount += amount * 2000
-	else
-		new stacktype(loc, amount)
-	busy = 0
-	updateUsrDialog()
-	return
+		busy = 1
+		use_power(max(1000, (3750 * amount / 10)))
+		var/material/material = stack.get_material()
+		if(istype(material) && do_after(user, 16) && stack.use(amount))
+			user << "<span class='notice'>You add [amount] sheets to \the [src].</span>"
+			icon_state = "protolathe"
+			
+			var/amount_to_add = amount * material.stack_per_sheet
+			switch(material.name)
+				if(DEFAULT_WALL_MATERIAL)
+					m_amount += amount_to_add
+				if("glass")
+					g_amount += amount_to_add
+				if("gold")
+					gold_amount += amount_to_add
+				if("silver")
+					silver_amount += amount_to_add
+				if("phoron")
+					phoron_amount += amount_to_add
+				if("uranium")
+					uranium_amount += amount_to_add
+				if("diamond")
+					diamond_amount += amount_to_add
+		busy = 0
+		updateUsrDialog()
+		return
+	..()
 
 //This is to stop these machines being hackable via clicking.
 /obj/machinery/r_n_d/protolathe/attack_hand(mob/user as mob)

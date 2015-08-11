@@ -19,7 +19,7 @@
 	New()
 		..()
 		for(var/i = 0, i < 6, i++)
-			new /obj/item/weapon/reagent_containers/food/snacks/flour(src)
+			new /obj/item/weapon/reagent_containers/food/condiment/flour(src)
 		new /obj/item/weapon/reagent_containers/food/condiment/sugar(src)
 		for(var/i = 0, i < 3, i++)
 			new /obj/item/weapon/reagent_containers/food/snacks/meat/monkey(src)

@@ -136,7 +136,7 @@
 		return
 
 	//Is the usr's mob type able to do this?
-	if(ishuman(usr) || ismonkey(usr) || isrobot(usr))
+	if(ishuman(usr) || issmall(usr) || isrobot(usr))
 
 		//Removing from inventory
 		if(href_list["remove_inv"])
@@ -215,7 +215,7 @@
 /mob/living/simple_animal/parrot/attack_hand(mob/living/carbon/M as mob)
 	..()
 	if(client) return
-	if(!stat && M.a_intent == "hurt")
+	if(!stat && M.a_intent == I_HURT)
 
 		icon_state = "parrot_fly" //It is going to be flying regardless of whether it flees or attacks
 
@@ -475,7 +475,7 @@
 
 			if(ishuman(parrot_interest))
 				var/mob/living/carbon/human/H = parrot_interest
-				var/datum/organ/external/affecting = H.get_organ(ran_zone(pick(parrot_dam_zone)))
+				var/obj/item/organ/external/affecting = H.get_organ(ran_zone(pick(parrot_dam_zone)))
 
 				H.apply_damage(damage, BRUTE, affecting, H.run_armor_check(affecting, "melee"), sharp=1)
 				visible_emote(pick("pecks [H]'s [affecting].", "cuts [H]'s [affecting] with its talons."))
@@ -607,7 +607,7 @@
 			stolen_item = C.r_hand
 
 		if(stolen_item)
-			C.u_equip(stolen_item)
+			C.remove_from_mob(stolen_item)
 			held_item = stolen_item
 			stolen_item.loc = src
 			visible_message("[src] grabs the [held_item] out of [C]'s hand!", "\blue You snag the [held_item] out of [C]'s hand!", "You hear the sounds of wings flapping furiously.")
@@ -714,7 +714,7 @@
 	if(message_mode)
 		if(message_mode in radiochannels)
 			if(ears && istype(ears,/obj/item/device/radio))
-				ears.talk_into(src,message, message_mode, verb, null)
+				ears.talk_into(src,sanitize(message), message_mode, verb, null)
 
 
 	..(message)

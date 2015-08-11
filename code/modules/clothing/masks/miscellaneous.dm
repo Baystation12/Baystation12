@@ -101,3 +101,34 @@
 	w_class = 2
 	var/voicechange = 0
 	siemens_coefficient = 0.9
+
+/obj/item/clothing/mask/ai
+	name = "camera MIU"
+	desc = "Allows for direct mental connection to accessible camera networks."
+	icon_state = "s-ninja"
+	item_state = "s-ninja"
+	flags_inv = HIDEFACE
+	body_parts_covered = 0
+	var/mob/eye/aiEye/eye
+
+/obj/item/clothing/mask/ai/New()
+	eye = new(src)
+
+/obj/item/clothing/mask/ai/equipped(var/mob/user, var/slot)
+	..(user, slot)
+	if(slot == slot_wear_mask)
+		eye.owner = user
+		user.eyeobj = eye
+
+		for(var/datum/chunk/c in eye.visibleChunks)
+			c.remove(eye)
+		eye.setLoc(user)
+
+/obj/item/clothing/mask/ai/dropped(var/mob/user)
+	..()
+	if(eye.owner == user)
+		for(var/datum/chunk/c in eye.visibleChunks)
+			c.remove(eye)
+
+		eye.owner.eyeobj = null
+		eye.owner = null

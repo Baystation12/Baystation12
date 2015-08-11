@@ -1,27 +1,10 @@
-#define CONTROL_POD_DOORS 0
-#define CONTROL_NORMAL_DOORS 1
-#define CONTROL_EMITTERS 2
-
-/obj/machinery/door_control
-	name = "remote door-control"
-	desc = "It controls doors, remotely."
+/obj/machinery/button/remote
+	name = "remote object control"
+	desc = "It controls objects, remotely."
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "doorctrl0"
-	desc = "A remote control-switch for a door."
 	power_channel = ENVIRON
-	var/id = null
-	var/normaldoorcontrol = CONTROL_POD_DOORS
-	var/desiredstate = 0 // Zero is closed, 1 is open.
-	var/specialfunctions = 1
-	/*
-	Bitflag, 	1= open
-				2= idscan,
-				4= bolts
-				8= shock
-				16= door safties
-
-	*/
-
+	var/desiredstate = 0
 	var/exposedwires = 0
 	var/wires = 3
 	/*
@@ -34,14 +17,13 @@
 	idle_power_usage = 2
 	active_power_usage = 4
 
-
-/obj/machinery/door_control/attack_ai(mob/user as mob)
+/obj/machinery/button/remote/attack_ai(mob/user as mob)
 	if(wires & 2)
 		return src.attack_hand(user)
 	else
 		user << "Error, no route to host."
 
-/obj/machinery/door_control/attackby(obj/item/weapon/W, mob/user as mob)
+/obj/machinery/button/remote/attackby(obj/item/weapon/W, mob/user as mob)
 	/* For later implementation
 	if (istype(W, /obj/item/weapon/screwdriver))
 	{
@@ -64,7 +46,56 @@
 		playsound(src.loc, "sparks", 100, 1)
 	return src.attack_hand(user)
 
-/obj/machinery/door_control/proc/handle_door()
+/obj/machinery/button/remote/attack_hand(mob/user as mob)
+	if(..())
+		return
+
+	src.add_fingerprint(user)
+	if(stat & (NOPOWER|BROKEN))
+		return
+
+	if(!allowed(user) && (wires & 1))
+		user << "<span class='warning'>Access Denied</span>"
+		flick("doorctrl-denied",src)
+		return
+
+	use_power(5)
+	icon_state = "doorctrl1"
+	desiredstate = !desiredstate
+	trigger()
+	spawn(15)
+		update_icon()
+
+/obj/machinery/button/remote/proc/trigger()
+	return
+
+/obj/machinery/button/remote/power_change()
+	..()
+	update_icon()
+
+/obj/machinery/button/remote/update_icon()
+	if(stat & NOPOWER)
+		icon_state = "doorctrl-p"
+	else
+		icon_state = "doorctrl0"
+
+/*
+	Airlock remote control
+*/
+/obj/machinery/button/remote/airlock
+	name = "remote door-control"
+	desc = "It controls doors, remotely."
+
+	var/specialfunctions = 1
+	/*
+	Bitflag, 	1= open
+				2= idscan,
+				4= bolts
+				8= shock
+				16= door safties
+	*/
+
+/obj/machinery/button/remote/airlock/trigger()
 	for(var/obj/machinery/door/airlock/D in world)
 		if(D.id_tag == src.id)
 			if(specialfunctions & OPEN)
@@ -78,25 +109,31 @@
 						return
 			if(desiredstate == 1)
 				if(specialfunctions & IDSCAN)
-					D.aiDisabledIdScanner = 1
+					D.set_idscan(0)
 				if(specialfunctions & BOLTS)
 					D.lock()
 				if(specialfunctions & SHOCK)
-					D.secondsElectrified = -1
+					D.electrify(-1)
 				if(specialfunctions & SAFE)
-					D.safe = 0
+					D.set_safeties(0)
 			else
 				if(specialfunctions & IDSCAN)
-					D.aiDisabledIdScanner = 0
+					D.set_idscan(1)
 				if(specialfunctions & BOLTS)
-					if(!D.isWireCut(4) && D.arePowerSystemsOn())
-						D.unlock()
+					D.unlock()
 				if(specialfunctions & SHOCK)
-					D.secondsElectrified = 0
+					D.electrify(0)
 				if(specialfunctions & SAFE)
-					D.safe = 1
+					D.set_safeties(1)
 
-/obj/machinery/door_control/proc/handle_pod()
+/*
+	Blast door remote control
+*/
+/obj/machinery/button/remote/blast_door
+	name = "remote blast door-control"
+	desc = "It controls blast doors, remotely."
+
+/obj/machinery/button/remote/blast_door/trigger()
 	for(var/obj/machinery/door/blast/M in world)
 		if(M.id == src.id)
 			if(M.density)
@@ -108,59 +145,32 @@
 					M.close()
 					return
 
-/obj/machinery/door_control/proc/handle_emitters(mob/user as mob)
+/*
+	Emitter remote control
+*/
+/obj/machinery/button/remote/emitter
+	name = "remote emitter control"
+	desc = "It controls emitters, remotely."
+
+/obj/machinery/button/remote/emitter/trigger(mob/user as mob)
 	for(var/obj/machinery/power/emitter/E in world)
 		if(E.id == src.id)
 			spawn(0)
 				E.activate(user)
 				return
 
-/obj/machinery/door_control/attack_hand(mob/user as mob)
-	src.add_fingerprint(user)
-	if(stat & (NOPOWER|BROKEN))
-		return
-
-	if(!allowed(user) && (wires & 1))
-		user << "\red Access Denied"
-		flick("doorctrl-denied",src)
-		return
-
-	use_power(5)
-	icon_state = "doorctrl1"
-	add_fingerprint(user)
-
-	switch(normaldoorcontrol)
-		if(CONTROL_NORMAL_DOORS)
-			handle_door()
-		if(CONTROL_POD_DOORS)
-			handle_pod()
-		if(CONTROL_EMITTERS)
-			handle_emitters(user)
-
-	desiredstate = !desiredstate
-	spawn(15)
-		if(!(stat & NOPOWER))
-			icon_state = "doorctrl0"
-
-/obj/machinery/door_control/power_change()
-	..()
-	if(stat & NOPOWER)
-		icon_state = "doorctrl-p"
-	else
-		icon_state = "doorctrl0"
-
-/obj/machinery/button/driver
+/*
+	Mass driver remote control
+*/
+/obj/machinery/button/remote/driver
 	name = "mass driver button"
 	desc = "A remote control switch for a mass driver."
+	icon = 'icons/obj/objects.dmi'
+	icon_state = "launcherbtt"
 
-/obj/machinery/button/driver/attack_hand(mob/user as mob)
-	if(..())
-		return
-
-	use_power(5)
-
+/obj/machinery/button/remote/driver/trigger(mob/user as mob)
 	active = 1
-	icon_state = "launcheract"
+	update_icon()
 
 	for(var/obj/machinery/door/blast/M in machines)
 		if (M.id == src.id)
@@ -178,11 +188,17 @@
 
 	for(var/obj/machinery/door/blast/M in machines)
 		if (M.id == src.id)
-			spawn( 0 )
+			spawn(0)
 				M.close()
 				return
 
 	icon_state = "launcherbtt"
-	active = 0
+	update_icon()
 
 	return
+
+/obj/machinery/button/remote/driver/update_icon()
+	if(!active || (stat & NOPOWER))
+		icon_state = "launcherbtt"
+	else
+		icon_state = "launcheract"

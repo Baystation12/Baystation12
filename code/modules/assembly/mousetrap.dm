@@ -2,7 +2,7 @@
 	name = "mousetrap"
 	desc = "A handy little spring-loaded trap for catching pesty rodents."
 	icon_state = "mousetrap"
-	matter = list("metal" = 100, "waste" = 10)
+	matter = list(DEFAULT_WALL_MATERIAL = 100, "waste" = 10)
 	origin_tech = "combat=1"
 	var/armed = 0
 
@@ -23,7 +23,7 @@
 	proc/triggered(mob/target as mob, var/type = "feet")
 		if(!armed)
 			return
-		var/datum/organ/external/affecting = null
+		var/obj/item/organ/external/affecting = null
 		if(ishuman(target))
 			var/mob/living/carbon/human/H = target
 			switch(type)

@@ -103,7 +103,7 @@
 		if ((!F.status)||(F.ptank))	return
 		src.master = F
 		F.ptank = src
-		user.before_take_item(src)
+		user.remove_from_mob(src)
 		src.loc = F
 	return
 
@@ -143,6 +143,29 @@
 	name = "double emergency oxygen tank"
 	icon_state = "emergency_double"
 	volume = 10
+
+/obj/item/weapon/tank/emergency_nitrogen
+	name = "emergency nitrogen tank"
+	desc = "An emergency air tank hastily painted red and issued to Vox crewmembers."
+	icon_state = "emergency_nitro"
+	flags = CONDUCT
+	slot_flags = SLOT_BELT
+	w_class = 2.0
+	force = 4.0
+	distribute_pressure = ONE_ATMOSPHERE*O2STANDARD
+	volume = 2
+	
+	New()
+		..()
+		src.air_contents.adjust_gas("nitrogen", (3*ONE_ATMOSPHERE)*volume/(R_IDEAL_GAS_EQUATION*T20C))
+
+		return
+
+
+	examine(mob/user)
+		if(..(user, 0) && air_contents.gas["nitrogen"] < 0.2 && loc==user)
+			user << text("\red <B>The meter on the [src.name] indicates you are almost out of air!</B>")
+			user << sound('sound/effects/alert.ogg')
 
 /*
  * Nitrogen

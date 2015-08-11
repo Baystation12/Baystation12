@@ -7,6 +7,8 @@ var/list/directory = list()							//list of all ckeys with associated client
 
 var/global/list/player_list = list()				//List of all mobs **with clients attached**. Excludes /mob/new_player
 var/global/list/mob_list = list()					//List of all mobs, including clientless
+var/global/list/human_mob_list = list()				//List of all human mobs and sub-types, including clientless
+var/global/list/silicon_mob_list = list()			//List of all silicon mobs, including clientless
 var/global/list/living_mob_list = list()			//List of all alive mobs, including clientless. Excludes /mob/new_player
 var/global/list/dead_mob_list = list()				//List of all dead mobs, including clientless. Excludes /mob/new_player
 
@@ -18,6 +20,8 @@ var/global/list/surgery_steps = list()				//list of all surgery steps  |BS12
 var/global/list/side_effects = list()				//list of all medical sideeffects types by thier names |BS12
 var/global/list/mechas_list = list()				//list of all mechs. Used by hostile mobs target tracking.
 var/global/list/joblist = list()					//list of all jobstypes, minus borg and AI
+
+var/global/list/turfs = list()						//list of all turfs
 
 //Languages/species/whitelist.
 var/global/list/all_species[0]
@@ -48,7 +52,18 @@ var/global/list/underwear_f = list("Red" = "f1", "White" = "f2", "Yellow" = "f3"
 var/global/list/undershirt_t = list("White Tank top" = "u1", "Black Tank top" = "u2", "Black shirt" = "u3", "White shirt" = "u4", "None")
 	//Backpacks
 var/global/list/backbaglist = list("Nothing", "Backpack", "Satchel", "Satchel Alt")
+var/global/list/exclude_jobs = list(/datum/job/ai,/datum/job/cyborg)
 
+// Visual nets
+var/list/datum/visualnet/visual_nets = list()
+var/datum/visualnet/camera/cameranet = new()
+var/datum/visualnet/cult/cultnet = new()
+
+// Runes
+var/global/list/rune_list = new()
+var/global/list/escape_list = list()
+var/global/list/endgame_exits = list()
+var/global/list/endgame_safespawns = list()
 //////////////////////////
 /////Initial Building/////
 //////////////////////////
@@ -88,7 +103,8 @@ var/global/list/backbaglist = list("Nothing", "Backpack", "Satchel", "Satchel Al
 	sort_surgeries()
 
 	//List of job. I can't believe this was calculated multiple times per tick!
-	paths = typesof(/datum/job) -list(/datum/job,/datum/job/ai,/datum/job/cyborg)
+	paths = typesof(/datum/job)-/datum/job
+	paths -= exclude_jobs
 	for(var/T in paths)
 		var/datum/job/J = new T
 		joblist[J.title] = J

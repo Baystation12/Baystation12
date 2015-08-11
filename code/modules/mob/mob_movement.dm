@@ -96,8 +96,8 @@
 
 /client/verb/drop_item()
 	set hidden = 1
-	if(!isrobot(mob))
-		mob.drop_item_v()
+	if(!isrobot(mob) && mob.stat == CONSCIOUS && isturf(mob.loc))
+		return mob.drop_item()
 	return
 
 
@@ -170,27 +170,31 @@
 
 
 /client/Move(n, direct)
+	if(!mob)
+		return // Moved here to avoid nullrefs below
 
 	if(mob.control_object)	Move_object(direct)
 
-	if(isobserver(mob))	return mob.Move(n,direct)
+	if(mob.incorporeal_move && isobserver(mob))
+		Process_Incorpmove(direct)
+		return
 
 	if(moving)	return 0
 
 	if(world.time < move_delay)	return
-
-	if(!mob)	return
 
 	if(locate(/obj/effect/stop/, mob.loc))
 		for(var/obj/effect/stop/S in mob.loc)
 			if(S.victim == mob)
 				return
 
-	if(mob.stat==2)	return
+	if(mob.stat==DEAD && isliving(mob))
+		mob.ghostize()
+		return
 
-	// handle possible AI movement
-	if(isAI(mob))
-		return AIMove(n,direct,mob)
+	// handle possible Eye movement
+	if(mob.eyeobj)
+		return mob.EyeMove(n,direct)
 
 	if(mob.monkeyizing)	return//This is sota the goto stop mobs from moving var
 
@@ -289,8 +293,8 @@
 			else if(istype(mob.buckled, /obj/structure/bed/chair/wheelchair))
 				if(ishuman(mob.buckled))
 					var/mob/living/carbon/human/driver = mob.buckled
-					var/datum/organ/external/l_hand = driver.get_organ("l_hand")
-					var/datum/organ/external/r_hand = driver.get_organ("r_hand")
+					var/obj/item/organ/external/l_hand = driver.get_organ("l_hand")
+					var/obj/item/organ/external/r_hand = driver.get_organ("r_hand")
 					if((!l_hand || (l_hand.status & ORGAN_DESTROYED)) && (!r_hand || (r_hand.status & ORGAN_DESTROYED)))
 						return // No hands to drive your chair? Tough luck!
 				//drunk wheelchair driving
@@ -339,6 +343,13 @@
 		else
 			. = mob.SelfMove(n, direct)
 
+		for (var/obj/item/weapon/grab/G in mob)
+			if (G.state == GRAB_NECK)
+				mob.set_dir(reverse_dir[direct])
+			G.adjust_position()
+		for (var/obj/item/weapon/grab/G in mob.grabbed_by)
+			G.adjust_position()
+
 		moving = 0
 
 		return .
@@ -356,7 +367,7 @@
 	for(var/obj/item/weapon/grab/G in list(mob.l_hand, mob.r_hand))
 		if(G.state == GRAB_KILL) //no wandering across the station/asteroid while choking someone
 			mob.visible_message("<span class='warning'>[mob] lost \his tight grip on [G.affecting]'s neck!</span>")
-			G.hud.icon_state = "disarm/kill"
+			G.hud.icon_state = "kill"
 			G.state = GRAB_NECK
 
 ///Process_Incorpmove
@@ -364,13 +375,16 @@
 ///Allows mobs to run though walls
 /client/proc/Process_Incorpmove(direct)
 	var/turf/mobloc = get_turf(mob)
-	if(!isliving(mob))
-		return
-	var/mob/living/L = mob
-	switch(L.incorporeal_move)
+
+	switch(mob.incorporeal_move)
 		if(1)
-			L.loc = get_step(L, direct)
-			L.dir = direct
+			var/turf/T = get_step(mob, direct)
+			if(mob.check_holy(T))
+				mob << "<span class='warning'>You cannot get past holy grounds while you are in this plane of existence!</span>"
+				return
+			else
+				mob.loc = get_step(mob, direct)
+				mob.dir = direct
 		if(2)
 			if(prob(50))
 				var/locx
@@ -398,21 +412,35 @@
 							return
 					else
 						return
-				L.loc = locate(locx,locy,mobloc.z)
+				mob.loc = locate(locx,locy,mobloc.z)
 				spawn(0)
 					var/limit = 2//For only two trailing shadows.
-					for(var/turf/T in getline(mobloc, L.loc))
+					for(var/turf/T in getline(mobloc, mob.loc))
 						spawn(0)
-							anim(T,L,'icons/mob/mob.dmi',,"shadow",,L.dir)
+							anim(T,mob,'icons/mob/mob.dmi',,"shadow",,mob.dir)
 						limit--
 						if(limit<=0)	break
 			else
 				spawn(0)
-					anim(mobloc,mob,'icons/mob/mob.dmi',,"shadow",,L.dir)
-				L.loc = get_step(L, direct)
-			L.dir = direct
+					anim(mobloc,mob,'icons/mob/mob.dmi',,"shadow",,mob.dir)
+				mob.loc = get_step(mob, direct)
+			mob.dir = direct
+	// Crossed is always a bit iffy
+	for(var/obj/S in mob.loc)
+		if(istype(S,/obj/effect/step_trigger) || istype(S,/obj/effect/beam))
+			S.Crossed(mob)
+
+	var/area/A = get_area_master(mob)
+	if(A)
+		A.Entered(mob)
+	if(isturf(mob.loc))
+		var/turf/T = mob.loc
+		T.Entered(mob)
+	mob.Post_Incorpmove()
 	return 1
 
+/mob/proc/Post_Incorpmove()
+	return
 
 ///Process_Spacemove
 ///Called by /client/Move()
@@ -421,17 +449,10 @@
 /mob/proc/Process_Spacemove(var/check_drift = 0)
 
 	if(!Check_Dense_Object()) //Nothing to push off of so end here
-		make_floating(1)
+		update_floating(0)
 		return 0
 
-	if(istype(src,/mob/living/carbon/human/))
-		var/mob/living/carbon/human/H = src
-		if(istype(H.shoes, /obj/item/clothing/shoes/magboots) && (H.shoes.flags & NOSLIP))  //magboots + dense_object = no floaty effect
-			make_floating(0)
-		else
-			make_floating(1)
-	else
-		make_floating(1)
+	update_floating(1)
 
 	if(restrained()) //Check to see if we can do things
 		return 0
@@ -449,6 +470,8 @@
 /mob/proc/Check_Dense_Object() //checks for anything to push off in the vicinity. also handles magboots on gravity-less floors tiles
 
 	var/dense_object = 0
+	var/shoegrip
+
 	for(var/turf/turf in oview(1,src))
 		if(istype(turf,/turf/space))
 			continue
@@ -456,14 +479,9 @@
 		if(istype(turf,/turf/simulated/floor)) // Floors don't count if they don't have gravity
 			var/area/A = turf.loc
 			if(istype(A) && A.has_gravity == 0)
-				var/can_walk = 0
-				
-				if(ishuman(src))  // Only humans can wear magboots, so we give them a chance to.
-					var/mob/living/carbon/human/H = src
-					if(istype(H.shoes, /obj/item/clothing/shoes/magboots) && (H.shoes.flags & NOSLIP))
-						can_walk = 1
-				
-				if(!can_walk)
+				if(shoegrip == null)
+					shoegrip = Check_Shoegrip() //Shoegrip is only ever checked when a zero-gravity floor is encountered to reduce load
+				if(!shoegrip)
 					continue
 
 		dense_object++
@@ -483,6 +501,8 @@
 
 	return dense_object
 
+/mob/proc/Check_Shoegrip()
+	return 0
 
 /mob/proc/Process_Spaceslipping(var/prob_slip = 5)
 	//Setup slipage

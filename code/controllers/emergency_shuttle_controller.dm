@@ -114,6 +114,8 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 		priority_announcement.Announce("The scheduled crew transfer has been cancelled.")
 
 /datum/emergency_shuttle_controller/proc/can_call()
+	if (!universe.OnShuttleCall(null))
+		return 0
 	if (deny_shuttle)
 		return 0
 	if (shuttle.moving_status != SHUTTLE_IDLE || !shuttle.location)	//must be idle at centcom
@@ -136,9 +138,8 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 
 /datum/emergency_shuttle_controller/proc/get_shuttle_prep_time()
 	// During mutiny rounds, the shuttle takes twice as long.
-	if(ticker && istype(ticker.mode,/datum/game_mode/mutiny))
-		return SHUTTLE_PREPTIME * 3		//15 minutes
-
+	if(ticker && ticker.mode)
+		return SHUTTLE_PREPTIME * ticker.mode.shuttle_delay
 	return SHUTTLE_PREPTIME
 
 
@@ -241,8 +242,8 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 		sleep(speed)
 		step(src, direction)
 		for(var/obj/effect/starender/E in loc)
-			del(src)
-
+			qdel(src)
+			return
 
 /obj/effect/starender
 	invisibility = 101

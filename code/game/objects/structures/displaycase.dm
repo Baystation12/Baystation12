@@ -13,11 +13,11 @@
 /obj/structure/displaycase/ex_act(severity)
 	switch(severity)
 		if (1)
-			new /obj/item/weapon/shard( src.loc )
+			new /obj/item/weapon/material/shard( src.loc )
 			if (occupied)
 				new /obj/item/weapon/gun/energy/captain( src.loc )
 				occupied = 0
-			del(src)
+			qdel(src)
 		if (2)
 			if (prob(50))
 				src.health -= 15
@@ -37,17 +37,17 @@
 
 /obj/structure/displaycase/blob_act()
 	if (prob(75))
-		new /obj/item/weapon/shard( src.loc )
+		new /obj/item/weapon/material/shard( src.loc )
 		if (occupied)
 			new /obj/item/weapon/gun/energy/captain( src.loc )
 			occupied = 0
-		del(src)
+		qdel(src)
 
 
 /obj/structure/displaycase/meteorhit(obj/O as obj)
-		new /obj/item/weapon/shard( src.loc )
+		new /obj/item/weapon/material/shard( src.loc )
 		new /obj/item/weapon/gun/energy/captain( src.loc )
-		del(src)
+		qdel(src)
 
 
 /obj/structure/displaycase/proc/healthcheck()
@@ -55,7 +55,7 @@
 		if (!( src.destroyed ))
 			src.density = 0
 			src.destroyed = 1
-			new /obj/item/weapon/shard( src.loc )
+			new /obj/item/weapon/material/shard( src.loc )
 			playsound(src, "shatter", 70, 1)
 			update_icon()
 	else

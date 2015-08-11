@@ -10,8 +10,7 @@
 	restricted_jobs = list("AI", "Cyborg")
 	recommended_enemies = 2 // need at least a meme and a host
 	votable = 0 // temporarily disable this mode for voting
-
-
+	end_on_antag_death = 1
 
 	var/var/list/datum/mind/first_hosts = list()
 	var/var/list/assigned_hosts = list()
@@ -61,9 +60,6 @@
 
 		var/datum/mind/first_host = pick(possible_memes)
 		possible_memes.Remove(first_host)
-
-		modePlayer += meme
-		modePlayer += first_host
 		memes += meme
 		first_hosts += first_host
 
@@ -97,7 +93,7 @@
 		M.enter_host(first_host.current)
 		forge_meme_objectives(meme, first_host)
 
-		del original
+		qdel(original)
 
 	log_admin("Created [memes.len] memes.")
 
@@ -147,34 +143,3 @@
 		return ..()
 	else
 		return 1
-
-/datum/game_mode/proc/auto_declare_completion_meme()
-	for(var/datum/mind/meme in memes)
-		var/memewin = 1
-		var/attuned = 0
-		if((meme.current) && istype(meme.current,/mob/living/parasite/meme))
-			world << "<B>The meme was [meme.current.key].</B>"
-			world << "<B>The last host was [meme.current:host.key].</B>"
-			world << "<B>Hosts attuned: [attuned]</B>"
-
-			var/count = 1
-			for(var/datum/objective/objective in meme.objectives)
-				if(objective.check_completion())
-					world << "<B>Objective #[count]</B>: [objective.explanation_text] \green <B>Success</B>"
-					feedback_add_details("meme_objective","[objective.type]|SUCCESS")
-				else
-					world << "<B>Objective #[count]</B>: [objective.explanation_text] \red Failed"
-					feedback_add_details("meme_objective","[objective.type]|FAIL")
-					memewin = 0
-				count++
-
-		else
-			memewin = 0
-
-		if(memewin)
-			world << "<B>The meme was successful!<B>"
-			feedback_add_details("meme_success","SUCCESS")
-		else
-			world << "<B>The meme has failed!<B>"
-			feedback_add_details("meme_success","FAIL")
-	return 1

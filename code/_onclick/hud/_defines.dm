@@ -48,6 +48,11 @@
 #define ui_monkey_mask "5:14,1:5"	//monkey
 #define ui_monkey_back "6:14,1:5"	//monkey
 
+#define ui_construct_health "15:00,7:15" //same height as humans, hugging the right border
+#define ui_construct_purge "15:00,6:15"
+#define ui_construct_fire "14:16,8:13" //above health, slightly to the left
+#define ui_construct_pull "14:28,2:10" //above the zone_sel icon
+
 //Lower right, persistant menu
 #define ui_dropbutton "11:22,1:5"
 #define ui_drop_throw "14:28,2:7"
@@ -66,6 +71,7 @@
 #define ui_gun2 "14:28, 4:7"
 #define ui_gun3 "13:26,4:7"
 #define ui_gun_select "14:28,3:7"
+#define ui_gun4 "12:24,3:7"
 
 //Upper-middle right (damage indicators)
 #define ui_toxin "14:28,13:27"
@@ -118,3 +124,6 @@
 
 #define ui_iarrowleft "SOUTH-1,11"
 #define ui_iarrowright "SOUTH-1,13"
+
+#define ui_spell_master "14:16,14:16"
+#define ui_genetic_master "14:16,12:16"

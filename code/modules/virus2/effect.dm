@@ -79,13 +79,13 @@
 		mob.adjustBruteLoss(10*multiplier)
 		if(istype(mob, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = mob
-			var/datum/organ/external/O = pick(H.organs)
+			var/obj/item/organ/external/O = pick(H.organs)
 			if(prob(25))
-				mob << "<span class='warning'>Your [O.display_name] feels as if it might fall off!</span>"
+				mob << "<span class='warning'>Your [O.name] feels as if it might burst!</span>"
 			if(prob(10))
 				spawn(50)
 					if(O)
-						O.droplimb(1)
+						O.droplimb(0,DROPLIMB_BLUNT)
 		else
 			if(prob(75))
 				mob << "<span class='warning'>Your whole body feels like it might fall apart!</span>"
@@ -153,11 +153,11 @@
 		if(istype(mob, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = mob
 			var/organ = pick(list("r_arm","l_arm","r_leg","r_leg"))
-			var/datum/organ/external/E = H.organs_by_name[organ]
+			var/obj/item/organ/external/E = H.organs_by_name[organ]
 			if (!(E.status & ORGAN_DEAD))
 				E.status |= ORGAN_DEAD
-				H << "<span class='notice'>You can't feel your [E.display_name] anymore...</span>"
-				for (var/datum/organ/external/C in E.children)
+				H << "<span class='notice'>You can't feel your [E.name] anymore...</span>"
+				for (var/obj/item/organ/external/C in E.children)
 					C.status |= ORGAN_DEAD
 			H.update_body(1)
 		mob.adjustToxLoss(15*multiplier)
@@ -165,9 +165,9 @@
 	deactivate(var/mob/living/carbon/mob,var/multiplier)
 		if(istype(mob, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = mob
-			for (var/datum/organ/external/E in H.organs)
+			for (var/obj/item/organ/external/E in H.organs)
 				E.status &= ~ORGAN_DEAD
-				for (var/datum/organ/external/C in E.children)
+				for (var/obj/item/organ/external/C in E.children)
 					C.status &= ~ORGAN_DEAD
 			H.update_body(1)
 
@@ -178,7 +178,7 @@
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		if(istype(mob, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = mob
-			for (var/datum/organ/external/E in H.organs)
+			for (var/obj/item/organ/external/E in H.organs)
 				if (E.status & ORGAN_BROKEN && prob(30))
 					E.status ^= ORGAN_BROKEN
 		var/heal_amt = -5*multiplier
@@ -199,13 +199,13 @@
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		if(istype(mob, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = mob
-			for (var/datum/organ/external/E in H.organs)
+			for (var/obj/item/organ/external/E in H.organs)
 				E.min_broken_damage = max(5, E.min_broken_damage - 30)
 
 	deactivate(var/mob/living/carbon/mob,var/multiplier)
 		if(istype(mob, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = mob
-			for (var/datum/organ/external/E in H.organs)
+			for (var/obj/item/organ/external/E in H.organs)
 				E.min_broken_damage = initial(E.min_broken_damage)
 
 ////////////////////////STAGE 3/////////////////////////////////
@@ -237,7 +237,7 @@
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		if(istype(mob, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = mob
-			var/datum/organ/internal/brain/B = H.internal_organs_by_name["brain"]
+			var/obj/item/organ/brain/B = H.internal_organs_by_name["brain"]
 			if (B && B.damage < B.min_broken_damage)
 				B.take_damage(5)
 		else
@@ -290,7 +290,7 @@
 		if(c_data)
 			data = c_data
 		else
-			data = pick("bicaridine", "kelotane", "dylovene", "inaprovaline", "space_drugs", "sugar",
+			data = pick("bicaridine", "kelotane", "anti_toxin", "inaprovaline", "space_drugs", "sugar",
 						"tramadol", "dexalin", "cryptobiolin", "impedrezene", "hyperzine", "ethylredoxrazine",
 						"mindbreaker", "nutriment")
 		var/datum/reagent/R = chemical_reagents_list[data]

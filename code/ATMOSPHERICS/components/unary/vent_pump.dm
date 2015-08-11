@@ -61,21 +61,30 @@
 	use_power = 1
 	icon_state = "map_vent_in"
 
+/obj/machinery/atmospherics/unary/vent_pump/siphon/on/atmos
+	use_power = 1
+	icon_state = "map_vent_in"
+	external_pressure_bound = 0
+	external_pressure_bound_default = 0
+	internal_pressure_bound = 2000
+	internal_pressure_bound_default = 2000
+	pressure_checks = 2
+	pressure_checks_default = 2
+
 /obj/machinery/atmospherics/unary/vent_pump/New()
 	..()
 	air_contents.volume = ATMOS_DEFAULT_VOLUME_PUMP
 
 	icon = null
 	initial_loc = get_area(loc)
-	if (initial_loc.master)
-		initial_loc = initial_loc.master
 	area_uid = initial_loc.uid
 	if (!id_tag)
 		assign_uid()
 		id_tag = num2text(uid)
-	if(ticker && ticker.current_state == 3)//if the game is running
-		src.initialize()
-		src.broadcast_status()
+
+/obj/machinery/atmospherics/unary/vent_pump/Destroy()
+	unregister_radio(src, frequency)
+	..()
 
 /obj/machinery/atmospherics/unary/vent_pump/high_volume
 	name = "Large Air Vent"
@@ -214,14 +223,6 @@
 
 	return pressure_delta
 
-//Radio remote control
-
-/obj/machinery/atmospherics/unary/vent_pump/proc/set_frequency(new_frequency)
-	radio_controller.remove_object(src, frequency)
-	frequency = new_frequency
-	if(frequency)
-		radio_connection = radio_controller.add_object(src, frequency,radio_filter_in)
-
 /obj/machinery/atmospherics/unary/vent_pump/proc/broadcast_status()
 	if(!radio_connection)
 		return 0
@@ -259,11 +260,12 @@
 /obj/machinery/atmospherics/unary/vent_pump/initialize()
 	..()
 
-	//some vents work his own spesial way
+	//some vents work his own special way
 	radio_filter_in = frequency==1439?(RADIO_FROM_AIRALARM):null
 	radio_filter_out = frequency==1439?(RADIO_TO_AIRALARM):null
 	if(frequency)
-		set_frequency(frequency)
+		radio_connection = register_radio(src, frequency, frequency, radio_filter_in)
+		src.broadcast_status()
 
 /obj/machinery/atmospherics/unary/vent_pump/receive_signal(datum/signal/signal)
 	if(stat & (NOPOWER|BROKEN))
@@ -414,26 +416,11 @@
 			"\blue You have unfastened \the [src].", \
 			"You hear ratchet.")
 		new /obj/item/pipe(loc, make_from=src)
-		del(src)
+		qdel(src)
 
-/obj/machinery/atmospherics/unary/vent_pump/Del()
+/obj/machinery/atmospherics/unary/vent_pump/Destroy()
 	if(initial_loc)
 		initial_loc.air_vent_info -= id_tag
 		initial_loc.air_vent_names -= id_tag
 	..()
 	return
-
-/*
-	Alt-click to vent crawl - Monkeys, aliens, slimes and mice.
-	This is a little buggy but somehow that just seems to plague ventcrawl.
-	I am sorry, I don't know why.
-*/
-// Commenting this out for now, it's not critical, stated to be buggy, and seems like
-// a really clumsy way of doing this. ~Z
-/*/obj/machinery/atmospherics/unary/vent_pump/AltClick(var/mob/living/ML)
-	if(istype(ML))
-		var/list/ventcrawl_verbs = list(/mob/living/carbon/monkey/verb/ventcrawl, /mob/living/carbon/alien/verb/ventcrawl, /mob/living/carbon/slime/verb/ventcrawl,/mob/living/simple_animal/mouse/verb/ventcrawl)
-		if(length(ML.verbs & ventcrawl_verbs)) // alien queens have this removed, an istype would be complicated
-			ML.handle_ventcrawl(src)
-			return
-	..()*/

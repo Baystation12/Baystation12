@@ -1,32 +1,33 @@
 /obj/structure/bed/chair	//YES, chairs are a type of bed, which are a type of stool. This works, believe me.	-Pete
 	name = "chair"
 	desc = "You sit in this. Either by will or force."
-	icon_state = "chair"
+	icon_state = "chair_preview"
+	color = "#666666"
+	base_icon = "chair"
 	buckle_lying = 0 //force people to sit up in chairs when buckled
-
 	var/propelled = 0 // Check for fire-extinguisher-driven chairs
 
 /obj/structure/bed/chair/New()
-	..()
+	..() //Todo make metal/stone chairs display as thrones
 	spawn(3)	//sorry. i don't think there's a better way to do this.
 		update_layer()
 	return
 
 /obj/structure/bed/chair/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	..()
-	if(istype(W, /obj/item/assembly/shock_kit))
+	if(!padding_material && istype(W, /obj/item/assembly/shock_kit))
 		var/obj/item/assembly/shock_kit/SK = W
 		if(!SK.status)
-			user << "<span class='notice'>[SK] is not ready to be attached!</span>"
+			user << "<span class='notice'>\The [SK] is not ready to be attached!</span>"
 			return
 		user.drop_item()
-		var/obj/structure/bed/chair/e_chair/E = new /obj/structure/bed/chair/e_chair(src.loc)
+		var/obj/structure/bed/chair/e_chair/E = new (src.loc, material.name)
 		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 		E.set_dir(dir)
 		E.part = SK
 		SK.loc = E
 		SK.master = E
-		del(src)
+		qdel(src)
 
 /obj/structure/bed/chair/attack_tk(mob/user as mob)
 	if(buckled_mob)
@@ -34,6 +35,20 @@
 	else
 		rotate()
 	return
+
+/obj/structure/bed/chair/post_buckle_mob()
+	update_icon()
+
+/obj/structure/bed/chair/update_icon()
+	..()
+	if(buckled_mob && padding_material)
+		var/cache_key = "[base_icon]-armrest-[padding_material.name]"
+		if(isnull(stool_cache[cache_key]))
+			var/image/I = image(icon, "[base_icon]_armrest")
+			I.layer = MOB_LAYER + 0.1
+			I.color = padding_material.icon_colour
+			stool_cache[cache_key] = I
+		overlays |= stool_cache[cache_key]
 
 /obj/structure/bed/chair/proc/update_layer()
 	if(src.dir == NORTH)
@@ -66,74 +81,49 @@
 		src.set_dir(turn(src.dir, 90))
 		return
 
-// Chair types
-/obj/structure/bed/chair/wood/normal
-	icon_state = "wooden_chair"
-	name = "wooden chair"
-	desc = "Old is never too old to not be in fashion."
-
-/obj/structure/bed/chair/wood/wings
-	icon_state = "wooden_chair_wings"
-	name = "wooden chair"
-	desc = "Old is never too old to not be in fashion."
-
-/obj/structure/bed/chair/wood/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/weapon/wrench))
-		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-		new /obj/item/stack/sheet/wood(src.loc)
-		del(src)
-	else
-		..()
-
+// Leaving this in for the sake of compilation.
 /obj/structure/bed/chair/comfy
-	name = "comfy chair"
-	desc = "It looks comfy."
-	icon_state = "comfychair"
-	color = rgb(255,255,255)
-	var/image/armrest = null
+	desc = "It's a chair. It looks comfy."
+	icon_state = "comfychair_preview"
 
-/obj/structure/bed/chair/comfy/New()
-	armrest = image("icons/obj/objects.dmi", "comfychair_armrest")
-	armrest.layer = MOB_LAYER + 0.1
+/obj/structure/bed/chair/comfy/brown/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","leather")
 
-	return ..()
+/obj/structure/bed/chair/comfy/red/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","carpet")
 
-/obj/structure/bed/chair/comfy/post_buckle_mob()
-	if(buckled_mob)
-		overlays += armrest
-	else
-		overlays -= armrest
+/obj/structure/bed/chair/comfy/teal/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","teal")
 
-/obj/structure/bed/chair/comfy/brown
-	color = rgb(141,70,0)
+/obj/structure/bed/chair/comfy/black/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","black")
 
-/obj/structure/bed/chair/comfy/red
-	color = rgb(218,2,10)
+/obj/structure/bed/chair/comfy/green/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","green")
 
-/obj/structure/bed/chair/comfy/teal
-	color = rgb(0,234,250)
+/obj/structure/bed/chair/comfy/purp/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","purple")
 
-/obj/structure/bed/chair/comfy/black
-	color = rgb(60,60,60)
+/obj/structure/bed/chair/comfy/blue/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","blue")
 
-/obj/structure/bed/chair/comfy/green
-	color = rgb(1,196,8)
+/obj/structure/bed/chair/comfy/beige/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","beige")
 
-/obj/structure/bed/chair/comfy/purp
-	color = rgb(112,2,176)
-
-/obj/structure/bed/chair/comfy/blue
-	color = rgb(2,9,210)
-
-/obj/structure/bed/chair/comfy/beige
-	color = rgb(255,253,195)
+/obj/structure/bed/chair/comfy/lime/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","lime")
 
 /obj/structure/bed/chair/office
 	anchored = 0
 	buckle_movable = 1
 
-/obj/structure/bed/chair/comfy/lime
-	color = rgb(255,251,0)
+/obj/structure/bed/chair/office/update_icon()
+	return
+
+/obj/structure/bed/chair/office/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	if(istype(W,/obj/item/stack) || istype(W, /obj/item/weapon/wirecutters))
+		return
+	..()
 
 /obj/structure/bed/chair/office/Move()
 	..()
@@ -180,3 +170,23 @@
 
 /obj/structure/bed/chair/office/dark
 	icon_state = "officechair_dark"
+
+// Chair types
+/obj/structure/bed/chair/wood
+	name = "wooden chair"
+	desc = "Old is never too old to not be in fashion."
+	icon_state = "wooden_chair"
+
+/obj/structure/bed/chair/wood/update_icon()
+	return
+
+/obj/structure/bed/chair/wood/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	if(istype(W,/obj/item/stack) || istype(W, /obj/item/weapon/wirecutters))
+		return
+	..()
+
+/obj/structure/bed/chair/wood/New(var/newloc)
+	..(newloc, "wood")
+
+/obj/structure/bed/chair/wood/wings
+	icon_state = "wooden_chair_wings"

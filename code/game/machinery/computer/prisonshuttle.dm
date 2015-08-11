@@ -14,6 +14,7 @@ var/prison_shuttle_timeleft = 0
 	name = "prison shuttle control console"
 	icon = 'icons/obj/computer.dmi'
 	icon_state = "shuttle"
+	light_color = "#00ffff"
 	req_access = list(access_security)
 	circuit = "/obj/item/weapon/circuitboard/prison_shuttle"
 	var/temp = null
@@ -37,7 +38,7 @@ var/prison_shuttle_timeleft = 0
 
 				if (src.stat & BROKEN)
 					user << "\blue The broken glass falls out."
-					new /obj/item/weapon/shard( src.loc )
+					new /obj/item/weapon/material/shard( src.loc )
 					A.state = 3
 					A.icon_state = "3"
 				else
@@ -45,7 +46,7 @@ var/prison_shuttle_timeleft = 0
 					A.state = 4
 					A.icon_state = "4"
 
-				del(src)
+				qdel(src)
 		else if(istype(I,/obj/item/weapon/card/emag) && (!hacked))
 			hacked = 1
 			user << "\blue You disable the lock."
@@ -194,7 +195,7 @@ var/prison_shuttle_timeleft = 0
 					for(var/atom/movable/AM as mob|obj in T)
 						AM.Move(D)
 					if(istype(T, /turf/simulated))
-						del(T)
+						qdel(T)
 				start_location.move_contents_to(end_location)
 
 			if(1)
@@ -224,7 +225,7 @@ var/prison_shuttle_timeleft = 0
 					for(var/atom/movable/AM as mob|obj in T)
 						AM.Move(D)
 					if(istype(T, /turf/simulated))
-						del(T)
+						qdel(T)
 
 				for(var/mob/living/carbon/bug in end_location) // If someone somehow is still in the shuttle's docking area...
 					bug.gib()

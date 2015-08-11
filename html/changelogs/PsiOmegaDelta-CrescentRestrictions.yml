@@ -1,5 +1,0 @@
-author: PsiOmegaDelta
-delete-after: True
-
-changes: 
-  - maptweak: "Non-general areas on Crescent are now protected by blast doors to enforce area restrictions. Admins can operate these from the central checkpoint."

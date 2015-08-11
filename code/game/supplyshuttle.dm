@@ -25,19 +25,16 @@ var/list/mechtoys = list(
 
 /obj/item/weapon/paper/manifest
 	name = "supply manifest"
+	var/is_copy = 1
 
-/area/supply/station //DO NOT TURN THE lighting_use_dynamic STUFF ON FOR SHUTTLES. IT BREAKS THINGS.
+/area/supply/station
 	name = "Supply Shuttle"
 	icon_state = "shuttle3"
-	luminosity = 1
-	lighting_use_dynamic = 0
 	requires_power = 0
 
-/area/supply/dock //DO NOT TURN THE lighting_use_dynamic STUFF ON FOR SHUTTLES. IT BREAKS THINGS.
+/area/supply/dock
 	name = "Supply Shuttle"
 	icon_state = "shuttle3"
-	luminosity = 1
-	lighting_use_dynamic = 0
 	requires_power = 0
 
 /obj/structure/plasticflaps //HOW DO YOU CALL THOSE THINGS ANYWAY
@@ -49,6 +46,11 @@ var/list/mechtoys = list(
 	anchored = 1
 	layer = 4
 	explosion_resistance = 5
+	var/list/mobs_can_pass = list(
+		/mob/living/carbon/slime,
+		/mob/living/simple_animal/mouse,
+		/mob/living/silicon/robot/drone
+		)
 
 /obj/structure/plasticflaps/CanPass(atom/A, turf/T)
 	if(istype(A) && A.checkpass(PASSGLASS))
@@ -61,22 +63,31 @@ var/list/mechtoys = list(
 	if(istype(A, /obj/vehicle))	//no vehicles
 		return 0
 
-	if(istype(A, /mob/living)) // You Shall Not Pass!
-		var/mob/living/M = A
-		if(!M.lying && !istype(M, /mob/living/carbon/monkey) && !istype(M, /mob/living/carbon/slime) && !istype(M, /mob/living/simple_animal/mouse) && !istype(M, /mob/living/silicon/robot/drone))  //If your not laying down, or a small creature, no pass.
-			return 0
+	var/mob/living/M = A
+	if(istype(M))
+		if(M.lying)
+			return ..()
+		for(var/mob_type in mobs_can_pass)
+			if(istype(A, mob_type))
+				return ..()
+		if(istype(A, /mob/living/carbon/human))
+			var/mob/living/carbon/human/H = M
+			if(H.species.is_small)
+				return ..()
+		return 0
+
 	return ..()
 
 /obj/structure/plasticflaps/ex_act(severity)
 	switch(severity)
 		if (1)
-			del(src)
+			qdel(src)
 		if (2)
 			if (prob(50))
-				del(src)
+				qdel(src)
 		if (3)
 			if (prob(5))
-				del(src)
+				qdel(src)
 
 /obj/structure/plasticflaps/mining //A specific type for mining that doesn't allow airflow because of them damn crates
 	name = "airtight plastic flaps"
@@ -88,7 +99,7 @@ var/list/mechtoys = list(
 			T.blocks_air = 1
 		..()
 
-	Del() //lazy hack to set the turf to allow air to pass if it's a simulated floor
+	Destroy() //lazy hack to set the turf to allow air to pass if it's a simulated floor
 		var/turf/T = get_turf(loc)
 		if(T)
 			if(istype(T, /turf/simulated/floor))
@@ -112,9 +123,6 @@ var/list/mechtoys = list(
 	var/comment = null
 
 /datum/controller/supply
-	var/processing = 1
-	var/processing_interval = 300
-	var/iteration = 0
 	//supply points
 	var/points = 50
 	var/points_per_process = 1
@@ -134,20 +142,14 @@ var/list/mechtoys = list(
 	New()
 		ordernum = rand(1,9000)
 
-	//Supply shuttle ticker - handles supply point regenertion and shuttle travelling between centcomm and the station
-	proc/process()
 		for(var/typepath in (typesof(/datum/supply_packs) - /datum/supply_packs))
 			var/datum/supply_packs/P = new typepath()
 			supply_packs[P.name] = P
 
-		spawn(0)
-			set background = 1
-			while(1)
-				if(processing)
-					iteration++
-					points += points_per_process
-
-				sleep(processing_interval)
+	// Supply shuttle ticker - handles supply point regeneration
+	// This is called by the process scheduler every thirty seconds
+	proc/process()
+		points += points_per_process
 
 	//To stop things being sent to centcomm which should not be sent to centcomm. Recursively checks for these types.
 	proc/forbidden_atoms_check(atom/A)
@@ -187,23 +189,19 @@ var/list/mechtoys = list(
 					// Sell manifests
 					var/atom/A = atom
 					if(find_slip && istype(A,/obj/item/weapon/paper/manifest))
-						var/obj/item/weapon/paper/slip = A
-						if(slip.stamped && slip.stamped.len) //yes, the clown stamp will work. clown is the highest authority on the station, it makes sense
+						var/obj/item/weapon/paper/manifest/slip = A
+						if(!slip.is_copy && slip.stamped && slip.stamped.len) //yes, the clown stamp will work. clown is the highest authority on the station, it makes sense
 							points += points_per_slip
 							find_slip = 0
 						continue
 
-					// Sell phoron
-					if(istype(A, /obj/item/stack/sheet/mineral/phoron))
-						var/obj/item/stack/sheet/mineral/phoron/P = A
-						phoron_count += P.get_amount()
-
-					// Sell platinum
-					if(istype(A, /obj/item/stack/sheet/mineral/platinum))
-						var/obj/item/stack/sheet/mineral/platinum/P = A
-						plat_count += P.get_amount()
-
-			del(MA)
+					// Sell phoron and platinum
+					if(istype(A, /obj/item/stack))
+						var/obj/item/stack/P
+						switch(P.get_material_name())
+							if("phoron") phoron_count += P.get_amount()
+							if("platinum") plat_count += P.get_amount()
+			qdel(MA)
 
 		if(phoron_count)
 			points += phoron_count * points_per_phoron
@@ -221,7 +219,14 @@ var/list/mechtoys = list(
 		var/list/clear_turfs = list()
 
 		for(var/turf/T in area_shuttle)
-			if(T.density || T.contents.len)	continue
+			if(T.density)	continue
+			var/contcount
+			for(var/atom/A in T.contents)
+				if(!A.simulated)
+					continue
+				contcount++
+			if(contcount)
+				continue
 			clear_turfs += T
 
 		for(var/S in shoppinglist)
@@ -233,22 +238,30 @@ var/list/mechtoys = list(
 			var/datum/supply_order/SO = S
 			var/datum/supply_packs/SP = SO.object
 
-			var/atom/A = new SP.containertype(pickedloc)
+			var/obj/A = new SP.containertype(pickedloc)
 			A.name = "[SP.containername] [SO.comment ? "([SO.comment])":"" ]"
 
 			//supply manifest generation begin
 
-			var/obj/item/weapon/paper/manifest/slip = new /obj/item/weapon/paper/manifest(A)
-			slip.info = "<h3>[command_name()] Shipping Manifest</h3><hr><br>"
-			slip.info +="Order #[SO.ordernum]<br>"
-			slip.info +="Destination: [station_name]<br>"
-			slip.info +="[shoppinglist.len] PACKAGES IN THIS SHIPMENT<br>"
-			slip.info +="CONTENTS:<br><ul>"
+			var/obj/item/weapon/paper/manifest/slip
+			if(!SP.contraband)
+				slip = new /obj/item/weapon/paper/manifest(A)
+				slip.is_copy = 0
+				slip.info = "<h3>[command_name()] Shipping Manifest</h3><hr><br>"
+				slip.info +="Order #[SO.ordernum]<br>"
+				slip.info +="Destination: [station_name]<br>"
+				slip.info +="[shoppinglist.len] PACKAGES IN THIS SHIPMENT<br>"
+				slip.info +="CONTENTS:<br><ul>"
 
 			//spawn the stuff, finish generating the manifest while you're at it
 			if(SP.access)
-				A:req_access = list()
-				A:req_access += text2num(SP.access)
+				if(isnum(SP.access))
+					A.req_access = list(SP.access)
+				else if(islist(SP.access))
+					var/list/L = SP.access // access var is a plain var, we need a list
+					A.req_access = L.Copy()
+				else
+					world << "<span class='danger'>Supply pack with invalid access restriction [SP.access] encountered!</span>"
 
 			var/list/contains
 			if(istype(SP,/datum/supply_packs/randomised))
@@ -264,12 +277,12 @@ var/list/mechtoys = list(
 				if(!typepath)	continue
 				var/atom/B2 = new typepath(A)
 				if(SP.amount && B2:amount) B2:amount = SP.amount
-				slip.info += "<li>[B2.name]</li>" //add the item to the manifest
+				if(slip) slip.info += "<li>[B2.name]</li>" //add the item to the manifest
 
 			//manifest finalisation
-			slip.info += "</ul><br>"
-			slip.info += "CHECK CONTENTS AND STAMP BELOW THE LINE TO CONFIRM RECEIPT OF GOODS<hr>"
-			if (SP.contraband) slip.loc = null	//we are out of blanks for Form #44-D Ordering Illicit Drugs.
+			if(slip)
+				slip.info += "</ul><br>"
+				slip.info += "CHECK CONTENTS AND STAMP BELOW THE LINE TO CONFIRM RECEIPT OF GOODS<hr>"
 
 		shoppinglist.Cut()
 		return

@@ -1,5 +1,8 @@
 // Holographic Items!
 
+// Holographic tables are in code/modules/tables/presets.dm
+// Holographic racks are in code/modules/tables/rack.dm
+
 /turf/simulated/floor/holofloor/
 	thermal_conductivity = 0
 
@@ -40,36 +43,6 @@
 	return
 	// HOLOFLOOR DOES NOT GIVE A FUCK
 
-/obj/structure/table/holotable
-	name = "table"
-	desc = "A square piece of metal standing on four metal legs. It can not move."
-	icon = 'icons/obj/structures.dmi'
-	icon_state = "table"
-	density = 1
-	anchored = 1.0
-	layer = 2.8
-	throwpass = 1	//You can throw objects over this, despite it's density.
-
-/obj/structure/table/holotable/attack_hand(mob/user as mob)
-	return // HOLOTABLE DOES NOT GIVE A FUCK
-
-
-/obj/structure/table/holotable/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if (istype(W, /obj/item/weapon/wrench))
-		user << "It's a holotable!  There are no bolts!"
-		return
-
-	if(isrobot(user))
-		return
-
-	..()
-
-/obj/structure/table/woodentable/holotable
-	name = "table"
-	desc = "A square piece of wood standing on four wooden legs. It can not move."
-	icon = 'icons/obj/structures.dmi'
-	icon_state = "wood_table"
-
 /obj/structure/holostool
 	name = "stool"
 	desc = "Apply butt."
@@ -85,7 +58,7 @@
 	icon_state = "boxing"
 	item_state = "boxing"
 
-/obj/structure/window/reinforced/holowindow/Del()
+/obj/structure/window/reinforced/holowindow/Destroy()
 	..()
 
 /obj/structure/window/reinforced/holowindow/attackby(obj/item/W as obj, mob/user as mob)
@@ -95,7 +68,7 @@
 		if(istype(G.affecting,/mob/living))
 			var/mob/living/M = G.affecting
 			var/state = G.state
-			del(W)	//gotta delete it here because if window breaks, it won't get deleted
+			qdel(W)	//gotta delete it here because if window breaks, it won't get deleted
 			switch (state)
 				if(1)
 					M.visible_message("<span class='warning'>[user] slams [M] against \the [src]!</span>")
@@ -138,13 +111,13 @@
 	playsound(src, "shatter", 70, 1)
 	if(display_message)
 		visible_message("[src] fades away as it shatters!")
-	del(src)
+	qdel(src)
 	return
 
-/obj/structure/window/reinforced/holowindow/disappearing/Del()
+/obj/structure/window/reinforced/holowindow/disappearing/Destroy()
 	..()
 
-/obj/machinery/door/window/holowindoor/Del()
+/obj/machinery/door/window/holowindoor/Destroy()
 	..()
 
 /obj/machinery/door/window/holowindoor/attackby(obj/item/weapon/I as obj, mob/user as mob)
@@ -180,9 +153,9 @@
 	playsound(src, "shatter", 70, 1)
 	if(display_message)
 		visible_message("[src] fades away as it shatters!")
-	del(src)
+	qdel(src)
 
-/obj/structure/bed/chair/holochair/Del()
+/obj/structure/bed/chair/holochair/Destroy()
 	..()
 
 /obj/structure/bed/chair/holochair/attackby(obj/item/weapon/W as obj, mob/user as mob)
@@ -204,6 +177,7 @@
 	w_class = 2.0
 	flags = NOSHIELD | NOBLOODY
 	var/active = 0
+	var/item_color
 
 /obj/item/weapon/holo/esword/green
 	New()
@@ -275,10 +249,10 @@
 		G.affecting.loc = src.loc
 		G.affecting.Weaken(5)
 		visible_message("<span class='warning'>[G.assailant] dunks [G.affecting] into the [src]!</span>", 3)
-		del(W)
+		qdel(W)
 		return
 	else if (istype(W, /obj/item) && get_dist(src,user)<2)
-		user.drop_item(src)
+		user.drop_item(src.loc)
 		visible_message("<span class='notice'>[user] dunks [W] into the [src]!</span>", 3)
 		return
 
@@ -334,7 +308,7 @@
 
 	currentarea = get_area(src.loc)
 	if(!currentarea)
-		del(src)
+		qdel(src)
 
 	if(eventstarted)
 		usr << "The event has already begun!"
@@ -365,26 +339,10 @@
 	eventstarted = 1
 
 	for(var/obj/structure/window/reinforced/holowindow/disappearing/W in currentarea)
-		del(W)
+		qdel(W)
 
 	for(var/mob/M in currentarea)
 		M << "FIGHT!"
-
-//Holorack
-
-/obj/structure/table/rack/holorack
-	name = "rack"
-	desc = "Different from the Middle Ages version."
-	icon = 'icons/obj/objects.dmi'
-	icon_state = "rack"
-
-/obj/structure/table/rack/holorack/attack_hand(mob/user as mob)
-	return
-
-/obj/structure/table/rack/holorack/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if (istype(W, /obj/item/weapon/wrench))
-		user << "It's a holorack!  You can't unwrench it!"
-		return
 
 //Holocarp
 
@@ -400,20 +358,20 @@
 
 /mob/living/simple_animal/hostile/carp/holodeck/New()
 	..()
-	SetLuminosity(2) //hologram lighting
+	set_light(2) //hologram lighting
 
 /mob/living/simple_animal/hostile/carp/holodeck/proc/set_safety(var/safe)
 	if (safe)
 		faction = "neutral"
 		melee_damage_lower = 0
 		melee_damage_upper = 0
-		wall_smash = 0
+		environment_smash = 0
 		destroy_surroundings = 0
 	else
 		faction = "carp"
 		melee_damage_lower = initial(melee_damage_lower)
 		melee_damage_upper = initial(melee_damage_upper)
-		wall_smash = initial(wall_smash)
+		environment_smash = initial(environment_smash)
 		destroy_surroundings = initial(destroy_surroundings)
 
 /mob/living/simple_animal/hostile/carp/holodeck/gib()
@@ -425,4 +383,4 @@
 
 /mob/living/simple_animal/hostile/carp/holodeck/proc/derez()
 	visible_message("<span class='notice'>\The [src] fades away!</span>")
-	del(src)
+	qdel(src)

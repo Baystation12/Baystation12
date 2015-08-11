@@ -1,5 +1,5 @@
 /obj/machinery/autolathe
-	name = "\improper autolathe"
+	name = "autolathe"
 	desc = "It produces items using metal and glass."
 	icon_state = "autolathe"
 	density = 1
@@ -9,8 +9,8 @@
 	active_power_usage = 2000
 
 	var/list/machine_recipes
-	var/list/stored_material =  list("metal" = 0, "glass" = 0)
-	var/list/storage_capacity = list("metal" = 0, "glass" = 0)
+	var/list/stored_material =  list(DEFAULT_WALL_MATERIAL = 0, "glass" = 0)
+	var/list/storage_capacity = list(DEFAULT_WALL_MATERIAL = 0, "glass" = 0)
 	var/show_category = "All"
 
 	var/hacked = 0
@@ -140,6 +140,9 @@
 	if(O.loc != user && !(istype(O,/obj/item/stack)))
 		return 0
 
+	if(is_robot_module(O))
+		return 0
+
 	//Resources are being loaded.
 	var/obj/item/eating = O
 	if(!eating.matter)
@@ -189,8 +192,8 @@
 		var/obj/item/stack/stack = eating
 		stack.use(max(1, round(total_used/mass_per_sheet))) // Always use at least 1 to prevent infinite materials.
 	else
-		user.drop_item(O)
-		del(O)
+		user.remove_from_mob(O)
+		qdel(O)
 
 	updateUsrDialog()
 	return
@@ -279,18 +282,21 @@
 	for(var/obj/item/weapon/stock_parts/manipulator/M in component_parts)
 		man_rating += M.rating
 
-	storage_capacity["metal"] = mb_rating  * 25000
+	storage_capacity[DEFAULT_WALL_MATERIAL] = mb_rating  * 25000
 	storage_capacity["glass"] = mb_rating  * 12500
 	build_time = 50 / man_rating
 	mat_efficiency = 1.1 - man_rating * 0.1// Normally, price is 1.25 the amount of material, so this shouldn't go higher than 0.8. Maximum rating of parts is 3
 
 /obj/machinery/autolathe/dismantle()
-	var/list/sheets = list("metal" = /obj/item/stack/sheet/metal, "glass" = /obj/item/stack/sheet/glass)
 
 	for(var/mat in stored_material)
-		var/T = sheets[mat]
-		var/obj/item/stack/sheet/S = new T
+		var/material/M = get_material_by_name(mat)
+		if(!istype(M))
+			continue
+		var/obj/item/stack/material/S = new M.stack_type(get_turf(src))
 		if(stored_material[mat] > S.perunit)
 			S.amount = round(stored_material[mat] / S.perunit)
-			S.loc = loc
+		else
+			qdel(S)
 	..()
+	return 1

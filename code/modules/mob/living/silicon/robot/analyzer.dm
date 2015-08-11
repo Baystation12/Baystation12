@@ -12,7 +12,7 @@
 	w_class = 2.0
 	throw_speed = 5
 	throw_range = 10
-	matter = list("metal" = 500, "glass" = 200)
+	matter = list(DEFAULT_WALL_MATERIAL = 500, "glass" = 200)
 	origin_tech = "magnets=2;biotech=1;engineering=2"
 	var/mode = 1;
 
@@ -65,9 +65,9 @@
 		var/list/damaged = H.get_damaged_organs(1,1)
 		user.show_message("\blue Localized Damage, Brute/Electronics:",1)
 		if(length(damaged)>0)
-			for(var/datum/organ/external/org in damaged)
+			for(var/obj/item/organ/external/org in damaged)
 				user.show_message(text("\blue \t []: [] - []",	\
-				capitalize(org.display_name),					\
+				capitalize(org.name),					\
 				(org.brute_dam > 0)	?	"\red [org.brute_dam]"							:0,		\
 				(org.burn_dam > 0)	?	"<font color='#FFA500'>[org.burn_dam]</font>"	:0),1)
 		else

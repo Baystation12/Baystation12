@@ -11,13 +11,13 @@
 /obj/effect/spider/ex_act(severity)
 	switch(severity)
 		if(1.0)
-			del(src)
+			qdel(src)
 		if(2.0)
 			if (prob(50))
-				del(src)
+				qdel(src)
 		if(3.0)
 			if (prob(5))
-				del(src)
+				qdel(src)
 	return
 
 /obj/effect/spider/attackby(var/obj/item/weapon/W, var/mob/user)
@@ -45,10 +45,10 @@
 
 /obj/effect/spider/proc/healthcheck()
 	if(health <= 0)
-		del(src)
+		qdel(src)
 
 /obj/effect/spider/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
-	if(exposed_temperature > 300)
+	if(exposed_temperature > 300 + T0C)
 		health -= 5
 		healthcheck()
 
@@ -86,7 +86,7 @@
 		var/num = rand(6,24)
 		for(var/i=0, i<num, i++)
 			new /obj/effect/spider/spiderling(src.loc)
-		del(src)
+		qdel(src)
 
 /obj/effect/spider/spiderling
 	name = "spiderling"
@@ -114,8 +114,8 @@
 
 /obj/effect/spider/spiderling/proc/die()
 	visible_message("<span class='alert'>[src] dies!</span>")
-	new /obj/effect/decal/cleanable/spiderling_remains(src.loc)
-	del(src)
+	PoolOrNew(/obj/effect/decal/cleanable/spiderling_remains, src.loc)
+	qdel(src)
 
 /obj/effect/spider/spiderling/healthcheck()
 	if(health <= 0)
@@ -188,7 +188,7 @@
 		if(amount_grown >= 100)
 			var/spawn_type = pick(typesof(/mob/living/simple_animal/hostile/giant_spider))
 			new spawn_type(src.loc)
-			del(src)
+			qdel(src)
 
 /obj/effect/decal/cleanable/spiderling_remains
 	name = "spiderling remains"
@@ -205,8 +205,8 @@
 	New()
 		icon_state = pick("cocoon1","cocoon2","cocoon3")
 
-/obj/effect/spider/cocoon/Del()
+/obj/effect/spider/cocoon/Destroy()
 	src.visible_message("\red \the [src] splits open.")
 	for(var/atom/movable/A in contents)
 		A.loc = src.loc
-	..()
+	return ..()

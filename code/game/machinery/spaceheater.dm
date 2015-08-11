@@ -121,7 +121,7 @@
 			if("cellremove")
 				if(panel_open && cell && !usr.get_active_hand())
 					usr.visible_message("\blue [usr] removes \the [cell] from \the [src].", "\blue You remove \the [cell] from \the [src].")
-					cell.updateicon()
+					cell.update_icon()
 					usr.put_in_hands(cell)
 					cell.add_fingerprint(usr)
 					cell = null

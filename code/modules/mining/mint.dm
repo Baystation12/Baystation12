@@ -17,7 +17,7 @@
 	var/amt_uranium = 0
 	var/newCoins = 0   //how many coins the machine made in it's last load
 	var/processing = 0
-	var/chosen = "metal" //which material will be used to make coins
+	var/chosen = DEFAULT_WALL_MATERIAL //which material will be used to make coins
 	var/coinsToProduce = 10
 
 
@@ -37,27 +37,27 @@
 
 /obj/machinery/mineral/mint/process()
 	if ( src.input)
-		var/obj/item/stack/sheet/O
-		O = locate(/obj/item/stack/sheet, input.loc)
+		var/obj/item/stack/O
+		O = locate(/obj/item/stack, input.loc)
 		if(O)
-			if (istype(O,/obj/item/stack/sheet/mineral/gold))
-				amt_gold += 100 * O.get_amount()
-				del(O)
-			if (istype(O,/obj/item/stack/sheet/mineral/silver))
-				amt_silver += 100 * O.get_amount()
-				del(O)
-			if (istype(O,/obj/item/stack/sheet/mineral/diamond))
-				amt_diamond += 100 * O.get_amount()
-				del(O)
-			if (istype(O,/obj/item/stack/sheet/mineral/phoron))
-				amt_phoron += 100 * O.get_amount()
-				del(O)
-			if (istype(O,/obj/item/stack/sheet/mineral/uranium))
-				amt_uranium += 100 * O.get_amount()
-				del(O)
-			if (istype(O,/obj/item/stack/sheet/metal))
-				amt_iron += 100 * O.get_amount()
-				del(O)
+			var/processed = 1
+			switch(O.get_material_name())
+				if("gold")
+					amt_gold += 100 * O.get_amount()
+				if("silver")
+					amt_silver += 100 * O.get_amount()
+				if("diamond")
+					amt_diamond += 100 * O.get_amount()
+				if("phoron")
+					amt_phoron += 100 * O.get_amount()
+				if("uranium")
+					amt_uranium += 100 * O.get_amount()
+				if(DEFAULT_WALL_MATERIAL)
+					amt_iron += 100 * O.get_amount()
+				else
+					processed = 0
+			if(processed)
+				qdel(O)
 
 /obj/machinery/mineral/mint/attack_hand(user as mob)
 
@@ -81,7 +81,7 @@
 	else
 		dat += text("<A href='?src=\ref[src];choose=silver'>Choose</A>")
 	dat += text("<br><font color='#555555'><b>Iron inserted: </b>[amt_iron]</font> ")
-	if (chosen == "metal")
+	if (chosen == DEFAULT_WALL_MATERIAL)
 		dat += text("chosen")
 	else
 		dat += text("<A href='?src=\ref[src];choose=metal'>Choose</A>")
@@ -133,7 +133,7 @@
 			icon_state = "coinpress1"
 			var/obj/item/weapon/moneybag/M
 			switch(chosen)
-				if("metal")
+				if(DEFAULT_WALL_MATERIAL)
 					while(amt_iron > 0 && coinsToProduce > 0)
 						if (locate(/obj/item/weapon/moneybag,output.loc))
 							M = locate(/obj/item/weapon/moneybag,output.loc)

@@ -8,7 +8,7 @@
 			M.client.show_popup_menus = 1
 			for(var/obj/effect/bmode/buildholder/H)
 				if(H.cl == M.client)
-					del(H)
+					qdel(H)
 		else
 			log_admin("[key_name(usr)] has entered build mode.")
 			M.client.buildmode = 1
@@ -41,6 +41,12 @@
 	dir = NORTH
 	icon = 'icons/misc/buildmode.dmi'
 	var/obj/effect/bmode/buildholder/master = null
+
+/obj/effect/bmode/Destroy()
+	if(master && master.cl)
+		master.cl.screen -= src
+	master = null
+	return ..()
 
 /obj/effect/bmode/builddir
 	icon_state = "build"
@@ -78,6 +84,8 @@
 			if(2)
 				usr << "\blue ***********************************************************"
 				usr << "\blue Right Mouse Button on buildmode button = Set object type"
+				usr << "\blue Middle Mouse Button on buildmode button= On/Off object type saying"
+				usr << "\blue Middle Mouse Button on turf/obj        = Capture object type"
 				usr << "\blue Left Mouse Button on turf/obj          = Place objects"
 				usr << "\blue Right Mouse Button                     = Delete objects"
 				usr << ""
@@ -115,15 +123,35 @@
 	var/obj/effect/bmode/buildquit/buildquit = null
 	var/atom/movable/throw_atom = null
 
+/obj/effect/bmode/buildholder/Destroy()
+	qdel(builddir)
+	builddir = null
+	qdel(buildhelp)
+	buildhelp = null
+	qdel(buildmode)
+	buildmode = null
+	qdel(buildquit)
+	buildquit = null
+	throw_atom = null
+	cl = null
+	return ..()
+
 /obj/effect/bmode/buildmode
 	icon_state = "buildmode1"
 	screen_loc = "NORTH,WEST+2"
 	var/varholder = "name"
 	var/valueholder = "derp"
 	var/objholder = /obj/structure/closet
+	var/objsay = 1
 
 	Click(location, control, params)
 		var/list/pa = params2list(params)
+
+		if(pa.Find("middle"))
+			switch(master.cl.buildmode)
+				if(2)
+					objsay=!objsay
+
 
 		if(pa.Find("left"))
 			switch(master.cl.buildmode)
@@ -211,7 +239,7 @@
 					T.ChangeTurf(/turf/simulated/wall)
 					return
 				else if(istype(object,/obj))
-					del(object)
+					qdel(object)
 					return
 			else if(istype(object,/turf) && pa.Find("alt") && pa.Find("left"))
 				new/obj/machinery/door/airlock(get_turf(object))
@@ -241,7 +269,11 @@
 					var/obj/A = new holder.buildmode.objholder (get_turf(object))
 					A.set_dir(holder.builddir.dir)
 			else if(pa.Find("right"))
-				if(isobj(object)) del(object)
+				if(isobj(object)) qdel(object)
+			if(pa.Find("middle"))
+				holder.buildmode.objholder = text2path("[object.type]")
+				if(holder.buildmode.objsay)	usr << "[object.type]"
+
 
 		if(3)
 			if(pa.Find("left")) //I cant believe this shit actually compiles.
@@ -264,4 +296,3 @@
 			if(pa.Find("right"))
 				if(holder.throw_atom)
 					holder.throw_atom.throw_at(object, 10, 1)
-

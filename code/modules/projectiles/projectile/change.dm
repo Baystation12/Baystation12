@@ -6,40 +6,45 @@
 	nodamage = 1
 	check_armour = "energy"
 
-	on_hit(var/atom/change)
-		wabbajack(change)
+/obj/item/projectile/change/on_hit(var/atom/change)
+	wabbajack(change)
 
-
-/obj/item/projectile/change/proc/wabbajack (mob/M as mob in living_mob_list)
+/obj/item/projectile/change/proc/wabbajack(var/mob/M)
 	if(istype(M, /mob/living) && M.stat != DEAD)
-		if(M.monkeyizing)	return
-		if(M.has_brain_worms()) return //Borer stuff - RR
-
-		M.monkeyizing = 1
-		M.canmove = 0
-		M.icon = null
-		M.overlays.Cut()
-		M.invisibility = 101
+		if(M.monkeyizing)
+			return
+		if(M.has_brain_worms())
+			return //Borer stuff - RR
 
 		if(istype(M, /mob/living/silicon/robot))
 			var/mob/living/silicon/robot/Robot = M
-			if(Robot.mmi)	del(Robot.mmi)
+			if(Robot.mmi)
+				qdel(Robot.mmi)
 		else
 			for(var/obj/item/W in M)
 				if(istype(W, /obj/item/weapon/implant))	//TODO: Carn. give implants a dropped() or something
-					del(W)
+					qdel(W)
 					continue
-				W.layer = initial(W.layer)
-				W.loc = M.loc
-				W.dropped(M)
+				M.drop_from_inventory(W)
 
 		var/mob/living/new_mob
 
-		var/randomize = pick("monkey","robot","slime","xeno","human")
+		var/options = list("robot", "slime")
+		for(var/t in all_species)
+			options += t
+		options -= "Xenomorph Queen"
+		options -= "Xenomorph"
+		if(ishuman(M))
+			var/mob/living/carbon/human/H = M
+			if(H.species)
+				options -= H.species.name
+		else if(isrobot(M))
+			options -= "robot"
+		else if(isslime(M))
+			options -= "slime"
+
+		var/randomize = pick(options)
 		switch(randomize)
-			if("monkey")
-				new_mob = new /mob/living/carbon/monkey(M.loc)
-				new_mob.universal_speak = 1
 			if("robot")
 				new_mob = new /mob/living/silicon/robot(M.loc)
 				new_mob.gender = M.gender
@@ -51,36 +56,42 @@
 			if("slime")
 				new_mob = new /mob/living/carbon/slime(M.loc)
 				new_mob.universal_speak = 1
-			if("xeno")
-				var/alien_caste = pick("Hunter","Sentinel","Drone","Larva")
-				new_mob = create_new_xenomorph(alien_caste,M.loc)
-				new_mob.universal_speak = 1
-			if("human")
-				new_mob = new /mob/living/carbon/human(M.loc, pick(all_species))
-				if(M.gender == MALE)
-					new_mob.gender = MALE
-					new_mob.name = pick(first_names_male)
-				else
-					new_mob.gender = FEMALE
-					new_mob.name = pick(first_names_female)
-				new_mob.name += " [pick(last_names)]"
-				new_mob.real_name = new_mob.name
-
-				var/datum/preferences/A = new()	//Randomize appearance for the human
-				A.randomize_appearance_for(new_mob)
 			else
-				return
+				var/mob/living/carbon/human/H
+				if(ishuman(M))
+					H = M
+				else
+					new_mob = new /mob/living/carbon/human(M.loc)
+					H = new_mob
 
-		for (var/obj/effect/proc_holder/spell/S in M.spell_list)
-			new_mob.spell_list += new S.type
+				if(M.gender == MALE)
+					H.gender = MALE
+					H.name = pick(first_names_male)
+				else
+					H.gender = FEMALE
+					H.name = pick(first_names_female)
+				H.name += " [pick(last_names)]"
+				H.real_name = H.name
 
-		new_mob.a_intent = "hurt"
-		if(M.mind)
-			M.mind.transfer_to(new_mob)
+				H.set_species(randomize)
+				H.universal_speak = 1
+				var/datum/preferences/A = new() //Randomize appearance for the human
+				A.randomize_appearance_for(H)
+
+		if(new_mob)
+			for (var/spell/S in M.spell_list)
+				new_mob.add_spell(new S.type)
+
+			new_mob.a_intent = "hurt"
+			if(M.mind)
+				M.mind.transfer_to(new_mob)
+			else
+				new_mob.key = M.key
+
+			new_mob << "<span class='warning'>Your form morphs into that of \a [lowertext(randomize)].</span>"
+
+			qdel(M)
+			return
 		else
-			new_mob.key = M.key
-
-		new_mob << "<B>Your form morphs into that of a [randomize].</B>"
-
-		del(M)
-		return new_mob
+			M << "<span class='warning'>Your form morphs into that of \a [lowertext(randomize)].</span>"
+			return

@@ -1,6 +1,9 @@
 // Navigation beacon for AI robots
 // Functions as a transponder: looks for incoming signal matching
 
+
+var/global/list/navbeacons			// no I don't like putting this in, but it will do for now
+
 /obj/machinery/navbeacon
 
 	icon = 'icons/obj/objects.dmi'
@@ -27,6 +30,13 @@
 
 		var/turf/T = loc
 		hide(T.intact)
+		
+		// add beacon to MULE bot beacon list
+		if(freq == 1400)
+			if(!navbeacons)
+				navbeacons = new()
+			navbeacons += src
+			
 
 		spawn(5)	// must wait for map loading to finish
 			if(radio_controller)
@@ -194,7 +204,7 @@ Transponder Codes:<UL>"}
 					updateDialog()
 
 				else if(href_list["locedit"])
-					var/newloc = sanitize(copytext(input("Enter New Location", "Navigation Beacon", location) as text|null,1,MAX_MESSAGE_LEN))
+					var/newloc = sanitize(input("Enter New Location", "Navigation Beacon", location) as text|null)
 					if(newloc)
 						location = newloc
 						updateDialog()
@@ -240,6 +250,8 @@ Transponder Codes:<UL>"}
 
 					updateDialog()
 
-
-
-
+/obj/machinery/navbeacon/Destroy()
+	navbeacons.Remove(src)
+	if(radio_controller)
+		radio_controller.remove_object(src, freq)
+	..()

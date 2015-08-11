@@ -8,6 +8,7 @@
 	force = 0.0
 	throwforce = 0.0
 	w_class = 1.0
+	slot_flags = SLOT_EARS
 	var/string_attached
 	var/sides = 2
 

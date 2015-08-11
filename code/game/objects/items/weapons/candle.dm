@@ -5,20 +5,18 @@
 	icon_state = "candle1"
 	item_state = "candle1"
 	w_class = 1
-
-	var/wax = 0
-	var/starting_wax = 0
+	light_color = "#E09D37"
+	var/wax = 2000
 
 /obj/item/weapon/flame/candle/New()
 	wax = rand(800, 1000) // Enough for 27-33 minutes. 30 minutes on average.
-	starting_wax = wax
 	..()
 
 /obj/item/weapon/flame/candle/update_icon()
 	var/i
-	if(wax > starting_wax*3/4)
+	if(wax > 1500)
 		i = 1
-	else if(wax > starting_wax*2/5)
+	else if(wax > 800)
 		i = 2
 	else i = 3
 	icon_state = "candle[i][lit ? "_lit" : ""]"
@@ -50,7 +48,7 @@
 		//src.damtype = "fire"
 		for(var/mob/O in viewers(usr, null))
 			O.show_message(flavor_text, 1)
-		SetLuminosity(CANDLE_LUM)
+		set_light(CANDLE_LUM)
 		processing_objects.Add(src)
 
 
@@ -62,28 +60,14 @@
 		new/obj/item/trash/candle(src.loc)
 		if(istype(src.loc, /mob))
 			src.dropped()
-		del(src)
+		qdel(src)
 	update_icon()
 	if(istype(loc, /turf)) //start a fire if possible
 		var/turf/T = loc
 		T.hotspot_expose(700, 5)
 
-
 /obj/item/weapon/flame/candle/attack_self(mob/user as mob)
 	if(lit)
 		lit = 0
 		update_icon()
-		SetLuminosity(0)
-		user.SetLuminosity(user.luminosity - CANDLE_LUM)
-
-
-/obj/item/weapon/flame/candle/pickup(mob/user)
-	if(lit)
-		SetLuminosity(0)
-		user.SetLuminosity(user.luminosity + CANDLE_LUM)
-
-
-/obj/item/weapon/flame/candle/dropped(mob/user)
-	if(lit)
-		user.SetLuminosity(user.luminosity - CANDLE_LUM)
-		SetLuminosity(CANDLE_LUM)
+		set_light(0)

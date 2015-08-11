@@ -314,7 +314,7 @@ datum/design/circuit/aifixer
 ///////////////////////////////////
 datum/design/circuit/shield
 	req_tech = list("bluespace" = 4, "phorontech" = 3)
-	materials = list("$glass" = 2000, "sacid" = 20, "$phoron" = 10000, "$diamond" = 5000, "$gold" = 10000)
+	materials = list("$glass" = 2000, "sacid" = 20, "$diamond" = 5000, "$gold" = 10000)
 
 datum/design/circuit/shield/AssembleDesignName()
 	name = "Shield generator circuit design ([name])"
@@ -358,7 +358,7 @@ datum/design/aimodule/safeguard
 	build_path = /obj/item/weapon/aiModule/safeguard
 
 datum/design/aimodule/onehuman
-	name = "OneHuman"
+	name = "OneCrewMember"
 	id = "onehuman"
 	req_tech = list("programming" = 4, "materials" = 6)
 	build_path = /obj/item/weapon/aiModule/oneHuman
@@ -484,6 +484,12 @@ datum/design/circuit/tcom/receiver
 	id = "tcom-receiver"
 	req_tech = list("programming" = 4, "engineering" = 3, "bluespace" = 2)
 	build_path = /obj/item/weapon/circuitboard/telecomms/receiver
+
+datum/design/circuit/tcom/bluespacerelay
+	name = "emergency bluespace relay"
+	id = "bluespace-relay"
+	req_tech = list("programming" = 4, "bluespace" = 4)
+	build_path = /obj/item/weapon/circuitboard/bluespacerelay
 
 ///////////////////////////////////
 ////////////Mecha Modules//////////

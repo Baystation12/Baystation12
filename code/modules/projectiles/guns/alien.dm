@@ -1,6 +1,7 @@
 //Vox pinning weapon.
 /obj/item/weapon/gun/launcher/spikethrower
-	name = "vox spike thrower"
+
+	name = "spike thrower"
 	desc = "A vicious alien projectile weapon. Parts of it quiver gelatinously, as though the thing is insectile and alive."
 
 	var/last_regen = 0
@@ -19,7 +20,7 @@
 	processing_objects.Add(src)
 	last_regen = world.time
 
-/obj/item/weapon/gun/launcher/spikethrower/Del()
+/obj/item/weapon/gun/launcher/spikethrower/Destroy()
 	processing_objects.Remove(src)
 	..()
 

@@ -39,4 +39,5 @@
 		msg += "\nIt is [pose]"
 
 	user << msg
+	user.showLaws(src)
 	return

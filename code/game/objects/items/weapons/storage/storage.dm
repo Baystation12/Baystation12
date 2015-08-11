@@ -8,11 +8,12 @@
 /obj/item/weapon/storage
 	name = "storage"
 	icon = 'icons/obj/storage.dmi'
-	w_class = 3.0
+	w_class = 3
 	var/list/can_hold = new/list() //List of objects which this item can store (if set, it can't store anything else)
 	var/list/cant_hold = new/list() //List of objects which this item can't store (in effect only if can_hold isn't set)
+	var/list/is_seeing = new/list() //List of mobs which are currently seeing the contents of this item's storage
 	var/max_w_class = 2 //Max size of objects that this object can store (in effect only if can_hold isn't set)
-	var/max_combined_w_class = 14 //The sum of the w_classes of all the items in this storage item.
+	var/max_storage_space = 14 //The sum of the storage costs of all the items in this storage item.
 	var/storage_slots = 7 //The number of storage slots in this container.
 	var/obj/screen/storage/boxes = null
 	var/obj/screen/close/closer = null
@@ -21,17 +22,22 @@
 	var/allow_quick_empty	//Set this variable to allow the object to have the 'empty' verb, which dumps all the contents on the floor.
 	var/allow_quick_gather	//Set this variable to allow the object to have the 'toggle mode' verb, which quickly collects all items from a tile.
 	var/collection_mode = 1;  //0 = pick one at a time, 1 = pick all on tile
-	var/foldable = null	// BubbleWrap - if set, can be folded (when empty) into a sheet of cardboard
 	var/use_sound = "rustle"	//sound played when used. null for no sound.
+
+/obj/item/weapon/storage/Destroy()
+	close_all()
+	qdel(boxes)
+	qdel(closer)
+	..()
 
 /obj/item/weapon/storage/MouseDrop(obj/over_object as obj)
 
 	if(!canremove)
 		return
 
-	if (ishuman(usr) || ismonkey(usr)) //so monkeys can take off their backpacks -- Urist
+	if (ishuman(usr) || issmall(usr)) //so monkeys can take off their backpacks -- Urist
 
-		if (istype(usr.loc,/obj/mecha)) // stops inventory actions in a mech
+		if (istype(usr.loc,/obj/mecha)) // stops inventory actions in a mech. why?
 			return
 
 		if(over_object == usr && Adjacent(usr)) // this must come before the screen objects only block
@@ -45,18 +51,21 @@
 		//there's got to be a better way of doing this.
 		if (!(src.loc == usr) || (src.loc && src.loc.loc == usr))
 			return
-
-		if (!( usr.restrained() ) && !( usr.stat ))
-			switch(over_object.name)
-				if("r_hand")
-					usr.u_equip(src)
-					usr.put_in_r_hand(src)
-				if("l_hand")
-					usr.u_equip(src)
-					usr.put_in_l_hand(src)
-			src.add_fingerprint(usr)
+		
+		if (( usr.restrained() ) || ( usr.stat ))
 			return
-	return
+		
+		if ((src.loc == usr) && !usr.unEquip(src))
+			return
+
+		switch(over_object.name)
+			if("r_hand")
+				usr.u_equip(src)
+				usr.put_in_r_hand(src)
+			if("l_hand")
+				usr.u_equip(src)
+				usr.put_in_l_hand(src)
+		src.add_fingerprint(usr)
 
 
 /obj/item/weapon/storage/proc/return_inv()
@@ -87,6 +96,7 @@
 	user.client.screen += src.closer
 	user.client.screen += src.contents
 	user.s_active = src
+	is_seeing |= user
 	return
 
 /obj/item/weapon/storage/proc/hide_from(mob/user as mob)
@@ -98,7 +108,7 @@
 	user.client.screen -= src.contents
 	if(user.s_active == src)
 		user.s_active = null
-	return
+	is_seeing -= user
 
 /obj/item/weapon/storage/proc/open(mob/user as mob)
 	if (src.use_sound)
@@ -110,10 +120,23 @@
 	show_to(user)
 
 /obj/item/weapon/storage/proc/close(mob/user as mob)
-
 	src.hide_from(user)
 	user.s_active = null
 	return
+
+/obj/item/weapon/storage/proc/close_all()
+	for(var/mob/M in can_see_contents())
+		close(M)
+		. = 1
+
+/obj/item/weapon/storage/proc/can_see_contents()
+	var/list/cansee = list()
+	for(var/mob/M in is_seeing)
+		if(M.s_active == src && M.client)
+			cansee |= M
+		else
+			is_seeing -= M
+	return cansee
 
 //This proc draws out the inventory and places the items on it. tx and ty are the upper left tile and mx, my are the bottm right.
 //The numbers are calculated from the bottom-left The bottom-left slot being 1,1.
@@ -164,7 +187,7 @@
 
 	New(obj/item/sample as obj)
 		if(!istype(sample))
-			del(src)
+			qdel(src)
 		sample_object = sample
 		number = 1
 
@@ -226,20 +249,19 @@
 			usr << "<span class='notice'>[W] is too big for this [src].</span>"
 		return 0
 
-	var/sum_w_class = W.w_class
+	var/total_storage_space = W.get_storage_cost()
 	for(var/obj/item/I in contents)
-		sum_w_class += I.w_class //Adds up the combined w_classes which will be in the storage item if the item is added to it.
+		total_storage_space += I.get_storage_cost() //Adds up the combined w_classes which will be in the storage item if the item is added to it.
 
-	if(sum_w_class > max_combined_w_class)
+	if(total_storage_space > max_storage_space)
 		if(!stop_messages)
 			usr << "<span class='notice'>[src] is full, make some space.</span>"
 		return 0
 
 	if(W.w_class >= src.w_class && (istype(W, /obj/item/weapon/storage)))
-		if(!istype(src, /obj/item/weapon/storage/backpack/holding))	//bohs should be able to hold backpacks again. The override for putting a boh in a boh is in backpack.dm.
-			if(!stop_messages)
-				usr << "<span class='notice'>[src] cannot hold [W] as it's a storage item of the same size.</span>"
-			return 0 //To prevent the stacking of same sized storage items.
+		if(!stop_messages)
+			usr << "<span class='notice'>[src] cannot hold [W] as it's a storage item of the same size.</span>"
+		return 0 //To prevent the stacking of same sized storage items.
 
 	return 1
 
@@ -249,7 +271,7 @@
 /obj/item/weapon/storage/proc/handle_item_insertion(obj/item/W as obj, prevent_warning = 0)
 	if(!istype(W)) return 0
 	if(usr)
-		usr.u_equip(W)
+		usr.remove_from_mob(W)
 		usr.update_icons()	//update our overlays
 	W.loc = src
 	W.on_enter_storage(src)
@@ -259,13 +281,13 @@
 		W.dropped(usr)
 		add_fingerprint(usr)
 
-		if(!prevent_warning && !istype(W, /obj/item/weapon/gun/energy/crossbow))
+		if(!prevent_warning)
 			for(var/mob/M in viewers(usr, null))
 				if (M == usr)
 					usr << "<span class='notice'>You put \the [W] into [src].</span>"
 				else if (M in range(1)) //If someone is standing close enough, they can tell what it is...
 					M.show_message("<span class='notice'>[usr] puts [W] into [src].</span>")
-				else if (W && W.w_class >= 3.0) //Otherwise they can only see large or normal items from a distance...
+				else if (W && W.w_class >= 3) //Otherwise they can only see large or normal items from a distance...
 					M.show_message("<span class='notice'>[usr] puts [W] into [src].</span>")
 
 		src.orient2hud(usr)
@@ -313,7 +335,6 @@
 	..()
 
 	if(isrobot(user))
-		user << "\blue You're a robot. No."
 		return //Robots can't interact with storage items.
 
 	if(!can_be_inserted(W))
@@ -415,35 +436,12 @@
 			O.emp_act(severity)
 	..()
 
-// BubbleWrap - A box can be folded up to make card
 /obj/item/weapon/storage/attack_self(mob/user as mob)
-
 	//Clicking on itself will empty it, if it has the verb to do that.
 	if(user.get_active_hand() == src)
 		if(src.verbs.Find(/obj/item/weapon/storage/verb/quick_empty))
 			src.quick_empty()
-			return
-
-	//Otherwise we'll try to fold it.
-	if ( contents.len )
-		return
-
-	if ( !ispath(src.foldable) )
-		return
-	var/found = 0
-	// Close any open UI windows first
-	for(var/mob/M in range(1))
-		if (M.s_active == src)
-			src.close(M)
-		if ( M == user )
-			found = 1
-	if ( !found )	// User is too far away
-		return
-	// Now make the cardboard
-	user << "<span class='notice'>You fold [src] flat.</span>"
-	new src.foldable(get_turf(src))
-	del(src)
-//BubbleWrap END
+			return 1
 
 /obj/item/weapon/storage/hear_talk(mob/M as mob, text, verb, datum/language/speaking)
 	for (var/atom/A in src)
@@ -486,3 +484,6 @@
 		return -1	//inside something with a null loc.
 
 	return depth
+
+/obj/item/proc/get_storage_cost()
+	return 2**(w_class-1) //1,2,4,8,16,...

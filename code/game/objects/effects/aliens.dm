@@ -46,7 +46,7 @@
 	var/turf/T = get_turf(src)
 	T.thermal_conductivity = WALL_HEAT_TRANSFER_COEFFICIENT
 
-/obj/effect/alien/resin/Del()
+/obj/effect/alien/resin/Destroy()
 	var/turf/T = get_turf(src)
 	T.thermal_conductivity = initial(T.thermal_conductivity)
 	..()
@@ -54,7 +54,7 @@
 /obj/effect/alien/resin/proc/healthcheck()
 	if(health <=0)
 		density = 0
-		del(src)
+		qdel(src)
 	return
 
 /obj/effect/alien/resin/bullet_act(var/obj/item/projectile/Proj)
@@ -113,7 +113,7 @@
 		// Aliens can get straight through these.
 		if(istype(usr,/mob/living/carbon))
 			var/mob/living/carbon/M = usr
-			if(locate(/datum/organ/internal/xenos/hivenode) in M.internal_organs)
+			if(locate(/obj/item/organ/xenos/hivenode) in M.internal_organs)
 				for(var/mob/O in oviewers(src))
 					O.show_message("\red [usr] strokes the [name] and it melts away!", 1)
 				health = 0
@@ -164,7 +164,7 @@
 	name = "purple sac"
 	desc = "Weird purple octopus-like thing."
 	layer = 3
-	luminosity = NODERANGE
+	light_range = NODERANGE
 	var/node_range = NODERANGE
 
 /obj/effect/alien/weeds/node/New()
@@ -174,7 +174,7 @@
 /obj/effect/alien/weeds/New(pos, node)
 	..()
 	if(istype(loc, /turf/space))
-		del(src)
+		qdel(src)
 		return
 	linked_node = node
 	if(icon_state == "weeds")icon_state = pick("weeds", "weeds1", "weeds2")
@@ -190,7 +190,7 @@
 	if (locate(/obj/movable, U))
 		U = locate(/obj/movable, U)
 		if(U.density == 1)
-			del(src)
+			qdel(src)
 			return
 
 Alien plants should do something if theres a lot of poison
@@ -200,7 +200,7 @@ Alien plants should do something if theres a lot of poison
 		return
 */
 	if (istype(U, /turf/space))
-		del(src)
+		qdel(src)
 		return
 
 	if(!linked_node || (get_dist(linked_node, src) > linked_node.node_range) )
@@ -220,19 +220,19 @@ Alien plants should do something if theres a lot of poison
 				if(O.density)
 					continue direction_loop
 
-			new /obj/effect/alien/weeds(T, linked_node)
+			PoolOrNew(/obj/effect/alien/weeds, T, linked_node)
 
 
 /obj/effect/alien/weeds/ex_act(severity)
 	switch(severity)
 		if(1.0)
-			del(src)
+			qdel(src)
 		if(2.0)
 			if (prob(50))
-				del(src)
+				qdel(src)
 		if(3.0)
 			if (prob(5))
-				del(src)
+				qdel(src)
 	return
 
 /obj/effect/alien/weeds/attackby(var/obj/item/weapon/W, var/mob/user)
@@ -255,11 +255,11 @@ Alien plants should do something if theres a lot of poison
 
 /obj/effect/alien/weeds/proc/healthcheck()
 	if(health <= 0)
-		del(src)
+		qdel(src)
 
 
 /obj/effect/alien/weeds/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
-	if(exposed_temperature > 300)
+	if(exposed_temperature > 300 + T0C)
 		health -= 5
 		healthcheck()
 
@@ -294,7 +294,7 @@ Alien plants should do something if theres a lot of poison
 
 /obj/effect/alien/acid/proc/tick()
 	if(!target)
-		del(src)
+		qdel(src)
 
 	ticks += 1
 
@@ -307,8 +307,8 @@ Alien plants should do something if theres a lot of poison
 			var/turf/simulated/wall/W = target
 			W.dismantle_wall(1)
 		else
-			del(target)
-		del(src)
+			qdel(target)
+		qdel(src)
 		return
 
 	switch(target_strength - ticks)
@@ -350,18 +350,18 @@ Alien plants should do something if theres a lot of poison
 		spawn(rand(MIN_GROWTH_TIME,MAX_GROWTH_TIME))
 			Grow()
 	else
-		del(src)
+		qdel(src)
 
 /obj/effect/alien/egg/attack_hand(user as mob)
 
 	var/mob/living/carbon/M = user
-	if(!istype(M) || !(locate(/datum/organ/internal/xenos/hivenode) in M.internal_organs))
+	if(!istype(M) || !(locate(/obj/item/organ/xenos/hivenode) in M.internal_organs))
 		return attack_hand(user)
 
 	switch(status)
 		if(BURST)
 			user << "\red You clear the hatched egg."
-			del(src)
+			qdel(src)
 			return
 		if(GROWING)
 			user << "\red The child is not developed yet."
@@ -430,7 +430,7 @@ Alien plants should do something if theres a lot of poison
 		Burst()
 
 /obj/effect/alien/egg/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
-	if(exposed_temperature > 500)
+	if(exposed_temperature > 500 + T0C)
 		health -= 5
 		healthcheck()
 

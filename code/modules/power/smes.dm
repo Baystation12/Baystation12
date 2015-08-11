@@ -83,6 +83,14 @@
 
 	return
 
+
+/obj/machinery/power/smes/disconnect_terminal()
+	if(terminal)
+		terminal.master = null
+		terminal = null
+		return 1
+	return 0
+
 /obj/machinery/power/smes/update_icon()
 	overlays.Cut()
 	if(stat & BROKEN)	return
@@ -138,7 +146,7 @@
 		if(output_used < 0.0001)			// either from no charge or set to 0
 			outputting(0)
 			investigate_log("lost power and turned <font color='red'>off</font>","singulo")
-	else if(output_attempt && charge > output_level && output_level > 0)
+	else if(output_attempt && output_level > 0)
 		outputting = 1
 	else
 		output_used = 0
@@ -281,7 +289,7 @@
 					user.visible_message(\
 						"<span class='notice'>[user.name] cut the cables and dismantled the power terminal.</span>",\
 						"<span class='notice'>You cut the cables and dismantle the power terminal.</span>")
-					del(terminal)
+					qdel(terminal)
 		building_terminal = 0
 		return 0
 	return 1
@@ -374,7 +382,7 @@
 			smoke.attach(src)
 			smoke.start()
 			explosion(src.loc, -1, 0, 1, 3, 1, 0)
-			del(src)
+			qdel(src)
 			return
 		if(prob(15)) //Power drain
 			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread

@@ -1,6 +1,6 @@
 <div class="item">
 	<div class="itemContent" style="padding: 5px">
-		{{:helper.link(data.power ? 'On' : 'Off', null, {'command' : 'power'})}}
+		{{:helper.link(data.power ? 'On' : 'Off', null, {'command' : 'power'}, data.config ? 'disabled' : null)}}
 	</div>
 	<div class="itemContent" style="padding: 5px">
 		{{:helper.link('Configure', null, {'command' : 'configure'}, null, data.config ? 'selected' : null)}}

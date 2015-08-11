@@ -49,8 +49,8 @@
 		Stun(2)
 
 	//Being hit while using a deadman switch
-	if(istype(equipped(),/obj/item/device/assembly/signaler))
-		var/obj/item/device/assembly/signaler/signaler = equipped()
+	if(istype(get_active_hand(),/obj/item/device/assembly/signaler))
+		var/obj/item/device/assembly/signaler/signaler = get_active_hand()
 		if(signaler.deadman && prob(80))
 			log_and_message_admins("has triggered a signaler deadman's switch")
 			src.visible_message("\red [src] triggers their deadman's switch!")
@@ -60,7 +60,7 @@
 	if(P.taser_effect)
 		stun_effect_act(0, P.agony, def_zone, P)
 		src <<"\red You have been hit by [P]!"
-		del P
+		qdel(P)
 		return
 
 	//Armor
@@ -139,7 +139,7 @@
 			var/obj/item/I = O
 			mass = I.w_class/THROWNOBJ_KNOCKBACK_DIVISOR
 		var/momentum = speed*mass
-		
+
 		if(O.throw_source && momentum >= THROWNOBJ_KNOCKBACK_SPEED)
 			var/dir = get_dir(O.throw_source, src)
 
@@ -194,54 +194,65 @@
 	user.attack_log += text("\[[time_stamp()]\] <font color='red'>attacked [src.name] ([src.ckey])</font>")
 	src.attack_log += text("\[[time_stamp()]\] <font color='orange'>was attacked by [user.name] ([user.ckey])</font>")
 	src.visible_message("<span class='danger'>[user] has [attack_message] [src]!</span>")
+	user.do_attack_animation(src)
 	spawn(1) updatehealth()
 	return 1
 
 /mob/living/proc/IgniteMob()
 	if(fire_stacks > 0 && !on_fire)
 		on_fire = 1
-		src.AddLuminosity(3)
+		set_light(light_range + 3)
 		update_fire()
 
 /mob/living/proc/ExtinguishMob()
 	if(on_fire)
 		on_fire = 0
 		fire_stacks = 0
-		src.AddLuminosity(-3)
+		set_light(max(0, light_range - 3))
 		update_fire()
 
 /mob/living/proc/update_fire()
 	return
 
 /mob/living/proc/adjust_fire_stacks(add_fire_stacks) //Adjusting the amount of fire_stacks we have on person
-    fire_stacks = Clamp(fire_stacks + add_fire_stacks, min = FIRE_MIN_STACKS, max = FIRE_MAX_STACKS)
+    fire_stacks = Clamp(fire_stacks + add_fire_stacks, FIRE_MIN_STACKS, FIRE_MAX_STACKS)
 
 /mob/living/proc/handle_fire()
 	if(fire_stacks < 0)
 		fire_stacks = max(0, fire_stacks++) //If we've doused ourselves in water to avoid fire, dry off slowly
-	
+
 	if(!on_fire)
 		return 1
 	else if(fire_stacks <= 0)
 		ExtinguishMob() //Fire's been put out.
 		return 1
-	
+
 	var/datum/gas_mixture/G = loc.return_air() // Check if we're standing in an oxygenless environment
 	if(G.gas["oxygen"] < 1)
 		ExtinguishMob() //If there's no oxygen in the tile we're on, put out the fire
 		return 1
-	
+
 	var/turf/location = get_turf(src)
 	location.hotspot_expose(fire_burn_temperature(), 50, 1)
 
 /mob/living/fire_act()
-	adjust_fire_stacks(0.5)
+	adjust_fire_stacks(2)
 	IgniteMob()
+
+/mob/living/proc/get_cold_protection()
+	return 0
+
+/mob/living/proc/get_heat_protection()
+	return 0
 
 //Finds the effective temperature that the mob is burning at.
 /mob/living/proc/fire_burn_temperature()
 	if (fire_stacks <= 0)
 		return 0
-	
+
 	//Scale quadratically so that single digit numbers of fire stacks don't burn ridiculously hot.
-	return round(FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE*(fire_stacks/FIRE_MAX_FIRESUIT_STACKS)**2)
+	//lower limit of 700 K, same as matches and roughly the temperature of a cool flame. 
+	return max(2.25*round(FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE*(fire_stacks/FIRE_MAX_FIRESUIT_STACKS)**2), 700)
+
+/mob/living/proc/reagent_permeability()
+	return 1

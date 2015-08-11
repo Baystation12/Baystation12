@@ -52,22 +52,14 @@
 					O.loc = loc
 			usr << "\The [src] crumbles to pieces."
 			spawn(5)
-				del src
+				qdel(src)
 			return
 
-		if(!stored_computer.manipulating)
-			stored_computer.manipulating = 1
-			stored_computer.loc = loc
-			stored_computer.stat &= ~MAINT
-			stored_computer.update_icon()
-			loc = null
-			usr << "You open \the [src]."
-
-			spawn(5)
-				stored_computer.manipulating = 0
-				del src
-		else
-			usr << "\red You are already opening the computer!"
+		stored_computer.loc = loc
+		stored_computer.stat &= ~MAINT
+		stored_computer.update_icon()
+		loc = stored_computer
+		usr << "You open \the [src]."
 
 
 	AltClick()
@@ -82,12 +74,10 @@
 
 	if(stored_computer)
 		stored_computer.eject_id()
-
 /obj/machinery/computer3/laptop/verb/eject_id()
 	set category = "Object"
 	set name = "Eject ID Card"
 	set src in oview(1)
-
 	var/obj/item/part/computer/cardslot/C = locate() in src.contents
 
 	if(!C)
@@ -104,7 +94,7 @@
 		return
 
 	usr << "You remove [card] from the laptop."
-	C.remove(card)
+	C.remove(4)
 
 
 /obj/machinery/computer3/laptop
@@ -116,13 +106,16 @@
 	pixel_x			= 2
 	pixel_y			= -3
 	show_keyboard	= 0
+	active_power_usage = 200 // Stationary consoles we use on station have 300, laptops are probably slightly more power efficient
+	idle_power_usage = 100
 
-	var/manipulating = 0 // To prevent disappearing bug
 	var/obj/item/device/laptop/portable = null
 
 	New(var/L, var/built = 0)
 		if(!built && !battery)
 			battery = new /obj/item/weapon/cell(src)
+			battery.maxcharge = 500
+			battery.charge = 500
 		..(L,built)
 
 	verb/close_computer()
@@ -157,12 +150,11 @@
 			portable=new
 			portable.stored_computer = src
 
-		if(!manipulating)
-			portable.loc = loc
-			loc = portable
-			stat |= MAINT
-			if(user)
-				user << "You close \the [src]."
+		portable.loc = loc
+		loc = portable
+		stat |= MAINT
+		if(user)
+			user << "You close \the [src]."
 
 	auto_use_power()
 		if(stat&MAINT)
@@ -185,12 +177,12 @@
 		else
 			stat &= ~NOPOWER
 
-	Del()
+	Destroy()
 		if(istype(loc,/obj/item/device/laptop))
 			var/obj/O = loc
 			spawn(5)
 				if(O)
-					del O
+					qdel(O)
 		..()
 
 

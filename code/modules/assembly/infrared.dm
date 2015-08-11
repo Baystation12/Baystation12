@@ -4,7 +4,7 @@
 	name = "infrared emitter"
 	desc = "Emits a visible or invisible beam and is triggered when the beam is interrupted."
 	icon_state = "infrared"
-	matter = list("metal" = 1000, "glass" = 500, "waste" = 100)
+	matter = list(DEFAULT_WALL_MATERIAL = 1000, "glass" = 500, "waste" = 100)
 	origin_tech = "magnets=2"
 
 	wires = WIRE_PULSE
@@ -32,7 +32,7 @@
 			processing_objects.Add(src)
 		else
 			on = 0
-			if(first)	del(first)
+			if(first)	qdel(first)
 			processing_objects.Remove(src)
 		update_icon()
 		return secured
@@ -53,7 +53,7 @@
 	process()//Old code
 		if(!on)
 			if(first)
-				del(first)
+				qdel(first)
 				return
 
 		if((!(first) && (secured && (istype(loc, /turf) || (holder && istype(holder.loc, /turf))))))
@@ -77,7 +77,7 @@
 
 
 	attack_hand()
-		del(first)
+		qdel(first)
 		..()
 		return
 
@@ -86,14 +86,14 @@
 		var/t = dir
 		..()
 		set_dir(t)
-		del(first)
+		qdel(first)
 		return
 
 
 	holder_movement()
 		if(!holder)	return 0
 //		set_dir(holder.dir)
-		del(first)
+		qdel(first)
 		return 1
 
 
@@ -175,7 +175,7 @@
 	if(master)
 		//world << "beam hit \ref[src]: calling master \ref[master].hit"
 		master.trigger_beam()
-	del(src)
+	qdel(src)
 	return
 
 /obj/effect/beam/i_beam/proc/vis_spread(v)
@@ -193,7 +193,7 @@
 
 	if((loc.density || !(master)))
 	//	world << "beam hit loc [loc] or no master [master], deleting"
-		del(src)
+		qdel(src)
 		return
 	//world << "proccess: [src.left] left"
 
@@ -233,17 +233,17 @@
 				return
 		else
 			//world << "is a next: \ref[next], deleting beam \ref[I]"
-			del(I)
+			qdel(I)
 	else
 		//world << "step failed, deleting \ref[next]"
-		del(next)
+		qdel(next)
 	spawn(10)
 		process()
 		return
 	return
 
 /obj/effect/beam/i_beam/Bump()
-	del(src)
+	qdel(src)
 	return
 
 /obj/effect/beam/i_beam/Bumped()
@@ -258,7 +258,10 @@
 		return
 	return
 
-/obj/effect/beam/i_beam/Del()
-	del(next)
+/obj/effect/beam/i_beam/Destroy()
+	if(master.first == src)
+		master.first = null
+	if(next)
+		qdel(next)
+		next = null
 	..()
-	return

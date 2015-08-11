@@ -37,12 +37,17 @@
 
 //NOTE: STUFF STOLEN FROM AIRLOCK.DM thx
 
+/obj/machinery/power/apc/critical
+	is_critical = 1
 
 /obj/machinery/power/apc/high
 	cell_type = /obj/item/weapon/cell/high
 
 /obj/machinery/power/apc/super
 	cell_type = /obj/item/weapon/cell/super
+
+/obj/machinery/power/apc/super/critical
+	is_critical = 1
 
 /obj/machinery/power/apc/hyper
 	cell_type = /obj/item/weapon/cell/hyper
@@ -80,24 +85,20 @@
 	var/lastused_charging = 0
 	var/lastused_total = 0
 	var/main_status = 0
+	var/mob/living/silicon/ai/hacker = null // Malfunction var. If set AI hacked the APC and has full control.
 	var/wiresexposed = 0
 	powernet = 0		// set so that APCs aren't found as powernet nodes //Hackish, Horrible, was like this before I changed it :(
-	var/malfhack = 0 //New var for my changes to AI malf. --NeoFite
-	var/mob/living/silicon/ai/malfai = null //See above --NeoFite
 	var/debug= 0
 	var/autoflag= 0		// 0 = off, 1= eqp and lights off, 2 = eqp off, 3 = all on.
-//	luminosity = 1
 	var/has_electronics = 0 // 0 - none, 1 - plugged in, 2 - secured by screwdriver
-	var/overload = 1 //used for the Blackout malf module
 	var/beenhit = 0 // used for counting how many times it has been hit, used for Aliens at the moment
-	var/mob/living/silicon/ai/occupier = null
 	var/longtermpower = 10
 	var/datum/wires/apc/wires = null
 	var/update_state = -1
 	var/update_overlay = -1
+	var/is_critical = 0
 	var/global/status_overlays = 0
 	var/updating_icon = 0
-	var/standard_max_charge
 	var/global/list/status_overlays_lock
 	var/global/list/status_overlays_charging
 	var/global/list/status_overlays_equipment
@@ -140,9 +141,6 @@
 /obj/machinery/power/apc/New(turf/loc, var/ndir, var/building=0)
 	..()
 	wires = new(src)
-	var/tmp/obj/item/weapon/cell/tmp_cell = new
-	standard_max_charge = tmp_cell.maxcharge
-	del(tmp_cell)
 
 	// offset 24 pixels in direction of dir
 	// this allows the APC to be embedded in a wall, yet still inside an area
@@ -156,32 +154,34 @@
 	if (building==0)
 		init()
 	else
-		area = src.loc.loc:master
-		area.apc |= src
+		area = get_area(src)
+		area.apc = src
 		opened = 1
 		operating = 0
 		name = "[area.name] APC"
 		stat |= MAINT
 		src.update_icon()
-		spawn(5)
-			src.update()
 
-/obj/machinery/power/apc/Del()
-	if(malfai && operating)
-		if (ticker.mode.config_tag == "malfunction")
-			if (src.z in config.station_levels) //if (is_type_in_list(get_area(src), the_station_areas))
-				ticker.mode:apcs--
+/obj/machinery/power/apc/Destroy()
+	src.update()
+	area.apc = null
 	area.power_light = 0
 	area.power_equip = 0
 	area.power_environ = 0
 	area.power_change()
-	if(occupier)
-		malfvacate(1)
-	del(wires)
+	if(wires)
+		qdel(wires)
+		wires = null
 	if(cell)
-		del(cell) // qdel
+		cell.loc = loc
+		cell = null
 	if(terminal)
-		disconnect_terminal()
+		qdel(terminal)
+		terminal = null
+
+	// Malf AI, removes the APC from AI's hacked APCs list.
+	if((hacker) && (hacker.hacked_apcs) && (src in hacker.hacked_apcs))
+		hacker.hacked_apcs -= src
 
 	..()
 
@@ -208,7 +208,7 @@
 	else
 		src.area = get_area_name(areastring)
 		name = "\improper [area.name] APC"
-	area.apc |= src
+	area.apc = src
 	update_icon()
 
 	make_terminal()
@@ -235,8 +235,8 @@
 		else
 			if (stat & MAINT)
 				user << "The cover is closed. Something wrong with it: it doesn't work."
-			else if (malfhack)
-				user << "The cover is broken. It may be hard to force it open."
+			else if (hacker)
+				user << "The cover is locked."
 			else
 				user << "The cover is closed."
 
@@ -340,7 +340,7 @@
 			update_state |= UPSTATE_OPENED1
 		if(opened==2)
 			update_state |= UPSTATE_OPENED2
-	else if(emagged || malfai)
+	else if(emagged || hacker)
 		update_state |= UPSTATE_BLUESCREEN
 	else if(wiresexposed)
 		update_state |= UPSTATE_WIREEXP
@@ -419,7 +419,7 @@
 			if(do_after(user, 50))
 				if (has_electronics==1)
 					has_electronics = 0
-					if ((stat & BROKEN) || malfhack)
+					if ((stat & BROKEN))
 						user.visible_message(\
 							"<span class='warning'>[user.name] has broken the power control board inside [src.name]!</span>",\
 							"<span class='notice'>You broke the charred power control board and remove the remains.</span>",
@@ -433,7 +433,7 @@
 		else if (opened!=2) //cover isn't removed
 			opened = 0
 			update_icon()
-	else if (istype(W, /obj/item/weapon/crowbar) && !((stat & BROKEN) || malfhack) )
+	else if (istype(W, /obj/item/weapon/crowbar) && !((stat & BROKEN) || hacker) )
 		if(coverlocked && !(stat & MAINT))
 			user << "<span class='warning'>The cover is locked and cannot be opened.</span>"
 			return
@@ -444,18 +444,21 @@
 		if(cell)
 			user << "There is a power cell already installed."
 			return
-		else
-			if (stat & MAINT)
-				user << "<span class='warning'>There is no connector for your power cell.</span>"
-				return
-			user.drop_item()
-			W.loc = src
-			cell = W
-			user.visible_message(\
-				"<span class='warning'>[user.name] has inserted the power cell to [src.name]!</span>",\
-				"<span class='notice'>You insert the power cell.</span>")
-			chargecount = 0
-			update_icon()
+		if (stat & MAINT)
+			user << "<span class='warning'>There is no connector for your power cell.</span>"
+			return
+		if(W.w_class != 3)
+			user << "\The [W] is too [W.w_class < 3? "small" : "large"] to fit here."
+			return
+
+		user.drop_item()
+		W.loc = src
+		cell = W
+		user.visible_message(\
+			"<span class='warning'>[user.name] has inserted the power cell to [src.name]!</span>",\
+			"<span class='notice'>You insert the power cell.</span>")
+		chargecount = 0
+		update_icon()
 	else if	(istype(W, /obj/item/weapon/screwdriver))	// haxing
 		if(opened)
 			if (cell)
@@ -492,6 +495,8 @@
 			user << "You must close the panel"
 		else if(stat & (BROKEN|MAINT))
 			user << "Nothing happens."
+		else if(hacker)
+			user << "<span class='warning'>Access denied.</span>"
 		else
 			if(src.allowed(usr) && !isWireCut(APC_WIRE_IDSCAN))
 				locked = !locked
@@ -499,7 +504,7 @@
 				update_icon()
 			else
 				user << "<span class='warning'>Access denied.</span>"
-	else if (istype(W, /obj/item/weapon/card/emag) && !(emagged || malfhack))		// trying to unlock with an emag card
+	else if (istype(W, /obj/item/weapon/card/emag) && !(emagged || hacker))		// trying to unlock with an emag card
 		if(opened)
 			user << "You must close the cover to swipe an ID card."
 		else if(wiresexposed)
@@ -560,8 +565,8 @@
 						return
 				new /obj/item/stack/cable_coil(loc,10)
 				user << "<span class='notice'>You cut the cables and dismantle the power terminal.</span>"
-				del(terminal) // qdel
-	else if (istype(W, /obj/item/weapon/module/power_control) && opened && has_electronics==0 && !((stat & BROKEN) || malfhack))
+				qdel(terminal)
+	else if (istype(W, /obj/item/weapon/module/power_control) && opened && has_electronics==0 && !((stat & BROKEN)))
 		user.visible_message("<span class='warning'>[user.name] inserts the power control board into [src].</span>", \
 							"You start to insert the power control board into the frame...")
 		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
@@ -569,8 +574,8 @@
 			if(has_electronics==0)
 				has_electronics = 1
 				user << "<span class='notice'>You place the power control board inside the frame.</span>"
-				del(W) // qdel
-	else if (istype(W, /obj/item/weapon/module/power_control) && opened && has_electronics==0 && ((stat & BROKEN) || malfhack))
+				qdel(W)
+	else if (istype(W, /obj/item/weapon/module/power_control) && opened && has_electronics==0 && ((stat & BROKEN)))
 		user << "<span class='warning'>You cannot put the board inside, the frame is damaged.</span>"
 		return
 	else if (istype(W, /obj/item/weapon/weldingtool) && opened && has_electronics==0 && !terminal)
@@ -584,30 +589,30 @@
 		playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
 		if(do_after(user, 50))
 			if(!src || !WT.remove_fuel(3, user)) return
-			if (emagged || malfhack || (stat & BROKEN) || opened==2)
-				new /obj/item/stack/sheet/metal(loc)
+			if (emagged || (stat & BROKEN) || opened==2)
+				new /obj/item/stack/material/steel(loc)
 				user.visible_message(\
 					"<span class='warning'>[src] has been cut apart by [user.name] with the weldingtool.</span>",\
 					"<span class='notice'>You disassembled the broken APC frame.</span>",\
 					"You hear welding.")
 			else
-				new /obj/item/apc_frame(loc)
+				new /obj/item/frame/apc(loc)
 				user.visible_message(\
 					"<span class='warning'>[src] has been cut from the wall by [user.name] with the weldingtool.</span>",\
 					"<span class='notice'>You cut the APC frame from the wall.</span>",\
 					"You hear welding.")
-			del(src) // qdel
+			qdel(src)
 			return
-	else if (istype(W, /obj/item/apc_frame) && opened && emagged)
+	else if (istype(W, /obj/item/frame/apc) && opened && emagged)
 		emagged = 0
 		if (opened==2)
 			opened = 1
 		user.visible_message(\
 			"<span class='warning'>[user.name] has replaced the damaged APC frontal panel with a new one.</span>",\
 			"<span class='notice'>You replace the damaged APC frontal panel with a new one.</span>")
-		del(W) // qdel
+		qdel(W)
 		update_icon()
-	else if (istype(W, /obj/item/apc_frame) && opened && ((stat & BROKEN) || malfhack))
+	else if (istype(W, /obj/item/frame/apc) && opened && ((stat & BROKEN) || hacker))
 		if (has_electronics)
 			user << "<span class='warning'>You cannot repair this APC until you remove the electronics still inside.</span>"
 			return
@@ -617,15 +622,16 @@
 			user.visible_message(\
 				"<span class='notice'>[user.name] has replaced the damaged APC frame with new one.</span>",\
 				"You replace the damaged APC frame with new one.")
-			del(W) // qdel
+			qdel(W)
 			stat &= ~BROKEN
-			malfai = null
-			malfhack = 0
+			// Malf AI, removes the APC from AI's hacked APCs list.
+			if(hacker && hacker.hacked_apcs && src in hacker.hacked_apcs)
+				hacker.hacked_apcs -= src
 			if (opened==2)
 				opened = 1
 			update_icon()
 	else
-		if (((stat & BROKEN) || malfhack) \
+		if (((stat & BROKEN) || hacker) \
 				&& !opened \
 				&& W.force >= 5 \
 				&& W.w_class >= 3.0 \
@@ -659,7 +665,7 @@
 	if(istype(user,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = user
 
-		if(H.species.flags & IS_SYNTHETIC && H.a_intent == "grab")
+		if(H.species.flags & IS_SYNTHETIC && H.a_intent == I_GRAB)
 			if(emagged || stat & BROKEN)
 				var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 				s.set_up(3, 1, src)
@@ -709,7 +715,7 @@
 		if(cell)
 			user.put_in_hands(cell)
 			cell.add_fingerprint(user)
-			cell.updateicon()
+			cell.update_icon()
 
 			src.cell = null
 			user.visible_message("<span class='warning'>[user.name] removes the power cell from [src.name]!</span>",\
@@ -738,21 +744,6 @@
 	return ui_interact(user)
 
 
-/obj/machinery/power/apc/proc/get_malf_status(mob/user)
-	if (ticker && ticker.mode && (user.mind in ticker.mode.malf_ai) && istype(user, /mob/living/silicon/ai))
-		if (src.malfai == (user:parent ? user:parent : user))
-			if (src.occupier == user)
-				return 3 // 3 = User is shunted in this APC
-			else if (istype(user.loc, /obj/machinery/power/apc))
-				return 4 // 4 = User is shunted in another APC
-			else
-				return 2 // 2 = APC hacked by user, and user is in its core.
-		else
-			return 1 // 1 = APC not hacked.
-	else
-		return 0 // 0 = User is not a Malf AI
-
-
 /obj/machinery/power/apc/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	if(!user)
 		return
@@ -768,7 +759,6 @@
 		"totalCharging" = round(lastused_charging),
 		"coverLocked" = coverlocked,
 		"siliconUser" = istype(user, /mob/living/silicon),
-		"malfStatus" = get_malf_status(user),
 
 		"powerChannels" = list(
 			list(
@@ -858,23 +848,22 @@
 		return 0
 	autoflag = 5
 	if (istype(user, /mob/living/silicon))
+		var/permit = 0 // Malfunction variable. If AI hacks APC it can control it even without AI control wire.
 		var/mob/living/silicon/ai/AI = user
 		var/mob/living/silicon/robot/robot = user
-		if (                                                             \
-			src.aidisabled ||                                            \
-			malfhack && istype(malfai) &&                                \
-			(                                                            \
-				(istype(AI) && (malfai!=AI && malfai != AI.parent)) ||   \
-				(istype(robot) && (robot in malfai.connected_robots))    \
-			)                                                            \
-		)
+		if(hacker)
+			if(hacker == AI)
+				permit = 1
+			else if(istype(robot) && robot.connected_ai && robot.connected_ai == hacker) // Cyborgs can use APCs hacked by their AI
+				permit = 1
+
+		if(aidisabled && !permit)
 			if(!loud)
 				user << "<span class='danger'>\The [src] have AI control disabled!</span>"
 			return 0
 	else
-		if ((!in_range(src, user) || !istype(src.loc, /turf)))
+		if ((!in_range(src, user) || !istype(src.loc, /turf) || hacker)) // AI-hacked APCs cannot be controlled by other AIs, unlinked cyborgs or humans.
 			return 0
-
 	var/mob/living/carbon/human/H = user
 	if (istype(H))
 		if(H.getBrainLoss() >= 60)
@@ -931,39 +920,6 @@
 		if(istype(usr, /mob/living/silicon))
 			src.overload_lighting()
 
-	else if (href_list["malfhack"])
-		var/mob/living/silicon/ai/malfai = usr
-		if(get_malf_status(malfai)==1)
-			if (malfai.malfhacking)
-				malfai << "You are already hacking an APC."
-				return 1
-			malfai << "Beginning override of APC systems. This takes some time, and you cannot perform other actions during the process."
-			malfai.malfhack = src
-			malfai.malfhacking = 1
-			sleep(600)
-			if(src)
-				if (!src.aidisabled)
-					malfai.malfhack = null
-					malfai.malfhacking = 0
-					locked = 1
-					if (ticker.mode.config_tag == "malfunction")
-						if (src.z in config.station_levels) //if (is_type_in_list(get_area(src), the_station_areas))
-							ticker.mode:apcs++
-					if(usr:parent)
-						src.malfai = usr:parent
-					else
-						src.malfai = usr
-					malfai << "Hack complete. The APC is now under your exclusive control."
-					update_icon()
-
-	else if (href_list["occupyapc"])
-		if(get_malf_status(usr))
-			malfoccupy(usr)
-
-	else if (href_list["deoccupyapc"])
-		if(get_malf_status(usr))
-			malfvacate()
-
 	else if (href_list["toggleaccess"])
 		if(istype(usr, /mob/living/silicon))
 			if(emagged || (stat & (BROKEN|MAINT)))
@@ -976,93 +932,25 @@
 
 /obj/machinery/power/apc/proc/toggle_breaker()
 	operating = !operating
-
-	if(malfai)
-		if (ticker.mode.config_tag == "malfunction")
-			if (src.z in config.station_levels) //if (is_type_in_list(get_area(src), the_station_areas))
-				operating ? ticker.mode:apcs++ : ticker.mode:apcs--
-
 	src.update()
 	update_icon()
 
-/obj/machinery/power/apc/proc/malfoccupy(var/mob/living/silicon/ai/malf)
-	return
-
-	if(!istype(malf))
-		return
-	if(istype(malf.loc, /obj/machinery/power/apc)) // Already in an APC
-		malf << "<span class='warning'>You must evacuate your current apc first.</span>"
-		return
-	/*if(!malf.can_shunt)
-		malf << "<span class='warning'>You cannot shunt.</span>"
-		return*/
-	if(isNotStationLevel(src.z))
-		return
-	src.occupier = new /mob/living/silicon/ai(src,malf.laws,null,1)
-	src.occupier.adjustOxyLoss(malf.getOxyLoss())
-	if(!findtext(src.occupier.name,"APC Copy"))
-		src.occupier.name = "[malf.name] APC Copy"
-	if(malf.parent)
-		src.occupier.parent = malf.parent
-	else
-		src.occupier.parent = malf
-	malf.mind.transfer_to(src.occupier)
-	src.occupier.eyeobj.name = "[src.occupier.name] (AI Eye)"
-	if(malf.parent)
-		del(malf) // qdel
-	// src.occupier.verbs += /mob/living/silicon/ai/proc/corereturn
-	src.occupier.verbs += /datum/game_mode/malfunction/proc/takeover
-	src.occupier.cancel_camera()
-	if (seclevel2num(get_security_level()) == SEC_LEVEL_DELTA)
-		for(var/obj/item/weapon/pinpointer/point in world)
-			point.the_disk = src //the pinpointer will detect the shunted AI
-
-
-/obj/machinery/power/apc/proc/malfvacate(var/forced)
-	if(!src.occupier)
-		return
-	if(src.occupier.parent && src.occupier.parent.stat != 2)
-		src.occupier.mind.transfer_to(src.occupier.parent)
-		src.occupier.parent.adjustOxyLoss(src.occupier.getOxyLoss())
-		src.occupier.parent.cancel_camera()
-		del(src.occupier) // qdel
-		if (seclevel2num(get_security_level()) == SEC_LEVEL_DELTA)
-			for(var/obj/item/weapon/pinpointer/point in world)
-				for(var/datum/mind/AI_mind in ticker.mode.malf_ai)
-					var/mob/living/silicon/ai/A = AI_mind.current // the current mob the mind owns
-					if(A.stat != DEAD)
-						point.the_disk = A //The pinpointer tracks the AI back into its core.
-
-	else
-		src.occupier << "<span class='danger'>Primary core damaged, unable to return core processes.</span>"
-		if(forced)
-			src.occupier.loc = src.loc
-			src.occupier.death()
-			src.occupier.gib()
-			for(var/obj/item/weapon/pinpointer/point in world)
-				point.the_disk = null //the pinpointer will go back to pointing at the nuke disc.
-
-
 /obj/machinery/power/apc/proc/ion_act()
-	//intended to be exactly the same as an AI malf attack
-	if(!src.malfhack && src.z in config.station_levels)
-		if(prob(3))
-			src.locked = 1
-			if (src.cell.charge > 0)
-//				world << "\red blew APC in [src.loc.loc]"
-				src.cell.charge = 0
-				cell.corrupt()
-				src.malfhack = 1
-				update_icon()
-				var/datum/effect/effect/system/smoke_spread/smoke = new /datum/effect/effect/system/smoke_spread()
-				smoke.set_up(3, 0, src.loc)
-				smoke.attach(src)
-				smoke.start()
-				var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
-				s.set_up(3, 1, src)
-				s.start()
-				visible_message("<span class='danger'>The [src.name] suddenly lets out a blast of smoke and some sparks!</span>", \
-								"<span class='danger'>You hear sizzling electronics.</span>")
+	if(prob(3))
+		src.locked = 1
+		if (src.cell.charge > 0)
+			src.cell.charge = 0
+			cell.corrupt()
+			update_icon()
+			var/datum/effect/effect/system/smoke_spread/smoke = new /datum/effect/effect/system/smoke_spread()
+			smoke.set_up(3, 0, src.loc)
+			smoke.attach(src)
+			smoke.start()
+			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+			s.set_up(3, 1, src)
+			s.start()
+			visible_message("<span class='danger'>The [src.name] suddenly lets out a blast of smoke and some sparks!</span>", \
+							"<span class='danger'>You hear sizzling electronics.</span>")
 
 
 /obj/machinery/power/apc/surplus()
@@ -1265,8 +1153,6 @@ obj/machinery/power/apc/proc/autoset(var/val, var/on)
 /obj/machinery/power/apc/emp_act(severity)
 	if(cell)
 		cell.emp_act(severity)
-	if(occupier)
-		occupier.emp_act(severity)
 
 	lighting = 0
 	equipment = 0
@@ -1287,7 +1173,7 @@ obj/machinery/power/apc/proc/autoset(var/val, var/on)
 			//set_broken() //now Del() do what we need
 			if (cell)
 				cell.ex_act(1.0) // more lags woohoo
-			del(src) // qdel
+			qdel(src)
 			return
 		if(2.0)
 			if (prob(50))
@@ -1313,10 +1199,6 @@ obj/machinery/power/apc/proc/autoset(var/val, var/on)
 		terminal = null
 
 /obj/machinery/power/apc/proc/set_broken()
-	if(malfai && operating)
-		if (ticker.mode.config_tag == "malfunction")
-			if (src.z in config.station_levels) //if (is_type_in_list(get_area(src), the_station_areas))
-				ticker.mode:apcs--
 	// Aesthetically much better!
 	src.visible_message("<span class='notice'>[src]'s screen flickers with warnings briefly!</span>")
 	spawn(rand(2,5))
@@ -1325,8 +1207,6 @@ obj/machinery/power/apc/proc/autoset(var/val, var/on)
 		operating = 0
 		update_icon()
 		update()
-		if(occupier)
-			malfvacate(1)
 
 // overload all the lights in this APC area
 
@@ -1336,11 +1216,10 @@ obj/machinery/power/apc/proc/autoset(var/val, var/on)
 	if( cell && cell.charge>=20)
 		cell.use(20);
 		spawn(0)
-			for(var/area/A in area.related)
-				for(var/obj/machinery/light/L in A)
-					L.on = 1
-					L.broken()
-					sleep(1)
+			for(var/obj/machinery/light/L in area)
+				L.on = 1
+				L.broken()
+				sleep(1)
 
 /obj/machinery/power/apc/proc/setsubsystem(val)
 	if(cell && cell.charge > 0)
@@ -1349,5 +1228,15 @@ obj/machinery/power/apc/proc/autoset(var/val, var/on)
 		return 1
 	else
 		return 0
+
+// Malfunction: Transfers APC under AI's control
+/obj/machinery/power/apc/proc/ai_hack(var/mob/living/silicon/ai/A = null)
+	if(!A || !A.hacked_apcs || hacker || aidisabled || A.stat == DEAD)
+		return 0
+	src.hacker = A
+	A.hacked_apcs += src
+	locked = 1
+	update_icon()
+	return 1
 
 #undef APC_UPDATE_ICON_COOLDOWN

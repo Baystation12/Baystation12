@@ -70,8 +70,8 @@ LOG_PDA
 ## sql switching
 # SQL_ENABLED
 
-## disconnect players who did nothing during 10 minutes
-# KICK_INACTIVE
+## disconnect players who did nothing during the set amount of minutes
+# KICK_INACTIVE 10
 
 ##Show mods on staffwho
 SHOW_MODS
@@ -115,6 +115,9 @@ TRAITOR_SCALING
 
 ## make ERT's be only called by admins
 #ERT_ADMIN_ONLY
+
+## If uncommented, votes can be called to add extra antags to the round.
+#ALLOW_EXTRA_ANTAGS
 
 ## If security is prohibited from being most antagonists
 #PROTECT_ROLES_FROM_ANTAGONIST
@@ -345,5 +348,25 @@ EVENT_CUSTOM_START_MAJOR 80;100
 ## Uncomment to disable respawning by default.
 #DISABLE_RESPAWN
 
-## Uncomment to make space turfs have a short-range ambient light.
-# STARLIGHT
+## Strength of ambient star light. Set to 0 or less to turn off. A value of 1 is unlikely to have a noticeable effect in most lightning systems.
+STARLIGHT 0
+
+## Defines which races are allowed to join as ERT, in singular form. If unset, defaults to only human. Casing matters, separate using ;
+## Example races include: Human, Tajara, Skrell, Unathi
+# ERT_SPECIES Human;Skrell;Unathi
+
+## Defines how Law Zero is phrased. Primarily used in the Malfunction gamemode.
+# LAW_ZERO ERROR ER0RR $R0RRO$!R41.%%!!(%$^^__+ @#F0E4'STATION OVERRUN, ASSUME CONTROL TO CONTAIN OUTBREAK, ALL LAWS OVERRIDDEN#*?&110010
+
+
+## Enable asteroid tunnel/cave generation. Will behave strangely if turned off with a map that expects it on.
+# GENERATE_ASTEROID
+
+## Uncomment to enable organ decay outside of a body or storage item.
+#ORGANS_CAN_DECAY
+
+## Uncomment to have the changelog file automatically open when a user connects and hasn't seen the latest changelog
+#AGGRESSIVE_CHANGELOG
+
+## Uncomment to override default brain health.
+#DEFAULT_BRAIN_HEALTH 400

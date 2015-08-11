@@ -13,11 +13,14 @@
 	power_rating = 7500 //7500 W ~ 10 HP
 	power_losses = 150
 
+	var/minrate = 0
+	var/maxrate = 10 * ONE_ATMOSPHERE
+
 	var/list/scrubbing_gas = list("phoron", "carbon_dioxide", "sleeping_agent", "oxygen_agent_b")
 
 /obj/machinery/portable_atmospherics/powered/scrubber/New()
 	..()
-	cell = new/obj/item/weapon/cell(src)
+	cell = new/obj/item/weapon/cell/apc(src)
 
 /obj/machinery/portable_atmospherics/powered/scrubber/emp_act(severity)
 	if(stat & (BROKEN|NOPOWER))
@@ -82,63 +85,58 @@
 /obj/machinery/portable_atmospherics/powered/scrubber/return_air()
 	return air_contents
 
-/obj/machinery/portable_atmospherics/powered/scrubber/attack_ai(var/mob/user as mob)
+/obj/machinery/portable_atmospherics/powered/scrubber/attack_ai(var/mob/user)
+	src.add_hiddenprint(user)
 	return src.attack_hand(user)
 
-/obj/machinery/portable_atmospherics/powered/scrubber/attack_hand(var/mob/user as mob)
+/obj/machinery/portable_atmospherics/powered/scrubber/attack_ghost(var/mob/user)
+	return src.attack_hand(user)
 
-	user.set_machine(src)
-	var/holding_text
-
-	if(holding)
-		holding_text = {"<BR><B>Tank Pressure</B>: [round(holding.air_contents.return_pressure(), 0.01)] kPa<BR>
-<A href='?src=\ref[src];remove_tank=1'>Remove Tank</A>
-"}
-	var/output_text = {"<TT><B>[name]</B><BR>
-Pressure: [round(air_contents.return_pressure(), 0.01)] kPa<BR>
-Flow Rate: [round(last_flow_rate, 0.1)] L/s<BR>
-Port Status: [(connected_port)?("Connected"):("Disconnected")]
-[holding_text]<BR>
-<BR>
-Cell Charge: [cell? "[round(cell.percent())]%" : "N/A"] | Load: [round(last_power_draw)] W<BR>
-Power Switch: <A href='?src=\ref[src];power=1'>[on?("On"):("Off")]</A><BR>
-Flow Rate Regulator: <A href='?src=\ref[src];volume_adj=-1000'>-</A> <A href='?src=\ref[src];volume_adj=-100'>-</A> <A href='?src=\ref[src];volume_adj=-10'>-</A> <A href='?src=\ref[src];volume_adj=-1'>-</A> [volume_rate] L/s <A href='?src=\ref[src];volume_adj=1'>+</A> <A href='?src=\ref[src];volume_adj=10'>+</A> <A href='?src=\ref[src];volume_adj=100'>+</A> <A href='?src=\ref[src];volume_adj=1000'>+</A><BR>
-
-<HR>
-<A href='?src=\ref[user];mach_close=scrubber'>Close</A><BR>
-"}
-
-	user << browse(output_text, "window=scrubber;size=600x300")
-	onclose(user, "scrubber")
+/obj/machinery/portable_atmospherics/powered/scrubber/attack_hand(var/mob/user)
+	ui_interact(user)
 	return
+
+/obj/machinery/portable_atmospherics/powered/scrubber/ui_interact(mob/user, ui_key = "rcon", datum/nanoui/ui=null, force_open=1)
+	var/list/data[0]
+	data["portConnected"] = connected_port ? 1 : 0
+	data["tankPressure"] = round(air_contents.return_pressure() > 0 ? air_contents.return_pressure() : 0)
+	data["rate"] = round(volume_rate)
+	data["minrate"] = round(minrate)
+	data["maxrate"] = round(maxrate)
+	data["powerDraw"] = round(last_power_draw)
+	data["cellCharge"] = cell ? cell.charge : 0
+	data["cellMaxCharge"] = cell ? cell.maxcharge : 1
+	data["on"] = on ? 1 : 0
+
+	data["hasHoldingTank"] = holding ? 1 : 0
+	if (holding)
+		data["holdingTank"] = list("name" = holding.name, "tankPressure" = round(holding.air_contents.return_pressure() > 0 ? holding.air_contents.return_pressure() : 0))
+
+	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	if (!ui)
+		ui = new(user, src, ui_key, "portscrubber.tmpl", "Portable Scrubber", 480, 400, state = physical_state)
+		ui.set_initial_data(data)
+		ui.open()
+		ui.set_auto_update(1)
+
 
 /obj/machinery/portable_atmospherics/powered/scrubber/Topic(href, href_list)
-	..()
-	if (usr.stat || usr.restrained())
-		return
+	if(..())
+		return 1
 
-	if (((get_dist(src, usr) <= 1) && istype(src.loc, /turf)))
-		usr.set_machine(src)
-
-		if(href_list["power"])
-			on = !on
-
-		if (href_list["remove_tank"])
-			if(holding)
-				holding.loc = loc
-				holding = null
-
-		if (href_list["volume_adj"])
-			var/diff = text2num(href_list["volume_adj"])
-			volume_rate = min(initial(volume_rate), max(0, volume_rate+diff))
-
-		src.updateUsrDialog()
-		src.add_fingerprint(usr)
-		update_icon()
-	else
-		usr << browse(null, "window=scrubber")
-		return
-	return
+	if(href_list["power"])
+		on = !on
+		. = 1
+	if (href_list["remove_tank"])
+		if(holding)
+			holding.loc = loc
+			holding = null
+		. = 1
+	if (href_list["volume_adj"])
+		var/diff = text2num(href_list["volume_adj"])
+		volume_rate = Clamp(volume_rate+diff, minrate, maxrate)
+		. = 1
+	update_icon()
 
 
 //Huge scrubber

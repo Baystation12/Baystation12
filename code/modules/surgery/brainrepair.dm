@@ -6,7 +6,7 @@
 	allowed_tools = list(
 	/obj/item/weapon/hemostat = 100, 		\
 	/obj/item/weapon/wirecutters = 75, 		\
-	/obj/item/weapon/kitchen/utensil/fork = 20
+	/obj/item/weapon/material/kitchen/utensil/fork = 20
 	)
 
 	priority = 3
@@ -14,8 +14,9 @@
 	max_duration = 100
 
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		var/datum/organ/external/affected = target.get_organ(target_zone)
-		var/datum/organ/internal/brain/sponge = target.internal_organs_by_name["brain"]
+		var/obj/item/organ/external/affected = target.get_organ(target_zone)
+		if(!affected) return
+		var/obj/item/organ/brain/sponge = target.internal_organs_by_name["brain"]
 		return (sponge && sponge.damage > 0 && sponge.damage <= 20) && affected.open == 3
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -26,7 +27,7 @@
 	end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		user.visible_message("\blue [user] takes out all the bone chips in [target]'s brain with \the [tool].",	\
 		"\blue You take out all the bone chips in [target]'s brain with \the [tool].")
-		var/datum/organ/internal/brain/sponge = target.internal_organs_by_name["brain"]
+		var/obj/item/organ/brain/sponge = target.internal_organs_by_name["brain"]
 		if (sponge)
 			sponge.damage = 0
 
@@ -46,8 +47,9 @@
 	max_duration = 110
 
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		var/datum/organ/external/affected = target.get_organ(target_zone)
-		var/datum/organ/internal/brain/sponge = target.internal_organs_by_name["brain"]
+		var/obj/item/organ/external/affected = target.get_organ(target_zone)
+		if(!affected) return
+		var/obj/item/organ/brain/sponge = target.internal_organs_by_name["brain"]
 		return (sponge && sponge.damage > 20) && affected.open == 3
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -58,7 +60,7 @@
 	end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		user.visible_message("\blue [user] mends hematoma in [target]'s brain with \the [tool].",	\
 		"\blue You mend hematoma in [target]'s brain with \the [tool].")
-		var/datum/organ/internal/brain/sponge = target.internal_organs_by_name["brain"]
+		var/obj/item/organ/brain/sponge = target.internal_organs_by_name["brain"]
 		if (sponge)
 			sponge.damage = 20
 
