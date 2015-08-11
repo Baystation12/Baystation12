@@ -157,7 +157,7 @@ datum/hud/New(mob/owner)
 	adding = null
 	other = null
 	hotkeybuttons = null
-	item_action_list = null
+//	item_action_list = null // ?
 	mymob = null
 
 /datum/hud/proc/hidden_inventory_update()
