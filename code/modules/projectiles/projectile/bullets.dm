@@ -69,7 +69,7 @@
 	damage = 20
 	//icon_state = "bullet" //TODO: would be nice to have it's own icon state
 	var/pellets = 4			//number of pellets
-	var/range_step = 2		//effective pellet count decreases every few tiles
+	var/range_step = 2		//projectile will lose a fragment each time it travels this distance. Can be a non-integer.
 	var/base_spread = 90	//lower means the pellets spread more across body parts
 	var/spread_step = 10	//higher means the pellets spread more across body parts with distance
 
@@ -92,6 +92,7 @@
 		if (..()) hits++
 		def_zone = old_zone //restore the original zone the projectile was aimed at
 
+	//world << "[src]: hitting [target_mob], [hits] of [pellets] hits."
 	pellets -= hits //each hit reduces the number of pellets left
 	if (hits >= total_pellets || pellets <= 0)
 		return 1

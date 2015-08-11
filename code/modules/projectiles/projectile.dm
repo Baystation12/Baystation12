@@ -25,7 +25,7 @@
 	var/yo = null
 	var/xo = null
 	var/current = null
-	var/obj/shot_from = null // the object which shot us
+	var/shot_from = "" // name of the object which shot us
 	var/atom/original = null // the target clicked (not necessarily where the projectile is headed). Should probably be renamed to 'target' or something.
 	var/turf/starting = null // the projectile's starting turf
 	var/list/permutated = list() // we've passed through these atoms, don't try to hit them again
@@ -111,7 +111,7 @@
 		p_y = between(0, p_y + rand(-radius, radius), world.icon_size)
 
 //called to launch a projectile
-/obj/item/projectile/proc/launch(atom/target, var/target_zone, var/x_offset=0, var/y_offset=0)
+/obj/item/projectile/proc/launch(atom/target, var/target_zone, var/x_offset=0, var/y_offset=0, var/angle_offset=0)
 	var/turf/curloc = get_turf(src)
 	var/turf/targloc = get_turf(target)
 	if (!istype(targloc) || !istype(curloc))
@@ -127,7 +127,7 @@
 	def_zone = target_zone
 
 	spawn()
-		setup_trajectory(curloc, targloc, x_offset, y_offset) //plot the initial trajectory
+		setup_trajectory(curloc, targloc, x_offset, y_offset, angle_offset) //plot the initial trajectory
 		process()
 
 	return 0
@@ -143,7 +143,7 @@
 	loc = get_turf(user) //move the projectile out into the world
 	
 	firer = user
-	shot_from = launcher
+	shot_from = launcher.name
 	silenced = launcher.silenced
 	
 	return launch(target, target_zone, x_offset, y_offset)
@@ -173,7 +173,8 @@
 		result = target_mob.bullet_act(src, def_zone)
 	
 	if(result == PROJECTILE_FORCE_MISS)
-		visible_message("<span class='notice'>\The [src] misses [target_mob] narrowly!</span>")
+		if(!silenced)
+			visible_message("<span class='notice'>\The [src] misses [target_mob] narrowly!</span>")
 		return 0
 
 	//hit messages
