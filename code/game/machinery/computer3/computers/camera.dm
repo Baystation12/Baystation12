@@ -56,7 +56,7 @@
 	name = "Security Camera Network Main Key"
 	var/title = "Station"
 	var/desc = "Connects to station security cameras."
-	var/list/networks = list("SS13")
+	var/networks = list("ALL") // A little workaround as it is not possible to place station_networks here
 	var/screen = "cameras"
 
 	execute(var/datum/file/source)
@@ -76,58 +76,65 @@
 						return
 		computer.Crash(MISSING_PROGRAM)
 
+/datum/file/camnet_key/New()
+	for(var/N in networks)
+		if(N == "ALL")
+			networks = station_networks
+			break
+	return ..()
+
 /datum/file/camnet_key/mining
 	name = "Mining Camera Network Key"
 	title = "mining station"
 	desc = "Connects to mining security cameras."
-	networks = list("MINE")
+	networks = list(NETWORK_MINE)
 	screen = "miningcameras"
 
 /datum/file/camnet_key/research
 	name = "Research Camera Network Key"
 	title = "research"
-	networks = list("RD")
+	networks = list(NETWORK_RESEARCH)
 
 /datum/file/camnet_key/bombrange
 	name = "R&D Bomb Range Camera Network Key"
 	title = "bomb range"
 	desc = "Monitors the bomb range."
-	networks = list("Toxins")
+	networks = list(NETWORK_RESEARCH)
 
 /datum/file/camnet_key/xeno
 	name = "R&D Misc. Research Camera Network Key"
 	title = "special research"
-	networks = list("Misc")
+	networks = list(NETWORK_RESEARCH)
 
 /datum/file/camnet_key/singulo
 	name = "Singularity Camera Network Key"
 	title = "singularity"
-	networks = list("Singularity")
+	networks = list(NETWORK_ENGINE)
 
 /datum/file/camnet_key/entertainment
 	name = "Entertainment Channel Encryption Key"
 	title = "entertainment"
 	desc = "Damn, I hope they have /tg/thechannel on here."
-	networks = list("thunder")
+	networks = list(NETWORK_THUNDER)
 	screen = "entertainment"
 
 /datum/file/camnet_key/creed
 	name = "Special Ops Camera Encryption Key"
 	title = "special ops"
 	desc = "Connects to special ops secure camera feeds."
-	networks = list("CREED")
+	networks = list(NETWORK_ERT)
 
 /datum/file/camnet_key/prison
 	name = "Prison Camera Network Key"
 	title = "prison"
 	desc = "Monitors the prison."
-	networks = list("Prison")
+	networks = list(NETWORK_SECURITY)
 
 /datum/file/camnet_key/syndicate
 	name = "Camera Network Key"
 	title = "%!#BUFFER OVERFLOW"
 	desc = "Connects to security cameras."
-	networks = list("SS13")
+	networks = list("ALL")
 	hidden_file = 1
 
 

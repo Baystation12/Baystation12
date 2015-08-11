@@ -106,12 +106,16 @@
 	pixel_x			= 2
 	pixel_y			= -3
 	show_keyboard	= 0
+	active_power_usage = 200 // Stationary consoles we use on station have 300, laptops are probably slightly more power efficient
+	idle_power_usage = 100
 
 	var/obj/item/device/laptop/portable = null
 
 	New(var/L, var/built = 0)
 		if(!built && !battery)
 			battery = new /obj/item/weapon/cell(src)
+			battery.maxcharge = 500
+			battery.charge = 500
 		..(L,built)
 
 	verb/close_computer()
