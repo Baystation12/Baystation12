@@ -6,6 +6,7 @@
 
 	var/spell/targeted/projectile/carried
 
+	penetrating = 0
 	kill_count = 10 //set by the duration of the spell
 
 	var/proj_trail = 0 //if it leaves a trail
@@ -15,18 +16,15 @@
 	var/list/trails = new()
 
 /obj/item/projectile/spell_projectile/Destroy()
-	..()
 	for(var/trail in trails)
 		qdel(trail)
+	carried = null
+	return ..()
 
 /obj/item/projectile/spell_projectile/ex_act()
 	return
 
 /obj/item/projectile/spell_projectile/before_move()
-	if(carried)
-		var/list/targets = carried.choose_prox_targets(user = carried.holder, spell_holder = src)
-		if(targets.len)
-			src.prox_cast(targets)
 	if(proj_trail && src && src.loc) //pretty trails
 		var/obj/effect/overlay/trail = PoolOrNew(/obj/effect/overlay, src.loc)
 		trails += trail
@@ -44,19 +42,14 @@
 	return
 
 /obj/item/projectile/spell_projectile/Bump(var/atom/A)
-	if(loc)
+	if(loc && carried)
 		prox_cast(carried.choose_prox_targets(user = carried.holder, spell_holder = src))
-	return
+	return 1
 
 /obj/item/projectile/spell_projectile/on_impact()
-	if(loc)
+	if(loc && carried)
 		prox_cast(carried.choose_prox_targets(user = carried.holder, spell_holder = src))
-	return
+	return 1
 
 /obj/item/projectile/spell_projectile/seeking
 	name = "seeking spell"
-
-/obj/item/projectile/spell_projectile/seeking/process_step()
-	..()
-	if(original && !isnull(src.loc))
-		current = original //update the target

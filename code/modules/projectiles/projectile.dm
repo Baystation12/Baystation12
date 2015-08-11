@@ -166,12 +166,12 @@
 	//roll to-hit
 	miss_modifier = max(15*(distance-2) - round(15*accuracy) + miss_modifier, 0)
 	var/hit_zone = get_zone_with_miss_chance(def_zone, target_mob, miss_modifier, ranged_attack=(distance > 1 || original != target_mob)) //if the projectile hits a target we weren't originally aiming at then retain the chance to miss
-	
+
 	var/result = PROJECTILE_FORCE_MISS
 	if(hit_zone)
 		def_zone = hit_zone //set def_zone, so if the projectile ends up hitting someone else later (to be implemented), it is more likely to hit the same part
 		result = target_mob.bullet_act(src, def_zone)
-	
+
 	if(result == PROJECTILE_FORCE_MISS)
 		visible_message("<span class='notice'>\The [src] misses [target_mob] narrowly!</span>")
 		return 0
@@ -313,9 +313,6 @@
 
 		if(!hitscan)
 			sleep(step_delay)	//add delay between movement iterations if it's not a hitscan weapon
-
-/obj/item/projectile/proc/process_step(first_step = 0)
-	return
 
 /obj/item/projectile/proc/before_move()
 	return
