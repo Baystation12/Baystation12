@@ -246,7 +246,13 @@ var/global/list/additional_antag_types = list()
 		return 1
 
 	var/datum/antagonist/main_antags = antag_templates[1]
-	if(main_antags.pending_antagonists.len >= required_enemies)
+	var/list/potential
+	if(main_antags.flags & ANTAG_OVERRIDE_JOB)
+		potential = main_antags.pending_antagonists
+	else
+		potential = main_antags.candidates
+
+	if(potential.len >= required_enemies)
 		return 1
 	return 0
 
