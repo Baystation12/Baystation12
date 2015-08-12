@@ -39,6 +39,8 @@ var/global/list/robot_modules = list(
 
 /obj/item/weapon/robot_module/New(var/mob/living/silicon/robot/R)
 	..()
+	R.module = src
+
 	add_camera_networks(R)
 	add_languages(R)
 	add_subsystems(R)
@@ -69,7 +71,7 @@ var/global/list/robot_modules = list(
 	synths = null
 	emag = null
 	jetpack = null
-	..()
+	return ..()
 
 /obj/item/weapon/robot_module/emp_act(severity)
 	if(modules)
