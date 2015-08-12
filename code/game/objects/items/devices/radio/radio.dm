@@ -578,7 +578,6 @@
 		if(keyslot.syndie)
 			src.syndie = 1
 
-
 	for (var/ch_name in src.channels)
 		if(!radio_controller)
 			sleep(30) // Waiting for the radio_controller to be created.

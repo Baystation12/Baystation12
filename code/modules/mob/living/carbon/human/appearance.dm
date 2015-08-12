@@ -152,14 +152,14 @@
 
 	return valid_species
 
-/mob/living/carbon/human/proc/generate_valid_hairstyles()
+/mob/living/carbon/human/proc/generate_valid_hairstyles(var/check_gender = 1)
 	var/list/valid_hairstyles = new()
 	for(var/hairstyle in hair_styles_list)
 		var/datum/sprite_accessory/S = hair_styles_list[hairstyle]
 
-		if(gender == MALE && S.gender == FEMALE)
+		if(check_gender && gender == MALE && S.gender == FEMALE)
 			continue
-		if(gender == FEMALE && S.gender == MALE)
+		if(check_gender && gender == FEMALE && S.gender == MALE)
 			continue
 		if(!(species.name in S.species_allowed))
 			continue
