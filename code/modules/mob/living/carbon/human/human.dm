@@ -224,6 +224,10 @@
 
 
 /mob/living/carbon/human/show_inv(mob/user as mob)
+	// TODO :  Change to incapacitated() on merge.
+	if(user.stat || user.lying || user.resting || user.buckled)
+		return
+
 	var/obj/item/clothing/under/suit = null
 	if (istype(w_uniform, /obj/item/clothing/under))
 		suit = w_uniform
