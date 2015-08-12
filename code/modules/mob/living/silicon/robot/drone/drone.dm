@@ -261,19 +261,17 @@
 
 /mob/living/silicon/robot/drone/start_pulling(var/atom/movable/AM)
 
-	if(istype(AM,/obj/item/pipe) || istype(AM,/obj/structure/disposalconstruct))
-		..()
-	else if(istype(AM,/obj/item))
-		var/obj/item/O = AM
-		if(O.w_class > can_pull_size)
-			src << "<span class='warning'>You are too small to pull that.</span>"
-			return
+	if(!(istype(AM,/obj/item/pipe) || istype(AM,/obj/structure/disposalconstruct)))
+		if(istype(AM,/obj/item))
+			var/obj/item/O = AM
+			if(O.w_class > can_pull_size)
+				src << "<span class='warning'>You are too small to pull that.</span>"
+				return
 		else
-			..()
-	else
-		if(!can_pull_mobs)
-			src << "<span class='warning'>You are too small to pull that.</span>"
-			return
+			if(!can_pull_mobs)
+				src << "<span class='warning'>You are too small to pull that.</span>"
+				return
+	..()
 
 /mob/living/silicon/robot/drone/add_robot_verbs()
 	src.verbs |= silicon_subsystems
