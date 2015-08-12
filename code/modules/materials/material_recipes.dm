@@ -86,7 +86,7 @@
 
 /material/sandstone/generate_recipes()
 	..()
-	recipes += new/datum/stack_recipe("pile of dirt", /obj/machinery/portable_atmospherics/hydroponics/soil, 3, time = 10, one_per_turf = 1, on_floor = 1)
+	recipes += new/datum/stack_recipe("planting bed", /obj/machinery/portable_atmospherics/hydroponics/soil, 3, time = 10, one_per_turf = 1, on_floor = 1)
 
 /material/plastic/generate_recipes()
 	..()
