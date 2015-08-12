@@ -246,7 +246,7 @@ var/global/list/additional_antag_types = list()
 		return 1
 
 	var/datum/antagonist/main_antags = antag_templates[1]
-	if(main_antags.candidates.len >= required_enemies)
+	if(main_antags.pending_antagonists.len >= required_enemies)
 		return 1
 	return 0
 
@@ -263,7 +263,7 @@ var/global/list/additional_antag_types = list()
 /datum/game_mode/proc/pre_setup()
 	for(var/datum/antagonist/antag in antag_templates)
 		antag.build_candidate_list() //compile a list of all eligible candidates
-		
+
 		//antag roles that replace jobs need to be assigned before the job controller hands out jobs.
 		if(antag.flags & ANTAG_OVERRIDE_JOB)
 			antag.attempt_spawn() //select antags to be spawned
