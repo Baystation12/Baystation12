@@ -21,7 +21,12 @@
 	{{for data.buildable}}
 		{{if value.category == data.category}}
 			<div class="item">
-				{{:helper.link(value.name, null, {'build' : value.id})}} - {{:value.resourses}}, {{:value.time}}
+				<div class="itemLabelWide">
+					{{:helper.link(value.name, null, {'build' : value.id})}}
+				</div>
+				<div class="itemContentMedium">
+					{{:value.resourses}}, {{:value.time}}
+				</div>
 			</div>
 		{{/if}}
 	{{/for}}

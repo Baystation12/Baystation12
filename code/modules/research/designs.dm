@@ -639,13 +639,17 @@ datum/design/circuit/shield
 	sort_string = "VACAA"
 
 /datum/design/item/posibrain
+	name = "Positronic brain"
 	id = "posibrain"
 	req_tech = list(TECH_ENGINERING = 4, TECH_MATERIAL = 6, TECH_BLUESPACE = 2, TECH_DATA = 4)
+	build_type = PROTOLATHE | MECHFAB
 	materials = list(DEFAULT_WALL_MATERIAL = 2000, "glass" = 1000, "silver" = 1000, "gold" = 500, "phoron" = 500, "diamond" = 100)
 	build_path = /obj/item/device/mmi/digital/posibrain
+	category = "Misc"
 	sort_string = "VACAB"
 
-/datum/design/item/medical/mmi
+/datum/design/item/mmi
+	name = "Man-machine interface"
 	id = "mmi"
 	req_tech = list(TECH_DATA = 2, TECH_BIO = 3)
 	build_type = PROTOLATHE | MECHFAB
@@ -654,7 +658,8 @@ datum/design/circuit/shield
 	category = "Misc"
 	sort_string = "VACBA"
 
-/datum/design/item/medical/mmi_radio
+/datum/design/item/mmi_radio
+	name = "Radio-enabled man-machine interface"
 	id = "mmi_radio"
 	req_tech = list(TECH_DATA = 2, TECH_BIO = 4)
 	build_type = PROTOLATHE | MECHFAB

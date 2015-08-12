@@ -14,5 +14,5 @@
 
 #define IMPRINTER	1	//For circuits. Uses glass/chemicals.
 #define PROTOLATHE	2	//New stuff. Uses glass/metal/chemicals
-#define MECHFAB		4	//Remember, objects utilising this flag should have construction_time and construction_cost vars.
+#define MECHFAB		4	//Mechfab
 #define CHASSIS		8	//For protolathe, but differently

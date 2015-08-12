@@ -5,8 +5,6 @@
 	icon_state = "blank"
 	flags = CONDUCT
 	slot_flags = SLOT_BELT
-	var/construction_time = 100
-	var/list/construction_cost = list(DEFAULT_WALL_MATERIAL=20000,"glass"=5000)
 	var/list/part = null // Order of args is important for installing robolimbs.
 	var/sabotaged = 0 //Emagging limbs can have repercussions when installed as prosthetics.
 	var/model_info
