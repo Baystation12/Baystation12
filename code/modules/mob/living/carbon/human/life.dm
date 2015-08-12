@@ -1217,14 +1217,6 @@
 			see_in_dark = 8
 			if(!druggy)		see_invisible = SEE_INVISIBLE_LEVEL_TWO
 
-		if(seer==1)
-			var/obj/effect/rune/R = locate() in loc
-			if(R && R.word1 == cultwords["see"] && R.word2 == cultwords["hell"] && R.word3 == cultwords["join"])
-				see_invisible = SEE_INVISIBLE_CULT
-			else
-				see_invisible = SEE_INVISIBLE_LIVING
-				seer = 0
-
 		else
 			sight = species.vision_flags
 			see_in_dark = species.darksight

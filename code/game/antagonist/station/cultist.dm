@@ -11,8 +11,8 @@ var/datum/antagonist/cultist/cult
 	role_text = "Cultist"
 	role_text_plural = "Cultists"
 	bantype = "cultist"
-	restricted_jobs = list("Chaplain","AI", "Cyborg", "Internal Affairs Agent", "Head of Security", "Captain")
-	protected_jobs = list("Security Officer", "Warden", "Detective")
+	restricted_jobs = list("Chaplain", "AI", "Cyborg")
+	protected_jobs = list("Internal Affairs Agent", "Head of Security", "Captain", "Security Officer", "Warden", "Detective")
 	role_type = BE_CULTIST
 	feedback_tag = "cult_objective"
 	antag_indicator = "cult"
@@ -27,10 +27,10 @@ var/datum/antagonist/cultist/cult
 	var/allow_narsie = 1
 
 	var/datum/mind/sacrifice_target
-	var/list/startwords = list("blood","join","self","hell")
-	var/list/allwords = list("travel","self","see","hell","blood","join","tech","destroy", "other", "hide")
 	var/list/sacrificed = list()
 	var/list/harvested = list()
+	var/cult_rating = 0
+	var/cult_level = 1
 
 /datum/antagonist/cultist/New()
 	..()
@@ -57,7 +57,7 @@ var/datum/antagonist/cultist/cult
 	if(!..())
 		return 0
 
-	var/obj/item/weapon/paper/talisman/supply/T = new(get_turf(player))
+	var/obj/item/weapon/book/tome/T = new(get_turf(player))
 	var/list/slots = list (
 		"backpack" = slot_in_backpack,
 		"left pocket" = slot_l_store,
@@ -76,37 +76,19 @@ var/datum/antagonist/cultist/cult
 /datum/antagonist/cultist/greet(var/datum/mind/player)
 	if(!..())
 		return 0
-	grant_runeword(player.current)
-
-/datum/antagonist/cultist/proc/grant_runeword(mob/living/carbon/human/cult_mob, var/word)
-
-	if (!word)
-		if(startwords.len > 0)
-			word=pick(startwords)
-			startwords -= word
-		else
-			word = pick(allwords)
-
-	// Ensure runes are randomized.
-	if(!cultwords["travel"])
-		runerandom()
-
-	var/wordexp = "[cultwords[word]] is [word]..."
-	cult_mob << "<span class='warning'>You remember one thing from the dark teachings of your master... [wordexp]</span>"
-	cult_mob.mind.store_memory("You remember that <B>[wordexp]</B>", 0, 0)
 
 /datum/antagonist/cultist/remove_antagonist(var/datum/mind/player, var/show_message, var/implanted)
 	if(!..())
 		return 0
 	player.current << "<span class='danger'>An unfamiliar white light flashes through your mind, cleansing the taint of the dark-one and the memories of your time as his servant with it.</span>"
-	player.memory = ""
 	if(show_message)
-		player.current.visible_message("<FONT size = 3>[player.current] looks like they just reverted to their old faith!</FONT>")
+		player.current.visible_message("<span class='notice'>[player.current] looks like they just reverted to their old faith!</span>")
+	remove_cult_magic(player.current)
 
 /datum/antagonist/cultist/add_antagonist(var/datum/mind/player)
 	if(!..())
 		return
-	player << "You catch a glimpse of the Realm of Nar-Sie, the Geometer of Blood. You now see how flimsy the world is, you see that it should be open to the knowledge of That Which Waits. Assist your new compatriots in their dark dealings. Their goals are yours, and yours are theirs. You serve the Dark One above all else. Bring It back."
+	player << "<span class='cult'>You catch a glimpse of the Realm of Nar-Sie, the Geometer of Blood. You now see how flimsy the world is, you see that it should be open to the knowledge of That Which Waits. Assist your new compatriots in their dark dealings. Their goals are yours, and yours are theirs. You serve the Dark One above all else. Bring It back.</span>"
 
 /datum/antagonist/cultist/can_become_antag(var/datum/mind/player)
 	if(!..())
@@ -115,3 +97,67 @@ var/datum/antagonist/cultist/cult
 		if(L && (L.imp_in == player.current))
 			return 0
 	return 1
+
+/datum/antagonist/cultist/update_antag_mob(var/datum/mind/player)
+	..()
+	add_cultiness(20)
+	add_cult_magic(player.current)
+
+/datum/antagonist/cultist/proc/add_cultiness(var/amount)
+	cult_rating += amount
+	if(cult_rating >= 100 && cult_level < 2)
+		cult_level = 2
+		for(var/datum/mind/H in cult.current_antagonists)
+			if(H.current)
+				H.current << "<span class='cult'>The veil between this world and beyond grows thin, and your power grows.</span>"
+				add_cult_magic(H.current)
+		for(var/mob/dead/observer/D)
+			add_ghost_magic(D)
+	if(cult_rating >= 200 && cult_level < 3)
+		cult_level = 3
+		for(var/datum/mind/H in cult.current_antagonists)
+			if(H.current)
+				H.current << "<span class='cult'>You feel that the fabric of reality is tearing. You can feel the Geometer of Blood's presence growing stronger.</span>"
+				add_cult_magic(H.current)
+		for(var/mob/dead/observer/D)
+			add_ghost_magic(D)
+	if(cult_rating >= 300 && cult_level < 4)
+		cult_level = 4
+		for(var/datum/mind/H in cult.current_antagonists)
+			if(H.current)
+				H.current << "<span class='cult'>The world is at end. The veil is as thin as ever. The time has come.</span>"
+				add_cult_magic(H.current)
+		for(var/mob/dead/observer/D)
+			add_ghost_magic(D)
+
+/datum/antagonist/cultist/proc/add_cult_magic(var/mob/M)
+	M.verbs += /mob/proc/convert_rune
+	M.verbs += /mob/proc/teleport_rune
+	M.verbs += /mob/proc/tome_rune
+	M.verbs += /mob/proc/wall_rune
+	M.verbs += /mob/proc/ajorney_rune
+	M.verbs += /mob/proc/defile_rune
+
+	if(cult_level >= 2)
+		M.verbs += /mob/proc/armor_rune
+		M.verbs += /mob/proc/sacrifice_rune
+		M.verbs += /mob/proc/manifest_rune
+		M.verbs += /mob/proc/drain_rune
+
+		if(cult_level >= 3)
+			M.verbs += /mob/proc/weapon_rune
+			M.verbs += /mob/proc/shell_rune
+			M.verbs += /mob/proc/bloodboil_rune
+			M.verbs += /mob/proc/confuse_rune
+			M.verbs += /mob/proc/revive_rune
+
+			if(cult_level >= 4)
+				M.verbs += /mob/proc/tearreality_rune
+
+	M.verbs += /mob/proc/stun_imbue
+	M.verbs += /mob/proc/emp_imbue
+
+	M.verbs += /mob/proc/cult_communicate
+
+/datum/antagonist/cultist/proc/remove_cult_magic(var/mob/M)
+	M.verbs -= /mob/proc/convert_rune

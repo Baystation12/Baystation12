@@ -66,7 +66,6 @@
 		return
 	if (istype(A, /turf/simulated/floor))
 		user << "<span class='notice'>You hit the floor with the [src].</span>"
-		call(/obj/effect/rune/proc/revealrunes)(src)
 
 /obj/item/weapon/sord
 	name = "\improper SORD"

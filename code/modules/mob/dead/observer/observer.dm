@@ -79,6 +79,10 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 	if(!name)							//To prevent nameless ghosts
 		name = capitalize(pick(first_names_male)) + " " + capitalize(pick(last_names))
 	real_name = name
+
+	if(cult)
+		cult.add_ghost_magic(src)
+
 	..()
 
 /mob/dead/observer/Destroy()
@@ -206,16 +210,6 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	if(mind.current.key && copytext(mind.current.key,1,2)!="@")	//makes sure we don't accidentally kick any clients
 		usr << "<span class='warning'>Another consciousness is in your body... it is resisting you.</span>"
 		return
-	if(mind.current.ajourn && mind.current.stat != DEAD) //check if the corpse is astral-journeying (it's client ghosted using a cultist rune).
-		var/found_rune
-		for(var/obj/effect/rune/R in mind.current.loc)   //whilst corpse is alive, we can only reenter the body if it's on the rune
-			if(R && R.word1 == cultwords["hell"] && R.word2 == cultwords["travel"] && R.word3 == cultwords["self"]) // Found an astral journey rune.
-				found_rune = 1
-				break
-		if(!found_rune)
-			usr << "<span class='warning'>The astral cord that ties your body and your spirit has been severed. You are likely to wander the realm beyond until your body is finally dead and thus reunited with you.</span>"
-			return
-	mind.current.ajourn=0
 	mind.current.key = key
 	if(!admin_ghosted)
 		announce_ghost_joinleave(mind, 0, "They now occupy their body again.")
@@ -357,21 +351,6 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 				following = null
 			else
 				src << "This mob is not located in the game world."
-/*
-/mob/dead/observer/verb/boo()
-	set category = "Ghost"
-	set name = "Boo!"
-	set desc= "Scare your crew members because of boredom!"
-
-	if(bootime > world.time) return
-	var/obj/machinery/light/L = locate(/obj/machinery/light) in view(1, src)
-	if(L)
-		L.flicker()
-		bootime = world.time + 600
-		return
-	//Maybe in the future we can add more <i>spooky</i> code here!
-	return
-*/
 
 /mob/dead/observer/memory()
 	set hidden = 1
@@ -470,81 +449,6 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 			return
 
 	return ..()
-
-//Used for drawing on walls with blood puddles as a spooky ghost.
-/mob/dead/verb/bloody_doodle()
-
-	set category = "Ghost"
-	set name = "Write in blood"
-	set desc = "If the round is sufficiently spooky, write a short message in blood on the floor or a wall. Remember, no IC in OOC or OOC in IC."
-
-	if(!(config.cult_ghostwriter))
-		src << "\red That verb is not currently permitted."
-		return
-
-	if (!src.stat)
-		return
-
-	if (usr != src)
-		return 0 //something is terribly wrong
-
-	var/ghosts_can_write
-	if(ticker.mode.name == "cult")
-		if(cult.current_antagonists.len > config.cult_ghostwriter_req_cultists)
-			ghosts_can_write = 1
-
-	if(!ghosts_can_write)
-		src << "\red The veil is not thin enough for you to do that."
-		return
-
-	var/list/choices = list()
-	for(var/obj/effect/decal/cleanable/blood/B in view(1,src))
-		if(B.amount > 0)
-			choices += B
-
-	if(!choices.len)
-		src << "<span class = 'warning'>There is no blood to use nearby.</span>"
-		return
-
-	var/obj/effect/decal/cleanable/blood/choice = input(src,"What blood would you like to use?") in null|choices
-
-	var/direction = input(src,"Which way?","Tile selection") as anything in list("Here","North","South","East","West")
-	var/turf/simulated/T = src.loc
-	if (direction != "Here")
-		T = get_step(T,text2dir(direction))
-
-	if (!istype(T))
-		src << "<span class='warning'>You cannot doodle there.</span>"
-		return
-
-	if(!choice || choice.amount == 0 || !(src.Adjacent(choice)))
-		return
-
-	var/doodle_color = (choice.basecolor) ? choice.basecolor : "#A10808"
-
-	var/num_doodles = 0
-	for (var/obj/effect/decal/cleanable/blood/writing/W in T)
-		num_doodles++
-	if (num_doodles > 4)
-		src << "<span class='warning'>There is no space to write on!</span>"
-		return
-
-	var/max_length = 50
-
-	var/message = sanitize(input("Write a message. It cannot be longer than [max_length] characters.","Blood writing", ""))
-
-	if (message)
-
-		if (length(message) > max_length)
-			message += "-"
-			src << "<span class='warning'>You ran out of blood to write with!</span>"
-
-		var/obj/effect/decal/cleanable/blood/writing/W = new(T)
-		W.basecolor = doodle_color
-		W.update_icon()
-		W.message = message
-		W.add_hiddenprint(src)
-		W.visible_message("\red Invisible fingers crudely paint something in blood on [T]...")
 
 /mob/dead/observer/pointed(atom/A as mob|obj|turf in view())
 	if(!..())

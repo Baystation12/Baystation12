@@ -1,4 +1,4 @@
-
+/*
 var/list/word_to_uristrune_table = null
 
 /proc/word_to_uristrune_bit(word)
@@ -17,8 +17,6 @@ var/list/word_to_uristrune_table = null
 			bit <<= 1
 
 	return word_to_uristrune_table[word]
-
-
 
 /proc/get_uristrune_cult(word1, word2, word3)
 	var/animated
@@ -55,7 +53,6 @@ var/list/word_to_uristrune_table = null
 			 | word_to_uristrune_bit(word3)
 
 	return get_uristrune(bits, animated)
-
 
 var/list/uristrune_cache = list()
 
@@ -129,3 +126,4 @@ var/list/uristrune_cache = list()
 	uristrune_cache[lookup] = result
 
 	return result
+*/
