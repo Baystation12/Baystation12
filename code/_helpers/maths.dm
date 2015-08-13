@@ -4,6 +4,15 @@
 /proc/Clamp(val, min, max)
 	return max(min, min(val, max))
 
+// min is inclusive, max is exclusive
+/proc/Wrap(val, min, max)
+	var/d = max - min
+	var/t = Floor((val - min) / d)
+	return val - (t * d)
+
+/proc/Default(a, b)
+	return a ? a : b
+
 // Trigonometric functions.
 /proc/Tan(x)
 	return sin(x) / cos(x)

@@ -88,12 +88,6 @@
 		return 1
 	return 0
 
-/mob/proc/isAI()
-	return 0
-
-/mob/living/silicon/ai/isAI()
-	return 1
-
 /mob/proc/isMobAI()
 	return 0
 
@@ -274,11 +268,11 @@ var/list/global/organ_rel_size = list(
 /proc/get_zone_with_miss_chance(zone, var/mob/target, var/miss_chance_mod = 0, var/ranged_attack=0)
 	zone = check_zone(zone)
 
-	// you cannot miss if your target is prone or restrained
-	if(target.buckled || target.lying)
-		return zone
-	// if your target is being grabbed aggressively by someone you cannot miss either
 	if(!ranged_attack)
+		// you cannot miss if your target is prone or restrained
+		if(target.buckled || target.lying)
+			return zone
+		// if your target is being grabbed aggressively by someone you cannot miss either
 		for(var/obj/item/weapon/grab/G in target.grabbed_by)
 			if(G.state >= GRAB_AGGRESSIVE)
 				return zone
@@ -626,13 +620,13 @@ proc/is_blind(A)
 	return client && client.inactivity < active MINUTES
 
 #define SAFE_PERP -50
-/mob/living/proc/assess_perp(var/auth_weapons, var/check_records, var/check_arrest)
+/mob/living/proc/assess_perp(var/obj/access_obj, var/check_access, var/auth_weapons, var/check_records, var/check_arrest)
 	if(stat == DEAD)
 		return SAFE_PERP
 
 	return 0
 
-/mob/living/carbon/human/assess_perp(var/obj/access_obj, var/auth_weapons, var/check_records, var/check_arrest)
+/mob/living/carbon/human/assess_perp(var/obj/access_obj, var/check_access, var/auth_weapons, var/check_records, var/check_arrest)
 	var/threatcount = ..()
 	if(. == SAFE_PERP)
 		return SAFE_PERP
@@ -644,6 +638,9 @@ proc/is_blind(A)
 	// A proper	CentCom id is hard currency.
 	else if(id && istype(id, /obj/item/weapon/card/id/centcom))
 		return SAFE_PERP
+	
+	if(check_access && !access_obj.allowed(src))
+		threatcount += 4
 
 	if(auth_weapons && !access_obj.allowed(src))
 		if(istype(l_hand, /obj/item/weapon/gun) || istype(l_hand, /obj/item/weapon/melee))
@@ -672,7 +669,7 @@ proc/is_blind(A)
 
 	return threatcount
 
-/mob/living/simple_animal/hostile/assess_perp(var/obj/access_obj, var/auth_weapons, var/check_records, var/check_arrest)
+/mob/living/simple_animal/hostile/assess_perp(var/obj/access_obj, var/check_access, var/auth_weapons, var/check_records, var/check_arrest)
 	var/threatcount = ..()
 	if(. == SAFE_PERP)
 		return SAFE_PERP

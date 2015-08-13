@@ -22,12 +22,6 @@
 
 	Destroy()
 		qdel(pr_mech_sleeper)
-		..()
-
-	allow_drop()
-		return 0
-
-	destroy()
 		for(var/atom/movable/AM in src)
 			AM.forceMove(get_turf(src))
 		return ..()

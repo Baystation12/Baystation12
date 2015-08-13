@@ -146,7 +146,7 @@
 
 		return
 
-	return -1 // the bullet/projectile goes through the target! Ie, you missed
+	return PROJECTILE_CONTINUE // the bullet/projectile goes through the target!
 
 
 // Small memory holder entity for transparent bullet holes

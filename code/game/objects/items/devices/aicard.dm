@@ -110,6 +110,7 @@
 
 	ai.loc = src
 	ai.cancel_camera()
+	ai.destroy_eyeobj(src)
 	ai.control_disabled = 1
 	ai.aiRestorePowerRoutine = 0
 	carded_ai = ai
