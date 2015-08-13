@@ -303,6 +303,10 @@ BLIND     // can't see anything
 	body_parts_covered = FACE|EYES
 	sprite_sheets = list("Vox" = 'icons/mob/species/vox/masks.dmi')
 
+	var/voicechange = 0
+	var/list/say_messages
+	var/list/say_verbs
+
 /obj/item/clothing/mask/update_clothing_icon()
 	if (ismob(src.loc))
 		var/mob/M = src.loc
