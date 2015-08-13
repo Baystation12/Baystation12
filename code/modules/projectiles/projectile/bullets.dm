@@ -155,7 +155,7 @@
 	stun = 3
 	weaken = 3
 	penetrating = 5
-	armor_penetration = 50
+	armor_penetration = 80
 	hitscan = 1 //so the PTR isn't useless as a sniper weapon
 
 /* Miscellaneous */
