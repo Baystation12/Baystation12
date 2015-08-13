@@ -7,16 +7,17 @@ var/datum/antagonist/ninja/ninjas
 	role_text_plural = "Ninja"
 	bantype = "ninja"
 	landmark_id = "ninjastart"
-	welcome_text = "You are an elite mercenary assassin of the Spider Clan. You have a variety of abilities at your disposal, thanks to your nano-enhanced cyber armor.</span>"
+	welcome_text = "<span class='info'>You are an elite mercenary assassin of the Spider Clan. You have a variety of abilities at your disposal, thanks to your nano-enhanced cyber armor.</span>"
 	flags = ANTAG_OVERRIDE_JOB | ANTAG_CLEAR_EQUIPMENT | ANTAG_CHOOSE_NAME | ANTAG_RANDSPAWN | ANTAG_VOTABLE | ANTAG_SET_APPEARANCE
-	max_antags = 3
-	max_antags_round = 3
+	max_antags = 1
+	max_antags_round = 1
+	id_type = /obj/item/weapon/card/id/syndicate
 
 /datum/antagonist/ninja/New()
 	..()
 	ninjas = src
 
-/datum/antagonist/ninja/random_spawn()
+/datum/antagonist/ninja/attempt_random_spawn()
 	if(config.ninjas_allowed) ..()
 
 /datum/antagonist/ninja/create_objectives(var/datum/mind/ninja)
@@ -82,7 +83,7 @@ var/datum/antagonist/ninja/ninjas
 	player.store_memory("<B>Directive:</B> <span class='danger'>[directive]</span><br>")
 	player << "<b>Remember your directive:</b> [directive]."
 
-/datum/antagonist/ninja/apply(var/datum/mind/player)
+/datum/antagonist/ninja/update_antag_mob(var/datum/mind/player)
 	..()
 	var/ninja_title = pick(ninja_titles)
 	var/ninja_name = pick(ninja_names)
@@ -101,18 +102,15 @@ var/datum/antagonist/ninja/ninjas
 	player.equip_to_slot_or_del(R, slot_l_ear)
 	player.equip_to_slot_or_del(new /obj/item/clothing/under/color/black(player), slot_w_uniform)
 	player.equip_to_slot_or_del(new /obj/item/device/flashlight(player), slot_belt)
-	var/obj/item/weapon/rig/light/ninja/ninjasuit = new(player)
+	create_id("Infiltrator", player)
+
+	var/obj/item/weapon/rig/light/ninja/ninjasuit = new(get_turf(player))
+	ninjasuit.seal_delay = 0
+	player.put_in_hands(ninjasuit)
 	player.equip_to_slot_or_del(ninjasuit,slot_back)
-
 	if(ninjasuit)
-		// Make sure the ninja can actually equip the suit.
-		if(player.dna && player.dna.unique_enzymes)
-			ninjasuit.locked_dna = player.dna.unique_enzymes
-			player << "<span class='warning'>Suit hardware locked to your DNA hash.</span>"
-		else
-			ninjasuit.req_access = list()
-
 		ninjasuit.toggle_seals(src,1)
+		ninjasuit.seal_delay = initial(ninjasuit.seal_delay)
 
 	if(istype(player.back,/obj/item/weapon/rig))
 		var/obj/item/weapon/rig/rig = player.back

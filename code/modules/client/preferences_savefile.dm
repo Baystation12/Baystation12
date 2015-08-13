@@ -107,8 +107,29 @@
 	S["gender"]				>> gender
 	S["age"]				>> age
 	S["species"]			>> species
-	S["language"]			>> language
 	S["spawnpoint"]			>> spawnpoint
+
+	S["language"]			>> alternate_languages
+	if(isnull(alternate_languages))
+		alternate_languages = list()
+	if(!islist(alternate_languages))
+		if(client)
+			// Warn them that we (probably) just broke their languages
+			client << "<span class='danger'>Your current character slot's languages list has been updated from an old version, and may not be what you expect.</span>"
+
+		if(alternate_languages in all_languages)
+			alternate_languages = list(alternate_languages)
+		else
+			alternate_languages = list()
+
+		// try to give them their species language
+		var/datum/species/SP = all_species[species]
+		if(SP)
+			alternate_languages |= SP.language
+			alternate_languages |= SP.default_language
+
+		// remove the Galcom that most races have as default_language
+		alternate_languages -= "Galactic Common"
 
 	//colors to be consolidated into hex strings (requires some work with dna code)
 	S["hair_red"]			>> r_hair
@@ -200,7 +221,7 @@
 	if(isnum(undershirt))
 		undershirt = undershirt_t[undershirt_t[undershirt]]
 
-	if(isnull(language)) language = "None"
+	if(isnull(alternate_languages)) alternate_languages = list()
 	if(isnull(spawnpoint)) spawnpoint = "Arrivals Shuttle"
 	if(isnull(nanotrasen_relation)) nanotrasen_relation = initial(nanotrasen_relation)
 	if(!real_name) real_name = random_name(gender)
@@ -265,7 +286,7 @@
 	S["gender"]				<< gender
 	S["age"]				<< age
 	S["species"]			<< species
-	S["language"]			<< language
+	S["language"]			<< alternate_languages
 	S["hair_red"]			<< r_hair
 	S["hair_green"]			<< g_hair
 	S["hair_blue"]			<< b_hair

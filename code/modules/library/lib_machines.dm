@@ -149,7 +149,7 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
 			if(src.arcanecheckout)
 				new /obj/item/weapon/book/tome(src.loc)
 				user << "<span class='warning'>Your sanity barely endures the seconds spent in the vault's browsing window. The only thing to remind you of this when you stop browsing is a dusty old tome sitting on the desk. You don't really remember printing it.</span>"
-				user.visible_message("[user] stares at the blank screen for a few moments, his expression frozen in fear. When he finally awakens from it, he looks a lot older.", 2)
+				user.visible_message("<span class='notice'>\The [user] stares at the blank screen for a few moments, \his expression frozen in fear. When \he finally awakens from it, \he looks a lot older.</span>", 2)
 				src.arcanecheckout = 0
 		if(1)
 			// Inventory
@@ -236,10 +236,13 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
 	//dat += "<A HREF='?src=\ref[user];mach_close=library'>Close</A><br><br>"
 	user << browse(dat, "window=library")
 	onclose(user, "library")
+	
+/obj/machinery/librarycomp/emag_act(var/remaining_charges, var/mob/user)
+	if (src.density && !src.emagged)
+		src.emagged = 1
+		return 1
 
 /obj/machinery/librarycomp/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if (src.density && istype(W, /obj/item/weapon/card/emag))
-		src.emagged = 1
 	if(istype(W, /obj/item/weapon/barcodescanner))
 		var/obj/item/weapon/barcodescanner/scanner = W
 		scanner.computer = src

@@ -253,10 +253,9 @@ var/global/photo_count = 0
 	var/viewer = user
 	if(user.client)		//To make shooting through security cameras possible
 		viewer = user.client.eye
-	var/can_see = (dummy in viewers(world.view, viewer)) != null
+	var/can_see = (dummy in viewers(world.view, viewer))
 
-	dummy.loc = null
-	dummy = null	//Alas, nameless creature	//garbage collect it instead
+	qdel(dummy)
 	return can_see
 
 /obj/item/device/camera/proc/captureimage(atom/target, mob/user, flag)

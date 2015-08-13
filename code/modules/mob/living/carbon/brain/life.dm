@@ -1,28 +1,6 @@
 /mob/living/carbon/brain/handle_breathing()
 	return
 
-/mob/living/carbon/brain/Life()
-	set invisibility = 0
-	set background = 1
-	..()
-
-	if(stat != DEAD)
-		//Chemicals in the body
-		handle_chemicals_in_body()
-
-	//Apparently, the person who wrote this code designed it so that
-	//blinded get reset each cycle and then get activated later in the
-	//code. Very ugly. I dont care. Moving this stuff here so its easy
-	//to find it.
-	blinded = null
-
-	//Status updates, death etc.
-	handle_regular_status_updates()
-	update_canmove()
-
-	if(client)
-		handle_regular_hud_updates()
-
 /mob/living/carbon/brain/handle_mutations_and_radiation()
 	if (radiation)
 		if (radiation > 100)
@@ -91,16 +69,13 @@
 		adjustFireLoss(5.0*discomfort)
 
 
-/mob/living/carbon/brain/proc/handle_chemicals_in_body()
+/mob/living/carbon/brain/handle_chemicals_in_body()
 	chem_effects.Cut()
 	analgesic = 0
 
-	if(touching)
-		touching.metabolize(0, CHEM_TOUCH)
-	if(ingested)
-		ingested.metabolize(0, CHEM_INGEST)
-	if(reagents)
-		reagents.metabolize(0, CHEM_BLOOD)
+	if(touching) touching.metabolize()
+	if(ingested) ingested.metabolize()
+	if(bloodstr) bloodstr.metabolize()
 
 	if(CE_PAINKILLER in chem_effects)
 		analgesic = chem_effects[CE_PAINKILLER]
@@ -116,7 +91,7 @@
 
 	return //TODO: DEFERRED
 
-/mob/living/carbon/brain/proc/handle_regular_status_updates()	//TODO: comment out the unused bits >_>
+/mob/living/carbon/brain/handle_regular_status_updates()	//TODO: comment out the unused bits >_>
 	updatehealth()
 
 	if(stat == DEAD)	//DEAD. BROWN BREAD. SWIMMING WITH THE SPESS CARP
@@ -186,7 +161,7 @@
 		handle_statuses()
 	return 1
 
-/mob/living/carbon/brain/proc/handle_regular_hud_updates()
+/mob/living/carbon/brain/handle_regular_hud_updates()
 	if (stat == 2 || (XRAY in src.mutations))
 		sight |= SEE_TURFS
 		sight |= SEE_MOBS
@@ -220,6 +195,18 @@
 		else
 			healths.icon_state = "health7"
 
+		if (stat == 2 || (XRAY in src.mutations))
+			sight |= SEE_TURFS
+			sight |= SEE_MOBS
+			sight |= SEE_OBJS
+			see_in_dark = 8
+			see_invisible = SEE_INVISIBLE_LEVEL_TWO
+		else if (stat != 2)
+			sight &= ~SEE_TURFS
+			sight &= ~SEE_MOBS
+			sight &= ~SEE_OBJS
+			see_in_dark = 2
+			see_invisible = SEE_INVISIBLE_LIVING
 	if (client)
 		client.screen.Remove(global_hud.blurry,global_hud.druggy,global_hud.vimpaired)
 
@@ -248,6 +235,13 @@
 
 	return 1
 
+	if (stat != 2)
+		if (machine)
+			if (machine.check_eye(src) < 0)
+				reset_view(null)
+		else
+			if(client && !client.adminobs)
+				reset_view(null)
 
 /*/mob/living/carbon/brain/emp_act(severity)
 	if(!(container && istype(container, /obj/item/device/mmi)))

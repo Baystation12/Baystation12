@@ -17,7 +17,7 @@
 		var/datum/nano_module/appearance_changer/AC = ui_users[user]
 		if(!AC)
 			AC = new(src, user)
-			AC.name = "SalonPro Nano-Mirror(TM)"
+			AC.name = "SalonPro Nano-Mirror&trade;"
 			ui_users[user] = AC
 		AC.ui_interact(user)
 
@@ -60,7 +60,7 @@
 		return 0
 
 	if(damage)
-		user.visible_message("<span class='danger'>[user] smashes [src]!")
+		user.visible_message("<span class='danger'>[user] smashes [src]!</span>")
 		shatter()
 	else
 		user.visible_message("<span class='danger'>[user] hits [src] and bounces off!</span>")

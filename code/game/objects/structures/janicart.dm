@@ -37,7 +37,7 @@
 	else if(istype(I, /obj/item/weapon/mop))
 		if(I.reagents.total_volume < I.reagents.maximum_volume)	//if it's not completely soaked we assume they want to wet it, otherwise store it
 			if(reagents.total_volume < 1)
-				user << "[src] is out of water!</span>"
+				user << "<span class='warning'>[src] is out of water!</span>"
 			else
 				reagents.trans_to_obj(I, 5)	//
 				user << "<span class='notice'>You wet [I] in [src].</span>"
@@ -83,22 +83,23 @@
 
 
 /obj/structure/janitorialcart/attack_hand(mob/user)
-	user.set_machine(src)
-	var/dat
-	if(mybag)
-		dat += "<a href='?src=\ref[src];garbage=1'>[mybag.name]</a><br>"
-	if(mymop)
-		dat += "<a href='?src=\ref[src];mop=1'>[mymop.name]</a><br>"
-	if(myspray)
-		dat += "<a href='?src=\ref[src];spray=1'>[myspray.name]</a><br>"
-	if(myreplacer)
-		dat += "<a href='?src=\ref[src];replacer=1'>[myreplacer.name]</a><br>"
-	if(signs)
-		dat += "<a href='?src=\ref[src];sign=1'>[signs] sign\s</a><br>"
-	var/datum/browser/popup = new(user, "janicart", name, 240, 160)
-	popup.set_content(dat)
-	popup.open()
+	ui_interact(user)
+	return
 
+/obj/structure/janitorialcart/ui_interact(var/mob/user, var/ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+	var/data[0]
+	data["name"] = capitalize(name)
+	data["bag"] = mybag ? capitalize(mybag.name) : null
+	data["mop"] = mymop ? capitalize(mymop.name) : null
+	data["spray"] = myspray ? capitalize(myspray.name) : null
+	data["replacer"] = myreplacer ? capitalize(myreplacer.name) : null
+	data["signs"] = signs ? "[signs] sign\s" : null
+
+	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	if(!ui)
+		ui = new(user, src, ui_key, "janitorcart.tmpl", "Janitorial cart", 240, 160)
+		ui.set_initial_data(data)
+		ui.open()
 
 /obj/structure/janitorialcart/Topic(href, href_list)
 	if(!in_range(src, usr))
@@ -106,36 +107,39 @@
 	if(!isliving(usr))
 		return
 	var/mob/living/user = usr
-	if(href_list["garbage"])
-		if(mybag)
-			user.put_in_hands(mybag)
-			user << "<span class='notice'>You take [mybag] from [src].</span>"
-			mybag = null
-	if(href_list["mop"])
-		if(mymop)
-			user.put_in_hands(mymop)
-			user << "<span class='notice'>You take [mymop] from [src].</span>"
-			mymop = null
-	if(href_list["spray"])
-		if(myspray)
-			user.put_in_hands(myspray)
-			user << "<span class='notice'>You take [myspray] from [src].</span>"
-			myspray = null
-	if(href_list["replacer"])
-		if(myreplacer)
-			user.put_in_hands(myreplacer)
-			user << "<span class='notice'>You take [myreplacer] from [src].</span>"
-			myreplacer = null
-	if(href_list["sign"])
-		if(signs)
-			var/obj/item/weapon/caution/Sign = locate() in src
-			if(Sign)
-				user.put_in_hands(Sign)
-				user << "<span class='notice'>You take \a [Sign] from [src].</span>"
-				signs--
-			else
-				warning("[src] signs ([signs]) didn't match contents")
-				signs = 0
+	
+	if(href_list["take"])
+		switch(href_list["take"])
+			if("garbage")
+				if(mybag)
+					user.put_in_hands(mybag)
+					user << "<span class='notice'>You take [mybag] from [src].</span>"
+					mybag = null
+			if("mop")
+				if(mymop)
+					user.put_in_hands(mymop)
+					user << "<span class='notice'>You take [mymop] from [src].</span>"
+					mymop = null
+			if("spray")
+				if(myspray)
+					user.put_in_hands(myspray)
+					user << "<span class='notice'>You take [myspray] from [src].</span>"
+					myspray = null
+			if("replacer")
+				if(myreplacer)
+					user.put_in_hands(myreplacer)
+					user << "<span class='notice'>You take [myreplacer] from [src].</span>"
+					myreplacer = null
+			if("sign")
+				if(signs)
+					var/obj/item/weapon/caution/Sign = locate() in src
+					if(Sign)
+						user.put_in_hands(Sign)
+						user << "<span class='notice'>You take \a [Sign] from [src].</span>"
+						signs--
+					else
+						warning("[src] signs ([signs]) didn't match contents")
+						signs = 0
 
 	update_icon()
 	updateUsrDialog()

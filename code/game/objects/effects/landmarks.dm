@@ -88,16 +88,7 @@
 
 	return 1
 
-/obj/effect/landmark/start/ninja
-	name = "ninja"
-
-/obj/effect/landmark/start/ninja/New()
-	..()
-	ninjastart += loc
-	qdel(src)
-
 //Costume spawner landmarks
-
 /obj/effect/landmark/costume/New() //costume spawner, selects a random subclass and disappears
 
 	var/list/options = typesof(/obj/effect/landmark/costume)

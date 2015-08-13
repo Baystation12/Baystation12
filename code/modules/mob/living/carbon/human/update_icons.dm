@@ -236,13 +236,22 @@ var/global/list/damage_icon_parts = list()
 
 	//CACHING: Generate an index key from visible bodyparts.
 	//0 = destroyed, 1 = normal, 2 = robotic, 3 = necrotic.
+
 	//Create a new, blank icon for our mob to use.
 	if(stand_icon)
 		qdel(stand_icon)
 	stand_icon = new(species.icon_template ? species.icon_template : 'icons/mob/human.dmi',"blank")
-	var/icon_key = ""
-	var/obj/item/organ/eyes/eyes = internal_organs_by_name["eyes"]
 
+	var/g = "male"
+	if(gender == FEMALE)
+		g = "female"
+
+	var/icon_key = "[species.race_key][g][s_tone][r_skin][g_skin][b_skin]"
+	if(lip_style)
+		icon_key += "[lip_style]"
+	else
+		icon_key += "nolips"
+	var/obj/item/organ/eyes/eyes = internal_organs_by_name["eyes"]
 	if(eyes)
 		icon_key += "[rgb(eyes.eye_colour[1], eyes.eye_colour[2], eyes.eye_colour[3])]"
 	else
@@ -495,7 +504,7 @@ var/global/list/damage_icon_parts = list()
 		var/obj/item/clothing/under/under = w_uniform
 		if(under.accessories.len)
 			for(var/obj/item/clothing/accessory/A in under.accessories)
-				standing.overlays |= A.get_inv_mob_overlay()
+				standing.overlays |= A.get_mob_overlay()
 
 		overlays_standing[UNIFORM_LAYER]	= standing
 	else
@@ -636,16 +645,35 @@ var/global/list/damage_icon_parts = list()
 /mob/living/carbon/human/update_inv_head(var/update_icons=1)
 	if(head)
 		head.screen_loc = ui_head		//TODO
-		var/image/standing
-		if(istype(head,/obj/item/clothing/head/kitty))
-			standing = image("icon" = head:mob)
+
+		//Determine the icon to use
+		var/t_icon
+		if(head.icon_override)
+			t_icon = head.icon_override
+		else if(head.sprite_sheets && head.sprite_sheets[species.name])
+			t_icon = head.sprite_sheets[species.name]
+
+		else if(head.item_icons && (slot_head_str in head.item_icons))
+			t_icon = head.item_icons[slot_head_str]
 		else
-			if(head.icon_override)
-				standing = image("icon" = head.icon_override, "icon_state" = "[head.icon_state]")
-			else if(head.sprite_sheets && head.sprite_sheets[species.name])
-				standing = image("icon" = head.sprite_sheets[species.name], "icon_state" = "[head.icon_state]")
+			t_icon = INV_HEAD_DEF_ICON
+
+		//Determine the state to use
+		var/t_state
+		if(istype(head, /obj/item/weapon/paper))
+			/* I don't like this, but bandaid to fix half the hats in the game
+			   being completely broken without re-breaking paper hats */
+			t_state = "paper"
+		else
+			if(head.item_state_slots && head.item_state_slots[slot_head_str])
+				t_state = head.item_state_slots[slot_head_str]
+			else if(head.item_state)
+				t_state = head.item_state
 			else
-				standing = image("icon" = 'icons/mob/head.dmi', "icon_state" = "[head.icon_state]")
+				t_state = head.icon_state
+
+		//Create the image
+		var/image/standing = image(icon = t_icon, icon_state = t_state)
 
 		if(head.blood_DNA)
 			var/image/bloodsies = image("icon" = species.blood_mask, "icon_state" = "helmetblood")
@@ -696,12 +724,15 @@ var/global/list/damage_icon_parts = list()
 
 		var/image/standing
 
+		var/t_icon = INV_SUIT_DEF_ICON
 		if(wear_suit.icon_override)
-			standing = image("icon" = wear_suit.icon_override, "icon_state" = "[wear_suit.icon_state]")
+			t_icon = wear_suit.icon_override
 		else if(wear_suit.sprite_sheets && wear_suit.sprite_sheets[species.name])
-			standing = image("icon" = wear_suit.sprite_sheets[species.name], "icon_state" = "[wear_suit.icon_state]")
-		else
-			standing = image("icon" = 'icons/mob/suit.dmi', "icon_state" = "[wear_suit.icon_state]")
+			t_icon = wear_suit.sprite_sheets[species.name]
+		else if(wear_suit.item_icons && wear_suit.item_icons[slot_wear_suit_str])
+			t_icon = wear_suit.item_icons[slot_wear_suit_str]
+
+		standing = image("icon" = t_icon, "icon_state" = "[wear_suit.icon_state]")
 
 		if( istype(wear_suit, /obj/item/clothing/suit/straight_jacket) )
 			drop_from_inventory(handcuffed)
@@ -836,11 +867,11 @@ var/global/list/damage_icon_parts = list()
 
 		//determine icon to use
 		var/icon/t_icon
-		if(r_hand.icon_override)
+		if(r_hand.item_icons && (slot_r_hand_str in r_hand.item_icons))
+			t_icon = r_hand.item_icons[slot_r_hand_str]
+		else if(r_hand.icon_override)
 			t_state += "_r"
 			t_icon = r_hand.icon_override
-		else if(r_hand.item_icons && (slot_r_hand_str in r_hand.item_icons))
-			t_icon = r_hand.item_icons[slot_r_hand_str]
 		else
 			t_icon = INV_R_HAND_DEF_ICON
 
@@ -868,11 +899,11 @@ var/global/list/damage_icon_parts = list()
 
 		//determine icon to use
 		var/icon/t_icon
-		if(l_hand.icon_override)
+		if(l_hand.item_icons && (slot_l_hand_str in l_hand.item_icons))
+			t_icon = l_hand.item_icons[slot_l_hand_str]
+		else if(l_hand.icon_override)
 			t_state += "_l"
 			t_icon = l_hand.icon_override
-		else if(l_hand.item_icons && (slot_l_hand_str in l_hand.item_icons))
-			t_icon = l_hand.item_icons[slot_l_hand_str]
 		else
 			t_icon = INV_L_HAND_DEF_ICON
 
@@ -929,7 +960,7 @@ var/global/list/damage_icon_parts = list()
 
 	tail_overlay = set_tail_state(t_state)
 	if(tail_overlay)
-		spawn(15)
+		spawn(20)
 			//check that the animation hasn't changed in the meantime
 			if(overlays_standing[TAIL_LAYER] == tail_overlay && tail_overlay.icon_state == t_state)
 				animate_tail_stop()

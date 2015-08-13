@@ -1,7 +1,7 @@
 /obj/item/weapon/grenade/chem_grenade
 	name = "grenade casing"
 	icon_state = "chemg"
-	item_state = "flashbang"
+	item_state = "grenade"
 	desc = "A hand made chemical grenade."
 	w_class = 2.0
 	force = 2.0
@@ -78,7 +78,7 @@
 					user << "<span class='notice'>You lock the assembly.</span>"
 					name = "grenade"
 				else
-//					user << "<span class='warning'>You need to add at least one beaker before locking the assembly."
+//					user << "<span class='warning'>You need to add at least one beaker before locking the assembly.</span>"
 					user << "<span class='notice'>You lock the empty assembly.</span>"
 					name = "fake grenade"
 				playsound(src.loc, 'sound/items/Screwdriver.ogg', 25, -3)

@@ -60,11 +60,6 @@
 
 	return 1
 
-
-/obj/machinery/atmospherics/unary/cryo_cell/allow_drop()
-	return 0
-
-
 /obj/machinery/atmospherics/unary/cryo_cell/relaymove(mob/user as mob)
 	if(user.stat)
 		return
@@ -334,6 +329,9 @@
 		return
 	put_mob(usr)
 	return
+
+/atom/proc/return_air_for_internal_lifeform()
+	return return_air()
 
 /obj/machinery/atmospherics/unary/cryo_cell/return_air_for_internal_lifeform()
 	//assume that the cryo cell has some kind of breath mask or something that

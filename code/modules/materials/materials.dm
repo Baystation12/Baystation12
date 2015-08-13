@@ -27,6 +27,17 @@
 // Assoc list containing all material datums indexed by name.
 var/list/name_to_material
 
+//Returns the material the object is made of, if applicable.
+//Will we ever need to return more than one value here? Or should we just return the "dominant" material.
+/obj/proc/get_material()
+	return null
+
+//mostly for convenience
+/obj/proc/get_material_name()
+	var/material/material = get_material()
+	if(material)
+		return material.name
+
 // Builds the datum list above.
 /proc/populate_material_list(force_remake=0)
 	if(name_to_material && !force_remake) return // Already set up!
@@ -44,12 +55,20 @@ var/list/name_to_material
 		populate_material_list()
 	return name_to_material[name]
 
+/proc/material_display_name(name)
+	var/material/material = get_material_by_name(name)
+	if(material)
+		return material.display_name
+	return null
+
 // Material definition and procs follow.
 /material
 	var/name	                          // Unique name for use in indexing the list.
 	var/display_name                      // Prettier name for display.
 	var/use_name
 	var/flags = 0                         // Various status modifiers.
+	var/sheet_singular_name = "sheet"
+	var/sheet_plural_name = "sheets"
 
 	// Shards/tables/structures
 	var/shard_type = SHARD_SHRAPNEL       // Path of debris object.
@@ -68,13 +87,19 @@ var/list/name_to_material
 	// Attributes
 	var/cut_delay = 0            // Delay in ticks when cutting through this wall.
 	var/radioactivity            // Radiation var. Used in wall and object processing to irradiate surroundings.
-	var/ignition_point           // Point at which the material catches on fire.
+	var/ignition_point           // K, point at which the material catches on fire.
 	var/melting_point = 1800     // K, walls will take damage if they're next to a fire hotter than this
 	var/integrity = 150          // General-use HP value for products.
 	var/opacity = 1              // Is the material transparent? 0.5< makes transparent walls/doors.
 	var/explosion_resistance = 5 // Only used by walls currently.
 	var/conductive = 1           // Objects with this var add CONDUCTS to flags on spawn.
 	var/list/composite_material  // If set, object matter var will be a list containing these values.
+
+	// Placeholder vars for the time being, todo properly integrate windows/light tiles/rods.
+	var/created_window
+	var/rod_product
+	var/wire_product
+	var/list/window_options = list()
 
 	// Damage values.
 	var/hardness = 60            // Prob of wall destruction by hulk, used for edge damage in weapons.
@@ -89,6 +114,37 @@ var/list/name_to_material
 	// Wallrot crumble message.
 	var/rotting_touch_message = "crumbles under your touch"
 
+// Placeholders for light tiles and rglass.
+/material/proc/build_rod_product(var/mob/user, var/obj/item/stack/used_stack, var/obj/item/stack/target_stack)
+	if(!rod_product)
+		user << "<span class='warning'>You cannot make anything out of \the [target_stack]</span>"
+		return
+	if(used_stack.get_amount() < 1 || target_stack.get_amount() < 1)
+		user << "<span class='warning'>You need one rod and one sheet of [display_name] to make anything useful.</span>"
+		return
+	used_stack.use(1)
+	target_stack.use(1)
+	var/obj/item/stack/S = new rod_product(get_turf(user))
+	S.add_fingerprint(user)
+	S.add_to_stacks(user)
+	if(!(user.l_hand && user.r_hand))
+		user.put_in_hands(S)
+
+/material/proc/build_wired_product(var/mob/user, var/obj/item/stack/used_stack, var/obj/item/stack/target_stack)
+	if(!wire_product)
+		user << "<span class='warning'>You cannot make anything out of \the [target_stack]</span>"
+		return
+	if(used_stack.get_amount() < 5 || target_stack.get_amount() < 1)
+		user << "<span class='warning'>You need five wires and one sheet of [display_name] to make anything useful.</span>"
+		return
+
+	used_stack.use(5)
+	target_stack.use(1)
+	user << "<span class='notice'>You attach wire to the [name].</span>"
+	var/obj/item/product = new wire_product(get_turf(user))
+	if(!(user.l_hand && user.r_hand))
+		user.put_in_hands(product)
+
 // Make sure we have a display name and shard icon even if they aren't explicitly set.
 /material/New()
 	..()
@@ -98,6 +154,10 @@ var/list/name_to_material
 		use_name = display_name
 	if(!shard_icon)
 		shard_icon = shard_type
+
+// This is a placeholder for proper integration of windows/windoors into the system.
+/material/proc/build_windows(var/mob/living/user, var/obj/item/stack/used_stack)
+	return 0
 
 // Weapons handle applying a divisor for this value locally.
 /material/proc/get_blunt_damage()
@@ -190,6 +250,8 @@ var/list/name_to_material
 	weight = 24
 	hardness = 40
 	stack_origin_tech = list(TECH_MATERIAL = 4)
+	sheet_singular_name = "ingot"
+	sheet_plural_name = "ingots"
 
 /material/gold/bronze //placeholder for ashtrays
 	name = "bronze"
@@ -202,18 +264,24 @@ var/list/name_to_material
 	weight = 22
 	hardness = 50
 	stack_origin_tech = list(TECH_MATERIAL = 3)
+	sheet_singular_name = "ingot"
+	sheet_plural_name = "ingots"
 
 /material/phoron
 	name = "phoron"
 	stack_type = /obj/item/stack/material/phoron
-	ignition_point = 100
+	ignition_point = PHORON_MINIMUM_BURN_TEMPERATURE
 	icon_base = "stone"
 	icon_colour = "#FC2BC5"
 	shard_type = SHARD_SHARD
 	hardness = 30
 	stack_origin_tech = list(TECH_MATERIAL = 2, TECH_PHORON = 2)
 	door_icon_base = "stone"
+	sheet_singular_name = "crystal"
+	sheet_plural_name = "crystals"
 
+/*
+// Commenting this out while fires are so spectacularly lethal, as I can't seem to get this balanced appropriately.
 /material/phoron/combustion_effect(var/turf/T, var/temperature, var/effect_multiplier)
 	if(isnull(ignition_point))
 		return 0
@@ -227,6 +295,7 @@ var/list/name_to_material
 		spawn (0)
 			target_tile.hotspot_expose(temperature, 400)
 	return round(totalPhoron/100)
+*/
 
 /material/stone
 	name = "sandstone"
@@ -238,6 +307,8 @@ var/list/name_to_material
 	weight = 22
 	hardness = 55
 	door_icon_base = "stone"
+	sheet_singular_name = "brick"
+	sheet_plural_name = "bricks"
 
 /material/stone/marble
 	name = "marble"
@@ -245,16 +316,18 @@ var/list/name_to_material
 	weight = 26
 	hardness = 100
 	integrity = 201 //hack to stop kitchen benches being flippable, todo: refactor into weight system
+	stack_type = /obj/item/stack/material/marble
 
 /material/steel
 	name = DEFAULT_WALL_MATERIAL
 	stack_type = /obj/item/stack/material/steel
+	integrity = 150
 	icon_base = "solid"
 	icon_reinf = "reinf_over"
 	icon_colour = "#666666"
 
 /material/steel/holographic
-	name = "holographic " + DEFAULT_WALL_MATERIAL
+	name = "holo" + DEFAULT_WALL_MATERIAL
 	display_name = DEFAULT_WALL_MATERIAL
 	stack_type = null
 	shard_type = SHARD_NONE
@@ -262,7 +335,7 @@ var/list/name_to_material
 /material/plasteel
 	name = "plasteel"
 	stack_type = /obj/item/stack/material/plasteel
-	integrity = 800
+	integrity = 400
 	melting_point = 6000
 	icon_base = "solid"
 	icon_reinf = "reinf_over"
@@ -271,7 +344,7 @@ var/list/name_to_material
 	hardness = 80
 	weight = 23
 	stack_origin_tech = list(TECH_MATERIAL = 2)
-	composite_material = list() //todo
+	composite_material = list(DEFAULT_WALL_MATERIAL = 3750, "platinum" = 3750) //todo
 
 /material/glass
 	name = "glass"
@@ -286,24 +359,86 @@ var/list/name_to_material
 	weight = 15
 	door_icon_base = "stone"
 	destruction_desc = "shatters"
+	window_options = list("One Direction", "Full Window")
+	created_window = /obj/structure/window/basic
+	wire_product = /obj/item/stack/light_w
+	rod_product = /obj/item/stack/material/glass/reinforced
 
-/material/glass/phoron
-	name = "phoron glass"
-	stack_type = /obj/item/stack/material/glass/phoronglass
-	flags = MATERIAL_BRITTLE
-	ignition_point = 300
-	integrity = 200 // idk why but phoron windows are strong, so.
-	icon_colour = "#FC2BC5"
-	stack_origin_tech = list(TECH_MATERIAL = 3, TECH_PHORON = 2)
+/material/glass/build_windows(var/mob/living/user, var/obj/item/stack/used_stack)
 
-/material/glass/phoron/reinforced
-	name = "reinforced phoron glass"
-	stack_type = /obj/item/stack/material/glass/phoronrglass
-	stack_origin_tech = list(TECH_MATERIAL = 4, TECH_PHORON = 2)
-	composite_material = list() //todo
+	if(!user || !used_stack || !created_window || !window_options.len)
+		return 0
+
+	if(!user.IsAdvancedToolUser())
+		user << "<span class='warning'>This task is too complex for your clumsy hands.</span>"
+		return 1
+
+	var/turf/T = user.loc
+	if(!istype(T))
+		user << "<span class='warning'>You must be standing on open flooring to build a window.</span>"
+		return 1
+
+	var/title = "Sheet-[used_stack.name] ([used_stack.get_amount()] sheet\s left)"
+	var/choice = input(title, "What would you like to construct?") as null|anything in window_options
+
+	if(!choice || !used_stack || !user || used_stack.loc != user || user.stat || user.loc != T)
+		return 1
+
+	// Get data for building windows here.
+	var/list/possible_directions = cardinal.Copy()
+	var/window_count = 0
+	for (var/obj/structure/window/check_window in user.loc)
+		window_count++
+		possible_directions  -= check_window.dir
+
+	// Get the closest available dir to the user's current facing.
+	var/build_dir = SOUTHWEST //Default to southwest for fulltile windows.
+	var/failed_to_build
+
+	if(window_count >= 4)
+		failed_to_build = 1
+	else
+		if(choice in list("One Direction","Windoor"))
+			if(possible_directions.len)
+				for(var/direction in list(user.dir, turn(user.dir,90), turn(user.dir,180), turn(user.dir,270) ))
+					if(direction in possible_directions)
+						build_dir = direction
+						break
+			else
+				failed_to_build = 1
+			if(!failed_to_build && choice == "Windoor")
+				if(!is_reinforced())
+					user << "<span class='warning'>This material is not reinforced enough to use for a door.</span>"
+					return
+				if((locate(/obj/structure/windoor_assembly) in T.contents) || (locate(/obj/machinery/door/window) in T.contents))
+					failed_to_build = 1
+	if(failed_to_build)
+		user << "<span class='warning'>There is no room in this location.</span>"
+		return 1
+
+	var/build_path = /obj/structure/windoor_assembly
+	var/sheets_needed = 4
+	if(choice == "Windoor")
+		sheets_needed = 5
+		build_dir = user.dir
+	else
+		build_path = created_window
+
+	if(used_stack.get_amount() < sheets_needed)
+		user << "<span class='warning'>You need at least [sheets_needed] sheets to build this.</span>"
+		return 1
+
+	// Build the structure and update sheet count etc.
+	used_stack.use(sheets_needed)
+	new build_path(T, build_dir, 1)
+	return 1
+
+/material/glass/proc/is_reinforced()
+	return (hardness > 35) //todo
 
 /material/glass/reinforced
-	name = "reinforced glass"
+	name = "rglass"
+	display_name = "reinforced glass"
 	stack_type = /obj/item/stack/material/glass/reinforced
 	flags = MATERIAL_BRITTLE
 	icon_colour = "#00E1FF"
@@ -313,8 +448,38 @@ var/list/name_to_material
 	tableslam_noise = 'sound/effects/Glasshit.ogg'
 	hardness = 40
 	weight = 30
+	stack_origin_tech = "materials=2"
+	composite_material = list(DEFAULT_WALL_MATERIAL = 1875,"glass" = 3750)
+	window_options = list("One Direction", "Full Window", "Windoor")
+	created_window = /obj/structure/window/reinforced
+	wire_product = null
+	rod_product = null
+
+/material/glass/phoron
+	name = "phglass"
+	display_name = "phoron glass"
+	stack_type = /obj/item/stack/material/glass/phoronglass
+	flags = MATERIAL_BRITTLE
+	ignition_point = PHORON_MINIMUM_BURN_TEMPERATURE+300
+	integrity = 200 // idk why but phoron windows are strong, so.
+	icon_colour = "#FC2BC5"
+	stack_origin_tech = list(TECH_MATERIAL = 3, TECH_PHORON = 2)
+	created_window = /obj/structure/window/phoronbasic
+	wire_product = null
+	rod_product = /obj/item/stack/material/glass/phoronrglass
+
+/material/glass/phoron/reinforced
+	name = "rphglass"
+	display_name = "reinforced phoron glass"
+	stack_type = /obj/item/stack/material/glass/phoronrglass
+	stack_origin_tech = list(TECH_MATERIAL = 4, TECH_PHORON = 2)
+	composite_material = list() //todo
+	created_window = /obj/structure/window/phoronreinforced
+	hardness = 40
+	weight = 30
 	stack_origin_tech = list(TECH_MATERIAL = 2)
 	composite_material = list() //todo
+	rod_product = null
 
 /material/plastic
 	name = "plastic"
@@ -325,19 +490,30 @@ var/list/name_to_material
 	icon_colour = "#CCCCCC"
 	hardness = 10
 	weight = 12
+	melting_point = T0C+371 //assuming heat resistant plastic
 	stack_origin_tech = list(TECH_MATERIAL = 3)
+
+/material/plastic/holographic
+	name = "holoplastic"
+	display_name = "plastic"
+	stack_type = null
+	shard_type = SHARD_NONE
 
 /material/osmium
 	name = "osmium"
 	stack_type = /obj/item/stack/material/osmium
 	icon_colour = "#9999FF"
 	stack_origin_tech = list(TECH_MATERIAL = 5)
+	sheet_singular_name = "ingot"
+	sheet_plural_name = "ingots"
 
 /material/tritium
 	name = "tritium"
 	stack_type = /obj/item/stack/material/tritium
 	icon_colour = "#777777"
 	stack_origin_tech = list(TECH_MATERIAL = 5)
+	sheet_singular_name = "ingot"
+	sheet_plural_name = "ingots"
 
 /material/mhydrogen
 	name = "mhydrogen"
@@ -351,12 +527,16 @@ var/list/name_to_material
 	icon_colour = "#9999FF"
 	weight = 27
 	stack_origin_tech = list(TECH_MATERIAL = 2)
+	sheet_singular_name = "ingot"
+	sheet_plural_name = "ingots"
 
 /material/iron
 	name = "iron"
 	stack_type = /obj/item/stack/material/iron
 	icon_colour = "#5C5454"
 	weight = 22
+	sheet_singular_name = "ingot"
+	sheet_plural_name = "ingots"
 
 // Adminspawn only, do not let anyone get this.
 /material/voxalloy
@@ -381,13 +561,17 @@ var/list/name_to_material
 	shard_can_repair = 0 // you can't weld splinters back into planks
 	hardness = 15
 	weight = 18
+	melting_point = T0C+300 //okay, not melting in this case, but hot enough to destroy wood
+	ignition_point = T0C+288
 	stack_origin_tech = list(TECH_MATERIAL = 1, TECH_BIO = 1)
 	dooropen_noise = 'sound/effects/doorcreaky.ogg'
 	door_icon_base = "wood"
 	destruction_desc = "splinters"
+	sheet_singular_name = "plank"
+	sheet_plural_name = "planks"
 
 /material/wood/holographic
-	name = "holographic wood"
+	name = "holowood"
 	display_name = "wood"
 	stack_type = null
 	shard_type = SHARD_NONE
@@ -402,6 +586,8 @@ var/list/name_to_material
 	icon_colour = "#AAAAAA"
 	hardness = 1
 	weight = 1
+	ignition_point = T0C+232 //"the temperature at which book-paper catches fire, and burns." close enough
+	melting_point = T0C+232 //temperature at which cardboard walls would be destroyed
 	stack_origin_tech = list(TECH_MATERIAL = 1)
 	door_icon_base = "wood"
 	destruction_desc = "crumples"
@@ -410,6 +596,8 @@ var/list/name_to_material
 	name = "cloth"
 	stack_origin_tech = list(TECH_MATERIAL = 2)
 	door_icon_base = "wood"
+	ignition_point = T0C+232
+	melting_point = T0C+300
 	flags = MATERIAL_PADDING
 
 /material/cult
@@ -419,6 +607,8 @@ var/list/name_to_material
 	icon_colour = "#402821"
 	icon_reinf = "reinf_cult"
 	shard_type = SHARD_STONE_PIECE
+	sheet_singular_name = "brick"
+	sheet_plural_name = "bricks"
 
 /material/cult/place_dismantled_girder(var/turf/target)
 	new /obj/structure/girder/cult(target)
@@ -438,6 +628,9 @@ var/list/name_to_material
 	icon_colour = "#E85DD8"
 	dooropen_noise = 'sound/effects/attackblob.ogg'
 	door_icon_base = "resin"
+	melting_point = T0C+300
+	sheet_singular_name = "blob"
+	sheet_plural_name = "blobs"
 
 /material/resin/can_open_material_door(var/mob/living/user)
 	var/mob/living/carbon/M = user
@@ -451,6 +644,8 @@ var/list/name_to_material
 	icon_colour = "#5C4831"
 	stack_origin_tech = list(TECH_MATERIAL = 2)
 	flags = MATERIAL_PADDING
+	ignition_point = T0C+300
+	melting_point = T0C+300
 
 /material/carpet
 	name = "carpet"
@@ -458,12 +653,18 @@ var/list/name_to_material
 	use_name = "red upholstery"
 	icon_colour = "#DA020A"
 	flags = MATERIAL_PADDING
+	ignition_point = T0C+232
+	melting_point = T0C+300
+	sheet_singular_name = "tile"
+	sheet_plural_name = "tiles"
 
 /material/cotton
 	name = "cotton"
 	display_name ="cotton"
 	icon_colour = "#FFFFFF"
 	flags = MATERIAL_PADDING
+	ignition_point = T0C+232
+	melting_point = T0C+300
 
 /material/cloth_teal
 	name = "teal"
@@ -471,6 +672,8 @@ var/list/name_to_material
 	use_name = "teal cloth"
 	icon_colour = "#00EAFA"
 	flags = MATERIAL_PADDING
+	ignition_point = T0C+232
+	melting_point = T0C+300
 
 /material/cloth_black
 	name = "black"
@@ -478,6 +681,8 @@ var/list/name_to_material
 	use_name = "black cloth"
 	icon_colour = "#505050"
 	flags = MATERIAL_PADDING
+	ignition_point = T0C+232
+	melting_point = T0C+300
 
 /material/cloth_green
 	name = "green"
@@ -485,6 +690,8 @@ var/list/name_to_material
 	use_name = "green cloth"
 	icon_colour = "#01C608"
 	flags = MATERIAL_PADDING
+	ignition_point = T0C+232
+	melting_point = T0C+300
 
 /material/cloth_puple
 	name = "purple"
@@ -492,6 +699,8 @@ var/list/name_to_material
 	use_name = "purple cloth"
 	icon_colour = "#9C56C4"
 	flags = MATERIAL_PADDING
+	ignition_point = T0C+232
+	melting_point = T0C+300
 
 /material/cloth_blue
 	name = "blue"
@@ -499,6 +708,8 @@ var/list/name_to_material
 	use_name = "blue cloth"
 	icon_colour = "#6B6FE3"
 	flags = MATERIAL_PADDING
+	ignition_point = T0C+232
+	melting_point = T0C+300
 
 /material/cloth_beige
 	name = "beige"
@@ -506,6 +717,8 @@ var/list/name_to_material
 	use_name = "beige cloth"
 	icon_colour = "#E8E7C8"
 	flags = MATERIAL_PADDING
+	ignition_point = T0C+232
+	melting_point = T0C+300
 
 /material/cloth_lime
 	name = "lime"
@@ -513,3 +726,5 @@ var/list/name_to_material
 	use_name = "lime cloth"
 	icon_colour = "#62E36C"
 	flags = MATERIAL_PADDING
+	ignition_point = T0C+232
+	melting_point = T0C+300

@@ -226,14 +226,15 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 
 //Returns the firelevel
 /datum/gas_mixture/proc/zburn(zone/zone, force_burn, no_check = 0)
-	#ifdef FIREDBG
-	log_debug("***************** FIREDBG *****************")
-	if(zone) log_debug("Burning [zone.name]!")
-	#endif
-
 	. = 0
 	if((temperature > PHORON_MINIMUM_BURN_TEMPERATURE || force_burn) && (no_check ||check_recombustability(zone? zone.fuel_objs : null)))
-		var/gas_fuel = 0 //in the case of mixed gas/liquid fires, the gas burns first.
+	
+		#ifdef FIREDBG
+		log_debug("***************** FIREDBG *****************")
+		log_debug("Burning [zone? zone.name : "zoneless gas_mixture"]!")
+		#endif
+	
+		var/gas_fuel = 0
 		var/liquid_fuel = 0
 		var/total_fuel = 0
 		var/total_oxidizers = 0
@@ -269,36 +270,40 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 
 		//calculate the firelevel.
 		var/firelevel = calculate_firelevel(total_fuel, total_oxidizers, reaction_limit)
+		var/firelevel_ratio = firelevel / vsc.fire_firelevel_multiplier
 		
-
-		//vapour fuels are extremely volatile! The reaction progress is a percentage of the total fuel (similar to old zburn).
-		var/gas_reaction_progress = min(0.2, (firelevel/vsc.fire_firelevel_multiplier))*gas_fuel*FIRE_GAS_BURNRATE_MULT
+		//vapour fuels are extremely volatile! The reaction progress is a percentage of the total fuel (similar to old zburn).)
+		var/min_burn = 0.30*volume*group_multiplier/CELL_VOLUME //in moles - so that fires with very small gas concentrations burn out fast
+		var/gas_reaction_progress = min(max(min_burn, firelevel_ratio*gas_fuel)*FIRE_GAS_BURNRATE_MULT, gas_fuel)
 
 		//liquid fuels are not as volatile, and the reaction progress depends on the size of the area that is burning. Limit the burn rate to a certain amount per area.
-		var/liquid_reaction_progress = ((firelevel/vsc.fire_firelevel_multiplier)*0.2 + 0.05)*fuel_area*FIRE_LIQUID_BURNRATE_MULT
+		var/liquid_reaction_progress = min((firelevel_ratio*0.2 + 0.05)*fuel_area*FIRE_LIQUID_BURNRATE_MULT, liquid_fuel)
 
 		var/total_reaction_progress = gas_reaction_progress + liquid_reaction_progress
 		var/used_fuel = min(total_reaction_progress, reaction_limit)
 		var/used_oxidizers = used_fuel*(FIRE_REACTION_OXIDIZER_AMOUNT/FIRE_REACTION_FUEL_AMOUNT)
 		
 		#ifdef FIREDBG
+		log_debug("gas_fuel = [gas_fuel], liquid_fuel = [liquid_fuel], total_oxidizers = [total_oxidizers]")
+		log_debug("fuel_area = [fuel_area], total_fuel = [total_fuel], reaction_limit = [reaction_limit]")
 		log_debug("firelevel -> [firelevel] / [vsc.fire_firelevel_multiplier]")
 		log_debug("liquid_reaction_progress = [liquid_reaction_progress]")
 		log_debug("gas_reaction_progress = [gas_reaction_progress]")
-		log_debug("used_fuel = [used_fuel]; used_oxidizers = [used_oxidizers]; reaction_limit=[reaction_limit]")
+		log_debug("total_reaction_progress = [total_reaction_progress]")
+		log_debug("used_fuel = [used_fuel], used_oxidizers = [used_oxidizers]; ")
 		#endif
 
 		//if the reaction is progressing too slow then it isn't self-sustaining anymore and burns out
 		if(zone) //be less restrictive with canister and tank reactions
-			if((!liquid_fuel || used_fuel <= FIRE_LIQUD_MIN_BURNRATE) && (!gas_fuel || used_fuel <= FIRE_GAS_MIN_BURNRATE*group_multiplier))
+			if((!liquid_fuel || used_fuel <= FIRE_LIQUD_MIN_BURNRATE) && (!gas_fuel || used_fuel <= FIRE_GAS_MIN_BURNRATE*zone.contents.len))
 				return 0
 
 
 		//*** Remove fuel and oxidizer, add carbon dioxide and heat
 
 		//remove and add gasses as calculated
-		var/used_gas_fuel = between(0.25, used_fuel*(gas_reaction_progress/total_reaction_progress), gas_fuel) //remove in proportion to the relative reaction progress
-		var/used_liquid_fuel = between(0.25, used_fuel-used_gas_fuel, liquid_fuel)
+		var/used_gas_fuel = min(max(0.25, used_fuel*(gas_reaction_progress/total_reaction_progress)), gas_fuel) //remove in proportion to the relative reaction progress
+		var/used_liquid_fuel = min(max(0.25, used_fuel-used_gas_fuel), liquid_fuel)
 
 		//remove_by_flag() and adjust_gas() handle the group_multiplier for us.
 		remove_by_flag(XGM_GAS_OXIDIZER, used_oxidizers)
@@ -309,10 +314,10 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 			zone.remove_liquidfuel(used_liquid_fuel, !check_combustability())
 
 		//calculate the energy produced by the reaction and then set the new temperature of the mix
-		temperature = (starting_energy + vsc.fire_fuel_energy_release * used_fuel) / heat_capacity()
+		temperature = (starting_energy + vsc.fire_fuel_energy_release * (used_gas_fuel + used_liquid_fuel)) / heat_capacity()
 		
 		#ifdef FIREDBG
-		log_debug("used_gas_fuel = [used_gas_fuel]; used_liquid_fuel = [used_liquid_fuel]; total = [used_gas_fuel+used_liquid_fuel]")
+		log_debug("used_gas_fuel = [used_gas_fuel]; used_liquid_fuel = [used_liquid_fuel]; total = [used_fuel]")
 		log_debug("new temperature = [temperature]")
 		#endif
 
@@ -353,7 +358,7 @@ datum/gas_mixture/proc/check_recombustability(list/fuel_objs)
 
 	. = 0
 	for(var/g in gas)
-		if(gas_data.flags[g] & XGM_GAS_FUEL && QUANTIZE(gas[g] * vsc.fire_consuption_rate) >= 0.1)
+		if(gas_data.flags[g] & XGM_GAS_FUEL && QUANTIZE(gas[g] * vsc.fire_consuption_rate) >= 0.005)
 			. = 1
 			break
 

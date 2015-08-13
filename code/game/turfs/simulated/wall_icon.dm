@@ -8,7 +8,7 @@
 	else
 		construction_stage = null
 	if(!material)
-		material = name_to_material[DEFAULT_WALL_MATERIAL]
+		material = get_material_by_name(DEFAULT_WALL_MATERIAL)
 	if(material)
 		explosion_resistance = material.explosion_resistance
 	if(reinf_material && reinf_material.explosion_resistance > explosion_resistance)
@@ -44,6 +44,7 @@
 		return
 
 	overlays.Cut()
+	damage_overlay = 0
 
 	if(!wall_cache["[new_state]-[material.icon_colour]"])
 		var/image/I = image(icon='icons/turf/wall_masks.dmi',icon_state="[new_state]")
@@ -74,7 +75,6 @@
 	check_relatives(1)
 
 /turf/simulated/wall/proc/update_icon()
-
 	if(!material)
 		return
 
@@ -86,15 +86,23 @@
 	else
 		set_wall_state("[material.icon_base]fwall_open")
 
-	var/dmg_amt = material.integrity
-	if(reinf_material)
-		dmg_amt += reinf_material.integrity
-	var/overlay = round(damage / dmg_amt * damage_overlays.len) + 1
-	if(overlay > damage_overlays.len)
-		overlay = damage_overlays.len
-	if(density)
+	if(damage == 0)
+		if(damage_overlay != 0)
+			overlays -= damage_overlays[damage_overlay]
+		damage_overlay = 0
+	else if(density)
+		var/integrity = material.integrity
+		if(reinf_material)
+			integrity += reinf_material.integrity
+
+		var/overlay = round(damage / integrity * damage_overlays.len) + 1
+		if(overlay > damage_overlays.len)
+			overlay = damage_overlays.len
+
 		if(damage_overlay && overlay == damage_overlay) //No need to update.
 			return
+
+		if(damage_overlay) overlays -= damage_overlays[damage_overlay]
 		overlays += damage_overlays[overlay]
 		damage_overlay = overlay
 	return
@@ -129,6 +137,6 @@
 	return
 
 /turf/simulated/wall/proc/can_join_with(var/turf/simulated/wall/W)
-	if(material && W.material && material.name == W.material.name)
+	if(material && W.material && material.icon_base == W.material.icon_base)
 		return 1
 	return 0

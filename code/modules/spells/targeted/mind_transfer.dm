@@ -12,6 +12,7 @@
 	cooldown_min = 200 //100 deciseconds reduction per rank
 	compatible_mobs = list(/mob/living/carbon/human) //which types of mobs are affected by the spell. NOTE: change at your own risk
 
+	// TODO: Update to new antagonist system.
 	var/list/protected_roles = list("Wizard","Changeling","Cultist") //which roles are immune to the spell
 	var/msg_wait = 500 //how long in deciseconds it waits before telling that body doesn't feel right or mind swap robbed of a spell
 	amt_paralysis = 20 //how much the victim is paralysed for after the spell
@@ -50,7 +51,10 @@
 		ghost.spell_list = victim.spell_list//If they have spells, transfer them. Now we basically have a backup mob.
 
 		caster.mind.transfer_to(victim)
-		victim.spell_list = caster.spell_list//Now they are inside the victim's body.
+		victim.spell_list = list() //clear those out
+		for(var/spell/S in caster.spell_list)
+			victim.add_spell(S) //Now they are inside the victim's body - this also generates the HUD
+		caster.spell_list = list() //clean that out as well
 
 		if(victim.mind.special_verbs.len)//To add all the special verbs for the original caster.
 			for(var/V in caster.mind.special_verbs)//Not too important but could come into play.
@@ -58,7 +62,9 @@
 
 		ghost.mind.transfer_to(caster)
 		caster.key = ghost.key	//have to transfer the key since the mind was not active
-		caster.spell_list = ghost.spell_list
+		for(var/spell/S in ghost.spell_list)
+			caster.add_spell(S)
+		ghost.spell_list = list()
 
 		if(caster.mind.special_verbs.len)//If they had any special verbs, we add them here.
 			for(var/V in caster.mind.special_verbs)
@@ -70,4 +76,4 @@
 
 		//After a certain amount of time the victim gets a message about being in a different body.
 		spawn(msg_wait)
-			caster << "\red You feel woozy and lightheaded. <b>Your body doesn't seem like your own.</b>"
+			caster << "<span class='danger'>You feel woozy and lightheaded. Your body doesn't seem like your own.</span>"

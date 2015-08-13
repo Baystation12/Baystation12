@@ -34,23 +34,13 @@
 					return
 			else
 				user << "<span class='warning'>Access Denied</span>"
-		else if((istype(W, /obj/item/weapon/card/emag)||istype(W, /obj/item/weapon/melee/energy/blade)) && !src.broken)
-			broken = 1
-			locked = 0
-			desc = "It appears to be broken."
-			icon_state = src.icon_broken
-			if(istype(W, /obj/item/weapon/melee/energy/blade))
+		else if(istype(W, /obj/item/weapon/melee/energy/blade))
+			if(emag_act(INFINITY, user, "The locker has been sliced open by [user] with an energy blade!", "You hear metal being sliced and sparks flying."))
 				var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
 				spark_system.set_up(5, 0, src.loc)
 				spark_system.start()
 				playsound(src.loc, 'sound/weapons/blade1.ogg', 50, 1)
 				playsound(src.loc, "sparks", 50, 1)
-				for(var/mob/O in viewers(user, 3))
-					O.show_message(text("<span class='warning'>The locker has been sliced open by [] with an energy blade!</span>", user), 1, text("<span class='warning'>You hear metal being sliced and sparks flying.</span>"), 2)
-			else
-				for(var/mob/O in viewers(user, 3))
-					O.show_message(text("<span class='warning'>The locker has been broken by [] with an electromagnetic card!</span>", user), 1, text("You hear a faint electrical spark."), 2)
-
 		if(!locked)
 			..()
 		else
@@ -65,6 +55,23 @@
 			..()
 		return
 
+/obj/item/weapon/storage/lockbox/emag_act(var/remaining_charges, var/mob/user, var/visual_feedback = "", var/audible_feedback = "")
+	if(!broken)
+		if(visual_feedback)
+			visual_feedback = "<span class='warning'>[visual_feedback]</span>"
+		else
+			visual_feedback = "<span class='warning'>The locker has been sliced open by [user] with an electromagnetic card!</span>"
+		if(audible_feedback)
+			audible_feedback = "<span class='warning'>[audible_feedback]</span>"
+		else
+			audible_feedback = "<span class='warning'>You hear a faint electrical spark.</span>"
+
+		broken = 1
+		locked = 0
+		desc = "It appears to be broken."
+		icon_state = src.icon_broken
+		visible_message(visual_feedback, audible_feedback)
+		return 1
 
 /obj/item/weapon/storage/lockbox/loyalty
 	name = "lockbox of loyalty implants"

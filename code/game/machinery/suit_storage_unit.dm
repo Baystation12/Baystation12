@@ -684,7 +684,7 @@
 			user << "<span class='danger'>There is no room inside the cycler for [G.affecting.name].</span>"
 			return
 
-		visible_message("[user] starts putting [G.affecting.name] into the suit cycler.</span>", 3)
+		visible_message("<span class='notice'>[user] starts putting [G.affecting.name] into the suit cycler.</span>", 3)
 
 		if(do_after(user, 20))
 			if(!G || !G.affecting) return
@@ -706,24 +706,6 @@
 		panel_open = !panel_open
 		user << "You [panel_open ?  "open" : "close"] the maintenance panel."
 		src.updateUsrDialog()
-		return
-
-	else if(istype(I,/obj/item/weapon/card/emag))
-
-		if(emagged)
-			user << "<span class='danger'>The cycler has already been subverted.</span>"
-			return
-
-		var/obj/item/weapon/card/emag/E = I
-		src.updateUsrDialog()
-		E.uses--
-
-		//Clear the access reqs, disable the safeties, and open up all paintjobs.
-		user << "<span class='danger'>You run the sequencer across the interface, corrupting the operating protocols.</span>"
-		departments = list("Engineering","Mining","Medical","Security","Atmos","^%###^%$")
-		emagged = 1
-		safeties = 0
-		req_access = list()
 		return
 
 	else if(istype(I,/obj/item/clothing/head/helmet/space) && !istype(I, /obj/item/clothing/head/helmet/space/rig))
@@ -773,6 +755,20 @@
 		return
 
 	..()
+	
+/obj/machinery/suit_cycler/emag_act(var/remaining_charges, var/mob/user)
+	if(emagged)
+		user << "<span class='danger'>The cycler has already been subverted.</span>"
+		return
+
+	//Clear the access reqs, disable the safeties, and open up all paintjobs.
+	user << "<span class='danger'>You run the sequencer across the interface, corrupting the operating protocols.</span>"
+	departments = list("Engineering","Mining","Medical","Security","Atmos","^%###^%$")
+	emagged = 1
+	safeties = 0
+	req_access = list()
+	src.updateUsrDialog()
+	return 1
 
 /obj/machinery/suit_cycler/attack_hand(mob/user as mob)
 

@@ -25,7 +25,7 @@
 /obj/structure/girder/bullet_act(var/obj/item/projectile/Proj)
 	//Girders only provide partial cover. There's a chance that the projectiles will just pass through. (unless you are trying to shoot the girder)
 	if(Proj.original != src && !prob(cover))
-		return -1 //pass through
+		return PROJECTILE_CONTINUE //pass through
 
 	//Tasers and the like should not damage girders.
 	if(!(Proj.damage_type == BRUTE || Proj.damage_type == BURN))
@@ -108,11 +108,11 @@
 
 	else if(istype(W, /obj/item/stack/material))
 
-		var/obj/item/stack/material/S = W
+		var/obj/item/stack/S = W
 		if(S.get_amount() < 2)
 			return ..()
 
-		var/material/M = name_to_material[S.default_type]
+		var/material/M = S.get_material()
 		if(!istype(M))
 			return ..()
 
@@ -149,7 +149,7 @@
 		if (P.pipe_type in list(0, 1, 5))	//simple pipes, simple bends, and simple manifolds.
 			user.drop_item()
 			P.loc = src.loc
-			user << "<span class='notice'>You fit the pipe into the [src]!"
+			user << "<span class='notice'>You fit the pipe into the [src]!</span>"
 	else
 		..()
 
@@ -183,7 +183,7 @@
 		user << "There is not enough material here to reinforce the girder."
 		return
 
-	var/material/M = name_to_material[S.default_type]
+	var/material/M = S.get_material()
 	if(!istype(M) || M.integrity < 50)
 		user << "You cannot reinforce \the [src] with that; it is too soft."
 		return
@@ -248,7 +248,7 @@
 			dismantle()
 
 	else if(istype(W, /obj/item/weapon/pickaxe/plasmacutter))
-		user << "<span class='notice'>Now slicing apart the girder..."
+		user << "<span class='notice'>Now slicing apart the girder...</span>"
 		if(do_after(user,30))
 			user << "<span class='notice'>You slice apart the girder!</span>"
 		dismantle()

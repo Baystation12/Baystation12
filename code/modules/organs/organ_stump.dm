@@ -14,7 +14,7 @@
 	..(holder, internal)
 	if(istype(limb))
 		max_damage = limb.max_damage
-		if((limb.status & ORGAN_ROBOT) && (!parent || (parent.status & ORGAN_ROBOT))) 
+		if((limb.status & ORGAN_ROBOT) && (!parent || (parent.status & ORGAN_ROBOT)))
 			robotize() //if both limb and the parent are robotic, the stump is robotic too
 
 /obj/item/organ/external/stump/is_stump()
@@ -23,3 +23,6 @@
 /obj/item/organ/external/stump/removed()
 	..()
 	qdel(src)
+
+/obj/item/organ/external/stump/is_usable()
+	return 0

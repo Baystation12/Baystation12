@@ -2,16 +2,16 @@
 
 	standard
 		icon_state = "plain_preview"
+		color = "#EEEEEE"
+		New()
+			material = get_material_by_name(DEFAULT_TABLE_MATERIAL)
+			..()
+
+	steel
+		icon_state = "plain_preview"
 		color = "#666666"
 		New()
 			material = get_material_by_name(DEFAULT_WALL_MATERIAL)
-			..()
-
-	plastic
-		icon_state = "plain_preview"
-		color = "#EEEEEE"
-		New()
-			material = get_material_by_name("plastic")
 			..()
 
 	marble
@@ -22,6 +22,14 @@
 			..()
 
 	reinforced
+		icon_state = "reinf_preview"
+		color = "#EEEEEE"
+		New()
+			material = get_material_by_name(DEFAULT_TABLE_MATERIAL)
+			reinforced = get_material_by_name(DEFAULT_WALL_MATERIAL)
+			..()
+	
+	steel_reinforced
 		icon_state = "reinf_preview"
 		color = "#666666"
 		New()
@@ -53,13 +61,13 @@
 
 	holotable
 		icon_state = "holo_preview"
-		color = "#666666"
+		color = "#EEEEEE"
 		New()
-			material = get_material_by_name("holographic [DEFAULT_WALL_MATERIAL]")
+			material = get_material_by_name("holo[DEFAULT_TABLE_MATERIAL]")
 			..()
 
 	woodentable/holotable
 		icon_state = "holo_preview"
 		New()
-			material = get_material_by_name("holographic wood")
+			material = get_material_by_name("holowood")
 			..()
