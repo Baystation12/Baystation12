@@ -160,8 +160,7 @@ var/const/enterloopsanity = 100
 
 /turf/proc/levelupdate()
 	for(var/obj/O in src)
-		if(O.hides_under_flooring())
-			O.hide(src.intact)
+		O.hide(O.hides_under_flooring() && src.intact)
 
 /turf/proc/AdjacentTurfs()
 	var/L[] = new()

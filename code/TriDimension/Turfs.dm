@@ -81,8 +81,7 @@
 // override to make sure nothing is hidden
 /turf/simulated/floor/open/levelupdate()
 	for(var/obj/O in src)
-		if(O.level == 1)
-			O.hide(0)
+		O.hide(0)
 
 //overwrite the attackby of space to transform it to openspace if necessary
 /turf/space/attackby(obj/item/C as obj, mob/user as mob)

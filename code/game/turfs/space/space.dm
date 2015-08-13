@@ -20,8 +20,7 @@
 // override for space turfs, since they should never hide anything
 /turf/space/levelupdate()
 	for(var/obj/O in src)
-		if(O.level == 1)
-			O.hide(0)
+		O.hide(0)
 
 /turf/space/proc/update_starlight()
 	if(!config.starlight)

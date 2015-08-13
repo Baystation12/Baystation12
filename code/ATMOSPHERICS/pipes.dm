@@ -2,7 +2,6 @@
 
 	var/datum/gas_mixture/air_temporary // used when reconstructing a pipeline that broke
 	var/datum/pipeline/parent
-	var/under_flooring = 1              // Set to 0 for the pipe to begin above the floor; useful for mapping.
 	var/volume = 0
 	force = 20
 
@@ -22,11 +21,11 @@
 /obj/machinery/atmospherics/pipe/New()
 	..()
 	//so pipes under walls are hidden
-	if(under_flooring && istype(get_turf(src), /turf/simulated/wall) || istype(get_turf(src), /turf/simulated/shuttle/wall) || istype(get_turf(src), /turf/unsimulated/wall))
+	if(hides_under_flooring() && (istype(get_turf(src), /turf/simulated/wall) || istype(get_turf(src), /turf/simulated/shuttle/wall) || istype(get_turf(src), /turf/unsimulated/wall)))
 		level = 1
 
 /obj/machinery/atmospherics/pipe/hides_under_flooring()
-	return 1
+	return level != 2
 
 /obj/machinery/atmospherics/pipe/proc/pipeline_expansion()
 	return null
