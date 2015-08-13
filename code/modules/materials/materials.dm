@@ -361,7 +361,7 @@ var/list/name_to_material
 	weight = 15
 	door_icon_base = "stone"
 	destruction_desc = "shatters"
-	window_options = list("One Direction", "Full Window")
+	window_options = list("One Direction" = 1, "Full Window" = 4)
 	created_window = /obj/structure/window/basic
 	wire_product = /obj/item/stack/light_w
 	rod_product = /obj/item/stack/material/glass/reinforced
@@ -419,9 +419,8 @@ var/list/name_to_material
 		return 1
 
 	var/build_path = /obj/structure/windoor_assembly
-	var/sheets_needed = 4
+	var/sheets_needed = window_options[choice]
 	if(choice == "Windoor")
-		sheets_needed = 5
 		build_dir = user.dir
 	else
 		build_path = created_window
@@ -452,7 +451,7 @@ var/list/name_to_material
 	weight = 30
 	stack_origin_tech = "materials=2"
 	composite_material = list(DEFAULT_WALL_MATERIAL = 1875,"glass" = 3750)
-	window_options = list("One Direction", "Full Window", "Windoor")
+	window_options = list("One Direction" = 1, "Full Window" = 4, "Windoor" = 5)
 	created_window = /obj/structure/window/reinforced
 	wire_product = null
 	rod_product = null

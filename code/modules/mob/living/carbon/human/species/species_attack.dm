@@ -9,11 +9,15 @@
 /datum/unarmed_attack/diona
 	attack_verb = list("lashed", "bludgeoned")
 	attack_noun = list("tendril")
+	eye_attack_text = "a tendril"
+	eye_attack_text_victim = "a tendril"
 	damage = 5
 
 /datum/unarmed_attack/claws
 	attack_verb = list("scratched", "clawed", "slashed")
 	attack_noun = list("claws")
+	eye_attack_text = "claws"
+	eye_attack_text_victim = "sharp claws"
 	attack_sound = 'sound/weapons/slice.ogg'
 	miss_sound = 'sound/weapons/slashmiss.ogg'
 	damage = 5

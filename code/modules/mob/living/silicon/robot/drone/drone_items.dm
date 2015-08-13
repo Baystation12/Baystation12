@@ -14,6 +14,7 @@
 		/obj/item/weapon/firealarm_electronics,
 		/obj/item/weapon/airalarm_electronics,
 		/obj/item/weapon/airlock_electronics,
+		/obj/item/weapon/tracker_electronics,
 		/obj/item/weapon/module/power_control,
 		/obj/item/weapon/stock_parts,
 		/obj/item/frame,

@@ -246,7 +246,13 @@ var/global/list/additional_antag_types = list()
 		return 1
 
 	var/datum/antagonist/main_antags = antag_templates[1]
-	if(main_antags.candidates.len >= required_enemies)
+	var/list/potential
+	if(main_antags.flags & ANTAG_OVERRIDE_JOB)
+		potential = main_antags.pending_antagonists
+	else
+		potential = main_antags.candidates
+
+	if(potential.len >= required_enemies)
 		return 1
 	return 0
 
@@ -263,7 +269,7 @@ var/global/list/additional_antag_types = list()
 /datum/game_mode/proc/pre_setup()
 	for(var/datum/antagonist/antag in antag_templates)
 		antag.build_candidate_list() //compile a list of all eligible candidates
-		
+
 		//antag roles that replace jobs need to be assigned before the job controller hands out jobs.
 		if(antag.flags & ANTAG_OVERRIDE_JOB)
 			antag.attempt_spawn() //select antags to be spawned
@@ -359,14 +365,13 @@ var/global/list/additional_antag_types = list()
 /datum/game_mode/proc/declare_completion()
 
 	var/is_antag_mode = (antag_templates && antag_templates.len)
-	if(!config.objectives_disabled)
-		check_victory()
-		if(is_antag_mode)
+	check_victory()
+	if(is_antag_mode)
+		sleep(10)
+		for(var/datum/antagonist/antag in antag_templates)
 			sleep(10)
-			for(var/datum/antagonist/antag in antag_templates)
-				sleep(10)
-				antag.check_victory()
-				antag.print_player_summary()
+			antag.check_victory()
+			antag.print_player_summary()
 
 	var/clients = 0
 	var/surviving_humans = 0
