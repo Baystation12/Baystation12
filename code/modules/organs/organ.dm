@@ -26,6 +26,25 @@ var/list/organ_cache = list()
 	var/datum/dna/dna
 	var/datum/species/species
 
+/obj/item/organ/Destroy()
+	if(!owner)
+		return ..()
+
+	if(istype(owner, /mob/living/carbon))
+		if((owner.internal_organs) && (src in owner.internal_organs))
+			owner.internal_organs -= src
+		if(istype(owner, /mob/living/carbon/human))
+			if((owner.internal_organs_by_name) && (src in owner.internal_organs_by_name))
+				owner.internal_organs_by_name -= src
+			if((owner.organs) && (src in owner.organs))
+				owner.organs -= src
+			if((owner.organs_by_name) && (src in owner.organs_by_name))
+				owner.organs_by_name -= src
+	if(src in owner.contents)
+		owner.contents -= src
+
+	return ..()
+
 /obj/item/organ/proc/update_health()
 	return
 
@@ -97,6 +116,9 @@ var/list/organ_cache = list()
 		if(B && prob(40))
 			reagents.remove_reagent("blood",0.1)
 			blood_splatter(src,B,1)
+		if(config.organs_decay) damage += rand(1,3)
+		if(damage >= max_damage)
+			damage = max_damage
 		germ_level += rand(2,6)
 		if(germ_level >= INFECTION_LEVEL_TWO)
 			germ_level += rand(2,6)

@@ -13,20 +13,26 @@
 		matter = null
 
 /obj/item/stack/material/cyborg/plastic
+	icon_state = "sheet-plastic"
 	default_type = "plastic"
 
 /obj/item/stack/material/cyborg/steel
+	icon_state = "sheet-metal"
 	default_type = "steel"
 
 /obj/item/stack/material/cyborg/plasteel
+	icon_state = "sheet-plasteel"
 	default_type = "plasteel"
 
 /obj/item/stack/material/cyborg/wood
+	icon_state = "sheet-wood"
 	default_type = "wood"
 
 /obj/item/stack/material/cyborg/glass
+	icon_state = "sheet-glass"
 	default_type = "glass"
 
 /obj/item/stack/material/cyborg/glass/reinforced
-	default_type = "reinforced glass"
+	icon_state = "sheet-rglass"
+	default_type = "rglass"
 	charge_costs = list(500, 1000)

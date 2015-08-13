@@ -35,16 +35,12 @@
 	else
 		return null
 
-//Currently used only for cryo cells, because they are also pipes and so overriding their return_air() would break their pipe-behaviour.
-//If cryo cells are ever rewritten so that the part that contains the human is separate from the pipe part --
-//such as rewriting them so that they are a machine that contains a pipe segment (or a pipe that contains a machine that contains the human?) -- then this can be removed.
-/atom/proc/return_air_for_internal_lifeform()
-	return return_air()
-
+//return flags that should be added to the viewer's sight var. 
+//Otherwise return a negative number to indicate that the view should be cancelled.
 /atom/proc/check_eye(user as mob)
 	if (istype(user, /mob/living/silicon/ai)) // WHYYYY
-		return 1
-	return
+		return 0
+	return -1
 
 /atom/proc/on_reagent_change()
 	return
@@ -66,9 +62,6 @@
 	proc/can_add_container()
 		return flags & INSERT_CONTAINER
 */
-
-/atom/proc/allow_drop()
-	return 1
 
 /atom/proc/CheckExit()
 	return 1
@@ -220,6 +213,9 @@ its easier to just keep the beam vertical.
 
 /atom/proc/ex_act()
 	return
+	
+/atom/proc/emag_act(var/remaining_charges, var/mob/user, var/emag_source)
+	return -1
 
 /atom/proc/blob_act()
 	return
@@ -418,7 +414,7 @@ its easier to just keep the beam vertical.
 	src.color = initial(src.color) //paint
 	src.germ_level = 0
 	if(istype(blood_DNA, /list))
-		qdel(blood_DNA)
+		del(blood_DNA)
 		return 1
 
 

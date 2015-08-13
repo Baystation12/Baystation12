@@ -5,10 +5,9 @@
 		//Being dead doesn't mean your temperature never changes
 		var/turf/T = get_turf(src)
 
-		if (src.stat!=0)
+		if (src.stat!=CONSCIOUS)
 			src.cameraFollow = null
 			src.reset_view(null)
-			src.unset_machine()
 
 		src.updatehealth()
 
@@ -19,6 +18,7 @@
 		// If our powersupply object was destroyed somehow, create new one.
 		if(!psupply)
 			create_powersupply()
+
 
 		// Handle power damage (oxy)
 		if(aiRestorePowerRoutine != 0 && !APU_power)
@@ -151,7 +151,7 @@
 							theAPC = null
 
 	process_queued_alarms()
-	regular_hud_updates()
+	handle_regular_hud_updates()
 	switch(src.sensor_mode)
 		if (SEC_HUD)
 			process_sec_hud(src,0,src.eyeobj)

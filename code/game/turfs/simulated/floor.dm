@@ -29,7 +29,7 @@ var/list/wood_icons = list("wood","wood-broken")
 /turf/simulated/floor
 
 	//Note to coders, the 'intact' var can no longer be used to determine if the floor is a plating or not.
-	//Use the is_plating(), is_plasteel_floor() and is_light_floor() procs instead. --Errorage
+	//Use the is_plating(), is_steel_floor() and is_light_floor() procs instead. --Errorage
 	name = "floor"
 	icon = 'icons/turf/floors.dmi'
 	icon_state = "floor"
@@ -42,7 +42,7 @@ var/list/wood_icons = list("wood","wood-broken")
 	var/broken = 0
 	var/burnt = 0
 	var/mineral = DEFAULT_WALL_MATERIAL
-	var/floor_type = /obj/item/stack/tile/plasteel
+	var/floor_type = /obj/item/stack/tile/steel
 	var/lightfloor_state // for light floors, this is the state of the tile. 0-7, 0x4 is on-bit - use the helper procs below
 
 	proc/get_lightfloor_state()
@@ -102,12 +102,22 @@ var/list/wood_icons = list("wood","wood-broken")
 	return
 
 /turf/simulated/floor/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
+	
+	var/temp_destroy = get_damage_temperature()
 	if(!burnt && prob(5))
-		burn_tile()
-	else if(prob(1) && !is_plating())
-		make_plating()
-		burn_tile()
+		burn_tile(exposed_temperature)
+	else if(temp_destroy && exposed_temperature >= (temp_destroy + 100) && prob(1) && !is_plating())
+		make_plating() //destroy the tile, exposing plating
+		burn_tile(exposed_temperature)
 	return
+
+//should be a little bit lower than the temperature required to destroy the material
+/turf/simulated/floor/proc/get_damage_temperature()
+	if(is_steel_floor())	return T0C+1400
+	if(is_wood_floor())		return T0C+200
+	if(is_carpet_floor())	return T0C+200
+	if(is_grass_floor())	return T0C+80
+	return null
 
 /turf/simulated/floor/adjacent_fire_act(turf/simulated/floor/adj_turf, datum/gas_mixture/adj_air, adj_temp, adj_volume)
 	var/dir_to = get_dir(src, adj_turf)
@@ -122,7 +132,7 @@ var/list/wood_icons = list("wood","wood-broken")
 turf/simulated/floor/proc/update_icon()
 	if(lava)
 		return
-	else if(is_plasteel_floor())
+	else if(is_steel_floor())
 		if(!broken && !burnt)
 			icon_state = icon_regular_floor
 	else if(is_plating())
@@ -237,8 +247,8 @@ turf/simulated/floor/proc/update_icon()
 		make_plating()
 	break_tile()
 
-/turf/simulated/floor/is_plasteel_floor()
-	if(ispath(floor_type, /obj/item/stack/tile/plasteel))
+/turf/simulated/floor/is_steel_floor()
+	if(ispath(floor_type, /obj/item/stack/tile/steel))
 		return 1
 	else
 		return 0
@@ -277,7 +287,7 @@ turf/simulated/floor/proc/update_icon()
 	if(istype(src,/turf/simulated/floor/mech_bay_recharge_floor))
 		src.ChangeTurf(/turf/simulated/floor/plating)
 	if(broken) return
-	if(is_plasteel_floor())
+	if(is_steel_floor())
 		src.icon_state = "damaged[pick(1,2,3,4,5)]"
 		broken = 1
 	else if(is_light_floor())
@@ -296,28 +306,38 @@ turf/simulated/floor/proc/update_icon()
 		src.icon_state = "sand[pick("1","2","3")]"
 		broken = 1
 
-/turf/simulated/floor/proc/burn_tile()
+/turf/simulated/floor/proc/burn_tile(var/exposed_temperature)
 	if(istype(src,/turf/simulated/floor/engine)) return
 	if(istype(src,/turf/simulated/floor/plating/airless/asteroid)) return//Asteroid tiles don't burn
-	if(broken || burnt) return
-	if(is_plasteel_floor())
-		src.icon_state = "damaged[pick(1,2,3,4,5)]"
-		burnt = 1
-	else if(is_plasteel_floor())
+	
+	var/damage_temp = get_damage_temperature()
+	
+	if(broken) return
+	if(burnt)
+		if(is_steel_floor() && exposed_temperature >= damage_temp) //allow upgrading from scorched tiles to damaged tiles
+			src.icon_state = "damaged[pick(1,2,3,4,5)]"
+			broken = 1
+		return
+	
+	if(is_steel_floor() && exposed_temperature >= T0C+300) //enough to char the floor, but not hot enough to actually burn holes in it
 		src.icon_state = "floorscorched[pick(1,2)]"
 		burnt = 1
-	else if(is_plating())
-		src.icon_state = "panelscorched"
-		burnt = 1
-	else if(is_wood_floor())
-		src.icon_state = "wood-broken"
-		burnt = 1
-	else if(is_carpet_floor())
-		src.icon_state = "carpet-broken"
-		burnt = 1
-	else if(is_grass_floor())
-		src.icon_state = "sand[pick("1","2","3")]"
-		burnt = 1
+	else if(exposed_temperature >= damage_temp)
+		if(is_steel_floor())
+			src.icon_state = "damaged[pick(1,2,3,4,5)]"
+			burnt = 1
+		else if(is_plating())
+			src.icon_state = "panelscorched"
+			burnt = 1
+		else if(is_wood_floor())
+			src.icon_state = "wood-broken"
+			burnt = 1
+		else if(is_carpet_floor())
+			src.icon_state = "carpet-broken"
+			burnt = 1
+		else if(is_grass_floor())
+			src.icon_state = "sand[pick("1","2","3")]"
+			burnt = 1
 
 //This proc will set floor_type to null and the update_icon() proc will then change the icon_state of the turf
 //This proc auto corrects the grass tiles' siding.
@@ -351,13 +371,13 @@ turf/simulated/floor/proc/update_icon()
 //This proc will make the turf a plasteel floor tile. The expected argument is the tile to make the turf with
 //If none is given it will make a new object. dropping or unequipping must be handled before or after calling
 //this proc.
-/turf/simulated/floor/proc/make_plasteel_floor(var/obj/item/stack/tile/plasteel/T = null)
+/turf/simulated/floor/proc/make_plasteel_floor(var/obj/item/stack/tile/steel/T = null)
 	broken = 0
 	burnt = 0
 	intact = 1
 	set_light(0)
 	if(T)
-		if(istype(T,/obj/item/stack/tile/plasteel))
+		if(istype(T,/obj/item/stack/tile/steel))
 			floor_type = T.type
 			if (icon_regular_floor)
 				icon_state = icon_regular_floor
@@ -368,7 +388,7 @@ turf/simulated/floor/proc/update_icon()
 			levelupdate()
 			return
 	//if you gave a valid parameter, it won't get thisf ar.
-	floor_type = /obj/item/stack/tile/plasteel
+	floor_type = /obj/item/stack/tile/steel
 	icon_state = "floor"
 	icon_regular_floor = icon_state
 
@@ -488,7 +508,7 @@ turf/simulated/floor/proc/update_icon()
 			return
 		else
 			if(is_wood_floor())
-				user << "<span class='notice'>You unscrew the planks.<span>"
+				user << "<span class='notice'>You unscrew the planks.</span>"
 				new floor_type(src)
 
 		make_plating()

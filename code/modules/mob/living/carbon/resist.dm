@@ -3,7 +3,7 @@
 
 	//drop && roll
 	if(on_fire)
-		fire_stacks -= 2 //reduced
+		fire_stacks -= 1.2
 		Weaken(3)
 		spin(32,2)
 		visible_message(
@@ -19,12 +19,12 @@
 			ExtinguishMob()
 		return
 
+	..()
+	
 	if(handcuffed)
 		spawn() escape_handcuffs()
 	else if(legcuffed)
 		spawn() escape_legcuffs()
-
-	..()
 
 /mob/living/carbon/proc/escape_handcuffs()
 	if(!(last_special <= world.time)) return

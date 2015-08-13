@@ -686,14 +686,6 @@
 
 /obj/mecha/attackby(obj/item/weapon/W as obj, mob/user as mob)
 
-
-	if(istype(W, /obj/item/device/mmi))
-		if(mmi_move_inside(W,user))
-			user << "[src]-MMI interface initialized successfuly"
-		else
-			user << "[src]-MMI interface initialization failed."
-		return
-
 	if(istype(W, /obj/item/mecha_parts/mecha_equipment))
 		var/obj/item/mecha_parts/mecha_equipment/E = W
 		spawn()
@@ -1051,65 +1043,6 @@
 		src.icon_state = src.reset_icon()
 		set_dir(dir_in)
 		playsound(src, 'sound/machines/windowdoor.ogg', 50, 1)
-		if(!hasInternalDamage())
-			src.occupant << sound('sound/mecha/nominal.ogg',volume=50)
-		return 1
-	else
-		return 0
-
-/obj/mecha/proc/mmi_move_inside(var/obj/item/device/mmi/mmi_as_oc as obj,mob/user as mob)
-	if(!mmi_as_oc.brainmob || !mmi_as_oc.brainmob.client)
-		user << "Consciousness matrix not detected."
-		return 0
-	else if(mmi_as_oc.brainmob.stat)
-		user << "Beta-rhythm below acceptable level."
-		return 0
-	else if(occupant)
-		user << "Occupant detected."
-		return 0
-	else if(dna && dna!=mmi_as_oc.brainmob.dna.unique_enzymes)
-		user << "Stop it!"
-		return 0
-	//Added a message here since people assume their first click failed or something./N
-//	user << "Installing MMI, please stand by."
-
-	visible_message("<span class='notice'>[usr] starts to insert an MMI into [src.name]</span>")
-
-	if(enter_after(40,user))
-		if(!occupant)
-			return mmi_moved_inside(mmi_as_oc,user)
-		else
-			user << "Occupant detected."
-	else
-		user << "You stop inserting the MMI."
-	return 0
-
-/obj/mecha/proc/mmi_moved_inside(var/obj/item/device/mmi/mmi_as_oc as obj,mob/user as mob)
-	if(mmi_as_oc && user in range(1))
-		if(!mmi_as_oc.brainmob || !mmi_as_oc.brainmob.client)
-			user << "Consciousness matrix not detected."
-			return 0
-		else if(mmi_as_oc.brainmob.stat)
-			user << "Beta-rhythm below acceptable level."
-			return 0
-		user.drop_from_inventory(mmi_as_oc)
-		var/mob/brainmob = mmi_as_oc.brainmob
-		brainmob.reset_view(src)
-	/*
-		brainmob.client.eye = src
-		brainmob.client.perspective = EYE_PERSPECTIVE
-	*/
-		occupant = brainmob
-		brainmob.loc = src //should allow relaymove
-		brainmob.canmove = 1
-		mmi_as_oc.loc = src
-		mmi_as_oc.mecha = src
-		src.verbs -= /obj/mecha/verb/eject
-		src.Entered(mmi_as_oc)
-		src.Move(src.loc)
-		src.icon_state = src.reset_icon()
-		set_dir(dir_in)
-		src.log_message("[mmi_as_oc] moved in as pilot.")
 		if(!hasInternalDamage())
 			src.occupant << sound('sound/mecha/nominal.ogg',volume=50)
 		return 1

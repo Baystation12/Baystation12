@@ -62,8 +62,13 @@ var/list/gamemode_cache = list()
 	var/respawn = 1
 	var/guest_jobban = 1
 	var/usewhitelist = 0
-	var/mods_are_mentors = 0
 	var/kick_inactive = 0				//force disconnect for inactive players after this many minutes, if non-0
+	var/show_mods = 0
+	var/show_mentors = 0
+	var/mods_can_tempban = 0
+	var/mods_can_job_tempban = 0
+	var/mod_tempban_max = 1440
+	var/mod_job_tempban_max = 1440
 	var/load_jobs_from_txt = 0
 	var/ToRban = 0
 	var/automute_on = 0					//enables automuting/spam prevention
@@ -91,6 +96,7 @@ var/list/gamemode_cache = list()
 	var/guests_allowed = 1
 	var/debugparanoid = 0
 
+	var/serverurl
 	var/server
 	var/banappeals
 	var/wikiurl
@@ -115,6 +121,8 @@ var/list/gamemode_cache = list()
 
 	var/organ_health_multiplier = 1
 	var/organ_regeneration_multiplier = 1
+	var/organs_decay
+	var/default_brain_health = 400
 
 	//Paincrit knocks someone down once they hit 60 shock_stage, so by default make it so that close to 100 additional damage needs to be dealt,
 	//so that it's similar to HALLOSS. Lowered it a bit since hitting paincrit takes much longer to wear off than a halloss stun.
@@ -163,6 +171,7 @@ var/list/gamemode_cache = list()
 
 	var/use_irc_bot = 0
 	var/irc_bot_host = ""
+	var/irc_bot_export = 0 // whether the IRC bot in use is a Bot32 (or similar) instance; Bot32 uses world.Export() instead of nudge.py/libnudge
 	var/main_irc = ""
 	var/admin_irc = ""
 	var/python_path = "" //Path to the python executable.  Defaults to "python" on windows and "/usr/bin/env python2" on unix
@@ -316,9 +325,6 @@ var/list/gamemode_cache = list()
 				if ("log_runtime")
 					config.log_runtime = 1
 
-				if ("mentors")
-					config.mods_are_mentors = 1
-
 				if ("generate_asteroid")
 					config.generate_asteroid = 1
 
@@ -384,6 +390,9 @@ var/list/gamemode_cache = list()
 
 				if ("hostedby")
 					config.hostedby = value
+
+				if ("serverurl")
+					config.serverurl = value
 
 				if ("server")
 					config.server = value
@@ -467,6 +476,24 @@ var/list/gamemode_cache = list()
 				if("kick_inactive")
 					config.kick_inactive = text2num(value)
 
+				if("show_mods")
+					config.show_mods = 1
+
+				if("show_mentors")
+					config.show_mentors = 1
+
+				if("mods_can_tempban")
+					config.mods_can_tempban = 1
+
+				if("mods_can_job_tempban")
+					config.mods_can_job_tempban = 1
+
+				if("mod_tempban_max")
+					config.mod_tempban_max = text2num(value)
+
+				if("mod_job_tempban_max")
+					config.mod_job_tempban_max = text2num(value)
+
 				if("load_jobs_from_txt")
 					load_jobs_from_txt = 1
 
@@ -499,6 +526,9 @@ var/list/gamemode_cache = list()
 
 				if("use_irc_bot")
 					use_irc_bot = 1
+
+				if("irc_bot_export")
+					irc_bot_export = 1
 
 				if("ticklag")
 					Ticklag = text2num(value)
@@ -681,6 +711,12 @@ var/list/gamemode_cache = list()
 					config.organ_regeneration_multiplier = value / 100
 				if("organ_damage_spillover_multiplier")
 					config.organ_damage_spillover_multiplier = value / 100
+				if("organs_can_decay")
+					config.organs_decay = 1
+				if("default_brain_health")
+					config.default_brain_health = text2num(value)
+					if(!config.default_brain_health || config.default_brain_health < 1)
+						config.default_brain_health = initial(config.default_brain_health)
 				if("bones_can_break")
 					config.bones_can_break = value
 				if("limbs_can_break")

@@ -11,15 +11,7 @@
 		src << "You can't commit suicide before the game starts!"
 		return
 
-
-	var/permitted = 0
-	var/list/allowed = list("Syndicate","traitor","Wizard","Head Revolutionary","Cultist","Changeling")
-	for(var/T in allowed)
-		if(mind.special_role == T)
-			permitted = 1
-			break
-
-	if(!permitted)
+	if(!player_is_antag(mind))
 		message_admins("[ckey] has tried to suicide, but they were not permitted due to not being antagonist as human.", 1)
 		src << "No. Adminhelp if there is a legitimate reason."
 		return
@@ -81,7 +73,7 @@
 
 		viewers(src) << pick("<span class='danger'>[src] is attempting to bite \his tongue off! It looks like \he's trying to commit suicide.</span>", \
 		                     "<span class='danger'>[src] is jamming \his thumbs into \his eye sockets! It looks like \he's trying to commit suicide.</span>", \
-		                     "<span class='danger'>[src] is twisting \his own neck! It looks like \he's trying to commit suicide.</spawn>", \
+		                     "<span class='danger'>[src] is twisting \his own neck! It looks like \he's trying to commit suicide.</span>", \
 		                     "<span class='danger'>[src] is holding \his breath! It looks like \he's trying to commit suicide.</span>")
 		adjustOxyLoss(max(175 - getToxLoss() - getFireLoss() - getBruteLoss() - getOxyLoss(), 0))
 		updatehealth()

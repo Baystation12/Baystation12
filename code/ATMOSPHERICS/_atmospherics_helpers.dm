@@ -199,7 +199,7 @@
 			total_unfilterable_moles += source.gas[g]
 
 		var/ratio = source.gas[g]/source.total_moles //converts the specific power per mole of pure gas to specific power per mole of input gas mix
-		total_specific_power = specific_power_gas[g]*ratio
+		total_specific_power += specific_power_gas[g]*ratio
 
 	//Figure out how much of each gas to filter
 	if (isnull(total_transfer_moles))
@@ -272,7 +272,7 @@
 			total_unfilterable_moles += source.gas[g]
 
 		var/ratio = source.gas[g]/source.total_moles //converts the specific power per mole of pure gas to specific power per mole of input gas mix
-		total_specific_power = specific_power_gas[g]*ratio
+		total_specific_power += specific_power_gas[g]*ratio
 
 	//Figure out how much of each gas to filter
 	if (isnull(total_transfer_moles))

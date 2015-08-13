@@ -119,9 +119,8 @@
 
 /mob/living/silicon/pai/check_eye(var/mob/user as mob)
 	if (!src.current)
-		return null
-	user.reset_view(src.current)
-	return 1
+		return -1
+	return 0
 
 /mob/living/silicon/pai/blob_act()
 	if (src.stat != 2)
@@ -170,9 +169,6 @@
 			src << "<font color=green>You feel an electric surge run through your circuitry and become acutely aware at how lucky you are that you can still feel at all.</font>"
 
 /mob/living/silicon/pai/proc/switchCamera(var/obj/machinery/camera/C)
-	if(istype(usr, /mob/living))
-		var/mob/living/U = usr
-		U.cameraFollow = null
 	if (!C)
 		src.unset_machine()
 		src.reset_view(null)
@@ -185,6 +181,19 @@
 	src.current = C
 	src.reset_view(C)
 	return 1
+
+/mob/living/silicon/pai/verb/reset_record_view()
+	set category = "pAI Commands"
+	set name = "Reset Records Software"
+
+	securityActive1 = null
+	securityActive2 = null
+	security_cannotfind = 0
+	medicalActive1 = null
+	medicalActive2 = null
+	medical_cannotfind = 0
+	nanomanager.update_uis(src)
+	usr << "<span class='notice'>You reset your record-viewing software.</span>"
 
 /mob/living/silicon/pai/cancel_camera()
 	set category = "pAI Commands"
@@ -258,9 +267,10 @@
 		if(ishuman(holder))
 			var/mob/living/carbon/human/H = holder
 			for(var/obj/item/organ/external/affecting in H.organs)
-				if(affecting.hidden == card)
+				if(card in affecting.implants)
 					affecting.take_damage(rand(30,50))
-					H.visible_message("<span class='danger'>\The [src] explodes out of \the [H]'s [affecting.name][(affecting.status & ORGAN_ROBOT) ? " in a shower of gore" : ""]!</span>")
+					affecting.implants -= card
+					H.visible_message("<span class='danger'>\The [src] explodes out of \the [H]'s [affecting.name] in shower of gore!</span>")
 					break
 		holder.drop_from_inventory(card)
 	else if(istype(card.loc,/obj/item/device/pda))

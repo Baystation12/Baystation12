@@ -188,9 +188,9 @@ datum/controller/vote
 		if(mode)
 			if(config.vote_no_dead && usr.stat == DEAD && !usr.client.holder)
 				return 0
-			if(current_votes[ckey])
-				choices[choices[current_votes[ckey]]]--
-			if(vote && 1<=vote && vote<=choices.len)
+			if(vote && vote >= 1 && vote <= choices.len)
+				if(current_votes[ckey])
+					choices[choices[current_votes[ckey]]]--
 				voted += usr.ckey
 				choices[choices[vote]]++	//check this
 				current_votes[ckey] = vote
@@ -237,7 +237,7 @@ datum/controller/vote
 						return 0
 					for(var/antag_type in all_antag_types)
 						var/datum/antagonist/antag = all_antag_types[antag_type]
-						if(!(antag.id in additional_antag_types) && (antag.flags & ANTAG_VOTABLE))
+						if(!(antag.id in additional_antag_types) && antag.is_votable())
 							choices.Add(antag.role_text)
 					choices.Add("None")
 				if("custom")
@@ -381,7 +381,9 @@ datum/controller/vote
 				if(usr.client.holder)
 					initiate_vote("custom",usr.key)
 			else
-				submit_vote(usr.ckey, round(text2num(href_list["vote"])))
+				var/t = round(text2num(href_list["vote"]))
+				if(t) // It starts from 1, so there's no problem
+					submit_vote(usr.ckey, t)
 		usr.vote()
 
 

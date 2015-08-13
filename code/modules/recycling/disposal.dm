@@ -5,9 +5,9 @@
 // Automatically recharges air (unless off), will flush when ready if pre-set
 // Can hold items and human size things, no other draggables
 // Toilets are a type of disposal bin for small objects only and work on magic. By magic, I mean torque rotation
-#define SEND_PRESSURE 50 + ONE_ATMOSPHERE //kPa - assume the inside of a dispoal pipe is 1 atm
-#define PRESSURE_TANK_VOLUME 70	//L - a 0.3 m diameter * 1 m long cylindrical tank. Happens to be the same volume as the regular oxygen tanks, so seems appropriate.
-#define PUMP_MAX_FLOW_RATE 100	//L/s - 4 m/s using a 15 cm by 15 cm inlet
+#define SEND_PRESSURE (700 + ONE_ATMOSPHERE) //kPa - assume the inside of a dispoal pipe is 1 atm, so that needs to be added.
+#define PRESSURE_TANK_VOLUME 150	//L
+#define PUMP_MAX_FLOW_RATE 90		//L/s - 4 m/s using a 15 cm by 15 cm inlet
 
 /obj/machinery/disposal
 	name = "disposal unit"
@@ -24,7 +24,7 @@
 	var/flush_every_ticks = 30 //Every 30 ticks it will look whether it is ready to flush
 	var/flush_count = 0 //this var adds 1 once per tick. When it reaches flush_every_ticks it resets and tries to flush.
 	var/last_sound = 0
-	active_power_usage = 3500	//the pneumatic pump power. 3 HP ~ 2200W
+	active_power_usage = 2200	//the pneumatic pump power. 3 HP ~ 2200W
 	idle_power_usage = 100
 
 // create a new disposal
@@ -39,15 +39,14 @@
 		else
 			trunk.linked = src	// link the pipe trunk to self
 
-		air_contents = new/datum/gas_mixture()
-		air_contents.volume = PRESSURE_TANK_VOLUME
+		air_contents = new/datum/gas_mixture(PRESSURE_TANK_VOLUME)
 		update()
 
 /obj/machinery/disposal/Destroy()
 	eject()
 	if(trunk)
 		trunk.linked = null
-	..()
+	return ..()
 
 // attack by item places it in to disposal
 /obj/machinery/disposal/attackby(var/obj/item/I, var/mob/user)
@@ -411,8 +410,6 @@
 		H.tomail = 1
 
 
-	air_contents = new()		// new empty gas resv.
-
 	sleep(10)
 	if(last_sound < world.time + 1)
 		playsound(src, 'sound/machines/disposalflush.ogg', 50, 0, 0)
@@ -420,7 +417,8 @@
 	sleep(5) // wait for animation to finish
 
 
-	H.init(src)	// copy the contents of disposer to holder
+	H.init(src, air_contents)	// copy the contents of disposer to holder
+	air_contents = new(PRESSURE_TANK_VOLUME)	// new empty gas resv.
 
 	H.start(src) // start the holder processing movement
 	flushing = 0
@@ -486,7 +484,6 @@
 	var/active = 0	// true if the holder is moving, otherwise inactive
 	dir = 0
 	var/count = 2048	//*** can travel 2048 steps before going inactive (in case of loops)
-	var/has_fat_guy = 0	// true if contains a fat person
 	var/destinationTag = "" // changes if contains a delivery container
 	var/tomail = 0 //changes if contains wrapped package
 	var/hasmob = 0 //If it contains a mob
@@ -495,8 +492,8 @@
 
 
 	// initialize a holder from the contents of a disposal unit
-	proc/init(var/obj/machinery/disposal/D)
-		gas = D.air_contents// transfer gas resv. into holder object
+	proc/init(var/obj/machinery/disposal/D, var/datum/gas_mixture/flush_gas)
+		gas = flush_gas// transfer gas resv. into holder object -- let's be explicit about the data this proc consumes, please.
 
 		//Check for any living mobs trigger hasmob.
 		//hasmob effects whether the package goes to cargo or its tagged destination.
@@ -516,10 +513,6 @@
 		// note AM since can contain mobs or objs
 		for(var/atom/movable/AM in D)
 			AM.loc = src
-			if(istype(AM, /mob/living/carbon/human))
-				var/mob/living/carbon/human/H = AM
-				if(FAT in H.mutations)		// is a human and fat?
-					has_fat_guy = 1			// set flag on holder
 			if(istype(AM, /obj/structure/bigDelivery) && !hasmob)
 				var/obj/structure/bigDelivery/T = AM
 				src.destinationTag = T.sortTag
@@ -551,21 +544,20 @@
 	proc/move()
 		var/obj/structure/disposalpipe/last
 		while(active)
+			sleep(1)		// was 1
+			if(!loc) return // check if we got GC'd
+
 			if(hasmob && prob(3))
 				for(var/mob/living/H in src)
 					if(!istype(H,/mob/living/silicon/robot/drone)) //Drones use the mailing code to move through the disposal system,
 						H.take_overall_damage(20, 0, "Blunt Trauma")//horribly maim any living creature jumping down disposals.  c'est la vie
 
-			if(has_fat_guy && prob(2)) // chance of becoming stuck per segment if contains a fat guy
-				active = 0
-				// find the fat guys
-				for(var/mob/living/carbon/human/H in src)
-
-				break
-			sleep(1)		// was 1
 			var/obj/structure/disposalpipe/curr = loc
 			last = curr
 			curr = curr.transfer(src)
+
+			if(!loc) return //side effects
+
 			if(!curr)
 				last.expel(src, loc, dir)
 
@@ -603,8 +595,6 @@
 				if(M.client)	// if a client mob, update eye to follow this holder
 					M.client.eye = src
 
-		if(other.has_fat_guy)
-			has_fat_guy = 1
 		qdel(other)
 
 
@@ -646,7 +636,7 @@
 /obj/structure/disposalholder/Destroy()
 	qdel(gas)
 	active = 0
-	..()
+	return ..()
 
 // Disposal pipes
 

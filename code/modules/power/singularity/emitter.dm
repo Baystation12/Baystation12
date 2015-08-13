@@ -223,13 +223,12 @@
 		else
 			user << "<span class='warning'>Access denied.</span>"
 		return
-
-
-	if(istype(W, /obj/item/weapon/card/emag) && !emagged)
+	..()
+	return
+	
+/obj/machinery/power/emitter/emag_act(var/remaining_charges, var/mob/user)
+	if(!emagged)
 		locked = 0
 		emagged = 1
 		user.visible_message("[user.name] emags [src].","<span class='warning'>You short out the lock.</span>")
-		return
-
-	..()
-	return
+		return 1

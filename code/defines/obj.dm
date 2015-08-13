@@ -166,7 +166,7 @@
 	return dat
 
 
-/var/list/acting_rank_prefixes = list("acting", "temporary", "interim")
+/var/list/acting_rank_prefixes = list("acting", "temporary", "interim", "provisional")
 
 /proc/make_list_rank(rank)
 	for(var/prefix in acting_rank_prefixes)
@@ -310,7 +310,7 @@ var/global/ManifestJSON
 	item_state = "beachball"
 	density = 0
 	anchored = 0
-	w_class = 2.0
+	w_class = 4
 	force = 0.0
 	throwforce = 0.0
 	throw_speed = 1

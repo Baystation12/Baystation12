@@ -100,8 +100,6 @@
 				user << "<span class='notice'>[src] does not need a repair.</span>"
 		else
 			user << "<span class='notice'>Unable to repair while [src] is off.</span>"
-	else if(istype(W, /obj/item/weapon/card/emag) && !emagged)
-		Emag(user)
 	else if(hasvar(W,"force") && hasvar(W,"damtype"))
 		switch(W.damtype)
 			if("fire")
@@ -186,12 +184,13 @@
 	set_light(0)
 	update_icon()
 
-/obj/vehicle/proc/Emag(mob/user as mob)
-	emagged = 1
-
-	if(locked)
-		locked = 0
-		user << "<span class='warning'>You bypass [src]'s controls.</span>"
+/obj/vehicle/emag_act(var/remaining_charges, mob/user as mob)
+	if(!emagged)
+		emagged = 1
+		if(locked)
+			locked = 0
+			user << "<span class='warning'>You bypass [src]'s controls.</span>"
+		return 1
 
 /obj/vehicle/proc/explode()
 	src.visible_message("\red <B>[src] blows apart!</B>", 1)

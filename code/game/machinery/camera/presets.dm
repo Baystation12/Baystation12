@@ -11,6 +11,7 @@ var/global/list/station_networks = list(
 										NETWORK_MINE,
 										NETWORK_RESEARCH,
 										NETWORK_RESEARCH_OUTPOST,
+										NETWORK_ROBOTS,
 										NETWORK_PRISON,
 										NETWORK_SECURITY
 										)

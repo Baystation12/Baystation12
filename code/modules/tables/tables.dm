@@ -176,6 +176,10 @@
 		user << "<span class='warning'>Plate \the [src] before reinforcing it!</span>"
 		return
 
+	if(flipped)
+		user << "<span class='warning'>Put \the [src] back in place before reinforcing it!</span>"
+		return
+
 	reinforced = common_material_add(S, user, "reinforc")
 	if(reinforced)
 		update_desc()
@@ -196,7 +200,7 @@
 
 // Returns the material to set the table to.
 /obj/structure/table/proc/common_material_add(obj/item/stack/material/S, mob/user, verb) // Verb is actually verb without 'e' or 'ing', which is added. Works for 'plate'/'plating' and 'reinforce'/'reinforcing'.
-	var/material/M = name_to_material[S.default_type]
+	var/material/M = S.get_material()
 	if(!istype(M))
 		user << "<span class='warning'>You cannot [verb]e \the [src] with \the [S].</span>"
 		return null
@@ -395,7 +399,7 @@
 
 	var/list/connection_dirs = list()
 
-	for(var/obj/structure/table/T in oview(src, 1))
+	for(var/obj/structure/table/T in orange(src, 1))
 		var/T_dir = get_dir(src, T)
 		if(T_dir in blocked_dirs) continue
 		if(material && T.material && material.name == T.material.name && flipped == T.flipped)

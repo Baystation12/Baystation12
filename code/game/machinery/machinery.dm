@@ -123,6 +123,15 @@ Class Procs:
 
 /obj/machinery/Destroy()
 	machines -= src
+	if(component_parts)
+		for(var/atom/A in component_parts)
+			if(A.loc == src) // If the components are inside the machine, delete them.
+				qdel(A)
+			else // Otherwise we assume they were dropped to the ground during deconstruction, and were not removed from the component_parts list by deconstruction code.
+				component_parts -= A
+	if(contents) // The same for contents.
+		for(var/atom/A in contents)
+			qdel(A)
 	..()
 
 /obj/machinery/process()//If you dont use process or power why are you here
@@ -167,7 +176,7 @@ Class Procs:
 		qdel(src)
 
 //sets the use_power var and then forces an area power update
-/obj/machinery/proc/update_use_power(var/new_use_power, var/force_update = 0)
+/obj/machinery/proc/update_use_power(var/new_use_power)
 	use_power = new_use_power
 
 /obj/machinery/proc/auto_use_power()

@@ -173,14 +173,14 @@ REAGENT SCANNER
 				if (ID in virusDB)
 					var/datum/data/record/V = virusDB[ID]
 					user.show_message("<span class='warning'>Warning: Pathogen [V.fields["name"]] detected in subject's blood. Known antigen : [V.fields["antigen"]]</span>")
-//			user.show_message(text("<span class='warning'>Warning: Unknown pathogen detected in subject's blood."))
+//			user.show_message(text("<span class='warning'>Warning: Unknown pathogen detected in subject's blood.</span>"))
 	if (M.getCloneLoss())
 		user.show_message("<span class='warning'>Subject appears to have been imperfectly cloned.</span>")
 	for(var/datum/disease/D in M.viruses)
 		if(!D.hidden[SCANNER])
 			user.show_message(text("<span class='danger'>Warning: [D.form] Detected</span><span class='warning'>\nName: [D.name].\nType: [D.spread].\nStage: [D.stage]/[D.max_stages].\nPossible Cure: [D.cure]</span>"))
 //	if (M.reagents && M.reagents.get_reagent_amount("inaprovaline"))
-//		user.show_message("<span class='notice'>Bloodstream Analysis located [M.reagents:get_reagent_amount("inaprovaline")] units of rejuvenation chemicals.")
+//		user.show_message("<span class='notice'>Bloodstream Analysis located [M.reagents:get_reagent_amount("inaprovaline")] units of rejuvenation chemicals.</span>")
 	if (M.has_brain_worms())
 		user.show_message("<span class='warning'>Subject suffering from aberrant brain activity. Recommend further scanning.</span>")
 	else if (M.getBrainLoss() >= 100 || !M.has_brain())
@@ -221,7 +221,7 @@ REAGENT SCANNER
 			if(blood_volume <= 500 && blood_volume > 336)
 				user.show_message("<span class='danger'>Warning: Blood Level LOW: [blood_percent]% [blood_volume]cl.</span> <span class='notice'>Type: [blood_type]</span>")
 			else if(blood_volume <= 336)
-				user.show_message("<span class='danger'><i>Warning: Blood Level CRITICAL: [blood_percent]% [blood_volume]cl.</i></span> <span class='notice'>Type: [blood_type]")
+				user.show_message("<span class='danger'><i>Warning: Blood Level CRITICAL: [blood_percent]% [blood_volume]cl.</i></span> <span class='notice'>Type: [blood_type]</span>")
 			else
 				user.show_message("<span class='notice'>Blood Level Normal: [blood_percent]% [blood_volume]cl. Type: [blood_type]</span>")
 		user.show_message("<span class='notice'>Subject's pulse: <font color='[H.pulse == PULSE_THREADY || H.pulse == PULSE_NONE ? "red" : "blue"]'>[H.get_pulse(GETPULSE_TOOL)] bpm.</font></span>")
@@ -256,6 +256,13 @@ REAGENT SCANNER
 
 	origin_tech = list(TECH_MAGNET = 1, TECH_ENGINERING = 1)
 
+/obj/item/device/analyzer/atmosanalyze(var/mob/user)
+	var/air = user.return_air()
+	if (!air)
+		return
+
+	return atmosanalyzer_scan(src, air, user)
+
 /obj/item/device/analyzer/attack_self(mob/user as mob)
 
 	if (user.stat)
@@ -264,27 +271,7 @@ REAGENT SCANNER
 		usr << "<span class='warning'>You don't have the dexterity to do this!</span>"
 		return
 
-	var/turf/location = user.loc
-	if (!( istype(location, /turf) ))
-		return
-
-	var/datum/gas_mixture/environment = location.return_air()
-
-	var/pressure = environment.return_pressure()
-	var/total_moles = environment.total_moles
-
-	user.show_message("<span class='notice'><b>Results:</b></span>", 1)
-	if(abs(pressure - ONE_ATMOSPHERE) < 10)
-		user.show_message("<span class='notice'>Pressure: [round(pressure,0.1)] kPa</span>", 1)
-	else
-		user.show_message("<span class='warning'>Pressure: [round(pressure,0.1)] kPa</span>", 1)
-	if(total_moles)
-		for(var/g in environment.gas)
-			user.show_message("<span class='notice'>[gas_data.name[g]]: [round((environment.gas[g] / total_moles)*100)]%</span>", 1)
-
-		user.show_message("<span class='notice'>Temperature: [round(environment.temperature-T0C)]&deg;C</span>", 1)
-
-	src.add_fingerprint(user)
+	analyze_gases(src, user)
 	return
 
 /obj/item/device/mass_spectrometer

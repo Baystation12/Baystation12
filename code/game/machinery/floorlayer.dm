@@ -10,7 +10,7 @@
 	var/list/mode = list("dismantle"=0,"laying"=0,"collect"=0)
 
 /obj/machinery/floorlayer/New()
-	T = new/obj/item/stack/tile/plasteel(src)
+	T = new/obj/item/stack/tile/steel(src)
 	..()
 
 /obj/machinery/floorlayer/Move(new_turf,M_Dir)

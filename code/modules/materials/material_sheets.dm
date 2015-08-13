@@ -24,12 +24,10 @@
 		qdel(src)
 		return 0
 
-	// Update from material datum.
-	name = "[material.display_name] sheets"
-	desc = "A stack of sheets of [material.display_name]."
 	recipes = material.get_recipes()
 	stacktype = material.stack_type
-	origin_tech = material.stack_origin_tech.Copy()
+	if(islist(material.stack_origin_tech))
+		origin_tech = material.stack_origin_tech.Copy()
 	perunit = SHEET_MATERIAL_AMOUNT
 
 	if(apply_colour)
@@ -39,13 +37,50 @@
 		flags |= CONDUCT
 
 	matter = material.get_matter()
+	update_strings()
 	return 1
+
+/obj/item/stack/material/get_material()
+	return material
+
+/obj/item/stack/material/proc/update_strings()
+	// Update from material datum.
+	singular_name = material.sheet_singular_name
+	
+	if(amount>1)
+		name = "[material.use_name] [material.sheet_plural_name]"
+		desc = "A stack of [material.use_name] [material.sheet_plural_name]."
+		gender = PLURAL
+	else
+		name = "[material.use_name] [material.sheet_singular_name]"
+		desc = "A [material.sheet_singular_name] of [material.use_name]."
+		gender = NEUTER
+
+/obj/item/stack/material/use(var/used)
+	. = ..()
+	update_strings()
+	return
 
 /obj/item/stack/material/transfer_to(obj/item/stack/S, var/tamount=null, var/type_verified)
 	var/obj/item/stack/material/M = S
 	if(!istype(M) || material.name != M.material.name)
 		return 0
 	..(S,tamount,1)
+	if(src) update_strings()
+	if(M) M.update_strings()
+
+/obj/item/stack/material/attack_self(var/mob/user)
+	if(!material.build_windows(user, src))
+		..()
+
+/obj/item/stack/material/attackby(var/obj/item/W, var/mob/user)
+	if(istype(W,/obj/item/stack/cable_coil))
+		material.build_wired_product(user, W, src)
+		return
+	else if(istype(W, /obj/item/stack/rods))
+		material.build_rod_product(user, W, src)
+		return
+	return ..()
 
 /obj/item/stack/material/iron
 	name = "iron"
@@ -55,9 +90,13 @@
 
 /obj/item/stack/material/sandstone
 	name = "sandstone brick"
-	singular_name = "sandstone brick"
 	icon_state = "sheet-sandstone"
 	default_type = "sandstone"
+
+/obj/item/stack/material/marble
+	name = "marble brick"
+	icon_state = "sheet-marble"
+	default_type = "marble"
 
 /obj/item/stack/material/diamond
 	name = "diamond"
@@ -75,7 +114,7 @@
 	default_type = "phoron"
 
 /obj/item/stack/material/plastic
-	name = "Plastic"
+	name = "plastic"
 	icon_state = "sheet-plastic"
 	default_type = "plastic"
 
@@ -116,38 +155,53 @@
 
 /obj/item/stack/material/steel
 	name = DEFAULT_WALL_MATERIAL
-	singular_name = "steel sheet"
 	icon_state = "sheet-metal"
 	default_type = DEFAULT_WALL_MATERIAL
 
 /obj/item/stack/material/plasteel
 	name = "plasteel"
-	singular_name = "plasteel sheet"
 	icon_state = "sheet-plasteel"
 	item_state = "sheet-metal"
 	default_type = "plasteel"
 
 /obj/item/stack/material/wood
 	name = "wooden plank"
-	singular_name = "wood plank"
 	icon_state = "sheet-wood"
 	default_type = "wood"
 
 /obj/item/stack/material/cloth
 	name = "cloth"
-	singular_name = "cloth roll"
 	icon_state = "sheet-cloth"
 	default_type = "cloth"
 
 /obj/item/stack/material/cardboard
 	name = "cardboard"
-	singular_name = "cardboard sheet"
 	icon_state = "sheet-card"
 	default_type = "cardboard"
 
 /obj/item/stack/material/leather
 	name = "leather"
 	desc = "The by-product of mob grinding."
-	singular_name = "leather piece"
 	icon_state = "sheet-leather"
 	default_type = "leather"
+
+/obj/item/stack/material/glass
+	name = "glass"
+	icon_state = "sheet-glass"
+	default_type = "glass"
+
+/obj/item/stack/material/glass/reinforced
+	name = "reinforced glass"
+	icon_state = "sheet-rglass"
+	default_type = "rglass"
+
+/obj/item/stack/material/glass/phoronglass
+	name = "phoron glass"
+	singular_name = "phoron glass sheet"
+	icon_state = "sheet-phoronglass"
+	default_type = "phglass"
+
+/obj/item/stack/material/glass/phoronrglass
+	name = "reinforced phoron glass"
+	icon_state = "sheet-phoronrglass"
+	default_type = "rphglass"

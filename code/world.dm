@@ -127,7 +127,8 @@ var/world_topic_spam_protect_time = world.timeofday
 				n++
 		return n
 
-	else if (T == "status")
+	else if (copytext(T,1,7) == "status")
+		var/input[] = params2list(T)
 		var/list/s = list()
 		s["version"] = game_version
 		s["mode"] = master_mode
@@ -136,21 +137,37 @@ var/world_topic_spam_protect_time = world.timeofday
 		s["vote"] = config.allow_vote_mode
 		s["ai"] = config.allow_ai
 		s["host"] = host ? host : null
-		s["players"] = list()
 		s["stationtime"] = worldtime2text()
-		var/n = 0
-		var/admins = 0
 
-		for(var/client/C in clients)
-			if(C.holder)
-				if(C.holder.fakekey)
-					continue	//so stealthmins aren't revealed by the hub
-				admins++
-			s["player[n]"] = C.key
-			n++
-		s["players"] = n
+		if(input["status"] == "2")
+			var/list/players = list()
+			var/list/admins = list()
 
-		s["admins"] = admins
+			for(var/client/C in clients)
+				if(C.holder)
+					if(C.holder.fakekey)
+						continue
+					admins[C.key] = C.holder.rank
+				players += C.key
+
+			s["players"] = players.len
+			s["playerlist"] = list2params(players)
+			s["admins"] = admins.len
+			s["adminlist"] = list2params(admins)
+		else
+			var/n = 0
+			var/admins = 0
+
+			for(var/client/C in clients)
+				if(C.holder)
+					if(C.holder.fakekey)
+						continue	//so stealthmins aren't revealed by the hub
+					admins++
+				s["player[n]"] = C.key
+				n++
+
+			s["players"] = n
+			s["admins"] = admins
 
 		return list2params(s)
 
@@ -179,9 +196,10 @@ var/world_topic_spam_protect_time = world.timeofday
 			return "Bad Key"
 
 		var/client/C
+		var/req_ckey = ckey(input["adminmsg"])
 
 		for(var/client/K in clients)
-			if(K.ckey == input["adminmsg"])
+			if(K.ckey == req_ckey)
 				C = K
 				break
 		if(!C)
@@ -222,10 +240,28 @@ var/world_topic_spam_protect_time = world.timeofday
 			world_topic_spam_protect_ip = addr
 			return "Bad Key"
 
-		return show_player_info_irc(input["notes"])
+		return show_player_info_irc(ckey(input["notes"]))
 
+	else if(copytext(T,1,4) == "age")
+		var/input[] = params2list(T)
+		if(input["key"] != config.comms_password)
+			if(world_topic_spam_protect_ip == addr && abs(world_topic_spam_protect_time - world.time) < 50)
+				spawn(50)
+					world_topic_spam_protect_time = world.time
+					return "Bad Key (Throttled)"
 
+			world_topic_spam_protect_time = world.time
+			world_topic_spam_protect_ip = addr
+			return "Bad Key"
 
+		var/age = get_player_age(input["age"])
+		if(isnum(age))
+			if(age >= 0)
+				return "[age]"
+			else
+				return "Ckey not found"
+		else
+			return "Database connection failed or not set up"
 
 
 /world/Reboot(var/reason)
@@ -275,6 +311,7 @@ var/world_topic_spam_protect_time = world.timeofday
 
 /hook/startup/proc/loadMods()
 	world.load_mods()
+	world.load_mentors() // no need to write another hook.
 	return 1
 
 /world/proc/load_mods()
@@ -292,7 +329,26 @@ var/world_topic_spam_protect_time = world.timeofday
 					continue
 
 				var/title = "Moderator"
-				if(config.mods_are_mentors) title = "Mentor"
+				var/rights = admin_ranks[title]
+
+				var/ckey = copytext(line, 1, length(line)+1)
+				var/datum/admins/D = new /datum/admins(title, rights, ckey)
+				D.associate(directory[ckey])
+
+/world/proc/load_mentors()
+	if(config.admin_legacy_system)
+		var/text = file2text("config/mentors.txt")
+		if (!text)
+			error("Failed to load config/mentors.txt")
+		else
+			var/list/lines = text2list(text, "\n")
+			for(var/line in lines)
+				if (!line)
+					continue
+				if (copytext(line, 1, 2) == ";")
+					continue
+
+				var/title = "Mentor"
 				var/rights = admin_ranks[title]
 
 				var/ckey = copytext(line, 1, length(line)+1)

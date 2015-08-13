@@ -5,6 +5,7 @@
 	icon_state = "colt"
 	caliber = ".45"
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
+	fire_sound = 'sound/weapons/Gunshot_light.ogg'
 	load_method = MAGAZINE
 
 /obj/item/weapon/gun/projectile/colt/detective
@@ -36,6 +37,7 @@
 	magazine_type = /obj/item/ammo_magazine/c45m/rubber
 	caliber = ".45"
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
+	fire_sound = 'sound/weapons/Gunshot_light.ogg'
 	load_method = MAGAZINE
 
 /obj/item/weapon/gun/projectile/sec/flash
@@ -112,6 +114,7 @@
 	caliber = "9mm"
 	silenced = 0
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2, TECH_ILLEGAL = 2)
+	fire_sound = 'sound/weapons/Gunshot_light.ogg'
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/mc9mm
 
@@ -161,3 +164,37 @@
 	icon = 'icons/obj/gun.dmi'
 	icon_state = "silencer"
 	w_class = 2
+
+/obj/item/weapon/gun/projectile/pirate
+	name = "zipgun"
+	desc = "Little more than a barrel, handle, and firing mechanism, cheap makeshift firearms like this one are not uncommon in frontier systems."
+	icon_state = "sawnshotgun"
+	item_state = "sawnshotgun"
+	handle_casings = CYCLE_CASINGS //player has to take the old casing out manually before reloading
+	load_method = SINGLE_CASING
+	max_shells = 1 //literally just a barrel
+	
+	var/global/list/ammo_types = list(
+		/obj/item/ammo_casing/a357              = ".357",
+		/obj/item/ammo_casing/c9mmf             = "9mm",
+		/obj/item/ammo_casing/c45f              = ".45",
+		/obj/item/ammo_casing/a12mm             = "12mm",
+		/obj/item/ammo_casing/shotgun           = "12 gauge",
+		/obj/item/ammo_casing/shotgun           = "12 gauge",
+		/obj/item/ammo_casing/shotgun/pellet    = "12 gauge",
+		/obj/item/ammo_casing/shotgun/pellet    = "12 gauge",
+		/obj/item/ammo_casing/shotgun/pellet    = "12 gauge",
+		/obj/item/ammo_casing/shotgun/beanbag   = "12 gauge",
+		/obj/item/ammo_casing/shotgun/stunshell = "12 gauge",
+		/obj/item/ammo_casing/shotgun/flash     = "12 gauge",
+		/obj/item/ammo_casing/a762              = "7.62mm",
+		/obj/item/ammo_casing/a556              = "5.56mm"
+		)
+
+/obj/item/weapon/gun/projectile/pirate/New()
+	ammo_type = pick(ammo_types)
+	desc += " Uses [ammo_types[ammo_type]] rounds."
+	
+	var/obj/item/ammo_casing/ammo = ammo_type
+	caliber = initial(ammo.caliber)
+	..()

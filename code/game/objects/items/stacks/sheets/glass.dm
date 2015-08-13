@@ -28,7 +28,7 @@
 		if(istype(W,/obj/item/stack/cable_coil))
 			var/obj/item/stack/cable_coil/CC = W
 			if (get_amount() < 1 || CC.get_amount() < 5)
-				user << "<span class='warning>You need five lengths of coil and one sheet of glass to make wired glass.</span>"
+				user << "<span class='warning'>You need five lengths of coil and one sheet of glass to make wired glass.</span>"
 				return
 
 			CC.use(5)
