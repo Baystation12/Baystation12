@@ -1,0 +1,5 @@
+author: Kelenius
+
+delete-after: True
+changes: 
+  - rscadd: "Bees have been updated and are totally worth checking out (beekeeping crate at cargo)."
