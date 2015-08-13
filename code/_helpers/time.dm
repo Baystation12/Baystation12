@@ -6,13 +6,13 @@
 
 var/roundstart_hour = 0
 //Returns the world time in english
-proc/worldtime2text(time = world.time)
+proc/worldtime2text(time = world.time, timeshift = 1)
 	if(!roundstart_hour) roundstart_hour = pick(2,7,12,17)
-	return "[(round(time / 36000)+roundstart_hour) % 24]:[(time / 600 % 60) < 10 ? add_zero(time / 600 % 60, 1) : time / 600 % 60]"
+	return timeshift ? time2text(time+(36000*roundstart_hour), "hh:mm") : time2text(time, "hh:mm")
 
 proc/worlddate2text()
 	return num2text((text2num(time2text(world.timeofday, "YYYY"))+544)) + "-" + time2text(world.timeofday, "MM-DD")
-	
+
 proc/time_stamp()
 	return time2text(world.timeofday, "hh:mm:ss")
 
