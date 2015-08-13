@@ -95,10 +95,13 @@
 
 // Inventory slot strings.
 // since numbers cannot be used as associative list keys.
-#define slot_back_str		"back"
+//icon_back, icon_l_hand, etc would be much better names for these...
+#define slot_back_str		"slot_back"
 #define slot_l_hand_str		"slot_l_hand"
 #define slot_r_hand_str		"slot_r_hand"
-#define slot_w_uniform_str	"w_uniform"
+#define slot_w_uniform_str	"slot_w_uniform"
+#define slot_head_str		"slot_head"
+#define slot_wear_suit_str	"slot_suit"
 
 // Bitflags for clothing parts.
 #define HEAD        1

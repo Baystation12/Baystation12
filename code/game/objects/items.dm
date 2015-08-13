@@ -70,7 +70,10 @@
 /obj/item/Destroy()
 	if(ismob(loc))
 		var/mob/m = loc
-		m.unEquip(src, 1)
+		m.drop_from_inventory(src)
+		m.update_inv_r_hand()
+		m.update_inv_l_hand()
+		src.loc = null
 	return ..()
 
 /obj/item/device
@@ -153,7 +156,7 @@
 		if(temp && !temp.is_usable())
 			user << "<span class='notice'>You try to move your [temp.name], but cannot!</span>"
 			return
-
+	src.pickup(user)
 	if (istype(src.loc, /obj/item/weapon/storage))
 		var/obj/item/weapon/storage/S = src.loc
 		S.remove_from_storage(src)
@@ -166,8 +169,6 @@
 		if(isliving(src.loc))
 			return
 	user.put_in_active_hand(src)
-	if(src.loc == user)
-		src.pickup(user)
 	return
 
 /obj/item/attack_ai(mob/user as mob)

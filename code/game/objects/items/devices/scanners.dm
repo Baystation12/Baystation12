@@ -256,6 +256,13 @@ REAGENT SCANNER
 
 	origin_tech = list(TECH_MAGNET = 1, TECH_ENGINERING = 1)
 
+/obj/item/device/analyzer/atmosanalyze(var/mob/user)
+	var/air = user.return_air()
+	if (!air)
+		return
+
+	return atmosanalyzer_scan(src, air, user)
+
 /obj/item/device/analyzer/attack_self(mob/user as mob)
 
 	if (user.stat)
@@ -264,27 +271,7 @@ REAGENT SCANNER
 		usr << "<span class='warning'>You don't have the dexterity to do this!</span>"
 		return
 
-	var/turf/location = user.loc
-	if (!( istype(location, /turf) ))
-		return
-
-	var/datum/gas_mixture/environment = location.return_air()
-
-	var/pressure = environment.return_pressure()
-	var/total_moles = environment.total_moles
-
-	user.show_message("<span class='notice'><b>Results:</b></span>", 1)
-	if(abs(pressure - ONE_ATMOSPHERE) < 10)
-		user.show_message("<span class='notice'>Pressure: [round(pressure,0.1)] kPa</span>", 1)
-	else
-		user.show_message("<span class='warning'>Pressure: [round(pressure,0.1)] kPa</span>", 1)
-	if(total_moles)
-		for(var/g in environment.gas)
-			user.show_message("<span class='notice'>[gas_data.name[g]]: [round((environment.gas[g] / total_moles)*100)]%</span>", 1)
-
-		user.show_message("<span class='notice'>Temperature: [round(environment.temperature-T0C)]&deg;C</span>", 1)
-
-	src.add_fingerprint(user)
+	analyze_gases(src, user)
 	return
 
 /obj/item/device/mass_spectrometer

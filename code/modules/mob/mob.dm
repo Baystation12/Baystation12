@@ -2,13 +2,47 @@
 	mob_list -= src
 	dead_mob_list -= src
 	living_mob_list -= src
+	unset_machine()
 	qdel(hud_used)
+	if(client)
+		for(var/obj/screen/movable/spell_master/spell_master in spell_masters)
+			qdel(spell_master)
+		remove_screen_obj_references()
+		for(var/atom/movable/AM in client.screen)
+			qdel(AM)
+		client.screen = list()
 	if(mind && mind.current == src)
 		spellremove(src)
 	for(var/infection in viruses)
 		qdel(infection)
 	ghostize()
 	..()
+
+/mob/proc/remove_screen_obj_references()
+	flash = null
+	blind = null
+	hands = null
+	pullin = null
+	purged = null
+	internals = null
+	oxygen = null
+	i_select = null
+	m_select = null
+	toxin = null
+	fire = null
+	bodytemp = null
+	healths = null
+	throw_icon = null
+	nutrition_icon = null
+	pressure = null
+	damageoverlay = null
+	pain = null
+	item_use_icon = null
+	gun_move_icon = null
+	gun_run_icon = null
+	gun_setting_icon = null
+	spell_masters = null
+	zone_sel = null
 
 /mob/New()
 	mob_list += src
@@ -64,7 +98,7 @@
 			var/mob/M = I
 			if(self_message && M==src)
 				M.show_message( self_message, 1, blind_message, 2)
-			if(M.see_invisible >= invisibility) // Cannot view the invisible
+			else if(M.see_invisible >= invisibility) // Cannot view the invisible
 				M.show_message( message, 1, blind_message, 2)
 			else if (blind_message)
 				M.show_message(blind_message, 2)
@@ -390,6 +424,7 @@
 		'html/hard-hat-exclamation.png',
 		'html/image-minus.png',
 		'html/image-plus.png',
+		'html/map-pencil.png',
 		'html/music-minus.png',
 		'html/music-plus.png',
 		'html/tick-circle.png',
@@ -494,12 +529,8 @@
 /mob/verb/cancel_camera()
 	set name = "Cancel Camera View"
 	set category = "OOC"
-	reset_view(null)
 	unset_machine()
-	if(istype(src, /mob/living))
-		var/mob/living/M = src
-		if(M.cameraFollow)
-			M.cameraFollow = null
+	reset_view(null)
 
 /mob/Topic(href, href_list)
 	if(href_list["mach_close"])
@@ -618,31 +649,35 @@
 
 /mob/Stat()
 	..()
+	. = (client && client.inactivity < 1200)
 
-	if(client && client.holder)
-		if(statpanel("Status"))
-			statpanel("Status","Location:","([x], [y], [z])")
-			statpanel("Status","CPU:","[world.cpu]")
-			statpanel("Status","Instances:","[world.contents.len]")
-		if(statpanel("Status") && processScheduler && processScheduler.getIsRunning())
-			for(var/datum/controller/process/P in processScheduler.processes)
-				statpanel("Status",P.getStatName(), P.getTickTime())
-		else
-			statpanel("Status","processScheduler is not running.")
+	if(.)
+		if(client.holder)
+			if(statpanel("Status"))
+				statpanel("Status","Location:","([x], [y], [z])")
+				statpanel("Status","CPU:","[world.cpu]")
+				statpanel("Status","Instances:","[world.contents.len]")
+			if(statpanel("Status") && processScheduler && processScheduler.getIsRunning())
+				for(var/datum/controller/process/P in processScheduler.processes)
+					statpanel("Status",P.getStatName(), P.getTickTime())
+			else
+				statpanel("Status","processScheduler is not running.")
 
-	if(listed_turf && client)
-		if(!TurfAdjacent(listed_turf))
-			listed_turf = null
-		else
-			statpanel(listed_turf.name, null, listed_turf)
-			for(var/atom/A in listed_turf)
-				if(!A.mouse_opacity)
-					continue
-				if(A.invisibility > see_invisible)
-					continue
-				if(is_type_in_list(A, shouldnt_see))
-					continue
-				statpanel(listed_turf.name, null, A)
+		if(listed_turf && client)
+			if(!TurfAdjacent(listed_turf))
+				listed_turf = null
+			else
+				statpanel(listed_turf.name, null, listed_turf)
+				for(var/atom/A in listed_turf)
+					if(!A.mouse_opacity)
+						continue
+					if(A.invisibility > see_invisible)
+						continue
+					if(is_type_in_list(A, shouldnt_see))
+						continue
+					statpanel(listed_turf.name, null, A)
+
+	sleep(4) //Prevent updating the stat panel for the next .4 seconds, prevents clientside latency from updates
 
 // facing verbs
 /mob/proc/canface()
@@ -1032,3 +1067,21 @@ mob/proc/yank_out_object()
 
 /mob/proc/setEarDamage()
 	return
+
+//Throwing stuff
+
+/mob/proc/toggle_throw_mode()
+	if (src.in_throw_mode)
+		throw_mode_off()
+	else
+		throw_mode_on()
+
+/mob/proc/throw_mode_off()
+	src.in_throw_mode = 0
+	if(src.throw_icon) //in case we don't have the HUD and we use the hotkey
+		src.throw_icon.icon_state = "act_throw_off"
+
+/mob/proc/throw_mode_on()
+	src.in_throw_mode = 1
+	if(src.throw_icon)
+		src.throw_icon.icon_state = "act_throw_on"

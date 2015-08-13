@@ -82,9 +82,7 @@
 	..()
 	recipes += new/datum/stack_recipe("AI core", /obj/structure/AIcore, 4, time = 50, one_per_turf = 1)
 	recipes += new/datum/stack_recipe("Metal crate", /obj/structure/closet/crate, 10, time = 50, one_per_turf = 1)
-	recipes += new/datum/stack_recipe("RUST fuel assembly port frame", /obj/item/frame/rust/assembly, 12, time = 50, one_per_turf = 1)
-	recipes += new/datum/stack_recipe("RUST fuel compressor frame", /obj/item/frame/rust, 12, time = 50, one_per_turf = 1)
-	recipes += new/datum/stack_recipe("knife grip", /obj/item/weapon/material/butterflyhandle, 4, time = 20, one_per_turf = 0, on_floor = 1)
+	recipes += new/datum/stack_recipe("knife grip", /obj/item/weapon/material/butterflyhandle, 4, time = 20, one_per_turf = 0, on_floor = 1, supplied_material = "[name]")
 
 /material/sandstone/generate_recipes()
 	..()

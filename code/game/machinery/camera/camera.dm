@@ -138,14 +138,10 @@
 
 	else if(iswelder(W) && (wires.CanDeconstruct() || (stat & BROKEN)))
 		if(weld(W, user))
-			if (stat & BROKEN)
-				stat &= ~BROKEN
-				cancelCameraAlarm()
-				update_icon()
-				update_coverage()
-			else if(assembly)
+			if(assembly)
 				assembly.loc = src.loc
 				assembly.state = 1
+				assembly = null //so qdel doesn't eat it.
 				new /obj/item/stack/cable_coil(src.loc, length=2)
 			qdel(src)
 
@@ -260,6 +256,11 @@
 		//Apparently, this will disconnect anyone even if the camera was re-activated.
 		//I guess that doesn't matter since they couldn't use it anyway?
 		kick_viewers()
+
+/obj/machinery/camera/check_eye(mob/user)
+	if(!can_use()) return -1
+	if(isXRay()) return SEE_TURFS|SEE_MOBS|SEE_OBJS
+	return 0
 
 //This might be redundant, because of check_eye()
 /obj/machinery/camera/proc/kick_viewers()

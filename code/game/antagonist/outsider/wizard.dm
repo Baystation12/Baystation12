@@ -96,7 +96,7 @@ var/datum/antagonist/wizard/wizards
 		world << "<span class='danger'><font size = 3>The [(current_antagonists.len>1)?"[role_text_plural] have":"[role_text] has"] been killed by the crew! The Space Wizards Federation has been taught a lesson they will not soon forget!</font></span>"
 
 //To batch-remove wizard spells. Linked to mind.dm.
-/mob/proc/spellremove(var/mob/M as mob)
+/mob/proc/spellremove()
 	for(var/spell/spell_to_remove in src.spell_list)
 		remove_spell(spell_to_remove)
 

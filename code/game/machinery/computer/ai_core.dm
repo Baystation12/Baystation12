@@ -88,8 +88,8 @@
 					var/obj/item/stack/cable_coil/A = new /obj/item/stack/cable_coil( loc )
 					A.amount = 5
 
-			if(istype(P, /obj/item/stack/material/glass/reinforced))
-				var/obj/item/stack/material/glass/reinforced/RG = P
+			if(istype(P, /obj/item/stack/material) && P.get_material_name() == "rglass")
+				var/obj/item/stack/RG = P
 				if (RG.get_amount() < 2)
 					user << "<span class='warning'>You need two sheets of glass to put in the glass panel.</span>"
 					return
@@ -201,6 +201,7 @@
 	transfer.control_disabled = 0
 	transfer.aiRadio.disabledAi = 0
 	transfer.loc = get_turf(src)
+	transfer.create_eyeobj()
 	transfer.cancel_camera()
 	user << "<span class='notice'>Transfer successful:</span> [transfer.name] ([rand(1000,9999)].exe) downloaded to host terminal. Local copy wiped."
 	transfer << "You have been uploaded to a stationary terminal. Remote device connection restored."

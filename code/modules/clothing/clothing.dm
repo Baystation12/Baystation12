@@ -176,7 +176,7 @@ BLIND     // can't see anything
 	slot_flags = SLOT_EYES
 	var/vision_flags = 0
 	var/darkness_view = 0//Base human is 2
-	var/invisa_view = 0
+	var/see_invisible = -1
 	sprite_sheets = list("Vox" = 'icons/mob/species/vox/eyes.dmi')
 
 /obj/item/clothing/glasses/update_clothing_icon()
@@ -241,6 +241,10 @@ BLIND     // can't see anything
 /obj/item/clothing/head
 	name = "head"
 	icon = 'icons/obj/clothing/hats.dmi'
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/items/lefthand_hats.dmi',
+		slot_r_hand_str = 'icons/mob/items/righthand_hats.dmi',
+		)
 	body_parts_covered = HEAD
 	slot_flags = SLOT_HEAD
 	w_class = 2.0
@@ -298,6 +302,10 @@ BLIND     // can't see anything
 	slot_flags = SLOT_MASK
 	body_parts_covered = FACE|EYES
 	sprite_sheets = list("Vox" = 'icons/mob/species/vox/masks.dmi')
+
+	var/voicechange = 0
+	var/list/say_messages
+	var/list/say_verbs
 
 /obj/item/clothing/mask/update_clothing_icon()
 	if (ismob(src.loc))
@@ -383,6 +391,7 @@ BLIND     // can't see anything
 	var/worn_state = null
 
 /obj/item/clothing/under/New()
+	..()
 	if(worn_state)
 		if(!item_state_slots)
 			item_state_slots = list()
@@ -394,6 +403,29 @@ BLIND     // can't see anything
 	if(rolled_down < 0)
 		if((worn_state + "_d_s") in icon_states('icons/mob/uniform.dmi'))
 			rolled_down = 0
+
+/obj/item/clothing/under/proc/update_rolldown_status()
+	var/mob/living/carbon/human/H
+	if(istype(src.loc, /mob/living/carbon/human))
+		H = src.loc
+
+	var/icon/under_icon
+	if(icon_override)
+		under_icon = icon_override
+	else if(H && sprite_sheets && sprite_sheets[H.species.name])
+		under_icon = sprite_sheets[H.species.name]
+	else if(item_icons && item_icons[slot_w_uniform_str])
+		under_icon = item_icons[slot_w_uniform_str]
+	else
+		under_icon = INV_W_UNIFORM_DEF_ICON
+
+	// The _s is because the icon update procs append it.
+	if(("[worn_state]_d_s") in icon_states(under_icon))
+		if(rolled_down != 1)
+			rolled_down = 0
+	else
+		rolled_down = -1
+	if(H) update_clothing_icon()
 
 /obj/item/clothing/under/update_clothing_icon()
 	if (ismob(src.loc))
@@ -536,7 +568,8 @@ BLIND     // can't see anything
 	if(!istype(usr, /mob/living)) return
 	if(usr.stat) return
 
-	if(rolled_down < 0)
+	update_rolldown_status()
+	if(rolled_down == -1)
 		usr << "<span class='notice'>You cannot roll down [src]!</span>"
 		return
 

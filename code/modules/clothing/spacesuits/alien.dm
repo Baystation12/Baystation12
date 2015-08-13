@@ -8,11 +8,9 @@
 
 /obj/item/clothing/head/helmet/space/skrell/white
 	icon_state = "skrell_helmet_white"
-	item_state = "skrell_helmet_white"
 
 /obj/item/clothing/head/helmet/space/skrell/black
 	icon_state = "skrell_helmet_black"
-	item_state = "skrell_helmet_black"
 
 /obj/item/clothing/suit/space/skrell
 	name = "Skrellian voidsuit"
@@ -68,7 +66,6 @@
 	icon_state = "vox-carapace"
 	item_state = "vox-carapace"
 	desc = "A glowing visor, perhaps stolen from a depressed Cylon."
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 
 /obj/item/clothing/suit/space/vox/carapace
 	name = "alien carapace armour"
