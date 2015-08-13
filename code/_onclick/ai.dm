@@ -107,7 +107,7 @@
 		return A.AIMiddleClick(src)
 	return ..()
 
-/mob/living/cabon/bran/MiddleClickOn(var/atom/A)
+/mob/living/carbon/brain/MiddleClickOn(var/atom/A)
 	if(istype(src.loc, /obj/item/device/mmi))
 		return A.AIMiddleClick(src)
 	return ..()
@@ -169,6 +169,7 @@
 	var/obj/item/weapon/rig/rig = user.get_rig()
 	if(rig && rig.wearer && rig.ai_can_move_suit(user, check_user_module = 1))
 		if(rig.wearer.HardsuitClickOn(src, alert_ai = 1))
+			message_admins("\The [user] ([user.ckey ? user.ckey : "*no key*"]) forced \the [rig.wearer] ([rig.wearer.ckey ? rig.wearer.ckey : "*no key*"]) to use hardsuit module on \the [src].")
 			return 1
 	return 0
 

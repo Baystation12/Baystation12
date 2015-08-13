@@ -781,12 +781,7 @@
 			return 0
 
 	if(check_user_module)
-		world << "Checking user module"
-		if(!user)
-			world << "No user"
-			return 0
-		if(!user.loc || !user.loc.loc)
-			world << "No user loc"
+		if(!user || !user.loc || !user.loc.loc)
 			return 0
 		var/obj/item/rig_module/ai_container/module = user.loc.loc
 		if(!istype(module) || module.damage >= 2)

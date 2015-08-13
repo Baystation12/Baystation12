@@ -1,9 +1,5 @@
 /mob/living/carbon/human/movement_delay()
 
-	// Used by the AI suit control proc.
-	if(stat)
-		return 20
-
 	var/tally = 0
 
 	if(species.slowdown)
