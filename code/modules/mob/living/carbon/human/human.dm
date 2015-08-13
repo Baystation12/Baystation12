@@ -1030,6 +1030,12 @@
 
 	return(visible_implants)
 
+/mob/living/carbon/human/embedded_needs_process()
+	for(var/obj/item/organ/external/organ in src.organs)
+		if(organ.implants.len)
+			return 1
+	return 0
+
 /mob/living/carbon/human/proc/handle_embedded_objects()
 
 	for(var/obj/item/organ/external/organ in src.organs)
