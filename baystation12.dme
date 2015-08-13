@@ -31,6 +31,7 @@
 #include "code\__defines\mobs.dm"
 #include "code\__defines\research.dm"
 #include "code\__defines\species_languages.dm"
+#include "code\_helpers\atmospherics.dm"
 #include "code\_helpers\datum_pool.dm"
 #include "code\_helpers\files.dm"
 #include "code\_helpers\game.dm"
