@@ -802,6 +802,14 @@ area/space/atmosalert()
 /area/hallway/primary/
 	sound_env = 12 //hallway
 
+/area/hallway/primary/z5/plaza
+	name = "\improper Civilian Plaza"
+	icon_state = "hallz5"
+
+/area/hallway/primary/z5/central
+	name = "\improper Civilian Central Hallway"
+	icon_state = "hallz5"
+
 /area/hallway/primary/fore
 	name = "\improper Fore Primary Hallway"
 	icon_state = "hallF"
@@ -907,6 +915,18 @@ area/space/atmosalert()
 	icon_state = "server"
 
 //Crew
+
+/area/giftshop
+	name = "\improper Giftshop"
+	icon_state = "giftshop"
+
+/area/crew_quarters/staterooma
+	name = "\improper State Room"
+	icon_state = "stateroom"
+
+/area/crew_quarters/stateroomb
+	name = "\improper State Room"
+	icon_state = "stateroom"
 
 /area/crew_quarters
 	name = "\improper Dormitories"
@@ -1681,6 +1701,26 @@ area/space/atmosalert()
 /area/derelict/singularity_engine
 	name = "\improper Derelict Singularity Engine"
 	icon_state = "engine"
+
+//Shelters//
+/area/shelters
+	flags = RAD_SHIELDED
+
+/area/shelters/civilian
+	name = "\improper Civilian Emergency Shelter"
+	icon_state = "shelter"
+
+/area/shelters/rnd
+	name = "\improper  Research Emergency Shelter"
+	icon_state = "shelter"
+
+/area/shelters/command
+	name = "\improper Command Emergency Shelter"
+	icon_state = "shelter"
+
+/area/shelters/supply
+	name = "\improper Supply Shelter"
+	icon_state = "shelter"
 
 //HALF-BUILT STATION (REPLACES DERELICT IN BAYCODE, ABOVE IS LEFT FOR DOWNSTREAM)
 
