@@ -100,11 +100,11 @@ var/list/sacrificed = list()
 					if(75 to 100)
 						target << "<span class='cult'>Your mind turns to ash as the burning flames engulf your very soul and images of an unspeakable horror begin to bombard the last remnants of mental resistance.</span>"
 						target.take_overall_damage(0, 10)
-					if(100 to INFINITY)
-						target << "<span class='cult'>Your entire broken soul and being is engulfed in corruption and flames as your mind shatters away into nothing.</span>"
-//TODO: kick out, replace by ghost
-//else
-//TODO: same
+			if(target.stat == UNCONSCIOUS || target.getFireLoss() > 100) // Kick them out and replace them by a ghost if any is willing
+				target << "<span class='cult'>Your entire broken soul and being is engulfed in corruption and flames as your mind shatters away into nothing.</span>"
+				target.ghostize(0)
+				var/datum/ghosttrap/cult/G = get_ghost_trap("cultist")
+				G.request_player(target, "The Geomoter of Blood claimed the soul of \the [target]. ")
 
 /obj/effect/rune/convert/Topic(href, href_list)
 	if(href_list["join"])
@@ -127,7 +127,7 @@ var/list/sacrificed = list()
 /obj/effect/rune/teleport/cast(var/mob/living/user)
 	if(user.loc == get_turf(src))
 		user.say("Sas[pick("'","`")]so c'arta forbici!")
-		user.visible_message("<span class='warning'>\The [user] disappears in a flash of red light!</span>", "<span class='warning'>You feel as your body gets dragged through the dimension of Nar-Sie!</span>", "<span class='warning'>You hear a sickening crunch.</span>")
+		user.visible_message("<span class='warning'>\The [user] disappears in a flash of red light!</span>", "<span class='warning'>You feel as your body gets dragged through the dimension of Nar-Sie!</span>", "You hear a sickening crunch.")
 		// TODO: actually teleport them
 	else
 		var/input = input(user, "Choose a new rune name.", "Destination", "")
@@ -223,19 +223,24 @@ var/list/sacrificed = list()
 	cultname = "astral journey"
 
 /obj/effect/rune/ajorney/cast(var/mob/living/user)
+	var/tmpkey = user.key
 	if(user.loc != get_turf(src))
 		return
 	user.say("Fwe[pick("'","`")]sh mah erl nyag r'ya!")
 	user.visible_message("<span class='warning'>\The [user]'s eyes glow blue as \he freezes in place, absolutely motionless.</span>", "<span class='warning'>The shadow that is your spirit separates itself from your body. You are now in the realm beyond. While this is a great sight, being here strains your mind and body. Hurry...</span>", "You hear only complete silence for a moment.")
 	announce_ghost_joinleave(user.ghostize(1), 1, "You feel that they had to use some [pick("dark", "black", "blood", "forgotten", "forbidden")] magic to [pick("invade", "disturb", "disrupt", "infest", "taint", "spoil", "blight")] this place!")
+	var/mob/dead/observer/soul
+	for(var/mob/dead/observer/O in dead_mob_list)
+		if(O.key == tmpkey)
+			soul = O
+			break
 	while(user)
 		if(user.stat == DEAD)
 			return
 		if(user.key)
 			return
-		else if(user.loc != get_turf(src) && 0) // TODO
-			var/mob/dead/observer/O
-			O.reenter_corpse()
+		else if(user.loc != get_turf(src) && soul)
+			soul.reenter_corpse()
 		else
 			user.take_organ_damage(0, 1)
 		sleep(20)

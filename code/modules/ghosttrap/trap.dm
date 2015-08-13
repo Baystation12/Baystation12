@@ -112,3 +112,13 @@ proc/populate_ghost_traps()
 	if(istype(target,/mob/living/carbon/alien/diona))
 		target << "<B>You are \a [target], one of a race of drifting interstellar plantlike creatures that sometimes share their seeds with human traders.</B>"
 		target << "<B>Too much darkness will send you into shock and starve you, but light will help you heal.</B>"
+
+/datum/ghosttrap/cult
+	object = "cultist"
+	ban_checks = list("cultist")
+	pref_check = BE_CULTIST
+	ghost_trap_message = "They are occupying a cultist's body now."
+	ghost_trap_role = "Cultist"
+
+/datum/ghosttrap/cult/welcome_candidate(var/mob/target)
+	cult.add_antagonist(target.mind)
