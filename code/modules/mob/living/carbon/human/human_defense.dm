@@ -134,11 +134,9 @@ emp_act
 
 /mob/living/carbon/human/proc/check_shields(var/damage = 0, var/atom/damage_source = null, var/mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
 	for(var/obj/item/shield in list(l_hand, r_hand, wear_suit))
-		if(!shield) 
-			continue
-		var/result = shield.handle_shield(src, damage, damage_source, attacker, def_zone, attack_text)
-		if(result)
-			return result
+		if(!shield) continue
+		. = shield.handle_shield(src, damage, damage_source, attacker, def_zone, attack_text)
+		if(.) return
 	return 0
 
 /mob/living/carbon/human/emp_act(severity)
@@ -293,14 +291,18 @@ emp_act
 			miss_chance = max(15*(distance-2), 0)
 		zone = get_zone_with_miss_chance(zone, src, miss_chance, ranged_attack=1)
 
+		if(zone && O.thrower != src)
+			var/shield_check = check_shields(throw_damage, O, thrower, zone, "[O]")
+			if(shield_check == PROJECTILE_FORCE_MISS)
+				zone = null
+			else if(shield_check)
+				return
+
 		if(!zone)
-			visible_message("\blue \The [O] misses [src] narrowly!")
+			visible_message("<span class='notice'>\The [O] misses [src] narrowly!</span>")
 			return
 
 		O.throwing = 0		//it hit, so stop moving
-
-		if ((O.thrower != src) && check_shields(throw_damage, O, thrower, zone, "[O]"))
-			return
 
 		var/obj/item/organ/external/affecting = get_organ(zone)
 		var/hit_area = affecting.name
