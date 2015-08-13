@@ -104,7 +104,6 @@
 		network.update = 1
 
 /obj/machinery/portable_atmospherics/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
-	var/obj/icon = src
 	if ((istype(W, /obj/item/weapon/tank) && !( src.destroyed )))
 		if (src.holding)
 			return
@@ -136,21 +135,8 @@
 				return
 
 	else if ((istype(W, /obj/item/device/analyzer)) && Adjacent(user))
-		visible_message("<span class='notice'>\The [user] has used \the [W] on \the [src] \icon[icon]</span>")
-		if(air_contents)
-			var/pressure = air_contents.return_pressure()
-			var/total_moles = air_contents.total_moles
-
-			user << "<span class='notice'>Results of analysis of \icon[icon]</span>"
-			if (total_moles>0)
-				user << "<span class='notice'>Pressure: [round(pressure,0.1)] kPa</span>"
-				for(var/g in air_contents.gas)
-					user << "<span class='notice'>[gas_data.name[g]]: [round((air_contents.gas[g] / total_moles) * 100)]%</span>"
-				user << "<span class='notice'>Temperature: [round(air_contents.temperature-T0C)]&deg;C</span>"
-			else
-				user << "<span class='notice'>Tank is empty!</span>"
-		else
-			user << "<span class='notice'>Tank is empty!</span>"
+		var/obj/item/device/analyzer/A = W
+		A.analyze_gases(src, user)
 		return
 
 	return
@@ -162,6 +148,13 @@
 	var/power_losses
 	var/last_power_draw = 0
 	var/obj/item/weapon/cell/cell
+
+/obj/machinery/portable_atmospherics/powered/powered()
+	if(use_power) //using area power
+		return ..()
+	if(cell && cell.charge)
+		return 1
+	return 0
 
 /obj/machinery/portable_atmospherics/powered/attackby(obj/item/I, mob/user)
 	if(istype(I, /obj/item/weapon/cell))
@@ -176,6 +169,7 @@
 		cell = C
 		C.loc = src
 		user.visible_message("<span class='notice'>[user] opens the panel on [src] and inserts [C].</span>", "<span class='notice'>You open the panel on [src] and insert [C].</span>")
+		power_change()
 		return
 
 	if(istype(I, /obj/item/weapon/screwdriver))
@@ -187,8 +181,8 @@
 		cell.add_fingerprint(user)
 		cell.loc = src.loc
 		cell = null
+		power_change()
 		return
-
 	..()
 
 /obj/machinery/portable_atmospherics/proc/log_open()

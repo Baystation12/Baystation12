@@ -10,7 +10,7 @@
 	..()
 	maximum_volume = max
 	my_atom = A
-	
+
 	//I dislike having these here but map-objects are initialised before world/New() is called. >_>
 	if(!chemical_reagents_list)
 		//Chemical Reagents - Initialises all /datum/reagent into a list indexed by reagent id
@@ -257,7 +257,7 @@
 	if(!target || !istype(target))
 		return
 
-	amount = min(amount, total_volume, target.get_free_space() / multiplier)
+	amount = max(0, min(amount, total_volume, target.get_free_space() / multiplier))
 
 	if(!amount)
 		return
@@ -277,9 +277,9 @@
 
 /* Holder-to-atom and similar procs */
 
-//The general proc for applying reagents to things. This proc assumes the reagents are being applied externally, 
+//The general proc for applying reagents to things. This proc assumes the reagents are being applied externally,
 //not directly injected into the contents. It first calls touch, then the appropriate trans_to_*() or splash_mob().
-//If for some reason touch effects are bypassed (e.g. injecting stuff directly into a reagent container or person), 
+//If for some reason touch effects are bypassed (e.g. injecting stuff directly into a reagent container or person),
 //call the appropriate trans_to_*() proc.
 /datum/reagents/proc/trans_to(var/atom/target, var/amount = 1, var/multiplier = 1, var/copy = 0)
 	touch(target) //First, handle mere touch effects

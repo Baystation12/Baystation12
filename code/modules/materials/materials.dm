@@ -27,6 +27,17 @@
 // Assoc list containing all material datums indexed by name.
 var/list/name_to_material
 
+//Returns the material the object is made of, if applicable.
+//Will we ever need to return more than one value here? Or should we just return the "dominant" material.
+/obj/proc/get_material()
+	return null
+
+//mostly for convenience
+/obj/proc/get_material_name()
+	var/material/material = get_material()
+	if(material)
+		return material.name
+
 // Builds the datum list above.
 /proc/populate_material_list(force_remake=0)
 	if(name_to_material && !force_remake) return // Already set up!
@@ -44,12 +55,20 @@ var/list/name_to_material
 		populate_material_list()
 	return name_to_material[name]
 
+/proc/material_display_name(name)
+	var/material/material = get_material_by_name(name)
+	if(material)
+		return material.display_name
+	return null
+
 // Material definition and procs follow.
 /material
 	var/name	                          // Unique name for use in indexing the list.
 	var/display_name                      // Prettier name for display.
 	var/use_name
 	var/flags = 0                         // Various status modifiers.
+	var/sheet_singular_name = "sheet"
+	var/sheet_plural_name = "sheets"
 
 	// Shards/tables/structures
 	var/shard_type = SHARD_SHRAPNEL       // Path of debris object.
@@ -231,6 +250,8 @@ var/list/name_to_material
 	weight = 24
 	hardness = 40
 	stack_origin_tech = list(TECH_MATERIAL = 4)
+	sheet_singular_name = "ingot"
+	sheet_plural_name = "ingots"
 
 /material/gold/bronze //placeholder for ashtrays
 	name = "bronze"
@@ -243,6 +264,8 @@ var/list/name_to_material
 	weight = 22
 	hardness = 50
 	stack_origin_tech = list(TECH_MATERIAL = 3)
+	sheet_singular_name = "ingot"
+	sheet_plural_name = "ingots"
 
 /material/phoron
 	name = "phoron"
@@ -254,6 +277,8 @@ var/list/name_to_material
 	hardness = 30
 	stack_origin_tech = list(TECH_MATERIAL = 2, TECH_PHORON = 2)
 	door_icon_base = "stone"
+	sheet_singular_name = "crystal"
+	sheet_plural_name = "crystals"
 
 /*
 // Commenting this out while fires are so spectacularly lethal, as I can't seem to get this balanced appropriately.
@@ -282,6 +307,8 @@ var/list/name_to_material
 	weight = 22
 	hardness = 55
 	door_icon_base = "stone"
+	sheet_singular_name = "brick"
+	sheet_plural_name = "bricks"
 
 /material/stone/marble
 	name = "marble"
@@ -289,6 +316,7 @@ var/list/name_to_material
 	weight = 26
 	hardness = 100
 	integrity = 201 //hack to stop kitchen benches being flippable, todo: refactor into weight system
+	stack_type = /obj/item/stack/material/marble
 
 /material/steel
 	name = DEFAULT_WALL_MATERIAL
@@ -299,7 +327,7 @@ var/list/name_to_material
 	icon_colour = "#666666"
 
 /material/steel/holographic
-	name = "holographic " + DEFAULT_WALL_MATERIAL
+	name = "holo" + DEFAULT_WALL_MATERIAL
 	display_name = DEFAULT_WALL_MATERIAL
 	stack_type = null
 	shard_type = SHARD_NONE
@@ -409,7 +437,8 @@ var/list/name_to_material
 	return (hardness > 35) //todo
 
 /material/glass/reinforced
-	name = "reinforced glass"
+	name = "rglass"
+	display_name = "reinforced glass"
 	stack_type = /obj/item/stack/material/glass/reinforced
 	flags = MATERIAL_BRITTLE
 	icon_colour = "#00E1FF"
@@ -427,7 +456,8 @@ var/list/name_to_material
 	rod_product = null
 
 /material/glass/phoron
-	name = "phoron glass"
+	name = "phglass"
+	display_name = "phoron glass"
 	stack_type = /obj/item/stack/material/glass/phoronglass
 	flags = MATERIAL_BRITTLE
 	ignition_point = PHORON_MINIMUM_BURN_TEMPERATURE+300
@@ -439,7 +469,8 @@ var/list/name_to_material
 	rod_product = /obj/item/stack/material/glass/phoronrglass
 
 /material/glass/phoron/reinforced
-	name = "reinforced phoron glass"
+	name = "rphglass"
+	display_name = "reinforced phoron glass"
 	stack_type = /obj/item/stack/material/glass/phoronrglass
 	stack_origin_tech = list(TECH_MATERIAL = 4, TECH_PHORON = 2)
 	composite_material = list() //todo
@@ -463,7 +494,7 @@ var/list/name_to_material
 	stack_origin_tech = list(TECH_MATERIAL = 3)
 
 /material/plastic/holographic
-	name = "holographic plastic"
+	name = "holoplastic"
 	display_name = "plastic"
 	stack_type = null
 	shard_type = SHARD_NONE
@@ -473,12 +504,16 @@ var/list/name_to_material
 	stack_type = /obj/item/stack/material/osmium
 	icon_colour = "#9999FF"
 	stack_origin_tech = list(TECH_MATERIAL = 5)
+	sheet_singular_name = "ingot"
+	sheet_plural_name = "ingots"
 
 /material/tritium
 	name = "tritium"
 	stack_type = /obj/item/stack/material/tritium
 	icon_colour = "#777777"
 	stack_origin_tech = list(TECH_MATERIAL = 5)
+	sheet_singular_name = "ingot"
+	sheet_plural_name = "ingots"
 
 /material/mhydrogen
 	name = "mhydrogen"
@@ -492,12 +527,16 @@ var/list/name_to_material
 	icon_colour = "#9999FF"
 	weight = 27
 	stack_origin_tech = list(TECH_MATERIAL = 2)
+	sheet_singular_name = "ingot"
+	sheet_plural_name = "ingots"
 
 /material/iron
 	name = "iron"
 	stack_type = /obj/item/stack/material/iron
 	icon_colour = "#5C5454"
 	weight = 22
+	sheet_singular_name = "ingot"
+	sheet_plural_name = "ingots"
 
 // Adminspawn only, do not let anyone get this.
 /material/voxalloy
@@ -528,9 +567,11 @@ var/list/name_to_material
 	dooropen_noise = 'sound/effects/doorcreaky.ogg'
 	door_icon_base = "wood"
 	destruction_desc = "splinters"
+	sheet_singular_name = "plank"
+	sheet_plural_name = "planks"
 
 /material/wood/holographic
-	name = "holographic wood"
+	name = "holowood"
 	display_name = "wood"
 	stack_type = null
 	shard_type = SHARD_NONE
@@ -566,6 +607,8 @@ var/list/name_to_material
 	icon_colour = "#402821"
 	icon_reinf = "reinf_cult"
 	shard_type = SHARD_STONE_PIECE
+	sheet_singular_name = "brick"
+	sheet_plural_name = "bricks"
 
 /material/cult/place_dismantled_girder(var/turf/target)
 	new /obj/structure/girder/cult(target)
@@ -586,6 +629,8 @@ var/list/name_to_material
 	dooropen_noise = 'sound/effects/attackblob.ogg'
 	door_icon_base = "resin"
 	melting_point = T0C+300
+	sheet_singular_name = "blob"
+	sheet_plural_name = "blobs"
 
 /material/resin/can_open_material_door(var/mob/living/user)
 	var/mob/living/carbon/M = user
@@ -610,6 +655,8 @@ var/list/name_to_material
 	flags = MATERIAL_PADDING
 	ignition_point = T0C+232
 	melting_point = T0C+300
+	sheet_singular_name = "tile"
+	sheet_plural_name = "tiles"
 
 /material/cotton
 	name = "cotton"

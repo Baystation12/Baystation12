@@ -110,9 +110,10 @@
 	..()
 	spawn(30)
 	if(istype(loc, /mob/living/carbon/human))
-		blood_type = loc:dna:b_type
-		dna_hash = loc:dna:unique_enzymes
-		fingerprint_hash = md5(loc:dna:uni_identity)
+		var/mob/living/carbon/human/H = loc
+		blood_type = H.dna.b_type
+		dna_hash = H.dna.unique_enzymes
+		fingerprint_hash = md5(H.dna.uni_identity)
 
 /obj/item/weapon/card/id/attack_self(mob/user as mob)
 	for(var/mob/O in viewers(user, null))

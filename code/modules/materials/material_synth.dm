@@ -34,5 +34,5 @@
 
 /obj/item/stack/material/cyborg/glass/reinforced
 	icon_state = "sheet-rglass"
-	default_type = "reinforced glass"
+	default_type = "rglass"
 	charge_costs = list(500, 1000)

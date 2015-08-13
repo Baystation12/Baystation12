@@ -218,9 +218,9 @@
 		enabled=0
 		updateTurrets()
 
-		sleep(rand(60,600))
-		if(!enabled)
-			enabled=1
-			updateTurrets()
+		spawn(rand(60,600))
+			if(!enabled)
+				enabled=1
+				updateTurrets()
 
 	..()

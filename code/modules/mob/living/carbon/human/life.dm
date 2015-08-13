@@ -445,7 +445,7 @@
 		else if(exhaled_pp > safe_exhaled_max * 0.7)
 			if (!co2_alert || prob(1))
 				var/word = pick("dizzy","short of breath","faint","momentarily confused")
-				src << "<span class='warning>You feel [word].</span>"
+				src << "<span class='warning'>You feel [word].</span>"
 
 			//scale linearly from 0 to 1 between safe_exhaled_max and safe_exhaled_max*0.7
 			var/ratio = 1.0 - (safe_exhaled_max - exhaled_pp)/(safe_exhaled_max*0.3)
@@ -459,7 +459,7 @@
 		else if(exhaled_pp > safe_exhaled_max * 0.6)
 			if (prob(0.3))
 				var/word = pick("a little dizzy","short of breath")
-				src << "<span class='warning>You feel [word].</span>"
+				src << "<span class='warning'>You feel [word].</span>"
 
 		else
 			co2_alert = 0
@@ -486,7 +486,7 @@
 
 			// Enough to make us sleep as well
 			if(SA_pp > SA_sleep_min)
-				sleeping = min(sleeping+2, 10)
+				Sleeping(5)
 
 		// There is sleeping gas in their lungs, but only a little, so give them a bit of a warning
 		else if(SA_pp > 0.15)
@@ -1197,7 +1197,7 @@
 			damageoverlay.overlays += I
 
 	if( stat == DEAD )
-		sight |= (SEE_TURFS|SEE_MOBS|SEE_OBJS)
+		sight |= SEE_TURFS|SEE_MOBS|SEE_OBJS|SEE_SELF
 		see_in_dark = 8
 		if(!druggy)		see_invisible = SEE_INVISIBLE_LEVEL_TWO
 		if(healths)		healths.icon_state = "health7"	//DEAD healthmeter
@@ -1208,20 +1208,8 @@
 						item.zoom()
 						break
 
-				/*
-				if(locate(/obj/item/weapon/gun/energy/sniperrifle, contents))
-					var/obj/item/weapon/gun/energy/sniperrifle/s = locate() in src
-					if(s.zoom)
-						s.zoom()
-				if(locate(/obj/item/device/binoculars, contents))
-					var/obj/item/device/binoculars/b = locate() in src
-					if(b.zoom)
-						b.zoom()
-				*/
-
 	else
 		sight &= ~(SEE_TURFS|SEE_MOBS|SEE_OBJS)
-		see_in_dark = species.darksight
 		see_invisible = see_in_dark>2 ? SEE_INVISIBLE_LEVEL_ONE : SEE_INVISIBLE_LIVING
 
 		if(XRAY in mutations)
@@ -1237,6 +1225,10 @@
 				see_invisible = SEE_INVISIBLE_LIVING
 				seer = 0
 
+		else
+			sight = species.vision_flags
+			see_in_dark = species.darksight
+			see_invisible = see_in_dark>2 ? SEE_INVISIBLE_LEVEL_ONE : SEE_INVISIBLE_LIVING
 		var/tmp/glasses_processed = 0
 		var/obj/item/weapon/rig/rig = back
 		if(istype(rig) && rig.visor)
@@ -1248,6 +1240,10 @@
 		if(glasses && !glasses_processed)
 			glasses_processed = 1
 			process_glasses(glasses)
+		if(XRAY in mutations)
+			sight |= SEE_TURFS|SEE_MOBS|SEE_OBJS
+			see_in_dark = 8
+			if(!druggy)		see_invisible = SEE_INVISIBLE_LEVEL_TWO
 
 		if(!glasses_processed && (species.vision_flags > 0))
 			sight |= species.vision_flags
@@ -1272,6 +1268,8 @@
 							if(0 to 20)				healths.icon_state = "health5"
 							else					healths.icon_state = "health6"
 
+			if(!seer)
+				see_invisible = SEE_INVISIBLE_LIVING
 		if(nutrition_icon)
 			switch(nutrition)
 				if(450 to INFINITY)				nutrition_icon.icon_state = "nutrition0"
@@ -1399,6 +1397,8 @@
 			sight |= G.vision_flags
 			if(!druggy && !seer)
 				see_invisible = SEE_INVISIBLE_MINIMUM
+		if(G.see_invisible >= 0)
+			see_invisible = G.see_invisible
 		if(istype(G,/obj/item/clothing/glasses/night) && !seer)
 			see_invisible = SEE_INVISIBLE_MINIMUM
 /* HUD shit goes here, as long as it doesn't modify sight flags */
@@ -1684,6 +1684,7 @@
 		holder.icon_state = "hudblank"
 		if(mind)
 
+			// TODO: Update to new antagonist system.
 			switch(mind.special_role)
 				if("traitor","Mercenary")
 					holder.icon_state = "hudsyndicate"
@@ -1745,6 +1746,10 @@
 
 	if (thermal_protection < 1 && bodytemperature < burn_temperature)
 		bodytemperature += round(BODYTEMP_HEATING_MAX*(1-thermal_protection), 1)
+
+/mob/living/carbon/human/rejuvenate()
+	restore_blood()
+	..()
 
 #undef HUMAN_MAX_OXYLOSS
 #undef HUMAN_CRIT_MAX_OXYLOSS

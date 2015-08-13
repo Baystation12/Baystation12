@@ -43,7 +43,7 @@
  * This item is completely unused, but removing it will break something in R&D and Radio code causing PDA and Ninja code to fail on compile
  */
 
-/var/list/acting_rank_prefixes = list("acting", "temporary", "interim")
+/var/list/acting_rank_prefixes = list("acting", "temporary", "interim", "provisional")
 
 /proc/make_list_rank(rank)
 	for(var/prefix in acting_rank_prefixes)

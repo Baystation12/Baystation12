@@ -9,8 +9,11 @@
 		return 0
 
 	current_antagonists |= player
+	
+	//do this again, just in case
 	if(flags & ANTAG_OVERRIDE_JOB)
-		player.assigned_role = "MODE"
+		player.assigned_role = role_text
+	player.special_role = role_text
 
 	if(istype(player.current, /mob/dead))
 		create_default(player.current)

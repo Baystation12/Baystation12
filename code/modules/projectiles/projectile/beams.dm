@@ -8,6 +8,7 @@
 	eyeblur = 4
 	var/frequency = 1
 	hitscan = 1
+	invisibility = 101	//beam projectiles are invisible as they are rendered by the effect engine
 
 	muzzle_type = /obj/effect/projectile/laser/muzzle
 	tracer_type = /obj/effect/projectile/laser/tracer

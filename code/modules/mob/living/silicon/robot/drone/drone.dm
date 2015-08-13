@@ -160,11 +160,11 @@
 	clear_supplied_laws()
 	clear_inherent_laws()
 	laws = new /datum/ai_laws/syndicate_override
-	set_zeroth_law("Only [user.real_name] and people he designates as being such are operatives.")
+	set_zeroth_law("Only [user.real_name] and people \he designates as being such are operatives.")
 
 	src << "<b>Obey these laws:</b>"
 	laws.show_laws(src)
-	src << "<span class='danger'>ALERT: [user.real_name] is your new master. Obey your new laws and his commands.</span>"
+	src << "<span class='danger'>ALERT: [user.real_name] is your new master. Obey your new laws and \his commands.</span>"
 	return 1
 
 //DRONE LIFE/DEATH
@@ -213,9 +213,9 @@
 			death()
 
 /mob/living/silicon/robot/drone/proc/full_law_reset()
-	clear_supplied_laws()
-	clear_inherent_laws()
-	clear_ion_laws()
+	clear_supplied_laws(1)
+	clear_inherent_laws(1)
+	clear_ion_laws(1)
 	laws = new law_type
 
 //Reboot procs.
@@ -231,7 +231,7 @@
 /mob/living/silicon/robot/drone/proc/question(var/client/C)
 	spawn(0)
 		if(!C || jobban_isbanned(C,"Cyborg"))	return
-		var/response = alert(C, "Someone is attempting to reboot a maintenance drone. Would you like to play as one?", "Maintenance drone reboot", "Yes", "No", "Never for this round.")
+		var/response = alert(C, "Someone is attempting to reboot a maintenance drone. Would you like to play as one?", "Maintenance drone reboot", "Yes", "No", "Never for this round")
 		if(!C || ckey)
 			return
 		if(response == "Yes")
@@ -257,23 +257,21 @@
 	src << "<b>You are a maintenance drone, a tiny-brained robotic repair machine</b>."
 	src << "You have no individual will, no personality, and no drives or urges other than your laws."
 	src << "Remember,  you are <b>lawed against interference with the crew</b>. Also remember, <b>you DO NOT take orders from the AI.</b>"
-	src << "Use <b>:d</b> to talk to other drones and <b>say</b> to speak silently to your nearby fellows."
+	src << "Use <b>say ;Hello</b> to talk to other drones and <b>say Hello</b> to speak silently to your nearby fellows."
 
 /mob/living/silicon/robot/drone/start_pulling(var/atom/movable/AM)
 
-	if(istype(AM,/obj/item/pipe) || istype(AM,/obj/structure/disposalconstruct))
-		..()
-	else if(istype(AM,/obj/item))
-		var/obj/item/O = AM
-		if(O.w_class > can_pull_size)
-			src << "<span class='warning'>You are too small to pull that.</span>"
-			return
+	if(!(istype(AM,/obj/item/pipe) || istype(AM,/obj/structure/disposalconstruct)))
+		if(istype(AM,/obj/item))
+			var/obj/item/O = AM
+			if(O.w_class > can_pull_size)
+				src << "<span class='warning'>You are too small to pull that.</span>"
+				return
 		else
-			..()
-	else
-		if(!can_pull_mobs)
-			src << "<span class='warning'>You are too small to pull that.</span>"
-			return
+			if(!can_pull_mobs)
+				src << "<span class='warning'>You are too small to pull that.</span>"
+				return
+	..()
 
 /mob/living/silicon/robot/drone/add_robot_verbs()
 	src.verbs |= silicon_subsystems
