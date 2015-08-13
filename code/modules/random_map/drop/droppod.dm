@@ -4,19 +4,6 @@
 #define SD_EMPTY_TILE 3
 #define SD_SUPPLY_TILE 7
 
-var/global/list/supply_drop_random_loot_types = list(
-	"guns",
-	"seeds",
-	"materials",
-	"food",
-	"armour",
-	"medical",
-	"power",
-	"hydroponics",
-	"lasers",
-	"ballistics"
-	)
-
 /datum/random_map/droppod
 	descriptor = "drop pod"
 	initial_wall_cell = 0
