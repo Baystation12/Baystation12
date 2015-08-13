@@ -210,14 +210,23 @@ proc/listclearnulls(list/list)
 	return (result + R.Copy(Ri, 0))
 
 //Mergesort: divides up the list into halves to begin the sort
-/proc/sortAtom(var/list/atom/L, var/order = 1)
+/proc/sortAtom(var/list/atom/L, var/order = 1, first = 1)
 	if(isnull(L) || L.len < 2)
+		if(!L)
+			testing("sortAtom() called with null as first parameter!")
 		return L
+	if(first)
+		var/msg = "sortAtom() called with list([L.len]): "
+		for(var/x in L)
+			msg += "'[x]'; "
+		testing(msg)
 	var/middle = L.len / 2 + 1
-	return mergeAtoms(sortAtom(L.Copy(0,middle)), sortAtom(L.Copy(middle)), order)
+	return mergeAtoms(sortAtom(L.Copy(0,middle), order, 0), sortAtom(L.Copy(middle), order, 0), order)
 
 //Mergsort: does the actual sorting and returns the results back to sortAtom
 /proc/mergeAtoms(var/list/atom/L, var/list/atom/R, var/order = 1)
+	if(!L || !R)
+		testing("mergeAtoms([L] ([L ? L.len : "*null*"]), [R] ([R ? R.len : "*null*"]))")
 	var/Li=1
 	var/Ri=1
 	var/list/result = new()
@@ -230,8 +239,14 @@ proc/listclearnulls(list/list)
 			result += R[Ri++]
 
 	if(Li <= L.len)
-		return (result + L.Copy(Li, 0))
-	return (result + R.Copy(Ri, 0))
+		. = (result + L.Copy(Li, 0))
+		if(!.)
+			testing("mergeAtoms returning [.]")
+		return
+	. = (result + R.Copy(Ri, 0))
+	if(!.)
+		testing("mergeAtoms returning [.]")
+	return
 
 
 

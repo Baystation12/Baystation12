@@ -170,20 +170,20 @@
 			src.electronics = I
 
 	else if(istype(I, /obj/item/stack/material) && !glass)
-		var/obj/item/stack/material/S = I
+		var/obj/item/stack/S = I
+		var/material_name = S.get_material_name()
 		if (S)
 			if (S.get_amount() >= 1)
-				if(istype(S, /obj/item/stack/material/glass/reinforced))
+				if(material_name == "rglass")
 					playsound(src.loc, 'sound/items/Crowbar.ogg', 100, 1)
 					user.visible_message("[user] adds [S.name] to the airlock assembly.", "You start to install [S.name] into the airlock assembly.")
 					if(do_after(user, 40) && !glass)
 						if (S.use(1))
 							user << "<span class='notice'>You installed reinforced glass windows into the airlock assembly.</span>"
 							glass = 1
-				else if(istype(S, /obj/item/stack/material) && S.default_type)
-					var/M = S.default_type
+				else if(material_name)
 					// Ugly hack, will suffice for now. Need to fix it upstream as well, may rewrite mineral walls. ~Z
-					if(M in list("mhydrogen","osmium","tritium","platinum","iron"))
+					if(!(material_name in list("gold", "silver", "diamond", "uranium", "phoron", "sandstone")))
 						user << "You cannot make an airlock out of that material."
 						return
 					if(S.get_amount() >= 2)
@@ -191,9 +191,8 @@
 						user.visible_message("[user] adds [S.name] to the airlock assembly.", "You start to install [S.name] into the airlock assembly.")
 						if(do_after(user, 40) && !glass)
 							if (S.use(2))
-								user << "<span class='notice'>You installed [M] plating into the airlock assembly.</span>"
-								glass = "[M]"
-
+								user << "<span class='notice'>You installed [material_display_name(material_name)] plating into the airlock assembly.</span>"
+								glass = material_name
 	else
 		..()
 	update_state()

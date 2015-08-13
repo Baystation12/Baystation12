@@ -38,8 +38,8 @@
 				state = 3
 				icon_state = "3"
 		return
-	else if(state == 3 && istype(I, /obj/item/stack/material/glass))
-		var/obj/item/stack/material/glass/G = I
+	else if(state == 3 && istype(I, /obj/item/stack/material) && I.get_material_name() == "glass")
+		var/obj/item/stack/G = I
 		if(G.get_amount() < 2)
 			user << "<span class='warning'>You need two sheets of glass to put in the glass panel.</span>"
 			return
@@ -50,6 +50,7 @@
 				user << "<span class='notice'>You put in the glass panel.</span>"
 				state = 4
 				icon_state = "4"
+
 		return
 
 /obj/structure/computerframe/gather_actions()

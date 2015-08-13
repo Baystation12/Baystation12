@@ -160,11 +160,11 @@
 	clear_supplied_laws()
 	clear_inherent_laws()
 	laws = new /datum/ai_laws/syndicate_override
-	set_zeroth_law("Only [user.real_name] and people he designates as being such are operatives.")
+	set_zeroth_law("Only [user.real_name] and people \he designates as being such are operatives.")
 
 	src << "<b>Obey these laws:</b>"
 	laws.show_laws(src)
-	src << "<span class='danger'>ALERT: [user.real_name] is your new master. Obey your new laws and his commands.</span>"
+	src << "<span class='danger'>ALERT: [user.real_name] is your new master. Obey your new laws and \his commands.</span>"
 	return 1
 
 //DRONE LIFE/DEATH
@@ -261,19 +261,17 @@
 
 /mob/living/silicon/robot/drone/start_pulling(var/atom/movable/AM)
 
-	if(istype(AM,/obj/item/pipe) || istype(AM,/obj/structure/disposalconstruct))
-		..()
-	else if(istype(AM,/obj/item))
-		var/obj/item/O = AM
-		if(O.w_class > can_pull_size)
-			src << "<span class='warning'>You are too small to pull that.</span>"
-			return
+	if(!(istype(AM,/obj/item/pipe) || istype(AM,/obj/structure/disposalconstruct)))
+		if(istype(AM,/obj/item))
+			var/obj/item/O = AM
+			if(O.w_class > can_pull_size)
+				src << "<span class='warning'>You are too small to pull that.</span>"
+				return
 		else
-			..()
-	else
-		if(!can_pull_mobs)
-			src << "<span class='warning'>You are too small to pull that.</span>"
-			return
+			if(!can_pull_mobs)
+				src << "<span class='warning'>You are too small to pull that.</span>"
+				return
+	..()
 
 /mob/living/silicon/robot/drone/add_robot_verbs()
 	src.verbs |= silicon_subsystems

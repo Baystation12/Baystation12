@@ -337,7 +337,7 @@
 			if(src.occupant.reagents.get_reagent_amount(chemical) + amount <= 20)
 				use_power(amount * CHEM_SYNTH_ENERGY)
 				src.occupant.reagents.add_reagent(chemical, amount)
-				user << "Occupant now has [src.occupant.reagents.get_reagent_amount(chemical)] units of [available_chemicals[chemical]] in his/her bloodstream."
+				user << "Occupant now has [src.occupant.reagents.get_reagent_amount(chemical)] units of [available_chemicals[chemical]] in their bloodstream."
 				return
 		user << "There's no occupant in the sleeper or the subject has too many chemicals!"
 		return

@@ -102,6 +102,7 @@
 
 		//ran out of charge
 		if (!cell.charge)
+			power_change()
 			update_icon()
 
 	src.updateDialog()
