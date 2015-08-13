@@ -738,7 +738,7 @@
 	if(!user)
 		return
 
-	if(wiresexposed /*&& (!istype(user, /mob/living/silicon))*/) //Commented out the typecheck to allow engiborgs to repair damaged apcs.
+	if(wiresexposed && !istype(user, /mob/living/silicon/ai))
 		wires.Interact(user)
 
 	return ui_interact(user)

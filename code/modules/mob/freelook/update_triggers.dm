@@ -29,7 +29,6 @@
 	..()
 
 /obj/structure/New()
-	..()
 	updateVisibility(src)
 
 // EFFECTS

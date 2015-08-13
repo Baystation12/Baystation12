@@ -50,7 +50,7 @@ var/list/delayed_garbage = list()
 			testing("GC: [refID] not old enough, breaking at [world.time] for [GCd_at_time - time_to_kill] deciseconds until [GCd_at_time + collection_timeout]")
 			#endif
 			break // Everything else is newer, skip them
-		var/atom/A = locate(refID)
+		var/datum/A = locate(refID)
 		#ifdef GC_DEBUG
 		testing("GC: [refID] old enough to test: GCd_at_time: [GCd_at_time] time_to_kill: [time_to_kill] current: [world.time]")
 		#endif

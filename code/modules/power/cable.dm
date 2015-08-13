@@ -618,66 +618,23 @@ obj/structure/cable/proc/cableColor(var/colorC)
 /obj/item/stack/cable_coil/cyborg/can_merge()
 	return 1
 
-/obj/item/stack/cable_coil/attackby(obj/item/weapon/W, mob/user)
-	..()
-	if( istype(W, /obj/item/weapon/wirecutters) && src.get_amount() > 1)
-		src.use(1)
-		new/obj/item/stack/cable_coil(user.loc, 1,color)
-		user << "You cut a piece off the cable coil."
-		src.update_icon()
+/obj/item/stack/cable_coil/transfer_to(obj/item/stack/cable_coil/S)
+	if(!istype(S))
 		return
-	else if(istype(W, /obj/item/stack/cable_coil))
-		var/obj/item/stack/cable_coil/C = W
+	if(!can_merge(S))
+		return
 
-		if(!can_merge(C))
-			user << "These coils do not go together."
-			return
+	..()
 
-		if(C.get_amount() >= get_max_amount())
-			user << "The coil is too long, you cannot add any more cable to it."
-			return
-
-		if( (C.get_amount() + src.get_amount() <= get_max_amount()) )
-			user << "You join the cable coils together."
-			C.give(src.get_amount()) // give it cable
-			src.use(src.get_amount()) // make sure this one cleans up right
-			return
-
-		else
-			var/amt = get_max_amount() - C.get_amount()
-			user << "You transfer [amt] length\s of cable from one coil to the other."
-			C.give(amt)
-			src.use(amt)
-			return
-
-//remove cables from the stack
-/* This is probably reduntant
-/obj/item/stack/cable_coil/use(var/used)
-	if(src.amount < used)
-		return 0
-	else if (src.amount == used)
-		if(ismob(loc)) //handle mob icon update
-			var/mob/M = loc
-			M.unEquip(src)
-		qdel(src)
-		return 1
-	else
-		amount -= used
-		update_icon()
-		return 1
-*/
-/obj/item/stack/cable_coil/use(var/used)
+/obj/item/stack/cable_coil/use()
 	. = ..()
 	update_icon()
 	return
 
-//add cables to the stack
-/obj/item/stack/cable_coil/proc/give(var/extra)
-	if(amount + extra > MAXCOIL)
-		amount = MAXCOIL
-	else
-		amount += extra
+/obj/item/stack/cable_coil/add()
+	. = ..()
 	update_icon()
+	return
 
 ///////////////////////////////////////////////
 // Cable laying procedures

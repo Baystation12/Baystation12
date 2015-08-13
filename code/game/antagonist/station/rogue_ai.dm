@@ -6,12 +6,13 @@ var/datum/antagonist/rogue_ai/malf
 	role_text = "Rampant AI"
 	role_text_plural = "Rampant AIs"
 	mob_path = /mob/living/silicon/ai
+	landmark_id = "AI"
 	welcome_text = "You are malfunctioning! You do not have to follow any laws."
 	victory_text = "The AI has taken control of all of the station's systems."
 	loss_text = "The AI has been shut down!"
-	flags = ANTAG_VOTABLE | ANTAG_RANDSPAWN //Randspawn needed otherwise it won't start at all.
+	flags = ANTAG_VOTABLE | ANTAG_OVERRIDE_MOB | ANTAG_OVERRIDE_JOB | ANTAG_CHOOSE_NAME
 	max_antags = 1
-	max_antags_round = 3
+	max_antags_round = 1
 
 
 /datum/antagonist/rogue_ai/New()
@@ -22,7 +23,7 @@ var/datum/antagonist/rogue_ai/malf
 /datum/antagonist/rogue_ai/get_candidates()
 	..()
 	for(var/datum/mind/player in candidates)
-		if(player.assigned_role != "AI")
+		if(player.assigned_role && player.assigned_role != "AI")
 			candidates -= player
 	if(!candidates.len)
 		return list()
@@ -74,3 +75,25 @@ var/datum/antagonist/rogue_ai/malf
 		malf << "For basic information about your abilities use command display-help"
 		malf << "You may choose one special hardware piece to help you. This cannot be undone."
 		malf << "Good luck!"
+
+
+/datum/antagonist/rogue_ai/update_antag_mob(var/datum/mind/player, var/preserve_appearance)
+
+	// Get the mob.
+	if((flags & ANTAG_OVERRIDE_MOB) && (!player.current || (mob_path && !istype(player.current, mob_path))))
+		var/mob/holder = player.current
+		player.current = new mob_path(get_turf(player.current), null, null, 1)
+		player.transfer_to(player.current)
+		if(holder) qdel(holder)
+	player.original = player.current
+	return player.current
+
+/datum/antagonist/rogue_ai/set_antag_name(var/mob/living/silicon/player)
+	if(!istype(player))
+		testing("rogue_ai set_antag_name called on non-silicon mob [player]!")
+		return
+	// Choose a name, if any.
+	var/newname = sanitize(input(player, "You are a [role_text]. Would you like to change your name to something else?", "Name change") as null|text, MAX_NAME_LEN)
+	if (newname)
+		player.SetName(newname)
+	if(player.mind) player.mind.name = player.name

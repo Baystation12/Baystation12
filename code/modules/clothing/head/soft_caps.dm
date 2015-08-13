@@ -2,7 +2,6 @@
 	name = "cargo cap"
 	desc = "It's a peaked cap in a tasteless yellow color."
 	icon_state = "cargosoft"
-	flags = HEADCOVERSEYES
 	item_state = "helmet"
 	var/flipped = 0
 	siemens_coefficient = 0.9

@@ -34,7 +34,7 @@
 /obj/item/weapon/melee/energy/attack_self(mob/living/user as mob)
 	if (active)
 		if ((CLUMSY in user.mutations) && prob(50))
-			user.visible_message("<span class='danger'>[user] accidentally cuts \himself with \the [src].</span>",\
+			user.visible_message("<span class='danger'>\The [user] accidentally cuts \himself with \the [src].</span>",\
 			"<span class='danger'>You accidentally cut yourself with \the [src].</span>")
 			user.take_organ_damage(5,5)
 		deactivate(user)
@@ -50,9 +50,10 @@
 	return
 
 /obj/item/weapon/melee/energy/suicide_act(mob/user)
+	var/tempgender = "[user.gender == MALE ? "he's" : user.gender == FEMALE ? "she's" : "they are"]"
 	if (active)
-		viewers(user) << pick("<span class='danger'>[user] is slitting \his stomach open with the [src.name]! It looks like \he's trying to commit seppuku.</span>", \
-							"<span class='danger'>[user] is falling on the [src.name]! It looks like \he's trying to commit suicide.</span>")
+		viewers(user) << pick("<span class='danger'>\The [user] is slitting \his stomach open with the [src.name]! It looks like [tempgender] trying to commit seppuku.</span>", \
+							"<span class='danger'>\The [user] is falling on the [src.name]! It looks like [tempgender] trying to commit suicide.</span>")
 		return (BRUTELOSS|FIRELOSS)
 
 /*
@@ -90,7 +91,7 @@
 	user << "\blue \The [src] is de-energised. It's just a regular axe now."
 
 /obj/item/weapon/melee/energy/axe/suicide_act(mob/user)
-	viewers(user) << "\red <b>[user] swings the [src.name] towards /his head! It looks like \he's trying to commit suicide.</b>"
+	viewers(user) << "\red <b>\The [user] swings the [src.name] towards \his head! It looks like \he's trying to commit suicide.</b>"
 	return (BRUTELOSS|FIRELOSS)
 
 /*
