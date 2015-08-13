@@ -17,9 +17,12 @@
 
 	var/datum/gas_mixture/air_contents = null
 	var/distribute_pressure = ONE_ATMOSPHERE
-	var/integrity = 3
+	var/integrity = 15
 	var/volume = 70
 	var/manipulated_by = null		//Used by _onclick/hud/screen_objects.dm internals to determine if someone has messed with our tank or not.
+	var/welded = 0
+	var/damaged = 0
+	var/soundplayed = 0
 						//If they have and we haven't scanned it with the PDA or gas analyzer then we might just breath whatever they put in it.
 /obj/item/weapon/tank/New()
 	..()
@@ -52,25 +55,27 @@
 	var/status
 
 	if (celsius_temperature < 20)
-		descriptive = "cold"
+		descriptive = "cold."
 		status = "warning"
 	else if (celsius_temperature < 40)
 		descriptive = "room temperature"
-		status = "notice"
+		status = "notice."
 	else if (celsius_temperature < 80)
-		descriptive = "lukewarm"
+		descriptive = "lukewarm."
 		status = "warning"
 	else if (celsius_temperature < 100)
-		descriptive = "warm"
+		descriptive = "warm."
 		status = "warning"
 	else if (celsius_temperature < 300)
-		descriptive = "hot"
+		descriptive = "hot!"
 		status = "danger"
 	else
-		descriptive = "furiously hot"
+		descriptive = "furiously hot!"
 		status = "danger"
 
 	user << "<span class='[status]'>\The \icon[icon][src] feels [descriptive]</span>"
+	if(src.welded)
+		user << "<span class='warning'>It appears the safety relief valve has been welded shut!</span>"
 
 	return
 
@@ -117,6 +122,32 @@
 	if(istype(W, /obj/item/device/assembly_holder))
 		bomb_assemble(W,user)
 
+	if(istype(W, /obj/item/weapon/weldingtool) && W:welding)
+		var/obj/item/weapon/weldingtool/T = W
+		var/fail = 0
+		T.eyecheck(user)
+		if(welded)
+			user.visible_message("<span class='notice'>[user] begins welding the safety relief valve open on \the [src]!</span>", "<span class='notice'>You begin welding the safety relief valve open on \the [src]!</span>")
+			if(do_after(user, 40))
+				user.visible_message("<span class='notice'>[user] welds the safety relief valve open on \the [src]!</span>", "<span class='notice'>You weld the safety relief valve open on \the [src]!</span>")
+			else
+				fail =1
+		else
+			user.visible_message("<span class='notice'>[user] begins welding the safety relief valve shut on \the [src]!</span>", "<span class='notice'>You begin welding the safety relief valve shut on \the [src]!</span>")
+			if(do_after(user, 40))
+				user.visible_message("<span class='notice'>[user] welds the safety relief valve shut on \the [src]!</span>", "<span class='notice'>You weld the safety relief valve shut on \the [src]!</span>")
+			else
+				fail = 1
+
+		if(fail)
+			var/damage_inflicted = rand(1,5)
+			damaged += damage_inflicted
+			integrity -= damage_inflicted
+			src.air_contents.temperature += rand(1,5) * damage_inflicted
+			user.visible_message("<span class='warning'>[user] accidently rakes the torch across \the [src]!</span>", "<span class='warning'>You accidently rake the torch across \the [src]!</span>")
+		else
+			welded = !welded
+
 /obj/item/weapon/tank/attack_self(mob/user as mob)
 	if (!(src.air_contents))
 		return
@@ -131,7 +162,7 @@
 			location = loc.loc
 	else if(istype(loc, /mob/living/carbon))
 		location = loc
-	
+
 	var/using_internal
 	if(istype(location))
 		if(location.internal==src)
@@ -265,26 +296,32 @@
 
 	var/pressure = air_contents.return_pressure()
 	if(pressure > TANK_FRAGMENT_PRESSURE)
-		if(!istype(src.loc,/obj/item/device/transfer_valve))
-			message_admins("Explosive tank rupture! last key to touch the tank was [src.fingerprintslast].")
-			log_game("Explosive tank rupture! last key to touch the tank was [src.fingerprintslast].")
+		if(integrity <= 0)
+			if(!istype(src.loc,/obj/item/device/transfer_valve) && !istype(src.loc,/obj/item/device/onetankbomb))
+				message_admins("Explosive tank rupture! last key to touch the tank was [src.fingerprintslast].")
+				log_game("Explosive tank rupture! last key to touch the tank was [src.fingerprintslast].")
 
-		//Give the gas a chance to build up more pressure through reacting
-		air_contents.react()
-		air_contents.react()
-		air_contents.react()
+			//Give the gas a chance to build up more pressure through reacting
+			air_contents.react()
+			air_contents.react()
+			air_contents.react()
 
-		pressure = air_contents.return_pressure()
-		var/range = (pressure-TANK_FRAGMENT_PRESSURE)/TANK_FRAGMENT_SCALE
+			pressure = air_contents.return_pressure()
+			var/range = (pressure-TANK_FRAGMENT_PRESSURE)/TANK_FRAGMENT_SCALE
 
-		explosion(
-			get_turf(loc), 
-			round(min(BOMBCAP_DVSTN_RADIUS, range*0.25)), 
-			round(min(BOMBCAP_HEAVY_RADIUS, range*0.50)), 
-			round(min(BOMBCAP_LIGHT_RADIUS, range*1.00)), 
-			round(min(BOMBCAP_FLASH_RADIUS, range*1.50)), 
-			)
-		qdel(src)
+			explosion(
+				get_turf(loc),
+				round(min(BOMBCAP_DVSTN_RADIUS, range*0.25)),
+				round(min(BOMBCAP_HEAVY_RADIUS, range*0.50)),
+				round(min(BOMBCAP_LIGHT_RADIUS, range*1.00)),
+				round(min(BOMBCAP_FLASH_RADIUS, range*1.50)),
+				)
+			qdel(src)
+		else
+			integrity-= rand(1,2)
+			var/damage_inflicted = rand(1,2)
+			damaged += damage_inflicted
+			integrity -= damage_inflicted
 
 	else if(pressure > TANK_RUPTURE_PRESSURE)
 		//world << "<span class='notice'>[x],[y] tank is rupturing: [pressure] kPa, integrity [integrity]</span>"
@@ -293,21 +330,41 @@
 			if(!T)
 				return
 			T.assume_air(air_contents)
-			playsound(src.loc, 'sound/effects/spray.ogg', 10, 1, -3)
+
+			playsound(src.loc, 'sound/effects/bang.ogg', 50, 1, 5)
+			visible_message("<span class='warning'>\The [src] violently ruptures!</span>")
+
 			qdel(src)
+
+
 		else
-			integrity--
+			integrity-= rand(1,2)
 
 	else if(pressure > TANK_LEAK_PRESSURE)
 		//world << "<span class='notice'>[x],[y] tank is leaking: [pressure] kPa, integrity [integrity]</span>"
-		if(integrity <= 0)
+		if(integrity <= 0 && !welded)
 			var/turf/simulated/T = get_turf(src)
 			if(!T)
 				return
 			var/datum/gas_mixture/leaked_gas = air_contents.remove_ratio(0.25)
 			T.assume_air(leaked_gas)
+			if(!soundplayed)
+				visible_message("<span class='warning'>\The [src] hisses violently!</span>")
+				playsound(src.loc, 'sound/effects/spray.ogg', 10, 1, -3)
+				soundplayed = 1
+				spawn(100)
+					src.soundplayed = 0
 		else
 			integrity--
 
-	else if(integrity < 3)
+	else if(integrity < 0 && damaged >= 15)
+		var/turf/simulated/T = get_turf(src)
+		if(!T)
+			return
+		T.assume_air(air_contents)
+		visible_message("<span class='warning'>\The [src] flies apart!</span>")
+		playsound(src.loc, 'sound/effects/spray.ogg', 10, 1, -3)
+		qdel(src)
+
+	else if((integrity + damaged) < 15)
 		integrity++
