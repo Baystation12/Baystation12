@@ -7,7 +7,7 @@
 			return
 
 	// Pass repair items on to the chestpiece.
-	if(chest && (istype(W,/obj/item/stack/material/plastic) || istype(W,/obj/item/stack/material/steel) || istype(W, /obj/item/weapon/weldingtool)))
+	if(chest && (istype(W,/obj/item/stack/material) || istype(W, /obj/item/weapon/weldingtool)))
 		return chest.attackby(W,user)
 
 	// Lock or unlock the access panel.

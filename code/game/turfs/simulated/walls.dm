@@ -28,7 +28,7 @@
 		materialtype = DEFAULT_WALL_MATERIAL
 	material = get_material_by_name(materialtype)
 	if(!isnull(rmaterialtype))
-		reinf_material = name_to_material[rmaterialtype]
+		reinf_material = get_material_by_name(rmaterialtype)
 	update_material()
 
 	processing_turfs |= src
@@ -37,7 +37,6 @@
 	processing_turfs -= src
 	dismantle_wall(null,null,1)
 	..()
-
 
 /turf/simulated/wall/process()
 	// Calling parent will kill processing
@@ -170,7 +169,7 @@
 			O.loc = src
 
 	clear_plants()
-	material = name_to_material["placeholder"]
+	material = get_material_by_name("placeholder")
 	reinf_material = null
 	update_connections(1)
 

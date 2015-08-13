@@ -139,10 +139,6 @@ proc/get_radio_key_from_channel(var/channel)
 			return say_dead(message)
 		return
 
-	if(is_muzzled())
-		src << "<span class='danger'>You're muzzled and cannot speak!</span>"
-		return
-
 	var/message_mode = parse_message_mode(message, "headset")
 
 	switch(copytext(message,1,2))
@@ -179,6 +175,10 @@ proc/get_radio_key_from_channel(var/channel)
 			verb = speaking.get_spoken_verb(copytext(message, length(message)))
 	else
 		verb = say_quote(message)
+
+	if(is_muzzled())
+		src << "<span class='danger'>You're muzzled and cannot speak!</span>"
+		return
 
 	message = trim_left(message)
 
