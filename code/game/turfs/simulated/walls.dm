@@ -1,5 +1,3 @@
-var/list/global/wall_cache = list()
-
 /turf/simulated/wall
 	name = "wall"
 	desc = "A huge chunk of metal used to seperate rooms."
@@ -20,6 +18,8 @@ var/list/global/wall_cache = list()
 	var/material/reinf_material
 	var/last_state
 	var/construction_stage
+
+	var/list/wall_connections = list("0", "0", "0", "0")
 
 /turf/simulated/wall/New(var/newloc, var/materialtype, var/rmaterialtype)
 	..(newloc)
@@ -171,7 +171,7 @@ var/list/global/wall_cache = list()
 	clear_plants()
 	material = get_material_by_name("placeholder")
 	reinf_material = null
-	check_relatives()
+	update_connections(1)
 
 	ChangeTurf(/turf/simulated/floor/plating)
 
