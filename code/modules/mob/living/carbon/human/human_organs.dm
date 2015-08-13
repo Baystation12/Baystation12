@@ -134,28 +134,29 @@
 			continue
 
 		if(E.is_broken() || E.is_dislocated())
-			if(E.body_part == HAND_LEFT)
-				if(!l_hand)
-					continue
-				drop_from_inventory(l_hand)
-			else
-				if(!r_hand)
-					continue
-				drop_from_inventory(r_hand)
+			switch(E.body_part)
+				if(HAND_LEFT, ARM_LEFT)
+					if(!l_hand)
+						continue
+					drop_from_inventory(l_hand)
+				if(HAND_RIGHT, ARM_RIGHT)
+					if(!r_hand)
+						continue
+					drop_from_inventory(r_hand)
 
 			var/emote_scream = pick("screams in pain and ", "lets out a sharp cry and ", "cries out and ")
 			emote("me", 1, "[(species.flags & NO_PAIN) ? "" : emote_scream ]drops what they were holding in their [E.name]!")
 
 		else if(E.is_malfunctioning())
-
-			if(E.body_part == HAND_LEFT)
-				if(!l_hand)
-					continue
-				drop_from_inventory(l_hand)
-			else
-				if(!r_hand)
-					continue
-				drop_from_inventory(r_hand)
+			switch(E.body_part)
+				if(HAND_LEFT, ARM_LEFT)
+					if(!l_hand)
+						continue
+					drop_from_inventory(l_hand)
+				if(HAND_RIGHT, ARM_RIGHT)
+					if(!r_hand)
+						continue
+					drop_from_inventory(r_hand)
 
 			emote("me", 1, "drops what they were holding, their [E.name] malfunctioning!")
 
