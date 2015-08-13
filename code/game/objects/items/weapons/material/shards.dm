@@ -89,4 +89,4 @@
 	..(loc, "steel")
 
 /obj/item/weapon/material/shard/phoron/New(loc)
-	..(loc, "phoron glass")
+	..(loc, "phglass")

@@ -128,6 +128,7 @@ proc/get_radio_key_from_channel(var/channel)
 	return verb
 
 /mob/living/say(var/message, var/datum/language/speaking = null, var/verb="says", var/alt_name="")
+
 	if(client)
 		if(client.prefs.muted & MUTE_IC)
 			src << "\red You cannot speak in IC (Muted)."
@@ -136,10 +137,6 @@ proc/get_radio_key_from_channel(var/channel)
 	if(stat)
 		if(stat == 2)
 			return say_dead(message)
-		return
-
-	if(is_muzzled())
-		src << "<span class='danger'>You're muzzled and cannot speak!</span>"
 		return
 
 	var/message_mode = parse_message_mode(message, "headset")
@@ -165,7 +162,6 @@ proc/get_radio_key_from_channel(var/channel)
 	else
 		speaking = get_default_language()
 
-	var/ending = copytext(message, length(message))
 	if (speaking)
 		// This is broadcast to all mobs with the language,
 		// irrespective of distance or anything else.
@@ -173,9 +169,16 @@ proc/get_radio_key_from_channel(var/channel)
 			speaking.broadcast(src,trim(message))
 			return
 		//If we've gotten this far, keep going!
-		verb = speaking.get_spoken_verb(ending)
+		if(speaking.flags & COMMON_VERBS)
+			verb = say_quote(message)
+		else
+			verb = speaking.get_spoken_verb(copytext(message, length(message)))
 	else
-		verb = get_speech_ending(verb, ending)
+		verb = say_quote(message)
+
+	if(is_muzzled())
+		src << "<span class='danger'>You're muzzled and cannot speak!</span>"
+		return
 
 	message = trim_left(message)
 

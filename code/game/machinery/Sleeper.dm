@@ -154,7 +154,6 @@
 		go_out()
 
 	..(severity)
-
 /obj/machinery/sleeper/proc/toggle_filter()
 	if(!occupant || !beaker)
 		filtering = 0

@@ -42,7 +42,7 @@
 	breath_type = null
 	poison_type = null
 
-	vision_flags = SEE_MOBS
+	vision_flags = SEE_SELF|SEE_MOBS
 
 	has_organ = list(
 		"heart" =           /obj/item/organ/heart,

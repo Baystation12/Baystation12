@@ -134,7 +134,7 @@ datum/admins/proc/notes_gethtml(var/ckey)
 	qdel(info)
 
 /proc/show_player_info_irc(var/key as text)
-	var/dat = "          Info on [key]%0D%0A"
+	var/dat = "          Info on [key]\n"
 	var/savefile/info = new("data/player_saves/[copytext(key, 1, 2)]/[key]/info.sav")
 	var/list/infos
 	info >> infos
@@ -142,6 +142,6 @@ datum/admins/proc/notes_gethtml(var/ckey)
 		dat = "No information found on the given key."
 	else
 		for(var/datum/player_info/I in infos)
-			dat += "[I.content]%0D%0Aby [I.author] ([I.rank]) on [I.timestamp]%0D%0A%0D%0A"
+			dat += "[I.content]\nby [I.author] ([I.rank]) on [I.timestamp]\n\n"
 
-	return dat
+	return list2params(list(dat))

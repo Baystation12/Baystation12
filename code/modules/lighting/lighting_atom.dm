@@ -7,11 +7,19 @@
 	var/list/light_sources
 
 /atom/proc/set_light(l_range, l_power, l_color)
-	if(l_power != null) light_power = l_power
-	if(l_range != null) light_range = l_range
-	if(l_color != null) light_color = l_color
+	. = 0 //make it less costly if nothing's changed
 
-	update_light()
+	if(l_power != null && l_power != light_power)
+		light_power = l_power
+		. = 1
+	if(l_range != null && l_range != light_range)
+		light_range = l_range
+		. = 1
+	if(l_color != null && l_color != light_color)
+		light_color = l_color
+		. = 1
+
+	if(.) update_light()
 
 /atom/proc/update_light()
 	if(!light_power || !light_range)
@@ -46,20 +54,12 @@
 		T.reconsider_lights()
 	return ..()
 
-/atom/movable/Move()
-	var/turf/old_loc = loc
+/atom/Entered(atom/movable/obj, atom/prev_loc)
 	. = ..()
 
-	if(loc != old_loc)
-		for(var/datum/light_source/L in light_sources)
+	if(obj && prev_loc != src)
+		for(var/datum/light_source/L in obj.light_sources)
 			L.source_atom.update_light()
-
-	var/turf/new_loc = loc
-	if(istype(old_loc) && opacity)
-		old_loc.reconsider_lights()
-
-	if(istype(new_loc) && opacity)
-		new_loc.reconsider_lights()
 
 /atom/proc/set_opacity(new_opacity)
 	var/old_opacity = opacity

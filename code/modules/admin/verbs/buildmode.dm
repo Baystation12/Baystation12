@@ -42,6 +42,12 @@
 	icon = 'icons/misc/buildmode.dmi'
 	var/obj/effect/bmode/buildholder/master = null
 
+/obj/effect/bmode/Destroy()
+	if(master && master.cl)
+		master.cl.screen -= src
+	master = null
+	return ..()
+
 /obj/effect/bmode/builddir
 	icon_state = "build"
 	screen_loc = "NORTH,WEST"
@@ -116,6 +122,19 @@
 	var/obj/effect/bmode/buildmode/buildmode = null
 	var/obj/effect/bmode/buildquit/buildquit = null
 	var/atom/movable/throw_atom = null
+
+/obj/effect/bmode/buildholder/Destroy()
+	qdel(builddir)
+	builddir = null
+	qdel(buildhelp)
+	buildhelp = null
+	qdel(buildmode)
+	buildmode = null
+	qdel(buildquit)
+	buildquit = null
+	throw_atom = null
+	cl = null
+	return ..()
 
 /obj/effect/bmode/buildmode
 	icon_state = "buildmode1"
