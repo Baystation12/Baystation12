@@ -1116,10 +1116,10 @@
 
 		user << "\blue Results of analysis of \icon[icon]"
 		if (total_moles>0)
-			user << "\blue Pressure: [round(pressure,0.1)] kPa"
+			user << "\blue Pressure: [round(pressure,0.01)] kPa"
 			for(var/g in parent.air.gas)
-				user << "\blue [gas_data.name[g]]: [round((parent.air.gas[g] / total_moles) * 100)]%"
-			user << "\blue Temperature: [round(parent.air.temperature-T0C)]&deg;C"
+				user << "\blue [gas_data.name[g]]: [(round(parent.air.gas[g] / total_moles,0.01) * 100)]%: [round(parent.air.gas[g],0.01)] moles"
+			user << "\blue Temperature: [round(parent.air.temperature-T0C,0.01)]&deg;C"
 		else
 			user << "\blue Tank is empty!"
 
