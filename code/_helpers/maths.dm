@@ -1,13 +1,10 @@
 // Macro functions.
 #define RAND_F(LOW, HIGH) (rand()*(HIGH-LOW) + LOW)
 
-/proc/Clamp(val, min, max)
-	return max(min, min(val, max))
-
 // min is inclusive, max is exclusive
 /proc/Wrap(val, min, max)
 	var/d = max - min
-	var/t = Floor((val - min) / d)
+	var/t = round((val - min) / d)
 	return val - (t * d)
 
 /proc/Default(a, b)
