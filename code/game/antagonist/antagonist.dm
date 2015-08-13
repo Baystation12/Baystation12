@@ -60,7 +60,8 @@
 /datum/antagonist/proc/get_candidates(var/ghosts_only)
 	candidates = list() // Clear.
 	candidates = ticker.mode.get_players_for_role(role_type, id)
-	// Prune restricted jobs and status. Broke it up for readability.
+	// Prune restricted status. Broke it up for readability.
+	// Note that this is done before jobs are handed out.
 	for(var/datum/mind/player in candidates)
 		if(ghosts_only && !istype(player.current, /mob/dead))
 			candidates -= player
@@ -75,7 +76,9 @@
 	return candidates
 
 /datum/antagonist/proc/attempt_random_spawn()
-	attempt_spawn(flags & (ANTAG_OVERRIDE_MOB|ANTAG_OVERRIDE_JOB))
+	build_candidate_list(flags & (ANTAG_OVERRIDE_MOB|ANTAG_OVERRIDE_JOB))
+	attempt_spawn()
+	finalize_spawn()
 
 /datum/antagonist/proc/attempt_late_spawn(var/datum/mind/player)
 	if(!can_late_spawn())
@@ -88,27 +91,59 @@
 		add_antagonist(player,0,1,0,1,1)
 	return
 
-/datum/antagonist/proc/attempt_spawn(var/ghosts_only)
-
+/datum/antagonist/proc/build_candidate_list(var/ghosts_only)
 	// Get the raw list of potential players.
 	update_current_antag_max()
 	candidates = get_candidates(ghosts_only)
+
+//Selects players that will be spawned in the antagonist role from the potential candidates
+//Selected players are added to the pending_antagonists lists.
+//Attempting to spawn an antag role with ANTAG_OVERRIDE_JOB should be done before jobs are assigned,
+//so that they do not occupy regular job slots. All other antag roles should be spawned after jobs are
+//assigned, so that job restrictions can be respected.
+/datum/antagonist/proc/attempt_spawn(var/rebuild_candidates = 1)
 
 	// Update our boundaries.
 	if(!candidates.len)
 		return 0
 
 	//Grab candidates randomly until we have enough.
-	while(candidates.len)
+	while(candidates.len && pending_antagonists.len < cur_max)
 		var/datum/mind/player = pick(candidates)
-		pending_antagonists |= player
 		candidates -= player
+		draft_antagonist(player)
+
 	return 1
 
+/datum/antagonist/proc/draft_antagonist(var/datum/mind/player)
+	//Check if the player can join in this antag role, or if the player has already been given an antag role.
+	if(!can_become_antag(player) || player.special_role)
+		return 0
+
+	pending_antagonists |= player
+	
+	//Ensure that antags with ANTAG_OVERRIDE_JOB do not occupy job slots.
+	if(flags & ANTAG_OVERRIDE_JOB)
+		player.assigned_role = role_text
+	
+	//Ensure that a player cannot be drafted for multiple antag roles, taking up slots for antag roles that they will not fill.
+	player.special_role = role_text
+	
+	return 1
+
+//Spawns all pending_antagonists. This is done separately from attempt_spawn in case the game mode setup fails.
 /datum/antagonist/proc/finalize_spawn()
-	if(!pending_antagonists || !pending_antagonists.len)
+	if(!pending_antagonists)
 		return
+
 	for(var/datum/mind/player in pending_antagonists)
-		if(can_become_antag(player) && !player.special_role)
-			add_antagonist(player,0,0,1)
+		pending_antagonists -= player
+		add_antagonist(player,0,0,1)
+
+//Resets all pending_antagonists, clearing their special_role (and assigned_role if ANTAG_OVERRIDE_JOB is set)
+/datum/antagonist/proc/reset()
+	for(var/datum/mind/player in pending_antagonists)
+		if(flags & ANTAG_OVERRIDE_JOB)
+			player.assigned_role = null
+		player.special_role = null
 	pending_antagonists.Cut()

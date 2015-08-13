@@ -121,7 +121,7 @@ var/list/datum/power/changeling/powerinstances = list()
 
 /datum/power/changeling/DeathSting
 	name = "Death Sting"
-	desc = "We silently sting a human, filling him with potent chemicals. His rapid death is all but assured."
+	desc = "We silently sting a human, filling them with potent chemicals. Their rapid death is all but assured."
 	genomecost = 10
 	verbpath = /mob/proc/changeling_DEATHsting
 

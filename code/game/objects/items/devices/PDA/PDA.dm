@@ -1284,40 +1284,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 				user << "<span class='notice'>No significant chemical agents found in [A].</span>"
 
 		if(5)
-			if((istype(A, /obj/item/weapon/tank)) || (istype(A, /obj/machinery/portable_atmospherics)))
-				var/obj/icon = A
-				for (var/mob/O in viewers(user, null))
-					O << "<span class='warning'>\The [user] has used [src] on \icon[icon] [A].</span>"
-				var/pressure = A:air_contents.return_pressure()
-
-				var/total_moles = A:air_contents.total_moles
-
-				user << "<span class='notice'>Results of analysis of \icon[icon]</span>"
-				if (total_moles>0)
-					user << "<span class='notice'>Pressure: [round(pressure,0.1)] kPa</span>"
-					for(var/g in A:air_contents.gas)
-						user << "<span class='notice'>[gas_data.name[g]]: [round((A:air_contents.gas[g] / total_moles) * 100)]%</span>"
-					user << "<span class='notice'>Temperature: [round(A:air_contents.temperature-T0C)]&deg;C</span>"
-				else
-					user << "<span class='notice'>Tank is empty!</span>"
-
-			if (istype(A, /obj/machinery/atmospherics/pipe/tank))
-				var/obj/icon = A
-				for (var/mob/O in viewers(user, null))
-					O << "<span class='warning'>\The [user] has used [src] on \icon[icon] [A]</span>"
-
-				var/obj/machinery/atmospherics/pipe/tank/T = A
-				var/pressure = T.parent.air.return_pressure()
-				var/total_moles = T.parent.air.total_moles
-
-				user << "<span class='notice'>Results of analysis of \icon[icon]</span>"
-				if (total_moles>0)
-					user << "<span class='notice'>Pressure: [round(pressure,0.1)] kPa</span>"
-					for(var/g in T.parent.air.gas)
-						user << "<span class='notice'>[gas_data.name[g]]: [round((T.parent.air.gas[g] / total_moles) * 100)]%</span>"
-					user << "<span class='notice'>Temperature: [round(T.parent.air.temperature-T0C)]&deg;C</span>"
-				else
-					user << "<span class='notice'>Tank is empty!</span>"
+			analyze_gases(A, user)
 
 	if (!scanmode && istype(A, /obj/item/weapon/paper) && owner)
 		// JMO 20140705: Makes scanned document show up properly in the notes. Not pretty for formatted documents,

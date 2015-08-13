@@ -53,11 +53,10 @@
 
 /obj/machinery/computer/helm/check_eye(var/mob/user as mob)
 	if (!manual_control)
-		return null
+		return -1
 	if (!get_dist(user, src) > 1 || user.blinded || !linked )
-		return null
-	user.reset_view(linked)
-	return 1
+		return -1
+	return 0
 
 /obj/machinery/computer/helm/attack_hand(var/mob/user as mob)
 	if(..())
@@ -67,6 +66,8 @@
 
 	if(!isAI(user))
 		user.set_machine(src)
+		if(linked)
+			user.reset_view(linked)
 
 	ui_interact(user)
 

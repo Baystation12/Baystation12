@@ -91,11 +91,14 @@ var/global/datum/controller/gameticker/ticker
 	else
 		src.mode = config.pick_mode(master_mode)
 
+	src.mode.pre_setup()
+
 	job_master.DivideOccupations() // Apparently important for new antagonist system to register specific job antags properly.
 
 	if(!mode_started && !src.mode.can_start())
 		world << "<B>Unable to start [mode.name].</B> Not enough players, [mode.required_players] players needed. Reverting to pre-game lobby."
 		current_state = GAME_STATE_PREGAME
+		mode.fail_setup()
 		mode = null
 		job_master.ResetOccupations()
 		return 0
@@ -110,6 +113,7 @@ var/global/datum/controller/gameticker/ticker
 	else
 		src.mode.announce()
 
+	setup_economy()
 	current_state = GAME_STATE_PLAYING
 	create_characters() //Create player characters and transfer them
 	collect_minds()
@@ -117,9 +121,6 @@ var/global/datum/controller/gameticker/ticker
 	data_core.manifest()
 
 	callHook("roundstart")
-
-	//here to initialize the random events nicely at round start
-	setup_economy()
 
 	shuttle_controller.setup_shuttle_docks()
 

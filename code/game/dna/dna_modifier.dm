@@ -64,9 +64,6 @@
 	component_parts += new /obj/item/stack/cable_coil(src)
 	RefreshParts()
 
-/obj/machinery/dna_scannernew/allow_drop()
-	return 0
-
 /obj/machinery/dna_scannernew/relaymove(mob/user as mob)
 	if (user.stat)
 		return
