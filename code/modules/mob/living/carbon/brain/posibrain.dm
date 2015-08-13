@@ -4,7 +4,7 @@
 	icon = 'icons/obj/assemblies.dmi'
 	icon_state = "posibrain"
 	w_class = 3
-	origin_tech = "engineering=4;materials=4;bluespace=2;programming=4"
+	origin_tech = list(TECH_ENGINERING = 4, TECH_MATERIAL = 4, TECH_BLUESPACE = 2, TECH_DATA = 4)
 
 	construction_cost = list(DEFAULT_WALL_MATERIAL=500,"glass"=500,"silver"=200,"gold"=200,"phoron"=100,"diamond"=10)
 	construction_time = 75
@@ -88,7 +88,7 @@
 	if(!..(user))
 		return
 
-	var/msg = "<span class='info'>*---------*\nThis is \icon[src] \a <EM>[src]</EM>!\n[desc]\n"
+	var/msg = "<span class='info'>*---------*</span>\nThis is \icon[src] \a <EM>[src]</EM>!\n[desc]\n"
 	msg += "<span class='warning'>"
 
 	if(src.brainmob && src.brainmob.key)
@@ -99,7 +99,7 @@
 			if(DEAD)			msg += "<span class='deadsay'>It appears to be completely inactive.</span>\n"
 	else
 		msg += "<span class='deadsay'>It appears to be completely inactive.</span>\n"
-	msg += "<span class='info'>*---------*</span>"
+	msg += "</span><span class='info'>*---------*</span>"
 	user << msg
 	return
 

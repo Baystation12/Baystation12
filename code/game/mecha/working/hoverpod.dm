@@ -27,7 +27,7 @@
 	if (href_list["toggle_stabilization"])
 		stabilization_enabled = !stabilization_enabled
 		send_byjax(src.occupant,"exosuit.browser","stabilization_command","[stabilization_enabled?"Dis":"En"]able thruster stabilization")
-		src.occupant_message("\blue Thruster stabilization [stabilization_enabled? "enabled" : "disabled"].")
+		src.occupant_message("<span class='notice'>Thruster stabilization [stabilization_enabled? "enabled" : "disabled"].</span>")
 		return
 
 /obj/mecha/working/hoverpod/get_commands()

@@ -98,7 +98,11 @@
 	return 0
 
 /mob/living/carbon/human/isSynthetic()
-	return species.flags & IS_SYNTHETIC
+	// If they are 100% robotic, they count as synthetic.
+	for(var/obj/item/organ/external/E in organs)
+		if(!(E.status & ORGAN_ROBOT))
+			return 0
+	return 1
 
 /mob/living/silicon/isSynthetic()
 	return 1
@@ -545,9 +549,9 @@ proc/is_blind(A)
 			var/lname
 			if(subject)
 				if(subject != M)
-					follow = "(<a href='byond://?src=\ref[M];track=\ref[subject]'>follow</a>) "
+					follow = "([ghost_follow_link(subject, M)]) "
 				if(M.stat != DEAD && M.client.holder)
-					follow = "(<a href='?src=\ref[M.client.holder];adminplayerobservejump=\ref[subject]'>JMP</a>) "
+					follow = "([admin_jump_link(subject, M.client.holder)]) "
 				var/mob/dead/observer/DM
 				if(istype(subject, /mob/dead/observer))
 					DM = subject

@@ -1,5 +1,5 @@
 /obj/item/weapon/melee/cultblade
-	name = "Cult Blade"
+	name = "cult blade"
 	desc = "An arcane weapon wielded by the followers of Nar-Sie"
 	icon_state = "cultblade"
 	item_state = "cultblade"
@@ -17,7 +17,7 @@
 		return ..()
 	else
 		user.Paralyse(5)
-		user << "\red An unexplicable force powerfully repels the sword from [target]!"
+		user << "<span class='warning'>An unexplicable force powerfully repels the sword from [target]!</span>"
 		var/organ = ((user.hand ? "l_":"r_") + "arm")
 		var/obj/item/organ/external/affecting = user.get_organ(organ)
 		if(affecting.take_damage(rand(force/2, force))) //random amount of damage between half of the blade's force and the full force of the blade.
@@ -26,7 +26,7 @@
 
 /obj/item/weapon/melee/cultblade/pickup(mob/living/user as mob)
 	if(!iscultist(user))
-		user << "\red An overwhelming feeling of dread comes over you as you pick up the cultist's sword. It would be wise to be rid of this blade quickly."
+		user << "<span class='warning'>An overwhelming feeling of dread comes over you as you pick up the cultist's sword. It would be wise to be rid of this blade quickly.</span>"
 		user.make_dizzy(120)
 
 
@@ -48,7 +48,6 @@
 /obj/item/clothing/head/culthood/magus
 	name = "magus helm"
 	icon_state = "magus"
-	item_state = "magus"
 	desc = "A helm worn by the followers of Nar-Sie."
 	flags_inv = HIDEFACE
 	flags = HEADCOVERSEYES | HEADCOVERSMOUTH | BLOCKHAIR
@@ -56,7 +55,6 @@
 
 /obj/item/clothing/head/culthood/alt
 	icon_state = "cult_hoodalt"
-	item_state = "cult_hoodalt"
 
 /obj/item/clothing/suit/cultrobes
 	name = "cult robes"
@@ -88,7 +86,6 @@
 	name = "cult helmet"
 	desc = "A space worthy helmet used by the followers of Nar-Sie"
 	icon_state = "cult_helmet"
-	item_state = "cult_helmet"
 	armor = list(melee = 60, bullet = 50, laser = 30,energy = 15, bomb = 30, bio = 30, rad = 30)
 	siemens_coefficient = 0
 

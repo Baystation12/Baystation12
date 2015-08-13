@@ -82,21 +82,21 @@
 		return ..()
 	var/turf/T = src.loc
 	if (level==1 && isturf(T) && T.intact)
-		user << "\red You must remove the plating first."
+		user << "<span class='warning'>You must remove the plating first.</span>"
 		return 1
 	var/datum/gas_mixture/int_air = return_air()
 	var/datum/gas_mixture/env_air = loc.return_air()
 	if ((int_air.return_pressure()-env_air.return_pressure()) > 2*ONE_ATMOSPHERE)
-		user << "<span class='warning'>You cannot unwrench [src], it is too exerted due to internal pressure.</span>"
+		user << "<span class='warning'>You cannot unwrench \the [src], it is too exerted due to internal pressure.</span>"
 		add_fingerprint(user)
 		return 1
 	playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-	user << "\blue You begin to unfasten \the [src]..."
+	user << "<span class='notice'>You begin to unfasten \the [src]...</span>"
 	if (do_after(user, 40))
 		user.visible_message( \
-			"[user] unfastens \the [src].", \
-			"\blue You have unfastened \the [src].", \
-			"You hear ratchet.")
+			"<span class='notice'>\The [user] unfastens \the [src].</span>", \
+			"<span class='notice'>You have unfastened \the [src].</span>", \
+			"You hear a ratchet.")
 		new /obj/item/pipe(loc, make_from=src)
 		for (var/obj/machinery/meter/meter in T)
 			if (meter.target == src)
@@ -214,7 +214,7 @@
 	else return 1
 
 /obj/machinery/atmospherics/pipe/simple/proc/burst()
-	src.visible_message("\red \bold [src] bursts!");
+	src.visible_message("<span class='danger'>\The [src] bursts!</span>");
 	playsound(src.loc, 'sound/effects/bang.ogg', 25, 1)
 	var/datum/effect/effect/system/smoke_spread/smoke = new
 	smoke.set_up(1,0, src.loc, 0)
@@ -1121,19 +1121,19 @@
 
 	if(istype(W, /obj/item/device/analyzer) && in_range(user, src))
 		for (var/mob/O in viewers(user, null))
-			O << "\red [user] has used the analyzer on \icon[icon]"
+			O << "<span class='notice'>\The [user] has used \the [W] on \the [src] \icon[src]</span>"
 
 		var/pressure = parent.air.return_pressure()
 		var/total_moles = parent.air.total_moles
 
-		user << "\blue Results of analysis of \icon[icon]"
+		user << "<span class='notice'>Results of analysis of \the [src] \icon[src]</span>"
 		if (total_moles>0)
-			user << "\blue Pressure: [round(pressure,0.1)] kPa"
+			user << "<span class='notice'>Pressure: [round(pressure,0.1)] kPa</span>"
 			for(var/g in parent.air.gas)
-				user << "\blue [gas_data.name[g]]: [round((parent.air.gas[g] / total_moles) * 100)]%"
-			user << "\blue Temperature: [round(parent.air.temperature-T0C)]&deg;C"
+				user << "<span class='notice'>[gas_data.name[g]]: [round((parent.air.gas[g] / total_moles) * 100)]%</span>"
+			user << "<span class='notice'>Temperature: [round(parent.air.temperature-T0C)]&deg;C</span>"
 		else
-			user << "\blue Tank is empty!"
+			user << "<span class='notice'>Tank is empty!</span>"
 
 /obj/machinery/atmospherics/pipe/tank/air
 	name = "Pressure Tank (Air)"

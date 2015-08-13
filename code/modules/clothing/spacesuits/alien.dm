@@ -8,11 +8,9 @@
 
 /obj/item/clothing/head/helmet/space/skrell/white
 	icon_state = "skrell_helmet_white"
-	item_state = "skrell_helmet_white"
 
 /obj/item/clothing/head/helmet/space/skrell/black
 	icon_state = "skrell_helmet_black"
-	item_state = "skrell_helmet_black"
 
 /obj/item/clothing/suit/space/skrell
 	name = "Skrellian voidsuit"
@@ -150,12 +148,12 @@
 			user << "You will have to put on the [src] before you can do that."
 			return
 
-
 		flags |= NOSLIP
 		magpulse = 1
 		canremove = 0	//kinda hard to take off magclaws when you are gripping them tightly.
 		user << "You dig your claws deeply into the flooring, bracing yourself."
 		user << "It would be hard to take off the [src] without relaxing your grip first."
+	user.update_action_buttons()
 
 //In case they somehow come off while enabled.
 /obj/item/clothing/shoes/magboots/vox/dropped(mob/user as mob)

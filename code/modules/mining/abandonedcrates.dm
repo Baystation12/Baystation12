@@ -167,6 +167,11 @@
 			var/turf/T = get_turf(src.loc)
 			explosion(T, 0, 0, 1, 2)
 			del(src)
+	
+/obj/structure/closet/crate/secure/loot/emag_act(var/remaining_charges, var/mob/user)	
+	if (locked)
+		user << "<span class='notice'>The crate unlocks!</span>"
+		locked = 0
 
 /obj/structure/closet/crate/secure/loot/proc/check_input(var/input)
 	if(length(input) != codelen)

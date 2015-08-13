@@ -5,15 +5,15 @@
 	icon_state = "alert:0"
 	light_color = "#e6ffff"
 	circuit = /obj/item/weapon/circuitboard/stationalert_engineering
-	var/obj/nano_module/alarm_monitor/alarm_monitor
-	var/monitor_type = /obj/nano_module/alarm_monitor/engineering
+	var/datum/nano_module/alarm_monitor/alarm_monitor
+	var/monitor_type = /datum/nano_module/alarm_monitor/engineering
 
 /obj/machinery/computer/station_alert/security
-	monitor_type = /obj/nano_module/alarm_monitor/security
+	monitor_type = /datum/nano_module/alarm_monitor/security
 	circuit = /obj/item/weapon/circuitboard/stationalert_security
 
 /obj/machinery/computer/station_alert/all
-	monitor_type = /obj/nano_module/alarm_monitor/all
+	monitor_type = /datum/nano_module/alarm_monitor/all
 	circuit = /obj/item/weapon/circuitboard/stationalert_all
 
 /obj/machinery/computer/station_alert/New()

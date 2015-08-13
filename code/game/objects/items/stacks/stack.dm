@@ -11,7 +11,7 @@
 
 /obj/item/stack
 	gender = PLURAL
-	origin_tech = "materials=1"
+	origin_tech = list(TECH_MATERIAL = 1)
 	var/list/datum/stack_recipe/recipes
 	var/singular_name
 	var/amount = 1
@@ -110,21 +110,21 @@
 
 	if (!can_use(required))
 		if (produced>1)
-			user << "\red You haven't got enough [src] to build \the [produced] [recipe.title]\s!"
+			user << "<span class='warning'>You haven't got enough [src] to build \the [produced] [recipe.title]\s!</span>"
 		else
-			user << "\red You haven't got enough [src] to build \the [recipe.title]!"
+			user << "<span class='warning'>You haven't got enough [src] to build \the [recipe.title]!</span>"
 		return
 
 	if (recipe.one_per_turf && (locate(recipe.result_type) in user.loc))
-		user << "\red There is another [recipe.title] here!"
+		user << "<span class='warning'>There is another [recipe.title] here!</span>"
 		return
 
 	if (recipe.on_floor && !isfloor(user.loc))
-		user << "\red \The [recipe.title] must be constructed on the floor!"
+		user << "<span class='warning'>\The [recipe.title] must be constructed on the floor!</span>"
 		return
 
 	if (recipe.time)
-		user << "\blue Building [recipe.title] ..."
+		user << "<span class='notice'>Building [recipe.title] ...</span>"
 		if (!do_after(user, recipe.time))
 			return
 

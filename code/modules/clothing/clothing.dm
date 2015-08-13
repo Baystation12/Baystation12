@@ -212,8 +212,6 @@ BLIND     // can't see anything
 		cell.charge -= 1000 / severity
 		if (cell.charge < 0)
 			cell.charge = 0
-		if(cell.reliability != 100 && prob(50/severity))
-			cell.reliability -= 10 / severity
 	..()
 
 // Called just before an attack_hand(), in mob/UnarmedAttack()
@@ -243,6 +241,10 @@ BLIND     // can't see anything
 /obj/item/clothing/head
 	name = "head"
 	icon = 'icons/obj/clothing/hats.dmi'
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/items/lefthand_hats.dmi',
+		slot_r_hand_str = 'icons/mob/items/righthand_hats.dmi',
+		)
 	body_parts_covered = HEAD
 	slot_flags = SLOT_HEAD
 	w_class = 2.0
@@ -251,11 +253,6 @@ BLIND     // can't see anything
 	var/light_applied
 	var/brightness_on
 	var/on = 0
-
-/obj/item/clothing/head/New()
-	..()
-	if(!icon_action_button && brightness_on)
-		icon_action_button = "[icon_state]"
 
 /obj/item/clothing/head/attack_self(mob/user)
 	if(brightness_on)
@@ -276,6 +273,7 @@ BLIND     // can't see anything
 		set_light(0)
 		light_applied = 0
 	update_icon(user)
+	user.update_action_buttons()
 
 /obj/item/clothing/head/update_icon(var/mob/user)
 
@@ -389,6 +387,7 @@ BLIND     // can't see anything
 	var/worn_state = null
 
 /obj/item/clothing/under/New()
+	..()
 	if(worn_state)
 		if(!item_state_slots)
 			item_state_slots = list()
@@ -396,8 +395,12 @@ BLIND     // can't see anything
 	else
 		worn_state = icon_state
 
-/obj/item/clothing/under/proc/update_rolldown_status()
+	//autodetect rollability
+	if(rolled_down < 0)
+		if((worn_state + "_d_s") in icon_states('icons/mob/uniform.dmi'))
+			rolled_down = 0
 
+/obj/item/clothing/under/proc/update_rolldown_status()
 	var/mob/living/carbon/human/H
 	if(istype(src.loc, /mob/living/carbon/human))
 		H = src.loc

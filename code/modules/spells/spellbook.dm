@@ -14,6 +14,10 @@
 /obj/item/weapon/spellbook/attack_self(mob/user = usr)
 	if(!user)
 		return
+	if((user.mind && !wizards.is_antagonist(user.mind)))
+		usr << "<span class='warning'>You stare at the book but cannot make sense of the markings!</span>"
+		return
+
 	user.set_machine(src)
 	var/dat
 	if(temp)
@@ -244,7 +248,7 @@
 								H.sight |= (SEE_MOBS|SEE_OBJS|SEE_TURFS)
 								H.see_in_dark = 8
 								H.see_invisible = SEE_INVISIBLE_LEVEL_TWO
-								H << "span class='notice'>The walls suddenly disappear.</span>"
+								H << "<span class='notice'>The walls suddenly disappear.</span>"
 							temp = "You have purchased a scrying orb, and gained x-ray vision."
 							max_uses--
 		else

@@ -171,6 +171,9 @@ var/list/admin_verbs_debug = list(
 	/client/proc/restart_controller,
 	/client/proc/print_random_map,
 	/client/proc/create_random_map,
+	/client/proc/apply_random_map,
+	/client/proc/overlay_random_map,
+	/client/proc/delete_random_map,
 	/client/proc/show_plant_genes,
 	/client/proc/enable_debug_verbs,
 	/client/proc/callproc,
@@ -739,7 +742,7 @@ var/list/admin_verbs_mentor = list(
 	var/mob/living/silicon/S = input("Select silicon.", "Manage Silicon Laws") as null|anything in silicon_mob_list
 	if(!S) return
 
-	var/obj/nano_module/law_manager/L = new(S)
+	var/datum/nano_module/law_manager/L = new(S)
 	L.ui_interact(usr, state = admin_state)
 	admin_log_and_message_admins("has opened [S]'s law manager.")
 	feedback_add_details("admin_verb","MSL") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!

@@ -148,9 +148,6 @@
 		src << "<span class='alert'>[custom_event_msg]</span>"
 		src << "<br>"
 
-	if( (world.address == address || !address) && !host )
-		host = key
-		world.update_status()
 
 	if(holder)
 		add_admin_verbs()

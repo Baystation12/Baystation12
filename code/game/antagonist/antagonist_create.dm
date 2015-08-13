@@ -86,7 +86,7 @@
 			code_owner.store_memory("<B>Nuclear Bomb Code</B>: [code]", 0, 0)
 			code_owner.current << "The nuclear authorization code is: <B>[code]</B>"
 	else
-		world << "<spam class='danger'>Could not spawn nuclear bomb. Contact a developer.</span>"
+		world << "<span class='danger'>Could not spawn nuclear bomb. Contact a developer.</span>"
 		return
 
 	spawned_nuke = code

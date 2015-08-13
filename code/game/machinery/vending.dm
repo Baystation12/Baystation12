@@ -176,6 +176,12 @@
 		return
 
 	return
+	
+/obj/machinery/vending/emag_act(var/remaining_charges, var/mob/user)
+	if (!emagged)
+		src.emagged = 1
+		user << "You short out the product lock on \the [src]"
+		return 1
 
 /obj/machinery/vending/attackby(obj/item/weapon/W as obj, mob/user as mob)
 
@@ -207,10 +213,6 @@
 	if (I || istype(W, /obj/item/weapon/spacecash))
 		attack_hand(user)
 		return
-	else if (istype(W, /obj/item/weapon/card/emag))
-		src.emagged = 1
-		user << "You short out the product lock on \the [src]"
-		return
 	else if(istype(W, /obj/item/weapon/screwdriver))
 		src.panel_open = !src.panel_open
 		user << "You [src.panel_open ? "open" : "close"] the maintenance panel."
@@ -229,7 +231,7 @@
 		W.loc = src
 		coin = W
 		categories |= CAT_COIN
-		user << "\blue You insert \the [W] into \the [src]"
+		user << "<span class='notice'>You insert \the [W] into \the [src].</span>"
 		nanomanager.update_uis(src)
 		return
 	else if(istype(W, /obj/item/weapon/wrench))
@@ -472,7 +474,7 @@
 		coin.loc = src.loc
 		if(!usr.get_active_hand())
 			usr.put_in_hands(coin)
-		usr << "\blue You remove the [coin] from the [src]"
+		usr << "<span class='notice'>You remove the [coin] from the [src]</span>"
 		coin = null
 		categories &= ~CAT_COIN
 
@@ -525,13 +527,13 @@
 
 	if (R.category & CAT_COIN)
 		if(!coin)
-			user << "\blue You need to insert a coin to get this item."
+			user << "<span class='notice'>You need to insert a coin to get this item.</span>"
 			return
 		if(coin.string_attached)
 			if(prob(50))
-				user << "\blue You successfully pull the coin out before \the [src] could swallow it."
+				user << "<span class='notice'>You successfully pull the coin out before \the [src] could swallow it.</span>"
 			else
-				user << "\blue You weren't able to pull the coin out fast enough, the machine ate it, string and all."
+				user << "<span class='notice'>You weren't able to pull the coin out fast enough, the machine ate it, string and all.</span>"
 				qdel(coin)
 				categories &= ~CAT_COIN
 		else
@@ -558,7 +560,7 @@
 
 /obj/machinery/vending/proc/stock(var/datum/data/vending_product/R, var/mob/user)
 	if(src.panel_open)
-		user << "\blue You stock \the [src] with \a [R.product_name]"
+		user << "<span class='notice'>You stock \the [src] with \a [R.product_name]</span>"
 		R.amount++
 
 	nanomanager.update_uis(src)
@@ -592,7 +594,7 @@
 		return
 
 	for(var/mob/O in hearers(src, null))
-		O.show_message("<span class='game say'><span class='name'>\The [src]</span> beeps, \"[message]\"",2)
+		O.show_message("<span class='game say'><span class='name'>\The [src]</span> beeps, \"[message]\"</span>",2)
 	return
 
 /obj/machinery/vending/power_change()
@@ -645,7 +647,7 @@
 		return 0
 	spawn(0)
 		throw_item.throw_at(target, 16, 3, src)
-	src.visible_message("\red <b>[src] launches [throw_item.name] at [target.name]!</b>")
+	src.visible_message("<span class='warning'>[src] launches [throw_item.name] at [target.name]!</span>")
 	return 1
 
 /*

@@ -37,7 +37,6 @@
 	weakened = 0
 	stunned = 0
 	paralysis = 0
-	update_canmove()
 
 /mob/living/bot/updatehealth()
 	if(status_flags & GODMODE)
@@ -84,9 +83,6 @@
 		else
 			user << "<span class='notice'>[src] does not need a repair.</span>"
 		return
-	else if (istype(O, /obj/item/weapon/card/emag) && !emagged)
-		Emag(user)
-		return
 	else
 		..()
 
@@ -106,9 +102,8 @@
 		if(!istype(D, /obj/machinery/door/firedoor) && !istype(D, /obj/machinery/door/blast) && D.check_access(botcard))
 			D.open()
 
-/mob/living/bot/proc/Emag(var/mob/user)
-	log_and_message_admins("emagged [src]")
-	return
+/mob/living/bot/emag_act(var/remaining_charges, var/mob/user)
+	return 0
 
 /mob/living/bot/proc/turn_on()
 	if(stat)
@@ -125,3 +120,6 @@
 
 /mob/living/bot/proc/explode()
 	qdel(src)
+
+/mob/living/bot/attack_throat()
+	return

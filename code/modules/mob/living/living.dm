@@ -444,6 +444,9 @@ default behaviour is:
 	BITSET(hud_updateflag, HEALTH_HUD)
 	BITSET(hud_updateflag, STATUS_HUD)
 	BITSET(hud_updateflag, LIFE_HUD)
+
+	failed_last_breath = 0 //So mobs that died of oxyloss don't revive and have perpetual out of breath.
+
 	return
 
 /mob/living/proc/UpdateDamageIcon()
@@ -486,10 +489,6 @@ default behaviour is:
 			if(!( isturf(pulling.loc) ))
 				stop_pulling()
 				return
-			else
-				if(Debug)
-					log_debug("pulling disappeared? at [__LINE__] in mob.dm - pulling = [pulling]")
-					log_debug("REPORT THIS")
 
 		/////
 		if(pulling && pulling.anchored)
@@ -776,3 +775,34 @@ default behaviour is:
 		return
 	..()
 
+/mob/living/touch_map_edge()
+
+	//check for nuke disks
+	if(client && stat != DEAD) //if they are clientless and dead don't bother, the parent will treat them as any other container
+		if(ticker && istype(ticker.mode, /datum/game_mode/nuclear)) //only really care if the game mode is nuclear
+			var/datum/game_mode/nuclear/G = ticker.mode
+			if(G.check_mob(src))
+				if(x <= TRANSITIONEDGE)
+					inertia_dir = 4
+				else if(x >= world.maxx -TRANSITIONEDGE)
+					inertia_dir = 8
+				else if(y <= TRANSITIONEDGE)
+					inertia_dir = 1
+				else if(y >= world.maxy -TRANSITIONEDGE)
+					inertia_dir = 2
+				src << "<span class='warning'>Something you are carrying is preventing you from leaving.</span>"
+				return
+
+	..()
+
+//damage/heal the mob ears and adjust the deaf amount
+/mob/living/adjustEarDamage(var/damage, var/deaf)
+	ear_damage = max(0, ear_damage + damage)
+	ear_deaf = max(0, ear_deaf + deaf)
+
+//pass a negative argument to skip one of the variable
+/mob/living/setEarDamage(var/damage, var/deaf)
+	if(damage >= 0)
+		ear_damage = damage
+	if(deaf >= 0)
+		ear_deaf = deaf

@@ -94,6 +94,25 @@
 	else
 		return ..()
 
+/datum/language/machine
+	name = "Encoded Audio Language"
+	desc = "A language of encoded tones that allow for IPCs to communicate auditorily between each other in a manner that allows for easier transfer of information."
+	speech_verb = "beeps"
+	ask_verb = "beeps"
+	exclaim_verb = "loudly beeps"
+	colour = "changeling"
+	key = "6"
+	flags = RESTRICTED | NO_STUTTER
+	syllables = list("beep","beep","beep","beep","beep","boop","boop","boop","bop","bop","dee","dee","doo","doo","hiss","hss","buzz","buzz","bzz","ksssh","keey","wurr","wahh","tzzz")
+	space_chance = 10
+
+/datum/language/machine/get_random_name()
+	if(prob(70))
+		name = "[pick(list("PBU","HIU","SINA","ARMA","OSI"))]-[rand(100, 999)]"
+	else
+		name = pick(ai_names)
+	return name
+
 //Syllable Lists
 /*
 	This list really long, mainly because I can't make up my mind about which mandarin syllables should be removed,

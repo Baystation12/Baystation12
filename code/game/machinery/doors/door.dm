@@ -153,10 +153,6 @@
 		else				do_animate("deny")
 	return
 
-/obj/machinery/door/meteorhit(obj/M as obj)
-	src.open()
-	return
-
 /obj/machinery/door/bullet_act(var/obj/item/projectile/Proj)
 	..()
 
@@ -168,7 +164,7 @@
 	if (Proj.damage > 90)
 		destroy_hits--
 		if (destroy_hits <= 0)
-			visible_message("\red <B>\The [src.name] disintegrates!</B>")
+			visible_message("<span class='danger'>\The [src.name] disintegrates!</span>")
 			switch (Proj.damage_type)
 				if(BRUTE)
 					new /obj/item/stack/material/steel(src.loc, 2)
@@ -186,7 +182,7 @@
 /obj/machinery/door/hitby(AM as mob|obj, var/speed=5)
 
 	..()
-	visible_message("\red <B>[src.name] was hit by [AM].</B>")
+	visible_message("<span class='danger'>[src.name] was hit by [AM].</span>")
 	var/tforce = 0
 	if(ismob(AM))
 		tforce = 15 * (speed/5)
@@ -273,9 +269,9 @@
 		if(W.damtype == BRUTE || W.damtype == BURN)
 			user.do_attack_animation(src)
 			if(W.force < min_force)
-				user.visible_message("\red <B>\The [user] hits \the [src] with \the [W] with no visible effect.</B>" )
+				user.visible_message("<span class='danger'>\The [user] hits \the [src] with \the [W] with no visible effect.</span>")
 			else
-				user.visible_message("\red <B>\The [user] forcefully strikes \the [src] with \the [W]!</B>" )
+				user.visible_message("<span class='danger'>\The [user] forcefully strikes \the [src] with \the [W]!</span>")
 				playsound(src.loc, hitsound, 100, 1)
 				take_damage(W.force)
 		return
@@ -283,13 +279,6 @@
 	if(src.operating > 0 || isrobot(user))	return //borgs can't attack doors open because it conflicts with their AI-like interaction with them.
 
 	if(src.operating) return
-
-	if(src.density && (operable() && istype(I, /obj/item/weapon/card/emag)))
-		do_animate("spark")
-		sleep(6)
-		open()
-		operating = -1
-		return 1
 
 	if(src.allowed(user) && operable())
 		if(src.density)
@@ -301,6 +290,14 @@
 	if(src.density)
 		do_animate("deny")
 	return
+
+/obj/machinery/door/emag_act(var/remaining_charges)
+	if(density && operable())
+		do_animate("spark")
+		sleep(6)
+		open()
+		operating = -1
+		return 1
 
 /obj/machinery/door/proc/take_damage(var/damage)
 	var/initialhealth = src.health
