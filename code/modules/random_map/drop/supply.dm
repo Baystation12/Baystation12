@@ -11,7 +11,7 @@
 // supplied_drop_types is a list of types to spawn in the pod.
 /datum/random_map/droppod/supply/get_spawned_drop(var/turf/T)
 
-	if(!drop_type) drop_type = pick(supply_drop_random_loot_types)
+	if(!drop_type) drop_type = pick(supply_drop_random_loot_types())
 
 	if(drop_type == "custom")
 		if(supplied_drop_types.len)
@@ -23,110 +23,14 @@
 					C.contents |= A
 			return
 		else
-			drop_type = pick(supply_drop_random_loot_types)
+			drop_type = pick(supply_drop_random_loot_types())
 
-	switch(drop_type)
+	if(istype(drop_type, /datum/supply_drop_loot))
+		var/datum/supply_drop_loot/SDL = drop_type
+		SDL.drop(T)
+	else
+		error("Unhandled drop type: [drop_type]")
 
-		if("supermatter")
-			new /obj/machinery/power/supermatter(T)
-
-		if("lasers")
-			var/obj/structure/largecrate/C = new(T)
-			new /obj/item/weapon/gun/energy/laser(C)
-			new /obj/item/weapon/gun/energy/laser(C)
-			new /obj/item/weapon/gun/energy/sniperrifle(C)
-			new /obj/item/weapon/gun/energy/ionrifle(C)
-
-		if("ballistics")
-			var/obj/structure/largecrate/C = new(T)
-			new /obj/item/weapon/gun/projectile/sec(C)
-			new /obj/item/weapon/gun/projectile/shotgun/doublebarrel(C)
-			new /obj/item/weapon/gun/projectile/shotgun/pump/combat(C)
-			new /obj/item/weapon/gun/projectile/automatic/wt550(C)
-			new /obj/item/weapon/gun/projectile/automatic/z8(C)
-
-		if("seeds")
-			var/obj/structure/closet/crate/C = new(T)
-			new /obj/item/seeds/chiliseed(C)
-			new /obj/item/seeds/berryseed(C)
-			new /obj/item/seeds/cornseed(C)
-			new /obj/item/seeds/eggplantseed(C)
-			new /obj/item/seeds/tomatoseed(C)
-			new /obj/item/seeds/appleseed(C)
-			new /obj/item/seeds/soyaseed(C)
-			new /obj/item/seeds/wheatseed(C)
-			new /obj/item/seeds/carrotseed(C)
-			new /obj/item/seeds/lemonseed(C)
-			new /obj/item/seeds/orangeseed(C)
-			new /obj/item/seeds/grassseed(C)
-			new /obj/item/seeds/sunflowerseed(C)
-			new /obj/item/seeds/chantermycelium(C)
-			new /obj/item/seeds/potatoseed(C)
-			new /obj/item/seeds/sugarcaneseed(C)
-
-		if("food")
-			var/obj/structure/largecrate/C = new(T)
-			new /obj/item/weapon/reagent_containers/food/condiment/flour(C)
-			new /obj/item/weapon/reagent_containers/food/condiment/flour(C)
-			new /obj/item/weapon/reagent_containers/food/condiment/flour(C)
-			new /obj/item/weapon/reagent_containers/food/drinks/milk(C)
-			new /obj/item/weapon/reagent_containers/food/drinks/milk(C)
-			new /obj/item/weapon/storage/fancy/egg_box(C)
-			new /obj/item/weapon/reagent_containers/food/snacks/tofu(C)
-			new /obj/item/weapon/reagent_containers/food/snacks/tofu(C)
-			new /obj/item/weapon/reagent_containers/food/snacks/meat(C)
-			new /obj/item/weapon/reagent_containers/food/snacks/meat(C)
-
-		if("armour")
-			var/obj/structure/largecrate/C = new(T)
-			new /obj/item/clothing/head/helmet/riot(C)
-			new /obj/item/clothing/suit/armor/riot(C)
-			new /obj/item/clothing/head/helmet/riot(C)
-			new /obj/item/clothing/suit/armor/riot(C)
-			new /obj/item/clothing/head/helmet/riot(C)
-			new /obj/item/clothing/suit/armor/riot(C)
-			new /obj/item/clothing/suit/storage/vest(C)
-			new /obj/item/clothing/suit/storage/vest(C)
-			new /obj/item/clothing/suit/storage/vest/heavy(C)
-			new /obj/item/clothing/suit/storage/vest/heavy(C)
-			new /obj/item/clothing/suit/armor/laserproof(C)
-			new /obj/item/clothing/suit/armor/bulletproof(C)
-
-		if("materials")
-			var/obj/structure/largecrate/C = new(T)
-			new /obj/item/stack/material/steel(C)
-			new /obj/item/stack/material/steel(C)
-			new /obj/item/stack/material/steel(C)
-			new /obj/item/stack/material/glass(C)
-			new /obj/item/stack/material/glass(C)
-			new /obj/item/stack/material/wood(C)
-			new /obj/item/stack/material/plastic(C)
-			new /obj/item/stack/material/glass/reinforced(C)
-			new /obj/item/stack/material/plasteel(C)
-
-		if("medical")
-			var/obj/structure/closet/crate/medical/M = new(T)
-			new /obj/item/weapon/storage/firstaid/regular(M)
-			new /obj/item/weapon/storage/firstaid/fire(M)
-			new /obj/item/weapon/storage/firstaid/toxin(M)
-			new /obj/item/weapon/storage/firstaid/o2(M)
-			new /obj/item/weapon/storage/firstaid/adv(M)
-			new /obj/item/weapon/reagent_containers/glass/bottle/antitoxin(M)
-			new /obj/item/weapon/reagent_containers/glass/bottle/inaprovaline(M)
-			new /obj/item/weapon/reagent_containers/glass/bottle/stoxin(M)
-			new /obj/item/weapon/storage/box/syringes(M)
-			new /obj/item/weapon/storage/box/autoinjectors(M)
-
-		if("power")
-			var/obj/structure/largecrate/C = new(T)
-			var/gen_type = pick(list(/obj/machinery/power/port_gen/pacman,/obj/machinery/power/port_gen/pacman/super,/obj/machinery/power/port_gen/pacman/mrs))
-			new gen_type(C)
-
-		if("hydroponics")
-			var/obj/structure/largecrate/C = new(T)
-			new /obj/machinery/portable_atmospherics/hydroponics(C)
-			new /obj/machinery/portable_atmospherics/hydroponics(C)
-			new /obj/machinery/portable_atmospherics/hydroponics(C)
 
 /datum/admins/proc/call_supply_drop()
 	set category = "Fun"
@@ -180,7 +84,7 @@
 	else
 		choice = alert("Do you wish to specify a loot type?",,"No","Yes")
 		if(choice == "Yes")
-			chosen_loot_type = input("Select a loot type.", "Loot Selection", null) as null|anything in supply_drop_random_loot_types
+			chosen_loot_type = input("Select a loot type.", "Loot Selection", null) as null|anything in supply_drop_random_loot_types()
 
 	choice = alert("Are you SURE you wish to deploy this supply drop? It will cause a sizable explosion and gib anyone underneath it.",,"No","Yes")
 	if(choice == "No")
