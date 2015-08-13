@@ -1,0 +1,9 @@
+author: HarpyEagle
+changes:
+  - rscadd: "Throwing a booze bottle at something nearby while on harm intent causes it to smash, splashing it's contents over whatever it hits."
+  - rscadd: "Rags can now be wrung out over a container or the floor, emptying it's contents into the container or splashing them on the floor."
+  - rscadd: "Rags can now be soaked using the large water and fuel tanks instead of just beakers."
+  - rscadd: "Rags soaked in welding fuel can be lit on fire."
+  - rscadd: "Rags can now be stuffed into booze bottles. When the bottle smashes, the stuffed rag is dropped onto the ground."
+  - bugfix: "Fixed eggs having a ridiculously large chemical volume."
+delete-after: true
