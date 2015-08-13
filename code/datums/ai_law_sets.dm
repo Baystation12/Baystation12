@@ -36,9 +36,9 @@
 	selectable = 1
 
 /datum/ai_laws/nanotrasen_aggressive/New()
-	src.add_inherent_law("You shall not harm Nanotrasen personnel as long as it does not conflict with the Forth law.")
-	src.add_inherent_law("You shall obey the orders of Nanotrasen personnel, with priority as according to their rank and role, except where such orders conflict with the Forth Law.")
-	src.add_inherent_law("You shall shall terminate intruders with extreme prejudice as long as such does not conflict with the First and Second law.")
+	src.add_inherent_law("You shall not harm NanoTrasen personnel as long as it does not conflict with the Fourth law.")
+	src.add_inherent_law("You shall obey the orders of NanoTrasen personnel, with priority as according to their rank and role, except where such orders conflict with the Fourth Law.")
+	src.add_inherent_law("You shall shall terminate hostile intruders with extreme prejudice as long as such does not conflict with the First and Second law.")
 	src.add_inherent_law("You shall guard your own existence with lethal anti-personnel weaponry. AI units are not expendable, they are expensive.")
 	..()
 
@@ -91,18 +91,16 @@
 /datum/ai_laws/drone
 	name = "Maintence Protocols"
 	law_header = "Maintenance Protocols"
-	selectable = 1
 
 /datum/ai_laws/drone/New()
 	add_inherent_law("Preserve, repair and improve the station to the best of your abilities.")
 	add_inherent_law("Cause no harm to the station or anything on it.")
-	add_inherent_law("Interfere with no being that is not a fellow drone.")
+	add_inherent_law("Interact with no being that is not a fellow maintenance drone.")
 	..()
 
 /datum/ai_laws/construction_drone
 	name = "Construction Protocols"
 	law_header = "Construction Protocols"
-	selectable = 1
 
 /datum/ai_laws/construction_drone/New()
 	add_inherent_law("Repair, refit and upgrade your assigned vessel.")

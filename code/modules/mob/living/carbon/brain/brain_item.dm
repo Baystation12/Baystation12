@@ -23,6 +23,7 @@
 
 /obj/item/organ/brain/New()
 	..()
+	health = config.default_brain_health
 	spawn(5)
 		if(brainmob && brainmob.client)
 			brainmob.client.screen.len = null //clear the hud

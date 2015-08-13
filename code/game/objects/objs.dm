@@ -14,6 +14,11 @@
 	var/damtype = "brute"
 	var/force = 0
 
+/obj/Destroy()
+	processing_objects -= src
+	nanomanager.close_uis(src)
+	return ..()
+
 /obj/Topic(href, href_list, var/nowindow = 0, var/datum/topic_state/state = default_state)
 	// Calling Topic without a corresponding window open causes runtime errors
 	if(!nowindow && ..())

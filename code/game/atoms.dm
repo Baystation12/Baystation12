@@ -63,9 +63,6 @@
 		return flags & INSERT_CONTAINER
 */
 
-/atom/proc/allow_drop()
-	return 1
-
 /atom/proc/CheckExit()
 	return 1
 

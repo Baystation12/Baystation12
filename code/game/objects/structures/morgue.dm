@@ -20,6 +20,12 @@
 	var/obj/structure/m_tray/connected = null
 	anchored = 1.0
 
+/obj/structure/morgue/Destroy()
+	if(connected)
+		qdel(connected)
+		connected = null
+	return ..()
+
 /obj/structure/morgue/proc/update()
 	if (src.connected)
 		src.icon_state = "morgue0"
@@ -34,21 +40,21 @@
 	switch(severity)
 		if(1.0)
 			for(var/atom/movable/A as mob|obj in src)
-				A.loc = src.loc
+				A.forceMove(src.loc)
 				ex_act(severity)
 			qdel(src)
 			return
 		if(2.0)
 			if (prob(50))
 				for(var/atom/movable/A as mob|obj in src)
-					A.loc = src.loc
+					A.forceMove(src.loc)
 					ex_act(severity)
 				qdel(src)
 				return
 		if(3.0)
 			if (prob(5))
 				for(var/atom/movable/A as mob|obj in src)
-					A.loc = src.loc
+					A.forceMove(src.loc)
 					ex_act(severity)
 				qdel(src)
 				return
@@ -61,10 +67,10 @@
 	if (src.connected)
 		for(var/atom/movable/A as mob|obj in src.connected.loc)
 			if (!( A.anchored ))
-				A.loc = src
+				A.forceMove(src)
 		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
-		//src.connected = null
 		qdel(src.connected)
+		src.connected = null
 	else
 		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 		src.connected = new /obj/structure/m_tray( src.loc )
@@ -75,12 +81,12 @@
 			src.connected.connected = src
 			src.icon_state = "morgue0"
 			for(var/atom/movable/A as mob|obj in src)
-				A.loc = src.connected.loc
+				A.forceMove(src.connected.loc)
 			src.connected.icon_state = "morguet"
 			src.connected.set_dir(src.dir)
 		else
-			//src.connected = null
 			qdel(src.connected)
+			src.connected = null
 	src.add_fingerprint(user)
 	update()
 	return
@@ -111,12 +117,11 @@
 		src.connected.connected = src
 		src.icon_state = "morgue0"
 		for(var/atom/movable/A as mob|obj in src)
-			A.loc = src.connected.loc
-			//Foreach goto(106)
+			A.forceMove(src.connected.loc)
 		src.connected.icon_state = "morguet"
 	else
-		//src.connected = null
 		qdel(src.connected)
+		src.connected = null
 	return
 
 
@@ -134,11 +139,17 @@
 	anchored = 1
 	throwpass = 1
 
+/obj/structure/m_tray/Destroy()
+	if(connected && connected.connected == src)
+		connected.connected = null
+	connected = null
+	return ..()
+
 /obj/structure/m_tray/attack_hand(mob/user as mob)
 	if (src.connected)
 		for(var/atom/movable/A as mob|obj in src.loc)
 			if (!( A.anchored ))
-				A.loc = src.connected
+				A.forceMove(src.connected)
 			//Foreach goto(26)
 		src.connected.connected = null
 		src.connected.update()
@@ -155,7 +166,7 @@
 		return
 	if (!ismob(user) || user.stat || user.lying || user.stunned)
 		return
-	O.loc = src.loc
+	O.forceMove(src.loc)
 	if (user != O)
 		for(var/mob/B in viewers(user, 3))
 			if ((B.client && !( B.blinded )))
@@ -179,6 +190,12 @@
 	var/id = 1
 	var/locked = 0
 
+/obj/structure/crematorium/Destroy()
+	if(connected)
+		qdel(connected)
+		connected = null
+	return ..()
+
 /obj/structure/crematorium/proc/update()
 	if (src.connected)
 		src.icon_state = "crema0"
@@ -193,21 +210,21 @@
 	switch(severity)
 		if(1.0)
 			for(var/atom/movable/A as mob|obj in src)
-				A.loc = src.loc
+				A.forceMove(src.loc)
 				ex_act(severity)
 			qdel(src)
 			return
 		if(2.0)
 			if (prob(50))
 				for(var/atom/movable/A as mob|obj in src)
-					A.loc = src.loc
+					A.forceMove(src.loc)
 					ex_act(severity)
 				qdel(src)
 				return
 		if(3.0)
 			if (prob(5))
 				for(var/atom/movable/A as mob|obj in src)
-					A.loc = src.loc
+					A.forceMove(src.loc)
 					ex_act(severity)
 				qdel(src)
 				return
@@ -229,7 +246,7 @@
 	if ((src.connected) && (src.locked == 0))
 		for(var/atom/movable/A as mob|obj in src.connected.loc)
 			if (!( A.anchored ))
-				A.loc = src
+				A.forceMove(src)
 		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 		//src.connected = null
 		qdel(src.connected)
@@ -243,7 +260,7 @@
 			src.connected.connected = src
 			src.icon_state = "crema0"
 			for(var/atom/movable/A as mob|obj in src)
-				A.loc = src.connected.loc
+				A.forceMove(src.connected.loc)
 			src.connected.icon_state = "cremat"
 		else
 			//src.connected = null
@@ -277,12 +294,11 @@
 		src.connected.connected = src
 		src.icon_state = "crema0"
 		for(var/atom/movable/A as mob|obj in src)
-			A.loc = src.connected.loc
-			//Foreach goto(106)
+			A.forceMove(src.connected.loc)
 		src.connected.icon_state = "cremat"
 	else
-		//src.connected = null
 		qdel(src.connected)
+		src.connected = null
 	return
 
 /obj/structure/crematorium/proc/cremate(atom/A, mob/user as mob)
@@ -350,11 +366,17 @@
 	anchored = 1
 	throwpass = 1
 
+/obj/structure/c_tray/Destroy()
+	if(connected && connected.connected == src)
+		connected.connected = null
+	connected = null
+	return ..()
+
 /obj/structure/c_tray/attack_hand(mob/user as mob)
 	if (src.connected)
 		for(var/atom/movable/A as mob|obj in src.loc)
 			if (!( A.anchored ))
-				A.loc = src.connected
+				A.forceMove(src.connected)
 			//Foreach goto(26)
 		src.connected.connected = null
 		src.connected.update()
@@ -371,7 +393,7 @@
 		return
 	if (!ismob(user) || user.stat || user.lying || user.stunned)
 		return
-	O.loc = src.loc
+	O.forceMove(src.loc)
 	if (user != O)
 		for(var/mob/B in viewers(user, 3))
 			if ((B.client && !( B.blinded )))
@@ -390,7 +412,7 @@
 /obj/machinery/button/crematorium/attack_hand(mob/user as mob)
 	if(..())
 		return
-	if(src.allowed(usr))
+	if(src.allowed(user))
 		for (var/obj/structure/crematorium/C in world)
 			if (C.id == id)
 				if (!C.cremating)

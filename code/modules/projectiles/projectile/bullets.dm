@@ -53,7 +53,7 @@
 	else if(istype(A, /obj/structure/girder))
 		chance = 100
 	else if(istype(A, /obj/machinery) || istype(A, /obj/structure))
-		chance = 25
+		chance = damage
 
 	if(prob(chance))
 		if(A.opacity)
