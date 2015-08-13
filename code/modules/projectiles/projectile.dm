@@ -26,7 +26,7 @@
 	var/xo = null
 	var/current = null
 	var/obj/shot_from = null // the object which shot us
-	var/atom/original = null // the original target clicked
+	var/atom/original = null // the target clicked (not necessarily where the projectile is headed). Should probably be renamed to 'target' or something.
 	var/turf/starting = null // the projectile's starting turf
 	var/list/permutated = list() // we've passed through these atoms, don't try to hit them again
 
@@ -110,21 +110,13 @@
 		p_x = between(0, p_x + rand(-radius, radius), world.icon_size)
 		p_y = between(0, p_y + rand(-radius, radius), world.icon_size)
 
-//called to launch a projectile from a gun
-/obj/item/projectile/proc/launch(atom/target, mob/user, obj/item/weapon/gun/launcher, var/target_zone, var/x_offset=0, var/y_offset=0)
-	var/turf/curloc = get_turf(user)
+//called to launch a projectile
+/obj/item/projectile/proc/launch(atom/target, var/target_zone, var/x_offset=0, var/y_offset=0)
+	var/turf/curloc = get_turf(src)
 	var/turf/targloc = get_turf(target)
 	if (!istype(targloc) || !istype(curloc))
 		return 1
 
-	firer = user
-	def_zone = target_zone
-
-	if(user == target) //Shooting yourself
-		user.bullet_act(src, target_zone)
-		on_impact(user)
-		qdel(src)
-		return 0
 	if(targloc == curloc) //Shooting something in the same turf
 		target.bullet_act(src, target_zone)
 		on_impact(target)
@@ -132,31 +124,39 @@
 		return 0
 
 	original = target
-	loc = curloc
-	starting = curloc
-	current = curloc
-	yo = targloc.y - curloc.y + y_offset
-	xo = targloc.x - curloc.x + x_offset
-
-	shot_from = launcher
-	silenced = launcher.silenced
+	def_zone = target_zone
 
 	spawn()
+		setup_trajectory(curloc, targloc, x_offset, y_offset) //plot the initial trajectory
 		process()
 
 	return 0
 
+//called to launch a projectile from a gun
+/obj/item/projectile/proc/launch_from_gun(atom/target, mob/user, obj/item/weapon/gun/launcher, var/target_zone, var/x_offset=0, var/y_offset=0)
+	if(user == target) //Shooting yourself
+		user.bullet_act(src, target_zone)
+		on_impact(user)
+		qdel(src)
+		return 0
+	
+	loc = get_turf(user) //move the projectile out into the world
+	
+	firer = user
+	shot_from = launcher
+	silenced = launcher.silenced
+	
+	return launch(target, target_zone, x_offset, y_offset)
+
 //Used to change the direction of the projectile in flight.
 /obj/item/projectile/proc/redirect(var/new_x, var/new_y, var/atom/starting_loc, var/mob/new_firer=null)
-	original = locate(new_x, new_y, src.z)
-	starting = starting_loc
-	current = starting_loc
+	var/turf/new_target = locate(new_x, new_y, src.z)
+	
+	original = new_target
 	if(new_firer)
 		firer = src
 
-	yo = new_y - starting_loc.y
-	xo = new_x - starting_loc.x
-	setup_trajectory()
+	setup_trajectory(starting_loc, new_target)
 
 //Called when the projectile intercepts a mob. Returns 1 if the projectile hit the mob, 0 if it missed and should keep flying.
 /obj/item/projectile/proc/attack_mob(var/mob/living/target_mob, var/distance, var/miss_modifier=0)
@@ -165,13 +165,16 @@
 
 	//roll to-hit
 	miss_modifier = max(15*(distance-2) - round(15*accuracy) + miss_modifier, 0)
-	var/hit_zone = get_zone_with_miss_chance(def_zone, target_mob, miss_modifier, ranged_attack=(distance > 1))
-	if(!hit_zone)
+	var/hit_zone = get_zone_with_miss_chance(def_zone, target_mob, miss_modifier, ranged_attack=(distance > 1 || original != target_mob)) //if the projectile hits a target we weren't originally aiming at then retain the chance to miss
+
+	var/result = PROJECTILE_FORCE_MISS
+	if(hit_zone)
+		def_zone = hit_zone //set def_zone, so if the projectile ends up hitting someone else later (to be implemented), it is more likely to hit the same part
+		result = target_mob.bullet_act(src, def_zone)
+
+	if(result == PROJECTILE_FORCE_MISS)
 		visible_message("<span class='notice'>\The [src] misses [target_mob] narrowly!</span>")
 		return 0
-
-	//set def_zone, so if the projectile ends up hitting someone else later (to be implemented), it is more likely to hit the same part
-	def_zone = hit_zone
 
 	//hit messages
 	if(silenced)
@@ -193,7 +196,7 @@
 			msg_admin_attack("UNKNOWN shot [target_mob] ([target_mob.ckey]) with \a [src] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[target_mob.x];Y=[target_mob.y];Z=[target_mob.z]'>JMP</a>)")
 
 	//sometimes bullet_act() will want the projectile to continue flying
-	if (target_mob.bullet_act(src, def_zone) == -1)
+	if (result == PROJECTILE_CONTINUE)
 		return 0
 
 	return 1
@@ -227,7 +230,7 @@
 		else
 			passthrough = 1 //so ghosts don't stop bullets
 	else
-		passthrough = (A.bullet_act(src, def_zone) == -1) //backwards compatibility
+		passthrough = (A.bullet_act(src, def_zone) == PROJECTILE_CONTINUE) //backwards compatibility
 		if(isturf(A))
 			for(var/obj/O in A)
 				O.bullet_act(src)
@@ -272,9 +275,6 @@
 /obj/item/projectile/process()
 	var/first_step = 1
 
-	//plot the initial trajectory
-	setup_trajectory()
-
 	spawn while(src && src.loc)
 		if(kill_count-- < 1)
 			on_impact(src.loc) //for any final impact behaviours
@@ -311,13 +311,16 @@
 		if(!hitscan)
 			sleep(step_delay)	//add delay between movement iterations if it's not a hitscan weapon
 
-/obj/item/projectile/proc/process_step(first_step = 0)
-	return
-
 /obj/item/projectile/proc/before_move()
 	return
 
-/obj/item/projectile/proc/setup_trajectory()
+/obj/item/projectile/proc/setup_trajectory(turf/startloc, turf/targloc, var/x_offset = 0, var/y_offset = 0)
+	// setup projectile state
+	starting = startloc
+	current = startloc
+	yo = targloc.y - startloc.y + y_offset
+	xo = targloc.x - startloc.x + x_offset
+
 	// trajectory dispersion
 	var/offset = 0
 	if(dispersion)
@@ -376,7 +379,6 @@
 	invisibility = 101 //Nope!  Can't see me!
 	yo = null
 	xo = null
-	var/target = null
 	var/result = 0 //To pass the message back to the gun.
 
 /obj/item/projectile/test/Bump(atom/A as mob|obj|turf|area)
@@ -391,25 +393,24 @@
 	result = 1
 	return
 
-/obj/item/projectile/test/process()
+/obj/item/projectile/test/launch(atom/target)
 	var/turf/curloc = get_turf(src)
 	var/turf/targloc = get_turf(target)
 	if(!curloc || !targloc)
 		return 0
-	yo = targloc.y - curloc.y
-	xo = targloc.x - curloc.x
-	target = targloc
+	
 	original = target
-	starting = curloc
-
+	
 	//plot the initial trajectory
-	setup_trajectory()
+	setup_trajectory(curloc, targloc)
+	return process(targloc)
 
+/obj/item/projectile/test/process(var/turf/targloc)
 	while(src) //Loop on through!
 		if(result)
 			return (result - 1)
-		if((!( target ) || loc == target))
-			target = locate(min(max(x + xo, 1), world.maxx), min(max(y + yo, 1), world.maxy), z) //Finding the target turf at map edge
+		if((!( targloc ) || loc == targloc))
+			targloc = locate(min(max(x + xo, 1), world.maxx), min(max(y + yo, 1), world.maxy), z) //Finding the target turf at map edge
 
 		trajectory.increment()	// increment the current location
 		location = trajectory.return_location(location)		// update the locally stored location data
@@ -420,18 +421,22 @@
 		if(istype(M)) //If there is someting living...
 			return 1 //Return 1
 		else
-			M = locate() in get_step(src,target)
+			M = locate() in get_step(src,targloc)
 			if(istype(M))
 				return 1
 
-/proc/check_trajectory(atom/target as mob|obj, atom/firer as mob|obj, var/pass_flags=PASSTABLE|PASSGLASS|PASSGRILLE, flags=null)  //Checks if you can hit them or not.
+//Helper proc to check if you can hit them or not.
+/proc/check_trajectory(atom/target as mob|obj, atom/firer as mob|obj, var/pass_flags=PASSTABLE|PASSGLASS|PASSGRILLE, flags=null)
 	if(!istype(target) || !istype(firer))
 		return 0
+
 	var/obj/item/projectile/test/trace = new /obj/item/projectile/test(get_turf(firer)) //Making the test....
-	trace.target = target
+
+	//Set the flags and pass flags to that of the real projectile...
 	if(!isnull(flags))
-		trace.flags = flags //Set the flags...
-	trace.pass_flags = pass_flags //And the pass flags to that of the real projectile...
-	var/output = trace.process() //Test it!
+		trace.flags = flags 
+	trace.pass_flags = pass_flags
+
+	var/output = trace.launch(target) //Test it!
 	qdel(trace) //No need for it anymore
 	return output //Send it back to the gun!

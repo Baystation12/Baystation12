@@ -16,6 +16,7 @@
 /obj/item/weapon/mop/New()
 	create_reagents(5)
 
+//expects an atom containing the reagents used to clean the turf
 /turf/proc/clean(atom/source)
 	if(source.reagents.has_reagent("water", 1))
 		clean_blood()

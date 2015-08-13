@@ -91,7 +91,7 @@
 		add_fingerprint(user)
 		return 1
 	playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-	user << "<span class='notice>You begin to unfasten \the [src]...</span>"
+	user << "<span class='notice'>You begin to unfasten \the [src]...</span>"
 	if (do_after(user, 40))
 		user.visible_message( \
 			"<span class='notice'>\The [user] unfastens \the [src].</span>", \
@@ -1120,20 +1120,8 @@
 		return
 
 	if(istype(W, /obj/item/device/analyzer) && in_range(user, src))
-		for (var/mob/O in viewers(user, null))
-			O << "<span class='notice'>\The [user] has used \the [W] on \the [src] \icon[src]</span>"
-
-		var/pressure = parent.air.return_pressure()
-		var/total_moles = parent.air.total_moles
-
-		user << "<span class='notice'>Results of analysis of \the [src] \icon[src]</span>"
-		if (total_moles>0)
-			user << "<span class='notice'>Pressure: [round(pressure,0.1)] kPa</span>"
-			for(var/g in parent.air.gas)
-				user << "<span class='notice'>[gas_data.name[g]]: [round((parent.air.gas[g] / total_moles) * 100)]%</span>"
-			user << "<span class='notice'>Temperature: [round(parent.air.temperature-T0C)]&deg;C</span>"
-		else
-			user << "<span class='notice'>Tank is empty!</span>"
+		var/obj/item/device/analyzer/A = W
+		A.analyze_gases(src, user)
 
 /obj/machinery/atmospherics/pipe/tank/air
 	name = "Pressure Tank (Air)"

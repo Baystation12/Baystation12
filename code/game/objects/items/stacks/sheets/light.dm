@@ -22,8 +22,8 @@
 			user.drop_from_inventory(src)
 			qdel(src)
 
-	if(istype(O,/obj/item/stack/material/steel))
-		var/obj/item/stack/material/steel/M = O
+	if(istype(O,/obj/item/stack/material) && O.get_material_name() == DEFAULT_WALL_MATERIAL)
+		var/obj/item/stack/M = O
 		if (M.use(1))
 			use(1)
 			new/obj/item/stack/tile/light(get_turf(user))

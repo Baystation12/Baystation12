@@ -199,7 +199,7 @@
 	if (src.stat)
 		msg += "<span class='warning'>[T.He] [T.is]n't responding to anything around [T.him] and seems to be asleep.</span>\n"
 		if((stat == 2 || src.losebreath) && distance <= 3)
-			msg += "<span class='warning'>[T.He] does not appear to be breathing.</span>\n"
+			msg += "<span class='warning'>[T.He] [T.does] not appear to be breathing.</span>\n"
 		if(istype(usr, /mob/living/carbon/human) && !usr.stat && Adjacent(usr))
 			usr.visible_message("<b>[usr]</b> checks [src]'s pulse.", "You check [src]'s pulse.")
 		spawn(15)
@@ -208,6 +208,7 @@
 					usr << "<span class='deadsay'>[T.He] [T.has] no pulse[src.client ? "" : " and [T.his] soul has departed"]...</span>"
 				else
 					usr << "<span class='deadsay'>[T.He] [T.has] a pulse!</span>"
+
 	if(fire_stacks)
 		msg += "[T.He] [T.is] covered in some liquid.\n"
 	if(on_fire)
@@ -229,7 +230,7 @@
 
 	if(species.show_ssd && (!species.has_organ["brain"] || has_brain()) && stat != DEAD)
 		if(!key)
-			msg += "<span class='deadsay'>[T.He] [T.is] [species.show_ssd]. It doesn't look like they are waking up anytime soon.</span>\n"
+			msg += "<span class='deadsay'>[T.He] [T.is] [species.show_ssd]. It doesn't look like [T.he] [T.is] waking up anytime soon.</span>\n"
 		else if(!client)
 			msg += "<span class='deadsay'>[T.He] [T.is] [species.show_ssd].</span>\n"
 
@@ -254,6 +255,10 @@
 
 	for(var/obj/item/organ/external/temp in organs)
 		if(temp)
+			if(temp.status & ORGAN_DESTROYED)
+				is_destroyed["[temp.name]"] = 1
+				wound_flavor_text["[temp.name]"] = "<span class='warning'><b>[t_He] [t_is] missing [t_his] [temp.name].</b></span>\n"
+				continue
 			if(temp.status & ORGAN_ROBOT)
 				if(!(temp.brute_dam + temp.burn_dam))
 					wound_flavor_text["[temp.name]"] = "<span class='warning'>[T.He] [T.has] a robot [temp.name]!</span>\n"
@@ -406,7 +411,7 @@
 	if (pose)
 		if( findtext(pose,".",lentext(pose)) == 0 && findtext(pose,"!",lentext(pose)) == 0 && findtext(pose,"?",lentext(pose)) == 0 )
 			pose = addtext(pose,".") //Makes sure all emotes end with a period.
-		msg += "\n[T.He] is [pose]"
+		msg += "\n[T.He] [T.is] [pose]"
 
 	user << msg
 

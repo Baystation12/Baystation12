@@ -11,6 +11,7 @@
 	emote_see = list("shakes its head", "stamps a foot", "glares around")
 	speak_chance = 1
 	turns_per_move = 5
+	see_in_dark = 6
 	meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat
 	meat_amount = 4
 	response_help  = "pets"
@@ -61,7 +62,8 @@
 
 /mob/living/simple_animal/hostile/retaliate/goat/Retaliate()
 	..()
-	src.visible_message("\red [src] gets an evil-looking gleam in their eye.")
+	if(stat == CONSCIOUS)
+		visible_message("<span class='warning'>[src] gets an evil-looking gleam in their eye.</span>")
 
 /mob/living/simple_animal/hostile/retaliate/goat/Move()
 	..()
@@ -94,6 +96,7 @@
 	emote_see = list("shakes its head")
 	speak_chance = 1
 	turns_per_move = 5
+	see_in_dark = 6
 	meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat
 	meat_amount = 6
 	response_help  = "pets"

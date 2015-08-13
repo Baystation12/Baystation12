@@ -14,9 +14,6 @@
 	idle_power_usage = 60
 	active_power_usage = 10000	//10 kW. It's a big all-body scanner.
 
-/*/obj/machinery/bodyscanner/allow_drop()
-	return 0*/
-
 /obj/machinery/bodyscanner/relaymove(mob/user as mob)
 	if (user.stat)
 		return

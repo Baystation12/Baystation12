@@ -316,22 +316,6 @@
 
 //Throwing stuff
 
-/mob/living/carbon/proc/toggle_throw_mode()
-	if (src.in_throw_mode)
-		throw_mode_off()
-	else
-		throw_mode_on()
-
-/mob/living/carbon/proc/throw_mode_off()
-	src.in_throw_mode = 0
-	if(src.throw_icon) //in case we don't have the HUD and we use the hotkey
-		src.throw_icon.icon_state = "act_throw_off"
-
-/mob/living/carbon/proc/throw_mode_on()
-	src.in_throw_mode = 1
-	if(src.throw_icon)
-		src.throw_icon.icon_state = "act_throw_on"
-
 /mob/proc/throw_item(atom/target)
 	return
 
@@ -388,8 +372,8 @@
 
 /mob/living/carbon/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	..()
-	var/temp_inc = max(BODYTEMP_HEATING_MAX*(1-get_heat_protection()), 0)
-	bodytemperature = min(bodytemperature + temp_inc, exposed_temperature)
+	var/temp_inc = max(min(BODYTEMP_HEATING_MAX*(1-get_heat_protection()), exposed_temperature - bodytemperature), 0)
+	bodytemperature += temp_inc
 
 /mob/living/carbon/can_use_hands()
 	if(handcuffed)
