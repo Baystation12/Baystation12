@@ -109,7 +109,7 @@
 	if(href_list["beaker"])
 		remove_beaker()
 	if(href_list["filter"])
-		if(filtering != href_list["filter"])
+		if(filtering != text2num(href_list["filter"]))
 			toggle_filter()
 	if(href_list["chemical"] && href_list["amount"])
 		if(occupant && occupant.stat != DEAD)
