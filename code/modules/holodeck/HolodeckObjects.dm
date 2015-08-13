@@ -257,7 +257,7 @@
 		return 0
 	
 	//parry only melee holo attacks
-	if(!istype(damage_source, /obj/item/weapon/holo) || (attacker && get_dist(user, attacker) > 1))
+	if(!istype(damage_source, /obj/item/weapon/holo) || (attacker && get_dist(user, attacker) > 1) || user.incapacitated())
 		return 0
 	
 	//block as long as they are not directly behind us

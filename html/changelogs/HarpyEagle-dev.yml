@@ -16,7 +16,8 @@ changes:
   - rscadd: "Shields no longer block attacks from directly behind the player."
   - rscadd: "Riot shields no longer stop bullets or beams (except for beanbags and rubber bullets), however they are now more effective at blocking melee attacks and thrown objects."
   - rscadd: "Energy shields block melee attacks as effectively as riot shields do. Their ability to block projectiles is largely unchanged."
-  - rscadd: "Melee weapons (just energy swords, really) now only block melee attacks."
+  - tweak: "Melee weapons now only block melee attacks."
   - experiment: "Two handed weapons have a small chance of blocking melee attacks when wielded in two hands."
   - rscadd: "Sound and visual effects when blocking attacks with an energy shield or energy sword."
+  - bugfix: "Fixed dead or unconscious people blocking stuff with shields."
 delete-after: false
