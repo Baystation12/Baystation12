@@ -1,0 +1,4 @@
+author: HarpyEagle
+changes:
+  - rscadd: "T-Ray scanner effects are now only visible to the person holding the scanner."
+delete-after: true
