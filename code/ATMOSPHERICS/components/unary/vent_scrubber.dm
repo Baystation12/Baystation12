@@ -37,15 +37,15 @@
 
 	icon = null
 	initial_loc = get_area(loc)
-	if (initial_loc.master)
-		initial_loc = initial_loc.master
 	area_uid = initial_loc.uid
 	if (!id_tag)
 		assign_uid()
 		id_tag = num2text(uid)
-	if(ticker && ticker.current_state == 3)//if the game is running
-		src.initialize()
-		src.broadcast_status()
+
+/obj/machinery/atmospherics/unary/vent_scrubber/Destroy()
+	unregister_radio(src, frequency)
+	..()
+
 
 /obj/machinery/atmospherics/unary/vent_scrubber/update_icon(var/safety = 0)
 	if(!check_icon_cache())
@@ -122,6 +122,7 @@
 	radio_filter_out = frequency==initial(frequency)?(RADIO_TO_AIRALARM):null
 	if (frequency)
 		set_frequency(frequency)
+		src.broadcast_status()
 
 /obj/machinery/atmospherics/unary/vent_scrubber/process()
 	..()
@@ -257,27 +258,27 @@
 	if (!istype(W, /obj/item/weapon/wrench))
 		return ..()
 	if (!(stat & NOPOWER) && use_power)
-		user << "\red You cannot unwrench this [src], turn it off first."
+		user << "<span class='warning'>You cannot unwrench \the [src], turn it off first.</span>"
 		return 1
 	var/turf/T = src.loc
 	if (node && node.level==1 && isturf(T) && T.intact)
-		user << "\red You must remove the plating first."
+		user << "<span class='warning'>You must remove the plating first.</span>"
 		return 1
 	var/datum/gas_mixture/int_air = return_air()
 	var/datum/gas_mixture/env_air = loc.return_air()
 	if ((int_air.return_pressure()-env_air.return_pressure()) > 2*ONE_ATMOSPHERE)
-		user << "\red You cannot unwrench this [src], it too exerted due to internal pressure."
+		user << "<span class='warning'>You cannot unwrench \the [src], it is too exerted due to internal pressure.</span>"
 		add_fingerprint(user)
 		return 1
 	playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-	user << "\blue You begin to unfasten \the [src]..."
+	user << "<span class='notice'>You begin to unfasten \the [src]...</span>"
 	if (do_after(user, 40))
 		user.visible_message( \
-			"[user] unfastens \the [src].", \
-			"\blue You have unfastened \the [src].", \
-			"You hear ratchet.")
+			"<span class='notice'>\The [user] unfastens \the [src].</span>", \
+			"<span class='notice'>You have unfastened \the [src].</span>", \
+			"You hear a ratchet.")
 		new /obj/item/pipe(loc, make_from=src)
-		del(src)
+		qdel(src)
 
 /obj/machinery/atmospherics/unary/vent_scrubber/examine(mob/user)
 	if(..(user, 1))
@@ -285,7 +286,7 @@
 	else
 		user << "You are too far away to read the gauge."
 
-/obj/machinery/atmospherics/unary/vent_scrubber/Del()
+/obj/machinery/atmospherics/unary/vent_scrubber/Destroy()
 	if(initial_loc)
 		initial_loc.air_scrub_info -= id_tag
 		initial_loc.air_scrub_names -= id_tag

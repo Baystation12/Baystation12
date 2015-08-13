@@ -3,6 +3,10 @@
 	var/wet = 0
 	var/image/wet_overlay = null
 
+	//Mining resources (for the large drills).
+	var/has_resources
+	var/list/resources
+
 	var/thermite = 0
 	oxygen = MOLES_O2STANDARD
 	nitrogen = MOLES_N2STANDARD
@@ -12,6 +16,8 @@
 
 /turf/simulated/New()
 	..()
+	if(istype(loc, /area/chapel))
+		holy = 1
 	levelupdate()
 
 /turf/simulated/proc/AddTracks(var/typepath,var/bloodDNA,var/comingdir,var/goingdir,var/bloodcolor="#A10808")
@@ -22,7 +28,7 @@
 
 /turf/simulated/Entered(atom/A, atom/OL)
 	if(movement_disabled && usr.ckey != movement_disabled_exception)
-		usr << "\red Movement is admin-disabled." //This is to identify lag problems
+		usr << "<span class='danger'>Movement is admin-disabled.</span>" //This is to identify lag problems
 		return
 
 	if (istype(A,/mob/living))
@@ -118,9 +124,7 @@
 
 // Only adds blood on the floor -- Skie
 /turf/simulated/proc/add_blood_floor(mob/living/carbon/M as mob)
-	if(istype(M, /mob/living/carbon/monkey))
-		blood_splatter(src,M,1)
-	else if( istype(M, /mob/living/carbon/alien ))
+	if( istype(M, /mob/living/carbon/alien ))
 		var/obj/effect/decal/cleanable/blood/xeno/this = new /obj/effect/decal/cleanable/blood/xeno(src)
 		this.blood_DNA["UNKNOWN BLOOD"] = "X*"
 	else if( istype(M, /mob/living/silicon/robot ))

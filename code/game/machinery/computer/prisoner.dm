@@ -4,6 +4,7 @@
 	name = "prisoner management console"
 	icon = 'icons/obj/computer.dmi'
 	icon_state = "explosive"
+	light_color = "#a91515"
 	req_access = list(access_armory)
 	circuit = "/obj/item/weapon/circuitboard/prisoner"
 	var/id = 0.0
@@ -44,7 +45,7 @@
 				if(!T.implanted) continue
 				var/loc_display = "Unknown"
 				var/mob/living/carbon/M = T.imp_in
-				if(M.z in config.station_levels && !istype(M.loc, /turf/space))
+				if((M.z in config.station_levels) && !istype(M.loc, /turf/space))
 					var/turf/mob_loc = get_turf(M)
 					loc_display = mob_loc.loc
 				if(T.malfunction)
@@ -90,12 +91,12 @@
 					usr << "Unauthorized Access."
 
 			else if(href_list["warn"])
-				var/warning = sanitize(copytext(input(usr,"Message:","Enter your message here!",""),1,MAX_MESSAGE_LEN))
+				var/warning = sanitize(input(usr,"Message:","Enter your message here!",""))
 				if(!warning) return
 				var/obj/item/weapon/implant/I = locate(href_list["warn"])
 				if((I)&&(I.imp_in))
 					var/mob/living/carbon/R = I.imp_in
-					R << "\green You hear a voice in your head saying: '[warning]'"
+					R << "<span class='notice'>You hear a voice in your head saying: '[warning]'</span>"
 
 			src.add_fingerprint(usr)
 		src.updateUsrDialog()

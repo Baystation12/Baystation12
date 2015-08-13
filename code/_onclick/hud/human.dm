@@ -77,7 +77,7 @@
 		ico.MapColors(0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, -1,-1,-1,-1)
 		ico.DrawBox(rgb(255,255,255,1),1,ico.Height()/2,ico.Width()/2,ico.Height())
 		using = new /obj/screen( src )
-		using.name = "help"
+		using.name = I_HELP
 		using.icon = ico
 		using.screen_loc = ui_acti
 		using.alpha = ui_alpha
@@ -89,7 +89,7 @@
 		ico.MapColors(0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, -1,-1,-1,-1)
 		ico.DrawBox(rgb(255,255,255,1),ico.Width()/2,ico.Height()/2,ico.Width(),ico.Height())
 		using = new /obj/screen( src )
-		using.name = "disarm"
+		using.name = I_DISARM
 		using.icon = ico
 		using.screen_loc = ui_acti
 		using.alpha = ui_alpha
@@ -101,7 +101,7 @@
 		ico.MapColors(0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, -1,-1,-1,-1)
 		ico.DrawBox(rgb(255,255,255,1),ico.Width()/2,1,ico.Width(),ico.Height()/2)
 		using = new /obj/screen( src )
-		using.name = "grab"
+		using.name = I_GRAB
 		using.icon = ico
 		using.screen_loc = ui_acti
 		using.alpha = ui_alpha
@@ -113,7 +113,7 @@
 		ico.MapColors(0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, -1,-1,-1,-1)
 		ico.DrawBox(rgb(255,255,255,1),1,1,ico.Width()/2,ico.Height()/2)
 		using = new /obj/screen( src )
-		using.name = "harm"
+		using.name = I_HURT
 		using.icon = ico
 		using.screen_loc = ui_acti
 		using.alpha = ui_alpha
@@ -356,6 +356,9 @@
 	//mymob.gun_run_icon.color = ui_color
 	mymob.gun_run_icon.alpha = ui_alpha
 
+	mymob.radio_use_icon = new /obj/screen/gun/radio(null)
+	mymob.radio_use_icon.alpha = ui_alpha
+
 	if (mymob.client)
 		if (mymob.client.gun_mode) // If in aim mode, correct the sprite
 			mymob.gun_setting_icon.set_dir(2)
@@ -381,52 +384,6 @@
 	else
 		client.screen -= hud_used.hotkeybuttons
 		hud_used.hotkey_ui_hidden = 1
-
-
-/mob/living/carbon/human/update_action_buttons()
-	var/num = 1
-	if(!hud_used) return
-	if(!client) return
-
-	if(!hud_used.hud_shown)	//Hud toggled to minimal
-		return
-
-	client.screen -= hud_used.item_action_list
-
-	hud_used.item_action_list = list()
-	for(var/obj/item/I in src)
-		if(I.icon_action_button)
-			var/obj/screen/item_action/A = new(hud_used)
-
-			//A.icon = 'icons/mob/screen1_action.dmi'
-			//A.icon_state = I.icon_action_button
-			A.icon = ui_style2icon(client.prefs.UI_style)
-			A.icon_state = "template"
-			var/image/img = image(I.icon, A, I.icon_state)
-			img.pixel_x = 0
-			img.pixel_y = 0
-			A.overlays += img
-
-			if(I.action_button_name)
-				A.name = I.action_button_name
-			else
-				A.name = "Use [I.name]"
-			A.owner = I
-			hud_used.item_action_list += A
-			switch(num)
-				if(1)
-					A.screen_loc = ui_action_slot1
-				if(2)
-					A.screen_loc = ui_action_slot2
-				if(3)
-					A.screen_loc = ui_action_slot3
-				if(4)
-					A.screen_loc = ui_action_slot4
-				if(5)
-					A.screen_loc = ui_action_slot5
-					break //5 slots available, so no more can be added.
-			num++
-	src.client.screen += src.hud_used.item_action_list
 
 //Used for new human mobs created by cloning/goleming/etc.
 /mob/living/carbon/human/proc/set_cloned_appearance()

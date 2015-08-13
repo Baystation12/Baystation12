@@ -15,8 +15,10 @@
 	idle_power_usage = 0
 	active_power_usage = 0
 
-/obj/machinery/power/Del()
+/obj/machinery/power/Destroy()
 	disconnect_from_network()
+	disconnect_terminal()
+
 	..()
 
 ///////////////////////////////
@@ -69,20 +71,20 @@
 	//	return 1
 
 	var/area/A = src.loc.loc		// make sure it's in an area
-	if(!A || !isarea(A) || !A.master)
+	if(!A || !isarea(A))
 		return 0					// if not, then not powered
 	if(chan == -1)
 		chan = power_channel
-	return A.master.powered(chan)	// return power status of the area
+	return A.powered(chan)			// return power status of the area
 
 // increment the power usage stats for an area
 /obj/machinery/proc/use_power(var/amount, var/chan = -1) // defaults to power_channel
 	var/area/A = get_area(src)		// make sure it's in an area
-	if(!A || !isarea(A) || !A.master)
+	if(!A || !isarea(A))
 		return
 	if(chan == -1)
 		chan = power_channel
-	A.master.use_power(amount, chan)
+	A.use_power(amount, chan)
 
 /obj/machinery/proc/power_change()		// called whenever the power settings of the containing area change
 										// by default, check equipment channel & set flag
@@ -235,7 +237,7 @@
 // rebuild all power networks from scratch - only called at world creation or by the admin verb
 /proc/makepowernets()
 	for(var/datum/powernet/PN in powernets)
-		del(PN)
+		qdel(PN)
 	powernets.Cut()
 
 	for(var/obj/structure/cable/PC in cable_list)

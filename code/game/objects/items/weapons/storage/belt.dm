@@ -32,7 +32,12 @@
 		/obj/item/device/t_scanner,
 		/obj/item/device/analyzer,
 		/obj/item/taperoll/engineering,
-		/obj/item/device/robotanalyzer)
+		/obj/item/device/robotanalyzer,
+		/obj/item/weapon/material/minihoe,
+		/obj/item/weapon/material/hatchet,
+		/obj/item/device/analyzer/plant_analyzer,
+		/obj/item/weapon/extinguisher/mini
+		)
 
 
 /obj/item/weapon/storage/belt/utility/full/New()
@@ -75,17 +80,20 @@
 		/obj/item/stack/medical,
 		/obj/item/device/flashlight/pen,
 		/obj/item/clothing/mask/surgical,
+		/obj/item/clothing/head/surgery,
 		/obj/item/clothing/gloves/latex,
-		/obj/item/weapon/reagent_containers/hypospray
-	)
+		/obj/item/weapon/reagent_containers/hypospray,
+		/obj/item/clothing/glasses/hud/health,
+		/obj/item/weapon/crowbar,
+		/obj/item/device/flashlight,
+		/obj/item/weapon/extinguisher/mini
+		)
 
 /obj/item/weapon/storage/belt/medical/emt
 	name = "EMT utility belt"
 	desc = "A sturdy black webbing belt with attached pouches."
-	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "emsbelt"
 	item_state = "emsbelt"
-
 
 /obj/item/weapon/storage/belt/security
 	name = "security belt"
@@ -94,7 +102,7 @@
 	item_state = "security"
 	storage_slots = 7
 	max_w_class = 3
-	max_combined_w_class = 21
+	max_storage_space = 28
 	can_hold = list(
 		/obj/item/weapon/grenade,
 		/obj/item/weapon/reagent_containers/spray/pepper,
@@ -103,15 +111,16 @@
 		/obj/item/clothing/glasses,
 		/obj/item/ammo_casing/shotgun,
 		/obj/item/ammo_magazine,
-		/obj/item/weapon/reagent_containers/food/snacks/donut/normal,
-		/obj/item/weapon/reagent_containers/food/snacks/donut/jelly,
+		/obj/item/weapon/reagent_containers/food/snacks/donut/,
 		/obj/item/weapon/melee/baton,
 		/obj/item/weapon/gun/energy/taser,
-		/obj/item/weapon/flame/lighter/zippo,
+		/obj/item/weapon/flame/lighter,
 		/obj/item/clothing/glasses/hud/security,
 		/obj/item/device/flashlight,
 		/obj/item/device/pda,
 		/obj/item/device/radio/headset,
+		/obj/item/device/hailer,
+		/obj/item/device/megaphone,
 		/obj/item/weapon/melee,
 		/obj/item/weapon/gun/projectile/sec,
 		/obj/item/taperoll/police
@@ -154,4 +163,4 @@
 	item_state = "swatbelt"
 	storage_slots = 9
 	max_w_class = 3
-	max_combined_w_class = 21
+	max_storage_space = 28

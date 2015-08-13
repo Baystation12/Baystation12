@@ -1,5 +1,0 @@
-author: PsiOmegaDelta
-delete-after: True
-
-changes: 
-  - bugfix: "Cells now drain when using more charge than what is available."

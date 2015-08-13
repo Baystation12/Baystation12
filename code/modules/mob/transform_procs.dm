@@ -1,18 +1,18 @@
 /mob/living/carbon/human/proc/monkeyize()
-	if (monkeyizing)
+	if (transforming)
 		return
 	for(var/obj/item/W in src)
 		if (W==w_uniform) // will be torn
 			continue
 		drop_from_inventory(W)
 	regenerate_icons()
-	monkeyizing = 1
+	transforming = 1
 	canmove = 0
 	stunned = 1
 	icon = null
 	invisibility = 101
 	for(var/t in organs)
-		del(t)
+		qdel(t)
 	var/atom/movable/overlay/animation = new /atom/movable/overlay( loc )
 	animation.icon_state = "blank"
 	animation.icon = 'icons/mob/mob.dmi'
@@ -21,55 +21,44 @@
 	sleep(48)
 	//animation = null
 
-	if(!species.primitive) //If the creature in question has no primitive set, this is going to be messy.
+	transforming = 0
+	stunned = 0
+	update_canmove()
+	invisibility = initial(invisibility)
+
+	if(!species.primitive_form) //If the creature in question has no primitive set, this is going to be messy.
 		gib()
 		return
 
-	var/mob/living/carbon/monkey/O = null
+	for(var/obj/item/W in src)
+		drop_from_inventory(W)
+	set_species(species.primitive_form)
+	dna.SetSEState(MONKEYBLOCK,1)
+	dna.SetSEValueRange(MONKEYBLOCK,0xDAC, 0xFFF)
 
-	O = new species.primitive(loc)
+	src << "<B>You are now [species.name]. </B>"
+	qdel(animation)
 
-	O.dna = dna.Clone()
-	O.dna.SetSEState(MONKEYBLOCK,1)
-	O.dna.SetSEValueRange(MONKEYBLOCK,0xDAC, 0xFFF)
-	O.loc = loc
-	O.viruses = viruses
-	O.a_intent = "hurt"
-
-	for(var/datum/disease/D in O.viruses)
-		D.affected_mob = O
-
-	if (client)
-		client.mob = O
-	if(mind)
-		mind.transfer_to(O)
-
-	O << "<B>You are now [O]. </B>"
-
-	spawn(0)//To prevent the proc from returning null.
-		del(src)
-	del(animation)
-
-	return O
+	return src
 
 /mob/new_player/AIize()
 	spawning = 1
 	return ..()
 
 /mob/living/carbon/human/AIize(move=1) // 'move' argument needs defining here too because BYOND is dumb
-	if (monkeyizing)
+	if (transforming)
 		return
 	for(var/t in organs)
-		del(t)
+		qdel(t)
 
 	return ..(move)
 
 /mob/living/carbon/AIize()
-	if (monkeyizing)
+	if (transforming)
 		return
 	for(var/obj/item/W in src)
 		drop_from_inventory(W)
-	monkeyizing = 1
+	transforming = 1
 	canmove = 0
 	icon = null
 	invisibility = 101
@@ -117,23 +106,23 @@
 	O.add_ai_verbs()
 
 	O.rename_self("ai",1)
-	spawn(0)
-		del(src)
+	spawn(0)	// Mobs still instantly del themselves, thus we need to spawn or O will never be returned
+		qdel(src)
 	return O
 
 //human -> robot
 /mob/living/carbon/human/proc/Robotize()
-	if (monkeyizing)
+	if (transforming)
 		return
 	for(var/obj/item/W in src)
 		drop_from_inventory(W)
 	regenerate_icons()
-	monkeyizing = 1
+	transforming = 1
 	canmove = 0
 	icon = null
 	invisibility = 101
 	for(var/t in organs)
-		del(t)
+		qdel(t)
 
 	var/mob/living/silicon/robot/O = new /mob/living/silicon/robot( loc )
 
@@ -170,47 +159,46 @@
 	callHook("borgify", list(O))
 	O.Namepick()
 
-	spawn(0)//To prevent the proc from returning null.
-		del(src)
+	spawn(0)	// Mobs still instantly del themselves, thus we need to spawn or O will never be returned
+		qdel(src)
 	return O
 
 //human -> alien
 /mob/living/carbon/human/proc/Alienize()
-	if (monkeyizing)
+	if (transforming)
 		return
 	for(var/obj/item/W in src)
 		drop_from_inventory(W)
 	regenerate_icons()
-	monkeyizing = 1
+	transforming = 1
 	canmove = 0
 	icon = null
 	invisibility = 101
 	for(var/t in organs)
-		del(t)
+		qdel(t)
 
 	var/alien_caste = pick("Hunter","Sentinel","Drone")
 	var/mob/living/carbon/human/new_xeno = create_new_xenomorph(alien_caste,loc)
 
-	new_xeno.a_intent = "hurt"
+	new_xeno.a_intent = I_HURT
 	new_xeno.key = key
 
 	new_xeno << "<B>You are now an alien.</B>"
-	spawn(0)//To prevent the proc from returning null.
-		del(src)
+	qdel(src)
 	return
 
 /mob/living/carbon/human/proc/slimeize(adult as num, reproduce as num)
-	if (monkeyizing)
+	if (transforming)
 		return
 	for(var/obj/item/W in src)
 		drop_from_inventory(W)
 	regenerate_icons()
-	monkeyizing = 1
+	transforming = 1
 	canmove = 0
 	icon = null
 	invisibility = 101
 	for(var/t in organs)
-		del(t)
+		qdel(t)
 
 	var/mob/living/carbon/slime/new_slime
 	if(reproduce)
@@ -230,30 +218,28 @@
 	new_slime.key = key
 
 	new_slime << "<B>You are now a slime. Skreee!</B>"
-	spawn(0)//To prevent the proc from returning null.
-		del(src)
+	qdel(src)
 	return
 
 /mob/living/carbon/human/proc/corgize()
-	if (monkeyizing)
+	if (transforming)
 		return
 	for(var/obj/item/W in src)
 		drop_from_inventory(W)
 	regenerate_icons()
-	monkeyizing = 1
+	transforming = 1
 	canmove = 0
 	icon = null
 	invisibility = 101
 	for(var/t in organs)	//this really should not be necessary
-		del(t)
+		qdel(t)
 
 	var/mob/living/simple_animal/corgi/new_corgi = new /mob/living/simple_animal/corgi (loc)
-	new_corgi.a_intent = "hurt"
+	new_corgi.a_intent = I_HURT
 	new_corgi.key = key
 
 	new_corgi << "<B>You are now a Corgi. Yap Yap!</B>"
-	spawn(0)//To prevent the proc from returning null.
-		del(src)
+	qdel(src)
 	return
 
 /mob/living/carbon/human/Animalize()
@@ -265,29 +251,29 @@
 		usr << "\red Sorry but this mob type is currently unavailable."
 		return
 
-	if(monkeyizing)
+	if(transforming)
 		return
 	for(var/obj/item/W in src)
 		drop_from_inventory(W)
 
 	regenerate_icons()
-	monkeyizing = 1
+	transforming = 1
 	canmove = 0
 	icon = null
 	invisibility = 101
 
 	for(var/t in organs)
-		del(t)
+		qdel(t)
 
 	var/mob/new_mob = new mobpath(src.loc)
 
 	new_mob.key = key
-	new_mob.a_intent = "hurt"
+	new_mob.a_intent = I_HURT
 
 
 	new_mob << "You suddenly feel more... animalistic."
 	spawn()
-		del(src)
+		qdel(src)
 	return
 
 /mob/proc/Animalize()
@@ -302,10 +288,10 @@
 	var/mob/new_mob = new mobpath(src.loc)
 
 	new_mob.key = key
-	new_mob.a_intent = "hurt"
+	new_mob.a_intent = I_HURT
 	new_mob << "You feel more... animalistic"
 
-	del(src)
+	qdel(src)
 
 /* Certain mob types have problems and should not be allowed to be controlled by players.
  *

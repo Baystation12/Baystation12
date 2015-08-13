@@ -9,6 +9,10 @@
 	name = master_item.name
 	verbs -= /obj/item/verb/verb_pickup	//make sure this is never picked up.
 	..()
+	
+/obj/item/weapon/storage/internal/Destroy()
+	master_item = null
+	..()
 
 /obj/item/weapon/storage/internal/attack_hand()
 	return		//make sure this is never picked up
@@ -26,7 +30,7 @@
 //returns 1 if the master item's parent's MouseDrop() should be called, 0 otherwise. It's strange, but no other way of
 //doing it without the ability to call another proc's parent, really.
 /obj/item/weapon/storage/internal/proc/handle_mousedrop(mob/user as mob, obj/over_object as obj)
-	if (ishuman(user) || ismonkey(user)) //so monkeys can take off their backpacks -- Urist
+	if (ishuman(user) || issmall(user)) //so monkeys can take off their backpacks -- Urist
 
 		if (istype(user.loc,/obj/mecha)) // stops inventory actions in a mech
 			return 0
@@ -37,12 +41,12 @@
 
 		if (!( istype(over_object, /obj/screen) ))
 			return 1
-		
+
 		//makes sure master_item is equipped before putting it in hand, so that we can't drag it into our hand from miles away.
 		//there's got to be a better way of doing this...
-		if (!(master_item.loc == user) || (master_item.loc && master_item.loc.loc == user))	
+		if (!(master_item.loc == user) || (master_item.loc && master_item.loc.loc == user))
 			return 0
-		
+
 		if (!( user.restrained() ) && !( user.stat ))
 			switch(over_object.name)
 				if("r_hand")
@@ -70,12 +74,12 @@
 			H.put_in_hands(master_item)
 			H.r_store = null
 			return 0
-	
+
 	src.add_fingerprint(user)
 	if (master_item.loc == user)
 		src.open(user)
 		return 0
-	
+
 	for(var/mob/M in range(1, master_item.loc))
 		if (M.s_active == src)
 			src.close(M)

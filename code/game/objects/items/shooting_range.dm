@@ -9,7 +9,7 @@
 	var/icon/virtualIcon
 	var/list/bulletholes = list()
 
-	Del()
+	Destroy()
 		// if a target is deleted and associated with a stake, force stake to forget
 		for(var/obj/structure/target_stake/T in view(3,src))
 			if(T.pinned_target == src)
@@ -96,8 +96,8 @@
 		if(hp <= 0)
 			for(var/mob/O in oviewers())
 				if ((O.client && !( O.blinded )))
-					O << "\red [src] breaks into tiny pieces and collapses!"
-			del(src)
+					O << "<span class='warning'>\The [src] breaks into tiny pieces and collapses!</span>"
+			qdel(src)
 
 		// Create a temporary object to represent the damage
 		var/obj/bmark = new
@@ -146,7 +146,7 @@
 
 		return
 
-	return -1 // the bullet/projectile goes through the target! Ie, you missed
+	return PROJECTILE_CONTINUE // the bullet/projectile goes through the target!
 
 
 // Small memory holder entity for transparent bullet holes

@@ -4,13 +4,17 @@
 	icon = 'icons/obj/wizard.dmi'
 	icon_state = "scroll"
 	var/uses = 4.0
-	w_class = 2.0
+	w_class = 1
 	item_state = "paper"
 	throw_speed = 4
 	throw_range = 20
-	origin_tech = "bluespace=4"
+	origin_tech = list(TECH_BLUESPACE = 4)
 
 /obj/item/weapon/teleportation_scroll/attack_self(mob/user as mob)
+	if((user.mind && !wizards.is_antagonist(user.mind)))
+		usr << "<span class='warning'>You stare at the scroll but cannot make sense of the markings!</span>"
+		return
+
 	user.set_machine(src)
 	var/dat = "<B>Teleportation Scroll:</B><BR>"
 	dat += "Number of uses: [src.uses]<BR>"

@@ -9,7 +9,7 @@
 	flags =  CONDUCT
 	slot_flags = SLOT_BACK
 	caliber = "shotgun"
-	origin_tech = "combat=4;materials=2"
+	origin_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 2)
 	load_method = SINGLE_CASING
 	ammo_type = /obj/item/ammo_casing/shotgun/beanbag
 	handle_casings = HOLD_CASINGS
@@ -43,10 +43,9 @@
 	name = "combat shotgun"
 	icon_state = "cshotgun"
 	item_state = "cshotgun"
-	origin_tech = "combat=5;materials=2"
+	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 2)
 	max_shells = 7 //match the ammo box capacity, also it can hold a round in the chamber anyways, for a total of 8.
 	ammo_type = /obj/item/ammo_casing/shotgun
-
 
 /obj/item/weapon/gun/projectile/shotgun/doublebarrel
 	name = "double-barreled shotgun"
@@ -63,13 +62,25 @@
 	flags =  CONDUCT
 	slot_flags = SLOT_BACK
 	caliber = "shotgun"
-	origin_tech = "combat=3;materials=1"
+	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 1)
 	ammo_type = /obj/item/ammo_casing/shotgun/beanbag
+	
+	burst_delay = 0
+	firemodes = list(
+		list(name="fire one barrel at a time", burst=1),
+		list(name="fire both barrels at once", burst=2),
+		)
+
+/obj/item/weapon/gun/projectile/shotgun/doublebarrel/pellet
+	ammo_type = /obj/item/ammo_casing/shotgun/pellet
 
 /obj/item/weapon/gun/projectile/shotgun/doublebarrel/flare
 	name = "signal shotgun"
 	desc = "A double-barreled shotgun meant to fire signal flash shells."
 	ammo_type = /obj/item/ammo_casing/shotgun/flash
+
+/obj/item/weapon/gun/projectile/shotgun/doublebarrel/unload_ammo(user, allow_dump)
+	..(user, allow_dump=1)
 
 //this is largely hacky and bad :(	-Pete
 /obj/item/weapon/gun/projectile/shotgun/doublebarrel/attackby(var/obj/item/A as obj, mob/user as mob)
@@ -83,8 +94,9 @@
 			return
 		if(do_after(user, 30))	//SHIT IS STEALTHY EYYYYY
 			icon_state = "sawnshotgun"
+			item_state = "sawnshotgun"
 			w_class = 3
-			item_state = "gun"
+			force = 5
 			slot_flags &= ~SLOT_BACK	//you can't sling it on your back
 			slot_flags |= (SLOT_BELT|SLOT_HOLSTER) //but you can wear it on your belt (poorly concealed under a trenchcoat, ideally) - or in a holster, why not.
 			name = "sawn-off shotgun"
@@ -92,3 +104,13 @@
 			user << "<span class='warning'>You shorten the barrel of \the [src]!</span>"
 	else
 		..()
+
+/obj/item/weapon/gun/projectile/shotgun/doublebarrel/sawn
+	name = "sawn-off shotgun"
+	desc = "Omar's coming!"
+	icon_state = "sawnshotgun"
+	item_state = "sawnshotgun"
+	slot_flags = SLOT_BELT|SLOT_HOLSTER
+	ammo_type = /obj/item/ammo_casing/shotgun/pellet
+	w_class = 3
+	force = 5

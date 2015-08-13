@@ -14,6 +14,7 @@ var/syndicate_elite_shuttle_timeleft = 0
 	name = "elite syndicate squad shuttle control console"
 	icon = 'icons/obj/computer.dmi'
 	icon_state = "syndishuttle"
+	light_color = "#00ffff"
 	req_access = list(access_cent_specops)
 	var/temp = null
 	var/hacked = 0
@@ -58,7 +59,7 @@ var/syndicate_elite_shuttle_timeleft = 0
 	if (syndicate_elite_shuttle_moving_to_station || syndicate_elite_shuttle_moving_to_mothership) return
 
 	if (!syndicate_elite_can_move())
-		usr << "\red The Syndicate Elite shuttle is unable to leave."
+		usr << "<span class='warning'>The Syndicate Elite shuttle is unable to leave.</span>"
 		return
 
 		sleep(600)
@@ -160,7 +161,7 @@ var/syndicate_elite_shuttle_timeleft = 0
 		for(var/atom/movable/AM as mob|obj in T)
 			AM.Move(D)
 		if(istype(T, /turf/simulated))
-			del(T)
+			qdel(T)
 
 	for(var/mob/living/carbon/bug in end_location) // If someone somehow is still in the shuttle's docking area...
 		bug.gib()
@@ -172,7 +173,7 @@ var/syndicate_elite_shuttle_timeleft = 0
 
 	for(var/turf/T in get_area_turfs(end_location) )
 		var/mob/M = locate(/mob) in T
-		M << "\red You have arrived to [station_name]. Commence operation!"
+		M << "<span class='warning'>You have arrived to [station_name]. Commence operation!</span>"
 
 /proc/syndicate_elite_can_move()
 	if(syndicate_elite_shuttle_moving_to_station || syndicate_elite_shuttle_moving_to_mothership) return 0
@@ -184,19 +185,16 @@ var/syndicate_elite_shuttle_timeleft = 0
 /obj/machinery/computer/syndicate_elite_shuttle/attack_ai(var/mob/user as mob)
 	return attack_hand(user)
 
-/obj/machinery/computer/syndicate_elite_shuttle/attackby(I as obj, user as mob)
-	if(istype(I,/obj/item/weapon/card/emag))
-		user << "\blue The electronic systems in this console are far too advanced for your primitive hacking peripherals."
-	else
-		return attack_hand(user)
+/obj/machinery/computer/syndicate_elite_shuttle/emag_act(var/remaining_charges, var/mob/user)
+	user << "<span class='notice'>The electronic systems in this console are far too advanced for your primitive hacking peripherals.</span>"
 
 /obj/machinery/computer/syndicate_elite_shuttle/attack_hand(var/mob/user as mob)
 	if(!allowed(user))
-		user << "\red Access Denied."
+		user << "<span class='warning'>Access Denied.</span>"
 		return
 
 //	if (sent_syndicate_strike_team == 0)
-//		usr << "\red The strike team has not yet deployed."
+//		usr << "<span class='warning'>The strike team has not yet deployed.</span>"
 //		return
 
 	if(..())
@@ -226,17 +224,17 @@ var/syndicate_elite_shuttle_timeleft = 0
 	if (href_list["sendtodock"])
 		if(!syndicate_elite_shuttle_at_station|| syndicate_elite_shuttle_moving_to_station || syndicate_elite_shuttle_moving_to_mothership) return
 
-		usr << "\blue The Syndicate will not allow the Elite Squad shuttle to return."
+		usr << "<span class='notice'>The Syndicate will not allow the Elite Squad shuttle to return.</span>"
 		return
 
 	else if (href_list["sendtostation"])
 		if(syndicate_elite_shuttle_at_station || syndicate_elite_shuttle_moving_to_station || syndicate_elite_shuttle_moving_to_mothership) return
 
 		if (!specops_can_move())
-			usr << "\red The Syndicate Elite shuttle is unable to leave."
+			usr << "<span class='warning'>The Syndicate Elite shuttle is unable to leave.</span>"
 			return
 
-		usr << "\blue The Syndicate Elite shuttle will arrive on [station_name] in [(SYNDICATE_ELITE_MOVETIME/10)] seconds."
+		usr << "<span class='notice'>The Syndicate Elite shuttle will arrive on [station_name] in [(SYNDICATE_ELITE_MOVETIME/10)] seconds.</span>"
 
 		temp  = "Shuttle departing.<BR><BR><A href='?src=\ref[src];mainmenu=1'>OK</A>"
 		updateUsrDialog()

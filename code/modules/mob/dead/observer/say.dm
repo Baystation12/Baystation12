@@ -1,5 +1,5 @@
 /mob/dead/observer/say(var/message)
-	message = strip_html_properly(message)
+	message = sanitize(message)
 
 	if (!message)
 		return
@@ -18,7 +18,7 @@
 
 
 /mob/dead/observer/emote(var/act, var/type, var/message)
-	message = trim_strip_html_properly(message)
+	//message = sanitize(message) - already sanitized in verb/me_verb()
 
 	if(!message)
 		return

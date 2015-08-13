@@ -2,7 +2,8 @@
 
 var/cultwords = list()
 var/runedec = 0
-var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", "self", "see", "other", "hide")
+var/global/list/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", "self", "see", "other", "hide")
+var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","mgar","balaq", "karazet", "geeri")
 
 /client/proc/check_words() // -- Urist
 	set category = "Special Verbs"
@@ -14,7 +15,7 @@ var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", 
 		usr << "[cultwords[word]] is [word]"
 
 /proc/runerandom() //randomizes word meaning
-	var/list/runewords=list("ire","ego","nahlizet","certum","veri","jatkaa","mgar","balaq", "karazet", "geeri") ///"orkan" and "allaq" removed.
+	var/list/runewords=rnwords
 	for (var/word in engwords)
 		cultwords[word] = pick(runewords)
 		runewords-=cultwords[word]
@@ -32,8 +33,9 @@ var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", 
 	var/word1
 	var/word2
 	var/word3
+	var/image/blood_image
 	var/list/converting = list()
-	
+
 // Places these combos are mentioned: this file - twice in the rune code, once in imbued tome, once in tome's HTML runes.dm - in the imbue rune code. If you change a combination - dont forget to change it everywhere.
 
 // travel self [word] - Teleport to random [rune with word destination matching]
@@ -65,10 +67,21 @@ var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", 
 // join hide technology - stun rune. Rune color: bright pink.
 	New()
 		..()
-		var/image/blood = image(loc = src)
-		blood.override = 1
+		blood_image = image(loc = src)
+		blood_image.override = 1
 		for(var/mob/living/silicon/ai/AI in player_list)
-			AI.client.images += blood
+			if(AI.client)
+				AI.client.images += blood_image
+		rune_list.Add(src)
+
+	Destroy()
+		for(var/mob/living/silicon/ai/AI in player_list)
+			if(AI.client)
+				AI.client.images -= blood_image
+		qdel(blood_image)
+		blood_image = null
+		rune_list.Remove(src)
+		..()
 
 	examine(mob/user)
 		..()
@@ -79,11 +92,11 @@ var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", 
 	attackby(I as obj, user as mob)
 		if(istype(I, /obj/item/weapon/book/tome) && iscultist(user))
 			user << "You retrace your steps, carefully undoing the lines of the rune."
-			del(src)
+			qdel(src)
 			return
 		else if(istype(I, /obj/item/weapon/nullrod))
-			user << "\blue You disrupt the vile magic with the deadening field of the null rod!"
-			del(src)
+			user << "<span class='notice'>You disrupt the vile magic with the deadening field of the null rod!</span>"
+			qdel(src)
 			return
 		return
 
@@ -158,7 +171,7 @@ var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", 
 			else
 				usr.whisper(pick("Hakkrutju gopoenjim.", "Nherasai pivroiashan.", "Firjji prhiv mazenhor.", "Tanah eh wakantahe.", "Obliyae na oraie.", "Miyf hon vnor'c.", "Wakabai hij fen juswix."))
 			for (var/mob/V in viewers(src))
-				V.show_message("\red The markings pulse with a small burst of light, then fall dark.", 3, "\red You hear a faint fizzle.", 2)
+				V.show_message("<span class='warning'>The markings pulse with a small burst of light, then fall dark.</span>", 3, "<span class='warning'>You hear a faint fizzle.</span>", 2)
 			return
 
 		check_icon()
@@ -326,7 +339,7 @@ var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", 
 
 	attack(mob/living/M as mob, mob/living/user as mob)
 
-		M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has had the [name] used on him by [user.name] ([user.ckey])</font>")
+		M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has had the [name] used on them by [user.name] ([user.ckey])</font>")
 		user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used [name] on [M.name] ([M.ckey])</font>")
 		msg_admin_attack("[user.name] ([user.ckey]) used [name] on [M.name] ([M.ckey]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
 
@@ -342,8 +355,8 @@ var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", 
 			return
 		M.take_organ_damage(0,rand(5,20)) //really lucky - 5 hits for a crit
 		for(var/mob/O in viewers(M, null))
-			O.show_message(text("\red <B>[] beats [] with the arcane tome!</B>", user, M), 1)
-		M << "\red You feel searing heat inside!"
+			O.show_message("<span class='warning'>\The [user] beats \the [M] with \the [src]!</span>", 1)
+		M << "<span class='danger'>You feel searing heat inside!</span>"
 
 
 	attack_self(mob/living/user as mob)
@@ -358,13 +371,10 @@ var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", 
 			for(var/obj/effect/rune/N in world)
 				C++
 			if (!istype(user.loc,/turf))
-				user << "\red You do not have enough space to write a proper rune."
+				user << "<span class='warning'>You do not have enough space to write a proper rune.</span>"
 				return
 
-
-
-
-			if (C>=26+runedec+ticker.mode.cult.len) //including the useless rune at the secret room, shouldn't count against the limit of 25 runes - Urist
+			if (C>=26 + runedec + cult.current_antagonists.len) //including the useless rune at the secret room, shouldn't count against the limit of 25 runes - Urist
 				alert("The cloth of reality can't take that much of a strain. Remove some runes first!")
 				return
 			else
@@ -445,7 +455,7 @@ var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", 
 				if (!chosen_rune)
 					return
 				if (chosen_rune == "none")
-					user << "\red You decide against scribing a rune, perhaps you should take this time to study your notes."
+					user << "<span class='notice'>You decide against scribing a rune, perhaps you should take this time to study your notes.</span>"
 					return
 				if (chosen_rune == "teleport")
 					dictionary[chosen_rune] += input ("Choose a destination word") in english
@@ -456,8 +466,8 @@ var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", 
 				return
 
 			for (var/mob/V in viewers(src))
-				V.show_message("\red [user] slices open a finger and begins to chant and paint symbols on the floor.", 3, "\red You hear chanting.", 2)
-			user << "\red You slice open one of your fingers and begin drawing a rune on the floor whilst chanting the ritual that binds your life essence with the dark arcane energies flowing through the surrounding world."
+				V.show_message("<span class='danger'>\The [user] slices open a finger and begins to chant and paint symbols on the floor.</span>", 3, "<span class='danger'>You hear chanting.</span>", 2)
+			user << "<span class='danger'>You slice open one of your fingers and begin drawing a rune on the floor whilst chanting the ritual that binds your life essence with the dark arcane energies flowing through the surrounding world.</span>"
 			user.take_overall_damage((rand(9)+1)/10) // 0.1 to 1.0 damage
 			if(do_after(user, 50))
 				var/area/A = get_area(user)
@@ -466,7 +476,7 @@ var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", 
 					return
 				var/mob/living/carbon/human/H = user
 				var/obj/effect/rune/R = new /obj/effect/rune(user.loc)
-				user << "\red You finish drawing the arcane markings of the Geometer."
+				user << "<span class='notice'>You finish drawing the arcane markings of the Geometer.</span>"
 				var/list/required = dictionary[chosen_rune]
 				R.word1 = english[required[1]]
 				R.word2 = english[required[2]]
@@ -500,6 +510,9 @@ var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", 
 		else
 			user << "The scriptures of Nar-Sie, The One Who Sees, The Geometer of Blood. Contains the details of every ritual his followers could think of. Most of these are useless, though."
 
+/obj/item/weapon/book/tome/cultify()
+	return
+
 /obj/item/weapon/book/tome/imbued //admin tome, spawns working runes without waiting
 	w_class = 2.0
 	var/cultistsonly = 1
@@ -511,7 +524,7 @@ var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", 
 		if(user)
 			var/r
 			if (!istype(user.loc,/turf))
-				user << "\red You do not have enough space to write a proper rune."
+				user << "<span class='notice'>You do not have enough space to write a proper rune.</span>"
 			var/list/runes = list("teleport", "itemport", "tome", "armor", "convert", "tear in reality", "emp", "drain", "seer", "raise", "obscure", "reveal", "astral journey", "manifest", "imbue talisman", "sacrifice", "wall", "freedom", "cultsummon", "deafen", "blind", "bloodboil", "communicate", "stun")
 			r = input("Choose a rune to scribe", "Rune Scribing") in runes //not cancellable.
 			var/obj/effect/rune/R = new /obj/effect/rune

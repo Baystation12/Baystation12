@@ -49,7 +49,7 @@
 
 	flags = CONDUCT
 	slot_flags = SLOT_BELT
-	origin_tech = "magnets=3;materials=2"
+	origin_tech = list(TECH_MAGNET = 3, TECH_MATERIAL = 2)
 
 	var/max_uses = 20
 	var/uses = 0
@@ -67,14 +67,10 @@
 		user << "It has [uses] lights remaining."
 
 /obj/item/device/lightreplacer/attackby(obj/item/W, mob/user)
-	if(istype(W,  /obj/item/weapon/card/emag) && emagged == 0)
-		Emag()
-		return
-
-	if(istype(W, /obj/item/stack/sheet/glass))
-		var/obj/item/stack/sheet/glass/G = W
+	if(istype(W, /obj/item/stack/material) && W.get_material_name() == "glass")
+		var/obj/item/stack/G = W
 		if(uses >= max_uses)
-			user << "<span class='warning'>[src.name] is full."
+			user << "<span class='warning'>[src.name] is full.</span>"
 			return
 		else if(G.use(1))
 			AddUses(5)
@@ -90,7 +86,7 @@
 				AddUses(1)
 				user << "You insert the [L.name] into the [src.name]. You have [uses] lights remaining."
 				user.drop_item()
-				del(L)
+				qdel(L)
 				return
 		else
 			user << "You need a working light."
@@ -140,7 +136,9 @@
 				var/obj/item/weapon/light/L1 = new target.light_type(target.loc)
 				L1.status = target.status
 				L1.rigged = target.rigged
-				L1.brightness = target.brightness
+				L1.brightness_range = target.brightness_range
+				L1.brightness_power = target.brightness_power
+				L1.brightness_color = target.brightness_color
 				L1.switchcount = target.switchcount
 				target.switchcount = 0
 				L1.update()
@@ -153,10 +151,12 @@
 			target.status = L2.status
 			target.switchcount = L2.switchcount
 			target.rigged = emagged
-			target.brightness = L2.brightness
+			target.brightness_range = L2.brightness_range
+			target.brightness_power = L2.brightness_power
+			target.brightness_color = L2.brightness_color
 			target.on = target.has_power()
 			target.update()
-			del(L2)
+			qdel(L2)
 
 			if(target.on && target.rigged)
 				target.explode()
@@ -169,14 +169,11 @@
 		U << "There is a working [target.fitting] already inserted."
 		return
 
-/obj/item/device/lightreplacer/proc/Emag()
+/obj/item/device/lightreplacer/emag_act(var/remaining_charges, var/mob/user)
 	emagged = !emagged
 	playsound(src.loc, "sparks", 100, 1)
-	if(emagged)
-		name = "Shortcircuited [initial(name)]"
-	else
-		name = initial(name)
 	update_icon()
+	return 1
 
 //Can you use it?
 

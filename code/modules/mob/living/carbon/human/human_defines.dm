@@ -71,8 +71,6 @@
 	var/miming = null //Toggle for the mime's abilities.
 	var/special_voice = "" // For changing our voice. Used by a symptom.
 
-	var/failed_last_breath = 0 //This is used to determine if the mob failed a breath. If they did fail a brath, they will attempt to breathe each tick, otherwise just once per 4 ticks.
-
 	var/last_dam = -1	//Used for determining if we need to process all organs or just some or even none.
 	var/list/bad_external_organs = list()// organs we check until they are good.
 
@@ -82,3 +80,7 @@
 	var/hand_blood_color
 
 	var/list/flavor_texts = list()
+
+	mob_bump_flag = HUMAN
+	mob_push_flags = ALLMOBS
+	mob_swap_flags = ALLMOBS

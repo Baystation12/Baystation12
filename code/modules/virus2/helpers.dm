@@ -3,25 +3,26 @@ proc/infection_check(var/mob/living/carbon/M, var/vector = "Airborne")
 	if (!istype(M))
 		return 0
 
+	var/mob/living/carbon/human/H = M
+	if(istype(H) && H.species.virus_immune)
+		return 0
+
 	var/protection = M.getarmor(null, "bio")	//gets the full body bio armour value, weighted by body part coverage.
 	var/score = round(0.06*protection) 			//scales 100% protection to 6.
 
 	switch(vector)
 		if("Airborne")
-			if(M.internal)
-				score = 6	//not breathing infected air helps greatly
-				var/obj/item/I = M.wear_mask
-
-				//masks provide a small bonus and can replace overall bio protection
-				if(I)
-					score = max(score, round(0.06*I.armor["bio"]))
-					if (istype(I, /obj/item/clothing/mask))
-						score += 1 //this should be added after
+			if(M.internal) //not breathing infected air helps greatly
+				return 0
+			var/obj/item/I = M.wear_mask
+			//masks provide a small bonus and can replace overall bio protection
+			if(I)
+				score = max(score, round(0.06*I.armor["bio"]))
+				if (istype(I, /obj/item/clothing/mask))
+					score += 1 //this should be added after
 
 		if("Contact")
-			if(istype(M, /mob/living/carbon/human))
-				var/mob/living/carbon/human/H = M
-
+			if(istype(H))
 				//gloves provide a larger bonus
 				if (istype(H.gloves, /obj/item/clothing/gloves))
 					score += 2
@@ -50,7 +51,7 @@ proc/infection_check(var/mob/living/carbon/M, var/vector = "Airborne")
 	if (vector == "Airborne")
 		var/obj/item/I = M.wear_mask
 		if (istype(I))
-			protection = max(protection, round(0.06*I.armor["bio"]))
+			protection = max(protection, I.armor["bio"])
 
 	return prob(protection)
 
@@ -110,14 +111,14 @@ proc/airborne_can_reach(turf/source, turf/target)
 //Infects mob M with random lesser disease, if he doesn't have one
 /proc/infect_mob_random_lesser(var/mob/living/carbon/M)
 	var/datum/disease2/disease/D = new /datum/disease2/disease
-	
+
 	D.makerandom(1)
 	infect_mob(M, D)
 
 //Infects mob M with random greated disease, if he doesn't have one
 /proc/infect_mob_random_greater(var/mob/living/carbon/M)
 	var/datum/disease2/disease/D = new /datum/disease2/disease
-	
+
 	D.makerandom(2)
 	infect_mob(M, D)
 
@@ -147,18 +148,18 @@ proc/airborne_can_reach(turf/source, turf/target)
 //					log_debug("Could not reach target")
 
 			if (vector == "Contact")
-				if (in_range(src, victim))
+				if (Adjacent(victim))
 //					log_debug("In range, infecting")
 					infect_virus2(victim,V)
 
 	//contact goes both ways
-	if (victim.virus2.len > 0 && vector == "Contact")
+	if (victim.virus2.len > 0 && vector == "Contact" && Adjacent(victim))
 //		log_debug("Spreading [vector] diseases from [victim] to [src]")
 		var/nudity = 1
 
 		if (ishuman(victim))
 			var/mob/living/carbon/human/H = victim
-			var/datum/organ/external/select_area = H.get_organ(src.zone_sel.selecting)
+			var/obj/item/organ/external/select_area = H.get_organ(src.zone_sel.selecting)
 			var/list/clothes = list(H.head, H.wear_mask, H.wear_suit, H.w_uniform, H.gloves, H.shoes)
 			for(var/obj/item/clothing/C in clothes)
 				if(C && istype(C))

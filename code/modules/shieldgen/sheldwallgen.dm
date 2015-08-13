@@ -6,7 +6,7 @@
 		icon_state = "Shield_Gen"
 		anchored = 0
 		density = 1
-		req_access = list(access_teleporter)
+		req_access = list(access_engine_equip)
 		var/active = 0
 		var/power = 0
 		var/state = 0
@@ -80,10 +80,10 @@
 	return 1
 
 /obj/machinery/shieldwallgen/process()
-	spawn(100)
-		power()
-		if(power)
-			storedpower -= 2500 //the generator post itself uses some power
+	power()
+	if(power)
+		storedpower -= 2500 //the generator post itself uses some power
+
 	if(storedpower >= max_stored_power)
 		storedpower = max_stored_power
 	if(storedpower <= 0)
@@ -199,14 +199,14 @@
 		T2 = T
 		if(locate(/obj/machinery/shieldwall) in T)
 			F = (locate(/obj/machinery/shieldwall) in T)
-			del(F)
+			qdel(F)
 
 		if(locate(/obj/machinery/shieldwallgen) in T)
 			G = (locate(/obj/machinery/shieldwallgen) in T)
 			if(!G.active)
 				break
 
-/obj/machinery/shieldwallgen/Del()
+/obj/machinery/shieldwallgen/Destroy()
 	src.cleanup(1)
 	src.cleanup(2)
 	src.cleanup(4)
@@ -228,7 +228,7 @@
 		anchored = 1
 		density = 1
 		unacidable = 1
-		luminosity = 3
+		light_range = 3
 		var/needs_power = 0
 		var/active = 1
 //		var/power = 10
@@ -252,9 +252,9 @@
 		else
 			B.storedpower -= generate_power_usage
 	else
-		del(src) //need at least two generator posts
+		qdel(src) //need at least two generator posts
 
-/obj/machinery/shieldwall/Del()
+/obj/machinery/shieldwall/Destroy()
 	update_nearby_tiles()
 	..()
 
@@ -265,11 +265,11 @@
 /obj/machinery/shieldwall/process()
 	if(needs_power)
 		if(isnull(gen_primary)||isnull(gen_secondary))
-			del(src)
+			qdel(src)
 			return
 
 		if(!(gen_primary.active)||!(gen_secondary.active))
-			del(src)
+			qdel(src)
 			return
 
 		if(prob(50))

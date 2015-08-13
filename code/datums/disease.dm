@@ -11,7 +11,7 @@
 
 /*
 
-IMPORTANT NOTE: Please delete the diseases by using cure() proc or del() instruction.
+IMPORTANT NOTE: Please delete the diseases by using cure() proc or qdel() instruction.
 Diseases are referenced in a global list, so simply setting mob or obj vars
 to null does not delete the object itself. Thank you.
 
@@ -53,14 +53,15 @@ var/list/diseases = typesof(/datum/disease) - /datum/disease
 	// if hidden[2] is true, then virus is hidden from PANDEMIC machine
 
 /datum/disease/proc/stage_act()
+
+	// Some species are immune to viruses entirely.
+	if(affected_mob && istype(affected_mob, /mob/living/carbon/human))
+		var/mob/living/carbon/human/H = affected_mob
+		if(H.species.virus_immune)
+			cure()
+			return
 	age++
 	var/cure_present = has_cure()
-	//world << "[cure_present]"
-
-	if(carrier&&!cure_present)
-		//world << "[affected_mob] is carrier"
-		return
-
 	spread = (cure_present?"Remissive":initial_spread)
 	if(stage > max_stages)
 		stage = max_stages
@@ -126,7 +127,7 @@ var/list/diseases = typesof(/datum/disease) - /datum/disease
 			source = affected_mob
 		else //no source and no mob affected. Rogue disease. Break
 			return
-	
+
 	if(affected_mob.reagents != null)
 		if(affected_mob)
 			if(affected_mob.reagents.has_reagent("spaceacillin"))
@@ -158,7 +159,7 @@ var/list/diseases = typesof(/datum/disease) - /datum/disease
 			if(D != src)
 				if(IsSame(D))
 					//error("Deleting [D.name] because it's the same as [src.name].")
-					del(D) // if there are somehow two viruses of the same kind in the system, delete the other one
+					qdel(D) // if there are somehow two viruses of the same kind in the system, delete the other one
 
 	if(holder == affected_mob)
 		if(affected_mob.stat != DEAD) //he's alive
@@ -183,7 +184,7 @@ var/list/diseases = typesof(/datum/disease) - /datum/disease
 		/*if(istype(src, /datum/disease/alien_embryo))	//Get rid of the infection flag if it's a xeno embryo.
 			affected_mob.status_flags &= ~(XENO_HOST)*/
 		affected_mob.viruses -= src		//remove the datum from the list
-	del(src)	//delete the datum to stop it processing
+	qdel(src)	//delete the datum to stop it processing
 	return
 
 
@@ -193,6 +194,9 @@ var/list/diseases = typesof(/datum/disease) - /datum/disease
 		active_diseases += src
 	initial_spread = spread
 
+/datum/disease/Destroy()
+	active_diseases.Remove(src)
+
 /datum/disease/proc/IsSame(var/datum/disease/D)
 	if(istype(src, D.type))
 		return 1
@@ -200,8 +204,3 @@ var/list/diseases = typesof(/datum/disease) - /datum/disease
 
 /datum/disease/proc/Copy(var/process = 0)
 	return new type(process, src)
-
-/*
-/datum/disease/Del()
-	active_diseases.Remove(src)
-*/

@@ -1,40 +1,63 @@
+/mob/living/silicon
+	var/datum/ai_laws/laws = null
+	var/list/additional_law_channels = list("State")
+
 /mob/living/silicon/proc/laws_sanity_check()
 	if (!src.laws)
 		laws = new base_law_type
 
 /mob/living/silicon/proc/has_zeroth_law()
-	return laws.zeroth
+	return laws.zeroth_law != null
 
 /mob/living/silicon/proc/set_zeroth_law(var/law, var/law_borg)
 	laws_sanity_check()
 	laws.set_zeroth_law(law, law_borg)
-	
+	log_and_message_admins("has given [src] the zeroth laws: [law]/[law_borg ? law_borg : "N/A"]")
+
 /mob/living/silicon/robot/set_zeroth_law(var/law, var/law_borg)
 	..()
 	if(tracking_entities)
 		src << "<span class='warning'>Internal camera is currently being accessed.</span>"
 
+/mob/living/silicon/proc/add_ion_law(var/law)
+	laws_sanity_check()
+	laws.add_ion_law(law)
+	log_and_message_admins("has given [src] the ion law: [law]")
+
 /mob/living/silicon/proc/add_inherent_law(var/law)
 	laws_sanity_check()
 	laws.add_inherent_law(law)
-
-/mob/living/silicon/proc/clear_inherent_laws()
-	laws_sanity_check()
-	laws.clear_inherent_laws()
-
-/mob/living/silicon/proc/clear_ion_laws()
-	laws_sanity_check()
-	laws.clear_ion_laws()
+	log_and_message_admins("has given [src] the inherent law: [law]")
 
 /mob/living/silicon/proc/add_supplied_law(var/number, var/law)
 	laws_sanity_check()
 	laws.add_supplied_law(number, law)
+	log_and_message_admins("has given [src] the supplied law: [law]")
 
-/mob/living/silicon/proc/clear_supplied_laws()
+/mob/living/silicon/proc/delete_law(var/datum/ai_law/law)
+	laws_sanity_check()
+	laws.delete_law(law)
+	log_and_message_admins("has deleted a law belonging to [src]: [law.law]")
+
+/mob/living/silicon/proc/clear_inherent_laws(var/silent = 0)
+	laws_sanity_check()
+	laws.clear_inherent_laws()
+	if(!silent)
+		log_and_message_admins("cleared the inherent laws of [src]")
+
+/mob/living/silicon/proc/clear_ion_laws(var/silent = 0)
+	laws_sanity_check()
+	laws.clear_ion_laws()
+	if(!silent)
+		log_and_message_admins("cleared the ion laws of [src]")
+
+/mob/living/silicon/proc/clear_supplied_laws(var/silent = 0)
 	laws_sanity_check()
 	laws.clear_supplied_laws()
+	if(!silent)
+		log_and_message_admins("cleared the supplied laws of [src]")
 
-/mob/living/silicon/proc/statelaws() // -- TLE
+/mob/living/silicon/proc/statelaws(var/datum/ai_laws/laws)
 	var/prefix = ""
 	switch(lawchannel)
 		if(MAIN_CHANNEL) prefix = ";"
@@ -42,9 +65,9 @@
 		else
 			prefix = get_radio_key_from_channel(lawchannel == "Holopad" ? "department" : lawchannel) + " "
 
-	dostatelaws(lawchannel, prefix)
+	dostatelaws(lawchannel, prefix, laws)
 
-/mob/living/silicon/proc/dostatelaws(var/method, var/prefix)
+/mob/living/silicon/proc/dostatelaws(var/method, var/prefix, var/datum/ai_laws/laws)
 	if(stating_laws[prefix])
 		src << "<span class='notice'>[method]: Already stating laws using this communication method.</span>"
 		return
@@ -53,34 +76,8 @@
 
 	var/can_state = statelaw("[prefix]Current Active Laws:")
 
-	//src.laws_sanity_check()
-	//src.laws.show_laws(world)
-	if (can_state && src.laws.zeroth)
-		if (src.lawcheck[1] == "Yes") //This line and the similar lines below make sure you don't state a law unless you want to. --NeoFite
-			can_state = statelaw("[prefix]0. [src.laws.zeroth]")
-
-	for (var/index = 1, can_state && index <= src.laws.ion.len, index++)
-		var/law = src.laws.ion[index]
-		var/num = ionnum()
-		if (length(law) > 0)
-			if (src.ioncheck[index] == "Yes")
-				can_state = statelaw("[prefix][num]. [law]")
-
-	var/number = 1
-	for (var/index = 1, can_state && index <= src.laws.inherent.len, index++)
-		var/law = src.laws.inherent[index]
-		if (length(law) > 0)
-			if (src.lawcheck[index+1] == "Yes")
-				can_state = statelaw("[prefix][number]. [law]")
-			number++
-
-	for (var/index = 1, can_state && index <= src.laws.supplied.len, index++)
-		var/law = src.laws.supplied[index]
-		if (length(law) > 0)
-			if(src.lawcheck.len >= number+1)
-				if (src.lawcheck[number+1] == "Yes")
-					can_state = statelaw("[prefix][number]. [law]")
-				number++
+	for(var/datum/ai_law/law in laws.laws_to_state())
+		can_state = statelaw("[prefix][law.get_index()]. [law.law]")
 
 	if(!can_state)
 		src << "<span class='danger'>[method]: Unable to state laws. Communication method unavailable.</span>"
@@ -93,43 +90,13 @@
 
 	return 0
 
-/mob/living/silicon/proc/checklaws() //Gives you a link-driven interface for deciding what laws the statelaws() proc will share with the crew. --NeoFite
-	var/list = "<b>Which laws do you want to include when stating them for the crew?</b><br><br>"
+/mob/living/silicon/proc/law_channels()
+	var/list/channels = new()
+	channels += MAIN_CHANNEL
+	channels += common_radio.channels
+	channels += additional_law_channels
+	return channels
 
-
-	if (src.laws.zeroth)
-		if (!src.lawcheck[1])
-			src.lawcheck[1] = "No" //Given Law 0's usual nature, it defaults to NOT getting reported. --NeoFite
-		list += {"<A href='byond://?src=\ref[src];lawc=0'>[src.lawcheck[1]] 0:</A> [src.laws.zeroth]<BR>"}
-
-	for (var/index = 1, index <= src.laws.ion.len, index++)
-		var/law = src.laws.ion[index]
-		if (length(law) > 0)
-			if (!src.ioncheck[index])
-				src.ioncheck[index] = "Yes"
-			list += {"<A href='byond://?src=\ref[src];lawi=[index]'>[src.ioncheck[index]] [ionnum()]:</A> [law]<BR>"}
-			src.ioncheck.len += 1
-
-	var/number = 1
-	for (var/index = 1, index <= src.laws.inherent.len, index++)
-		var/law = src.laws.inherent[index]
-		if (length(law) > 0)
-			src.lawcheck.len += 1
-			if (!src.lawcheck[number+1])
-				src.lawcheck[number+1] = "Yes"
-			list += {"<A href='byond://?src=\ref[src];lawc=[number]'>[src.lawcheck[number+1]] [number]:</A> [law]<BR>"}
-			number++
-
-	for (var/index = 1, index <= src.laws.supplied.len, index++)
-		var/law = src.laws.supplied[index]
-		if (length(law) > 0)
-			src.lawcheck.len += 1
-			if (!src.lawcheck[number+1])
-				src.lawcheck[number+1] = "Yes"
-			list += {"<A href='byond://?src=\ref[src];lawc=[number]'>[src.lawcheck[number+1]] [number]:</A> [law]<BR>"}
-			number++
-
-	list += {"<br><A href='byond://?src=\ref[src];lawr=1'>Channel: [src.lawchannel]</A><br>"}
-	list += {"<A href='byond://?src=\ref[src];laws=1'>State Laws</A>"}
-
-	usr << browse(list, "window=laws")
+/mob/living/silicon/proc/lawsync()
+	laws_sanity_check()
+	laws.sort_laws()

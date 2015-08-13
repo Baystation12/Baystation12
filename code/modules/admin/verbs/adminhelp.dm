@@ -23,7 +23,7 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 	//clean the input msg
 	if(!msg)
 		return
-	msg = sanitize(copytext(msg,1,MAX_MESSAGE_LEN))
+	msg = sanitize(msg)
 	if(!msg)
 		return
 	var/original_msg = msg
@@ -88,7 +88,7 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 	if(ai_found)
 		ai_cl = " (<A HREF='?_src_=holder;adminchecklaws=\ref[mob]'>CL</A>)"
 
-			//Options bar:  mob, details ( admin = 2, dev = 3, mentor = 4, character name (0 = just ckey, 1 = ckey and character name), link? (0 no don't make it a link, 1 do so), 
+			//Options bar:  mob, details ( admin = 2, dev = 3, mentor = 4, character name (0 = just ckey, 1 = ckey and character name), link? (0 no don't make it a link, 1 do so),
 			//		highlight special roles (0 = everyone has same looking name, 1 = antags / special roles get a golden name)
 
 	var/mentor_msg = "\blue <b><font color=red>Request for Help: </font>[get_options_bar(mob, 4, 1, 1, 0)][ai_cl]:</b> [msg]"

@@ -13,7 +13,7 @@ datum/objective
 		if(text)
 			explanation_text = text
 
-	Del()
+	Destroy()
 		all_objectives -= src
 		..()
 
@@ -119,9 +119,8 @@ datum/objective/mutiny/rp
 			if(target.current.stat == DEAD || target.current:handcuffed || !ishuman(target.current))
 				return 1
 			// Check if they're converted
-			if(istype(ticker.mode, /datum/game_mode/revolution))
-				if(target in ticker.mode:head_revolutionaries)
-					return 1
+			if(target in revs.head_revolutionaries)
+				return 1
 			var/turf/T = get_turf(target.current)
 			if(T && isNotStationLevel(T.z))			//If they leave the station they count as dead for this
 				rval = 2
@@ -456,15 +455,21 @@ datum/objective/harm
 				return 0
 
 			var/mob/living/carbon/human/H = target.current
-			for(var/datum/organ/external/E in H.organs)
+			for(var/obj/item/organ/external/E in H.organs)
 				if(E.status & ORGAN_BROKEN)
-					already_completed = 1
 					return 1
-				if(E.status & ORGAN_DESTROYED && !E.amputated)
-					already_completed = 1
+			for(var/limb_tag in H.species.has_limbs) //todo check prefs for robotic limbs and amputations.
+				var/list/organ_data = H.species.has_limbs[limb_tag]
+				var/limb_type = organ_data["path"]
+				var/found
+				for(var/obj/item/organ/external/E in H.organs)
+					if(limb_type == E.type)
+						found = 1
+						break
+				if(!found)
 					return 1
 
-			var/datum/organ/external/head/head = H.get_organ("head")
+			var/obj/item/organ/external/head/head = H.get_organ("head")
 			if(head.disfigured)
 				return 1
 		return 0
@@ -508,9 +513,9 @@ datum/objective/steal
 		"diamond drill" = /obj/item/weapon/pickaxe/diamonddrill,
 		"bag of holding" = /obj/item/weapon/storage/backpack/holding,
 		"hyper-capacity cell" = /obj/item/weapon/cell/hyper,
-		"10 diamonds" = /obj/item/stack/sheet/mineral/diamond,
-		"50 gold bars" = /obj/item/stack/sheet/mineral/gold,
-		"25 refined uranium bars" = /obj/item/stack/sheet/mineral/uranium,
+		"10 diamonds" = /obj/item/stack/material/diamond,
+		"50 gold bars" = /obj/item/stack/material/gold,
+		"25 refined uranium bars" = /obj/item/stack/material/uranium,
 	)
 
 
@@ -536,8 +541,8 @@ datum/objective/steal
 			if (!custom_target) return
 			var/tmp_obj = new custom_target
 			var/custom_name = tmp_obj:name
-			del(tmp_obj)
-			custom_name = sanitize(copytext(input("Enter target name:", "Objective target", custom_name) as text|null,1,MAX_MESSAGE_LEN))
+			qdel(tmp_obj)
+			custom_name = sanitize(input("Enter target name:", "Objective target", custom_name) as text|null)
 			if (!custom_name) return
 			target_name = custom_name
 			steal_target = custom_target
@@ -650,9 +655,6 @@ datum/objective/capture
 				continue
 			captured_amount += worth
 
-		for(var/mob/living/carbon/monkey/M in A)//Monkeys are almost worthless, you failure.
-			captured_amount+=0.1
-
 		for(var/mob/living/carbon/alien/larva/M in A)//Larva are important for research.
 			if(M.stat==2)
 				captured_amount+=0.5
@@ -665,8 +667,7 @@ datum/objective/capture
 		return 1
 
 
-
-datum/objective/absorb
+/datum/objective/absorb
 	proc/gen_amount_goal(var/lowbound = 4, var/highbound = 6)
 		target_amount = rand (lowbound,highbound)
 		if (ticker)
@@ -677,7 +678,7 @@ datum/objective/absorb
 						n_p ++
 			else if (ticker.current_state == GAME_STATE_PLAYING)
 				for(var/mob/living/carbon/human/P in player_list)
-					if(P.client && !(P.mind in ticker.mode.changelings) && P.mind!=owner)
+					if(P.client && !(P.mind.changeling) && P.mind!=owner)
 						n_p ++
 			target_amount = min(target_amount, n_p)
 
@@ -690,67 +691,7 @@ datum/objective/absorb
 		else
 			return 0
 
-
-
-/* Isn't suited for global objectives
-/*---------CULTIST----------*/
-
-		eldergod
-			explanation_text = "Summon Nar-Sie via the use of an appropriate rune. It will only work if nine cultists stand on and around it."
-
-			check_completion()
-				if(eldergod) //global var, defined in rune4.dm
-					return 1
-				return 0
-
-		survivecult
-			var/num_cult
-
-			explanation_text = "Our knowledge must live on. Make sure at least 5 acolytes escape on the shuttle to spread their work on an another station."
-
-			check_completion()
-				if(!emergency_shuttle.returned())
-					return 0
-
-				var/cultists_escaped = 0
-
-				var/area/shuttle/escape/centcom/C = /area/shuttle/escape/centcom
-				for(var/turf/T in	get_area_turfs(C.type))
-					for(var/mob/living/carbon/H in T)
-						if(iscultist(H))
-							cultists_escaped++
-
-				if(cultists_escaped>=5)
-					return 1
-
-				return 0
-
-		sacrifice //stolen from traitor target objective
-
-			proc/find_target() //I don't know how to make it work with the rune otherwise, so I'll do it via a global var, sacrifice_target, defined in rune15.dm
-				var/list/possible_targets = call(/datum/game_mode/cult/proc/get_unconvertables)()
-
-				if(possible_targets.len > 0)
-					sacrifice_target = pick(possible_targets)
-
-				if(sacrifice_target && sacrifice_target.current)
-					explanation_text = "Sacrifice [sacrifice_target.current.real_name], the [sacrifice_target.assigned_role]. You will need the sacrifice rune (Hell join blood) and three acolytes to do so."
-				else
-					explanation_text = "Free Objective"
-
-				return sacrifice_target
-
-			check_completion() //again, calling on a global list defined in rune15.dm
-				if(sacrifice_target.current in sacrificed)
-					return 1
-				else
-					return 0
-
-/*-------ENDOF CULTIST------*/
-*/
-
-//Vox heist objectives.
-
+// Heist objectives.
 datum/objective/heist
 	proc/choose_target()
 		return
@@ -762,7 +703,7 @@ datum/objective/heist/kidnap
 		var/list/priority_targets = list()
 
 		for(var/datum/mind/possible_target in ticker.minds)
-			if(possible_target != owner && ishuman(possible_target.current) && (possible_target.current.stat != 2) && (possible_target.assigned_role != "MODE"))
+			if(possible_target != owner && ishuman(possible_target.current) && (possible_target.current.stat != 2) && (!possible_target.special_role))
 				possible_targets += possible_target
 				for(var/role in roles)
 					if(possible_target.assigned_role == role)
@@ -775,7 +716,7 @@ datum/objective/heist/kidnap
 			target = pick(possible_targets)
 
 		if(target && target.current)
-			explanation_text = "The Shoal has a need for [target.current.real_name], the [target.assigned_role]. Take them alive."
+			explanation_text = "We can get a good price for [target.current.real_name], the [target.assigned_role]. Take them alive."
 		else
 			explanation_text = "Free Objective"
 		return target
@@ -787,7 +728,7 @@ datum/objective/heist/kidnap
 			//if (!target.current.restrained())
 			//	return 0 // They're loose. Close but no cigar.
 
-			var/area/shuttle/vox/station/A = locate()
+			var/area/shuttle/skipjack/station/A = locate()
 			for(var/mob/living/carbon/human/M in A)
 				if(target.current == M)
 					return 1 //They're restrained on the shuttle. Success.
@@ -832,20 +773,19 @@ datum/objective/heist/loot
 				target_amount = 1
 				loot = "an ion gun"
 
-		explanation_text = "We are lacking in hardware. Steal [loot]."
+		explanation_text = "It's a buyer's market out here. Steal [loot] for resale."
 
 	check_completion()
 
 		var/total_amount = 0
 
-		for(var/obj/O in locate(/area/shuttle/vox/station))
+		for(var/obj/O in locate(/area/shuttle/skipjack/station))
 			if(istype(O,target)) total_amount++
 			for(var/obj/I in O.contents)
 				if(istype(I,target)) total_amount++
 			if(total_amount >= target_amount) return 1
 
-		var/datum/game_mode/heist/H = ticker.mode
-		for(var/datum/mind/raider in H.raiders)
+		for(var/datum/mind/raider in raiders.current_antagonists)
 			if(raider.current)
 				for(var/obj/O in raider.current.get_contents())
 					if(istype(O,target)) total_amount++
@@ -858,7 +798,7 @@ datum/objective/heist/salvage
 	choose_target()
 		switch(rand(1,8))
 			if(1)
-				target = "metal"
+				target = DEFAULT_WALL_MATERIAL
 				target_amount = 300
 			if(2)
 				target = "glass"
@@ -888,52 +828,39 @@ datum/objective/heist/salvage
 
 		var/total_amount = 0
 
-		for(var/obj/item/O in locate(/area/shuttle/vox/station))
+		for(var/obj/item/O in locate(/area/shuttle/skipjack/station))
 
-			var/obj/item/stack/sheet/S
-			if(istype(O,/obj/item/stack/sheet))
+			var/obj/item/stack/material/S
+			if(istype(O,/obj/item/stack/material))
 				if(O.name == target)
 					S = O
 					total_amount += S.get_amount()
 			for(var/obj/I in O.contents)
-				if(istype(I,/obj/item/stack/sheet))
+				if(istype(I,/obj/item/stack/material))
 					if(I.name == target)
 						S = I
 						total_amount += S.get_amount()
 
-		var/datum/game_mode/heist/H = ticker.mode
-		for(var/datum/mind/raider in H.raiders)
+		for(var/datum/mind/raider in raiders.current_antagonists)
 			if(raider.current)
 				for(var/obj/item/O in raider.current.get_contents())
-					if(istype(O,/obj/item/stack/sheet))
+					if(istype(O,/obj/item/stack/material))
 						if(O.name == target)
-							var/obj/item/stack/sheet/S = O
+							var/obj/item/stack/material/S = O
 							total_amount += S.get_amount()
 
 		if(total_amount >= target_amount) return 1
 		return 0
 
 
-datum/objective/heist/inviolate_crew
-	explanation_text = "Do not leave any Vox behind, alive or dead."
+/datum/objective/heist/preserve_crew
+	explanation_text = "Do not leave anyone behind, alive or dead."
 
 	check_completion()
-		var/datum/game_mode/heist/H = ticker.mode
-		if(H.is_raider_crew_safe()) return 1
+		if(raiders && raiders.is_raider_crew_safe()) return 1
 		return 0
 
-#define MAX_VOX_KILLS 10 //Number of kills during the round before the Inviolate is broken.
-						 //Would be nice to use vox-specific kills but is currently not feasible.
-var/global/vox_kills = 0 //Used to check the Inviolate.
-
-datum/objective/heist/inviolate_death
-	explanation_text = "Follow the Inviolate. Minimise death and loss of resources."
-	check_completion()
-		if(vox_kills > MAX_VOX_KILLS) return 0
-		return 1
-
 //Borer objective(s).
-
 /datum/objective/borer_survive
 	explanation_text = "Survive in a host until the end of the round."
 
@@ -957,15 +884,52 @@ datum/objective/heist/inviolate_death
 
 /datum/objective/ninja_highlander/check_completion()
 	if(owner)
-		for(var/datum/mind/ninja in ticker.mode.ninjas)
+		for(var/datum/mind/ninja in get_antags("ninja"))
 			if(ninja != owner)
 				if(ninja.current.stat < 2) return 0
 		return 1
 	return 0
 
-/datum/objective/cult_summon
-	explanation_text = "Summon Nar-Sie via the use of the appropriate rune (Hell join self). It will only work if nine cultists stand on and around it."
+/datum/objective/cult/survive
+	explanation_text = "Our knowledge must live on."
+	target_amount = 5
 
-/datum/objective/cult_summon/check_completion()
-	if(locate(/obj/machinery/singularity/narsie/large) in machines) return 1
-	return 0
+/datum/objective/cult/survive/New()
+	..()
+	explanation_text = "Our knowledge must live on. Make sure at least [target_amount] acolytes escape on the shuttle to spread their work on an another station."
+
+/datum/objective/cult/survive/check_completion()
+	var/acolytes_survived = 0
+	if(!cult)
+		return 0
+	for(var/datum/mind/cult_mind in cult.current_antagonists)
+		if (cult_mind.current && cult_mind.current.stat!=2)
+			var/area/A = get_area(cult_mind.current )
+			if ( is_type_in_list(A, centcom_areas))
+				acolytes_survived++
+	if(acolytes_survived >= target_amount)
+		return 0
+	else
+		return 1
+
+/datum/objective/cult/eldergod
+	explanation_text = "Summon Nar-Sie via the use of the appropriate rune (Hell join self). It will only work if nine cultists stand on and around it. The convert rune is join blood self."
+
+/datum/objective/cult/eldergod/check_completion()
+	return (locate(/obj/singularity/narsie/large) in machines)
+
+/datum/objective/cult/sacrifice
+	explanation_text = "Conduct a ritual sacrifice for the glory of Nar-Sie."
+
+/datum/objective/cult/sacrifice/find_target()
+	var/list/possible_targets = list()
+	if(!possible_targets.len)
+		for(var/mob/living/carbon/human/player in player_list)
+			if(player.mind && !(player.mind in cult))
+				possible_targets += player.mind
+	if(possible_targets.len > 0)
+		target = pick(possible_targets)
+	if(target) explanation_text = "Sacrifice [target.name], the [target.assigned_role]. You will need the sacrifice rune (Hell blood join) and three acolytes to do so."
+
+/datum/objective/cult/sacrifice/check_completion()
+	return (target && cult && !cult.sacrificed.Find(target))

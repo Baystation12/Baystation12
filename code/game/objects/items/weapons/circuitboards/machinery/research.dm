@@ -6,8 +6,7 @@ obj/item/weapon/circuitboard/rdserver
 	name = T_BOARD("R&D server")
 	build_path = "/obj/machinery/r_n_d/server"
 	board_type = "machine"
-	origin_tech = "programming=3"
-	frame_desc = "Requires 2 pieces of cable, and 1 Scanning Module."
+	origin_tech = list(TECH_DATA = 3)
 	req_components = list(
 							"/obj/item/stack/cable_coil" = 2,
 							"/obj/item/weapon/stock_parts/scanning_module" = 1)
@@ -16,8 +15,7 @@ obj/item/weapon/circuitboard/rdserver
 	name = T_BOARD("destructive analyzer")
 	build_path = "/obj/machinery/r_n_d/destructive_analyzer"
 	board_type = "machine"
-	origin_tech = "magnets=2;engineering=2;programming=2"
-	frame_desc = "Requires 1 Scanning Module, 1 Micro Manipulator, and 1 Micro-Laser."
+	origin_tech = list(TECH_MAGNET = 2, TECH_ENGINERING = 2, TECH_DATA = 2)
 	req_components = list(
 							"/obj/item/weapon/stock_parts/scanning_module" = 1,
 							"/obj/item/weapon/stock_parts/manipulator" = 1,
@@ -27,8 +25,7 @@ obj/item/weapon/circuitboard/rdserver
 	name = T_BOARD("autolathe")
 	build_path = "/obj/machinery/autolathe"
 	board_type = "machine"
-	origin_tech = "engineering=2;programming=2"
-	frame_desc = "Requires 3 Matter Bins, 1 Micro Manipulator, and 1 Console Screen."
+	origin_tech = list(TECH_ENGINERING = 2, TECH_DATA = 2)
 	req_components = list(
 							"/obj/item/weapon/stock_parts/matter_bin" = 3,
 							"/obj/item/weapon/stock_parts/manipulator" = 1,
@@ -38,8 +35,7 @@ obj/item/weapon/circuitboard/rdserver
 	name = T_BOARD("protolathe")
 	build_path = "/obj/machinery/r_n_d/protolathe"
 	board_type = "machine"
-	origin_tech = "engineering=2;programming=2"
-	frame_desc = "Requires 2 Matter Bins, 2 Micro Manipulators, and 2 Beakers."
+	origin_tech = list(TECH_ENGINERING = 2, TECH_DATA = 2)
 	req_components = list(
 							"/obj/item/weapon/stock_parts/matter_bin" = 2,
 							"/obj/item/weapon/stock_parts/manipulator" = 2,
@@ -50,8 +46,7 @@ obj/item/weapon/circuitboard/rdserver
 	name = T_BOARD("circuit imprinter")
 	build_path = "/obj/machinery/r_n_d/circuit_imprinter"
 	board_type = "machine"
-	origin_tech = "engineering=2;programming=2"
-	frame_desc = "Requires 1 Matter Bin, 1 Micro Manipulator, and 2 Beakers."
+	origin_tech = list(TECH_ENGINERING = 2, TECH_DATA = 2)
 	req_components = list(
 							"/obj/item/weapon/stock_parts/matter_bin" = 1,
 							"/obj/item/weapon/stock_parts/manipulator" = 1,
@@ -61,8 +56,7 @@ obj/item/weapon/circuitboard/rdserver
 	name = "Circuit board (Exosuit Fabricator)"
 	build_path = "/obj/machinery/mecha_part_fabricator"
 	board_type = "machine"
-	origin_tech = "programming=3;engineering=3"
-	frame_desc = "Requires 2 Matter Bins, 1 Micro Manipulator, 1 Micro-Laser and 1 Console Screen."
+	origin_tech = list(TECH_DATA = 3, TECH_ENGINERING = 3)
 	req_components = list(
 							"/obj/item/weapon/stock_parts/matter_bin" = 2,
 							"/obj/item/weapon/stock_parts/manipulator" = 1,

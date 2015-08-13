@@ -26,6 +26,6 @@
 			if(10)
 				msg += "<span class='warning'><B>It is radiating with massive levels of electrical activity!</B></span>\n"
 
-	msg += "*---------*</span>"
+	msg += "*---------*"
 	user << msg
 	return

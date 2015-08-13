@@ -28,7 +28,7 @@ RSF
 			user << "The RSF can't hold any more matter."
 			return
 
-		del(W)
+		qdel(W)
 
 		stored_matter += 10
 		playsound(src.loc, 'sound/machines/click.ogg', 10, 1)
@@ -54,14 +54,9 @@ RSF
 		user << "Changed dispensing mode to 'Dice Pack'"
 		return
 	if (mode == 5)
-		mode = 6
+		mode = 1
 		user << "Changed dispensing mode to 'Cigarette'"
 		return
-	if (mode == 6)
-		mode = 1
-		user << "Changed dispensing mode to 'Dosh'"
-		return
-	// Change mode
 
 /obj/item/weapon/rsf/afterattack(atom/A, mob/user as mob, proximity)
 
@@ -84,8 +79,8 @@ RSF
 
 	switch(mode)
 		if(1)
-			product = new /obj/item/weapon/spacecash/c10()
-			used_energy = 200
+			product = new /obj/item/clothing/mask/smokable/cigarette()
+			used_energy = 10
 		if(2)
 			product = new /obj/item/weapon/reagent_containers/food/drinks/drinkingglass()
 			used_energy = 50
@@ -98,9 +93,6 @@ RSF
 		if(5)
 			product = new /obj/item/weapon/storage/pill_bottle/dice()
 			used_energy = 200
-		if(6)
-			product = new /obj/item/clothing/mask/smokable/cigarette()
-			used_energy = 10
 
 	user << "Dispensing [product ? product : "product"]..."
 	product.loc = get_turf(A)

@@ -15,7 +15,7 @@
 	response_harm = "hits"
 	speak = list("ALERT.","Hostile-ile-ile entities dee-twhoooo-wected.","Threat parameterszzzz- szzet.","Bring sub-sub-sub-systems uuuup to combat alert alpha-a-a.")
 	emote_see = list("beeps menacingly","whirrs threateningly","scans its immediate vicinity")
-	a_intent = "harm"
+	a_intent = I_HURT
 	stop_automated_movement_when_pulled = 0
 	health = 300
 	maxHealth = 300
@@ -159,9 +159,9 @@
 
 /mob/living/simple_animal/hostile/retaliate/malf_drone/death()
 	..(null,"suddenly breaks apart.")
-	del(src)
+	qdel(src)
 
-/mob/living/simple_animal/hostile/retaliate/malf_drone/Del()
+/mob/living/simple_animal/hostile/retaliate/malf_drone/Destroy()
 	//some random debris left behind
 	if(has_loot)
 		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
@@ -170,42 +170,42 @@
 		var/obj/O
 
 		//shards
-		O = new /obj/item/weapon/shard(src.loc)
+		O = new /obj/item/weapon/material/shard(src.loc)
 		step_to(O, get_turf(pick(view(7, src))))
 		if(prob(75))
-			O = new /obj/item/weapon/shard(src.loc)
+			O = new /obj/item/weapon/material/shard(src.loc)
 			step_to(O, get_turf(pick(view(7, src))))
 		if(prob(50))
-			O = new /obj/item/weapon/shard(src.loc)
+			O = new /obj/item/weapon/material/shard(src.loc)
 			step_to(O, get_turf(pick(view(7, src))))
 		if(prob(25))
-			O = new /obj/item/weapon/shard(src.loc)
+			O = new /obj/item/weapon/material/shard(src.loc)
 			step_to(O, get_turf(pick(view(7, src))))
 
 		//rods
-		O = new /obj/item/stack/rods(src.loc)
+		O = PoolOrNew(/obj/item/stack/rods, src.loc)
 		step_to(O, get_turf(pick(view(7, src))))
 		if(prob(75))
-			O = new /obj/item/stack/rods(src.loc)
+			O = PoolOrNew(/obj/item/stack/rods, src.loc)
 			step_to(O, get_turf(pick(view(7, src))))
 		if(prob(50))
-			O = new /obj/item/stack/rods(src.loc)
+			O = PoolOrNew(/obj/item/stack/rods, src.loc)
 			step_to(O, get_turf(pick(view(7, src))))
 		if(prob(25))
-			O = new /obj/item/stack/rods(src.loc)
+			O = PoolOrNew(/obj/item/stack/rods, src.loc)
 			step_to(O, get_turf(pick(view(7, src))))
 
 		//plasteel
-		O = new /obj/item/stack/sheet/plasteel(src.loc)
+		O = new /obj/item/stack/material/plasteel(src.loc)
 		step_to(O, get_turf(pick(view(7, src))))
 		if(prob(75))
-			O = new /obj/item/stack/sheet/plasteel(src.loc)
+			O = new /obj/item/stack/material/plasteel(src.loc)
 			step_to(O, get_turf(pick(view(7, src))))
 		if(prob(50))
-			O = new /obj/item/stack/sheet/plasteel(src.loc)
+			O = new /obj/item/stack/material/plasteel(src.loc)
 			step_to(O, get_turf(pick(view(7, src))))
 		if(prob(25))
-			O = new /obj/item/stack/sheet/plasteel(src.loc)
+			O = new /obj/item/stack/material/plasteel(src.loc)
 			step_to(O, get_turf(pick(view(7, src))))
 
 		//also drop dummy circuit boards deconstructable for research (loot)
@@ -214,7 +214,7 @@
 		//spawn 1-4 boards of a random type
 		var/spawnees = 0
 		var/num_boards = rand(1,4)
-		var/list/options = list(1,2,4,8,16,32,64,128,256, 512)
+		var/list/options = list(1,2,4,8,16,32,64,128,256,512)
 		for(var/i=0, i<num_boards, i++)
 			var/chosen = pick(options)
 			options.Remove(options.Find(chosen))
@@ -223,52 +223,52 @@
 		if(spawnees & 1)
 			C = new(src.loc)
 			C.name = "Drone CPU motherboard"
-			C.origin_tech = "programming=[rand(3,6)]"
+			C.origin_tech = list(TECH_DATA = rand(3, 6))
 
 		if(spawnees & 2)
 			C = new(src.loc)
 			C.name = "Drone neural interface"
-			C.origin_tech = "biotech=[rand(3,6)]"
+			C.origin_tech = list(TECH_BIO = rand(3,6))
 
 		if(spawnees & 4)
 			C = new(src.loc)
 			C.name = "Drone suspension processor"
-			C.origin_tech = "magnets=[rand(3,6)]"
+			C.origin_tech = list(TECH_MAGNET = rand(3,6))
 
 		if(spawnees & 8)
 			C = new(src.loc)
 			C.name = "Drone shielding controller"
-			C.origin_tech = "bluespace=[rand(3,6)]"
+			C.origin_tech = list(TECH_BLUESPACE = rand(3,6))
 
 		if(spawnees & 16)
 			C = new(src.loc)
 			C.name = "Drone power capacitor"
-			C.origin_tech = "powerstorage=[rand(3,6)]"
+			C.origin_tech = list(TECH_POWER = rand(3,6))
 
 		if(spawnees & 32)
 			C = new(src.loc)
 			C.name = "Drone hull reinforcer"
-			C.origin_tech = "materials=[rand(3,6)]"
+			C.origin_tech = list(TECH_MATERIAL = rand(3,6))
 
 		if(spawnees & 64)
 			C = new(src.loc)
 			C.name = "Drone auto-repair system"
-			C.origin_tech = "engineering=[rand(3,6)]"
+			C.origin_tech = list(TECH_ENGINERING = rand(3,6))
 
 		if(spawnees & 128)
 			C = new(src.loc)
 			C.name = "Drone phoron overcharge counter"
-			C.origin_tech = "phorontech=[rand(3,6)]"
+			C.origin_tech = list(TECH_PHORON = rand(3,6))
 
 		if(spawnees & 256)
 			C = new(src.loc)
 			C.name = "Drone targetting circuitboard"
-			C.origin_tech = "combat=[rand(3,6)]"
+			C.origin_tech = list(TECH_COMBAT = rand(3,6))
 
 		if(spawnees & 512)
 			C = new(src.loc)
 			C.name = "Corrupted drone morality core"
-			C.origin_tech = "illegal=[rand(3,6)]"
+			C.origin_tech = list(TECH_ILLEGAL = rand(3,6))
 
 	..()
 

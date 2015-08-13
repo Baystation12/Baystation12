@@ -1,6 +1,19 @@
 /datum/shuttle/ferry/escape_pod
 	var/datum/computer/file/embedded_program/docking/simple/escape_pod/arming_controller
 
+/datum/shuttle/ferry/escape_pod/init_docking_controllers()
+	..()
+	arming_controller = locate(dock_target_station)
+	if(!istype(arming_controller))
+		world << "<span class='danger'>warning: escape pod with station dock tag [dock_target_station] could not find it's dock target!</span>"
+	
+	if(docking_controller)
+		var/obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod/controller_master = docking_controller.master
+		if(!istype(controller_master))
+			world << "<span class='danger'>warning: escape pod with docking tag [docking_controller_tag] could not find it's controller master!</span>"
+		else
+			controller_master.pod = src
+
 /datum/shuttle/ferry/escape_pod/can_launch()
 	if(arming_controller && !arming_controller.armed)	//must be armed
 		return 0
@@ -89,19 +102,15 @@
 		ui.open()
 		ui.set_auto_update(1)
 
-/obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod_berth/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if (istype(W, /obj/item/weapon/card/emag) && !emagged)
-		user << "\blue You emag the [src], arming the escape pod!"
+/obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod_berth/emag_act(var/remaining_charges, var/mob/user)
+	if (!emagged)
+		user << "<span class='notice'>You emag the [src], arming the escape pod!</span>"
 		emagged = 1
 		if (istype(docking_program, /datum/computer/file/embedded_program/docking/simple/escape_pod))
 			var/datum/computer/file/embedded_program/docking/simple/escape_pod/P = docking_program
 			if (!P.armed)
 				P.arm()
-		return
-	
-	..()
-
-
+		return 1
 
 //A docking controller program for a simple door based docking port
 /datum/computer/file/embedded_program/docking/simple/escape_pod
@@ -111,8 +120,9 @@
 	var/closing = 0
 
 /datum/computer/file/embedded_program/docking/simple/escape_pod/proc/arm()
-	armed = 1
-	open_door()
+	if(!armed)
+		armed = 1
+		open_door()
 
 
 /datum/computer/file/embedded_program/docking/simple/escape_pod/receive_user_command(command)

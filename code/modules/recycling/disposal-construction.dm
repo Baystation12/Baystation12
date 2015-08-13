@@ -10,11 +10,12 @@
 	anchored = 0
 	density = 0
 	pressure_resistance = 5*ONE_ATMOSPHERE
-	matter = list("metal" = 1850)
+	matter = list(DEFAULT_WALL_MATERIAL = 1850)
 	level = 2
+	var/sortType = ""
 	var/ptype = 0
-	// 0=straight, 1=bent, 2=junction-j1, 3=junction-j2, 4=junction-y, 5=trunk, 6=disposal bin, 7=outlet, 8=inlet
-
+	// 0=straight, 1=bent, 2=junction-j1, 3=junction-j2, 4=junction-y, 5=trunk, 6=disposal bin, 7=outlet, 8=inlet 9=pipe-j1s 10=pipe-j2s
+	var/subtype = 0
 	var/dpdir = 0	// directions as disposalpipe
 	var/base_state = "pipe-s"
 
@@ -82,7 +83,7 @@
 
 
 ///// Z-Level stuff
-		if(ptype<6 || ptype>8 && !(ptype==11 || ptype==12))
+		if(!(ptype in list(6, 7, 8, 11, 12, 13, 14)))
 ///// Z-Level stuff
 			icon_state = "con[base_state]"
 		else
@@ -154,9 +155,21 @@
 			if(8)
 				return /obj/machinery/disposal/deliveryChute
 			if(9)
-				return /obj/structure/disposalpipe/sortjunction
+				switch(subtype)
+					if(0)
+						return /obj/structure/disposalpipe/sortjunction
+					if(1)
+						return /obj/structure/disposalpipe/sortjunction/wildcard
+					if(2)
+						return /obj/structure/disposalpipe/sortjunction/untagged
 			if(10)
-				return /obj/structure/disposalpipe/sortjunction/flipped
+				switch(subtype)
+					if(0)
+						return /obj/structure/disposalpipe/sortjunction/flipped
+					if(1)
+						return /obj/structure/disposalpipe/sortjunction/wildcard/flipped
+					if(2)
+						return /obj/structure/disposalpipe/sortjunction/untagged/flipped
 ///// Z-Level stuff
 			if(11)
 				return /obj/structure/disposalpipe/up
@@ -187,7 +200,13 @@
 			if(8)
 				nicetype = "delivery chute"
 			if(9, 10)
-				nicetype = "sorting pipe"
+				switch(subtype)
+					if(0)
+						nicetype = "sorting pipe"
+					if(1)
+						nicetype = "wildcard sorting pipe"
+					if(2)
+						nicetype = "untagged sorting pipe"
 				ispipe = 1
 			if(13)
 				nicetype = "tagging pipe"
@@ -267,7 +286,10 @@
 							//Needs some special treatment ;)
 							if(ptype==9 || ptype==10)
 								var/obj/structure/disposalpipe/sortjunction/SortP = P
+								SortP.sortType = sortType
 								SortP.updatedir()
+								SortP.updatedesc()
+								SortP.updatename()
 
 						else if(ptype==6) // Disposal bin
 							var/obj/machinery/disposal/P = new /obj/machinery/disposal(src.loc)
@@ -288,7 +310,7 @@
 							src.transfer_fingerprints_to(P)
 							P.set_dir(dir)
 
-						del(src)
+						qdel(src)
 						return
 				else
 					user << "You need more welding fuel to complete this task."

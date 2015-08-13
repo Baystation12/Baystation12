@@ -20,11 +20,7 @@
 	var/hallucination = 0 //Directly affects how long a mob will hallucinate for
 	var/list/atom/hallucinations = list() //A list of hallucinated people that try to attack the mob. See /obj/effect/fake_attacker in hallucinations.dm
 
-
 	var/last_special = 0 //Used by the resist verb, likely used to prevent players from bypassing next_move by logging in/out.
-
-	//Allows mobs to move through dense areas without restriction. For instance, in space or out of holder objects.
-	var/incorporeal_move = 0 //0 is off, 1 is normal, 2 is for ninjas.
 
 	var/t_phoron = null
 	var/t_oxygen = null
@@ -32,8 +28,13 @@
 	var/t_n2 = null
 
 	var/now_pushing = null
+	var/mob_bump_flag = 0
+	var/mob_swap_flags = 0
+	var/mob_push_flags = 0
+	var/mob_always_swap = 0
 
 	var/mob/living/cameraFollow = null
+	var/list/datum/action/actions = list()
 
 	var/tod = null // Time of death
 	var/update_slimes = 1
@@ -41,4 +42,7 @@
 	var/mob_size            // Used by lockers.
 	var/on_fire = 0 //The "Are we on fire?" var
 	var/fire_stacks
+
+	var/failed_last_breath = 0 //This is used to determine if the mob failed a breath. If they did fail a brath, they will attempt to breathe each tick, otherwise just once per 4 ticks.
+
 

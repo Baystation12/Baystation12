@@ -3,13 +3,16 @@
 	name = "gem-encrusted voidsuit helmet"
 	desc = "A bizarre gem-encrusted helmet that radiates magical energies."
 	icon_state = "rig0-wiz"
-	item_state = "wiz_helm"
-	item_color = "wiz"
+	item_state_slots = list(
+		slot_l_hand_str = "wiz_helm",
+		slot_r_hand_str = "wiz_helm",
+		)
 	unacidable = 1 //No longer shall our kind be foiled by lone chemists with spray bottles!
 	armor = list(melee = 40, bullet = 20, laser = 20,energy = 20, bomb = 35, bio = 100, rad = 60)
 	siemens_coefficient = 0.7
 	sprite_sheets_refit = null
 	sprite_sheets_obj = null
+	wizard_garb = 1
 
 /obj/item/clothing/suit/space/void/wizard
 	icon_state = "rig-wiz"
@@ -23,3 +26,4 @@
 	siemens_coefficient = 0.7
 	sprite_sheets_refit = null
 	sprite_sheets_obj = null
+	wizard_garb = 1

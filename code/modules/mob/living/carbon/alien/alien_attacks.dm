@@ -3,27 +3,16 @@
 /mob/living/carbon/alien/attack_ui(slot_id)
 	return
 
-/mob/living/carbon/alien/meteorhit(O as obj)
-	for(var/mob/M in viewers(src, null))
-		if ((M.client && !( M.blinded )))
-			M.show_message(text("\red [] has been hit by []", src, O), 1)
-	if (health > 0)
-		adjustBruteLoss((istype(O, /obj/effect/meteor/small) ? 10 : 25))
-		adjustFireLoss(30)
-
-		updatehealth()
-	return
-
 /mob/living/carbon/alien/attack_hand(mob/living/carbon/M as mob)
 
 	..()
 
 	switch(M.a_intent)
 
-		if ("help")
+		if (I_HELP)
 			help_shake_act(M)
 
-		if ("grab")
+		if (I_GRAB)
 			if (M == src)
 				return
 			var/obj/item/weapon/grab/G = new /obj/item/weapon/grab( M, M, src )

@@ -5,6 +5,8 @@ obj/machinery/atmospherics/pipe/simple/heat_exchanging
 	pipe_icon = "hepipe"
 	color = "#404040"
 	level = 2
+	connect_types = CONNECT_TYPE_HE
+	layer = 2.41
 	var/initialize_directions_he
 	var/surface = 2	//surface area in m^2
 	var/icon_temperature = T20C //stop small changes in temperature causing an icon refresh
@@ -42,7 +44,7 @@ obj/machinery/atmospherics/pipe/simple/heat_exchanging
 				node2 = target
 				break
 		if(!node1 && !node2)
-			del(src)
+			qdel(src)
 			return
 
 		update_icon()
@@ -106,6 +108,7 @@ obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction
 	icon_state = "intact"
 	pipe_icon = "hejunction"
 	level = 2
+	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_HE
 	minimum_temperature_difference = 300
 	thermal_conductivity = WALL_HEAT_TRANSFER_COEFFICIENT
 
@@ -138,7 +141,7 @@ obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction
 				break
 
 		if(!node1&&!node2)
-			del(src)
+			qdel(src)
 			return
 
 		update_icon()

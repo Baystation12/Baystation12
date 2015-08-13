@@ -1,7 +1,3 @@
-// These may have some say.dm bugs regarding understanding common,
-// might be worth adapting the bugs into a feature and using these
-// subtypes as a basis for non-common-speaking alien foreigners. ~ Z
-
 /mob/living/carbon/human/dummy
 	real_name = "Test Dummy"
 	status_flags = GODMODE|CANPUSH
@@ -28,3 +24,15 @@
 /mob/living/carbon/human/machine/New(var/new_loc)
 	h_style = "blue IPC screen"
 	..(new_loc, "Machine")
+
+/mob/living/carbon/human/monkey/New(var/new_loc)
+	..(new_loc, "Monkey")
+
+/mob/living/carbon/human/farwa/New(var/new_loc)
+	..(new_loc, "Farwa")
+
+/mob/living/carbon/human/neara/New(var/new_loc)
+	..(new_loc, "Neara")
+
+/mob/living/carbon/human/stok/New(var/new_loc)
+	..(new_loc, "Stok")

@@ -2,13 +2,13 @@
 	name = "flash"
 	desc = "Used for blinding and being an asshole."
 	icon_state = "flash"
-	item_state = "flash"
+	item_state = "flashtool"
 	throwforce = 5
-	w_class = 2.0
+	w_class = 2
 	throw_speed = 4
 	throw_range = 10
 	flags = CONDUCT
-	origin_tech = "magnets=2;combat=1"
+	origin_tech = list(TECH_MAGNET = 2, TECH_COMBAT = 1)
 
 	var/times_used = 0 //Number of times it's been used.
 	var/broken = 0     //Is the flash burnt out?
@@ -16,7 +16,7 @@
 
 /obj/item/device/flash/proc/clown_check(var/mob/user)
 	if(user && (CLUMSY in user.mutations) && prob(50))
-		user << "\red \The [src] slips out of your hand."
+		user << "<span class='warning'>\The [src] slips out of your hand.</span>"
 		user.drop_item()
 		return 0
 	return 1
@@ -70,7 +70,7 @@
 			flick("e_flash", M.flash)
 
 			if(ishuman(M) && ishuman(user) && M.stat!=DEAD)
-				if(user.mind && user.mind in ticker.mode.head_revolutionaries && ticker.mode.name == "revolution")
+				if(user.mind && user.mind in revs.head_revolutionaries)
 					var/revsafe = 0
 					for(var/obj/item/weapon/implant/loyalty/L in M)
 						if(L && L.implanted)
@@ -81,7 +81,7 @@
 						revsafe = 2
 					if(!revsafe)
 						M.mind.has_been_rev = 1
-						ticker.mode.add_revolutionary(M.mind)
+						revs.add_antagonist(M.mind)
 					else if(revsafe == 1)
 						user << "<span class='warning'>Something seems to be blocking the flash!</span>"
 					else
@@ -103,7 +103,7 @@
 			animation.master = user
 			flick("blspell", animation)
 			sleep(5)
-			del(animation)
+			qdel(animation)
 
 	if(!flashfail)
 		flick("flash2", src)
@@ -154,7 +154,7 @@
 			animation.master = user
 			flick("blspell", animation)
 			sleep(5)
-			del(animation)
+			qdel(animation)
 
 	for(var/mob/living/carbon/M in oviewers(3, null))
 		if(prob(50))
@@ -193,20 +193,20 @@
 	name = "synthetic flash"
 	desc = "When a problem arises, SCIENCE is the solution."
 	icon_state = "sflash"
-	origin_tech = "magnets=2;combat=1"
-	var/construction_cost = list("metal"=750,"glass"=750)
+	origin_tech = list(TECH_MAGNET = 2, TECH_COMBAT = 1)
+	var/construction_cost = list(DEFAULT_WALL_MATERIAL=750,"glass"=750)
 	var/construction_time=100
 
 /obj/item/device/flash/synthetic/attack(mob/living/M as mob, mob/user as mob)
 	..()
 	if(!broken)
 		broken = 1
-		user << "\red The bulb has burnt out!"
+		user << "<span class='warning'>The bulb has burnt out!</span>"
 		icon_state = "flashburnt"
 
 /obj/item/device/flash/synthetic/attack_self(mob/living/carbon/user as mob, flag = 0, emp = 0)
 	..()
 	if(!broken)
 		broken = 1
-		user << "\red The bulb has burnt out!"
+		user << "<span class='warning'>The bulb has burnt out!</span>"
 		icon_state = "flashburnt"

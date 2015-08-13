@@ -3,15 +3,15 @@
 	desc = "A folded membrane which rapidly expands into a large cubical shape on activation."
 	icon = 'icons/obj/inflatable.dmi'
 	icon_state = "folded_wall"
-	w_class = 3.0
+	w_class = 3
 
 	attack_self(mob/user)
 		playsound(loc, 'sound/items/zip.ogg', 75, 1)
-		user << "\blue You inflate [src]."
+		user << "<span class='notice'>You inflate [src].</span>"
 		var/obj/structure/inflatable/R = new /obj/structure/inflatable(user.loc)
 		src.transfer_fingerprints_to(R)
 		R.add_fingerprint(user)
-		del(src)
+		qdel(src)
 
 /obj/structure/inflatable
 	name = "inflatable wall"
@@ -30,7 +30,7 @@
 	..()
 	update_nearby_tiles(need_rebuild=1)
 
-/obj/structure/inflatable/Del()
+/obj/structure/inflatable/Destroy()
 	update_nearby_tiles()
 	..()
 
@@ -50,7 +50,7 @@
 /obj/structure/inflatable/ex_act(severity)
 	switch(severity)
 		if(1.0)
-			del(src)
+			qdel(src)
 			return
 		if(2.0)
 			deflate(1)
@@ -63,9 +63,6 @@
 /obj/structure/inflatable/blob_act()
 	deflate(1)
 
-/obj/structure/inflatable/meteorhit()
-	deflate(1)
-
 /obj/structure/inflatable/attack_hand(mob/user as mob)
 		add_fingerprint(user)
 		return
@@ -74,7 +71,7 @@
 	if(!istype(W)) return
 
 	if (can_puncture(W))
-		visible_message("\red <b>[user] pierces [src] with [W]!</b>")
+		visible_message("<span class='danger'>[user] pierces [src] with [W]!</span>")
 		deflate(1)
 	if(W.damtype == BRUTE || W.damtype == BURN)
 		hit(W.force)
@@ -94,14 +91,14 @@
 		visible_message("[src] rapidly deflates!")
 		var/obj/item/inflatable/torn/R = new /obj/item/inflatable/torn(loc)
 		src.transfer_fingerprints_to(R)
-		del(src)
+		qdel(src)
 	else
-		//user << "\blue You slowly deflate the inflatable wall."
+		//user << "<span class='notice'>You slowly deflate the inflatable wall.</span>"
 		visible_message("[src] slowly deflates.")
 		spawn(50)
 			var/obj/item/inflatable/R = new /obj/item/inflatable(loc)
 			src.transfer_fingerprints_to(R)
-			del(src)
+			qdel(src)
 
 /obj/structure/inflatable/verb/hand_deflate()
 	set name = "Deflate"
@@ -111,10 +108,12 @@
 	if(isobserver(usr)) //to stop ghosts from deflating
 		return
 
+	verbs -= /obj/structure/inflatable/verb/hand_deflate
 	deflate()
 
 /obj/structure/inflatable/attack_generic(var/mob/user, var/damage, var/attack_verb)
 	health -= damage
+	user.do_attack_animation(src)
 	if(health <= 0)
 		user.visible_message("<span class='danger'>[user] [attack_verb] open the [src]!</span>")
 		spawn(1) deflate(1)
@@ -130,11 +129,11 @@
 
 	attack_self(mob/user)
 		playsound(loc, 'sound/items/zip.ogg', 75, 1)
-		user << "\blue You inflate [src]."
+		user << "<span class='notice'>You inflate [src].</span>"
 		var/obj/structure/inflatable/door/R = new /obj/structure/inflatable/door(user.loc)
 		src.transfer_fingerprints_to(R)
 		R.add_fingerprint(user)
-		del(src)
+		qdel(src)
 
 /obj/structure/inflatable/door //Based on mineral door code
 	name = "inflatable door"
@@ -219,13 +218,13 @@
 		visible_message("[src] rapidly deflates!")
 		var/obj/item/inflatable/door/torn/R = new /obj/item/inflatable/door/torn(loc)
 		src.transfer_fingerprints_to(R)
-		del(src)
+		qdel(src)
 	else
 		visible_message("[src] slowly deflates.")
 		spawn(50)
 			var/obj/item/inflatable/door/R = new /obj/item/inflatable/door(loc)
 			src.transfer_fingerprints_to(R)
-			del(src)
+			qdel(src)
 
 /obj/item/inflatable/torn
 	name = "torn inflatable wall"
@@ -234,7 +233,7 @@
 	icon_state = "folded_wall_torn"
 
 	attack_self(mob/user)
-		user << "\blue The inflatable wall is too torn to be inflated!"
+		user << "<span class='notice'>The inflatable wall is too torn to be inflated!</span>"
 		add_fingerprint(user)
 
 /obj/item/inflatable/door/torn
@@ -244,7 +243,7 @@
 	icon_state = "folded_door_torn"
 
 	attack_self(mob/user)
-		user << "\blue The inflatable door is too torn to be inflated!"
+		user << "<span class='notice'>The inflatable door is too torn to be inflated!</span>"
 		add_fingerprint(user)
 
 /obj/item/weapon/storage/briefcase/inflatable
@@ -252,7 +251,7 @@
 	desc = "Contains inflatable walls and doors."
 	icon_state = "inf_box"
 	item_state = "syringe_kit"
-	max_combined_w_class = 21
+	max_storage_space = 28
 	can_hold = list(/obj/item/inflatable)
 
 	New()

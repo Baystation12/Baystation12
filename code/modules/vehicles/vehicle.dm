@@ -11,7 +11,7 @@
 	density = 1
 	anchored = 1
 	animate_movement=1
-	luminosity = 3
+	light_range = 3
 
 	can_buckle = 1
 	buckle_movable = 1
@@ -100,8 +100,6 @@
 				user << "<span class='notice'>[src] does not need a repair.</span>"
 		else
 			user << "<span class='notice'>Unable to repair while [src] is off.</span>"
-	else if(istype(W, /obj/item/weapon/card/emag) && !emagged)
-		Emag(user)
 	else if(hasvar(W,"force") && hasvar(W,"damtype"))
 		switch(W.damtype)
 			if("fire")
@@ -118,10 +116,6 @@
 		health -= Proj.damage
 	..()
 	healthcheck()
-
-/obj/vehicle/meteorhit()
-	explode()
-	return
 
 /obj/vehicle/blob_act()
 	src.health -= rand(20,40)*fire_dam_coeff
@@ -149,7 +143,7 @@
 /obj/vehicle/emp_act(severity)
 	var/was_on = on
 	stat |= EMPED
-	var/obj/effect/overlay/pulse2 = new/obj/effect/overlay ( src.loc )
+	var/obj/effect/overlay/pulse2 = PoolOrNew(/obj/effect/overlay, src.loc)
 	pulse2.icon = 'icons/effects/effects.dmi'
 	pulse2.icon_state = "empdisable"
 	pulse2.name = "emp sparks"
@@ -157,7 +151,7 @@
 	pulse2.set_dir(pick(cardinal))
 
 	spawn(10)
-		pulse2.delete()
+		qdel(pulse2)
 	if(on)
 		turn_off()
 	spawn(severity*300)
@@ -181,28 +175,29 @@
 	if(powered && cell.charge < charge_use)
 		return 0
 	on = 1
-	luminosity = initial(luminosity)
+	set_light(initial(light_range))
 	update_icon()
 	return 1
 
 /obj/vehicle/proc/turn_off()
 	on = 0
-	luminosity = 0
+	set_light(0)
 	update_icon()
 
-/obj/vehicle/proc/Emag(mob/user as mob)
-	emagged = 1
-
-	if(locked)
-		locked = 0
-		user << "<span class='warning'>You bypass [src]'s controls.</span>"
+/obj/vehicle/emag_act(var/remaining_charges, mob/user as mob)
+	if(!emagged)
+		emagged = 1
+		if(locked)
+			locked = 0
+			user << "<span class='warning'>You bypass [src]'s controls.</span>"
+		return 1
 
 /obj/vehicle/proc/explode()
 	src.visible_message("\red <B>[src] blows apart!</B>", 1)
 	var/turf/Tsec = get_turf(src)
 
-	new /obj/item/stack/rods(Tsec)
-	new /obj/item/stack/rods(Tsec)
+	PoolOrNew(/obj/item/stack/rods, Tsec)
+	PoolOrNew(/obj/item/stack/rods, Tsec)
 	new /obj/item/stack/cable_coil/cut(Tsec)
 
 	if(cell)
@@ -220,7 +215,7 @@
 	new /obj/effect/gibspawner/robot(Tsec)
 	new /obj/effect/decal/cleanable/blood/oil(src.loc)
 
-	del(src)
+	qdel(src)
 
 /obj/vehicle/proc/healthcheck()
 	if(health <= 0)
@@ -363,6 +358,7 @@
 		return
 	visible_message("<span class='danger'>[user] [attack_message] the [src]!</span>")
 	user.attack_log += text("\[[time_stamp()]\] <font color='red'>attacked [src.name]</font>")
+	user.do_attack_animation(src)
 	src.health -= damage
 	if(prob(10))
 		new /obj/effect/decal/cleanable/blood/oil(src.loc)

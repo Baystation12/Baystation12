@@ -35,12 +35,13 @@ var/const/AIRLOCK_WIRE_LIGHT = 2048
 /datum/wires/airlock/GetInteractWindow()
 	var/obj/machinery/door/airlock/A = holder
 	var/haspower = A.arePowerSystemsOn() //If there's no power, then no lights will be on.
-	
+
 	. += ..()
-	. += text("<br>\n[]<br>\n[]<br>\n[]<br>\n[]<br>\n[]<br>\n[]<br>\n[]", 
+	. += text("<br>\n[]<br>\n[]<br>\n[]<br>\n[]<br>\n[]<br>\n[]<br>\n[]<br>\n[]",
 	(A.locked ? "The door bolts have fallen!" : "The door bolts look up."),
 	((A.lights && haspower) ? "The door bolt lights are on." : "The door bolt lights are off!"),
 	((haspower) ? "The test light is on." : "The test light is off!"),
+	((A.backupPowerCablesCut()) ? "The backup power light is off!" : "The backup power light is on."),
 	((A.aiControlDisabled==0 && !A.emagged && haspower)? "The 'AI control allowed' light is on." : "The 'AI control allowed' light is off."),
 	((A.safe==0 && haspower)? "The 'Check Wiring' light is on." : "The 'Check Wiring' light is off."),
 	((A.normalspeed==0 && haspower)? "The 'Check Timing Mechanism' light is on." : "The 'Check Timing Mechanism' light is off."),
@@ -59,9 +60,8 @@ var/const/AIRLOCK_WIRE_LIGHT = 2048
 				A.loseMainPower()
 				A.shock(usr, 50)
 			else
-				if((!IsIndexCut(AIRLOCK_WIRE_MAIN_POWER1)) && (!IsIndexCut(AIRLOCK_WIRE_MAIN_POWER2)))
-					A.regainMainPower()
-					A.shock(usr, 50)
+				A.regainMainPower()
+				A.shock(usr, 50)
 
 		if(AIRLOCK_WIRE_BACKUP_POWER1, AIRLOCK_WIRE_BACKUP_POWER2)
 
@@ -70,16 +70,14 @@ var/const/AIRLOCK_WIRE_LIGHT = 2048
 				A.loseBackupPower()
 				A.shock(usr, 50)
 			else
-				if((!IsIndexCut(AIRLOCK_WIRE_BACKUP_POWER1)) && (!IsIndexCut(AIRLOCK_WIRE_BACKUP_POWER2)))
-					A.regainBackupPower()
-					A.shock(usr, 50)
+				A.regainBackupPower()
+				A.shock(usr, 50)
 
 		if(AIRLOCK_WIRE_DOOR_BOLTS)
 
 			if(!mended)
 				//Cutting this wire also drops the door bolts, and mending it does not raise them. (This is what happens now, except there are a lot more wires going to door bolts at present)
-				if(A.locked!=1)
-					A.locked = 1
+				A.lock(1)
 				A.update_icon()
 
 		if(AIRLOCK_WIRE_AI_CONTROL)
@@ -98,16 +96,11 @@ var/const/AIRLOCK_WIRE_LIGHT = 2048
 					A.aiControlDisabled = -1
 
 		if(AIRLOCK_WIRE_ELECTRIFY)
-
 			if(!mended)
 				//Cutting this wire electrifies the door, so that the next person to touch the door without insulated gloves gets electrocuted.
-				if(A.secondsElectrified != -1)
-					A.shockedby += text("\[[time_stamp()]\][usr](ckey:[usr.ckey])")
-					add_logs(usr, A, "electrified", admin=0, addition="at [A.x],[A.y],[A.z]")
-					A.secondsElectrified = -1
+				A.electrify(-1)
 			else
-				if(A.secondsElectrified == -1)
-					A.secondsElectrified = 0
+				A.electrify(0)
 			return // Don't update the dialog.
 
 		if (AIRLOCK_WIRE_SAFETY)
@@ -132,22 +125,18 @@ var/const/AIRLOCK_WIRE_LIGHT = 2048
 			//Sending a pulse through flashes the red light on the door (if the door has power).
 			if(A.arePowerSystemsOn() && A.density)
 				A.do_animate("deny")
-		if(AIRLOCK_WIRE_MAIN_POWER1 || AIRLOCK_WIRE_MAIN_POWER2)
+		if(AIRLOCK_WIRE_MAIN_POWER1, AIRLOCK_WIRE_MAIN_POWER2)
 			//Sending a pulse through either one causes a breaker to trip, disabling the door for 10 seconds if backup power is connected, or 1 minute if not (or until backup power comes back on, whichever is shorter).
 			A.loseMainPower()
 		if(AIRLOCK_WIRE_DOOR_BOLTS)
 			//one wire for door bolts. Sending a pulse through this drops door bolts if they're not down (whether power's on or not),
 			//raises them if they are down (only if power's on)
 			if(!A.locked)
-				A.locked = 1
-				A.audible_message("You hear a click from the bottom of the door.", null,  1)
+				A.lock()
 			else
-				if(A.arePowerSystemsOn()) //only can raise bolts if power's on
-					A.locked = 0
-					A.audible_message("You hear a click from the bottom of the door.", null, 1)
-			A.update_icon()
+				A.unlock()
 
-		if(AIRLOCK_WIRE_BACKUP_POWER1 || AIRLOCK_WIRE_BACKUP_POWER2)
+		if(AIRLOCK_WIRE_BACKUP_POWER1, AIRLOCK_WIRE_BACKUP_POWER2)
 			//two wires for backup power. Sending a pulse through either one causes a breaker to trip, but this does not disable it unless main power is down too (in which case it is disabled for 1 minute or however long it takes main power to come back, whichever is shorter).
 			A.loseBackupPower()
 		if(AIRLOCK_WIRE_AI_CONTROL)
@@ -165,19 +154,7 @@ var/const/AIRLOCK_WIRE_LIGHT = 2048
 
 		if(AIRLOCK_WIRE_ELECTRIFY)
 			//one wire for electrifying the door. Sending a pulse through this electrifies the door for 30 seconds.
-			if(A.secondsElectrified==0)
-				A.shockedby += text("\[[time_stamp()]\][usr](ckey:[usr.ckey])")
-				add_logs(usr, A, "electrified", admin=0, addition="at [A.x],[A.y],[A.z]")
-				A.secondsElectrified = 30
-				spawn(10)
-					if(A)
-						//TODO: Move this into process() and make pulsing reset secondsElectrified to 30
-						while (A.secondsElectrified>0)
-							A.secondsElectrified-=1
-							if(A.secondsElectrified<0)
-								A.secondsElectrified = 0
-							sleep(10)
-				return
+			A.electrify(30)
 		if(AIRLOCK_WIRE_OPEN_DOOR)
 			//tries to open the door without ID
 			//will succeed only if the ID wire is cut or the door requires no access and it's not emagged

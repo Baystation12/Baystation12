@@ -1,5 +1,0 @@
-author: PsiOmegaDelta
-delete-after: True
-
-changes: 
-  - bugfix: "As an observer, using antagHUD should now always restrict you from respawning without admin intervention."

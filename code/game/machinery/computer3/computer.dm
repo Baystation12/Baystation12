@@ -75,15 +75,15 @@
 		set name = "Reset Computer"
 		set category = "Object"
 		set src in view(1)
-		
+
 		if(usr.stat || usr.restrained() || usr.lying || !istype(usr, /mob/living))
-			usr << "\red You can't do that."
+			usr << "<span class='warning'>You can't do that.</span>"
 			return
-		
+
 		if(!Adjacent(usr))
 			usr << "You can't reach it."
 			return
-		
+
 		Reset()
 
 	New(var/L, var/built = 0)
@@ -199,14 +199,6 @@
 
 		// todo does this do enough
 
-
-	meteorhit(var/obj/O as obj)
-		for(var/x in verbs)
-			verbs -= x
-		set_broken()
-		return
-
-
 	emp_act(severity)
 		if(prob(20/severity)) set_broken()
 		..()
@@ -215,11 +207,11 @@
 	ex_act(severity)
 		switch(severity)
 			if(1.0)
-				del(src)
+				qdel(src)
 				return
 			if(2.0)
 				if (prob(25))
-					del(src)
+					qdel(src)
 					return
 				if (prob(50))
 					for(var/x in verbs)
@@ -278,8 +270,8 @@
 			chan = power_channel
 
 		var/area/A = get_area(loc)
-		if(istype(A) && A.master && A.master.powered(chan))
-			A.master.use_power(amount, chan)
+		if(istype(A) && A.powered(chan))
+			A.use_power(amount, chan)
 		else if(battery && battery.charge > 0)
 			battery.use(amount)
 
@@ -309,7 +301,6 @@
 	proc/set_broken()
 		icon_state = "computer_b"
 		stat |= BROKEN
-		crit_fail = 1
 		if(program)
 			program.error = BUSTED_ASS_COMPUTER
 		if(os)

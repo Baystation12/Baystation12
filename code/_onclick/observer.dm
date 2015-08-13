@@ -6,9 +6,9 @@
 	if(!client) return
 	client.inquisitive_ghost = !client.inquisitive_ghost
 	if(client.inquisitive_ghost)
-		src << "\blue You will now examine everything you click on."
+		src << "<span class='notice'>You will now examine everything you click on.</span>"
 	else
-		src << "\blue You will no longer examine things you click on."
+		src << "<span class='notice'>You will no longer examine things you click on.</span>"
 
 /mob/dead/observer/DblClickOn(var/atom/A, var/params)
 	if(client.buildmode)
@@ -20,7 +20,7 @@
 			return									// seems legit.
 
 	// Things you might plausibly want to follow
-	if((ismob(A) && A != src) || istype(A,/obj/machinery/bot) || istype(A,/obj/machinery/singularity))
+	if((ismob(A) && A != src) || istype(A,/obj/machinery/bot) || istype(A,/obj/singularity))
 		ManualFollow(A)
 
 	// Otherwise jump

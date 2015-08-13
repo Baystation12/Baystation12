@@ -16,7 +16,7 @@
 	var/mob/living/carbon/C = M
 	if (istype(C,/mob/living/carbon/human/))
 		var/mob/living/carbon/human/H = C
-		if(H.species && H.species.flags & NO_BLOOD)
+		if(H.species.flags & NO_BLOOD)
 			report("Scan aborted: The target does not have blood.", user)
 			return
 
@@ -64,7 +64,7 @@
 			for(var/mob/living/carbon/target in view(1, get_turf(src)))
 				if(airborne_can_reach(get_turf(src), get_turf(target)))
 					infect_virus2(target, src.virus2)
-		del src
+		qdel(src)
 
 /obj/item/weapon/virusdish/examine(mob/user)
 	..()
@@ -91,7 +91,7 @@
 
 	if(prob(50))
 		user << "\The [src] shatters!"
-		del src
+		qdel(src)
 
 ///////////////GNA DISK///////////////
 

@@ -1,5 +1,3 @@
-
-
 ///////////////////////////////////////////////Alchohol bottles! -Agouri //////////////////////////
 //Functionally identical to regular drinks. The only difference is that the default bottle size is 100. - Darem
 //Bottles now weaken and break when smashed on people's heads. - Giacom
@@ -18,7 +16,7 @@
 	var/obj/item/weapon/broken_bottle/B = new /obj/item/weapon/broken_bottle(user.loc)
 	user.put_in_active_hand(B)
 	if(prob(33))
-		new/obj/item/weapon/shard(target.loc) // Create a glass shard at the target's location!
+		new/obj/item/weapon/material/shard(target.loc) // Create a glass shard at the target's location!
 	B.icon_state = src.icon_state
 
 	var/icon/I = new('icons/obj/drinks.dmi', src.icon_state)
@@ -30,20 +28,20 @@
 	user.put_in_active_hand(B)
 	src.transfer_fingerprints_to(B)
 
-	del(src)
+	qdel(src)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/attack(mob/living/target as mob, mob/living/user as mob)
 
 	if(!target)
 		return
 
-	if(user.a_intent != "hurt" || !isGlass)
+	if(user.a_intent != I_HURT || !isGlass)
 		return ..()
 
 
 	force = 15 //Smashing bottles over someoen's head hurts.
 
-	var/datum/organ/external/affecting = user.zone_sel.selecting //Find what the player is aiming at
+	var/obj/item/organ/external/affecting = user.zone_sel.selecting //Find what the player is aiming at
 
 	var/armor_block = 0 //Get the target's armour values for normal attack damage.
 	var/armor_duration = 0 //The more force the bottle has, the longer the duration.
@@ -78,12 +76,11 @@
 	msg_admin_attack("[user.name] ([user.ckey]) attacked [target.name] ([target.ckey]) with a bottle. (INTENT: [uppertext(user.a_intent)]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
 
 	//The reagents in the bottle splash all over the target, thanks for the idea Nodrak
-	if(src.reagents)
-		for(var/mob/O in viewers(user, null))
-			O.show_message(text("\blue <B>The contents of the [src] splashes all over [target]!</B>"), 1)
-		src.reagents.reaction(target, TOUCH)
+	if(reagents)
+		user.visible_message("<span class='notice'>The contents of the [src] splash all over [target]!</span>")
+		reagents.splash(target, reagents.total_volume)
 
-	//Finally, smash the bottle. This kills (del) the bottle.
+	//Finally, smash the bottle. This kills (qdel) the bottle.
 	src.smash(target, user)
 
 	return

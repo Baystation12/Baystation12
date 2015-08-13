@@ -12,6 +12,9 @@
  * /obj/item/rig_module/chem_dispenser
  * /obj/item/rig_module/chem_dispenser/injector
  * /obj/item/rig_module/voice
+ * /obj/item/rig_module/device/paperdispenser
+ * /obj/item/rig_module/device/pen
+ * /obj/item/rig_module/device/stamp
  */
 
 /obj/item/rig_module/device
@@ -28,6 +31,7 @@
 /obj/item/rig_module/device/plasmacutter
 	name = "hardsuit plasma cutter"
 	desc = "A lethal-looking industrial cutter."
+	icon_state = "plasmacutter"
 	interface_name = "plasma cutter"
 	interface_desc = "A self-sustaining plasma arc capable of cutting through walls."
 	suit_overlay_active = "plasmacutter"
@@ -38,6 +42,7 @@
 /obj/item/rig_module/device/healthscanner
 	name = "health scanner module"
 	desc = "A hardsuit-mounted health scanner."
+	icon_state = "scanner"
 	interface_name = "health scanner"
 	interface_desc = "Shows an informative health readout when used on a subject."
 
@@ -46,6 +51,7 @@
 /obj/item/rig_module/device/drill
 	name = "hardsuit drill mount"
 	desc = "A very heavy diamond-tipped drill."
+	icon_state = "drill"
 	interface_name = "mounted drill"
 	interface_desc = "A diamond-tipped industrial drill."
 	suit_overlay_active = "mounted-drill"
@@ -56,6 +62,7 @@
 /obj/item/rig_module/device/anomaly_scanner
 	name = "hardsuit anomaly scanner"
 	desc = "You think it's called an Elder Sarsparilla or something."
+	icon_state = "eldersasparilla"
 	interface_name = "Alden-Saraspova counter"
 	interface_desc = "An exotic particle detector commonly used by xenoarchaeologists."
 	engage_string = "Begin Scan"
@@ -66,6 +73,7 @@
 /obj/item/rig_module/device/orescanner
 	name = "ore scanner module"
 	desc = "A clunky old ore scanner."
+	icon_state = "scanner"
 	interface_name = "ore detector"
 	interface_desc = "A sonar system for detecting large masses of ore."
 	engage_string = "Begin Scan"
@@ -76,6 +84,7 @@
 /obj/item/rig_module/device/rcd
 	name = "RCD mount"
 	desc = "A cell-powered rapid construction device for a hardsuit."
+	icon_state = "rcd"
 	interface_name = "mounted RCD"
 	interface_desc = "A device for building or removing walls. Cell-powered."
 	usable = 1
@@ -88,7 +97,6 @@
 	if(device_type) device = new device_type(src)
 
 /obj/item/rig_module/device/engage(atom/target)
-
 	if(!..() || !device)
 		return 0
 
@@ -105,9 +113,12 @@
 		device.afterattack(target,holder.wearer,1)
 	return 1
 
+
+
 /obj/item/rig_module/chem_dispenser
 	name = "mounted chemical dispenser"
 	desc = "A complex web of tubing and needles suitable for hardsuit use."
+	icon_state = "injector"
 	usable = 1
 	selectable = 0
 	toggleable = 0
@@ -130,6 +141,21 @@
 		)
 
 	var/max_reagent_volume = 80 //Used when refilling.
+
+/obj/item/rig_module/chem_dispenser/ninja
+	interface_desc = "Dispenses loaded chemicals directly into the wearer's bloodstream. This variant is made to be extremely light and flexible."
+
+	//just over a syringe worth of each. Want more? Go refill. Gives the ninja another reason to have to show their face.
+	charges = list(
+		list("tricordrazine", "tricordrazine", 0, 20),
+		list("tramadol",      "tramadol",      0, 20),
+		list("dexalin plus",  "dexalinp",      0, 20),
+		list("antibiotics",   "spaceacillin",  0, 20),
+		list("antitoxins",    "anti_toxin",    0, 20),
+		list("nutrients",     "nutriment",     0, 80),
+		list("hyronalin",     "hyronalin",     0, 20),
+		list("radium",        "radium",        0, 20)
+		)
 
 /obj/item/rig_module/chem_dispenser/accepts_item(var/obj/item/input_item, var/mob/living/user)
 
@@ -187,9 +213,9 @@
 	else if(charge.charges < chems_to_use)
 		chems_to_use = charge.charges
 
-	var/mob/living/target_mob
+	var/mob/living/carbon/target_mob
 	if(target)
-		if(istype(target,/mob/living))
+		if(istype(target,/mob/living/carbon))
 			target_mob = target
 		else
 			return 0
@@ -208,6 +234,19 @@
 
 /obj/item/rig_module/chem_dispenser/combat
 
+	name = "combat chemical injector"
+	desc = "A complex web of tubing and needles suitable for hardsuit use."
+
+	charges = list(
+		list("synaptizine",   "synaptizine",   0, 30),
+		list("hyperzine",     "hyperzine",     0, 30),
+		list("oxycodone",     "oxycodone",     0, 30),
+		list("nutrients",     "nutriment",     0, 80),
+		)
+
+	interface_name = "combat chem dispenser"
+	interface_desc = "Dispenses loaded chemicals directly into the bloodstream."
+
 
 /obj/item/rig_module/chem_dispenser/injector
 
@@ -224,6 +263,7 @@
 
 	name = "hardsuit voice synthesiser"
 	desc = "A speaker box and sound processor."
+	icon_state = "megaphone"
 	usable = 1
 	selectable = 0
 	toggleable = 0
@@ -265,10 +305,10 @@
 			voice_holder.active = 0
 			usr << "<font color='blue'>You disable the speech synthesiser.</font>"
 		if("Set Name")
-			var/raw_choice = input(usr, "Please enter a new name.")  as text|null
+			var/raw_choice = sanitize(input(usr, "Please enter a new name.")  as text|null, MAX_NAME_LEN)
 			if(!raw_choice)
 				return 0
-			voice_holder.voice = sanitize(copytext(raw_choice,1,MAX_MESSAGE_LEN))
+			voice_holder.voice = raw_choice
 			usr << "<font color='blue'>You are now mimicking <B>[voice_holder.voice]</B>.</font>"
 	return 1
 
@@ -276,6 +316,7 @@
 
 	name = "hardsuit maneuvering jets"
 	desc = "A compact gas thruster system for a hardsuit."
+	icon_state = "thrusters"
 	usable = 1
 	toggleable = 1
 	selectable = 0
@@ -339,3 +380,63 @@
 	jets.ion_trail.set_up(jets)
 
 /obj/item/rig_module/foam_sprayer
+
+/obj/item/rig_module/device/paperdispenser
+	name = "hardsuit paper dispenser"
+	desc = "Crisp sheets."
+	icon_state = "paper"
+	interface_name = "paper dispenser"
+	interface_desc = "Dispenses warm, clean, and crisp sheets of paper."
+	engage_string = "Dispense"
+	usable = 1
+	selectable = 0
+	device_type = /obj/item/weapon/paper_bin
+
+/obj/item/rig_module/device/paperdispenser/engage(atom/target)
+
+	if(!..() || !device)
+		return 0
+
+	if(!target)
+		device.attack_hand(holder.wearer)
+		return 1
+
+/obj/item/rig_module/device/pen
+	name = "mounted pen"
+	desc = "For mecha John Hancocks."
+	icon_state = "pen"
+	interface_name = "mounted pen"
+	interface_desc = "Signatures with style(tm)."
+	engage_string = "Change color"
+	usable = 1
+	device_type = /obj/item/weapon/pen/multi
+
+/obj/item/rig_module/device/stamp
+	name = "mounted internal affairs stamp"
+	desc = "DENIED."
+	icon_state = "stamp"
+	interface_name = "mounted stamp"
+	interface_desc = "Leave your mark."
+	engage_string = "Toggle stamp type"
+	usable = 1
+	var/iastamp
+	var/deniedstamp
+
+/obj/item/rig_module/device/stamp/New()
+	..()
+	iastamp = new /obj/item/weapon/stamp/internalaffairs(src)
+	deniedstamp = new /obj/item/weapon/stamp/denied(src)
+	device = iastamp
+
+/obj/item/rig_module/device/stamp/engage(atom/target)
+	if(!..() || !device)
+		return 0
+
+	if(!target)
+		if(device == iastamp)
+			device = deniedstamp
+			holder.wearer << "<span class='notice'>Switched to denied stamp.</span>"
+		else if(device == deniedstamp)
+			device = iastamp
+			holder.wearer << "<span class='notice'>Switched to internal affairs stamp.</span>"
+		return 1

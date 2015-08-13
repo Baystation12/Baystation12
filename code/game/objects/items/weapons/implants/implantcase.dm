@@ -13,7 +13,7 @@
 
 /obj/item/weapon/implantcase/proc/update()
 	if (src.imp)
-		src.icon_state = text("implantcase-[]", src.imp.item_color)
+		src.icon_state = text("implantcase-[]", src.imp.implant_color)
 	else
 		src.icon_state = "implantcase-0"
 	return
@@ -26,7 +26,7 @@
 			return
 		if((!in_range(src, usr) && src.loc != user))
 			return
-		t = sanitize(copytext(t,1,MAX_MESSAGE_LEN))
+		t = sanitizeSafe(t, MAX_NAME_LEN)
 		if(t)
 			src.name = text("Glass Case - '[]'", t)
 		else
@@ -35,11 +35,11 @@
 		if(!src.imp)	return
 		if(!src.imp.allow_reagents)	return
 		if(src.imp.reagents.total_volume >= src.imp.reagents.maximum_volume)
-			user << "\red [src] is full."
+			user << "<span class='warning'>\The [src] is full.</span>"
 		else
 			spawn(5)
-				I.reagents.trans_to(src.imp, 5)
-				user << "\blue You inject 5 units of the solution. The syringe now contains [I.reagents.total_volume] units."
+				I.reagents.trans_to_obj(src.imp, 5)
+				user << "<span class='notice'>You inject 5 units of the solution. The syringe now contains [I.reagents.total_volume] units.</span>"
 	else if (istype(I, /obj/item/weapon/implanter))
 		var/obj/item/weapon/implanter/M = I
 		if (M.imp)

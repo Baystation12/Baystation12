@@ -80,7 +80,8 @@
 	for(var/datum/data/record/t in data_core.general)
 		var/name = t.fields["name"]
 		var/rank = t.fields["rank"]
-		var/real_rank = t.fields["real_rank"]
+		var/real_rank = make_list_rank(t.fields["real_rank"])
+
 		if(OOC)
 			var/active = 0
 			for(var/mob/M in player_list)
@@ -165,6 +166,15 @@
 	return dat
 
 
+/var/list/acting_rank_prefixes = list("acting", "temporary", "interim", "provisional")
+
+/proc/make_list_rank(rank)
+	for(var/prefix in acting_rank_prefixes)
+		if(findtext(rank, "[prefix] ", 1, 2+length(prefix)))
+			return copytext(rank, 2+length(prefix))
+	return rank
+
+
 /*
 We can't just insert in HTML into the nanoUI so we need the raw data to play with.
 Instead of creating this list over and over when someone leaves their PDA open to the page
@@ -189,7 +199,8 @@ var/global/ManifestJSON
 	for(var/datum/data/record/t in data_core.general)
 		var/name = sanitize(t.fields["name"])
 		var/rank = sanitize(t.fields["rank"])
-		var/real_rank = t.fields["real_rank"]
+		var/real_rank = make_list_rank(t.fields["real_rank"])
+
 		var/isactive = t.fields["p_stat"]
 		var/department = 0
 		var/depthead = 0 			// Department Heads will be placed at the top of their lists.
@@ -299,7 +310,7 @@ var/global/ManifestJSON
 	item_state = "beachball"
 	density = 0
 	anchored = 0
-	w_class = 2.0
+	w_class = 4
 	force = 0.0
 	throwforce = 0.0
 	throw_speed = 1

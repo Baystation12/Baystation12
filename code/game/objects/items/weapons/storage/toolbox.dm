@@ -5,19 +5,15 @@
 	icon_state = "red"
 	item_state = "toolbox_red"
 	flags = CONDUCT
-	force = 5.0
-	throwforce = 10.0
+	force = 5
+	throwforce = 10
 	throw_speed = 1
 	throw_range = 7
-	w_class = 4.0
-	origin_tech = "combat=1"
+	w_class = 4
+	max_w_class = 3
+	max_storage_space = 14 //can hold 7 w_class-2 items or up to 3 w_class-3 items (with 1 w_class-2 item as change).
+	origin_tech = list(TECH_COMBAT = 1)
 	attack_verb = list("robusted")
-
-	New()
-		..()
-		if (src.type == /obj/item/weapon/storage/toolbox)
-			world << "BAD: [src] ([src.type]) spawned at [src.x] [src.y] [src.z]"
-			del(src)
 
 /obj/item/weapon/storage/toolbox/emergency
 	name = "emergency toolbox"
@@ -71,7 +67,7 @@
 	name = "suspicious looking toolbox"
 	icon_state = "syndicate"
 	item_state = "toolbox_syndi"
-	origin_tech = "combat=1;syndicate=1"
+	origin_tech = list(TECH_COMBAT = 1, TECH_ILLEGAL = 1)
 	force = 7.0
 
 	New()

@@ -45,6 +45,9 @@
 		return
 
 	var/list/modifiers = params2list(params)
+	if(modifiers["shift"] && modifiers["ctrl"])
+		CtrlShiftClickOn(A)
+		return
 	if(modifiers["middle"])
 		MiddleClickOn(A)
 		return
@@ -77,8 +80,10 @@
 		return
 
 	if(in_throw_mode)
-		throw_item(A)
-		return
+		if(isturf(A) || isturf(A.loc))
+			throw_item(A)
+			return
+		throw_mode_off()
 
 	if(!istype(A,/obj/item/weapon/gun) && !isturf(A) && !istype(A,/obj/screen))
 		last_target_click = world.time
@@ -112,7 +117,7 @@
 			if(W.flags&USEDELAY)
 				next_move += 5
 
-			var/resolved = A.attackby(W,src)
+			var/resolved = W.resolve_attackby(A, src)
 			if(!resolved && A && W)
 				W.afterattack(A,src,1,params) // 1 indicates adjacency
 		else
@@ -133,7 +138,7 @@
 					next_move += 5
 
 				// Return 1 in attackby() to prevent afterattack() effects (when safely moving items for example)
-				var/resolved = A.attackby(W,src)
+				var/resolved = W.resolve_attackby(A,src)
 				if(!resolved && A && W)
 					W.afterattack(A,src,1,params) // 1: clicking something Adjacent
 			else
@@ -192,7 +197,7 @@
 */
 /mob/proc/RangedAttack(var/atom/A, var/params)
 	if(!mutations.len) return
-	if((LASER in mutations) && a_intent == "harm")
+	if((LASER in mutations) && a_intent == I_HURT)
 		LaserEyes(A) // moved into a proc below
 	else if(TK in mutations)
 		switch(get_dist(src,A))
@@ -226,17 +231,6 @@
 /mob/living/carbon/MiddleClickOn(var/atom/A)
 	swap_hand()
 
-/mob/living/carbon/human/MiddleClickOn(var/atom/A)
-
-	if(back)
-		var/obj/item/weapon/rig/rig = back
-		if(istype(rig) && rig.selected_module)
-			if(world.time <= next_move) return
-			next_move = world.time + 8
-			rig.selected_module.engage(A)
-			return
-
-	swap_hand()
 
 // In case of use break glass
 /*
@@ -293,6 +287,17 @@
 	return T.AdjacentQuick(src)
 
 /*
+	Control+Shift click
+	Unused except for AI
+*/
+/mob/proc/CtrlShiftClickOn(var/atom/A)
+	A.CtrlShiftClick(src)
+	return
+
+/atom/proc/CtrlShiftClick(var/mob/user)
+	return
+
+/*
 	Misc helpers
 
 	Laser Eyes: as the name implies, handles this since nothing else does currently
@@ -326,7 +331,7 @@
 		nutrition = max(nutrition - rand(1,5),0)
 		handle_regular_hud_updates()
 	else
-		src << "\red You're out of energy!  You need food!"
+		src << "<span class='warning'>You're out of energy!  You need food!</span>"
 
 // Simple helper to face what you clicked on, in case it should be needed in more than one place
 /mob/proc/face_atom(var/atom/A)

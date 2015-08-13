@@ -2,7 +2,7 @@
 	set invisibility = 0
 	set background = 1
 
-	if (src.monkeyizing)
+	if (src.transforming)
 		return
 
 	src.blinded = null
@@ -10,6 +10,7 @@
 	//Status updates, death etc.
 	clamp_values()
 	handle_regular_status_updates()
+	handle_actions()
 
 	if(client)
 		handle_regular_hud_updates()
@@ -58,15 +59,15 @@
 		src.has_power = 0
 		if(lights_on) // Light is on but there is no power!
 			lights_on = 0
-			SetLuminosity(0)
+			set_light(0)
 
-/mob/living/silicon/robot/proc/handle_regular_status_updates()
+/mob/living/silicon/robot/handle_regular_status_updates()
 
 	if(src.camera && !scrambledcodes)
 		if(src.stat == 2 || wires.IsIndexCut(BORG_WIRE_CAMERA))
-			src.camera.status = 0
+			src.camera.set_status(0)
 		else
-			src.camera.status = 1
+			src.camera.set_status(1)
 
 	updatehealth()
 
@@ -143,7 +144,7 @@
 
 	return 1
 
-/mob/living/silicon/robot/proc/handle_regular_hud_updates()
+/mob/living/silicon/robot/handle_regular_hud_updates()
 
 	if (src.stat == 2 || XRAY in mutations || src.sight_mode & BORGXRAY)
 		src.sight |= SEE_TURFS
@@ -172,7 +173,7 @@
 		src.see_invisible = SEE_INVISIBLE_LIVING // This is normal vision (25), setting it lower for normal vision means you don't "see" things like darkness since darkness
 							 // has a "invisible" value of 15
 
-	regular_hud_updates()
+	..()
 
 	var/obj/item/borg/sight/hud/hud = (locate(/obj/item/borg/sight/hud) in src)
 	if(hud && hud.hud)
@@ -222,16 +223,17 @@
 			src.healths.icon_state = "health7"
 
 	if (src.syndicate && src.client)
-		if(ticker.mode.name == "traitor")
-			for(var/datum/mind/tra in ticker.mode.traitors)
-				if(tra.current)
-					var/I = image('icons/mob/mob.dmi', loc = tra.current, icon_state = "traitor")
-					src.client.images += I
+		for(var/datum/mind/tra in traitors.current_antagonists)
+			if(tra.current)
+				// TODO: Update to new antagonist system.
+				var/I = image('icons/mob/mob.dmi', loc = tra.current, icon_state = "traitor")
+				src.client.images += I
 		src.disconnect_from_ai()
 		if(src.mind)
+			// TODO: Update to new antagonist system.
 			if(!src.mind.special_role)
 				src.mind.special_role = "traitor"
-				ticker.mode.traitors += src.mind
+				traitors.current_antagonists |= src.mind
 
 	if (src.cells)
 		if (src.cell)
@@ -285,7 +287,7 @@
 
 	if (src.stat != 2)
 		if (src.machine)
-			if (!( src.machine.check_eye(src) ))
+			if (src.machine.check_eye(src) < 0)
 				src.reset_view(null)
 		else
 			if(client && !client.adminobs)
@@ -331,3 +333,12 @@
 	if(paralysis || stunned || weakened || buckled || lockcharge || !is_component_functioning("actuator")) canmove = 0
 	else canmove = 1
 	return canmove
+
+/mob/living/silicon/robot/update_fire()
+	overlays -= image("icon"='icons/mob/OnFire.dmi', "icon_state"="Standing")
+	if(on_fire)
+		overlays += image("icon"='icons/mob/OnFire.dmi', "icon_state"="Standing")
+
+/mob/living/silicon/robot/fire_act()
+	if(!on_fire) //Silicons don't gain stacks from hotspots, but hotspots can ignite them
+		IgniteMob()

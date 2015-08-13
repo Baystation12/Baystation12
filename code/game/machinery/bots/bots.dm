@@ -3,7 +3,7 @@
 /obj/machinery/bot
 	icon = 'icons/obj/aibots.dmi'
 	layer = MOB_LAYER
-	luminosity = 3
+	light_range = 3
 	use_power = 0
 	var/obj/item/weapon/card/id/botcard			// the ID card that the bot "holds"
 	var/on = 1
@@ -15,33 +15,35 @@
 	var/locked = 1
 	//var/emagged = 0 //Urist: Moving that var to the general /bot tree as it's used by most bots
 
-
 /obj/machinery/bot/proc/turn_on()
 	if(stat)	return 0
 	on = 1
-	SetLuminosity(initial(luminosity))
+	set_light(initial(light_range))
 	return 1
 
 /obj/machinery/bot/proc/turn_off()
 	on = 0
-	SetLuminosity(0)
+	set_light(0)
 
 /obj/machinery/bot/proc/explode()
-	del(src)
+	qdel(src)
 
 /obj/machinery/bot/proc/healthcheck()
 	if (src.health <= 0)
 		src.explode()
 
-/obj/machinery/bot/proc/Emag(mob/user as mob)
-	if(locked)
+/obj/machinery/bot/emag_act(var/remaining_charges, var/user)
+	if(locked && !emagged)
 		locked = 0
 		emagged = 1
 		user << "<span class='warning'>You short out [src]'s maintenance hatch lock.</span>"
 		log_and_message_admins("emagged [src]'s maintenance hatch lock")
-	if(!locked && open)
+		return 1
+
+	if(!locked && open && emagged == 1)
 		emagged = 2
 		log_and_message_admins("emagged [src]'s inner circuits")
+		return 1
 
 /obj/machinery/bot/examine(mob/user)
 	..(user)
@@ -61,13 +63,11 @@
 		if(health < maxhealth)
 			if(open)
 				health = min(maxhealth, health+10)
-				user.visible_message("\red [user] repairs [src]!","\blue You repair [src]!")
+				user.visible_message("<span class='warning'>[user] repairs [src]!</span>","<span class='notice'>You repair [src]!</span>")
 			else
 				user << "<span class='notice'>Unable to repair with the maintenance panel closed.</span>"
 		else
 			user << "<span class='notice'>[src] does not need a repair.</span>"
-	else if (istype(W, /obj/item/weapon/card/emag) && emagged < 2)
-		Emag(user)
 	else
 		if(hasvar(W,"force") && hasvar(W,"damtype"))
 			switch(W.damtype)
@@ -86,10 +86,6 @@
 	health -= Proj.damage
 	..()
 	healthcheck()
-
-/obj/machinery/bot/meteorhit()
-	src.explode()
-	return
 
 /obj/machinery/bot/blob_act()
 	src.health -= rand(20,40)*fire_dam_coeff
@@ -117,7 +113,7 @@
 /obj/machinery/bot/emp_act(severity)
 	var/was_on = on
 	stat |= EMPED
-	var/obj/effect/overlay/pulse2 = new/obj/effect/overlay ( src.loc )
+	var/obj/effect/overlay/pulse2 = PoolOrNew(/obj/effect/overlay, src.loc )
 	pulse2.icon = 'icons/effects/effects.dmi'
 	pulse2.icon_state = "empdisable"
 	pulse2.name = "emp sparks"
@@ -125,7 +121,7 @@
 	pulse2.set_dir(pick(cardinal))
 
 	spawn(10)
-		pulse2.delete()
+		qdel(pulse2)
 	if (on)
 		turn_off()
 	spawn(severity*300)
@@ -144,7 +140,7 @@
 
 	if(user.species.can_shred(user))
 		src.health -= rand(15,30)*brute_dam_coeff
-		src.visible_message("\red <B>[user] has slashed [src]!</B>")
+		src.visible_message("<span class='danger'>[user] has slashed [src]!</span>")
 		playsound(src.loc, 'sound/weapons/slice.ogg', 25, 1, -1)
 		if(prob(10))
 			new /obj/effect/decal/cleanable/blood/oil(src.loc)

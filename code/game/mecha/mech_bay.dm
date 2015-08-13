@@ -139,6 +139,7 @@
 	anchored = 1
 	icon = 'icons/obj/computer.dmi'
 	icon_state = "recharge_comp"
+	light_color = "#a97faa"
 	circuit = "/obj/item/weapon/circuitboard/mech_bay_power_console"
 	var/autostart = 1
 	var/voltage = 45

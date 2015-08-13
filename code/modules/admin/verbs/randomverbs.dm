@@ -52,7 +52,7 @@
 		src << "Only administrators may use this command."
 		return
 
-	var/msg = input("Message:", text("Subtle PM to [M.key]")) as text
+	var/msg = sanitize(input("Message:", text("Subtle PM to [M.key]")) as text)
 
 	if (!msg)
 		return
@@ -109,7 +109,7 @@
 		src << "Only administrators may use this command."
 		return
 
-	var/msg = input("Message:", text("Enter the text you wish to appear to everyone:")) as text
+	var/msg = sanitize(input("Message:", text("Enter the text you wish to appear to everyone:")) as text)
 
 	if (!msg)
 		return
@@ -132,7 +132,7 @@
 	if(!M)
 		return
 
-	var/msg = input("Message:", text("Enter the text you wish to appear to your target:")) as text
+	var/msg = sanitize(input("Message:", text("Enter the text you wish to appear to your target:")) as text)
 
 	if( !msg )
 		return
@@ -368,19 +368,6 @@ Traitors and the like can also be revived with the previous role mostly intact.
 		usr << "<font color='red'>There is no active key like that in the game or the person is not currently a ghost.</font>"
 		return
 
-	if(G_found.mind && !G_found.mind.active)	//mind isn't currently in use by someone/something
-
-		//check if they were a monkey
-		if(findtext(G_found.real_name,"monkey"))
-			if(alert("This character appears to have been a monkey. Would you like to respawn them as such?",,"Yes","No")=="Yes")
-				var/mob/living/carbon/monkey/new_monkey = new(pick(latejoin))
-				G_found.mind.transfer_to(new_monkey)	//be careful when doing stuff like this! I've already checked the mind isn't in use
-				new_monkey.key = G_found.key
-				new_monkey << "You have been fully respawned. Enjoy the game."
-				message_admins("\blue [key_name_admin(usr)] has respawned [new_monkey.key] as a filthy xeno.", 1)
-				return	//all done. The ghost is auto-deleted
-
-	//Ok, it's not a monkey. So, spawn a human.
 	var/mob/living/carbon/human/new_character = new(pick(latejoin))//The mob being spawned.
 
 	var/datum/data/record/record_found			//Referenced to later to either randomize or not randomize the character.
@@ -445,54 +432,16 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	var/player_key = G_found.key
 
 	//Now for special roles and equipment.
-	switch(new_character.mind.special_role)
-		if("traitor")
-			job_master.EquipRank(new_character, new_character.mind.assigned_role, 1)
-			ticker.mode.equip_traitor(new_character)
-		if("Wizard")
-			new_character.loc = pick(wizardstart)
-			//ticker.mode.learn_basic_spells(new_character)
-			ticker.mode.equip_wizard(new_character)
-		if("Mercenary")
-			var/obj/effect/landmark/synd_spawn = locate("landmark*Syndicate-Spawn")
-			if(synd_spawn)
-				new_character.loc = get_turf(synd_spawn)
-			call(/datum/game_mode/proc/equip_syndicate)(new_character)
-		if("Ninja")
-			new_character.equip_space_ninja()
-			if(ninjastart.len == 0)
-				new_character << "<B>\red A proper starting location for you could not be found, please report this bug!</B>"
-				new_character << "<B>\red Attempting to place at a carpspawn.</B>"
-				for(var/obj/effect/landmark/L in landmarks_list)
-					if(L.name == "carpspawn")
-						ninjastart.Add(L)
-				if(ninjastart.len == 0 && latejoin.len > 0)
-					new_character << "<B>\red Still no spawneable locations could be found. Defaulting to latejoin.</B>"
-					new_character.loc = pick(latejoin)
-				else if (ninjastart.len == 0)
-					new_character << "<B>\red Still no spawneable locations could be found. Aborting.</B>"
-
-		if("Death Commando")//Leaves them at late-join spawn.
-			new_character.equip_death_commando()
-			new_character.internal = new_character.s_store
-			new_character.internals.icon_state = "internal1"
-		else//They may also be a cyborg or AI.
-			switch(new_character.mind.assigned_role)
-				if("Cyborg")//More rigging to make em' work and check if they're traitor.
-					new_character = new_character.Robotize()
-					if(new_character.mind.special_role=="traitor")
-						call(/datum/game_mode/proc/add_law_zero)(new_character)
-				if("AI")
-					new_character = new_character.AIize()
-					if(new_character.mind.special_role=="traitor")
-						call(/datum/game_mode/proc/add_law_zero)(new_character)
-				//Add aliens.
-				else
-					job_master.EquipRank(new_character, new_character.mind.assigned_role, 1)//Or we simply equip them.
+	var/datum/antagonist/antag_data = get_antag_data(new_character.mind.special_role)
+	if(antag_data)
+		antag_data.add_antagonist(new_character.mind)
+		antag_data.place_mob(new_character)
+	else
+		job_master.EquipRank(new_character, new_character.mind.assigned_role, 1)
 
 	//Announces the character on all the systems, based on the record.
 	if(!issilicon(new_character))//If they are not a cyborg/AI.
-		if(!record_found&&new_character.mind.assigned_role!="MODE")//If there are no records for them. If they have a record, this info is already in there. MODE people are not announced anyway.
+		if(!record_found && !player_is_antag(new_character.mind, only_offstation_roles = 1)) //If there are no records for them. If they have a record, this info is already in there. MODE people are not announced anyway.
 			//Power to the user!
 			if(alert(new_character,"Warning: No data core entry detected. Would you like to announce the arrival of this character by adding them to various databases, such as medical records?",,"No","Yes")=="Yes")
 				data_core.manifest_inject(new_character)
@@ -513,7 +462,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	if(!holder)
 		src << "Only administrators may use this command."
 		return
-	var/input = input(usr, "Please enter anything you want the AI to do. Anything. Serious.", "What?", "") as text|null
+	var/input = sanitize(input(usr, "Please enter anything you want the AI to do. Anything. Serious.", "What?", "") as text|null)
 	if(!input)
 		return
 	for(var/mob/living/silicon/ai/M in mob_list)
@@ -561,8 +510,8 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	if(!holder)
 		src << "Only administrators may use this command."
 		return
-	var/input = input(usr, "Please enter anything you want. Anything. Serious.", "What?", "") as message|null
-	var/customname = input(usr, "Pick a title for the report.", "Title") as text|null
+	var/input = sanitize(input(usr, "Please enter anything you want. Anything. Serious.", "What?", "") as message|null, extra = 0)
+	var/customname = sanitizeSafe(input(usr, "Pick a title for the report.", "Title") as text|null)
 	if(!input)
 		return
 	if(!customname)
@@ -578,7 +527,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 
 	switch(alert("Should this be announced to the general population?",,"Yes","No"))
 		if("Yes")
-			command_announcement.Announce(input, customname, new_sound = 'sound/AI/commandreport.ogg');
+			command_announcement.Announce(input, customname, new_sound = 'sound/AI/commandreport.ogg', msg_sanitized = 1);
 		if("No")
 			world << "\red New NanoTrasen Update available at all communication consoles."
 			world << sound('sound/AI/commandreport.ogg')
@@ -599,7 +548,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 		log_admin("[key_name(usr)] deleted [O] at ([O.x],[O.y],[O.z])")
 		message_admins("[key_name_admin(usr)] deleted [O] at ([O.x],[O.y],[O.z])", 1)
 		feedback_add_details("admin_verb","DEL") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-		del(O)
+		qdel(O)
 
 /client/proc/cmd_admin_list_open_jobs()
 	set category = "Admin"
@@ -737,7 +686,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 			message_admins("\blue[usr.client.ckey] has banned [M.ckey].\nReason: [reason]\nThis will be removed in [mins] minutes.")
 			world.Export("http://216.38.134.132/adminlog.php?type=ban&key=[usr.client.key]&key2=[M.key]&msg=[html_decode(reason)]&time=[mins]&server=[replacetext(config.server_name, "#", "")]")
 			del(M.client)
-			del(M)
+			qdel(M)
 		else
 
 	if("No")
@@ -752,7 +701,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 		message_admins("\blue[usr.client.ckey] has banned [M.ckey].\nReason: [reason]\nThis is a permanent ban.")
 		world.Export("http://216.38.134.132/adminlog.php?type=ban&key=[usr.client.key]&key2=[M.key]&msg=[html_decode(reason)]&time=perma&server=[replacetext(config.server_name, "#", "")]")
 		del(M.client)
-		del(M)
+		qdel(M)
 */
 
 /client/proc/update_world()
@@ -829,7 +778,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	if(confirm != "Yes") return
 
 	var/choice
-	if(ticker.mode.name == "revolution" || ticker.mode.name == "AI malfunction" || ticker.mode.name == "confliction")
+	if(ticker.mode.name == "revolution" || ticker.mode.name == "confliction")
 		choice = input("The shuttle will just return if you call it. Call anyway?") in list("Confirm", "Cancel")
 		if(choice == "Confirm")
 			emergency_shuttle.auto_recall = 1	//enable auto-recall

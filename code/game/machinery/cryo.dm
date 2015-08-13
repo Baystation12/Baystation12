@@ -3,7 +3,7 @@
 /obj/machinery/atmospherics/unary/cryo_cell
 	name = "cryo cell"
 	icon = 'icons/obj/cryogenics.dmi'
-	icon_state = "cell-off"
+	icon_state = "pod0"
 	density = 1
 	anchored = 1.0
 	layer = 2.8
@@ -24,9 +24,11 @@
 	..()
 	initialize_directions = dir
 
-/obj/machinery/atmospherics/unary/cryo_cell/Del()
-	if(occupant)
-		occupant.loc = loc
+/obj/machinery/atmospherics/unary/cryo_cell/Destroy()
+	var/turf/T = loc
+	T.contents += contents
+	if(beaker)
+		beaker.loc = get_step(loc, SOUTH) //Beaker is carefully ejected from the wreckage of the cryotube
 	..()
 
 /obj/machinery/atmospherics/unary/cryo_cell/initialize()
@@ -57,11 +59,6 @@
 		network.update = 1
 
 	return 1
-
-
-/obj/machinery/atmospherics/unary/cryo_cell/allow_drop()
-	return 0
-
 
 /obj/machinery/atmospherics/unary/cryo_cell/relaymove(mob/user as mob)
 	if(user.stat)
@@ -174,7 +171,7 @@
 /obj/machinery/atmospherics/unary/cryo_cell/attackby(var/obj/item/weapon/G as obj, var/mob/user as mob)
 	if(istype(G, /obj/item/weapon/reagent_containers/glass))
 		if(beaker)
-			user << "\red A beaker is already loaded into the machine."
+			user << "<span class='warning'>A beaker is already loaded into the machine.</span>"
 			return
 
 		beaker =  G
@@ -190,17 +187,18 @@
 				return
 		var/mob/M = G:affecting
 		if(put_mob(M))
-			del(G)
+			qdel(G)
 	return
 
 /obj/machinery/atmospherics/unary/cryo_cell/update_icon()
-	if(on)
-		if(occupant)
-			icon_state = "cell-occupied"
-			return
-		icon_state = "cell-on"
-		return
-	icon_state = "cell-off"
+	overlays.Cut()
+	icon_state = "pod[on]"
+	if(occupant)
+		var/image/pickle = image(occupant.icon, occupant.icon_state)
+		pickle.overlays = occupant.overlays
+		pickle.pixel_y = 20
+		overlays += pickle
+	overlays += "lid[on]"
 
 /obj/machinery/atmospherics/unary/cryo_cell/proc/process_occupant()
 	if(air_contents.total_moles < 10)
@@ -229,8 +227,7 @@
 		var/has_clonexa = occupant.reagents.get_reagent_amount("clonexadone") >= 1
 		var/has_cryo_medicine = has_cryo || has_clonexa
 		if(beaker && !has_cryo_medicine)
-			beaker.reagents.trans_to(occupant, 1, 10)
-			beaker.reagents.reaction(occupant)
+			beaker.reagents.trans_to_mob(occupant, 1, CHEM_BLOOD, 10)
 
 /obj/machinery/atmospherics/unary/cryo_cell/proc/heat_gas_contents()
 	if(air_contents.total_moles < 1)
@@ -271,19 +268,19 @@
 	return
 /obj/machinery/atmospherics/unary/cryo_cell/proc/put_mob(mob/living/carbon/M as mob)
 	if (stat & (NOPOWER|BROKEN))
-		usr << "\red The cryo cell is not functioning."
+		usr << "<span class='warning'>The cryo cell is not functioning.</span>"
 		return
 	if (!istype(M))
-		usr << "\red <B>The cryo cell cannot handle such a lifeform!</B>"
+		usr << "<span class='danger'>The cryo cell cannot handle such a lifeform!</span>"
 		return
 	if (occupant)
-		usr << "\red <B>The cryo cell is already occupied!</B>"
+		usr << "<span class='danger'>The cryo cell is already occupied!</span>"
 		return
 	if (M.abiotic())
-		usr << "\red Subject may not have abiotic items on."
+		usr << "<span class='warning'>Subject may not have abiotic items on.</span>"
 		return
 	if(!node)
-		usr << "\red The cell is not correctly connected to its pipe network!"
+		usr << "<span class='warning'>The cell is not correctly connected to its pipe network!</span>"
 		return
 	if (M.client)
 		M.client.perspective = EYE_PERSPECTIVE
@@ -292,7 +289,7 @@
 	M.loc = src
 	M.ExtinguishMob()
 	if(M.health > -100 && (M.health < 0 || M.sleeping))
-		M << "\blue <b>You feel a cold liquid surround you. Your skin starts to freeze up.</b>"
+		M << "<span class='notice'><b>You feel a cold liquid surround you. Your skin starts to freeze up.</b></span>"
 	occupant = M
 	current_heat_capacity = HEAT_CAPACITY_HUMAN
 	update_use_power(2)
@@ -308,7 +305,7 @@
 	if(usr == occupant)//If the user is inside the tube...
 		if (usr.stat == 2)//and he's not dead....
 			return
-		usr << "\blue Release sequence activated. This will take two minutes."
+		usr << "<span class='notice'>Release sequence activated. This will take two minutes.</span>"
 		sleep(1200)
 		if(!src || !usr || !occupant || (occupant != usr)) //Check if someone's released/replaced/bombed him already
 			return
@@ -333,7 +330,16 @@
 	put_mob(usr)
 	return
 
+/atom/proc/return_air_for_internal_lifeform()
+	return return_air()
 
+/obj/machinery/atmospherics/unary/cryo_cell/return_air_for_internal_lifeform()
+	//assume that the cryo cell has some kind of breath mask or something that
+	//draws from the cryo tube's environment, instead of the cold internal air.
+	if(loc)
+		return loc.return_air()
+	else
+		return null
 
 /datum/data/function/proc/reset()
 	return

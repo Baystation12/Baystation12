@@ -7,7 +7,7 @@
 	item_state = "plasticx"
 	flags = NOBLUDGEON
 	w_class = 2.0
-	origin_tech = "syndicate=2"
+	origin_tech = list(TECH_ILLEGAL = 2)
 	var/datum/wires/explosive/c4/wires = null
 	var/timer = 10
 	var/atom/target = null
@@ -80,7 +80,7 @@
 			target.ex_act(1)
 	if(target)
 		target.overlays -= image_overlay
-	del(src) // qdel
+	qdel(src)
 
 /obj/item/weapon/plastique/attack(mob/M as mob, mob/user as mob, def_zone)
 	return

@@ -188,16 +188,16 @@
 					N.seeds -= O
 					if (N.amount <= 0 || N.seeds.len <= 0)
 						piles -= N
-						del(N)
+						qdel(N)
 					O.loc = src.loc
 				else
 					piles -= N
-					del(N)
+					qdel(N)
 			else if (task == "purge")
 				for (var/obj/O in N.seeds)
-					del(O)
+					qdel(O)
 					piles -= N
-					del(N)
+					qdel(N)
 			break
 	updateUsrDialog()
 
@@ -225,7 +225,7 @@
 /obj/machinery/seed_storage/proc/add(var/obj/item/seeds/O as obj)
 	if (istype(O.loc, /mob))
 		var/mob/user = O.loc
-		user.drop_item(O)
+		user.remove_from_mob(O)
 	else if(istype(O.loc,/obj/item/weapon/storage))
 		var/obj/item/weapon/storage/S = O.loc
 		S.remove_from_storage(O, src)

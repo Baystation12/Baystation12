@@ -53,25 +53,25 @@
 			if(prob(1))
 				affected_mob.emote("cough")
 			if(prob(1))
-				affected_mob << "\red Your throat feels sore."
+				affected_mob << "<span class='warning'>Your throat feels sore.</span>"
 			if(prob(1))
-				affected_mob << "\red Mucous runs down the back of your throat."
+				affected_mob << "<span class='warning'>Mucous runs down the back of your throat.</span>"
 		if(4)
 			if(prob(1))
 				affected_mob.emote("sneeze")
 			if(prob(1))
 				affected_mob.emote("cough")
 			if(prob(2))
-				affected_mob << "\red Your muscles ache."
+				affected_mob << "<span class='warning'>Your muscles ache.</span>"
 				if(prob(20))
 					affected_mob.take_organ_damage(1)
 			if(prob(2))
-				affected_mob << "\red Your stomach hurts."
+				affected_mob << "<span class='warning'>Your stomach hurts.</span>"
 				if(prob(20))
 					affected_mob.adjustToxLoss(1)
 					affected_mob.updatehealth()
 		if(5)
-			affected_mob << "\red You feel something tearing its way out of your stomach..."
+			affected_mob << "<span class='danger'>You feel something tearing its way out of your stomach...</span>"
 			affected_mob.adjustToxLoss(10)
 			affected_mob.updatehealth()
 			if(prob(50))
@@ -113,7 +113,7 @@ Des: Removes all infection images from aliens and places an infection image on a
 			if (alien.client)
 				for(var/image/I in alien.client.images)
 					if(dd_hasprefix_case(I.icon_state, "infected"))
-						del(I)
+						qdel(I)
 
 		for (var/mob/living/carbon/alien/alien in player_list)
 			if (alien.client)
@@ -149,5 +149,5 @@ Des: Removes the alien infection image from all aliens in the world located in p
 				for(var/image/I in alien.client.images)
 					if(I.loc == C)
 						if(dd_hasprefix_case(I.icon_state, "infected"))
-							del(I)
+							qdel(I)
 	return

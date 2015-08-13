@@ -73,10 +73,11 @@
 		var/f = 1
 		for(var/k in all_species)
 			var/datum/species/S = all_species[k]
-			if(!(S.flags & IS_SYNTHETIC))
-				if(!f) H += " | "
-				else f = 0
-				H += "<a href='?src=\ref[src];what=species;toggle=[k]' style='color:[(k in species) ? "#006600" : "#ff0000"]'>[k]</a>"
+			if(S.virus_immune)
+				continue
+			if(!f) H += " | "
+			else f = 0
+			H += "<a href='?src=\ref[src];what=species;toggle=[k]' style='color:[(k in species) ? "#006600" : "#ff0000"]'>[k]</a>"
 		H += {"
 		<a href="?src=\ref[src];what=species;reset=1" style="color:#0000aa">Reset</a>
 		<br />

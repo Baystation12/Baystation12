@@ -7,7 +7,7 @@
 		src << "Only administrators may use this command."
 		return
 
-	var/input = input(usr, "Enter the description of the custom event. Be descriptive. To cancel the event, make this blank or hit cancel.", "Custom Event", custom_event_msg) as message|null
+	var/input = sanitize(input(usr, "Enter the description of the custom event. Be descriptive. To cancel the event, make this blank or hit cancel.", "Custom Event", custom_event_msg) as message|null, MAX_BOOK_MESSAGE_LEN, extra = 0)
 	if(!input || input == "")
 		custom_event_msg = null
 		log_admin("[usr.key] has cleared the custom event text.")
@@ -21,7 +21,7 @@
 
 	world << "<h1 class='alert'>Custom Event</h1>"
 	world << "<h2 class='alert'>A custom event is starting. OOC Info:</h2>"
-	world << "<span class='alert'>[html_encode(custom_event_msg)]</span>"
+	world << "<span class='alert'>[custom_event_msg]</span>"
 	world << "<br>"
 
 // normal verb for players to view info
@@ -36,5 +36,5 @@
 
 	src << "<h1 class='alert'>Custom Event</h1>"
 	src << "<h2 class='alert'>A custom event is taking place. OOC Info:</h2>"
-	src << "<span class='alert'>[html_encode(custom_event_msg)]</span>"
+	src << "<span class='alert'>[custom_event_msg]</span>"
 	src << "<br>"

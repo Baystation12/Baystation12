@@ -60,68 +60,33 @@
 	name = "broken cryptographic sequencer"
 	icon_state = "emag"
 	item_state = "card-id"
-	origin_tech = "magnets=2;syndicate=2"
+	origin_tech = list(TECH_MAGNET = 2, TECH_ILLEGAL = 2)
 
 /obj/item/weapon/card/emag
 	desc = "It's a card with a magnetic strip attached to some circuitry."
 	name = "cryptographic sequencer"
 	icon_state = "emag"
 	item_state = "card-id"
-	origin_tech = "magnets=2;syndicate=2"
+	origin_tech = list(TECH_MAGNET = 2, TECH_ILLEGAL = 2)
 	var/uses = 10
-	// List of devices that cost a use to emag.
-	var/list/devices = list(
-		/obj/item/robot_parts,
-		/obj/item/weapon/storage/lockbox,
-		/obj/item/weapon/storage/secure,
-		/obj/item/weapon/circuitboard,
-		/obj/item/weapon/rig,
-		/obj/item/device/eftpos,
-		/obj/item/device/lightreplacer,
-		/obj/item/device/taperecorder,
-		/obj/item/device/hailer,
-		/obj/item/device/megaphone,
-		/obj/item/clothing/accessory/holobadge,
-		/obj/structure/closet/crate/secure,
-		/obj/structure/closet/secure_closet,
-		/obj/machinery/librarycomp,
-		/obj/machinery/computer,
-		/obj/machinery/power,
-		/obj/machinery/suspension_gen,
-		/obj/machinery/shield_capacitor,
-		/obj/machinery/shield_gen,
-		/obj/machinery/clonepod,
-		/obj/machinery/deployable,
-		/obj/machinery/door_control,
-		/obj/machinery/porta_turret,
-		/obj/machinery/shieldgen,
-		/obj/machinery/turretid,
-		/obj/machinery/vending,
-		/obj/machinery/bot,
-		/obj/machinery/door,
-		/obj/machinery/telecomms,
-		/obj/machinery/mecha_part_fabricator,
-		/obj/machinery/gibber,
-		/obj/vehicle
-		)
 
+/obj/item/weapon/card/emag/resolve_attackby(atom/A, mob/user)
+	var/used_uses = A.emag_act(uses, user)
+	if(used_uses < 0)
+		return ..(A, user)
 
-/obj/item/weapon/card/emag/afterattack(var/obj/item/weapon/O as obj, mob/user as mob)
-
-	for(var/type in devices)
-		if(istype(O,type))
-			uses--
-			break
+	uses -= used_uses
+	A.add_fingerprint(user)
+	log_and_message_admins("emagged \an [A].")
 
 	if(uses<1)
-		user.visible_message("[src] fizzles and sparks - it seems it's been used once too often, and is now broken.")
+		user.visible_message("<span class='warning'>\The [src] fizzles and sparks - it seems it's been used once too often, and is now spent.</span>")
 		user.drop_item()
 		var/obj/item/weapon/card/emag_broken/junk = new(user.loc)
 		junk.add_fingerprint(user)
-		del(src)
-		return
+		qdel(src)
 
-	..()
+	return 1
 
 /obj/item/weapon/card/id
 	name = "identification card"
@@ -145,9 +110,10 @@
 	..()
 	spawn(30)
 	if(istype(loc, /mob/living/carbon/human))
-		blood_type = loc:dna:b_type
-		dna_hash = loc:dna:unique_enzymes
-		fingerprint_hash = md5(loc:dna:uni_identity)
+		var/mob/living/carbon/human/H = loc
+		blood_type = H.dna.b_type
+		dna_hash = H.dna.unique_enzymes
+		fingerprint_hash = md5(H.dna.uni_identity)
 
 /obj/item/weapon/card/id/attack_self(mob/user as mob)
 	for(var/mob/O in viewers(user, null))
@@ -161,17 +127,6 @@
 
 /obj/item/weapon/card/id/GetID()
 	return src
-
-/obj/item/weapon/card/id/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	..()
-	if(istype(W,/obj/item/weapon/id_wallet))
-		user << "You slip [src] into [W]."
-		src.name = "[src.registered_name]'s [W.name] ([src.assignment])"
-		src.desc = W.desc
-		src.icon = W.icon
-		src.icon_state = W.icon_state
-		del(W)
-		return
 
 /obj/item/weapon/card/id/verb/read()
 	set name = "Read ID Card"
@@ -200,7 +155,7 @@
 /obj/item/weapon/card/id/syndicate
 	name = "agent card"
 	access = list(access_maint_tunnels, access_syndicate, access_external_airlocks)
-	origin_tech = "syndicate=3"
+	origin_tech = list(TECH_ILLEGAL = 3)
 	var/registered_user=null
 
 /obj/item/weapon/card/id/syndicate/New(mob/user as mob)
@@ -219,25 +174,25 @@
 		src.access |= I.access
 		if(istype(user, /mob/living) && user.mind)
 			if(user.mind.special_role)
-				usr << "\blue The card's microscanners activate as you pass it over the ID, copying its access."
+				usr << "<span class='notice'>The card's microscanners activate as you pass it over the ID, copying its access.</span>"
 
 /obj/item/weapon/card/id/syndicate/attack_self(mob/user as mob)
 	if(!src.registered_name)
 		//Stop giving the players unsanitized unputs! You are giving ways for players to intentionally crash clients! -Nodrak
-		var t = reject_bad_name(input(user, "What name would you like to put on this card?", "Agent card name", ishuman(user) ? user.real_name : user.name))
+		var t = sanitizeName(input(user, "What name would you like to put on this card?", "Agent card name", ishuman(user) ? user.real_name : user.name), MAX_NAME_LEN)
 		if(!t) //Same as mob/new_player/prefrences.dm
 			alert("Invalid name.")
 			return
 		src.registered_name = t
 
-		var u = sanitize(copytext(input(user, "What occupation would you like to put on this card?\nNote: This will not grant any access levels other than Maintenance.", "Agent card job assignment", "Agent"),1,MAX_MESSAGE_LEN))
+		var u = sanitize(input(user, "What occupation would you like to put on this card?\nNote: This will not grant any access levels other than Maintenance.", "Agent card job assignment", "Agent"), MAX_LNAME_LEN)
 		if(!u)
 			alert("Invalid assignment.")
 			src.registered_name = ""
 			return
 		src.assignment = u
 		src.name = "[src.registered_name]'s ID Card ([src.assignment])"
-		user << "\blue You successfully forge the ID card."
+		user << "<span class='notice'>You successfully forge the ID card.</span>"
 		registered_user = user
 	else if(!registered_user || registered_user == user)
 
@@ -245,19 +200,19 @@
 
 		switch(alert("Would you like to display the ID, or retitle it?","Choose.","Rename","Show"))
 			if("Rename")
-				var t = sanitize(copytext(input(user, "What name would you like to put on this card?", "Agent card name", ishuman(user) ? user.real_name : user.name),1,26))
+				var t = sanitize(input(user, "What name would you like to put on this card?", "Agent card name", ishuman(user) ? user.real_name : user.name), 26)
 				if(!t || t == "Unknown" || t == "floor" || t == "wall" || t == "r-wall") //Same as mob/new_player/prefrences.dm
 					alert("Invalid name.")
 					return
 				src.registered_name = t
 
-				var u = sanitize(copytext(input(user, "What occupation would you like to put on this card?\nNote: This will not grant any access levels other than Maintenance.", "Agent card job assignment", "Assistant"),1,MAX_MESSAGE_LEN))
+				var u = sanitize(input(user, "What occupation would you like to put on this card?\nNote: This will not grant any access levels other than Maintenance.", "Agent card job assignment", "Assistant"))
 				if(!u)
 					alert("Invalid assignment.")
 					return
 				src.assignment = u
 				src.name = "[src.registered_name]'s ID Card ([src.assignment])"
-				user << "\blue You successfully forge the ID card."
+				user << "<span class='notice'>You successfully forge the ID card.</span>"
 				return
 			if("Show")
 				..()
@@ -281,8 +236,7 @@
 	registered_name = "Captain"
 	assignment = "Captain"
 	New()
-		var/datum/job/captain/J = new/datum/job/captain
-		access = J.get_access()
+		access = get_all_station_access()
 		..()
 
 /obj/item/weapon/card/id/centcom
@@ -298,7 +252,7 @@
 /obj/item/weapon/card/id/centcom/ERT
 	name = "\improper Emergency Response Team ID"
 	assignment = "Emergency Response Team"
-		
+
 /obj/item/weapon/card/id/centcom/ERT/New()
 	..()
-	access += get_all_accesses()
+	access += get_all_station_access()

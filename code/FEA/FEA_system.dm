@@ -146,7 +146,7 @@ datum
 
 			setup()
 				set background = 1
-				world << "\red \b Processing Geometry..."
+				world << "<span class='danger'>Processing Geometry...</span>"
 				sleep(1)
 
 				var/start_time = world.timeofday
@@ -156,7 +156,7 @@ datum
 						assemble_group_turf(S)
 					S.update_air_properties()
 
-				world << "\red \b Geometry processed in [(world.timeofday-start_time)/10] seconds!"
+				world << "<span class='danger'>Geometry processed in [(world.timeofday-start_time)/10] seconds!</span>"
 
 			assemble_group_turf(turf/simulated/base)
 
@@ -291,7 +291,7 @@ datum
 						var/turf/simulated/T = turf
 						T.parent = null
 						turfs += T
-					del(turf_AG)
+					qdel(turf_AG)
 
 				for(var/turf/simulated/S in turfs) //Have old members try to form new groups
 					if(!S.parent)
@@ -306,7 +306,7 @@ datum
 					for(var/obj/movable/floor/OM in object_AG.members)
 						OM.parent = null
 						movable_objects += OM
-					del(object_AG)
+					qdel(object_AG)
 
 				for(var/obj/movable/floor/OM in movable_objects) //Have old members try to form new groups
 					if(!OM.parent)

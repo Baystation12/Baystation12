@@ -7,7 +7,7 @@
 	icon_opened = "medicalopen"
 	icon_broken = "medicalbroken"
 	icon_off = "medicaloff"
-	req_access = list(access_medical)
+	req_access = list(access_medical_equip)
 
 
 	New()
@@ -52,7 +52,7 @@
 
 /obj/structure/closet/secure_closet/medical3
 	name = "medical doctor's locker"
-	req_access = list(access_medical)
+	req_access = list(access_medical_equip)
 	icon_state = "securemed1"
 	icon_closed = "securemed"
 	icon_locked = "securemed1"
@@ -187,7 +187,7 @@
 	anchored = 1
 	density = 0
 	wall_mounted = 1
-	req_access = list(access_medical)
+	req_access = list(access_medical_equip)
 
 /obj/structure/closet/secure_closet/medical_wall/update_icon()
 	if(broken)

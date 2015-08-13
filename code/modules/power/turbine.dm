@@ -234,7 +234,7 @@
 			if (src.stat & BROKEN)
 				user << "\blue The broken glass falls out."
 				var/obj/structure/computerframe/A = new /obj/structure/computerframe( src.loc )
-				new /obj/item/weapon/shard( src.loc )
+				new /obj/item/weapon/material/shard( src.loc )
 				var/obj/item/weapon/circuitboard/turbine_control/M = new /obj/item/weapon/circuitboard/turbine_control( A )
 				for (var/obj/C in src)
 					C.loc = src.loc
@@ -243,7 +243,7 @@
 				A.state = 3
 				A.icon_state = "3"
 				A.anchored = 1
-				del(src)
+				qdel(src)
 			else
 				user << "\blue You disconnect the monitor."
 				var/obj/structure/computerframe/A = new /obj/structure/computerframe( src.loc )
@@ -255,7 +255,7 @@
 				A.state = 4
 				A.icon_state = "4"
 				A.anchored = 1
-				del(src)
+				qdel(src)
 	else
 		src.attack_hand(user)
 	return

@@ -90,13 +90,13 @@
 			screen = !screen
 
 		else if(href_list["warn"])
-			var/warning = trim(sanitize(copytext(input(usr,"Message:","Enter your message here!",""),1,MAX_MESSAGE_LEN)))
+			var/warning = sanitize(input(usr,"Message:","Enter your message here!",""))
 			if(!warning) return
 			var/obj/item/weapon/implant/I = locate(href_list["warn"])
 			if( istype(I) && I.imp_in)
 				var/mob/living/carbon/R = I.imp_in
 				log_say("PrisonComputer3 message: [key_name(usr)]->[key_name(R)] : [warning]")
-				R << "\green You hear a voice in your head saying: '[warning]'"
+				R << "<span class='notice'>You hear a voice in your head saying: '[warning]'</span>"
 
 		interact()
 		return

@@ -106,7 +106,7 @@ datum/admins/proc/notes_gethtml(var/ckey)
 	message_admins("\blue [key_name_admin(user)] has edited [key]'s notes.")
 	log_admin("[key_name(user)] has edited [key]'s notes.")
 
-	del info
+	qdel(info)
 
 	//Updating list of keys with notes on them
 	var/savefile/note_list = new("data/player_notes.sav")
@@ -115,7 +115,7 @@ datum/admins/proc/notes_gethtml(var/ckey)
 	if(!note_keys) note_keys = list()
 	if(!note_keys.Find(key)) note_keys += key
 	note_list << note_keys
-	del note_list
+	qdel(note_list)
 
 
 /proc/notes_del(var/key, var/index)
@@ -131,10 +131,10 @@ datum/admins/proc/notes_gethtml(var/ckey)
 	message_admins("\blue [key_name_admin(usr)] deleted one of [key]'s notes.")
 	log_admin("[key_name(usr)] deleted one of [key]'s notes.")
 
-	del info
+	qdel(info)
 
 /proc/show_player_info_irc(var/key as text)
-	var/dat = "          Info on [key]%0D%0A"
+	var/dat = "          Info on [key]\n"
 	var/savefile/info = new("data/player_saves/[copytext(key, 1, 2)]/[key]/info.sav")
 	var/list/infos
 	info >> infos
@@ -142,6 +142,6 @@ datum/admins/proc/notes_gethtml(var/ckey)
 		dat = "No information found on the given key."
 	else
 		for(var/datum/player_info/I in infos)
-			dat += "[I.content]%0D%0Aby [I.author] ([I.rank]) on [I.timestamp]%0D%0A%0D%0A"
+			dat += "[I.content]\nby [I.author] ([I.rank]) on [I.timestamp]\n\n"
 
-	return dat
+	return list2params(list(dat))

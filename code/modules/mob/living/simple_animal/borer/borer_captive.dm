@@ -14,7 +14,7 @@
 
 	if(istype(src.loc,/mob/living/simple_animal/borer))
 
-		message = trim_strip_html_properly(message)
+		message = sanitize(message)
 		if (!message)
 			return
 		log_say("[key_name(src)] : [message]")

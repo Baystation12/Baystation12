@@ -56,7 +56,7 @@
 	for(var/obj/machinery/door/firedoor/F in loc)
 		if(F != src)
 			spawn(1)
-				del src
+				qdel(src)
 			return .
 	var/area/A = get_area(src)
 	ASSERT(istype(A))
@@ -70,11 +70,13 @@
 			A.all_doors.Add(src)
 			areas_added += A
 
-/obj/machinery/door/firedoor/Del()
+/obj/machinery/door/firedoor/Destroy()
 	for(var/area/A in areas_added)
 		A.all_doors.Remove(src)
 	. = ..()
 
+/obj/machinery/door/firedoor/get_material()
+	return get_material_by_name(DEFAULT_WALL_MATERIAL)
 
 /obj/machinery/door/firedoor/examine(mob/user)
 	. = ..(user, 1)
@@ -102,10 +104,7 @@
 			continue
 		var/celsius = convert_k2c(tile_info[index][1])
 		var/pressure = tile_info[index][2]
-		if(dir_alerts[index] & (FIREDOOR_ALERT_HOT|FIREDOOR_ALERT_COLD))
-			o += "<span class='warning'>"
-		else
-			o += "<span style='color:blue'>"
+		o += "<span class='[(dir_alerts[index] & (FIREDOOR_ALERT_HOT|FIREDOOR_ALERT_COLD)) ? "warning" : "color:blue"]'>"
 		o += "[celsius]&deg;C</span> "
 		o += "<span style='color:blue'>"
 		o += "[pressure]kPa</span></li>"
@@ -150,7 +149,7 @@
 	"\The [src]", "Yes, [density ? "open" : "close"]", "No")
 	if(answer == "No")
 		return
-	if(user.stat || user.stunned || user.weakened || user.paralysis || (!user.canmove && !isAI(user)) || (get_dist(src, user) > 1  && !isAI(user)))
+	if(user.stat || user.stunned || user.weakened || user.paralysis || (!user.canmove && !user.isSilicon()) || (get_dist(src, user) > 1  && !isAI(user)))
 		user << "Sorry, you must remain able bodied and close to \the [src] in order to use it."
 		return
 	if(density && (stat & (BROKEN|NOPOWER))) //can still close without power
@@ -170,7 +169,7 @@
 		if(alarmed)
 			// Accountability!
 			users_to_open |= user.name
-			needs_to_close = 1
+			needs_to_close = !user.isSilicon()
 		spawn()
 			open()
 	else
@@ -231,14 +230,14 @@
 					FA.density = 1
 					FA.wired = 1
 					FA.update_icon()
-					del(src)
+					qdel(src)
 		return
 
 	if(blocked)
 		user << "<span class='danger'>\The [src] is welded shut!</span>"
 		return
 
-	if(istype(C, /obj/item/weapon/crowbar) || istype(C,/obj/item/weapon/twohanded/fireaxe))
+	if(istype(C, /obj/item/weapon/crowbar) || istype(C,/obj/item/weapon/material/twohanded/fireaxe))
 		if(operating)
 			return
 
@@ -248,8 +247,8 @@
 			"You hear someone struggle and metal straining.")
 			return
 
-		if(istype(C,/obj/item/weapon/twohanded/fireaxe))
-			var/obj/item/weapon/twohanded/fireaxe/F = C
+		if(istype(C,/obj/item/weapon/material/twohanded/fireaxe))
+			var/obj/item/weapon/material/twohanded/fireaxe/F = C
 			if(!F.wielded)
 				return
 

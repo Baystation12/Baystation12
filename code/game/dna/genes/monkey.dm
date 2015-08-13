@@ -12,7 +12,7 @@
 		//testing("Cannot monkey-ify [M], type is [M.type].")
 		return
 	var/mob/living/carbon/human/H = M
-	H.monkeyizing = 1
+	H.transforming = 1
 	var/list/implants = list() //Try to preserve implants.
 	for(var/obj/item/weapon/implant/W in H)
 		implants += W
@@ -23,7 +23,7 @@
 			if (W==H.w_uniform) // will be teared
 				continue
 			H.drop_from_inventory(W)
-		M.monkeyizing = 1
+		M.transforming = 1
 		M.canmove = 0
 		M.icon = null
 		M.invisibility = 101
@@ -33,7 +33,7 @@
 		animation.master = src
 		flick("h2monkey", animation)
 		sleep(48)
-		del(animation)
+		qdel(animation)
 
 
 	var/mob/living/carbon/monkey/O = null
@@ -60,7 +60,7 @@
 
 
 	for(var/obj/T in (M.contents-implants))
-		del(T)
+		qdel(T)
 
 	O.loc = M.loc
 
@@ -77,12 +77,12 @@
 	O.adjustToxLoss(M.getToxLoss() + 20)
 	O.adjustOxyLoss(M.getOxyLoss())
 	O.stat = M.stat
-	O.a_intent = "hurt"
+	O.a_intent = I_HURT
 	for (var/obj/item/weapon/implant/I in implants)
 		I.loc = O
 		I.implanted = O
 //		O.update_icon = 1	//queue a full icon update at next life() call
-	del(M)
+	qdel(M)
 	return
 
 /datum/dna/gene/monkey/deactivate(var/mob/living/M, var/connected, var/flags)
@@ -90,7 +90,7 @@
 		//testing("Cannot humanize [M], type is [M.type].")
 		return
 	var/mob/living/carbon/monkey/Mo = M
-	Mo.monkeyizing = 1
+	Mo.transforming = 1
 	var/list/implants = list() //Still preserving implants
 	for(var/obj/item/weapon/implant/W in Mo)
 		implants += W
@@ -98,7 +98,7 @@
 	if(!connected)
 		for(var/obj/item/W in (Mo.contents-implants))
 			Mo.drop_from_inventory(W)
-		M.monkeyizing = 1
+		M.transforming = 1
 		M.canmove = 0
 		M.icon = null
 		M.invisibility = 101
@@ -108,7 +108,7 @@
 		animation.master = src
 		flick("monkey2h", animation)
 		sleep(48)
-		del(animation)
+		qdel(animation)
 
 	var/mob/living/carbon/human/O
 	if(Mo.greaterform)
@@ -136,7 +136,7 @@
 		M.viruses -= D
 
 	//for(var/obj/T in M)
-	//	del(T)
+	//	qdel(T)
 
 	O.loc = M.loc
 
@@ -171,5 +171,5 @@
 		I.loc = O
 		I.implanted = O
 //		O.update_icon = 1	//queue a full icon update at next life() call
-	del(M)
+	qdel(M)
 	return

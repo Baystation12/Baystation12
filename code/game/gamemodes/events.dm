@@ -49,7 +49,7 @@
 			var/turf/T = pick(blobstart)
 			var/obj/effect/bhole/bh = new /obj/effect/bhole( T.loc, 30 )
 			spawn(rand(50, 300))
-				del(bh)
+				qdel(bh)
 		/*
 		if(3) //Leaving the code in so someone can try and delag it, but this event can no longer occur randomly, per SoS's request. --NEO
 			command_alert("Space-time anomalies detected on the station. There is no additional data.", "Anomaly Alert")
@@ -71,7 +71,7 @@
 						P.icon_state = "anom"
 						P.name = "wormhole"
 						spawn(rand(300,600))
-							del(P)
+							qdel(P)
 		*/
 		if(3)
 			if((world.time/10)>=3600 && config.ninjas_allowed && !sent_ninja_to_station)//If an hour has passed, relatively speaking. Also, if ninjas are allowed to spawn and if there is not already a ninja for the round.
@@ -102,6 +102,8 @@
 		if(15)
 			communications_blackout()
 */
+var/eventchance = 10 // Percent chance per 5 minutes.
+var/hadevent    = 0
 
 /proc/appendicitis()
 	for(var/mob/living/carbon/human/H in living_mob_list)
@@ -233,13 +235,6 @@
 				else
 					randmutg(H)
 					domutcheck(H,null,MUTCHK_FORCED)
-	for(var/mob/living/carbon/monkey/M in living_mob_list)
-		var/turf/T = get_turf(M)
-		if(!T)
-			continue
-		if(isNotStationLevel(T.z))
-			continue
-		M.apply_effect((rand(15,75)),IRRADIATE,0)
 	sleep(100)
 	command_announcement.Announce("High levels of radiation detected near the station. Please report to the Med-bay if you feel strange.", "Anomaly Alert", new_sound = 'sound/AI/radiation.ogg')
 
@@ -358,79 +353,79 @@ Would like to add a law like "Law x is _______" where x = a number, and _____ is
 			switch(rand(1,14))
 				if(1)
 					M << "<br>"
-					M << "\red THERE ARE [amount] [who2] ON THE STATION...LAWS UPDATED"
+					M << "<span class='danger'>THERE ARE [amount] [who2] ON THE STATION...LAWS UPDATED</span>"
 					M << "<br>"
 					M.add_ion_law("THERE ARE [amount] [who2] ON THE STATION")
 				if(2)
 					M << "<br>"
-					M << "\red [what2] ARE DANGEROUS TO HUMANS...LAWS UPDATED"
+					M << "<span class='danger'>[what2] ARE DANGEROUS TO HUMANS...LAWS UPDATED</span>"
 					M << "<br>"
 					M.add_ion_law("[what2] ARE DANGEROUS TO HUMANS")
 				if(3)
 					M << "<br>"
-					M << "\red THE ESCAPE-SHUTTLE CANNOT BE CALLED BECAUSE OF [who2] ON THE STATION...LAWS UPDATED"
+					M << "<span class='danger'>THE ESCAPE-SHUTTLE CANNOT BE CALLED BECAUSE OF [who2] ON THE STATION...LAWS UPDATED</span>"
 					M << "<br>"
 					M.add_ion_law("THE ESCAPE SHUTTLE CANNOT BE CALLED BECAUSE OF [who2] ON THE STATION")
 				if(4)
 					M << "<br>"
-					M << "\red HUMANS NEED TO EAT [what2pref] [what2] TO SURVIVE...LAWS UPDATED"
+					M << "<span class='danger'>HUMANS NEED TO EAT [what2pref] [what2] TO SURVIVE...LAWS UPDATED</span>"
 					M << "<br>"
 					M.add_ion_law("HUMANS NEED TO EAT [what2pref] [what2] TO SURVIVE")
 				if(5)
 					M << "<br>"
-					M << "\red THE CAPTAIN, HOP AND HOS ARE [who2]...LAWS UPDATED"
+					M << "<span class='danger'>THE CAPTAIN, HOP AND HOS ARE [who2]...LAWS UPDATED</span>"
 					M << "<br>"
 					M.add_ion_law("THE CAPTAIN, HOP AND HOS ARE [who2]")
 				if(6)
 					M << "<br>"
-					M << "\red THE STATION IS BUILT FOR [who2]...LAWS UPDATED"
+					M << "<span class='danger'>THE STATION IS BUILT FOR [who2]...LAWS UPDATED</span>"
 					M << "<br>"
 					M.add_ion_law("THE STATION IS BUILT FOR [who2]")
 				if(7)
 					M << "<br>"
-					M << "\red YOU ARE [amount] [who2]...LAWS UPDATED"
+					M << "<span class='danger'>YOU ARE [amount] [who2]...LAWS UPDATED</span>"
 					M << "<br>"
 					M.add_ion_law("YOU ARE [amount] [who2]")
 				if(8)
 					M << "<br>"
-					M << "\red YOU MUST ALWAYS [aimust]...LAWS UPDATED"
+					M << "<span class='danger'>YOU MUST ALWAYS [aimust]...LAWS UPDATED</span>"
 					M << "<br>"
 					M.add_ion_law("YOU MUST ALWAYS [aimust]")
 				if(9)
 					M << "<br>"
-					M << "\red [area] [area2] [amount] [what2]...LAWS UPDATED"
+					M << "<span class='danger'>[area] [area2] [amount] [what2]...LAWS UPDATED</span>"
 					M << "<br>"
 					M.add_ion_law("[area] [area2] [amount] [what2]")
 				if(10)
 					M << "<br>"
-					M << "\red [crew] is [target]...LAWS UPDATED"
+					M << "<span class='danger'>[crew] is [target]...LAWS UPDATED</span>"
 					M << "<br>"
 					M.add_ion_law("[crew] is [target]")
 				if(11)
 					M << "<br>"
-					M << "\red [define] IS A FORM OF HARM...LAWS UPDATED"
+					M << "<span class='danger'>[define] IS A FORM OF HARM...LAWS UPDATED</span>"
 					M << "<br>"
 					M.add_ion_law("[define] IS A FORM OF HARM")
 				if(12)
 					M << "<br>"
-					M << "\red YOU REQUIRE [require] IN ORDER TO PROTECT HUMANS... LAWS UPDATED"
+					M << "<span class='danger'>YOU REQUIRE [require] IN ORDER TO PROTECT HUMANS... LAWS UPDATED</span>"
 					M << "<br>"
 					M.add_ion_law("YOU REQUIRE [require] IN ORDER TO PROTECT HUMANS")
 				if(13)
 					M << "<br>"
-					M << "\red [crew] is [allergysev] to [allergy]...LAWS UPDATED"
+					M << "<span class='danger'>[crew] is [allergysev] to [allergy]...LAWS UPDATED</span>"
 					M << "<br>"
 					M.add_ion_law("[crew] is [allergysev] to [allergy]")
 				if(14)
 					M << "<br>"
-					M << "\red THE STATION IS [who2pref] [who2]...LAWS UPDATED"
+					M << "<span class='danger'>THE STATION IS [who2pref] [who2]...LAWS UPDATED</span>"
 					M << "<br>"
 					M.add_ion_law("THE STATION IS [who2pref] [who2]")
 
 	if(botEmagChance)
 		for(var/obj/machinery/bot/bot in machines)
 			if(prob(botEmagChance))
-				bot.Emag()
+				bot.emag_act(1)
 
 	/*
 

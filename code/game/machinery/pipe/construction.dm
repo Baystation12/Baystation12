@@ -78,8 +78,10 @@ Buildable meters
 			is_bent = 1
 		if     (istype(make_from, /obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction))
 			src.pipe_type = PIPE_JUNCTION
+			connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_HE
 		else if(istype(make_from, /obj/machinery/atmospherics/pipe/simple/heat_exchanging))
 			src.pipe_type = PIPE_HE_STRAIGHT + is_bent
+			connect_types = CONNECT_TYPE_HE
 		else if(istype(make_from, /obj/machinery/atmospherics/pipe/simple/insulated))
 			src.pipe_type = PIPE_INSULATED_STRAIGHT + is_bent
 		else if(istype(make_from, /obj/machinery/atmospherics/pipe/simple/visible/supply) || istype(make_from, /obj/machinery/atmospherics/pipe/simple/hidden/supply))
@@ -190,6 +192,10 @@ Buildable meters
 		else if (pipe_type == 31 || pipe_type == 32 || pipe_type == 34 || pipe_type == 36 || pipe_type == 38 || pipe_type == 40 || pipe_type == 42)
 			connect_types = CONNECT_TYPE_SCRUBBER
 			src.color = PIPE_COLOR_RED
+		else if (pipe_type == 2 || pipe_type == 3)
+			connect_types = CONNECT_TYPE_HE
+		else if (pipe_type == 6)
+			connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_HE
 		else if (pipe_type == 28)
 			connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_SCRUBBER
 	//src.pipe_dir = get_pipe_dir()
@@ -441,11 +447,11 @@ Buildable meters
 
 	for(var/obj/machinery/atmospherics/M in src.loc)
 		if((M.initialize_directions & pipe_dir) && M.check_connect_types_construction(M,src))	// matches at least one direction on either type of pipe & same connection type
-			user << "\red There is already a pipe of the same type at this location."
+			user << "<span class='warning'>There is already a pipe of the same type at this location.</span>"
 			return 1
 	// no conflicts found
 
-	var/pipefailtext = "\red There's nothing to connect this pipe section to!" //(with how the pipe code works, at least one end needs to be connected to something, otherwise the game deletes the segment)"
+	var/pipefailtext = "<span class='warning'>There's nothing to connect this pipe section to!</span>" //(with how the pipe code works, at least one end needs to be connected to something, otherwise the game deletes the segment)"
 
 	//TODO: Move all of this stuff into the various pipe constructors.
 	switch(pipe_type)
@@ -1141,9 +1147,9 @@ Buildable meters
 	playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 	user.visible_message( \
 		"[user] fastens the [src].", \
-		"\blue You have fastened the [src].", \
+		"<span class='notice'>You have fastened the [src].</span>", \
 		"You hear ratchet.")
-	del(src)	// remove the pipe item
+	qdel(src)	// remove the pipe item
 
 	return
 	 //TODO: DEFERRED
@@ -1166,12 +1172,12 @@ Buildable meters
 	if (!istype(W, /obj/item/weapon/wrench))
 		return ..()
 	if(!locate(/obj/machinery/atmospherics/pipe, src.loc))
-		user << "\red You need to fasten it to a pipe"
+		user << "<span class='warning'>You need to fasten it to a pipe</span>"
 		return 1
 	new/obj/machinery/meter( src.loc )
 	playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-	user << "\blue You have fastened the meter to the pipe"
-	del(src)
+	user << "<span class='notice'>You have fastened the meter to the pipe</span>"
+	qdel(src)
 //not sure why these are necessary
 #undef PIPE_SIMPLE_STRAIGHT
 #undef PIPE_SIMPLE_BENT

@@ -24,8 +24,8 @@
 	force = 5.0
 	throwforce = 7.0
 	w_class = 2.0
-	matter = list("metal" = 150)
-	origin_tech = "materials=1;engineering=1"
+	origin_tech = list(TECH_MATERIAL = 1, TECH_ENGINERING = 1)
+	matter = list(DEFAULT_WALL_MATERIAL = 150)
 	attack_verb = list("bashed", "battered", "bludgeoned", "whacked")
 
 
@@ -38,18 +38,18 @@
 	icon = 'icons/obj/items.dmi'
 	icon_state = "screwdriver"
 	flags = CONDUCT
-	slot_flags = SLOT_BELT
+	slot_flags = SLOT_BELT | SLOT_EARS
 	force = 5.0
 	w_class = 1.0
 	throwforce = 5.0
 	throw_speed = 3
 	throw_range = 5
-	matter = list("metal" = 75)
+	matter = list(DEFAULT_WALL_MATERIAL = 75)
 	attack_verb = list("stabbed")
 
 	suicide_act(mob/user)
-		viewers(user) << pick("\red <b>[user] is stabbing the [src.name] into \his temple! It looks like \he's trying to commit suicide.</b>", \
-							"\red <b>[user] is stabbing the [src.name] into \his heart! It looks like \he's trying to commit suicide.</b>")
+		viewers(user) << pick("<span class='danger'>\The [user] is stabbing the [src.name] into \his temple! It looks like \he's trying to commit suicide.</span>", \
+		                       "<span class='danger'>\The [user] is stabbing the [src.name] into \his heart! It looks like \he's trying to commit suicide.</span>")
 		return(BRUTELOSS)
 
 /obj/item/weapon/screwdriver/New()
@@ -81,7 +81,8 @@
 	return
 
 /obj/item/weapon/screwdriver/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
-	if(!istype(M))	return ..()
+	if(!istype(M) || user.a_intent == "help")
+		return ..()
 	if(user.zone_sel.selecting != "eyes" && user.zone_sel.selecting != "head")
 		return ..()
 	if((CLUMSY in user.mutations) && prob(50))
@@ -102,8 +103,8 @@
 	throw_speed = 2
 	throw_range = 9
 	w_class = 2.0
-	matter = list("metal" = 80)
-	origin_tech = "materials=1;engineering=1"
+	origin_tech = list(TECH_MATERIAL = 1, TECH_ENGINERING = 1)
+	matter = list(DEFAULT_WALL_MATERIAL = 80)
 	attack_verb = list("pinched", "nipped")
 	sharp = 1
 	edge = 1
@@ -144,10 +145,10 @@
 	w_class = 2.0
 
 	//Cost to make in the autolathe
-	matter = list("metal" = 70, "glass" = 30)
+	matter = list(DEFAULT_WALL_MATERIAL = 70, "glass" = 30)
 
 	//R&D tech level
-	origin_tech = "engineering=1"
+	origin_tech = list(TECH_ENGINERING = 1)
 
 	//Welding tool specific stuff
 	var/welding = 0 	//Whether or not the welding tool is off(0), on(1) or currently welding(2)
@@ -162,6 +163,10 @@
 	R.add_reagent("fuel", max_fuel)
 	return
 
+/obj/item/weapon/weldingtool/Destroy()
+	if(welding)
+		processing_objects -= src
+	..()
 
 /obj/item/weapon/weldingtool/examine(mob/user)
 	if(..(user, 0))
@@ -171,13 +176,13 @@
 /obj/item/weapon/weldingtool/attackby(obj/item/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/weapon/screwdriver))
 		if(welding)
-			user << "\red Stop welding first!"
+			user << "<span class='danger'>Stop welding first!</span>"
 			return
 		status = !status
 		if(status)
-			user << "\blue You resecure the welder."
+			user << "<span class='notice'>You secure the welder.</span>"
 		else
-			user << "\blue The welder can now be attached and modified."
+			user << "<span class='notice'>The welder can now be attached and modified.</span>"
 		src.add_fingerprint(user)
 		return
 
@@ -190,12 +195,12 @@
 		if (user.client)
 			user.client.screen -= src
 		if (user.r_hand == src)
-			user.u_equip(src)
+			user.remove_from_mob(src)
 		else
-			user.u_equip(src)
+			user.remove_from_mob(src)
 		src.master = F
 		src.layer = initial(src.layer)
-		user.u_equip(src)
+		user.remove_from_mob(src)
 		if (user.client)
 			user.client.screen -= src
 		src.loc = F
@@ -207,31 +212,12 @@
 
 
 /obj/item/weapon/weldingtool/process()
-	switch(welding)
-		//If off
-		if(0)
-			if(src.icon_state != "welder") //Check that the sprite is correct, if it isnt, it means toggle() was not called
-				src.force = 3
-				src.damtype = "brute"
-				src.icon_state = "welder"
-				src.welding = 0
-			processing_objects.Remove(src)
-			return
-		//Welders left on now use up fuel, but lets not have them run out quite that fast
-		if(1)
-			if(src.icon_state != "welder1") //Check that the sprite is correct, if it isnt, it means toggle() was not called
-				src.force = 15
-				src.damtype = "fire"
-				src.icon_state = "welder1"
-			if(prob(5))
-				remove_fuel(1)
+	if(welding)
+		if(prob(5))
+			remove_fuel(1)
 
-		//If you're actually actively welding, use fuel faster.
-		//Is this actually used or set anywhere? - Nodrak
-		if(2)
-			if(prob(75))
-				remove_fuel(1)
-
+		if(get_fuel() == 0)
+			setWelding(0)
 
 	//I'm not sure what this does. I assume it has to do with starting fires...
 	//...but it doesnt check to see if the welder is on or not.
@@ -247,14 +233,14 @@
 /obj/item/weapon/weldingtool/afterattack(obj/O as obj, mob/user as mob, proximity)
 	if(!proximity) return
 	if (istype(O, /obj/structure/reagent_dispensers/fueltank) && get_dist(src,O) <= 1 && !src.welding)
-		O.reagents.trans_to(src, max_fuel)
-		user << "\blue Welder refueled"
+		O.reagents.trans_to_obj(src, max_fuel)
+		user << "<span class='notice'>Welder refueled</span>"
 		playsound(src.loc, 'sound/effects/refill.ogg', 50, 1, -6)
 		return
 	else if (istype(O, /obj/structure/reagent_dispensers/fueltank) && get_dist(src,O) <= 1 && src.welding)
 		message_admins("[key_name_admin(user)] triggered a fueltank explosion with a welding tool.")
 		log_game("[key_name(user)] triggered a fueltank explosion with a welding tool.")
-		user << "\red You begin welding on the fueltank and with a moment of lucidity you realize, this might not have been the smartest thing you've ever done."
+		user << "<span class='danger'>You begin welding on the fueltank and with a moment of lucidity you realize, this might not have been the smartest thing you've ever done.</span>"
 		var/obj/structure/reagent_dispensers/fueltank/tank = O
 		tank.explode()
 		return
@@ -270,7 +256,7 @@
 
 
 /obj/item/weapon/weldingtool/attack_self(mob/user as mob)
-	toggle()
+	setWelding(!welding, usr)
 	return
 
 //Returns the amount of fuel in the welder
@@ -280,80 +266,65 @@
 
 //Removes fuel from the welding tool. If a mob is passed, it will perform an eyecheck on the mob. This should probably be renamed to use()
 /obj/item/weapon/weldingtool/proc/remove_fuel(var/amount = 1, var/mob/M = null)
-	if(!welding || !check_fuel())
+	if(!welding)
 		return 0
 	if(get_fuel() >= amount)
 		reagents.remove_reagent("fuel", amount)
-		check_fuel()
 		if(M)
 			eyecheck(M)
 		return 1
 	else
 		if(M)
-			M << "\blue You need more welding fuel to complete this task."
+			M << "<span class='notice'>You need more welding fuel to complete this task.</span>"
 		return 0
 
 //Returns whether or not the welding tool is currently on.
 /obj/item/weapon/weldingtool/proc/isOn()
 	return src.welding
 
+/obj/item/weapon/weldingtool/update_icon()
+	..()
+	icon_state = welding ? "welder1" : "welder"
+	var/mob/M = loc
+	if(istype(M))
+		M.update_inv_l_hand()
+		M.update_inv_r_hand()
+
 //Sets the welding state of the welding tool. If you see W.welding = 1 anywhere, please change it to W.setWelding(1)
 //so that the welding tool updates accordingly
-/obj/item/weapon/weldingtool/proc/setWelding(var/temp_welding)
+/obj/item/weapon/weldingtool/proc/setWelding(var/set_welding, var/mob/M)
+	if(!status)	return
+
+	var/turf/T = get_turf(src)
 	//If we're turning it on
-	if(temp_welding > 0)
-		if (remove_fuel(1))
-			usr << "\blue The [src] switches on."
+	if(set_welding && !welding)
+		if (get_fuel() > 0)
+			if(M)
+				M << "<span class='notice'>You switch the [src] on.</span>"
+			else if(T)
+				T.visible_message("<span class='danger'>\The [src] turns on.</span>")
 			src.force = 15
 			src.damtype = "fire"
-			src.icon_state = "welder1"
-			processing_objects.Add(src)
+			src.w_class = 4
+			welding = 1
+			update_icon()
+			processing_objects |= src
 		else
-			usr << "\blue Need more fuel!"
-			src.welding = 0
+			if(M)
+				M << "<span class='notice'>You need more welding fuel to complete this task.</span>"
 			return
 	//Otherwise
-	else
-		usr << "\blue The [src] switches off."
+	else if(!set_welding && welding)
+		processing_objects -= src
+		if(M)
+			M << "<span class='notice'>You switch \the [src] off.</span>"
+		else if(T)
+			T.visible_message("<span class='warning'>\The [src] turns off.</span>")
 		src.force = 3
 		src.damtype = "brute"
-		src.icon_state = "welder"
-		src.welding = 0
-
-//Turns off the welder if there is no more fuel (does this really need to be its own proc?)
-/obj/item/weapon/weldingtool/proc/check_fuel()
-	if((get_fuel() <= 0) && welding)
-		toggle(1)
-		return 0
-	return 1
-
-
-//Toggles the welder off and on
-/obj/item/weapon/weldingtool/proc/toggle(var/message = 0)
-	if(!status)	return
-	src.welding = !( src.welding )
-	if (src.welding)
-		if (remove_fuel(1))
-			usr << "\blue You switch the [src] on."
-			src.force = 15
-			src.damtype = "fire"
-			src.icon_state = "welder1"
-			src.w_class = 4
-			processing_objects.Add(src)
-		else
-			usr << "\blue Need more fuel!"
-			src.welding = 0
-			return
-	else
-		if(!message)
-			usr << "\blue You switch the [src] off."
-		else
-			usr << "\blue The [src] shuts off!"
-		src.force = 3
-		src.damtype = "brute"
-		src.icon_state = "welder"
-		src.welding = 0
 		src.w_class = initial(src.w_class)
+		src.welding = 0
+		update_icon()
 
 //Decides whether or not to damage a player's eyes based on what they're wearing as protection
 //Note: This should probably be moved to mob
@@ -362,36 +333,34 @@
 	var/safety = user:eyecheck()
 	if(istype(user, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = user
-		var/datum/organ/internal/eyes/E = H.internal_organs_by_name["eyes"]
+		var/obj/item/organ/eyes/E = H.internal_organs_by_name["eyes"]
 		if(!E)
-			return
-		if(H.species.flags & IS_SYNTHETIC)
 			return
 		switch(safety)
 			if(1)
-				usr << "\red Your eyes sting a little."
+				usr << "<span class='warning'>Your eyes sting a little.</span>"
 				E.damage += rand(1, 2)
 				if(E.damage > 12)
 					user.eye_blurry += rand(3,6)
 			if(0)
-				usr << "\red Your eyes burn."
+				usr << "<span class='warning'>Your eyes burn.</span>"
 				E.damage += rand(2, 4)
 				if(E.damage > 10)
 					E.damage += rand(4,10)
 			if(-1)
-				usr << "\red Your thermals intensify the welder's glow. Your eyes itch and burn severely."
+				usr << "<span class='danger'>Your thermals intensify the welder's glow. Your eyes itch and burn severely.</span>"
 				user.eye_blurry += rand(12,20)
 				E.damage += rand(12, 16)
 		if(safety<2)
 
 			if(E.damage > 10)
-				user << "\red Your eyes are really starting to hurt. This can't be good for you!"
+				user << "<span class='warning'>Your eyes are really starting to hurt. This can't be good for you!</span>"
 
 			if (E.damage >= E.min_broken_damage)
-				user << "\red You go blind!"
+				user << "<span class='danger'>You go blind!</span>"
 				user.sdisabilities |= BLIND
 			else if (E.damage >= E.min_bruised_damage)
-				user << "\red You go blind!"
+				user << "<span class='danger'>You go blind!</span>"
 				user.eye_blind = 5
 				user.eye_blurry = 5
 				user.disabilities |= NEARSIGHTED
@@ -403,22 +372,22 @@
 /obj/item/weapon/weldingtool/largetank
 	name = "industrial welding tool"
 	max_fuel = 40
-	matter = list("metal" = 70, "glass" = 60)
-	origin_tech = "engineering=2"
+	origin_tech = list(TECH_ENGINERING = 2)
+	matter = list(DEFAULT_WALL_MATERIAL = 70, "glass" = 60)
 
 /obj/item/weapon/weldingtool/hugetank
 	name = "upgraded welding tool"
 	max_fuel = 80
 	w_class = 3.0
-	matter = list("metal" = 70, "glass" = 120)
-	origin_tech = "engineering=3"
+	origin_tech = list(TECH_ENGINERING = 3)
+	matter = list(DEFAULT_WALL_MATERIAL = 70, "glass" = 120)
 
 /obj/item/weapon/weldingtool/experimental
 	name = "experimental welding tool"
 	max_fuel = 40
 	w_class = 3.0
-	matter = list("metal" = 70, "glass" = 120)
-	origin_tech = "engineering=4;phorontech=3"
+	origin_tech = list(TECH_ENGINERING = 4, TECH_PHORON = 3)
+	matter = list(DEFAULT_WALL_MATERIAL = 70, "glass" = 120)
 	var/last_gen = 0
 
 
@@ -444,8 +413,8 @@
 	throwforce = 7.0
 	item_state = "crowbar"
 	w_class = 2.0
-	matter = list("metal" = 50)
-	origin_tech = "engineering=1"
+	origin_tech = list(TECH_ENGINERING = 1)
+	matter = list(DEFAULT_WALL_MATERIAL = 50)
 	attack_verb = list("attacked", "bashed", "battered", "bludgeoned", "whacked")
 
 /obj/item/weapon/crowbar/red
@@ -453,29 +422,25 @@
 	icon_state = "red_crowbar"
 	item_state = "crowbar_red"
 
-/obj/item/weapon/weldingtool/attack(mob/M as mob, mob/user as mob)
+/obj/item/weapon/weldingtool/afterattack(var/mob/M, var/mob/user)
 
-	if(hasorgans(M))
-
-		var/datum/organ/external/S = M:organs_by_name[user.zone_sel.selecting]
+	if(ishuman(M))
+		var/mob/living/carbon/human/H = M
+		var/obj/item/organ/external/S = H.organs_by_name[user.zone_sel.selecting]
 
 		if (!S) return
-		if(!(S.status & ORGAN_ROBOT) || user.a_intent != "help")
+		if(!(S.status & ORGAN_ROBOT) || user.a_intent != I_HELP)
 			return ..()
 
-		if(istype(M,/mob/living/carbon/human))
-			var/mob/living/carbon/human/H = M
-			if(H.species.flags & IS_SYNTHETIC)
-				if(M == user)
-					user << "\red You can't repair damage to your own body - it's against OH&S."
-					return
-
 		if(S.brute_dam)
-			S.heal_damage(15,0,0,1)
-			user.visible_message("\red \The [user] patches some dents on \the [M]'s [S.display_name] with \the [src].")
-			return
-		else
-			user << "Nothing to fix!"
+			if(S.brute_dam < ROBOLIMB_SELF_REPAIR_CAP)
+				S.heal_damage(15,0,0,1)
+				user.visible_message("<span class='notice'>\The [user] patches some dents on \the [M]'s [S.name] with \the [src].</span>")
+			else if(S.open != 2)
+				user << "<span class='danger'>The damage is far too severe to patch over externally.</span>"
+			return 1
+		else if(S.open != 2)
+			user << "<span class='notice'>Nothing to fix!</span>"
 
 	else
 		return ..()
@@ -491,9 +456,9 @@
 		/obj/item/weapon/screwdriver,
 		/obj/item/weapon/wrench,
 		/obj/item/weapon/wirecutters,
-		/obj/item/weapon/kitchen/utensil/knife,
-		/obj/item/weapon/kitchen/utensil/fork,
-		/obj/item/weapon/hatchet
+		/obj/item/weapon/material/kitchen/utensil/knife,
+		/obj/item/weapon/material/kitchen/utensil/fork,
+		/obj/item/weapon/material/hatchet
 		)
 	var/list/tools = list()
 	var/current_tool = 1

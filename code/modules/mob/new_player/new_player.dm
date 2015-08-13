@@ -80,7 +80,7 @@
 					stat("Game Mode:", "[master_mode]") // Old setting for showing the game mode
 
 			if(ticker.current_state == GAME_STATE_PREGAME)
-				stat("Time To Start:", "[ticker.pregame_timeleft][going ? "" : " (DELAYED)"]")
+				stat("Time To Start:", "[ticker.pregame_timeleft][round_progressing ? "" : " (DELAYED)"]")
 				stat("Players: [totalPlayers]", "Players Ready: [totalPlayersReady]")
 				totalPlayers = 0
 				totalPlayersReady = 0
@@ -119,8 +119,11 @@
 				observer.started_as_observer = 1
 				close_spawn_windows()
 				var/obj/O = locate("landmark*Observer-Start")
-				src << "\blue Now teleporting."
-				observer.loc = O.loc
+				if(istype(O))
+					src << "<span class='notice'>Now teleporting.</span>"
+					observer.loc = O.loc
+				else
+					src << "<span class='danger'>Could not locate an observer spawn point. Use the Teleport verb to jump to the station map.</span>"
 				observer.timeofdeath = world.time // Set the time of death so that the respawn timer works correctly.
 
 				announce_ghost_joinleave(src)
@@ -135,7 +138,7 @@
 				if(!client.holder && !config.antag_hud_allowed)           // For new ghosts we remove the verb from even showing up if it's not allowed.
 					observer.verbs -= /mob/dead/observer/verb/toggle_antagHUD        // Poor guys, don't know what they are missing!
 				observer.key = key
-				del(src)
+				qdel(src)
 
 				return 1
 
@@ -311,7 +314,7 @@
 		var/mob/living/character = create_character()	//creates the human and transfers vars and mind
 		character = job_master.EquipRank(character, rank, 1)					//equips the human
 		UpdateFactionList(character)
-		EquipCustomItems(character)
+		equip_custom_items(character)
 
 		// AIs don't need a spawnpoint, they must spawn at an empty core
 		if(character.mind.assigned_role == "AI")
@@ -327,8 +330,8 @@
 			AnnounceCyborg(character, rank, "has been downloaded to the empty core in \the [character.loc.loc]")
 			ticker.mode.latespawn(character)
 
-			del(C)
-			del(src)
+			qdel(C)
+			qdel(src)
 			return
 
 		//Find our spawning point.
@@ -358,8 +361,6 @@
 
 		ticker.mode.latespawn(character)
 
-		//ticker.mode.latespawn(character)
-
 		if(character.mind.assigned_role != "Cyborg")
 			data_core.manifest_inject(character)
 			ticker.minds += character.mind//Cyborgs and AIs handle this in the transform proc.	//TODO!!!!! ~Carn
@@ -370,7 +371,7 @@
 		else
 			AnnounceCyborg(character, rank, join_message)
 
-		del(src)
+		qdel(src)
 
 	proc/AnnounceArrival(var/mob/living/carbon/human/character, var/rank, var/join_message)
 		if (ticker.current_state == GAME_STATE_PLAYING)
@@ -438,12 +439,12 @@
 
 		new_character.lastarea = get_area(loc)
 
-		var/datum/language/chosen_language
-		if(client.prefs.language)
-			chosen_language = all_languages["[client.prefs.language]"]
-		if(chosen_language)
-			if(is_alien_whitelisted(src, client.prefs.language) || !config.usealienwhitelist || !(chosen_language.flags & WHITELISTED) || (new_character.species && (chosen_language.name in new_character.species.secondary_langs)))
-				new_character.add_language("[client.prefs.language]")
+		for(var/lang in client.prefs.alternate_languages)
+			var/datum/language/chosen_language = all_languages[lang]
+			if(chosen_language)
+				if(!config.usealienwhitelist || !(chosen_language.flags & WHITELISTED) || is_alien_whitelisted(src, lang) || has_admin_rights() \
+					|| (new_character.species && (chosen_language.name in new_character.species.secondary_langs)))
+					new_character.add_language(lang)
 
 		if(ticker.random_players)
 			new_character.gender = pick(MALE, FEMALE)
@@ -465,7 +466,7 @@
 		new_character.name = real_name
 		new_character.dna.ready_dna(new_character)
 		new_character.dna.b_type = client.prefs.b_type
-
+		new_character.sync_organ_dna()
 		if(client.prefs.disabilities)
 			// Set defer to 1 if you add more crap here so it only recalculates struc_enzymes once. - N3X
 			new_character.dna.SetSEState(GLASSESBLOCK,1,0)
@@ -475,6 +476,8 @@
 		//new_character.dna.UpdateSE()
 
 		// Do the initial caching of the player's body icons.
+		new_character.force_update_limbs()
+		new_character.update_eyes()
 		new_character.regenerate_icons()
 
 		new_character.key = key		//Manually transfer the key to log them in

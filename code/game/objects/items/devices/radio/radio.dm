@@ -26,7 +26,7 @@
 	throw_range = 9
 	w_class = 2
 
-	matter = list("glass" = 25,"metal" = 75)
+	matter = list("glass" = 25,DEFAULT_WALL_MATERIAL = 75)
 	var/const/FREQ_LISTENING = 1
 
 
@@ -42,8 +42,15 @@
 /obj/item/device/radio/New()
 	..()
 	wires = new(src)
+
+/obj/item/device/radio/Destroy()
+	qdel(wires)
+	wires = null
 	if(radio_controller)
-		initialize()
+		radio_controller.remove_object(src, frequency)
+		for (var/ch_name in channels)
+			radio_controller.remove_object(src, radiochannels[ch_name])
+	..()
 
 
 /obj/item/device/radio/initialize()
@@ -149,6 +156,9 @@
 			else
 				channels[chan_name] |= FREQ_LISTENING
 
+	if(href_list["nowindow"]) // here for pAIs, maybe others will want it, idk
+		return
+
 	interact(usr)
 
 /obj/item/device/radio/proc/autosay(var/message, var/from, var/channel) //BS12 EDIT
@@ -172,7 +182,7 @@
 						0, "*garbled automated announcement*", src,
 						message, from, "Automated Announcement", from, "synthesized voice",
 						4, 0, list(0), connection.frequency, "states")
-	del(A)
+	qdel(A)
 	return
 
 // Interprets the message mode when talking into a radio, possibly returning a connection datum
@@ -202,7 +212,10 @@
 	if(wires.IsIndexCut(WIRE_TRANSMIT)) // The device has to have all its wires and shit intact
 		return 0
 
-	M.last_target_click = world.time
+	M.last_target_radio = world.time // For the projectile targeting system
+
+	if(!radio_connection)
+		set_frequency(frequency)
 
 	/* Quick introduction:
 		This new radio system uses a very robust FTL signaling technology unoriginally
@@ -446,16 +459,16 @@
 
 	var/range = receive_range(freq, level)
 	if(range > -1)
-		return get_mobs_in_view(canhear_range, src)
+		return get_mobs_or_objects_in_view(canhear_range, src)
 
 
 /obj/item/device/radio/examine(mob/user)
 	. = ..()
 	if ((in_range(src, user) || loc == user))
 		if (b_stat)
-			user.show_message("\blue \the [src] can be attached and modified!")
+			user.show_message("<span class='notice'>\The [src] can be attached and modified!</span>")
 		else
-			user.show_message("\blue \the [src] can not be modified or attached!")
+			user.show_message("<span class='notice'>\The [src] can not be modified or attached!</span>")
 	return
 
 /obj/item/device/radio/attackby(obj/item/weapon/W as obj, mob/user as mob)
@@ -466,9 +479,9 @@
 	b_stat = !( b_stat )
 	if(!istype(src, /obj/item/device/radio/beacon))
 		if (b_stat)
-			user.show_message("\blue The radio can now be attached and modified!")
+			user.show_message("<span class='notice'>\The [src] can now be attached and modified!</span>")
 		else
-			user.show_message("\blue The radio can no longer be modified or attached!")
+			user.show_message("<span class='notice'>\The [src] can no longer be modified or attached!</span>")
 		updateDialog()
 			//Foreach goto(83)
 		add_fingerprint(user)
@@ -565,7 +578,6 @@
 		if(keyslot.syndie)
 			src.syndie = 1
 
-
 	for (var/ch_name in src.channels)
 		if(!radio_controller)
 			sleep(30) // Waiting for the radio_controller to be created.
@@ -624,7 +636,6 @@
 	user << browse(dat, "window=radio")
 	onclose(user, "radio")
 	return
-
 
 /obj/item/device/radio/proc/config(op)
 	if(radio_controller)

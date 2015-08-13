@@ -18,7 +18,7 @@
 	powernets += src
 	..()
 
-/datum/powernet/Del()
+/datum/powernet/Destroy()
 	powernets -= src
 	..()
 
@@ -42,7 +42,7 @@
 	cables -= C
 	C.powernet = null
 	if(is_empty())//the powernet is now empty...
-		del(src)///... delete it - qdel
+		qdel(src)///... delete it
 
 //add a cable to the current powernet
 //Warning : this proc DON'T check if the cable exists
@@ -62,7 +62,7 @@
 	nodes -=M
 	M.powernet = null
 	if(is_empty())//the powernet is now empty...
-		del(src)///... delete it - qdel
+		qdel(src)///... delete it - qdel
 
 
 //add a power machine to the current powernet
@@ -149,8 +149,6 @@
 			return C
 	return null
 
+
 /area/proc/get_apc()
-	for(var/area/RA in src.related)
-		var/obj/machinery/power/apc/FINDME = locate() in RA
-		if (FINDME)
-			return FINDME
+	return apc

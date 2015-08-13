@@ -18,9 +18,9 @@
 	melee_damage_lower = 15
 	melee_damage_upper = 15
 	attacktext = "punched"
-	a_intent = "harm"
+	a_intent = I_HURT
 	var/corpse = /obj/effect/landmark/mobcorpse/russian
-	var/weapon1 = /obj/item/weapon/kitchenknife
+	var/weapon1 = /obj/item/weapon/material/knife
 	min_oxy = 5
 	max_oxy = 0
 	min_tox = 0
@@ -51,5 +51,5 @@
 		new corpse (src.loc)
 	if(weapon1)
 		new weapon1 (src.loc)
-	del src
+	qdel(src)
 	return

@@ -39,6 +39,22 @@
 	field = new/list()
 	..()
 
+/obj/machinery/shield_gen/Destroy()
+	for(var/obj/effect/energy_field/D in field)
+		field.Remove(D)
+		D.loc = null
+	..()
+	
+/obj/machinery/shield_gen/emag_act(var/remaining_charges, var/mob/user)
+	if(prob(75))
+		src.locked = !src.locked
+		user << "Controls are now [src.locked ? "locked." : "unlocked."]"
+		. = 1
+		updateDialog()
+	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+	s.set_up(5, 1, src)
+	s.start()
+
 /obj/machinery/shield_gen/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/weapon/card/id))
 		var/obj/item/weapon/card/id/C = W
@@ -48,15 +64,6 @@
 			updateDialog()
 		else
 			user << "\red Access denied."
-	else if(istype(W, /obj/item/weapon/card/emag))
-		if(prob(75))
-			src.locked = !src.locked
-			user << "Controls are now [src.locked ? "locked." : "unlocked."]"
-			updateDialog()
-		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
-		s.set_up(5, 1, src)
-		s.start()
-
 	else if(istype(W, /obj/item/weapon/wrench))
 		src.anchored = !src.anchored
 		src.visible_message("\blue \icon[src] [src] has been [anchored?"bolted to the floor":"unbolted from the floor"] by [user].")
@@ -208,7 +215,7 @@
 		for(var/turf/O in covered_turfs)
 			var/obj/effect/energy_field/E = new(O)
 			field.Add(E)
-		del covered_turfs
+		covered_turfs = null
 
 		for(var/mob/M in view(5,src))
 			M << "\icon[src] You hear heavy droning start up."

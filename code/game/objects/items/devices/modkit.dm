@@ -24,7 +24,7 @@
 	if(!parts)
 		user << "<span class='warning'>This kit has no parts for this modification left.</span>"
 		user.drop_from_inventory(src)
-		del(src)
+		qdel(src)
 		return
 
 	var/allowed = 0
@@ -49,7 +49,7 @@
 
 	playsound(user.loc, 'sound/items/Screwdriver.ogg', 100, 1)
 
-	user.visible_message("\red [user] opens \the [src] and modifies \the [O].","\red You open \the [src] and modify \the [O].")
+	user.visible_message("<span class='notice'>\The [user] opens \the [src] and modifies \the [O].</span>","<span class='notice'>You open \the [src] and modify \the [O].</span>")
 
 	I.refit_for_species(target_species)
 
@@ -60,7 +60,7 @@
 
 	if(!parts)
 		user.drop_from_inventory(src)
-		del(src)
+		qdel(src)
 
 /obj/item/device/modkit/examine(mob/user)
 	..(user)

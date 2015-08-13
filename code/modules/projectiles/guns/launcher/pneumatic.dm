@@ -12,9 +12,9 @@
 
 	var/fire_pressure                                   // Used in fire checks/pressure checks.
 	var/max_w_class = 3                                 // Hopper intake size.
-	var/max_combined_w_class = 20                       // Total internal storage size.
+	var/max_storage_space = 20                       // Total internal storage size.
 	var/obj/item/weapon/tank/tank = null                // Tank of gas for use in firing the cannon.
-	
+
 	var/obj/item/weapon/storage/item_storage
 	var/pressure_setting = 10                           // Percentage of the gas in the tank used to fire the projectile.
 	var/possible_pressure_amounts = list(5,10,20,25,50) // Possible pressure settings.
@@ -26,7 +26,7 @@
 	item_storage = new(src)
 	item_storage.name = "hopper"
 	item_storage.max_w_class = max_w_class
-	item_storage.max_combined_w_class = max_combined_w_class
+	item_storage.max_storage_space = max_storage_space
 	item_storage.use_sound = null
 
 /obj/item/weapon/gun/launcher/pneumatic/verb/set_pressure() //set amount of tank pressure.
@@ -42,7 +42,7 @@
 	if(!tank)
 		user << "There's no tank in [src]."
 		return
-	
+
 	user << "You twist the valve and pop the tank out of [src]."
 	user.put_in_hands(tank)
 	tank = null
@@ -82,13 +82,13 @@
 		user << "There is no gas tank in [src]!"
 		return null
 
-	var/environment_pressure = 10 
+	var/environment_pressure = 10
 	var/turf/T = get_turf(src)
 	if(T)
 		var/datum/gas_mixture/environment = T.return_air()
 		if(environment)
 			environment_pressure = environment.return_pressure()
-	
+
 	fire_pressure = (tank.air_contents.return_pressure() - environment_pressure)*pressure_setting/100
 	if(fire_pressure < 10)
 		user << "There isn't enough gas in the tank to fire [src]."
@@ -118,7 +118,7 @@
 	if(tank)
 		var/lost_gas_amount = tank.air_contents.total_moles*(pressure_setting/100)
 		var/datum/gas_mixture/removed = tank.air_contents.remove(lost_gas_amount)
-		
+
 		var/turf/T = get_turf(src.loc)
 		if(T) T.assume_air(removed)
 	..()
@@ -162,14 +162,14 @@
 	if(istype(W,/obj/item/pipe))
 		if(buildstate == 0)
 			user.drop_from_inventory(W)
-			del(W)
+			qdel(W)
 			user << "<span class='notice'>You secure the piping inside the frame.</span>"
 			buildstate++
 			update_icon()
 			return
-	else if(istype(W,/obj/item/stack/sheet/metal))
+	else if(istype(W,/obj/item/stack/material) && W.get_material_name() == DEFAULT_WALL_MATERIAL)
 		if(buildstate == 2)
-			var/obj/item/stack/sheet/metal/M = W
+			var/obj/item/stack/material/M = W
 			if(M.use(5))
 				user << "<span class='notice'>You assemble a chassis around the cannon frame.</span>"
 				buildstate++
@@ -180,7 +180,7 @@
 	else if(istype(W,/obj/item/device/transfer_valve))
 		if(buildstate == 4)
 			user.drop_from_inventory(W)
-			del(W)
+			qdel(W)
 			user << "<span class='notice'>You install the transfer valve and connect it to the piping.</span>"
 			buildstate++
 			update_icon()
@@ -209,7 +209,7 @@
 				playsound(src.loc, 'sound/items/Welder2.ogg', 100, 1)
 				user << "<span class='notice'>You weld the valve into place.</span>"
 				new /obj/item/weapon/gun/launcher/pneumatic(get_turf(src))
-				del(src)
+				qdel(src)
 		return
 	else
 		..()

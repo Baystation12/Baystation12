@@ -131,7 +131,7 @@
 			usr.drop_item()
 			I.loc = src
 			auth_card = I
-			if(attempt_unlock(I))
+			if(attempt_unlock(I, usr))
 				usr << "<span class='info'>You insert [I], the console flashes \'<i>Access granted.</a>\'</span>"
 			else
 				usr << "<span class='warning'>You insert [I], the console flashes \'<i>Access denied.</a>\'</span>"
@@ -159,7 +159,7 @@
 	else if(cell)
 		cell.loc = loc
 		cell.add_fingerprint(user)
-		cell.updateicon()
+		cell.update_icon()
 
 		icon_state = "suspension0"
 		cell = null
@@ -215,24 +215,26 @@
 	else if(istype(W, /obj/item/weapon/card))
 		var/obj/item/weapon/card/I = W
 		if(!auth_card)
-			if(attempt_unlock(I))
+			if(attempt_unlock(I, user))
 				user << "<span class='info'>You swipe [I], the console flashes \'<i>Access granted.</i>\'</span>"
 			else
 				user << "<span class='warning'>You swipe [I], console flashes \'<i>Access denied.</i>\'</span>"
 		else
 			user << "<span class='warning'>Remove [auth_card] first.</span>"
 
-/obj/machinery/suspension_gen/proc/attempt_unlock(var/obj/item/weapon/card/C)
+/obj/machinery/suspension_gen/proc/attempt_unlock(var/obj/item/weapon/card/C, var/mob/user)
 	if(!open)
-		if(istype(C, /obj/item/weapon/card/emag) && cell.charge > 0)
-			//put sparks here
-			if(prob(95))
-				locked = 0
+		if(istype(C, /obj/item/weapon/card/emag))
+			C.resolve_attackby(src, user)
 		else if(istype(C, /obj/item/weapon/card/id) && check_access(C))
 			locked = 0
-
 		if(!locked)
 			return 1
+
+/obj/machinery/suspension_gen/emag_act(var/remaining_charges, var/mob/user)
+	if(cell.charge > 0 && locked)
+		locked = 0
+		return 1
 
 //checks for whether the machine can be activated or not should already have occurred by this point
 /obj/machinery/suspension_gen/proc/activate()
@@ -306,10 +308,10 @@
 		M.weakened = min(M.weakened, 3)
 
 	src.visible_message("\blue \icon[src] [src] deactivates with a gentle shudder.")
-	del(suspension_field)
+	qdel(suspension_field)
 	icon_state = "suspension2"
 
-/obj/machinery/suspension_gen/Del()
+/obj/machinery/suspension_gen/Destroy()
 	//safety checks: clear the field and drop anything it's holding
 	deactivate()
 	..()
@@ -341,7 +343,7 @@
 	density = 1
 	var/field_type = "chlorine"
 
-/obj/effect/suspension_field/Del()
+/obj/effect/suspension_field/Destroy()
 	for(var/obj/I in src)
 		I.loc = src.loc
 	..()

@@ -56,6 +56,10 @@
 		if(src.Adjacent(C))
 			choices += C
 
+	if(!choices.len)
+		src << "There are no viable hosts within range..."
+		return
+
 	var/mob/living/carbon/M = input(src,"Who do you wish to infest?") in null|choices
 
 	if(!M || !src) return
@@ -69,7 +73,7 @@
 	if(istype(M,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = M
 
-		var/datum/organ/external/E = H.organs_by_name["head"]
+		var/obj/item/organ/external/E = H.organs_by_name["head"]
 		if(!E || (E.status & ORGAN_DESTROYED))
 			src << "\The [H] does not have a head!"
 
@@ -106,7 +110,7 @@
 		//Update their traitor status.
 		if(host.mind)
 			if(!host.mind.special_role)
-				ticker.mode.borers |= host.mind
+				borers.hosts |= host.mind
 				host.mind.special_role = "Borer Thrall"
 			host << "<span class='danger'>A creeping lassitude surrounds you. Your mind is being invaded by an alien intelligence and that's just fine.</span>"
 			host << "<span class = 'danger'>You are now a thrall to a cortical borer. Please listen to what they have to say; they're in your head.</span>"
@@ -115,12 +119,12 @@
 		if(istype(M,/mob/living/carbon/human))
 
 			var/mob/living/carbon/human/H = M
-			var/datum/organ/internal/I = H.internal_organs_by_name["brain"]
+			var/obj/item/organ/I = H.internal_organs_by_name["brain"]
 			if(!I) // No brain organ, so the borer moves in and replaces it permanently.
 				replace_brain()
 			else
 				// If they're in normally, implant removal can get them out.
-				var/datum/organ/external/head = H.get_organ("head")
+				var/obj/item/organ/external/head = H.get_organ("head")
 				head.implants += src
 
 		return
@@ -183,11 +187,11 @@
 
 	H.ChangeToHusk()
 
-	var/datum/organ/internal/borer/B = new(H)
+	var/obj/item/organ/borer/B = new(H)
 	H.internal_organs_by_name["brain"] = B
 	H.internal_organs |= B
 
-	var/datum/organ/external/affecting = H.get_organ("head")
+	var/obj/item/organ/external/affecting = H.get_organ("head")
 	affecting.implants -= src
 
 	var/s2h_id = src.computer_id
@@ -304,7 +308,7 @@
 			host.computer_id = null
 			host.lastKnownIP = null
 
-			del(host_brain)
+			qdel(host_brain)
 			host_brain = new(src)
 
 			host_brain.ckey = host.ckey

@@ -11,7 +11,7 @@
 
 /mob/living/carbon/human/proc/gain_plasma(var/amount)
 
-	var/datum/organ/internal/xenos/plasmavessel/I = internal_organs_by_name["plasma vessel"]
+	var/obj/item/organ/xenos/plasmavessel/I = internal_organs_by_name["plasma vessel"]
 	if(!istype(I)) return
 
 	if(amount)
@@ -20,13 +20,13 @@
 
 /mob/living/carbon/human/proc/check_alien_ability(var/cost,var/needs_foundation,var/needs_organ)
 
-	var/datum/organ/internal/xenos/plasmavessel/P = internal_organs_by_name["plasma vessel"]
+	var/obj/item/organ/xenos/plasmavessel/P = internal_organs_by_name["plasma vessel"]
 	if(!istype(P))
 		src << "<span class='danger'>Your plasma vessel has been removed!</span>"
 		return
 
 	if(needs_organ)
-		var/datum/organ/internal/I = internal_organs_by_name[needs_organ]
+		var/obj/item/organ/I = internal_organs_by_name[needs_organ]
 		if(!I)
 			src << "<span class='danger'>Your [needs_organ] has been removed!</span>"
 			return
@@ -62,7 +62,7 @@
 		src << "<span class='alium'>You need to be closer.</span>"
 		return
 
-	var/datum/organ/internal/xenos/plasmavessel/I = M.internal_organs_by_name["plasma vessel"]
+	var/obj/item/organ/xenos/plasmavessel/I = M.internal_organs_by_name["plasma vessel"]
 	if(!istype(I))
 		src << "<span class='alium'>Their plasma vessel is missing.</span>"
 		return
@@ -134,13 +134,20 @@
 		return
 
 	// OBJ CHECK
+	var/cannot_melt
 	if(isobj(O))
 		var/obj/I = O
-		if(I.unacidable)	//So the aliens don't destroy energy fields/singularies/other aliens/etc with their acid.
-			src << "<span class='alium'>You cannot dissolve this object.</span>"
-			return
-	// TURF CHECK
-	else if(istype(O, /turf/simulated/wall/r_wall) || istype(O, /turf/simulated/floor/engine))
+		if(I.unacidable)
+			cannot_melt = 1
+	else
+		if(istype(O, /turf/simulated/wall))
+			var/turf/simulated/wall/W = O
+			if(W.material.flags & MATERIAL_UNMELTABLE)
+				cannot_melt = 1
+		else if(istype(O, /turf/simulated/floor/engine))
+			cannot_melt = 1
+
+	if(cannot_melt)
 		src << "<span class='alium'>You cannot dissolve this object.</span>"
 		return
 
@@ -203,7 +210,7 @@
 	visible_message("<span class='warning'><B>[src] vomits up a thick purple substance and begins to shape it!</B></span>", "<span class='alium'>You shape a [choice].</span>")
 	switch(choice)
 		if("resin door")
-			new /obj/structure/mineral_door/resin(loc)
+			new /obj/structure/simple_door/resin(loc)
 		if("resin wall")
 			new /obj/effect/alien/resin/wall(loc)
 		if("resin membrane")

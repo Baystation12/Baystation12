@@ -59,13 +59,13 @@
 		if(src)//Do not add to this if() statement, otherwise the meteor won't delete them
 			if(A)
 
-				A.meteorhit(src)
+				A.ex_act(2)
 				playsound(src.loc, 'sound/effects/meteorimpact.ogg', 40, 1)
 
 				for(var/mob/M in range(10, src))
 					if(!M.stat && !istype(M, /mob/living/silicon/ai))\
 						shake_camera(M, 3, 1)
-				del(src)
+				qdel(src)
 				return 1
 		else
 			return 0
@@ -141,12 +141,21 @@
 /obj/item/projectile/icarus/pointdefense/process()
 	Icarus_FireLaser(get_turf(original))
 	spawn
-		del src
+		qdel(src)
 
 	return
 
 /obj/item/projectile/icarus/guns/process()
 	Icarus_FireCannon(get_turf(original))
 	spawn
-		del src
+		qdel(src)
 	return
+
+/obj/item/projectile/chameleon
+	name = "bullet"
+	icon_state = "bullet"
+	damage = 1 // stop trying to murderbone with a fake gun dumbass!!!
+	embed = 0 // nope
+	nodamage = 1
+	damage_type = HALLOSS
+	muzzle_type = /obj/effect/projectile/bullet/muzzle

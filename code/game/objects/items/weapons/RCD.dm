@@ -13,8 +13,8 @@
 	throw_speed = 1
 	throw_range = 5
 	w_class = 3.0
-	matter = list("metal" = 50000)
-	origin_tech = "engineering=4;materials=2"
+	origin_tech = list(TECH_ENGINERING = 4, TECH_MATERIAL = 2)
+	matter = list(DEFAULT_WALL_MATERIAL = 50000)
 	var/datum/effect/effect/system/spark_spread/spark_system
 	var/stored_matter = 0
 	var/working = 0
@@ -40,6 +40,11 @@
 	spark_system.set_up(5, 0, src)
 	spark_system.attach(src)
 
+/obj/item/weapon/rcd/Destroy()
+	qdel(spark_system)
+	spark_system = null
+	return ..()
+
 /obj/item/weapon/rcd/attackby(obj/item/weapon/W, mob/user)
 
 	if(istype(W, /obj/item/weapon/rcd_ammo))
@@ -47,7 +52,7 @@
 			user << "<span class='notice'>The RCD can't hold any more matter-units.</span>"
 			return
 		user.drop_from_inventory(W)
-		del(W)
+		qdel(W)
 		stored_matter += 10
 		playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
 		user << "<span class='notice'>The RCD now holds [stored_matter]/30 matter-units.</span>"
@@ -95,20 +100,21 @@
 		build_delay = 50
 		build_type = "airlock"
 		build_other = /obj/machinery/door/airlock
-	else if(!deconstruct && istype(T,/turf/space))
+	else if(!deconstruct && (istype(T,/turf/space) || istype(T,get_base_turf(T.z))))
 		build_cost =  1
 		build_type =  "floor"
 		build_turf =  /turf/simulated/floor/plating/airless
 	else if(deconstruct && istype(T,/turf/simulated/wall))
+		var/turf/simulated/wall/W = T
 		build_delay = deconstruct ? 50 : 40
 		build_cost =  5
-		build_type =  (!canRwall && istype(T,/turf/simulated/wall/r_wall)) ? null : "wall"
+		build_type =  (!canRwall && W.reinf_material) ? null : "wall"
 		build_turf =  /turf/simulated/floor
 	else if(istype(T,/turf/simulated/floor))
 		build_delay = deconstruct ? 50 : 20
 		build_cost =  deconstruct ? 10 : 3
 		build_type =  deconstruct ? "floor" : "wall"
-		build_turf =  deconstruct ? /turf/space : /turf/simulated/wall
+		build_turf =  deconstruct ? get_base_turf(T.z) : /turf/simulated/wall
 	else
 		return 0
 
@@ -138,7 +144,7 @@
 	else if(build_other)
 		new build_other(T)
 	else
-		del(T)
+		qdel(T)
 
 	playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 	return 1
@@ -149,11 +155,9 @@
 	icon = 'icons/obj/ammo.dmi'
 	icon_state = "rcd"
 	item_state = "rcdammo"
-	opacity = 0
-	density = 0
-	anchored = 0.0
-	origin_tech = "materials=2"
-	matter = list("metal" = 30000,"glass" = 15000)
+	w_class = 2
+	origin_tech = list(TECH_MATERIAL = 2)
+	matter = list(DEFAULT_WALL_MATERIAL = 30000,"glass" = 15000)
 
 /obj/item/weapon/rcd/borg
 	canRwall = 1
@@ -176,7 +180,7 @@
 
 
 /obj/item/weapon/rcd/mounted/useResource(var/amount, var/mob/user)
-	var/cost = amount*30
+	var/cost = amount*130 //so that a rig with default powercell can build ~2.5x the stuff a fully-loaded RCD can.
 	if(istype(loc,/obj/item/rig_module))
 		var/obj/item/rig_module/module = loc
 		if(module.holder && module.holder.cell)

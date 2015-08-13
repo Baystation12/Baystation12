@@ -25,7 +25,7 @@
 	if(!melee_can_hit || !istype(target, /atom)) return
 	if(istype(target, /mob/living))
 		var/mob/living/M = target
-		if(src.occupant.a_intent == "hurt")
+		if(src.occupant.a_intent == I_HURT)
 			playsound(src, 'sound/weapons/punch4.ogg', 50, 1)
 			if(damtype == "brute")
 				step_away(M,src,15)
@@ -41,7 +41,7 @@
 				var/mob/living/carbon/human/H = target
 	//			if (M.health <= 0) return
 
-				var/datum/organ/external/temp = H.get_organ(pick("chest", "chest", "chest", "head"))
+				var/obj/item/organ/external/temp = H.get_organ(pick("chest", "chest", "chest", "head"))
 				if(temp)
 					var/update = 0
 					switch(damtype)
@@ -99,7 +99,7 @@
 						target:attackby(src,src.occupant)
 					else if(prob(5))
 						target:dismantle_wall(1)
-						src.occupant_message("\blue You smash through the wall.")
+						src.occupant_message("<span class='notice'>You smash through the wall.</span>")
 						src.visible_message("<b>[src.name] smashes through the wall</b>")
 						playsound(src, 'sound/weapons/smash.ogg', 50, 1)
 					melee_can_hit = 0
@@ -243,15 +243,6 @@
 		return 1
 	else
 		return 0
-
-/obj/mecha/combat/mmi_moved_inside(var/obj/item/device/mmi/mmi_as_oc as obj,mob/user as mob)
-	if(..())
-		if(occupant.client)
-			occupant.client.mouse_pointer_icon = file("icons/mecha/mecha_mouse.dmi")
-		return 1
-	else
-		return 0
-
 
 /obj/mecha/combat/go_out()
 	if(src.occupant && src.occupant.client)

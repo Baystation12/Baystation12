@@ -14,6 +14,20 @@
 	var/datum/computer/file/embedded_program/docking/docking_controller_station
 	var/datum/computer/file/embedded_program/docking/docking_controller_offsite
 
+/datum/shuttle/ferry/multidock/init_docking_controllers()
+	if(docking_controller_tag_station)
+		docking_controller_station = locate(docking_controller_tag_station)
+		if(!istype(docking_controller_station))
+			world << "<span class='danger'>warning: shuttle with docking tag [docking_controller_station] could not find it's controller!</span>"
+	if(docking_controller_tag_offsite)
+		docking_controller_offsite = locate(docking_controller_tag_offsite)
+		if(!istype(docking_controller_offsite))
+			world << "<span class='danger'>warning: shuttle with docking tag [docking_controller_offsite] could not find it's controller!</span>"
+	if (!location)
+		docking_controller = docking_controller_station
+	else
+		docking_controller = docking_controller_offsite
+
 /datum/shuttle/ferry/multidock/move(var/area/origin,var/area/destination)
 	..(origin, destination)
 	if (!location)
@@ -64,23 +78,30 @@
 
 	sleep_until_launch()
 
+	if (location)
+		var/obj/machinery/light/small/readylight/light = locate() in get_location_area()
+		if(light) light.set_state(0)
+
 	//launch
 	radio_announce("ALERT: INITIATING LAUNCH SEQUENCE")
 	..(user)
 
 /datum/shuttle/ferry/multidock/specops/move(var/area/origin,var/area/destination)
 	..(origin, destination)
-	if (!location)	//just arrived home
-		for(var/turf/T in get_area_turfs(destination))
-			var/mob/M = locate(/mob) in T
-			M << "\red You have arrived at Central Command. Operation has ended!"
-	else	//just left for the station
-		launch_mauraders()
-		for(var/turf/T in get_area_turfs(destination))
-			var/mob/M = locate(/mob) in T
-			M << "\red You have arrived at [station_name]. Commence operation!"
-
-	reset_time = world.time + specops_return_delay	//set the timeout
+	
+	spawn(20)
+		if (!location)	//just arrived home
+			for(var/turf/T in get_area_turfs(destination))
+				var/mob/M = locate(/mob) in T
+				M << "\red You have arrived at Central Command. Operation has ended!"
+		else	//just left for the station
+			launch_mauraders()
+			for(var/turf/T in get_area_turfs(destination))
+				var/mob/M = locate(/mob) in T
+				M << "\red You have arrived at [station_name]. Commence operation!"
+				
+				var/obj/machinery/light/small/readylight/light = locate() in T
+				if(light) light.set_state(1)
 
 /datum/shuttle/ferry/multidock/specops/cancel_launch()
 	if (!can_cancel())
@@ -205,3 +226,17 @@
 						M.close()
 		special_ops.readyreset()//Reset firealarm after the team launched.
 	//End Marauder launchpad.
+
+/obj/machinery/light/small/readylight
+	brightness_range = 5
+	brightness_power = 1
+	brightness_color = "#DA0205"
+	var/state = 0
+
+/obj/machinery/light/small/readylight/proc/set_state(var/new_state)
+	state = new_state
+	if(state)
+		brightness_color = "00FF00"
+	else
+		brightness_color = initial(brightness_color)
+	update()

@@ -31,11 +31,11 @@
 		O.loc = src
 		update_icon()
 	else if(istype(O, /obj/item/weapon/pen))
-		var/newname = stripped_input(usr, "What would you like to title this bookshelf?")
+		var/newname = sanitizeSafe(input("What would you like to title this bookshelf?"), MAX_NAME_LEN)
 		if(!newname)
 			return
 		else
-			name = ("bookcase ([sanitize(newname)])")
+			name = ("bookcase ([newname])")
 	else
 		..()
 
@@ -56,20 +56,20 @@
 	switch(severity)
 		if(1.0)
 			for(var/obj/item/weapon/book/b in contents)
-				del(b)
-			del(src)
+				qdel(b)
+			qdel(src)
 			return
 		if(2.0)
 			for(var/obj/item/weapon/book/b in contents)
 				if (prob(50)) b.loc = (get_turf(src))
-				else del(b)
-			del(src)
+				else qdel(b)
+			qdel(src)
 			return
 		if(3.0)
 			if (prob(50))
 				for(var/obj/item/weapon/book/b in contents)
 					b.loc = (get_turf(src))
-				del(src)
+				qdel(src)
 			return
 		else
 	return
@@ -174,7 +174,7 @@
 		var/choice = input("What would you like to change?") in list("Title", "Contents", "Author", "Cancel")
 		switch(choice)
 			if("Title")
-				var/newtitle = reject_bad_text(stripped_input(usr, "Write a new title:"))
+				var/newtitle = reject_bad_text(sanitizeSafe(input("Write a new title:")))
 				if(!newtitle)
 					usr << "The title is invalid."
 					return
@@ -182,14 +182,14 @@
 					src.name = newtitle
 					src.title = newtitle
 			if("Contents")
-				var/content = strip_html(input(usr, "Write your book's contents (HTML NOT allowed):"),8192) as message|null
+				var/content = sanitize(input("Write your book's contents (HTML NOT allowed):") as message|null, MAX_BOOK_MESSAGE_LEN)
 				if(!content)
 					usr << "The content is invalid."
 					return
 				else
 					src.dat += content
 			if("Author")
-				var/newauthor = stripped_input(usr, "Write the author's name:")
+				var/newauthor = sanitize(input(usr, "Write the author's name:"))
 				if(!newauthor)
 					usr << "The name is invalid."
 					return
@@ -226,7 +226,7 @@
 							return
 					scanner.computer.inventory.Add(src)
 					user << "[W]'s screen flashes: 'Book stored in buffer. Title added to general inventory.'"
-	else if(istype(W, /obj/item/weapon/kitchenknife) || istype(W, /obj/item/weapon/wirecutters))
+	else if(istype(W, /obj/item/weapon/material/knife) || istype(W, /obj/item/weapon/wirecutters))
 		if(carved)	return
 		user << "<span class='notice'>You begin to carve out [title].</span>"
 		if(do_after(user, 30))

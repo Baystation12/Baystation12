@@ -10,7 +10,7 @@
 	edge = 0
 	throwforce = 7
 	w_class = 3
-	origin_tech = "combat=2"
+	origin_tech = list(TECH_COMBAT = 2)
 	attack_verb = list("beaten")
 	var/stunforce = 0
 	var/agonyforce = 60
@@ -19,7 +19,7 @@
 	var/hitcost = 1000	//oh god why do power cells carry so much charge? We probably need to make a distinction between "industrial" sized power cells for APCs and power cells for everything else.
 
 /obj/item/weapon/melee/baton/suicide_act(mob/user)
-	user.visible_message("<span class='suicide'>[user] is putting the live [name] in \his mouth! It looks like \he's trying to commit suicide.</span>")
+	user.visible_message("<span class='suicide'>\The [user] is putting the live [name] in \his mouth! It looks like \he's trying to commit suicide.</span>")
 	return (FIRELOSS)
 
 /obj/item/weapon/melee/baton/New()
@@ -54,7 +54,7 @@
 /obj/item/weapon/melee/baton/examine(mob/user)
 	if(!..(user, 1))
 		return
-	
+
 	if(bcell)
 		user <<"<span class='notice'>The baton is [round(bcell.percent())]% charged.</span>"
 	if(!bcell)
@@ -73,7 +73,7 @@
 
 	else if(istype(W, /obj/item/weapon/screwdriver))
 		if(bcell)
-			bcell.updateicon()
+			bcell.update_icon()
 			bcell.loc = get_turf(src.loc)
 			bcell = null
 			user << "<span class='notice'>You remove the cell from the [src].</span>"
@@ -100,7 +100,7 @@
 
 /obj/item/weapon/melee/baton/attack(mob/M, mob/user)
 	if(status && (CLUMSY in user.mutations) && prob(50))
-		user << "span class='danger'>You accidentally hit yourself with the [src]!</span>"
+		user << "<span class='danger'>You accidentally hit yourself with the [src]!</span>"
 		user.Weaken(30)
 		deductcharge(hitcost)
 		return
@@ -114,7 +114,7 @@
 	var/mob/living/L = M
 
 	var/target_zone = check_zone(user.zone_sel.selecting)
-	if(user.a_intent == "hurt")
+	if(user.a_intent == I_HURT)
 		if (!..())	//item/attack() does it's own messaging and logs
 			return 0	// item/attack() will return 1 if they hit, 0 if they missed.
 		agony *= 0.5	//whacking someone causes a much poorer contact than prodding them.
@@ -130,17 +130,17 @@
 				target_zone = get_zone_with_miss_chance(user.zone_sel.selecting, L)
 
 			if(!target_zone)
-				L.visible_message("\red <B>[user] misses [L] with \the [src]!")
+				L.visible_message("<span class='danger'>\The [user] misses [L] with \the [src]!</span>")
 				return 0
 
 			var/mob/living/carbon/human/H = L
-			var/datum/organ/external/affecting = H.get_organ(target_zone)
+			var/obj/item/organ/external/affecting = H.get_organ(target_zone)
 			if (affecting)
 				if(!status)
-					L.visible_message("<span class='warning'>[L] has been prodded in the [affecting.display_name] with [src] by [user]. Luckily it was off.</span>")
+					L.visible_message("<span class='warning'>[L] has been prodded in the [affecting.name] with [src] by [user]. Luckily it was off.</span>")
 					return 1
 				else
-					H.visible_message("<span class='danger'>[L] has been prodded in the [affecting.display_name] with [src] by [user]!</span>")
+					H.visible_message("<span class='danger'>[L] has been prodded in the [affecting.name] with [src] by [user]!</span>")
 		else
 			if(!status)
 				L.visible_message("<span class='warning'>[L] has been prodded with [src] by [user]. Luckily it was off.</span>")

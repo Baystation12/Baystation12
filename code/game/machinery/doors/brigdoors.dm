@@ -35,11 +35,11 @@
 	..()
 
 	spawn(20)
-		for(var/obj/machinery/door/window/brigdoor/M in world)
+		for(var/obj/machinery/door/window/brigdoor/M in machines)
 			if (M.id == src.id)
 				targets += M
 
-		for(var/obj/machinery/flasher/F in world)
+		for(var/obj/machinery/flasher/F in machines)
 			if(F.id == src.id)
 				targets += F
 

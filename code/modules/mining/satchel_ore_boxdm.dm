@@ -12,7 +12,7 @@
 
 /obj/structure/ore_box/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (istype(W, /obj/item/weapon/ore))
-		user.u_equip(W)
+		user.remove_from_mob(W)
 		src.contents += W
 	if (istype(W, /obj/item/weapon/storage))
 		var/obj/item/weapon/storage/S = W
@@ -97,5 +97,5 @@
 		for (var/obj/item/weapon/ore/O in contents)
 			O.loc = src.loc
 			O.ex_act(severity++)
-		del(src)
+		qdel(src)
 		return

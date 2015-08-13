@@ -2,7 +2,7 @@
 	name = "flashbang"
 	icon_state = "flashbang"
 	item_state = "flashbang"
-	origin_tech = "materials=2;combat=1"
+	origin_tech = list(TECH_MATERIAL = 2, TECH_COMBAT = 1)
 	var/banglet = 0
 
 	prime()
@@ -23,7 +23,7 @@
 
 		new/obj/effect/effect/sparks(src.loc)
 		new/obj/effect/effect/smoke/illumination(src.loc, brightness=15)
-		del(src)
+		qdel(src)
 		return
 
 	proc/bang(var/turf/T , var/mob/living/carbon/M)					// Added a new proc called 'bang' that takes a location and a person to be banged.
@@ -32,7 +32,7 @@
 				S.active = 0										// -- Polymorph
 				S.icon_state = "shield0"
 
-		M << "\red <B>BANG</B>"
+		M << "<span class='danger'>BANG</span>"
 		playsound(src.loc, 'sound/effects/bang.ogg', 50, 1, 5)
 
 //Checking for protections
@@ -84,21 +84,21 @@
 //This really should be in mob not every check
 		if(ishuman(M))
 			var/mob/living/carbon/human/H = M
-			var/datum/organ/internal/eyes/E = H.internal_organs_by_name["eyes"]
+			var/obj/item/organ/eyes/E = H.internal_organs_by_name["eyes"]
 			if (E && E.damage >= E.min_bruised_damage)
-				M << "\red Your eyes start to burn badly!"
+				M << "<span class='danger'>Your eyes start to burn badly!</span>"
 				if(!banglet && !(istype(src , /obj/item/weapon/grenade/flashbang/clusterbang)))
 					if (E.damage >= E.min_broken_damage)
-						M << "\red You can't see anything!"
+						M << "<span class='danger'>You can't see anything!</span>"
 		if (M.ear_damage >= 15)
-			M << "\red Your ears start to ring badly!"
+			M << "<span class='danger'>Your ears start to ring badly!</span>"
 			if(!banglet && !(istype(src , /obj/item/weapon/grenade/flashbang/clusterbang)))
 				if (prob(M.ear_damage - 10 + 5))
-					M << "\red You can't hear anything!"
+					M << "<span class='danger'>You can't hear anything!</span>"
 					M.sdisabilities |= DEAF
 		else
 			if (M.ear_damage >= 5)
-				M << "\red Your ears start to ring!"
+				M << "<span class='danger'>Your ears start to ring!</span>"
 		M.update_icons()
 
 /obj/item/weapon/grenade/flashbang/clusterbang//Created by Polymorph, fixed by Sieve
@@ -124,9 +124,8 @@
 		spawn(0)
 			new /obj/item/weapon/grenade/flashbang/clusterbang/segment(src.loc)//Creates a 'segment' that launches a few more flashbangs
 			playsound(src.loc, 'sound/weapons/armbomb.ogg', 75, 1, -3)
-	spawn(0)
-		del(src)
-		return
+	qdel(src)
+	return
 
 /obj/item/weapon/grenade/flashbang/clusterbang/segment
 	desc = "A smaller segment of a clusterbang. Better run."
@@ -156,9 +155,8 @@
 		spawn(0)
 			new /obj/item/weapon/grenade/flashbang/cluster(src.loc)
 			playsound(src.loc, 'sound/weapons/armbomb.ogg', 75, 1, -3)
-	spawn(0)
-		del(src)
-		return
+	qdel(src)
+	return
 
 /obj/item/weapon/grenade/flashbang/cluster/New()//Same concept as the segments, so that all of the parts don't become reliant on the clusterbang
 	spawn(0)
