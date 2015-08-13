@@ -389,9 +389,7 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
 			if(isnum(orderid))
 				var/nhref = "src=\ref[src];targetid=[orderid]"
 				spawn() src.Topic(nhref, params2list(nhref), src)
-	if(href_list["sort"])
-		if(href_list["sort"] != "author" && href_list["sort"] != "title" && href_list["sort"] != "category")
-			return
+	if(href_list["sort"] in list("author", "title", "category"))
 		sortby = href_list["sort"]
 	src.add_fingerprint(usr)
 	src.updateUsrDialog()

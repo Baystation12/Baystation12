@@ -1,0 +1,6 @@
+author: TheWelp
+delete-after: True
+changes: 
+  - rscadd: "Bookcases are now movable/buildable/destroyable."
+  - rscadd: "Paper can now be crumpled by using in-hand while on hurt intent."
+  - rscadd: "Library Computer External Archive is now sortable."
