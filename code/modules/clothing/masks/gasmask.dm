@@ -46,6 +46,8 @@
 /obj/item/clothing/mask/gas/swat/vox
 	name = "\improper alien mask"
 	desc = "Clearly not designed for a human face."
+	body_parts_covered = 0 //Hack to allow vox to eat while wearing this mask. 
+	species_restricted = list("Vox")
 
 /obj/item/clothing/mask/gas/syndicate
 	name = "tactical mask"
@@ -55,7 +57,7 @@
 
 /obj/item/clothing/mask/gas/clown_hat
 	name = "clown wig and mask"
-	desc = "A true prankster's facial attire. A clown is incomplete without his wig and mask."
+	desc = "A true prankster's facial attire. A clown is incomplete without their wig and mask."
 	icon_state = "clown"
 	item_state = "clown_hat"
 

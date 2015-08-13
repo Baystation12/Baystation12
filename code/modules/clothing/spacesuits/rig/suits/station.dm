@@ -145,8 +145,13 @@
 		/obj/item/rig_module/vision/meson
 		)
 
+	chest_type = /obj/item/clothing/suit/space/rig/ce
 	boot_type =  null
 	glove_type = null
+
+/obj/item/clothing/suit/space/rig/ce
+	heat_protection = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 
 /obj/item/weapon/rig/hazmat
 

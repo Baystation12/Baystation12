@@ -58,10 +58,10 @@
 	var/growth_threshold = 0
 	var/growth_type = 0
 	var/max_growth = 0
-	var/sampled
 	var/list/neighbors = list()
 	var/obj/effect/plant/parent
 	var/datum/seed/seed
+	var/sampled = 0
 	var/floor = 0
 	var/spread_chance = 40
 	var/spread_distance = 3
@@ -237,8 +237,14 @@
 	plant_controller.add_plant(src)
 
 	if(istype(W, /obj/item/weapon/wirecutters) || istype(W, /obj/item/weapon/scalpel))
+		if(sampled)
+			user << "<span class='warning'>\The [src] has already been sampled recently.</span>"
+			return
+		if(!is_mature())
+			user << "<span class='warning'>\The [src] is not mature enough to yield a sample yet.</span>"
+			return
 		if(!seed)
-			user << "<span class='danger'>There is nothing to take a sample from.</span>"
+			user << "<span class='warning'>There is nothing to take a sample from.</span>"
 			return
 		if(sampled)
 			user << "<span class='danger'>You cannot take another sample from \the [src].</span>"
@@ -246,7 +252,8 @@
 		if(prob(70))
 			sampled = 1
 		seed.harvest(user,0,1)
-		health -= (rand(3,5)*10)
+		health -= (rand(3,5)*5)
+		sampled = 1
 	else
 		..()
 		if(W.force)

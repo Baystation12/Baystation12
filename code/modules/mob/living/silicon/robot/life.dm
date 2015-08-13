@@ -65,9 +65,9 @@
 
 	if(src.camera && !scrambledcodes)
 		if(src.stat == 2 || wires.IsIndexCut(BORG_WIRE_CAMERA))
-			src.camera.status = 0
+			src.camera.set_status(0)
 		else
-			src.camera.status = 1
+			src.camera.set_status(1)
 
 	updatehealth()
 
@@ -173,7 +173,7 @@
 		src.see_invisible = SEE_INVISIBLE_LIVING // This is normal vision (25), setting it lower for normal vision means you don't "see" things like darkness since darkness
 							 // has a "invisible" value of 15
 
-	handle_regular_hud_updates()
+	..()
 
 	var/obj/item/borg/sight/hud/hud = (locate(/obj/item/borg/sight/hud) in src)
 	if(hud && hud.hud)
@@ -225,10 +225,12 @@
 	if (src.syndicate && src.client)
 		for(var/datum/mind/tra in traitors.current_antagonists)
 			if(tra.current)
+				// TODO: Update to new antagonist system.
 				var/I = image('icons/mob/mob.dmi', loc = tra.current, icon_state = "traitor")
 				src.client.images += I
 		src.disconnect_from_ai()
 		if(src.mind)
+			// TODO: Update to new antagonist system.
 			if(!src.mind.special_role)
 				src.mind.special_role = "traitor"
 				traitors.current_antagonists |= src.mind

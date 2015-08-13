@@ -166,12 +166,14 @@ var/global/list/additional_antag_types = list()
 	if(!(antag_templates && antag_templates.len))
 		return 1
 
-	// Attempt to mark folks down as ready to go. Don't finalize until post setup.
 	var/datum/antagonist/main_antags = antag_templates[1]
-	var/list/candidates = main_antags.get_candidates()
-	if(candidates.len >= required_enemies)
-		for(var/datum/antagonist/antag in antag_templates)
-			antag.attempt_spawn()
+	var/list/potential
+	if(main_antags.flags & ANTAG_OVERRIDE_JOB)
+		potential = main_antags.pending_antagonists
+	else
+		potential = main_antags.candidates
+
+	if(potential.len >= required_enemies)
 		return 1
 	return 0
 
@@ -184,6 +186,14 @@ var/global/list/additional_antag_types = list()
 		if(event_delay_mod_moderate)
 			var/datum/event_container/EMajor = event_manager.event_containers[EVENT_LEVEL_MAJOR]
 			EMajor.delay_modifier = event_delay_mod_major
+
+/datum/game_mode/proc/pre_setup()
+	for(var/datum/antagonist/antag in antag_templates)
+		antag.build_candidate_list() //compile a list of all eligible candidates
+
+		//antag roles that replace jobs need to be assigned before the job controller hands out jobs.
+		if(antag.flags & ANTAG_OVERRIDE_JOB)
+			antag.attempt_spawn() //select antags to be spawned
 
 ///post_setup()
 /datum/game_mode/proc/post_setup()
@@ -198,11 +208,13 @@ var/global/list/additional_antag_types = list()
 		spawn(rand(100,150))
 			announce_ert_disabled()
 
-	if(antag_templates && antag_templates.len)
-		for(var/datum/antagonist/antag in antag_templates)
-			antag.finalize_spawn()
-			if(antag.is_latejoin_template())
-				latejoin_templates |= antag
+	//Assign all antag types for this game mode. Any players spawned as antags earlier should have been removed from the pending list, so no need to worry about those.
+	for(var/datum/antagonist/antag in antag_templates)
+		if(!(antag.flags & ANTAG_OVERRIDE_JOB))
+			antag.attempt_spawn() //select antags to be spawned
+		antag.finalize_spawn() //actually spawn antags
+		if(antag.is_latejoin_template())
+			latejoin_templates |= antag
 
 	if(emergency_shuttle && auto_recall_shuttle)
 		emergency_shuttle.auto_recall = 1
@@ -212,6 +224,10 @@ var/global/list/additional_antag_types = list()
 		feedback_set_details("game_mode","[ticker.mode]")
 	feedback_set_details("server_ip","[world.internet_address]:[world.port]")
 	return 1
+
+/datum/game_mode/proc/fail_setup()
+	for(var/datum/antagonist/antag in antag_templates)
+		antag.reset()
 
 /datum/game_mode/proc/announce_ert_disabled()
 	if(!ert_disabled)
@@ -391,7 +407,7 @@ var/global/list/additional_antag_types = list()
 			suspects += man
 
 	for(var/mob/M in suspects)
-		if(M.mind.assigned_role == "MODE")
+		if(player_is_antag(M.mind, only_offstation_roles = 1))
 			continue
 		switch(rand(1, 100))
 			if(1 to 50)

@@ -85,6 +85,17 @@
 #define MIN_SUPPLIED_LAW_NUMBER 15
 #define MAX_SUPPLIED_LAW_NUMBER 50
 
+//default item on-mob icons
+#define INV_HEAD_DEF_ICON 'icons/mob/head.dmi'
+#define INV_BACK_DEF_ICON 'icons/mob/back.dmi'
+#define INV_L_HAND_DEF_ICON 'icons/mob/items/lefthand.dmi'
+#define INV_R_HAND_DEF_ICON 'icons/mob/items/righthand.dmi'
+#define INV_W_UNIFORM_DEF_ICON 'icons/mob/uniform.dmi'
+#define INV_ACCESSORIES_DEF_ICON 'icons/mob/ties.dmi'
+#define INV_SUIT_DEF_ICON 'icons/mob/ties.dmi'
+#define INV_SUIT_DEF_ICON 'icons/mob/suit.dmi'
+#define MAX_SUPPLIED_LAW_NUMBER 50
+
 // NT's alignment towards the character
 #define COMPANY_LOYAL 			"Loyal"
 #define COMPANY_SUPPORTATIVE	"Supportive"
