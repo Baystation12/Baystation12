@@ -1023,23 +1023,29 @@
 
 	return(visible_implants)
 
+/mob/living/carbon/human/embedded_needs_process()
+	for(var/obj/item/organ/external/organ in src.organs)
+		for(var/obj/item/O in organ.implants)
+			if(!istype(O, /obj/item/weapon/implant)) //implant type items do not cause embedding effects, see handle_embedded_objects()
+				return 1
+	return 0
+
 /mob/living/carbon/human/proc/handle_embedded_objects()
 
 	for(var/obj/item/organ/external/organ in src.organs)
 		if(organ.status & ORGAN_SPLINTED) //Splints prevent movement.
 			continue
-		for(var/obj/item/weapon/O in organ.implants)
+		for(var/obj/item/O in organ.implants)
 			if(!istype(O,/obj/item/weapon/implant) && prob(5)) //Moving with things stuck in you could be bad.
 				// All kinds of embedded objects cause bleeding.
-				var/msg = null
-				switch(rand(1,3))
-					if(1)
-						msg ="<span class='warning'>A spike of pain jolts your [organ.name] as you bump [O] inside.</span>"
-					if(2)
-						msg ="<span class='warning'>Your movement jostles [O] in your [organ.name] painfully.</span>"
-					if(3)
-						msg ="<span class='warning'>[O] in your [organ.name] twists painfully as you move.</span>"
-				src << msg
+				if(species.flags & NO_PAIN)
+					src << "<span class='warning'>You feel [O] moving inside your [organ.name].</span>"
+				else
+					var/msg = pick( \
+						"<span class='warning'>A spike of pain jolts your [organ.name] as you bump [O] inside.</span>", \
+						"<span class='warning'>Your movement jostles [O] in your [organ.name] painfully.</span>", \
+						"<span class='warning'>Your movement jostles [O] in your [organ.name] painfully.</span>")
+					src << msg
 
 				organ.take_damage(rand(1,3), 0, 0)
 				if(!(organ.status & ORGAN_ROBOT) && !(species.flags & NO_BLOOD)) //There is no blood in protheses.

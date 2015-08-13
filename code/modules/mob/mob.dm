@@ -872,6 +872,9 @@
 			visible_implants += O
 	return visible_implants
 
+/mob/proc/embedded_needs_process()
+	return (embedded.len > 0)
+
 mob/proc/yank_out_object()
 	set category = "Object"
 	set name = "Yank out object"
