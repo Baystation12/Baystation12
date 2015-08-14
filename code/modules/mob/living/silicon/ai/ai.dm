@@ -769,7 +769,7 @@ var/list/ai_verbs_default = list(
 	// Off-Station APCs should not count towards CPU generation.
 	for(var/obj/machinery/power/apc/A in hacked_apcs)
 		if(A.z in config.station_levels)
-			cpu_gain += 0.002
+			cpu_gain += 0.004
 			cpu_storage += 10
 
 	research.max_cpu = cpu_storage + override_CPUStorage
