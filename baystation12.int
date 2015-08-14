@@ -1,6 +1,11 @@
 // BEGIN_INTERNALS
 /*
-MAP_ICON_TYPE: 0
+LAST_COMPILE_TIME: 1439521929
+DIR: code code\game code\game\objects code\game\objects\items\devices code\modules code\modules\projectiles code\modules\projectiles\ammunition code\modules\projectiles\projectile maps 
 AUTO_FILE_DIR: OFF
+MAP_ICON_TYPE: 0
+LAST_COMPILE_VERSION: 508.1290
+WINDOW: code\game\objects\items\devices\uplink_items.dm;code\modules\projectiles\projectile\special.dm;code\modules\projectiles\projectile\bullets.dm;code\modules\projectiles\projectile\energy.dm
+FILE: code\modules\projectiles\projectile\bullets.dm
 */
 // END_INTERNALS

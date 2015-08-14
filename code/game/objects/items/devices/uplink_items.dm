@@ -143,7 +143,7 @@ datum/uplink_item/dd_SortValue()
 	path = /obj/item/weapon/storage/box/sniperammo
 
 /datum/uplink_item/item/ammo/a10mm
-	name = "12mm"
+	name = "10mm"
 	path = /obj/item/ammo_magazine/a10mm
 
 /datum/uplink_item/item/ammo/a762
