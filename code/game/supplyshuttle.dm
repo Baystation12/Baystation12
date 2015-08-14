@@ -197,7 +197,7 @@ var/list/mechtoys = list(
 
 					// Sell phoron and platinum
 					if(istype(A, /obj/item/stack))
-						var/obj/item/stack/P
+						var/obj/item/stack/P = A
 						switch(P.get_material_name())
 							if("phoron") phoron_count += P.get_amount()
 							if("platinum") plat_count += P.get_amount()
