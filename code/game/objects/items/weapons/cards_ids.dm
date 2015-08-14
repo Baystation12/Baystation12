@@ -138,7 +138,6 @@
 /obj/item/weapon/card/id/proc/set_owner_info(var/mob/living/carbon/human/H)
 	if(!H || !H.dna)
 		return
-
 	age 				= H.age
 	blood_type			= H.dna.b_type
 	dna_hash			= H.dna.unique_enzymes
@@ -195,72 +194,6 @@
 	icon_state = "gold"
 	item_state = "gold_id"
 
-/obj/item/weapon/card/id/syndicate
-	name = "agent card"
-	access = list(access_maint_tunnels, access_syndicate, access_external_airlocks)
-	origin_tech = list(TECH_ILLEGAL = 3)
-	var/registered_user=null
-
-/obj/item/weapon/card/id/syndicate/New(mob/user as mob)
-	..()
-	if(!isnull(user)) // Runtime prevention on laggy starts or where users log out because of lag at round start.
-		registered_name = ishuman(user) ? user.real_name : user.name
-	else
-		registered_name = "Agent Card"
-	assignment = "Agent"
-	name = "[registered_name]'s ID Card ([assignment])"
-
-/obj/item/weapon/card/id/syndicate/afterattack(var/obj/item/weapon/O as obj, mob/user as mob, proximity)
-	if(!proximity) return
-	if(istype(O, /obj/item/weapon/card/id))
-		var/obj/item/weapon/card/id/I = O
-		src.access |= I.access
-		if(istype(user, /mob/living) && user.mind)
-			if(user.mind.special_role)
-				usr << "<span class='notice'>The card's microscanners activate as you pass it over the ID, copying its access.</span>"
-
-/obj/item/weapon/card/id/syndicate/attack_self(mob/user as mob)
-	if(!src.registered_name)
-		var t = sanitizeName(input(user, "What name would you like to put on this card?", "Agent card name", ishuman(user) ? user.real_name : user.name), MAX_NAME_LEN)
-		if(!t) //Same as mob/new_player/prefrences.dm
-			alert("Invalid name.")
-			return
-		src.registered_name = t
-
-		var u = sanitize(input(user, "What occupation would you like to put on this card?\nNote: This will not grant any access levels other than Maintenance.", "Agent card job assignment", "Agent"), MAX_LNAME_LEN)
-		if(!u)
-			alert("Invalid assignment.")
-			src.registered_name = ""
-			return
-		src.assignment = u
-		src.name = "[src.registered_name]'s ID Card ([src.assignment])"
-		user << "<span class='notice'>You successfully forge the ID card.</span>"
-		registered_user = user
-	else if(!registered_user || registered_user == user)
-
-		if(!registered_user) registered_user = user  //
-
-		switch(alert("Would you like to display the ID, or retitle it?","Choose.","Rename","Show"))
-			if("Rename")
-				var t = sanitizeName(input(user, "What name would you like to put on this card?", "Agent card name", ishuman(user) ? user.real_name : user.name), 26)
-				if(!t)
-					alert("Invalid name.")
-					return
-				src.registered_name = t
-
-				var u = sanitize(input(user, "What occupation would you like to put on this card?\nNote: This will not grant any access levels other than Maintenance.", "Agent card job assignment", "Assistant"))
-				if(!u)
-					alert("Invalid assignment.")
-					return
-				src.assignment = u
-				src.name = "[src.registered_name]'s ID Card ([src.assignment])"
-				user << "<span class='notice'>You successfully forge the ID card.</span>"
-				return
-			if("Show")
-				..()
-	else
-		..()
-
 /obj/item/weapon/card/id/syndicate_command
 	name = "syndicate ID card"
 	desc = "An ID straight from the Syndicate."
@@ -295,4 +228,4 @@
 
 /obj/item/weapon/card/id/centcom/ERT/New()
 	..()
-	access += get_all_station_access()
+	access |= get_all_station_access()
