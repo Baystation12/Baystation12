@@ -313,7 +313,7 @@
 
 /obj/item/weapon/storage/box/anti_photons
 	name = "box of anti-photon grenades"
-	desc = "A box containing 5 experimental anti-photon grenades."
+	desc = "A box containing 5 experimental photon disruption grenades."
 	icon_state = "flashbang"
 
 /obj/item/weapon/storage/box/anti_photon/New()

@@ -155,15 +155,7 @@
 
 /datum/datacore/proc/manifest_inject(var/mob/living/carbon/human/H)
 	if(H.mind && !player_is_antag(H.mind, only_offstation_roles = 1))
-		var/assignment
-		if(H.mind.role_alt_title)
-			assignment = H.mind.role_alt_title
-		else if(H.mind.assigned_role)
-			assignment = H.mind.assigned_role
-		else if(H.job)
-			assignment = H.job
-		else
-			assignment = "Unassigned"
+		var/assignment = GetAssignment(H)
 
 		var/id = add_zero(num2hex(rand(1, 1.6777215E7)), 6)	//this was the best they could come up with? A large random number? *sigh*
 		//General Record
@@ -188,25 +180,11 @@
 		var/datum/data/record/M = CreateMedicalRecord(H.real_name, id)
 		M.fields["b_type"]		= H.b_type
 		M.fields["b_dna"]		= H.dna.unique_enzymes
-		M.fields["mi_dis"]		= "None"
-		M.fields["mi_dis_d"]	= "No minor disabilities have been declared."
-		M.fields["ma_dis"]		= "None"
-		M.fields["ma_dis_d"]	= "No major disabilities have been diagnosed."
-		M.fields["alg"]			= "None"
-		M.fields["alg_d"]		= "No allergies have been detected in this patient."
-		M.fields["cdi"]			= "None"
-		M.fields["cdi_d"]		= "No diseases have been diagnosed at the moment."
 		if(H.med_record && !jobban_isbanned(H, "Records"))
 			M.fields["notes"] = H.med_record
 
 		//Security Record
 		var/datum/data/record/S = CreateSecurityRecord(H.real_name, id)
-		S.fields["criminal"]	= "None"
-		S.fields["mi_crim"]		= "None"
-		S.fields["mi_crim_d"]	= "No minor crime convictions."
-		S.fields["ma_crim"]		= "None"
-		S.fields["ma_crim_d"]	= "No major crime convictions."
-		S.fields["notes"]		= "No notes."
 		if(H.sec_record && !jobban_isbanned(H, "Records"))
 			S.fields["notes"] = H.sec_record
 
@@ -235,7 +213,7 @@
 		locked += L
 	return
 
-proc/get_id_photo(var/mob/living/carbon/human/H)
+proc/get_id_photo(var/mob/living/carbon/human/H, var/assigned_role)
 	var/icon/preview_icon = null
 
 	var/g = "m"
@@ -289,7 +267,8 @@ proc/get_id_photo(var/mob/living/carbon/human/H)
 		eyes_s.Blend(facial_s, ICON_OVERLAY)
 
 	var/icon/clothes_s = null
-	switch(H.mind.assigned_role)
+	if(!assigned_role) assigned_role = H.mind.assigned_role
+	switch(assigned_role)
 		if("Head of Personnel")
 			clothes_s = new /icon('icons/mob/uniform.dmi', "hop_s")
 			clothes_s.Blend(new /icon('icons/mob/feet.dmi', "brown"), ICON_UNDERLAY)
@@ -399,8 +378,8 @@ proc/get_id_photo(var/mob/living/carbon/human/H)
 	var/icon/front
 	var/icon/side
 	if(H)
-		front = new(get_id_photo(H), dir = SOUTH)
-		side = new(get_id_photo(H), dir = SOUTH)
+		front = getFlatIcon(H, SOUTH, always_use_defdir = 1)
+		side = getFlatIcon(H, WEST, always_use_defdir = 1)
 	else
 		var/mob/living/carbon/human/dummy = new()
 		front = new(get_id_photo(dummy), dir = SOUTH)
@@ -437,11 +416,12 @@ proc/get_id_photo(var/mob/living/carbon/human/H)
 	R.name = "Security Record #[id]"
 	R.fields["name"] = name
 	R.fields["id"] = id
-	R.fields["criminal"] = "None"
-	R.fields["mi_crim"] = "None"
-	R.fields["mi_crim_d"] = "No minor crime convictions."
-	R.fields["ma_crim"] = "None"
-	R.fields["ma_crim_d"] = "No major crime convictions."
+	R.fields["criminal"]	= "None"
+	R.fields["mi_crim"]		= "None"
+	R.fields["mi_crim_d"]	= "No minor crime convictions."
+	R.fields["ma_crim"]		= "None"
+	R.fields["ma_crim_d"]	= "No major crime convictions."
+	R.fields["notes"]		= "No notes."
 	R.fields["notes"] = "No notes."
 	data_core.security += R
 
@@ -485,3 +465,13 @@ proc/get_id_photo(var/mob/living/carbon/human/H)
 	for(var/datum/data/record/R in L)
 		if(R.fields[field] == value)
 			return R
+
+/proc/GetAssignment(var/mob/living/carbon/human/H)
+	if(H.mind.role_alt_title)
+		return H.mind.role_alt_title
+	else if(H.mind.assigned_role)
+		return H.mind.assigned_role
+	else if(H.job)
+		return H.job
+	else
+		return "Unassigned"

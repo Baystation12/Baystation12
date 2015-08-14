@@ -455,7 +455,7 @@ datum/uplink_item/dd_SortValue()
 	category = /datum/uplink_category/grenades
 
 /datum/uplink_item/item/grenades/anti_photon
-	name = "5xAnti-Photon Grenades"
+	name = "5xPhoton Disruption Grenades"
 	item_cost = 2
 	path = /obj/item/weapon/storage/box/anti_photons
 
@@ -585,8 +585,8 @@ var/image/default_abstract_uplink_icon
 	return 1
 
 /datum/uplink_item/abstract/announcements/fake_crew_arrival
-	name = "Crew Arrival Announcement"
-	desc = "Creates a fake crew arrival annoucement as well as fake crew records, using your current appearance and worn id card."
+	name = "Crew Arrival Announcement/Records"
+	desc = "Creates a fake crew arrival announcement as well as fake crew records, using your current appearance (including held items!) and worn id card."
 	item_cost = 4
 
 /datum/uplink_item/abstract/announcements/fake_crew_arrival/New()
@@ -597,9 +597,47 @@ var/image/default_abstract_uplink_icon
 	if(!user)
 		return 0
 
+	// TODO-PSI: Port cool agent ID
+	var/obj/item/weapon/card/id/I = GetIdCard(user)
+	var/assignment = I ? I.assignment : GetAssignment(user)
+
+	var/datum/data/record/random_general_record
+	var/datum/data/record/random_medical_record
+	if(data_core.general.len)
+		random_general_record	= pick(data_core.general)
+		random_medical_record	= find_medical_record("id", random_general_record.fields["id"])
+
 	var/datum/data/record/general = data_core.CreateGeneralRecord(user)
+	if(I)
+		general.fields["name"] = I.registered_name
+	else
+		general.fields["name"] = user.real_name
+
 	var/datum/data/record/medical = data_core.CreateMedicalRecord(general.fields["name"], general.fields["id"])
 	var/datum/data/record/security = data_core.CreateSecurityRecord(general.fields["name"], general.fields["id"])
+
+	general.fields["rank"] = assignment
+	general.fields["real_rank"] = assignment
+	general.fields["sex"] = capitalize(user.gender)
+	general.fields["species"] = user.get_species()
+	var/mob/living/carbon/human/H
+	if(istype(user,/mob/living/carbon/human))
+		H = user
+		general.fields["age"] = H.age
+	else
+		general.fields["age"] = initial(H.age)
+
+	if(random_general_record)
+		general.fields["citizenship"]	= random_general_record.fields["citizenship"]
+		general.fields["faction"] 		= random_general_record.fields["faction"]
+		general.fields["fingerprint"] 	= random_general_record.fields["fingerprint"]
+		general.fields["home_system"] 	= random_general_record.fields["home_system"]
+		general.fields["religion"] 		= random_general_record.fields["religion"]
+	if(random_medical_record)
+		medical.fields["b_type"]		= random_medical_record.fields["b_type"]
+		medical.fields["b_dna"]			= random_medical_record.fields["b_type"]
+
+	AnnounceArrivalSimple(general.fields["name"], general.fields["rank"])
 	return 1
 
 /datum/uplink_item/abstract/announcements/fake_ion_storm
