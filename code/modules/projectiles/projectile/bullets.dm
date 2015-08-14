@@ -77,7 +77,7 @@
 	. = ..()
 	bumped = 0 //can hit all mobs in a tile. pellets is decremented inside attack_mob so this should be fine.
 
-/obj/item/projectile/bullet/pellet/attack_mob(var/mob/living/target_mob, var/distance, var/prone = 0)
+/obj/item/projectile/bullet/pellet/attack_mob(var/mob/living/target_mob, var/distance, var/miss_modifier)
 	if (pellets < 0) return 1
 
 	var/pellet_loss = round((distance - 1)/range_step) //pellets lost due to distance
@@ -88,8 +88,6 @@
 	var/prone_chance = 0
 	if(!base_spread)
 		prone_chance = max(spread_step*(distance - 2), 0)
-	
-	world << "[src]: attacking [target_mob] > target_mob.lying = [target_mob.lying], original = [original], prone_chance = [prone_chance]"
 	
 	var/hits = 0
 	for (var/i in 1 to total_pellets)
@@ -114,8 +112,9 @@
 	//If this is a shrapnel explosion, allow mobs that are prone to get hit, too
 	if(. && !base_spread && isturf(loc))
 		for(var/mob/living/M in loc)
-			if(M.lying && Bump(M)) //Bump will make sure we don't hit a mob multiple times
-				return
+			if(M.lying || !M.CanPass(src, loc)) //Bump if lying or if we would normally Bump.
+				if(Bump(M)) //Bump will make sure we don't hit a mob multiple times
+					return
 
 /* short-casing projectiles, like the kind used in pistols or SMGs */
 
