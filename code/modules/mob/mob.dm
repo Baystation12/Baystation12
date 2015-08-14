@@ -153,7 +153,7 @@
 	return
 
 /mob/proc/incapacitated()
-	return
+	return (stat || paralysis || stunned || weakened || restrained())
 
 /mob/proc/restrained()
 	return
