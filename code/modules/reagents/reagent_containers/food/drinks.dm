@@ -14,7 +14,13 @@
 		return
 
 	attack_self(mob/user as mob)
-		return
+		if(!is_open_container())
+			open(user)
+
+	proc/open(mob/user)
+		playsound(loc,'sound/effects/canopen.ogg', rand(10,50), 1)
+		user << "<span class='notice'>You open [src] with an audible pop!</span>"
+		flags |= OPENCONTAINER
 
 	attack(mob/M as mob, mob/user as mob, def_zone)
 		if(standard_feed_mob(user, M))
@@ -29,7 +35,24 @@
 			return
 		if(standard_pour_into(user, target))
 			return
+		return ..()
 
+	standard_feed_mob(var/mob/user, var/mob/target)
+		if(!is_open_container())
+			user << "<span class='notice'>You need to open [src]!</span>"
+			return 1
+		return ..()
+
+	standard_dispenser_refill(var/mob/user, var/obj/structure/reagent_dispensers/target)
+		if(!is_open_container())
+			user << "<span class='notice'>You need to open [src]!</span>"
+			return 1
+		return ..()
+
+	standard_pour_into(var/mob/user, var/atom/target)
+		if(!is_open_container())
+			user << "<span class='notice'>You need to open [src]!</span>"
+			return 1
 		return ..()
 
 	self_feed_message(var/mob/user)
