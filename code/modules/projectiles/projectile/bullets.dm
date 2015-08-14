@@ -196,10 +196,12 @@
 
 /obj/item/projectile/bullet/pistol/cap
 	name = "cap"
+	damage_type = HALLOSS
 	damage = 0
 	nodamage = 1
 	embed = 0
 	sharp = 0
 
 /obj/item/projectile/bullet/pistol/cap/process()
-	return 0
+	loc = null
+	qdel(src)
