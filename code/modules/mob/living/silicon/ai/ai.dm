@@ -830,7 +830,7 @@ var/list/ai_verbs_default = list(
 		if(src.research)
 			stat(null, "Available CPU: [src.research.stored_cpu] TFlops")
 			stat(null, "Maximal CPU: [src.research.max_cpu] TFlops")
-			stat(null, "CPU generation rate: [src.research.cpu_increase_per_tick] TFlops/s")
+			stat(null, "CPU generation rate: [src.research.cpu_increase_per_tick * 10] TFlops/s")
 			stat(null, "Current research focus: [src.research.focus ? src.research.focus.name : "None"]")
 			if(src.research.focus)
 				stat(null, "Research completed: [round(src.research.focus.invested, 0.1)]/[round(src.research.focus.price)]")
