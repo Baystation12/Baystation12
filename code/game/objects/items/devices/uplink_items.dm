@@ -586,7 +586,7 @@ var/image/default_abstract_uplink_icon
 
 /datum/uplink_item/abstract/announcements/fake_crew_arrival
 	name = "Crew Arrival Announcement/Records"
-	desc = "Creates a fake crew arrival announcement as well as fake crew records, using your current appearance (including held items!) and worn id card."
+	desc = "Creates a fake crew arrival announcement as well as fake crew records, using your current appearance (including held items!) and worn id card. Trigger with care!"
 	item_cost = 4
 
 /datum/uplink_item/abstract/announcements/fake_crew_arrival/New()
@@ -614,7 +614,7 @@ var/image/default_abstract_uplink_icon
 		general.fields["name"] = user.real_name
 
 	var/datum/data/record/medical = data_core.CreateMedicalRecord(general.fields["name"], general.fields["id"])
-	var/datum/data/record/security = data_core.CreateSecurityRecord(general.fields["name"], general.fields["id"])
+	data_core.CreateSecurityRecord(general.fields["name"], general.fields["id"])
 
 	general.fields["rank"] = assignment
 	general.fields["real_rank"] = assignment
