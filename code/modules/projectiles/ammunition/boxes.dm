@@ -192,3 +192,12 @@
 	max_ammo = 20
 	multiple_sprites = 1
 
+/obj/item/ammo_magazine/caps
+	name = "speed loader (caps)"
+	icon_state = "T38"
+	caliber = "caps"
+	color = "#FF0000"
+	ammo_type = /obj/item/ammo_casing/cap
+	matter = list(DEFAULT_WALL_MATERIAL = 600)
+	max_ammo = 7
+	multiple_sprites = 1
