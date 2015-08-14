@@ -43,6 +43,13 @@
 		return
 	..()
 
+/datum/reagent/nutriment/honey
+	name = "Honey"
+	id = "honey"
+	description = "A golden yellow syrup, loaded with sugary sweetness."
+	nutriment_factor = 10
+	color = "#FFFF00"
+
 /datum/reagent/nutriment/flour
 	name = "flour"
 	id = "flour"
