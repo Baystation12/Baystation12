@@ -1,0 +1,8 @@
+author: Kelenius
+
+delete-after: True
+
+changes: 
+  - rscdel: "Sleeper consoles removed. All interaction is now done by clicking on the sleeper itself."
+  - tweak: "To put people into sleeper, you now have to click-drag people to it. Grabs no longer work. To exit the sleeper, move."
+  - tweak: "Sleeper now uses a NanoUI."
