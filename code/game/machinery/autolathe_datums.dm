@@ -333,7 +333,7 @@
 
 /datum/autolathe/recipe/magazine_c20r
 	name = "ammunition (12mm)"
-	path = /obj/item/ammo_magazine/a12mm
+	path = /obj/item/ammo_magazine/a10mm
 	hidden = 1
 	category = "Arms and Ammunition"
 
