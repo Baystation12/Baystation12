@@ -142,9 +142,9 @@ datum/uplink_item/dd_SortValue()
 	name = "14.5mm"
 	path = /obj/item/weapon/storage/box/sniperammo
 
-/datum/uplink_item/item/ammo/a12mm
-	name = "12mm"
-	path = /obj/item/ammo_magazine/a12mm
+/datum/uplink_item/item/ammo/a10mm
+	name = "10mm"
+	path = /obj/item/ammo_magazine/a10mm
 
 /datum/uplink_item/item/ammo/a762
 	name = "7.62mm"
