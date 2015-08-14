@@ -6,24 +6,8 @@
 	base_spread = 0 //hit any target zone randomly
 	spread_step = 0
 	
-	//step_delay = 10
 	silenced = 1
-	//hitscan = 1
 	muzzle_type = null
-
-/obj/item/projectile/bullet/pellet/fragment/Move()
-	. = ..()
-	
-	//Allow mobs that are prone close to the starting turf a chance to get hit, too
-	
-	if(. && isturf(loc))
-		var/distance = get_dist(loc, starting)
-		var/chance = max(100 - (distance - 1)*20, 0)
-		if(prob(chance))
-			for(var/mob/living/M in loc)
-				if(Bump(M)) //Bump will make sure we don't hit a mob multiple times
-					return
-
 
 /obj/item/weapon/grenade/frag
 	name = "fragmentation grenade"
@@ -76,10 +60,12 @@
 	var/location = loc //store our current loc since qdel will move the grenade to nullspace
 	spawn(0)
 		P.launch(target)
+		/*
 		if(!isturf(location))
 			P.Bump(location)
 		for(var/atom/movable/AM in source)
 			P.Bump(AM)
+		*/
 
 	/*
 	//the vector system doesn't play well with very large angle offsets, so generate projectiles along each of the 8 directions
