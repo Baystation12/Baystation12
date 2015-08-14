@@ -111,12 +111,6 @@
 	var/rank = null			//actual job
 	var/dorm = 0			// determines if this ID has claimed a dorm already
 
-/obj/item/weapon/card/id/New()
-	..()
-	spawn(30)
-		if(istype(loc, /mob/living/carbon/human))
-			SetOwnerInfo(loc)
-
 /obj/item/weapon/card/id/examine(mob/user)
 	set src in oview(1)
 	if(in_range(usr, src))
@@ -128,7 +122,7 @@
 /obj/item/weapon/card/id/proc/show(mob/user as mob)
 	user << browse_rsc(front, "front.png")
 	user << browse_rsc(side, "side.png")
-	var/datum/browser/popup = new(user, "idcard", name, 600, 200)
+	var/datum/browser/popup = new(user, "idcard", name, 600, 250)
 	popup.set_content(dat)
 	popup.set_title_image(usr.browse_rsc_icon(src.icon, src.icon_state))
 	popup.open()
@@ -137,20 +131,22 @@
 /obj/item/weapon/card/id/proc/update_name()
 	name = "[src.registered_name]'s ID Card ([src.assignment])"
 
-/obj/item/weapon/card/id/syndicate/proc/set_id_photo(var/mob/M)
+/obj/item/weapon/card/id/proc/set_id_photo(var/mob/M)
 	front = getFlatIcon(M, SOUTH, always_use_defdir = 1)
 	side = getFlatIcon(M, WEST, always_use_defdir = 1)
 
-/obj/item/weapon/card/id/proc/SetOwnerInfo(var/mob/living/carbon/human/H)
+/obj/item/weapon/card/id/proc/set_owner_info(var/mob/living/carbon/human/H)
 	if(!H || !H.dna)
 		return
 
-	sex = capitalize(H.gender)
-	age = H.age
-	blood_type = H.dna.b_type
-	dna_hash = H.dna.unique_enzymes
-	fingerprint_hash = md5(H.dna.uni_identity)
+	age 				= H.age
+	blood_type			= H.dna.b_type
+	dna_hash			= H.dna.unique_enzymes
+	fingerprint_hash	= md5(H.dna.uni_identity)
+	registered_name		= H.real_name
+	sex 				= capitalize(H.gender)
 	set_id_photo(H)
+	update_name()
 
 	dat = ("<table><tr><td>")
 	dat += text("Name: []</A><BR>", registered_name)
@@ -264,8 +260,6 @@
 				..()
 	else
 		..()
-
-
 
 /obj/item/weapon/card/id/syndicate_command
 	name = "syndicate ID card"
