@@ -131,7 +131,7 @@ datum/uplink_item/dd_SortValue()
 	path = /obj/item/ammo_magazine/a357
 
 /datum/uplink_item/item/ammo/mc9mm
-	name = ".9mm"
+	name = "9mm"
 	path = /obj/item/ammo_magazine/mc9mm
 
 /datum/uplink_item/item/ammo/darts
@@ -141,6 +141,14 @@ datum/uplink_item/dd_SortValue()
 /datum/uplink_item/item/ammo/sniperammo
 	name = "14.5mm"
 	path = /obj/item/weapon/storage/box/sniperammo
+
+/datum/uplink_item/item/ammo/a10mm
+	name = "10mm"
+	path = /obj/item/ammo_magazine/a10mm
+
+/datum/uplink_item/item/ammo/a762
+	name = "7.62mm"
+	path = /obj/item/ammo_magazine/a762
 
 /***************************************
 * Highly Visible and Dangerous Weapons *
@@ -187,6 +195,17 @@ datum/uplink_item/dd_SortValue()
 	name = "Anti-materiel Rifle"
 	item_cost = DEFAULT_TELECRYSTAL_AMOUNT
 	path = /obj/item/weapon/gun/projectile/heavysniper
+
+//These are for traitors (or other antags, perhaps) to have the option of purchasing some merc gear.
+/datum/uplink_item/item/visible_weapons/submachinegun
+	name = "Submachine Gun"
+	item_cost = 6
+	path = /obj/item/weapon/gun/projectile/automatic/c20r
+
+/datum/uplink_item/item/visible_weapons/assaultrifle
+	name = "Assault Rifle"
+	item_cost = 7
+	path = /obj/item/weapon/gun/projectile/automatic/sts35
 
 /*************************************
 * Stealthy and Inconspicuous Weapons *

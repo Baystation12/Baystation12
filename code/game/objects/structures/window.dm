@@ -239,6 +239,7 @@
 	if(istype(W, /obj/item/weapon/screwdriver))
 		if(reinf && state >= 1)
 			state = 3 - state
+			update_nearby_icons()
 			playsound(loc, 'sound/items/Screwdriver.ogg', 75, 1)
 			user << (state == 1 ? "<span class='notice'>You have unfastened the window from the frame.</span>" : "<span class='notice'>You have fastened the window to the frame.</span>")
 		else if(reinf && state == 0)
@@ -337,7 +338,11 @@
 /obj/structure/window/Destroy()
 	density = 0
 	update_nearby_tiles()
-	update_nearby_icons()
+	var/turf/location = loc
+	loc = null
+	for(var/obj/structure/window/W in orange(location, 1))
+		W.update_icon()
+	loc = location
 	..()
 
 
@@ -357,35 +362,31 @@
 //This proc is used to update the icons of nearby windows. It should not be confused with update_nearby_tiles(), which is an atmos proc!
 /obj/structure/window/proc/update_nearby_icons()
 	update_icon()
-	for(var/direction in cardinal)
-		for(var/obj/structure/window/W in get_step(src,direction) )
-			W.update_icon()
+	for(var/obj/structure/window/W in orange(src, 1))
+		W.update_icon()
 
 //merges adjacent full-tile windows into one (blatant ripoff from game/smoothwall.dm)
 /obj/structure/window/update_icon()
 	//A little cludge here, since I don't know how it will work with slim windows. Most likely VERY wrong.
 	//this way it will only update full-tile ones
-	//This spawn is here so windows get properly updated when one gets deleted.
-	spawn(2)
-		if(!src) return
-		if(!is_fulltile())
-			icon_state = "[basestate]"
-			return
-		var/junction = 0 //will be used to determine from which side the window is connected to other windows
-		if(anchored)
-			for(var/obj/structure/window/W in orange(src,1))
-				if(W.anchored && W.density	&& W.is_fulltile()) //Only counts anchored, not-destroyed fill-tile windows.
-					if(abs(x-W.x)-abs(y-W.y) ) 		//doesn't count windows, placed diagonally to src
-						junction |= get_dir(src,W)
-		if(opacity)
-			icon_state = "[basestate][junction]"
-		else
-			if(reinf)
-				icon_state = "[basestate][junction]"
-			else
-				icon_state = "[basestate][junction]"
-
+	overlays.Cut()
+	if(!is_fulltile())
+		icon_state = "[basestate]"
 		return
+	var/list/dirs = list()
+	if(anchored)
+		for(var/obj/structure/window/W in orange(src,1))
+			if(W.anchored && W.density && W.type == src.type && W.is_fulltile()) //Only counts anchored, not-destroyed fill-tile windows.
+				dirs += get_dir(src, W)
+
+	var/list/connections = dirs_to_corner_states(dirs)
+
+	icon_state = ""
+	for(var/i = 1 to 4)
+		var/image/I = image(icon, "[basestate][connections[i]]", dir = 1<<(i-1))
+		overlays += I
+
+	return
 
 /obj/structure/window/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	if(exposed_temperature > T0C + 800)
@@ -466,10 +467,8 @@
 	basestate = "window"
 	maxhealth = 40
 	reinf = 1
+	basestate = "w"
 	dir = 5
-
-	update_icon() //icon_state has to be set manually
-		return
 
 /obj/structure/window/reinforced/polarized
 	name = "electrochromic window"
