@@ -1,0 +1,7 @@
+ 
+author: Chinsky
+
+delete-after: True
+
+changes: 
+  - rscadd: "Made capguns into proper guns code-wise. It means you can now take people hostage with them, stick in your mouth, and all other things you can do with real guns but probably shouldn't."
