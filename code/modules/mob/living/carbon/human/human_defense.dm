@@ -10,9 +10,11 @@ emp_act
 
 /mob/living/carbon/human/bullet_act(var/obj/item/projectile/P, var/def_zone)
 
-	var/obj/item/organ/external/organ = get_organ(check_zone(def_zone))
-	if(!organ)
-		return
+	def_zone = check_zone(def_zone)
+	if(!has_organ(def_zone))
+		return PROJECTILE_FORCE_MISS //if they don't have the organ in question then the projectile just passes by.
+
+	var/obj/item/organ/external/organ = get_organ()
 
 	//Shields
 	if(check_shields(P.damage, "the [P.name]"))
@@ -37,7 +39,7 @@ emp_act
 					// redirect the projectile
 					P.redirect(new_x, new_y, curloc, src)
 
-				return -1 // complete projectile permutation
+				return PROJECTILE_CONTINUE // complete projectile permutation
 
 	//Shrapnel
 	if(P.can_embed())

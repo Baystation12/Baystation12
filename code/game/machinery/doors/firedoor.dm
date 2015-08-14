@@ -75,6 +75,8 @@
 		A.all_doors.Remove(src)
 	. = ..()
 
+/obj/machinery/door/firedoor/get_material()
+	return get_material_by_name(DEFAULT_WALL_MATERIAL)
 
 /obj/machinery/door/firedoor/examine(mob/user)
 	. = ..(user, 1)

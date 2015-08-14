@@ -39,20 +39,23 @@
 	laws.delete_law(law)
 	log_and_message_admins("has deleted a law belonging to [src]: [law.law]")
 
-/mob/living/silicon/proc/clear_inherent_laws()
+/mob/living/silicon/proc/clear_inherent_laws(var/silent = 0)
 	laws_sanity_check()
 	laws.clear_inherent_laws()
-	log_and_message_admins("cleared the inherent laws of [src]")
+	if(!silent)
+		log_and_message_admins("cleared the inherent laws of [src]")
 
-/mob/living/silicon/proc/clear_ion_laws()
+/mob/living/silicon/proc/clear_ion_laws(var/silent = 0)
 	laws_sanity_check()
 	laws.clear_ion_laws()
-	log_and_message_admins("cleared the ion laws of [src]")
+	if(!silent)
+		log_and_message_admins("cleared the ion laws of [src]")
 
-/mob/living/silicon/proc/clear_supplied_laws()
+/mob/living/silicon/proc/clear_supplied_laws(var/silent = 0)
 	laws_sanity_check()
 	laws.clear_supplied_laws()
-	log_and_message_admins("cleared the supplied laws of [src]")
+	if(!silent)
+		log_and_message_admins("cleared the supplied laws of [src]")
 
 /mob/living/silicon/proc/statelaws(var/datum/ai_laws/laws)
 	var/prefix = ""

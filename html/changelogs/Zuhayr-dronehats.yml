@@ -1,0 +1,4 @@
+author: Zuhayr
+delete-after: True
+changes: 
+  - rscadd: "Click a hat on a drone with help intent to equip it. Drag the drone onto yourself with grab intent to remove it."

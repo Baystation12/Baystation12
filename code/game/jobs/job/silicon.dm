@@ -9,7 +9,8 @@
 	supervisors = "your laws"
 	req_admin_notify = 1
 	minimal_player_age = 7
-
+	account_allowed = 0
+	economic_modifier = 0
 	equip(var/mob/living/carbon/human/H)
 		if(!H)	return 0
 		return 1
@@ -40,6 +41,8 @@
 	selection_color = "#ddffdd"
 	minimal_player_age = 1
 	alt_titles = list("Android", "Robot")
+	account_allowed = 0
+	economic_modifier = 0
 
 	equip(var/mob/living/carbon/human/H)
 		if(!H)	return 0

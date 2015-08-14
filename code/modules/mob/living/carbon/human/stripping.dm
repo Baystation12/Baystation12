@@ -3,6 +3,11 @@
 	if(!slot_to_strip || !istype(user))
 		return
 
+	// TODO :  Change to incapacitated() on merge.
+	if(user.stat || user.lying || user.resting || user.buckled)
+		user << browse(null, text("window=mob[src.name]"))
+		return
+
 	var/obj/item/target_slot = get_equipped_item(text2num(slot_to_strip))
 
 	switch(slot_to_strip)

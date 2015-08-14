@@ -65,9 +65,9 @@
 
 	if(src.camera && !scrambledcodes)
 		if(src.stat == 2 || wires.IsIndexCut(BORG_WIRE_CAMERA))
-			src.camera.status = 0
+			src.camera.set_status(0)
 		else
-			src.camera.status = 1
+			src.camera.set_status(1)
 
 	updatehealth()
 
