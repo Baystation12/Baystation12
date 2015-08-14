@@ -286,14 +286,13 @@ var/global/list/additional_antag_types = list()
 /datum/game_mode/proc/declare_completion()
 
 	var/is_antag_mode = (antag_templates && antag_templates.len)
-	if(!config.objectives_disabled)
-		check_victory()
-		if(is_antag_mode)
+	check_victory()
+	if(is_antag_mode)
+		sleep(10)
+		for(var/datum/antagonist/antag in antag_templates)
 			sleep(10)
-			for(var/datum/antagonist/antag in antag_templates)
-				sleep(10)
-				antag.check_victory()
-				antag.print_player_summary()
+			antag.check_victory()
+			antag.print_player_summary()
 
 	var/clients = 0
 	var/surviving_humans = 0
