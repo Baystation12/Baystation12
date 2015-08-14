@@ -45,14 +45,17 @@
 	var/list/res = list()
 	for (var/specie in all_species)
 		var/datum/species/S = all_species[specie]
-		if(!(S.flags & IS_SYNTHETIC))
-			meat += S.name
+		if(!(S.flags & IS_SYNTHETIC) && S.flags & CAN_JOIN)
+			meat += S
 	if(meat.len)
 		var/num = rand(1,meat.len)
 		for(var/i=0,i<num,i++)
-			var/picked = pick(meat)
-			meat -= picked
-			res += picked
+			var/datum/species/picked = pick_n_take(meat)
+			res |= picked.name
+			if(picked.greater_form)
+				res |= picked.greater_form
+			if(picked.primitive_form)
+				res |= picked.primitive_form
 	return res
 
 /datum/disease2/disease/proc/activate(var/mob/living/carbon/mob)
