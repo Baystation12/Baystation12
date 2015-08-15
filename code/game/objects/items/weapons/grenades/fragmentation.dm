@@ -6,14 +6,15 @@
 	base_spread = 0 //causes it to be treated as a shrapnel explosion instead of cone
 	spread_step = 20
 	
-	//silenced = 1 //embedding messages are still produced so it's kind of weird when enabled.
+	silenced = 1 //embedding messages are still produced so it's kind of weird when enabled.
+	no_attack_log = 1
 	muzzle_type = null
 
 /obj/item/weapon/grenade/frag
 	name = "fragmentation grenade"
 	desc = "A military fragmentation grenade, designed to explode in a deadly shower of fragments."
 	
-	var/num_fragments = 120  //total number of fragments produced by the grenade
+	var/num_fragments = 200  //total number of fragments produced by the grenade
 	var/fragment_damage = 15
 	var/damage_step = 2      //projectiles lose a fragment each time they travel this distance. Can be a non-integer.
 	var/explosion_size = 2   //size of the center explosion
@@ -43,13 +44,15 @@
 
 		P.launch(T)
 
-		var/cone = new /obj/item/weapon/caution/cone (T)
-		spawn(100) qdel(cone)
+		//var/cone = new /obj/item/weapon/caution/cone (T)
+		//spawn(100) qdel(cone)
 
 		//Make sure to hit any mobs in the source turf
 		for(var/mob/living/M in O)
-			if(M.lying) 
-				P.attack_mob(M, 0, 0) //lying on a frag grenade causes you to tank most of it.
+			//lying on a frag grenade while the grenade is on the ground causes you to absorb most of the shrapnel.
+			//you will most likely be dead, but others nearby will be spared the fragments that hit you instead.
+			if(M.lying && isturf(src.loc))
+				P.attack_mob(M, 0, 0) 
 			else
 				P.attack_mob(M, 0, 100) //otherwise, allow a decent amount of fragments to pass
 
