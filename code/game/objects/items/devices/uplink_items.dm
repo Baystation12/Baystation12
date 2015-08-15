@@ -597,10 +597,7 @@ var/image/default_abstract_uplink_icon
 	if(!user)
 		return 0
 
-	// TODO-PSI: Port cool agent ID
 	var/obj/item/weapon/card/id/I = GetIdCard(user)
-	var/assignment = I ? I.assignment : GetAssignment(user)
-
 	var/datum/data/record/random_general_record
 	var/datum/data/record/random_medical_record
 	if(data_core.general.len)
@@ -609,25 +606,29 @@ var/image/default_abstract_uplink_icon
 
 	var/datum/data/record/general = data_core.CreateGeneralRecord(user)
 	if(I)
+		general.fields["age"] = I.age
+		general.fields["rank"] = I.assignment
+		general.fields["real_rank"] = I.assignment
 		general.fields["name"] = I.registered_name
+		general.fields["sex"] = I.sex
 	else
+		var/mob/living/carbon/human/H
+		if(istype(user,/mob/living/carbon/human))
+			H = user
+			general.fields["age"] = H.age
+		else
+			general.fields["age"] = initial(H.age)
+		var/assignment = GetAssignment(user)
+		general.fields["rank"] = assignment
+		general.fields["real_rank"] = assignment
 		general.fields["name"] = user.real_name
+		general.fields["sex"] = capitalize(user.gender)
 
+	general.fields["species"] = user.get_species()
 	var/datum/data/record/medical = data_core.CreateMedicalRecord(general.fields["name"], general.fields["id"])
 	data_core.CreateSecurityRecord(general.fields["name"], general.fields["id"])
 
-	general.fields["rank"] = assignment
-	general.fields["real_rank"] = assignment
-	general.fields["sex"] = capitalize(user.gender)
-	general.fields["species"] = user.get_species()
-	var/mob/living/carbon/human/H
-	if(istype(user,/mob/living/carbon/human))
-		H = user
-		general.fields["age"] = H.age
-	else
-		general.fields["age"] = initial(H.age)
-
-	if(random_general_record)
+	if(!random_general_record)
 		general.fields["citizenship"]	= random_general_record.fields["citizenship"]
 		general.fields["faction"] 		= random_general_record.fields["faction"]
 		general.fields["fingerprint"] 	= random_general_record.fields["fingerprint"]
@@ -636,6 +637,11 @@ var/image/default_abstract_uplink_icon
 	if(random_medical_record)
 		medical.fields["b_type"]		= random_medical_record.fields["b_type"]
 		medical.fields["b_dna"]			= random_medical_record.fields["b_type"]
+
+	if(I)
+		general.fields["fingerprint"] 	= I.fingerprint_hash
+		medical.fields["b_type"]	= I.blood_type
+		medical.fields["b_dna"]		= I.dna_hash
 
 	AnnounceArrivalSimple(general.fields["name"], general.fields["rank"])
 	return 1
