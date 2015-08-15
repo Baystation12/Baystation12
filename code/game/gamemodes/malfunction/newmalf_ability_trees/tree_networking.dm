@@ -38,7 +38,7 @@
 // END RESEARCH DATUMS
 // BEGIN ABILITY VERBS
 
-/datum/game_mode/malfunction/verb/basic_encryption_hack(obj/machinery/power/apc/A as obj in get_unhacked_apcs())
+/datum/game_mode/malfunction/verb/basic_encryption_hack(obj/machinery/power/apc/A as obj in get_all_apcs())
 	set category = "Software"
 	set name = "Basic Encryption Hack"
 	set desc = "10 CPU - Basic encryption hack that allows you to overtake APCs on the station."
