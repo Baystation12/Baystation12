@@ -674,7 +674,7 @@ About the new airlock wires panel:
 
 	return ..()
 
-/obj/machinery/door/airlock/Topic(href, href_list, var/nowindow = 0)
+/obj/machinery/door/airlock/Topic(href, href_list)
 	if(..())
 		return 1
 

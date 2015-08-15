@@ -104,7 +104,6 @@
 	var/sex = "\[UNSET\]"
 	var/icon/front
 	var/icon/side
-	var/dat
 
 	//alt titles are handled a bit weirdly in order to unobtrusively integrate into existing ID system
 	var/assignment = null	//can be alt title or the actual job
@@ -119,11 +118,14 @@
 	else
 		usr << "<span class='warning'>It is too far away.</span>"
 
+/obj/item/weapon/card/id/proc/prevent_tracking()
+	return 0
+
 /obj/item/weapon/card/id/proc/show(mob/user as mob)
 	user << browse_rsc(front, "front.png")
 	user << browse_rsc(side, "side.png")
 	var/datum/browser/popup = new(user, "idcard", name, 600, 250)
-	popup.set_content(dat)
+	popup.set_content(dat())
 	popup.set_title_image(usr.browse_rsc_icon(src.icon, src.icon_state))
 	popup.open()
 	return
@@ -147,7 +149,8 @@
 	set_id_photo(H)
 	update_name()
 
-	dat = ("<table><tr><td>")
+/obj/item/weapon/card/id/proc/dat()
+	var/dat = ("<table><tr><td>")
 	dat += text("Name: []</A><BR>", registered_name)
 	dat += text("Sex: []</A><BR>\n", sex)
 	dat += text("Age: []</A><BR>\n", age)
@@ -155,8 +158,10 @@
 	dat += text("Fingerprint: []</A><BR>\n", fingerprint_hash)
 	dat += text("Blood Type: []<BR>\n", blood_type)
 	dat += text("DNA Hash: []<BR><BR>\n", dna_hash)
-	dat +="<td align = center valign = top>Photo:<br><img src=front.png height=80 width=80 border=4>	\
-	<img src=side.png height=80 width=80 border=4></td></tr></table>"
+	if(front && side)
+		dat +="<td align = center valign = top>Photo:<br><img src=front.png height=80 width=80 border=4><img src=side.png height=80 width=80 border=4></td>"
+	dat += "</tr></table>"
+	return dat
 
 /obj/item/weapon/card/id/attack_self(mob/user as mob)
 	user.visible_message("\The [user] shows you: \icon[src] [src.name]. The assignment on the card: [src.assignment]",\

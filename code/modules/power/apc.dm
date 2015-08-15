@@ -850,7 +850,7 @@
 			return 0
 	return 1
 
-/obj/machinery/power/apc/Topic(href, href_list, var/nowindow = 0)
+/obj/machinery/power/apc/Topic(href, href_list)
 	if(..())
 		return 1
 
