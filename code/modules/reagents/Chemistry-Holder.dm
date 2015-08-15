@@ -399,7 +399,7 @@
 	if(!target)
 		return
 
-	var/datum/reagents/R = new /datum/reagents(maximum_volume)
+	var/datum/reagents/R = new /datum/reagents(amount * multiplier)
 	. = trans_to_holder(R, amount, multiplier, copy)
 	R.touch_turf(target)
 	return
@@ -409,7 +409,7 @@
 		return
 
 	if(!target.reagents)
-		var/datum/reagents/R = new /datum/reagents(maximum_volume)
+		var/datum/reagents/R = new /datum/reagents(amount * multiplier)
 		. = trans_to_holder(R, amount, multiplier, copy)
 		R.touch_obj(target)
 		return
