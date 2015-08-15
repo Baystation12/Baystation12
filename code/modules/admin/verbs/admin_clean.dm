@@ -18,6 +18,5 @@
 			if(istype(Obj,/obj/effect/decal/cleanable))
 				del(Obj)
 		log_admin("[key_name_admin(usr)] cleaned the world ([i] objects deleted) ")
-		log_admin_single("[key_name_admin(usr)] cleaned the world ([i] objects deleted) ")
 		message_admins("\blue [key_name_admin(usr)] cleaned the world ([i] objects deleted) ")
 
