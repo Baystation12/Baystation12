@@ -85,14 +85,14 @@ var/SMALLSIZEBLOCK     = 0
 
 var/skipupdate = 0
 
-var/eventchance = 10 // Percent chance per 5 minutes.
+var/eventchance = 20 // Percent chance per 5 minutes.
 var/event       = 0
 var/hadevent    = 0
 var/blobevent   = 0
 
 var/diary          = null
 var/href_logfile   = null
-var/station_name   = "NSS Exodus"
+var/station_name   = "NSS Aphelion"
 var/game_version   = "Baystation12"
 var/changelog_hash = ""
 var/game_year      = (text2num(time2text(world.realtime, "YYYY")) + 544)
