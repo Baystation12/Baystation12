@@ -27,11 +27,10 @@
 	if(Proj.original != src && !prob(cover))
 		return PROJECTILE_CONTINUE //pass through
 
-	//Tasers and the like should not damage girders.
-	if(!(Proj.damage_type == BRUTE || Proj.damage_type == BURN))
+	var/damage = Proj.get_structure_damage()
+	if(!damage)
 		return
 
-	var/damage = Proj.damage
 	if(!istype(Proj, /obj/item/projectile/beam))
 		damage *= 0.4 //non beams do reduced damage
 

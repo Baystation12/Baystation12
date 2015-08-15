@@ -371,7 +371,9 @@ var/list/turret_icons
 		die()	//the death process :(
 
 /obj/machinery/porta_turret/bullet_act(obj/item/projectile/Proj)
-	if(Proj.damage_type == HALLOSS)
+	var/damage = Proj.get_structure_damage()
+	
+	if(!damage)
 		return
 
 	if(enabled)
@@ -383,8 +385,7 @@ var/list/turret_icons
 
 	..()
 
-	if((Proj.damage_type == BRUTE || Proj.damage_type == BURN))
-		take_damage(Proj.damage)
+	take_damage(damage)
 
 /obj/machinery/porta_turret/emp_act(severity)
 	if(enabled)

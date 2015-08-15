@@ -195,11 +195,12 @@
 		qdel(src)
 
 /obj/structure/closet/bullet_act(var/obj/item/projectile/Proj)
-	if(!(Proj.damage_type == BRUTE || Proj.damage_type == BURN))
+	var/proj_damage = Proj.get_structure_damage()
+	if(!proj_damage)
 		return
 
 	..()
-	damage(Proj.damage)
+	damage(proj_damage)
 
 	return
 

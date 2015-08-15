@@ -214,7 +214,7 @@
 	..()
 
 /obj/machinery/shieldwallgen/bullet_act(var/obj/item/projectile/Proj)
-	storedpower -= 400 * Proj.damage
+	storedpower -= 400 * Proj.get_structure_damage()
 	..()
 	return
 
@@ -285,7 +285,7 @@
 			G = gen_primary
 		else
 			G = gen_secondary
-		G.storedpower -= 400 * Proj.damage
+		G.storedpower -= 400 * Proj.get_structure_damage()
 	..()
 	return
 

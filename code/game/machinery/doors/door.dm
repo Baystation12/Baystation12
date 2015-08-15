@@ -149,12 +149,10 @@
 /obj/machinery/door/bullet_act(var/obj/item/projectile/Proj)
 	..()
 
-	//Tasers and the like should not damage doors. Nor should TOX, OXY, CLONE, etc damage types
-	if(!(Proj.damage_type == BRUTE || Proj.damage_type == BURN))
-		return
+	var/damage = Proj.get_structure_damage()
 
 	// Emitter Blasts - these will eventually completely destroy the door, given enough time.
-	if (Proj.damage > 90)
+	if (damage > 90)
 		destroy_hits--
 		if (destroy_hits <= 0)
 			visible_message("<span class='danger'>\The [src.name] disintegrates!</span>")
@@ -166,9 +164,9 @@
 					new /obj/effect/decal/cleanable/ash(src.loc) // Turn it to ashes!
 			qdel(src)
 
-	if(Proj.damage)
+	if(damage)
 		//cap projectile damage so that there's still a minimum number of hits required to break the door
-		take_damage(min(Proj.damage, 100))
+		take_damage(min(damage, 100))
 
 
 

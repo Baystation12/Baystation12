@@ -601,7 +601,7 @@
 				if(prob(15))
 					break //give a chance to exit early
 
-	Proj.on_hit(src)
+	Proj.on_hit(src) //on_hit just returns if it's argument is not a living mob so does this actually do anything?
 	return
 
 /obj/mecha/ex_act(severity)
