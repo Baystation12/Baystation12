@@ -9,6 +9,10 @@
 	var/const/duration = 13 //Directly relates to the 'weaken' duration. Lowered by armor (i.e. helmets)
 	var/isGlass = 1 //Whether the 'bottle' is made of glass or not so that milk cartons dont shatter when someone gets hit by it
 
+/obj/item/weapon/reagent_containers/food/drinks/bottle/New()
+	..()
+	if(isGlass) unacidable = 1
+
 /obj/item/weapon/reagent_containers/food/drinks/bottle/proc/smash(mob/living/target as mob, mob/living/user as mob)
 
 	//Creates a shattering noise and replaces the bottle with a broken_bottle
