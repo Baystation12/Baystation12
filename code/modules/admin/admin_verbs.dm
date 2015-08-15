@@ -9,6 +9,7 @@ var/list/admin_verbs_default = list(
 	/client/proc/debug_variables,		/*allows us to -see- the variables of any instance in the game. +VAREDIT needed to modify*/
 //	/client/proc/check_antagonists,		/*shows all antags*/
     /client/proc/clean,
+    /client/proc/cleartox,
 	/client/proc/cmd_mentor_check_new_players
 //	/client/proc/deadchat				/*toggles deadchat on/off*/
 	)
@@ -38,6 +39,7 @@ var/list/admin_verbs_admin = list(
 	/client/proc/Getkey,				/*teleports a mob with a certain ckey to our location*/
 //	/client/proc/sendmob,				/*sends a mob somewhere*/ -Removed due to it needing two sorting procs to work, which were executed every time an admin right-clicked. ~Errorage
 	/client/proc/Jump,
+	/client/proc/cleartox,
 	/client/proc/jumptokey,				/*allows us to jump to the location of a mob with a certain ckey*/
 	/client/proc/jumptomob,				/*allows us to jump to a specific mob*/
 	/client/proc/jumptoturf,			/*allows us to jump to a specific turf*/
@@ -129,6 +131,7 @@ var/list/admin_verbs_spawn = list(
 	/client/proc/FireCannons,
 	/client/proc/ChangeIcarusPosition,
 	/client/proc/virus2_editor,
+	/client/proc/cleartox,
 	/client/proc/spawn_chemdisp_cartridge
 	)
 var/list/admin_verbs_server = list(
