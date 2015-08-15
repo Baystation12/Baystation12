@@ -24,6 +24,7 @@
 	volume = 5
 	can_be_placed_into = null
 	flags = OPENCONTAINER | NOBLUDGEON
+	unacidable = 0
 
 /obj/item/weapon/reagent_containers/glass/rag/attack_self(mob/user as mob)
 	return
