@@ -915,7 +915,7 @@
 	if(status_flags & GODMODE)	return 0
 
 	//SSD check, if a logged player is awake put them back to sleep!
-	if(sleeping < 2 && species.show_ssd && (!client || !key || player_logged))
+	if(species.show_ssd && !client && !aghosted)
 		sleeping = 2
 
 	//SSD check, if a logged player is awake put them back to sleep!
@@ -987,10 +987,8 @@
 			adjustHalLoss(-3)
 			if (mind)
 				//Are they SSD? If so we'll keep them asleep but work off some of that sleep var in case of stoxin or similar.
-				if(player_logged)
-					sleeping = max(sleeping-1, 2)
-				else
-					sleeping = max(sleeping-1, 0)
+				if(client || sleeping > 3)
+					AdjustSleeping(-1)
 			blinded = 1
 			stat = UNCONSCIOUS
 			animate_tail_reset()
