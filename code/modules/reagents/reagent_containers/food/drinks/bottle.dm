@@ -9,13 +9,19 @@
 	force = 5
 	var/smash_duration = 5 //Directly relates to the 'weaken' duration. Lowered by armor (i.e. helmets)
 	var/isGlass = 1 //Whether the 'bottle' is made of glass or not so that milk cartons dont shatter when someone gets hit by it
-	
+
 	var/obj/item/weapon/reagent_containers/glass/rag/rag = null
 	var/rag_underlay = "rag"
 
-/obj/item/weapon/reagent_containers/food/drinks/bottle/Destroy()
-	rag = null
+/obj/item/weapon/reagent_containers/food/drinks/bottle/New()
 	..()
+	if(isGlass) unacidable = 1
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/Destroy()
+	if(rag)
+		rag.forceMove(src.loc)
+	rag = null
+	return ..()
 
 //when thrown on impact, bottles smash and spill their contents
 /obj/item/weapon/reagent_containers/food/drinks/bottle/throw_impact(atom/hit_atom, var/speed)
@@ -125,7 +131,7 @@
 
 	//Calculating duration and calculating damage.
 	armor_block = target.run_armor_check(affecting, "melee")
-	
+
 	//force will counteract armour, but will never increase duration
 	armor_duration = smash_duration + min(0, force - target.getarmor(affecting, "melee") + 10)
 
