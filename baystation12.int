@@ -1,9 +1,7 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: code\modules\admin\verbs\admin_clean.dm
-DIR: code code\controllers code\game code\modules code\modules\admin code\modules\admin\verbs 
-FILE: code\modules\admin\verbs\admin_clean.dm
+DIR: code code\modules code\modules\admin code\modules\admin\verbs 
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
