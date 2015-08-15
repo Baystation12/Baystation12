@@ -126,11 +126,10 @@ using metal and glass, it uses glass and reagents (usually sulfuric acis).
 			amount = min(stack.amount, round((max_material_amount - TotalMaterials()) / stack.perunit))
 
 		busy = 1
-		use_power(max(1000, (3750 * amount / 10)))
 		var/stacktype = stack.type
-		stack.use(amount)
-		if(do_after(usr, 16))
+		if(do_after(usr, 16) && stack.use(amount))
 			user << "<span class='notice'>You add [amount] sheets to \the [src].</span>"
+			use_power(max(1000, (3750 * amount / 10)))
 			switch(stacktype)
 				if(/obj/item/stack/material/glass)
 					g_amount += amount * 3750
@@ -140,8 +139,6 @@ using metal and glass, it uses glass and reagents (usually sulfuric acis).
 					diamond_amount += amount * 2000
 				if(/obj/item/stack/material/uranium)
 					uranium_amount += amount * 2000
-		else
-			new stacktype(loc, amount)
 		busy = 0
 		updateUsrDialog()
 		return
