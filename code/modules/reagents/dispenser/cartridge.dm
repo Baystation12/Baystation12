@@ -9,6 +9,7 @@
 	amount_per_transfer_from_this = 50
 	// Large, but inaccurate. Use a chem dispenser or beaker for accuracy.
 	possible_transfer_amounts = list(50, 100)
+	unacidable = 1
 
 	var/spawn_reagent = null
 	var/label = ""

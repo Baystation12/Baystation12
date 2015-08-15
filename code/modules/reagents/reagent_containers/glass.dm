@@ -14,6 +14,7 @@
 	volume = 60
 	w_class = 2
 	flags = OPENCONTAINER
+	unacidable = 1 //glass doesn't dissolve in acid
 
 	var/label_text = ""
 
@@ -219,6 +220,7 @@
 	possible_transfer_amounts = list(10,20,30,60,120)
 	volume = 120
 	flags = OPENCONTAINER
+	unacidable = 0
 
 	attackby(var/obj/D, mob/user as mob)
 		if(isprox(D))
