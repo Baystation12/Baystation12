@@ -13,6 +13,7 @@
 /obj/item/weapon/grenade/frag
 	name = "fragmentation grenade"
 	desc = "A military fragmentation grenade, designed to explode in a deadly shower of fragments."
+	icon_state = "frag"
 	
 	var/num_fragments = 200  //total number of fragments produced by the grenade
 	var/fragment_damage = 15
