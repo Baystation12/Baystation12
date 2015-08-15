@@ -265,13 +265,11 @@
 	qdel(src)
 	return 1
 
-/obj/item/projectile/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
-	if(air_group || (height==0)) return 1
+/obj/item/projectile/ex_act()
+	return //explosions probably shouldn't delete projectiles
 
-	if(istype(mover, /obj/item/projectile))
-		return prob(95) //ha
-	else
-		return 1
+/obj/item/projectile/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
+	return 1
 
 /obj/item/projectile/process()
 	var/first_step = 1

@@ -7,7 +7,6 @@
 	spread_step = 20
 	
 	//silenced = 1 //embedding messages are still produced so it's kind of weird when enabled.
-	move_delay = 10
 	muzzle_type = null
 
 /obj/item/weapon/grenade/frag
