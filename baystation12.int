@@ -1,9 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: code\modules\admin\verbs\cleartoxin.dm
-DIR: code code\modules code\modules\admin code\modules\admin\verbs 
-FILE: code\modules\admin\verbs\cleartoxin.dm
+WINDOW: code\modules\admin\admin_verbs.dm
+LAST_COMPILE_VERSION: 506.1247
+DIR: code code\modules code\modules\admin 
+FILE: code\modules\admin\admin_verbs.dm
+LAST_COMPILE_TIME: 1439679616
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS

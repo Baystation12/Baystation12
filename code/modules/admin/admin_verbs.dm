@@ -286,6 +286,7 @@ var/list/admin_verbs_mod = list(
 	/datum/admins/proc/show_player_info,
 	/client/proc/player_panel_new,
 	/client/proc/dsay,
+	/client/proc/cleartox,
 	/client/proc/clean,
 	/datum/admins/proc/show_skills,
 	/datum/admins/proc/show_player_panel,
