@@ -105,7 +105,7 @@
 	playsound(loc, "sparks", 50, 1, -1)
 	if (shock_damage > 15)
 		src.visible_message(
-			"\red [src] was shocked by the [source]!", \
+			"\red [src] was shocked by \the [source]!", \
 			"\red <B>You feel a powerful shock course through your body!</B>", \
 			"\red You hear a heavy electrical crack." \
 		)
@@ -113,7 +113,7 @@
 		Weaken(10)
 	else
 		src.visible_message(
-			"\red [src] was mildly shocked by the [source].", \
+			"\red [src] was mildly shocked by \the [source].", \
 			"\red You feel a mild shock course through your body.", \
 			"\red You hear a light zapping." \
 		)

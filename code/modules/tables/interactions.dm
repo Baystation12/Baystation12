@@ -127,6 +127,11 @@
 		break_to_parts()
 		return
 
+	if(istype(W, /obj/item/weapon/melee/arm_blade))
+		user.visible_message("<span class='danger'>\The [src] was sliced apart by [user]!</span>")
+		break_to_parts()
+		return
+
 	if(can_plate && !material)
 		user << "<span class='warning'>There's nothing to put \the [W] on! Try adding plating to \the [src] first.</span>"
 		return
