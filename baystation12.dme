@@ -10,6 +10,7 @@
 #define DEBUG
 // END_PREFERENCES
 // BEGIN_INCLUDE
+#include "admin_clean.dm"
 #include "code\global.dm"
 #include "code\hub.dm"
 #include "code\names.dm"
