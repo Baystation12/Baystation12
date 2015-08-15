@@ -80,6 +80,10 @@ var/list/delayed_garbage = list()
 /datum/controller/process/garbage_collector/getStatName()
 	return ..()+"([garbage_collector.destroyed.len]/[garbage_collector.dels]/[garbage_collector.hard_dels])"
 
+// Tests if an atom has been deleted.
+/proc/deleted(atom/A) 
+	return !A || !isnull(A.gcDestroyed)
+
 // Should be treated as a replacement for the 'del' keyword.
 // Datums passed to this will be given a chance to clean up references to allow the GC to collect them.
 /proc/qdel(var/datum/A)
