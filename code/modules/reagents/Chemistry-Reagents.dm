@@ -39,7 +39,7 @@
 		return
 	if(!affects_dead && M.stat == DEAD)
 		return
-	if(overdose && (dose > overdose) && (location == CHEM_BLOOD))
+	if(overdose && (dose > overdose) && (location != CHEM_TOUCH))
 		overdose(M, alien)
 	var/removed = metabolism
 	if(ingest_met && (location == CHEM_INGEST))
