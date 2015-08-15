@@ -13,9 +13,16 @@
 	var/obj/item/weapon/reagent_containers/glass/rag/rag = null
 	var/rag_underlay = "rag"
 
-/obj/item/weapon/reagent_containers/food/drinks/bottle/Destroy()
-	rag = null
+/obj/item/weapon/reagent_containers/food/drinks/bottle/New()
 	..()
+	if(isGlass) unacidable = 1
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/proc/smash(mob/living/target as mob, mob/living/user as mob)
+/obj/item/weapon/reagent_containers/food/drinks/bottle/Destroy()
+	if(rag)
+		rag.forceMove(src.loc)
+	rag = null
+	return ..()
 
 //when thrown on impact, bottles smash and spill their contents
 /obj/item/weapon/reagent_containers/food/drinks/bottle/throw_impact(atom/hit_atom, var/speed)
