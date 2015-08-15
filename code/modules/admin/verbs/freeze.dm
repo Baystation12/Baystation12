@@ -1,4 +1,4 @@
-/client/proc/freeze(mob/M as mob in mob_list)
+/client/proc/freeze(mob/M as mob in mob_list) //Freeze
 	set category = "Admin"
 	set name = "FREEZE!"
 	if(!holder)
