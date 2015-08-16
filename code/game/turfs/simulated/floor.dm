@@ -31,7 +31,7 @@
 	if(!floortype && initial_flooring)
 		floortype = initial_flooring
 	if(floortype)
-		get_flooring_by_name(floortype)
+		set_flooring(get_flooring_data(floortype))
 
 	//TEMPORARY DEBUGGING LINES, REMOVE LATER
 	if(!flooring && icon_state != "plating")
