@@ -164,7 +164,7 @@
 	if (reagents.total_volume > 500)
 		explosion(src.loc,1,2,4)
 	else if (reagents.total_volume > 100)
-		explosion(src.loc,0,1,3)
+		explosion(src.loc,0,0,3)
 	else if (reagents.total_volume > 50)
 		explosion(src.loc,-1,1,2)
 	if(src)
