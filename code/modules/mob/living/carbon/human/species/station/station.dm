@@ -24,6 +24,8 @@
 	primitive_form = "Stok"
 	darksight = 3
 	gluttonous = 1
+	slowdown = 0.5
+	brute_mod = 0.8
 
 	blurb = "A heavily reptillian species, Unathi (or 'Sinta as they call themselves) hail from the \
 	Uuosa-Eso system, which roughly translates to 'burning mother'.<br/><br/>Coming from a harsh, radioactive \
@@ -74,8 +76,9 @@
 	tail_animation = 'icons/mob/species/tajaran/tail.dmi'
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/claws, /datum/unarmed_attack/bite/sharp)
 	darksight = 8
-	slowdown = -1
-	brute_mod = 1.2
+	slowdown = -0.5
+	brute_mod = 1.15
+	burn_mod =  1.15
 
 	blurb = "The Tajaran race is a species of feline-like bipeds hailing from the planet of Ahdomai in the \
 	S'randarr system. They have been brought up into the space age by the Humans and Skrell, and have been \
@@ -85,7 +88,7 @@
 
 	cold_level_1 = 200 //Default 260
 	cold_level_2 = 140 //Default 200
-	cold_level_3 = 80 //Default 120
+	cold_level_3 = 80  //Default 120
 
 	heat_level_1 = 330 //Default 360
 	heat_level_2 = 380 //Default 400
