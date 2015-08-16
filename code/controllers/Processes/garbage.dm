@@ -79,7 +79,7 @@ world/loop_checks = 0
 			testing("GC: [refID] not old enough, breaking at [world.time] for [GCd_at_time - time_to_kill] deciseconds until [GCd_at_time + collection_timeout]")
 			#endif
 			break // Everything else is newer, skip them
-		var/atom/A = locate(refID)
+		var/datum/A = locate(refID)
 		#ifdef GC_DEBUG
 		testing("GC: [refID] old enough to test: GCd_at_time: [GCd_at_time] time_to_kill: [time_to_kill] current: [world.time]")
 		#endif
@@ -134,6 +134,10 @@ world/loop_checks = 0
 
 /datum/controller/process/garbage_collector/getStatName()
 	return ..()+"([garbage_collector.destroyed.len]/[garbage_collector.dels]/[garbage_collector.hard_dels])"
+
+// Tests if an atom has been deleted.
+/proc/deleted(atom/A) 
+	return !A || !isnull(A.gcDestroyed)
 
 // Should be treated as a replacement for the 'del' keyword.
 // Datums passed to this will be given a chance to clean up references to allow the GC to collect them.

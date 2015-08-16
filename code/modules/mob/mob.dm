@@ -2,13 +2,47 @@
 	mob_list -= src
 	dead_mob_list -= src
 	living_mob_list -= src
+	unset_machine()
 	qdel(hud_used)
+	if(client)
+		for(var/obj/screen/movable/spell_master/spell_master in spell_masters)
+			qdel(spell_master)
+		remove_screen_obj_references()
+		for(var/atom/movable/AM in client.screen)
+			qdel(AM)
+		client.screen = list()
 	if(mind && mind.current == src)
 		spellremove(src)
 	for(var/infection in viruses)
 		qdel(infection)
 	ghostize()
 	..()
+
+/mob/proc/remove_screen_obj_references()
+	flash = null
+	blind = null
+	hands = null
+	pullin = null
+	purged = null
+	internals = null
+	oxygen = null
+	i_select = null
+	m_select = null
+	toxin = null
+	fire = null
+	bodytemp = null
+	healths = null
+	throw_icon = null
+	nutrition_icon = null
+	pressure = null
+	damageoverlay = null
+	pain = null
+	item_use_icon = null
+	gun_move_icon = null
+	gun_run_icon = null
+	gun_setting_icon = null
+	spell_masters = null
+	zone_sel = null
 
 /mob/New()
 	mob_list += src
@@ -119,7 +153,7 @@
 	return
 
 /mob/proc/incapacitated()
-	return
+	return (stat || paralysis || stunned || weakened || restrained())
 
 /mob/proc/restrained()
 	return
@@ -617,31 +651,35 @@
 
 /mob/Stat()
 	..()
+	. = (client && client.inactivity < 1200)
 
-	if(client && client.holder)
-		if(statpanel("Status"))
-			statpanel("Status","Location:","([x], [y], [z])")
-			statpanel("Status","CPU:","[world.cpu]")
-			statpanel("Status","Instances:","[world.contents.len]")
-		if(statpanel("Status") && processScheduler && processScheduler.getIsRunning())
-			for(var/datum/controller/process/P in processScheduler.processes)
-				statpanel("Status",P.getStatName(), P.getTickTime())
-		else
-			statpanel("Status","processScheduler is not running.")
+	if(.)
+		if(client.holder)
+			if(statpanel("Status"))
+				statpanel("Status","Location:","([x], [y], [z])")
+				statpanel("Status","CPU:","[world.cpu]")
+				statpanel("Status","Instances:","[world.contents.len]")
+			if(statpanel("Status") && processScheduler && processScheduler.getIsRunning())
+				for(var/datum/controller/process/P in processScheduler.processes)
+					statpanel("Status",P.getStatName(), P.getTickTime())
+			else
+				statpanel("Status","processScheduler is not running.")
 
-	if(listed_turf && client)
-		if(!TurfAdjacent(listed_turf))
-			listed_turf = null
-		else
-			statpanel(listed_turf.name, null, listed_turf)
-			for(var/atom/A in listed_turf)
-				if(!A.mouse_opacity)
-					continue
-				if(A.invisibility > see_invisible)
-					continue
-				if(is_type_in_list(A, shouldnt_see))
-					continue
-				statpanel(listed_turf.name, null, A)
+		if(listed_turf && client)
+			if(!TurfAdjacent(listed_turf))
+				listed_turf = null
+			else
+				statpanel(listed_turf.name, null, listed_turf)
+				for(var/atom/A in listed_turf)
+					if(!A.mouse_opacity)
+						continue
+					if(A.invisibility > see_invisible)
+						continue
+					if(is_type_in_list(A, shouldnt_see))
+						continue
+					statpanel(listed_turf.name, null, A)
+
+	sleep(4) //Prevent updating the stat panel for the next .4 seconds, prevents clientside latency from updates
 
 // facing verbs
 /mob/proc/canface()
@@ -833,6 +871,9 @@
 		if(O.w_class > class)
 			visible_implants += O
 	return visible_implants
+
+/mob/proc/embedded_needs_process()
+	return (embedded.len > 0)
 
 mob/proc/yank_out_object()
 	set category = "Object"

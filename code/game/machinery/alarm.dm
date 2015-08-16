@@ -69,6 +69,7 @@
 	var/datum/radio_frequency/radio_connection
 
 	var/list/TLV = list()
+	var/list/trace_gas = list("sleeping_agent", "volatile_fuel") //list of other gases that this air alarm is able to detect
 
 	var/danger_level = 0
 	var/pressure_dangerlevel = 0
@@ -240,23 +241,24 @@
 /obj/machinery/alarm/proc/overall_danger_level(var/datum/gas_mixture/environment)
 	var/partial_pressure = R_IDEAL_GAS_EQUATION*environment.temperature/environment.volume
 	var/environment_pressure = environment.return_pressure()
-	//var/other_moles = 0.0
-	////for(var/datum/gas/G in environment.trace_gases)
-	//	other_moles+=G.moles
+
+	var/other_moles = 0
+	for(var/g in trace_gas)
+		other_moles += environment.gas[g] //this is only going to be used in a partial pressure calc, so we don't need to worry about group_multiplier here.
 
 	pressure_dangerlevel = get_danger_level(environment_pressure, TLV["pressure"])
 	oxygen_dangerlevel = get_danger_level(environment.gas["oxygen"]*partial_pressure, TLV["oxygen"])
 	co2_dangerlevel = get_danger_level(environment.gas["carbon_dioxide"]*partial_pressure, TLV["carbon dioxide"])
 	phoron_dangerlevel = get_danger_level(environment.gas["phoron"]*partial_pressure, TLV["phoron"])
 	temperature_dangerlevel = get_danger_level(environment.temperature, TLV["temperature"])
-	//other_dangerlevel = get_danger_level(other_moles*partial_pressure, TLV["other"])
+	other_dangerlevel = get_danger_level(other_moles*partial_pressure, TLV["other"])
 
 	return max(
 		pressure_dangerlevel,
 		oxygen_dangerlevel,
 		co2_dangerlevel,
 		phoron_dangerlevel,
-		//other_dangerlevel,
+		other_dangerlevel,
 		temperature_dangerlevel
 		)
 
@@ -302,22 +304,30 @@
 /obj/machinery/alarm/update_icon()
 	if(wiresexposed)
 		icon_state = "alarmx"
+		set_light(0)
 		return
 	if((stat & (NOPOWER|BROKEN)) || shorted)
 		icon_state = "alarmp"
+		set_light(0)
 		return
 
 	var/icon_level = danger_level
 	if (alarm_area.atmosalm)
 		icon_level = max(icon_level, 1)	//if there's an atmos alarm but everything is okay locally, no need to go past yellow
 
+	var/new_color = null
 	switch(icon_level)
 		if (0)
 			icon_state = "alarm0"
+			new_color = "#03A728"
 		if (1)
 			icon_state = "alarm2" //yes, alarm2 is yellow alarm
+			new_color = "#EC8B2F"
 		if (2)
 			icon_state = "alarm1"
+			new_color = "#DA0205"
+	
+	set_light(l_range = 2, l_power = 0.5, l_color = new_color)
 
 /obj/machinery/alarm/receive_signal(datum/signal/signal)
 	if(stat & (NOPOWER|BROKEN))
@@ -504,34 +514,13 @@
 	var/list/environment_data = new
 	data["has_environment"] = total
 	if(total)
-		var/partial_pressure = R_IDEAL_GAS_EQUATION*environment.temperature/environment.volume
-
-		var/list/current_settings = TLV["pressure"]
 		var/pressure = environment.return_pressure()
-		var/pressure_danger = get_danger_level(pressure, current_settings)
-		environment_data[++environment_data.len] = list("name" = "Pressure", "value" = pressure, "unit" = "kPa", "danger_level" = pressure_danger)
-		data["total_danger"] = pressure_danger
-
-		current_settings = TLV["oxygen"]
-		var/oxygen_danger = get_danger_level(environment.gas["oxygen"]*partial_pressure, current_settings)
-		environment_data[++environment_data.len] = list("name" = "Oxygen", "value" = environment.gas["oxygen"] / total * 100, "unit" = "%", "danger_level" = oxygen_danger)
-		data["total_danger"] = max(oxygen_danger, data["total_danger"])
-
-		current_settings = TLV["carbon dioxide"]
-		var/carbon_dioxide_danger = get_danger_level(environment.gas["carbon_dioxide"]*partial_pressure, current_settings)
-		environment_data[++environment_data.len] = list("name" = "Carbon dioxide", "value" = environment.gas["carbon_dioxide"] / total * 100, "unit" = "%", "danger_level" = carbon_dioxide_danger)
-		data["total_danger"] = max(carbon_dioxide_danger, data["total_danger"])
-
-		current_settings = TLV["phoron"]
-		var/phoron_danger = get_danger_level(environment.gas["phoron"]*partial_pressure, current_settings)
-		environment_data[++environment_data.len] = list("name" = "Toxins", "value" = environment.gas["phoron"] / total * 100, "unit" = "%", "danger_level" = phoron_danger)
-		data["total_danger"] = max(phoron_danger, data["total_danger"])
-
-		current_settings = TLV["temperature"]
-		var/temperature_danger = get_danger_level(environment.temperature, current_settings)
-		environment_data[++environment_data.len] = list("name" = "Temperature", "value" = environment.temperature, "unit" = "K ([round(environment.temperature - T0C, 0.1)]C)", "danger_level" = temperature_danger)
-		data["total_danger"] = max(temperature_danger, data["total_danger"])
-
+		environment_data[++environment_data.len] = list("name" = "Pressure", "value" = pressure, "unit" = "kPa", "danger_level" = pressure_dangerlevel)
+		environment_data[++environment_data.len] = list("name" = "Oxygen", "value" = environment.gas["oxygen"] / total * 100, "unit" = "%", "danger_level" = oxygen_dangerlevel)
+		environment_data[++environment_data.len] = list("name" = "Carbon dioxide", "value" = environment.gas["carbon_dioxide"] / total * 100, "unit" = "%", "danger_level" = co2_dangerlevel)
+		environment_data[++environment_data.len] = list("name" = "Toxins", "value" = environment.gas["phoron"] / total * 100, "unit" = "%", "danger_level" = phoron_dangerlevel)
+		environment_data[++environment_data.len] = list("name" = "Temperature", "value" = environment.temperature, "unit" = "K ([round(environment.temperature - T0C, 0.1)]C)", "danger_level" = temperature_dangerlevel)
+	data["total_danger"] = danger_level
 	data["environment"] = environment_data
 	data["atmos_alarm"] = alarm_area.atmosalm
 	data["fire_alarm"] = alarm_area.fire != null
@@ -888,8 +877,11 @@ FIRE ALARM
 	var/last_process = 0
 	var/wiresexposed = 0
 	var/buildstage = 2 // 2 = complete, 1 = no wires,  0 = circuit gone
+	var/seclevel
 
 /obj/machinery/firealarm/update_icon()
+	overlays.Cut()
+
 	if(wiresexposed)
 		switch(buildstage)
 			if(2)
@@ -898,17 +890,28 @@ FIRE ALARM
 				icon_state="fire_b1"
 			if(0)
 				icon_state="fire_b0"
-
+		set_light(0)
 		return
 
 	if(stat & BROKEN)
 		icon_state = "firex"
+		set_light(0)
 	else if(stat & NOPOWER)
 		icon_state = "firep"
-	else if(!src.detecting)
-		icon_state = "fire1"
+		set_light(0)
 	else
-		icon_state = "fire0"
+		if(!src.detecting)
+			icon_state = "fire1"
+			set_light(l_range = 4, l_power = 2, l_color = "#ff0000")
+		else
+			icon_state = "fire0"
+			switch(seclevel)
+				if("green")	set_light(l_range = 2, l_power = 0.5, l_color = "#00ff00")
+				if("blue")	set_light(l_range = 2, l_power = 0.5, l_color = "#1024A9")
+				if("red")	set_light(l_range = 4, l_power = 2, l_color = "#ff0000")
+				if("delta")	set_light(l_range = 4, l_power = 2, l_color = "#FF6633")
+		
+		src.overlays += image('icons/obj/monitors.dmi', "overlay_[seclevel]")
 
 /obj/machinery/firealarm/fire_act(datum/gas_mixture/air, temperature, volume)
 	if(src.detecting)
@@ -1121,14 +1124,14 @@ FIRE ALARM
 		pixel_x = (dir & 3)? 0 : (dir == 4 ? -24 : 24)
 		pixel_y = (dir & 3)? (dir ==1 ? -24 : 24) : 0
 
+/obj/machinery/firealarm/proc/set_security_level(var/newlevel)
+	if(seclevel != newlevel)
+		seclevel = newlevel
+		update_icon()
+
 /obj/machinery/firealarm/initialize()
 	if(z in config.contact_levels)
-		if(security_level)
-			src.overlays += image('icons/obj/monitors.dmi', "overlay_[get_security_level()]")
-		else
-			src.overlays += image('icons/obj/monitors.dmi', "overlay_green")
-
-	update_icon()
+		set_security_level(security_level? get_security_level() : "green")
 
 /*
 FIRE ALARM CIRCUIT

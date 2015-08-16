@@ -202,11 +202,11 @@
 	if (network == 3)
 		newlap.spawn_parts += (/obj/item/part/computer/networking/cable)
 	if (power == 1)
-		qdel(newlap.battery)
-		newlap.battery = new /obj/item/weapon/cell/high(newlap)
+		newlap.battery.maxcharge = 1000
+		newlap.battery.charge = 1000
 	if (power == 2)
-		qdel(newlap.battery)
-		newlap.battery = new /obj/item/weapon/cell/super(newlap)
+		newlap.battery.maxcharge = 1750
+		newlap.battery.charge = 1750
 
 	newlap.spawn_parts()
 

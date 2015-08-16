@@ -103,6 +103,13 @@
 			bumpopen(M)
 		return
 
+	if(istype(AM, /obj/machinery/bot))
+		var/obj/machinery/bot/bot = AM
+		if(src.check_access(bot.botcard))
+			if(density)
+				open()
+		return
+
 	if(istype(AM, /mob/living/bot))
 		var/mob/living/bot/bot = AM
 		if(src.check_access(bot.botcard))
@@ -334,7 +341,8 @@
 
 /obj/machinery/door/emp_act(severity)
 	if(prob(20/severity) && (istype(src,/obj/machinery/door/airlock) || istype(src,/obj/machinery/door/window)) )
-		open()
+		spawn(0)
+			open()
 	..()
 
 

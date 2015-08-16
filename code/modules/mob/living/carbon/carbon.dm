@@ -17,6 +17,9 @@
 		germ_level++
 
 /mob/living/carbon/Destroy()
+	qdel(ingested)
+	qdel(touching)
+	// We don't qdel(bloodstr) because it's the same as qdel(reagents)
 	for(var/guts in internal_organs)
 		qdel(guts)
 	for(var/food in stomach_contents)
@@ -257,7 +260,7 @@
 			var/show_ssd
 			var/mob/living/carbon/human/H = src
 			if(istype(H)) show_ssd = H.species.show_ssd
-			if(show_ssd && (!client || !key || player_logged))
+			if(show_ssd && !client && !aghosted)
 				M.visible_message("<span class='notice'>[M] shakes [src] trying to wake [t_him] up!</span>", \
 				"<span class='notice'>You shake [src], but they do not respond... Maybe they have S.S.D?</span>")
 			else if(lying || src.sleeping)
@@ -372,8 +375,8 @@
 
 /mob/living/carbon/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	..()
-	var/temp_inc = max(BODYTEMP_HEATING_MAX*(1-get_heat_protection()), 0)
-	bodytemperature = min(bodytemperature + temp_inc, exposed_temperature)
+	var/temp_inc = max(min(BODYTEMP_HEATING_MAX*(1-get_heat_protection()), exposed_temperature - bodytemperature), 0)
+	bodytemperature += temp_inc
 
 /mob/living/carbon/can_use_hands()
 	if(handcuffed)

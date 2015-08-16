@@ -75,7 +75,7 @@ datum/preferences
 	var/b_eyes = 0						//Eye color
 	var/species = "Human"               //Species datum to use.
 	var/species_preview                 //Used for the species selection window.
-	var/language = "None"				//Secondary language
+	var/list/alternate_languages = list() //Secondary language(s)
 	var/list/gear						//Custom/fluff item loadout.
 
 		//Some faction information.
@@ -132,9 +132,12 @@ datum/preferences
 	var/metadata = ""
 	var/slot_name = ""
 
+	var/client/client = null
+
 /datum/preferences/New(client/C)
 	b_type = pick(4;"O-", 36;"O+", 3;"A-", 28;"A+", 1;"B-", 20;"B+", 1;"AB-", 5;"AB+")
 	if(istype(C))
+		client = C
 		if(!IsGuestKey(C.key))
 			load_path(C.ckey)
 			if(load_preferences())
@@ -307,7 +310,7 @@ datum/preferences
 	dat += "(<a href='?_src_=prefs;preference=all;task=random'>&reg;</A>)"
 	dat += "<br>"
 	dat += "Species: <a href='?src=\ref[user];preference=species;task=change'>[species]</a><br>"
-	dat += "Secondary Language:<br><a href='byond://?src=\ref[user];preference=language;task=input'>[language]</a><br>"
+
 	dat += "Blood Type: <a href='byond://?src=\ref[user];preference=b_type;task=input'>[b_type]</a><br>"
 	dat += "Skin Tone: <a href='?_src_=prefs;preference=s_tone;task=input'>[-s_tone + 35]/220<br></a>"
 	//dat += "Skin pattern: <a href='byond://?src=\ref[user];preference=skin_style;task=input'>Adjust</a><br>"
@@ -380,6 +383,25 @@ datum/preferences
 		dat += "\[...\]<br><br>"
 	else
 		dat += "<br><br>"
+
+
+	dat += "<b>Languages</b><br>"
+	var/datum/species/S = all_species[species]
+	if(S.language)
+		dat += "- [S.language]<br>"
+	if(S.default_language && S.default_language != S.language)
+		dat += "- [S.default_language]<br>"
+	if(S.num_alternate_languages)
+		if(alternate_languages.len)
+			for(var/i = 1 to alternate_languages.len)
+				var/lang = alternate_languages[i]
+				dat += "- [lang] - <a href='byond://?src=\ref[user];preference=language;remove=[i]'>remove</a><br>"
+
+		if(alternate_languages.len < S.num_alternate_languages)
+			dat += "- <a href='byond://?src=\ref[user];preference=language;add=1'>add</a> ([S.num_alternate_languages - alternate_languages.len] remaining)<br>"
+	else
+		dat += "- [species] cannot choose secondary languages.<br>"
+	dat += "<br><br>"
 
 	var/list/undies = gender == MALE ? underwear_m : underwear_f
 
@@ -1126,6 +1148,32 @@ datum/preferences
 				if(gear_name == choice)
 					gear -= gear_name
 					break
+	else if(href_list["preference"] == "language")
+		if(href_list["remove"])
+			var/index = text2num(href_list["remove"])
+			alternate_languages.Cut(index, index+1)
+		if(href_list["add"])
+			var/datum/species/S = all_species[species]
+			if(alternate_languages.len >= S.num_alternate_languages)
+				alert(user, "You have already selected the maximum number of alternate languages for this species!")
+			else
+				var/list/available_languages = S.secondary_langs.Copy()
+				for(var/L in all_languages)
+					var/datum/language/lang = all_languages[L]
+					if(!(lang.flags & RESTRICTED) && (!config.usealienwhitelist || is_alien_whitelisted(user, L) || !(lang.flags & WHITELISTED)))
+						available_languages |= L
+
+				// make sure we don't let them waste slots on the default languages
+				available_languages -= S.language
+				available_languages -= S.default_language
+				available_languages -= alternate_languages
+
+				if(!available_languages.len)
+					alert(user, "There are no additional languages available to select.")
+				else
+					var/new_lang = input("Select an additional language", "Character Generation", null) as null|anything in available_languages
+					if(new_lang)
+						alternate_languages |= new_lang
 
 	switch(href_list["task"])
 		if("change")
@@ -1135,6 +1183,7 @@ datum/preferences
 				if(!choice) return
 				species_preview = choice
 				SetSpecies(user)
+				alternate_languages = list() // Reset their alternate languages. Todo: attempt to just fix it instead?
 
 		if("random")
 			switch(href_list["preference"])
@@ -1242,29 +1291,6 @@ datum/preferences
 						b_hair = 0//hex2num(copytext(new_hair, 6, 8))
 
 						s_tone = 0
-
-				if("language")
-					var/languages_available
-					var/list/new_languages = list("None")
-					var/datum/species/S = all_species[species]
-
-					if(config.usealienwhitelist)
-						for(var/L in all_languages)
-							var/datum/language/lang = all_languages[L]
-							if((!(lang.flags & RESTRICTED)) && (is_alien_whitelisted(user, L)||(!( lang.flags & WHITELISTED ))||(S && (L in S.secondary_langs))))
-								new_languages += lang
-
-								languages_available = 1
-
-						if(!(languages_available))
-							alert(user, "There are not currently any available secondary languages.")
-					else
-						for(var/L in all_languages)
-							var/datum/language/lang = all_languages[L]
-							if(!(lang.flags & RESTRICTED))
-								new_languages += lang.name
-
-					language = input("Please select a secondary language", "Character Generation", null) in new_languages
 
 				if("metadata")
 					var/new_metadata = input(user, "Enter any information you'd like others to see, such as Roleplay-preferences:", "Game Preference" , metadata)  as message|null
@@ -1375,7 +1401,7 @@ datum/preferences
 						backbag = backbaglist.Find(new_backbag)
 
 				if("nt_relation")
-					var/new_relation = input(user, "Choose your relation to NT. Note that this represents what others can find out about your character by researching your background, not what your character actually thinks.", "Character Preference")  as null|anything in list("Loyal", "Supportive", "Neutral", "Skeptical", "Opposed")
+					var/new_relation = input(user, "Choose your relation to NT. Note that this represents what others can find out about your character by researching your background, not what your character actually thinks.", "Character Preference")  as null|anything in COMPANY_ALIGNMENTS
 					if(new_relation)
 						nanotrasen_relation = new_relation
 

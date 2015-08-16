@@ -7,60 +7,6 @@ GAS ANALYZER
 MASS SPECTROMETER
 REAGENT SCANNER
 */
-/obj/item/device/t_scanner
-	name = "\improper T-ray scanner"
-	desc = "A terahertz-ray emitter and scanner used to detect underfloor objects such as cables and pipes."
-	icon_state = "t-ray0"
-	var/on = 0
-	slot_flags = SLOT_BELT
-	w_class = 2
-	item_state = "electronic"
-
-	matter = list(DEFAULT_WALL_MATERIAL = 150)
-
-	origin_tech = list(TECH_MAGNET = 1, TECH_ENGINERING = 1)
-
-/obj/item/device/t_scanner/attack_self(mob/user)
-
-	on = !on
-	icon_state = "t-ray[on]"
-
-	if(on)
-		processing_objects.Add(src)
-
-
-/obj/item/device/t_scanner/process()
-	if(!on)
-		processing_objects.Remove(src)
-		return null
-
-	for(var/turf/T in range(1, src.loc) )
-
-		if(!T.intact)
-			continue
-
-		for(var/obj/O in T.contents)
-
-			if(O.level != 1)
-				continue
-
-			if(O.invisibility == 101)
-				O.invisibility = 0
-				O.alpha = 128
-				spawn(10)
-					if(O)
-						var/turf/U = O.loc
-						if(U.intact)
-							O.invisibility = 101
-							O.alpha = 255
-
-		var/mob/living/M = locate() in T
-		if(M && M.invisibility == 2)
-			M.invisibility = 0
-			spawn(2)
-				if(M)
-					M.invisibility = INVISIBILITY_LEVEL_TWO
-
 
 /obj/item/device/healthanalyzer
 	name = "health analyzer"
@@ -256,6 +202,13 @@ REAGENT SCANNER
 
 	origin_tech = list(TECH_MAGNET = 1, TECH_ENGINERING = 1)
 
+/obj/item/device/analyzer/atmosanalyze(var/mob/user)
+	var/air = user.return_air()
+	if (!air)
+		return
+
+	return atmosanalyzer_scan(src, air, user)
+
 /obj/item/device/analyzer/attack_self(mob/user as mob)
 
 	if (user.stat)
@@ -264,27 +217,7 @@ REAGENT SCANNER
 		usr << "<span class='warning'>You don't have the dexterity to do this!</span>"
 		return
 
-	var/turf/location = user.loc
-	if (!( istype(location, /turf) ))
-		return
-
-	var/datum/gas_mixture/environment = location.return_air()
-
-	var/pressure = environment.return_pressure()
-	var/total_moles = environment.total_moles
-
-	user.show_message("<span class='notice'><b>Results:</b></span>", 1)
-	if(abs(pressure - ONE_ATMOSPHERE) < 10)
-		user.show_message("<span class='notice'>Pressure: [round(pressure,0.1)] kPa</span>", 1)
-	else
-		user.show_message("<span class='warning'>Pressure: [round(pressure,0.1)] kPa</span>", 1)
-	if(total_moles)
-		for(var/g in environment.gas)
-			user.show_message("<span class='notice'>[gas_data.name[g]]: [round((environment.gas[g] / total_moles)*100)]%</span>", 1)
-
-		user.show_message("<span class='notice'>Temperature: [round(environment.temperature-T0C)]&deg;C</span>", 1)
-
-	src.add_fingerprint(user)
+	analyze_gases(src, user)
 	return
 
 /obj/item/device/mass_spectrometer
