@@ -15,6 +15,15 @@
 	attack_verb = list("attacked", "slapped", "whacked")
 	var/mob/living/carbon/brain/brainmob = null
 
+/obj/item/organ/pariah_brain
+	name = "brain remnants"
+	desc = "Did someone tread on this? It looks useless for cloning or cyborgification."
+	organ_tag = "brain"
+	parent_organ = "head"
+	icon = 'icons/mob/alien.dmi'
+	icon_state = "chitin"
+	vital = 1
+
 /obj/item/organ/brain/xeno
 	name = "thinkpan"
 	desc = "It looks kind of like an enormous wad of purple bubblegum."

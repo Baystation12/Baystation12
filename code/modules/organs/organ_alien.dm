@@ -328,10 +328,6 @@
 		backup_time = world.time
 		if(owner.mind) backup = owner.mind
 
-/obj/item/organ/stack/vox
-
-/obj/item/organ/stack/vox/stack
-
 /obj/item/organ/stack
 	name = "cortical stack"
 	icon_state = "brain-prosthetic"
