@@ -813,8 +813,8 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	name = "Energy marksman crate"
 	contains = list(/obj/item/clothing/suit/armor/laserproof,
 					/obj/item/clothing/suit/armor/laserproof,
-					/obj/item/weapon/gun/energy/sniperrifle,
-					/obj/item/weapon/gun/energy/sniperrifle)
+					/obj/item/weapon/gun/energy/xray,
+					/obj/item/weapon/gun/energy/xray)
 	cost = 90
 	containertype = /obj/structure/closet/crate/secure
 	containername = "Energy marksman crate"
