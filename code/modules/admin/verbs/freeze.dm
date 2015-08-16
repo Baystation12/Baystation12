@@ -1,6 +1,6 @@
 /client/proc/freeze(mob/M as mob in mob_list) //Freeze
 	set category = "Admin"
-	set name = "FREEZE!"
+	set name = "Freeze Mob"
 	if(!holder)
 		src << "Only mentors and above may use this command."
 		return
@@ -16,7 +16,7 @@
 			return
 		if (!M.paralysis)
 			alert("\red You have frozen [key_name(M)] for suspicious activity.")
-			M << "\red FREEZE!  DON'T MOVE!  You have been frozen."
+			M << "\red You have been frozen by [key_name(usr)]."
 			M.Paralyse(5000000000)
 			log_admin("\red [key_name_admin(usr)] has frozen [key_name(M)] for suspicious activity!", 1)
 			message_admins("\blue [key_name_admin(usr)] froze [key_name_admin(M)] on suspicious conduct.", 1)
@@ -27,6 +27,7 @@
 			log_admin("\blue [key_name(usr)] has unfrozen [key_name(M)] and returned them to play.")
 			message_admins("\blue [key_name_admin(usr)] has unfrozen [key_name_admin(M)] and returned them to play.")
 			M.Paralyse(0)
+			M.AdjustParalysis(-5000000000)
 			M.blinded = 0
 			M.lying = 0
 			M.stat = 0

@@ -201,7 +201,8 @@ var/list/admin_verbs_permissions = list(
 	/client/proc/edit_admin_permissions
 	)
 var/list/admin_verbs_rejuv = list(
-	/client/proc/respawn_character
+	/client/proc/respawn_character,
+	/client/proc/cmd_admin_rejuvenate
 	)
 
 //verbs which can be hidden - needs work
@@ -286,6 +287,7 @@ var/list/admin_verbs_mod = list(
 	/datum/admins/proc/show_player_info,
 	/client/proc/player_panel_new,
 	/client/proc/dsay,
+	/client/proc/cleartox,
 	/client/proc/clean,
 	/datum/admins/proc/show_skills,
 	/datum/admins/proc/show_player_panel,
