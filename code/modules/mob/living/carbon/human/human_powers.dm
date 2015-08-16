@@ -71,7 +71,7 @@
 
 	if(!T || !src || src.stat) return
 
-	if(get_dist(get_turf(T), get_turf(src)) > 6) return
+	if(get_dist(get_turf(T), get_turf(src)) > 4) return
 
 	if(last_special > world.time)
 		return
@@ -83,8 +83,8 @@
 	last_special = world.time + 75
 	status_flags |= LEAPING
 
-	src.visible_message("<span class='warning'><b>\The [src]</b> leaps at [T]!</span>")
-	src.throw_at(get_step(get_turf(T),get_turf(src)), 5, 1, src)
+	src.visible_message("<span class='danger'>\The [src] leaps at [T]!</span>")
+	src.throw_at(get_step(get_turf(T),get_turf(src)), 4, 1, src)
 	playsound(src.loc, 'sound/voice/shriek1.ogg', 50, 1)
 
 	sleep(5)
@@ -92,13 +92,13 @@
 	if(status_flags & LEAPING) status_flags &= ~LEAPING
 
 	if(!src.Adjacent(T))
-		src << "\red You miss!"
+		src << "<span class='warning'>You miss!</span>"
 		return
 
-	T.Weaken(5)
+	T.Weaken(3)
 
-	//Only official cool kids get the grab and no self-prone.
-	if(!(src.mind && src.mind.special_role))
+	// Pariahs are not good at leaping. This is snowflakey, pls fix.
+	if(species.name == "Vox Pariah")
 		src.Weaken(5)
 		return
 
@@ -118,7 +118,7 @@
 	else
 		r_hand = G
 
-	G.state = GRAB_AGGRESSIVE
+	G.state = GRAB_PASSIVE
 	G.icon_state = "grabbed1"
 	G.synch()
 
