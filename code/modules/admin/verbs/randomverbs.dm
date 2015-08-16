@@ -497,6 +497,11 @@ Traitors and the like can also be revived with the previous role mostly intact.
 		return
 	if(config.allow_admin_rev)
 		M.revive()
+		M.AdjustParalysis(-9999999999999)
+		M.adjustHalLoss(-999999999999)
+		M.blinded = 0
+		M.lying = 0
+		M.stat = 0
 
 		log_admin("[key_name(usr)] healed / revived [key_name(M)]")
 		message_admins("\red Admin [key_name_admin(usr)] healed / revived [key_name_admin(M)]!", 1)
