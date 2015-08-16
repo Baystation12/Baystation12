@@ -1,6 +1,6 @@
 /client/proc/freeze(mob/M as mob in mob_list) //Freeze
 	set category = "Admin"
-	set name = "FREEZE!"
+	set name = "Freeze Mob"
 	if(!holder)
 		src << "Only mentors and above may use this command."
 		return
