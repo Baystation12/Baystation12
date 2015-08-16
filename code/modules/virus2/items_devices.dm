@@ -3,7 +3,7 @@
 /obj/item/device/antibody_scanner
 	name = "antibody scanner"
 	desc = "Scans living beings for antibodies in their blood."
-	icon_state = "health"
+	icon_state = "anti"
 	w_class = 2.0
 	item_state = "electronic"
 	flags = CONDUCT
