@@ -638,6 +638,10 @@
 	. = (client && client.inactivity < 1200)
 
 	if(.)
+		if(statpanel("Status") && ticker && ticker.current_state != GAME_STATE_PREGAME)
+			statpanel("Status", "Station Time", worldtime2text())
+			statpanel("Status", "Round Duration", round_duration())
+
 		if(client.holder)
 			if(statpanel("Status"))
 				statpanel("Status","Location:","([x], [y], [z])")
