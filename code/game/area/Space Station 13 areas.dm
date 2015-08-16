@@ -130,7 +130,7 @@ area/space/atmosalert()
 /area/admin
 	name = "\improper Admin room"
 	icon_state = "start"
-
+	requires_power = 0
 
 
 ////////////
