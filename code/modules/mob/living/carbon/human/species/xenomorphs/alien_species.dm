@@ -11,7 +11,7 @@
 
 	has_fine_manipulation = 0
 	siemens_coefficient = 0
-	gluttonous = 2
+	gluttonous = 3
 
 	eyes = "blank_eyes"
 
