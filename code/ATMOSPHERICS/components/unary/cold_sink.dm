@@ -43,6 +43,13 @@
 			node = target
 			break
 
+	//copied from pipe construction code since heaters/freezers don't use fittings and weren't doing this check - this all really really needs to be refactored someday.
+	//check that there are no incompatible pipes/machinery in our own location
+	for(var/obj/machinery/atmospherics/M in src.loc)
+		if(M != src && (M.initialize_directions & node_connect) && M.check_connect_types(M,src))	// matches at least one direction on either type of pipe & same connection type
+			node = null
+			break
+
 	update_icon()
 
 /obj/machinery/atmospherics/unary/freezer/update_icon()
