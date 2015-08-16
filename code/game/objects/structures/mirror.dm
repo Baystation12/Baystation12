@@ -75,8 +75,8 @@
 
 /obj/structure/mirror/raider/attack_hand(var/mob/living/carbon/human/user)
 	if(istype(get_area(src),/area/syndicate_mothership))
-		if(istype(user) && user.mind && user.mind.special_role == "Raider" && user.species != "Vox" && is_alien_whitelisted(user, "Vox"))
-			var/choice = input("Do you wish to become a Vox? This is not reversible.") as null|anything in list("No","Yes")
+		if(istype(user) && user.mind && user.mind.special_role == "Raider" && user.species.name != "Vox" && is_alien_whitelisted(user, "Vox"))
+			var/choice = input("Do you wish to become a true Vox of the Shoal? This is not reversible.") as null|anything in list("No","Yes")
 			if(choice && choice == "Yes")
 				var/mob/living/carbon/human/vox/vox = new(get_turf(src),"Vox")
 				vox.gender = user.gender
