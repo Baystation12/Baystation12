@@ -287,6 +287,8 @@
 		if(M.mind)
 			linkedholodeck.play_ambience(M)
 
+	linkedholodeck.sound_env = A.sound_env
+
 	spawn(30)
 		for(var/obj/effect/landmark/L in linkedholodeck)
 			if(L.name=="Atmospheric Test Start")
