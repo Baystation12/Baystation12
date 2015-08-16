@@ -319,11 +319,6 @@ area/space/atmosalert()
 /area/shuttle/research/outpost
 	icon_state = "shuttle"
 
-/area/shuttle/skipjack/station
-	name = "\improper Skipjack"
-	icon_state = "yellow"
-	requires_power = 0
-
 /area/airtunnel1/      // referenced in airtunnel.dm:759
 
 /area/dummy/           // Referenced in engine.dm:261
@@ -515,6 +510,11 @@ area/space/atmosalert()
 	icon_state = "yellow"
 	requires_power = 0
 	lighting_use_dynamic = 0
+
+/area/skipjack_station
+	name = "\improper Skipjack"
+	icon_state = "yellow"
+	requires_power = 0
 
 /area/skipjack_station/transit
 
