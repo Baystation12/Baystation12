@@ -86,9 +86,9 @@ proc/airborne_can_reach(turf/source, turf/target)
 	if(!disease.affected_species.len)
 		return
 
-	if (!(M.species.name in disease.affected_species))
+	if (!(M.species.get_bodytype() in disease.affected_species))
 		if (forced)
-			disease.affected_species[1] = M.species.name
+			disease.affected_species[1] = M.species.get_bodytype()
 		else
 			return //not compatible with this species
 
