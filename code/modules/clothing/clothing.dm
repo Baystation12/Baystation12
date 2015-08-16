@@ -73,6 +73,7 @@
 	switch(target_species)
 		if("Skrell")
 			species_restricted = list("Human", "Skrell") //skrell helmets fit humans too
+
 		else
 			species_restricted = list(target_species)
 
