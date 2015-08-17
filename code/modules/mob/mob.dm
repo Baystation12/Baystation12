@@ -717,7 +717,7 @@
 		drop_l_hand()
 		drop_r_hand()
 	else
-		density = 1
+		density = initial(density)
 
 	for(var/obj/item/weapon/grab/G in grabbed_by)
 		if(G.state >= GRAB_AGGRESSIVE)

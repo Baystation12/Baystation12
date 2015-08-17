@@ -101,10 +101,12 @@
 	..(message, null, verb)
 
 /mob/living/bot/Bump(var/atom/A)
-	if(istype(A, /obj/machinery/door) && botcard)
+	if(on && botcard && istype(A, /obj/machinery/door))
 		var/obj/machinery/door/D = A
 		if(!istype(D, /obj/machinery/door/firedoor) && !istype(D, /obj/machinery/door/blast) && D.check_access(botcard))
 			D.open()
+	else
+		..()
 
 /mob/living/bot/proc/Emag(var/mob/user)
 	log_and_message_admins("emagged [src]")

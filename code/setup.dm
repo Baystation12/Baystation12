@@ -863,7 +863,7 @@ var/list/be_special_flags = list(
 #define ROBOT 8
 #define SLIME 16
 #define SIMPLE_ANIMAL 32
-
+#define HEAVY 64
 
 #define ALLMOBS (HUMAN|MONKEY|ALIEN|ROBOT|SLIME|SIMPLE_ANIMAL)
 
