@@ -10,6 +10,7 @@ var/list/gamemode_cache = list()
 	var/log_access = 0					// log login/logout
 	var/log_say = 0						// log client say
 	var/log_admin = 0					// log admin actions
+	var/log_devsay = 0					// log devsay messages
 	var/log_debug = 1					// log debug output
 	var/log_game = 0					// log game events
 	var/log_vote = 0					// log voting
@@ -22,7 +23,7 @@ var/list/gamemode_cache = list()
 	var/log_hrefs = 0					// logs all links clicked in-game. Could be used for debugging and tracking down exploits
 	var/log_runtime = 0					// logs world.log to a file
 	var/sql_enabled = 1					// for sql switching
-	var/allow_admin_ooccolor = 0		// Allows admins with relevant permissions to have their own ooc colour
+	var/allow_admin_ooccolor = 1		// Allows admins with relevant permissions to have their own ooc colour
 	var/allow_vote_restart = 0 			// allow votes to restart
 	var/ert_admin_call_only = 0
 	var/allow_vote_mode = 0				// allow votes to change mode
@@ -202,6 +203,7 @@ var/list/gamemode_cache = list()
 	var/looc_allowed = 1
 	var/dooc_allowed = 1
 	var/dsay_allowed = 1
+	var/devsay_allowed = 1
 
 	var/starlight = 0	// Whether space turfs have ambient light or not
 
@@ -311,6 +313,9 @@ var/list/gamemode_cache = list()
 
 				if ("log_adminchat")
 					config.log_adminchat = 1
+
+				if ("log_devsay")
+					config.log_devsay = 1
 
 				if ("log_adminwarn")
 					config.log_adminwarn = 1

@@ -786,6 +786,22 @@ proc/admin_notice(var/message, var/rights)
 	log_and_message_admins("toggled LOOC.")
 	feedback_add_details("admin_verb","TLOOC") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
+/datum/admins/proc/toggledevsay()
+	set category = "Server"
+	set desc="Globally Toggles DEVSAY"
+	set name="Toggle DEVSAY"
+
+	if(!check_rights(R_ADMIN))
+		return
+
+	config.devsay_allowed = !( config.devsay_allowed )
+	if (config.devsay_allowed)
+		world << "<B>Devchat has been globally enabled!</B>"
+	else
+		world << "<B>Devchat has been globally disabled!</B>"
+	log_admin("[key_name(usr)] toggled DEV chat.")
+	message_admins("[key_name_admin(usr)] toggled DEV chat.", 1)
+	feedback_add_details("admin_verb","DEVZSAY")
 
 /datum/admins/proc/toggledsay()
 	set category = "Server"
