@@ -56,7 +56,7 @@
 	id = "Receiver A"
 	network = "tcommsat"
 	autolinkers = list("receiverA") // link to relay
-	freq_listening = list(SCI_FREQ, MED_FREQ, SUP_FREQ, SRV_FREQ, COMM_FREQ, ENG_FREQ, SEC_FREQ)
+	freq_listening = list(AI_FREQ, SCI_FREQ, MED_FREQ, SUP_FREQ, SRV_FREQ, COMM_FREQ, ENG_FREQ, SEC_FREQ)
 
 	//Common and other radio frequencies for people to freely use
 	New()
@@ -88,7 +88,7 @@
 
 /obj/machinery/telecomms/bus/preset_two/New()
 	for(var/i = 1441, i < 1489, i += 2)
-		if(i == AI_FREQ || i == PUB_FREQ)
+		if(i == PUB_FREQ)
 			continue
 		freq_listening |= i
 	..()
