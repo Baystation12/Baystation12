@@ -513,7 +513,15 @@
 
 /obj/item/clothing/under/blazer
 	name = "blue blazer"
-	desc = "A bold but yet conservative outfit, red corduroys, navy blazer and a tie." 
+	desc = "A bold but yet conservative outfit, red corduroys, navy blazer and a tie."
 	icon_state = "blue_blazer"
 	item_state = "blue_blazer"
 	worn_state = "blue_blazer"
+
+/obj/item/clothing/under/olddressuniform
+	name = "retired dress uniform"
+	desc = "A retired Station Head of Staff uniform, phased out twenty years ago for the newer jumpsuit design, but still acceptable dress. Lovingly maintained."
+	icon_state = "olddressuniform"
+	item_state = "olddressuniform"
+	worn_state = "olddressuniform"
+
