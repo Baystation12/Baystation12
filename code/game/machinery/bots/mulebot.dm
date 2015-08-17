@@ -712,10 +712,6 @@
 				M.lying = 1
 	..()
 
-/obj/machinery/bot/mulebot/alter_health()
-	return get_turf(src)
-
-
 // called from mob/living/carbon/human/Crossed()
 // when mulebot is in the same loc
 /obj/machinery/bot/mulebot/proc/RunOver(var/mob/living/carbon/human/H)
