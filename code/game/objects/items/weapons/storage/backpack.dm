@@ -76,7 +76,7 @@
 			return
 			*/
 		..()
-	
+
 	//Please don't clutter the parent storage item with stupid hacks.
 	can_be_inserted(obj/item/W as obj, stop_messages = 0)
 		if(istype(W, /obj/item/weapon/storage/backpack/holding))
@@ -121,23 +121,31 @@
 	name = "medical backpack"
 	desc = "It's a backpack especially designed for use in a sterile environment."
 	icon_state = "medicalpack"
+	storage_slots = 10
+	max_storage_space = 36
 	item_state_slots = null
 
 /obj/item/weapon/storage/backpack/security
 	name = "security backpack"
 	desc = "It's a very robust backpack."
 	icon_state = "securitypack"
+	storage_slots = 10
+	max_storage_space = 36
 	item_state_slots = null
 
 /obj/item/weapon/storage/backpack/captain
 	name = "captain's backpack"
 	desc = "It's a special backpack made exclusively for Nanotrasen officers."
 	icon_state = "captainpack"
+	storage_slots = 14
+	max_storage_space = 46
 	item_state_slots = null
 
 /obj/item/weapon/storage/backpack/industrial
 	name = "industrial backpack"
 	desc = "It's a tough backpack for the daily grind of station life."
+	storage_slots = 14
+	max_storage_space = 46
 	icon_state = "engiepack"
 	item_state_slots = null
 
@@ -155,16 +163,22 @@
 	name = "geneticist backpack"
 	desc = "It's a backpack fitted with slots for diskettes and other workplace tools."
 	icon_state = "genpack"
+	storage_slots = 10
+	max_storage_space = 36
 
 /obj/item/weapon/storage/backpack/virology
 	name = "sterile backpack"
 	desc = "It's a sterile backpack able to withstand different pathogens from entering its fabric."
 	icon_state = "viropack"
+	storage_slots = 10
+	max_storage_space = 36
 
 /obj/item/weapon/storage/backpack/chemistry
 	name = "chemistry backpack"
 	desc = "It's an orange backpack which was designed to hold beakers, pill bottles and bottles."
 	icon_state = "chempack"
+	storage_slots = 10
+	max_storage_space = 36
 
 /*
  * Satchel Types
@@ -189,6 +203,8 @@
 	name = "industrial satchel"
 	desc = "A tough satchel with extra pockets."
 	icon_state = "satchel-eng"
+	storage_slots = 14
+	max_storage_space = 46
 	item_state_slots = list(
 		slot_l_hand_str = "engiepack",
 		slot_r_hand_str = "engiepack",
@@ -198,6 +214,8 @@
 	name = "medical satchel"
 	desc = "A sterile satchel used in medical departments."
 	icon_state = "satchel-med"
+	storage_slots = 10
+	max_storage_space = 36
 	item_state_slots = list(
 		slot_l_hand_str = "medicalpack",
 		slot_r_hand_str = "medicalpack",
@@ -207,16 +225,22 @@
 	name = "virologist satchel"
 	desc = "A sterile satchel with virologist colours."
 	icon_state = "satchel-vir"
+	storage_slots = 10
+	max_storage_space = 36
 
 /obj/item/weapon/storage/backpack/satchel_chem
 	name = "chemist satchel"
 	desc = "A sterile satchel with chemist colours."
 	icon_state = "satchel-chem"
+	storage_slots = 10
+	max_storage_space = 36
 
 /obj/item/weapon/storage/backpack/satchel_gen
 	name = "geneticist satchel"
 	desc = "A sterile satchel with geneticist colours."
 	icon_state = "satchel-gen"
+	storage_slots = 10
+	max_storage_space = 36
 
 /obj/item/weapon/storage/backpack/satchel_tox
 	name = "scientist satchel"
@@ -227,6 +251,8 @@
 	name = "security satchel"
 	desc = "A robust satchel for security related needs."
 	icon_state = "satchel-sec"
+	storage_slots = 10
+	max_storage_space = 36
 	item_state_slots = list(
 		slot_l_hand_str = "securitypack",
 		slot_r_hand_str = "securitypack",
@@ -241,6 +267,8 @@
 	name = "captain's satchel"
 	desc = "An exclusive satchel for Nanotrasen officers."
 	icon_state = "satchel-cap"
+	storage_slots = 14
+	max_storage_space = 46
 	item_state_slots = list(
 		slot_l_hand_str = "satchel-cap",
 		slot_r_hand_str = "satchel-cap",
@@ -260,21 +288,29 @@
 /obj/item/weapon/storage/backpack/ert/commander
 	name = "emergency response team commander backpack"
 	desc = "A spacious backpack with lots of pockets, worn by the commander of a Nanotrasen Emergency Response Team."
+	storage_slots = 14
+	max_storage_space = 46
 
 //Security
 /obj/item/weapon/storage/backpack/ert/security
 	name = "emergency response team security backpack"
 	desc = "A spacious backpack with lots of pockets, worn by security members of a Nanotrasen Emergency Response Team."
 	icon_state = "ert_security"
+	storage_slots = 10
+	max_storage_space = 36
 
 //Engineering
 /obj/item/weapon/storage/backpack/ert/engineer
 	name = "emergency response team engineer backpack"
 	desc = "A spacious backpack with lots of pockets, worn by engineering members of a Nanotrasen Emergency Response Team."
 	icon_state = "ert_engineering"
+	storage_slots = 14
+	max_storage_space = 46
 
 //Medical
 /obj/item/weapon/storage/backpack/ert/medical
 	name = "emergency response team medical backpack"
 	desc = "A spacious backpack with lots of pockets, worn by medical members of a Nanotrasen Emergency Response Team."
 	icon_state = "ert_medical"
+	storage_slots = 10
+	max_storage_space = 36
