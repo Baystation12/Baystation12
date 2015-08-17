@@ -16,6 +16,16 @@
 	armor = list(melee = 30, bullet = 10, laser = 10, energy = 15, bomb = 20, bio = 0, rad = 0)
 	siemens_coefficient = 0.7
 
+/obj/item/clothing/shoes/jackboots/attackby(var/obj/item/W, mob/user as mob)
+	..()
+	if(istype(W, /obj/item/weapon/wirecutters) || istype(W, /obj/item/weapon/scalpel))
+		var/obj/item/clothing/shoes/jackboots/unathi/S = new /obj/item/clothing/shoes/jackboots/unathi
+
+		user.put_in_hands(S)
+		user << "<span class='notice'>You hack the toe box out of the boots.</span>" //placeholder
+		del(src)
+		update_icon(user)
+
 /obj/item/clothing/shoes/jackboots/unathi
 	name = "toe-less jackboots"
 	desc = "Modified pair of jackboots, particularly friendly to those species whose toes hold claws."
