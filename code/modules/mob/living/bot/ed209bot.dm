@@ -11,6 +11,11 @@
 	is_ranged = 1
 	preparing_arrest_sounds = new()
 
+	a_intent = I_HURT
+	mob_bump_flag = HEAVY
+	mob_swap_flags = ~HEAVY
+	mob_push_flags = HEAVY
+
 	var/shot_delay = 4
 	var/last_shot = 0
 
