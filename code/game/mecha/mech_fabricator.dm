@@ -100,7 +100,11 @@
 	data["category"] = category
 	data["categories"] = categories
 	if(all_robolimbs)
-		data["manufacturers"] = all_robolimbs
+		var/list/T = list()
+		for(var/A in all_robolimbs)
+			var/datum/robolimb/R = all_robolimbs[A]
+			T += list(list("id" = A, "company" = R.company))
+		data["manufacturers"] = T
 		data["manufacturer"] = manufacturer
 	data["materials"] = get_materials()
 	data["maxres"] = res_max_amount

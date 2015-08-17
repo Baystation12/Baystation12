@@ -7,7 +7,7 @@
 	{{if data.manufacturers}}
 		<div class="item">
 			{{for data.manufacturers}}
-				{{:helper.link(value, null, {'manufacturer' : value}, value == data.manufacturer ? 'selected' : null)}}
+				{{:helper.link(value.company, null, {'manufacturer' : value.id}, value.id == data.manufacturer ? 'selected' : null)}}
 			{{/for}}
 		</div>
 	{{/if}}
