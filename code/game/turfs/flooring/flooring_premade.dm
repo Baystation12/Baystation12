@@ -45,6 +45,42 @@
 	icon_state = "reinforced"
 	initial_flooring = /decl/flooring/reinforced
 
+/turf/simulated/floor/reinforced/airless
+	oxygen = 0
+	nitrogen = 0
+
+/turf/simulated/floor/reinforced/airmix
+	oxygen = MOLES_O2ATMOS
+	nitrogen = MOLES_N2ATMOS
+
+/turf/simulated/floor/reinforced/nitrogen
+	oxygen = 0
+	nitrogen = MOLES_O2ATMOS + MOLES_N2ATMOS
+
+/turf/simulated/floor/reinforced/oxygen
+	oxygen = MOLES_O2ATMOS + MOLES_N2ATMOS
+	nitrogen = 0
+
+/turf/simulated/floor/reinforced/phoron
+	oxygen = 0
+	nitrogen = 0
+	phoron = MOLES_O2ATMOS + MOLES_N2ATMOS
+
+/turf/simulated/floor/reinforced/carbon_dioxide
+	oxygen = 0
+	nitrogen = 0
+	carbon_dioxide = MOLES_O2ATMOS + MOLES_N2ATMOS
+
+/turf/simulated/floor/reinforced/n20
+	oxygen = 0
+	nitrogen = 0
+
+/turf/simulated/floor/reinforced/n20/New()
+	..()
+	sleep(-1)
+	if(!air) make_air()
+	air.adjust_gas("sleeping_agent", MOLES_O2ATMOS + MOLES_N2ATMOS)
+
 /turf/simulated/floor/cult
 	name = "engraved floor"
 	icon = 'icons/turf/flooring/cult.dmi'
