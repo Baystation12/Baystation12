@@ -87,8 +87,8 @@
 				var/obj/item/stack/cable_coil/A = new /obj/item/stack/cable_coil( src.loc )
 				A.amount = 5
 
-			if(istype(P, /obj/item/stack/material/glass))
-				var/obj/item/stack/material/glass/G = P
+			if(istype(P, /obj/item/stack/material) && P.get_material_name() == "glass")
+				var/obj/item/stack/G = P
 				if (G.get_amount() < 2)
 					user << "<span class='warning'>You need two sheets of glass to put in the glass panel.</span>"
 					return

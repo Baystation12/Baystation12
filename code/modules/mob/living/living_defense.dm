@@ -378,7 +378,3 @@
 	src.attack_log += "\[[time_stamp()]\]<font color='orange'> Got knifed by [user.name] ([user.ckey]) with [W.name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(W.damtype)])</font>"
 	msg_admin_attack("[key_name(user)] knifed [key_name(src)] with [W.name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(W.damtype)])" )
 	return
-
-/mob/living/incapacitated()
-	if(stat || paralysis || stunned || weakened || restrained())
-		return 1

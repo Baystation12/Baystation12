@@ -46,7 +46,7 @@
 	eject()
 	if(trunk)
 		trunk.linked = null
-	..()
+	return ..()
 
 // attack by item places it in to disposal
 /obj/machinery/disposal/attackby(var/obj/item/I, var/mob/user)
@@ -186,10 +186,6 @@
 
 	update()
 	return
-
-// can breath normally in the disposal
-/obj/machinery/disposal/alter_health()
-	return get_turf(src)
 
 // attempt to move while inside
 /obj/machinery/disposal/relaymove(mob/user as mob)
@@ -636,7 +632,7 @@
 /obj/structure/disposalholder/Destroy()
 	qdel(gas)
 	active = 0
-	..()
+	return ..()
 
 // Disposal pipes
 

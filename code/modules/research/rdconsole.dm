@@ -29,7 +29,8 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 
 /obj/machinery/computer/rdconsole
 	name = "R&D control console"
-	icon_state = "rdcomp"
+	icon_keyboard = "rd_key"
+	icon_screen = "rdcomp"
 	light_color = "#a97faa"
 	circuit = /obj/item/weapon/circuitboard/rdconsole
 	var/datum/research/files							//Stores all the collected research data.
@@ -151,7 +152,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 
 	src.updateUsrDialog()
 	return
-	
+
 /obj/machinery/computer/rdconsole/emp_act(var/remaining_charges, var/mob/user)
 	if(!emagged)
 		playsound(src.loc, 'sound/effects/sparks4.ogg', 75, 1)
@@ -361,25 +362,24 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 	else if(href_list["lathe_ejectsheet"] && linked_lathe) //Causes the protolathe to eject a sheet of material
 		var/desired_num_sheets = text2num(href_list["amount"])
 		var/res_amount, type
-		var/material/M = name_to_material[href_list["lathe_ejectsheet"]]
+		var/material/M = get_material_by_name(href_list["lathe_ejectsheet"])
 		if(istype(M))
 			type = M.stack_type
-
-		switch(name_to_material[href_list["lathe_ejectsheet"]])
-			if(DEFAULT_WALL_MATERIAL)
-				res_amount = "m_amount"
-			if("glass")
-				res_amount = "g_amount"
-			if("gold")
-				res_amount = "gold_amount"
-			if("silver")
-				res_amount = "silver_amount"
-			if("phoron")
-				res_amount = "phoron_amount"
-			if("uranium")
-				res_amount = "uranium_amount"
-			if("diamond")
-				res_amount = "diamond_amount"
+			switch(M.name)
+				if(DEFAULT_WALL_MATERIAL)
+					res_amount = "m_amount"
+				if("glass")
+					res_amount = "g_amount"
+				if("gold")
+					res_amount = "gold_amount"
+				if("silver")
+					res_amount = "silver_amount"
+				if("phoron")
+					res_amount = "phoron_amount"
+				if("uranium")
+					res_amount = "uranium_amount"
+				if("diamond")
+					res_amount = "diamond_amount"
 
 		if(ispath(type) && hasvar(linked_lathe, res_amount))
 			var/obj/item/stack/material/sheet = new type(linked_lathe.loc)

@@ -5,6 +5,7 @@
 	deform = 'icons/mob/human_races/r_def_vox.dmi'
 	default_language = "Vox-pidgin"
 	language = "Galactic Common"
+	num_alternate_languages = 1
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick,  /datum/unarmed_attack/claws/strong, /datum/unarmed_attack/bite/strong)
 	rarity_value = 2
 	blurb = "The Vox are the broken remnants of a once-proud race, now reduced to little more than \
@@ -65,7 +66,7 @@
 		H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/vox(H.back), slot_in_backpack)
 		H.internal = H.r_hand
 	H.internals.icon_state = "internal1"
-		
+
 
 /datum/species/vox/can_shred(var/mob/living/carbon/human/H, var/ignore_intent)
 	if(!H.mind || !H.mind.special_role) // Pariah check.

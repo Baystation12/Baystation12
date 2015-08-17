@@ -101,7 +101,7 @@
 
 		if ("choke")
 			if(miming)
-				message = "clutches his throat desperately!"
+				message = "clutches [get_visible_gender() == MALE ? "his" : get_visible_gender() == FEMALE ? "her" : "their"] throat desperately!"
 				m_type = 1
 			else
 				if (!muzzled)
