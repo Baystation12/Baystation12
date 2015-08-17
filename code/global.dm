@@ -190,13 +190,13 @@ var/list/awaydestinations = list() // Away missions. A list of landmarks that th
 var/sqladdress = "localhost"
 var/sqlport    = "3306"
 var/sqldb      = "tgstation"
-var/sqllogin   = "root"
-var/sqlpass    = ""
+var/sqllogin   = "aphelion"
+var/sqlpass    = "App@[@92mNszE"
 
 // Feedback gathering sql connection
-var/sqlfdbkdb    = "test"
-var/sqlfdbklogin = "root"
-var/sqlfdbkpass  = ""
+var/sqlfdbkdb    = "feedback"
+var/sqlfdbklogin = "aphelion"
+var/sqlfdbkpass  = "App@[@92mNszE"
 var/sqllogging   = 0 // Should we log deaths, population stats, etc.?
 
 // Forum MySQL configuration. (for use with forum account/key authentication)
