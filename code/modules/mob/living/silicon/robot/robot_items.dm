@@ -105,13 +105,6 @@
 	desc = "A circuit grafted onto the bottom of an ID card.  It is used to transmit access codes into other robot chassis, \
 	allowing you to lock and unlock other robots' panels."
 
-/obj/item/weapon/card/id/robot/attack_self() //override so borgs can't flash their IDs.
-	return
-
-/obj/item/weapon/card/id/robot/read()
-	usr << "The ID card does not appear to have any writing on it."
-	return
-
 //A harvest item for serviceborgs.
 /obj/item/weapon/robot_harvester
 	name = "auto harvester"

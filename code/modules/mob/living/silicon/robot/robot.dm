@@ -179,6 +179,7 @@
 	playsound(loc, 'sound/voice/liveagain.ogg', 75, 1)
 
 /mob/living/silicon/robot/syndicate/init()
+	access_rights = list(access_syndicate)
 	aiCamera = new/obj/item/device/camera/siliconcam/robot_camera(src)
 
 	laws = new /datum/ai_laws/syndicate_override

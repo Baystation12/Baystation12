@@ -9,8 +9,8 @@
 	if(src.check_access(null))
 		return 1
 	if(istype(M, /mob/living/silicon))
-		//AI can do whatever he wants
-		return 1
+		var/mob/living/silicon/S = M
+		return check_access_list(S.access_rights)
 	else if(istype(M, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = M
 		//if they are holding or wearing a card that has access, that works

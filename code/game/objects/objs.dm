@@ -33,9 +33,19 @@
 	CouldNotUseTopic(usr)
 	return 1
 
+/obj/CanUseTopic(var/mob/user, var/datum/topic_state/state)
+	if(user.CanUseObjTopic(src))
+		return ..()
+	return STATUS_CLOSE
+
+/mob/living/silicon/CanUseObjTopic(var/obj/O)
+	return O.allowed(src)
+
+/mob/proc/CanUseObjTopic()
+
 /obj/proc/CouldUseTopic(var/mob/user)
 	var/atom/host = nano_host()
-	host.add_fingerprint(user)
+	host.add_hiddenprint(user)
 
 /obj/proc/CouldNotUseTopic(var/mob/user)
 	// Nada

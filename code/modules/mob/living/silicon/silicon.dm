@@ -23,12 +23,16 @@
 	var/next_alarm_notice
 	var/list/datum/alarm/queued_alarms = new()
 
+	var/list/access_rights
+
 	#define SEC_HUD 1 //Security HUD mode
 	#define MED_HUD 2 //Medical HUD mode
 
 /mob/living/silicon/New()
 	silicon_mob_list |= src
 	..()
+	access_rights = get_all_station_access()
+	access_rights = access_rights.Copy()
 	add_language("Galactic Common")
 	init_subsystems()
 
