@@ -15,17 +15,15 @@
 			alert("The AI can't be frozen.  You'll have to talk to them.", null, null, null, null, null)
 			return
 		if (!M.paralysis)
-			alert("\red You have frozen [key_name(M)] for suspicious activity.")
-			M << "\red You have been frozen by [key_name(usr)]."
+			M << "<b><font color= red>You have been frozen by <a href='?priv_msg=\ref[usr.client]'>[key]</a></b></font>"
 			M.Paralyse(5000000000)
-			log_admin("\red [key_name_admin(usr)] has frozen [key_name(M)] for suspicious activity!", 1)
-			message_admins("\blue [key_name_admin(usr)] froze [key_name_admin(M)] on suspicious conduct.", 1)
+			log_admin("\red [key_name_admin(usr)] has frozen [key_name(M)].", 1)
+			message_admins("\blue [key_name_admin(usr)] froze [key_name_admin(M)].", 1)
 			return
 		else if (M.paralysis)
-			alert("You have unfrozen [key_name(M)].  They can continue playing.")
-			M << "\blue You're free to go and have been unfrozen.  Act like you went SSD."
-			log_admin("\blue [key_name(usr)] has unfrozen [key_name(M)] and returned them to play.")
-			message_admins("\blue [key_name_admin(usr)] has unfrozen [key_name_admin(M)] and returned them to play.")
+			M << "<b> <font color= red>You have been unfrozen by <a href='?priv_msg=\ref[usr.client]'>[key]</a></b></font>"
+			log_admin("\blue [key_name(usr)] has unfrozen [key_name(M)].")
+			message_admins("\blue [key_name_admin(usr)] has unfrozen [key_name_admin(M)].")
 			M.Paralyse(0)
 			M.AdjustParalysis(-5000000000)
 			M.blinded = 0
