@@ -10,14 +10,14 @@
 	var/open
 	var/obj/item/held //Item inside locket.
 
-/obj/item/clothing/accessory/locket/heart
-	name = "heart-shaped locket"
-	desc = " A silver, heart-shaped locket. It flips open to reveal two pictures, one of a young red-headed woman and one of a brunette of similar age. Small writing is etched onto the back, reading 'M+L'. Some may regard it as cheesy."
-	icon_state = "heartlocket"
-
 /obj/item/clothing/accessory/locket/attack_self(mob/user as mob)
 	if(!base_icon)
 		base_icon = icon_state
+
+	if(!("[base_icon]_open" in icon_states(icon)))
+		user << "\The [src] doesn't seem to open."
+		return
+
 	open = !open
 	user << "You flip \the [src] [open?"open":"closed"]."
 	if(open)
@@ -36,7 +36,7 @@
 
 	if(istype(O,/obj/item/weapon/paper) || istype(O, /obj/item/weapon/photo))
 		if(held)
-			usr << "[src] already has something inside it."
+			usr << "\The [src] already has something inside it."
 		else
 			usr << "You slip [O] into [src]."
 			user.drop_item()
