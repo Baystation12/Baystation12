@@ -489,7 +489,7 @@ About the new airlock wires panel:
 			icon_state = "door_locked"
 		else
 			icon_state = "door_closed"
-		if(p_open || welded)
+		if(p_open || welded || emergency)
 			overlays = list()
 			if(p_open)
 				overlays += image(icon, "panel_open")
@@ -500,6 +500,8 @@ About the new airlock wires panel:
 					overlays += image(icon, "sparks_damaged")
 			if(welded)
 				overlays += image(icon, "welded")
+			if(emergency && !locked)
+				overlays += image(icon, "elights")
 		else if (health < maxhealth * 3/4 && !(stat & NOPOWER))
 			overlays += image(icon, "sparks_damaged")
 	else
@@ -556,6 +558,7 @@ About the new airlock wires panel:
 	commands[++commands.len] = list("name" = "Safeties",				"command"= "safeties",				"active" = safe,					"enabled" = "Nominal",	"disabled" = "Overridden",	"danger" = 1, "act" = 0)
 	commands[++commands.len] = list("name" = "Timing",					"command"= "timing",				"active" = normalspeed,				"enabled" = "Nominal",	"disabled" = "Overridden",	"danger" = 1, "act" = 0)
 	commands[++commands.len] = list("name" = "Door State",				"command"= "open",					"active" = density,					"enabled" = "Closed",	"disabled" = "Opened", 		"danger" = 0, "act" = 0)
+	commands[++commands.len] = list("name" = "Emergency",				"command"= "emergency",					"active" = !emergency,					"enabled" = "Disabled",	"disabled" = "Enabled", 		"danger" = 0, "act" = 0)
 
 	data["commands"] = commands
 
@@ -728,6 +731,13 @@ About the new airlock wires panel:
 			else if (activate && !src.lights)
 				lights = 1
 				usr << "The door bolt lights have been enabled."
+		if("emergency")
+			// Emergency access
+			if (src.emergency)
+				emergency = 0
+			else
+				emergency = 1
+
 
 	update_icon()
 	return 1

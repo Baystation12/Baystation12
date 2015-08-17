@@ -18,6 +18,7 @@
 	var/operating = 0
 	var/autoclose = 0
 	var/glass = 0
+	var/emergency = 0 // Emergency access override
 	var/normalspeed = 1
 	var/heat_proof = 0 // For glass airlocks/opacity firedoors
 	var/air_properties_vary_with_direction = 0
@@ -105,7 +106,7 @@
 
 	if(istype(AM, /obj/machinery/bot))
 		var/obj/machinery/bot/bot = AM
-		if(src.check_access(bot.botcard))
+		if(src.check_access(bot.botcard) || emergency == 1)
 			if(density)
 				open()
 		return
@@ -120,7 +121,7 @@
 	if(istype(AM, /obj/mecha))
 		var/obj/mecha/mecha = AM
 		if(density)
-			if(mecha.occupant && (src.allowed(mecha.occupant) || src.check_access_list(mecha.operation_req_access)))
+			if(mecha.occupant && (src.allowed(mecha.occupant) || src.check_access_list(mecha.operation_req_access) || emergency == 1))
 				open()
 			else
 				do_animate("deny")
@@ -149,8 +150,10 @@
 		return
 	src.add_fingerprint(user)
 	if(density)
-		if(allowed(user))	open()
-		else				do_animate("deny")
+		if(allowed(user) || src.emergency == 1)
+			open()
+		else
+			do_animate("deny")
 	return
 
 /obj/machinery/door/meteorhit(obj/M as obj)
@@ -291,7 +294,7 @@
 		operating = -1
 		return 1
 
-	if(src.allowed(user) && operable())
+	if(src.allowed(user) && operable() || src.emergency == 1)
 		if(src.density)
 			open()
 		else
