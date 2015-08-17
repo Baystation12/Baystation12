@@ -86,7 +86,7 @@
 		var/turf/simulated/floor/T = new_turf
 		if(!T.is_plating())
 			T.make_plating(!(T.broken || T.burnt))
-	return !new_turf.intact
+	return new_turf.is_plating()
 
 /obj/machinery/cablelayer/proc/layCable(var/turf/new_turf,var/M_Dir)
 	if(!on)

@@ -70,7 +70,6 @@ By design, d1 is the smallest direction and d2 is the highest
 /obj/structure/cable/New()
 	..()
 
-
 	// ensure d1 & d2 reflect the icon_state for entering and exiting cable
 
 	var/dash = findtext(icon_state, "-")
@@ -80,7 +79,7 @@ By design, d1 is the smallest direction and d2 is the highest
 	d2 = text2num( copytext( icon_state, dash+1 ) )
 
 	var/turf/T = src.loc			// hide if turf is not intact
-	if(level==1) hide(T.intact)
+	if(level==1) hide(!T.is_plating())
 	cable_list += src //add it to the global cable list
 
 
@@ -123,7 +122,7 @@ By design, d1 is the smallest direction and d2 is the highest
 /obj/structure/cable/attackby(obj/item/W, mob/user)
 
 	var/turf/T = src.loc
-	if(T.intact)
+	if(!T.is_plating())
 		return
 
 	if(istype(W, /obj/item/weapon/wirecutters))
@@ -655,7 +654,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 		user << "You can't lay cable at a place that far away."
 		return
 
-	if(F.intact)		// Ff floor is intact, complain
+	if(!F.is_plating())		// Ff floor is intact, complain
 		user << "You can't lay cable there unless the floor tiles are removed."
 		return
 
@@ -750,7 +749,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 
 	var/turf/T = C.loc
 
-	if(!isturf(T) || T.intact)		// sanity checks, also stop use interacting with T-scanner revealed cable
+	if(!isturf(T) || !T.is_plating())		// sanity checks, also stop use interacting with T-scanner revealed cable
 		return
 
 	if(get_dist(C, user) > 1)		// make sure it's close enough
@@ -766,7 +765,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 
 	// one end of the clicked cable is pointing towards us
 	if(C.d1 == dirn || C.d2 == dirn)
-		if(U.intact)						// can't place a cable if the floor is complete
+		if(!U.is_plating())						// can't place a cable if the floor is complete
 			user << "You can't lay cable there unless the floor tiles are removed."
 			return
 		else

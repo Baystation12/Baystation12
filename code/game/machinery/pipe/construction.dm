@@ -461,7 +461,7 @@ Buildable meters
 			P.set_dir(src.dir)
 			P.initialize_directions = pipe_dir
 			var/turf/T = P.loc
-			P.level = T.intact ? 2 : 1
+			P.level = !T.is_plating() ? 2 : 1
 			P.initialize()
 			if (deleted(P))
 				usr << pipefailtext
@@ -480,7 +480,7 @@ Buildable meters
 			P.set_dir(src.dir)
 			P.initialize_directions = pipe_dir
 			var/turf/T = P.loc
-			P.level = T.intact ? 2 : 1
+			P.level = !T.is_plating() ? 2 : 1
 			P.initialize()
 			if (deleted(P))
 				usr << pipefailtext
@@ -499,7 +499,7 @@ Buildable meters
 			P.set_dir(src.dir)
 			P.initialize_directions = pipe_dir
 			var/turf/T = P.loc
-			P.level = T.intact ? 2 : 1
+			P.level = !T.is_plating() ? 2 : 1
 			P.initialize()
 			if (deleted(P))
 				usr << pipefailtext
@@ -518,7 +518,7 @@ Buildable meters
 			P.set_dir(src.dir)
 			P.initialize_directions = pipe_dir
 			var/turf/T = P.loc
-			P.level = T.intact ? 2 : 1
+			P.level = !T.is_plating() ? 2 : 1
 			P.initialize()
 			if (deleted(P))
 				usr << pipefailtext
@@ -536,8 +536,6 @@ Buildable meters
 			P.set_dir(src.dir)
 			P.initialize_directions = pipe_dir //this var it's used to know if the pipe is bent or not
 			P.initialize_directions_he = pipe_dir
-			//var/turf/T = P.loc
-			//P.level = T.intact ? 2 : 1
 			P.initialize()
 			if (deleted(P))
 				usr << pipefailtext
@@ -557,7 +555,7 @@ Buildable meters
 			if (pipename)
 				C.name = pipename
 			var/turf/T = C.loc
-			C.level = T.intact ? 2 : 1
+			C.level = !T.is_plating() ? 2 : 1
 			C.initialize()
 			C.build_network()
 			if (C.node)
@@ -572,7 +570,7 @@ Buildable meters
 			M.initialize_directions = pipe_dir
 			//M.New()
 			var/turf/T = M.loc
-			M.level = T.intact ? 2 : 1
+			M.level = !T.is_plating() ? 2 : 1
 			M.initialize()
 			if (deleted(M))
 				usr << pipefailtext
@@ -595,7 +593,7 @@ Buildable meters
 			M.initialize_directions = pipe_dir
 			//M.New()
 			var/turf/T = M.loc
-			M.level = T.intact ? 2 : 1
+			M.level = !T.is_plating() ? 2 : 1
 			M.initialize()
 			if (!M)
 				usr << "There's nothing to connect this manifold to! (with how the pipe code works, at least one end needs to be connected to something, otherwise the game deletes the segment)"
@@ -618,7 +616,7 @@ Buildable meters
 			M.initialize_directions = pipe_dir
 			//M.New()
 			var/turf/T = M.loc
-			M.level = T.intact ? 2 : 1
+			M.level = !T.is_plating() ? 2 : 1
 			M.initialize()
 			if (!M)
 				usr << "There's nothing to connect this manifold to! (with how the pipe code works, at least one end needs to be connected to something, otherwise the game deletes the segment)"
@@ -641,7 +639,7 @@ Buildable meters
 			M.initialize_directions = pipe_dir
 			//M.New()
 			var/turf/T = M.loc
-			M.level = T.intact ? 2 : 1
+			M.level = !T.is_plating() ? 2 : 1
 			M.initialize()
 			if (deleted(M))
 				usr << pipefailtext
@@ -668,7 +666,7 @@ Buildable meters
 			M.connect_types = src.connect_types
 			//M.New()
 			var/turf/T = M.loc
-			M.level = T.intact ? 2 : 1
+			M.level = !T.is_plating() ? 2 : 1
 			M.initialize()
 			if (!M)
 				usr << "There's nothing to connect this manifold to! (with how the pipe code works, at least one end needs to be connected to something, otherwise the game deletes the segment)"
@@ -695,7 +693,7 @@ Buildable meters
 			M.connect_types = src.connect_types
 			//M.New()
 			var/turf/T = M.loc
-			M.level = T.intact ? 2 : 1
+			M.level = !T.is_plating() ? 2 : 1
 			M.initialize()
 			if (!M)
 				usr << "There's nothing to connect this manifold to! (with how the pipe code works, at least one end needs to be connected to something, otherwise the game deletes the segment)"
@@ -719,8 +717,6 @@ Buildable meters
 			P.set_dir(src.dir)
 			P.initialize_directions = src.get_pdir()
 			P.initialize_directions_he = src.get_hdir()
-			//var/turf/T = P.loc
-			//P.level = T.intact ? 2 : 1
 			P.initialize()
 			if (deleted(P))
 				usr << pipefailtext //"There's nothing to connect this pipe to! (with how the pipe code works, at least one end needs to be connected to something, otherwise the game deletes the segment)"
@@ -740,7 +736,7 @@ Buildable meters
 			if (pipename)
 				V.name = pipename
 			var/turf/T = V.loc
-			V.level = T.intact ? 2 : 1
+			V.level = !T.is_plating() ? 2 : 1
 			V.initialize()
 			V.build_network()
 			if (V.node)
@@ -755,7 +751,7 @@ Buildable meters
 			if (pipename)
 				V.name = pipename
 			var/turf/T = V.loc
-			V.level = T.intact ? 2 : 1
+			V.level = !T.is_plating() ? 2 : 1
 			V.initialize()
 			V.build_network()
 			if (V.node1)
@@ -774,7 +770,7 @@ Buildable meters
 			if (pipename)
 				P.name = pipename
 			var/turf/T = P.loc
-			P.level = T.intact ? 2 : 1
+			P.level = !T.is_plating() ? 2 : 1
 			P.initialize()
 			P.build_network()
 			if (P.node1)
@@ -791,7 +787,7 @@ Buildable meters
 			if (pipename)
 				P.name = pipename
 			var/turf/T = P.loc
-			P.level = T.intact ? 2 : 1
+			P.level = !T.is_plating() ? 2 : 1
 			P.initialize()
 			P.build_network()
 			if (P.node1)
@@ -811,7 +807,7 @@ Buildable meters
 			if (pipename)
 				P.name = pipename
 			var/turf/T = P.loc
-			P.level = T.intact ? 2 : 1
+			P.level = !T.is_plating() ? 2 : 1
 			P.initialize()
 			P.build_network()
 			if (P.node1)
@@ -831,7 +827,7 @@ Buildable meters
 			if (pipename)
 				P.name = pipename
 			var/turf/T = P.loc
-			P.level = T.intact ? 2 : 1
+			P.level = !T.is_plating() ? 2 : 1
 			P.initialize()
 			P.build_network()
 			if (P.node1)
@@ -851,7 +847,7 @@ Buildable meters
 			if (pipename)
 				P.name = pipename
 			var/turf/T = P.loc
-			P.level = T.intact ? 2 : 1
+			P.level = !T.is_plating() ? 2 : 1
 			P.initialize()
 			P.build_network()
 			if (P.node1)
@@ -871,7 +867,7 @@ Buildable meters
 			if (pipename)
 				P.name = pipename
 			var/turf/T = P.loc
-			P.level = T.intact ? 2 : 1
+			P.level = !T.is_plating() ? 2 : 1
 			P.initialize()
 			P.build_network()
 			if (P.node1)
@@ -891,7 +887,7 @@ Buildable meters
 			if (pipename)
 				S.name = pipename
 			var/turf/T = S.loc
-			S.level = T.intact ? 2 : 1
+			S.level = !T.is_plating() ? 2 : 1
 			S.initialize()
 			S.build_network()
 			if (S.node)
@@ -903,7 +899,7 @@ Buildable meters
 			P.set_dir(src.dir)
 			P.initialize_directions = pipe_dir
 			var/turf/T = P.loc
-			P.level = T.intact ? 2 : 1
+			P.level = !T.is_plating() ? 2 : 1
 			P.initialize()
 			if (deleted(P))
 				usr << pipefailtext
@@ -923,7 +919,7 @@ Buildable meters
 			if (pipename)
 				V.name = pipename
 			var/turf/T = V.loc
-			V.level = T.intact ? 2 : 1
+			V.level = !T.is_plating() ? 2 : 1
 			V.initialize()
 			V.build_network()
 			if (V.node1)
@@ -943,7 +939,7 @@ Buildable meters
 			if (pipename)
 				V.name = pipename
 			var/turf/T = V.loc
-			V.level = T.intact ? 2 : 1
+			V.level = !T.is_plating() ? 2 : 1
 			V.initialize()
 			V.build_network()
 			if (V.node1)
@@ -993,7 +989,7 @@ Buildable meters
 			if (pipename)
 				P.name = pipename
 			var/turf/T = P.loc
-			P.level = T.intact ? 2 : 1
+			P.level = !T.is_plating() ? 2 : 1
 			P.initialize()
 			P.build_network()
 			if (P.node1)
@@ -1010,7 +1006,7 @@ Buildable meters
 			if (pipename)
 				P.name = pipename
 			var/turf/T = P.loc
-			P.level = T.intact ? 2 : 1
+			P.level = !T.is_plating() ? 2 : 1
 			P.initialize()
 			P.build_network()
 			if (P.node1)
@@ -1027,7 +1023,7 @@ Buildable meters
 			if (pipename)
 				C.name = pipename
 			var/turf/T = C.loc
-			C.level = T.intact ? 2 : 1
+			C.level = !T.is_plating() ? 2 : 1
 			C.initialize()
 			C.build_network()
 			if (C.node)
@@ -1041,7 +1037,7 @@ Buildable meters
 			if (pipename)
 				P.name = pipename
 			var/turf/T = P.loc
-			P.level = T.intact ? 2 : 1
+			P.level = !T.is_plating() ? 2 : 1
 			P.initialize()
 			P.build_network()
 			if (P.node1)
@@ -1057,7 +1053,7 @@ Buildable meters
 			if (pipename)
 				P.name = pipename
 			var/turf/T = P.loc
-			P.level = T.intact ? 2 : 1
+			P.level = !T.is_plating() ? 2 : 1
 			P.initialize()
 			P.build_network()
 			if (P.node1)
@@ -1073,7 +1069,7 @@ Buildable meters
 			if (pipename)
 				P.name = pipename
 			var/turf/T = P.loc
-			P.level = T.intact ? 2 : 1
+			P.level = !T.is_plating() ? 2 : 1
 			P.initialize()
 			P.build_network()
 			if (P.node1)
@@ -1089,7 +1085,7 @@ Buildable meters
 			if (pipename)
 				P.name = pipename
 			var/turf/T = P.loc
-			P.level = T.intact ? 2 : 1
+			P.level = !T.is_plating() ? 2 : 1
 			P.initialize()
 			P.build_network()
 			if (P.node1)
@@ -1105,7 +1101,7 @@ Buildable meters
 			if (pipename)
 				P.name = pipename
 			var/turf/T = P.loc
-			P.level = T.intact ? 2 : 1
+			P.level = !T.is_plating() ? 2 : 1
 			P.initialize()
 			P.build_network()
 			if (P.node1)
@@ -1121,7 +1117,7 @@ Buildable meters
 			if (pipename)
 				P.name = pipename
 			var/turf/T = P.loc
-			P.level = T.intact ? 2 : 1
+			P.level = !T.is_plating() ? 2 : 1
 			P.initialize()
 			P.build_network()
 			if (P.node1)
@@ -1134,13 +1130,13 @@ Buildable meters
 		if(PIPE_OMNI_MIXER)
 			var/obj/machinery/atmospherics/omni/mixer/P = new(loc)
 			var/turf/T = P.loc
-			P.level = T.intact ? 2 : 1
+			P.level = !T.is_plating() ? 2 : 1
 			P.initialize()
 			P.build_network()
 		if(PIPE_OMNI_FILTER)
 			var/obj/machinery/atmospherics/omni/filter/P = new(loc)
 			var/turf/T = P.loc
-			P.level = T.intact ? 2 : 1
+			P.level = !T.is_plating() ? 2 : 1
 			P.initialize()
 			P.build_network()
 

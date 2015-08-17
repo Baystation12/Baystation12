@@ -81,7 +81,7 @@
 		var/turf/simulated/floor/T = new_turf
 		if(!T.is_plating())
 			T.make_plating(!(T.broken || T.burnt))
-	return !new_turf.intact
+	return new_turf.is_plating()
 
 /obj/machinery/floorlayer/proc/TakeNewStack()
 	for(var/obj/item/stack/tile/tile in contents)

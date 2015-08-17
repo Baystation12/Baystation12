@@ -111,7 +111,7 @@
 		var/turf/simulated/floor/T = new_turf
 		if(!T.is_plating())
 			T.make_plating(!(T.broken || T.burnt))
-	return !new_turf.intact
+	return new_turf.is_plating()
 
 /obj/machinery/pipelayer/proc/layPipe(var/turf/w_turf,var/M_Dir,var/old_dir)
 	if(!on || !(M_Dir in list(1, 2, 4, 8)) || M_Dir==old_dir)

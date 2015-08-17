@@ -1,7 +1,6 @@
 /turf
 	icon = 'icons/turf/floors.dmi'
 	level = 1
-	var/intact
 	var/holy = 0
 
 	// Initial air contents (in moles)
@@ -42,6 +41,9 @@
 	return 0
 
 /turf/proc/is_space()
+	return 0
+
+/turf/proc/is_intact()
 	return 0
 
 /turf/attack_hand(mob/user)
@@ -160,7 +162,7 @@ var/const/enterloopsanity = 100
 
 /turf/proc/levelupdate()
 	for(var/obj/O in src)
-		O.hide(O.hides_under_flooring() && src.intact)
+		O.hide(O.hides_under_flooring() && !is_plating())
 
 /turf/proc/AdjacentTurfs()
 	var/L[] = new()

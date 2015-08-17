@@ -40,10 +40,8 @@
 /turf/simulated/floor/proc/set_flooring(var/decl/flooring/newflooring)
 	make_plating(defer_icon_update = 1)
 	flooring = newflooring
-	intact = 1
 	update_icon(1)
 	levelupdate()
-
 
 //This proc will set floor_type to null and the update_icon() proc will then change the icon_state of the turf
 //This proc auto corrects the grass tiles' siding.
@@ -63,10 +61,8 @@
 		if(flooring.build_type && place_product)
 			new flooring.build_type(src)
 		flooring = null
-		intact = 0
 
 	set_light(0)
-	intact = 0
 	broken = null
 	burnt = null
 	flooring_override = null
