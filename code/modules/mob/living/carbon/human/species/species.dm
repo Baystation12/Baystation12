@@ -132,9 +132,9 @@
 		)
 
 	// Bump vars
-	var/bump_flag = HUMAN		// What are we considered to be when bumped?
-	var/push_flags = ALLMOBS	// What can we push?
-	var/swap_flags = ALLMOBS	// What can we swap place with?
+	var/bump_flag = HUMAN	// What are we considered to be when bumped?
+	var/push_flags = ~HEAVY	// What can we push?
+	var/swap_flags = ~HEAVY	// What can we swap place with?
 
 /datum/species/New()
 	if(hud_type)
