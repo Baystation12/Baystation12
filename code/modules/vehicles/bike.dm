@@ -2,17 +2,21 @@
 	name = "space-bike"
 	desc = "Space wheelies! Woo! "
 	icon = 'icons/obj/bike.dmi'
-	icon_state = "bike_back_off"
+	icon_state = "bike_off"
 	dir = SOUTH
 
 	load_item_visible = 1
-	mob_offset_y = 7
-
+	mob_offset_y = 5
 	health = 100
 	maxhealth = 100
 
 	fire_dam_coeff = 0.6
 	brute_dam_coeff = 0.5
+	var/protection_percent = 60
+
+	var/land_speed = 10 //if 0 it can't go on turf
+	var/space_speed = 1
+	var/bike_icon = "bike"
 
 	var/datum/effect/effect/system/ion_trail_follow/ion
 	var/kickstand = 1
@@ -22,7 +26,8 @@
 	ion = new /datum/effect/effect/system/ion_trail_follow()
 	ion.set_up(src)
 	turn_off()
-	overlays += image('icons/obj/bike.dmi', "bike_front_off", MOB_LAYER + 1)
+	overlays += image('icons/obj/bike.dmi', "[icon_state]_off_overlay", MOB_LAYER + 1)
+	icon_state = "[bike_icon]_off"
 
 /obj/vehicle/bike/verb/toggle()
 	set name = "Toggle Engine"
@@ -75,9 +80,6 @@
 		unload(load)
 		user << "You unbuckle yourself from \the [src]"
 
-
-/obj/vehicle/bike/attackby(var/obj/item/weapon/W, var/mob/M)
-	//we want people to be able to place other people on the bikes. For now.
 /obj/vehicle/bike/relaymove(mob/user, direction)
 	if(user != load || !on)
 		return
@@ -89,9 +91,13 @@
 
 	//these things like space, not turf. Dragging shouldn't weigh you down.
 	if(istype(destination,/turf/space) || pulledby)
-		move_delay = 1
+		if(!space_speed)
+			return 0
+		move_delay = space_speed
 	else
-		move_delay = 10
+		if(!land_speed)
+			return 0
+		move_delay = land_speed
 	return ..()
 
 /obj/vehicle/bike/turn_on()
@@ -112,7 +118,7 @@
 	..()
 
 /obj/vehicle/bike/bullet_act(var/obj/item/projectile/Proj)
-	if(buckled_mob && prob(40))
+	if(buckled_mob && prob(protection_percent))
 		buckled_mob.bullet_act(Proj)
 		return
 	..()
@@ -121,11 +127,11 @@
 	overlays.Cut()
 
 	if(on)
-		overlays += image('icons/obj/bike.dmi', "bike_front_on", MOB_LAYER + 1)
-		icon_state = "bike_back_on"
+		overlays += image('icons/obj/bike.dmi', "[bike_icon]_on_overlay", MOB_LAYER + 1)
+		icon_state = "[bike_icon]_on"
 	else
-		overlays += image('icons/obj/bike.dmi', "bike_front_off", MOB_LAYER + 1)
-		icon_state = "bike_back_off"
+		overlays += image('icons/obj/bike.dmi', "[bike_icon]_off_overlay", MOB_LAYER + 1)
+		icon_state = "[bike_icon]_off"
 
 	..()
 
