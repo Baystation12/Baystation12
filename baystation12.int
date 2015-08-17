@@ -1,10 +1,10 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: code\modules\admin\verbs\cleartoxin.dm;code\modules\clothing\spacesuits\spacesuits.dm;code\modules\economy\TradeDestinations.dm;code\modules\events\ion_storm.dm;code\modules\mob\living\silicon\ai\ai.dm;code\modules\mob\living\silicon\robot\robot.dm;code\global.dm;code\game\verbs\ooc.dm;code\world.dm;code\game\machinery\vending.dm;code\modules\admin\admin_verbs.dm
+WINDOW: code\stylesheet.dm
 LAST_COMPILE_VERSION: 506.1247
-DIR: code code\game\machinery code\game\verbs code\modules code\modules\admin code\modules\admin\verbs code\modules\clothing code\modules\clothing\spacesuits code\modules\economy code\modules\events code\modules\mob code\modules\mob\living code\modules\mob\living\silicon code\modules\mob\living\silicon\ai code\modules\mob\living\silicon\robot 
-FILE: code\modules\admin\admin_verbs.dm
+DIR: code code\game\machinery code\game\verbs code\modules code\modules\admin code\modules\admin\verbs code\modules\clothing code\modules\clothing\spacesuits code\modules\economy code\modules\events code\modules\mob code\modules\mob\living 
+FILE: code\stylesheet.dm
 LAST_COMPILE_TIME: 1439679616
 AUTO_FILE_DIR: OFF
 */
