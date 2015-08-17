@@ -15,7 +15,7 @@ var/global/floorIsLava = 0
 	log_attack(text)
 	var/rendered = "<span class=\"log_message\"><span class=\"prefix\">ATTACK:</span> <span class=\"message\">[text]</span></span>"
 	for(var/client/C in admins)
-		if(R_ADMIN & C.holder.rights)
+		if(R_MOD & C.holder.rights)
 			if(C.prefs.toggles & CHAT_ATTACKLOGS)
 				var/msg = rendered
 				C << msg
