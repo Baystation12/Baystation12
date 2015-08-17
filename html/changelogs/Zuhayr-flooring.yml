@@ -3,4 +3,5 @@ delete-after: True
 changes: 
   - tweak: "Rewrote tiling. White floors, dark floors and freezer floors now have associated tiles."
   - tweak: "Changed how decals work in the mapper. floor_decal is now used instead of an icon in floors.dmi."
+  - tweak: "The floor painter has been rewritten to use decals. Click it in-hand to set direction and decal."
   - tweak: "Floor lights are now built from the autholathe, secured with a screwdriver, activated by clicking them with an empty hand, and repaired with a welding torch."

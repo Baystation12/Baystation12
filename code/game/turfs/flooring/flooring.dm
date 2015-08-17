@@ -36,6 +36,7 @@ var/list/flooring_types
 
 	var/descriptor = "tiles"
 	var/flags
+	var/can_paint
 
 /decl/flooring/grass
 	name = "grass"
@@ -79,12 +80,14 @@ var/list/flooring_types
 	damage_temperature = T0C+1400
 	flags = TURF_REMOVE_CROWBAR | TURF_CAN_BREAK | TURF_CAN_BURN
 	build_type = /obj/item/stack/tile/floor
+	can_paint = 1
 
 /decl/flooring/linoleum
 	name = "linoleum"
 	desc = "It's like the 2390's all over again."
 	icon = 'icons/turf/flooring/linoleum.dmi'
 	icon_base = "lino"
+	can_paint = 1
 
 /decl/flooring/tiling/red
 	name = "floor"
@@ -153,6 +156,7 @@ var/list/flooring_types
 	build_time = 30
 	apply_thermal_conductivity = 0.025
 	apply_heat_capacity = 325000
+	can_paint = 1
 
 /decl/flooring/reinforced/circuit
 	name = "processing strata"
@@ -160,6 +164,7 @@ var/list/flooring_types
 	icon_base = "bcircuit"
 	build_type = null
 	flags = TURF_ACID_IMMUNE | TURF_CAN_BREAK
+	can_paint = 1
 
 /decl/flooring/reinforced/circuit/green
 	name = "processing strata"
@@ -173,3 +178,4 @@ var/list/flooring_types
 	build_type = null
 	has_damage_range = 6
 	flags = TURF_ACID_IMMUNE | TURF_CAN_BREAK
+	can_paint = null

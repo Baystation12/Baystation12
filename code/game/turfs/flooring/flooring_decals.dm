@@ -7,8 +7,14 @@ var/list/floor_decals = list()
 	name = "floor decal"
 	icon = 'icons/turf/flooring/decals.dmi'
 	layer = TURF_LAYER + 0.01
+	var/supplied_dir
+
+/obj/effect/floor_decal/New(var/newloc, var/newdir)
+	supplied_dir = newdir
+	..(newloc)
 
 /obj/effect/floor_decal/initialize()
+	if(supplied_dir) set_dir(supplied_dir)
 	var/turf/T = get_turf(src)
 	if(istype(T, /turf/simulated/floor) || istype(T, /turf/unsimulated/floor))
 		var/cache_key = "[alpha]-[color]-[dir]-[icon_state]-[layer]"
@@ -22,6 +28,16 @@ var/list/floor_decals = list()
 		T.decals |= floor_decals[cache_key]
 		T.overlays |= floor_decals[cache_key]
 	qdel(src)
+	return
+
+/obj/effect/floor_decal/reset
+	name = "reset marker"
+
+/obj/effect/floor_decal/reset/initialize()
+	var/turf/T = get_turf(src)
+	if(T.decals && T.decals.len)
+		T.decals.Cut()
+		T.update_icon()
 	return
 
 /obj/effect/floor_decal/corner
@@ -292,3 +308,37 @@ var/list/floor_decals = list()
 /obj/effect/floor_decal/ss13/l16
 	name = "L16"
 	icon_state = "L16"
+
+/obj/effect/floor_decal/sign
+	name = "floor sign"
+	icon_state = "white_1"
+
+/obj/effect/floor_decal/sign/two
+	icon_state = "white_2"
+
+/obj/effect/floor_decal/sign/a
+	icon_state = "white_a"
+
+/obj/effect/floor_decal/sign/b
+	icon_state = "white_b"
+
+/obj/effect/floor_decal/sign/c
+	icon_state = "white_c"
+
+/obj/effect/floor_decal/sign/d
+	icon_state = "white_d"
+
+/obj/effect/floor_decal/sign/ex
+	icon_state = "white_ex"
+
+/obj/effect/floor_decal/sign/m
+	icon_state = "white_m"
+
+/obj/effect/floor_decal/sign/cmo
+	icon_state = "white_cmo"
+
+/obj/effect/floor_decal/sign/v
+	icon_state = "white_v"
+
+/obj/effect/floor_decal/sign/p
+	icon_state = "white_p"
