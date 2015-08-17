@@ -301,11 +301,17 @@ var/list/admin_verbs_mentor = list(
 	/datum/admins/proc/PlayerNotes,
 	/client/proc/freeze,
 	/client/proc/freezemecha,
+	/client/proc/player_panel_new,
 	/client/proc/admin_ghost,
 	/client/proc/cmd_mod_say,
 	/datum/admins/proc/show_player_info,
 //	/client/proc/dsay,
-	/client/proc/cmd_admin_subtle_message
+	/client/proc/cmd_admin_subtle_message,
+	/client/proc/jumptokey,				/*allows us to jump to the location of a mob with a certain ckey*/
+	/client/proc/jumptomob,				/*allows us to jump to a specific mob*/
+	/client/proc/jumptoturf,
+	/client/proc/jumptocoord,			/*we ghost and jump to a coordinate*/
+	/client/proc/Jump
 )
 
 /client/proc/add_admin_verbs()
