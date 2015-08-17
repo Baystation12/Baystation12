@@ -53,7 +53,6 @@
 		return
 
 	var/msg = input("Message:", text("Subtle PM to [M.key]")) as text
-
 	if (!msg)
 		return
 	if(usr)
@@ -110,7 +109,6 @@
 		return
 
 	var/msg = input("Message:", text("Enter the text you wish to appear to everyone:")) as text
-
 	if (!msg)
 		return
 	world << "[msg]"
@@ -133,7 +131,6 @@
 		return
 
 	var/msg = input("Message:", text("Enter the text you wish to appear to your target:")) as text
-
 	if( !msg )
 		return
 
