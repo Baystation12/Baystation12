@@ -324,8 +324,8 @@ other types of metals and chemistry for reagents).
 ///////////////////////////////////
 /////////Shield Generators/////////
 ///////////////////////////////////
-datum/design/circuit/shield
-	req_tech = list("bluespace" = 4, "phorontech" = 3)
+/datum/design/circuit/shield
+	req_tech = list(TECH_BLUESPACE = 4, TECH_PHORON = 3)
 	materials = list("$glass" = 2000, "sacid" = 20, "$phoron" = 10000, "$diamond" = 5000, "$gold" = 10000)
 
 /datum/design/item/medical
