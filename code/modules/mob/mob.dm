@@ -645,13 +645,14 @@
 		if(client.holder)
 			if(statpanel("Status"))
 				statpanel("Status","Location:","([x], [y], [z])")
-				statpanel("Status","CPU:","[world.cpu]")
-				statpanel("Status","Instances:","[world.contents.len]")
-			if(statpanel("Status") && processScheduler && processScheduler.getIsRunning())
-				for(var/datum/controller/process/P in processScheduler.processes)
-					statpanel("Status",P.getStatName(), P.getTickTime())
-			else
-				statpanel("Status","processScheduler is not running.")
+			if(statpanel("Processes"))
+				statpanel("Processes","CPU:","[world.cpu]")
+				statpanel("Processes","Instances:","[world.contents.len]")
+				if(processScheduler && processScheduler.getIsRunning())
+					for(var/datum/controller/process/P in processScheduler.processes)
+						statpanel("Processes",P.getStatName(), P.getTickTime())
+				else
+					statpanel("Processes","processScheduler is not running.")
 
 		if(listed_turf && client)
 			if(!TurfAdjacent(listed_turf))
