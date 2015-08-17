@@ -189,7 +189,6 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 /mob/dead/observer/Stat()
 	..()
 	if(statpanel("Status"))
-		stat(null, "Station Time: [worldtime2text()]")
 		if(emergency_shuttle)
 			var/eta_status = emergency_shuttle.get_status_panel_eta()
 			if(eta_status)
@@ -216,6 +215,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 			return
 	mind.current.ajourn=0
 	mind.current.key = key
+	mind.current.aghosted = null
 	if(!admin_ghosted)
 		announce_ghost_joinleave(mind, 0, "They now occupy their body again.")
 	return 1
@@ -318,16 +318,56 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		if(following && following == target)
 			return
 		following = target
-		src << "\blue Now following [target]"
-		spawn(0)
-			while(target && following == target && client)
-				var/turf/T = get_turf(target)
-				if(!T)
-					break
-				// To stop the ghost flickering.
-				if(loc != T)
-					loc = T
-				sleep(15)
+		src << "<span class='notice'>Now following [target]</span>"
+		if(ismob(target))
+			loc = get_turf(target)
+			var/mob/M = target
+			M.following_mobs += src
+		else
+			spawn(0)
+				while(target && following == target && client)
+					var/turf/T = get_turf(target)
+					if(!T)
+						break
+					// To stop the ghost flickering.
+					if(loc != T)
+						loc = T
+					sleep(15)
+
+/mob/proc/update_following()
+	. = get_turf(src)
+	for(var/mob/dead/observer/M in following_mobs)
+		if(M.following != src)
+			following_mobs -= M
+		else
+			if(M.loc != .)
+				M.loc = .
+
+/mob
+	var/list/following_mobs = list()
+
+/mob/Destroy()
+	for(var/mob/dead/observer/M in following_mobs)
+		M.following = null
+	following_mobs = null
+	return ..()
+
+/mob/dead/observer/Destroy()
+	if(ismob(following))
+		var/mob/M = following
+		M.following_mobs -= src
+	following = null
+	return ..()
+
+/mob/Move()
+	. = ..()
+	if(.)
+		update_following()
+
+/mob/Life()
+	// to catch teleports etc which directly set loc
+	update_following()
+	return ..()
 
 /mob/proc/check_holy(var/turf/T)
 	return 0

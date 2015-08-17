@@ -53,8 +53,8 @@
 		)
 
 	bump_flag = ALIEN
-	swap_flags = ALLMOBS
-	push_flags = ALLMOBS ^ ROBOT
+	swap_flags = ~HEAVY
+	push_flags = (~HEAVY) ^ ROBOT
 
 	var/alien_number = 0
 	var/caste_name = "creature" // Used to update alien name.

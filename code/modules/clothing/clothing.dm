@@ -50,7 +50,7 @@
 	//Set species_restricted list
 	switch(target_species)
 		if("Human", "Skrell")	//humanoid bodytypes
-			species_restricted = list("exclude","Unathi","Tajara","Diona","Vox", "Xenomorph", "Xenomorph Drone", "Xenomorph Hunter", "Xenomorph Sentinel", "Xenomorph Queen")
+			species_restricted = list("Human", "Skrell") //skrell/humans can wear each other's suits
 		else
 			species_restricted = list(target_species)
 
@@ -72,9 +72,7 @@
 	//Set species_restricted list
 	switch(target_species)
 		if("Skrell")
-			species_restricted = list("exclude","Unathi","Tajara","Diona","Vox", "Xenomorph", "Xenomorph Drone", "Xenomorph Hunter", "Xenomorph Sentinel", "Xenomorph Queen")
-		if("Human")
-			species_restricted = list("exclude","Skrell","Unathi","Tajara","Diona","Vox", "Xenomorph", "Xenomorph Drone", "Xenomorph Hunter", "Xenomorph Sentinel", "Xenomorph Queen")
+			species_restricted = list("Human", "Skrell") //skrell helmets fit humans too
 		else
 			species_restricted = list(target_species)
 
@@ -274,6 +272,41 @@ BLIND     // can't see anything
 		light_applied = 0
 	update_icon(user)
 	user.update_action_buttons()
+
+/obj/item/clothing/head/attack_ai(var/mob/user)
+	if(!mob_wear_hat(user))
+		return ..()
+
+/obj/item/clothing/head/attack_generic(var/mob/user)
+	if(!mob_wear_hat(user))
+		return ..()
+
+/obj/item/clothing/head/proc/mob_wear_hat(var/mob/user)
+	if(!Adjacent(user))
+		return 0
+	var/success
+	if(istype(user, /mob/living/silicon/robot/drone))
+		var/mob/living/silicon/robot/drone/D = user
+		if(D.hat)
+			success = 2
+		else
+			D.wear_hat(src)
+			success = 1
+	else if(istype(user, /mob/living/carbon/alien/diona))
+		var/mob/living/carbon/alien/diona/D = user
+		if(D.hat)
+			success = 2
+		else
+			D.wear_hat(src)
+			success = 1
+
+	if(!success)
+		return 0
+	else if(success == 2)
+		user << "<span class='warning'>You are already wearing a hat.</span>"
+	else if(success == 1)
+		user << "<span class='notice'>You crawl under \the [src].</span>"
+	return 1
 
 /obj/item/clothing/head/update_icon(var/mob/user)
 
