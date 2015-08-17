@@ -639,20 +639,20 @@
 
 	if(.)
 		if(statpanel("Status") && ticker && ticker.current_state != GAME_STATE_PREGAME)
-			statpanel("Status", "Station Time", worldtime2text())
-			statpanel("Status", "Round Duration", round_duration())
+			stat("Station Time", worldtime2text())
+			stat("Round Duration", round_duration())
 
 		if(client.holder)
 			if(statpanel("Status"))
-				statpanel("Status","Location:","([x], [y], [z])")
+				stat("Location:","([x], [y], [z])")
 			if(statpanel("Processes"))
-				statpanel("Processes","CPU:","[world.cpu]")
-				statpanel("Processes","Instances:","[world.contents.len]")
+				stat("CPU:","[world.cpu]")
+				stat("Instances:","[world.contents.len]")
 				if(processScheduler && processScheduler.getIsRunning())
 					for(var/datum/controller/process/P in processScheduler.processes)
-						statpanel("Processes",P.getStatName(), P.getTickTime())
+						stat(P.getStatName(), P.getTickTime())
 				else
-					statpanel("Processes","processScheduler is not running.")
+					stat("processScheduler is not running.")
 
 		if(listed_turf && client)
 			if(!TurfAdjacent(listed_turf))
