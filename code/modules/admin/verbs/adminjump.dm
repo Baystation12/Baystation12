@@ -8,7 +8,7 @@
 	set name = "Jump to Area"
 	set desc = "Area to jump to"
 	set category = "Admin"
-	if(!check_rights(R_ADMIN|R_MOD|R_DEBUG))
+	if(!check_rights(R_ADMIN|R_MOD|R_DEBUG|R_MENTOR))
 		return
 
 	if(config.allow_admin_jump)
@@ -24,7 +24,7 @@
 /client/proc/jumptoturf(var/turf/T in world)
 	set name = "Jump to Turf"
 	set category = "Admin"
-	if(!check_rights(R_ADMIN|R_MOD|R_DEBUG))
+	if(!check_rights(R_ADMIN|R_MOD|R_DEBUG|R_MENTOR))
 		return
 	if(config.allow_admin_jump)
 		log_admin("[key_name(usr)] jumped to [T.x],[T.y],[T.z] in [T.loc]")
@@ -40,7 +40,7 @@
 	set category = "Admin"
 	set name = "Jump to Mob"
 
-	if(!check_rights(R_ADMIN|R_MOD|R_DEBUG))
+	if(!check_rights(R_ADMIN|R_MOD|R_DEBUG|R_MENTOR))
 		return
 
 	if(config.allow_admin_jump)
@@ -62,7 +62,7 @@
 	set category = "Admin"
 	set name = "Jump to Coordinate"
 
-	if(!check_rights(R_ADMIN|R_MOD|R_DEBUG))
+	if(!check_rights(R_ADMIN|R_MOD|R_DEBUG|R_MENTOR))
 		return
 
 	if (config.allow_admin_jump)
@@ -82,7 +82,7 @@
 	set category = "Admin"
 	set name = "Jump to Key"
 
-	if(!check_rights(R_ADMIN|R_MOD|R_DEBUG))
+	if(!check_rights(R_ADMIN|R_MOD|R_DEBUG|R_MENTOR))
 		return
 
 	if(config.allow_admin_jump)
