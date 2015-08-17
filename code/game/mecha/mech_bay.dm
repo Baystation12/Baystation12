@@ -66,6 +66,7 @@
 		charging.health = min(charging.health + repair, initial(charging.health))
 		if(charging.health == initial(charging.health))
 			charging.occupant_message("<span class='notice'>Fully repaired.</span>")
+
 		else
 			done = 0
 	if(done)
@@ -92,5 +93,6 @@
 
 /obj/machinery/mech_recharger/proc/stop_charging()
 	if(!charging)
+
 		return
 	charging = null

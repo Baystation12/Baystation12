@@ -43,8 +43,9 @@
 /obj/machinery/computer/guestpass
 	name = "guest pass terminal"
 	icon_state = "guest"
+	icon_keyboard = null
+	icon_screen = "pass"
 	density = 0
-
 
 	var/obj/item/weapon/card/id/giver
 	var/list/accesses = list()

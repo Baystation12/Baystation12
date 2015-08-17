@@ -2,10 +2,11 @@
 	name = "robotics control console"
 	desc = "Used to remotely lockdown or detonate linked cyborgs."
 	icon = 'icons/obj/computer.dmi'
-	icon_state = "robot"
+	icon_keyboard = "tech_key"
+	icon_screen = "robot"
 	light_color = "#a97faa"
 	req_access = list(access_robotics)
-	circuit = "/obj/item/weapon/circuitboard/robotics"
+	circuit = /obj/item/weapon/circuitboard/robotics
 
 	var/safety = 1
 
