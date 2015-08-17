@@ -1004,7 +1004,7 @@ menu "menu"
 		group = "size"
 		is-disabled = false
 		saved-params = "is-checked"
-	elem "icon32"
+	elem "icon48"
 		name = "&48x48"
 		command = ".winset \"mapwindow.map.icon-size=48\""
 		category = "&Icons"
