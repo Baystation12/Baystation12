@@ -82,6 +82,10 @@
 /proc/log_misc(text)
 	diary << "\[[time_stamp()]]MISC: [text][log_end]"
 
+/proc/log_devsay(text)
+	if (config.log_devsay)
+		diary << "\[[time_stamp()]]DEVSAY: [text][log_end]"
+
 //pretty print a direction bitflag, can be useful for debugging.
 /proc/print_dir(var/dir)
 	var/list/comps = list()
@@ -91,7 +95,7 @@
 	if(dir & WEST) comps += "WEST"
 	if(dir & UP) comps += "UP"
 	if(dir & DOWN) comps += "DOWN"
-	
+
 	return english_list(comps, nothing_text="0", and_text="|", comma_text="|")
 
 //more or less a logging utility
