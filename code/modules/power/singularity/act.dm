@@ -101,7 +101,7 @@
 	return 1000
 
 /turf/singularity_act(S, current_size)
-	if(intact)
+	if(!is_plating())
 		for(var/obj/O in contents)
 			if(O.level != 1)
 				continue

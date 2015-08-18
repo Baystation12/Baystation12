@@ -24,7 +24,7 @@ proc/spawn_room(var/atom/start_loc,var/x_size,var/y_size,var/wall,var/floor , va
 	if(!wall)
 		wall = pick(/turf/simulated/wall/r_wall,/turf/simulated/wall,/obj/effect/alien/resin)
 	if(!floor)
-		floor = pick(/turf/simulated/floor,/turf/simulated/floor/engine)
+		floor = pick(/turf/simulated/floor,/turf/simulated/floor/tiled,/turf/simulated/floor/reinforced)
 
 	for(var/x = 0,x<x_size,x++)
 		for(var/y = 0,y<y_size,y++)
@@ -76,9 +76,9 @@ proc/admin_spawn_room_at_pos()
 			wall=/obj/effect/alien/resin
 	switch(alert("Floor type",null,"Regular floor","Reinforced floor"))
 		if("Regular floor")
-			floor=/turf/simulated/floor
+			floor=/turf/simulated/floor/tiled
 		if("Reinforced floor")
-			floor=/turf/simulated/floor/engine
+			floor=/turf/simulated/floor/reinforced
 	if(x && y && z && wall && floor && x_len && y_len)
 		spawn_room(locate(x,y,z),x_len,y_len,wall,floor,clean)
 	return

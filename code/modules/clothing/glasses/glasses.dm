@@ -37,7 +37,7 @@
 	icon_state = "meson"
 	item_state = "glasses"
 	action_button_name = "Toggle Goggles"
-	origin_tech = list(TECH_MAGNET = 2, TECH_ENGINERING = 2)
+	origin_tech = list(TECH_MAGNET = 2, TECH_ENGINEERING = 2)
 	toggleable = 1
 	vision_flags = SEE_TURFS
 
@@ -95,7 +95,7 @@
 	desc = "Very confusing glasses."
 	icon_state = "material"
 	item_state = "glasses"
-	origin_tech = list(TECH_MAGNET = 3, TECH_ENGINERING = 3)
+	origin_tech = list(TECH_MAGNET = 3, TECH_ENGINEERING = 3)
 	toggleable = 1
 	vision_flags = SEE_OBJS
 
