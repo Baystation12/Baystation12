@@ -191,12 +191,12 @@ var/sqladdress = "localhost"
 var/sqlport    = "3306"
 var/sqldb      = "tgstation"
 var/sqllogin   = "aphelion"
-var/sqlpass    = "App@[@92mNszE"
+var/sqlpass    = "App@@92mNszE" // You can't have a [ in the password. It throws syntax errors.
 
 // Feedback gathering sql connection
 var/sqlfdbkdb    = "feedback"
 var/sqlfdbklogin = "aphelion"
-var/sqlfdbkpass  = "App@[@92mNszE"
+var/sqlfdbkpass  = "App@@92mNszE" // You can't have a [ in the password. It throws syntax errors.
 var/sqllogging   = 0 // Should we log deaths, population stats, etc.?
 
 // Forum MySQL configuration. (for use with forum account/key authentication)
