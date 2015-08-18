@@ -60,7 +60,7 @@
 	//Sanitize
 	ooccolor		= sanitize_hexcolor(ooccolor, initial(ooccolor))
 	lastchangelog	= sanitize_text(lastchangelog, initial(lastchangelog))
-	UI_style		= sanitize_inlist(UI_style, list("White", "Midnight","Orange","old"), initial(UI_style))
+	UI_style		= sanitize_inlist(UI_style, all_ui_styles, initial(UI_style))
 	be_special		= sanitize_integer(be_special, 0, 65535, initial(be_special))
 	default_slot	= sanitize_integer(default_slot, 1, config.character_slots, initial(default_slot))
 	toggles			= sanitize_integer(toggles, 0, 65535, initial(toggles))

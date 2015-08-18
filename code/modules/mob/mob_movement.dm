@@ -28,7 +28,7 @@
 
 
 /client/proc/client_dir(input)
-	return turn(input, dir2angle(dir))
+	return turn(input, -dir2angle(dir))
 
 /client/Northeast()
 	diagonal_action(NORTHEAST)
