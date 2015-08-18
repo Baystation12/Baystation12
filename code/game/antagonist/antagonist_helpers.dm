@@ -2,9 +2,9 @@
 	if(player.current && jobban_isbanned(player.current, bantype))
 		return 0
 	if(!ignore_role)
-		if(player.assigned_role in protected_jobs)
+		if(player.assigned_role in restricted_jobs)
 			return 0
-		if(config.protect_roles_from_antagonist && (player.assigned_role in restricted_jobs))
+		if(config.protect_roles_from_antagonist && (player.assigned_role in protected_jobs))
 			return 0
 	return 1
 
