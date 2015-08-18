@@ -654,16 +654,21 @@
 	. = (client && client.inactivity < 1200)
 
 	if(.)
+		if(statpanel("Status") && ticker && ticker.current_state != GAME_STATE_PREGAME)
+			stat("Station Time", worldtime2text())
+			stat("Round Duration", round_duration())
+
 		if(client.holder)
 			if(statpanel("Status"))
-				statpanel("Status","Location:","([x], [y], [z])")
-				statpanel("Status","CPU:","[world.cpu]")
-				statpanel("Status","Instances:","[world.contents.len]")
-			if(statpanel("Status") && processScheduler && processScheduler.getIsRunning())
-				for(var/datum/controller/process/P in processScheduler.processes)
-					statpanel("Status",P.getStatName(), P.getTickTime())
-			else
-				statpanel("Status","processScheduler is not running.")
+				stat("Location:","([x], [y], [z])")
+			if(statpanel("Processes"))
+				stat("CPU:","[world.cpu]")
+				stat("Instances:","[world.contents.len]")
+				if(processScheduler && processScheduler.getIsRunning())
+					for(var/datum/controller/process/P in processScheduler.processes)
+						stat(P.getStatName(), P.getTickTime())
+				else
+					stat("processScheduler is not running.")
 
 		if(listed_turf && client)
 			if(!TurfAdjacent(listed_turf))
@@ -729,7 +734,7 @@
 		drop_l_hand()
 		drop_r_hand()
 	else
-		density = 1
+		density = initial(density)
 
 	for(var/obj/item/weapon/grab/G in grabbed_by)
 		if(G.state >= GRAB_AGGRESSIVE)
