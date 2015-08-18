@@ -1778,7 +1778,7 @@
 "Ij" = (/obj/structure/toilet{pixel_y = 8},/turf/unsimulated/floor{icon_state = "engine"},/area/wizard_station)
 "Ik" = (/turf/unsimulated/floor{icon_state = "engine"},/area/wizard_station)
 "Il" = (/obj/structure/mirror{pixel_y = 28},/turf/unsimulated/floor{icon_state = "engine"},/area/wizard_station)
-"Im" = (/obj/structure/table/rack,/obj/item/clothing/suit/space/vox/medic,/obj/item/clothing/shoes/magboots/vox,/obj/item/clothing/gloves/yellow/vox,/obj/item/clothing/under/vox/vox_robes,/turf/unsimulated/floor{tag = "icon-asteroid"; icon_state = "asteroid"},/area/syndicate_mothership{name = "\improper Raider Base"})
+"Im" = (/obj/structure/table/rack,/obj/item/clothing/suit/space/vox/medic,/obj/item/clothing/head/helmet/space/vox/medic,/obj/item/clothing/shoes/magboots/vox,/obj/item/clothing/gloves/yellow/vox,/obj/item/clothing/under/vox/vox_robes,/turf/unsimulated/floor{tag = "icon-asteroid"; icon_state = "asteroid"},/area/syndicate_mothership{name = "\improper Raider Base"})
 "In" = (/turf/unsimulated/floor{dir = 8; icon_state = "carpetside"},/area/wizard_station)
 "Io" = (/obj/effect/landmark/start{name = "wizard"},/turf/unsimulated/floor{dir = 2; icon_state = "carpetsymbol"},/area/wizard_station)
 "Ip" = (/turf/unsimulated/floor{dir = 4; icon_state = "carpetside"},/area/wizard_station)
