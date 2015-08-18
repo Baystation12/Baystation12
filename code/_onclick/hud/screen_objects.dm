@@ -377,7 +377,7 @@
 			usr.hud_used.action_intent.icon_state = "intent_help"
 		if(I_HURT)
 			usr.a_intent = I_HURT
-			usr.hud_used.action_intent.icon_state = "intent_hurt"
+			usr.hud_used.action_intent.icon_state = "intent_harm"
 		if(I_GRAB)
 			usr.a_intent = I_GRAB
 			usr.hud_used.action_intent.icon_state = "intent_grab"
