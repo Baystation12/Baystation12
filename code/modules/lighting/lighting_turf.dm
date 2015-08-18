@@ -17,6 +17,10 @@
 			var/atom/movable/lighting_overlay/O = PoolOrNew(/atom/movable/lighting_overlay, src)
 			lighting_overlay = O
 
+	//Make the light sources recalculate us so the lighting overlay updates immediately
+	for(var/datum/light_source/L in affecting_lights)
+		L.calc_turf(src)
+
 /turf/Entered(atom/movable/obj)
 	. = ..()
 	if(obj && obj.opacity)

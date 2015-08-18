@@ -22,6 +22,7 @@
 	//Used for logging people entering cryosleep and important items they are carrying.
 	var/list/frozen_crew = list()
 	var/list/frozen_items = list()
+	var/list/_admin_logs = list() // _ so it shows first in VV
 
 	var/storage_type = "crewmembers"
 	var/storage_name = "Cryogenic Oversight Control"
@@ -389,14 +390,17 @@
 
 	//TODO: Check objectives/mode, update new targets if this mob is the target, spawn new antags?
 
-	//This should guarantee that ghosts don't spawn.
-	occupant.ckey = null
 
 	//Make an announcement and log the person entering storage.
 	control_computer.frozen_crew += "[occupant.real_name], [occupant.mind.role_alt_title] - [worldtime2text()]"
+	control_computer._admin_logs += "[key_name(occupant)] ([occupant.mind.role_alt_title]) at [worldtime2text()]"
+	log_and_message_admins("[key_name(occupant)] ([occupant.mind.role_alt_title]) entered cryostorage.")
 
 	announce.autosay("[occupant.real_name], [occupant.mind.role_alt_title], [on_store_message]", "[on_store_name]")
 	visible_message("<span class='notice'>\The [initial(name)] hums and hisses as it moves [occupant.real_name] into storage.</span>", 3)
+
+	//This should guarantee that ghosts don't spawn.
+	occupant.ckey = null
 
 	// Delete the mob.
 	qdel(occupant)

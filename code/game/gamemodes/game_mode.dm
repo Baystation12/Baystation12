@@ -432,32 +432,26 @@ var/global/list/additional_antag_types = list()
 	if(!antag_template)
 		return candidates
 
-	var/roletext
 	// Assemble a list of active players without jobbans.
 	for(var/mob/new_player/player in player_list)
 		if( player.client && player.ready )
-			if(!(jobban_isbanned(player, "Syndicate") || jobban_isbanned(player, antag_template.bantype)))
-				players += player
-
-	// Shuffle the players list so that it becomes ping-independent.
-	players = shuffle(players)
+			players += player
 
 	// Get a list of all the people who want to be the antagonist for this round
 	for(var/mob/new_player/player in players)
 		if(!role || (player.client.prefs.be_special & role))
-			log_debug("[player.key] had [roletext] enabled, so we are drafting them.")
+			log_debug("[player.key] had [antag_id] enabled, so we are drafting them.")
 			candidates += player.mind
 			players -= player
 
 	// If we don't have enough antags, draft people who voted for the round.
 	if(candidates.len < required_enemies)
-		for(var/key in round_voters)
-			for(var/mob/new_player/player in players)
-				if(player.ckey == key)
-					log_debug("[player.key] voted for this round, so we are drafting them.")
-					candidates += player.mind
-					players -= player
-					break
+		for(var/mob/new_player/player in players)
+			if(player.ckey in round_voters)
+				log_debug("[player.key] voted for this round, so we are drafting them.")
+				candidates += player.mind
+				players -= player
+				break
 
 	return candidates		// Returns: The number of people who had the antagonist role set to yes, regardless of recomended_enemies, if that number is greater than required_enemies
 							//			required_enemies if the number of people with that role set to yes is less than recomended_enemies,
@@ -490,12 +484,14 @@ var/global/list/additional_antag_types = list()
 			if(antag)
 				antag_templates |= antag
 
+	/*
 	if(antag_templates && antag_templates.len)
 		for(var/datum/antagonist/antag in antag_templates)
 			if(antag.flags & (ANTAG_OVERRIDE_JOB|ANTAG_RANDSPAWN))
 				continue
 			antag_templates -= antag
 			world << "<span class='danger'>[antag.role_text_plural] are invalid for additional roundtype antags!</span>"
+	*/
 
 	newscaster_announcements = pick(newscaster_standard_feeds)
 
