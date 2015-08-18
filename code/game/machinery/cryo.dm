@@ -211,7 +211,7 @@
 
 	I = image(icon, "lid[on]")
 	I.layer = 5
-	overlays += I2
+	overlays += I
 
 	I = image(icon, "lid[on]_top")
 	I.layer = 5
