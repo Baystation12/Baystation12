@@ -59,20 +59,23 @@
 
 /datum/antagonist/proc/get_candidates(var/ghosts_only)
 	candidates = list() // Clear.
-	candidates = ticker.mode.get_players_for_role(role_type, id)
+	
 	// Prune restricted status. Broke it up for readability.
 	// Note that this is done before jobs are handed out.
-	for(var/datum/mind/player in candidates)
+	for(var/datum/mind/player in ticker.mode.get_players_for_role(role_type, id))
 		if(ghosts_only && !istype(player.current, /mob/dead))
-			candidates -= player
+			log_debug("[key_name(player)] is not eligible to become a [role_text]: Only ghosts may join as this role!"
 		else if(player.special_role)
-			candidates -= player
+			log_debug("[key_name(player)] is not eligible to become a [role_text]: They already have a special role ([player.special_role])!"
 		else if (player in pending_antagonists)
-			candidates -= player
+			log_debug("[key_name(player)] is not eligible to become a [role_text]: They have already been selected for this role!"
 		else if(!can_become_antag(player))
-			candidates -= player
+			log_debug("[key_name(player)] is not eligible to become a [role_text]: They are blacklisted for this role!"
 		else if(player_is_antag(player))
-			candidates -= player
+			log_debug("[key_name(player)] is not eligible to become a [role_text]: They are already an antagonist!"
+		else
+			candidates += player
+
 	return candidates
 
 /datum/antagonist/proc/attempt_random_spawn()
@@ -108,6 +111,7 @@
 		return 0
 
 	//Grab candidates randomly until we have enough.
+	candidates = shuffle(candidates)
 	while(candidates.len && pending_antagonists.len < cur_max)
 		var/datum/mind/player = pick(candidates)
 		candidates -= player
@@ -118,6 +122,7 @@
 /datum/antagonist/proc/draft_antagonist(var/datum/mind/player)
 	//Check if the player can join in this antag role, or if the player has already been given an antag role.
 	if(!can_become_antag(player) || player.special_role)
+		log_debug("[player.key] was selected for [role_text] by lottery, but is not allowed to be that role.")
 		return 0
 
 	pending_antagonists |= player
