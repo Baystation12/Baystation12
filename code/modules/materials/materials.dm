@@ -477,6 +477,7 @@ var/list/name_to_material
 	composite_material = list() //todo
 	created_window = /obj/structure/window/phoronreinforced
 	hardness = 40
+	melting_point = 8000000	
 	rod_product = null
 
 /material/plastic
