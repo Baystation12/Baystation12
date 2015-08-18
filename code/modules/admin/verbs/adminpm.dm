@@ -118,30 +118,31 @@
 		if(X.key != key && X.key != C.key && (X.holder.rights & R_ADMIN|R_MOD|R_MENTOR))
 			X << "<span class='pm'><span class='other'>" + create_text_tag("pm_other", "PM:", X) + " <span class='name'>[key_name(src, X, 0)]</span> to <span class='name'>[key_name(C, X, 0)]</span>: <span class='message'>[msg]</span></span></span>"
 
-/client/proc/cmd_admin_irc_pm()
+/client/proc/cmd_admin_irc_pm(sender)
 	if(prefs.muted & MUTE_ADMINHELP)
 		src << "<font color='red'>Error: Private-Message: You are unable to use PM-s (muted).</font>"
 		return
 
-	var/msg = input(src,"Message:", "Private message to admins on IRC / 400 character limit") as text|null
+	var/msg = input(src,"Message:", "Reply private message to [sender] on IRC / 400 character limit") as text|null
 
 	if(!msg)
 		return
 
 	sanitize(msg)
 
-	if(length(msg) > 400) // TODO: if message length is over 400, divide it up into seperate messages, the message length restriction is based on IRC limitations.  Probably easier to do this on the bots ends.
-		src << "\red Your message was not sent because it was more then 400 characters find your message below for ease of copy/pasting"
-		src << "\blue [msg]"
-		return
+	// Handled on Bot32's end, unsure about other bots
+//	if(length(msg) > 400) // TODO: if message length is over 400, divide it up into seperate messages, the message length restriction is based on IRC limitations.  Probably easier to do this on the bots ends.
+//		src << "<span class='warning'>Your message was not sent because it was more then 400 characters find your message below for ease of copy/pasting</span>"
+//		src << "<span class='notice'>[msg]</span>"
+//		return
 
-	send2adminirc("PlayerPM from [key_name(src)]: [html_decode(msg)]")
+	send2adminirc("PlayerPM to [sender] from [key_name(src)]: [html_decode(msg)]")
 
-	src << "<span class='pm'><span class='out'>" + create_text_tag("pm_out_alt", "", src) + " to <span class='name'>Admin IRC</span>: <span class='message'>[msg]</span></span></span>"
+	src << "<span class='pm'><span class='out'>" + create_text_tag("pm_out_alt", "", src) + " to <span class='name'>IRC-[sender]</span>: <span class='message'>[msg]</span></span></span>"
 
-	log_admin("PM: [key_name(src)]->IRC: [msg]")
+	log_admin("PM: [key_name(src)]->IRC-[sender]: [msg]")
 	for(var/client/X in admins)
 		if(X == src)
 			continue
 		if(X.holder.rights & R_ADMIN|R_MOD)
-			X << "<span class='pm'><span class='other'>" + create_text_tag("pm_other", "PM:", X) + " <span class='name'>[key_name(src, X, 0)]</span> to <span class='name'>Admin IRC</span>: <span class='message'>[msg]</span></span></span>"
+			X << "<span class='pm'><span class='other'>" + create_text_tag("pm_other", "PM:", X) + " <span class='name'>[key_name(src, X, 0)]</span> to <span class='name'>IRC-[sender]</span>: <span class='message'>[msg]</span></span></span>"
