@@ -9,8 +9,9 @@ var/list/floor_decals = list()
 	layer = TURF_LAYER + 0.01
 	var/supplied_dir
 
-/obj/effect/floor_decal/New(var/newloc, var/newdir)
+/obj/effect/floor_decal/New(var/newloc, var/newdir, var/newcolour)
 	supplied_dir = newdir
+	if(newcolour) color = newcolour
 	..(newloc)
 
 /obj/effect/floor_decal/initialize()

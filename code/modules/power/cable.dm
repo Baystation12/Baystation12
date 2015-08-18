@@ -50,7 +50,7 @@ By design, d1 is the smallest direction and d2 is the highest
 	color = COLOR_YELLOW
 
 /obj/structure/cable/green
-	color = COLOR_GREEN
+	color = COLOR_LIME
 
 /obj/structure/cable/blue
 	color = COLOR_BLUE
@@ -538,7 +538,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 
 /obj/item/stack/cable_coil/update_icon()
 	if (!color)
-		color = pick(COLOR_RED, COLOR_BLUE, COLOR_GREEN, COLOR_ORANGE, COLOR_WHITE, COLOR_PINK, COLOR_YELLOW, COLOR_CYAN)
+		color = pick(COLOR_RED, COLOR_BLUE, COLOR_LIME, COLOR_ORANGE, COLOR_WHITE, COLOR_PINK, COLOR_YELLOW, COLOR_CYAN)
 	if(amount == 1)
 		icon_state = "coil1"
 		name = "cable piece"
@@ -597,7 +597,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 			if("Yellow")
 				color = COLOR_YELLOW
 			if("Green")
-				color = COLOR_GREEN
+				color = COLOR_LIME
 			if("Pink")
 				color = COLOR_PINK
 			if("Blue")
@@ -878,7 +878,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 	color = COLOR_BLUE
 
 /obj/item/stack/cable_coil/green
-	color = COLOR_GREEN
+	color = COLOR_LIME
 
 /obj/item/stack/cable_coil/pink
 	color = COLOR_PINK
@@ -893,5 +893,5 @@ obj/structure/cable/proc/cableColor(var/colorC)
 	color = COLOR_WHITE
 
 /obj/item/stack/cable_coil/random/New()
-	color = pick(COLOR_RED, COLOR_BLUE, COLOR_GREEN, COLOR_WHITE, COLOR_PINK, COLOR_YELLOW, COLOR_CYAN)
+	color = pick(COLOR_RED, COLOR_BLUE, COLOR_LIME, COLOR_WHITE, COLOR_PINK, COLOR_YELLOW, COLOR_CYAN)
 	..()
