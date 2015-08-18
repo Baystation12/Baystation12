@@ -1258,6 +1258,13 @@
 	required_reagents = list("soymilk" = 4, "sacid" = 1)
 	result_amount = 5
 
+/datum/chemical_reaction/ketchup
+	name = "Ketchup"
+	id = "ketchup"
+	result = "ketchup"
+	required_reagents = list("tomatojuice" = 2, "water" = 1, "sugar" = 1)
+	result_amount = 4
+
 /datum/chemical_reaction/cheesewheel
 	name = "Cheesewheel"
 	id = "cheesewheel"

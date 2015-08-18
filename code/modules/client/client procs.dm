@@ -52,7 +52,7 @@
 		if(mute_irc)
 			usr << "<span class='warning'You cannot use this as your client has been muted from sending messages to the admins on IRC</span>"
 			return
-		cmd_admin_irc_pm()
+		cmd_admin_irc_pm(href_list["irc_msg"])
 		return
 
 
