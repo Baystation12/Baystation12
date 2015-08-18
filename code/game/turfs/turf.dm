@@ -136,7 +136,7 @@ var/const/enterloopsanity = 100
 			if(objects > enterloopsanity) break
 			objects++
 			spawn(0)
-				thing.HasProximity(A, 1)
+				A.HasProximity(thing, 1)
 				if ((thing && A) && (thing.flags & PROXMOVE))
 					thing.HasProximity(A, 1)
 	return

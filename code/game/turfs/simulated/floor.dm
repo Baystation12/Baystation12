@@ -33,9 +33,9 @@
 	if(floortype)
 		set_flooring(get_flooring_data(floortype))
 
-	//TEMPORARY DEBUGGING LINES, REMOVE LATER
+	//DEBUGGING LINES, REMOVE WHEN MAP IS UP TO DATE.
 	if(!flooring && icon_state != "plating")
-		name = "OLDCODE FLOORING WOOP WOOP"
+		testing("turf at [x],[y],[z] is oldcode")
 
 /turf/simulated/floor/proc/set_flooring(var/decl/flooring/newflooring)
 	make_plating(defer_icon_update = 1)

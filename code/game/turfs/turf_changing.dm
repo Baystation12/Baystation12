@@ -46,11 +46,11 @@
 		if(S.zone) S.zone.rebuild()
 
 	if(ispath(N, /turf/simulated/floor))
-		var/turf/simulated/W = new N( locate(src.x, src.y, src.z) )
+		var/turf/simulated/floor/W = new N( locate(src.x, src.y, src.z) )
 		if(old_fire)
 			fire = old_fire
 
-		if (istype(W,/turf/simulated/floor))
+		if (istype(W))
 			W.RemoveLattice()
 
 		if(tell_universe)
