@@ -415,7 +415,7 @@ It's fairly easy to fix if dealing with single letters but not so much with comp
 
 		var/atom/oldeye=M.client.eye
 		var/aiEyeFlag = 0
-		if(istype(oldeye, /mob/aiEye))
+		if(istype(oldeye, /mob/eye/aiEye))
 			aiEyeFlag = 1
 
 		var/x
