@@ -64,15 +64,15 @@
 	// Note that this is done before jobs are handed out.
 	for(var/datum/mind/player in ticker.mode.get_players_for_role(role_type, id))
 		if(ghosts_only && !istype(player.current, /mob/dead))
-			log_debug("[key_name(player)] is not eligible to become a [role_text]: Only ghosts may join as this role!"
+			log_debug("[key_name(player)] is not eligible to become a [role_text]: Only ghosts may join as this role!")
 		else if(player.special_role)
-			log_debug("[key_name(player)] is not eligible to become a [role_text]: They already have a special role ([player.special_role])!"
+			log_debug("[key_name(player)] is not eligible to become a [role_text]: They already have a special role ([player.special_role])!")
 		else if (player in pending_antagonists)
-			log_debug("[key_name(player)] is not eligible to become a [role_text]: They have already been selected for this role!"
+			log_debug("[key_name(player)] is not eligible to become a [role_text]: They have already been selected for this role!")
 		else if(!can_become_antag(player))
-			log_debug("[key_name(player)] is not eligible to become a [role_text]: They are blacklisted for this role!"
+			log_debug("[key_name(player)] is not eligible to become a [role_text]: They are blacklisted for this role!")
 		else if(player_is_antag(player))
-			log_debug("[key_name(player)] is not eligible to become a [role_text]: They are already an antagonist!"
+			log_debug("[key_name(player)] is not eligible to become a [role_text]: They are already an antagonist!")
 		else
 			candidates += player
 
