@@ -1,4 +1,4 @@
-/datum/hud/proc/monkey_hud(var/ui_style='icons/mob/screen1_old.dmi')
+/datum/hud/proc/monkey_hud(var/ui_style='icons/mob/screen1_old.dmi', var/ui_color = "#ffffff", var/ui_alpha = 255)
 
 	src.adding = list()
 	src.other = list()
@@ -8,8 +8,9 @@
 
 	using = new /obj/screen()
 	using.name = "act_intent"
-	using.set_dir(SOUTHWEST)
 	using.icon = ui_style
+	using.color = ui_color
+	using.alpha = ui_alpha
 	using.icon_state = mymob.a_intent
 	using.screen_loc = ui_acti
 	using.layer = 20
@@ -67,8 +68,9 @@
 
 	using = new /obj/screen()
 	using.name = "mov_intent"
-	using.set_dir(SOUTHWEST)
 	using.icon = ui_style
+	using.color = ui_color
+	using.alpha = ui_alpha
 	using.icon_state = (mymob.m_intent == "run" ? "running" : "walking")
 	using.screen_loc = ui_movi
 	using.layer = 20
@@ -78,6 +80,8 @@
 	using = new /obj/screen()
 	using.name = "drop"
 	using.icon = ui_style
+	using.color = ui_color
+	using.alpha = ui_alpha
 	using.icon_state = "act_drop"
 	using.screen_loc = ui_drop_throw
 	using.layer = 19
@@ -85,9 +89,10 @@
 
 	inv_box = new /obj/screen/inventory()
 	inv_box.name = "r_hand"
-	inv_box.set_dir(WEST)
 	inv_box.icon = ui_style
-	inv_box.icon_state = "hand_inactive"
+	using.color = ui_color
+	using.alpha = ui_alpha
+	inv_box.icon_state = "r_hand_inactive"
 	if(mymob && !mymob.hand)	//This being 0 or null means the right hand is in use
 		inv_box.icon_state = "hand_active"
 	inv_box.screen_loc = ui_rhand
@@ -98,9 +103,10 @@
 
 	inv_box = new /obj/screen/inventory()
 	inv_box.name = "l_hand"
-	inv_box.set_dir(EAST)
 	inv_box.icon = ui_style
-	inv_box.icon_state = "hand_inactive"
+	using.color = ui_color
+	using.alpha = ui_alpha
+	inv_box.icon_state = "l_hand_inactive"
 	if(mymob && mymob.hand)	//This being 1 means the left hand is in use
 		inv_box.icon_state = "hand_active"
 	inv_box.screen_loc = ui_lhand
@@ -111,8 +117,9 @@
 
 	using = new /obj/screen/inventory()
 	using.name = "hand"
-	using.set_dir(SOUTH)
 	using.icon = ui_style
+	using.color = ui_color
+	using.alpha = ui_alpha
 	using.icon_state = "hand1"
 	using.screen_loc = ui_swaphand1
 	using.layer = 19
@@ -120,8 +127,9 @@
 
 	using = new /obj/screen/inventory()
 	using.name = "hand"
-	using.set_dir(SOUTH)
 	using.icon = ui_style
+	using.color = ui_color
+	using.alpha = ui_alpha
 	using.icon_state = "hand2"
 	using.screen_loc = ui_swaphand2
 	using.layer = 19
@@ -129,8 +137,9 @@
 
 	inv_box = new /obj/screen/inventory()
 	inv_box.name = "mask"
-	inv_box.set_dir(NORTH)
 	inv_box.icon = ui_style
+	inv_box.color = ui_color
+	inv_box.alpha = ui_alpha
 	inv_box.icon_state = "equip"
 	inv_box.screen_loc = ui_monkey_mask
 	inv_box.slot_id = slot_wear_mask
@@ -139,8 +148,9 @@
 
 	inv_box = new /obj/screen/inventory()
 	inv_box.name = "back"
-	inv_box.set_dir(NORTHEAST)
 	inv_box.icon = ui_style
+	inv_box.color = ui_color
+	inv_box.alpha = ui_alpha
 	inv_box.icon_state = "equip"
 	inv_box.screen_loc = ui_back
 	inv_box.slot_id = slot_back
@@ -149,54 +159,72 @@
 
 	mymob.throw_icon = new /obj/screen()
 	mymob.throw_icon.icon = ui_style
+	mymob.throw_icon.color = ui_color
+	mymob.throw_icon.alpha = ui_alpha
 	mymob.throw_icon.icon_state = "act_throw_off"
 	mymob.throw_icon.name = "throw"
 	mymob.throw_icon.screen_loc = ui_drop_throw
 
 	mymob.oxygen = new /obj/screen()
 	mymob.oxygen.icon = ui_style
+	mymob.oxygen.color = ui_color
+	mymob.oxygen.alpha = ui_alpha
 	mymob.oxygen.icon_state = "oxy0"
 	mymob.oxygen.name = "oxygen"
 	mymob.oxygen.screen_loc = ui_oxygen
 
 	mymob.pressure = new /obj/screen()
 	mymob.pressure.icon = ui_style
+	mymob.pressure.color = ui_color
+	mymob.pressure.alpha = ui_alpha
 	mymob.pressure.icon_state = "pressure0"
 	mymob.pressure.name = "pressure"
 	mymob.pressure.screen_loc = ui_pressure
 
 	mymob.toxin = new /obj/screen()
 	mymob.toxin.icon = ui_style
+	mymob.toxin.color = ui_color
+	mymob.toxin.alpha = ui_alpha
 	mymob.toxin.icon_state = "tox0"
 	mymob.toxin.name = "toxin"
 	mymob.toxin.screen_loc = ui_toxin
 
 	mymob.internals = new /obj/screen()
 	mymob.internals.icon = ui_style
+	mymob.internals.color = ui_color
+	mymob.internals.alpha = ui_alpha
 	mymob.internals.icon_state = "internal0"
 	mymob.internals.name = "internal"
 	mymob.internals.screen_loc = ui_internal
 
 	mymob.fire = new /obj/screen()
 	mymob.fire.icon = ui_style
+	mymob.fire.color = ui_color
+	mymob.fire.alpha = ui_alpha
 	mymob.fire.icon_state = "fire0"
 	mymob.fire.name = "fire"
 	mymob.fire.screen_loc = ui_fire
 
 	mymob.bodytemp = new /obj/screen()
 	mymob.bodytemp.icon = ui_style
+	mymob.bodytemp.color = ui_color
+	mymob.bodytemp.alpha = ui_alpha
 	mymob.bodytemp.icon_state = "temp1"
 	mymob.bodytemp.name = "body temperature"
 	mymob.bodytemp.screen_loc = ui_temp
 
 	mymob.healths = new /obj/screen()
 	mymob.healths.icon = ui_style
+	mymob.healths.color = ui_color
+	mymob.healths.alpha = ui_alpha
 	mymob.healths.icon_state = "health0"
 	mymob.healths.name = "health"
 	mymob.healths.screen_loc = ui_health
 
 	mymob.pullin = new /obj/screen()
 	mymob.pullin.icon = ui_style
+	mymob.pullin.color = ui_color
+	mymob.pullin.alpha = ui_alpha
 	mymob.pullin.icon_state = "pull0"
 	mymob.pullin.name = "pull"
 	mymob.pullin.screen_loc = ui_pull_resist
@@ -217,6 +245,8 @@
 
 	mymob.zone_sel = new /obj/screen/zone_sel()
 	mymob.zone_sel.icon = ui_style
+	mymob.zone_sel.color = ui_color
+	mymob.zone_sel.alpha = ui_alpha
 	mymob.zone_sel.overlays.Cut()
 	mymob.zone_sel.overlays += image('icons/mob/zone_sel.dmi', "[mymob.zone_sel.selecting]")
 

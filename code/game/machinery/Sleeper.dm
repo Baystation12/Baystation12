@@ -5,7 +5,6 @@
 	icon_state = "sleeper_0"
 	density = 1
 	anchored = 1
-	var/orient = "LEFT" // "RIGHT" changes the dir suffix to "-r"
 	var/mob/living/carbon/human/occupant = null
 	var/list/available_chemicals = list("inaprovaline" = "Inaprovaline", "stoxin" = "Soporific", "paracetamol" = "Paracetamol", "anti_toxin" = "Dylovene", "dexalin" = "Dexalin")
 	var/obj/item/weapon/reagent_containers/glass/beaker = null
@@ -39,7 +38,7 @@
 			toggle_filter()
 
 /obj/machinery/sleeper/update_icon()
-	icon_state = "sleeper_[occupant ? "1" : "0"][orient == "RIGHT" ? "-r" : ""]"
+	icon_state = "sleeper_[occupant ? "1" : "0"]"
 
 /obj/machinery/sleeper/attack_hand(var/mob/user)
 	if(..())
