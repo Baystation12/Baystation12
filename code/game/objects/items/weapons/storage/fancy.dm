@@ -134,7 +134,7 @@
 	item_state = "cigpacket"
 	w_class = 1
 	throwforce = 2
-	slot_flags = SLOT_BELT
+	slot_flags = SLOT_BELT| SLOT_EARS
 	storage_slots = 6
 	can_hold = list(/obj/item/clothing/mask/smokable/cigarette)
 	icon_type = "cigarette"
@@ -185,7 +185,7 @@
 	icon = 'icons/obj/cigarettes.dmi'
 	w_class = 1
 	throwforce = 2
-	slot_flags = SLOT_BELT
+	slot_flags = SLOT_BELT| SLOT_EARS
 	storage_slots = 7
 	can_hold = list(/obj/item/clothing/mask/smokable/cigarette/cigar)
 	icon_type = "cigar"
