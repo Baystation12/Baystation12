@@ -15,7 +15,7 @@
 	idle_power_usage = 20
 	active_power_usage = 5000
 
-	var/fabricator_tag = "Exodus"
+	var/fabricator_tag = "Aphelion"
 	var/drone_progress = 0
 	var/produce_drones = 1
 	var/time_last_drone = 500
