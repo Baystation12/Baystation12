@@ -58,7 +58,6 @@
 
 		using = new /obj/screen()
 		using.name = "act_intent"
-		using.set_dir(SOUTHWEST)
 		using.icon = ui_style
 		using.icon_state = "intent_"+mymob.a_intent
 		using.screen_loc = ui_acti
@@ -125,7 +124,6 @@
 	if(hud_data.has_m_intent)
 		using = new /obj/screen()
 		using.name = "mov_intent"
-		using.set_dir(SOUTHWEST)
 		using.icon = ui_style
 		using.icon_state = (mymob.m_intent == "run" ? "running" : "walking")
 		using.screen_loc = ui_movi
@@ -160,11 +158,10 @@
 
 		inv_box = new /obj/screen/inventory()
 		inv_box.name = "r_hand"
-		inv_box.set_dir(WEST)
 		inv_box.icon = ui_style
-		inv_box.icon_state = "hand_inactive"
+		inv_box.icon_state = "r_hand_inactive"
 		if(mymob && !mymob.hand)	//This being 0 or null means the right hand is in use
-			inv_box.icon_state = "hand_active"
+			inv_box.icon_state = "r_hand_active"
 		inv_box.screen_loc = ui_rhand
 		inv_box.slot_id = slot_r_hand
 		inv_box.layer = 19
@@ -176,11 +173,10 @@
 
 		inv_box = new /obj/screen/inventory()
 		inv_box.name = "l_hand"
-		inv_box.set_dir(EAST)
 		inv_box.icon = ui_style
-		inv_box.icon_state = "hand_inactive"
+		inv_box.icon_state = "l_hand_inactive"
 		if(mymob && mymob.hand)	//This being 1 means the left hand is in use
-			inv_box.icon_state = "hand_active"
+			inv_box.icon_state = "l_hand_active"
 		inv_box.screen_loc = ui_lhand
 		inv_box.slot_id = slot_l_hand
 		inv_box.layer = 19
@@ -191,7 +187,6 @@
 
 		using = new /obj/screen/inventory()
 		using.name = "hand"
-		using.set_dir(SOUTH)
 		using.icon = ui_style
 		using.icon_state = "hand1"
 		using.screen_loc = ui_swaphand1
@@ -202,7 +197,6 @@
 
 		using = new /obj/screen/inventory()
 		using.name = "hand"
-		using.set_dir(SOUTH)
 		using.icon = ui_style
 		using.icon_state = "hand2"
 		using.screen_loc = ui_swaphand2
@@ -340,28 +334,30 @@
 
 	//Handle the gun settings buttons
 	mymob.gun_setting_icon = new /obj/screen/gun/mode(null)
-	//mymob.gun_setting_icon.color = ui_color
+	mymob.gun_setting_icon.icon = ui_style
+	mymob.gun_setting_icon.color = ui_color
 	mymob.gun_setting_icon.alpha = ui_alpha
 	hud_elements |= mymob.gun_setting_icon
 
 	mymob.item_use_icon = new /obj/screen/gun/item(null)
-	//mymob.item_use_icon.color = ui_color
+	mymob.item_use_icon.icon = ui_style
+	mymob.item_use_icon.color = ui_color
 	mymob.item_use_icon.alpha = ui_alpha
 
 	mymob.gun_move_icon = new /obj/screen/gun/move(null)
-	//mymob.gun_move_icon.color = ui_color
+	mymob.gun_move_icon.icon = ui_style
+	mymob.gun_move_icon.color = ui_color
 	mymob.gun_move_icon.alpha = ui_alpha
 
 	mymob.gun_run_icon = new /obj/screen/gun/run(null)
-	//mymob.gun_run_icon.color = ui_color
+	mymob.gun_run_icon.icon = ui_style
+	mymob.gun_run_icon.color = ui_color
 	mymob.gun_run_icon.alpha = ui_alpha
 
 	mymob.radio_use_icon = new /obj/screen/gun/radio(null)
+	mymob.radio_use_icon.icon = ui_style
+	mymob.radio_use_icon.color = ui_color
 	mymob.radio_use_icon.alpha = ui_alpha
-
-	if (mymob.client)
-		if (mymob.client.gun_mode) // If in aim mode, correct the sprite
-			mymob.gun_setting_icon.set_dir(2)
 
 
 	mymob.client.screen = null

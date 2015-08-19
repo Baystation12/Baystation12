@@ -921,6 +921,7 @@
 #include "code\modules\client\preferences_savefile.dm"
 #include "code\modules\client\preferences_spawnpoints.dm"
 #include "code\modules\client\preferences_toggles.dm"
+#include "code\modules\client\ui_style.dm"
 #include "code\modules\clothing\chameleon.dm"
 #include "code\modules\clothing\clothing.dm"
 #include "code\modules\clothing\ears\skrell.dm"

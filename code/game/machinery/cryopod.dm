@@ -147,20 +147,7 @@
 	icon = 'icons/obj/Cryogenic2.dmi'
 	icon_state = "cryo_rear"
 	anchored = 1
-
-	var/orient_right = null //Flips the sprite.
-
-/obj/structure/cryofeed/right
-	orient_right = 1
-	icon_state = "cryo_rear-r"
-
-/obj/structure/cryofeed/New()
-
-	if(orient_right)
-		icon_state = "cryo_rear-r"
-	else
-		icon_state = "cryo_rear"
-	..()
+	dir = WEST
 
 //Cryopods themselves.
 /obj/machinery/cryopod
@@ -170,6 +157,7 @@
 	icon_state = "body_scanner_0"
 	density = 1
 	anchored = 1
+	dir = WEST
 
 	var/base_icon_state = "body_scanner_0"
 	var/occupied_icon_state = "body_scanner_1"
@@ -180,7 +168,6 @@
 	var/disallow_occupant_types = list()
 
 	var/mob/occupant = null       // Person waiting to be despawned.
-	var/orient_right = null       // Flips the sprite.
 	var/time_till_despawn = 18000 // 30 minutes-ish safe period before being despawned.
 	var/time_entered = 0          // Used to keep track of the safe period.
 	var/obj/item/device/radio/intercom/announce //
@@ -204,10 +191,6 @@
 		/obj/item/weapon/storage/internal
 	)
 
-/obj/machinery/cryopod/right
-	orient_right = 1
-	icon_state = "body_scanner_0-r"
-
 /obj/machinery/cryopod/robot
 	name = "robotic storage unit"
 	desc = "A storage unit for robots."
@@ -221,18 +204,8 @@
 	allow_occupant_types = list(/mob/living/silicon/robot)
 	disallow_occupant_types = list(/mob/living/silicon/robot/drone)
 
-/obj/machinery/cryopod/robot/right
-	orient_right = 1
-	icon_state = "pod_0-r"
-
 /obj/machinery/cryopod/New()
 	announce = new /obj/item/device/radio/intercom(src)
-
-	if(orient_right)
-		icon_state = "[base_icon_state]-r"
-	else
-		icon_state = base_icon_state
-
 	..()
 
 /obj/machinery/cryopod/Destroy()
@@ -383,10 +356,7 @@
 		if ((G.fields["name"] == occupant.real_name))
 			qdel(G)
 
-	if(orient_right)
-		icon_state = "[base_icon_state]-r"
-	else
-		icon_state = base_icon_state
+	icon_state = base_icon_state
 
 	//TODO: Check objectives/mode, update new targets if this mob is the target, spawn new antags?
 
@@ -444,10 +414,7 @@
 					M.client.perspective = EYE_PERSPECTIVE
 					M.client.eye = src
 
-			if(orient_right)
-				icon_state = "[occupied_icon_state]-r"
-			else
-				icon_state = occupied_icon_state
+			icon_state = occupied_icon_state
 
 			M << "<span class='notice'>[on_enter_occupant_message]</span>"
 			M << "<span class='notice'><b>If you ghost, log out or close your client now, your character will shortly be permanently removed from the round.</b></span>"
@@ -469,10 +436,7 @@
 	if(usr.stat != 0)
 		return
 
-	if(orient_right)
-		icon_state = "[base_icon_state]-r"
-	else
-		icon_state = base_icon_state
+	icon_state = base_icon_state
 
 	//Eject any items that aren't meant to be in the pod.
 	var/list/items = src.contents
@@ -522,10 +486,7 @@
 		usr.loc = src
 		set_occupant(usr)
 
-		if(orient_right)
-			icon_state = "[occupied_icon_state]-r"
-		else
-			icon_state = occupied_icon_state
+		icon_state = occupied_icon_state
 
 		usr << "<span class='notice'>[on_enter_occupant_message]</span>"
 		usr << "<span class='notice'><b>If you ghost, log out or close your client now, your character will shortly be permanently removed from the round.</b></span>"
@@ -548,10 +509,7 @@
 	occupant.loc = get_turf(src)
 	set_occupant(null)
 
-	if(orient_right)
-		icon_state = "[base_icon_state]-r"
-	else
-		icon_state = base_icon_state
+	icon_state = base_icon_state
 
 	return
 
