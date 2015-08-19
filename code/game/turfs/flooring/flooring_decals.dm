@@ -194,6 +194,27 @@ var/list/floor_decals = list()
 /obj/effect/floor_decal/corner/grey/full
 	icon_state = "corner_white_full"
 
+/obj/effect/floor_decal/spline/plain
+	name = "spline - plain"
+	icon_state = "spline_plain"
+
+/obj/effect/floor_decal/spline/fancy
+	name = "spline - fancy"
+	icon_state = "spline_fancy"
+
+/obj/effect/floor_decal/spline/fancy/wood
+	name = "spline - wood"
+	color = "#CB9E04"
+
+/obj/effect/floor_decal/spline/fancy/wood/corner
+	icon_state = "spline_fancy_corner"
+
+/obj/effect/floor_decal/spline/fancy/wood/cee
+	icon_state = "spline_fancy_cee"
+
+/obj/effect/floor_decal/spline/fancy/wood/full
+	icon_state = "spline_fancy_full"
+
 /obj/effect/floor_decal/industrial/warning
 	name = "hazard stripes"
 	icon_state = "warning"
@@ -245,6 +266,16 @@ var/list/floor_decals = list()
 /obj/effect/floor_decal/plaque
 	name = "plaque"
 	icon_state = "plaque"
+
+/obj/effect/floor_decal/carpet
+	name = "carpet"
+	icon = 'icons/turf/flooring/carpet.dmi'
+	icon_state = "carpet_edges"
+
+/obj/effect/floor_decal/carpet/corners
+	name = "carpet"
+	icon = 'icons/turf/flooring/carpet.dmi'
+	icon_state = "carpet_corners"
 
 /obj/effect/floor_decal/asteroid
 	name = "random asteroid rubble"
