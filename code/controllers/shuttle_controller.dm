@@ -203,7 +203,7 @@ var/global/datum/shuttle_controller/shuttle_controller
 
 	//Skipjack.
 	var/datum/shuttle/multi_shuttle/VS = new/datum/shuttle/multi_shuttle()
-	VS.origin = locate(/area/skipjack_station)
+	VS.origin = locate(/area/skipjack_station/start)
 
 	VS.destinations = list(
 		"Fore Starboard Solars" = locate(/area/skipjack_station/northeast_solars),
