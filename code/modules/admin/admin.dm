@@ -680,7 +680,7 @@ proc/admin_notice(var/message, var/rights)
 
 	if(check_rights(R_SERVER,0))
 		dat += "<A href='?src=\ref[src];secretsfun=togglebombcap'>Toggle bomb cap</A><BR>"
-		dat += "<A href='?src=\ref[src];secretsfun=togglebomboff'>Toggle bomb cap</A><BR>"
+		dat += "<A href='?src=\ref[src];secretsfun=togglebomboff'>Toggle bombs off</A><BR>"
 
 	if(check_rights(R_SERVER|R_FUN,0))
 		dat += {"
