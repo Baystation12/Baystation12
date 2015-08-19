@@ -1,6 +1,3 @@
-#define CELLS 4
-#define CELLSIZE (32/CELLS)
-
 /obj/item/device/floor_painter
 	name = "floor painter"
 	icon = 'icons/obj/bureaucracy.dmi'
@@ -197,6 +194,3 @@
 	if(new_dir && !isnull(paint_dirs[new_dir]))
 		paint_dir = new_dir
 		usr << "<span class='notice'>You set \the [src] direction to '[paint_dir]'.</span>"
-
-#undef CELLS
-#undef CELLSIZE
