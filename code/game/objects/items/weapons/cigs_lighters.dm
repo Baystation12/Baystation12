@@ -423,7 +423,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	w_class = 1
 	throwforce = 4
 	flags = CONDUCT
-	slot_flags = SLOT_BELT
+	slot_flags = SLOT_BELT| SLOT_EARS
 	attack_verb = list("burnt", "singed")
 	var/base_state
 
