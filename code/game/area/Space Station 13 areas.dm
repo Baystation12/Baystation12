@@ -516,8 +516,11 @@ area/space/atmosalert()
 	icon_state = "yellow"
 	requires_power = 0
 
-/area/skipjack_station/transit
+/area/skipjack_station/start
+	name = "\improper Skipjack"
+	icon_state = "yellow"
 
+/area/skipjack_station/transit
 	name = "\improper hyperspace"
 	icon_state = "shuttle"
 
