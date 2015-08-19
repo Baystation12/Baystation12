@@ -348,8 +348,8 @@
 /obj/machinery/atmospherics/pipe/simple/visible/green
 	color = PIPE_COLOR_GREEN
 
-/obj/machinery/atmospherics/pipe/simple/visible/purple
-	color = PIPE_COLOR_PURPLE
+/obj/machinery/atmospherics/pipe/simple/visible/black
+	color = PIPE_COLOR_BLACK
 
 /obj/machinery/atmospherics/pipe/simple/visible/red
 	color = PIPE_COLOR_RED
@@ -390,8 +390,8 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/green
 	color = PIPE_COLOR_GREEN
 
-/obj/machinery/atmospherics/pipe/simple/hidden/purple
-	color = PIPE_COLOR_PURPLE
+/obj/machinery/atmospherics/pipe/simple/hidden/black
+	color = PIPE_COLOR_BLACK
 
 /obj/machinery/atmospherics/pipe/simple/hidden/red
 	color = PIPE_COLOR_RED
@@ -616,8 +616,8 @@
 /obj/machinery/atmospherics/pipe/manifold/visible/green
 	color = PIPE_COLOR_GREEN
 
-/obj/machinery/atmospherics/pipe/manifold/visible/purple
-	color = PIPE_COLOR_PURPLE
+/obj/machinery/atmospherics/pipe/manifold/visible/black
+	color = PIPE_COLOR_BLACK
 
 /obj/machinery/atmospherics/pipe/manifold/visible/red
 	color = PIPE_COLOR_RED
@@ -658,8 +658,8 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/green
 	color = PIPE_COLOR_GREEN
 
-/obj/machinery/atmospherics/pipe/manifold/hidden/purple
-	color = PIPE_COLOR_PURPLE
+/obj/machinery/atmospherics/pipe/manifold/hidden/black
+	color = PIPE_COLOR_BLACK
 
 /obj/machinery/atmospherics/pipe/manifold/hidden/red
 	color = PIPE_COLOR_RED
@@ -874,8 +874,8 @@
 /obj/machinery/atmospherics/pipe/manifold4w/visible/green
 	color = PIPE_COLOR_GREEN
 
-/obj/machinery/atmospherics/pipe/manifold4w/visible/purple
-	color = PIPE_COLOR_PURPLE
+/obj/machinery/atmospherics/pipe/manifold4w/visible/black
+	color = PIPE_COLOR_BLACK
 
 /obj/machinery/atmospherics/pipe/manifold4w/visible/red
 	color = PIPE_COLOR_RED
@@ -915,8 +915,8 @@
 /obj/machinery/atmospherics/pipe/manifold4w/hidden/green
 	color = PIPE_COLOR_GREEN
 
-/obj/machinery/atmospherics/pipe/manifold4w/hidden/purple
-	color = PIPE_COLOR_PURPLE
+/obj/machinery/atmospherics/pipe/manifold4w/hidden/black
+	color = PIPE_COLOR_BLACK
 
 /obj/machinery/atmospherics/pipe/manifold4w/hidden/red
 	color = PIPE_COLOR_RED

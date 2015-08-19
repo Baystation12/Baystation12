@@ -44,6 +44,16 @@ var/list/floor_decals = list()
 /obj/effect/floor_decal/corner
 	icon_state = "corner_white"
 
+/obj/effect/floor_decal/corner/black
+	name = "black corner"
+	color = "#333333"
+
+/obj/effect/floor_decal/corner/black/diagonal
+	icon_state = "corner_white_diagonal"
+
+/obj/effect/floor_decal/corner/black/full
+	icon_state = "corner_white_full"
+
 /obj/effect/floor_decal/corner/blue
 	name = "blue corner"
 	color = "#6A97B0"
@@ -208,6 +218,8 @@ var/list/floor_decals = list()
 /obj/effect/floor_decal/industrial/hatch
 	name = "hatched marking"
 	icon_state = "delivery"
+
+/obj/effect/floor_decal/industrial/hatch/yellow
 	color = "#CFCF55"
 
 /obj/effect/floor_decal/industrial/outline
