@@ -467,6 +467,7 @@ var/list/name_to_material
 	stack_origin_tech = "materials=3;phorontech=2"
 	created_window = /obj/structure/window/phoronbasic
 	wire_product = null
+	melting_point = 12000	
 	rod_product = /obj/item/stack/material/glass/phoronrglass
 
 /material/glass/phoron/reinforced
@@ -477,7 +478,7 @@ var/list/name_to_material
 	composite_material = list() //todo
 	created_window = /obj/structure/window/phoronreinforced
 	hardness = 40
-	melting_point = 8000000	
+	melting_point = 20000	
 	rod_product = null
 
 /material/plastic
