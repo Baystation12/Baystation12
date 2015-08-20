@@ -165,7 +165,7 @@
 	set src in view(1)
 
 	var/mob/living/user = usr
-	if(!istype(user) || !(user.l_hand || user.r_hand))
+	if(!istype(user) || !(user.l_hand || user.r_hand) || !Adjacent(user))
 		return
 
 	if(reinf_material)
@@ -248,7 +248,7 @@
 			dismantle()
 
 	else if(istype(W, /obj/item/weapon/pickaxe/plasmacutter))
-		user << "<span class='notice'>Now slicing apart the girder..."
+		user << "<span class='notice'>Now slicing apart the girder...</span>"
 		if(do_after(user,30))
 			user << "<span class='notice'>You slice apart the girder!</span>"
 		dismantle()
