@@ -68,4 +68,4 @@
 		pipe_networks.Remove(pipeNetwork)
 
 /datum/controller/process/machinery/getStatName()
-	return ..()+"([machines.len])"
+	return ..()+"(MCH:[machines.len] PWR:[powernets.len] PIP:[pipe_networks.len])"
