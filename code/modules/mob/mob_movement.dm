@@ -27,8 +27,8 @@
 	..()
 
 
-/client/proc/client_dir(input)
-	return turn(input, -dir2angle(dir))
+/client/proc/client_dir(input, direction=-1)
+	return turn(input, direction*dir2angle(dir))
 
 /client/Northeast()
 	diagonal_action(NORTHEAST)
@@ -40,7 +40,7 @@
 	diagonal_action(SOUTHWEST)
 
 /client/proc/diagonal_action(direction)
-	switch(client_dir(direction))
+	switch(client_dir(direction, 1))
 		if(NORTHEAST)
 			swap_hand()
 			return
