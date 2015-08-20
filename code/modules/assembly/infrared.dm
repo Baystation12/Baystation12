@@ -171,9 +171,7 @@
 
 
 /obj/effect/beam/i_beam/proc/hit()
-	//world << "beam \ref[src]: hit"
 	if(master)
-		//world << "beam hit \ref[src]: calling master \ref[master].hit"
 		master.trigger_beam()
 	qdel(src)
 	return

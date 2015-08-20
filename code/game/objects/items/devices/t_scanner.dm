@@ -61,10 +61,10 @@
 		user_client.images += overlay
 
 	//Remove stale overlays
-	for(var/obj/O in update_remove) 
+	for(var/obj/O in update_remove)
 		user_client.images -= active_scanned[O]
 		active_scanned -= O
-	
+
 	//Flicker effect
 	for(var/obj/O in active_scanned)
 		var/image/overlay = active_scanned[O]
@@ -76,19 +76,19 @@
 
 //creates a new overlay for a scanned object
 /obj/item/device/t_scanner/proc/get_overlay(obj/scanned)
-	//Use a cache so we don't create a whole bunch of new images just because someone's walking back and forth in a room. 
+	//Use a cache so we don't create a whole bunch of new images just because someone's walking back and forth in a room.
 	//Also means that images are reused if multiple people are using t-rays to look at the same objects.
 	if(scanned in overlay_cache)
 		. = overlay_cache[scanned]
 	else
 		var/image/I = image(loc = scanned, icon = scanned.icon, icon_state = scanned.icon_state, layer = HUD_LAYER)
-		
+
 		//Pipes are special
 		if(istype(scanned, /obj/machinery/atmospherics/pipe))
 			var/obj/machinery/atmospherics/pipe/P = scanned
 			I.color = P.pipe_color
 			I.overlays += P.overlays
-		
+
 		I.alpha = 128
 		I.mouse_opacity = 0
 		. = I
@@ -100,12 +100,12 @@
 
 /obj/item/device/t_scanner/proc/get_scanned_objects(var/scan_dist)
 	. = list()
-	
+
 	var/turf/center = get_turf(src.loc)
 	if(!center) return
-	
+
 	for(var/turf/T in range(scan_range, center))
-		if(!T.intact)
+		if(!!T.is_plating())
 			continue
 
 		for(var/obj/O in T.contents)

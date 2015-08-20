@@ -8,6 +8,7 @@ MASS SPECTROMETER
 REAGENT SCANNER
 */
 
+
 /obj/item/device/healthanalyzer
 	name = "health analyzer"
 	desc = "A hand-held body scanner able to distinguish vital signs of the subject."
@@ -200,7 +201,7 @@ REAGENT SCANNER
 
 	matter = list(DEFAULT_WALL_MATERIAL = 30,"glass" = 20)
 
-	origin_tech = list(TECH_MAGNET = 1, TECH_ENGINERING = 1)
+	origin_tech = list(TECH_MAGNET = 1, TECH_ENGINEERING = 1)
 
 /obj/item/device/analyzer/atmosanalyze(var/mob/user)
 	var/air = user.return_air()

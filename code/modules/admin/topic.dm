@@ -2112,7 +2112,7 @@
 			if("friendai")
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","FA")
-				for(var/mob/aiEye/aE in mob_list)
+				for(var/mob/eye/aiEye/aE in mob_list)
 					aE.icon_state = "ai_friend"
 				for(var/obj/machinery/M in machines)
 					if(istype(M, /obj/machinery/ai_status_display))

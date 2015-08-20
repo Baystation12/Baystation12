@@ -63,15 +63,23 @@
 #define 	  LIFE_HUD 10 // STATUS_HUD that only reports dead or alive
 
 //some colors
-#define COLOR_RED    "#FF0000"
-#define COLOR_GREEN  "#00FF00"
-#define COLOR_BLUE   "#0000FF"
-#define COLOR_CYAN   "#00FFFF"
-#define COLOR_PINK   "#FF00FF"
-#define COLOR_YELLOW "#FFFF00"
-#define COLOR_ORANGE "#FF9900"
 #define COLOR_WHITE  "#FFFFFF"
+#define COLOR_SILVER "#C0C0C0"
+#define COLOR_GRAY   "#808080"
 #define COLOR_BLACK  "#000000"
+#define COLOR_RED    "#FF0000"
+#define COLOR_MAROON "#800000"
+#define COLOR_YELLOW "#FFFF00"
+#define COLOR_OLIVE  "#808000"
+#define COLOR_LIME   "#00FF00"
+#define COLOR_GREEN  "#008000"
+#define COLOR_CYAN   "#00FFFF"
+#define COLOR_TEAL   "#008080"
+#define COLOR_BLUE   "#0000FF"
+#define COLOR_NAVY   "#000080"
+#define COLOR_PINK   "#FF00FF"
+#define COLOR_PURPLE "#800080"
+#define COLOR_ORANGE "#FF9900"
 
 //	Shuttles.
 

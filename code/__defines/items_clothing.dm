@@ -33,6 +33,7 @@
 #define ON_BORDER          64   // Item has priority to check when entering or leaving.
 #define NOBLOODY           512  // Used for items if they don't want to get a blood overlay.
 #define NODELAY            8192 // 1 second attack-by delay skipped (Can be used once every 0.2s). Most objects have a 1s attack-by delay, which doesn't require a flag.
+#define PROXMOVE          16384 // Does this object require proximity checking in Enter()?
 
 //Use these flags to indicate if an item obscures the specified slots from view, whereas body_parts_covered seems to be used to indicate what body parts the item protects.
 #define GLASSESCOVERSEYES 256

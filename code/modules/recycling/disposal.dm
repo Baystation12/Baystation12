@@ -713,7 +713,7 @@
 	// update the icon_state to reflect hidden status
 	proc/update()
 		var/turf/T = src.loc
-		hide(T.intact && !istype(T,/turf/space))	// space never hides pipes
+		hide(!T.is_plating() && !istype(T,/turf/space))	// space never hides pipes
 
 	// hide called by levelupdate if turf intact status changes
 	// change visibility status and force update of icon
@@ -746,14 +746,10 @@
 			H.active = 0
 			H.loc = src
 			return
-		if(T.intact && istype(T,/turf/simulated/floor)) //intact floor, pop the tile
+		if(!T.is_plating() && istype(T,/turf/simulated/floor)) //intact floor, pop the tile
 			var/turf/simulated/floor/F = T
-			//F.health	= 100
-			F.burnt	= 1
-			F.intact	= 0
-			F.levelupdate()
+			F.break_tile()
 			new /obj/item/stack/tile(H)	// add to holder so it will be thrown with other stuff
-			F.icon_state = "Floor[F.burnt ? "1" : ""]"
 
 		if(direction)		// direction is specified
 			if(istype(T, /turf/space)) // if ended in space, then range is unlimited
@@ -856,7 +852,7 @@
 	attackby(var/obj/item/I, var/mob/user)
 
 		var/turf/T = src.loc
-		if(T.intact)
+		if(!T.is_plating())
 			return		// prevent interaction with T-scanner revealed pipes
 		src.add_fingerprint(user)
 		if(istype(I, /obj/item/weapon/weldingtool))
@@ -1339,7 +1335,7 @@
 		return
 
 	var/turf/T = src.loc
-	if(T.intact)
+	if(!T.is_plating())
 		return		// prevent interaction with T-scanner revealed pipes
 	src.add_fingerprint(user)
 	if(istype(I, /obj/item/weapon/weldingtool))

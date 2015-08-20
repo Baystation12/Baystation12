@@ -144,8 +144,10 @@
 			var/turf/simulated/wall/W = O
 			if(W.material.flags & MATERIAL_UNMELTABLE)
 				cannot_melt = 1
-		else if(istype(O, /turf/simulated/floor/engine))
-			cannot_melt = 1
+		else if(istype(O, /turf/simulated/floor))
+			var/turf/simulated/floor/F = O
+			if(F.flooring && (F.flooring.flags & TURF_ACID_IMMUNE))
+				cannot_melt = 1
 
 	if(cannot_melt)
 		src << "<span class='alium'>You cannot dissolve this object.</span>"

@@ -139,7 +139,7 @@
 		ui.open()
 		ui.set_auto_update(1)
 
-/obj/machinery/turretid/Topic(href, href_list, var/nowindow = 0)
+/obj/machinery/turretid/Topic(href, href_list)
 	if(..())
 		return 1
 

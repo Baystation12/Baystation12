@@ -196,7 +196,7 @@ other types of metals and chemistry for reagents).
 	name = "Rapid Part Exchange Device"
 	desc = "Special mechanical module made to store, sort, and apply standard machine parts."
 	id = "rped"
-	req_tech = list(TECH_ENGINERING = 3, TECH_MATERIAL = 3)
+	req_tech = list(TECH_ENGINEERING = 3, TECH_MATERIAL = 3)
 	materials = list("metal" = 15000, "glass" = 5000)
 	build_path = /obj/item/weapon/storage/part_replacer
 	sort_string = "CBAAA"
@@ -278,7 +278,7 @@ other types of metals and chemistry for reagents).
 	name = "Optical meson scanners design"
 	desc = "Using the meson-scanning technology those glasses allow you to see through walls, floor or anything else."
 	id = "mesons"
-	req_tech = list(TECH_MAGNET = 2, TECH_ENGINERING = 2)
+	req_tech = list(TECH_MAGNET = 2, TECH_ENGINEERING = 2)
 	materials = list("metal" = 50, "glass" = 50)
 	build_path = /obj/item/clothing/glasses/meson
 	sort_string = "GAAAC"
@@ -289,21 +289,21 @@ other types of metals and chemistry for reagents).
 
 /datum/design/item/weapon/mining/jackhammer
 	id = "jackhammer"
-	req_tech = list(TECH_MATERIAL = 3, TECH_POWER = 2, TECH_ENGINERING = 2)
+	req_tech = list(TECH_MATERIAL = 3, TECH_POWER = 2, TECH_ENGINEERING = 2)
 	materials = list("metal" = 2000, "glass" = 500, "silver" = 500)
 	build_path = /obj/item/weapon/pickaxe/jackhammer
 	sort_string = "KAAAA"
 
 /datum/design/item/weapon/mining/drill
 	id = "drill"
-	req_tech = list(TECH_MATERIAL = 2, TECH_POWER = 3, TECH_ENGINERING = 2)
+	req_tech = list(TECH_MATERIAL = 2, TECH_POWER = 3, TECH_ENGINEERING = 2)
 	materials = list("metal" = 6000, "glass" = 1000) //expensive, but no need for miners.
 	build_path = /obj/item/weapon/pickaxe/drill
 	sort_string = "KAAAB"
 
 /datum/design/item/weapon/mining/plasmacutter
 	id = "plasmacutter"
-	req_tech = list(TECH_MATERIAL = 4, TECH_PHORON = 3, TECH_ENGINERING = 3)
+	req_tech = list(TECH_MATERIAL = 4, TECH_PHORON = 3, TECH_ENGINEERING = 3)
 	materials = list("metal" = 1500, "glass" = 500, "gold" = 500, "phoron" = 500)
 	build_path = /obj/item/weapon/pickaxe/plasmacutter
 	sort_string = "KAAAC"
@@ -317,15 +317,15 @@ other types of metals and chemistry for reagents).
 
 /datum/design/item/weapon/mining/drill_diamond
 	id = "drill_diamond"
-	req_tech = list(TECH_MATERIAL = 6, TECH_POWER = 4, TECH_ENGINERING = 4)
+	req_tech = list(TECH_MATERIAL = 6, TECH_POWER = 4, TECH_ENGINEERING = 4)
 	materials = list("metal" = 3000, "glass" = 1000, "diamond" = 2000)
 	build_path = /obj/item/weapon/pickaxe/diamonddrill
 	sort_string = "KAAAE"
 ///////////////////////////////////
 /////////Shield Generators/////////
 ///////////////////////////////////
-datum/design/circuit/shield
-	req_tech = list("bluespace" = 4, "phorontech" = 3)
+/datum/design/circuit/shield
+	req_tech = list(TECH_BLUESPACE = 4, TECH_PHORON = 3)
 	materials = list("$glass" = 2000, "sacid" = 20, "$phoron" = 10000, "$diamond" = 5000, "$gold" = 10000)
 
 /datum/design/item/medical
@@ -338,7 +338,7 @@ datum/design/circuit/shield
 /datum/design/item/medical/robot_scanner
 	desc = "A hand-held scanner able to diagnose robotic injuries."
 	id = "robot_scanner"
-	req_tech = list(TECH_MAGNET = 3, TECH_BIO = 2, TECH_ENGINERING = 3)
+	req_tech = list(TECH_MAGNET = 3, TECH_BIO = 2, TECH_ENGINEERING = 3)
 	materials = list("metal" = 500, "glass" = 200)
 	build_path = /obj/item/device/robotanalyzer
 	sort_string = "MACFA"
@@ -395,7 +395,7 @@ datum/design/circuit/shield
 /datum/design/item/medical/nanopaste
 	desc = "A tube of paste containing swarms of repair nanites. Very effective in repairing robotic machinery."
 	id = "nanopaste"
-	req_tech = list(TECH_MATERIAL = 4, TECH_ENGINERING = 3)
+	req_tech = list(TECH_MATERIAL = 4, TECH_ENGINEERING = 3)
 	materials = list("metal" = 7000, "glass" = 7000)
 	build_path = /obj/item/stack/nanopaste
 	sort_string = "MBAAA"
@@ -529,14 +529,14 @@ datum/design/circuit/shield
 /datum/design/item/weapon/chemsprayer
 	desc = "An advanced chem spraying device."
 	id = "chemsprayer"
-	req_tech = list(TECH_MATERIAL = 3, TECH_ENGINERING = 3, TECH_BIO = 2)
+	req_tech = list(TECH_MATERIAL = 3, TECH_ENGINEERING = 3, TECH_BIO = 2)
 	materials = list("metal" = 5000, "glass" = 1000)
 	build_path = /obj/item/weapon/reagent_containers/spray/chemsprayer
 	sort_string = "TABAA"
 
 /datum/design/item/weapon/rapidsyringe
 	id = "rapidsyringe"
-	req_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 3, TECH_ENGINERING = 3, TECH_BIO = 2)
+	req_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 3, TECH_ENGINEERING = 3, TECH_BIO = 2)
 	materials = list("metal" = 5000, "glass" = 1000)
 	build_path = /obj/item/weapon/gun/launcher/syringe/rapid
 	sort_string = "TABAB"
@@ -640,7 +640,7 @@ datum/design/circuit/shield
 
 /datum/design/item/posibrain
 	id = "posibrain"
-	req_tech = list(TECH_ENGINERING = 4, TECH_MATERIAL = 6, TECH_BLUESPACE = 2, TECH_DATA = 4)
+	req_tech = list(TECH_ENGINEERING = 4, TECH_MATERIAL = 6, TECH_BLUESPACE = 2, TECH_DATA = 4)
 	materials = list("metal" = 2000, "glass" = 1000, "silver" = 1000, "gold" = 500, "phoron" = 500, "diamond" = 100)
 	build_path = /obj/item/device/mmi/digital/posibrain
 	sort_string = "VACAB"
@@ -826,12 +826,6 @@ CIRCUITS BELOW
 	build_path = /obj/item/weapon/circuitboard/mecha_control
 	sort_string = "HAAAC"
 
-/datum/design/circuit/mechapower
-	name = "mech bay power control console"
-	id = "mechapower"
-	build_path = /obj/item/weapon/circuitboard/mech_bay_power_console
-	sort_string = "HAAAD"
-
 /datum/design/circuit/rdconsole
 	name = "R&D control console"
 	id = "rdconsole"
@@ -884,28 +878,28 @@ CIRCUITS BELOW
 /datum/design/circuit/destructive_analyzer
 	name = "destructive analyzer"
 	id = "destructive_analyzer"
-	req_tech = list(TECH_DATA = 2, TECH_MAGNET = 2, TECH_ENGINERING = 2)
+	req_tech = list(TECH_DATA = 2, TECH_MAGNET = 2, TECH_ENGINEERING = 2)
 	build_path = /obj/item/weapon/circuitboard/destructive_analyzer
 	sort_string = "HABAA"
 
 /datum/design/circuit/protolathe
 	name = "protolathe"
 	id = "protolathe"
-	req_tech = list(TECH_DATA = 2, TECH_ENGINERING = 2)
+	req_tech = list(TECH_DATA = 2, TECH_ENGINEERING = 2)
 	build_path = /obj/item/weapon/circuitboard/protolathe
 	sort_string = "HABAB"
 
 /datum/design/circuit/circuit_imprinter
 	name = "circuit imprinter"
 	id = "circuit_imprinter"
-	req_tech = list(TECH_DATA = 2, TECH_ENGINERING = 2)
+	req_tech = list(TECH_DATA = 2, TECH_ENGINEERING = 2)
 	build_path = /obj/item/weapon/circuitboard/circuit_imprinter
 	sort_string = "HABAC"
 
 /datum/design/circuit/autolathe
 	name = "autolathe board"
 	id = "autolathe"
-	req_tech = list(TECH_DATA = 2, TECH_ENGINERING = 2)
+	req_tech = list(TECH_DATA = 2, TECH_ENGINEERING = 2)
 	build_path = /obj/item/weapon/circuitboard/autolathe
 	sort_string = "HABAD"
 
@@ -926,16 +920,23 @@ CIRCUITS BELOW
 /datum/design/circuit/mechfab
 	name = "exosuit fabricator"
 	id = "mechfab"
-	req_tech = list(TECH_DATA = 3, TECH_ENGINERING = 3)
+	req_tech = list(TECH_DATA = 3, TECH_ENGINEERING = 3)
 	build_path = /obj/item/weapon/circuitboard/mechfab
 	sort_string = "HABAE"
+
+/datum/design/circuit/mech_recharger
+	name = "mech recharger"
+	id = "mech_recharger"
+	req_tech = list(TECH_DATA = 2, TECH_POWER = 2, TECH_ENGINEERING = 2)
+	build_path = /obj/item/weapon/circuitboard/mech_recharger
+	sort_string = "HACAA"
 
 /datum/design/circuit/recharge_station
 	name = "cyborg recharge station"
 	id = "recharge_station"
-	req_tech = list(TECH_DATA = 3, TECH_ENGINERING = 2)
+	req_tech = list(TECH_DATA = 3, TECH_ENGINEERING = 2)
 	build_path = /obj/item/weapon/circuitboard/recharge_station
-	sort_string = "HACAA"
+	sort_string = "HACAC"
 
 /datum/design/circuit/atmosalerts
 	name = "atmosphere alert console"
@@ -952,7 +953,7 @@ CIRCUITS BELOW
 /datum/design/circuit/rcon_console
 	name = "RCON remote control console"
 	id = "rcon_console"
-	req_tech = list(TECH_DATA = 4, TECH_ENGINERING = 3, TECH_POWER = 5)
+	req_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 3, TECH_POWER = 5)
 	build_path = /obj/item/weapon/circuitboard/rcon_console
 	sort_string = "JAAAC"
 
@@ -978,28 +979,28 @@ CIRCUITS BELOW
 /datum/design/circuit/pacman
 	name = "PACMAN-type generator"
 	id = "pacman"
-	req_tech = list(TECH_DATA = 3, TECH_PHORON = 3, TECH_POWER = 3, TECH_ENGINERING = 3)
+	req_tech = list(TECH_DATA = 3, TECH_PHORON = 3, TECH_POWER = 3, TECH_ENGINEERING = 3)
 	build_path = /obj/item/weapon/circuitboard/pacman
 	sort_string = "JBAAA"
 
 /datum/design/circuit/superpacman
 	name = "SUPERPACMAN-type generator"
 	id = "superpacman"
-	req_tech = list(TECH_DATA = 3, TECH_POWER = 4, TECH_ENGINERING = 4)
+	req_tech = list(TECH_DATA = 3, TECH_POWER = 4, TECH_ENGINEERING = 4)
 	build_path = /obj/item/weapon/circuitboard/pacman/super
 	sort_string = "JBAAB"
 
 /datum/design/circuit/mrspacman
 	name = "MRSPACMAN-type generator"
 	id = "mrspacman"
-	req_tech = list(TECH_DATA = 3, TECH_POWER = 5, TECH_ENGINERING = 5)
+	req_tech = list(TECH_DATA = 3, TECH_POWER = 5, TECH_ENGINEERING = 5)
 	build_path = /obj/item/weapon/circuitboard/pacman/mrs
 	sort_string = "JBAAC"
 
 /datum/design/circuit/batteryrack
 	name = "cell rack PSU"
 	id = "batteryrack"
-	req_tech = list(TECH_POWER = 3, TECH_ENGINERING = 2)
+	req_tech = list(TECH_POWER = 3, TECH_ENGINEERING = 2)
 	build_path = /obj/item/weapon/circuitboard/batteryrack
 	sort_string = "JBABA"
 
@@ -1007,21 +1008,21 @@ CIRCUITS BELOW
 	name = "'SMES' superconductive magnetic energy storage"
 	desc = "Allows for the construction of circuit boards used to build a SMES."
 	id = "smes_cell"
-	req_tech = list(TECH_POWER = 7, TECH_ENGINERING = 5)
+	req_tech = list(TECH_POWER = 7, TECH_ENGINEERING = 5)
 	build_path = /obj/item/weapon/circuitboard/smes
 	sort_string = "JBABB"
 
 /datum/design/circuit/gas_heater
 	name = "gas heating system"
 	id = "gasheater"
-	req_tech = list(TECH_POWER = 2, TECH_ENGINERING = 1)
+	req_tech = list(TECH_POWER = 2, TECH_ENGINEERING = 1)
 	build_path = /obj/item/weapon/circuitboard/unary_atmos/heater
 	sort_string = "JCAAA"
 
 /datum/design/circuit/gas_cooler
 	name = "gas cooling system"
 	id = "gascooler"
-	req_tech = list(TECH_MAGNET = 2, TECH_ENGINERING = 2)
+	req_tech = list(TECH_MAGNET = 2, TECH_ENGINEERING = 2)
 	build_path = /obj/item/weapon/circuitboard/unary_atmos/cooler
 	sort_string = "JCAAB"
 
@@ -1148,7 +1149,7 @@ CIRCUITS BELOW
 	sort_string = "NAADC"
 
 /datum/design/circuit/tcom
-	req_tech = list(TECH_DATA = 4, TECH_ENGINERING = 4)
+	req_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 4)
 
 /datum/design/circuit/tcom/AssembleDesignName()
 	name = "Telecommunications machinery circuit design ([name])"
@@ -1182,21 +1183,21 @@ CIRCUITS BELOW
 /datum/design/circuit/tcom/relay
 	name = "relay mainframe"
 	id = "tcom-relay"
-	req_tech = list(TECH_DATA = 3, TECH_ENGINERING = 4, TECH_BLUESPACE = 3)
+	req_tech = list(TECH_DATA = 3, TECH_ENGINEERING = 4, TECH_BLUESPACE = 3)
 	build_path = /obj/item/weapon/circuitboard/telecomms/relay
 	sort_string = "PAAAE"
 
 /datum/design/circuit/tcom/broadcaster
 	name = "subspace broadcaster"
 	id = "tcom-broadcaster"
-	req_tech = list(TECH_DATA = 4, TECH_ENGINERING = 4, TECH_BLUESPACE = 2)
+	req_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 4, TECH_BLUESPACE = 2)
 	build_path = /obj/item/weapon/circuitboard/telecomms/broadcaster
 	sort_string = "PAAAF"
 
 /datum/design/circuit/tcom/receiver
 	name = "subspace receiver"
 	id = "tcom-receiver"
-	req_tech = list(TECH_DATA = 4, TECH_ENGINERING = 3, TECH_BLUESPACE = 2)
+	req_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 3, TECH_BLUESPACE = 2)
 	build_path = /obj/item/weapon/circuitboard/telecomms/receiver
 	sort_string = "PAAAG"
 
@@ -1349,14 +1350,14 @@ CIRCUITS BELOW
 	name = "PDA design"
 	desc = "Cheaper than whiny non-digital assistants."
 	id = "pda"
-	req_tech = list(TECH_ENGINERING = 2, TECH_POWER = 3)
+	req_tech = list(TECH_ENGINEERING = 2, TECH_POWER = 3)
 	materials = list("metal" = 50, "glass" = 50)
 	build_path = /obj/item/device/pda
 	sort_string = "VAAAA"
 
 // Cartridges
 /datum/design/item/pda_cartridge
-	req_tech = list(TECH_ENGINERING = 2, TECH_POWER = 3)
+	req_tech = list(TECH_ENGINEERING = 2, TECH_POWER = 3)
 	materials = list("metal" = 50, "glass" = 50)
 
 /datum/design/item/pda_cartridge/AssembleDesignName()
@@ -1513,25 +1514,25 @@ MECHAS BELOW
 /datum/design/item/mecha/rcd
 	desc = "An exosuit-mounted rapid construction device."
 	id = "mech_rcd"
-	req_tech = list(TECH_MATERIAL = 4, TECH_BLUESPACE = 3, TECH_MAGNET = 4, TECH_POWER=4, TECH_ENGINERING = 4)
+	req_tech = list(TECH_MATERIAL = 4, TECH_BLUESPACE = 3, TECH_MAGNET = 4, TECH_POWER=4, TECH_ENGINEERING = 4)
 	build_path = /obj/item/mecha_parts/mecha_equipment/tool/rcd
 
 /datum/design/item/mecha/gravcatapult
 	desc = "An exosuit-mounted gravitational catapult."
 	id = "mech_gravcatapult"
-	req_tech = list(TECH_BLUESPACE = 2, TECH_MAGNET = 3, TECH_ENGINERING = 3)
+	req_tech = list(TECH_BLUESPACE = 2, TECH_MAGNET = 3, TECH_ENGINEERING = 3)
 	build_path = /obj/item/mecha_parts/mecha_equipment/gravcatapult
 
 /datum/design/item/mecha/repair_droid
 	desc = "Automated repair droid, exosuits' best companion. BEEP BOOP"
 	id = "mech_repair_droid"
-	req_tech = list(TECH_MAGNET = 3, TECH_DATA = 3, TECH_ENGINERING = 3)
+	req_tech = list(TECH_MAGNET = 3, TECH_DATA = 3, TECH_ENGINEERING = 3)
 	build_path = /obj/item/mecha_parts/mecha_equipment/repair_droid
 
 /datum/design/item/mecha/phoron_generator
 	desc = "Exosuit-mounted phoron generator."
 	id = "mech_phoron_generator"
-	req_tech = list(TECH_PHORON = 2, TECH_POWER= 2, TECH_ENGINERING = 2)
+	req_tech = list(TECH_PHORON = 2, TECH_POWER= 2, TECH_ENGINEERING = 2)
 	build_path = /obj/item/mecha_parts/mecha_equipment/generator
 
 /datum/design/item/mecha/energy_relay
@@ -1548,7 +1549,7 @@ MECHAS BELOW
 /datum/design/item/mecha/proj_armor
 	desc = "Exosuit projectile armor booster."
 	id = "mech_proj_armor"
-	req_tech = list(TECH_MATERIAL = 5, TECH_COMBAT = 5, TECH_ENGINERING=3)
+	req_tech = list(TECH_MATERIAL = 5, TECH_COMBAT = 5, TECH_ENGINEERING=3)
 	build_path = /obj/item/mecha_parts/mecha_equipment/antiproj_armor_booster
 
 /datum/design/item/mecha/syringe_gun
@@ -1560,13 +1561,13 @@ MECHAS BELOW
 /datum/design/item/mecha/diamond_drill
 	desc = "A diamond version of the exosuit drill. It's harder, better, faster, stronger."
 	id = "mech_diamond_drill"
-	req_tech = list(TECH_MATERIAL = 4, TECH_ENGINERING = 3)
+	req_tech = list(TECH_MATERIAL = 4, TECH_ENGINEERING = 3)
 	build_path = /obj/item/mecha_parts/mecha_equipment/tool/drill/diamonddrill
 
 /datum/design/item/mecha/generator_nuclear
 	desc = "Exosuit-held nuclear reactor. Converts uranium and everyone's health to energy."
 	id = "mech_generator_nuclear"
-	req_tech = list(TECH_POWER= 3, TECH_ENGINERING = 3, TECH_MATERIAL = 3)
+	req_tech = list(TECH_POWER= 3, TECH_ENGINEERING = 3, TECH_MATERIAL = 3)
 	build_path = /obj/item/mecha_parts/mecha_equipment/generator/nuclear
 
 /datum/design/item/synthetic_flash
