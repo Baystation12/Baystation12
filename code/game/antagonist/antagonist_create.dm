@@ -34,10 +34,9 @@
 
 	var/obj/item/weapon/card/id/W = new id_type(player)
 	if(!W) return
-	W.name = "[player.real_name]'s ID Card"
 	W.access |= default_access
 	W.assignment = "[assignment]"
-	W.registered_name = player.real_name
+	W.set_owner_info(player)
 	if(equip) player.equip_to_slot_or_del(W, slot_wear_id)
 	return W
 

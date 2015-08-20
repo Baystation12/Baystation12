@@ -155,6 +155,11 @@
 	if(!istype(target))	return
 	var/mob/living/silicon/ai/U = usr
 
+	if(target == U.cameraFollow)
+		return
+
+	if(U.cameraFollow)
+		U.ai_cancel_tracking()
 	U.cameraFollow = target
 	U << "Now tracking [target.name] on camera."
 	target.tracking_initiated()
@@ -240,7 +245,8 @@ mob/living/proc/near_camera()
 
 /mob/living/carbon/human/tracking_status()
 	//Cameras can't track people wearing an agent card or a ninja hood.
-	if(wear_id && istype(wear_id.GetID(), /obj/item/weapon/card/id/syndicate))
+	var/obj/item/weapon/card/id/id = GetIdCard(src)
+	if(id && id.prevent_tracking())
 		return TRACKING_TERMINATE
 	if(istype(head, /obj/item/clothing/head/helmet/space/rig))
 		var/obj/item/clothing/head/helmet/space/rig/helmet = head
