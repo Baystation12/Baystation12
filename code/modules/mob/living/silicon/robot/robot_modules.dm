@@ -53,8 +53,6 @@ var/global/list/robot_modules = list(
 	R.choose_icon(R.module_sprites.len + 1, R.module_sprites)
 
 /obj/item/weapon/robot_module/proc/Reset(var/mob/living/silicon/robot/R)
-	R.module = null
-
 	remove_camera_networks(R)
 	remove_languages(R)
 	remove_subsystems(R)
@@ -64,15 +62,15 @@ var/global/list/robot_modules = list(
 		R.radio.recalculateChannels()
 	R.choose_icon(0, R.set_module_sprites(list("Default" = "robot")))
 
-	qdel(src)
-
 /obj/item/weapon/robot_module/Destroy()
-	qdel(modules)
-	qdel(synths)
+	for(var/module in modules)
+		qdel(module)
+	for(var/synth in synths)
+		qdel(synths)
+	modules.Cut()
+	synths.Cut()
 	qdel(emag)
 	qdel(jetpack)
-	modules = null
-	synths = null
 	emag = null
 	jetpack = null
 	return ..()
@@ -624,6 +622,7 @@ var/global/list/robot_modules = list(
 	sprites = list(
 					"Dread" = "securityrobot",
 				)
+	var/id
 
 /obj/item/weapon/robot_module/syndicate/New(var/mob/living/silicon/robot/R)
 	..()
@@ -635,7 +634,15 @@ var/global/list/robot_modules = list(
 	var/jetpack = new/obj/item/weapon/tank/jetpack/carbondioxide(src)
 	src.modules += jetpack
 	R.internals = jetpack
+
+	id = R.idcard
+	src.modules += id
 	return
+
+/obj/item/weapon/robot_module/syndicate/Destroy()
+	src.modules -= id
+	id = null
+	return ..()
 
 /obj/item/weapon/robot_module/security/combat
 	name = "combat robot module"

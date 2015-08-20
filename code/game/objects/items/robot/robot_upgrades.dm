@@ -33,6 +33,8 @@
 
 	R.notify_ai(ROBOT_NOTIFICATION_MODULE_RESET, R.module.name)
 	R.module.Reset(R)
+	qdel(R.module)
+	R.module = null
 	R.updatename("Default")
 
 	return 1

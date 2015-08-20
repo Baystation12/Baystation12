@@ -74,7 +74,7 @@
 				W.access = list()
 		if(corpseidjob)
 			W.assignment = corpseidjob
-		W.set_owner_info(M)
+		M.set_id_info(W)
 		M.equip_to_slot_or_del(W, slot_wear_id)
 	qdel(src)
 

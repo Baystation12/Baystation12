@@ -137,17 +137,26 @@
 	front = getFlatIcon(M, SOUTH, always_use_defdir = 1)
 	side = getFlatIcon(M, WEST, always_use_defdir = 1)
 
-/obj/item/weapon/card/id/proc/set_owner_info(var/mob/living/carbon/human/H)
-	if(!H || !H.dna)
-		return
-	age 				= H.age
-	blood_type			= H.dna.b_type
-	dna_hash			= H.dna.unique_enzymes
-	fingerprint_hash	= md5(H.dna.uni_identity)
-	registered_name		= H.real_name
-	sex 				= capitalize(H.gender)
-	set_id_photo(H)
-	update_name()
+/mob/proc/set_id_info(var/obj/item/weapon/card/id/id_card)
+	id_card.age = 0
+	id_card.registered_name		= real_name
+	id_card.sex 				= capitalize(gender)
+	id_card.set_id_photo(src)
+
+	if(dna)
+		id_card.blood_type		= dna.b_type
+		id_card.dna_hash		= dna.unique_enzymes
+		id_card.fingerprint_hash= md5(dna.uni_identity)
+	id_card.update_name()
+
+/mob/living/silicon/set_id_info(var/obj/item/weapon/card/id/id_card)
+	id_card.assignment = "Synthetic"
+	id_card.rank = "Synthetic"
+	..()
+	
+/mob/living/carbon/human/set_id_info(var/obj/item/weapon/card/id/id_card)
+	..()
+	id_card.age = age
 
 /obj/item/weapon/card/id/proc/dat()
 	var/dat = ("<table><tr><td>")

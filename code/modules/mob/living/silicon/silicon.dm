@@ -25,6 +25,7 @@
 
 	var/list/access_rights
 	var/obj/item/weapon/card/id/idcard
+	var/idcard_type = /obj/item/weapon/card/id/captains_spare
 
 	#define SEC_HUD 1 //Security HUD mode
 	#define MED_HUD 2 //Medical HUD mode
@@ -33,15 +34,20 @@
 	silicon_mob_list |= src
 	..()
 	add_language("Galactic Common")
+	init_id()
 	init_subsystems()
-	if(!idcard)
-		idcard = new/obj/item/weapon/card/id/captains_spare(src)
 
 /mob/living/silicon/Destroy()
 	silicon_mob_list -= src
 	for(var/datum/alarm_handler/AH in alarm_manager.all_handlers)
 		AH.unregister(src)
 	..()
+
+/mob/living/silicon/proc/init_id()
+	if(idcard)
+		return
+	idcard = new idcard_type(src)
+	set_id_info(idcard)
 
 /mob/living/silicon/proc/SetName(pickedName as text)
 	real_name = pickedName
