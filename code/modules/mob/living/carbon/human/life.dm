@@ -963,6 +963,11 @@
 						spawn(rand(20,50))
 							if(C)
 								C.dir = 1
+			if(hallucination <= 2)
+				hallucination = 0
+				halloss = 0
+			else
+				hallucination -= 2
 
 		else
 			for(var/atom/a in hallucinations)
