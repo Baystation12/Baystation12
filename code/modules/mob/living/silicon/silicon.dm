@@ -24,6 +24,7 @@
 	var/list/datum/alarm/queued_alarms = new()
 
 	var/list/access_rights
+	var/obj/item/weapon/card/id/idcard
 
 	#define SEC_HUD 1 //Security HUD mode
 	#define MED_HUD 2 //Medical HUD mode
@@ -31,10 +32,10 @@
 /mob/living/silicon/New()
 	silicon_mob_list |= src
 	..()
-	access_rights = get_all_station_access()
-	access_rights = access_rights.Copy()
 	add_language("Galactic Common")
 	init_subsystems()
+	if(!idcard)
+		idcard = new/obj/item/weapon/card/id/captains_spare(src)
 
 /mob/living/silicon/Destroy()
 	silicon_mob_list -= src

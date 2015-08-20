@@ -49,6 +49,9 @@ var/global/list/robot_modules = list(
 	if(R.radio)
 		R.radio.recalculateChannels()
 
+	R.set_module_sprites(sprites)
+	R.choose_icon(R.module_sprites.len + 1, R.module_sprites)
+
 /obj/item/weapon/robot_module/proc/Reset(var/mob/living/silicon/robot/R)
 	R.module = null
 
@@ -59,6 +62,7 @@ var/global/list/robot_modules = list(
 
 	if(R.radio)
 		R.radio.recalculateChannels()
+	R.choose_icon(0, R.set_module_sprites(list("Default" = "robot")))
 
 	qdel(src)
 
@@ -617,6 +621,9 @@ var/global/list/robot_modules = list(
 					LANGUAGE_SKRELLIAN = 0,
 					LANGUAGE_GUTTER = 1
 					)
+	sprites = list(
+					"Dread" = "securityrobot",
+				)
 
 /obj/item/weapon/robot_module/syndicate/New(var/mob/living/silicon/robot/R)
 	..()

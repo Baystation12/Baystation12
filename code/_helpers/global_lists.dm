@@ -64,6 +64,8 @@ var/global/list/rune_list = new()
 var/global/list/escape_list = list()
 var/global/list/endgame_exits = list()
 var/global/list/endgame_safespawns = list()
+
+var/global/list/syndicate_access = list(access_maint_tunnels, access_syndicate, access_external_airlocks)
 //////////////////////////
 /////Initial Building/////
 //////////////////////////

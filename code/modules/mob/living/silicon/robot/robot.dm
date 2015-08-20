@@ -24,8 +24,10 @@
 
 //Icon stuff
 
-	var/icontype //Persistent icontype tracking allows for cleaner icon updates
-	var/module_sprites[0] //Used to store the associations between sprite names and sprite index.
+	var/icontype 				//Persistent icontype tracking allows for cleaner icon updates
+	var/module_sprites[0] 		//Used to store the associations between sprite names and sprite index.
+	var/icon_selected = 1		//If icon selection has been completed yet
+	var/icon_selection_tries = 0//Remaining attempts to select icon before a selection is forced
 
 //Hud stuff
 
@@ -88,21 +90,6 @@
 		/mob/living/silicon/robot/proc/sensor_mode,
 		/mob/living/silicon/robot/proc/robot_checklaws
 	)
-
-/mob/living/silicon/robot/syndicate
-	lawupdate = 0
-	scrambledcodes = 1
-	icon_state = "securityrobot"
-	modtype = "Security"
-	lawchannel = "State"
-
-/mob/living/silicon/robot/syndicate/New()
-	if(!cell)
-		cell = new /obj/item/weapon/cell(src)
-		cell.maxcharge = 25000
-		cell.charge = 25000
-
-	..()
 
 /mob/living/silicon/robot/New(loc,var/unfinished = 0)
 	spark_system = new /datum/effect/effect/system/spark_spread()
@@ -178,18 +165,6 @@
 
 	playsound(loc, 'sound/voice/liveagain.ogg', 75, 1)
 
-/mob/living/silicon/robot/syndicate/init()
-	access_rights = list(access_syndicate)
-	aiCamera = new/obj/item/device/camera/siliconcam/robot_camera(src)
-
-	laws = new /datum/ai_laws/syndicate_override
-	new /obj/item/weapon/robot_module/syndicate(src)
-
-	radio.keyslot = new /obj/item/device/encryptionkey/syndicate(radio)
-	radio.recalculateChannels()
-
-	playsound(loc, 'sound/mecha/nominalsyndi.ogg', 75, 0)
-
 /mob/living/silicon/robot/SetName(pickedName as text)
 	custom_name = pickedName
 	updatename()
@@ -242,10 +217,15 @@
 	..()
 
 /mob/living/silicon/robot/proc/set_module_sprites(var/list/new_sprites)
-	module_sprites = new_sprites
+	module_sprites = new_sprites.Copy()
 	//Custom_sprite check and entry
 	if (custom_sprite == 1)
 		module_sprites["Custom"] = "[src.ckey]-[modtype]"
+		icontype = "Custom"
+	else
+		icontype = module_sprites[1]
+	icon_state = module_sprites[icontype]
+	updateicon()
 	return module_sprites
 
 /mob/living/silicon/robot/proc/pick_module()
@@ -256,7 +236,7 @@
 	if((crisis && security_level == SEC_LEVEL_RED) || crisis_override) //Leaving this in until it's balanced appropriately.
 		src << "\red Crisis mode active. Combat module available."
 		modules+="Combat"
-	modtype = input("Please, select a module!", "Robot", null, null) in modules
+	modtype = input("Please, select a module!", "Robot", null, null) as null|anything in modules
 
 	if(module)
 		return
@@ -269,8 +249,6 @@
 	hands.icon_state = lowertext(modtype)
 	feedback_inc("cyborg_[lowertext(modtype)]",1)
 	updatename()
-	set_module_sprites(module.sprites)
-	choose_icon(module_sprites.len + 1, module_sprites)
 	notify_ai(ROBOT_NOTIFICATION_NEW_MODULE, module.name)
 
 /mob/living/silicon/robot/proc/updatename(var/prefix as text)
@@ -689,7 +667,7 @@
 
 /mob/living/silicon/robot/updateicon()
 	overlays.Cut()
-	if(stat == 0)
+	if(stat == CONSCIOUS)
 		overlays += "eyes-[module_sprites[icontype]]"
 
 	if(opened)
@@ -917,38 +895,30 @@
 	return
 
 /mob/living/silicon/robot/proc/choose_icon(var/triesleft, var/list/module_sprites)
-	if(triesleft<1 || !module_sprites.len)
-		return
-	else
-		triesleft--
-
-	if (custom_sprite == 1)
-		icontype = "Custom"
-		triesleft = 0
-	else if(module_sprites.len == 1)
-		icontype = module_sprites[1]
-	else
-		icontype = input("Select an icon! [triesleft ? "You have [triesleft] more chances." : "This is your last try."]", "Robot", null, null) in module_sprites
-
-	if(icontype)
-		icon_state = module_sprites[icontype]
-	else
+	if(!module_sprites.len)
 		src << "Something is badly wrong with the sprite selection. Harass a coder."
-		icon_state = module_sprites[1]
 		return
 
+	icon_selected = 0
+	src.icon_selection_tries = triesleft
+	if(module_sprites.len == 1 || !client)
+		if(!(icontype in module_sprites))
+			icontype = module_sprites[1]
+	else
+		icontype = input("Select an icon! [triesleft ? "You have [triesleft] more chance\s." : "This is your last try."]", "Robot", icontype, null) in module_sprites
+	icon_state = module_sprites[icontype]
 	updateicon()
 
-	if (triesleft >= 1)
+	if (module_sprites.len > 1 && triesleft >= 1 && client)
+		icon_selection_tries--
 		var/choice = input("Look at your icon - is this what you want?") in list("Yes","No")
 		if(choice=="No")
-			choose_icon(triesleft, module_sprites)
+			choose_icon(icon_selection_tries, module_sprites)
 			return
-		else
-			triesleft = 0
-			return
-	else
-		src << "Your icon has been set. You now require a module reset to change it."
+
+	icon_selected = 1
+	icon_selection_tries = 0
+	src << "Your icon has been set. You now require a module reset to change it."
 
 /mob/living/silicon/robot/proc/sensor_mode() //Medical/Security HUD controller for borgs
 	set name = "Set Sensor Augmentation"

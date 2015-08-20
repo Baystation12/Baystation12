@@ -154,12 +154,12 @@
 
 /obj/item/weapon/card/id/syndicate
 	name = "agent card"
-	access = list(access_maint_tunnels, access_syndicate, access_external_airlocks)
 	origin_tech = list(TECH_ILLEGAL = 3)
 	var/registered_user=null
 
 /obj/item/weapon/card/id/syndicate/New(mob/user as mob)
 	..()
+	access = syndicate_access.Copy()
 	if(!isnull(user)) // Runtime prevention on laggy starts or where users log out because of lag at round start.
 		registered_name = ishuman(user) ? user.real_name : user.name
 	else
