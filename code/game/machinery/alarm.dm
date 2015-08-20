@@ -623,8 +623,8 @@
 
 	return min(..(), .)
 
-/obj/machinery/alarm/Topic(href, href_list, var/nowindow = 0, var/datum/topic_state/state)
-	if(..(href, href_list, nowindow, state))
+/obj/machinery/alarm/Topic(href, href_list, var/datum/topic_state/state)
+	if(..(href, href_list, state))
 		return 1
 
 	// hrefs that can always be called -walter0o
