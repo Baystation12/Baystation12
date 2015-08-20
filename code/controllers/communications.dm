@@ -97,12 +97,14 @@ On the map:
 1455 for AI access
 */
 
-var/const/BOT_FREQ = 1447
+var/const/PUBLIC_LOW_FREQ = 1441
+var/const/PUBLIC_HIGH_FREQ = 1489
+
+var/const/BOT_FREQ	= 1447
 var/const/COMM_FREQ = 1353
-var/const/ERT_FREQ = 1345
-var/const/AI_FREQ = 1343
-var/const/DTH_FREQ = 1341
-var/const/SYND_FREQ = 1213
+var/const/ERT_FREQ	= 1345
+var/const/DTH_FREQ	= 1341
+var/const/SYND_FREQ	= 1213
 
 // department channels
 var/const/PUB_FREQ = 1459
@@ -113,20 +115,22 @@ var/const/SCI_FREQ = 1351
 var/const/SRV_FREQ = 1349
 var/const/SUP_FREQ = 1347
 
-var/list/radiochannels = list(
-	"Common"		= PUB_FREQ,
-	"Science"		= SCI_FREQ,
-	"Command"		= COMM_FREQ,
-	"Medical"		= MED_FREQ,
-	"Engineering"	= ENG_FREQ,
-	"Security" 		= SEC_FREQ,
-	"Response Team" = ERT_FREQ,
-	"Special Ops" 	= DTH_FREQ,
-	"Mercenary" 	= SYND_FREQ,
-	"Supply" 		= SUP_FREQ,
-	"Service" 		= SRV_FREQ,
-	"AI Private"	= AI_FREQ
-)
+var/list/radiochannels
+/hook/startup/proc/radio_channel_setup()
+	radiochannels = list(
+		"Common"		= PUB_FREQ,
+		"Science"		= SCI_FREQ,
+		"Command"		= COMM_FREQ,
+		"Medical"		= MED_FREQ,
+		"Engineering"	= ENG_FREQ,
+		"Security" 		= SEC_FREQ,
+		"Response Team" = ERT_FREQ,
+		"Special Ops" 	= DTH_FREQ,
+		"Mercenary" 	= SYND_FREQ,
+		"Supply" 		= SUP_FREQ,
+		"Service" 		= SRV_FREQ,
+		"AI Private"	= get_ai_frequency()
+	)
 
 // central command channels, i.e deathsquid & response teams
 var/list/CENT_FREQS = list(ERT_FREQ, DTH_FREQ)
@@ -140,6 +144,9 @@ var/list/DEPT_FREQS = list(SCI_FREQ, MED_FREQ, ENG_FREQ, SEC_FREQ, SUP_FREQ, SRV
 #define TRANSMISSION_WIRE	0
 #define TRANSMISSION_RADIO	1
 
+/proc/get_ai_frequency()
+	return 1343
+
 /proc/frequency_span_class(var/frequency)
 	// Antags!
 	if (frequency in ANTAG_FREQS)
@@ -151,7 +158,7 @@ var/list/DEPT_FREQS = list(SCI_FREQ, MED_FREQ, ENG_FREQ, SEC_FREQ, SUP_FREQ, SRV
 	else if(frequency == COMM_FREQ)
 		return "comradio"
 	// AI private channel
-	else if(frequency == AI_FREQ)
+	else if(frequency == get_ai_frequency())
 		return "airadio"
 	// department radio formatting (poorly optimized, ugh)
 	else if(frequency == SEC_FREQ)

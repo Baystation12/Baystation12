@@ -13,7 +13,7 @@
 	var/translate_hive = 0
 	var/obj/item/device/encryptionkey/keyslot1 = null
 	var/obj/item/device/encryptionkey/keyslot2 = null
-	maxf = 1489
+	maxf = PUBLIC_HIGH_FREQ
 
 	var/ks1type = /obj/item/device/encryptionkey
 	var/ks2type = null

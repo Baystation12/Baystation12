@@ -56,13 +56,13 @@
 	id = "Receiver A"
 	network = "tcommsat"
 	autolinkers = list("receiverA") // link to relay
-	freq_listening = list(AI_FREQ, SCI_FREQ, MED_FREQ, SUP_FREQ, SRV_FREQ, COMM_FREQ, ENG_FREQ, SEC_FREQ)
 
+/obj/machinery/telecomms/receiver/preset_right/New()
+	freq_listening = list(get_ai_frequency(), SCI_FREQ, MED_FREQ, SUP_FREQ, SRV_FREQ, COMM_FREQ, ENG_FREQ, SEC_FREQ)
 	//Common and other radio frequencies for people to freely use
-	New()
-		for(var/i = 1441, i < 1489, i += 2)
-			freq_listening |= i
-		..()
+	for(var/i = PUBLIC_LOW_FREQ, i < PUBLIC_HIGH_FREQ, i += 2)
+		freq_listening |= i
+	..()
 
 /obj/machinery/telecomms/receiver/preset_cent
 	id = "CentComm Receiver"
@@ -87,7 +87,7 @@
 	autolinkers = list("processor2", "supply", "service", "unused")
 
 /obj/machinery/telecomms/bus/preset_two/New()
-	for(var/i = 1441, i < 1489, i += 2)
+	for(var/i = PUBLIC_LOW_FREQ, i < PUBLIC_HIGH_FREQ, i += 2)
 		if(i == PUB_FREQ)
 			continue
 		freq_listening |= i
@@ -102,8 +102,11 @@
 /obj/machinery/telecomms/bus/preset_four
 	id = "Bus 4"
 	network = "tcommsat"
-	freq_listening = list(ENG_FREQ, AI_FREQ, PUB_FREQ)
 	autolinkers = list("processor4", "engineering", "common")
+
+/obj/machinery/telecomms/bus/preset_four/New()
+	freq_listening = list(ENG_FREQ, get_ai_frequency(), PUB_FREQ)
+	..()
 
 /obj/machinery/telecomms/bus/preset_cent
 	id = "CentComm Bus"
@@ -168,8 +171,11 @@
 
 /obj/machinery/telecomms/server/presets/common
 	id = "Common Server"
-	freq_listening = list(PUB_FREQ, AI_FREQ) // AI Private and Common
 	autolinkers = list("common")
+
+/obj/machinery/telecomms/server/presets/common/New()
+	freq_listening = list(PUB_FREQ, get_ai_frequency()) // AI Private and Common
+	..()
 
 // "Unused" channels, AKA all others.
 /obj/machinery/telecomms/server/presets/unused
@@ -178,8 +184,8 @@
 	autolinkers = list("unused")
 
 /obj/machinery/telecomms/server/presets/unused/New()
-	for(var/i = 1441, i < 1489, i += 2)
-		if(i == AI_FREQ || i == PUB_FREQ)
+	for(var/i = PUBLIC_LOW_FREQ, i < PUBLIC_HIGH_FREQ, i += 2)
+		if(i in radiochannels)
 			continue
 		freq_listening |= i
 	..()
