@@ -4,16 +4,16 @@
 #define DEAD        2
 
 // Bitflags defining which status effects could be or are inflicted on a mob.
-#define CANSTUN     1
-#define CANWEAKEN   2
-#define CANPARALYSE 4
-#define CANPUSH     8
-#define LEAPING     16
-#define PASSEMOTES  32    // Mob has a cortical borer or holders inside of it that need to see emotes.
-#define GODMODE     4096
-#define FAKEDEATH   8192  // Replaces stuff like changeling.changeling_fakedeath.
-#define DISFIGURED  16384 // I'll probably move this elsewhere if I ever get wround to writing a bitflag mob-damage system.
-#define XENO_HOST   32768 // Tracks whether we're gonna be a baby alien's mummy.
+#define CANSTUN     0x1
+#define CANWEAKEN   0x2
+#define CANPARALYSE 0x4
+#define CANPUSH     0x8
+#define LEAPING     0x10
+#define PASSEMOTES  0x32    // Mob has a cortical borer or holders inside of it that need to see emotes.
+#define GODMODE     0x1000
+#define FAKEDEATH   0x2000  // Replaces stuff like changeling.changeling_fakedeath.
+#define DISFIGURED  0x4000  // Set but never checked. Remove this sometime and replace occurences with the appropriate organ code
+#define XENO_HOST   0x8000  // Tracks whether we're gonna be a baby alien's mummy.
 
 // Grab levels.
 #define GRAB_PASSIVE    1
@@ -22,9 +22,9 @@
 #define GRAB_UPGRADING  4
 #define GRAB_KILL       5
 
-#define BORGMESON 1
-#define BORGTHERM 2
-#define BORGXRAY  4
+#define BORGMESON 0x1
+#define BORGTHERM 0x2
+#define BORGXRAY  0x4
 
 #define HOSTILE_STANCE_IDLE      1
 #define HOSTILE_STANCE_ALERT     2
@@ -70,17 +70,17 @@
 #define ROBOT_NOTIFICATION_MODULE_RESET 4
 
 // Appearance change flags
-#define APPEARANCE_UPDATE_DNA 1
-#define APPEARANCE_RACE	(2|APPEARANCE_UPDATE_DNA)
-#define APPEARANCE_GENDER (4|APPEARANCE_UPDATE_DNA)
-#define APPEARANCE_SKIN 8
-#define APPEARANCE_HAIR 16
-#define APPEARANCE_HAIR_COLOR 32
-#define APPEARANCE_FACIAL_HAIR 64
-#define APPEARANCE_FACIAL_HAIR_COLOR 128
-#define APPEARANCE_EYE_COLOR 256
+#define APPEARANCE_UPDATE_DNA  0x1
+#define APPEARANCE_RACE       (0x2|APPEARANCE_UPDATE_DNA)
+#define APPEARANCE_GENDER     (0x4|APPEARANCE_UPDATE_DNA)
+#define APPEARANCE_SKIN        0x8
+#define APPEARANCE_HAIR        0x10
+#define APPEARANCE_HAIR_COLOR  0x20
+#define APPEARANCE_FACIAL_HAIR 0x40
+#define APPEARANCE_FACIAL_HAIR_COLOR 0x80
+#define APPEARANCE_EYE_COLOR 0x100
 #define APPEARANCE_ALL_HAIR (APPEARANCE_HAIR|APPEARANCE_HAIR_COLOR|APPEARANCE_FACIAL_HAIR|APPEARANCE_FACIAL_HAIR_COLOR)
-#define APPEARANCE_ALL 511
+#define APPEARANCE_ALL       0xFFFF
 
 
 #define MIN_SUPPLIED_LAW_NUMBER 15
@@ -105,3 +105,4 @@
 #define COMPANY_OPPOSED			"Opposed"
 
 #define COMPANY_ALIGNMENTS		list(COMPANY_LOYAL,COMPANY_SUPPORTATIVE,COMPANY_NEUTRAL,COMPANY_SKEPTICAL,COMPANY_OPPOSED)
+

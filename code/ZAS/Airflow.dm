@@ -24,7 +24,7 @@ mob/living/carbon/slime/airflow_stun()
 
 mob/living/carbon/human/airflow_stun()
 	if(shoes)
-		if(shoes.flags & NOSLIP) return 0
+		if(shoes.item_flags & NOSLIP) return 0
 	..()
 
 atom/movable/proc/check_airflow_movable(n)
@@ -62,6 +62,19 @@ obj/item/check_airflow_movable(n)
 /atom/movable/var/tmp/airflow_time = 0
 /atom/movable/var/tmp/last_airflow = 0
 
+/atom/movable/proc/AirflowCanMove(n)
+	return 1
+
+/mob/AirflowCanMove(n)
+	if(status_flags & GODMODE)
+		return 0
+	if(buckled)
+		return 0
+	var/obj/item/shoes = get_equipped_item(slot_shoes)
+	if(istype(shoes) && (shoes.item_flags & NOSLIP))
+		return 0
+	return 1
+
 /atom/movable/proc/GotoAirflowDest(n)
 	if(!airflow_dest) return
 	if(airflow_speed < 0) return
@@ -69,18 +82,13 @@ obj/item/check_airflow_movable(n)
 	if(airflow_speed)
 		airflow_speed = n/max(get_dist(src,airflow_dest),1)
 		return
-	last_airflow = world.time
 	if(airflow_dest == loc)
 		step_away(src,loc)
+	if(!src.AirflowCanMove(n))
+		return
 	if(ismob(src))
-		if(src:status_flags & GODMODE)
-			return
-		if(istype(src, /mob/living/carbon/human))
-			if(src:buckled)
-				return
-			if(src:shoes && src:shoes.flags & NOSLIP)
-				return
 		src << "<span class='danger'>You are sucked away by airflow!</span>"
+	last_airflow = world.time
 	var/airflow_falloff = 9 - sqrt((x - airflow_dest.x) ** 2 + (y - airflow_dest.y) ** 2)
 	if(airflow_falloff < 1)
 		airflow_dest = null
@@ -116,8 +124,9 @@ obj/item/check_airflow_movable(n)
 		if(!istype(loc, /turf))
 			break
 		step_towards(src, src.airflow_dest)
-		if(ismob(src) && src:client)
-			src:client:move_delay = world.time + vsc.airflow_mob_slowdown
+		var/mob/M = src
+		if(istype(M) && M.client)
+			M.client.move_delay = world.time + vsc.airflow_mob_slowdown
 	airflow_dest = null
 	airflow_speed = 0
 	airflow_time = 0
@@ -134,18 +143,11 @@ obj/item/check_airflow_movable(n)
 		return
 	if(airflow_dest == loc)
 		step_away(src,loc)
+	if(!src.AirflowCanMove(n))
+		return
 	if(ismob(src))
-		if(src:status_flags & GODMODE)
-			return
-		if(istype(src, /mob/living/carbon/human))
-			if(src:buckled)
-				return
-			if(src:shoes)
-				if(istype(src:shoes, /obj/item/clothing/shoes/magboots))
-					if(src:shoes.flags & NOSLIP)
-						return
 		src << "<span clas='danger'>You are pushed away by airflow!</span>"
-		last_airflow = world.time
+	last_airflow = world.time
 	var/airflow_falloff = 9 - sqrt((x - airflow_dest.x) ** 2 + (y - airflow_dest.y) ** 2)
 	if(airflow_falloff < 1)
 		airflow_dest = null

@@ -12,7 +12,7 @@
 #define TECH_ILLEGAL "syndicate"
 #define TECH_ARCANE "arcane"
 
-#define IMPRINTER	1	//For circuits. Uses glass/chemicals.
-#define PROTOLATHE	2	//New stuff. Uses glass/metal/chemicals
-#define MECHFAB		4	//Remember, objects utilising this flag should have construction_time and construction_cost vars.
-#define CHASSIS		8	//For protolathe, but differently
+#define IMPRINTER	0x1	//For circuits. Uses glass/chemicals.
+#define PROTOLATHE	0x2	//New stuff. Uses glass/metal/chemicals
+#define MECHFAB		0x4	//Remember, objects utilising this flag should have construction_time and construction_cost vars.
+#define CHASSIS		0x8	//For protolathe, but differently

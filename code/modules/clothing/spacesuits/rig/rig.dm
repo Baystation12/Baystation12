@@ -180,8 +180,7 @@
 		if(!piece) continue
 		piece.icon_state = "[initial(icon_state)]"
 		if(airtight)
-			piece.flags &= ~STOPPRESSUREDAMAGE
-			piece.flags &= ~AIRTIGHT
+			piece.item_flags &= ~(STOPPRESSUREDAMAGE|AIRTIGHT)
 	update_icon(1)
 
 /obj/item/weapon/rig/proc/toggle_seals(var/mob/living/carbon/human/M,var/instant)
@@ -289,11 +288,10 @@
 /obj/item/weapon/rig/proc/update_component_sealed()
 	for(var/obj/item/piece in list(helmet,boots,gloves,chest))
 		if(canremove)
-			piece.flags &= ~STOPPRESSUREDAMAGE
-			piece.flags &= ~AIRTIGHT
+			piece.item_flags &= ~(STOPPRESSUREDAMAGE|AIRTIGHT)
 		else
-			piece.flags |=  STOPPRESSUREDAMAGE
-			piece.flags |=  AIRTIGHT
+			piece.item_flags |=  (STOPPRESSUREDAMAGE|AIRTIGHT)
+	update_icon(1)
 
 /obj/item/weapon/rig/process()
 

@@ -7,8 +7,6 @@
 #define PRESSURE_CHECK_EXTERNAL 1
 #define PRESSURE_CHECK_INTERNAL 2
 
-#undefine
-
 /obj/machinery/atmospherics/unary/vent_pump
 	icon = 'icons/atmos/vent_pump.dmi'
 	icon_state = "map_vent"
@@ -424,3 +422,12 @@
 		initial_loc.air_vent_names -= id_tag
 	..()
 	return
+
+#undef DEFAULT_PRESSURE_DELTA
+
+#undef EXTERNAL_PRESSURE_BOUND
+#undef INTERNAL_PRESSURE_BOUND
+#undef PRESSURE_CHECKS
+
+#undef PRESSURE_CHECK_EXTERNAL
+#undef PRESSURE_CHECK_INTERNAL
