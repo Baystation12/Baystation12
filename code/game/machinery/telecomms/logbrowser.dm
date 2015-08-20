@@ -1,8 +1,11 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:31
 
+/obj/machinery/computer/telecomms
+	icon_keyboard = "tech_key"
+
 /obj/machinery/computer/telecomms/server
 	name = "Telecommunications Server Monitor"
-	icon_state = "comm_logs"
+	icon_screen = "comm_logs"
 
 	var/screen = 0				// the screen number:
 	var/list/servers = list()	// the servers located by the computer
