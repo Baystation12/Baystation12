@@ -35,7 +35,7 @@
 	reinf_material = newrmaterial
 	update_material()
 
-/turf/simulated/wall/proc/update_icon()
+/turf/simulated/wall/update_icon()
 	if(!material)
 		return
 

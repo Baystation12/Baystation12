@@ -14,6 +14,7 @@
 	anchored = 1
 	use_power = 1
 	idle_power_usage = 2
+	flags = PROXMOVE
 
 /obj/machinery/flasher/portable //Portable version of the flasher. Only flashes when anchored
 	name = "portable flasher"
@@ -24,11 +25,6 @@
 	base_state = "pflash"
 	density = 1
 
-/*
-/obj/machinery/flasher/New()
-	sleep(4)					//<--- What the fuck are you doing? D=
-	src.sd_SetLuminosity(2)
-*/
 /obj/machinery/flasher/power_change()
 	..()
 	if ( !(stat & NOPOWER) )

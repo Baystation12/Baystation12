@@ -136,6 +136,8 @@
 /obj/proc/hide(h)
 	return
 
+/obj/proc/hides_under_flooring()
+	return 0
 
 /obj/proc/hear_talk(mob/M as mob, text, verb, datum/language/speaking)
 	if(talking_atom)

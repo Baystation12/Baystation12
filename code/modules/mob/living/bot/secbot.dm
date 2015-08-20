@@ -30,7 +30,7 @@
 
 	var/obj/secbot_listener/listener = null
 	var/beacon_freq = 1445			// Navigation beacon frequency
-	var/control_freq = AI_FREQ		// Bot control frequency
+	var/control_freq = BOT_FREQ		// Bot control frequency
 	var/list/path = list()
 	var/frustration = 0
 	var/turf/patrol_target = null	// This is where we are headed

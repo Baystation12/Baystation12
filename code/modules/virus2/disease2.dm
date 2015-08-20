@@ -46,7 +46,7 @@
 	for (var/specie in all_species)
 		var/datum/species/S = all_species[specie]
 		if(!S.virus_immune)
-			meat += S.name
+			meat += S
 	if(meat.len)
 		var/num = rand(1,meat.len)
 		for(var/i=0,i<num,i++)

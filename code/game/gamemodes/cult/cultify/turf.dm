@@ -3,10 +3,8 @@
 	return
 
 /turf/simulated/floor/cultify()
+	//todo: flooring datum cultify check
 	cultify_floor()
-
-/turf/simulated/floor/carpet/cultify()
-	return
 
 /turf/simulated/shuttle/floor/cultify()
 	cultify_floor()
@@ -39,8 +37,6 @@
 	if((icon_state != "cult")&&(icon_state != "cult-narsie"))
 		name = "engraved floor"
 		icon_state = "cult"
-		turf_animation('icons/effects/effects.dmi',"cultfloor",0,0,MOB_LAYER-1)
 
 /turf/proc/cultify_wall()
 	ChangeTurf(/turf/unsimulated/wall/cult)
-	turf_animation('icons/effects/effects.dmi',"cultwall",0,0,MOB_LAYER-1)
