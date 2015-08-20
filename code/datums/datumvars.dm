@@ -656,7 +656,6 @@ client
 					if(amount)
 						A.reagents.add_reagent(chosen_id, amount)
 						log_admin("[key_name(usr)] has added [amount] units of [chosen] to \the [A]")
-						log_admin_single("[key_name(usr)] has added [amount] units of [chosen] to \the [A]")
 						message_admins("\blue [key_name(usr)] has added [amount] units of [chosen] to \the [A]")
 
 	else if(href_list["emp"])
