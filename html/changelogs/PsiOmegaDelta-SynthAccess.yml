@@ -1,0 +1,7 @@
+author: PsiOmegaDelta
+delete-after: True
+changes: 
+  - rscadd: "Synths now have id cards with access levels which is checked when operating most station equipment."
+  - rscadd: "Station synthetics still have full station access but can no longer interact with syndicate equipment, and syndicate borgs now start with only syndicate access."
+  - rscadd: "Syndicate borgs can copy the access from other cards by utilizing their own id card module, similar to how syndicate ids work."
+  
