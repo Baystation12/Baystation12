@@ -1004,7 +1004,7 @@ proc/admin_notice(var/message, var/rights)
 	else
 		new chosen(usr.loc)
 
-	log_admin("[key_name(usr)] spawned [chosen] at ([usr.x],[usr.y],[usr.z])")
+	log_and_message_admins("spawned [chosen] at ([usr.x],[usr.y],[usr.z])")
 	feedback_add_details("admin_verb","SA") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 

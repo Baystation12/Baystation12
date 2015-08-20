@@ -100,10 +100,6 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	flags |= NOREACT // so it doesn't react until you light it
 	create_reagents(chem_volume) // making the cigarrete a chemical holder with a maximum volume of 15
 
-/obj/item/clothing/mask/smokable/Destroy()
-	..()
-	qdel(reagents)
-
 /obj/item/clothing/mask/smokable/process()
 	var/turf/location = get_turf(src)
 	smoketime--
@@ -206,7 +202,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	throw_speed = 0.5
 	item_state = "cigoff"
 	w_class = 1
-	slot_flags = SLOT_EARS
+	slot_flags = SLOT_EARS | SLOT_MASK
 	attack_verb = list("burnt", "singed")
 	icon_on = "cigon"  //Note - these are in masks.dmi not in cigarette.dmi
 	icon_off = "cigoff"

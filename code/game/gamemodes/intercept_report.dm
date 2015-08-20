@@ -54,7 +54,7 @@
 		"Small Prick"
 	)
 
-
+// TODO: Update to new antagonist system.
 /datum/intercept_text/proc/build(var/mode_type, datum/mind/correct_person)
 	switch(mode_type)
 		if("revolution")
@@ -88,32 +88,9 @@
 		else
 			return null
 
-// NOTE: Commentted out was the code which showed the chance of someone being an antag. If you want to re-add it, just uncomment the code.
-
-/*
-/datum/intercept_text/proc/pick_mob()
-	var/list/dudes = list()
-	for(var/mob/living/carbon/human/man in player_list)
-		if (!man.mind) continue
-		if (man.mind.assigned_role=="MODE") continue
-		dudes += man
-	if(dudes.len==0)
-		return null
-	return pick(dudes)
-
-
-/datum/intercept_text/proc/pick_fingerprints()
-	var/mob/living/carbon/human/dude = src.pick_mob()
-	//if (!dude) return pick_fingerprints() //who coded that is totally crasy or just a traitor. -- rastaf0
-	if(dude)
-		return num2text(md5(dude.dna.uni_identity))
-	else
-		return num2text(md5(num2text(rand(1,10000))))
-*/
-
 /datum/intercept_text/proc/get_suspect()
 	var/list/dudes = list()
-	for(var/mob/living/carbon/human/man in player_list) if(man.client && man.client.prefs.nanotrasen_relation == "Opposed")
+	for(var/mob/living/carbon/human/man in player_list) if(man.client && man.client.prefs.nanotrasen_relation == COMPANY_OPPOSED)
 		dudes += man
 	for(var/i = 0, i < max(player_list.len/10,2), i++)
 		dudes += pick(player_list)
@@ -205,32 +182,6 @@
 	var/cname = pick(src.changeling_names)
 	var/orgname1 = pick(src.org_names_1)
 	var/orgname2 = pick(src.org_names_2)
-	/*
-	var/changeling_name
-	var/changeling_job
-	var/prob_right_dude = rand(prob_correct_person_lower, prob_correct_person_higher)
-	var/prob_right_job = rand(prob_correct_job_lower, prob_correct_job_higher)
-	if(prob(prob_right_job))
-		if(correct_person)
-			if(correct_person:assigned_role=="MODE")
-				changeling_job = pick(joblist)
-			else
-				changeling_job = correct_person:assigned_role
-	else
-		changeling_job = pick(joblist)
-	if(prob(prob_right_dude) && ticker.mode == "changeling")
-		if(correct_person:assigned_role=="MODE")
-			changeling_name = correct_person:current
-		else
-			changeling_name = src.pick_mob()
-	else
-		changeling_name = src.pick_mob()
-	*/
-
 	src.text += "<BR><BR>We have received a report that a dangerous alien lifeform known only as \"[cname]\" may have infiltrated your crew.  "
-	/*
-	src.text += "Our intelligence suggests a [prob_right_job]% chance that a [changeling_job] on board your station has been replaced by the alien.  "
-	src.text += "Additionally, the report indicates a [prob_right_dude]% chance that [changeling_name] may have been in contact with the lifeform at a recent social gathering.  "
-	*/
 	src.text += "These lifeforms are assosciated with the [orgname1] [orgname2] and may be attempting to acquire sensitive materials on their behalf.  "
 	src.text += "Please take care not to alarm the crew, as [cname] may take advantage of a panic situation. Remember, they can be anybody, suspect everybody!"

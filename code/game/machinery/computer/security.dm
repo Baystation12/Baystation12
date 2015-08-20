@@ -3,10 +3,11 @@
 /obj/machinery/computer/secure_data//TODO:SANITY
 	name = "security records console"
 	desc = "Used to view, edit and maintain security records"
-	icon_state = "security"
+	icon_keyboard = "security_key"
+	icon_screen = "security"
 	light_color = "#a91515"
-	req_one_access = list(access_security, access_forensics_lockers)
-	circuit = "/obj/item/weapon/circuitboard/secure_data"
+	req_one_access = list(access_security, access_forensics_lockers, access_lawyer)
+	circuit = /obj/item/weapon/circuitboard/secure_data
 	var/obj/item/weapon/card/id/scan = null
 	var/authenticated = null
 	var/rank = null
@@ -411,11 +412,11 @@ What a mess.*/
 //RECORD CREATE
 			if ("New Record (Security)")
 				if ((istype(active1, /datum/data/record) && !( istype(active2, /datum/data/record) )))
-					active2 = CreateSecurityRecord(active1.fields["name"], active1.fields["id"])
+					active2 = data_core.CreateSecurityRecord(active1.fields["name"], active1.fields["id"])
 					screen = 3
 
 			if ("New Record (General)")
-				active1 = CreateGeneralRecord()
+				active1 = data_core.CreateGeneralRecord()
 				active2 = null
 
 //FIELD FUNCTIONS

@@ -260,7 +260,6 @@
 	return 0
 
 /stat_rig_module/Click()
-	..()
 	if(CanUse())
 		var/list/href_list = list(
 							"interact_module" = module.holder.installed_modules.Find(module),
@@ -268,6 +267,9 @@
 							)
 		AddHref(href_list)
 		module.holder.Topic(usr, href_list)
+
+/stat_rig_module/DblClick()
+	return Click()
 
 /stat_rig_module/activate/New(var/obj/item/rig_module/module)
 	..()

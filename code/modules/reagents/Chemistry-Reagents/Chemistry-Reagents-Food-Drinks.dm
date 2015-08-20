@@ -43,6 +43,13 @@
 		return
 	..()
 
+/datum/reagent/nutriment/honey
+	name = "Honey"
+	id = "honey"
+	description = "A golden yellow syrup, loaded with sugary sweetness."
+	nutriment_factor = 10
+	color = "#FFFF00"
+
 /datum/reagent/nutriment/flour
 	name = "flour"
 	id = "flour"
@@ -572,9 +579,10 @@
 	..()
 	if(alien == IS_DIONA)
 		return
-	M.make_jittery(5)
 	if(adj_temp > 0)
 		holder.remove_reagent("frostoil", 10 * removed)
+	if(dose > 45)
+		M.make_jittery(5)
 
 /datum/reagent/drink/coffee/icecoffee
 	name = "Iced Coffee"

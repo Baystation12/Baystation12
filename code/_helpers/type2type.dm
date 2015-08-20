@@ -36,35 +36,19 @@
 	return num
 
 // Returns the hex value of a number given a value assumed to be a base-ten value
-/proc/num2hex(num, digits)
-	if (digits == null)
-		digits = 2
+/proc/num2hex(num, padlength)
+	var/global/list/hexdigits = list("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F")
 
-	if (!isnum(num))
-		return
+	. = ""
+	while(num > 0)
+		var/hexdigit = hexdigits[(num & 0xF) + 1]
+		. = "[hexdigit][.]"
+		num >>= 4 //go to the next half-byte
 
-	// hex is our return value, to which each hex-digit of num is appended to.
-	var/hex   = ""
-	var/power = -4
-	var/n     = 1
-
-	// Figure out power. (power of 2)
-	while (n < num)
-		power += 4
-		n     *= 16
-
-	// Note that we have to start appending to hex with the most-significant digits.
-	while (power >= 0)
-		var/m  = (num >> power) & 15
-		hex   += ascii2text(m + (m < 10 ? 48 : 87)) // Provided by the IconProcs library.
-		power -= 4
-
-	// Append zeroes to make sure that hex is atleast digits long.
-	var/left = length(hex) - digits
+	//pad with zeroes
+	var/left = padlength - length(.)
 	while (left-- > 0)
-		hex = text("0[]", hex)
-
-	return hex
+		. = "0[.]"
 
 // Concatenates a list of strings into a single string.  A seperator may optionally be provided.
 /proc/list2text(list/ls, sep)
@@ -290,13 +274,6 @@ proc/tg_list2text(list/list, glue=",")
 	if (rights & R_MOD)         . += "[seperator]+MODERATOR"
 	if (rights & R_MENTOR)      . += "[seperator]+MENTOR"
 	return .
-
-/proc/ui_style2icon(ui_style)
-	switch (ui_style)
-		if ("old")      return 'icons/mob/screen1_old.dmi'
-		if ("Orange")   return 'icons/mob/screen1_Orange.dmi'
-		if ("Midnight") return 'icons/mob/screen1_Midnight.dmi'
-		else            return 'icons/mob/screen1_White.dmi'
 
 // heat2color functions. Adapted from: http://www.tannerhelland.com/4435/convert-temperature-rgb-algorithm-code/
 /proc/heat2color(temp)

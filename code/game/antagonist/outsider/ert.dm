@@ -11,6 +11,7 @@ var/datum/antagonist/ert/ert
 	max_antags = 5
 	max_antags_round = 5 // ERT mode?
 	landmark_id = "Response Team"
+	id_type = /obj/item/weapon/card/id/centcom/ERT
 
 	flags = ANTAG_OVERRIDE_JOB | ANTAG_SET_APPEARANCE | ANTAG_HAS_LEADER | ANTAG_CHOOSE_NAME
 
@@ -36,10 +37,6 @@ var/datum/antagonist/ert/ert
 	player.equip_to_slot_or_del(new /obj/item/clothing/shoes/swat(src), slot_shoes)
 	player.equip_to_slot_or_del(new /obj/item/clothing/gloves/swat(src), slot_gloves)
 	player.equip_to_slot_or_del(new /obj/item/clothing/glasses/sunglasses(src), slot_glasses)
-
-	var/obj/item/weapon/card/id/centcom/ERT/W = new(src)
-	W.registered_name = player.real_name
-	W.name = "[player.real_name]'s ID Card ([W.assignment])"
-	player.equip_to_slot_or_del(W, slot_wear_id)
-
+	
+	create_id(role_text, player)
 	return 1

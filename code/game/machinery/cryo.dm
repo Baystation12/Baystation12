@@ -2,8 +2,8 @@
 
 /obj/machinery/atmospherics/unary/cryo_cell
 	name = "cryo cell"
-	icon = 'icons/obj/cryogenics.dmi'
-	icon_state = "pod0"
+	icon = 'icons/obj/cryogenics.dmi' // map only
+	icon_state = "pod_preview"
 	density = 1
 	anchored = 1.0
 	layer = 2.8
@@ -22,6 +22,8 @@
 
 /obj/machinery/atmospherics/unary/cryo_cell/New()
 	..()
+	icon = 'icons/obj/cryogenics_split.dmi'
+	update_icon()
 	initialize_directions = dir
 
 /obj/machinery/atmospherics/unary/cryo_cell/Destroy()
@@ -59,11 +61,6 @@
 		network.update = 1
 
 	return 1
-
-
-/obj/machinery/atmospherics/unary/cryo_cell/allow_drop()
-	return 0
-
 
 /obj/machinery/atmospherics/unary/cryo_cell/relaymove(mob/user as mob)
 	if(user.stat)
@@ -198,12 +195,28 @@
 /obj/machinery/atmospherics/unary/cryo_cell/update_icon()
 	overlays.Cut()
 	icon_state = "pod[on]"
+	var/image/I
+
+	I = image(icon, "pod[on]_top")
+	I.layer = 5 // this needs to be fairly high so it displays over most things, but it needs to be under lighting (at 10)
+	I.pixel_z = 32
+	overlays += I
+
 	if(occupant)
 		var/image/pickle = image(occupant.icon, occupant.icon_state)
 		pickle.overlays = occupant.overlays
-		pickle.pixel_y = 20
+		pickle.pixel_z = 18
+		pickle.layer = 5
 		overlays += pickle
-	overlays += "lid[on]"
+
+	I = image(icon, "lid[on]")
+	I.layer = 5
+	overlays += I
+
+	I = image(icon, "lid[on]_top")
+	I.layer = 5
+	I.pixel_z = 32
+	overlays += I
 
 /obj/machinery/atmospherics/unary/cryo_cell/proc/process_occupant()
 	if(air_contents.total_moles < 10)

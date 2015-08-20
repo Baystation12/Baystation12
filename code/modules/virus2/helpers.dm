@@ -51,7 +51,7 @@ proc/infection_check(var/mob/living/carbon/M, var/vector = "Airborne")
 	if (vector == "Airborne")
 		var/obj/item/I = M.wear_mask
 		if (istype(I))
-			protection = max(protection, round(0.06*I.armor["bio"]))
+			protection = max(protection, I.armor["bio"])
 
 	return prob(protection)
 
@@ -148,12 +148,12 @@ proc/airborne_can_reach(turf/source, turf/target)
 //					log_debug("Could not reach target")
 
 			if (vector == "Contact")
-				if (in_range(src, victim))
+				if (Adjacent(victim))
 //					log_debug("In range, infecting")
 					infect_virus2(victim,V)
 
 	//contact goes both ways
-	if (victim.virus2.len > 0 && vector == "Contact")
+	if (victim.virus2.len > 0 && vector == "Contact" && Adjacent(victim))
 //		log_debug("Spreading [vector] diseases from [victim] to [src]")
 		var/nudity = 1
 

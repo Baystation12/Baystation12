@@ -73,10 +73,23 @@ LOG_PDA
 ## disconnect players who did nothing during the set amount of minutes
 # KICK_INACTIVE 10
 
-## Use Mentors instead of Moderators.  Mentors are designed with the idea that
-###they help in pushing new people to be better at roleplay.  If you uncomment
-###this it will reduce the rights that your mods have.
-#MENTORS
+##Show mods on staffwho
+SHOW_MODS
+
+##Show mentors on staffwho
+SHOW_MENTORS
+
+## Chooses whether mods have the ability to tempban or not
+MODS_CAN_TEMPBAN
+
+## Chooses whether mods have the ability to issue tempbans for jobs or not
+MODS_CAN_JOB_TEMPBAN
+
+## Maximum mod tempban duration (in minutes)
+MOD_TEMPBAN_MAX 1440
+
+## Maximum mod job tempban duration (in minutes)
+MOD_JOB_TEMPBAN_MAX 1440
 
 
 ## probablities for game modes chosen in "secret" and "random" modes
@@ -349,7 +362,11 @@ STARLIGHT 0
 ## Enable asteroid tunnel/cave generation. Will behave strangely if turned off with a map that expects it on.
 # GENERATE_ASTEROID
 
-
+## Uncomment to enable organ decay outside of a body or storage item.
+#ORGANS_CAN_DECAY
 
 ## Uncomment to have the changelog file automatically open when a user connects and hasn't seen the latest changelog
 #AGGRESSIVE_CHANGELOG
+
+## Uncomment to override default brain health.
+#DEFAULT_BRAIN_HEALTH 400

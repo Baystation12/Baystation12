@@ -79,6 +79,13 @@
 		return
 	..()
 
+//cargo trains are open topped, so there is a chance the projectile will hit the mob ridding the train instead
+/obj/vehicle/train/cargo/bullet_act(var/obj/item/projectile/Proj)
+	if(buckled_mob && prob(70))
+		buckled_mob.bullet_act(Proj)
+		return
+	..()
+
 /obj/vehicle/train/cargo/update_icon()
 	if(open)
 		icon_state = initial(icon_state) + "_open"

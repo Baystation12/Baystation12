@@ -399,6 +399,7 @@ default behaviour is:
 	fire_stacks = 0
 
 /mob/living/proc/rejuvenate()
+	reagents.clear_reagents()
 
 	// shut down various types of badness
 	setToxLoss(0)
@@ -424,16 +425,11 @@ default behaviour is:
 	ear_damage = 0
 	heal_overall_damage(getBruteLoss(), getFireLoss())
 
-	// restore all of a human's blood
-	if(ishuman(src))
-		var/mob/living/carbon/human/human_mob = src
-		human_mob.restore_blood()
-
 	// fix all of our organs
 	restore_all_organs()
 
 	// remove the character from the list of the dead
-	if(stat == 2)
+	if(stat == DEAD)
 		dead_mob_list -= src
 		living_mob_list += src
 		tod = null
@@ -524,27 +520,30 @@ default behaviour is:
 						var/atom/movable/t = M.pulling
 						M.stop_pulling()
 
-						//this is the gay blood on floor shit -- Added back -- Skie
-						if (M.lying && (prob(M.getBruteLoss() / 6)))
-							var/turf/location = M.loc
-							if (istype(location, /turf/simulated))
-								location.add_blood(M)
-						//pull damage with injured people
-							if(prob(25))
-								M.adjustBruteLoss(1)
-								visible_message("<span class='danger'>\The [M]'s [M.isSynthetic() ? "state worsens": "wounds open more"] from being dragged!</span>")
-						if(M.pull_damage())
-							if(prob(25))
-								M.adjustBruteLoss(2)
-								visible_message("<span class='danger'>\The [M]'s [M.isSynthetic() ? "state" : "wounds"] worsen terribly from being dragged!</span>")
-								var/turf/location = M.loc
-								if (istype(location, /turf/simulated))
-									location.add_blood(M)
-									if(ishuman(M))
-										var/mob/living/carbon/H = M
-										var/blood_volume = round(H:vessel.get_reagent_amount("blood"))
-										if(blood_volume > 0)
-											H:vessel.remove_reagent("blood",1)
+						if(!istype(M.loc, /turf/space))
+							var/area/A = get_area(M)
+							if(A.has_gravity)
+								//this is the gay blood on floor shit -- Added back -- Skie
+								if (M.lying && (prob(M.getBruteLoss() / 6)))
+									var/turf/location = M.loc
+									if (istype(location, /turf/simulated))
+										location.add_blood(M)
+								//pull damage with injured people
+									if(prob(25))
+										M.adjustBruteLoss(1)
+										visible_message("<span class='danger'>\The [M]'s [M.isSynthetic() ? "state worsens": "wounds open more"] from being dragged!</span>")
+								if(M.pull_damage())
+									if(prob(25))
+										M.adjustBruteLoss(2)
+										visible_message("<span class='danger'>\The [M]'s [M.isSynthetic() ? "state" : "wounds"] worsen terribly from being dragged!</span>")
+										var/turf/location = M.loc
+										if (istype(location, /turf/simulated))
+											location.add_blood(M)
+											if(ishuman(M))
+												var/mob/living/carbon/human/H = M
+												var/blood_volume = round(H.vessel.get_reagent_amount("blood"))
+												if(blood_volume > 0)
+													H.vessel.remove_reagent("blood", 1)
 
 
 						step(pulling, get_dir(pulling.loc, T))
@@ -668,9 +667,9 @@ default behaviour is:
 		src << "You can't vent crawl while you're stunned!"
 		return
 
-	var/special_fail_msg = can_use_vents()
+	var/special_fail_msg = cannot_use_vents()
 	if(special_fail_msg)
-		src << "\red [special_fail_msg]"
+		src << "<span class='warning'>[special_fail_msg]</span>"
 		return
 
 	if(vent_found) // one was passed in, probably from vent/AltClick()
@@ -759,7 +758,7 @@ default behaviour is:
 		if(new_area)
 			new_area.Entered(src)
 
-/mob/living/proc/can_use_vents()
+/mob/living/proc/cannot_use_vents()
 	return "You can't fit into that vent."
 
 /mob/living/proc/has_brain()
@@ -791,7 +790,7 @@ default behaviour is:
 					inertia_dir = 1
 				else if(y >= world.maxy -TRANSITIONEDGE)
 					inertia_dir = 2
-				src << "<span class='warning>Something you are carrying is preventing you from leaving.</span>"
+				src << "<span class='warning'>Something you are carrying is preventing you from leaving.</span>"
 				return
 
 	..()

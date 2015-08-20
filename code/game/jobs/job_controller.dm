@@ -348,7 +348,6 @@ var/global/datum/controller/occupations/job_master
 
 
 	proc/EquipRank(var/mob/living/carbon/human/H, var/rank, var/joined_late = 0)
-
 		if(!H)	return null
 
 		var/datum/job/job = GetJob(rank)
@@ -393,6 +392,8 @@ var/global/datum/controller/occupations/job_master
 							spawn_in_storage += thing
 			//Equip job items.
 			job.equip(H)
+			job.setup_account(H)
+			job.equip_backpack(H)
 			job.equip_survival(H)
 			job.apply_fingerprints(H)
 
@@ -428,21 +429,6 @@ var/global/datum/controller/occupations/job_master
 				H.buckled.loc = H.loc
 				H.buckled.set_dir(H.dir)
 
-		//give them an account in the station database
-		var/datum/money_account/M = create_account(H.real_name, rand(50,500)*10, null)
-		if(H.mind)
-			var/remembered_info = ""
-			remembered_info += "<b>Your account number is:</b> #[M.account_number]<br>"
-			remembered_info += "<b>Your account pin is:</b> [M.remote_access_pin]<br>"
-			remembered_info += "<b>Your account funds are:</b> $[M.money]<br>"
-
-			if(M.transaction_log.len)
-				var/datum/transaction/T = M.transaction_log[1]
-				remembered_info += "<b>Your account was created:</b> [T.time], [T.date] at [T.source_terminal]<br>"
-			H.mind.store_memory(remembered_info)
-
-			H.mind.initial_account = M
-
 		// If they're head, give them the account info for their department
 		if(H.mind && job.head_position)
 			var/remembered_info = ""
@@ -454,9 +440,6 @@ var/global/datum/controller/occupations/job_master
 				remembered_info += "<b>Your department's account funds are:</b> $[department_account.money]<br>"
 
 			H.mind.store_memory(remembered_info)
-
-		spawn(0)
-			H << "<span class='notice'><b>Your account number is: [M.account_number], your account pin is: [M.remote_access_pin]</b></span>"
 
 		var/alt_title = null
 		if(H.mind)
@@ -543,10 +526,9 @@ var/global/datum/controller/occupations/job_master
 		else
 			C = new /obj/item/weapon/card/id(H)
 		if(C)
-			C.registered_name = H.real_name
 			C.rank = rank
 			C.assignment = title ? title : rank
-			C.name = "[C.registered_name]'s ID Card ([C.assignment])"
+			C.set_owner_info(H)
 
 			//put the player's account number onto the ID
 			if(H.mind && H.mind.initial_account)

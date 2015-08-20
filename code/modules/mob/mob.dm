@@ -2,13 +2,47 @@
 	mob_list -= src
 	dead_mob_list -= src
 	living_mob_list -= src
+	unset_machine()
 	qdel(hud_used)
+	if(client)
+		for(var/obj/screen/movable/spell_master/spell_master in spell_masters)
+			qdel(spell_master)
+		remove_screen_obj_references()
+		for(var/atom/movable/AM in client.screen)
+			qdel(AM)
+		client.screen = list()
 	if(mind && mind.current == src)
 		spellremove(src)
 	for(var/infection in viruses)
 		qdel(infection)
 	ghostize()
 	..()
+
+/mob/proc/remove_screen_obj_references()
+	flash = null
+	blind = null
+	hands = null
+	pullin = null
+	purged = null
+	internals = null
+	oxygen = null
+	i_select = null
+	m_select = null
+	toxin = null
+	fire = null
+	bodytemp = null
+	healths = null
+	throw_icon = null
+	nutrition_icon = null
+	pressure = null
+	damageoverlay = null
+	pain = null
+	item_use_icon = null
+	gun_move_icon = null
+	gun_run_icon = null
+	gun_setting_icon = null
+	spell_masters = null
+	zone_sel = null
 
 /mob/New()
 	mob_list += src
@@ -64,7 +98,7 @@
 			var/mob/M = I
 			if(self_message && M==src)
 				M.show_message( self_message, 1, blind_message, 2)
-			if(M.see_invisible >= invisibility) // Cannot view the invisible
+			else if(M.see_invisible >= invisibility) // Cannot view the invisible
 				M.show_message( message, 1, blind_message, 2)
 			else if (blind_message)
 				M.show_message(blind_message, 2)
@@ -119,7 +153,7 @@
 	return
 
 /mob/proc/incapacitated()
-	return
+	return (stat || paralysis || stunned || weakened || restrained())
 
 /mob/proc/restrained()
 	return
@@ -617,31 +651,40 @@
 
 /mob/Stat()
 	..()
+	. = (client && client.inactivity < 1200)
 
-	if(client && client.holder)
-		if(statpanel("Status"))
-			statpanel("Status","Location:","([x], [y], [z])")
-			statpanel("Status","CPU:","[world.cpu]")
-			statpanel("Status","Instances:","[world.contents.len]")
-		if(statpanel("Status") && processScheduler && processScheduler.getIsRunning())
-			for(var/datum/controller/process/P in processScheduler.processes)
-				statpanel("Status",P.getStatName(), P.getTickTime())
-		else
-			statpanel("Status","processScheduler is not running.")
+	if(.)
+		if(statpanel("Status") && ticker && ticker.current_state != GAME_STATE_PREGAME)
+			stat("Station Time", worldtime2text())
+			stat("Round Duration", round_duration())
 
-	if(listed_turf && client)
-		if(!TurfAdjacent(listed_turf))
-			listed_turf = null
-		else
-			statpanel(listed_turf.name, null, listed_turf)
-			for(var/atom/A in listed_turf)
-				if(!A.mouse_opacity)
-					continue
-				if(A.invisibility > see_invisible)
-					continue
-				if(is_type_in_list(A, shouldnt_see))
-					continue
-				statpanel(listed_turf.name, null, A)
+		if(client.holder)
+			if(statpanel("Status"))
+				stat("Location:","([x], [y], [z])")
+			if(statpanel("Processes"))
+				stat("CPU:","[world.cpu]")
+				stat("Instances:","[world.contents.len]")
+				if(processScheduler && processScheduler.getIsRunning())
+					for(var/datum/controller/process/P in processScheduler.processes)
+						stat(P.getStatName(), P.getTickTime())
+				else
+					stat("processScheduler is not running.")
+
+		if(listed_turf && client)
+			if(!TurfAdjacent(listed_turf))
+				listed_turf = null
+			else
+				statpanel(listed_turf.name, null, listed_turf)
+				for(var/atom/A in listed_turf)
+					if(!A.mouse_opacity)
+						continue
+					if(A.invisibility > see_invisible)
+						continue
+					if(is_type_in_list(A, shouldnt_see))
+						continue
+					statpanel(listed_turf.name, null, A)
+
+	sleep(4) //Prevent updating the stat panel for the next .4 seconds, prevents clientside latency from updates
 
 // facing verbs
 /mob/proc/canface()
@@ -691,7 +734,7 @@
 		drop_l_hand()
 		drop_r_hand()
 	else
-		density = 1
+		density = initial(density)
 
 	for(var/obj/item/weapon/grab/G in grabbed_by)
 		if(G.state >= GRAB_AGGRESSIVE)
@@ -722,22 +765,22 @@
 
 /mob/verb/eastface()
 	set hidden = 1
-	return facedir(EAST)
+	return facedir(client.client_dir(EAST))
 
 
 /mob/verb/westface()
 	set hidden = 1
-	return facedir(WEST)
+	return facedir(client.client_dir(WEST))
 
 
 /mob/verb/northface()
 	set hidden = 1
-	return facedir(NORTH)
+	return facedir(client.client_dir(NORTH))
 
 
 /mob/verb/southface()
 	set hidden = 1
-	return facedir(SOUTH)
+	return facedir(client.client_dir(SOUTH))
 
 
 //This might need a rename but it should replace the can this mob use things check
@@ -833,6 +876,9 @@
 		if(O.w_class > class)
 			visible_implants += O
 	return visible_implants
+
+/mob/proc/embedded_needs_process()
+	return (embedded.len > 0)
 
 mob/proc/yank_out_object()
 	set category = "Object"
@@ -1012,22 +1058,40 @@ mob/proc/yank_out_object()
 
 /mob/verb/northfaceperm()
 	set hidden = 1
-	set_face_dir(NORTH)
+	set_face_dir(client.client_dir(NORTH))
 
 /mob/verb/southfaceperm()
 	set hidden = 1
-	set_face_dir(SOUTH)
+	set_face_dir(client.client_dir(SOUTH))
 
 /mob/verb/eastfaceperm()
 	set hidden = 1
-	set_face_dir(EAST)
+	set_face_dir(client.client_dir(EAST))
 
 /mob/verb/westfaceperm()
 	set hidden = 1
-	set_face_dir(WEST)
+	set_face_dir(client.client_dir(WEST))
 
 /mob/proc/adjustEarDamage()
 	return
 
 /mob/proc/setEarDamage()
 	return
+
+//Throwing stuff
+
+/mob/proc/toggle_throw_mode()
+	if (src.in_throw_mode)
+		throw_mode_off()
+	else
+		throw_mode_on()
+
+/mob/proc/throw_mode_off()
+	src.in_throw_mode = 0
+	if(src.throw_icon) //in case we don't have the HUD and we use the hotkey
+		src.throw_icon.icon_state = "act_throw_off"
+
+/mob/proc/throw_mode_on()
+	src.in_throw_mode = 1
+	if(src.throw_icon)
+		src.throw_icon.icon_state = "act_throw_on"

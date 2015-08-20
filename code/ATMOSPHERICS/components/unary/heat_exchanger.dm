@@ -69,7 +69,7 @@
 		if (!istype(W, /obj/item/weapon/wrench))
 			return ..()
 		var/turf/T = src.loc
-		if (level==1 && isturf(T) && T.intact)
+		if (level==1 && isturf(T) && !T.is_plating())
 			user << "<span class='warning'>You must remove the plating first.</span>"
 			return 1
 		var/datum/gas_mixture/int_air = return_air()

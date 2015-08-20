@@ -274,10 +274,10 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 		
 		//vapour fuels are extremely volatile! The reaction progress is a percentage of the total fuel (similar to old zburn).)
 		var/min_burn = 0.30*volume*group_multiplier/CELL_VOLUME //in moles - so that fires with very small gas concentrations burn out fast
-		var/gas_reaction_progress = max(min_burn, firelevel_ratio*gas_fuel)*FIRE_GAS_BURNRATE_MULT
+		var/gas_reaction_progress = min(max(min_burn, firelevel_ratio*gas_fuel)*FIRE_GAS_BURNRATE_MULT, gas_fuel)
 
 		//liquid fuels are not as volatile, and the reaction progress depends on the size of the area that is burning. Limit the burn rate to a certain amount per area.
-		var/liquid_reaction_progress = (firelevel_ratio*0.2 + 0.05)*fuel_area*FIRE_LIQUID_BURNRATE_MULT
+		var/liquid_reaction_progress = min((firelevel_ratio*0.2 + 0.05)*fuel_area*FIRE_LIQUID_BURNRATE_MULT, liquid_fuel)
 
 		var/total_reaction_progress = gas_reaction_progress + liquid_reaction_progress
 		var/used_fuel = min(total_reaction_progress, reaction_limit)
@@ -295,7 +295,7 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 
 		//if the reaction is progressing too slow then it isn't self-sustaining anymore and burns out
 		if(zone) //be less restrictive with canister and tank reactions
-			if((!liquid_fuel || used_fuel <= FIRE_LIQUD_MIN_BURNRATE) && (!gas_fuel || used_fuel <= FIRE_GAS_MIN_BURNRATE*group_multiplier))
+			if((!liquid_fuel || used_fuel <= FIRE_LIQUD_MIN_BURNRATE) && (!gas_fuel || used_fuel <= FIRE_GAS_MIN_BURNRATE*zone.contents.len))
 				return 0
 
 

@@ -49,7 +49,7 @@
 #define I_HELP		"help"
 #define I_DISARM	"disarm"
 #define I_GRAB		"grab"
-#define I_HURT		"hurt"
+#define I_HURT		"harm"
 
 //These are used Bump() code for living mobs, in the mob_bump_flag, mob_swap_flags, and mob_push_flags vars to determine whom can bump/swap with whom.
 #define HUMAN 1
@@ -58,7 +58,8 @@
 #define ROBOT 8
 #define SLIME 16
 #define SIMPLE_ANIMAL 32
-#define ALLMOBS (HUMAN|MONKEY|ALIEN|ROBOT|SLIME|SIMPLE_ANIMAL)
+#define HEAVY 64
+#define ALLMOBS (HUMAN|MONKEY|ALIEN|ROBOT|SLIME|SIMPLE_ANIMAL|HEAVY)
 
 #define NEXT_MOVE_DELAY 8
 
@@ -84,3 +85,23 @@
 
 #define MIN_SUPPLIED_LAW_NUMBER 15
 #define MAX_SUPPLIED_LAW_NUMBER 50
+
+//default item on-mob icons
+#define INV_HEAD_DEF_ICON 'icons/mob/head.dmi'
+#define INV_BACK_DEF_ICON 'icons/mob/back.dmi'
+#define INV_L_HAND_DEF_ICON 'icons/mob/items/lefthand.dmi'
+#define INV_R_HAND_DEF_ICON 'icons/mob/items/righthand.dmi'
+#define INV_W_UNIFORM_DEF_ICON 'icons/mob/uniform.dmi'
+#define INV_ACCESSORIES_DEF_ICON 'icons/mob/ties.dmi'
+#define INV_SUIT_DEF_ICON 'icons/mob/ties.dmi'
+#define INV_SUIT_DEF_ICON 'icons/mob/suit.dmi'
+#define MAX_SUPPLIED_LAW_NUMBER 50
+
+// NT's alignment towards the character
+#define COMPANY_LOYAL 			"Loyal"
+#define COMPANY_SUPPORTATIVE	"Supportive"
+#define COMPANY_NEUTRAL 		"Neutral"
+#define COMPANY_SKEPTICAL		"Skeptical"
+#define COMPANY_OPPOSED			"Opposed"
+
+#define COMPANY_ALIGNMENTS		list(COMPANY_LOYAL,COMPANY_SUPPORTATIVE,COMPANY_NEUTRAL,COMPANY_SKEPTICAL,COMPANY_OPPOSED)

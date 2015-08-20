@@ -42,7 +42,7 @@
 	breath_type = null
 	poison_type = null
 
-	vision_flags = SEE_MOBS
+	vision_flags = SEE_SELF|SEE_MOBS
 
 	has_organ = list(
 		"heart" =           /obj/item/organ/heart,
@@ -53,8 +53,8 @@
 		)
 
 	bump_flag = ALIEN
-	swap_flags = ALLMOBS
-	push_flags = ALLMOBS ^ ROBOT
+	swap_flags = ~HEAVY
+	push_flags = (~HEAVY) ^ ROBOT
 
 	var/alien_number = 0
 	var/caste_name = "creature" // Used to update alien name.

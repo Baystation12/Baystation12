@@ -275,7 +275,6 @@
 		seed.harvest(user,yield_mod)
 	else
 		seed.harvest(get_turf(src),yield_mod)
-
 	// Reset values.
 	harvest = 0
 	lastproduce = age
@@ -307,6 +306,7 @@
 	mutation_mod = 0
 
 	user << "You remove the dead plant."
+	lastproduce = 0
 	check_health()
 	return
 
@@ -476,6 +476,7 @@
 				return
 
 			user << "You plant the [S.seed.seed_name] [S.seed.seed_noun]."
+			lastproduce = 0
 			seed = S.seed //Grab the seed datum.
 			dead = 0
 			age = 1
@@ -531,19 +532,6 @@
 		anchored = !anchored
 		user << "You [anchored ? "wrench" : "unwrench"] \the [src]."
 
-	else if(istype(O, /obj/item/apiary))
-
-		if(seed)
-			user << "<span class='danger'>[src] is already occupied!</span>"
-		else
-			user.drop_item()
-			qdel(O)
-
-			var/obj/machinery/apiary/A = new(src.loc)
-			A.icon = src.icon
-			A.icon_state = src.icon_state
-			A.hydrotray_type = src.type
-			qdel(src)
 	else if(O.force && seed)
 		user.visible_message("<span class='danger'>\The [seed.display_name] has been attacked by [user] with \the [O]!</span>")
 		if(!dead)

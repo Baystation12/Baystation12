@@ -55,8 +55,10 @@
 
 	targetTurfs = new()
 
-	for(var/turf/T in view(range, location)) //build affected area list
-		if(cheap_pythag(T.x - location.x, T.y - location.y) <= range) //cull turfs to circle
+	//build affected area list
+	for(var/turf/T in view(range, location))
+		//cull turfs to circle
+		if(sqrt((T.x - location.x)**2 + (T.y - location.y)**2) <= range)
 			targetTurfs += T
 
 	wallList = new()

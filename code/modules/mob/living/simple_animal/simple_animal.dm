@@ -305,7 +305,7 @@
 			purge = 3
 		adjustBruteLoss(damage)
 	else
-		usr << "<span class='danger>This weapon is ineffective, it does no damage.</span>"
+		usr << "<span class='danger'>This weapon is ineffective, it does no damage.</span>"
 
 	visible_message("<span class='danger'>\The [src] has been attacked with \the [O] by [user].</span>")
 	user.do_attack_animation(src)

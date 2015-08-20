@@ -5,7 +5,6 @@
 	var/spawning = 0//Referenced when you want to delete the new_player later on in the code.
 	var/totalPlayers = 0		 //Player counts for the Lobby tab
 	var/totalPlayersReady = 0
-
 	universal_speak = 1
 
 	invisibility = 101
@@ -68,12 +67,7 @@
 	Stat()
 		..()
 
-		statpanel("Status")
-		if (client.statpanel == "Status" && ticker)
-			if (ticker.current_state != GAME_STATE_PREGAME)
-				stat(null, "Station Time: [worldtime2text()]")
-		statpanel("Lobby")
-		if(client.statpanel=="Lobby" && ticker)
+		if(statpanel("Lobby") && ticker)
 			if(ticker.hide_mode)
 				stat("Game Mode:", "Secret")
 			else
@@ -120,8 +114,11 @@
 				observer.started_as_observer = 1
 				close_spawn_windows()
 				var/obj/O = locate("landmark*Observer-Start")
-				src << "\blue Now teleporting."
-				observer.loc = O.loc
+				if(istype(O))
+					src << "<span class='notice'>Now teleporting.</span>"
+					observer.loc = O.loc
+				else
+					src << "<span class='danger'>Could not locate an observer spawn point. Use the Teleport verb to jump to the station map.</span>"
 				observer.timeofdeath = world.time // Set the time of death so that the respawn timer works correctly.
 
 				announce_ghost_joinleave(src)
@@ -131,8 +128,6 @@
 
 				if(client.prefs.be_random_name)
 					client.prefs.real_name = random_name(client.prefs.gender)
-				if(client.prefs.dummy)
-					qdel(client.prefs.dummy)
 				observer.real_name = client.prefs.real_name
 				observer.name = observer.real_name
 				if(!client.holder && !config.antag_hud_allowed)           // For new ghosts we remove the verb from even showing up if it's not allowed.
@@ -373,12 +368,6 @@
 
 		qdel(src)
 
-	proc/AnnounceArrival(var/mob/living/carbon/human/character, var/rank, var/join_message)
-		if (ticker.current_state == GAME_STATE_PLAYING)
-			if(character.mind.role_alt_title)
-				rank = character.mind.role_alt_title
-			global_announcer.autosay("[character.real_name],[rank ? " [rank]," : " visitor," ] [join_message ? join_message : "has arrived on the station"].", "Arrivals Announcement Computer")
-
 	proc/AnnounceCyborg(var/mob/living/character, var/rank, var/join_message)
 		if (ticker.current_state == GAME_STATE_PLAYING)
 			if(character.mind.role_alt_title)
@@ -387,16 +376,11 @@
 			global_announcer.autosay("A new[rank ? " [rank]" : " visitor" ] [join_message ? join_message : "has arrived on the station"].", "Arrivals Announcement Computer")
 
 	proc/LateChoices()
-		var/mills = world.time // 1/10 of a second, not real milliseconds but whatever
-		//var/secs = ((mills % 36000) % 600) / 10 //Not really needed, but I'll leave it here for refrence.. or something
-		var/mins = (mills % 36000) / 600
-		var/hours = mills / 36000
-
 		var/name = client.prefs.be_random_name ? "friend" : client.prefs.real_name
 
 		var/dat = "<html><body><center>"
 		dat += "<b>Welcome, [name].<br></b>"
-		dat += "Round Duration: [round(hours)]h [round(mins)]m<br>"
+		dat += "Round Duration: [round_duration()]<br>"
 
 		if(emergency_shuttle) //In case Nanotrasen decides reposess CentComm's shuttles.
 			if(emergency_shuttle.going_to_centcom()) //Shuttle is going to centcomm, not recalled
@@ -439,12 +423,12 @@
 
 		new_character.lastarea = get_area(loc)
 
-		var/datum/language/chosen_language
-		if(client.prefs.language)
-			chosen_language = all_languages["[client.prefs.language]"]
-		if(chosen_language)
-			if(is_alien_whitelisted(src, client.prefs.language) || !config.usealienwhitelist || !(chosen_language.flags & WHITELISTED) || (new_character.species && (chosen_language.name in new_character.species.secondary_langs)))
-				new_character.add_language("[client.prefs.language]")
+		for(var/lang in client.prefs.alternate_languages)
+			var/datum/language/chosen_language = all_languages[lang]
+			if(chosen_language)
+				if(!config.usealienwhitelist || !(chosen_language.flags & WHITELISTED) || is_alien_whitelisted(src, lang) || has_admin_rights() \
+					|| (new_character.species && (chosen_language.name in new_character.species.secondary_langs)))
+					new_character.add_language(lang)
 
 		if(ticker.random_players)
 			new_character.gender = pick(MALE, FEMALE)
@@ -452,8 +436,7 @@
 			client.prefs.randomize_appearance_for(new_character)
 		else
 			client.prefs.copy_to(new_character)
-		if(client.prefs.dummy)
-			qdel(client.prefs.dummy)
+
 		src << sound(null, repeat = 0, wait = 0, volume = 85, channel = 1) // MAD JAMS cant last forever yo
 
 		if(mind)

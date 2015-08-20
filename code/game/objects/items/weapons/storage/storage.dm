@@ -335,7 +335,6 @@
 	..()
 
 	if(isrobot(user))
-		user << "<span class='warning'>You're a robot. No.</span>"
 		return //Robots can't interact with storage items.
 
 	if(!can_be_inserted(W))

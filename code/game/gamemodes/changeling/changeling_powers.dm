@@ -193,7 +193,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 		src << "<span class='warning'>This creature's DNA is ruined beyond useability!</span>"
 		return
 
-	if(!G.state == GRAB_KILL)
+	if(G.state != GRAB_KILL)
 		src << "<span class='warning'>We must have a tighter grip to absorb this creature.</span>"
 		return
 

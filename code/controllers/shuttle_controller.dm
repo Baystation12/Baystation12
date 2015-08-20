@@ -203,7 +203,7 @@ var/global/datum/shuttle_controller/shuttle_controller
 
 	//Skipjack.
 	var/datum/shuttle/multi_shuttle/VS = new/datum/shuttle/multi_shuttle()
-	VS.origin = locate(/area/shuttle/skipjack/station)
+	VS.origin = locate(/area/skipjack_station/start)
 
 	VS.destinations = list(
 		"Fore Starboard Solars" = locate(/area/skipjack_station/northeast_solars),
@@ -213,7 +213,7 @@ var/global/datum/shuttle_controller/shuttle_controller
 		"Mining Station" = locate(/area/skipjack_station/mining)
 		)
 
-	VS.announcer = "NSV Icarus"
+	VS.announcer = "NDV Icarus"
 	VS.arrival_message = "Attention, Exodus, we just tracked a small target bypassing our defensive perimeter. Can't fire on it without hitting the station - you've got incoming visitors, like it or not."
 	VS.departure_message = "Your guests are pulling away, Exodus - moving too fast for us to draw a bead on them. Looks like they're heading out of the system at a rapid clip."
 	VS.interim = locate(/area/skipjack_station/transit)
@@ -244,7 +244,7 @@ var/global/datum/shuttle_controller/shuttle_controller
 		"Arrivals dock" = "nuke_shuttle_dock_airlock",
 		)
 
-	MS.announcer = "NSV Icarus"
+	MS.announcer = "NDV Icarus"
 	MS.arrival_message = "Attention, Exodus, you have a large signature approaching the station - looks unarmed to surface scans. We're too far out to intercept - brace for visitors."
 	MS.departure_message = "Your visitors are on their way out of the system, Exodus, burning delta-v like it's nothing. Good riddance."
 	MS.interim = locate(/area/syndicate_station/transit)

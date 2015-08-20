@@ -21,7 +21,7 @@
 		return "I cannot feed on other slimes..."
 	if (!Adjacent(M))
 		return "This subject is too far away..."
-	if (istype(M, /mob/living/carbon) && M.getCloneLoss() > 150 || istype(M, /mob/living/simple_animal) && M.stat == DEAD)
+	if (istype(M, /mob/living/carbon) && M.getCloneLoss() >= M.maxHealth * 1.5 || istype(M, /mob/living/simple_animal) && M.stat == DEAD)
 		return "This subject does not have an edible life energy..."
 	for(var/mob/living/carbon/slime/met in view())
 		if(met.Victim == M && met != src)

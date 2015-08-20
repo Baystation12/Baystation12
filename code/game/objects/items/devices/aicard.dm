@@ -46,7 +46,7 @@
 		ui.open()
 		ui.set_auto_update(1)
 
-/obj/item/device/aicard/Topic(href, href_list, nowindow, state)
+/obj/item/device/aicard/Topic(href, href_list, state)
 	if(..())
 		return 1
 
@@ -110,6 +110,7 @@
 
 	ai.loc = src
 	ai.cancel_camera()
+	ai.destroy_eyeobj(src)
 	ai.control_disabled = 1
 	ai.aiRestorePowerRoutine = 0
 	carded_ai = ai

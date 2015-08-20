@@ -17,11 +17,20 @@
 		germ_level++
 
 /mob/living/carbon/Destroy()
+	qdel(ingested)
+	qdel(touching)
+	// We don't qdel(bloodstr) because it's the same as qdel(reagents)
 	for(var/guts in internal_organs)
 		qdel(guts)
 	for(var/food in stomach_contents)
 		qdel(food)
 	return ..()
+
+/mob/living/carbon/rejuvenate()
+	bloodstr.clear_reagents()
+	ingested.clear_reagents()
+	touching.clear_reagents()
+	..()
 
 /mob/living/carbon/Move(NewLoc, direct)
 	. = ..()
@@ -138,11 +147,11 @@
 	src.hand = !( src.hand )
 	if(hud_used.l_hand_hud_object && hud_used.r_hand_hud_object)
 		if(hand)	//This being 1 means the left hand is in use
-			hud_used.l_hand_hud_object.icon_state = "hand_active"
-			hud_used.r_hand_hud_object.icon_state = "hand_inactive"
+			hud_used.l_hand_hud_object.icon_state = "l_hand_active"
+			hud_used.r_hand_hud_object.icon_state = "r_hand_inactive"
 		else
-			hud_used.l_hand_hud_object.icon_state = "hand_inactive"
-			hud_used.r_hand_hud_object.icon_state = "hand_active"
+			hud_used.l_hand_hud_object.icon_state = "l_hand_inactive"
+			hud_used.r_hand_hud_object.icon_state = "r_hand_active"
 	/*if (!( src.hand ))
 		src.hands.set_dir(NORTH)
 	else
@@ -251,7 +260,7 @@
 			var/show_ssd
 			var/mob/living/carbon/human/H = src
 			if(istype(H)) show_ssd = H.species.show_ssd
-			if(show_ssd && (!client || !key || player_logged))
+			if(show_ssd && !client && !aghosted)
 				M.visible_message("<span class='notice'>[M] shakes [src] trying to wake [t_him] up!</span>", \
 				"<span class='notice'>You shake [src], but they do not respond... Maybe they have S.S.D?</span>")
 			else if(lying || src.sleeping)
@@ -261,8 +270,9 @@
 				M.visible_message("<span class='notice'>[M] shakes [src] trying to wake [t_him] up!</span>", \
 									"<span class='notice'>You shake [src] trying to wake [t_him] up!</span>")
 			else
-				if(istype(H))
-					H.species.hug(H,src)
+				var/mob/living/carbon/human/hugger = M
+				if(istype(hugger))
+					hugger.species.hug(hugger,src)
 				else
 					M.visible_message("<span class='notice'>[M] hugs [src] to make [t_him] feel better!</span>", \
 								"<span class='notice'>You hug [src] to make [t_him] feel better!</span>")
@@ -308,22 +318,6 @@
 
 
 //Throwing stuff
-
-/mob/living/carbon/proc/toggle_throw_mode()
-	if (src.in_throw_mode)
-		throw_mode_off()
-	else
-		throw_mode_on()
-
-/mob/living/carbon/proc/throw_mode_off()
-	src.in_throw_mode = 0
-	if(src.throw_icon) //in case we don't have the HUD and we use the hotkey
-		src.throw_icon.icon_state = "act_throw_off"
-
-/mob/living/carbon/proc/throw_mode_on()
-	src.in_throw_mode = 1
-	if(src.throw_icon)
-		src.throw_icon.icon_state = "act_throw_on"
 
 /mob/proc/throw_item(atom/target)
 	return
@@ -381,8 +375,8 @@
 
 /mob/living/carbon/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	..()
-	var/temp_inc = max(BODYTEMP_HEATING_MAX*(1-get_heat_protection()), 0)
-	bodytemperature = min(bodytemperature + temp_inc, exposed_temperature)
+	var/temp_inc = max(min(BODYTEMP_HEATING_MAX*(1-get_heat_protection()), exposed_temperature - bodytemperature), 0)
+	bodytemperature += temp_inc
 
 /mob/living/carbon/can_use_hands()
 	if(handcuffed)
@@ -452,7 +446,7 @@
 	if(istype(AM, /mob/living/carbon) && prob(10))
 		src.spread_disease_to(AM, "Contact")
 
-/mob/living/carbon/can_use_vents()
+/mob/living/carbon/cannot_use_vents()
 	return
 
 /mob/living/carbon/slip(var/slipped_on,stun_duration=8)

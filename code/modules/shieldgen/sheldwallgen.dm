@@ -80,10 +80,10 @@
 	return 1
 
 /obj/machinery/shieldwallgen/process()
-	spawn(100)
-		power()
-		if(power)
-			storedpower -= 2500 //the generator post itself uses some power
+	power()
+	if(power)
+		storedpower -= 2500 //the generator post itself uses some power
+
 	if(storedpower >= max_stored_power)
 		storedpower = max_stored_power
 	if(storedpower <= 0)

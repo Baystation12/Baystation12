@@ -351,7 +351,7 @@ update_flag
 				"\[N2O\]" = "redws", \
 				"\[N2\]" = "red", \
 				"\[O2\]" = "blue", \
-				"\[Toxin (Bio)\]" = "orange", \
+				"\[Phoron\]" = "orange", \
 				"\[CO2\]" = "black", \
 				"\[Air\]" = "grey", \
 				"\[CAUTION\]" = "yellow", \

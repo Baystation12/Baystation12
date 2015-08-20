@@ -1,7 +1,8 @@
 /obj/machinery/computer/HolodeckControl
 	name = "holodeck control console"
 	desc = "A computer used to control a nearby holodeck."
-	icon_state = "holocontrol"
+	icon_keyboard = "tech_key"
+	icon_screen = "holocontrol"
 
 	use_power = 1
 	active_power_usage = 8000 //8kW for the scenery + 500W per holoitem
@@ -281,7 +282,7 @@
 	if(HP.ambience)
 		linkedholodeck.forced_ambience = HP.ambience
 	else
-		linkedholodeck.forced_ambience = initial(linkedholodeck.ambience)
+		linkedholodeck.forced_ambience = list()
 
 	for(var/mob/living/M in mobs_in_area(linkedholodeck))
 		if(M.mind)

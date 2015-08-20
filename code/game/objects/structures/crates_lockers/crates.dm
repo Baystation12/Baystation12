@@ -154,14 +154,19 @@
 		user << "<span class='warning'>The crate appears to be broken.</span>"
 		return
 	if(src.allowed(user))
-		src.locked = !src.locked
-		for(var/mob/O in viewers(user, 3))
-			if((O.client && !( O.blinded )))
-				O << "<span class='notice'>The crate has been [locked ? null : "un"]locked by [user].</span>"
-		overlays.Cut()
-		overlays += locked ? redlight : greenlight
+		set_locked(!locked, user)
 	else
 		user << "<span class='notice'>Access Denied</span>"
+
+/obj/structure/closet/crate/secure/proc/set_locked(var/newlocked, mob/user = null)
+	if(locked == newlocked) return
+	
+	locked = newlocked
+	if(user)
+		for(var/mob/O in viewers(user, 3))
+			O.show_message( "<span class='notice'>The crate has been [locked ? null : "un"]locked by [user].</span>", 1)
+	overlays.Cut()
+	overlays += locked ? redlight : greenlight
 
 /obj/structure/closet/crate/secure/verb/verb_togglelock()
 	set src in oview(1) // One square distance

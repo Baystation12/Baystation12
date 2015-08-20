@@ -17,7 +17,7 @@
 	src.whitelist = species_whitelist
 	src.blacklist = species_blacklist
 
-/datum/nano_module/appearance_changer/Topic(ref, href_list, var/nowindow, var/datum/topic_state/state = default_state)
+/datum/nano_module/appearance_changer/Topic(ref, href_list, var/datum/topic_state/state = default_state)
 	if(..())
 		return 1
 
@@ -155,5 +155,5 @@
 	if(!valid_species.len)
 		valid_species = owner.generate_valid_species(check_whitelist, whitelist, blacklist)
 	if(!valid_hairstyles.len || !valid_facial_hairstyles.len)
-		valid_hairstyles = owner.generate_valid_hairstyles()
+		valid_hairstyles = owner.generate_valid_hairstyles(check_gender = 0)
 		valid_facial_hairstyles = owner.generate_valid_facial_hairstyles()

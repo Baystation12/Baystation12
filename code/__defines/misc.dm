@@ -12,7 +12,7 @@
 #define INVISIBILITY_EYE		          61
 
 #define SEE_INVISIBLE_LIVING              25
-#define SEE_INVISIBLE_OBSERVER_NOLIGHTING 15
+#define SEE_INVISIBLE_NOLIGHTING 15
 #define SEE_INVISIBLE_LEVEL_ONE           35
 #define SEE_INVISIBLE_LEVEL_TWO           45
 #define SEE_INVISIBLE_CULT		          60
@@ -63,15 +63,23 @@
 #define 	  LIFE_HUD 10 // STATUS_HUD that only reports dead or alive
 
 //some colors
-#define COLOR_RED    "#FF0000"
-#define COLOR_GREEN  "#00FF00"
-#define COLOR_BLUE   "#0000FF"
-#define COLOR_CYAN   "#00FFFF"
-#define COLOR_PINK   "#FF00FF"
-#define COLOR_YELLOW "#FFFF00"
-#define COLOR_ORANGE "#FF9900"
 #define COLOR_WHITE  "#FFFFFF"
+#define COLOR_SILVER "#C0C0C0"
+#define COLOR_GRAY   "#808080"
 #define COLOR_BLACK  "#000000"
+#define COLOR_RED    "#FF0000"
+#define COLOR_MAROON "#800000"
+#define COLOR_YELLOW "#FFFF00"
+#define COLOR_OLIVE  "#808000"
+#define COLOR_LIME   "#00FF00"
+#define COLOR_GREEN  "#008000"
+#define COLOR_CYAN   "#00FFFF"
+#define COLOR_TEAL   "#008080"
+#define COLOR_BLUE   "#0000FF"
+#define COLOR_NAVY   "#000080"
+#define COLOR_PINK   "#FF00FF"
+#define COLOR_PURPLE "#800080"
+#define COLOR_ORANGE "#FF9900"
 
 //	Shuttles.
 
@@ -117,8 +125,9 @@
 #define DOOR_OPEN_LAYER 2.7		//Under all objects if opened. 2.7 due to tables being at 2.6
 #define DOOR_CLOSED_LAYER 3.1	//Above most items if closed
 #define LIGHTING_LAYER 11
-#define OBFUSCATION_LAYER 14	//Where images covering the view for eyes are put
-#define SCREEN_LAYER 17			//Mob HUD/effects layer
+#define HUD_LAYER 20			//Above lighting, but below obfuscation. For in-game HUD effects (whereas SCREEN_LAYER is for abstract/OOC things like inventory slots)
+#define OBFUSCATION_LAYER 21	//Where images covering the view for eyes are put
+#define SCREEN_LAYER 22			//Mob HUD/effects layer
 
 // Convoluted setup so defines can be supplied by Bay12 main server compile script.
 // Should still work fine for people jamming the icons into their repo.
@@ -154,3 +163,7 @@
 #define BOMBCAP_HEAVY_RADIUS (max_explosion_range/2)
 #define BOMBCAP_LIGHT_RADIUS max_explosion_range
 #define BOMBCAP_FLASH_RADIUS (max_explosion_range*1.5)
+
+// Special return values from bullet_act(). Positive return values are already used to indicate the blocked level of the projectile.
+#define PROJECTILE_CONTINUE   -1 //if the projectile should continue flying after calling bullet_act()
+#define PROJECTILE_FORCE_MISS -2 //if the projectile should treat the attack as a miss (suppresses attack and admin logs) - only applies to mobs.

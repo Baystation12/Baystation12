@@ -25,7 +25,7 @@
 /obj/structure/girder/bullet_act(var/obj/item/projectile/Proj)
 	//Girders only provide partial cover. There's a chance that the projectiles will just pass through. (unless you are trying to shoot the girder)
 	if(Proj.original != src && !prob(cover))
-		return -1 //pass through
+		return PROJECTILE_CONTINUE //pass through
 
 	//Tasers and the like should not damage girders.
 	if(!(Proj.damage_type == BRUTE || Proj.damage_type == BURN))
@@ -43,6 +43,7 @@
 	return
 
 /obj/structure/girder/proc/reset_girder()
+	anchored = 1
 	cover = initial(cover)
 	health = min(health,initial(health))
 	state = 0
@@ -108,11 +109,11 @@
 
 	else if(istype(W, /obj/item/stack/material))
 
-		var/obj/item/stack/material/S = W
+		var/obj/item/stack/S = W
 		if(S.get_amount() < 2)
 			return ..()
 
-		var/material/M = name_to_material[S.default_type]
+		var/material/M = S.get_material()
 		if(!istype(M))
 			return ..()
 
@@ -183,7 +184,7 @@
 		user << "There is not enough material here to reinforce the girder."
 		return
 
-	var/material/M = name_to_material[S.default_type]
+	var/material/M = S.get_material()
 	if(!istype(M) || M.integrity < 50)
 		user << "You cannot reinforce \the [src] with that; it is too soft."
 		return

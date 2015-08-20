@@ -2,9 +2,9 @@
 	name = "flash"
 	desc = "Used for blinding and being an asshole."
 	icon_state = "flash"
-	item_state = "flash"
+	item_state = "flashtool"
 	throwforce = 5
-	w_class = 2.0
+	w_class = 2
 	throw_speed = 4
 	throw_range = 10
 	flags = CONDUCT

@@ -215,7 +215,7 @@
 	return
 
 /mob/living/proc/adjust_fire_stacks(add_fire_stacks) //Adjusting the amount of fire_stacks we have on person
-    fire_stacks = Clamp(fire_stacks + add_fire_stacks, min = FIRE_MIN_STACKS, max = FIRE_MAX_STACKS)
+    fire_stacks = Clamp(fire_stacks + add_fire_stacks, FIRE_MIN_STACKS, FIRE_MAX_STACKS)
 
 /mob/living/proc/handle_fire()
 	if(fire_stacks < 0)
@@ -378,7 +378,3 @@
 	src.attack_log += "\[[time_stamp()]\]<font color='orange'> Got knifed by [user.name] ([user.ckey]) with [W.name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(W.damtype)])</font>"
 	msg_admin_attack("[key_name(user)] knifed [key_name(src)] with [W.name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(W.damtype)])" )
 	return
-
-/mob/living/incapacitated()
-	if(stat || paralysis || stunned || weakened || restrained())
-		return 1

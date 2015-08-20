@@ -19,7 +19,7 @@ mob/proc/airflow_stun()
 mob/living/silicon/airflow_stun()
 	return
 
-mob/living/carbon/metroid/airflow_stun()
+mob/living/carbon/slime/airflow_stun()
 	return
 
 mob/living/carbon/human/airflow_stun()
@@ -241,7 +241,7 @@ mob/living/carbon/human/airflow_hit(atom/A)
 zone/proc/movables()
 	. = list()
 	for(var/turf/T in contents)
-		for(var/atom/A in T)
-			if(istype(A, /obj/effect) || istype(A, /mob/aiEye))
+		for(var/atom/movable/A in T)
+			if(!A.simulated || A.anchored || istype(A, /obj/effect) || istype(A, /mob/eye))
 				continue
 			. += A

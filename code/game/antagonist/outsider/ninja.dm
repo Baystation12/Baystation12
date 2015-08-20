@@ -11,6 +11,7 @@ var/datum/antagonist/ninja/ninjas
 	flags = ANTAG_OVERRIDE_JOB | ANTAG_CLEAR_EQUIPMENT | ANTAG_CHOOSE_NAME | ANTAG_RANDSPAWN | ANTAG_VOTABLE | ANTAG_SET_APPEARANCE
 	max_antags = 1
 	max_antags_round = 1
+	id_type = /obj/item/weapon/card/id/syndicate
 
 /datum/antagonist/ninja/New()
 	..()
@@ -101,18 +102,15 @@ var/datum/antagonist/ninja/ninjas
 	player.equip_to_slot_or_del(R, slot_l_ear)
 	player.equip_to_slot_or_del(new /obj/item/clothing/under/color/black(player), slot_w_uniform)
 	player.equip_to_slot_or_del(new /obj/item/device/flashlight(player), slot_belt)
-	var/obj/item/weapon/rig/light/ninja/ninjasuit = new(player)
+	create_id("Infiltrator", player)
+
+	var/obj/item/weapon/rig/light/ninja/ninjasuit = new(get_turf(player))
+	ninjasuit.seal_delay = 0
+	player.put_in_hands(ninjasuit)
 	player.equip_to_slot_or_del(ninjasuit,slot_back)
-
 	if(ninjasuit)
-		// Make sure the ninja can actually equip the suit.
-		if(player.dna && player.dna.unique_enzymes)
-			ninjasuit.locked_dna = player.dna.unique_enzymes
-			player << "<span class='warning'>Suit hardware locked to your DNA hash.</span>"
-		else
-			ninjasuit.req_access = list()
-
 		ninjasuit.toggle_seals(src,1)
+		ninjasuit.seal_delay = initial(ninjasuit.seal_delay)
 
 	if(istype(player.back,/obj/item/weapon/rig))
 		var/obj/item/weapon/rig/rig = player.back

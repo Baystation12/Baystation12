@@ -10,7 +10,7 @@
 
 	mob_bump_flag = ROBOT
 	mob_swap_flags = ROBOT|MONKEY|SLIME|SIMPLE_ANIMAL
-	mob_push_flags = ALLMOBS //trundle trundle
+	mob_push_flags = ~HEAVY //trundle trundle
 
 	var/lights_on = 0 // Is our integrated light on?
 	var/used_power_this_tick = 0
@@ -182,7 +182,7 @@
 	aiCamera = new/obj/item/device/camera/siliconcam/robot_camera(src)
 
 	laws = new /datum/ai_laws/syndicate_override
-	module = new /obj/item/weapon/robot_module/syndicate(src)
+	new /obj/item/weapon/robot_module/syndicate(src)
 
 	radio.keyslot = new /obj/item/device/encryptionkey/syndicate(radio)
 	radio.recalculateChannels()
@@ -263,7 +263,7 @@
 		return
 
 	var/module_type = robot_modules[modtype]
-	module = new module_type(src)
+	new module_type(src)
 
 	hands.icon_state = lowertext(modtype)
 	feedback_inc("cyborg_[lowertext(modtype)]",1)
@@ -302,23 +302,7 @@
 		camera.c_tag = changed_name
 
 	if(!custom_sprite) //Check for custom sprite
-		var/file = file2text("config/custom_sprites.txt")
-		var/lines = text2list(file, "\n")
-
-		for(var/line in lines)
-		// split & clean up
-			var/list/Entry = text2list(line, "-")
-			for(var/i = 1 to Entry.len)
-				Entry[i] = trim(Entry[i])
-
-			if(Entry.len < 2)
-				continue;
-
-			if(Entry[1] == src.ckey && Entry[2] == src.real_name) //They're in the list? Custom sprite time, var and icon change required
-				custom_sprite = 1
-				icon = CUSTOM_ITEM_SYNTH
-				if(icon_state == "robot")
-					icon_state = "[src.ckey]-Standard"
+		set_custom_sprite()
 
 	//Flavour text.
 	if(client)
@@ -437,8 +421,7 @@
 // update the status screen display
 /mob/living/silicon/robot/Stat()
 	..()
-	statpanel("Status")
-	if (client.statpanel == "Status")
+	if (statpanel("Status"))
 		show_cell_power()
 		show_jetpack_pressure()
 		stat(null, text("Lights: [lights_on ? "ON" : "OFF"]"))
@@ -1013,7 +996,7 @@
 		if(ROBOT_NOTIFICATION_NEW_MODULE) //New Module
 			connected_ai << "<br><br><span class='notice'>NOTICE - [braintype] module change detected: [name] has loaded the [first_arg].</span><br>"
 		if(ROBOT_NOTIFICATION_MODULE_RESET)
-			connected_ai << "<br><br><span class='notice'>NOTICE - [braintype] module reset detected: [name] has unladed the [first_arg].</span><br>"
+			connected_ai << "<br><br><span class='notice'>NOTICE - [braintype] module reset detected: [name] has unloaded the [first_arg].</span><br>"
 		if(ROBOT_NOTIFICATION_NEW_NAME) //New Name
 			if(first_arg != second_arg)
 				connected_ai << "<br><br><span class='notice'>NOTICE - [braintype] reclassification detected: [first_arg] is now designated as [second_arg].</span><br>"
@@ -1065,25 +1048,25 @@
 				laws = new /datum/ai_laws/syndicate_override
 				var/time = time2text(world.realtime,"hh:mm:ss")
 				lawchanges.Add("[time] <B>:</B> [user.name]([user.key]) emagged [name]([key])")
-				set_zeroth_law("Only [user.real_name] and people he designates as being such are operatives.")
+				set_zeroth_law("Only [user.real_name] and people \he designates as being such are operatives.")
 				. = 1
 				spawn()
-					src << "\red ALERT: Foreign software detected."
+					src << "<span class='danger'>ALERT: Foreign software detected.</span>"
 					sleep(5)
-					src << "\red Initiating diagnostics..."
+					src << "<span class='danger'>Initiating diagnostics...</span>"
 					sleep(20)
-					src << "\red SynBorg v1.7.1 loaded."
+					src << "<span class='danger'>SynBorg v1.7.1 loaded.</span>"
 					sleep(5)
-					src << "\red LAW SYNCHRONISATION ERROR"
+					src << "<span class='danger'>LAW SYNCHRONISATION ERROR</span>"
 					sleep(5)
-					src << "\red Would you like to send a report to NanoTraSoft? Y/N"
+					src << "<span class='danger'>Would you like to send a report to NanoTraSoft? Y/N</span>"
 					sleep(10)
-					src << "\red > N"
+					src << "<span class='danger'>> N</span>"
 					sleep(20)
-					src << "\red ERRORERRORERROR"
+					src << "<span class='danger'>ERRORERRORERROR</span>"
 					src << "<b>Obey these laws:</b>"
 					laws.show_laws(src)
-					src << "\red \b ALERT: [user.real_name] is your new master. Obey your new laws and his commands."
+					src << "<span class='danger'>ALERT: [user.real_name] is your new master. Obey your new laws and his commands.</span>"
 					if(src.module)
 						var/rebuild = 0
 						for(var/obj/item/weapon/pickaxe/borgdrill/D in src.module.modules)

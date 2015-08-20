@@ -305,17 +305,8 @@
 	desc = "Cargo Office"
 	region = ACCESS_REGION_SUPPLY
 
-/var/const/access_mint = 51
-/datum/access/mint
-	id = access_mint
-	desc = "Mint"
-	region = ACCESS_REGION_SUPPLY
-
-/var/const/access_mint_vault = 52
-/datum/access/mint_vault
-	id = access_mint_vault
-	desc = "Mint Vault"
-	access_type = ACCESS_TYPE_NONE
+// /var/const/free_access_id = 51
+// /var/const/free_access_id = 52
 
 /var/const/access_heads_vault = 53
 /datum/access/heads_vault

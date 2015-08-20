@@ -4,7 +4,7 @@
 	icon_state = "secbot0"
 	maxHealth = 50
 	health = 50
-	req_access = list(access_security, access_forensics_lockers)
+	req_one_access = list(access_security, access_forensics_lockers)
 	botcard_access = list(access_security, access_sec_doors, access_forensics_lockers, access_morgue, access_maint_tunnels, access_court)
 
 	var/mob/target
@@ -30,7 +30,7 @@
 
 	var/obj/secbot_listener/listener = null
 	var/beacon_freq = 1445			// Navigation beacon frequency
-	var/control_freq = AI_FREQ		// Bot control frequency
+	var/control_freq = BOT_FREQ		// Bot control frequency
 	var/list/path = list()
 	var/frustration = 0
 	var/turf/patrol_target = null	// This is where we are headed
