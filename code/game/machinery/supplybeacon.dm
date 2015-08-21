@@ -81,7 +81,6 @@
 	set_light(3, 3, "#00CCAA")
 	icon_state = "beacon_active"
 	use_power = 1
-	machines |= src
 	if(user) user << "<span class='notice'>You activate the beacon. The supply drop will be dispatched soon.</span>"
 
 /obj/machinery/power/supply_beacon/proc/deactivate(var/mob/user, var/permanent)

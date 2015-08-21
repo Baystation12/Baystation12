@@ -83,7 +83,7 @@
 		var/turf/T = locate((origin_x + n_ceil(limit_x / 2)-1), (origin_y + n_ceil(limit_y / 2)-1), origin_z)
 		if(istype(T))
 			explosion(T, placement_explosion_dev, placement_explosion_heavy, placement_explosion_light, placement_explosion_flash)
-			sleep(5) // Let the explosion finish proccing before we ChangeTurf(), otherwise it might destroy our spawned objects.
+			sleep(15) // Let the explosion finish proccing before we ChangeTurf(), otherwise it might destroy our spawned objects.
 	return ..()
 
 /datum/random_map/droppod/get_appropriate_path(var/value)
@@ -111,14 +111,9 @@
 
 	// Splatter anything under us that survived the explosion.
 	if(value != SD_EMPTY_TILE && T.contents.len)
-		for(var/atom/A in T)
-			if(!A.simulated || istype(A, /mob/dead))
-				continue
-			if(istype(A, /mob/living))
-				var/mob/living/M = A
-				M.gib()
-			else
-				qdel(A)
+		for(var/atom/movable/AM in T)
+			if(AM.simulated && !istype(AM, /mob/dead))
+				qdel(AM)
 
 	// Also spawn doors and loot.
 	if(value == SD_DOOR_TILE)
