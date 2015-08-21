@@ -191,23 +191,6 @@
 	icon_state = "reinforced"
 	reinforcing = 0
 
-/obj/structure/girder/verb/reinforce_with_material_verb()
-	set name = "Reinforce girder"
-	set desc = "Reinforce a girder with metal."
-	set src in view(1)
-
-	var/mob/living/user = usr
-	if(!istype(user) || !(user.l_hand || user.r_hand) || !Adjacent(user))
-		return
-
-	var/obj/item/stack/material/S = user.l_hand
-	if(!istype(S))
-		S = user.r_hand
-	if(!istype(S))
-		user << "You cannot plate \the [src] with that."
-		return
-	reinforce_with_material(S, user)
-
 /obj/structure/girder/proc/dismantle()
 	new /obj/item/stack/material/steel(get_turf(src))
 	qdel(src)

@@ -15,4 +15,4 @@ author: HarpyEagle
 delete-after: True
 
 changes: 
-  - tweak: "Girders can now be reinforced by using a screwdriver on the girder before applying the material sheets. Use a screwdriver again to cancel reinforcing."
+  - tweak: "Girders are now reinforced by using a screwdriver on the girder before applying the material sheets. Use a screwdriver again instead to cancel reinforcing."
