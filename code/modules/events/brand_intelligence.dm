@@ -47,7 +47,10 @@
 										 "Your money can buy happiness!", \
 										 "Engage direct marketing!", \
 										 "Advertising is legalized lying! But don't let that put you off our great deals!", \
-										 "You don't want to buy anything? Yeah, well I didn't want to buy your mom either."))
+										 "You don't want to buy anything? Yeah, well I didn't want to buy your mom either.", \
+										 "Did you try our new product?  Oh I'm sorry, I didn't mean you!", \
+										 "You have to buy sometime!  It's the law!", \
+										 "REDRUM!"))
 
 /datum/event/brand_intelligence/end()
 	for(var/obj/machinery/vending/infectedMachine in infectedVendingMachines)
