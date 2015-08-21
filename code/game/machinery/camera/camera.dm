@@ -302,6 +302,9 @@
 /obj/machinery/camera/proc/can_see()
 	var/list/see = null
 	var/turf/pos = get_turf(src)
+	if(!pos)
+		return list()
+	
 	if(isXRay())
 		see = range(view_range, pos)
 	else
