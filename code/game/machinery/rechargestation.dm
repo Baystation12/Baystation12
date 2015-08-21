@@ -196,8 +196,9 @@
 	if(icon_update_tick == 0)
 		build_overlays()
 
-/obj/machinery/recharge_station/Bumped(var/mob/AM)
-	move_inside(AM)
+/obj/machinery/recharge_station/Bumped(var/mob/living/silicon/robot/R)
+	if(istype(R))
+		go_in(R)
 
 /obj/machinery/recharge_station/proc/go_out()
 	if(!(occupant))
@@ -207,6 +208,12 @@
 	occupant = null
 	update_icon()
 	return
+
+/obj/machinery/recharge_station/proc/go_in(var/mob/living/silicon/robot/R)
+	R.reset_view(src)
+	R.loc = src
+	occupant = R
+	update_icon()
 
 /obj/machinery/recharge_station/verb/move_eject()
 	set category = "Object"
@@ -235,8 +242,5 @@
 		usr << "<span class='notice'>Without a powercell, you can't be recharged.</span>"
 		return
 
-	usr.reset_view(src)
-	usr.loc = src
-	occupant = usr
+	go_in(usr)
 	add_fingerprint(usr)
-	update_icon()
