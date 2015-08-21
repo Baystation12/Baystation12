@@ -54,7 +54,7 @@
 	switch(M.a_intent)
 		if(I_HELP)
 			if(istype(H) && health < config.health_threshold_crit && health > config.health_threshold_dead)
-				if(H.species_flags & IS_SYNTHETIC) //No CPR on IPC's
+				if(H.species.flags & IS_SYNTHETIC) //No CPR on IPC's
 					return 0
 				else
 					if((H.head && (H.head.flags & HEADCOVERSMOUTH)) || (H.wear_mask && (H.wear_mask.flags & MASKCOVERSMOUTH)))
