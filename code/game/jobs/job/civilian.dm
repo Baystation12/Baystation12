@@ -311,7 +311,7 @@
 	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2
-	supervisors = "Nanotrasen officials and Corporate Regulations"
+	supervisors = "company officials and Corporate Regulations"
 	selection_color = "#dddddd"
 	economic_modifier = 7
 	access = list(access_lawyer, access_sec_doors, access_maint_tunnels, access_heads)
