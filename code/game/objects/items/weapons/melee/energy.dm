@@ -5,6 +5,7 @@
 	var/active_w_class
 	sharp = 0
 	edge = 0
+	armor_penetration = 50
 	flags = NOBLOODY
 
 /obj/item/weapon/melee/energy/proc/activate(mob/living/user)
@@ -173,7 +174,8 @@
 	name = "energy blade"
 	desc = "A concentrated beam of energy in the shape of a blade. Very stylish... and lethal."
 	icon_state = "blade"
-	force = 70.0//Normal attacks deal very high damage.
+	force = 40 //Normal attacks deal very high damage - about the same as wielded fire axe
+	armor_penetration = 100
 	sharp = 1
 	edge = 1
 	anchored = 1    // Never spawned outside of inventory, should be fine.

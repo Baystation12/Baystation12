@@ -10,24 +10,36 @@
 	1 - halfblock
 	2 - fullblock
 */
-/mob/living/proc/run_armor_check(var/def_zone = null, var/attack_flag = "melee", var/absorb_text = null, var/soften_text = null)
+/mob/living/proc/run_armor_check(var/def_zone = null, var/attack_flag = "melee", var/armour_pen = 0, var/absorb_text = null, var/soften_text = null)
+	if(armour_pen >= 100)
+		return 0 //might as well just skip the processing
+
 	var/armor = getarmor(def_zone, attack_flag)
 	var/absorb = 0
+	
+	//Roll armour
 	if(prob(armor))
 		absorb += 1
 	if(prob(armor))
 		absorb += 1
+	
+	//Roll penetration
+	if(prob(armour_pen))
+		absorb -= 1
+	if(prob(armour_pen))
+		absorb -= 1
+	
 	if(absorb >= 2)
 		if(absorb_text)
 			show_message("[absorb_text]")
 		else
-			show_message("\red Your armor absorbs the blow!")
+			show_message("<span class='warning'>Your armor absorbs the blow!</span>")
 		return 2
 	if(absorb == 1)
 		if(absorb_text)
 			show_message("[soften_text]",4)
 		else
-			show_message("\red Your armor softens the blow!")
+			show_message("<span class='warning'>Your armor softens the blow!</span>")
 		return 1
 	return 0
 
@@ -64,7 +76,7 @@
 		return
 
 	//Armor
-	var/absorb = run_armor_check(def_zone, P.check_armour)
+	var/absorb = run_armor_check(def_zone, P.check_armour, P.armor_penetration)
 	var/proj_sharp = is_sharp(P)
 	var/proj_edge = has_edge(P)
 	if ((proj_sharp || proj_edge) && prob(getarmor(def_zone, P.check_armour)))
