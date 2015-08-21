@@ -32,8 +32,8 @@
 	if(client.buildmode)
 		build_click(src, client.buildmode, params, A)
 		return
-	if(world.time <= next_move) return
-	next_move = world.time + 8
+	if(!canClick()) return
+	setClickCooldown(4)
 	// You are responsible for checking config.ghost_interaction when you override this function
 	// Not all of them require checking, see below
 	A.attack_ghost(src)

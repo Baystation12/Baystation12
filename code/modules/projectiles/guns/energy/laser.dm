@@ -9,8 +9,7 @@
 	force = 10
 	origin_tech = list(TECH_COMBAT = 3, TECH_MAGNET = 2)
 	matter = list(DEFAULT_WALL_MATERIAL = 2000)
-	projectile_type = /obj/item/projectile/beam
-	fire_delay = 1 //rapid fire
+	projectile_type = /obj/item/projectile/beam/midlaser
 
 /obj/item/weapon/gun/energy/laser/mounted
 	self_recharge = 1

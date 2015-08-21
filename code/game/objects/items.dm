@@ -172,7 +172,6 @@
 	else
 		if(isliving(src.loc))
 			return
-		user.next_move = max(user.next_move+2,world.time + 2)
 	user.put_in_active_hand(src)
 	return
 
@@ -608,9 +607,9 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 
 	return
 
-
 /obj/item/proc/pwr_drain()
 	return 0 // Process Kill
 
 /obj/item/proc/resolve_attackby(atom/A, mob/source)
 	return A.attackby(src,source)
+

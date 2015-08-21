@@ -139,6 +139,7 @@ var/list/gamemode_cache = list()
 
 	var/welder_vision = 1
 	var/generate_asteroid = 0
+	var/no_click_cooldown = 0
 
 	//Used for modifying movement speed for mobs.
 	//Unversal modifiers
@@ -327,6 +328,9 @@ var/list/gamemode_cache = list()
 
 				if ("generate_asteroid")
 					config.generate_asteroid = 1
+
+				if ("no_click_cooldown")
+					config.no_click_cooldown = 1
 
 				if("allow_admin_ooccolor")
 					config.allow_admin_ooccolor = 1

@@ -186,6 +186,7 @@
 			src.bugged = 1
 
 	else if(W.damtype == BRUTE || W.damtype == BURN) //bashing cameras
+		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		if (W.force >= src.toughness)
 			user.do_attack_animation(src)
 			visible_message("<span class='warning'><b>[src] has been [pick(W.attack_verb)] with [W] by [user]!</b></span>")
@@ -301,6 +302,9 @@
 /obj/machinery/camera/proc/can_see()
 	var/list/see = null
 	var/turf/pos = get_turf(src)
+	if(!pos)
+		return list()
+	
 	if(isXRay())
 		see = range(view_range, pos)
 	else
