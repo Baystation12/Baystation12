@@ -951,9 +951,7 @@
 					spawn(rand(20,50))
 						client.dir = 1
 
-			hallucination -= 2
-			if(hallucination < 0)
-				hallucination = 0
+			hallucination = max(0, hallucination - 2)
 		else
 			for(var/atom/a in hallucinations)
 				qdel(a)
