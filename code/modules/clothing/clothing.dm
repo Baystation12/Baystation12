@@ -170,7 +170,7 @@ BLIND     // can't see anything
 	name = "glasses"
 	icon = 'icons/obj/clothing/glasses.dmi'
 	w_class = 2.0
-	flags = GLASSESCOVERSEYES
+	body_parts_covered = EYES
 	slot_flags = SLOT_EYES
 	var/vision_flags = 0
 	var/darkness_view = 0//Base human is 2

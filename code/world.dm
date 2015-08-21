@@ -84,7 +84,7 @@ var/global/datum/global_init/init = new ()
 		// it's brute-forcey, but frankly the alternative is a mine turf rewrite.
 		for(var/turf/simulated/mineral/M in world) // Ugh.
 			M.updateMineralOverlays()
-		for(var/turf/simulated/floor/plating/airless/asteroid/M in world) // Uuuuuugh.
+		for(var/turf/simulated/floor/asteroid/M in world) // Uuuuuugh.
 			M.updateMineralOverlays()
 
 	// Create autolathe recipes, as above.
@@ -208,8 +208,12 @@ var/world_topic_spam_protect_time = world.timeofday
 		if(!C)
 			return "No client with that name on server"
 
-		var/message =	"<font color='red'>IRC-Admin PM from <b><a href='?irc_msg=1'>[C.holder ? "IRC-" + input["sender"] : "Administrator"]</a></b>: [input["msg"]]</font>"
-		var/amessage =  "<font color='blue'>IRC-Admin PM from <a href='?irc_msg=1'>IRC-[input["sender"]]</a> to <b>[key_name(C)]</b> : [input["msg"]]</font>"
+		var/rank = input["rank"]
+		if(!rank)
+			rank = "Admin"
+
+		var/message =	"<font color='red'>IRC-[rank] PM from <b><a href='?irc_msg=[input["sender"]]'>IRC-[input["sender"]]</a></b>: [input["msg"]]</font>"
+		var/amessage =  "<font color='blue'>IRC-[rank] PM from <a href='?irc_msg=[input["sender"]]'>IRC-[input["sender"]]</a> to <b>[key_name(C)]</b> : [input["msg"]]</font>"
 
 		C.received_irc_pm = world.time
 		C.irc_admin = input["sender"]

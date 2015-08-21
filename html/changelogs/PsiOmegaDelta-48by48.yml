@@ -1,0 +1,4 @@
+author: PsiOmegaDelta
+delete-after: true
+changes:
+  - rscadd: "Adds the option to set the icon size to 48x48, found under the Icons menu, along with 32x32, 64x64, and stretch to fit."

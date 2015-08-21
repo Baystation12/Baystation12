@@ -37,4 +37,4 @@
 			else if(M.stat == 2 &&  M.client.prefs.toggles & CHAT_GHOSTEARS)
 				if(M.client) M << "<b>[src]</b> transmits, \"[message]\""
 		return 1
-	..(message)
+	return ..(message, 0)

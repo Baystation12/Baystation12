@@ -275,13 +275,6 @@ proc/tg_list2text(list/list, glue=",")
 	if (rights & R_MENTOR)      . += "[seperator]+MENTOR"
 	return .
 
-/proc/ui_style2icon(ui_style)
-	switch (ui_style)
-		if ("old")      return 'icons/mob/screen1_old.dmi'
-		if ("Orange")   return 'icons/mob/screen1_Orange.dmi'
-		if ("Midnight") return 'icons/mob/screen1_Midnight.dmi'
-		else            return 'icons/mob/screen1_White.dmi'
-
 // heat2color functions. Adapted from: http://www.tannerhelland.com/4435/convert-temperature-rgb-algorithm-code/
 /proc/heat2color(temp)
 	return rgb(heat2color_r(temp), heat2color_g(temp), heat2color_b(temp))

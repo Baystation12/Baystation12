@@ -516,28 +516,28 @@
 	id = "mech_rcd"
 	time = 120
 	materials = list(DEFAULT_WALL_MATERIAL = 30000, "phoron" = 25000, "silver" = 20000, "gold" = 20000)
-	req_tech = list(TECH_MATERIAL = 4, TECH_BLUESPACE = 3, TECH_MAGNET = 4, TECH_POWER = 4, TECH_ENGINERING = 4)
+	req_tech = list(TECH_MATERIAL = 4, TECH_BLUESPACE = 3, TECH_MAGNET = 4, TECH_POWER = 4, TECH_ENGINEERING = 4)
 	build_path = /obj/item/mecha_parts/mecha_equipment/tool/rcd
 
 /datum/design/item/mecha/gravcatapult
 	name = "Gravitational catapult"
 	desc = "An exosuit-mounted gravitational catapult."
 	id = "mech_gravcatapult"
-	req_tech = list(TECH_BLUESPACE = 2, TECH_MAGNET = 3, TECH_ENGINERING = 3)
+	req_tech = list(TECH_BLUESPACE = 2, TECH_MAGNET = 3, TECH_ENGINEERING = 3)
 	build_path = /obj/item/mecha_parts/mecha_equipment/gravcatapult
 
 /datum/design/item/mecha/repair_droid
 	name = "Repair droid"
 	desc = "Automated repair droid, exosuits' best companion. BEEP BOOP"
 	id = "mech_repair_droid"
-	req_tech = list(TECH_MAGNET = 3, TECH_DATA = 3, TECH_ENGINERING = 3)
+	req_tech = list(TECH_MAGNET = 3, TECH_DATA = 3, TECH_ENGINEERING = 3)
 	materials = list(DEFAULT_WALL_MATERIAL = 10000, "gold" = 1000, "silver" = 2000, "glass" = 5000)
 	build_path = /obj/item/mecha_parts/mecha_equipment/repair_droid
 
 /datum/design/item/mecha/phoron_generator
 	desc = "Phoron reactor."
 	id = "mech_phoron_generator"
-	req_tech = list(TECH_PHORON = 2, TECH_POWER= 2, TECH_ENGINERING = 2)
+	req_tech = list(TECH_PHORON = 2, TECH_POWER= 2, TECH_ENGINEERING = 2)
 	build_path = /obj/item/mecha_parts/mecha_equipment/generator
 	materials = list(DEFAULT_WALL_MATERIAL = 10000, "silver" = 500, "glass" = 1000)
 
@@ -559,7 +559,7 @@
 /datum/design/item/mecha/proj_armor
 	desc = "Exosuit projectile armor booster."
 	id = "mech_proj_armor"
-	req_tech = list(TECH_MATERIAL = 5, TECH_COMBAT = 5, TECH_ENGINERING = 3)
+	req_tech = list(TECH_MATERIAL = 5, TECH_COMBAT = 5, TECH_ENGINEERING = 3)
 	materials = list(DEFAULT_WALL_MATERIAL = 20000, "gold" = 5000)
 	build_path = /obj/item/mecha_parts/mecha_equipment/antiproj_armor_booster
 
@@ -567,7 +567,7 @@
 	name = "Diamond drill"
 	desc = "A diamond version of the exosuit drill. It's harder, better, faster, stronger."
 	id = "mech_diamond_drill"
-	req_tech = list(TECH_MATERIAL = 4, TECH_ENGINERING = 3)
+	req_tech = list(TECH_MATERIAL = 4, TECH_ENGINEERING = 3)
 	materials = list(DEFAULT_WALL_MATERIAL = 10000, "diamond" = 6500)
 	build_path = /obj/item/mecha_parts/mecha_equipment/tool/drill/diamonddrill
 
@@ -575,7 +575,7 @@
 	name = "Nuclear reactor"
 	desc = "Exosuit-held nuclear reactor. Converts uranium and everyone's health to energy."
 	id = "mech_generator_nuclear"
-	req_tech = list(TECH_POWER= 3, TECH_ENGINERING = 3, TECH_MATERIAL = 3)
+	req_tech = list(TECH_POWER= 3, TECH_ENGINEERING = 3, TECH_MATERIAL = 3)
 	materials = list(DEFAULT_WALL_MATERIAL = 10000, "silver" = 500, "glass" = 1000)
 	build_path = /obj/item/mecha_parts/mecha_equipment/generator/nuclear
 
