@@ -574,7 +574,7 @@ default behaviour is:
 	set category = "IC"
 
 	if(can_resist())
-		next_move = world.time + 20
+		setClickCooldown(20)
 		process_resist()
 
 /mob/living/proc/can_resist()
@@ -582,7 +582,7 @@ default behaviour is:
 	//so just check weakened instead.
 	if(stat || weakened)
 		return 0
-	if(next_move > world.time)
+	if(!canClick())
 		return 0
 	return 1
 

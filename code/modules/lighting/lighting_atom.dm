@@ -21,6 +21,9 @@
 
 	if(.) update_light()
 
+/atom/proc/copy_light(atom/A)
+	set_light(A.light_range, A.light_power, A.light_color)
+
 /atom/proc/update_light()
 	if(!light_power || !light_range)
 		if(light)

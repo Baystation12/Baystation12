@@ -4,7 +4,7 @@
 	icon = 'icons/obj/device.dmi'
 	icon_state = "forensic0-old" //GET A BETTER SPRITE.
 	item_state = "electronic"
-	origin_tech = list(TECH_MAGNET = 1, TECH_ENGINERING = 1)
+	origin_tech = list(TECH_MAGNET = 1, TECH_ENGINEERING = 1)
 	matter = list(DEFAULT_WALL_MATERIAL = 150)
 
 /obj/item/weapon/mining_scanner/attack_self(mob/user as mob)

@@ -40,7 +40,7 @@
 	var/mob/living/bot/secbot/active 	// the active bot; if null, show bot list
 	var/list/botstatus			// the status signal sent by the bot
 
-	var/control_freq = AI_FREQ
+	var/control_freq = BOT_FREQ
 
 	// create a new QM cartridge, and register to receive bot control & beacon message
 	New()
@@ -112,7 +112,7 @@
 	var/list/beacons
 
 	var/beacon_freq = 1400
-	var/control_freq = AI_FREQ
+	var/control_freq = BOT_FREQ
 
 	// create a new QM cartridge, and register to receive bot control & beacon message
 	New()

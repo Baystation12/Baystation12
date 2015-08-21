@@ -48,12 +48,14 @@
 	..()
 
 /mob/living/carbon/human/proc/HardsuitClickOn(var/atom/A, var/alert_ai = 0)
+	if(!canClick())
+		return
 	if(back)
 		var/obj/item/weapon/rig/rig = back
 		if(istype(rig) && rig.selected_module)
-			if(world.time <= next_move) return 1
-			next_move = world.time + 8
 			rig.selected_module.engage(A, alert_ai)
+			if(ismob(A)) // No instant mob attacking - though modules have their own cooldowns
+				setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 			return 1
 	return 0
 

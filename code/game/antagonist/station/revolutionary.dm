@@ -135,10 +135,10 @@ datum/antagonist/revolutionary/finalize(var/datum/mind/target)
 	world << text
 
 // This is a total redefine because headrevs are greeted differently to subrevs.
-/datum/antagonist/revolutionary/add_antagonist(var/datum/mind/player)
+/datum/antagonist/revolutionary/add_antagonist(var/datum/mind/player, var/ignore_role)
 	if((player in current_antagonists) || (player in head_revolutionaries))
 		return 0
-	if(!can_become_antag(player))
+	if(!can_become_antag(player, ignore_role))
 		return 0
 	current_antagonists |= player
 	player.current << "<span class='danger'><font size=3>You are a Revolutionary!</font></span>"
@@ -167,11 +167,6 @@ datum/antagonist/revolutionary/finalize(var/datum/mind/target)
 			player.current << "<span class='danger'>You have been brainwashed! You are no longer a revolutionary! Your memory is hazy from the time you were a rebel...the only thing you remember is the name of the one who brainwashed you...</span>"
 		if(show_message)
 			player.current.visible_message("[player.current] looks like they just remembered their real allegiance!")
-
-/datum/antagonist/revolutionary/can_become_antag(var/datum/mind/player)
-	return ..() && istype(player) && \
-		istype(player.current, /mob/living/carbon/human) && \
-		!(player.assigned_role in command_positions)
 
 // Used by RP-rev.
 /mob/living/carbon/human/proc/convert_to_rev(mob/M as mob in oview(src))

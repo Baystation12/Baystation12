@@ -4,6 +4,9 @@
 	var/region = ACCESS_REGION_NONE
 	var/access_type = ACCESS_TYPE_STATION
 
+/datum/access/dd_SortValue()
+	return "[access_type][desc]"
+
 /*****************
 * Station access *
 *****************/
@@ -232,8 +235,8 @@
 /var/const/access_lawyer = 38
 /datum/access/lawyer
 	id = access_lawyer
-	desc = "Law Office"
-	region = ACCESS_REGION_GENERAL
+	desc = "Internal Affairs"
+	region = ACCESS_REGION_COMMAND
 
 /var/const/access_virology = 39
 /datum/access/virology
@@ -253,21 +256,9 @@
 	desc = "Quartermaster"
 	region = ACCESS_REGION_SUPPLY
 
-/var/const/access_court = 42
-/datum/access/court
-	id = access_court
-	desc = "Courtroom"
-	region = ACCESS_REGION_SECURITY
-
-/var/const/access_clown = 43
-/datum/access/clown
-	id = access_clown
-	desc = "HONK! Access"
-
-/var/const/access_mime = 44
-/datum/access/mime
-	id = access_mime
-	desc = "Silent Access"
+// /var/const/free_access_id = 43
+// /var/const/free_access_id = 43
+// /var/const/free_access_id = 44
 
 /var/const/access_surgery = 45
 /datum/access/surgery
@@ -275,11 +266,7 @@
 	desc = "Surgery"
 	region = ACCESS_REGION_MEDBAY
 
-/var/const/access_theatre = 46
-/datum/access/theatre
-	id = access_theatre
-	desc = "Theatre"
-	region = ACCESS_REGION_GENERAL
+// /var/const/free_access_id = 46
 
 /var/const/access_research = 47
 /datum/access/research
