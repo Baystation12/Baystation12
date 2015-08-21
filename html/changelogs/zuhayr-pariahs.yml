@@ -1,0 +1,5 @@
+author: Zuhayr
+delete-after: True
+changes: 
+  - rscadd: "Pariahs are now a subspecies of Vox with less atmos/cold protection, a useless brain, and lower health."
+  - rscadd: "Leap now only gives a passive grab and has a shorter range. It also stuns Pariahs longer than it does their target."

@@ -465,8 +465,8 @@
 		var/species_icon = 'icons/mob/rig_back.dmi'
 		// Since setting mob_icon will override the species checks in
 		// update_inv_wear_suit(), handle species checks here.
-		if(wearer && sprite_sheets && sprite_sheets[wearer.species.name])
-			species_icon =  sprite_sheets[wearer.species.name]
+		if(wearer && sprite_sheets && sprite_sheets[wearer.species.get_bodytype()])
+			species_icon =  sprite_sheets[wearer.species.get_bodytype()]
 		mob_icon = image("icon" = species_icon, "icon_state" = "[icon_state]")
 
 	if(installed_modules.len)
