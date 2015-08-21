@@ -3,6 +3,10 @@
 		This code is slightly more documented than normal, as requested by XSI on IRC.
 */
 
+#define TURRET_PRIORITY_TARGET 2
+#define TURRET_SECONDARY_TARGET 1
+#define TURRET_NOT_TARGET 0
+
 /obj/machinery/porta_turret
 	name = "turret"
 	icon = 'icons/obj/turrets.dmi'
@@ -343,7 +347,7 @@ var/list/turret_icons
 					sleep(60)
 					attacked = 0
 		..()
-		
+
 /obj/machinery/porta_turret/emag_act(var/remaining_charges, var/mob/user)
 	if(!emagged)
 		//Emagging the turret makes it go bonkers and stun everyone. It also makes
@@ -503,7 +507,7 @@ var/list/turret_icons
 
 	if(isanimal(L) || issmall(L)) // Animals are not so dangerous
 		return check_anomalies ? TURRET_SECONDARY_TARGET : TURRET_NOT_TARGET
-	
+
 	if(isxenomorph(L) || isalien(L)) // Xenos are dangerous
 		return check_anomalies ? TURRET_PRIORITY_TARGET	: TURRET_NOT_TARGET
 
@@ -759,11 +763,7 @@ var/list/turret_icons
 				installation = I.type //installation becomes I.type
 				gun_charge = E.power_supply.charge //the gun's charge is stored in gun_charge
 				user << "<span class='notice'>You add [I] to the turret.</span>"
-
-				if(istype(installation, /obj/item/weapon/gun/energy/lasertag/blue) || istype(installation, /obj/item/weapon/gun/energy/lasertag/red))
-					target_type = /obj/machinery/porta_turret/tag
-				else
-					target_type = /obj/machinery/porta_turret
+				target_type = /obj/machinery/porta_turret
 
 				build_step = 4
 				qdel(I) //delete the gun :(
@@ -880,3 +880,8 @@ var/list/turret_icons
 
 /atom/movable/porta_turret_cover
 	icon = 'icons/obj/turrets.dmi'
+
+
+#undef TURRET_PRIORITY_TARGET
+#undef TURRET_SECONDARY_TARGET
+#undef TURRET_NOT_TARGET
