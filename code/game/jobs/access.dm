@@ -333,6 +333,8 @@
 			return "Gateway"
 		if(access_sec_doors)
 			return "Security"
+		if(access_medical_equip)
+			return "Medical Equipment"
 
 /proc/get_centcom_access_desc(A)
 	switch(A)

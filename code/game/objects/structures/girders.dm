@@ -43,6 +43,7 @@
 	return
 
 /obj/structure/girder/proc/reset_girder()
+	anchored = 1
 	cover = initial(cover)
 	health = min(health,initial(health))
 	state = 0
