@@ -2,6 +2,8 @@
 	icon_state = "rgeneric"
 /turf/simulated/wall/r_wall/New(var/newloc)
 	..(newloc, "plasteel","plasteel") //3strong
+/turf/simulated/wall/rpr_wall/New(var/newloc)
+	..(newloc, "plasteel","rphglass")
 
 /turf/simulated/wall/cult
 	icon_state = "cult"
