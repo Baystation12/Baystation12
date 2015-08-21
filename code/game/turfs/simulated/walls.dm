@@ -146,8 +146,12 @@ var/list/global/wall_cache = list()
 
 /turf/simulated/wall/adjacent_fire_act(turf/simulated/floor/adj_turf, datum/gas_mixture/adj_air, adj_temp, adj_volume)
 	burn(adj_temp)
-	if(adj_temp > material.melting_point)
-		take_damage(log(RAND_F(0.9, 1.1) * (adj_temp - ((material.melting_point + reinf_material.melting_point)/2))))
+	if(!isnull(reinf_material))
+		if(adj_temp > (material.melting_point + reinf_material.melting_point)/2)
+			take_damage(log(RAND_F(0.9, 1.1) * (adj_temp - ((material.melting_point + reinf_material.melting_point)/2))))
+	else if(!(reinf_material))
+		if(adj_temp > material.melting_point)
+			take_damage(log(RAND_F(0.9, 1.1) * (adj_temp - material.melting_point)))
 
 	return ..()
 
