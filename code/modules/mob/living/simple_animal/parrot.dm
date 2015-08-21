@@ -184,7 +184,7 @@
 						src.ears = headset_to_add
 						usr << "You fit the headset onto [src]."
 
-						clearlist(available_channels)
+						available_channels.Cut()
 						for(var/ch in headset_to_add.channels)
 							switch(ch)
 								if("Engineering")
@@ -291,7 +291,7 @@
 			speak.Remove(pick(speak))
 
 		speak.Add(pick(speech_buffer))
-		clearlist(speech_buffer)
+		speech_buffer.Cut()
 
 
 //-----SLEEPING

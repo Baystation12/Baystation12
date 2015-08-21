@@ -220,8 +220,7 @@
 			return
 
 		//figure out how much metal we need
-		var/amount_needed = (maxhealth - health) / DOOR_REPAIR_AMOUNT
-		amount_needed = (round(amount_needed) == amount_needed)? amount_needed : round(amount_needed) + 1 //Why does BYOND not have a ceiling proc?
+		var/amount_needed = ceil((maxhealth - health) / DOOR_REPAIR_AMOUNT)
 
 		var/obj/item/stack/stack = I
 		var/transfer
