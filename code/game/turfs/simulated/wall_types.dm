@@ -1,6 +1,6 @@
 /turf/simulated/wall/r_wall
 	icon_state = "rgeneric"
-/turf/simulated/wall/PlPr_wall/New(var/newloc)
+/turf/simulated/wall/r_wall/New(var/newloc)
 	..(newloc, "plasteel","plasteel")
 /turf/simulated/wall/PlPhgr_wall/New(var/newloc)
 	..(newloc, "plasteel","phglass")
