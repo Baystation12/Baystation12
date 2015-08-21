@@ -203,7 +203,7 @@
 /obj/machinery/recharge_station/proc/go_out()
 	if(!(occupant))
 		return
-	occupant.loc = loc
+	occupant.forceMove(loc)
 	occupant.reset_view()
 	occupant = null
 	update_icon()
@@ -211,7 +211,7 @@
 
 /obj/machinery/recharge_station/proc/go_in(var/mob/living/silicon/robot/R)
 	R.reset_view(src)
-	R.loc = src
+	R.forceMove(src)
 	occupant = R
 	update_icon()
 
