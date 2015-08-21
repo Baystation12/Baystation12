@@ -1,0 +1,16 @@
+author: Zuhayr
+delete-after: True
+changes: 
+  - rscadd: "Added get_bodytype() and get_station_variant() procs as groundwork for subspecies."
+  - rscadd: "Added a Vox Pariah subspecies."
+  - rscadd: "Being whitelisted for a main species will whitelist you for all subspecies."
+  - tweak: "Pariahs have an unusable brain, 80% human health, pressure and cold resistance but not immunity, and periodically give a message to nearby people about being smelly."
+  - tweak: "Leap now gives a passive grab. If you are a pariah it also prones you for longer than it prones the target."
+  - tweak: "Pariahs can no longer break windows or cuffs."
+  - tweak: "Tajaran movespeed buff has been halved."
+  - tweak: "Unathi now have a movespeed penalty equal to the amount Taj have as a buff (0.5)."
+  - tweak: "Taj now have a brute and burn malus of 15%."
+  - tweak: "Unathi now have a brute resistance of 25%."
+  - tweak: "Unarmed damage for non-baseline attacks (ie. not punch and kick) has been reduced across the board."
+  - tweak: "Tajarans can now eat small animals like mice, Unathi and Vox can eat the former, monkeys and dionaea, and xenomorphs can eat any mob."
+  - tweak: "Vox can wear softsuits."

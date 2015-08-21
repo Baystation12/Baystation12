@@ -55,7 +55,7 @@ var/global/list/limb_icon_cache = list()
 
 	if(owner.f_style)
 		var/datum/sprite_accessory/facial_hair_style = facial_hair_styles_list[owner.f_style]
-		if(facial_hair_style && facial_hair_style.species_allowed && (owner.species.name in facial_hair_style.species_allowed))
+		if(facial_hair_style && facial_hair_style.species_allowed && (owner.species.get_bodytype() in facial_hair_style.species_allowed))
 			var/icon/facial_s = new/icon("icon" = facial_hair_style.icon, "icon_state" = "[facial_hair_style.icon_state]_s")
 			if(facial_hair_style.do_colouration)
 				facial_s.Blend(rgb(owner.r_facial, owner.g_facial, owner.b_facial), ICON_ADD)
@@ -63,7 +63,7 @@ var/global/list/limb_icon_cache = list()
 
 	if(owner.h_style && !(owner.head && (owner.head.flags & BLOCKHEADHAIR)))
 		var/datum/sprite_accessory/hair_style = hair_styles_list[owner.h_style]
-		if(hair_style && (owner.species.name in hair_style.species_allowed))
+		if(hair_style && (owner.species.get_bodytype() in hair_style.species_allowed))
 			var/icon/hair_s = new/icon("icon" = hair_style.icon, "icon_state" = "[hair_style.icon_state]_s")
 			if(hair_style.do_colouration)
 				hair_s.Blend(rgb(owner.r_hair, owner.g_hair, owner.b_hair), ICON_ADD)
