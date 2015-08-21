@@ -144,11 +144,11 @@
 				mask_check = 1
 
 		if(mask_check)
-			if(location.wear_mask && (location.wear_mask.flags & AIRTIGHT))
+			if(location.wear_mask && (location.wear_mask.item_flags & AIRTIGHT))
 				data["maskConnected"] = 1
 			else if(istype(location, /mob/living/carbon/human))
 				var/mob/living/carbon/human/H = location
-				if(H.head && (H.head.flags & AIRTIGHT))
+				if(H.head && (H.head.item_flags & AIRTIGHT))
 					data["maskConnected"] = 1
 
 	// update the ui if it exists, returns null if no ui is passed/found
@@ -192,11 +192,11 @@
 			else
 
 				var/can_open_valve
-				if(location.wear_mask && (location.wear_mask.flags & AIRTIGHT))
+				if(location.wear_mask && (location.wear_mask.item_flags & AIRTIGHT))
 					can_open_valve = 1
 				else if(istype(location,/mob/living/carbon/human))
 					var/mob/living/carbon/human/H = location
-					if(H.head && (H.head.flags & AIRTIGHT))
+					if(H.head && (H.head.item_flags & AIRTIGHT))
 						can_open_valve = 1
 
 				if(can_open_valve)

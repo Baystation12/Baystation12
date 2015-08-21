@@ -63,6 +63,7 @@
 	var/area/area
 	var/areastring = null
 	var/obj/item/weapon/cell/cell
+	var/chargelevel = 0.0005  // Cap for how fast APC cells charge, as a percentage-per-tick (0.01 means cellcharge is capped to 1% per second)
 	var/start_charge = 90				// initial cell charge %
 	var/cell_type = /obj/item/weapon/cell/apc
 	var/opened = 0 //0=closed, 1=opened, 2=cover removed
@@ -1022,7 +1023,7 @@
 		if(src.attempt_charging())
 			if(excess > 0)		// check to make sure we have enough to charge
 				// Max charge is capped to % per second constant
-				var/ch = min(excess*CELLRATE, cell.maxcharge*CHARGELEVEL)
+				var/ch = min(excess*CELLRATE, cell.maxcharge*chargelevel)
 
 				ch = draw_power(ch/CELLRATE) // Removes the power we're taking from the grid
 				cell.give(ch*CELLRATE) // actually recharge the cell
@@ -1039,7 +1040,7 @@
 
 		if(chargemode)
 			if(!charging)
-				if(excess > cell.maxcharge*CHARGELEVEL)
+				if(excess > cell.maxcharge*chargelevel)
 					chargecount++
 				else
 					chargecount = 0

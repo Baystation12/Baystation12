@@ -149,7 +149,7 @@
 					return 0
 
 				var/datum/species/S = all_species[client.prefs.species]
-				if(!(S.flags & IS_WHITELISTED))
+				if(!(S.spawn_flags & IS_WHITELISTED))
 					src << alert("Your current species,[client.prefs.species], is not available for play on the station.")
 					return 0
 
@@ -173,7 +173,7 @@
 					return 0
 
 				var/datum/species/S = all_species[client.prefs.species]
-				if(!(S.flags & CAN_JOIN))
+				if(!(S.spawn_flags & CAN_JOIN))
 					src << alert("Your current species, [client.prefs.species], is not available for play on the station.")
 					return 0
 
@@ -487,7 +487,7 @@
 
 	proc/is_species_whitelisted(datum/species/S)
 		if(!S) return 1
-		return is_alien_whitelisted(src, S.name) || !config.usealienwhitelist || !(S.flags & IS_WHITELISTED)
+		return is_alien_whitelisted(src, S.name) || !config.usealienwhitelist || !(S.spawn_flags & IS_WHITELISTED)
 
 /mob/new_player/get_species()
 	var/datum/species/chosen_species

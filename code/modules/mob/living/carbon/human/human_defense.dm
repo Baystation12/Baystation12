@@ -144,7 +144,7 @@ emp_act
 /mob/living/carbon/human/proc/check_mouth_coverage()
 	var/list/protective_gear = list(head, wear_mask, wear_suit, w_uniform)
 	for(var/obj/item/gear in protective_gear)
-		if(istype(gear) && (gear.body_parts_covered & FACE) && (gear.flags & (MASKCOVERSMOUTH|HEADCOVERSMOUTH)))
+		if(istype(gear) && (gear.body_parts_covered & FACE) && !(gear.item_flags & FLEXIBLEMATERIAL))
 			return gear
 	return null
 
@@ -227,7 +227,7 @@ emp_act
 	else
 		visible_message("\red <B>[src] has been attacked in the [hit_area] with [I.name] by [user]!</B>")
 
-	var/armor = run_armor_check(affecting, "melee", "Your armor has protected your [hit_area].", "Your armor has softened hit to your [hit_area].")
+	var/armor = run_armor_check(affecting, "melee", I.armor_penetration, "Your armor has protected your [hit_area].", "Your armor has softened hit to your [hit_area].")
 	var/weapon_sharp = is_sharp(I)
 	var/weapon_edge = has_edge(I)
 	if ((weapon_sharp || weapon_edge) && prob(getarmor(target_zone, "melee")))
@@ -342,7 +342,7 @@ emp_act
 		var/hit_area = affecting.name
 
 		src.visible_message("\red [src] has been hit in the [hit_area] by [O].")
-		var/armor = run_armor_check(affecting, "melee", "Your armor has protected your [hit_area].", "Your armor has softened hit to your [hit_area].") //I guess "melee" is the best fit here
+		var/armor = run_armor_check(affecting, "melee", O.armor_penetration, "Your armor has protected your [hit_area].", "Your armor has softened hit to your [hit_area].") //I guess "melee" is the best fit here
 
 		if(armor < 2)
 			apply_damage(throw_damage, dtype, zone, armor, is_sharp(O), has_edge(O), O)

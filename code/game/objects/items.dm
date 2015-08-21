@@ -25,9 +25,13 @@
 	var/action_button_name //It is also the text which gets displayed on the action button. If not set it defaults to 'Use [name]'. If it's not set, there'll be no button.
 	var/action_button_is_hands_free = 0 //If 1, bypass the restrained, lying, and stunned checks action buttons normally test for
 
-	//Since any item can now be a piece of clothing, this has to be put here so all items share it.
-	var/flags_inv //This flag is used to determine when items in someone's inventory cover others. IE helmets making it so you can't see glasses, etc.
+	//This flag is used to determine when items in someone's inventory cover others. IE helmets making it so you can't see glasses, etc.
+	//It should be used purely for appearance. For gameplay effects caused by items covering body parts, use body_parts_covered.
+	var/flags_inv = 0
 	var/body_parts_covered = 0 //see setup.dm for appropriate bit flags
+	
+	var/item_flags = 0 //Miscellaneous flags pertaining to equippable objects.
+	
 	//var/heat_transfer_coefficient = 1 //0 prevents all transfers, 1 is invisible
 	var/gas_transfer_coefficient = 1 // for leaking gas from turf to mask and vice-versa (for masks right now, but at some point, i'd like to include space helmets)
 	var/permeability_coefficient = 1 // for chemicals/diseases
@@ -168,7 +172,6 @@
 	else
 		if(isliving(src.loc))
 			return
-		user.next_move = max(user.next_move+2,world.time + 2)
 	user.put_in_active_hand(src)
 	return
 
@@ -418,14 +421,12 @@ var/list/global/slot_flags_enumeration = list(
 /obj/item/proc/eyestab(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
 
 	var/mob/living/carbon/human/H = M
-	if(istype(H) && ( \
-			(H.head && H.head.flags & HEADCOVERSEYES) || \
-			(H.wear_mask && H.wear_mask.flags & MASKCOVERSEYES) || \
-			(H.glasses && H.glasses.flags & GLASSESCOVERSEYES) \
-		))
-		// you can't stab someone in the eyes wearing a mask!
-		user << "<span class='warning'>You're going to need to remove the eye covering first.</span>"
-		return
+	if(istype(H))
+		for(var/obj/item/protection in list(H.head, H.wear_mask, H.glasses))
+			if(protection && (protection.body_parts_covered & EYES))
+				// you can't stab someone in the eyes wearing a mask!
+				user << "<span class='warning'>You're going to need to remove the eye covering first.</span>"
+				return
 
 	if(!M.has_eyes())
 		user << "<span class='warning'>You cannot locate any eyes on [M]!</span>"
@@ -606,9 +607,9 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 
 	return
 
-
 /obj/item/proc/pwr_drain()
 	return 0 // Process Kill
 
 /obj/item/proc/resolve_attackby(atom/A, mob/source)
 	return A.attackby(src,source)
+

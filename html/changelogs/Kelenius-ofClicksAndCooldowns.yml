@@ -1,0 +1,6 @@
+author: Kelenius
+
+delete-after: True
+
+changes: 
+  - experiment: "Click cooldowns have been removed on pretty much everything that isn't an attack."

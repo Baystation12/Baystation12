@@ -99,6 +99,7 @@ for reference:
 				return
 		return
 	else
+		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		switch(W.damtype)
 			if("fire")
 				src.health -= W.force * 1
@@ -111,6 +112,7 @@ for reference:
 			qdel(src)
 			return
 		..()
+
 /obj/structure/barricade/proc/dismantle()
 	material.place_dismantled_product(get_turf(src))
 	qdel(src)

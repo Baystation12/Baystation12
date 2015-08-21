@@ -3,7 +3,6 @@
 	name = "glasses"
 	icon = 'icons/obj/clothing/glasses.dmi'
 	//w_class = 2.0
-	//flags = GLASSESCOVERSEYES
 	//slot_flags = SLOT_EYES
 	//var/vision_flags = 0
 	//var/darkness_view = 0//Base human is 2
@@ -13,7 +12,6 @@
 	var/active = 1
 	var/activation_sound = 'sound/items/goggles_charge.ogg'
 	var/obj/screen/overlay = null
-	body_parts_covered = EYES
 
 /obj/item/clothing/glasses/attack_self(mob/user)
 	if(toggleable)
@@ -159,14 +157,12 @@
 	if(usr.canmove && !usr.stat && !usr.restrained())
 		if(src.up)
 			src.up = !src.up
-			src.flags |= GLASSESCOVERSEYES
 			flags_inv |= HIDEEYES
 			body_parts_covered |= EYES
 			icon_state = initial(icon_state)
 			usr << "You flip \the [src] down to protect your eyes."
 		else
 			src.up = !src.up
-			src.flags &= ~HEADCOVERSEYES
 			flags_inv &= ~HIDEEYES
 			body_parts_covered &= ~EYES
 			icon_state = "[initial(icon_state)]up"

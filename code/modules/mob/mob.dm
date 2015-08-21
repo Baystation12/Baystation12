@@ -277,8 +277,6 @@
 		if (W)
 			W.attack_self(src)
 			update_inv_r_hand()
-	if(next_move < world.time)
-		next_move = world.time + 2
 	return
 
 /*
@@ -886,9 +884,9 @@ mob/proc/yank_out_object()
 	set desc = "Remove an embedded item at the cost of bleeding and pain."
 	set src in view(1)
 
-	if(!isliving(usr) || usr.next_move > world.time)
+	if(!isliving(usr) || !usr.canClick())
 		return
-	usr.next_move = world.time + 20
+	usr.setClickCooldown(20)
 
 	if(usr.stat == 1)
 		usr << "You are unconcious and cannot do that!"

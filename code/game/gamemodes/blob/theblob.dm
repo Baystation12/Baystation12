@@ -157,6 +157,7 @@
 
 
 	attackby(var/obj/item/weapon/W, var/mob/user)
+		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		playsound(src.loc, 'sound/effects/attackblob.ogg', 50, 1)
 		src.visible_message("<span class='danger'>The [src.name] has been attacked with \the [W][(user ? " by [user]." : ".")]</span>")
 		var/damage = 0
