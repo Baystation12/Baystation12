@@ -30,35 +30,43 @@
 	..()
 
 
+/client/proc/client_dir(input, direction=-1)
+	return turn(input, direction*dir2angle(dir))
+
 /client/Northeast()
-	swap_hand()
-	return
-
-
-/client/Southeast()
-	attack_self()
-	return
-
-
-/client/Southwest()
-	if(iscarbon(usr))
-		var/mob/living/carbon/C = usr
-		C.toggle_throw_mode()
-	else
-		usr << "\red This mob type cannot throw items."
-	return
-
-
+	diagonal_action(NORTHEAST)
 /client/Northwest()
-	if(iscarbon(usr))
-		var/mob/living/carbon/C = usr
-		if(!C.get_active_hand())
-			usr << "\red You have nothing to drop in your hand."
+	diagonal_action(NORTHWEST)
+/client/Southeast()
+	diagonal_action(SOUTHEAST)
+/client/Southwest()
+	diagonal_action(SOUTHWEST)
+
+/client/proc/diagonal_action(direction)
+	switch(client_dir(direction, 1))
+		if(NORTHEAST)
+			swap_hand()
 			return
-		drop_item()
-	else
-		usr << "\red This mob type cannot drop items."
-	return
+		if(SOUTHEAST)
+			attack_self()
+			return
+		if(SOUTHWEST)
+			if(iscarbon(usr))
+				var/mob/living/carbon/C = usr
+				C.toggle_throw_mode()
+			else
+				usr << "\red This mob type cannot throw items."
+			return
+		if(NORTHWEST)
+			if(iscarbon(usr))
+				var/mob/living/carbon/C = usr
+				if(!C.get_active_hand())
+					usr << "\red You have nothing to drop in your hand."
+					return
+				drop_item()
+			else
+				usr << "\red This mob type cannot drop items."
+			return
 
 //This gets called when you press the delete button.
 /client/verb/delete_key_pressed()

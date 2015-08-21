@@ -236,7 +236,7 @@ var/list/turret_icons
 	return ..()
 
 
-/obj/machinery/porta_turret/Topic(href, href_list, var/nowindow = 0)
+/obj/machinery/porta_turret/Topic(href, href_list)
 	if(..())
 		return 1
 

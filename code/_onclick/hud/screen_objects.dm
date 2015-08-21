@@ -276,7 +276,7 @@
 						var/no_mask
 						if(!(C.wear_mask && C.wear_mask.flags & AIRTIGHT))
 							var/mob/living/carbon/human/H = C
-							if(!(H.head && H.head.flags & AIRTIGHT))
+							if(!(H.head && H.head.item_flags & AIRTIGHT))
 								no_mask = 1
 
 						if(no_mask)
@@ -370,7 +370,7 @@
 			usr.hud_used.action_intent.icon_state = "intent_help"
 		if(I_HURT)
 			usr.a_intent = I_HURT
-			usr.hud_used.action_intent.icon_state = "intent_hurt"
+			usr.hud_used.action_intent.icon_state = "intent_harm"
 		if(I_GRAB)
 			usr.a_intent = I_GRAB
 			usr.hud_used.action_intent.icon_state = "intent_grab"

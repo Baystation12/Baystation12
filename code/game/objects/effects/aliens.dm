@@ -341,6 +341,7 @@ Alien plants should do something if theres a lot of poison
 
 	var/health = 100
 	var/status = GROWING //can be GROWING, GROWN or BURST; all mutually exclusive
+	flags = PROXMOVE
 
 /obj/effect/alien/egg/New()
 	if(config.aliens_allowed)

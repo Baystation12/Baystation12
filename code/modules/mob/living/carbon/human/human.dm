@@ -207,8 +207,7 @@
 
 
 /mob/living/carbon/human/show_inv(mob/user as mob)
-	// TODO :  Change to incapacitated() on merge.
-	if(user.stat || user.lying || user.resting || user.buckled)
+	if(user.incapacitated())
 		return
 
 	var/obj/item/clothing/under/suit = null
@@ -1023,23 +1022,29 @@
 
 	return(visible_implants)
 
+/mob/living/carbon/human/embedded_needs_process()
+	for(var/obj/item/organ/external/organ in src.organs)
+		for(var/obj/item/O in organ.implants)
+			if(!istype(O, /obj/item/weapon/implant)) //implant type items do not cause embedding effects, see handle_embedded_objects()
+				return 1
+	return 0
+
 /mob/living/carbon/human/proc/handle_embedded_objects()
 
 	for(var/obj/item/organ/external/organ in src.organs)
 		if(organ.status & ORGAN_SPLINTED) //Splints prevent movement.
 			continue
-		for(var/obj/item/weapon/O in organ.implants)
+		for(var/obj/item/O in organ.implants)
 			if(!istype(O,/obj/item/weapon/implant) && prob(5)) //Moving with things stuck in you could be bad.
 				// All kinds of embedded objects cause bleeding.
-				var/msg = null
-				switch(rand(1,3))
-					if(1)
-						msg ="<span class='warning'>A spike of pain jolts your [organ.name] as you bump [O] inside.</span>"
-					if(2)
-						msg ="<span class='warning'>Your movement jostles [O] in your [organ.name] painfully.</span>"
-					if(3)
-						msg ="<span class='warning'>[O] in your [organ.name] twists painfully as you move.</span>"
-				src << msg
+				if(species.flags & NO_PAIN)
+					src << "<span class='warning'>You feel [O] moving inside your [organ.name].</span>"
+				else
+					var/msg = pick( \
+						"<span class='warning'>A spike of pain jolts your [organ.name] as you bump [O] inside.</span>", \
+						"<span class='warning'>Your movement jostles [O] in your [organ.name] painfully.</span>", \
+						"<span class='warning'>Your movement jostles [O] in your [organ.name] painfully.</span>")
+					src << msg
 
 				organ.take_damage(rand(1,3), 0, 0)
 				if(!(organ.status & ORGAN_ROBOT) && !(species.flags & NO_BLOOD)) //There is no blood in protheses.
@@ -1220,10 +1225,10 @@
 	else
 		switch(target_zone)
 			if("head")
-				if(head && head.flags & THICKMATERIAL)
+				if(head && head.item_flags & THICKMATERIAL)
 					. = 0
 			else
-				if(wear_suit && wear_suit.flags & THICKMATERIAL)
+				if(wear_suit && wear_suit.item_flags & THICKMATERIAL)
 					. = 0
 	if(!. && error_msg && user)
 		if(!fail_msg)
@@ -1296,7 +1301,7 @@
 	return 0
 
 /mob/living/carbon/human/slip(var/slipped_on, stun_duration=8)
-	if((species.flags & NO_SLIP) || (shoes && (shoes.flags & NOSLIP)))
+	if((species.flags & NO_SLIP) || (shoes && (shoes.item_flags & NOSLIP)))
 		return 0
 	..(slipped_on,stun_duration)
 
@@ -1365,6 +1370,6 @@
 		handle_regular_hud_updates()
 
 /mob/living/carbon/human/Check_Shoegrip()
-	if(istype(shoes, /obj/item/clothing/shoes/magboots) && (shoes.flags & NOSLIP))  //magboots + dense_object = no floating
+	if(istype(shoes, /obj/item/clothing/shoes/magboots) && (shoes.item_flags & NOSLIP))  //magboots + dense_object = no floating
 		return 1
 	return 0

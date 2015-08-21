@@ -633,9 +633,9 @@ datum/preferences
 		dat += "<img src='species_preview_[current_species.name].png' width='64px' height='64px'><br/><br/>"
 	dat += "<b>Language:</b> [current_species.language]<br/>"
 	dat += "<small>"
-	if(current_species.flags & CAN_JOIN)
+	if(current_species.spawn_flags & CAN_JOIN)
 		dat += "</br><b>Often present on human stations.</b>"
-	if(current_species.flags & IS_WHITELISTED)
+	if(current_species.spawn_flags & IS_WHITELISTED)
 		dat += "</br><b>Whitelist restricted.</b>"
 	if(current_species.flags & NO_BLOOD)
 		dat += "</br><b>Does not have blood.</b>"
@@ -649,11 +649,11 @@ datum/preferences
 		dat += "</br><b>Has excellent traction.</b>"
 	if(current_species.flags & NO_POISON)
 		dat += "</br><b>Immune to most poisons.</b>"
-	if(current_species.flags & HAS_SKIN_TONE)
+	if(current_species.appearance_flags & HAS_SKIN_TONE)
 		dat += "</br><b>Has a variety of skin tones.</b>"
-	if(current_species.flags & HAS_SKIN_COLOR)
+	if(current_species.appearance_flags & HAS_SKIN_COLOR)
 		dat += "</br><b>Has a variety of skin colours.</b>"
-	if(current_species.flags & HAS_EYE_COLOR)
+	if(current_species.appearance_flags & HAS_EYE_COLOR)
 		dat += "</br><b>Has a variety of eye colours.</b>"
 	if(current_species.flags & IS_PLANT)
 		dat += "</br><b>Has a plantlike physiology.</b>"
@@ -663,9 +663,9 @@ datum/preferences
 
 	var/restricted = 0
 	if(config.usealienwhitelist) //If we're using the whitelist, make sure to check it!
-		if(!(current_species.flags & CAN_JOIN))
+		if(!(current_species.spawn_flags & CAN_JOIN))
 			restricted = 2
-		else if((current_species.flags & IS_WHITELISTED) && !is_alien_whitelisted(user,current_species))
+		else if((current_species.spawn_flags & IS_WHITELISTED) && !is_alien_whitelisted(user,current_species))
 			restricted = 1
 
 	if(restricted)
@@ -1401,7 +1401,7 @@ datum/preferences
 						backbag = backbaglist.Find(new_backbag)
 
 				if("nt_relation")
-					var/new_relation = input(user, "Choose your relation to NT. Note that this represents what others can find out about your character by researching your background, not what your character actually thinks.", "Character Preference")  as null|anything in list("Loyal", "Supportive", "Neutral", "Skeptical", "Opposed")
+					var/new_relation = input(user, "Choose your relation to NT. Note that this represents what others can find out about your character by researching your background, not what your character actually thinks.", "Character Preference")  as null|anything in COMPANY_ALIGNMENTS
 					if(new_relation)
 						nanotrasen_relation = new_relation
 

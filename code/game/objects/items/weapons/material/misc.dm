@@ -61,7 +61,6 @@
 	throw_speed = 1
 	throw_range = 3
 	w_class = 4
-	flags = NOSHIELD
 	slot_flags = SLOT_BACK
 	origin_tech = "materials=2;combat=2"
 	attack_verb = list("chopped", "sliced", "cut", "reaped")

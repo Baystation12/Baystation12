@@ -430,11 +430,11 @@ What a mess.*/
 //RECORD CREATE
 			if ("New Record (Security)")
 				if ((istype(active1, /datum/data/record) && !( istype(active2, /datum/data/record) )))
-					active2 = CreateSecurityRecord(active1.fields["name"], active1.fields["id"])
+					active2 = data_core.CreateSecurityRecord(active1.fields["name"], active1.fields["id"])
 					screen = 3
 
 			if ("New Record (General)")
-				active1 = CreateGeneralRecord()
+				active1 = data_core.CreateGeneralRecord()
 				active2 = null
 
 //FIELD FUNCTIONS
