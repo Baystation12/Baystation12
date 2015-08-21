@@ -25,7 +25,7 @@
 
 	var/list/access_rights
 	var/obj/item/weapon/card/id/idcard
-	var/idcard_type = /obj/item/weapon/card/id/captains_spare
+	var/idcard_type = /obj/item/weapon/card/id/synthetic
 
 	#define SEC_HUD 1 //Security HUD mode
 	#define MED_HUD 2 //Medical HUD mode

@@ -122,8 +122,9 @@
 	return 0
 
 /obj/item/weapon/card/id/proc/show(mob/user as mob)
-	user << browse_rsc(front, "front.png")
-	user << browse_rsc(side, "side.png")
+	if(front && side)
+		user << browse_rsc(front, "front.png")
+		user << browse_rsc(side, "side.png")
 	var/datum/browser/popup = new(user, "idcard", name, 600, 250)
 	popup.set_content(dat())
 	popup.set_title_image(usr.browse_rsc_icon(src.icon, src.icon_state))
@@ -148,11 +149,6 @@
 		id_card.dna_hash		= dna.unique_enzymes
 		id_card.fingerprint_hash= md5(dna.uni_identity)
 	id_card.update_name()
-
-/mob/living/silicon/set_id_info(var/obj/item/weapon/card/id/id_card)
-	id_card.assignment = "Synthetic"
-	id_card.rank = "Synthetic"
-	..()
 	
 /mob/living/carbon/human/set_id_info(var/obj/item/weapon/card/id/id_card)
 	..()
@@ -222,9 +218,20 @@
 	item_state = "gold_id"
 	registered_name = "Captain"
 	assignment = "Captain"
-	New()
-		access = get_all_station_access()
-		..()
+/obj/item/weapon/card/id/captains_spare/New()
+	access = get_all_station_access()
+	..()
+		
+/obj/item/weapon/card/id/synthetic
+	name = "\improper Synthetic ID"
+	desc = "Access module for NanoTrasen Synthetics"
+	icon_state = "id-robot"
+	item_state = "tdgreen"
+	assignment = "Synthetic"
+	
+/obj/item/weapon/card/id/synthetic/New()
+	access = get_all_station_access()
+	..()
 
 /obj/item/weapon/card/id/centcom
 	name = "\improper CentCom. ID"

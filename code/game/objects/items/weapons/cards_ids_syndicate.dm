@@ -39,7 +39,7 @@ var/global/list/syndicate_ids = list()
 	if(!registered_user)
 		registered_user = user
 		user.set_id_info(src)
-		user << "<span class='notice'>The microscanner marks you as its owner, preventing others some accessing its internals.</span>"
+		user << "<span class='notice'>The microscanner marks you as its owner, preventing others from accessing its internals.</span>"
 	if(registered_user == user)
 		switch(alert("Would you like edit the ID, or show it?","Show or Edit?", "Edit","Show"))
 			if("Edit")

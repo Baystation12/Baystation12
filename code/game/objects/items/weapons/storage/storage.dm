@@ -224,6 +224,9 @@
 //Set the stop_messages to stop it from printing messages
 /obj/item/weapon/storage/proc/can_be_inserted(obj/item/W as obj, stop_messages = 0)
 	if(!istype(W)) return //Not an item
+	
+	if(!usr.canUnEquip(W))
+		return 0
 
 	if(src.loc == W)
 		return 0 //Means the item is already in the storage item
