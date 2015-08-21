@@ -678,7 +678,7 @@ var/global/list/gear_datums = list()
 	slot = slot_wear_suit
 
 /datum/gear/leather_jacket_nt
-	display_name = "leather jacket, NanoTrasen, black"
+	display_name = "leather jacket, corporate, black"
 	path = /obj/item/clothing/suit/storage/leather_jacket/nanotrasen
 	cost = 2
 	slot = slot_wear_suit
@@ -690,7 +690,7 @@ var/global/list/gear_datums = list()
 	slot = slot_wear_suit
 
 /datum/gear/brown_jacket_nt
-	display_name = "leather jacket, NanoTrasen, brown"
+	display_name = "leather jacket, corporate, brown"
 	path = /obj/item/clothing/suit/storage/toggle/brown_jacket/nanotrasen
 	cost = 2
 	slot = slot_wear_suit

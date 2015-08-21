@@ -211,7 +211,7 @@
 /obj/item/weapon/rig/hazard
 	name = "hazard hardsuit control module"
 	suit_type = "hazard hardsuit"
-	desc = "A Nanotrasen security hardsuit designed for prolonged EVA in dangerous environments."
+	desc = "A Security hardsuit designed for prolonged EVA in dangerous environments."
 	icon_state = "hazard_rig"
 	armor = list(melee = 60, bullet = 40, laser = 30, energy = 15, bomb = 60, bio = 100, rad = 30)
 	slowdown = 1

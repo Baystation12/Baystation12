@@ -333,7 +333,7 @@
 		return get_all_centcom_jobs() + "Custom"
 
 	accessblock()
-		var/accesses = "<h5>Central Command:</h5>"
+		var/accesses = "<h5>[boss_name]:</h5>"
 		for(var/A in get_all_centcom_access())
 			if(A in writer.access)
 				accesses += topic_link(src,"access=[A]","<font color='red'>[replacetext(get_centcom_access_desc(A), " ", "&nbsp")]</font>") + " "

@@ -61,7 +61,7 @@
 		"Tajara" = 'icons/mob/species/tajaran/helmet.dmi',
 		"Unathi" = 'icons/mob/species/unathi/helmet.dmi',
 		)
-	
+
 	armor = list(melee = 62, bullet = 50, laser = 50,energy = 35, bomb = 10, bio = 2, rad = 0)
 	flags_inv = HIDEEARS
 	siemens_coefficient = 0.7
@@ -80,7 +80,7 @@
 //Non-hardsuit ERT helmets.
 /obj/item/clothing/head/helmet/ert
 	name = "emergency response team helmet"
-	desc = "An in-atmosphere helmet worn by members of the NanoTrasen Emergency Response Team. Protects the head from impacts."
+	desc = "An in-atmosphere helmet worn by members of the Emergency Response Team. Protects the head from impacts."
 	icon_state = "erthelmet_cmd"
 	item_state_slots = list(
 		slot_l_hand_str = "syndicate-helm-green",
@@ -91,22 +91,22 @@
 //Commander
 /obj/item/clothing/head/helmet/ert/command
 	name = "emergency response team commander helmet"
-	desc = "An in-atmosphere helmet worn by the commander of a NanoTrasen Emergency Response Team. Has blue highlights."
+	desc = "An in-atmosphere helmet worn by the commander of a Emergency Response Team. Has blue highlights."
 
 //Security
 /obj/item/clothing/head/helmet/ert/security
 	name = "emergency response team security helmet"
-	desc = "An in-atmosphere helmet worn by security members of the NanoTrasen Emergency Response Team. Has red highlights."
+	desc = "An in-atmosphere helmet worn by security members of the Emergency Response Team. Has red highlights."
 	icon_state = "erthelmet_sec"
 
 //Engineer
 /obj/item/clothing/head/helmet/ert/engineer
 	name = "emergency response team engineer helmet"
-	desc = "An in-atmosphere helmet worn by engineering members of the NanoTrasen Emergency Response Team. Has orange highlights."
+	desc = "An in-atmosphere helmet worn by engineering members of the Emergency Response Team. Has orange highlights."
 	icon_state = "erthelmet_eng"
 
 //Medical
 /obj/item/clothing/head/helmet/ert/medical
 	name = "emergency response team medical helmet"
-	desc = "A set of armor worn by medical members of the NanoTrasen Emergency Response Team. Has red and white highlights."
+	desc = "A set of armor worn by medical members of the Emergency Response Team. Has red and white highlights."
 	icon_state = "erthelmet_med"
