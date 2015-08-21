@@ -341,9 +341,12 @@
 	if(!req_breakout())
 		return
 
+	if(!escapee.canClick())
+		return
+
+	escapee.setClickCooldown(100)
+
 	//okay, so the closet is either welded or locked... resist!!!
-	escapee.next_move = world.time + 100
-	escapee.last_special = world.time + 100
 	escapee << "<span class='warning'>You lean on the back of \the [src] and start pushing the door open. (this will take about [breakout_time] minutes)</span>"
 
 	visible_message("<span class='danger'>The [src] begins to shake violently!</span>")

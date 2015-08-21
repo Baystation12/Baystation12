@@ -126,7 +126,7 @@ obj/item/check_airflow_movable(n)
 		step_towards(src, src.airflow_dest)
 		var/mob/M = src
 		if(istype(M) && M.client)
-			M.client.move_delay = world.time + vsc.airflow_mob_slowdown
+			M.setMoveCooldown(vsc.airflow_mob_slowdown)
 	airflow_dest = null
 	airflow_speed = 0
 	airflow_time = 0
