@@ -155,6 +155,12 @@
 	for(var/u_type in unarmed_types)
 		unarmed_attacks += new u_type()
 
+/datum/species/proc/get_station_variant()
+	return name
+
+/datum/species/proc/get_bodytype()
+	return name
+
 /datum/species/proc/get_environment_discomfort(var/mob/living/carbon/human/H, var/msg_type)
 
 	if(!prob(5))

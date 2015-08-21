@@ -62,6 +62,9 @@
 	var/weeds_heal_rate = 1     // Health regen on weeds.
 	var/weeds_plasma_rate = 5   // Plasma regen on weeds.
 
+/datum/species/xenos/get_bodytype()
+	return "Xenomorph"
+
 /datum/species/xenos/get_random_name()
 	return "alien [caste_name] ([alien_number])"
 
