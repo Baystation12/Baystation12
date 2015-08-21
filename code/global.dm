@@ -189,7 +189,7 @@ var/list/awaydestinations = list() // Away missions. A list of landmarks that th
 // MySQL configuration
 var/sqladdress = "localhost"
 var/sqlport    = "3306"
-var/sqldb      = "tgstation"
+var/sqldb      = "feedback"
 var/sqllogin   = "aphelion"
 var/sqlpass    = "shitinmymouth" // You can't have a [ in the password. It throws syntax errors.
 
@@ -197,7 +197,7 @@ var/sqlpass    = "shitinmymouth" // You can't have a [ in the password. It throw
 var/sqlfdbkdb    = "feedback"
 var/sqlfdbklogin = "aphelion"
 var/sqlfdbkpass  = "shitinmymouth" // You can't have a [ in the password. It throws syntax errors.
-var/sqllogging   = 0 // Should we log deaths, population stats, etc.?
+var/sqllogging   = 1 // Should we log deaths, population stats, etc.?
 
 // Forum MySQL configuration. (for use with forum account/key authentication)
 // These are all default values that will load should the forumdbconfig.txt file fail to read for whatever reason.
