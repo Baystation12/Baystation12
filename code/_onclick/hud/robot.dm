@@ -57,7 +57,7 @@ var/obj/screen/robot_inventory
 	using.name = "act_intent"
 	using.set_dir(SOUTHWEST)
 	using.icon = 'icons/mob/screen1_robot.dmi'
-	using.icon_state = (mymob.a_intent == I_HURT ? I_HURT : mymob.a_intent)
+	using.icon_state = mymob.a_intent
 	using.screen_loc = ui_acti
 	using.layer = 20
 	src.adding += using

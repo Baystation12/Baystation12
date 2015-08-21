@@ -130,9 +130,9 @@ var/global/list/endgame_safespawns = list()
 		S.race_key = rkey //Used in mob icon caching.
 		all_species[S.name] = S
 
-		if(!(S.flags & IS_RESTRICTED))
+		if(!(S.spawn_flags & IS_RESTRICTED))
 			playable_species += S.name
-		if(S.flags & IS_WHITELISTED)
+		if(S.spawn_flags & IS_WHITELISTED)
 			whitelisted_species += S.name
 
 	//Posters

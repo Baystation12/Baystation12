@@ -3,8 +3,8 @@
 	name = "breath mask"
 	icon_state = "breath"
 	item_state = "breath"
-	flags = MASKCOVERSMOUTH | AIRTIGHT
-	body_parts_covered = 0
+	item_flags = AIRTIGHT|FLEXIBLEMATERIAL
+	body_parts_covered = FACE
 	w_class = 2
 	gas_transfer_coefficient = 0.10
 	permeability_coefficient = 0.50
@@ -20,16 +20,16 @@
 		if(!src.hanging)
 			src.hanging = !src.hanging
 			gas_transfer_coefficient = 1 //gas is now escaping to the turf and vice versa
-			flags &= ~(MASKCOVERSMOUTH | AIRTIGHT)
-			body_parts_covered = 0
+			item_flags &= ~(AIRTIGHT)
+			body_parts_covered = ~(FACE)
 			icon_state = "breathdown"
 			user << "Your mask is now hanging on your neck."
 
 		else
 			src.hanging = !src.hanging
 			gas_transfer_coefficient = initial(gas_transfer_coefficient)
-			flags |= MASKCOVERSMOUTH | AIRTIGHT
-			body_parts_covered = initial(body_parts_covered)
+			item_flags |= AIRTIGHT
+			body_parts_covered |= FACE
 			icon_state = "breath"
 			user << "You pull the mask up to cover your face."
 		update_clothing_icon()

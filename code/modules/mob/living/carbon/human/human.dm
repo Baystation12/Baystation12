@@ -1225,10 +1225,10 @@
 	else
 		switch(target_zone)
 			if("head")
-				if(head && head.flags & THICKMATERIAL)
+				if(head && head.item_flags & THICKMATERIAL)
 					. = 0
 			else
-				if(wear_suit && wear_suit.flags & THICKMATERIAL)
+				if(wear_suit && wear_suit.item_flags & THICKMATERIAL)
 					. = 0
 	if(!. && error_msg && user)
 		if(!fail_msg)
@@ -1301,7 +1301,7 @@
 	return 0
 
 /mob/living/carbon/human/slip(var/slipped_on, stun_duration=8)
-	if((species.flags & NO_SLIP) || (shoes && (shoes.flags & NOSLIP)))
+	if((species.flags & NO_SLIP) || (shoes && (shoes.item_flags & NOSLIP)))
 		return 0
 	..(slipped_on,stun_duration)
 
@@ -1369,6 +1369,6 @@
 		handle_regular_hud_updates()
 
 /mob/living/carbon/human/Check_Shoegrip()
-	if(istype(shoes, /obj/item/clothing/shoes/magboots) && (shoes.flags & NOSLIP))  //magboots + dense_object = no floating
+	if(istype(shoes, /obj/item/clothing/shoes/magboots) && (shoes.item_flags & NOSLIP))  //magboots + dense_object = no floating
 		return 1
 	return 0

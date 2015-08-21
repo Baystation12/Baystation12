@@ -9,6 +9,7 @@ var/datum/uplink/uplink = new()
 	items_assoc = list()
 	items = init_subtypes(/datum/uplink_item)
 	categories = init_subtypes(/datum/uplink_category)
+	categories = dd_sortedObjectList(categories)
 
 	for(var/datum/uplink_item/item in items)
 		if(!item.name)
@@ -38,14 +39,30 @@ var/datum/uplink/uplink = new()
 	..()
 	antag_roles = list()
 
-/datum/uplink_item/proc/buy(var/obj/item/device/uplink/U, var/mob/user)
-	purchase_log(U)
-	var/cost = cost(U.uses)
-	var/goods = get_goods(U, get_turf(user))
 
+
+/datum/uplink_item/proc/buy(var/obj/item/device/uplink/U, var/mob/user)
+	var/extra_args = extra_args(user)
+	if(!extra_args)
+		return
+
+	if(!can_buy(U))
+		return
+
+	var/cost = cost(U.uses)
+
+	var/goods = get_goods(U, get_turf(user), user, extra_args)
+	if(!goods)
+		return
+
+	purchase_log(U)
 	U.uses -= cost
 	U.used_TC += cost
 	return goods
+
+// Any additional arguments you wish to send to the get_goods
+/datum/uplink_item/proc/extra_args(var/mob/user)
+	return 1
 
 /datum/uplink_item/proc/can_buy(obj/item/device/uplink/U)
 	if(cost(U.uses) > U.uses)
@@ -90,11 +107,14 @@ datum/uplink_item/dd_SortValue()
 
 /********************************
 *                           	*
-*	Physical Uplink Entires		*
+*	Physical Uplink Entries		*
 *                           	*
 ********************************/
 /datum/uplink_item/item/buy(var/obj/item/device/uplink/U, var/mob/user)
 	var/obj/item/I = ..()
+	if(!I)
+		return
+
 	if(istype(I, /list))
 		var/list/L = I
 		if(L.len) I = L[1]
@@ -155,11 +175,6 @@ datum/uplink_item/dd_SortValue()
 ***************************************/
 /datum/uplink_item/item/visible_weapons
 	category = /datum/uplink_category/visible_weapons
-
-/datum/uplink_item/item/visible_weapons/emp
-	name = "5xEMP Grenades"
-	item_cost = 3
-	path = /obj/item/weapon/storage/box/emps
 
 /datum/uplink_item/item/visible_weapons/energy_sword
 	name = "Energy Sword"
@@ -452,6 +467,27 @@ datum/uplink_item/dd_SortValue()
 	item_cost = 8
 	path = /obj/item/rig_module/mounted
 
+/***********
+* Grenades *
+************/
+/datum/uplink_item/item/grenades
+	category = /datum/uplink_category/grenades
+
+/datum/uplink_item/item/grenades/anti_photon
+	name = "5xPhoton Disruption Grenades"
+	item_cost = 2
+	path = /obj/item/weapon/storage/box/anti_photons
+
+/datum/uplink_item/item/grenades/emp
+	name = "5xEMP Grenades"
+	item_cost = 3
+	path = /obj/item/weapon/storage/box/emps
+
+/datum/uplink_item/item/grenades/smoke
+	name = "5xSmoke Grenades"
+	item_cost = 2
+	path = /obj/item/weapon/storage/box/smokes
+
 /************
 * Badassery *
 ************/
@@ -530,6 +566,124 @@ datum/uplink_item/dd_SortValue()
 		icon = image(initial(C.icon), initial(C.icon_state))
 
 	return "\icon[icon]"
+
+/********************************
+*                           	*
+*	Abstract Uplink Entries		*
+*                           	*
+********************************/
+var/image/default_abstract_uplink_icon
+/datum/uplink_item/abstract/log_icon()
+	if(!default_abstract_uplink_icon)
+		default_abstract_uplink_icon = image('icons/obj/pda.dmi', "pda-syn")
+
+	return "\icon[default_abstract_uplink_icon]"
+
+/****************
+* Announcements *
+*****************/
+/datum/uplink_item/abstract/announcements
+	category = /datum/uplink_category/services
+
+/datum/uplink_item/abstract/announcements/buy(var/obj/item/device/uplink/U, var/mob/user)
+	. = ..()
+	if(.)
+		log_and_message_admins("has triggered a falsified [src]", user)
+
+/datum/uplink_item/abstract/announcements/fake_centcom
+	item_cost = DEFAULT_TELECRYSTAL_AMOUNT / 2
+
+/datum/uplink_item/abstract/announcements/fake_centcom/New()
+	..()
+	name = "[command_name()] Update Announcement"
+	desc = "Causes a falsified [command_name()] Update. Triggers immediately after supplying additional data."
+	antag_roles = list(MODE_MERCENARY)
+
+/datum/uplink_item/abstract/announcements/fake_centcom/get_goods(var/obj/item/device/uplink/U, var/loc, var/mob/user, var/list/args)
+	command_announcement.Announce(args.["message"], args.["title"])
+	return 1
+
+/datum/uplink_item/abstract/announcements/fake_crew_arrival
+	name = "Crew Arrival Announcement/Records"
+	desc = "Creates a fake crew arrival announcement as well as fake crew records, using your current appearance (including held items!) and worn id card. Trigger with care!"
+	item_cost = 4
+
+/datum/uplink_item/abstract/announcements/fake_crew_arrival/New()
+	..()
+	antag_roles = list(MODE_MERCENARY)
+
+/datum/uplink_item/abstract/announcements/fake_crew_arrival/get_goods(var/obj/item/device/uplink/U, var/loc, var/mob/user, var/list/args)
+	if(!user)
+		return 0
+
+	var/obj/item/weapon/card/id/I = GetIdCard(user)
+	var/datum/data/record/random_general_record
+	var/datum/data/record/random_medical_record
+	if(data_core.general.len)
+		random_general_record	= pick(data_core.general)
+		random_medical_record	= find_medical_record("id", random_general_record.fields["id"])
+
+	var/datum/data/record/general = data_core.CreateGeneralRecord(user)
+	if(I)
+		general.fields["age"] = I.age
+		general.fields["rank"] = I.assignment
+		general.fields["real_rank"] = I.assignment
+		general.fields["name"] = I.registered_name
+		general.fields["sex"] = I.sex
+	else
+		var/mob/living/carbon/human/H
+		if(istype(user,/mob/living/carbon/human))
+			H = user
+			general.fields["age"] = H.age
+		else
+			general.fields["age"] = initial(H.age)
+		var/assignment = GetAssignment(user)
+		general.fields["rank"] = assignment
+		general.fields["real_rank"] = assignment
+		general.fields["name"] = user.real_name
+		general.fields["sex"] = capitalize(user.gender)
+
+	general.fields["species"] = user.get_species()
+	var/datum/data/record/medical = data_core.CreateMedicalRecord(general.fields["name"], general.fields["id"])
+	data_core.CreateSecurityRecord(general.fields["name"], general.fields["id"])
+
+	if(!random_general_record)
+		general.fields["citizenship"]	= random_general_record.fields["citizenship"]
+		general.fields["faction"] 		= random_general_record.fields["faction"]
+		general.fields["fingerprint"] 	= random_general_record.fields["fingerprint"]
+		general.fields["home_system"] 	= random_general_record.fields["home_system"]
+		general.fields["religion"] 		= random_general_record.fields["religion"]
+	if(random_medical_record)
+		medical.fields["b_type"]		= random_medical_record.fields["b_type"]
+		medical.fields["b_dna"]			= random_medical_record.fields["b_type"]
+
+	if(I)
+		general.fields["fingerprint"] 	= I.fingerprint_hash
+		medical.fields["b_type"]	= I.blood_type
+		medical.fields["b_dna"]		= I.dna_hash
+
+	AnnounceArrivalSimple(general.fields["name"], general.fields["rank"])
+	return 1
+
+/datum/uplink_item/abstract/announcements/fake_ion_storm
+	name = "Ion Storm Announcement"
+	desc = "Interferes with the station's ion sensors. Triggers immediately upon investment."
+	item_cost = 1
+
+/datum/uplink_item/abstract/announcements/fake_ion_storm/get_goods(var/obj/item/device/uplink/U, var/loc)
+	ion_storm_announcement()
+	return 1
+
+/datum/uplink_item/abstract/announcements/fake_radiation
+	name = "Radiation Storm Announcement"
+	desc = "Interferes with the station's radiation sensors. Triggers immediately upon investment."
+	item_cost = 3
+
+/datum/uplink_item/abstract/announcements/fake_radiation/get_goods(var/obj/item/device/uplink/U, var/loc)
+	var/datum/event_meta/EM = new(EVENT_LEVEL_MUNDANE, "Fake Radiation Storm", add_to_queue = 0)
+	new/datum/event/radiation_storm/syndicate(EM)
+	return 1
+
 
 /****************
 * Support procs *
