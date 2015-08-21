@@ -115,9 +115,11 @@
 				continue
 			var/mob/living/carbon/human/target = M
 			if(istype(target))
-				if(target.head && (target.head.flags & HEADCOVERSMOUTH) && (target.head.flags & AIRTIGHT))
+				if(target.internals)
 					continue
-				if(target.wear_mask && (target.wear_mask.flags & MASKCOVERSMOUTH) && (target.wear_mask.flags & BLOCK_GAS_SMOKE_EFFECT))
+				if(target.head && (target.head.body_parts_covered & FACE) && (target.head.flags & AIRTIGHT))
+					continue
+				if(target.wear_mask && (target.wear_mask.body_parts_covered & FACE) && (target.wear_mask.flags & BLOCK_GAS_SMOKE_EFFECT))
 					continue
 			M << "<span class='danger'>A terrible stench emanates from \the [H].</span>"
 
