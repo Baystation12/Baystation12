@@ -728,7 +728,7 @@ datum/objective/heist/kidnap
 			//if (!target.current.restrained())
 			//	return 0 // They're loose. Close but no cigar.
 
-			var/area/shuttle/skipjack/station/A = locate()
+			var/area/skipjack_station/start/A = locate()
 			for(var/mob/living/carbon/human/M in A)
 				if(target.current == M)
 					return 1 //They're restrained on the shuttle. Success.
@@ -779,7 +779,7 @@ datum/objective/heist/loot
 
 		var/total_amount = 0
 
-		for(var/obj/O in locate(/area/shuttle/skipjack/station))
+		for(var/obj/O in locate(/area/skipjack_station/start))
 			if(istype(O,target)) total_amount++
 			for(var/obj/I in O.contents)
 				if(istype(I,target)) total_amount++
@@ -828,7 +828,7 @@ datum/objective/heist/salvage
 
 		var/total_amount = 0
 
-		for(var/obj/item/O in locate(/area/shuttle/skipjack/station))
+		for(var/obj/item/O in locate(/area/skipjack_station/start))
 
 			var/obj/item/stack/material/S
 			if(istype(O,/obj/item/stack/material))

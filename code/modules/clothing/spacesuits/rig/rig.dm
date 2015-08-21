@@ -180,8 +180,7 @@
 		if(!piece) continue
 		piece.icon_state = "[initial(icon_state)]"
 		if(airtight)
-			piece.flags &= ~STOPPRESSUREDAMAGE
-			piece.flags &= ~AIRTIGHT
+			piece.item_flags &= ~(STOPPRESSUREDAMAGE|AIRTIGHT)
 	update_icon(1)
 
 /obj/item/weapon/rig/proc/toggle_seals(var/mob/living/carbon/human/M,var/instant)
@@ -289,11 +288,10 @@
 /obj/item/weapon/rig/proc/update_component_sealed()
 	for(var/obj/item/piece in list(helmet,boots,gloves,chest))
 		if(canremove)
-			piece.flags &= ~STOPPRESSUREDAMAGE
-			piece.flags &= ~AIRTIGHT
+			piece.item_flags &= ~(STOPPRESSUREDAMAGE|AIRTIGHT)
 		else
-			piece.flags |=  STOPPRESSUREDAMAGE
-			piece.flags |=  AIRTIGHT
+			piece.item_flags |=  (STOPPRESSUREDAMAGE|AIRTIGHT)
+	update_icon(1)
 
 /obj/item/weapon/rig/process()
 
@@ -467,8 +465,8 @@
 		var/species_icon = 'icons/mob/rig_back.dmi'
 		// Since setting mob_icon will override the species checks in
 		// update_inv_wear_suit(), handle species checks here.
-		if(wearer && sprite_sheets && sprite_sheets[wearer.species.name])
-			species_icon =  sprite_sheets[wearer.species.name]
+		if(wearer && sprite_sheets && sprite_sheets[wearer.species.get_bodytype()])
+			species_icon =  sprite_sheets[wearer.species.get_bodytype()]
 		mob_icon = image("icon" = species_icon, "icon_state" = "[icon_state]")
 
 	if(installed_modules.len)

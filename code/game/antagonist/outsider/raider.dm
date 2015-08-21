@@ -184,7 +184,7 @@ var/datum/antagonist/raider/raiders
 		return 0
 
 	for(var/datum/mind/player in current_antagonists)
-		if(!player.current || get_area(player.current) != locate(/area/shuttle/skipjack/station))
+		if(!player.current || get_area(player.current) != locate(/area/skipjack_station/start))
 			return 0
 	return 1
 
@@ -193,7 +193,7 @@ var/datum/antagonist/raider/raiders
 	if(!..())
 		return 0
 
-	if(player.species && player.species.name == "Vox")
+	if(player.species && player.species.get_bodytype() == "Vox")
 		equip_vox(player)
 	else
 		var/new_shoes =   pick(raider_shoes)

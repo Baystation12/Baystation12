@@ -12,7 +12,7 @@
 	preserve_map = 0
 
 	wall_type = /turf/simulated/wall/titanium
-	floor_type = /turf/simulated/floor/engine
+	floor_type = /turf/simulated/floor/reinforced
 	var/list/supplied_drop_types = list()
 	var/door_type = /obj/structure/droppod_door
 	var/drop_type = /mob/living/simple_animal/parrot

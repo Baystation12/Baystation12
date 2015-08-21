@@ -110,7 +110,7 @@
 	return 1
 
 /mob/living/carbon/human/proc/change_skin_color(var/red, var/green, var/blue)
-	if(red == r_skin && green == g_skin && blue == b_skin || !(species.flags & HAS_SKIN_COLOR))
+	if(red == r_skin && green == g_skin && blue == b_skin || !(species.appearance_flags & HAS_SKIN_COLOR))
 		return
 
 	r_skin = red
@@ -122,7 +122,7 @@
 	return 1
 
 /mob/living/carbon/human/proc/change_skin_tone(var/tone)
-	if(s_tone == tone || !(species.flags & HAS_SKIN_TONE))
+	if(s_tone == tone || !(species.appearance_flags & HAS_SKIN_TONE))
 		return
 
 	s_tone = tone
@@ -141,13 +141,13 @@
 		var/datum/species/current_species = all_species[current_species_name]
 
 		if(check_whitelist && config.usealienwhitelist && !check_rights(R_ADMIN, 0, src)) //If we're using the whitelist, make sure to check it!
-			if(!(current_species.flags & CAN_JOIN))
+			if(!(current_species.spawn_flags & CAN_JOIN))
 				continue
 			if(whitelist.len && !(current_species_name in whitelist))
 				continue
 			if(blacklist.len && (current_species_name in blacklist))
 				continue
-			if((current_species.flags & IS_WHITELISTED) && !is_alien_whitelisted(src, current_species_name))
+			if((current_species.spawn_flags & IS_WHITELISTED) && !is_alien_whitelisted(src, current_species_name))
 				continue
 
 		valid_species += current_species_name
@@ -163,7 +163,7 @@
 			continue
 		if(check_gender && gender == FEMALE && S.gender == MALE)
 			continue
-		if(!(species.name in S.species_allowed))
+		if(!(species.get_bodytype() in S.species_allowed))
 			continue
 		valid_hairstyles += hairstyle
 
@@ -178,7 +178,7 @@
 			continue
 		if(gender == FEMALE && S.gender == MALE)
 			continue
-		if(!(species.name in S.species_allowed))
+		if(!(species.get_bodytype() in S.species_allowed))
 			continue
 
 		valid_facial_hairstyles += facialhairstyle

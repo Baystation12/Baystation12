@@ -46,8 +46,8 @@ obj/machinery/atmospherics/pipe/zpipe/New()
 		if(SOUTHWEST)
 			initialize_directions = SOUTH
 
-obj/machinery/atmospherics/pipe/zpipe/hide(var/i)
-	if(level == 1 && istype(loc, /turf/simulated))
+/obj/machinery/atmospherics/pipe/zpipe/hide(var/i)
+	if(istype(loc, /turf/simulated))
 		invisibility = i ? 101 : 0
 	update_icon()
 
@@ -149,7 +149,7 @@ obj/machinery/atmospherics/pipe/zpipe/up/initialize()
 
 
 	var/turf/T = src.loc			// hide if turf is not intact
-	hide(T.intact)
+	hide(!T.is_plating())
 
 ///////////////////////
 // and the down pipe //
@@ -190,7 +190,7 @@ obj/machinery/atmospherics/pipe/zpipe/down/initialize()
 
 
 	var/turf/T = src.loc			// hide if turf is not intact
-	hide(T.intact)
+	hide(!T.is_plating())
 
 ///////////////////////
 // supply/scrubbers  //

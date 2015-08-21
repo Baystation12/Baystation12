@@ -3,10 +3,12 @@
 /obj/machinery/computer/skills//TODO:SANITY
 	name = "employment records console"
 	desc = "Used to view, edit and maintain employment records."
-	icon_state = "medlaptop"
+	icon_state = "laptop"
+	icon_keyboard = "laptop_key"
+	icon_screen = "medlaptop"
 	light_color = "#00b000"
 	req_one_access = list(access_heads)
-	circuit = "/obj/item/weapon/circuitboard/skills"
+	circuit = /obj/item/weapon/circuitboard/skills
 	var/obj/item/weapon/card/id/scan = null
 	var/authenticated = null
 	var/rank = null
@@ -21,7 +23,6 @@
 	//Sorting Variables
 	var/sortBy = "name"
 	var/order = 1 // -1 = Descending - 1 = Ascending
-
 
 /obj/machinery/computer/skills/attackby(obj/item/O as obj, user as mob)
 	if(istype(O, /obj/item/weapon/card/id) && !scan)
@@ -302,7 +303,7 @@ What a mess.*/
 			if ("New Record (General)")
 				if(PDA_Manifest.len)
 					PDA_Manifest.Cut()
-				active1 = CreateGeneralRecord()
+				active1 = data_core.CreateGeneralRecord()
 
 //FIELD FUNCTIONS
 			if ("Edit Field")

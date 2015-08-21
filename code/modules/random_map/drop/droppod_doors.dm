@@ -46,10 +46,10 @@
 
 	// Overwrite turfs.
 	var/turf/origin = get_turf(src)
-	origin.ChangeTurf(/turf/simulated/floor/engine)
+	origin.ChangeTurf(/turf/simulated/floor/reinforced)
 	origin.set_light(0) // Forcing updates
 	var/turf/T = get_step(origin, src.dir)
-	T.ChangeTurf(/turf/simulated/floor/engine)
+	T.ChangeTurf(/turf/simulated/floor/reinforced)
 	T.set_light(0) // Forcing updates
 
 	// Destroy turf contents.

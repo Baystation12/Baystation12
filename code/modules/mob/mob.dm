@@ -153,7 +153,7 @@
 	return
 
 /mob/proc/incapacitated()
-	return
+	return (stat || paralysis || stunned || weakened || restrained())
 
 /mob/proc/restrained()
 	return
@@ -277,8 +277,6 @@
 		if (W)
 			W.attack_self(src)
 			update_inv_r_hand()
-	if(next_move < world.time)
-		next_move = world.time + 2
 	return
 
 /*
@@ -654,16 +652,21 @@
 	. = (client && client.inactivity < 1200)
 
 	if(.)
+		if(statpanel("Status") && ticker && ticker.current_state != GAME_STATE_PREGAME)
+			stat("Station Time", worldtime2text())
+			stat("Round Duration", round_duration())
+
 		if(client.holder)
 			if(statpanel("Status"))
-				statpanel("Status","Location:","([x], [y], [z])")
-				statpanel("Status","CPU:","[world.cpu]")
-				statpanel("Status","Instances:","[world.contents.len]")
-			if(statpanel("Status") && processScheduler && processScheduler.getIsRunning())
-				for(var/datum/controller/process/P in processScheduler.processes)
-					statpanel("Status",P.getStatName(), P.getTickTime())
-			else
-				statpanel("Status","processScheduler is not running.")
+				stat("Location:","([x], [y], [z])")
+			if(statpanel("Processes"))
+				stat("CPU:","[world.cpu]")
+				stat("Instances:","[world.contents.len]")
+				if(processScheduler && processScheduler.getIsRunning())
+					for(var/datum/controller/process/P in processScheduler.processes)
+						stat(P.getStatName(), P.getTickTime())
+				else
+					stat("processScheduler is not running.")
 
 		if(listed_turf && client)
 			if(!TurfAdjacent(listed_turf))
@@ -729,7 +732,7 @@
 		drop_l_hand()
 		drop_r_hand()
 	else
-		density = 1
+		density = initial(density)
 
 	for(var/obj/item/weapon/grab/G in grabbed_by)
 		if(G.state >= GRAB_AGGRESSIVE)
@@ -760,22 +763,22 @@
 
 /mob/verb/eastface()
 	set hidden = 1
-	return facedir(EAST)
+	return facedir(client.client_dir(EAST))
 
 
 /mob/verb/westface()
 	set hidden = 1
-	return facedir(WEST)
+	return facedir(client.client_dir(WEST))
 
 
 /mob/verb/northface()
 	set hidden = 1
-	return facedir(NORTH)
+	return facedir(client.client_dir(NORTH))
 
 
 /mob/verb/southface()
 	set hidden = 1
-	return facedir(SOUTH)
+	return facedir(client.client_dir(SOUTH))
 
 
 //This might need a rename but it should replace the can this mob use things check
@@ -881,9 +884,9 @@ mob/proc/yank_out_object()
 	set desc = "Remove an embedded item at the cost of bleeding and pain."
 	set src in view(1)
 
-	if(!isliving(usr) || usr.next_move > world.time)
+	if(!isliving(usr) || !usr.canClick())
 		return
-	usr.next_move = world.time + 20
+	usr.setClickCooldown(20)
 
 	if(usr.stat == 1)
 		usr << "You are unconcious and cannot do that!"
@@ -1053,19 +1056,19 @@ mob/proc/yank_out_object()
 
 /mob/verb/northfaceperm()
 	set hidden = 1
-	set_face_dir(NORTH)
+	set_face_dir(client.client_dir(NORTH))
 
 /mob/verb/southfaceperm()
 	set hidden = 1
-	set_face_dir(SOUTH)
+	set_face_dir(client.client_dir(SOUTH))
 
 /mob/verb/eastfaceperm()
 	set hidden = 1
-	set_face_dir(EAST)
+	set_face_dir(client.client_dir(EAST))
 
 /mob/verb/westfaceperm()
 	set hidden = 1
-	set_face_dir(WEST)
+	set_face_dir(client.client_dir(WEST))
 
 /mob/proc/adjustEarDamage()
 	return

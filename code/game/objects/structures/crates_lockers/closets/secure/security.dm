@@ -122,7 +122,7 @@
 		new /obj/item/weapon/gun/energy/gun(src)
 		new /obj/item/clothing/accessory/holster/waist(src)
 		new /obj/item/weapon/melee/telebaton(src)
-		new /obj/item/clothing/head/beret/sec/hos(src)
+		new /obj/item/clothing/head/beret/sec/corporate/hos(src)
 		return
 
 
@@ -159,7 +159,7 @@
 		new /obj/item/weapon/melee/baton/loaded(src)
 		new /obj/item/weapon/gun/energy/gun(src)
 		new /obj/item/weapon/storage/box/holobadge(src)
-		new /obj/item/clothing/head/beret/sec/warden(src)
+		new /obj/item/clothing/head/beret/sec/corporate/warden(src)
 		return
 
 
@@ -308,7 +308,7 @@
 
 /obj/structure/closet/secure_closet/courtroom
 	name = "courtroom locker"
-	req_access = list(access_court)
+	req_access = list(access_lawyer)
 
 	New()
 		..()

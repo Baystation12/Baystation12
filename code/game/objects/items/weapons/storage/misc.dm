@@ -31,9 +31,7 @@
 	overlays.Cut()
 	var/i = 0
 	for(var/obj/item/weapon/reagent_containers/food/snacks/donut/D in contents)
-		var/image/img = image('icons/obj/food.dmi', D.overlay_state)
-		img.pixel_x = i * 3
-		overlays += img
+		overlays += image('icons/obj/food.dmi', "[i][D.overlay_state]")
 		i++
 
 /obj/item/weapon/storage/box/donut/empty
