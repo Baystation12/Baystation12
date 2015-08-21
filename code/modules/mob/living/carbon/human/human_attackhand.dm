@@ -6,6 +6,9 @@
 
 /mob/living/carbon/human/attack_hand(mob/living/carbon/M as mob)
 
+	if(M == src && M.a_intent != I_HURT)
+		return
+
 	var/mob/living/carbon/human/H = M
 	if(istype(H))
 		var/obj/item/organ/external/temp = H.organs_by_name["r_hand"]
