@@ -32,10 +32,10 @@
 
 		if(H.species)
 			if(exclusive)
-				if(!(H.species.name in species_restricted))
+				if(!(H.species.get_bodytype() in species_restricted))
 					wearable = 1
 			else
-				if(H.species.name in species_restricted)
+				if(H.species.get_bodytype() in species_restricted)
 					wearable = 1
 
 			if(!wearable && !(slot in list(slot_l_store, slot_r_store, slot_s_store)))
@@ -75,6 +75,7 @@
 			species_restricted = list("exclude","Unathi","Tajara","Diona","Vox", "Xenomorph", "Xenomorph Drone", "Xenomorph Hunter", "Xenomorph Sentinel", "Xenomorph Queen")
 		if("Human")
 			species_restricted = list("exclude","Skrell","Unathi","Tajara","Diona","Vox", "Xenomorph", "Xenomorph Drone", "Xenomorph Hunter", "Xenomorph Sentinel", "Xenomorph Queen")
+
 		else
 			species_restricted = list(target_species)
 
@@ -405,8 +406,8 @@ BLIND     // can't see anything
 	var/icon/under_icon
 	if(icon_override)
 		under_icon = icon_override
-	else if(H && sprite_sheets && sprite_sheets[H.species.name])
-		under_icon = sprite_sheets[H.species.name]
+	else if(H && sprite_sheets && sprite_sheets[H.species.get_bodytype()])
+		under_icon = sprite_sheets[H.species.get_bodytype()]
 	else if(item_icons && item_icons[slot_w_uniform_str])
 		under_icon = item_icons[slot_w_uniform_str]
 	else
