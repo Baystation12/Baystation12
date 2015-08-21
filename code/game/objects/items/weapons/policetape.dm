@@ -1,5 +1,5 @@
 //Define all tape types in policetape.dm
-/obj/item/taperoll
+/obj/item/tapeproj
 	name = "tape roll"
 	icon = 'icons/policetape.dmi'
 	icon_state = "rollstart"
@@ -29,8 +29,8 @@ var/list/tape_roll_applications = list()
 		hazard_overlays["[SOUTH]"]	= new/image('icons/effects/warning_stripes.dmi', icon_state = "S")
 		hazard_overlays["[WEST]"]	= new/image('icons/effects/warning_stripes.dmi', icon_state = "W")
 
-/obj/item/taperoll/police
-	name = "police tape"
+/obj/item/tapeproj/security
+	name = "police holotape"
 	desc = "A roll of police tape used to block off crime scenes from the public."
 	icon_state = "police_start"
 	tape_type = /obj/item/tape/police
@@ -42,7 +42,7 @@ var/list/tape_roll_applications = list()
 	req_access = list(access_security)
 	icon_base = "police"
 
-/obj/item/taperoll/engineering
+/obj/item/tapeproj/engineering
 	name = "engineering tape"
 	desc = "A roll of engineering tape used to block off working areas from the public."
 	icon_state = "engineering_start"
@@ -55,7 +55,7 @@ var/list/tape_roll_applications = list()
 	req_one_access = list(access_engine,access_atmospherics)
 	icon_base = "engineering"
 
-/obj/item/taperoll/attack_self(mob/user as mob)
+/obj/item/tapeproj/attack_self(mob/user as mob)
 	if(icon_state == "[icon_base]_start")
 		start = get_turf(src)
 		usr << "\blue You place the first end of the [src]."
@@ -108,7 +108,7 @@ var/list/tape_roll_applications = list()
 			cur = get_step_towards(cur,end)
 		usr << "\blue You finish placing the [src]."	//Git Test
 
-/obj/item/taperoll/afterattack(var/atom/A, mob/user as mob, proximity)
+/obj/item/tapeproj/afterattack(var/atom/A, mob/user as mob, proximity)
 	if(!proximity)
 		return
 
