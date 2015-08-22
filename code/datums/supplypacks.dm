@@ -1486,7 +1486,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 /datum/supply_packs/randomised/exosuit_mod
 	num_contained = 1
 	contains = list(
-		/obj/item/device/kit/paint/ripley,
+//		/obj/item/device/kit/paint/ripley,  // Does not have a sprite.
 		/obj/item/device/kit/paint/ripley/death,
 		/obj/item/device/kit/paint/ripley/flames_red,
 		/obj/item/device/kit/paint/ripley/flames_blue

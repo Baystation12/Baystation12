@@ -111,13 +111,14 @@
 		return ..()
 
 //Ripley APLU kits.
+/*
 /obj/item/device/kit/paint/ripley
 	name = "\"Classic\" APLU customisation kit"
 	new_name = "APLU \"Classic\""
 	new_desc = "A very retro APLU unit; didn't they retire these back in 2543?"
 	new_icon = "ripley-old"
 	allowed_types = list("ripley")
-
+*/
 /obj/item/device/kit/paint/ripley/death
 	name = "\"Reaper\" APLU customisation kit"
 	new_name = "APLU \"Reaper\""
