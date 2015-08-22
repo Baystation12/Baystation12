@@ -132,10 +132,10 @@
 	opacity = 0
 	anchored = 1
 	unacidable = 1
-	var/const/max_health = 10000
-	var/health = max_health //The shield can only take so much beating (prevents perma-prisons)
-	var/shield_generate_power = 0	//how much power we use when regenerating
-	var/shield_idle_power = 0
+	max_health = 10000
+	health = max_health //The shield can only take so much beating (prevents perma-prisons)
+	shield_generate_power = 0	//how much power we use when regenerating
+	shield_idle_power = 0
 
 /obj/machinery/shieldgen
 	name = "Emergency shield projector"
