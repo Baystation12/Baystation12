@@ -41,7 +41,7 @@
 	//how far the reaction proceeds each time it is processed. Used with either REACTION_RATE or HALF_LIFE macros.
 	var/reaction_rate = HALF_LIFE(0)
 
-	//if less than 1, the reaction will be inhibited if the ratio of products/reagents is too high. 
+	//if less than 1, the reaction will be inhibited if the ratio of products/reagents is too high.
 	//0.5 = 50% yield -> reaction will only proceed halfway until products are removed.
 	var/yield = 1.0
 
@@ -70,22 +70,22 @@
 
 /datum/chemical_reaction/proc/calc_reaction_progress(var/datum/reagents/holder, var/reaction_limit)
 	var/progress = reaction_limit * reaction_rate //simple exponential progression
-	
+
 	//calculate yield
 	if(1-yield > 0.001) //if yield ratio is big enough just assume it goes to completion
 		/*
 			Determine the max amount of product by applying the yield condition:
 			(max_product/result_amount) / reaction_limit == yield/(1-yield)
-			
+
 			We make use of the fact that:
 			reaction_limit = (holder.get_reagent_amount(reactant) / required_reagents[reactant]) of the limiting reagent.
 		*/
 		var/yield_ratio = yield/(1-yield)
 		var/max_product = yield_ratio * reaction_limit * result_amount //rearrange to obtain max_product
 		var/yield_limit = max(0, max_product - holder.get_reagent_amount(result))/result_amount
-		
+
 		progress = min(progress, yield_limit) //apply yield limit
-	
+
 	//apply min reaction progress - wasn't sure if this should go before or after applying yield
 	//I guess people can just have their miniscule reactions go to completion regardless of yield.
 	for(var/reactant in required_reagents)
@@ -93,7 +93,7 @@
 		if(remainder <= min_reaction*required_reagents[reactant])
 			progress = reaction_limit
 			break
-	
+
 	return progress
 
 /datum/chemical_reaction/proc/process(var/datum/reagents/holder)
@@ -101,28 +101,28 @@
 	var/list/reaction_limits = list()
 	for(var/reactant in required_reagents)
 		reaction_limits += holder.get_reagent_amount(reactant) / required_reagents[reactant]
-	
+
 	//determine how far the reaction proceeds
 	var/reaction_limit = min(reaction_limits)
 	var/progress_limit = calc_reaction_progress(holder, reaction_limit)
-	
+
 	var/reaction_progress = min(reaction_limit, progress_limit) //no matter what, the reaction progress cannot exceed the stoichiometric limit.
-	
+
 	//need to obtain the new reagent's data before anything is altered
 	var/data = send_data(holder, reaction_progress)
-	
+
 	//remove the reactants
 	for(var/reactant in required_reagents)
 		var/amt_used = required_reagents[reactant] * reaction_progress
 		holder.remove_reagent(reactant, amt_used, safety = 1)
-	
+
 	//add the product
 	var/amt_produced = result_amount * reaction_progress
 	if(result)
 		holder.add_reagent(result, amt_produced, data, safety = 1)
-	
+
 	on_reaction(holder, amt_produced)
-	
+
 	return reaction_progress
 
 //called when a reaction processes
@@ -1470,22 +1470,22 @@
 	name = "Iced Tea"
 	id = "icetea"
 	result = "icetea"
-	required_reagents = list("ice" = 1, "tea" = 3)
+	required_reagents = list("ice" = 1, "tea" = 4)
 	result_amount = 4
 
 /datum/chemical_reaction/icecoffee
 	name = "Iced Coffee"
 	id = "icecoffee"
 	result = "icecoffee"
-	required_reagents = list("ice" = 1, "coffee" = 3)
+	required_reagents = list("ice" = 1, "coffee" = 4)
 	result_amount = 4
 
 /datum/chemical_reaction/nuka_cola
 	name = "Nuka Cola"
 	id = "nuka_cola"
 	result = "nuka_cola"
-	required_reagents = list("uranium" = 1, "cola" = 6)
-	result_amount = 6
+	required_reagents = list("uranium" = 1, "cola" = 5)
+	result_amount = 5
 
 /datum/chemical_reaction/moonshine
 	name = "Moonshine"
@@ -1599,8 +1599,8 @@
 	name = "White Russian"
 	id = "whiterussian"
 	result = "whiterussian"
-	required_reagents = list("blackrussian" = 3, "cream" = 2)
-	result_amount = 5
+	required_reagents = list("blackrussian" = 2, "cream" = 1)
+	result_amount = 3
 
 /datum/chemical_reaction/whiskey_cola
 	name = "Whiskey Cola"
@@ -1620,8 +1620,8 @@
 	name = "Bloody Mary"
 	id = "bloodymary"
 	result = "bloodymary"
-	required_reagents = list("vodka" = 1, "tomatojuice" = 2, "limejuice" = 1)
-	result_amount = 4
+	required_reagents = list("vodka" = 2, "tomatojuice" = 3, "limejuice" = 1)
+	result_amount = 6
 
 /datum/chemical_reaction/gargle_blaster
 	name = "Pan-Galactic Gargle Blaster"
@@ -1648,22 +1648,22 @@
 	name = "Toxins Special"
 	id = "phoronspecial"
 	result = "phoronspecial"
-	required_reagents = list("rum" = 2, "vermouth" = 1, "phoron" = 2)
-	result_amount = 5
+	required_reagents = list("rum" = 2, "vermouth" = 2, "phoron" = 2)
+	result_amount = 6
 
 /datum/chemical_reaction/beepsky_smash
 	name = "Beepksy Smash"
 	id = "beepksysmash"
 	result = "beepskysmash"
-	required_reagents = list("limejuice" = 2, "whiskey" = 2, "iron" = 1)
-	result_amount = 4
+	required_reagents = list("limejuice" = 1, "whiskey" = 1, "iron" = 1)
+	result_amount = 2
 
 /datum/chemical_reaction/doctor_delight
 	name = "The Doctor's Delight"
 	id = "doctordelight"
 	result = "doctorsdelight"
-	required_reagents = list("limejuice" = 1, "tomatojuice" = 1, "orangejuice" = 1, "cream" = 1, "tricordrazine" = 1)
-	result_amount = 5
+	required_reagents = list("limejuice" = 1, "tomatojuice" = 1, "orangejuice" = 1, "cream" = 2, "tricordrazine" = 1)
+	result_amount = 6
 
 /datum/chemical_reaction/irish_cream
 	name = "Irish Cream"
@@ -1718,15 +1718,15 @@
 	name = "Long Island Iced Tea"
 	id = "longislandicedtea"
 	result = "longislandicedtea"
-	required_reagents = list("vodka" = 1, "gin" = 1, "tequilla" = 1, "cubalibre" = 1)
-	result_amount = 4
+	required_reagents = list("vodka" = 1, "gin" = 1, "tequilla" = 1, "cubalibre" = 3)
+	result_amount = 6
 
 /datum/chemical_reaction/icedtea
 	name = "Long Island Iced Tea"
 	id = "longislandicedtea"
 	result = "longislandicedtea"
-	required_reagents = list("vodka" = 1, "gin" = 1, "tequilla" = 1, "cubalibre" = 1)
-	result_amount = 4
+	required_reagents = list("vodka" = 1, "gin" = 1, "tequilla" = 1, "cubalibre" = 3)
+	result_amount = 6
 
 /datum/chemical_reaction/threemileisland
 	name = "Three Mile Island Iced Tea"
@@ -1746,8 +1746,8 @@
 	name = "Black Russian"
 	id = "blackrussian"
 	result = "blackrussian"
-	required_reagents = list("vodka" = 3, "kahlua" = 2)
-	result_amount = 5
+	required_reagents = list("vodka" = 2, "kahlua" = 1)
+	result_amount = 3
 
 /datum/chemical_reaction/manhattan
 	name = "Manhattan"
@@ -1774,8 +1774,8 @@
 	name = "Gin Fizz"
 	id = "ginfizz"
 	result = "ginfizz"
-	required_reagents = list("gin" = 2, "sodawater" = 1, "limejuice" = 1)
-	result_amount = 4
+	required_reagents = list("gin" = 1, "sodawater" = 1, "limejuice" = 1)
+	result_amount = 3
 
 /datum/chemical_reaction/bahama_mama
 	name = "Bahama mama"
@@ -1802,22 +1802,22 @@
 	name = "Demons Blood"
 	id = "demonsblood"
 	result = "demonsblood"
-	required_reagents = list("rum" = 1, "spacemountainwind" = 1, "blood" = 1, "dr_gibb" = 1)
-	result_amount = 4
+	required_reagents = list("rum" = 3, "spacemountainwind" = 1, "blood" = 1, "dr_gibb" = 1)
+	result_amount = 6
 
 /datum/chemical_reaction/booger
 	name = "Booger"
 	id = "booger"
 	result = "booger"
-	required_reagents = list("cream" = 1, "banana" = 1, "rum" = 1, "watermelonjuice" = 1)
-	result_amount = 4
+	required_reagents = list("cream" = 2, "banana" = 1, "rum" = 1, "watermelonjuice" = 1)
+	result_amount = 5
 
 /datum/chemical_reaction/antifreeze
 	name = "Anti-freeze"
 	id = "antifreeze"
 	result = "antifreeze"
-	required_reagents = list("vodka" = 2, "cream" = 1, "ice" = 1)
-	result_amount = 4
+	required_reagents = list("vodka" = 1, "cream" = 1, "ice" = 1)
+	result_amount = 3
 
 /datum/chemical_reaction/barefoot
 	name = "Barefoot"
@@ -1909,14 +1909,14 @@
 	id = "changelingsting"
 	result = "changelingsting"
 	required_reagents = list("screwdrivercocktail" = 1, "limejuice" = 1, "lemonjuice" = 1)
-	result_amount = 5
+	result_amount = 3
 
 /datum/chemical_reaction/aloe
 	name = "Aloe"
 	id = "aloe"
 	result = "aloe"
 	required_reagents = list("cream" = 1, "whiskey" = 1, "watermelonjuice" = 1)
-	result_amount = 2
+	result_amount = 3
 
 /datum/chemical_reaction/andalusia
 	name = "Andalusia"
@@ -1957,8 +1957,8 @@
 	name = "Erika Surprise"
 	id = "erikasurprise"
 	result = "erikasurprise"
-	required_reagents = list("ale" = 1, "limejuice" = 1, "whiskey" = 1, "banana" = 1, "ice" = 1)
-	result_amount = 5
+	required_reagents = list("ale" = 2, "limejuice" = 1, "whiskey" = 1, "banana" = 1, "ice" = 1)
+	result_amount = 6
 
 /datum/chemical_reaction/devilskiss
 	name = "Devils Kiss"
@@ -2007,14 +2007,14 @@
 	id = "kiraspecial"
 	result = "kiraspecial"
 	required_reagents = list("orangejuice" = 1, "limejuice" = 1, "sodawater" = 1)
-	result_amount = 2
+	result_amount = 3
 
 /datum/chemical_reaction/brownstar
 	name = "Brown Star"
 	id = "brownstar"
 	result = "brownstar"
 	required_reagents = list("orangejuice" = 2, "cola" = 1)
-	result_amount = 2
+	result_amount = 3
 
 /datum/chemical_reaction/milkshake
 	name = "Milkshake"
@@ -2034,8 +2034,8 @@
 	name = "Sui Dream"
 	id = "suidream"
 	result = "suidream"
-	required_reagents = list("space_up" = 2, "bluecuracao" = 1, "melonliquor" = 1)
-	result_amount = 4
+	required_reagents = list("space_up" = 1, "bluecuracao" = 1, "melonliquor" = 1)
+	result_amount = 3
 
 /* Removed xenoarcheology stuff
 datum
