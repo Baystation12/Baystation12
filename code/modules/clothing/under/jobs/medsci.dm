@@ -114,11 +114,12 @@
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 10, rad = 0)
 
 /obj/item/clothing/under/rank/medical/paramedic
-	name = "short sleeve medical jumpsuit"
-	desc = "It's made of a special fiber that provides minor protection against biohazards. This one has a cross on the chest denoting that the wearer is trained medical personnel."
-	icon_state = "medical_short"
-	item_state = "medical_short"
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS
+	name = "paramedic's jumpsuit"
+	desc = "A durable green jumpsuit made from a special fiber that provides minor protection against hazards such as debris or biohazards."
+	icon_state = "emtitem"
+	item_state = "emt"
+	worn_state = "emt"
+	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 10, rad = 0)
 
 /obj/item/clothing/under/rank/medical/blue
 	name = "medical scrubs"
