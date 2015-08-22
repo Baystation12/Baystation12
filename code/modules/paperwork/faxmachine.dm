@@ -60,7 +60,7 @@ var/list/adminfaxes = list()	//cache for faxes that have been sent to admins
 				dat += "<b>Transmitter arrays realigning. Please stand by.</b><br>"
 
 			else
-				
+
 				dat += "<a href='byond://?src=\ref[src];send=1'>Send</a><br>"
 				dat += "<b>Currently sending:</b> [copyitem.name]<br>"
 				dat += "<b>Sending to:</b> <a href='byond://?src=\ref[src];dept=1'>[destination]</a><br>"
@@ -89,7 +89,7 @@ var/list/adminfaxes = list()	//cache for faxes that have been sent to admins
 				send_admin_fax(usr, destination)
 			else
 				sendfax(destination)
-			
+
 			if (sendcooldown)
 				spawn(sendcooldown) // cooldown time
 					sendcooldown = 0
@@ -138,14 +138,14 @@ var/list/adminfaxes = list()	//cache for faxes that have been sent to admins
 /obj/machinery/photocopier/faxmachine/proc/sendfax(var/destination)
 	if(stat & (BROKEN|NOPOWER))
 		return
-	
+
 	use_power(200)
-	
+
 	var/success = 0
 	for(var/obj/machinery/photocopier/faxmachine/F in allfaxes)
 		if( F.department == destination )
 			success = F.recievefax(copyitem)
-	
+
 	if (success)
 		visible_message("[src] beeps, \"Message transmitted successfully.\"")
 		//sendcooldown = 600
@@ -155,16 +155,16 @@ var/list/adminfaxes = list()	//cache for faxes that have been sent to admins
 /obj/machinery/photocopier/faxmachine/proc/recievefax(var/obj/item/incoming)
 	if(stat & (BROKEN|NOPOWER))
 		return 0
-	
+
 	if(department == "Unknown")
 		return 0	//You can't send faxes to "Unknown"
 
 	flick("faxreceive", src)
 	playsound(loc, "sound/items/polaroid1.ogg", 50, 1)
-	
+
 	// give the sprite some time to flick
 	sleep(20)
-	
+
 	if (istype(incoming, /obj/item/weapon/paper))
 		copy(incoming)
 	else if (istype(incoming, /obj/item/weapon/photo))
@@ -180,7 +180,7 @@ var/list/adminfaxes = list()	//cache for faxes that have been sent to admins
 /obj/machinery/photocopier/faxmachine/proc/send_admin_fax(var/mob/sender, var/destination)
 	if(stat & (BROKEN|NOPOWER))
 		return
-	
+
 	use_power(200)
 
 	var/obj/item/rcvdcopy
@@ -193,10 +193,10 @@ var/list/adminfaxes = list()	//cache for faxes that have been sent to admins
 	else
 		visible_message("[src] beeps, \"Error transmitting message.\"")
 		return
-	
+
 	rcvdcopy.loc = null //hopefully this shouldn't cause trouble
 	adminfaxes += rcvdcopy
-	
+
 	//message badmins that a fax has arrived
 	switch(destination)
 		if ("Central Command")
@@ -204,15 +204,15 @@ var/list/adminfaxes = list()	//cache for faxes that have been sent to admins
 		if ("Sol Government")
 			message_admins(sender, "SOL GOVERNMENT FAX", rcvdcopy, "CentcommFaxReply", "#1F66A0")
 			//message_admins(sender, "SOL GOVERNMENT FAX", rcvdcopy, "SolGovFaxReply", "#1F66A0")
-	
+
 	sendcooldown = 1800
 	sleep(50)
 	visible_message("[src] beeps, \"Message transmitted successfully.\"")
-	
+
 
 /obj/machinery/photocopier/faxmachine/proc/message_admins(var/mob/sender, var/faxname, var/obj/item/sent, var/reply_type, font_colour="#006100")
 	var/msg = "\blue <b><font color='[font_colour]'>[faxname]: </font>[key_name(sender, 1)] (<A HREF='?_src_=holder;adminplayeropts=\ref[sender]'>PP</A>) (<A HREF='?_src_=vars;Vars=\ref[sender]'>VV</A>) (<A HREF='?_src_=holder;subtlemessage=\ref[sender]'>SM</A>) (<A HREF='?_src_=holder;adminplayerobservejump=\ref[sender]'>JMP</A>) (<A HREF='?_src_=holder;secretsadmin=check_antagonist'>CA</A>) (<a href='?_src_=holder;[reply_type]=\ref[sender];originfax=\ref[src]'>REPLY</a>)</b>: Receiving '[sent.name]' via secure connection ... <a href='?_src_=holder;AdminFaxView=\ref[sent]'>view message</a>"
 
 	for(var/client/C in admins)
-		if(R_ADMIN & C.holder.rights)
+		if(R_MENTOR & C.holder.rights)
 			C << msg
