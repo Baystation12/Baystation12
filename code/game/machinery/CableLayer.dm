@@ -20,10 +20,10 @@
 
 /obj/machinery/cablelayer/attack_hand(mob/user as mob)
 	if(!cable&&!on)
-		user << "\The [src] don't work with no cable."
+		user << "<span class='warning'>\The [src] doesn't have any cable loaded.</span>"
 		return
 	on=!on
-	user.visible_message("\The [src] [!on?"dea":"a"]ctivated.", "[user] [!on?"dea":"a"]ctivated \the [src].")
+	user.visible_message("\The [user] [!on?"dea":"a"]ctivates \the [src].", "You switch [src] [on? "on" : "off"]")
 	return
 
 /obj/machinery/cablelayer/attackby(var/obj/item/O as obj, var/mob/user as mob)
@@ -31,26 +31,27 @@
 
 		var/result = load_cable(O)
 		if(!result)
-			user << "Reel is full."
+			user << "<span class='warning'>\The [src]'s cable reel is full.</span>"
 		else
-			user << "[result] meters of cable successfully loaded."
+			user << "You load [result] lengths of cable into [src]."
 		return
 
-	if(istype(O, /obj/item/weapon/screwdriver))
+	if(istype(O, /obj/item/weapon/wirecutters))
 		if(cable && cable.amount)
 			var/m = round(input(usr,"Please specify the length of cable to cut","Cut cable",min(cable.amount,30)) as num, 1)
 			m = min(m, cable.amount)
 			m = min(m, 30)
 			if(m)
+				playsound(loc, 'sound/items/Wirecutter.ogg', 50, 1)
 				use_cable(m)
 				var/obj/item/stack/cable_coil/CC = new (get_turf(src))
 				CC.amount = m
 		else
-			usr << "There's no more cable on the reel."
+			usr << "<span class='warning'>There's no more cable on the reel.</span>"
 
 /obj/machinery/cablelayer/examine(mob/user)
 	..()
-	user << "\The [src] has [cable.amount] meter\s."
+	user << "\The [src]'s cable reel has [cable.amount] length\s left."
 
 /obj/machinery/cablelayer/proc/load_cable(var/obj/item/stack/cable_coil/CC)
 	if(istype(CC) && CC.amount)
@@ -70,12 +71,11 @@
 
 /obj/machinery/cablelayer/proc/use_cable(amount)
 	if(!cable || cable.amount<1)
-		visible_message("Cable depleted, [src] deactivated.")
+		visible_message("A red light flashes on \the [src].")
 		return
-/*	if(cable.amount < amount)
-		visible_message("No enough cable to finish the task.")
-		return*/
 	cable.use(amount)
+	if(deleted(cable)) 
+		cable = null
 	return 1
 
 /obj/machinery/cablelayer/proc/reset()
