@@ -135,7 +135,7 @@
 
 /obj/item/stack/material/tungsten
 	name = "tungsten"
-	icon_state = "sheet-adamantine"
+	icon_state = "sheet-tungsten"
 	default_type = "tungsten"
 
 //Extremely valuable to Research.
