@@ -391,6 +391,12 @@
 	hidden = 1
 	category = "Devices and Components"
 
+/datum/autolathe/recipe/beartrap
+	name = "mechanical trap"
+	path = /obj/item/weapon/beartrap
+	hidden = 1
+	category = "Devices and Components"
+
 /datum/autolathe/recipe/welder_industrial
 	name = "industrial welding tool"
 	path = /obj/item/weapon/weldingtool/largetank

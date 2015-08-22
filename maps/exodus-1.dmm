@@ -5010,7 +5010,7 @@
 "bSr" = (/obj/item/weapon/paper_bin{pixel_x = -3; pixel_y = 7},/obj/item/weapon/pen,/obj/structure/table/steel,/turf/simulated/floor,/area/janitor)
 "bSs" = (/obj/machinery/atmospherics/unary/vent_pump/on{dir = 1},/turf/simulated/floor{icon_state = "white"},/area/crew_quarters/heads/cmo)
 "bSt" = (/obj/machinery/computer/crew,/obj/machinery/light,/turf/simulated/floor{dir = 6; icon_state = "whiteblue"; tag = "icon-whitehall (WEST)"},/area/crew_quarters/heads/cmo)
-"bSu" = (/obj/item/weapon/beartrap,/obj/item/weapon/storage/box/mousetraps,/obj/item/weapon/storage/box/mousetraps,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/item/weapon/beartrap,/turf/simulated/floor,/area/janitor)
+"bSu" = (/obj/item/weapon/storage/box/mousetraps,/obj/item/weapon/storage/box/mousetraps,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/turf/simulated/floor,/area/janitor)
 "bSv" = (/obj/structure/disposalpipe/segment,/obj/structure/cable/green{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/atmospherics/unary/vent_pump/on{dir = 8},/turf/simulated/floor{icon_state = "white"},/area/medical/medbay2)
 "bSw" = (/obj/machinery/hologram/holopad,/turf/simulated/floor{icon_state = "white"},/area/medical/sleeper)
 "bSx" = (/obj/machinery/firealarm{dir = 1; pixel_y = -24},/obj/machinery/light,/obj/machinery/atmospherics/unary/vent_pump/on{dir = 1},/turf/simulated/floor{tag = "icon-cafeteria (NORTHEAST)"; icon_state = "cafeteria"; dir = 5},/area/crew_quarters/medbreak)
