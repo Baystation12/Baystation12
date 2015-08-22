@@ -176,7 +176,7 @@
 		return
 
 	return
-	
+
 /obj/machinery/vending/emag_act(var/remaining_charges, var/mob/user)
 	if (!emagged)
 		src.emagged = 1
@@ -235,26 +235,25 @@
 		nanomanager.update_uis(src)
 		return
 	else if(istype(W, /obj/item/weapon/wrench))
+		playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
+		if(anchored)
+			user.visible_message("[user] begins unsecuring \the [src] from the floor.", "You start unsecuring \the [src] from the floor.")
+		else
+			user.visible_message("[user] begins securing \the [src] to the floor.", "You start securing \the [src] to the floor.")
+
 		if(do_after(user, 20))
 			if(!src) return
-			playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
-			switch (anchored)
-				if (0)
-					anchored = 1
-					user.visible_message("\The [user] tightens the bolts securing \the [src] to the floor.", "You tighten the bolts securing \the [src] to the floor.")
-				if (1)
-					user.visible_message("\The [user] unfastens the bolts securing \the [src] to the floor.", "You unfasten the bolts securing \the [src] to the floor.")
-					anchored = 0
+			user << "<span class='notice'>You [anchored? "un" : ""]secured \the [src]!</span>"
+			anchored = !anchored
 		return
 
-	else if(src.panel_open)
+	else
 
 		for(var/datum/data/vending_product/R in product_records)
 			if(istype(W, R.product_path))
 				stock(R, user)
 				qdel(W)
-
-	else
+				return
 		..()
 
 /**
@@ -560,7 +559,7 @@
 
 /obj/machinery/vending/proc/stock(var/datum/data/vending_product/R, var/mob/user)
 	if(src.panel_open)
-		user << "<span class='notice'>You stock \the [src] with \a [R.product_name]</span>"
+		user << "<span class='notice'>You insert \the [src] in the product receptor.</span>"
 		R.amount++
 
 	nanomanager.update_uis(src)
