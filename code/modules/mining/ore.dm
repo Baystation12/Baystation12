@@ -59,6 +59,11 @@
 	icon_state = "ore_platinum"
 	material = "platinum"
 
+/obj/item/weapon/ore/tungsten
+	name = "raw tungsten"
+	icon_state = "ore_tungsten"
+	material = "tungsten"
+
 /obj/item/weapon/ore/hydrogen
 	name = "raw hydrogen"
 	icon_state = "ore_hydrogen"

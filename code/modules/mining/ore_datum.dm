@@ -125,6 +125,15 @@ var/global/list/ore_data = list()
 	ore = /obj/item/weapon/ore/osmium
 	scan_icon = "mineral_rare"
 
+/ore/tungsten
+	name = "tungsten"
+	display_name = "raw tungsten"
+	smelts_to = "tungsten"
+	result_amount = 5
+	spread_chance = 10
+	ore = /obj/item/weapon/ore/tungsten
+	scan_icon = "mineral_rare"
+
 /ore/hydrogen
 	name = "mhydrogen"
 	display_name = "metallic hydrogen"
