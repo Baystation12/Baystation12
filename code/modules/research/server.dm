@@ -124,7 +124,7 @@
 		return
 
 /obj/machinery/r_n_d/server/centcom
-	name = "Centcom Central R&D Database"
+	name = "Central R&D Database"
 	server_id = -1
 
 /obj/machinery/r_n_d/server/centcom/initialize()

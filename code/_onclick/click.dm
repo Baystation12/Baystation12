@@ -106,9 +106,7 @@
 	var/sdepth = A.storage_depth(src)
 	if((!isturf(A) && A == loc) || (sdepth != -1 && sdepth <= 1))
 		// faster access to objects already on you
-		if(A in contents)
-			setMoveCooldown(5) //taking an item off of an inventory slot
-		else
+		if(A.loc != src)
 			setMoveCooldown(10) //getting something out of a backpack
 
 		if(W)
@@ -129,7 +127,7 @@
 	sdepth = A.storage_depth_turf()
 	if(isturf(A) || isturf(A.loc) || (sdepth != -1 && sdepth <= 1))
 		if(A.Adjacent(src)) // see adjacent.dm
-			setMoveCooldown(10)
+			setMoveCooldown(5)
 
 			if(W)
 				// Return 1 in attackby() to prevent afterattack() effects (when safely moving items for example)

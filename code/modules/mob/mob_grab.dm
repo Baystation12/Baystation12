@@ -355,7 +355,7 @@
 						var/datum/unarmed_attack/attack = H.get_unarmed_attack(src, hit_zone)
 						if(!attack)
 							return
-						
+
 						if(state < GRAB_NECK)
 							assailant << "<span class='warning'>You require a better grab to do this.</span>"
 							return
@@ -370,7 +370,7 @@
 						assailant.attack_log += text("\[[time_stamp()]\] <font color='red'>Attacked [affecting.name]'s eyes using grab ([affecting.ckey])</font>")
 						affecting.attack_log += text("\[[time_stamp()]\] <font color='orange'>Had eyes attacked by [assailant.name]'s grab ([assailant.ckey])</font>")
 						msg_admin_attack("[key_name(assailant)] attacked [key_name(affecting)]'s eyes using a grab action.")
-						
+
 						attack.handle_eye_attack(assailant, affecting)
 					else if(hit_zone != "head")
 						if(state < GRAB_NECK)
@@ -428,10 +428,24 @@
 		else
 			var/mob/living/carbon/human/H = user
 			if(istype(H) && H.species.gluttonous)
-				if(H.species.gluttonous == 2)
+				// Small animals (mice, lizards).
+				if(affecting.small)
 					can_eat = 2
-				else if(!ishuman(affecting) && !issmall(affecting) && (affecting.small || iscarbon(affecting)))
-					can_eat = 1
+				else
+					if(H.species.gluttonous == 2)
+						// Diona nymphs, alien larvae.
+						if(iscarbon(affecting) && !ishuman(affecting))
+							can_eat = 2
+						// Monkeys.
+						else if(issmall(affecting))
+							can_eat = 1
+					else if(H.species.gluttonous == 3)
+						// Full-sized humans.
+						if(ishuman(affecting) && !issmall(affecting))
+							can_eat = 1
+						// Literally everything else.
+						else
+							can_eat = 2
 
 		if(can_eat)
 			var/mob/living/carbon/attacker = user

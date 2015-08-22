@@ -1,6 +1,6 @@
 /obj/structure/closet/wardrobe
 	name = "wardrobe"
-	desc = "It's a storage unit for standard-issue Nanotrasen attire."
+	desc = "It's a storage unit for standard-issue attire."
 	icon_state = "blue"
 	icon_closed = "blue"
 
@@ -68,7 +68,7 @@
 
 /obj/structure/closet/wardrobe/chaplain_black
 	name = "chapel wardrobe"
-	desc = "It's a storage unit for Nanotrasen-approved religious attire."
+	desc = "It's a storage unit for approved religious attire."
 	icon_state = "black"
 	icon_closed = "black"
 
@@ -120,7 +120,7 @@
 
 /obj/structure/closet/wardrobe/orange
 	name = "prison wardrobe"
-	desc = "It's a storage unit for Nanotrasen-regulation prisoner attire."
+	desc = "It's a storage unit for regulation prisoner attire."
 	icon_state = "orange"
 	icon_closed = "orange"
 
