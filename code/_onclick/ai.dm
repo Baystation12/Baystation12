@@ -89,27 +89,24 @@
 */
 
 /mob/living/silicon/ai/ShiftClickOn(var/atom/A)
-	A.AIShiftClick(src)
+	if(A.AIShiftClick(src))
+		return
+	 ..()
+
 /mob/living/silicon/ai/CtrlClickOn(var/atom/A)
-	A.AICtrlClick(src)
+	if(A.AICtrlClick(src))
+		return
+	 ..()
+
 /mob/living/silicon/ai/AltClickOn(var/atom/A)
-	A.AIAltClick(src)
+	if(A.AIAltClick(src))
+		return
+	 ..()
+
 /mob/living/silicon/ai/MiddleClickOn(var/atom/A)
-    A.AIMiddleClick(src)
-
-/*
-	Sticking minor pAI and brain overrides into this because I can.
-*/
-/mob/living/silicon/pai/MiddleClickOn(var/atom/A)
-	if(src.loc == src.card)
-		return A.AIMiddleClick(src)
-	return ..()
-
-/mob/living/carbon/brain/MiddleClickOn(var/atom/A)
-	if(istype(src.loc, /obj/item/device/mmi))
-		return A.AIMiddleClick(src)
-	return ..()
-
+	if(A.AIMiddleClick(src))
+		return
+	 ..()
 /*
 	The following criminally helpful code is just the previous code cleaned up;
 	I have no idea why it was in atoms.dm instead of respective files.
@@ -131,7 +128,7 @@
 		Topic(src, list("src"= "\ref[src]", "command"="open", "activate" = "1"), 1) // 1 meaning no window (consistency!)
 	else
 		Topic(src, list("src"= "\ref[src]", "command"="open", "activate" = "0"), 1)
-	return
+	return 1
 
 /atom/proc/AICtrlClick()
 	return
@@ -141,15 +138,18 @@
 		Topic(src, list("src"= "\ref[src]", "command"="bolts", "activate" = "0"), 1)// 1 meaning no window (consistency!)
 	else
 		Topic(src, list("src"= "\ref[src]", "command"="bolts", "activate" = "1"), 1)
+	return 1
 
 /obj/machinery/power/apc/AICtrlClick() // turns off/on APCs.
 	Topic(src, list("src"= "\ref[src]", "breaker"="1"), 1) // 1 meaning no window (consistency!)
+	return 1
 
 /obj/machinery/turretid/AICtrlClick() //turns off/on Turrets
 	Topic(src, list("src"= "\ref[src]", "command"="enable", "value"="[!enabled]"), 1) // 1 meaning no window (consistency!)
+	return 1
 
 /atom/proc/AIAltClick(var/atom/A)
-	AltClick(A)
+	return AltClick(A)
 
 /obj/machinery/door/airlock/AIAltClick() // Electrifies doors.
 	if(!electrified_until)
@@ -158,17 +158,13 @@
 	else
 		// disable/6 is not in Topic; disable/5 disables both temporary and permanent shock
 		Topic(src, list("src"= "\ref[src]", "command"="electrify_permanently", "activate" = "0"), 1)
-	return
+	return 1
 
 /obj/machinery/turretid/AIAltClick() //toggles lethal on turrets
 	Topic(src, list("src"= "\ref[src]", "command"="lethal", "value"="[!lethal]"), 1) // 1 meaning no window (consistency!)
+	return 1
 
 /atom/proc/AIMiddleClick(var/mob/living/silicon/user)
-	var/obj/item/weapon/rig/rig = user.get_rig()
-	if(rig && rig.wearer && rig.ai_can_move_suit(user, check_user_module = 1))
-		if(rig.wearer.HardsuitClickOn(src, alert_ai = 1))
-			message_admins("\The [user] ([user.ckey ? user.ckey : "*no key*"]) forced \the [rig.wearer] ([rig.wearer.ckey ? rig.wearer.ckey : "*no key*"]) to use hardsuit module on \the [src].")
-			return 1
 	return 0
 
 /obj/machinery/door/airlock/AIMiddleClick() // Toggles door bolt lights.
@@ -180,7 +176,7 @@
 		Topic(src, list("src"= "\ref[src]", "command"="lights", "activate" = "1"), 1) // 1 meaning no window (consistency!)
 	else
 		Topic(src, list("src"= "\ref[src]", "command"="lights", "activate" = "0"), 1)
-	return
+	return 1
 
 //
 // Override AdjacentQuick for AltClicking

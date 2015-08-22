@@ -81,7 +81,7 @@ var/list/ai_verbs_default = list(
 
 	var/datum/ai_icon/selected_sprite			// The selected icon set
 	var/custom_sprite 	= 0 					// Whether the selected icon is custom
-
+	var/carded
 
 /mob/living/silicon/ai/proc/add_ai_verbs()
 	src.verbs |= ai_verbs_default

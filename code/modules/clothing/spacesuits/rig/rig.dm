@@ -894,6 +894,9 @@
 /obj/item/weapon/rig/get_rig()
 	return src
 
+/mob/living/carbon/human/get_rig()
+	return back
+
 #undef ONLY_DEPLOY
 #undef ONLY_RETRACT
 #undef SEAL_DELAY

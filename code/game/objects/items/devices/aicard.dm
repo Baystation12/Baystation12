@@ -105,6 +105,7 @@
 	if(istype(ai.loc, /turf/))
 		new /obj/structure/AIcore/deactivated(get_turf(ai))
 
+	ai.carded = 1
 	admin_attack_log(user, ai, "Carded with [src.name]", "Was carded with [src.name]", "used the [src.name] to card")
 	src.name = "[initial(name)] - [ai.name]"
 
@@ -127,6 +128,7 @@
 /obj/item/device/aicard/proc/clear()
 	if(carded_ai && istype(carded_ai.loc, /turf))
 		carded_ai.canmove = 0
+		carded_ai.carded = 0
 	name = initial(name)
 	carded_ai = null
 	update_icon()

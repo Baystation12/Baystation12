@@ -110,7 +110,7 @@
 			setMoveCooldown(5) //taking an item off of an inventory slot
 		else
 			setMoveCooldown(10) //getting something out of a backpack
-		
+
 		if(W)
 			var/resolved = W.resolve_attackby(A, src)
 			if(!resolved && A && W)
@@ -130,7 +130,7 @@
 	if(isturf(A) || isturf(A.loc) || (sdepth != -1 && sdepth <= 1))
 		if(A.Adjacent(src)) // see adjacent.dm
 			setMoveCooldown(10)
-			
+
 			if(W)
 				// Return 1 in attackby() to prevent afterattack() effects (when safely moving items for example)
 				var/resolved = W.resolve_attackby(A,src)
@@ -280,7 +280,7 @@
 		else
 			user.listed_turf = T
 			user.client.statpanel = T.name
-	return
+	return 1
 
 /mob/proc/TurfAdjacent(var/turf/T)
 	return T.AdjacentQuick(src)
