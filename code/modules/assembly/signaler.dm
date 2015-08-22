@@ -79,7 +79,7 @@
 
 		if (href_list["freq"])
 			var/new_frequency = (frequency + text2num(href_list["freq"]))
-			if(new_frequency < 1200 || new_frequency > 1600)
+			if(new_frequency < PUBLIC_LOW_FREQ || new_frequency > PUBLIC_HIGH_FREQ)
 				new_frequency = sanitize_frequency(new_frequency)
 			set_frequency(new_frequency)
 

@@ -518,7 +518,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 	if (length(heard_normal) || length(heard_garbled) || length(heard_gibberish))
 
 	  /* --- Some miscellaneous variables to format the string output --- */
-		var/part_a = "<span class='radio'><span class='name'>" // goes in the actual output
+		var/part_a = "<span class='[frequency_span_class(display_freq)]'><span class='name'>" // goes in the actual output
 		var/freq_text = get_frequency_name(display_freq)
 
 		// --- Some more pre-message formatting ---
@@ -532,16 +532,6 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 
 		var/part_b = "</span><b> \icon[radio]\[[freq_text]\][part_b_extra]</b> <span class='message'>" // Tweaked for security headsets -- TLE
 		var/part_c = "</span></span>"
-
-		part_a = "<span class='"
-		if (display_freq in ANTAG_FREQS)
-			part_a += "syndradio"
-		else if (display_freq==COMM_FREQ)
-			part_a += "comradio"
-		else if (display_freq in DEPT_FREQS)
-			part_a += "deptradio"
-
-		part_a += "'><span class='name'>"
 
 		// --- This following recording is intended for research and feedback in the use of department radio channels ---
 

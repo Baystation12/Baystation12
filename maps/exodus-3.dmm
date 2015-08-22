@@ -162,7 +162,7 @@
 "df" = (/obj/machinery/atmospherics/pipe/simple/hidden{dir = 4; icon_state = "intact"},/turf/simulated/floor/tiled,/area/tcommsat/computer)
 "dg" = (/obj/machinery/atmospherics/pipe/simple/hidden{dir = 10; icon_state = "intact"},/turf/simulated/floor/tiled,/area/tcommsat/computer)
 "dh" = (/obj/machinery/atmospherics/pipe/simple/hidden{icon_state = "intact"; dir = 4},/turf/simulated/floor/tiled,/area/tcommsat/computer)
-"di" = (/obj/machinery/computer/telecomms/monitor{network = "tcommsat"},/obj/item/device/radio/intercom{anyai = 1; freerange = 1; name = "General Listening Channel"; pixel_x = 28; pixel_y = 0},/turf/simulated/floor/tiled,/area/tcommsat/computer)
+"di" = (/obj/machinery/computer/telecomms/monitor{network = "tcommsat"},/obj/item/device/radio/intercom{anyai = 1; name = "General Listening Channel"; pixel_x = 28; pixel_y = 0},/turf/simulated/floor/tiled,/area/tcommsat/computer)
 "dj" = (/obj/structure/bed,/obj/item/weapon/bedsheet/orange,/obj/machinery/light{dir = 8},/turf/simulated/floor/tiled,/area/tcommsat/computer)
 "dk" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 6},/turf/simulated/floor/tiled,/area/tcommsat/computer)
 "dl" = (/obj/machinery/atmospherics/unary/vent_pump/on{dir = 8},/turf/simulated/floor/tiled,/area/tcommsat/computer)

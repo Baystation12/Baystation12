@@ -4,6 +4,8 @@
 	suffix = "\[3\]"
 	icon_state = "walkietalkie"
 	item_state = "walkietalkie"
+	req_access = list(access_synth)
+
 	var/on = 1 // 0 for off
 	var/last_transmission
 	var/frequency = PUB_FREQ //common chat
@@ -14,11 +16,9 @@
 	var/b_stat = 0
 	var/broadcasting = 0
 	var/listening = 1
-	var/freerange = 0 // 0 - Sanitize frequencies, 1 - Full range
 	var/list/channels = list() //see communications.dm for full list. First channes is a "default" for :h
 	var/subspace_transmission = 0
-	var/syndie = 0//Holder to see if it's a syndicate encrpyed radio
-	var/maxf = 1499
+	var/syndie = 0//Holder to see if it's a syndicate encrypted radio
 //			"Example" = FREQ_LISTENING|FREQ_BROADCASTING
 	flags = CONDUCT
 	slot_flags = SLOT_BELT
@@ -55,14 +55,8 @@
 
 /obj/item/device/radio/initialize()
 
-	if(freerange)
-		if(frequency < 1200 || frequency > 1600)
-			frequency = sanitize_frequency(frequency, maxf)
-	// The max freq is higher than a regular headset to decrease the chance of people listening in, if you use the higher channels.
-	else if (frequency < 1441 || frequency > maxf)
-		//world.log << "[src] ([type]) has a frequency of [frequency], sanitizing."
-		frequency = sanitize_frequency(frequency, maxf)
-
+	if(frequency < RADIO_LOW_FREQ || frequency > RADIO_HIGH_FREQ)
+		frequency = sanitize_frequency(frequency, RADIO_LOW_FREQ, RADIO_HIGH_FREQ)
 	set_frequency(frequency)
 
 	for (var/ch_name in channels)
@@ -97,6 +91,10 @@
 
 	for (var/ch_name in channels)
 		dat+=text_sec_channel(ch_name, channels[ch_name])
+
+	if(allowed(user))
+		dat+= "Channel Name: [(frequency in DEPT_FREQS) ? get_frequency_name(frequency) : "Unknown"]<BR>"
+
 	dat+={"[text_wires()]</TT></body></html>"}
 	user << browse(dat, "window=radio")
 	onclose(user, "radio")
@@ -136,8 +134,8 @@
 
 	else if (href_list["freq"])
 		var/new_frequency = (frequency + text2num(href_list["freq"]))
-		if (!freerange || (frequency < 1200 || frequency > 1600))
-			new_frequency = sanitize_frequency(new_frequency, maxf)
+		if ((frequency < RADIO_LOW_FREQ || frequency > RADIO_HIGH_FREQ) || !allowed(usr))
+			new_frequency = sanitize_frequency(new_frequency)
 		set_frequency(new_frequency)
 		if(hidden_uplink)
 			if(hidden_uplink.check_trigger(usr, frequency, traitor_frequency))

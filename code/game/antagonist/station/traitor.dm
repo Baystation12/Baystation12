@@ -141,7 +141,7 @@ var/datum/antagonist/traitor/traitors
 		var/obj/item/device/radio/target_radio = R
 		var/freq = 1441
 		var/list/freqlist = list()
-		while (freq <= 1489)
+		while (freq <= PUBLIC_HIGH_FREQ)
 			if (freq < 1451 || freq > PUB_FREQ)
 				freqlist += freq
 			freq += 2
