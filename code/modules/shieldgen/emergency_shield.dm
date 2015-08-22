@@ -132,8 +132,7 @@
 	opacity = 0
 	anchored = 1
 	unacidable = 1
-	max_health = 10000
-	health = max_health //The shield can only take so much beating (prevents perma-prisons)
+	health = 10000
 	shield_generate_power = 0	//how much power we use when regenerating
 	shield_idle_power = 0
 
