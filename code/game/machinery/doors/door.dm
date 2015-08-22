@@ -258,6 +258,7 @@
 				health = between(health, health + repairing.amount*DOOR_REPAIR_AMOUNT, maxhealth)
 				update_icon()
 				qdel(repairing)
+				repairing = null
 		return
 
 	if(repairing && istype(I, /obj/item/weapon/crowbar))
