@@ -934,12 +934,9 @@
 			return 1
 
 		//UNCONSCIOUS. NO-ONE IS HOME
-		if( (getOxyLoss() > 50) || (config.health_threshold_crit > health) )
-			Paralyse(3)
-
-		//UNCONSCIOUS. NO-ONE IS HOME
 		if((getOxyLoss() > 50) || (health <= config.health_threshold_crit))
 			Paralyse(3)
+
 		if(hallucination)
 			if(hallucination >= 20)
 				if(prob(3))
@@ -968,30 +965,28 @@
 			for(var/atom/a in hallucinations)
 				qdel(a)
 
-			if(halloss > 100)
-				src << "<span class='notice'>You're in too much pain to keep going...</span>"
-				src.visible_message("<B>[src]</B> slumps to the ground, too weak to continue fighting.")
-				Paralyse(10)
-				setHalLoss(99)
+		if(halloss > 100)
+			src << "<span class='notice'>You're in too much pain to keep going...</span>"
+			src.visible_message("<B>[src]</B> slumps to the ground, too weak to continue fighting.")
+			Paralyse(10)
+			setHalLoss(99)
 
-		if(paralysis)
-			AdjustParalysis(-1)
+		if(paralysis || sleeping)
 			blinded = 1
 			stat = UNCONSCIOUS
 			animate_tail_reset()
-			if(halloss > 0)
-				adjustHalLoss(-3)
+			adjustHalLoss(-3)
+			
+		if(paralysis)
+			AdjustParalysis(-1)
+			
 		else if(sleeping)
 			speech_problem_flag = 1
 			handle_dreams()
-			adjustHalLoss(-3)
 			if (mind)
 				//Are they SSD? If so we'll keep them asleep but work off some of that sleep var in case of stoxin or similar.
 				if(client || sleeping > 3)
 					AdjustSleeping(-1)
-			blinded = 1
-			stat = UNCONSCIOUS
-			animate_tail_reset()
 			if( prob(2) && health && !hal_crit )
 				spawn(0)
 					emote("snore")
