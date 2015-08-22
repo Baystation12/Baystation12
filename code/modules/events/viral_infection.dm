@@ -35,7 +35,7 @@ datum/event/viral_infection/start()
 
 	var/list/candidates = list()	//list of candidate keys
 	for(var/mob/living/carbon/human/G in player_list)
-		if(G.stat != DEAD && G.is_client_active(5))
+		if(G.mind && G.stat != DEAD && G.is_client_active(5) && !player_is_antag(G.mind))
 			var/turf/T = get_turf(G)
 			if(T.z in config.station_levels)
 				candidates += G
