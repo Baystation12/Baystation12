@@ -420,7 +420,7 @@
 		var/datum/species/chosen_species
 		if(client.prefs.species)
 			chosen_species = all_species[client.prefs.species]
-			use_species_name = all_species[chosen_species.get_station_variant()] //Only used by pariahs atm.
+			use_species_name = chosen_species.get_station_variant() //Only used by pariahs atm.
 
 		if(chosen_species && use_species_name)
 			// Have to recheck admin due to no usr at roundstart. Latejoins are fine though.
