@@ -277,9 +277,10 @@
 	//health/MaxHealth = Y
 	//100 * X * Y
 	var/msg = sanitize(input("Message:", "Telepathic message") as text|null)
+	var/dist = max(0,get_dist(usr,target)-10) //10 turf before shit goes down
 	if(msg)
-		msg = stars(msg,max(1,100-halloss) * max(1,health)/maxHealth)
 		log_say("Quorum telepathy: [key_name(src)]-> [target.key] : [msg]")
+		msg = stars(msg,max(1,100-halloss) * max(1,health)/maxHealth * (100-dist/2)/100)
 		target.show_message("You hear something whisper into your ear: <i>[msg]</i>")
 		usr.show_message("You say: <i>[msg]</i> to [target]")
 		for(var/mob/dead/observer/G in world)
