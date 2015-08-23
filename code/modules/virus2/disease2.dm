@@ -59,6 +59,13 @@
 	return res
 
 /datum/disease2/disease/proc/activate(var/mob/living/carbon/mob)
+
+	/*if (ishuman(mob))
+		var/mob/living/carbon/human/H = mob
+		if(H.species.flags & IS_SYNTHETIC)   //TEMP FIX UNTIL IPC BUG CONFIRMED
+			cure(mob)
+			return
+	*/
 	if(dead)
 		cure(mob)
 		return
