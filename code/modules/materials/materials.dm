@@ -242,7 +242,7 @@ var/list/name_to_material
 	opacity = 0.4
 	shard_type = SHARD_SHARD
 	tableslam_noise = 'sound/effects/Glasshit.ogg'
-	hardness = 100
+	hardness = 85
 	melting_point = 3800 //Not really melting but the carbon bonds break.
 	stack_origin_tech = "materials=6"
 	stack_per_sheet = 3750
@@ -362,10 +362,11 @@ var/list/name_to_material
 	icon_reinf = "reinf_over"
 	melting_point = 3700
 	stack_origin_tech = "materials=6"
-	explosion_resistance = 25
+	cut_delay = 60	
+	explosion_resistance = 30
 	integrity = 600
-	hardness = 80
-	weight = 23
+	hardness = 90
+	weight = 25
 	
 /material/glass
 	name = "glass"

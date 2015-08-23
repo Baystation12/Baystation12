@@ -59,6 +59,7 @@
 
 	var/used_skillpoints = 0
 	var/skill_specialization = null
+	//Whether or not the player can use machinery such as the hand teleporter
 	var/list/skills = list()
 
 	var/icon/stand_icon = null
