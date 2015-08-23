@@ -59,6 +59,10 @@
 
 	var/used_skillpoints = 0
 	var/skill_specialization = null
+	var/isSurgeon = 0 //Whether or not the player can perform perfect surgery
+	var/isDoctor = 0 //Whether or not the player can use advanced medical equipment
+	var/isEngineer = 0 //Whether or noy the player do advanced engineering tasks
+	var/isScientist = 0 //Whether or not the player can use machinery such as the hand teleporter
 	var/list/skills = list()
 
 	var/icon/stand_icon = null
