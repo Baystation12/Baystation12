@@ -40,7 +40,7 @@
 		cultnet.updateVisibility(src)
 
 /datum/antagonist/add_antagonist(var/datum/mind/player)
-	..()
+	. = ..()
 	if(src == cult)
 		cultnet.updateVisibility(player.current, 0)
 
