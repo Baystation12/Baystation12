@@ -111,7 +111,6 @@
 		return 0
 
 	//Grab candidates randomly until we have enough.
-	candidates = shuffle(candidates)
 	while(candidates.len && pending_antagonists.len < cur_max)
 		var/datum/mind/player = pick(candidates)
 		candidates -= player
