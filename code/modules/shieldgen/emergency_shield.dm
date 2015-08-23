@@ -100,7 +100,7 @@
 
 /obj/machinery/shield/hitby(AM as mob|obj)
 	//Let everyone know we've been hit!
-	visible_message("<span class='notice'><B>\[src] was hit by [AM].</B></span>")
+	visible_message("<span class='notice'><B>[src] was hit by [AM].</B></span>")
 
 	//Super realistic, resource-intensive, real-time damage calculations.
 	var/tforce = 0
@@ -122,6 +122,20 @@
 
 	..()
 	return
+
+/obj/machinery/shield/admin
+	name = "Admin shield"
+	desc = "An impenetrable barrier of energy."
+	icon = 'icons/effects/effects.dmi'
+	icon_state = "at_shield1"
+	density = 1
+	opacity = 0
+	anchored = 1
+	unacidable = 1
+	health = 10000
+	shield_generate_power = 0	//how much power we use when regenerating
+	shield_idle_power = 0
+
 /obj/machinery/shieldgen
 	name = "Emergency shield projector"
 	desc = "Used to seal minor hull breaches."

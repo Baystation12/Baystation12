@@ -21,7 +21,8 @@
 		/obj/item/weapon/camera_assembly,
 		/obj/item/weapon/tank,
 		/obj/item/weapon/circuitboard,
-		/obj/item/weapon/smes_coil
+		/obj/item/weapon/smes_coil,
+		/obj/item/weapon/tracker_electronics
 		)
 
 	var/obj/item/wrapped = null // Item currently being held.
@@ -36,7 +37,8 @@
 
 	can_hold = list(
 	/obj/item/weapon/cell,
-	/obj/item/weapon/stock_parts
+	/obj/item/weapon/stock_parts,
+	/obj/item/weapon/circuitboard/miningdrill
 	)
 
 /obj/item/weapon/gripper/paperwork

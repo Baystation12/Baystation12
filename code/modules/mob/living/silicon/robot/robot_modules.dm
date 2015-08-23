@@ -341,7 +341,7 @@ var/global/list/robot_modules = list(
 	src.modules += new /obj/item/device/multitool(src)
 	src.modules += new /obj/item/device/t_scanner(src)
 	src.modules += new /obj/item/device/analyzer(src)
-	src.modules += new /obj/item/taperoll/engineering(src)
+	src.modules += new /obj/item/tapeproj/engineering(src)
 	src.modules += new /obj/item/weapon/gripper(src)
 	src.modules += new /obj/item/device/pipe_painter(src)
 	src.emag = new /obj/item/borg/stun(src)
@@ -409,7 +409,7 @@ var/global/list/robot_modules = list(
 	src.modules += new /obj/item/weapon/handcuffs/cyborg(src)
 	src.modules += new /obj/item/weapon/melee/baton/robot(src)
 	src.modules += new /obj/item/weapon/gun/energy/taser/mounted/cyborg(src)
-	src.modules += new /obj/item/taperoll/police(src)
+	src.modules += new /obj/item/tapeproj/security(src)
 	src.emag = new /obj/item/weapon/gun/energy/laser/mounted(src)
 	return
 
@@ -558,7 +558,7 @@ var/global/list/robot_modules = list(
 /obj/item/weapon/robot_module/miner/New()
 	..()
 	src.modules += new /obj/item/device/flash(src)
-	src.modules += new /obj/item/borg/sight/meson(src)
+	src.modules += new /obj/item/borg/sight/material(src)
 	src.modules += new /obj/item/weapon/wrench(src)
 	src.modules += new /obj/item/weapon/screwdriver(src)
 	src.modules += new /obj/item/weapon/storage/bag/ore(src)

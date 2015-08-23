@@ -23,3 +23,5 @@
 	var/datum/reagents/metabolism/touching = null
 
 	var/pulse = PULSE_NORM	//current pulse level
+	var/heart_attack = 0 
+	var/cardiac_arrest = 0

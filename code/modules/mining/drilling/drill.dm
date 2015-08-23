@@ -25,7 +25,8 @@
 		"osmium" = /obj/item/weapon/ore/osmium,
 		"hydrogen" = /obj/item/weapon/ore/hydrogen,
 		"silicates" = /obj/item/weapon/ore/glass,
-		"carbonaceous rock" = /obj/item/weapon/ore/coal
+		"carbonaceous rock" = /obj/item/weapon/ore/coal,
+		"tungsten" = /obj/item/weapon/ore/tungsten
 		)
 
 	//Upgrades

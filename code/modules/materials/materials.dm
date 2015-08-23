@@ -228,6 +228,7 @@ var/list/name_to_material
 	icon_base = "stone"
 	icon_reinf = "reinf_stone"
 	icon_colour = "#007A00"
+	melting_point = 1400
 	weight = 22
 	stack_origin_tech = "materials=5"
 	door_icon_base = "stone"
@@ -241,7 +242,8 @@ var/list/name_to_material
 	opacity = 0.4
 	shard_type = SHARD_SHARD
 	tableslam_noise = 'sound/effects/Glasshit.ogg'
-	hardness = 100
+	hardness = 85
+	melting_point = 3800 //Not really melting but the carbon bonds break.
 	stack_origin_tech = "materials=6"
 	stack_per_sheet = 3750
 
@@ -251,6 +253,7 @@ var/list/name_to_material
 	icon_colour = "#EDD12F"
 	weight = 24
 	hardness = 40
+	melting_point = 1350
 	stack_origin_tech = "materials=4"
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
@@ -265,6 +268,7 @@ var/list/name_to_material
 	icon_colour = "#D1E6E3"
 	weight = 22
 	hardness = 50
+	melting_point = 1200
 	stack_origin_tech = "materials=3"
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
@@ -277,6 +281,7 @@ var/list/name_to_material
 	icon_colour = "#FC2BC5"
 	shard_type = SHARD_SHARD
 	hardness = 30
+	melting_point = 5000
 	stack_origin_tech = "phorontech=2;materials=2"
 	door_icon_base = "stone"
 	sheet_singular_name = "crystal"
@@ -324,6 +329,7 @@ var/list/name_to_material
 	name = DEFAULT_WALL_MATERIAL
 	stack_type = /obj/item/stack/material/steel
 	integrity = 150
+	melting_point = 1800
 	icon_base = "solid"
 	icon_reinf = "reinf_over"
 	icon_colour = "#666666"
@@ -338,7 +344,7 @@ var/list/name_to_material
 	name = "plasteel"
 	stack_type = /obj/item/stack/material/plasteel
 	integrity = 400
-	melting_point = 6000
+	melting_point = 3000
 	icon_base = "solid"
 	icon_reinf = "reinf_over"
 	icon_colour = "#777777"
@@ -348,6 +354,20 @@ var/list/name_to_material
 	stack_origin_tech = "materials=2"
 	composite_material = list(DEFAULT_WALL_MATERIAL = 3750, "platinum" = 3750) //todo
 
+/material/tungsten
+	name = "tungsten"
+	stack_type = /obj/item/stack/material/tungsten
+	icon_colour = "#6a768a"
+	icon_base = "solid"
+	icon_reinf = "reinf_over"
+	melting_point = 3700
+	stack_origin_tech = "materials=6"
+	cut_delay = 60	
+	explosion_resistance = 30
+	integrity = 600
+	hardness = 90
+	weight = 25
+	
 /material/glass
 	name = "glass"
 	stack_type = /obj/item/stack/material/glass
@@ -445,6 +465,7 @@ var/list/name_to_material
 	icon_colour = "#00E1FF"
 	opacity = 0.3
 	integrity = 100
+	melting_point = 2000
 	shard_type = SHARD_SHARD
 	tableslam_noise = 'sound/effects/Glasshit.ogg'
 	hardness = 40
@@ -463,22 +484,23 @@ var/list/name_to_material
 	flags = MATERIAL_BRITTLE
 	ignition_point = PHORON_MINIMUM_BURN_TEMPERATURE+300
 	integrity = 200 // idk why but phoron windows are strong, so.
+	melting_point = 12000
 	icon_colour = "#FC2BC5"
 	stack_origin_tech = "materials=3;phorontech=2"
 	created_window = /obj/structure/window/phoronbasic
 	wire_product = null
-	melting_point = 12000	
 	rod_product = /obj/item/stack/material/glass/phoronrglass
 
 /material/glass/phoron/reinforced
 	name = "rphglass"
 	display_name = "reinforced phoron glass"
+	icon_colour = "#d60db4"	
 	stack_type = /obj/item/stack/material/glass/phoronrglass
 	stack_origin_tech = "materials=4;phorontech=2"
 	composite_material = list() //todo
 	created_window = /obj/structure/window/phoronreinforced
 	hardness = 40
-	melting_point = 20000	
+	melting_point = 20000
 	rod_product = null
 
 /material/plastic
@@ -503,6 +525,7 @@ var/list/name_to_material
 	name = "osmium"
 	stack_type = /obj/item/stack/material/osmium
 	icon_colour = "#9999FF"
+	melting_point =	3300
 	stack_origin_tech = "materials=5"
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
@@ -511,6 +534,7 @@ var/list/name_to_material
 	name = "tritium"
 	stack_type = /obj/item/stack/material/tritium
 	icon_colour = "#777777"
+	melting_point = 18 //It's a gas at room temperature.
 	stack_origin_tech = "materials=5"
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
@@ -525,15 +549,17 @@ var/list/name_to_material
 	name = "platinum"
 	stack_type = /obj/item/stack/material/platinum
 	icon_colour = "#9999FF"
+	melting_point = 2050
 	weight = 27
 	stack_origin_tech = "materials=2"
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
-
+	
 /material/iron
 	name = "iron"
 	stack_type = /obj/item/stack/material/iron
 	icon_colour = "#5C5454"
+	melting_point = 1800
 	weight = 22
 	stack_per_sheet = 3750
 	sheet_singular_name = "ingot"
@@ -606,6 +632,7 @@ var/list/name_to_material
 	display_name = "disturbing stone"
 	icon_base = "cult"
 	icon_colour = "#402821"
+	melting_point = 8000
 	icon_reinf = "reinf_cult"
 	shard_type = SHARD_STONE_PIECE
 	sheet_singular_name = "brick"

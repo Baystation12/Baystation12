@@ -75,6 +75,7 @@
 		if(src.last_message_count >= SPAM_TRIGGER_AUTOMUTE)
 			src << "\red You have exceeded the spam filter limit for identical messages. An auto-mute was applied."
 			cmd_admin_mute(src.mob, mute_type, 1)
+			message_admins("[src] Exceeded the spam filter limit, and has been automuted.")
 			return 1
 		if(src.last_message_count >= SPAM_TRIGGER_WARNING)
 			src << "\red You are nearing the spam filter limit for identical messages."

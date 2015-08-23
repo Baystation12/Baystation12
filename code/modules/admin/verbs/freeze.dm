@@ -29,6 +29,8 @@
 			M.blinded = 0
 			M.lying = 0
 			M.stat = 0
+			M.SetStunned(0) //should fix the issue with slowdown
+			M.SetWeakened(0) //should fix the issue with slowdown
 			return
 		return
 

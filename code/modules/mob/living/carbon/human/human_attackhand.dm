@@ -54,30 +54,33 @@
 	switch(M.a_intent)
 		if(I_HELP)
 			if(istype(H) && health < config.health_threshold_crit && health > config.health_threshold_dead)
-				if((H.head && (H.head.flags & HEADCOVERSMOUTH)) || (H.wear_mask && (H.wear_mask.flags & MASKCOVERSMOUTH)))
-					H << "<span class='notice'>Remove your mask!</span>"
+				if(H.species.flags & IS_SYNTHETIC) //No CPR on IPC's
 					return 0
-				if((head && (head.flags & HEADCOVERSMOUTH)) || (wear_mask && (wear_mask.flags & MASKCOVERSMOUTH)))
-					H << "<span class='notice'>Remove [src]'s mask!</span>"
-					return 0
+				else
+					if((H.head && (H.head.flags & HEADCOVERSMOUTH)) || (H.wear_mask && (H.wear_mask.flags & MASKCOVERSMOUTH)))
+						H << "<span class='notice'>Remove your mask!</span>"
+						return 0
+					if((head && (head.flags & HEADCOVERSMOUTH)) || (wear_mask && (wear_mask.flags & MASKCOVERSMOUTH)))
+						H << "<span class='notice'>Remove [src]'s mask!</span>"
+						return 0
 
-				if (!cpr_time)
-					return 0
+					if (!cpr_time)
+						return 0
 
-				cpr_time = 0
-				spawn(30)
-					cpr_time = 1
+					cpr_time = 0
+					spawn(30)
+						cpr_time = 1
 
-				H.visible_message("<span class='danger'>\The [H] is trying perform CPR on \the [src]!</span>")
+					H.visible_message("<span class='danger'>\The [H] is trying perform CPR on \the [src]!</span>")
 
-				if(!do_after(H, 30))
-					return
+					if(!do_after(H, 30))
+						return
 
-				adjustOxyLoss(-(min(getOxyLoss(), 5)))
-				updatehealth()
-				H.visible_message("<span class='danger'>\The [H] performs CPR on \the [src]!</span>")
-				src << "<span class='notice'>You feel a breath of fresh air enter your lungs. It feels good.</span>"
-				H << "<span class='warning'>Repeat at least every 7 seconds.</span>"
+					adjustOxyLoss(-(min(getOxyLoss(), 5)))
+					updatehealth()
+					H.visible_message("<span class='danger'>\The [H] performs CPR on \the [src]!</span>")
+					src << "<span class='notice'>You feel a breath of fresh air enter your lungs. It feels good.</span>"
+					H << "<span class='warning'>Repeat at least every 7 seconds.</span>"
 
 			else
 				help_shake_act(M)

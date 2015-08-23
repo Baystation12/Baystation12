@@ -133,6 +133,11 @@
 	icon_state = "sheet-adamantine"
 	default_type = "platinum"
 
+/obj/item/stack/material/tungsten
+	name = "tungsten"
+	icon_state = "sheet-tungsten"
+	default_type = "tungsten"
+
 //Extremely valuable to Research.
 /obj/item/stack/material/mhydrogen
 	name = "metallic hydrogen"
