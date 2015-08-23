@@ -184,11 +184,9 @@
 	if(!uses_charge)
 		amount -= used
 		if (amount <= 0)
-			spawn(0) //delete the empty stack once the current context yields
-				if (amount <= 0) //check again in case someone transferred stuff to us
-					if(usr)
-						usr.remove_from_mob(src)
-					qdel(src)
+			if(usr)
+				usr.remove_from_mob(src)
+			qdel(src) //should be safe to qdel immediately since if someone is still using this stack it will persist for a little while longer
 		return 1
 	else
 		if(get_amount() < used)

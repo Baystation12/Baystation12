@@ -32,12 +32,12 @@
 
 		if(allowed_species)
 			for(var/species in allowed_species)
-				if(target.species.name == species)
+				if(target.species.get_bodytype() == species)
 					return 1
 
 		if(disallowed_species)
 			for(var/species in disallowed_species)
-				if(target.species.name == species)
+				if(target.species.get_bodytype() == species)
 					return 0
 
 		return 1
