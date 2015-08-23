@@ -31,6 +31,10 @@
 	var/mob_bump_flag = 0
 	var/mob_swap_flags = 0
 	var/mob_push_flags = 0
+	var/isSurgeon = 0
+	var/isDoctor = 0
+	var/isEngineer = 0
+	var/isScientist = 0
 	var/mob_always_swap = 0
 
 	var/tod = null // Time of death
