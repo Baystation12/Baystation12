@@ -25,7 +25,7 @@
 			log_admin("\blue [key_name(usr)] has unfrozen [key_name(M)].")
 			message_admins("\blue [key_name_admin(usr)] has unfrozen [key_name_admin(M)].")
 			M.Paralyse(0)
-			M.setParalysis(0)
+			M.SetParalysis(0)
 			M.blinded = 0
 			M.lying = 0
 			M.stat = 0
