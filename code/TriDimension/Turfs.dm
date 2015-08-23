@@ -1,114 +1,100 @@
-/turf/simulated/floor/open
+/turf/simulated/open
 	name = "open space"
 	density = 0
+	alpha = 0
 	icon_state = "black"
 	pathweight = 100000 //Seriously, don't try and path over this one numbnuts
-	var/icon/darkoverlays = null
-	var/turf/floorbelow
+	var/icon/darkoverlays
+	var/turf/below
 	var/list/overlay_references
 
 	New()
 		..()
-		getbelow()
+		// Unhide shit.
+		for(var/obj/obj in src)
+			if(obj.level == 1)
+				obj.hide(0)
+
+		ASSERT(HasBelow(z))
+		below = GetBelow(src)
 		return
 
-	Enter(var/atom/movable/AM)
-		if (..()) //TODO make this check if gravity is active (future use) - Sukasa
-			spawn(1)
-				// only fall down in defined areas (read: areas with artificial gravitiy)
-				if(!floorbelow) //make sure that there is actually something below
-					if(!getbelow())
+	Entered(var/atom/movable/mover)
+		// only fall down in defined areas (read: areas with artificial gravitiy)
+		if(!istype(below)) //make sure that there is actually something below
+			below = GetBelow(src)
+			if(!below)
+				return
+
+		// No gravity in space, apparently.
+		var/area/area = get_area(src)
+		if(area.name == "Space")
+			return
+
+		// Prevent pipes from falling into the void... if there is a pipe to support it.
+		if(istype(mover, /obj/item/pipe) && \
+			(locate(/obj/structure/disposalpipe/up) in below) || \
+			 locate(/obj/machinery/atmospherics/pipe/zpipe/up in below))
+			return
+
+		// See if something prevents us from falling.
+		var/soft = 0
+		for(var/atom/A in below)
+			if(A.density)
+				if(!istype(A, /obj/structure/window))
+					return
+				else
+					var/obj/structure/window/W = A
+					if(W.is_fulltile())
 						return
-				if(AM)
-					var/area/areacheck = get_area(src)
-					var/blocked = 0
-					var/soft = 0
-					for(var/atom/A in floorbelow.contents)
-						if(A.density)
-							if(istype(A, /obj/structure/window))
-								var/obj/structure/window/W = A
-								blocked = W.is_fulltile()
-								if(blocked)
-									break
-							else
-								blocked = 1
-								break
-						if(istype(A, /obj/machinery/atmospherics/pipe/zpipe/up) && istype(AM,/obj/item/pipe))
-							blocked = 1
-							break
-						if(istype(A, /obj/structure/disposalpipe/up) && istype(AM,/obj/item/pipe))
-							blocked = 1
-							break
-						if(istype(A, /obj/multiz/stairs))
-							soft = 1
-							//dont break here, since we still need to be sure that it isnt blocked
+			// Dont break here, since we still need to be sure that it isnt blocked
+			if(istype(A, /obj/multiz/stairs))
+				soft = 1
 
-					if (soft || (!blocked && !(areacheck.name == "Space")))
-						AM.Move(floorbelow)
-						if (!soft && istype(AM, /mob/living/carbon/human))
-							var/mob/living/carbon/human/H = AM
-							var/damage = 5
-							H.apply_damage(min(rand(-damage,damage),0), BRUTE, "head")
-							H.apply_damage(min(rand(-damage,damage),0), BRUTE, "chest")
-							H.apply_damage(min(rand(-damage,damage),0), BRUTE, "l_leg")
-							H.apply_damage(min(rand(-damage,damage),0), BRUTE, "r_leg")
-							H.apply_damage(min(rand(-damage,damage),0), BRUTE, "l_arm")
-							H.apply_damage(min(rand(-damage,damage),0), BRUTE, "r_arm")
-							H:weakened = max(H:weakened,2)
-							H:updatehealth()
-		return ..()
+		// We've made sure we can move, now.
+		mover.Move(below)
 
-/turf/proc/hasbelow()
-	var/turf/controllerlocation = locate(1, 1, z)
-	for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
-		if(controller.down)
-			return 1
-	return 0
+		if(!soft)
+			if(!istype(mover, /mob))
+				if(istype(below, /turf/simulated/open))
+					below.visible_message("\The [mover] falls from the deck above through \the [below]!", "You hear a whoosh of displaced air.")
+				else
+					below.visible_message("\The [mover] falls from the deck above and slams into \the [below]!", "You hear something slam into the deck.")
+			else
+				var/mob/M = mover
+				if(istype(below, /turf/simulated/open))
+					below.visible_message("\The [mover] falls from the deck above through \the [below]!", "You hear a soft whoosh.[M.stat ? "" : ".. and some screaming."]")
+				else
+					M.visible_message("\The [mover] falls from the deck above and slams into \the [below]!", "You land on \the [below].", "You hear a soft whoosh and a crunch")
 
-/turf/simulated/floor/open/proc/getbelow()
-	var/turf/controllerlocation = locate(1, 1, z)
-	for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
-		// check if there is something to draw below
-		if(!controller.down)
-			src.ChangeTurf(get_base_turf(src.z))
-			return 0
-		else
-			floorbelow = locate(src.x, src.y, controller.down_target)
-			return 1
-	return 1
+				// Handle people getting hurt, it's funny!
+				if (istype(mover, /mob/living/carbon/human))
+					var/mob/living/carbon/human/H = mover
+					var/damage = 5
+					H.apply_damage(rand(0, damage), BRUTE, "head")
+					H.apply_damage(rand(0, damage), BRUTE, "chest")
+					H.apply_damage(rand(0, damage), BRUTE, "l_leg")
+					H.apply_damage(rand(0, damage), BRUTE, "r_leg")
+					H.apply_damage(rand(0, damage), BRUTE, "l_arm")
+					H.apply_damage(rand(0, damage), BRUTE, "r_arm")
+					H.weakened = max(H.weakened,2)
+					H.updatehealth()
 
 // override to make sure nothing is hidden
-/turf/simulated/floor/open/levelupdate()
+/turf/simulated/open/levelupdate()
 	for(var/obj/O in src)
 		O.hide(0)
 
-//overwrite the attackby of space to transform it to openspace if necessary
-/turf/space/attackby(obj/item/C as obj, mob/user as mob)
-	if (istype(C, /obj/item/stack/cable_coil) && src.hasbelow())
-		var/turf/simulated/floor/open/W = src.ChangeTurf(/turf/simulated/floor/open)
-		W.attackby(C, user)
-		return
-	..()
-
-/turf/simulated/floor/open/ex_act(severity)
-	// cant destroy empty space with an ordinary bomb
-	return
-
-/turf/simulated/floor/open/attackby(obj/item/C as obj, mob/user as mob)
-	(..)
-	if (istype(C, /obj/item/stack/cable_coil))
-		var/obj/item/stack/cable_coil/cable = C
-		cable.turf_place(src, user)
-		return
-
+// Straight copy from space.
+/turf/simulated/open/attackby(obj/item/C as obj, mob/user as mob)
 	if (istype(C, /obj/item/stack/rods))
 		var/obj/structure/lattice/L = locate(/obj/structure/lattice, src)
 		if(L)
 			return
 		var/obj/item/stack/rods/R = C
 		if (R.use(1))
-			user << "<span class='notice'>Constructing support lattice...</span>"
-			playsound(src.loc, 'sound/weapons/Genhit.ogg', 50, 1)
+			user << "<span class='notice'>Constructing support lattice ...</span>"
+			playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
 			ReplaceWithLattice()
 		return
 
@@ -119,7 +105,7 @@
 			if (S.get_amount() < 1)
 				return
 			qdel(L)
-			playsound(src.loc, 'sound/weapons/Genhit.ogg', 50, 1)
+			playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
 			S.use(1)
 			ChangeTurf(/turf/simulated/floor/airless)
 			return

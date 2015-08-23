@@ -25,17 +25,12 @@
 	proc/connect()
 		if(icon_state == "ladderdown") // the upper will connect to the lower
 			d_state = 1
-			var/turf/controllerlocation = locate(1, 1, z)
-			for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
-				if(controller.down)
-					var/turf/below = locate(src.x, src.y, controller.down_target)
-					for(var/obj/multiz/ladder/L in below)
-						if(L.icon_state == "ladderup")
-							target = L
-							L.target = src
-							d_state = 0
-							break
-		return
+			for(var/obj/multiz/ladder/L in GetBelow(src))
+				if(L.icon_state == "ladderup")
+					target = L
+					L.target = src
+					d_state = 0
+					return
 
 /*	ex_act(severity)
 		switch(severity)
@@ -210,12 +205,9 @@
 
 	New()
 		..()
-		var/turf/cl= locate(1, 1, src.z)
-		for(var/obj/effect/landmark/zcontroller/c in cl)
-			if(c.up)
-				var/turf/O = locate(src.x, src.y, c.up_target)
-				if(istype(O, /turf/space))
-					O.ChangeTurf(/turf/simulated/floor/open)
+		var/turf/above = GetAbove(src)
+		if(istype(above, /turf/space))
+			above.ChangeTurf(/turf/simulated/open)
 
 		spawn(1)
 			var/turf/T
@@ -262,13 +254,10 @@
 		bottom.connected = top
 		top.icon_state = "ramptop"
 		top.density = 1
-		var/turf/controllerlocation = locate(1, 1, top.z)
-		for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
-			if(controller.up)
-				var/turf/above = locate(top.x, top.y, controller.up_target)
-				if(istype(above,/turf/space) || istype(above,/turf/simulated/floor/open))
-					top.target = above
-				var/turf/above2 = locate(bottom.x, bottom.y, controller.up_target)
-				if(istype(above2, /turf/space) || istype(above,/turf/simulated/floor/open))
-					top.target2 = above2
+		var/turf/above = GetAbove(top)
+		if(istype(above,/turf/space) || istype(above,/turf/simulated/open))
+			top.target = above
+		above = GetAbove(bottom)
+		if(istype(above, /turf/space) || istype(above,/turf/simulated/open))
+			top.target2 = above
 		return

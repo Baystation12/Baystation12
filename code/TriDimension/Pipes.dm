@@ -136,16 +136,13 @@ obj/machinery/atmospherics/pipe/zpipe/up/initialize()
 				node1 = target
 				break
 
-	var/turf/controllerlocation = locate(1, 1, src.z)
-	for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
-		if(controller.up)
-			var/turf/above = locate(src.x, src.y, controller.up_target)
-			if(above)
-				for(var/obj/machinery/atmospherics/target in above)
-					if(target.initialize_directions && istype(target, /obj/machinery/atmospherics/pipe/zpipe/down))
-						if (check_connect_types(target,src))
-							node2 = target
-							break
+	var/turf/above = GetAbove(src)
+	if(above)
+		for(var/obj/machinery/atmospherics/target in above)
+			if(target.initialize_directions && istype(target, /obj/machinery/atmospherics/pipe/zpipe/down))
+				if (check_connect_types(target,src))
+					node2 = target
+					break
 
 
 	var/turf/T = src.loc			// hide if turf is not intact
@@ -177,16 +174,13 @@ obj/machinery/atmospherics/pipe/zpipe/down/initialize()
 				node1 = target
 				break
 
-	var/turf/controllerlocation = locate(1, 1, src.z)
-	for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
-		if(controller.down)
-			var/turf/below = locate(src.x, src.y, controller.down_target)
-			if(below)
-				for(var/obj/machinery/atmospherics/target in below)
-					if(target.initialize_directions && istype(target, /obj/machinery/atmospherics/pipe/zpipe/up))
-						if (check_connect_types(target,src))
-							node2 = target
-							break
+	var/turf/below = GetBelow(src)
+	if(below)
+		for(var/obj/machinery/atmospherics/target in below)
+			if(target.initialize_directions && istype(target, /obj/machinery/atmospherics/pipe/zpipe/up))
+				if (check_connect_types(target,src))
+					node2 = target
+					break
 
 
 	var/turf/T = src.loc			// hide if turf is not intact
