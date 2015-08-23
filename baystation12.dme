@@ -316,6 +316,7 @@
 #include "code\game\gamemodes\changeling\powers\deaf_sting.dm"
 #include "code\game\gamemodes\changeling\powers\delayed_toxin_sting.dm"
 #include "code\game\gamemodes\changeling\powers\digital_camo.dm"
+#include "code\game\gamemodes\changeling\powers\electric_lockpick.dm"
 #include "code\game\gamemodes\changeling\powers\endoarmor.dm"
 #include "code\game\gamemodes\changeling\powers\enfeebling_string.dm"
 #include "code\game\gamemodes\changeling\powers\engorged_glands.dm"

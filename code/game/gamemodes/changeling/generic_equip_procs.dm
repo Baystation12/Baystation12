@@ -234,7 +234,7 @@
 		return success
 
 //This is a generic proc that should be called by other ling weapon procs to equip them.
-/mob/proc/changeling_generic_weapon(var/weapon_type, var/make_sound = 1)
+/mob/proc/changeling_generic_weapon(var/weapon_type, var/make_sound = 1, var/cost = 20)
 	var/datum/changeling/changeling = changeling_power(cost,1,100,CONSCIOUS)
 	if(!changeling)
 		return
@@ -251,7 +251,7 @@
 	var/obj/item/weapon/W = new weapon_type(src)
 	src.put_in_hands(W)
 
-	src.mind.changeling.chem_charges -= 20
+	src.mind.changeling.chem_charges -= cost
 	if(make_sound)
 		playsound(src, 'sound/effects/blobattack.ogg', 30, 1)
 	return 1
