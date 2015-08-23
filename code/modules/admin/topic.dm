@@ -2621,7 +2621,7 @@
 
 	if(href_list["add_player_info"])
 		var/key = href_list["add_player_info"]
-		var/add = sanitize(input("Add Player Info") as null|text)
+		var/add = sanitize(input("Add Player Info") as null|text, ja_mode = POPUP)
 		if(!add) return
 
 		notes_add(key,add,usr)
