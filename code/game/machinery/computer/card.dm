@@ -59,12 +59,10 @@
 	if(!istype(id_card))
 		return ..()
 
-	if(!scan && access_change_ids in id_card.access)
-		user.drop_item()
+	if(!scan && (access_change_ids in id_card.access) && user.unEquip(id_card))
 		id_card.loc = src
 		scan = id_card
 	else if(!modify)
-		user.drop_item()
 		id_card.loc = src
 		modify = id_card
 
@@ -157,8 +155,7 @@
 					modify = null
 			else
 				var/obj/item/I = usr.get_active_hand()
-				if (istype(I, /obj/item/weapon/card/id))
-					usr.drop_item()
+				if (istype(I, /obj/item/weapon/card/id) && usr.unEquip(I))
 					I.loc = src
 					modify = I
 

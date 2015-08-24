@@ -257,3 +257,7 @@
 	icon_state = "syndicam"
 	network = list("NUKE")
 	circuit = null
+
+/obj/machinery/computer/security/nuclear/New()
+	..()
+	req_access = list(150)
