@@ -1397,7 +1397,7 @@
 "AS" = (/obj/machinery/door/airlock/centcom{name = "General Access"; opacity = 1; req_access = list(101)},/obj/machinery/door/blast/regular{id = "crescent_checkpoint_access"; name = "Crescent Checkpoint"},/turf/unsimulated/floor{icon_state = "floor"},/area/centcom/control)
 "AT" = (/turf/simulated/shuttle/wall{icon_state = "swall14"; dir = 2},/area/shuttle/escape/centcom)
 "AU" = (/turf/simulated/shuttle/wall{icon_state = "swall12"; dir = 2},/area/shuttle/escape/centcom)
-"AV" = (/obj/structure/table/rack,/obj/item/weapon/grenade/empgrenade,/obj/item/weapon/grenade/flashbang,/obj/item/weapon/grenade/spawnergrenade,/turf/simulated/shuttle/floor{icon_state = "floor4"},/area/skipjack_station/start)
+"AV" = (/obj/structure/table/rack,/obj/item/weapon/grenade/empgrenade,/obj/item/weapon/grenade/flashbang,/obj/item/weapon/grenade/spawnergrenade/manhacks,/turf/simulated/shuttle/floor{icon_state = "floor4"},/area/skipjack_station/start)
 "AW" = (/turf/unsimulated/floor{name = "plating"},/area/centcom/ferry)
 "AX" = (/obj/structure/grille,/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced,/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced{dir = 4},/turf/unsimulated/floor{name = "plating"},/area/centcom/ferry)
 "AY" = (/turf/unsimulated/floor{icon_state = "warnplate"; dir = 8},/area/centcom/ferry)
