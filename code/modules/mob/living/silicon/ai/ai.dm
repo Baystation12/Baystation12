@@ -691,7 +691,7 @@ var/list/ai_verbs_default = list(
 
 	resting = 0
 	var/obj/item/weapon/rig/rig = src.get_rig()
-	if(istype(rig))
+	if(rig)
 		rig.force_rest(src)
 
 #undef AI_CHECK_WIRELESS
