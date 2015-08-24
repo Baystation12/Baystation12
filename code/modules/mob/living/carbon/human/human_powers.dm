@@ -263,26 +263,27 @@
 	set category = "Abilities"
 
 	//pretty much C&P from remoteSay
-	if(usr.incapacitated())
+	if(usr.stat!=CONSCIOUS)
 		return
 
 	var/list/creatures = list()
 	for(var/mob/living/carbon/h in world)
 		creatures += h
 	var/mob/target = input("Who do you want to communicate with ?") as null|anything in creatures
+
 	if (isnull(target))
 		return
-	//probability (of correct letter) is:
-	//(100-halloss)/100 = X
-	//health/MaxHealth = Y
-	//100 * X * Y
+
 	var/msg = sanitize(input("Message:", "Telepathic message") as text|null)
-	var/dist = max(0,get_dist(usr,target)-10) //10 turf before shit goes down
+
+	if(usr.stat!=CONSCIOUS) //we check it again so that people can't 'save' messages for when they are knocked out
+		return
+	var/dist = max(1,get_dist(usr,target)-11) //10 turf before distance effects readability
 	if(msg)
 		log_say("Quorum telepathy: [key_name(src)]-> [target.key] : [msg]")
-		msg = stars(msg,max(1,100-halloss) * max(1,health)/maxHealth * (100-dist/2)/100)
+		msg = stars(msg,max(1,100-halloss) * max(1,health)/maxHealth * (max(1,100-dist/2))/100)
 		target.show_message("You hear something whisper into your ear: <i>[msg]</i>")
-		usr.show_message("You say: <i>[msg]</i> to [target]")
+		usr.show_message("You transmit: <i>[msg]</i> to [target]")
 		for(var/mob/dead/observer/G in world)
 			G.show_message("<i>Telepathic message from <b>[src]</b> to <b>[target]</b>: [msg]</i>")
 
