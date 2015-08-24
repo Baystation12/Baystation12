@@ -180,7 +180,7 @@ research holder datum.
 
 /datum/tech/syndicate
 	name = "Illegal Technologies Research"
-	desc = "The study of technologies that violate standard Nanotrasen regulations."
+	desc = "The study of technologies that violate standard government regulations."
 	id = TECH_ILLEGAL
 	level = 0
 

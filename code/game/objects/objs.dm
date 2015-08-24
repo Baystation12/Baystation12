@@ -13,6 +13,7 @@
 
 	var/damtype = "brute"
 	var/force = 0
+	var/armor_penetration = 0
 
 /obj/Destroy()
 	processing_objects -= src
@@ -32,9 +33,21 @@
 	CouldNotUseTopic(usr)
 	return 1
 
+/obj/CanUseTopic(var/mob/user, var/datum/topic_state/state)
+	if(user.CanUseObjTopic(src))
+		return ..()
+	user << "<span class='danger'>\icon[src]Access Denied!</span>"
+	return STATUS_CLOSE
+
+/mob/living/silicon/CanUseObjTopic(var/obj/O)
+	return O.allowed(src)
+
+/mob/proc/CanUseObjTopic()
+	return 1
+
 /obj/proc/CouldUseTopic(var/mob/user)
 	var/atom/host = nano_host()
-	host.add_fingerprint(user)
+	host.add_hiddenprint(user)
 
 /obj/proc/CouldNotUseTopic(var/mob/user)
 	// Nada

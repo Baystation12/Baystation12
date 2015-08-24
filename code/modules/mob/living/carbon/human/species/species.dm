@@ -108,7 +108,7 @@
 	var/slowdown = 0              // Passive movement speed malus (or boost, if negative)
 	var/primitive_form            // Lesser form, if any (ie. monkey for humans)
 	var/greater_form              // Greater form, if any, ie. human for monkeys.
-	var/gluttonous                // Can eat some mobs. 1 for monkeys, 2 for people.
+	var/gluttonous                // Can eat some mobs. 1 for mice, 2 for monkeys, 3 for people.
 	var/rarity_value = 1          // Relative rarity/collector value for this species.
 	                              // Determines the organs that the species spawns with and
 	var/list/has_organ = list(    // which required-organ checks are conducted.
@@ -154,6 +154,17 @@
 	unarmed_attacks = list()
 	for(var/u_type in unarmed_types)
 		unarmed_attacks += new u_type()
+
+	if(gluttonous)
+		if(!inherent_verbs)
+			inherent_verbs = list()
+		inherent_verbs |= /mob/living/carbon/human/proc/regurgitate
+
+/datum/species/proc/get_station_variant()
+	return name
+
+/datum/species/proc/get_bodytype()
+	return name
 
 /datum/species/proc/get_environment_discomfort(var/mob/living/carbon/human/H, var/msg_type)
 

@@ -52,6 +52,10 @@
 	// update the current life tick, can be used to e.g. only do something every 4 ticks
 	life_tick++
 
+	// This is not an ideal place for this but it will do for now.
+	if(wearing_rig && wearing_rig.offline)
+		wearing_rig = null
+
 	in_stasis = istype(loc, /obj/structure/closet/body_bag/cryobag) && loc:opened == 0
 	if(in_stasis) loc:used++
 
@@ -934,12 +938,9 @@
 			return 1
 
 		//UNCONSCIOUS. NO-ONE IS HOME
-		if( (getOxyLoss() > 50) || (config.health_threshold_crit > health) )
-			Paralyse(3)
-
-		//UNCONSCIOUS. NO-ONE IS HOME
 		if((getOxyLoss() > 50) || (health <= config.health_threshold_crit))
 			Paralyse(3)
+
 		if(hallucination)
 			if(hallucination >= 20)
 				if(prob(3))
@@ -951,47 +952,33 @@
 					spawn(rand(20,50))
 						client.dir = 1
 
-			if(hallucination)
-				if(hallucination >= 20)
-					if(prob(3))
-						fake_attack(src)
-					if(!handling_hal)
-						spawn handle_hallucinations() //The not boring kind!
-					if(client && prob(5))
-						client.dir = pick(2,4,8)
-						var/client/C = client
-						spawn(rand(20,50))
-							if(C)
-								C.dir = 1
-
+			hallucination = max(0, hallucination - 2)
 		else
 			for(var/atom/a in hallucinations)
 				qdel(a)
 
-			if(halloss > 100)
-				src << "<span class='notice'>You're in too much pain to keep going...</span>"
-				src.visible_message("<B>[src]</B> slumps to the ground, too weak to continue fighting.")
-				Paralyse(10)
-				setHalLoss(99)
+		if(halloss > 100)
+			src << "<span class='notice'>You're in too much pain to keep going...</span>"
+			src.visible_message("<B>[src]</B> slumps to the ground, too weak to continue fighting.")
+			Paralyse(10)
+			setHalLoss(99)
 
-		if(paralysis)
-			AdjustParalysis(-1)
+		if(paralysis || sleeping)
 			blinded = 1
 			stat = UNCONSCIOUS
 			animate_tail_reset()
-			if(halloss > 0)
-				adjustHalLoss(-3)
+			adjustHalLoss(-3)
+			
+		if(paralysis)
+			AdjustParalysis(-1)
+			
 		else if(sleeping)
 			speech_problem_flag = 1
 			handle_dreams()
-			adjustHalLoss(-3)
 			if (mind)
 				//Are they SSD? If so we'll keep them asleep but work off some of that sleep var in case of stoxin or similar.
 				if(client || sleeping > 3)
 					AdjustSleeping(-1)
-			blinded = 1
-			stat = UNCONSCIOUS
-			animate_tail_reset()
 			if( prob(2) && health && !hal_crit )
 				spawn(0)
 					emote("snore")

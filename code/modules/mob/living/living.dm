@@ -574,7 +574,7 @@ default behaviour is:
 	set category = "IC"
 
 	if(can_resist())
-		next_move = world.time + 20
+		setClickCooldown(20)
 		process_resist()
 
 /mob/living/proc/can_resist()
@@ -582,7 +582,7 @@ default behaviour is:
 	//so just check weakened instead.
 	if(stat || weakened)
 		return 0
-	if(next_move > world.time)
+	if(!canClick())
 		return 0
 	return 1
 
@@ -657,7 +657,7 @@ default behaviour is:
 	set category = "IC"
 
 	resting = !resting
-	src << "\blue You are now [resting ? "resting" : "getting up"]"
+	src << "<span class='notice'>You are now [resting ? "resting" : "getting up"].</span>"
 
 /mob/living/proc/handle_ventcrawl(var/obj/machinery/atmospherics/unary/vent_pump/vent_found = null, var/ignore_items = 0) // -- TLE -- Merged by Carn
 	if(stat)

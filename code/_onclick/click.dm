@@ -4,7 +4,7 @@
 */
 
 // 1 decisecond click delay (above and beyond mob/next_move)
-/mob/var/next_click	= 0
+/mob/var/next_click = 0
 
 /*
 	Before anything else, defer these calls to a per-mobtype handler.  This allows us to
@@ -15,12 +15,14 @@
 
 	Note that this proc can be overridden, and is in the case of screen objects.
 */
-/atom/Click(location,control,params)
+
+/atom/Click(var/location, var/control, var/params) // This is their reaction to being clicked on (standard proc)
 	if(src)
 		usr.ClickOn(src, params)
-/atom/DblClick(location,control,params)
+
+/atom/DblClick(var/location, var/control, var/params)
 	if(src)
-		usr.DblClickOn(src,params)
+		usr.DblClickOn(src, params)
 
 /*
 	Standard mob ClickOn()
@@ -35,8 +37,8 @@
 	* item/afterattack(atom,user,adjacent,params) - used both ranged and adjacent
 	* mob/RangedAttack(atom,params) - used only ranged, only used for tk and laser eyes but could be changed
 */
-/mob/proc/ClickOn( var/atom/A, var/params )
-	if(world.time <= next_click)
+/mob/proc/ClickOn(var/atom/A, var/params)
+	if(world.time <= next_click) // Hard check, before anything else, to avoid crashing
 		return
 	next_click = world.time + 1
 
@@ -66,16 +68,17 @@
 
 	face_atom(A) // change direction to face what you clicked on
 
-	if(next_move > world.time) // in the year 2000...
+	if(!canClick()) // in the year 2000...
 		return
 
-	if(istype(loc,/obj/mecha))
-		if(!locate(/turf) in list(A,A.loc)) // Prevents inventory from being drilled
+	if(istype(loc, /obj/mecha))
+		if(!locate(/turf) in list(A, A.loc)) // Prevents inventory from being drilled
 			return
 		var/obj/mecha/M = loc
-		return M.click_action(A,src)
+		return M.click_action(A, src)
 
 	if(restrained())
+		setClickCooldown(10)
 		RestrainedClickOn(A)
 		return
 
@@ -85,79 +88,76 @@
 			return
 		throw_mode_off()
 
-	if(!istype(A,/obj/item/weapon/gun) && !isturf(A) && !istype(A,/obj/screen))
+	if(!istype(A, /obj/item/weapon/gun) && !isturf(A) && !istype(A, /obj/screen))
 		last_target_click = world.time
 
 	var/obj/item/W = get_active_hand()
 
-	if(W == A)
-		next_move = world.time + 6
-		if(W.flags&USEDELAY)
-			next_move += 5
+	if(W == A) // Handle attack_self
 		W.attack_self(src)
 		if(hand)
 			update_inv_l_hand(0)
 		else
 			update_inv_r_hand(0)
-
 		return
 
-	// operate two STORAGE levels deep here (item in backpack in src; NOT item in box in backpack in src)
+	//Atoms on your person
+	// A is your location but is not a turf; or is on you (backpack); or is on something on you (box in backpack); sdepth is needed here because contents depth does not equate inventory storage depth.
 	var/sdepth = A.storage_depth(src)
-	if(A == loc || (A in loc) || (sdepth != -1 && sdepth <= 1))
-
+	if((!isturf(A) && A == loc) || (sdepth != -1 && sdepth <= 1))
 		// faster access to objects already on you
-		if(A in contents)
-			next_move = world.time + 6 // on your person
-		else
-			next_move = world.time + 8 // in a box/bag or in your square
+		if(A.loc != src)
+			setMoveCooldown(10) //getting something out of a backpack
 
-		// No adjacency needed
 		if(W)
-			if(W.flags&USEDELAY)
-				next_move += 5
-
 			var/resolved = W.resolve_attackby(A, src)
 			if(!resolved && A && W)
-				W.afterattack(A,src,1,params) // 1 indicates adjacency
+				W.afterattack(A, src, 1, params) // 1 indicates adjacency
 		else
+			if(ismob(A)) // No instant mob attacking
+				setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 			UnarmedAttack(A, 1)
 		return
 
 	if(!isturf(loc)) // This is going to stop you from telekinesing from inside a closet, but I don't shed many tears for that
 		return
 
-	// Allows you to click on a box's contents, if that box is on the ground, but no deeper than that
+	//Atoms on turfs (not on your person)
+	// A is a turf or is on a turf, or in something on a turf (pen in a box); but not something in something on a turf (pen in a box in a backpack)
 	sdepth = A.storage_depth_turf()
 	if(isturf(A) || isturf(A.loc) || (sdepth != -1 && sdepth <= 1))
-		next_move = world.time + 10
-
 		if(A.Adjacent(src)) // see adjacent.dm
-			if(W)
-				if(W.flags&USEDELAY)
-					next_move += 5
+			setMoveCooldown(5)
 
+			if(W)
 				// Return 1 in attackby() to prevent afterattack() effects (when safely moving items for example)
 				var/resolved = W.resolve_attackby(A,src)
 				if(!resolved && A && W)
-					W.afterattack(A,src,1,params) // 1: clicking something Adjacent
+					W.afterattack(A, src, 1, params) // 1: clicking something Adjacent
 			else
+				if(ismob(A)) // No instant mob attacking
+					setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 				UnarmedAttack(A, 1)
 			return
 		else // non-adjacent click
 			if(W)
-				W.afterattack(A,src,0,params) // 0: not Adjacent
+				W.afterattack(A, src, 0, params) // 0: not Adjacent
 			else
 				RangedAttack(A, params)
 
 	return
 
-/mob/proc/changeNext_move(num)
-	next_move = world.time + num
+/mob/proc/setClickCooldown(var/timeout)
+	next_move = max(world.time + timeout, next_move)
 
-// Default behavior: ignore double clicks, consider them normal clicks instead
+/mob/proc/canClick()
+	if(config.no_click_cooldown || next_move <= world.time)
+		return 1
+	return 0
+
+// Default behavior: ignore double clicks, the second click that makes the doubleclick call already calls for a normal click
 /mob/proc/DblClickOn(var/atom/A, var/params)
-	ClickOn(A,params)
+	return
 
 /*
 	Translates into attack_hand, etc.
@@ -201,14 +201,12 @@
 		LaserEyes(A) // moved into a proc below
 	else if(TK in mutations)
 		switch(get_dist(src,A))
-			if(0)
-				;
 			if(1 to 5) // not adjacent may mean blocked by window
-				next_move += 2
+				setMoveCooldown(2)
 			if(5 to 7)
-				next_move += 5
+				setMoveCooldown(5)
 			if(8 to tk_maxrange)
-				next_move += 10
+				setMoveCooldown(10)
 			else
 				return
 		A.attack_tk(src)
@@ -226,11 +224,8 @@
 	Only used for swapping hands
 */
 /mob/proc/MiddleClickOn(var/atom/A)
-	return
-
-/mob/living/carbon/MiddleClickOn(var/atom/A)
 	swap_hand()
-
+	return
 
 // In case of use break glass
 /*
@@ -281,7 +276,7 @@
 		else
 			user.listed_turf = T
 			user.client.statpanel = T.name
-	return
+	return 1
 
 /mob/proc/TurfAdjacent(var/turf/T)
 	return T.AdjacentQuick(src)
@@ -307,7 +302,7 @@
 	return
 
 /mob/living/LaserEyes(atom/A)
-	next_move = world.time + 6
+	setClickCooldown(4)
 	var/turf/T = get_turf(src)
 	var/turf/U = get_turf(A)
 

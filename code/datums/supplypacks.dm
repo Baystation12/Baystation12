@@ -1091,9 +1091,8 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 					/obj/item/clothing/under/kilt)
 	name = "Costumes crate"
 	cost = 10
-	containertype = /obj/structure/closet/crate/secure
+	containertype = /obj/structure/closet/crate
 	containername = "Actor Costumes"
-	access = access_theatre
 	group = "Miscellaneous"
 
 /datum/supply_packs/formal_wear
@@ -1419,7 +1418,6 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 					/obj/item/clothing/head/helmet/gladiator,
 					/obj/item/clothing/head/ushanka)
 	group = "Miscellaneous"
-	access = access_theatre
 
 /datum/supply_packs/randomised/webbing
 	name = "Webbing crate"

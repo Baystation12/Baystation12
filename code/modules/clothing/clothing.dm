@@ -32,10 +32,10 @@
 
 		if(H.species)
 			if(exclusive)
-				if(!(H.species.name in species_restricted))
+				if(!(H.species.get_bodytype() in species_restricted))
 					wearable = 1
 			else
-				if(H.species.name in species_restricted)
+				if(H.species.get_bodytype() in species_restricted)
 					wearable = 1
 
 			if(!wearable && !(slot in list(slot_l_store, slot_r_store, slot_s_store)))
@@ -73,6 +73,7 @@
 	switch(target_species)
 		if("Skrell")
 			species_restricted = list("Human", "Skrell") //skrell helmets fit humans too
+
 		else
 			species_restricted = list(target_species)
 
@@ -445,8 +446,8 @@ BLIND     // can't see anything
 	var/icon/under_icon
 	if(icon_override)
 		under_icon = icon_override
-	else if(H && sprite_sheets && sprite_sheets[H.species.name])
-		under_icon = sprite_sheets[H.species.name]
+	else if(H && sprite_sheets && sprite_sheets[H.species.get_bodytype()])
+		under_icon = sprite_sheets[H.species.get_bodytype()]
 	else if(item_icons && item_icons[slot_w_uniform_str])
 		under_icon = item_icons[slot_w_uniform_str]
 	else

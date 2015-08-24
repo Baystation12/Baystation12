@@ -379,6 +379,12 @@ datum/uplink_item/dd_SortValue()
 	..()
 	antag_roles = list(MODE_MERCENARY)
 
+/datum/uplink_item/item/tools/money
+	name = "Operations Funding"
+	item_cost = 3
+	path = /obj/item/weapon/storage/secure/briefcase/money
+	desc = "A briefcase with 10,000 untraceable thalers for funding your sneaky activities."
+
 /***********
 * Implants *
 ***********/
@@ -616,7 +622,7 @@ var/image/default_abstract_uplink_icon
 	if(!user)
 		return 0
 
-	var/obj/item/weapon/card/id/I = GetIdCard(user)
+	var/obj/item/weapon/card/id/I = user.GetIdCard()
 	var/datum/data/record/random_general_record
 	var/datum/data/record/random_medical_record
 	if(data_core.general.len)

@@ -210,6 +210,7 @@
 		if(istype(W, /obj/item/weapon/grab))
 			var/obj/item/weapon/grab/G = W
 			src.MouseDrop_T(G.affecting, user)      //act like they were dragged onto the closet
+			return 0
 		if(istype(W,/obj/item/tk_grab))
 			return 0
 		if(istype(W, /obj/item/weapon/weldingtool))
@@ -257,11 +258,9 @@
 		return
 	if(user.restrained() || user.stat || user.weakened || user.stunned || user.paralysis)
 		return
-	if((!( istype(O, /atom/movable) ) || O.anchored || get_dist(user, src) > 1 || get_dist(user, O) > 1 || user.contents.Find(src)))
+	if((!( istype(O, /atom/movable) ) || O.anchored || !Adjacent(user) || !Adjacent(O) || !user.Adjacent(O) || user.contents.Find(src)))
 		return
-	if(user.loc==null) // just in case someone manages to get a closet into the blue light dimension, as unlikely as that seems
-		return
-	if(!istype(user.loc, /turf)) // are you in a container/closet/pod/etc?
+	if(!isturf(user.loc)) // are you in a container/closet/pod/etc?
 		return
 	if(!src.opened)
 		return
@@ -341,9 +340,12 @@
 	if(!req_breakout())
 		return
 
+	if(!escapee.canClick())
+		return
+
+	escapee.setClickCooldown(100)
+
 	//okay, so the closet is either welded or locked... resist!!!
-	escapee.next_move = world.time + 100
-	escapee.last_special = world.time + 100
 	escapee << "<span class='warning'>You lean on the back of \the [src] and start pushing the door open. (this will take about [breakout_time] minutes)</span>"
 
 	visible_message("<span class='danger'>The [src] begins to shake violently!</span>")

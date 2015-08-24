@@ -1,6 +1,6 @@
 /mob/living/simple_animal/hostile/syndicate
 	name = "\improper Syndicate operative"
-	desc = "Death to Nanotrasen."
+	desc = "Death to the Company."
 	icon_state = "syndicate"
 	icon_living = "syndicate"
 	icon_dead = "syndicate_dead"

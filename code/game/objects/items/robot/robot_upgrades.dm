@@ -29,10 +29,10 @@
 	R.modtype = initial(R.modtype)
 	R.hands.icon_state = initial(R.hands.icon_state)
 
-	R.choose_icon(1, R.set_module_sprites(list("Default" = "robot")))
-
 	R.notify_ai(ROBOT_NOTIFICATION_MODULE_RESET, R.module.name)
 	R.module.Reset(R)
+	qdel(R.module)
+	R.module = null
 	R.updatename("Default")
 
 	return 1

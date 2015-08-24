@@ -20,7 +20,7 @@
 		icon_state = "[initial(icon_state)]-on"
 		set_light(brightness_on)
 	else
-		icon_state = initial(icon_state)
+		icon_state = "[initial(icon_state)]"
 		set_light(0)
 
 /obj/item/device/flashlight/proc/update_brightness(var/mob/user = null)
@@ -141,7 +141,7 @@
 
 /obj/item/device/flashlight/flare
 	name = "flare"
-	desc = "A red Nanotrasen issued flare. There are instructions on the side, it reads 'pull cord, make light'."
+	desc = "A red standard-issue flare. There are instructions on the side reading 'pull cord, make light'."
 	w_class = 2.0
 	brightness_on = 7 // Pretty bright.
 	light_color = "#e58775"

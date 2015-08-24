@@ -24,15 +24,13 @@
 
 // Flags bitmasks.
 #define NOBLUDGEON         0x1    // When an item has this it produces no "X has been hit by Y with Z" message with the default handler.
-#define USEDELAY           0x2    // 1 second extra delay on use. (Can be used once every 2s)
-#define CONDUCT            0x4   // Conducts electricity. (metal etc.)
-#define ON_BORDER          0x8   // Item has priority to check when entering or leaving.
-#define NOBLOODY           0x10   // Used for items if they don't want to get a blood overlay.
-#define NODELAY            0x20   // 1 second attack-by delay skipped (Can be used once every 0.2s). Most objects have a 1s attack-by delay, which doesn't require a flag.
-#define OPENCONTAINER      0x40 // Is an open container for chemistry purposes.
-#define PHORONGUARD        0x80 // Does not get contaminated by phoron.
-#define	NOREACT            0x100 // Reagents don't react inside this container.
-#define PROXMOVE           0x200  // Does this object require proximity checking in Enter()?
+#define CONDUCT            0x2   // Conducts electricity. (metal etc.)
+#define ON_BORDER          0x4   // Item has priority to check when entering or leaving.
+#define NOBLOODY           0x8   // Used for items if they don't want to get a blood overlay.
+#define OPENCONTAINER      0x10 // Is an open container for chemistry purposes.
+#define PHORONGUARD        0x20 // Does not get contaminated by phoron.
+#define	NOREACT            0x40 // Reagents don't react inside this container.
+#define PROXMOVE           0x80  // Does this object require proximity checking in Enter()?
 
 //Flags for items (equipment)
 #define THICKMATERIAL          0x1  // Prevents syringes, parapens and hyposprays if equiped to slot_suit or slot_head.

@@ -74,7 +74,7 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 		mind = body.mind	//we don't transfer the mind but we keep a reference to it.
 
 	if(!T)	T = pick(latejoin)			//Safety in case we cannot find the body's position
-	loc = T
+	forceMove(T)
 
 	if(!name)							//To prevent nameless ghosts
 		name = capitalize(pick(first_names_male)) + " " + capitalize(pick(last_names))
@@ -293,7 +293,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		else
 			usr << "No area available."
 
-	usr.loc = pick(L)
+	usr.forceMove(pick(L))
 	following = null
 
 /mob/dead/observer/verb/follow(input in getmobs())
@@ -320,7 +320,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		following = target
 		src << "<span class='notice'>Now following [target]</span>"
 		if(ismob(target))
-			loc = get_turf(target)
+			forceMove(get_turf(target))
 			var/mob/M = target
 			M.following_mobs += src
 		else
@@ -331,7 +331,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 						break
 					// To stop the ghost flickering.
 					if(loc != T)
-						loc = T
+						forceMove(T)
 					sleep(15)
 
 /mob/proc/update_following()
@@ -341,7 +341,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 			following_mobs -= M
 		else
 			if(M.loc != .)
-				M.loc = .
+				M.forceMove(.)
 
 /mob
 	var/list/following_mobs = list()
@@ -392,7 +392,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 			var/turf/T = get_turf(M) //Turf of the destination mob
 
 			if(T && isturf(T))	//Make sure the turf exists, then move the source to that destination.
-				src.loc = T
+				forceMove(T)
 				following = null
 			else
 				src << "This mob is not located in the game world."
@@ -492,7 +492,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		host << "<span class='info'>You are now a mouse. Try to avoid interaction with players, and do not give hints away that you are more than a simple rodent.</span>"
 
 /mob/dead/observer/verb/view_manfiest()
-	set name = "View Crew Manifest"
+	set name = "Show Crew Manifest"
 	set category = "Ghost"
 
 	var/dat

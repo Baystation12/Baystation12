@@ -12,11 +12,11 @@
 	idtype = /obj/item/weapon/card/id/silver
 	req_admin_notify = 1
 	economic_modifier = 10
-	access = list(access_security, access_eva, access_sec_doors, access_brig, access_armory, access_court,
+	access = list(access_security, access_eva, access_sec_doors, access_brig, access_armory,
 			            access_forensics_lockers, access_morgue, access_maint_tunnels, access_all_personal_lockers,
 			            access_research, access_engine, access_mining, access_medical, access_construction, access_mailsorting,
 			            access_heads, access_hos, access_RC_announce, access_keycard_auth, access_gateway, access_external_airlocks)
-	minimal_access = list(access_security, access_eva, access_sec_doors, access_brig, access_armory, access_court,
+	minimal_access = list(access_security, access_eva, access_sec_doors, access_brig, access_armory,
 			            access_forensics_lockers, access_morgue, access_maint_tunnels, access_all_personal_lockers,
 			            access_research, access_engine, access_mining, access_medical, access_construction, access_mailsorting,
 			            access_heads, access_hos, access_RC_announce, access_keycard_auth, access_gateway, access_external_airlocks)
@@ -56,8 +56,8 @@
 	supervisors = "the head of security"
 	selection_color = "#ffeeee"
 	economic_modifier = 5
-	access = list(access_security, access_eva, access_sec_doors, access_brig, access_armory, access_court, access_maint_tunnels, access_morgue, access_external_airlocks)
-	minimal_access = list(access_security, access_eva, access_sec_doors, access_brig, access_armory, access_court, access_maint_tunnels, access_external_airlocks)
+	access = list(access_security, access_eva, access_sec_doors, access_brig, access_armory, access_maint_tunnels, access_morgue, access_external_airlocks)
+	minimal_access = list(access_security, access_eva, access_sec_doors, access_brig, access_armory, access_maint_tunnels, access_external_airlocks)
 	minimal_player_age = 5
 
 	equip(var/mob/living/carbon/human/H)
@@ -88,14 +88,14 @@
 	department = "Security"
 	department_flag = ENGSEC
 	faction = "Station"
-	total_positions = 2
+	total_positions = 1
 	spawn_positions = 2
 	supervisors = "the head of security"
 	selection_color = "#ffeeee"
 	alt_titles = list("Forensic Technician")
 	economic_modifier = 5
-	access = list(access_security, access_sec_doors, access_forensics_lockers, access_morgue, access_maint_tunnels, access_court)
-	minimal_access = list(access_security, access_sec_doors, access_forensics_lockers, access_morgue, access_maint_tunnels, access_court)
+	access = list(access_security, access_sec_doors, access_forensics_lockers, access_morgue, access_maint_tunnels)
+	minimal_access = list(access_security, access_sec_doors, access_forensics_lockers, access_morgue, access_maint_tunnels)
 	alt_titles = list("Forensic Technician")
 	minimal_player_age = 3
 	equip(var/mob/living/carbon/human/H)
@@ -131,13 +131,13 @@
 	department = "Security"
 	department_flag = ENGSEC
 	faction = "Station"
-	total_positions = 3
-	spawn_positions = 3
+	total_positions = 4
+	spawn_positions = 4
 	supervisors = "the head of security"
 	selection_color = "#ffeeee"
 	economic_modifier = 4
-	access = list(access_security, access_eva, access_sec_doors, access_brig, access_court, access_maint_tunnels, access_morgue, access_external_airlocks)
-	minimal_access = list(access_security, access_eva, access_sec_doors, access_brig, access_court, access_maint_tunnels, access_external_airlocks)
+	access = list(access_security, access_eva, access_sec_doors, access_brig, access_maint_tunnels, access_morgue, access_external_airlocks)
+	minimal_access = list(access_security, access_eva, access_sec_doors, access_brig, access_maint_tunnels, access_external_airlocks)
 	minimal_player_age = 3
 	equip(var/mob/living/carbon/human/H)
 		if(!H)	return 0

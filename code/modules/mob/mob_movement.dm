@@ -10,6 +10,9 @@
 		return (!mover.density || !density || lying)
 	return
 
+/mob/proc/setMoveCooldown(var/timeout)
+	if(client) 
+		client.move_delay = max(world.time + timeout, client.move_delay)
 
 /client/North()
 	..()
@@ -230,7 +233,6 @@
 
 	if(Process_Grab())	return
 
-
 	if(!mob.canmove)
 		return
 
@@ -242,7 +244,6 @@
 
 	if((istype(mob.loc, /turf/space)) || (mob.lastarea.has_gravity == 0))
 		if(!mob.Process_Spacemove(0))	return 0
-
 
 	if(isobj(mob.loc) || ismob(mob.loc))//Inside an object, tell it we moved
 		var/atom/O = mob.loc
