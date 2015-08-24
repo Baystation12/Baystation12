@@ -28,6 +28,13 @@
 	required_reagents = list("oxygen" = 1, "carbon" = 1, "sugar" = 1)
 	result_amount = 3
 
+/datum/chemical_reaction/cordrazine
+	name = "Cordrazine"
+	id = "cordrazine"
+	result = "cordrazine"
+	required_reagents = list("lithium" = 1, "inaprovaline" = 1, "nitrogen" = 1)
+	result_amount = 3
+
 /datum/chemical_reaction/dylovene
 	name = "Dylovene"
 	id = "anti_toxin"
