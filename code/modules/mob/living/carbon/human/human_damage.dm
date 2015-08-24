@@ -30,7 +30,6 @@
 		var/obj/item/organ/brain/sponge = internal_organs_by_name["brain"]
 		if(sponge)
 			sponge.take_damage(amount)
-			sponge.damage = min(max(brainloss, 0),(maxHealth*2))
 			brainloss = sponge.damage
 		else
 			brainloss = 200
