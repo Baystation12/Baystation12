@@ -43,6 +43,7 @@
 	return O.allowed(src)
 
 /mob/proc/CanUseObjTopic()
+	return 1
 
 /obj/proc/CouldUseTopic(var/mob/user)
 	var/atom/host = nano_host()
