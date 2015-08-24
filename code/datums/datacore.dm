@@ -17,6 +17,7 @@
 	var/list/eng = new()
 	var/list/med = new()
 	var/list/sci = new()
+	var/list/car = new()
 	var/list/civ = new()
 	var/list/bot = new()
 	var/list/misc = new()
@@ -67,6 +68,9 @@
 		if(real_rank in science_positions)
 			sci[name] = rank
 			department = 1
+		if(real_rank in cargo_positions)
+			car[name] = rank
+			department = 1
 		if(real_rank in civilian_positions)
 			civ[name] = rank
 			department = 1
@@ -99,6 +103,11 @@
 		dat += "<tr><th colspan=3>Science</th></tr>"
 		for(name in sci)
 			dat += "<tr[even ? " class='alt'" : ""]><td>[name]</td><td>[sci[name]]</td><td>[isactive[name]]</td></tr>"
+			even = !even
+	if(car.len > 0)
+		dat += "<tr><th colspan=3>Cargo</th></tr>"
+		for(name in car)
+			dat += "<tr[even ? " class='alt'" : ""]><td>[name]</td><td>[car[name]]</td><td>[isactive[name]]</td></tr>"
 			even = !even
 	if(civ.len > 0)
 		dat += "<tr><th colspan=3>Civilian</th></tr>"
