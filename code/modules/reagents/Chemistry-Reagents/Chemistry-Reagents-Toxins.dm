@@ -302,6 +302,7 @@
 	else
 		M.sleeping = max(M.sleeping, 20)
 		M.drowsyness = max(M.drowsyness, 60)
+	M.add_chemical_effect(CE_PAINKILLER, 80)
 
 /datum/reagent/chloralhydrate
 	name = "Chloral Hydrate"
