@@ -136,6 +136,7 @@
 			drop = pick(supplied_drop_types)
 			supplied_drop_types -= drop
 			if(istype(drop))
+				drop.tag = null
 				if(drop.buckled)
 					drop.buckled = null
 				drop.loc = T
@@ -155,11 +156,6 @@
 
 	if(!check_rights(R_FUN)) return
 
-	var/turf/holder_turf = locate(157,254,2) // This is in the admin jails, will need adjusting for other mobs.
-	if(!istype(holder_turf))
-		usr << "Nowhere to put the mobs, aborting."
-		return
-
 	var/client/selected_player
 	var/mob/living/spawned_mob
 	var/list/spawned_mobs = list()
@@ -173,7 +169,9 @@
 		if(spawn_count <= 0)
 			return
 		for(var/i=0;i<spawn_count;i++)
-			spawned_mobs |= new spawn_path(holder_turf)
+			var/mob/living/M = new spawn_path()
+			M.tag = "awaiting drop"
+			spawned_mobs |= M
 	else
 		var/list/candidates = list()
 		for(var/client/player in clients)
@@ -190,7 +188,8 @@
 			return
 
 		// Spawn the mob in nullspace for now.
-		spawned_mob = new spawn_path(holder_turf)
+		spawned_mob = new spawn_path()
+		spawned_mob.tag = "awaiting drop"
 
 		// Equip them, if they are human and it is desirable.
 		if(istype(spawned_mob, /mob/living/carbon/human))
@@ -205,6 +204,7 @@
 		if(spawned_mobs.len)
 			for(var/mob/living/M in spawned_mobs)
 				spawned_mobs -= M
+				M.tag = null
 				qdel(M)
 			spawned_mobs.Cut()
 		return
