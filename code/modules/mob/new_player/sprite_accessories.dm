@@ -51,7 +51,7 @@
 		name = "Bald"
 		icon_state = "bald"
 		gender = MALE
-		species_allowed = list("Human","Unathi")
+		species_allowed = list("Human","Unathi", "Quora")
 
 	short
 		name = "Short Hair"	  // try to capatilize the names please~
@@ -672,6 +672,16 @@
 		icon_state = "vox_shortquills"
 		species_allowed = list("Vox")
 
+	quorum_spike_west
+		name = "Spikes West"
+		icon_state = "hair_quorum_spikes"
+		species_allowed = list("Quora")
+
+	quorum_ocular
+		name = "Ocular Head"
+		icon_state = "hair_quorum_ocular"
+		species_allowed = list("Quora")
+
 /datum/sprite_accessory/facial_hair
 
 	taj_sideburns
@@ -703,6 +713,11 @@
 		name = "Tajara Smallsatche"
 		icon_state = "facial_smallstache"
 		species_allowed = list("Tajara")
+
+	quorum_facial_scar
+		name = "Facial Scar"
+		icon_state = "facial_quorum_scar_left_eye"
+		species_allowed = list("Quora")
 
 //skin styles - WIP
 //going to have to re-integrate this with surgery
