@@ -99,7 +99,7 @@
 
 
 /datum/gas_mixture/proc/equalize(datum/gas_mixture/sharer)
-	for(var/g in sharer.gas)
+	for(var/g in gas|sharer.gas)
 		var/comb = gas[g] + sharer.gas[g]
 		comb /= volume + sharer.volume
 		gas[g] = comb * volume
