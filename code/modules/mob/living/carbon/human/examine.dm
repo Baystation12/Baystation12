@@ -268,9 +268,9 @@
 			else if(temp.wounds.len > 0 || temp.open)
 				if(temp.is_stump() && temp.parent_organ && organs_by_name[temp.parent_organ])
 					var/obj/item/organ/external/parent = organs_by_name[temp.parent_organ]
-					wound_flavor_text["[temp.name]"] = "<span class='warning'>[t_He] has [temp.get_wounds_desc()] on [t_his] [parent.name].</span><br>"
+					wound_flavor_text["[temp.name]"] = "<span class='warning'>[T.He] has [temp.get_wounds_desc()] on [T.His] [parent.name].</span><br>"
 				else
-					wound_flavor_text["[temp.name]"] = "<span class='warning'>[t_He] has [temp.get_wounds_desc()] on [t_his] [temp.name].</span><br>"
+					wound_flavor_text["[temp.name]"] = "<span class='warning'>[T.He] has [temp.get_wounds_desc()] on [T.His] [temp.name].</span><br>"
 				if(temp.status & ORGAN_BLEEDING)
 					is_bleeding["[temp.name]"] = "<span class='danger'>[T.His] [temp.name] is bleeding!</span><br>"
 			else
