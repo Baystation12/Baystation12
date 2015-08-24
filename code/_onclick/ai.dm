@@ -31,7 +31,7 @@
 		build_click(src, client.buildmode, params, A)
 		return
 
-	if(control_disabled || stat)
+	if(stat)
 		return
 
 	var/list/modifiers = params2list(params)
@@ -51,7 +51,7 @@
 		CtrlClickOn(A)
 		return
 
-	if(!canClick())
+	if(control_disabled || !canClick())
 		return
 
 	if(aiCamera.in_camera_mode)
@@ -89,35 +89,31 @@
 */
 
 /mob/living/silicon/ai/ShiftClickOn(var/atom/A)
-	if(A.AIShiftClick(src))
+	if(!control_disabled && A.AIShiftClick(src))
 		return
-	 ..()
+	..()
 
 /mob/living/silicon/ai/CtrlClickOn(var/atom/A)
-	if(A.AICtrlClick(src))
+	if(!control_disabled && A.AICtrlClick(src))
 		return
-	 ..()
+	..()
 
 /mob/living/silicon/ai/AltClickOn(var/atom/A)
-	if(A.AIAltClick(src))
+	if(!control_disabled && A.AIAltClick(src))
 		return
-	 ..()
+	..()
 
 /mob/living/silicon/ai/MiddleClickOn(var/atom/A)
-	if(A.AIMiddleClick(src))
+	if(!control_disabled && A.AIMiddleClick(src))
 		return
-	 ..()
+	..()
+
 /*
 	The following criminally helpful code is just the previous code cleaned up;
 	I have no idea why it was in atoms.dm instead of respective files.
 */
 
 /atom/proc/AICtrlShiftClick()
-	return
-
-/obj/machinery/door/airlock/AICtrlShiftClick()
-	if(emagged)
-		return
 	return
 
 /atom/proc/AIShiftClick()

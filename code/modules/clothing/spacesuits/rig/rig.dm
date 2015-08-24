@@ -545,14 +545,10 @@
 	return 0
 
 /obj/item/weapon/rig/proc/notify_ai(var/message)
-	if(!message || !installed_modules || !installed_modules.len)
-		return 0
-	. = 0
-	for(var/obj/item/rig_module/module in installed_modules)
-		for(var/mob/living/silicon/ai/ai in module.contents)
-			if(ai && ai.client && !ai.stat)
-				ai << "[message]"
-				. = 1
+	for(var/obj/item/rig_module/ai_container/module in installed_modules)
+		if(module.integrated_ai && module.integrated_ai.client && !module.integrated_ai.stat)
+			module.integrated_ai << "[message]"
+			. = 1
 
 /obj/item/weapon/rig/equipped(mob/living/carbon/human/M)
 	..()
@@ -809,7 +805,7 @@
 	if(world.time < wearer_move_delay)
 		return
 
-	if(!wearer.loc || !ai_can_move_suit(user, check_user_module = 1))
+	if(!wearer || !wearer.loc || !ai_can_move_suit(user, check_user_module = 1))
 		return
 
 	//This is sota the goto stop mobs from moving var

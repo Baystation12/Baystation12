@@ -697,7 +697,7 @@
 	return 0
 
 /mob/proc/cannot_stand()
-	return stat || weakened || paralysis || resting || sleeping || (status_flags & FAKEDEATH)
+	return incapacitated() || restrained() || resting || sleeping || (status_flags & FAKEDEATH)
 
 //Updates canmove, lying and icons. Could perhaps do with a rename but I can't think of anything to describe it.
 /mob/proc/update_canmove()
