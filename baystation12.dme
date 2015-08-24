@@ -1393,6 +1393,7 @@
 #include "code\modules\organs\wound.dm"
 #include "code\modules\organs\subtypes\diona.dm"
 #include "code\modules\organs\subtypes\machine.dm"
+#include "code\modules\organs\subtypes\quorum.dm"
 #include "code\modules\organs\subtypes\standard.dm"
 #include "code\modules\organs\subtypes\unbreakable.dm"
 #include "code\modules\organs\subtypes\xenos.dm"
