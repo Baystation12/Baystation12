@@ -126,10 +126,7 @@
 	space_chance = 25
 
 /datum/language/quorum/get_random_name()
-
-	name = "[pick(list("Shaper","Dreamer","Mender","Thinker","Leader"))] [pick(first_names_male)] [rand(100, 999)]"
-
-	return name
+	return "[pick(list("Shaper","Dreamer","Mender","Thinker","Leader"))] [pick(first_names_male)] [rand(100, 999)]"
 //Syllable Lists
 /*
 	This list really long, mainly because I can't make up my mind about which mandarin syllables should be removed,
