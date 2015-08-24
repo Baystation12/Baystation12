@@ -255,4 +255,30 @@
 
 	qdel(src)
 
+/mob/living/carbon/human/proc/quorum_whisper()
+	set name = "Communicate Telepathically"
+	set desc = "Communicate over a distance with your mind."
+	set category = "Abilities"
 
+	if(usr.stat!=CONSCIOUS || !usr)
+		return
+
+	var/mob/target = input("Who do you want to communicate with ?") as null|anything in player_list
+
+	if (isnull(target))
+		return
+
+	var/msg = sanitize(input("Message:", "Telepathic message") as text|null)
+
+	if(usr.stat!=CONSCIOUS) //we check it again so that people can't 'save' messages for when they are knocked out
+		return
+	var/dist = max(1,get_dist(usr,target)-11) //10 turf before distance effects readability
+	if(msg)
+		log_say("Quorum telepathy: [key_name(src)]-> [target.key] : [msg]")
+		msg = stars(msg,max(1,100-halloss) * max(1,health)/maxHealth * (max(1,100-dist/2))/100)
+		target.show_message("You hear something whisper into your ear: <i>[msg]</i>")
+		usr.show_message("You transmit: <i>[msg]</i> to [target]")
+		for(var/mob/dead/G in dead_mob_list)
+			G.show_message("<i>Telepathic message from <b>[src]</b> to <b>[target]</b>: [msg]</i>")
+
+	return
