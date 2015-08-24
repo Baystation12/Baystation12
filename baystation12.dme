@@ -129,7 +129,6 @@
 #include "code\controllers\Processes\mob.dm"
 #include "code\controllers\Processes\nanoui.dm"
 #include "code\controllers\Processes\obj.dm"
-#include "code\controllers\Processes\pipenet.dm"
 #include "code\controllers\Processes\Shuttle.dm"
 #include "code\controllers\Processes\sun.dm"
 #include "code\controllers\Processes\supply.dm"
