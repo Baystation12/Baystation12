@@ -309,6 +309,24 @@
 		mode = SYRINGE_INJECT
 		update_icon()
 
+/obj/item/weapon/reagent_containers/syringe/melorazine
+	name = "Syringe (melorazine)"
+	desc = "Contains melorazine - A standard surgical sedative."
+	New()
+		..()
+		reagents.add_reagent("melorazine", 15)
+		mode = SYRINGE_INJECT
+		update_icon()
+
+/obj/item/weapon/reagent_containers/syringe/antitoxin
+	name = "Syringe (anti-toxin)"
+	desc = "Contains anti-toxins."
+	New()
+		..()
+		reagents.add_reagent("anti_toxin", 15)
+		mode = SYRINGE_INJECT
+		update_icon()
+
 /obj/item/weapon/reagent_containers/syringe/antiviral
 	name = "Syringe (spaceacillin)"
 	desc = "Contains antiviral agents."

@@ -105,6 +105,15 @@
 		..()
 		reagents.add_reagent("anti_toxin", 25)
 
+/obj/item/weapon/reagent_containers/pill/synaptezine
+	name = "Synaptezine pill"
+	desc = "Treats paralysis and weakness, along with other conditions associated with the mind."
+	icon_state = "pill8"
+	New()
+		..()
+		reagents.add_reagent("synaptezine", 2)
+		reagents.add_reagent("dylovene", 5)
+
 /obj/item/weapon/reagent_containers/pill/tox
 	name = "Toxins pill"
 	desc = "Highly toxic."

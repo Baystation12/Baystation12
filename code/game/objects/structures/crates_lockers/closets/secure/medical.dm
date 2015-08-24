@@ -40,11 +40,12 @@
 
 	New()
 		..()
-		new /obj/item/weapon/tank/anesthetic(src)
-		new /obj/item/weapon/tank/anesthetic(src)
-		new /obj/item/weapon/tank/anesthetic(src)
-		new /obj/item/clothing/mask/breath/medical(src)
-		new /obj/item/clothing/mask/breath/medical(src)
+		new /obj/item/weapon/reagent_containers/syringe/melorazine(src)
+		new /obj/item/weapon/reagent_containers/syringe/melorazine(src)
+		new /obj/item/weapon/reagent_containers/syringe/melorazine(src)
+		new /obj/item/weapon/reagent_containers/syringe/melorazine(src)
+		new /obj/item/weapon/tank/oxygen(src)
+		new /obj/item/weapon/tank/oxygen(src)
 		new /obj/item/clothing/mask/breath/medical(src)
 		return
 

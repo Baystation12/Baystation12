@@ -1,20 +1,25 @@
 
-/* General medicine */
-/datum/reagent/cordrazine
-	name = "Cordrazine"
-	id = "cordrazine"
-	description = "Cordrazine is a strong chemical stimulant, used for stimulating neural and cardiac activity."
+/datum/reagent/chloromydride
+	name = "Chloromydride"
+	id = "chloromydride"
+	description = "Chloromydride is a strong cardiac stimulant, usually used for cardiac arrest. Be warned, however - It has dangerous side effects."
 	reagent_state = LIQUID
-	color = "#8A0808"
-	overdose = 30
+	color = "#F600FA"
+	overdose = 15
+	metabolism = REM * 0.5
 	scannable = 1
-	
-/datum/reagent/cordrazine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+
+/datum/reagent/chloromydride/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien != IS_DIONA)
+		M.add_chemical_effect(CE_STABLE)
+		M.add_chemical_effect(CE_PAINKILLER, 50)
 		M.AdjustParalysis(-1)
-		M.AdjustWeakened(-2)
+		M.AdjustWeakened(-1)
+		M.AdjustStunned(-1)
+		M.adjustToxLoss(removed * 5)
 		//M.stimulate_heart()
-		//M.stimulate_brain()
+		M.adjustOxyLoss(-30 * removed)
+
 
 /datum/reagent/inaprovaline
 	name = "Inaprovaline"
@@ -84,6 +89,33 @@
 		M.drowsyness = max(0, M.drowsyness - 6 * removed)
 		M.hallucination = max(0, M.hallucination - 9 * removed)
 		M.adjustToxLoss(-4 * removed)
+
+/datum/reagent/cytrazine
+	name = "Cytrazine"
+	id = "cytrazine"
+	description = "Cytrazine is a powerful antitoxin, and purges other chemicals from the system. However, it also multiplies damage of any other type."
+	reagent_state = LIQUID
+	color = "#00A000"
+	scannable = 1
+
+/datum/reagent/cytrazine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	var/mob/living/carbon/human/H = M
+	if(alien != IS_DIONA)
+		M.drowsyness = max(0, M.drowsyness - 12 * removed)
+		M.hallucination = max(0, M.hallucination - 12 * removed)
+		M.adjustToxLoss(-12 * removed)
+		for(var/datum/reagent/R in M.reagents.reagent_list)
+			if(R != src)
+				M.reagents.remove_reagent(R.id,2)
+		if(H.oxyloss)
+			H.oxyloss = (H.oxyloss*1.1)
+		if(H.brainloss)
+			H.brainloss = (H.brainloss*1.1)
+//		for(var/obj/item/organ/external/O in H.organs)
+//			if(O.brute_dam)
+//				O.brute_dam = (O.brute_dam*1.1)
+//			if(O.burn_dam)
+//				O.burn_dam = (O.burn_dam*1.1)
 
 /datum/reagent/dexalin
 	name = "Dexalin"

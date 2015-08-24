@@ -110,16 +110,16 @@
 			H.adjustOxyLoss(2)
 			H.Weaken(10)
 
-/datum/reagent/toxin/zombiepowder
-	name = "Zombie Powder"
-	id = "zombiepowder"
+/datum/reagent/toxin/dylamadon
+	name = "Dylamadon"
+	id = "dylamadon"
 	description = "A strong neurotoxin that puts the subject into a death-like state."
 	reagent_state = SOLID
 	color = "#669900"
 	metabolism = REM
 	strength = 3
 
-/datum/reagent/toxin/zombiepowder/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/toxin/dylamadon/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
 	if(alien == IS_DIONA)
 		return
@@ -129,7 +129,7 @@
 	M.silent = max(M.silent, 10)
 	M.tod = worldtime2text()
 
-/datum/reagent/toxin/zombiepowder/Destroy()
+/datum/reagent/toxin/dylamadon/Destroy()
 	if(holder && holder.my_atom && ismob(holder.my_atom))
 		var/mob/M = holder.my_atom
 		M.status_flags &= ~FAKEDEATH
@@ -277,6 +277,28 @@
 		if(prob(50))
 			M.Weaken(2)
 		M.drowsyness = max(M.drowsyness, 20)
+	else
+		M.sleeping = max(M.sleeping, 20)
+		M.drowsyness = max(M.drowsyness, 60)
+
+/datum/reagent/melorazine
+	name = "Melorazine"
+	id = "melorazine"
+	description = "A standard sedative, used in most medical facilities in Sol and Nyx.."
+	reagent_state = LIQUID
+	color = "#E0F8F7"
+	metabolism = REM * 0.5
+	overdose = 25
+
+/datum/reagent/melorazine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	if(alien == IS_DIONA)
+		return
+	if(dose < 0.5)
+		if(dose == metabolism * 2 || prob(5))
+			M.emote("yawn")
+	else if(dose < 1.5)
+		M.Weaken(10)
+		M.eye_blurry = max(M.eye_blurry, 20)
 	else
 		M.sleeping = max(M.sleeping, 20)
 		M.drowsyness = max(M.drowsyness, 60)
