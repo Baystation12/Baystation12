@@ -255,15 +255,19 @@
 
 	qdel(src)
 
+
 /mob/living/carbon/human/proc/quorum_whisper()
 	set name = "Communicate Telepathically"
 	set desc = "Communicate over a distance with your mind."
 	set category = "Abilities"
 
-	if(usr.stat!=CONSCIOUS || !usr)
+	if(usr.stat!=CONSCIOUS || !istype(usr,/mob/living/carbon/human))
 		return
 
-	var/mob/target = input("Who do you want to communicate with ?") as null|anything in player_list
+	var/list/targets = list()
+	for(var/mob/living/L in player_list)
+		targets += L
+	var/mob/target = input("Who do you want to communicate with?") as null|anything in targets
 
 	if (isnull(target))
 		return
