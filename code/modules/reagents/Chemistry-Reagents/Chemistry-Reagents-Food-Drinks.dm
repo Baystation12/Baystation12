@@ -568,6 +568,16 @@
 	glass_name = "cup of coffee"
 	glass_desc = "Don't drop it, or you'll send scalding liquid and glass shards everywhere."
 
+/datum/reagent/drink/coffee/on_mob_life(var/mob/living/carbon/M, var/alien, var/location)
+	if(istype(M,/mob/living/carbon/human) && M.species.has_organ["kidneys"])
+		var/mob/living/carbon/human/H = M
+		var/obj/item/organ/K = H.internal_organs_by_name["kidneys"]
+		if(K)
+			if(K.is_bruised())
+				H.adjustToxLoss(0.1 * PROCESS_ACCURACY)
+			else if(K.is_broken())
+				H.adjustToxLoss(0.3 * PROCESS_ACCURACY)
+	..()
 /datum/reagent/drink/coffee/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
 	if(alien == IS_DIONA)

@@ -332,6 +332,6 @@
 	has_organ = list(
 		"brain" = /obj/item/organ/brain,
 		"eyes" = /obj/item/organ/eyes,
-		"heart" = /obj/item/organ/heart/quorum,
-		"liver" = /obj/item/organ/liver/quorum
+		"heart" = /obj/item/organ/lungs/quorum,
+		"kidneys" = /obj/item/organ/liver/quorum
 		)
