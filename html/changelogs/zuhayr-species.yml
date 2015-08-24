@@ -1,8 +1,0 @@
-author: Zuhayr
-delete-after: True
-changes: 
-  - rscadd: "Unathi now have minor slowdown and 20% brute resist."
-  - rscadd: "Tajarans now have lower bonus speed and a flat 15% malus to brute and burn."
-  - rscadd: "Vox can now eat monkeys and small animals."
-  - rscadd: "Tajarans can now eat small animals."
-  - rscadd: "Unarmed attack damage has been lowered across the board."
