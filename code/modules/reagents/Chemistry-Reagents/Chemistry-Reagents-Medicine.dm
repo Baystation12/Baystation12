@@ -1,4 +1,20 @@
+
 /* General medicine */
+/datum/reagent/cordrazine
+	name = "Cordrazine"
+	id = "cordrazine"
+	description = "Cordrazine is a strong chemical stimulant, used for stimulating neural and cardiac activity."
+	reagent_state = LIQUID
+	color = "#8A0808"
+	overdose = 30
+	scannable = 1
+	
+/datum/reagent/cordrazine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	if(alien != IS_DIONA)
+		M.AdjustParalysis(-1)
+		M.AdjustWeakened(-2)
+		//M.stimulate_heart()
+		//M.stimulate_brain()
 
 /datum/reagent/inaprovaline
 	name = "Inaprovaline"
@@ -14,6 +30,7 @@
 	if(alien != IS_DIONA)
 		M.add_chemical_effect(CE_STABLE)
 		M.add_chemical_effect(CE_PAINKILLER, 25)
+
 
 /datum/reagent/bicaridine
 	name = "Bicaridine"
