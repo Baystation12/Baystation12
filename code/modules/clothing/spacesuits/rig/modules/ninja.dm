@@ -102,7 +102,7 @@
 	var/mob/living/carbon/human/H = holder.wearer
 
 	if(!istype(H.loc, /turf))
-		usr << "<span class='warning'>You cannot teleport out of your current location.</span>"
+		H << "<span class='warning'>You cannot teleport out of your current location.</span>"
 		return 0
 
 	var/turf/T
@@ -112,15 +112,15 @@
 		T = get_teleport_loc(get_turf(H), H, rand(5, 9))
 
 	if(!T || T.density)
-		usr << "<span class='warning'>You cannot teleport into solid walls.</span>"
+		H << "<span class='warning'>You cannot teleport into solid walls.</span>"
 		return 0
 
 	if(T.z in config.admin_levels)
-		usr << "<span class='warning'>You cannot use your teleporter on this Z-level.</span>"
+		H << "<span class='warning'>You cannot use your teleporter on this Z-level.</span>"
 		return 0
 
 	if(T.contains_dense_objects())
-		usr << "<span class='warning'>You cannot teleport to a location with solid objects.</span>"
+		H << "<span class='warning'>You cannot teleport to a location with solid objects.</span>"
 
 	phase_out(H,get_turf(H))
 	H.loc = T
