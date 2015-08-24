@@ -90,7 +90,7 @@
 	ask_verb = "intones"
 	exclaim_verb = "chants"
 	colour = "cult"
-	key = "n"
+	key = "f"
 	flags = RESTRICTED
 	space_chance = 100
 	syllables = list("ire","ego","nahlizet","certum","veri","jatkaa","mgar","balaq", "karazet", "geeri", \
@@ -108,5 +108,5 @@
 	ask_verb = "intones"
 	exclaim_verb = "chants"
 	colour = "cult"
-	key = "m"
+	key = "y"
 	flags = RESTRICTED | HIVEMIND
