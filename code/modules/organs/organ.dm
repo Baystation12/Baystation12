@@ -326,6 +326,7 @@ var/list/organ_cache = list()
 	user.drop_from_inventory(src)
 	var/obj/item/weapon/reagent_containers/food/snacks/organ/O = new(get_turf(src))
 	O.name = name
+	O.icon = icon
 	O.icon_state = icon_state
 
 	// Pass over the blood.
