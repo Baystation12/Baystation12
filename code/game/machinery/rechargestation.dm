@@ -200,46 +200,46 @@
 	if(istype(R))
 		go_in(R)
 
-/obj/machinery/recharge_station/proc/go_out()
-	if(!(occupant))
-		return
-	occupant.forceMove(loc)
-	occupant.reset_view()
-	occupant = null
-	update_icon()
-	return
-
 /obj/machinery/recharge_station/proc/go_in(var/mob/living/silicon/robot/R)
+	if(!istype(R))
+		return
+	if(occupant)
+		return
+
 	R.reset_view(src)
 	R.forceMove(src)
 	occupant = R
 	update_icon()
 
+/obj/machinery/recharge_station/proc/go_out()
+	if(!occupant)
+		return
+
+	occupant.forceMove(loc)
+	occupant.reset_view()
+	occupant = null
+	update_icon()
+
 /obj/machinery/recharge_station/verb/move_eject()
 	set category = "Object"
+	set name = "Eject Recharger"
 	set src in oview(1)
-	if(usr.stat != 0)
+
+	// TODO :  Change to incapacitated() on merge.
+	if(usr.stat || usr.lying || usr.resting || usr.buckled)
 		return
+
 	go_out()
 	add_fingerprint(usr)
 	return
 
 /obj/machinery/recharge_station/verb/move_inside()
 	set category = "Object"
+	set name = "Enter Recharger"
 	set src in oview(1)
 
-	if(usr.stat == DEAD)
-		return
-	if(occupant)
-		usr << "<span class='notice'>\The [src] is already occupied!</span>"
-		return
-
-	var/mob/living/silicon/robot/R = usr
-	if(!istype(R))
-		usr << "<span class='notice'>Only synthetics may enter the recharger!</span>"
-		return
-	if(!R.cell)
-		usr << "<span class='notice'>Without a powercell, you can't be recharged.</span>"
+	// TODO :  Change to incapacitated() on merge.
+	if(usr.stat || usr.lying || usr.resting || usr.buckled)
 		return
 
 	go_in(usr)
