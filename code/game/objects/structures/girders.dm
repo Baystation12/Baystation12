@@ -7,6 +7,7 @@
 	var/health = 200
 	var/cover = 50 //how much cover the girder provides against projectiles.
 	var/material/reinf_material
+	var/reinforcing = 0
 
 /obj/structure/girder/displaced
 	icon_state = "displaced"
@@ -48,6 +49,7 @@
 	health = min(health,initial(health))
 	state = 0
 	icon_state = initial(icon_state)
+	reinforcing = 0
 	if(reinf_material)
 		reinforce_girder()
 
@@ -78,13 +80,18 @@
 		user << "<span class='notice'>You drill through the girder!</span>"
 		dismantle()
 
-	else if(istype(W, /obj/item/weapon/screwdriver) && state == 2)
-		playsound(src.loc, 'sound/items/Screwdriver.ogg', 100, 1)
-		user << "<span class='notice'>Now unsecuring support struts...</span>"
-		if(do_after(user,40))
-			if(!src) return
-			user << "<span class='notice'>You unsecured the support struts!</span>"
-			state = 1
+	else if(istype(W, /obj/item/weapon/screwdriver))
+		if(state == 2)
+			playsound(src.loc, 'sound/items/Screwdriver.ogg', 100, 1)
+			user << "<span class='notice'>Now unsecuring support struts...</span>"
+			if(do_after(user,40))
+				if(!src) return
+				user << "<span class='notice'>You unsecured the support struts!</span>"
+				state = 1
+		else if(anchored && !reinf_material)
+			playsound(src.loc, 'sound/items/Screwdriver.ogg', 100, 1)
+			reinforcing = !reinforcing
+			user << "<span class='notice'>\The [src] can now be [reinforcing? "reinforced" : "constructed"]!</span>"
 
 	else if(istype(W, /obj/item/weapon/wirecutters) && state == 1)
 		playsound(src.loc, 'sound/items/Wirecutter.ogg', 100, 1)
@@ -108,95 +115,82 @@
 			cover = 25
 
 	else if(istype(W, /obj/item/stack/material))
-
-		var/obj/item/stack/S = W
-		if(S.get_amount() < 2)
-			return ..()
-
-		var/material/M = S.get_material()
-		if(!istype(M))
-			return ..()
-
-		var/wall_fake
-		add_hiddenprint(usr)
-
-		if(M.integrity < 50)
-			user << "<span class='notice'>This material is too soft for use in wall construction.</span>"
-			return
-
-		user << "<span class='notice'>You begin adding the plating...</span>"
-
-		if(!do_after(user,40) || !S.use(2))
-			return
-
-		if(anchored)
-			user << "<span class='notice'>You added the plating!</span>"
+		if(reinforcing && !reinf_material)
+			if(!reinforce_with_material(W, user))
+				return ..()
 		else
-			user << "<span class='notice'>You create a false wall! Push on it to open or close the passage.</span>"
-			wall_fake = 1
+			if(!construct_wall(W, user))
+				return ..()
 
-		var/turf/Tsrc = get_turf(src)
-		Tsrc.ChangeTurf(/turf/simulated/wall)
-		var/turf/simulated/wall/T = get_turf(src)
-		T.set_material(M, reinf_material)
-		if(wall_fake)
-			T.can_open = 1
-		T.add_hiddenprint(usr)
-		qdel(src)
-		return
-
-	else if(istype(W, /obj/item/pipe))
-		var/obj/item/pipe/P = W
-		if (P.pipe_type in list(0, 1, 5))	//simple pipes, simple bends, and simple manifolds.
-			user.drop_item()
-			P.loc = src.loc
-			user << "<span class='notice'>You fit the pipe into the [src]!"
 	else
-		..()
+		return ..()
+
+/obj/structure/girder/proc/construct_wall(obj/item/stack/material/S, mob/user)
+	if(S.get_amount() < 2)
+		user << "<span class='notice'>There isn't enough material here to construct a wall.</span>"
+		return 0
+
+	var/material/M = name_to_material[S.default_type]
+	if(!istype(M))
+		return 0
+
+	var/wall_fake
+	add_hiddenprint(usr)
+
+	if(M.integrity < 50)
+		user << "<span class='notice'>This material is too soft for use in wall construction.</span>"
+		return 0
+
+	user << "<span class='notice'>You begin adding the plating...</span>"
+
+	if(!do_after(user,40) || !S.use(2))
+		return 1 //once we've gotten this far don't call parent attackby()
+
+	if(anchored)
+		user << "<span class='notice'>You added the plating!</span>"
+	else
+		user << "<span class='notice'>You create a false wall! Push on it to open or close the passage.</span>"
+		wall_fake = 1
+
+	var/turf/Tsrc = get_turf(src)
+	Tsrc.ChangeTurf(/turf/simulated/wall)
+	var/turf/simulated/wall/T = get_turf(src)
+	T.set_material(M, reinf_material)
+	if(wall_fake)
+		T.can_open = 1
+	T.add_hiddenprint(usr)
+	qdel(src)
+	return 1
+
+/obj/structure/girder/proc/reinforce_with_material(obj/item/stack/material/S, mob/user) //if the verb is removed this can be renamed.
+	if(reinf_material)
+		user << "<span class='notice'>\The [src] is already reinforced.</span>"
+		return 0
+
+	if(S.get_amount() < 2)
+		user << "<span class='notice'>There isn't enough material here to reinforce the girder.</span>"
+		return 0
+
+	var/material/M = name_to_material[S.default_type]
+	if(!istype(M) || M.integrity < 50)
+		user << "You cannot reinforce \the [src] with that; it is too soft."
+		return 0
+
+	user << "<span class='notice'>Now reinforcing...</span>"
+	if (!do_after(user,40) || !S.use(2))
+		return 1 //don't call parent attackby() past this point
+	user << "<span class='notice'>You added reinforcement!</span>"
+
+	reinf_material = M
+	reinforce_girder()
+	return 1
 
 /obj/structure/girder/proc/reinforce_girder()
 	cover = reinf_material.hardness
 	health = 500
 	state = 2
 	icon_state = "reinforced"
-
-/obj/structure/girder/verb/reinforce_with_material()
-	set name = "Reinforce girder"
-	set desc = "Reinforce a girder with metal."
-	set src in view(1)
-
-	var/mob/living/user = usr
-	if(!istype(user) || !(user.l_hand || user.r_hand))
-		return
-
-	if(reinf_material)
-		user << "\The [src] is already reinforced."
-		return
-
-	var/obj/item/stack/material/S = user.l_hand
-	if(!istype(S))
-		S = user.r_hand
-	if(!istype(S))
-		user << "You cannot plate \the [src] with that."
-		return
-
-	if(S.get_amount() < 2)
-		user << "There is not enough material here to reinforce the girder."
-		return
-
-	var/material/M = S.get_material()
-	if(!istype(M) || M.integrity < 50)
-		user << "You cannot reinforce \the [src] with that; it is too soft."
-		return
-
-	user << "<span class='notice'>Now reinforcing...</span>"
-	if (!do_after(user,40) || !S.use(2))
-		return
-	user << "<span class='notice'>You added reinforcement!</span>"
-
-	reinf_material = M
-	reinforce_girder()
-
+	reinforcing = 0
 
 /obj/structure/girder/proc/dismantle()
 	new /obj/item/stack/material/steel(get_turf(src))
@@ -249,7 +243,7 @@
 			dismantle()
 
 	else if(istype(W, /obj/item/weapon/pickaxe/plasmacutter))
-		user << "<span class='notice'>Now slicing apart the girder..."
+		user << "<span class='notice'>Now slicing apart the girder...</span>"
 		if(do_after(user,30))
 			user << "<span class='notice'>You slice apart the girder!</span>"
 		dismantle()
