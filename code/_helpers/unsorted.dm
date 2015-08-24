@@ -245,8 +245,8 @@ Turf and target are seperate in case you want to teleport some distance from a t
 //Ensure the frequency is within bounds of what it should be sending/recieving at
 /proc/sanitize_frequency(var/f)
 	f = round(f)
-	f = max(1441, f) // 144.1
-	f = min(1489, f) // 148.9
+	f = max(PUBLIC_LOW_FREQ, f) // 144.1
+	f = min(PUBLIC_HIGH_FREQ, f) // 148.9
 	if ((f % 2) == 0) //Ensure the last digit is an odd number
 		f += 1
 	return f
