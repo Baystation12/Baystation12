@@ -110,8 +110,8 @@
 	src.name = "[initial(name)] - [ai.name]"
 
 	ai.loc = src
-	ai.cancel_camera()
 	ai.destroy_eyeobj(src)
+	ai.cancel_camera()
 	ai.control_disabled = 1
 	ai.aiRestorePowerRoutine = 0
 	carded_ai = ai
