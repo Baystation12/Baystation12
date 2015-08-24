@@ -23,7 +23,7 @@
 		usr << "Your module is not installed in a hardsuit."
 		return
 
-	module.holder.ui_interact(usr)
+	module.holder.ui_interact(usr, nano_state = contained_state)
 
 /obj/item/rig_module/ai_container
 
@@ -46,9 +46,23 @@
 	var/obj/item/ai_card  // Reference to the MMI, posibrain, intellicard or pAI card previously holding the AI.
 	var/obj/item/ai_verbs/verb_holder
 
+/mob
+	var/get_rig_stats = 0
+
 /obj/item/rig_module/ai_container/process()
-	if(integrated_ai && loc)
-		integrated_ai.SetupStat(loc.get_rig())
+	if(integrated_ai)
+		var/obj/item/weapon/rig/rig = get_rig()
+		if(rig && rig.ai_override_enabled)
+			integrated_ai.get_rig_stats = 1
+		else
+			integrated_ai.get_rig_stats = 0
+
+/mob/living/Stat()
+	. = ..()
+	if(. && get_rig_stats)
+		var/obj/item/weapon/rig/rig = get_rig()
+		if(rig)
+			SetupStat(rig)
 
 /obj/item/rig_module/ai_container/proc/update_verb_holder()
 	if(!verb_holder)
@@ -158,7 +172,10 @@
 			if(integrated_ai)
 				integrated_ai.ghostize()
 				qdel(integrated_ai)
-			if(ai_card) qdel(ai_card)
+				integrated_ai = null
+			if(ai_card)
+				qdel(ai_card)
+				ai_card = null
 		else if(user)
 			user.put_in_hands(ai_card)
 		else
@@ -168,7 +185,6 @@
 	update_verb_holder()
 
 /obj/item/rig_module/ai_container/proc/integrate_ai(var/obj/item/ai,var/mob/user)
-
 	if(!ai) return
 
 	// The ONLY THING all the different AI systems have in common is that they all store the mob inside an item.

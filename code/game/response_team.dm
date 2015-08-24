@@ -53,8 +53,9 @@ client/verb/JoinResponseTeam()
 		if(jobban_isbanned(usr, "Syndicate") || jobban_isbanned(usr, "Emergency Response Team") || jobban_isbanned(usr, "Security Officer"))
 			usr << "<font color=red><b>You are jobbanned from the emergency reponse team!"
 			return
-		if(ert.current_antagonists.len > 5)
+		if(ert.current_antagonists.len >= ert.max_antags)
 			usr << "The emergency response team is already full!"
+			return
 		ert.create_default(usr)
 	else
 		usr << "You need to be an observer or new player to use this."
