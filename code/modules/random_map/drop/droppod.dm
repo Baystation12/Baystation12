@@ -139,14 +139,12 @@
 				drop.tag = null
 				if(drop.buckled)
 					drop.buckled = null
-				drop.loc = T
 				drop.forceMove(T)
 	else if(ispath(drop_type))
 		drop = new drop_type(T)
 		if(istype(drop))
 			if(drop.buckled)
 				drop.buckled = null
-			drop.loc = T
 			drop.forceMove(T)
 
 /datum/admins/proc/call_drop_pod()
