@@ -255,7 +255,7 @@
 /datum/reagent/synaptizine
 	name = "Synaptizine"
 	id = "synaptizine"
-	description = "Synaptizine is used to treat various diseases."
+	description = "Synaptizine is used to treat various issues related to the mind."
 	reagent_state = LIQUID
 	color = "#99CCFF"
 	metabolism = REM * 0.05
