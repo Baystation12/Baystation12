@@ -29,13 +29,13 @@
 	if(!stored_computer)
 		if(contents.len)
 			for(var/obj/O in contents)
-				O.loc = loc
+				O.forceMove(src.loc)
 		usr << "\The [src] crumbles to pieces."
 		spawn(5)
 			qdel(src)
 		return
 
-	stored_computer.loc = loc
+	stored_computer.forceMove(src.loc)
 	stored_computer.stat &= ~MAINT
 	stored_computer.update_icon()
 	stored_computer.open = 1
@@ -56,17 +56,6 @@
 	icon_state_unpowered = "laptop-open"					// Icon state when the computer is turned off
 	icon = 'icons/obj/modular_laptop.dmi'
 	icon_state = "laptop-open"
-
-/obj/machinery/modular_computer/laptop/update_icon()
-	icon_state = icon_state_unpowered
-
-	overlays.Cut()
-	if(!enabled)
-		return
-	if(active_program)
-		overlays.Add(active_program.program_icon_state ? active_program.program_icon_state : icon_state_menu)
-	else
-		overlays.Add(icon_state_menu)
 
 // Close the computer. collapsing it into movable item that can't be used.
 /obj/machinery/modular_computer/laptop/verb/close_computer()
@@ -94,8 +83,8 @@
 		portable=new
 		portable.stored_computer = src
 
-	portable.loc = loc
-	loc = portable
+	portable.forceMove(src.loc)
+	src.forceMove(portable)
 	stat |= MAINT
 	if(user)
 		user << "You close \the [src]."

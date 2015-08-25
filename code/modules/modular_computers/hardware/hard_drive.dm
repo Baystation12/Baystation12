@@ -70,7 +70,7 @@
 /datum/computer_hardware/hard_drive/proc/recalculate_size()
 	var/total_size = 0
 	for(var/datum/computer_file/F in stored_files)
-		total_size = F.size
+		total_size += F.size
 
 	used_capacity = total_size
 

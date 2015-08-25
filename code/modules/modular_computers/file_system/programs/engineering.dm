@@ -7,6 +7,7 @@
 	program_icon_state = "power_monitor"
 	keyboard_icon_state = "keyboard9"
 	requires_ntnet = 1
+	size = 8
 
 /datum/computer_file/program/alarm_monitor
 	filename = "alarmmonitor"
@@ -15,6 +16,7 @@
 	program_icon_state = "alarm_monitor"
 	keyboard_icon_state = "keyboard4"
 	requires_ntnet = 1
+	size = 5
 
 /datum/computer_file/program/atmos_control
 	filename = "atmoscontrol"
@@ -26,6 +28,7 @@
 	requires_ntnet = 1
 	requires_ntnet_feature = NTNET_SYSTEMCONTROL
 	usage_flags = PROGRAM_LAPTOP & PROGRAM_CONSOLE
+	size = 17
 
 /datum/computer_file/program/rcon_console
 	filename = "rconconsole"
@@ -37,6 +40,7 @@
 	requires_ntnet = 1
 	requires_ntnet_feature = NTNET_SYSTEMCONTROL
 	usage_flags = PROGRAM_LAPTOP & PROGRAM_CONSOLE
+	size = 25
 
 /datum/computer_file/program/suit_sensors
 	filename = "sensormonitor"
@@ -45,3 +49,4 @@
 	program_icon_state = "crew"
 	keyboard_icon_state = "keyboard7"
 	requires_ntnet = 1
+	size = 20

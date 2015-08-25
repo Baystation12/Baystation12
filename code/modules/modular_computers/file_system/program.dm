@@ -9,7 +9,7 @@
 	var/atom/movable/computer = null		// Device that runs this program.
 	var/filedesc = "Unknown Program"		// User-friendly name of this program.
 	var/program_icon_state = null			// Overlay for this program, selected by computer
-	var/keyboard_icon_state = null			// Program-specific keboard icon state 
+	var/keyboard_icon_state = null			// Program-specific keboard icon state
 	var/requires_ntnet = 0					// Set to 1 for program to require nonstop NTNet connection to run. If NTNet connection is lost program crashes.
 	var/requires_ntnet_feature = 0			// Optional, if above is set to 1 checks for specific function of NTNet (currently NTNET_SOFTWAREDOWNLOAD, NTNET_PEERTOPEER, NTNET_SYSTEMCONTROL and NTNET_COMMUNICATION)
 	var/ntnet_status = 1					// NTNet status, updated every tick by computer running this program. Don't use this for checks if NTNet works, computers do that. Use this for calculations, etc.
@@ -30,6 +30,13 @@
 	temp.requires_ntnet_feature = requires_ntnet_feature
 	temp.usage_flags = usage_flags
 	return temp
+
+/datum/computer_file/program/proc/is_supported_by_hardware(var/hardware_flag = 0, var/loud = 0, var/mob/user = null)
+	if(!(hardware_flag & usage_flags))
+		if(loud && computer && user)
+			user << "<span class='danger'>\The [computer] flashes an \"Hardware Error - Incompatible software\" warning.</span>"
+		return 0
+	return 1
 
 // Check if the user can run program. Only humans can operate computer. Automatically called in run_program()
 // User has to wear their ID or have it inhand for ID Scan to work.
@@ -64,6 +71,10 @@
 	if(istype(computer, /obj/machinery/modular_computer))
 		var/obj/machinery/modular_computer/L = computer
 		return L.get_header_data()
+	if(istype(computer, /obj/item/modular_computer))
+		var/obj/item/modular_computer/L = computer
+		return L.get_header_data()
+	return list()
 
 // This is performed on program startup. May be overriden to add extra logic. Remember to include ..() call. Return 1 on success, 0 on failure.
 // When implementing new program based device, use this to run the program.
