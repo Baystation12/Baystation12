@@ -97,14 +97,14 @@
 
 
 /datum/gas_mixture/proc/equalize(datum/gas_mixture/sharer)
-	for(var/g in sharer.gas)
+	var/our_heatcap = heat_capacity()
+	var/share_heatcap = sharer.heat_capacity()
+
+	for(var/g in gas|sharer.gas)
 		var/comb = gas[g] + sharer.gas[g]
 		comb /= volume + sharer.volume
 		gas[g] = comb * volume
 		sharer.gas[g] = comb * sharer.volume
-
-	var/our_heatcap = heat_capacity()
-	var/share_heatcap = sharer.heat_capacity()
 
 	if(our_heatcap + share_heatcap)
 		temperature = ((temperature * our_heatcap) + (sharer.temperature * share_heatcap)) / (our_heatcap + share_heatcap)
