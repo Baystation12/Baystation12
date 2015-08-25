@@ -12,12 +12,11 @@
 /datum/reagent/chloromydride/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien != IS_DIONA)
 		M.add_chemical_effect(CE_STABLE)
-		M.add_chemical_effect(CE_PAINKILLER, 50)
+		M.add_chemical_effect(CE_PAINKILLER, 40)
 		M.AdjustParalysis(-1)
 		M.AdjustWeakened(-1)
 		M.AdjustStunned(-1)
 		M.adjustToxLoss(removed * 5)
-		//M.stimulate_heart()
 		M.adjustOxyLoss(-30 * removed)
 
 
@@ -120,7 +119,7 @@
 /datum/reagent/dexalin
 	name = "Dexalin"
 	id = "dexalin"
-	description = "Dexalin is used in the treatment of oxygen deprivation."
+	description = "Dexalin is a cardiac stimulant used in the treatment of oxygen deprivation."
 	reagent_state = LIQUID
 	color = "#0080FF"
 	overdose = REAGENTS_OVERDOSE
@@ -255,7 +254,7 @@
 /datum/reagent/synaptizine
 	name = "Synaptizine"
 	id = "synaptizine"
-	description = "Synaptizine is used to treat various diseases."
+	description = "Synaptizine is used to treat various issues related to the mind."
 	reagent_state = LIQUID
 	color = "#99CCFF"
 	metabolism = REM * 0.05
