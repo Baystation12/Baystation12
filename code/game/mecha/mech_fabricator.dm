@@ -335,19 +335,13 @@
 
 /obj/machinery/mecha_part_fabricator/proc/sync()
 	sync_message = "Error: no console found."
-	world << "Syncing"
 	for(var/obj/machinery/computer/rdconsole/RDC in get_area_all_atoms(get_area(src)))
 		if(!RDC.sync)
 			continue
 		for(var/datum/tech/T in RDC.files.known_tech)
-			world << "Adding [T]"
-			sleep(3)
 			files.AddTech2Known(T)
 		for(var/datum/design/D in RDC.files.known_designs)
-			world << "Adding [D]"
-			sleep(3)
 			files.AddDesign2Known(D)
-		world << "Refreshing"
 		files.RefreshResearch()
 		sync_message = "Sync complete."
 	update_categories()
