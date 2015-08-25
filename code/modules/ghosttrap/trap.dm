@@ -122,3 +122,8 @@ proc/populate_ghost_traps()
 
 /datum/ghosttrap/cult/welcome_candidate(var/mob/target)
 	cult.add_antagonist(target.mind)
+
+/datum/ghosttrap/cult/shade
+	object = "soul stone"
+	ghost_trap_message = "They are occupying a soul stone now."
+	ghost_trap_role = "Shade"

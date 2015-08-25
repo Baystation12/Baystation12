@@ -45,7 +45,7 @@ var/list/sacrificed = list()
 			. += M
 
 /obj/effect/rune/proc/fizzle(var/mob/living/user)
-	user.say(pick("Hakkrutju gopoenjim.", "Nherasai pivroiashan.", "Firjji prhiv mazenhor.", "Tanah eh wakantahe.", "Obliyae na oraie.", "Miyf hon vnor'c.", "Wakabai hij fen juswix."))
+	//user.say(pick("Hakkrutju gopoenjim.", "Nherasai pivroiashan.", "Firjji prhiv mazenhor.", "Tanah eh wakantahe.", "Obliyae na oraie.", "Miyf hon vnor'c.", "Wakabai hij fen juswix."))
 	visible_message("<span class='warning'>The markings pulse with a small burst of light, then fall dark.</span>", "You hear a faint fizzle.")
 
 	//obj/effect/rune/proc/check_icon()
@@ -307,20 +307,27 @@ var/list/sacrificed = list()
 		M.say("Barhah hra zar[pick("'","`")]garis!")
 
 	while(victim && victim.loc == T && victim.stat != DEAD)
+		var/list/mob/living/casters = get_cultists()
+		if(casters.len < 3)
+			break
 		T.turf_animation('icons/effects/effects.dmi', "rune_sac")
 		victim.fire_stacks = max(2, victim.fire_stacks)
 		victim.IgniteMob()
 		victim.take_organ_damage(5, 5) // This is to speed up the process and also damage mobs that don't take damage from being on fire, e.g. borgs
 		switch(victim.health)
 			if(50 to INFINITY)
-				world << "<span class='danger'>Your flesh burns!</span>"
+				world << "<span class='danger'>Your flesh burns!</span>"//TODO: DON'T FORGET TO CHANGE IT TO VICTIM
 			if(0 to 50)
 				world << "<span class='danger'>You feel as if your body is rippened apart and burned!</span>"
 			if(-INFINITY to 0)
 				world << "<span class='danger'>!</span>" // TODO goddamn this is hard
 		sleep(40)
 	if(victim && victim.loc == T && victim.stat == DEAD)
-		//TODO: add points and handle sac target, give soulstone. Other rewards?
+		cult.add_cultiness(25)
+		var/obj/item/device/soulstone/full = new(get_turf(src))
+		for(var/mob/M in cultists | casters)
+			M << "<span class='warning'>The Geometer of Blood accepts this sacrifice.</span>"
+		//TODO: handle sac target, other rewards?
 		/*
 		var/worth = 0
 		if(istype(H,/mob/living/carbon/human))
@@ -340,7 +347,7 @@ var/list/sacrificed = list()
 		usr << "<span class='warning'>The Geometer of blood accepts this sacrifice.</span>"
 		usr << "<span class='warning'>However, a mere dead body is not enough to satisfy Him.</span>"
 		*/
-		world << "<span class='cult'>The Geometer of Blood claims your body.</span>"
+		world << "<span class='cult'>The Geometer of Blood claims your body.</span>" //TODO: DON'T FORGET TO CHANGE IT TO VICTIM
 		victim.dust()
 	victim.ExtinguishMob() // Technically allows them to put the fire out by sacrificing them and stopping immediately, but I don't think it'd have much effect
 
@@ -357,7 +364,7 @@ var/list/sacrificed = list()
 /obj/effect/rune/manifest/cast(var/mob/living/user)
 	if(puppet)
 		user << "<span class='warning'>This rune already has a servant bound to it.</span>"
-		return fizzle()
+		return fizzle(user)
 	var/mob/dead/observer/ghost
 	for(var/mob/dead/observer/O in get_turf(src))
 		if(!O.client)
