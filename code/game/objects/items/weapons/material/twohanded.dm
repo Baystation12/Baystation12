@@ -167,13 +167,12 @@
 		else if(istype(A,/obj/effect/plant))
 			var/obj/effect/plant/P = A
 			P.die_off()
+			
+/*
+/* 
+ * Double-Bladed Energy Swords - Cheridan 
+ */ 
 
-/*
-/*
- * Double-Bladed Energy Swords - Cheridan
- */
- // Not sure what to do with this one, it won't work nicely with the material system,
- // but I don't want to copypaste all the twohanded procs..
 /obj/item/weapon/material/twohanded/dualsaber
 	icon_state = "dualsaber0"
 	base_icon = "dualsaber"
@@ -211,7 +210,7 @@
 		return 1
 	else
 		return 0
-*/
+
 
 //spears, bay edition
 /obj/item/weapon/material/twohanded/spear
