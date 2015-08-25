@@ -358,7 +358,7 @@
 			dat += "<td>NA</td>"
 
 
-		dat += {"<td>[(M.client ? "[M.client]" : "No client")]</td>
+		dat += {"<td>[M.key ? (M.client ? M.key : "[M.key] (DC)") : "No key"]</td>
 		<td align=center><A HREF='?src=\ref[src];adminplayeropts=\ref[M]'>X</A></td>
 		<td align=center><A href='?src=\ref[usr];priv_msg=\ref[M]'>PM</A></td>
 		"}

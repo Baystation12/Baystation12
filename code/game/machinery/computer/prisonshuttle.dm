@@ -13,10 +13,11 @@ var/prison_shuttle_timeleft = 0
 /obj/machinery/computer/prison_shuttle
 	name = "prison shuttle control console"
 	icon = 'icons/obj/computer.dmi'
-	icon_state = "shuttle"
+	icon_keyboard = "security_key"
+	icon_screen = "syndishuttle"
 	light_color = "#00ffff"
 	req_access = list(access_security)
-	circuit = "/obj/item/weapon/circuitboard/prison_shuttle"
+	circuit = /obj/item/weapon/circuitboard/prison_shuttle
 	var/temp = null
 	var/hacked = 0
 	var/allowedtocall = 0

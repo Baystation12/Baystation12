@@ -227,21 +227,21 @@
 	return 0
 
 /mob/living/carbon/human/Stat()
-	..()
+	. = ..()
 
-	if(istype(back,/obj/item/weapon/rig))
+	if(. && istype(back,/obj/item/weapon/rig))
 		var/obj/item/weapon/rig/R = back
 		SetupStat(R)
 
 /mob/proc/SetupStat(var/obj/item/weapon/rig/R)
-	if(src == usr && R && !R.canremove && R.installed_modules.len && statpanel("Hardsuit Modules"))
+	if(R && !R.canremove && R.installed_modules.len && statpanel("Hardsuit Modules"))
 		var/cell_status = R.cell ? "[R.cell.charge]/[R.cell.maxcharge]" : "ERROR"
-		statpanel("Hardsuit Modules", "Suit charge", cell_status)
+		stat("Suit charge", cell_status)
 		for(var/obj/item/rig_module/module in R.installed_modules)
 		{
 			for(var/stat_rig_module/SRM in module.stat_modules)
 				if(SRM.CanUse())
-					statpanel("Hardsuit Modules",SRM.module.interface_name,SRM)
+					stat(SRM.module.interface_name,SRM)
 		}
 
 /stat_rig_module
@@ -260,7 +260,6 @@
 	return 0
 
 /stat_rig_module/Click()
-	..()
 	if(CanUse())
 		var/list/href_list = list(
 							"interact_module" = module.holder.installed_modules.Find(module),
@@ -268,6 +267,9 @@
 							)
 		AddHref(href_list)
 		module.holder.Topic(usr, href_list)
+
+/stat_rig_module/DblClick()
+	return Click()
 
 /stat_rig_module/activate/New(var/obj/item/rig_module/module)
 	..()

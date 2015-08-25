@@ -64,22 +64,36 @@ var/global/list/gear_datums = list()
 	slot = slot_head
 
 /datum/gear/bsec_beret
-	display_name = "beret, blue (security)"
-	path = /obj/item/clothing/head/beret/sec/alt
+	display_name = "beret, navy (officer)"
+	path = /obj/item/clothing/head/beret/sec/navy/officer
 	cost = 1
 	slot = slot_head
 	allowed_roles = list("Security Officer","Head of Security","Warden")
 
+/datum/gear/bsec_beret_warden
+	display_name = "beret, navy (warden)"
+	path = /obj/item/clothing/head/beret/sec/navy/warden
+	cost = 1
+	slot = slot_head
+	allowed_roles = list("Head of Security","Warden")
+
+/datum/gear/bsec_beret_hos
+	display_name = "beret, navy (hos)"
+	path = /obj/item/clothing/head/beret/sec/navy/hos
+	cost = 1
+	slot = slot_head
+	allowed_roles = list("Head of Security")
+
 /datum/gear/eng_beret
 	display_name = "beret, engie-orange"
-	path = /obj/item/clothing/head/beret/eng
+	path = /obj/item/clothing/head/beret/engineering
 	cost = 1
 	slot = slot_head
 //	allowed_roles = list("Station Engineer","Atmospheric Technician","Chief Engineer")
 
 /datum/gear/purp_beret
 	display_name = "beret, purple"
-	path = /obj/item/clothing/head/beret/jan
+	path = /obj/item/clothing/head/beret/purple
 	cost = 1
 	slot = slot_head
 
@@ -279,7 +293,7 @@ var/global/list/gear_datums = list()
 
 /datum/gear/scanning_goggles
 	display_name = "scanning goggles"
-	path = /obj/item/clothing/glasses/science/scanners
+	path = /obj/item/clothing/glasses/regular/scanners
 	cost = 1
 	slot = slot_glasses
 
@@ -377,6 +391,13 @@ var/global/list/gear_datums = list()
 	path = /obj/item/clothing/under/blackskirt
 	slot = slot_w_uniform
 	cost = 1
+
+/datum/gear/roboticist_skirt
+	display_name = "skirt, roboticist"
+	path = /obj/item/clothing/under/rank/roboticist/skirt
+	slot = slot_w_uniform
+	cost = 1
+	allowed_roles = list("Roboticist")
 
 /datum/gear/amishsuit
 	display_name = "suit, amish"
@@ -657,7 +678,7 @@ var/global/list/gear_datums = list()
 	slot = slot_wear_suit
 
 /datum/gear/leather_jacket_nt
-	display_name = "leather jacket, NanoTrasen, black"
+	display_name = "leather jacket, corporate, black"
 	path = /obj/item/clothing/suit/storage/leather_jacket/nanotrasen
 	cost = 2
 	slot = slot_wear_suit
@@ -669,7 +690,7 @@ var/global/list/gear_datums = list()
 	slot = slot_wear_suit
 
 /datum/gear/brown_jacket_nt
-	display_name = "leather jacket, NanoTrasen, brown"
+	display_name = "leather jacket, corporate, brown"
 	path = /obj/item/clothing/suit/storage/toggle/brown_jacket/nanotrasen
 	cost = 2
 	slot = slot_wear_suit

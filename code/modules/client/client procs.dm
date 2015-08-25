@@ -33,7 +33,7 @@
 	if( findtext(href,"<script",1,0) )
 		world.log << "Attempted use of scripts within a topic call, by [src]"
 		message_admins("Attempted use of scripts within a topic call, by [src]")
-		//qdel(usr)
+		//del(usr)
 		return
 
 	//Admin PM
@@ -52,7 +52,7 @@
 		if(mute_irc)
 			usr << "<span class='warning'You cannot use this as your client has been muted from sending messages to the admins on IRC</span>"
 			return
-		cmd_admin_irc_pm()
+		cmd_admin_irc_pm(href_list["irc_msg"])
 		return
 
 
@@ -112,7 +112,7 @@
 
 	if(!config.guests_allowed && IsGuestKey(key))
 		alert(src,"This server doesn't allow guest accounts to play. Please go to http://www.byond.com/ and register for a key.","Guest","OK")
-		qdel(src)
+		del(src)
 		return
 
 	// Change the way they should download resources.
@@ -153,6 +153,13 @@
 		add_admin_verbs()
 		admin_memo_show()
 
+	// Forcibly enable hardware-accelerated graphics, as we need them for the lighting overlays.
+	// (but turn them off first, since sometimes BYOND doesn't turn them on properly otherwise)
+	spawn(5) // And wait a half-second, since it sounds like you can do this too fast.
+		if(src)
+			winset(src, null, "command=\".configure graphics-hwmode off\"")
+			winset(src, null, "command=\".configure graphics-hwmode on\"")
+
 	log_client_to_db()
 
 	send_resources()
@@ -177,6 +184,25 @@
 	clients -= src
 	return ..()
 
+
+// here because it's similar to below
+
+// Returns null if no DB connection can be established, or -1 if the requested key was not found in the database
+
+/proc/get_player_age(key)
+	establish_db_connection()
+	if(!dbcon.IsConnected())
+		return null
+
+	var/sql_ckey = sql_sanitize_text(ckey(key))
+
+	var/DBQuery/query = dbcon.NewQuery("SELECT datediff(Now(),firstseen) as age FROM erro_player WHERE ckey = '[sql_ckey]'")
+	query.Execute()
+
+	if(query.NextRow())
+		return text2num(query.item[1])
+	else
+		return -1
 
 
 /client/proc/log_client_to_db()

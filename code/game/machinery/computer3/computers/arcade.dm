@@ -37,7 +37,7 @@
 
 
 /datum/file/program/arcade
-	desc = "The best arcade game ever produced by Nanotrasen's short-lived entertainment divison."
+	desc = "The best arcade game ever produced by the Company's short-lived entertainment divison."
 	//headcanon: they also ported E.T. for the atari 2600, superman 64, and basically every other movie tie-in game ever
 
 	active_state = "generic"

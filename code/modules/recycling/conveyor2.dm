@@ -25,31 +25,14 @@
 	..(loc)
 	if(newdir)
 		set_dir(newdir)
-	switch(dir)
-		if(NORTH)
-			forwards = NORTH
-			backwards = SOUTH
-		if(SOUTH)
-			forwards = SOUTH
-			backwards = NORTH
-		if(EAST)
-			forwards = EAST
-			backwards = WEST
-		if(WEST)
-			forwards = WEST
-			backwards = EAST
-		if(NORTHEAST)
-			forwards = EAST
-			backwards = SOUTH
-		if(NORTHWEST)
-			forwards = SOUTH
-			backwards = WEST
-		if(SOUTHEAST)
-			forwards = NORTH
-			backwards = EAST
-		if(SOUTHWEST)
-			forwards = WEST
-			backwards = NORTH
+
+	if(dir & (dir-1)) // Diagonal. Forwards is *away* from dir, curving to the right.
+		forwards = turn(dir, 135)
+		backwards = turn(dir, 45)
+	else
+		forwards = dir
+		backwards = turn(dir, 180)
+
 	if(on)
 		operating = 1
 		setmove()
@@ -95,8 +78,9 @@
 // attack with item, place item on conveyor
 /obj/machinery/conveyor/attackby(var/obj/item/I, mob/user)
 	if(isrobot(user))	return //Carn: fix for borgs dropping their modules on conveyor belts
-	user.drop_item()
-	if(I && I.loc)	I.loc = src.loc
+	if(I.loc != user)	return // This should stop mounted modules ending up outside the module.
+
+	user.drop_item(src)
 	return
 
 // attack with hand, move pulled object onto conveyor

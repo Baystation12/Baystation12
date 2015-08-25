@@ -1,3 +1,9 @@
+/mob/living/carbon/human/proc/get_unarmed_attack(var/mob/living/carbon/human/target, var/hit_zone)
+	for(var/datum/unarmed_attack/u_attack in species.unarmed_attacks)
+		if(u_attack.is_usable(src, target, hit_zone))
+			return u_attack
+	return null
+
 /mob/living/carbon/human/attack_hand(mob/living/carbon/M as mob)
 
 	var/mob/living/carbon/human/H = M
@@ -54,10 +60,10 @@
 				if(!check_has_mouth())
 					H << "<span class='danger'>They don't have a mouth, you cannot perform CPR!</span>"
 					return
-				if((H.head && (H.head.flags & HEADCOVERSMOUTH)) || (H.wear_mask && (H.wear_mask.flags & MASKCOVERSMOUTH)))
+				if((H.head && (H.head.body_parts_covered & FACE)) || (H.wear_mask && (H.wear_mask.body_parts_covered & FACE)))
 					H << "<span class='notice'>Remove your mask!</span>"
 					return 0
-				if((head && (head.flags & HEADCOVERSMOUTH)) || (wear_mask && (wear_mask.flags & MASKCOVERSMOUTH)))
+				if((head && (head.body_parts_covered & FACE)) || (wear_mask && (wear_mask.body_parts_covered & FACE)))
 					H << "<span class='notice'>Remove [src]'s mask!</span>"
 					return 0
 
@@ -184,18 +190,7 @@
 				miss_type = 2
 
 			// See what attack they use
-			var/possible_moves = list()
-			var/datum/unarmed_attack/attack = null
-			for(var/part in list("l_hand","r_hand","l_foot","r_foot","head"))
-				var/obj/item/organ/external/E = H.get_organ(part)
-				possible_moves |= E.species.unarmed_attacks
-
-			for(var/datum/unarmed_attack/u_attack in possible_moves)
-				if(!u_attack.is_usable(H, src, hit_zone))
-					continue
-				else
-					attack = u_attack
-					break
+			var/datum/unarmed_attack/attack = H.get_unarmed_attack(src, hit_zone)
 			if(!attack)
 				return 0
 

@@ -67,3 +67,10 @@
 			icon_state = "intercom-p"
 		else
 			icon_state = "intercom"
+
+/obj/item/device/radio/intercom/locked
+    freerange = 1
+    var/locked_frequency
+    
+/obj/item/device/radio/intercom/locked/set_frequency()
+    ..(locked_frequency)

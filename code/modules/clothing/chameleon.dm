@@ -75,7 +75,6 @@
 /obj/item/clothing/head/chameleon
 	name = "grey cap"
 	icon_state = "greysoft"
-	item_state = "greysoft"
 	desc = "It looks like a plain hat, but upon closer inspection, there's an advanced holographic array installed inside. It seems to have a small dial inside."
 	origin_tech = list(TECH_ILLEGAL = 3)
 	body_parts_covered = 0

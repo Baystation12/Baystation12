@@ -64,9 +64,6 @@
 	component_parts += new /obj/item/stack/cable_coil(src)
 	RefreshParts()
 
-/obj/machinery/dna_scannernew/allow_drop()
-	return 0
-
 /obj/machinery/dna_scannernew/relaymove(mob/user as mob)
 	if (user.stat)
 		return
@@ -221,7 +218,8 @@
 	name = "DNA Modifier Access Console"
 	desc = "Scand DNA."
 	icon = 'icons/obj/computer.dmi'
-	icon_state = "scanner"
+	icon_keyboard = "med_key"
+	icon_screen = "dna"
 	density = 1
 	circuit = /obj/item/weapon/circuitboard/scan_consolenew
 	var/selected_ui_block = 1.0
@@ -273,20 +271,8 @@
 	return
 
 /obj/machinery/computer/scan_consolenew/blob_act()
-
 	if(prob(75))
 		qdel(src)
-
-/obj/machinery/computer/scan_consolenew/power_change()
-	..()
-	if(stat & BROKEN)
-		icon_state = "broken"
-	else
-		if (stat & NOPOWER)
-			spawn(rand(0, 15))
-				src.icon_state = "c_unpowered"
-		else
-			icon_state = initial(icon_state)
 
 /obj/machinery/computer/scan_consolenew/New()
 	..()

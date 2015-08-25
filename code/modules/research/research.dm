@@ -98,7 +98,7 @@ research holder datum.
 		var/datum/design/A = known_designs[i]
 		if(A.id == D.id) // We are guaranteed to reach this if the ids are the same, because sort_string will also be the same
 			return
-		if(A.sort_string > D.sort_string)
+		if(A.sort_string >= D.sort_string)
 			known_designs.Insert(i, D)
 			return
 	known_designs.Add(D)
@@ -141,7 +141,7 @@ research holder datum.
 /datum/tech/engineering
 	name = "Engineering Research"
 	desc = "Development of new and improved engineering parts."
-	id = TECH_ENGINERING
+	id = TECH_ENGINEERING
 
 /datum/tech/phorontech
 	name = "Phoron Research"
@@ -180,7 +180,7 @@ research holder datum.
 
 /datum/tech/syndicate
 	name = "Illegal Technologies Research"
-	desc = "The study of technologies that violate standard Nanotrasen regulations."
+	desc = "The study of technologies that violate standard government regulations."
 	id = TECH_ILLEGAL
 	level = 0
 

@@ -28,9 +28,9 @@
 		emergency_shuttle.departed = 1
 
 		if (emergency_shuttle.evac)
-			priority_announcement.Announce("The Emergency Shuttle has left the station. Estimate [round(emergency_shuttle.estimate_arrival_time()/60,1)] minutes until the shuttle docks at Central Command.")
+			priority_announcement.Announce("The Emergency Shuttle has left the station. Estimate [round(emergency_shuttle.estimate_arrival_time()/60,1)] minutes until the shuttle docks at [boss_name].")
 		else
-			priority_announcement.Announce("The Crew Transfer Shuttle has left the station. Estimate [round(emergency_shuttle.estimate_arrival_time()/60,1)] minutes until the shuttle docks at Central Command.")
+			priority_announcement.Announce("The Crew Transfer Shuttle has left the station. Estimate [round(emergency_shuttle.estimate_arrival_time()/60,1)] minutes until the shuttle docks at [boss_name].")
 
 /datum/shuttle/ferry/emergency/can_launch(var/user)
 	if (istype(user, /obj/machinery/computer/shuttle_control/emergency))
@@ -185,7 +185,7 @@
 			else if (!shuttle.location)
 				shuttle_status = "Standing-by at [station_name]."
 			else
-				shuttle_status = "Standing-by at Central Command."
+				shuttle_status = "Standing-by at [boss_name]."
 		if(WAIT_LAUNCH, FORCE_LAUNCH)
 			shuttle_status = "Shuttle has recieved command and will depart shortly."
 		if(WAIT_ARRIVE)

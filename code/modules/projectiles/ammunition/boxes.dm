@@ -110,18 +110,18 @@
 /obj/item/ammo_magazine/c9mm/empty
 	initial_ammo = 0
 
-/obj/item/ammo_magazine/a12mm
-	name = "magazine (12mm)"
+/obj/item/ammo_magazine/a10mm
+	name = "magazine (10mm)"
 	icon_state = "12mm"
 	origin_tech = list(TECH_COMBAT = 2)
 	mag_type = MAGAZINE
-	caliber = "12mm"
+	caliber = "10mm"
 	matter = list(DEFAULT_WALL_MATERIAL = 1500)
-	ammo_type = "/obj/item/ammo_casing/a12mm"
+	ammo_type = /obj/item/ammo_casing/a10mm
 	max_ammo = 20
 	multiple_sprites = 1
 
-/obj/item/ammo_magazine/a12mm/empty
+/obj/item/ammo_magazine/a10mm/empty
 	initial_ammo = 0
 
 /obj/item/ammo_magazine/a556

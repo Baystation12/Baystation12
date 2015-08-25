@@ -141,6 +141,25 @@ datum/hud/New(mob/owner)
 	instantiate()
 	..()
 
+/datum/hud/Destroy()
+	..()
+	grab_intent = null
+	hurt_intent = null
+	disarm_intent = null
+	help_intent = null
+	lingchemdisplay = null
+	blobpwrdisplay = null
+	blobhealthdisplay = null
+	r_hand_hud_object = null
+	l_hand_hud_object = null
+	action_intent = null
+	move_intent = null
+	adding = null
+	other = null
+	hotkeybuttons = null
+//	item_action_list = null // ?
+	mymob = null
+
 /datum/hud/proc/hidden_inventory_update()
 	if(!mymob) return
 	if(ishuman(mymob))
@@ -237,7 +256,7 @@ datum/hud/New(mob/owner)
 	if(ishuman(mymob))
 		human_hud(ui_style, ui_color, ui_alpha, mymob) // Pass the player the UI style chosen in preferences
 	else if(issmall(mymob))
-		monkey_hud(ui_style)
+		monkey_hud(ui_style, ui_color, ui_alpha)
 	else if(isbrain(mymob))
 		brain_hud(ui_style)
 	else if(isalien(mymob))

@@ -52,6 +52,7 @@
 	var/mix_message = "The solution begins to bubble."
 	var/reaction_sound = 'sound/effects/bubbles.ogg'
 
+	var/log_is_important = 0 // If this reaction should be considered important for logging. Important recipes message admins when mixed, non-important ones just log to file.
 /datum/chemical_reaction/proc/can_happen(var/datum/reagents/holder)
 	//check that all the required reagents are present
 	if(!holder.has_all_reagents(required_reagents))
@@ -264,6 +265,7 @@
 	result = "kelotane"
 	required_reagents = list("silicon" = 1, "carbon" = 1)
 	result_amount = 2
+	log_is_important = 1
 
 /datum/chemical_reaction/peridaxon
 	name = "Peridaxon"
@@ -503,6 +505,7 @@
 	result = "coolant"
 	required_reagents = list("tungsten" = 1, "acetone" = 1, "water" = 1)
 	result_amount = 3
+	log_is_important = 1
 
 /datum/chemical_reaction/rezadone
 	name = "Rezadone"
@@ -638,6 +641,7 @@
 	result = "nitroglycerin"
 	required_reagents = list("glycerol" = 1, "pacid" = 1, "sacid" = 1)
 	result_amount = 2
+	log_is_important = 1
 
 /datum/chemical_reaction/nitroglycerin/on_reaction(var/datum/reagents/holder, var/created_volume)
 	var/datum/effect/effect/system/reagents_explosion/e = new()
@@ -1365,6 +1369,13 @@
 	required_reagents = list("soymilk" = 4, "sacid" = 1)
 	result_amount = 5
 
+/datum/chemical_reaction/ketchup
+	name = "Ketchup"
+	id = "ketchup"
+	result = "ketchup"
+	required_reagents = list("tomatojuice" = 2, "water" = 1, "sugar" = 1)
+	result_amount = 4
+
 /datum/chemical_reaction/cheesewheel
 	name = "Cheesewheel"
 	id = "cheesewheel"
@@ -1570,10 +1581,10 @@
 	required_reagents = list("rum" = 2, "cola" = 1)
 	result_amount = 3
 
-/datum/chemical_reaction/classicmartini
+/datum/chemical_reaction/martini
 	name = "Classic Martini"
-	id = "classicmartini"
-	result = "classicmartini"
+	id = "martini"
+	result = "martini"
 	required_reagents = list("gin" = 2, "vermouth" = 1)
 	result_amount = 3
 

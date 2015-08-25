@@ -24,7 +24,7 @@
 	force = 5.0
 	throwforce = 7.0
 	w_class = 2.0
-	origin_tech = list(TECH_MATERIAL = 1, TECH_ENGINERING = 1)
+	origin_tech = list(TECH_MATERIAL = 1, TECH_ENGINEERING = 1)
 	matter = list(DEFAULT_WALL_MATERIAL = 150)
 	attack_verb = list("bashed", "battered", "bludgeoned", "whacked")
 
@@ -103,7 +103,7 @@
 	throw_speed = 2
 	throw_range = 9
 	w_class = 2.0
-	origin_tech = list(TECH_MATERIAL = 1, TECH_ENGINERING = 1)
+	origin_tech = list(TECH_MATERIAL = 1, TECH_ENGINEERING = 1)
 	matter = list(DEFAULT_WALL_MATERIAL = 80)
 	attack_verb = list("pinched", "nipped")
 	sharp = 1
@@ -148,7 +148,7 @@
 	matter = list(DEFAULT_WALL_MATERIAL = 70, "glass" = 30)
 
 	//R&D tech level
-	origin_tech = list(TECH_ENGINERING = 1)
+	origin_tech = list(TECH_ENGINEERING = 1)
 
 	//Welding tool specific stuff
 	var/welding = 0 	//Whether or not the welding tool is off(0), on(1) or currently welding(2)
@@ -212,8 +212,12 @@
 
 
 /obj/item/weapon/weldingtool/process()
-	if(welding && prob(5) && !remove_fuel(1))
-		setWelding(0)
+	if(welding)
+		if(prob(5))
+			remove_fuel(1)
+
+		if(get_fuel() == 0)
+			setWelding(0)
 
 	//I'm not sure what this does. I assume it has to do with starting fires...
 	//...but it doesnt check to see if the welder is on or not.
@@ -368,21 +372,21 @@
 /obj/item/weapon/weldingtool/largetank
 	name = "industrial welding tool"
 	max_fuel = 40
-	origin_tech = list(TECH_ENGINERING = 2)
+	origin_tech = list(TECH_ENGINEERING = 2)
 	matter = list(DEFAULT_WALL_MATERIAL = 70, "glass" = 60)
 
 /obj/item/weapon/weldingtool/hugetank
 	name = "upgraded welding tool"
 	max_fuel = 80
 	w_class = 3.0
-	origin_tech = list(TECH_ENGINERING = 3)
+	origin_tech = list(TECH_ENGINEERING = 3)
 	matter = list(DEFAULT_WALL_MATERIAL = 70, "glass" = 120)
 
 /obj/item/weapon/weldingtool/experimental
 	name = "experimental welding tool"
 	max_fuel = 40
 	w_class = 3.0
-	origin_tech = list(TECH_ENGINERING = 4, TECH_PHORON = 3)
+	origin_tech = list(TECH_ENGINEERING = 4, TECH_PHORON = 3)
 	matter = list(DEFAULT_WALL_MATERIAL = 70, "glass" = 120)
 	var/last_gen = 0
 
@@ -409,7 +413,7 @@
 	throwforce = 7.0
 	item_state = "crowbar"
 	w_class = 2.0
-	origin_tech = list(TECH_ENGINERING = 1)
+	origin_tech = list(TECH_ENGINEERING = 1)
 	matter = list(DEFAULT_WALL_MATERIAL = 50)
 	attack_verb = list("attacked", "bashed", "battered", "bludgeoned", "whacked")
 

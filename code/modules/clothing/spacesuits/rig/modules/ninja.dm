@@ -95,7 +95,7 @@
 	playsound(T, "sparks", 50, 1)
 	anim(T,M,'icons/mob/mob.dmi',,"phaseout",,M.dir)
 
-/obj/item/rig_module/teleporter/engage(atom/target)
+/obj/item/rig_module/teleporter/engage(var/atom/target, var/notify_ai)
 
 	if(!..()) return 0
 
@@ -114,6 +114,13 @@
 	if(!T || T.density)
 		H << "<span class='warning'>You cannot teleport into solid walls.</span>"
 		return 0
+
+	if(T.z in config.admin_levels)
+		H << "<span class='warning'>You cannot use your teleporter on this Z-level.</span>"
+		return 0
+
+	if(T.contains_dense_objects())
+		H << "<span class='warning'>You cannot teleport to a location with solid objects.</span>"
 
 	phase_out(H,get_turf(H))
 	H.loc = T

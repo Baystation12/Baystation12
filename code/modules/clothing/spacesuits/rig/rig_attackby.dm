@@ -7,7 +7,7 @@
 			return
 
 	// Pass repair items on to the chestpiece.
-	if(chest && (istype(W,/obj/item/stack/material/plastic) || istype(W,/obj/item/stack/material/steel) || istype(W, /obj/item/weapon/weldingtool)))
+	if(chest && (istype(W,/obj/item/stack/material) || istype(W, /obj/item/weapon/weldingtool)))
 		return chest.attackby(W,user)
 
 	// Lock or unlock the access panel.
@@ -188,7 +188,6 @@
 
 /obj/item/weapon/rig/emag_act(var/remaining_charges, var/mob/user)
 	if(!subverted)
-		locked_dna = null
 		req_access.Cut()
 		req_one_access.Cut()
 		locked = 0

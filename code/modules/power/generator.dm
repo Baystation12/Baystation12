@@ -144,6 +144,10 @@
 					"You [anchored ? "secure" : "unsecure"] the bolts holding [src] to the floor.", \
 					"You hear a ratchet")
 		use_power = anchored
+		if(anchored) // Powernet connection stuff.
+			connect_to_network()
+		else
+			disconnect_from_network()
 		reconnect()
 	else
 		..()

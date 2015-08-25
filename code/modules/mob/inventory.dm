@@ -73,6 +73,21 @@ var/list/slot_equipment_priority = list( \
 
 	return 0
 
+/mob/proc/equip_to_storage(obj/item/newitem)
+	// Try put it in their backpack
+	if(istype(src.back,/obj/item/weapon/storage))
+		var/obj/item/weapon/storage/backpack = src.back
+		if(backpack.contents.len < backpack.storage_slots)
+			newitem.loc = src.back
+			return 1
+
+	// Try to place it in any item that can store stuff, on the mob.
+	for(var/obj/item/weapon/storage/S in src.contents)
+		if (S.contents.len < S.storage_slots)
+			newitem.loc = S
+			return 1
+	return 0
+
 //These procs handle putting s tuff in your hand. It's probably best to use these rather than setting l_hand = ...etc
 //as they handle all relevant stuff like adding it to the player's screen and updating their overlays.
 
@@ -201,11 +216,9 @@ var/list/slot_equipment_priority = list( \
 		update_inv_wear_mask(0)
 	return
 
-//This differs from remove_from_mob() in that it checks if the item can be unequipped first.
-/mob/proc/unEquip(obj/item/I, force = 0) //Force overrides NODROP for things like wizarditis and admin undress.
+/mob/proc/canUnEquip(obj/item/I)
 	if(!I) //If there's nothing to drop, the drop is automatically successful.
 		return 1
-
 	var/slot
 	for(var/s in slot_back to slot_tie) //kind of worries me
 		if(get_equipped_item(s) == I)
@@ -215,6 +228,12 @@ var/list/slot_equipment_priority = list( \
 	if(slot && !I.mob_can_unequip(src, slot))
 		return 0
 
+	return 1
+
+//This differs from remove_from_mob() in that it checks if the item can be unequipped first.
+/mob/proc/unEquip(obj/item/I, force = 0) //Force overrides NODROP for things like wizarditis and admin undress.
+	if(!(force || canUnEquip(I)))
+		return
 	drop_from_inventory(I)
 	return 1
 

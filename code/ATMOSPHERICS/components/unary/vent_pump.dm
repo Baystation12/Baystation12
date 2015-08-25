@@ -7,8 +7,6 @@
 #define PRESSURE_CHECK_EXTERNAL 1
 #define PRESSURE_CHECK_INTERNAL 2
 
-#undefine
-
 /obj/machinery/atmospherics/unary/vent_pump
 	icon = 'icons/atmos/vent_pump.dmi'
 	icon_state = "map_vent"
@@ -118,7 +116,7 @@
 	if(!istype(T))
 		return
 
-	if(T.intact && node && node.level == 1 && istype(node, /obj/machinery/atmospherics/pipe))
+	if(!T.is_plating() && node && node.level == 1 && istype(node, /obj/machinery/atmospherics/pipe))
 		vent_icon += "h"
 
 	if(welded)
@@ -136,7 +134,7 @@
 		var/turf/T = get_turf(src)
 		if(!istype(T))
 			return
-		if(T.intact && node && node.level == 1 && istype(node, /obj/machinery/atmospherics/pipe))
+		if(!T.is_plating() && node && node.level == 1 && istype(node, /obj/machinery/atmospherics/pipe))
 			return
 		else
 			if(node)
@@ -178,10 +176,10 @@
 
 	if((environment.temperature || air_contents.temperature) && pressure_delta > 0.5)
 		if(pump_direction) //internal -> external
-			var/transfer_moles = calculate_transfer_moles(air_contents, environment)
+			var/transfer_moles = calculate_transfer_moles(air_contents, environment, pressure_delta)
 			power_draw = pump_gas(src, air_contents, environment, transfer_moles, power_rating)
 		else //external -> internal
-			var/transfer_moles = calculate_transfer_moles(environment, air_contents, (network)? network.volume : 0)
+			var/transfer_moles = calculate_transfer_moles(environment, air_contents, pressure_delta, (network)? network.volume : 0)
 
 			//limit flow rate from turfs
 			transfer_moles = min(transfer_moles, environment.total_moles*air_contents.volume/environment.volume)	//group_multiplier gets divided out here
@@ -399,7 +397,7 @@
 		user << "<span class='warning'>You cannot unwrench \the [src], turn it off first.</span>"
 		return 1
 	var/turf/T = src.loc
-	if (node && node.level==1 && isturf(T) && T.intact)
+	if (node && node.level==1 && isturf(T) && !T.is_plating())
 		user << "<span class='warning'>You must remove the plating first.</span>"
 		return 1
 	var/datum/gas_mixture/int_air = return_air()
@@ -424,3 +422,12 @@
 		initial_loc.air_vent_names -= id_tag
 	..()
 	return
+
+#undef DEFAULT_PRESSURE_DELTA
+
+#undef EXTERNAL_PRESSURE_BOUND
+#undef INTERNAL_PRESSURE_BOUND
+#undef PRESSURE_CHECKS
+
+#undef PRESSURE_CHECK_EXTERNAL
+#undef PRESSURE_CHECK_INTERNAL

@@ -2,7 +2,7 @@
 	density = 1
 	layer = 4.0
 	animate_movement = 2
-//	flags = NOREACT
+	flags = PROXMOVE
 	var/datum/mind/mind
 
 	var/stat = 0 //Whether a mob is alive or dead. TODO: Move this to living - Nodrak
@@ -214,8 +214,8 @@
 
 	var/stance_damage = 0 //Whether this mob's ability to stand has been affected
 
-	//SSD var, changed it up some so people can have special things happen for different mobs when SSD.
-	var/player_logged = 0
+	//Indicates if a clientless mob is actually an admin aghosting
+	var/mob/dead/observer/aghosted = null
 
 	var/turf/listed_turf = null  	//the current turf being examined in the stat panel
 	var/list/shouldnt_see = list()	//list of objects that this mob shouldn't see in the stat panel. this silliness is needed because of AI alt+click and cult blood runes

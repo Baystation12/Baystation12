@@ -1,7 +1,6 @@
 /datum/species/human
 	name = "Human"
 	name_plural = "Humans"
-	language = "Sol Common"
 	primitive_form = "Monkey"
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/punch, /datum/unarmed_attack/bite)
 	blurb = "Humanity originated in the Sol system, and over the last five centuries has spread \
@@ -9,21 +8,27 @@
 	While the central Sol government maintains control of its far-flung people, powerful corporate \
 	interests, rampant cyber and bio-augmentation and secretive factions make life on most human \
 	worlds tumultous at best."
+	num_alternate_languages = 2
+	secondary_langs = list("Sol Common")
 
-	flags = CAN_JOIN | HAS_SKIN_TONE | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
+	spawn_flags = CAN_JOIN
+	appearance_flags = HAS_SKIN_TONE | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
 
 /datum/species/unathi
 	name = "Unathi"
 	name_plural = "Unathi"
 	icobase = 'icons/mob/human_races/r_lizard.dmi'
 	deform = 'icons/mob/human_races/r_def_lizard.dmi'
-	language = "Sinta'unathi"
 	tail = "sogtail"
 	tail_animation = 'icons/mob/species/unathi/tail.dmi'
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/claws, /datum/unarmed_attack/bite/sharp)
 	primitive_form = "Stok"
 	darksight = 3
 	gluttonous = 1
+	slowdown = 0.5
+	brute_mod = 0.8
+	num_alternate_languages = 2
+	secondary_langs = list("Sinta'unathi")
 
 	blurb = "A heavily reptillian species, Unathi (or 'Sinta as they call themselves) hail from the \
 	Uuosa-Eso system, which roughly translates to 'burning mother'.<br/><br/>Coming from a harsh, radioactive \
@@ -39,7 +44,8 @@
 	heat_level_2 = 480 //Default 400
 	heat_level_3 = 1100 //Default 1000
 
-	flags = CAN_JOIN | IS_WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
+	spawn_flags = CAN_JOIN | IS_WHITELISTED
+	appearance_flags = HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
 
 	flesh_color = "#34AF10"
 
@@ -69,13 +75,16 @@
 	name_plural = "Tajaran"
 	icobase = 'icons/mob/human_races/r_tajaran.dmi'
 	deform = 'icons/mob/human_races/r_def_tajaran.dmi'
-	language = "Siik'tajr"
 	tail = "tajtail"
 	tail_animation = 'icons/mob/species/tajaran/tail.dmi'
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/claws, /datum/unarmed_attack/bite/sharp)
 	darksight = 8
-	slowdown = -1
-	brute_mod = 1.2
+	slowdown = -0.5
+	brute_mod = 1.15
+	burn_mod =  1.15
+	gluttonous = 1
+	num_alternate_languages = 2
+	secondary_langs = list("Siik'tajr")
 
 	blurb = "The Tajaran race is a species of feline-like bipeds hailing from the planet of Ahdomai in the \
 	S'randarr system. They have been brought up into the space age by the Humans and Skrell, and have been \
@@ -85,7 +94,7 @@
 
 	cold_level_1 = 200 //Default 260
 	cold_level_2 = 140 //Default 200
-	cold_level_3 = 80 //Default 120
+	cold_level_3 = 80  //Default 120
 
 	heat_level_1 = 330 //Default 360
 	heat_level_2 = 380 //Default 400
@@ -93,7 +102,8 @@
 
 	primitive_form = "Farwa"
 
-	flags = CAN_JOIN | IS_WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
+	spawn_flags = CAN_JOIN | IS_WHITELISTED
+	appearance_flags = HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
 
 	flesh_color = "#AFA59E"
 	base_color = "#333333"
@@ -116,7 +126,6 @@
 	icobase = 'icons/mob/human_races/r_skrell.dmi'
 	deform = 'icons/mob/human_races/r_def_skrell.dmi'
 	eyes = "skrell_eyes_s"
-	language = "Skrellian"
 	primitive_form = "Neara"
 	unarmed_types = list(/datum/unarmed_attack/punch)
 	blurb = "An amphibious species, Skrell come from the star system known as Qerr'Vallis, which translates to 'Star of \
@@ -124,8 +133,11 @@
 	of the Qerr'Katish, a caste within their society which keeps the empire of the Skrell running smoothly. Skrell are \
 	herbivores on the whole and tend to be co-operative with the other species of the galaxy, although they rarely reveal \
 	the secrets of their empire to their allies."
+	num_alternate_languages = 2
+	secondary_langs = list("Skrellian")
 
-	flags = CAN_JOIN | IS_WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR
+	spawn_flags = CAN_JOIN | IS_WHITELISTED
+	appearance_flags = HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR
 
 	flesh_color = "#8CD7A3"
 	blood_color = "#1D2CBF"
@@ -147,6 +159,7 @@
 	siemens_coefficient = 0.3
 	eyes = "blank_eyes"
 	show_ssd = "completely quiescent"
+	num_alternate_languages = 1
 
 
 	blurb = "Commonly referred to (erroneously) as 'plant people', the Dionaea are a strange space-dwelling collective \
@@ -197,7 +210,8 @@
 
 	body_temperature = T0C + 15		//make the plant people have a bit lower body temperature, why not
 
-	flags = CAN_JOIN | IS_WHITELISTED | NO_BREATHE | NO_SCAN | IS_PLANT | NO_BLOOD | NO_PAIN | NO_SLIP
+	flags = NO_BREATHE | NO_SCAN | IS_PLANT | NO_BLOOD | NO_PAIN | NO_SLIP | NO_MINOR_CUT
+	spawn_flags = CAN_JOIN | IS_WHITELISTED
 
 	blood_color = "#004400"
 	flesh_color = "#907E4A"
@@ -251,6 +265,7 @@
 	language = "Encoded Audio Language"
 	unarmed_types = list(/datum/unarmed_attack/punch)
 	rarity_value = 2
+	num_alternate_languages = 1 // potentially could be 2?
 
 	eyes = "blank_eyes"
 	brute_mod = 1.875 // 100% * 1.875 * 0.8 (robolimbs) ~= 150%
@@ -270,7 +285,8 @@
 
 	passive_temp_gain = 10  // This should cause IPCs to stabilize at ~80 C in a 20 C environment.
 
-	flags = CAN_JOIN | IS_WHITELISTED | NO_BREATHE | NO_SCAN | NO_BLOOD | NO_PAIN | NO_POISON
+	flags = NO_BREATHE | NO_SCAN | NO_BLOOD | NO_PAIN | NO_POISON
+	spawn_flags = CAN_JOIN | IS_WHITELISTED
 
 	blood_color = "#1F181F"
 	flesh_color = "#575757"

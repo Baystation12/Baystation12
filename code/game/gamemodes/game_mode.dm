@@ -166,12 +166,14 @@ var/global/list/additional_antag_types = list()
 	if(!(antag_templates && antag_templates.len))
 		return 1
 
-	// Attempt to mark folks down as ready to go. Don't finalize until post setup.
 	var/datum/antagonist/main_antags = antag_templates[1]
-	var/list/candidates = main_antags.get_candidates()
-	if(candidates.len >= required_enemies)
-		for(var/datum/antagonist/antag in antag_templates)
-			antag.attempt_spawn()
+	var/list/potential
+	if(main_antags.flags & ANTAG_OVERRIDE_JOB)
+		potential = main_antags.pending_antagonists
+	else
+		potential = main_antags.candidates
+
+	if(potential.len >= required_enemies)
 		return 1
 	return 0
 
@@ -184,6 +186,14 @@ var/global/list/additional_antag_types = list()
 		if(event_delay_mod_moderate)
 			var/datum/event_container/EMajor = event_manager.event_containers[EVENT_LEVEL_MAJOR]
 			EMajor.delay_modifier = event_delay_mod_major
+
+/datum/game_mode/proc/pre_setup()
+	for(var/datum/antagonist/antag in antag_templates)
+		antag.build_candidate_list() //compile a list of all eligible candidates
+
+		//antag roles that replace jobs need to be assigned before the job controller hands out jobs.
+		if(antag.flags & ANTAG_OVERRIDE_JOB)
+			antag.attempt_spawn() //select antags to be spawned
 
 ///post_setup()
 /datum/game_mode/proc/post_setup()
@@ -198,11 +208,13 @@ var/global/list/additional_antag_types = list()
 		spawn(rand(100,150))
 			announce_ert_disabled()
 
-	if(antag_templates && antag_templates.len)
-		for(var/datum/antagonist/antag in antag_templates)
-			antag.finalize_spawn()
-			if(antag.is_latejoin_template())
-				latejoin_templates |= antag
+	//Assign all antag types for this game mode. Any players spawned as antags earlier should have been removed from the pending list, so no need to worry about those.
+	for(var/datum/antagonist/antag in antag_templates)
+		if(!(antag.flags & ANTAG_OVERRIDE_JOB))
+			antag.attempt_spawn() //select antags to be spawned
+		antag.finalize_spawn() //actually spawn antags
+		if(antag.is_latejoin_template())
+			latejoin_templates |= antag
 
 	if(emergency_shuttle && auto_recall_shuttle)
 		emergency_shuttle.auto_recall = 1
@@ -212,6 +224,10 @@ var/global/list/additional_antag_types = list()
 		feedback_set_details("game_mode","[ticker.mode]")
 	feedback_set_details("server_ip","[world.internet_address]:[world.port]")
 	return 1
+
+/datum/game_mode/proc/fail_setup()
+	for(var/datum/antagonist/antag in antag_templates)
+		antag.reset()
 
 /datum/game_mode/proc/announce_ert_disabled()
 	if(!ert_disabled)
@@ -270,14 +286,13 @@ var/global/list/additional_antag_types = list()
 /datum/game_mode/proc/declare_completion()
 
 	var/is_antag_mode = (antag_templates && antag_templates.len)
-	if(!config.objectives_disabled)
-		check_victory()
-		if(is_antag_mode)
+	check_victory()
+	if(is_antag_mode)
+		sleep(10)
+		for(var/datum/antagonist/antag in antag_templates)
 			sleep(10)
-			for(var/datum/antagonist/antag in antag_templates)
-				sleep(10)
-				antag.check_victory()
-				antag.print_player_summary()
+			antag.check_victory()
+			antag.print_player_summary()
 
 	var/clients = 0
 	var/surviving_humans = 0
@@ -379,8 +394,8 @@ var/global/list/additional_antag_types = list()
 
 		if (special_role in disregard_roles)
 			continue
-		else if(man.client.prefs.nanotrasen_relation == "Opposed" && prob(50) || \
-			man.client.prefs.nanotrasen_relation == "Skeptical" && prob(20))
+		else if(man.client.prefs.nanotrasen_relation == COMPANY_OPPOSED && prob(50) || \
+			man.client.prefs.nanotrasen_relation == COMPANY_SKEPTICAL && prob(20))
 			suspects += man
 		// Antags
 		else if(special_role_data && prob(special_role_data.suspicion_chance))
@@ -391,7 +406,7 @@ var/global/list/additional_antag_types = list()
 			suspects += man
 
 	for(var/mob/M in suspects)
-		if(M.mind.assigned_role == "MODE")
+		if(player_is_antag(M.mind, only_offstation_roles = 1))
 			continue
 		switch(rand(1, 100))
 			if(1 to 50)
@@ -417,32 +432,26 @@ var/global/list/additional_antag_types = list()
 	if(!antag_template)
 		return candidates
 
-	var/roletext
 	// Assemble a list of active players without jobbans.
 	for(var/mob/new_player/player in player_list)
 		if( player.client && player.ready )
-			if(!(jobban_isbanned(player, "Syndicate") || jobban_isbanned(player, antag_template.bantype)))
-				players += player
-
-	// Shuffle the players list so that it becomes ping-independent.
-	players = shuffle(players)
+			players += player
 
 	// Get a list of all the people who want to be the antagonist for this round
 	for(var/mob/new_player/player in players)
 		if(!role || (player.client.prefs.be_special & role))
-			log_debug("[player.key] had [roletext] enabled, so we are drafting them.")
+			log_debug("[player.key] had [antag_id] enabled, so we are drafting them.")
 			candidates += player.mind
 			players -= player
 
 	// If we don't have enough antags, draft people who voted for the round.
 	if(candidates.len < required_enemies)
-		for(var/key in round_voters)
-			for(var/mob/new_player/player in players)
-				if(player.ckey == key)
-					log_debug("[player.key] voted for this round, so we are drafting them.")
-					candidates += player.mind
-					players -= player
-					break
+		for(var/mob/new_player/player in players)
+			if(player.ckey in round_voters)
+				log_debug("[player.key] voted for this round, so we are drafting them.")
+				candidates += player.mind
+				players -= player
+				break
 
 	return candidates		// Returns: The number of people who had the antagonist role set to yes, regardless of recomended_enemies, if that number is greater than required_enemies
 							//			required_enemies if the number of people with that role set to yes is less than recomended_enemies,
@@ -475,12 +484,14 @@ var/global/list/additional_antag_types = list()
 			if(antag)
 				antag_templates |= antag
 
+	/*
 	if(antag_templates && antag_templates.len)
 		for(var/datum/antagonist/antag in antag_templates)
 			if(antag.flags & (ANTAG_OVERRIDE_JOB|ANTAG_RANDSPAWN))
 				continue
 			antag_templates -= antag
 			world << "<span class='danger'>[antag.role_text_plural] are invalid for additional roundtype antags!</span>"
+	*/
 
 	newscaster_announcements = pick(newscaster_standard_feeds)
 
@@ -546,9 +557,9 @@ proc/get_nt_opposed()
 	var/list/dudes = list()
 	for(var/mob/living/carbon/human/man in player_list)
 		if(man.client)
-			if(man.client.prefs.nanotrasen_relation == "Opposed")
+			if(man.client.prefs.nanotrasen_relation == COMPANY_OPPOSED)
 				dudes += man
-			else if(man.client.prefs.nanotrasen_relation == "Skeptical" && prob(50))
+			else if(man.client.prefs.nanotrasen_relation == COMPANY_SKEPTICAL && prob(50))
 				dudes += man
 	if(dudes.len == 0) return null
 	return pick(dudes)

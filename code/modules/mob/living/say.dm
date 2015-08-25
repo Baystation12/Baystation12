@@ -138,10 +138,6 @@ proc/get_radio_key_from_channel(var/channel)
 			return say_dead(message)
 		return
 
-	if(is_muzzled())
-		src << "<span class='danger'>You're muzzled and cannot speak!</span>"
-		return
-
 	var/message_mode = parse_message_mode(message, "headset")
 
 	switch(copytext(message,1,2))
@@ -165,17 +161,23 @@ proc/get_radio_key_from_channel(var/channel)
 	else
 		speaking = get_default_language()
 
-	var/ending = copytext(message, length(message))
 	if (speaking)
 		// This is broadcast to all mobs with the language,
 		// irrespective of distance or anything else.
 		if(speaking.flags & HIVEMIND)
 			speaking.broadcast(src,trim(message))
-			return
+			return 1
 		//If we've gotten this far, keep going!
-		verb = speaking.get_spoken_verb(ending)
+		if(speaking.flags & COMMON_VERBS)
+			verb = say_quote(message)
+		else
+			verb = speaking.get_spoken_verb(copytext(message, length(message)))
 	else
-		verb = get_speech_ending(verb, ending)
+		verb = say_quote(message)
+
+	if(is_muzzled())
+		src << "<span class='danger'>You're muzzled and cannot speak!</span>"
+		return
 
 	message = trim_left(message)
 
@@ -185,11 +187,11 @@ proc/get_radio_key_from_channel(var/channel)
 		verb = handle_s[2]
 
 	if(!message || message == "")
-		return
+		return 0
 
 	var/list/obj/item/used_radios = new
 	if(handle_message_mode(message_mode, message, verb, speaking, used_radios, alt_name))
-		return
+		return 1
 
 	var/list/handle_v = handle_speech_sound()
 	var/sound/speech_sound = handle_v[1]

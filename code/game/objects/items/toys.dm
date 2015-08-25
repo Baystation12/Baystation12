@@ -104,7 +104,7 @@
 
 /obj/item/toy/nanotrasenballoon
 	name = "criminal balloon"
-	desc = "Across the balloon the following is printed: \"Man, I love NT soooo much. I use only NanoTrasen products. You have NO idea.\""
+	desc = "Across the balloon the following is printed: \"Man, I love NanoTrasen soooo much. I use only NT products. You have NO idea.\""
 	throwforce = 0
 	throw_speed = 4
 	throw_range = 20
@@ -141,7 +141,11 @@
 	desc = "There are 0 caps left. Looks almost like the real thing! Ages 8 and up. Please recycle in an autolathe when you're out of caps!"
 	icon = 'icons/obj/gun.dmi'
 	icon_state = "revolver"
-	item_state = "gun"
+	item_state = "revolver"
+	item_icons = list(
+		icon_l_hand = 'icons/mob/items/lefthand_guns.dmi',
+		icon_r_hand = 'icons/mob/items/righthand_guns.dmi',
+		)
 	flags =  CONDUCT
 	slot_flags = SLOT_BELT|SLOT_HOLSTER
 	w_class = 3.0
@@ -220,6 +224,10 @@
 	icon = 'icons/obj/gun.dmi'
 	icon_state = "crossbow"
 	item_state = "crossbow"
+	item_icons = list(
+		icon_l_hand = 'icons/mob/items/lefthand_guns.dmi',
+		icon_r_hand = 'icons/mob/items/righthand_guns.dmi',
+		)
 	w_class = 2.0
 	attack_verb = list("attacked", "struck", "hit")
 	var/bullets = 5
@@ -336,7 +344,6 @@
 	item_state = "sword0"
 	var/active = 0.0
 	w_class = 2.0
-	flags = NOSHIELD
 	attack_verb = list("attacked", "struck", "hit")
 
 	attack_self(mob/user as mob)

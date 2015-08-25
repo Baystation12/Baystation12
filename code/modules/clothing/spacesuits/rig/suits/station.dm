@@ -145,8 +145,13 @@
 		/obj/item/rig_module/vision/meson
 		)
 
+	chest_type = /obj/item/clothing/suit/space/rig/ce
 	boot_type =  null
 	glove_type = null
+
+/obj/item/clothing/suit/space/rig/ce
+	heat_protection = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 
 /obj/item/weapon/rig/hazmat
 
@@ -206,7 +211,7 @@
 /obj/item/weapon/rig/hazard
 	name = "hazard hardsuit control module"
 	suit_type = "hazard hardsuit"
-	desc = "A Nanotrasen security hardsuit designed for prolonged EVA in dangerous environments."
+	desc = "A Security hardsuit designed for prolonged EVA in dangerous environments."
 	icon_state = "hazard_rig"
 	armor = list(melee = 60, bullet = 40, laser = 30, energy = 15, bomb = 60, bio = 100, rad = 30)
 	slowdown = 1

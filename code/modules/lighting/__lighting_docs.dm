@@ -51,7 +51,7 @@ turf: (lighting_turf.dm)
   - proc/lighting_clear_overlays():
 	  - Delete (manual GC) all light overlays on this turf, used when changing turf to space
   - proc/lighting_build_overlays():
-	  - Create lighting overlays for this turf
+	  - Create lighting overlays for this turf. Called by ChangeTurf in case the turf is being changed to use dynamic lighting.
 
 
 atom/movable/lighting_overlay: (lighting_overlay.dm)

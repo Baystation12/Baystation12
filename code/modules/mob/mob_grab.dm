@@ -209,7 +209,7 @@
 		return
 	if(state == GRAB_UPGRADING)
 		return
-	if(assailant.next_move > world.time)
+	if(!assailant.canClick())
 		return
 	if(world.time < (last_action + UPGRADE_COOLDOWN))
 		return
@@ -259,7 +259,7 @@
 		assailant.attack_log += "\[[time_stamp()]\] <font color='red'>Strangled (kill intent) [affecting.name] ([affecting.ckey])</font>"
 		msg_admin_attack("[key_name(assailant)] strangled (kill intent) [key_name(affecting)]")
 
-		assailant.next_move = world.time + 10
+		affecting.setClickCooldown(10)
 		affecting.losebreath += 1
 		affecting.set_dir(WEST)
 	adjust_position()
@@ -351,27 +351,27 @@
 				if(I_HURT)
 
 					if(hit_zone == "eyes")
+						var/mob/living/carbon/human/H = affecting
+						var/datum/unarmed_attack/attack = H.get_unarmed_attack(src, hit_zone)
+						if(!attack)
+							return
+
 						if(state < GRAB_NECK)
 							assailant << "<span class='warning'>You require a better grab to do this.</span>"
 							return
-						if((affecting:head && affecting:head.flags & HEADCOVERSEYES) || \
-							(affecting:wear_mask && affecting:wear_mask.flags & MASKCOVERSEYES) || \
-							(affecting:glasses && affecting:glasses.flags & GLASSESCOVERSEYES))
-							assailant << "<span class='danger'>You're going to need to remove the eye covering first.</span>"
-							return
+						for(var/slot in list(slot_wear_mask, slot_head, slot_glasses))
+							var/obj/item/protection = affecting.get_equipped_item(slot)
+							if(istype(protection) && (protection.body_parts_covered & EYES))
+								assailant << "<span class='danger'>You're going to need to remove the eye covering first.</span>"
+								return
 						if(!affecting.has_eyes())
 							assailant << "<span class='danger'>You cannot locate any eyes on [affecting]!</span>"
 							return
-						assailant.visible_message("<span class='danger'>[assailant] pressed \his fingers into [affecting]'s eyes!</span>")
-						affecting << "<span class='danger'>You experience immense pain as you feel digits being pressed into your eyes!</span>"
-						assailant.attack_log += text("\[[time_stamp()]\] <font color='red'>Pressed fingers into the eyes of [affecting.name] ([affecting.ckey])</font>")
-						affecting.attack_log += text("\[[time_stamp()]\] <font color='orange'>Had fingers pressed into their eyes by [assailant.name] ([assailant.ckey])</font>")
-						msg_admin_attack("[key_name(assailant)] has pressed his fingers into [key_name(affecting)]'s eyes.")
-						var/obj/item/organ/eyes/eyes = affecting:internal_organs_by_name["eyes"]
-						eyes.damage += rand(3,4)
-						if (eyes.damage >= eyes.min_broken_damage)
-							if(affecting.stat != 2)
-								affecting << "\red You go blind!"
+						assailant.attack_log += text("\[[time_stamp()]\] <font color='red'>Attacked [affecting.name]'s eyes using grab ([affecting.ckey])</font>")
+						affecting.attack_log += text("\[[time_stamp()]\] <font color='orange'>Had eyes attacked by [assailant.name]'s grab ([assailant.ckey])</font>")
+						msg_admin_attack("[key_name(assailant)] attacked [key_name(affecting)]'s eyes using a grab action.")
+
+						attack.handle_eye_attack(assailant, affecting)
 					else if(hit_zone != "head")
 						if(state < GRAB_NECK)
 							assailant << "<span class='warning'>You require a better grab to do this.</span>"
@@ -428,10 +428,24 @@
 		else
 			var/mob/living/carbon/human/H = user
 			if(istype(H) && H.species.gluttonous)
-				if(H.species.gluttonous == 2)
+				// Small animals (mice, lizards).
+				if(affecting.small)
 					can_eat = 2
-				else if(!ishuman(affecting) && !issmall(affecting) && (affecting.small || iscarbon(affecting)))
-					can_eat = 1
+				else
+					if(H.species.gluttonous == 2)
+						// Diona nymphs, alien larvae.
+						if(iscarbon(affecting) && !ishuman(affecting))
+							can_eat = 2
+						// Monkeys.
+						else if(issmall(affecting))
+							can_eat = 1
+					else if(H.species.gluttonous == 3)
+						// Full-sized humans.
+						if(ishuman(affecting) && !issmall(affecting))
+							can_eat = 1
+						// Literally everything else.
+						else
+							can_eat = 2
 
 		if(can_eat)
 			var/mob/living/carbon/attacker = user

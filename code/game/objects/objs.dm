@@ -13,10 +13,15 @@
 
 	var/damtype = "brute"
 	var/force = 0
+	var/armor_penetration = 0
 
-/obj/Topic(href, href_list, var/nowindow = 0, var/datum/topic_state/state = default_state)
-	// Calling Topic without a corresponding window open causes runtime errors
-	if(!nowindow && ..())
+/obj/Destroy()
+	processing_objects -= src
+	nanomanager.close_uis(src)
+	return ..()
+
+/obj/Topic(href, href_list, var/datum/topic_state/state = default_state)
+	if(usr && ..())
 		return 1
 
 	// In the far future no checks are made in an overriding Topic() beyond if(..()) return
@@ -28,9 +33,21 @@
 	CouldNotUseTopic(usr)
 	return 1
 
+/obj/CanUseTopic(var/mob/user, var/datum/topic_state/state)
+	if(user.CanUseObjTopic(src))
+		return ..()
+	user << "<span class='danger'>\icon[src]Access Denied!</span>"
+	return STATUS_CLOSE
+
+/mob/living/silicon/CanUseObjTopic(var/obj/O)
+	return O.allowed(src)
+
+/mob/proc/CanUseObjTopic()
+	return 1
+
 /obj/proc/CouldUseTopic(var/mob/user)
 	var/atom/host = nano_host()
-	host.add_fingerprint(user)
+	host.add_hiddenprint(user)
 
 /obj/proc/CouldNotUseTopic(var/mob/user)
 	// Nada
@@ -118,13 +135,11 @@
 	if(istype(M) && M.client && M.machine == src)
 		src.attack_self(M)
 
-
-/obj/proc/alter_health()
-	return 1
-
 /obj/proc/hide(h)
 	return
 
+/obj/proc/hides_under_flooring()
+	return 0
 
 /obj/proc/hear_talk(mob/M as mob, text, verb, datum/language/speaking)
 	if(talking_atom)

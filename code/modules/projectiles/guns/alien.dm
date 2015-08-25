@@ -40,7 +40,7 @@
 /obj/item/weapon/gun/launcher/spikethrower/special_check(user)
 	if(istype(user,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = user
-		if(H.species && H.species.name != "Vox")
+		if(H.species && H.species.get_bodytype() != "Vox")
 			user << "<span class='warning'>\The [src] does not respond to you!</span>"
 			return 0
 	return ..()

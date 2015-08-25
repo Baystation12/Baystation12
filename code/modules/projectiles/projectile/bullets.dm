@@ -53,7 +53,7 @@
 	else if(istype(A, /obj/structure/girder))
 		chance = 100
 	else if(istype(A, /obj/machinery) || istype(A, /obj/structure))
-		chance = 25
+		chance = damage
 
 	if(prob(chance))
 		if(A.opacity)
@@ -119,7 +119,8 @@
 
 /obj/item/projectile/bullet/shotgun
 	name = "slug"
-	damage = 60
+	damage = 50
+	armor_penetration = 15
 
 /obj/item/projectile/bullet/shotgun/beanbag		//because beanbags are not bullets
 	name = "beanbag"
@@ -139,20 +140,23 @@
 
 /* "Rifle" rounds */
 
-/obj/item/projectile/bullet/rifle/a762
-	damage = 30
+/obj/item/projectile/bullet/rifle
+	armor_penetration = 20
 	penetrating = 1
+
+/obj/item/projectile/bullet/rifle/a762
+	damage = 25
+
+/obj/item/projectile/bullet/rifle/a556
+	damage = 35
 
 /obj/item/projectile/bullet/rifle/a145
 	damage = 80
 	stun = 3
 	weaken = 3
 	penetrating = 5
+	armor_penetration = 80
 	hitscan = 1 //so the PTR isn't useless as a sniper weapon
-
-/obj/item/projectile/bullet/rifle/a556
-	damage = 40
-	penetrating = 1
 
 /* Miscellaneous */
 

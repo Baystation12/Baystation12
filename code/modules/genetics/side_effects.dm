@@ -54,7 +54,7 @@
 	duration = 10*90
 
 	start(mob/living/carbon/human/H)
-		H.emote("me", 1, "has drool running down from his mouth.")
+		H.emote("me", 1, "has drool running down from [H.gender == MALE ? "his" : H.gender == FEMALE ? "her" : "their"] mouth.")
 
 	finish(mob/living/carbon/human/H)
 		if(!H.reagents.has_reagent("anti_toxin"))
@@ -68,7 +68,7 @@
 	duration = 10*30
 
 	start(mob/living/carbon/human/H)
-		H.emote("me", 1, "has drool running down from his mouth.")
+		H.emote("me", 1, "has drool running down from [H.gender == MALE ? "his" : H.gender == FEMALE ? "her" : "their"] mouth.")
 
 	finish(mob/living/carbon/human/H)
 		if(!H.reagents.has_reagent("anti_toxin"))

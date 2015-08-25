@@ -1,8 +1,7 @@
 /obj/machinery/atmospherics/pipe
 
-	var/datum/gas_mixture/air_temporary //used when reconstructing a pipeline that broke
+	var/datum/gas_mixture/air_temporary // used when reconstructing a pipeline that broke
 	var/datum/pipeline/parent
-
 	var/volume = 0
 	force = 20
 
@@ -20,10 +19,12 @@
 	return -1
 
 /obj/machinery/atmospherics/pipe/New()
-	..()
-	//so pipes under walls are hidden
 	if(istype(get_turf(src), /turf/simulated/wall) || istype(get_turf(src), /turf/simulated/shuttle/wall) || istype(get_turf(src), /turf/unsimulated/wall))
 		level = 1
+	..()
+
+/obj/machinery/atmospherics/pipe/hides_under_flooring()
+	return level != 2
 
 /obj/machinery/atmospherics/pipe/proc/pipeline_expansion()
 	return null
@@ -81,7 +82,7 @@
 	if (!istype(W, /obj/item/weapon/wrench))
 		return ..()
 	var/turf/T = src.loc
-	if (level==1 && isturf(T) && T.intact)
+	if (level==1 && isturf(T) && !T.is_plating())
 		user << "<span class='warning'>You must remove the plating first.</span>"
 		return 1
 	var/datum/gas_mixture/int_air = return_air()
@@ -91,7 +92,7 @@
 		add_fingerprint(user)
 		return 1
 	playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-	user << "<span class='notice>You begin to unfasten \the [src]...</span>"
+	user << "<span class='notice'>You begin to unfasten \the [src]...</span>"
 	if (do_after(user, 40))
 		user.visible_message( \
 			"<span class='notice'>\The [user] unfastens \the [src].</span>", \
@@ -188,7 +189,7 @@
 			initialize_directions = SOUTH|WEST
 
 /obj/machinery/atmospherics/pipe/simple/hide(var/i)
-	if(level == 1 && istype(loc, /turf/simulated))
+	if(istype(loc, /turf/simulated))
 		invisibility = i ? 101 : 0
 	update_icon()
 
@@ -297,9 +298,8 @@
 		qdel(src)
 		return
 
-	var/turf/T = get_turf(src)
-	if(istype(T))
-		hide(T.intact)
+	var/turf/T = loc
+	if(level == 1 && !T.is_plating()) hide(1)
 	update_icon()
 
 /obj/machinery/atmospherics/pipe/simple/disconnect(obj/machinery/atmospherics/reference)
@@ -348,8 +348,8 @@
 /obj/machinery/atmospherics/pipe/simple/visible/green
 	color = PIPE_COLOR_GREEN
 
-/obj/machinery/atmospherics/pipe/simple/visible/purple
-	color = PIPE_COLOR_PURPLE
+/obj/machinery/atmospherics/pipe/simple/visible/black
+	color = PIPE_COLOR_BLACK
 
 /obj/machinery/atmospherics/pipe/simple/visible/red
 	color = PIPE_COLOR_RED
@@ -390,8 +390,8 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/green
 	color = PIPE_COLOR_GREEN
 
-/obj/machinery/atmospherics/pipe/simple/hidden/purple
-	color = PIPE_COLOR_PURPLE
+/obj/machinery/atmospherics/pipe/simple/hidden/black
+	color = PIPE_COLOR_BLACK
 
 /obj/machinery/atmospherics/pipe/simple/hidden/red
 	color = PIPE_COLOR_RED
@@ -446,7 +446,7 @@
 			initialize_directions = NORTH|EAST|SOUTH
 
 /obj/machinery/atmospherics/pipe/manifold/hide(var/i)
-	if(level == 1 && istype(loc, /turf/simulated))
+	if(istype(loc, /turf/simulated))
 		invisibility = i ? 101 : 0
 	update_icon()
 
@@ -582,8 +582,7 @@
 		return
 
 	var/turf/T = get_turf(src)
-	if(istype(T))
-		hide(T.intact)
+	if(level == 1 && !T.is_plating()) hide(1)
 	update_icon()
 
 /obj/machinery/atmospherics/pipe/manifold/visible
@@ -617,8 +616,8 @@
 /obj/machinery/atmospherics/pipe/manifold/visible/green
 	color = PIPE_COLOR_GREEN
 
-/obj/machinery/atmospherics/pipe/manifold/visible/purple
-	color = PIPE_COLOR_PURPLE
+/obj/machinery/atmospherics/pipe/manifold/visible/black
+	color = PIPE_COLOR_BLACK
 
 /obj/machinery/atmospherics/pipe/manifold/visible/red
 	color = PIPE_COLOR_RED
@@ -659,8 +658,8 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/green
 	color = PIPE_COLOR_GREEN
 
-/obj/machinery/atmospherics/pipe/manifold/hidden/purple
-	color = PIPE_COLOR_PURPLE
+/obj/machinery/atmospherics/pipe/manifold/hidden/black
+	color = PIPE_COLOR_BLACK
 
 /obj/machinery/atmospherics/pipe/manifold/hidden/red
 	color = PIPE_COLOR_RED
@@ -806,7 +805,7 @@
 	update_icon()
 
 /obj/machinery/atmospherics/pipe/manifold4w/hide(var/i)
-	if(level == 1 && istype(loc, /turf/simulated))
+	if(istype(loc, /turf/simulated))
 		invisibility = i ? 101 : 0
 	update_icon()
 
@@ -841,8 +840,7 @@
 		return
 
 	var/turf/T = get_turf(src)
-	if(istype(T))
-		hide(T.intact)
+	if(level == 1 && !T.is_plating()) hide(1)
 	update_icon()
 
 /obj/machinery/atmospherics/pipe/manifold4w/visible
@@ -876,8 +874,8 @@
 /obj/machinery/atmospherics/pipe/manifold4w/visible/green
 	color = PIPE_COLOR_GREEN
 
-/obj/machinery/atmospherics/pipe/manifold4w/visible/purple
-	color = PIPE_COLOR_PURPLE
+/obj/machinery/atmospherics/pipe/manifold4w/visible/black
+	color = PIPE_COLOR_BLACK
 
 /obj/machinery/atmospherics/pipe/manifold4w/visible/red
 	color = PIPE_COLOR_RED
@@ -917,8 +915,8 @@
 /obj/machinery/atmospherics/pipe/manifold4w/hidden/green
 	color = PIPE_COLOR_GREEN
 
-/obj/machinery/atmospherics/pipe/manifold4w/hidden/purple
-	color = PIPE_COLOR_PURPLE
+/obj/machinery/atmospherics/pipe/manifold4w/hidden/black
+	color = PIPE_COLOR_BLACK
 
 /obj/machinery/atmospherics/pipe/manifold4w/hidden/red
 	color = PIPE_COLOR_RED
@@ -946,7 +944,7 @@
 	initialize_directions = dir
 
 /obj/machinery/atmospherics/pipe/cap/hide(var/i)
-	if(level == 1 && istype(loc, /turf/simulated))
+	if(istype(loc, /turf/simulated))
 		invisibility = i ? 101 : 0
 	update_icon()
 
@@ -997,7 +995,7 @@
 				break
 
 	var/turf/T = src.loc			// hide if turf is not intact
-	hide(T.intact)
+	if(level == 1 && !T.is_plating()) hide(1)
 	update_icon()
 
 /obj/machinery/atmospherics/pipe/cap/visible
@@ -1120,20 +1118,8 @@
 		return
 
 	if(istype(W, /obj/item/device/analyzer) && in_range(user, src))
-		for (var/mob/O in viewers(user, null))
-			O << "<span class='notice'>\The [user] has used \the [W] on \the [src] \icon[src]</span>"
-
-		var/pressure = parent.air.return_pressure()
-		var/total_moles = parent.air.total_moles
-
-		user << "<span class='notice'>Results of analysis of \the [src] \icon[src]</span>"
-		if (total_moles>0)
-			user << "<span class='notice'>Pressure: [round(pressure,0.1)] kPa</span>"
-			for(var/g in parent.air.gas)
-				user << "<span class='notice'>[gas_data.name[g]]: [round((parent.air.gas[g] / total_moles) * 100)]%</span>"
-			user << "<span class='notice'>Temperature: [round(parent.air.temperature-T0C)]&deg;C</span>"
-		else
-			user << "<span class='notice'>Tank is empty!</span>"
+		var/obj/item/device/analyzer/A = W
+		A.analyze_gases(src, user)
 
 /obj/machinery/atmospherics/pipe/tank/air
 	name = "Pressure Tank (Air)"
@@ -1398,7 +1384,7 @@
 
 /obj/machinery/atmospherics/proc/add_underlay_adapter(var/turf/T, var/obj/machinery/atmospherics/node, var/direction, var/icon_connect_type) //modified from add_underlay, does not make exposed underlays
 	if(node)
-		if(T.intact && node.level == 1 && istype(node, /obj/machinery/atmospherics/pipe))
+		if(!T.is_plating() && node.level == 1 && istype(node, /obj/machinery/atmospherics/pipe))
 			underlays += icon_manager.get_atmos_icon("underlay", direction, color_cache_name(node), "down" + icon_connect_type)
 		else
 			underlays += icon_manager.get_atmos_icon("underlay", direction, color_cache_name(node), "intact" + icon_connect_type)

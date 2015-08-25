@@ -207,5 +207,5 @@
 	your host and your eventual spawn safe and warm."
 	src << "You can speak to your victim with <b>say</b>, to other borers with <b>say :x</b>, and use your Abilities tab to access powers."
 
-/mob/living/simple_animal/borer/can_use_vents()
+/mob/living/simple_animal/borer/cannot_use_vents()
 	return

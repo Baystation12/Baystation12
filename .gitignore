@@ -1,4 +1,5 @@
 #ignore misc BYOND files
+Thumbs.db
 *.log
 *.int
 *.rsc
@@ -7,3 +8,4 @@
 *.backup
 data/
 cfg/
+

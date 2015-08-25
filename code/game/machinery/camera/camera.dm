@@ -8,7 +8,7 @@
 	active_power_usage = 10
 	layer = 5
 
-	var/list/network = list("Exodus")
+	var/list/network = list(NETWORK_EXODUS)
 	var/c_tag = null
 	var/c_tag_order = 999
 	var/status = 1
@@ -138,14 +138,10 @@
 
 	else if(iswelder(W) && (wires.CanDeconstruct() || (stat & BROKEN)))
 		if(weld(W, user))
-			if (stat & BROKEN)
-				stat &= ~BROKEN
-				cancelCameraAlarm()
-				update_icon()
-				update_coverage()
-			else if(assembly)
+			if(assembly)
 				assembly.loc = src.loc
 				assembly.state = 1
+				assembly = null //so qdel doesn't eat it.
 				new /obj/item/stack/cable_coil(src.loc, length=2)
 			qdel(src)
 
@@ -190,6 +186,7 @@
 			src.bugged = 1
 
 	else if(W.damtype == BRUTE || W.damtype == BURN) //bashing cameras
+		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		if (W.force >= src.toughness)
 			user.do_attack_animation(src)
 			visible_message("<span class='warning'><b>[src] has been [pick(W.attack_verb)] with [W] by [user]!</b></span>")
@@ -260,6 +257,11 @@
 		//I guess that doesn't matter since they couldn't use it anyway?
 		kick_viewers()
 
+/obj/machinery/camera/check_eye(mob/user)
+	if(!can_use()) return -1
+	if(isXRay()) return SEE_TURFS|SEE_MOBS|SEE_OBJS
+	return 0
+
 //This might be redundant, because of check_eye()
 /obj/machinery/camera/proc/kick_viewers()
 	for(var/mob/O in player_list)
@@ -300,6 +302,9 @@
 /obj/machinery/camera/proc/can_see()
 	var/list/see = null
 	var/turf/pos = get_turf(src)
+	if(!pos)
+		return list()
+	
 	if(isXRay())
 		see = range(view_range, pos)
 	else

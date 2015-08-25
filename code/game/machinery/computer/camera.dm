@@ -8,7 +8,8 @@
 /obj/machinery/computer/security
 	name = "security camera monitor"
 	desc = "Used to access the various cameras on the station."
-	icon_state = "cameras"
+	icon_keyboard = "security_key"
+	icon_screen = "cameras"
 	light_color = "#a91515"
 	var/obj/machinery/camera/current = null
 	var/last_pic = 1.0
@@ -28,11 +29,13 @@
 
 	check_eye(var/mob/user as mob)
 		if (user.stat || ((get_dist(user, src) > 1 || !( user.canmove ) || user.blinded) && !istype(user, /mob/living/silicon))) //user can't see - not sure why canmove is here.
-			return null
-		if ( !current || !current.can_use() ) //camera doesn't work
+			return -1
+		if(!current)
+			return 0
+		var/viewflag = current.check_eye(user)
+		if ( viewflag < 0 ) //camera doesn't work
 			reset_current()
-		user.reset_view(current)
-		return 1
+		return viewflag
 
 	ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
 		if(src.z > 6) return
@@ -69,7 +72,7 @@
 			ui.add_template("mapContent", "sec_camera_map_content.tmpl")
 			// adding a template with the key "mapHeader" replaces the map header content
 			ui.add_template("mapHeader", "sec_camera_map_header.tmpl")
-			
+
 			ui.set_initial_data(data)
 			ui.open()
 			ui.set_auto_update(1)
@@ -87,7 +90,7 @@
 			if(src.z>6 || stat&(NOPOWER|BROKEN)) return
 			if(usr.stat || ((get_dist(usr, src) > 1 || !( usr.canmove ) || usr.blinded) && !istype(usr, /mob/living/silicon))) return
 			reset_current()
-			usr.check_eye(current)
+			usr.reset_view(current)
 			return 1
 		else
 			. = ..()
@@ -123,8 +126,8 @@
 		if (!C.can_use() || user.stat || (get_dist(user, src) > 1 || user.machine != src || user.blinded || !( user.canmove ) && !istype(user, /mob/living/silicon)))
 			return 0
 		set_current(C)
+		user.reset_view(current)
 		check_eye(user)
-		use_power(50)
 		return 1
 
 //Camera control: moving.
@@ -166,6 +169,7 @@
 
 	src.current = C
 	if(current)
+		use_power = 2
 		var/mob/living/L = current.loc
 		if(istype(L))
 			L.tracking_initiated()
@@ -176,6 +180,7 @@
 		if(istype(L))
 			L.tracking_cancelled()
 	current = null
+	use_power = 1
 
 //Camera control: mouse.
 /atom/DblClick()
@@ -197,23 +202,19 @@
 /obj/machinery/computer/security/telescreen
 	name = "Telescreen"
 	desc = "Used for watching an empty arena."
-	icon = 'icons/obj/stationobjs.dmi'
-	icon_state = "telescreen"
+	icon_state = "wallframe"
+	icon_keyboard = null
+	icon_screen = null
+	light_range_on = 0
 	network = list("thunder")
 	density = 0
 	circuit = null
-
-/obj/machinery/computer/security/telescreen/update_icon()
-	icon_state = initial(icon_state)
-	if(stat & BROKEN)
-		icon_state += "b"
-	return
 
 /obj/machinery/computer/security/telescreen/entertainment
 	name = "entertainment monitor"
 	desc = "Damn, why do they never have anything interesting on these things?"
 	icon = 'icons/obj/status_display.dmi'
-	icon_state = "entertainment"
+	icon_screen = "entertainment"
 	light_color = "#FFEEDB"
 	light_range_on = 2
 	circuit = null
@@ -221,7 +222,9 @@
 /obj/machinery/computer/security/wooden_tv
 	name = "security camera monitor"
 	desc = "An old TV hooked into the stations camera network."
-	icon_state = "security_det"
+	icon_state = "television"
+	icon_keyboard = null
+	icon_screen = "detective_tv"
 	circuit = null
 	light_color = "#3848B3"
 	light_power_on = 0.5
@@ -229,7 +232,8 @@
 /obj/machinery/computer/security/mining
 	name = "outpost camera monitor"
 	desc = "Used to access the various cameras on the outpost."
-	icon_state = "miningcameras"
+	icon_keyboard = "mining_key"
+	icon_screen = "mining"
 	network = list("MINE")
 	circuit = /obj/item/weapon/circuitboard/security/mining
 	light_color = "#F9BBFC"
@@ -237,7 +241,8 @@
 /obj/machinery/computer/security/engineering
 	name = "engineering camera monitor"
 	desc = "Used to monitor fires and breaches."
-	icon_state = "engineeringcameras"
+	icon_keyboard = "power_key"
+	icon_screen = "engie_cams"
 	circuit = /obj/item/weapon/circuitboard/security/engineering
 	light_color = "#FAC54B"
 
@@ -252,3 +257,7 @@
 	icon_state = "syndicam"
 	network = list("NUKE")
 	circuit = null
+
+/obj/machinery/computer/security/nuclear/New()
+	..()
+	req_access = list(150)

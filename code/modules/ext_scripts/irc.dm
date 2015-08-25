@@ -1,7 +1,8 @@
 /proc/send2irc(var/channel, var/msg)
 	if(config.use_irc_bot && config.irc_bot_host)
 		if(config.irc_bot_export)
-			world.Export("http://[config.irc_bot_host]:45678?[list2params(list(pwd=config.comms_password, chan=channel, mesg=msg))]")
+			spawn(-1) // spawn here prevents hanging in the case that the bot isn't reachable
+				world.Export("http://[config.irc_bot_host]:45678?[list2params(list(pwd=config.comms_password, chan=channel, mesg=msg))]")
 		else
 			if(config.use_lib_nudge)
 				var/nudge_lib

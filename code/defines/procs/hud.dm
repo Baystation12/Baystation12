@@ -61,7 +61,7 @@ proc/can_process_hud(var/mob/M)
 	return 1
 
 //Deletes the current HUD images so they can be refreshed with new ones.
-mob/proc/regular_hud_updates() //Used in the life.dm of mobs that can use HUDs.
+mob/proc/handle_regular_hud_updates() //Used in the life.dm of mobs that can use HUDs.
 	if(client)
 		for(var/image/hud in client.images)
 			if(copytext(hud.icon_state,1,4) == "hud")
@@ -72,7 +72,7 @@ mob/proc/regular_hud_updates() //Used in the life.dm of mobs that can use HUDs.
 mob/proc/in_view(var/turf/T)
 	return view(T)
 
-/mob/aiEye/in_view(var/turf/T)
+/mob/eye/in_view(var/turf/T)
 	var/list/viewed = new
 	for(var/mob/living/carbon/human/H in mob_list)
 		if(get_dist(H, T) <= 7)

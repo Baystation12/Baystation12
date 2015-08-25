@@ -8,7 +8,6 @@
 	..()
 
 	if(stat != DEAD)
-		handle_chemicals_in_body()
 		handle_nutrition()
 
 		if (!client)
@@ -17,10 +16,6 @@
 				spawn()
 					handle_AI()
 			handle_speech_and_mood()
-
-	regular_hud_updates()
-
-	handle_regular_status_updates() // Status updates, death etc.
 
 /mob/living/carbon/slime/handle_environment(datum/gas_mixture/environment)
 	if(!environment)
@@ -74,7 +69,7 @@
 	temp_change = (temperature - current)
 	return temp_change
 
-/mob/living/carbon/slime/proc/handle_chemicals_in_body()
+/mob/living/carbon/slime/handle_chemicals_in_body()
 	chem_effects.Cut()
 	analgesic = 0
 
@@ -89,7 +84,7 @@
 
 	return //TODO: DEFERRED
 
-/mob/living/carbon/slime/proc/handle_regular_status_updates()
+/mob/living/carbon/slime/handle_regular_status_updates()
 
 	src.blinded = null
 
@@ -205,9 +200,12 @@
 	if(hungry == 2 && !client) // if a slime is starving, it starts losing its friends
 		if(Friends.len > 0 && prob(1))
 			var/mob/nofriend = pick(Friends)
-			--Friends[nofriend]
-			if (Friends[nofriend] <= 0)
-				Friends -= nofriend
+			if(nofriend && Friends[nofriend])
+				Friends[nofriend] -= 1
+				if (Friends[nofriend] <= 0)
+					Friends[nofriend] = null
+					Friends -= nofriend
+					Friends -= null
 
 	if(!Target)
 		if(will_hunt(hungry) || attacked || rabid) // Only add to the list if we need to

@@ -15,6 +15,12 @@
 	response_harm   = "whacks"
 	harm_intent_damage = 5
 	var/datum/seed/seed
+	var/harvest_time
+	var/min_explode_time = 1200
+
+/mob/living/simple_animal/mushroom/New()
+	..()
+	harvest_time = world.time
 
 /mob/living/simple_animal/mushroom/verb/spawn_spores()
 
@@ -31,6 +37,10 @@
 		usr << "<span class='danger'>You are sterile!</span>"
 		return
 
+	if(world.time < harvest_time + min_explode_time)
+		usr << "<span class='danger'>You are not mature enough for that.</span>"
+		return
+
 	spore_explode()
 
 /mob/living/simple_animal/mushroom/death()
@@ -40,15 +50,13 @@
 	..()
 
 /mob/living/simple_animal/mushroom/proc/spore_explode()
-
 	if(!seed)
 		return
-
-	var/list/target_turfs = list()
-	for(var/turf/new_turf in orange(1,src))
-		if(prob(60) && !new_turf.density && src.Adjacent(new_turf)) target_turfs |= new_turf
-	for(var/turf/target_turf in target_turfs)
-		new /obj/machinery/portable_atmospherics/hydroponics/soil/invisible(target_turf,seed)
+	if(world.time < harvest_time + min_explode_time)
+		return
+	for(var/turf/simulated/target_turf in orange(1,src))
+		if(prob(60) && !target_turf.density && src.Adjacent(target_turf))
+			new /obj/machinery/portable_atmospherics/hydroponics/soil/invisible(target_turf,seed)
 	seed.thrown_at(src,get_turf(src),1)
 	if(src)
 		gib()

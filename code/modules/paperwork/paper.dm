@@ -8,6 +8,7 @@
 	gender = PLURAL
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "paper"
+	item_state = "paper"
 	throwforce = 0
 	w_class = 1.0
 	throw_range = 1
@@ -106,6 +107,15 @@
 	return
 
 /obj/item/weapon/paper/attack_self(mob/living/user as mob)
+	if(user.a_intent == I_HURT)
+		if(icon_state == "scrap")
+			user.show_message("<span class='warning'>\The [src] is already crumpled.</span>")
+			return
+		//crumple dat paper
+		info = stars(info,85)
+		user.visible_message("\The [user] crumples \the [src] into a ball!")
+		icon_state = "scrap"
+		return
 	user.examinate(src)
 	if(rigged && (Holiday == "April Fool's Day"))
 		if(spam_flag == 0)
@@ -441,6 +451,10 @@
 		B.update_icon()
 
 	else if(istype(P, /obj/item/weapon/pen))
+		if(icon_state == "scrap")
+			usr << "<span class='warning'>\The [src] is too crumpled to write on.</span>"
+			return
+
 		var/obj/item/weapon/pen/robopen/RP = P
 		if ( istype(RP) && RP.mode == 2 )
 			RP.RenamePaper(user,src)
