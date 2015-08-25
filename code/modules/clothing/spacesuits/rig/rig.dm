@@ -621,16 +621,14 @@
 						use_obj.loc = src
 
 		else if (deploy_mode != ONLY_RETRACT)
-			if(check_slot)
-				if(check_slot != use_obj)
-					H << "<span class='danger'>You are unable to deploy \the [piece] as \the [check_slot] [check_slot.gender == PLURAL ? "are" : "is"] in the way.</span>"
+			if(check_slot && check_slot == use_obj)
 				return
+			use_obj.loc = H
+			if(!H.equip_to_slot_if_possible(use_obj, equip_to, 0, 1))
+				use_obj.loc = src
+				H << "<span class='danger'>You are unable to deploy \the [piece] as \the [check_slot] [check_slot.gender == PLURAL ? "are" : "is"] in the way.</span>"
 			else
-				use_obj.loc = H
-				if(!H.equip_to_slot_if_possible(use_obj, equip_to, 0))
-					use_obj.loc = src
-				else
-					H << "<font color='blue'><b>Your [use_obj.name] [use_obj.gender == PLURAL ? "deploy" : "deploys"] swiftly.</b></span>"
+				H << "<font color='blue'><b>Your [use_obj.name] [use_obj.gender == PLURAL ? "deploy" : "deploys"] swiftly.</b></span>"
 
 	if(piece == "helmet" && helmet)
 		helmet.update_light(H)
