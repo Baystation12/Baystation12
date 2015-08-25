@@ -210,7 +210,7 @@
 		return 1
 	else
 		return 0
-*/
+
 
 //spears, bay edition
 /obj/item/weapon/material/twohanded/spear
