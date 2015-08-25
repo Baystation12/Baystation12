@@ -144,7 +144,7 @@
 /datum/reagent/cryoxadone/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(M.bodytemperature < 170)
 		M.adjustCloneLoss(-30 * removed)
-		M.adjustOxyLoss(-3 * removed)
+		M.adjustOxyLoss(-30 * removed)
 		M.heal_organ_damage(30 * removed, 30 * removed)
 		M.adjustToxLoss(-30 * removed)
 
