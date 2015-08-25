@@ -167,6 +167,11 @@
 		else if(istype(A,/obj/effect/plant))
 			var/obj/effect/plant/P = A
 			P.die_off()
+			
+/*
+/* 
+ * Double-Bladed Energy Swords - Cheridan 
+ */ 
 
 /obj/item/weapon/material/twohanded/dualsaber
 	icon_state = "dualsaber0"
