@@ -101,8 +101,8 @@
 		if(ui)
 			ui.close()
 		return 0
-	if(NM)
-		NM.ui_interact(user, ui_key, ui, force_open)
+	if(istype(NM))
+		NM.ui_interact(user, ui_key, null, force_open)
 		return 0
 	return 1
 

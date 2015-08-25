@@ -52,7 +52,7 @@
 	name = "laptop computer"
 	desc = "A portable computer"
 	var/obj/item/laptop/portable = null						// Portable version of this computer, dropped on alt-click to allow transport. Used by laptops.
-	battery_powered = 1										// Laptops have integrated battery
+	hardware_flag = PROGRAM_LAPTOP
 	icon_state_unpowered = "laptop-open"					// Icon state when the computer is turned off
 	icon = 'icons/obj/modular_laptop.dmi'
 	icon_state = "laptop-open"

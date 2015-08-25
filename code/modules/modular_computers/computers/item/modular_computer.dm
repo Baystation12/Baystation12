@@ -10,7 +10,7 @@
 	var/open = 1											// Whether the computer is active/opened/it's screen is on.
 	var/datum/computer_file/program/active_program = null	// A currently active program running on the computer.
 	var/hardware_flag = 0									// A flag that describes this device type
-
+	var/last_power_usage = 0
 	// Modular computers can run on various devices. Each DEVICE (Laptop, Console, Tablet,..)
 	// must have it's own DMI file. Icon states must be called exactly the same in all files, but may look differently
 	// If you create a program which is limited to Laptops and Consoles you don't have to add it's icon_state overlay for Tablets too, for example.
@@ -148,6 +148,7 @@
 // Process currently calls handle_power(), may be expanded in future if more things are added.
 /obj/item/modular_computer/process()
 	if(!enabled) // The computer is turned off
+		last_power_usage = 0
 		return 0
 
 	if(active_program && active_program.requires_ntnet && !get_ntnet_status(active_program.requires_ntnet_feature)) // Active program requires NTNet to run but we've just lost connection. Crash.
@@ -188,6 +189,8 @@
 			data["PC_ntneticon"] = "sig_low.gif"
 		if(2)
 			data["PC_ntneticon"] = "sig_high.gif"
+		if(3)
+			data["PC_ntneticon"] = "sig_lan.gif"
 
 	data["PC_stationtime"] = worldtime2text()
 	data["PC_hasheader"] = 1
@@ -197,6 +200,9 @@
 // Installs programs necessary for computer function.
 // TODO: Implement program for downloading of other programs, and replace hardcoded program addition here
 /obj/item/modular_computer/proc/install_default_programs()
+	hard_drive.store_file(new/datum/computer_file/program/computerconfig(src)) // Computer configuration utility, allows hardware control and displays more info than status bar
+
+	//TODO: Remove once downloading is implemented
 	hard_drive.store_file(new/datum/computer_file/program/alarm_monitor(src))
 	hard_drive.store_file(new/datum/computer_file/program/power_monitor(src))
 	hard_drive.store_file(new/datum/computer_file/program/atmos_control(src))
@@ -226,6 +232,16 @@
 		return 1
 	if( href_list["PC_exit"] )
 		kill_program()
+		return
+	if( href_list["PC_enable_component"] )
+		var/datum/computer_hardware/H = find_hardware_by_name(href_list["PC_enable_component"])
+		if(H && istype(H) && !H.enabled)
+			H.enabled = 1
+		return
+	if( href_list["PC_disable_component"] )
+		var/datum/computer_hardware/H = find_hardware_by_name(href_list["PC_disable_component"])
+		if(H && istype(H) && H.enabled)
+			H.enabled = 0
 		return
 	if( href_list["PC_shutdown"] )
 		kill_program(1)
@@ -278,6 +294,7 @@
 
 	if(battery)
 		battery.use(power_usage * CELLRATE)
+	last_power_usage = power_usage
 
 /obj/item/modular_computer/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
 	if(istype(W, /obj/item/weapon/card/id)) // ID Card, try to insert it.
@@ -296,3 +313,15 @@
 		return
 
 	..()
+
+// Checks all hardware pieces to determine if name matches, if yes, returns the hardware piece, otherwise returns null
+/obj/item/modular_computer/proc/find_hardware_by_name(var/name)
+	if(hard_drive && (hard_drive.name == name))
+		return hard_drive
+	if(network_card && (network_card.name == name))
+		return network_card
+	if(nano_printer && (nano_printer.name == name))
+		return nano_printer
+	if(card_slot && (card_slot.name == name))
+		return card_slot
+	return null

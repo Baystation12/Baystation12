@@ -27,7 +27,7 @@
 	required_access = access_atmospherics
 	requires_ntnet = 1
 	requires_ntnet_feature = NTNET_SYSTEMCONTROL
-	usage_flags = PROGRAM_LAPTOP & PROGRAM_CONSOLE
+	usage_flags = PROGRAM_LAPTOP | PROGRAM_CONSOLE
 	size = 17
 
 /datum/computer_file/program/rcon_console
@@ -39,7 +39,7 @@
 	required_access = access_engine
 	requires_ntnet = 1
 	requires_ntnet_feature = NTNET_SYSTEMCONTROL
-	usage_flags = PROGRAM_LAPTOP & PROGRAM_CONSOLE
+	usage_flags = PROGRAM_LAPTOP | PROGRAM_CONSOLE
 	size = 25
 
 /datum/computer_file/program/suit_sensors
