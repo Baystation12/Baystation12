@@ -79,7 +79,6 @@
 	name = "\improper P.R.O.V.E. cartridge"
 	icon_state = "cart-s"
 	access_security = 1
-	access_status_display = 1
 
 /obj/item/weapon/cartridge/clown
 	name = "\improper Honkworks 5.0 cartridge"
