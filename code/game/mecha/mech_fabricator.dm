@@ -714,7 +714,7 @@
 			sleep(15)
 			src.visible_message("\icon[src] <b>[src]</b> beeps: \"User DB corrupted \[Code 0x00FA\]. Truncating data structure...\"")
 			sleep(30)
-			src.visible_message("\icon[src] <b>[src]</b> beeps: \"User DB truncated. Please contact your Nanotrasen system operator for future assistance.\"")
+			src.visible_message("\icon[src] <b>[src]</b> beeps: \"User DB truncated. Please contact your [company_name] system operator for future assistance.\"")
 			req_access = null
 			emagged = 1
 			return 1
@@ -722,7 +722,7 @@
 			src.visible_message("\icon[src] <b>[src]</b> beeps: \"DB not responding \[Code 0x0003\]...\"")
 		if(1)
 			src.visible_message("\icon[src] <b>[src]</b> beeps: \"No records in User DB\"")
-	
+
 /obj/machinery/mecha_part_fabricator/attackby(obj/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/weapon/screwdriver))
 		if (!opened)

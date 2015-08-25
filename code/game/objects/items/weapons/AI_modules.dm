@@ -35,7 +35,7 @@ AI MODULES
 			return
 
 		if(ticker && ticker.mode && ticker.mode.name == "blob")
-			usr << "Law uploads have been disabled by NanoTrasen!"
+			usr << "Law uploads have been disabled by [company_name]!"
 			return
 
 		if (comp.current.stat == 2 || comp.current.control_disabled == 1)

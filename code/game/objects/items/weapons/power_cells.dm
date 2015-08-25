@@ -40,7 +40,7 @@
 	charge = maxcharge
 
 /obj/item/weapon/cell/crap
-	name = "\improper Nanotrasen brand rechargable AA battery"
+	name = "\improper rechargable AA battery"
 	desc = "You can't top the plasma top." //TOTALLY TRADEMARK INFRINGEMENT
 	origin_tech = list(TECH_POWER = 0)
 	maxcharge = 500
@@ -107,7 +107,7 @@
 	origin_tech =  null
 	maxcharge = 30000 //determines how badly mobs get shocked
 	matter = list(DEFAULT_WALL_MATERIAL = 700, "glass" = 80)
-	
+
 	check_charge()
 		return 1
 	use()

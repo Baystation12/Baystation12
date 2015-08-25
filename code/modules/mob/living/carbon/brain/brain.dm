@@ -49,12 +49,12 @@
 			return 1
 		return ..()
 
-
 /mob/living/carbon/brain/update_canmove()
-	if(in_contents_of(/obj/mecha))
+	if(in_contents_of(/obj/mecha) || istype(loc, /obj/item/device/mmi))
 		canmove = 1
-		use_me = 1 //If it can move, let it emote
-	else							canmove = 0
+		use_me = 1
+	else
+		canmove = 0
 	return canmove
 
 /mob/living/carbon/brain/binarycheck()

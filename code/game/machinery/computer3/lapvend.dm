@@ -227,7 +227,7 @@
 				else
 					usr << "\icon[src]<span class='warning'>Unable to access account. Check security settings and try again.</span>"
 			else
-				usr << "\icon[src]<span class='warning'>Unable to access vendor account. Please record the machine ID and call CentComm Support.</span>"
+				usr << "\icon[src]<span class='warning'>Unable to access vendor account. Please record the machine ID and call [boss_short] Support.</span>"
 		else
 			transfer_and_vend(CH, C)
 
@@ -380,7 +380,7 @@
 					usr << "\icon[src]<span class='warning'>Unable to access account. Check security settings and try again.</span>"
 					return 0
 			else
-				usr << "\icon[src]<span class='warning'>Unable to access vendor account. Please record the machine ID and call CentComm Support.</span>"
+				usr << "\icon[src]<span class='warning'>Unable to access vendor account. Please record the machine ID and call [boss_short] Support.</span>"
 				return 0
 		else
 			transfer_and_reimburse(CH)

@@ -4,7 +4,7 @@
 
 /obj/item/weapon/rig/ert
 	name = "ERT-C hardsuit control module"
-	desc = "A suit worn by the commander of a NanoTrasen Emergency Response Team. Has blue highlights. Armoured and space ready."
+	desc = "A suit worn by the commander of an Emergency Response Team. Has blue highlights. Armoured and space ready."
 	suit_type = "ERT commander"
 	icon_state = "ert_commander_rig"
 
@@ -26,7 +26,7 @@
 
 /obj/item/weapon/rig/ert/engineer
 	name = "ERT-E suit control module"
-	desc = "A suit worn by the engineering division of a NanoTrasen Emergency Response Team. Has orange highlights. Armoured and space ready."
+	desc = "A suit worn by the engineering division of an Emergency Response Team. Has orange highlights. Armoured and space ready."
 	suit_type = "ERT engineer"
 	icon_state = "ert_engineer_rig"
 	armor = list(melee = 60, bullet = 50, laser = 30,energy = 15, bomb = 30, bio = 100, rad = 100)
@@ -41,7 +41,7 @@
 
 /obj/item/weapon/rig/ert/medical
 	name = "ERT-M suit control module"
-	desc = "A suit worn by the medical division of a NanoTrasen Emergency Response Team. Has white highlights. Armoured and space ready."
+	desc = "A suit worn by the medical division of an Emergency Response Team. Has white highlights. Armoured and space ready."
 	suit_type = "ERT medic"
 	icon_state = "ert_medical_rig"
 
@@ -54,7 +54,7 @@
 
 /obj/item/weapon/rig/ert/security
 	name = "ERT-S suit control module"
-	desc = "A suit worn by the security division of a NanoTrasen Emergency Response Team. Has red highlights. Armoured and space ready."
+	desc = "A suit worn by the security division of an Emergency Response Team. Has red highlights. Armoured and space ready."
 	suit_type = "ERT security"
 	icon_state = "ert_security_rig"
 
@@ -67,7 +67,7 @@
 
 /obj/item/weapon/rig/ert/assetprotection
 	name = "Heavy Asset Protection suit control module"
-	desc = "A heavy suit worn by the highest level of Nanotrasen Asset Protection, don't mess with the person wearing this. Armoured and space ready."
+	desc = "A heavy suit worn by the highest level of Asset Protection, don't mess with the person wearing this. Armoured and space ready."
 	suit_type = "heavy asset protection"
 	icon_state = "asset_protection_rig"
 	armor = list(melee = 60, bullet = 50, laser = 50,energy = 40, bomb = 40, bio = 100, rad = 100)
