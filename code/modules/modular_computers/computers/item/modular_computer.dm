@@ -91,13 +91,17 @@
 	else
 		overlays.Add(icon_state_menu)
 
+// Used by child types if they have other power source than battery
+/obj/item/modular_computer/proc/check_power_override()
+	return 0
+
 // Operates NanoUI
 /obj/item/modular_computer/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	if(!open || !enabled)
 		if(ui)
 			ui.close()
 		return 0
-	if(!battery || !battery.charge)
+	if((!battery || !battery.charge) && !check_power_override())
 		if(ui)
 			ui.close()
 		return 0
@@ -127,7 +131,7 @@
 	data["programs"] = programs
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
-		ui = new(user, src, ui_key, "laptop_mainscreen.tmpl", "NTOS-M Main Menu", 400, 500)
+		ui = new(user, src, ui_key, "laptop_mainscreen.tmpl", "NTOS Main Menu", 400, 500)
 		ui.auto_update_layout = 1
 		ui.set_initial_data(data)
 		ui.open()

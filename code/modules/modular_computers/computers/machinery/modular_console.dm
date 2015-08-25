@@ -20,4 +20,5 @@
 	tesla_link.critical = 1 // Consoles don't usually come with cells, and this prevents people from disabling their only power source, as they wouldn't be able to enable it again.
 	hard_drive = new/datum/computer_hardware/hard_drive/super(src) // Consoles generally have better HDDs due to lower space limitations
 	..()
+	shift_to_cpu()
 	update_icon()

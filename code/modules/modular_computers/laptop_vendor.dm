@@ -240,6 +240,7 @@ obj/machinery/lapvend/attackby(obj/item/weapon/W as obj, mob/user as mob)
 			if((devtype == 1) && fabricated_laptop)
 				fabricated_laptop.forceMove(src.loc)
 				fabricated_laptop.install_default_programs()
+				fabricated_laptop.shift_to_cpu()
 				fabricated_laptop.close_laptop()
 				fabricated_laptop = null
 			else if((devtype == 2) && fabricated_tablet)

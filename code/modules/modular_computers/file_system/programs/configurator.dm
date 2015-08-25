@@ -37,19 +37,13 @@
 
 	var/list/hardware = list()
 	if(stationary)
-		hardware.Add(stationary.network_card)
-		hardware.Add(stationary.hard_drive)
-		hardware.Add(stationary.tesla_link)
-		hardware.Add(stationary.card_slot)
-		hardware.Add(stationary.nano_printer)
-		data["disk_size"] = stationary.hard_drive.max_capacity
-		data["disk_used"] = stationary.hard_drive.used_capacity
-		data["power_usage"] = stationary.last_power_usage
-		data["battery_exists"] = stationary.battery ? 1 : 0
-		if(stationary.battery)
-			data["battery_rating"] = stationary.battery.maxcharge
-			data["battery_percent"] = round(stationary.battery.percent())
-	else if(movable)
+		if(stationary.cpu)
+			movable = stationary.cpu
+			hardware.Add(stationary.tesla_link)
+		else
+			return
+
+	if(movable)
 		hardware.Add(movable.network_card)
 		hardware.Add(movable.hard_drive)
 		hardware.Add(movable.card_slot)
