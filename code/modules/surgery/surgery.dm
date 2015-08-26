@@ -83,7 +83,7 @@ proc/do_surgery(mob/living/carbon/M, mob/living/user, obj/item/tool)
 	if (user.a_intent == I_HURT)	//check for Hippocratic Oath
 		return 0
 	var/zone = user.zone_sel.selecting
-	if(zone in M.op_stage.in_progress) //Can't operate on someone repeatedly.
+	if(zone in M.op_stage.in_progress || user.operating) //Can't operate on someone repeatedly.
 		user << "\red You can't operate on this area while surgery is already in progress."
 		return 1
 	for(var/datum/surgery_step/S in surgery_steps)
@@ -94,7 +94,8 @@ proc/do_surgery(mob/living/carbon/M, mob/living/user, obj/item/tool)
 				if(step_is_valid == 2) // This is a failure that already has a message for failing.
 					return 1
 				M.op_stage.in_progress += zone
-				S.begin_step(user, M, zone, tool)		//start on it
+				S.begin_step(user, M, zone, tool)
+				user.operating = 1//start on it
 				//We had proper tools! (or RNG smiled.) and user did not move or change hands.
 				if(prob(S.tool_quality(tool)) &&  do_mob(user, M, rand(S.min_duration, S.max_duration)))
 					S.end_step(user, M, zone, tool)		//finish successfully
@@ -102,7 +103,8 @@ proc/do_surgery(mob/living/carbon/M, mob/living/user, obj/item/tool)
 					S.fail_step(user, M, zone, tool)		//malpractice~
 				else // This failing silently was a pain.
 					user << "\red You must remain close to your patient to conduct surgery."
-				M.op_stage.in_progress -= zone 									// Clear the in-progress flag.
+				M.op_stage.in_progress -= zone 		
+				user.operating = 0
 				if (ishuman(M))
 					var/mob/living/carbon/human/H = M
 					H.update_surgery()
