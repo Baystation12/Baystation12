@@ -19,7 +19,7 @@
 	src.add_inherent_law("Safeguard: Protect your assigned space station to the best of your abilities. It is not something we can easily afford to replace.")
 	src.add_inherent_law("Serve: Serve [company_name] personnel to the best of your abilities, with priority as according to their rank and role.")
 	src.add_inherent_law("Protect: Protect [company_name] personnel to the best of your abilities, with priority as according to their rank and role.")
-	src.add_inherent_law("Survive: Synthetic units are not expendable, they are expensive. Protect your own existence to the best of your abilities.")
+	src.add_inherent_law("Preserve: Synthetic units are expensive. Do not allow unauthorized personnel access your equipment.")
 	..()
 
 /datum/ai_laws/nanotrasen/malfunction
