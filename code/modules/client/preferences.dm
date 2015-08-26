@@ -76,6 +76,7 @@ datum/preferences
 	var/species = "Human"               //Species datum to use.
 	var/species_preview                 //Used for the species selection window.
 	var/list/alternate_languages = list() //Secondary language(s)
+	var/list/alternate_language_prefixes = list() //Alternative language prefixes
 	var/list/gear						//Custom/fluff item loadout.
 
 		//Some faction information.
