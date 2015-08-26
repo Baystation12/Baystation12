@@ -324,8 +324,8 @@ var/list/sacrificed = list()
 		sleep(40)
 	if(victim && victim.loc == T && victim.stat == DEAD)
 		cult.add_cultiness(25)
-		var/obj/item/device/soulstone/full = new(get_turf(src))
-		for(var/mob/M in cultists | casters)
+		var/obj/item/device/soulstone/full/F = new(get_turf(src))
+		for(var/mob/M in cultists | get_cultists())
 			M << "<span class='warning'>The Geometer of Blood accepts this sacrifice.</span>"
 		//TODO: handle sac target, other rewards?
 		/*

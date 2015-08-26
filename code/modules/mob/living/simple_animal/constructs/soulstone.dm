@@ -46,7 +46,7 @@
 		user.pay_for_rune(1)
 		var/datum/ghosttrap/cult/shade/S = get_ghost_trap("shade")
 		S.request_player(src, "The soul stone shade summon ritual has been performed. ")
-	else if(shade.loc = src)
+	else if(shade.loc == src)
 		shade.forceMove(get_turf(src))
 		user << "<span class='notice'>You summon \the [shade].</span>"
 		return
@@ -69,7 +69,7 @@
 		var/obj/item/device/soulstone/S = I
 		if(!S.shade || S.shade.loc != S)
 			return
-		var/construct = alert(U, "Please choose which type of construct you wish to create.",,"Artificer", "Wraith", "Juggernaut")
+		var/construct = alert(user, "Please choose which type of construct you wish to create.",,"Artificer", "Wraith", "Juggernaut")
 		var/ctype
 		switch(construct)
 			if("Artificer")
@@ -111,11 +111,10 @@
 
 
 						Z << "<B>You are playing a Juggernaut. Though slow, you can withstand extreme punishment, and rip apart enemies and walls alike.</B>"
-						Z << "<B>You are still bound to serve your creator, follow their orders and help them complete their goals at all costs.</B>"
 
 						Z << "<B>You are playing a Wraith. Though relatively fragile, you are fast, deadly, and even able to phase through walls.</B>"
-						Z << "<B>You are still bound to serve your creator, follow their orders and help them complete their goals at all costs.</B>"
 
 						Z << "<B>You are playing an Artificer. You are incredibly weak and fragile, but you are able to construct fortifications, repair allied constructs (by clicking on them), and even create new constructs</B>"
+						
 						Z << "<B>You are still bound to serve your creator, follow their orders and help them complete their goals at all costs.</B>"
 							*/
