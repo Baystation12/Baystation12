@@ -691,7 +691,9 @@ var/list/gamemode_cache = list()
 					config.aggressive_changelog = 1
 
 				if("default_language_prefixes")
-					language_prefixes = text2list(value, " ")
+					var/list/values = text2list(value, " ")
+					if(values.len > 0)
+						language_prefixes = values
 
 				else
 					log_misc("Unknown setting in configuration: '[name]'")
