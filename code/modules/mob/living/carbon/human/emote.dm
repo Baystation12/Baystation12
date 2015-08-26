@@ -601,13 +601,13 @@
 		if("swish")
 			src.animate_tail_once()
 
-		if("wag", "sway")
+		if("wag" || "sway")
 			src.animate_tail_start()
 
-		if("qwag", "fastsway")
+		if("qwag" || "fastsway")
 			src.animate_tail_fast()
 
-		if("swag", "stopsway")
+		if("swag" || "stopsway")
 			src.animate_tail_stop()
 
 		if ("help")
