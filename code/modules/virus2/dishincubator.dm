@@ -128,7 +128,7 @@
 		nanomanager.update_uis(src)
 
 	if(beaker)
-		if(!beaker.reagents.remove_reagent("virusfood",5))
+		if(beaker.reagents.remove_reagent("virusfood",5))
 			foodsupply += 10
 			nanomanager.update_uis(src)
 
