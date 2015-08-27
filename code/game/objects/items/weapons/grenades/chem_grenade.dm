@@ -2,7 +2,7 @@
 	name = "grenade casing"
 	icon_state = "chemg"
 	item_state = "grenade"
-	desc = "A hand made chemical grenade."
+	desc = "A hand-made chemical grenade."
 	w_class = 2.0
 	force = 2.0
 	det_time = null
@@ -51,10 +51,10 @@
 		if(istype(W,/obj/item/device/assembly_holder) && (!stage || stage==1) && path != 2)
 			var/obj/item/device/assembly_holder/det = W
 			if(istype(det.a_left,det.a_right.type) || (!isigniter(det.a_left) && !isigniter(det.a_right)))
-				user << "\red Assembly must contain one igniter."
+				user << "\red The assembly must contain one igniter."
 				return
 			if(!det.secured)
-				user << "\red Assembly must be secured with screwdriver."
+				user << "\red the assembly must be secured with a screwdriver."
 				return
 			path = 1
 			user << "\blue You add [W] to the metal casing."
@@ -99,7 +99,7 @@
 		else if(is_type_in_list(W, allowed_containers) && (!stage || stage==1) && path != 2)
 			path = 1
 			if(beakers.len == 2)
-				user << "\red The grenade can not hold more containers."
+				user << "\red The grenade cannot hold more containers."
 				return
 			else
 				if(W.reagents.total_volume)

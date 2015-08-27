@@ -1,7 +1,7 @@
 //replaces our stun baton code with /tg/station's code
 /obj/item/weapon/melee/baton
 	name = "stunbaton"
-	desc = "A stun baton for incapacitating people with."
+	desc = "An electrically charged baton, used for incapacitating unruly criminals."
 	icon_state = "stunbaton"
 	item_state = "baton"
 	slot_flags = SLOT_BELT

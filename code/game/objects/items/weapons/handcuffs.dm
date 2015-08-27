@@ -23,7 +23,7 @@
 		return
 
 	if ((CLUMSY in user.mutations) && prob(50))
-		user << "<span class='warning'>Uh ... how do those things work?!</span>"
+		user << "<span class='warning'>Uh ... how do these things work?!</span>"
 		place_handcuffs(user, user)
 		return
 

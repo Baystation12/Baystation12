@@ -65,7 +65,7 @@
 //Telescopic baton
 /obj/item/weapon/melee/telebaton
 	name = "telescopic baton"
-	desc = "A compact yet rebalanced personal defense weapon. Can be concealed when folded."
+	desc = "A compact yet balanced personal defense weapon. Can be concealed when folded."
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "telebaton_0"
 	item_state = "telebaton_0"

@@ -980,7 +980,7 @@ datum/design/circuit/gas_cooler
 
 datum/design/circuit/secure_airlock
 	name = "secure airlock electronics"
-	desc =  "Allows for the construction of a tamper-resistant airlock electronics."
+	desc =  "Allows for the construction of tamper-resistant airlock electronics."
 	id = "securedoor"
 	req_tech = list("programming" = 3)
 	build_path = /obj/item/weapon/airlock_electronics/secure
@@ -1457,7 +1457,7 @@ datum/design/item/hud/AssembleDesignName()
 	name = "HUD glasses prototype ([item_name])"
 
 datum/design/item/hud/AssembleDesignDesc()
-	desc = "Allows for the construction of \a [item_name] HUD glasses."
+	desc = "Allows for the construction of [item_name] HUD glasses."
 
 datum/design/item/hud/health
 	name = "health scanner"
@@ -1568,7 +1568,7 @@ datum/design/item/borg_syndicate_module
 
 datum/design/item/mesons
 	name = "Optical meson scanners design"
-	desc = "Using the meson-scanning technology those glasses allow you to see through walls, floor or anything else."
+	desc = "Using meson-scanning technology these glasses allow you to see through walls, floors or anything else."
 	id = "mesons"
 	req_tech = list("magnets" = 2, "engineering" = 2)
 	materials = list("$metal" = 50, "$glass" = 50)

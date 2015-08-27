@@ -3,7 +3,7 @@
 
 /obj/item/weapon/shield/riot
 	name = "riot shield"
-	desc = "A shield adept at blocking blunt objects from connecting with the torso of the shield wielder."
+	desc = "A shield adept at blocking blunt objects from connecting with the torso of the wielder."
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "riot"
 	flags = CONDUCT
