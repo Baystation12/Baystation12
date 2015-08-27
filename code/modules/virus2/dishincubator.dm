@@ -128,7 +128,7 @@
 		nanomanager.update_uis(src)
 
 	if(beaker)
-		if(beaker.reagents.remove_reagent("virusfood",5) && foodsupply < 100)
+		if(foodsupply < 100 && beaker.reagents.remove_reagent("virusfood",5))
 			if(foodsupply + 10 <= 100)
 				foodsupply += 10
 			else
@@ -177,10 +177,7 @@
 		return 1
 
 	if (href_list["rad"])
-		if(radiation + 10 > 100)
-			radiation = 100
-		else
-			radiation += 10
+		radiation = min(100, radiation + 10)
 		return 1
 
 	if (href_list["flush"])
