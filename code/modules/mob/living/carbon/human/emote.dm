@@ -15,67 +15,10 @@
 	for (var/obj/item/weapon/implant/I in src)
 		if (I.implanted)
 			I.trigger(act, src)
-	switch(act)
-		if("ping","buzz","beep")
-			if (species.name == "Machine")		//Only Machines can beep, ping, and buzz
-			else			//Everyone else fails, skip the emote attempt
-				return
-
-	switch(act)
-		if("ping")
-			var/M = null
-			if(param)
-				for (var/mob/A in view(null, null))
-					if (param == A.name)
-						M = A
-						break
-			if(!M)
-				param = null
-
-			if (param)
-				message = "<B>[src]</B> pings at [param]."
-			else
-				message = "<B>[src]</B> pings."
-			playsound(src.loc, 'sound/machines/ping.ogg', 50, 0)
-			m_type = 1
-
-		if("buzz")
-			var/M = null
-			if(param)
-				for (var/mob/A in view(null, null))
-					if (param == A.name)
-						M = A
-						break
-			if(!M)
-				param = null
-
-			if (param)
-				message = "<B>[src]</B> buzzes at [param]."
-			else
-				message = "<B>[src]</B> buzzes."
-			playsound(src.loc, 'sound/machines/buzz-sigh.ogg', 50, 0)
-			m_type = 1
-
-		if("beep")
-			var/M = null
-			if(param)
-				for (var/mob/A in view(null, null))
-					if (param == A.name)
-						M = A
-						break
-			if(!M)
-				param = null
-
-			if (param)
-				message = "<B>[src]</B> beeps at [param]."
-			else
-				message = "<B>[src]</B> beeps."
-			playsound(src.loc, 'sound/machines/twobeep.ogg', 50, 0)
-			m_type = 1
 
 	if(src.stat == 2.0 && (act != "deathgasp"))
 		return
-
+	switch(act)
 		if ("airguitar")
 			if (!src.restrained())
 				message = "<B>[src]</B> is strumming the air and headbanging like a safari chimp."
@@ -601,13 +544,13 @@
 		if("swish")
 			src.animate_tail_once()
 
-		if("wag", "sway")
+		if("wag" || "sway")
 			src.animate_tail_start()
 
-		if("qwag", "fastsway")
+		if("qwag" || "fastsway")
 			src.animate_tail_fast()
 
-		if("swag", "stopsway")
+		if("swag" || "stopsway")
 			src.animate_tail_stop()
 
 		if ("help")
