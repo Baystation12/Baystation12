@@ -213,7 +213,7 @@
 
 /obj/item/weapon/SWF_uplink
 	name = "station-bounced radio"
-	desc = "used to comunicate it appears."
+	desc = "It appears to be used for communication."
 	icon = 'icons/obj/radio.dmi'
 	icon_state = "radio"
 	var/temp = null
@@ -252,7 +252,7 @@
 
 /obj/item/weapon/staff/gentcane
 	name = "Gentlemans Cane"
-	desc = "An ebony can with an ivory tip."
+	desc = "An ebony cane with an ivory tip."
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "cane"
 	item_state = "stick"
@@ -449,7 +449,7 @@
 
 /obj/item/weapon/stock_parts/matter_bin
 	name = "matter bin"
-	desc = "A container for hold compressed matter awaiting re-construction."
+	desc = "A container for holding compressed matter awaiting re-construction."
 	icon_state = "matter_bin"
 	origin_tech = "materials=1"
 	matter = list(DEFAULT_WALL_MATERIAL = 80)
@@ -489,7 +489,7 @@
 
 /obj/item/weapon/stock_parts/matter_bin/adv
 	name = "advanced matter bin"
-	desc = "A container for hold compressed matter awaiting re-construction."
+	desc = "A container for holding compressed matter awaiting re-construction."
 	icon_state = "advanced_matter_bin"
 	origin_tech = "materials=3"
 	rating = 2
@@ -529,7 +529,7 @@
 
 /obj/item/weapon/stock_parts/matter_bin/super
 	name = "super matter bin"
-	desc = "A container for hold compressed matter awaiting re-construction."
+	desc = "A container for holding compressed matter awaiting re-construction."
 	icon_state = "super_matter_bin"
 	origin_tech = "materials=5"
 	rating = 3

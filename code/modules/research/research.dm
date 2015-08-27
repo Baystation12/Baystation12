@@ -196,7 +196,7 @@ datum/tech/engineering
 
 datum/tech/phorontech
 	name = "Phoron Research"
-	desc = "Research into the mysterious substance colloqually known as 'phoron'."
+	desc = "Research into the mysterious substance colloquially known as 'phoron'."
 	id = "phorontech"
 
 datum/tech/powerstorage
