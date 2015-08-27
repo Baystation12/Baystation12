@@ -208,7 +208,7 @@
 
 
 /mob/living/carbon/human/show_inv(mob/user as mob)
-	if(user.incapacitated())
+	if(user.incapacitated()  || !user.Adjacent(src))
 		return
 
 	var/obj/item/clothing/under/suit = null
