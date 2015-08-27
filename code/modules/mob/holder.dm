@@ -57,7 +57,7 @@
 
 /obj/item/weapon/holder/diona
 	name = "diona nymph"
-	desc = "It's a tiny plant critter."
+	desc = "It's some sort of slug puppy made of plants."
 	icon_state = "nymph"
 	origin_tech = "magnets=3;biotech=5"
 	slot_flags = SLOT_HEAD | SLOT_OCLOTHING
