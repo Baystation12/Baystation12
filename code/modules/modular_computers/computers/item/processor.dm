@@ -10,9 +10,19 @@
 
 	var/obj/machinery/modular_computer/machinery_computer = null
 
-// Process is handled via machinery half of this, due to power interaction.
-/obj/item/modular_computer/processor/process()
-	return PROCESS_KILL
+// Due to how processes work, we'd receive two process calls - one from machinery type and one from our own type.
+// Since we want this to be in-sync with machinery (as it's hidden type for machinery-based computers) we'll ignore
+// non-relayed process calls.
+/obj/item/modular_computer/processor/process(var/relayed = 0)
+	if(relayed)
+		..()
+	else
+		return
+
+// Power interaction is handled by our machinery part, due to machinery having APC connection.
+/obj/item/modular_computer/processor/handle_power()
+	if(machinery_computer)
+		machinery_computer.handle_power()
 
 /obj/item/modular_computer/processor/New(var/comp)
 	if(!comp || !istype(comp, /obj/machinery/modular_computer))
@@ -21,29 +31,6 @@
 	// Obtain reference to machinery computer
 	machinery_computer = comp
 	machinery_computer.cpu = src
-	// Now steal the computer's components and assume them as our own. The computer will send us commands, we'll do most of the work.
-	hard_drive = machinery_computer.hard_drive
-	machinery_computer.hard_drive = null
-	if(hard_drive)
-		hard_drive.holder2 = src
-		hard_drive.holder = null
-	network_card = machinery_computer.network_card
-	machinery_computer.network_card = null
-	if(network_card)
-		network_card.holder2 = src
-		network_card.holder = null
-	nano_printer = machinery_computer.nano_printer
-	machinery_computer.nano_printer = null
-	if(nano_printer)
-		nano_printer.holder = src
-		nano_printer.holder = null
-	card_slot = machinery_computer.card_slot
-	machinery_computer.card_slot = null
-	if(card_slot)
-		card_slot.holder2 = src
-		card_slot.holder = null
-	battery = machinery_computer.battery
-	machinery_computer.battery = null
 	hardware_flag = machinery_computer.hardware_flag
 
 /obj/item/modular_computer/processor/find_hardware_by_name(var/N)
@@ -53,9 +40,13 @@
 	else
 		return ..()
 
+/obj/item/modular_computer/processor/update_icon()
+	if(machinery_computer)
+		return machinery_computer.update_icon()
+
 /obj/item/modular_computer/processor/get_header_data()
 	var/list/L = ..()
-	if(machinery_computer.tesla_link && machinery_computer.tesla_link.enabled)
+	if(machinery_computer.tesla_link && machinery_computer.tesla_link.enabled && machinery_computer.powered())
 		L["PC_apclinkicon"] = "charging.gif"
 	return L
 
@@ -65,11 +56,19 @@
 		return 0
 	if(!machinery_computer.tesla_link || !machinery_computer.tesla_link.enabled)
 		return 0
-	return 1
+	return machinery_computer.powered()
 
-//
+// This thing is not meant to be used on it's own, get topic data from our machinery owner.
 /obj/item/modular_computer/processor/CanUseTopic(user, state)
 	if(!machinery_computer)
 		return 0
 	return machinery_computer.CanUseTopic(user, state)
 
+/obj/item/modular_computer/processor/shutdown_computer()
+	if(!machinery_computer)
+		return
+	kill_program(1)
+	visible_message("\The [machinery_computer] shuts down.")
+	enabled = 0
+	machinery_computer.update_icon()
+	return

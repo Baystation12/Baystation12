@@ -38,7 +38,8 @@
 	stored_computer.forceMove(src.loc)
 	stored_computer.stat &= ~MAINT
 	stored_computer.update_icon()
-	stored_computer.open = 1
+	if(stored_computer.cpu)
+		stored_computer.cpu.screen_on = 1
 	loc = stored_computer
 	usr << "You open \the [src]."
 
@@ -56,6 +57,9 @@
 	icon_state_unpowered = "laptop-open"					// Icon state when the computer is turned off
 	icon = 'icons/obj/modular_laptop.dmi'
 	icon_state = "laptop-open"
+	nokeyboard = 1
+	base_idle_power_usage = 25
+	base_active_power_usage = 200
 
 // Close the computer. collapsing it into movable item that can't be used.
 /obj/machinery/modular_computer/laptop/verb/close_computer()
@@ -88,7 +92,8 @@
 	stat |= MAINT
 	if(user)
 		user << "You close \the [src]."
-	open = 0
+	if(cpu)
+		cpu.screen_on = 0
 
 /obj/machinery/modular_computer/laptop/AltClick()
 	if(Adjacent(usr))

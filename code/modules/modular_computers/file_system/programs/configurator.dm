@@ -9,6 +9,8 @@
 	unsendable = 1
 	undeletable = 1
 	size = 2
+	available_on_ntnet = 0
+	requires_ntnet = 0
 	nanomodule_path = /datum/nano_module/computer_configurator/
 
 /datum/nano_module/computer_configurator

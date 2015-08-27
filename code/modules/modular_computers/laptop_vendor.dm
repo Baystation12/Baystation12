@@ -49,43 +49,43 @@
 	if(devtype == 1) 		// Laptop, generally cheaper to make it accessible for most station roles
 		if(fabricate)
 			fabricated_laptop = new(src)
-			fabricated_laptop.battery = new(fabricated_laptop)
+			fabricated_laptop.cpu.battery = new(fabricated_laptop.cpu)
 		total_price = 99
 		switch(dev_battery)
 			if(1) // Basic(500C)
 				if(fabricate)
-					fabricated_laptop.battery.maxcharge = 500
-					fabricated_laptop.battery.charge = 500
+					fabricated_laptop.cpu.battery.maxcharge = 500
+					fabricated_laptop.cpu.battery.charge = 500
 			if(2) // Upgraded(1000C)
 				if(fabricate)
-					fabricated_laptop.battery.maxcharge = 1000
-					fabricated_laptop.battery.charge = 1000
+					fabricated_laptop.cpu.battery.maxcharge = 1000
+					fabricated_laptop.cpu.battery.charge = 1000
 				total_price += 199
 			if(3) // Advanced(1500C)
 				if(fabricate)
-					fabricated_laptop.battery.maxcharge = 1500
-					fabricated_laptop.battery.charge = 1500
+					fabricated_laptop.cpu.battery.maxcharge = 1500
+					fabricated_laptop.cpu.battery.charge = 1500
 				total_price += 499
 		switch(dev_disk)
 			if(1) // Basic(128GQ)
 				if(fabricate)
-					fabricated_laptop.hard_drive = new/datum/computer_hardware/hard_drive(fabricated_laptop)
+					fabricated_laptop.cpu.hard_drive = new/datum/computer_hardware/hard_drive(fabricated_laptop.cpu)
 			if(2) // Upgraded(256GQ)
 				if(fabricate)
-					fabricated_laptop.hard_drive = new/datum/computer_hardware/hard_drive/advanced(fabricated_laptop)
+					fabricated_laptop.cpu.hard_drive = new/datum/computer_hardware/hard_drive/advanced(fabricated_laptop.cpu)
 				total_price += 99
 			if(3) // Advanced(512GQ)
 				if(fabricate)
-					fabricated_laptop.hard_drive = new/datum/computer_hardware/hard_drive/super(fabricated_laptop)
+					fabricated_laptop.cpu.hard_drive = new/datum/computer_hardware/hard_drive/super(fabricated_laptop.cpu)
 				total_price += 299
 		switch(dev_netcard)
 			if(1) // Basic(Short-Range)
 				if(fabricate)
-					fabricated_laptop.network_card = new/datum/computer_hardware/network_card(fabricated_laptop)
+					fabricated_laptop.cpu.network_card = new/datum/computer_hardware/network_card(fabricated_laptop.cpu)
 				total_price += 99
 			if(2) // Advanced (Long Range)
 				if(fabricate)
-					fabricated_laptop.network_card = new/datum/computer_hardware/network_card/advanced(fabricated_laptop)
+					fabricated_laptop.cpu.network_card = new/datum/computer_hardware/network_card/advanced(fabricated_laptop.cpu)
 				total_price += 299
 		if(dev_tesla)
 			total_price += 399
@@ -94,11 +94,11 @@
 		if(dev_nanoprint)
 			total_price += 99
 			if(fabricate)
-				fabricated_laptop.nano_printer = new/datum/computer_hardware/nano_printer(fabricated_laptop)
+				fabricated_laptop.cpu.nano_printer = new/datum/computer_hardware/nano_printer(fabricated_laptop.cpu)
 		if(dev_card)
 			total_price += 199
 			if(fabricate)
-				fabricated_laptop.card_slot = new/datum/computer_hardware/card_slot(fabricated_laptop)
+				fabricated_laptop.cpu.card_slot = new/datum/computer_hardware/card_slot(fabricated_laptop.cpu)
 
 		return total_price
 	else if(devtype == 2) 	// Tablet, more expensive, not everyone could probably afford this.
@@ -240,7 +240,6 @@ obj/machinery/lapvend/attackby(obj/item/weapon/W as obj, mob/user as mob)
 			if((devtype == 1) && fabricated_laptop)
 				fabricated_laptop.forceMove(src.loc)
 				fabricated_laptop.install_default_programs()
-				fabricated_laptop.shift_to_cpu()
 				fabricated_laptop.close_laptop()
 				fabricated_laptop = null
 			else if((devtype == 2) && fabricated_tablet)

@@ -7,6 +7,7 @@
 	program_icon_state = "power_monitor"
 	keyboard_icon_state = "keyboard9"
 	requires_ntnet = 1
+	network_destination = "power monitoring system"
 	size = 8
 
 /datum/computer_file/program/alarm_monitor
@@ -16,6 +17,7 @@
 	program_icon_state = "alarm_monitor"
 	keyboard_icon_state = "keyboard4"
 	requires_ntnet = 1
+	network_destination = "alarm monitoring network"
 	size = 5
 
 /datum/computer_file/program/atmos_control
@@ -26,6 +28,7 @@
 	keyboard_icon_state = "keyboard4"
 	required_access = access_atmospherics
 	requires_ntnet = 1
+	network_destination = "atmospheric control system"
 	requires_ntnet_feature = NTNET_SYSTEMCONTROL
 	usage_flags = PROGRAM_LAPTOP | PROGRAM_CONSOLE
 	size = 17
@@ -38,6 +41,7 @@
 	keyboard_icon_state = "keyboard1"
 	required_access = access_engine
 	requires_ntnet = 1
+	network_destination = "RCON remote control system"
 	requires_ntnet_feature = NTNET_SYSTEMCONTROL
 	usage_flags = PROGRAM_LAPTOP | PROGRAM_CONSOLE
 	size = 25
@@ -49,4 +53,5 @@
 	program_icon_state = "crew"
 	keyboard_icon_state = "keyboard7"
 	requires_ntnet = 1
+	network_destination = "crew lifesigns monitoring system"
 	size = 20

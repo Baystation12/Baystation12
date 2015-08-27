@@ -10,19 +10,22 @@
 	if(!holder)
 		return ..()
 
-	holder.stored_files -= src
+	holder.remove_file(src)
 	// holder.holder is the computer that has drive installed. If we are Destroy()ing program that's currently running kill it.
-	if(holder.holder && holder.holder.active_program == src)
-		holder.holder.kill_program(1)
+	if(holder.holder2 && holder.holder2.active_program == src)
+		holder.holder2.kill_program(1)
 	holder = null
 	..()
 
 // Returns independent copy of this file.
-/datum/computer_file/proc/clone()
-	var/datum/computer_file/temp
+/datum/computer_file/proc/clone(var/rename = 0)
+	var/datum/computer_file/temp = new type
 	temp.unsendable = unsendable
 	temp.undeletable = undeletable
 	temp.size = size
-	temp.filename = filename + "(Copy)"
+	if(rename)
+		temp.filename = filename + "(Copy)"
+	else
+		temp.filename = filename
 	temp.filetype = filetype
 	return temp

@@ -47,6 +47,7 @@
 	if(F in stored_files)
 		return 0
 
+	F.holder = src
 	stored_files.Add(F)
 	recalculate_size()
 	return 1
@@ -84,6 +85,18 @@
 		return 0
 	else
 		return 1
+
+// Checks whether we can store the file. We can only store unique files, so this checks whether we wouldn't get a duplicity by adding a file.
+/datum/computer_hardware/hard_drive/proc/try_store_file(var/datum/computer_file/F)
+	if(!F || !istype(F))
+		return 0
+	var/name = F.filename + "." + F.filetype
+	for(var/datum/computer_file/file in stored_files)
+		if((file.filename + "." + file.filetype) == name)
+			return 0
+	return can_store_file(F.size)
+
+
 
 // Tries to find the file by filename. Returns null on failure
 /datum/computer_hardware/hard_drive/proc/find_file_by_name(var/filename)

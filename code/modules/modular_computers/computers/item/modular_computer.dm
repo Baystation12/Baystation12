@@ -7,10 +7,14 @@
 	desc = "A small portable microcomputer"
 
 	var/enabled = 1											// Whether the computer is turned on.
-	var/open = 1											// Whether the computer is active/opened/it's screen is on.
+	var/screen_on = 1										// Whether the computer is active/opened/it's screen is on.
 	var/datum/computer_file/program/active_program = null	// A currently active program running on the computer.
 	var/hardware_flag = 0									// A flag that describes this device type
 	var/last_power_usage = 0
+
+	var/base_active_power_usage = 50						// Power usage when the computer is open (screen is active) and can be interacted with. Remember hardware can use power too.
+	var/base_idle_power_usage = 5							// Power usage when the computer is idle and screen is off (currently only applies to laptops)
+
 	// Modular computers can run on various devices. Each DEVICE (Laptop, Console, Tablet,..)
 	// must have it's own DMI file. Icon states must be called exactly the same in all files, but may look differently
 	// If you create a program which is limited to Laptops and Consoles you don't have to add it's icon_state overlay for Tablets too, for example.
@@ -97,7 +101,7 @@
 
 // Operates NanoUI
 /obj/item/modular_computer/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
-	if(!open || !enabled)
+	if(!screen_on || !enabled)
 		if(ui)
 			ui.close()
 		return 0
@@ -141,7 +145,7 @@
 /obj/item/modular_computer/attack_self(mob/user)
 	if(enabled)
 		ui_interact(user)
-	else if(battery && battery.charge) // Battery-run and charged or non-battery but powered by APC.
+	else if((battery && battery.charge) || check_power_override()) // Battery-run and charged or non-battery but powered by APC.
 		user << "You press the power button and start up \the [src]"
 		enabled = 1
 		update_icon()
@@ -158,6 +162,11 @@
 	if(active_program && active_program.requires_ntnet && !get_ntnet_status(active_program.requires_ntnet_feature)) // Active program requires NTNet to run but we've just lost connection. Crash.
 		kill_program(1)
 		visible_message("<span class='danger'>\The [src]'s screen briefly freezes and then shows \"NETWORK ERROR - NTNet connection lost. Please retry. If problem persists contact your system administrator.\" error.</span>")
+
+	if(active_program)
+		active_program.process_tick()
+		active_program.ntnet_status = get_ntnet_status()
+	// TODO: Implement computer_emagged handling for programs
 
 	handle_power() // Handles all computer power interaction
 
@@ -181,7 +190,7 @@
 				data["PC_batteryicon"] = "batt_5.gif"
 		data["PC_batterypercent"] = "[round(battery.percent())] %"
 		data["PC_showbatteryicon"] = 1
-	else // Computer without battery shouldn't work at all, but in case we implement computers without batteries in future that run solely on APC network, it's here.
+	else
 		data["PC_batteryicon"] = "batt_5.gif"
 		data["PC_batterypercent"] = "N/C"
 		data["PC_showbatteryicon"] = battery ? 1 : 0
@@ -204,14 +213,8 @@
 // Installs programs necessary for computer function.
 // TODO: Implement program for downloading of other programs, and replace hardcoded program addition here
 /obj/item/modular_computer/proc/install_default_programs()
-	hard_drive.store_file(new/datum/computer_file/program/computerconfig(src)) // Computer configuration utility, allows hardware control and displays more info than status bar
-
-	//TODO: Remove once downloading is implemented
-	hard_drive.store_file(new/datum/computer_file/program/alarm_monitor(src))
-	hard_drive.store_file(new/datum/computer_file/program/power_monitor(src))
-	hard_drive.store_file(new/datum/computer_file/program/atmos_control(src))
-	hard_drive.store_file(new/datum/computer_file/program/rcon_console(src))
-	hard_drive.store_file(new/datum/computer_file/program/suit_sensors(src))
+	hard_drive.store_file(new/datum/computer_file/program/computerconfig(src)) 		// Computer configuration utility, allows hardware control and displays more info than status bar
+	hard_drive.store_file(new/datum/computer_file/program/ntnetdownload(src))		// NTNet Downloader Utility, allows users to download more software from NTNet repository
 
 // Relays kill program request to currently active program. Use this to quit current program.
 /obj/item/modular_computer/proc/kill_program(var/forced = 0)
@@ -229,6 +232,18 @@
 		return network_card.get_signal(specific_action)
 	else
 		return 0
+
+/obj/item/modular_computer/proc/add_log(var/text)
+	if(!get_ntnet_status())
+		return 0
+	return ntnet_global.add_log(text, network_card)
+
+/obj/item/modular_computer/proc/shutdown_computer()
+	kill_program(1)
+	visible_message("\The [src] shuts down.")
+	enabled = 0
+	update_icon()
+	return
 
 // Handles user's GUI input
 /obj/item/modular_computer/Topic(href, href_list)
@@ -248,11 +263,7 @@
 			H.enabled = 0
 		return
 	if( href_list["PC_shutdown"] )
-		kill_program(1)
-		visible_message("\The [src] shuts down.")
-		enabled = 0
-		update_icon()
-		return
+		shutdown_computer()
 	if( href_list["PC_runprogram"] )
 		var/prog = href_list["PC_runprogram"]
 		var/datum/computer_file/program/P = null
@@ -289,7 +300,7 @@
 		power_failure()
 		return 0
 
-	var/power_usage = open ? 50 : 5 // 50W when it's open and only 5W when closed (sleep mode)? Screen probably uses a lot.
+	var/power_usage = screen_on ? base_active_power_usage : base_idle_power_usage
 	if(network_card && network_card.enabled)
 		power_usage += network_card.power_usage
 
@@ -310,7 +321,7 @@
 		if(card_slot.stored_card)
 			user << "You try to insert \the [I] into \the [src], but it's ID card slot is occupied."
 			return
-
+		user.drop_from_inventory(I)
 		card_slot.stored_card = I
 		I.forceMove(src)
 		user << "You insert \the [I] into \the [src]."

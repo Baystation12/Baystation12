@@ -1,11 +1,19 @@
+var/global/ntnet_card_uid = 1
+
 /datum/computer_hardware/network_card/
 	name = "NTNet Network Card"
 	desc = "A basic network card for usage with standard NTNet frequencies."
 	power_usage = 50
 	critical = 0
-	var/identification_string = "" // Identification string, technically nickname seen in the network. Can be set by user.
+	var/identification_id = null	// Identification ID. Technically MAC address of this device. Can't be changed by user.
+	var/identification_string = "" 	// Identification string, technically nickname seen in the network. Can be set by user.
 	var/long_range = 0
 	var/ethernet = 0 // Hard-wired, therefore always on, ignores NTNet wireless checks.
+
+/datum/computer_hardware/network_card/New(var/l)
+	..(l)
+	identification_id = ntnet_card_uid
+	ntnet_card_uid++
 
 /datum/computer_hardware/network_card/advanced
 	desc = "An advanced network card for usage with standard NTNet frequencies. It's transmitter is strong enough to connect even off-station."
@@ -24,6 +32,10 @@
 		holder2.network_card = null
 	holder = null
 	..()
+
+// Returns a string identifier of this network card
+/datum/computer_hardware/network_card/proc/get_network_tag()
+	return "[identification_string] (NID [identification_id])"
 
 // 0 - No signal, 1 - Low signal, 2 - High signal. 3 - Wired Connection
 /datum/computer_hardware/network_card/proc/get_signal(var/specific_action = 0)
