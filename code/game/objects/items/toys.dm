@@ -167,7 +167,7 @@
 				user << "\blue It's already fully loaded!"
 				return 1
 			if (A.amount_left <= 0)
-				user << "\red There is no more caps!"
+				user << "\red There are no more caps!"
 				return 1
 			if (A.amount_left < (7 - src.bullets))
 				src.bullets += A.amount_left

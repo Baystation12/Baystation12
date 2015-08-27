@@ -47,7 +47,7 @@
 	..()
 
 	if (!istype(W, /obj/item/weapon/wirecutters))
-		user << "\blue I need wirecutters for that."
+		user << "\blue You'll need wirecutters for that."
 		return
 
 	user << "\blue You cut open the present."
@@ -120,7 +120,7 @@
  */
 /obj/item/weapon/wrapping_paper
 	name = "wrapping paper"
-	desc = "You can use this to wrap items in."
+	desc = "You can use this to wrap items for delivery."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "wrap_paper"
 	var/amount = 20.0
@@ -128,7 +128,7 @@
 /obj/item/weapon/wrapping_paper/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	..()
 	if (!( locate(/obj/structure/table, src.loc) ))
-		user << "\blue You MUST put the paper on a table!"
+		user << "\blue You must put the paper on a table!"
 	if (W.w_class < 4)
 		if ((istype(user.l_hand, /obj/item/weapon/wirecutters) || istype(user.r_hand, /obj/item/weapon/wirecutters)))
 			var/a_used = 2 ** (src.w_class - 1)
@@ -157,7 +157,7 @@
 		else
 			user << "\blue You need scissors!"
 	else
-		user << "\blue The object is FAR too large!"
+		user << "\blue The object is far too large!"
 	return
 
 

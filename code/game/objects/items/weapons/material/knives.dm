@@ -88,3 +88,11 @@
 	desc = "A huge thing used for chopping and chopping up meat. This includes clowns and clown-by-products."
 	force_divisor = 0.25 // 15 when wielded with hardness 60 (steel)
 	attack_verb = list("cleaved", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
+
+/obj/item/weapon/material/knife/tacknife //Why the hell is this under axes?
+	name = "tactical knife"
+	desc = "You'd be killing loads of people if this was Medal of Valor: Heroes of Nyx."
+	icon = 'icons/obj/weapons.dmi'
+	icon_state = "tacknife"
+	item_state = "knife"
+	applies_material_colour = 1

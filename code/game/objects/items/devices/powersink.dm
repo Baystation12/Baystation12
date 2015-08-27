@@ -45,7 +45,7 @@
 					src.visible_message("<span class='notice'>[user] attaches [src] to the cable!</span>")
 					return
 			else
-				user << "Device must be placed over an exposed cable to attach to it."
+				user << "The powersink must be placed over an exposed cable to attach to it."
 				return
 		else
 			if (mode == 2)
@@ -69,13 +69,13 @@
 		if(0)
 			..()
 		if(1)
-			src.visible_message("<span class='notice'>[user] activates [src]!</span>")
+			src.visible_message("<span class='notice'>[user] activates the [src]!</span>")
 			mode = 2
 			icon_state = "powersink1"
 			processing_objects.Add(src)
 			processing_power_items.Add(src)
 		if(2)  //This switch option wasn't originally included. It exists now. --NeoFite
-			src.visible_message("<span class='notice'>[user] deactivates [src]!</span>")
+			src.visible_message("<span class='notice'>[user] deactivates the [src]!</span>")
 			mode = 1
 			set_light(0)
 			icon_state = "powersink0"
