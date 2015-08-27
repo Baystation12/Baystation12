@@ -1183,12 +1183,14 @@ datum/preferences
 		var/char
 		var/keys[0]
 		do
-			char = input("Enter a single special character.\nYou may re-select the same characters.\nBe aware that the following characters are already in use by radio: ; : .", "Enter Character - [3 - keys.len] remaining") as null|text
+			char = input("Enter a single special character.\nYou may re-select the same characters.\nThe following characters are already in use by radio: ; : .\nThe following characters are already in use by special say commands: ! *", "Enter Character - [3 - keys.len] remaining") as null|text
 			if(char)
 				if(length(char) > 1)
 					alert("Only single characters allowed.", "Error", "Ok")
 				else if(char in list(";", ":", "."))
 					alert("Radio character. Rejected.", "Error", "Ok")
+				else if(char in list("!","*"))
+					alert("Say character. Rejected.", "Error", "Ok")
 				else if(contains_az09(char))
 					alert("Non-special character. Rejected.", "Error", "Ok")
 				else

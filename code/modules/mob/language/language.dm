@@ -101,14 +101,14 @@
 	log_say("[key_name(speaker)] : ([name]) [message]")
 
 	if(!speaker_mask) speaker_mask = speaker.name
-	format_message(message, get_spoken_verb(message))
+	message = format_message(message, get_spoken_verb(message))
 
 	for(var/mob/player in player_list)
 		player.hear_broadcast(src, speaker, speaker_mask, message)
 
 /mob/proc/hear_broadcast(var/datum/language/language, var/mob/speaker, var/speaker_name, var/message)
 	if((language in languages) && language.check_special_condition(src))
-		var/msg = "<i><span class='game say'>[language.name], <span class='name'>[speaker_name]</span>, \"[message]\"</span></i>"
+		var/msg = "<i><span class='game say'>[language.name], <span class='name'>[speaker_name]</span> [message]</span></i>"
 		src << msg
 
 /mob/new_player/hear_broadcast(var/datum/language/language, var/mob/speaker, var/speaker_name, var/message)
@@ -116,9 +116,9 @@
 
 /mob/dead/observer/hear_broadcast(var/datum/language/language, var/mob/speaker, var/speaker_name, var/message)
 	if(speaker.name == speaker_name || antagHUD)
-		src << "<i><span class='game say'>[language.name], <span class='name'>[speaker_name]</span> ([ghost_follow_link(speaker, src)]), \"[message]\"</span></i>"
+		src << "<i><span class='game say'>[language.name], <span class='name'>[speaker_name]</span> ([ghost_follow_link(speaker, src)]) [message]</span></i>"
 	else
-		src << "<i><span class='game say'>[language.name], <span class='name'>[speaker_name]</span>, \"[message]\"</span></i>"
+		src << "<i><span class='game say'>[language.name], <span class='name'>[speaker_name]</span> [message]</span></i>"
 
 /datum/language/proc/check_special_condition(var/mob/other)
 	return 1
