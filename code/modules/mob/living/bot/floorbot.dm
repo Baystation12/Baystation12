@@ -2,7 +2,7 @@
 	name = "Floorbot"
 	desc = "A little floor repairing robot, he looks so excited!"
 	icon_state = "floorbot0"
-	req_access = list(access_construction)
+	req_one_access = list(access_construction, access_robotics)
 
 	var/amount = 10 // 1 for tile, 2 for lattice
 	var/maxAmount = 60
