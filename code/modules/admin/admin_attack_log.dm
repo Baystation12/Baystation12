@@ -4,7 +4,7 @@
 
 proc/log_and_message_admins(var/message as text, var/mob/user = usr)
 	log_admin(user ? "[key_name(user)] [message]" : "EVENT [message]")
-	message_admins(user ? "[key_name(user)] [message]" : "EVENT [message]")
+	message_admins(user ? "[key_name_admin(user)] [message]" : "EVENT [message]")
 
 proc/log_and_message_admins_many(var/list/mob/users, var/message)
 	if(!users || !users.len)
@@ -16,10 +16,6 @@ proc/log_and_message_admins_many(var/list/mob/users, var/message)
 
 	log_admin("[english_list(user_keys)] [message]")
 	message_admins("[english_list(user_keys)] [message]")
-
-proc/admin_log_and_message_admins(var/message as text)
-	log_admin(usr ? "[key_name_admin(usr)] [message]" : "EVENT [message]")
-	message_admins(usr ? "[key_name_admin(usr)] [message]" : "EVENT [message]", 1)
 
 proc/admin_attack_log(var/mob/attacker, var/mob/victim, var/attacker_message, var/victim_message, var/admin_message)
 	if(victim)
