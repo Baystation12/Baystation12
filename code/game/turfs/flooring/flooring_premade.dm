@@ -55,21 +55,21 @@
 
 /turf/simulated/floor/reinforced/nitrogen
 	oxygen = 0
-	nitrogen = 90000
+	nitrogen = ATMOSTANK_NITROGEN
 
 /turf/simulated/floor/reinforced/oxygen
-	oxygen = 50000
+	oxygen = ATMOSTANK_OXYGEN
 	nitrogen = 0
 
 /turf/simulated/floor/reinforced/phoron
 	oxygen = 0
 	nitrogen = 0
-	phoron = 25000
+	phoron = ATMOSTANK_PHORON
 
 /turf/simulated/floor/reinforced/carbon_dioxide
 	oxygen = 0
 	nitrogen = 0
-	carbon_dioxide = 25000
+	carbon_dioxide = ATMOSTANK_CO2
 
 /turf/simulated/floor/reinforced/n20
 	oxygen = 0
@@ -79,7 +79,7 @@
 	..()
 	sleep(-1)
 	if(!air) make_air()
-	air.adjust_gas("sleeping_agent", 10000)
+	air.adjust_gas("sleeping_agent", ATMOSTANK_NITROUSOXIDE)
 
 /turf/simulated/floor/cult
 	name = "engraved floor"
