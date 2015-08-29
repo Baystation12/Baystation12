@@ -22,10 +22,6 @@
 	var/icon_old = null
 	var/pathweight = 1
 
-	//Mining resource generation stuff.
-	var/has_resources
-	var/list/resources
-
 	// Flick animation
 	var/atom/movable/overlay/c_animation = null
 
@@ -69,7 +65,7 @@
 
 /turf/Enter(atom/movable/mover as mob|obj, atom/forget as mob|obj|turf|area)
 	if(movement_disabled && usr.ckey != movement_disabled_exception)
-		usr << "\red Movement is admin-disabled." //This is to identify lag problems
+		usr << "<span class='warning'>Movement is admin-disabled.</span>" //This is to identify lag problems
 		return
 	if (!mover || !isturf(mover.loc))
 		return 1
@@ -112,7 +108,7 @@
 
 /turf/Entered(atom/atom as mob|obj)
 	if(movement_disabled)
-		usr << "\red Movement is admin-disabled." //This is to identify lag problems
+		usr << "<span class='warning'>Movement is admin-disabled.</span>" //This is to identify lag problems
 		return
 	..()
 //vvvvv Infared beam stuff vvvvv
@@ -291,61 +287,8 @@
 		else
 			lighting_clear_overlays()
 
-
-//Commented out by SkyMarshal 5/10/13 - If you are patching up space, it should be vacuum.
-//  If you are replacing a wall, you have increased the volume of the room without increasing the amount of gas in it.
-//  As such, this will no longer be used.
-
-//////Assimilate Air//////
-/*
-/turf/simulated/proc/Assimilate_Air()
-	var/aoxy = 0//Holders to assimilate air from nearby turfs
-	var/anitro = 0
-	var/aco = 0
-	var/atox = 0
-	var/atemp = 0
-	var/turf_count = 0
-
-	for(var/direction in cardinal)//Only use cardinals to cut down on lag
-		var/turf/T = get_step(src,direction)
-		if(istype(T,/turf/space))//Counted as no air
-			turf_count++//Considered a valid turf for air calcs
-			continue
-		else if(istype(T,/turf/simulated/floor))
-			var/turf/simulated/S = T
-			if(S.air)//Add the air's contents to the holders
-				aoxy += S.air.oxygen
-				anitro += S.air.nitrogen
-				aco += S.air.carbon_dioxide
-				atox += S.air.toxins
-				atemp += S.air.temperature
-			turf_count ++
-	air.oxygen = (aoxy/max(turf_count,1))//Averages contents of the turfs, ignoring walls and the like
-	air.nitrogen = (anitro/max(turf_count,1))
-	air.carbon_dioxide = (aco/max(turf_count,1))
-	air.toxins = (atox/max(turf_count,1))
-	air.temperature = (atemp/max(turf_count,1))//Trace gases can get bant
-	air.update_values()
-
-	//cael - duplicate the averaged values across adjacent turfs to enforce a seamless atmos change
-	for(var/direction in cardinal)//Only use cardinals to cut down on lag
-		var/turf/T = get_step(src,direction)
-		if(istype(T,/turf/space))//Counted as no air
-			continue
-		else if(istype(T,/turf/simulated/floor))
-			var/turf/simulated/S = T
-			if(S.air)//Add the air's contents to the holders
-				S.air.oxygen = air.oxygen
-				S.air.nitrogen = air.nitrogen
-				S.air.carbon_dioxide = air.carbon_dioxide
-				S.air.toxins = air.toxins
-				S.air.temperature = air.temperature
-				S.air.update_values()
-*/
-
-
 /turf/proc/ReplaceWithLattice()
-	src.ChangeTurf(/turf/space)
+	src.ChangeTurf(get_base_turf(src.z))
 	spawn()
 		new /obj/structure/lattice( locate(src.x, src.y, src.z) )
 

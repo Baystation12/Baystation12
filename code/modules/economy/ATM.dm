@@ -62,6 +62,22 @@ log transactions
 			playsound(loc, 'sound/items/polaroid2.ogg', 50, 1)
 		break
 
+/obj/machinery/atm/emag_act(var/remaining_charges, var/mob/user)
+	if(!emagged)
+		return
+
+	//short out the machine, shoot sparks, spew money!
+	emagged = 1
+	spark_system.start()
+	spawn_money(rand(100,500),src.loc)
+	//we don't want to grief people by locking their id in an emagged ATM
+	release_held_id(user)
+
+	//display a message to the user
+	var/response = pick("Initiating withdraw. Have a nice day!", "CRITICAL ERROR: Activating cash chamber panic siphon.","PIN Code accepted! Emptying account balance.", "Jackpot!")
+	user << "<span class='warning'>\icon[src] The [src] beeps: \"[response]\"</span>"
+	return 1
+
 /obj/machinery/atm/attackby(obj/item/I as obj, mob/user as mob)
 	if(istype(I, /obj/item/weapon/card))
 		if(emagged > 0)
@@ -69,16 +85,7 @@ log transactions
 			user << "\red \icon[src] CARD READER ERROR. This system has been compromised!"
 			return
 		else if(istype(I,/obj/item/weapon/card/emag))
-			//short out the machine, shoot sparks, spew money!
-			emagged = 1
-			spark_system.start()
-			spawn_money(rand(100,500),src.loc)
-			//we don't want to grief people by locking their id in an emagged ATM
-			release_held_id(user)
-
-			//display a message to the user
-			var/response = pick("Initiating withdraw. Have a nice day!", "CRITICAL ERROR: Activating cash chamber panic siphon.","PIN Code accepted! Emptying account balance.", "Jackpot!")
-			user << "\red \icon[src] The [src] beeps: \"[response]\""
+			I.resolve_attackby(src, user)
 			return
 
 		var/obj/item/weapon/card/id/idcard = I

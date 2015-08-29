@@ -6,7 +6,5 @@
 	required_players = 1
 	required_players_secret = 10
 	required_enemies = 1
-	uplink_welcome = "Wizardly Uplink Console:"
-	uplink_uses = 10
 	end_on_antag_death = 1
 	antag_tag = MODE_WIZARD

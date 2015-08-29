@@ -25,11 +25,11 @@ obj/machinery/recharger/attackby(obj/item/weapon/G as obj, mob/user as mob)
 
 	if(allowed)
 		if(charging)
-			user << "\red \A [charging] is already charging here."
+			user << "<span class='warning'>\A [charging] is already charging here.</span>"
 			return
 		// Checks to make sure he's not in space doing it, and that the area got proper power.
 		if(!powered())
-			user << "\red The [name] blinks red as you try to insert the item!"
+			user << "<span class='warning'>The [name] blinks red as you try to insert the item!</span>"
 			return
 		if (istype(G, /obj/item/weapon/gun/energy/gun/nuclear) || istype(G, /obj/item/weapon/gun/energy/crossbow))
 			user << "<span class='notice'>Your gun's recharge port was removed to make room for a miniaturized reactor.</span>"
@@ -47,7 +47,7 @@ obj/machinery/recharger/attackby(obj/item/weapon/G as obj, mob/user as mob)
 		update_icon()
 	else if(portable && istype(G, /obj/item/weapon/wrench))
 		if(charging)
-			user << "\red Remove [charging] first!"
+			user << "<span class='warning'>Remove [charging] first!</span>"
 			return
 		anchored = !anchored
 		user << "You [anchored ? "attached" : "detached"] the recharger."

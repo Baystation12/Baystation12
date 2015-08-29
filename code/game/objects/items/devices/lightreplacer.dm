@@ -49,7 +49,7 @@
 
 	flags = CONDUCT
 	slot_flags = SLOT_BELT
-	origin_tech = "magnets=3;materials=2"
+	origin_tech = list(TECH_MAGNET = 3, TECH_MATERIAL = 2)
 
 	var/max_uses = 20
 	var/uses = 0
@@ -67,14 +67,10 @@
 		user << "It has [uses] lights remaining."
 
 /obj/item/device/lightreplacer/attackby(obj/item/W, mob/user)
-	if(istype(W,  /obj/item/weapon/card/emag) && emagged == 0)
-		Emag()
-		return
-
 	if(istype(W, /obj/item/stack/material) && W.get_material_name() == "glass")
 		var/obj/item/stack/G = W
 		if(uses >= max_uses)
-			user << "<span class='warning'>[src.name] is full."
+			user << "<span class='warning'>[src.name] is full.</span>"
 			return
 		else if(G.use(1))
 			AddUses(5)
@@ -173,14 +169,11 @@
 		U << "There is a working [target.fitting] already inserted."
 		return
 
-/obj/item/device/lightreplacer/proc/Emag()
+/obj/item/device/lightreplacer/emag_act(var/remaining_charges, var/mob/user)
 	emagged = !emagged
 	playsound(src.loc, "sparks", 100, 1)
-	if(emagged)
-		name = "Shortcircuited [initial(name)]"
-	else
-		name = initial(name)
 	update_icon()
+	return 1
 
 //Can you use it?
 

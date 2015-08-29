@@ -80,11 +80,14 @@
 /obj/structure/closet/statue/toggle()
 	return
 
-/obj/structure/closet/statue/bullet_act(var/obj/item/projectile/Proj)
-	health -= Proj.damage
+/obj/structure/closet/statue/proc/check_health()
 	if(health <= 0)
 		for(var/mob/M in src)
 			shatter(M)
+
+/obj/structure/closet/statue/bullet_act(var/obj/item/projectile/Proj)
+	health -= Proj.damage
+	check_health()
 
 	return
 
@@ -97,19 +100,17 @@
 	for(var/mob/M in src)
 		shatter(M)
 
-/obj/structure/closet/statue/meteorhit(obj/O as obj)
-	if(O.icon_state == "flaming")
-		for(var/mob/M in src)
-			M.meteorhit(O)
-			shatter(M)
+/obj/structure/closet/statue/ex_act(severity)
+	for(var/mob/M in src)
+		M.ex_act(severity)
+		health -= 60 / severity
+		check_health()
 
 /obj/structure/closet/statue/attackby(obj/item/I as obj, mob/user as mob)
 	health -= I.force
 	user.do_attack_animation(src)
 	visible_message("<span class='danger'>[user] strikes [src] with [I].</span>")
-	if(health <= 0)
-		for(var/mob/M in src)
-			shatter(M)
+	check_health()
 
 /obj/structure/closet/statue/MouseDrop_T()
 	return

@@ -100,41 +100,6 @@
 		user << "<span class='danger'>\The [src] is hermetically sealed. You can't open the case.</span>"
 		return
 
-	else if (istype(W, /obj/item/weapon/card/emag))
-
-		if(!client || stat == 2)
-			user << "<span class='danger'>There's not much point subverting this heap of junk.</span>"
-			return
-
-		if(emagged)
-			src << "<span class='danger'>\The [user] attempts to load subversive software into you, but your hacked subroutines ignore the attempt.</span>"
-			user << "<span class='danger'>You attempt to subvert [src], but the sequencer has no effect.</span>"
-			return
-
-		user << "<span class='danger'>You swipe the sequencer across [src]'s interface and watch its eyes flicker.</span>"
-		src << "<span class='danger'>You feel a sudden burst of malware loaded into your execute-as-root buffer. Your tiny brain methodically parses, loads and executes the script.</span>"
-
-		var/obj/item/weapon/card/emag/emag = W
-		emag.uses--
-
-		message_admins("[key_name_admin(user)] emagged drone [key_name_admin(src)].  Laws overridden.")
-		log_game("[key_name(user)] emagged drone [key_name(src)].  Laws overridden.")
-		var/time = time2text(world.realtime,"hh:mm:ss")
-		lawchanges.Add("[time] <B>:</B> [user.name]([user.key]) emagged [name]([key])")
-
-		emagged = 1
-		lawupdate = 0
-		connected_ai = null
-		clear_supplied_laws()
-		clear_inherent_laws()
-		laws = new /datum/ai_laws/syndicate_override
-		set_zeroth_law("Only [user] and people \he designates as being such are operatives.")
-
-		src << "<b>Obey these laws:</b>"
-		laws.show_laws(src)
-		src << "<span class='danger'>ALERT: [user] is your new master. Obey \his commands and your new laws.</span>"
-		return
-
 	else if (istype(W, /obj/item/weapon/card/id)||istype(W, /obj/item/device/pda))
 
 		if(stat == 2)
@@ -170,6 +135,37 @@
 		return
 
 	..()
+	
+/mob/living/silicon/robot/drone/emag_act(var/remaining_charges, var/mob/user)
+	if(!client || stat == 2)
+		user << "<span class='danger'>There's not much point subverting this heap of junk.</span>"
+		return
+
+	if(emagged)
+		src << "<span class='danger'>\The [user] attempts to load subversive software into you, but your hacked subroutines ignore the attempt.</span>"
+		user << "<span class='danger'>You attempt to subvert [src], but the sequencer has no effect.</span>"
+		return
+
+	user << "<span class='danger'>You swipe the sequencer across [src]'s interface and watch its eyes flicker.</span>"
+	src << "<span class='danger'>You feel a sudden burst of malware loaded into your execute-as-root buffer. Your tiny brain methodically parses, loads and executes the script.</span>"
+
+	message_admins("[key_name_admin(user)] emagged drone [key_name_admin(src)].  Laws overridden.")
+	log_game("[key_name(user)] emagged drone [key_name(src)].  Laws overridden.")
+	var/time = time2text(world.realtime,"hh:mm:ss")
+	lawchanges.Add("[time] <B>:</B> [user.name]([user.key]) emagged [name]([key])")
+
+	emagged = 1
+	lawupdate = 0
+	connected_ai = null
+	clear_supplied_laws()
+	clear_inherent_laws()
+	laws = new /datum/ai_laws/syndicate_override
+	set_zeroth_law("Only [user.real_name] and people \he designates as being such are operatives.")
+
+	src << "<b>Obey these laws:</b>"
+	laws.show_laws(src)
+	src << "<span class='danger'>ALERT: [user.real_name] is your new master. Obey your new laws and \his commands.</span>"
+	return 1
 
 //DRONE LIFE/DEATH
 

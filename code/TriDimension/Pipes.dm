@@ -73,7 +73,7 @@ obj/machinery/atmospherics/pipe/zpipe/check_pressure(pressure)
 	else return 1
 
 obj/machinery/atmospherics/pipe/zpipe/proc/burst()
-	src.visible_message("\red \bold [src] bursts!");
+	src.visible_message("<span class='warning'>\The [src] bursts!</span>");
 	playsound(src.loc, 'sound/effects/bang.ogg', 25, 1)
 	var/datum/effect/effect/system/smoke_spread/smoke = new
 	smoke.set_up(1,0, src.loc, 0)

@@ -42,7 +42,7 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 		return 1
 
 	get_access()
-		return get_all_accesses()
+		return get_all_station_access()
 
 
 

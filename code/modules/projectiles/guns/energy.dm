@@ -36,7 +36,6 @@
 		fire_sound = isnull(current_mode.fire_sound)? initial(fire_sound) : current_mode.fire_sound
 
 		update_icon()
-		update_held_icon()
 
 /obj/item/weapon/gun/energy/emp_act(severity)
 	..()
@@ -115,4 +114,4 @@
 			icon_state = "[modifystate][ratio]"
 		else
 			icon_state = "[initial(icon_state)][ratio]"
-
+	update_held_icon()

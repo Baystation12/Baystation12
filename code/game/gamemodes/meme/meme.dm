@@ -126,7 +126,7 @@
 
 /datum/game_mode/proc/greet_meme(var/datum/mind/meme, var/you_are=1)
 	if (you_are)
-		meme.current << "<B>\red You are a meme!</B>"
+		meme.current << "<span class='danger'>You are a meme!</span>"
 	show_objectives(meme)
 	return
 

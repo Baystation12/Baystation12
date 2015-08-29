@@ -178,7 +178,7 @@ var/list/global/wall_cache = list()
 /turf/simulated/wall/ex_act(severity)
 	switch(severity)
 		if(1.0)
-			src.ChangeTurf(/turf/space)
+			src.ChangeTurf(get_base_turf(src.z))
 			return
 		if(2.0)
 			if(prob(75))
@@ -231,16 +231,6 @@ var/list/global/wall_cache = list()
 			qdel(O)
 //	F.sd_LumReset()		//TODO: ~Carn
 	return
-
-/turf/simulated/wall/meteorhit(obj/M as obj)
-	var/rotting = (locate(/obj/effect/overlay/wallrot) in src)
-	if (prob(15) && !rotting)
-		dismantle_wall()
-	else if(prob(70) && !rotting)
-		ChangeTurf(/turf/simulated/floor/plating)
-	else
-		ReplaceWithLattice()
-	return 0
 
 /turf/simulated/wall/proc/radiate()
 	var/total_radiation = material.radioactivity + (reinf_material ? reinf_material.radioactivity / 2 : 0)

@@ -25,6 +25,6 @@ var/datum/antagonist/deathsquad/mercenary/commandos
 	player.equip_to_slot_or_del(new /obj/item/weapon/gun/energy/pulse_rifle(player), slot_r_hand)
 
 	var/obj/item/weapon/card/id/id = create_id("Commando", player)
-	id.access |= get_all_accesses()
+	id.access |= get_all_station_access()
 	id.icon_state = "centcom"
 	create_radio(SYND_FREQ, player)

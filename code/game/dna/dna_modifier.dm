@@ -100,13 +100,13 @@
 	if (usr.stat != 0)
 		return
 	if (!ishuman(usr) && !issmall(usr)) //Make sure they're a mob that has dna
-		usr << "\blue Try as you might, you can not climb up into the scanner."
+		usr << "<span class='notice'>Try as you might, you can not climb up into the scanner.</span>"
 		return
 	if (src.occupant)
-		usr << "\blue <B>The scanner is already occupied!</B>"
+		usr << "<span class='warning'>The scanner is already occupied!</span>"
 		return
 	if (usr.abiotic())
-		usr << "\blue <B>Subject cannot have abiotic items on.</B>"
+		usr << "<span class='warning'>The subject cannot have abiotic items on.</span>"
 		return
 	usr.stop_pulling()
 	usr.client.perspective = EYE_PERSPECTIVE
@@ -120,13 +120,13 @@
 /obj/machinery/dna_scannernew/attackby(var/obj/item/weapon/item as obj, var/mob/user as mob)
 	if(istype(item, /obj/item/weapon/reagent_containers/glass))
 		if(beaker)
-			user << "\red A beaker is already loaded into the machine."
+			user << "<span class='warning'>A beaker is already loaded into the machine.</span>"
 			return
 
 		beaker = item
 		user.drop_item()
 		item.loc = src
-		user.visible_message("[user] adds \a [item] to \the [src]!", "You add \a [item] to \the [src]!")
+		user.visible_message("\The [user] adds \a [item] to \the [src]!", "You add \a [item] to \the [src]!")
 		return
 	else if (!istype(item, /obj/item/weapon/grab))
 		return
@@ -134,10 +134,10 @@
 	if (!ismob(G.affecting))
 		return
 	if (src.occupant)
-		user << "\blue <B>The scanner is already occupied!</B>"
+		user << "<span class='warning'>The scanner is already occupied!</span>"
 		return
 	if (G.affecting.abiotic())
-		user << "\blue <B>Subject cannot have abiotic items on.</B>"
+		user << "<span class='warning'>The subject cannot have abiotic items on.</span>"
 		return
 	put_in(G.affecting)
 	src.add_fingerprint(user)

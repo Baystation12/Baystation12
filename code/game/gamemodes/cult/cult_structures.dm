@@ -138,7 +138,7 @@
 	var/mob/living/M = A
 
 	if(M.stat != DEAD)
-		if(M.monkeyizing)
+		if(M.transforming)
 			return
 		if(M.has_brain_worms())
 			return //Borer stuff - RR
@@ -146,7 +146,7 @@
 		if(iscultist(M)) return
 		if(!ishuman(M) && !isrobot(M)) return
 
-		M.monkeyizing = 1
+		M.transforming = 1
 		M.canmove = 0
 		M.icon = null
 		M.overlays.len = 0

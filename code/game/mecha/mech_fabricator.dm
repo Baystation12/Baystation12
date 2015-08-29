@@ -94,15 +94,6 @@
 						/obj/item/mecha_parts/part/durand_right_leg,
 						/obj/item/mecha_parts/part/durand_armour
 					),
-	/*"H.O.N.K"=list(
-						/obj/item/mecha_parts/chassis/honker,
-						/obj/item/mecha_parts/part/honker_torso,
-						/obj/item/mecha_parts/part/honker_head,
-						/obj/item/mecha_parts/part/honker_left_arm,
-						/obj/item/mecha_parts/part/honker_right_arm,
-						/obj/item/mecha_parts/part/honker_left_leg,
-						/obj/item/mecha_parts/part/honker_right_leg
-						), No need for HONK stuff*/
 	"Exosuit Equipment"=list(
 						/obj/item/mecha_parts/mecha_equipment/tool/hydraulic_clamp,
 						/obj/item/mecha_parts/mecha_equipment/tool/drill,
@@ -116,10 +107,7 @@
 						/obj/item/mecha_parts/mecha_equipment/generator,
 						///obj/item/mecha_parts/mecha_equipment/jetpack, //TODO MECHA JETPACK SPRITE MISSING
 						/obj/item/mecha_parts/mecha_equipment/weapon/energy/taser,
-						/obj/item/mecha_parts/mecha_equipment/weapon/ballistic/lmg,
-						///obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack/banana_mortar/mousetrap_mortar, HONK-related mech part
-						///obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack/banana_mortar, Also HONK-related
-						///obj/item/mecha_parts/mecha_equipment/weapon/honker Thirdly HONK-related
+						/obj/item/mecha_parts/mecha_equipment/weapon/ballistic/lmg
 						),
 
 	"Robotic Upgrade Modules" = list(
@@ -131,16 +119,8 @@
 						/obj/item/borg/upgrade/jetpack
 						),
 
-
-
-
-
-
 	"Misc"=list(/obj/item/mecha_parts/mecha_tracking)
 	)
-
-
-
 
 /obj/machinery/mecha_part_fabricator/New()
 	..()
@@ -212,27 +192,6 @@
 	M << "<font color='red'>You don't have required permissions to use [src]</font>"
 	return 0
 
-
-/obj/machinery/mecha_part_fabricator/proc/emag()
-	sleep()
-	switch(emagged)
-		if(0)
-			emagged = 0.5
-			src.visible_message("\icon[src] <b>[src]</b> beeps: \"DB error \[Code 0x00F1\]\"")
-			sleep(10)
-			src.visible_message("\icon[src] <b>[src]</b> beeps: \"Attempting auto-repair\"")
-			sleep(15)
-			src.visible_message("\icon[src] <b>[src]</b> beeps: \"User DB corrupted \[Code 0x00FA\]. Truncating data structure...\"")
-			sleep(30)
-			src.visible_message("\icon[src] <b>[src]</b> beeps: \"User DB truncated. Please contact your Nanotrasen system operator for future assistance.\"")
-			req_access = null
-			emagged = 1
-		if(0.5)
-			src.visible_message("\icon[src] <b>[src]</b> beeps: \"DB not responding \[Code 0x0003\]...\"")
-		if(1)
-			src.visible_message("\icon[src] <b>[src]</b> beeps: \"No records in User DB\"")
-	return
-
 /obj/machinery/mecha_part_fabricator/proc/convert_part_set(set_name as text)
 	var/list/parts = part_sets[set_name]
 	if(istype(parts, /list))
@@ -293,14 +252,6 @@
 				world << "Duplicate part set definition for [src](\ref[src])"
 				return 0
 		return 1
-*/
-/*
-	New()
-		..()
-		src.add_part_to_set("Test",list("result"="/obj/item/mecha_parts/part/gygax_armour","time"=600,"metal"=75000,"diamond"=10000))
-		src.add_part_to_set("Test",list("result"="/obj/item/mecha_parts/part/ripley_left_arm","time"=200,"metal"=25000))
-		src.remove_part_set("Gygax")
-		return
 */
 
 /obj/machinery/mecha_part_fabricator/proc/output_parts_list(set_name)
@@ -752,7 +703,26 @@
 		qdel(res)
 	return result
 
-
+/obj/machinery/mecha_part_fabricator/emag_act(var/remaining_charges, var/mob/user)
+	sleep()
+	switch(emagged)
+		if(0)
+			emagged = 0.5
+			src.visible_message("\icon[src] <b>[src]</b> beeps: \"DB error \[Code 0x00F1\]\"")
+			sleep(10)
+			src.visible_message("\icon[src] <b>[src]</b> beeps: \"Attempting auto-repair\"")
+			sleep(15)
+			src.visible_message("\icon[src] <b>[src]</b> beeps: \"User DB corrupted \[Code 0x00FA\]. Truncating data structure...\"")
+			sleep(30)
+			src.visible_message("\icon[src] <b>[src]</b> beeps: \"User DB truncated. Please contact your Nanotrasen system operator for future assistance.\"")
+			req_access = null
+			emagged = 1
+			return 1
+		if(0.5)
+			src.visible_message("\icon[src] <b>[src]</b> beeps: \"DB not responding \[Code 0x0003\]...\"")
+		if(1)
+			src.visible_message("\icon[src] <b>[src]</b> beeps: \"No records in User DB\"")
+	
 /obj/machinery/mecha_part_fabricator/attackby(obj/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/weapon/screwdriver))
 		if (!opened)
@@ -771,8 +741,6 @@
 			M.state = 2
 			M.icon_state = "box_1"
 			for(var/obj/I in component_parts)
-				if(I.reliability != 100 && crit_fail)
-					I.crit_fail = 1
 				I.loc = src.loc
 			if(src.resources[DEFAULT_WALL_MATERIAL] >= 3750)
 				var/obj/item/stack/material/steel/G = new /obj/item/stack/material/steel(src.loc)
@@ -798,12 +766,8 @@
 			qdel(src)
 			return 1
 		else
-			user << "\red You can't load the [src.name] while it's opened."
+			user << "<span class='warning'>You can't load the [src.name] while it's opened.</span>"
 			return 1
-
-	if(istype(W, /obj/item/weapon/card/emag))
-		emag()
-		return
 
 	var/material
 	switch(W.type)

@@ -61,7 +61,7 @@
 	var/extra_law = "Crew authorized to know of pathogen [virus_name]'s existence are: Heads of command. Do not allow unauthorized personnel to gain knowledge of [virus_name]. Aid authorized personnel in quarantining and neutrlizing the outbreak. This law overrides all other laws."
 	for(var/mob/living/silicon/ai/M in world)
 		M.add_ion_law(extra_law)
-		M << "\red " + extra_law
+		M << "<span class='danger'>[extra_law]</span>"
 
 /datum/game_mode/epidemic/proc/announce_to_kill_crew()
 	var/intercepttext = "<FONT size = 3 color='red'><B>CONFIDENTIAL REPORT</FONT><HR>"
@@ -91,8 +91,8 @@
 		crew += H
 
 	if(crew.len < 2)
-		world << "\red There aren't enough players for this mode!"
-		world << "\red Rebooting world in 5 seconds."
+		world << "<span class='danger'>There aren't enough players for this mode!</span>"
+		world << "<span class='danger'>Rebooting world in 5 seconds.</span>"
 
 		if(blackbox)
 			blackbox.save_all_data_to_sql()
@@ -182,10 +182,10 @@
 	for(var/mob/M in world)
 		if(M.client)
 			M << 'sound/machines/Alarm.ogg'
-	world << "\blue<b>Incoming missile detected.. Impact in 10..</b>"
+	world << "<span class='notice'><b>Incoming missile detected.. Impact in 10..</b></span>"
 	for (var/i=9 to 1 step -1)
 		sleep(10)
-		world << "\blue<b>[i]..</b>"
+		world << "<span class='notice'><b>[i]..</b></span>"
 	sleep(10)
 	enter_allowed = 0
 	if(ticker)
@@ -203,9 +203,9 @@
 /datum/game_mode/epidemic/declare_completion()
 	if(finished == 1)
 		feedback_set_details("round_end_result","win - epidemic cured")
-		world << "\red <FONT size = 3><B> The virus outbreak was contained! The crew wins!</B></FONT>"
+		world << "<font size = 3><span class='danger'> The virus outbreak was contained! The crew wins!</span></font>"
 	else if(finished == 2)
 		feedback_set_details("round_end_result","loss - rev heads killed")
-		world << "\red <FONT size = 3><B> The crew succumbed to the epidemic!</B></FONT>"
+		world << "<font size = 3><span class='danger'> The crew succumbed to the epidemic!</span></font>"
 	..()
 	return 1

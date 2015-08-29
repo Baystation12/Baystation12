@@ -23,7 +23,7 @@
 	icon = 'icons/obj/assemblies.dmi'
 	icon_state = "mmi_empty"
 	w_class = 3
-	origin_tech = "biotech=3"
+	origin_tech = list(TECH_BIO = 3)
 
 	var/list/construction_cost = list(DEFAULT_WALL_MATERIAL=1000,"glass"=500)
 	var/construction_time = 75
@@ -134,7 +134,7 @@
 /obj/item/device/mmi/radio_enabled
 	name = "radio-enabled man-machine interface"
 	desc = "The Warrior's bland acronym, MMI, obscures the true horror of this monstrosity. This one comes with a built-in radio."
-	origin_tech = "biotech=4"
+	origin_tech = list(TECH_BIO = 4)
 
 	var/obj/item/device/radio/radio = null//Let's give it a radio.
 

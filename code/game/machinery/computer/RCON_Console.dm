@@ -13,7 +13,7 @@
 	circuit = /obj/item/weapon/circuitboard/rcon_console
 	req_one_access = list(access_engine)
 	var/current_tag = null
-	var/obj/nano_module/rcon/rcon
+	var/datum/nano_module/rcon/rcon
 
 /obj/machinery/computer/rcon/New()
 	..()

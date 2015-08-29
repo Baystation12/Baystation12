@@ -353,7 +353,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 		// --- This following recording is intended for research and feedback in the use of department radio channels ---
 
 		var/part_blackbox_b = "</span><b> \[[freq_text]\]</b> <span class='message'>" // Tweaked for security headsets -- TLE
-		var/blackbox_msg = "[part_a][name][part_blackbox_b][quotedmsg][part_c]"
+		var/blackbox_msg = "[part_a][name][part_blackbox_b][quotedmsg][part_c]</span>"
 		//var/blackbox_admin_msg = "[part_a][M.name] (Real name: [M.real_name])[part_blackbox_b][quotedmsg][part_c]"
 
 		//BR.messages_admin += blackbox_admin_msg
@@ -533,12 +533,15 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 		var/part_b = "</span><b> \icon[radio]\[[freq_text]\][part_b_extra]</b> <span class='message'>" // Tweaked for security headsets -- TLE
 		var/part_c = "</span></span>"
 
+		part_a = "<span class='"
 		if (display_freq in ANTAG_FREQS)
-			part_a = "<span class='syndradio'><span class='name'>"
+			part_a += "syndradio"
 		else if (display_freq==COMM_FREQ)
-			part_a = "<span class='comradio'><span class='name'>"
+			part_a += "comradio"
 		else if (display_freq in DEPT_FREQS)
-			part_a = "<span class='deptradio'><span class='name'>"
+			part_a += "deptradio"
+
+		part_a += "'><span class='name'>"
 
 		// --- This following recording is intended for research and feedback in the use of department radio channels ---
 

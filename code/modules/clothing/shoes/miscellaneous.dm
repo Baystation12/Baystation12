@@ -5,7 +5,7 @@
 	item_state = "brown"
 	permeability_coefficient = 0.05
 	flags = NOSLIP
-	origin_tech = "syndicate=3"
+	origin_tech = list(TECH_ILLEGAL = 3)
 	var/list/clothing_choices = list()
 	siemens_coefficient = 0.8
 	species_restricted = null

@@ -9,7 +9,7 @@ client
 
 
 		if(!usr.client || !usr.client.holder)
-			usr << "\red You need to be an administrator to access this."
+			usr << "<span class='warning'>You need to be an administrator to access this.</span>"
 			return
 
 
@@ -602,8 +602,8 @@ client
 				if(!i)
 					usr << "No objects of this type exist"
 					return
-				log_admin("[key_name(usr)] deleted all objects of type [O_type] ([i] objects deleted) ")
-				message_admins("\blue [key_name(usr)] deleted all objects of type [O_type] ([i] objects deleted) ")
+				log_admin("[key_name(usr)] deleted all objects of type [O_type] ([i] objects deleted)")
+				message_admins("<span class='notice'>[key_name(usr)] deleted all objects of type [O_type] ([i] objects deleted)</span>")
 			if("Type and subtypes")
 				var/i = 0
 				for(var/obj/Obj in world)
@@ -613,8 +613,8 @@ client
 				if(!i)
 					usr << "No objects of this type exist"
 					return
-				log_admin("[key_name(usr)] deleted all objects of type or subtype of [O_type] ([i] objects deleted) ")
-				message_admins("\blue [key_name(usr)] deleted all objects of type or subtype of [O_type] ([i] objects deleted) ")
+				log_admin("[key_name(usr)] deleted all objects of type or subtype of [O_type] ([i] objects deleted)")
+				message_admins("<span class='notice'>[key_name(usr)] deleted all objects of type or subtype of [O_type] ([i] objects deleted)</span>")
 
 	else if(href_list["explode"])
 		if(!check_rights(R_DEBUG|R_FUN))	return
@@ -941,8 +941,8 @@ client
 				return
 
 		if(amount != 0)
-			log_admin("[key_name(usr)] dealt [amount] amount of [Text] damage to [L] ")
-			message_admins("\blue [key_name(usr)] dealt [amount] amount of [Text] damage to [L] ")
+			log_admin("[key_name(usr)] dealt [amount] amount of [Text] damage to [L]")
+			message_admins("<span class='notice'>[key_name(usr)] dealt [amount] amount of [Text] damage to [L]</span>")
 			href_list["datumrefresh"] = href_list["mobToDamage"]
 
 	if(href_list["datumrefresh"])

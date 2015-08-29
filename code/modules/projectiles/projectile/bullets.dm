@@ -58,7 +58,7 @@
 	if(prob(chance))
 		if(A.opacity)
 			//display a message so that people on the other side aren't so confused
-			A.visible_message("<span class='warning'>\The [src] pierces through \the [A]!")
+			A.visible_message("<span class='warning'>\The [src] pierces through \the [A]!</span>")
 		return 1
 
 	return 0
@@ -181,10 +181,6 @@
 	invisibility = 101
 	damage = 1
 	embed = 0
-
-/obj/item/projectile/bullet/chameleon
-	damage = 1 // stop trying to murderbone with a fake gun dumbass!!!
-	embed = 0 // nope
 
 /* Practice */
 

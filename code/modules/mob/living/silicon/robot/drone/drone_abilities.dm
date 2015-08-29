@@ -21,9 +21,11 @@
 
 	return
 
-//Actual picking-up event.
-/mob/living/silicon/robot/drone/attack_hand(mob/living/carbon/human/M as mob)
-
-	if(M.a_intent == I_HELP)
-		get_scooped(M)
-	..()
+/mob/living/silicon/robot/drone/MouseDrop(atom/over_object)
+	var/mob/living/carbon/H = over_object
+	if(!istype(H) || !Adjacent(H)) return ..()
+	if(H.a_intent == "help")
+		get_scooped(H)
+		return
+	else
+		return ..()

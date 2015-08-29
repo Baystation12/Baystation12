@@ -19,6 +19,42 @@
 	light_overlay = "helmet_light_dual"
 	camera_networks = list("Security")
 
+/obj/item/weapon/rig/internalaffairs
+	name = "augmented tie"
+	suit_type = "augmented suit"
+	desc = "Prepare for paperwork."
+	icon_state = "internalaffairs_rig"
+	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
+	siemens_coefficient = 0.9
+	slowdown = 0
+	offline_slowdown = 0
+	offline_vision_restriction = 0
+
+	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/storage/briefcase,/obj/item/weapon/storage/secure/briefcase)
+
+	req_access = list()
+	req_one_access = list()
+
+	glove_type = null
+	helm_type = null
+	boot_type = null
+
+/obj/item/weapon/rig/internalaffairs/equipped
+
+	req_access = list(access_lawyer)
+
+	initial_modules = list(
+		/obj/item/rig_module/ai_container,
+		/obj/item/rig_module/device/flash,
+		/obj/item/rig_module/device/paperdispenser,
+		/obj/item/rig_module/device/pen,
+		/obj/item/rig_module/device/stamp
+		)
+
+	glove_type = null
+	helm_type = null
+	boot_type = null
+
 /obj/item/weapon/rig/industrial
 	name = "industrial suit control module"
 	suit_type = "industrial hardsuit"

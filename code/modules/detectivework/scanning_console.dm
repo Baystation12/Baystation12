@@ -234,7 +234,7 @@
 				screen = "details"
 				current = files[href_list["identifier"]]
 			else
-				usr << "<spawn class='warning'>No record found.</span>"
+				usr << "<span class='warning'>No record found.</span>"
 		if("delete")
 			if(href_list["identifier"])
 				if(alert("Are you sure you want to delete this record?","Record deletion", "Yes", "No") == "Yes")
@@ -265,7 +265,7 @@
 						M.drop_item()
 						I.loc = src
 				else
-					usr << "<spawn class='warning'>Invalid object, rejected.</span>"
+					usr << "<span class='warning'>Invalid object, rejected.</span>"
 		if("scan")
 			if(scanning)
 				scan_progress = 10
@@ -279,7 +279,7 @@
 					M.drop_item()
 					qdel(I)
 			else
-				usr << "<spawn class='warning'>Invalid fingerprint card, rejected.</span>"
+				usr << "<span class='warning'>Invalid fingerprint card, rejected.</span>"
 		if("print")
 			if(current)
 				var/obj/item/weapon/paper/P = new(loc)

@@ -90,7 +90,7 @@
 	if(botEmagChance)
 		for(var/obj/machinery/bot/bot in world)
 			if(prob(botEmagChance))
-				bot.Emag()
+				bot.emag_act(1)
 
 /datum/event/ionstorm/end()
 	spawn(rand(5000,8000))

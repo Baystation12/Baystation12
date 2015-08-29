@@ -480,10 +480,10 @@ steam.start() -- spawns the effect
 			s.start()
 
 			for(var/mob/M in viewers(5, location))
-				M << "\red The solution violently explodes."
+				M << "<span class='warning'>The solution violently explodes.</span>"
 			for(var/mob/M in viewers(1, location))
 				if (prob (50 * amount))
-					M << "\red The explosion knocks you down."
+					M << "<span class='warning'>The explosion knocks you down.</span>"
 					M.Weaken(rand(1,5))
 			return
 		else
@@ -506,7 +506,7 @@ steam.start() -- spawns the effect
 				flash = (amount/4) * flashing_factor
 
 			for(var/mob/M in viewers(8, location))
-				M << "\red The solution violently explodes."
+				M << "<span class='warning'>The solution violently explodes.</span>"
 
 			explosion(
 				location, 

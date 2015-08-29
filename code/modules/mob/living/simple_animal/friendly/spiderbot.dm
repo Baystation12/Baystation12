@@ -129,28 +129,19 @@
 		else
 			user << "<span class='danger'>You swipe your card with no effect.</span>"
 			return 0
-	else if (istype(O, /obj/item/weapon/card/emag))
-		if (emagged)
-			user << "<span class='danger'>\The [src] is already overloaded - better run!</span>"
-			return 0
-		else
-			var/obj/item/weapon/card/emag/emag = O
-			emag.uses--
-			emagged = 1
-			user << "<span class='danger'>You short out the security protocols and overload \the [src]'s cell, priming it to explode in a short time.</span>"
-			spawn(0)
-				sleep(100)
-				if(!src) return
-				src << "<span class='warning'>Your cell seems to be outputting a lot of power...</span>"
-				sleep(200)
-				if(!src) return
-				src << "<span class='danger'>Internal heat sensors are spiking! Something is badly wrong with your cell!</span>"
-				sleep(300)
-				if(!src) return
-				src.explode()
-				return
+
 	else
 		attacked_with_item(O, user)
+	
+/mob/living/simple_animal/spiderbot/emag_act(var/remaining_charges, var/mob/user)
+	if (emagged)
+		user << "<span class='warning'>[src] is already overloaded - better run.</span>"
+		return 0
+	else
+		user << "<span class='notice'>You short out the security protocols and overload [src]'s cell, priming it to explode in a short time.</span>"
+		spawn(100)	src << "<span class='danger'>Your cell seems to be outputting a lot of power...</span>"
+		spawn(200)	src << "<span class='danger'>Internal heat sensors are spiking! Something is badly wrong with your cell!</span>"
+		spawn(300)	src.explode()
 
 /mob/living/simple_animal/spiderbot/proc/transfer_personality(var/obj/item/device/mmi/M as obj)
 

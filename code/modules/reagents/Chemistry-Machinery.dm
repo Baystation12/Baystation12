@@ -48,10 +48,6 @@
 	if (prob(50))
 		qdel(src)
 
-/obj/machinery/chem_master/meteorhit()
-	qdel(src)
-	return
-
 /obj/machinery/chem_master/attackby(var/obj/item/weapon/B as obj, var/mob/user as mob)
 
 	if(istype(B, /obj/item/weapon/reagent_containers/glass))

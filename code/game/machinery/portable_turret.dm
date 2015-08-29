@@ -292,18 +292,6 @@ var/list/turret_icons
 					user << "<span class='notice'>You remove the turret but did not manage to salvage anything.</span>"
 				qdel(src) // qdel
 
-	if(istype(I, /obj/item/weapon/card/emag) && !emagged)
-		//Emagging the turret makes it go bonkers and stun everyone. It also makes
-		//the turret shoot much, much faster.
-		user << "<span class='warning'>You short out [src]'s threat assessment circuits.</span>"
-		visible_message("[src] hums oddly...")
-		emagged = 1
-		iconholder = 1
-		controllock = 1
-		enabled = 0 //turns off the turret temporarily
-		sleep(60) //6 seconds for the traitor to gtfo of the area before the turret decides to ruin his shit
-		enabled = 1 //turns it back on. The cover popUp() popDown() are automatically called in process(), no need to define it here
-
 	else if((istype(I, /obj/item/weapon/wrench)))
 		if(enabled || raised)
 			user << "<span class='warning'>You cannot unsecure an active turret!</span>"
@@ -355,6 +343,20 @@ var/list/turret_icons
 					sleep(60)
 					attacked = 0
 		..()
+		
+/obj/machinery/porta_turret/emag_act(var/remaining_charges, var/mob/user)
+	if(!emagged)
+		//Emagging the turret makes it go bonkers and stun everyone. It also makes
+		//the turret shoot much, much faster.
+		user << "<span class='warning'>You short out [src]'s threat assessment circuits.</span>"
+		visible_message("[src] hums oddly...")
+		emagged = 1
+		iconholder = 1
+		controllock = 1
+		enabled = 0 //turns off the turret temporarily
+		sleep(60) //6 seconds for the traitor to gtfo of the area before the turret decides to ruin his shit
+		enabled = 1 //turns it back on. The cover popUp() popDown() are automatically called in process(), no need to define it here
+		return 1
 
 /obj/machinery/porta_turret/proc/take_damage(var/force)
 	if(!raised && !raising)
@@ -424,8 +426,6 @@ var/list/turret_icons
 
 /obj/machinery/porta_turret/process()
 	//the main machinery process
-
-	set background = BACKGROUND_ENABLED
 
 	if(stat & (NOPOWER|BROKEN))
 		//if the turret has no power or is broken, make the turret pop down if it hasn't already

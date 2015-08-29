@@ -150,7 +150,7 @@
 
 /obj/machinery/computer/supplycomp/attack_hand(var/mob/user as mob)
 	if(!allowed(user))
-		user << "\red Access Denied."
+		user << "<span class='warning'>Access Denied.</span>"
 		return
 
 	if(..())
@@ -207,14 +207,11 @@
 	onclose(user, "computer")
 	return
 
-/obj/machinery/computer/supplycomp/attackby(I as obj, user as mob)
-	if(istype(I,/obj/item/weapon/card/emag) && !hacked)
-		user << "\blue Special supplies unlocked."
+/obj/machinery/computer/supplycomp/emag_act(var/remaining_charges, var/mob/user)
+	if(!hacked)
+		user << "<span class='notice'>Special supplies unlocked.</span>"
 		hacked = 1
-		return
-	else
-		..()
-	return
+		return 1
 
 /obj/machinery/computer/supplycomp/Topic(href, href_list)
 	if(!supply_controller)

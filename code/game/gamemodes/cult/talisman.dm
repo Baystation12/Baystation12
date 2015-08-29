@@ -7,6 +7,7 @@
 	attack_self(mob/living/user as mob)
 		if(iscultist(user))
 			var/delete = 1
+			// who the hell thought this was a good idea :(
 			switch(imbue)
 				if("newtome")
 					call(/obj/effect/rune/proc/tomesummon)()
@@ -28,7 +29,7 @@
 				if("blind")
 					call(/obj/effect/rune/proc/blind)()
 				if("runestun")
-					user << "\red To use this talisman, attack your target directly."
+					user << "<span class='warning'>To use this talisman, attack your target directly.</span>"
 					return
 				if("supply")
 					supply()

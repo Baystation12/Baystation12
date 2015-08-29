@@ -12,7 +12,7 @@
 	circuit = "/obj/item/weapon/circuitboard/atmoscontrol"
 	req_access = list(access_ce)
 	var/list/monitored_alarm_ids = null
-	var/obj/nano_module/atmos_control/atmos_control
+	var/datum/nano_module/atmos_control/atmos_control
 
 /obj/machinery/computer/atmoscontrol/New()
 	..()
@@ -31,14 +31,13 @@
 		return 1
 	ui_interact(user)
 
-/obj/machinery/computer/atmoscontrol/attackby(var/obj/item/I as obj, var/mob/user as mob)
-	if(istype(I, /obj/item/weapon/card/emag) && !emagged)
-		user.visible_message("\red \The [user] swipes \a [I] through \the [src], causing the screen to flash!",\
-			"\red You swipe your [I] through \the [src], the screen flashing as you gain full control.",\
-			"You hear the swipe of a card through a reader, and an electronic warble.")
+/obj/machinery/computer/atmoscontrol/emag_act(var/remaining_carges, var/mob/user)
+	if(!emagged)
+		user.visible_message("<span class='warning'>\The [user] does something \the [src], causing the screen to flash!</span>",\
+			"<span class='warning'>You cause the screen to flash as you gain full control.</span>",\
+			"You hear an electronic warble.")
 		atmos_control.emagged = 1
-		return
-	return ..()
+		return 1
 
 /obj/machinery/computer/atmoscontrol/ui_interact(var/mob/user)
 	if(!atmos_control)

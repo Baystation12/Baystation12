@@ -16,7 +16,7 @@
 			new /obj/item/weapon/storage/backpack/satchel_cap(src)
 		new /obj/item/clothing/suit/captunic(src)
 		new /obj/item/clothing/suit/captunic/capjacket(src)
-		new /obj/item/clothing/head/helmet/cap(src)
+		new /obj/item/clothing/head/caphat/cap(src)
 		new /obj/item/clothing/under/rank/captain(src)
 		new /obj/item/clothing/suit/storage/vest(src)
 		new /obj/item/weapon/cartridge/captain(src)
@@ -28,7 +28,7 @@
 		new /obj/item/clothing/suit/armor/captain(src)
 		new /obj/item/weapon/melee/telebaton(src)
 		new /obj/item/clothing/under/dress/dress_cap(src)
-		new /obj/item/clothing/head/helmet/formalcaptain(src)
+		new /obj/item/clothing/head/caphat/formal(src)
 		new /obj/item/clothing/under/captainformal(src)
 		return
 
@@ -82,7 +82,7 @@
 		new /obj/item/clothing/shoes/leather(src)
 		new /obj/item/clothing/shoes/white(src)
 		new /obj/item/clothing/under/rank/head_of_personnel_whimsy(src)
-		new /obj/item/clothing/head/helmet/hop(src)
+		new /obj/item/clothing/head/caphat/hop(src)
 		return
 
 
@@ -103,13 +103,13 @@
 			new /obj/item/weapon/storage/backpack/security(src)
 		else
 			new /obj/item/weapon/storage/backpack/satchel_sec(src)
-		new /obj/item/clothing/head/helmet/HoS(src)
+		new /obj/item/clothing/head/HoS(src)
 		new /obj/item/clothing/suit/storage/vest/hos(src)
 		new /obj/item/clothing/under/rank/head_of_security/jensen(src)
 		new /obj/item/clothing/under/rank/head_of_security/corp(src)
 		new /obj/item/clothing/suit/armor/hos/jensen(src)
 		new /obj/item/clothing/suit/armor/hos(src)
-		new /obj/item/clothing/head/helmet/HoS/dermal(src)
+		new /obj/item/clothing/head/HoS/dermal(src)
 		new /obj/item/weapon/cartridge/hos(src)
 		new /obj/item/device/radio/headset/heads/hos(src)
 		new /obj/item/clothing/glasses/sunglasses/sechud(src)
@@ -148,7 +148,7 @@
 		new /obj/item/clothing/under/rank/warden(src)
 		new /obj/item/clothing/under/rank/warden/corp(src)
 		new /obj/item/clothing/suit/armor/vest/warden(src)
-		new /obj/item/clothing/head/helmet/warden(src)
+		new /obj/item/clothing/head/warden(src)
 		new /obj/item/weapon/cartridge/security(src)
 		new /obj/item/device/radio/headset/headset_sec(src)
 		new /obj/item/clothing/glasses/sunglasses/sechud(src)

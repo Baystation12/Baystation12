@@ -27,7 +27,7 @@
 	if(istype(W, /obj/item/weapon/weldingtool))
 		var/obj/item/weapon/weldingtool/WT = W
 		if(WT.isOn()) //Badasses dont get blinded by lighting their candle with a welding tool
-			light("\red [user] casually lights the [name] with [W].")
+			light("<span class='notice'>\The [user] casually lights the [name] with [W].</span>")
 	else if(istype(W, /obj/item/weapon/flame/lighter))
 		var/obj/item/weapon/flame/lighter/L = W
 		if(L.lit)
@@ -42,7 +42,7 @@
 			light()
 
 
-/obj/item/weapon/flame/candle/proc/light(var/flavor_text = "\red [usr] lights the [name].")
+/obj/item/weapon/flame/candle/proc/light(var/flavor_text = "<span class='notice'>\The [usr] lights the [name].</span>")
 	if(!src.lit)
 		src.lit = 1
 		//src.damtype = "fire"

@@ -99,7 +99,7 @@
 	if (modded)
 		user << "\red Fuel faucet is wrenched open, leaking the fuel!"
 	if(rig)
-		user << "<span class='notice'>There is some kind of device rigged to the tank."
+		user << "<span class='notice'>There is some kind of device rigged to the tank.</span>"
 
 /obj/structure/reagent_dispensers/fueltank/attack_hand()
 	if (rig)

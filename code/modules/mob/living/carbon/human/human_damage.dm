@@ -8,6 +8,8 @@
 	var/total_burn  = 0
 	var/total_brute = 0
 	for(var/obj/item/organ/external/O in organs)	//hardcoded to streamline things a bit
+		if(O.status & ORGAN_ROBOT)
+			continue //robot limbs don't count towards shock and crit
 		total_brute += O.brute_dam
 		total_burn  += O.burn_dam
 
@@ -68,12 +70,16 @@
 /mob/living/carbon/human/getBruteLoss()
 	var/amount = 0
 	for(var/obj/item/organ/external/O in organs)
+		if(O.status & ORGAN_ROBOT)
+			continue //robot limbs don't count towards shock and crit
 		amount += O.brute_dam
 	return amount
 
 /mob/living/carbon/human/getFireLoss()
 	var/amount = 0
 	for(var/obj/item/organ/external/O in organs)
+		if(O.status & ORGAN_ROBOT)
+			continue //robot limbs don't count towards shock and crit
 		amount += O.burn_dam
 	return amount
 
@@ -141,12 +147,12 @@
 	..()
 
 /mob/living/carbon/human/getCloneLoss()
-	if(species.flags & (IS_SYNTHETIC | NO_SCAN))
+	if(species.flags & (NO_SCAN))
 		cloneloss = 0
 	return ..()
 
 /mob/living/carbon/human/setCloneLoss(var/amount)
-	if(species.flags & (IS_SYNTHETIC | NO_SCAN))
+	if(species.flags & (NO_SCAN))
 		cloneloss = 0
 	else
 		..()
@@ -154,7 +160,7 @@
 /mob/living/carbon/human/adjustCloneLoss(var/amount)
 	..()
 
-	if(species.flags & (IS_SYNTHETIC | NO_SCAN))
+	if(species.flags & (NO_SCAN))
 		cloneloss = 0
 		return
 

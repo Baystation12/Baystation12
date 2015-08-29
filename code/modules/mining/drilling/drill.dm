@@ -84,7 +84,7 @@
 
 	//Dig out the tasty ores.
 	if(resource_field.len)
-		var/turf/harvesting = pick(resource_field)
+		var/turf/simulated/harvesting = pick(resource_field)
 
 		while(resource_field.len && !harvesting.resources)
 			harvesting.has_resources = 0
@@ -253,7 +253,7 @@
 
 	var/tx = T.x - 2
 	var/ty = T.y - 2
-	var/turf/mine_turf
+	var/turf/simulated/mine_turf
 	for(var/iy = 0,iy < 5, iy++)
 		for(var/ix = 0, ix < 5, ix++)
 			mine_turf = locate(tx + ix, ty + iy, T.z)

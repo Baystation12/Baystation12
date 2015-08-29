@@ -504,23 +504,6 @@
 				update_icon()
 			else
 				user << "<span class='warning'>Access denied.</span>"
-	else if (istype(W, /obj/item/weapon/card/emag) && !(emagged || hacker))		// trying to unlock with an emag card
-		if(opened)
-			user << "You must close the cover to swipe an ID card."
-		else if(wiresexposed)
-			user << "You must close the panel first"
-		else if(stat & (BROKEN|MAINT))
-			user << "Nothing happens."
-		else
-			flick("apc-spark", src)
-			if (do_after(user,6))
-				if(prob(50))
-					emagged = 1
-					locked = 0
-					user << "<span class='notice'>You emag the APC interface.</span>"
-					update_icon()
-				else
-					user << "<span class='warning'>You fail to [ locked ? "unlock" : "lock"] the APC interface.</span>"
 	else if (istype(W, /obj/item/stack/cable_coil) && !terminal && opened && has_electronics!=2)
 		if (src.loc:intact)
 			user << "<span class='warning'>You must remove the floor plating in front of the APC first.</span>"
@@ -654,6 +637,26 @@
 
 // attack with hand - remove cell (if cover open) or interact with the APC
 
+/obj/machinery/power/apc/emag_act(var/remaining_charges, var/mob/user)
+	if (!(emagged || hacker))		// trying to unlock with an emag card
+		if(opened)
+			user << "You must close the cover to swipe an ID card."
+		else if(wiresexposed)
+			user << "You must close the panel first"
+		else if(stat & (BROKEN|MAINT))
+			user << "Nothing happens."
+		else
+			flick("apc-spark", src)
+			if (do_after(user,6))
+				if(prob(50))
+					emagged = 1
+					locked = 0
+					user << "<span class='notice'>You emag the APC interface.</span>"
+					update_icon()
+				else
+					user << "<span class='warning'>You fail to [ locked ? "unlock" : "lock"] the APC interface.</span>"
+				return 1
+
 /obj/machinery/power/apc/attack_hand(mob/user)
 //	if (!can_use(user)) This already gets called in interact() and in topic()
 //		return
@@ -665,34 +668,7 @@
 	if(istype(user,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = user
 
-		if(H.species.flags & IS_SYNTHETIC && H.a_intent == I_GRAB)
-			if(emagged || stat & BROKEN)
-				var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
-				s.set_up(3, 1, src)
-				s.start()
-				H << "\red The APC power currents surge eratically, damaging your chassis!"
-				H.adjustFireLoss(10,0)
-			else if(src.cell && src.cell.charge > 0)
-				if(H.nutrition < 450)
-
-					if(src.cell.charge >= 500)
-						H.nutrition += 50
-						src.cell.charge -= 500
-					else
-						H.nutrition += src.cell.charge/10
-						src.cell.charge = 0
-
-					user << "\blue You slot your fingers into the APC interface and siphon off some of the stored charge for your own use."
-					if(src.cell.charge < 0) src.cell.charge = 0
-					if(H.nutrition > 500) H.nutrition = 500
-					src.charging = 1
-
-				else
-					user << "\blue You are already fully charged."
-			else
-				user << "There is no charge to draw from that APC."
-			return
-		else if(H.species.can_shred(H))
+		if(H.species.can_shred(H))
 			user.visible_message("\red [user.name] slashes at the [src.name]!", "\blue You slash at the [src.name]!")
 			playsound(src.loc, 'sound/weapons/slash.ogg', 100, 1)
 
@@ -1208,17 +1184,18 @@ obj/machinery/power/apc/proc/autoset(var/val, var/on)
 		update_icon()
 		update()
 
-// overload all the lights in this APC area
+// overload the lights in this APC area
 
-/obj/machinery/power/apc/proc/overload_lighting()
+/obj/machinery/power/apc/proc/overload_lighting(var/chance = 100)
 	if(/* !get_connection() || */ !operating || shorted)
 		return
 	if( cell && cell.charge>=20)
 		cell.use(20);
 		spawn(0)
 			for(var/obj/machinery/light/L in area)
-				L.on = 1
-				L.broken()
+				if(prob(chance))
+					L.on = 1
+					L.broken()
 				sleep(1)
 
 /obj/machinery/power/apc/proc/setsubsystem(val)

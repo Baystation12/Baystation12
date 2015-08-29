@@ -161,6 +161,11 @@ obj/machinery/door/blast/regular
 	icon_state = "pdoor1"
 	maxhealth = 600
 
+obj/machinery/door/blast/regular/open
+	icon_state = "pdoor0"
+	density = 0
+	opacity = 0
+
 // SUBTYPE: Shutters
 // Nicer looking, and also weaker, shutters. Found in kitchen and similar areas.
 /obj/machinery/door/blast/shutters

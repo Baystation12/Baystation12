@@ -7,7 +7,10 @@
 	icon_state = "space"
 	desc = "A special helmet designed for work in a hazardous, low-pressure environment."
 	flags = HEADCOVERSEYES | BLOCKHAIR | HEADCOVERSMOUTH | STOPPRESSUREDAMAGE | THICKMATERIAL | AIRTIGHT
-	item_state = "space"
+	item_state_slots = list(
+		slot_l_hand_str = "s_helmet",
+		slot_r_hand_str = "s_helmet",
+		)
 	permeability_coefficient = 0.01
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 100, rad = 50)
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE
@@ -20,6 +23,7 @@
 	var/obj/machinery/camera/camera
 	var/list/camera_networks
 
+	action_button_name = "Toggle Helmet Light"
 	light_overlay = "helmet_light"
 	brightness_on = 4
 	on = 0
@@ -28,13 +32,11 @@
 
 	if(!camera && camera_networks)
 
-		if(!icon_action_button)
-			icon_action_button = "[icon_state]"
-
 		camera = new /obj/machinery/camera(src)
 		camera.replace_networks(camera_networks)
 		camera.c_tag = user.name
 		user << "\blue User scanned as [camera.c_tag]. Camera activated."
+		user.update_action_buttons()
 		return 1
 
 	..()

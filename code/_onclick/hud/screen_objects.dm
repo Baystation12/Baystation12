@@ -65,11 +65,6 @@
 	owner.ui_action_click()
 	return 1
 
-//This is the proc used to update all the action buttons. It just returns for all mob types except humans.
-/mob/proc/update_action_buttons()
-	return
-
-
 /obj/screen/grab
 	name = "grab"
 

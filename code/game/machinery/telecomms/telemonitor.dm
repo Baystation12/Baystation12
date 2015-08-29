@@ -128,7 +128,7 @@
 			playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 			if(do_after(user, 20))
 				if (src.stat & BROKEN)
-					user << "\blue The broken glass falls out."
+					user << "<span class='notice'>The broken glass falls out.</span>"
 					var/obj/structure/computerframe/A = new /obj/structure/computerframe( src.loc )
 					new /obj/item/weapon/material/shard( src.loc )
 					var/obj/item/weapon/circuitboard/comm_monitor/M = new /obj/item/weapon/circuitboard/comm_monitor( A )
@@ -140,7 +140,7 @@
 					A.anchored = 1
 					qdel(src)
 				else
-					user << "\blue You disconnect the monitor."
+					user << "<span class='notice'>You disconnect the monitor.</span>"
 					var/obj/structure/computerframe/A = new /obj/structure/computerframe( src.loc )
 					var/obj/item/weapon/circuitboard/comm_monitor/M = new /obj/item/weapon/circuitboard/comm_monitor( A )
 					for (var/obj/C in src)
@@ -150,9 +150,13 @@
 					A.icon_state = "4"
 					A.anchored = 1
 					qdel(src)
-		else if(istype(D, /obj/item/weapon/card/emag) && !emagged)
-			playsound(src.loc, 'sound/effects/sparks4.ogg', 75, 1)
-			emagged = 1
-			user << "\blue You you disable the security protocols"
 		src.updateUsrDialog()
 		return
+
+/obj/machinery/computer/telecomms/monitor/emag_act(var/remaining_charges, var/mob/user)
+	if(!emagged)
+		playsound(src.loc, 'sound/effects/sparks4.ogg', 75, 1)
+		emagged = 1
+		user << "<span class='notice'>You you disable the security protocols</span>"
+		src.updateUsrDialog()
+		return 1

@@ -3,7 +3,6 @@
 	name = "void helmet"
 	desc = "A high-tech dark red space suit helmet. Used for AI satellite maintenance."
 	icon_state = "void"
-	item_state = "void"
 
 	heat_protection = HEAD
 	armor = list(melee = 40, bullet = 5, laser = 20,energy = 5, bomb = 35, bio = 100, rad = 20)

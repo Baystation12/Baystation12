@@ -2,7 +2,7 @@
 	name = "HUD"
 	desc = "A heads-up display that provides important info in (almost) real time."
 	flags = null //doesn't protect eyes because it's a monocle, duh
-	origin_tech = "magnets=3;biotech=2"
+	origin_tech = list(TECH_MAGNET = 3, TECH_BIO = 2)
 	var/list/icon/current = list() //the current hud icons
 
 	proc
@@ -33,7 +33,7 @@
 	icon_state = "jensenshades"
 	item_state = "jensenshades"
 	vision_flags = SEE_MOBS
-	see_invisible = SEE_INVISIBLE_OBSERVER_NOLIGHTING
+	see_invisible = SEE_INVISIBLE_NOLIGHTING
 
 /obj/item/clothing/glasses/hud/security/process_hud(var/mob/M)
 	process_sec_hud(M, 1)

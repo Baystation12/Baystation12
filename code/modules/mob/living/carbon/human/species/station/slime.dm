@@ -8,7 +8,7 @@
 
 	language = "Sol Common" //todo?
 	unarmed_types = list(/datum/unarmed_attack/slime_glomp)
-	flags = IS_RESTRICTED | NO_BLOOD | NO_SCAN | NO_SLIP | NO_BREATHE
+	flags = IS_RESTRICTED | NO_SCAN | NO_SLIP | NO_BREATHE
 	siemens_coefficient = 3
 	darksight = 3
 
@@ -30,17 +30,17 @@
 	push_flags = MONKEY|SLIME|SIMPLE_ANIMAL
 
 	has_limbs = list(
-		"chest" =  list("path" = /obj/item/organ/external/chest/slime),
-		"groin" =  list("path" = /obj/item/organ/external/groin/slime),
-		"head" =   list("path" = /obj/item/organ/external/head/slime),
-		"l_arm" =  list("path" = /obj/item/organ/external/arm/slime),
-		"r_arm" =  list("path" = /obj/item/organ/external/arm/right/slime),
-		"l_leg" =  list("path" = /obj/item/organ/external/leg/slime),
-		"r_leg" =  list("path" = /obj/item/organ/external/leg/right/slime),
-		"l_hand" = list("path" = /obj/item/organ/external/hand/slime),
-		"r_hand" = list("path" = /obj/item/organ/external/hand/right/slime),
-		"l_foot" = list("path" = /obj/item/organ/external/foot/slime),
-		"r_foot" = list("path" = /obj/item/organ/external/foot/right/slime)
+		"chest" =  list("path" = /obj/item/organ/external/chest/unbreakable),
+		"groin" =  list("path" = /obj/item/organ/external/groin/unbreakable),
+		"head" =   list("path" = /obj/item/organ/external/head/unbreakable),
+		"l_arm" =  list("path" = /obj/item/organ/external/arm/unbreakable),
+		"r_arm" =  list("path" = /obj/item/organ/external/arm/right/unbreakable),
+		"l_leg" =  list("path" = /obj/item/organ/external/leg/unbreakable),
+		"r_leg" =  list("path" = /obj/item/organ/external/leg/right/unbreakable),
+		"l_hand" = list("path" = /obj/item/organ/external/hand/unbreakable),
+		"r_hand" = list("path" = /obj/item/organ/external/hand/right/unbreakable),
+		"l_foot" = list("path" = /obj/item/organ/external/foot/unbreakable),
+		"r_foot" = list("path" = /obj/item/organ/external/foot/right/unbreakable)
 		)
 
 /datum/species/slime/handle_death(var/mob/living/carbon/human/H)
