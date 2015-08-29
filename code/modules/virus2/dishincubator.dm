@@ -128,14 +128,21 @@
 		nanomanager.update_uis(src)
 
 	if(beaker)
-		if(!beaker.reagents.remove_reagent("virusfood",5))
-			foodsupply += 10
+		if(foodsupply < 100 && beaker.reagents.remove_reagent("virusfood",5))
+			if(foodsupply + 10 <= 100)
+				foodsupply += 10
+			else
+				beaker.reagents.add_reagent("virusfood",(100 - foodsupply)/2)
+				foodsupply = 100
 			nanomanager.update_uis(src)
 
-		if (locate(/datum/reagent/toxin) in beaker.reagents.reagent_list)
+		if (locate(/datum/reagent/toxin) in beaker.reagents.reagent_list && toxins < 100)
 			for(var/datum/reagent/toxin/T in beaker.reagents.reagent_list)
 				toxins += max(T.strength,1)
 				beaker.reagents.remove_reagent(T.id,1)
+				if(toxins > 100)
+					toxins = 100
+					break
 			nanomanager.update_uis(src)
 
 /obj/machinery/disease2/incubator/Topic(href, href_list)
@@ -170,7 +177,7 @@
 		return 1
 
 	if (href_list["rad"])
-		radiation += 10
+		radiation = min(100, radiation + 10)
 		return 1
 
 	if (href_list["flush"])
