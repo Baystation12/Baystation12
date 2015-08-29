@@ -4,7 +4,6 @@
 	suffix = "\[3\]"
 	icon_state = "walkietalkie"
 	item_state = "walkietalkie"
-	req_access = list(access_synth)
 
 	var/on = 1 // 0 for off
 	var/last_transmission
@@ -89,16 +88,18 @@
 				<A href='byond://?src=\ref[src];freq=10'>+</A><BR>
 				"}
 
-	for (var/ch_name in channels)
-		dat+=text_sec_channel(ch_name, channels[ch_name])
-
-	if(allowed(user))
-		dat+= "Channel Name: [(frequency in DEPT_FREQS) ? get_frequency_name(frequency) : "Unknown"]<BR>"
+	dat+=list_channels(user)
 
 	dat+={"[text_wires()]</TT></body></html>"}
 	user << browse(dat, "window=radio")
 	onclose(user, "radio")
 	return
+
+/obj/item/device/radio/proc/list_channels(var/mob/user)
+	var/dat = ""
+	for (var/ch_name in channels)
+		dat+=text_sec_channel(ch_name, channels[ch_name])
+	return dat
 
 /obj/item/device/radio/proc/text_wires()
 	if (b_stat)
@@ -122,7 +123,7 @@
 /obj/item/device/radio/Topic(href, href_list)
 	if(..() || !on)
 		usr << browse(null, "window=radio")
-		return
+		return 1
 
 	usr.set_machine(src)
 	if (href_list["track"])
@@ -130,20 +131,20 @@
 		var/mob/living/silicon/ai/A = locate(href_list["track2"])
 		if(A && target)
 			A.ai_actual_track(target)
-		return
+		. = 1
 
 	else if (href_list["freq"])
 		var/new_frequency = (frequency + text2num(href_list["freq"]))
-		if ((frequency < RADIO_LOW_FREQ || frequency > RADIO_HIGH_FREQ) || !allowed(usr))
+		if ((new_frequency < PUBLIC_LOW_FREQ || new_frequency > PUBLIC_HIGH_FREQ))
 			new_frequency = sanitize_frequency(new_frequency)
 		set_frequency(new_frequency)
 		if(hidden_uplink)
 			if(hidden_uplink.check_trigger(usr, frequency, traitor_frequency))
 				usr << browse(null, "window=radio")
-				return
-
+		. = 1
 	else if (href_list["talk"])
 		ToggleBroadcast()
+		. = 1
 	else if (href_list["listen"])
 		var/chan_name = href_list["ch_name"]
 		if (!chan_name)
@@ -153,11 +154,12 @@
 				channels[chan_name] &= ~FREQ_LISTENING
 			else
 				channels[chan_name] |= FREQ_LISTENING
-
+		. = 1
 	if(href_list["nowindow"]) // here for pAIs, maybe others will want it, idk
-		return
+		return 1
 
-	interact(usr)
+	if(.)
+		interact(usr)
 
 /obj/item/device/radio/proc/autosay(var/message, var/from, var/channel) //BS12 EDIT
 	var/datum/radio_frequency/connection = null
@@ -501,11 +503,15 @@
 /obj/item/device/radio/borg
 	var/mob/living/silicon/robot/myborg = null // Cyborg which owns this radio. Used for power checks
 	var/obj/item/device/encryptionkey/keyslot = null//Borg radios can handle a single encryption key
-	var/shut_up = 0
+	var/shut_up = 1
 	icon = 'icons/obj/robot_component.dmi' // Cyborgs radio icons should look like the component.
 	icon_state = "radio"
-	canhear_range = 3
+	canhear_range = 0
 	subspace_transmission = 1
+
+/obj/item/device/radio/borg/Destroy()
+	myborg = null
+	return ..()
 
 /obj/item/device/radio/borg/talk_into()
 	. = ..()
@@ -588,8 +594,8 @@
 	return
 
 /obj/item/device/radio/borg/Topic(href, href_list)
-	if(usr.stat || !on)
-		return
+	if(..())
+		return 1
 	if (href_list["mode"])
 		if(subspace_transmission != 1)
 			subspace_transmission = 1
@@ -601,14 +607,14 @@
 			channels = list()
 		else
 			recalculateChannels()
+		return 1
 	if (href_list["shutup"]) // Toggle loudspeaker mode, AKA everyone around you hearing your radio.
 		shut_up = !shut_up
 		if(shut_up)
 			canhear_range = 0
 		else
 			canhear_range = 3
-
-	..()
+		return 1
 
 /obj/item/device/radio/borg/interact(mob/user as mob)
 	if(!on)
@@ -628,8 +634,7 @@
 				"}
 
 	if(subspace_transmission)//Don't even bother if subspace isn't turned on
-		for (var/ch_name in channels)
-			dat+=text_sec_channel(ch_name, channels[ch_name])
+		dat+=list_channels(user)
 	dat+={"[text_wires()]</TT></body></html>"}
 	user << browse(dat, "window=radio")
 	onclose(user, "radio")
