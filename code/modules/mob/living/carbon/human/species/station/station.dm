@@ -25,6 +25,8 @@
 	primitive_form = "Stok"
 	darksight = 3
 	gluttonous = 1
+	slowdown = 0.5
+	brute_mod = 0.8
 	num_alternate_languages = 2
 	secondary_langs = list("Sinta'unathi")
 
@@ -42,7 +44,7 @@
 	heat_level_2 = 480 //Default 400
 	heat_level_3 = 1100 //Default 1000
 
-	spawn_flags = CAN_JOIN | IS_WHITELISTED 
+	spawn_flags = CAN_JOIN | IS_WHITELISTED
 	appearance_flags = HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
 
 	flesh_color = "#34AF10"
@@ -77,8 +79,10 @@
 	tail_animation = 'icons/mob/species/tajaran/tail.dmi'
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/claws, /datum/unarmed_attack/bite/sharp)
 	darksight = 8
-	slowdown = -1
-	brute_mod = 1.2
+	slowdown = -0.5
+	brute_mod = 1.15
+	burn_mod =  1.15
+	gluttonous = 1
 	num_alternate_languages = 2
 	secondary_langs = list("Siik'tajr")
 
@@ -90,7 +94,7 @@
 
 	cold_level_1 = 200 //Default 260
 	cold_level_2 = 140 //Default 200
-	cold_level_3 = 80 //Default 120
+	cold_level_3 = 80  //Default 120
 
 	heat_level_1 = 330 //Default 360
 	heat_level_2 = 380 //Default 400

@@ -131,8 +131,8 @@
 	department = "Security"
 	department_flag = ENGSEC
 	faction = "Station"
-	total_positions = 3
-	spawn_positions = 3
+	total_positions = 4
+	spawn_positions = 4
 	supervisors = "the head of security"
 	selection_color = "#ffeeee"
 	economic_modifier = 4

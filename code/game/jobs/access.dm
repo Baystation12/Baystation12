@@ -8,14 +8,10 @@
 	//check if it doesn't require any access at all
 	if(src.check_access(null))
 		return 1
-	if(istype(M, /mob/living/silicon))
-		//AI can do whatever he wants
-		return 1
-	else if(istype(M, /mob/living/carbon/human))
-		var/mob/living/carbon/human/H = M
-		//if they are holding or wearing a card that has access, that works
-		if(src.check_access(H.get_active_hand()) || src.check_access(H.wear_id))
-			return 1
+
+	var/id = M.GetIdCard()
+	if(id)
+		return check_access(id)
 	return 0
 
 /obj/item/proc/GetAccess()
@@ -191,18 +187,27 @@
 		"Emergency Response Team",
 		"Emergency Response Team Leader")
 
-proc/GetIdCard(var/mob/living/carbon/human/H)
-	if(H.wear_id)
-		var/id = H.wear_id.GetID()
+/mob/proc/GetIdCard()
+	return null
+
+/mob/living/bot/GetIdCard()
+	return botcard
+
+/mob/living/carbon/human/GetIdCard()
+	if(wear_id)
+		var/id = wear_id.GetID()
 		if(id)
 			return id
-	if(H.get_active_hand())
-		var/obj/item/I = H.get_active_hand()
+	if(get_active_hand())
+		var/obj/item/I = get_active_hand()
 		return I.GetID()
+
+/mob/living/silicon/GetIdCard()
+	return idcard
 
 proc/FindNameFromID(var/mob/living/carbon/human/H)
 	ASSERT(istype(H))
-	var/obj/item/weapon/card/id/C = GetIdCard(H)
+	var/obj/item/weapon/card/id/C = H.GetIdCard()
 	if(C)
 		return C.registered_name
 

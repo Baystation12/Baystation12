@@ -19,8 +19,7 @@
 
 /datum/antagonist/proc/update_access(var/mob/living/player)
 	for(var/obj/item/weapon/card/id/id in player.contents)
-		id.name = "[player.real_name]'s ID Card"
-		id.registered_name = player.real_name
+		player.set_id_info(id)
 
 /datum/antagonist/proc/update_all_icons()
 	if(!antag_indicator)

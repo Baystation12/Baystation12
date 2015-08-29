@@ -1,9 +1,9 @@
-/turf/simulated/wall/vault
-	icon_state = "rockvault"
+/turf/simulated/floor/diona
+	name = "biomass flooring"
+	icon_state = "diona"
 
-	New(location,type)
-		..()
-		icon_state = "[type]vault"
+/turf/simulated/floor/diona/attackby()
+	return
 
 /turf/simulated/shuttle
 	name = "shuttle"
