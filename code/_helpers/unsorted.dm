@@ -1053,11 +1053,11 @@ proc/get_mob_with_client_list()
 
 //gets the turf the atom is located in (or itself, if it is a turf).
 //returns null if the atom is not in a turf.
-/proc/get_turf(atom/location)
-	while(location)
-		if(isturf(location))
-			return location
-		location = location.loc
+/proc/get_turf(atom/movable/location)
+	if(istype(location) && location.locs.len)
+		return location.locs[1]
+	if(istype(location, /turf))
+		return location
 	return null
 
 /proc/get(atom/loc, type)
