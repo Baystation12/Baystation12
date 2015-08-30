@@ -649,7 +649,7 @@
 
 /mob/Stat()
 	..()
-	. = (client && client.inactivity < 1200)
+	. = (is_client_active(10 MINUTES))
 
 	if(.)
 		if(statpanel("Status") && ticker && ticker.current_state != GAME_STATE_PREGAME)
