@@ -3,8 +3,8 @@
 	set category = "Object"
 
 	. = 1
-	if(allow_thrust(0.01, usr))
-		usr << "<span class='warning'>Your [src] is disabled.</span>"
+	if(!allow_thrust(0.01, usr))
+		usr << "<span class='warning'>\The [src] is disabled.</span>"
 		return
 
 	var/turf/above = GetAbove(src)
@@ -29,23 +29,23 @@
 	set category = "Object"
 
 	. = 1
-	if(allow_thrust(0.01, usr))
-		usr << "<span class='warning'>Your [src] is disabled.</span>"
+	if(!allow_thrust(0.01, usr))
+		usr << "<span class='warning'>\The [src] is disabled.</span>"
 		return
 
-	var/turf/above = GetBelow(src)
-	if(!istype(above))
+	var/turf/below = GetBelow(src)
+	if(!istype(below))
 		usr << "<span class='notice'>There is nothing of interest in this direction.</span>"
 		return
 
-	if(!istype(above, /turf/space) && !istype(above, /turf/simulated/open))
-		usr << "<span class='warning'>You bump against \the [above].</span>"
+	if(below.density)
+		usr << "<span class='warning'>You bump against \the [below].</span>"
 		return
 
-	for(var/atom/A in above)
+	for(var/atom/A in below)
 		if(A.density)
 			usr << "<span class='warning'>\The [A] blocks you.</span>"
 			return
 
-	usr.Move(above)
-	usr << "<span class='notice'>You move upwards.</span>"
+	usr.Move(below)
+	usr << "<span class='notice'>You move downwards.</span>"
