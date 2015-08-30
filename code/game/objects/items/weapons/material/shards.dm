@@ -61,7 +61,7 @@
 	return ..()
 
 /obj/item/weapon/material/shard/Crossed(AM as mob|obj)
-	if(ismob(AM))
+	if(isliving(AM))
 		var/mob/M = AM
 		M << "<span class='danger'>You step on \the [src]!</span>"
 		playsound(src.loc, 'sound/effects/glass_step.ogg', 50, 1) // not sure how to handle metal shards with sounds
